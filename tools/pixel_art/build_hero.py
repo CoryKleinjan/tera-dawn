@@ -53,7 +53,7 @@ def front(legs="legs_stand", dy=0, sx=0, legs_dy=0):
     put(f, g("sword_diag"), 5 + sx, 46 + dy)
     put(f, g(legs), 14, 69 + legs_dy)
     put(f, g("torso_idle"), 14, 50 + dy)
-    put(f, g("head"), 10, dy)
+    put(f, g("head"), 5, 1 + dy)
     return f
 
 
@@ -64,17 +64,17 @@ def attack(n):
         put(f, g("legs_walkA"), 14, 69)
         put(f, g("torso_noarm"), 14, 50)
         put(f, g("arm_back"), 21, 57)
-        put(f, g("head"), 11, 1)
+        put(f, g("head"), 4, 2)
     elif n == 1:  # swing: sword straight out in front
         put(f, g("legs_walkA"), 14, 69)
         put(f, g("torso_noarm"), 14, 50)
-        put(f, g("head"), 9, 1)
+        put(f, g("head"), 4, 2)
         put(f, g("sword_horiz"), -11, 55)
         put(f, g("arm_fwd"), 15, 56)
     else:  # follow-through: sword angled down in front
         put(f, g("legs_walkA"), 14, 69)
         put(f, g("torso_noarm"), 14, 50)
-        put(f, g("head"), 9, 1)
+        put(f, g("head"), 4, 2)
         put(f, g("sword_diag", "v"), 4, 58)
         put(f, g("arm_down"), 16, 57)
     return f
@@ -87,7 +87,7 @@ def climb():
     f.alpha_composite(g("legs_climb"), (ox, 66))
     f.alpha_composite(g("torso_back"), (ox, 50))
     hb = g("head_back")
-    f.alpha_composite(hb, (cx - hb.width // 2, 1))
+    f.alpha_composite(hb, (cx - hb.width // 2, 3))
     f.alpha_composite(g("arm_climb_hi"), (ox + 2, 47))
     f.alpha_composite(g("arm_climb_lo"), (ox + 21, 51))
     return f
