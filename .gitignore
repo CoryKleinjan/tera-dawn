@@ -5,3 +5,4 @@ build/
 *.translation
 # Steam
 steam_appid.txt
+__pycache__/
