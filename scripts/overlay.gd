@@ -13,6 +13,7 @@ func _draw() -> void:
 	var font := Game.ui_font
 	var v := TDWorld.VIEW
 	var dark := Color(0.1, 0.07, 0.19, 0.6)
+	_draw_world_text()
 	# map name
 	var name_w := DrawUtil.text_width(font, world.map["name"], 14) + 22
 	DrawUtil.round_rect(self, Rect2(10, 10, name_w, 28), 8, dark)
@@ -44,3 +45,30 @@ func _draw() -> void:
 		draw_rect(Rect2(Vector2.ZERO, v), Color(0.1, 0.07, 0.19, 0.45))
 		DrawUtil.text(self, Game.num_font, Vector2(v.x / 2, v.y / 2 - 10), "You fainted", 40, GameData.MIST)
 		DrawUtil.text(self, font, Vector2(v.x / 2, v.y / 2 + 22), "Returning to Dawnrise Meadow…", 16, GameData.MIST)
+
+## Name tags, HP bars and damage numbers follow things in the 3D stage, so they are
+## projected to the screen here and stay crisp (no depth of field or fog on them).
+func _draw_world_text() -> void:
+	var st := world.stage
+	for m in world.mobs():
+		if not st.in_view(m.position, m.z):
+			continue
+		m.draw_tag(self, st.screen(m.position, m.z))
+	var p := world.player
+	if p.dead == 0:
+		var at := st.screen(p.position, TDPlayer.Z)
+		DrawUtil.round_rect(self, Rect2(at.x - 30, at.y + 4, 60, 16), 4, Color(0.1, 0.07, 0.19, 0.7))
+		DrawUtil.text(self, Game.ui_font, at + Vector2(0, 16), "Dawnling", 11, GameData.SUN)
+	for f in world.fx_layer.get_children():
+		if f is TDFloatText:
+			(f as TDFloatText).draw_at(self, st.screen(f.position, 0.6))
+		elif f is TDEffect and (f as TDEffect).kind == "levelup":
+			(f as TDEffect).draw_caption(self, st.screen(f.position, 0.2))
+	for portal in world.map["portals"]:
+		var base := Vector2(float(portal["x"]), world.plats[int(portal["plat"])].y)
+		if world.started and absf(p.position.x - base.x) < 60:
+			var at := st.screen(base + Vector2(0, -112), -0.3)
+			var label := "↑ to %s" % GameData.MAPS[portal["to"]]["name"]
+			var w := DrawUtil.text_width(Game.ui_font, label, 13) + 20
+			DrawUtil.round_rect(self, Rect2(at.x - w / 2, at.y - 16, w, 22), 6, Color(0.1, 0.07, 0.19, 0.7))
+			DrawUtil.text(self, Game.ui_font, at, label, 13, GameData.MIST)

@@ -2,6 +2,7 @@ class_name TDWorld
 extends Node2D
 ## Owns the current map: terrain, monsters, drops, effects, camera and combat rules.
 ## The game logic steps once per physics tick (60 Hz), matching the web prototype.
+## Logic runs in 2D pixel space; TDStage renders it as an HD-2D diorama.
 
 const VIEW := Vector2(960, 540)
 
@@ -18,22 +19,16 @@ var banner_t := 0
 var log_lines: Array[Dictionary] = []
 
 var player: TDPlayer
-var camera: Camera2D
+var stage: TDStage
 var mob_layer: Node2D
 var drop_layer: Node2D
 var fx_layer: Node2D
 var hud: TDHud
 
 func _ready() -> void:
-	camera = Camera2D.new()
-	camera.anchor_mode = Camera2D.ANCHOR_MODE_FIXED_TOP_LEFT
-	add_child(camera)
-	var bg_layer := CanvasLayer.new()
-	bg_layer.layer = -1
-	add_child(bg_layer)
-	var bg := TDBackground.new()
-	bg.world = self
-	bg_layer.add_child(bg)
+	stage = TDStage.new()
+	stage.world = self
+	add_child(stage)
 	mob_layer = Node2D.new()
 	add_child(mob_layer)
 	drop_layer = Node2D.new()
@@ -76,11 +71,10 @@ func load_map(id: String, x: float) -> void:
 			mob_layer.add_child(m)
 	player.place(x, plats[0].y)
 	cam = _camera_target()
-	camera.position = cam
+	stage.build()
 	if started:
 		show_banner(map["name"])
 	Game.save_game()
-	queue_redraw()
 
 func show_banner(text: String) -> void:
 	banner_text = text
@@ -136,10 +130,9 @@ func _physics_process(_delta: float) -> void:
 	if banner_t > 0:
 		banner_t -= 1
 	cam += (_camera_target() - cam) * Vector2(0.12, 0.1)
-	camera.position = cam
+	stage.follow(cam)
 	if tick % 300 == 0:
 		Game.save_game()
-	queue_redraw()
 
 # ---------- combat ----------
 
@@ -212,6 +205,7 @@ func hurt_player(base: int, from_x: float) -> void:
 
 func add_number(pos: Vector2, value: int, kind: String) -> void:
 	var n := TDFloatText.new()
+	n.world = self
 	n.position = pos
 	n.value = value
 	n.kind = kind
@@ -224,90 +218,3 @@ func add_effect(kind: String, pos: Vector2, face: int) -> void:
 	e.position = pos
 	e.face = face
 	fx_layer.add_child(e)
-
-# ---------- terrain drawing ----------
-
-func _draw() -> void:
-	var view := Rect2(cam, VIEW).grow(80)
-	for pl in plats:
-		if pl.x > view.end.x or pl.x + pl.w < view.position.x:
-			continue
-		_draw_platform(pl, view)
-	for r in ropes:
-		if r["x"] > view.position.x and r["x"] < view.end.x:
-			_draw_rope(r)
-	_draw_portals()
-	_draw_sign()
-
-func _draw_platform(pl: Plat, view: Rect2) -> void:
-	var dirt: Color = colors["dirt"]
-	var dirt_dark: Color = colors["dirt_dark"]
-	var grass: Color = colors["grass"]
-	if pl.solid:
-		var x0 := maxf(pl.x, view.position.x)
-		var x1 := minf(pl.x + pl.w, view.end.x)
-		DrawUtil.vgradient_rect(self, Rect2(x0, pl.y, x1 - x0, 120), dirt, dirt_dark)
-		draw_rect(Rect2(x0, pl.y + 120, x1 - x0, float(map["h"]) - pl.y), dirt_dark)
-		var sx := floorf(x0 / 60.0) * 60.0
-		while sx < x1:
-			DrawUtil.ellipse(self, Vector2(sx + 20, pl.y + 40 + int(sx) % 7 * 4), 10, 5, Color(0, 0, 0, 0.12))
-			sx += 60.0
-	else:
-		var body := DrawUtil.round_rect_points(Rect2(pl.x, pl.y, pl.w, 24), 8)
-		var cols := PackedColorArray()
-		for pt in body:
-			cols.append(dirt.lerp(dirt_dark, (pt.y - pl.y) / 24.0))
-		draw_polygon(body, cols)
-	DrawUtil.round_rect(self, Rect2(pl.x - 2, pl.y - 3, pl.w + 4, 10), 4, grass)
-	draw_rect(Rect2(pl.x + 4, pl.y - 2, pl.w - 8, 2), colors["grass_hi"])
-	var gx := 6.0
-	while gx < pl.w - 6:
-		var tip := 12.0 + int(gx * 7) % 5
-		draw_colored_polygon(PackedVector2Array([
-			Vector2(pl.x + gx, pl.y + 6), Vector2(pl.x + gx + 5, pl.y + 6), Vector2(pl.x + gx + 2.5, pl.y + tip)]), grass)
-		gx += 14.0
-
-func _draw_rope(r: Dictionary) -> void:
-	var x: float = r["x"]
-	var t: float = r["top"]
-	var b: float = r["bottom"]
-	if r["kind"] == "ladder":
-		draw_line(Vector2(x - 10, t - 6), Vector2(x - 10, b), Color("6b4433"), 4)
-		draw_line(Vector2(x + 10, t - 6), Vector2(x + 10, b), Color("6b4433"), 4)
-		var y := t + 6
-		while y < b:
-			draw_line(Vector2(x - 10, y), Vector2(x + 10, y), Color("a77a5a"), 3)
-			y += 16
-	else:
-		draw_line(Vector2(x, t - 4), Vector2(x, b - 4), Color("c9a77a"), 4)
-		var y := t + 10
-		while y < b - 6:
-			draw_circle(Vector2(x, y), 3.5, Color("8e6c4a"))
-			y += 22
-
-func _draw_portals() -> void:
-	for p in map["portals"]:
-		var base := Vector2(float(p["x"]), plats[int(p["plat"])].y)
-		var c := base + Vector2(0, -46)
-		DrawUtil.ellipse(self, c, 18, 38, Color(1, 0.94, 0.78, 0.25))
-		for i in 3:
-			var col := Color(1, 0.82, 0.4) if i == 1 else Color(0.67, 0.55, 1)
-			col.a = 0.8 - i * 0.2
-			var pts := DrawUtil.ellipse_points(c, 22 + i * 6 + sin(tick * 0.08 + i) * 3, 42 + i * 5)
-			pts.append(pts[0])
-			draw_polyline(pts, col, 5 - i, true)
-		if absf(player.position.x - base.x) < 60:
-			var label := "↑ to %s" % GameData.MAPS[p["to"]]["name"]
-			var w := DrawUtil.text_width(Game.ui_font, label, 13) + 20
-			DrawUtil.round_rect(self, Rect2(base.x - w / 2, base.y - 118, w, 22), 6, Color(0.1, 0.07, 0.19, 0.7))
-			DrawUtil.text(self, Game.ui_font, base + Vector2(0, -102), label, 13, GameData.MIST)
-
-func _draw_sign() -> void:
-	if not map.has("sign"):
-		return
-	var s: Dictionary = map["sign"]
-	var base := Vector2(float(s["x"]), float(map["ground"]))
-	draw_rect(Rect2(base.x - 3, base.y - 60, 6, 60), Color("6b4433"))
-	var w := DrawUtil.text_width(Game.ui_font, s["text"], 13) + 20
-	DrawUtil.round_rect(self, Rect2(base.x - w / 2, base.y - 84, w, 28), 5, Color("a77a5a"))
-	DrawUtil.text(self, Game.ui_font, base + Vector2(0, -65), s["text"], 13, Color("2b1a14"))

@@ -27,11 +27,28 @@ func step() -> void:
 		queue_free()
 	elif t > 3600:
 		queue_free()
-	queue_redraw()
 
-func _draw() -> void:
+var gem: Sprite3D
+var glow: Sprite3D
+var shine: OmniLight3D
+
+func _ready() -> void:
+	gem = TDStage.sprite(TDStage.tex("shard"), 1, false)
+	gem.offset = Vector2.ZERO
+	gem.modulate = Color(1.5, 1.4, 1.2)
+	add_child(gem)
+	glow = TDStage.glow_sprite(TDStage.tex("glow"), Color(1.0, 0.7, 0.3, 0.6))
+	glow.pixel_size = TDStage.PIXEL * 0.35
+	add_child(glow)
+	shine = TDStage.light(Color("ffd166"), 0.8, 1.8)
+	add_child(shine)
+
+func _process(_delta: float) -> void:
+	if gem == null:
+		return
 	var hover := sin(spin * 2.0) * 2.0 if vel == Vector2.ZERO else 0.0
-	var sx := absf(cos(spin)) * 0.7 + 0.3
-	draw_set_transform_matrix(Transform2D(0, Vector2(0, -8 - hover)) * Transform2D(0, Vector2(sx, 1), 0, Vector2.ZERO) * Transform2D(PI / 4, Vector2.ZERO))
-	draw_polygon(PackedVector2Array([Vector2(-6, -6), Vector2(6, -6), Vector2(6, 6), Vector2(-6, 6)]),
-		PackedColorArray([Color("fff2b8"), GameData.SUN, GameData.EMBER, GameData.SUN]))
+	var p := TDStage.to3d(position + Vector2(0, -10 - hover), 0.35)
+	gem.position = p
+	gem.scale = Vector3(absf(cos(spin)) * 0.7 + 0.3, 1, 1)
+	glow.position = p + Vector3(0, 0, -0.02)
+	shine.position = p + Vector3(0, 0.2, 0.4)
