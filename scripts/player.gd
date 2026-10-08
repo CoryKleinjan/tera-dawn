@@ -173,7 +173,7 @@ func _move() -> void:
 
 # ---------- HD-2D visuals ----------
 
-const Z := 0.15 # in front of monsters standing at the same spot
+const Z := 0.4 # in front of monsters standing at the same spot
 
 var body: Sprite3D
 var shadow: Sprite3D
@@ -197,7 +197,7 @@ func _sync_visuals() -> void:
 		return
 	var p := TDStage.to3d(position, Z)
 	body.position = p
-	shadow.position = p + Vector3(0, 0.02, 0)
+	shadow.position = TDStage.to3d(position, -0.25) + Vector3(0, 0.02, 0) # on the platform top, behind its front edge
 	shadow.visible = on_ground and dead == 0
 	body.visible = not (inv > 0 and inv % 8 < 4) or dead > 0
 	var frame := 0

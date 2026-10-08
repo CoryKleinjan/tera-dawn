@@ -42,6 +42,8 @@ func _run() -> void:
 	var p := world.player
 	p.inv = 100000
 	if only == "" or only == "meadow":
+		p.position = Vector2(1120, 620)
+		p.face = -1
 		await _physics(40)
 		await _shot("meadow")
 	if only == "" or only == "action":

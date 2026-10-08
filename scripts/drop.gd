@@ -38,7 +38,7 @@ func _ready() -> void:
 	gem.modulate = Color(1.5, 1.4, 1.2)
 	add_child(gem)
 	glow = TDStage.glow_sprite(TDStage.tex("glow"), Color(1.0, 0.7, 0.3, 0.6))
-	glow.pixel_size = TDStage.PIXEL * 0.35
+	glow.pixel_size = TDStage.PIXEL * 0.7
 	add_child(glow)
 	shine = TDStage.light(Color("ffd166"), 0.8, 1.8)
 	add_child(shine)
@@ -47,7 +47,7 @@ func _process(_delta: float) -> void:
 	if gem == null:
 		return
 	var hover := sin(spin * 2.0) * 2.0 if vel == Vector2.ZERO else 0.0
-	var p := TDStage.to3d(position + Vector2(0, -10 - hover), 0.35)
+	var p := TDStage.to3d(position + Vector2(0, -10 - hover), 0.5)
 	gem.position = p
 	gem.scale = Vector3(absf(cos(spin)) * 0.7 + 0.3, 1, 1)
 	glow.position = p + Vector3(0, 0, -0.02)
