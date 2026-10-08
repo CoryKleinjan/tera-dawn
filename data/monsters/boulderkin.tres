@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/boulderkin.png" id="2_boulderkin"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("4_dawnshard")
+chance = 1.0
+min_amount = 12
+max_amount = 25
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("4_dawnshard")
+chance = 0.5
+min_amount = 12
+max_amount = 25
+
+[resource]
+script = ExtResource("1_monster_def")
+id = &"boulderkin"
+display_name = "Boulderkin"
+level = 6
+max_hp = 320
+attack = 18
+exp_reward = 40
+speed = 0.45
+size = Vector2(64.0, 100.0)
+texture = ExtResource("2_boulderkin")
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2")])
+sprite_scale = 0.62

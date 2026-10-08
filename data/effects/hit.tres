@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="EffectDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/effect_def.gd" id="1_effect_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/effects/hit_1.png" id="2_hit_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/effects/hit_2.png" id="3_hit_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/effects/hit_3.png" id="4_hit_3"]
+
+[resource]
+script = ExtResource("1_effect_def")
+id = &"hit"
+frames = Array[Texture2D]([ExtResource("2_hit_1"), ExtResource("3_hit_2"), ExtResource("4_hit_3")])
+fps = 24.0
+texel = 0.55
+energy = 2.0
+light_color = Color(1.0, 0.8470588235294118, 0.6274509803921569, 1.0)
+light_energy = 2.5
+light_range = 3.0
+burst_color = Color(3.0, 2.4, 1.4, 1.0)
+burst_amount = 14

@@ -1,0 +1,51 @@
+{
+  "source": "art/source/ground_textures.png",
+  "scale": 0.3,
+  "label_band": 0.1,
+  "grid_threshold": 0.95,
+  "out_dir": "assets/sprites/ground",
+  "cells": [
+    [
+      "meadow_top",
+      "meadow_side",
+      "meadow_soil"
+    ],
+    [
+      "ember_top",
+      "ember_side",
+      "ember_soil"
+    ]
+  ],
+  "overrides": {
+    "meadow_top": {
+      "seamless": true,
+      "size": 128,
+      "keep": "largest"
+    },
+    "meadow_side": {
+      "seamless": true,
+      "size": 128,
+      "keep": "largest"
+    },
+    "meadow_soil": {
+      "seamless": true,
+      "size": 128,
+      "keep": "largest"
+    },
+    "ember_top": {
+      "seamless": true,
+      "size": 128,
+      "keep": "largest"
+    },
+    "ember_side": {
+      "seamless": true,
+      "size": 128,
+      "keep": "largest"
+    },
+    "ember_soil": {
+      "seamless": true,
+      "size": 128,
+      "keep": "largest"
+    }
+  }
+}

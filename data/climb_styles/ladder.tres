@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ClimbStyleDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/climb_style_def.gd" id="1_climb_style_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/ladder_middle.png" id="2_ladder_middle"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/ladder_bottom.png" id="3_ladder_bottom"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/ladder_top.png" id="4_ladder_top"]
+
+[resource]
+script = ExtResource("1_climb_style_def")
+id = &"ladder"
+middle = ExtResource("2_ladder_middle")
+bottom = ExtResource("3_ladder_bottom")
+top = ExtResource("4_ladder_top")
+texel = 0.9
+climb_animation = &"ladder"

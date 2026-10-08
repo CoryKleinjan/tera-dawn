@@ -20,8 +20,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Game="*res://scripts/game_state.gd"
-SteamService="*res://scripts/steam_service.gd"
+Content="*res://scripts/autoload/content.gd"
+Game="*res://scripts/autoload/game_state.gd"
+SteamService="*res://scripts/autoload/steam_service.gd"
 
 [display]
 
@@ -39,3 +40,9 @@ common/physics_ticks_per_second=60
 [rendering]
 
 environment/defaults/default_clear_color=Color(0.105882, 0.0705882, 0.188235, 1)
+
+[importer_defaults]
+
+texture={
+"detect_3d/compress_to": 0
+}

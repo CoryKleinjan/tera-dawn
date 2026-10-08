@@ -31,7 +31,8 @@ func _run() -> void:
 	var only := args[1] if args.size() > 1 else ""
 	Game.save_path = "user://screenshot_save.json"
 	Game.level = 9
-	Game.map_id = "meadow"
+	Game.map_id = &"meadow"
+	Game.refill()
 	var world: TDWorld = load("res://scenes/main.tscn").instantiate()
 	add_child(world)
 	await _frames(10)
@@ -51,7 +52,7 @@ func _run() -> void:
 		p.position = Vector2(230, 500)
 		p.face = 1
 		for m in world.mobs():
-			if m.plat == world.plats[1]:
+			if m.plat == world.platforms[1]:
 				m.position.x = randf_range(300, 380)
 		await _physics(40)
 		Input.action_press("skill")
@@ -59,13 +60,29 @@ func _run() -> void:
 		Input.action_release("skill")
 		await _physics(3)
 		await _shot("action")
+	if only == "" or only == "village":
+		# The elder and shopkeeper by the village.
+		var elder := world.npcs()[0]
+		p.position = Vector2(elder.position.x - 40, 620)
+		p.face = 1
+		await _physics(5)
+		elder.talk()
+		await _physics(10)
+		await _shot("village")
+	if only == "" or only == "rope":
+		p.position = Vector2(700, 560)
+		await _physics(2)
+		Input.action_press("move_up")
+		await _physics(20)
+		Input.action_release("move_up")
+		await _shot("rope")
 	if only == "" or only == "hollow":
-		world.load_map("hollow", 760)
+		world.load_map(&"hollow", 760)
 		p.inv = 100000
 		await _physics(60)
 		var boar: TDMob = null
 		for m in world.mobs():
-			if m.type == "emberboar" and m.plat == world.plats[0]:
+			if m.def.id == &"ember_boar" and m.plat == world.platforms[0]:
 				boar = m
 				break
 		if boar:

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/npcs/shopkeeper.png" id="2_shopkeeper"]
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"shopkeeper"
+display_name = "Mira"
+title = "Shopkeeper"
+texture = ExtResource("2_shopkeeper")
+sprite_scale = 1.0
+lines = PackedStringArray("Dawnshards! Bring me Dawnshards!", "My stall opens soon. Keep collecting those shards until then.", "The Ember Boars carry the shiniest ones. Mind their manes, though.")

@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="SkillDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/icon_dawn_slash.png" id="2_icon_dawn_slash"]
+[ext_resource type="Resource" path="res://data/effects/dawn_slash.tres" id="3_dawn_slash"]
+[ext_resource type="Resource" path="res://data/effects/hit.tres" id="4_hit"]
+
+[resource]
+script = ExtResource("1_skill_def")
+id = &"dawn_slash"
+display_name = "Dawn Slash"
+icon = ExtResource("2_icon_dawn_slash")
+mp_cost = 8
+cooldown = 36
+action_ticks = 22
+reach = 170.0
+height = 110.0
+max_targets = 4
+hits = 2
+damage_multiplier = 1.25
+animation = &"slash"
+effect = ExtResource("3_dawn_slash")
+hit_effect = ExtResource("4_hit")
