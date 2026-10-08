@@ -823,7 +823,7 @@ def tiles(prefix, grass, dirt, stone, seed):
 
 def main():
     os.makedirs(OUT, exist_ok=True)
-    hero()
+    # hero.png is hand-drawn now: see tools/pixel_art/build_hero.py
     dewling()
     sproutcap()
     emberboar()
