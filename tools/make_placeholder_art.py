@@ -205,6 +205,68 @@ def eye(f, x, y, w, h, iris_top="1e4a9a", iris_bot="58c8ff", narrow=False):
 # ---------------------------------------------------------------- hero
 
 HERO_W, HERO_H = 72, 84
+HAIR_SHINE = rgba("ffe0a8")
+
+
+def hero_head(f, hx, hy, back=False):
+    """The head: about 60% of the character's height. (hx, hy) is the centre of the hair mass."""
+    if back:
+        tail = f.shape().ellipse(hx - 1, hy + 20, 7, 11).ellipse(hx - 1, hy + 31, 6, 5)
+        f.draw(tail, HAIR, soft=3)
+        hair = f.shape().ellipse(hx, hy, 22, 21)
+        hair.poly([(hx - 6, hy - 18), (hx - 1, hy - 28), (hx + 3, hy - 18)])
+        hair.poly([(hx + 4, hy - 18), (hx + 13, hy - 25), (hx + 11, hy - 14)])
+        f.draw(hair, HAIR, soft=5, vgrad=0.3)
+        for (x0, y0, x1, y1) in [(hx - 8, hy - 14, hx - 10, hy + 14), (hx + 1, hy - 18, hx, hy + 18), (hx + 9, hy - 14, hx + 11, hy + 14)]:
+            st = f.shape().line(x0, y0, x1, y1, 1.0)
+            f.draw(st, [HAIR[1]] * 4, outline=False, flat=True)
+        band = f.shape().rect(hx - 4, hy + 15, 6, 4)
+        f.draw(band, GOLD, flat=True)
+        return
+    # ponytail at the back of the head (left side, since the hero faces right)
+    tail = f.shape().ellipse(hx - 22, hy + 4, 7, 12).ellipse(hx - 21, hy + 17, 6.5, 6)
+    tail.poly([(hx - 14, hy - 14), (hx - 6, hy - 10), (hx - 22, hy + 6), (hx - 28, hy)])
+    f.draw(tail, HAIR, soft=3)
+    band = f.shape().ellipse(hx - 16, hy - 9, 3, 3)
+    f.draw(band, GOLD, soft=1)
+    # face
+    face = f.shape().ellipse(hx + 2, hy + 7, 17, 14.5)
+    f.draw(face, ramp("fff0e4", "fbd2b8", "f5c0a2", "fffaf4"), soft=8, vgrad=0.0)
+    # hair: one outlined mass (crown, cowlick, bangs, side locks) so the bangs have a jagged edge
+    hair = f.shape().ellipse(hx, hy - 2, 22, 19)
+    opening = f.shape().ellipse(hx + 2, hy + 7, 17, 14.5)
+    opening.rect(0, 0, 200, hy - 1, add=False)
+    hair.cut(opening)  # the face shows below the bangs line
+    hair.poly([(hx + 1, hy - 19), (hx + 7, hy - 26), (hx + 9, hy - 18)])  # cowlick
+    tips = [(hx - 9, hy + 9), (hx - 2, hy + 4), (hx + 3, hy + 9), (hx + 9, hy + 4), (hx + 15, hy + 7)]
+    xs = [hx - 13, hx - 5, hx + 1, hx + 6, hx + 12, hx + 18]
+    for k, (tx, ty) in enumerate(tips):
+        hair.poly([(xs[k], hy - 2), (xs[k + 1], hy - 2), (tx, ty)])
+    hair.poly([(hx - 21, hy - 4), (hx - 10, hy - 4), (hx - 12, hy + 12), (hx - 17, hy + 19)])  # back side lock
+    hair.poly([(hx + 14, hy - 4), (hx + 21, hy - 6), (hx + 21, hy + 10), (hx + 19, hy + 18)])  # front side lock
+    f.draw(hair, HAIR, soft=5, vgrad=0.35)
+    for k, (tx, ty) in enumerate(tips[:-1]):  # strand separations
+        sep = f.shape().line(xs[k + 1], hy - 4, xs[k + 1] + (tx - xs[k + 1]) * 0.2, hy + 1, 1.0)
+        f.draw(sep, [HAIR[1]] * 4, outline=False, flat=True)
+    # shine band across the top of the hair
+    shine = f.shape().ellipse(hx - 2, hy + 6, 20, 19)
+    shine.cut(f.shape().ellipse(hx - 2, hy + 7, 18, 17))
+    shine.rect(0, hy - 6, 200, 200, add=False)
+    shine.rect(0, 0, hx - 15, 200, add=False)
+    sel = shine.m & np.all(f.px == HAIR[2], axis=2) | shine.m & np.all(f.px == HAIR[3], axis=2)
+    f.px[sel] = HAIR_SHINE
+    # eyes: huge, low on the face
+    ey = hy + 4
+    eye(f, hx - 5, ey, 6, 10)
+    eye(f, hx + 6, ey, 5, 10, narrow=True)
+    for i in range(-2, 13):  # heavier upper lashes, flicking out at the far corners
+        f.put(hx - 5 + i, ey - 3 if i in (-2, -1, 11, 12) else ey - 2, INK)
+    f.put(hx - 8, ey - 4, INK)
+    f.put(hx + 13, ey - 4, INK)
+    f.put(hx + 4, ey + 14, "a04a5a")
+    f.put(hx + 5, ey + 14, "a04a5a")
+    for (bx_, by_) in [(hx - 5, ey + 12), (hx - 4, ey + 12), (hx + 10, ey + 12), (hx + 11, ey + 12)]:
+        f.put(bx_, by_, "ffa0a8")
 
 
 def hero_frame(pose="idle", t=0):
@@ -212,20 +274,20 @@ def hero_frame(pose="idle", t=0):
     0-1 idle, 2-5 walk, 6 jump, 7-8 climb, 9-11 attack, 12 fallen."""
     f = Frame(HERO_W, HERO_H)
     foot = 82
-    cx = 33
+    cx = 35
     bob = 0
     lf = rf = 0
     lift_b = lift_f = 0
     if pose == "idle":
         bob = t % 2
     elif pose == "walk":
-        lf, rf = [(-4, 4), (-1, 1), (4, -4), (1, -1)][t]
+        lf, rf = [(-3, 3), (-1, 1), (3, -3), (1, -1)][t]
         lift_b, lift_f = [(0, 2), (2, 0), (2, 0), (0, 2)][t]
         bob = [0, 1, 0, 1][t]
     elif pose == "jump":
-        lf, rf, lift_b, lift_f = -3, 4, 5, 3
+        lf, rf, lift_b, lift_f = -2, 3, 4, 2
     elif pose == "attack":
-        lf, rf = -4, 5
+        lf, rf = -3, 4
         bob = [0, 1, 1][t]
 
     if pose == "fallen":
@@ -235,8 +297,8 @@ def hero_frame(pose="idle", t=0):
                                  (cx + 1, foot - 20, cx + 1, foot - 11), (cx + 1, foot - 20, cx + 5, foot - 20),
                                  (cx + 5, foot - 20, cx + 5, foot - 16), (cx + 1, foot - 16, cx + 5, foot - 16),
                                  (cx + 3, foot - 16, cx + 6, foot - 11)]:
-            s = f.shape().line(x0, y0, x1, y1, 1.6)
-            f.draw(s, [rgba("5b4682")] * 4, outline=False, flat=True)
+            s_ = f.shape().line(x0, y0, x1, y1, 1.6)
+            f.draw(s_, [rgba("5b4682")] * 4, outline=False, flat=True)
         grass = f.shape()
         for i in range(-16, 17, 4):
             grass.poly([(cx + i - 2, foot + 1), (cx + i + 2, foot + 1), (cx + i + (1 if i % 8 else -1), foot - 5)])
@@ -244,121 +306,78 @@ def hero_frame(pose="idle", t=0):
         return f
 
     climb = pose == "climb"
-    body_top = foot - 34 - bob  # shoulders
-    head_cy = body_top - 15
+    waist = foot - 15 - bob  # bottom of the tunic
+    neck = foot - 30 - bob   # top of the tunic
+    hx, hy = cx - 1, neck - 22
 
-    # ---- back arm (climbing only) and back hair spikes
-    if not climb:
-        back = f.shape()
-        back.poly([(cx - 12, head_cy - 4), (cx - 27, head_cy + 4), (cx - 14, head_cy + 8)])
-        back.poly([(cx - 10, head_cy + 4), (cx - 22, head_cy + 16), (cx - 8, head_cy + 12)])
-        back.poly([(cx - 8, head_cy - 14), (cx - 24, head_cy - 12), (cx - 12, head_cy - 4)])
-        f.draw(back, HAIR)
-
-    # ---- legs and boots
-    def leg(x, lift, front):
-        l = f.shape().rect(x, body_top + 20, 7, foot - 6 - lift - (body_top + 20))
-        f.draw(l, PANTS)
-        b = f.shape().rect(x - 1, foot - 7 - lift, 9, 6).ellipse(x + 6, foot - 3 - lift, 4, 3)
-        f.draw(b, BOOT)
-        cuff = f.shape().rect(x - 1, foot - 8 - lift, 9, 2)
-        f.draw(cuff, GOLD, flat=True)
+    def leg(x, lift):
+        l = f.shape().rect(x, waist - 2, 5, foot - 5 - lift - (waist - 2))
+        f.draw(l, PANTS, soft=1)
+        b = f.shape().rect(x - 1, foot - 7 - lift, 7, 6).ellipse(x + 5, foot - 3 - lift, 3.5, 3)
+        f.draw(b, BOOT, soft=2)
+        cuff = f.shape().rect(x - 1, foot - 8 - lift, 7, 2)
+        f.draw(cuff, GOLD, outline=False, flat=True)
 
     if climb:
-        a = 3 if t == 0 else -3
-        leg(cx - 7, a + 3, False)
-        leg(cx + 1, -a + 3, True)
+        a = 2 if t == 0 else -2
+        leg(cx - 6, a + 2)
+        leg(cx + 1, -a + 2)
     else:
-        leg(cx - 7 + lf, lift_b, False)
-        leg(cx + 1 + rf, lift_f, True)
+        # back arm, mostly hidden behind the body
+        arm_b = f.shape().line(cx - 6, neck + 3, cx - 9, neck + 11, 4)
+        f.draw(arm_b, SKIN, soft=1)
+        leg(cx - 6 + lf, lift_b)
+        leg(cx + 1 + rf, lift_f)
 
-    # ---- torso: tunic with a flared hem, collar and belt
-    torso = f.shape().poly([(cx - 9, body_top), (cx + 10, body_top), (cx + 12, body_top + 16),
-                            (cx + 16, body_top + 23), (cx - 15, body_top + 23), (cx - 11, body_top + 16)])
-    f.draw(torso, TUNIC)
-    collar = f.shape().poly([(cx - 4, body_top), (cx + 5, body_top), (cx + 1, body_top + 4)])
-    f.draw(collar, SKIN, outline=False, flat=True)
-    belt = f.shape().rect(cx - 11, body_top + 13, 23, 3)
+    torso = f.shape().poly([(cx - 7, neck), (cx + 7, neck), (cx + 9, waist - 5), (cx + 12, waist),
+                            (cx - 12, waist), (cx - 9, waist - 5)])
+    f.draw(torso, TUNIC, soft=3)
+    collar = f.shape().poly([(cx - 4, neck), (cx + 4, neck), (cx, neck + 4)])
+    f.draw(collar, CLOTH, outline=False, flat=True)
+    belt = f.shape().rect(cx - 10, waist - 6, 20, 2)
     f.draw(belt, GOLD, outline=False, flat=True)
-    f.put(cx + 3, body_top + 14, "fff6c8")
-    f.put(cx + 4, body_top + 14, "fff6c8")
 
-    # ---- arms and sword
     if climb:
-        a = -3 if t == 0 else 3
-        for (x, dy) in ((cx - 13, a), (cx + 9, -a)):
-            arm = f.shape().rect(x, body_top - 12 + dy, 5, 14)
-            f.draw(arm, SKIN)
-            sl = f.shape().rect(x - 1, body_top + dy, 7, 5)
-            f.draw(sl, TUNIC)
-    else:
-        sx, sy = cx + 3, body_top + 4
-        if pose in ("idle", "walk"):
-            hx, hy = sx + 7, sy + 12 + (bob if pose == "walk" else 0)
-            blade_ang = -0.55 if pose == "idle" else -0.45
-        elif pose == "jump":
-            hx, hy = sx + 7, sy - 3
-            blade_ang = -1.35
-        else:
-            arm_ang = [-2.3, -0.2, 0.8][t]
-            hx, hy = sx + math.cos(arm_ang) * 10, sy + math.sin(arm_ang) * 10
-            blade_ang = [-2.4, -0.15, 0.85][t]
-        L = 30
-        bx, by = hx + math.cos(blade_ang) * 4, hy + math.sin(blade_ang) * 4
-        ex, ey = hx + math.cos(blade_ang) * L, hy + math.sin(blade_ang) * L
-        blade = f.shape().line(bx, by, ex, ey, 4)
-        blade.poly([(ex + math.cos(blade_ang) * 4, ey + math.sin(blade_ang) * 4),
-                    (ex - math.sin(blade_ang) * 2, ey + math.cos(blade_ang) * 2),
-                    (ex + math.sin(blade_ang) * 2, ey - math.cos(blade_ang) * 2)])
-        f.draw(blade, STEEL, soft=1)
-        px_, py_ = -math.sin(blade_ang), math.cos(blade_ang)
-        guard = f.shape().line(bx - px_ * 5, by - py_ * 5, bx + px_ * 5, by + py_ * 5, 3)
-        f.draw(guard, GOLD, soft=1)
-        hilt = f.shape().line(hx - math.cos(blade_ang) * 4, hy - math.sin(blade_ang) * 4, hx, hy, 3)
-        f.draw(hilt, WOOD, soft=1)
-        arm = f.shape().line(sx + 1, sy + 1, hx, hy, 5)
-        f.draw(arm, SKIN, soft=1)
-        hand = f.shape().ellipse(hx, hy, 3.2, 3.2)
-        f.draw(hand, SKIN, soft=1)
-        sleeve = f.shape().ellipse(sx + 1, sy + 1, 4.5, 4.5)
-        f.draw(sleeve, TUNIC, soft=1)
+        a = -2 if t == 0 else 2
+        for (x, dy) in ((cx - 11, a), (cx + 7, -a)):
+            arm = f.shape().rect(x, neck - 9 + dy, 4, 12)
+            f.draw(arm, SKIN, soft=1)
+            sl = f.shape().rect(x - 1, neck + dy, 6, 4)
+            f.draw(sl, TUNIC, soft=1)
+        hero_head(f, hx + 1, hy, back=True)
+        return f
 
-    # ---- head
-    face = f.shape().ellipse(cx + 3, head_cy + 2, 16, 14.5)
-    f.draw(face, SKIN, vgrad=0.1)
-    if climb:
-        hair = f.shape().ellipse(cx + 2, head_cy - 1, 19, 17)
-        hair.poly([(cx - 8, head_cy + 10), (cx + 12, head_cy + 10), (cx + 2, head_cy + 20)])
-        f.draw(hair, HAIR)
-        for (x0, y0, x1, y1) in [(cx - 6, head_cy - 10, cx - 2, head_cy + 8), (cx + 6, head_cy - 12, cx + 8, head_cy + 8)]:
-            s = f.shape().line(x0, y0, x1, y1, 1.2)
-            f.draw(s, [HAIR[1]] * 4, outline=False, flat=True)
+    hero_head(f, hx, hy)
+
+    # front arm and sword, drawn over the body
+    sx, sy = cx + 5, neck + 3
+    if pose in ("idle", "walk"):
+        hx2, hy2 = sx + 4, sy + 8 + (bob if pose == "walk" else 0)
+        blade_ang = -0.5 if pose == "idle" else -0.4
+    elif pose == "jump":
+        hx2, hy2 = sx + 5, sy - 2
+        blade_ang = -1.3
     else:
-        # ear
-        hair = f.shape().ellipse(cx + 2, head_cy - 7, 19, 12)
-        hair.rect(cx - 15, head_cy - 8, 9, 18)  # side behind the ear
-        hair.poly([(cx - 2, head_cy - 14), (cx + 6, head_cy - 30), (cx + 10, head_cy - 14)])  # top spike
-        hair.poly([(cx + 8, head_cy - 15), (cx + 20, head_cy - 24), (cx + 17, head_cy - 10)])
-        f.draw(hair, HAIR)
-        # bangs: separate outlined strands falling over the forehead
-        for (x0, x1, tip_x, tip_y) in [(cx - 6, cx + 3, cx - 2, head_cy + 4), (cx + 2, cx + 11, cx + 5, head_cy + 3),
-                                        (cx + 9, cx + 18, cx + 13, head_cy + 4), (cx + 15, cx + 22, cx + 20, head_cy + 9)]:
-            strand = f.shape().poly([(x0, head_cy - 8), (x1, head_cy - 8), (tip_x, tip_y)])
-            f.draw(strand, HAIR, soft=2, vgrad=0.8)
-        for (x0, y0, x1, y1) in [(cx + 3, head_cy - 14, cx + 6, head_cy - 3), (cx + 11, head_cy - 13, cx + 12, head_cy - 3),
-                                 (cx - 4, head_cy - 12, cx - 4, head_cy - 1)]:
-            s = f.shape().line(x0, y0, x1, y1, 1.0)
-            f.draw(s, [HAIR[1]] * 4, outline=False, flat=True)
-        # face details
-        ear = f.shape().ellipse(cx - 5, head_cy + 5, 2.5, 3.5)
-        f.draw(ear, SKIN, soft=1)
-        ey = head_cy + 5
-        eye(f, cx + 3, ey, 5, 9)
-        eye(f, cx + 13, ey, 4, 9, narrow=True)
-        f.put(cx + 11, ey + 13, "a04a5a")
-        f.put(cx + 12, ey + 13, "a04a5a")
-        for (bx_, by_) in [(cx + 2, ey + 11), (cx + 3, ey + 11), (cx + 17, ey + 11), (cx + 18, ey + 11)]:
-            f.put(bx_, by_, "ffa0a8")
+        arm_ang = [-2.2, -0.2, 0.8][t]
+        hx2, hy2 = sx + math.cos(arm_ang) * 7, sy + math.sin(arm_ang) * 7
+        blade_ang = [-2.4, -0.15, 0.85][t]
+    L = 24
+    bx, by = hx2 + math.cos(blade_ang) * 3, hy2 + math.sin(blade_ang) * 3
+    ex, ey = hx2 + math.cos(blade_ang) * L, hy2 + math.sin(blade_ang) * L
+    blade = f.shape().line(bx, by, ex, ey, 3.5)
+    blade.poly([(ex + math.cos(blade_ang) * 4, ey + math.sin(blade_ang) * 4),
+                (ex - math.sin(blade_ang) * 1.8, ey + math.cos(blade_ang) * 1.8),
+                (ex + math.sin(blade_ang) * 1.8, ey - math.cos(blade_ang) * 1.8)])
+    f.draw(blade, STEEL, soft=1)
+    px_, py_ = -math.sin(blade_ang), math.cos(blade_ang)
+    guard = f.shape().line(bx - px_ * 4, by - py_ * 4, bx + px_ * 4, by + py_ * 4, 3)
+    f.draw(guard, GOLD, soft=1)
+    arm = f.shape().line(sx, sy, hx2, hy2, 4)
+    f.draw(arm, SKIN, soft=1)
+    hand = f.shape().ellipse(hx2, hy2, 2.8, 2.8)
+    f.draw(hand, SKIN, soft=1)
+    sleeve = f.shape().ellipse(sx, sy, 3.5, 3.5)
+    f.draw(sleeve, TUNIC, soft=1)
     return f
 
 
