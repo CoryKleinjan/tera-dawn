@@ -59,11 +59,16 @@ const THEMES := {
 		"sky": [Color("2b2152"), Color("6a4688"), Color("e8917e"), Color("ffd3a0")], "sun": Color("ffe7a8"),
 		"far": Color("5b4682"), "mid": Color("7f5f93"), "near": Color("4f7a5a"),
 		"grass": Color("8fd16a"), "grass_hi": Color("c3ef8e"), "dirt": Color("8a5a43"), "dirt_dark": Color("5e3a2e"),
+		# HD-2D stage: sprite set, sunlight, ambient fill, distance haze and floating particles
+		"art": "dawn", "light": Color("ffe2b0"), "light_energy": 1.9, "ambient": Color("7a6ab8"), "ambient_energy": 0.35,
+		"fog": Color("e8a49a"), "motes": Color(1.8, 1.5, 0.9), "lantern": Color("ffc070"),
 	},
 	"ember": {
 		"sky": [Color("1a0f2b"), Color("4d1b3e"), Color("b9423b"), Color("ff9b5c")], "sun": Color("ffb35c"),
 		"far": Color("3c1c3e"), "mid": Color("5e2741"), "near": Color("3a2a33"),
 		"grass": Color("d9774f"), "grass_hi": Color("ffa577"), "dirt": Color("5c3433"), "dirt_dark": Color("3a1f24"),
+		"art": "ember", "light": Color("ffb07a"), "light_energy": 1.5, "ambient": Color("7a3a5a"), "ambient_energy": 0.45,
+		"fog": Color("b9423b"), "motes": Color(3.0, 1.2, 0.4), "lantern": Color("ff8a4a"),
 	},
 }
 

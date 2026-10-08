@@ -30,7 +30,6 @@ func is_climbing() -> bool:
 
 func step() -> void:
 	anim += 1
-	queue_redraw()
 	if dead > 0:
 		dead -= 1
 		if dead == 0:
@@ -63,6 +62,7 @@ func _attacks() -> void:
 		atk_t = 16
 		atk_cd = 24
 		world.hit_mobs(78, 1, 1, 1.0)
+		world.add_effect("swish", position + Vector2(0, -34), face)
 	elif Input.is_action_just_pressed("skill"):
 		if Game.mp >= 8:
 			Game.mp -= 8
@@ -171,60 +171,48 @@ func _move() -> void:
 		position.y = float(world.map["ground"])
 		vel.y = 0
 
-# ---------- drawing (placeholder art) ----------
+# ---------- HD-2D visuals ----------
 
-func _draw() -> void:
-	if dead > 0:
-		DrawUtil.round_rect(self, Rect2(-14, -30, 28, 30), 6, Color("c9b8d9"))
-		DrawUtil.text(self, Game.ui_font, Vector2(0, -11), "RIP", 11, Color("5b4682"))
+const Z := 0.15 # in front of monsters standing at the same spot
+
+var body: Sprite3D
+var shadow: Sprite3D
+
+func _ready() -> void:
+	body = TDStage.sprite(TDStage.tex("hero"), 13)
+	add_child(body)
+	shadow = TDStage.sprite(TDStage.tex("blob_shadow"), 1, false)
+	shadow.offset = Vector2.ZERO
+	shadow.axis = Vector3.AXIS_Y
+	shadow.alpha_cut = SpriteBase3D.ALPHA_CUT_DISABLED
+	shadow.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	add_child(shadow)
+
+func _process(_delta: float) -> void:
+	_sync_visuals()
+
+## Frames in hero.png: 0-1 idle, 2-5 walk, 6 jump, 7-8 climb, 9-11 attack, 12 fallen.
+func _sync_visuals() -> void:
+	if body == null or world == null:
 		return
-	modulate.a = 0.55 if inv > 0 and inv % 8 < 4 else 1.0
-	var climbing := is_climbing()
-	if on_ground:
-		DrawUtil.ellipse(self, Vector2.ZERO, 14, 4, Color(0, 0, 0, 0.22))
-	var f := 1.0 if climbing else float(face)
-	var flip := Transform2D(0, Vector2(f, 1), 0, Vector2.ZERO)
-	draw_set_transform_matrix(flip)
-	var walking := on_ground and absf(vel.x) > 0.3
-	var stride := sin(anim * 0.35) * 5.0 if walking else 0.0
-	var cstep := sin(position.y * 0.25) * 4.0 if climbing else 0.0
-	# legs and boots
-	draw_rect(Rect2(-7 + stride * 0.6, -16 + cstep, 6, 16), Color("3d2c5e"))
-	draw_rect(Rect2(2 - stride * 0.6, -16 - cstep, 6, 16), Color("3d2c5e"))
-	draw_rect(Rect2(-8 + stride * 0.6, -3, 8, 3), Color("2a1b3d"))
-	draw_rect(Rect2(1 - stride * 0.6, -3, 8, 3), Color("2a1b3d"))
-	# tunic
-	var tunic := DrawUtil.round_rect_points(Rect2(-10, -38, 20, 24), 6)
-	var tcols := PackedColorArray()
-	for pt in tunic:
-		tcols.append(Color("ff9a6b").lerp(Color("e0603f"), (pt.y + 38) / 24.0))
-	draw_polygon(tunic, tcols)
-	draw_rect(Rect2(-10, -20, 20, 3), GameData.SUN)
-	# arm and sword
-	var swing := 1.0 - float(atk_t) / (22.0 if skill_t > 0 else 16.0) if atk_t > 0 else -1.0
-	var ang := -2.2 if climbing else 0.5
-	if swing >= 0:
-		ang = -2.0 + swing * 3.4
-	draw_set_transform_matrix(flip * Transform2D(ang, Vector2(4, -32)))
-	draw_rect(Rect2(-3, 0, 6, 13), Color("ffd9b8"))
-	if not climbing:
-		draw_rect(Rect2(-2, 12, 4, 6), Color("6b4433"))
-		draw_rect(Rect2(-6, 17, 12, 3), GameData.SUN)
-		var blade := PackedVector2Array([Vector2(-3, 20), Vector2(3, 20), Vector2(2, 50), Vector2(0, 55), Vector2(-2, 50)])
-		draw_polygon(blade, PackedColorArray([Color("f4f1ff"), Color("f4f1ff"), Color("a9b7ff"), Color("a9b7ff"), Color("a9b7ff")]))
-	draw_set_transform_matrix(flip)
-	# head and hair
-	draw_circle(Vector2(0, -52), 15, Color("ffd9b8"))
-	var hair := Color("ff9a3c")
-	draw_colored_polygon(DrawUtil.ellipse_points(Vector2(-1, -56), 16, 16, PI * 1.02, PI * 2.05, 16), hair)
-	draw_colored_polygon(PackedVector2Array([Vector2(-16, -56), Vector2(-20, -40), Vector2(-9, -50)]), hair)
-	if climbing:
-		draw_circle(Vector2(0, -52), 14, hair)
+	var p := TDStage.to3d(position, Z)
+	body.position = p
+	shadow.position = p + Vector3(0, 0.02, 0)
+	shadow.visible = on_ground and dead == 0
+	body.visible = not (inv > 0 and inv % 8 < 4) or dead > 0
+	var frame := 0
+	if dead > 0:
+		frame = 12
+	elif is_climbing():
+		frame = 7 + int(position.y / 14.0) % 2
+	elif atk_t > 0:
+		var dur := 22.0 if skill_t > 0 else 16.0
+		frame = 9 + mini(2, int((1.0 - atk_t / dur) * 3.0))
+	elif not on_ground:
+		frame = 6
+	elif absf(vel.x) > 0.3:
+		frame = 2 + (anim / 6) % 4
 	else:
-		draw_rect(Rect2(4, -53, 3, 6), Color("2a1b3d"))
-		draw_rect(Rect2(10, -53, 3, 6), Color("2a1b3d"))
-		draw_circle(Vector2(11, -45), 3, Color(1, 0.47, 0.47, 0.4))
-	draw_set_transform_matrix(Transform2D.IDENTITY)
-	# name tag
-	DrawUtil.round_rect(self, Rect2(-30, 4, 60, 16), 4, Color(0.1, 0.07, 0.19, 0.7))
-	DrawUtil.text(self, Game.ui_font, Vector2(0, 16), "Dawnling", 11, GameData.SUN)
+		frame = (anim / 30) % 2
+	body.frame = frame
+	body.flip_h = face < 0 and not is_climbing() and dead == 0

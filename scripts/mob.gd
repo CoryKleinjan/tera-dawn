@@ -37,7 +37,6 @@ func _reset() -> void:
 	death_t = 0
 	show_hp = 0
 	phase = randf() * 6.0
-	modulate.a = 1.0
 
 func hurt(from_face: int) -> void:
 	hurt_t = 14
@@ -52,7 +51,6 @@ func die() -> void:
 
 func step() -> void:
 	phase += 0.08
-	queue_redraw()
 	if dead:
 		if death_t > 0:
 			death_t -= 1
@@ -94,73 +92,75 @@ func step() -> void:
 	if absf(position.x - p.position.x) < half + 10 and p.position.y > position.y - float(d["h"]) - 4 and p.position.y - 56 < position.y:
 		world.hurt_player(int(d["atk"]), position.x)
 
-# ---------- drawing (placeholder art) ----------
+# ---------- HD-2D visuals ----------
 
-func _draw() -> void:
+var body: Sprite3D
+var glow: Sprite3D
+var flame_light: OmniLight3D
+var shadow: Sprite3D
+var z := 0.0
+var last_x := 0.0
+
+func _ready() -> void:
+	z = randf_range(-0.35, 0.05)
+	body = TDStage.sprite(TDStage.tex(type), 4)
+	add_child(body)
+	if type == "emberboar":
+		glow = TDStage.glow_sprite(TDStage.tex("emberboar_glow"), Color(2.4, 1.5, 0.8), 4)
+		glow.offset = body.offset
+		add_child(glow)
+		flame_light = TDStage.light(Color("ff8a4a"), 1.6, 3.5)
+		add_child(flame_light)
+	shadow = TDStage.sprite(TDStage.tex("blob_shadow"), 1, false)
+	shadow.offset = Vector2.ZERO
+	shadow.axis = Vector3.AXIS_Y
+	shadow.pixel_size = TDStage.PIXEL * float(d["w"]) / 40.0
+	shadow.alpha_cut = SpriteBase3D.ALPHA_CUT_DISABLED
+	shadow.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	add_child(shadow)
+
+func _process(_delta: float) -> void:
+	if body == null or world == null:
+		return
 	var alpha := 1.0
 	if dead:
 		alpha = death_t / 30.0
-	if hurt_t > 0 and hurt_t % 4 < 2:
-		alpha *= 0.6
-	modulate.a = alpha
-	if alpha <= 0.0:
-		return
+	body.visible = alpha > 0.0
+	body.transparency = 1.0 - alpha
+	body.modulate = Color(2.2, 1.0, 1.0) if hurt_t > 0 and hurt_t % 4 < 2 else Color.WHITE
 	var facing := dir
 	if facing == 0:
 		facing = -1 if world.player.position.x < position.x else 1
-	var bob := sin(phase * 2.0)
-	DrawUtil.ellipse(self, Vector2.ZERO, float(d["w"]) * 0.45, 5, Color(0, 0, 0, 0.2))
-	var flip := Transform2D(0, Vector2(facing, 1), 0, Vector2.ZERO)
-	match type:
-		"dewling":
-			var sq := 1.0 + bob * 0.08
-			draw_set_transform_matrix(flip * Transform2D(0, Vector2(1.0 / sq, sq), 0, Vector2.ZERO))
-			var body := PackedVector2Array()
-			for i in 17:
-				var t := i / 16.0
-				var a := PI + t * PI
-				body.append(Vector2(cos(a) * 18, sin(a) * 30 * (1.0 - 0.15 * absf(cos(a)))))
-			var cols := PackedColorArray()
-			for pt in body:
-				cols.append(Color("a8f0e6").lerp(Color("3fb3b0"), (pt.y + 30) / 30.0))
-			draw_polygon(body, cols)
-			DrawUtil.ellipse(self, Vector2(-6, -20), 4, 6, Color(1, 1, 1, 0.6))
-			draw_circle(Vector2(4, -13), 2.6, GameData.NIGHT)
-			draw_circle(Vector2(11, -13), 2.6, GameData.NIGHT)
-		"sproutcap":
-			draw_set_transform_matrix(flip * Transform2D(0, Vector2(0, -maxf(0, bob) * 4)))
-			DrawUtil.round_rect(self, Rect2(-12, -22, 24, 22), 8, Color("f2dcc0"))
-			draw_circle(Vector2(2, -12), 2.4, GameData.NIGHT)
-			draw_circle(Vector2(9, -12), 2.4, GameData.NIGHT)
-			draw_colored_polygon(DrawUtil.ellipse_points(Vector2(0, -24), 22, 15, PI, TAU, 16), Color("e8566b"))
-			draw_circle(Vector2(-9, -31), 3.5, GameData.MIST)
-			draw_circle(Vector2(7, -34), 3, GameData.MIST)
-			draw_circle(Vector2(14, -27), 2.5, GameData.MIST)
-			draw_line(Vector2(0, -38), Vector2(0, -46), Color("4f9a4a"), 2.5)
-			DrawUtil.ellipse(self, Vector2(-5, -47), 6, 3, Color("7ccf5f"))
-			DrawUtil.ellipse(self, Vector2(5, -47), 6, 3, Color("7ccf5f"))
-		_:
-			draw_set_transform_matrix(flip)
-			var stride := sin(phase * 3.0) * 3.0
-			draw_rect(Rect2(-20 + stride, -12, 7, 12), Color("4a2c22"))
-			draw_rect(Rect2(12 - stride, -12, 7, 12), Color("4a2c22"))
-			DrawUtil.ellipse(self, Vector2(0, -22), 30, 17, Color("7a4a34"))
-			for i in 5:
-				var flick := sin(world.tick * 0.2 + i) * 4.0
-				draw_colored_polygon(PackedVector2Array([
-					Vector2(-14 + i * 8, -36), Vector2(-10 + i * 8, -48 - flick), Vector2(-6 + i * 8, -36)]), GameData.EMBER)
-			DrawUtil.ellipse(self, Vector2(26, -18), 10, 9, Color("8f5a40"))
-			draw_colored_polygon(PackedVector2Array([Vector2(30, -12), Vector2(36, -22), Vector2(33, -11)]), GameData.MIST)
-			draw_circle(Vector2(22, -24), 2.4, GameData.NIGHT)
-	draw_set_transform_matrix(Transform2D.IDENTITY)
+	var moving := absf(position.x - last_x) > 0.01
+	last_x = position.x
+	var frame := int(phase * 1.2) % 4
+	if type == "emberboar":
+		frame = int(phase * 2.0) % 4 if moving or hurt_t > 0 else 0
+	body.frame = frame
+	body.flip_h = facing < 0
+	var p := TDStage.to3d(position, z)
+	body.position = p
+	shadow.position = p + Vector3(0, 0.02, 0)
+	shadow.visible = not dead
+	if glow:
+		glow.frame = frame
+		glow.flip_h = body.flip_h
+		glow.position = p + Vector3(0, 0, 0.01)
+		glow.visible = body.visible
+		glow.transparency = body.transparency
+		flame_light.position = p + Vector3(0, 1.4, 0.4)
+		flame_light.light_energy = (1.4 + sin(phase * 5.0) * 0.3) * alpha
+
+## Name tag and HP bar, drawn by the overlay at this monster's projected screen position.
+func draw_tag(ci: CanvasItem, at: Vector2) -> void:
 	if dead:
 		return
 	var label := "Lv.%d %s" % [int(d["lvl"]), d["name"]]
 	var w := DrawUtil.text_width(Game.ui_font, label, 11) + 12
-	DrawUtil.round_rect(self, Rect2(-w / 2, 4, w, 16), 4, Color(0.1, 0.07, 0.19, 0.6))
-	DrawUtil.text(self, Game.ui_font, Vector2(0, 16), label, 11, GameData.MIST)
+	DrawUtil.round_rect(ci, Rect2(at.x - w / 2, at.y + 4, w, 16), 4, Color(0.1, 0.07, 0.19, 0.6))
+	DrawUtil.text(ci, Game.ui_font, at + Vector2(0, 16), label, 11, GameData.MIST)
 	if show_hp > 0:
 		var bw := maxf(40.0, float(d["w"]))
-		var top := -float(d["h"]) - 14
-		draw_rect(Rect2(-bw / 2, top, bw, 6), Color(0, 0, 0, 0.55))
-		draw_rect(Rect2(-bw / 2 + 1, top + 1, (bw - 2) * maxf(0, float(hp) / float(d["hp"])), 4), GameData.HP)
+		var top := at.y - float(d["h"]) - 14
+		ci.draw_rect(Rect2(at.x - bw / 2, top, bw, 6), Color(0, 0, 0, 0.55))
+		ci.draw_rect(Rect2(at.x - bw / 2 + 1, top + 1, (bw - 2) * maxf(0, float(hp) / float(d["hp"])), 4), GameData.HP)
