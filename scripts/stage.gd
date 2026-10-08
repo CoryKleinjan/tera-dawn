@@ -15,6 +15,7 @@ const GROUND_FRONT := 3.0
 const PLAT_BACK := -2.4
 const PLAT_FRONT := 0.1 # characters stand in front of it so platforms above never hide them
 const PLAT_THICK := 0.8
+const TREE_SCALE := 1.8 # tree sprites are drawn at about half size; scale them back up
 
 var world: TDWorld
 var camera: Camera3D
@@ -418,7 +419,7 @@ func _build_backdrop(th: Dictionary, rng: RandomNumberGenerator) -> void:
 			while tx < x1:
 				var t := sprite(tex("tree_%s" % art), 1, false)
 				t.modulate = col.darkened(0.1)
-				t.pixel_size = PIXEL * r / dist * 0.55
+				t.pixel_size = PIXEL * r / dist * 0.55 * TREE_SCALE
 				t.position = Vector3(tx, base + _ridge(l[3], tx / scale) * scale - 1.0, z + 0.5)
 				t.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 				map_root.add_child(t)
@@ -457,7 +458,7 @@ func _dress_ground(art: String, rng: RandomNumberGenerator) -> void:
 		var tree_name := "tree_%s" % art
 		if art == "dawn" and rng.randf() < 0.35:
 			tree_name = "tree_dawn_pink"
-		_prop(tree_name, Vector3(x, y, rng.randf_range(GROUND_BACK + 0.5, -5.0)), 1, 0, rng.randf_range(0.9, 1.4))
+		_prop(tree_name, Vector3(x, y, rng.randf_range(GROUND_BACK + 0.5, -5.0)), 1, 0, rng.randf_range(0.9, 1.4) * TREE_SCALE)
 		x += rng.randf_range(4.0, 9.0)
 	x = -12.0
 	while x < w + 12.0:

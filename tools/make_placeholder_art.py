@@ -823,29 +823,16 @@ def tiles(prefix, grass, dirt, stone, seed):
 
 def main():
     os.makedirs(OUT, exist_ok=True)
-    # hero.png is hand-drawn now: see tools/pixel_art/build_hero.py
-    dewling()
-    sproutcap()
-    emberboar()
-    emberboar(glow=True)
+    # The hero, monsters, trees, bushes and rocks are hand-drawn now: see tools/pixel_art/.
     shard()
     soft_dot("soft_dot.png", 16)
     soft_dot("glow.png", 64, 1.6)
     blob_shadow()
-    green = ramp("6cc85a", "48a04a", "2e7440", "a8ec7a")
-    pink = ramp("ffa8c8", "ec7aa6", "c0507e", "ffd8e8")
-    tree("tree_dawn.png", green, seed=1)
-    tree("tree_dawn_pink.png", pink, seed=5, blossoms=[rgba("fff0f6")] * 4)
-    tree("tree_ember.png", None, trunk=ramp("5a3440", "42242e", "2a141e", "7a4a56"), dead=True)
-    bush("bush_dawn.png", green, flower=[rgba("ffd166")] * 4)
-    bush("bush_ember.png", ramp("b0483e", "8a3036", "5c1e2a", "e0705a"), flower=[rgba("ffb35c")] * 4)
     tufts("tufts_dawn.png", ramp("8fe06a", "5eb04a", "3f8a3a", "c8ff9a"),
           flowers=(ramp("ffb0c8", "ff7a9a", "d04a70", "ffe0ea"), ramp("ffe080", "ffc040", "d08a20", "fff6c8"),
                    ramp("c8b8ff", "9a86f0", "6a56c0", "ece6ff")))
     tufts("tufts_ember.png", ramp("e88a5a", "c0603e", "8a3a2e", "ffb88a"),
           flowers=(ramp("ffe080", "ffc040", "d08a20", "fff6c8"),), seed=7)
-    rock("rock_dawn.png", ramp("b4a8c8", "8a7ca6", "5e5280", "dcd4ea"))
-    rock("rock_ember.png", ramp("5a3a46", "42283a", "2a1828", "7a5466"), glow="ffb35c")
     lantern()
     signpost()
     cloud()
