@@ -1,0 +1,74 @@
+{
+  "source": "art/source/dewling.png",
+  "scale": 0.24,
+  "save": false,
+  "out_dir": "art/build/dewling",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "hop1",
+      "hop2"
+    ],
+    [
+      "hop3",
+      "attack",
+      "hurt",
+      "defeated"
+    ]
+  ],
+  "sets": {
+    "dewling": {
+      "frames": {
+        "idle1": "dewling:idle1",
+        "idle2": "dewling:idle2",
+        "hop1": "dewling:hop1",
+        "hop2": "dewling:hop2",
+        "hop3": "dewling:hop3",
+        "attack": "dewling:attack",
+        "hurt": "dewling:hurt",
+        "defeated": "dewling:defeated"
+      },
+      "anchor": "mass",
+      "baseline": "cell",
+      "out": "assets/sprites/monsters/dewling.png",
+      "sprite_frames": "assets/animations/dewling.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "hop1",
+            "hop2",
+            "hop3"
+          ],
+          "fps": 6
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 1
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      }
+    }
+  }
+}

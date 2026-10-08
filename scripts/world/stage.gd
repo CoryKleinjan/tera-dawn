@@ -1,0 +1,279 @@
+class_name TDStage
+extends Node3D
+## The HD-2D view of the map: pixel-art sprites standing in a lit 3D diorama.
+## Gameplay stays 2D (game pixels, y down); this node owns the camera, sky, light and
+## post effects, and asks the builders to turn the map into 3D:
+##   TerrainBuilder  the floor and platform blocks and their painted fronts
+##   BackdropBuilder the parallax mountains, trees, clouds and sun
+##   SceneryBuilder  props, climbables, portals, lanterns and signs
+## One 3D unit is PX game pixels. Static helpers here make sprites and lights for everyone.
+
+const PX := 32.0
+const FOV := 30.0
+const PITCH := 9.0 # degrees the camera looks down
+## Size of one sprite texel in game pixels, for characters and props.
+const TEXEL := 1.25
+
+const GROUND_BACK := -9.0
+const GROUND_FRONT := 3.0
+const PLAT_BACK := -2.4
+const PLAT_FRONT := 0.1 # characters stand in front of it so platforms above never hide them
+const PLAT_THICK := 0.8
+
+var world: TDWorld
+var camera: Camera3D
+var env: Environment
+var sun: DirectionalLight3D
+var map_root: Node3D
+var motes: CPUParticles3D
+var backdrop: BackdropBuilder
+var dist := 0.0
+
+static var _soft_dot: Texture2D
+static var _shadow: Texture2D
+
+# ---------- helpers for everyone ----------
+
+static func to3d(p: Vector2, z := 0.0) -> Vector3:
+	return Vector3(p.x / PX, -p.y / PX, z)
+
+## Pixel-art defaults: crisp texels, cut-out alpha, lit, origin at the bottom centre.
+static func style_sprite(s: SpriteBase3D, texel := TEXEL, shaded := true) -> void:
+	s.pixel_size = texel / PX
+	s.centered = true
+	s.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+	s.alpha_cut = SpriteBase3D.ALPHA_CUT_DISCARD
+	s.shaded = shaded
+	s.double_sided = true
+
+## A sprite whose origin is the bottom centre of its texture.
+static func sprite(texture: Texture2D, texel := TEXEL, shaded := true) -> Sprite3D:
+	var s := Sprite3D.new()
+	s.texture = texture
+	style_sprite(s, texel, shaded)
+	s.offset = Vector2(0, texture.get_height() / 2.0)
+	return s
+
+## Unshaded, soft-edged sprite with HDR colour so it blooms (glows, effects, the sun).
+static func glow_sprite(texture: Texture2D, col: Color, texel := TEXEL) -> Sprite3D:
+	var s := sprite(texture, texel, false)
+	s.alpha_cut = SpriteBase3D.ALPHA_CUT_DISABLED
+	s.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	s.offset = Vector2.ZERO
+	s.modulate = col
+	return s
+
+## The soft round shadow under a character, `width` game pixels across.
+static func shadow_sprite(width: float) -> Sprite3D:
+	if _shadow == null:
+		_shadow = load("res://assets/sprites/fx/blob_shadow.png")
+	var s := sprite(_shadow, width / _shadow.get_width(), false)
+	s.offset = Vector2.ZERO
+	s.axis = Vector3.AXIS_Y
+	s.alpha_cut = SpriteBase3D.ALPHA_CUT_DISABLED
+	s.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	return s
+
+static func light(col: Color, energy: float, range_: float, shadows := false) -> OmniLight3D:
+	var o := OmniLight3D.new()
+	o.light_color = col
+	o.light_energy = energy
+	o.omni_range = range_
+	o.omni_attenuation = 1.4
+	o.shadow_enabled = shadows
+	return o
+
+static func additive_material(col: Color) -> StandardMaterial3D:
+	if _soft_dot == null:
+		_soft_dot = load("res://assets/sprites/fx/soft_dot.png")
+	var m := StandardMaterial3D.new()
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	m.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+	m.billboard_mode = BaseMaterial3D.BILLBOARD_PARTICLES
+	m.vertex_color_use_as_albedo = true
+	m.albedo_color = col
+	m.albedo_texture = _soft_dot
+	m.disable_receive_shadows = true
+	return m
+
+## Glowing particles (sparks, embers, dust motes). Colours may be HDR.
+static func particles(col: Color, amount: int, size: float) -> CPUParticles3D:
+	var p := CPUParticles3D.new()
+	p.amount = amount
+	var q := QuadMesh.new()
+	q.size = Vector2(size, size)
+	q.material = additive_material(col)
+	p.mesh = q
+	p.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	return p
+
+# ---------- camera, sky and post effects ----------
+
+func _ready() -> void:
+	dist = (TDWorld.VIEW.y / PX) / 2.0 / tan(deg_to_rad(FOV / 2.0))
+	camera = Camera3D.new()
+	camera.fov = FOV
+	camera.near = 1.0
+	camera.far = 400.0
+	camera.rotation_degrees = Vector3(-PITCH, 0, 0)
+	add_child(camera)
+	camera.make_current()
+	_build_environment()
+	_build_sun()
+	_build_motes()
+	_build_post()
+
+func _build_environment() -> void:
+	env = Environment.new()
+	env.background_mode = Environment.BG_SKY
+	var sky := Sky.new()
+	var sky_mat := ShaderMaterial.new()
+	sky_mat.shader = load("res://shaders/sky.gdshader")
+	sky.sky_material = sky_mat
+	env.sky = sky
+	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+	env.reflected_light_source = Environment.REFLECTION_SOURCE_DISABLED
+	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
+	env.tonemap_exposure = 0.95
+	env.tonemap_white = 6.0
+	env.glow_enabled = true
+	env.glow_normalized = false
+	env.glow_intensity = 0.7
+	env.glow_strength = 1.0
+	env.glow_bloom = 0.0
+	env.glow_hdr_threshold = 1.0
+	env.glow_blend_mode = Environment.GLOW_BLEND_MODE_SCREEN
+	for i in 7:
+		env.set_glow_level(i, 1.0 if i in [1, 2, 3, 4, 5] else 0.0)
+	env.ssao_enabled = true
+	env.ssao_radius = 1.2
+	env.ssao_intensity = 1.6
+	env.fog_enabled = true
+	env.fog_mode = Environment.FOG_MODE_DEPTH
+	env.fog_depth_begin = dist + 12.0
+	env.fog_depth_end = dist + 160.0
+	env.fog_depth_curve = 1.6
+	env.fog_density = 0.6
+	env.fog_sky_affect = 0.0
+	env.adjustment_enabled = true
+	env.adjustment_saturation = 1.08
+	env.adjustment_contrast = 1.08
+	var we := WorldEnvironment.new()
+	we.environment = env
+	var attrs := CameraAttributesPractical.new()
+	attrs.dof_blur_far_enabled = true
+	attrs.dof_blur_far_distance = dist + 3.0
+	attrs.dof_blur_far_transition = 14.0
+	attrs.dof_blur_near_enabled = true
+	attrs.dof_blur_near_distance = dist - 6.0
+	attrs.dof_blur_near_transition = 5.0
+	attrs.dof_blur_amount = 0.12
+	we.camera_attributes = attrs
+	add_child(we)
+
+func _build_sun() -> void:
+	sun = DirectionalLight3D.new()
+	sun.basis = Basis.looking_at(Vector3(-0.75, -0.48, -0.45).normalized(), Vector3.UP)
+	sun.shadow_enabled = true
+	sun.shadow_blur = 1.0
+	sun.shadow_bias = 0.03
+	sun.shadow_normal_bias = 0.3
+	sun.directional_shadow_mode = DirectionalLight3D.SHADOW_PARALLEL_2_SPLITS
+	sun.directional_shadow_max_distance = dist + 30.0
+	add_child(sun)
+
+func _build_motes() -> void:
+	motes = particles(Color.WHITE, 70, 0.14)
+	motes.lifetime = 7.0
+	motes.preprocess = 7.0
+	motes.emission_shape = CPUParticles3D.EMISSION_SHAPE_BOX
+	motes.emission_box_extents = Vector3(18, 10, 5)
+	motes.spread = 60.0
+	motes.initial_velocity_min = 0.1
+	motes.initial_velocity_max = 0.4
+	motes.scale_amount_min = 0.4
+	motes.scale_amount_max = 1.2
+	var fade := Gradient.new()
+	fade.set_color(0, Color(1, 1, 1, 0))
+	fade.set_color(1, Color(1, 1, 1, 0))
+	fade.add_point(0.25, Color(1, 1, 1, 1))
+	fade.add_point(0.75, Color(1, 1, 1, 1))
+	motes.color_ramp = fade
+	add_child(motes)
+
+func _build_post() -> void:
+	var post_layer := CanvasLayer.new()
+	post_layer.layer = 5
+	var post := ColorRect.new()
+	post.set_anchors_preset(Control.PRESET_FULL_RECT)
+	post.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var post_mat := ShaderMaterial.new()
+	post_mat.shader = load("res://shaders/post.gdshader")
+	post.material = post_mat
+	post_layer.add_child(post)
+	add_child(post_layer)
+
+## Rebuilds everything for the world's current map.
+func build() -> void:
+	if map_root:
+		remove_child(map_root)
+		map_root.queue_free()
+	map_root = Node3D.new()
+	add_child(map_root)
+	var map := world.map
+	var biome := map.biome
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash(map.id)
+	_apply_biome(biome)
+	TerrainBuilder.new(self, map_root).build(map, world.platforms)
+	backdrop = BackdropBuilder.new(self, map_root)
+	backdrop.build(map, rng)
+	SceneryBuilder.new(self, map_root).build(map, world.platforms, rng)
+	follow(world.cam)
+
+func _apply_biome(b: BiomeDef) -> void:
+	var sky_mat := env.sky.sky_material as ShaderMaterial
+	sky_mat.set_shader_parameter("top_color", b.sky_top)
+	sky_mat.set_shader_parameter("mid_color", b.sky_mid)
+	sky_mat.set_shader_parameter("low_color", b.sky_low)
+	sky_mat.set_shader_parameter("horizon_color", b.sky_horizon)
+	sky_mat.set_shader_parameter("sun_color", b.sun_color)
+	env.ambient_light_color = b.ambient_color
+	env.ambient_light_energy = b.ambient_energy
+	env.fog_light_color = b.fog_color
+	sun.light_color = b.light_color
+	sun.light_energy = b.light_energy
+	((motes.mesh as PrimitiveMesh).material as StandardMaterial3D).albedo_color = b.mote_color
+	motes.gravity = Vector3(0, 0.35 if b.motes_rise else 0.05, 0)
+	motes.direction = Vector3(0.2 if b.motes_rise else 0.3, 1, 0)
+
+# ---------- camera ----------
+
+func follow(cam: Vector2) -> void:
+	var target := to3d(cam + TDWorld.VIEW / 2.0)
+	var pitch := deg_to_rad(PITCH)
+	camera.position = target + Vector3(0, sin(pitch), cos(pitch)) * dist
+	motes.position = Vector3(target.x, target.y, 1.0)
+
+## Where a gameplay point appears in the 960x540 canvas.
+func screen(p: Vector2, z := 0.0) -> Vector2:
+	return camera.unproject_position(to3d(p, z)) * TDWorld.VIEW / get_viewport().get_visible_rect().size
+
+func in_view(p: Vector2, z := 0.0) -> bool:
+	return not camera.is_position_behind(to3d(p, z)) and Rect2(Vector2(-80, -80), TDWorld.VIEW + Vector2(160, 160)).has_point(screen(p, z))
+
+## World height (3D y) at depth z that appears `frac` of the way down the screen
+## when the camera is in the middle of its vertical range.
+func screen_height(frac: float, z: float) -> float:
+	var cam_mid := (float(world.map.height) - TDWorld.VIEW.y) / 2.0
+	var target_y := -(cam_mid + TDWorld.VIEW.y / 2.0) / PX
+	var pitch := deg_to_rad(PITCH)
+	var cam_y := target_y + sin(pitch) * dist
+	var cam_z := cos(pitch) * dist
+	var rel := atan((0.5 - frac) * 2.0 * tan(deg_to_rad(FOV / 2.0)))
+	return cam_y + tan(rel - pitch) * (cam_z - z)
+
+func _process(delta: float) -> void:
+	if backdrop:
+		backdrop.drift(delta)

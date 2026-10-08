@@ -10,7 +10,7 @@ What to match:
 - Cel shading with three to four tones per colour, lit from the upper left.
 - Big glossy eyes with a dark top lash, a deep-blue iris and white highlights.
 - His palette: brown hair, red cape, blue tunic with gold trim, brown leather, silver steel.
-- One art pixel per sprite texel. Draw at the game's scale; don't scale art up or down.
 
-The hero sprite in the game is cut straight out of this image: see
-`tools/pixel_art/hero_base.png` and `tools/pixel_art/build_hero.py`.
+The game's sprites are cut from the sheets in `art/source/` by `tools/art/slice_sheets.py`
+(see `art/sheets/README.md`). New sheets should use the same layout: a grid of cells on a
+flat magenta background with thin divider lines, one pose or object per cell.

@@ -1,0 +1,51 @@
+{
+  "source": "art/source/ember_backgrounds.png",
+  "scale": 0.5,
+  "label_band": 0.3,
+  "out_dir": "assets/sprites/backgrounds/ember",
+  "cells": [
+    [
+      "far_volcanoes"
+    ],
+    [
+      "mid_crags"
+    ],
+    [
+      "near_ridge"
+    ],
+    [
+      "smoke"
+    ],
+    [
+      "motes"
+    ],
+    [
+      "moon"
+    ]
+  ],
+  "overrides": {
+    "far_volcanoes": {
+      "extend_bottom": 160
+    },
+    "mid_crags": {
+      "extend_bottom": 160
+    },
+    "near_ridge": {
+      "extend_bottom": 160
+    },
+    "smoke": {
+      "keep": "split",
+      "blank_top": 33
+    },
+    "motes": {
+      "alpha": "soft"
+    },
+    "moon": {
+      "alpha": "soft"
+    }
+  },
+  "key": [
+    0.6,
+    0.85
+  ]
+}

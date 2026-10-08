@@ -1,0 +1,81 @@
+# Sheet manifests
+
+Each file here tells `tools/art/slice_sheets.py` how to cut one sheet from `art/source/`:
+
+```sh
+python3 tools/art/slice_sheets.py              # every sheet
+python3 tools/art/slice_sheets.py dewling ui   # only these
+python3 tools/art/slice_sheets.py --grid ui    # print the cells it finds, write nothing
+python3 tools/art/contact_sheet.py assets/sprites/monsters out.png 3   # preview a folder
+```
+
+The sheets are laid out as a grid of cells on a magenta (or dark) background, with thin
+divider lines between cells and a small white label in each cell's top-left corner. The
+slicer finds the cells, removes the background and label, shrinks each cell to game scale and
+trims it.
+
+## Adding a sheet
+
+1. Save it as `art/source/<name>.png`.
+2. Write `art/sheets/<name>.json` with at least `source`, `out_dir` and `cells`.
+3. Run `--grid` first to check the slicer sees the same rows and columns as `cells`.
+4. Run it, then look at the output with `contact_sheet.py` and tune `scale` and overrides.
+
+## Keys
+
+| Key | Default | Meaning |
+| --- | --- | --- |
+| `source` | | The sheet, relative to the repo. |
+| `out_dir` | | Where the sprites go (`<out_dir>/<cell name>.png`). |
+| `cells` | | Cell names, one list per row, left to right. |
+| `background` | `"magenta"` | `"magenta"` (soft chroma key), `"dark"` (flood fill from the cell border) or `[r, g, b]`. |
+| `scale` | `0.25` | Shrink factor from sheet pixels to sprite texels. The hero is 0.25; match its pixel size. |
+| `alpha` | `"hard"` | `"hard"` for pixel sprites, `"soft"` for glows, effects and backgrounds. |
+| `key` | `[0.35, 0.8]` | Magenta sheets: how magenta a pixel must be to start and finish fading out. Raise it if purple art is being eaten. |
+| `label_band` | `0.16` | Top part of each cell (fraction of its height) where the label may be. |
+| `blank_top` | | Paint the top N rows of the cell with background, for labels that touch the art. |
+| `keep` | `"all"` | `"largest"` keeps only the biggest piece; `"split"` saves each piece as `name_1`, `name_2`... |
+| `shadow` | `false` | Dark sheets: also remove the soft drop shadow under the sprite. |
+| `inset` | `3` | Pixels trimmed off every cell edge (the divider lines). |
+| `save` | `true` | `false` keeps cells only for animation sets. |
+| `grid_threshold` | `0.8` | How much of a row or column must be divider-coloured to count as a divider. |
+| `grid` | | Give the cells by hand when detection fails: `{"rows": [y0, y1, y2, ...], "cols": [x0, x1, ...]}` (edges between cells; `cols` can be one list per row). |
+| `overrides` | | Per-cell versions of any key above, plus `crop` `[x0, y0, x1, y1]`, `seamless` (tileable texture, with `size`), `extend_bottom` (pad a backdrop downward), `fix` (a named clean-up from `FIXES`) and `out_dir`. |
+
+## Animation sets
+
+A `sets` block lines frames up on one strip with their feet on a shared baseline and writes a
+Godot `SpriteFrames` resource. Frames can come from any manifest, as `"<sheet>:<cell>"`:
+
+```json
+"sets": {
+  "dewling": {
+    "frames": {"idle1": "dewling:idle1", "hop1": "dewling:hop1"},
+    "anchor": "mass",
+    "baseline": "cell",
+    "out": "assets/sprites/monsters/dewling.png",
+    "sprite_frames": "assets/animations/dewling.tres",
+    "animations": {
+      "idle": {"frames": ["idle1"], "fps": 3},
+      "move": {"frames": ["hop1"], "fps": 6},
+      "die":  {"frames": ["defeated"], "fps": 1, "loop": false}
+    }
+  }
+}
+```
+
+- `anchor` lines frames up horizontally: `"mass"` (centre of the opaque pixels), `"head"` (the
+  topmost pixels, steady for characters whose weapon or cape swings) or `"cell"` (where the art
+  sat in its cell).
+- `baseline`: `"bottom"` puts every frame's lowest pixel on the floor; `"cell"` keeps the
+  height the art had in its cell, so hops and jumps stay in the air.
+- `nudge`: `{"frame": [dx, dy]}` fine-tunes one frame.
+
+Actors look for the animations `idle`, `move` (monsters), `attack`, `hurt` and `die`; the hero
+has its own list in `art/sheets/hero_main.json`.
+
+## Picks between versions
+
+Two sheets came in two versions. The game uses `meadow_backgrounds_a` (crisper, clearer
+castle) and `ropes_props_b` (no label remnants, cleaner shards). The other versions still have
+manifests that cut into `art/build/`, which is ignored, so they can be compared or swapped in.

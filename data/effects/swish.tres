@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EffectDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/effect_def.gd" id="1_effect_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/effects/swish_1.png" id="2_swish_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/effects/swish_2.png" id="3_swish_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/effects/swish_3.png" id="4_swish_3"]
+
+[resource]
+script = ExtResource("1_effect_def")
+id = &"swish"
+frames = Array[Texture2D]([ExtResource("2_swish_1"), ExtResource("3_swish_2"), ExtResource("4_swish_3")])
+fps = 22.0
+texel = 0.9
+offset = Vector2(40.0, 0.0)
+energy = 1.7
+light_color = Color(0.7843137254901961, 0.8156862745098039, 1.0, 1.0)
+light_energy = 1.5
+light_range = 3.0

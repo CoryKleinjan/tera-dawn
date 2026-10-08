@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/cinder_imp.png" id="2_cinder_imp"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("4_dawnshard")
+chance = 1.0
+min_amount = 10
+max_amount = 22
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("4_dawnshard")
+chance = 0.35
+min_amount = 10
+max_amount = 22
+
+[resource]
+script = ExtResource("1_monster_def")
+id = &"cinder_imp"
+display_name = "Cinder Imp"
+level = 7
+max_hp = 170
+attack = 20
+exp_reward = 36
+speed = 1.4
+size = Vector2(36.0, 56.0)
+texture = ExtResource("2_cinder_imp")
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2")])
+light_color = Color(1.0, 0.6039215686274509, 0.2901960784313726, 1.0)
+light_energy = 1.2
+aura_color = Color(3.0, 1.3, 0.4, 1.0)

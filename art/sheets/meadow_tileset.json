@@ -1,0 +1,104 @@
+{
+  "source": "art/source/meadow_tileset.png",
+  "background": "dark",
+  "scale": 0.35,
+  "label_band": 0.2,
+  "out_dir": "assets/sprites/tiles/meadow",
+  "cells": [
+    [
+      "ground_middle",
+      "ground_left",
+      "ground_right",
+      "corner_small",
+      "corner_large"
+    ],
+    [
+      "platform_small",
+      "platform_medium",
+      "platform_large",
+      "slope_up",
+      "slope_down"
+    ],
+    [
+      "arch",
+      "tall_ledge",
+      "ledge_overhang",
+      "ledge_vines",
+      "floating_rock"
+    ],
+    [
+      "bush_small",
+      "bush_medium",
+      "bush_large",
+      "tree_small",
+      "tree_large",
+      "stump"
+    ],
+    [
+      "rock_small",
+      "rock_medium",
+      "rock_large",
+      "fence",
+      "signpost",
+      "flowers_white",
+      "flowers_yellow",
+      "tall_grass"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      216,
+      409,
+      644,
+      842,
+      1024
+    ],
+    "cols": [
+      [
+        0,
+        391,
+        681,
+        975,
+        1246,
+        1536
+      ],
+      [
+        0,
+        230,
+        525,
+        950,
+        1244,
+        1536
+      ],
+      [
+        0,
+        440,
+        668,
+        959,
+        1265,
+        1536
+      ],
+      [
+        0,
+        198,
+        440,
+        746,
+        965,
+        1292,
+        1536
+      ],
+      [
+        0,
+        168,
+        355,
+        553,
+        829,
+        998,
+        1170,
+        1360,
+        1536
+      ]
+    ]
+  }
+}
