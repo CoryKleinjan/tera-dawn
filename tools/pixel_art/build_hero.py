@@ -1,32 +1,29 @@
 #!/usr/bin/env python3
-"""Build assets/sprites/hero.png from Cory's hero art.
+"""Build assets/sprites/hero.png from Cory's hero sprite sheet.
 
-hero_base.png is the character cut out of the reference image Cory supplied
-(background removed, his outline kept, one pixel per art pixel, 68x85).
-hero_base_nosword.png is the same with the sword taken out of his hand, for the
-attack frames. hero.txt holds the hand-drawn extras in his palette: the back
-view for climbing and the sword at other angles.
+extract_hero_frames.py cuts the frames out of art/reference/hero_spritesheet.png
+into hero_frames/. This script lines them up (feet on a common baseline, head
+centred in the frame) and adds what the sheet doesn't have: the hand-drawn back
+view for climbing (hero.txt, in his palette) and the fallen tombstone.
 
-FRAMES (104x88 each, feet on row 86, facing right):
-0-1 idle, 2-5 walk, 6 jump, 7-8 climb (back view), 9-11 attack, 12 fallen.
+FRAMES (136x88 each, feet on row 86, facing right):
+0-3 idle, 4-7 walk, 8 jump, 9-10 climb (back view), 11-12 attack, 13 hurt, 14 fallen.
 
 Run from anywhere: python3 tools/pixel_art/build_hero.py
 """
 import os
 
+import numpy as np
 from PIL import Image, ImageOps
 
 from render import grid_img, load_all
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "..", "..", "assets", "sprites", "hero.png")
-FW, FH = 104, 88
-OX, OY = 16, 2  # where the 68x85 base sits in a frame: body centred, feet on row 86
-HAND = (27, 55)  # his sword hand in base coordinates
-
+FRAMES = os.path.join(HERE, "hero_frames")
+FW, FH = 136, 88
+BASELINE = 86  # last row of the feet
 GRIDS = load_all(os.path.join(HERE, "hero.txt"))
-BASE = Image.open(os.path.join(HERE, "hero_base.png")).convert("RGBA")
-NOSWORD = Image.open(os.path.join(HERE, "hero_base_nosword.png")).convert("RGBA")
 
 
 def g(name):
@@ -37,43 +34,18 @@ def new():
     return Image.new("RGBA", (FW, FH), (0, 0, 0, 0))
 
 
-def split(base):
-    """Upper body, left boot and right boot as separate layers (base coordinates)."""
-    upper, left, right = [Image.new("RGBA", base.size, (0, 0, 0, 0)) for _ in range(3)]
-    src = base.load()
-    for y in range(base.height):
-        for x in range(base.width):
-            p = src[x, y]
-            if not p[3]:
-                continue
-            if y >= 71 and x <= 42:
-                left.putpixel((x, y), p)
-            elif y >= 70 and x >= 44:
-                right.putpixel((x, y), p)
-            else:
-                upper.putpixel((x, y), p)
-    return upper, left, right
+def head_x(im):
+    """Centre of the head: the coloured (not pale steel) pixels in the upper part of the figure."""
+    a = np.asarray(im).astype(int)
+    top = a[int(im.height * 0.12):int(im.height * 0.45)]
+    m = (top[..., 3] > 0) & (top[..., :3].min(2) < 170)
+    return float(np.nonzero(m)[1].mean())
 
 
-def posed(base=BASE, dy=0, lx=0, ly=0, rx=0, ry=0, dx=0):
-    """The base pose with the upper body bobbed by dy and each boot nudged."""
-    upper, left, right = split(base)
+def sheet_frame(name):
+    im = Image.open(os.path.join(FRAMES, name + ".png")).convert("RGBA")
     f = new()
-    f.alpha_composite(left, (OX + dx + lx, OY + ly))
-    f.alpha_composite(right, (OX + dx + rx, OY + ry))
-    f.alpha_composite(upper, (OX + dx, OY + dy))
-    return f
-
-
-def attack(n):
-    if n == 0:  # wind-up: sword drawn back, leaning back a pixel
-        return posed(dx=-1)
-    f = posed(NOSWORD, dx=1, lx=-1, rx=1)
-    hx, hy = OX + 1 + HAND[0], OY + HAND[1]
-    if n == 1:  # swing: blade straight out in front
-        f.alpha_composite(g("sword_fwd"), (hx - 2, hy - 3))
-    else:  # follow-through: blade angled down in front
-        f.alpha_composite(g("sword_down"), (hx - 2, hy - 2))
+    f.alpha_composite(im, (round(FW / 2 - head_x(im)), BASELINE + 1 - im.height))
     return f
 
 
@@ -94,17 +66,15 @@ def climb():
 def fallen():
     f = new()
     stone = Image.open(os.path.join(HERE, "fallen.png")).convert("RGBA")
-    f.alpha_composite(stone, ((FW - stone.width) // 2, FH - 2 - stone.height + 2))
+    f.alpha_composite(stone, ((FW - stone.width) // 2, FH - stone.height))
     return f
 
 
 def frames():
-    fr = [posed(), posed(dy=1)]
-    fr += [posed(dy=1, lx=2, rx=-2), posed(), posed(dy=1, lx=-2, rx=2), posed()]
-    fr += [posed(dy=-2, ly=-5, lx=1, ry=-3)]
+    fr = [sheet_frame(n) for n in ("idle1", "idle2", "idle3", "idle4", "walk1", "walk2", "walk3", "walk4", "run2")]
     c = climb()
     fr += [c, ImageOps.mirror(c)]
-    fr += [attack(i) for i in range(3)]
+    fr += [sheet_frame(n) for n in ("attack1", "attack2", "hurt")]
     fr += [fallen()]
     return fr
 

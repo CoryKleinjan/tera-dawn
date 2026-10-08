@@ -179,7 +179,7 @@ var body: Sprite3D
 var shadow: Sprite3D
 
 func _ready() -> void:
-	body = TDStage.sprite(TDStage.tex("hero"), 13)
+	body = TDStage.sprite(TDStage.tex("hero"), 15)
 	add_child(body)
 	shadow = TDStage.sprite(TDStage.tex("blob_shadow"), 1, false)
 	shadow.offset = Vector2.ZERO
@@ -191,7 +191,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	_sync_visuals()
 
-## Frames in hero.png: 0-1 idle, 2-5 walk, 6 jump, 7-8 climb, 9-11 attack, 12 fallen.
+## Frames in hero.png: 0-3 idle, 4-7 walk, 8 jump, 9-10 climb, 11-12 attack, 13 hurt, 14 fallen.
 func _sync_visuals() -> void:
 	if body == null or world == null:
 		return
@@ -202,17 +202,19 @@ func _sync_visuals() -> void:
 	body.visible = not (inv > 0 and inv % 8 < 4) or dead > 0
 	var frame := 0
 	if dead > 0:
-		frame = 12
+		frame = 14
 	elif is_climbing():
-		frame = 7 + int(position.y / 14.0) % 2
+		frame = 9 + int(position.y / 14.0) % 2
 	elif atk_t > 0:
 		var dur := 22.0 if skill_t > 0 else 16.0
-		frame = 9 + mini(2, int((1.0 - atk_t / dur) * 3.0))
+		frame = 11 + mini(1, int((1.0 - atk_t / dur) * 2.0))
+	elif inv > 70 and inv <= 90: # just got hit (world.gd sets inv = 90)
+		frame = 13
 	elif not on_ground:
-		frame = 6
+		frame = 8
 	elif absf(vel.x) > 0.3:
-		frame = 2 + (anim / 6) % 4
+		frame = 4 + (anim / 6) % 4
 	else:
-		frame = (anim / 30) % 2
+		frame = (anim / 15) % 4
 	body.frame = frame
 	body.flip_h = face < 0 and not is_climbing() and dead == 0
