@@ -19,7 +19,7 @@ OUT = os.path.join(HERE, "..", "..", "assets", "sprites")
 GRIDS = load_all(os.path.join(HERE, "props.txt"))
 
 BARK = {"r": "c88a58", "s": "9a6440", "t": "6e4228", "u": "4a2c1c"}
-LEAF = {"K": "1e3226", "a": "d8ff9c", "b": "96e46a", "c": "62c052", "d": "3e9445", "e": "2a6a3a"}
+LEAF = {"K": "142018", "a": "d8ff9c", "b": "96e46a", "c": "62c052", "d": "3e9445", "e": "2a6a3a"}
 BLOSSOM = {"K": "4a1e34", "a": "fff4f8", "b": "ffb0cc", "c": "ee80aa", "d": "c45482", "e": "8a3058"}
 EMBER_LEAF = {"K": "2a1018", "a": "ffb07a", "b": "e0705a", "c": "b0483e", "d": "8a3036", "e": "5c1e2a"}
 EMBER_BARK = {"K": "1e1016", "r": "7a4a56", "s": "5a3440", "t": "42242e", "u": "2a141e"}

@@ -1,4 +1,4 @@
-MPAL = {'.': None, 'K': '1c2638', 'w': 'ffffff', 'x': '121c3a', 'y': '2a4486', 'z': '6a92e0', 'q': 'cfe2ff',
+MPAL = {'.': None, 'K': '14121e', 'w': 'ffffff', 'x': '121c3a', 'y': '2a4486', 'z': '6a92e0', 'q': 'cfe2ff',
        'r': 'ff9cb4', 'm': '6a2a3a',
        'a': 'eafffb', 'b': 'a4f2e6', 'c': '62d2c8', 'd': '33a0a8', 'e': '1f6e82'}
 MPAL.update({'f': 'ffb4a0', 'g': 'f25c52', 'h': 'c63642', 'i': '8a2236', 'S': 'e8dcf0',

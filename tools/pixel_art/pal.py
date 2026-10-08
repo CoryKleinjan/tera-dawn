@@ -1,16 +1,8 @@
-PAL = {
-    '.': None,
-    'K': '2a1616',  # outline
-    'a': 'ffe0a4', 'b': 'f5ad5e', 'c': 'd47c38', 'd': 'a04e22', 'e': '6c2c16',  # hair
-    'W': 'fffaf4', 's': 'fff0e2', 'S': 'fcd2b4', 'T': 'eba383', 'r': 'ffb2a2',  # skin
-    'w': 'ffffff', 'x': '15336a', 'y': '2a72c0', 'z': '5ebff0', 'q': 'c4f0ff',  # eyes
-    'm': '8a3a34',
-}
-PAL.update({
-    'f': 'ff8a66', 'g': 'e8483a', 'h': 'a82a2c',          # scarf
-    'i': 'a8e2ff', 'j': '5aa8ea', 'k': '3870b8', 'l': '22427c',  # tunic
-    'o': 'b97a42', 'p': '70431f', 'u': 'ffd860', 'U': 'c8962a',  # belt / gold
-    'v': '4f5c96', 'V': '323a6a',                          # shorts
-    'A': 'd6965a', 'B': '9a5e32', 'C': '5e3620',           # boots
-    'E': 'ffffff', 'F': 'cfdcec', 'G': '8796ae', 'H': '56637c',  # blade
-})
+PAL = {'.': None, 'K': '14121e',
+       'a': 'b96f43', 'b': '7b452d', 'c': '5e3220', 'd': '42221a', 'e': '2e1812',
+       'f': 'ee5a4c', 'g': 'd73430', 'h': 'a02630', 'i': '7e1f2c',
+       's': 'f8c4a0', 'S': 'e0906c',
+       'o': '8a4a2a', 'p': '683422', 'P': '46231a',
+       'E': 'fefffe', 'F': 'e7e8f0', 'G': 'b8b9d2', 'H': '8989ae',
+       'u': 'f7b436', 'U': 'c87a20', 'n': '23aefa', 'N': '082baf',
+       'q': '82472e', 'Q': '5a3020', 't': '344ea2', 'T': '22336e', 'v': '3a3c5d', 'V': '26283e'}
