@@ -3,17 +3,17 @@ extends Node3D
 ## The HD-2D view of the map: pixel-art sprites standing in a lit 3D diorama.
 ## Gameplay stays 2D (pixels, y down); this node turns map data into 3D terrain,
 ## props, lights, sky and post effects, and moves a tilted perspective camera.
-## One 3D unit is PX game pixels, and one sprite texel is two game pixels.
+## One 3D unit is PX game pixels, and one sprite texel is 1.25 game pixels.
 
 const PX := 32.0
-const PIXEL := 2.0 / PX
+const PIXEL := 1.25 / PX
 const FOV := 30.0
 const PITCH := 9.0 # degrees the camera looks down
 
 const GROUND_BACK := -9.0
 const GROUND_FRONT := 3.0
-const PLAT_BACK := -1.6
-const PLAT_FRONT := 1.4
+const PLAT_BACK := -2.4
+const PLAT_FRONT := 0.1 # characters stand in front of it so platforms above never hide them
 const PLAT_THICK := 0.8
 
 var world: TDWorld
@@ -457,7 +457,7 @@ func _dress_ground(art: String, rng: RandomNumberGenerator) -> void:
 		var tree_name := "tree_%s" % art
 		if art == "dawn" and rng.randf() < 0.35:
 			tree_name = "tree_dawn_pink"
-		_prop(tree_name, Vector3(x, y, rng.randf_range(GROUND_BACK + 0.5, -5.0)), 1, 0, rng.randf_range(1.1, 1.7))
+		_prop(tree_name, Vector3(x, y, rng.randf_range(GROUND_BACK + 0.5, -5.0)), 1, 0, rng.randf_range(0.9, 1.4))
 		x += rng.randf_range(4.0, 9.0)
 	x = -12.0
 	while x < w + 12.0:
@@ -519,7 +519,7 @@ func _build_sign() -> void:
 		return
 	var s: Dictionary = world.map["sign"]
 	var pos := to3d(Vector2(float(s["x"]), float(world.map["ground"])), -0.9)
-	var post := _prop("signpost", pos, 1, 0, 1.5)
+	var post := _prop("signpost", pos, 1, 0, 1.2)
 	post.flip_h = false
 	var l := Label3D.new()
 	l.text = s["text"]
@@ -528,7 +528,7 @@ func _build_sign() -> void:
 	l.pixel_size = 1.0 / (PX * 2.0)
 	l.modulate = Color("2b1a14")
 	l.outline_size = 0
-	l.position = pos + Vector3(0, 2.75, 0.06)
+	l.position = pos + Vector3(0, 2.68, 0.06)
 	l.shaded = true
 	map_root.add_child(l)
 
@@ -539,10 +539,10 @@ func _build_lanterns(th: Dictionary, rng: RandomNumberGenerator) -> void:
 		var pos := to3d(Vector2(x, float(world.map["ground"])), -1.3)
 		_prop("lantern", pos, 1, 0, 1.2).flip_h = false
 		var g := glow_sprite(tex("glow"), Color(th["lantern"], 0.5) * 1.5)
-		g.pixel_size = PIXEL * 0.6
-		g.position = pos + Vector3(0, 3.0, 0.05)
+		g.pixel_size = PIXEL * 1.2
+		g.position = pos + Vector3(0, 3.8, 0.05)
 		map_root.add_child(g)
 		var l := light(th["lantern"], 2.2, 6.0)
-		l.position = pos + Vector3(0, 3.2, 0.5)
+		l.position = pos + Vector3(0, 4.0, 0.5)
 		map_root.add_child(l)
 		x += rng.randf_range(560.0, 760.0)

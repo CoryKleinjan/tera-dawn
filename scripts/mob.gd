@@ -102,7 +102,7 @@ var z := 0.0
 var last_x := 0.0
 
 func _ready() -> void:
-	z = randf_range(-0.35, 0.05)
+	z = randf_range(0.15, 0.32)
 	body = TDStage.sprite(TDStage.tex(type), 4)
 	add_child(body)
 	if type == "emberboar":
@@ -140,7 +140,7 @@ func _process(_delta: float) -> void:
 	body.flip_h = facing < 0
 	var p := TDStage.to3d(position, z)
 	body.position = p
-	shadow.position = p + Vector3(0, 0.02, 0)
+	shadow.position = TDStage.to3d(position, -0.25) + Vector3(0, 0.02, 0) # on the platform top, behind its front edge
 	shadow.visible = not dead
 	if glow:
 		glow.frame = frame
