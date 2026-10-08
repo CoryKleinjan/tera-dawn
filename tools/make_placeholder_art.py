@@ -171,35 +171,87 @@ WOOD = ramp("9a6a4a", "7a4e36", "583424", "c08a62")
 
 
 def eye(f, x, y, w, h, iris_top="1e4a9a", iris_bot="58c8ff", narrow=False):
-    """A big MapleStory-style eye. (x, y) is the top-left of the iris."""
+    """A small eye for monsters. (x, y) is the top-left of the iris."""
     for j in range(h):
         t = j / max(1, h - 1)
         c = np.array(rgba(iris_top), dtype=float) * (1 - t) + np.array(rgba(iris_bot), dtype=float) * t
         for i in range(w):
             f.put(x + i, y + j, c.astype(np.uint8))
-    # pupil
     for j in range(2, h - 2):
         f.put(x + w // 2, y + j, rgba("0e1a3a"))
         if w > 3:
             f.put(x + w // 2 - 1, y + j, rgba("16285a"))
-    # thick upper lid and lash flick
     for i in range(-1, w + 1):
         f.put(x + i, y - 1, rgba(INK))
         f.put(x + i, y - 2, rgba(INK))
     if not narrow:
         f.put(x + w + 1, y - 2, rgba(INK))
         f.put(x + w + 1, y - 3, rgba(INK))
-    # outer corner and a soft lower lash
     for j in range(h // 2):
         f.put(x + w, y + j, rgba(INK))
     for i in range(1, w):
         f.put(x + i, y + h, rgba("b06a6a"))
-    # highlights
     f.put(x, y, rgba("ffffff"))
     f.put(x + 1, y, rgba("ffffff"))
     f.put(x, y + 1, rgba("ffffff"))
     f.put(x + 1, y + 1, rgba("ffffff"))
     f.put(x + w - 1, y + h - 2, rgba("ffffff"))
+
+
+# Hand-placed anime eye for the hero, 7 wide x 12 tall including lids. Facing right:
+# "near" is the eye closer to the viewer, "far" is narrower. Characters:
+# K lash/outline, k soft lid, W white, 1-5 iris from darkest to lightest, p pupil, . skin (untouched)
+HERO_EYE_NEAR = [
+    "KKKKKKKK.",
+    ".KKKKKKKK",
+    "kW11111K.",
+    "kWW1112K.",
+    ".W22pp2K.",
+    ".222pp3W.",
+    ".233pp3..",
+    ".3334443.",
+    ".3444554.",
+    ".4455W55.",
+    "..k55555.",
+    "...kkkk..",
+]
+HERO_EYE_FAR = [
+    "KKKKKKK",
+    "KKKKKK.",
+    "WW1111K",
+    "W1112K.",
+    "22pp2K.",
+    "22pp3W.",
+    "23pp3..",
+    "33443..",
+    "34454..",
+    "4455W..",
+    "k5555..",
+    ".kkkk..",
+]
+EYE_COLORS = {"K": "1c1224", "k": "6a3a4a", "W": "ffffff", "1": "16245a", "2": "1f4aa0", "3": "2f7ad8",
+              "4": "4aaeee", "5": "8ae4ff", "p": "0a1230"}
+
+
+def stamp(f, x, y, rows, colors):
+    for j, row in enumerate(rows):
+        for i, ch in enumerate(row):
+            if ch in colors:
+                f.put(x + i, y + j, colors[ch])
+
+
+def strand(f, p0, p1, p2, col, only, width=1):
+    """Paints a quadratic Bezier strand, only over pixels whose color is in `only`."""
+    only = [tuple(c[:3]) for c in only]
+    c = rgba(col) if isinstance(col, str) else col
+    for k in range(60):
+        t = k / 59
+        x = (1 - t) ** 2 * p0[0] + 2 * (1 - t) * t * p1[0] + t * t * p2[0]
+        y = (1 - t) ** 2 * p0[1] + 2 * (1 - t) * t * p1[1] + t * t * p2[1]
+        for dx in range(width):
+            xi, yi = int(x) + dx, int(y)
+            if 0 <= xi < f.w and 0 <= yi < f.h and tuple(f.px[yi, xi][:3]) in only:
+                f.px[yi, xi] = c
 
 
 # ---------------------------------------------------------------- hero
@@ -255,18 +307,37 @@ def hero_head(f, hx, hy, back=False):
     shine.rect(0, 0, hx - 15, 200, add=False)
     sel = shine.m & np.all(f.px == HAIR[2], axis=2) | shine.m & np.all(f.px == HAIR[3], axis=2)
     f.px[sel] = HAIR_SHINE
-    # eyes: huge, low on the face
-    ey = hy + 4
-    eye(f, hx - 5, ey, 6, 10)
-    eye(f, hx + 6, ey, 5, 10, narrow=True)
-    for i in range(-2, 13):  # heavier upper lashes, flicking out at the far corners
-        f.put(hx - 5 + i, ey - 3 if i in (-2, -1, 11, 12) else ey - 2, INK)
-    f.put(hx - 8, ey - 4, INK)
-    f.put(hx + 13, ey - 4, INK)
-    f.put(hx + 4, ey + 14, "a04a5a")
-    f.put(hx + 5, ey + 14, "a04a5a")
-    for (bx_, by_) in [(hx - 5, ey + 12), (hx - 4, ey + 12), (hx + 10, ey + 12), (hx + 11, ey + 12)]:
-        f.put(bx_, by_, "ffa0a8")
+    # hair strands: shade lines fanning from the crown, each with a light edge on its lit side
+    hair_tones = [HAIR[1], HAIR[2], HAIR[3], HAIR_SHINE]
+    crown = (hx + 2, hy - 17)
+    for (mx, my, ex_, ey_) in [(hx - 12, hy - 12, hx - 17, hy + 17), (hx - 8, hy - 8, hx - 10, hy + 10),
+                               (hx - 3, hy - 8, hx - 2, hy + 4), (hx + 2, hy - 8, hx + 3, hy + 8),
+                               (hx + 8, hy - 8, hx + 9, hy + 4), (hx + 14, hy - 9, hx + 15, hy + 6),
+                               (hx + 19, hy - 6, hx + 20, hy + 15), (hx - 16, hy - 14, hx - 22, hy - 2)]:
+        strand(f, (crown[0] - 1, crown[1] + 1), (mx - 1, my), (ex_ - 1, ey_), HAIR[3], hair_tones)
+        strand(f, crown, (mx, my), (ex_, ey_), HAIR[1], hair_tones)
+    for (x0, y0, x1, y1, x2, y2) in [(hx - 26, hy - 2, hx - 28, hy + 8, hx - 23, hy + 20),
+                                     (hx - 20, hy - 6, hx - 22, hy + 6, hx - 19, hy + 19)]:
+        strand(f, (x0, y0), (x1, y1), (x2, y2), HAIR[1], hair_tones)
+    for yy in range(hy + 2, hy + 10):  # shadow under the bangs where they meet the face
+        for xx in range(hx - 12, hx + 22):
+            if tuple(f.px[yy, xx][:3]) == tuple(rgba(INK)[:3]) and yy + 1 < f.h:
+                below = f.px[yy + 1, xx]
+                if tuple(below[:3]) in [tuple(c[:3]) for c in ramp("fff0e4", "fbd2b8", "f5c0a2", "fffaf4")]:
+                    f.px[yy + 1, xx] = rgba("f0b8a0")
+    # eyes: huge and low on the face
+    ey = hy + 3
+    stamp(f, hx - 6, ey, HERO_EYE_NEAR, EYE_COLORS)
+    stamp(f, hx + 6, ey, HERO_EYE_FAR, EYE_COLORS)
+    # nose, mouth, blush
+    f.put(hx + 4, ey + 11, "e8a088")
+    f.put(hx + 3, ey + 14, "8a3a4a")
+    f.put(hx + 4, ey + 14, "8a3a4a")
+    f.put(hx + 5, ey + 14, "c06070")
+    f.put(hx + 4, ey + 15, "f08a98")
+    for (bx_, by_, c_) in [(hx - 6, ey + 13, "ff9aa8"), (hx - 5, ey + 13, "ffb4bc"), (hx - 4, ey + 13, "ff9aa8"),
+                           (hx + 10, ey + 13, "ff9aa8"), (hx + 11, ey + 13, "ffb4bc")]:
+        f.put(bx_, by_, c_)
 
 
 def hero_frame(pose="idle", t=0):
@@ -317,6 +388,15 @@ def hero_frame(pose="idle", t=0):
         f.draw(b, BOOT, soft=2)
         cuff = f.shape().rect(x - 1, foot - 8 - lift, 7, 2)
         f.draw(cuff, GOLD, outline=False, flat=True)
+        f.put(x + 1, waist + 3, PANTS[3])  # knee highlight
+        f.put(x + 1, waist + 4, PANTS[3])
+        f.put(x + 5, foot - 4 - lift, BOOT[3])  # toe shine
+        f.put(x + 6, foot - 4 - lift, BOOT[3])
+        for xx in range(x - 1, x + 8):  # sole
+            if f.px[foot - 2 - lift, xx, 3]:
+                f.put(xx, foot - 2 - lift, "3a2418")
+        f.put(x + 1, foot - 6 - lift, BOOT[0])  # laces
+        f.put(x + 3, foot - 6 - lift, BOOT[0])
 
     if climb:
         a = 2 if t == 0 else -2
@@ -336,6 +416,15 @@ def hero_frame(pose="idle", t=0):
     f.draw(collar, CLOTH, outline=False, flat=True)
     belt = f.shape().rect(cx - 10, waist - 6, 20, 2)
     f.draw(belt, GOLD, outline=False, flat=True)
+    tunic_tones = [TUNIC[1], TUNIC[2], TUNIC[3]]
+    for (x0, x1) in [(cx - 4, cx - 7), (cx + 3, cx + 6), (cx - 1, cx - 1)]:  # skirt folds
+        strand(f, (x0, waist - 4), ((x0 + x1) / 2, waist - 2), (x1, waist), TUNIC[0], tunic_tones)
+    strand(f, (cx - 6, neck + 2), (cx - 7, neck + 6), (cx - 7, waist - 7), TUNIC[3], tunic_tones)
+    for (xx, yy, c_) in [(cx - 2, waist - 6, "b07028"), (cx + 1, waist - 6, "b07028"), (cx - 2, waist - 5, "b07028"),
+                         (cx + 1, waist - 5, "b07028"), (cx - 1, waist - 6, "fff6c8"), (cx, waist - 5, "fff6c8")]:
+        f.put(xx, yy, c_)  # buckle
+    for (xx, yy) in [(cx, neck + 6), (cx, neck + 9)]:  # buttons
+        f.put(xx, yy, "ffd166")
 
     if climb:
         a = -2 if t == 0 else 2
