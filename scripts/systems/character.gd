@@ -482,104 +482,12 @@ func unequip(place: StringName, i := -1) -> String:
 	inventory.put(ItemDef.Tab.EQUIP, i, stack)
 	return ""
 
-## Everything about the character, for the save file and for sending to its client.
+## Everything about the character, for the save file and for sending to its client (see
+## CharacterCodec).
 func to_dict() -> Dictionary:
-	return {
-		"name": name, "level": level, "xp": xp, "shards": shards, "map_id": map_id,
-		"job": job.id, "base": base.to_dict(), "ap": ap,
-		"hp": health.hp, "mp": mp,
-		"inventory": inventory.to_dict(), "equipment": equipment.to_dict(), "storage": storage.to_dict(),
-		"quests": quests.to_dict(),
-		"skills": _string_keys(skills), "sp": sp, "buffs": _string_keys(buffs),
-		"quickslots": quickslots.map(func(q: Array) -> Array: return q.map(func(v) -> String: return String(v))),
-		"buddies": buddies.duplicate(), "fame": fame, "fame_day": fame_day, "fame_given": fame_given.duplicate(), "guild": guild,
-		"book": book.to_dict(), "pet": String(pet), "pet_full": pet_full, "visited": visited.duplicate(),
-		"achievements": achievements.duplicate(), "counters": counters.duplicate(),
-	}
-
-static func _string_keys(d: Dictionary) -> Dictionary:
-	var out := {}
-	for k in d:
-		out[String(k)] = d[k]
-	return out
+	return CharacterCodec.to_dict(self)
 
 ## Loads what to_dict() wrote. Missing or bad values keep the current ones, so older saves
 ## still load.
 func load_dict(data: Dictionary) -> void:
-	name = str(data.get("name", name))
-	level = maxi(1, int(data.get("level", level)))
-	xp = maxi(0, int(data.get("xp", xp)))
-	shards = maxi(0, int(data.get("shards", shards)))
-	var m := StringName(str(data.get("map_id", map_id)))
-	map_id = m if Content.maps.has(m) else START_MAP
-	var j := StringName(str(data.get("job", START_JOB)))
-	if Content.jobs.has(j):
-		job = Content.jobs[j]
-	if data.get("base") is Dictionary:
-		base = StatBlock.from_dict(data["base"])
-		ap = maxi(0, int(data.get("ap", 0)))
-	else:
-		# a save from before stats existed: hand out the points for the levels it has
-		ap = (level - 1) * job.ap_per_level
-	if data.get("inventory") is Dictionary:
-		inventory.load_dict(data["inventory"])
-	if data.get("equipment") is Dictionary:
-		equipment.load_dict(data["equipment"])
-	if data.get("storage") is Dictionary:
-		storage.load_dict(data["storage"])
-	if data.get("quests") is Dictionary:
-		quests.load_dict(data["quests"])
-	skills.clear()
-	if data.get("skills") is Dictionary:
-		for k in data["skills"]:
-			var s: SkillDef = Content.skills.get(StringName(k))
-			if s:
-				skills[s.id] = clampi(int(data["skills"][k]), 0, s.max_level)
-	if data.has("sp"):
-		sp = maxi(0, int(data["sp"]))
-	else:
-		# a save from before skills existed: hand out the points for the levels it has
-		sp = (level - 1) * job.sp_per_level
-	buffs.clear()
-	if data.get("buffs") is Dictionary:
-		for k in data["buffs"]:
-			var b: Variant = data["buffs"][k]
-			if Content.skills.has(StringName(k)) and b is Array and b.size() == 2:
-				buffs[StringName(k)] = [int(b[0]), int(b[1])]
-	if data.get("quickslots") is Array:
-		var saved: Array = data["quickslots"]
-		for i in QUICKSLOTS:
-			var q: Variant = saved[i] if i < saved.size() else []
-			quickslots[i] = [StringName(q[0]), StringName(q[1])] if q is Array and q.size() == 2 else []
-	elif not data.has("sp"):
-		set_quickslot(QUICKSLOTS - 2, &"item", &"red_potion")
-		set_quickslot(QUICKSLOTS - 1, &"item", &"blue_potion")
-	if data.get("buddies") is Array:
-		buddies.clear()
-		for b in data["buddies"]:
-			buddies.append(str(b))
-	fame = int(data.get("fame", fame))
-	fame_day = int(data.get("fame_day", fame_day))
-	if data.get("fame_given") is Dictionary:
-		fame_given = {}
-		for k in data["fame_given"]:
-			fame_given[str(k)] = int(data["fame_given"][k])
-	guild = str(data.get("guild", guild))
-	if data.get("book") is Dictionary:
-		book.load_dict(data["book"])
-	var pet_id := StringName(str(data.get("pet", "")))
-	pet = pet_id if Content.items.get(pet_id) is PetDef else &""
-	pet_full = clampi(int(data.get("pet_full", pet_full)), 0, 100)
-	for key in ["visited", "achievements"]:
-		if data.get(key) is Array:
-			var list: Array[String] = get(key)
-			list.clear()
-			for v in data[key]:
-				list.append(str(v))
-	if data.get("counters") is Dictionary:
-		counters = {}
-		for k in data["counters"]:
-			counters[str(k)] = int(data["counters"][k])
-	recalc()
-	health.set_hp(maxi(1, int(data.get("hp", max_hp()))))
-	mp = clampi(int(data.get("mp", max_mp())), 0, max_mp())
+	CharacterCodec.load_dict(self, data)
