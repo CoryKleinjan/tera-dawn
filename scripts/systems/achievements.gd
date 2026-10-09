@@ -17,7 +17,7 @@ const LIST := [
 	{"id": "level_50", "steam": "ACH_LEVEL_50", "title": "Hero of Tera", "text": "Reach level 50.", "kind": "level", "goal": 50},
 	{"id": "first_job", "steam": "ACH_FIRST_JOB", "title": "A Calling", "text": "Take up a job.", "kind": "job", "goal": 1},
 	{"id": "helper", "steam": "ACH_HELPER", "title": "Helping Hand", "text": "Finish 10 quests.", "kind": "quests", "goal": 10},
-	{"id": "hero_for_hire", "steam": "ACH_HERO_FOR_HIRE", "title": "Hero for Hire", "text": "Finish 40 quests.", "kind": "quests", "goal": 40},
+	{"id": "hero_for_hire", "steam": "ACH_HERO_FOR_HIRE", "title": "Hero for Hire", "text": "Finish 30 quests.", "kind": "quests", "goal": 30},
 	{"id": "wanderer", "steam": "ACH_WANDERER", "title": "Wanderer", "text": "Visit 20 maps.", "kind": "maps", "goal": 20},
 	{"id": "cartographer", "steam": "ACH_CARTOGRAPHER", "title": "Cartographer", "text": "Visit 40 maps.", "kind": "maps", "goal": 40},
 	{"id": "collector", "steam": "ACH_COLLECTOR", "title": "Collector", "text": "Find 10 Monster Book cards.", "kind": "cards", "goal": 10},

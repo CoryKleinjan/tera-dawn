@@ -84,10 +84,8 @@ func test_goals_are_reachable() -> void:
 			check(int(a["goal"]) <= Content.maps.size(), "achievement %s: visit %d maps, but there are %d" % [a["id"], a["goal"], Content.maps.size()])
 		if a["kind"] == "pages":
 			check(int(a["goal"]) <= Content.monsters.size(), "achievement %s: %d pages, but there are %d monsters" % [a["id"], a["goal"], Content.monsters.size()])
-		# Known bug, left out so the suite stays green: hero_for_hire wants 40 quests but
-		# measure() counts distinct quests done and there are only 31, so it can't be reached.
-		#if a["kind"] == "quests":
-		#	check(int(a["goal"]) <= Content.quests.size(), "achievement %s: finish %d quests, but there are %d" % [a["id"], a["goal"], Content.quests.size()])
+		if a["kind"] == "quests":
+			check(int(a["goal"]) <= Content.quests.size(), "achievement %s: finish %d quests, but there are %d" % [a["id"], a["goal"], Content.quests.size()])
 
 func test_find_returns_each_achievement() -> void:
 	for a: Dictionary in Achievements.LIST:
