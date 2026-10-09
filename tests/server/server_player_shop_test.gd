@@ -156,11 +156,8 @@ func test_too_many_entries_are_refused() -> void:
 	check(not h.server.social.shops.has(2), "not opened")
 	check(h.told(2, "Put up 1 to 12 things for sale."), "told")
 
-# Left out: fails. A shop keeper can still leave the market through a portal, travel or a
-# return scroll (all TDServer._enter_map), and TDSocial.changed_map doesn't close their
-# shop, so it follows them to any map and keeps selling there (see the report).
-#func test_the_shop_closes_when_its_owner_leaves_the_market() -> void:
-#	_open()
-#	h.move_to(ann, ServerHarness.TOWN)
-#	check(not h.server.social.shops.has(2), "the shop doesn't follow its owner out of the market")
-#	check_eq(ann.character.inventory.count_of(leaf), 10, "unsold leaves back")
+func test_the_shop_closes_when_its_owner_leaves_the_market() -> void:
+	_open()
+	h.move_to(ann, ServerHarness.TOWN)
+	check(not h.server.social.shops.has(2), "the shop doesn't follow its owner out of the market")
+	check_eq(ann.character.inventory.count_of(leaf), 10, "unsold leaves back")
