@@ -69,6 +69,27 @@ func has_room(item: ItemDef, n := 1) -> bool:
 			room += item.stack_size() - s.count
 	return room >= n
 
+## The first tab that can't fit all of `wanted` ([[item, n], ...]) together, or -1 if
+## everything fits. Topping up stacks counts, and items sharing a tab share its free slots.
+func tab_without_room(wanted: Array) -> int:
+	var totals := {}
+	for w in wanted:
+		var item: ItemDef = w[0]
+		if item:
+			totals[item] = totals.get(item, 0) + int(w[1])
+	var slots_needed := {}
+	for item: ItemDef in totals:
+		var left: int = totals[item]
+		for s in tabs[item.tab()]:
+			if s != null and s.item == item:
+				left -= item.stack_size() - s.count
+		if left > 0:
+			slots_needed[item.tab()] = slots_needed.get(item.tab(), 0) + ceili(float(left) / item.stack_size())
+	for t in slots_needed:
+		if free_slots(t) < slots_needed[t]:
+			return t
+	return -1
+
 ## Whether all of `stacks` would fit, each in a slot of its own (a trade's worth of items).
 func room_for(stacks: Array) -> bool:
 	var need := {}

@@ -383,9 +383,9 @@ func advance_problem(next: JobDef) -> String:
 		for stat in StatBlock.BASE:
 			if base.value(stat) < next.advance_requirements.value(stat):
 				return "You need %d %s to become a %s." % [next.advance_requirements.value(stat), StatBlock.LABELS[stat], next.display_name]
-	for g in next.advance_gifts:
-		if g.item and not inventory.has_room(g.item, g.min_amount):
-			return "Make room in your %s inventory first." % ItemDef.TAB_NAMES[g.item.tab()]
+	var full := inventory.tab_without_room(next.advance_gifts.map(func(g: DropEntry) -> Array: return [g.item, 1 if g.item is EquipDef else g.min_amount]))
+	if full >= 0:
+		return "Make room in your %s inventory first." % ItemDef.TAB_NAMES[full]
 	return ""
 
 ## Becomes `next` (see advance_problem) and receives its gifts. Returns why not, or "".

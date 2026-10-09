@@ -94,9 +94,9 @@ func quest_drops(monster: MonsterDef, c: Character) -> Array:
 func complete(q: QuestDef, c: Character) -> String:
 	if not is_ready(q, c):
 		return "You haven't finished %s yet." % q.title
-	for r in q.reward_items:
-		if r.item and not c.inventory.has_room(r.item, r.min_amount):
-			return "Make room in your %s inventory first." % ItemDef.TAB_NAMES[r.item.tab()]
+	var full := c.inventory.tab_without_room(q.reward_items.map(func(r: DropEntry) -> Array: return [r.item, r.min_amount]))
+	if full >= 0:
+		return "Make room in your %s inventory first." % ItemDef.TAB_NAMES[full]
 	for o in q.objectives:
 		if o.kind == QuestObjective.Kind.COLLECT:
 			c.inventory.remove(o.item, o.count)

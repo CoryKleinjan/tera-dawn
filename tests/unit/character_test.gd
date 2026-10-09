@@ -611,9 +611,7 @@ func test_real_beginner_can_reach_warrior() -> void:
 	check_eq(c.advance(w), "", "advanced")
 	check_eq(c.job.id, &"warrior", "warrior")
 
-# BUG (left out until fixed): the room check looks at each reward on its own, so two gear
-# rewards with one free slot pass it and the second one is lost. Rename pending_ to test_ once fixed.
-func pending_advance_refused_when_gifts_need_more_slots_than_free() -> void:
+func test_advance_refused_when_gifts_need_more_slots_than_free() -> void:
 	var setup := _advance_setup()
 	var c: Character = setup[0]
 	var next: JobDef = setup[1]
