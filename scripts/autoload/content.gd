@@ -1,5 +1,5 @@
 extends Node
-## Autoload "Content": every monster, NPC, item, skill, effect, job and map in data/, by id.
+## Autoload "Content": every monster, NPC, item, skill, effect, job, map and shop in data/, by id.
 ##
 ## Content is plain Godot resources (.tres) loaded from these folders at startup, so adding
 ## a monster or a map means adding a file, not code. Lookups by an unknown id push an error
@@ -13,6 +13,7 @@ const FOLDERS := {
 	"effects": "res://data/effects",
 	"maps": "res://data/maps",
 	"jobs": "res://data/jobs",
+	"shops": "res://data/shops",
 }
 
 var monsters := {}
@@ -22,6 +23,7 @@ var skills := {}
 var effects := {}
 var maps := {}
 var jobs := {}
+var shops := {}
 
 func _ready() -> void:
 	for kind in FOLDERS:
@@ -47,6 +49,9 @@ func map(id: StringName) -> MapDef:
 
 func job(id: StringName) -> JobDef:
 	return _lookup(jobs, id, "job")
+
+func shop(id: StringName) -> ShopDef:
+	return _lookup(shops, id, "shop")
 
 func _lookup(table: Dictionary, id: StringName, what: String) -> Resource:
 	if not table.has(id):

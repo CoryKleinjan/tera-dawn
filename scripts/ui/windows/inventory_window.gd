@@ -33,11 +33,7 @@ func slot_at(at: Vector2) -> int:
 
 func _draw_body() -> void:
 	for t in ItemDef.Tab.size():
-		var r := _tab_rect(t)
-		var on := t == tab
-		draw_texture_rect(UiSkin.tex("window_tab_on" if on else "window_tab_off"), r, false)
-		DrawUtil.text(self, Game.ui_font, r.get_center() + Vector2(0, 5), ItemDef.TAB_NAMES[t], 13,
-			Color("3b2208") if on else Palette.MIST, 0, 0 if on else 3, Palette.NIGHT)
+		draw_tab(_tab_rect(t), ItemDef.TAB_NAMES[t], t == tab)
 	var dragged := _dragged_index()
 	for i in Inventory.SLOTS:
 		draw_slot(slot_rect(i), Game.me.inventory.at(tab, i), i == dragged)

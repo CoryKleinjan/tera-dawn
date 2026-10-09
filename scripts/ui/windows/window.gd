@@ -100,6 +100,19 @@ func draw_slot(r: Rect2, stack: ItemStack, dim := false, label := "") -> void:
 	if stack.count > 1:
 		DrawUtil.text(self, Game.num_font, r.end + Vector2(-4, -3), str(stack.count), 12, Palette.MIST, -1, 4, Palette.NIGHT)
 
+## A clickable button drawn with the UI sheet's button art; dimmed when it can't be used.
+func draw_button(r: Rect2, label: String, enabled := true) -> void:
+	var hot := enabled and r.has_point(_hover)
+	UiSkin.box("button_hover" if hot else "button_normal", 16, 14).draw(get_canvas_item(), r)
+	DrawUtil.text(self, Game.num_font, r.get_center() + Vector2(0, 6), label, 15,
+		Color("3b2208") if enabled else Color("3b2208", 0.4), 0)
+
+## A tab along the top of a window: lit when `on`.
+func draw_tab(r: Rect2, label: String, on: bool) -> void:
+	draw_texture_rect(UiSkin.tex("window_tab_on" if on else "window_tab_off"), r, false)
+	DrawUtil.text(self, Game.ui_font, r.get_center() + Vector2(0, 5), label, 13,
+		Color("3b2208") if on else Palette.MIST, 0, 0 if on else 3, Palette.NIGHT)
+
 ## The largest rect inside `box` with the texture's shape, centred (icons cut from a sheet
 ## aren't all square).
 static func fit(tex: Texture2D, box: Rect2) -> Rect2:

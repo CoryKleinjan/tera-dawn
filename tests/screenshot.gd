@@ -96,10 +96,31 @@ func _run() -> void:
 		var elder := world.npcs()[0]
 		_teleport(world, Vector2(elder.position.x - 40, 620))
 		p.face = 1
+		await _physics(15)
+		await _shot("village")
+	if only == "" or only == "dialogue":
+		# Talking to the elder.
+		var elder := world.npcs()[0]
+		_teleport(world, Vector2(elder.position.x - 40, 620))
 		await _physics(5)
 		elder.talk()
-		await _physics(10)
-		await _shot("village")
+		await _frames(3)
+		await _shot("dialogue")
+		world.hud.windows["dialogue"].visible = false
+	if only == "" or only == "shop":
+		# Mira's shop with some loot to sell.
+		var mira: TDNpc = world.npcs()[1]
+		_teleport(world, Vector2(mira.position.x - 40, 620))
+		ch.shards = 1250
+		for id in [&"boar_tusk", &"petal_wing", &"dewling_droplet"]:
+			ch.inventory.add(Content.item(id), randi_range(3, 40))
+		_me().dirty_character = true
+		await _physics(5)
+		world.hud.open_shop(mira)
+		world.hud.windows["shop"].tab = ItemDef.Tab.ETC
+		await _frames(3)
+		await _shot("shop")
+		world.hud.windows["shop"].visible = false
 	if only == "" or only == "players":
 		# Two other players nearby. They're on the server but have no game connected.
 		_teleport(world, Vector2(1300, 620))

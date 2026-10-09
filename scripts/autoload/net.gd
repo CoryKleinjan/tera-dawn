@@ -177,6 +177,21 @@ func req_add_ap(stat: StringName) -> void:
 	if server:
 		server.on_add_ap(_sender(), stat)
 
+@rpc("any_peer", "call_local", "reliable")
+func req_buy(npc_id: StringName, index: int, count: int) -> void:
+	if server:
+		server.on_buy(_sender(), npc_id, index, count)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_sell(npc_id: StringName, tab: int, slot: int, count: int) -> void:
+	if server:
+		server.on_sell(_sender(), npc_id, tab, slot, count)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_sell_all_etc(npc_id: StringName) -> void:
+	if server:
+		server.on_sell_all_etc(_sender(), npc_id)
+
 # ---------- events: server -> client ----------
 
 @rpc("authority", "call_local", "reliable")

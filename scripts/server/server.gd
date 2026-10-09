@@ -211,6 +211,57 @@ func on_drop_item(peer: int, tab: int, slot: int) -> void:
 		p.dirty_character = true
 		p.map.drop_from_player(p, stack)
 
+## Buys `count` of a shop's entry `index` from the NPC `npc_id` the player stands by.
+func on_buy(peer: int, npc_id: StringName, index: int, count: int) -> void:
+	var p := _player(peer)
+	var npc := p.map.npc_near(p, npc_id) if p else null
+	if npc == null or npc.shop == null or index < 0 or index >= npc.shop.items.size():
+		return
+	var entry := npc.shop.items[index]
+	count = clampi(count, 1, entry.item.stack_size())
+	var c := p.character
+	var total := entry.cost() * count
+	if c.shards < total:
+		p.map.tell(p, "You don't have enough Dawnshards.", MapInstance.BAD)
+	elif not c.inventory.has_room(entry.item, count):
+		p.map.tell(p, "Your %s inventory is full." % ItemDef.TAB_NAMES[entry.item.tab()], MapInstance.BAD)
+	else:
+		c.shards -= total
+		c.inventory.add_stack(ItemStack.unrolled(entry.item, count))
+		p.dirty_character = true
+		p.map.tell(p, "Bought %s for %d Dawnshards." % [MapInstance.amount_name(entry.item, count), total], Palette.MIST)
+
+## Sells up to `count` from a bag slot to the NPC `npc_id`'s shop.
+func on_sell(peer: int, npc_id: StringName, tab: int, slot: int, count: int) -> void:
+	var p := _player(peer)
+	var npc := p.map.npc_near(p, npc_id) if p else null
+	if npc == null or npc.shop == null or tab < 0 or tab >= ItemDef.Tab.size() or slot < 0 or slot >= Inventory.SLOTS:
+		return
+	var stack := p.character.inventory.at(tab, slot)
+	if stack == null:
+		return
+	var sold := p.character.inventory.take(tab, slot, clampi(count, 1, stack.count))
+	var total := sold.item.sell_price * sold.count
+	p.character.shards += total
+	p.dirty_character = true
+	p.map.tell(p, "Sold %s for %d Dawnshards." % [MapInstance.amount_name(sold.item, sold.count), total], Palette.MIST)
+
+## Sells everything in the Etc tab to the NPC `npc_id`'s shop.
+func on_sell_all_etc(peer: int, npc_id: StringName) -> void:
+	var p := _player(peer)
+	var npc := p.map.npc_near(p, npc_id) if p else null
+	if npc == null or npc.shop == null:
+		return
+	var total := 0
+	for i in Inventory.SLOTS:
+		var s := p.character.inventory.take(ItemDef.Tab.ETC, i)
+		if s:
+			total += s.item.sell_price * s.count
+	if total > 0:
+		p.character.shards += total
+		p.dirty_character = true
+		p.map.tell(p, "Sold all your Etc items for %d Dawnshards." % total, Palette.MIST)
+
 ## Runs a change to the player's character and sends them the result, or why it failed.
 func _change(peer: int, change: Callable) -> void:
 	var p := _player(peer)

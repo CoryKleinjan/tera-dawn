@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="NpcDef" load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/npcs/shopkeeper.png" id="2_shopkeeper"]
+
+[ext_resource type="Resource" path="res://data/shops/meadow_general.tres" id="3_shop"]
 
 [resource]
 script = ExtResource("1_npc_def")
@@ -10,4 +12,6 @@ display_name = "Mira"
 title = "Shopkeeper"
 texture = ExtResource("2_shopkeeper")
 sprite_scale = 1.0
-lines = PackedStringArray("Dawnshards! Bring me Dawnshards!", "My stall opens soon. Keep collecting those shards until then.", "The Ember Boars carry the shiniest ones. Mind their manes, though.")
+greeting = "Welcome, welcome! Potions for the road, gear for the fight. And I pay fair for anything the monsters drop."
+lines = PackedStringArray("Red Potions are cheap, but an Elixir will save your life in Ember Hollow.", "Sell me your monster parts. Boar Tusks fetch a good price!", "Gear from monsters can roll better stats than mine. Keep an eye on those drops.")
+shop = ExtResource("3_shop")
