@@ -17,7 +17,10 @@ func build(map: MapDef, platforms: Array[Platform]) -> void:
 	var biome := map.biome
 	_build_blocks(map, platforms, biome)
 	for i in range(1, platforms.size()):
-		_platform_front(platforms[i], biome)
+		if map.platforms[i - 1].look:
+			_platform_look(platforms[i], map.platforms[i - 1])
+		else:
+			_platform_front(platforms[i], biome)
 	_edge_grass(map, platforms, biome)
 
 # ---------- blocks ----------
@@ -30,7 +33,10 @@ func _build_blocks(map: MapDef, platforms: Array[Platform], biome: BiomeDef) -> 
 		sts.append(st)
 	var w := float(map.width) / TDStage.PX
 	var h := float(map.height) / TDStage.PX
-	for pl in platforms:
+	for i in platforms.size():
+		var pl := platforms[i]
+		if i > 0 and map.platforms[i - 1].look:
+			continue # a painted piece of land is its own block
 		var top := -pl.y / TDStage.PX
 		if pl.solid:
 			_block(sts, -40.0, w + 40.0, top, -h - 20.0, TDStage.GROUND_BACK, TDStage.GROUND_FRONT)
@@ -115,6 +121,14 @@ func _platform_front(pl: Platform, biome: BiomeDef) -> void:
 		n += 1
 	_front_piece(left, Vector2(x0 + lw / 2.0, pl.y), texel, z + 0.01)
 	_front_piece(right, Vector2(x1 - rw / 2.0, pl.y), texel, z + 0.01)
+
+## A platform drawn as one painted piece of land, hung so its grass rises above the top edge.
+func _platform_look(pl: Platform, d: PlatformDef) -> void:
+	var texel := d.look_texel()
+	var s := TDStage.sprite(d.look, texel)
+	s.offset = Vector2(0, -d.look.get_height() / 2.0)  # origin at the top centre
+	s.position = TDStage.to3d(Vector2(pl.x + pl.w / 2.0, pl.y - PlatformDef.LOOK_GRASS * texel), TDStage.LAND_FRONT)
+	root.add_child(s)
 
 ## A platform-front sprite hung from the platform's top edge (its grass rises a little above it).
 func _front_piece(tex: Texture2D, top_center: Vector2, texel: float, z: float) -> Sprite3D:

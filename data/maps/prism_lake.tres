@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=52 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=51 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/lumewood.tres" id="2_lumewood"]
@@ -13,28 +13,7 @@
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="11_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/stump.png" id="12_stump"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_small.png" id="13_tree_small"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/floating_rock.png" id="14_floating_rock"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/bush_large.png" id="15_bush_large"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/arch.png" id="16_arch"]
-
-[sub_resource type="Resource" id="Resource_35"]
-script = ExtResource("11_prop_placement")
-texture = ExtResource("16_arch")
-x = 2337.0
-y = -1.0
-depth = -3.8
-scale = 1.41
-flip = false
-
-[sub_resource type="Resource" id="Resource_34"]
-script = ExtResource("11_prop_placement")
-texture = ExtResource("16_arch")
-x = 2147.0
-y = -1.0
-depth = -3.6
-scale = 1.14
-flip = false
-
 [sub_resource type="Resource" id="Resource_33"]
 script = ExtResource("11_prop_placement")
 texture = ExtResource("15_bush_large")
@@ -42,15 +21,6 @@ x = 1096.0
 y = -1.0
 depth = -7.6
 scale = 1.29
-flip = false
-
-[sub_resource type="Resource" id="Resource_32"]
-script = ExtResource("11_prop_placement")
-texture = ExtResource("14_floating_rock")
-x = 1100.0
-y = 206.0
-depth = -7.2
-scale = 1.48
 flip = false
 
 [sub_resource type="Resource" id="Resource_31"]
@@ -258,6 +228,31 @@ x = 300.0
 y = 490.0
 width = 380.0
 
+[sub_resource type="Resource" id="Land_1"]
+script = ExtResource("3_platform_def")
+x = 1030.0
+y = 170.0
+width = 140.0
+
+[sub_resource type="Resource" id="Land_2"]
+script = ExtResource("3_platform_def")
+x = 2600.0
+y = 540.0
+width = 140.0
+
+[sub_resource type="Resource" id="Land_3"]
+script = ExtResource("3_platform_def")
+x = 1290.0
+y = 540.0
+width = 180.0
+
+[sub_resource type="Resource" id="Rope_8_0"]
+script = ExtResource("4_climbable_def")
+x = 1100.0
+top = 170.0
+bottom = 490.0
+style = ExtResource("5_rope")
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"prism_lake"
@@ -270,11 +265,11 @@ height = 700
 ground_y = 620
 start_x = 120.0
 lantern_spacing = 700.0
-platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8")])
-climbables = Array[ExtResource("4_climbable_def")]([SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16")])
+platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Land_1"), SubResource("Land_2"), SubResource("Land_3")])
+climbables = Array[ExtResource("4_climbable_def")]([SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Rope_8_0")])
 portals = Array[ExtResource("6_portal_def")]([SubResource("Resource_17"), SubResource("Resource_18")])
 spawns = Array[ExtResource("7_spawn_def")]([SubResource("Resource_19"), SubResource("Resource_20"), SubResource("Resource_21"), SubResource("Resource_22"), SubResource("Resource_23"), SubResource("Resource_24"), SubResource("Resource_25"), SubResource("Resource_26"), SubResource("Resource_27"), SubResource("Resource_28")])
-props = Array[ExtResource("11_prop_placement")]([SubResource("Resource_29"), SubResource("Resource_30"), SubResource("Resource_31"), SubResource("Resource_32"), SubResource("Resource_33"), SubResource("Resource_34"), SubResource("Resource_35")])
+props = Array[ExtResource("11_prop_placement")]([SubResource("Resource_29"), SubResource("Resource_30"), SubResource("Resource_31"), SubResource("Resource_33")])
 region = &"lumewood"
 world_pos = Vector2(642.0, 164.0)
 return_map = &"lumewood"

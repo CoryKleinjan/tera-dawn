@@ -2,7 +2,7 @@ extends TestCase
 ## Your own character's jump in a running game: coyote time after walking off a ledge and
 ## jump buffering before landing (JumpGrace), and neither changes how high you go.
 ## Runs on Dawnrise Meadow: off the right edge of the one-way platform at x 600..880, y 420,
-## and over open floor at x 1330.
+## and over open floor at x 1305.
 
 const LEDGE := Vector2(880, 420)
 const FLOOR := 620.0
@@ -63,7 +63,7 @@ func test_too_late_after_walking_off_falls() -> void:
 	check(me.vel.y > 0.0, "still falling")
 
 func test_a_jump_pressed_just_before_landing_goes_off_on_landing() -> void:
-	ui.teleport(Vector2(1330, 560))
+	ui.teleport(Vector2(1305, 560))
 	me.on_ground = false
 	# press when the landing is two or three ticks off
 	for i in 60:
@@ -75,7 +75,7 @@ func test_a_jump_pressed_just_before_landing_goes_off_on_landing() -> void:
 	check(await _peak(30) < FLOOR - 40.0, "jumped right after landing")
 
 func test_a_press_long_before_landing_is_forgotten() -> void:
-	ui.teleport(Vector2(1330, 300))
+	ui.teleport(Vector2(1305, 300))
 	me.on_ground = false
 	await _tap_jump()
 	for i in 120:
@@ -87,7 +87,7 @@ func test_a_press_long_before_landing_is_forgotten() -> void:
 	check(me.on_ground and me.position.y == FLOOR, "stays on the ground")
 
 func test_jump_height_is_unchanged() -> void:
-	ui.teleport(Vector2(1330, FLOOR))
+	ui.teleport(Vector2(1305, FLOOR))
 	me.on_ground = true
 	await ui.ticks(2)
 	await _tap_jump()
