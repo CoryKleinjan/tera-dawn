@@ -7,6 +7,9 @@ extends Node
 
 ## Ticks between position snapshots (60 / 3 = 20 a second).
 const SNAPSHOT_EVERY := 3
+## Ticks between snapshots that include every monster, changed or not (once a second), so
+## a client that lost an update catches up.
+const FULL_SNAPSHOT_EVERY := 60
 ## Ticks between saving everyone.
 const SAVE_EVERY := 600
 ## Attack requests may arrive this many ticks early, to allow for network jitter.
@@ -45,7 +48,8 @@ func _physics_process(_delta: float) -> void:
 	if tick % SNAPSHOT_EVERY == 0:
 		for m: MapInstance in maps.values():
 			if not m.players.is_empty():
-				m.broadcast(&"ev_snapshot", [m.snapshot()])
+				m.send_player_info()
+				m.broadcast(&"ev_snapshot", [m.snapshot(tick % FULL_SNAPSHOT_EVERY == 0)])
 	if tick % SAVE_EVERY == 0:
 		save_all()
 

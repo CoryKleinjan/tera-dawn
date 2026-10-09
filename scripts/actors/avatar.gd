@@ -36,27 +36,29 @@ static func create(w: TDWorld, peer_id: int) -> TDAvatar:
 	a.peer = peer_id
 	return a
 
-## Takes the server's latest [peer, name, x, y, face, animation, level, flags, job, guild,
-## chair, pet, look, shop sign].
+## Takes the server's latest [peer, x, y, face, animation, flags] (SnapshotCodec).
 func apply(state: Array) -> void:
-	char_name = state[1]
-	target = Vector2(state[2], state[3])
-	face = state[4]
-	var anim := StringName(state[5])
+	target = Vector2(state[1], state[2])
+	face = state[3]
+	var anim := StringName(state[4])
 	_swing = _swing or (anim != animation and anim in [&"attack", &"slash"])
 	animation = anim
-	level = state[6]
-	flags = state[7]
-	job = StringName(str(state[8])) if state.size() > 8 else &""
-	guild = str(state[9]) if state.size() > 9 else ""
-	chair = StringName(str(state[10])) if state.size() > 10 else &""
-	pet = StringName(str(state[11])) if state.size() > 11 else &""
-	if state.size() > 12 and state[12] is Dictionary:
-		look = state[12]
-	shop_title = str(state[13]) if state.size() > 13 else ""
+	flags = state[5]
 	if not known or position.distance_to(target) > 300.0:
 		position = target # first sight or a portal hop: no gliding across the map
 	known = true
+
+## Takes their [name, level, job, guild, chair, pet, look, shop sign], sent when it changes.
+func apply_info(info: Array) -> void:
+	char_name = info[0]
+	level = info[1]
+	job = StringName(str(info[2]))
+	guild = str(info[3])
+	chair = StringName(str(info[4]))
+	pet = StringName(str(info[5]))
+	if info[6] is Dictionary:
+		look = info[6]
+	shop_title = str(info[7])
 
 ## They used a skill: restart its animation even if it's the same one as last time.
 func play_skill(skill: SkillDef) -> void:

@@ -196,6 +196,20 @@ func last(peer: int, event: StringName) -> Array:
 	var all := events(peer, event)
 	return all[-1] if not all.is_empty() else []
 
+## The latest snapshot `peer` was sent, decoded (SnapshotCodec.decode), or {}.
+func snapshot(peer: int) -> Dictionary:
+	var ev := last(peer, &"ev_snapshot")
+	return SnapshotCodec.decode(ev[0]) if not ev.is_empty() else {}
+
+## The latest info `peer` was sent about player `of` ([name, level, job, guild, chair, pet,
+## look, shop sign]), or [].
+func player_info(peer: int, of: int) -> Array:
+	for i in range(events(peer, &"ev_player_info").size() - 1, -1, -1):
+		var ev: Array = events(peer, &"ev_player_info")[i]
+		if ev[0] == of:
+			return ev[1]
+	return []
+
 ## The text of every ev_log `peer` was sent.
 func logs(peer: int) -> Array[String]:
 	var out: Array[String] = []

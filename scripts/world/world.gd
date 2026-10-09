@@ -35,6 +35,9 @@ var hud: TDHud
 var drops := {}
 ## peer id -> TDAvatar
 var avatars := {}
+## peer id -> another player's info (name, level, look...; see MapInstance.send_player_info),
+## kept so an avatar made after it arrived still gets it.
+var player_infos := {}
 
 func _ready() -> void:
 	Net.world = self
@@ -80,6 +83,7 @@ func stop(stay_connected := false) -> void:
 	for a in avatars.values():
 		a.queue_free()
 	avatars.clear()
+	player_infos.clear()
 	player.rig.visible = false
 	Game.social = {}
 	hud.invites.clear()
@@ -115,6 +119,7 @@ func load_map(id: StringName) -> void:
 			c.queue_free()
 	drops.clear()
 	avatars.clear()
+	player_infos.clear()
 	# same order as the server's MapInstance, so index i is the same monster on both sides
 	for r in map.roster():
 		mob_layer.add_child(TDMob.create(self, mob_layer.get_child_count(), r[0], platforms[r[1]]))
@@ -268,12 +273,13 @@ func _physics_process(_delta: float) -> void:
 
 # ---------- events from the server ----------
 
-## Where the monsters and other players are now.
+## Where the monsters and other players are now (SnapshotCodec.decode). Monsters left out
+## of it haven't changed.
 func apply_snapshot(snap: Dictionary) -> void:
 	var views := mobs()
-	var mob_states: Array = snap.get("mobs", [])
-	for i in mini(mob_states.size(), views.size()):
-		views[i].apply(mob_states[i])
+	for row: Array in snap.get("mobs", []):
+		if row[0] < views.size():
+			views[row[0]].apply(row[1])
 	var me := multiplayer.get_unique_id()
 	var seen := {}
 	for state in snap.get("players", []):
@@ -284,13 +290,22 @@ func apply_snapshot(snap: Dictionary) -> void:
 		if not avatars.has(peer):
 			avatars[peer] = TDAvatar.create(self, peer)
 			avatar_layer.add_child(avatars[peer])
+			if player_infos.has(peer):
+				avatars[peer].apply_info(player_infos[peer])
 		avatars[peer].apply(state)
 	for peer in avatars.keys():
 		if not seen.has(peer):
 			remove_avatar(peer)
 
+## Another player's name, level, look and the like changed.
+func set_player_info(peer: int, info: Array) -> void:
+	player_infos[peer] = info
+	if avatars.has(peer):
+		avatars[peer].apply_info(info)
+
 func remove_avatar(peer: int) -> void:
 	var a: TDAvatar = avatars.get(peer)
+	player_infos.erase(peer)
 	if a:
 		avatars.erase(peer)
 		a.queue_free()

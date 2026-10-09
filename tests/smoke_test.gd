@@ -1249,7 +1249,8 @@ func _check_social() -> void:
 	stall.open_shop()
 	await _ticks(3)
 	_check(social.shops.has(_me().peer) and world.hud.selling() and Game.me.inventory.count_of(Content.item(&"petal_wing")) == 0, "opening a shop puts your goods on display")
-	_check(Net.server.maps[&"free_market"].snapshot()["players"].any(func(s: Array) -> bool: return s[13] == stall.shop_title), "others see the shop sign")
+	await _ticks(TDServer.SNAPSHOT_EVERY)
+	_check(world.player_infos.get(_me().peer, [""])[-1] == stall.shop_title, "others see the shop sign")
 	var before := ch.shards
 	social.on_shop_view(ally.peer, _me().peer)
 	social.on_shop_buy(ally.peer, _me().peer, 0, &"petal_wing")
