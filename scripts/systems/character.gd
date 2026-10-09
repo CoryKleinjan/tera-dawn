@@ -16,6 +16,8 @@ const START_JOB := &"beginner"
 const QUICKSLOTS := 8
 ## The innate attack bound to the attack key.
 const BASIC_ATTACK := &"basic_attack"
+## What a storage keeper charges to store one stack.
+const STORE_FEE := 10
 
 var name := ""
 var level := 1
@@ -30,6 +32,8 @@ var base := StatBlock.new()
 ## Unspent Ability Points.
 var ap := 0
 var inventory := Inventory.new()
+## Kept by storage keepers in town.
+var storage := Inventory.new()
 var equipment := Equipment.new()
 var quests := QuestLog.new()
 ## Skill id -> level learned.
@@ -303,6 +307,35 @@ func _quickslot_of(kind: StringName, id: StringName) -> int:
 			return i
 	return -1
 
+# ---------- storage ----------
+
+## Puts bag slot `i` of `tab` into storage. Returns why not, or "".
+func store(tab: int, i: int) -> String:
+	var stack := inventory.at(tab, i)
+	if stack == null:
+		return ""
+	if stack.item.quest_item:
+		return "Quest items can't be stored."
+	if shards < STORE_FEE:
+		return "Storing costs %d Dawnshards." % STORE_FEE
+	if not storage.has_room(stack.item, stack.count):
+		return "Your storage is full."
+	shards -= STORE_FEE
+	inventory.take(tab, i)
+	storage.add_stack(stack)
+	return ""
+
+## Takes storage slot `i` of `tab` back into the bag. Returns why not, or "".
+func retrieve(tab: int, i: int) -> String:
+	var stack := storage.at(tab, i)
+	if stack == null:
+		return ""
+	if not inventory.has_room(stack.item, stack.count):
+		return "Make room in your %s inventory first." % ItemDef.TAB_NAMES[tab]
+	storage.take(tab, i)
+	inventory.add_stack(stack)
+	return ""
+
 ## Why the character can't advance to `next`, or "" if they can.
 func advance_problem(next: JobDef) -> String:
 	if next.advances_from != job.id:
@@ -387,7 +420,7 @@ func to_dict() -> Dictionary:
 		"name": name, "level": level, "xp": xp, "shards": shards, "map_id": map_id,
 		"job": job.id, "base": base.to_dict(), "ap": ap,
 		"hp": health.hp, "mp": mp,
-		"inventory": inventory.to_dict(), "equipment": equipment.to_dict(),
+		"inventory": inventory.to_dict(), "equipment": equipment.to_dict(), "storage": storage.to_dict(),
 		"quests": quests.to_dict(),
 		"skills": _string_keys(skills), "sp": sp, "buffs": _string_keys(buffs),
 		"quickslots": quickslots.map(func(q: Array) -> Array: return q.map(func(v) -> String: return String(v))),
@@ -421,6 +454,8 @@ func load_dict(data: Dictionary) -> void:
 		inventory.load_dict(data["inventory"])
 	if data.get("equipment") is Dictionary:
 		equipment.load_dict(data["equipment"])
+	if data.get("storage") is Dictionary:
+		storage.load_dict(data["storage"])
 	if data.get("quests") is Dictionary:
 		quests.load_dict(data["quests"])
 	skills.clear()

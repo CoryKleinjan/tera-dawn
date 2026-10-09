@@ -235,6 +235,26 @@ func on_use_item(peer: int, slot: int) -> void:
 	if dest != &"":
 		_enter_map(p, dest, Content.map(dest).start_x)
 
+## Stores bag slot `slot` of `tab` with the storage keeper `npc_id`.
+func on_store(peer: int, npc_id: StringName, tab: int, slot: int) -> void:
+	_at_storage(peer, npc_id, tab, slot, func(c: Character) -> String: return c.store(tab, slot))
+
+## Takes storage slot `slot` of `tab` back from the storage keeper `npc_id`.
+func on_retrieve(peer: int, npc_id: StringName, tab: int, slot: int) -> void:
+	_at_storage(peer, npc_id, tab, slot, func(c: Character) -> String: return c.retrieve(tab, slot))
+
+func _at_storage(peer: int, npc_id: StringName, tab: int, slot: int, change: Callable) -> void:
+	var p := _player(peer)
+	var npc := p.map.npc_near(p, npc_id) if p else null
+	if npc == null or not npc.storage or tab < 0 or tab >= ItemDef.Tab.size() or slot < 0 or slot >= Inventory.SLOTS:
+		return
+	var problem: String = change.call(p.character)
+	if problem != "":
+		p.map.tell(p, problem, MapInstance.BAD)
+	p.dirty_character = true
+	p.dirty_vitals = true
+	store.save(p.character)
+
 ## Takes the player on trip `index` of the NPC `npc_id` they stand by, if they can pay.
 func on_travel(peer: int, npc_id: StringName, index: int) -> void:
 	var p := _player(peer)

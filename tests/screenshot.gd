@@ -211,6 +211,15 @@ func _run() -> void:
 		await _frames(3)
 		await _shot("worldmap")
 		world.hud.toggle_window("worldmap")
+	if only == "" or only == "towns":
+		# Every hub town, standing by its instructor.
+		for town in [&"dawnharbor", &"greenbough", &"lumewood", &"emberforge", &"lanternfall", &"driftcove"]:
+			Net.server._enter_map(_me(), town, 1000)
+			await _physics(40)
+			await _frames(3)
+			await _shot("town_" + town)
+		Net.server._enter_map(_me(), &"meadow", 300)
+		await _physics(10)
 	if only == "" or only == "players":
 		# Two other players nearby. They're on the server but have no game connected.
 		_teleport(world, Vector2(1300, 620))

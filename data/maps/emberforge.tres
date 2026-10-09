@@ -1,0 +1,108 @@
+[gd_resource type="Resource" script_class="MapDef" load_steps=24 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
+[ext_resource type="Resource" path="res://data/biomes/forge.tres" id="2_forge"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="3_platform_def"]
+[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="4_climbable_def"]
+[ext_resource type="Resource" path="res://data/climb_styles/ladder.tres" id="5_ladder"]
+[ext_resource type="Resource" path="res://data/climb_styles/rope.tres" id="6_rope"]
+[ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="7_npc_placement"]
+[ext_resource type="Resource" path="res://data/npcs/emberforge_taxi.tres" id="8_emberforge_taxi"]
+[ext_resource type="Resource" path="res://data/npcs/emberforge_store.tres" id="9_emberforge_store"]
+[ext_resource type="Resource" path="res://data/npcs/emberforge_shop.tres" id="10_emberforge_shop"]
+[ext_resource type="Resource" path="res://data/npcs/emberforge_instructor.tres" id="11_emberforge_instructor"]
+[ext_resource type="Resource" path="res://data/npcs/storage_keeper.tres" id="12_storage_keeper"]
+
+[sub_resource type="Resource" id="Resource_11"]
+script = ExtResource("7_npc_placement")
+npc = ExtResource("12_storage_keeper")
+x = 1460.0
+platform = 0
+face = -1
+
+[sub_resource type="Resource" id="Resource_10"]
+script = ExtResource("7_npc_placement")
+npc = ExtResource("11_emberforge_instructor")
+x = 1100.0
+platform = 3
+face = -1
+
+[sub_resource type="Resource" id="Resource_9"]
+script = ExtResource("7_npc_placement")
+npc = ExtResource("10_emberforge_shop")
+x = 860.0
+platform = 0
+face = -1
+
+[sub_resource type="Resource" id="Resource_8"]
+script = ExtResource("7_npc_placement")
+npc = ExtResource("9_emberforge_store")
+x = 620.0
+platform = 0
+face = -1
+
+[sub_resource type="Resource" id="Resource_7"]
+script = ExtResource("7_npc_placement")
+npc = ExtResource("8_emberforge_taxi")
+x = 330.0
+platform = 0
+face = 1
+
+[sub_resource type="Resource" id="Resource_6"]
+script = ExtResource("4_climbable_def")
+x = 1270.0
+top = 330.0
+bottom = 620.0
+style = ExtResource("6_rope")
+
+[sub_resource type="Resource" id="Resource_5"]
+script = ExtResource("4_climbable_def")
+x = 2050.0
+top = 470.0
+bottom = 620.0
+style = ExtResource("5_ladder")
+
+[sub_resource type="Resource" id="Resource_4"]
+script = ExtResource("4_climbable_def")
+x = 150.0
+top = 470.0
+bottom = 620.0
+style = ExtResource("5_ladder")
+
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("3_platform_def")
+x = 900.0
+y = 330.0
+width = 400.0
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("3_platform_def")
+x = 1660.0
+y = 470.0
+width = 420.0
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("3_platform_def")
+x = 120.0
+y = 470.0
+width = 420.0
+
+[resource]
+script = ExtResource("1_map_def")
+id = &"emberforge"
+display_name = "Emberforge"
+sign_text = "Emberforge"
+sign_x = 200.0
+biome = ExtResource("2_forge")
+width = 2200
+height = 700
+ground_y = 620
+start_x = 300.0
+lantern_spacing = 320.0
+platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3")])
+climbables = Array[ExtResource("4_climbable_def")]([SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6")])
+npcs = Array[ExtResource("7_npc_placement")]([SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11")])
+region = &"emberreach"
+world_pos = Vector2(820.0, 300.0)
+town = true
+level_text = "Town"

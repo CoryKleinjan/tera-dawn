@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="QuestDef" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="1_quest_def"]
+[ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="2_quest_objective"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/use/return_scroll.tres" id="4_return_scroll"]
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("4_return_scroll")
+chance = 1.0
+min_amount = 2
+max_amount = 2
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("2_quest_objective")
+kind = 2
+map = &"dawnharbor"
+count = 1
+
+[resource]
+script = ExtResource("1_quest_def")
+id = &"q07_choosing_a_path"
+title = "Choosing a Path"
+giver = &"guide_sorrel"
+min_level = 7
+requires = Array[StringName]([])
+jobs = Array[StringName]([])
+offer_text = "You're nearly ready to choose a job. The job instructors live on the mainland. Take Captain Marlo's ship to Dawnharbor and have a look around, then come tell me about it."
+progress_text = "Captain Marlo's ship to Dawnharbor leaves from the meadow. Visit the port, then come back."
+complete_text = "The mainland! Did you see the masts? Here, for the road. Return Scrolls bring you home in a pinch."
+objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1")])
+reward_xp = 400
+reward_shards = 300
+reward_items = Array[ExtResource("3_drop_entry")]([SubResource("Resource_2")])

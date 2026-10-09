@@ -1,0 +1,192 @@
+[gd_resource type="Resource" script_class="BiomeDef" load_steps=49 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/biome_def.gd" id="1_biome_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground/meadow_top.png" id="2_meadow_top"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground/meadow_side.png" id="3_meadow_side"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground/meadow_soil.png" id="4_meadow_soil"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/ground_left.png" id="5_ground_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/ground_middle.png" id="6_ground_middle"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/ground_right.png" id="7_ground_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tall_grass.png" id="8_tall_grass"]
+[ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="9_backdrop_layer_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/meadow/sun.png" id="10_sun"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/meadow/clouds_1.png" id="11_clouds_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/meadow/clouds_2.png" id="12_clouds_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/meadow/clouds_3.png" id="13_clouds_3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/meadow/clouds_4.png" id="14_clouds_4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/meadow/far_mountains.png" id="15_far_mountains"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/meadow/village.png" id="16_village"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/meadow/mid_hills.png" id="17_mid_hills"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/meadow/near_treeline.png" id="18_near_treeline"]
+[ext_resource type="Script" path="res://scripts/data/decor_def.gd" id="19_decor_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_large.png" id="20_tree_large"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_small.png" id="21_tree_small"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/bush_small.png" id="22_bush_small"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/bush_medium.png" id="23_bush_medium"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/bush_large.png" id="24_bush_large"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/rock_small.png" id="25_rock_small"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/rock_medium.png" id="26_rock_medium"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/rock_large.png" id="27_rock_large"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/stump.png" id="28_stump"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/fence.png" id="29_fence"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/flowers_white.png" id="30_flowers_white"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/flowers_yellow.png" id="31_flowers_yellow"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/lantern_lit.png" id="32_lantern_lit"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/signpost.png" id="33_signpost"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/portal_1.png" id="34_portal_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/portal_2.png" id="35_portal_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/portal_3.png" id="36_portal_3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/portal_4.png" id="37_portal_4"]
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("9_backdrop_layer_def")
+textures = Array[Texture2D]([ExtResource("10_sun")])
+mode = 1
+depth = 170.0
+screen_top = Vector2(0.16, 0.16)
+texel = 2.4
+tint = Color(1.3, 1.2, 1.1, 1.0)
+glow = true
+count = 1
+drift = 0.0
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("9_backdrop_layer_def")
+textures = Array[Texture2D]([ExtResource("11_clouds_1"), ExtResource("12_clouds_2"), ExtResource("13_clouds_3"), ExtResource("14_clouds_4")])
+mode = 1
+depth = 130.0
+screen_top = Vector2(0.0, 0.22)
+texel = 2.0
+tint = Color(1.0, 1.0, 1.0, 0.92)
+glow = false
+count = 7
+drift = 0.5
+
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("9_backdrop_layer_def")
+textures = Array[Texture2D]([ExtResource("15_far_mountains")])
+mode = 0
+depth = 110.0
+screen_top = Vector2(0.2, 0.2)
+texel = 2.3
+tint = Color(1.0, 1.0, 1.0, 1.0)
+glow = false
+count = 1
+drift = 0.0
+
+[sub_resource type="Resource" id="Resource_4"]
+script = ExtResource("9_backdrop_layer_def")
+textures = Array[Texture2D]([ExtResource("16_village")])
+mode = 0
+depth = 85.0
+screen_top = Vector2(0.27, 0.27)
+texel = 2.1
+tint = Color(1.0, 1.0, 1.0, 1.0)
+glow = false
+count = 1
+drift = 0.0
+
+[sub_resource type="Resource" id="Resource_5"]
+script = ExtResource("9_backdrop_layer_def")
+textures = Array[Texture2D]([ExtResource("17_mid_hills")])
+mode = 0
+depth = 60.0
+screen_top = Vector2(0.36, 0.36)
+texel = 2.0
+tint = Color(1.0, 1.0, 1.0, 1.0)
+glow = false
+count = 1
+drift = 0.0
+
+[sub_resource type="Resource" id="Resource_6"]
+script = ExtResource("9_backdrop_layer_def")
+textures = Array[Texture2D]([ExtResource("18_near_treeline")])
+mode = 0
+depth = 34.0
+screen_top = Vector2(0.42, 0.42)
+texel = 1.8
+tint = Color(1.0, 1.0, 1.0, 1.0)
+glow = false
+count = 1
+drift = 0.0
+
+[sub_resource type="Resource" id="Resource_7"]
+script = ExtResource("19_decor_def")
+textures = Array[Texture2D]([ExtResource("20_tree_large"), ExtResource("21_tree_small")])
+spacing = Vector2(170.0, 320.0)
+depth = Vector2(-8.5, -5.5)
+scale = Vector2(1.4, 1.9)
+chance = 1.0
+texel = 1.25
+shaded = true
+
+[sub_resource type="Resource" id="Resource_8"]
+script = ExtResource("19_decor_def")
+textures = Array[Texture2D]([ExtResource("22_bush_small"), ExtResource("23_bush_medium"), ExtResource("24_bush_large")])
+spacing = Vector2(130.0, 260.0)
+depth = Vector2(-4.6, -2.6)
+scale = Vector2(0.9, 1.2)
+chance = 1.0
+texel = 1.25
+shaded = true
+
+[sub_resource type="Resource" id="Resource_9"]
+script = ExtResource("19_decor_def")
+textures = Array[Texture2D]([ExtResource("25_rock_small"), ExtResource("26_rock_medium"), ExtResource("27_rock_large"), ExtResource("28_stump"), ExtResource("29_fence")])
+spacing = Vector2(240.0, 440.0)
+depth = Vector2(-4.0, -1.8)
+scale = Vector2(0.9, 1.1)
+chance = 0.7
+texel = 1.25
+shaded = true
+
+[sub_resource type="Resource" id="Resource_10"]
+script = ExtResource("19_decor_def")
+textures = Array[Texture2D]([ExtResource("30_flowers_white"), ExtResource("31_flowers_yellow")])
+spacing = Vector2(70.0, 160.0)
+depth = Vector2(-3.0, 2.4)
+scale = Vector2(0.6, 0.85)
+chance = 1.0
+texel = 1.25
+shaded = true
+
+[sub_resource type="Resource" id="Resource_11"]
+script = ExtResource("19_decor_def")
+textures = Array[Texture2D]([ExtResource("30_flowers_white"), ExtResource("31_flowers_yellow"), ExtResource("22_bush_small")])
+spacing = Vector2(90.0, 190.0)
+depth = Vector2(-2.2, -1.2)
+scale = Vector2(0.6, 0.8)
+chance = 0.6
+texel = 1.25
+shaded = true
+
+[resource]
+script = ExtResource("1_biome_def")
+id = &"lumewood"
+sky_top = Color(0.0706, 0.0588, 0.2, 1.0)
+sky_mid = Color(0.2275, 0.1412, 0.4392, 1.0)
+sky_low = Color(0.4784, 0.3529, 0.8157, 1.0)
+sky_horizon = Color(0.7882, 0.6588, 1.0, 1.0)
+sun_color = Color(1.0, 0.9058823529411765, 0.6588235294117647, 1.0)
+light_color = Color(0.8471, 0.7843, 1.0, 1.0)
+light_energy = 1.4
+ambient_color = Color(0.4157, 0.3216, 0.7843, 1.0)
+ambient_energy = 0.5
+fog_color = Color(0.4784, 0.3843, 0.7843, 1.0)
+mote_color = Color(1.0, 1.6, 2.6, 1.0)
+motes_rise = true
+lantern_light = Color(0.6588, 0.7843, 1.0, 1.0)
+ground_top = ExtResource("2_meadow_top")
+ground_side = ExtResource("3_meadow_side")
+ground_soil = ExtResource("4_meadow_soil")
+platform_left = ExtResource("5_ground_left")
+platform_middle = ExtResource("6_ground_middle")
+platform_right = ExtResource("7_ground_right")
+platform_texel = 1.0
+edge_grass = Array[Texture2D]([ExtResource("8_tall_grass")])
+backdrop = Array[ExtResource("9_backdrop_layer_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6")])
+ground_decor = Array[ExtResource("19_decor_def")]([SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10")])
+platform_decor = Array[ExtResource("19_decor_def")]([SubResource("Resource_11")])
+lantern = ExtResource("32_lantern_lit")
+signpost = ExtResource("33_signpost")
+portal_frames = Array[Texture2D]([ExtResource("34_portal_1"), ExtResource("35_portal_2"), ExtResource("36_portal_3"), ExtResource("37_portal_4")])

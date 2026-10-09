@@ -1,0 +1,64 @@
+[gd_resource type="Resource" script_class="ShopDef" load_steps=21 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/shop_def.gd" id="1_shop_def"]
+[ext_resource type="Script" path="res://scripts/data/shop_entry.gd" id="2_shop_entry"]
+[ext_resource type="Resource" path="res://data/items/use/red_potion.tres" id="3_red_potion"]
+[ext_resource type="Resource" path="res://data/items/use/orange_potion.tres" id="4_orange_potion"]
+[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="5_white_potion"]
+[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="6_blue_potion"]
+[ext_resource type="Resource" path="res://data/items/use/mana_elixir.tres" id="7_mana_elixir"]
+[ext_resource type="Resource" path="res://data/items/use/return_scroll.tres" id="8_return_scroll"]
+[ext_resource type="Resource" path="res://data/items/ammo/feather_arrow.tres" id="9_feather_arrow"]
+[ext_resource type="Resource" path="res://data/items/ammo/iron_star.tres" id="10_iron_star"]
+[ext_resource type="Resource" path="res://data/items/ammo/lead_bullet.tres" id="11_lead_bullet"]
+
+[sub_resource type="Resource" id="Resource_9"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("11_lead_bullet")
+price = 0
+
+[sub_resource type="Resource" id="Resource_8"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("10_iron_star")
+price = 0
+
+[sub_resource type="Resource" id="Resource_7"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("9_feather_arrow")
+price = 0
+
+[sub_resource type="Resource" id="Resource_6"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("8_return_scroll")
+price = 0
+
+[sub_resource type="Resource" id="Resource_5"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("7_mana_elixir")
+price = 0
+
+[sub_resource type="Resource" id="Resource_4"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("6_blue_potion")
+price = 0
+
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("5_white_potion")
+price = 0
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("4_orange_potion")
+price = 0
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("3_red_potion")
+price = 0
+
+[resource]
+script = ExtResource("1_shop_def")
+id = &"town_general"
+display_name = "General Store"
+items = Array[ExtResource("2_shop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9")])

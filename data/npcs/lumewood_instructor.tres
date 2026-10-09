@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/npcs/village_elder.png" id="2_village_elder"]
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"lumewood_instructor"
+display_name = "Archmage Celest"
+title = "Magician Instructor"
+texture = ExtResource("2_village_elder")
+sprite_scale = 0.95
+tint = Color(0.784314, 0.690196, 1.0, 1.0)
+greeting = "The light here listens to those who listen first. Do you wish to study magic?"
+lines = PackedStringArray("Advance at level 8, with the stat the path asks for.", "Practise on the fields outside town. That's what they're for.")
+instructs = Array[StringName]([&"mage"])
+storage = false
