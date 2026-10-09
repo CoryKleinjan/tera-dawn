@@ -57,11 +57,19 @@ func _process(_delta: float) -> void:
 	rig.place(position, TDStage.Z_NPC, position.y)
 	rig.face(face)
 
-## Name tag under the NPC, and a hint when the player is close enough to talk.
-func draw_tag(ci: CanvasItem, at: Vector2, top: Vector2) -> void:
-	UiSkin.draw_name_tag(ci, at + Vector2(0, 4), def.display_name, Palette.SUN)
+## Name tag (and title) under the NPC, put in `tags`, which keeps tags apart; the quest
+## marker over them, and a hint when the player is close enough to talk.
+func draw_tag(ci: CanvasItem, at: Vector2, top: Vector2, tags: TDNameTags) -> void:
+	var tag_top := at + Vector2(0, 4)
+	var rect := UiSkin.name_tag_rect(tag_top, def.display_name)
 	if def.title != "":
-		DrawUtil.text(ci, Game.ui_font, at + Vector2(0, 36), def.title, 10, Palette.MIST, 0, 4, Palette.NIGHT)
+		var w := DrawUtil.text_width(Game.ui_font, def.title, 10)
+		rect = rect.merge(Rect2(tag_top.x - w / 2.0, rect.end.y, w, 15))
+	var title := def.title
+	tags.add(rect, func(c: CanvasItem, offset: Vector2) -> void:
+		UiSkin.draw_name_tag(c, tag_top + offset, def.display_name, Palette.SUN)
+		if title != "":
+			DrawUtil.text(c, Game.ui_font, tag_top + offset + Vector2(0, 32), title, 10, Palette.MIST, 0, 4, Palette.NIGHT))
 	var p := world.player
 	var near := world.started and absf(p.position.x - position.x) < 50 and absf(p.position.y - position.y) < 8
 	if near:

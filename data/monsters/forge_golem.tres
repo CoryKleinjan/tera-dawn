@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=26 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=28 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/forge_golem.tres" id="2_forge_golem"]
@@ -14,11 +14,19 @@
 [ext_resource type="Resource" path="res://data/items/equips/viper_claw.tres" id="12_viper_claw"]
 [ext_resource type="Resource" path="res://data/items/equips/kite_shield.tres" id="13_kite_shield"]
 [ext_resource type="Resource" path="res://data/items/equips/moonstone_wand.tres" id="14_moonstone_wand"]
+[ext_resource type="Resource" path="res://data/items/equips/steel_bastard_sword.tres" id="15_steel_bastard_sword"]
+
+[sub_resource type="Resource" id="Resource_12"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("15_steel_bastard_sword")
+chance = 0.0225
+min_amount = 1
+max_amount = 1
 
 [sub_resource type="Resource" id="Resource_11"]
 script = ExtResource("3_drop_entry")
 item = ExtResource("14_moonstone_wand")
-chance = 0.015
+chance = 0.0225
 min_amount = 1
 max_amount = 1
 
@@ -32,7 +40,7 @@ max_amount = 1
 [sub_resource type="Resource" id="Resource_9"]
 script = ExtResource("3_drop_entry")
 item = ExtResource("12_viper_claw")
-chance = 0.015
+chance = 0.0225
 min_amount = 1
 max_amount = 1
 
@@ -98,7 +106,7 @@ id = &"forge_golem"
 display_name = "Forge Golem"
 level = 23
 max_hp = 3158
-attack = 55
+attack = 69
 exp_reward = 464
 speed = 0.5
 size = Vector2(64.0, 100.0)
@@ -107,4 +115,4 @@ flying = false
 sprite_frames = ExtResource("2_forge_golem")
 sprite_scale = 1.0
 light_color = Color(1.0, 0.501961, 0.25098, 1.0)
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12")])

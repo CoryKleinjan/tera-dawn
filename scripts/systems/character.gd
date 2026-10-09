@@ -185,8 +185,16 @@ func spend_ammo(n: int) -> void:
 func xp_need(lvl := -1) -> int:
 	if lvl < 0:
 		lvl = level
-	# a few kills a level at first, climbing to a few dozen by the 30s, like MapleStory
-	return int(floor(15.0 * pow(lvl, 1.6) * (1.0 + lvl / 8.0)))
+	# Intended pace, for a quick player hunting monsters near their level: about 1 minute
+	# for Lv 1, 2 hours to Lv 10 (the job), 10 to Lv 20, 27 to Lv 30 and 40 to the Lv 35
+	# cap, about classic MapleStory. It comes from the 75-minute playtest: EXP earned per
+	# minute (kills and quests) was about 33 * lvl^1.3, and minutes per level are meant to
+	# grow as about 1.5 * lvl^1.32, so a level takes their product, about 50 * lvl^2.6
+	# (53 lands the cap on 40 hours). Quest EXP rewards are scaled to match; change them
+	# together.
+	const SCALE := 53.0
+	const GROWTH := 2.6
+	return int(floor(SCALE * pow(lvl, GROWTH)))
 
 ## Adds EXP and returns how many levels were gained.
 func gain_xp(n: int) -> int:
@@ -212,14 +220,56 @@ func spend_mp(n: int) -> bool:
 func restore_mp(n: int) -> void:
 	mp = clampi(mp + n, 0, max_mp())
 
-## Spends one Ability Point on STR, DEX, INT or LUK.
-func add_ap(stat: StringName) -> bool:
-	if ap <= 0 or not stat in StatBlock.BASE:
+## Spends `amount` Ability Points (at most what's left) on STR, DEX, INT or LUK.
+func add_ap(stat: StringName, amount := 1) -> bool:
+	if ap <= 0 or amount <= 0 or not stat in StatBlock.BASE:
 		return false
-	ap -= 1
-	base.set(stat, base.value(stat) + 1)
+	amount = mini(amount, ap)
+	ap -= amount
+	base.set(stat, base.value(stat) + amount)
 	recalc()
 	return true
+
+## How the Auto button spends the unspent Ability Points, as {stat: amount}: enough of the
+## job's secondary stat to wear its gear (what's worn, and what's in the bag at this level),
+## and the rest in its primary stat.
+func auto_ap_plan() -> Dictionary:
+	var out := {}
+	if ap <= 0:
+		return out
+	var main := StringName(job.primary_stat)
+	var second := StringName(job.secondary_stat)
+	var short := mini(ap, maxi(0, _gear_needs(second) - stats.value(second)))
+	if short > 0 and second != main:
+		out[second] = short
+	if ap - short > 0:
+		out[main] = out.get(main, 0) + ap - short
+	return out
+
+## The most of `stat` any gear this character wears, or could wear at this level, asks for.
+func _gear_needs(stat: StringName) -> int:
+	var gear: Array[EquipDef] = []
+	for s: ItemStack in equipment.worn.values():
+		gear.append(s.equip_def())
+	for i in Inventory.SLOTS:
+		var s := inventory.at(ItemDef.Tab.EQUIP, i)
+		if s and can_use(s.equip_def().jobs) and s.equip_def().required_level <= level:
+			gear.append(s.equip_def())
+	var most := 0
+	for e in gear:
+		most = maxi(most, e.requirements().get(stat, 0))
+	return most
+
+## The base stats still short of what advancing to `next` asks for, as {stat: amount needed}
+## (empty when the stats are there; the level isn't counted).
+func stats_short_of(next: JobDef) -> Dictionary:
+	var out := {}
+	if next.advance_requirements:
+		for stat in StatBlock.BASE:
+			var need := next.advance_requirements.value(stat)
+			if base.value(stat) < need:
+				out[stat] = need
+	return out
 
 # ---------- skills ----------
 

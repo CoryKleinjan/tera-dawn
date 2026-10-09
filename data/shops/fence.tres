@@ -1,11 +1,8 @@
-[gd_resource type="Resource" script_class="ShopDef" load_steps=25 format=3]
+[gd_resource type="Resource" script_class="ShopDef" load_steps=19 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/shop_def.gd" id="1_shop_def"]
 [ext_resource type="Script" path="res://scripts/data/shop_entry.gd" id="2_shop_entry"]
 [ext_resource type="Resource" path="res://data/items/equips/iron_claw.tres" id="3_iron_claw"]
-[ext_resource type="Resource" path="res://data/items/equips/steel_claw.tres" id="4_steel_claw"]
-[ext_resource type="Resource" path="res://data/items/equips/shadow_claw.tres" id="5_shadow_claw"]
-[ext_resource type="Resource" path="res://data/items/equips/viper_claw.tres" id="6_viper_claw"]
 [ext_resource type="Resource" path="res://data/items/equips/dusk_bandana.tres" id="7_dusk_bandana"]
 [ext_resource type="Resource" path="res://data/items/equips/night_garb.tres" id="8_night_garb"]
 [ext_resource type="Resource" path="res://data/items/equips/viper_bandana.tres" id="9_viper_bandana"]
@@ -49,21 +46,6 @@ script = ExtResource("2_shop_entry")
 item = ExtResource("7_dusk_bandana")
 price = 0
 
-[sub_resource type="Resource" id="Resource_4"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("6_viper_claw")
-price = 0
-
-[sub_resource type="Resource" id="Resource_3"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("5_shadow_claw")
-price = 0
-
-[sub_resource type="Resource" id="Resource_2"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("4_steel_claw")
-price = 0
-
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("2_shop_entry")
 item = ExtResource("3_iron_claw")
@@ -73,4 +55,4 @@ price = 0
 script = ExtResource("1_shop_def")
 id = &"fence"
 display_name = "Lanternfall Fence"
-items = Array[ExtResource("2_shop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11")])
+items = Array[ExtResource("2_shop_entry")]([SubResource("Resource_1"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11")])

@@ -9,6 +9,10 @@ const SETTLE_TICKS := 25
 ## Ticks only the owner can pick it up.
 const OWNER_TICKS := 900
 const LIFETIME := 3600
+## How far to either side of the feet the loot key reaches, and how far above or below.
+## Pets reach further sideways, and a little further up and down with it.
+const LOOT_REACH := 40.0
+const LOOT_REACH_Y := 50.0
 
 var id := 0
 var item: ItemDef
@@ -35,10 +39,11 @@ func expired() -> bool:
 	return t > LIFETIME
 
 ## Whether `p` may pick this up now, standing within `reach` of it (their pet reaches further).
-func can_loot(p: SimPlayer, reach := 26.0) -> bool:
+func can_loot(p: SimPlayer, reach := LOOT_REACH) -> bool:
 	return not taken and t > SETTLE_TICKS and not p.fainted() \
 		and (owner == 0 or owner == p.peer or t > OWNER_TICKS) \
-		and absf(flight.position.x - p.position.x) < reach and absf(flight.position.y - p.position.y) < 50 + (reach - 26.0) * 0.5
+		and absf(flight.position.x - p.position.x) < reach \
+		and absf(flight.position.y - p.position.y) < LOOT_REACH_Y + maxf(0.0, reach - LOOT_REACH) * 0.5
 
 ## What a client needs to show it: [id, item id, amount, flight state, age in ticks].
 func snapshot() -> Array:

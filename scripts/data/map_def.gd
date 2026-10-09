@@ -63,15 +63,16 @@ func neighbours() -> Array[StringName]:
 	return out
 
 ## Every monster on the map, in the order the server and every client number them:
-## [MonsterDef, platform index, parent index]. Monsters that split are followed by the
-## ones they split into, whose parent is the index of the one that splits (-1 otherwise).
+## [MonsterDef, platform index, parent index, SpawnDef]. Monsters that split are followed
+## by the ones they split into, whose parent is the index of the one that splits (-1
+## otherwise). The SpawnDef says which part of the platform they walk on (patrol_area).
 func roster() -> Array:
 	var out := []
 	for s in spawns:
 		for i in s.count:
 			var parent := out.size()
-			out.append([s.monster, s.platform, -1])
+			out.append([s.monster, s.platform, -1, s])
 			if s.monster.splits_into:
 				for k in s.monster.split_count:
-					out.append([s.monster.splits_into, s.platform, parent])
+					out.append([s.monster.splits_into, s.platform, parent, s])
 	return out

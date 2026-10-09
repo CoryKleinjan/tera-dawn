@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=60 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=61 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/meadow.tres" id="2_meadow"]
@@ -142,12 +142,14 @@ script = ExtResource("9_spawn_def")
 monster = ExtResource("10_dewling")
 platform = 0
 count = 5
+patrol_from = 900.0
 
 [sub_resource type="Resource" id="Resource_20"]
 script = ExtResource("9_spawn_def")
 monster = ExtResource("11_mossling")
 platform = 0
 count = 2
+patrol_from = 900.0
 
 [sub_resource type="Resource" id="Resource_21"]
 script = ExtResource("9_spawn_def")
@@ -165,7 +167,13 @@ count = 2
 script = ExtResource("9_spawn_def")
 monster = ExtResource("12_boulderkin")
 platform = 6
-count = 1
+count = 2
+
+[sub_resource type="Resource" id="Resource_37"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("12_boulderkin")
+platform = 2
+count = 2
 
 [sub_resource type="Resource" id="Resource_24"]
 script = ExtResource("9_spawn_def")
@@ -314,7 +322,7 @@ start_x = 200.0
 lantern_spacing = 640.0
 platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9")])
 climbables = Array[ExtResource("4_climbable_def")]([SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17")])
-spawns = Array[ExtResource("9_spawn_def")]([SubResource("Resource_19"), SubResource("Resource_20"), SubResource("Resource_21"), SubResource("Resource_22"), SubResource("Resource_23"), SubResource("Resource_24"), SubResource("Resource_25"), SubResource("Resource_26"), SubResource("Resource_27"), SubResource("Resource_28")])
+spawns = Array[ExtResource("9_spawn_def")]([SubResource("Resource_19"), SubResource("Resource_20"), SubResource("Resource_21"), SubResource("Resource_22"), SubResource("Resource_23"), SubResource("Resource_24"), SubResource("Resource_25"), SubResource("Resource_26"), SubResource("Resource_27"), SubResource("Resource_28"), SubResource("Resource_37")])
 npcs = Array[ExtResource("15_npc_placement")]([SubResource("Resource_29"), SubResource("Resource_30"), SubResource("Resource_sorrel"), SubResource("Resource_hobb"), SubResource("Resource_marlo")])
 props = Array[ExtResource("18_prop_placement")]([SubResource("Resource_31"), SubResource("Resource_32"), SubResource("Resource_33"), SubResource("Resource_34"), SubResource("Resource_35"), SubResource("Resource_36")])
 region = &"dawnrise_isle"

@@ -1,13 +1,9 @@
-[gd_resource type="Resource" script_class="ShopDef" load_steps=29 format=3]
+[gd_resource type="Resource" script_class="ShopDef" load_steps=21 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/shop_def.gd" id="1_shop_def"]
 [ext_resource type="Script" path="res://scripts/data/shop_entry.gd" id="2_shop_entry"]
 [ext_resource type="Resource" path="res://data/items/equips/brass_knuckle.tres" id="3_brass_knuckle"]
-[ext_resource type="Resource" path="res://data/items/equips/iron_knuckle.tres" id="4_iron_knuckle"]
-[ext_resource type="Resource" path="res://data/items/equips/barnacle_knuckle.tres" id="5_barnacle_knuckle"]
 [ext_resource type="Resource" path="res://data/items/equips/driftwood_pistol.tres" id="6_driftwood_pistol"]
-[ext_resource type="Resource" path="res://data/items/equips/flintlock.tres" id="7_flintlock"]
-[ext_resource type="Resource" path="res://data/items/equips/saltwood_pistol.tres" id="8_saltwood_pistol"]
 [ext_resource type="Resource" path="res://data/items/equips/tricorn_hat.tres" id="9_tricorn_hat"]
 [ext_resource type="Resource" path="res://data/items/equips/sailor_coat.tres" id="10_sailor_coat"]
 [ext_resource type="Resource" path="res://data/items/equips/deckhand_bandana.tres" id="11_deckhand_bandana"]
@@ -51,29 +47,9 @@ script = ExtResource("2_shop_entry")
 item = ExtResource("9_tricorn_hat")
 price = 0
 
-[sub_resource type="Resource" id="Resource_6"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("8_saltwood_pistol")
-price = 0
-
-[sub_resource type="Resource" id="Resource_5"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("7_flintlock")
-price = 0
-
 [sub_resource type="Resource" id="Resource_4"]
 script = ExtResource("2_shop_entry")
 item = ExtResource("6_driftwood_pistol")
-price = 0
-
-[sub_resource type="Resource" id="Resource_3"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("5_barnacle_knuckle")
-price = 0
-
-[sub_resource type="Resource" id="Resource_2"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("4_iron_knuckle")
 price = 0
 
 [sub_resource type="Resource" id="Resource_1"]
@@ -85,4 +61,4 @@ price = 0
 script = ExtResource("1_shop_def")
 id = &"shipwright"
 display_name = "Driftcove Outfitter"
-items = Array[ExtResource("2_shop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13")])
+items = Array[ExtResource("2_shop_entry")]([SubResource("Resource_1"), SubResource("Resource_4"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13")])

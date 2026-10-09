@@ -50,7 +50,8 @@ func test_the_owner_picks_up_with_the_loot_key() -> void:
 	check_eq(ann.character.inventory.count_of(leaf), 3, "in Ann's bag")
 	check(not map.drops.has(d.id), "gone from the ground")
 	check_eq(h.last(3, &"ev_drop_gone"), [d.id, 2], "everyone sees Ann take it")
-	check(h.told(2, "Picked up 3 Green Leaf"), "told")
+	check_eq(h.last(2, &"ev_pickup"), [leaf.id, 3], "told what was picked up")
+	check(not h.told(2, "Picked up"), "not as a log line: the client merges pickups")
 
 func test_others_cant_take_your_drop_at_first() -> void:
 	var d := _kill()
@@ -83,12 +84,31 @@ func test_drops_cant_be_taken_before_they_settle() -> void:
 
 func test_you_must_stand_by_a_drop_to_loot_it() -> void:
 	var d := _kill()
-	h.place(ann, 340.0 + 26.0)
+	h.place(ann, 340.0 + 40.0)
 	h.ask(2, &"req_loot")
-	check(map.drops.has(d.id), "26 px is too far")
-	h.place(ann, 340.0 + 25.0)
+	check(map.drops.has(d.id), "40 px is too far")
+	h.place(ann, 340.0 - 39.0)
 	h.ask(2, &"req_loot")
-	check(not map.drops.has(d.id), "25 px is close enough")
+	check(not map.drops.has(d.id), "39 px is close enough")
+
+func test_the_loot_key_reaches_further_than_it_used_to() -> void:
+	check_eq(SimDrop.LOOT_REACH, 40.0, "40 px either side")
+	var d := _kill()
+	h.place(ann, 340.0 + 30.0)
+	h.ask(2, &"req_loot")
+	check(not map.drops.has(d.id), "30 px away is in reach")
+
+func test_holding_the_loot_key_picks_up_a_pile_one_by_one() -> void:
+	# the client asks again every TDPlayer.LOOT_EVERY ticks while the key is held
+	for x in [330.0, 345.0, 360.0]:
+		_drop_here(leaf, 1, 2, x)
+	h.step(SimDrop.SETTLE_TICKS + 1)
+	h.place(ann, 345.0)
+	for i in 3:
+		h.ask(2, &"req_loot")
+		h.step(TDPlayer.LOOT_EVERY)
+	check(map.drops.is_empty(), "everything in reach taken")
+	check_eq(ann.character.inventory.count_of(leaf), 3, "all three in the bag")
 
 func test_climbing_players_cant_loot() -> void:
 	var d := _kill()
@@ -104,6 +124,8 @@ func test_dawnshards_go_to_the_wallet_by_walking_over_them() -> void:
 	check_eq(ann.character.shards, 40, "picked up without the loot key")
 	check(not map.drops.has(d.id), "gone")
 	check_eq(h.last(2, &"ev_vitals")[4], 40, "wallet sent")
+	check_eq(h.last(2, &"ev_gain"), [&"shards", 40], "shown rising over Ann")
+	check(h.events(2, &"ev_pickup").is_empty() and not h.told(2, "Picked up"), "not in the message log")
 
 func test_others_dont_walk_off_with_your_dawnshards() -> void:
 	var shard := Content.item(&"dawnshard")

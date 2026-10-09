@@ -172,6 +172,22 @@ func test_the_start_is_reachable_from_every_map() -> void:
 	for id in Content.maps:
 		check(_reachable(id).has(Character.START_MAP), "%s: no way back to %s" % [Scan.where(Content.maps[id]), Character.START_MAP])
 
+func test_meadow_floor_monsters_keep_out_of_the_village() -> void:
+	# the Elder, the shop and Sorrel stand at the west end of the floor; monsters there
+	# bumped players walking up to them (playtest)
+	var m: MapDef = Content.maps[&"meadow"]
+	var layout := MapLayout.new(m)
+	var village := 0.0
+	for p in m.npcs:
+		if p.platform == 0 and p.npc.id in [&"village_elder", &"shopkeeper", &"guide_sorrel"]:
+			village = maxf(village, p.x)
+	check(village > 0.0, "the village NPCs are on the floor")
+	for i in m.spawns.size():
+		var s := m.spawns[i]
+		if s.platform == 0:
+			var area := s.patrol_area(layout.platforms[0])
+			check(area.x > village + 100.0, "meadow: spawns[%d] (%s) walks from x %s, into the village (NPCs up to x %s)" % [i, s.monster.id, area.x, village])
+
 func test_every_town_has_a_storage_keeper() -> void:
 	for m: MapDef in Content.maps.values():
 		if m.town and m.id != &"free_market" and m.id != Character.START_MAP:

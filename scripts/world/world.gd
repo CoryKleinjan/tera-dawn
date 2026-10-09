@@ -7,6 +7,9 @@ extends Node2D
 ## Logic steps once per physics tick (60 Hz) in 2D game pixels (y down).
 
 const VIEW := Vector2(960, 540)
+## Picking up more of an item within this many ticks of the last time adds to its log line
+## ("Picked up 3 Moss Tuft") instead of writing another.
+const PICKUP_MERGE_TICKS := 120
 
 var map: MapDef
 var layout: MapLayout
@@ -131,6 +134,8 @@ func show_achievement(id: String) -> void:
 	add_log("Achievement unlocked: %s (%s)" % [a["title"], a["text"]], Palette.SUN)
 	SteamService.unlock_achievement(a["steam"])
 
+## Adds a line to the message log (the last six show, each for five seconds). The same
+## text twice in a row just keeps the line up longer.
 func add_log(text: String, col: Color) -> void:
 	if not log_lines.is_empty() and log_lines[-1]["text"] == text:
 		log_lines[-1]["t"] = 300
@@ -138,6 +143,25 @@ func add_log(text: String, col: Color) -> void:
 	log_lines.append({"text": text, "color": col, "t": 300})
 	if log_lines.size() > 6:
 		log_lines.pop_front()
+
+## You picked something up: one log line per item, adding to the last one when you pick up
+## the same item again within PICKUP_MERGE_TICKS.
+func show_pickup(item: ItemDef, amount: int) -> void:
+	for i in log_lines.size():
+		var line := log_lines[i]
+		if line.get("item") == item.id and tick - int(line["at"]) <= PICKUP_MERGE_TICKS:
+			log_lines.remove_at(i)
+			_log_pickup(item, int(line["count"]) + amount)
+			return
+	_log_pickup(item, amount)
+
+func _log_pickup(item: ItemDef, count: int) -> void:
+	add_log("Picked up %s" % MapInstance.amount_name(item, count), Palette.MIST)
+	log_lines[-1].merge({"item": item.id, "count": count, "at": tick}, true)
+
+## EXP or Dawnshards you just gained, as a small number rising over you.
+func show_gain(kind: StringName, amount: int) -> void:
+	fx.show_gain(kind, amount)
 
 # ---------- queries ----------
 

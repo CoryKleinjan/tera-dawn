@@ -12,8 +12,6 @@ const SAVE_EVERY := 600
 ## Attack requests may arrive this many ticks early, to allow for network jitter.
 const COOLDOWN_SLACK := 4
 const NOT_ENOUGH_SHARDS := "You don't have enough Dawnshards."
-## The colour of "+N EXP".
-const EXP_COLOR := Color("ffe39a")
 
 var store: CharacterStore
 ## Import the single-player save (user://save.json) as a player's character the first time
@@ -143,7 +141,7 @@ func give_xp(p: SimPlayer, amount: int) -> void:
 	var c := p.character
 	var levels := c.gain_xp(amount)
 	p.dirty_vitals = true
-	p.map.tell(p, "+%d EXP" % amount, EXP_COLOR)
+	p.map.show_gain(p, &"exp", amount)
 	if levels > 0:
 		p.dirty_character = true
 		p.map.broadcast(&"ev_level_up", [p.peer, c.level])
@@ -379,9 +377,11 @@ func on_move_item(peer: int, tab: int, from: int, to: int) -> void:
 			c.inventory.move(tab, from, to)
 			return "")
 
-func on_add_ap(peer: int, stat: StringName) -> void:
+## Spends `amount` Ability Points on one base stat (the "+" buttons spend one, Auto more).
+## Character.add_ap refuses other stats and never spends more points than there are.
+func on_add_ap(peer: int, stat: StringName, amount := 1) -> void:
 	_change(peer, func(c: Character) -> String:
-		c.add_ap(stat)
+		c.add_ap(stat, amount)
 		return "")
 
 func on_drop_item(peer: int, tab: int, slot: int) -> void:

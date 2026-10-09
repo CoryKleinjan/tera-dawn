@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=24 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=26 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/dusk_moth.tres" id="2_dusk_moth"]
@@ -13,6 +13,14 @@
 [ext_resource type="Resource" path="res://data/items/equips/shell_earrings.tres" id="11_shell_earrings"]
 [ext_resource type="Resource" path="res://data/items/equips/traveler_cape.tres" id="12_traveler_cape"]
 [ext_resource type="Resource" path="res://data/items/equips/canvas_gloves.tres" id="13_canvas_gloves"]
+[ext_resource type="Resource" path="res://data/items/equips/steel_claw.tres" id="14_steel_claw"]
+
+[sub_resource type="Resource" id="Resource_11"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("14_steel_claw")
+chance = 0.0225
+min_amount = 1
+max_amount = 1
 
 [sub_resource type="Resource" id="Resource_10"]
 script = ExtResource("3_drop_entry")
@@ -90,7 +98,7 @@ id = &"dusk_moth"
 display_name = "Dusk Moth"
 level = 15
 max_hp = 1128
-attack = 37
+attack = 46
 exp_reward = 173
 speed = 1.1
 size = Vector2(40.0, 30.0)
@@ -99,4 +107,4 @@ flying = true
 hover_height = 56.0
 sprite_frames = ExtResource("2_dusk_moth")
 sprite_scale = 1.0
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11")])

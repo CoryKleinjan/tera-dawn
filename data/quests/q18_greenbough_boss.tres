@@ -38,6 +38,6 @@ offer_text = "At the end of our hunting grounds lives the Elder Treant. Only the
 progress_text = "Defeat the Elder Treant at the far end of the hunting grounds and bring back the Heartwood."
 complete_text = "You did it. The whole town will hear of this. Take this, and my respect."
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1")])
-reward_xp = 9086
+reward_xp = 188400
 reward_shards = 6000
 reward_items = Array[ExtResource("4_drop_entry")]([SubResource("Resource_2"), SubResource("Resource_3")])

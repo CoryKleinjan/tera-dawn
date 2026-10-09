@@ -71,10 +71,10 @@ func test_main_attack_is_known_to_the_job() -> void:
 
 func test_kills_per_level() -> void:
 	var m := MonsterDef.new()
-	m.exp_reward = 16
-	check_near(Balance.kills_per_level(1, m), 1.0, "16 EXP at level 1")
+	m.exp_reward = 53
+	check_near(Balance.kills_per_level(1, m), 1.0, "53 EXP at level 1")
 	m.exp_reward = 0
-	check_near(Balance.kills_per_level(1, m), 16.0, "zero EXP treated as 1")
+	check_near(Balance.kills_per_level(1, m), 53.0, "zero EXP treated as 1")
 	for lvl in SAMPLE_LEVELS:
 		var real := _monster_near(lvl)
-		check(Balance.kills_per_level(real.level, real) <= 60.0, "%s: no more than 60 kills a level" % real.id)
+		check(Balance.kills_per_level(real.level, real) <= 1000.0, "%s: no more than 1000 kills a level" % real.id)

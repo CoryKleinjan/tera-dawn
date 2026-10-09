@@ -97,9 +97,7 @@ func _process(_delta: float) -> void:
 	companion.set_pet(pet, position)
 	companion.follow(position, face, TDStage.Z_OTHER_PLAYER, world.layout.ground_below(position))
 
-## Name tag (and guild) under their feet, drawn by the overlay.
-func draw_tag(ci: CanvasItem, at: Vector2) -> void:
+## Their name tag (and guild) under their feet, put in `tags` for the overlay to draw.
+func draw_tag(tags: TDNameTags, at: Vector2) -> void:
 	if known and not fainted():
-		UiSkin.draw_name_tag(ci, at + Vector2(0, 4), char_name, Palette.MIST)
-		if guild != "":
-			UiSkin.draw_guild_tag(ci, at + Vector2(0, 26), guild)
+		tags.add_name(at + Vector2(0, 4), char_name, Palette.MIST, guild)

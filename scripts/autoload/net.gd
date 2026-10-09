@@ -270,6 +270,12 @@ func req_add_ap(stat: StringName) -> void:
 	if server:
 		server.on_add_ap(_sender(), stat)
 
+## Spends several Ability Points on one stat at once (the Character window's Auto button).
+@rpc("any_peer", "call_local", "reliable")
+func req_add_ap_many(stat: StringName, amount: int) -> void:
+	if server:
+		server.on_add_ap(_sender(), stat, amount)
+
 @rpc("any_peer", "call_local", "reliable")
 func req_buy(npc_id: StringName, index: int, count: int) -> void:
 	if server:
@@ -432,6 +438,18 @@ func ev_mob_shot(index: int, x: float, y: float) -> void:
 func ev_level_up(peer: int, level: int) -> void:
 	if world:
 		world.show_level_up(peer, level)
+
+## EXP or Dawnshards you just gained, shown rising over you.
+@rpc("authority", "call_local", "reliable")
+func ev_gain(kind: StringName, amount: int) -> void:
+	if world:
+		world.show_gain(kind, amount)
+
+## You picked something up (Dawnshards come as ev_gain instead).
+@rpc("authority", "call_local", "reliable")
+func ev_pickup(item_id: StringName, amount: int) -> void:
+	if world and Content.items.has(item_id):
+		world.show_pickup(Content.items[item_id], amount)
 
 @rpc("authority", "call_local", "reliable")
 func ev_number(x: float, y: float, value: int, kind: String) -> void:

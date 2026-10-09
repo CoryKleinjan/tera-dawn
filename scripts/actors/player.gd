@@ -38,6 +38,8 @@ const KNOCKBACK := Vector2(3.5, -4.5)
 const HURT_POSE_TICKS := 20
 ## Ticks of the level-up pose.
 const CHEER_TICKS := 50
+## Ticks between asking the server for the next item while the loot key is held.
+const LOOT_EVERY := 4
 
 var world: TDWorld
 var vel := Vector2.ZERO
@@ -58,6 +60,8 @@ var down := false     # fainted, until the server sends you back to town
 var land_t := 0       # ticks of the landing pose
 var cheer_t := 0      # ticks of the level-up pose
 var loot_cd := 0      # ticks before the loot key asks for the next item
+## Coyote time and jump buffering (see JumpGrace).
+var jump_grace := JumpGrace.new()
 var _reported := &""  # the animation the server last heard about
 var _swing := false   # restart the attack animation on the next frame
 var speech := ""      # the last thing said in map chat, shown in a bubble
@@ -91,6 +95,7 @@ func place(x: float, y: float) -> void:
 	down = false
 	sitting = &""
 	platform = world.platforms[0]
+	jump_grace.cancel()
 	_report()
 
 func is_climbing() -> bool:
@@ -118,6 +123,7 @@ func knock_back(from_x: float) -> void:
 	if not is_climbing():
 		vel = Vector2(-KNOCKBACK.x if position.x < from_x else KNOCKBACK.x, KNOCKBACK.y)
 		on_ground = false
+		jump_grace.cancel()
 
 ## The server didn't accept where you said you were, and puts you back.
 func correct(at: Vector2) -> void:
@@ -162,11 +168,11 @@ func step() -> void:
 				_report()
 			return
 	_attacks()
-	# hold the loot key to pick things up one after another
+	# hold the loot key to pick up everything in reach, one item after another
 	if _held("loot") and loot_cd == 0 and not is_climbing():
 		_report()
 		Net.ask(&"req_loot")
-		loot_cd = 8
+		loot_cd = LOOT_EVERY
 	if not _interact():
 		if is_climbing():
 			_climb()
@@ -287,6 +293,7 @@ func _grab_climbable() -> bool:
 	position.x = c.x
 	vel = Vector2.ZERO
 	on_ground = false
+	jump_grace.cancel()
 	return true
 
 func _move() -> void:
@@ -306,8 +313,13 @@ func _move() -> void:
 	if absf(vel.x) < 0.05:
 		vel.x = 0
 
-	if _tapped("jump") and on_ground:
-		if _held("move_down") and platform != null and not platform.solid:
+	# a jump works a few ticks after walking off a ledge, and a press just before
+	# landing goes off on landing (see JumpGrace); dropping through needs footing
+	if _tapped("jump"):
+		jump_grace.press()
+	if jump_grace.can_jump(on_ground):
+		jump_grace.cancel()
+		if on_ground and _held("move_down") and platform != null and not platform.solid:
 			drop_from = platform
 			drop_t = DROP_TICKS
 			vel.y = 1
@@ -336,6 +348,7 @@ func _move() -> void:
 	if position.y > float(world.map.height):
 		position.y = float(world.map.ground_y)
 		vel.y = 0
+	jump_grace.step(on_ground)
 
 # ---------- HD-2D visuals ----------
 
