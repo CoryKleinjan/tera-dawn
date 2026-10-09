@@ -35,6 +35,7 @@ func _run() -> void:
 	DirAccess.make_dir_recursive_absolute(out)
 	var only := args[1] if args.size() > 1 else ""
 	Game.save_path = "user://screenshot_save.json"
+	Game.new_character()
 	Game.level = 9
 	Game.map_id = &"meadow"
 	Game.refill()
@@ -74,6 +75,38 @@ func _run() -> void:
 		elder.talk()
 		await _physics(10)
 		await _shot("village")
+	if only == "" or only == "windows":
+		# Inventory, equipment and character windows with some loot, one tooltip showing.
+		for id in [&"leather_boots", &"petal_cape", &"moss_ring", &"oak_shield", &"dawn_blade"]:
+			Game.inventory.add(Content.item(id))
+		for id in [&"boar_tusk", &"petal_wing", &"dewling_droplet"]:
+			Game.inventory.add(Content.item(id), randi_range(3, 40))
+		Game.inventory.add(Content.item(&"blue_potion"), 12)
+		Game.equip(0)
+		Game.ap = 40
+		for n in 30:
+			Game.add_ap(&"strength")
+		p.position = Vector2(1120, 620)
+		await _physics(5)
+		for action in TDHud.WINDOW_ACTIONS:
+			world.hud.toggle_window(action)
+		var inv: TDInventoryWindow = world.hud.windows["inventory"]
+		world.hud.tooltip.show_item(inv, Game.inventory.at(ItemDef.Tab.EQUIP, 3), inv.global_position + inv.slot_rect(3).get_center())
+		await _frames(3)
+		await _shot("windows")
+		for action in TDHud.WINDOW_ACTIONS:
+			world.hud.toggle_window(action)
+	if only == "" or only == "drops":
+		# A spread of loot on the ground: Dawnshards, a potion, an Etc item and gear.
+		p.position = Vector2(1000, 620)
+		p.face = 1
+		var loot := [&"dawnshard", &"red_potion", &"petal_wing", &"dawn_blade", &"leather_boots", &"dawnshard"]
+		for i in loot.size():
+			var d := TDDrop.create(world, Content.item(loot[i]), 3, Vector2(1100, 600), 620)
+			d.land_x = 1100 + (i - (loot.size() - 1) / 2.0) * TDWorld.DROP_SPACING
+			world.drop_layer.add_child(d)
+		await _physics(45)
+		await _shot("drops")
 	if only == "" or only == "rope":
 		p.position = Vector2(700, 600)
 		await _physics(2)

@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="JobDef" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/job_def.gd" id="script"]
+[ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="stat_block"]
+[ext_resource type="Script" path="res://scripts/data/equip_def.gd" id="equip_def"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="drop_entry"]
+[ext_resource type="Resource" path="res://data/items/equips/training_sword.tres" id="training_sword"]
+[ext_resource type="Resource" path="res://data/items/equips/linen_tunic.tres" id="linen_tunic"]
+[ext_resource type="Resource" path="res://data/items/equips/trail_pants.tres" id="trail_pants"]
+[ext_resource type="Resource" path="res://data/items/use/red_potion.tres" id="red_potion"]
+
+[sub_resource type="Resource" id="stats"]
+script = ExtResource("stat_block")
+strength = 12
+dexterity = 5
+intelligence = 4
+luck = 4
+
+[sub_resource type="Resource" id="potions"]
+script = ExtResource("drop_entry")
+item = ExtResource("red_potion")
+chance = 1.0
+min_amount = 5
+max_amount = 5
+
+[resource]
+script = ExtResource("script")
+id = &"warrior"
+display_name = "Warrior"
+primary_stat = "strength"
+secondary_stat = "dexterity"
+mastery = 0.6
+base_hp = 50
+hp_per_level = 14
+base_mp = 20
+mp_per_level = 6
+ap_per_level = 5
+starting_stats = SubResource("stats")
+starting_gear = Array[ExtResource("equip_def")]([ExtResource("training_sword"), ExtResource("linen_tunic"), ExtResource("trail_pants")])
+starting_items = Array[ExtResource("drop_entry")]([SubResource("potions")])

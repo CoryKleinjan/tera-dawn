@@ -29,6 +29,12 @@ func damage(amount: int) -> int:
 		died.emit()
 	return lost
 
+## Changes the maximum (gear, level) without healing; hp stays within the new maximum.
+func set_max(maximum: int) -> void:
+	max_hp = maxi(1, maximum)
+	hp = mini(hp, max_hp)
+	changed.emit()
+
 func heal(amount: int) -> void:
 	if hp <= 0:
 		return

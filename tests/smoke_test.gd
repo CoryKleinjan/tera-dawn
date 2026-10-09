@@ -54,17 +54,91 @@ func _check_content() -> void:
 		for d in m.drops:
 			if d.item == null:
 				problems.append("monster %s drops nothing" % id)
-	_check(problems.is_empty(), "maps and monsters reference valid content %s" % [problems])
+	for id in Content.items:
+		var item: ItemDef = Content.items[id]
+		if item.icon == null:
+			problems.append("item %s has no icon" % id)
+		if item is EquipDef and (item as EquipDef).stats == null:
+			problems.append("equip %s has no stats" % id)
+	for id in Content.jobs:
+		var job: JobDef = Content.jobs[id]
+		if job.starting_stats == null or job.starting_gear.has(null):
+			problems.append("job %s is missing starting stats or gear" % id)
+	_check(problems.is_empty(), "maps, monsters, items and jobs reference valid content %s" % [problems])
+	_check(Content.jobs.has(Game.START_JOB), "the starting job is defined")
+
+func _press(action: String) -> void:
+	var e := InputEventAction.new()
+	e.action = action
+	e.pressed = true
+	Input.parse_input_event(e)
+	await _ticks(1)
+	e = InputEventAction.new()
+	e.action = action
+	e.pressed = false
+	Input.parse_input_event(e)
+	await _ticks(1)
+
+func _first_filled(tab: int) -> int:
+	for i in Inventory.SLOTS:
+		if Game.inventory.at(tab, i) != null:
+			return i
+	return -1
+
+## Inventory, equipment, stats and saving, without the world.
+func _check_character() -> void:
+	Game.new_character()
+	var sword: EquipDef = Content.item(&"training_sword")
+	_check(Game.equipment.at(&"weapon") != null and Game.equipment.at(&"weapon").item == sword, "a new character wears the starting sword")
+	_check(Game.inventory.count_of(Content.item(&"red_potion")) == 5, "a new character carries 5 Red Potions")
+	var dmg := Game.damage_range()
+	_check(dmg.x > 0 and dmg.y >= dmg.x, "the damage range comes from stats and the weapon (%d ~ %d)" % [dmg.x, dmg.y])
+
+	# stacking and a full tab
+	var red: ItemDef = Content.item(&"red_potion")
+	Game.inventory.add(red, 150)
+	_check(Game.inventory.count_of(red) == 155 and Game.inventory.at(ItemDef.Tab.USE, 0).count == 100 and Game.inventory.at(ItemDef.Tab.USE, 1).count == 55, "potions stack up to 100 a slot")
+	var tusk: ItemDef = Content.item(&"boar_tusk")
+	var left := Game.inventory.add(tusk, 200 * Inventory.SLOTS + 7)
+	_check(left == 7 and not Game.inventory.has_room(tusk), "a full Etc tab hands back what doesn't fit")
+	Game.inventory.clear()
+
+	# unequip and equip change stats
+	var attack := Game.stats.attack
+	_check(Game.unequip(&"weapon") == "" and Game.stats.attack == attack - sword.stats.attack, "taking off the sword lowers Weapon Attack")
+	_check(Game.equip(_first_filled(ItemDef.Tab.EQUIP)) == "" and Game.stats.attack == attack, "putting it back on restores Weapon Attack")
+	Game.inventory.add(Content.item(&"leaf_cap"))
+	var defense := Game.stats.defense
+	Game.equip(_first_filled(ItemDef.Tab.EQUIP))
+	_check(Game.stats.defense > defense, "wearing a hat raises Weapon Defense")
+	Game.inventory.add(Content.item(&"dawn_blade"))
+	_check(Game.equip(_first_filled(ItemDef.Tab.EQUIP)) != "", "level 1 can't wear the level 8 Dawn Blade")
+
+	# levels give Ability Points, and STR raises damage
+	Game.gain_xp(Game.xp_need())
+	_check(Game.level == 2 and Game.ap == Content.job(Game.START_JOB).ap_per_level, "levelling up gives Ability Points")
+	var top := Game.damage_range().y
+	for n in 5:
+		Game.add_ap(&"strength")
+	_check(Game.ap == 0 and Game.damage_range().y > top, "spending AP on STR raises damage")
+
+	# saving and loading keeps the bag and the gear
+	Game.inventory.add(tusk, 3)
+	Game.save_game()
+	var inv := JSON.stringify(Game.inventory.to_dict())
+	var worn := JSON.stringify(Game.equipment.to_dict())
+	var strength := Game.base.strength
+	Game.new_character()
+	Game.load_game()
+	_check(JSON.stringify(Game.inventory.to_dict()) == inv and JSON.stringify(Game.equipment.to_dict()) == worn
+		and Game.base.strength == strength, "saving and loading keeps inventory, equipment and stats")
 
 func _run() -> void:
 	_check_content()
 	# Start from a fresh character without touching the real save file.
 	Game.save_path = "user://smoke_test_save.json"
-	Game.level = 1
-	Game.xp = 0
-	Game.shards = 0
-	Game.map_id = &"meadow"
-	Game.refill()
+	_check_character()
+	Game.new_character()
 	var scene: PackedScene = load("res://scenes/main.tscn")
 	world = scene.instantiate() as TDWorld
 	add_child(world)
@@ -114,11 +188,45 @@ func _run() -> void:
 	_check(world.drop_layer.get_child_count() > 0 or Game.shards > shards, "the monster drops Dawnshards")
 	await _ticks(80)
 	for drop in world.drop_layer.get_children():
-		if not is_instance_valid(drop):
+		if not is_instance_valid(drop) or not drop.item.is_currency:
 			continue # picked up while walking to an earlier one
 		p.position = Vector2(drop.position.x, 620)
 		await _ticks(5)
-	_check(Game.shards > shards and world.drop_layer.get_child_count() == 0, "walking over drops picks them up")
+	var currency_left := world.drop_layer.get_children().filter(func(d): return is_instance_valid(d) and not d.taken and d.item.is_currency)
+	_check(Game.shards > shards and currency_left.is_empty(), "walking over Dawnshards picks them up")
+
+	# Items wait for the loot key.
+	for d in world.drop_layer.get_children():
+		d.queue_free()
+	await _ticks(1)
+	var tusk: ItemDef = Content.item(&"boar_tusk")
+	var boots: EquipDef = Content.item(&"leather_boots")
+	for item in [tusk, boots]:
+		var d := TDDrop.create(world, item, 1, p.position + Vector2(0, -20), 620)
+		d.land_x = p.position.x
+		world.drop_layer.add_child(d)
+	await _ticks(40)
+	_check(world.drop_layer.get_child_count() == 2, "items stay on the ground until looted")
+	await _hold("loot", 24)
+	_check(Game.inventory.count_of(tusk) == 1 and Game.inventory.count_of(boots) == 1, "the loot key picks up items and gear")
+
+	# A Red Potion from the Use tab heals.
+	Game.health.set_hp(10)
+	var red: ItemDef = Content.item(&"red_potion")
+	var potions := Game.inventory.count_of(red)
+	_check(world.use_item(_first_filled(ItemDef.Tab.USE)) == ""
+		and Game.health.hp > 10 and Game.inventory.count_of(red) == potions - 1, "drinking a Red Potion heals and uses it up")
+
+	# The windows open with their keys and Esc closes them.
+	for action in TDHud.WINDOW_ACTIONS:
+		await _press(action)
+	var all_open := true
+	for action in TDHud.WINDOW_ACTIONS:
+		all_open = all_open and world.hud.windows[action].visible
+	_check(all_open, "I, E and S open the inventory, equipment and character windows")
+	for action in TDHud.WINDOW_ACTIONS:
+		await _press("pause")
+	_check(world.started and not world.hud.windows["stats"].visible, "Esc closes the windows before opening the menu")
 
 	# Dawn Slash costs MP and hits several monsters.
 	var mp_before := Game.mp

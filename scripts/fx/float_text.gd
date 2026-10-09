@@ -4,7 +4,7 @@ extends Node2D
 
 var world: TDWorld
 var value := 0
-var kind := "hit" # hit, crit or taken
+var kind := "hit" # hit, crit, taken or miss
 var t := 0
 
 func step() -> void:
@@ -21,5 +21,8 @@ func draw_at(ci: CanvasItem, at: Vector2) -> void:
 	var fill := Color("ff5d73") if kind == "crit" else (Color("d79bff") if kind == "taken" else Color("ffb347"))
 	var edge := Color("3b1550") if kind == "taken" else Color("5a2a10")
 	ci.draw_set_transform(at, 0, Vector2(pop, pop))
-	DrawUtil.text(ci, Game.num_font, Vector2.ZERO, str(value), size, Color(fill, a), 0, 8, Color(edge, a))
+	if kind == "miss":
+		DrawUtil.text(ci, Game.num_font, Vector2.ZERO, "MISS", 24, Color(Color("c9d6ff"), a), 0, 8, Color(Color("27305a"), a))
+	else:
+		DrawUtil.text(ci, Game.num_font, Vector2.ZERO, str(value), size, Color(fill, a), 0, 8, Color(edge, a))
 	ci.draw_set_transform(Vector2.ZERO)

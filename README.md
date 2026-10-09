@@ -26,7 +26,9 @@ The game is built to grow: monsters, NPCs, items, skills, effects, maps and biom
 - Nine monsters, from Dewlings to the Flame Boar Chief boss, with patrol and chase behavior.
 - Two NPCs in the meadow village (press Up to talk).
 - EXP, leveling, HP and MP regen, fainting and respawn.
-- **Dawnshards** (currency) dropped by monsters.
+- **Dawnshards** (currency) dropped by monsters, plus potions, monster parts and gear from per-monster drop tables.
+- MapleStory-style stats: STR, DEX, INT and LUK, 5 Ability Points per level, and a damage range worked out from your main stat and weapon.
+- An **inventory** with Equip, Use and Etc tabs, **equipment** in 12 slots that changes your stats, and a **character** window.
 - Saving to `user://save.json`.
 - Keyboard and gamepad controls, fullscreen toggle, title and pause menu.
 
@@ -37,10 +39,14 @@ The game is built to grow: monsters, NPCs, items, skills, effects, maps and biom
 | Move / climb | Arrow keys | Left stick or d-pad |
 | Jump | Space, C or Alt | A |
 | Drop through a platform | Down + Jump | Down + A |
-| Attack | X, Z or Ctrl | X |
+| Attack | X or Ctrl | X |
 | Dawn Slash | A or Shift | Y |
+| Pick up items (hold to keep looting) | Z | B |
+| Inventory | I | Back |
+| Equipment | E | |
+| Character info | S | |
 | Enter a portal | Up | Up |
-| Menu | Esc | Start |
+| Close a window, or the menu | Esc | Start |
 | Fullscreen | F11 | |
 
 ## Running it
@@ -55,7 +61,7 @@ Run the gameplay smoke test headless:
 godot --headless --path . res://tests/smoke_test.tscn
 ```
 
-It checks that all content loads and references real maps, monsters and items, then plays a short scripted session (walk, jump, talk to an NPC, kill a monster, loot, use Dawn Slash, climb, take a portal) and exits non-zero on failure.
+It checks that all content loads and references real maps, monsters and items, then plays a short scripted session (inventory stacking, equipping and stat changes, Ability Points, saving and loading, then walk, jump, talk to an NPC, kill a monster, loot with the loot key, drink a potion, open the windows, use Dawn Slash, climb, take a portal) and exits non-zero on failure.
 
 Render screenshots of the title, both maps and a Dawn Slash (needs a GPU or software Vulkan, and a display; `xvfb-run` works on a headless Linux box):
 
@@ -89,3 +95,5 @@ tools/art/         Sheet slicer, store-art cropper, fx textures, contact-sheet p
 2. **GodotSteam.** Install the GodotSteam GDExtension from the Godot Asset Library into `addons/godotsteam`. Then set `APP_ID` in `scripts/autoload/steam_service.gd`. Achievements (for example `REACH_LEVEL_5`, which the game already unlocks) are defined in the Steamworks dashboard.
 3. **Export.** In Godot, install the export templates (Editor → Manage Export Templates). Then use **Project → Export**: presets for Windows, Linux and macOS are already in `export_presets.cfg`. macOS builds need signing and notarization with an Apple Developer account.
 4. **Upload.** Upload the builds with SteamPipe (`steamcmd` + an app build VDF), set up the store page, and submit for review.
+
+In the windows: double-click gear to wear it or a potion to drink it, drag items to rearrange them or onto the equipment window, and drag an item out of every window to drop it on the ground.

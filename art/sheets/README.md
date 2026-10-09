@@ -79,3 +79,12 @@ has its own list in `art/sheets/hero_main.json`.
 Two sheets came in two versions. The game uses `meadow_backgrounds_a` (crisper, clearer
 castle) and `ropes_props_b` (no label remnants, cleaner shards). The other versions still have
 manifests that cut into `art/build/`, which is ignored, so they can be compared or swapped in.
+
+## Item icons and window art
+
+`items_gear` and `items_consumables` cut the item icons into `assets/sprites/items/`, named
+after the item ids, replacing the placeholders from `tools/art/make_item_placeholders.py`
+(which never overwrites a real icon). `elixir` and `mana_elixir` are art for future potions.
+`ui_windows` cuts the window frame, tabs, slots, buttons and tooltip into
+`assets/sprites/ui/`; the windows still draw with `menu_panel` and `skill_slot` until they're
+switched over to these.

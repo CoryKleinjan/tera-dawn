@@ -90,7 +90,7 @@ static func draw_speech(ci: CanvasItem, bottom_center: Vector2, text: String) ->
 	var font := Game.ui_font
 	var size := 12
 	var max_w := 240.0
-	var lines := _wrap(font, text, size, max_w)
+	var lines := wrap_text(font, text, size, max_w)
 	var w := 0.0
 	for l in lines:
 		w = maxf(w, DrawUtil.text_width(font, l, size))
@@ -115,7 +115,7 @@ static func draw_banner(ci: CanvasItem, center: Vector2, text: String, alpha: fl
 	sb.draw(ci.get_canvas_item(), Rect2(center.x - w / 2.0, center.y - 34, w, 68))
 	DrawUtil.text(ci, Game.num_font, center + Vector2(0, 12), text, 34, Color("5a3414", alpha), 0, 0)
 
-static func _wrap(font: Font, text: String, size: int, max_w: float) -> PackedStringArray:
+static func wrap_text(font: Font, text: String, size: int, max_w: float) -> PackedStringArray:
 	var out := PackedStringArray()
 	var line := ""
 	for word in text.split(" "):

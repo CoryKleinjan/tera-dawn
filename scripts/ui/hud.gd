@@ -1,7 +1,11 @@
 class_name TDHud
 extends CanvasLayer
 ## The screen UI: the status bar (level, HP, MP, EXP, skills, Dawnshards), the in-game
-## overlay and the title / pause menu. Art comes from UiSkin.
+## overlay, the game windows (inventory, equipment, character), and the title / pause menu.
+## Art comes from UiSkin.
+
+## Input actions that open and close a window, in the order the status bar shows them.
+const WINDOW_ACTIONS: Array[String] = ["inventory", "equipment", "stats"]
 
 var world: TDWorld
 var overlay: TDOverlay
@@ -9,6 +13,11 @@ var status: TDStatusBar
 var title: Control
 var play_button: Button
 var ui_theme: Theme
+## Holds the windows so raising one never lifts it above the tooltip or the title menu.
+var window_layer: Control
+## action -> TDWindow
+var windows := {}
+var tooltip: TDItemTooltip
 
 func _ready() -> void:
 	layer = 10
@@ -26,9 +35,53 @@ func _ready() -> void:
 	status.world = world
 	status.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
 	status.offset_top = -TDStatusBar.HEIGHT
-	status.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	status.mouse_filter = Control.MOUSE_FILTER_PASS
 	add_child(status)
+	_build_windows()
 	_build_title()
+
+func _build_windows() -> void:
+	window_layer = Control.new()
+	window_layer.set_anchors_preset(Control.PRESET_FULL_RECT)
+	window_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(window_layer)
+	var view := TDWorld.VIEW
+	var inventory := TDInventoryWindow.new()
+	inventory.position = Vector2(view.x - inventory.size.x - 16, 70)
+	var equipment := TDEquipmentWindow.new()
+	equipment.position = Vector2(inventory.position.x - equipment.size.x - 10, 70)
+	var stats := TDStatsWindow.new()
+	stats.position = Vector2(16, 56)
+	for pair in [["inventory", inventory], ["equipment", equipment], ["stats", stats]]:
+		var w: TDWindow = pair[1]
+		w.hud = self
+		windows[pair[0]] = w
+		window_layer.add_child(w)
+	tooltip = TDItemTooltip.new()
+	tooltip.set_anchors_preset(Control.PRESET_FULL_RECT)
+	tooltip.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(tooltip)
+
+func toggle_window(action: String) -> void:
+	if windows.has(action):
+		windows[action].toggle()
+
+## Closes the window on top (Esc). False if none was open.
+func close_top_window() -> bool:
+	for i in range(window_layer.get_child_count() - 1, -1, -1):
+		var w := window_layer.get_child(i) as TDWindow
+		if w.visible:
+			w.toggle()
+			return true
+	return false
+
+## The open window under a screen point, or null.
+func window_at(pos: Vector2) -> TDWindow:
+	for i in range(window_layer.get_child_count() - 1, -1, -1):
+		var w := window_layer.get_child(i) as TDWindow
+		if w.visible and w.get_global_rect().has_point(pos):
+			return w
+	return null
 
 func _build_title() -> void:
 	title = ColorRect.new()
@@ -85,7 +138,7 @@ func _build_title() -> void:
 	buttons.add_child(quit)
 
 	var keys := Label.new()
-	keys.text = "Arrows move and climb · Space jump · X attack · A Dawn Slash · Up talks and enters portals\nEsc menu · F11 fullscreen · Gamepad: stick · A jump · X attack · Y Dawn Slash · Start menu"
+	keys.text = "Arrows move and climb · Space jump · X attack · A Dawn Slash · Z loot · Up talks and enters portals\nI inventory · E equipment · S character · Esc menu · F11 fullscreen\nGamepad: stick · A jump · X attack · Y Dawn Slash · B loot · Back inventory · Start menu"
 	keys.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	keys.add_theme_font_size_override("font_size", 12)
 	keys.add_theme_color_override("font_color", Color("c9b8d9"))

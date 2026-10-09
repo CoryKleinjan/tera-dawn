@@ -1,5 +1,5 @@
 extends Node
-## Autoload "Content": every monster, NPC, item, skill, effect and map in data/, by id.
+## Autoload "Content": every monster, NPC, item, skill, effect, job and map in data/, by id.
 ##
 ## Content is plain Godot resources (.tres) loaded from these folders at startup, so adding
 ## a monster or a map means adding a file, not code. Lookups by an unknown id push an error
@@ -12,6 +12,7 @@ const FOLDERS := {
 	"skills": "res://data/skills",
 	"effects": "res://data/effects",
 	"maps": "res://data/maps",
+	"jobs": "res://data/jobs",
 }
 
 var monsters := {}
@@ -20,10 +21,11 @@ var items := {}
 var skills := {}
 var effects := {}
 var maps := {}
+var jobs := {}
 
 func _ready() -> void:
 	for kind in FOLDERS:
-		set(kind, _load_folder(FOLDERS[kind]))
+		set(kind, _load_folder(FOLDERS[kind], {}))
 
 func monster(id: StringName) -> MonsterDef:
 	return _lookup(monsters, id, "monster")
@@ -43,15 +45,19 @@ func effect(id: StringName) -> EffectDef:
 func map(id: StringName) -> MapDef:
 	return _lookup(maps, id, "map")
 
+func job(id: StringName) -> JobDef:
+	return _lookup(jobs, id, "job")
+
 func _lookup(table: Dictionary, id: StringName, what: String) -> Resource:
 	if not table.has(id):
 		push_error("Unknown %s id: %s" % [what, id])
 		return null
 	return table[id]
 
-## Loads every resource in a folder into a dictionary keyed by its `id`.
-func _load_folder(path: String) -> Dictionary:
-	var out := {}
+## Loads every resource in a folder and its subfolders into a dictionary keyed by its `id`.
+func _load_folder(path: String, out: Dictionary) -> Dictionary:
+	for sub in DirAccess.get_directories_at(path):
+		_load_folder(path.path_join(sub), out)
 	for file in DirAccess.get_files_at(path):
 		# exported builds list text resources as "name.tres.remap"
 		file = file.trim_suffix(".remap")

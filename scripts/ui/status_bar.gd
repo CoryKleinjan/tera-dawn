@@ -1,9 +1,12 @@
 class_name TDStatusBar
 extends Control
-## The bar along the bottom of the screen: level badge, HP, MP and EXP, the skill slots
-## with their cooldowns, and the Dawnshard purse. Drawn from the UI sheet's art.
+## The bar along the bottom of the screen: level badge, HP, MP and EXP, buttons for the
+## game windows, the skill slots with their cooldowns, and the Dawnshard purse. Drawn from
+## the UI sheet's art.
 
 const HEIGHT := 50.0
+const WINDOW_BUTTON := 34.0
+const WINDOW_LABELS := {"inventory": "Bag", "equipment": "Gear", "stats": "Stats"}
 
 var world: TDWorld
 
@@ -30,6 +33,9 @@ func _draw() -> void:
 	UiSkin.draw_bar(self, "mp_frame", "fill_blue", Vector2(x, 4), float(Game.mp) / Game.max_mp(), 0.95, "%d / %d" % [Game.mp, Game.max_mp()])
 	x += 168 * 0.95 + 6
 	UiSkin.draw_bar(self, "exp_frame", "fill_gold", Vector2(x, 10), float(Game.xp) / need, 1.0, "%.1f%%" % (100.0 * Game.xp / need))
+	# window buttons
+	for i in TDHud.WINDOW_ACTIONS.size():
+		_window_button(TDHud.WINDOW_ACTIONS[i], _window_button_rect(i))
 	# skill slots
 	x = w - 250
 	for action in Game.SKILL_BINDINGS:
@@ -54,6 +60,24 @@ func _skill_slot(skill: SkillDef, action: String, pos: Vector2) -> void:
 		draw_rect(r.grow(-3), Color(0.05, 0.02, 0.15, 0.55))
 	var key := _key_name(action)
 	DrawUtil.text(self, Game.num_font, pos + Vector2(s - 4, s - 2), key, 12, Palette.MIST, -1, 4, Palette.NIGHT)
+
+func _window_button_rect(i: int) -> Rect2:
+	return Rect2(size.x - 380 + i * (WINDOW_BUTTON + 6), (HEIGHT - WINDOW_BUTTON) / 2.0, WINDOW_BUTTON, WINDOW_BUTTON)
+
+func _window_button(action: String, r: Rect2) -> void:
+	var open: bool = world != null and world.hud.windows[action].visible
+	draw_texture_rect(UiSkin.tex("skill_slot"), r, false, Color(1.25, 1.15, 0.9) if open else Color.WHITE)
+	DrawUtil.text(self, Game.ui_font, r.get_center() + Vector2(0, 3), WINDOW_LABELS[action], 10, Palette.SUN if open else Palette.MIST, 0, 3, Palette.NIGHT)
+	DrawUtil.text(self, Game.num_font, r.end + Vector2(-3, -2), _key_name(action), 10, Color(Palette.MIST, 0.8), -1, 3, Palette.NIGHT)
+
+func _gui_input(event: InputEvent) -> void:
+	var mb := event as InputEventMouseButton
+	if mb == null or not mb.pressed or mb.button_index != MOUSE_BUTTON_LEFT or not world.started:
+		return
+	for i in TDHud.WINDOW_ACTIONS.size():
+		if _window_button_rect(i).has_point(mb.position):
+			world.hud.toggle_window(TDHud.WINDOW_ACTIONS[i])
+			accept_event()
 
 func _key_name(action: String) -> String:
 	for e in InputMap.action_get_events(action):

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="EquipDef" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/equip_def.gd" id="script"]
+[ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="stat_block"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/ember_helm.png" id="icon"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="pickup"]
+
+[sub_resource type="Resource" id="stats"]
+script = ExtResource("stat_block")
+defense = 18
+max_hp = 20
+
+[resource]
+script = ExtResource("script")
+id = &"ember_helm"
+display_name = "Ember Helm"
+description = "Blackened iron that shrugs off sparks."
+icon = ExtResource("icon")
+sprite_scale = 0.5
+glow_color = Color(0.62, 0.85, 1.0, 1.0)
+pickup_effect = ExtResource("pickup")
+sell_price = 260
+slot = 1
+required_level = 10
+required_strength = 40
+stats = SubResource("stats")
+variance = 2
