@@ -15,6 +15,7 @@ const FOLDERS := {
 	"jobs": "res://data/jobs",
 	"shops": "res://data/shops",
 	"quests": "res://data/quests",
+	"regions": "res://data/regions",
 }
 
 var monsters := {}
@@ -26,6 +27,7 @@ var maps := {}
 var jobs := {}
 var shops := {}
 var quests := {}
+var regions := {}
 
 func _ready() -> void:
 	for kind in FOLDERS:

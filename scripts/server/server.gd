@@ -114,7 +114,10 @@ func revive(p: SimPlayer) -> void:
 	c.mp = ceili(c.max_mp() / 2.0)
 	p.inv = 120
 	p.dirty_vitals = true
-	_enter_map(p, Character.START_MAP, Content.map(Character.START_MAP).start_x)
+	var town := p.map.def.return_town() if p.map else Character.START_MAP
+	if not Content.maps.has(town):
+		town = Character.START_MAP
+	_enter_map(p, town, Content.map(town).start_x)
 
 func give_xp(p: SimPlayer, amount: int) -> void:
 	var c := p.character
@@ -214,6 +217,14 @@ func on_use_item(peer: int, slot: int) -> void:
 		return
 	var u := stack.item as UseDef
 	var c := p.character
+	var dest := &""
+	if u.teleport != &"":
+		dest = p.map.def.return_town() if u.teleport == &"town" else u.teleport
+		if not Content.maps.has(dest):
+			return
+		if dest == p.map.def.id and p.map.def.town:
+			p.map.tell(p, "You're already in town.", MapInstance.BAD)
+			return
 	c.health.heal(u.hp_for(c.max_hp()))
 	c.restore_mp(u.mp_for(c.max_mp()))
 	p.item_cd = u.cooldown
@@ -221,6 +232,25 @@ func on_use_item(peer: int, slot: int) -> void:
 	p.dirty_character = true
 	if u.use_effect:
 		p.map.broadcast(&"ev_effect", [u.use_effect.id, p.position.x, p.position.y - 40, p.face, peer])
+	if dest != &"":
+		_enter_map(p, dest, Content.map(dest).start_x)
+
+## Takes the player on trip `index` of the NPC `npc_id` they stand by, if they can pay.
+func on_travel(peer: int, npc_id: StringName, index: int) -> void:
+	var p := _player(peer)
+	var npc := p.map.npc_near(p, npc_id) if p and not p.fainted() else null
+	if npc == null or index < 0 or index >= npc.travel.size():
+		return
+	var route := npc.travel[index]
+	if not Content.maps.has(route.target_map):
+		return
+	if p.character.shards < route.price:
+		p.map.tell(p, "You don't have enough Dawnshards.", MapInstance.BAD)
+		return
+	p.character.shards -= route.price
+	p.dirty_vitals = true
+	_enter_map(p, route.target_map, route.target_x)
+	p.map.tell(p, "%s to %s." % [route.by, Content.map(route.target_map).display_name], Palette.SUN)
 
 func on_equip(peer: int, slot: int, place: StringName) -> void:
 	_change(peer, func(c: Character) -> String: return c.equip(slot, place))

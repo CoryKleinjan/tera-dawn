@@ -75,6 +75,7 @@ func _setup_input() -> void:
 	_bind("stats", [KEY_S], [])
 	_bind("quests", [KEY_Q], [])
 	_bind("skills", [KEY_K], [])
+	_bind("worldmap", [KEY_W], [])
 	_bind("pause", [KEY_ESCAPE], [JOY_BUTTON_START])
 	_bind("toggle_fullscreen", [KEY_F11], [])
 

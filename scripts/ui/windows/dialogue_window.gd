@@ -57,6 +57,8 @@ func _options() -> Array:
 	var out := []
 	var def := npc.def
 	out.append_array(_quest_options())
+	if not def.travel.is_empty():
+		out.append(["Travel", _travel_list])
 	if not _jobs_offered().is_empty():
 		out.append(["Choose a job", _job_list])
 	if not def.lines.is_empty():
@@ -94,6 +96,22 @@ func _quest_options() -> Array:
 				_page("%s\n\n%s" % [q.progress_text, _objective_list(q)], [
 					["Back", func() -> void: _main_page(greeting)]])])
 	return out
+
+## Where this NPC can take you, and the fare.
+func _travel_list() -> void:
+	var greeting := npc.def.greeting
+	var opts := []
+	for i in npc.def.travel.size():
+		var r := npc.def.travel[i]
+		var dest: MapDef = Content.maps.get(r.target_map)
+		if dest == null:
+			continue
+		var fare := "free" if r.price == 0 else "%d Dawnshards" % r.price
+		opts.append(["%s to %s (%s)" % [r.by, dest.display_name, fare], func() -> void:
+			Net.ask(&"req_travel", [npc.def.id, i])
+			visible = false])
+	opts.append(["Back", func() -> void: _main_page(greeting)])
+	_page("Where to?", opts)
 
 ## The jobs this instructor teaches that the player could advance into from their job.
 func _jobs_offered() -> Array[JobDef]:

@@ -29,6 +29,7 @@ The game is built to grow: monsters, NPCs, items, skills, effects, maps and biom
 - Two NPCs in the meadow village. Press Up to talk: a dialogue window shows what they offer.
 - **Quests**: six to start, from Elder Rowan and Mira, with kill, collect and visit objectives, a quest item that only drops while you're on its quest, and a repeatable one. A "!" over an NPC means they have a quest for you, "?" means you can hand one in. The quest log (Q) lists what's in progress, available and done, and a tracker under the minimap shows your progress.
 - **Jobs**: everyone starts as a Beginner. Guide Sorrel, the meadow's Job Instructor, turns a level 10 Beginner into a Warrior, Archer, Thief or Pirate (a Magician from level 8) once they have the stats the job asks for, and hands over the job's first weapon. Some gear can only be worn by one job line.
+- **World map** (W, or click the minimap): seven regions with their level ranges, every map placed and joined by its roads, and where you are. Fainting wakes you in the map's town, **Return Scrolls** take you back to town, and **Hobb**'s wagon carries you to Ember Hollow for a fare.
 - **Mira's General Store**: buy potions and starter gear, sell anything (1, 10 or 100 at a time, or all your Etc items at once).
 - EXP, leveling, HP and MP regen, fainting and respawn.
 - **Dawnshards** (currency) dropped by monsters, plus potions, monster parts and gear from per-monster drop tables.
@@ -52,6 +53,7 @@ The game is built to grow: monsters, NPCs, items, skills, effects, maps and biom
 | Character info | S | |
 | Quest log | Q | |
 | Skills | K | |
+| World map | W | |
 | Enter a portal, talk to an NPC | Up | Up |
 | Pick a dialogue option | 1 to 9, or click | |
 | Close a window, or the menu | Esc | Start |

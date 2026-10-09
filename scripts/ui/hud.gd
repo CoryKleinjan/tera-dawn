@@ -5,7 +5,7 @@ extends CanvasLayer
 ## Art comes from UiSkin.
 
 ## Input actions that open and close a window, in the order the status bar shows them.
-const WINDOW_ACTIONS: Array[String] = ["inventory", "equipment", "stats", "skills", "quests"]
+const WINDOW_ACTIONS: Array[String] = ["inventory", "equipment", "stats", "skills", "quests", "worldmap"]
 
 var world: TDWorld
 var overlay: TDOverlay
@@ -49,6 +49,18 @@ func _ready() -> void:
 	quickslots.hud = self
 	add_child(quickslots)
 	_build_windows()
+	# clicking the minimap opens the world map
+	var minimap := Button.new()
+	minimap.flat = true
+	minimap.focus_mode = Control.FOCUS_NONE
+	minimap.position = Vector2(TDWorld.VIEW.x - 182, 10)
+	minimap.size = Vector2(172, 50)
+	minimap.tooltip_text = "World map (W)"
+	minimap.pressed.connect(func() -> void:
+		if world.started:
+			toggle_window("worldmap"))
+	add_child(minimap)
+	move_child(minimap, window_layer.get_index())
 	_build_title()
 
 func _build_windows() -> void:
@@ -65,12 +77,14 @@ func _build_windows() -> void:
 	stats.position = Vector2(16, 56)
 	var quests := TDQuestWindow.new()
 	quests.position = Vector2(16, 120)
+	var worldmap := TDWorldMapWindow.new()
+	worldmap.position = (view - worldmap.size) / 2.0 + Vector2(0, -20)
 	var skills := TDSkillWindow.new()
 	skills.position = Vector2(276, 56)
 	# opened by talking to NPCs rather than by a key
 	var dialogue := TDDialogueWindow.new()
 	var shop := TDShopWindow.new()
-	for pair in [["inventory", inventory], ["equipment", equipment], ["stats", stats], ["quests", quests], ["skills", skills], ["dialogue", dialogue], ["shop", shop]]:
+	for pair in [["inventory", inventory], ["equipment", equipment], ["stats", stats], ["quests", quests], ["skills", skills], ["worldmap", worldmap], ["dialogue", dialogue], ["shop", shop]]:
 		var w: TDWindow = pair[1]
 		w.hud = self
 		windows[pair[0]] = w

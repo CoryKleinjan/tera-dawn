@@ -59,6 +59,8 @@ ICONS = {
     "feather_arrow": ("arrow", "e9dcc0"),
     "iron_star": ("star", "a9b4c2"),
     "lead_bullet": ("bullet", "9c8f86"),
+    "return_scroll": ("scroll", "ffe7a8"),
+    "dawnrise_scroll": ("scroll", "ffd166"),
 }
 
 

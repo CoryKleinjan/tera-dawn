@@ -204,6 +204,13 @@ func _run() -> void:
 		Input.action_release("quick_1")
 		await _physics(5)
 		await _shot("ranged")
+	if only == "" or only == "worldmap":
+		world.hud.toggle_window("worldmap")
+		var wm: TDWorldMapWindow = world.hud.windows["worldmap"]
+		wm._hovered(wm.to_screen(Content.map(&"hollow").world_pos))
+		await _frames(3)
+		await _shot("worldmap")
+		world.hud.toggle_window("worldmap")
 	if only == "" or only == "players":
 		# Two other players nearby. They're on the server but have no game connected.
 		_teleport(world, Vector2(1300, 620))

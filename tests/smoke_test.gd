@@ -58,6 +58,14 @@ func _check_content() -> void:
 				problems.append("%s: bad NPC" % id)
 			elif n.npc.instructs.any(func(j: StringName) -> bool: return not Content.jobs.has(j)):
 				problems.append("%s: %s teaches an unknown job" % [id, n.npc.id])
+		if map.region != &"" and not Content.regions.has(map.region):
+			problems.append("%s: unknown region %s" % [id, map.region])
+		if not Content.maps.has(map.return_town()):
+			problems.append("%s: returns to unknown map %s" % [id, map.return_town()])
+		for n in map.npcs:
+			for route in (n.npc.travel if n.npc else []):
+				if not Content.maps.has(route.target_map):
+					problems.append("%s: %s travels to unknown map %s" % [id, n.npc.id, route.target_map])
 		for c in map.climbables:
 			if c.style == null or c.style.middle == null:
 				problems.append("%s: climbable at %d has no style" % [id, c.x])
@@ -271,7 +279,7 @@ func _run() -> void:
 	_check(Net.server != null and _me() != null, "single player runs its own server")
 	var p := world.player
 	_check(p.on_ground, "player starts on the ground")
-	_check(world.npcs().size() == 3, "the meadow has its three NPCs")
+	_check(world.npcs().size() == 4, "the meadow has its four NPCs")
 	await _ticks(5)
 	_check(world.mobs().all(func(m: TDMob) -> bool: return m.known), "the server tells the game where every monster is")
 
@@ -436,6 +444,7 @@ func _run() -> void:
 	for action in TDHud.WINDOW_ACTIONS:
 		all_open = all_open and world.hud.windows[action].visible
 	_check(all_open, "I, E and S open the inventory, equipment and character windows")
+	world.hud.toggle_window("worldmap") # it covers the others
 	# Hovering gear in the bag shows its tooltip, compared with what's worn.
 	var inv: TDInventoryWindow = world.hud.windows["inventory"]
 	inv.tab = ItemDef.Tab.EQUIP
@@ -468,6 +477,7 @@ func _run() -> void:
 
 	await _check_skills()
 	await _check_ranged()
+	await _check_travel()
 
 	# Dawn Slash costs MP and hits several monsters.
 	var mp_before := Game.me.mp
@@ -673,9 +683,9 @@ func _check_ranged() -> void:
 	ch.inventory.add(arrows, 50)
 	ch.recalc()
 	_me().dirty_character = true
-	_teleport(Vector2(1500, 620))
+	_teleport(Vector2(1380, 620))
 	var m: SimMob = meadow.mobs.filter(func(x: SimMob) -> bool: return x.plat == meadow.layout.platforms[0] and not x.dead)[0]
-	m.position.x = 1500 + 200
+	m.position.x = 1380 + 200
 	world.player.face = 1
 	_me().face = 1
 	world.player.cooldown = 0
@@ -683,7 +693,7 @@ func _check_ranged() -> void:
 	await _ticks(3)
 	_check(Game.me.basic_attack().id == &"bow_shot", "a bow turns the attack key into a shot")
 	var hp := m.health.hp
-	m.position.x = 1500 + 200
+	m.position.x = 1380 + 200
 	await _tap("attack")
 	var flying := world.fx_layer.get_children().filter(func(c: Node) -> bool: return c is TDProjectile)
 	_check(not flying.is_empty(), "the arrow flies")
@@ -726,6 +736,47 @@ func _check_ranged() -> void:
 	ch.recalc()
 	_me().dirty_character = true
 	await _ticks(2)
+
+## The world map, Hobb's wagon, return scrolls, and waking up in the right town.
+func _check_travel() -> void:
+	var ch := _me().character
+	await _press("worldmap")
+	var wm: TDWorldMapWindow = world.hud.windows["worldmap"]
+	_check(wm.visible and TDWorldMapWindow.placed().size() >= 2, "W opens the world map with the maps on it")
+	wm._hovered(wm.to_screen(Content.map(&"hollow").world_pos))
+	_check(wm.hovered == &"hollow", "hovering a dot picks that map")
+	await _press("worldmap")
+	# Hobb's wagon to Ember Hollow costs 150 Dawnshards.
+	var hobb: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"wagon_driver")[0]
+	ch.shards = 1000
+	_me().dirty_vitals = true
+	_me().inv = 100000
+	_teleport(Vector2(hobb.position.x - 30, 620))
+	await _ticks(2)
+	await _tap("move_up")
+	var talk: TDDialogueWindow = world.hud.windows["dialogue"]
+	var labels: Array = talk.options.map(func(o: Array) -> String: return o[0])
+	_check(labels.has("Travel"), "the wagon driver offers to travel")
+	talk.choose(labels.find("Travel"))
+	_check(str(talk.options[0][0]).begins_with("Wagon to Ember Hollow"), "the trip lists where it goes and the fare")
+	talk.choose(0)
+	await _ticks(3)
+	_check(world.map.id == &"hollow" and Game.me.shards == 850, "the wagon takes you there for 150 Dawnshards")
+	# A Return Scroll brings you back to town.
+	var scroll: ItemDef = Content.item(&"return_scroll")
+	ch.inventory.add(scroll, 2)
+	_me().dirty_character = true
+	_me().item_cd = 0
+	await _ticks(2)
+	world.hud.windows["inventory"].tab = ItemDef.Tab.USE
+	world.hud.windows["inventory"].use_slot(Game.me.inventory.find(scroll))
+	await _ticks(3)
+	_check(world.map.id == &"meadow" and Game.me.inventory.count_of(scroll) == 1, "a Return Scroll takes you back to town")
+	_me().item_cd = 0
+	world.hud.windows["inventory"].use_slot(Game.me.inventory.find(scroll))
+	await _ticks(2)
+	_check(Game.me.inventory.count_of(scroll) == 1, "it isn't used up when you're already in town")
+	_check(Content.map(&"hollow").return_town() == &"meadow" and Content.map(&"meadow").return_town() == &"meadow", "maps know their town")
 
 func server_forfeit_check(ch: Character) -> void:
 	Net.ask(&"req_quest_forfeit", [&"q04_sweet_nectar"])

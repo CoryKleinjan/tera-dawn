@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="RegionDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/region_def.gd" id="1_region_def"]
+
+[resource]
+script = ExtResource("1_region_def")
+id = &"dawnharbor"
+display_name = "Dawnharbor Coast"
+description = "The busy port at the heart of the mainland. Ships come and go from every shore."
+color = Color(0.560784, 0.847059, 1.0, 1.0)
+label_pos = Vector2(470.0, 250.0)
+level_text = "Lv. 10-15"

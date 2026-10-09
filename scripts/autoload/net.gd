@@ -218,6 +218,11 @@ func req_set_quickslot(i: int, kind: StringName, id: StringName) -> void:
 		server.on_set_quickslot(_sender(), i, kind, id)
 
 @rpc("any_peer", "call_local", "reliable")
+func req_travel(npc_id: StringName, index: int) -> void:
+	if server:
+		server.on_travel(_sender(), npc_id, index)
+
+@rpc("any_peer", "call_local", "reliable")
 func req_advance(npc_id: StringName, job_id: StringName) -> void:
 	if server:
 		server.on_advance(_sender(), npc_id, job_id)
