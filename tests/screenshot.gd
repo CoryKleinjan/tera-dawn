@@ -112,7 +112,7 @@ func _run() -> void:
 		# A spread of loot on the ground: Dawnshards, a potion, an Etc item and gear.
 		p.position = Vector2(1000, 620)
 		p.face = 1
-		var loot := [&"dawnshard", &"red_potion", &"petal_wing", &"dawn_blade", &"leather_boots", &"dawnshard"]
+		var loot := [&"dawnshard", &"red_potion", &"petal_wing", &"dawn_blade", &"elixir", &"leather_boots", &"dawnshard"]
 		for i in loot.size():
 			var d := TDDrop.create(world, Content.item(loot[i]), 3, Vector2(1100, 600), 620)
 			d.land_x = 1100 + (i - (loot.size() - 1) / 2.0) * TDWorld.DROP_SPACING

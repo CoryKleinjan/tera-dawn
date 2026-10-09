@@ -39,7 +39,7 @@ func place_at(at: Vector2) -> StringName:
 func _draw_body() -> void:
 	# portrait
 	var box := Rect2(PAD + SLOT + GAP, GRID_Y + SLOT + GAP, SLOT * 2 + GAP, SLOT * 2 + GAP)
-	DrawUtil.round_rect(self, box, 10, Color(Palette.NIGHT, 0.55))
+	draw_texture_rect(UiSkin.tex("equip_doll_bg"), box, false)
 	if portrait:
 		var s := minf(box.size.x / portrait.get_width(), box.size.y / portrait.get_height()) * 1.3
 		var ps := portrait.get_size() * s

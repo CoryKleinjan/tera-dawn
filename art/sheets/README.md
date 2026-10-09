@@ -34,6 +34,7 @@ trims it.
 | `key` | `[0.35, 0.8]` | Magenta sheets: how magenta a pixel must be to start and finish fading out. Raise it if purple art is being eaten. |
 | `label_band` | `0.16` | Top part of each cell (fraction of its height) where the label may be. |
 | `blank_top` | | Paint the top N rows of the cell with background, for labels that touch the art. |
+| `blank` | | Rects `[[x0, y0, x1, y1], ...]` inside the cell to paint with background, for a label beside art that reaches the top. |
 | `keep` | `"all"` | `"largest"` keeps only the biggest piece; `"split"` saves each piece as `name_1`, `name_2`... |
 | `shadow` | `false` | Dark sheets: also remove the soft drop shadow under the sprite. |
 | `inset` | `3` | Pixels trimmed off every cell edge (the divider lines). |
@@ -86,5 +87,6 @@ manifests that cut into `art/build/`, which is ignored, so they can be compared 
 after the item ids, replacing the placeholders from `tools/art/make_item_placeholders.py`
 (which never overwrites a real icon). `elixir` and `mana_elixir` are art for future potions.
 `ui_windows` cuts the window frame, tabs, slots, buttons and tooltip into
-`assets/sprites/ui/`; the windows still draw with `menu_panel` and `skill_slot` until they're
-switched over to these.
+`assets/sprites/ui/`, which the game windows and the status bar's window buttons draw with.
+`item_slot_hover` isn't used: its glow kept a pink tint from the magenta key, so the windows
+brighten `item_slot` on hover instead.

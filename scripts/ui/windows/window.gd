@@ -7,7 +7,7 @@ extends Control
 const TITLE_H := 30.0
 const PAD := 16.0
 const SLOT := 40.0
-const CLOSE_SIZE := 18.0
+const CLOSE_SIZE := 20.0
 
 var hud: TDHud
 var title := ""
@@ -41,16 +41,15 @@ func raise() -> void:
 	get_parent().move_child(self, -1)
 
 func _draw() -> void:
-	UiSkin.panel().draw(get_canvas_item(), Rect2(Vector2.ZERO, size))
-	DrawUtil.text(self, Game.num_font, Vector2(PAD + 2, 26), title, 18, Palette.SUN, 1, 4, Palette.NIGHT)
+	UiSkin.window_frame().draw(get_canvas_item(), Rect2(Vector2.ZERO, size))
+	DrawUtil.text(self, Game.num_font, Vector2(PAD + 2, 20), title, 15, Palette.SUN, 1, 4, Palette.NIGHT)
 	var c := _close_rect()
 	var hot := c.has_point(_hover)
-	DrawUtil.round_rect(self, c, 5, Color(Palette.EMBER if hot else Palette.PLUM, 0.9))
-	DrawUtil.text(self, Game.ui_font, c.get_center() + Vector2(0, 5), "x", 14, Palette.MIST)
+	draw_texture_rect(UiSkin.tex("window_close"), c, false, Color(1.25, 1.15, 1.0) if hot else Color.WHITE)
 	_draw_body()
 
 func _close_rect() -> Rect2:
-	return Rect2(size.x - PAD - CLOSE_SIZE + 4, 10, CLOSE_SIZE, CLOSE_SIZE)
+	return Rect2(size.x - PAD - CLOSE_SIZE + 6, 4, CLOSE_SIZE, CLOSE_SIZE)
 
 func _gui_input(event: InputEvent) -> void:
 	var mb := event as InputEventMouseButton
@@ -88,9 +87,10 @@ func _hovered(_at: Vector2) -> void:
 
 ## An item slot: frame, icon and stack count. `dim` greys it out (being dragged, unusable).
 func draw_slot(r: Rect2, stack: ItemStack, dim := false, label := "") -> void:
-	draw_texture_rect(UiSkin.tex("skill_slot"), r, false, Color(1, 1, 1, 0.95))
-	if r.has_point(_hover):
-		DrawUtil.round_rect(self, r.grow(-3), 6, Color(1, 0.9, 0.6, 0.18))
+	var hot := r.has_point(_hover)
+	draw_texture_rect(UiSkin.tex("item_slot"), r, false, Color(1.3, 1.2, 1.0) if hot else Color.WHITE)
+	if hot:
+		DrawUtil.round_rect(self, r.grow(-4), 5, Color(1, 0.85, 0.45, 0.16))
 	if stack == null:
 		if label != "":
 			DrawUtil.text(self, Game.ui_font, r.get_center() + Vector2(0, 4), label, 9, Color(Palette.MIST, 0.45))

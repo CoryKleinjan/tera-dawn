@@ -30,10 +30,9 @@ func _draw_body() -> void:
 		var main := stat == StringName(Game.job.primary_stat)
 		y = _row(y, StatBlock.LABELS[stat], text, Palette.SUN if main else Palette.MIST)
 		if Game.ap > 0:
-			var r := Rect2(size.x - PAD - 20, y - ROW - 13, 18, 16)
+			var r := Rect2(size.x - PAD - 20, y - ROW - 14, 18, 18)
 			_plus[stat] = r
-			DrawUtil.round_rect(self, r, 4, Palette.SUN if r.has_point(_hover) else Color("e9b44c"))
-			DrawUtil.text(self, Game.num_font, r.get_center() + Vector2(0, 6), "+", 15, Color("3b2208"))
+			draw_texture_rect(UiSkin.tex("stat_plus"), r, false, Color(1.25, 1.2, 1.1) if r.has_point(_hover) else Color.WHITE)
 	y = _divider(y)
 	var dmg := Game.damage_range()
 	y = _row(y, "Damage", "%d ~ %d" % [dmg.x, dmg.y], Palette.SUN)

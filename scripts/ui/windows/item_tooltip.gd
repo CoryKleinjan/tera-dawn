@@ -101,8 +101,7 @@ func _draw() -> void:
 		pos.x = at.x - W - 12
 	pos.y = clampf(pos.y, 4, view.y - h - 4)
 	var r := Rect2(pos, Vector2(W, h))
-	DrawUtil.round_rect(self, r, 10, Color(0.08, 0.05, 0.16, 0.94))
-	draw_rect(r.grow(-3), Color(Palette.SUN, 0.3), false, 1.0)
+	UiSkin.tooltip_frame().draw(get_canvas_item(), r)
 	var y := pos.y + 10
 	for l in lines:
 		y += l[2] + 5

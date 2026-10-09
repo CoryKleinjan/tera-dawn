@@ -20,7 +20,7 @@ func _init() -> void:
 
 func _tab_rect(t: int) -> Rect2:
 	var w := (size.x - PAD * 2) / ItemDef.Tab.size()
-	return Rect2(PAD + t * w, TAB_Y, w - 3, 24)
+	return Rect2(PAD + t * w - 3, TAB_Y - 1, w + 6, 26)
 
 func slot_rect(i: int) -> Rect2:
 	return Rect2(PAD + (i % COLS) * (SLOT + GAP), GRID_Y + (i / COLS) * (SLOT + GAP), SLOT, SLOT)
@@ -35,9 +35,9 @@ func _draw_body() -> void:
 	for t in ItemDef.Tab.size():
 		var r := _tab_rect(t)
 		var on := t == tab
-		DrawUtil.round_rect(self, r, 7, Color(Palette.SUN, 0.95) if on else Color(Palette.PLUM, 0.85))
+		draw_texture_rect(UiSkin.tex("window_tab_on" if on else "window_tab_off"), r, false)
 		DrawUtil.text(self, Game.ui_font, r.get_center() + Vector2(0, 5), ItemDef.TAB_NAMES[t], 13,
-			Color("3b2208") if on else Palette.MIST)
+			Color("3b2208") if on else Palette.MIST, 0, 0 if on else 3, Palette.NIGHT)
 	var dragged := _dragged_index()
 	for i in Inventory.SLOTS:
 		draw_slot(slot_rect(i), Game.inventory.at(tab, i), i == dragged)

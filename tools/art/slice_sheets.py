@@ -262,6 +262,8 @@ def cut_cell(rgb_full, bg, box, opts):
     cell = rgb_full[y0 + ins:y1 - ins, x0 + ins:x1 - ins].astype(float)
     if opts.get("blank_top"):  # a label that touches the art: paint its rows over with background
         cell[:opts["blank_top"]] = bg
+    for bx0, by0, bx1, by1 in opts.get("blank", []):  # paint rects over with background (a label beside the art)
+        cell[by0:by1, bx0:bx1] = bg
     if "crop" in opts:  # [x0, y0, x1, y1] inside the cell, in source pixels
         cx0, cy0, cx1, cy1 = opts["crop"]
         cell = cell[cy0:cy1, cx0:cx1]

@@ -40,6 +40,15 @@ static func box(name: String, margin_x: float, margin_y: float, pad_x := 0.0, pa
 static func panel() -> StyleBoxTexture:
 	return box("menu_panel", 16, 16, 28, 24)
 
+## The game windows' frame (inventory, equipment, character): gold trim and a title strip.
+static func window_frame() -> StyleBoxTexture:
+	var sb := box("window_frame", 22, 24)
+	sb.texture_margin_bottom = 20
+	return sb
+
+static func tooltip_frame() -> StyleBoxTexture:
+	return box("tooltip_frame", 12, 12)
+
 ## Styles for a gold button in every state.
 static func style_button(b: Button) -> void:
 	b.add_theme_stylebox_override("normal", box("button_normal", 16, 14))
