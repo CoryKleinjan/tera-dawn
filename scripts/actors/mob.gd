@@ -112,7 +112,7 @@ func step() -> void:
 # ---------- HD-2D visuals ----------
 
 func _ready() -> void:
-	z = randf_range(0.15, 0.32)
+	z = TDStage.Z_MONSTER + randf() * TDStage.Z_MONSTER_SPREAD
 	rig = SpriteRig.new()
 	rig.setup(def.sprite_frames, def.texture, TDStage.TEXEL * def.sprite_scale, def.size.x * 1.1)
 	add_child(rig)

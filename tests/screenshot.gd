@@ -78,7 +78,7 @@ func _run() -> void:
 		p.position = Vector2(700, 600)
 		await _physics(2)
 		Input.action_press("move_up")
-		await _physics(16)
+		await _physics(40)
 		Input.action_release("move_up")
 		await _shot("rope")
 		p.inv = 100000

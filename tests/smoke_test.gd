@@ -114,16 +114,20 @@ func _run() -> void:
 	_check(world.drop_layer.get_child_count() > 0 or Game.shards > shards, "the monster drops Dawnshards")
 	await _ticks(80)
 	for drop in world.drop_layer.get_children():
+		if not is_instance_valid(drop):
+			continue # picked up while walking to an earlier one
 		p.position = Vector2(drop.position.x, 620)
 		await _ticks(5)
 	_check(Game.shards > shards and world.drop_layer.get_child_count() == 0, "walking over drops picks them up")
 
 	# Dawn Slash costs MP and hits several monsters.
 	var mp_before := Game.mp
+	var level := Game.level
 	p.cooldown = 0
 	await _tap("skill")
-	# MP regen may tick once during the key press.
-	_check(mp_before - Game.mp >= Content.skill(&"dawn_slash").mp_cost - 1, "Dawn Slash spends MP")
+	_check(p.action_anim == &"slash", "Dawn Slash plays its animation")
+	# MP regen may tick once during the key press, and a kill that levels up refills MP.
+	_check(Game.level > level or mp_before - Game.mp >= Content.skill(&"dawn_slash").mp_cost - 1, "Dawn Slash spends MP")
 
 	# Climb the rope at x=700 up to the platform at y=420.
 	await _ticks(40)

@@ -40,7 +40,7 @@ func _ready() -> void:
 		burst.damping_max = 16.0
 		burst.scale_amount_min = 0.5
 		burst.scale_amount_max = 1.3
-		burst.position = TDStage.to3d(position, 0.7)
+		burst.position = TDStage.to3d(position, TDStage.Z_EFFECT)
 		burst.emitting = true
 		add_child(burst)
 	_sync()
@@ -62,11 +62,11 @@ func _sync() -> void:
 		if def.lifetime > 0:
 			i = int(t / 60.0 * def.fps) % def.frames.size()  # long effects loop their frames
 		sprite.texture = def.frames[i]
-		sprite.position = TDStage.to3d(at, 0.7)
+		sprite.position = TDStage.to3d(at, TDStage.Z_EFFECT)
 		if def.fade_out:
 			sprite.transparency = clampf((k - 0.6) / 0.4, 0.0, 1.0)
 	if flash:
-		flash.position = TDStage.to3d(at, 1.4)
+		flash.position = TDStage.to3d(at, TDStage.Z_EFFECT + 0.6)
 		flash.light_energy = def.light_energy * (1.0 - k)
 
 ## The caption ("LEVEL UP!"), drawn by the overlay so it stays sharp.
