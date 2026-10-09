@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=56 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=57 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/meadow.tres" id="2_meadow"]
@@ -25,24 +25,6 @@ y = -1.0
 depth = -3.2
 scale = 1.4
 flip = false
-
-[sub_resource type="Resource" id="Resource_38"]
-script = ExtResource("12_prop_placement")
-texture = ExtResource("15_arch")
-x = 1841.0
-y = -1.0
-depth = -6.4
-scale = 0.94
-flip = true
-
-[sub_resource type="Resource" id="Resource_37"]
-script = ExtResource("12_prop_placement")
-texture = ExtResource("14_floating_rock")
-x = 2119.0
-y = 259.0
-depth = -2.3
-scale = 1.09
-flip = true
 
 [sub_resource type="Resource" id="Resource_36"]
 script = ExtResource("12_prop_placement")
@@ -278,6 +260,27 @@ x = 300.0
 y = 490.0
 width = 340.0
 
+[sub_resource type="Resource" id="Land_1"]
+script = ExtResource("3_platform_def")
+x = 2070.0
+y = 170.0
+width = 100.0
+look = ExtResource("14_floating_rock")
+
+[sub_resource type="Resource" id="Land_2"]
+script = ExtResource("3_platform_def")
+x = 1860.0
+y = 557.2
+width = 120.0
+look = ExtResource("15_arch")
+
+[sub_resource type="Resource" id="Rope_10_0"]
+script = ExtResource("4_climbable_def")
+x = 2095.0
+top = 170.0
+bottom = 620.0
+style = ExtResource("6_rope")
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"sunny_slope"
@@ -290,11 +293,11 @@ height = 700
 ground_y = 620
 start_x = 120.0
 lantern_spacing = 700.0
-platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10")])
-climbables = Array[ExtResource("4_climbable_def")]([SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18"), SubResource("Resource_19"), SubResource("Resource_20")])
+platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Land_1"), SubResource("Land_2")])
+climbables = Array[ExtResource("4_climbable_def")]([SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18"), SubResource("Resource_19"), SubResource("Resource_20"), SubResource("Rope_10_0")])
 portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_21"), SubResource("Resource_22")])
 spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_23"), SubResource("Resource_24"), SubResource("Resource_25"), SubResource("Resource_26"), SubResource("Resource_27"), SubResource("Resource_28"), SubResource("Resource_29"), SubResource("Resource_30"), SubResource("Resource_31"), SubResource("Resource_32"), SubResource("Resource_33"), SubResource("Resource_34")])
-props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_35"), SubResource("Resource_36"), SubResource("Resource_37"), SubResource("Resource_38"), SubResource("Resource_39")])
+props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_35"), SubResource("Resource_36"), SubResource("Resource_39")])
 region = &"dawnrise_isle"
 world_pos = Vector2(74.0, 204.0)
 return_map = &"meadow"

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=50 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=49 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/coast.tres" id="2_coast"]
@@ -11,7 +11,6 @@
 [ext_resource type="Resource" path="res://data/monsters/reef_gull.tres" id="9_reef_gull"]
 [ext_resource type="Resource" path="res://data/monsters/coral_turret.tres" id="10_coral_turret"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="11_prop_placement"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tall_ledge.png" id="12_tall_ledge"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/bush_large.png" id="13_bush_large"]
 
 [sub_resource type="Resource" id="Resource_36"]
@@ -22,42 +21,6 @@ y = -1.0
 depth = -3.5
 scale = 1.07
 flip = false
-
-[sub_resource type="Resource" id="Resource_35"]
-script = ExtResource("11_prop_placement")
-texture = ExtResource("12_tall_ledge")
-x = 2008.0
-y = -1.0
-depth = -7.0
-scale = 0.9
-flip = true
-
-[sub_resource type="Resource" id="Resource_34"]
-script = ExtResource("11_prop_placement")
-texture = ExtResource("12_tall_ledge")
-x = 2583.0
-y = -1.0
-depth = -2.9
-scale = 1.36
-flip = true
-
-[sub_resource type="Resource" id="Resource_33"]
-script = ExtResource("11_prop_placement")
-texture = ExtResource("12_tall_ledge")
-x = 1635.0
-y = -1.0
-depth = -3.0
-scale = 0.92
-flip = true
-
-[sub_resource type="Resource" id="Resource_32"]
-script = ExtResource("11_prop_placement")
-texture = ExtResource("12_tall_ledge")
-x = 279.0
-y = -1.0
-depth = -5.0
-scale = 1.22
-flip = true
 
 [sub_resource type="Resource" id="Resource_31"]
 script = ExtResource("7_spawn_def")
@@ -256,6 +219,30 @@ x = 300.0
 y = 490.0
 width = 420.0
 
+[sub_resource type="Resource" id="Land_1"]
+script = ExtResource("3_platform_def")
+x = 130.0
+y = 540.0
+width = 140.0
+
+[sub_resource type="Resource" id="Land_2"]
+script = ExtResource("3_platform_def")
+x = 1400.0
+y = 540.0
+width = 140.0
+
+[sub_resource type="Resource" id="Land_3"]
+script = ExtResource("3_platform_def")
+x = 2550.0
+y = 540.0
+width = 140.0
+
+[sub_resource type="Resource" id="Land_4"]
+script = ExtResource("3_platform_def")
+x = 1980.0
+y = 540.0
+width = 140.0
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"coral_reef"
@@ -268,11 +255,11 @@ height = 700
 ground_y = 620
 start_x = 120.0
 lantern_spacing = 700.0
-platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9")])
+platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Land_1"), SubResource("Land_2"), SubResource("Land_3"), SubResource("Land_4")])
 climbables = Array[ExtResource("4_climbable_def")]([SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18")])
 portals = Array[ExtResource("6_portal_def")]([SubResource("Resource_19"), SubResource("Resource_20")])
 spawns = Array[ExtResource("7_spawn_def")]([SubResource("Resource_21"), SubResource("Resource_22"), SubResource("Resource_23"), SubResource("Resource_24"), SubResource("Resource_25"), SubResource("Resource_26"), SubResource("Resource_27"), SubResource("Resource_28"), SubResource("Resource_29"), SubResource("Resource_30"), SubResource("Resource_31")])
-props = Array[ExtResource("11_prop_placement")]([SubResource("Resource_32"), SubResource("Resource_33"), SubResource("Resource_34"), SubResource("Resource_35"), SubResource("Resource_36")])
+props = Array[ExtResource("11_prop_placement")]([SubResource("Resource_36")])
 region = &"driftcove"
 world_pos = Vector2(259.0, 482.0)
 return_map = &"driftcove"

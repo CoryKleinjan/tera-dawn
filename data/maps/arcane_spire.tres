@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=44 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=42 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/lumewood.tres" id="2_lumewood"]
@@ -14,8 +14,6 @@
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="12_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_large.png" id="13_tree_large"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_small.png" id="14_tree_small"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/arch.png" id="15_arch"]
-
 [sub_resource type="Resource" id="Resource_28"]
 script = ExtResource("12_prop_placement")
 texture = ExtResource("13_tree_large")
@@ -23,24 +21,6 @@ x = 1532.0
 y = -1.0
 depth = -2.8
 scale = 1.26
-flip = false
-
-[sub_resource type="Resource" id="Resource_27"]
-script = ExtResource("12_prop_placement")
-texture = ExtResource("15_arch")
-x = 1398.0
-y = -1.0
-depth = -3.7
-scale = 1.49
-flip = false
-
-[sub_resource type="Resource" id="Resource_26"]
-script = ExtResource("12_prop_placement")
-texture = ExtResource("15_arch")
-x = 1699.0
-y = -1.0
-depth = -4.7
-scale = 1.4
 flip = false
 
 [sub_resource type="Resource" id="Resource_25"]
@@ -209,6 +189,12 @@ x = 300.0
 y = 490.0
 width = 340.0
 
+[sub_resource type="Resource" id="Land_1"]
+script = ExtResource("3_platform_def")
+x = 1770.0
+y = 540.0
+width = 180.0
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"arcane_spire"
@@ -221,11 +207,11 @@ height = 700
 ground_y = 620
 start_x = 120.0
 lantern_spacing = 700.0
-platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6")])
+platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Land_1")])
 climbables = Array[ExtResource("4_climbable_def")]([SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12")])
 portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_13")])
 spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18"), SubResource("Resource_19"), SubResource("Resource_20"), SubResource("Resource_21"), SubResource("Resource_22")])
-props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_23"), SubResource("Resource_24"), SubResource("Resource_25"), SubResource("Resource_26"), SubResource("Resource_27"), SubResource("Resource_28")])
+props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_23"), SubResource("Resource_24"), SubResource("Resource_25"), SubResource("Resource_28")])
 region = &"lumewood"
 world_pos = Vector2(627.0, 53.0)
 return_map = &"lumewood"

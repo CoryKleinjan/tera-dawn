@@ -276,7 +276,13 @@ layers (or add one here) rather than a raw number.
 2. Lay it out: `platforms` (one-way, numbered from 1; the floor is 0), `climbables` (x, top,
    bottom and a climb style: rope, vine, ladder or rope ladder) and `portals`.
 3. Fill it: `spawns`, `npcs` (an **NpcPlacement** with an NpcDef and an x) and hand-placed
-   `props` on top of the biome's random decoration.
+   `props` on top of the biome's random decoration. Anything that looks like ground (a
+   floating rock, a tall ledge, an arch) is a platform with that picture as its `look`,
+   never a prop, so everything that looks walkable is. Every platform, rope, portal, NPC
+   and spawn must be reachable with the hero's own jump from where players arrive, and no
+   two portals on a map may lead to the same map (`tests/content/content_reach_test.gd`).
+   A platform more than about 90 px above the one below needs a rope or ladder. A map can
+   be taller than 700 (more floors, more exits); keep `ground_y` 80 above `height`.
 4. Connect it: add a **PortalDef** on an existing map whose `target_map` is the new id, and a
    portal back.
 5. Place it in the world: its `region` (a **RegionDef** in `data/regions/`), `world_pos` on
