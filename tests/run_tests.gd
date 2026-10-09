@@ -4,9 +4,22 @@ extends Node
 ##   godot --headless --path . res://tests/run_tests.tscn -- inventory   (only files or tests whose name contains "inventory")
 
 const DIRS := ["res://tests/unit", "res://tests/content", "res://tests/server", "res://tests/ui"]
+## A test that takes longer than this (in seconds) has hung, usually on a script error.
+const TEST_TIMEOUT := 120.0
+
+## The test that's running, for the watchdog.
+var _current := ""
+var _current_started := 0
 
 func _ready() -> void:
 	_run.call_deferred()
+
+func _process(_delta: float) -> void:
+	if _current != "" and Time.get_ticks_msec() - _current_started > TEST_TIMEOUT * 1000.0:
+		print("FAIL %s: still running after %ds; it probably hit a script error" % [_current, TEST_TIMEOUT])
+		print("\nstopped: a test hung")
+		get_tree().quit(1)
+		_current = ""
 
 func _run() -> void:
 	var only := ""
@@ -17,7 +30,10 @@ func _run() -> void:
 	var failed: Array[String] = []
 	var started := Time.get_ticks_msec()
 	for path in _files():
-		var case := (load(path).new()) as TestCase
+		var script := load(path) as Script
+		var case: TestCase = null
+		if script and script.can_instantiate():
+			case = script.new() as TestCase
 		if case == null:
 			failed.append("%s: not a TestCase" % path)
 			continue
@@ -31,6 +47,8 @@ func _run() -> void:
 				continue
 			case.failures.clear()
 			seed(12345) # every test sees the same random numbers
+			_current = "%s.%s" % [file, test]
+			_current_started = Time.get_ticks_msec()
 			await case.before_each()
 			await case.call(test)
 			await case.after_each()
@@ -43,6 +61,7 @@ func _run() -> void:
 				failed.append("%s.%s" % [file, test])
 		case.queue_free()
 		await get_tree().process_frame
+	_current = ""
 	print("\n%d passed, %d failed in %.1fs" % [passed, failed.size(), (Time.get_ticks_msec() - started) / 1000.0])
 	for f in failed:
 		print("  failed: " + f)
