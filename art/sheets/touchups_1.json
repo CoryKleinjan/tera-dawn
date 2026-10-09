@@ -1,0 +1,93 @@
+{
+  "source": "art/source/touchups_1.png",
+  "out_dir": "art/build/touchups_1",
+  "label_band": 0.12,
+  "strip_labels": true,
+  "grid": {
+    "rows": [
+      0,
+      577,
+      585,
+      1023
+    ],
+    "cols": [
+      [
+        0,
+        305,
+        611,
+        619,
+        1535
+      ],
+      [
+        0,
+        1535
+      ],
+      [
+        0,
+        735,
+        1198,
+        1535
+      ]
+    ]
+  },
+  "cells": [
+    [
+      "lantern_unlit",
+      "lantern_lit",
+      "",
+      "near"
+    ],
+    [
+      ""
+    ],
+    [
+      "list_row_hover",
+      "slider_knob_hover",
+      "cooldown_cover"
+    ]
+  ],
+  "overrides": {
+    "lantern_unlit": {
+      "scale": 0.2,
+      "out_dir": "assets/sprites/tiles/emberreach",
+      "keep": "largest"
+    },
+    "lantern_lit": {
+      "scale": 0.2,
+      "out_dir": "assets/sprites/tiles/emberreach",
+      "keep": "largest"
+    },
+    "near": {
+      "scale": 0.284,
+      "crop": [
+        3,
+        150,
+        913,
+        446
+      ],
+      "out_dir": "assets/sprites/backgrounds/lumewood",
+      "extend_bottom": 160
+    },
+    "list_row_hover": {
+      "scale": 0.14,
+      "out_dir": "assets/sprites/ui/menu",
+      "keep": "largest"
+    },
+    "slider_knob_hover": {
+      "scale": 0.4,
+      "crop": [
+        160,
+        160,
+        300,
+        300
+      ],
+      "out_dir": "assets/sprites/ui/menu",
+      "keep": "largest"
+    },
+    "cooldown_cover": {
+      "scale": 0.4,
+      "out_dir": "assets/sprites/ui/hud",
+      "keep": "largest"
+    }
+  }
+}

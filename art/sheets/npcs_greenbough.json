@@ -1,0 +1,139 @@
+{
+  "source": "art/source/npcs_greenbough.png",
+  "grid": {
+    "rows": [
+      1,
+      511,
+      1022
+    ],
+    "cols": [
+      1,
+      383,
+      768,
+      1151,
+      1534
+    ]
+  },
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/npcs_greenbough",
+  "cells": [
+    [
+      "greenbough_instructor_1",
+      "greenbough_shop_1",
+      "greenbough_store_1",
+      "greenbough_taxi_1"
+    ],
+    [
+      "greenbough_instructor_2",
+      "greenbough_shop_2",
+      "greenbough_store_2",
+      "greenbough_taxi_2"
+    ]
+  ],
+  "overrides": {
+    "greenbough_instructor_1": {
+      "scale": 0.205
+    },
+    "greenbough_instructor_2": {
+      "scale": 0.205
+    },
+    "greenbough_shop_1": {
+      "scale": 0.205
+    },
+    "greenbough_shop_2": {
+      "scale": 0.205
+    },
+    "greenbough_store_1": {
+      "scale": 0.205
+    },
+    "greenbough_store_2": {
+      "scale": 0.205
+    },
+    "greenbough_taxi_1": {
+      "scale": 0.205
+    },
+    "greenbough_taxi_2": {
+      "scale": 0.205
+    }
+  },
+  "sets": {
+    "greenbough_instructor": {
+      "frames": {
+        "idle1": "npcs_greenbough:greenbough_instructor_1",
+        "idle2": "npcs_greenbough:greenbough_instructor_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/greenbough_instructor.png",
+      "sprite_frames": "assets/animations/npc_greenbough_instructor.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "greenbough_shop": {
+      "frames": {
+        "idle1": "npcs_greenbough:greenbough_shop_1",
+        "idle2": "npcs_greenbough:greenbough_shop_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/greenbough_shop.png",
+      "sprite_frames": "assets/animations/npc_greenbough_shop.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "greenbough_store": {
+      "frames": {
+        "idle1": "npcs_greenbough:greenbough_store_1",
+        "idle2": "npcs_greenbough:greenbough_store_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/greenbough_store.png",
+      "sprite_frames": "assets/animations/npc_greenbough_store.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "greenbough_taxi": {
+      "frames": {
+        "idle1": "npcs_greenbough:greenbough_taxi_1",
+        "idle2": "npcs_greenbough:greenbough_taxi_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/greenbough_taxi.png",
+      "sprite_frames": "assets/animations/npc_greenbough_taxi.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 1.5
+        }
+      }
+    }
+  }
+}

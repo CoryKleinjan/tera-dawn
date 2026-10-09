@@ -1,16 +1,14 @@
 [gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/npcs/village_elder.png" id="2_village_elder"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/npc_greenbough_instructor.tres" id="2_sprite"]
 
 [resource]
 script = ExtResource("1_npc_def")
 id = &"greenbough_instructor"
 display_name = "Ranger Yew"
 title = "Archer Instructor"
-texture = ExtResource("2_village_elder")
-sprite_scale = 0.95
-tint = Color(0.721569, 0.941176, 0.627451, 1.0)
+sprite_frames = ExtResource("2_sprite")
 greeting = "The forest teaches patience. So do I. If you would walk the path of the bow, speak."
 lines = PackedStringArray("Advance at level 10, with the stat the path asks for.", "Practise on the fields outside town. That's what they're for.")
 instructs = Array[StringName]([&"archer"])

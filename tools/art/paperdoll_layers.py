@@ -21,7 +21,7 @@ Writes:
   grip point.
 - assets/sprites/characters/layers/*.png and assets/animations/paperdoll/*.tres: hair (front,
   back, under a hat) per hairstyle, face and eyes per face, cape (behind, and in front for
-  back views), round and kite shields.
+  back views), round and kite shields, gloves.
 - assets/sprites/characters/weapons/<kind>.png: held weapons, pointing right, greyscale.
 
 A hairstyle with a sheet drawn in every pose (art/sheets/hair_<style>_frames.json, the body
@@ -30,7 +30,11 @@ hair is lifted off each pose and set on the hero's head, so it sways with him. U
 hairstyle the top and back of his bald head are repainted in hair greys, so no pose shows
 scalp where the hair doesn't reach.
 
-Hair, cape, shields and weapons are greyscale; the game tints them (hair colour, the worn
+Gloves come from a sheet of the body wearing them in every pose (art/sheets/gloves_frames.json):
+each pose's two gloves are lifted off and set on the hero's hands (the rig's grip and shield
+points), at the size the drawn body is to his.
+
+Hair, cape, shields, gloves and weapons are greyscale; the game tints them (hair colour, the worn
 item's colour). The irises are split off the faces into their own layer for the eye colour.
 """
 import json
@@ -83,6 +87,7 @@ FACE_WIDTH = 1.1      # the face (eyes to mouth) is this wide
 FACE_AT = (0.2, 0.3)  # and centred this far forward and down from the head's centre
 NECK = 0.95           # the neck is this far below the head's centre
 SHIELD_HEIGHT = 1.25
+GLOVE_REACH = 0.9     # a glove is put on a hand only if the drawn one is this near it (head radii)
 SWORD_LENGTH = 1.9    # every weapon is drawn at the scale that makes the sword this long
 WEAPON_LENGTH = 20    # rig "tip" is this far from "grip" along the weapon (only its direction matters)
 
@@ -264,13 +269,13 @@ def drawn_head(arr):
     return np.array([xs.mean(), ys.mean()]), float(r)
 
 
-def body_fit(arr, hair, px):
+def body_fit(arr, hair, px, scales=(0.46, 0.48, 0.5, 0.52, 0.54)):
     """Lines the body a pose was drawn on up with the hero's: (scale, x, y) of the best overlap."""
     figure = (arr[..., 3] > 0) & ~ss.dilate(hair, 1)
     ours = px[..., 3] > 127
     oy, ox = np.nonzero(ours)
     best = None
-    for s in (0.46, 0.48, 0.5, 0.52, 0.54):
+    for s in scales:
         m = np.asarray(Image.fromarray((figure * 255).astype(np.uint8)).resize(
             (max(1, round(figure.shape[1] * s)), max(1, round(figure.shape[0] * s))), Image.BOX)) > 127
         my, mx_ = np.nonzero(m)
@@ -338,6 +343,61 @@ def posed_hair(arr, fi, link):
     grey = cut[..., :3].mean(2, keepdims=True)
     cut[..., :3] = np.repeat(grey, 3, 2).round().astype(np.uint8)
     return scaled(Image.fromarray(cut, "RGBA"), s), (int(round(at[0])), int(round(at[1])))
+
+
+# ---------- gloves drawn on the body ----------
+
+def worn_mask(arr):
+    """A worn piece in a cell of a sheet of the body wearing it (RGBA): its greys and their
+    outline, without the body (peach skin, a cream undershirt, sky-blue shorts) or coloured
+    fringe left by the background."""
+    rgb = arr[..., :3].astype(float)
+    mx, mn = rgb.max(2), rgb.min(2)
+    sat = (mx - mn) / np.maximum(mx, 1)
+    solid = arr[..., 3] > 0
+    grey = solid & (sat < 0.15) & (mx > 60)
+    skin = solid & (rgb[..., 0] > 150) & (rgb[..., 0] > rgb[..., 2] + 40)
+    shorts = solid & (rgb[..., 2] > rgb[..., 0] + 40)
+    return solid & ~skin & ~shorts & ss.dilate(grey, 2) & ((sat < 0.3) | (mx < 90))
+
+
+def posed_gloves(arr, px, hands, reach):
+    """The two gloves of one drawn pose, sized to the hero, each centred on the hand of his
+    nearest to where it sits on the drawn body (no further than `reach`). Returns
+    [(image, top-left)]."""
+    ys = np.nonzero(arr[..., 3] > 0)[0]
+    ours = np.nonzero(px[..., 3] > 127)[0]
+    base = (ours.max() - ours.min() + 1) / (ys.max() - ys.min() + 1)
+    s, x, y = body_fit(arr, np.zeros(arr.shape[:2], bool), px, [base * k for k in (0.92, 0.96, 1.0, 1.04, 1.08)])
+    mask = worn_mask(arr)
+    lab, n = ss.label(mask)
+    if not n:
+        return []
+    # each hand takes the nearest sizeable piece that sits near it on the fitted body (a
+    # piece of shirt or a stray outline elsewhere stays behind)
+    sizes = np.bincount(lab.ravel())[1:]
+    centres = {}
+    for i in np.nonzero(sizes >= max(sizes.max() * 0.15, 8))[0]:
+        gy, gx = np.nonzero(lab == i + 1)
+        if max(np.ptp(gy), np.ptp(gx)) * s <= reach:  # glove-sized
+            centres[i] = np.array([x + gx.mean() * s, y + gy.mean() * s])
+    out = []
+    for hand in hands:
+        near = sorted((np.hypot(*(c - hand)), i) for i, c in centres.items())
+        if not near or near[0][0] > reach:
+            continue
+        i = near[0][1]
+        del centres[i]
+        gy, gx = np.nonzero(lab == i + 1)
+        y0, y1, x0, x1 = gy.min(), gy.max() + 1, gx.min(), gx.max() + 1
+        part = lab[y0:y1, x0:x1] == i + 1
+        cut = arr[y0:y1, x0:x1].copy()
+        cut[~part] = 0
+        grey = cut[..., :3].mean(2, keepdims=True)
+        cut[..., :3] = np.repeat(grey, 3, 2).round().astype(np.uint8)
+        img = scaled(Image.fromarray(cut, "RGBA"), s)
+        out.append((img, (int(round(hand[0] - img.width / 2)), int(round(hand[1] - img.height / 2)))))
+    return out
 
 
 # ---------- weapons ----------
@@ -550,6 +610,20 @@ def main():
                 place(canvas, img, (img.width / 2, img.height / 2), entry["shield"])
             out.append(canvas)
         save_layer(f"shield_{style}", out, fw, fh, index, anims)
+
+    # gloves, on both hands
+    if os.path.exists(os.path.join(ss.SHEETS, "gloves_frames.json")):
+        drawn = cut("gloves_frames")
+        out = []
+        for n, px, entry in zip(names, frames, rig_frames):
+            canvas = blank()
+            cell = drawn.get(spec["frames"][n].split(":", 1)[1])
+            hands = [entry[k] for k in ("grip", "shield") if k in entry]
+            if cell and hands and n not in BACK_VIEW:  # climbing: his hands are off the rig's points
+                for img, at in posed_gloves(np.asarray(cell.img), px, hands, r * GLOVE_REACH):
+                    _paste(canvas, img, *at)
+            out.append(canvas)
+        save_layer("gloves", out, fw, fh, index, anims)
 
     # weapons
     os.makedirs(WEAPONS, exist_ok=True)

@@ -1,0 +1,36 @@
+{
+  "source": "art/source/chairs.png",
+  "out_dir": "assets/sprites/items",
+  "scale": 0.22,
+  "alpha": "hard",
+  "keep": "largest",
+  "fix": "glow_backdrop",
+  "cells": [
+    [
+      "wooden_stool",
+      "cushion_chair",
+      "boar_hide_rug"
+    ],
+    [
+      "barrel_seat",
+      "stump_seat",
+      "crystal_chair"
+    ],
+    [
+      "lantern_bench",
+      "ember_throne",
+      "coral_seat"
+    ]
+  ],
+  "overrides": {
+    "boar_hide_rug": {
+      "keep": "all"
+    },
+    "crystal_chair": {
+      "keep": "all"
+    },
+    "lantern_bench": {
+      "fix": "glow_backdrop_holes"
+    }
+  }
+}

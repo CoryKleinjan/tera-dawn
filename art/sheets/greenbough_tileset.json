@@ -1,0 +1,102 @@
+{
+  "source": "art/source/greenbough_area.png",
+  "region": [
+    0,
+    0,
+    995,
+    1024
+  ],
+  "scale": 0.35,
+  "label_band": 0.2,
+  "out_dir": "assets/sprites/tiles/greenbough",
+  "cells": [
+    [
+      "ground_left",
+      "ground_middle",
+      "ground_right",
+      "platform_small",
+      "platform_medium",
+      "platform_large"
+    ],
+    [
+      "edge_grass",
+      "tall_grass",
+      "tree_large",
+      "tree_small",
+      "bush_large",
+      "bush_small"
+    ],
+    [
+      "rock_large",
+      "rock_small",
+      "stump",
+      "flowers",
+      "signature_plant",
+      "fence"
+    ],
+    [
+      "signpost",
+      "lantern_unlit",
+      "lantern_lit",
+      "building_large",
+      "building_small",
+      "signature_prop"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      244,
+      505,
+      719,
+      1022
+    ],
+    "cols": [
+      [
+        0,
+        164,
+        323,
+        495,
+        641,
+        804,
+        992
+      ],
+      [
+        0,
+        164,
+        323,
+        495,
+        641,
+        804,
+        992
+      ],
+      [
+        0,
+        164,
+        323,
+        495,
+        641,
+        804,
+        992
+      ],
+      [
+        0,
+        164,
+        323,
+        468,
+        677,
+        836,
+        992
+      ]
+    ]
+  },
+  "overrides": {
+    "lantern_lit": {
+      "fix": null,
+      "key": [
+        0.15,
+        0.4
+      ]
+    }
+  }
+}
