@@ -5,8 +5,8 @@ extends Control
 ## the UI sheet's art.
 
 const HEIGHT := 50.0
-const WINDOW_BUTTON := 34.0
-const WINDOW_LABELS := {"inventory": "Bag", "equipment": "Gear", "stats": "Stats"}
+const WINDOW_BUTTON := 38.0
+const WINDOW_ICONS := {"inventory": "bag_button", "equipment": "gear_button", "stats": "stats_button"}
 
 var world: TDWorld
 
@@ -66,9 +66,10 @@ func _window_button_rect(i: int) -> Rect2:
 
 func _window_button(action: String, r: Rect2) -> void:
 	var open: bool = world != null and world.hud.windows[action].visible
-	draw_texture_rect(UiSkin.tex("skill_slot"), r, false, Color(1.25, 1.15, 0.9) if open else Color.WHITE)
-	DrawUtil.text(self, Game.ui_font, r.get_center() + Vector2(0, 3), WINDOW_LABELS[action], 10, Palette.SUN if open else Palette.MIST, 0, 3, Palette.NIGHT)
-	DrawUtil.text(self, Game.num_font, r.end + Vector2(-3, -2), _key_name(action), 10, Color(Palette.MIST, 0.8), -1, 3, Palette.NIGHT)
+	if open:
+		DrawUtil.ellipse(self, r.get_center(), r.size.x / 2.0 + 2, r.size.y / 2.0 + 2, Color(Palette.SUN, 0.45))
+	draw_texture_rect(UiSkin.tex(WINDOW_ICONS[action]), r, false, Color(1.2, 1.15, 1.05) if open else Color.WHITE)
+	DrawUtil.text(self, Game.num_font, r.end + Vector2(0, -1), _key_name(action), 11, Palette.MIST, -1, 4, Palette.NIGHT)
 
 func _gui_input(event: InputEvent) -> void:
 	var mb := event as InputEventMouseButton

@@ -26,5 +26,10 @@
       "moss_ring",
       "cinder_ring"
     ]
-  ]
+  ],
+  "overrides": {
+    "dewdrop_earrings": {
+      "keep": "all"
+    }
+  }
 }
