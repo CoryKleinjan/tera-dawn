@@ -5,7 +5,7 @@ extends Node2D
 ## (see Game.SKILL_BINDINGS) resolved by the world.
 
 const HERO_FRAMES := preload("res://assets/animations/hero.tres")
-const Z := 0.4 # in front of monsters standing at the same spot
+const Z := TDStage.Z_PLAYER
 const FAINT_TICKS := 150
 
 var world: TDWorld

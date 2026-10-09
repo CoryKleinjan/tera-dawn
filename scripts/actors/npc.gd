@@ -43,7 +43,7 @@ func step() -> void:
 func _process(_delta: float) -> void:
 	if rig == null:
 		return
-	rig.place(position, 0.1, position.y)
+	rig.place(position, TDStage.Z_NPC, position.y)
 	rig.face(face)
 
 ## Name tag under the NPC, and a hint when the player is close enough to talk.

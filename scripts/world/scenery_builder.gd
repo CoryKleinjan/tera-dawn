@@ -36,7 +36,7 @@ func _scatter(rule: DecorDef, x0: float, x1: float, y: float, rng: RandomNumberG
 		if rng.randf() < rule.chance:
 			var tex: Texture2D = rule.textures[rng.randi() % rule.textures.size()]
 			var s := TDStage.sprite(tex, rule.texel * rng.randf_range(rule.scale.x, rule.scale.y), rule.shaded)
-			s.position = TDStage.to3d(Vector2(x, y + 3.0), rng.randf_range(rule.depth.x, rule.depth.y))
+			s.position = TDStage.to3d(Vector2(x, y + 3.0), rng.randf_range(TDStage.land_depth(rule.depth.x), TDStage.land_depth(rule.depth.y)))
 			s.flip_h = rng.randf() < 0.5
 			root.add_child(s)
 		x += rng.randf_range(rule.spacing.x, rule.spacing.y)
@@ -46,7 +46,7 @@ func _prop(p: PropPlacement, map: MapDef) -> void:
 		return
 	var y := p.y if p.y >= 0.0 else float(map.ground_y) + 3.0
 	var s := TDStage.sprite(p.texture, TDStage.TEXEL * p.scale)
-	s.position = TDStage.to3d(Vector2(p.x, y), p.depth)
+	s.position = TDStage.to3d(Vector2(p.x, y), TDStage.land_depth(p.depth))
 	s.flip_h = p.flip
 	root.add_child(s)
 	if p.light_color.a > 0.0:
@@ -59,7 +59,7 @@ func _climbable(c: ClimbableDef) -> void:
 	var st := c.style
 	if st == null or st.middle == null:
 		return
-	var z := -0.45
+	var z := TDStage.Z_CLIMBABLE
 	var texel := st.texel
 	var y := c.top
 	if st.top:

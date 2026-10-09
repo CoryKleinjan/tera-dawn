@@ -65,7 +65,7 @@ func _process(_delta: float) -> void:
 		return
 	var resting := vel == Vector2.ZERO
 	var hover := sin(spin * 2.0) * 2.0 if resting else 0.0
-	var p := TDStage.to3d(position + Vector2(0, -2 - hover), 0.5)
+	var p := TDStage.to3d(position + Vector2(0, -2 - hover), TDStage.Z_DROP)
 	gem.position = p
 	if item.world_frames.size() > 1 and not (item.pile_texture and amount >= item.pile_amount):
 		gem.texture = item.world_frames[int(spin * 0.8) % item.world_frames.size()]

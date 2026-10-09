@@ -96,7 +96,7 @@ func _platform_front(pl: Platform, biome: BiomeDef) -> void:
 	if biome.platform_middle == null:
 		return
 	var texel := biome.platform_texel
-	var z := TDStage.PLAT_FRONT + 0.04
+	var z := TDStage.LAND_FRONT
 	var left := biome.platform_left
 	var right := biome.platform_right
 	var mid := biome.platform_middle
