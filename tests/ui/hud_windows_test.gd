@@ -3,8 +3,7 @@ extends TestCase
 ## that has something in every tab: it draws, its tabs switch on click, its hit tests find
 ## what's drawn where, and what it lists matches the character. Windows NPCs open are
 ## tried with every NPC, shop and storage; trade, player shops and the player menu with
-## the server's kind of state. (tests/ui/ui_script_errors_test.gd re-runs these and fails
-## on any script error they print.)
+## the server's kind of state. (tests/run_all.sh fails on any script error they print.)
 
 const KNOWN := ["inventory", "equipment", "stats", "quests", "skills", "worldmap", "community", "collection",
 	"dialogue", "shop", "storage", "player", "trade", "player_shop"]
