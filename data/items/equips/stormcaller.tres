@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="EquipDef" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/equip_def.gd" id="1_equip_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/stormcaller.png" id="2_stormcaller"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="3_shard_pickup"]
+[ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="4_stat_block"]
+[ext_resource type="Resource" path="res://data/skills/gun_shot.tres" id="5_gun_shot"]
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("4_stat_block")
+attack = 41
+
+[resource]
+script = ExtResource("1_equip_def")
+id = &"stormcaller"
+display_name = "Stormcaller"
+description = "A level 30 gun for Pirates who would rather not get close."
+icon = ExtResource("2_stormcaller")
+sprite_scale = 0.4
+glow_color = Color(0.435294, 0.690196, 1.0, 1.0)
+pickup_effect = ExtResource("3_shard_pickup")
+sell_price = 4175
+slot = 0
+jobs = Array[StringName]([&"pirate"])
+required_level = 30
+stats = SubResource("Resource_1")
+variance = 3
+upgrade_slots = 7
+weapon_kind = &"gun"
+ammo = &"bullet"
+basic_attack = ExtResource("5_gun_shot")
+required_dexterity = 90

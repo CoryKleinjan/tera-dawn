@@ -1,0 +1,78 @@
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=18 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/ashshell.png" id="2_ashshell"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
+[ext_resource type="Resource" path="res://data/items/etc/crab_claw.tres" id="5_crab_claw"]
+[ext_resource type="Resource" path="res://data/items/use/red_potion.tres" id="6_red_potion"]
+[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="7_blue_potion"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_shield_def_60.tres" id="8_scroll_shield_def_60"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_gloves_att_60.tres" id="9_scroll_gloves_att_60"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_weapon_matt_60.tres" id="10_scroll_weapon_matt_60"]
+
+[sub_resource type="Resource" id="Resource_7"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("10_scroll_weapon_matt_60")
+chance = 0.012
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_6"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("9_scroll_gloves_att_60")
+chance = 0.012
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_5"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("8_scroll_shield_def_60")
+chance = 0.012
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_4"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("7_blue_potion")
+chance = 0.05
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("6_red_potion")
+chance = 0.08
+min_amount = 1
+max_amount = 2
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("5_crab_claw")
+chance = 0.45
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("4_dawnshard")
+chance = 1.0
+min_amount = 10
+max_amount = 21
+
+[resource]
+script = ExtResource("1_monster_def")
+id = &"shell_crab"
+display_name = "Shell Crab"
+level = 7
+max_hp = 217
+attack = 19
+exp_reward = 34
+speed = 0.4
+size = Vector2(48.0, 36.0)
+boss = false
+flying = false
+texture = ExtResource("2_ashshell")
+sprite_scale = 0.75
+tint = Color(1.0, 0.690196, 0.627451, 1.0)
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7")])

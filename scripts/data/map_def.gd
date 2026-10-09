@@ -59,3 +59,17 @@ func neighbours() -> Array[StringName]:
 		if not p.target_map in out:
 			out.append(p.target_map)
 	return out
+
+## Every monster on the map, in the order the server and every client number them:
+## [MonsterDef, platform index, parent index]. Monsters that split are followed by the
+## ones they split into, whose parent is the index of the one that splits (-1 otherwise).
+func roster() -> Array:
+	var out := []
+	for s in spawns:
+		for i in s.count:
+			var parent := out.size()
+			out.append([s.monster, s.platform, -1])
+			if s.monster.splits_into:
+				for k in s.monster.split_count:
+					out.append([s.monster.splits_into, s.platform, parent])
+	return out

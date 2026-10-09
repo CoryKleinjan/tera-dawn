@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="QuestDef" load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="1_quest_def"]
+[ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="2_quest_objective"]
+[ext_resource type="Resource" path="res://data/monsters/sporecap.tres" id="3_sporecap"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/use/red_potion.tres" id="5_red_potion"]
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("5_red_potion")
+chance = 1.0
+min_amount = 15
+max_amount = 15
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("2_quest_objective")
+kind = 0
+monster = ExtResource("3_sporecap")
+count = 12
+
+[resource]
+script = ExtResource("1_quest_def")
+id = &"q14_spore_trouble"
+title = "Spore Trouble"
+giver = &"shopkeeper"
+min_level = 4
+requires = Array[StringName]([])
+offer_text = "Sporecaps have taken over the dell west of the meadow, and when you pop one, out come more! Thin them out for me? Twelve should do."
+progress_text = "Twelve Sporecaps in Mushroom Dell, west of the meadow, past Sunny Slope."
+complete_text = "The air smells sweeter already. Here, for your trouble."
+objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1")])
+reward_xp = 260
+reward_shards = 300
+reward_items = Array[ExtResource("4_drop_entry")]([SubResource("Resource_2")])

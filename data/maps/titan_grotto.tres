@@ -1,0 +1,205 @@
+[gd_resource type="Resource" script_class="MapDef" load_steps=41 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
+[ext_resource type="Resource" path="res://data/biomes/coast.tres" id="2_coast"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="3_platform_def"]
+[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="4_climbable_def"]
+[ext_resource type="Resource" path="res://data/climb_styles/rope_ladder.tres" id="5_rope_ladder"]
+[ext_resource type="Resource" path="res://data/climb_styles/rope.tres" id="6_rope"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="7_portal_def"]
+[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
+[ext_resource type="Resource" path="res://data/monsters/kelp_lurker.tres" id="9_kelp_lurker"]
+[ext_resource type="Resource" path="res://data/monsters/barnacle_boar.tres" id="10_barnacle_boar"]
+[ext_resource type="Resource" path="res://data/monsters/reef_titan.tres" id="11_reef_titan"]
+[ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="12_prop_placement"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tall_grass.png" id="13_tall_grass"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_large.png" id="14_tree_large"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/bush_large.png" id="15_bush_large"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_small.png" id="16_tree_small"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/floating_rock.png" id="17_floating_rock"]
+
+[sub_resource type="Resource" id="Resource_23"]
+script = ExtResource("12_prop_placement")
+texture = ExtResource("16_tree_small")
+x = 1426.0
+y = -1.0
+depth = -7.4
+scale = 0.95
+flip = false
+
+[sub_resource type="Resource" id="Resource_22"]
+script = ExtResource("12_prop_placement")
+texture = ExtResource("13_tall_grass")
+x = 330.0
+y = -1.0
+depth = -7.2
+scale = 0.95
+flip = true
+
+[sub_resource type="Resource" id="Resource_21"]
+script = ExtResource("12_prop_placement")
+texture = ExtResource("17_floating_rock")
+x = 442.0
+y = 245.0
+depth = -7.5
+scale = 1.11
+flip = true
+
+[sub_resource type="Resource" id="Resource_20"]
+script = ExtResource("12_prop_placement")
+texture = ExtResource("16_tree_small")
+x = 442.0
+y = -1.0
+depth = -6.5
+scale = 1.45
+flip = false
+
+[sub_resource type="Resource" id="Resource_19"]
+script = ExtResource("12_prop_placement")
+texture = ExtResource("15_bush_large")
+x = 1097.0
+y = -1.0
+depth = -7.6
+scale = 1.26
+flip = true
+
+[sub_resource type="Resource" id="Resource_18"]
+script = ExtResource("12_prop_placement")
+texture = ExtResource("14_tree_large")
+x = 994.0
+y = -1.0
+depth = -5.9
+scale = 1.3
+flip = false
+
+[sub_resource type="Resource" id="Resource_17"]
+script = ExtResource("12_prop_placement")
+texture = ExtResource("13_tall_grass")
+x = 1077.0
+y = -1.0
+depth = -7.5
+scale = 1.21
+flip = true
+
+[sub_resource type="Resource" id="Resource_16"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("11_reef_titan")
+platform = 0
+count = 1
+
+[sub_resource type="Resource" id="Resource_15"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("10_barnacle_boar")
+platform = 4
+count = 2
+
+[sub_resource type="Resource" id="Resource_14"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("10_barnacle_boar")
+platform = 3
+count = 3
+
+[sub_resource type="Resource" id="Resource_13"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("10_barnacle_boar")
+platform = 2
+count = 2
+
+[sub_resource type="Resource" id="Resource_12"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("9_kelp_lurker")
+platform = 1
+count = 3
+
+[sub_resource type="Resource" id="Resource_11"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("10_barnacle_boar")
+platform = 0
+count = 3
+
+[sub_resource type="Resource" id="Resource_10"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("9_kelp_lurker")
+platform = 0
+count = 3
+
+[sub_resource type="Resource" id="Resource_9"]
+script = ExtResource("7_portal_def")
+x = 60.0
+platform = 0
+target_map = &"wreck_cove"
+target_x = 2880.0
+
+[sub_resource type="Resource" id="Resource_8"]
+script = ExtResource("4_climbable_def")
+x = 1190.0
+top = 360.0
+bottom = 480.0
+style = ExtResource("6_rope")
+
+[sub_resource type="Resource" id="Resource_7"]
+script = ExtResource("4_climbable_def")
+x = 830.0
+top = 480.0
+bottom = 620.0
+style = ExtResource("5_rope_ladder")
+
+[sub_resource type="Resource" id="Resource_6"]
+script = ExtResource("4_climbable_def")
+x = 570.0
+top = 380.0
+bottom = 490.0
+style = ExtResource("6_rope")
+
+[sub_resource type="Resource" id="Resource_5"]
+script = ExtResource("4_climbable_def")
+x = 360.0
+top = 490.0
+bottom = 620.0
+style = ExtResource("5_rope_ladder")
+
+[sub_resource type="Resource" id="Resource_4"]
+script = ExtResource("3_platform_def")
+x = 940.0
+y = 360.0
+width = 300.0
+
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("3_platform_def")
+x = 800.0
+y = 480.0
+width = 420.0
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("3_platform_def")
+x = 380.0
+y = 380.0
+width = 240.0
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("3_platform_def")
+x = 300.0
+y = 490.0
+width = 340.0
+
+[resource]
+script = ExtResource("1_map_def")
+id = &"titan_grotto"
+display_name = "Titan Grotto"
+sign_text = "Titan Grotto · Lv. 22-30"
+sign_x = 180.0
+biome = ExtResource("2_coast")
+width = 2000
+height = 700
+ground_y = 620
+start_x = 120.0
+lantern_spacing = 700.0
+platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4")])
+climbables = Array[ExtResource("4_climbable_def")]([SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8")])
+portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_9")])
+spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16")])
+props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_17"), SubResource("Resource_18"), SubResource("Resource_19"), SubResource("Resource_20"), SubResource("Resource_21"), SubResource("Resource_22"), SubResource("Resource_23")])
+region = &"driftcove"
+world_pos = Vector2(192.0, 525.0)
+return_map = &"driftcove"
+level_text = "Lv. 22-30"

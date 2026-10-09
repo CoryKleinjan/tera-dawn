@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="EquipDef" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/equip_def.gd" id="1_equip_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/barnacle_knuckle.png" id="2_barnacle_knuckle"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="3_shard_pickup"]
+[ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="4_stat_block"]
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("4_stat_block")
+attack = 38
+
+[resource]
+script = ExtResource("1_equip_def")
+id = &"barnacle_knuckle"
+display_name = "Barnacle Knuckle"
+description = "A level 25 weapon favoured by Pirates."
+icon = ExtResource("2_barnacle_knuckle")
+sprite_scale = 0.4
+glow_color = Color(0.658824, 0.815686, 0.878431, 1.0)
+pickup_effect = ExtResource("3_shard_pickup")
+sell_price = 3124
+slot = 0
+jobs = Array[StringName]([&"pirate"])
+required_level = 25
+stats = SubResource("Resource_1")
+variance = 2
+upgrade_slots = 7
+weapon_kind = &"knuckle"
+required_strength = 75

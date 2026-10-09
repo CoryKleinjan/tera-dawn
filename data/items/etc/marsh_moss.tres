@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_def.gd" id="1_item_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/marsh_moss.png" id="2_marsh_moss"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="3_shard_pickup"]
+
+[resource]
+script = ExtResource("1_item_def")
+id = &"marsh_moss"
+display_name = "Marsh Moss"
+description = "Dropped by the Marsh Horror."
+icon = ExtResource("2_marsh_moss")
+sprite_scale = 0.36
+glow_color = Color(0.313725, 0.376471, 0.25098, 1.0)
+pickup_effect = ExtResource("3_shard_pickup")
+sell_price = 48

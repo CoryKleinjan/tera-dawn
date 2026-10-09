@@ -1,33 +1,69 @@
-[gd_resource type="Resource" script_class="ShopDef" load_steps=17 format=3]
+[gd_resource type="Resource" script_class="ShopDef" load_steps=29 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/shop_def.gd" id="1_shop_def"]
 [ext_resource type="Script" path="res://scripts/data/shop_entry.gd" id="2_shop_entry"]
 [ext_resource type="Resource" path="res://data/items/equips/apprentice_wand.tres" id="3_apprentice_wand"]
 [ext_resource type="Resource" path="res://data/items/equips/oak_staff.tres" id="4_oak_staff"]
 [ext_resource type="Resource" path="res://data/items/equips/crystal_wand.tres" id="5_crystal_wand"]
-[ext_resource type="Resource" path="res://data/items/equips/apprentice_hat.tres" id="6_apprentice_hat"]
-[ext_resource type="Resource" path="res://data/items/equips/starweave_robe.tres" id="7_starweave_robe"]
-[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="8_blue_potion"]
-[ext_resource type="Resource" path="res://data/items/use/mana_elixir.tres" id="9_mana_elixir"]
+[ext_resource type="Resource" path="res://data/items/equips/moonstone_wand.tres" id="6_moonstone_wand"]
+[ext_resource type="Resource" path="res://data/items/equips/apprentice_hat.tres" id="7_apprentice_hat"]
+[ext_resource type="Resource" path="res://data/items/equips/starweave_robe.tres" id="8_starweave_robe"]
+[ext_resource type="Resource" path="res://data/items/equips/moonweave_hat.tres" id="9_moonweave_hat"]
+[ext_resource type="Resource" path="res://data/items/equips/moonweave_robe.tres" id="10_moonweave_robe"]
+[ext_resource type="Resource" path="res://data/items/equips/moonweave_trousers.tres" id="11_moonweave_trousers"]
+[ext_resource type="Resource" path="res://data/items/equips/moonweave_slippers.tres" id="12_moonweave_slippers"]
+[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="13_blue_potion"]
+[ext_resource type="Resource" path="res://data/items/use/mana_tea.tres" id="14_mana_tea"]
+[ext_resource type="Resource" path="res://data/items/use/mana_elixir.tres" id="15_mana_elixir"]
+
+[sub_resource type="Resource" id="Resource_13"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("15_mana_elixir")
+price = 0
+
+[sub_resource type="Resource" id="Resource_12"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("14_mana_tea")
+price = 0
+
+[sub_resource type="Resource" id="Resource_11"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("13_blue_potion")
+price = 0
+
+[sub_resource type="Resource" id="Resource_10"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("12_moonweave_slippers")
+price = 0
+
+[sub_resource type="Resource" id="Resource_9"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("11_moonweave_trousers")
+price = 0
+
+[sub_resource type="Resource" id="Resource_8"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("10_moonweave_robe")
+price = 0
 
 [sub_resource type="Resource" id="Resource_7"]
 script = ExtResource("2_shop_entry")
-item = ExtResource("9_mana_elixir")
+item = ExtResource("9_moonweave_hat")
 price = 0
 
 [sub_resource type="Resource" id="Resource_6"]
 script = ExtResource("2_shop_entry")
-item = ExtResource("8_blue_potion")
+item = ExtResource("8_starweave_robe")
 price = 0
 
 [sub_resource type="Resource" id="Resource_5"]
 script = ExtResource("2_shop_entry")
-item = ExtResource("7_starweave_robe")
+item = ExtResource("7_apprentice_hat")
 price = 0
 
 [sub_resource type="Resource" id="Resource_4"]
 script = ExtResource("2_shop_entry")
-item = ExtResource("6_apprentice_hat")
+item = ExtResource("6_moonstone_wand")
 price = 0
 
 [sub_resource type="Resource" id="Resource_3"]
@@ -49,4 +85,4 @@ price = 0
 script = ExtResource("1_shop_def")
 id = &"arcanum"
 display_name = "Lumewood Arcanum"
-items = Array[ExtResource("2_shop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7")])
+items = Array[ExtResource("2_shop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13")])

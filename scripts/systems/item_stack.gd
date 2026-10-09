@@ -7,6 +7,9 @@ var item: ItemDef
 var count := 1
 ## Gear only: this copy's stats (its EquipDef's stats, rolled).
 var stats: StatBlock
+## Gear only: upgrade slots spent on scrolls, and how many of those scrolls worked.
+var slots_used := 0
+var upgrades := 0
 
 ## A new stack of `n`; gear rolls its stats here.
 static func create(it: ItemDef, n := 1) -> ItemStack:
@@ -35,6 +38,15 @@ static func unrolled(it: ItemDef, n := 1) -> ItemStack:
 func equip_def() -> EquipDef:
 	return item as EquipDef
 
+## The item's name, with "+3" for gear that took three scrolls.
+func display_name() -> String:
+	return "%s +%d" % [item.display_name, upgrades] if upgrades > 0 else item.display_name
+
+## Gear only: upgrade slots it has left for scrolls.
+func slots_left() -> int:
+	var e := equip_def()
+	return maxi(0, e.upgrade_slots - slots_used) if e else 0
+
 func can_stack_with(other: ItemStack) -> bool:
 	return other != null and other.item == item and item.stack_size() > 1
 
@@ -42,6 +54,9 @@ func to_dict() -> Dictionary:
 	var d := {"id": String(item.id), "count": count}
 	if stats:
 		d["stats"] = stats.to_dict()
+	if slots_used > 0:
+		d["slots_used"] = slots_used
+		d["upgrades"] = upgrades
 	return d
 
 ## Rebuilds a saved stack, or null if its item no longer exists.
@@ -55,4 +70,6 @@ static func from_dict(d: Dictionary) -> ItemStack:
 	if s.item is EquipDef:
 		var saved: Variant = d.get("stats")
 		s.stats = StatBlock.from_dict(saved) if saved is Dictionary else ItemStack.exact(s.item).stats
+		s.slots_used = maxi(0, int(d.get("slots_used", 0)))
+		s.upgrades = clampi(int(d.get("upgrades", 0)), 0, s.slots_used)
 	return s

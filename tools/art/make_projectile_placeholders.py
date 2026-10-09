@@ -54,6 +54,13 @@ SPRITES = {
     "energy_bolt": (22, 22, orb((150, 130, 255, 255)), True),
     "arcane_claw": (22, 22, orb((255, 120, 200, 255)), True),
     "pebble": (9, 9, pebble, False),
+    # monster shots
+    "mob_seed": (11, 11, orb((150, 110, 60, 255)), False),
+    "mob_bolt": (18, 18, orb((180, 120, 255, 255)), True),
+    "mob_ember": (18, 18, orb((255, 130, 60, 255)), True),
+    "mob_bubble": (16, 16, orb((120, 220, 255, 255)), True),
+    "mob_wisp": (16, 16, orb((255, 220, 110, 255)), True),
+    "mob_shadow": (20, 20, orb((110, 80, 200, 255)), True),
 }
 
 

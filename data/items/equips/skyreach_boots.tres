@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="EquipDef" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/equip_def.gd" id="1_equip_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/skyreach_boots.png" id="2_skyreach_boots"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="3_shard_pickup"]
+[ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="4_stat_block"]
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("4_stat_block")
+defense = 14
+avoid = 3
+speed = 3
+
+[resource]
+script = ExtResource("1_equip_def")
+id = &"skyreach_boots"
+display_name = "Skyreach Boots"
+description = "Part of the Skyreach set for Archers."
+icon = ExtResource("2_skyreach_boots")
+sprite_scale = 0.4
+glow_color = Color(0.560784, 0.847059, 1.0, 1.0)
+pickup_effect = ExtResource("3_shard_pickup")
+sell_price = 5338
+slot = 4
+jobs = Array[StringName]([&"archer"])
+required_level = 35
+stats = SubResource("Resource_1")
+variance = 3
+upgrade_slots = 5
+required_dexterity = 70

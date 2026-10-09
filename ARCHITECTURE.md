@@ -64,8 +64,9 @@ others can join, and `-- --server` (see `scripts/boot.gd`) runs a server with no
 
 Shared pieces both sides use: `MapLayout` (a map's platforms, ropes, portals), `DropFlight`
 (how a drop flies and lands, run identically everywhere), `Combat` and `CharacterStats`.
-Monster index `i` is the same monster on both sides because both build them from the map's
-spawns in order.
+Monster index `i` is the same monster on both sides because both build them from
+`MapDef.roster()`: the map's spawns in order, each monster that splits followed by the
+monsters it splits into (those sleep, dead, until their parent is defeated).
 
 ### How to add something the player does
 
@@ -143,8 +144,14 @@ layers (or add one here) rather than a raw number.
    is too big or small next to the hero.
 3. Add drops: each `DropEntry` is an item, a chance and an amount range.
 4. Optional: `flying` with `hover_height`, `boss`, a `light_color` or `aura_color` for
-   glowing monsters, and `respawn_ticks`.
-5. Put it on a map: add a **SpawnDef** to the map's `spawns` with the monster, a platform index
+   glowing monsters, a `tint` (one sprite can stand in for several monsters), and
+   `respawn_ticks`.
+5. Optional behavior (`SimMob` runs it): `jumps` hops now and then; `stationary` never walks;
+   `shot` (a ProjectileDef) with `shot_range` and `shot_cooldown` shoots whoever hit it, or
+   anyone in range when `aggressive`. A shot flies to where the player stood (`ev_mob_shot`)
+   and only hurts them if they're still there when it lands. `splits_into` with `split_count`
+   bursts into smaller monsters when defeated.
+6. Put it on a map: add a **SpawnDef** to the map's `spawns` with the monster, a platform index
    and a count.
 
 `Content` finds every `.tres` in `data/monsters/` on its own; there's no list to update.
@@ -237,6 +244,8 @@ There are three inventory tabs, and the class of the item decides which one it g
 | --- | --- | --- |
 | **EquipDef** | Equip | Gear: slot, required level and stats, a `StatBlock` of bonuses, and `variance` (each dropped copy rolls every stat up or down by up to this much) |
 | **UseDef** | Use | Potions: HP / MP restored (flat and percent), effect, cooldown |
+| **AmmoDef** | Use | Arrows, stars and bullets fired by ranged weapons |
+| **ScrollDef** | Use | Upgrade scrolls: the gear `slots` they work on, a success `chance` and the `stats` they add. Each use spends one of the gear's `upgrade_slots` (`ItemStack.slots_used`; `upgrades` counts the ones that worked) |
 | **ItemDef** | Etc | Monster parts and anything else; stacks up to `max_stack` |
 
 Equipment slots: Weapon, Hat, Top, Bottom, Shoes, Gloves, Cape, Earrings, Pendant, two Rings
@@ -245,7 +254,8 @@ and Shield (`EquipDef.Slot` and `Equipment.PLACES_FOR`). Adding a slot means add
 ## How to add an item or piece of gear
 
 1. Give it an icon in `assets/sprites/items/<id>.png`. Until there's real art, add it to
-   `ICONS` in `tools/art/make_item_placeholders.py` and run the script.
+   `ICONS` in `tools/art/make_item_placeholders.py` (or `tools/art/item_icons.json`) and run
+   the script.
 2. Create the `.tres` in `data/items/equips/`, `use/` or `etc/` as an **EquipDef**, **UseDef**
    or **ItemDef**. Fill in `id`, name, description, icon and `sell_price`; for gear, the slot,
    requirements and a **StatBlock** in `stats`.

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ScrollDef" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/scroll_def.gd" id="1_scroll_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/scroll_earring_int_60.png" id="2_scroll_earring_int_60"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="3_shard_pickup"]
+[ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="4_stat_block"]
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("4_stat_block")
+intelligence = 1
+max_mp = 5
+
+[resource]
+script = ExtResource("1_scroll_def")
+id = &"scroll_earring_int_60"
+display_name = "Earring Scroll for INT 60%"
+description = "Improves earrings. Success rate: 60%. Uses one upgrade slot either way."
+icon = ExtResource("2_scroll_earring_int_60")
+sprite_scale = 0.4
+glow_color = Color(0.658824, 0.784314, 1.0, 1.0)
+pickup_effect = ExtResource("3_shard_pickup")
+sell_price = 40
+max_stack = 100
+slots = Array[int]([7])
+chance = 0.6
+stats = SubResource("Resource_1")

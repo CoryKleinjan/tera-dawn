@@ -220,6 +220,22 @@ func _run() -> void:
 			await _shot("town_" + town)
 		Net.server._enter_map(_me(), &"meadow", 300)
 		await _physics(10)
+	if only == "" or only == "fields":
+		# A field from each region, next to its monsters, a boss, and the world map.
+		_me().inv = 100000
+		for pair in [[&"mushroom_dell", 900], [&"thornwood", 1100], [&"crystal_caves", 1100], [&"smoke_pits", 1100],
+				[&"gloom_woods", 1100], [&"coral_reef", 1100], [&"dusk_bridge", 1300], [&"molten_throne", 1000]]:
+			Net.server._enter_map(_me(), pair[0], pair[1])
+			await _physics(90)
+			await _frames(3)
+			await _shot("field_" + pair[0])
+		_me().inv = 0
+		world.hud.toggle_window("worldmap")
+		await _frames(3)
+		await _shot("worldmap_fields")
+		world.hud.toggle_window("worldmap")
+		Net.server._enter_map(_me(), &"meadow", 300)
+		await _physics(10)
 	if only == "" or only == "players":
 		# Two other players nearby. They're on the server but have no game connected.
 		_teleport(world, Vector2(1300, 620))

@@ -1,0 +1,111 @@
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=26 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/sproutcap.tres" id="2_sproutcap"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
+[ext_resource type="Resource" path="res://data/items/etc/bark_cap.tres" id="5_bark_cap"]
+[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="6_white_potion"]
+[ext_resource type="Resource" path="res://data/items/use/mana_tea.tres" id="7_mana_tea"]
+[ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="8_elixir"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_helmet_hp_60.tres" id="9_scroll_helmet_hp_60"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_cape_mdef_60.tres" id="10_scroll_cape_mdef_60"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_dex_60.tres" id="11_scroll_top_dex_60"]
+[ext_resource type="Resource" path="res://data/items/equips/hiking_boots.tres" id="12_hiking_boots"]
+[ext_resource type="Resource" path="res://data/items/equips/shell_earrings.tres" id="13_shell_earrings"]
+[ext_resource type="Resource" path="res://data/items/equips/acorn_pendant.tres" id="14_acorn_pendant"]
+
+[sub_resource type="Resource" id="Resource_11"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("14_acorn_pendant")
+chance = 0.015
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_10"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("13_shell_earrings")
+chance = 0.015
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_9"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("12_hiking_boots")
+chance = 0.015
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_8"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("11_scroll_top_dex_60")
+chance = 0.012
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_7"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("10_scroll_cape_mdef_60")
+chance = 0.012
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_6"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("9_scroll_helmet_hp_60")
+chance = 0.012
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_5"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("8_elixir")
+chance = 0.01
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_4"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("7_mana_tea")
+chance = 0.05
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("6_white_potion")
+chance = 0.08
+min_amount = 1
+max_amount = 2
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("5_bark_cap")
+chance = 0.45
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("4_dawnshard")
+chance = 1.0
+min_amount = 27
+max_amount = 54
+
+[resource]
+script = ExtResource("1_monster_def")
+id = &"barkcap"
+display_name = "Barkcap"
+level = 18
+max_hp = 753
+attack = 44
+exp_reward = 146
+speed = 0.9
+size = Vector2(40.0, 44.0)
+boss = false
+flying = false
+jumps = true
+sprite_frames = ExtResource("2_sproutcap")
+sprite_scale = 1.0
+tint = Color(0.690196, 0.501961, 0.313725, 1.0)
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11")])

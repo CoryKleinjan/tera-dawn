@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="EquipDef" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/equip_def.gd" id="1_equip_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/starfall_trousers.png" id="2_starfall_trousers"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="3_shard_pickup"]
+[ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="4_stat_block"]
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("4_stat_block")
+defense = 10
+magic_defense = 21
+max_mp = 30
+
+[resource]
+script = ExtResource("1_equip_def")
+id = &"starfall_trousers"
+display_name = "Starfall Trousers"
+description = "Part of the Starfall set for Magicians."
+icon = ExtResource("2_starfall_trousers")
+sprite_scale = 0.4
+glow_color = Color(0.788235, 0.654902, 1.0, 1.0)
+pickup_effect = ExtResource("3_shard_pickup")
+sell_price = 4175
+slot = 3
+jobs = Array[StringName]([&"mage"])
+required_level = 30
+stats = SubResource("Resource_1")
+variance = 3
+upgrade_slots = 7
+required_intelligence = 60

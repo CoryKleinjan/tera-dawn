@@ -1,0 +1,204 @@
+[gd_resource type="Resource" script_class="MapDef" load_steps=39 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
+[ext_resource type="Resource" path="res://data/biomes/forge.tres" id="2_forge"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="3_platform_def"]
+[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="4_climbable_def"]
+[ext_resource type="Resource" path="res://data/climb_styles/rope.tres" id="5_rope"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="6_portal_def"]
+[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="7_spawn_def"]
+[ext_resource type="Resource" path="res://data/monsters/cinder_hog.tres" id="8_cinder_hog"]
+[ext_resource type="Resource" path="res://data/monsters/starfall_golem.tres" id="9_starfall_golem"]
+[ext_resource type="Resource" path="res://data/monsters/forge_golem.tres" id="10_forge_golem"]
+[ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="11_prop_placement"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/floating_rock.png" id="12_floating_rock"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/steam_vent.png" id="13_steam_vent"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/stump.png" id="14_stump"]
+
+[sub_resource type="Resource" id="Resource_24"]
+script = ExtResource("11_prop_placement")
+texture = ExtResource("13_steam_vent")
+x = 2007.0
+y = -1.0
+depth = -7.3
+scale = 1.39
+flip = true
+
+[sub_resource type="Resource" id="Resource_23"]
+script = ExtResource("11_prop_placement")
+texture = ExtResource("14_stump")
+x = 2062.0
+y = -1.0
+depth = -2.8
+scale = 1.01
+flip = true
+
+[sub_resource type="Resource" id="Resource_22"]
+script = ExtResource("11_prop_placement")
+texture = ExtResource("13_steam_vent")
+x = 1719.0
+y = -1.0
+depth = -6.0
+scale = 0.91
+flip = true
+
+[sub_resource type="Resource" id="Resource_21"]
+script = ExtResource("11_prop_placement")
+texture = ExtResource("12_floating_rock")
+x = 2236.0
+y = 206.0
+depth = -5.1
+scale = 1.45
+flip = false
+
+[sub_resource type="Resource" id="Resource_20"]
+script = ExtResource("11_prop_placement")
+texture = ExtResource("12_floating_rock")
+x = 1368.0
+y = 247.0
+depth = -5.7
+scale = 1.22
+flip = false
+
+[sub_resource type="Resource" id="Resource_19"]
+script = ExtResource("7_spawn_def")
+monster = ExtResource("9_starfall_golem")
+platform = 5
+count = 2
+
+[sub_resource type="Resource" id="Resource_18"]
+script = ExtResource("7_spawn_def")
+monster = ExtResource("10_forge_golem")
+platform = 4
+count = 3
+
+[sub_resource type="Resource" id="Resource_17"]
+script = ExtResource("7_spawn_def")
+monster = ExtResource("10_forge_golem")
+platform = 3
+count = 3
+
+[sub_resource type="Resource" id="Resource_16"]
+script = ExtResource("7_spawn_def")
+monster = ExtResource("8_cinder_hog")
+platform = 2
+count = 2
+
+[sub_resource type="Resource" id="Resource_15"]
+script = ExtResource("7_spawn_def")
+monster = ExtResource("8_cinder_hog")
+platform = 1
+count = 2
+
+[sub_resource type="Resource" id="Resource_14"]
+script = ExtResource("7_spawn_def")
+monster = ExtResource("9_starfall_golem")
+platform = 0
+count = 3
+
+[sub_resource type="Resource" id="Resource_13"]
+script = ExtResource("7_spawn_def")
+monster = ExtResource("8_cinder_hog")
+platform = 0
+count = 3
+
+[sub_resource type="Resource" id="Resource_12"]
+script = ExtResource("6_portal_def")
+x = 2540.0
+platform = 0
+target_map = &"emberforge"
+target_x = 120.0
+
+[sub_resource type="Resource" id="Resource_11"]
+script = ExtResource("6_portal_def")
+x = 60.0
+platform = 0
+target_map = &"starfall_ridge"
+target_x = 2480.0
+
+[sub_resource type="Resource" id="Resource_10"]
+script = ExtResource("4_climbable_def")
+x = 1850.0
+top = 360.0
+bottom = 480.0
+style = ExtResource("5_rope")
+
+[sub_resource type="Resource" id="Resource_9"]
+script = ExtResource("4_climbable_def")
+x = 1580.0
+top = 480.0
+bottom = 620.0
+style = ExtResource("5_rope")
+
+[sub_resource type="Resource" id="Resource_8"]
+script = ExtResource("4_climbable_def")
+x = 910.0
+top = 490.0
+bottom = 620.0
+style = ExtResource("5_rope")
+
+[sub_resource type="Resource" id="Resource_7"]
+script = ExtResource("4_climbable_def")
+x = 400.0
+top = 380.0
+bottom = 500.0
+style = ExtResource("5_rope")
+
+[sub_resource type="Resource" id="Resource_6"]
+script = ExtResource("4_climbable_def")
+x = 330.0
+top = 500.0
+bottom = 620.0
+style = ExtResource("5_rope")
+
+[sub_resource type="Resource" id="Resource_5"]
+script = ExtResource("3_platform_def")
+x = 1660.0
+y = 360.0
+width = 240.0
+
+[sub_resource type="Resource" id="Resource_4"]
+script = ExtResource("3_platform_def")
+x = 1540.0
+y = 480.0
+width = 380.0
+
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("3_platform_def")
+x = 860.0
+y = 490.0
+width = 420.0
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("3_platform_def")
+x = 360.0
+y = 380.0
+width = 300.0
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("3_platform_def")
+x = 300.0
+y = 500.0
+width = 300.0
+
+[resource]
+script = ExtResource("1_map_def")
+id = &"cinder_pass"
+display_name = "Cinder Pass"
+sign_text = "Cinder Pass · Lv. 26-30"
+sign_x = 180.0
+biome = ExtResource("2_forge")
+width = 2600
+height = 700
+ground_y = 620
+start_x = 120.0
+lantern_spacing = 700.0
+platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5")])
+climbables = Array[ExtResource("4_climbable_def")]([SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10")])
+portals = Array[ExtResource("6_portal_def")]([SubResource("Resource_11"), SubResource("Resource_12")])
+spawns = Array[ExtResource("7_spawn_def")]([SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18"), SubResource("Resource_19")])
+props = Array[ExtResource("11_prop_placement")]([SubResource("Resource_20"), SubResource("Resource_21"), SubResource("Resource_22"), SubResource("Resource_23"), SubResource("Resource_24")])
+region = &"emberreach"
+world_pos = Vector2(760.0, 243.0)
+return_map = &"emberforge"
+level_text = "Lv. 26-30"

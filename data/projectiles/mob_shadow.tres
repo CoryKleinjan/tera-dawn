@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ProjectileDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/projectile_def.gd" id="1_projectile_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/projectiles/mob_shadow.png" id="2_mob_shadow"]
+
+[resource]
+script = ExtResource("1_projectile_def")
+id = &"mob_shadow"
+texture = ExtResource("2_mob_shadow")
+texel = 1.8
+speed = 6.0
+spin = 0.0
+energy = 1.8
+light_color = Color(0.501961, 0.376471, 1.0, 1.0)
+max_range = 420.0

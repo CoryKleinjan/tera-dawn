@@ -124,6 +124,64 @@ func _check_content() -> void:
 				or (o.kind == QuestObjective.Kind.VISIT and not Content.maps.has(o.map)):
 				quest_problems.append("%s has a broken objective" % id)
 	_check(Content.quests.size() >= 6 and quest_problems.is_empty(), "every quest has a placed giver and real objectives %s" % [quest_problems])
+	_check_world_graph()
+
+## Every portal leads somewhere with a portal back, every map can be reached from the
+## meadow, and every item a quest asks for can be found.
+func _check_world_graph() -> void:
+	var problems := []
+	for id in Content.maps:
+		var m: MapDef = Content.maps[id]
+		for p in m.portals:
+			var there: MapDef = Content.maps.get(p.target_map)
+			if there == null:
+				problems.append("%s portal to missing %s" % [id, p.target_map])
+			elif not there.portals.any(func(b: PortalDef) -> bool: return b.target_map == id):
+				problems.append("%s -> %s has no way back" % [id, p.target_map])
+			elif p.target_x < 0 or p.target_x > there.width or there.portals.any(func(b: PortalDef) -> bool: return absf(b.x - p.target_x) < 34):
+				problems.append("%s -> %s lands on a portal or off the map" % [id, p.target_map])
+			if p.platform >= m.platforms.size() + 1:
+				problems.append("%s portal on a missing platform" % id)
+		for s in m.spawns:
+			if s.platform > m.platforms.size():
+				problems.append("%s spawns on a missing platform" % id)
+		if not m.town and m.return_town() == id:
+			problems.append("%s has no town" % id)
+	# walk the portals and travel routes from the meadow
+	var seen := {&"meadow": true}
+	var todo: Array[StringName] = [&"meadow"]
+	while not todo.is_empty():
+		var id: StringName = todo.pop_back()
+		var nexts: Array[StringName] = Content.maps[id].neighbours()
+		for n in Content.maps[id].npcs:
+			for r in n.npc.travel:
+				nexts.append(r.target_map)
+		for n in nexts:
+			if Content.maps.has(n) and not seen.has(n):
+				seen[n] = true
+				todo.append(n)
+	for id in Content.maps:
+		if not seen.has(id):
+			problems.append("%s can't be reached" % id)
+	_check(Content.maps.size() >= 40 and problems.is_empty(), "%d maps joined by portals both ways, all reachable %s" % [Content.maps.size(), problems])
+	var dropped := {}
+	for id in Content.monsters:
+		for d in Content.monsters[id].drops:
+			dropped[d.item.id] = true
+	var missing := []
+	for id in Content.quests:
+		for o in Content.quests[id].objectives:
+			if o.kind == QuestObjective.Kind.COLLECT and not dropped.has(o.item.id) and o.drop_from == null:
+				missing.append(o.item.id)
+	_check(missing.is_empty(), "every item a quest asks for drops somewhere %s" % [missing])
+	var bosses := Content.monsters.values().filter(func(m: MonsterDef) -> bool: return m.boss)
+	var shooters := Content.monsters.values().filter(func(m: MonsterDef) -> bool: return m.shot != null)
+	var splitters := Content.monsters.values().filter(func(m: MonsterDef) -> bool: return m.splits_into != null)
+	_check(Content.monsters.size() >= 50 and bosses.size() >= 6 and shooters.size() >= 10 and splitters.size() >= 4,
+		"%d monsters, with bosses, shooters and splitters" % Content.monsters.size())
+	var scrolls := Content.items.values().filter(func(i: ItemDef) -> bool: return i is ScrollDef)
+	_check(Content.items.size() >= 200 and scrolls.size() >= 12 and scrolls.all(func(s: ScrollDef) -> bool: return not s.slots.is_empty() and s.stats != null),
+		"%d items, with upgrade scrolls for each kind of gear" % Content.items.size())
 
 func _press(action: String) -> void:
 	var e := InputEventAction.new()
@@ -486,6 +544,7 @@ func _run() -> void:
 	await _check_skills()
 	await _check_ranged()
 	await _check_travel()
+	await _check_fields()
 
 	# Dawn Slash costs MP and hits several monsters.
 	var mp_before := Game.me.mp
@@ -835,6 +894,97 @@ func _check_travel() -> void:
 	talk.choose(0)
 	await _ticks(3)
 	_check(world.map.id == &"greenbough", "the coach takes you to Greenbough")
+	Net.server._enter_map(_me(), &"meadow", 300)
+	await _ticks(3)
+
+## The new field maps: walking west out of the meadow, monsters that split, hop and shoot,
+## and upgrade scrolls.
+func _check_fields() -> void:
+	var ch := _me().character
+	_me().inv = 0
+	var west: PortalDef = Content.map(&"meadow").portals.filter(func(p: PortalDef) -> bool: return p.target_map == &"sunny_slope")[0]
+	_teleport(Vector2(west.x, 620))
+	await _ticks(2)
+	await _tap("move_up")
+	await _ticks(4)
+	_check(world.map.id == &"sunny_slope", "the meadow's west portal leads to Sunny Slope")
+	# a Sporecap splits into Spore Puffs when it's defeated
+	Net.server._enter_map(_me(), &"mushroom_dell", 300)
+	await _ticks(3)
+	var dell: MapInstance = Net.server.maps[&"mushroom_dell"]
+	var cap: SimMob = dell.mobs.filter(func(m: SimMob) -> bool: return m.def.id == &"sporecap")[0]
+	_check(cap.children.size() == 2 and cap.children.all(func(c: SimMob) -> bool: return c.dead and c.asleep), "a Sporecap's Spore Puffs wait asleep")
+	_check(world.mobs().size() == dell.mobs.size(), "the client numbers split-off monsters the same way")
+	dell.kill_mob(cap, _me())
+	await _ticks(3)
+	_check(cap.children.all(func(c: SimMob) -> bool: return not c.dead), "defeating a Sporecap releases its Spore Puffs")
+	_check(not world.mobs()[cap.children[0].index].dead, "and the client sees them")
+	for c in cap.children:
+		dell.kill_mob(c, _me())
+	await _ticks(60)
+	_check(cap.children.all(func(c: SimMob) -> bool: return c.dead and c.asleep), "defeated Spore Puffs go back to sleep instead of respawning")
+	# hoppers hop
+	Net.server._enter_map(_me(), &"sunny_slope", 300)
+	await _ticks(3)
+	var slope: MapInstance = Net.server.maps[&"sunny_slope"]
+	var hopper: SimMob = slope.mobs.filter(func(m: SimMob) -> bool: return m.def.jumps)[0]
+	var hopped := false
+	for i in 400:
+		hopper.step()
+		hopped = hopped or hopper.hop > 0.0
+	_check(hopped and hopper.body_position().y <= hopper.plat.y, "a Tide Dewling hops")
+	# an Acorn Sentry never moves and shoots anyone near it; the shot lands where they stood
+	Net.server._enter_map(_me(), &"thornwood", 300)
+	await _ticks(3)
+	var wood: MapInstance = Net.server.maps[&"thornwood"]
+	var sentry: SimMob = wood.mobs.filter(func(m: SimMob) -> bool: return m.def.id == &"acorn_sentry" and not m.dead)[0]
+	var x0 := sentry.position.x
+	_teleport(Vector2(sentry.position.x + 150, sentry.plat.y))
+	ch.health.reset(ch.max_hp())
+	var hp: int = ch.health.hp
+	sentry.shot_t = 1
+	var shots := 0
+	for i in 200:
+		await _ticks(1)
+		_me().position = Vector2(x0 + 150, sentry.plat.y)
+		world.player.position = _me().position
+		shots += world.fx_layer.get_children().filter(func(n: Node) -> bool: return n is TDProjectile).size()
+		if ch.health.hp < hp:
+			break
+	_check(shots > 0, "the client sees the sentry's shot fly")
+	_check(ch.health.hp < hp or _me().inv > 0, "the shot hits a player who stays put")
+	_check(sentry.position.x == x0, "the sentry never moves")
+	_me().inv = 100000
+	# upgrade scrolls: always spend a slot, add their stats when they work
+	var sword: EquipDef = Content.item(&"bronze_sword")
+	var good: ScrollDef = Content.item(&"scroll_weapon_att_60")
+	ch.inventory.add(sword, 1)
+	ch.inventory.add(good, 2)
+	ch.inventory.add(Content.item(&"scroll_helmet_hp_60"), 1)
+	var e := ch.inventory.find(sword)
+	var stack := ch.inventory.at(ItemDef.Tab.EQUIP, e)
+	var att := stack.stats.attack
+	_check(ch.scroll_problem(ch.inventory.find(Content.item(&"scroll_helmet_hp_60")), e) != "", "a helmet scroll doesn't work on a sword")
+	var r := ch.use_scroll(ch.inventory.find(good), e, 0.0)
+	_check(r["worked"] and stack.stats.attack == att + 2 and stack.slots_used == 1 and stack.upgrades == 1 and stack.display_name().ends_with("+1"),
+		"a scroll that works adds its stats and spends a slot")
+	r = ch.use_scroll(ch.inventory.find(good), e, 0.99)
+	_check(not r["worked"] and stack.stats.attack == att + 2 and stack.slots_used == 2 and stack.slots_left() == sword.upgrade_slots - 2,
+		"a scroll that fails still spends a slot")
+	var saved := ItemStack.from_dict(stack.to_dict())
+	_check(saved.slots_used == 2 and saved.upgrades == 1 and saved.stats.attack == att + 2, "upgrades are saved with the gear")
+	# and through the bag window
+	ch.inventory.add(good, 1)
+	_me().dirty_character = true
+	await _ticks(2)
+	var bag: TDInventoryWindow = world.hud.windows["inventory"]
+	bag.tab = ItemDef.Tab.USE
+	bag.use_slot(Game.me.inventory.find(good))
+	_check(bag.scrolling >= 0 and bag.tab == ItemDef.Tab.EQUIP, "double-clicking a scroll picks it up and shows the gear")
+	bag.use_scroll_on(Game.me.inventory.find(sword))
+	await _ticks(3)
+	_check(Game.me.inventory.count_of(good) == 0 and Game.me.inventory.at(ItemDef.Tab.EQUIP, Game.me.inventory.find(sword)).slots_used == 3,
+		"clicking the gear uses the scroll on it")
 	Net.server._enter_map(_me(), &"meadow", 300)
 	await _ticks(3)
 

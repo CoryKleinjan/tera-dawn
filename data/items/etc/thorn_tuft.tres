@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_def.gd" id="1_item_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/thorn_tuft.png" id="2_thorn_tuft"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="3_shard_pickup"]
+
+[resource]
+script = ExtResource("1_item_def")
+id = &"thorn_tuft"
+display_name = "Thorn Tuft"
+description = "Dropped by the Thornling."
+icon = ExtResource("2_thorn_tuft")
+sprite_scale = 0.36
+glow_color = Color(0.498039, 0.815686, 0.376471, 1.0)
+pickup_effect = ExtResource("3_shard_pickup")
+sell_price = 22

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_def.gd" id="1_item_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/pup_tooth.png" id="2_pup_tooth"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="3_shard_pickup"]
+
+[resource]
+script = ExtResource("1_item_def")
+id = &"pup_tooth"
+display_name = "Cinder Pup Tooth"
+description = "Dropped by the Cinder Pup."
+icon = ExtResource("2_pup_tooth")
+sprite_scale = 0.36
+glow_color = Color(1.0, 0.752941, 0.501961, 1.0)
+pickup_effect = ExtResource("3_shard_pickup")
+sell_price = 26

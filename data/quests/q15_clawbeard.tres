@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="QuestDef" load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="1_quest_def"]
+[ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="2_quest_objective"]
+[ext_resource type="Resource" path="res://data/items/etc/clawbeard_pearl.tres" id="3_clawbeard_pearl"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/equips/copper_ring.tres" id="5_copper_ring"]
+[ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="6_elixir"]
+
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("6_elixir")
+chance = 1.0
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("5_copper_ring")
+chance = 1.0
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("2_quest_objective")
+kind = 1
+item = ExtResource("3_clawbeard_pearl")
+count = 1
+
+[resource]
+script = ExtResource("1_quest_def")
+id = &"q15_clawbeard"
+title = "Old Clawbeard"
+giver = &"village_elder"
+min_level = 9
+requires = Array[StringName]([&"q01_dewling_trouble"])
+offer_text = "Out on the Tidal Flats lives a crab older than this village. Old Clawbeard, the fishermen call him. He's been snapping nets again. Bring me his pearl and the shore is yours."
+progress_text = "Old Clawbeard lives on the Tidal Flats, at the far west of the isle. Bring back Clawbeard's Pearl."
+complete_text = "His pearl! The fishermen will sing about this. Take this, you've earned it."
+objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1")])
+reward_xp = 900
+reward_shards = 1200
+reward_items = Array[ExtResource("4_drop_entry")]([SubResource("Resource_2"), SubResource("Resource_3")])
