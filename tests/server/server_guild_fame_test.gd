@@ -139,7 +139,7 @@ func test_raising_someones_fame() -> void:
 	_famous()
 	h.ask(2, &"req_fame", [3, true])
 	check_eq(bob.character.fame, 1, "+1")
-	check_eq(ann.character.fame_day, TDSocial.today(), "Ann's daily fame spent")
+	check_eq(ann.character.fame_day, SocialGuilds.today(), "Ann's daily fame spent")
 	check(h.told(3, "Ann raised your fame."), "Bob told")
 
 func test_lowering_someones_fame() -> void:
@@ -158,14 +158,14 @@ func test_fame_once_a_day() -> void:
 func test_someone_else_the_next_day() -> void:
 	_famous()
 	h.join(4, "Cat", ServerHarness.TOWN)
-	ann.character.fame_day = TDSocial.today() - 1
-	ann.character.fame_given["Bob"] = TDSocial.today() - 1
+	ann.character.fame_day = SocialGuilds.today() - 1
+	ann.character.fame_given["Bob"] = SocialGuilds.today() - 1
 	h.ask(2, &"req_fame", [4, true])
 	check_eq(h.server.sessions[4].character.fame, 1, "Cat gets it")
 
 func test_the_same_player_once_a_month() -> void:
 	_famous()
-	var day := TDSocial.today()
+	var day := SocialGuilds.today()
 	ann.character.fame_day = day - 29
 	ann.character.fame_given["Bob"] = day - 29
 	h.ask(2, &"req_fame", [3, true])

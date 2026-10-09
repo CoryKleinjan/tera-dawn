@@ -63,9 +63,9 @@ func test_platform_under_feet() -> void:
 	check(layout.platform_under(Vector2(200, 380)) == null, "in the air")
 	check(layout.platform_under(Vector2(50, 400)) == null, "beside the platform")
 
-func test_landing_y_matches_ground_below() -> void:
-	check_eq(layout.landing_y(200, 0), 250.0, "drop above both")
-	check_eq(layout.landing_y(900, 0), 600.0, "drop over floor")
+func test_dropping_from_the_top_lands_on_the_highest_ground() -> void:
+	check_eq(layout.ground_below(Vector2(200, 0)), 250.0, "drop above both")
+	check_eq(layout.ground_below(Vector2(900, 0)), 600.0, "drop over floor")
 
 func test_climbable_near() -> void:
 	check(layout.climbable_near(Vector2(500, 450)) != null, "on the rope")
@@ -88,4 +88,4 @@ func test_real_maps_have_floor_and_land_on_ground() -> void:
 		var m: MapDef = Content.maps[id]
 		var l := MapLayout.new(m)
 		check_eq(l.platforms.size(), m.platforms.size() + 1, "%s platforms" % id)
-		check(l.landing_y(m.start_x, -1000) <= m.ground_y, "%s landing never below floor" % id)
+		check(l.ground_below(Vector2(m.start_x, -1000)) <= m.ground_y, "%s landing never below floor" % id)
