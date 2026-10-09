@@ -26,6 +26,8 @@ var inv := 0          # invincibility ticks after being hit
 var faint_t := 0      # ticks left lying fainted
 var land_t := 0       # ticks of the landing pose
 var cheer_t := 0      # ticks of the level-up pose
+var item_cd := 0      # ticks before another potion can be used
+var loot_cd := 0      # ticks before the loot key picks up the next item
 var _swing := false   # restart the attack animation on the next frame
 
 var rig: SpriteRig
@@ -63,7 +65,7 @@ func step() -> void:
 		if faint_t == 0:
 			_revive()
 		return
-	for t in ["inv", "action_t", "cooldown", "grab_cd", "drop_t", "land_t", "cheer_t"]:
+	for t in ["inv", "action_t", "cooldown", "grab_cd", "drop_t", "land_t", "cheer_t", "item_cd", "loot_cd"]:
 		if get(t) > 0:
 			set(t, get(t) - 1)
 	if world.tick % 120 == 0:
@@ -71,6 +73,10 @@ func step() -> void:
 		Game.mp = mini(Game.max_mp(), Game.mp + 2 + Game.level / 4)
 
 	_attacks()
+	# hold the loot key to pick things up one after another
+	if Input.is_action_pressed("loot") and loot_cd == 0 and not is_climbing():
+		if world.loot_near(position):
+			loot_cd = 8
 	if _interact():
 		return
 	if is_climbing():
@@ -176,7 +182,7 @@ func _move() -> void:
 	var right := Input.is_action_pressed("move_right")
 	var rooted := action_t > 0 and on_ground
 	var acc := 0.8 if on_ground else 0.28
-	var max_speed := 3.7
+	var max_speed := 3.7 * CharacterStats.speed_multiplier(Game.stats)
 	if left and not right and not rooted:
 		vel.x = maxf(-max_speed, vel.x - acc)
 		face = -1
@@ -194,7 +200,7 @@ func _move() -> void:
 			drop_t = 16
 			vel.y = 1
 		else:
-			vel.y = -9.8
+			vel.y = -9.8 * CharacterStats.jump_multiplier(Game.stats)
 		on_ground = false
 
 	vel.y = minf(vel.y + 0.5, 12.0)

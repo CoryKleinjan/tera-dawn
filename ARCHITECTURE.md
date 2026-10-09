@@ -14,6 +14,10 @@ data/*.tres  ──►  Content (autoload)  ──►  World loads a MapDef  ─
 - **Data** (`scripts/data/`, saved as `.tres` in `data/`) says *what* things are: a monster's
   stats and sprite, a map's platforms and spawns, a skill's reach and damage. Every class is a
   Godot `Resource`, so it can be edited in the Godot inspector.
+- **Systems** (`scripts/systems/`) are the character's rules that aren't tied to the world:
+  `Inventory`, `Equipment`, `ItemStack` (one slot's worth of an item, with its own rolled
+  stats for gear) and `CharacterStats` (the MapleStory formulas). `Game` holds the
+  character's state and uses them.
 - **Components** (`scripts/components/`) are small reusable parts any actor can use: `Health`,
   `Hitbox` and `SpriteRig` (sprite, animation, shadow, light and aura).
 - **Actors** (`scripts/actors/`) run things in the world: the player, monsters, NPCs and drops.
@@ -30,16 +34,19 @@ second. Only the stage turns that into 3D (32 game pixels per 3D unit).
 
 ```
 data/                 Content, one .tres per thing
-  monsters/ npcs/ items/ skills/ effects/   Looked up by id through Content
+  monsters/ npcs/ items/ skills/ effects/ jobs/   Looked up by id through Content
+  items/equips/ items/use/ items/etc/            Subfolders are scanned too
   maps/ biomes/ climb_styles/               Maps and how they look
 scripts/
-  autoload/           Content (data index), Game (player stats, save, input), SteamService
+  autoload/           Content (data index), Game (the character, save, input), SteamService
   data/               Resource classes for everything in data/
+  systems/            Inventory, Equipment, ItemStack, CharacterStats
   components/         Health, Hitbox, SpriteRig
   actors/             Player, Mob, Npc, Drop
   world/              World (rules), Stage + Terrain/Backdrop/Scenery builders, Platform, Combat
   fx/                 Flipbook effects and floating text
   ui/                 HUD, status bar, overlay, UiSkin, Palette
+  ui/windows/         Draggable windows (inventory, equipment, character) and the item tooltip
 assets/
   sprites/            Cut sprites, one folder per kind (generated, don't hand-edit)
   animations/         SpriteFrames for animated actors (generated)
@@ -48,7 +55,7 @@ art/
   sheets/             One manifest per sheet: how to cut it
   reference/          Style reference (the hero)
 store/                Steam capsules and key art
-tools/art/            Slicer, store-art cropper, fx texture generator, contact-sheet preview
+tools/art/            Slicer, store-art cropper, fx texture and item placeholder generators, contact-sheet preview
 tests/                Headless smoke test and screenshot scene
 ```
 
@@ -123,6 +130,56 @@ world is usually a new biome plus a few maps that use it.
    button also needs an input action in `Game`'s input bindings.
 
 Damage is worked out in `scripts/world/combat.gd`, so balance changes stay in one place.
+
+## Items, equipment and stats
+
+Stats work like MapleStory. A character has base **STR / DEX / INT / LUK** (their job's
+starting stats plus the Ability Points they spend, 5 per level), and everything they wear adds
+a **StatBlock** on top. `Game.stats` is the total. From it, `CharacterStats` works out:
+
+- **Damage range**: max = (primary × 4 + secondary) × Weapon Attack / 100 × `DAMAGE_SCALE`,
+  min = max × the job's mastery. The job says which stat is primary (STR for warriors).
+- Accuracy (DEX, LUK) lets you hit monsters above your level, Avoidability (DEX, LUK) dodges
+  their touches, Weapon Defense lowers the damage, Speed and Jump scale movement.
+- Max HP and MP: the job's base plus growth per level plus gear.
+
+`Combat` uses those numbers, so all balance lives in `character_stats.gd` and `combat.gd`.
+
+There are three inventory tabs, and the class of the item decides which one it goes in:
+
+| Class | Tab | What |
+| --- | --- | --- |
+| **EquipDef** | Equip | Gear: slot, required level and stats, a `StatBlock` of bonuses, and `variance` (each dropped copy rolls every stat up or down by up to this much) |
+| **UseDef** | Use | Potions: HP / MP restored (flat and percent), effect, cooldown |
+| **ItemDef** | Etc | Monster parts and anything else; stacks up to `max_stack` |
+
+Equipment slots: Weapon, Hat, Top, Bottom, Shoes, Gloves, Cape, Earrings, Pendant, two Rings
+and Shield (`EquipDef.Slot` and `Equipment.PLACES_FOR`). Adding a slot means adding it to both.
+
+## How to add an item or piece of gear
+
+1. Give it an icon in `assets/sprites/items/<id>.png`. Until there's real art, add it to
+   `ICONS` in `tools/art/make_item_placeholders.py` and run the script.
+2. Create the `.tres` in `data/items/equips/`, `use/` or `etc/` as an **EquipDef**, **UseDef**
+   or **ItemDef**. Fill in `id`, name, description, icon and `sell_price`; for gear, the slot,
+   requirements and a **StatBlock** in `stats`.
+3. Make something drop it: a **DropEntry** on a monster's `drops` (item, chance from 0 to 1,
+   amount range). Rare gear is usually 1 to 4%.
+
+Dawnshards go straight to the wallet when walked over; everything else waits on the ground
+for the loot key, and stays there if its tab is full.
+
+## How to add a job
+
+Create `data/jobs/<id>.tres` as a **JobDef**: primary and secondary stat, mastery, HP and MP
+growth, Ability Points per level, and what a new character starts with (stats, gear, items).
+`Game.START_JOB` picks the job new characters get; job advancement isn't built yet.
+
+## How to add a window
+
+Extend `TDWindow` (`scripts/ui/windows/window.gd`): draw in `_draw_body`, handle clicks in
+`_click`, show tooltips from `_hovered`. Register it in `TDHud._build_windows` under an input
+action, add the action to `TDHud.WINDOW_ACTIONS` and bind a key in `Game._setup_input`.
 
 ## How to add an NPC
 

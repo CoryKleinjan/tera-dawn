@@ -107,7 +107,7 @@ func step() -> void:
 		if dir > 0:
 			dir = -1
 	if hurtbox.rect_at(body_position()).intersects(p.hurtbox.rect_at(p.position)):
-		world.hurt_player(def.attack, position.x)
+		world.hurt_player(def, position.x)
 
 # ---------- HD-2D visuals ----------
 

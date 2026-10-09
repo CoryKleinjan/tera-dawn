@@ -1,9 +1,14 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=7 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=17 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/monsters/cinder_imp.png" id="2_cinder_imp"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
+[ext_resource type="Resource" path="res://data/items/etc/cinder_horn.tres" id="loot_cinder_horn"]
+[ext_resource type="Resource" path="res://data/items/use/orange_potion.tres" id="loot_orange_potion"]
+[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="loot_blue_potion"]
+[ext_resource type="Resource" path="res://data/items/equips/cinder_ring.tres" id="loot_cinder_ring"]
+[ext_resource type="Resource" path="res://data/items/equips/work_gloves.tres" id="loot_work_gloves"]
 
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("3_drop_entry")
@@ -19,6 +24,41 @@ chance = 0.35
 min_amount = 10
 max_amount = 22
 
+[sub_resource type="Resource" id="Resource_loot0"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("loot_cinder_horn")
+chance = 0.5
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_loot1"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("loot_orange_potion")
+chance = 0.05
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_loot2"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("loot_blue_potion")
+chance = 0.05
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_loot3"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("loot_cinder_ring")
+chance = 0.02
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_loot4"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("loot_work_gloves")
+chance = 0.02
+min_amount = 1
+max_amount = 1
+
 [resource]
 script = ExtResource("1_monster_def")
 id = &"cinder_imp"
@@ -30,7 +70,7 @@ exp_reward = 36
 speed = 1.4
 size = Vector2(36.0, 56.0)
 texture = ExtResource("2_cinder_imp")
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_loot0"), SubResource("Resource_loot1"), SubResource("Resource_loot2"), SubResource("Resource_loot3"), SubResource("Resource_loot4")])
 light_color = Color(1.0, 0.6039215686274509, 0.2901960784313726, 1.0)
 light_energy = 1.2
 aura_color = Color(3.0, 1.3, 0.4, 1.0)

@@ -1,9 +1,14 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=7 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=17 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/sproutcap.tres" id="2_sproutcap"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
+[ext_resource type="Resource" path="res://data/items/etc/sproutcap_cap.tres" id="loot_sproutcap_cap"]
+[ext_resource type="Resource" path="res://data/items/use/red_potion.tres" id="loot_red_potion"]
+[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="loot_blue_potion"]
+[ext_resource type="Resource" path="res://data/items/equips/leather_boots.tres" id="loot_leather_boots"]
+[ext_resource type="Resource" path="res://data/items/equips/work_gloves.tres" id="loot_work_gloves"]
 
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("3_drop_entry")
@@ -19,6 +24,41 @@ chance = 0.35
 min_amount = 6
 max_amount = 14
 
+[sub_resource type="Resource" id="Resource_loot0"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("loot_sproutcap_cap")
+chance = 0.5
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_loot1"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("loot_red_potion")
+chance = 0.06
+min_amount = 1
+max_amount = 2
+
+[sub_resource type="Resource" id="Resource_loot2"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("loot_blue_potion")
+chance = 0.04
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_loot3"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("loot_leather_boots")
+chance = 0.03
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_loot4"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("loot_work_gloves")
+chance = 0.03
+min_amount = 1
+max_amount = 1
+
 [resource]
 script = ExtResource("1_monster_def")
 id = &"sproutcap"
@@ -30,4 +70,4 @@ exp_reward = 18
 speed = 0.9
 size = Vector2(40.0, 44.0)
 sprite_frames = ExtResource("2_sproutcap")
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_loot0"), SubResource("Resource_loot1"), SubResource("Resource_loot2"), SubResource("Resource_loot3"), SubResource("Resource_loot4")])

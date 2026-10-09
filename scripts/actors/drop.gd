@@ -1,10 +1,15 @@
 class_name TDDrop
 extends Node2D
-## An item lying on the ground after a monster drops it. Walk over it to pick it up.
+## An item lying on the ground after a monster drops it. Currency is picked up by walking
+## over it; everything else with the loot key (see TDPlayer).
 
 var world: TDWorld
 var item: ItemDef
 var amount := 1
+## Gear dropped from the bag keeps its rolled stats; otherwise null and rolled on pickup.
+var stack: ItemStack
+## Where it lands; NAN means wherever it flies.
+var land_x := NAN
 var vel := Vector2.ZERO
 var floor_y := 0.0
 var t := 0
@@ -30,27 +35,38 @@ func step() -> void:
 	spin += 0.1
 	if vel.y != 0.0 or position.y < floor_y:
 		vel.y += 0.45
-		position += vel
+		position.y += vel.y
+		if is_nan(land_x):
+			position.x += vel.x
+		else:
+			position.x = lerpf(position.x, land_x, 0.12)
 		if position.y >= floor_y:
 			position.y = floor_y
+			if not is_nan(land_x):
+				position.x = land_x
 			vel = Vector2.ZERO
-	var p := world.player
-	if not taken and t > 25 and not p.fainted() and absf(position.x - p.position.x) < 26 and absf(position.y - p.position.y) < 50:
-		_pick_up()
+	if item.is_currency and can_loot(world.player.position):
+		pick_up()
 	elif t > 3600:
 		queue_free()
 
-func _pick_up() -> void:
+## Whether a player standing at `feet` can pick this up now.
+func can_loot(feet: Vector2) -> bool:
+	return not taken and t > 25 and not world.player.fainted() \
+		and absf(position.x - feet.x) < 26 and absf(position.y - feet.y) < 50
+
+## Puts it in the wallet or bag. False if the bag is full (it stays on the ground).
+func pick_up() -> bool:
+	if not world.collect(item, amount, stack):
+		return false
 	taken = true
-	if item.is_currency:
-		Game.shards += amount
-	world.add_log("Picked up %d %s" % [amount, item.display_name], Palette.MIST)
 	world.add_effect(item.pickup_effect, position + Vector2(0, -16), 1)
 	queue_free()
+	return true
 
 func _ready() -> void:
 	var big := item.pile_texture != null and amount >= item.pile_amount
-	var tex: Texture2D = item.pile_texture if big else item.world_frames[0]
+	var tex: Texture2D = item.pile_texture if big else item.world_texture()
 	gem = TDStage.sprite(tex, TDStage.TEXEL * item.sprite_scale, false)
 	gem.modulate = Color(1.3, 1.25, 1.15)
 	add_child(gem)
@@ -68,6 +84,6 @@ func _process(_delta: float) -> void:
 	var p := TDStage.to3d(position + Vector2(0, -2 - hover), TDStage.Z_DROP)
 	gem.position = p
 	if item.world_frames.size() > 1 and not (item.pile_texture and amount >= item.pile_amount):
-		gem.texture = item.world_frames[int(spin * 0.8) % item.world_frames.size()]
+		gem.texture = item.world_texture(int(spin * 0.8))
 	glow.position = p + Vector3(0, 0.4, -0.02)
 	shine.position = p + Vector3(0, 0.6, 0.4)

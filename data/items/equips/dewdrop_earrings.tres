@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="EquipDef" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/equip_def.gd" id="script"]
+[ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="stat_block"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/dewdrop_earrings.png" id="icon"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="pickup"]
+
+[sub_resource type="Resource" id="stats"]
+script = ExtResource("stat_block")
+magic_defense = 6
+intelligence = 1
+luck = 1
+
+[resource]
+script = ExtResource("script")
+id = &"dewdrop_earrings"
+display_name = "Dewdrop Earrings"
+description = "Two drops of morning dew that never dry."
+icon = ExtResource("icon")
+sprite_scale = 0.5
+glow_color = Color(0.62, 0.85, 1.0, 1.0)
+pickup_effect = ExtResource("pickup")
+sell_price = 60
+slot = 7
+required_level = 5
+stats = SubResource("stats")
+variance = 1

@@ -5,6 +5,8 @@ extends Node2D
 ## TDStage renders it as an HD-2D diorama.
 
 const VIEW := Vector2(960, 540)
+## Game pixels between the items a monster drops.
+const DROP_SPACING := 26.0
 
 var map: MapDef
 var platforms: Array[Platform] = []
@@ -130,8 +132,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		var full := DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED if full else DisplayServer.WINDOW_MODE_FULLSCREEN)
 	elif event.is_action_pressed("pause") and started:
-		started = false
-		hud.show_title(true)
+		if not hud.close_top_window():
+			started = false
+			hud.show_title(true)
+	elif started:
+		for action in TDHud.WINDOW_ACTIONS:
+			if event.is_action_pressed(action):
+				hud.toggle_window(action)
 
 func _physics_process(_delta: float) -> void:
 	tick += 1
@@ -175,8 +182,12 @@ func use_skill(skill: SkillDef) -> int:
 			if m.dead:
 				break
 			var hit := Combat.player_hit(skill, m.def)
+			var at := m.body_position() + Vector2(0, -m.def.size.y - 10 - i * 30)
+			if hit["miss"]:
+				add_number(at, 0, "miss")
+				continue
 			m.health.damage(hit["damage"])
-			add_number(m.body_position() + Vector2(0, -m.def.size.y - 10 - i * 30), hit["damage"], "crit" if hit["crit"] else "hit")
+			add_number(at, hit["damage"], "crit" if hit["crit"] else "hit")
 			if hit["crit"]:
 				add_effect(Content.effect(&"critical"), m.body_position() + Vector2(0, -m.def.size.y / 2.0), player.face)
 		if m.health.is_dead():
@@ -197,15 +208,79 @@ func kill_mob(m: TDMob) -> void:
 		add_log("Level up! You reached Lv. %d" % Game.level, Palette.SUN)
 		if Game.level >= 5:
 			SteamService.unlock_achievement("REACH_LEVEL_5")
+	var loot := []
 	for entry in m.def.drops:
 		var amount := entry.roll()
 		if amount > 0:
-			drop_layer.add_child(TDDrop.create(self, entry.item, amount, m.position + Vector2(0, -20), m.plat.y))
+			loot.append([entry.item, amount])
+	# spread out in a row under the monster, like MapleStory
+	for i in loot.size():
+		var x := clampf(m.position.x + (i - (loot.size() - 1) / 2.0) * DROP_SPACING, m.plat.x + 8, m.plat.x + m.plat.w - 8)
+		var d := TDDrop.create(self, loot[i][0], loot[i][1], m.position + Vector2(0, -20), m.plat.y)
+		d.land_x = x
+		drop_layer.add_child(d)
 
-func hurt_player(base: int, from_x: float) -> void:
+## Drops a stack from the bag onto the ground at the player's feet.
+func drop_from_player(stack: ItemStack) -> void:
+	var d := TDDrop.create(self, stack.item, stack.count, player.position + Vector2(0, -30), player.platform.y if player.platform else player.position.y)
+	d.stack = stack
+	d.land_x = player.position.x + player.face * 14
+	drop_layer.add_child(d)
+	add_log("Dropped %s" % _amount_name(stack.item, stack.count), Palette.MIST)
+
+## Picks up the nearest drop the player is standing by (the loot key). True if one was taken.
+func loot_near(pos: Vector2) -> bool:
+	var best: TDDrop = null
+	for d in drop_layer.get_children():
+		var drop := d as TDDrop
+		if drop.can_loot(pos) and (best == null or absf(drop.position.x - pos.x) < absf(best.position.x - pos.x)):
+			best = drop
+	return best != null and best.pick_up()
+
+## Puts a picked-up item in the bag. False (with a message) if there's no room.
+func collect(item: ItemDef, amount: int, stack: ItemStack = null) -> bool:
+	if item.is_currency:
+		Game.shards += amount
+	elif stack:
+		if not Game.inventory.add_stack(stack):
+			add_log("Your %s inventory is full." % ItemDef.TAB_NAMES[item.tab()], Color("ff8a99"))
+			return false
+	elif not Game.inventory.has_room(item, amount):
+		add_log("Your %s inventory is full." % ItemDef.TAB_NAMES[item.tab()], Color("ff8a99"))
+		return false
+	else:
+		Game.inventory.add(item, amount)
+	add_log("Picked up %s" % _amount_name(item, amount), Palette.MIST)
+	return true
+
+## Uses the item in Use slot `i` (a potion). Returns why it couldn't, or "".
+func use_item(i: int) -> String:
+	var stack := Game.inventory.at(ItemDef.Tab.USE, i)
+	if stack == null or not stack.item is UseDef:
+		return ""
+	if player.fainted():
+		return "You can't do that right now."
+	if player.item_cd > 0:
+		return "You can't use another item yet."
+	var u := stack.item as UseDef
+	Game.health.heal(u.hp_for(Game.max_hp()))
+	Game.mp = mini(Game.max_mp(), Game.mp + u.mp_for(Game.max_mp()))
+	player.item_cd = u.cooldown
+	Game.inventory.take(ItemDef.Tab.USE, i, 1)
+	add_effect(u.use_effect, player.position + Vector2(0, -40), player.face)
+	return ""
+
+func _amount_name(item: ItemDef, amount: int) -> String:
+	return "%d %s" % [amount, item.display_name] if amount > 1 or item.is_currency else item.display_name
+
+func hurt_player(monster: MonsterDef, from_x: float) -> void:
 	if not started or player.inv > 0 or player.fainted():
 		return
-	var dmg := Combat.monster_hit(base)
+	var dmg := Combat.monster_hit(monster)
+	if dmg == 0:
+		player.inv = 40
+		add_number(player.position + Vector2(0, -70), 0, "miss")
+		return
 	Game.health.damage(dmg)
 	player.inv = 90
 	add_number(player.position + Vector2(0, -70), dmg, "taken")

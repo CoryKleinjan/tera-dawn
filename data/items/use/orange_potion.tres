@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="UseDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/use_def.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/orange_potion.png" id="icon"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="pickup"]
+[ext_resource type="Resource" path="res://data/effects/heal.tres" id="heal"]
+
+[resource]
+script = ExtResource("script")
+id = &"orange_potion"
+display_name = "Orange Potion"
+description = "Brewed from sunfruit. Restores a fair amount of HP."
+icon = ExtResource("icon")
+sprite_scale = 0.45
+glow_color = Color(1.000, 0.690, 0.361, 1.0)
+pickup_effect = ExtResource("pickup")
+sell_price = 15
+max_stack = 100
+heal_hp = 150
+use_effect = ExtResource("heal")
