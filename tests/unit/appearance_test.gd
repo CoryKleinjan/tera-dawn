@@ -235,3 +235,25 @@ func test_stand_ins_sit_on_the_hero_and_mirror() -> void:
 	var cap: Dictionary = Paperdoll.place_overlay(&"cap", climbing)
 	var top: Vector2 = Paperdoll.anchor(climbing, &"head_top")
 	check(absf(cap["centre"].x - top.x) < 8, "a hat stays on his head while he climbs")
+
+func test_the_weapon_hand_and_shield_sit_on_the_body() -> void:
+	var img := Paperdoll.MASK.get_image()
+	img.decompress()
+	var frames: Array = Paperdoll.rig()["frames"]
+	for i in frames.size():
+		for key in [&"grip", &"shield"]:
+			var at: Variant = Paperdoll.anchor(i, key)
+			if at == null:
+				continue
+			var on_body := false
+			for dy in range(-3, 4):
+				for dx in range(-3, 4):
+					var p := Vector2i(at) + Vector2i(i * int(Paperdoll.FRAME_SIZE.x) + dx, dy)
+					if p.x >= i * Paperdoll.FRAME_SIZE.x and p.x < (i + 1) * Paperdoll.FRAME_SIZE.x and p.y >= 0 and p.y < img.get_height():
+						on_body = on_body or img.get_pixelv(p).a > 0.5
+			check(on_body, "%s: %s is on the body" % [frames[i]["name"], key])
+
+func test_hats_turn_with_the_head() -> void:
+	var lying := Paperdoll.frame_index(Paperdoll.FRAMES.get_frame_texture(&"faint", 1))
+	var hat: Dictionary = Paperdoll.place_overlay(&"cap", lying)
+	check(absf(hat["angle"]) > 1.0, "the cap lies down with him")
