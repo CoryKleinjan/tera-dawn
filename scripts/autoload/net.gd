@@ -153,6 +153,11 @@ func req_use_item(slot: int) -> void:
 		server.on_use_item(_sender(), slot)
 
 @rpc("any_peer", "call_local", "reliable")
+func req_scroll(use_slot: int, equip_slot: int) -> void:
+	if server:
+		server.on_scroll(_sender(), use_slot, equip_slot)
+
+@rpc("any_peer", "call_local", "reliable")
 func req_equip(slot: int, place: StringName) -> void:
 	if server:
 		server.on_equip(_sender(), slot, place)
@@ -286,6 +291,11 @@ func ev_skill(peer: int, skill_id: StringName, x: float, y: float, face: int, li
 func ev_mob_died(index: int) -> void:
 	if world:
 		world.show_mob_death(index)
+
+@rpc("authority", "call_local", "reliable")
+func ev_mob_shot(index: int, x: float, y: float) -> void:
+	if world:
+		world.show_mob_shot(index, Vector2(x, y))
 
 @rpc("authority", "call_local", "reliable")
 func ev_level_up(peer: int, level: int) -> void:

@@ -1,45 +1,99 @@
-[gd_resource type="Resource" script_class="ShopDef" load_steps=21 format=3]
+[gd_resource type="Resource" script_class="ShopDef" load_steps=39 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/shop_def.gd" id="1_shop_def"]
 [ext_resource type="Script" path="res://scripts/data/shop_entry.gd" id="2_shop_entry"]
 [ext_resource type="Resource" path="res://data/items/use/red_potion.tres" id="3_red_potion"]
 [ext_resource type="Resource" path="res://data/items/use/orange_potion.tres" id="4_orange_potion"]
 [ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="5_white_potion"]
-[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="6_blue_potion"]
-[ext_resource type="Resource" path="res://data/items/use/mana_elixir.tres" id="7_mana_elixir"]
-[ext_resource type="Resource" path="res://data/items/use/return_scroll.tres" id="8_return_scroll"]
-[ext_resource type="Resource" path="res://data/items/ammo/feather_arrow.tres" id="9_feather_arrow"]
-[ext_resource type="Resource" path="res://data/items/ammo/iron_star.tres" id="10_iron_star"]
-[ext_resource type="Resource" path="res://data/items/ammo/lead_bullet.tres" id="11_lead_bullet"]
+[ext_resource type="Resource" path="res://data/items/use/honey_bun.tres" id="6_honey_bun"]
+[ext_resource type="Resource" path="res://data/items/use/sunrise_cake.tres" id="7_sunrise_cake"]
+[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="8_blue_potion"]
+[ext_resource type="Resource" path="res://data/items/use/mana_tea.tres" id="9_mana_tea"]
+[ext_resource type="Resource" path="res://data/items/use/mana_elixir.tres" id="10_mana_elixir"]
+[ext_resource type="Resource" path="res://data/items/use/return_scroll.tres" id="11_return_scroll"]
+[ext_resource type="Resource" path="res://data/items/use/dawnharbor_scroll.tres" id="12_dawnharbor_scroll"]
+[ext_resource type="Resource" path="res://data/items/use/greenbough_scroll.tres" id="13_greenbough_scroll"]
+[ext_resource type="Resource" path="res://data/items/use/lumewood_scroll.tres" id="14_lumewood_scroll"]
+[ext_resource type="Resource" path="res://data/items/use/emberforge_scroll.tres" id="15_emberforge_scroll"]
+[ext_resource type="Resource" path="res://data/items/use/lanternfall_scroll.tres" id="16_lanternfall_scroll"]
+[ext_resource type="Resource" path="res://data/items/use/driftcove_scroll.tres" id="17_driftcove_scroll"]
+[ext_resource type="Resource" path="res://data/items/ammo/feather_arrow.tres" id="18_feather_arrow"]
+[ext_resource type="Resource" path="res://data/items/ammo/iron_star.tres" id="19_iron_star"]
+[ext_resource type="Resource" path="res://data/items/ammo/lead_bullet.tres" id="20_lead_bullet"]
+
+[sub_resource type="Resource" id="Resource_18"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("20_lead_bullet")
+price = 0
+
+[sub_resource type="Resource" id="Resource_17"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("19_iron_star")
+price = 0
+
+[sub_resource type="Resource" id="Resource_16"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("18_feather_arrow")
+price = 0
+
+[sub_resource type="Resource" id="Resource_15"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("17_driftcove_scroll")
+price = 0
+
+[sub_resource type="Resource" id="Resource_14"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("16_lanternfall_scroll")
+price = 0
+
+[sub_resource type="Resource" id="Resource_13"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("15_emberforge_scroll")
+price = 0
+
+[sub_resource type="Resource" id="Resource_12"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("14_lumewood_scroll")
+price = 0
+
+[sub_resource type="Resource" id="Resource_11"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("13_greenbough_scroll")
+price = 0
+
+[sub_resource type="Resource" id="Resource_10"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("12_dawnharbor_scroll")
+price = 0
 
 [sub_resource type="Resource" id="Resource_9"]
 script = ExtResource("2_shop_entry")
-item = ExtResource("11_lead_bullet")
+item = ExtResource("11_return_scroll")
 price = 0
 
 [sub_resource type="Resource" id="Resource_8"]
 script = ExtResource("2_shop_entry")
-item = ExtResource("10_iron_star")
+item = ExtResource("10_mana_elixir")
 price = 0
 
 [sub_resource type="Resource" id="Resource_7"]
 script = ExtResource("2_shop_entry")
-item = ExtResource("9_feather_arrow")
+item = ExtResource("9_mana_tea")
 price = 0
 
 [sub_resource type="Resource" id="Resource_6"]
 script = ExtResource("2_shop_entry")
-item = ExtResource("8_return_scroll")
+item = ExtResource("8_blue_potion")
 price = 0
 
 [sub_resource type="Resource" id="Resource_5"]
 script = ExtResource("2_shop_entry")
-item = ExtResource("7_mana_elixir")
+item = ExtResource("7_sunrise_cake")
 price = 0
 
 [sub_resource type="Resource" id="Resource_4"]
 script = ExtResource("2_shop_entry")
-item = ExtResource("6_blue_potion")
+item = ExtResource("6_honey_bun")
 price = 0
 
 [sub_resource type="Resource" id="Resource_3"]
@@ -61,4 +115,4 @@ price = 0
 script = ExtResource("1_shop_def")
 id = &"town_general"
 display_name = "General Store"
-items = Array[ExtResource("2_shop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9")])
+items = Array[ExtResource("2_shop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18")])

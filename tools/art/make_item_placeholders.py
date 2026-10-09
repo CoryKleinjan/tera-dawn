@@ -370,6 +370,11 @@ def draw(item_id, shape, col):
 
 
 def main():
+    # icons for generated content are listed in item_icons.json next to this script
+    extra = os.path.join(HERE, "item_icons.json")
+    if os.path.exists(extra):
+        import json
+        ICONS.update({k: tuple(v) for k, v in json.load(open(extra)).items()})
     force = "--force" in sys.argv
     os.makedirs(OUT, exist_ok=True)
     for item_id, (shape, col) in ICONS.items():

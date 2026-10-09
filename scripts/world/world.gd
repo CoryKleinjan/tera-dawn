@@ -102,9 +102,8 @@ func load_map(id: StringName) -> void:
 	drops.clear()
 	avatars.clear()
 	# same order as the server's MapInstance, so index i is the same monster on both sides
-	for s in map.spawns:
-		for i in s.count:
-			mob_layer.add_child(TDMob.create(self, mob_layer.get_child_count(), s.monster, platforms[s.platform]))
+	for r in map.roster():
+		mob_layer.add_child(TDMob.create(self, mob_layer.get_child_count(), r[0], platforms[r[1]]))
 	for p in map.npcs:
 		npc_layer.add_child(TDNpc.create(self, p, platforms[p.platform]))
 	cam = _camera_target()
@@ -254,6 +253,16 @@ func _show_hits(skill: SkillDef, m: TDMob, hits: Array, face: int, first := 0) -
 		if kind == "crit":
 			add_effect(Content.effect(&"critical"), mid, face)
 	add_effect(skill.hit_effect, mid, face)
+
+## Monster `index` fired its shot at the point `aim`.
+func show_mob_shot(index: int, aim: Vector2) -> void:
+	var views := mobs()
+	if index >= views.size() or views[index].def.shot == null:
+		return
+	var m := views[index]
+	m.dir = -1 if aim.x < m.position.x else 1
+	var from := m.body_position() + Vector2(m.dir * m.def.size.x * 0.4, -m.def.size.y * 0.55)
+	fx_layer.add_child(TDProjectile.create(self, m.def.shot, from, aim, 0, null, Callable()))
 
 func show_mob_death(index: int) -> void:
 	var views := mobs()

@@ -1,0 +1,694 @@
+{
+"acorn_pendant": [
+"pendant",
+"b07a45"
+],
+"arcane_core": [
+"gem",
+"b090ff"
+],
+"ash_veil": [
+"cape",
+"909090"
+],
+"ash_wing": [
+"wing",
+"806060"
+],
+"aurora_hat": [
+"cap",
+"ffb0e8"
+],
+"aurora_robe": [
+"shirt",
+"ffb0e8"
+],
+"aurora_slippers": [
+"boots",
+"ffb0e8"
+],
+"aurora_trousers": [
+"pants",
+"ffb0e8"
+],
+"aurora_wand": [
+"wand",
+"ffb0e8"
+],
+"bark_cap": [
+"mushroom",
+"b08050"
+],
+"barnacle": [
+"stone",
+"70b0c0"
+],
+"barnacle_knuckle": [
+"knuckle",
+"a8d0e0"
+],
+"bramble_tusk": [
+"tusk",
+"90c070"
+],
+"brigand_gloves": [
+"gloves",
+"8a6f7d"
+],
+"canvas_gloves": [
+"gloves",
+"e9dcc0"
+],
+"clawbeard_pearl": [
+"gem",
+"ff8070"
+],
+"copper_ring": [
+"ring",
+"d08a4a"
+],
+"coral_branch": [
+"horn",
+"ff9090"
+],
+"crab_claw": [
+"horn",
+"ffb0a0"
+],
+"crypt_shard": [
+"shard",
+"7070a0"
+],
+"crystal_chunk": [
+"gem",
+"a0c0ff"
+],
+"dawnbreaker_claymore": [
+"sword",
+"ffd166"
+],
+"dawnharbor_scroll": [
+"scroll",
+"ffe8a8"
+],
+"dawnwing_cape": [
+"cape",
+"ffcf4a"
+],
+"deckhand_bandana": [
+"cap",
+"a8d0e0"
+],
+"deckhand_boots": [
+"boots",
+"a8d0e0"
+],
+"deckhand_coat": [
+"shirt",
+"a8d0e0"
+],
+"deckhand_trousers": [
+"pants",
+"a8d0e0"
+],
+"dragonhide_gloves": [
+"gloves",
+"ff7a59"
+],
+"driftcove_scroll": [
+"scroll",
+"ffe8a8"
+],
+"eclipse_bandana": [
+"cap",
+"d0d0e8"
+],
+"eclipse_claw": [
+"claw",
+"d0d0e8"
+],
+"eclipse_garb": [
+"shirt",
+"d0d0e8"
+],
+"eclipse_pants": [
+"pants",
+"d0d0e8"
+],
+"eclipse_shoes": [
+"boots",
+"d0d0e8"
+],
+"elmwood_longbow": [
+"bow",
+"7ccf6a"
+],
+"ember_earrings": [
+"earrings",
+"ff9a3c"
+],
+"emberforge_aegis": [
+"shield",
+"ff9a5a"
+],
+"emberforge_scroll": [
+"scroll",
+"ffe8a8"
+],
+"emberplate_cuirass": [
+"shirt",
+"ff9a5a"
+],
+"emberplate_greaves": [
+"pants",
+"ff9a5a"
+],
+"emberplate_helm": [
+"cap",
+"ff9a5a"
+],
+"emberplate_sabatons": [
+"boots",
+"ff9a5a"
+],
+"fallen_star": [
+"gem",
+"e0e0ff"
+],
+"forge_rivet": [
+"stone",
+"d07040"
+],
+"gale_bow": [
+"bow",
+"9fe0c0"
+],
+"gloom_spore": [
+"mushroom",
+"6a5aa0"
+],
+"glow_spore": [
+"mushroom",
+"9fb8ff"
+],
+"green_leaf": [
+"wing",
+"a0e080"
+],
+"greenbough_scroll": [
+"scroll",
+"ffe8a8"
+],
+"grove_spark": [
+"flame",
+"c0ff90"
+],
+"gull_feather": [
+"wing",
+"f4f8ff"
+],
+"hard_acorn": [
+"stone",
+"c09060"
+],
+"harpy_plume": [
+"wing",
+"ffc0a0"
+],
+"heartwood": [
+"stone",
+"70a050"
+],
+"hiking_boots": [
+"boots",
+"a5714a"
+],
+"hog_mane": [
+"flame",
+"ff9060"
+],
+"honey_bun": [
+"stone",
+"e0a050"
+],
+"imp_arrowhead": [
+"shard",
+"ffb070"
+],
+"kelp_strand": [
+"tuft",
+"40a080"
+],
+"kite_shield": [
+"shield",
+"c0c8d8"
+],
+"lantern_pendant": [
+"pendant",
+"ffc060"
+],
+"lanternfall_scroll": [
+"scroll",
+"ffe8a8"
+],
+"leviathan_bandana": [
+"cap",
+"40c0b0"
+],
+"leviathan_boots": [
+"boots",
+"40c0b0"
+],
+"leviathan_coat": [
+"shirt",
+"40c0b0"
+],
+"leviathan_fist": [
+"knuckle",
+"40c0b0"
+],
+"leviathan_hand_cannon": [
+"gun",
+"40c0b0"
+],
+"leviathan_trousers": [
+"pants",
+"40c0b0"
+],
+"lume_dust": [
+"shard",
+"c0a0ff"
+],
+"lume_earrings": [
+"earrings",
+"a8c8ff"
+],
+"lumewood_scroll": [
+"scroll",
+"ffe8a8"
+],
+"magma_plate": [
+"shard",
+"ff7040"
+],
+"mana_tea": [
+"potion",
+"8fb8ff"
+],
+"marsh_moss": [
+"tuft",
+"506040"
+],
+"molten_crown": [
+"flame",
+"ff6040"
+],
+"moonstone_wand": [
+"wand",
+"b8c8ff"
+],
+"moonweave_hat": [
+"cap",
+"b8c8ff"
+],
+"moonweave_robe": [
+"shirt",
+"b8c8ff"
+],
+"moonweave_slippers": [
+"boots",
+"b8c8ff"
+],
+"moonweave_trousers": [
+"pants",
+"b8c8ff"
+],
+"moth_dust": [
+"wing",
+"c0a060"
+],
+"night_bristle": [
+"tuft",
+"6050a0"
+],
+"nightfang_bandana": [
+"cap",
+"7a6ad0"
+],
+"nightfang_claw": [
+"claw",
+"7a6ad0"
+],
+"nightfang_garb": [
+"shirt",
+"7a6ad0"
+],
+"nightfang_pants": [
+"pants",
+"7a6ad0"
+],
+"nightfang_shoes": [
+"boots",
+"7a6ad0"
+],
+"patched_trousers": [
+"pants",
+"7d8fb3"
+],
+"power_elixir": [
+"potion",
+"ffe080"
+],
+"prism_jelly": [
+"drop",
+"ffc0ff"
+],
+"pup_tooth": [
+"tusk",
+"ffc080"
+],
+"ranger_breeches": [
+"pants",
+"6f8f50"
+],
+"ravager_blade": [
+"sword",
+"ff9a5a"
+],
+"reef_feather": [
+"wing",
+"e0f0ff"
+],
+"saltwood_pistol": [
+"gun",
+"a8d0e0"
+],
+"sand_claw": [
+"horn",
+"f0d090"
+],
+"sandals": [
+"boots",
+"c99a62"
+],
+"scroll_armor_def_10": [
+"scroll",
+"8a9ab8"
+],
+"scroll_armor_def_60": [
+"scroll",
+"c0c8d8"
+],
+"scroll_cape_mdef_60": [
+"scroll",
+"6a52c8"
+],
+"scroll_earring_int_60": [
+"scroll",
+"a8c8ff"
+],
+"scroll_gloves_att_10": [
+"scroll",
+"c07040"
+],
+"scroll_gloves_att_60": [
+"scroll",
+"e0b070"
+],
+"scroll_helmet_hp_60": [
+"scroll",
+"ff6b7d"
+],
+"scroll_shield_def_60": [
+"scroll",
+"b07a45"
+],
+"scroll_shoes_speed_60": [
+"scroll",
+"9fe0c0"
+],
+"scroll_top_dex_60": [
+"scroll",
+"7ccf6a"
+],
+"scroll_top_int_60": [
+"scroll",
+"8fb8ff"
+],
+"scroll_top_luk_60": [
+"scroll",
+"d0a0ff"
+],
+"scroll_top_str_60": [
+"scroll",
+"ff8a5a"
+],
+"scroll_weapon_att_10": [
+"scroll",
+"ff9a3c"
+],
+"scroll_weapon_att_60": [
+"scroll",
+"ffd166"
+],
+"scroll_weapon_matt_10": [
+"scroll",
+"9a7bd0"
+],
+"scroll_weapon_matt_60": [
+"scroll",
+"c9a7ff"
+],
+"sea_jelly": [
+"drop",
+"60e0d0"
+],
+"shade_horn": [
+"horn",
+"7060a0"
+],
+"shell_earrings": [
+"earrings",
+"ffd8c8"
+],
+"skyreach_boots": [
+"boots",
+"8fd8ff"
+],
+"skyreach_bow": [
+"bow",
+"8fd8ff"
+],
+"skyreach_hood": [
+"cap",
+"8fd8ff"
+],
+"skyreach_jerkin": [
+"shirt",
+"8fd8ff"
+],
+"skyreach_leggings": [
+"pants",
+"8fd8ff"
+],
+"slag_lump": [
+"stone",
+"ff9050"
+],
+"spell_horn": [
+"horn",
+"9070ff"
+],
+"spore_sac": [
+"mushroom",
+"d0a0ff"
+],
+"stalker_fang": [
+"tusk",
+"403070"
+],
+"star_wing": [
+"wing",
+"8080ff"
+],
+"starfall_hat": [
+"cap",
+"c9a7ff"
+],
+"starfall_robe": [
+"shirt",
+"c9a7ff"
+],
+"starfall_slippers": [
+"boots",
+"c9a7ff"
+],
+"starfall_staff": [
+"staff",
+"c9a7ff"
+],
+"starfall_trousers": [
+"pants",
+"c9a7ff"
+],
+"starlight_draught": [
+"potion",
+"c9a7ff"
+],
+"starlit_cape": [
+"cape",
+"6a52c8"
+],
+"steel_bastard_sword": [
+"sword",
+"c0c8d8"
+],
+"steel_cuirass": [
+"shirt",
+"c0c8d8"
+],
+"steel_greaves": [
+"pants",
+"c0c8d8"
+],
+"steel_helm": [
+"cap",
+"c0c8d8"
+],
+"steel_sabatons": [
+"boots",
+"c0c8d8"
+],
+"stormbreaker_knuckle": [
+"knuckle",
+"6fb0ff"
+],
+"stormcaller": [
+"gun",
+"6fb0ff"
+],
+"stormsail_bandana": [
+"cap",
+"6fb0ff"
+],
+"stormsail_boots": [
+"boots",
+"6fb0ff"
+],
+"stormsail_coat": [
+"shirt",
+"6fb0ff"
+],
+"stormsail_trousers": [
+"pants",
+"6fb0ff"
+],
+"sunforged_cuirass": [
+"shirt",
+"ffd166"
+],
+"sunforged_greaves": [
+"pants",
+"ffd166"
+],
+"sunforged_helm": [
+"cap",
+"ffd166"
+],
+"sunforged_sabatons": [
+"boots",
+"ffd166"
+],
+"sunrise_cake": [
+"stone",
+"ffb0a0"
+],
+"sunstone_ring": [
+"ring",
+"ffd166"
+],
+"thicket_boots": [
+"boots",
+"7ccf6a"
+],
+"thicket_hood": [
+"cap",
+"7ccf6a"
+],
+"thicket_jerkin": [
+"shirt",
+"7ccf6a"
+],
+"thicket_leggings": [
+"pants",
+"7ccf6a"
+],
+"thorn_tuft": [
+"tuft",
+"7fd060"
+],
+"tide_droplet": [
+"drop",
+"8fd8ff"
+],
+"tide_ring": [
+"ring",
+"40c0b0"
+],
+"titan_coral": [
+"gem",
+"60c0c0"
+],
+"traveler_cape": [
+"cape",
+"b07a45"
+],
+"viper_bandana": [
+"cap",
+"8fbf5a"
+],
+"viper_claw": [
+"claw",
+"8fbf5a"
+],
+"viper_garb": [
+"shirt",
+"8fbf5a"
+],
+"viper_pants": [
+"pants",
+"8fbf5a"
+],
+"viper_shoes": [
+"boots",
+"8fbf5a"
+],
+"wick_ember": [
+"flame",
+"ffd070"
+],
+"windrunner_boots": [
+"boots",
+"9fe0c0"
+],
+"windrunner_hood": [
+"cap",
+"9fe0c0"
+],
+"windrunner_jerkin": [
+"shirt",
+"9fe0c0"
+],
+"windrunner_leggings": [
+"pants",
+"9fe0c0"
+],
+"windstep_boots": [
+"boots",
+"9fe0c0"
+],
+"wraith_lantern": [
+"flame",
+"9080ff"
+]
+}

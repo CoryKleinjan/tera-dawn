@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_def.gd" id="1_item_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/forge_rivet.png" id="2_forge_rivet"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="3_shard_pickup"]
+
+[resource]
+script = ExtResource("1_item_def")
+id = &"forge_rivet"
+display_name = "Forge Rivet"
+description = "Dropped by the Forge Golem."
+icon = ExtResource("2_forge_rivet")
+sprite_scale = 0.36
+glow_color = Color(0.815686, 0.439216, 0.25098, 1.0)
+pickup_effect = ExtResource("3_shard_pickup")
+sell_price = 46

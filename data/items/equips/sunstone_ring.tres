@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="EquipDef" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/equip_def.gd" id="1_equip_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/sunstone_ring.png" id="2_sunstone_ring"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="3_shard_pickup"]
+[ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="4_stat_block"]
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("4_stat_block")
+strength = 1
+dexterity = 1
+intelligence = 1
+luck = 1
+
+[resource]
+script = ExtResource("1_equip_def")
+id = &"sunstone_ring"
+display_name = "Sunstone Ring"
+description = "A sliver of dawn set in gold."
+icon = ExtResource("2_sunstone_ring")
+sprite_scale = 0.4
+glow_color = Color(1.0, 0.819608, 0.4, 1.0)
+pickup_effect = ExtResource("3_shard_pickup")
+sell_price = 5338
+slot = 9
+required_level = 35
+stats = SubResource("Resource_1")
+variance = 3
+upgrade_slots = 3

@@ -9,6 +9,7 @@ const DEAD := 1
 const HURT := 2
 const AGGRO := 4
 const SHOW_HP := 8
+const CASTING := 16
 
 ## How far it moves toward the server's position each tick (0..1).
 const FOLLOW := 0.35
@@ -82,6 +83,8 @@ func _ready() -> void:
 	rig = SpriteRig.new()
 	rig.setup(def.sprite_frames, def.texture, TDStage.TEXEL * def.sprite_scale, def.size.x * 1.1)
 	add_child(rig)
+	if def.tint != Color.WHITE:
+		rig.set_tint(def.tint)
 	if def.light_color.a > 0.0:
 		rig.add_light(def.light_color, def.light_energy, def.size.y)
 	if def.aura_color.a > 0.0:
@@ -108,6 +111,8 @@ func _process(_delta: float) -> void:
 		rig.play(&"die")
 	elif hurt:
 		rig.play(&"hurt")
+	elif flags & CASTING != 0:
+		rig.play(&"attack")
 	elif flags & AGGRO != 0 and moving:
 		rig.play(&"attack")
 	elif moving:

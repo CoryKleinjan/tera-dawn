@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="UseDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/use_def.gd" id="1_use_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/dawnharbor_scroll.png" id="2_dawnharbor_scroll"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="3_shard_pickup"]
+[ext_resource type="Resource" path="res://data/effects/heal.tres" id="4_heal"]
+
+[resource]
+script = ExtResource("1_use_def")
+id = &"dawnharbor_scroll"
+display_name = "Dawnharbor Scroll"
+description = "Reading it takes you straight to Dawnharbor."
+icon = ExtResource("2_dawnharbor_scroll")
+sprite_scale = 0.4
+glow_color = Color(1.0, 0.909804, 0.658824, 1.0)
+pickup_effect = ExtResource("3_shard_pickup")
+sell_price = 40
+max_stack = 100
+teleport = &"dawnharbor"
+use_effect = ExtResource("4_heal")
+cooldown = 60

@@ -1,0 +1,330 @@
+[gd_resource type="Resource" script_class="MapDef" load_steps=61 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
+[ext_resource type="Resource" path="res://data/biomes/lantern.tres" id="2_lantern"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="3_platform_def"]
+[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="4_climbable_def"]
+[ext_resource type="Resource" path="res://data/climb_styles/rope_ladder.tres" id="5_rope_ladder"]
+[ext_resource type="Resource" path="res://data/climb_styles/rope.tres" id="6_rope"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="7_portal_def"]
+[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
+[ext_resource type="Resource" path="res://data/monsters/shade_imp.tres" id="9_shade_imp"]
+[ext_resource type="Resource" path="res://data/monsters/lantern_wisp.tres" id="10_lantern_wisp"]
+[ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="11_prop_placement"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/rock_large.png" id="12_rock_large"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/stump.png" id="13_stump"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/crystals.png" id="14_crystals"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/tree_small.png" id="15_tree_small"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/floating_rock.png" id="16_floating_rock"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/steam_vent.png" id="17_steam_vent"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/fire_lilies.png" id="18_fire_lilies"]
+
+[sub_resource type="Resource" id="Resource_42"]
+script = ExtResource("11_prop_placement")
+texture = ExtResource("18_fire_lilies")
+x = 301.0
+y = -1.0
+depth = -5.4
+scale = 0.92
+flip = true
+
+[sub_resource type="Resource" id="Resource_41"]
+script = ExtResource("11_prop_placement")
+texture = ExtResource("17_steam_vent")
+x = 1717.0
+y = -1.0
+depth = -7.4
+scale = 1.32
+flip = false
+
+[sub_resource type="Resource" id="Resource_40"]
+script = ExtResource("11_prop_placement")
+texture = ExtResource("16_floating_rock")
+x = 536.0
+y = 274.0
+depth = -7.2
+scale = 1.21
+flip = true
+
+[sub_resource type="Resource" id="Resource_39"]
+script = ExtResource("11_prop_placement")
+texture = ExtResource("15_tree_small")
+x = 786.0
+y = -1.0
+depth = -4.4
+scale = 1.41
+flip = false
+
+[sub_resource type="Resource" id="Resource_38"]
+script = ExtResource("11_prop_placement")
+texture = ExtResource("14_crystals")
+x = 2241.0
+y = -1.0
+depth = -5.6
+scale = 1.21
+flip = false
+
+[sub_resource type="Resource" id="Resource_37"]
+script = ExtResource("11_prop_placement")
+texture = ExtResource("14_crystals")
+x = 1184.0
+y = -1.0
+depth = -2.5
+scale = 0.98
+flip = true
+
+[sub_resource type="Resource" id="Resource_36"]
+script = ExtResource("11_prop_placement")
+texture = ExtResource("13_stump")
+x = 857.0
+y = -1.0
+depth = -6.4
+scale = 1.37
+flip = true
+
+[sub_resource type="Resource" id="Resource_35"]
+script = ExtResource("11_prop_placement")
+texture = ExtResource("12_rock_large")
+x = 2335.0
+y = -1.0
+depth = -4.2
+scale = 1.44
+flip = true
+
+[sub_resource type="Resource" id="Resource_34"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("10_lantern_wisp")
+platform = 10
+count = 2
+
+[sub_resource type="Resource" id="Resource_33"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("9_shade_imp")
+platform = 9
+count = 3
+
+[sub_resource type="Resource" id="Resource_32"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("10_lantern_wisp")
+platform = 8
+count = 2
+
+[sub_resource type="Resource" id="Resource_31"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("9_shade_imp")
+platform = 7
+count = 2
+
+[sub_resource type="Resource" id="Resource_30"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("9_shade_imp")
+platform = 6
+count = 3
+
+[sub_resource type="Resource" id="Resource_29"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("10_lantern_wisp")
+platform = 5
+count = 2
+
+[sub_resource type="Resource" id="Resource_28"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("9_shade_imp")
+platform = 4
+count = 3
+
+[sub_resource type="Resource" id="Resource_27"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("9_shade_imp")
+platform = 3
+count = 2
+
+[sub_resource type="Resource" id="Resource_26"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("10_lantern_wisp")
+platform = 2
+count = 2
+
+[sub_resource type="Resource" id="Resource_25"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("10_lantern_wisp")
+platform = 1
+count = 3
+
+[sub_resource type="Resource" id="Resource_24"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("10_lantern_wisp")
+platform = 0
+count = 3
+
+[sub_resource type="Resource" id="Resource_23"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("9_shade_imp")
+platform = 0
+count = 3
+
+[sub_resource type="Resource" id="Resource_22"]
+script = ExtResource("7_portal_def")
+x = 2940.0
+platform = 0
+target_map = &"gloom_woods"
+target_x = 120.0
+
+[sub_resource type="Resource" id="Resource_21"]
+script = ExtResource("7_portal_def")
+x = 60.0
+platform = 0
+target_map = &"lanternfall"
+target_x = 1780.0
+
+[sub_resource type="Resource" id="Resource_20"]
+script = ExtResource("4_climbable_def")
+x = 2360.0
+top = 350.0
+bottom = 480.0
+style = ExtResource("6_rope")
+
+[sub_resource type="Resource" id="Resource_19"]
+script = ExtResource("4_climbable_def")
+x = 2150.0
+top = 480.0
+bottom = 620.0
+style = ExtResource("5_rope_ladder")
+
+[sub_resource type="Resource" id="Resource_18"]
+script = ExtResource("4_climbable_def")
+x = 1660.0
+top = 250.0
+bottom = 360.0
+style = ExtResource("6_rope")
+
+[sub_resource type="Resource" id="Resource_17"]
+script = ExtResource("4_climbable_def")
+x = 1810.0
+top = 360.0
+bottom = 480.0
+style = ExtResource("6_rope")
+
+[sub_resource type="Resource" id="Resource_16"]
+script = ExtResource("4_climbable_def")
+x = 1580.0
+top = 480.0
+bottom = 620.0
+style = ExtResource("5_rope_ladder")
+
+[sub_resource type="Resource" id="Resource_15"]
+script = ExtResource("4_climbable_def")
+x = 1120.0
+top = 350.0
+bottom = 480.0
+style = ExtResource("6_rope")
+
+[sub_resource type="Resource" id="Resource_14"]
+script = ExtResource("4_climbable_def")
+x = 950.0
+top = 480.0
+bottom = 620.0
+style = ExtResource("6_rope")
+
+[sub_resource type="Resource" id="Resource_13"]
+script = ExtResource("4_climbable_def")
+x = 600.0
+top = 240.0
+bottom = 360.0
+style = ExtResource("6_rope")
+
+[sub_resource type="Resource" id="Resource_12"]
+script = ExtResource("4_climbable_def")
+x = 540.0
+top = 360.0
+bottom = 480.0
+style = ExtResource("6_rope")
+
+[sub_resource type="Resource" id="Resource_11"]
+script = ExtResource("4_climbable_def")
+x = 330.0
+top = 480.0
+bottom = 620.0
+style = ExtResource("5_rope_ladder")
+
+[sub_resource type="Resource" id="Resource_10"]
+script = ExtResource("3_platform_def")
+x = 2320.0
+y = 350.0
+width = 300.0
+
+[sub_resource type="Resource" id="Resource_9"]
+script = ExtResource("3_platform_def")
+x = 2120.0
+y = 480.0
+width = 360.0
+
+[sub_resource type="Resource" id="Resource_8"]
+script = ExtResource("3_platform_def")
+x = 1620.0
+y = 250.0
+width = 220.0
+
+[sub_resource type="Resource" id="Resource_7"]
+script = ExtResource("3_platform_def")
+x = 1600.0
+y = 360.0
+width = 260.0
+
+[sub_resource type="Resource" id="Resource_6"]
+script = ExtResource("3_platform_def")
+x = 1520.0
+y = 480.0
+width = 380.0
+
+[sub_resource type="Resource" id="Resource_5"]
+script = ExtResource("3_platform_def")
+x = 1080.0
+y = 350.0
+width = 300.0
+
+[sub_resource type="Resource" id="Resource_4"]
+script = ExtResource("3_platform_def")
+x = 920.0
+y = 480.0
+width = 380.0
+
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("3_platform_def")
+x = 560.0
+y = 240.0
+width = 240.0
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("3_platform_def")
+x = 500.0
+y = 360.0
+width = 320.0
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("3_platform_def")
+x = 300.0
+y = 480.0
+width = 340.0
+
+[resource]
+script = ExtResource("1_map_def")
+id = &"lantern_alley"
+display_name = "Lantern Alley"
+sign_text = "Lantern Alley · Lv. 10-13"
+sign_x = 180.0
+biome = ExtResource("2_lantern")
+width = 3000
+height = 700
+ground_y = 620
+start_x = 120.0
+lantern_spacing = 700.0
+platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10")])
+climbables = Array[ExtResource("4_climbable_def")]([SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18"), SubResource("Resource_19"), SubResource("Resource_20")])
+portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_21"), SubResource("Resource_22")])
+spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_23"), SubResource("Resource_24"), SubResource("Resource_25"), SubResource("Resource_26"), SubResource("Resource_27"), SubResource("Resource_28"), SubResource("Resource_29"), SubResource("Resource_30"), SubResource("Resource_31"), SubResource("Resource_32"), SubResource("Resource_33"), SubResource("Resource_34")])
+props = Array[ExtResource("11_prop_placement")]([SubResource("Resource_35"), SubResource("Resource_36"), SubResource("Resource_37"), SubResource("Resource_38"), SubResource("Resource_39"), SubResource("Resource_40"), SubResource("Resource_41"), SubResource("Resource_42")])
+region = &"lanternfall"
+world_pos = Vector2(722.0, 493.0)
+return_map = &"lanternfall"
+level_text = "Lv. 10-13"

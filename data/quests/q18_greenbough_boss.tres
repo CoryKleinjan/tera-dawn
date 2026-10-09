@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="QuestDef" load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="1_quest_def"]
+[ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="2_quest_objective"]
+[ext_resource type="Resource" path="res://data/items/etc/heartwood.tres" id="3_heartwood"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/equips/canvas_gloves.tres" id="5_canvas_gloves"]
+[ext_resource type="Resource" path="res://data/items/use/power_elixir.tres" id="6_power_elixir"]
+
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("6_power_elixir")
+chance = 1.0
+min_amount = 5
+max_amount = 5
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("5_canvas_gloves")
+chance = 1.0
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("2_quest_objective")
+kind = 1
+item = ExtResource("3_heartwood")
+count = 1
+
+[resource]
+script = ExtResource("1_quest_def")
+id = &"q18_greenbough_boss"
+title = "The Elder Treant"
+giver = &"greenbough_instructor"
+min_level = 22
+requires = Array[StringName]([&"q17_greenbough_supplies"])
+offer_text = "At the end of our hunting grounds lives the Elder Treant. Only the strongest of us have faced it. Bring me the Heartwood and I'll know you're ready."
+progress_text = "Defeat the Elder Treant at the far end of the hunting grounds and bring back the Heartwood."
+complete_text = "You did it. The whole town will hear of this. Take this, and my respect."
+objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1")])
+reward_xp = 2423
+reward_shards = 6000
+reward_items = Array[ExtResource("4_drop_entry")]([SubResource("Resource_2"), SubResource("Resource_3")])

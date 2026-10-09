@@ -1,0 +1,102 @@
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=24 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/mossling.png" id="2_mossling"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
+[ext_resource type="Resource" path="res://data/items/etc/thorn_tuft.tres" id="5_thorn_tuft"]
+[ext_resource type="Resource" path="res://data/items/use/orange_potion.tres" id="6_orange_potion"]
+[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="7_blue_potion"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_gloves_att_60.tres" id="8_scroll_gloves_att_60"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_gloves_att_10.tres" id="9_scroll_gloves_att_10"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_int_60.tres" id="10_scroll_top_int_60"]
+[ext_resource type="Resource" path="res://data/items/equips/sandals.tres" id="11_sandals"]
+[ext_resource type="Resource" path="res://data/items/equips/canvas_gloves.tres" id="12_canvas_gloves"]
+[ext_resource type="Resource" path="res://data/items/equips/patched_trousers.tres" id="13_patched_trousers"]
+
+[sub_resource type="Resource" id="Resource_10"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("13_patched_trousers")
+chance = 0.015
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_9"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("12_canvas_gloves")
+chance = 0.015
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_8"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("11_sandals")
+chance = 0.015
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_7"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("10_scroll_top_int_60")
+chance = 0.012
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_6"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("9_scroll_gloves_att_10")
+chance = 0.0036
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_5"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("8_scroll_gloves_att_60")
+chance = 0.012
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_4"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("7_blue_potion")
+chance = 0.05
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("6_orange_potion")
+chance = 0.08
+min_amount = 1
+max_amount = 2
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("5_thorn_tuft")
+chance = 0.45
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("4_dawnshard")
+chance = 1.0
+min_amount = 16
+max_amount = 33
+
+[resource]
+script = ExtResource("1_monster_def")
+id = &"thornling"
+display_name = "Thornling"
+level = 11
+max_hp = 392
+attack = 28
+exp_reward = 68
+speed = 0.7
+size = Vector2(34.0, 40.0)
+boss = false
+flying = false
+texture = ExtResource("2_mossling")
+sprite_scale = 1.0
+tint = Color(0.498039, 0.815686, 0.376471, 1.0)
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10")])

@@ -1,0 +1,110 @@
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=26 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/ember_boar.tres" id="2_ember_boar"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
+[ext_resource type="Resource" path="res://data/items/etc/barnacle.tres" id="5_barnacle"]
+[ext_resource type="Resource" path="res://data/items/use/honey_bun.tres" id="6_honey_bun"]
+[ext_resource type="Resource" path="res://data/items/use/mana_tea.tres" id="7_mana_tea"]
+[ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="8_elixir"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_gloves_att_60.tres" id="9_scroll_gloves_att_60"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_shield_def_60.tres" id="10_scroll_shield_def_60"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_weapon_matt_10.tres" id="11_scroll_weapon_matt_10"]
+[ext_resource type="Resource" path="res://data/items/equips/kite_shield.tres" id="12_kite_shield"]
+[ext_resource type="Resource" path="res://data/items/equips/brigand_gloves.tres" id="13_brigand_gloves"]
+[ext_resource type="Resource" path="res://data/items/equips/ranger_breeches.tres" id="14_ranger_breeches"]
+
+[sub_resource type="Resource" id="Resource_11"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("14_ranger_breeches")
+chance = 0.015
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_10"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("13_brigand_gloves")
+chance = 0.015
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_9"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("12_kite_shield")
+chance = 0.015
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_8"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("11_scroll_weapon_matt_10")
+chance = 0.0036
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_7"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("10_scroll_shield_def_60")
+chance = 0.012
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_6"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("9_scroll_gloves_att_60")
+chance = 0.012
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_5"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("8_elixir")
+chance = 0.01
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_4"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("7_mana_tea")
+chance = 0.05
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("6_honey_bun")
+chance = 0.08
+min_amount = 1
+max_amount = 2
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("5_barnacle")
+chance = 0.45
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("4_dawnshard")
+chance = 1.0
+min_amount = 33
+max_amount = 66
+
+[resource]
+script = ExtResource("1_monster_def")
+id = &"barnacle_boar"
+display_name = "Barnacle Boar"
+level = 22
+max_hp = 984
+attack = 52
+exp_reward = 200
+speed = 1.25
+size = Vector2(60.0, 42.0)
+boss = false
+flying = false
+sprite_frames = ExtResource("2_ember_boar")
+sprite_scale = 0.8
+tint = Color(0.439216, 0.690196, 0.752941, 1.0)
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11")])

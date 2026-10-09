@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="UseDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/use_def.gd" id="1_use_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/emberforge_scroll.png" id="2_emberforge_scroll"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="3_shard_pickup"]
+[ext_resource type="Resource" path="res://data/effects/heal.tres" id="4_heal"]
+
+[resource]
+script = ExtResource("1_use_def")
+id = &"emberforge_scroll"
+display_name = "Emberforge Scroll"
+description = "Reading it takes you straight to Emberforge."
+icon = ExtResource("2_emberforge_scroll")
+sprite_scale = 0.4
+glow_color = Color(1.0, 0.909804, 0.658824, 1.0)
+pickup_effect = ExtResource("3_shard_pickup")
+sell_price = 40
+max_stack = 100
+teleport = &"emberforge"
+use_effect = ExtResource("4_heal")
+cooldown = 60

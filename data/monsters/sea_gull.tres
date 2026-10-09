@@ -1,0 +1,79 @@
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=18 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/petal_bat.png" id="2_petal_bat"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
+[ext_resource type="Resource" path="res://data/items/etc/gull_feather.tres" id="5_gull_feather"]
+[ext_resource type="Resource" path="res://data/items/use/red_potion.tres" id="6_red_potion"]
+[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="7_blue_potion"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_cape_mdef_60.tres" id="8_scroll_cape_mdef_60"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_gloves_att_10.tres" id="9_scroll_gloves_att_10"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_luk_60.tres" id="10_scroll_top_luk_60"]
+
+[sub_resource type="Resource" id="Resource_7"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("10_scroll_top_luk_60")
+chance = 0.012
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_6"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("9_scroll_gloves_att_10")
+chance = 0.0036
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_5"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("8_scroll_cape_mdef_60")
+chance = 0.012
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_4"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("7_blue_potion")
+chance = 0.05
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("6_red_potion")
+chance = 0.08
+min_amount = 1
+max_amount = 2
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("5_gull_feather")
+chance = 0.45
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("4_dawnshard")
+chance = 1.0
+min_amount = 9
+max_amount = 18
+
+[resource]
+script = ExtResource("1_monster_def")
+id = &"sea_gull"
+display_name = "Sea Gull"
+level = 6
+max_hp = 178
+attack = 17
+exp_reward = 28
+speed = 1.1
+size = Vector2(40.0, 30.0)
+boss = false
+flying = true
+hover_height = 56.0
+texture = ExtResource("2_petal_bat")
+sprite_scale = 1.0
+tint = Color(0.956863, 0.972549, 1.0, 1.0)
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7")])

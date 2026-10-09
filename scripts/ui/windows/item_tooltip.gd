@@ -33,7 +33,7 @@ func clear(owner_window: Control) -> void:
 func _lines() -> Array:
 	var out := []  # [text, colour, size]
 	var item := stack.item
-	out.append([item.display_name, Palette.SUN, 15])
+	out.append([stack.display_name(), Palette.SUN, 15])
 	var e := item as EquipDef
 	if e:
 		var kind := " (%s)" % String(e.weapon_kind).capitalize() if e.weapon_kind != &"" else ""
@@ -56,7 +56,7 @@ func _lines() -> Array:
 			elif v < base.value(f):
 				col = Color("ffb38a")
 			out.append(["%s: %s" % [StatBlock.LABELS[f], StatBlock.format(f, v)], col, 12])
-		out.append(["Upgrades available: %d" % e.upgrade_slots, Color("c9b8d9"), 11])
+		out.append(["Upgrades available: %d" % stack.slots_left(), Color("c9b8d9"), 11])
 		if compare:
 			out.append_array(_comparison(e))
 	elif item is UseDef:
@@ -68,6 +68,13 @@ func _lines() -> Array:
 			out.append(["Restores %d HP" % hp, Palette.HP, 12])
 		if mp > 0:
 			out.append(["Restores %d MP" % mp, Palette.MP, 12])
+	elif item is ScrollDef:
+		var sc := item as ScrollDef
+		out.append(["Upgrade scroll · %s" % sc.slot_text(), Color("c9b8d9"), 11])
+		out.append(["Success rate: %d%%" % roundi(sc.chance * 100.0), Palette.SUN, 12])
+		if sc.stats:
+			for f in sc.stats.nonzero():
+				out.append(["%s +%s" % [StatBlock.LABELS[f], StatBlock.format(f, sc.stats.value(f))], Palette.MIST, 12])
 	elif item is AmmoDef:
 		var a := item as AmmoDef
 		out.append(["Ammo · %ss" % String(a.kind).capitalize(), Color("c9b8d9"), 11])

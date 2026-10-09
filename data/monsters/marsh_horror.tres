@@ -1,0 +1,111 @@
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=26 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/mossling.png" id="2_mossling"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
+[ext_resource type="Resource" path="res://data/items/etc/marsh_moss.tres" id="5_marsh_moss"]
+[ext_resource type="Resource" path="res://data/items/use/honey_bun.tres" id="6_honey_bun"]
+[ext_resource type="Resource" path="res://data/items/use/mana_tea.tres" id="7_mana_tea"]
+[ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="8_elixir"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_helmet_hp_60.tres" id="9_scroll_helmet_hp_60"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_luk_60.tres" id="10_scroll_top_luk_60"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_int_60.tres" id="11_scroll_top_int_60"]
+[ext_resource type="Resource" path="res://data/items/equips/deckhand_trousers.tres" id="12_deckhand_trousers"]
+[ext_resource type="Resource" path="res://data/items/equips/deckhand_coat.tres" id="13_deckhand_coat"]
+[ext_resource type="Resource" path="res://data/items/equips/lume_earrings.tres" id="14_lume_earrings"]
+
+[sub_resource type="Resource" id="Resource_11"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("14_lume_earrings")
+chance = 0.015
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_10"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("13_deckhand_coat")
+chance = 0.015
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_9"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("12_deckhand_trousers")
+chance = 0.015
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_8"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("11_scroll_top_int_60")
+chance = 0.012
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_7"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("10_scroll_top_luk_60")
+chance = 0.012
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_6"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("9_scroll_helmet_hp_60")
+chance = 0.012
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_5"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("8_elixir")
+chance = 0.01
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_4"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("7_mana_tea")
+chance = 0.05
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("6_honey_bun")
+chance = 0.08
+min_amount = 1
+max_amount = 2
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("5_marsh_moss")
+chance = 0.45
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("4_dawnshard")
+chance = 1.0
+min_amount = 36
+max_amount = 72
+
+[resource]
+script = ExtResource("1_monster_def")
+id = &"marsh_horror"
+display_name = "Marsh Horror"
+level = 24
+max_hp = 1105
+attack = 57
+exp_reward = 229
+speed = 0.7
+size = Vector2(51.0, 60.0)
+boss = false
+flying = false
+jumps = true
+texture = ExtResource("2_mossling")
+sprite_scale = 1.5
+tint = Color(0.313725, 0.376471, 0.25098, 1.0)
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11")])

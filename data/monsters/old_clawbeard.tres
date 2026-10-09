@@ -1,0 +1,139 @@
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=33 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
+[ext_resource type="Resource" path="res://data/projectiles/mob_bubble.tres" id="2_mob_bubble"]
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/ashshell.png" id="3_ashshell"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="5_dawnshard"]
+[ext_resource type="Resource" path="res://data/items/etc/clawbeard_pearl.tres" id="6_clawbeard_pearl"]
+[ext_resource type="Resource" path="res://data/items/use/orange_potion.tres" id="7_orange_potion"]
+[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="8_blue_potion"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_cape_mdef_60.tres" id="9_scroll_cape_mdef_60"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_dex_60.tres" id="10_scroll_top_dex_60"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_weapon_att_60.tres" id="11_scroll_weapon_att_60"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_armor_def_60.tres" id="12_scroll_armor_def_60"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_weapon_matt_60.tres" id="13_scroll_weapon_matt_60"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_int_60.tres" id="14_scroll_top_int_60"]
+[ext_resource type="Resource" path="res://data/items/equips/patched_trousers.tres" id="15_patched_trousers"]
+[ext_resource type="Resource" path="res://data/items/equips/canvas_gloves.tres" id="16_canvas_gloves"]
+[ext_resource type="Resource" path="res://data/items/equips/sandals.tres" id="17_sandals"]
+[ext_resource type="Resource" path="res://data/items/use/power_elixir.tres" id="18_power_elixir"]
+
+[sub_resource type="Resource" id="Resource_14"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("18_power_elixir")
+chance = 0.5
+min_amount = 1
+max_amount = 3
+
+[sub_resource type="Resource" id="Resource_13"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("17_sandals")
+chance = 0.3
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_12"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("16_canvas_gloves")
+chance = 0.3
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_11"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("15_patched_trousers")
+chance = 0.3
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_10"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("14_scroll_top_int_60")
+chance = 0.25
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_9"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("13_scroll_weapon_matt_60")
+chance = 0.25
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_8"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("12_scroll_armor_def_60")
+chance = 0.25
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_7"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("11_scroll_weapon_att_60")
+chance = 0.25
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_6"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("10_scroll_top_dex_60")
+chance = 0.25
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_5"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("9_scroll_cape_mdef_60")
+chance = 0.25
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_4"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("8_blue_potion")
+chance = 0.05
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("7_orange_potion")
+chance = 0.08
+min_amount = 1
+max_amount = 2
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("6_clawbeard_pearl")
+chance = 1.0
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("5_dawnshard")
+chance = 1.0
+min_amount = 144
+max_amount = 288
+
+[resource]
+script = ExtResource("1_monster_def")
+id = &"old_clawbeard"
+display_name = "Old Clawbeard"
+level = 12
+max_hp = 6160
+attack = 40
+exp_reward = 931
+speed = 0.4
+size = Vector2(128.0, 96.0)
+boss = true
+flying = false
+shot = ExtResource("2_mob_bubble")
+shot_range = 380.0
+shot_cooldown = 110
+texture = ExtResource("3_ashshell")
+sprite_scale = 2.0
+tint = Color(1.0, 0.501961, 0.439216, 1.0)
+drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14")])
+respawn_ticks = Vector2i(1800, 2400)

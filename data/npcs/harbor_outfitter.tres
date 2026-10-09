@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/npcs/shopkeeper.png" id="2_shopkeeper"]
+[ext_resource type="Resource" path="res://data/shops/harbor_outfitter.tres" id="3_harbor_outfitter"]
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"harbor_outfitter"
+display_name = "Juno"
+title = "Outfitter"
+texture = ExtResource("2_shopkeeper")
+sprite_scale = 0.95
+tint = Color(1.0, 0.784314, 0.878431, 1.0)
+greeting = "Gloves, boots, capes and trinkets for every kind of hero."
+lines = PackedStringArray("Gear for anyone, any job.", "The roads out of town get rough. Dress for it.")
+shop = ExtResource("3_harbor_outfitter")

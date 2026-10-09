@@ -20,6 +20,24 @@ extends Resource
 @export var flying := false
 @export var hover_height := 50.0
 
+@export_group("Behavior")
+## Hops around its platform now and then (a pixel speed straight up).
+@export var jumps := false
+@export var jump_power := 7.0
+## Never walks (a plant, a cannon); it still turns to shoot.
+@export var stationary := false
+## Shoots this at players up to `shot_range` game pixels away, every `shot_cooldown` ticks.
+## A shot flies in a straight line to where the player stood, so it can be dodged.
+@export var shot: ProjectileDef
+@export var shot_range := 320.0
+@export var shot_cooldown := 150
+## Shoots anyone who comes in range, not only whoever hit it last.
+@export var aggressive := false
+## Defeated, it bursts into `split_count` of these. They don't come back on their own:
+## they wait for the next time this one is defeated.
+@export var splits_into: MonsterDef
+@export var split_count := 2
+
 @export_group("Looks")
 ## Animated monsters: SpriteFrames with idle, move, attack, hurt and die (missing ones fall back to idle).
 @export var sprite_frames: SpriteFrames
@@ -27,6 +45,8 @@ extends Resource
 @export var texture: Texture2D
 ## Multiplies the sprite's size in the world.
 @export var sprite_scale := 1.0
+## Multiplies the sprite's colours (lets one sprite stand in for several monsters).
+@export var tint := Color.WHITE
 ## A light carried by the monster (Ember Boar's mane). Alpha 0 means no light.
 @export var light_color := Color(0, 0, 0, 0)
 @export var light_energy := 1.4

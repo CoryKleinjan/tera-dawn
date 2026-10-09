@@ -1,0 +1,64 @@
+[gd_resource type="Resource" script_class="QuestDef" load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="1_quest_def"]
+[ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="2_quest_objective"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/equips/starlit_cape.tres" id="4_starlit_cape"]
+
+[sub_resource type="Resource" id="Resource_7"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("4_starlit_cape")
+chance = 1.0
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_6"]
+script = ExtResource("2_quest_objective")
+kind = 2
+map = &"harbor_beach"
+count = 1
+
+[sub_resource type="Resource" id="Resource_5"]
+script = ExtResource("2_quest_objective")
+kind = 2
+map = &"saltwind_cliffs"
+count = 1
+
+[sub_resource type="Resource" id="Resource_4"]
+script = ExtResource("2_quest_objective")
+kind = 2
+map = &"dusk_bridge"
+count = 1
+
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("2_quest_objective")
+kind = 2
+map = &"cinder_pass"
+count = 1
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("2_quest_objective")
+kind = 2
+map = &"glimmer_path"
+count = 1
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("2_quest_objective")
+kind = 2
+map = &"harbor_road"
+count = 1
+
+[resource]
+script = ExtResource("1_quest_def")
+id = &"q31_ring_road"
+title = "The Ring Road"
+giver = &"harbormaster"
+min_level = 20
+requires = Array[StringName]([&"q08_grand_tour"])
+offer_text = "Every town is joined by road, and the roads are dangerous. Walk the whole ring once, from Dawnharbor round to Dawnharbor, and you'll know the mainland like I do. Start with the Harbor Road."
+progress_text = "Visit Harbor Road, Glimmer Path, Cinder Pass, Dusk Bridge, Saltwind Cliffs and Harbor Beach."
+complete_text = "You walked the whole ring! Here, a sailor's cape for a true traveler."
+objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6")])
+reward_xp = 2754
+reward_shards = 8000
+reward_items = Array[ExtResource("3_drop_entry")]([SubResource("Resource_7")])

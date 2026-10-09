@@ -1,0 +1,264 @@
+[gd_resource type="Resource" script_class="MapDef" load_steps=51 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
+[ext_resource type="Resource" path="res://data/biomes/coast.tres" id="2_coast"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="3_platform_def"]
+[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="4_climbable_def"]
+[ext_resource type="Resource" path="res://data/climb_styles/rope.tres" id="5_rope"]
+[ext_resource type="Resource" path="res://data/climb_styles/rope_ladder.tres" id="6_rope_ladder"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="7_portal_def"]
+[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
+[ext_resource type="Resource" path="res://data/monsters/kelp_lurker.tres" id="9_kelp_lurker"]
+[ext_resource type="Resource" path="res://data/monsters/barnacle_boar.tres" id="10_barnacle_boar"]
+[ext_resource type="Resource" path="res://data/monsters/coral_turret.tres" id="11_coral_turret"]
+[ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="12_prop_placement"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/stump.png" id="13_stump"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_small.png" id="14_tree_small"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_large.png" id="15_tree_large"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/floating_rock.png" id="16_floating_rock"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/arch.png" id="17_arch"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/flowers_yellow.png" id="18_flowers_yellow"]
+
+[sub_resource type="Resource" id="Resource_32"]
+script = ExtResource("12_prop_placement")
+texture = ExtResource("18_flowers_yellow")
+x = 869.0
+y = -1.0
+depth = -2.2
+scale = 1.01
+flip = true
+
+[sub_resource type="Resource" id="Resource_31"]
+script = ExtResource("12_prop_placement")
+texture = ExtResource("17_arch")
+x = 856.0
+y = -1.0
+depth = -6.3
+scale = 1.29
+flip = false
+
+[sub_resource type="Resource" id="Resource_30"]
+script = ExtResource("12_prop_placement")
+texture = ExtResource("16_floating_rock")
+x = 550.0
+y = 267.0
+depth = -3.4
+scale = 1.46
+flip = true
+
+[sub_resource type="Resource" id="Resource_29"]
+script = ExtResource("12_prop_placement")
+texture = ExtResource("14_tree_small")
+x = 2347.0
+y = -1.0
+depth = -3.8
+scale = 1.06
+flip = false
+
+[sub_resource type="Resource" id="Resource_28"]
+script = ExtResource("12_prop_placement")
+texture = ExtResource("15_tree_large")
+x = 859.0
+y = -1.0
+depth = -3.0
+scale = 1.05
+flip = false
+
+[sub_resource type="Resource" id="Resource_27"]
+script = ExtResource("12_prop_placement")
+texture = ExtResource("14_tree_small")
+x = 2530.0
+y = -1.0
+depth = -7.7
+scale = 1.08
+flip = true
+
+[sub_resource type="Resource" id="Resource_26"]
+script = ExtResource("12_prop_placement")
+texture = ExtResource("13_stump")
+x = 362.0
+y = -1.0
+depth = -7.7
+scale = 1.01
+flip = false
+
+[sub_resource type="Resource" id="Resource_25"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("11_coral_turret")
+platform = 7
+count = 1
+
+[sub_resource type="Resource" id="Resource_24"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("11_coral_turret")
+platform = 6
+count = 1
+
+[sub_resource type="Resource" id="Resource_23"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("11_coral_turret")
+platform = 5
+count = 1
+
+[sub_resource type="Resource" id="Resource_22"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("11_coral_turret")
+platform = 4
+count = 1
+
+[sub_resource type="Resource" id="Resource_21"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("10_barnacle_boar")
+platform = 3
+count = 3
+
+[sub_resource type="Resource" id="Resource_20"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("10_barnacle_boar")
+platform = 2
+count = 2
+
+[sub_resource type="Resource" id="Resource_19"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("11_coral_turret")
+platform = 1
+count = 1
+
+[sub_resource type="Resource" id="Resource_18"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("10_barnacle_boar")
+platform = 0
+count = 3
+
+[sub_resource type="Resource" id="Resource_17"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("9_kelp_lurker")
+platform = 0
+count = 3
+
+[sub_resource type="Resource" id="Resource_16"]
+script = ExtResource("7_portal_def")
+x = 2940.0
+platform = 0
+target_map = &"titan_grotto"
+target_x = 120.0
+
+[sub_resource type="Resource" id="Resource_15"]
+script = ExtResource("7_portal_def")
+x = 60.0
+platform = 0
+target_map = &"coral_reef"
+target_x = 2880.0
+
+[sub_resource type="Resource" id="Resource_14"]
+script = ExtResource("4_climbable_def")
+x = 2180.0
+top = 380.0
+bottom = 500.0
+style = ExtResource("5_rope")
+
+[sub_resource type="Resource" id="Resource_13"]
+script = ExtResource("4_climbable_def")
+x = 2120.0
+top = 500.0
+bottom = 620.0
+style = ExtResource("6_rope_ladder")
+
+[sub_resource type="Resource" id="Resource_12"]
+script = ExtResource("4_climbable_def")
+x = 1800.0
+top = 370.0
+bottom = 490.0
+style = ExtResource("5_rope")
+
+[sub_resource type="Resource" id="Resource_11"]
+script = ExtResource("4_climbable_def")
+x = 1530.0
+top = 490.0
+bottom = 620.0
+style = ExtResource("6_rope_ladder")
+
+[sub_resource type="Resource" id="Resource_10"]
+script = ExtResource("4_climbable_def")
+x = 880.0
+top = 500.0
+bottom = 620.0
+style = ExtResource("5_rope")
+
+[sub_resource type="Resource" id="Resource_9"]
+script = ExtResource("4_climbable_def")
+x = 610.0
+top = 370.0
+bottom = 500.0
+style = ExtResource("5_rope")
+
+[sub_resource type="Resource" id="Resource_8"]
+script = ExtResource("4_climbable_def")
+x = 360.0
+top = 500.0
+bottom = 620.0
+style = ExtResource("5_rope")
+
+[sub_resource type="Resource" id="Resource_7"]
+script = ExtResource("3_platform_def")
+x = 2140.0
+y = 380.0
+width = 320.0
+
+[sub_resource type="Resource" id="Resource_6"]
+script = ExtResource("3_platform_def")
+x = 2080.0
+y = 500.0
+width = 340.0
+
+[sub_resource type="Resource" id="Resource_5"]
+script = ExtResource("3_platform_def")
+x = 1760.0
+y = 370.0
+width = 260.0
+
+[sub_resource type="Resource" id="Resource_4"]
+script = ExtResource("3_platform_def")
+x = 1480.0
+y = 490.0
+width = 420.0
+
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("3_platform_def")
+x = 820.0
+y = 500.0
+width = 380.0
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("3_platform_def")
+x = 380.0
+y = 370.0
+width = 280.0
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("3_platform_def")
+x = 300.0
+y = 500.0
+width = 340.0
+
+[resource]
+script = ExtResource("1_map_def")
+id = &"wreck_cove"
+display_name = "Wreck Cove"
+sign_text = "Wreck Cove · Lv. 17-22"
+sign_x = 180.0
+biome = ExtResource("2_coast")
+width = 3000
+height = 700
+ground_y = 620
+start_x = 120.0
+lantern_spacing = 700.0
+platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7")])
+climbables = Array[ExtResource("4_climbable_def")]([SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14")])
+portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_15"), SubResource("Resource_16")])
+spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_17"), SubResource("Resource_18"), SubResource("Resource_19"), SubResource("Resource_20"), SubResource("Resource_21"), SubResource("Resource_22"), SubResource("Resource_23"), SubResource("Resource_24"), SubResource("Resource_25")])
+props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_26"), SubResource("Resource_27"), SubResource("Resource_28"), SubResource("Resource_29"), SubResource("Resource_30"), SubResource("Resource_31"), SubResource("Resource_32")])
+region = &"driftcove"
+world_pos = Vector2(224.0, 514.0)
+return_map = &"driftcove"
+level_text = "Lv. 17-22"

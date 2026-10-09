@@ -1,0 +1,329 @@
+[gd_resource type="Resource" script_class="MapDef" load_steps=60 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
+[ext_resource type="Resource" path="res://data/biomes/coast.tres" id="2_coast"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="3_platform_def"]
+[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="4_climbable_def"]
+[ext_resource type="Resource" path="res://data/climb_styles/rope_ladder.tres" id="5_rope_ladder"]
+[ext_resource type="Resource" path="res://data/climb_styles/rope.tres" id="6_rope"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="7_portal_def"]
+[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
+[ext_resource type="Resource" path="res://data/monsters/cliff_harpy.tres" id="9_cliff_harpy"]
+[ext_resource type="Resource" path="res://data/monsters/barnacle_boar.tres" id="10_barnacle_boar"]
+[ext_resource type="Resource" path="res://data/monsters/kelp_lurker.tres" id="11_kelp_lurker"]
+[ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="12_prop_placement"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/bush_large.png" id="13_bush_large"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/stump.png" id="14_stump"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/flowers_yellow.png" id="15_flowers_yellow"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_large.png" id="16_tree_large"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tall_ledge.png" id="17_tall_ledge"]
+
+[sub_resource type="Resource" id="Resource_42"]
+script = ExtResource("12_prop_placement")
+texture = ExtResource("15_flowers_yellow")
+x = 376.0
+y = -1.0
+depth = -3.8
+scale = 1.38
+flip = false
+
+[sub_resource type="Resource" id="Resource_41"]
+script = ExtResource("12_prop_placement")
+texture = ExtResource("16_tree_large")
+x = 359.0
+y = -1.0
+depth = -7.5
+scale = 1.46
+flip = false
+
+[sub_resource type="Resource" id="Resource_40"]
+script = ExtResource("12_prop_placement")
+texture = ExtResource("17_tall_ledge")
+x = 2529.0
+y = -1.0
+depth = -3.8
+scale = 1.49
+flip = false
+
+[sub_resource type="Resource" id="Resource_39"]
+script = ExtResource("12_prop_placement")
+texture = ExtResource("15_flowers_yellow")
+x = 1660.0
+y = -1.0
+depth = -4.0
+scale = 1.22
+flip = false
+
+[sub_resource type="Resource" id="Resource_38"]
+script = ExtResource("12_prop_placement")
+texture = ExtResource("16_tree_large")
+x = 2737.0
+y = -1.0
+depth = -5.7
+scale = 1.34
+flip = false
+
+[sub_resource type="Resource" id="Resource_37"]
+script = ExtResource("12_prop_placement")
+texture = ExtResource("15_flowers_yellow")
+x = 2249.0
+y = -1.0
+depth = -3.7
+scale = 1.41
+flip = true
+
+[sub_resource type="Resource" id="Resource_36"]
+script = ExtResource("12_prop_placement")
+texture = ExtResource("14_stump")
+x = 990.0
+y = -1.0
+depth = -3.5
+scale = 1.31
+flip = true
+
+[sub_resource type="Resource" id="Resource_35"]
+script = ExtResource("12_prop_placement")
+texture = ExtResource("13_bush_large")
+x = 1395.0
+y = -1.0
+depth = -5.3
+scale = 1.1
+flip = true
+
+[sub_resource type="Resource" id="Resource_34"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("10_barnacle_boar")
+platform = 10
+count = 2
+
+[sub_resource type="Resource" id="Resource_33"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("11_kelp_lurker")
+platform = 9
+count = 2
+
+[sub_resource type="Resource" id="Resource_32"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("10_barnacle_boar")
+platform = 8
+count = 3
+
+[sub_resource type="Resource" id="Resource_31"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("9_cliff_harpy")
+platform = 7
+count = 2
+
+[sub_resource type="Resource" id="Resource_30"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("11_kelp_lurker")
+platform = 6
+count = 2
+
+[sub_resource type="Resource" id="Resource_29"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("11_kelp_lurker")
+platform = 5
+count = 2
+
+[sub_resource type="Resource" id="Resource_28"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("11_kelp_lurker")
+platform = 4
+count = 2
+
+[sub_resource type="Resource" id="Resource_27"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("10_barnacle_boar")
+platform = 3
+count = 2
+
+[sub_resource type="Resource" id="Resource_26"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("9_cliff_harpy")
+platform = 2
+count = 3
+
+[sub_resource type="Resource" id="Resource_25"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("9_cliff_harpy")
+platform = 1
+count = 3
+
+[sub_resource type="Resource" id="Resource_24"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("10_barnacle_boar")
+platform = 0
+count = 3
+
+[sub_resource type="Resource" id="Resource_23"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("9_cliff_harpy")
+platform = 0
+count = 3
+
+[sub_resource type="Resource" id="Resource_22"]
+script = ExtResource("7_portal_def")
+x = 2940.0
+platform = 0
+target_map = &"driftcove"
+target_x = 120.0
+
+[sub_resource type="Resource" id="Resource_21"]
+script = ExtResource("7_portal_def")
+x = 60.0
+platform = 0
+target_map = &"shadow_marsh"
+target_x = 2880.0
+
+[sub_resource type="Resource" id="Resource_20"]
+script = ExtResource("4_climbable_def")
+x = 2280.0
+top = 270.0
+bottom = 380.0
+style = ExtResource("6_rope")
+
+[sub_resource type="Resource" id="Resource_19"]
+script = ExtResource("4_climbable_def")
+x = 2240.0
+top = 380.0
+bottom = 490.0
+style = ExtResource("6_rope")
+
+[sub_resource type="Resource" id="Resource_18"]
+script = ExtResource("4_climbable_def")
+x = 2040.0
+top = 490.0
+bottom = 620.0
+style = ExtResource("5_rope_ladder")
+
+[sub_resource type="Resource" id="Resource_17"]
+script = ExtResource("4_climbable_def")
+x = 1620.0
+top = 260.0
+bottom = 380.0
+style = ExtResource("6_rope")
+
+[sub_resource type="Resource" id="Resource_16"]
+script = ExtResource("4_climbable_def")
+x = 1620.0
+top = 380.0
+bottom = 490.0
+style = ExtResource("6_rope")
+
+[sub_resource type="Resource" id="Resource_15"]
+script = ExtResource("4_climbable_def")
+x = 1490.0
+top = 490.0
+bottom = 620.0
+style = ExtResource("5_rope_ladder")
+
+[sub_resource type="Resource" id="Resource_14"]
+script = ExtResource("4_climbable_def")
+x = 1180.0
+top = 280.0
+bottom = 390.0
+style = ExtResource("6_rope")
+
+[sub_resource type="Resource" id="Resource_13"]
+script = ExtResource("4_climbable_def")
+x = 1060.0
+top = 390.0
+bottom = 500.0
+style = ExtResource("6_rope")
+
+[sub_resource type="Resource" id="Resource_12"]
+script = ExtResource("4_climbable_def")
+x = 900.0
+top = 500.0
+bottom = 620.0
+style = ExtResource("5_rope_ladder")
+
+[sub_resource type="Resource" id="Resource_11"]
+script = ExtResource("4_climbable_def")
+x = 330.0
+top = 500.0
+bottom = 620.0
+style = ExtResource("5_rope_ladder")
+
+[sub_resource type="Resource" id="Resource_10"]
+script = ExtResource("3_platform_def")
+x = 2240.0
+y = 270.0
+width = 260.0
+
+[sub_resource type="Resource" id="Resource_9"]
+script = ExtResource("3_platform_def")
+x = 2200.0
+y = 380.0
+width = 300.0
+
+[sub_resource type="Resource" id="Resource_8"]
+script = ExtResource("3_platform_def")
+x = 2000.0
+y = 490.0
+width = 360.0
+
+[sub_resource type="Resource" id="Resource_7"]
+script = ExtResource("3_platform_def")
+x = 1580.0
+y = 260.0
+width = 260.0
+
+[sub_resource type="Resource" id="Resource_6"]
+script = ExtResource("3_platform_def")
+x = 1580.0
+y = 380.0
+width = 320.0
+
+[sub_resource type="Resource" id="Resource_5"]
+script = ExtResource("3_platform_def")
+x = 1460.0
+y = 490.0
+width = 320.0
+
+[sub_resource type="Resource" id="Resource_4"]
+script = ExtResource("3_platform_def")
+x = 980.0
+y = 280.0
+width = 200.0
+
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("3_platform_def")
+x = 1020.0
+y = 390.0
+width = 320.0
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("3_platform_def")
+x = 860.0
+y = 500.0
+width = 360.0
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("3_platform_def")
+x = 300.0
+y = 500.0
+width = 340.0
+
+[resource]
+script = ExtResource("1_map_def")
+id = &"saltwind_cliffs"
+display_name = "Saltwind Cliffs"
+sign_text = "Saltwind Cliffs · Lv. 20-24"
+sign_x = 180.0
+biome = ExtResource("2_coast")
+width = 3000
+height = 700
+ground_y = 620
+start_x = 120.0
+lantern_spacing = 700.0
+platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10")])
+climbables = Array[ExtResource("4_climbable_def")]([SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18"), SubResource("Resource_19"), SubResource("Resource_20")])
+portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_21"), SubResource("Resource_22")])
+spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_23"), SubResource("Resource_24"), SubResource("Resource_25"), SubResource("Resource_26"), SubResource("Resource_27"), SubResource("Resource_28"), SubResource("Resource_29"), SubResource("Resource_30"), SubResource("Resource_31"), SubResource("Resource_32"), SubResource("Resource_33"), SubResource("Resource_34")])
+props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_35"), SubResource("Resource_36"), SubResource("Resource_37"), SubResource("Resource_38"), SubResource("Resource_39"), SubResource("Resource_40"), SubResource("Resource_41"), SubResource("Resource_42")])
+region = &"driftcove"
+world_pos = Vector2(443.0, 480.0)
+return_map = &"driftcove"
+level_text = "Lv. 20-24"

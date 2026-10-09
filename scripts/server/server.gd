@@ -235,6 +235,25 @@ func on_use_item(peer: int, slot: int) -> void:
 	if dest != &"":
 		_enter_map(p, dest, Content.map(dest).start_x)
 
+## Uses the scroll in Use slot `use_slot` on the gear in Equip slot `equip_slot`.
+func on_scroll(peer: int, use_slot: int, equip_slot: int) -> void:
+	var p := _player(peer)
+	if p == null or p.fainted():
+		return
+	var gear := p.character.inventory.at(ItemDef.Tab.EQUIP, equip_slot)
+	var name := gear.item.display_name if gear else ""
+	var result := p.character.use_scroll(use_slot, equip_slot)
+	if result["problem"] != "":
+		p.map.tell(p, result["problem"], MapInstance.BAD)
+		return
+	p.dirty_character = true
+	if result["worked"]:
+		p.map.tell(p, "The scroll worked! %s is now %s." % [name, gear.display_name()], Color("8cf0a6"))
+		p.map.broadcast(&"ev_effect", [&"level_up", p.position.x, p.position.y, 1, peer])
+	else:
+		p.map.tell(p, "The scroll failed. %s has %d upgrades left." % [name, gear.slots_left()], MapInstance.BAD)
+		p.map.broadcast(&"ev_effect", [&"monster_poof", p.position.x, p.position.y - 40, 1, 0])
+
 ## Stores bag slot `slot` of `tab` with the storage keeper `npc_id`.
 func on_store(peer: int, npc_id: StringName, tab: int, slot: int) -> void:
 	_at_storage(peer, npc_id, tab, slot, func(c: Character) -> String: return c.store(tab, slot))

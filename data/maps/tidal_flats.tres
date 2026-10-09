@@ -1,0 +1,150 @@
+[gd_resource type="Resource" script_class="MapDef" load_steps=34 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
+[ext_resource type="Resource" path="res://data/biomes/coast.tres" id="2_coast"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="3_platform_def"]
+[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="4_climbable_def"]
+[ext_resource type="Resource" path="res://data/climb_styles/rope.tres" id="5_rope"]
+[ext_resource type="Resource" path="res://data/climb_styles/rope_ladder.tres" id="6_rope_ladder"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="7_portal_def"]
+[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
+[ext_resource type="Resource" path="res://data/monsters/shell_crab.tres" id="9_shell_crab"]
+[ext_resource type="Resource" path="res://data/monsters/sea_gull.tres" id="10_sea_gull"]
+[ext_resource type="Resource" path="res://data/monsters/tide_dewling.tres" id="11_tide_dewling"]
+[ext_resource type="Resource" path="res://data/monsters/old_clawbeard.tres" id="12_old_clawbeard"]
+[ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="13_prop_placement"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/arch.png" id="14_arch"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tall_ledge.png" id="15_tall_ledge"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/floating_rock.png" id="16_floating_rock"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/bush_large.png" id="17_bush_large"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tall_grass.png" id="18_tall_grass"]
+
+[sub_resource type="Resource" id="Resource_15"]
+script = ExtResource("13_prop_placement")
+texture = ExtResource("18_tall_grass")
+x = 1472.0
+y = -1.0
+depth = -4.0
+scale = 0.99
+flip = false
+
+[sub_resource type="Resource" id="Resource_14"]
+script = ExtResource("13_prop_placement")
+texture = ExtResource("17_bush_large")
+x = 551.0
+y = -1.0
+depth = -2.4
+scale = 0.92
+flip = false
+
+[sub_resource type="Resource" id="Resource_13"]
+script = ExtResource("13_prop_placement")
+texture = ExtResource("16_floating_rock")
+x = 315.0
+y = 253.0
+depth = -4.2
+scale = 0.92
+flip = false
+
+[sub_resource type="Resource" id="Resource_12"]
+script = ExtResource("13_prop_placement")
+texture = ExtResource("15_tall_ledge")
+x = 769.0
+y = -1.0
+depth = -6.1
+scale = 1.44
+flip = false
+
+[sub_resource type="Resource" id="Resource_11"]
+script = ExtResource("13_prop_placement")
+texture = ExtResource("14_arch")
+x = 661.0
+y = -1.0
+depth = -3.4
+scale = 1.03
+flip = true
+
+[sub_resource type="Resource" id="Resource_10"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("12_old_clawbeard")
+platform = 0
+count = 1
+
+[sub_resource type="Resource" id="Resource_9"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("11_tide_dewling")
+platform = 2
+count = 3
+
+[sub_resource type="Resource" id="Resource_8"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("9_shell_crab")
+platform = 1
+count = 3
+
+[sub_resource type="Resource" id="Resource_7"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("10_sea_gull")
+platform = 0
+count = 3
+
+[sub_resource type="Resource" id="Resource_6"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("9_shell_crab")
+platform = 0
+count = 3
+
+[sub_resource type="Resource" id="Resource_5"]
+script = ExtResource("7_portal_def")
+x = 1940.0
+platform = 0
+target_map = &"mushroom_dell"
+target_x = 120.0
+
+[sub_resource type="Resource" id="Resource_4"]
+script = ExtResource("4_climbable_def")
+x = 1000.0
+top = 480.0
+bottom = 620.0
+style = ExtResource("6_rope_ladder")
+
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("4_climbable_def")
+x = 350.0
+top = 500.0
+bottom = 620.0
+style = ExtResource("5_rope")
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("3_platform_def")
+x = 940.0
+y = 480.0
+width = 420.0
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("3_platform_def")
+x = 300.0
+y = 500.0
+width = 400.0
+
+[resource]
+script = ExtResource("1_map_def")
+id = &"tidal_flats"
+display_name = "Tidal Flats"
+sign_text = "Tidal Flats · Lv. 7-12"
+sign_x = 180.0
+biome = ExtResource("2_coast")
+width = 2000
+height = 700
+ground_y = 620
+start_x = 120.0
+lantern_spacing = 700.0
+platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2")])
+climbables = Array[ExtResource("4_climbable_def")]([SubResource("Resource_3"), SubResource("Resource_4")])
+portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_5")])
+spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10")])
+props = Array[ExtResource("13_prop_placement")]([SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15")])
+region = &"dawnrise_isle"
+world_pos = Vector2(200.0, 445.0)
+return_map = &"meadow"
+level_text = "Lv. 7-12"

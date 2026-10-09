@@ -23,9 +23,13 @@ func _init(s: TDServer, map_def: MapDef) -> void:
 	server = s
 	def = map_def
 	layout = MapLayout.new(map_def)
-	for spawn in def.spawns:
-		for i in spawn.count:
-			mobs.append(SimMob.new(self, mobs.size(), spawn.monster, layout.platforms[spawn.platform]))
+	for r in def.roster():
+		var m := SimMob.new(self, mobs.size(), r[0], layout.platforms[r[1]])
+		if r[2] >= 0:
+			m.sleep()
+			m.parent = mobs[r[2]]
+			mobs[r[2]].children.append(m)
+		mobs.append(m)
 
 func step() -> void:
 	tick += 1
@@ -129,6 +133,8 @@ func use_skill(p: SimPlayer, skill: SkillDef) -> int:
 func kill_mob(m: SimMob, killer: SimPlayer) -> void:
 	m.die()
 	broadcast(&"ev_mob_died", [m.index])
+	for i in m.children.size():
+		m.children[i].wake(m.position.x + (i - (m.children.size() - 1) / 2.0) * 30.0, killer.peer)
 	server.give_xp(killer, m.def.exp_reward)
 	server.record_kill(killer, m.def)
 	var loot := []
@@ -147,16 +153,20 @@ func kill_mob(m: SimMob, killer: SimPlayer) -> void:
 
 ## A monster touched a player.
 func touch_player(p: SimPlayer, m: SimMob) -> void:
+	hurt_player(p, m.def, m.position.x)
+
+## A monster (`def`, standing at `from_x`) hit a player, by touch or with a shot.
+func hurt_player(p: SimPlayer, def: MonsterDef, from_x: float) -> void:
 	if p.inv > 0 or p.fainted():
 		return
-	var dmg := Combat.monster_hit(m.def, p.character)
+	var dmg := Combat.monster_hit(def, p.character)
 	p.inv = 40 if dmg == 0 else SimPlayer.HURT_INV
 	broadcast(&"ev_number", [p.position.x, p.position.y - 70, dmg, "miss" if dmg == 0 else "taken"])
 	if dmg == 0:
 		return
 	p.character.health.damage(dmg)
 	p.dirty_vitals = true
-	Net.send(p.peer, &"ev_hurt", [m.position.x])
+	Net.send(p.peer, &"ev_hurt", [from_x])
 	if p.character.health.is_dead():
 		p.faint_t = SimPlayer.FAINT_TICKS
 		p.climbing = false

@@ -1,0 +1,103 @@
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=24 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/petal_bat.png" id="2_petal_bat"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
+[ext_resource type="Resource" path="res://data/items/etc/reef_feather.tres" id="5_reef_feather"]
+[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="6_white_potion"]
+[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="7_blue_potion"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_earring_int_60.tres" id="8_scroll_earring_int_60"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_int_60.tres" id="9_scroll_top_int_60"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_gloves_att_10.tres" id="10_scroll_gloves_att_10"]
+[ext_resource type="Resource" path="res://data/items/equips/canvas_gloves.tres" id="11_canvas_gloves"]
+[ext_resource type="Resource" path="res://data/items/equips/sandals.tres" id="12_sandals"]
+[ext_resource type="Resource" path="res://data/items/equips/shell_earrings.tres" id="13_shell_earrings"]
+
+[sub_resource type="Resource" id="Resource_10"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("13_shell_earrings")
+chance = 0.015
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_9"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("12_sandals")
+chance = 0.015
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_8"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("11_canvas_gloves")
+chance = 0.015
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_7"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("10_scroll_gloves_att_10")
+chance = 0.0036
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_6"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("9_scroll_top_int_60")
+chance = 0.012
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_5"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("8_scroll_earring_int_60")
+chance = 0.012
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_4"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("7_blue_potion")
+chance = 0.05
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("6_white_potion")
+chance = 0.08
+min_amount = 1
+max_amount = 2
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("5_reef_feather")
+chance = 0.45
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("4_dawnshard")
+chance = 1.0
+min_amount = 22
+max_amount = 45
+
+[resource]
+script = ExtResource("1_monster_def")
+id = &"reef_gull"
+display_name = "Reef Gull"
+level = 15
+max_hp = 591
+attack = 37
+exp_reward = 110
+speed = 1.1
+size = Vector2(40.0, 30.0)
+boss = false
+flying = true
+hover_height = 56.0
+texture = ExtResource("2_petal_bat")
+sprite_scale = 1.0
+tint = Color(0.878431, 0.941176, 1.0, 1.0)
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10")])

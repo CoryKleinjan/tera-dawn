@@ -400,6 +400,37 @@ func equip(i: int, place: StringName = &"") -> String:
 		inventory.put(ItemDef.Tab.EQUIP, i, old)
 	return ""
 
+## Why the scroll in Use slot `use_slot` can't go on the gear in Equip slot `equip_slot`, or "".
+func scroll_problem(use_slot: int, equip_slot: int) -> String:
+	var held := inventory.at(ItemDef.Tab.USE, use_slot)
+	var gear := inventory.at(ItemDef.Tab.EQUIP, equip_slot)
+	if held == null or not held.item is ScrollDef or gear == null:
+		return "Pick a piece of gear in your bag to use the scroll on."
+	var scroll := held.item as ScrollDef
+	if not scroll.fits(gear.equip_def()):
+		return "The %s only works on %s gear." % [scroll.display_name, scroll.slot_text()]
+	if gear.slots_left() <= 0:
+		return "The %s has no upgrades left." % gear.display_name()
+	return ""
+
+## Uses the scroll in Use slot `use_slot` on the gear in Equip slot `equip_slot`: it spends
+## an upgrade slot and works if `roll` is under the scroll's chance. Returns
+## {"problem": why it couldn't, or "", "worked": whether the gear got the stats}.
+func use_scroll(use_slot: int, equip_slot: int, roll := randf()) -> Dictionary:
+	var problem := scroll_problem(use_slot, equip_slot)
+	if problem != "":
+		return {"problem": problem, "worked": false}
+	var scroll := inventory.at(ItemDef.Tab.USE, use_slot).item as ScrollDef
+	var gear := inventory.at(ItemDef.Tab.EQUIP, equip_slot)
+	inventory.take(ItemDef.Tab.USE, use_slot, 1)
+	gear.slots_used += 1
+	var worked := roll < scroll.chance
+	if worked:
+		gear.upgrades += 1
+		if scroll.stats:
+			gear.stats.add(scroll.stats)
+	return {"problem": "", "worked": worked}
+
 ## Takes off what's worn in `place` and puts it in the bag (at slot `i` if given and free).
 func unequip(place: StringName, i := -1) -> String:
 	var stack := equipment.at(place)
