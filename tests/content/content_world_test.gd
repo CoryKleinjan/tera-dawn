@@ -234,21 +234,9 @@ func _sources() -> Dictionary:
 				out[e.id] = "starting gear of %s" % j.id
 	return out
 
-## Known gap: the level 35 gear sets nothing drops, sells or gives yet. Remove an id once
-## something does (the test below fails when a listed item becomes obtainable).
-const KNOWN_UNOBTAINABLE: Array[StringName] = [
-	&"aurora_hat", &"aurora_robe", &"aurora_slippers", &"aurora_trousers", &"aurora_wand",
-	&"dawnbreaker_claymore", &"dawnwing_cape", &"dragonhide_gloves", &"eclipse_bandana",
-	&"eclipse_claw", &"eclipse_garb", &"eclipse_pants", &"eclipse_shoes", &"ember_earrings",
-	&"emberforge_aegis", &"emberplate_greaves", &"emberplate_helm", &"emberplate_sabatons",
-	&"leviathan_bandana", &"leviathan_boots", &"leviathan_coat", &"leviathan_fist",
-	&"leviathan_hand_cannon", &"leviathan_trousers", &"nightfang_claw", &"nightfang_shoes",
-	&"skyreach_boots", &"skyreach_bow", &"skyreach_jerkin", &"skyreach_leggings",
-	&"starfall_hat", &"starfall_robe", &"starfall_slippers", &"starfall_staff",
-	&"starfall_trousers", &"stormsail_bandana", &"sunforged_cuirass", &"sunforged_greaves",
-	&"sunforged_helm", &"sunforged_sabatons", &"sunstone_ring", &"windrunner_jerkin",
-	&"windrunner_leggings",
-]
+## Items nothing drops, sells or gives yet, if a gap is ever let in on purpose. Remove an id
+## once something does (the test below fails when a listed item becomes obtainable).
+const KNOWN_UNOBTAINABLE: Array[StringName] = []
 
 func test_every_item_can_be_obtained() -> void:
 	var sources := _sources()

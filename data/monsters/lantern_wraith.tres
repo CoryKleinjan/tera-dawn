@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=41 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=59 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="Resource" path="res://data/projectiles/mob_shadow.tres" id="2_mob_shadow"]
@@ -23,6 +23,15 @@
 [ext_resource type="Resource" path="res://data/items/equips/nightfang_garb.tres" id="21_nightfang_garb"]
 [ext_resource type="Resource" path="res://data/items/use/power_elixir.tres" id="22_power_elixir"]
 [ext_resource type="Resource" path="res://data/items/setup/lantern_bench.tres" id="p11_lantern_bench"]
+[ext_resource type="Resource" path="res://data/items/equips/eclipse_claw.tres" id="d35_eclipse_claw"]
+[ext_resource type="Resource" path="res://data/items/equips/eclipse_bandana.tres" id="d35_eclipse_bandana"]
+[ext_resource type="Resource" path="res://data/items/equips/eclipse_garb.tres" id="d35_eclipse_garb"]
+[ext_resource type="Resource" path="res://data/items/equips/eclipse_pants.tres" id="d35_eclipse_pants"]
+[ext_resource type="Resource" path="res://data/items/equips/eclipse_shoes.tres" id="d35_eclipse_shoes"]
+[ext_resource type="Resource" path="res://data/items/equips/nightfang_claw.tres" id="d35_nightfang_claw"]
+[ext_resource type="Resource" path="res://data/items/equips/nightfang_shoes.tres" id="d35_nightfang_shoes"]
+[ext_resource type="Resource" path="res://data/items/equips/dawnwing_cape.tres" id="d35_dawnwing_cape"]
+[ext_resource type="Resource" path="res://data/items/equips/dragonhide_gloves.tres" id="d35_dragonhide_gloves"]
 
 [sub_resource type="Resource" id="Resource_18"]
 script = ExtResource("4_drop_entry")
@@ -157,6 +166,69 @@ chance = 0.08
 min_amount = 1
 max_amount = 1
 
+[sub_resource type="Resource" id="Drop35_eclipse_claw"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("d35_eclipse_claw")
+chance = 0.1
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Drop35_eclipse_bandana"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("d35_eclipse_bandana")
+chance = 0.1
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Drop35_eclipse_garb"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("d35_eclipse_garb")
+chance = 0.1
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Drop35_eclipse_pants"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("d35_eclipse_pants")
+chance = 0.1
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Drop35_eclipse_shoes"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("d35_eclipse_shoes")
+chance = 0.1
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Drop35_nightfang_claw"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("d35_nightfang_claw")
+chance = 0.1
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Drop35_nightfang_shoes"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("d35_nightfang_shoes")
+chance = 0.1
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Drop35_dawnwing_cape"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("d35_dawnwing_cape")
+chance = 0.1
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Drop35_dragonhide_gloves"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("d35_dragonhide_gloves")
+chance = 0.1
+min_amount = 1
+max_amount = 1
+
 [resource]
 script = ExtResource("1_monster_def")
 id = &"lantern_wraith"
@@ -178,5 +250,5 @@ texture = ExtResource("3_cinder_imp")
 sprite_scale = 2.4
 tint = Color(0.564706, 0.501961, 1.0, 1.0)
 light_color = Color(0.501961, 0.376471, 1.0, 1.0)
-drops = Array[ExtResource("4_drop_entry")]([SubResource("P11_lantern_bench"), SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18")])
+drops = Array[ExtResource("4_drop_entry")]([SubResource("P11_lantern_bench"), SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18"), SubResource("Drop35_eclipse_claw"), SubResource("Drop35_eclipse_bandana"), SubResource("Drop35_eclipse_garb"), SubResource("Drop35_eclipse_pants"), SubResource("Drop35_eclipse_shoes"), SubResource("Drop35_nightfang_claw"), SubResource("Drop35_nightfang_shoes"), SubResource("Drop35_dawnwing_cape"), SubResource("Drop35_dragonhide_gloves")])
 respawn_ticks = Vector2i(1800, 2400)
