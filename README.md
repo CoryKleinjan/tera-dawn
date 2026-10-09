@@ -28,6 +28,10 @@ The game is built to grow: monsters, NPCs, items, skills, effects, maps and biom
 - **59 monsters** from level 1 to 35, with patrol and chase behavior plus: hoppers (Tide Dewlings, Glowcaps), turrets that never move but shoot anyone who comes close (Acorn Sentries, Coral Turrets), shooters whose shots fly to where you stood so you can dodge them (Star Bats, Fire Imp Archers, Lantern Wisps), and slimes that burst into smaller slimes when defeated (Sporecaps, Prism, Slag and Tide Slimes). Seven bosses: the Flame Boar Chief, Old Clawbeard, the Elder Treant, the Arcane Sentinel, the Molten King, the Lantern Wraith and the Reef Titan.
 - **Upgrade scrolls**: double-click a scroll in the Use tab, then click a piece of gear. Each scroll spends one of the gear's upgrade slots and, at its success rate (60% or 10%), adds its stats; upgraded gear shows "+N" after its name. There are scrolls for weapon attack and magic attack, armor defense, helmet HP, top stats, gloves, shoes, capes, earrings and shields.
 - **About 240 items**: job gear sets at levels 25, 30 and 35 for every job, gloves, capes, earrings, pendants, rings and shields for anyone, new potions and food, a scroll back to every town, and a monster part from every monster. Every monster drops Dawnshards, its part, potions for its level, gear near its level and, rarely, scrolls.
+- **Playing together**: press Enter to chat with everyone on the map (it shows in a bubble over your head), or start the line with /w Name to whisper, /p for your party, /g for your guild or /b for your buddies (/help lists every command). Click another player to whisper, invite them to a party, add them as a buddy, trade, invite them to your guild or give them fame.
+- **Parties** of up to six: members on the same map get 40% of each other's kill EXP, and their HP shows under the map name. **Buddies** (up to 20) show who's online and where. **Guilds**: found one with the Guild Clerk in Dawnharbor (15,000 Dawnshards, level 10); its name shows under every member's name. The community window (O) has a tab for each.
+- **Trading**: drag items onto your side of the trade window and set your Dawnshards; nothing changes hands until both players press Trade. **Fame**: from level 15, once a day, and the same player once a month, shown on the character window.
+- **The Free Market** (through the portal on Dawnharbor's east dock): the Market Clerk helps you set up a shop. Price your goods, name the stall and stand behind it; other players click your sign to buy, and anything unsold comes back when you close.
 - Two NPCs in the meadow village. Press Up to talk: a dialogue window shows what they offer.
 - **Quests**: six to start, from Elder Rowan and Mira, with kill, collect and visit objectives, a quest item that only drops while you're on its quest, and a repeatable one. A "!" over an NPC means they have a quest for you, "?" means you can hand one in. The quest log (Q) lists what's in progress, available and done, and a tracker under the minimap shows your progress.
 - **Jobs**: everyone starts as a Beginner. Each job town's instructor turns a level 10 Beginner into their job (a Magician from level 8) once they have the stat the job asks for, and hands over the job's first weapon. Some gear can only be worn by one job line.
@@ -58,6 +62,8 @@ The game is built to grow: monsters, NPCs, items, skills, effects, maps and biom
 | Quest log | Q | |
 | Skills | K | |
 | World map | W | |
+| Community (buddies, party, guild) | O | |
+| Chat | Enter | |
 | Enter a portal, talk to an NPC | Up | Up |
 | Pick a dialogue option | 1 to 9, or click | |
 | Close a window, or the menu | Esc | Start |

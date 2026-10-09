@@ -68,6 +68,17 @@ Monster index `i` is the same monster on both sides because both build them from
 `MapDef.roster()`: the map's spawns in order, each monster that splits followed by the
 monsters it splits into (those sleep, dead, until their parent is defeated).
 
+### Players together
+
+`TDSocial` (`scripts/server/social.gd`, owned by the server) runs everything players do with
+each other: chat and its slash commands, invitations (`ev_invite` / `req_invite_answer`),
+buddies (kept on the Character), parties (server memory only; `party_shares` hands out kill
+EXP), trades (offers are held by the server until both press Trade, then swapped, or handed
+back on cancel), guilds (saved in `guilds.data` next to the character saves), fame, and player
+shops on maps with `MapDef.market`. Each player gets a summary of their buddies, party and
+guild through `ev_social` whenever it changes (`Game.social`); the community window, the
+player menu, the party HP list and the trade and shop windows (`scripts/ui/social/`) read it.
+
 ### How to add something the player does
 
 1. Add a `req_<thing>` to `Net` that calls `server.on_<thing>(_sender(), …)`.

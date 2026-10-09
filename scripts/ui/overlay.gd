@@ -20,6 +20,7 @@ func _draw() -> void:
 	UiSkin.draw_hint(self, Vector2(16 + (DrawUtil.text_width(font, world.map.display_name, 13) + 26) / 2.0, 36), world.map.display_name)
 	_draw_minimap(Rect2(v.x - 182, 10, 172, 50))
 	if world.started:
+		_draw_party(Vector2(16, 56))
 		_draw_quest_tracker(Vector2(v.x - 178, 82))
 		_draw_buffs(Vector2(v.x - 192, 12))
 	# message log, newest at the bottom, above the status bar and left of the quickslots
@@ -71,6 +72,20 @@ func _draw_buffs(right_top: Vector2) -> void:
 		DrawUtil.text(self, Game.num_font, Vector2(r.get_center().x, r.end.y + 11), str(left), 11,
 			Palette.MIST if left > 10 else Color("ffb38a"), 0, 4, Palette.NIGHT)
 
+## Your party under the map name: each other member's name and HP.
+func _draw_party(at: Vector2) -> void:
+	var party: Dictionary = Game.social.get("party", {})
+	var y := at.y
+	for m in party.get("members", []):
+		if m[0] == Game.me.name:
+			continue
+		var here: bool = StringName(m[5]) == world.map.id
+		DrawUtil.text(self, Game.ui_font, Vector2(at.x, y + 10), "%s  Lv.%d" % [m[0], m[2]], 11, Palette.MIST if here else Color(Palette.MIST, 0.55), 1, 3, Palette.NIGHT)
+		var bar := Rect2(at.x, y + 14, 90, 5)
+		draw_rect(bar, Color(Palette.NIGHT, 0.6))
+		draw_rect(Rect2(bar.position, Vector2(bar.size.x * float(m[4]), bar.size.y)), Palette.HP)
+		y += 24
+
 ## Quests in progress and how far along they are, under the minimap.
 func _draw_quest_tracker(at: Vector2) -> void:
 	var me := Game.me
@@ -108,10 +123,22 @@ func _draw_world_text() -> void:
 			n.draw_tag(self, st.screen(n.position, 0.1), st.screen(n.position + Vector2(0, -n.rig.body.get_item_rect().size.y * n.rig.body.pixel_size * TDStage.PX), 0.1))
 	for a in world.avatars.values():
 		if st.in_view(a.position, TDStage.Z_OTHER_PLAYER):
-			a.draw_tag(self, st.screen(a.position, TDStage.Z_OTHER_PLAYER))
+			var feet := st.screen(a.position, TDStage.Z_OTHER_PLAYER)
+			a.draw_tag(self, feet)
+			if a.shop_title != "":
+				UiSkin.draw_hint(self, feet + Vector2(0, -84), "Shop: " + a.shop_title)
+			elif a.speech_t > 0:
+				UiSkin.draw_speech(self, feet + Vector2(0, -84), a.speech)
 	var p := world.player
 	if world.started and not p.fainted():
-		UiSkin.draw_name_tag(self, st.screen(p.position, TDPlayer.Z) + Vector2(0, 4), Game.me.name, Palette.SUN)
+		var feet := st.screen(p.position, TDPlayer.Z)
+		UiSkin.draw_name_tag(self, feet + Vector2(0, 4), Game.me.name, Palette.SUN)
+		if Game.me.guild != "":
+			UiSkin.draw_name_tag(self, feet + Vector2(0, 26), Game.me.guild, Color("b8f070"))
+		if world.hud.selling():
+			UiSkin.draw_hint(self, feet + Vector2(0, -84), "Shop: " + world.hud.windows["player_shop"].shop_title)
+		elif p.speech_t > 0:
+			UiSkin.draw_speech(self, feet + Vector2(0, -84), p.speech)
 	for f in world.fx_layer.get_children():
 		if f is TDFloatText:
 			(f as TDFloatText).draw_at(self, st.screen(f.position, 0.6))

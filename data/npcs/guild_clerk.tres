@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/npcs/village_elder.png" id="2_village_elder"]
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"guild_clerk"
+display_name = "Guild Clerk Hollis"
+title = "Guilds"
+texture = ExtResource("2_village_elder")
+sprite_scale = 0.95
+tint = Color(0.721569, 0.941176, 0.439216, 1.0)
+greeting = "Every great band of heroes starts with a name. Want to found a guild?"
+lines = PackedStringArray("A guild's name shows under every member's name.", "Guild members can talk to each other anywhere with /g.")
+guild = true

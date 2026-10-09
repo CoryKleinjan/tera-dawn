@@ -13,6 +13,8 @@ signal character_changed
 
 ## The player's character as the server last described it. Read it; don't change it.
 var me: Character
+## Buddies, party and guild as the server last described them (TDSocial.summary).
+var social := {}
 ## The name typed on the title screen and the last server joined.
 var player_name := "Dawnling"
 var last_address := "127.0.0.1"
@@ -76,6 +78,8 @@ func _setup_input() -> void:
 	_bind("quests", [KEY_Q], [])
 	_bind("skills", [KEY_K], [])
 	_bind("worldmap", [KEY_W], [])
+	_bind("community", [KEY_O], [])
+	_bind("chat", [KEY_ENTER, KEY_KP_ENTER], [])
 	_bind("pause", [KEY_ESCAPE], [JOY_BUTTON_START])
 	_bind("toggle_fullscreen", [KEY_F11], [])
 

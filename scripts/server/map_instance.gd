@@ -74,7 +74,7 @@ func full_state() -> Dictionary:
 func snapshot() -> Dictionary:
 	return {"tick": tick,
 		"mobs": mobs.map(func(m: SimMob) -> Array: return m.snapshot()),
-		"players": players.values().map(func(p: SimPlayer) -> Array: return p.snapshot())}
+		"players": players.values().map(func(p: SimPlayer) -> Array: return p.snapshot() + [server.social.shop_title(p.peer)])}
 
 ## Sends an event to every player on this map (except `skip`).
 func broadcast(event: StringName, args: Array, skip := 0) -> void:
@@ -136,6 +136,8 @@ func kill_mob(m: SimMob, killer: SimPlayer) -> void:
 	for i in m.children.size():
 		m.children[i].wake(m.position.x + (i - (m.children.size() - 1) / 2.0) * 30.0, killer.peer)
 	server.give_xp(killer, m.def.exp_reward)
+	for share in server.social.party_shares(killer, m.def.exp_reward):
+		server.give_xp(share[0], share[1])
 	server.record_kill(killer, m.def)
 	var loot := []
 	for entry in m.def.drops:

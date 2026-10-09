@@ -77,7 +77,8 @@ func step() -> bool:
 		dirty_vitals = true
 	return false
 
-## What other clients need to draw this player: [peer, name, x, y, face, animation, level, flags].
+## What other clients need to draw this player: [peer, name, x, y, face, animation, level,
+## flags, job, guild] (the map adds their shop sign).
 func snapshot() -> Array:
 	var flags := 0
 	if fainted():
@@ -86,4 +87,4 @@ func snapshot() -> Array:
 		flags |= TDAvatar.BLINK
 	if climbing:
 		flags |= TDAvatar.CLIMBING
-	return [peer, character.name, position.x, position.y, face, animation, character.level, flags, character.job.id]
+	return [peer, character.name, position.x, position.y, face, animation, character.level, flags, character.job.id, character.guild]

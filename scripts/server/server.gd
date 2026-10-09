@@ -22,15 +22,19 @@ var sessions := {}
 var maps := {}
 var tick := 0
 var _drop_ids := 0
+## Chat, buddies, parties, trades, guilds, fame and player shops.
+var social: TDSocial
 
 func _init(save_dir := "user://characters") -> void:
 	store = CharacterStore.new(save_dir)
+	social = TDSocial.new(self, save_dir)
 
 func _physics_process(_delta: float) -> void:
 	tick += 1
 	for m: MapInstance in maps.values():
 		if not m.players.is_empty():
 			m.step()
+	social.step(tick)
 	for p: SimPlayer in sessions.values():
 		_flush(p)
 	if tick % SNAPSHOT_EVERY == 0:
@@ -82,6 +86,7 @@ func join(peer: int, raw_name: String) -> void:
 		c = Character.create(char_name)
 	var p := SimPlayer.new(peer, c)
 	sessions[peer] = p
+	social.joined(p)
 	Net.send(peer, &"ev_joined", [c.to_dict()])
 	_enter_map(p, c.map_id, Content.map(c.map_id).start_x)
 	print("%s joined (peer %d)" % [char_name, peer])
@@ -90,6 +95,7 @@ func leave(peer: int) -> void:
 	var p: SimPlayer = sessions.get(peer)
 	if p == null:
 		return
+	social.left(p)
 	sessions.erase(peer)
 	p.map.remove_player(p)
 	p.map.broadcast(&"ev_player_left", [peer])
@@ -98,6 +104,7 @@ func leave(peer: int) -> void:
 
 func _enter_map(p: SimPlayer, id: StringName, x: float) -> void:
 	if p.map:
+		social.changed_map(p)
 		p.map.remove_player(p)
 		p.map.broadcast(&"ev_player_left", [p.peer])
 	var m := map_instance(id)
@@ -137,6 +144,11 @@ func _player(peer: int) -> SimPlayer:
 
 func on_move(peer: int, at: Vector2, face: int, anim: StringName, climbing: bool) -> void:
 	var p := _player(peer)
+	if p and social.shops.has(peer):
+		# minding a shop: stay put
+		if p.position.distance_to(at) > 2.0:
+			Net.send(peer, &"ev_place", [p.position.x, p.position.y])
+		return
 	if p and not p.report_move(at, face, anim, climbing) and not p.fainted():
 		Net.send(peer, &"ev_place", [p.position.x, p.position.y])
 

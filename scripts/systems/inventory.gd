@@ -69,6 +69,16 @@ func has_room(item: ItemDef, n := 1) -> bool:
 			room += item.stack_size() - s.count
 	return room >= n
 
+## Whether all of `stacks` would fit, each in a slot of its own (a trade's worth of items).
+func room_for(stacks: Array) -> bool:
+	var need := {}
+	for s: ItemStack in stacks:
+		need[s.item.tab()] = need.get(s.item.tab(), 0) + 1
+	for t in need:
+		if free_slots(t) < need[t]:
+			return false
+	return true
+
 func first_free(tab: int) -> int:
 	return tabs[tab].find(null)
 

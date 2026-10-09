@@ -32,6 +32,8 @@ var cheer_t := 0      # ticks of the level-up pose
 var loot_cd := 0      # ticks before the loot key asks for the next item
 var _reported := &""  # the animation the server last heard about
 var _swing := false   # restart the attack animation on the next frame
+var speech := ""      # the last thing said in map chat, shown in a bubble
+var speech_t := 0
 
 var rig: SpriteRig
 
@@ -78,6 +80,8 @@ func level_up() -> void:
 # ---------- per tick ----------
 
 func step() -> void:
+	if speech_t > 0:
+		speech_t -= 1
 	if down:
 		return
 	for t in ["inv", "action_t", "cooldown", "grab_cd", "drop_t", "land_t", "cheer_t", "loot_cd"]:
@@ -87,7 +91,7 @@ func step() -> void:
 		Game.me.tick_buffs() # the server ends them too; this keeps timers and speed in step
 	_attacks()
 	# hold the loot key to pick things up one after another
-	if Input.is_action_pressed("loot") and loot_cd == 0 and not is_climbing():
+	if _held("loot") and loot_cd == 0 and not is_climbing():
 		_report()
 		Net.ask(&"req_loot")
 		loot_cd = 8
@@ -99,6 +103,13 @@ func step() -> void:
 	if world.tick % REPORT_EVERY == 0 or _animation() != _reported:
 		_report()
 
+## Whether an input is held, unless typing or minding a shop.
+func _held(action: StringName) -> bool:
+	return not world.input_blocked() and Input.is_action_pressed(action)
+
+func _tapped(action: StringName) -> bool:
+	return not world.input_blocked() and Input.is_action_just_pressed(action)
+
 ## Tells the server where you are and what you're doing.
 func _report() -> void:
 	_reported = _animation()
@@ -107,10 +118,10 @@ func _report() -> void:
 func _attacks() -> void:
 	# items on quickslots work even mid-swing or on a rope
 	for i in Game.QUICKSLOT_ACTIONS.size():
-		if Input.is_action_just_pressed(Game.QUICKSLOT_ACTIONS[i]):
+		if _tapped(Game.QUICKSLOT_ACTIONS[i]):
 			use_quickslot(i)
 			return
-	if Input.is_action_just_pressed("attack"):
+	if _tapped("attack"):
 		_use(Game.me.basic_attack())
 
 ## Does what's on quickslot `i`: a skill, or the first stack of an item.
@@ -143,7 +154,7 @@ func _use(skill: SkillDef) -> void:
 
 ## Up on the ground: enter a portal, or talk to the NPC in front of you.
 func _interact() -> bool:
-	if not (Input.is_action_just_pressed("move_up") and on_ground):
+	if not (_tapped("move_up") and on_ground):
 		return false
 	if world.layout.portal_at(position):
 		_report()
@@ -158,13 +169,13 @@ func _interact() -> bool:
 
 func _climb() -> void:
 	vel = Vector2.ZERO
-	if Input.is_action_pressed("move_up"):
+	if _held("move_up"):
 		position.y -= 2.6
-	if Input.is_action_pressed("move_down"):
+	if _held("move_down"):
 		position.y += 2.6
-	var left := Input.is_action_pressed("move_left")
-	var right := Input.is_action_pressed("move_right")
-	if Input.is_action_just_pressed("jump") and (left or right):
+	var left := _held("move_left")
+	var right := _held("move_right")
+	if _tapped("jump") and (left or right):
 		var dir := -1 if left else 1
 		climb = null
 		grab_cd = 20
@@ -191,11 +202,11 @@ func _grab_climbable() -> bool:
 	var c := world.layout.climbable_near(position)
 	if c == null:
 		return false
-	if Input.is_action_pressed("move_up") and on_ground and world.npc_near(position):
+	if _held("move_up") and on_ground and world.npc_near(position):
 		return false # Up next to someone talks to them (see _interact)
-	if Input.is_action_pressed("move_up") and position.y > c.top + 1:
+	if _held("move_up") and position.y > c.top + 1:
 		climb = c
-	elif Input.is_action_pressed("move_down") and on_ground and absf(position.y - c.top) < 3:
+	elif _held("move_down") and on_ground and absf(position.y - c.top) < 3:
 		climb = c
 		position.y = c.top + 8
 	else:
@@ -206,8 +217,8 @@ func _grab_climbable() -> bool:
 	return true
 
 func _move() -> void:
-	var left := Input.is_action_pressed("move_left")
-	var right := Input.is_action_pressed("move_right")
+	var left := _held("move_left")
+	var right := _held("move_right")
 	var rooted := action_t > 0 and on_ground
 	var acc := 0.8 if on_ground else 0.28
 	var max_speed := 3.7 * CharacterStats.speed_multiplier(Game.me.stats)
@@ -222,8 +233,8 @@ func _move() -> void:
 	if absf(vel.x) < 0.05:
 		vel.x = 0
 
-	if Input.is_action_just_pressed("jump") and on_ground:
-		if Input.is_action_pressed("move_down") and platform != null and not platform.solid:
+	if _tapped("jump") and on_ground:
+		if _held("move_down") and platform != null and not platform.solid:
 			drop_from = platform
 			drop_t = 16
 			vel.y = 1
@@ -270,7 +281,7 @@ func _animation() -> StringName:
 	if fainted():
 		return &"faint"
 	if is_climbing():
-		var moving := Input.is_action_pressed("move_up") or Input.is_action_pressed("move_down")
+		var moving := _held("move_up") or _held("move_down")
 		return climb.style.climb_animation if moving and climb.style else &"climb_idle"
 	if action_t > 0:
 		return action_anim
@@ -284,7 +295,7 @@ func _animation() -> StringName:
 		return &"level_up"
 	if absf(vel.x) > 0.3:
 		return &"walk"
-	if Input.is_action_pressed("move_down"):
+	if _held("move_down"):
 		return &"crouch"
 	return &"idle"
 
