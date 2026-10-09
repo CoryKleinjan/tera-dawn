@@ -4,13 +4,6 @@ extends Node2D
 ## where it is and what it's doing; this glides to that spot and plays the matching
 ## animation, HP bar and hit flash.
 
-## Bits of the flags in a monster's snapshot (see SimMob.snapshot).
-const DEAD := 1
-const HURT := 2
-const AGGRO := 4
-const SHOW_HP := 8
-const CASTING := 16
-
 ## How far it moves toward the server's position each tick (0..1).
 const FOLLOW := 0.35
 
@@ -42,7 +35,7 @@ static func create(w: TDWorld, i: int, d: MonsterDef, p: Platform) -> TDMob:
 	return m
 
 var dead: bool:
-	get: return flags & DEAD != 0
+	get: return flags & SnapshotFlags.MOB_DEAD != 0
 
 ## Takes the server's latest [x, y, dir, hp, flags].
 func apply(state: Array) -> void:
@@ -55,20 +48,18 @@ func apply(state: Array) -> void:
 		position = target # first sight, or back from the dead: no gliding in
 		death_t = 0
 	if dead and not was_dead and known:
-		death_t = 40
+		death_t = SimMob.DEATH_FADE_TICKS
 	known = true
 
 ## The server says it was defeated: start fading out now rather than at the next snapshot.
 func kill() -> void:
 	if not dead:
-		flags |= DEAD
-		death_t = 40
+		flags |= SnapshotFlags.MOB_DEAD
+		death_t = SimMob.DEATH_FADE_TICKS
 
 ## Feet position including the hover height of flying monsters.
 func body_position() -> Vector2:
-	if def.flying:
-		return position + Vector2(0, -def.hover_height + sin(phase * 1.5) * 6.0)
-	return position
+	return position + SimMob.hover_offset(def, phase)
 
 func step() -> void:
 	phase += 0.08
@@ -99,7 +90,7 @@ func _process(_delta: float) -> void:
 		return
 	var fallen := dead and incoming <= 0
 	rig.set_opacity(clampf(death_t / 30.0, 0.0, 1.0) if fallen else 1.0)
-	var hurt := flags & HURT != 0
+	var hurt := flags & SnapshotFlags.MOB_HURT != 0
 	rig.set_flash(hurt and Engine.get_physics_frames() % 4 < 2)
 	var facing := dir
 	if facing == 0:
@@ -111,9 +102,9 @@ func _process(_delta: float) -> void:
 		rig.play(&"die")
 	elif hurt:
 		rig.play(&"hurt")
-	elif flags & CASTING != 0:
+	elif flags & SnapshotFlags.MOB_CASTING != 0:
 		rig.play(&"attack")
-	elif flags & AGGRO != 0 and moving:
+	elif flags & SnapshotFlags.MOB_AGGRO != 0 and moving:
 		rig.play(&"attack")
 	elif moving:
 		rig.play(&"move")
@@ -127,5 +118,5 @@ func draw_tag(ci: CanvasItem, at: Vector2, top: Vector2) -> void:
 		return
 	var label := "Lv.%d %s" % [def.level, def.display_name]
 	UiSkin.draw_name_tag(ci, at + Vector2(0, 4), label, Palette.MIST, Palette.EMBER if def.boss else Color.TRANSPARENT)
-	if flags & SHOW_HP != 0 or def.boss:
+	if flags & SnapshotFlags.MOB_SHOW_HP != 0 or def.boss:
 		UiSkin.draw_monster_hp(ci, top + Vector2(0, -16), maxf(54.0, def.size.x * (1.6 if def.boss else 1.1)), hp)

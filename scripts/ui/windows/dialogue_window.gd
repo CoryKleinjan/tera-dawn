@@ -9,7 +9,7 @@ extends TDWindow
 
 const PORTRAIT := 96.0
 const TEXT_X := PAD + PORTRAIT + 16
-const OPTION_H := 26.0
+const ROW_H := 26.0
 ## Walk this far from the NPC and the window closes.
 const REACH := 170.0
 
@@ -188,7 +188,7 @@ func choose(i: int) -> void:
 		options[i][1].call()
 
 func _option_rect(i: int) -> Rect2:
-	return Rect2(TEXT_X - 6, size.y - PAD - (options.size() - i) * OPTION_H, size.x - TEXT_X - PAD + 6, OPTION_H - 2)
+	return Rect2(TEXT_X - 6, size.y - PAD - (options.size() - i) * ROW_H, size.x - TEXT_X - PAD + 6, ROW_H - 2)
 
 func _process(delta: float) -> void:
 	super(delta)
@@ -206,12 +206,12 @@ func _draw_body() -> void:
 		return
 	# portrait
 	var box := Rect2(PAD, TITLE_H + 10, PORTRAIT, PORTRAIT + 20)
-	DrawUtil.round_rect(self, box, 8, Color(Palette.NIGHT, 0.45))
+	draw_row(box)
 	var tex := npc.portrait()
 	if tex:
 		draw_texture_rect(tex, fit(tex, box.grow(-6)), false, npc.def.tint)
 	if npc.def.title != "":
-		DrawUtil.text(self, Game.ui_font, Vector2(box.get_center().x, box.end.y + 16), npc.def.title, 11, Color("c9b8d9"), 0, 3, Palette.NIGHT)
+		DrawUtil.text(self, Game.ui_font, Vector2(box.get_center().x, box.end.y + 16), npc.def.title, 11, Palette.MUTED, 0, 3, Palette.NIGHT)
 	# what they say
 	var y := TITLE_H + 26
 	for paragraph in text.split("\n"):
@@ -224,7 +224,7 @@ func _draw_body() -> void:
 	for i in options.size():
 		var r := _option_rect(i)
 		if r.has_point(_hover):
-			DrawUtil.round_rect(self, r, 6, Color(1, 0.85, 0.45, 0.18))
+			draw_hilite(r)
 		DrawUtil.text(self, Game.ui_font, Vector2(r.position.x + 8, r.end.y - 7), "%d.  %s" % [i + 1, options[i][0]], 14, Palette.SUN, 1, 3, Palette.NIGHT)
 
 func _click(at: Vector2, button: int, _double: bool) -> void:

@@ -11,13 +11,39 @@ const Z := TDStage.Z_PLAYER
 ## Ticks between telling the server where you are (60 / 3 = 20 a second).
 const REPORT_EVERY := 3
 
+# ---------- movement (game pixels and ticks) ----------
+## Acceleration on the ground and in the air.
+const ACCEL_GROUND := 0.8
+const ACCEL_AIR := 0.28
+## Top running speed, before the speed stat.
+const RUN_SPEED := 3.7
+## Share of the speed kept each tick with no direction held, on the ground and in the air.
+const FRICTION_GROUND := 0.7
+const FRICTION_AIR := 0.98
+## Upward speed of a jump, before the jump stat.
+const JUMP_SPEED := -9.8
+const GRAVITY := 0.5
+const MAX_FALL := 12.0
+## Ticks spent falling through a platform after down + jump.
+const DROP_TICKS := 16
+## Ticks of the landing pose after a fall.
+const LAND_TICKS := 6
+## Closest the feet get to the map's left and right edges.
+const EDGE := 14.0
+## Knockback speed when a monster hits you (away from it, and up).
+const KNOCKBACK := Vector2(3.5, -4.5)
+## Ticks of the hurt pose at the start of the invincibility after a hit.
+const HURT_POSE_TICKS := 20
+## Ticks of the level-up pose.
+const CHEER_TICKS := 50
+
 var world: TDWorld
 var vel := Vector2.ZERO
 var face := 1
 var on_ground := false
 var platform: Platform = null
 var climb: ClimbableDef = null
-var hurtbox := Hitbox.new(Vector2(28, 64))
+var hurtbox := Hitbox.new(SimPlayer.HURTBOX_SIZE)
 
 var grab_cd := 0      # ticks before a rope can be grabbed again
 var drop_from: Platform = null
@@ -79,9 +105,9 @@ func sit(chair_id: StringName) -> void:
 
 ## The server says a monster hit you: blink, and get knocked away from it.
 func knock_back(from_x: float) -> void:
-	inv = 90
+	inv = SimPlayer.HURT_INV
 	if not is_climbing():
-		vel = Vector2(-3.5 if position.x < from_x else 3.5, -4.5)
+		vel = Vector2(-KNOCKBACK.x if position.x < from_x else KNOCKBACK.x, KNOCKBACK.y)
 		on_ground = false
 
 ## The server didn't accept where you said you were, and puts you back.
@@ -90,7 +116,7 @@ func correct(at: Vector2) -> void:
 	vel = Vector2.ZERO
 
 func level_up() -> void:
-	cheer_t = 50
+	cheer_t = CHEER_TICKS
 
 # ---------- per tick ----------
 
@@ -99,9 +125,22 @@ func step() -> void:
 		speech_t -= 1
 	if down:
 		return
-	for t in ["inv", "action_t", "cooldown", "grab_cd", "drop_t", "land_t", "cheer_t", "loot_cd"]:
-		if get(t) > 0:
-			set(t, get(t) - 1)
+	if inv > 0:
+		inv -= 1
+	if action_t > 0:
+		action_t -= 1
+	if cooldown > 0:
+		cooldown -= 1
+	if grab_cd > 0:
+		grab_cd -= 1
+	if drop_t > 0:
+		drop_t -= 1
+	if land_t > 0:
+		land_t -= 1
+	if cheer_t > 0:
+		cheer_t -= 1
+	if loot_cd > 0:
+		loot_cd -= 1
 	if not Game.me.buffs.is_empty():
 		Game.me.tick_buffs() # the server ends them too; this keeps timers and speed in step
 	if sitting != &"":
@@ -167,7 +206,7 @@ func _use(skill: SkillDef) -> void:
 		return
 	var problem := Game.me.use_problem(skill)
 	if problem != "":
-		world.add_log(problem, Color("8cc6ff"))
+		world.add_log(problem, Palette.INFO)
 		return
 	action_t = skill.action_ticks
 	action_anim = skill.animation
@@ -245,8 +284,8 @@ func _move() -> void:
 	var left := _held("move_left")
 	var right := _held("move_right")
 	var rooted := action_t > 0 and on_ground
-	var acc := 0.8 if on_ground else 0.28
-	var max_speed := 3.7 * CharacterStats.speed_multiplier(Game.me.stats)
+	var acc := ACCEL_GROUND if on_ground else ACCEL_AIR
+	var max_speed := RUN_SPEED * CharacterStats.speed_multiplier(Game.me.stats)
 	if left and not right and not rooted:
 		vel.x = maxf(-max_speed, vel.x - acc)
 		face = -1
@@ -254,23 +293,23 @@ func _move() -> void:
 		vel.x = minf(max_speed, vel.x + acc)
 		face = 1
 	else:
-		vel.x *= 0.7 if on_ground else 0.98
+		vel.x *= FRICTION_GROUND if on_ground else FRICTION_AIR
 	if absf(vel.x) < 0.05:
 		vel.x = 0
 
 	if _tapped("jump") and on_ground:
 		if _held("move_down") and platform != null and not platform.solid:
 			drop_from = platform
-			drop_t = 16
+			drop_t = DROP_TICKS
 			vel.y = 1
 		else:
-			vel.y = -9.8 * CharacterStats.jump_multiplier(Game.me.stats)
+			vel.y = JUMP_SPEED * CharacterStats.jump_multiplier(Game.me.stats)
 		on_ground = false
 
-	vel.y = minf(vel.y + 0.5, 12.0)
+	vel.y = minf(vel.y + GRAVITY, MAX_FALL)
 	var prev_y := position.y
 	var was_falling := vel.y > 4.0
-	position.x = clampf(position.x + vel.x, 14.0, float(world.map.width) - 14.0)
+	position.x = clampf(position.x + vel.x, EDGE, float(world.map.width) - EDGE)
 	position.y += vel.y
 	on_ground = false
 	if vel.y >= 0:
@@ -283,7 +322,7 @@ func _move() -> void:
 				on_ground = true
 				platform = pl
 				if was_falling:
-					land_t = 6
+					land_t = LAND_TICKS
 				break
 	if position.y > float(world.map.height):
 		position.y = float(world.map.ground_y)
@@ -315,7 +354,7 @@ func _animation() -> StringName:
 		return climb.style.climb_animation if moving and climb.style else &"climb_idle"
 	if action_t > 0:
 		return action_anim
-	if inv > 70: # just got hit (knock_back sets inv = 90)
+	if inv > SimPlayer.HURT_INV - HURT_POSE_TICKS: # just got hit (see knock_back)
 		return &"hurt"
 	if not on_ground:
 		return &"jump" if vel.y < 0 else &"fall"

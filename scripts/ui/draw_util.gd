@@ -33,10 +33,6 @@ static func round_rect_points(r: Rect2, rad: float) -> PackedVector2Array:
 static func round_rect(ci: CanvasItem, r: Rect2, rad: float, col: Color) -> void:
 	ci.draw_colored_polygon(round_rect_points(r, rad), col)
 
-static func vgradient_rect(ci: CanvasItem, r: Rect2, top: Color, bottom: Color) -> void:
-	var pts := PackedVector2Array([r.position, Vector2(r.end.x, r.position.y), r.end, Vector2(r.position.x, r.end.y)])
-	ci.draw_polygon(pts, PackedColorArray([top, top, bottom, bottom]))
-
 ## Draws text anchored at `pos` (baseline). align: -1 right, 0 center, 1 left.
 static func text(ci: CanvasItem, font: Font, pos: Vector2, s: String, size: int, col: Color, align := 0, outline := 0, outline_col := Color(0, 0, 0, 0.8)) -> void:
 	var w := font.get_string_size(s, HORIZONTAL_ALIGNMENT_LEFT, -1, size).x

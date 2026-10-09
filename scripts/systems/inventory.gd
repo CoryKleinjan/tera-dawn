@@ -24,6 +24,10 @@ func clear() -> void:
 func at(tab: int, i: int) -> ItemStack:
 	return tabs[tab][i]
 
+## Whether `tab` is a real tab and `slot` a real slot in it (for checking what clients ask for).
+static func valid_slot(tab: int, slot: int) -> bool:
+	return tab >= 0 and tab < ItemDef.Tab.size() and slot >= 0 and slot < SLOTS
+
 ## Puts `n` of an item in the bag, topping up stacks before using empty slots.
 ## Returns how many didn't fit.
 func add(item: ItemDef, n := 1) -> int:

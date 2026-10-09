@@ -10,8 +10,16 @@ extends RefCounted
 const FAINT_TICKS := 150
 ## Fastest a report may move the player per tick: well above running and falling speed.
 const MAX_STEP := 16.0
-## Ticks of invincibility after a monster touch.
+## Ticks of invincibility after a monster touch (the client blinks for as long).
 const HURT_INV := 90
+## The player's hurtbox, the same on the server and the client (TDPlayer).
+const HURTBOX_SIZE := Vector2(28, 64)
+## Ticks between HP / MP regeneration, and what's regained each time: a base plus
+## level / divisor, plus the character's regen bonus and their chair's.
+const REGEN_EVERY := 120
+const REGEN_BASE := 2
+const REGEN_HP_LEVELS := 3
+const REGEN_MP_LEVELS := 4
 
 var peer := 0
 var character: Character
@@ -23,7 +31,7 @@ var animation := &"idle"
 var climbing := false
 ## The chair (a ChairDef id) they're sitting on, or empty.
 var chair: StringName = &""
-var hurtbox := Hitbox.new(Vector2(28, 64))
+var hurtbox := Hitbox.new(HURTBOX_SIZE)
 
 var cooldown := 0     # ticks before the next attack
 var inv := 0          # invincibility ticks after being hit
@@ -65,9 +73,12 @@ func report_move(at: Vector2, facing: int, anim: StringName, on_rope: bool) -> b
 ## enough to be sent back to town.
 func step() -> bool:
 	since_move += 1
-	for t in ["cooldown", "inv", "item_cd"]:
-		if get(t) > 0:
-			set(t, get(t) - 1)
+	if cooldown > 0:
+		cooldown -= 1
+	if inv > 0:
+		inv -= 1
+	if item_cd > 0:
+		item_cd -= 1
 	if faint_t > 0:
 		faint_t -= 1
 		return faint_t == 0
@@ -75,13 +86,13 @@ func step() -> bool:
 		for s in character.tick_buffs():
 			map.tell(self, "%s wore off." % s.display_name, Palette.MIST)
 			dirty_character = true
-	if map.tick % 120 == 0:
+	if map.tick % REGEN_EVERY == 0:
 		var bonus := character.regen_bonus()
 		var seat := Content.items.get(chair) as ChairDef
 		if seat:
 			bonus += Vector2i(seat.regen_hp, seat.regen_mp)
-		character.health.heal(2 + character.level / 3 + bonus.x)
-		character.restore_mp(2 + character.level / 4 + bonus.y)
+		character.health.heal(REGEN_BASE + character.level / REGEN_HP_LEVELS + bonus.x)
+		character.restore_mp(REGEN_BASE + character.level / REGEN_MP_LEVELS + bonus.y)
 		dirty_vitals = true
 	return false
 
@@ -90,9 +101,9 @@ func step() -> bool:
 func snapshot() -> Array:
 	var flags := 0
 	if fainted():
-		flags |= TDAvatar.FAINTED
+		flags |= SnapshotFlags.PLAYER_FAINTED
 	if inv > 0:
-		flags |= TDAvatar.BLINK
+		flags |= SnapshotFlags.PLAYER_BLINK
 	if climbing:
-		flags |= TDAvatar.CLIMBING
+		flags |= SnapshotFlags.PLAYER_CLIMBING
 	return [peer, character.name, position.x, position.y, face, animation, character.level, flags, character.job.id, character.guild, chair, character.pet]

@@ -7,7 +7,6 @@ extends TDWindow
 
 const COLS := 4
 const GAP := 4.0
-const TAB_Y := 36.0
 const GRID_Y := 66.0
 
 var tab := ItemDef.Tab.EQUIP
@@ -21,10 +20,6 @@ func _init() -> void:
 	var rows := ceili(Inventory.SLOTS / float(COLS))
 	super("Inventory", Vector2(PAD * 2 + COLS * (SLOT + GAP) - GAP, GRID_Y + rows * (SLOT + GAP) + 40))
 
-func _tab_rect(t: int) -> Rect2:
-	var w := (size.x - PAD * 2) / ItemDef.Tab.size()
-	return Rect2(PAD + t * w - 3, TAB_Y - 1, w + 6, 26)
-
 func slot_rect(i: int) -> Rect2:
 	return Rect2(PAD + (i % COLS) * (SLOT + GAP), GRID_Y + (i / COLS) * (SLOT + GAP), SLOT, SLOT)
 
@@ -35,8 +30,7 @@ func slot_at(at: Vector2) -> int:
 	return -1
 
 func _draw_body() -> void:
-	for t in ItemDef.Tab.size():
-		draw_tab(_tab_rect(t), ItemDef.TAB_NAMES[t], t == tab)
+	draw_tabs(ItemDef.TAB_NAMES, tab)
 	var dragged := _dragged_index()
 	for i in Inventory.SLOTS:
 		draw_slot(slot_rect(i), Game.me.inventory.at(tab, i), i == dragged)
@@ -45,12 +39,11 @@ func _draw_body() -> void:
 		for i in Inventory.SLOTS:
 			var g := Game.me.inventory.at(ItemDef.Tab.EQUIP, i) if tab == ItemDef.Tab.EQUIP else null
 			if g and scroll.fits(g.equip_def()) and g.slots_left() > 0:
-				draw_rect(slot_rect(i).grow(1), Color(1, 0.85, 0.4, 0.9), false, 2.0)
+				draw_rect(slot_rect(i).grow(1), Color(Palette.HILITE, 0.9), false, 2.0)
 		DrawUtil.text(self, Game.ui_font, Vector2(size.x / 2.0, GRID_Y - 4), "Click gear for the %s" % scroll.display_name, 11, Palette.SUN, 0, 3, Palette.NIGHT)
 	# Dawnshards and free space
 	var y := size.y - 22
-	draw_texture_rect(UiSkin.tex("icon_dawnshard"), Rect2(PAD, y - 16, 22, 20), false)
-	DrawUtil.text(self, Game.num_font, Vector2(PAD + 28, y), str(Game.me.shards), 15, Palette.SUN, 1, 4, Palette.NIGHT)
+	draw_shards(Vector2(PAD, y), Game.me.shards)
 	DrawUtil.text(self, Game.ui_font, Vector2(size.x - PAD, y), "%d free" % Game.me.inventory.free_slots(tab), 11, Color(Palette.MIST, 0.7), -1)
 
 func _dragged_index() -> int:
@@ -76,10 +69,10 @@ func _click(at: Vector2, button: int, double: bool) -> void:
 		scrolling = -1
 	if button != MOUSE_BUTTON_LEFT:
 		return
-	for t in ItemDef.Tab.size():
-		if _tab_rect(t).has_point(at):
-			tab = t as ItemDef.Tab
-			return
+	var t := tab_at(at)
+	if t >= 0:
+		tab = t as ItemDef.Tab
+		return
 	var i := slot_at(at)
 	if i >= 0 and _scroll() and tab == ItemDef.Tab.EQUIP:
 		if Game.me.inventory.at(tab, i):

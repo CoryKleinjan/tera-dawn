@@ -54,6 +54,13 @@ func _fill_bag(c: Character) -> void:
 func _redrawn(w: CanvasItem, what: String) -> void:
 	check(await ui.redraw(w), "%s: its draw ran" % what)
 
+## Clicks tab `t` of `win`, drawing the window first if its tabs haven't been drawn yet.
+func _click_tab(win: TDWindow, t: int) -> void:
+	if win._tab_rects.size() <= t:
+		await _redrawn(win, "%s before clicking a tab" % win.name)
+	if check(t < win._tab_rects.size(), "%s has a tab %d" % [win.name, t]):
+		await ui.click(win, win._tab_rects[t].get_center())
+
 # ---------- the HUD itself ----------
 
 func test_hud_registers_every_window_once() -> void:
@@ -95,7 +102,7 @@ func test_inventory_draws_every_tab_full_of_items() -> void:
 	await ui.edit(_fill_bag)
 	var inv: TDInventoryWindow = _open("inventory")
 	for t in ItemDef.Tab.size():
-		await ui.click(inv, inv._tab_rect(t).get_center())
+		await _click_tab(inv, t)
 		check_eq(inv.tab, t, "clicking tab %s" % ItemDef.TAB_NAMES[t])
 		check(Game.me.inventory.free_slots(t) < Inventory.SLOTS, "%s tab has items" % ItemDef.TAB_NAMES[t])
 		await _redrawn(inv, "inventory, %s tab" % ItemDef.TAB_NAMES[t])
@@ -107,9 +114,10 @@ func test_inventory_slot_hit_test_matches_its_layout() -> void:
 		check_eq(inv.slot_at(r.get_center()), i, "slot_at the middle of slot %d" % i)
 		check(Rect2(Vector2.ZERO, inv.size).encloses(r), "slot %d at %s lies inside the window" % [i, r])
 	check_eq(inv.slot_at(Vector2(2, 2)), -1, "slot_at the corner")
-	check_eq(inv.slot_at(inv._tab_rect(0).get_center()), -1, "slot_at a tab")
+	await _redrawn(inv, "inventory")
+	check_eq(inv.slot_at(inv._tab_rects[0].get_center()), -1, "slot_at a tab")
 	for t in ItemDef.Tab.size():
-		check(inv._tab_rect(t).get_center().y < inv.slot_rect(0).position.y, "tab %d sits above the slots" % t)
+		check(inv._tab_rects[t].get_center().y < inv.slot_rect(0).position.y, "tab %d sits above the slots" % t)
 
 func test_inventory_hover_shows_the_item_under_the_mouse() -> void:
 	await ui.edit(_fill_bag)
@@ -198,17 +206,27 @@ func test_equipment_double_click_takes_gear_off() -> void:
 	check(Game.me.equipment.at(&"weapon") == null, "double-clicking the weapon takes it off")
 	check_eq(Game.me.inventory.count_of(sword.item), 1, "and it's back in the bag")
 
+## The "+" buttons a window drew, in the order it drew them.
+func _plus_rects(win: TDWindow) -> Array[Rect2]:
+	var out: Array[Rect2] = []
+	for b in win._buttons:
+		var r: Rect2 = b[0]
+		if r.size == Vector2(TDWindow.PLUS_SIZE, TDWindow.PLUS_SIZE):
+			out.append(r)
+	return out
+
 # ---------- character stats ----------
 
 func test_stats_plus_buttons_spend_ability_points() -> void:
 	await ui.edit(func(c: Character) -> void: c.ap = 3)
 	var stats: TDStatsWindow = _open("stats")
 	await _redrawn(stats, "stats with AP to spend")
-	check_eq(stats._plus.keys().size(), StatBlock.BASE.size(), "a + for every base stat")
-	for stat in StatBlock.BASE:
-		check(Rect2(Vector2.ZERO, stats.size).encloses(stats._plus[stat]), "the %s + lies inside the window" % stat)
+	var plus := _plus_rects(stats) # drawn in StatBlock.BASE order
+	check_eq(plus.size(), StatBlock.BASE.size(), "a + for every base stat")
+	for i in plus.size():
+		check(Rect2(Vector2.ZERO, stats.size).encloses(plus[i]), "the %s + lies inside the window" % StatBlock.BASE[i])
 	var str_before := Game.me.base.strength
-	await ui.click(stats, stats._plus[&"strength"].get_center())
+	await ui.click(stats, plus[StatBlock.BASE.find(&"strength")].get_center())
 	await ui.ticks(3)
 	check_eq(Game.me.base.strength, str_before + 1, "STR after clicking its +")
 	check_eq(Game.me.ap, 2, "AP left")
@@ -216,7 +234,7 @@ func test_stats_plus_buttons_spend_ability_points() -> void:
 func test_stats_hide_plus_buttons_without_points() -> void:
 	var stats: TDStatsWindow = _open("stats")
 	await _redrawn(stats, "stats")
-	check(stats._plus.is_empty(), "no + buttons with 0 AP")
+	check(_plus_rects(stats).is_empty(), "no + buttons with 0 AP")
 
 # ---------- skills ----------
 
@@ -233,7 +251,7 @@ func test_skill_window_lists_every_skill_of_every_job() -> void:
 		var line := book.jobs()
 		check_eq(line.size(), 2, "%s: tabs (Beginner and the job)" % j.id)
 		for t in line.size():
-			await ui.click(book, book._tab_rect(t, line.size()).get_center())
+			await _click_tab(book, t)
 			check_eq(book.tab, t, "%s: clicking tab %d" % [j.id, t])
 			var listed := book.listed()
 			var want := Content.skills.values().filter(func(s: SkillDef) -> bool: return s.job == line[t] and not s.innate)
@@ -255,9 +273,15 @@ func test_skill_plus_learns_through_the_server() -> void:
 	var book: TDSkillWindow = _open("skills")
 	book.tab = 1
 	await _redrawn(book, "warrior skills")
-	check(not book._plus.is_empty(), "skills with points to spend show a +")
-	var id: StringName = book._plus.keys()[0]
-	await ui.click(book, book._plus[id].get_center())
+	var plus := _plus_rects(book)
+	check(not plus.is_empty(), "skills with points to spend show a +")
+	var row := -1
+	for i in TDSkillWindow.ROWS:
+		if book.row_rect(i).encloses(plus[0]):
+			row = i
+	check(row >= 0, "the first + sits on a skill's row")
+	var id: StringName = book.listed()[maxi(row, 0)].id
+	await ui.click(book, plus[0].get_center())
 	await ui.ticks(3)
 	check_eq(Game.me.skill_level(Content.skill(id)), 1, "%s after clicking its +" % id)
 	check_eq(Game.me.sp, 2, "SP left")
@@ -286,7 +310,7 @@ func test_quest_pages_list_what_the_log_holds() -> void:
 	var log: TDQuestWindow = _open("quests")
 	var me := Game.me
 	for page in TDQuestWindow.PAGE_NAMES.size():
-		await ui.click(log, log._tab_rect(page).get_center())
+		await _click_tab(log, page)
 		check_eq(log.page, page, "clicking the %s tab" % TDQuestWindow.PAGE_NAMES[page])
 		var listed := log.listed()
 		check(not listed.is_empty(), "%s lists something" % TDQuestWindow.PAGE_NAMES[page])
@@ -392,7 +416,7 @@ func test_community_tabs_draw_buddies_party_and_guild() -> void:
 	for state in [{}, _social()]:
 		Game.social = state
 		for t in TDCommunityWindow.TABS.size():
-			await ui.click(com, com._tab_rect(t).get_center())
+			await _click_tab(com, t)
 			check_eq(com.tab, t, "clicking the %s tab" % TDCommunityWindow.TABS[t])
 			await _redrawn(com, "community, %s, %s" % [TDCommunityWindow.TABS[t], "empty" if state.is_empty() else "full"])
 			for b in com._buttons:
@@ -431,7 +455,7 @@ func test_collection_book_pages_and_every_monster() -> void:
 		c.achievements.append_array(["first_hunt", "level_5"]))
 	var book: TDCollectionWindow = _open("collection")
 	check_eq(book._monsters.size(), Content.monsters.size(), "the book has a page per monster")
-	await ui.click(book, book._tab_rect(0).get_center())
+	await _click_tab(book, 0)
 	check_eq(book.tab, 0, "clicking Monster Book")
 	# turn every page with the arrows, selecting every cell
 	check(book.pages() > 1, "more than one page of monsters")
@@ -455,7 +479,7 @@ func test_collection_book_pages_and_every_monster() -> void:
 func test_collection_achievements_tab() -> void:
 	await ui.edit(func(c: Character) -> void: c.achievements.append("first_hunt"))
 	var book: TDCollectionWindow = _open("collection")
-	await ui.click(book, book._tab_rect(1).get_center())
+	await _click_tab(book, 1)
 	check_eq(book.tab, 1, "clicking Achievements")
 	await _redrawn(book, "achievements")
 	await ui.click(book, book.cell_rect(0).get_center())
@@ -560,7 +584,7 @@ func test_every_shop_draws_and_scrolls() -> void:
 		check(shop.visible and shop.shop == s, "%s: opens" % s.id)
 		check(Rect2(Vector2.ZERO, TDWorld.VIEW).encloses(Rect2(shop.position, shop.size)), "%s: on screen" % s.id)
 		for t in ItemDef.Tab.size():
-			await ui.click(shop, shop._tab_rect(t).get_center())
+			await _click_tab(shop, t)
 			check_eq(shop.tab, t, "%s: clicking bag tab %d" % [s.id, t])
 			await _redrawn(shop, "%s, bag tab %d" % [s.id, t])
 		for i in TDShopWindow.AMOUNTS.size():
@@ -602,7 +626,7 @@ func test_storage_draws_every_tab() -> void:
 	vault.open(npc)
 	check(vault.title.contains(keeper.display_name), "storage title names %s" % keeper.id)
 	for t in ItemDef.Tab.size():
-		await ui.click(vault, vault._tab_rect(t).get_center())
+		await _click_tab(vault, t)
 		check_eq(vault.tab, t, "clicking tab %d" % t)
 		await _redrawn(vault, "storage, tab %d" % t)
 		for i in [0, Inventory.SLOTS - 1]:

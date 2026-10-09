@@ -9,8 +9,8 @@ const W := 380.0
 const LINES := 7
 const LINE_H := 17.0
 const FADE_TICKS := 900
-const COLORS := {"all": Color("f4ecff"), "pet": Color("ffd9a8"), "whisper": Color("ff9ee6"), "whisper_sent": Color("ff9ee6"),
-	"party": Color("ffb36b"), "guild": Color("b8f070"), "buddy": Color("8fe0ff"), "system": Color("c9b8d9")}
+const COLORS := {"all": Color("f4ecff"), "pet": Palette.PET, "whisper": Color("ff9ee6"), "whisper_sent": Color("ff9ee6"),
+	"party": Color("ffb36b"), "guild": Palette.GUILD, "buddy": Color("8fe0ff"), "system": Palette.MUTED}
 
 var world: TDWorld
 var field: LineEdit
@@ -96,4 +96,4 @@ func _draw() -> void:
 			continue
 		var col: Color = l["color"]
 		col.a = a
-		DrawUtil.text(self, Game.ui_font, Vector2(6, 16 + (LINES - shown.size() + i) * LINE_H), l["text"], 13, col, 1, 4, Color(0.1, 0.07, 0.19, 0.8 * a))
+		DrawUtil.text(self, Game.ui_font, Vector2(6, 16 + (LINES - shown.size() + i) * LINE_H), l["text"], 13, col, 1, 4, Color(Palette.NIGHT, 0.8 * a))

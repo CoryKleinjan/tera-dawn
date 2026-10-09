@@ -5,7 +5,7 @@ extends TDWindow
 ## behind it until you close it. Other players click you to browse and buy. Unsold
 ## things come back when the shop closes.
 
-const ROW := 40.0
+const ROW_H := 40.0
 const LIST_Y := 64.0
 const ROWS := 6
 
@@ -19,7 +19,7 @@ var entries: Array = []
 var scroll := 0
 
 func _init() -> void:
-	super("Shop", Vector2(330, LIST_Y + ROWS * ROW + 60))
+	super("Shop", Vector2(330, LIST_Y + ROWS * ROW_H + 60))
 
 ## Starts setting up a shop of your own.
 func setup() -> void:
@@ -28,9 +28,7 @@ func setup() -> void:
 	shop_title = "%s's Shop" % Game.me.name
 	entries.clear()
 	title = "Set up your shop"
-	position = Vector2(TDWorld.VIEW.x / 2.0 - size.x - 10, 60)
-	hud.windows["inventory"].visible = true
-	hud.windows["inventory"].position = Vector2(TDWorld.VIEW.x / 2.0 + 10, 60)
+	place_beside_inventory(60)
 	visible = true
 	raise()
 
@@ -59,72 +57,53 @@ func toggle() -> void:
 	super()
 
 func _row(i: int) -> Rect2:
-	return Rect2(PAD, LIST_Y + i * ROW, size.x - PAD * 2, ROW - 4)
+	return Rect2(PAD, LIST_Y + i * ROW_H, size.x - PAD * 2, ROW_H - 4)
 
 func _stack(i: int) -> ItemStack:
 	if mode == Mode.SETUP:
-		var e: Array = entries[i]
-		var held := Game.me.inventory.at(e[0], e[1])
-		return held
+		return Game.me.inventory.at(entries[i][0], entries[i][1])
 	return ItemStack.from_dict(entries[i][0])
 
 func _price(i: int) -> int:
 	return entries[i][3] if mode == Mode.SETUP else entries[i][1]
 
-func _buttons() -> Array:
-	var w := (size.x - PAD * 2 - 8) / 2.0
-	var a := Rect2(PAD, size.y - 44, w, 32)
-	var b := Rect2(a.end.x + 8, a.position.y, w, 32)
-	match mode:
-		Mode.SETUP:
-			return [[a, "Name", _rename], [b, "Open shop", open_shop]]
-		Mode.OWNER:
-			return [[b, "Close shop", func() -> void: toggle()]]
-	return []
-
 func _draw_body() -> void:
-	DrawUtil.text(self, Game.ui_font, Vector2(PAD, 48), shop_title if mode == Mode.SETUP else "", 13, Palette.SUN, 1, 3, Palette.NIGHT)
+	draw_label(Vector2(PAD, 48), shop_title if mode == Mode.SETUP else "", Palette.SUN, 13)
 	if entries.is_empty():
-		DrawUtil.text(self, Game.ui_font, Vector2(size.x / 2.0, LIST_Y + 40), "Drag things from your bag here" if mode == Mode.SETUP else "Sold out", 12, Color("c9b8d9"), 0, 3, Palette.NIGHT)
+		draw_hint(Vector2(size.x / 2.0, LIST_Y + 40), "Drag things from your bag here" if mode == Mode.SETUP else "Sold out", 0)
 	for k in mini(ROWS, entries.size()):
 		var i := k + scroll
 		if i >= entries.size():
 			break
 		var r := _row(k)
-		DrawUtil.round_rect(self, r, 6, Color(Palette.NIGHT, 0.32))
+		draw_row(r)
 		var stack := _stack(i)
 		draw_slot(Rect2(r.position + Vector2(2, 0), Vector2(36, 36)), stack)
+		if mode == Mode.VISITOR:
+			add_button(_buy_rect(k), "Buy", buy.bind(i), Game.me.shards >= _price(i))
+		elif mode == Mode.SETUP:
+			add_button(_buy_rect(k), "Remove", func() -> void: entries.remove_at(i))
 		if stack == null:
 			continue
 		var n: int = entries[i][2] if mode == Mode.SETUP else stack.count
-		DrawUtil.text(self, Game.ui_font, r.position + Vector2(46, 16), stack.display_name() + (" ×%d" % n if n > 1 else ""), 13, Palette.MIST, 1, 3, Palette.NIGHT)
+		draw_label(r.position + Vector2(46, 16), stack.display_name() + (" ×%d" % n if n > 1 else ""), Palette.MIST, 13)
 		DrawUtil.text(self, Game.num_font, r.position + Vector2(46, 32), "%d Dawnshards" % _price(i), 12, Palette.SUN, 1, 3, Palette.NIGHT)
-		if mode == Mode.VISITOR:
-			draw_button(_buy_rect(k), "Buy", Game.me.shards >= _price(i))
-		elif mode == Mode.SETUP:
-			draw_button(_buy_rect(k), "Remove")
-	for b in _buttons():
-		draw_button(b[0], b[1], mode != Mode.SETUP or b[1] != "Open shop" or not entries.is_empty())
+	var w := (size.x - PAD * 2 - 8) / 2.0
+	var left := Rect2(PAD, size.y - 44, w, 32)
+	var right := Rect2(left.end.x + 8, left.position.y, w, 32)
+	match mode:
+		Mode.SETUP:
+			add_button(left, "Name", _rename)
+			add_button(right, "Open shop", open_shop, not entries.is_empty())
+		Mode.OWNER:
+			add_button(right, "Close shop", toggle)
 
 func _buy_rect(k: int) -> Rect2:
 	var r := _row(k)
 	return Rect2(r.end.x - 74, r.position.y + 4, 70, 28)
 
-func _click(at: Vector2, button: int, _double: bool) -> void:
-	if button == MOUSE_BUTTON_LEFT:
-		for k in mini(ROWS, entries.size() - scroll):
-			if _buy_rect(k).has_point(at):
-				var i := k + scroll
-				if mode == Mode.VISITOR:
-					buy(i)
-				elif mode == Mode.SETUP:
-					entries.remove_at(i)
-				return
-		for b in _buttons():
-			if (b[0] as Rect2).has_point(at):
-				(b[2] as Callable).call()
-				return
-	elif button == MOUSE_BUTTON_WHEEL_DOWN:
+func _click(_at: Vector2, button: int, _double: bool) -> void:
+	if button == MOUSE_BUTTON_WHEEL_DOWN:
 		scroll = clampi(scroll + 1, 0, maxi(0, entries.size() - ROWS))
 	elif button == MOUSE_BUTTON_WHEEL_UP:
 		scroll = maxi(0, scroll - 1)

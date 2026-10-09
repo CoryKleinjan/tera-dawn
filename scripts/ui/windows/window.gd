@@ -2,18 +2,31 @@ class_name TDWindow
 extends Control
 ## A draggable game window (inventory, equipment, stats) drawn in the UI sheet's style.
 ## Windows open over gameplay without pausing it, like MapleStory. Subclasses draw their
-## body in `_draw_body` and react to clicks in `_click`; item slots share the helpers here.
+## body in `_draw_body` and react to clicks in `_click`; tabs, list rows, buttons and item
+## slots share the helpers here so every window looks alike.
 
 const TITLE_H := 30.0
 const PAD := 16.0
 const SLOT := 40.0
 const CLOSE_SIZE := 20.0
+## Where a window's row of tabs sits, and how big a tab can be.
+const TAB_Y := 36.0
+const TAB_H := 26.0
+const TAB_MAX_W := 150.0
+## List rows and panels: one darkness and one corner radius everywhere.
+const ROW_ALPHA := 0.4
+const ROW_RADIUS := 6.0
+const PLUS_SIZE := 20.0
 
 var hud: TDHud
 var title := ""
 var _dragging := false
 var _drag_from := Vector2.ZERO
 var _hover := Vector2(-1, -1)
+## The tabs drawn last frame, for `tab_at`.
+var _tab_rects: Array[Rect2] = []
+## The buttons drawn this frame and what they do: [Rect2, Callable].
+var _buttons: Array = []
 
 func _init(window_title: String, window_size: Vector2) -> void:
 	title = window_title
@@ -46,6 +59,7 @@ func _draw() -> void:
 	var c := _close_rect()
 	var hot := c.has_point(_hover)
 	draw_texture_rect(UiSkin.tex("window_close"), c, false, Color(1.25, 1.15, 1.0) if hot else Color.WHITE)
+	_buttons.clear()
 	_draw_body()
 
 func _close_rect() -> Rect2:
@@ -60,7 +74,7 @@ func _gui_input(event: InputEvent) -> void:
 		elif mb.button_index == MOUSE_BUTTON_LEFT and mb.position.y < TITLE_H:
 			_dragging = true
 			_drag_from = mb.position
-		else:
+		elif not (mb.button_index == MOUSE_BUTTON_LEFT and _press_button(mb.position)):
 			_click(mb.position, mb.button_index, mb.double_click)
 		accept_event()
 	elif mb and not mb.pressed and mb.button_index == MOUSE_BUTTON_LEFT:
@@ -90,7 +104,7 @@ func draw_slot(r: Rect2, stack: ItemStack, dim := false, label := "") -> void:
 	var hot := r.has_point(_hover)
 	draw_texture_rect(UiSkin.tex("item_slot"), r, false, Color(1.3, 1.2, 1.0) if hot else Color.WHITE)
 	if hot:
-		DrawUtil.round_rect(self, r.grow(-4), 5, Color(1, 0.85, 0.45, 0.16))
+		draw_hilite(r.grow(-4), 5)
 	if stack == null:
 		if label != "":
 			DrawUtil.text(self, Game.ui_font, r.get_center() + Vector2(0, 4), label, 9, Color(Palette.MIST, 0.45))
@@ -100,18 +114,97 @@ func draw_slot(r: Rect2, stack: ItemStack, dim := false, label := "") -> void:
 	if stack.count > 1:
 		DrawUtil.text(self, Game.num_font, r.end + Vector2(-4, -3), str(stack.count), 12, Palette.MIST, -1, 4, Palette.NIGHT)
 
-## A clickable button drawn with the UI sheet's button art; dimmed when it can't be used.
-func draw_button(r: Rect2, label: String, enabled := true) -> void:
+## A button drawn with the UI sheet's button art; dimmed when it can't be used. `small` is
+## the short kind that fits in a list row. Use `add_button` to make it do something.
+func draw_button(r: Rect2, label: String, enabled := true, small := false) -> void:
 	var hot := enabled and r.has_point(_hover)
-	UiSkin.box("button_hover" if hot else "button_normal", 16, 14).draw(get_canvas_item(), r)
-	DrawUtil.text(self, Game.num_font, r.get_center() + Vector2(0, 6), label, 15,
-		Color("3b2208") if enabled else Color("3b2208", 0.4), 0)
+	var art := UiSkin.box("button_hover" if hot else "button_normal", 16, 14)
+	if small:  # the same art at half size, so its trim isn't squeezed
+		draw_set_transform(r.position, 0.0, Vector2(0.5, 0.5))
+		art.draw(get_canvas_item(), Rect2(Vector2.ZERO, r.size * 2.0))
+		draw_set_transform(Vector2.ZERO)
+	else:
+		art.draw(get_canvas_item(), r)
+	DrawUtil.text(self, Game.num_font if not small else Game.ui_font, r.get_center() + Vector2(0, 4 if small else 6), label,
+		11 if small else 15, Palette.INK if enabled else Color(Palette.INK, 0.4), 0)
+
+## A button that calls `action` when clicked (only while `enabled`). Call it while drawing:
+## the buttons drawn last are the ones a click can press.
+func add_button(r: Rect2, label: String, action: Callable, enabled := true, small := false) -> void:
+	draw_button(r, label, enabled, small)
+	if enabled:
+		_buttons.append([r, action])
+
+## The "+" that spends a point (Ability Points, Skill Points), with its top left at `at`.
+func plus_button(at: Vector2, action: Callable) -> void:
+	var r := Rect2(at, Vector2(PLUS_SIZE, PLUS_SIZE))
+	draw_texture_rect(UiSkin.tex("stat_plus"), r, false, Color(1.25, 1.2, 1.1) if r.has_point(_hover) else Color.WHITE)
+	_buttons.append([r, action])
+
+## Presses the button under `at`, if there is one.
+func _press_button(at: Vector2) -> bool:
+	for b in _buttons:
+		if (b[0] as Rect2).has_point(at):
+			(b[1] as Callable).call()
+			return true
+	return false
 
 ## A tab along the top of a window: lit when `on`.
 func draw_tab(r: Rect2, label: String, on: bool) -> void:
 	draw_texture_rect(UiSkin.tex("window_tab_on" if on else "window_tab_off"), r, false)
 	DrawUtil.text(self, Game.ui_font, r.get_center() + Vector2(0, 5), label, 13,
-		Color("3b2208") if on else Palette.MIST, 0, 0 if on else 3, Palette.NIGHT)
+		Palette.INK if on else Palette.MIST, 0, 0 if on else 3, Palette.NIGHT)
+
+## A row of tabs at `y` sharing the width from `left` to `right` (the window's padding by
+## default), with `current` lit. `tab_at` says which one a click hit.
+func draw_tabs(labels: Array, current: int, y := TAB_Y, left := PAD, right := -1.0) -> void:
+	if right < 0.0:
+		right = size.x - PAD
+	var w := minf(TAB_MAX_W, (right - left) / labels.size())
+	_tab_rects.clear()
+	for i in labels.size():
+		var r := Rect2(left + i * w - 3, y - 1, w + 6, TAB_H)
+		_tab_rects.append(r)
+		draw_tab(r, labels[i], i == current)
+
+## The tab under `at` (as drawn by `draw_tabs`), or -1.
+func tab_at(at: Vector2) -> int:
+	for i in _tab_rects.size():
+		if _tab_rects[i].has_point(at):
+			return i
+	return -1
+
+## The background of a list row or panel; `lit` (hovered, selected) shows the highlight.
+func draw_row(r: Rect2, lit := false) -> void:
+	if lit:
+		draw_hilite(r)
+	else:
+		DrawUtil.round_rect(self, r, ROW_RADIUS, Color(Palette.NIGHT, ROW_ALPHA))
+
+## The hover / selection highlight.
+func draw_hilite(r: Rect2, radius := ROW_RADIUS) -> void:
+	DrawUtil.round_rect(self, r, radius, Color(Palette.HILITE, Palette.HILITE_ALPHA))
+
+## Text with the windows' dark outline. align: -1 right, 0 center, 1 left.
+func draw_label(at: Vector2, s: String, col := Palette.MIST, sz := 12, align := 1) -> void:
+	DrawUtil.text(self, Game.ui_font, at, s, sz, col, align, 3, Palette.NIGHT)
+
+## A quiet line for an empty list or a hint ("Nothing here yet.").
+func draw_hint(at: Vector2, s: String, align := 1) -> void:
+	draw_label(at, s, Palette.MUTED, 12, align)
+
+## A Dawnshard icon and an amount, with the text's baseline starting at `at`.
+func draw_shards(at: Vector2, amount: int) -> void:
+	draw_texture_rect(UiSkin.tex("icon_dawnshard"), Rect2(at + Vector2(0, -16), Vector2(22, 20)), false)
+	DrawUtil.text(self, Game.num_font, at + Vector2(28, 0), str(amount), 15, Palette.SUN, 1, 4, Palette.NIGHT)
+
+## Puts this window just left of the screen's centre at height `y` and opens the inventory
+## just right of it (for windows you drag items into: trade, a player shop).
+func place_beside_inventory(y: float) -> void:
+	position = Vector2(TDWorld.VIEW.x / 2.0 - size.x - 10, y)
+	var inv: TDWindow = hud.windows["inventory"]
+	inv.visible = true
+	inv.position = Vector2(TDWorld.VIEW.x / 2.0 + 10, y)
 
 ## The largest rect inside `box` with the texture's shape, centred (icons cut from a sheet
 ## aren't all square).

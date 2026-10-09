@@ -3,7 +3,7 @@ extends TDWindow
 ## What you can do with another player: click them on the map. Whisper, invite them to a
 ## party, add them as a buddy, trade, invite them to your guild, or give them fame.
 
-const ROW := 34.0
+const ROW_H := 34.0
 const TOP := 64.0
 
 var peer := 0
@@ -13,7 +13,7 @@ var job := &""
 var guild := ""
 
 func _init() -> void:
-	super("", Vector2(220, TOP + 7 * ROW + 10))
+	super("", Vector2(220, TOP + 7 * ROW_H + 10))
 
 ## Opens the menu for `a`.
 func open(a: TDAvatar) -> void:
@@ -44,21 +44,16 @@ func actions() -> Array:
 	return out
 
 func _row_rect(i: int) -> Rect2:
-	return Rect2(PAD, TOP + i * ROW, size.x - PAD * 2, ROW - 6)
+	return Rect2(PAD, TOP + i * ROW_H, size.x - PAD * 2, ROW_H - 6)
 
 func _draw_body() -> void:
 	var j: JobDef = Content.jobs.get(job)
-	DrawUtil.text(self, Game.ui_font, Vector2(PAD, 46), "Lv. %d %s%s" % [level, j.display_name if j else "", "  ·  " + guild if guild != "" else ""], 12, Color("c9b8d9"), 1, 3, Palette.NIGHT)
+	draw_label(Vector2(PAD, 46), "Lv. %d %s%s" % [level, j.display_name if j else "", "  ·  " + guild if guild != "" else ""], Palette.MUTED)
 	var list := actions()
 	for i in list.size():
-		draw_button(_row_rect(i), list[i][0])
+		add_button(_row_rect(i), list[i][0], _pick.bind(list[i][1]))
 
-func _click(at: Vector2, button: int, _double: bool) -> void:
-	if button != MOUSE_BUTTON_LEFT:
-		return
-	var list := actions()
-	for i in list.size():
-		if _row_rect(i).has_point(at):
-			visible = false
-			(list[i][1] as Callable).call()
-			return
+## Closes the menu and does `action`.
+func _pick(action: Callable) -> void:
+	visible = false
+	action.call()

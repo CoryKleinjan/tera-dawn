@@ -9,6 +9,35 @@ extends RefCounted
 
 ## Ticks the HP bar stays up after a hit.
 const SHOW_HP_TICKS := 240
+## Ticks a defeated monster takes to fade out (clients fade their view over the same time).
+const DEATH_FADE_TICKS := 40
+## Ticks it keeps chasing whoever hit it (or woke it).
+const AGGRO_TICKS := 600
+## Ticks it flinches after a hit, how hard it's knocked back, and how fast that slows (per tick).
+const HURT_TICKS := 14
+const KNOCKBACK := 3.2
+const KNOCKBACK_DECAY := 0.82
+## Speed while chasing, as a multiple of its walking speed.
+const CHASE_SPEED := 1.3
+## Ticks between changes of direction while patrolling (first walk, then later ones).
+const FIRST_WALK_TICKS := Vector2i(60, 200)
+const WALK_TICKS := Vector2i(60, 220)
+## Chance a patrol turn stands still instead of walking.
+const IDLE_CHANCE := 0.3
+## Hopping monsters: pull of gravity per tick, chance to hop each tick, and the upward
+## speed of a split-off monster popping out of its parent.
+const HOP_GRAVITY := 0.35
+const HOP_CHANCE := 1.0 / 80.0
+const WAKE_HOP := 5.0
+## Players further above or below than this are out of shooting range.
+const SHOT_Y_RANGE := 180.0
+## Ticks it stands still after shooting, and the most extra random wait before the next shot.
+const CAST_TICKS := 24
+const SHOT_JITTER := 40
+## Shortest wait before its first shot.
+const FIRST_SHOT_TICKS := 30
+## How far around a player's hurtbox a landing shot still hits.
+const SHOT_GROW := 14
 
 var map: MapInstance
 var index := 0
@@ -54,7 +83,7 @@ func _reset() -> void:
 	health.reset(def.max_hp)
 	position = Vector2(randf_range(plat.x + half, plat.x + plat.w - half), plat.y)
 	dir = -1 if randf() < 0.5 else 1
-	walk_t = randi_range(60, 200)
+	walk_t = randi_range(FIRST_WALK_TICKS.x, FIRST_WALK_TICKS.y)
 	kx = 0.0
 	hurt_t = 0
 	aggro = 0
@@ -65,7 +94,7 @@ func _reset() -> void:
 	phase = randf() * 6.0
 	hop = 0.0
 	hop_v = 0.0
-	shot_t = randi_range(30, maxi(31, def.shot_cooldown))
+	shot_t = randi_range(FIRST_SHOT_TICKS, maxi(FIRST_SHOT_TICKS + 1, def.shot_cooldown))
 	cast_t = 0
 	shots.clear()
 	asleep = false
@@ -81,26 +110,33 @@ func wake(x: float, by: int) -> void:
 	_reset()
 	var half := def.size.x / 2.0
 	position.x = clampf(x, plat.x + half, plat.x + plat.w - half)
-	hop_v = 5.0
-	aggro = 600
+	hop_v = WAKE_HOP
+	aggro = AGGRO_TICKS
 	target = by
 
 func hurt(from_face: int, by: int) -> void:
-	hurt_t = 14
-	kx = from_face * 3.2
-	aggro = 600
+	hurt_t = HURT_TICKS
+	kx = from_face * KNOCKBACK
+	aggro = AGGRO_TICKS
 	target = by
 	show_hp = SHOW_HP_TICKS
 
 func die() -> void:
 	dead = true
-	death_t = 40
+	death_t = DEATH_FADE_TICKS
 	respawn = randi_range(def.respawn_ticks.x, def.respawn_ticks.y)
+
+## How far above its feet a monster's body floats: flying monsters hover and bob (by
+## `phase`), others don't. Clients (TDMob) use the same.
+static func hover_offset(d: MonsterDef, phase_now: float) -> Vector2:
+	if d.flying:
+		return Vector2(0, -d.hover_height + sin(phase_now * 1.5) * 6.0)
+	return Vector2.ZERO
 
 ## Feet position including the hover height of flying monsters and hops.
 func body_position() -> Vector2:
 	if def.flying:
-		return position + Vector2(0, -def.hover_height + sin(phase * 1.5) * 6.0)
+		return position + hover_offset(def, phase)
 	return position + Vector2(0, -hop)
 
 func step() -> void:
@@ -125,7 +161,7 @@ func step() -> void:
 		hurt_t -= 1
 		if not def.stationary:
 			position.x += kx
-		kx *= 0.82
+		kx *= KNOCKBACK_DECAY
 	elif cast_t > 0:
 		cast_t -= 1
 	else:
@@ -134,12 +170,12 @@ func step() -> void:
 			pass
 		elif chased and chased.stands_on(plat):
 			dir = -1 if chased.position.x < position.x else 1
-			position.x += dir * def.speed * 1.3
+			position.x += dir * def.speed * CHASE_SPEED
 		else:
 			walk_t -= 1
 			if walk_t <= 0:
-				walk_t = randi_range(60, 220)
-				dir = 0 if randf() < 0.3 else (-1 if randf() < 0.5 else 1)
+				walk_t = randi_range(WALK_TICKS.x, WALK_TICKS.y)
+				dir = 0 if randf() < IDLE_CHANCE else (-1 if randf() < 0.5 else 1)
 			position.x += dir * def.speed
 		if def.shot:
 			shot_t -= 1
@@ -148,10 +184,10 @@ func step() -> void:
 				if aim:
 					_shoot(aim)
 	if def.jumps and not def.flying:
-		if hop <= 0.0 and hurt_t == 0 and randf() < 1.0 / 80.0:
+		if hop <= 0.0 and hurt_t == 0 and randf() < HOP_CHANCE:
 			hop_v = def.jump_power
 		hop += hop_v
-		hop_v -= 0.35
+		hop_v -= HOP_GRAVITY
 		if hop <= 0.0:
 			hop = 0.0
 			hop_v = 0.0
@@ -182,7 +218,7 @@ func _shot_target(chased: SimPlayer) -> SimPlayer:
 	return best
 
 func _in_range(p: SimPlayer) -> bool:
-	return not p.fainted() and absf(p.position.x - position.x) <= def.shot_range and absf(p.position.y - position.y) <= 180.0
+	return not p.fainted() and absf(p.position.x - position.x) <= def.shot_range and absf(p.position.y - position.y) <= SHOT_Y_RANGE
 
 ## Where its shots leave from.
 func muzzle() -> Vector2:
@@ -190,8 +226,8 @@ func muzzle() -> Vector2:
 
 func _shoot(p: SimPlayer) -> void:
 	dir = -1 if p.position.x < position.x else 1
-	shot_t = def.shot_cooldown + randi_range(0, 40)
-	cast_t = 24
+	shot_t = def.shot_cooldown + randi_range(0, SHOT_JITTER)
+	cast_t = CAST_TICKS
 	var aim := p.position + Vector2(0, -30)
 	var ticks := ceili(muzzle().distance_to(aim) / maxf(1.0, def.shot.speed))
 	shots.append([p.peer, ticks, aim])
@@ -206,20 +242,20 @@ func _step_shots() -> void:
 			continue
 		shots.remove_at(i)
 		var p := map.players.get(s[0]) as SimPlayer
-		if p and p.hurtbox.rect_at(p.position).grow(14).has_point(s[2]):
+		if p and p.hurtbox.rect_at(p.position).grow(SHOT_GROW).has_point(s[2]):
 			map.hurt_player(p, def, position.x)
 
 ## What clients need to draw it: [x, y, dir, hp fraction (0..1000), flags].
 func snapshot() -> Array:
 	var flags := 0
 	if dead:
-		flags |= TDMob.DEAD
+		flags |= SnapshotFlags.MOB_DEAD
 	if hurt_t > 0:
-		flags |= TDMob.HURT
+		flags |= SnapshotFlags.MOB_HURT
 	if aggro > 0:
-		flags |= TDMob.AGGRO
+		flags |= SnapshotFlags.MOB_AGGRO
 	if show_hp > 0:
-		flags |= TDMob.SHOW_HP
+		flags |= SnapshotFlags.MOB_SHOW_HP
 	if cast_t > 0:
-		flags |= TDMob.CASTING
+		flags |= SnapshotFlags.MOB_CASTING
 	return [position.x, position.y - hop, dir, roundi(health.fraction() * 1000.0), flags]

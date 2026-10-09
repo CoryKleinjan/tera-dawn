@@ -37,31 +37,31 @@ func _lines() -> Array:
 	var e := item as EquipDef
 	if e:
 		var kind := " (%s)" % String(e.weapon_kind).capitalize() if e.weapon_kind != &"" else ""
-		out.append(["Equip · %s%s" % [e.slot_name(), kind], Color("c9b8d9"), 11])
+		out.append(["Equip · %s%s" % [e.slot_name(), kind], Palette.MUTED, 11])
 		if e.ammo != &"":
 			out.append(["Fires %ss" % e.ammo, Palette.MIST, 12])
 		if not e.jobs.is_empty():
-			out.append(["%s only" % EquipDef.families_text(e.jobs), Palette.MIST if Game.me.can_use(e.jobs) else Color("ff6b7d"), 12])
+			out.append(["%s only" % EquipDef.families_text(e.jobs), Palette.MIST if Game.me.can_use(e.jobs) else Palette.BAD, 12])
 		var reqs := e.requirements()
 		for key in reqs:
 			var have := Game.me.level if key == &"level" else Game.me.stats.value(key)
 			var label: String = "Level" if key == &"level" else StatBlock.LABELS[key]
-			out.append(["Requires %s %d" % [label, reqs[key]], Palette.MIST if have >= reqs[key] else Color("ff6b7d"), 12])
+			out.append(["Requires %s %d" % [label, reqs[key]], Palette.MIST if have >= reqs[key] else Palette.BAD, 12])
 		var base := e.stats if e.stats else StatBlock.new()
 		for f in stack.stats.nonzero():
 			var v := stack.stats.value(f)
 			var col := Palette.MIST
 			if v > base.value(f):
-				col = Color("8cf0a6")
+				col = Palette.GOOD
 			elif v < base.value(f):
-				col = Color("ffb38a")
+				col = Palette.WARN
 			out.append(["%s: %s" % [StatBlock.LABELS[f], StatBlock.format(f, v)], col, 12])
-		out.append(["Upgrades available: %d" % stack.slots_left(), Color("c9b8d9"), 11])
+		out.append(["Upgrades available: %d" % stack.slots_left(), Palette.MUTED, 11])
 		if compare:
 			out.append_array(_comparison(e))
 	elif item is UseDef:
 		var u := item as UseDef
-		out.append(["Use", Color("c9b8d9"), 11])
+		out.append(["Use", Palette.MUTED, 11])
 		var hp := u.hp_for(Game.me.max_hp())
 		var mp := u.mp_for(Game.me.max_mp())
 		if hp > 0:
@@ -69,34 +69,34 @@ func _lines() -> Array:
 		if mp > 0:
 			out.append(["Restores %d MP" % mp, Palette.MP, 12])
 		if u.pet_food > 0:
-			out.append(["Pet food: +%d fullness" % u.pet_food, Color("ffd9a8"), 12])
+			out.append(["Pet food: +%d fullness" % u.pet_food, Palette.PET, 12])
 	elif item is ChairDef:
 		var ch := item as ChairDef
-		out.append(["Setup · Chair", Color("c9b8d9"), 11])
-		out.append(["While sitting: +%d HP, +%d MP each recovery" % [ch.regen_hp, ch.regen_mp], Color("8cf0a6"), 12])
+		out.append(["Setup · Chair", Palette.MUTED, 11])
+		out.append(["While sitting: +%d HP, +%d MP each recovery" % [ch.regen_hp, ch.regen_mp], Palette.GOOD, 12])
 	elif item is PetDef:
 		var pet := item as PetDef
-		out.append(["Setup · Pet", Color("c9b8d9"), 11])
-		out.append(["Picks up items within %d px of you" % roundi(pet.loot_reach), Color("8cf0a6"), 12])
+		out.append(["Setup · Pet", Palette.MUTED, 11])
+		out.append(["Picks up items within %d px of you" % roundi(pet.loot_reach), Palette.GOOD, 12])
 		if Game.me.pet == pet.id:
-			out.append(["Out with you · Fullness %d/100" % Game.me.pet_full, Color("ffd9a8"), 12])
+			out.append(["Out with you · Fullness %d/100" % Game.me.pet_full, Palette.PET, 12])
 	elif item is CardDef:
 		var card := item as CardDef
-		out.append(["Monster Book card · %d/%d found" % [Game.me.book.cards(card.monster), CardDef.SET], Color("a8e6ff"), 11])
+		out.append(["Monster Book card · %d/%d found" % [Game.me.book.cards(card.monster), CardDef.SET], Palette.CARD, 11])
 	elif item is ScrollDef:
 		var sc := item as ScrollDef
-		out.append(["Upgrade scroll · %s" % sc.slot_text(), Color("c9b8d9"), 11])
+		out.append(["Upgrade scroll · %s" % sc.slot_text(), Palette.MUTED, 11])
 		out.append(["Success rate: %d%%" % roundi(sc.chance * 100.0), Palette.SUN, 12])
 		if sc.stats:
 			for f in sc.stats.nonzero():
 				out.append(["%s +%s" % [StatBlock.LABELS[f], StatBlock.format(f, sc.stats.value(f))], Palette.MIST, 12])
 	elif item is AmmoDef:
 		var a := item as AmmoDef
-		out.append(["Ammo · %ss" % String(a.kind).capitalize(), Color("c9b8d9"), 11])
+		out.append(["Ammo · %ss" % String(a.kind).capitalize(), Palette.MUTED, 11])
 		if a.attack > 0:
 			out.append(["Weapon Attack +%d when fired" % a.attack, Palette.MIST, 12])
 	else:
-		out.append(["Etc", Color("c9b8d9"), 11])
+		out.append(["Etc", Palette.MUTED, 11])
 	if item.description != "":
 		for l in UiSkin.wrap_text(Game.ui_font, item.description, 11, W - 28):
 			out.append([l, Color(Palette.MIST, 0.8), 11])
@@ -108,14 +108,14 @@ func _lines() -> Array:
 func _comparison(e: EquipDef) -> Array:
 	var worn := Game.me.equipment.at(Game.me.equipment.place_for(e))
 	if worn == null:
-		return [["Nothing worn in this slot", Color("8cf0a6"), 11]]
-	var out := [["vs. worn %s:" % worn.item.display_name, Color("c9b8d9"), 11]]
+		return [["Nothing worn in this slot", Palette.GOOD, 11]]
+	var out := [["vs. worn %s:" % worn.item.display_name, Palette.MUTED, 11]]
 	var changed := false
 	for f in StatBlock.FIELDS:
 		var diff := stack.stats.value(f) - worn.stats.value(f)
 		if diff != 0:
 			changed = true
-			out.append(["  %s %s" % [StatBlock.format(f, diff), StatBlock.LABELS[f]], Color("8cf0a6") if diff > 0 else Color("ff6b7d"), 12])
+			out.append(["  %s %s" % [StatBlock.format(f, diff), StatBlock.LABELS[f]], Palette.GOOD if diff > 0 else Palette.BAD, 12])
 	if not changed:
 		out.append(["  Same stats", Palette.MIST, 12])
 	return out

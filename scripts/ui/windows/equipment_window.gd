@@ -16,7 +16,7 @@ const LAYOUT := {
 }
 
 const PANEL_W := 176.0
-const PANEL_ROW := 16.0
+const ROW_H := 16.0
 
 var portrait: Texture2D
 ## The worn item whose stats the panel shows, or &"" for the whole set.
@@ -61,7 +61,7 @@ func _draw_bonuses() -> void:
 	if selected != &"" and Game.me.equipment.at(selected) == null:
 		selected = &""
 	var panel := Rect2(size.x - PAD - PANEL_W, GRID_Y, PANEL_W, 4 * (SLOT + GAP) - GAP)
-	DrawUtil.round_rect(self, panel, 10, Color(Palette.NIGHT, 0.55))
+	draw_row(panel)
 	var stack := Game.me.equipment.at(selected) if selected != &"" else null
 	var heading := stack.item.display_name if stack else "Gear bonuses"
 	var bonus := stack.stats if stack else Game.me.equipment.bonus()
@@ -71,11 +71,11 @@ func _draw_bonuses() -> void:
 	y += 6
 	var stats := bonus.nonzero()
 	if stats.is_empty():
-		DrawUtil.text(self, Game.ui_font, Vector2(x, y + PANEL_ROW), "Nothing worn yet." if stack == null else "No stats.", 11, Color(Palette.MIST, 0.6), 1)
+		draw_hint(Vector2(x, y + ROW_H), "Nothing worn yet." if stack == null else "No stats.")
 	for f in stats:
-		y += PANEL_ROW
-		DrawUtil.text(self, Game.ui_font, Vector2(x, y), StatBlock.LABELS[f], 11, Color("c9b8d9"), 1)
-		DrawUtil.text(self, Game.ui_font, Vector2(panel.end.x - 10, y), StatBlock.format(f, bonus.value(f)), 11, Color("8cf0a6"), -1)
+		y += ROW_H
+		DrawUtil.text(self, Game.ui_font, Vector2(x, y), StatBlock.LABELS[f], 11, Palette.MUTED, 1)
+		DrawUtil.text(self, Game.ui_font, Vector2(panel.end.x - 10, y), StatBlock.format(f, bonus.value(f)), 11, Palette.GOOD, -1)
 	DrawUtil.text(self, Game.ui_font, Vector2(panel.get_center().x, panel.end.y - 8),
 		"Click again for all gear" if stack else "Click an item for its stats", 10, Color(Palette.MIST, 0.5))
 
