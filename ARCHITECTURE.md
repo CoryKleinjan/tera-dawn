@@ -77,7 +77,13 @@ EXP), trades (offers are held by the server until both press Trade, then swapped
 back on cancel), guilds (saved in `guilds.data` next to the character saves), fame, and player
 shops on maps with `MapDef.market`. Each player gets a summary of their buddies, party and
 guild through `ev_social` whenever it changes (`Game.social`); the community window, the
-player menu, the party HP list and the trade and shop windows (`scripts/ui/social/`) read it.
+player menu, the party HP list and the trade and shop windows (`scripts/ui/windows/`) read it.
+
+`TDSocial` holds the shared state and is what the server and `Net` call; the work is done by
+its parts in `scripts/server/social/`, one per section: `SocialChat` (chat and slash commands),
+`SocialParties` (invitations, buddies, parties), `SocialTrade`, `SocialGuilds` (guilds and fame)
+and `SocialShops` (player shops). A new social feature gets its own part (extend `SocialPart`)
+and a forwarding method on `TDSocial`.
 
 ### Chairs, pets, the Monster Book and achievements
 
@@ -122,17 +128,20 @@ data/                 Content, one .tres per thing
 scripts/
   autoload/           Content (data index), Game (your character copy, settings, input),
                       Net (connections and the protocol), SteamService
-  server/             TDServer, MapInstance, SimPlayer, SimMob, SimDrop, CharacterStore
+  server/             TDServer, MapInstance, SimPlayer, SimMob, SimDrop, CharacterStore, TDSocial
+  server/social/      TDSocial's parts: chat, parties, trade, guilds, player shops
+  net/                SnapshotFlags, the bits both server and client read in snapshots
   data/               Resource classes for everything in data/
-  systems/            Character, Inventory, Equipment, ItemStack, CharacterStats, MonsterBook,
-                      Achievements, Balance
+  systems/            Character (and CharacterCodec, its save format), Inventory, Equipment,
+                      ItemStack, CharacterStats, MonsterBook, Achievements, Balance
   components/         Health, Hitbox, SpriteRig
   actors/             Player (you), Avatar (other players), Companion (chairs, pets), Mob, Npc, Drop views
-  world/              World (what you see), Stage + Terrain/Backdrop/Scenery builders, MapLayout,
-                      Platform, DropFlight, Combat
+  world/              World (what you see), WorldFx (hits, numbers, effects), Stage +
+                      Terrain/Backdrop/Scenery builders, MapLayout, Platform, DropFlight, Combat
   fx/                 Flipbook effects and floating text
-  ui/                 HUD, status bar, overlay, UiSkin, Palette
-  ui/windows/         Draggable windows (inventory, equipment, character) and the item tooltip
+  ui/                 HUD, status bar, overlay, quickslots, UiSkin, Palette
+  ui/windows/         Every draggable window (all extend TDWindow)
+  ui/widgets/         UI pieces that aren't windows: item tooltip, chat, invites, prompt
 assets/
   sprites/            Cut sprites, one folder per kind (generated, don't hand-edit)
   animations/         SpriteFrames for animated actors (generated)
@@ -319,7 +328,11 @@ NPC's `instructs`: their dialogue then offers "Choose a job", and the server
 ## How to add a window
 
 Extend `TDWindow` (`scripts/ui/windows/window.gd`): draw in `_draw_body`, handle clicks in
-`_click`, show tooltips from `_hovered`. Register it in `TDHud._build_windows` under an input
+`_click`, show tooltips from `_hovered`. Use `TDWindow`'s helpers rather than drawing your
+own, so every window looks the same: `draw_tabs` / `tab_at`, `add_button` (drawn and clicked in
+one call), `draw_row` for list rows, `draw_label`, `draw_hint` for empty lists, `draw_shards`
+and `plus_button`. Colours come from `Palette` by meaning (`GOOD`, `BAD`, `MUTED`, `INFO`...),
+never a hex value written in the window. Register it in `TDHud._build_windows` under an input
 action, add the action to `TDHud.WINDOW_ACTIONS` and bind a key in `Game._setup_input`.
 
 ## How to add an NPC
@@ -366,5 +379,11 @@ cut sprites land in `assets/sprites/`, ready to be referenced from data.
 - Data classes end in `Def`; placements on a map (`SpawnDef`, `NpcPlacement`, `PropPlacement`)
   point at a Def.
 - Code never names a specific monster, map or item; it reads what it needs from the Def.
+- Class names: nodes and the server's top-level objects use the `TD` prefix (`TDWorld`,
+  `TDServer`, `TDSocial`, `TDWindow`); data classes, systems and helpers don't (`MonsterDef`,
+  `Character`, `SimMob`, `Palette`).
+- Numbers that tune how something plays (speeds, timers, ranges) are named constants at the
+  top of their file. A value both server and client need lives in one place (`SimPlayer`,
+  `SimMob` or `SnapshotFlags`) and the other side reads it from there.
 - Generated files (`assets/sprites/`, `assets/animations/`) are rebuilt by the tools, so fix
   art in the sheet or manifest rather than in the output.

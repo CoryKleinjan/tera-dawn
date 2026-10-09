@@ -111,7 +111,7 @@ data/              Content: monsters, NPCs, items, skills, effects, maps, biomes
 scripts/           Code, by layer: autoload, data, components, actors, world, fx, ui
 assets/            Cut sprites and animations (generated from art/), fonts
 art/source/        Cory's raw sheets; art/sheets/ says how to cut each one
-shaders/           Sky, portal, sword trail, level-up beam and screen post-process
+shaders/           Sky and screen post-process
 store/             Steam capsules and key art
 tests/             Headless smoke test and screenshot scene
 tools/art/         Sheet slicer, store-art cropper, fx textures, contact-sheet preview
