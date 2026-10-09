@@ -1,40 +1,45 @@
 [gd_resource type="Resource" script_class="JobDef" load_steps=9 format=3]
 
-[ext_resource type="Script" path="res://scripts/data/job_def.gd" id="script"]
-[ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="stat_block"]
-[ext_resource type="Script" path="res://scripts/data/equip_def.gd" id="equip_def"]
-[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="drop_entry"]
-[ext_resource type="Resource" path="res://data/items/equips/training_sword.tres" id="training_sword"]
-[ext_resource type="Resource" path="res://data/items/equips/linen_tunic.tres" id="linen_tunic"]
-[ext_resource type="Resource" path="res://data/items/equips/trail_pants.tres" id="trail_pants"]
-[ext_resource type="Resource" path="res://data/items/use/red_potion.tres" id="red_potion"]
+[ext_resource type="Script" path="res://scripts/data/job_def.gd" id="1_job_def"]
+[ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="2_stat_block"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/equips/bronze_sword.tres" id="4_bronze_sword"]
+[ext_resource type="Resource" path="res://data/items/use/red_potion.tres" id="5_red_potion"]
 
-[sub_resource type="Resource" id="stats"]
-script = ExtResource("stat_block")
-strength = 12
-dexterity = 5
-intelligence = 4
-luck = 4
-
-[sub_resource type="Resource" id="potions"]
-script = ExtResource("drop_entry")
-item = ExtResource("red_potion")
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("5_red_potion")
 chance = 1.0
-min_amount = 5
-max_amount = 5
+min_amount = 20
+max_amount = 20
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("4_bronze_sword")
+chance = 1.0
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("2_stat_block")
+strength = 35
 
 [resource]
-script = ExtResource("script")
+script = ExtResource("1_job_def")
 id = &"warrior"
 display_name = "Warrior"
+family = &"warrior"
+tint = Color(1.0, 0.823529, 0.721569, 1.0)
 primary_stat = "strength"
 secondary_stat = "dexterity"
 mastery = 0.6
+description = "Front-line fighters with heavy blades and the most HP of any job. Strength drives their damage."
 base_hp = 50
-hp_per_level = 14
+hp_per_level = 16
 base_mp = 20
-mp_per_level = 6
+mp_per_level = 4
 ap_per_level = 5
-starting_stats = SubResource("stats")
-starting_gear = Array[ExtResource("equip_def")]([ExtResource("training_sword"), ExtResource("linen_tunic"), ExtResource("trail_pants")])
-starting_items = Array[ExtResource("drop_entry")]([SubResource("potions")])
+advances_from = &"beginner"
+advance_level = 10
+advance_requirements = SubResource("Resource_1")
+advance_gifts = Array[ExtResource("3_drop_entry")]([SubResource("Resource_2"), SubResource("Resource_3")])

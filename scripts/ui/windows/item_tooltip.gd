@@ -37,6 +37,8 @@ func _lines() -> Array:
 	var e := item as EquipDef
 	if e:
 		out.append(["Equip · %s" % e.slot_name(), Color("c9b8d9"), 11])
+		if not e.jobs.is_empty():
+			out.append(["%s only" % EquipDef.families_text(e.jobs), Palette.MIST if Game.me.can_use(e.jobs) else Color("ff6b7d"), 12])
 		var reqs := e.requirements()
 		for key in reqs:
 			var have := Game.me.level if key == &"level" else Game.me.stats.value(key)

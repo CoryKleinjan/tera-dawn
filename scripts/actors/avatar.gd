@@ -29,7 +29,7 @@ static func create(w: TDWorld, peer_id: int) -> TDAvatar:
 	a.peer = peer_id
 	return a
 
-## Takes the server's latest [peer, name, x, y, face, animation, level, flags].
+## Takes the server's latest [peer, name, x, y, face, animation, level, flags, job].
 func apply(state: Array) -> void:
 	char_name = state[1]
 	target = Vector2(state[2], state[3])
@@ -39,6 +39,8 @@ func apply(state: Array) -> void:
 	animation = anim
 	level = state[6]
 	flags = state[7]
+	if state.size() > 8 and rig and Content.jobs.has(StringName(state[8])):
+		rig.set_tint(Content.job(state[8]).tint)
 	if not known or position.distance_to(target) > 300.0:
 		position = target # first sight or a portal hop: no gliding across the map
 	known = true

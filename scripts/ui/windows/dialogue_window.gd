@@ -57,6 +57,8 @@ func _options() -> Array:
 	var out := []
 	var def := npc.def
 	out.append_array(_quest_options())
+	if not _jobs_offered().is_empty():
+		out.append(["Choose a job", _job_list])
 	if not def.lines.is_empty():
 		out.append(["Chat", func() -> void: text = _next_line()])
 	if def.shop:
@@ -92,6 +94,37 @@ func _quest_options() -> Array:
 				_page("%s\n\n%s" % [q.progress_text, _objective_list(q)], [
 					["Back", func() -> void: _main_page(greeting)]])])
 	return out
+
+## The jobs this instructor teaches that the player could advance into from their job.
+func _jobs_offered() -> Array[JobDef]:
+	var out: Array[JobDef] = []
+	for id in npc.def.instructs:
+		var j: JobDef = Content.jobs.get(id)
+		if j and j.advances_from == Game.me.job.id:
+			out.append(j)
+	return out
+
+func _job_list() -> void:
+	var greeting := npc.def.greeting
+	var opts := []
+	for j in _jobs_offered():
+		opts.append([j.display_name, _job_page.bind(j)])
+	opts.append(["Back", func() -> void: _main_page(greeting)])
+	_page("Which path calls to you?", opts)
+
+## One job: what it is, what it takes (in red what you don't have yet), and the choice.
+func _job_page(j: JobDef) -> void:
+	var problem := Game.me.advance_problem(j)
+	var say := "%s\n\nRequires: %s" % [j.description, ", ".join(j.requirement_lines())]
+	if problem != "":
+		say += "\n\n" + problem
+	var opts := []
+	if problem == "":
+		opts.append(["Become a %s" % j.display_name, func() -> void:
+			Net.ask(&"req_advance", [npc.def.id, j.id])
+			visible = false])
+	opts.append(["Back", _job_list])
+	_page(say, opts)
 
 ## "Defeat 8 Dewlings (3/8)", one per line.
 static func _objective_list(q: QuestDef) -> String:
@@ -135,7 +168,7 @@ func _draw_body() -> void:
 	DrawUtil.round_rect(self, box, 8, Color(Palette.NIGHT, 0.45))
 	var tex := npc.portrait()
 	if tex:
-		draw_texture_rect(tex, fit(tex, box.grow(-6)), false)
+		draw_texture_rect(tex, fit(tex, box.grow(-6)), false, npc.def.tint)
 	if npc.def.title != "":
 		DrawUtil.text(self, Game.ui_font, Vector2(box.get_center().x, box.end.y + 16), npc.def.title, 11, Color("c9b8d9"), 0, 3, Palette.NIGHT)
 	# what they say
@@ -145,7 +178,7 @@ func _draw_body() -> void:
 			DrawUtil.text(self, Game.ui_font, Vector2(TEXT_X, y), l, 13, Palette.MIST, 1, 3, Palette.NIGHT)
 			y += 18
 		if paragraph == "":
-			y -= 8
+			y += 8
 	# what you can do
 	for i in options.size():
 		var r := _option_rect(i)

@@ -10,6 +10,8 @@ const SLOT_NAMES := ["Weapon", "Hat", "Top", "Bottom", "Shoes", "Gloves", "Cape"
 @export var slot: Slot = Slot.WEAPON
 
 @export_group("Requirements")
+## Job lines that can wear it (JobDef.family); empty for anyone.
+@export var jobs: Array[StringName] = []
 @export var required_level := 0
 @export var required_strength := 0
 @export var required_dexterity := 0
@@ -28,6 +30,15 @@ func tab() -> Tab:
 
 func stack_size() -> int:
 	return 1
+
+## "Warriors and Pirates" for a list of job lines.
+static func families_text(families: Array[StringName]) -> String:
+	var names := []
+	for f in families:
+		names.append(String(f).capitalize() + "s")
+	if names.size() <= 1:
+		return "".join(names)
+	return ", ".join(names.slice(0, -1)) + " and " + names[-1]
 
 func slot_name() -> String:
 	return SLOT_NAMES[slot]

@@ -50,6 +50,11 @@ ICONS = {
     "ashshell_fragment": ("shard", "8f8a99"),
     "chief_mane": ("flame", "ff7a2e"),
     "petal_nectar": ("potion", "ffc2e0"),
+    "bronze_sword": ("sword", "d9925a"),
+    "willow_bow": ("bow", "b58a4c"),
+    "apprentice_wand": ("wand", "c9a7ff"),
+    "iron_claw": ("claw", "a9b4c2"),
+    "brass_knuckle": ("knuckle", "e0b64a"),
 }
 
 
@@ -224,9 +229,100 @@ def flame(p):
     p.poly([(32, 24), (40, 38), (36, 52), (28, 52), (24, 40)], rgb("ffd166"))
 
 
+def bow(p):
+    p.line([(18, 6), (34, 14), (44, 32), (34, 50), (18, 58)], p.base, 6)
+    p.line([(19, 7), (19, 57)], rgb("f3e6c8"), 1.5)
+    p.poly([(26, 28), (30, 28), (30, 36), (26, 36)], rgb("6b4a2b"))
+
+
+def wand(p):
+    p.line([(12, 54), (40, 22)], rgb("8a5a35"), 5)
+    p.ellipse((36, 8, 54, 26), p.base)
+    p.ellipse((41, 12, 47, 18), p.light, 1)
+
+
+def staff(p):
+    p.line([(14, 58), (40, 14)], rgb("7a4f2e"), 6)
+    p.poly([(36, 6), (50, 8), (52, 22), (40, 24), (34, 16)], p.base)
+    p.ellipse((40, 11, 46, 17), p.light, 1)
+
+
+def claw(p):
+    p.poly([(14, 30), (40, 26), (44, 46), (18, 50)], rgb("6b4a2b"))
+    for x in (20, 30, 40):
+        p.poly([(x, 28), (x + 6, 26), (x + 12, 6), (x + 6, 8)], p.base)
+
+
+def dagger(p):
+    p.poly([(40, 6), (48, 10), (30, 38), (24, 34)], p.base)
+    p.poly([(18, 34), (32, 44), (30, 48), (16, 38)], rgb("ffd166"))
+    p.poly([(20, 42), (26, 46), (14, 58), (8, 54)], rgb("4a3326"))
+
+
+def knuckle(p):
+    p.poly([(12, 22), (52, 22), (54, 40), (10, 40)], p.base)
+    for x in (16, 26, 36, 46):
+        p.ellipse((x - 4, 14, x + 6, 26), p.light)
+    p.poly([(18, 40), (46, 40), (40, 52), (24, 52)], p.dark)
+
+
+def gun(p):
+    p.poly([(8, 18), (54, 18), (54, 30), (8, 30)], p.base)
+    p.poly([(14, 28), (28, 28), (24, 54), (10, 54)], rgb("6b4a2b"))
+    p.poly([(48, 12), (54, 12), (54, 18), (48, 18)], p.dark)
+
+
+def star(p):
+    import math
+    pts_ = []
+    for i in range(8):
+        r = 26 if i % 2 == 0 else 9
+        a = math.pi / 4 * i
+        pts_.append((32 + r * math.cos(a), 32 + r * math.sin(a)))
+    p.poly(pts_, p.base)
+    p.ellipse((28, 28, 36, 36), p.dark, 1.5)
+
+
+def arrow(p):
+    p.line([(10, 54), (46, 18)], rgb("c99a62"), 4)
+    p.poly([(40, 12), (54, 8), (50, 22)], p.base)
+    p.poly([(8, 46), (16, 52), (12, 58), (4, 50)], rgb("f3e6c8"))
+
+
+def bullet(p):
+    p.poly([(20, 20), (38, 20), (38, 50), (20, 50)], p.base)
+    p.ellipse((20, 8, 38, 30), p.light)
+
+
+def scroll(p):
+    p.poly([(14, 14), (50, 14), (50, 50), (14, 50)], rgb("f3e6c8"))
+    p.ellipse((8, 10, 20, 54), rgb("e0cfa6"))
+    p.ellipse((44, 10, 56, 54), rgb("e0cfa6"))
+    p.ellipse((26, 26, 38, 38), p.base)
+
+
+def book(p):
+    p.poly([(12, 10), (48, 8), (52, 52), (14, 56)], p.base)
+    p.poly([(16, 12), (22, 12), (24, 52), (18, 54)], p.dark)
+    p.ellipse((30, 24, 42, 36), p.light, 1.5)
+
+
+def gem(p):
+    p.poly([(32, 8), (52, 26), (32, 56), (12, 26)], p.base)
+    p.poly([(32, 8), (40, 26), (32, 56), (24, 26)], p.light)
+
+
+def key(p):
+    p.ellipse((10, 10, 30, 30), p.base)
+    p.line([(26, 26), (52, 52)], p.base, 6)
+    p.line([(44, 44), (50, 38)], p.base, 5)
+
+
 SHAPES = {f.__name__: f for f in [sword, cleaver, cap, helm, shirt, pants, boots, gloves, cape,
                                     earrings, pendant, ring, shield, potion, drop, tuft, wing,
-                                    mushroom, stone, horn, tusk, shard, flame]}
+                                    mushroom, stone, horn, tusk, shard, flame, bow, wand, staff,
+                                    claw, dagger, knuckle, gun, star, arrow, bullet, scroll, book,
+                                    gem, key]}
 
 
 def is_placeholder(path):

@@ -22,6 +22,7 @@ var current := &"idle"
 var _t := randf() * 10.0
 var _frames: SpriteFrames
 var _flash := false
+var _tint := Color.WHITE
 var _lift := 0.0
 
 ## Builds the sprite. Pass `frames` for an animated actor or `texture` for a single image.
@@ -107,7 +108,14 @@ func place(feet: Vector2, z: float, shadow_y := NAN) -> void:
 func set_flash(on: bool) -> void:
 	if on != _flash:
 		_flash = on
-		body.modulate = Color(2.2, 1.0, 1.0) if on else Color.WHITE
+		body.modulate = Color(2.2, 1.0, 1.0) if on else _tint
+
+## A colour the sprite is always tinted with (until art for it exists, jobs share the
+## hero's art in their own colours).
+func set_tint(col: Color) -> void:
+	_tint = col
+	if not _flash:
+		body.modulate = col
 
 ## 1 is solid, 0 is invisible.
 func set_opacity(alpha: float) -> void:
