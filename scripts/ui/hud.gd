@@ -1,7 +1,8 @@
 class_name TDHud
 extends CanvasLayer
 ## The screen UI: the status bar (level, HP, MP, EXP, skills, Dawnshards), the in-game
-## overlay, the game windows (inventory, equipment, character), and the title / pause menu.
+## overlay, the game windows (inventory, equipment, character), the title screen, the
+## game menu (Esc) and the settings screen.
 ## Art comes from UiSkin.
 
 ## Input actions that open and close a window, in the order the status bar shows them.
@@ -11,17 +12,24 @@ var world: TDWorld
 var overlay: TDOverlay
 var status: TDStatusBar
 var quickslots: TDQuickslots
+## The dimmed layer over the game that holds the title card, the game menu, the settings
+## screen and the character creator. While it's showing, the game ignores play keys.
 var title: Control
-## The title card (name, Play, Host, Join), hidden while the character creator is open.
+## The title card (name, Play, Host, Join, Settings, Quit), hidden while the character
+## creator, the game menu or the settings screen is showing.
 var title_card: Control
 var creator: TDCreator
+var game_menu: TDGameMenu
+var settings_menu: TDSettingsMenu
+## What the settings screen goes back to: the title card or the game menu.
+var _settings_from: Control
 var start_panel: Control
-var pause_panel: Control
-var resume_button: Button
 var name_field: LineEdit
 var address_field: LineEdit
 ## Shows why joining didn't work.
 var message: Label
+## The key hints under the title card, which follow the player's keybinds.
+var keys_help: Label
 var ui_theme: Theme
 ## Holds the windows so raising one never lifts it above the tooltip or the title menu.
 var window_layer: Control
@@ -224,34 +232,42 @@ func _build_title() -> void:
 	message = _label("")
 	message.add_theme_color_override("font_color", Palette.BAD)
 	message.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	message.hide()
 	start_panel.add_child(message)
 
-	# while playing: the pause menu
-	pause_panel = HBoxContainer.new()
-	pause_panel.alignment = BoxContainer.ALIGNMENT_CENTER
-	pause_panel.add_theme_constant_override("separation", 16)
-	resume_button = _menu_button("Resume")
-	resume_button.pressed.connect(func() -> void: title.hide())
-	pause_panel.add_child(resume_button)
-	var leave := _menu_button("Leave")
-	leave.pressed.connect(_on_leave)
-	pause_panel.add_child(leave)
-	pause_panel.hide()
-	inner.add_child(pause_panel)
-
+	var settings := _menu_button("Settings")
+	settings.pressed.connect(func() -> void: open_settings())
 	var quit := _menu_button("Quit")
-	quit.pressed.connect(func() -> void:
-		Net.stop()
-		get_tree().quit())
-	inner.add_child(_row([quit]))
+	quit.pressed.connect(_quit)
+	inner.add_child(_row([settings, quit]))
 
-	var keys := Label.new()
-	keys.text = "Arrows move and climb · Space jump · X attack · A Dawn Slash · Z loot · Up talks and enters portals\nI inventory · E equipment · S character · Esc menu · F11 fullscreen\nGamepad: stick · A jump · X attack · Y Dawn Slash · B loot · Back inventory · Start menu"
-	keys.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	keys.add_theme_font_size_override("font_size", 12)
-	keys.add_theme_color_override("font_color", Palette.MUTED)
-	inner.add_child(keys)
+	keys_help = Label.new()
+	keys_help.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	keys_help.add_theme_font_size_override("font_size", 12)
+	keys_help.add_theme_color_override("font_color", Palette.MUTED)
+	inner.add_child(keys_help)
+	_update_keys_help()
+	Settings.changed.connect(_on_settings_changed)
 	name_field.call_deferred("grab_focus")
+
+	# while playing: the game menu (Esc)
+	game_menu = TDGameMenu.new()
+	game_menu.hide()
+	title.add_child(game_menu)
+	game_menu.resumed.connect(resume)
+	game_menu.settings_requested.connect(func() -> void: open_settings())
+	game_menu.left.connect(_on_leave)
+	game_menu.quit.connect(_quit)
+
+	settings_menu = TDSettingsMenu.new()
+	settings_menu.hide()
+	title.add_child(settings_menu)
+	settings_menu.closed.connect(func() -> void:
+		_settings_from.show()
+		if _settings_from == game_menu:
+			game_menu.open()
+		else:
+			name_field.grab_focus())
 
 	# a name with no character yet: the creator takes the title card's place
 	creator = TDCreator.new()
@@ -275,13 +291,7 @@ func _build_title() -> void:
 		_show_message("Lost the connection to the server."))
 
 func _menu_button(text: String) -> Button:
-	var b := Button.new()
-	b.text = text
-	b.custom_minimum_size = Vector2(150, 48)
-	b.add_theme_font_override("font", Game.num_font)
-	b.add_theme_font_size_override("font_size", 22)
-	UiSkin.style_button(b)
-	return b
+	return UiSkin.menu_button(text)
 
 func _field(text: String, hint: String, max_length: int) -> LineEdit:
 	var f := LineEdit.new()
@@ -350,15 +360,52 @@ func _on_leave() -> void:
 	world.stop()
 	show_title(false)
 
+func _quit() -> void:
+	Net.stop()
+	get_tree().quit()
+
+func _on_settings_changed(section: SettingsSection) -> void:
+	if section is Keybinds:
+		_update_keys_help()
+
+## The hints under the title card, naming the player's own keys.
+func _update_keys_help() -> void:
+	var k := func(action: String) -> String: return TDStatusBar._key_name(action)
+	keys_help.text = "%s %s move and climb · %s jump · %s attack · %s Dawn Slash · %s loot · %s talks and enters portals\n%s inventory · %s equipment · %s character · Esc menu · %s fullscreen · Gamepads work too" % [
+		k.call("move_left"), k.call("move_right"), k.call("jump"), k.call("attack"), k.call("quick_1"), k.call("loot"), k.call("move_up"),
+		k.call("inventory"), k.call("equipment"), k.call("stats"), k.call("toggle_fullscreen")]
+
 func _show_message(text: String) -> void:
 	message.text = text
+	message.visible = text != ""
 
-## The title screen (not playing yet) or the pause menu (playing).
+## The title screen (not playing yet) or the game menu (playing).
 func show_title(paused: bool) -> void:
-	start_panel.visible = not paused
-	pause_panel.visible = paused
+	if settings_menu.visible:
+		settings_menu.close()
+	title_card.visible = not paused
 	title.show()
 	if paused:
-		resume_button.grab_focus()
+		game_menu.open()
 	else:
+		game_menu.hide()
 		name_field.grab_focus()
+
+## Back to the game from the game menu.
+func resume() -> void:
+	game_menu.hide()
+	title.hide()
+
+## Esc while playing: closes the top window, or opens the game menu, or closes it again.
+func escape() -> void:
+	if title.visible:
+		if game_menu.visible:
+			resume()
+	elif not close_top_window():
+		show_title(true)
+
+## Opens the settings screen in place of the title card or the game menu.
+func open_settings() -> void:
+	_settings_from = game_menu if game_menu.visible else title_card
+	_settings_from.hide()
+	settings_menu.open()

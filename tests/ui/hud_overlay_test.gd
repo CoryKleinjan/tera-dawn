@@ -134,9 +134,9 @@ func test_overlay_draws_the_faint_screen() -> void:
 func test_title_screen_draws_and_hides() -> void:
 	check(not ui.hud.title.visible, "playing hides the title screen")
 	ui.hud.show_title(false)
-	check(ui.hud.title.visible and ui.hud.start_panel.visible and not ui.hud.pause_panel.visible, "the title shows the start panel")
+	check(ui.hud.title.visible and ui.hud.start_panel.visible and not ui.hud.game_menu.visible, "the title shows the start panel")
 	check(await ui.redraw(ui.hud.title), "the title screen draws")
 	ui.hud.show_title(true)
-	check(ui.hud.pause_panel.visible and not ui.hud.start_panel.visible, "the pause menu shows Resume and Leave")
-	ui.hud.resume_button.pressed.emit()
+	check(ui.hud.game_menu.visible and not ui.hud.title_card.visible, "the game menu shows Resume, Settings, Leave and Quit")
+	ui.hud.game_menu.resume_button.pressed.emit()
 	check(not ui.hud.title.visible, "Resume hides it")

@@ -50,7 +50,7 @@ func test_window_keys_do_nothing_on_the_title_screen() -> void:
 	for action in TDHud.WINDOW_ACTIONS:
 		await ui.press(action)
 		check(not _win(action).visible, "%s stays closed behind the pause menu" % action)
-	ui.hud.resume_button.pressed.emit()
+	ui.hud.game_menu.resume_button.pressed.emit()
 	check(not ui.hud.title.visible, "Resume closes the pause menu")
 
 func test_escape_closes_the_top_window_then_pauses() -> void:
@@ -64,8 +64,8 @@ func test_escape_closes_the_top_window_then_pauses() -> void:
 	check_eq(_open_count(), 0, "Esc closes them one at a time")
 	check(not ui.hud.title.visible, "no pause menu while windows were open")
 	await ui.press("pause")
-	check(ui.hud.title.visible and ui.hud.pause_panel.visible, "with nothing open, Esc pauses")
-	ui.hud.resume_button.pressed.emit()
+	check(ui.hud.title.visible and ui.hud.game_menu.visible, "with nothing open, Esc pauses")
+	ui.hud.game_menu.resume_button.pressed.emit()
 
 func test_close_button_closes_every_window() -> void:
 	for key in ui.hud.windows:

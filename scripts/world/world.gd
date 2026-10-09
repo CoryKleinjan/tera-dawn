@@ -206,8 +206,9 @@ func _camera_target() -> Vector2:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_fullscreen"):
-		var full := DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED if full else DisplayServer.WINDOW_MODE_FULLSCREEN)
+		Settings.video.toggle_fullscreen()
+		Settings.apply(Settings.video)
+		Settings.save()
 	elif started and not hud.title.visible and event.is_action_pressed("chat") and not hud.typing():
 		hud.chat.open()
 		get_viewport().set_input_as_handled()
@@ -216,8 +217,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if a:
 			click_avatar(a)
 	elif event.is_action_pressed("pause") and started:
-		if not hud.close_top_window():
-			hud.show_title(true)
+		hud.escape()
 	elif started and not hud.title.visible:
 		for action in TDHud.WINDOW_ACTIONS:
 			if event.is_action_pressed(action):
