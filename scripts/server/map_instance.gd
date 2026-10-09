@@ -81,6 +81,14 @@ func broadcast(event: StringName, args: Array, skip := 0) -> void:
 func tell(p: SimPlayer, text: String, col: Color) -> void:
 	Net.send(p.peer, &"ev_log", [text, col.to_html()])
 
+## The NPC with this id when the player is close enough to deal with them, or null.
+func npc_near(p: SimPlayer, npc_id: StringName, reach := 160.0) -> NpcDef:
+	for placement in def.npcs:
+		var at := Vector2(placement.x, layout.platforms[placement.platform].y)
+		if placement.npc.id == npc_id and p.position.distance_to(at) <= reach:
+			return placement.npc
+	return null
+
 # ---------- combat ----------
 
 ## Resolves a player's skill against the monsters in front of them. Returns how many were hit.

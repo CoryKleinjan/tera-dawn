@@ -234,8 +234,17 @@ action, add the action to `TDHud.WINDOW_ACTIONS` and bind a key in `Game._setup_
 
 ## How to add an NPC
 
-Create `data/npcs/<id>.tres` as an **NpcDef** (name, title, sprite, and the `lines` they say,
-one per press of Up), then place it on a map with an **NpcPlacement**.
+Create `data/npcs/<id>.tres` as an **NpcDef** (name, title, sprite, a `greeting`, and the
+`lines` they say when you pick Chat), then place it on a map with an **NpcPlacement**.
+Pressing Up next to them opens `TDDialogueWindow`, which lists what they offer. To make NPCs
+offer something new, add an option in `TDDialogueWindow._options()`.
+
+## How to add a shop
+
+Create `data/shops/<id>.tres` as a **ShopDef**: a name and a list of **ShopEntry**s (an item
+and its price; 0 means four times what a shop pays for it). Set it as an NpcDef's `shop` and
+they offer "Open shop". Every shop also buys anything for the item's `sell_price`. The server
+checks the player is standing by that NPC before buying or selling (`TDServer.on_buy`).
 
 ## How to add art
 

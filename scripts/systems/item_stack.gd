@@ -26,6 +26,12 @@ static func exact(e: EquipDef) -> ItemStack:
 	s.stats = e.stats.copy() if e.stats else StatBlock.new()
 	return s
 
+## A new stack of `n` with gear at exactly its listed stats (what shops sell).
+static func unrolled(it: ItemDef, n := 1) -> ItemStack:
+	if it is EquipDef:
+		return exact(it)
+	return create(it, n)
+
 func equip_def() -> EquipDef:
 	return item as EquipDef
 

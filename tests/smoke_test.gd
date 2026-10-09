@@ -69,6 +69,12 @@ func _check_content() -> void:
 			problems.append("job %s is missing starting stats or gear" % id)
 	_check(problems.is_empty(), "maps, monsters, items and jobs reference valid content %s" % [problems])
 	_check(Content.jobs.has(Character.START_JOB), "the starting job is defined")
+	var shop_problems := []
+	for id in Content.shops:
+		for e in Content.shops[id].items:
+			if e == null or e.item == null or e.cost() <= 0:
+				shop_problems.append(id)
+	_check(not Content.shops.is_empty() and shop_problems.is_empty(), "every shop sells real items at a price %s" % [shop_problems])
 
 func _press(action: String) -> void:
 	var e := InputEventAction.new()
@@ -166,11 +172,11 @@ func _run() -> void:
 	_check(not world.started and world.hud.title.visible, "the game opens on the title screen")
 	world.hud.name_field.text = "Tester"
 	world.hud._on_play()
+	_me().inv = 100000 # keep monsters from hurting the player mid-test
 	await _ticks(2)
 	_check(world.started and not world.hud.title.visible and Game.me.name == "Tester", "Play starts a single-player game as the named character")
 	_check(Net.server != null and _me() != null, "single player runs its own server")
 	var p := world.player
-	_me().inv = 100000 # keep monsters from hurting the player mid-test
 	_check(p.on_ground, "player starts on the ground")
 	_check(world.npcs().size() == 2, "the meadow has its two NPCs")
 	await _ticks(5)
@@ -196,7 +202,70 @@ func _run() -> void:
 	_teleport(Vector2(elder.position.x - 30, 620))
 	await _ticks(2)
 	await _tap("move_up")
-	_check(elder.speech() != "", "pressing Up next to an NPC makes them talk")
+	var talk: TDDialogueWindow = world.hud.windows["dialogue"]
+	_check(talk.visible and talk.npc == elder and talk.text != "", "pressing Up next to an NPC opens their dialogue")
+	var greeting := talk.text
+	talk.choose(0)
+	_check(talk.text != greeting and talk.options[0][0] == "Chat", "Chat moves on to their next line")
+	talk.choose(talk.options.size() - 1)
+	_check(not talk.visible, "Goodbye closes the dialogue")
+
+	# Mira runs a shop: buy potions, sell monster parts.
+	var mira: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.shop != null)[0]
+	_teleport(Vector2(mira.position.x - 30, 620))
+	await _ticks(2)
+	await _tap("move_up")
+	var labels := talk.options.map(func(o: Array) -> String: return o[0])
+	_check(talk.visible and labels.has("Open shop"), "the shopkeeper offers her shop")
+	talk.choose(labels.find("Open shop"))
+	var shop: TDShopWindow = world.hud.windows["shop"]
+	_check(shop.visible and not talk.visible and shop.shop == mira.def.shop, "Open shop opens her shop window")
+	_me().character.shards = 1000
+	_me().character.inventory.add(Content.item(&"boar_tusk"), 5)
+	_me().character.inventory.add(Content.item(&"moss_tuft"), 3)
+	_me().dirty_character = true
+	await _ticks(1)
+	var red_potion: ItemDef = Content.item(&"red_potion")
+	var reds := Game.me.inventory.count_of(red_potion)
+	shop.amount = 10
+	shop.buy(0)
+	await _ticks(1)
+	_check(Game.me.inventory.count_of(red_potion) == reds + 10 and Game.me.shards == 1000 - 10 * mira.def.shop.items[0].cost(), "buying 10 Red Potions takes their price")
+	var shards_now := Game.me.shards
+	var gear_line := -1
+	for i in mira.def.shop.items.size():
+		if mira.def.shop.items[i].item is EquipDef:
+			gear_line = i
+			break
+	shop.buy(gear_line)
+	await _ticks(1)
+	_check(Game.me.shards == shards_now - mira.def.shop.items[gear_line].cost(), "gear is bought one at a time")
+	shop.tab = ItemDef.Tab.ETC
+	var tusk_slot := -1
+	for i in Inventory.SLOTS:
+		var st := Game.me.inventory.at(ItemDef.Tab.ETC, i)
+		if st and st.item.id == &"boar_tusk":
+			tusk_slot = i
+	shards_now = Game.me.shards
+	shop.amount = 1
+	shop.sell(tusk_slot)
+	await _ticks(1)
+	_check(Game.me.inventory.count_of(Content.item(&"boar_tusk")) == 4 and Game.me.shards == shards_now + Content.item(&"boar_tusk").sell_price, "selling one Boar Tusk pays its price")
+	Net.ask(&"req_sell_all_etc", [mira.def.id])
+	await _ticks(1)
+	_check(Game.me.inventory.free_slots(ItemDef.Tab.ETC) == Inventory.SLOTS, "Sell all Etc empties the Etc tab")
+	_me().character.shards = 0
+	_me().dirty_character = true
+	await _ticks(1)
+	shop.buy(4)
+	await _ticks(1)
+	_check(Game.me.shards == 0 and Game.me.inventory.count_of(Content.item(&"elixir")) == 0, "you can't buy what you can't afford")
+	_teleport(Vector2(mira.position.x + 600, 620))
+	await _ticks(2)
+	_check(not shop.visible, "walking away closes the shop")
+	Net.ask(&"req_buy", [mira.def.id, 0, 1])
+	await _ticks(1)
+	_check(Game.me.inventory.count_of(red_potion) == reds + 10, "the server won't sell from across the map")
 
 	# Put a Dewling right in front of the player and hit it until it dies.
 	var meadow: MapInstance = Net.server.maps[&"meadow"]

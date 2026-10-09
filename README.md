@@ -25,7 +25,8 @@ The game is built to grow: monsters, NPCs, items, skills, effects, maps and biom
 - Platforms, ropes and ladders, and dropping down through platforms.
 - Basic attack and **Dawn Slash**, a skill that costs 8 MP and hits up to 4 monsters twice.
 - Nine monsters, from Dewlings to the Flame Boar Chief boss, with patrol and chase behavior.
-- Two NPCs in the meadow village (press Up to talk).
+- Two NPCs in the meadow village. Press Up to talk: a dialogue window shows what they offer.
+- **Mira's General Store**: buy potions and starter gear, sell anything (1, 10 or 100 at a time, or all your Etc items at once).
 - EXP, leveling, HP and MP regen, fainting and respawn.
 - **Dawnshards** (currency) dropped by monsters, plus potions, monster parts and gear from per-monster drop tables.
 - MapleStory-style stats: STR, DEX, INT and LUK, 5 Ability Points per level, and a damage range worked out from your main stat and weapon.
@@ -46,7 +47,8 @@ The game is built to grow: monsters, NPCs, items, skills, effects, maps and biom
 | Inventory | I | Back |
 | Equipment | E | |
 | Character info | S | |
-| Enter a portal | Up | Up |
+| Enter a portal, talk to an NPC | Up | Up |
+| Pick a dialogue option | 1 to 9, or click | |
 | Close a window, or the menu | Esc | Start |
 | Fullscreen | F11 | |
 

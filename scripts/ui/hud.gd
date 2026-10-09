@@ -58,7 +58,10 @@ func _build_windows() -> void:
 	equipment.position = Vector2(inventory.position.x - equipment.size.x - 10, 70)
 	var stats := TDStatsWindow.new()
 	stats.position = Vector2(16, 56)
-	for pair in [["inventory", inventory], ["equipment", equipment], ["stats", stats]]:
+	# opened by talking to NPCs rather than by a key
+	var dialogue := TDDialogueWindow.new()
+	var shop := TDShopWindow.new()
+	for pair in [["inventory", inventory], ["equipment", equipment], ["stats", stats], ["dialogue", dialogue], ["shop", shop]]:
 		var w: TDWindow = pair[1]
 		w.hud = self
 		windows[pair[0]] = w
@@ -67,6 +70,14 @@ func _build_windows() -> void:
 	tooltip.set_anchors_preset(Control.PRESET_FULL_RECT)
 	tooltip.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(tooltip)
+
+## Opens an NPC's dialogue window.
+func open_dialogue(npc: TDNpc) -> void:
+	windows["dialogue"].open(npc)
+
+## Opens an NPC's shop, with the bag beside it.
+func open_shop(npc: TDNpc) -> void:
+	windows["shop"].open(npc)
 
 func toggle_window(action: String) -> void:
 	if windows.has(action):
