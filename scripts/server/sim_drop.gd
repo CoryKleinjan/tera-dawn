@@ -34,11 +34,11 @@ func step() -> void:
 func expired() -> bool:
 	return t > LIFETIME
 
-## Whether `p` may pick this up now.
-func can_loot(p: SimPlayer) -> bool:
+## Whether `p` may pick this up now, standing within `reach` of it (their pet reaches further).
+func can_loot(p: SimPlayer, reach := 26.0) -> bool:
 	return not taken and t > SETTLE_TICKS and not p.fainted() \
 		and (owner == 0 or owner == p.peer or t > OWNER_TICKS) \
-		and absf(flight.position.x - p.position.x) < 26 and absf(flight.position.y - p.position.y) < 50
+		and absf(flight.position.x - p.position.x) < reach and absf(flight.position.y - p.position.y) < 50 + (reach - 26.0) * 0.5
 
 ## What a client needs to show it: [id, item id, amount, flight state, age in ticks].
 func snapshot() -> Array:

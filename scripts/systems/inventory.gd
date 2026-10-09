@@ -1,6 +1,6 @@
 class_name Inventory
 extends RefCounted
-## The bag: one row of slots per ItemDef.Tab (Equip, Use, Etc). Use and Etc items stack up
+## The bag: one row of slots per ItemDef.Tab (Equip, Use, Etc, Setup). Use and Etc items stack up
 ## to their `max_stack`; gear takes a slot each.
 
 signal changed

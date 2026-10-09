@@ -12,6 +12,8 @@ extends ItemDef
 ## Takes you to another map: a map id, or "town" for the town of the map you're on
 ## (MapDef.return_town). Empty for none.
 @export var teleport: StringName
+## Fullness this gives the pet you have out (0 for anything that isn't pet food).
+@export var pet_food := 0
 ## Ticks before another item can be used.
 @export var cooldown := 30
 

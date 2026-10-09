@@ -21,6 +21,8 @@ var face := 1
 ## The animation the client says it is playing, passed on to everyone else on the map.
 var animation := &"idle"
 var climbing := false
+## The chair (a ChairDef id) they're sitting on, or empty.
+var chair: StringName = &""
 var hurtbox := Hitbox.new(Vector2(28, 64))
 
 var cooldown := 0     # ticks before the next attack
@@ -45,11 +47,14 @@ func stands_on(plat: Platform) -> bool:
 	return not fainted() and absf(position.y - plat.y) < 6 and plat.contains_x(position.x)
 
 ## Applies a movement report. False (and the position stays) when it isn't possible.
+## Moving gets you up off a chair.
 func report_move(at: Vector2, facing: int, anim: StringName, on_rope: bool) -> bool:
 	var ticks := maxi(1, since_move)
 	since_move = 0
 	if fainted() or at.distance_to(position) > MAX_STEP * ticks + 40.0:
 		return false
+	if chair != &"" and (at.distance_to(position) > 2.0 or on_rope):
+		chair = &""
 	position = Vector2(clampf(at.x, 0.0, float(map.def.width)), clampf(at.y, -200.0, float(map.def.height)))
 	face = 1 if facing >= 0 else -1
 	animation = anim
@@ -72,13 +77,16 @@ func step() -> bool:
 			dirty_character = true
 	if map.tick % 120 == 0:
 		var bonus := character.regen_bonus()
+		var seat := Content.items.get(chair) as ChairDef
+		if seat:
+			bonus += Vector2i(seat.regen_hp, seat.regen_mp)
 		character.health.heal(2 + character.level / 3 + bonus.x)
 		character.restore_mp(2 + character.level / 4 + bonus.y)
 		dirty_vitals = true
 	return false
 
 ## What other clients need to draw this player: [peer, name, x, y, face, animation, level,
-## flags, job, guild] (the map adds their shop sign).
+## flags, job, guild, chair, pet] (the map adds their shop sign).
 func snapshot() -> Array:
 	var flags := 0
 	if fainted():
@@ -87,4 +95,4 @@ func snapshot() -> Array:
 		flags |= TDAvatar.BLINK
 	if climbing:
 		flags |= TDAvatar.CLIMBING
-	return [peer, character.name, position.x, position.y, face, animation, character.level, flags, character.job.id, character.guild]
+	return [peer, character.name, position.x, position.y, face, animation, character.level, flags, character.job.id, character.guild, chair, character.pet]

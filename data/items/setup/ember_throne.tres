@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ChairDef" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/chair_def.gd" id="1_chair_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/ember_throne.png" id="2_ember_throne"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="3_shard_pickup"]
+
+[resource]
+script = ExtResource("1_chair_def")
+id = &"ember_throne"
+display_name = "Ember Throne"
+description = "The Molten King's seat. Mind the heat."
+icon = ExtResource("2_ember_throne")
+sprite_scale = 0.42
+glow_color = Color(1.0, 0.415686, 0.239216, 1.0)
+pickup_effect = ExtResource("3_shard_pickup")
+sell_price = 2500
+max_stack = 1
+regen_hp = 45
+regen_mp = 15

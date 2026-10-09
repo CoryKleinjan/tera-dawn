@@ -16,10 +16,11 @@ static func damage_range(job: JobDef, total: StatBlock, extra_attack := 0) -> Ve
 	return Vector2i(maxi(1, roundi(top * job.mastery)), top)
 
 ## Lowest and highest spell hit before the spell's own multiplier, from Magic Attack (which
-## includes INT): ((M² / 1000) + M) × 1.4, like MapleStory's curve.
+## includes INT): (M² / 120) + M. The square keeps spells growing as fast as weapon
+## damage, which grows with both the main stat and Weapon Attack.
 static func magic_range(job: JobDef, total: StatBlock) -> Vector2i:
 	var m := magic_attack(total)
-	var top := maxi(1, roundi((m * m / 1000.0 + m) * 1.4))
+	var top := maxi(1, roundi(m * m / 120.0 + m))
 	return Vector2i(maxi(1, roundi(top * job.mastery)), top)
 
 static func magic_attack(total: StatBlock) -> int:

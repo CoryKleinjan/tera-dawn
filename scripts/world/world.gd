@@ -119,6 +119,15 @@ func show_banner(text: String) -> void:
 	banner_text = text
 	banner_t = 180
 
+## You reached an achievement: say so, and unlock it on Steam.
+func show_achievement(id: String) -> void:
+	var a := Achievements.find(id)
+	if a.is_empty():
+		return
+	show_banner("Achievement: %s" % a["title"])
+	add_log("Achievement unlocked: %s (%s)" % [a["title"], a["text"]], Palette.SUN)
+	SteamService.unlock_achievement(a["steam"])
+
 func add_log(text: String, col: Color) -> void:
 	if not log_lines.is_empty() and log_lines[-1]["text"] == text:
 		log_lines[-1]["t"] = 300
@@ -175,6 +184,10 @@ func input_blocked() -> bool:
 ## A chat line arrived; map chat also shows in a bubble over the speaker.
 func show_chat(kind: String, from: String, text: String, from_peer: int) -> void:
 	hud.chat.add(kind, from, text)
+	if kind == "pet":
+		var owner := actor(from_peer)
+		if owner and owner.get(&"companion"):
+			(owner.get(&"companion") as TDCompanion).say(text)
 	if kind == "all":
 		var who := actor(from_peer)
 		if who:
@@ -312,15 +325,13 @@ func show_mob_death(index: int) -> void:
 		m.kill()
 		add_effect(Content.effect(&"monster_poof"), m.body_position() + Vector2(0, -m.def.size.y / 2.0), 1)
 
-func show_level_up(peer: int, level: int) -> void:
+func show_level_up(peer: int, _level: int) -> void:
 	var who := actor(peer)
 	if who == null:
 		return
 	add_effect(Content.effect(&"level_up"), who.position, 1, who)
 	if who == player:
 		player.level_up()
-		if level >= 5:
-			SteamService.unlock_achievement("REACH_LEVEL_5")
 
 func add_drop(snap: Array) -> void:
 	var d := TDDrop.create(self, snap)

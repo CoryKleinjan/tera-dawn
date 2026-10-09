@@ -68,6 +68,21 @@ func _lines() -> Array:
 			out.append(["Restores %d HP" % hp, Palette.HP, 12])
 		if mp > 0:
 			out.append(["Restores %d MP" % mp, Palette.MP, 12])
+		if u.pet_food > 0:
+			out.append(["Pet food: +%d fullness" % u.pet_food, Color("ffd9a8"), 12])
+	elif item is ChairDef:
+		var ch := item as ChairDef
+		out.append(["Setup · Chair", Color("c9b8d9"), 11])
+		out.append(["While sitting: +%d HP, +%d MP each recovery" % [ch.regen_hp, ch.regen_mp], Color("8cf0a6"), 12])
+	elif item is PetDef:
+		var pet := item as PetDef
+		out.append(["Setup · Pet", Color("c9b8d9"), 11])
+		out.append(["Picks up items within %d px of you" % roundi(pet.loot_reach), Color("8cf0a6"), 12])
+		if Game.me.pet == pet.id:
+			out.append(["Out with you · Fullness %d/100" % Game.me.pet_full, Color("ffd9a8"), 12])
+	elif item is CardDef:
+		var card := item as CardDef
+		out.append(["Monster Book card · %d/%d found" % [Game.me.book.cards(card.monster), CardDef.SET], Color("a8e6ff"), 11])
 	elif item is ScrollDef:
 		var sc := item as ScrollDef
 		out.append(["Upgrade scroll · %s" % sc.slot_text(), Color("c9b8d9"), 11])

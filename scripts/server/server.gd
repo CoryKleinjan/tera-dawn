@@ -59,6 +59,8 @@ func map_instance(id: StringName) -> MapInstance:
 
 ## Sends the player what changed about their character this tick.
 func _flush(p: SimPlayer) -> void:
+	if p.dirty_character or p.dirty_vitals or tick % 60 == 0:
+		check_achievements(p)
 	if p.dirty_character:
 		Net.send(p.peer, &"ev_character", [p.character.to_dict()])
 	elif p.dirty_vitals:
@@ -108,6 +110,8 @@ func _enter_map(p: SimPlayer, id: StringName, x: float) -> void:
 		p.map.remove_player(p)
 		p.map.broadcast(&"ev_player_left", [p.peer])
 	var m := map_instance(id)
+	p.chair = &""
+	p.character.visit(id)
 	m.add_player(p, x)
 	Net.send(p.peer, &"ev_enter_map", [id, x, m.full_state()])
 	_quest_progress(p, p.character.quests.record_visit(id))
@@ -229,6 +233,20 @@ func on_use_item(peer: int, slot: int) -> void:
 		return
 	var u := stack.item as UseDef
 	var c := p.character
+	if u.pet_food > 0:
+		var pet := c.pet_def()
+		if pet == null:
+			p.map.tell(p, "You have no pet out to feed.", MapInstance.BAD)
+			return
+		if c.pet_full >= 100:
+			p.map.tell(p, "%s isn't hungry." % pet.display_name, MapInstance.BAD)
+			return
+		c.pet_full = mini(100, c.pet_full + u.pet_food)
+		c.inventory.take(ItemDef.Tab.USE, slot, 1)
+		p.item_cd = u.cooldown
+		p.dirty_character = true
+		p.map.tell(p, "%s munches happily. (Fullness %d)" % [pet.display_name, c.pet_full], Color("8cf0a6"))
+		return
 	var dest := &""
 	if u.teleport != &"":
 		dest = p.map.def.return_town() if u.teleport == &"town" else u.teleport
@@ -247,6 +265,41 @@ func on_use_item(peer: int, slot: int) -> void:
 	if dest != &"":
 		_enter_map(p, dest, Content.map(dest).start_x)
 
+## Uses what's in Setup slot `slot`: sit on a chair (or get up), or bring out a pet (or
+## send it home).
+func on_setup(peer: int, slot: int) -> void:
+	var p := _player(peer)
+	if p == null or slot < 0 or slot >= Inventory.SLOTS:
+		return
+	var stack := p.character.inventory.at(ItemDef.Tab.SETUP, slot)
+	if stack == null:
+		return
+	var c := p.character
+	if stack.item is ChairDef:
+		if p.chair == stack.item.id:
+			p.chair = &""
+		elif p.fainted() or p.climbing or p.map.layout.platform_under(p.position) == null:
+			p.map.tell(p, "You can't sit here.", MapInstance.BAD)
+			return
+		else:
+			p.chair = stack.item.id
+			c.count("sat")
+			p.dirty_character = true
+		Net.send(peer, &"ev_sit", [p.chair])
+	elif stack.item is PetDef:
+		var pet := stack.item as PetDef
+		if c.pet == pet.id:
+			c.pet = &""
+			p.map.tell(p, "%s went home." % pet.display_name, Palette.MIST)
+		else:
+			c.pet = pet.id
+			c.pet_full = maxi(c.pet_full, 20)
+			c.count("pets")
+			p.map.tell(p, "%s came out to play! It picks up things near you." % pet.display_name, Color("8cf0a6"))
+			if not pet.chatter.is_empty():
+				p.map.broadcast(&"ev_chat", ["pet", pet.display_name, pet.chatter.pick_random(), p.peer])
+		p.dirty_character = true
+
 ## Uses the scroll in Use slot `use_slot` on the gear in Equip slot `equip_slot`.
 func on_scroll(peer: int, use_slot: int, equip_slot: int) -> void:
 	var p := _player(peer)
@@ -260,6 +313,7 @@ func on_scroll(peer: int, use_slot: int, equip_slot: int) -> void:
 		return
 	p.dirty_character = true
 	if result["worked"]:
+		p.character.count("scrolls")
 		p.map.tell(p, "The scroll worked! %s is now %s." % [name, gear.display_name()], Color("8cf0a6"))
 		p.map.broadcast(&"ev_effect", [&"level_up", p.position.x, p.position.y, 1, peer])
 	else:
@@ -336,7 +390,17 @@ func on_drop_item(peer: int, tab: int, slot: int) -> void:
 # ---------- quests ----------
 
 func record_kill(p: SimPlayer, monster: MonsterDef) -> void:
+	p.character.book.record_kill(monster)
+	if monster.boss:
+		p.character.count("bosses")
 	_quest_progress(p, p.character.quests.record_kill(monster))
+
+## Tells the player about achievements they've just reached; their game unlocks them on Steam.
+func check_achievements(p: SimPlayer) -> void:
+	for a in Achievements.check(p.character):
+		p.dirty_character = true
+		Net.send(p.peer, &"ev_achievement", [a["id"]])
+		p.map.broadcast(&"ev_effect", [&"level_up", p.position.x, p.position.y, 1, p.peer])
 
 ## Shows how quests that collect `item` are going after picking one up.
 func picked_up(p: SimPlayer, item: ItemDef) -> void:

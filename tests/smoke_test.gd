@@ -128,6 +128,30 @@ func _check_content() -> void:
 
 ## Every portal leads somewhere with a portal back, every map can be reached from the
 ## meadow, and every item a quest asks for can be found.
+## Every job can fight monsters of its level, and levels take a sensible number of kills
+## (see Balance and tests/balance_report.tscn).
+func _check_balance() -> void:
+	var worst := ""
+	var slow := ""
+	for m: MonsterDef in Content.monsters.values():
+		if m.boss:
+			continue
+		for j in Balance.LINES:
+			var hits := Balance.hits_to_kill(Balance.typical(j, m.level), m)
+			if hits < Balance.BAND.x - 0.2 or hits > Balance.BAND.y:
+				worst += " %s/%s %.1f" % [j, m.id, hits]
+		var kills := Balance.kills_per_level(m.level, m)
+		if kills > 60.0:
+			slow += " %s %.0f" % [m.id, kills]
+	_check(worst == "", "every job beats monsters of its level in a few hits%s" % worst)
+	_check(slow == "", "no monster takes too many kills a level%s" % slow)
+	var c := Character.new()
+	_check(c.xp_need(1) < 20 and c.xp_need(30) > c.xp_need(20) * 2, "early levels are quick and later ones take longer")
+	var steam_ids := {}
+	for a in Achievements.LIST:
+		steam_ids[a["steam"]] = true
+	_check(steam_ids.size() == Achievements.LIST.size() and not steam_ids.has(""), "every achievement has its own Steam id")
+
 func _check_world_graph() -> void:
 	var problems := []
 	for id in Content.maps:
@@ -327,6 +351,7 @@ func _teleport(at: Vector2) -> void:
 
 func _run() -> void:
 	_check_content()
+	_check_balance()
 	_clear_saves()
 	_check_character()
 	# Play single player against a server inside this game, with test-only saves.
@@ -546,6 +571,7 @@ func _run() -> void:
 	await _check_travel()
 	await _check_fields()
 	await _check_social()
+	await _check_keepsakes()
 
 	# Dawn Slash costs MP and hits several monsters.
 	var mp_before := Game.me.mp
@@ -902,13 +928,15 @@ func _check_travel() -> void:
 ## and upgrade scrolls.
 func _check_fields() -> void:
 	var ch := _me().character
-	_me().inv = 0
+	# a monster bumping you off the portal would make this flaky
+	_me().inv = 100000
 	var west: PortalDef = Content.map(&"meadow").portals.filter(func(p: PortalDef) -> bool: return p.target_map == &"sunny_slope")[0]
 	_teleport(Vector2(west.x, 620))
 	await _ticks(2)
 	await _tap("move_up")
 	await _ticks(4)
 	_check(world.map.id == &"sunny_slope", "the meadow's west portal leads to Sunny Slope")
+	_me().inv = 0
 	# a Sporecap splits into Spore Puffs when it's defeated
 	Net.server._enter_map(_me(), &"mushroom_dell", 300)
 	await _ticks(3)
@@ -1122,7 +1150,7 @@ func _check_social() -> void:
 	stall.open_shop()
 	await _ticks(3)
 	_check(social.shops.has(_me().peer) and world.hud.selling() and Game.me.inventory.count_of(Content.item(&"petal_wing")) == 0, "opening a shop puts your goods on display")
-	_check(Net.server.maps[&"free_market"].snapshot()["players"].any(func(s: Array) -> bool: return s[10] == stall.shop_title), "others see the shop sign")
+	_check(Net.server.maps[&"free_market"].snapshot()["players"].any(func(s: Array) -> bool: return s[12] == stall.shop_title), "others see the shop sign")
 	var before := ch.shards
 	social.on_shop_view(ally.peer, _me().peer)
 	social.on_shop_buy(ally.peer, _me().peer, 0, &"petal_wing")
@@ -1137,6 +1165,84 @@ func _check_social() -> void:
 	_check(Game.social.get("party", {}).is_empty(), "a party of one breaks up")
 	Net.server._enter_map(_me(), &"meadow", 300)
 	await _ticks(3)
+
+## Chairs, pets, the Monster Book and achievements.
+func _check_keepsakes() -> void:
+	var me := _me()
+	var ch := me.character
+	var map := me.map
+	me.inv = 100000
+	_teleport(Vector2(300, 620))
+	await _ticks(3)
+	# chairs: sit, heal faster, get up by moving
+	var stool: ChairDef = Content.item(&"wooden_stool")
+	ch.inventory.add(stool)
+	me.dirty_character = true
+	await _ticks(2)
+	var inv: TDInventoryWindow = world.hud.windows["inventory"]
+	inv.tab = ItemDef.Tab.SETUP
+	inv.use_slot(Game.me.inventory.find(stool))
+	await _ticks(3)
+	_check(me.chair == &"wooden_stool" and world.player.sitting == &"wooden_stool" and world.player._animation() == &"sit", "double-clicking a chair sits you on it")
+	_check(ch.achievements.has("take_a_seat") and world.banner_text == "Achievement: Take a Seat", "sitting down earns an achievement")
+	ch.health.set_hp(10)
+	var hp := ch.health.hp
+	map.tick = (map.tick / 120 + 1) * 120 - 1
+	await _ticks(1)
+	_check(ch.health.hp - hp == 2 + ch.level / 3 + ch.regen_bonus().x + stool.regen_hp, "a chair adds to HP recovery")
+	await _hold("move_right", 6)
+	await _ticks(4)
+	_check(me.chair == &"" and world.player.sitting == &"", "moving gets you up")
+	# pets: bring one out, it picks things up nearby, it eats, it gets hungry
+	var pup: PetDef = Content.item(&"pet_puffpaw")
+	ch.inventory.add(pup)
+	ch.inventory.add(Content.item(&"pet_snack"), 2)
+	me.dirty_character = true
+	await _ticks(2)
+	Net.ask(&"req_setup", [Game.me.inventory.find(pup)])
+	await _ticks(3)
+	_check(ch.pet == &"pet_puffpaw" and Game.me.pet == &"pet_puffpaw" and world.player.companion.pet == pup, "double-clicking a pet brings it out")
+	var wing := Content.item(&"petal_wing")
+	var wings := ch.inventory.count_of(wing)
+	var x := me.position.x + 110.0
+	map.spawn_drop(wing, 1, null, DropFlight.create(Vector2(x, 600), 620.0, x), me.peer)
+	await _ticks(SimDrop.SETTLE_TICKS + pup.loot_every * 2 + 4)
+	_check(ch.inventory.count_of(wing) == wings + 1, "a pet picks up items out of your reach")
+	ch.pet_full = 40
+	Net.ask(&"req_use_item", [Game.me.inventory.find(Content.item(&"pet_snack"))])
+	await _ticks(2)
+	_check(ch.pet_full == 70, "pet food fills your pet up")
+	ch.pet_full = 5
+	map.tick = (map.tick / pup.hunger_ticks + 1) * pup.hunger_ticks - 1
+	await _ticks(3)
+	_check(ch.pet == &"" and Game.me.pet == &"", "a hungry pet goes home")
+	# the Monster Book: kills and cards
+	var dew: MonsterDef = Content.monster(&"dewling")
+	_check(ch.book.kills(dew) > 0, "the Monster Book counts kills")
+	_check(Content.card(dew) is CardDef and Content.card(dew).monster == dew, "every monster has a card")
+	ch.book.pages[&"mossling"] = [1, CardDef.SET]
+	ch.book.pages[&"petal_bat"] = [1, CardDef.SET]
+	ch.book.pages[dew.id] = [ch.book.kills(dew), CardDef.SET - 1]
+	ch.recalc()
+	var strength := ch.stats.strength
+	map.spawn_drop(Content.card(dew), 1, null, DropFlight.create(me.position + Vector2(0, -20), 620.0, me.position.x), me.peer)
+	await _ticks(SimDrop.SETTLE_TICKS + 3)
+	await _tap("loot")
+	await _ticks(3)
+	_check(ch.book.cards(dew) == CardDef.SET and Game.me.book.complete(dew), "picking up a card fills in the book")
+	_check(ch.book.level() == 2 and ch.stats.strength == strength + 1, "completed pages raise the book's level and your stats")
+	_check(ch.achievements.has("first_hunt") and ch.achievements.has("first_page") and Game.me.achievements.has("first_page"), "kills and pages earn achievements")
+	await _press("collection")
+	var book: TDCollectionWindow = world.hud.windows["collection"]
+	book.show_monster(dew)
+	_check(book.visible and book.selected == dew and book.pages() >= 2, "L opens the Monster Book")
+	await _press("collection")
+	# everything saves
+	var copy := Character.create("Copy")
+	copy.load_dict(ch.to_dict())
+	_check(copy.book.cards(dew) == CardDef.SET and copy.achievements == ch.achievements and copy.visited == ch.visited
+		and copy.counters.get("sat", 0) == 1 and copy.pet_full == ch.pet_full, "the book, achievements and pet save")
+	me.inv = 0
 
 func server_forfeit_check(ch: Character) -> void:
 	Net.ask(&"req_quest_forfeit", [&"q04_sweet_nectar"])

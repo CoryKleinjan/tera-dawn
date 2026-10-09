@@ -278,6 +278,44 @@ func _run() -> void:
 			f.map.remove_player(f)
 		Net.server._enter_map(_me(), &"meadow", 300)
 		await _physics(10)
+	if only == "" or only == "keepsakes":
+		# Sitting on a chair with a pet out, a friend doing the same, and the Monster Book.
+		var meadow: MapInstance = Net.server.maps[&"meadow"]
+		_teleport(world, Vector2(900, 620))
+		p.face = 1
+		var friend := SimPlayer.new(400, Character.create("Mossy"))
+		meadow.add_player(friend, 1060.0)
+		friend.face = -1
+		friend.chair = &"cushion_chair"
+		friend.animation = &"sit"
+		friend.character.pet = &"pet_sprout"
+		for id in [&"ember_throne", &"pet_emberkit"]:
+			ch.inventory.add(Content.item(id))
+		_me().dirty_character = true
+		await _physics(3)
+		for id in [&"ember_throne", &"pet_emberkit"]:
+			Net.ask(&"req_setup", [Game.me.inventory.find(Content.item(id))])
+		var dew: MonsterDef = Content.monster(&"dewling")
+		for id in [&"dewling", &"mossling", &"petal_bat", &"sproutcap", &"spore_puff", &"sporecap", &"tide_dewling", &"ember_boar", &"cinder_imp"]:
+			ch.book.pages[id] = [40 + id.length() * 7, mini(5, id.length() % 6)]
+		ch.book.pages[dew.id] = [212, 5]
+		ch.achievements.append_array(["first_hunt", "level_10", "first_job", "take_a_seat", "best_friend", "collector"])
+		_me().dirty_character = true
+		await _physics(240)
+		world.log_lines.clear()
+		await _frames(3)
+		await _shot("chairs_pets")
+		world.hud.toggle_window("collection")
+		world.hud.windows["collection"].show_monster(dew)
+		await _frames(3)
+		await _shot("keepsakes")
+		world.hud.windows["collection"].tab = 1
+		await _frames(3)
+		await _shot("achievements")
+		world.hud.toggle_window("collection")
+		meadow.remove_player(friend)
+		Net.ask(&"req_setup", [Game.me.inventory.find(Content.item(&"ember_throne"))])
+		await _physics(3)
 	if only == "" or only == "players":
 		# Two other players nearby. They're on the server but have no game connected.
 		_teleport(world, Vector2(1300, 620))
@@ -311,14 +349,16 @@ func _run() -> void:
 		_me().dirty_character = true
 		_teleport(world, Vector2(1120, 620))
 		await _physics(5)
-		for action in TDHud.WINDOW_ACTIONS:
+		# the everyday windows (the world map, community and collection have their own shots)
+		var everyday := TDHud.WINDOW_ACTIONS.slice(0, 5)
+		for action in everyday:
 			world.hud.toggle_window(action)
 		var inv: TDInventoryWindow = world.hud.windows["inventory"]
 		var helm := _slot_of(&"ember_helm")
 		world.hud.tooltip.show_item(inv, Game.me.inventory.at(ItemDef.Tab.EQUIP, helm), inv.global_position + inv.slot_rect(helm).get_center(), "Double-click to equip", true)
 		await _frames(3)
 		await _shot("windows")
-		for action in TDHud.WINDOW_ACTIONS:
+		for action in everyday:
 			world.hud.toggle_window(action)
 	if only == "" or only == "drops":
 		# A spread of loot on the ground: Dawnshards, a potion, an Etc item and gear.

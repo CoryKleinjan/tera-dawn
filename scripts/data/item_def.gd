@@ -2,11 +2,12 @@ class_name ItemDef
 extends Resource
 ## An item that can drop and be picked up. Currency (Dawnshards) goes straight to the wallet;
 ## everything else goes into the inventory tab that `tab()` names.
-## Plain ItemDefs are Etc items (monster parts, quest pieces); EquipDef and UseDef extend this.
+## Plain ItemDefs are Etc items (monster parts, quest pieces); EquipDef, UseDef, ChairDef,
+## PetDef and CardDef extend this.
 
 ## The inventory tabs, in the order the window shows them.
-enum Tab { EQUIP, USE, ETC }
-const TAB_NAMES := ["Equip", "Use", "Etc"]
+enum Tab { EQUIP, USE, ETC, SETUP }
+const TAB_NAMES := ["Equip", "Use", "Etc", "Setup"]
 
 @export var id: StringName
 @export var display_name := ""

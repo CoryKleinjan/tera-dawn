@@ -30,6 +30,6 @@ offer_text = "Sporecaps have taken over the dell west of the meadow, and when yo
 progress_text = "Twelve Sporecaps in Mushroom Dell, west of the meadow, past Sunny Slope."
 complete_text = "The air smells sweeter already. Here, for your trouble."
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1")])
-reward_xp = 260
+reward_xp = 422
 reward_shards = 300
 reward_items = Array[ExtResource("4_drop_entry")]([SubResource("Resource_2")])
