@@ -39,6 +39,8 @@ extends Resource
 @export var advance_requirements: StatBlock
 ## Items handed over when advancing (each gives `min_amount`).
 @export var advance_gifts: Array[DropEntry] = []
+## Skill Points handed over when advancing, so the new job has something to learn right away.
+@export var advance_sp := 0
 
 @export_group("New character")
 @export var starting_stats: StatBlock

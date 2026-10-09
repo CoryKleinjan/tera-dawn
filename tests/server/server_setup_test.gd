@@ -203,7 +203,7 @@ func test_others_see_the_achievement_sparkle() -> void:
 	h.ask(2, &"req_setup", [1])
 	h.step(1)
 	check_eq(h.last(2, &"ev_achievement"), ["best_friend"], "pet achievement")
-	check_eq(h.last(3, &"ev_effect")[0], &"level_up", "Bob sees the effect")
+	check_eq(h.last(3, &"ev_effect")[0], &"celebrate", "Bob sees the sparkle, not a level up")
 	check_eq(h.count(3, &"ev_achievement"), 0, "but isn't sent the achievement")
 
 func test_a_first_kill_earns_first_hunt() -> void:
