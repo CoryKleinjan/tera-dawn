@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="Resource" path="res://data/monsters/prism_bit.tres" id="2_prism_bit"]
-[ext_resource type="SpriteFrames" path="res://assets/animations/dewling.tres" id="3_dewling"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/prism_slime.tres" id="anim"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="5_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/prism_jelly.tres" id="6_prism_jelly"]
@@ -99,7 +99,6 @@ boss = false
 flying = false
 splits_into = ExtResource("2_prism_bit")
 split_count = 3
-sprite_frames = ExtResource("3_dewling")
-sprite_scale = 1.3
-tint = Color(1.0, 0.752941, 1.0, 1.0)
+sprite_frames = ExtResource("anim")
+sprite_scale = 1.0
 drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10")])

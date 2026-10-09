@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/data/use_def.gd" id="script"]
 [ext_resource type="Texture2D" path="res://assets/sprites/items/elixir.png" id="icon"]
 [ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="pickup"]
-[ext_resource type="Resource" path="res://data/effects/heal.tres" id="heal"]
+[ext_resource type="Resource" path="res://data/effects/buff_rise.tres" id="heal"]
 
 [resource]
 script = ExtResource("script")

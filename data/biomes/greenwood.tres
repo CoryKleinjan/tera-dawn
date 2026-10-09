@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="BiomeDef" load_steps=49 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/biome_def.gd" id="1_biome_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ground/meadow_top.png" id="2_meadow_top"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ground/meadow_side.png" id="3_meadow_side"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ground/meadow_soil.png" id="4_meadow_soil"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground/greenbough_top.png" id="2_meadow_top"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground/greenbough_side.png" id="3_meadow_side"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground/greenbough_soil.png" id="4_meadow_soil"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/ground_left.png" id="5_ground_left"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/ground_middle.png" id="6_ground_middle"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/ground_right.png" id="7_ground_right"]

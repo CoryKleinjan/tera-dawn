@@ -24,6 +24,12 @@ Writes:
   back views), round and kite shields.
 - assets/sprites/characters/weapons/<kind>.png: held weapons, pointing right, greyscale.
 
+A hairstyle with a sheet drawn in every pose (art/sheets/hair_<style>_frames.json, the body
+wearing the hair on the body sheet's grid) uses that instead of its one front piece: the
+hair is lifted off each pose and set on the hero's head, so it sways with him. Under every
+hairstyle the top and back of his bald head are repainted in hair greys, so no pose shows
+scalp where the hair doesn't reach.
+
 Hair, cape, shields and weapons are greyscale; the game tints them (hair colour, the worn
 item's colour). The irises are split off the faces into their own layer for the eye colour.
 """
@@ -68,8 +74,11 @@ FACES = ["bright", "determined", "rosy", "freckled", "cheeky"]
 WEAPON_KINDS = ["sword", "bow", "wand", "staff", "claw", "knuckle", "gun"]
 
 # Sizes against the head's radius r (measured on the body).
-HAIR_WIDTH = 2.3      # a hairstyle's front piece is this wide
+HAIR_WIDTH = 2.5      # a hairstyle's front piece is this wide
 HAIR_LIFT = 0.12      # and starts this far above the scalp
+SCALP = 0.1           # the scalp under the hair: the head above this far over its centre,
+SCALP_BACK = 0.45     # and behind this far back of it (any height down to SCALP_NAPE)
+SCALP_NAPE = 0.55
 FACE_WIDTH = 1.1      # the face (eyes to mouth) is this wide
 FACE_AT = (0.2, 0.3)  # and centred this far forward and down from the head's centre
 NECK = 0.95           # the neck is this far below the head's centre
@@ -187,6 +196,150 @@ def cut(manifest):
     return {k.split(":", 1)[1]: Piece(v) for k, v in sprites.items()}
 
 
+# ---------- the scalp ----------
+
+def hair_grey(img):
+    """The middle grey of a hair piece (0..255)."""
+    arr = np.asarray(img).astype(float)
+    solid = arr[..., 3] > 0
+    return float(np.median(arr[solid][:, :3].mean(1))) if solid.any() else 128.0
+
+
+def scalp(px, fi, back_view, grey):
+    """The top and back of the bald head in one body frame, repainted in hair greys with the
+    head's own shading. It goes under the hairstyle, so no pose shows a bald patch where the
+    hair piece doesn't reach (the back of the head in a slash, the crown when he looks up)."""
+    h, w = px.shape[:2]
+    yy, xx = np.mgrid[0:h, 0:w]
+    dx, dy = xx - fi["head"][0], yy - fi["head"][1]
+    r = fi["r"]
+    up, fwd = turned((0, -1), fi["tilt"]), turned((1, 0), fi["tilt"])
+    above = (dx * up[0] + dy * up[1]) / r
+    ahead = (dx * fwd[0] + dy * fwd[1]) / r
+    head = (dx * dx + dy * dy <= (1.45 * r) ** 2) & (px[..., 3] > 127)
+    if back_view:
+        on = head & (above > -SCALP_NAPE)
+    else:
+        on = head & ((above > SCALP) | ((ahead < -SCALP_BACK) & (above > -SCALP_NAPE)))
+    rgb = px[..., :3].astype(float)
+    lum = rgb.mean(2)
+    skin = on & (lum > 90)
+    ref = np.median(lum[skin]) if skin.any() else 200.0
+    out = np.zeros((h, w, 4), np.uint8)
+    shade = (lum * grey / ref).clip(0, 255)
+    out[..., 0] = out[..., 1] = out[..., 2] = np.where(skin, shade, lum).round().astype(np.uint8)
+    out[..., 3] = np.where(on, 255, 0)
+    return Image.fromarray(out, "RGBA")
+
+
+# ---------- hair drawn in every pose ----------
+
+# Poses where the drawn body matches the hero's closely enough to measure how the drawn
+# heads line up with his (the others are placed by the head alone, see posed_hair).
+STEADY_POSES = ("idle1", "idle2", "idle3", "idle4", "walk1", "walk2", "walk3", "walk4")
+
+
+def hair_mask(arr):
+    """The hair in a cell of a hair_<style>_frames sheet (RGBA): everything near its greys
+    that isn't the body it's drawn on (peach skin, sky-blue shorts)."""
+    rgb = arr[..., :3].astype(float)
+    mx, mn = rgb.max(2), rgb.min(2)
+    solid = arr[..., 3] > 0
+    grey = solid & (mx - mn < 0.15 * np.maximum(mx, 1)) & (mx > 60)
+    skin = solid & (rgb[..., 0] > 150) & (rgb[..., 0] > rgb[..., 2] + 40)
+    shorts = solid & (rgb[..., 2] > rgb[..., 0] + 40)
+    hair = solid & ~skin & ~shorts & ss.dilate(grey, 3)
+    lab, n = ss.label(hair)  # drop specks of the body's outline caught near the hair
+    if n > 1:
+        sizes = np.bincount(lab.ravel())[1:]
+        hair &= np.isin(lab, 1 + np.nonzero(sizes >= sizes.max() * 0.05)[0])
+    return hair
+
+
+def drawn_head(arr):
+    """The centre and radius of the head (with its hair) in a drawn pose."""
+    d = distance_inside(arr[..., 3] > 0)
+    r = d.max()
+    ys, xs = np.nonzero(d >= r * 0.8)
+    return np.array([xs.mean(), ys.mean()]), float(r)
+
+
+def body_fit(arr, hair, px):
+    """Lines the body a pose was drawn on up with the hero's: (scale, x, y) of the best overlap."""
+    figure = (arr[..., 3] > 0) & ~ss.dilate(hair, 1)
+    ours = px[..., 3] > 127
+    oy, ox = np.nonzero(ours)
+    best = None
+    for s in (0.46, 0.48, 0.5, 0.52, 0.54):
+        m = np.asarray(Image.fromarray((figure * 255).astype(np.uint8)).resize(
+            (max(1, round(figure.shape[1] * s)), max(1, round(figure.shape[0] * s))), Image.BOX)) > 127
+        my, mx_ = np.nonzero(m)
+        if not len(my):
+            continue
+        x0 = int(round(ox.mean() - mx_.mean()))
+        y0 = int(oy.max() - my.max())
+        for dy in range(-12, 13):
+            for dx in range(-12, 13):
+                score = overlap(m, ours, x0 + dx, y0 + dy)
+                if best is None or score > best[0]:
+                    best = (score, s, x0 + dx, y0 + dy)
+    return best[1:]
+
+
+def overlap(m, ours, x, y):
+    """How well mask `m` placed at (x, y) covers `ours`: shared pixels minus half the pixels
+    it puts off the body."""
+    h, w = ours.shape
+    mh, mw = m.shape
+    sx0, sy0 = max(0, -x), max(0, -y)
+    ex, ey = min(mw, w - x), min(mh, h - y)
+    if ex <= sx0 or ey <= sy0:
+        return -1e9
+    part = m[sy0:ey, sx0:ex]
+    under = ours[y + sy0:y + ey, x + sx0:x + ex]
+    return (part & under).sum() - 0.5 * (part & ~under).sum() - 0.5 * (m.sum() - part.sum())
+
+
+def head_link(cells, names, info, frames):
+    """How a drawn head maps onto the hero's, measured on the steady poses: the scale against
+    the two heads' radii, and where the drawn head's centre lands, in hero head radii from
+    his head's centre."""
+    ks, offs = [], []
+    for n, fi, px in zip(names, info, frames):
+        arr = cells.get(n)
+        if n not in STEADY_POSES or arr is None:
+            continue
+        s, x, y = body_fit(arr, hair_mask(arr), px)
+        c, r = drawn_head(arr)
+        ks.append(s * r / fi["r"])
+        offs.append((np.array([x, y]) + c * s - fi["head"]) / fi["r"])
+    return float(np.median(ks)), np.median(np.array(offs), axis=0)
+
+
+def hides_face(img, fi):
+    """Whether hair covers most of the face (the middle of it, where the eyes are)."""
+    at = fi["head"] + turned(FACE_AT, fi["tilt"]) * fi["r"]
+    a = np.asarray(img)[..., 3] > 0
+    yy, xx = np.mgrid[0:a.shape[0], 0:a.shape[1]]
+    face = (xx - at[0]) ** 2 + (yy - at[1]) ** 2 <= (fi["r"] * 0.35) ** 2
+    return a[face].mean() > 0.5
+
+
+def posed_hair(arr, fi, link):
+    """The hair of one drawn pose, shrunk to the hero's size, with the drawn head's centre on
+    his. Returns (image, top-left)."""
+    k, off = link
+    hair = hair_mask(arr)
+    c, r = drawn_head(arr)
+    s = k * fi["r"] / r
+    at = fi["head"] + turned(off, fi["tilt"]) * fi["r"] - c * s
+    cut = arr.copy()
+    cut[~hair] = 0
+    grey = cut[..., :3].mean(2, keepdims=True)
+    cut[..., :3] = np.repeat(grey, 3, 2).round().astype(np.uint8)
+    return scaled(Image.fromarray(cut, "RGBA"), s), (int(round(at[0])), int(round(at[1])))
+
+
 # ---------- weapons ----------
 
 def weapon(piece, s):
@@ -264,26 +417,59 @@ def main():
     blank = lambda: Image.new("RGBA", (fw, fh))  # noqa: E731
 
     # hair: one transform per style from its front piece, used for all four pieces
+    old = {}
     for style in HAIRSTYLES:
         front = hair[style + "_front"]
         s = r * HAIR_WIDTH / front.img.width
         head_cell = (front.x + front.img.width / 2, front.y + (r * (1 + HAIR_LIFT)) / s)
+        grey = hair_grey(front.img)
         out = {"": [], "_back": [], "_hat": []}
-        for n, fi in zip(names, info):
+        for n, fi, px in zip(names, info, frames):
             back_view = n in BACK_VIEW
+            fs = s * fi["r"] / r  # heads are drawn a little bigger or smaller in some poses
             pieces = {"": "_behind" if back_view else "_front", "_back": None if back_view else "_back",
                       "_hat": "_behind" if back_view else "_hat"}
             for layer, which in pieces.items():
                 canvas = blank()
                 p = hair.get(style + which) if which else None
                 if p:
-                    img = scaled(p.img, s)
-                    anchor = ((head_cell[0] - p.x) * s, (head_cell[1] - p.y) * s)
+                    if layer != "_back":
+                        canvas.alpha_composite(scalp(px, fi, back_view, grey))
+                    img = scaled(p.img, fs)
+                    anchor = ((head_cell[0] - p.x) * fs, (head_cell[1] - p.y) * fs)
                     place(canvas, img, anchor, fi["head"], fi["tilt"])
                 out[layer].append(canvas)
+        old[style] = out[""]
         for layer, fr in out.items():
             if any(im.getbbox() for im in fr):
                 save_layer(f"hair_{style}{layer}", fr, fw, fh, index, anims)
+
+    # hairstyles drawn in every pose (hair_<style>_frames sheets) replace the front piece
+    for style in HAIRSTYLES:
+        manifest = os.path.join(ss.SHEETS, f"hair_{style}_frames.json")
+        if os.path.exists(manifest):
+            drawn = cut(f"hair_{style}_frames")
+            cells = {n: np.asarray(drawn[spec["frames"][n].split(":", 1)[1]].img) for n in names
+                     if spec["frames"][n].split(":", 1)[1] in drawn}
+            link = head_link(cells, names, info, frames)
+            out = []
+            for n, fi, px in zip(names, info, frames):
+                canvas = blank()
+                canvas.alpha_composite(scalp(px, fi, n in BACK_VIEW, 128))
+                drawn_hair = blank()
+                if n in cells:
+                    hair_img, at = posed_hair(cells[n], fi, link)
+                    _paste(drawn_hair, hair_img, *at)
+                if n in BACK_VIEW or not hides_face(drawn_hair, fi):
+                    canvas.alpha_composite(drawn_hair)
+                else:  # drawn in a pose too unlike his (lying face down): the one-piece hair
+                    canvas = old[style][index[n]]
+                out.append(canvas)
+            save_layer(f"hair_{style}", out, fw, fh, index, anims)
+            for gone in ("_back",):  # the drawn poses include the hair behind the head
+                for path in (os.path.join(LAYERS, f"hair_{style}{gone}.png"), os.path.join(ANIMS, f"hair_{style}{gone}.tres")):
+                    if os.path.exists(path):
+                        os.remove(path)
 
     # faces: the irises (drawn in greys) go on their own layer for the eye colour
     for face in FACES:

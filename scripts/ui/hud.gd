@@ -18,6 +18,8 @@ var title: Control
 ## The title card (name, Play, Host, Join, Settings, Quit), hidden while the character
 ## creator, the game menu or the settings screen is showing.
 var title_card: Control
+## The key art behind the title screen.
+var title_backdrop: TextureRect
 var creator: TDCreator
 var game_menu: TDGameMenu
 var settings_menu: TDSettingsMenu
@@ -208,6 +210,14 @@ func _build_title() -> void:
 	title.theme = ui_theme
 	title.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(title)
+	# the key art behind the title screen and the creator (not behind the Esc menu)
+	title_backdrop = TextureRect.new()
+	title_backdrop.texture = UiSkin.tex("title_backdrop")
+	title_backdrop.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	title_backdrop.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	title_backdrop.set_anchors_preset(Control.PRESET_FULL_RECT)
+	title_backdrop.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	title.add_child(title_backdrop)
 	title_card = CenterContainer.new()
 	title_card.set_anchors_preset(Control.PRESET_FULL_RECT)
 	title.add_child(title_card)
@@ -416,6 +426,7 @@ func show_title(paused: bool) -> void:
 	if settings_menu.visible:
 		settings_menu.close()
 	title_card.visible = not paused
+	title_backdrop.visible = not paused
 	title.show()
 	if paused:
 		game_menu.open()

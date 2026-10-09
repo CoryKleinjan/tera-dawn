@@ -1,0 +1,139 @@
+{
+  "source": "art/source/npcs_harbor_2.png",
+  "grid": {
+    "rows": [
+      1,
+      511,
+      1022
+    ],
+    "cols": [
+      1,
+      383,
+      768,
+      1151,
+      1534
+    ]
+  },
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/npcs_harbor_2",
+  "cells": [
+    [
+      "harbor_store_1",
+      "harbor_outfitter_1",
+      "harbor_taxi_1",
+      "storage_keeper_1"
+    ],
+    [
+      "harbor_store_2",
+      "harbor_outfitter_2",
+      "harbor_taxi_2",
+      "storage_keeper_2"
+    ]
+  ],
+  "overrides": {
+    "harbor_store_1": {
+      "scale": 0.207
+    },
+    "harbor_store_2": {
+      "scale": 0.207
+    },
+    "harbor_outfitter_1": {
+      "scale": 0.206
+    },
+    "harbor_outfitter_2": {
+      "scale": 0.206
+    },
+    "harbor_taxi_1": {
+      "scale": 0.194
+    },
+    "harbor_taxi_2": {
+      "scale": 0.194
+    },
+    "storage_keeper_1": {
+      "scale": 0.208
+    },
+    "storage_keeper_2": {
+      "scale": 0.208
+    }
+  },
+  "sets": {
+    "harbor_store": {
+      "frames": {
+        "idle1": "npcs_harbor_2:harbor_store_1",
+        "idle2": "npcs_harbor_2:harbor_store_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/harbor_store.png",
+      "sprite_frames": "assets/animations/npc_harbor_store.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "harbor_outfitter": {
+      "frames": {
+        "idle1": "npcs_harbor_2:harbor_outfitter_1",
+        "idle2": "npcs_harbor_2:harbor_outfitter_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/harbor_outfitter.png",
+      "sprite_frames": "assets/animations/npc_harbor_outfitter.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "harbor_taxi": {
+      "frames": {
+        "idle1": "npcs_harbor_2:harbor_taxi_1",
+        "idle2": "npcs_harbor_2:harbor_taxi_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/harbor_taxi.png",
+      "sprite_frames": "assets/animations/npc_harbor_taxi.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "storage_keeper": {
+      "frames": {
+        "idle1": "npcs_harbor_2:storage_keeper_1",
+        "idle2": "npcs_harbor_2:storage_keeper_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/storage_keeper.png",
+      "sprite_frames": "assets/animations/npc_storage_keeper.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 1.5
+        }
+      }
+    }
+  }
+}

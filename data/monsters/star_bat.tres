@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="Resource" path="res://data/projectiles/mob_bolt.tres" id="2_mob_bolt"]
-[ext_resource type="SpriteFrames" path="res://assets/animations/petal_bat.tres" id="3_petal_bat"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/star_bat.tres" id="anim"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="5_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/star_wing.tres" id="6_star_wing"]
@@ -99,7 +99,6 @@ boss = false
 flying = true
 hover_height = 56.0
 shot = ExtResource("2_mob_bolt")
-sprite_frames = ExtResource("3_petal_bat")
+sprite_frames = ExtResource("anim")
 sprite_scale = 1.0
-tint = Color(0.501961, 0.501961, 1.0, 1.0)
 drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10")])
