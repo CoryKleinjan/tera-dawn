@@ -163,6 +163,10 @@ layers (or add one here) rather than a raw number.
    the world map (1000 x 600 units), `level_text`, and either `town = true` or the
    `return_map` where fainting and Return Scrolls send you.
 
+An NpcDef with `storage = true` keeps the player's storage (`Character.storage`, an
+Inventory saved with the character; `TDServer.on_store` / `on_retrieve`, `TDStorageWindow`).
+The same NpcDef can stand in several maps (Brin is in every town).
+
 Travel NPCs (ships, wagons) list **TravelRoute**s in `NpcDef.travel` (destination, arrival x,
 fare, "Ship"/"Wagon"); their dialogue offers "Travel" and `TDServer.on_travel` moves the
 player. A **UseDef** with `teleport` set to a map id, or to `town`, is a return scroll.

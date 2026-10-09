@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/npcs/shopkeeper.png" id="2_shopkeeper"]
+[ext_resource type="Resource" path="res://data/shops/town_general.tres" id="3_town_general"]
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"lumewood_store"
+display_name = "Moss"
+title = "General Store"
+texture = ExtResource("2_shopkeeper")
+sprite_scale = 0.95
+tint = Color(1.0, 0.909804, 0.690196, 1.0)
+greeting = "Potions and supplies. Can't adventure on an empty bag."
+lines = PackedStringArray("Return Scrolls bring you back to the nearest town.")
+shop = ExtResource("3_town_general")
+storage = false

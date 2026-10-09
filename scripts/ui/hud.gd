@@ -84,7 +84,8 @@ func _build_windows() -> void:
 	# opened by talking to NPCs rather than by a key
 	var dialogue := TDDialogueWindow.new()
 	var shop := TDShopWindow.new()
-	for pair in [["inventory", inventory], ["equipment", equipment], ["stats", stats], ["quests", quests], ["skills", skills], ["worldmap", worldmap], ["dialogue", dialogue], ["shop", shop]]:
+	var storage := TDStorageWindow.new()
+	for pair in [["inventory", inventory], ["equipment", equipment], ["stats", stats], ["quests", quests], ["skills", skills], ["worldmap", worldmap], ["dialogue", dialogue], ["shop", shop], ["storage", storage]]:
 		var w: TDWindow = pair[1]
 		w.hud = self
 		windows[pair[0]] = w

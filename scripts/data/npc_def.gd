@@ -19,6 +19,8 @@ extends Resource
 @export var shop: ShopDef
 ## Jobs they can advance characters into (job ids).
 @export var instructs: Array[StringName] = []
+## Keeps players' storage.
+@export var storage := false
 ## Trips they offer (ships, wagons...).
 @export var travel: Array[TravelRoute] = []
 ## Until they have their own art, NPCs can share a sprite in their own colour.

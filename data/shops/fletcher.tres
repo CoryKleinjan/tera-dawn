@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="ShopDef" load_steps=15 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/shop_def.gd" id="1_shop_def"]
+[ext_resource type="Script" path="res://scripts/data/shop_entry.gd" id="2_shop_entry"]
+[ext_resource type="Resource" path="res://data/items/equips/willow_bow.tres" id="3_willow_bow"]
+[ext_resource type="Resource" path="res://data/items/equips/hunter_bow.tres" id="4_hunter_bow"]
+[ext_resource type="Resource" path="res://data/items/equips/composite_bow.tres" id="5_composite_bow"]
+[ext_resource type="Resource" path="res://data/items/equips/green_hood.tres" id="6_green_hood"]
+[ext_resource type="Resource" path="res://data/items/equips/ranger_vest.tres" id="7_ranger_vest"]
+[ext_resource type="Resource" path="res://data/items/ammo/feather_arrow.tres" id="8_feather_arrow"]
+
+[sub_resource type="Resource" id="Resource_6"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("8_feather_arrow")
+price = 0
+
+[sub_resource type="Resource" id="Resource_5"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("7_ranger_vest")
+price = 0
+
+[sub_resource type="Resource" id="Resource_4"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("6_green_hood")
+price = 0
+
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("5_composite_bow")
+price = 0
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("4_hunter_bow")
+price = 0
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("3_willow_bow")
+price = 0
+
+[resource]
+script = ExtResource("1_shop_def")
+id = &"fletcher"
+display_name = "Greenbough Fletcher"
+items = Array[ExtResource("2_shop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6")])

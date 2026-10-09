@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/npcs/shopkeeper.png" id="2_shopkeeper"]
+[ext_resource type="Script" path="res://scripts/data/travel_route.gd" id="3_travel_route"]
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("3_travel_route")
+target_map = &"dawnharbor"
+target_x = 300.0
+price = 400
+by = "Coach"
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"driftcove_taxi"
+display_name = "Coachman Barnacle"
+title = "Taxi"
+texture = ExtResource("2_shopkeeper")
+sprite_scale = 0.95
+tint = Color(0.623529, 0.815686, 1.0, 1.0)
+greeting = "Back to Dawnharbor? Hop on."
+lines = PackedStringArray("Dawnharbor's the hub. From there, anywhere.")
+travel = Array[ExtResource("3_travel_route")]([SubResource("Resource_1")])
+storage = false

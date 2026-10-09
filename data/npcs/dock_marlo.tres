@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/npcs/village_elder.png" id="2_village_elder"]
+[ext_resource type="Script" path="res://scripts/data/travel_route.gd" id="3_travel_route"]
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("3_travel_route")
+target_map = &"meadow"
+target_x = 300.0
+price = 300
+by = "Ship"
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"dock_marlo"
+display_name = "Captain Marlo"
+title = "Ship Captain"
+texture = ExtResource("2_village_elder")
+sprite_scale = 0.95
+tint = Color(1.0, 0.815686, 0.627451, 1.0)
+greeting = "Back to Dawnrise Isle? The Dawnbreaker's always ready."
+lines = PackedStringArray("The isle's a fine place to train, but the mainland's where the adventure is.")
+travel = Array[ExtResource("3_travel_route")]([SubResource("Resource_1")])
+storage = false

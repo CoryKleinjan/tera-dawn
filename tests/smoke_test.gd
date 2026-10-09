@@ -31,7 +31,15 @@ func _tap(action: String) -> void:
 
 func _check_content() -> void:
 	_check(Content.monsters.size() >= 9, "monster definitions load (%d)" % Content.monsters.size())
-	_check(Content.maps.has(&"meadow") and Content.maps.has(&"hollow"), "both maps load")
+	_check(Content.maps.has(&"meadow") and Content.maps.has(&"hollow"), "the starting maps load")
+	var towns := Content.maps.values().filter(func(m: MapDef) -> bool: return m.town)
+	_check(towns.size() >= 7, "there are hub towns (%d)" % towns.size())
+	for id in [&"warrior", &"archer", &"mage", &"thief", &"pirate"]:
+		var teaches := false
+		for m in towns:
+			for n in m.npcs:
+				teaches = teaches or id in n.npc.instructs
+		_check(teaches, "some town's instructor teaches %s" % id)
 	_check(Content.skill(Character.BASIC_ATTACK) != null and Content.skill(Character.BASIC_ATTACK).innate, "the basic attack is an innate skill")
 	var problems := []
 	for id in Content.skills:
@@ -279,7 +287,7 @@ func _run() -> void:
 	_check(Net.server != null and _me() != null, "single player runs its own server")
 	var p := world.player
 	_check(p.on_ground, "player starts on the ground")
-	_check(world.npcs().size() == 4, "the meadow has its four NPCs")
+	_check(world.npcs().size() == 5, "the meadow has its five NPCs")
 	await _ticks(5)
 	_check(world.mobs().all(func(m: TDMob) -> bool: return m.known), "the server tells the game where every monster is")
 
@@ -590,16 +598,20 @@ func _check_quests() -> void:
 	_check(nectar_drops.call() > 0, "they do once you're on it")
 	server_forfeit_check(ch)
 
-## Guide Sorrel turns a ready Beginner into a Magician through the dialogue window.
+## Archmage Celest in Lumewood turns a ready Beginner into a Magician through the dialogue
+## window.
 func _check_job_advance() -> void:
-	var guide: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"guide_sorrel")[0]
 	var ch := _me().character
+	Net.server._enter_map(_me(), &"lumewood", 300)
+	await _ticks(3)
+	_check(world.map.id == &"lumewood" and world.map.town, "Lumewood is a town")
+	var guide: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"lumewood_instructor")[0]
 	ch.job = Content.job(&"beginner")
 	ch.level = maxi(ch.level, 8)
 	ch.base.intelligence = 20
 	_me().dirty_character = true
 	await _ticks(2)
-	_teleport(Vector2(guide.position.x - 30, 620))
+	_teleport(Vector2(guide.position.x - 30, guide.position.y))
 	await _ticks(2)
 	await _tap("move_up")
 	var talk: TDDialogueWindow = world.hud.windows["dialogue"]
@@ -607,13 +619,15 @@ func _check_job_advance() -> void:
 	_check(labels.has("Choose a job"), "the job instructor offers to choose a job")
 	talk.choose(labels.find("Choose a job"))
 	labels = talk.options.map(func(o: Array) -> String: return o[0])
-	_check(labels.size() == 6, "five first jobs to pick from")
+	_check(labels == ["Magician", "Back"], "Lumewood's instructor teaches Magicians")
 	talk.choose(labels.find("Magician"))
 	_check(talk.options[0][0] == "Become a Magician", "a level 8 Beginner with 20 INT may become a Magician")
 	talk.choose(0)
 	await _ticks(2)
 	_check(Game.me.job.id == &"mage" and Game.me.inventory.count_of(Content.item(&"apprentice_wand")) == 1, "the server makes them a Magician and gives a wand")
 	_check(world.player.rig.body.modulate == Content.job(&"mage").tint, "the hero takes the Magician's colours")
+	Net.server._enter_map(_me(), &"meadow", 300)
+	await _ticks(3)
 
 ## A Warrior with Skill Points learns skills in the skill window: they land on quickslots,
 ## a buff raises stats until it runs out, and a passive is always on.
@@ -760,7 +774,7 @@ func _check_travel() -> void:
 	talk.choose(labels.find("Travel"))
 	_check(str(talk.options[0][0]).begins_with("Wagon to Ember Hollow"), "the trip lists where it goes and the fare")
 	talk.choose(0)
-	await _ticks(3)
+	await _ticks(5)
 	_check(world.map.id == &"hollow" and Game.me.shards == 850, "the wagon takes you there for 150 Dawnshards")
 	# A Return Scroll brings you back to town.
 	var scroll: ItemDef = Content.item(&"return_scroll")
@@ -777,6 +791,52 @@ func _check_travel() -> void:
 	await _ticks(2)
 	_check(Game.me.inventory.count_of(scroll) == 1, "it isn't used up when you're already in town")
 	_check(Content.map(&"hollow").return_town() == &"meadow" and Content.map(&"meadow").return_town() == &"meadow", "maps know their town")
+	# Captain Marlo's ship to Dawnharbor, then Brin's storage, then Rook's coach.
+	var marlo: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"captain_marlo")[0]
+	_teleport(Vector2(marlo.position.x - 30, 620))
+	await _ticks(2)
+	await _tap("move_up")
+	labels = talk.options.map(func(o: Array) -> String: return o[0])
+	talk.choose(labels.find("Travel"))
+	talk.choose(0)
+	await _ticks(3)
+	_check(world.map.id == &"dawnharbor", "Captain Marlo sails to Dawnharbor")
+	var brin: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"storage_keeper")[0]
+	_teleport(Vector2(brin.position.x - 30, 620))
+	await _ticks(2)
+	await _tap("move_up")
+	labels = talk.options.map(func(o: Array) -> String: return o[0])
+	_check(labels.has("Open storage"), "the storage keeper offers storage")
+	talk.choose(labels.find("Open storage"))
+	var vault: TDStorageWindow = world.hud.windows["storage"]
+	_check(vault.visible, "the storage window opens")
+	var tusk: ItemDef = Content.item(&"boar_tusk")
+	ch.inventory.remove(tusk, 1000)
+	ch.inventory.add(tusk, 7)
+	_me().dirty_character = true
+	await _ticks(2)
+	var shards := Game.me.shards
+	vault.tab = ItemDef.Tab.ETC
+	vault.store(Game.me.inventory.find(tusk))
+	await _ticks(2)
+	_check(Game.me.inventory.count_of(tusk) == 0 and Game.me.storage.count_of(tusk) == 7 and Game.me.shards == shards - Character.STORE_FEE, "storing a stack costs the fee")
+	vault.take(Game.me.storage.find(tusk))
+	await _ticks(2)
+	_check(Game.me.inventory.count_of(tusk) == 7 and Game.me.storage.count_of(tusk) == 0, "and it can be taken back")
+	vault.visible = false
+	var rook: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"harbor_taxi")[0]
+	_teleport(Vector2(rook.position.x - 30, 620))
+	await _ticks(2)
+	await _tap("move_up")
+	labels = talk.options.map(func(o: Array) -> String: return o[0])
+	talk.choose(labels.find("Travel"))
+	labels = talk.options.map(func(o: Array) -> String: return o[0])
+	_check(labels.size() == 6, "Rook's coach goes to all five job towns")
+	talk.choose(0)
+	await _ticks(3)
+	_check(world.map.id == &"greenbough", "the coach takes you to Greenbough")
+	Net.server._enter_map(_me(), &"meadow", 300)
+	await _ticks(3)
 
 func server_forfeit_check(ch: Character) -> void:
 	Net.ask(&"req_quest_forfeit", [&"q04_sweet_nectar"])

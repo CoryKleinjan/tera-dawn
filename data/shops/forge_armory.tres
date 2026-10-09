@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="ShopDef" load_steps=15 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/shop_def.gd" id="1_shop_def"]
+[ext_resource type="Script" path="res://scripts/data/shop_entry.gd" id="2_shop_entry"]
+[ext_resource type="Resource" path="res://data/items/equips/bronze_sword.tres" id="3_bronze_sword"]
+[ext_resource type="Resource" path="res://data/items/equips/iron_broadsword.tres" id="4_iron_broadsword"]
+[ext_resource type="Resource" path="res://data/items/equips/cinder_greatsword.tres" id="5_cinder_greatsword"]
+[ext_resource type="Resource" path="res://data/items/equips/iron_helm.tres" id="6_iron_helm"]
+[ext_resource type="Resource" path="res://data/items/equips/bronze_mail.tres" id="7_bronze_mail"]
+[ext_resource type="Resource" path="res://data/items/equips/oak_shield.tres" id="8_oak_shield"]
+
+[sub_resource type="Resource" id="Resource_6"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("8_oak_shield")
+price = 0
+
+[sub_resource type="Resource" id="Resource_5"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("7_bronze_mail")
+price = 0
+
+[sub_resource type="Resource" id="Resource_4"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("6_iron_helm")
+price = 0
+
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("5_cinder_greatsword")
+price = 0
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("4_iron_broadsword")
+price = 0
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("3_bronze_sword")
+price = 0
+
+[resource]
+script = ExtResource("1_shop_def")
+id = &"forge_armory"
+display_name = "Emberforge Armory"
+items = Array[ExtResource("2_shop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6")])

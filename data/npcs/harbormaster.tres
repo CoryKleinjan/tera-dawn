@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/npcs/village_elder.png" id="2_village_elder"]
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"harbormaster"
+display_name = "Harbormaster Ines"
+title = "Harbormaster"
+texture = ExtResource("2_village_elder")
+sprite_scale = 0.95
+tint = Color(0.752941, 0.909804, 1.0, 1.0)
+greeting = "Welcome to Dawnharbor. Every road on the mainland starts at my docks."
+lines = PackedStringArray("The five job towns each train their own kind of hero.", "Lost? Your world map (W) shows every road.")
+storage = false

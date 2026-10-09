@@ -57,6 +57,10 @@ func _options() -> Array:
 	var out := []
 	var def := npc.def
 	out.append_array(_quest_options())
+	if def.storage:
+		out.append(["Open storage", func() -> void:
+			visible = false
+			hud.windows["storage"].open(npc)])
 	if not def.travel.is_empty():
 		out.append(["Travel", _travel_list])
 	if not _jobs_offered().is_empty():
