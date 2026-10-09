@@ -85,10 +85,6 @@ func play(anim: StringName, from_start := false) -> void:
 		_t = 0.0
 	current = anim
 
-func is_finished() -> bool:
-	var s := body as AnimatedSprite3D
-	return s == null or not s.is_playing()
-
 ## 1 faces right, -1 faces left (the art faces right).
 func face(dir: int) -> void:
 	body.flip_h = dir < 0

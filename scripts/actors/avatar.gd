@@ -3,11 +3,6 @@ extends Node2D
 ## Another player on the same map. Their own game moves them; the server passes on where
 ## they are and which animation they're playing, and this glides there and plays it.
 
-## Bits of the flags in a player's snapshot (see SimPlayer.snapshot).
-const FAINTED := 1
-const BLINK := 2
-const CLIMBING := 4
-
 ## How far it moves toward the reported position each tick (0..1).
 const FOLLOW := 0.3
 
@@ -68,7 +63,7 @@ func play_skill(skill: SkillDef) -> void:
 		_swing = true
 
 func fainted() -> bool:
-	return flags & FAINTED != 0
+	return flags & SnapshotFlags.PLAYER_FAINTED != 0
 
 func step() -> void:
 	position += (target - position) * FOLLOW
@@ -86,13 +81,13 @@ func _process(_delta: float) -> void:
 	if rig == null or world == null or world.map == null:
 		return
 	rig.visible = known
-	var climbing := flags & CLIMBING != 0
+	var climbing := flags & SnapshotFlags.PLAYER_CLIMBING != 0
 	var airborne := climbing or fainted() or world.layout.ground_below(position) - position.y > 200.0
 	rig.place(position + Vector2(0, -companion.seat_lift()), TDStage.Z_OTHER_PLAYER, NAN if airborne else world.layout.ground_below(position))
 	rig.play(&"faint" if fainted() else animation, _swing)
 	_swing = false
 	rig.face(1 if climbing else face)
-	var blink := flags & BLINK != 0 and not fainted() and Engine.get_physics_frames() % 8 < 4
+	var blink := flags & SnapshotFlags.PLAYER_BLINK != 0 and not fainted() and Engine.get_physics_frames() % 8 < 4
 	rig.set_opacity(0.0 if blink else 1.0)
 	companion.visible = known
 	companion.set_chair(chair)
@@ -104,4 +99,4 @@ func draw_tag(ci: CanvasItem, at: Vector2) -> void:
 	if known and not fainted():
 		UiSkin.draw_name_tag(ci, at + Vector2(0, 4), char_name, Palette.MIST)
 		if guild != "":
-			UiSkin.draw_name_tag(ci, at + Vector2(0, 26), guild, Color("b8f070"))
+			UiSkin.draw_name_tag(ci, at + Vector2(0, 26), guild, Palette.GUILD)
