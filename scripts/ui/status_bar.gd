@@ -5,8 +5,11 @@ extends Control
 ## the UI sheet's art.
 
 const HEIGHT := 50.0
-const WINDOW_BUTTON := 38.0
+const WINDOW_BUTTON := 32.0
+## UI sheet art for each window's button. Windows without art yet get a round button
+## with a symbol from WINDOW_SYMBOLS.
 const WINDOW_ICONS := {"inventory": "bag_button", "equipment": "gear_button", "stats": "stats_button"}
+const WINDOW_SYMBOLS := {"quests": "!"}
 
 var world: TDWorld
 
@@ -62,13 +65,19 @@ func _skill_slot(skill: SkillDef, action: String, pos: Vector2) -> void:
 	DrawUtil.text(self, Game.num_font, pos + Vector2(s - 4, s - 2), key, 12, Palette.MIST, -1, 4, Palette.NIGHT)
 
 func _window_button_rect(i: int) -> Rect2:
-	return Rect2(size.x - 380 + i * (WINDOW_BUTTON + 6), (HEIGHT - WINDOW_BUTTON) / 2.0, WINDOW_BUTTON, WINDOW_BUTTON)
+	var left := size.x - 254 - TDHud.WINDOW_ACTIONS.size() * (WINDOW_BUTTON + 2)
+	return Rect2(left + i * (WINDOW_BUTTON + 2), (HEIGHT - WINDOW_BUTTON) / 2.0, WINDOW_BUTTON, WINDOW_BUTTON)
 
 func _window_button(action: String, r: Rect2) -> void:
 	var open: bool = world != null and world.hud.windows[action].visible
 	if open:
 		DrawUtil.ellipse(self, r.get_center(), r.size.x / 2.0 + 2, r.size.y / 2.0 + 2, Color(Palette.SUN, 0.45))
-	draw_texture_rect(UiSkin.tex(WINDOW_ICONS[action]), r, false, Color(1.2, 1.15, 1.05) if open else Color.WHITE)
+	if WINDOW_ICONS.has(action):
+		draw_texture_rect(UiSkin.tex(WINDOW_ICONS[action]), r, false, Color(1.2, 1.15, 1.05) if open else Color.WHITE)
+	else:
+		DrawUtil.ellipse(self, r.get_center(), r.size.x / 2.0 - 2, r.size.y / 2.0 - 2, Color("e9b44c"))
+		DrawUtil.ellipse(self, r.get_center(), r.size.x / 2.0 - 5, r.size.y / 2.0 - 5, Palette.PLUM)
+		DrawUtil.text(self, Game.num_font, r.get_center() + Vector2(0, 7), WINDOW_SYMBOLS.get(action, "?"), 19, Palette.SUN, 0, 4, Palette.NIGHT)
 	DrawUtil.text(self, Game.num_font, r.end + Vector2(0, -1), _key_name(action), 11, Palette.MIST, -1, 4, Palette.NIGHT)
 
 func _gui_input(event: InputEvent) -> void:

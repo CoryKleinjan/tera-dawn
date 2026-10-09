@@ -19,6 +19,8 @@ func _draw() -> void:
 	# map name
 	UiSkin.draw_hint(self, Vector2(16 + (DrawUtil.text_width(font, world.map.display_name, 13) + 26) / 2.0, 36), world.map.display_name)
 	_draw_minimap(Rect2(v.x - 182, 10, 172, 50))
+	if world.started:
+		_draw_quest_tracker(Vector2(v.x - 178, 82))
 	# message log, newest at the bottom, above the status bar
 	var n := world.log_lines.size()
 	for i in n:
@@ -51,6 +53,31 @@ func _draw_minimap(mm: Rect2) -> void:
 		draw_circle(inner.position + Vector2(a.position.x * sx, a.position.y * sy - 3), 2.5, Color("8cc6ff"))
 	var pp := world.player.position
 	draw_circle(inner.position + Vector2(pp.x * sx, pp.y * sy - 3), 3, Palette.SUN)
+
+## Quests in progress and how far along they are, under the minimap.
+func _draw_quest_tracker(at: Vector2) -> void:
+	var me := Game.me
+	var y := at.y
+	var shown := 0
+	for id in me.quests.active:
+		var q: QuestDef = Content.quests.get(id)
+		if q == null or shown >= 4:
+			continue
+		shown += 1
+		var ready := me.quests.is_ready(q, me)
+		DrawUtil.text(self, Game.ui_font, Vector2(at.x, y), q.title, 12, Palette.SUN, 1, 4, Palette.NIGHT)
+		y += 15
+		if ready:
+			DrawUtil.text(self, Game.ui_font, Vector2(at.x + 8, y), "Ready to hand in", 11, Color("8cf0a6"), 1, 4, Palette.NIGHT)
+			y += 15
+		else:
+			for i in q.objectives.size():
+				var o := q.objectives[i]
+				var have := me.quests.progress(q, i, me)
+				DrawUtil.text(self, Game.ui_font, Vector2(at.x + 8, y), "%s %d/%d" % [o.describe(), have, o.count], 11,
+					Color("8cf0a6") if have >= o.count else Palette.MIST, 1, 4, Palette.NIGHT)
+				y += 15
+		y += 4
 
 func _draw_world_text() -> void:
 	var st := world.stage

@@ -66,6 +66,7 @@ func _setup_input() -> void:
 	_bind("inventory", [KEY_I], [JOY_BUTTON_BACK])
 	_bind("equipment", [KEY_E], [])
 	_bind("stats", [KEY_S], [])
+	_bind("quests", [KEY_Q], [])
 	_bind("pause", [KEY_ESCAPE], [JOY_BUTTON_START])
 	_bind("toggle_fullscreen", [KEY_F11], [])
 

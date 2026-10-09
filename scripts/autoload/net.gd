@@ -192,6 +192,21 @@ func req_sell_all_etc(npc_id: StringName) -> void:
 	if server:
 		server.on_sell_all_etc(_sender(), npc_id)
 
+@rpc("any_peer", "call_local", "reliable")
+func req_quest_accept(npc_id: StringName, quest_id: StringName) -> void:
+	if server:
+		server.on_quest_accept(_sender(), npc_id, quest_id)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_quest_complete(npc_id: StringName, quest_id: StringName) -> void:
+	if server:
+		server.on_quest_complete(_sender(), npc_id, quest_id)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_quest_forfeit(quest_id: StringName) -> void:
+	if server:
+		server.on_quest_forfeit(_sender(), quest_id)
+
 # ---------- events: server -> client ----------
 
 @rpc("authority", "call_local", "reliable")

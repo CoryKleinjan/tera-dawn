@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="QuestDef" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="1_quest_def"]
+[ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="2_quest_objective"]
+[ext_resource type="Resource" path="res://data/items/etc/boar_tusk.tres" id="3_boar_tusk"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("2_quest_objective")
+kind = 1
+item = ExtResource("3_boar_tusk")
+count = 10
+drop_chance = 0.5
+
+[resource]
+script = ExtResource("1_quest_def")
+id = &"q06_tusk_collector"
+title = "Tusk Collector"
+giver = &"shopkeeper"
+min_level = 8
+requires = Array[StringName]([])
+repeatable = true
+offer_text = "Boar Tusks make the finest potion stirrers. I'll always pay for ten more, any time you bring them."
+progress_text = "Ten Boar Tusks from the Ember Boars of the Hollow."
+complete_text = "Lovely tusks. Here's your payment. Come back any time!"
+objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1")])
+reward_xp = 250
+reward_shards = 500
+reward_items = Array[ExtResource("4_drop_entry")]([])

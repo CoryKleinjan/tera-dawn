@@ -5,7 +5,7 @@ extends CanvasLayer
 ## Art comes from UiSkin.
 
 ## Input actions that open and close a window, in the order the status bar shows them.
-const WINDOW_ACTIONS: Array[String] = ["inventory", "equipment", "stats"]
+const WINDOW_ACTIONS: Array[String] = ["inventory", "equipment", "stats", "quests"]
 
 var world: TDWorld
 var overlay: TDOverlay
@@ -58,10 +58,12 @@ func _build_windows() -> void:
 	equipment.position = Vector2(inventory.position.x - equipment.size.x - 10, 70)
 	var stats := TDStatsWindow.new()
 	stats.position = Vector2(16, 56)
+	var quests := TDQuestWindow.new()
+	quests.position = Vector2(16, 120)
 	# opened by talking to NPCs rather than by a key
 	var dialogue := TDDialogueWindow.new()
 	var shop := TDShopWindow.new()
-	for pair in [["inventory", inventory], ["equipment", equipment], ["stats", stats], ["dialogue", dialogue], ["shop", shop]]:
+	for pair in [["inventory", inventory], ["equipment", equipment], ["stats", stats], ["quests", quests], ["dialogue", dialogue], ["shop", shop]]:
 		var w: TDWindow = pair[1]
 		w.hud = self
 		windows[pair[0]] = w

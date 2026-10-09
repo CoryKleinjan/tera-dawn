@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="QuestDef" load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="1_quest_def"]
+[ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="2_quest_objective"]
+[ext_resource type="Resource" path="res://data/monsters/sproutcap.tres" id="3_sproutcap"]
+[ext_resource type="Resource" path="res://data/items/etc/sproutcap_cap.tres" id="4_sproutcap_cap"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="5_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/equips/leather_boots.tres" id="6_leather_boots"]
+
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("5_drop_entry")
+item = ExtResource("6_leather_boots")
+chance = 1.0
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("2_quest_objective")
+kind = 1
+item = ExtResource("4_sproutcap_cap")
+count = 3
+drop_chance = 0.5
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("2_quest_objective")
+kind = 0
+monster = ExtResource("3_sproutcap")
+count = 6
+
+[resource]
+script = ExtResource("1_quest_def")
+id = &"q03_sprouting_menace"
+title = "Sprouting Menace"
+giver = &"village_elder"
+min_level = 4
+requires = Array[StringName]([&"q01_dewling_trouble"])
+repeatable = false
+offer_text = "Sproutcaps have taken the upper meadow. They spread their spores if left alone. Clear six of them, and bring back three of their caps so I know it's done."
+progress_text = "Six Sproutcaps, and three of their caps. Climb the ropes to the upper meadow."
+complete_text = "Well done. The upper meadow can breathe again. These boots served me well in my youth."
+objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1"), SubResource("Resource_2")])
+reward_xp = 220
+reward_shards = 150
+reward_items = Array[ExtResource("5_drop_entry")]([SubResource("Resource_3")])

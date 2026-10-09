@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_def.gd" id="1_item_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/petal_nectar.png" id="2_petal_nectar"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="3_shard_pickup"]
+
+[resource]
+script = ExtResource("1_item_def")
+id = &"petal_nectar"
+display_name = "Petal Nectar"
+description = "Sweet nectar Petal Bats carry in their wings. Mira wants it for her honey cakes. (Quest item)"
+icon = ExtResource("2_petal_nectar")
+sprite_scale = 0.36
+glow_color = Color(1.0, 0.823529, 0.917647, 1.0)
+pickup_effect = ExtResource("3_shard_pickup")
+sell_price = 0
+max_stack = 100
+quest_item = true

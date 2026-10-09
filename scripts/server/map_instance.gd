@@ -130,11 +130,16 @@ func kill_mob(m: SimMob, killer: SimPlayer) -> void:
 	m.die()
 	broadcast(&"ev_mob_died", [m.index])
 	server.give_xp(killer, m.def.exp_reward)
+	server.record_kill(killer, m.def)
 	var loot := []
 	for entry in m.def.drops:
 		var amount := entry.roll()
 		if amount > 0:
 			loot.append([entry.item, amount])
+	# quest items only drop for someone on that quest
+	for pair in killer.character.quests.quest_drops(m.def, killer.character):
+		if randf() < pair[1]:
+			loot.append([pair[0], 1])
 	# spread out in a row under the monster, like MapleStory
 	for i in loot.size():
 		var x := clampf(m.position.x + (i - (loot.size() - 1) / 2.0) * DROP_SPACING, m.plat.x + 8, m.plat.x + m.plat.w - 8)
@@ -201,6 +206,7 @@ func pick_up(p: SimPlayer, d: SimDrop) -> bool:
 		p.dirty_character = true
 	_remove_drop(d, p.peer)
 	tell(p, "Picked up %s" % amount_name(d.item, d.amount), Palette.MIST)
+	server.picked_up(p, d.item)
 	return true
 
 ## Drops a stack from the player's bag onto the ground at their feet.

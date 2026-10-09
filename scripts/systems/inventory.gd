@@ -113,6 +113,18 @@ func move(tab: int, from: int, to: int) -> void:
 		tabs[tab][to] = a
 	changed.emit()
 
+## Takes `n` of an item out of the bag, from wherever it is. Returns how many were taken.
+func remove(item: ItemDef, n: int) -> int:
+	var left := n
+	var row: Array = tabs[item.tab()]
+	for i in SLOTS:
+		var s: ItemStack = row[i]
+		if left > 0 and s != null and s.item == item:
+			var taken := mini(left, s.count)
+			take(item.tab(), i, taken)
+			left -= taken
+	return n - left
+
 func count_of(item: ItemDef) -> int:
 	var n := 0
 	for s in tabs[item.tab()]:
