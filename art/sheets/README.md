@@ -113,6 +113,6 @@ brighten `item_slot` on hover instead.
 - **The paperdoll**: `paperdoll_body` cuts the bare hero into the hero strip (`pad_top` leaves
   room for hair). `paperdoll_hair`, `_faces`, `_layers` (cape, gloves, shields per frame) and
   `_weapons` cut into `art/build/` only; `tools/art/paperdoll_layers.py` places those pieces
-  on every body frame and writes the layers, the region map and the rig. Run it after
-  re-cutting the body. Gloves are cut but not used yet (nothing to anchor them to).
+  on every body frame and writes the layers, the region map and the rig. The weapon hand, the weapon's angle, the shield and the head's tilt
+  in each frame are placed by hand in `paperdoll_rig.json`. Run it after re-cutting the body. Gloves are cut but not used yet (nothing to anchor them to).
   `hero_main` (the painted hero) now cuts into `art/build/` for reference.

@@ -75,11 +75,11 @@ FACE_AT = (0.2, 0.3)  # and centred this far forward and down from the head's ce
 NECK = 0.95           # the neck is this far below the head's centre
 SHIELD_HEIGHT = 1.25
 SWORD_LENGTH = 1.9    # every weapon is drawn at the scale that makes the sword this long
-ROTATE_FROM = 25.0    # pieces turn with the head only when it leans more than this (degrees)
+WEAPON_LENGTH = 20    # rig "tip" is this far from "grip" along the weapon (only its direction matters)
 
-# Where the hand and shield are, per frame: the painted hero's rig, carried onto the body by
-# matching the heads (the body was traced from his poses).
-OLD_RIG = os.path.join(ROOT, "art", "reference", "hero_rig_painted.json")
+# Where the weapon hand and shield are, and how the head is tilted, per frame: placed by hand,
+# since the hands are hard to tell apart from the rest of the body.
+HAND_RIG = os.path.join(ss.SHEETS, "paperdoll_rig.json")
 
 
 # ---------- reading the body ----------
@@ -122,7 +122,6 @@ def analyse(px):
     up = head - hips
     up /= max(np.linalg.norm(up), 1e-3)
     down = -up
-    lean = math.degrees(math.atan2(up[0], -up[1]))
     yy, xx = np.mgrid[0:a.shape[0], 0:a.shape[1]]
     along = (xx - head[0]) * down[0] + (yy - head[1]) * down[1]
     side = (xx - head[0]) * -down[1] + (yy - head[1]) * down[0]
@@ -138,7 +137,7 @@ def analyse(px):
     region[chest] = R["top"]
     soles = skin & (along > shorts_bottom + (feet - shorts_bottom) * 0.62)
     region[soles] = R["shoes"]
-    return {"r": float(r), "head": head, "up": up, "lean": lean, "region": region,
+    return {"r": float(r), "head": head, "up": up, "region": region,
             "neck": head + down * neck, "feet_y": float(np.nonzero(a)[0].max()), "top_y": float(np.nonzero(a)[0].min())}
 
 
@@ -157,7 +156,7 @@ def scaled(piece_img, s):
 def place(canvas, img, anchor, at, angle=0.0):
     """Draws `img` on `canvas` with its point `anchor` on `at`, turned by `angle` degrees
     (clockwise on screen)."""
-    if abs(angle) >= ROTATE_FROM:
+    if abs(angle) >= 0.5:
         pad = int(max(img.size) * 1.5)
         big = Image.new("RGBA", (pad * 2, pad * 2))
         big.paste(img, (int(round(pad - anchor[0])), int(round(pad - anchor[1]))))
@@ -237,6 +236,12 @@ def save_layer(name, frames, fw, fh, index, anims, tinted=True):
                            fw, fh, index, anims)
 
 
+def turned(v, angle):
+    """A vector turned clockwise on screen by `angle` degrees."""
+    a = math.radians(angle)
+    return np.array([v[0] * math.cos(a) - v[1] * math.sin(a), v[0] * math.sin(a) + v[1] * math.cos(a)])
+
+
 def main():
     names, spec = frame_names()
     index = {n: i for i, n in enumerate(names)}
@@ -245,6 +250,13 @@ def main():
     fw, fh = strip.width // len(names), strip.height
     frames = [np.asarray(strip.crop((i * fw, 0, (i + 1) * fw, fh))) for i in range(len(names))]
     info = [analyse(f) for f in frames]
+    with open(HAND_RIG) as f:
+        hands = json.load(f)["frames"]
+    missing = [n for n in names if n not in hands]
+    if missing:
+        sys.exit(f"{os.path.relpath(HAND_RIG, ROOT)} has no entry for {missing}")
+    for n, fi in zip(names, info):
+        fi["tilt"] = float(hands[n].get("head_tilt", 0))
     ref = info[0]  # idle1: pieces are sized against this frame
     r = ref["r"]
 
@@ -267,7 +279,7 @@ def main():
                 if p:
                     img = scaled(p.img, s)
                     anchor = ((head_cell[0] - p.x) * s, (head_cell[1] - p.y) * s)
-                    place(canvas, img, anchor, fi["head"], fi["lean"])
+                    place(canvas, img, anchor, fi["head"], fi["tilt"])
                 out[layer].append(canvas)
         for layer, fr in out.items():
             if any(im.getbbox() for im in fr):
@@ -285,11 +297,8 @@ def main():
                 p = faces[face + "_" + EXPRESSIONS.get(n, "normal")]
                 img = scaled(p.img, s)
                 anchor = ((centre[0] - p.x) * s, (centre[1] - p.y) * s)
-                lean = math.radians(fi["lean"])
-                fx, fy = FACE_AT
-                at = fi["head"] + np.array([fx * math.cos(lean) - fy * math.sin(lean),
-                                            fx * math.sin(lean) + fy * math.cos(lean)]) * fi["r"]
-                place(canvas, img, anchor, at, fi["lean"])
+                at = fi["head"] + turned(FACE_AT, fi["tilt"]) * fi["r"]
+                place(canvas, img, anchor, at, fi["tilt"])
                 px = np.asarray(canvas).copy()
                 rgb = px[..., :3].astype(float) / 255
                 mx, mn = rgb.max(2), rgb.min(2)
@@ -303,26 +312,24 @@ def main():
         save_layer(f"face_{face}", out, fw, fh, index, anims, tinted=False)
         save_layer(f"face_{face}_eyes", eyes, fw, fh, index, anims)
 
-    # the painted hero's rig, carried over: hand, weapon tip and shield
-    with open(OLD_RIG) as f:
-        old = {fr["name"]: fr for fr in json.load(f)["frames"]}
+    # the rig: the head, face and neck found on the body, the hands placed by hand
     rig_frames = []
     for n, fi in zip(names, info):
-        o = old[n]
-        k = (fi["feet_y"] - fi["head"][1]) / max(o["feet"][1] - o["head"][1], 1) if abs(fi["lean"]) < ROTATE_FROM \
-            else fi["r"] / max(o["head_size"][0] / 2 * 0.9, 1)
-        carry = lambda p: [round(float(fi["head"][0] + (p[0] - o["head"][0]) * k), 1),  # noqa: E731
-                           round(float(fi["head"][1] + (p[1] - o["head"][1]) * k), 1)]
-        head_top = fi["head"] + fi["up"] * fi["r"]
+        h = hands[n]
+        r2 = lambda v: [round(float(c), 1) for c in v]  # noqa: E731
         entry = {"name": n, "back": n in BACK_VIEW,
-                 "head": [round(float(v), 1) for v in fi["head"]],
-                 "head_top": [round(float(v), 1) for v in head_top],
+                 "head": r2(fi["head"]),
+                 "head_top": r2(fi["head"] + turned((0, -fi["r"]), fi["tilt"])),
+                 "head_angle": fi["tilt"],
                  "head_size": [round(fi["r"] * 2), round(fi["r"] * 2)],
-                 "neck": [round(float(v), 1) for v in fi["neck"]],
+                 "neck": r2(fi["neck"]),
                  "feet": [round(float(fi["head"][0]), 1), fi["feet_y"]]}
-        for key in ("grip", "tip", "shield"):
-            if key in o:
-                entry[key] = carry(o[key])
+        if "weapon" in h:
+            x, y, angle = h["weapon"]
+            entry["grip"] = [x, y]
+            entry["tip"] = r2(np.array([x, y]) + turned((WEAPON_LENGTH, 0), angle))
+        if "shield" in h:
+            entry["shield"] = list(h["shield"])
         if n not in BACK_VIEW:
             entry["face"] = entry["head"]
         rig_frames.append(entry)
@@ -397,7 +404,7 @@ def main():
 
 
 def preview(names, fw, fh, rig_frames):
-    """Every frame with the tousled hair, a face, the cape, a shield and a sword."""
+    """Every frame with long hair, a face, the cape, a shield and a sword."""
     load = lambda n: Image.open(os.path.join(LAYERS, n + ".png"))  # noqa: E731
     body = Image.open(STRIP)
     tint = lambda im, c: Image.fromarray((np.asarray(im).astype(float) * (list(c) + [1])).astype(np.uint8), "RGBA")  # noqa: E731
@@ -415,7 +422,7 @@ def preview(names, fw, fh, rig_frames):
         if "grip" in e and "tip" in e:
             ang = math.degrees(math.atan2(e["tip"][1] - e["grip"][1], e["tip"][0] - e["grip"][0]))
             place_on = Image.new("RGBA", (fw, fh))
-            place(place_on, sword, grip, e["grip"], ang if abs(ang) >= ROTATE_FROM else ROTATE_FROM * (1 if ang >= 0 else -1))
+            place(place_on, sword, grip, e["grip"], ang)
             out.alpha_composite(place_on, (i * fw, 0))
     os.makedirs(os.path.dirname(PREVIEW), exist_ok=True)
     half = len(names) // 2

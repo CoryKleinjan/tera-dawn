@@ -7,6 +7,8 @@ extends Node2D
 ## basic attack; the quickslot keys use whatever skill or item is on that slot.
 
 const HERO_FRAMES := preload("res://assets/animations/hero.tres")
+## The hero's size against everyone else's art (TDStage.TEXEL): players are drawn a bit smaller.
+const HERO_SCALE := 0.8
 const Z := TDStage.Z_PLAYER
 ## Ticks between telling the server where you are (60 / 3 = 20 a second).
 const REPORT_EVERY := 3
@@ -69,7 +71,7 @@ var companion: TDCompanion
 
 func _ready() -> void:
 	rig = SpriteRig.new()
-	rig.setup(HERO_FRAMES, null, TDStage.TEXEL, 40.0)
+	rig.setup(HERO_FRAMES, null, TDStage.TEXEL * HERO_SCALE, 40.0)
 	add_child(rig)
 	companion = TDCompanion.new()
 	add_child(companion)

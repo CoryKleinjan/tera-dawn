@@ -203,6 +203,11 @@ static func anchor(frame: int, name: StringName) -> Variant:
 	var p: Variant = frames[frame].get(String(name))
 	return Vector2(p[0], p[1]) if p is Array else null
 
+## How far the head is turned on a frame (degrees clockwise, 0 upright); hats turn with it.
+static func head_angle(frame: int) -> float:
+	var frames: Array = rig().get("frames", [])
+	return float(frames[frame].get("head_angle", 0.0)) if frame >= 0 and frame < frames.size() else 0.0
+
 ## Where a stand-in goes on a frame: its centre in frame pixels, its angle (radians, y
 ## down) and its scale, for a hero facing right; null if the frame has nowhere to put it.
 ## `mirror` turns it into the hero facing left (flip the picture and use these values).
@@ -221,6 +226,7 @@ static func place_overlay(shape: StringName, frame: int, mirror := false) -> Var
 		var head: Variant = anchor(frame, &"head_size")
 		if head != null:
 			scale = clampf(head.x / HEAD_WIDTH, 0.85, 1.2)
+		angle = deg_to_rad(head_angle(frame))
 	var size := LookShapes.texture(shape, Color.WHITE).get_size()
 	var centre: Vector2 = at + ((size / 2.0 - LookShapes.pivot(shape)) * scale).rotated(angle)
 	if mirror:
