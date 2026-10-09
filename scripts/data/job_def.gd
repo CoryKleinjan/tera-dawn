@@ -28,6 +28,8 @@ extends Resource
 @export var mp_per_level := 6
 ## Ability Points gained per level, spent in the stats window.
 @export var ap_per_level := 5
+## Skill Points gained per level, spent in the skill window.
+@export var sp_per_level := 3
 
 @export_group("Advancement")
 ## The job you advance from (empty: you start as this job).

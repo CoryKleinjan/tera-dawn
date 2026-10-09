@@ -9,6 +9,9 @@
 script = ExtResource("1_skill_def")
 id = &"basic_attack"
 display_name = "Slash"
+description = "A plain swing with whatever you're holding."
+innate = true
+max_level = 1
 icon = ExtResource("2_icon_attack")
 mp_cost = 0
 cooldown = 24

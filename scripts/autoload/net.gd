@@ -208,6 +208,16 @@ func req_quest_forfeit(quest_id: StringName) -> void:
 		server.on_quest_forfeit(_sender(), quest_id)
 
 @rpc("any_peer", "call_local", "reliable")
+func req_learn_skill(skill_id: StringName) -> void:
+	if server:
+		server.on_learn_skill(_sender(), skill_id)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_set_quickslot(i: int, kind: StringName, id: StringName) -> void:
+	if server:
+		server.on_set_quickslot(_sender(), i, kind, id)
+
+@rpc("any_peer", "call_local", "reliable")
 func req_advance(npc_id: StringName, job_id: StringName) -> void:
 	if server:
 		server.on_advance(_sender(), npc_id, job_id)

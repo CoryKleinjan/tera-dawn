@@ -32,9 +32,18 @@ func _tap(action: String) -> void:
 func _check_content() -> void:
 	_check(Content.monsters.size() >= 9, "monster definitions load (%d)" % Content.monsters.size())
 	_check(Content.maps.has(&"meadow") and Content.maps.has(&"hollow"), "both maps load")
-	for id in Game.SKILL_BINDINGS.values():
-		_check(Content.skill(id) != null, "skill %s is defined" % id)
+	_check(Content.skill(Character.BASIC_ATTACK) != null and Content.skill(Character.BASIC_ATTACK).innate, "the basic attack is an innate skill")
 	var problems := []
+	for id in Content.skills:
+		var sk: SkillDef = Content.skills[id]
+		if sk.icon == null:
+			problems.append("skill %s has no icon" % id)
+		if not sk.innate and not Content.jobs.has(sk.job):
+			problems.append("skill %s belongs to unknown job %s" % [id, sk.job])
+		if sk.requires != &"" and not Content.skills.has(sk.requires):
+			problems.append("skill %s requires unknown skill %s" % [id, sk.requires])
+		if sk.kind == SkillDef.Kind.BUFF and sk.duration <= 0:
+			problems.append("buff %s has no duration" % id)
 	for id in Content.maps:
 		var map: MapDef = Content.maps[id]
 		var count := map.platforms.size() + 1
@@ -165,6 +174,40 @@ func _check_character() -> void:
 		and back.base.strength == c.base.strength and back.level == 2, "saving and loading keeps inventory, equipment and stats")
 	_check(CharacterStore.clean_name("  Dawn<ling>!  ") == "Dawnling", "character names are cleaned up")
 	_check_jobs()
+	_check_skill_rules()
+
+## Skill Points, Beginner skills, buffs and save files, without the world.
+func _check_skill_rules() -> void:
+	var c := Character.create("Skiller")
+	_check(c.sp == 0 and c.skill_level(Content.skill(Character.BASIC_ATTACK)) == 1, "a new character knows only the basic attack")
+	c.gain_xp(c.xp_need())
+	_check(c.sp == 1, "a Beginner gets 1 Skill Point a level")
+	var step: SkillDef = Content.skill(&"quick_step")
+	_check(c.learn(step) == "" and c.skill_level(step) == 1 and c.sp == 0, "a Beginner learns Quick Step")
+	_check(c.learn(step) != "", "no Skill Points, no more levels")
+	_check(c.learn(Content.skill(&"power_strike")) != "", "a Beginner can't learn Warrior skills")
+	var speed := c.stats.speed
+	c.mp = 100
+	c.add_buff(step)
+	_check(c.stats.speed > speed, "Quick Step makes you faster")
+	c.tick_buffs(step.duration_ticks(1))
+	_check(c.buffs.is_empty() and c.stats.speed == speed, "and wears off after its time")
+	c.sp = 3
+	var wind: SkillDef = Content.skill(&"second_wind")
+	c.learn(wind)
+	_check(c.regen_bonus().x == wind.regen_hp, "Second Wind adds HP recovery")
+	var back := Character.new()
+	back.load_dict(c.to_dict())
+	_check(back.skills == c.skills and back.sp == c.sp and back.quickslots == c.quickslots, "skills, Skill Points and quickslots save")
+	var old := c.to_dict()
+	old.erase("sp")
+	old.erase("skills")
+	old.erase("quickslots")
+	old["level"] = 12
+	old["job"] = "warrior"
+	var legacy := Character.new()
+	legacy.load_dict(old)
+	_check(legacy.sp == 11 * 3 and legacy.quickslots[Character.QUICKSLOTS - 2] == [&"item", &"red_potion"], "older saves get Skill Points for their levels")
 
 ## Starting as a Beginner, advancing, and gear only some jobs can use.
 func _check_jobs() -> void:
@@ -423,15 +466,17 @@ func _run() -> void:
 	await _check_quests()
 	await _check_job_advance()
 
+	await _check_skills()
+
 	# Dawn Slash costs MP and hits several monsters.
 	var mp_before := Game.me.mp
 	var level := Game.me.level
 	p.cooldown = 0
 	_me().cooldown = 0
-	await _tap("skill")
+	await _tap("quick_2")
 	_check(p.action_anim == &"slash", "Dawn Slash plays its animation")
 	# MP regen may tick once during the key press, and a kill that levels up refills MP.
-	_check(Game.me.level > level or mp_before - Game.me.mp >= Content.skill(&"dawn_slash").mp_cost - 1, "Dawn Slash spends MP")
+	_check(Game.me.level > level or mp_before - Game.me.mp >= Content.skill(&"dawn_slash").mp_at(1) - 1, "Dawn Slash spends MP")
 
 	# Climb the rope at x=700 up to the platform at y=420.
 	await _ticks(40)
@@ -455,7 +500,10 @@ func _run() -> void:
 	_me().inv = 0
 	_me().character.health.set_hp(1)
 	var hollow: MapInstance = Net.server.maps[&"hollow"]
-	hollow.touch_player(_me(), hollow.mobs[0])
+	for n in 20: # a touch can miss
+		if not _me().fainted():
+			_me().inv = 0
+			hollow.touch_player(_me(), hollow.mobs[0])
 	_check(p.fainted(), "running out of HP faints the player")
 	await _ticks(SimPlayer.FAINT_TICKS + 5)
 	_check(not p.fainted() and world.map.id == Character.START_MAP and Game.me.health.hp > 0, "after fainting the player wakes up in town")
@@ -555,6 +603,62 @@ func _check_job_advance() -> void:
 	await _ticks(2)
 	_check(Game.me.job.id == &"mage" and Game.me.inventory.count_of(Content.item(&"apprentice_wand")) == 1, "the server makes them a Magician and gives a wand")
 	_check(world.player.rig.body.modulate == Content.job(&"mage").tint, "the hero takes the Magician's colours")
+
+## A Warrior with Skill Points learns skills in the skill window: they land on quickslots,
+## a buff raises stats until it runs out, and a passive is always on.
+func _check_skills() -> void:
+	var ch := _me().character
+	ch.job = Content.job(&"warrior")
+	ch.sp = 5
+	ch.skills.clear()
+	ch.quickslots.fill([])
+	_me().dirty_character = true
+	await _ticks(2)
+	var book: TDSkillWindow = world.hud.windows["skills"]
+	await _press("skills")
+	_check(book.visible and book.jobs() == [&"beginner", &"warrior"], "K opens the skill book with Beginner and Warrior tabs")
+	book.tab = 1
+	var slash: SkillDef = Content.skill(&"dawn_slash")
+	book.learn(slash)
+	await _ticks(1)
+	_check(Game.me.skill_level(slash) == 0 and Game.me.sp == 5, "Dawn Slash needs Power Strike first")
+	book.learn(Content.skill(&"power_strike"))
+	book.learn(slash)
+	book.learn(Content.skill(&"iron_body"))
+	book.learn(Content.skill(&"toughness"))
+	await _ticks(1)
+	_check(Game.me.skill_level(slash) == 1 and Game.me.sp == 1, "spending Skill Points learns skills")
+	_check(Game.me.quickslots[0] == [&"skill", &"power_strike"] and Game.me.quickslots[1] == [&"skill", &"dawn_slash"]
+		and Game.me.quickslots[2] == [&"skill", &"iron_body"], "learned skills go on the free quickslots")
+	_check(Game.me.max_hp() == Game.me.job.base_hp + Game.me.level * Game.me.job.hp_per_level + Game.me.equipment.bonus().max_hp + 15, "Toughness raises Max HP")
+	await _press("skills")
+	# Iron Body raises defense until it wears off.
+	var defense := Game.me.stats.defense
+	ch.mp = ch.max_mp()
+	world.player.cooldown = 0
+	_me().cooldown = 0
+	await _tap("quick_3")
+	await _ticks(1)
+	_check(Game.me.buffs.has(&"iron_body") and Game.me.stats.defense == defense + 5, "Iron Body raises Weapon Defense")
+	ch.buffs[&"iron_body"][1] = 2
+	await _ticks(4)
+	_check(not Game.me.buffs.has(&"iron_body") and Game.me.stats.defense == defense, "it wears off")
+	# Quickslots can be rearranged from the client, and the server keeps them.
+	world.hud.quickslots.assign(5, &"skill", &"dawn_slash")
+	await _ticks(1)
+	_check(ch.quickslots[5] == [&"skill", &"dawn_slash"] and ch.quickslots[1] == [], "moving a skill to another quickslot")
+	world.hud.quickslots.assign(1, &"skill", &"dawn_slash")
+	# A Red Potion on a quickslot is drunk with its key.
+	world.hud.quickslots.assign(7, &"item", &"red_potion")
+	ch.health.set_hp(10)
+	await _ticks(2)
+	_me().item_cd = 0
+	await _tap("quick_8")
+	await _ticks(1)
+	_check(Game.me.health.hp > 10, "a potion's quickslot key drinks it")
+	world.player.cooldown = 0
+	_me().cooldown = 0
+	await _ticks(30)
 
 func server_forfeit_check(ch: Character) -> void:
 	Net.ask(&"req_quest_forfeit", [&"q04_sweet_nectar"])

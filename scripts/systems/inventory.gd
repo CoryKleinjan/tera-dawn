@@ -125,6 +125,16 @@ func remove(item: ItemDef, n: int) -> int:
 			left -= taken
 	return n - left
 
+## The first slot (in its tab) holding `item`, or -1.
+func find(item: ItemDef) -> int:
+	if item == null:
+		return -1
+	var row: Array = tabs[item.tab()]
+	for i in SLOTS:
+		if row[i] != null and row[i].item == item:
+			return i
+	return -1
+
 func count_of(item: ItemDef) -> int:
 	var n := 0
 	for s in tabs[item.tab()]:

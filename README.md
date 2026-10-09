@@ -23,7 +23,7 @@ The game is built to grow: monsters, NPCs, items, skills, effects, maps and biom
 - **Online multiplayer.** Play alone, host a game friends can join, or join someone's server. Other players walk, climb and fight on the same map, with their names over their heads. A dedicated server can run with no window (see below).
 - Two maps: **Dawnrise Meadow** and **Ember Hollow**, joined by portals.
 - Platforms, ropes and ladders, and dropping down through platforms.
-- Basic attack and **Dawn Slash**, a skill that costs 8 MP and hits up to 4 monsters twice.
+- **Skills**: Skill Points every level (1 as a Beginner, 3 after), a skill book (K) with a tab per job, and eight quickslots for skills and potions. Beginners have Pebble Toss, Second Wind (HP recovery) and Quick Step (a speed buff); Warriors have Power Strike, Dawn Slash (hits up to 4 monsters twice), Iron Body (a defense buff) and Toughness (Max HP). Running buffs show next to the minimap with their time left.
 - Nine monsters, from Dewlings to the Flame Boar Chief boss, with patrol and chase behavior.
 - Two NPCs in the meadow village. Press Up to talk: a dialogue window shows what they offer.
 - **Quests**: six to start, from Elder Rowan and Mira, with kill, collect and visit objectives, a quest item that only drops while you're on its quest, and a repeatable one. A "!" over an NPC means they have a quest for you, "?" means you can hand one in. The quest log (Q) lists what's in progress, available and done, and a tracker under the minimap shows your progress.
@@ -44,12 +44,13 @@ The game is built to grow: monsters, NPCs, items, skills, effects, maps and biom
 | Jump | Space, C or Alt | A |
 | Drop through a platform | Down + Jump | Down + A |
 | Attack | X or Ctrl | X |
-| Dawn Slash | A or Shift | Y |
+| Quickslots (skills, potions) | A, D, F, G, V, B, N, M | Y, RB, LB |
 | Pick up items (hold to keep looting) | Z | B |
 | Inventory | I | Back |
 | Equipment | E | |
 | Character info | S | |
 | Quest log | Q | |
+| Skills | K | |
 | Enter a portal, talk to an NPC | Up | Up |
 | Pick a dialogue option | 1 to 9, or click | |
 | Close a window, or the menu | Esc | Start |

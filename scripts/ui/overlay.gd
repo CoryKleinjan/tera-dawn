@@ -1,7 +1,7 @@
 class_name TDOverlay
 extends Control
 ## Screen-space drawing over the map: name tags, HP bars, damage numbers, speech bubbles,
-## the map name, minimap, message log, map banner and the faint screen.
+## the map name, minimap, running buffs, message log, map banner and the faint screen.
 ## Things that follow the 3D stage are projected to the screen here so they stay crisp
 ## (no depth of field or fog on text).
 
@@ -21,14 +21,16 @@ func _draw() -> void:
 	_draw_minimap(Rect2(v.x - 182, 10, 172, 50))
 	if world.started:
 		_draw_quest_tracker(Vector2(v.x - 178, 82))
-	# message log, newest at the bottom, above the status bar
+		_draw_buffs(Vector2(v.x - 192, 12))
+	# message log, newest at the bottom, above the status bar and left of the quickslots
+	var log_right := v.x - 12 - (world.hud.quickslots.size.x + 6 if world.started else 0.0)
 	var n := world.log_lines.size()
 	for i in n:
 		var line: Dictionary = world.log_lines[i]
 		var y := v.y - TDStatusBar.HEIGHT - 12 - (n - 1 - i) * 18
 		var col: Color = line["color"]
 		col.a = minf(1.0, line["t"] / 40.0)
-		DrawUtil.text(self, font, Vector2(v.x - 12, y), line["text"], 13, col, -1, 4, Color(0.1, 0.07, 0.19, 0.8 * col.a))
+		DrawUtil.text(self, font, Vector2(log_right, y), line["text"], 13, col, -1, 4, Color(0.1, 0.07, 0.19, 0.8 * col.a))
 	# map banner
 	if world.banner_t > 0:
 		var a := minf(1.0, minf(world.banner_t / 30.0, (180 - world.banner_t) / 20.0))
@@ -53,6 +55,21 @@ func _draw_minimap(mm: Rect2) -> void:
 		draw_circle(inner.position + Vector2(a.position.x * sx, a.position.y * sy - 3), 2.5, Color("8cc6ff"))
 	var pp := world.player.position
 	draw_circle(inner.position + Vector2(pp.x * sx, pp.y * sy - 3), 3, Palette.SUN)
+
+## Running buffs left of the minimap, newest on the left, with the seconds they have left.
+func _draw_buffs(right_top: Vector2) -> void:
+	var x := right_top.x
+	for id in Game.me.buffs:
+		var s: SkillDef = Content.skills.get(id)
+		if s == null:
+			continue
+		x -= 30
+		var r := Rect2(x, right_top.y, 26, 26)
+		if s.icon:
+			draw_texture_rect(s.icon, r, false)
+		var left := ceili(Game.me.buffs[id][1] / 60.0)
+		DrawUtil.text(self, Game.num_font, Vector2(r.get_center().x, r.end.y + 11), str(left), 11,
+			Palette.MIST if left > 10 else Color("ffb38a"), 0, 4, Palette.NIGHT)
 
 ## Quests in progress and how far along they are, under the minimap.
 func _draw_quest_tracker(at: Vector2) -> void:

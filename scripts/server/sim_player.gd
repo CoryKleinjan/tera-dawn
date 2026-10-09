@@ -66,9 +66,14 @@ func step() -> bool:
 	if faint_t > 0:
 		faint_t -= 1
 		return faint_t == 0
+	if not character.buffs.is_empty():
+		for s in character.tick_buffs():
+			map.tell(self, "%s wore off." % s.display_name, Palette.MIST)
+			dirty_character = true
 	if map.tick % 120 == 0:
-		character.health.heal(2 + character.level / 3)
-		character.restore_mp(2 + character.level / 4)
+		var bonus := character.regen_bonus()
+		character.health.heal(2 + character.level / 3 + bonus.x)
+		character.restore_mp(2 + character.level / 4 + bonus.y)
 		dirty_vitals = true
 	return false
 

@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="SkillDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
+[ext_resource type="Resource" path="res://data/effects/swish.tres" id="2_swish"]
+[ext_resource type="Resource" path="res://data/effects/critical.tres" id="3_critical"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/power_strike.png" id="4_power_strike"]
+
+[resource]
+script = ExtResource("1_skill_def")
+id = &"power_strike"
+display_name = "Power Strike"
+job = &"warrior"
+max_level = 20
+kind = 0
+description = "Put your whole weight behind one blow against a single monster."
+mp_cost = 4
+mp_cost_per_level = 0.3
+cooldown = 26
+action_ticks = 18
+reach = 96.0
+height = 100.0
+max_targets = 1
+hits = 1
+damage_multiplier = 1.6
+damage_per_level = 0.08
+animation = &"attack"
+effect = ExtResource("2_swish")
+hit_effect = ExtResource("3_critical")
+icon = ExtResource("4_power_strike")
