@@ -34,9 +34,5 @@ jobs:
           sudo ln -sf ~/godot/godot /usr/local/bin/godot
           godot --headless --path . --import || true
 
-      - name: Unit, content, server and UI tests
-        run: timeout 900 godot --headless --path . res://tests/run_tests.tscn
-
-      - name: Smoke test
-        if: always()
-        run: timeout 900 godot --headless --path . res://tests/smoke_test.tscn
+      - name: Run every test
+        run: tests/run_all.sh

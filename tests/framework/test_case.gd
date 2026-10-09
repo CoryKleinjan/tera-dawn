@@ -23,11 +23,18 @@ func check(ok: bool, what: String) -> bool:
 		failures.append(what)
 	return ok
 
+# The messages below are only built when a check fails: printing some values (objects
+# that point at each other) is slow or recurses.
+
 func check_eq(got: Variant, want: Variant, what: String) -> bool:
-	return check(_same(got, want), "%s: got %s, want %s" % [what, _show(got), _show(want)])
+	if _same(got, want):
+		return true
+	return check(false, "%s: got %s, want %s" % [what, _show(got), _show(want)])
 
 func check_ne(got: Variant, unwanted: Variant, what: String) -> bool:
-	return check(not _same(got, unwanted), "%s: got %s, wanted anything else" % [what, _show(got)])
+	if not _same(got, unwanted):
+		return true
+	return check(false, "%s: got %s, wanted anything else" % [what, _show(got)])
 
 func check_near(got: float, want: float, what: String, within := 0.001) -> bool:
 	return check(absf(got - want) <= within, "%s: got %s, want %s (±%s)" % [what, got, want, within])
@@ -36,7 +43,9 @@ func check_between(got: float, low: float, high: float, what: String) -> bool:
 	return check(got >= low and got <= high, "%s: got %s, want %s to %s" % [what, got, low, high])
 
 func check_has(list: Variant, item: Variant, what: String) -> bool:
-	return check(item in list, "%s: %s not in %s" % [what, _show(item), _show(list)])
+	if item in list:
+		return true
+	return check(false, "%s: %s not in %s" % [what, _show(item), _show(list)])
 
 func fail(what: String) -> void:
 	failures.append(what)
@@ -59,5 +68,7 @@ func _same(a: Variant, b: Variant) -> bool:
 	return a == b
 
 func _show(v: Variant) -> String:
+	if v is Object:
+		return str(v)
 	var s := var_to_str(v)
 	return s if s.length() <= 120 else s.substr(0, 117) + "..."
