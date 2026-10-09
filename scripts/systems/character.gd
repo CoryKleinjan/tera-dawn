@@ -185,8 +185,16 @@ func spend_ammo(n: int) -> void:
 func xp_need(lvl := -1) -> int:
 	if lvl < 0:
 		lvl = level
-	# a few kills a level at first, climbing to a few dozen by the 30s, like MapleStory
-	return int(floor(15.0 * pow(lvl, 1.6) * (1.0 + lvl / 8.0)))
+	# Intended pace, for a quick player hunting monsters near their level: about 1 minute
+	# for Lv 1, 2 hours to Lv 10 (the job), 10 to Lv 20, 27 to Lv 30 and 40 to the Lv 35
+	# cap, about classic MapleStory. It comes from the 75-minute playtest: EXP earned per
+	# minute (kills and quests) was about 33 * lvl^1.3, and minutes per level are meant to
+	# grow as about 1.5 * lvl^1.32, so a level takes their product, about 50 * lvl^2.6
+	# (53 lands the cap on 40 hours). Quest EXP rewards are scaled to match; change them
+	# together.
+	const SCALE := 53.0
+	const GROWTH := 2.6
+	return int(floor(SCALE * pow(lvl, GROWTH)))
 
 ## Adds EXP and returns how many levels were gained.
 func gain_xp(n: int) -> int:

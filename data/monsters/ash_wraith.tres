@@ -105,7 +105,7 @@ max_amount = 93
 [sub_resource type="Resource" id="Drop35_dawnbreaker_claymore"]
 script = ExtResource("4_drop_entry")
 item = ExtResource("d35_dawnbreaker_claymore")
-chance = 0.015
+chance = 0.0225
 min_amount = 1
 max_amount = 1
 
@@ -171,7 +171,7 @@ id = &"ash_wraith"
 display_name = "Ash Wraith"
 level = 31
 max_hp = 6499
-attack = 72
+attack = 90
 exp_reward = 935
 speed = 1.3
 size = Vector2(36.0, 56.0)

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=25 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=27 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="Resource" path="res://data/projectiles/mob_bolt.tres" id="2_mob_bolt"]
@@ -14,6 +14,14 @@
 [ext_resource type="Resource" path="res://data/items/equips/patched_trousers.tres" id="12_patched_trousers"]
 [ext_resource type="Resource" path="res://data/items/equips/canvas_gloves.tres" id="13_canvas_gloves"]
 [ext_resource type="Resource" path="res://data/items/equips/copper_ring.tres" id="14_copper_ring"]
+[ext_resource type="Resource" path="res://data/items/equips/oak_staff.tres" id="15_oak_staff"]
+
+[sub_resource type="Resource" id="Resource_11"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("15_oak_staff")
+chance = 0.0225
+min_amount = 1
+max_amount = 1
 
 [sub_resource type="Resource" id="Resource_10"]
 script = ExtResource("4_drop_entry")
@@ -91,7 +99,7 @@ id = &"star_bat"
 display_name = "Star Bat"
 level = 15
 max_hp = 1128
-attack = 37
+attack = 46
 exp_reward = 173
 speed = 1.1
 size = Vector2(40.0, 30.0)
@@ -102,4 +110,4 @@ shot = ExtResource("2_mob_bolt")
 sprite_frames = ExtResource("3_petal_bat")
 sprite_scale = 1.0
 tint = Color(0.501961, 0.501961, 1.0, 1.0)
-drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10")])
+drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11")])

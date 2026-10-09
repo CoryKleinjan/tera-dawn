@@ -74,14 +74,14 @@ max_amount = 1
 [sub_resource type="Resource" id="Resource_13"]
 script = ExtResource("4_drop_entry")
 item = ExtResource("17_elmwood_longbow")
-chance = 0.3
+chance = 0.45
 min_amount = 1
 max_amount = 1
 
 [sub_resource type="Resource" id="Resource_12"]
 script = ExtResource("4_drop_entry")
 item = ExtResource("16_gale_bow")
-chance = 0.3
+chance = 0.45
 min_amount = 1
 max_amount = 1
 
@@ -172,7 +172,7 @@ max_amount = 1
 [sub_resource type="Resource" id="Drop35_aurora_wand"]
 script = ExtResource("4_drop_entry")
 item = ExtResource("d35_aurora_wand")
-chance = 0.1
+chance = 0.15
 min_amount = 1
 max_amount = 1
 
@@ -207,7 +207,7 @@ max_amount = 1
 [sub_resource type="Resource" id="Drop35_starfall_staff"]
 script = ExtResource("4_drop_entry")
 item = ExtResource("d35_starfall_staff")
-chance = 0.1
+chance = 0.15
 min_amount = 1
 max_amount = 1
 
@@ -259,7 +259,7 @@ id = &"arcane_sentinel"
 display_name = "Arcane Sentinel"
 level = 30
 max_hp = 84040
-attack = 91
+attack = 114
 exp_reward = 10384
 speed = 0.5
 size = Vector2(96.0, 150.0)

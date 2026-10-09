@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=26 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=28 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/barnacle_boar.tres" id="2_barnacle_boar"]
@@ -14,6 +14,14 @@
 [ext_resource type="Resource" path="res://data/items/equips/kite_shield.tres" id="12_kite_shield"]
 [ext_resource type="Resource" path="res://data/items/equips/brigand_gloves.tres" id="13_brigand_gloves"]
 [ext_resource type="Resource" path="res://data/items/equips/ranger_breeches.tres" id="14_ranger_breeches"]
+[ext_resource type="Resource" path="res://data/items/equips/barnacle_knuckle.tres" id="15_barnacle_knuckle"]
+
+[sub_resource type="Resource" id="Resource_12"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("15_barnacle_knuckle")
+chance = 0.0225
+min_amount = 1
+max_amount = 1
 
 [sub_resource type="Resource" id="Resource_11"]
 script = ExtResource("3_drop_entry")
@@ -98,7 +106,7 @@ id = &"barnacle_boar"
 display_name = "Barnacle Boar"
 level = 22
 max_hp = 2838
-attack = 52
+attack = 65
 exp_reward = 420
 speed = 1.25
 size = Vector2(60.0, 42.0)
@@ -106,4 +114,4 @@ boss = false
 flying = false
 sprite_frames = ExtResource("2_barnacle_boar")
 sprite_scale = 1.0
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12")])

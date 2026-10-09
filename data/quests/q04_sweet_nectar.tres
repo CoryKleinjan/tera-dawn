@@ -34,6 +34,6 @@ offer_text = "I'm baking honey cakes for the village, but I'm out of nectar. Pet
 progress_text = "Five Petal Nectar. Only the Petal Bats have it, and they flutter up high."
 complete_text = "Mmm, smell that! The first cake is yours. And a few Dawnshards for the trouble."
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1")])
-reward_xp = 248
+reward_xp = 1900
 reward_shards = 200
 reward_items = Array[ExtResource("5_drop_entry")]([SubResource("Resource_2")])

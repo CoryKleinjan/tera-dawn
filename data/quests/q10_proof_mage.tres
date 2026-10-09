@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="1_quest_def"]
 [ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="2_quest_objective"]
-[ext_resource type="Resource" path="res://data/items/etc/dewling_droplet.tres" id="3_dewling_droplet"]
+[ext_resource type="Resource" path="res://data/items/etc/glow_spore.tres" id="3_glow_spore"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/equips/apprentice_hat.tres" id="5_apprentice_hat"]
 
@@ -16,7 +16,7 @@ max_amount = 1
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("2_quest_objective")
 kind = 1
-item = ExtResource("3_dewling_droplet")
+item = ExtResource("3_glow_spore")
 count = 20
 
 [resource]
@@ -27,10 +27,10 @@ giver = &"lumewood_instructor"
 min_level = 8
 requires = Array[StringName]([])
 jobs = Array[StringName]([&"mage"])
-offer_text = "You've joined us, but words are cheap. Bring me 20 Dewling Droplets from Dawnrise Isle and prove you can hunt."
-progress_text = "20 Dewling Droplets. They come from the monsters of Dawnrise Isle."
+offer_text = "You've joined us, but words are cheap. Bring me 20 Glow Spores from the Glowcaps in Glowcap Hollow, just outside town, and prove you can hunt."
+progress_text = "20 Glow Spores. The Glowcaps in Glowcap Hollow carry them."
 complete_text = "Good. You have the makings of one of us. Wear this with pride."
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1")])
-reward_xp = 1600
+reward_xp = 22600
 reward_shards = 500
 reward_items = Array[ExtResource("4_drop_entry")]([SubResource("Resource_2")])
