@@ -51,7 +51,7 @@ max_amount = 3
 [sub_resource type="Resource" id="Resource_loot2"]
 script = ExtResource("3_drop_entry")
 item = ExtResource("loot_ember_cleaver")
-chance = 0.25
+chance = 0.375
 min_amount = 1
 max_amount = 1
 
@@ -72,7 +72,7 @@ max_amount = 1
 [sub_resource type="Resource" id="Resource_loot5"]
 script = ExtResource("3_drop_entry")
 item = ExtResource("loot_dawn_blade")
-chance = 0.2
+chance = 0.3
 min_amount = 1
 max_amount = 1
 
@@ -96,7 +96,7 @@ id = &"flame_boar_chief"
 display_name = "Flame Boar Chief"
 level = 12
 max_hp = 2251
-attack = 34
+attack = 43
 exp_reward = 399
 speed = 1.0
 size = Vector2(130.0, 110.0)

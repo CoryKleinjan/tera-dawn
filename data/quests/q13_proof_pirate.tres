@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="1_quest_def"]
 [ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="2_quest_objective"]
-[ext_resource type="Resource" path="res://data/items/etc/pebble_core.tres" id="3_pebble_core"]
+[ext_resource type="Resource" path="res://data/items/etc/sand_claw.tres" id="3_sand_claw"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/equips/tricorn_hat.tres" id="5_tricorn_hat"]
 
@@ -16,8 +16,8 @@ max_amount = 1
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("2_quest_objective")
 kind = 1
-item = ExtResource("3_pebble_core")
-count = 15
+item = ExtResource("3_sand_claw")
+count = 20
 
 [resource]
 script = ExtResource("1_quest_def")
@@ -27,10 +27,10 @@ giver = &"driftcove_instructor"
 min_level = 10
 requires = Array[StringName]([])
 jobs = Array[StringName]([&"pirate"])
-offer_text = "You've joined us, but words are cheap. Bring me 15 Pebble Cores from Dawnrise Isle and prove you can hunt."
-progress_text = "15 Pebble Cores. They come from the monsters of Dawnrise Isle."
+offer_text = "You've joined us, but words are cheap. Bring me 20 Sand Claws from the Sand Crabs in the Tidepools, just outside town, and prove you can hunt."
+progress_text = "20 Sand Claws. The Sand Crabs in the Tidepools carry them."
 complete_text = "Good. You have the makings of one of us. Wear this with pride."
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1")])
-reward_xp = 1800
+reward_xp = 28300
 reward_shards = 500
 reward_items = Array[ExtResource("4_drop_entry")]([SubResource("Resource_2")])

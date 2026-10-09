@@ -37,6 +37,6 @@ offer_text = "You've grown strong, Dawnling. East through the portal lies Ember 
 progress_text = "Go east to Ember Hollow and defeat five Ember Boars. Take potions."
 complete_text = "You've returned, and singed but standing! You are ready for a real blade. Take the Dawn Blade."
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1"), SubResource("Resource_2")])
-reward_xp = 1200
+reward_xp = 15800
 reward_shards = 400
 reward_items = Array[ExtResource("4_drop_entry")]([SubResource("Resource_3")])

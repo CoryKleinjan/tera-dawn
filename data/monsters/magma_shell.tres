@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=26 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=28 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/monsters/ashshell.png" id="2_ashshell"]
@@ -14,6 +14,14 @@
 [ext_resource type="Resource" path="res://data/items/equips/acorn_pendant.tres" id="12_acorn_pendant"]
 [ext_resource type="Resource" path="res://data/items/equips/hiking_boots.tres" id="13_hiking_boots"]
 [ext_resource type="Resource" path="res://data/items/equips/ranger_breeches.tres" id="14_ranger_breeches"]
+[ext_resource type="Resource" path="res://data/items/equips/cinder_greatsword.tres" id="15_cinder_greatsword"]
+
+[sub_resource type="Resource" id="Resource_12"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("15_cinder_greatsword")
+chance = 0.0225
+min_amount = 1
+max_amount = 1
 
 [sub_resource type="Resource" id="Resource_11"]
 script = ExtResource("3_drop_entry")
@@ -98,7 +106,7 @@ id = &"magma_shell"
 display_name = "Magma Shell"
 level = 20
 max_hp = 2254
-attack = 48
+attack = 60
 exp_reward = 336
 speed = 0.4
 size = Vector2(64.0, 48.0)
@@ -108,4 +116,4 @@ texture = ExtResource("2_ashshell")
 sprite_scale = 1.0
 tint = Color(1.0, 0.439216, 0.25098, 1.0)
 light_color = Color(1.0, 0.439216, 0.25098, 1.0)
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12")])

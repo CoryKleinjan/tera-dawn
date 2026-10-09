@@ -169,14 +169,14 @@ max_amount = 1
 [sub_resource type="Resource" id="Drop35_leviathan_fist"]
 script = ExtResource("4_drop_entry")
 item = ExtResource("d35_leviathan_fist")
-chance = 0.1
+chance = 0.15
 min_amount = 1
 max_amount = 1
 
 [sub_resource type="Resource" id="Drop35_leviathan_hand_cannon"]
 script = ExtResource("4_drop_entry")
 item = ExtResource("d35_leviathan_hand_cannon")
-chance = 0.1
+chance = 0.15
 min_amount = 1
 max_amount = 1
 
@@ -235,7 +235,7 @@ id = &"reef_titan"
 display_name = "Reef Titan"
 level = 30
 max_hp = 84040
-attack = 91
+attack = 114
 exp_reward = 10384
 speed = 0.5
 size = Vector2(102.0, 160.0)

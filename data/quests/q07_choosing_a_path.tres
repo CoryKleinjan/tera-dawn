@@ -30,6 +30,6 @@ offer_text = "You're nearly ready to choose a job. The job instructors live on t
 progress_text = "Captain Marlo's ship to Dawnharbor leaves from the meadow. Visit the port, then come back."
 complete_text = "The mainland! Did you see the masts? Here, for the road. Return Scrolls bring you home in a pinch."
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1")])
-reward_xp = 750
+reward_xp = 9900
 reward_shards = 300
 reward_items = Array[ExtResource("3_drop_entry")]([SubResource("Resource_2")])

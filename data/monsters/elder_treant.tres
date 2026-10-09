@@ -61,7 +61,7 @@ max_amount = 1
 [sub_resource type="Resource" id="Resource_14"]
 script = ExtResource("4_drop_entry")
 item = ExtResource("18_elmwood_longbow")
-chance = 0.3
+chance = 0.45
 min_amount = 1
 max_amount = 1
 
@@ -75,7 +75,7 @@ max_amount = 1
 [sub_resource type="Resource" id="Resource_12"]
 script = ExtResource("4_drop_entry")
 item = ExtResource("16_stormbreaker_knuckle")
-chance = 0.3
+chance = 0.45
 min_amount = 1
 max_amount = 1
 
@@ -166,7 +166,7 @@ max_amount = 1
 [sub_resource type="Resource" id="Drop35_skyreach_bow"]
 script = ExtResource("4_drop_entry")
 item = ExtResource("d35_skyreach_bow")
-chance = 0.1
+chance = 0.15
 min_amount = 1
 max_amount = 1
 
@@ -211,7 +211,7 @@ id = &"elder_treant"
 display_name = "Elder Treant"
 level = 28
 max_hp = 71105
-attack = 85
+attack = 106
 exp_reward = 8835
 speed = 0.5
 size = Vector2(96.0, 150.0)

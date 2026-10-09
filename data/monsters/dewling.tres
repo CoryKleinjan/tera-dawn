@@ -41,7 +41,7 @@ max_amount = 1
 [sub_resource type="Resource" id="Resource_loot2"]
 script = ExtResource("3_drop_entry")
 item = ExtResource("loot_training_sword")
-chance = 0.02
+chance = 0.03
 min_amount = 1
 max_amount = 1
 

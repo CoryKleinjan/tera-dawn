@@ -24,6 +24,6 @@ offer_text = "Boar Tusks make the finest potion stirrers. I'll always pay for te
 progress_text = "Ten Boar Tusks from the Ember Boars of the Hollow."
 complete_text = "Lovely tusks. Here's your payment. Come back any time!"
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1")])
-reward_xp = 500
+reward_xp = 7100
 reward_shards = 500
 reward_items = Array[ExtResource("4_drop_entry")]([])

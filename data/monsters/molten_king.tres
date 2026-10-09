@@ -171,7 +171,7 @@ max_amount = 1
 [sub_resource type="Resource" id="Drop35_dawnbreaker_claymore"]
 script = ExtResource("4_drop_entry")
 item = ExtResource("d35_dawnbreaker_claymore")
-chance = 0.1
+chance = 0.15
 min_amount = 1
 max_amount = 1
 
@@ -251,7 +251,7 @@ id = &"molten_king"
 display_name = "Molten King"
 level = 30
 max_hp = 84040
-attack = 91
+attack = 114
 exp_reward = 10384
 speed = 1.0
 size = Vector2(156.0, 132.0)
