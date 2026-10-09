@@ -59,9 +59,42 @@ TDWorld  ───────────────────────�
   `Net.ask(&"req_…", [args])`; the server answers with events, and `Game.me` (your copy of
   your Character) is refreshed from them. Never change `Game.me` to make something happen.
 
-The three ways to play all use the same rules: **Play** runs a server inside the game with an
-offline peer (messages never touch the network), **Host** does the same on an ENet port so
+The three ways to play all use the same rules: **Play solo** runs a server inside the game with
+an offline peer (messages never touch the network), **Host** does the same on an ENet port so
 others can join, and `-- --server` (see `scripts/boot.gd`) runs a server with no player.
+
+### Accounts and character select
+
+Every server has its own accounts, and every character belongs to one account on the server
+it was made on. Nothing is shared between servers, so characters never move to another one.
+
+- **`TDLobby`** (`scripts/server/lobby.gd`, owned by the server) handles a connection before
+  it's in the world: `req_register` / `req_login` (answered with `ev_logged_in` or
+  `ev_refused`), then character select: `req_create_character`, `req_delete_character`
+  (the player must type the name), `req_play` (into the world, `ev_joined`) and
+  `req_leave_character` (back to the list). `ev_characters` sends the list again. Every other
+  request is ignored until a character is in the world, because the server finds the player
+  by peer first. An account has at most `TDLobby.MAX_CHARACTERS` characters.
+- **`AccountStore`** keeps accounts in `<save folder>/accounts/`: the username, a
+  `PasswordHash` record and the names of the account's characters. Passwords are never
+  stored: `PasswordHash` is PBKDF2-HMAC-SHA256 with a random salt and 100,000 rounds (kept per
+  record, so it can be raised). Checking a password runs on a worker thread.
+- **`LoginGuard`** drops a connection after 5 wrong passwords and locks a username for 30
+  seconds after 5 wrong passwords in a row. A wrong username and a wrong password get the same
+  answer and take as long.
+- **The local account** (`AccountStore.LOCAL`): in single player and when hosting, the
+  player at the keyboard (peer 1) logs in with `req_local_login` and no password. The first
+  time, it takes in characters saved before accounts that no account owns.
+- **`CharacterStore`** still keeps one file per character name (names are unique on a
+  server); a deleted character's file moves to `deleted/` for the server's owner.
+- **Encryption** (`TDTls`): host and dedicated servers turn on DTLS for ENet with the key and
+  certificate in `<save folder>/tls/` (a self-signed pair is made the first time). Clients
+  always encrypt; they check the server's identity only when the game ships its certificate
+  as `res://certs/<address>.crt`, so other servers are encrypted but not verified.
+- On the client, `Net.log_in` connects and sends the username and password once the
+  connection is up (the password isn't kept), the title card (`TDHud`) has the login and
+  register boxes, `TDCharacterSelect` shows the list and `TDDeleteConfirm` asks before
+  deleting. `settings.cfg` remembers the last username and server, never the password.
 
 Shared pieces both sides use: `MapLayout` (a map's platforms, ropes, portals), `DropFlight`
 (how a drop flies and lands, run identically everywhere), `Combat` and `CharacterStats`.
@@ -88,10 +121,10 @@ and a forwarding method on `TDSocial`.
 
 ### Character creation and looks
 
-Playing a name with no character opens the character creator (`TDCreator`): the server
-answers `req_join` with `ev_new_character`, and the client joins again with the creator's
-choices (`NewCharacter.to_dict()`). The server keeps only what the creator offers and makes
-a level 1 character in the starting job (`Character.START_JOB`).
+**Create** on character select opens the character creator (`TDCreator`): a name and the
+look and outfit, sent with `req_create_character` (`NewCharacter.to_dict()`). The server keeps
+only what the creator offers and makes a level 1 character in the starting job
+(`Character.START_JOB`), then sends the list back with the new character picked.
 
 - **Appearance** (on the Character) is a skin tone, face, eye colour, hairstyle and hair
   colour, each the id of a `LookDef` in `data/looks/`. Add an option by adding a file;

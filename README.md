@@ -20,7 +20,7 @@ The game is built to grow: monsters, NPCs, items, skills, effects, maps and biom
 
 ## What's in it
 
-- **Online multiplayer.** Play alone, host a game friends can join, or join someone's server. Other players walk, climb and fight on the same map, with their names over their heads. A dedicated server can run with no window (see below).
+- **Online multiplayer.** Play alone, host a game friends can join, or log in to someone's server. Each server has its own accounts (username and password) and characters, up to 6 per account, picked on character select. Other players walk, climb and fight on the same map, with their names over their heads. A dedicated server can run with no window (see below).
 - **A sprawling world**: 43 maps. Dawnrise Isle (the meadow, Ember Hollow and three fields west to the Tidal Flats), Dawnharbor, five job towns, a ring road of twelve fields joining the towns, and four hunting grounds behind each job town that end in a boss. Every map is joined to its neighbours by portals at its edges.
 - Platforms, ropes and ladders, and dropping down through platforms.
 - **Skills**: Skill Points every level (1 as a Beginner, 3 after), a skill book (K) with a tab per job, and eight quickslots for skills and potions. Beginners have Pebble Toss, Second Wind (HP recovery) and Quick Step (a speed buff); Warriors have Power Strike, Dawn Slash (hits up to 4 monsters twice), Iron Body (a defense buff) and Toughness (Max HP). Archers shoot arrows (Double Shot, Arrow Blow, Focus, Critical Shot), Magicians cast spells from Magic Attack (Energy Bolt, Arcane Claw, Magic Armor, Mana Well), Thieves throw stars (Lucky Seven, Star Scatter, Haste, Nimble Body) and Pirates brawl or shoot (Somersault Kick, Flash Fist, Quick Draw, Bullet Time).
@@ -48,7 +48,7 @@ The game is built to grow: monsters, NPCs, items, skills, effects, maps and biom
 - **Dawnshards** (currency) dropped by monsters, plus potions, monster parts and gear from per-monster drop tables.
 - MapleStory-style stats: STR, DEX, INT and LUK, 5 Ability Points per level, and a damage range worked out from your main stat and weapon.
 - An **inventory** with Equip, Use, Etc and Setup tabs, **equipment** in 12 slots that changes your stats, and a **character** window.
-- Characters saved by the server, one file per name in `user://characters/` (a single-player save from before multiplayer is brought in the first time you play).
+- Characters saved by the server, one file per name in `user://characters/`, each owned by one account on that server (characters from before accounts, and a single-player save from before multiplayer, join your local account the first time you play solo or host).
 - Keyboard and gamepad controls, fullscreen toggle, title and pause menu.
 
 ## Controls
@@ -87,7 +87,7 @@ rate limit, and bloom, ambient occlusion and fog for slower computers). They're 
 
 1. Install [Godot 4.3](https://godotengine.org/download) (the standard build; C# isn't needed).
 2. In the Project Manager, choose **Import** and pick this folder's `project.godot`.
-3. Press **F5** to play. On the title screen, type a name and pick **Play** (just you), **Host** (friends can join you on port 7350) or **Join** (type the host's address).
+3. Press **F5** to play. On the title screen, pick **Play solo** (just you), **Host** (friends can join you on port 7350), or type a server's address, a username and a password and pick **Log in** (or **Register** the first time on that server). Then pick, make or delete characters on character select.
 
 Run a dedicated server, with no window and no player of its own:
 
@@ -95,7 +95,7 @@ Run a dedicated server, with no window and no player of its own:
 godot --headless --path . -- --server --port 7350
 ```
 
-Players join it with **Join** and the server's address. It keeps their characters in its own `user://characters/` folder and saves every 10 seconds, on every map change and when they leave. Hosting over the internet needs UDP port 7350 forwarded to the host.
+Players register and log in with the server's address. It keeps accounts and characters in its own `user://characters/` folder (accounts in `accounts/`, deleted characters in `deleted/`) and saves every 10 seconds, on every map change and when they leave. Passwords are stored only as salted PBKDF2 hashes, and the connection is encrypted (DTLS) with the key and certificate in `user://characters/tls/`, made the first time the server starts. To let players verify an official server, put its real certificate there and ship it with the game as `certs/<address>.crt`. Hosting over the internet needs UDP port 7350 forwarded to the host.
 
 ## Tests
 

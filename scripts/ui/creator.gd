@@ -1,12 +1,12 @@
 class_name TDCreator
 extends CenterContainer
-## The character creator, shown when you play a name that has no character yet: a live
-## preview of your hero and a row of arrows for each choice (skin, face, eyes, hair, hair
-## colour and the starting outfit). Every new character starts in the starting job
+## The character creator, opened from character select: a name, a live preview of your
+## hero and a row of arrows for each choice (skin, face, eyes, hair, hair colour and the
+## starting outfit). Every new character starts in the starting job
 ## (Character.START_JOB); the options come from data/looks/ and the job's `creator_gear`.
 
-## Create was pressed with these choices.
-signal created(made: NewCharacter)
+## Create was pressed with this name and these choices.
+signal created(char_name: String, made: NewCharacter)
 ## Back was pressed.
 signal cancelled
 
@@ -17,7 +17,10 @@ var made: NewCharacter
 var job: JobDef
 var preview := PaperdollView.new()
 var heading: Label
+var name_field: LineEdit
 var create_button: Button
+## Why the server turned the last Create down (a name that's taken...).
+var message: Label
 ## Every choice row's value label, keyed by "look:<kind>" or "outfit:<slot>".
 var values := {}
 var _pose := 0
@@ -41,6 +44,13 @@ func _init() -> void:
 	heading.add_theme_font_override("font", Game.num_font)
 	heading.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	left.add_child(heading)
+	name_field = LineEdit.new()
+	name_field.placeholder_text = "Character name"
+	name_field.max_length = CharacterStore.MAX_NAME
+	name_field.alignment = HORIZONTAL_ALIGNMENT_CENTER
+	name_field.custom_minimum_size = Vector2(250, 36)
+	name_field.text_submitted.connect(func(_t: String) -> void: _create())
+	left.add_child(name_field)
 	var stage := Panel.new()
 	stage.custom_minimum_size = Vector2(250, 176)
 	stage.add_theme_stylebox_override("panel", UiSkin.box("equip_doll_bg", 12, 12))
@@ -83,23 +93,45 @@ func _init() -> void:
 		made.roll(job)
 		_refresh()))
 	buttons.add_child(_small_button("Back", func() -> void: cancelled.emit()))
-	create_button = _small_button("Create", func() -> void: created.emit(made))
+	create_button = _small_button("Create", _create)
 	create_button.custom_minimum_size.x = 100
 	buttons.add_child(create_button)
 	right.add_child(Control.new()) # a little space
 	right.add_child(buttons)
+	message = _label("", 13, Palette.BAD)
+	message.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	message.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	message.custom_minimum_size.x = 300
+	message.hide()
+	right.add_child(message)
 	_refresh()
 
-## Starts over for a new character called `char_name`.
-func open(char_name: String) -> void:
+## Starts over for a new character.
+func open() -> void:
 	made = NewCharacter.new(job.id)
-	heading.text = "Create %s" % char_name
+	heading.text = "New character"
+	name_field.text = ""
+	show_message("")
 	preview.facing = 1
 	_pose = 0
 	preview.play(POSES[0])
 	_refresh()
 	show()
-	create_button.grab_focus()
+	name_field.grab_focus()
+
+func show_message(text: String) -> void:
+	message.text = text
+	message.visible = text != ""
+
+## Create: asks for a name first if there isn't one.
+func _create() -> void:
+	var n := CharacterStore.clean_name(name_field.text)
+	if n == "":
+		show_message("Please pick a name.")
+		name_field.grab_focus()
+		return
+	show_message("")
+	created.emit(n, made)
 
 ## The text a choice row shows now.
 func value_text(key: String) -> String:

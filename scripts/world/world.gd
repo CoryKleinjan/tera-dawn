@@ -71,10 +71,12 @@ func start() -> void:
 	started = true
 	player.rig.visible = true
 
-## Leaves the game and goes back to the title screen.
-func stop() -> void:
+## Stops showing the game. Also leaves the server and logs out, unless `stay_connected`
+## (going back to character select).
+func stop(stay_connected := false) -> void:
 	started = false
-	Net.stop()
+	if not stay_connected:
+		Net.stop()
 	for a in avatars.values():
 		a.queue_free()
 	avatars.clear()

@@ -17,7 +17,7 @@ var world: TDWorld
 var hud: TDHud
 var _save_dir := ""
 var _import_legacy := true
-var _player_name := ""
+var _username := ""
 
 func _init(owner: Node) -> void:
 	test = owner
@@ -26,7 +26,9 @@ func _init(owner: Node) -> void:
 ## starting map. Monsters can't hurt the player.
 func start(char_name := "Uitester") -> void:
 	await open_title()
-	Net.play_single(char_name, NewCharacter.new().to_dict())
+	Net.play_single()
+	Net.create_character(char_name, NewCharacter.new())
+	Net.play(char_name)
 	await ticks(3)
 	player().inv = 100000000
 
@@ -34,7 +36,7 @@ func start(char_name := "Uitester") -> void:
 func open_title() -> void:
 	_save_dir = Net.save_dir
 	_import_legacy = Net.import_legacy_save
-	_player_name = Game.player_name
+	_username = Game.last_username
 	Net.save_dir = SAVE_DIR
 	Net.import_legacy_save = false
 	clear_saves()
@@ -54,13 +56,17 @@ func stop() -> void:
 	Net.save_dir = _save_dir
 	Net.import_legacy_save = _import_legacy
 	Game.social = {}
-	Game.player_name = _player_name
-	Game.me = Character.create(_player_name)
+	Game.last_username = _username
+	Game.me = Character.create("")
 	clear_saves()
 	DirAccess.remove_absolute(SAVE_DIR)
 
 static func clear_saves() -> void:
 	DirAccess.make_dir_recursive_absolute(SAVE_DIR)
+	for d in DirAccess.get_directories_at(SAVE_DIR):
+		for f in DirAccess.get_files_at(SAVE_DIR.path_join(d)):
+			DirAccess.remove_absolute(SAVE_DIR.path_join(d).path_join(f))
+		DirAccess.remove_absolute(SAVE_DIR.path_join(d))
 	for f in DirAccess.get_files_at(SAVE_DIR):
 		DirAccess.remove_absolute(SAVE_DIR.path_join(f))
 

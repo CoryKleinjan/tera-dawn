@@ -1,11 +1,14 @@
 class_name BotClient
 extends Node
-## A second player for the smoke test's multiplayer check. It joins the host on the port
-## given after `--`, keeps attacking for a while (at least 20 swings), and writes what it saw
-## to the file given after the port (RESULT_PATH if none):
+## A second player for the smoke test's multiplayer check. It registers an account on the
+## host on the port given after `--` (over the encrypted connection), makes a character and
+## plays it, keeps attacking for a while (at least 20 swings), and writes what it saw to the
+## file given after the port (RESULT_PATH if none):
 ##   godot --headless --path . res://tests/bot_client.tscn -- 7391 user://smoke_test_bot.json
 
 const RESULT_PATH := "user://smoke_test_bot.json"
+const USERNAME := "smoke_bot"
+const PASSWORD := "bot password 123"
 
 var world: TDWorld
 var result := {"joined": false, "saw_host": false, "saw_mobs": false, "saw_hits": false}
@@ -24,8 +27,10 @@ func _run() -> void:
 	world = load("res://scenes/world.tscn").instantiate() as TDWorld
 	add_child(world)
 	await _ticks(2)
-	Net.join("Bot", "127.0.0.1", port, NewCharacter.new().to_dict())
-	for i in 600:
+	Net.characters_changed.connect(func(_selected: String) -> void: Net.play("Bot"))
+	Net.logged_in.connect(func() -> void: Net.create_character("Bot", NewCharacter.new()))
+	Net.log_in("127.0.0.1", USERNAME, PASSWORD, true, port)
+	for i in 900:
 		await _ticks(1)
 		if world.started:
 			break
