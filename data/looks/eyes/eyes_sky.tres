@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LookDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/look_def.gd" id="1_look_def"]
+
+[resource]
+script = ExtResource("1_look_def")
+id = &"eyes_sky"
+display_name = "Sky"
+kind = 2
+order = 0

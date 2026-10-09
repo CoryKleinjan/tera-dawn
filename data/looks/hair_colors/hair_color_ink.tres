@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LookDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/look_def.gd" id="1_look_def"]
+
+[resource]
+script = ExtResource("1_look_def")
+id = &"hair_color_ink"
+display_name = "Ink"
+kind = 4
+color = Color(0.165, 0.149, 0.188, 1)
+order = 1

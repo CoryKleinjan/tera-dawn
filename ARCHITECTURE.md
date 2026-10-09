@@ -19,7 +19,8 @@ data/*.tres  ──►  Content (autoload)  ──►  World loads a MapDef  ─
   (one slot's worth of an item, with its own rolled stats for gear) and `CharacterStats` (the
   MapleStory formulas). The server owns each player's `Character`; `Game.me` is your copy.
 - **Components** (`scripts/components/`) are small reusable parts any actor can use: `Health`,
-  `Hitbox` and `SpriteRig` (sprite, animation, shadow, light and aura).
+  `Hitbox`, `SpriteRig` (sprite, animation, shadow, light and aura) and the paperdoll that
+  dresses heroes (see Looks below).
 - **Server** (`scripts/server/`) runs the game for everyone (see Multiplayer below).
 - **Actors** (`scripts/actors/`) are what you see in the world: your hero, other players,
   monsters, NPCs and drops.
@@ -85,6 +86,30 @@ its parts in `scripts/server/social/`, one per section: `SocialChat` (chat and s
 and `SocialShops` (player shops). A new social feature gets its own part (extend `SocialPart`)
 and a forwarding method on `TDSocial`.
 
+### Character creation and looks
+
+Playing a name with no character opens the character creator (`TDCreator`): the server
+answers `req_join` with `ev_new_character`, and the client joins again with the creator's
+choices (`NewCharacter.to_dict()`). The server keeps only what the creator offers and makes
+a level 1 character in the starting job (`Character.START_JOB`).
+
+- **Appearance** (on the Character) is a skin tone, face, eye colour, hairstyle and hair
+  colour, each the id of a `LookDef` in `data/looks/`. Add an option by adding a file;
+  `creator` and `order` decide whether and where the creator lists it.
+- **Outfit** choices come from the starting job's `creator_gear` (one piece per kind).
+- **Looks** travel in every player snapshot (`Character.look()`: appearance and the worn
+  gear that shows), so everyone sees everyone's hair and gear.
+- **Drawing** is done by `Paperdoll`, which works out the layers from a look;
+  `PaperdollSprite` shows it in the world (on `SpriteRig`) and `PaperdollView` in menus (the
+  creator, the equipment window). The hero is still one painted strip, so for now layers are
+  faked on it: `tools/art/hero_regions.py` maps which pixels are hair, skin, eyes, clothes,
+  cape, sword and shield (`hero_regions.png`) and where the head, face and hand are in each
+  frame (`hero_rig.json`). Colours recolour those pixels through the paperdoll shaders, gear
+  not worn hides them, and hats, hairstyles, faces and non-sword weapons are stand-ins drawn
+  in code (`LookShapes`, picked by `EquipDef.look_shape` or the weapon kind, coloured by
+  `EquipDef.look_color` or the icon). When layered art exists, `LookDef.frames` and
+  `EquipDef.worn_frames` replace the stand-ins without code changes.
+
 ### Chairs, pets, the Monster Book and achievements
 
 - **Chairs** (`ChairDef`) and **pets** (`PetDef`) live in the Setup tab and are used with
@@ -122,7 +147,7 @@ monster of its level; `tests/balance_report.tscn` prints the full table when tun
 
 ```
 data/                 Content, one .tres per thing
-  monsters/ npcs/ items/ skills/ effects/ jobs/   Looked up by id through Content
+  monsters/ npcs/ items/ skills/ effects/ jobs/ looks/   Looked up by id through Content
   items/equips/ items/use/ items/etc/ items/setup/   Subfolders are scanned too
   maps/ biomes/ climb_styles/               Maps and how they look
 scripts/
@@ -132,14 +157,15 @@ scripts/
   server/social/      TDSocial's parts: chat, parties, trade, guilds, player shops
   net/                SnapshotFlags, the bits both server and client read in snapshots
   data/               Resource classes for everything in data/
-  systems/            Character (and CharacterCodec, its save format), Inventory, Equipment,
+  systems/            Character (and CharacterCodec, its save format), Appearance, NewCharacter,
+                      Inventory, Equipment,
                       ItemStack, CharacterStats, MonsterBook, Achievements, Balance
-  components/         Health, Hitbox, SpriteRig
+  components/         Health, Hitbox, SpriteRig, Paperdoll (+ Sprite, View), LookShapes
   actors/             Player (you), Avatar (other players), Companion (chairs, pets), Mob, Npc, Drop views
   world/              World (what you see), WorldFx (hits, numbers, effects), Stage +
                       Terrain/Backdrop/Scenery builders, MapLayout, Platform, DropFlight, Combat
   fx/                 Flipbook effects and floating text
-  ui/                 HUD, status bar, overlay, quickslots, UiSkin, Palette
+  ui/                 HUD, status bar, overlay, quickslots, character creator, UiSkin, Palette
   ui/windows/         Every draggable window (all extend TDWindow)
   ui/widgets/         UI pieces that aren't windows: item tooltip, chat, invites, prompt
 assets/

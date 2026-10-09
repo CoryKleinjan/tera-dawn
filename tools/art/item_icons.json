@@ -746,5 +746,33 @@
 "wraith_lantern": [
 "flame",
 "9080ff"
+],
+"meadow_shirt": [
+"shirt",
+"6fbf73"
+],
+"berry_smock": [
+"shirt",
+"d9607e"
+],
+"rolled_shorts": [
+"pants",
+"c49a6c"
+],
+"field_trousers": [
+"pants",
+"5f7d4a"
+],
+"canvas_shoes": [
+"boots",
+"e0d6c4"
+],
+"clay_clogs": [
+"boots",
+"b5654a"
+],
+"reed_sandals": [
+"boots",
+"d8b878"
 ]
 }

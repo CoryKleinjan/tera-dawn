@@ -585,7 +585,7 @@ func test_create_beginner_from_content() -> void:
 	check_eq(c.level, 1, "level 1")
 	check(c.job == j, "beginner")
 	check_eq(c.base.to_dict(), j.starting_stats.to_dict(), "starting stats")
-	check_eq(c.equipment.worn.size(), j.starting_gear.size(), "starting gear worn")
+	check_eq(c.equipment.worn.size(), NewCharacter.new().starting_gear(j).size(), "starting gear and the creator's default outfit worn")
 	for e in j.starting_gear:
 		var worn: ItemStack = null
 		for s: ItemStack in c.equipment.worn.values():

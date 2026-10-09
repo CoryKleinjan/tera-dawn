@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LookDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/look_def.gd" id="1_look_def"]
+
+[resource]
+script = ExtResource("1_look_def")
+id = &"skin_porcelain"
+display_name = "Porcelain"
+kind = 0
+color = Color(1.000, 0.941, 0.894, 1)
+order = 1

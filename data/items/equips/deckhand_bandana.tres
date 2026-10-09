@@ -27,3 +27,4 @@ stats = SubResource("Resource_1")
 variance = 2
 upgrade_slots = 7
 required_strength = 50
+look_shape = &"bandana"

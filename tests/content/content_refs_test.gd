@@ -204,6 +204,8 @@ func test_jobs_link_up() -> void:
 				_indexed(g.item, Content.items, "%s: starting_items[%d].item" % [Scan.where(j), i])
 		for i in j.starting_gear.size():
 			_indexed(j.starting_gear[i], Content.items, "%s: starting_gear[%d]" % [Scan.where(j), i])
+		for i in j.creator_gear.size():
+			_indexed(j.creator_gear[i], Content.items, "%s: creator_gear[%d]" % [Scan.where(j), i])
 	check(Content.jobs.has(Character.START_JOB), "Character.START_JOB %s is not a job" % Character.START_JOB)
 	var start: JobDef = Content.jobs.get(Character.START_JOB)
 	if start:

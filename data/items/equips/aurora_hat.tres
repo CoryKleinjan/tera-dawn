@@ -29,3 +29,4 @@ stats = SubResource("Resource_1")
 variance = 3
 upgrade_slots = 7
 required_intelligence = 70
+look_shape = &"wizard"

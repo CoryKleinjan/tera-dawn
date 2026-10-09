@@ -16,6 +16,9 @@ const MAX_PLAYERS := 32
 signal joined
 ## Joining didn't work; `reason` says why, in words for the player.
 signal join_failed(reason: String)
+## The server has no character called `char_name`: make one in the character creator, then
+## call `create` (or `stop` to give up).
+signal new_character(char_name: String)
 ## The connection to the server was lost.
 signal disconnected
 
@@ -29,12 +32,15 @@ var save_dir := "user://characters"
 ## Whether a server started for this player may bring in the save from before multiplayer.
 var import_legacy_save := true
 var _name := ""
+## The character creator's choices to join with (NewCharacter.to_dict()), or {} to only
+## load a character that exists.
+var _made := {}
 
 func _ready() -> void:
 	multiplayer.peer_disconnected.connect(func(peer: int) -> void:
 		if server:
 			server.leave(peer))
-	multiplayer.connected_to_server.connect(func() -> void: req_join.rpc_id(1, _name))
+	multiplayer.connected_to_server.connect(func() -> void: req_join.rpc_id(1, _name, _made))
 	multiplayer.connection_failed.connect(func() -> void:
 		stop()
 		join_failed.emit("Couldn't reach the server."))
@@ -48,15 +54,16 @@ func is_playing() -> bool:
 # ---------- starting and stopping ----------
 
 ## Single player: a private server inside this game, not reachable from the network.
-func play_single(char_name: String) -> void:
+## `made` is the character creator's choices for a new character (see `create`).
+func play_single(char_name: String, made := {}) -> void:
 	stop()
 	mode = Mode.SINGLE
 	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
 	_start_server(true)
-	req_join.rpc_id(1, char_name)
+	_ask_join(char_name, made)
 
 ## Host: play, and let other players join this game on `port`. Returns "" or what went wrong.
-func host(char_name: String, port := DEFAULT_PORT) -> String:
+func host(char_name: String, port := DEFAULT_PORT, made := {}) -> String:
 	stop()
 	var peer := ENetMultiplayerPeer.new()
 	if peer.create_server(port, MAX_PLAYERS) != OK:
@@ -64,19 +71,29 @@ func host(char_name: String, port := DEFAULT_PORT) -> String:
 	mode = Mode.HOST
 	multiplayer.multiplayer_peer = peer
 	_start_server(true)
-	req_join.rpc_id(1, char_name)
+	_ask_join(char_name, made)
 	return ""
 
-## Join someone else's server. `joined` or `join_failed` follows.
-func join(char_name: String, address: String, port := DEFAULT_PORT) -> String:
+## Join someone else's server. `joined`, `new_character` or `join_failed` follows.
+func join(char_name: String, address: String, port := DEFAULT_PORT, made := {}) -> String:
 	stop()
 	var peer := ENetMultiplayerPeer.new()
 	if peer.create_client(address, port) != OK:
 		return "Couldn't connect to %s." % address
 	mode = Mode.CLIENT
 	_name = char_name
+	_made = made
 	multiplayer.multiplayer_peer = peer
 	return ""
+
+## Joins with a new character made in the creator, after `new_character`.
+func create(made: NewCharacter) -> void:
+	_ask_join(_name, made.to_dict())
+
+func _ask_join(char_name: String, made: Dictionary) -> void:
+	_name = char_name
+	_made = made
+	req_join.rpc_id(1, char_name, made)
 
 ## A server with no player of its own (run with `-- --server`). Returns "" or what went wrong.
 func run_dedicated(port := DEFAULT_PORT) -> String:
@@ -123,9 +140,9 @@ func _sender() -> int:
 # ---------- requests: client -> server ----------
 
 @rpc("any_peer", "call_local", "reliable")
-func req_join(char_name: String) -> void:
+func req_join(char_name: String, made: Dictionary) -> void:
 	if server:
-		server.join(_sender(), char_name)
+		server.join(_sender(), char_name, made)
 
 @rpc("any_peer", "call_local", "unreliable_ordered")
 func req_move(at: Vector2, face: int, anim: StringName, climbing: bool) -> void:
@@ -324,6 +341,12 @@ func ev_joined(character: Dictionary) -> void:
 func ev_join_failed(reason: String) -> void:
 	stop()
 	join_failed.emit(reason)
+
+## There's no character by that name yet: open the character creator.
+@rpc("authority", "call_local", "reliable")
+func ev_new_character(char_name: String) -> void:
+	_name = char_name
+	new_character.emit(char_name)
 
 @rpc("authority", "call_local", "reliable")
 func ev_character(character: Dictionary) -> void:

@@ -6,7 +6,7 @@ extends RefCounted
 ## Everything about the character.
 static func to_dict(c: Character) -> Dictionary:
 	return {
-		"name": c.name, "level": c.level, "xp": c.xp, "shards": c.shards, "map_id": c.map_id,
+		"name": c.name, "appearance": c.appearance.to_dict(), "level": c.level, "xp": c.xp, "shards": c.shards, "map_id": c.map_id,
 		"job": c.job.id, "base": c.base.to_dict(), "ap": c.ap,
 		"hp": c.health.hp, "mp": c.mp,
 		"inventory": c.inventory.to_dict(), "equipment": c.equipment.to_dict(), "storage": c.storage.to_dict(),
@@ -28,6 +28,8 @@ static func _string_keys(d: Dictionary) -> Dictionary:
 ## older saves still load.
 static func load_dict(c: Character, data: Dictionary) -> void:
 	c.name = str(data.get("name", c.name))
+	if data.get("appearance") is Dictionary:
+		c.appearance.load_dict(data["appearance"])
 	c.level = maxi(1, int(data.get("level", c.level)))
 	c.xp = maxi(0, int(data.get("xp", c.xp)))
 	c.shards = maxi(0, int(data.get("shards", c.shards)))

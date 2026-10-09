@@ -25,3 +25,4 @@ required_level = 10
 required_strength = 40
 stats = SubResource("stats")
 variance = 2
+look_shape = &"helm"

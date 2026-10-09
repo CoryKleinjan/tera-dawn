@@ -26,6 +26,7 @@ const EXPECTED := {
 	"biomes": ["BiomeDef"],
 	"climb_styles": ["ClimbStyleDef"],
 	"projectiles": ["ProjectileDef"],
+	"looks": ["LookDef"],
 }
 
 ## Every .tres file under `dir`, sorted.

@@ -24,7 +24,7 @@ func _run() -> void:
 	world = load("res://scenes/world.tscn").instantiate() as TDWorld
 	add_child(world)
 	await _ticks(2)
-	Net.join("Bot", "127.0.0.1", port)
+	Net.join("Bot", "127.0.0.1", port, NewCharacter.new().to_dict())
 	for i in 600:
 		await _ticks(1)
 		if world.started:

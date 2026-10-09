@@ -13,7 +13,7 @@ extends Resource
 ## The job line it belongs to (warrior, archer, mage, thief, pirate, beginner). Gear that
 ## names a line can be worn by every job in it.
 @export var family: StringName
-## Until each job has its own art, the hero is drawn in this colour.
+## The job's colour, for the places that show jobs (the hero now wears his job's gear instead).
 @export var tint := Color.WHITE
 ## The stat that drives damage (STR for warriors) and the one that helps a little.
 @export_enum("strength", "dexterity", "intelligence", "luck") var primary_stat := "strength"
@@ -46,6 +46,9 @@ extends Resource
 @export var starting_gear: Array[EquipDef] = []
 ## Put in the inventory at the start; each entry is rolled once (use chance 1).
 @export var starting_items: Array[DropEntry] = []
+## The outfit pieces the character creator offers a new character of this job, any kinds of
+## gear; the creator lets them pick one of each kind (see NewCharacter).
+@export var creator_gear: Array[EquipDef] = []
 
 ## What advancing takes, as readable lines ("Level 10", "35 STR").
 func requirement_lines() -> PackedStringArray:

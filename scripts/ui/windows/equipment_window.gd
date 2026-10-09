@@ -18,13 +18,22 @@ const LAYOUT := {
 const PANEL_W := 176.0
 const ROW_H := 16.0
 
-var portrait: Texture2D
+## Your hero, dressed in what you wear.
+var doll := PaperdollView.new()
 ## The worn item whose stats the panel shows, or &"" for the whole set.
 var selected: StringName = &""
 
 func _init() -> void:
 	super("Equipment", Vector2(PAD * 2 + 4 * (SLOT + GAP) - GAP + 10 + PANEL_W, GRID_Y + 4 * (SLOT + GAP) + 14))
-	portrait = TDPlayer.HERO_FRAMES.get_frame_texture(&"idle", 0)
+	var box := _portrait_box()
+	var s := minf(box.size.x / Paperdoll.FRAME_SIZE.x, box.size.y / Paperdoll.FRAME_SIZE.y) * 1.3
+	doll.size = Paperdoll.FRAME_SIZE * s
+	doll.position = box.get_center() - Vector2(doll.size.x / 2.0, doll.size.y * 0.55)
+	doll.max_zoom = s
+	add_child(doll)
+
+func _portrait_box() -> Rect2:
+	return Rect2(PAD + SLOT + GAP, GRID_Y + SLOT + GAP, SLOT * 2 + GAP, SLOT * 2 + GAP)
 
 func slot_rect(place: StringName) -> Rect2:
 	var cell: Vector2i = LAYOUT[place]
@@ -38,12 +47,9 @@ func place_at(at: Vector2) -> StringName:
 
 func _draw_body() -> void:
 	# portrait
-	var box := Rect2(PAD + SLOT + GAP, GRID_Y + SLOT + GAP, SLOT * 2 + GAP, SLOT * 2 + GAP)
+	var box := _portrait_box()
 	draw_texture_rect(UiSkin.tex("equip_doll_bg"), box, false)
-	if portrait:
-		var s := minf(box.size.x / portrait.get_width(), box.size.y / portrait.get_height()) * 1.3
-		var ps := portrait.get_size() * s
-		draw_texture_rect(portrait, Rect2(box.get_center() - Vector2(ps.x / 2.0, ps.y * 0.55), ps), false)
+	doll.set_look(Game.me.look())
 	DrawUtil.text(self, Game.ui_font, Vector2(box.get_center().x, box.end.y - 6), "%s Lv. %d" % [Game.me.job.display_name, Game.me.level], 11, Palette.MIST, 0, 4, Palette.NIGHT)
 	var dragging := _dragged_equip()
 	for p in LAYOUT:

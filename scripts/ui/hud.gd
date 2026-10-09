@@ -12,6 +12,9 @@ var overlay: TDOverlay
 var status: TDStatusBar
 var quickslots: TDQuickslots
 var title: Control
+## The title card (name, Play, Host, Join), hidden while the character creator is open.
+var title_card: Control
+var creator: TDCreator
 var start_panel: Control
 var pause_panel: Control
 var resume_button: Button
@@ -165,13 +168,13 @@ func _build_title() -> void:
 	title.theme = ui_theme
 	title.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(title)
-	var center := CenterContainer.new()
-	center.set_anchors_preset(Control.PRESET_FULL_RECT)
-	title.add_child(center)
+	title_card = CenterContainer.new()
+	title_card.set_anchors_preset(Control.PRESET_FULL_RECT)
+	title.add_child(title_card)
 	var col := VBoxContainer.new()
 	col.alignment = BoxContainer.ALIGNMENT_CENTER
 	col.add_theme_constant_override("separation", 10)
-	center.add_child(col)
+	title_card.add_child(col)
 
 	var heading := Label.new()
 	heading.text = "Tera Dawn"
@@ -249,8 +252,23 @@ func _build_title() -> void:
 	keys.add_theme_color_override("font_color", Palette.MUTED)
 	inner.add_child(keys)
 	name_field.call_deferred("grab_focus")
+
+	# a name with no character yet: the creator takes the title card's place
+	creator = TDCreator.new()
+	creator.hide()
+	title.add_child(creator)
+	Net.new_character.connect(func(char_name: String) -> void:
+		title_card.hide()
+		creator.open(char_name))
+	creator.created.connect(func(made: NewCharacter) -> void: Net.create(made))
+	creator.cancelled.connect(func() -> void:
+		Net.stop()
+		_close_creator())
+
 	Net.joined.connect(_on_joined)
-	Net.join_failed.connect(func(reason: String) -> void: _show_message(reason))
+	Net.join_failed.connect(func(reason: String) -> void:
+		_close_creator()
+		_show_message(reason))
 	Net.disconnected.connect(func() -> void:
 		world.stop()
 		show_title(false)
@@ -320,8 +338,13 @@ func _on_join() -> void:
 
 func _on_joined() -> void:
 	_show_message("")
+	_close_creator()
 	title.hide()
 	world.start()
+
+func _close_creator() -> void:
+	creator.hide()
+	title_card.show()
 
 func _on_leave() -> void:
 	world.stop()
