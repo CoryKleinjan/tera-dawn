@@ -1,0 +1,47 @@
+{
+  "source": "art/source/monsters_npcs.png",
+  "out_dir": "assets/sprites/monsters",
+  "label_band": 0.1,
+  "cells": [
+    [
+      "mossling",
+      "petal_bat",
+      "cinder_imp",
+      "ashshell"
+    ],
+    [
+      "boulderkin",
+      "flame_boar_chief",
+      "village_elder",
+      "shopkeeper"
+    ]
+  ],
+  "overrides": {
+    "mossling": {
+      "scale": 0.19
+    },
+    "petal_bat": {
+      "scale": 0.17
+    },
+    "cinder_imp": {
+      "scale": 0.2
+    },
+    "ashshell": {
+      "scale": 0.21
+    },
+    "boulderkin": {
+      "scale": 0.27
+    },
+    "flame_boar_chief": {
+      "scale": 0.31
+    },
+    "village_elder": {
+      "scale": 0.24,
+      "out_dir": "assets/sprites/npcs"
+    },
+    "shopkeeper": {
+      "scale": 0.21,
+      "out_dir": "assets/sprites/npcs"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EffectDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/effect_def.gd" id="1_effect_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/effects/dawn_slash_1.png" id="2_dawn_slash_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/effects/dawn_slash_2.png" id="3_dawn_slash_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/effects/dawn_slash_3.png" id="4_dawn_slash_3"]
+
+[resource]
+script = ExtResource("1_effect_def")
+id = &"dawn_slash"
+frames = Array[Texture2D]([ExtResource("2_dawn_slash_1"), ExtResource("3_dawn_slash_2"), ExtResource("4_dawn_slash_3")])
+fps = 14.0
+texel = 1.5
+offset = Vector2(84.0, 0.0)
+energy = 1.9
+light_color = Color(1.0, 0.7529411764705882, 0.4392156862745098, 1.0)
+light_energy = 4.0
+light_range = 6.0

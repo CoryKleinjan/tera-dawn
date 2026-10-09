@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EffectDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/effect_def.gd" id="1_effect_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/effects/heal.png" id="2_heal"]
+
+[resource]
+script = ExtResource("1_effect_def")
+id = &"heal"
+frames = Array[Texture2D]([ExtResource("2_heal")])
+lifetime = 50
+texel = 0.8
+offset = Vector2(0.0, -50.0)
+energy = 1.8
+follow_player = true
+light_color = Color(0.5490196078431373, 0.9411764705882353, 0.6274509803921569, 1.0)
+light_energy = 2.0
+light_range = 4.0

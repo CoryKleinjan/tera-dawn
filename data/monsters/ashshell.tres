@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/ashshell.png" id="2_ashshell"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("4_dawnshard")
+chance = 1.0
+min_amount = 18
+max_amount = 36
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("4_dawnshard")
+chance = 0.35
+min_amount = 18
+max_amount = 36
+
+[resource]
+script = ExtResource("1_monster_def")
+id = &"ashshell"
+display_name = "Ashshell"
+level = 9
+max_hp = 300
+attack = 24
+exp_reward = 55
+speed = 0.35
+size = Vector2(64.0, 48.0)
+texture = ExtResource("2_ashshell")
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2")])
+light_color = Color(1.0, 0.47843137254901963, 0.22745098039215686, 1.0)
+light_energy = 0.9

@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="SkillDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/icon_attack.png" id="2_icon_attack"]
+[ext_resource type="Resource" path="res://data/effects/swish.tres" id="3_swish"]
+[ext_resource type="Resource" path="res://data/effects/hit.tres" id="4_hit"]
+
+[resource]
+script = ExtResource("1_skill_def")
+id = &"basic_attack"
+display_name = "Slash"
+icon = ExtResource("2_icon_attack")
+mp_cost = 0
+cooldown = 24
+action_ticks = 16
+reach = 78.0
+height = 100.0
+max_targets = 1
+hits = 1
+damage_multiplier = 1.0
+animation = &"attack"
+effect = ExtResource("3_swish")
+hit_effect = ExtResource("4_hit")

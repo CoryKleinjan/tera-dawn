@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_def.gd" id="1_item_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/icon_dawnshard.png" id="2_icon_dawnshard"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/dawnshard_1.png" id="3_dawnshard_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/dawnshard_2.png" id="4_dawnshard_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/dawnshard_pile.png" id="5_dawnshard_pile"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="6_shard_pickup"]
+
+[resource]
+script = ExtResource("1_item_def")
+id = &"dawnshard"
+display_name = "Dawnshards"
+description = "Golden crystals of morning light. Everyone in Tera Dawn trades in them."
+icon = ExtResource("2_icon_dawnshard")
+world_frames = Array[Texture2D]([ExtResource("3_dawnshard_1"), ExtResource("4_dawnshard_2")])
+pile_texture = ExtResource("5_dawnshard_pile")
+pile_amount = 20
+sprite_scale = 0.9
+glow_color = Color(1.0, 0.7490196078431373, 0.34901960784313724, 1.0)
+is_currency = true
+pickup_effect = ExtResource("6_shard_pickup")

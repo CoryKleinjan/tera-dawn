@@ -1,0 +1,486 @@
+#!/usr/bin/env python3
+"""Cut sprites out of the generated art sheets in art/source/.
+
+Every sheet has a manifest in art/sheets/<name>.json that says where its cells
+are, what each cell is called, how much to shrink it and where the result goes.
+Adding a new sheet means dropping the PNG in art/source/ and writing a manifest;
+no code changes. See art/sheets/README.md for the manifest format.
+
+    python3 tools/art/slice_sheets.py            # every manifest
+    python3 tools/art/slice_sheets.py dewling ui # only these
+    python3 tools/art/slice_sheets.py --grid ui  # print the detected grid, write nothing
+
+Steps for each cell:
+1. Find the cells: thin divider lines are detected automatically (or given in the manifest).
+2. Remove the background: magenta sheets get a soft chroma key with the magenta
+   unmixed from the edge colours; dark sheets are flood-filled from the cell border.
+3. Drop the white label in the cell's top-left corner and any specks.
+4. Shrink to the game's scale (premultiplied box filter), harden the alpha for
+   pixel-art sprites, and trim to the opaque pixels.
+
+Animation sets (the "sets" block of a manifest) lay frames out on one strip with
+the feet on a shared baseline and write a Godot SpriteFrames resource next to it.
+"""
+import json
+import os
+import sys
+from collections import deque
+
+import numpy as np
+from PIL import Image
+
+ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
+SHEETS = os.path.join(ROOT, "art", "sheets")
+
+DEFAULTS = {
+    "background": "magenta",  # "magenta", "dark" or [r, g, b]
+    "scale": 0.25,
+    "alpha": "hard",          # "hard" for pixel sprites, "soft" for glows and effects
+    "label_band": 0.16,       # top part of each cell (fraction of its height) that can hold the label
+    "min_area": 6,            # specks smaller than this (in output pixels) are dropped
+    "keep": "all",            # "all", "largest" or "split" (one sprite per piece, name_1, name_2...)
+    "shadow": False,          # dark sheets: remove the soft drop shadow under the sprite
+    "inset": 3,               # pixels trimmed off each cell edge (divider anti-aliasing)
+    "save": True,             # False: only used by animation sets, not written on its own
+    "key": [0.35, 0.8],       # magenta sheets: magenta-ness at which pixels start / stop being background
+}
+
+
+# ---------- small image helpers ----------
+
+N4 = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+N8 = N4 + [(-1, -1), (-1, 1), (1, -1), (1, 1)]
+
+
+def label(mask):
+    """Connected components (8-neighbour). Returns (labels, count)."""
+    h, w = mask.shape
+    lab = np.zeros((h, w), np.int32)
+    n = 0
+    for y, x in zip(*np.nonzero(mask)):
+        if lab[y, x]:
+            continue
+        n += 1
+        lab[y, x] = n
+        q = deque([(y, x)])
+        while q:
+            cy, cx = q.popleft()
+            for dy, dx in N8:
+                ny, nx = cy + dy, cx + dx
+                if 0 <= ny < h and 0 <= nx < w and mask[ny, nx] and not lab[ny, nx]:
+                    lab[ny, nx] = n
+                    q.append((ny, nx))
+    return lab, n
+
+
+def flood(mask, seeds):
+    """Pixels of `mask` 4-connected to any seed."""
+    h, w = mask.shape
+    out = np.zeros_like(mask)
+    q = deque()
+    for s in seeds:
+        if mask[s] and not out[s]:
+            out[s] = True
+            q.append(s)
+    while q:
+        y, x = q.popleft()
+        for dy, dx in N4:
+            ny, nx = y + dy, x + dx
+            if 0 <= ny < h and 0 <= nx < w and mask[ny, nx] and not out[ny, nx]:
+                out[ny, nx] = True
+                q.append((ny, nx))
+    return out
+
+
+def dilate(m, r):
+    out = m.copy()
+    for dy in range(-r, r + 1):
+        for dx in range(-r, r + 1):
+            out |= np.roll(np.roll(m, dy, 0), dx, 1)
+    return out
+
+
+def background_color(rgb):
+    """The sheet's most common colour."""
+    q = (rgb[::3, ::3] // 4).reshape(-1, 3)
+    vals, counts = np.unique(q, axis=0, return_counts=True)
+    return vals[counts.argmax()] * 4 + 2
+
+
+# ---------- grid detection ----------
+
+def _runs(idx):
+    runs = []
+    for i in idx:
+        if runs and i - runs[-1][1] <= 1:
+            runs[-1][1] = i
+        else:
+            runs.append([i, i])
+    return runs
+
+
+def _divider_lines(rgb, bg, axis, threshold):
+    """Indices along `axis` (0 rows, 1 columns) that are thin, uniform lines unlike the background."""
+    lines = rgb if axis == 0 else rgb.transpose(1, 0, 2)
+    out = []
+    for i, line in enumerate(lines):
+        med = np.median(line, 0)
+        if np.abs(med - bg).sum() < 40:
+            continue
+        near = np.abs(line - med).sum(1) < 45
+        if near.mean() > threshold:
+            out.append(i)
+    # dividers are thin: drop long runs (those are opaque art, e.g. a texture or strip)
+    keep = []
+    for a, b in _runs(out):
+        if b - a <= 5:
+            keep.append((a + b) // 2)
+    return keep
+
+
+def detect_grid(rgb, bg, threshold=0.8):
+    """Returns a list of bands: (y0, y1, [(x0, x1), ...])."""
+    h, w, _ = rgb.shape
+    ys = [0] + _divider_lines(rgb, bg, 0, threshold) + [h]
+    bands = []
+    for y0, y1 in zip(ys, ys[1:]):
+        if y1 - y0 < 24:
+            continue
+        xs = [0] + _divider_lines(rgb[y0 + 4:y1 - 4], bg, 1, threshold) + [w]
+        cols = [(x0, x1) for x0, x1 in zip(xs, xs[1:]) if x1 - x0 >= 24]
+        bands.append((y0, y1, cols))
+    return bands
+
+
+def grid_from_manifest(spec, shape):
+    """An explicit grid: {"rows": [y0, y1, ...], "cols": [x0, ...] or [[x0, ...], ...] per row}."""
+    h, w = shape[:2]
+    ys = spec["rows"]
+    bands = []
+    for i, (y0, y1) in enumerate(zip(ys, ys[1:])):
+        cols = spec["cols"][i] if isinstance(spec["cols"][0], list) else spec["cols"]
+        bands.append((y0, y1, list(zip(cols, cols[1:]))))
+    return bands
+
+
+# ---------- cutting one cell ----------
+
+def key_magenta(cell, bg, lo=0.35, hi=0.8):
+    """Soft alpha from how magenta each pixel is, with the magenta unmixed from edge colours.
+    Pixels at or below `lo` magenta-ness are opaque, at or above `hi` fully background."""
+    c = cell / 255.0
+    peak = np.maximum(c.max(2), 1e-3)
+    spread = np.minimum(c[..., 0], c[..., 2]) - c[..., 1]
+    k = spread.copy()
+    # the floor shadows are darker magenta with no green at all: judge those relative to their
+    # brightness. Near-black outlines pick up a magenta tint too, so fade that back out.
+    pure = c[..., 1] / peak < 0.12
+    k[pure] = np.maximum(k[pure], (spread / peak * np.clip(peak / 0.3, 0.0, 1.0))[pure])
+    alpha = np.clip((hi - k) / (hi - lo), 0.0, 1.0)
+    alpha[np.abs(c[..., 0] - c[..., 2]) > 0.35] = 1.0  # strongly red or blue: never background
+    a = np.maximum(alpha, 1e-3)[..., None]
+    rgb = np.clip((c - (1.0 - alpha[..., None]) * (bg / 255.0)) / a, 0, 1)
+    # despill: see-through edge pixels keep a magenta cast the unmixing can't remove
+    spill = np.clip(np.minimum(rgb[..., 0], rgb[..., 2]) - rgb[..., 1], 0, None) * (alpha < 0.98)
+    rgb[..., 0] -= spill * 0.85
+    rgb[..., 2] -= spill * 0.85
+    return np.clip(rgb, 0, 1), alpha
+
+
+def key_dark(cell, bg, shadow):
+    """Flood the background in from the cell border (the outlines are nearly the background colour)."""
+    h, w, _ = cell.shape
+    border = [(0, x) for x in range(w)] + [(h - 1, x) for x in range(w)] + \
+             [(y, 0) for y in range(h)] + [(y, w - 1) for y in range(h)]
+    bgm = flood(np.abs(cell - bg).sum(2) < 28, border)
+    fg = ~bgm
+    fg = ~flood(~fg, border)  # fill holes enclosed by the sprite
+    if shadow:
+        dark = cell.max(2) < 50
+        fg &= ~(dark & ~dilate(fg & ~dark, 3))
+    return cell / 255.0, fg.astype(float)
+
+
+def fix_hero_attack_arc(rgb, alpha):
+    """hero_main Attack 2: keep the sword blade, drop the blue slash arc around it (the game draws its own)."""
+    cell = (rgb * 255).astype(int)
+    m = alpha > 0.5
+    h, w = m.shape
+    yy, xx = np.mgrid[0:h, 0:w]
+    x0, y0, x1, y1 = 230.0, 141.0, 330.0, 184.0  # the blade, hilt to tip
+    dx, dy = x1 - x0, y1 - y0
+    proj = ((xx - x0) * dx + (yy - y0) * dy) / (dx * dx + dy * dy)
+    t = proj.clip(0, 1)
+    dist = np.hypot(xx - (x0 + t * dx), yy - (y0 + t * dy))
+    blue = (cell[..., 2] - cell[..., 0] > 45) & (cell[..., 2] > 110)
+    bluish = cell[..., 2] > cell[..., 0] + 8
+    m = m & ~((xx > 246) & ((dist > 10) | blue))
+    m = m & ~((xx > 214) & (xx <= 246) & (yy > 150) & (dist > 10) & bluish)
+    m = m & ~((proj > 0.985) & (xx > 300))
+    hole = ~m & (xx > 236) & (t < 0.97) & (dist <= 7.5)  # where the arc covered the blade
+    cell[hole] = (196, 200, 214)
+    edge = ~m & (xx > 236) & (t < 0.93) & (dist > 7.5) & (dist <= 9.2) & (dx * (yy - y0) - dy * (xx - x0) < 0)
+    cell[edge] = (14, 16, 26)
+    return cell / 255.0, (m | hole | edge).astype(float)
+
+
+# Per-cell clean-ups a manifest can ask for with "fix": "<name>".
+FIXES = {"hero_attack_arc": fix_hero_attack_arc}
+
+
+def shrink(rgb, alpha, scale):
+    h, w = alpha.shape
+    nw, nh = max(1, round(w * scale)), max(1, round(h * scale))
+    planes = [rgb[..., k] * alpha for k in range(3)] + [alpha]
+    small = [np.asarray(Image.fromarray((p * 255).astype(np.uint8)).resize((nw, nh), Image.BOX)) / 255.0
+             for p in planes]
+    a = small[3]
+    out = np.zeros((nh, nw, 3))
+    nz = a > 1e-3
+    for k in range(3):
+        out[..., k][nz] = small[k][nz] / a[nz]
+    return np.clip(out, 0, 1), a
+
+
+def make_seamless(img, blend=0.2):
+    """Cross-fades the edges with a half-offset copy so the texture tiles."""
+    a = np.asarray(img).astype(float)
+    h, w = a.shape[:2]
+    shifted = np.roll(np.roll(a, h // 2, 0), w // 2, 1)
+    yy, xx = np.mgrid[0:h, 0:w]
+    dx = np.minimum(xx, w - 1 - xx) / (w * blend)
+    dy = np.minimum(yy, h - 1 - yy) / (h * blend)
+    t = np.clip(np.minimum(dx, dy), 0, 1)[..., None]
+    out = a * t + shifted * (1 - t)
+    # the seam of the shifted copy now sits in the middle; blend that with the original
+    return Image.fromarray(out.clip(0, 255).astype(np.uint8))
+
+
+def cut_cell(rgb_full, bg, box, opts):
+    x0, y0, x1, y1 = box
+    ins = opts["inset"]
+    cell = rgb_full[y0 + ins:y1 - ins, x0 + ins:x1 - ins].astype(float)
+    if opts.get("blank_top"):  # a label that touches the art: paint its rows over with background
+        cell[:opts["blank_top"]] = bg
+    if "crop" in opts:  # [x0, y0, x1, y1] inside the cell, in source pixels
+        cx0, cy0, cx1, cy1 = opts["crop"]
+        cell = cell[cy0:cy1, cx0:cx1]
+        label_px = 0
+    else:
+        label_px = opts["label_band"] * cell.shape[0] if opts["label_band"] < 1 else opts["label_band"]
+    if opts["background"] == "dark":
+        rgb, alpha = key_dark(cell, bg, opts["shadow"])
+    else:
+        rgb, alpha = key_magenta(cell, bg, *opts["key"])
+    if opts.get("fix"):
+        rgb, alpha = FIXES[opts["fix"]](rgb, alpha)
+    rgb, alpha = shrink(rgb, alpha, opts["scale"])
+    solid = alpha > (0.5 if opts["alpha"] == "hard" else 0.04)
+    lab, n = label(solid)
+    band = label_px * opts["scale"]
+    left = alpha.shape[1] * 0.6
+    keep = np.zeros_like(solid)
+    pieces = []
+    for i in range(1, n + 1):
+        m = lab == i
+        ys, xs = np.nonzero(m)
+        if m.sum() < opts["min_area"]:
+            continue
+        if ys.max() < band and (xs.min() < left or ys.max() - ys.min() < band * 0.6):  # the label text
+            continue
+        pieces.append(m)
+    if not pieces:
+        return []
+    if opts["keep"] == "largest":
+        pieces = [max(pieces, key=lambda m: m.sum())]
+    groups = pieces if opts["keep"] == "split" else [np.any(pieces, axis=0)]
+    if opts["keep"] == "split":
+        biggest = max(m.sum() for m in groups)
+        groups = [m for m in groups if m.sum() >= biggest * 0.15]  # crumbs, not pieces
+        groups.sort(key=lambda m: np.nonzero(m)[1].min())
+    out = []
+    for g in groups:
+        reach = dilate(g, 2)  # soft edges around the piece
+        a = alpha * (reach if opts["alpha"] == "soft" else g)
+        if opts["alpha"] == "hard":
+            a = (a > 0.5).astype(float)
+        ys, xs = np.nonzero(a > 0)
+        by0, by1, bx0, bx1 = ys.min(), ys.max() + 1, xs.min(), xs.max() + 1
+        px = np.zeros((by1 - by0, bx1 - bx0, 4), np.uint8)
+        px[..., :3] = (rgb[by0:by1, bx0:bx1] * 255).round().astype(np.uint8)
+        px[..., 3] = (a[by0:by1, bx0:bx1] * 255).round().astype(np.uint8)
+        px[px[..., 3] == 0, :3] = 0
+        out.append({"image": Image.fromarray(px, "RGBA"), "x": int(bx0), "y": int(by0),
+                    "cell_w": alpha.shape[1], "cell_h": alpha.shape[0]})
+    return out
+
+
+def extend_bottom(img, n):
+    """Continues a parallax strip n rows further down in its own colours, so a layer
+    never shows sky under it. The colour is the strip's bottom edge, blurred sideways."""
+    a = np.asarray(img).astype(float)
+    h, w, _ = a.shape
+    edge = a[h - 8:h - 2].mean(0)  # skip the last rows (anti-aliasing against the divider)
+    k = 41
+    pad = np.concatenate([edge[:k], edge, edge[-k:]])
+    kernel = np.ones(k) / k
+    soft = np.stack([np.convolve(pad[:, c], kernel, "same")[k:-k] for c in range(4)], 1)
+    flat = soft.mean(0)
+    out = np.zeros((h + n, w, 4))
+    out[:h] = a
+    for i in range(n):
+        t = min(1.0, i / max(1, n * 0.5))
+        out[h + i] = soft * (1 - t) + flat * t
+    out[h - 2:h + 4] = (out[h - 2:h + 4] + soft) / 2  # soften the join
+    out[..., 3] = np.where(np.arange(h + n)[:, None] >= h - 2, 255, out[..., 3])
+    return Image.fromarray(out.clip(0, 255).astype(np.uint8), "RGBA")
+
+
+# ---------- animation sets ----------
+
+def head_x(im):
+    """Centre of the head: coloured (not pale steel) pixels in the upper part of the figure."""
+    a = np.asarray(im).astype(int)
+    top = a[int(im.height * 0.12):int(im.height * 0.45)]
+    m = (top[..., 3] > 0) & (top[..., :3].min(2) < 170)
+    return float(np.nonzero(m)[1].mean()) if m.any() else im.width / 2
+
+
+def mass_x(im):
+    a = np.asarray(im)[..., 3] > 0
+    return float(np.nonzero(a)[1].mean())
+
+
+def build_set(name, spec, sprites, out_root):
+    """Lays the frames of one animation set on a strip, feet on a shared baseline."""
+    frames = []
+    for key in spec["frames"]:
+        sheet_frame = spec["frames"][key]
+        s = sprites[sheet_frame]
+        im = s["image"]
+        if spec.get("anchor", "mass") == "head":
+            ax = head_x(im)
+        elif spec.get("anchor") == "cell":
+            ax = s["cell_w"] / 2 - s["x"]
+        else:
+            ax = mass_x(im)
+        ax += spec.get("nudge", {}).get(key, [0, 0])[0]
+        if spec.get("baseline", "bottom") == "cell":
+            bottom = s["cell_h"] - (s["y"] + im.height)  # empty rows under the sprite inside its cell
+        else:
+            bottom = 0
+        bottom -= spec.get("nudge", {}).get(key, [0, 0])[1]
+        frames.append((key, im, ax, bottom))
+    if spec.get("baseline") == "cell":
+        lowest = min(b for _, _, _, b in frames)
+        frames = [(k, im, ax, b - lowest) for k, im, ax, b in frames]
+    half = max(max(ax, im.width - ax) for _, im, ax, _ in frames)
+    fw = int(np.ceil(half)) * 2 + 2
+    fh = max(im.height + b for _, im, _, b in frames) + 1
+    strip = Image.new("RGBA", (fw * len(frames), fh), (0, 0, 0, 0))
+    index = {}
+    for i, (key, im, ax, b) in enumerate(frames):
+        strip.alpha_composite(im, (i * fw + round(fw / 2 - ax), fh - 1 - b - im.height))
+        index[key] = i
+    png = os.path.join(out_root, spec["out"])
+    os.makedirs(os.path.dirname(png), exist_ok=True)
+    strip.save(png)
+    tres = os.path.join(ROOT, spec["sprite_frames"])
+    os.makedirs(os.path.dirname(tres), exist_ok=True)
+    write_sprite_frames(tres, "res://" + os.path.relpath(png, ROOT), fw, fh, index, spec["animations"])
+    print(f"  set {name}: {len(frames)} frames of {fw}x{fh} -> {spec['out']}, {spec['sprite_frames']}")
+
+
+def write_sprite_frames(path, texture, fw, fh, index, anims):
+    """A Godot SpriteFrames resource whose frames are regions of one strip texture."""
+    used = sorted({index[f] for a in anims.values() for f in a["frames"]})
+    lines = [f'[gd_resource type="SpriteFrames" load_steps={len(used) + 2} format=3]', "",
+             f'[ext_resource type="Texture2D" path="{texture}" id="1_strip"]', ""]
+    for i in used:
+        lines += [f'[sub_resource type="AtlasTexture" id="f{i}"]', 'atlas = ExtResource("1_strip")',
+                  f"region = Rect2({i * fw}, 0, {fw}, {fh})", ""]
+    entries = []
+    for name, a in anims.items():
+        frames = ", ".join('{"duration": 1.0, "texture": SubResource("f%d")}' % index[f] for f in a["frames"])
+        entries.append('{"frames": [%s], "loop": %s, "name": &"%s", "speed": %s}'
+                       % (frames, "true" if a.get("loop", True) else "false", name, float(a.get("fps", 8))))
+    lines += ["[resource]", "animations = [" + ", ".join(entries) + "]", ""]
+    with open(path, "w") as f:
+        f.write("\n".join(lines))
+
+
+# ---------- driver ----------
+
+def process(manifest_path, grid_only=False, sprites=None):
+    with open(manifest_path) as f:
+        man = json.load(f)
+    sheet_id = os.path.splitext(os.path.basename(manifest_path))[0]
+    src = os.path.join(ROOT, man["source"])
+    rgb = np.asarray(Image.open(src).convert("RGB")).astype(int)
+    base = {**DEFAULTS, **{k: v for k, v in man.items() if k in DEFAULTS}}
+    bg = np.array(base["background"]) if isinstance(base["background"], list) else background_color(rgb)
+    bands = grid_from_manifest(man["grid"], rgb.shape) if "grid" in man else detect_grid(rgb, bg, man.get("grid_threshold", 0.8))
+    print(f"{sheet_id}: {len(bands)} rows, cells per row {[len(c) for _, _, c in bands]}")
+    if grid_only:
+        for y0, y1, cols in bands:
+            print(f"  y {y0}-{y1}: x {[c for c in cols]}")
+        return
+    names = man["cells"]
+    if len(names) != len(bands) or any(len(n) != len(b[2]) for n, b in zip(names, bands)):
+        sys.exit(f"{sheet_id}: the manifest names {[len(n) for n in names]} cells per row, "
+                 f"the sheet has {[len(b[2]) for b in bands]}")
+    out_dir = os.path.join(ROOT, man["out_dir"])
+    os.makedirs(out_dir, exist_ok=True)
+    count = 0
+    for (y0, y1, cols), row in zip(bands, names):
+        for (x0, x1), name in zip(cols, row):
+            if not name:
+                continue
+            opts = {**base, **man.get("overrides", {}).get(name, {})}
+            pieces = cut_cell(rgb, bg, (x0, y0, x1, y1), opts)
+            if not pieces:
+                print(f"  {name}: nothing found")
+                continue
+            for i, p in enumerate(pieces):
+                pname = f"{name}_{i + 1}" if opts["keep"] == "split" else name
+                im = p["image"]
+                if opts.get("seamless"):
+                    side = opts.get("size", min(im.size))
+                    im = make_seamless(im.convert("RGB").crop((0, 0, min(im.size), min(im.size)))
+                                       .resize((side, side), Image.BOX)).convert("RGBA")
+                if opts.get("extend_bottom"):
+                    im = extend_bottom(im, opts["extend_bottom"])
+                p["image"] = im
+                if sprites is not None:
+                    sprites[f"{sheet_id}:{pname}"] = p
+                if opts.get("save", True):
+                    dest = os.path.join(ROOT, opts["out_dir"]) if "out_dir" in opts else out_dir
+                    os.makedirs(dest, exist_ok=True)
+                    im.save(os.path.join(dest, pname + ".png"))
+                count += 1
+    print(f"  {count} sprites -> {man['out_dir']}")
+    return man
+
+
+def main():
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    grid_only = "--grid" in sys.argv
+    paths = sorted(os.path.join(SHEETS, f) for f in os.listdir(SHEETS) if f.endswith(".json"))
+    if args:
+        paths = [p for p in paths if os.path.splitext(os.path.basename(p))[0] in args]
+    sprites = {}
+    manifests = [process(p, grid_only, sprites) for p in paths]
+    if grid_only:
+        return
+    # animation sets can pull frames from any sheet processed in this run
+    for man in manifests:
+        for name, spec in man.get("sets", {}).items():
+            missing = [f for f in spec["frames"].values() if f not in sprites]
+            if missing:
+                print(f"  set {name}: skipped, run its sheets too ({missing[:3]}...)")
+                continue
+            build_set(name, spec, sprites, ROOT)
+
+
+if __name__ == "__main__":
+    main()

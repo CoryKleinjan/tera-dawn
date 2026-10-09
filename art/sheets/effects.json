@@ -1,0 +1,48 @@
+{
+  "source": "art/source/effects.png",
+  "scale": 0.5,
+  "alpha": "soft",
+  "label_band": 0.15,
+  "out_dir": "assets/sprites/effects",
+  "cells": [
+    [
+      "swish_1",
+      "swish_2",
+      "swish_3",
+      "dawn_slash_1",
+      "dawn_slash_2"
+    ],
+    [
+      "dawn_slash_3",
+      "hit_1",
+      "hit_2",
+      "hit_3",
+      "critical"
+    ],
+    [
+      "level_up_1",
+      "level_up_2",
+      "level_up_3",
+      "dust_1",
+      "dust_2"
+    ],
+    [
+      "heal",
+      "shard_pickup",
+      "poof_1",
+      "poof_2",
+      "soft_glow"
+    ]
+  ],
+  "overrides": {
+    "level_up_1": {
+      "blank_top": 34
+    },
+    "level_up_2": {
+      "blank_top": 34
+    },
+    "level_up_3": {
+      "blank_top": 34
+    }
+  }
+}

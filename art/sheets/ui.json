@@ -1,0 +1,45 @@
+{
+  "source": "art/source/ui.png",
+  "scale": 0.5,
+  "alpha": "soft",
+  "label_band": 0.2,
+  "grid_threshold": 0.7,
+  "out_dir": "assets/sprites/ui",
+  "cells": [
+    [
+      "hud_bar",
+      "hp_frame",
+      "mp_frame",
+      "exp_frame"
+    ],
+    [
+      "fill_red",
+      "fill_blue",
+      "fill_gold",
+      "level_badge"
+    ],
+    [
+      "menu_panel",
+      "button_normal",
+      "button_hover",
+      "button_pressed"
+    ],
+    [
+      "icon_attack",
+      "icon_dawn_slash",
+      "skill_slot",
+      "icon_dawnshard"
+    ],
+    [
+      "name_tag",
+      "monster_hp",
+      "cursor",
+      "area_banner"
+    ]
+  ],
+  "overrides": {
+    "monster_hp": {
+      "keep": "split"
+    }
+  }
+}

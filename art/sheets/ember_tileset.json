@@ -1,0 +1,45 @@
+{
+  "source": "art/source/ember_tileset.png",
+  "scale": 0.35,
+  "label_band": 0.16,
+  "out_dir": "assets/sprites/tiles/ember",
+  "cells": [
+    [
+      "ground_middle",
+      "ground_left",
+      "ground_right",
+      "corner_small",
+      "platform_small",
+      "platform_medium"
+    ],
+    [
+      "platform_large",
+      "slope_up",
+      "slope_down",
+      "tall_ledge",
+      "ledge_roots",
+      "floating_rock"
+    ],
+    [
+      "bush_small",
+      "bush_large",
+      "tree_small",
+      "tree_large",
+      "stump",
+      "rock_small"
+    ],
+    [
+      "rock_large",
+      "crystals",
+      "steam_vent",
+      "fence",
+      "fire_lilies",
+      "tall_grass"
+    ]
+  ],
+  "overrides": {
+    "steam_vent": {
+      "blank_top": 30
+    }
+  }
+}

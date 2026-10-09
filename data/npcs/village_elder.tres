@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/npcs/village_elder.png" id="2_village_elder"]
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"village_elder"
+display_name = "Elder Rowan"
+title = "Village Elder"
+texture = ExtResource("2_village_elder")
+sprite_scale = 1.0
+lines = PackedStringArray("Welcome to Dawnrise Meadow, young Dawnling.", "The Dewlings are harmless. Practice your sword on them first.", "Hold Up on a rope or ladder to climb to the upper meadow.", "Beyond the eastern portal lies Ember Hollow. Train well before you go.")
