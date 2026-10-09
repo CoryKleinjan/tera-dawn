@@ -26,6 +26,8 @@ extends Resource
 @export var world_pos := Vector2.ZERO
 ## Towns are safe places to respawn and where return scrolls take you.
 @export var town := false
+## A free market: players may open their own shops here.
+@export var market := false
 ## The town you wake up in after fainting here, and where a return scroll goes. Empty means
 ## this map if it's a town, else the starting map.
 @export var return_map: StringName

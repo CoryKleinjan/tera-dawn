@@ -153,6 +153,71 @@ func req_use_item(slot: int) -> void:
 		server.on_use_item(_sender(), slot)
 
 @rpc("any_peer", "call_local", "reliable")
+func req_chat(text: String) -> void:
+	if server:
+		server.social.on_chat(_sender(), text)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_social(action: StringName, arg: String) -> void:
+	if server:
+		server.social.on_social(_sender(), action, arg)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_invite_answer(id: int, accept: bool) -> void:
+	if server:
+		server.social.on_answer(_sender(), id, accept)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_trade_offer(tab: int, slot: int, count: int) -> void:
+	if server:
+		server.social.on_trade_offer(_sender(), tab, slot, count)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_trade_shards(amount: int) -> void:
+	if server:
+		server.social.on_trade_shards(_sender(), amount)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_trade_ready() -> void:
+	if server:
+		server.social.on_trade_ready(_sender())
+
+@rpc("any_peer", "call_local", "reliable")
+func req_trade_cancel() -> void:
+	if server:
+		server.social.cancel_trade(_sender())
+
+@rpc("any_peer", "call_local", "reliable")
+func req_guild_create(npc_id: StringName, guild_name: String) -> void:
+	if server:
+		server.social.on_guild_create(_sender(), npc_id, guild_name)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_fame(target_peer: int, up: bool) -> void:
+	if server:
+		server.social.on_fame(_sender(), target_peer, up)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_shop_open(title: String, entries: Array) -> void:
+	if server:
+		server.social.on_shop_open(_sender(), title, entries)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_shop_view(owner: int) -> void:
+	if server:
+		server.social.on_shop_view(_sender(), owner)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_shop_buy(owner: int, index: int, item_id: StringName) -> void:
+	if server:
+		server.social.on_shop_buy(_sender(), owner, index, item_id)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_shop_leave(owner: int) -> void:
+	if server:
+		server.social.on_shop_leave(_sender(), owner)
+
+@rpc("any_peer", "call_local", "reliable")
 func req_scroll(use_slot: int, equip_slot: int) -> void:
 	if server:
 		server.on_scroll(_sender(), use_slot, equip_slot)
@@ -291,6 +356,31 @@ func ev_skill(peer: int, skill_id: StringName, x: float, y: float, face: int, li
 func ev_mob_died(index: int) -> void:
 	if world:
 		world.show_mob_death(index)
+
+@rpc("authority", "call_local", "reliable")
+func ev_chat(kind: String, from: String, text: String, from_peer: int) -> void:
+	if world:
+		world.show_chat(kind, from, text, from_peer)
+
+@rpc("authority", "call_local", "reliable")
+func ev_invite(id: int, kind: String, from: String, text: String) -> void:
+	if world:
+		world.hud.invites.add(id, kind, from, text)
+
+@rpc("authority", "call_local", "reliable")
+func ev_social(summary: Dictionary) -> void:
+	if world:
+		Game.social = summary
+
+@rpc("authority", "call_local", "reliable")
+func ev_trade(state: Dictionary) -> void:
+	if world:
+		world.hud.show_trade(state)
+
+@rpc("authority", "call_local", "reliable")
+func ev_player_shop(owner: int, owner_name: String, title: String, items: Array) -> void:
+	if world:
+		world.hud.show_player_shop(owner, owner_name, title, items)
 
 @rpc("authority", "call_local", "reliable")
 func ev_mob_shot(index: int, x: float, y: float) -> void:

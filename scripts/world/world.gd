@@ -73,9 +73,15 @@ func stop() -> void:
 		a.queue_free()
 	avatars.clear()
 	player.rig.visible = false
+	Game.social = {}
+	hud.invites.clear()
+	for w in ["player", "trade", "player_shop", "community"]:
+		hud.windows[w].visible = false
 
 ## The server put the player on a map: build it and show what's on it.
 func enter_map(id: StringName, x: float, state: Dictionary) -> void:
+	for w in ["player", "player_shop"]:
+		hud.windows[w].visible = false
 	load_map(id)
 	player.place(x, platforms[0].y)
 	var mob_states: Array = state.get("mobs", [])
@@ -147,6 +153,34 @@ func actor(peer: int) -> Node2D:
 		return player
 	return avatars.get(peer)
 
+## The other player drawn under a screen point, or null.
+func avatar_at(screen_pos: Vector2) -> TDAvatar:
+	for a: TDAvatar in avatars.values():
+		var feet := stage.screen(a.position, TDStage.Z_OTHER_PLAYER)
+		if Rect2(feet + Vector2(-24, -78), Vector2(48, 82)).has_point(screen_pos):
+			return a
+	return null
+
+## Clicking another player: their shop if they're minding one, otherwise what you can do with them.
+func click_avatar(a: TDAvatar) -> void:
+	if a.shop_title != "":
+		Net.ask(&"req_shop_view", [a.peer])
+	else:
+		hud.windows["player"].open(a)
+
+## Keys don't move the player while they type or mind a shop.
+func input_blocked() -> bool:
+	return hud.typing() or hud.selling()
+
+## A chat line arrived; map chat also shows in a bubble over the speaker.
+func show_chat(kind: String, from: String, text: String, from_peer: int) -> void:
+	hud.chat.add(kind, from, text)
+	if kind == "all":
+		var who := actor(from_peer)
+		if who:
+			who.set(&"speech", text)
+			who.set(&"speech_t", 300)
+
 func _camera_target() -> Vector2:
 	return Vector2(
 		clampf(player.position.x - VIEW.x / 2.0, 0, float(map.width) - VIEW.x),
@@ -158,6 +192,13 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_fullscreen"):
 		var full := DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED if full else DisplayServer.WINDOW_MODE_FULLSCREEN)
+	elif started and not hud.title.visible and event.is_action_pressed("chat") and not hud.typing():
+		hud.chat.open()
+		get_viewport().set_input_as_handled()
+	elif started and event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		var a := avatar_at(event.position)
+		if a:
+			click_avatar(a)
 	elif event.is_action_pressed("pause") and started:
 		if not hud.close_top_window():
 			hud.show_title(true)

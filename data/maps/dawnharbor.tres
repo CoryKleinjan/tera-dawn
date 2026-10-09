@@ -14,6 +14,7 @@
 [ext_resource type="Resource" path="res://data/npcs/harbor_taxi.tres" id="12_harbor_taxi"]
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="portal_def_p9"]
 [ext_resource type="Resource" path="res://data/npcs/harbor_outfitter.tres" id="npc_outfitter_p9"]
+[ext_resource type="Resource" path="res://data/npcs/guild_clerk.tres" id="npc_guild_p10"]
 
 [sub_resource type="Resource" id="Resource_11"]
 script = ExtResource("7_npc_placement")
@@ -110,6 +111,20 @@ platform = 0
 target_map = &"harbor_road"
 target_x = 120.0
 
+[sub_resource type="Resource" id="Portal_market"]
+script = ExtResource("portal_def_p9")
+x = 1840.0
+platform = 0
+target_map = &"free_market"
+target_x = 120.0
+
+[sub_resource type="Resource" id="Npc_guild"]
+script = ExtResource("7_npc_placement")
+npc = ExtResource("npc_guild_p10")
+x = 950.0
+platform = 3
+face = -1
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"dawnharbor"
@@ -124,9 +139,9 @@ start_x = 300.0
 lantern_spacing = 320.0
 platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3")])
 climbables = Array[ExtResource("4_climbable_def")]([SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6")])
-npcs = Array[ExtResource("7_npc_placement")]([SubResource("Npc_p9"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11")])
+npcs = Array[ExtResource("7_npc_placement")]([SubResource("Npc_guild"), SubResource("Npc_p9"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11")])
 region = &"dawnharbor"
 world_pos = Vector2(470.0, 300.0)
 town = true
 level_text = "Town"
-portals = Array[ExtResource("portal_def_p9")]([SubResource("Portal_1"), SubResource("Portal_2")])
+portals = Array[ExtResource("portal_def_p9")]([SubResource("Portal_market"), SubResource("Portal_1"), SubResource("Portal_2")])

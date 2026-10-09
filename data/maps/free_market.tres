@@ -1,0 +1,74 @@
+[gd_resource type="Resource" script_class="MapDef" load_steps=16 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
+[ext_resource type="Resource" path="res://data/biomes/harbor.tres" id="2_harbor"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="3_platform_def"]
+[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="4_climbable_def"]
+[ext_resource type="Resource" path="res://data/climb_styles/ladder.tres" id="5_ladder"]
+[ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="6_npc_placement"]
+[ext_resource type="Resource" path="res://data/npcs/market_clerk.tres" id="7_market_clerk"]
+[ext_resource type="Resource" path="res://data/npcs/storage_keeper.tres" id="8_storage_keeper"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="9_portal_def"]
+
+[sub_resource type="Resource" id="Resource_6"]
+script = ExtResource("9_portal_def")
+x = 60.0
+platform = 0
+target_map = &"dawnharbor"
+target_x = 1780.0
+
+[sub_resource type="Resource" id="Resource_5"]
+script = ExtResource("6_npc_placement")
+npc = ExtResource("8_storage_keeper")
+x = 1800.0
+platform = 0
+face = -1
+
+[sub_resource type="Resource" id="Resource_4"]
+script = ExtResource("6_npc_placement")
+npc = ExtResource("7_market_clerk")
+x = 320.0
+platform = 0
+face = 1
+
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("4_climbable_def")
+x = 1460.0
+top = 480.0
+bottom = 620.0
+style = ExtResource("5_ladder")
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("4_climbable_def")
+x = 540.0
+top = 480.0
+bottom = 620.0
+style = ExtResource("5_ladder")
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("3_platform_def")
+x = 500.0
+y = 480.0
+width = 1000.0
+
+[resource]
+script = ExtResource("1_map_def")
+id = &"free_market"
+display_name = "Free Market"
+sign_text = "Free Market"
+sign_x = 200.0
+biome = ExtResource("2_harbor")
+width = 2000
+height = 700
+ground_y = 620
+start_x = 200.0
+lantern_spacing = 260.0
+platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1")])
+climbables = Array[ExtResource("4_climbable_def")]([SubResource("Resource_2"), SubResource("Resource_3")])
+npcs = Array[ExtResource("6_npc_placement")]([SubResource("Resource_4"), SubResource("Resource_5")])
+portals = Array[ExtResource("9_portal_def")]([SubResource("Resource_6")])
+region = &"dawnharbor"
+world_pos = Vector2(500.0, 330.0)
+town = true
+market = true
+level_text = "Town"

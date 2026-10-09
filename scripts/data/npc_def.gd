@@ -21,6 +21,10 @@ extends Resource
 @export var instructs: Array[StringName] = []
 ## Keeps players' storage.
 @export var storage := false
+## Founds guilds (for TDSocial.GUILD_COST Dawnshards).
+@export var guild := false
+## Helps players set up their own shop (on a market map).
+@export var market := false
 ## Trips they offer (ships, wagons...).
 @export var travel: Array[TravelRoute] = []
 ## Until they have their own art, NPCs can share a sprite in their own colour.

@@ -20,6 +20,12 @@ var face := 1
 var animation := &"idle"
 var flags := 0
 var known := false
+var job := &""
+var guild := ""
+## The sign over their shop, or "" when they aren't minding one.
+var shop_title := ""
+var speech := ""
+var speech_t := 0
 var rig: SpriteRig
 var _swing := false
 
@@ -29,7 +35,7 @@ static func create(w: TDWorld, peer_id: int) -> TDAvatar:
 	a.peer = peer_id
 	return a
 
-## Takes the server's latest [peer, name, x, y, face, animation, level, flags, job].
+## Takes the server's latest [peer, name, x, y, face, animation, level, flags, job, guild, shop sign].
 func apply(state: Array) -> void:
 	char_name = state[1]
 	target = Vector2(state[2], state[3])
@@ -39,8 +45,11 @@ func apply(state: Array) -> void:
 	animation = anim
 	level = state[6]
 	flags = state[7]
-	if state.size() > 8 and rig and Content.jobs.has(StringName(state[8])):
-		rig.set_tint(Content.job(state[8]).tint)
+	if state.size() > 8 and rig and Content.jobs.has(StringName(state[8])) and job != StringName(state[8]):
+		job = StringName(state[8])
+		rig.set_tint(Content.job(job).tint)
+	guild = str(state[9]) if state.size() > 9 else ""
+	shop_title = str(state[10]) if state.size() > 10 else ""
 	if not known or position.distance_to(target) > 300.0:
 		position = target # first sight or a portal hop: no gliding across the map
 	known = true
@@ -56,6 +65,8 @@ func fainted() -> bool:
 
 func step() -> void:
 	position += (target - position) * FOLLOW
+	if speech_t > 0:
+		speech_t -= 1
 
 func _ready() -> void:
 	rig = SpriteRig.new()
@@ -75,7 +86,9 @@ func _process(_delta: float) -> void:
 	var blink := flags & BLINK != 0 and not fainted() and Engine.get_physics_frames() % 8 < 4
 	rig.set_opacity(0.0 if blink else 1.0)
 
-## Name tag under their feet, drawn by the overlay.
+## Name tag (and guild) under their feet, drawn by the overlay.
 func draw_tag(ci: CanvasItem, at: Vector2) -> void:
 	if known and not fainted():
 		UiSkin.draw_name_tag(ci, at + Vector2(0, 4), char_name, Palette.MIST)
+		if guild != "":
+			UiSkin.draw_name_tag(ci, at + Vector2(0, 26), guild, Color("b8f070"))

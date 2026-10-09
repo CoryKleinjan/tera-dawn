@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/npcs/shopkeeper.png" id="2_shopkeeper"]
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"market_clerk"
+display_name = "Market Clerk Tibb"
+title = "Free Market"
+texture = ExtResource("2_shopkeeper")
+sprite_scale = 0.95
+tint = Color(1.0, 0.815686, 0.941176, 1.0)
+greeting = "Welcome to the Free Market! Set up a stall, name it, price your goods, and other heroes can browse while you wait."
+lines = PackedStringArray("Click a player's shop sign to browse what they're selling.", "Unsold goods come back to you when you close up.")
+market = true

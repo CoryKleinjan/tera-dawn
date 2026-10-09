@@ -10,13 +10,15 @@ const COL_VALUE := 112.0
 var _plus := {}
 
 func _init() -> void:
-	super("Character", Vector2(250, 428))
+	super("Character", Vector2(250, 462))
 
 func _draw_body() -> void:
 	var s := Game.me.stats
 	var y := 52.0
 	y = _row(y, "Job", Game.me.job.display_name)
 	y = _row(y, "Level", str(Game.me.level))
+	y = _row(y, "Guild", Game.me.guild if Game.me.guild != "" else "-")
+	y = _row(y, "Fame", str(Game.me.fame), Color("8cf0a6") if Game.me.fame > 0 else (Color("ffb38a") if Game.me.fame < 0 else Palette.MIST))
 	y = _row(y, "EXP", "%d / %d" % [Game.me.xp, Game.me.xp_need()])
 	y = _row(y, "HP", "%d / %d" % [Game.me.health.hp, Game.me.max_hp()])
 	y = _row(y, "MP", "%d / %d" % [Game.me.mp, Game.me.max_mp()])

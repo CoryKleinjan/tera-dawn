@@ -46,6 +46,15 @@ var quickslots: Array = []
 var buffs := {}
 ## Base stats plus everything worn. Kept up to date by recalc().
 var stats := StatBlock.new()
+## Names of this character's buddies (the server keeps them both ways).
+var buddies: Array[String] = []
+## Fame other players gave (or took). `fame_day` is the day (days since 1970) this
+## character last gave fame, and `fame_given` the day they last gave each name fame.
+var fame := 0
+var fame_day := -1
+var fame_given := {}
+## The guild's name, or "". The server's guild list is the real record.
+var guild := ""
 
 func _init() -> void:
 	equipment.changed.connect(recalc)
@@ -455,6 +464,7 @@ func to_dict() -> Dictionary:
 		"quests": quests.to_dict(),
 		"skills": _string_keys(skills), "sp": sp, "buffs": _string_keys(buffs),
 		"quickslots": quickslots.map(func(q: Array) -> Array: return q.map(func(v) -> String: return String(v))),
+		"buddies": buddies.duplicate(), "fame": fame, "fame_day": fame_day, "fame_given": fame_given.duplicate(), "guild": guild,
 	}
 
 static func _string_keys(d: Dictionary) -> Dictionary:
@@ -514,6 +524,17 @@ func load_dict(data: Dictionary) -> void:
 	elif not data.has("sp"):
 		set_quickslot(QUICKSLOTS - 2, &"item", &"red_potion")
 		set_quickslot(QUICKSLOTS - 1, &"item", &"blue_potion")
+	if data.get("buddies") is Array:
+		buddies.clear()
+		for b in data["buddies"]:
+			buddies.append(str(b))
+	fame = int(data.get("fame", fame))
+	fame_day = int(data.get("fame_day", fame_day))
+	if data.get("fame_given") is Dictionary:
+		fame_given = {}
+		for k in data["fame_given"]:
+			fame_given[str(k)] = int(data["fame_given"][k])
+	guild = str(data.get("guild", guild))
 	recalc()
 	health.set_hp(maxi(1, int(data.get("hp", max_hp()))))
 	mp = clampi(int(data.get("mp", max_mp())), 0, max_mp())
