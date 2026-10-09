@@ -64,7 +64,21 @@ func _run() -> void:
 	if only == "" or only == "title":
 		await _shot("title")
 	DirAccess.remove_absolute("user://screenshot_characters/dawnling.json")
-	Net.play_single("Dawnling")
+	if only == "" or only == "creator":
+		# The character creator for a new name, with a few choices made.
+		world.hud.name_field.text = "Dawnling"
+		world.hud._on_play()
+		await _physics(2)
+		var creator := world.hud.creator
+		creator.step("look:%d" % LookDef.Kind.HAIR, 2)
+		creator.step("look:%d" % LookDef.Kind.HAIR_COLOR, 3)
+		creator.step("look:%d" % LookDef.Kind.FACE, 2)
+		creator.step("outfit:%d" % EquipDef.Slot.TOP, 1)
+		await _frames(10)
+		await _shot("creator")
+		creator.cancelled.emit()
+		await _frames(2)
+	Net.play_single("Dawnling", NewCharacter.new().to_dict())
 	var ch := _me().character
 	ch.level = 9
 	ch.recalc()
@@ -95,6 +109,58 @@ func _run() -> void:
 		Input.action_release("quick_1")
 		await _physics(3)
 		await _shot("action")
+	if only == "" or only == "lookbook":
+		# Five players with their own looks, each wearing a different job's gear: in the
+		# meadow, then close up in menus (the equipment window's dressed hero).
+		var meadow: MapInstance = Net.server.maps[&"meadow"]
+		_teleport(world, Vector2(1500, 620))
+		p.face = -1
+		await _physics(240) # let the level-up banner pass
+		var outfits := [
+			["Bramble", "hair_long", "hair_color_copper", "skin_honey", "face_freckled", ["green_hood", "willow_bow", "ranger_vest", "leather_boots"]],
+			["Ondine", "hair_twin_tails", "hair_color_blossom", "skin_porcelain", "face_rosy", ["apprentice_hat", "oak_staff", "aurora_robe", "petal_cape"]],
+			["Garrick", "hair_crest", "hair_color_ink", "skin_umber", "face_determined", ["iron_helm", "bronze_sword", "bronze_mail", "oak_shield", "dawnwing_cape"]],
+			["Wren", "hair_ponytail", "hair_color_frost", "skin_bronze", "face_cheeky", ["dusk_bandana", "iron_claw", "night_garb", "work_gloves"]],
+			["Marlo", "hair_bun", "hair_color_moss", "skin_cocoa", "face_bright", ["tricorn_hat", "flintlock", "sailor_coat", "patched_trousers"]],
+		]
+		var models := []
+		for i in outfits.size():
+			var o: Array = outfits[i]
+			var made := NewCharacter.new()
+			for pair in [[&"hair", o[1]], [&"hair_color", o[2]], [&"skin", o[3]], [&"face", o[4]]]:
+				made.appearance.set(pair[0], StringName(pair[1]))
+			var c := Character.create(o[0], Character.START_JOB, made)
+			for id in o[5]:
+				var e: EquipDef = Content.item(StringName(id))
+				c.equipment.put(c.equipment.place_for(e), ItemStack.exact(e))
+			var m := SimPlayer.new(500 + i, c)
+			meadow.add_player(m, 1150.0 + i * 70.0)
+			m.position.y = 620
+			m.face = -1 if i % 2 else 1
+			models.append(m)
+		await _physics(30)
+		await _shot("lookbook")
+		var sheet := ColorRect.new()
+		sheet.color = Palette.NIGHT
+		sheet.size = TDWorld.VIEW
+		world.hud.add_child(sheet)
+		for i in models.size():
+			for j in 2:
+				var view := PaperdollView.new()
+				view.position = Vector2(10 + i * 188, 20 + j * 260)
+				view.size = Vector2(184, 240)
+				view.max_zoom = 3.0
+				view.set_look(models[i].character.look())
+				view.facing = 1 if j == 0 else -1
+				view.play(&"idle" if j == 0 else &"walk")
+				view.playing = false
+				sheet.add_child(view)
+		await _frames(3)
+		await _shot("lookbook_close")
+		sheet.queue_free()
+		for m in models:
+			meadow.remove_player(m)
+		await _physics(3)
 	if only == "" or only == "village":
 		# The elder and shopkeeper by the village.
 		var elder := world.npcs()[0]

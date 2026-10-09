@@ -73,6 +73,13 @@ func _ready() -> void:
 	add_child(rig)
 	companion = TDCompanion.new()
 	add_child(companion)
+	_dress()
+	Game.character_changed.connect(_dress)
+
+## Shows your look and the gear you wear (the server sends a new copy when it changes).
+func _dress() -> void:
+	if Game.me:
+		rig.dress(Game.me.look())
 
 func place(x: float, y: float) -> void:
 	position = Vector2(x, y)
@@ -337,8 +344,6 @@ func _process(_delta: float) -> void:
 	rig.play(_animation(), _swing)
 	_swing = false
 	rig.face(1 if is_climbing() else face)
-	if Game.me.job:
-		rig.set_tint(Game.me.job.tint)
 	rig.set_opacity(0.0 if inv > 0 and inv % 8 < 4 and not fainted() else 1.0)
 	companion.set_chair(sitting)
 	companion.set_pet(Game.me.pet, position)

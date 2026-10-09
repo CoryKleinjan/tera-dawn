@@ -20,6 +20,8 @@ const BASIC_ATTACK := &"basic_attack"
 const STORE_FEE := 10
 
 var name := ""
+## Skin, face, eyes and hair, picked in the character creator.
+var appearance := Appearance.new()
 var level := 1
 var xp := 0
 var shards := 0
@@ -72,13 +74,17 @@ func _init() -> void:
 	quickslots.resize(QUICKSLOTS)
 	quickslots.fill([])
 
-## A fresh level 1 character of `job_id` with the job's starting stats, gear and items.
-static func create(char_name: String, job_id := START_JOB) -> Character:
+## A fresh level 1 character of `job_id` with the job's starting stats, gear and items, and
+## the look and outfit picked in the character creator (`made`, null for the defaults).
+static func create(char_name: String, job_id := START_JOB, made: NewCharacter = null) -> Character:
 	var c := Character.new()
 	c.name = char_name
 	c.job = Content.job(job_id)
 	c.base = c.job.starting_stats.copy() if c.job.starting_stats else StatBlock.new()
-	for e in c.job.starting_gear:
+	if made == null:
+		made = NewCharacter.new(job_id)
+	c.appearance = made.appearance.copy()
+	for e in made.starting_gear(c.job):
 		c.equipment.put(c.equipment.place_for(e), ItemStack.exact(e))
 	for entry in c.job.starting_items:
 		var n := entry.roll()
@@ -89,6 +95,16 @@ static func create(char_name: String, job_id := START_JOB) -> Character:
 	c.recalc()
 	c.refill()
 	return c
+
+## How the character looks to everyone: their appearance and the worn gear that shows
+## (Paperdoll draws it). Sent with every player snapshot.
+func look() -> Dictionary:
+	var gear := {}
+	for place in Paperdoll.SHOWN_PLACES:
+		var s := equipment.at(place)
+		if s:
+			gear[String(place)] = String(s.item.id)
+	return {"appearance": appearance.to_dict(), "gear": gear}
 
 ## Works out the total stats again after base stats or gear change.
 func recalc() -> void:

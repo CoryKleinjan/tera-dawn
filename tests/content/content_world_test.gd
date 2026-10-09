@@ -229,7 +229,7 @@ func _sources() -> Dictionary:
 		for g in j.advance_gifts + j.starting_items:
 			if g and g.item:
 				out[g.item.id] = "given by job %s" % j.id
-		for e in j.starting_gear:
+		for e in j.starting_gear + j.creator_gear:
 			if e:
 				out[e.id] = "starting gear of %s" % j.id
 	return out

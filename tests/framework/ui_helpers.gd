@@ -25,6 +25,13 @@ func _init(owner: Node) -> void:
 ## Starts single player as `char_name` and waits until the server has put them on the
 ## starting map. Monsters can't hurt the player.
 func start(char_name := "Uitester") -> void:
+	await open_title()
+	Net.play_single(char_name, NewCharacter.new().to_dict())
+	await ticks(3)
+	player().inv = 100000000
+
+## Opens the game on its title screen, not playing yet.
+func open_title() -> void:
 	_save_dir = Net.save_dir
 	_import_legacy = Net.import_legacy_save
 	_player_name = Game.player_name
@@ -35,9 +42,6 @@ func start(char_name := "Uitester") -> void:
 	test.add_child(world)
 	hud = world.hud
 	await frames(2)
-	Net.play_single(char_name)
-	await ticks(3)
-	player().inv = 100000000
 
 ## Leaves the game, frees the world and puts Net and Game back as they were.
 func stop() -> void:

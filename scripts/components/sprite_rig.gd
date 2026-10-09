@@ -1,7 +1,8 @@
 class_name SpriteRig
 extends Node3D
 ## The 3D body of a 2D actor: an animated pixel-art sprite standing in the HD-2D stage,
-## a soft shadow under it, and optionally a light and glowing particles.
+## a soft shadow under it, and optionally a light and glowing particles. Heroes are also
+## dressed (`dress`): their look and gear are drawn on them by a PaperdollSprite.
 ##
 ## Actors keep their logic in 2D game pixels and call `place()` every frame. Animations
 ## come from a SpriteFrames resource; when an actor only has a single image, the rig
@@ -17,6 +18,8 @@ var body: SpriteBase3D
 var shadow: Sprite3D
 var light: OmniLight3D
 var aura: CPUParticles3D
+## Draws the character's look on the body (heroes only, see `dress`).
+var paperdoll: PaperdollSprite
 var current := &"idle"
 ## Procedural animation clock (seconds), for single-image actors.
 var _t := randf() * 10.0
@@ -43,6 +46,14 @@ func setup(frames: SpriteFrames, texture: Texture2D, texel: float, shadow_width:
 	shadow = TDStage.shadow_sprite(shadow_width)
 	add_child(shadow)
 	play(&"idle")
+
+## Draws a look (Character.look()) on the body, which must be the hero's animated sprite.
+## Call again whenever the look changes; an unchanged look costs nothing.
+func dress(look: Dictionary) -> void:
+	if paperdoll == null:
+		paperdoll = PaperdollSprite.new(body as AnimatedSprite3D, (body as AnimatedSprite3D).pixel_size * TDStage.PX)
+		body.add_child(paperdoll)
+	paperdoll.set_look(look)
 
 func add_light(col: Color, energy: float, height_px: float) -> void:
 	light = TDStage.light(col, energy, 3.5)
@@ -106,8 +117,7 @@ func set_flash(on: bool) -> void:
 		_flash = on
 		body.modulate = Color(2.2, 1.0, 1.0) if on else _tint
 
-## A colour the sprite is always tinted with (until art for it exists, jobs share the
-## hero's art in their own colours).
+## A colour the sprite is always tinted with (NPCs and monsters that share art).
 func set_tint(col: Color) -> void:
 	_tint = col
 	if not _flash:

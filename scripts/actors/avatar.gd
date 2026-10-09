@@ -26,6 +26,8 @@ var rig: SpriteRig
 var companion: TDCompanion
 var chair: StringName = &""
 var pet: StringName = &""
+## Their appearance and the gear that shows (Character.look()).
+var look := {}
 var _swing := false
 
 static func create(w: TDWorld, peer_id: int) -> TDAvatar:
@@ -35,7 +37,7 @@ static func create(w: TDWorld, peer_id: int) -> TDAvatar:
 	return a
 
 ## Takes the server's latest [peer, name, x, y, face, animation, level, flags, job, guild,
-## chair, pet, shop sign].
+## chair, pet, look, shop sign].
 func apply(state: Array) -> void:
 	char_name = state[1]
 	target = Vector2(state[2], state[3])
@@ -45,13 +47,13 @@ func apply(state: Array) -> void:
 	animation = anim
 	level = state[6]
 	flags = state[7]
-	if state.size() > 8 and rig and Content.jobs.has(StringName(state[8])) and job != StringName(state[8]):
-		job = StringName(state[8])
-		rig.set_tint(Content.job(job).tint)
+	job = StringName(str(state[8])) if state.size() > 8 else &""
 	guild = str(state[9]) if state.size() > 9 else ""
 	chair = StringName(str(state[10])) if state.size() > 10 else &""
 	pet = StringName(str(state[11])) if state.size() > 11 else &""
-	shop_title = str(state[12]) if state.size() > 12 else ""
+	if state.size() > 12 and state[12] is Dictionary:
+		look = state[12]
+	shop_title = str(state[13]) if state.size() > 13 else ""
 	if not known or position.distance_to(target) > 300.0:
 		position = target # first sight or a portal hop: no gliding across the map
 	known = true
@@ -87,6 +89,7 @@ func _process(_delta: float) -> void:
 	rig.play(&"faint" if fainted() else animation, _swing)
 	_swing = false
 	rig.face(1 if climbing else face)
+	rig.dress(look)
 	var blink := flags & SnapshotFlags.PLAYER_BLINK != 0 and not fainted() and Engine.get_physics_frames() % 8 < 4
 	rig.set_opacity(0.0 if blink else 1.0)
 	companion.visible = known

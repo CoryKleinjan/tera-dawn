@@ -106,12 +106,16 @@ static func _wipe(path: String) -> void:
 
 # ---------- players ----------
 
-## Joins `char_name` on `peer` and puts them on `map` at `x` (on the floor). Clears the
-## events sent so far.
+## The character creator's default choices, to join with a new character.
+static func made() -> Dictionary:
+	return NewCharacter.new().to_dict()
+
+## Joins `char_name` on `peer` (making them with the creator's defaults if they're new) and
+## puts them on `map` at `x` (on the floor). Clears the events sent so far.
 func join(peer: int, char_name: String, map := FIELD, x := 300.0) -> SimPlayer:
 	if not api.peers.has(peer):
 		api.peers.append(peer)
-	server.join(peer, char_name)
+	server.join(peer, char_name, made())
 	var p: SimPlayer = server.sessions.get(peer)
 	if p and map != p.map.def.id:
 		move_to(p, map, x)

@@ -408,9 +408,22 @@ func _run() -> void:
 	_check(not world.started and world.hud.title.visible, "the game opens on the title screen")
 	world.hud.name_field.text = "Tester"
 	world.hud._on_play()
-	_me().inv = 100000 # keep monsters from hurting the player mid-test
 	await _ticks(2)
-	_check(world.started and not world.hud.title.visible and Game.me.name == "Tester", "Play starts a single-player game as the named character")
+	var creator := world.hud.creator
+	_check(creator.visible and not world.hud.title_card.visible and not world.started, "Play with a new name opens the character creator")
+	creator.step("look:%d" % LookDef.Kind.HAIR, 1)
+	creator.step("look:%d" % LookDef.Kind.HAIR_COLOR, 2)
+	creator.step("outfit:%d" % EquipDef.Slot.TOP, 1)
+	var chosen := creator.made.appearance.to_dict()
+	var top: EquipDef = creator.made.outfit[EquipDef.Slot.TOP]
+	_check(creator.preview.look["appearance"] == chosen and creator.preview.look["gear"]["top"] == String(top.id), "the preview shows every choice")
+	creator.create_button.pressed.emit()
+	await _ticks(2)
+	_me().inv = 100000 # keep monsters from hurting the player mid-test
+	_check(world.started and not world.hud.title.visible and Game.me.name == "Tester", "Create starts a single-player game as the named character")
+	_check(Game.me.appearance.to_dict() == chosen and Game.me.equipment.at(&"top").item == top, "the character has the look and outfit picked")
+	_check(Game.me.job.id == Character.START_JOB, "a new character starts as a Beginner")
+	_check(world.player.rig.paperdoll.look == Game.me.look(), "the hero is drawn with that look")
 	_check(Net.server != null and _me() != null, "single player runs its own server")
 	var p := world.player
 	_check(p.on_ground, "player starts on the ground")
@@ -761,7 +774,9 @@ func _check_job_advance() -> void:
 	talk.choose(0)
 	await _ticks(2)
 	_check(Game.me.job.id == &"mage" and Game.me.inventory.count_of(Content.item(&"apprentice_wand")) == 1, "the server makes them a Magician and gives a wand")
-	_check(world.player.rig.body.modulate == Content.job(&"mage").tint, "the hero takes the Magician's colours")
+	Net.ask(&"req_equip", [Game.me.inventory.find(Content.item(&"apprentice_wand")), &"weapon"])
+	await _ticks(2)
+	_check(world.player.rig.paperdoll.look["gear"].get("weapon") == "apprentice_wand", "the hero is drawn holding the wand once it's worn")
 	Net.server._enter_map(_me(), &"meadow", 300)
 	await _ticks(3)
 
@@ -1223,7 +1238,7 @@ func _check_social() -> void:
 	stall.open_shop()
 	await _ticks(3)
 	_check(social.shops.has(_me().peer) and world.hud.selling() and Game.me.inventory.count_of(Content.item(&"petal_wing")) == 0, "opening a shop puts your goods on display")
-	_check(Net.server.maps[&"free_market"].snapshot()["players"].any(func(s: Array) -> bool: return s[12] == stall.shop_title), "others see the shop sign")
+	_check(Net.server.maps[&"free_market"].snapshot()["players"].any(func(s: Array) -> bool: return s[13] == stall.shop_title), "others see the shop sign")
 	var before := ch.shards
 	social.on_shop_view(ally.peer, _me().peer)
 	social.on_shop_buy(ally.peer, _me().peer, 0, &"petal_wing")
@@ -1328,12 +1343,12 @@ func server_forfeit_check(ch: Character) -> void:
 ## the network: each must see the other, and the bot's attacks must count on the server.
 func _check_multiplayer() -> void:
 	var port := TEST_PORT + OS.get_process_id() % TEST_PORTS
-	var problem := Net.host("Host", port)
+	var problem := Net.host("Host", port, NewCharacter.new().to_dict())
 	for i in 20:
 		if problem == "":
 			break
 		port = TEST_PORT + (port - TEST_PORT + 1) % TEST_PORTS
-		problem = Net.host("Host", port)
+		problem = Net.host("Host", port, NewCharacter.new().to_dict())
 	_check(problem == "", "hosting opens a port (%d)%s" % [port, "" if problem == "" else ": " + problem])
 	if problem != "":
 		return

@@ -106,4 +106,4 @@ func snapshot() -> Array:
 		flags |= SnapshotFlags.PLAYER_BLINK
 	if climbing:
 		flags |= SnapshotFlags.PLAYER_CLIMBING
-	return [peer, character.name, position.x, position.y, face, animation, character.level, flags, character.job.id, character.guild, chair, character.pet]
+	return [peer, character.name, position.x, position.y, face, animation, character.level, flags, character.job.id, character.guild, chair, character.pet, character.look()]

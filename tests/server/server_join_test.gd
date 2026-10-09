@@ -13,7 +13,7 @@ func after_each() -> void:
 
 func test_join_sends_the_character_then_the_starting_map() -> void:
 	h.api.peers.append(2)
-	h.server.join(2, "Ann")
+	h.server.join(2, "Ann", ServerHarness.made())
 	check_eq(h.count(2, &"ev_joined"), 1, "ev_joined sent once")
 	check_eq(h.count(2, &"ev_enter_map"), 1, "ev_enter_map sent once")
 	var kinds := []
@@ -108,7 +108,7 @@ func test_entering_a_map_sends_its_monsters() -> void:
 	var m := ServerHarness.monster()
 	h.field_with([ServerHarness.spawn(m, 3)])
 	h.api.peers.append(2)
-	h.server.join(2, "Ann")
+	h.server.join(2, "Ann", ServerHarness.made())
 	h.move_to(h.server.sessions[2], ServerHarness.FIELD)
 	var state: Dictionary = h.last(2, &"ev_enter_map")[2]
 	check_eq((state["mobs"] as Array).size(), 3, "three monsters in the state")
@@ -119,3 +119,45 @@ func test_events_to_a_peer_that_left_are_not_sent() -> void:
 	h.clear()
 	Net.send(2, &"ev_log", ["hi", "ffffff"])
 	check_eq(h.api.sent.size(), 0, "nothing sent to a gone peer")
+
+# ---------- making a new character ----------
+
+func test_a_new_name_without_choices_is_sent_to_the_character_creator() -> void:
+	h.api.peers.append(2)
+	h.server.join(2, "Ann")
+	check_eq(h.last(2, &"ev_new_character"), ["Ann"], "asked to make Ann")
+	check(not h.server.sessions.has(2), "not playing yet")
+	check(not h.server.store.exists("Ann"), "nothing saved")
+
+func test_the_creators_choices_make_a_beginner_with_that_look() -> void:
+	var made := NewCharacter.new()
+	made.appearance.hair = &"hair_bun"
+	made.outfit[EquipDef.Slot.TOP] = Content.item(&"meadow_shirt")
+	h.api.peers.append(2)
+	h.server.join(2, "Ann", made.to_dict())
+	var c: Character = h.server.sessions[2].character
+	check_eq(c.job.id, Character.START_JOB, "a Beginner")
+	check_eq(c.level, 1, "level 1")
+	check_eq(c.appearance.hair, &"hair_bun", "the hair picked")
+	check_eq(c.equipment.at(&"top").item.id, &"meadow_shirt", "the top picked")
+	check_eq(h.last(2, &"ev_joined")[0]["appearance"]["hair"], "hair_bun", "the client hears it")
+
+func test_choices_for_a_name_that_exists_change_nothing() -> void:
+	var made := NewCharacter.new()
+	made.appearance.hair = &"hair_crest"
+	h.join(2, "Ann")
+	h.leave(2)
+	h.api.peers.append(2)
+	h.server.join(2, "Ann", made.to_dict())
+	check_eq(h.server.sessions[2].character.appearance.hair, Appearance.new().hair, "the saved Ann, unchanged")
+
+func test_others_see_your_look_and_gear_in_snapshots() -> void:
+	var a := h.join(2, "Ann")
+	h.join(3, "Bob", ServerHarness.FIELD, 700.0)
+	a.character.appearance.hair_color = &"hair_color_copper"
+	h.step(TDServer.SNAPSHOT_EVERY)
+	var rows: Array = h.last(3, &"ev_snapshot")[0]["players"]
+	var ann: Array = rows.filter(func(r: Array) -> bool: return r[0] == 2)[0]
+	check_eq(ann[12], a.character.look(), "Ann's look in her row")
+	check_eq(ann[12]["appearance"]["hair_color"], "hair_color_copper", "her hair colour")
+	check_eq(ann[12]["gear"]["weapon"], "training_sword", "her sword")

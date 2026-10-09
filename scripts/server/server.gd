@@ -74,7 +74,10 @@ func _flush(p: SimPlayer) -> void:
 
 # ---------- joining and leaving ----------
 
-func join(peer: int, raw_name: String) -> void:
+## A player wants to play `raw_name`. A saved character loads; a new one is made from the
+## character creator's choices (`made`, NewCharacter.to_dict()), and without them the player
+## is sent to the creator first (ev_new_character).
+func join(peer: int, raw_name: String, made := {}) -> void:
 	var char_name := CharacterStore.clean_name(raw_name)
 	if char_name == "":
 		Net.send(peer, &"ev_join_failed", ["Please pick a name."])
@@ -88,7 +91,10 @@ func join(peer: int, raw_name: String) -> void:
 		c = CharacterStore.load_file("user://save.json", char_name)
 		import_legacy_save = false
 	if c == null:
-		c = Character.create(char_name)
+		if made.is_empty():
+			Net.send(peer, &"ev_new_character", [char_name])
+			return
+		c = Character.create(char_name, Character.START_JOB, NewCharacter.from_dict(made))
 	var p := SimPlayer.new(peer, c)
 	sessions[peer] = p
 	social.joined(p)

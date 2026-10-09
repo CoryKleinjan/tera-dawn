@@ -33,6 +33,19 @@ const SLOT_NAMES := ["Weapon", "Hat", "Top", "Bottom", "Shoes", "Gloves", "Cape"
 ## Upgrade slots for scrolls (not used yet).
 @export var upgrade_slots := 7
 
+@export_group("Look")
+## Layered art of this piece worn, frame for frame like the hero's SpriteFrames. Until it
+## exists, the piece is shown on the hero with stand-ins (see Paperdoll).
+@export var worn_frames: SpriteFrames
+## The stand-in drawn for hats and weapons (LookShapes): "cap", "helm", "hood", "bandana",
+## "wizard", "tricorn" for hats. Empty: hats use "cap", weapons their `weapon_kind`.
+@export var look_shape: StringName
+## The colour it's shown in. Fully transparent takes the main colour of its icon.
+@export var look_color := Color(0, 0, 0, 0)
+
+## Icon colours worked out so far: item id -> Color.
+static var _icon_colors := {}
+
 func tab() -> Tab:
 	return Tab.EQUIP
 
@@ -47,6 +60,44 @@ static func families_text(families: Array[StringName]) -> String:
 	if names.size() <= 1:
 		return "".join(names)
 	return ", ".join(names.slice(0, -1)) + " and " + names[-1]
+
+## The stand-in shape shown while it's worn.
+func worn_shape() -> StringName:
+	if look_shape != &"":
+		return look_shape
+	if slot == Slot.WEAPON:
+		return weapon_kind if weapon_kind != &"" else &"sword"
+	return &"cap" if slot == Slot.HAT else &""
+
+## The colour it's shown in while worn: `look_color`, else its icon's main colour.
+func worn_color() -> Color:
+	if look_color.a > 0.0:
+		return look_color
+	if not _icon_colors.has(id):
+		_icon_colors[id] = main_color(icon)
+	return _icon_colors[id]
+
+## The typical colour of a picture's mid-tones (not its outline or shine).
+static func main_color(tex: Texture2D) -> Color:
+	var img := tex.get_image() if tex else null
+	if img == null:
+		return Color(0.7, 0.7, 0.7)
+	if img.is_compressed():
+		img.decompress()
+	var sum := Vector3.ZERO
+	var weight := 0.0
+	for y in range(0, img.get_height(), 2):
+		for x in range(0, img.get_width(), 2):
+			var c := img.get_pixel(x, y)
+			if c.a < 0.5 or c.v < 0.22 or c.v > 0.97:
+				continue
+			var w := 0.25 + c.s # colourful pixels say more about it than grey ones
+			sum += Vector3(c.r, c.g, c.b) * w
+			weight += w
+	if weight == 0.0:
+		return Color(0.7, 0.7, 0.7)
+	sum /= weight
+	return Color(sum.x, sum.y, sum.z)
 
 func slot_name() -> String:
 	return SLOT_NAMES[slot]
