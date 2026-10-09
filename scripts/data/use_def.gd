@@ -9,6 +9,9 @@ extends ItemDef
 @export_range(0, 100) var heal_mp_percent := 0
 ## Shown on the player when used.
 @export var use_effect: EffectDef
+## Takes you to another map: a map id, or "town" for the town of the map you're on
+## (MapDef.return_town). Empty for none.
+@export var teleport: StringName
 ## Ticks before another item can be used.
 @export var cooldown := 30
 

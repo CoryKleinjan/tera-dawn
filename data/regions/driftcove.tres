@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="RegionDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/region_def.gd" id="1_region_def"]
+
+[resource]
+script = ExtResource("1_region_def")
+id = &"driftcove"
+display_name = "Driftcove"
+description = "Sea caves, wrecks and beaches, ruled by the Pirates."
+color = Color(0.309804, 0.717647, 0.85098, 1.0)
+label_pos = Vector2(320.0, 520.0)
+level_text = "Lv. 15-35"

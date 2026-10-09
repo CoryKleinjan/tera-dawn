@@ -191,6 +191,8 @@ func _grab_climbable() -> bool:
 	var c := world.layout.climbable_near(position)
 	if c == null:
 		return false
+	if Input.is_action_pressed("move_up") and on_ground and world.npc_near(position):
+		return false # Up next to someone talks to them (see _interact)
 	if Input.is_action_pressed("move_up") and position.y > c.top + 1:
 		climb = c
 	elif Input.is_action_pressed("move_down") and on_ground and absf(position.y - c.top) < 3:

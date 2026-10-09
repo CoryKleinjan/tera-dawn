@@ -38,7 +38,7 @@ func _draw() -> void:
 	if world.player.fainted():
 		draw_rect(Rect2(Vector2.ZERO, v), Color(0.1, 0.07, 0.19, 0.45))
 		DrawUtil.text(self, Game.num_font, Vector2(v.x / 2, v.y / 2 - 10), "You fainted", 40, Palette.MIST)
-		DrawUtil.text(self, font, Vector2(v.x / 2, v.y / 2 + 22), "Returning to Dawnrise Meadow…", 16, Palette.MIST)
+		DrawUtil.text(self, font, Vector2(v.x / 2, v.y / 2 + 22), "Returning to %s…" % Content.map(world.map.return_town()).display_name, 16, Palette.MIST)
 
 func _draw_minimap(mm: Rect2) -> void:
 	UiSkin.box("name_tag", 12, 8).draw(get_canvas_item(), mm)

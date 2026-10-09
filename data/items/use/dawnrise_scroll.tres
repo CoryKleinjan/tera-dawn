@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="UseDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/use_def.gd" id="1_use_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/dawnrise_scroll.png" id="2_dawnrise_scroll"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="3_shard_pickup"]
+[ext_resource type="Resource" path="res://data/effects/heal.tres" id="4_heal"]
+
+[resource]
+script = ExtResource("1_use_def")
+id = &"dawnrise_scroll"
+display_name = "Return Scroll: Dawnrise"
+description = "Takes you straight back to Dawnrise Meadow, wherever you are."
+icon = ExtResource("2_dawnrise_scroll")
+sprite_scale = 0.4
+glow_color = Color(1.0, 0.819608, 0.4, 1.0)
+pickup_effect = ExtResource("3_shard_pickup")
+max_stack = 100
+sell_price = 37
+teleport = &"meadow"
+use_effect = ExtResource("4_heal")
+cooldown = 60

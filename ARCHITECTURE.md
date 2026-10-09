@@ -159,6 +159,13 @@ layers (or add one here) rather than a raw number.
    `props` on top of the biome's random decoration.
 4. Connect it: add a **PortalDef** on an existing map whose `target_map` is the new id, and a
    portal back.
+5. Place it in the world: its `region` (a **RegionDef** in `data/regions/`), `world_pos` on
+   the world map (1000 x 600 units), `level_text`, and either `town = true` or the
+   `return_map` where fainting and Return Scrolls send you.
+
+Travel NPCs (ships, wagons) list **TravelRoute**s in `NpcDef.travel` (destination, arrival x,
+fare, "Ship"/"Wagon"); their dialogue offers "Travel" and `TDServer.on_travel` moves the
+player. A **UseDef** with `teleport` set to a map id, or to `town`, is a return scroll.
 
 The smoke test checks that every portal points at a real map and every spawn at a real
 platform, so a typo fails the test instead of the game.

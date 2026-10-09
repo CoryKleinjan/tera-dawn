@@ -19,6 +19,19 @@ extends Resource
 ## Lanterns stand along the floor, about this far apart (0 for none).
 @export var lantern_spacing := 640.0
 
+@export_group("World")
+## The RegionDef it belongs to.
+@export var region: StringName
+## Where it sits on the world map, in world-map units (1000 x 600).
+@export var world_pos := Vector2.ZERO
+## Towns are safe places to respawn and where return scrolls take you.
+@export var town := false
+## The town you wake up in after fainting here, and where a return scroll goes. Empty means
+## this map if it's a town, else the starting map.
+@export var return_map: StringName
+## "Lv. 10-15": who it's for, shown on the world map.
+@export var level_text := ""
+
 @export_group("Layout")
 ## One-way platforms, numbered from 1 in this order (0 is the floor).
 @export var platforms: Array[PlatformDef] = []
@@ -32,3 +45,17 @@ extends Resource
 @export_group("Set dressing")
 ## Hand-placed scenery on top of the biome's random decoration.
 @export var props: Array[PropPlacement] = []
+
+## The town this map sends you back to (see `return_map`).
+func return_town() -> StringName:
+	if return_map != &"":
+		return return_map
+	return id if town else Character.START_MAP
+
+## The maps its portals lead to.
+func neighbours() -> Array[StringName]:
+	var out: Array[StringName] = []
+	for p in portals:
+		if not p.target_map in out:
+			out.append(p.target_map)
+	return out
