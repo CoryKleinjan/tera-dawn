@@ -49,15 +49,12 @@ func test_quickslot_skill_hover_clears_the_tooltip() -> void:
 	await ui.hover(slots, slots.slot_rect(0).get_center())
 	check(ui.hud.tooltip.stack == null, "a skill shows no item tooltip")
 
-# Known bug, left out so the suite stays green: hovering a potion on a quickslot calls
-# ItemStack.exact(), which only takes an EquipDef, so it raises a script error and shows
-# no tooltip (scripts/ui/quickslots.gd:79, _gui_input).
-#func test_quickslot_item_hover_shows_the_item() -> void:
-#	var slots := ui.hud.quickslots
-#	slots.assign(1, &"item", &"red_potion")
-#	await ui.ticks(2)
-#	await ui.hover(slots, slots.slot_rect(1).get_center())
-#	check(ui.hud.tooltip.stack != null and ui.hud.tooltip.stack.item.id == &"red_potion", "hovering a potion shows it")
+func test_quickslot_item_hover_shows_the_item() -> void:
+	var slots := ui.hud.quickslots
+	slots.assign(1, &"item", &"red_potion")
+	await ui.ticks(2)
+	await ui.hover(slots, slots.slot_rect(1).get_center())
+	check(ui.hud.tooltip.stack != null and ui.hud.tooltip.stack.item.id == &"red_potion", "hovering a potion shows it")
 
 func test_chat_shows_every_channel() -> void:
 	var chat := ui.hud.chat
