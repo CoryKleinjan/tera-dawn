@@ -87,6 +87,20 @@ func _run() -> void:
 	var p := world.player
 	_me().inv = 100000
 	await _physics(2)
+	if only == "" or only == "menu":
+		# The game menu, then each settings tab.
+		_teleport(world, Vector2(1120, 620))
+		await _physics(20)
+		world.hud.show_title(true)
+		await _frames(4)
+		await _shot("game_menu")
+		world.hud.open_settings()
+		for tab in ["controls", "audio", "video"]:
+			world.hud.settings_menu.show_tab(["controls", "audio", "video"].find(tab))
+			await _frames(4)
+			await _shot("settings_" + tab)
+		world.hud.settings_menu.hide()
+		world.hud.resume()
 	if only == "" or only == "meadow":
 		_teleport(world, Vector2(1120, 620))
 		p.face = -1

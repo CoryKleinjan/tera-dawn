@@ -616,11 +616,12 @@ func _run() -> void:
 	gear._click(gear.slot_rect(&"weapon").get_center(), MOUSE_BUTTON_LEFT, false)
 	_check(gear.selected == &"", "clicking it again shows the whole set's bonuses")
 	for action in TDHud.WINDOW_ACTIONS:
-		await _press("pause")
-	_check(world.started and not world.hud.windows["stats"].visible, "Esc closes the windows before opening the menu")
+		if world.hud.windows.values().any(func(w: TDWindow) -> bool: return w.visible):
+			await _press("pause")
+	_check(world.started and not world.hud.title.visible and not world.hud.windows["stats"].visible, "Esc closes the windows before opening the menu")
 	await _press("pause")
-	_check(world.hud.title.visible and world.hud.pause_panel.visible, "Esc again opens the pause menu")
-	world.hud.resume_button.pressed.emit()
+	_check(world.hud.title.visible and world.hud.game_menu.visible, "Esc again opens the game menu")
+	world.hud.game_menu.resume_button.pressed.emit()
 	_check(not world.hud.title.visible, "Resume closes it")
 
 	await _check_quests()

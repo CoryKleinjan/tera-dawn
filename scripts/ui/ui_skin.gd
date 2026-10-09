@@ -58,6 +58,40 @@ static func style_button(b: Button) -> void:
 	for state in ["font_color", "font_hover_color", "font_focus_color", "font_pressed_color"]:
 		b.add_theme_color_override(state, Palette.INK)
 
+## A tab button (toggle_mode, in a ButtonGroup) lit like the game windows' tabs when chosen.
+static func style_tab(b: Button) -> void:
+	for state in ["normal", "hover"]:
+		b.add_theme_stylebox_override(state, box("window_tab_off", 30, 14))
+	b.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+	b.add_theme_stylebox_override("pressed", box("window_tab_on", 30, 14))
+	b.add_theme_stylebox_override("hover_pressed", box("window_tab_on", 30, 14))
+	for state in ["font_color", "font_hover_color", "font_focus_color"]:
+		b.add_theme_color_override(state, Palette.MIST)
+	b.add_theme_color_override("font_pressed_color", Palette.INK)
+	b.add_theme_color_override("font_hover_pressed_color", Palette.INK)
+
+## A small dark framed button, like a tooltip (the keys on the Controls tab).
+static func style_slot_button(b: Button) -> void:
+	var normal := box("tooltip_frame", 12, 12, 10, 4)
+	var lit := normal.duplicate() as StyleBoxTexture
+	lit.modulate_color = Color(1.3, 1.2, 1.0)
+	b.add_theme_stylebox_override("normal", normal)
+	for state in ["hover", "focus", "pressed"]:
+		b.add_theme_stylebox_override(state, lit)
+	for state in ["font_color", "font_focus_color", "font_pressed_color"]:
+		b.add_theme_color_override(state, Palette.MIST)
+	b.add_theme_color_override("font_hover_color", Palette.SUN)
+
+## A big gold menu button in the title font (title screen, game menu, settings).
+static func menu_button(text: String, min_size := Vector2(150, 48), font_size := 22) -> Button:
+	var b := Button.new()
+	b.text = text
+	b.custom_minimum_size = min_size
+	b.add_theme_font_override("font", Game.num_font)
+	b.add_theme_font_size_override("font_size", font_size)
+	style_button(b)
+	return b
+
 static func use_cursor() -> void:
 	Input.set_custom_mouse_cursor(tex("cursor"), Input.CURSOR_ARROW, Vector2(14, 6))
 

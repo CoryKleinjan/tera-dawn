@@ -53,10 +53,13 @@ The game is built to grow: monsters, NPCs, items, skills, effects, maps and biom
 
 ## Controls
 
+These are the defaults. Every key can be changed under **Settings > Controls** (from the title
+screen or the Esc menu), and each action can have two keys.
+
 | Action | Keyboard | Gamepad |
 | --- | --- | --- |
 | Move / climb | Arrow keys | Left stick or d-pad |
-| Jump | Space, C or Alt | A |
+| Jump | Space or Alt | A |
 | Drop through a platform | Down + Jump | Down + A |
 | Attack | X or Ctrl | X |
 | Quickslots (skills, potions) | A, D, F, G, V, B, N, M | Y, RB, LB |
@@ -72,8 +75,13 @@ The game is built to grow: monsters, NPCs, items, skills, effects, maps and biom
 | Chat | Enter | |
 | Enter a portal, talk to an NPC | Up | Up |
 | Pick a dialogue option | 1 to 9, or click | |
-| Close a window, or the menu | Esc | Start |
+| Close a window, or open the menu | Esc | Start |
 | Fullscreen | F11 | |
+
+The Esc menu has **Resume**, **Settings**, **Leave to title** and **Quit to desktop**. Settings
+also has volume (master, music, effects, mute) and video (window mode and size, vsync, frame
+rate limit, and bloom, ambient occlusion and fog for slower computers). They're saved in
+`user://settings.cfg`.
 
 ## Running it
 

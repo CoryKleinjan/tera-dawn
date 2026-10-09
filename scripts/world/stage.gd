@@ -180,6 +180,8 @@ func _build_environment() -> void:
 	env.adjustment_enabled = true
 	env.adjustment_saturation = 1.08
 	env.adjustment_contrast = 1.08
+	apply_video(Settings.video)
+	Settings.changed.connect(_on_settings_changed)
 	var we := WorldEnvironment.new()
 	we.environment = env
 	var attrs := CameraAttributesPractical.new()
@@ -192,6 +194,16 @@ func _build_environment() -> void:
 	attrs.dof_blur_amount = 0.12
 	we.camera_attributes = attrs
 	add_child(we)
+
+func _on_settings_changed(section: SettingsSection) -> void:
+	if section is VideoSettings:
+		apply_video(section)
+
+## Turns the costly effects on or off as the player's video settings say.
+func apply_video(v: VideoSettings) -> void:
+	env.glow_enabled = v.bloom
+	env.ssao_enabled = v.ambient_occlusion
+	env.fog_enabled = v.fog
 
 func _build_sun() -> void:
 	sun = DirectionalLight3D.new()
