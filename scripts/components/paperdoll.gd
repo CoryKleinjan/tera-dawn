@@ -9,10 +9,10 @@ extends RefCounted
 ## chest, the shorts and the feet) and a rig (hero_rig.json: where his head, face, neck, hand
 ## and shield are in every frame), both made with the layers by tools/art/paperdoll_layers.py.
 ## The skin tone recolours his skin; a worn top, bottom or shoes recolour the chest, shorts
-## or feet until the piece has its own art (EquipDef.worn_frames). Hair, irises, capes and
-## shields are greyscale art tinted with the hair, eye or item colour. Hats and weapons are
-## drawn on top at a rig point (LookShapes): hats are code-drawn stand-ins for now, weapons
-## are pictures cut from the paperdoll sheets.
+## or feet until the piece has its own art (EquipDef.worn_frames). Hair, irises, capes,
+## shields and gloves are greyscale art tinted with the hair, eye or item colour. Hats and
+## weapons are drawn on top at a rig point (LookShapes): hats are code-drawn stand-ins for
+## now, weapons are pictures cut from the paperdoll sheets.
 
 ## The parts of the body, as hero_regions.png numbers them. Hair, eyes, cape, weapon, shield
 ## and gloves are layers now, so only skin, top, bottom and shoes are on the map.
@@ -36,6 +36,8 @@ const CAPE := preload("res://assets/animations/paperdoll/cape.tres")
 ## The cape seen from behind (climbing), over his back.
 const CAPE_BACK_VIEW := preload("res://assets/animations/paperdoll/cape_back_view.tres")
 const SHIELD := preload("res://assets/animations/paperdoll/shield_round.tres")
+## Gloves on both hands (climbing: bare hands).
+const GLOVES := preload("res://assets/animations/paperdoll/gloves.tres")
 ## Shields by EquipDef.look_shape (any other: SHIELD).
 const SHIELDS := {&"kite": preload("res://assets/animations/paperdoll/shield_kite.tres")}
 ## The hero's frame size in pixels; every frame of the strip is this big.
@@ -123,6 +125,8 @@ static func dress(look: Dictionary) -> Paperdoll:
 			d._add(e.worn_frames, false)
 			if PLACE_REGIONS.has(place):
 				d.hidden[PLACE_REGIONS[place]] = 1.0
+		elif e and place == &"gloves":
+			d._add(GLOVES, false, e.worn_color())
 	if cape and cape.worn_frames == null:
 		d._add(CAPE_BACK_VIEW, false, cape.worn_color())
 	var face := a.part(LookDef.Kind.FACE)

@@ -188,6 +188,13 @@ func test_a_cape_and_shield_are_tinted_layers() -> void:
 	check(not _layer(d, Paperdoll.CAPE_BACK_VIEW).behind, "and over his back when he climbs")
 	check(_layer(d, Paperdoll.SHIELD) != null, "a shield")
 
+func test_gloves_are_a_tinted_layer_over_him() -> void:
+	var gloves := Content.item(&"work_gloves") as EquipDef
+	var d := Paperdoll.dress(_look(Appearance.new(), {"gloves": "work_gloves"}))
+	var layer := _layer(d, Paperdoll.GLOVES)
+	check(layer != null and not layer.behind, "gloves over him")
+	check(Color(layer.tint, 1.0).is_equal_approx(gloves.worn_color()), "in the gloves' colour")
+
 func test_hats_and_weapons_are_drawn_on_top() -> void:
 	var d := Paperdoll.dress(_look(Appearance.new(), {"hat": "iron_helm", "weapon": "willow_bow"}))
 	var shapes := d.overlays.map(func(o: Paperdoll.Overlay) -> StringName: return o.shape)

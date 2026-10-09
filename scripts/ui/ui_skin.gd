@@ -301,8 +301,7 @@ static func style_option_button(o: OptionButton) -> void:
 	o.add_theme_color_override("font_disabled_color", Color(Palette.MIST, 0.45))
 	var popup := o.get_popup()
 	popup.add_theme_stylebox_override("panel", box("menu/dropdown_list", 14, 10, 10, 8))
-	var hover := box("dialogue/option_row_hover", 22, 14)
-	popup.add_theme_stylebox_override("hover", hover)
+	popup.add_theme_stylebox_override("hover", list_row_hover())
 	popup.add_theme_color_override("font_color", Palette.MIST)
 	popup.add_theme_color_override("font_hover_color", Palette.INK)
 	popup.add_theme_font_override("font", Game.ui_font)
@@ -310,6 +309,16 @@ static func style_option_button(o: OptionButton) -> void:
 	popup.add_theme_constant_override("v_separation", 8)
 	for icon in ["radio_checked", "radio_unchecked", "checked", "unchecked"]:
 		popup.add_theme_icon_override(icon, ImageTexture.new())
+
+## A hovered row in a list (a dropdown's choices): cream and gold with the sun on its left,
+## which keeps its size while the row stretches.
+static func list_row_hover() -> StyleBoxTexture:
+	if not _cache.has("list_row_hover"):
+		var sb := box("menu/list_row_hover", 8, 8).duplicate() as StyleBoxTexture
+		sb.texture_margin_left = 26
+		sb.content_margin_left = 28
+		_cache["list_row_hover"] = sb
+	return _cache["list_row_hover"]
 
 ## A scroll container's vertical bar: a thin groove with a gold handle.
 static func style_scroll(sc: ScrollContainer) -> void:

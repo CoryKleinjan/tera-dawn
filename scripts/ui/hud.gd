@@ -231,18 +231,12 @@ func _build_title() -> void:
 	col.add_theme_constant_override("separation", 10)
 	title_card.add_child(col)
 
-	var heading := Label.new()
-	heading.text = "Tera Dawn"
-	heading.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	heading.add_theme_font_override("font", Game.num_font)
-	heading.add_theme_font_size_override("font_size", 96)
-	heading.add_theme_color_override("font_color", Palette.SUN)
-	heading.add_theme_color_override("font_outline_color", Palette.PLUM)
-	heading.add_theme_constant_override("outline_size", 18)
-	heading.add_theme_color_override("font_shadow_color", Palette.EMBER)
-	heading.add_theme_constant_override("shadow_offset_y", 6)
-	heading.add_theme_constant_override("shadow_offset_x", 0)
-	col.add_child(heading)
+	var logo := TextureRect.new()
+	logo.texture = UiSkin.tex("logo")
+	logo.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	logo.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	logo.custom_minimum_size = Vector2(420, 124)
+	col.add_child(logo)
 
 	var card := PanelContainer.new()
 	card.add_theme_stylebox_override("panel", UiSkin.panel())
