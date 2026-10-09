@@ -47,6 +47,8 @@ func _check_content() -> void:
 		for n in map.npcs:
 			if n.npc == null or n.platform >= count:
 				problems.append("%s: bad NPC" % id)
+			elif n.npc.instructs.any(func(j: StringName) -> bool: return not Content.jobs.has(j)):
+				problems.append("%s: %s teaches an unknown job" % [id, n.npc.id])
 		for c in map.climbables:
 			if c.style == null or c.style.middle == null:
 				problems.append("%s: climbable at %d has no style" % [id, c.x])
@@ -65,8 +67,13 @@ func _check_content() -> void:
 			problems.append("equip %s has no stats" % id)
 	for id in Content.jobs:
 		var job: JobDef = Content.jobs[id]
-		if job.starting_stats == null or job.starting_gear.has(null):
+		if job.advances_from == &"" and (job.starting_stats == null or job.starting_gear.has(null)):
 			problems.append("job %s is missing starting stats or gear" % id)
+		if job.advances_from != &"" and not Content.jobs.has(job.advances_from):
+			problems.append("job %s advances from unknown job %s" % [id, job.advances_from])
+		for g in job.advance_gifts:
+			if g == null or g.item == null:
+				problems.append("job %s has an empty advancement gift" % id)
 	_check(problems.is_empty(), "maps, monsters, items and jobs reference valid content %s" % [problems])
 	_check(Content.jobs.has(Character.START_JOB), "the starting job is defined")
 	var shop_problems := []
@@ -157,6 +164,32 @@ func _check_character() -> void:
 		and JSON.stringify(back.equipment.to_dict()) == JSON.stringify(c.equipment.to_dict())
 		and back.base.strength == c.base.strength and back.level == 2, "saving and loading keeps inventory, equipment and stats")
 	_check(CharacterStore.clean_name("  Dawn<ling>!  ") == "Dawnling", "character names are cleaned up")
+	_check_jobs()
+
+## Starting as a Beginner, advancing, and gear only some jobs can use.
+func _check_jobs() -> void:
+	var c := Character.create("Rookie")
+	_check(c.job.id == &"beginner", "new characters start as Beginners")
+	var warrior: JobDef = Content.job(&"warrior")
+	var mage: JobDef = Content.job(&"mage")
+	for id in [&"warrior", &"archer", &"mage", &"thief", &"pirate"]:
+		_check(Content.jobs.has(id) and Content.job(id).advances_from == &"beginner", "%s is a first job" % id)
+	_check(c.advance(warrior).begins_with("You need to be level"), "a level 1 Beginner can't advance")
+	c.level = 10
+	_check(c.advance(warrior).contains("STR"), "advancing to Warrior needs 35 STR")
+	c.base.strength = 35
+	var hp := c.max_hp()
+	_check(c.advance(warrior) == "" and c.job == warrior, "a level 10 Beginner with 35 STR becomes a Warrior")
+	_check(c.inventory.count_of(Content.item(&"bronze_sword")) == 1 and c.max_hp() >= hp, "the Warrior gets a Bronze Sword")
+	_check(c.advance(mage) != "", "a Warrior can't then become a Magician")
+	var wand: EquipDef = Content.item(&"apprentice_wand")
+	c.inventory.add(wand)
+	var slot := -1
+	for i in Inventory.SLOTS:
+		var st := c.inventory.at(ItemDef.Tab.EQUIP, i)
+		if st and st.item == wand:
+			slot = i
+	_check(c.equip(slot).begins_with("Only Mages"), "a Warrior can't wear a wand")
 
 ## Empties the test's character folder, so every run starts from new characters.
 func _clear_saves() -> void:
@@ -195,7 +228,7 @@ func _run() -> void:
 	_check(Net.server != null and _me() != null, "single player runs its own server")
 	var p := world.player
 	_check(p.on_ground, "player starts on the ground")
-	_check(world.npcs().size() == 2, "the meadow has its two NPCs")
+	_check(world.npcs().size() == 3, "the meadow has its three NPCs")
 	await _ticks(5)
 	_check(world.mobs().all(func(m: TDMob) -> bool: return m.known), "the server tells the game where every monster is")
 
@@ -388,6 +421,7 @@ func _run() -> void:
 	_check(not world.hud.title.visible, "Resume closes it")
 
 	await _check_quests()
+	await _check_job_advance()
 
 	# Dawn Slash costs MP and hits several monsters.
 	var mp_before := Game.me.mp
@@ -496,6 +530,31 @@ func _check_quests() -> void:
 		meadow.kill_mob(bat, _me())
 	_check(nectar_drops.call() > 0, "they do once you're on it")
 	server_forfeit_check(ch)
+
+## Guide Sorrel turns a ready Beginner into a Magician through the dialogue window.
+func _check_job_advance() -> void:
+	var guide: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"guide_sorrel")[0]
+	var ch := _me().character
+	ch.job = Content.job(&"beginner")
+	ch.level = maxi(ch.level, 8)
+	ch.base.intelligence = 20
+	_me().dirty_character = true
+	await _ticks(2)
+	_teleport(Vector2(guide.position.x - 30, 620))
+	await _ticks(2)
+	await _tap("move_up")
+	var talk: TDDialogueWindow = world.hud.windows["dialogue"]
+	var labels: Array = talk.options.map(func(o: Array) -> String: return o[0])
+	_check(labels.has("Choose a job"), "the job instructor offers to choose a job")
+	talk.choose(labels.find("Choose a job"))
+	labels = talk.options.map(func(o: Array) -> String: return o[0])
+	_check(labels.size() == 6, "five first jobs to pick from")
+	talk.choose(labels.find("Magician"))
+	_check(talk.options[0][0] == "Become a Magician", "a level 8 Beginner with 20 INT may become a Magician")
+	talk.choose(0)
+	await _ticks(2)
+	_check(Game.me.job.id == &"mage" and Game.me.inventory.count_of(Content.item(&"apprentice_wand")) == 1, "the server makes them a Magician and gives a wand")
+	_check(world.player.rig.body.modulate == Content.job(&"mage").tint, "the hero takes the Magician's colours")
 
 func server_forfeit_check(ch: Character) -> void:
 	Net.ask(&"req_quest_forfeit", [&"q04_sweet_nectar"])

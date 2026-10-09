@@ -19,6 +19,7 @@ static func create(w: TDWorld, placement: NpcPlacement, p: Platform) -> TDNpc:
 func _ready() -> void:
 	rig = SpriteRig.new()
 	rig.setup(def.sprite_frames, def.texture, TDStage.TEXEL * def.sprite_scale, 40.0)
+	rig.set_tint(def.tint)
 	add_child(rig)
 
 ## Opens their dialogue window.

@@ -17,3 +17,7 @@ extends Resource
 @export_multiline var lines: PackedStringArray = []
 ## What they sell, or null if they don't run a shop.
 @export var shop: ShopDef
+## Jobs they can advance characters into (job ids).
+@export var instructs: Array[StringName] = []
+## Until they have their own art, NPCs can share a sprite in their own colour.
+@export var tint := Color.WHITE

@@ -137,6 +137,22 @@ func _run() -> void:
 		await _shot("quests")
 		talk.visible = false
 		world.hud.toggle_window("quests")
+	if only == "" or only == "jobs":
+		# Guide Sorrel's Magician page, then a Pirate (tinted hero) next to her.
+		var guide: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"guide_sorrel")[0]
+		ch.level = maxi(ch.level, 8)
+		ch.base.intelligence = 20
+		_me().dirty_character = true
+		_teleport(world, Vector2(guide.position.x - 50, 620))
+		await _physics(5)
+		guide.talk()
+		var talk: TDDialogueWindow = world.hud.windows["dialogue"]
+		talk.choose(talk.options.map(func(o: Array) -> String: return o[0]).find("Choose a job"))
+		talk.choose(2)
+		await _frames(3)
+		await _shot("jobs")
+		talk.visible = false
+		ch.job = Content.job(&"beginner")
 	if only == "" or only == "players":
 		# Two other players nearby. They're on the server but have no game connected.
 		_teleport(world, Vector2(1300, 620))

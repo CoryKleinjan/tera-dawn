@@ -81,4 +81,4 @@ func snapshot() -> Array:
 		flags |= TDAvatar.BLINK
 	if climbing:
 		flags |= TDAvatar.CLIMBING
-	return [peer, character.name, position.x, position.y, face, animation, character.level, flags]
+	return [peer, character.name, position.x, position.y, face, animation, character.level, flags, character.job.id]

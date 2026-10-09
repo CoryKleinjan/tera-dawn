@@ -223,8 +223,14 @@ for the loot key, and stays there if its tab is full.
 ## How to add a job
 
 Create `data/jobs/<id>.tres` as a **JobDef**: primary and secondary stat, mastery, HP and MP
-growth, Ability Points per level, and what a new character starts with (stats, gear, items).
-`Character.START_JOB` picks the job new characters get; job advancement isn't built yet.
+growth, Ability Points per level, its `family` (the job line gear names in `EquipDef.jobs`),
+and a `tint` the hero is drawn in until the job has its own art.
+
+Everyone starts as `Character.START_JOB` (the Beginner, which lists starting stats, gear and
+items). A job that others reach sets `advances_from`, `advance_level`, `advance_requirements`
+(base STR/DEX/INT/LUK) and `advance_gifts`. To let an NPC hand it out, add its id to that
+NPC's `instructs`: their dialogue then offers "Choose a job", and the server
+(`TDServer.on_advance` → `Character.advance`) checks the requirements again before changing it.
 
 ## How to add a window
 

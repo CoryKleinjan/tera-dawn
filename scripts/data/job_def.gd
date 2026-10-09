@@ -1,10 +1,20 @@
 class_name JobDef
 extends Resource
-## A job (class): which stats drive its damage, how HP and MP grow, and what a new
-## character of this job starts with. Add a job by saving a JobDef in data/jobs/.
+## A job (class): which stats drive its damage, how HP and MP grow, what a new character
+## of this job starts with, and how a character advances into it. Add a job by saving a
+## JobDef in data/jobs/.
+##
+## Everyone starts as a Beginner (`advances_from` empty). A job instructor (an NpcDef that
+## `instructs` this job) advances a character from `advances_from` at `advance_level`.
 
 @export var id: StringName
 @export var display_name := ""
+@export_multiline var description := ""
+## The job line it belongs to (warrior, archer, mage, thief, pirate, beginner). Gear that
+## names a line can be worn by every job in it.
+@export var family: StringName
+## Until each job has its own art, the hero is drawn in this colour.
+@export var tint := Color.WHITE
 ## The stat that drives damage (STR for warriors) and the one that helps a little.
 @export_enum("strength", "dexterity", "intelligence", "luck") var primary_stat := "strength"
 @export_enum("strength", "dexterity", "intelligence", "luck") var secondary_stat := "dexterity"
@@ -19,9 +29,28 @@ extends Resource
 ## Ability Points gained per level, spent in the stats window.
 @export var ap_per_level := 5
 
+@export_group("Advancement")
+## The job you advance from (empty: you start as this job).
+@export var advances_from: StringName
+@export var advance_level := 10
+## Base stats (STR, DEX, INT, LUK, before gear) needed to advance.
+@export var advance_requirements: StatBlock
+## Items handed over when advancing (each gives `min_amount`).
+@export var advance_gifts: Array[DropEntry] = []
+
 @export_group("New character")
 @export var starting_stats: StatBlock
 ## Worn from the start.
 @export var starting_gear: Array[EquipDef] = []
 ## Put in the inventory at the start; each entry is rolled once (use chance 1).
 @export var starting_items: Array[DropEntry] = []
+
+## What advancing takes, as readable lines ("Level 10", "35 STR").
+func requirement_lines() -> PackedStringArray:
+	var out := PackedStringArray(["Level %d" % advance_level])
+	if advance_requirements:
+		for stat in StatBlock.BASE:
+			var n := advance_requirements.value(stat)
+			if n > 0:
+				out.append("%d %s" % [n, StatBlock.LABELS[stat]])
+	return out

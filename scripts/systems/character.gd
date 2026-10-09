@@ -11,7 +11,7 @@ extends RefCounted
 signal stats_changed
 
 const START_MAP := &"meadow"
-const START_JOB := &"warrior"
+const START_JOB := &"beginner"
 
 var name := ""
 var level := 1
@@ -110,8 +110,42 @@ func add_ap(stat: StringName) -> bool:
 	recalc()
 	return true
 
+## Why the character can't advance to `next`, or "" if they can.
+func advance_problem(next: JobDef) -> String:
+	if next.advances_from != job.id:
+		return "A %s can't become a %s." % [job.display_name, next.display_name]
+	if level < next.advance_level:
+		return "You need to be level %d to become a %s." % [next.advance_level, next.display_name]
+	if next.advance_requirements:
+		for stat in StatBlock.BASE:
+			if base.value(stat) < next.advance_requirements.value(stat):
+				return "You need %d %s to become a %s." % [next.advance_requirements.value(stat), StatBlock.LABELS[stat], next.display_name]
+	for g in next.advance_gifts:
+		if g.item and not inventory.has_room(g.item, g.min_amount):
+			return "Make room in your %s inventory first." % ItemDef.TAB_NAMES[g.item.tab()]
+	return ""
+
+## Becomes `next` (see advance_problem) and receives its gifts. Returns why not, or "".
+func advance(next: JobDef) -> String:
+	var problem := advance_problem(next)
+	if problem != "":
+		return problem
+	job = next
+	for g in next.advance_gifts:
+		if g.item:
+			inventory.add_stack(ItemStack.unrolled(g.item, g.min_amount))
+	recalc()
+	refill()
+	return ""
+
+## Whether this job can use gear meant for `families` (empty means anyone).
+func can_use(families: Array[StringName]) -> bool:
+	return families.is_empty() or job.family in families
+
 ## Why the character can't wear this, or "" if they can.
 func equip_problem(e: EquipDef) -> String:
+	if not can_use(e.jobs):
+		return "Only %s can use the %s." % [EquipDef.families_text(e.jobs), e.display_name]
 	if level < e.required_level:
 		return "You need to be level %d to wear the %s." % [e.required_level, e.display_name]
 	var reqs := e.requirements()

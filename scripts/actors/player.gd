@@ -244,6 +244,8 @@ func _process(_delta: float) -> void:
 	rig.play(_animation(), _swing)
 	_swing = false
 	rig.face(1 if is_climbing() else face)
+	if Game.me.job:
+		rig.set_tint(Game.me.job.tint)
 	rig.set_opacity(0.0 if inv > 0 and inv % 8 < 4 and not fainted() else 1.0)
 
 func _animation() -> StringName:

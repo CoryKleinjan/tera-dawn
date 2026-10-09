@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="15_npc_placement"]
 [ext_resource type="Resource" path="res://data/npcs/village_elder.tres" id="16_village_elder"]
 [ext_resource type="Resource" path="res://data/npcs/shopkeeper.tres" id="17_shopkeeper"]
+[ext_resource type="Resource" path="res://data/npcs/guide_sorrel.tres" id="40_guide_sorrel"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="18_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/arch.png" id="19_arch"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tall_ledge.png" id="20_tall_ledge"]
@@ -215,6 +216,13 @@ x = 560.0
 platform = 0
 face = -1
 
+[sub_resource type="Resource" id="Resource_sorrel"]
+script = ExtResource("15_npc_placement")
+npc = ExtResource("40_guide_sorrel")
+x = 760.0
+platform = 0
+face = -1
+
 [sub_resource type="Resource" id="Resource_31"]
 script = ExtResource("18_prop_placement")
 texture = ExtResource("19_arch")
@@ -285,5 +293,5 @@ platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), Sub
 climbables = Array[ExtResource("4_climbable_def")]([SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17")])
 portals = Array[ExtResource("8_portal_def")]([SubResource("Resource_18")])
 spawns = Array[ExtResource("9_spawn_def")]([SubResource("Resource_19"), SubResource("Resource_20"), SubResource("Resource_21"), SubResource("Resource_22"), SubResource("Resource_23"), SubResource("Resource_24"), SubResource("Resource_25"), SubResource("Resource_26"), SubResource("Resource_27"), SubResource("Resource_28")])
-npcs = Array[ExtResource("15_npc_placement")]([SubResource("Resource_29"), SubResource("Resource_30")])
+npcs = Array[ExtResource("15_npc_placement")]([SubResource("Resource_29"), SubResource("Resource_30"), SubResource("Resource_sorrel")])
 props = Array[ExtResource("18_prop_placement")]([SubResource("Resource_31"), SubResource("Resource_32"), SubResource("Resource_33"), SubResource("Resource_34"), SubResource("Resource_35"), SubResource("Resource_36")])

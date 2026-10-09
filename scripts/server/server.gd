@@ -278,6 +278,23 @@ func on_quest_forfeit(peer: int, quest_id: StringName) -> void:
 		p.dirty_character = true
 		p.map.tell(p, "Gave up on %s." % q.title, Palette.MIST)
 
+## Advances the player to `job_id` through the instructor `npc_id` they stand by.
+func on_advance(peer: int, npc_id: StringName, job_id: StringName) -> void:
+	var p := _player(peer)
+	var npc := p.map.npc_near(p, npc_id) if p else null
+	var next: JobDef = Content.jobs.get(job_id)
+	if npc == null or next == null or not job_id in npc.instructs:
+		return
+	var problem := p.character.advance(next)
+	if problem != "":
+		p.map.tell(p, problem, MapInstance.BAD)
+		return
+	p.dirty_character = true
+	p.dirty_vitals = true
+	p.map.broadcast(&"ev_effect", [&"level_up", p.position.x, p.position.y, 1, p.peer])
+	p.map.tell(p, "You are now a %s!" % next.display_name, Palette.SUN)
+	store.save(p.character)
+
 ## Buys `count` of a shop's entry `index` from the NPC `npc_id` the player stands by.
 func on_buy(peer: int, npc_id: StringName, index: int, count: int) -> void:
 	var p := _player(peer)
