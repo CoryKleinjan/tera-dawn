@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm /mnt/project-files/*)",
+      "Bash(rm -r /mnt/project-files/*)",
+      "Bash(rm -rf /mnt/project-files/*)"
+    ]
+  }
+}
