@@ -17,4 +17,4 @@ sell_price = 2000
 max_stack = 1
 loot_reach = 170.0
 loot_every = 20
-chatter = PackedStringArray("Mip!", "Sunshine is my favourite.", "*rustle rustle*", "So many leaves today.")
+chatter = Array[String](["Mip!", "Sunshine is my favourite.", "*rustle rustle*", "So many leaves today."])

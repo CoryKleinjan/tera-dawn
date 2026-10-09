@@ -98,14 +98,11 @@ func test_bringing_out_a_pet() -> void:
 	check_eq(int(c.counters.get("pets", 0)), 1, "counted")
 	check(h.told(2, "came out to play"), "told")
 
-# Left out: fails because every pet's `chatter` comes back empty. The pet .tres files
-# store it as a PackedStringArray but PetDef.chatter is an Array[String], so Godot drops
-# it on load and pets never speak (see the report on this branch).
-#func test_a_pet_says_hello_when_it_comes_out() -> void:
-#	check(not sprout.chatter.is_empty(), "the pet has lines")
-#	h.ask(2, &"req_setup", [1])
-#	var chat := h.last(2, &"ev_chat")
-#	check(chat.size() == 4 and chat[0] == "pet" and chat[1] == sprout.display_name, "it says hello")
+func test_a_pet_says_hello_when_it_comes_out() -> void:
+	check(not sprout.chatter.is_empty(), "the pet has lines")
+	h.ask(2, &"req_setup", [1])
+	var chat := h.last(2, &"ev_chat")
+	check(chat.size() == 4 and chat[0] == "pet" and chat[1] == sprout.display_name, "it says hello")
 
 func test_a_pet_picks_up_loot_within_reach() -> void:
 	h.ask(2, &"req_setup", [1])
