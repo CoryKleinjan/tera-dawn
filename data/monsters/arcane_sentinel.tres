@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="Resource" path="res://data/projectiles/mob_bolt.tres" id="2_mob_bolt"]
-[ext_resource type="SpriteFrames" path="res://assets/animations/boulderkin.tres" id="3_boulderkin"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/arcane_sentinel.tres" id="anim"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="5_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/arcane_core.tres" id="6_arcane_core"]
@@ -269,9 +269,8 @@ shot = ExtResource("2_mob_bolt")
 shot_range = 380.0
 shot_cooldown = 110
 aggressive = true
-sprite_frames = ExtResource("3_boulderkin")
-sprite_scale = 0.9299999999999999
-tint = Color(0.690196, 0.564706, 1.0, 1.0)
+sprite_frames = ExtResource("anim")
+sprite_scale = 2.35
 light_color = Color(0.690196, 0.564706, 1.0, 1.0)
 drops = Array[ExtResource("4_drop_entry")]([SubResource("P11_crystal_chair"), SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18"), SubResource("Drop35_aurora_wand"), SubResource("Drop35_aurora_hat"), SubResource("Drop35_aurora_robe"), SubResource("Drop35_aurora_trousers"), SubResource("Drop35_aurora_slippers"), SubResource("Drop35_starfall_staff"), SubResource("Drop35_starfall_hat"), SubResource("Drop35_starfall_robe"), SubResource("Drop35_starfall_trousers"), SubResource("Drop35_starfall_slippers"), SubResource("Drop35_dawnwing_cape"), SubResource("Drop35_ember_earrings")])
 respawn_ticks = Vector2i(1800, 2400)

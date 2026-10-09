@@ -1,0 +1,42 @@
+{
+  "source": "art/source/items_thief.png",
+  "out_dir": "assets/sprites/items",
+  "scale": 0.3,
+  "alpha": "hard",
+  "keep": "largest",
+  "fix": "glow_backdrop",
+  "cells": [
+    [
+      "iron_claw",
+      "steel_claw",
+      "shadow_claw",
+      "viper_claw",
+      "nightfang_claw",
+      "eclipse_claw"
+    ],
+    [
+      "dusk_bandana",
+      "night_garb",
+      "viper_bandana",
+      "viper_garb",
+      "viper_pants",
+      "viper_shoes"
+    ],
+    [
+      "nightfang_bandana",
+      "nightfang_garb",
+      "nightfang_pants",
+      "nightfang_shoes",
+      "eclipse_bandana",
+      "eclipse_garb"
+    ],
+    [
+      "eclipse_pants",
+      "eclipse_shoes",
+      "iron_star",
+      "",
+      "",
+      ""
+    ]
+  ]
+}

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Resource" path="res://data/projectiles/bullet.tres" id="2_bullet"]
-[ext_resource type="Resource" path="res://data/effects/hit.tres" id="3_hit"]
+[ext_resource type="Resource" path="res://data/effects/bullet_hit.tres" id="3_hit"]
 [ext_resource type="Texture2D" path="res://assets/sprites/skills/quick_draw.png" id="4_quick_draw"]
 
 [resource]

@@ -168,6 +168,7 @@ const TRACKER_PANEL := ["dialogue/tracker_panel", Vector4(16, 32, 16, 12), Vecto
 const GUILD_TAG := ["social/guild_tag", Vector4(46, 28, 46, 18), Vector2(56, 0)]
 const SHOP_SIGN := ["social/shop_sign", Vector4(40, 50, 40, 20), Vector2(50, 0)]
 const DIVIDER := ["menu/divider", Vector4(12, 0, 12, 0), Vector2(40, 0)]
+const CREATOR_FRAME := ["creator/frame", Vector4(22, 48, 22, 22), Vector2(70, 0)]
 const DIALOGUE_FRAME := ["dialogue/dialogue_frame", Vector4(160, 52, 30, 34), Vector2(100, 50)]
 
 ## Draws one of the panels above.
@@ -350,6 +351,14 @@ static func menu_button(text: String, min_size := Vector2(150, 48), font_size :=
 	for state in ["font_color", "font_hover_color", "font_focus_color", "font_pressed_color"]:
 		b.add_theme_color_override(state, Palette.INK)
 	return b
+
+## A style brightened, for hover and focus.
+static func lit(sb: StyleBoxTexture) -> StyleBoxTexture:
+	return _tinted(sb, LIT)
+
+## A style darkened, for a pressed button.
+static func pressed(sb: StyleBoxTexture) -> StyleBoxTexture:
+	return _tinted(sb, PRESSED)
 
 ## A copy of a style drawn in another tint.
 static func _tinted(sb: StyleBoxTexture, tint: Color) -> StyleBoxTexture:

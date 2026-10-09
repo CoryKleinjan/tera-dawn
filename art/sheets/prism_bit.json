@@ -1,0 +1,97 @@
+{
+  "source": "art/source/mon_lumewood.png",
+  "region": [
+    0,
+    504,
+    764,
+    737
+  ],
+  "grid": {
+    "rows": [
+      29,
+      131,
+      233
+    ],
+    "cols": [
+      0,
+      193,
+      385,
+      575,
+      764
+    ]
+  },
+  "scale": 0.386,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/prism_bit",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "hop1",
+      "hop2"
+    ],
+    [
+      "hop3",
+      "attack",
+      "hurt",
+      "defeated"
+    ]
+  ],
+  "sets": {
+    "prism_bit": {
+      "frames": {
+        "idle1": "prism_bit:idle1",
+        "idle2": "prism_bit:idle2",
+        "hop1": "prism_bit:hop1",
+        "hop2": "prism_bit:hop2",
+        "hop3": "prism_bit:hop3",
+        "attack": "prism_bit:attack",
+        "hurt": "prism_bit:hurt",
+        "defeated": "prism_bit:defeated"
+      },
+      "anchor": "mass",
+      "baseline": "cell",
+      "out": "assets/sprites/monsters/prism_bit.png",
+      "sprite_frames": "assets/animations/prism_bit.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "hop1",
+            "hop2",
+            "hop3"
+          ],
+          "fps": 6
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      }
+    }
+  }
+}

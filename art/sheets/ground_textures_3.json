@@ -1,0 +1,91 @@
+{
+  "source": "art/source/ground_textures_2.png",
+  "region": [
+    768,
+    0,
+    1536,
+    1024
+  ],
+  "scale": 0.3,
+  "label_band": 0.1,
+  "grid_threshold": 0.95,
+  "out_dir": "assets/sprites/ground",
+  "cells": [
+    [
+      "lumewood_top",
+      "lumewood_side",
+      "lumewood_soil"
+    ],
+    [
+      "emberreach_top",
+      "emberreach_side",
+      "emberreach_soil"
+    ],
+    [
+      "lanternfall_top",
+      "lanternfall_side",
+      "lanternfall_soil"
+    ]
+  ],
+  "overrides": {
+    "lumewood_top": {
+      "seamless": true,
+      "size": 128,
+      "keep": "largest"
+    },
+    "lumewood_side": {
+      "seamless": true,
+      "size": 128,
+      "keep": "largest"
+    },
+    "lumewood_soil": {
+      "seamless": true,
+      "size": 128,
+      "keep": "largest"
+    },
+    "emberreach_top": {
+      "seamless": true,
+      "size": 128,
+      "keep": "largest"
+    },
+    "emberreach_side": {
+      "seamless": true,
+      "size": 128,
+      "keep": "largest"
+    },
+    "emberreach_soil": {
+      "seamless": true,
+      "size": 128,
+      "keep": "largest"
+    },
+    "lanternfall_top": {
+      "seamless": true,
+      "size": 128,
+      "keep": "largest"
+    },
+    "lanternfall_side": {
+      "seamless": true,
+      "size": 128,
+      "keep": "largest"
+    },
+    "lanternfall_soil": {
+      "seamless": true,
+      "size": 128,
+      "keep": "largest"
+    }
+  },
+  "grid": {
+    "rows": [
+      77,
+      343,
+      657,
+      1000
+    ],
+    "cols": [
+      11,
+      260,
+      511,
+      761
+    ]
+  }
+}

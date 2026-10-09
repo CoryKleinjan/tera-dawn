@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Resource" path="res://data/projectiles/star.tres" id="2_star"]
-[ext_resource type="Resource" path="res://data/effects/hit.tres" id="3_hit"]
+[ext_resource type="Resource" path="res://data/effects/star_hit.tres" id="3_hit"]
 [ext_resource type="Texture2D" path="res://assets/sprites/skills/star_throw.png" id="4_star_throw"]
 
 [resource]

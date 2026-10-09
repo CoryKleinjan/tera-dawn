@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="2_stat_block"]
-[ext_resource type="Resource" path="res://data/effects/heal.tres" id="3_heal"]
+[ext_resource type="Resource" path="res://data/effects/magic_armor_aura.tres" id="3_heal"]
 [ext_resource type="Texture2D" path="res://assets/sprites/skills/magic_armor.png" id="4_magic_armor"]
 
 [sub_resource type="Resource" id="Resource_2"]

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SkillDef" load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
-[ext_resource type="Resource" path="res://data/effects/swish.tres" id="2_swish"]
+[ext_resource type="Resource" path="res://data/effects/flash_fist.tres" id="2_swish"]
 [ext_resource type="Resource" path="res://data/effects/critical.tres" id="3_critical"]
 [ext_resource type="Texture2D" path="res://assets/sprites/skills/flash_fist.png" id="4_flash_fist"]
 
