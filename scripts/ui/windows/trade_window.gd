@@ -26,9 +26,7 @@ func show_state(s: Dictionary) -> void:
 		return
 	title = "Trade with %s" % s["partner"]
 	if not was_open:
-		position = Vector2(TDWorld.VIEW.x / 2.0 - size.x - 10, 70)
-		hud.windows["inventory"].visible = true
-		hud.windows["inventory"].position = Vector2(TDWorld.VIEW.x / 2.0 + 10, 70)
+		place_beside_inventory(70)
 	visible = true
 	raise()
 
@@ -67,17 +65,16 @@ func _draw_body() -> void:
 		var theirs: bool = side == "theirs"
 		var d: Dictionary = state[side]
 		var x := RIGHT_X if theirs else PAD
-		DrawUtil.text(self, Game.ui_font, Vector2(x, GRID_Y - 8), "Them" if theirs else "You", 12, Color("c9b8d9"), 1, 3, Palette.NIGHT)
+		draw_label(Vector2(x, GRID_Y - 8), "Them" if theirs else "You", Palette.MUTED)
 		if d["ready"]:
-			DrawUtil.text(self, Game.ui_font, Vector2(x + GRID_W, GRID_Y - 8), "Ready!", 12, Color("8cf0a6"), -1, 3, Palette.NIGHT)
+			draw_label(Vector2(x + GRID_W, GRID_Y - 8), "Ready!", Palette.GOOD, 12, -1)
 		for i in COLS * 3:
 			draw_slot(slot_rect(i, theirs), _stack(side, i))
 		var sr := Rect2(x, _shards_rect().position.y, GRID_W, 24)
-		DrawUtil.round_rect(self, sr, 5, Color(Palette.NIGHT, 0.4 if theirs or not sr.has_point(_hover) else 0.6))
-		draw_texture_rect(UiSkin.tex("icon_dawnshard"), Rect2(sr.position + Vector2(4, 3), Vector2(20, 18)), false)
-		DrawUtil.text(self, Game.num_font, sr.position + Vector2(30, 18), str(d["shards"]), 14, Palette.SUN, 1, 4, Palette.NIGHT)
+		draw_row(sr, not theirs and sr.has_point(_hover))
+		draw_shards(sr.position + Vector2(4, 19), d["shards"])
 		if not theirs:
-			DrawUtil.text(self, Game.ui_font, sr.end + Vector2(-6, -7), "click to set", 9, Color("c9b8d9"), -1)
+			DrawUtil.text(self, Game.ui_font, sr.end + Vector2(-6, -7), "click to set", 9, Palette.MUTED, -1)
 	draw_button(_trade_rect(), "Trade", not state["mine"]["ready"])
 	draw_button(_cancel_rect(), "Cancel")
 

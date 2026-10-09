@@ -219,7 +219,7 @@ func _build_title() -> void:
 	join.pressed.connect(_on_join)
 	start_panel.add_child(_row([_label("Server"), address_field, join]))
 	message = _label("")
-	message.add_theme_color_override("font_color", Color("ff8a99"))
+	message.add_theme_color_override("font_color", Palette.BAD)
 	message.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	start_panel.add_child(message)
 
@@ -246,7 +246,7 @@ func _build_title() -> void:
 	keys.text = "Arrows move and climb · Space jump · X attack · A Dawn Slash · Z loot · Up talks and enters portals\nI inventory · E equipment · S character · Esc menu · F11 fullscreen\nGamepad: stick · A jump · X attack · Y Dawn Slash · B loot · Back inventory · Start menu"
 	keys.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	keys.add_theme_font_size_override("font_size", 12)
-	keys.add_theme_color_override("font_color", Color("c9b8d9"))
+	keys.add_theme_color_override("font_color", Palette.MUTED)
 	inner.add_child(keys)
 	name_field.call_deferred("grab_focus")
 	Net.joined.connect(_on_joined)

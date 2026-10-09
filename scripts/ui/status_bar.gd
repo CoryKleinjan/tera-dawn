@@ -55,7 +55,7 @@ func _window_button(action: String, r: Rect2) -> void:
 	if WINDOW_ICONS.has(action):
 		draw_texture_rect(UiSkin.tex(WINDOW_ICONS[action]), r, false, Color(1.2, 1.15, 1.05) if open else Color.WHITE)
 	else:
-		DrawUtil.ellipse(self, r.get_center(), r.size.x / 2.0 - 2, r.size.y / 2.0 - 2, Color("e9b44c"))
+		DrawUtil.ellipse(self, r.get_center(), r.size.x / 2.0 - 2, r.size.y / 2.0 - 2, Palette.GOLD_TRIM)
 		DrawUtil.ellipse(self, r.get_center(), r.size.x / 2.0 - 5, r.size.y / 2.0 - 5, Palette.PLUM)
 		var symbol: String = WINDOW_SYMBOLS.get(action, "?")
 		DrawUtil.text(self, Game.num_font, r.get_center() + Vector2(0, 7 if symbol.length() == 1 else 5), symbol, 19 if symbol.length() == 1 else 13, Palette.SUN, 0, 4, Palette.NIGHT)

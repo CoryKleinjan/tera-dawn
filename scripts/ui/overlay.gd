@@ -31,13 +31,13 @@ func _draw() -> void:
 		var y := v.y - TDStatusBar.HEIGHT - 12 - (n - 1 - i) * 18
 		var col: Color = line["color"]
 		col.a = minf(1.0, line["t"] / 40.0)
-		DrawUtil.text(self, font, Vector2(log_right, y), line["text"], 13, col, -1, 4, Color(0.1, 0.07, 0.19, 0.8 * col.a))
+		DrawUtil.text(self, font, Vector2(log_right, y), line["text"], 13, col, -1, 4, Color(Palette.NIGHT, 0.8 * col.a))
 	# map banner
 	if world.banner_t > 0:
 		var a := minf(1.0, minf(world.banner_t / 30.0, (180 - world.banner_t) / 20.0))
 		UiSkin.draw_banner(self, Vector2(v.x / 2, 110), world.banner_text, a)
 	if world.player.fainted():
-		draw_rect(Rect2(Vector2.ZERO, v), Color(0.1, 0.07, 0.19, 0.45))
+		draw_rect(Rect2(Vector2.ZERO, v), Color(Palette.NIGHT, 0.45))
 		DrawUtil.text(self, Game.num_font, Vector2(v.x / 2, v.y / 2 - 10), "You fainted", 40, Palette.MIST)
 		DrawUtil.text(self, font, Vector2(v.x / 2, v.y / 2 + 22), "Returning to %s…" % Content.map(world.map.return_town()).display_name, 16, Palette.MIST)
 
@@ -51,9 +51,9 @@ func _draw_minimap(mm: Rect2) -> void:
 	for p in world.map.portals:
 		draw_rect(Rect2(inner.position.x + p.x * sx - 2, inner.position.y + world.platforms[p.platform].y * sy - 6, 4, 6), Color("aa8cff"))
 	for n in world.npcs():
-		draw_circle(inner.position + Vector2(n.position.x * sx, n.position.y * sy - 3), 2, Color("8cf0a0"))
+		draw_circle(inner.position + Vector2(n.position.x * sx, n.position.y * sy - 3), 2, Palette.GOOD)
 	for a in world.avatars.values():
-		draw_circle(inner.position + Vector2(a.position.x * sx, a.position.y * sy - 3), 2.5, Color("8cc6ff"))
+		draw_circle(inner.position + Vector2(a.position.x * sx, a.position.y * sy - 3), 2.5, Palette.INFO)
 	var pp := world.player.position
 	draw_circle(inner.position + Vector2(pp.x * sx, pp.y * sy - 3), 3, Palette.SUN)
 
@@ -70,7 +70,7 @@ func _draw_buffs(right_top: Vector2) -> void:
 			draw_texture_rect(s.icon, r, false)
 		var left := ceili(Game.me.buffs[id][1] / 60.0)
 		DrawUtil.text(self, Game.num_font, Vector2(r.get_center().x, r.end.y + 11), str(left), 11,
-			Palette.MIST if left > 10 else Color("ffb38a"), 0, 4, Palette.NIGHT)
+			Palette.MIST if left > 10 else Palette.WARN, 0, 4, Palette.NIGHT)
 
 ## Your party under the map name: each other member's name and HP.
 func _draw_party(at: Vector2) -> void:
@@ -100,14 +100,14 @@ func _draw_quest_tracker(at: Vector2) -> void:
 		DrawUtil.text(self, Game.ui_font, Vector2(at.x, y), q.title, 12, Palette.SUN, 1, 4, Palette.NIGHT)
 		y += 15
 		if ready:
-			DrawUtil.text(self, Game.ui_font, Vector2(at.x + 8, y), "Ready to hand in", 11, Color("8cf0a6"), 1, 4, Palette.NIGHT)
+			DrawUtil.text(self, Game.ui_font, Vector2(at.x + 8, y), "Ready to hand in", 11, Palette.GOOD, 1, 4, Palette.NIGHT)
 			y += 15
 		else:
 			for i in q.objectives.size():
 				var o := q.objectives[i]
 				var have := me.quests.progress(q, i, me)
 				DrawUtil.text(self, Game.ui_font, Vector2(at.x + 8, y), "%s %d/%d" % [o.describe(), have, o.count], 11,
-					Color("8cf0a6") if have >= o.count else Palette.MIST, 1, 4, Palette.NIGHT)
+					Palette.GOOD if have >= o.count else Palette.MIST, 1, 4, Palette.NIGHT)
 				y += 15
 		y += 4
 
@@ -115,7 +115,7 @@ func _draw_quest_tracker(at: Vector2) -> void:
 func _draw_pet(c: TDCompanion, z: float, shown: bool) -> void:
 	if c == null or c.pet == null or not shown or not world.stage.in_view(c.pet_pos, z):
 		return
-	UiSkin.draw_name_tag(self, world.stage.screen(c.pet_pos, z) + Vector2(0, 4), c.pet.display_name, Color("ffd9a8"))
+	UiSkin.draw_name_tag(self, world.stage.screen(c.pet_pos, z) + Vector2(0, 4), c.pet.display_name, Palette.PET)
 	if c.speech_t > 0:
 		UiSkin.draw_speech(self, world.stage.screen(c.pet_head(), z) + Vector2(0, -6), c.speech)
 
@@ -142,7 +142,7 @@ func _draw_world_text() -> void:
 		var feet := st.screen(p.position, TDPlayer.Z)
 		UiSkin.draw_name_tag(self, feet + Vector2(0, 4), Game.me.name, Palette.SUN)
 		if Game.me.guild != "":
-			UiSkin.draw_name_tag(self, feet + Vector2(0, 26), Game.me.guild, Color("b8f070"))
+			UiSkin.draw_name_tag(self, feet + Vector2(0, 26), Game.me.guild, Palette.GUILD)
 		if world.hud.selling():
 			UiSkin.draw_hint(self, feet + Vector2(0, -84), "Shop: " + world.hud.windows["player_shop"].shop_title)
 		elif p.speech_t > 0:
