@@ -81,8 +81,12 @@ func reset() -> void:
 func load_from(cfg: ConfigFile) -> void:
 	for a in ACTIONS:
 		var action: String = a["action"]
-		var saved: Variant = cfg.get_value(section(), action, null)
-		if action in FIXED or not saved is Array or saved.size() != SLOTS:
+		# fixed actions are never saved, and asking for a missing key with a null default
+		# makes Godot print an error
+		if action in FIXED or not cfg.has_section_key(section(), action):
+			continue
+		var saved: Variant = cfg.get_value(section(), action)
+		if not saved is Array or saved.size() != SLOTS:
 			continue
 		var codes: Array[int] = []
 		for k in saved:

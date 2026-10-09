@@ -61,3 +61,22 @@ func requirement_lines() -> PackedStringArray:
 			if n > 0:
 				out.append("%d %s" % [n, StatBlock.LABELS[stat]])
 	return out
+
+## Whether this is a starting job (Beginner): one you don't advance into.
+func is_starting_job() -> bool:
+	return advances_from == &""
+
+## The jobs a character of job `from` can advance into, by level and then name, so lists
+## of them read the same everywhere.
+static func paths_from(from: StringName) -> Array[JobDef]:
+	var out: Array[JobDef] = []
+	for j: JobDef in Content.jobs.values():
+		if j.advances_from == from and from != &"":
+			out.append(j)
+	out.sort_custom(func(a: JobDef, b: JobDef) -> bool:
+		return a.display_name < b.display_name if a.advance_level == b.advance_level else a.advance_level < b.advance_level)
+	return out
+
+## "Warrior: Level 10, 35 STR", for lists of the paths open to a Beginner.
+func path_line() -> String:
+	return "%s: %s" % [display_name, ", ".join(requirement_lines())]

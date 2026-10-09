@@ -50,7 +50,8 @@ func test_the_owner_picks_up_with_the_loot_key() -> void:
 	check_eq(ann.character.inventory.count_of(leaf), 3, "in Ann's bag")
 	check(not map.drops.has(d.id), "gone from the ground")
 	check_eq(h.last(3, &"ev_drop_gone"), [d.id, 2], "everyone sees Ann take it")
-	check(h.told(2, "Picked up 3 Green Leaf"), "told")
+	check_eq(h.last(2, &"ev_pickup"), [leaf.id, 3], "told what was picked up")
+	check(not h.told(2, "Picked up"), "not as a log line: the client merges pickups")
 
 func test_others_cant_take_your_drop_at_first() -> void:
 	var d := _kill()
@@ -104,6 +105,8 @@ func test_dawnshards_go_to_the_wallet_by_walking_over_them() -> void:
 	check_eq(ann.character.shards, 40, "picked up without the loot key")
 	check(not map.drops.has(d.id), "gone")
 	check_eq(h.last(2, &"ev_vitals")[4], 40, "wallet sent")
+	check_eq(h.last(2, &"ev_gain"), [&"shards", 40], "shown rising over Ann")
+	check(h.events(2, &"ev_pickup").is_empty() and not h.told(2, "Picked up"), "not in the message log")
 
 func test_others_dont_walk_off_with_your_dawnshards() -> void:
 	var shard := Content.item(&"dawnshard")

@@ -110,14 +110,14 @@ func _quest_options() -> Array:
 					["Not yet", func() -> void: _main_page(greeting)]])])
 		elif status == QuestLog.Status.AVAILABLE and q.giver == npc.def.id:
 			out.append(["New quest: %s" % q.title, func() -> void:
-				_page("%s\n\n%s\nReward: %s" % [q.offer_text, _objective_list(q), q.describe_rewards()], [
+				_page("%s%s\n\n%s\nReward: %s" % [q.offer_text, _job_paths(q), _objective_list(q), q.describe_rewards()], [
 					["Accept", func() -> void:
 						Net.ask(&"req_quest_accept", [npc.def.id, q.id])
 						_main_page(greeting)],
 					["Decline", func() -> void: _main_page(greeting)]])])
 		elif status in [QuestLog.Status.ACTIVE, QuestLog.Status.READY]:
 			out.append(["In progress: %s" % q.title, func() -> void:
-				_page("%s\n\n%s" % [q.progress_text, _objective_list(q)], [
+				_page("%s%s\n\n%s" % [q.progress_text, _job_paths(q), _objective_list(q)], [
 					["Back", func() -> void: _main_page(greeting)]])])
 	return out
 
@@ -180,6 +180,16 @@ func _job_page(j: JobDef) -> void:
 			visible = false])
 	opts.append(["Back", _job_list])
 	_page(say, opts)
+
+## For a quest that lists the job paths: a paragraph naming each job a Beginner can
+## advance into and what it takes ("Warrior: Level 10, 35 STR"). "" for other quests.
+static func _job_paths(q: QuestDef) -> String:
+	if not q.lists_job_paths:
+		return ""
+	var lines := ["", "", "The paths ahead:"]
+	for j in JobDef.paths_from(Character.START_JOB):
+		lines.append(j.path_line())
+	return "\n".join(lines)
 
 ## "Defeat 8 Dewlings (3/8)", one per line.
 static func _objective_list(q: QuestDef) -> String:

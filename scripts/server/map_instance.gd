@@ -87,6 +87,11 @@ func broadcast(event: StringName, args: Array, skip := 0) -> void:
 func tell(p: SimPlayer, text: String, col: Color) -> void:
 	Net.send(p.peer, &"ev_log", [text, col.to_html()])
 
+## Shows the player what they just gained (&"exp" or &"shards") as a small number rising
+## over them, rather than a line in the message log.
+func show_gain(p: SimPlayer, kind: StringName, amount: int) -> void:
+	Net.send(p.peer, &"ev_gain", [kind, amount])
+
 ## The NPC with this id when the player is close enough to deal with them, or null.
 func npc_near(p: SimPlayer, npc_id: StringName, reach := 160.0) -> NpcDef:
 	for placement in def.npcs:
@@ -226,7 +231,11 @@ func pick_up(p: SimPlayer, d: SimDrop) -> bool:
 		ch.inventory.add(d.item, d.amount)
 		p.dirty_character = true
 	_remove_drop(d, p.peer)
-	tell(p, "Picked up %s" % amount_name(d.item, d.amount), Palette.MIST)
+	if d.item.is_currency:
+		show_gain(p, &"shards", d.amount)
+	else:
+		# the client merges pickups of the same item into one log line
+		Net.send(p.peer, &"ev_pickup", [d.item.id, d.amount])
 	server.picked_up(p, d.item)
 	return true
 

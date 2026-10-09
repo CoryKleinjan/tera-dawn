@@ -24,6 +24,9 @@ extends Resource
 @export_multiline var offer_text := ""
 @export_multiline var progress_text := ""
 @export_multiline var complete_text := ""
+## The offer and progress pages also list every job a Beginner can advance into and what
+## each takes, built from the JobDefs so it never drifts from them.
+@export var lists_job_paths := false
 
 @export_group("Objectives")
 @export var objectives: Array[QuestObjective] = []

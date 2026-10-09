@@ -166,3 +166,18 @@ func test_spending_ability_points() -> void:
 	check_eq(c.ap, 1, "point spent")
 	h.ask(2, &"req_add_ap", [&"attack"])
 	check_eq(c.ap, 1, "only main stats take points")
+
+func test_spending_many_ability_points_at_once() -> void:
+	c.ap = 5
+	var luck := c.base.luck
+	h.ask(2, &"req_add_ap_many", [&"luck", 3])
+	check_eq(c.base.luck, luck + 3, "LUK raised by 3")
+	check_eq(c.ap, 2, "three points spent")
+	h.ask(2, &"req_add_ap_many", [&"luck", 50])
+	check_eq(c.base.luck, luck + 5, "never more than the points left")
+	check_eq(c.ap, 0, "all spent")
+	c.ap = 4
+	h.ask(2, &"req_add_ap_many", [&"luck", -3])
+	h.ask(2, &"req_add_ap_many", [&"attack", 2])
+	check_eq(c.ap, 4, "a negative amount or a non-base stat spends nothing")
+	check_eq(c.base.luck, luck + 5, "LUK unchanged")

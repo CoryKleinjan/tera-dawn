@@ -39,6 +39,8 @@ var tooltip: TDItemTooltip
 var chat: TDChat
 var invites: TDInvites
 var prompt: TDPrompt
+## The invisible button over the minimap that opens the world map.
+var minimap_button: Button
 ## Quest complete, job advance and achievement pop-ups.
 var banners: TDBanners
 ## The game menu's button in the top left corner (shown while playing).
@@ -81,6 +83,7 @@ func _ready() -> void:
 	add_child(banners)
 	# clicking the minimap opens the world map
 	var minimap := Button.new()
+	minimap_button = minimap
 	minimap.flat = true
 	minimap.focus_mode = Control.FOCUS_NONE
 	minimap.position = TDOverlay.minimap_rect().position
@@ -115,6 +118,8 @@ func _build_menu_button() -> void:
 
 func _process(_delta: float) -> void:
 	menu_cog.visible = world != null and world.started
+	# the minimap (drawn by the overlay) only shows once there's a character
+	minimap_button.visible = world != null and world.started
 
 func _build_windows() -> void:
 	window_layer = Control.new()
@@ -400,12 +405,19 @@ func _on_settings_changed(section: SettingsSection) -> void:
 	if section is Keybinds:
 		_update_keys_help()
 
-## The hints under the title card, naming the player's own keys.
+## The hints under the title card, naming the player's own keys: moving and fighting, the
+## first quickslots (empty for a new character, so no skill is named), then every window key.
 func _update_keys_help() -> void:
 	var k := func(action: String) -> String: return TDStatusBar._key_name(action)
-	keys_help.text = "%s %s move and climb · %s jump · %s attack · %s Dawn Slash · %s loot · %s talks and enters portals\n%s inventory · %s equipment · %s character · Esc menu · %s fullscreen · Gamepads work too" % [
-		k.call("move_left"), k.call("move_right"), k.call("jump"), k.call("attack"), k.call("quick_1"), k.call("loot"), k.call("move_up"),
-		k.call("inventory"), k.call("equipment"), k.call("stats"), k.call("toggle_fullscreen")]
+	var slots := []
+	for i in range(1, 5):
+		slots.append(k.call("quick_%d" % i))
+	var window_keys := []
+	for action in WINDOW_ACTIONS:
+		window_keys.append("%s %s" % [k.call(action), String(Keybinds.info(action)["label"]).to_lower()])
+	keys_help.text = "%s %s move and climb · %s jump · %s attack · %s loot · %s talks and enters portals · %s… quickslots\n%s\nEsc menu · %s fullscreen · Gamepads work too" % [
+		k.call("move_left"), k.call("move_right"), k.call("jump"), k.call("attack"), k.call("loot"), k.call("move_up"), ", ".join(slots),
+		" · ".join(window_keys), k.call("toggle_fullscreen")]
 
 func _show_message(text: String) -> void:
 	message.text = text

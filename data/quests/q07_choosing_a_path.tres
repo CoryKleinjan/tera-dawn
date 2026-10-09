@@ -29,6 +29,7 @@ jobs = Array[StringName]([])
 offer_text = "You're nearly ready to choose a job. The job instructors live on the mainland. Take Captain Marlo's ship to Dawnharbor and have a look around, then come tell me about it."
 progress_text = "Captain Marlo's ship to Dawnharbor leaves from the meadow. Visit the port, then come back."
 complete_text = "The mainland! Did you see the masts? Here, for the road. Return Scrolls bring you home in a pinch."
+lists_job_paths = true
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1")])
 reward_xp = 9900
 reward_shards = 300

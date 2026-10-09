@@ -381,20 +381,27 @@ static func draw_bar_fill(ci: CanvasItem, fill: String, groove: Rect2, fraction:
 	else:
 		box(fill, 10, 0).draw(ci.get_canvas_item(), Rect2(groove.position, Vector2(w, groove.size.y)))
 
+## Where a name tag with its top centre at `top_center` sits on screen.
+static func name_tag_rect(top_center: Vector2, label: String) -> Rect2:
+	var w := DrawUtil.text_width(Game.ui_font, label, 11) + 22
+	return Rect2(top_center.x - w / 2.0, top_center.y, w, 19)
+
 ## The plaque under a character's feet with their name.
 static func draw_name_tag(ci: CanvasItem, top_center: Vector2, label: String, col: Color, badge := Color.TRANSPARENT) -> void:
-	var w := DrawUtil.text_width(Game.ui_font, label, 11) + 22
-	var r := Rect2(top_center.x - w / 2.0, top_center.y, w, 19)
+	var r := name_tag_rect(top_center, label)
 	box("name_tag", 12, 8).draw(ci.get_canvas_item(), r)
 	DrawUtil.text(ci, Game.ui_font, top_center + Vector2(0, 14), label, 11, col)
 	if badge.a > 0.0:
 		DrawUtil.text(ci, Game.num_font, top_center + Vector2(0, 32), "BOSS", 12, badge, 0, 4, Palette.NIGHT)
 
+## Where a guild plaque with its top centre at `top_center` sits on screen.
+static func guild_tag_rect(top_center: Vector2, label: String) -> Rect2:
+	var w := maxf(DrawUtil.text_width(Game.ui_font, label, 11) + 34, ornate_min_size(GUILD_TAG[1], GUILD_TAG[2], 0.4).x)
+	return Rect2(top_center.x - w / 2.0, top_center.y - 3, w, 24)
+
 ## The guild plaque under a member's name: cream with green trim, in dark ink.
 static func draw_guild_tag(ci: CanvasItem, top_center: Vector2, label: String) -> void:
-	var scale := 0.4
-	var w := maxf(DrawUtil.text_width(Game.ui_font, label, 11) + 34, ornate_min_size(GUILD_TAG[1], GUILD_TAG[2], scale).x)
-	draw_panel(ci, GUILD_TAG, Rect2(top_center.x - w / 2.0, top_center.y - 3, w, 24), scale)
+	draw_panel(ci, GUILD_TAG, guild_tag_rect(top_center, label), 0.4)
 	DrawUtil.text(ci, Game.ui_font, top_center + Vector2(0, 13), label, 11, Palette.INK)
 
 ## A wooden sign hanging over a player who keeps a shop, with the shop's name on it.
