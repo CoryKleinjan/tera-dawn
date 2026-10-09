@@ -1,0 +1,98 @@
+{
+  "source": "art/source/monsters_m1.png",
+  "region": [
+    0,
+    330,
+    764,
+    618
+  ],
+  "grid": {
+    "rows": [
+      1,
+      143,
+      288
+    ],
+    "cols": [
+      0,
+      191,
+      382,
+      573,
+      764
+    ]
+  },
+  "scale": 0.545,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/cinder_imp",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "walk1",
+      "walk2"
+    ],
+    [
+      "walk3",
+      "attack",
+      "hurt",
+      "defeated"
+    ]
+  ],
+  "sets": {
+    "cinder_imp": {
+      "frames": {
+        "idle1": "cinder_imp:idle1",
+        "idle2": "cinder_imp:idle2",
+        "walk1": "cinder_imp:walk1",
+        "walk2": "cinder_imp:walk2",
+        "walk3": "cinder_imp:walk3",
+        "attack": "cinder_imp:attack",
+        "hurt": "cinder_imp:hurt",
+        "defeated": "cinder_imp:defeated"
+      },
+      "anchor": "mass",
+      "baseline": "bottom",
+      "out": "assets/sprites/monsters/cinder_imp.png",
+      "sprite_frames": "assets/animations/cinder_imp.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "walk1",
+            "walk2",
+            "walk3",
+            "walk2"
+          ],
+          "fps": 7
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      }
+    }
+  }
+}

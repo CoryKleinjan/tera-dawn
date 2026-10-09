@@ -27,20 +27,20 @@ func open(a: TDAvatar) -> void:
 	visible = true
 	raise()
 
-## [label, Callable] for each thing you can do with them.
+## [label, Callable, icon] for each thing you can do with them (the icon, from the UI art, is optional).
 func actions() -> Array:
 	var out := []
-	out.append(["Whisper", func() -> void: hud.chat.open("/w %s " % who_name)])
+	out.append(["Whisper", func() -> void: hud.chat.open("/w %s " % who_name), "social/whisper_icon"])
 	out.append(["Invite to party", func() -> void: Net.ask(&"req_social", [&"party", who_name])])
 	var buddies: Array = Game.social.get("buddies", [])
 	if not buddies.any(func(b: Array) -> bool: return b[0] == who_name):
-		out.append(["Add buddy", func() -> void: Net.ask(&"req_social", [&"buddy", who_name])])
+		out.append(["Add buddy", func() -> void: Net.ask(&"req_social", [&"buddy", who_name]), "social/buddy_add_icon"])
 	out.append(["Trade", func() -> void: Net.ask(&"req_social", [&"trade", who_name])])
 	var g: Dictionary = Game.social.get("guild", {})
 	if not g.is_empty() and g["master"] == Game.me.name and guild == "":
 		out.append(["Invite to guild", func() -> void: Net.ask(&"req_social", [&"guild", who_name])])
-	out.append(["Fame +1", func() -> void: Net.ask(&"req_fame", [peer, true])])
-	out.append(["Fame -1", func() -> void: Net.ask(&"req_fame", [peer, false])])
+	out.append(["Fame +1", func() -> void: Net.ask(&"req_fame", [peer, true]), "social/fame_up"])
+	out.append(["Fame -1", func() -> void: Net.ask(&"req_fame", [peer, false]), "social/fame_down"])
 	return out
 
 func _row_rect(i: int) -> Rect2:
@@ -51,7 +51,10 @@ func _draw_body() -> void:
 	draw_label(Vector2(PAD, 46), "Lv. %d %s%s" % [level, j.display_name if j else "", "  ·  " + guild if guild != "" else ""], Palette.MUTED)
 	var list := actions()
 	for i in list.size():
-		add_button(_row_rect(i), list[i][0], _pick.bind(list[i][1]))
+		var r := _row_rect(i)
+		add_button(r, list[i][0], _pick.bind(list[i][1]))
+		if list[i].size() > 2:
+			UiSkin.draw_icon(self, list[i][2], Rect2(r.position + Vector2(8, 4), Vector2(22, r.size.y - 8)))
 
 ## Closes the menu and does `action`.
 func _pick(action: Callable) -> void:

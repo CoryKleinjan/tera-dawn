@@ -1,0 +1,98 @@
+{
+  "source": "art/source/mon_driftcove.png",
+  "region": [
+    0,
+    730,
+    764,
+    1024
+  ],
+  "grid": {
+    "rows": [
+      29,
+      142,
+      294
+    ],
+    "cols": [
+      0,
+      194,
+      385,
+      575,
+      764
+    ]
+  },
+  "scale": 0.492,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/barnacle_boar",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "walk1",
+      "walk2"
+    ],
+    [
+      "walk3",
+      "attack",
+      "hurt",
+      "defeated"
+    ]
+  ],
+  "sets": {
+    "barnacle_boar": {
+      "frames": {
+        "idle1": "barnacle_boar:idle1",
+        "idle2": "barnacle_boar:idle2",
+        "walk1": "barnacle_boar:walk1",
+        "walk2": "barnacle_boar:walk2",
+        "walk3": "barnacle_boar:walk3",
+        "attack": "barnacle_boar:attack",
+        "hurt": "barnacle_boar:hurt",
+        "defeated": "barnacle_boar:defeated"
+      },
+      "anchor": "mass",
+      "baseline": "bottom",
+      "out": "assets/sprites/monsters/barnacle_boar.png",
+      "sprite_frames": "assets/animations/barnacle_boar.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "walk1",
+            "walk2",
+            "walk3",
+            "walk2"
+          ],
+          "fps": 7
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      }
+    }
+  }
+}

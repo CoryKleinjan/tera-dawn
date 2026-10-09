@@ -1,0 +1,125 @@
+{
+  "source": "art/source/mon_greenbough.png",
+  "region": [
+    0,
+    759,
+    1536,
+    1024
+  ],
+  "grid": {
+    "rows": [
+      26,
+      128,
+      265
+    ],
+    "cols": [
+      0,
+      257,
+      512,
+      768,
+      1024,
+      1279,
+      1536
+    ]
+  },
+  "scale": 1.0,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/elder_treant",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "move1",
+      "move2",
+      "move3",
+      "windup"
+    ],
+    [
+      "strike",
+      "special",
+      "hurt",
+      "enraged",
+      "defeated1",
+      "defeated2"
+    ]
+  ],
+  "sets": {
+    "elder_treant": {
+      "frames": {
+        "idle1": "elder_treant:idle1",
+        "idle2": "elder_treant:idle2",
+        "move1": "elder_treant:move1",
+        "move2": "elder_treant:move2",
+        "move3": "elder_treant:move3",
+        "windup": "elder_treant:windup",
+        "strike": "elder_treant:strike",
+        "special": "elder_treant:special",
+        "hurt": "elder_treant:hurt",
+        "enraged": "elder_treant:enraged",
+        "defeated1": "elder_treant:defeated1",
+        "defeated2": "elder_treant:defeated2"
+      },
+      "anchor": "mass",
+      "baseline": "bottom",
+      "out": "assets/sprites/monsters/elder_treant.png",
+      "sprite_frames": "assets/animations/elder_treant.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "move1",
+            "move2",
+            "move3",
+            "move2"
+          ],
+          "fps": 6
+        },
+        "attack": {
+          "frames": [
+            "windup",
+            "strike",
+            "special"
+          ],
+          "fps": 3,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated1",
+            "defeated2"
+          ],
+          "fps": 2,
+          "loop": false
+        }
+      }
+    }
+  },
+  "overrides": {
+    "windup": {
+      "blank_label": 16
+    },
+    "strike": {
+      "blank_label": 16
+    },
+    "special": {
+      "blank_label": 16
+    },
+    "enraged": {
+      "blank_label": 16
+    }
+  }
+}

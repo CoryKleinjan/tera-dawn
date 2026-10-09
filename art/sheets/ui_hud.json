@@ -1,0 +1,52 @@
+{
+  "source": "art/source/ui_hud.png",
+  "out_dir": "assets/sprites/ui/hud",
+  "scale": 0.5,
+  "alpha": "soft",
+  "label_band": 0.2,
+  "grid_threshold": 0.7,
+  "cells": [
+    [
+      "quests_button",
+      "skills_button",
+      "worldmap_button",
+      "community_button"
+    ],
+    [
+      "collection_button",
+      "menu_button",
+      "quest_available",
+      "quest_ready"
+    ],
+    [
+      "quest_in_progress",
+      "minimap_frame",
+      "minimap_dot",
+      "minimap_portal"
+    ],
+    [
+      "speech_bubble",
+      "buff_frame",
+      "cooldown_sweep",
+      ""
+    ]
+  ],
+  "overrides": {
+    "minimap_dot": {
+      "keep": "split"
+    },
+    "quest_available": {
+      "label_band": 0.3,
+      "fix": "glow_backdrop",
+      "keep": "largest"
+    },
+    "quest_ready": {
+      "label_band": 0.3,
+      "fix": "glow_backdrop",
+      "keep": "largest"
+    },
+    "quest_in_progress": {
+      "label_band": 0.3
+    }
+  }
+}

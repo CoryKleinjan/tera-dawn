@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MonsterDef" load_steps=17 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/monsters/petal_bat.png" id="2_petal_bat"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/petal_bat.tres" id="2_petal_bat"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/petal_wing.tres" id="loot_petal_wing"]
@@ -69,7 +69,7 @@ attack = 10
 exp_reward = 13
 speed = 1.1
 size = Vector2(40.0, 30.0)
-texture = ExtResource("2_petal_bat")
+sprite_frames = ExtResource("2_petal_bat")
 drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_loot0"), SubResource("Resource_loot1"), SubResource("Resource_loot2"), SubResource("Resource_loot3"), SubResource("Resource_loot4")])
 flying = true
 hover_height = 56.0

@@ -33,9 +33,9 @@ func _init() -> void:
 	var mat := ShaderMaterial.new()
 	mat.shader = SHADER
 	_body.material = mat
-	_back.draw.connect(_draw_overlays.bind(_back, true))
+	_back.draw.connect(_draw_around.bind(_back, true))
 	_body.draw.connect(_draw_body)
-	_front.draw.connect(_draw_overlays.bind(_front, false))
+	_front.draw.connect(_draw_around.bind(_front, false))
 	set_look({})
 
 func set_look(new_look: Dictionary) -> void:
@@ -79,20 +79,26 @@ func _frame_box() -> Array:
 func _texture() -> AtlasTexture:
 	return Paperdoll.FRAMES.get_frame_texture(animation, frame()) as AtlasTexture
 
+## Where the frame is drawn, and mirrors `on` for facing left.
+func _frame_rect(on: Control) -> Rect2:
+	var box := _frame_box()
+	if facing < 0: # mirrored about the middle (the frame is centred)
+		on.draw_set_transform(Vector2(size.x, 0), 0.0, Vector2(-1, 1))
+	return Rect2(box[1], Paperdoll.FRAME_SIZE * box[0])
+
 func _draw_body() -> void:
 	var tex := _texture()
-	var box := _frame_box()
-	var rect := Rect2(box[1], Paperdoll.FRAME_SIZE * box[0])
-	if facing < 0: # mirrored about the middle (the frame is centred)
-		_body.draw_set_transform(Vector2(size.x, 0), 0.0, Vector2(-1, 1))
-	_body.draw_texture_rect_region(tex.atlas, rect, tex.region)
-	for l in doll.layers:
-		if l.frames.has_animation(animation):
-			var lt := l.frames.get_frame_texture(animation, mini(frame(), l.frames.get_frame_count(animation) - 1))
-			_body.draw_texture_rect(lt, rect, false)
+	_body.draw_texture_rect_region(tex.atlas, _frame_rect(_body), tex.region)
 	_body.draw_set_transform(Vector2.ZERO)
 
-func _draw_overlays(on: Control, behind: bool) -> void:
+## The layers behind the body or in front of it, then (in front) the hat and weapon.
+func _draw_around(on: Control, behind: bool) -> void:
+	var rect := _frame_rect(on)
+	for l in doll.layers:
+		if l.behind == behind and l.frames.has_animation(animation):
+			var lt := l.frames.get_frame_texture(animation, mini(frame(), l.frames.get_frame_count(animation) - 1))
+			on.draw_texture_rect(lt, rect, false, l.tint)
+	on.draw_set_transform(Vector2.ZERO)
 	var index := Paperdoll.frame_index(_texture())
 	var box := _frame_box()
 	var s: float = box[0]

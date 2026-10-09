@@ -1,0 +1,139 @@
+{
+  "source": "art/source/npcs_driftcove.png",
+  "grid": {
+    "rows": [
+      1,
+      511,
+      1022
+    ],
+    "cols": [
+      1,
+      384,
+      768,
+      1151,
+      1534
+    ]
+  },
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/npcs_driftcove",
+  "cells": [
+    [
+      "driftcove_instructor_1",
+      "driftcove_shop_1",
+      "driftcove_store_1",
+      "driftcove_taxi_1"
+    ],
+    [
+      "driftcove_instructor_2",
+      "driftcove_shop_2",
+      "driftcove_store_2",
+      "driftcove_taxi_2"
+    ]
+  ],
+  "overrides": {
+    "driftcove_instructor_1": {
+      "scale": 0.205
+    },
+    "driftcove_instructor_2": {
+      "scale": 0.205
+    },
+    "driftcove_shop_1": {
+      "scale": 0.204
+    },
+    "driftcove_shop_2": {
+      "scale": 0.204
+    },
+    "driftcove_store_1": {
+      "scale": 0.221
+    },
+    "driftcove_store_2": {
+      "scale": 0.221
+    },
+    "driftcove_taxi_1": {
+      "scale": 0.191
+    },
+    "driftcove_taxi_2": {
+      "scale": 0.191
+    }
+  },
+  "sets": {
+    "driftcove_instructor": {
+      "frames": {
+        "idle1": "npcs_driftcove:driftcove_instructor_1",
+        "idle2": "npcs_driftcove:driftcove_instructor_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/driftcove_instructor.png",
+      "sprite_frames": "assets/animations/npc_driftcove_instructor.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "driftcove_shop": {
+      "frames": {
+        "idle1": "npcs_driftcove:driftcove_shop_1",
+        "idle2": "npcs_driftcove:driftcove_shop_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/driftcove_shop.png",
+      "sprite_frames": "assets/animations/npc_driftcove_shop.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "driftcove_store": {
+      "frames": {
+        "idle1": "npcs_driftcove:driftcove_store_1",
+        "idle2": "npcs_driftcove:driftcove_store_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/driftcove_store.png",
+      "sprite_frames": "assets/animations/npc_driftcove_store.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "driftcove_taxi": {
+      "frames": {
+        "idle1": "npcs_driftcove:driftcove_taxi_1",
+        "idle2": "npcs_driftcove:driftcove_taxi_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/driftcove_taxi.png",
+      "sprite_frames": "assets/animations/npc_driftcove_taxi.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 1.5
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "source": "art/source/ui_menu.png",
+  "out_dir": "assets/sprites/ui/menu",
+  "scale": 0.5,
+  "alpha": "soft",
+  "label_band": 0.2,
+  "grid_threshold": 0.7,
+  "cells": [
+    [
+      "menu_panel",
+      "settings_panel",
+      "tab_on",
+      "tab_off",
+      "wide_button"
+    ],
+    [
+      "slider_track",
+      "slider_fill",
+      "slider_knob",
+      "slider_knob_hover",
+      "checkbox_off"
+    ],
+    [
+      "checkbox_on",
+      "dropdown",
+      "dropdown_list",
+      "list_row_hover",
+      "scroll_track"
+    ],
+    [
+      "scroll_grabber",
+      "keycap",
+      "keycap_listening",
+      "keycap_empty",
+      "icon_controls"
+    ],
+    [
+      "icon_audio",
+      "icon_video",
+      "icon_mute",
+      "icon_reset",
+      "divider"
+    ]
+  ],
+  "overrides": {
+    "keycap_listening": {
+      "fix": "glow_backdrop"
+    },
+    "slider_knob_hover": {
+      "fix": "glow_backdrop",
+      "keep": "largest"
+    },
+    "menu_panel": {
+      "scale": 1.0
+    }
+  }
+}

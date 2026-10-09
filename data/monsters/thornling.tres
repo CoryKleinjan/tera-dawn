@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MonsterDef" load_steps=24 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/monsters/mossling.png" id="2_mossling"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/thornling.tres" id="2_thornling"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/thorn_tuft.tres" id="5_thorn_tuft"]
@@ -96,7 +96,6 @@ speed = 0.7
 size = Vector2(34.0, 40.0)
 boss = false
 flying = false
-texture = ExtResource("2_mossling")
+sprite_frames = ExtResource("2_thornling")
 sprite_scale = 1.0
-tint = Color(0.498039, 0.815686, 0.376471, 1.0)
 drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10")])

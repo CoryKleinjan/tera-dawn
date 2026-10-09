@@ -1,0 +1,98 @@
+{
+  "source": "art/source/mon_ring_road.png",
+  "region": [
+    0,
+    0,
+    764,
+    336
+  ],
+  "grid": {
+    "rows": [
+      37,
+      184,
+      336
+    ],
+    "cols": [
+      0,
+      193,
+      385,
+      575,
+      764
+    ]
+  },
+  "scale": 0.429,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/cliff_harpy",
+  "cells": [
+    [
+      "hover1",
+      "hover2",
+      "fly1",
+      "fly2"
+    ],
+    [
+      "fly3",
+      "attack",
+      "hurt",
+      "defeated"
+    ]
+  ],
+  "sets": {
+    "cliff_harpy": {
+      "frames": {
+        "hover1": "cliff_harpy:hover1",
+        "hover2": "cliff_harpy:hover2",
+        "fly1": "cliff_harpy:fly1",
+        "fly2": "cliff_harpy:fly2",
+        "fly3": "cliff_harpy:fly3",
+        "attack": "cliff_harpy:attack",
+        "hurt": "cliff_harpy:hurt",
+        "defeated": "cliff_harpy:defeated"
+      },
+      "anchor": "mass",
+      "baseline": "cell",
+      "out": "assets/sprites/monsters/cliff_harpy.png",
+      "sprite_frames": "assets/animations/cliff_harpy.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "hover1",
+            "hover2"
+          ],
+          "fps": 5
+        },
+        "move": {
+          "frames": [
+            "fly1",
+            "fly2",
+            "fly3",
+            "fly2"
+          ],
+          "fps": 8
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      }
+    }
+  }
+}

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="Resource" path="res://data/projectiles/mob_shadow.tres" id="2_mob_shadow"]
-[ext_resource type="Texture2D" path="res://assets/sprites/monsters/cinder_imp.png" id="3_cinder_imp"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/lantern_wraith.tres" id="3_lantern_wraith"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="5_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/wraith_lantern.tres" id="6_wraith_lantern"]
@@ -246,9 +246,8 @@ shot = ExtResource("2_mob_shadow")
 shot_range = 380.0
 shot_cooldown = 110
 aggressive = true
-texture = ExtResource("3_cinder_imp")
-sprite_scale = 2.4
-tint = Color(0.564706, 0.501961, 1.0, 1.0)
+sprite_frames = ExtResource("3_lantern_wraith")
+sprite_scale = 1.65
 light_color = Color(0.501961, 0.376471, 1.0, 1.0)
 drops = Array[ExtResource("4_drop_entry")]([SubResource("P11_lantern_bench"), SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18"), SubResource("Drop35_eclipse_claw"), SubResource("Drop35_eclipse_bandana"), SubResource("Drop35_eclipse_garb"), SubResource("Drop35_eclipse_pants"), SubResource("Drop35_eclipse_shoes"), SubResource("Drop35_nightfang_claw"), SubResource("Drop35_nightfang_shoes"), SubResource("Drop35_dawnwing_cape"), SubResource("Drop35_dragonhide_gloves")])
 respawn_ticks = Vector2i(1800, 2400)

@@ -1,0 +1,126 @@
+{
+  "source": "art/source/mon_emberreach.png",
+  "region": [
+    772,
+    712,
+    1536,
+    1024
+  ],
+  "grid": {
+    "rows": [
+      27,
+      106,
+      198,
+      312
+    ],
+    "cols": [
+      0,
+      192,
+      383,
+      573,
+      764
+    ]
+  },
+  "scale": 1.0,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/molten_king",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "move1",
+      "move2"
+    ],
+    [
+      "move3",
+      "windup",
+      "strike",
+      "special"
+    ],
+    [
+      "hurt",
+      "enraged",
+      "defeated1",
+      "defeated2"
+    ]
+  ],
+  "sets": {
+    "molten_king": {
+      "frames": {
+        "idle1": "molten_king:idle1",
+        "idle2": "molten_king:idle2",
+        "move1": "molten_king:move1",
+        "move2": "molten_king:move2",
+        "move3": "molten_king:move3",
+        "windup": "molten_king:windup",
+        "strike": "molten_king:strike",
+        "special": "molten_king:special",
+        "hurt": "molten_king:hurt",
+        "enraged": "molten_king:enraged",
+        "defeated1": "molten_king:defeated1",
+        "defeated2": "molten_king:defeated2"
+      },
+      "anchor": "mass",
+      "baseline": "bottom",
+      "out": "assets/sprites/monsters/molten_king.png",
+      "sprite_frames": "assets/animations/molten_king.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "move1",
+            "move2",
+            "move3",
+            "move2"
+          ],
+          "fps": 6
+        },
+        "attack": {
+          "frames": [
+            "windup",
+            "strike",
+            "special"
+          ],
+          "fps": 3,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated1",
+            "defeated2"
+          ],
+          "fps": 2,
+          "loop": false
+        }
+      }
+    }
+  },
+  "overrides": {
+    "windup": {
+      "blank_label": 16
+    },
+    "strike": {
+      "blank_label": 16
+    },
+    "special": {
+      "blank_label": 16
+    },
+    "enraged": {
+      "blank_label": 16
+    }
+  }
+}

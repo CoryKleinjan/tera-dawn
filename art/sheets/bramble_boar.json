@@ -1,0 +1,98 @@
+{
+  "source": "art/source/mon_greenbough.png",
+  "region": [
+    0,
+    254,
+    764,
+    502
+  ],
+  "grid": {
+    "rows": [
+      27,
+      137,
+      248
+    ],
+    "cols": [
+      0,
+      193,
+      384,
+      575,
+      764
+    ]
+  },
+  "scale": 0.525,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/bramble_boar",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "walk1",
+      "walk2"
+    ],
+    [
+      "walk3",
+      "attack",
+      "hurt",
+      "defeated"
+    ]
+  ],
+  "sets": {
+    "bramble_boar": {
+      "frames": {
+        "idle1": "bramble_boar:idle1",
+        "idle2": "bramble_boar:idle2",
+        "walk1": "bramble_boar:walk1",
+        "walk2": "bramble_boar:walk2",
+        "walk3": "bramble_boar:walk3",
+        "attack": "bramble_boar:attack",
+        "hurt": "bramble_boar:hurt",
+        "defeated": "bramble_boar:defeated"
+      },
+      "anchor": "mass",
+      "baseline": "bottom",
+      "out": "assets/sprites/monsters/bramble_boar.png",
+      "sprite_frames": "assets/animations/bramble_boar.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "walk1",
+            "walk2",
+            "walk3",
+            "walk2"
+          ],
+          "fps": 7
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      }
+    }
+  }
+}

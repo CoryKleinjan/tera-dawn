@@ -1,8 +1,15 @@
 class_name UiSkin
 extends RefCounted
-## The game's UI art (assets/sprites/ui/, cut from art/source/ui.png) as Godot styles,
-## plus drawing helpers for things the overlay draws every frame (name tags, HP bars,
-## speech bubbles). All sizes are in the 960x540 canvas.
+## The game's UI art as Godot styles, plus drawing helpers for things the overlay and the
+## windows draw every frame (name tags, HP bars, speech bubbles, rows, markers). All sizes
+## are in the 960x540 canvas.
+##
+## The art is cut from the UI sheets in art/source/ into assets/sprites/ui/: ui.png and
+## ui_windows.png straight into it, and one folder per newer sheet, named like the textures
+## here ("hud/quests_button"): hud/ (HUD buttons, quest markers, minimap), menu/ (Esc menu
+## and settings controls), dialogue/ (dialogue, shop, trade, quests, banners), social/
+## (buddies, party, guild, chat, invitations), book/ (Monster Book and achievements).
+## world_map.png is the painted world map.
 
 const DIR := "res://assets/sprites/ui/"
 ## Where each bar frame's empty groove is, in texels: Rect2(x, y, w, h).
@@ -11,7 +18,18 @@ const GROOVES := {
 	"mp_frame": Rect2(37, 12, 116, 18),
 	"exp_frame": Rect2(27, 7, 131, 13),
 	"monster_hp_1": Rect2(38, 9, 83, 17),
+	"social/party_hp_frame": Rect2(20, 11, 145, 9),
 }
+## The quest marker over an NPC for each QuestLog-like state TDNpc.quest_marker() returns.
+const QUEST_MARKERS := {"!": "hud/quest_available", "?": "hud/quest_ready", "...": "hud/quest_in_progress"}
+## The speech bubble's body and tail inside hud/speech_bubble, in texels.
+const SPEECH_BODY := Rect2(0, 0, 144, 82)
+const SPEECH_TAIL := Rect2(36, 76, 34, 23)
+## Where the tail's tip is inside SPEECH_TAIL.
+const SPEECH_TIP := Vector2(6, 23)
+## Brighter and darker tints for hover and pressed states of art that has only one state.
+const LIT := Color(1.25, 1.18, 1.05)
+const PRESSED := Color(0.85, 0.8, 0.75)
 
 static var _cache := {}
 
@@ -37,8 +55,134 @@ static func box(name: String, margin_x: float, margin_y: float, pad_x := 0.0, pa
 		_cache[key] = sb
 	return _cache[key]
 
+## A nine-patch drawn `scale` screen pixels per texel, so chunky art fits a thin row
+## (a row 26 pixels tall from art 60 texels tall) without squeezing its corners.
+static func draw_box(ci: CanvasItem, sb: StyleBox, r: Rect2, scale := 1.0) -> void:
+	if is_equal_approx(scale, 1.0):
+		sb.draw(ci.get_canvas_item(), r)
+		return
+	ci.draw_set_transform(r.position, 0.0, Vector2(scale, scale))
+	sb.draw(ci.get_canvas_item(), Rect2(Vector2.ZERO, r.size / scale))
+	ci.draw_set_transform(Vector2.ZERO)
+
+## A nine-patch whose middle `keep` texels (a sun on the top trim, diamonds halfway down the
+## sides) keep their size: the art is cut into quarters and each quarter stretches only
+## between its own corner and the middle. `margins` are the left, top, right and bottom
+## borders in texels; `keep` is how much of the middle stays put across and down.
+static func draw_ornate(ci: CanvasItem, name: String, r: Rect2, margins: Vector4, keep: Vector2, scale := 1.0) -> void:
+	var half := r.size / 2.0
+	for q in 4:
+		var right := q % 2 == 1
+		var bottom := q >= 2
+		var at := r.position + Vector2(half.x if right else 0.0, half.y if bottom else 0.0)
+		draw_box(ci, _quarter_box(name, right, bottom, margins, keep), Rect2(at, half), scale)
+
+static func _quarter_box(name: String, right: bool, bottom: bool, margins: Vector4, keep: Vector2) -> StyleBoxTexture:
+	var key := "quarter:%s:%s:%s:%s:%s" % [name, right, bottom, margins, keep]
+	if not _cache.has(key):
+		var t := tex(name)
+		var half := t.get_size() / 2.0
+		var sb := StyleBoxTexture.new()
+		sb.texture = t
+		sb.region_rect = Rect2(half.x if right else 0.0, half.y if bottom else 0.0, half.x, half.y)
+		sb.texture_margin_left = keep.x / 2.0 if right else margins.x
+		sb.texture_margin_right = margins.z if right else keep.x / 2.0
+		sb.texture_margin_top = keep.y / 2.0 if bottom else margins.y
+		sb.texture_margin_bottom = margins.w if bottom else keep.y / 2.0
+		_cache[key] = sb
+	return _cache[key]
+
+## The smallest size `draw_ornate` can draw at `scale` without squeezing the art.
+static func ornate_min_size(margins: Vector4, keep: Vector2, scale := 1.0) -> Vector2:
+	return Vector2(margins.x + margins.z + keep.x, margins.y + margins.w + keep.y) * scale
+
+## A texture with its shape kept, centred in `r`.
+static func draw_icon(ci: CanvasItem, name: String, r: Rect2, modulate := Color.WHITE) -> void:
+	var t := tex(name)
+	var k := minf(r.size.x / t.get_width(), r.size.y / t.get_height())
+	var s := t.get_size() * k
+	ci.draw_texture_rect(t, Rect2(r.get_center() - s / 2.0, s), false, modulate)
+
 static func panel() -> StyleBoxTexture:
 	return box("menu_panel", 16, 16, 28, 24)
+
+## The thin gold line with a sun in the middle, as wide as its container (under a heading).
+static func divider() -> Control:
+	var line := Control.new()
+	var scale := 0.6
+	line.custom_minimum_size = Vector2(0, tex(DIVIDER[0]).get_height() * scale)
+	line.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	line.draw.connect(func() -> void: draw_panel(line, DIVIDER, Rect2(Vector2.ZERO, line.size), scale))
+	return line
+
+## A PanelContainer drawn with one of the ornate panels above, `pad` pixels inside it.
+static func use_panel(card: PanelContainer, panel_art: Array, pad: Vector4, scale := 1.0) -> void:
+	var sb := StyleBoxEmpty.new()
+	sb.content_margin_left = pad.x
+	sb.content_margin_top = pad.y
+	sb.content_margin_right = pad.z
+	sb.content_margin_bottom = pad.w
+	card.add_theme_stylebox_override("panel", sb)
+	card.draw.connect(func() -> void: draw_panel(card, panel_art, Rect2(Vector2.ZERO, card.size), scale))
+
+## A list row (dialogue options, quests); `lit` when hovered or chosen.
+static func option_row(lit: bool) -> StyleBoxTexture:
+	return box("dialogue/option_row_hover" if lit else "dialogue/option_row", 22, 14)
+
+## A shop line: a square item niche on the left, then the name and price.
+static func shop_row(lit: bool) -> StyleBoxTexture:
+	var sb := box("dialogue/shop_row_hover" if lit else "dialogue/shop_row", 18, 16)
+	sb.texture_margin_left = 64
+	return sb
+
+## A pill with a Dawnshard on its left and room for the amount after it.
+static func shard_counter() -> StyleBoxTexture:
+	var sb := box("dialogue/shard_counter", 20, 14)
+	sb.texture_margin_left = 60
+	return sb
+
+## A small pill for picking an amount (×1, ×10, ×100); `on` is the one picked.
+static func amount_chip(on: bool) -> StyleBoxTexture:
+	return box("dialogue/amount_chip_on" if on else "dialogue/amount_chip", 20, 14)
+
+## A buddy or guild member: a round niche on the left (for their online dot), then text.
+static func friend_row() -> StyleBoxTexture:
+	var sb := box("social/friend_row", 18, 16)
+	sb.texture_margin_left = 70
+	return sb
+
+## An achievement: a round badge niche on the left; the done one glows with a star in it.
+static func achievement_row(done: bool) -> StyleBoxTexture:
+	var sb := box("book/achievement_row_done" if done else "book/achievement_row", 20, 18)
+	sb.texture_margin_left = 84
+	return sb
+
+## The open Monster Book (book/book_pages): drawn as two pages of any widths with the
+## spine between them, see `draw_book`.
+const BOOK := ["book/book_pages", Vector4(40, 44, 40, 48), Vector2(30, 0)]
+
+## Panels with an ornament in the middle of an edge (draw them with draw_panel):
+## [texture, margins (left, top, right, bottom), middle kept (across, down)], in texels.
+const ARCH_PANEL := ["menu/menu_panel", Vector4(30, 56, 30, 28), Vector2(70, 34)]
+const TRACKER_PANEL := ["dialogue/tracker_panel", Vector4(16, 32, 16, 12), Vector2(44, 0)]
+const GUILD_TAG := ["social/guild_tag", Vector4(46, 28, 46, 18), Vector2(56, 0)]
+const SHOP_SIGN := ["social/shop_sign", Vector4(40, 50, 40, 20), Vector2(50, 0)]
+const DIVIDER := ["menu/divider", Vector4(12, 0, 12, 0), Vector2(40, 0)]
+const DIALOGUE_FRAME := ["dialogue/dialogue_frame", Vector4(160, 52, 30, 34), Vector2(100, 50)]
+
+## Draws one of the panels above.
+static func draw_panel(ci: CanvasItem, panel_art: Array, r: Rect2, scale := 1.0) -> void:
+	draw_ornate(ci, panel_art[0], r, panel_art[1], panel_art[2], scale)
+
+## The open book with its left page `left_w` pixels wide; the right page takes the rest of `r`.
+static func draw_book(ci: CanvasItem, r: Rect2, left_w: float, scale := 1.0) -> void:
+	var name: String = BOOK[0]
+	var spine := Vector2(BOOK[2].x, 0)
+	draw_box(ci, _quarter_box(name, false, false, BOOK[1], spine), Rect2(r.position, Vector2(left_w, r.size.y / 2.0)), scale)
+	draw_box(ci, _quarter_box(name, false, true, BOOK[1], spine), Rect2(r.position + Vector2(0, r.size.y / 2.0), Vector2(left_w, r.size.y / 2.0)), scale)
+	var right := Rect2(r.position.x + left_w, r.position.y, r.size.x - left_w, r.size.y / 2.0)
+	draw_box(ci, _quarter_box(name, true, false, BOOK[1], spine), right, scale)
+	draw_box(ci, _quarter_box(name, true, true, BOOK[1], spine), Rect2(right.position + Vector2(0, right.size.y), right.size), scale)
 
 ## The game windows' frame (inventory, equipment, character): gold trim and a title strip.
 static func window_frame() -> StyleBoxTexture:
@@ -58,39 +202,160 @@ static func style_button(b: Button) -> void:
 	for state in ["font_color", "font_hover_color", "font_focus_color", "font_pressed_color"]:
 		b.add_theme_color_override(state, Palette.INK)
 
-## A tab button (toggle_mode, in a ButtonGroup) lit like the game windows' tabs when chosen.
-static func style_tab(b: Button) -> void:
-	for state in ["normal", "hover"]:
-		b.add_theme_stylebox_override(state, box("window_tab_off", 30, 14))
+## A tab button (toggle_mode, in a ButtonGroup) from the settings sheet: muted purple, raised
+## gold when chosen. `icon` (a texture name) shows left of the text.
+static func style_tab(b: Button, icon := "") -> void:
+	var off := box("menu/tab_off", 22, 12, 18, 4)
+	var on := box("menu/tab_on", 22, 12, 18, 4)
+	b.add_theme_stylebox_override("normal", off)
+	b.add_theme_stylebox_override("hover", _tinted(off, LIT))
 	b.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
-	b.add_theme_stylebox_override("pressed", box("window_tab_on", 30, 14))
-	b.add_theme_stylebox_override("hover_pressed", box("window_tab_on", 30, 14))
+	b.add_theme_stylebox_override("pressed", on)
+	b.add_theme_stylebox_override("hover_pressed", on)
 	for state in ["font_color", "font_hover_color", "font_focus_color"]:
 		b.add_theme_color_override(state, Palette.MIST)
 	b.add_theme_color_override("font_pressed_color", Palette.INK)
 	b.add_theme_color_override("font_hover_pressed_color", Palette.INK)
+	if icon != "":
+		b.icon = tex(icon)
+		b.expand_icon = false
+		b.add_theme_constant_override("icon_max_width", 22)
 
-## A small dark framed button, like a tooltip (the keys on the Controls tab).
-static func style_slot_button(b: Button) -> void:
-	var normal := box("tooltip_frame", 12, 12, 10, 4)
-	var lit := normal.duplicate() as StyleBoxTexture
-	lit.modulate_color = Color(1.3, 1.2, 1.0)
-	b.add_theme_stylebox_override("normal", normal)
-	for state in ["hover", "focus", "pressed"]:
-		b.add_theme_stylebox_override(state, lit)
-	for state in ["font_color", "font_focus_color", "font_pressed_color"]:
-		b.add_theme_color_override(state, Palette.MIST)
-	b.add_theme_color_override("font_hover_color", Palette.SUN)
+## A key on the Controls tab: a keycap, glowing gold while it waits for a key, dim and
+## dashed when nothing is bound (see `set_keycap`).
+static func style_key_button(b: Button) -> void:
+	for state in ["font_color", "font_focus_color", "font_pressed_color", "font_hover_color"]:
+		b.add_theme_color_override(state, Palette.INK)
+	b.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+	set_keycap(b, "keycap")
 
-## A big gold menu button in the title font (title screen, game menu, settings).
+## Shows a key button as "keycap", "keycap_listening" or "keycap_empty".
+static func set_keycap(b: Button, art: String) -> void:
+	var sb := box("menu/" + art, 14, 14, 10, 2)
+	if art == "keycap_listening":  # its glow is cut away; this art is bigger, so keep the same insets
+		sb = box("menu/" + art, 20, 20, 10, 2)
+	b.add_theme_stylebox_override("normal", sb)
+	b.add_theme_stylebox_override("hover", _tinted(sb, LIT))
+	b.add_theme_stylebox_override("pressed", _tinted(sb, PRESSED))
+	b.add_theme_color_override("font_color", Palette.MIST if art == "keycap_empty" else Palette.INK)
+
+## A text field drawn with a field art (the chat line); `margins` are its borders in texels
+## (left, top, right, bottom), drawn `scale` pixels per texel.
+static func style_field(f: LineEdit, art: String, margins: Vector4, scale := 1.0) -> void:
+	var img := tex(art).get_image()
+	img.resize(roundi(img.get_width() * scale), roundi(img.get_height() * scale), Image.INTERPOLATE_LANCZOS)
+	var sb := StyleBoxTexture.new()
+	sb.texture = ImageTexture.create_from_image(img)
+	sb.texture_margin_left = margins.x * scale
+	sb.texture_margin_top = margins.y * scale
+	sb.texture_margin_right = margins.z * scale
+	sb.texture_margin_bottom = margins.w * scale
+	sb.content_margin_left = margins.x * scale + 2
+	sb.content_margin_right = margins.z * scale
+	f.add_theme_stylebox_override("normal", sb)
+	f.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+	f.add_theme_color_override("font_color", Palette.MIST)
+	f.add_theme_color_override("font_placeholder_color", Color(Palette.MUTED, 0.8))
+	f.add_theme_color_override("caret_color", Palette.SUN)
+
+## A slider: a dark groove, a glowing gold fill and the sun knob.
+static func style_slider(s: HSlider) -> void:
+	var track := box("menu/slider_track", 10, 0)
+	track.content_margin_top = 4
+	track.content_margin_bottom = 4
+	var fill := box("menu/slider_fill", 10, 0)
+	s.add_theme_stylebox_override("slider", track)
+	s.add_theme_stylebox_override("grabber_area", fill)
+	s.add_theme_stylebox_override("grabber_area_highlight", _tinted(fill, LIT))
+	s.add_theme_icon_override("grabber", sized("menu/slider_knob", 24))
+	s.add_theme_icon_override("grabber_highlight", sized("menu/slider_knob_hover", 26))
+	s.add_theme_icon_override("grabber_disabled", sized("menu/slider_knob", 24))
+
+## A check box with the settings sheet's box and gold tick; `icon` shows before the text.
+static func style_check_box(c: CheckBox, icon := "") -> void:
+	# the ticked box's art is drawn a little bigger (the tick pokes out of it)
+	c.add_theme_icon_override("unchecked", sized("menu/checkbox_off", 20))
+	c.add_theme_icon_override("checked", sized("menu/checkbox_on", 24))
+	c.add_theme_icon_override("unchecked_disabled", sized("menu/checkbox_off", 20))
+	c.add_theme_icon_override("checked_disabled", sized("menu/checkbox_on", 24))
+	c.add_theme_constant_override("h_separation", 8)
+	for state in ["normal", "hover", "pressed", "hover_pressed", "focus"]:
+		c.add_theme_stylebox_override(state, StyleBoxEmpty.new())
+	if icon != "":
+		c.icon = sized(icon, 20)
+
+## A dropdown: the long field with the down arrow, and its list in the dark gold-edged panel.
+static func style_option_button(o: OptionButton) -> void:
+	var field := box("menu/dropdown", 14, 12, 14, 4)
+	field.texture_margin_right = 30
+	field.content_margin_right = 34
+	o.add_theme_stylebox_override("normal", field)
+	o.add_theme_stylebox_override("hover", _tinted(field, LIT))
+	o.add_theme_stylebox_override("pressed", _tinted(field, PRESSED))
+	o.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+	o.add_theme_stylebox_override("disabled", _tinted(field, Color(0.7, 0.65, 0.75, 0.6)))
+	o.add_theme_icon_override("arrow", ImageTexture.new())  # the art has its own arrow
+	for state in ["font_color", "font_hover_color", "font_focus_color", "font_pressed_color"]:
+		o.add_theme_color_override(state, Palette.MIST)
+	o.add_theme_color_override("font_disabled_color", Color(Palette.MIST, 0.45))
+	var popup := o.get_popup()
+	popup.add_theme_stylebox_override("panel", box("menu/dropdown_list", 14, 10, 10, 8))
+	var hover := box("dialogue/option_row_hover", 22, 14)
+	popup.add_theme_stylebox_override("hover", hover)
+	popup.add_theme_color_override("font_color", Palette.MIST)
+	popup.add_theme_color_override("font_hover_color", Palette.INK)
+	popup.add_theme_font_override("font", Game.ui_font)
+	popup.add_theme_font_size_override("font_size", 15)
+	popup.add_theme_constant_override("v_separation", 8)
+	for icon in ["radio_checked", "radio_unchecked", "checked", "unchecked"]:
+		popup.add_theme_icon_override(icon, ImageTexture.new())
+
+## A scroll container's vertical bar: a thin groove with a gold handle.
+static func style_scroll(sc: ScrollContainer) -> void:
+	var bar := sc.get_v_scroll_bar()
+	var track := box("menu/scroll_track", 0, 8)
+	track.content_margin_left = 6
+	track.content_margin_right = 6
+	var grab := box("menu/scroll_grabber", 0, 10)
+	bar.add_theme_stylebox_override("scroll", track)
+	bar.add_theme_stylebox_override("scroll_focus", track)
+	bar.add_theme_stylebox_override("grabber", grab)
+	bar.add_theme_stylebox_override("grabber_highlight", _tinted(grab, LIT))
+	bar.add_theme_stylebox_override("grabber_pressed", _tinted(grab, PRESSED))
+	bar.custom_minimum_size.x = 14
+
+## A UI texture shrunk to `height` pixels tall (for button and theme icons, which draw at their own size).
+static func sized(name: String, height: int) -> Texture2D:
+	var key := "scaled:%s:%d" % [name, height]
+	if not _cache.has(key):
+		var img := tex(name).get_image()
+		img.resize(maxi(1, roundi(img.get_width() * float(height) / img.get_height())), height, Image.INTERPOLATE_LANCZOS)
+		_cache[key] = ImageTexture.create_from_image(img)
+	return _cache[key]
+
+## A big gold menu button in the title font (title screen, game menu, settings), from the
+## settings sheet's wide button: it brightens on hover and darkens when pressed.
 static func menu_button(text: String, min_size := Vector2(150, 48), font_size := 22) -> Button:
 	var b := Button.new()
 	b.text = text
 	b.custom_minimum_size = min_size
 	b.add_theme_font_override("font", Game.num_font)
 	b.add_theme_font_size_override("font_size", font_size)
-	style_button(b)
+	var normal := box("menu/wide_button", 20, 14, 18, 6)
+	b.add_theme_stylebox_override("normal", normal)
+	b.add_theme_stylebox_override("hover", _tinted(normal, LIT))
+	b.add_theme_stylebox_override("focus", _tinted(normal, LIT))
+	b.add_theme_stylebox_override("pressed", _tinted(normal, PRESSED))
+	b.add_theme_stylebox_override("disabled", _tinted(normal, Color(0.7, 0.65, 0.7, 0.7)))
+	for state in ["font_color", "font_hover_color", "font_focus_color", "font_pressed_color"]:
+		b.add_theme_color_override(state, Palette.INK)
 	return b
+
+## A copy of a style drawn in another tint.
+static func _tinted(sb: StyleBoxTexture, tint: Color) -> StyleBoxTexture:
+	var out := sb.duplicate() as StyleBoxTexture
+	out.modulate_color = tint
+	return out
 
 static func use_cursor() -> void:
 	Input.set_custom_mouse_cursor(tex("cursor"), Input.CURSOR_ARROW, Vector2(14, 6))
@@ -101,17 +366,20 @@ static func draw_bar(ci: CanvasItem, frame: String, fill: String, pos: Vector2, 
 	ci.draw_texture_rect(ft, Rect2(pos, ft.get_size() * scale), false)
 	var g: Rect2 = GROOVES[frame]
 	var groove := Rect2(pos + g.position * scale, g.size * scale)
-	var w := groove.size.x * clampf(fraction, 0.0, 1.0)
-	if w >= 2.0:
-		var fill_box := box(fill, 10, 0)
-		var r := Rect2(groove.position, Vector2(maxf(w, 20.0 * scale), groove.size.y))
-		if w < 20.0 * scale:  # too short for the rounded ends: squeeze the whole pill
-			ci.draw_texture_rect(tex(fill), Rect2(groove.position, Vector2(w, groove.size.y)), false)
-		else:
-			fill_box.draw(ci.get_canvas_item(), r)
+	draw_bar_fill(ci, fill, groove, fraction, scale)
 	if text != "":
 		DrawUtil.text(ci, Game.ui_font, groove.position + Vector2(groove.size.x / 2.0, groove.size.y - 4.0 * scale),
 			text, int(12 * scale), Palette.MIST, 0, 4, Color(0.1, 0.05, 0.15, 0.9))
+
+## A bar's fill pill across the left `fraction` of `groove`.
+static func draw_bar_fill(ci: CanvasItem, fill: String, groove: Rect2, fraction: float, scale := 1.0) -> void:
+	var w := groove.size.x * clampf(fraction, 0.0, 1.0)
+	if w < 2.0:
+		return
+	if w < 20.0 * scale:  # too short for the rounded ends: squeeze the whole pill
+		ci.draw_texture_rect(tex(fill), Rect2(groove.position, Vector2(w, groove.size.y)), false)
+	else:
+		box(fill, 10, 0).draw(ci.get_canvas_item(), Rect2(groove.position, Vector2(w, groove.size.y)))
 
 ## The plaque under a character's feet with their name.
 static func draw_name_tag(ci: CanvasItem, top_center: Vector2, label: String, col: Color, badge := Color.TRANSPARENT) -> void:
@@ -122,26 +390,68 @@ static func draw_name_tag(ci: CanvasItem, top_center: Vector2, label: String, co
 	if badge.a > 0.0:
 		DrawUtil.text(ci, Game.num_font, top_center + Vector2(0, 32), "BOSS", 12, badge, 0, 4, Palette.NIGHT)
 
+## The guild plaque under a member's name: cream with green trim, in dark ink.
+static func draw_guild_tag(ci: CanvasItem, top_center: Vector2, label: String) -> void:
+	var scale := 0.4
+	var w := maxf(DrawUtil.text_width(Game.ui_font, label, 11) + 34, ornate_min_size(GUILD_TAG[1], GUILD_TAG[2], scale).x)
+	draw_panel(ci, GUILD_TAG, Rect2(top_center.x - w / 2.0, top_center.y - 3, w, 24), scale)
+	DrawUtil.text(ci, Game.ui_font, top_center + Vector2(0, 13), label, 11, Palette.INK)
+
+## A wooden sign hanging over a player who keeps a shop, with the shop's name on it.
+static func draw_shop_sign(ci: CanvasItem, bottom_center: Vector2, label: String) -> void:
+	var scale := 0.4
+	var size := Vector2(DrawUtil.text_width(Game.ui_font, label, 12) + 44, tex(SHOP_SIGN[0]).get_height() * scale)
+	size.x = maxf(size.x, ornate_min_size(SHOP_SIGN[1], SHOP_SIGN[2], scale).x)
+	draw_panel(ci, SHOP_SIGN, Rect2(bottom_center - Vector2(size.x / 2.0, size.y), size), scale)
+	DrawUtil.text(ci, Game.ui_font, bottom_center + Vector2(0, -size.y * 0.3), label, 12, Palette.SUN, 0, 4, Palette.NIGHT)
+
+## The marker over an NPC: "!" a quest for you, "?" one to hand in, "..." one in progress.
+static func draw_quest_marker(ci: CanvasItem, bottom_center: Vector2, kind: String, height := 34.0) -> void:
+	var art: String = QUEST_MARKERS.get(kind, "")
+	if art == "":
+		return
+	var t := tex(art)
+	var s := t.get_size() * height / t.get_height()
+	ci.draw_texture_rect(t, Rect2(bottom_center - Vector2(s.x / 2.0, s.y), s), false)
+
+## A party member's slim HP bar, `width` pixels wide with its top left at `pos`. The art has
+## a fill painted in, so the groove is emptied before the real fill goes on.
+static func draw_party_hp(ci: CanvasItem, pos: Vector2, width: float, fraction: float) -> void:
+	var frame := "social/party_hp_frame"
+	var scale := width / tex(frame).get_width()
+	var g: Rect2 = GROOVES[frame]
+	ci.draw_texture_rect(tex(frame), Rect2(pos, tex(frame).get_size() * scale), false)
+	var groove := Rect2(pos + g.position * scale, g.size * scale)
+	DrawUtil.round_rect(ci, groove.grow(0.5), groove.size.y / 2.0, Palette.NIGHT)
+	draw_bar_fill(ci, "fill_red", groove, fraction)
+
 ## A monster HP bar centred above it.
 static func draw_monster_hp(ci: CanvasItem, bottom_center: Vector2, width: float, fraction: float) -> void:
 	var scale := width / 134.0
 	var h := 38.0 * scale
 	draw_bar(ci, "monster_hp_1", "monster_hp_2", bottom_center - Vector2(width / 2.0, h), fraction, scale)
 
-## A speech bubble whose tail points down at `bottom_center`.
+## A cream speech bubble whose tail points down at `bottom_center`, in dark ink.
 static func draw_speech(ci: CanvasItem, bottom_center: Vector2, text: String) -> void:
 	var font := Game.ui_font
 	var size := 12
 	var max_w := 240.0
+	var k := 0.5  # screen pixels per texel of the bubble art
 	var lines := wrap_text(font, text, size, max_w)
 	var w := 0.0
 	for l in lines:
 		w = maxf(w, DrawUtil.text_width(font, l, size))
-	var r := Rect2(bottom_center.x - w / 2.0 - 16, bottom_center.y - lines.size() * 16 - 28, w + 32, lines.size() * 16 + 20)
-	panel().draw(ci.get_canvas_item(), r)
-	ci.draw_colored_polygon(PackedVector2Array([bottom_center + Vector2(-7, -9), bottom_center + Vector2(7, -9), bottom_center]), Palette.GOLD_TRIM)
+	var tail := Rect2(bottom_center - SPEECH_TIP * k, SPEECH_TAIL.size * k)
+	var bottom := tail.position.y + (SPEECH_BODY.end.y - SPEECH_TAIL.position.y) * k
+	var h := lines.size() * 16 + 14
+	# the tail sits a little left of centre in the art; keep the bubble centred on the speaker
+	var r := Rect2(bottom_center.x - w / 2.0 - 12, bottom - h, w + 24, h)
+	var body := box("hud/speech_bubble", 20, 20)
+	body.region_rect = SPEECH_BODY
+	draw_box(ci, body, r, k)
+	ci.draw_texture_rect_region(tex("hud/speech_bubble"), tail, SPEECH_TAIL)
 	for i in lines.size():
-		DrawUtil.text(ci, font, Vector2(bottom_center.x, r.position.y + 24 + i * 16), lines[i], size, Palette.MIST)
+		DrawUtil.text(ci, font, Vector2(bottom_center.x, r.position.y + 19 + i * 16), lines[i], size, Palette.INK)
 
 ## A small floating hint ("↑ Talk", "↑ to Ember Hollow").
 static func draw_hint(ci: CanvasItem, bottom_center: Vector2, text: String) -> void:

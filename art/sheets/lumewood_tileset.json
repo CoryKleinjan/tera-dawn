@@ -1,0 +1,102 @@
+{
+  "source": "art/source/lumewood_area.png",
+  "region": [
+    0,
+    43,
+    997,
+    1024
+  ],
+  "scale": 0.35,
+  "label_band": 0.2,
+  "out_dir": "assets/sprites/tiles/lumewood",
+  "cells": [
+    [
+      "ground_left",
+      "ground_middle",
+      "ground_right",
+      "platform_small",
+      "platform_medium",
+      "platform_large"
+    ],
+    [
+      "edge_grass",
+      "tall_grass",
+      "tree_large",
+      "tree_small",
+      "bush_large",
+      "bush_small"
+    ],
+    [
+      "rock_large",
+      "rock_small",
+      "stump",
+      "flowers",
+      "signature_plant",
+      "fence"
+    ],
+    [
+      "signpost",
+      "lantern_unlit",
+      "lantern_lit",
+      "building_large",
+      "building_small",
+      "signature_prop"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      221,
+      455,
+      664,
+      981
+    ],
+    "cols": [
+      [
+        0,
+        150,
+        306,
+        466,
+        643,
+        813,
+        997
+      ],
+      [
+        0,
+        151,
+        306,
+        514,
+        641,
+        826,
+        997
+      ],
+      [
+        0,
+        166,
+        328,
+        479,
+        647,
+        810,
+        997
+      ],
+      [
+        0,
+        130,
+        275,
+        420,
+        646,
+        826,
+        997
+      ]
+    ]
+  },
+  "overrides": {
+    "lantern_lit": {
+      "fix": null,
+      "key": [
+        0.15,
+        0.4
+      ]
+    }
+  }
+}

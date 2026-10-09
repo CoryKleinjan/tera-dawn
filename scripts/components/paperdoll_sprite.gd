@@ -1,12 +1,14 @@
 class_name PaperdollSprite
 extends Node3D
 ## The dressed hero in the 3D stage. It goes on the hero's AnimatedSprite3D (SpriteRig's
-## body): it recolours and hides parts of him with the paperdoll shader, and keeps the
-## stand-ins (LookShapes) and layered art in step with whatever frame he is showing.
+## body): it recolours his skin and clothes with the paperdoll shader, and keeps the layers
+## (hair, face, gear) and the hat and weapon pictures (LookShapes) in step with whatever
+## frame he is showing.
 ## SpriteRig.dress() makes one; give it a look with `set_look`.
 
 const SHADER := preload("res://shaders/paperdoll_sprite.gdshader")
-## How far stand-ins and layers sit in front of (or behind) the body, in 3D units.
+## How far pictures sit in front of (or behind) the body, in 3D units. Layers are spread
+## within that, in drawing order.
 const DEPTH := 0.01
 
 var body: AnimatedSprite3D
@@ -43,11 +45,14 @@ func set_look(new_look: Dictionary) -> void:
 		TDStage.style_sprite(s, _texel)
 		add_child(s)
 		_overlays.append(s)
-	for l in doll.layers:
+	var count := doll.layers.size()
+	for i in count:
+		var l := doll.layers[i]
 		var a := AnimatedSprite3D.new()
 		a.sprite_frames = l.frames
 		TDStage.style_sprite(a, _texel)
-		a.position.z = -DEPTH if l.behind else DEPTH * 0.5
+		# back to front: behind ones under the body (z < 0), the rest between it and the pictures
+		a.position.z = DEPTH * (0.8 * (i + 1) / (count + 1) - (1.0 if l.behind else 0.0))
 		add_child(a)
 		_layers.append(a)
 	sync()
@@ -74,13 +79,14 @@ func sync() -> void:
 		s.scale = Vector3(at["scale"], at["scale"], 1.0)
 		s.flip_h = mirror
 		s.modulate = body.modulate
-	for a in _layers:
+	for i in _layers.size():
+		var a := _layers[i]
 		if a.sprite_frames.has_animation(body.animation):
 			a.animation = body.animation
 			a.frame = mini(body.frame, a.sprite_frames.get_frame_count(body.animation) - 1)
 		a.offset = body.offset
 		a.flip_h = mirror
-		a.modulate = body.modulate
+		a.modulate = body.modulate * doll.layers[i].tint
 
 ## A point of the frame (pixels from its top-left) in the body's own space, whose origin
 ## is the bottom middle of the frame.

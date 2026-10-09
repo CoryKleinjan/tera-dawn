@@ -1,0 +1,45 @@
+{
+  "source": "art/source/items_parts_1.png",
+  "out_dir": "assets/sprites/items",
+  "scale": 0.3,
+  "alpha": "hard",
+  "keep": "largest",
+  "fix": "glow_backdrop",
+  "cells": [
+    [
+      "tide_droplet",
+      "spore_sac",
+      "gull_feather",
+      "crab_claw",
+      "clawbeard_pearl"
+    ],
+    [
+      "thorn_tuft",
+      "green_leaf",
+      "bramble_tusk",
+      "hard_acorn",
+      "bark_cap"
+    ],
+    [
+      "grove_spark",
+      "heartwood",
+      "glow_spore",
+      "lume_dust",
+      "star_wing"
+    ],
+    [
+      "prism_jelly",
+      "crystal_chunk",
+      "spell_horn",
+      "arcane_core",
+      "slag_lump"
+    ],
+    [
+      "pup_tooth",
+      "ash_wing",
+      "imp_arrowhead",
+      "magma_plate",
+      "forge_rivet"
+    ]
+  ]
+}

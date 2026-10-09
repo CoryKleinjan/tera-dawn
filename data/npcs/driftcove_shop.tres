@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="NpcDef" load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/npcs/shopkeeper.png" id="2_shopkeeper"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/npc_driftcove_shop.tres" id="2_sprite"]
 [ext_resource type="Resource" path="res://data/shops/shipwright.tres" id="3_shipwright"]
 
 [resource]
@@ -9,9 +9,7 @@ script = ExtResource("1_npc_def")
 id = &"driftcove_shop"
 display_name = "Outfitter Sable"
 title = "Equipment"
-texture = ExtResource("2_shopkeeper")
-sprite_scale = 0.95
-tint = Color(0.623529, 0.878431, 0.941176, 1.0)
+sprite_frames = ExtResource("2_sprite")
 greeting = "Gear for the Pirate path. Take a look."
 lines = PackedStringArray("Everything here's made in town.", "Check the level and stat each piece asks for.")
 shop = ExtResource("3_shipwright")

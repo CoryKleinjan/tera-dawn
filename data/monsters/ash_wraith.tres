@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="Resource" path="res://data/projectiles/mob_shadow.tres" id="2_mob_shadow"]
-[ext_resource type="Texture2D" path="res://assets/sprites/monsters/cinder_imp.png" id="3_cinder_imp"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/ash_wraith.tres" id="3_ash_wraith"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="5_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/ash_veil.tres" id="6_ash_veil"]
@@ -179,7 +179,6 @@ boss = false
 flying = true
 hover_height = 60.0
 shot = ExtResource("2_mob_shadow")
-texture = ExtResource("3_cinder_imp")
+sprite_frames = ExtResource("3_ash_wraith")
 sprite_scale = 1.0
-tint = Color(0.564706, 0.564706, 0.564706, 1.0)
 drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Drop35_dawnbreaker_claymore"), SubResource("Drop35_emberforge_aegis"), SubResource("Drop35_emberplate_helm"), SubResource("Drop35_emberplate_greaves"), SubResource("Drop35_emberplate_sabatons"), SubResource("Drop35_sunforged_helm"), SubResource("Drop35_sunforged_cuirass"), SubResource("Drop35_sunforged_greaves"), SubResource("Drop35_sunforged_sabatons")])

@@ -1,0 +1,64 @@
+{
+  "source": "art/source/paperdoll_hair.png",
+  "grid": {
+    "rows": [
+      0,
+      175,
+      367,
+      559,
+      740,
+      924,
+      1086
+    ],
+    "cols": [
+      0,
+      361,
+      723,
+      1086,
+      1448
+    ]
+  },
+  "scale": 1.0,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/paperdoll/hair",
+  "cells": [
+    [
+      "tousled_front",
+      "tousled_back",
+      "tousled_behind",
+      "tousled_hat"
+    ],
+    [
+      "long_front",
+      "long_back",
+      "long_behind",
+      "long_hat"
+    ],
+    [
+      "ponytail_front",
+      "ponytail_back",
+      "ponytail_behind",
+      "ponytail_hat"
+    ],
+    [
+      "twin_tails_front",
+      "twin_tails_back",
+      "twin_tails_behind",
+      "twin_tails_hat"
+    ],
+    [
+      "bun_front",
+      "bun_back",
+      "bun_behind",
+      "bun_hat"
+    ],
+    [
+      "crest_front",
+      "crest_back",
+      "crest_behind",
+      "crest_hat"
+    ]
+  ]
+}
