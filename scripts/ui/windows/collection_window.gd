@@ -10,8 +10,19 @@ const TABS := ["Monster Book", "Achievements"]
 const COLS := 6
 const ROWS := 5
 const CELL := 46.0
-const GRID := Vector2(PAD, 96)
-const DETAIL_X := PAD + COLS * CELL + 12
+## The open book (UiSkin.draw_book) the Monster Book is drawn in: its top left, how many
+## pixels per texel, and its page margins in pixels at that scale.
+const BOOK_AT := Vector2(PAD - 6, 92)
+const BOOK_SCALE := 0.5
+const PAGE_MARGIN := Vector2(20, 22)
+const GRID := BOOK_AT + PAGE_MARGIN + Vector2(2, 2)
+## The left page holds the grid; the right page (from DETAIL_X) a monster's details.
+const LEFT_PAGE_W := PAGE_MARGIN.x + COLS * CELL + 12
+const DETAIL_X := BOOK_AT.x + LEFT_PAGE_W + 12
+const DETAIL_W := 176.0
+const BOOK_H := PAGE_MARGIN.y + ROWS * CELL + 28
+## Card pips under each cell, and how big.
+const PIP := 8.0
 
 var tab := 0
 var page := 0
@@ -21,7 +32,7 @@ var _monsters: Array[MonsterDef] = []
 var _homes := {}
 
 func _init() -> void:
-	super("Collection", Vector2(DETAIL_X + 196, GRID.y + ROWS * CELL + 52))
+	super("Collection", Vector2(DETAIL_X + DETAIL_W + PAGE_MARGIN.x + BOOK_AT.x, BOOK_AT.y + BOOK_H + 40))
 
 func _ready() -> void:
 	super()
@@ -53,8 +64,12 @@ func cell_rect(i: int) -> Rect2:
 	return Rect2(GRID.x + (i % COLS) * CELL, GRID.y + (i / COLS) * CELL, CELL - 4, CELL - 4)
 
 func _arrow_rect(dir: int) -> Rect2:
-	var y := GRID.y + ROWS * CELL + 6
+	var y := BOOK_AT.y + BOOK_H + 6
 	return Rect2(GRID.x + (0.0 if dir < 0 else COLS * CELL - 34), y, 30, 24)
+
+## The whole open book.
+func _book_rect() -> Rect2:
+	return Rect2(BOOK_AT, Vector2(size.x - BOOK_AT.x * 2, BOOK_H))
 
 func _draw_body() -> void:
 	draw_tabs(TABS, tab)
@@ -68,23 +83,26 @@ func _draw_book() -> void:
 	draw_label(Vector2(PAD, 84), "Book Lv. %d  ·  %d/%d pages  ·  %d cards" % [book.level(), book.completed(), _monsters.size(), book.total_cards()], Palette.SUN, 12)
 	if book.level() > 1:
 		draw_label(Vector2(size.x - PAD, 84), "+%d to every stat" % (book.level() - 1), Palette.GOOD, 11, -1)
+	UiSkin.draw_book(self, _book_rect(), LEFT_PAGE_W, BOOK_SCALE)
 	for i in COLS * ROWS:
 		var k := page * COLS * ROWS + i
 		if k >= _monsters.size():
 			break
 		var m := _monsters[k]
 		var r := cell_rect(i)
-		var hot := r.has_point(_hover) or m == selected
-		draw_row(r, hot)
-		var tex := monster_icon(m)
-		if tex:
-			var seen := book.seen(m)
-			draw_texture_rect(tex, fit(tex, r.grow(-5)), false, m.tint if seen else Color(0.05, 0.03, 0.1, 0.8))
+		var done := book.complete(m)
+		UiSkin.draw_icon(self, "book/page_cell_complete" if done else "book/page_cell", r.grow(2.0 if done else 0.0))
+		if r.has_point(_hover) or m == selected:
+			draw_hilite(r.grow(-2), 4)
+		if book.seen(m):
+			var tex := monster_icon(m)
+			if tex:
+				draw_texture_rect(tex, fit(tex, r.grow(-6)), false, m.tint)
+		else:
+			UiSkin.draw_icon(self, "book/unseen_monster", r.grow(-7), Color(1, 1, 1, 0.8))
 		for c in CardDef.SET:
-			var dot := Vector2(r.position.x + 7 + c * 7, r.end.y - 4)
-			draw_circle(dot, 2.2, Palette.CARD if c < book.cards(m) else Color(0.3, 0.25, 0.4))
-		if book.complete(m):
-			draw_rect(r, Palette.SUN, false, 1.5)
+			var at := Vector2(r.get_center().x + (c - (CardDef.SET - 1) / 2.0) * (PIP - 1), r.end.y - 4)
+			UiSkin.draw_icon(self, "book/pip_on" if c < book.cards(m) else "book/pip_off", Rect2(at - Vector2(PIP, PIP) / 2.0, Vector2(PIP, PIP)))
 	if pages() > 1:
 		for d in [-1, 1]:
 			var step: int = d
@@ -92,38 +110,40 @@ func _draw_book() -> void:
 		draw_label(Vector2(GRID.x + COLS * CELL / 2.0, _arrow_rect(1).position.y + 17), "Page %d/%d" % [page + 1, pages()], Palette.MUTED, 11, 0)
 	_draw_detail()
 
+## Dark ink on the book's paper. align: -1 right, 0 center, 1 left.
+func _ink(at: Vector2, s: String, col := Palette.INK, sz := 11, align := 1) -> void:
+	DrawUtil.text(self, Game.ui_font, at, s, sz, col, align)
+
 func _draw_detail() -> void:
-	var r := Rect2(DETAIL_X, GRID.y, size.x - DETAIL_X - PAD, ROWS * CELL - 4)
-	draw_row(r)
 	var m := selected
+	var x := DETAIL_X
+	var y := GRID.y + 14
 	if m == null:
-		draw_hint(r.position + Vector2(10, 22), "Pick a monster.")
+		_ink(Vector2(x, y), "Pick a monster.", Palette.INK_SOFT, 12)
 		return
 	var book := Game.me.book
-	var x := r.position.x + 10
-	var y := r.position.y + 20
 	if not book.seen(m):
-		draw_label(Vector2(x, y), "???", Palette.SUN, 14)
-		draw_hint(Vector2(x, y + 20), "Defeat one to fill in this page.")
+		_ink(Vector2(x, y), "???", Palette.INK, 14)
+		_ink(Vector2(x, y + 20), "Defeat one to fill in this page.", Palette.INK_SOFT, 11)
 		return
-	draw_label(Vector2(x, y), m.display_name, Palette.SUN, 14)
+	DrawUtil.text(self, Game.num_font, Vector2(x, y), m.display_name, 15, Palette.INK, 1)
 	y += 18
-	draw_label(Vector2(x, y), "Lv. %d%s" % [m.level, "  ·  BOSS" if m.boss else ""], Palette.WARN if m.boss else Palette.MUTED, 11)
+	_ink(Vector2(x, y), "Lv. %d%s" % [m.level, "  ·  BOSS" if m.boss else ""], Palette.EMBER if m.boss else Palette.INK_SOFT)
 	y += 18
 	for line in ["HP %d  ·  EXP %d" % [m.max_hp, m.exp_reward], "Defeated: %d" % book.kills(m), "Cards: %d/%d" % [book.cards(m), CardDef.SET]]:
-		draw_label(Vector2(x, y), line, Palette.MIST, 11)
+		_ink(Vector2(x, y), line)
 		y += 16
 	y += 4
-	draw_label(Vector2(x, y), "Found in", Palette.MUTED, 11)
+	_ink(Vector2(x, y), "Found in", Palette.INK_SOFT)
 	y += 15
 	for name in (_homes.get(m.id, []) as Array).slice(0, 3):
-		draw_label(Vector2(x + 6, y), name, Palette.MIST, 11)
+		_ink(Vector2(x + 6, y), name)
 		y += 14
 	y += 4
-	draw_label(Vector2(x, y), "Drops", Palette.MUTED, 11)
+	_ink(Vector2(x, y), "Drops", Palette.INK_SOFT)
 	y += 15
 	if book.cards(m) == 0:
-		draw_hint(Vector2(x + 6, y), "Find a card to reveal")
+		_ink(Vector2(x + 6, y), "Find a card to reveal", Palette.INK_SOFT)
 		return
 	var shown := 0
 	for d in m.drops:
@@ -131,26 +151,32 @@ func _draw_detail() -> void:
 			continue
 		if d.item.icon:
 			draw_texture_rect(d.item.icon, fit(d.item.icon, Rect2(x + 4, y - 11, 14, 14)), false)
-		draw_label(Vector2(x + 22, y), d.item.display_name, Palette.MIST, 11)
+		_ink(Vector2(x + 22, y), d.item.display_name)
 		y += 15
 		shown += 1
 
 func _draw_achievements() -> void:
 	var got := Game.me.achievements.size()
-	draw_label(Vector2(PAD, 84), "%d of %d reached" % [got, Achievements.LIST.size()], Palette.SUN, 12)
+	UiSkin.draw_icon(self, "book/badge", Rect2(PAD, 68, 20, 20))
+	draw_label(Vector2(PAD + 24, 84), "%d of %d reached" % [got, Achievements.LIST.size()], Palette.SUN, 12)
 	var per := ceili(Achievements.LIST.size() / 2.0)
 	var w := (size.x - PAD * 2 - 8) / 2.0
-	var row_h := (size.y - GRID.y - 16) / per
+	var top := BOOK_AT.y + 4
+	var row_h := (size.y - top - 16) / per
 	for i in Achievements.LIST.size():
 		var a: Dictionary = Achievements.LIST[i]
-		var r := Rect2(PAD + (i / per) * (w + 8), GRID.y + (i % per) * row_h, w, row_h - 2)
+		var r := Rect2(PAD + (i / per) * (w + 8), top + (i % per) * row_h, w, row_h - 2)
 		var done := Game.me.achievements.has(a["id"])
-		draw_row(r, done)
-		draw_circle(r.position + Vector2(9, r.size.y / 2.0), 4, Palette.SUN if done else Color(0.4, 0.35, 0.5))
-		draw_label(r.position + Vector2(18, 13), a["title"], Palette.SUN if done else Palette.MIST, 11)
+		var k := r.size.y / UiSkin.tex("book/achievement_row").get_height()
+		UiSkin.draw_box(self, UiSkin.achievement_row(done), r, k)
+		if not done:
+			var niche := Rect2(r.position + Vector2(10, 12) * k, Vector2(62, 56) * k)
+			UiSkin.draw_icon(self, "book/badge_locked", niche, Color(1, 1, 1, 0.7))
+		var x := r.position.x + 86 * k
+		draw_label(Vector2(x, r.end.y - r.size.y / 2.0 + 4), a["title"], Palette.SUN if done else Palette.MIST, 11)
 		var have := mini(Achievements.measure(Game.me, a["kind"]), a["goal"])
 		var tail := "Done" if done else "%d/%d" % [have, a["goal"]]
-		draw_label(Vector2(r.end.x - 6, r.position.y + 13), tail, Palette.GOOD if done else Palette.MUTED, 10, -1)
+		draw_label(Vector2(r.end.x - 8, r.end.y - r.size.y / 2.0 + 4), tail, Palette.GOOD if done else Palette.MUTED, 10, -1)
 		if r.has_point(_hover):
 			draw_label(Vector2(size.x - PAD, 84), a["text"], Palette.MIST, 11, -1)
 

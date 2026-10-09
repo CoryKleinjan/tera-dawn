@@ -229,6 +229,6 @@ portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_11"), SubRes
 spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18"), SubResource("Resource_19")])
 props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_20"), SubResource("Resource_21"), SubResource("Resource_22"), SubResource("Resource_23"), SubResource("Resource_24"), SubResource("Resource_25"), SubResource("Resource_26"), SubResource("Resource_27")])
 region = &"lumewood"
-world_pos = Vector2(543.0, 133.0)
+world_pos = Vector2(531.0, 148.0)
 return_map = &"lumewood"
 level_text = "Lv. 18-22"

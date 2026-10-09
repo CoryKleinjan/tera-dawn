@@ -1,0 +1,98 @@
+{
+  "source": "art/source/mon_ring_road.png",
+  "region": [
+    0,
+    688,
+    764,
+    1024
+  ],
+  "grid": {
+    "rows": [
+      30,
+      161,
+      336
+    ],
+    "cols": [
+      0,
+      193,
+      385,
+      575,
+      764
+    ]
+  },
+  "scale": 0.625,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/ash_wraith",
+  "cells": [
+    [
+      "hover1",
+      "hover2",
+      "fly1",
+      "fly2"
+    ],
+    [
+      "fly3",
+      "attack",
+      "hurt",
+      "defeated"
+    ]
+  ],
+  "sets": {
+    "ash_wraith": {
+      "frames": {
+        "hover1": "ash_wraith:hover1",
+        "hover2": "ash_wraith:hover2",
+        "fly1": "ash_wraith:fly1",
+        "fly2": "ash_wraith:fly2",
+        "fly3": "ash_wraith:fly3",
+        "attack": "ash_wraith:attack",
+        "hurt": "ash_wraith:hurt",
+        "defeated": "ash_wraith:defeated"
+      },
+      "anchor": "mass",
+      "baseline": "cell",
+      "out": "assets/sprites/monsters/ash_wraith.png",
+      "sprite_frames": "assets/animations/ash_wraith.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "hover1",
+            "hover2"
+          ],
+          "fps": 5
+        },
+        "move": {
+          "frames": [
+            "fly1",
+            "fly2",
+            "fly3",
+            "fly2"
+          ],
+          "fps": 8
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      }
+    }
+  }
+}

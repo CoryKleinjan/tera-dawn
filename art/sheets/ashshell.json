@@ -1,0 +1,98 @@
+{
+  "source": "art/source/monsters_m1.png",
+  "region": [
+    771,
+    330,
+    1536,
+    618
+  ],
+  "grid": {
+    "rows": [
+      1,
+      143,
+      288
+    ],
+    "cols": [
+      0,
+      190,
+      382,
+      573,
+      765
+    ]
+  },
+  "scale": 0.547,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/ashshell",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "walk1",
+      "walk2"
+    ],
+    [
+      "walk3",
+      "attack",
+      "hurt",
+      "defeated"
+    ]
+  ],
+  "sets": {
+    "ashshell": {
+      "frames": {
+        "idle1": "ashshell:idle1",
+        "idle2": "ashshell:idle2",
+        "walk1": "ashshell:walk1",
+        "walk2": "ashshell:walk2",
+        "walk3": "ashshell:walk3",
+        "attack": "ashshell:attack",
+        "hurt": "ashshell:hurt",
+        "defeated": "ashshell:defeated"
+      },
+      "anchor": "mass",
+      "baseline": "bottom",
+      "out": "assets/sprites/monsters/ashshell.png",
+      "sprite_frames": "assets/animations/ashshell.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "walk1",
+            "walk2",
+            "walk3",
+            "walk2"
+          ],
+          "fps": 7
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      }
+    }
+  }
+}

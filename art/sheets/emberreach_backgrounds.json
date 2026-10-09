@@ -1,0 +1,110 @@
+{
+  "source": "art/source/emberreach_area.png",
+  "region": [
+    1040,
+    43,
+    1536,
+    1024
+  ],
+  "scale": 0.5,
+  "label_band": 0.3,
+  "inset": 5,
+  "out_dir": "assets/sprites/backgrounds/emberreach",
+  "cells": [
+    [
+      "far"
+    ],
+    [
+      ""
+    ],
+    [
+      "mid"
+    ],
+    [
+      ""
+    ],
+    [
+      "near"
+    ],
+    [
+      ""
+    ],
+    [
+      "clouds"
+    ],
+    [
+      ""
+    ],
+    [
+      "landmark"
+    ],
+    [
+      ""
+    ],
+    [
+      "sky_body"
+    ],
+    [
+      ""
+    ],
+    [
+      "motes"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      139,
+      145,
+      290,
+      294,
+      437,
+      442,
+      559,
+      564,
+      731,
+      735,
+      856,
+      860,
+      981
+    ],
+    "cols": [
+      0,
+      496
+    ]
+  },
+  "overrides": {
+    "far": {
+      "fix": "painted_sky",
+      "extend_bottom": 160
+    },
+    "mid": {
+      "fix": "painted_sky",
+      "extend_bottom": 160
+    },
+    "near": {
+      "fix": "painted_sky",
+      "extend_bottom": 160
+    },
+    "landmark": {
+      "fix": "painted_sky",
+      "extend_bottom": 160
+    },
+    "clouds": {
+      "keep": "split"
+    },
+    "sky_body": {
+      "fix": "sky_body",
+      "alpha": "soft",
+      "crop": [
+        205,
+        12,
+        290,
+        97
+      ]
+    },
+    "motes": {
+      "alpha": "soft"
+    }
+  }
+}

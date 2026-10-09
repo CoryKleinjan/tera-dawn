@@ -1,0 +1,101 @@
+{
+  "source": "art/source/lanternfall_area.png",
+  "region": [
+    0,
+    43,
+    1032,
+    1024
+  ],
+  "scale": 0.35,
+  "label_band": 0.2,
+  "out_dir": "assets/sprites/tiles/lanternfall",
+  "cells": [
+    [
+      "ground_left",
+      "ground_middle",
+      "ground_right",
+      "platform_small",
+      "platform_medium",
+      "platform_large"
+    ],
+    [
+      "edge_grass",
+      "tall_grass",
+      "tree_large",
+      "tree_small",
+      "bush_large",
+      "bush_small"
+    ],
+    [
+      "rock_large",
+      "rock_small",
+      "stump",
+      "flowers",
+      "signature_plant",
+      "fence"
+    ],
+    [
+      "signpost",
+      "lantern_unlit",
+      "lantern_lit",
+      "building_large",
+      "building_small",
+      "signature_prop"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      222,
+      455,
+      662,
+      981
+    ],
+    "cols": [
+      [
+        0,
+        152,
+        309,
+        471,
+        643,
+        812,
+        1032
+      ],
+      [
+        0,
+        152,
+        308,
+        515,
+        644,
+        837,
+        1032
+      ],
+      [
+        0,
+        170,
+        334,
+        475,
+        648,
+        837,
+        1032
+      ],
+      [
+        0,
+        134,
+        281,
+        429,
+        679,
+        856,
+        1032
+      ]
+    ]
+  },
+  "overrides": {
+    "lantern_lit": {
+      "fix": "glow_backdrop"
+    },
+    "signature_plant": {
+      "blank_top": 46
+    }
+  }
+}

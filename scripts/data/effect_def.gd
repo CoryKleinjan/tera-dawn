@@ -31,6 +31,9 @@ extends Resource
 @export_group("Caption")
 ## Big text above the effect, drawn by the overlay (e.g. "LEVEL UP!").
 @export var caption := ""
+## Art drawn instead of the caption's text (the "LEVEL UP!" ribbon), this many pixels wide.
+@export var caption_art: Texture2D
+@export var caption_art_width := 200.0
 
 func duration() -> int:
 	if lifetime > 0:

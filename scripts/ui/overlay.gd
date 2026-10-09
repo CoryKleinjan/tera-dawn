@@ -5,9 +5,28 @@ extends Control
 ## Things that follow the 3D stage are projected to the screen here so they stay crisp
 ## (no depth of field or fog on text).
 
+## The game menu's cog in the top left corner (a button TDHud puts there); the map name sits right of it.
+const MENU_BUTTON := Rect2(8, 6, 34, 34)
+## The minimap's top left; it's drawn at its frame art's own size (see minimap_rect).
+const MINIMAP_AT := Vector2(TDWorld.VIEW.x - 189, 4)
+## Inside hud/minimap_frame, in texels: where the map is drawn.
+const MINIMAP_INNER := Rect2(18, 28, 147, 58)
+## Minimap marks: texture, and its height in pixels.
+const MINIMAP_PLAYER := ["hud/minimap_dot_1", 9.0]
+const MINIMAP_NPC := ["hud/minimap_dot_2", 6.0]
+const MINIMAP_OTHER := ["hud/minimap_dot_3", 6.0]
+const MINIMAP_PORTAL := ["hud/minimap_portal", 10.0]
+## The quest tracker's panel: its width, and how many quests it lists.
+const TRACKER_W := 176.0
+const TRACKER_QUESTS := 4
+
 var world: TDWorld
 ## The name tags of the last frame drawn, where they ended up (for tests).
 var last_tags: TDNameTags
+
+## Where the minimap and its frame are on screen.
+static func minimap_rect() -> Rect2:
+	return Rect2(MINIMAP_AT, UiSkin.tex("hud/minimap_frame").get_size())
 
 func _process(_delta: float) -> void:
 	queue_redraw()
@@ -19,14 +38,16 @@ func _draw() -> void:
 	var v := TDWorld.VIEW
 	_draw_world_text()
 	# map name
-	UiSkin.draw_hint(self, Vector2(16 + (DrawUtil.text_width(font, world.map.display_name, 13) + 26) / 2.0, 36), world.map.display_name)
+	var name_x := MENU_BUTTON.end.x + 6 if world.started else 16.0
+	UiSkin.draw_hint(self, Vector2(name_x + (DrawUtil.text_width(font, world.map.display_name, 13) + 26) / 2.0, 34), world.map.display_name)
+	var mm := minimap_rect()
 	if world.started:
-		_draw_minimap(Rect2(v.x - 182, 10, 172, 50))
+		_draw_minimap(mm)
 	var boss_shown := world.started and _draw_boss_bar(Vector2(v.x / 2, 6))
 	if world.started:
 		_draw_party(Vector2(16, 56))
-		_draw_quest_tracker(Vector2(v.x - 178, 82))
-		_draw_buffs(Vector2(v.x - 192, 12))
+		_draw_quest_tracker(Vector2(v.x - TRACKER_W - 8, mm.end.y + 2))
+		_draw_buffs(Vector2(mm.position.x - 6, 10))
 	# message log, newest at the bottom, above the status bar and left of the quickslots
 	var log_right := v.x - 12 - (world.hud.quickslots.size.x + 6 if world.started else 0.0)
 	var n := world.log_lines.size()
@@ -46,20 +67,25 @@ func _draw() -> void:
 		DrawUtil.text(self, font, Vector2(v.x / 2, v.y / 2 + 22), "Returning to %s…" % Content.map(world.map.return_town()).display_name, 16, Palette.MIST)
 
 func _draw_minimap(mm: Rect2) -> void:
-	UiSkin.box("name_tag", 12, 8).draw(get_canvas_item(), mm)
-	var inner := mm.grow(-8)
+	draw_texture_rect(UiSkin.tex("hud/minimap_frame"), mm, false)
+	var inner := Rect2(mm.position + MINIMAP_INNER.position, MINIMAP_INNER.size)
 	var sx := inner.size.x / float(world.map.width)
 	var sy := inner.size.y / float(world.map.height)
 	for pl in world.platforms:
 		draw_rect(Rect2(inner.position.x + pl.x * sx, inner.position.y + pl.y * sy, maxf(2, pl.w * sx), 2), Color(1, 0.95, 0.9, 0.5))
 	for p in world.map.portals:
-		draw_rect(Rect2(inner.position.x + p.x * sx - 2, inner.position.y + world.platforms[p.platform].y * sy - 6, 4, 6), Color("aa8cff"))
+		_minimap_mark(MINIMAP_PORTAL, inner.position + Vector2(p.x * sx, world.platforms[p.platform].y * sy - 5))
 	for n in world.npcs():
-		draw_circle(inner.position + Vector2(n.position.x * sx, n.position.y * sy - 3), 2, Palette.GOOD)
+		_minimap_mark(MINIMAP_NPC, inner.position + Vector2(n.position.x * sx, n.position.y * sy - 3))
 	for a in world.avatars.values():
-		draw_circle(inner.position + Vector2(a.position.x * sx, a.position.y * sy - 3), 2.5, Palette.INFO)
+		_minimap_mark(MINIMAP_OTHER, inner.position + Vector2(a.position.x * sx, a.position.y * sy - 3))
 	var pp := world.player.position
-	draw_circle(inner.position + Vector2(pp.x * sx, pp.y * sy - 3), 3, Palette.SUN)
+	_minimap_mark(MINIMAP_PLAYER, inner.position + Vector2(pp.x * sx, pp.y * sy - 4))
+
+## One of the minimap's marks ([texture, height]) centred on `at`.
+func _minimap_mark(mark: Array, at: Vector2) -> void:
+	var h: float = mark[1]
+	UiSkin.draw_icon(self, mark[0], Rect2(at - Vector2(h, h) / 2.0, Vector2(h, h)))
 
 ## The first living boss on the map, at the top centre where it can't run off the screen.
 ## Returns whether there was one.
@@ -77,12 +103,13 @@ func _draw_buffs(right_top: Vector2) -> void:
 		var s: SkillDef = Content.skills.get(id)
 		if s == null:
 			continue
-		x -= 30
-		var r := Rect2(x, right_top.y, 26, 26)
+		x -= 32
+		var r := Rect2(x, right_top.y, 30, 30)
+		UiSkin.draw_icon(self, "hud/buff_frame", r)
 		if s.icon:
-			draw_texture_rect(s.icon, r, false)
+			draw_texture_rect(s.icon, TDWindow.fit(s.icon, r.grow(-7)), false)
 		var left := ceili(Game.me.buffs[id][1] / 60.0)
-		DrawUtil.text(self, Game.num_font, Vector2(r.get_center().x, r.end.y + 11), str(left), 11,
+		DrawUtil.text(self, Game.num_font, Vector2(r.get_center().x, r.end.y + 9), str(left), 11,
 			Palette.MIST if left > 10 else Palette.WARN, 0, 4, Palette.NIGHT)
 
 ## Your party under the map name: each other member's name and HP.
@@ -93,36 +120,40 @@ func _draw_party(at: Vector2) -> void:
 		if m[0] == Game.me.name:
 			continue
 		var here: bool = StringName(m[5]) == world.map.id
-		DrawUtil.text(self, Game.ui_font, Vector2(at.x, y + 10), "%s  Lv.%d" % [m[0], m[2]], 11, Palette.MIST if here else Color(Palette.MIST, 0.55), 1, 3, Palette.NIGHT)
-		var bar := Rect2(at.x, y + 14, 90, 5)
-		draw_rect(bar, Color(Palette.NIGHT, 0.6))
-		draw_rect(Rect2(bar.position, Vector2(bar.size.x * float(m[4]), bar.size.y)), Palette.HP)
-		y += 24
+		var x := at.x
+		if m[0] == party["leader"]:
+			UiSkin.draw_icon(self, "social/leader_star", Rect2(x, y, 12, 12))
+			x += 14
+		DrawUtil.text(self, Game.ui_font, Vector2(x, y + 10), "%s  Lv.%d" % [m[0], m[2]], 11, Palette.MIST if here else Color(Palette.MIST, 0.55), 1, 3, Palette.NIGHT)
+		UiSkin.draw_party_hp(self, Vector2(at.x - 2, y + 12), 100, float(m[4]))
+		y += 30
 
-## Quests in progress and how far along they are, under the minimap.
+## Quests in progress and how far along they are, on a panel under the minimap.
 func _draw_quest_tracker(at: Vector2) -> void:
 	var me := Game.me
-	var y := at.y
+	var lines := []  # [text, indent, colour, size]
 	var shown := 0
 	for id in me.quests.active:
 		var q: QuestDef = Content.quests.get(id)
-		if q == null or shown >= 4:
+		if q == null or shown >= TRACKER_QUESTS:
 			continue
 		shown += 1
-		var ready := me.quests.is_ready(q, me)
-		DrawUtil.text(self, Game.ui_font, Vector2(at.x, y), q.title, 12, Palette.SUN, 1, 4, Palette.NIGHT)
-		y += 15
-		if ready:
-			DrawUtil.text(self, Game.ui_font, Vector2(at.x + 8, y), "Ready to hand in", 11, Palette.GOOD, 1, 4, Palette.NIGHT)
-			y += 15
+		lines.append([q.title, 0, Palette.SUN, 12])
+		if me.quests.is_ready(q, me):
+			lines.append(["Ready to hand in", 8, Palette.GOOD, 11])
 		else:
 			for i in q.objectives.size():
 				var o := q.objectives[i]
 				var have := me.quests.progress(q, i, me)
-				DrawUtil.text(self, Game.ui_font, Vector2(at.x + 8, y), "%s %d/%d" % [o.describe(), have, o.count], 11,
-					Palette.GOOD if have >= o.count else Palette.MIST, 1, 4, Palette.NIGHT)
-				y += 15
-		y += 4
+				lines.append(["%s %d/%d" % [o.describe(), have, o.count], 8, Palette.GOOD if have >= o.count else Palette.MIST, 11])
+	if lines.is_empty():
+		return
+	var h := 26.0 + lines.size() * 15
+	UiSkin.draw_panel(self, UiSkin.TRACKER_PANEL, Rect2(at, Vector2(TRACKER_W, h)), 0.6)
+	var y := at.y + 26
+	for l in lines:
+		DrawUtil.text(self, Game.ui_font, Vector2(at.x + 12 + l[1], y), l[0], l[3], l[2], 1, 4, Palette.NIGHT)
+		y += 15
 
 ## A pet's name under it (into `tags`) and what it's saying over it.
 func _draw_pet(c: TDCompanion, z: float, shown: bool, tags: TDNameTags) -> void:
@@ -151,15 +182,15 @@ func _draw_world_text() -> void:
 			var feet := st.screen(a.position, TDStage.Z_OTHER_PLAYER)
 			a.draw_tag(tags, feet)
 			if a.shop_title != "":
-				UiSkin.draw_hint(self, feet + Vector2(0, -84), "Shop: " + a.shop_title)
+				UiSkin.draw_shop_sign(self, feet + Vector2(0, -80), a.shop_title)
 			elif a.speech_t > 0:
 				UiSkin.draw_speech(self, feet + Vector2(0, -84), a.speech)
 	var p := world.player
 	if world.started and not p.fainted():
 		var feet := st.screen(p.position, TDPlayer.Z)
-		tags.add_name(feet + Vector2(0, 4), Game.me.name, Palette.SUN, Game.me.guild, Palette.GUILD, true)
+		tags.add_name(feet + Vector2(0, 4), Game.me.name, Palette.SUN, Game.me.guild, true)
 		if world.hud.selling():
-			UiSkin.draw_hint(self, feet + Vector2(0, -84), "Shop: " + world.hud.windows["player_shop"].shop_title)
+			UiSkin.draw_shop_sign(self, feet + Vector2(0, -80), world.hud.windows["player_shop"].shop_title)
 		elif p.speech_t > 0:
 			UiSkin.draw_speech(self, feet + Vector2(0, -84), p.speech)
 	_draw_pet(world.player.companion, TDPlayer.Z, world.started and not p.fainted(), tags)

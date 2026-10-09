@@ -1,0 +1,58 @@
+{
+  "source": "art/source/items_accessories.png",
+  "out_dir": "assets/sprites/items",
+  "scale": 0.275,
+  "alpha": "hard",
+  "keep": "largest",
+  "fix": "glow_backdrop",
+  "cells": [
+    [
+      "acorn_pendant",
+      "lantern_pendant",
+      "copper_ring",
+      "tide_ring",
+      "sunstone_ring"
+    ],
+    [
+      "shell_earrings",
+      "lume_earrings",
+      "ember_earrings",
+      "canvas_gloves",
+      "brigand_gloves"
+    ],
+    [
+      "dragonhide_gloves",
+      "traveler_cape",
+      "starlit_cape",
+      "dawnwing_cape",
+      "patched_trousers"
+    ],
+    [
+      "ranger_breeches",
+      "sandals",
+      "hiking_boots",
+      "windstep_boots",
+      "lead_bullet"
+    ]
+  ],
+  "overrides": {
+    "acorn_pendant": {
+      "fix": "glow_backdrop_holes"
+    },
+    "tide_ring": {
+      "fix": "glow_backdrop_holes"
+    },
+    "sunstone_ring": {
+      "fix": "glow_backdrop_holes"
+    },
+    "shell_earrings": {
+      "keep": "all"
+    },
+    "lume_earrings": {
+      "keep": "all"
+    },
+    "ember_earrings": {
+      "keep": "all"
+    }
+  }
+}

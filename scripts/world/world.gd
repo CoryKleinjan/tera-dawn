@@ -130,7 +130,7 @@ func show_achievement(id: String) -> void:
 	var a := Achievements.find(id)
 	if a.is_empty():
 		return
-	show_banner("Achievement: %s" % a["title"])
+	hud.banners.achievement(a)
 	add_log("Achievement unlocked: %s (%s)" % [a["title"], a["text"]], Palette.SUN)
 	SteamService.unlock_achievement(a["steam"])
 

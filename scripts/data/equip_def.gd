@@ -38,7 +38,8 @@ const SLOT_NAMES := ["Weapon", "Hat", "Top", "Bottom", "Shoes", "Gloves", "Cape"
 ## exists, the piece is shown on the hero with stand-ins (see Paperdoll).
 @export var worn_frames: SpriteFrames
 ## The stand-in drawn for hats and weapons (LookShapes): "cap", "helm", "hood", "bandana",
-## "wizard", "tricorn" for hats. Empty: hats use "cap", weapons their `weapon_kind`.
+## "wizard", "tricorn" for hats. Empty: hats use "cap", weapons their `weapon_kind`. For
+## shields, the shape of the shield art: "kite", or empty for a round one (Paperdoll.SHIELDS).
 @export var look_shape: StringName
 ## The colour it's shown in. Fully transparent takes the main colour of its icon.
 @export var look_color := Color(0, 0, 0, 0)

@@ -1,0 +1,98 @@
+{
+  "source": "art/source/mon_ring_road.png",
+  "region": [
+    772,
+    688,
+    1536,
+    1024
+  ],
+  "grid": {
+    "rows": [
+      31,
+      161,
+      336
+    ],
+    "cols": [
+      0,
+      192,
+      381,
+      572,
+      764
+    ]
+  },
+  "scale": 0.531,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/dusk_stalker",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "walk1",
+      "walk2"
+    ],
+    [
+      "walk3",
+      "attack",
+      "hurt",
+      "defeated"
+    ]
+  ],
+  "sets": {
+    "dusk_stalker": {
+      "frames": {
+        "idle1": "dusk_stalker:idle1",
+        "idle2": "dusk_stalker:idle2",
+        "walk1": "dusk_stalker:walk1",
+        "walk2": "dusk_stalker:walk2",
+        "walk3": "dusk_stalker:walk3",
+        "attack": "dusk_stalker:attack",
+        "hurt": "dusk_stalker:hurt",
+        "defeated": "dusk_stalker:defeated"
+      },
+      "anchor": "mass",
+      "baseline": "bottom",
+      "out": "assets/sprites/monsters/dusk_stalker.png",
+      "sprite_frames": "assets/animations/dusk_stalker.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "walk1",
+            "walk2",
+            "walk3",
+            "walk2"
+          ],
+          "fps": 7
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      }
+    }
+  }
+}

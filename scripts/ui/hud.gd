@@ -41,6 +41,10 @@ var invites: TDInvites
 var prompt: TDPrompt
 ## The invisible button over the minimap that opens the world map.
 var minimap_button: Button
+## Quest complete, job advance and achievement pop-ups.
+var banners: TDBanners
+## The game menu's button in the top left corner (shown while playing).
+var menu_cog: TextureButton
 
 func _ready() -> void:
 	layer = 10
@@ -72,24 +76,50 @@ func _ready() -> void:
 	add_child(invites)
 	prompt = TDPrompt.new()
 	add_child(prompt)
+	banners = TDBanners.new()
+	banners.world = world
+	banners.set_anchors_preset(Control.PRESET_FULL_RECT)
+	banners.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(banners)
 	# clicking the minimap opens the world map
 	var minimap := Button.new()
 	minimap_button = minimap
 	minimap.flat = true
 	minimap.focus_mode = Control.FOCUS_NONE
-	minimap.position = Vector2(TDWorld.VIEW.x - 182, 10)
-	minimap.size = Vector2(172, 50)
+	minimap.position = TDOverlay.minimap_rect().position
+	minimap.size = TDOverlay.minimap_rect().size
 	minimap.tooltip_text = "World map (W)"
 	minimap.pressed.connect(func() -> void:
 		if world.started:
 			toggle_window("worldmap"))
 	add_child(minimap)
 	move_child(minimap, window_layer.get_index())
+	_build_menu_button()
 	_build_title()
 
+## The cog in the top left corner: the game menu, for playing with the mouse (Esc does the same).
+func _build_menu_button() -> void:
+	var cog := TextureButton.new()
+	cog.texture_normal = UiSkin.tex("hud/menu_button")
+	cog.ignore_texture_size = true
+	cog.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
+	cog.focus_mode = Control.FOCUS_NONE
+	cog.position = TDOverlay.MENU_BUTTON.position
+	cog.size = TDOverlay.MENU_BUTTON.size
+	cog.tooltip_text = "Menu (Esc)"
+	cog.mouse_entered.connect(func() -> void: cog.self_modulate = UiSkin.LIT)
+	cog.mouse_exited.connect(func() -> void: cog.self_modulate = Color.WHITE)
+	cog.pressed.connect(func() -> void:
+		if world.started and not title.visible:
+			show_title(true))
+	add_child(cog)
+	move_child(cog, window_layer.get_index())
+	menu_cog = cog
+
 func _process(_delta: float) -> void:
+	menu_cog.visible = world != null and world.started
 	# the minimap (drawn by the overlay) only shows once there's a character
-	minimap_button.visible = world.started
+	minimap_button.visible = world != null and world.started
 
 func _build_windows() -> void:
 	window_layer = Control.new()

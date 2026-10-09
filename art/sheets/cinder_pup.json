@@ -1,0 +1,98 @@
+{
+  "source": "art/source/mon_emberreach.png",
+  "region": [
+    0,
+    242,
+    764,
+    464
+  ],
+  "grid": {
+    "rows": [
+      27,
+      126,
+      222
+    ],
+    "cols": [
+      0,
+      193,
+      385,
+      575,
+      764
+    ]
+  },
+  "scale": 0.471,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/cinder_pup",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "walk1",
+      "walk2"
+    ],
+    [
+      "walk3",
+      "attack",
+      "hurt",
+      "defeated"
+    ]
+  ],
+  "sets": {
+    "cinder_pup": {
+      "frames": {
+        "idle1": "cinder_pup:idle1",
+        "idle2": "cinder_pup:idle2",
+        "walk1": "cinder_pup:walk1",
+        "walk2": "cinder_pup:walk2",
+        "walk3": "cinder_pup:walk3",
+        "attack": "cinder_pup:attack",
+        "hurt": "cinder_pup:hurt",
+        "defeated": "cinder_pup:defeated"
+      },
+      "anchor": "mass",
+      "baseline": "bottom",
+      "out": "assets/sprites/monsters/cinder_pup.png",
+      "sprite_frames": "assets/animations/cinder_pup.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "walk1",
+            "walk2",
+            "walk3",
+            "walk2"
+          ],
+          "fps": 7
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      }
+    }
+  }
+}

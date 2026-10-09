@@ -1,0 +1,20 @@
+{
+  "source": "art/source/projectiles.png",
+  "out_dir": "assets/sprites/projectiles",
+  "scale": 0.08,
+  "alpha": "soft",
+  "cells": [
+    ["arrow", "star", "bullet", "pebble"],
+    ["energy_bolt", "arcane_claw", "mob_seed", "mob_bolt"],
+    ["mob_ember", "mob_bubble", "mob_wisp", "mob_shadow"]
+  ],
+  "overrides": {
+    "arrow": {"scale": 0.1, "alpha": "hard"},
+    "star": {"scale": 0.075},
+    "bullet": {"scale": 0.12},
+    "pebble": {"scale": 0.1},
+    "energy_bolt": {"scale": 0.1},
+    "arcane_claw": {"scale": 0.09},
+    "mob_seed": {"scale": 0.07}
+  }
+}

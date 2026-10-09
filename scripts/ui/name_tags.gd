@@ -20,15 +20,15 @@ var tags: Array[Dictionary] = []
 func add(rect: Rect2, draw: Callable, mine := false) -> void:
 	tags.append({"rect": rect, "draw": draw, "mine": mine, "offset": Vector2.ZERO})
 
-## A name tag with an optional second tag under it (a guild), as UiSkin.draw_name_tag draws them.
-func add_name(top_center: Vector2, label: String, col: Color, sub := "", sub_col := Palette.GUILD, mine := false) -> void:
+## A name tag with an optional guild plaque under it, as UiSkin draws them.
+func add_name(top_center: Vector2, label: String, col: Color, guild := "", mine := false) -> void:
 	var rect := UiSkin.name_tag_rect(top_center, label)
-	if sub != "":
-		rect = rect.merge(UiSkin.name_tag_rect(top_center + Vector2(0, SUB_TAG_Y), sub))
+	if guild != "":
+		rect = rect.merge(UiSkin.guild_tag_rect(top_center + Vector2(0, SUB_TAG_Y), guild))
 	var draw_it := func(ci: CanvasItem, offset: Vector2) -> void:
 		UiSkin.draw_name_tag(ci, top_center + offset, label, col)
-		if sub != "":
-			UiSkin.draw_name_tag(ci, top_center + offset + Vector2(0, SUB_TAG_Y), sub, sub_col)
+		if guild != "":
+			UiSkin.draw_guild_tag(ci, top_center + offset + Vector2(0, SUB_TAG_Y), guild)
 	add(rect, draw_it, mine)
 
 ## Moves tags that overlap one already placed down below it. Your own tag is placed first

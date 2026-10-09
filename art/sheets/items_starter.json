@@ -1,0 +1,21 @@
+{
+  "source": "art/source/items_starter.png",
+  "out_dir": "assets/sprites/items",
+  "scale": 0.175,
+  "alpha": "hard",
+  "keep": "largest",
+  "cells": [
+    [
+      "meadow_shirt",
+      "berry_smock",
+      "rolled_shorts",
+      "field_trousers"
+    ],
+    [
+      "canvas_shoes",
+      "clay_clogs",
+      "reed_sandals",
+      ""
+    ]
+  ]
+}

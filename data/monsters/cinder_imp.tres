@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MonsterDef" load_steps=21 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/monsters/cinder_imp.png" id="2_cinder_imp"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/cinder_imp.tres" id="2_cinder_imp"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/cinder_horn.tres" id="loot_cinder_horn"]
@@ -85,7 +85,7 @@ attack = 20
 exp_reward = 36
 speed = 1.4
 size = Vector2(36.0, 56.0)
-texture = ExtResource("2_cinder_imp")
+sprite_frames = ExtResource("2_cinder_imp")
 drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_loot0"), SubResource("Resource_loot1"), SubResource("Resource_loot2"), SubResource("Resource_loot3"), SubResource("Resource_loot4"), SubResource("Resource_loot5"), SubResource("Resource_loot6")])
 light_color = Color(1.0, 0.6039215686274509, 0.2901960784313726, 1.0)
 light_energy = 1.2

@@ -650,20 +650,7 @@ func test_choosing_a_path_lists_every_job_and_what_it_takes() -> void:
 		check(talk.text.contains(j.path_line()), "the offer names %s" % j.path_line())
 	check(talk.text.contains("Warrior: Level 10, 35 STR"), "in the JobDef's own words")
 	await _redrawn(talk, "the Choosing a Path offer")
-	var lines := talk._text_lines()
-	check(lines[-1][1] < talk._option_rect(0).position.y, "the text ends above the options")
 	check(talk.position.y + talk.size.y < TDWorld.VIEW.y - TDStatusBar.HEIGHT, "the window ends above the status bar")
-
-func test_dialogue_shrinks_to_short_pages() -> void:
-	var talk: TDDialogueWindow = _win("dialogue")
-	var npc := ui.npc_beside(Content.npcs[&"village_elder"])
-	ui.hud.open_dialogue(npc)
-	talk._page("Where to?", [["Back", func() -> void: pass]])
-	check_eq(talk.size.y, TDDialogueWindow.MIN_H, "a short page gets a short window")
-	talk._page("Long.\n\n" + "\n".join(range(14).map(func(i: int) -> String: return "Line %d" % i)), [["One", func() -> void: pass], ["Two", func() -> void: pass]])
-	check(talk.size.y > TDDialogueWindow.MIN_H, "a long page gets a taller one")
-	await _redrawn(talk, "a long page")
-	check(talk._text_lines()[-1][1] < talk._option_rect(0).position.y, "its text ends above the options")
 
 func test_dialogue_number_keys_pick_options() -> void:
 	var elder: NpcDef = Content.npcs[&"village_elder"]

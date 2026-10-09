@@ -1,0 +1,134 @@
+{
+  "source": "art/source/emberreach_area.png",
+  "region": [
+    0,
+    43,
+    1032,
+    1024
+  ],
+  "scale": 0.35,
+  "label_band": 0.2,
+  "out_dir": "assets/sprites/tiles/emberreach",
+  "cells": [
+    [
+      "ground_left",
+      "ground_middle",
+      "ground_right",
+      "platform_small",
+      "platform_medium",
+      "platform_large"
+    ],
+    [
+      "edge_grass",
+      "tall_grass",
+      "tree_large",
+      "tree_small",
+      "bush_large",
+      "bush_small"
+    ],
+    [
+      "rock_large",
+      "rock_small",
+      "stump",
+      "flowers",
+      "signature_plant",
+      "fence"
+    ],
+    [
+      "signpost",
+      "lantern_unlit",
+      "lantern_lit",
+      "building_large",
+      "building_small",
+      "signature_prop"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      220,
+      454,
+      661,
+      981
+    ],
+    "cols": [
+      [
+        0,
+        153,
+        308,
+        469,
+        642,
+        811,
+        1032
+      ],
+      [
+        0,
+        153,
+        308,
+        470,
+        641,
+        828,
+        1032
+      ],
+      [
+        0,
+        171,
+        333,
+        473,
+        643,
+        828,
+        1032
+      ],
+      [
+        0,
+        138,
+        282,
+        428,
+        666,
+        847,
+        1032
+      ]
+    ]
+  },
+  "overrides": {
+    "lantern_lit": {
+      "fix": "glow_backdrop"
+    },
+    "platform_small": {
+      "blank": [
+        [
+          41,
+          0,
+          127,
+          54
+        ],
+        [
+          0,
+          0,
+          175,
+          38
+        ]
+      ]
+    },
+    "building_large": {
+      "blank": [
+        [
+          150,
+          0,
+          240,
+          66
+        ]
+      ]
+    },
+    "stump": {
+      "blank": [
+        [
+          40,
+          0,
+          150,
+          80
+        ]
+      ]
+    }
+  }
+}

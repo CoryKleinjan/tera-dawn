@@ -1,0 +1,139 @@
+{
+  "source": "art/source/npcs_lumewood.png",
+  "grid": {
+    "rows": [
+      1,
+      511,
+      1022
+    ],
+    "cols": [
+      1,
+      384,
+      768,
+      1151,
+      1534
+    ]
+  },
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/npcs_lumewood",
+  "cells": [
+    [
+      "lumewood_instructor_1",
+      "lumewood_shop_1",
+      "lumewood_store_1",
+      "lumewood_taxi_1"
+    ],
+    [
+      "lumewood_instructor_2",
+      "lumewood_shop_2",
+      "lumewood_store_2",
+      "lumewood_taxi_2"
+    ]
+  ],
+  "overrides": {
+    "lumewood_instructor_1": {
+      "scale": 0.206
+    },
+    "lumewood_instructor_2": {
+      "scale": 0.206
+    },
+    "lumewood_shop_1": {
+      "scale": 0.199
+    },
+    "lumewood_shop_2": {
+      "scale": 0.199
+    },
+    "lumewood_store_1": {
+      "scale": 0.205
+    },
+    "lumewood_store_2": {
+      "scale": 0.205
+    },
+    "lumewood_taxi_1": {
+      "scale": 0.192
+    },
+    "lumewood_taxi_2": {
+      "scale": 0.192
+    }
+  },
+  "sets": {
+    "lumewood_instructor": {
+      "frames": {
+        "idle1": "npcs_lumewood:lumewood_instructor_1",
+        "idle2": "npcs_lumewood:lumewood_instructor_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/lumewood_instructor.png",
+      "sprite_frames": "assets/animations/npc_lumewood_instructor.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "lumewood_shop": {
+      "frames": {
+        "idle1": "npcs_lumewood:lumewood_shop_1",
+        "idle2": "npcs_lumewood:lumewood_shop_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/lumewood_shop.png",
+      "sprite_frames": "assets/animations/npc_lumewood_shop.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "lumewood_store": {
+      "frames": {
+        "idle1": "npcs_lumewood:lumewood_store_1",
+        "idle2": "npcs_lumewood:lumewood_store_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/lumewood_store.png",
+      "sprite_frames": "assets/animations/npc_lumewood_store.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "lumewood_taxi": {
+      "frames": {
+        "idle1": "npcs_lumewood:lumewood_taxi_1",
+        "idle2": "npcs_lumewood:lumewood_taxi_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/lumewood_taxi.png",
+      "sprite_frames": "assets/animations/npc_lumewood_taxi.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 1.5
+        }
+      }
+    }
+  }
+}

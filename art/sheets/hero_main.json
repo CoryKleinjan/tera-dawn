@@ -40,7 +40,7 @@
     }
   },
   "sets": {
-    "hero": {
+    "hero_painted": {
       "frames": {
         "idle1": "hero_main:idle1",
         "idle2": "hero_main:idle2",
@@ -77,8 +77,8 @@
       },
       "anchor": "head",
       "baseline": "bottom",
-      "out": "assets/sprites/characters/hero.png",
-      "sprite_frames": "assets/animations/hero.tres",
+      "out": "art/build/hero_painted/hero.png",
+      "sprite_frames": "art/build/hero_painted/hero.tres",
       "animations": {
         "idle": {
           "frames": [

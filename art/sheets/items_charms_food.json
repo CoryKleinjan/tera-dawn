@@ -1,0 +1,42 @@
+{
+  "source": "art/source/items_charms_food.png",
+  "out_dir": "assets/sprites/items",
+  "scale": 0.3,
+  "alpha": "hard",
+  "keep": "largest",
+  "fix": "glow_backdrop",
+  "cells": [
+    [
+      "scroll_weapon_att_10",
+      "scroll_weapon_att_60",
+      "scroll_weapon_matt_10",
+      "scroll_weapon_matt_60",
+      "scroll_armor_def_10",
+      "scroll_armor_def_60"
+    ],
+    [
+      "scroll_helmet_hp_60",
+      "scroll_top_str_60",
+      "scroll_top_dex_60",
+      "scroll_top_int_60",
+      "scroll_top_luk_60",
+      "scroll_gloves_att_10"
+    ],
+    [
+      "scroll_gloves_att_60",
+      "scroll_shoes_speed_60",
+      "scroll_cape_mdef_60",
+      "scroll_earring_int_60",
+      "scroll_shield_def_60",
+      "power_elixir"
+    ],
+    [
+      "honey_bun",
+      "sunrise_cake",
+      "mana_tea",
+      "starlight_draught",
+      "pet_snack",
+      ""
+    ]
+  ]
+}

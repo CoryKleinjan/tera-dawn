@@ -10,7 +10,7 @@ extends CenterContainer
 ## Back (or Esc) was pressed; the settings are saved.
 signal closed
 
-const TAB_SIZE := Vector2(640, 300)
+const TAB_SIZE := Vector2(640, 280)
 
 var tab_buttons: Array[Button] = []
 var pages: Array[Control] = []
@@ -44,10 +44,10 @@ var _sizes: Array[Vector2i] = []
 func _init() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	var card := PanelContainer.new()
-	card.add_theme_stylebox_override("panel", UiSkin.panel())
+	UiSkin.use_panel(card, UiSkin.ARCH_PANEL, Vector4(30, 40, 30, 22), 0.7)
 	add_child(card)
 	var col := VBoxContainer.new()
-	col.add_theme_constant_override("separation", 10)
+	col.add_theme_constant_override("separation", 8)
 	card.add_child(col)
 
 	var heading := _label("Settings", 30, Palette.SUN)
@@ -62,12 +62,13 @@ func _init() -> void:
 	tabs_row.add_theme_constant_override("separation", 8)
 	col.add_child(tabs_row)
 	var group := ButtonGroup.new()
-	for page in [["Controls", _build_controls(), Settings.keybinds], ["Audio", _build_audio(), Settings.audio], ["Video", _build_video(), Settings.video]]:
+	for page in [["Controls", _build_controls(), Settings.keybinds, "menu/icon_controls"], ["Audio", _build_audio(), Settings.audio, "menu/icon_audio"],
+			["Video", _build_video(), Settings.video, "menu/icon_video"]]:
 		var b := Button.new()
 		b.text = page[0]
-		b.custom_minimum_size = Vector2(130, 34)
+		b.custom_minimum_size = Vector2(140, 38)
 		b.add_theme_font_size_override("font_size", 16)
-		UiSkin.style_tab(b)
+		UiSkin.style_tab(b, page[3])
 		b.toggle_mode = true
 		b.button_group = group
 		var i := tab_buttons.size()
@@ -87,7 +88,8 @@ func _init() -> void:
 	bottom.alignment = BoxContainer.ALIGNMENT_CENTER
 	bottom.add_theme_constant_override("separation", 12)
 	col.add_child(bottom)
-	reset_button = UiSkin.menu_button("Reset to defaults", Vector2(200, 42), 18)
+	reset_button = UiSkin.menu_button("Reset to defaults", Vector2(220, 42), 18)
+	reset_button.icon = UiSkin.sized("menu/icon_reset", 20)
 	reset_button.pressed.connect(func() -> void:
 		_stop_listening()
 		Settings.reset(page_sections[tab])
@@ -132,6 +134,7 @@ func refresh() -> void:
 		var parts: PackedStringArray = id.split(":")
 		var text := Keybinds.key_text(Settings.keybinds.key(parts[0], int(parts[1])))
 		(key_buttons[id] as Button).text = text if text != "" else "-"
+		UiSkin.set_keycap(key_buttons[id], "keycap" if text != "" else "keycap_empty")
 	for bus in sliders:
 		var v: float = Settings.audio.volume[bus]
 		(sliders[bus][0] as HSlider).set_value_no_signal(roundf(v * 100.0))
@@ -152,6 +155,7 @@ func refresh() -> void:
 func _build_controls() -> Control:
 	var scroll := ScrollContainer.new()
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	UiSkin.style_scroll(scroll)
 	var list := VBoxContainer.new()
 	list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	list.add_theme_constant_override("separation", 4)
@@ -175,9 +179,9 @@ func _build_controls() -> Control:
 
 func _key_button(action: String, slot: int) -> Button:
 	var b := Button.new()
-	b.custom_minimum_size = Vector2(150, 30)
+	b.custom_minimum_size = Vector2(150, 32)
 	b.add_theme_font_size_override("font_size", 14)
-	UiSkin.style_slot_button(b)
+	UiSkin.style_key_button(b)
 	b.pressed.connect(func() -> void: _listen(action, slot))
 	b.gui_input.connect(func(e: InputEvent) -> void:
 		var mb := e as InputEventMouseButton
@@ -196,6 +200,7 @@ func _listen(action: String, slot: int) -> void:
 	listening = action
 	listening_slot = slot
 	key_buttons["%s:%d" % [action, slot]].text = "Press a key..."
+	UiSkin.set_keycap(key_buttons["%s:%d" % [action, slot]], "keycap_listening")
 	note.text = "Press the new key for %s, or Esc to cancel." % Keybinds.info(action)["label"]
 
 func _stop_listening() -> void:
@@ -245,8 +250,9 @@ func _build_audio() -> Control:
 		slider.min_value = 0
 		slider.max_value = 100
 		slider.step = 1
-		slider.custom_minimum_size = Vector2(340, 24)
+		slider.custom_minimum_size = Vector2(340, 28)
 		slider.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		UiSkin.style_slider(slider)
 		grid.add_child(slider)
 		var percent := _label("", 16, Palette.MIST)
 		percent.custom_minimum_size.x = 56
@@ -258,7 +264,7 @@ func _build_audio() -> Control:
 			Settings.apply(Settings.audio))
 	mute_box = _check_box("Mute all sound", func(on: bool) -> void:
 		Settings.audio.muted = on
-		Settings.apply(Settings.audio))
+		Settings.apply(Settings.audio), "menu/icon_mute")
 	page.add_child(mute_box)
 	return page
 
@@ -266,7 +272,7 @@ func _build_audio() -> Control:
 
 func _build_video() -> Control:
 	var page := VBoxContainer.new()
-	page.add_theme_constant_override("separation", 10)
+	page.add_theme_constant_override("separation", 6)
 	var grid := GridContainer.new()
 	grid.columns = 2
 	grid.add_theme_constant_override("h_separation", 18)
@@ -324,15 +330,17 @@ func _grid_row(grid: GridContainer, text: String, control: Control) -> void:
 
 func _option_button(items: Array[String], on_pick: Callable) -> OptionButton:
 	var o := OptionButton.new()
-	o.custom_minimum_size = Vector2(260, 32)
+	o.custom_minimum_size = Vector2(260, 34)
+	UiSkin.style_option_button(o)
 	for it in items:
 		o.add_item(it)
 	o.item_selected.connect(on_pick)
 	return o
 
-func _check_box(text: String, on_toggle: Callable) -> CheckBox:
+func _check_box(text: String, on_toggle: Callable, icon := "") -> CheckBox:
 	var c := CheckBox.new()
 	c.text = text
+	UiSkin.style_check_box(c, icon)
 	c.add_theme_font_size_override("font_size", 15)
 	c.add_theme_color_override("font_color", Palette.MIST)
 	c.add_theme_color_override("font_hover_color", Palette.SUN)

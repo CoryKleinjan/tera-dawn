@@ -1,0 +1,36 @@
+{
+  "source": "art/source/items_scrolls.png",
+  "out_dir": "assets/sprites/items",
+  "scale": 0.175,
+  "alpha": "hard",
+  "keep": "largest",
+  "fix": "glow_backdrop",
+  "cells": [
+    [
+      "return_scroll",
+      "dawnrise_scroll",
+      "dawnharbor_scroll",
+      "greenbough_scroll"
+    ],
+    [
+      "lumewood_scroll",
+      "emberforge_scroll",
+      "lanternfall_scroll",
+      "driftcove_scroll"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      1,
+      443,
+      885
+    ],
+    "cols": [
+      1,
+      443,
+      886,
+      1329,
+      1772
+    ]
+  }
+}

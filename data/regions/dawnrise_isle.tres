@@ -8,5 +8,5 @@ id = &"dawnrise_isle"
 display_name = "Dawnrise Isle"
 description = "A sunny island where every Dawnling wakes. Meadows, ropes and gentle monsters."
 color = Color(1.0, 0.819608, 0.4, 1.0)
-label_pos = Vector2(150.0, 250.0)
+label_pos = Vector2(142.0, 321.0)
 level_text = "Lv. 1-12"

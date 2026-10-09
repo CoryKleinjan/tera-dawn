@@ -1,0 +1,98 @@
+{
+  "source": "art/source/mon_driftcove.png",
+  "region": [
+    772,
+    0,
+    1536,
+    246
+  ],
+  "grid": {
+    "rows": [
+      33,
+      141,
+      246
+    ],
+    "cols": [
+      0,
+      192,
+      382,
+      572,
+      764
+    ]
+  },
+  "scale": 0.609,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/tide_slime",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "walk1",
+      "walk2"
+    ],
+    [
+      "walk3",
+      "attack",
+      "hurt",
+      "defeated"
+    ]
+  ],
+  "sets": {
+    "tide_slime": {
+      "frames": {
+        "idle1": "tide_slime:idle1",
+        "idle2": "tide_slime:idle2",
+        "walk1": "tide_slime:walk1",
+        "walk2": "tide_slime:walk2",
+        "walk3": "tide_slime:walk3",
+        "attack": "tide_slime:attack",
+        "hurt": "tide_slime:hurt",
+        "defeated": "tide_slime:defeated"
+      },
+      "anchor": "mass",
+      "baseline": "bottom",
+      "out": "assets/sprites/monsters/tide_slime.png",
+      "sprite_frames": "assets/animations/tide_slime.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "walk1",
+            "walk2",
+            "walk3",
+            "walk2"
+          ],
+          "fps": 7
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      }
+    }
+  }
+}

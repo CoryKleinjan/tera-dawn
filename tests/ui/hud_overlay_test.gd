@@ -123,7 +123,7 @@ func test_overlay_draws_everything_it_can_show() -> void:
 	check_eq(ui.world.log_lines.size(), 6, "the log keeps the last 6 lines")
 	check(await ui.redraw(ui.hud.overlay), "the overlay draws")
 	ui.world.show_achievement("first_hunt")
-	check(ui.world.banner_text == "Achievement: First Hunt", "an achievement shows a banner")
+	check(ui.hud.banners.toasts.any(func(t: Dictionary) -> bool: return t["title"] == "First Hunt"), "an achievement shows a toast")
 	check(await ui.redraw(ui.hud.overlay), "the overlay draws the achievement")
 
 func test_overlay_draws_the_faint_screen() -> void:
@@ -147,7 +147,7 @@ func test_name_tags_nudge_apart_and_yours_stays_put() -> void:
 	var tags := TDNameTags.new()
 	tags.add_name(Vector2(100, 200), "Mossy", Palette.MIST)
 	tags.add_name(Vector2(104, 202), "Kestrel", Palette.MIST, "Dawnbreakers")
-	tags.add_name(Vector2(102, 201), Game.me.name, Palette.SUN, "", Palette.GUILD, true)
+	tags.add_name(Vector2(102, 201), Game.me.name, Palette.SUN, "", true)
 	tags.add_name(Vector2(400, 200), "Far away", Palette.MIST)
 	tags.arrange()
 	var r := tags.rects()

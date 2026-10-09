@@ -27,6 +27,7 @@ func _ready() -> void:
 	field.position = Vector2(0, size.y - 32)
 	field.size = Vector2(W, 30)
 	field.add_theme_font_size_override("font_size", 13)
+	UiSkin.style_field(field, "social/chat_input", Vector4(34, 8, 14, 8), 0.85)
 	field.visible = false
 	field.text_submitted.connect(_send)
 	field.gui_input.connect(func(e: InputEvent) -> void:
@@ -88,7 +89,9 @@ func _draw() -> void:
 	var open_box := field.visible
 	var shown := lines.slice(maxi(0, lines.size() - LINES))
 	if open_box:
-		DrawUtil.round_rect(self, Rect2(0, 0, W, LINES * LINE_H + 6), 6, Color(Palette.NIGHT, 0.45))
+		var frame := UiSkin.box("social/chat_frame", 20, 14)
+		frame.modulate_color = Color(1, 1, 1, 0.85)
+		UiSkin.draw_box(self, frame, Rect2(-6, -6, W + 12, LINES * LINE_H + 16), 0.7)
 	for i in shown.size():
 		var l: Dictionary = shown[i]
 		var a := 1.0 if open_box else minf(1.0, l["t"] / 60.0)

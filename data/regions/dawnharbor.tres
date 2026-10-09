@@ -8,5 +8,5 @@ id = &"dawnharbor"
 display_name = "Dawnharbor Coast"
 description = "The busy port at the heart of the mainland. Ships come and go from every shore."
 color = Color(0.560784, 0.847059, 1.0, 1.0)
-label_pos = Vector2(505.0, 190.0)
+label_pos = Vector2(396.0, 198.0)
 level_text = "Lv. 10-14"

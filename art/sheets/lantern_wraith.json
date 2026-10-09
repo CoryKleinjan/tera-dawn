@@ -1,0 +1,125 @@
+{
+  "source": "art/source/mon_lanternfall.png",
+  "region": [
+    0,
+    771,
+    1536,
+    1024
+  ],
+  "grid": {
+    "rows": [
+      28,
+      127,
+      253
+    ],
+    "cols": [
+      0,
+      256,
+      512,
+      768,
+      1024,
+      1279,
+      1536
+    ]
+  },
+  "scale": 1.0,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/lantern_wraith",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "move1",
+      "move2",
+      "move3",
+      "windup"
+    ],
+    [
+      "strike",
+      "special",
+      "hurt",
+      "enraged",
+      "defeated1",
+      "defeated2"
+    ]
+  ],
+  "sets": {
+    "lantern_wraith": {
+      "frames": {
+        "idle1": "lantern_wraith:idle1",
+        "idle2": "lantern_wraith:idle2",
+        "move1": "lantern_wraith:move1",
+        "move2": "lantern_wraith:move2",
+        "move3": "lantern_wraith:move3",
+        "windup": "lantern_wraith:windup",
+        "strike": "lantern_wraith:strike",
+        "special": "lantern_wraith:special",
+        "hurt": "lantern_wraith:hurt",
+        "enraged": "lantern_wraith:enraged",
+        "defeated1": "lantern_wraith:defeated1",
+        "defeated2": "lantern_wraith:defeated2"
+      },
+      "anchor": "mass",
+      "baseline": "bottom",
+      "out": "assets/sprites/monsters/lantern_wraith.png",
+      "sprite_frames": "assets/animations/lantern_wraith.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "move1",
+            "move2",
+            "move3",
+            "move2"
+          ],
+          "fps": 6
+        },
+        "attack": {
+          "frames": [
+            "windup",
+            "strike",
+            "special"
+          ],
+          "fps": 3,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated1",
+            "defeated2"
+          ],
+          "fps": 2,
+          "loop": false
+        }
+      }
+    }
+  },
+  "overrides": {
+    "windup": {
+      "blank_label": 16
+    },
+    "strike": {
+      "blank_label": 16
+    },
+    "special": {
+      "blank_label": 16
+    },
+    "enraged": {
+      "blank_label": 16
+    }
+  }
+}

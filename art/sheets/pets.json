@@ -1,0 +1,192 @@
+{
+  "source": "art/source/pets.png",
+  "out_dir": "art/build/pets",
+  "scale": 0.3,
+  "alpha": "hard",
+  "label_band": 0.3,
+  "save": false,
+  "cells": [
+    [
+      "puffpaw_idle1",
+      "puffpaw_idle2",
+      "puffpaw_walk1",
+      "puffpaw_walk2",
+      "puffpaw_walk3",
+      "puffpaw_walk4",
+      "puffpaw_jump",
+      "puffpaw_happy1",
+      "puffpaw_happy2"
+    ],
+    [
+      "sprout_idle1",
+      "sprout_idle2",
+      "sprout_walk1",
+      "sprout_walk2",
+      "sprout_walk3",
+      "sprout_walk4",
+      "sprout_jump",
+      "sprout_happy1",
+      "sprout_happy2"
+    ],
+    [
+      "emberkit_idle1",
+      "emberkit_idle2",
+      "emberkit_walk1",
+      "emberkit_walk2",
+      "emberkit_walk3",
+      "emberkit_walk4",
+      "emberkit_jump",
+      "emberkit_happy1",
+      "emberkit_happy2"
+    ]
+  ],
+  "sets": {
+    "pet_puffpaw": {
+      "frames": {
+        "idle1": "pets:puffpaw_idle1",
+        "idle2": "pets:puffpaw_idle2",
+        "walk1": "pets:puffpaw_walk1",
+        "walk2": "pets:puffpaw_walk2",
+        "walk3": "pets:puffpaw_walk3",
+        "walk4": "pets:puffpaw_walk4",
+        "jump": "pets:puffpaw_jump",
+        "happy1": "pets:puffpaw_happy1",
+        "happy2": "pets:puffpaw_happy2"
+      },
+      "anchor": "mass",
+      "baseline": "cell",
+      "out": "assets/sprites/pets/pet_puffpaw.png",
+      "sprite_frames": "assets/animations/pet_puffpaw.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 2
+        },
+        "walk": {
+          "frames": [
+            "walk1",
+            "walk2",
+            "walk3",
+            "walk4"
+          ],
+          "fps": 8
+        },
+        "jump": {
+          "frames": [
+            "jump"
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "happy": {
+          "frames": [
+            "happy1",
+            "happy2"
+          ],
+          "fps": 4
+        }
+      }
+    },
+    "pet_sprout": {
+      "frames": {
+        "idle1": "pets:sprout_idle1",
+        "idle2": "pets:sprout_idle2",
+        "walk1": "pets:sprout_walk1",
+        "walk2": "pets:sprout_walk2",
+        "walk3": "pets:sprout_walk3",
+        "walk4": "pets:sprout_walk4",
+        "jump": "pets:sprout_jump",
+        "happy1": "pets:sprout_happy1",
+        "happy2": "pets:sprout_happy2"
+      },
+      "anchor": "mass",
+      "baseline": "cell",
+      "out": "assets/sprites/pets/pet_sprout.png",
+      "sprite_frames": "assets/animations/pet_sprout.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 2
+        },
+        "walk": {
+          "frames": [
+            "walk1",
+            "walk2",
+            "walk3",
+            "walk4"
+          ],
+          "fps": 8
+        },
+        "jump": {
+          "frames": [
+            "jump"
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "happy": {
+          "frames": [
+            "happy1",
+            "happy2"
+          ],
+          "fps": 4
+        }
+      }
+    },
+    "pet_emberkit": {
+      "frames": {
+        "idle1": "pets:emberkit_idle1",
+        "idle2": "pets:emberkit_idle2",
+        "walk1": "pets:emberkit_walk1",
+        "walk2": "pets:emberkit_walk2",
+        "walk3": "pets:emberkit_walk3",
+        "walk4": "pets:emberkit_walk4",
+        "jump": "pets:emberkit_jump",
+        "happy1": "pets:emberkit_happy1",
+        "happy2": "pets:emberkit_happy2"
+      },
+      "anchor": "mass",
+      "baseline": "cell",
+      "out": "assets/sprites/pets/pet_emberkit.png",
+      "sprite_frames": "assets/animations/pet_emberkit.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 2
+        },
+        "walk": {
+          "frames": [
+            "walk1",
+            "walk2",
+            "walk3",
+            "walk4"
+          ],
+          "fps": 8
+        },
+        "jump": {
+          "frames": [
+            "jump"
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "happy": {
+          "frames": [
+            "happy1",
+            "happy2"
+          ],
+          "fps": 4
+        }
+      }
+    }
+  }
+}

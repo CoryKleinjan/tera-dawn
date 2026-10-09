@@ -76,9 +76,12 @@ func _draw_body() -> void:
 		if i >= entries.size():
 			break
 		var r := _row(k)
-		draw_row(r)
 		var stack := _stack(i)
-		draw_slot(Rect2(r.position + Vector2(2, 0), Vector2(36, 36)), stack)
+		var k_art := r.size.y / UiSkin.tex("dialogue/shop_row").get_height()
+		UiSkin.draw_box(self, UiSkin.shop_row(r.has_point(_hover)), r, k_art)
+		if stack and stack.item.icon:
+			var niche := Rect2(r.position + TDShopWindow.NICHE.position * k_art, TDShopWindow.NICHE.size * k_art)
+			draw_texture_rect(stack.item.icon, fit(stack.item.icon, niche.grow(-1)), false)
 		if mode == Mode.VISITOR:
 			add_button(_buy_rect(k), "Buy", buy.bind(i), Game.me.shards >= _price(i))
 		elif mode == Mode.SETUP:

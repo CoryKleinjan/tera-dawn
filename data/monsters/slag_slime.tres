@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="Resource" path="res://data/monsters/slag_bit.tres" id="2_slag_bit"]
-[ext_resource type="SpriteFrames" path="res://assets/animations/dewling.tres" id="3_dewling"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/slag_slime.tres" id="3_slag_slime"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="5_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/slag_lump.tres" id="6_slag_lump"]
@@ -99,8 +99,7 @@ boss = false
 flying = false
 splits_into = ExtResource("2_slag_bit")
 split_count = 2
-sprite_frames = ExtResource("3_dewling")
-sprite_scale = 1.2
-tint = Color(1.0, 0.564706, 0.313725, 1.0)
+sprite_frames = ExtResource("3_slag_slime")
+sprite_scale = 1.0
 light_color = Color(1.0, 0.564706, 0.313725, 1.0)
 drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10")])

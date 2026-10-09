@@ -8,6 +8,9 @@ const TABS := ["Buddies", "Party", "Guild"]
 const LIST_Y := 72.0
 const ROW_H := 30.0
 const ROWS := 8
+## Pixels per texel of the friend row art, and the middle of its round niche in texels.
+const ROW_SCALE := (ROW_H - 4) / 61.0
+const NICHE_CENTER := Vector2(42, 30)
 
 var tab := 0
 
@@ -16,6 +19,12 @@ func _init() -> void:
 
 func _row(i: int) -> Rect2:
 	return Rect2(PAD, LIST_Y + i * ROW_H, size.x - PAD * 2, ROW_H - 4)
+
+## A buddy or guild member's row with their online dot in its niche.
+func _friend_row(r: Rect2, online: bool) -> void:
+	UiSkin.draw_box(self, UiSkin.friend_row(), r, ROW_SCALE)
+	var c := r.position + NICHE_CENTER * ROW_SCALE
+	UiSkin.draw_icon(self, "social/online_dot" if online else "social/offline_dot", Rect2(c - Vector2(7, 7), Vector2(14, 14)))
 
 func _draw_body() -> void:
 	draw_tabs(TABS, tab)
@@ -39,13 +48,12 @@ func _draw_buddies() -> void:
 	for i in mini(list.size(), ROWS):
 		var b: Array = list[i]
 		var r := _row(i)
-		draw_row(r)
-		draw_circle(r.position + Vector2(10, r.size.y / 2.0), 4, Palette.GOOD if b[1] else Color(0.5, 0.45, 0.6))
-		draw_label(r.position + Vector2(20, 18), b[0], Palette.SUN if b[1] else Palette.MIST, 13)
-		draw_label(r.position + Vector2(112, 18), b[2] if b[1] else "Offline", Palette.MUTED, 11)
+		_friend_row(r, b[1])
+		draw_label(r.position + Vector2(36, 18), b[0], Palette.SUN if b[1] else Palette.MIST, 13)
+		draw_label(r.position + Vector2(124, 18), b[2] if b[1] else "Offline", Palette.MUTED, 11)
 		var who: String = b[0]
 		if b[1]:
-			add_button(Rect2(r.end.x - 98, r.position.y + 3, 46, 20), "Whisper", func() -> void: hud.chat.open("/w %s " % who), true, true)
+			icon_button(Rect2(r.end.x - 78, r.position.y + 2, 24, 22), "social/whisper_icon", func() -> void: hud.chat.open("/w %s " % who))
 		add_button(Rect2(r.end.x - 48, r.position.y + 3, 46, 20), "Remove", func() -> void: Net.ask(&"req_social", [&"unbuddy", who]), true, true)
 	_bottom_button("Add buddy", func() -> void:
 		hud.prompt.ask("Who do you want as a buddy?", "", func(n: String) -> void: Net.ask(&"req_social", [&"buddy", n])))
@@ -61,11 +69,13 @@ func _draw_party() -> void:
 		var r := _row(i)
 		draw_row(r)
 		var j: JobDef = Content.jobs.get(StringName(m[3]))
-		draw_label(r.position + Vector2(6, 12), ("★ " if m[0] == party["leader"] else "") + m[0], Palette.SUN, 12)
+		var x := 6.0
+		if m[0] == party["leader"]:
+			UiSkin.draw_icon(self, "social/leader_star", Rect2(r.position + Vector2(4, 1), Vector2(14, 14)))
+			x = 20.0
+		draw_label(r.position + Vector2(x, 12), m[0], Palette.SUN, 12)
 		draw_label(r.position + Vector2(6, 24), "Lv. %d %s  ·  %s" % [m[2], j.display_name if j else "", Content.map(StringName(m[5])).display_name if Content.maps.has(StringName(m[5])) else ""], Palette.MUTED, 10)
-		var bar := Rect2(r.position.x + 196, r.position.y + 8, 70, 8)
-		draw_rect(bar, Color(Palette.NIGHT, 0.6))
-		draw_rect(Rect2(bar.position, Vector2(bar.size.x * float(m[4]), bar.size.y)), Palette.HP)
+		UiSkin.draw_party_hp(self, r.position + Vector2(190, 4), 80, float(m[4]))
 		var who: String = m[0]
 		if lead and who != Game.me.name:
 			add_button(Rect2(r.end.x - 40, r.position.y + 3, 38, 20), "Kick", func() -> void: Net.ask(&"req_social", [&"kick", who]), true, true)
@@ -81,15 +91,16 @@ func _draw_guild() -> void:
 		for k in 3:
 			draw_hint(Vector2(PAD, LIST_Y + 18 + k * 18), ["You're not in a guild.", "Found one with the Guild Clerk in Dawnharbor", "(%d Dawnshards, level %d), or get invited." % [TDSocial.GUILD_COST, TDSocial.GUILD_LEVEL]][k])
 		return
-	draw_label(Vector2(PAD, LIST_Y - 2), "%s  ·  master %s" % [g["name"], g["master"]], Palette.SUN, 13)
+	UiSkin.draw_icon(self, "social/guild_emblem", Rect2(PAD, LIST_Y - 12, 20, 20))
+	UiSkin.draw_guild_tag(self, Vector2(PAD + 26 + (DrawUtil.text_width(Game.ui_font, g["name"], 11) + 34) / 2.0, LIST_Y - 10), g["name"])
+	draw_label(Vector2(size.x - PAD, LIST_Y + 4), "master %s" % g["master"], Palette.MUTED, 11, -1)
 	var members: Array = g["members"]
 	for i in mini(members.size(), ROWS - 1):
 		var m: Array = members[i]
 		var r := _row(i)
 		r.position.y += 10
-		draw_row(r)
-		draw_circle(r.position + Vector2(10, r.size.y / 2.0), 4, Palette.GOOD if m[1] else Color(0.5, 0.45, 0.6))
-		draw_label(r.position + Vector2(20, 18), m[0], Palette.SUN if m[1] else Palette.MIST, 13)
+		_friend_row(r, m[1])
+		draw_label(r.position + Vector2(36, 18), m[0], Palette.SUN if m[1] else Palette.MIST, 13)
 	if g["master"] == Game.me.name:
 		_bottom_button("Invite", func() -> void:
 			hud.prompt.ask("Who do you want in the guild?", "", func(n: String) -> void: Net.ask(&"req_social", [&"guild", n])))

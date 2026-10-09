@@ -1,0 +1,36 @@
+{
+  "source": "art/source/world_map.png",
+  "out_dir": "assets/sprites/ui",
+  "scale": 0.6,
+  "alpha": "soft",
+  "key": [
+    5,
+    6
+  ],
+  "inset": 0,
+  "cells": [
+    [
+      "world_map"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      971
+    ],
+    "cols": [
+      0,
+      1619
+    ]
+  },
+  "overrides": {
+    "world_map": {
+      "crop": [
+        0,
+        0,
+        1619,
+        971
+      ]
+    }
+  }
+}

@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="PetDef" load_steps=4 format=3]
+[gd_resource type="Resource" script_class="PetDef" load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/pet_def.gd" id="1_pet_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/items/pet_emberkit.png" id="2_pet_emberkit"]
 [ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="3_shard_pickup"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/pet_emberkit.tres" id="4_frames"]
 
 [resource]
 script = ExtResource("1_pet_def")
@@ -10,6 +11,7 @@ id = &"pet_emberkit"
 display_name = "Emberkit"
 description = "A quick little fire kitten from Emberforge. Fast and greedy."
 icon = ExtResource("2_pet_emberkit")
+sprite_frames = ExtResource("4_frames")
 sprite_scale = 0.42
 glow_color = Color(1.0, 0.541176, 0.290196, 1.0)
 pickup_effect = ExtResource("3_shard_pickup")

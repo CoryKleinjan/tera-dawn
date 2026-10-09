@@ -1,0 +1,98 @@
+{
+  "source": "art/source/mon_greenbough.png",
+  "region": [
+    0,
+    0,
+    764,
+    246
+  ],
+  "grid": {
+    "rows": [
+      30,
+      139,
+      246
+    ],
+    "cols": [
+      0,
+      193,
+      384,
+      575,
+      764
+    ]
+  },
+  "scale": 0.464,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/thornling",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "walk1",
+      "walk2"
+    ],
+    [
+      "walk3",
+      "attack",
+      "hurt",
+      "defeated"
+    ]
+  ],
+  "sets": {
+    "thornling": {
+      "frames": {
+        "idle1": "thornling:idle1",
+        "idle2": "thornling:idle2",
+        "walk1": "thornling:walk1",
+        "walk2": "thornling:walk2",
+        "walk3": "thornling:walk3",
+        "attack": "thornling:attack",
+        "hurt": "thornling:hurt",
+        "defeated": "thornling:defeated"
+      },
+      "anchor": "mass",
+      "baseline": "bottom",
+      "out": "assets/sprites/monsters/thornling.png",
+      "sprite_frames": "assets/animations/thornling.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "walk1",
+            "walk2",
+            "walk3",
+            "walk2"
+          ],
+          "fps": 7
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "source": "art/source/mon_greenbough.png",
+  "region": [
+    772,
+    254,
+    1536,
+    502
+  ],
+  "grid": {
+    "rows": [
+      27,
+      137,
+      248
+    ],
+    "cols": [
+      0,
+      191,
+      381,
+      573,
+      764
+    ]
+  },
+  "scale": 0.687,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/acorn_sentry",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "alert",
+      "charge"
+    ],
+    [
+      "shoot1",
+      "shoot2",
+      "hurt",
+      "defeated"
+    ]
+  ],
+  "sets": {
+    "acorn_sentry": {
+      "frames": {
+        "idle1": "acorn_sentry:idle1",
+        "idle2": "acorn_sentry:idle2",
+        "alert": "acorn_sentry:alert",
+        "charge": "acorn_sentry:charge",
+        "shoot1": "acorn_sentry:shoot1",
+        "shoot2": "acorn_sentry:shoot2",
+        "hurt": "acorn_sentry:hurt",
+        "defeated": "acorn_sentry:defeated"
+      },
+      "anchor": "mass",
+      "baseline": "bottom",
+      "out": "assets/sprites/monsters/acorn_sentry.png",
+      "sprite_frames": "assets/animations/acorn_sentry.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "alert"
+          ],
+          "fps": 1
+        },
+        "attack": {
+          "frames": [
+            "charge",
+            "shoot1",
+            "shoot2"
+          ],
+          "fps": 5,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      }
+    }
+  },
+  "overrides": {
+    "charge": {
+      "blank_label": 16
+    },
+    "alert": {
+      "blank_label": 16
+    },
+    "shoot1": {
+      "blank_label": 16
+    }
+  }
+}
