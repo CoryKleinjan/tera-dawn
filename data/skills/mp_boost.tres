@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="SkillDef" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
+[ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="2_stat_block"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/mp_boost.png" id="3_mp_boost"]
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("2_stat_block")
+max_mp = 20
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("2_stat_block")
+max_mp = 20
+
+[resource]
+script = ExtResource("1_skill_def")
+id = &"mp_boost"
+display_name = "Mana Well"
+job = &"mage"
+max_level = 10
+kind = 2
+description = "Deepen your well of magic: more Max MP, and MP comes back faster."
+stats = SubResource("Resource_1")
+stats_per_level = SubResource("Resource_2")
+regen_mp = 3
+regen_mp_per_level = 2
+icon = ExtResource("3_mp_boost")
+animation = &"attack"

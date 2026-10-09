@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/items/willow_bow.png" id="2_willow_bow"]
 [ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="3_shard_pickup"]
 [ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="4_stat_block"]
+[ext_resource type="Resource" path="res://data/skills/bow_shot.tres" id="bow_shot"]
 
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("4_stat_block")
@@ -25,3 +26,6 @@ required_level = 10
 stats = SubResource("Resource_1")
 variance = 1
 required_dexterity = 25
+weapon_kind = &"bow"
+ammo = &"arrow"
+basic_attack = ExtResource("bow_shot")

@@ -82,7 +82,7 @@ func _hovered(at: Vector2) -> void:
 		ItemDef.Tab.EQUIP:
 			hint = "Double-click to equip"
 		ItemDef.Tab.USE:
-			hint = "Double-click to use"
+			hint = "" if stack and stack.item is AmmoDef else "Double-click to use"
 	hud.tooltip.show_item(self, stack, get_global_mouse_position(), hint, true)
 
 func _get_drag_data(at: Vector2) -> Variant:

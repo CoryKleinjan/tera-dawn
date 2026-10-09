@@ -5,6 +5,8 @@
 [ext_resource type="Resource" path="res://data/effects/hit.tres" id="3_hit"]
 [ext_resource type="Texture2D" path="res://assets/sprites/skills/pebble_toss.png" id="4_pebble_toss"]
 
+[ext_resource type="Resource" path="res://data/projectiles/pebble.tres" id="pebble_proj"]
+
 [resource]
 script = ExtResource("1_skill_def")
 id = &"pebble_toss"
@@ -26,3 +28,4 @@ animation = &"attack"
 effect = ExtResource("2_swish")
 hit_effect = ExtResource("3_hit")
 icon = ExtResource("4_pebble_toss")
+projectile = ExtResource("pebble_proj")

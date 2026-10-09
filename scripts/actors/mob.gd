@@ -24,6 +24,8 @@ var flags := 0
 ## False until the server has said where it is.
 var known := false
 var death_t := 0
+## Projectiles still flying at it: it doesn't fall until they land.
+var incoming := 0
 var phase := randf() * 6.0
 var z := 0.0
 
@@ -70,7 +72,7 @@ func body_position() -> Vector2:
 func step() -> void:
 	phase += 0.08
 	position += (target - position) * FOLLOW
-	if death_t > 0:
+	if death_t > 0 and incoming <= 0:
 		death_t -= 1
 
 # ---------- HD-2D visuals ----------
@@ -92,7 +94,8 @@ func _process(_delta: float) -> void:
 	rig.visible = known and (not dead or death_t > 0)
 	if not rig.visible:
 		return
-	rig.set_opacity(clampf(death_t / 30.0, 0.0, 1.0) if dead else 1.0)
+	var fallen := dead and incoming <= 0
+	rig.set_opacity(clampf(death_t / 30.0, 0.0, 1.0) if fallen else 1.0)
 	var hurt := flags & HURT != 0
 	rig.set_flash(hurt and Engine.get_physics_frames() % 4 < 2)
 	var facing := dir
@@ -101,7 +104,7 @@ func _process(_delta: float) -> void:
 	rig.face(facing)
 	var moving := absf(position.x - _last_x) > 0.01
 	_last_x = position.x
-	if dead:
+	if fallen:
 		rig.play(&"die")
 	elif hurt:
 		rig.play(&"hurt")

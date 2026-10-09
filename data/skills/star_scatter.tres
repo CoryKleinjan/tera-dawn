@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="SkillDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
+[ext_resource type="Resource" path="res://data/projectiles/star.tres" id="2_star"]
+[ext_resource type="Resource" path="res://data/effects/hit.tres" id="3_hit"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/star_scatter.png" id="4_star_scatter"]
+
+[resource]
+script = ExtResource("1_skill_def")
+id = &"star_scatter"
+display_name = "Star Scatter"
+job = &"thief"
+max_level = 20
+description = "Fan a spray of stars across up to three monsters."
+mp_cost = 10
+mp_cost_per_level = 0.4
+cooldown = 32
+action_ticks = 20
+reach = 320.0
+max_targets = 3
+hits = 1
+damage_multiplier = 0.9
+damage_per_level = 0.035
+requires = &"lucky_seven"
+requires_level = 1
+projectile = ExtResource("2_star")
+weapons = Array[StringName]([&"claw"])
+kind = 0
+uses_ammo = true
+height = 90.0
+hit_effect = ExtResource("3_hit")
+icon = ExtResource("4_star_scatter")
+animation = &"attack"

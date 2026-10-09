@@ -7,7 +7,7 @@ extends Resource
 const FIELDS: Array[StringName] = [
 	&"strength", &"dexterity", &"intelligence", &"luck", &"max_hp", &"max_mp",
 	&"attack", &"magic_attack", &"defense", &"magic_defense", &"accuracy", &"avoid",
-	&"speed", &"jump",
+	&"speed", &"jump", &"crit",
 ]
 ## Short names for tooltips and the stats window.
 const LABELS := {
@@ -15,7 +15,7 @@ const LABELS := {
 	&"max_hp": "MaxHP", &"max_mp": "MaxMP", &"attack": "Weapon Attack",
 	&"magic_attack": "Magic Attack", &"defense": "Weapon Defense",
 	&"magic_defense": "Magic Defense", &"accuracy": "Accuracy", &"avoid": "Avoidability",
-	&"speed": "Speed", &"jump": "Jump",
+	&"speed": "Speed", &"jump": "Jump", &"crit": "Critical Rate",
 }
 ## The four stats Ability Points go into.
 const BASE: Array[StringName] = [&"strength", &"dexterity", &"intelligence", &"luck"]
@@ -38,10 +38,12 @@ const BASE: Array[StringName] = [&"strength", &"dexterity", &"intelligence", &"l
 @export var speed := 0
 ## Jump height bonus in percent.
 @export var jump := 0
+## Critical rate bonus in percent.
+@export var crit := 0
 
 ## A bonus as players read it: "+3", "-2", "+5%" for Speed and Jump.
 static func format(stat: StringName, amount: int) -> String:
-	return "%+d%s" % [amount, "%" if stat in [&"speed", &"jump"] else ""]
+	return "%+d%s" % [amount, "%" if stat in [&"speed", &"jump", &"crit"] else ""]
 
 func value(stat: StringName) -> int:
 	return int(get(stat))

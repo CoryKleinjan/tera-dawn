@@ -467,6 +467,7 @@ func _run() -> void:
 	await _check_job_advance()
 
 	await _check_skills()
+	await _check_ranged()
 
 	# Dawn Slash costs MP and hits several monsters.
 	var mp_before := Game.me.mp
@@ -659,6 +660,72 @@ func _check_skills() -> void:
 	world.player.cooldown = 0
 	_me().cooldown = 0
 	await _ticks(30)
+
+## An Archer's bow shoots arrows that fly to the monster, a Magician's Energy Bolt uses
+## magic, and a claw with no stars can't throw.
+func _check_ranged() -> void:
+	var ch := _me().character
+	var meadow: MapInstance = Net.server.maps[&"meadow"]
+	var sword := ch.equipment.take(&"weapon")
+	ch.job = Content.job(&"archer")
+	ch.equipment.put(&"weapon", ItemStack.exact(Content.item(&"willow_bow")))
+	var arrows: ItemDef = Content.item(&"feather_arrow")
+	ch.inventory.add(arrows, 50)
+	ch.recalc()
+	_me().dirty_character = true
+	_teleport(Vector2(1500, 620))
+	var m: SimMob = meadow.mobs.filter(func(x: SimMob) -> bool: return x.plat == meadow.layout.platforms[0] and not x.dead)[0]
+	m.position.x = 1500 + 200
+	world.player.face = 1
+	_me().face = 1
+	world.player.cooldown = 0
+	_me().cooldown = 0
+	await _ticks(3)
+	_check(Game.me.basic_attack().id == &"bow_shot", "a bow turns the attack key into a shot")
+	var hp := m.health.hp
+	m.position.x = 1500 + 200
+	await _tap("attack")
+	var flying := world.fx_layer.get_children().filter(func(c: Node) -> bool: return c is TDProjectile)
+	_check(not flying.is_empty(), "the arrow flies")
+	await _ticks(20)
+	_check(m.health.hp < hp or m.dead, "it hits a monster 200 pixels away")
+	_check(Game.me.inventory.count_of(arrows) == 49, "and uses one arrow")
+	# no arrows, no shot
+	ch.inventory.remove(arrows, 49)
+	_me().cooldown = 0
+	world.player.cooldown = 0
+	_me().dirty_character = true
+	await _ticks(2)
+	_check(Game.me.use_problem(Game.me.basic_attack()).contains("out of arrows"), "without arrows the bow can't shoot")
+	# a Magician's spell uses Magic Attack
+	ch.job = Content.job(&"mage")
+	ch.equipment.take(&"weapon")
+	ch.equipment.put(&"weapon", ItemStack.exact(Content.item(&"apprentice_wand")))
+	ch.base.intelligence = 60
+	ch.skills[&"energy_bolt"] = 1
+	ch.recalc()
+	var bolt: SkillDef = Content.skill(&"energy_bolt")
+	var magic := ch.magic_range()
+	_check(magic.y > ch.damage_range().y, "a Magician's spells hit harder than their wand")
+	var hit := Combat.player_hit(bolt, m.def, ch)
+	_check(hit["miss"] or (hit["damage"] >= 1 and hit["damage"] <= roundi(magic.y * 1.6) + 1), "Energy Bolt's damage comes from Magic Attack")
+	# a claw needs stars
+	ch.job = Content.job(&"thief")
+	ch.equipment.take(&"weapon")
+	ch.equipment.put(&"weapon", ItemStack.exact(Content.item(&"iron_claw")))
+	ch.skills[&"lucky_seven"] = 1
+	_check(ch.use_problem(Content.skill(&"lucky_seven")).contains("out of stars"), "Lucky Seven needs throwing stars")
+	ch.inventory.add(Content.item(&"iron_star"), 10)
+	_check(ch.use_problem(Content.skill(&"lucky_seven")) == "" and ch.ammo_attack() == 15, "with stars it's ready, and stars add attack")
+	ch.skills[&"flash_fist"] = 1
+	_check(ch.use_problem(Content.skill(&"flash_fist")).contains("needs a knuckle"), "Flash Fist needs a knuckle")
+	# back to a Warrior with a sword for the rest of the test
+	ch.job = Content.job(&"warrior")
+	ch.equipment.take(&"weapon")
+	ch.equipment.put(&"weapon", sword)
+	ch.recalc()
+	_me().dirty_character = true
+	await _ticks(2)
 
 func server_forfeit_check(ch: Character) -> void:
 	Net.ask(&"req_quest_forfeit", [&"q04_sweet_nectar"])

@@ -25,3 +25,4 @@ required_level = 12
 required_strength = 50
 stats = SubResource("stats")
 variance = 3
+weapon_kind = &"sword"

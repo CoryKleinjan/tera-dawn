@@ -111,7 +111,7 @@ func _attacks() -> void:
 			use_quickslot(i)
 			return
 	if Input.is_action_just_pressed("attack"):
-		_use(Content.skill(Character.BASIC_ATTACK))
+		_use(Game.me.basic_attack())
 
 ## Does what's on quickslot `i`: a skill, or the first stack of an item.
 func use_quickslot(i: int) -> void:

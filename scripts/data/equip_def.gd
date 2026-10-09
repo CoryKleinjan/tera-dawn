@@ -9,6 +9,14 @@ const SLOT_NAMES := ["Weapon", "Hat", "Top", "Bottom", "Shoes", "Gloves", "Cape"
 
 @export var slot: Slot = Slot.WEAPON
 
+@export_group("Weapon")
+## "sword", "bow", "wand", "claw", "knuckle", "gun"... Skills can require one.
+@export var weapon_kind: StringName
+## The ammo kind it fires (AmmoDef.kind), empty for melee weapons.
+@export var ammo: StringName
+## Replaces the plain attack while wielded (a bow's shot). Null keeps the basic attack.
+@export var basic_attack: SkillDef
+
 @export_group("Requirements")
 ## Job lines that can wear it (JobDef.family); empty for anyone.
 @export var jobs: Array[StringName] = []
