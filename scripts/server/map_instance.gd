@@ -36,6 +36,8 @@ func step() -> void:
 	for p in players.values():
 		if p.step():
 			server.revive(p)
+		elif p.character.pet != &"":
+			_pet_step(p)
 	for m in mobs:
 		m.step()
 	for id in drops.keys():
@@ -144,6 +146,9 @@ func kill_mob(m: SimMob, killer: SimPlayer) -> void:
 		var amount := entry.roll()
 		if amount > 0:
 			loot.append([entry.item, amount])
+	# a Monster Book card, until the killer's page for it is complete
+	if not killer.character.book.complete(m.def) and randf() < CardDef.CHANCE:
+		loot.append([Content.card(m.def), 1])
 	# quest items only drop for someone on that quest
 	for pair in killer.character.quests.quest_drops(m.def, killer.character):
 		if randf() < pair[1]:
@@ -202,6 +207,10 @@ func loot_near(p: SimPlayer) -> bool:
 func pick_up(p: SimPlayer, d: SimDrop) -> bool:
 	var ch := p.character
 	var full := "Your %s inventory is full." % ItemDef.TAB_NAMES[d.item.tab()]
+	if d.item is CardDef:
+		_remove_drop(d, p.peer)
+		_add_card(p, (d.item as CardDef).monster)
+		return true
 	if d.item.is_currency:
 		ch.shards += d.amount
 		p.dirty_vitals = true
@@ -220,6 +229,57 @@ func pick_up(p: SimPlayer, d: SimDrop) -> bool:
 	tell(p, "Picked up %s" % amount_name(d.item, d.amount), Palette.MIST)
 	server.picked_up(p, d.item)
 	return true
+
+## Whether the player has room for a drop (a pet only picks up what fits).
+func has_room(p: SimPlayer, d: SimDrop) -> bool:
+	if d.item.is_currency or d.item is CardDef:
+		return true
+	if d.stack:
+		return p.character.inventory.room_for([d.stack])
+	return p.character.inventory.has_room(d.item, d.amount)
+
+func _add_card(p: SimPlayer, m: MonsterDef) -> void:
+	var book := p.character.book
+	var level := book.level()
+	if not book.add_card(m):
+		tell(p, "Your %s page is already complete." % m.display_name, Palette.MIST)
+		return
+	p.dirty_character = true
+	tell(p, "Monster Book: %s card (%d/%d)" % [m.display_name, book.cards(m), CardDef.SET], Color("a8e6ff"))
+	if book.complete(m):
+		tell(p, "You completed the %s page!" % m.display_name, Palette.SUN)
+	if book.level() > level:
+		p.character.recalc()
+		tell(p, "Your Monster Book reached level %d: +%d to every stat." % [book.level(), book.level() - 1], Palette.SUN)
+		broadcast(&"ev_effect", [&"level_up", p.position.x, p.position.y, 1, p.peer])
+
+## The pet that's out gets hungrier, and picks up what it can reach.
+func _pet_step(p: SimPlayer) -> void:
+	var c := p.character
+	var pet := c.pet_def()
+	if pet == null:
+		c.pet = &""
+		return
+	if tick % pet.hunger_ticks == 0:
+		c.pet_full = maxi(0, c.pet_full - 5)
+		p.dirty_character = true
+		if c.pet_full == 0:
+			c.pet = &""
+			tell(p, "%s got hungry and went home." % pet.display_name, BAD)
+			return
+		if c.pet_full == 20:
+			tell(p, "%s is getting hungry. Feed it some pet food." % pet.display_name, BAD)
+	if tick % 2400 == 0 and not pet.chatter.is_empty() and randf() < 0.5:
+		broadcast(&"ev_chat", ["pet", pet.display_name, pet.chatter.pick_random(), p.peer])
+	if tick % pet.loot_every != 0 or p.climbing:
+		return
+	var best: SimDrop = null
+	for d in drops.values():
+		if d.can_loot(p, pet.loot_reach) and has_room(p, d) \
+				and (best == null or absf(d.flight.position.x - p.position.x) < absf(best.flight.position.x - p.position.x)):
+			best = d
+	if best:
+		pick_up(p, best)
 
 ## Drops a stack from the player's bag onto the ground at their feet.
 func drop_from_player(p: SimPlayer, stack: ItemStack) -> void:

@@ -123,7 +123,7 @@ func _can_drop_data(at: Vector2, data: Variant) -> bool:
 		"skills", "quickslot":
 			return true
 		"inventory":
-			return data["tab"] == ItemDef.Tab.USE
+			return data["tab"] in [ItemDef.Tab.USE, ItemDef.Tab.SETUP]
 	return false
 
 func _drop_data(at: Vector2, data: Variant) -> void:
@@ -132,7 +132,7 @@ func _drop_data(at: Vector2, data: Variant) -> void:
 		"skills":
 			assign(i, &"skill", data["id"])
 		"inventory":
-			var stack := Game.me.inventory.at(ItemDef.Tab.USE, data["index"])
+			var stack := Game.me.inventory.at(data["tab"], data["index"])
 			if stack:
 				assign(i, &"item", stack.item.id)
 		"quickslot":

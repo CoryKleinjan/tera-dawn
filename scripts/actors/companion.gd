@@ -1,0 +1,88 @@
+class_name TDCompanion
+extends Node2D
+## What comes along with a player (yours or someone else's): the chair they're sitting on
+## and the pet trotting after them. The player moves it each frame with `follow`.
+## Pets and chairs use their item icon as their body until they get their own art.
+
+## How far behind its owner a pet keeps, in game pixels.
+const PET_GAP := 72.0
+
+var chair: ChairDef
+var pet: PetDef
+## Where the pet is, in game pixels (its feet).
+var pet_pos := Vector2.ZERO
+var pet_face := 1
+var speech := ""
+var speech_t := 0
+var _walk := 0.0
+var _seat: Sprite3D
+var _body: Sprite3D
+var _shadow: Sprite3D
+
+func set_chair(id: StringName) -> void:
+	var c := Content.items.get(id) as ChairDef
+	if c == chair:
+		return
+	chair = c
+	if _seat:
+		_seat.queue_free()
+		_seat = null
+	if chair and chair.icon:
+		_seat = TDStage.sprite(chair.icon, TDStage.TEXEL * chair.seat_scale)
+		add_child(_seat)
+
+## Brings out a pet (or puts it away with an empty id) next to `at`.
+func set_pet(id: StringName, at: Vector2) -> void:
+	var p := Content.items.get(id) as PetDef
+	if p == pet:
+		return
+	pet = p
+	for s in [_body, _shadow]:
+		if s:
+			s.queue_free()
+	_body = null
+	_shadow = null
+	speech_t = 0
+	if pet and pet.icon:
+		pet_pos = at
+		_body = TDStage.sprite(pet.icon, TDStage.TEXEL * pet.body_scale)
+		add_child(_body)
+		_shadow = TDStage.shadow_sprite(34)
+		add_child(_shadow)
+
+func say(text: String) -> void:
+	speech = text
+	speech_t = 240
+
+## Puts the chair under the owner's feet and moves the pet toward its spot behind them.
+## `ground` is the top of whatever is under the owner (for the pet to walk on).
+func follow(owner_feet: Vector2, owner_face: int, z: float, ground: float) -> void:
+	if speech_t > 0:
+		speech_t -= 1
+	if _seat:
+		_seat.position = TDStage.to3d(owner_feet + Vector2(0, 2), z - 0.03)
+		_seat.flip_h = owner_face < 0
+	if _body == null:
+		return
+	var want := Vector2(owner_feet.x - owner_face * PET_GAP, ground)
+	if pet_pos.distance_to(want) > 500.0:
+		pet_pos = want # left far behind (a portal, a fall): catch up at once
+	var step := (want - pet_pos) * Vector2(0.08, 0.2)
+	pet_pos += step
+	if absf(step.x) > 0.2:
+		pet_face = 1 if step.x > 0 else -1
+		_walk += 0.3
+	else:
+		_walk = 0.0
+	var hop := absf(sin(_walk)) * 6.0
+	_body.position = TDStage.to3d(pet_pos + Vector2(0, -hop), z + 0.01)
+	_body.flip_h = pet_face < 0
+	_shadow.position = TDStage.to3d(Vector2(pet_pos.x, ground), z - 0.02) + Vector3(0, 0.02, 0)
+
+## How far the sitter is raised to sit on the chair, in game pixels.
+func seat_lift() -> float:
+	return chair.icon.get_height() * TDStage.TEXEL * chair.seat_scale * 0.45 if chair and chair.icon else 0.0
+
+## The top of the pet's head, for its name tag and speech bubble.
+func pet_head() -> Vector2:
+	return pet_pos + Vector2(0, -(pet.icon.get_height() * TDStage.TEXEL * pet.body_scale if pet and pet.icon else 30.0))

@@ -55,6 +55,17 @@ var fame_day := -1
 var fame_given := {}
 ## The guild's name, or "". The server's guild list is the real record.
 var guild := ""
+## Kills and cards of every monster met.
+var book := MonsterBook.new()
+## The pet that's out (a PetDef id, or empty) and how full it is (0 to 100).
+var pet: StringName = &""
+var pet_full := 100
+## Every map visited, for the world map and achievements.
+var visited: Array[String] = []
+## Achievement ids reached (see Achievements).
+var achievements: Array[String] = []
+## Tallies achievements count that aren't kept anywhere else: "bosses", "scrolls", "sat", "pets", "deals".
+var counters := {}
 
 func _init() -> void:
 	equipment.changed.connect(recalc)
@@ -85,6 +96,7 @@ func recalc() -> void:
 		return
 	stats = base.plus(equipment.bonus())
 	stats.add(skill_bonus())
+	stats.add(book.bonus())
 	health.set_max(max_hp())
 	mp = mini(mp, max_mp())
 	stats_changed.emit()
@@ -157,7 +169,8 @@ func spend_ammo(n: int) -> void:
 func xp_need(lvl := -1) -> int:
 	if lvl < 0:
 		lvl = level
-	return int(floor(15.0 * pow(lvl, 1.6)))
+	# a few kills a level at first, climbing to a few dozen by the 30s, like MapleStory
+	return int(floor(15.0 * pow(lvl, 1.6) * (1.0 + lvl / 8.0)))
 
 ## Adds EXP and returns how many levels were gained.
 func gain_xp(n: int) -> int:
@@ -295,6 +308,21 @@ func regen_bonus() -> Vector2i:
 		if s and s.kind == SkillDef.Kind.PASSIVE:
 			out += Vector2i(s.regen_hp_at(skills[id]), s.regen_mp_at(skills[id]))
 	return out
+
+## Adds to one of the achievement tallies.
+func count(kind: String, n := 1) -> void:
+	counters[kind] = int(counters.get(kind, 0)) + n
+
+## Notes a map as visited. True the first time.
+func visit(id: StringName) -> bool:
+	if visited.has(String(id)):
+		return false
+	visited.append(String(id))
+	return true
+
+## The pet that's out, or null.
+func pet_def() -> PetDef:
+	return Content.items.get(pet) as PetDef
 
 ## Puts a skill or an item (`kind` "skill" or "item") on quickslot `i`, or clears it with
 ## an empty kind. A skill or item already on another slot swaps with what's here.
@@ -465,6 +493,8 @@ func to_dict() -> Dictionary:
 		"skills": _string_keys(skills), "sp": sp, "buffs": _string_keys(buffs),
 		"quickslots": quickslots.map(func(q: Array) -> Array: return q.map(func(v) -> String: return String(v))),
 		"buddies": buddies.duplicate(), "fame": fame, "fame_day": fame_day, "fame_given": fame_given.duplicate(), "guild": guild,
+		"book": book.to_dict(), "pet": String(pet), "pet_full": pet_full, "visited": visited.duplicate(),
+		"achievements": achievements.duplicate(), "counters": counters.duplicate(),
 	}
 
 static func _string_keys(d: Dictionary) -> Dictionary:
@@ -535,6 +565,21 @@ func load_dict(data: Dictionary) -> void:
 		for k in data["fame_given"]:
 			fame_given[str(k)] = int(data["fame_given"][k])
 	guild = str(data.get("guild", guild))
+	if data.get("book") is Dictionary:
+		book.load_dict(data["book"])
+	var pet_id := StringName(str(data.get("pet", "")))
+	pet = pet_id if Content.items.get(pet_id) is PetDef else &""
+	pet_full = clampi(int(data.get("pet_full", pet_full)), 0, 100)
+	for key in ["visited", "achievements"]:
+		if data.get(key) is Array:
+			var list: Array[String] = get(key)
+			list.clear()
+			for v in data[key]:
+				list.append(str(v))
+	if data.get("counters") is Dictionary:
+		counters = {}
+		for k in data["counters"]:
+			counters[str(k)] = int(data["counters"][k])
 	recalc()
 	health.set_hp(maxi(1, int(data.get("hp", max_hp()))))
 	mp = clampi(int(data.get("mp", max_mp())), 0, max_mp())

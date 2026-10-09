@@ -152,6 +152,12 @@ func req_use_item(slot: int) -> void:
 	if server:
 		server.on_use_item(_sender(), slot)
 
+## Sit on the chair, or bring out the pet, in Setup slot `slot` (again to stop).
+@rpc("any_peer", "call_local", "reliable")
+func req_setup(slot: int) -> void:
+	if server:
+		server.on_setup(_sender(), slot)
+
 @rpc("any_peer", "call_local", "reliable")
 func req_chat(text: String) -> void:
 	if server:
@@ -341,6 +347,18 @@ func ev_snapshot(snap: Dictionary) -> void:
 func ev_player_left(peer: int) -> void:
 	if world:
 		world.remove_avatar(peer)
+
+## You sat down on a chair (or got up, with an empty id).
+@rpc("authority", "call_local", "reliable")
+func ev_sit(chair_id: StringName) -> void:
+	if world:
+		world.player.sit(chair_id)
+
+## You reached an achievement.
+@rpc("authority", "call_local", "reliable")
+func ev_achievement(id: String) -> void:
+	if world:
+		world.show_achievement(id)
 
 @rpc("authority", "call_local", "reliable")
 func ev_log(text: String, color: String) -> void:

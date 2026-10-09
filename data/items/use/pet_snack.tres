@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="UseDef" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/use_def.gd" id="1_use_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/pet_snack.png" id="2_pet_snack"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="3_shard_pickup"]
+
+[resource]
+script = ExtResource("1_use_def")
+id = &"pet_snack"
+display_name = "Pet Snack"
+description = "A crunchy biscuit pets go wild for. Feeds the pet you have out."
+icon = ExtResource("2_pet_snack")
+sprite_scale = 0.36
+glow_color = Color(0.878431, 0.690196, 0.392157, 1.0)
+pickup_effect = ExtResource("3_shard_pickup")
+sell_price = 8
+max_stack = 100
+pet_food = 30
+cooldown = 30

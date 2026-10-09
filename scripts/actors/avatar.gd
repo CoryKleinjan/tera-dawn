@@ -27,6 +27,10 @@ var shop_title := ""
 var speech := ""
 var speech_t := 0
 var rig: SpriteRig
+## Their chair and pet.
+var companion: TDCompanion
+var chair: StringName = &""
+var pet: StringName = &""
 var _swing := false
 
 static func create(w: TDWorld, peer_id: int) -> TDAvatar:
@@ -35,7 +39,8 @@ static func create(w: TDWorld, peer_id: int) -> TDAvatar:
 	a.peer = peer_id
 	return a
 
-## Takes the server's latest [peer, name, x, y, face, animation, level, flags, job, guild, shop sign].
+## Takes the server's latest [peer, name, x, y, face, animation, level, flags, job, guild,
+## chair, pet, shop sign].
 func apply(state: Array) -> void:
 	char_name = state[1]
 	target = Vector2(state[2], state[3])
@@ -49,7 +54,9 @@ func apply(state: Array) -> void:
 		job = StringName(state[8])
 		rig.set_tint(Content.job(job).tint)
 	guild = str(state[9]) if state.size() > 9 else ""
-	shop_title = str(state[10]) if state.size() > 10 else ""
+	chair = StringName(str(state[10])) if state.size() > 10 else &""
+	pet = StringName(str(state[11])) if state.size() > 11 else &""
+	shop_title = str(state[12]) if state.size() > 12 else ""
 	if not known or position.distance_to(target) > 300.0:
 		position = target # first sight or a portal hop: no gliding across the map
 	known = true
@@ -72,6 +79,8 @@ func _ready() -> void:
 	rig = SpriteRig.new()
 	rig.setup(TDPlayer.HERO_FRAMES, null, TDStage.TEXEL, 40.0)
 	add_child(rig)
+	companion = TDCompanion.new()
+	add_child(companion)
 
 func _process(_delta: float) -> void:
 	if rig == null or world == null or world.map == null:
@@ -79,12 +88,16 @@ func _process(_delta: float) -> void:
 	rig.visible = known
 	var climbing := flags & CLIMBING != 0
 	var airborne := climbing or fainted() or world.layout.ground_below(position) - position.y > 200.0
-	rig.place(position, TDStage.Z_OTHER_PLAYER, NAN if airborne else world.layout.ground_below(position))
+	rig.place(position + Vector2(0, -companion.seat_lift()), TDStage.Z_OTHER_PLAYER, NAN if airborne else world.layout.ground_below(position))
 	rig.play(&"faint" if fainted() else animation, _swing)
 	_swing = false
 	rig.face(1 if climbing else face)
 	var blink := flags & BLINK != 0 and not fainted() and Engine.get_physics_frames() % 8 < 4
 	rig.set_opacity(0.0 if blink else 1.0)
+	companion.visible = known
+	companion.set_chair(chair)
+	companion.set_pet(pet, position)
+	companion.follow(position, face, TDStage.Z_OTHER_PLAYER, world.layout.ground_below(position))
 
 ## Name tag (and guild) under their feet, drawn by the overlay.
 func draw_tag(ci: CanvasItem, at: Vector2) -> void:

@@ -32,6 +32,11 @@ The game is built to grow: monsters, NPCs, items, skills, effects, maps and biom
 - **Parties** of up to six: members on the same map get 40% of each other's kill EXP, and their HP shows under the map name. **Buddies** (up to 20) show who's online and where. **Guilds**: found one with the Guild Clerk in Dawnharbor (15,000 Dawnshards, level 10); its name shows under every member's name. The community window (O) has a tab for each.
 - **Trading**: drag items onto your side of the trade window and set your Dawnshards; nothing changes hands until both players press Trade. **Fame**: from level 15, once a day, and the same player once a month, shown on the character window.
 - **The Free Market** (through the portal on Dawnharbor's east dock): the Market Clerk helps you set up a shop. Price your goods, name the stall and stand behind it; other players click your sign to buy, and anything unsold comes back when you close.
+- **Chairs**: double-click one in the new Setup tab to sit on it; you recover extra HP and MP until you move. Pip in the Free Market sells a stool and a cushion chair, and every boss can drop its own chair (the Ember Throne, the Coral Seat, the Lantern Bench...).
+- **Pets**: Puffpaw, Sproutling and Emberkit, from Pip. A pet follows you, picks up anything near you that fits in your bag, and chats now and then. It gets hungry: feed it Pet Snacks (Pip and every general store) or it goes home.
+- **The Monster Book** (L): a page for every monster with how many you've beaten. Monsters drop cards; five complete a page and reveal its drops, and every three complete pages raise the book's level, which adds a point to STR, DEX, INT and LUK.
+- **Achievements**: 24 milestones (kills, bosses, levels, quests, maps visited, cards, scrolls, fame, guilds, trades, pets and chairs), shown in the collection window (L) and unlocked on Steam.
+- **Balance**: monsters from level 10 up have HP that keeps pace with player damage (3 to 5 hits of your main attack at your level), EXP to match, a level curve that goes from a few kills a level to about twenty, and spells that grow as fast as weapons. `tests/balance_report.tscn` prints the whole table.
 - Two NPCs in the meadow village. Press Up to talk: a dialogue window shows what they offer.
 - **Quests**: six to start, from Elder Rowan and Mira, with kill, collect and visit objectives, a quest item that only drops while you're on its quest, and a repeatable one. A "!" over an NPC means they have a quest for you, "?" means you can hand one in. The quest log (Q) lists what's in progress, available and done, and a tracker under the minimap shows your progress.
 - **Jobs**: everyone starts as a Beginner. Each job town's instructor turns a level 10 Beginner into their job (a Magician from level 8) once they have the stat the job asks for, and hands over the job's first weapon. Some gear can only be worn by one job line.
@@ -42,7 +47,7 @@ The game is built to grow: monsters, NPCs, items, skills, effects, maps and biom
 - EXP, leveling, HP and MP regen, fainting and respawn.
 - **Dawnshards** (currency) dropped by monsters, plus potions, monster parts and gear from per-monster drop tables.
 - MapleStory-style stats: STR, DEX, INT and LUK, 5 Ability Points per level, and a damage range worked out from your main stat and weapon.
-- An **inventory** with Equip, Use and Etc tabs, **equipment** in 12 slots that changes your stats, and a **character** window.
+- An **inventory** with Equip, Use, Etc and Setup tabs, **equipment** in 12 slots that changes your stats, and a **character** window.
 - Characters saved by the server, one file per name in `user://characters/` (a single-player save from before multiplayer is brought in the first time you play).
 - Keyboard and gamepad controls, fullscreen toggle, title and pause menu.
 
@@ -63,6 +68,7 @@ The game is built to grow: monsters, NPCs, items, skills, effects, maps and biom
 | Skills | K | |
 | World map | W | |
 | Community (buddies, party, guild) | O | |
+| Monster Book and achievements | L | |
 | Chat | Enter | |
 | Enter a portal, talk to an NPC | Up | Up |
 | Pick a dialogue option | 1 to 9, or click | |
@@ -120,7 +126,7 @@ tools/art/         Sheet slicer, store-art cropper, fx textures, contact-sheet p
 ## Shipping on Steam
 
 1. **Steamworks.** Sign up at partner.steamgames.com, pay the Steam Direct fee for an app, and note the app ID.
-2. **GodotSteam.** Install the GodotSteam GDExtension from the Godot Asset Library into `addons/godotsteam`. Then set `APP_ID` in `scripts/autoload/steam_service.gd`. Achievements (for example `REACH_LEVEL_5`, which the game already unlocks) are defined in the Steamworks dashboard.
+2. **GodotSteam.** Install the GodotSteam GDExtension from the Godot Asset Library into `addons/godotsteam`. Then set `APP_ID` in `scripts/autoload/steam_service.gd`. Define the achievements in the Steamworks dashboard with the `steam` ids listed in `scripts/systems/achievements.gd` (`REACH_LEVEL_5`, `ACH_FIRST_HUNT`, ...); the game unlocks each one when the server says it was reached.
 3. **Export.** In Godot, install the export templates (Editor → Manage Export Templates). Then use **Project → Export**: presets for Windows, Linux and macOS are already in `export_presets.cfg`. macOS builds need signing and notarization with an Apple Developer account.
 4. **Upload.** Upload the builds with SteamPipe (`steamcmd` + an app build VDF), set up the store page, and submit for review.
 

@@ -31,6 +31,6 @@ offer_text = "You've joined us, but words are cheap. Bring me 15 Pebble Cores fr
 progress_text = "15 Pebble Cores. They come from the monsters of Dawnrise Isle."
 complete_text = "Good. You have the makings of one of us. Wear this with pride."
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1")])
-reward_xp = 800
+reward_xp = 1800
 reward_shards = 500
 reward_items = Array[ExtResource("4_drop_entry")]([SubResource("Resource_2")])

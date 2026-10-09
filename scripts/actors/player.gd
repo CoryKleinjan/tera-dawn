@@ -34,13 +34,19 @@ var _reported := &""  # the animation the server last heard about
 var _swing := false   # restart the attack animation on the next frame
 var speech := ""      # the last thing said in map chat, shown in a bubble
 var speech_t := 0
+## The chair you're sitting on (the server said so), or empty. Moving gets you up.
+var sitting: StringName = &""
 
 var rig: SpriteRig
+## Your chair and pet.
+var companion: TDCompanion
 
 func _ready() -> void:
 	rig = SpriteRig.new()
 	rig.setup(HERO_FRAMES, null, TDStage.TEXEL, 40.0)
 	add_child(rig)
+	companion = TDCompanion.new()
+	add_child(companion)
 
 func place(x: float, y: float) -> void:
 	position = Vector2(x, y)
@@ -48,6 +54,7 @@ func place(x: float, y: float) -> void:
 	climb = null
 	on_ground = true
 	down = false
+	sitting = &""
 	platform = world.platforms[0]
 	_report()
 
@@ -61,6 +68,14 @@ func fainted() -> bool:
 func faint() -> void:
 	down = true
 	climb = null
+	sitting = &""
+
+## The server sat you down on a chair (or got you up, with an empty id).
+func sit(chair_id: StringName) -> void:
+	sitting = chair_id
+	if sitting != &"":
+		vel = Vector2.ZERO
+		action_t = 0
 
 ## The server says a monster hit you: blink, and get knocked away from it.
 func knock_back(from_x: float) -> void:
@@ -89,6 +104,15 @@ func step() -> void:
 			set(t, get(t) - 1)
 	if not Game.me.buffs.is_empty():
 		Game.me.tick_buffs() # the server ends them too; this keeps timers and speed in step
+	if sitting != &"":
+		# any move gets you up; the server sees you move and does the same
+		for a in ["move_left", "move_right", "move_up", "move_down", "jump", "attack"]:
+			if _held(a):
+				sitting = &""
+		if sitting != &"":
+			if world.tick % REPORT_EVERY == 0 or _animation() != _reported:
+				_report()
+			return
 	_attacks()
 	# hold the loot key to pick things up one after another
 	if _held("loot") and loot_cd == 0 and not is_climbing():
@@ -130,9 +154,10 @@ func use_quickslot(i: int) -> void:
 	if q.is_empty():
 		return
 	if q[0] == &"item":
-		var slot := Game.me.inventory.find(Content.items.get(q[1]))
+		var item: ItemDef = Content.items.get(q[1])
+		var slot := Game.me.inventory.find(item)
 		if slot >= 0:
-			Net.ask(&"req_use_item", [slot])
+			Net.ask(&"req_setup" if item.tab() == ItemDef.Tab.SETUP else &"req_use_item", [slot])
 		return
 	_use(Content.skills.get(q[1]))
 
@@ -269,17 +294,22 @@ func _move() -> void:
 func _process(_delta: float) -> void:
 	if rig == null or world == null or world.map == null:
 		return
-	rig.place(position, Z, NAN if is_climbing() or fainted() or not _over_ground() else _ground_y())
+	rig.place(position + Vector2(0, -companion.seat_lift()), Z, NAN if is_climbing() or fainted() or not _over_ground() else _ground_y())
 	rig.play(_animation(), _swing)
 	_swing = false
 	rig.face(1 if is_climbing() else face)
 	if Game.me.job:
 		rig.set_tint(Game.me.job.tint)
 	rig.set_opacity(0.0 if inv > 0 and inv % 8 < 4 and not fainted() else 1.0)
+	companion.set_chair(sitting)
+	companion.set_pet(Game.me.pet, position)
+	companion.follow(position, face, Z, _ground_y())
 
 func _animation() -> StringName:
 	if fainted():
 		return &"faint"
+	if sitting != &"":
+		return &"sit"
 	if is_climbing():
 		var moving := _held("move_up") or _held("move_down")
 		return climb.style.climb_animation if moving and climb.style else &"climb_idle"

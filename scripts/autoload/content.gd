@@ -32,6 +32,15 @@ var regions := {}
 func _ready() -> void:
 	for kind in FOLDERS:
 		set(kind, _load_folder(FOLDERS[kind], {}))
+	# every monster has a Monster Book card, made here rather than kept as files
+	var art: Texture2D = load("res://assets/sprites/items/monster_card.png")
+	for m in monsters.values():
+		var card := CardDef.for_monster(m, art)
+		items[card.id] = card
+
+## The Monster Book card of a monster.
+func card(m: MonsterDef) -> CardDef:
+	return items.get(StringName("card_%s" % m.id))
 
 func monster(id: StringName) -> MonsterDef:
 	return _lookup(monsters, id, "monster")

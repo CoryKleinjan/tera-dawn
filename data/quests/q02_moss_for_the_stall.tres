@@ -32,6 +32,6 @@ offer_text = "My potion shelf needs fresh moss to keep the bottles cool. Mosslin
 progress_text = "Ten Moss Tufts, please. The Mosslings wander the lower platforms."
 complete_text = "Oh, these are perfect! Here, a little something from the shelf, on the house."
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1")])
-reward_xp = 90
+reward_xp = 112
 reward_shards = 120
 reward_items = Array[ExtResource("4_drop_entry")]([SubResource("Resource_2")])

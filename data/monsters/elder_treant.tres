@@ -22,6 +22,7 @@
 [ext_resource type="Resource" path="res://data/items/equips/nightfang_garb.tres" id="20_nightfang_garb"]
 [ext_resource type="Resource" path="res://data/items/equips/windstep_boots.tres" id="21_windstep_boots"]
 [ext_resource type="Resource" path="res://data/items/use/power_elixir.tres" id="22_power_elixir"]
+[ext_resource type="Resource" path="res://data/items/setup/stump_seat.tres" id="p11_stump_seat"]
 
 [sub_resource type="Resource" id="Resource_18"]
 script = ExtResource("4_drop_entry")
@@ -149,14 +150,21 @@ chance = 1.0
 min_amount = 336
 max_amount = 672
 
+[sub_resource type="Resource" id="P11_stump_seat"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("p11_stump_seat")
+chance = 0.08
+min_amount = 1
+max_amount = 1
+
 [resource]
 script = ExtResource("1_monster_def")
 id = &"elder_treant"
 display_name = "Elder Treant"
 level = 28
-max_hp = 19012
+max_hp = 71105
 attack = 85
-exp_reward = 3509
+exp_reward = 8835
 speed = 0.5
 size = Vector2(96.0, 150.0)
 boss = true
@@ -167,5 +175,5 @@ shot_cooldown = 110
 texture = ExtResource("3_boulderkin")
 sprite_scale = 0.9299999999999999
 tint = Color(0.439216, 0.627451, 0.313725, 1.0)
-drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18")])
+drops = Array[ExtResource("4_drop_entry")]([SubResource("P11_stump_seat"), SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18")])
 respawn_ticks = Vector2i(1800, 2400)

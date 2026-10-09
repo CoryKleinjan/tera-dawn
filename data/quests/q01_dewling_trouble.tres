@@ -31,6 +31,6 @@ offer_text = "The Dewlings have been splashing through the village gardens all w
 progress_text = "Eight Dewlings, young one. They bounce about near the village."
 complete_text = "Ha! The gardens are dry at last. You have a good arm. Take these; you'll need them."
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1")])
-reward_xp = 60
+reward_xp = 68
 reward_shards = 80
 reward_items = Array[ExtResource("4_drop_entry")]([SubResource("Resource_2")])

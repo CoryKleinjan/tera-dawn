@@ -22,6 +22,7 @@
 [ext_resource type="Resource" path="res://data/items/equips/saltwood_pistol.tres" id="20_saltwood_pistol"]
 [ext_resource type="Resource" path="res://data/items/equips/nightfang_garb.tres" id="21_nightfang_garb"]
 [ext_resource type="Resource" path="res://data/items/use/power_elixir.tres" id="22_power_elixir"]
+[ext_resource type="Resource" path="res://data/items/setup/lantern_bench.tres" id="p11_lantern_bench"]
 
 [sub_resource type="Resource" id="Resource_18"]
 script = ExtResource("4_drop_entry")
@@ -149,14 +150,21 @@ chance = 1.0
 min_amount = 360
 max_amount = 720
 
+[sub_resource type="Resource" id="P11_lantern_bench"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("p11_lantern_bench")
+chance = 0.08
+min_amount = 1
+max_amount = 1
+
 [resource]
 script = ExtResource("1_monster_def")
 id = &"lantern_wraith"
 display_name = "Lantern Wraith"
 level = 30
-max_hp = 20860
+max_hp = 84040
 attack = 91
-exp_reward = 3915
+exp_reward = 10384
 speed = 1.3
 size = Vector2(86.0, 134.0)
 boss = true
@@ -170,5 +178,5 @@ texture = ExtResource("3_cinder_imp")
 sprite_scale = 2.4
 tint = Color(0.564706, 0.501961, 1.0, 1.0)
 light_color = Color(0.501961, 0.376471, 1.0, 1.0)
-drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18")])
+drops = Array[ExtResource("4_drop_entry")]([SubResource("P11_lantern_bench"), SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18")])
 respawn_ticks = Vector2i(1800, 2400)

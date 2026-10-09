@@ -9,7 +9,7 @@ const WINDOW_BUTTON := 32.0
 ## UI sheet art for each window's button. Windows without art yet get a round button
 ## with a symbol from WINDOW_SYMBOLS.
 const WINDOW_ICONS := {"inventory": "bag_button", "equipment": "gear_button", "stats": "stats_button"}
-const WINDOW_SYMBOLS := {"quests": "!", "skills": "SP", "worldmap": "W", "community": "O"}
+const WINDOW_SYMBOLS := {"quests": "!", "skills": "SP", "worldmap": "W", "community": "O", "collection": "MB"}
 
 var world: TDWorld
 

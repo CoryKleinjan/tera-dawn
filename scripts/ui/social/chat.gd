@@ -9,7 +9,7 @@ const W := 380.0
 const LINES := 7
 const LINE_H := 17.0
 const FADE_TICKS := 900
-const COLORS := {"all": Color("f4ecff"), "whisper": Color("ff9ee6"), "whisper_sent": Color("ff9ee6"),
+const COLORS := {"all": Color("f4ecff"), "pet": Color("ffd9a8"), "whisper": Color("ff9ee6"), "whisper_sent": Color("ff9ee6"),
 	"party": Color("ffb36b"), "guild": Color("b8f070"), "buddy": Color("8fe0ff"), "system": Color("c9b8d9")}
 
 var world: TDWorld

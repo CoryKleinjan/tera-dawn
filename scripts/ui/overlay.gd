@@ -111,6 +111,14 @@ func _draw_quest_tracker(at: Vector2) -> void:
 				y += 15
 		y += 4
 
+## A pet's name under it and what it's saying over it.
+func _draw_pet(c: TDCompanion, z: float, shown: bool) -> void:
+	if c == null or c.pet == null or not shown or not world.stage.in_view(c.pet_pos, z):
+		return
+	UiSkin.draw_name_tag(self, world.stage.screen(c.pet_pos, z) + Vector2(0, 4), c.pet.display_name, Color("ffd9a8"))
+	if c.speech_t > 0:
+		UiSkin.draw_speech(self, world.stage.screen(c.pet_head(), z) + Vector2(0, -6), c.speech)
+
 func _draw_world_text() -> void:
 	var st := world.stage
 	for m in world.mobs():
@@ -139,6 +147,9 @@ func _draw_world_text() -> void:
 			UiSkin.draw_hint(self, feet + Vector2(0, -84), "Shop: " + world.hud.windows["player_shop"].shop_title)
 		elif p.speech_t > 0:
 			UiSkin.draw_speech(self, feet + Vector2(0, -84), p.speech)
+	_draw_pet(world.player.companion, TDPlayer.Z, world.started and not p.fainted())
+	for a in world.avatars.values():
+		_draw_pet(a.companion, TDStage.Z_OTHER_PLAYER, a.known)
 	for f in world.fx_layer.get_children():
 		if f is TDFloatText:
 			(f as TDFloatText).draw_at(self, st.screen(f.position, 0.6))

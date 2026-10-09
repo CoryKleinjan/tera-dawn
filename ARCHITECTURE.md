@@ -79,6 +79,30 @@ shops on maps with `MapDef.market`. Each player gets a summary of their buddies,
 guild through `ev_social` whenever it changes (`Game.social`); the community window, the
 player menu, the party HP list and the trade and shop windows (`scripts/ui/social/`) read it.
 
+### Chairs, pets, the Monster Book and achievements
+
+- **Chairs** (`ChairDef`) and **pets** (`PetDef`) live in the Setup tab and are used with
+  `req_setup`. The server keeps the chair you sit on in `SimPlayer.chair` (moving clears it)
+  and adds its regen; the pet that's out is `Character.pet`, with `pet_full` dropping every
+  `hunger_ticks` and `MapInstance._pet_step` picking up drops within `loot_reach`. Both go out
+  in the player snapshot, and `TDCompanion` draws them next to you and other players.
+- **The Monster Book** (`MonsterBook`, on the Character) counts kills and cards per monster.
+  `Content` makes a `CardDef` for every monster at startup (`card_<id>`, no files); monsters
+  drop it at `CardDef.CHANCE` until your page is full, and picking it up files it in the book
+  instead of the bag. The book's level adds to every main stat in `Character.recalc`.
+- **Achievements** (`Achievements.LIST`) each measure something about the Character and a
+  goal. The server checks them whenever a player's state changes (`TDServer.check_achievements`)
+  and sends `ev_achievement`; the client shows it and calls `SteamService.unlock_achievement`
+  with its `steam` id. Add one by adding a line; a new kind of tally goes through
+  `Character.count`.
+
+### Balance
+
+`Balance` builds a typical character for any job and level (points in the main stat, the best
+gear they could wear) and works out how many hits of their main attack a monster takes and how
+many kills a level needs. The smoke test keeps every job inside `Balance.BAND` against every
+monster of its level; `tests/balance_report.tscn` prints the full table when tuning.
+
 ### How to add something the player does
 
 1. Add a `req_<thing>` to `Net` that calls `server.on_<thing>(_sender(), …)`.
@@ -93,16 +117,17 @@ player menu, the party HP list and the trade and shop windows (`scripts/ui/socia
 ```
 data/                 Content, one .tres per thing
   monsters/ npcs/ items/ skills/ effects/ jobs/   Looked up by id through Content
-  items/equips/ items/use/ items/etc/            Subfolders are scanned too
+  items/equips/ items/use/ items/etc/ items/setup/   Subfolders are scanned too
   maps/ biomes/ climb_styles/               Maps and how they look
 scripts/
   autoload/           Content (data index), Game (your character copy, settings, input),
                       Net (connections and the protocol), SteamService
   server/             TDServer, MapInstance, SimPlayer, SimMob, SimDrop, CharacterStore
   data/               Resource classes for everything in data/
-  systems/            Character, Inventory, Equipment, ItemStack, CharacterStats
+  systems/            Character, Inventory, Equipment, ItemStack, CharacterStats, MonsterBook,
+                      Achievements, Balance
   components/         Health, Hitbox, SpriteRig
-  actors/             Player (you), Avatar (other players), Mob, Npc, Drop views
+  actors/             Player (you), Avatar (other players), Companion (chairs, pets), Mob, Npc, Drop views
   world/              World (what you see), Stage + Terrain/Backdrop/Scenery builders, MapLayout,
                       Platform, DropFlight, Combat
   fx/                 Flipbook effects and floating text
@@ -249,7 +274,7 @@ a **StatBlock** on top. `Character.stats` is the total. From it, `CharacterStats
 
 `Combat` uses those numbers, so all balance lives in `character_stats.gd` and `combat.gd`.
 
-There are three inventory tabs, and the class of the item decides which one it goes in:
+There are four inventory tabs, and the class of the item decides which one it goes in:
 
 | Class | Tab | What |
 | --- | --- | --- |
@@ -258,6 +283,9 @@ There are three inventory tabs, and the class of the item decides which one it g
 | **AmmoDef** | Use | Arrows, stars and bullets fired by ranged weapons |
 | **ScrollDef** | Use | Upgrade scrolls: the gear `slots` they work on, a success `chance` and the `stats` they add. Each use spends one of the gear's `upgrade_slots` (`ItemStack.slots_used`; `upgrades` counts the ones that worked) |
 | **ItemDef** | Etc | Monster parts and anything else; stacks up to `max_stack` |
+| **ChairDef** | Setup | Chairs: extra `regen_hp` / `regen_mp` while sitting |
+| **PetDef** | Setup | Pets: `loot_reach`, `loot_every`, `hunger_ticks` and their `chatter` |
+| **CardDef** | (book) | Monster Book cards, made by `Content` for every monster |
 
 Equipment slots: Weapon, Hat, Top, Bottom, Shoes, Gloves, Cape, Earrings, Pendant, two Rings
 and Shield (`EquipDef.Slot` and `Equipment.PLACES_FOR`). Adding a slot means adding it to both.

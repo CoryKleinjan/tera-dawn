@@ -47,6 +47,14 @@
 "knuckle",
 "a8d0e0"
 ],
+"barrel_seat": [
+"chair",
+"a5714a"
+],
+"boar_hide_rug": [
+"chair",
+"ff7a3d"
+],
 "bramble_tusk": [
 "tusk",
 "90c070"
@@ -71,6 +79,10 @@
 "horn",
 "ff9090"
 ],
+"coral_seat": [
+"chair",
+"40c0b0"
+],
 "crab_claw": [
 "horn",
 "ffb0a0"
@@ -79,9 +91,17 @@
 "shard",
 "7070a0"
 ],
+"crystal_chair": [
+"chair",
+"b090ff"
+],
 "crystal_chunk": [
 "gem",
 "a0c0ff"
+],
+"cushion_chair": [
+"chair",
+"ff9ec4"
 ],
 "dawnbreaker_claymore": [
 "sword",
@@ -146,6 +166,10 @@
 "ember_earrings": [
 "earrings",
 "ff9a3c"
+],
+"ember_throne": [
+"chair",
+"ff6a3d"
 ],
 "emberforge_aegis": [
 "shield",
@@ -243,6 +267,10 @@
 "shield",
 "c0c8d8"
 ],
+"lantern_bench": [
+"chair",
+"ffcf4a"
+],
 "lantern_pendant": [
 "pendant",
 "ffc060"
@@ -303,6 +331,10 @@
 "flame",
 "ff6040"
 ],
+"monster_card": [
+"card",
+"a8e6ff"
+],
 "moonstone_wand": [
 "wand",
 "b8c8ff"
@@ -354,6 +386,22 @@
 "patched_trousers": [
 "pants",
 "7d8fb3"
+],
+"pet_emberkit": [
+"pet",
+"ff8a4a"
+],
+"pet_puffpaw": [
+"pet",
+"ffb0d0"
+],
+"pet_snack": [
+"biscuit",
+"e0b064"
+],
+"pet_sprout": [
+"pet",
+"7ccf6a"
 ],
 "power_elixir": [
 "potion",
@@ -583,6 +631,10 @@
 "pants",
 "6fb0ff"
 ],
+"stump_seat": [
+"chair",
+"6dbb5a"
+],
 "sunforged_cuirass": [
 "shirt",
 "ffd166"
@@ -686,6 +738,10 @@
 "windstep_boots": [
 "boots",
 "9fe0c0"
+],
+"wooden_stool": [
+"chair",
+"c99a62"
 ],
 "wraith_lantern": [
 "flame",

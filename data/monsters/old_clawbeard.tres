@@ -18,6 +18,7 @@
 [ext_resource type="Resource" path="res://data/items/equips/canvas_gloves.tres" id="16_canvas_gloves"]
 [ext_resource type="Resource" path="res://data/items/equips/sandals.tres" id="17_sandals"]
 [ext_resource type="Resource" path="res://data/items/use/power_elixir.tres" id="18_power_elixir"]
+[ext_resource type="Resource" path="res://data/items/setup/barrel_seat.tres" id="p11_barrel_seat"]
 
 [sub_resource type="Resource" id="Resource_14"]
 script = ExtResource("4_drop_entry")
@@ -117,14 +118,21 @@ chance = 1.0
 min_amount = 144
 max_amount = 288
 
+[sub_resource type="Resource" id="P11_barrel_seat"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("p11_barrel_seat")
+chance = 0.08
+min_amount = 1
+max_amount = 1
+
 [resource]
 script = ExtResource("1_monster_def")
 id = &"old_clawbeard"
 display_name = "Old Clawbeard"
 level = 12
-max_hp = 6160
+max_hp = 9242
 attack = 40
-exp_reward = 931
+exp_reward = 1237
 speed = 0.4
 size = Vector2(128.0, 96.0)
 boss = true
@@ -135,5 +143,5 @@ shot_cooldown = 110
 texture = ExtResource("3_ashshell")
 sprite_scale = 2.0
 tint = Color(1.0, 0.501961, 0.439216, 1.0)
-drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14")])
+drops = Array[ExtResource("4_drop_entry")]([SubResource("P11_barrel_seat"), SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14")])
 respawn_ticks = Vector2i(1800, 2400)

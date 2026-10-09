@@ -541,6 +541,7 @@ func on_trade_ready(peer: int) -> void:
 			p.character.inventory.add_stack(s)
 		p.character.shards += t.shards[other]
 		p.dirty_character = true
+		p.character.count("deals")
 		trades.erase(p.peer)
 		Net.send(p.peer, &"ev_trade", [{}])
 		_tell(p, "The trade is done.", GOOD)
@@ -770,6 +771,8 @@ func on_shop_buy(peer: int, owner: int, index: int, item_id: StringName) -> void
 	shop.items.remove_at(index)
 	p.dirty_character = true
 	o.dirty_character = true
+	p.character.count("deals")
+	o.character.count("deals")
 	_tell(p, "You bought %s." % MapInstance.amount_name(stack.item, stack.count), GOOD)
 	_tell(o, "%s bought %s for %d Dawnshards." % [p.character.name, MapInstance.amount_name(stack.item, stack.count), price], GOOD)
 	if shop.items.is_empty():

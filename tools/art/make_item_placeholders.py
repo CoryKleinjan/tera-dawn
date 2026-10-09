@@ -344,11 +344,43 @@ def key(p):
     p.line([(44, 44), (50, 38)], p.base, 5)
 
 
+def chair(p):
+    p.poly([(14, 8), (26, 8), (26, 36), (14, 36)], p.base)          # back
+    p.poly([(12, 34), (52, 34), (52, 42), (12, 42)], p.light)        # seat
+    p.poly([(14, 42), (20, 42), (20, 58), (14, 58)], p.dark)
+    p.poly([(44, 42), (50, 42), (50, 58), (44, 58)], p.dark)
+
+
+def pet(p):
+    p.ellipse((12, 22, 52, 56), p.base)                              # body
+    p.poly([(16, 26), (20, 8), (30, 22)], p.base)                    # ears
+    p.poly([(48, 26), (44, 8), (34, 22)], p.base)
+    p.ellipse((22, 34, 28, 40), rgb("2b183a"), 1)                    # eyes
+    p.ellipse((36, 34, 42, 40), rgb("2b183a"), 1)
+    p.ellipse((28, 42, 36, 48), p.light, 1.5)
+
+
+def biscuit(p):
+    p.ellipse((10, 20, 30, 40), p.base)
+    p.ellipse((34, 20, 54, 40), p.base)
+    p.poly([(20, 24), (44, 24), (44, 36), (20, 36)], p.base)
+    p.ellipse((26, 26, 30, 30), p.dark, 1)
+    p.ellipse((36, 30, 40, 34), p.dark, 1)
+
+
+def card(p):
+    p.poly([(16, 6), (48, 6), (48, 58), (16, 58)], rgb("f4f0ff"))
+    p.poly([(20, 10), (44, 10), (44, 38), (20, 38)], p.base)
+    p.ellipse((26, 16, 38, 30), p.light, 1.5)
+    p.line([(22, 46), (42, 46)], rgb("8a7aa0"), 3)
+    p.line([(22, 52), (36, 52)], rgb("8a7aa0"), 3)
+
+
 SHAPES = {f.__name__: f for f in [sword, cleaver, cap, helm, shirt, pants, boots, gloves, cape,
                                     earrings, pendant, ring, shield, potion, drop, tuft, wing,
                                     mushroom, stone, horn, tusk, shard, flame, bow, wand, staff,
                                     claw, dagger, knuckle, gun, star, arrow, bullet, scroll, book,
-                                    gem, key]}
+                                    gem, key, chair, pet, biscuit, card]}
 
 
 def is_placeholder(path):
