@@ -1,8 +1,9 @@
 class_name SimMob
 extends RefCounted
-## A monster as the server runs it: it patrols its platform, chases whoever hit it last
-## while they stand on its platform, hurts players it touches, and comes back some time
-## after it is defeated. Flying monsters do the same in the air. Depending on its
+## A monster as the server runs it: it patrols its platform (or the stretch of it its
+## SpawnDef allows), chases whoever hit it last while they stand on its platform, hurts
+## players it touches, and comes back some time after it is defeated. Flying monsters do
+## the same in the air. Depending on its
 ## MonsterDef it may hop, stand still, shoot at players, or split into smaller monsters
 ## (those wait asleep until their parent is defeated).
 ## Clients only see it through snapshots (see TDMob, the client-side view).
@@ -43,6 +44,8 @@ var map: MapInstance
 var index := 0
 var def: MonsterDef
 var plat: Platform
+## The stretch of `plat` it walks on: all of it unless its SpawnDef sets a patrol range.
+var area: Platform
 var health := Health.new()
 var hurtbox: Hitbox
 var position := Vector2.ZERO
@@ -70,18 +73,19 @@ var parent: SimMob
 ## A split-off monster waiting for its parent to be defeated.
 var asleep := false
 
-func _init(m: MapInstance, i: int, d: MonsterDef, p: Platform) -> void:
+func _init(m: MapInstance, i: int, d: MonsterDef, p: Platform, patrol: Platform = null) -> void:
 	map = m
 	index = i
 	def = d
 	plat = p
+	area = patrol if patrol else p
 	hurtbox = Hitbox.new(d.size)
 	_reset()
 
 func _reset() -> void:
 	var half := def.size.x / 2.0
 	health.reset(def.max_hp)
-	position = Vector2(randf_range(plat.x + half, plat.x + plat.w - half), plat.y)
+	position = Vector2(randf_range(area.x + half, area.x + area.w - half), plat.y)
 	dir = -1 if randf() < 0.5 else 1
 	walk_t = randi_range(FIRST_WALK_TICKS.x, FIRST_WALK_TICKS.y)
 	kx = 0.0
@@ -109,7 +113,7 @@ func sleep() -> void:
 func wake(x: float, by: int) -> void:
 	_reset()
 	var half := def.size.x / 2.0
-	position.x = clampf(x, plat.x + half, plat.x + plat.w - half)
+	position.x = clampf(x, area.x + half, area.x + area.w - half)
 	hop_v = WAKE_HOP
 	aggro = AGGRO_TICKS
 	target = by
@@ -191,12 +195,12 @@ func step() -> void:
 		if hop <= 0.0:
 			hop = 0.0
 			hop_v = 0.0
-	if position.x < plat.x + half:
-		position.x = plat.x + half
+	if position.x < area.x + half:
+		position.x = area.x + half
 		if dir < 0:
 			dir = 1
-	if position.x > plat.x + plat.w - half:
-		position.x = plat.x + plat.w - half
+	if position.x > area.x + area.w - half:
+		position.x = area.x + area.w - half
 		if dir > 0:
 			dir = -1
 	var body := hurtbox.rect_at(body_position())

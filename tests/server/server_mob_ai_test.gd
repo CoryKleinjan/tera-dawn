@@ -212,3 +212,33 @@ func test_split_children_dont_come_back_on_their_own() -> void:
 	child.die()
 	h.step(2000)
 	check(child.dead and child.asleep, "still asleep long after")
+
+func test_a_patrol_range_keeps_monsters_on_its_stretch_of_floor() -> void:
+	var d := _walker(&"walker", 3.0)
+	var s := ServerHarness.spawn(d, 4)
+	s.patrol_from = 900.0
+	s.patrol_to = 1400.0
+	var map := h.field_with([s])
+	var p := h.join(2, "Ann", ServerHarness.FIELD, 300.0)
+	var half := d.size.x / 2.0
+	for m in map.mobs:
+		check_between(m.position.x, 900.0 + half, 1400.0 - half, "spawns in range")
+	# even chasing someone outside it, or knocked back, they stay in
+	map.mobs[0].hurt(-1, 2)
+	map.mobs[1].hurt(1, 2)
+	for i in 600:
+		h.place(p, 300.0)
+		h.step(1)
+		for m in map.mobs:
+			if not check_between(m.position.x, 900.0 + half, 1400.0 - half, "tick %d: stays in range" % i):
+				return
+
+func test_a_spawn_without_a_patrol_range_uses_the_whole_platform() -> void:
+	var plat := Platform.new(100, 400, 300)
+	var a := SpawnDef.new().patrol_area(plat)
+	check_eq(Vector3(a.x, a.y, a.w), Vector3(100, 400, 300), "whole platform")
+	var s := SpawnDef.new()
+	s.patrol_from = 50.0
+	s.patrol_to = 250.0
+	a = s.patrol_area(plat)
+	check_eq(Vector3(a.x, a.y, a.w), Vector3(100, 400, 150), "clipped to the platform")

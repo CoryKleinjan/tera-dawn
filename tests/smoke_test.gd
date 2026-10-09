@@ -1385,6 +1385,7 @@ func _check_multiplayer() -> void:
 			seen_name = world.avatars[bot_peer].char_name
 		for m in meadow.mobs:
 			if m.def.id == &"dewling" and m.plat == meadow.layout.platforms[0] and not m.dead:
+				m.area = m.plat # floor Dewlings keep out of the village, where the bot stands
 				m.position.x = bot_player.position.x + 40
 				break
 		if bot_player.character.xp != xp or bot_player.character.level != level:
