@@ -239,9 +239,7 @@ func test_real_repeatable_quest_reopens() -> void:
 	c2.quests.done[q.id] = 1
 	check_eq(c2.quests.status(q, c2), QuestLog.Status.AVAILABLE, "available after handing in")
 
-# BUG (left out until fixed): the room check looks at each reward on its own, so two gear
-# rewards with one free slot pass it and the second one is lost. Rename pending_ to test_ once fixed.
-func pending_complete_refused_when_rewards_need_more_slots_than_free() -> void:
+func test_complete_refused_when_rewards_need_more_slots_than_free() -> void:
 	var q := _kill_quest(&"t_kill", 1)
 	q.reward_items = [UnitHelpers.drop(fx.equip(&"t_sword_a")), UnitHelpers.drop(fx.equip(&"t_sword_b"))]
 	c.inventory.add(fx.equip(&"t_junk"), Inventory.SLOTS - 1)
@@ -249,3 +247,17 @@ func pending_complete_refused_when_rewards_need_more_slots_than_free() -> void:
 	c.quests.record_kill(mob)
 	check_ne(c.quests.complete(q, c), "", "two gear rewards, one free slot")
 	check(c.quests.active.has(q.id), "still active")
+
+func test_complete_counts_topping_up_stacks_toward_room() -> void:
+	var potion := fx.use(&"t_potion", 10)
+	var q := _kill_quest(&"t_kill", 1)
+	q.reward_items = [UnitHelpers.drop(potion, 5), UnitHelpers.drop(potion, 5)]
+	var junk := fx.use(&"t_junk_use", 1)
+	c.inventory.add(potion, 5)
+	c.inventory.add(junk, Inventory.SLOTS - 1)
+	c.quests.accept(q)
+	c.quests.record_kill(mob)
+	check_ne(c.quests.complete(q, c), "", "ten potions need the full stack and a new slot, none free")
+	c.inventory.remove(junk, 1)
+	check_eq(c.quests.complete(q, c), "", "one free slot and the stack's room is enough")
+	check_eq(c.inventory.count_of(potion), 15, "all rewards paid")

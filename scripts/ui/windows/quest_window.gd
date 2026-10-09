@@ -2,13 +2,16 @@ class_name TDQuestWindow
 extends TDWindow
 ## The quest log (Q): quests in progress, quests you could take (and who gives them), and
 ## quests you've finished. Click one to see its objectives and rewards; quests in progress
-## can be given up here.
+## can be given up here. A long list scrolls with the mouse wheel.
 
 enum Page { ACTIVE, AVAILABLE, DONE }
 const PAGE_NAMES := ["In progress", "Available", "Done"]
 const LIST_Y := 68.0
 const ROW_H := 24.0
 const LIST_W := 200.0
+const ROWS := 11
+
+var scroll := 0
 
 var page := Page.ACTIVE
 var selected: QuestDef
@@ -30,7 +33,12 @@ func listed() -> Array[QuestDef]:
 	return out
 
 func _row_rect(i: int) -> Rect2:
-	return Rect2(PAD, LIST_Y + i * ROW_H, LIST_W, ROW_H - 2)
+	return Rect2(PAD, LIST_Y + (i - scroll) * ROW_H, LIST_W, ROW_H - 2)
+
+## The indices of the rows that fit in the list right now.
+func _shown(count: int) -> Array:
+	scroll = clampi(scroll, 0, maxi(0, count - ROWS))
+	return range(scroll, mini(scroll + ROWS, count))
 
 func _forfeit_rect() -> Rect2:
 	return Rect2(size.x - PAD - 110, size.y - PAD - 32, 110, 32)
@@ -43,12 +51,14 @@ func _draw_body() -> void:
 	if quests.is_empty():
 		draw_hint(Vector2(PAD + 4, LIST_Y + 16), "Nothing here yet.")
 	var me := Game.me
-	for i in quests.size():
+	for i in _shown(quests.size()):
 		var q := quests[i]
 		var r := _row_rect(i)
 		draw_row(r, q == selected or r.has_point(_hover))
 		var ready := me.quests.status(q, me) == QuestLog.Status.READY
 		DrawUtil.text(self, Game.ui_font, Vector2(r.position.x + 6, r.end.y - 6), q.title, 12, Palette.SUN if ready else Palette.MIST, 1, 3, Palette.NIGHT)
+	if quests.size() > ROWS:
+		DrawUtil.text(self, Game.ui_font, Vector2(PAD + LIST_W, LIST_Y + ROWS * ROW_H + 8), "scroll for more (%d/%d)" % [scroll + 1, quests.size() - ROWS + 1], 10, Color(Palette.MIST, 0.6), -1)
 	if selected:
 		_draw_details(selected, Rect2(PAD + LIST_W + 14, LIST_Y - 4, size.x - LIST_W - PAD * 2 - 14, size.y - LIST_Y - PAD))
 
@@ -89,15 +99,19 @@ func _draw_details(q: QuestDef, box: Rect2) -> void:
 		draw_button(_forfeit_rect(), "Give up")
 
 func _click(at: Vector2, button: int, _double: bool) -> void:
+	if button == MOUSE_BUTTON_WHEEL_UP or button == MOUSE_BUTTON_WHEEL_DOWN:
+		scroll = clampi(scroll + (1 if button == MOUSE_BUTTON_WHEEL_DOWN else -1), 0, maxi(0, listed().size() - ROWS))
+		return
 	if button != MOUSE_BUTTON_LEFT:
 		return
 	var t := tab_at(at)
 	if t >= 0:
 		page = t as Page
 		selected = null
+		scroll = 0
 		return
 	var quests := listed()
-	for i in quests.size():
+	for i in _shown(quests.size()):
 		if _row_rect(i).has_point(at):
 			selected = quests[i]
 			return

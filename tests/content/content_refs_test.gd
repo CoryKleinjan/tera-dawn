@@ -360,10 +360,8 @@ func test_pets_have_food_and_sane_numbers() -> void:
 		check(not food.is_empty(), "there are pets but no pet food (UseDef.pet_food)")
 	for p: PetDef in pets:
 		check(p.loot_reach > 0 and p.loot_every > 0 and p.hunger_ticks > 0 and p.body_scale > 0, "%s: loot_reach, loot_every, hunger_ticks and body_scale must be positive" % Scan.where(p))
-	# Known bug, left out so the suite stays green: the pet files save `chatter` as a
-	# PackedStringArray but PetDef.chatter is Array[String], so it loads empty and pets never talk.
-	#for p: PetDef in pets:
-	#	check(not p.chatter.is_empty() and p.chatter.all(func(l: String) -> bool: return l.strip_edges() != ""), "%s: chatter is empty or has blank lines" % Scan.where(p))
+	for p: PetDef in pets:
+		check(not p.chatter.is_empty() and p.chatter.all(func(l: String) -> bool: return l.strip_edges() != ""), "%s: chatter is empty or has blank lines" % Scan.where(p))
 
 func test_chairs_restore_something() -> void:
 	for i: ItemDef in Content.items.values():

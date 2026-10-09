@@ -260,11 +260,19 @@ func test_the_social_summary_shows_buddies_online() -> void:
 	var s: Dictionary = h.last(2, &"ev_social")[0]
 	check_eq(s["buddies"], [["Cat", true, "Test Town"]], "Cat, online, in town")
 
-# Left out: fails. Only the inviter's list is checked against BUDDY_MAX
-# (TDSocial._invite_problem), so accepting with a full list makes it 21 (see the report).
-#func test_accepting_a_buddy_with_a_full_list_is_refused() -> void:
-#	for i in TDSocial.BUDDY_MAX:
-#		bob.character.buddies.append("Friend%d" % i)
-#	_accept(2, "buddy", 3)
-#	check_eq(bob.character.buddies.size(), TDSocial.BUDDY_MAX, "Bob's list stays at the limit")
-#	check(not ann.character.buddies.has("Bob"), "Ann isn't half-buddied")
+func test_accepting_a_buddy_with_a_full_list_is_refused() -> void:
+	var id := _invite(2, "buddy", 3)
+	check_ne(id, 0, "invited while Bob had room")
+	for i in TDSocial.BUDDY_MAX:
+		bob.character.buddies.append("Friend%d" % i)
+	h.ask(3, &"req_invite_answer", [id, true])
+	check_eq(bob.character.buddies.size(), TDSocial.BUDDY_MAX, "Bob's list stays at the limit")
+	check(not ann.character.buddies.has("Bob"), "Ann isn't half-buddied")
+	check(h.told(3, "Your buddy list is full."), "Bob is told why")
+	check(h.told(2, "Bob's buddy list is full."), "Ann is told why")
+
+func test_inviting_someone_with_a_full_buddy_list_is_refused() -> void:
+	for i in TDSocial.BUDDY_MAX:
+		bob.character.buddies.append("Friend%d" % i)
+	check_eq(_invite(2, "buddy", 3), 0, "no invite sent")
+	check(h.told(2, "Bob's buddy list is full."), "Ann is told why")

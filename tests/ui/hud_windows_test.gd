@@ -360,9 +360,23 @@ func test_quest_done_page_lists_every_finished_quest() -> void:
 	log.page = TDQuestWindow.Page.DONE
 	var listed := log.listed()
 	check_eq(listed.size(), Content.quests.size(), "the Done page lists every quest")
-	# Known bug, left out so the suite stays green: TDQuestWindow has no scrolling, so past
-	# about 12 quests the rows run off the bottom of the window and can't be clicked.
-	#check(log._row_rect(listed.size() - 1).end.y <= log.size.y, "the last of %d rows ends at y %s, below the window (%s)" % [listed.size(), log._row_rect(listed.size() - 1).end.y, log.size.y])
+	log.scroll = 0
+	await _redrawn(log, "the Done page")
+	check(listed.size() > TDQuestWindow.ROWS, "more quests than fit, so the list scrolls")
+	for i in range(log.scroll, mini(log.scroll + TDQuestWindow.ROWS, listed.size())):
+		check(log._row_rect(i).end.y <= log.size.y - TDWindow.PAD, "row %d ends at y %s, inside the window (%s)" % [i, log._row_rect(i).end.y, log.size.y])
+	for n in listed.size():
+		await ui.click(log, log._row_rect(log.scroll).get_center(), MOUSE_BUTTON_WHEEL_DOWN)
+	check_eq(log.scroll, listed.size() - TDQuestWindow.ROWS, "the wheel scrolls to the last quest and stops")
+	var last := listed.size() - 1
+	check(log._row_rect(last).end.y <= log.size.y - TDWindow.PAD, "the last row is inside the window once scrolled")
+	await ui.click(log, log._row_rect(last).get_center())
+	check(log.selected == listed[last], "clicking the last row selects the last quest")
+	await ui.click(log, log._row_rect(last - 1).get_center(), MOUSE_BUTTON_WHEEL_UP)
+	check_eq(log.scroll, listed.size() - TDQuestWindow.ROWS - 1, "the wheel scrolls back up")
+	await ui.click(log, log._row_rect(log.scroll).get_center())
+	check(log.selected == listed[log.scroll], "clicking the top row selects the quest shown there")
+	await _redrawn(log, "the scrolled Done page")
 
 func test_quest_give_up_button_forfeits_through_the_server() -> void:
 	await ui.edit(_quest_log)

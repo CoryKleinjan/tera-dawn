@@ -76,7 +76,7 @@ func _gui_input(event: InputEvent) -> void:
 		_hover = slot_at(mm.position)
 		var thing := content(_hover) if _hover >= 0 else null
 		if thing is ItemDef:
-			hud.tooltip.show_item(self, ItemStack.exact(thing), get_global_mouse_position(), "Right-click to clear")
+			hud.tooltip.show_item(self, ItemStack.unrolled(thing), get_global_mouse_position(), "Right-click to clear")
 		else:
 			hud.tooltip.clear(self)
 	var mb := event as InputEventMouseButton

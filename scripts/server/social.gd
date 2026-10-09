@@ -138,10 +138,12 @@ func left(p: SimPlayer) -> void:
 			invites.erase(id)
 	_sent.erase(peer)
 
-## A player moved to another map: trades and shop visits end.
+## A player moved to another map: trades, their shop and shop visits end.
 func changed_map(p: SimPlayer) -> void:
 	if trades.has(p.peer):
 		cancel_trade(p.peer, "%s left the map." % p.character.name)
+	if shops.has(p.peer):
+		close_shop(p.peer)
 	for s: Shop in shops.values():
 		s.viewers.erase(p.peer)
 
