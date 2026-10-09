@@ -129,6 +129,55 @@ func test_add_ap_refuses_without_points_or_bad_stat() -> void:
 	check_eq(c.ap, 3, "points kept")
 	check_eq(c.base.attack, 0, "nothing raised")
 
+func test_add_ap_spends_several_but_never_more_than_left() -> void:
+	var c := fx.character(null, {"luck": 4})
+	c.ap = 5
+	check(c.add_ap(&"luck", 3), "spent three")
+	check_eq(c.base.luck, 7, "LUK")
+	check_eq(c.ap, 2, "two left")
+	check(c.add_ap(&"luck", 10), "spent the rest")
+	check_eq(c.base.luck, 9, "only the two that were left")
+	check_eq(c.ap, 0, "none left")
+	c.ap = 3
+	check(not c.add_ap(&"luck", 0), "zero points")
+	check(not c.add_ap(&"luck", -2), "negative points")
+	check_eq(c.ap, 3, "points kept")
+
+func test_auto_ap_fills_the_primary_stat() -> void:
+	var c := fx.character(null, {"strength": 10, "dexterity": 5})
+	c.ap = 7
+	check_eq(c.auto_ap_plan(), {&"strength": 7}, "all in STR with no gear asking for DEX")
+	c.ap = 0
+	check_eq(c.auto_ap_plan(), {}, "nothing to spend")
+
+func test_auto_ap_keeps_enough_secondary_for_gear() -> void:
+	var c := fx.character(null, {"strength": 10, "dexterity": 5})
+	c.level = 10
+	var worn := fx.equip(&"t_worn", EquipDef.Slot.WEAPON)
+	worn.required_dexterity = 7
+	c.equipment.put(&"weapon", ItemStack.exact(worn))
+	var bagged := fx.equip(&"t_bagged", EquipDef.Slot.TOP)
+	bagged.required_dexterity = 9
+	c.inventory.add_stack(ItemStack.exact(bagged))
+	var later := fx.equip(&"t_later", EquipDef.Slot.SHOES)
+	later.required_dexterity = 30
+	later.required_level = 20
+	c.inventory.add_stack(ItemStack.exact(later))
+	c.recalc()
+	c.ap = 10
+	check_eq(c.auto_ap_plan(), {&"dexterity": 4, &"strength": 6}, "DEX up to the bag's top (not gear for later levels), the rest in STR")
+	c.ap = 3
+	check_eq(c.auto_ap_plan(), {&"dexterity": 3}, "gear first when points are short")
+
+func test_stats_short_of_a_job() -> void:
+	var beginner := fx.job(&"t_beginner")
+	var thief := fx.job(&"t_thief", &"t_thieves", &"t_beginner")
+	thief.advance_requirements = UnitHelpers.stats({"luck": 25, "dexterity": 10})
+	var c := fx.character(beginner, {"luck": 4, "dexterity": 12})
+	check_eq(c.stats_short_of(thief), {&"luck": 25}, "only LUK is short")
+	c.base.luck = 25
+	check_eq(c.stats_short_of(thief), {}, "ready")
+
 # ---------- skills ----------
 
 func test_job_line_walks_back_through_advances() -> void:

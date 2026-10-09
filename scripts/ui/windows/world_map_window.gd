@@ -41,12 +41,6 @@ func _draw_body() -> void:
 		if r:
 			draw_circle(to_screen(m.world_pos), 52 * k, Color(r.color, 0.22))
 			draw_circle(to_screen(m.world_pos), 34 * k, Color(r.color, 0.18))
-	for r in Content.regions.values():
-		if r.label_pos != Vector2.ZERO:
-			var at := to_screen(r.label_pos)
-			DrawUtil.text(self, Game.num_font, at, r.display_name, 14, r.color.lightened(0.35), 0, 4, Palette.NIGHT)
-			if r.level_text != "":
-				DrawUtil.text(self, Game.ui_font, at + Vector2(0, 14), r.level_text, 10, Palette.MIST, 0, 3, Palette.NIGHT)
 	# roads (portals) and trips (travel NPCs)
 	for m in maps:
 		for n in m.neighbours():
@@ -73,6 +67,13 @@ func _draw_body() -> void:
 		if m.id == here:
 			var pulse := 11.0 + sin(Engine.get_physics_frames() * 0.12) * 2.5
 			draw_arc(c, pulse, 0, TAU, 24, Palette.SUN, 2.0, true)
+	# region names last, so no dot or road covers them
+	for r in Content.regions.values():
+		if r.label_pos != Vector2.ZERO:
+			var at := to_screen(r.label_pos)
+			DrawUtil.text(self, Game.num_font, at, r.display_name, 14, r.color.lightened(0.35), 0, 4, Palette.NIGHT)
+			if r.level_text != "":
+				DrawUtil.text(self, Game.ui_font, at + Vector2(0, 14), r.level_text, 10, Palette.MIST, 0, 3, Palette.NIGHT)
 	_draw_info(Content.maps.get(hovered if hovered != &"" else here))
 
 ## The hovered map (or the one you're on) under the map.
@@ -91,6 +92,12 @@ func _draw_info(m: MapDef) -> void:
 	if hud and hud.world and hud.world.map and m.id == hud.world.map.id:
 		bits.append("You are here")
 	DrawUtil.text(self, Game.ui_font, Vector2(PAD + 4, y + 18), "  ·  ".join(bits), 12, Palette.MIST, 1, 3, Palette.NIGHT)
+
+## The screen area a region's name (and level range) covers, for keeping dots off it.
+func label_rect(r: RegionDef) -> Rect2:
+	var at := to_screen(r.label_pos)
+	var w := maxf(DrawUtil.text_width(Game.num_font, r.display_name, 14), DrawUtil.text_width(Game.ui_font, r.level_text, 10))
+	return Rect2(at.x - w / 2.0, at.y - 12, w, 16 if r.level_text == "" else 30)
 
 func _hovered(at: Vector2) -> void:
 	hovered = &""

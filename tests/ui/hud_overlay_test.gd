@@ -140,3 +140,95 @@ func test_title_screen_draws_and_hides() -> void:
 	check(ui.hud.game_menu.visible and not ui.hud.title_card.visible, "the game menu shows Resume, Settings, Leave and Quit")
 	ui.hud.game_menu.resume_button.pressed.emit()
 	check(not ui.hud.title.visible, "Resume hides it")
+
+# ---------- name tags ----------
+
+func test_name_tags_nudge_apart_and_yours_stays_put() -> void:
+	var tags := TDNameTags.new()
+	tags.add_name(Vector2(100, 200), "Mossy", Palette.MIST)
+	tags.add_name(Vector2(104, 202), "Kestrel", Palette.MIST, "Dawnbreakers")
+	tags.add_name(Vector2(102, 201), Game.me.name, Palette.SUN, "", Palette.GUILD, true)
+	tags.add_name(Vector2(400, 200), "Far away", Palette.MIST)
+	tags.arrange()
+	var r := tags.rects()
+	check_eq(r[2].position, Vector2(102, 201) - Vector2(r[2].size.x / 2.0, 0), "your own tag doesn't move")
+	for i in r.size():
+		for k in range(i + 1, r.size()):
+			check(not r[i].intersects(r[k]), "tags %d and %d overlap: %s %s" % [i, k, r[i], r[k]])
+	check_eq(tags.tags[3]["offset"], Vector2.ZERO, "a tag nothing overlaps stays put")
+	check(r[0].position.y > r[2].position.y and r[1].position.y > r[0].position.y, "the others move down below yours, in order")
+	var order := []
+	var draw_order := TDNameTags.new()
+	for i in 3:
+		draw_order.add(Rect2(0, 0, 10, 10), func(_ci: CanvasItem, _o: Vector2) -> void: order.append(i), i == 1)
+	draw_order.draw(ui.hud.overlay)
+	check_eq(order, [0, 2, 1], "your tag draws last, on top")
+
+func test_monster_tags_show_only_when_hurt_or_a_boss() -> void:
+	var mobs := ui.world.mobs()
+	if not check(not mobs.is_empty(), "the meadow has monsters"):
+		return
+	var m := mobs[0]
+	m.apply([m.position.x, m.position.y, 1, 1000, 0])
+	check(not m.shows_tag(), "an unhurt monster has no tag")
+	m.apply([m.position.x, m.position.y, 1, 600, SnapshotFlags.MOB_SHOW_HP])
+	check(m.shows_tag(), "a hurt one shows it")
+	m.apply([m.position.x, m.position.y, 1, 1000, 0])
+	var boss: MonsterDef = Content.monsters.values().filter(func(d: MonsterDef) -> bool: return d.boss)[0]
+	var was := m.def
+	m.def = boss
+	check(m.shows_tag(), "a boss always shows it")
+	m.def = was
+	check(await ui.redraw(ui.hud.overlay), "the overlay draws the tags")
+	check(ui.hud.overlay.last_tags != null and not ui.hud.overlay.last_tags.tags.is_empty(), "your own tag at least was gathered")
+
+# ---------- message log and gains ----------
+
+func test_pickups_of_the_same_item_merge() -> void:
+	var tuft: ItemDef = Content.items.values().filter(func(i: ItemDef) -> bool: return not i.is_currency and i.stack_size() > 1)[0]
+	var other: ItemDef = Content.items.values().filter(func(i: ItemDef) -> bool: return not i.is_currency and i != tuft)[0]
+	ui.world.log_lines.clear()
+	ui.world.show_pickup(tuft, 1)
+	ui.world.show_pickup(other, 1)
+	ui.world.show_pickup(tuft, 2)
+	check_eq(ui.world.log_lines.size(), 2, "one line per item")
+	check_eq(ui.world.log_lines[-1]["text"], "Picked up 3 %s" % tuft.display_name, "the counts add up, on the newest line")
+	await ui.ticks(TDWorld.PICKUP_MERGE_TICKS + 5)
+	ui.world.show_pickup(tuft, 1)
+	check_eq(ui.world.log_lines[-1]["text"], "Picked up %s" % tuft.display_name, "later pickups start a new line")
+
+func test_exp_and_dawnshards_float_over_you() -> void:
+	ui.world.log_lines.clear()
+	ui.world.show_gain(&"exp", 9)
+	ui.world.show_gain(&"shards", 8)
+	var gains: Array = ui.world.fx_layer.get_children().filter(func(f: Node) -> bool: return f is TDFloatText and f.is_gain())
+	check_eq(gains.size(), 2, "two rising numbers")
+	check(ui.world.log_lines.is_empty(), "nothing in the log")
+	check_eq((gains[0] as TDFloatText).gain_text(), "+9 EXP", "EXP")
+	check_eq((gains[1] as TDFloatText).gain_text(), "+8 Dawnshards", "Dawnshards")
+	check(gains[1].position.y < gains[0].position.y, "the second stacks above the first")
+	check(await ui.redraw(ui.hud.overlay), "the overlay draws them")
+
+func test_killing_shows_exp_over_you_not_in_the_log() -> void:
+	ui.world.log_lines.clear()
+	ui.player().map.server.give_xp(ui.player(), 3)
+	await ui.ticks(2)
+	check(ui.world.log_lines.all(func(l: Dictionary) -> bool: return not l["text"].contains("EXP")), "no EXP line in the log")
+	check(ui.world.fx_layer.get_children().any(func(f: Node) -> bool: return f is TDFloatText and f.is_gain()), "a rising +3 EXP")
+
+# ---------- title screen ----------
+
+func test_title_screen_hides_the_status_bar_and_minimap() -> void:
+	ui.world.stop()
+	ui.hud.show_title(false)
+	await ui.frames(2)
+	check(not ui.hud.status.visible, "no status bar before there's a character")
+	check(not ui.hud.minimap_button.visible, "no minimap button either")
+	check(await ui.redraw(ui.hud.overlay), "the overlay draws without the minimap")
+
+func test_title_hints_name_the_real_keys() -> void:
+	var text := ui.hud.keys_help.text
+	check(not text.contains("Dawn Slash"), "no skill a new character doesn't have")
+	check(text.contains("A, D, F, G… quickslots"), "the quickslot keys: %s" % text)
+	for pair in [["K", "skills"], ["Q", "quests"], ["W", "world map"], ["O", "community"], ["L", "collection"], ["S", "character"], ["I", "inventory"]]:
+		check(text.contains("%s %s" % pair), "names %s %s" % pair)

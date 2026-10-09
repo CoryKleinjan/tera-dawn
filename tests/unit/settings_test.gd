@@ -58,6 +58,17 @@ func test_keys_save_and_load() -> void:
 	check_eq(back.key("attack", 0), KEY_X, "a bad entry keeps the default")
 	check_eq(back.key("stats", 0), KEY_S, "an entry with the wrong number of slots keeps the default")
 
+func test_keys_load_from_a_file_without_them() -> void:
+	var k := Keybinds.new()
+	k.reset()
+	k.load_from(ConfigFile.new()) # reading a missing key must not ask Godot for it (it prints an error)
+	for a in Keybinds.ACTIONS:
+		check_eq(k.keys[a["action"]], Keybinds.default_keys(a["action"]), "%s keeps its defaults" % a["action"])
+	var cfg := ConfigFile.new()
+	cfg.set_value("keys", "pause", [KEY_P, 0])
+	k.load_from(cfg)
+	check_eq(k.key("pause", 0), KEY_ESCAPE, "a saved menu key is ignored")
+
 func test_apply_writes_the_input_map() -> void:
 	Settings.keybinds.set_key("loot", 0, KEY_P)
 	Settings.keybinds.clear_key("attack", 1)

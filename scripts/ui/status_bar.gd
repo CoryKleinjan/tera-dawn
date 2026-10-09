@@ -14,6 +14,8 @@ const WINDOW_SYMBOLS := {"quests": "!", "skills": "SP", "worldmap": "W", "commun
 var world: TDWorld
 
 func _process(_delta: float) -> void:
+	# the title screen shows no bar until there's a character to show
+	visible = world != null and world.started
 	queue_redraw()
 
 func _draw() -> void:
@@ -50,6 +52,10 @@ func _window_button_rect(i: int) -> Rect2:
 
 func _window_button(action: String, r: Rect2) -> void:
 	var open: bool = world != null and world.hud.windows[action].visible
+	if has_points_waiting(action):
+		var glow := 0.4 + 0.25 * sin(Time.get_ticks_msec() / 180.0)
+		DrawUtil.ellipse(self, r.get_center(), r.size.x / 2.0 + 6, r.size.y / 2.0 + 6, Color(Palette.SUN, glow * 0.5))
+		DrawUtil.ellipse(self, r.get_center(), r.size.x / 2.0 + 3, r.size.y / 2.0 + 3, Color(Palette.SUN, glow))
 	if open:
 		DrawUtil.ellipse(self, r.get_center(), r.size.x / 2.0 + 2, r.size.y / 2.0 + 2, Color(Palette.SUN, 0.45))
 	if WINDOW_ICONS.has(action):
@@ -69,6 +75,16 @@ func _gui_input(event: InputEvent) -> void:
 		if _window_button_rect(i).has_point(mb.position):
 			world.hud.toggle_window(TDHud.WINDOW_ACTIONS[i])
 			accept_event()
+
+## Whether a window's button should glow because there are points to spend in it: the
+## Character window while you have Ability Points, Skills while you have Skill Points.
+static func has_points_waiting(action: String) -> bool:
+	match action:
+		"stats":
+			return Game.me.ap > 0
+		"skills":
+			return Game.me.sp > 0
+	return false
 
 static func _key_name(action: String) -> String:
 	for e in InputMap.action_get_events(action):

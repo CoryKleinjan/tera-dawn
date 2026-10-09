@@ -8,5 +8,5 @@ id = &"lumewood"
 display_name = "Lumewood"
 description = "A glowing, dreaming forest where the Magicians study."
 color = Color(0.694118, 0.54902, 1.0, 1.0)
-label_pos = Vector2(640.0, 80.0)
+label_pos = Vector2(625.0, 60.0)
 level_text = "Lv. 10-30"

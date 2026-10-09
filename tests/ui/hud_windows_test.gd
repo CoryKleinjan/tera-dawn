@@ -240,6 +240,70 @@ func test_stats_hide_plus_buttons_without_points() -> void:
 	await _redrawn(stats, "stats")
 	check(_plus_rects(stats).is_empty(), "no + buttons with 0 AP")
 
+func test_stats_window_shows_a_beginner_the_job_paths() -> void:
+	await ui.edit(func(c: Character) -> void:
+		c.job = Content.job(Character.START_JOB)
+		c.level = 9
+		c.ap = 5
+		c.base.strength = 35
+		c.base.dexterity = 4
+		c.base.intelligence = 4
+		c.base.luck = 4)
+	var stats: TDStatsWindow = _open("stats")
+	await _redrawn(stats, "stats for a Beginner")
+	var paths := JobDef.paths_from(Character.START_JOB)
+	check(paths.size() >= 5, "a Beginner has every first job ahead")
+	check_eq(stats.size.y, stats.wanted_height(), "the window grows to fit the paths")
+	check(stats.position.y + stats.size.y < TDWorld.VIEW.y - TDStatusBar.HEIGHT, "still ends above the HP bar (%s)" % (stats.position.y + stats.size.y))
+	check(stats.content_end <= stats.size.y - 16, "the last path line (%s) lies inside the window (%s)" % [stats.content_end, stats.size.y])
+	check_eq(TDStatsWindow.path_text(Game.me, Content.job(&"warrior")), "Warrior: 35 STR", "a path whose stats are there")
+	check_eq(TDStatsWindow.path_text(Game.me, Content.job(&"thief")), "Thief: 25 LUK (you have 4)", "what's missing")
+	check_eq(TDStatsWindow.path_text(Game.me, Content.job(&"pirate")), "Pirate: 15 DEX (you have 4)", "only what's missing")
+	for j in paths:
+		var w := DrawUtil.text_width(Game.ui_font, TDStatsWindow.path_text(Game.me, j), 11)
+		check(w < stats.size.x - TDWindow.PAD * 2, "%s's line fits across the window (%d px)" % [j.id, w])
+	check_eq(stats.auto_rect, Rect2(), "no Auto button for a Beginner")
+	check_eq(_plus_rects(stats).size(), StatBlock.BASE.size(), "the + buttons are still there")
+
+func test_stats_window_hides_the_paths_once_you_have_a_job() -> void:
+	await ui.edit(func(c: Character) -> void:
+		c.job = Content.job(&"warrior")
+		c.level = 12)
+	var stats: TDStatsWindow = _open("stats")
+	await _redrawn(stats, "stats for a Warrior")
+	check_eq(stats.size.y, TDStatsWindow.BASE_H, "no paths, no extra room")
+	check(stats.content_end <= stats.size.y - 16, "the rows fit")
+
+func test_stats_auto_spends_every_point_through_the_server() -> void:
+	await ui.edit(func(c: Character) -> void:
+		c.job = Content.job(&"thief")
+		c.level = 12
+		c.ap = 10)
+	var stats: TDStatsWindow = _open("stats")
+	await _redrawn(stats, "stats with an Auto button")
+	check(stats.auto_rect.size.x > 0 and Rect2(Vector2.ZERO, stats.size).encloses(stats.auto_rect), "Auto lies inside the window")
+	var plan := Game.me.auto_ap_plan()
+	var before := Game.me.base.copy()
+	await ui.click(stats, stats.auto_rect.get_center())
+	await ui.ticks(3)
+	check_eq(Game.me.ap, 0, "every point spent")
+	check_eq(Game.me.base.luck - before.luck, plan.get(&"luck", 0), "LUK as planned")
+	check_eq(Game.me.base.dexterity - before.dexterity, plan.get(&"dexterity", 0), "DEX as planned")
+	check(plan.get(&"luck", 0) > 0, "most points go in the thief's LUK")
+
+func test_status_bar_glows_while_points_wait() -> void:
+	await ui.edit(func(c: Character) -> void:
+		c.ap = 0
+		c.sp = 0)
+	check(not TDStatusBar.has_points_waiting("stats") and not TDStatusBar.has_points_waiting("skills"), "nothing to spend, no glow")
+	await ui.edit(func(c: Character) -> void:
+		c.ap = 5
+		c.sp = 2)
+	check(TDStatusBar.has_points_waiting("stats"), "the Character button glows with AP")
+	check(TDStatusBar.has_points_waiting("skills"), "the Skills button glows with SP")
+	check(not TDStatusBar.has_points_waiting("inventory"), "other buttons don't")
+	check(await ui.redraw(ui.hud.status), "the status bar draws the glow")
+
 # ---------- skills ----------
 
 func test_skill_window_lists_every_skill_of_every_job() -> void:
@@ -418,6 +482,19 @@ func test_world_map_dots_dont_overlap() -> void:
 			var d := wm.to_screen(placed[i].world_pos).distance_to(wm.to_screen(placed[k].world_pos))
 			check(d >= 10.0, "%s and %s sit %.1f px apart on the world map" % [placed[i].id, placed[k].id, d])
 
+func test_world_map_dots_keep_off_region_names() -> void:
+	var wm: TDWorldMapWindow = _open("worldmap")
+	for r: RegionDef in Content.regions.values():
+		if r.label_pos == Vector2.ZERO:
+			continue
+		var label := wm.label_rect(r)
+		check(wm._area().encloses(label), "%s: its name lies inside the map area" % r.id)
+		for m in TDWorldMapWindow.placed():
+			var dot := wm.to_screen(m.world_pos)
+			var hit := Rect2(dot - Vector2(9, 9), Vector2(18, 18)).intersects(label)
+			check(not hit, "%s's dot at %s covers the name %s at %s" % [m.id, dot, r.display_name, label])
+	await _redrawn(wm, "world map")
+
 # ---------- community ----------
 
 func _social() -> Dictionary:
@@ -556,6 +633,37 @@ func test_every_npc_dialogue_and_its_pages() -> void:
 			for key in ["dialogue", "shop", "storage", "player_shop", "inventory"]:
 				_win(key).visible = false
 		npc.free()
+
+func test_choosing_a_path_lists_every_job_and_what_it_takes() -> void:
+	await ui.edit(func(c: Character) -> void: c.level = 7)
+	var q: QuestDef = Content.quests[&"q07_choosing_a_path"]
+	check(q.lists_job_paths, "the quest lists the job paths")
+	var npc := ui.npc_beside(Content.npcs[q.giver])
+	ui.hud.open_dialogue(npc)
+	var talk: TDDialogueWindow = _win("dialogue")
+	var labels: Array = talk.options.map(func(o: Array) -> String: return o[0])
+	var at := labels.find("New quest: %s" % q.title)
+	if not check(at >= 0, "Sorrel offers %s: %s" % [q.title, labels]):
+		return
+	talk.choose(at)
+	for j in JobDef.paths_from(Character.START_JOB):
+		check(talk.text.contains(j.path_line()), "the offer names %s" % j.path_line())
+	check(talk.text.contains("Warrior: Level 10, 35 STR"), "in the JobDef's own words")
+	await _redrawn(talk, "the Choosing a Path offer")
+	var lines := talk._text_lines()
+	check(lines[-1][1] < talk._option_rect(0).position.y, "the text ends above the options")
+	check(talk.position.y + talk.size.y < TDWorld.VIEW.y - TDStatusBar.HEIGHT, "the window ends above the status bar")
+
+func test_dialogue_shrinks_to_short_pages() -> void:
+	var talk: TDDialogueWindow = _win("dialogue")
+	var npc := ui.npc_beside(Content.npcs[&"village_elder"])
+	ui.hud.open_dialogue(npc)
+	talk._page("Where to?", [["Back", func() -> void: pass]])
+	check_eq(talk.size.y, TDDialogueWindow.MIN_H, "a short page gets a short window")
+	talk._page("Long.\n\n" + "\n".join(range(14).map(func(i: int) -> String: return "Line %d" % i)), [["One", func() -> void: pass], ["Two", func() -> void: pass]])
+	check(talk.size.y > TDDialogueWindow.MIN_H, "a long page gets a taller one")
+	await _redrawn(talk, "a long page")
+	check(talk._text_lines()[-1][1] < talk._option_rect(0).position.y, "its text ends above the options")
 
 func test_dialogue_number_keys_pick_options() -> void:
 	var elder: NpcDef = Content.npcs[&"village_elder"]

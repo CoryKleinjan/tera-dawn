@@ -112,15 +112,21 @@ func _process(_delta: float) -> void:
 		rig.play(&"idle")
 	rig.place(body_position(), z, NAN if dead else plat.y)
 
-## Name tag and HP bar, drawn by the overlay at this monster's projected screen position.
-## A boss's HP is on the boss bar at the top of the screen instead (see draws_boss_bar).
-func draw_tag(ci: CanvasItem, at: Vector2, top: Vector2) -> void:
+## HP bar and name tag, drawn by the overlay at this monster's projected screen position
+## (the tag goes in `tags`, which keeps tags apart). A boss's HP is on the boss bar at the
+## top of the screen instead (see draws_boss_bar).
+func draw_tag(ci: CanvasItem, at: Vector2, top: Vector2, tags: TDNameTags) -> void:
 	if dead or not known:
 		return
-	var label := "Lv.%d %s" % [def.level, def.display_name]
-	UiSkin.draw_name_tag(ci, at + Vector2(0, 4), label, Palette.MIST)
+	if shows_tag():
+		tags.add_name(at + Vector2(0, 4), "Lv.%d %s" % [def.level, def.display_name], Palette.MIST)
 	if flags & SnapshotFlags.MOB_SHOW_HP != 0 and not def.boss:
 		UiSkin.draw_monster_hp(ci, top + Vector2(0, -16), maxf(54.0, def.size.x * 1.1), hp)
+
+## Whether its name tag shows: only while it's hurt (its HP bar is up) or for a boss, so a
+## field of monsters isn't a field of labels.
+func shows_tag() -> bool:
+	return known and not dead and (flags & SnapshotFlags.MOB_SHOW_HP != 0 or def.boss)
 
 ## Whether this is a living boss whose HP belongs on the boss bar.
 func draws_boss_bar() -> bool:

@@ -6,6 +6,8 @@ extends Control
 ## (no depth of field or fog on text).
 
 var world: TDWorld
+## The name tags of the last frame drawn, where they ended up (for tests).
+var last_tags: TDNameTags
 
 func _process(_delta: float) -> void:
 	queue_redraw()
@@ -18,7 +20,8 @@ func _draw() -> void:
 	_draw_world_text()
 	# map name
 	UiSkin.draw_hint(self, Vector2(16 + (DrawUtil.text_width(font, world.map.display_name, 13) + 26) / 2.0, 36), world.map.display_name)
-	_draw_minimap(Rect2(v.x - 182, 10, 172, 50))
+	if world.started:
+		_draw_minimap(Rect2(v.x - 182, 10, 172, 50))
 	var boss_shown := world.started and _draw_boss_bar(Vector2(v.x / 2, 6))
 	if world.started:
 		_draw_party(Vector2(16, 56))
@@ -121,28 +124,32 @@ func _draw_quest_tracker(at: Vector2) -> void:
 				y += 15
 		y += 4
 
-## A pet's name under it and what it's saying over it.
-func _draw_pet(c: TDCompanion, z: float, shown: bool) -> void:
+## A pet's name under it (into `tags`) and what it's saying over it.
+func _draw_pet(c: TDCompanion, z: float, shown: bool, tags: TDNameTags) -> void:
 	if c == null or c.pet == null or not shown or not world.stage.in_view(c.pet_pos, z):
 		return
-	UiSkin.draw_name_tag(self, world.stage.screen(c.pet_pos, z) + Vector2(0, 4), c.pet.display_name, Palette.PET)
+	tags.add_name(world.stage.screen(c.pet_pos, z) + Vector2(0, 4), c.pet.display_name, Palette.PET)
 	if c.speech_t > 0:
 		UiSkin.draw_speech(self, world.stage.screen(c.pet_head(), z) + Vector2(0, -6), c.speech)
 
+## Everything drawn at a spot in the world: name tags (gathered first and nudged apart,
+## yours on top), HP bars, quest markers, speech, floating numbers and portal hints.
 func _draw_world_text() -> void:
 	var st := world.stage
+	var tags := TDNameTags.new()
+	last_tags = tags
 	for m in world.mobs():
 		var body := m.body_position()
 		if not st.in_view(body, m.z):
 			continue
-		m.draw_tag(self, st.screen(m.position, m.z), st.screen(body + Vector2(0, -m.def.size.y), m.z))
+		m.draw_tag(self, st.screen(m.position, m.z), st.screen(body + Vector2(0, -m.def.size.y), m.z), tags)
 	for n in world.npcs():
 		if st.in_view(n.position, 0.1):
-			n.draw_tag(self, st.screen(n.position, 0.1), st.screen(n.position + Vector2(0, -n.rig.body.get_item_rect().size.y * n.rig.body.pixel_size * TDStage.PX), 0.1))
+			n.draw_tag(self, st.screen(n.position, 0.1), st.screen(n.position + Vector2(0, -n.rig.body.get_item_rect().size.y * n.rig.body.pixel_size * TDStage.PX), 0.1), tags)
 	for a in world.avatars.values():
 		if st.in_view(a.position, TDStage.Z_OTHER_PLAYER):
 			var feet := st.screen(a.position, TDStage.Z_OTHER_PLAYER)
-			a.draw_tag(self, feet)
+			a.draw_tag(tags, feet)
 			if a.shop_title != "":
 				UiSkin.draw_hint(self, feet + Vector2(0, -84), "Shop: " + a.shop_title)
 			elif a.speech_t > 0:
@@ -150,16 +157,15 @@ func _draw_world_text() -> void:
 	var p := world.player
 	if world.started and not p.fainted():
 		var feet := st.screen(p.position, TDPlayer.Z)
-		UiSkin.draw_name_tag(self, feet + Vector2(0, 4), Game.me.name, Palette.SUN)
-		if Game.me.guild != "":
-			UiSkin.draw_name_tag(self, feet + Vector2(0, 26), Game.me.guild, Palette.GUILD)
+		tags.add_name(feet + Vector2(0, 4), Game.me.name, Palette.SUN, Game.me.guild, Palette.GUILD, true)
 		if world.hud.selling():
 			UiSkin.draw_hint(self, feet + Vector2(0, -84), "Shop: " + world.hud.windows["player_shop"].shop_title)
 		elif p.speech_t > 0:
 			UiSkin.draw_speech(self, feet + Vector2(0, -84), p.speech)
-	_draw_pet(world.player.companion, TDPlayer.Z, world.started and not p.fainted())
+	_draw_pet(world.player.companion, TDPlayer.Z, world.started and not p.fainted(), tags)
 	for a in world.avatars.values():
-		_draw_pet(a.companion, TDStage.Z_OTHER_PLAYER, a.known)
+		_draw_pet(a.companion, TDStage.Z_OTHER_PLAYER, a.known, tags)
+	tags.draw(self)
 	for f in world.fx_layer.get_children():
 		if f is TDFloatText:
 			(f as TDFloatText).draw_at(self, st.screen(f.position, 0.6))

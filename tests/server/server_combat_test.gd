@@ -97,7 +97,8 @@ func test_killing_a_monster_announces_it_and_gives_exp() -> void:
 	check_eq(h.last(2, &"ev_mob_died"), [0], "killer told")
 	check_eq(h.last(3, &"ev_mob_died"), [0], "others on the map told")
 	check_eq(p.character.xp, 10, "EXP")
-	check(h.told(2, "+10 EXP"), "EXP shown")
+	check_eq(h.last(2, &"ev_gain"), [&"exp", 10], "EXP shown rising over the player")
+	check(not h.told(2, "EXP"), "not in the message log")
 	h.step(1)
 	# the first kill also earns an achievement, so the whole character is sent
 	check_eq(h.last(2, &"ev_character")[0]["xp"], 10, "the update carries the new EXP")

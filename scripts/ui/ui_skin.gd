@@ -113,10 +113,14 @@ static func draw_bar(ci: CanvasItem, frame: String, fill: String, pos: Vector2, 
 		DrawUtil.text(ci, Game.ui_font, groove.position + Vector2(groove.size.x / 2.0, groove.size.y - 4.0 * scale),
 			text, int(12 * scale), Palette.MIST, 0, 4, Color(0.1, 0.05, 0.15, 0.9))
 
+## Where a name tag with its top centre at `top_center` sits on screen.
+static func name_tag_rect(top_center: Vector2, label: String) -> Rect2:
+	var w := DrawUtil.text_width(Game.ui_font, label, 11) + 22
+	return Rect2(top_center.x - w / 2.0, top_center.y, w, 19)
+
 ## The plaque under a character's feet with their name.
 static func draw_name_tag(ci: CanvasItem, top_center: Vector2, label: String, col: Color, badge := Color.TRANSPARENT) -> void:
-	var w := DrawUtil.text_width(Game.ui_font, label, 11) + 22
-	var r := Rect2(top_center.x - w / 2.0, top_center.y, w, 19)
+	var r := name_tag_rect(top_center, label)
 	box("name_tag", 12, 8).draw(ci.get_canvas_item(), r)
 	DrawUtil.text(ci, Game.ui_font, top_center + Vector2(0, 14), label, 11, col)
 	if badge.a > 0.0:

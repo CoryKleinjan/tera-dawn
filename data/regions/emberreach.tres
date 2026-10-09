@@ -8,5 +8,5 @@ id = &"emberreach"
 display_name = "Emberreach"
 description = "Cinder hills and forges, home of the Warriors."
 color = Color(1.0, 0.478431, 0.239216, 1.0)
-label_pos = Vector2(820.0, 250.0)
+label_pos = Vector2(840.0, 245.0)
 level_text = "Lv. 10-32"

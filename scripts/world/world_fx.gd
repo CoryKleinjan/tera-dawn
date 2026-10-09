@@ -76,6 +76,20 @@ func show_level_up(peer: int, _level: int) -> void:
 	if who == world.player:
 		world.player.level_up()
 
+## A small "+9 EXP" or "+8 Dawnshards" rising over your hero; gains that arrive together
+## stack upwards instead of covering each other.
+func show_gain(kind: StringName, amount: int) -> void:
+	var young := 0
+	for f in world.fx_layer.get_children():
+		if f is TDFloatText and (f as TDFloatText).is_gain() and f.t < TDFloatText.GAIN_STACK_TICKS:
+			young += 1
+	var n := TDFloatText.new()
+	n.world = world
+	n.position = world.player.position + Vector2(0, -96 - young * 14)
+	n.value = amount
+	n.kind = String(kind)
+	world.fx_layer.add_child(n)
+
 func add_number(pos: Vector2, value: int, kind: String) -> void:
 	var n := TDFloatText.new()
 	n.world = world

@@ -12,6 +12,11 @@ const TEXT_X := PAD + PORTRAIT + 16
 const ROW_H := 26.0
 ## Walk this far from the NPC and the window closes.
 const REACH := 170.0
+## The window fits its page: never shorter than the portrait needs, never taller than this.
+const MIN_H := 200.0
+const MAX_H := 440.0
+const TEXT_TOP := TITLE_H + 26
+const LINE_H := 18.0
 
 var npc: TDNpc
 var text := ""
@@ -20,7 +25,7 @@ var options: Array = []
 var _line := -1
 
 func _init() -> void:
-	super("", Vector2(520, 330))
+	super("", Vector2(520, MIN_H))
 
 func _ready() -> void:
 	super()
@@ -45,12 +50,14 @@ func _main_page(say: String) -> void:
 	_on_main_page = true
 	text = say
 	options = _options()
+	_fit()
 
 ## A page of its own: different text and options, until one of them goes back.
 func _page(say: String, page_options: Array) -> void:
 	_on_main_page = false
 	text = say
 	options = page_options
+	_fit()
 
 ## What this NPC offers, in order. Goodbye is always last.
 func _options() -> Array:
@@ -96,14 +103,14 @@ func _quest_options() -> Array:
 					["Not yet", func() -> void: _main_page(greeting)]])])
 		elif status == QuestLog.Status.AVAILABLE and q.giver == npc.def.id:
 			out.append(["New quest: %s" % q.title, func() -> void:
-				_page("%s\n\n%s\nReward: %s" % [q.offer_text, _objective_list(q), q.describe_rewards()], [
+				_page("%s%s\n\n%s\nReward: %s" % [q.offer_text, _job_paths(q), _objective_list(q), q.describe_rewards()], [
 					["Accept", func() -> void:
 						Net.ask(&"req_quest_accept", [npc.def.id, q.id])
 						_main_page(greeting)],
 					["Decline", func() -> void: _main_page(greeting)]])])
 		elif status in [QuestLog.Status.ACTIVE, QuestLog.Status.READY]:
 			out.append(["In progress: %s" % q.title, func() -> void:
-				_page("%s\n\n%s" % [q.progress_text, _objective_list(q)], [
+				_page("%s%s\n\n%s" % [q.progress_text, _job_paths(q), _objective_list(q)], [
 					["Back", func() -> void: _main_page(greeting)]])])
 	return out
 
@@ -167,6 +174,16 @@ func _job_page(j: JobDef) -> void:
 	opts.append(["Back", _job_list])
 	_page(say, opts)
 
+## For a quest that lists the job paths: a paragraph naming each job a Beginner can
+## advance into and what it takes ("Warrior: Level 10, 35 STR"). "" for other quests.
+static func _job_paths(q: QuestDef) -> String:
+	if not q.lists_job_paths:
+		return ""
+	var lines := ["", "", "The paths ahead:"]
+	for j in JobDef.paths_from(Character.START_JOB):
+		lines.append(j.path_line())
+	return "\n".join(lines)
+
 ## "Defeat 8 Dewlings (3/8)", one per line.
 static func _objective_list(q: QuestDef) -> String:
 	var me := Game.me
@@ -191,6 +208,8 @@ func _option_rect(i: int) -> Rect2:
 	return Rect2(TEXT_X - 6, size.y - PAD - (options.size() - i) * ROW_H, size.x - TEXT_X - PAD + 6, ROW_H - 2)
 
 func _process(delta: float) -> void:
+	if visible:
+		_fit()
 	super(delta)
 	if visible and (npc == null or not is_instance_valid(npc) or hud.world.player.position.distance_to(npc.position) > REACH):
 		visible = false
@@ -213,19 +232,38 @@ func _draw_body() -> void:
 	if npc.def.title != "":
 		DrawUtil.text(self, Game.ui_font, Vector2(box.get_center().x, box.end.y + 16), npc.def.title, 11, Palette.MUTED, 0, 3, Palette.NIGHT)
 	# what they say
-	var y := TITLE_H + 26
-	for paragraph in text.split("\n"):
-		for l in UiSkin.wrap_text(Game.ui_font, paragraph, 13, size.x - TEXT_X - PAD):
-			DrawUtil.text(self, Game.ui_font, Vector2(TEXT_X, y), l, 13, Palette.MIST, 1, 3, Palette.NIGHT)
-			y += 18
-		if paragraph == "":
-			y += 8
+	for l in _text_lines():
+		DrawUtil.text(self, Game.ui_font, Vector2(TEXT_X, l[1]), l[0], 13, Palette.MIST, 1, 3, Palette.NIGHT)
 	# what you can do
 	for i in options.size():
 		var r := _option_rect(i)
 		if r.has_point(_hover):
 			draw_hilite(r)
 		DrawUtil.text(self, Game.ui_font, Vector2(r.position.x + 8, r.end.y - 7), "%d.  %s" % [i + 1, options[i][0]], 14, Palette.SUN, 1, 3, Palette.NIGHT)
+
+## The page's text wrapped to the window, as [line, baseline y].
+func _text_lines() -> Array:
+	var out := []
+	var y := TEXT_TOP
+	for paragraph in text.split("\n"):
+		for l in UiSkin.wrap_text(Game.ui_font, paragraph, 13, size.x - TEXT_X - PAD):
+			out.append([l, y])
+			y += LINE_H
+		if paragraph == "":
+			y += 8
+	return out
+
+## How tall the window needs to be for this page: its text, then its options, and room for
+## the portrait.
+func wanted_height() -> float:
+	var lines := _text_lines()
+	var text_end: float = lines[-1][1] + 10.0 if not lines.is_empty() else TEXT_TOP
+	return clampf(text_end + options.size() * ROW_H + PAD, MIN_H, MAX_H)
+
+## Resizes to the page, keeping the window above the status bar.
+func _fit() -> void:
+	size.y = wanted_height()
+	position.y = minf(position.y, TDWorld.VIEW.y - TDStatusBar.HEIGHT - size.y - 4)
 
 func _click(at: Vector2, button: int, _double: bool) -> void:
 	if button != MOUSE_BUTTON_LEFT:
