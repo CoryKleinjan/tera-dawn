@@ -95,9 +95,7 @@ func test_npcs_and_starts_are_inside_the_map() -> void:
 		for i in m.npcs.size():
 			if m.npcs[i]:
 				check_between(m.npcs[i].x, 0, m.width, "%s: npcs[%d].x" % [Scan.where(m), i])
-		# Known bug, left out so the suite stays green: data/maps/hollow.tres has start_x 90
-		# inside its portal at x 60, so logging in there puts you in the portal.
-		#check(MapLayout.new(m).portal_at(Vector2(m.start_x, m.ground_y)) == null, "%s: start_x %s is inside a portal" % [Scan.where(m), m.start_x])
+		check(MapLayout.new(m).portal_at(Vector2(m.start_x, m.ground_y)) == null, "%s: start_x %s is inside a portal" % [Scan.where(m), m.start_x])
 
 func test_every_portal_has_a_way_back() -> void:
 	for m: MapDef in Content.maps.values():
