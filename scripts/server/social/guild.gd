@@ -60,6 +60,22 @@ func join_guild(g: Dictionary, p: SimPlayer) -> void:
 	for m in g["members"]:
 		tell(social.player_named(m), "%s joined the guild." % p.character.name, Palette.GOOD)
 
+## Takes a deleted character out of their guild, as if they had left it.
+func forget(char_name: String) -> void:
+	var g := social.guild_of(char_name)
+	if g.is_empty():
+		return
+	var members: Array = g["members"]
+	members.erase(char_name)
+	if members.is_empty():
+		social.guilds.erase(String(g["name"]).to_lower())
+	else:
+		if g["master"] == char_name:
+			g["master"] = members[0]
+		for m in members:
+			tell(social.player_named(m), "%s left the guild." % char_name)
+	save_guilds()
+
 func leave_guild(p: SimPlayer) -> void:
 	var g := social.guild_of(p.character.name)
 	if g.is_empty():

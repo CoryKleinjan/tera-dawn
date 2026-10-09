@@ -14,9 +14,11 @@ const COOLDOWN_SLACK := 4
 const NOT_ENOUGH_SHARDS := "You don't have enough Dawnshards."
 
 var store: CharacterStore
-## Import the single-player save (user://save.json) as a player's character the first time
-## they play on this machine. On for a host or single player, off for dedicated servers.
-var import_legacy_save := false
+## Accounts, logging in and character select.
+var lobby: TDLobby
+## Whether a player at this game's own keyboard plays here (single player or host). Only
+## they can use the password-free LOCAL account.
+var local_player := false
 ## peer id -> SimPlayer
 var sessions := {}
 ## map id -> MapInstance
@@ -29,6 +31,7 @@ var social: TDSocial
 func _init(save_dir := "user://characters") -> void:
 	store = CharacterStore.new(save_dir)
 	social = TDSocial.new(self, save_dir)
+	lobby = TDLobby.new(self, save_dir)
 
 func _physics_process(_delta: float) -> void:
 	tick += 1
@@ -36,6 +39,7 @@ func _physics_process(_delta: float) -> void:
 		if not m.players.is_empty():
 			m.step()
 	social.step(tick)
+	lobby.step(tick)
 	for p: SimPlayer in sessions.values():
 		_flush(p)
 	if tick % SNAPSHOT_EVERY == 0:
@@ -72,34 +76,25 @@ func _flush(p: SimPlayer) -> void:
 
 # ---------- joining and leaving ----------
 
-## A player wants to play `raw_name`. A saved character loads; a new one is made from the
-## character creator's choices (`made`, NewCharacter.to_dict()), and without them the player
-## is sent to the creator first (ev_new_character).
-func join(peer: int, raw_name: String, made := {}) -> void:
-	var char_name := CharacterStore.clean_name(raw_name)
-	if char_name == "":
-		Net.send(peer, &"ev_join_failed", ["Please pick a name."])
+## Puts a logged-in player's character `c` (picked at character select, see TDLobby) into
+## the world.
+func enter_game(peer: int, c: Character) -> void:
+	if social.player_named(c.name) != null:
+		lobby.refuse(peer, "%s is already playing." % c.name)
 		return
-	for p: SimPlayer in sessions.values():
-		if p.character.name.to_lower() == char_name.to_lower():
-			Net.send(peer, &"ev_join_failed", ["%s is already playing." % char_name])
-			return
-	var c := store.load_character(char_name)
-	if c == null and import_legacy_save:
-		c = CharacterStore.load_file("user://save.json", char_name)
-		import_legacy_save = false
-	if c == null:
-		if made.is_empty():
-			Net.send(peer, &"ev_new_character", [char_name])
-			return
-		c = Character.create(char_name, Character.START_JOB, NewCharacter.from_dict(made))
 	var p := SimPlayer.new(peer, c)
 	sessions[peer] = p
 	social.joined(p)
 	Net.send(peer, &"ev_joined", [c.to_dict()])
 	_enter_map(p, c.map_id, Content.map(c.map_id).start_x)
-	print("%s joined (peer %d)" % [char_name, peer])
+	print("%s joined (peer %d)" % [c.name, peer])
 
+## A connection closed: out of the world, and logged out.
+func disconnected(peer: int) -> void:
+	leave(peer)
+	lobby.dropped(peer)
+
+## Takes a player out of the world (saving them). They stay logged in.
 func leave(peer: int) -> void:
 	var p := player_of(peer)
 	if p == null:

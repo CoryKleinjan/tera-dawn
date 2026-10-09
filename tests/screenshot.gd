@@ -63,13 +63,15 @@ func _run() -> void:
 	await _frames(10)
 	if only == "" or only == "title":
 		await _shot("title")
-	DirAccess.remove_absolute("user://screenshot_characters/dawnling.json")
+	for f in ["dawnling.json", "mira.json", "accounts/~local.json"]:
+		DirAccess.remove_absolute("user://screenshot_characters/" + f)
+	world.hud._on_play()
+	await _physics(2)
 	if only == "" or only == "creator":
-		# The character creator for a new name, with a few choices made.
-		world.hud.name_field.text = "Dawnling"
-		world.hud._on_play()
-		await _physics(2)
+		# The character creator, with a name and a few choices made.
+		world.hud.character_select.create_button.pressed.emit()
 		var creator := world.hud.creator
+		creator.name_field.text = "Dawnling"
 		creator.step("look:%d" % LookDef.Kind.HAIR, 2)
 		creator.step("look:%d" % LookDef.Kind.HAIR_COLOR, 3)
 		creator.step("look:%d" % LookDef.Kind.FACE, 2)
@@ -78,7 +80,15 @@ func _run() -> void:
 		await _shot("creator")
 		creator.cancelled.emit()
 		await _frames(2)
-	Net.play_single("Dawnling", NewCharacter.new().to_dict())
+	Net.create_character("Dawnling", NewCharacter.new())
+	Net.create_character("Mira", NewCharacter.new())
+	await _physics(2)
+	if only == "" or only == "select":
+		world.hud.character_select.select("Dawnling")
+		await _frames(10)
+		await _shot("select")
+	Net.play("Dawnling")
+	await _physics(2)
 	var ch := _me().character
 	ch.level = 9
 	ch.recalc()

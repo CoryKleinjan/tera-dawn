@@ -244,8 +244,7 @@ func test_buddies_are_told_when_you_come_online() -> void:
 	_accept(2, "buddy", 4)
 	h.leave(4)
 	h.clear()
-	h.api.peers.append(4)
-	h.server.join(4, "Cat")
+	h.play(4, "Cat")
 	check(h.told(2, "Cat is online."), "Ann told")
 	check(not h.told(3, "Cat is online."), "Bob isn't her buddy")
 

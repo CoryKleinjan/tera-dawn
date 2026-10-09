@@ -116,6 +116,10 @@ func tell(p: SimPlayer, text: String, col := INFO) -> void:
 # ---------- coming and going ----------
 
 func joined(p: SimPlayer) -> void:
+	# buddies whose characters were deleted while this one was away
+	for b in p.character.buddies.duplicate():
+		if not server.store.exists(b):
+			p.character.buddies.erase(b)
 	var g := guild_of(p.character.name)
 	p.character.guild = g.get("name", "")
 	for other: SimPlayer in server.sessions.values():
@@ -137,6 +141,16 @@ func left(p: SimPlayer) -> void:
 		if invites[id]["to"] == peer:
 			invites.erase(id)
 	_sent.erase(peer)
+
+## A character was deleted: out of their guild (handing it on, or ending it if they were
+## the last one) and off the buddy lists of everyone online. Offline buddy lists drop them
+## when those players next join.
+func forget(char_name: String) -> void:
+	guild.forget(char_name)
+	for other: SimPlayer in server.sessions.values():
+		if other.character.buddies.has(char_name):
+			other.character.buddies.erase(char_name)
+			other.dirty_character = true
 
 ## A player moved to another map: trades, their shop and shop visits end.
 func changed_map(p: SimPlayer) -> void:

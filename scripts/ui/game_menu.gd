@@ -1,16 +1,20 @@
 class_name TDGameMenu
 extends CenterContainer
-## The menu Esc opens while playing: Resume, Settings, Leave to title and Quit to desktop.
+## The menu Esc opens while playing: Resume, Settings, Character select, Log out and Quit
+## to desktop.
 ## The game carries on behind it (it's online); TDHud decides what each button does.
 
 signal resumed
 signal settings_requested
-signal left
+## Back to character select, still logged in.
+signal to_characters
+signal logged_out
 signal quit
 
 var resume_button: Button
 var settings_button: Button
-var leave_button: Button
+var characters_button: Button
+var logout_button: Button
 var quit_button: Button
 
 func _init() -> void:
@@ -33,7 +37,8 @@ func _init() -> void:
 	col.add_child(UiSkin.divider())
 	resume_button = _button(col, "Resume", resumed)
 	settings_button = _button(col, "Settings", settings_requested)
-	leave_button = _button(col, "Leave to title", left)
+	characters_button = _button(col, "Character select", to_characters)
+	logout_button = _button(col, "Log out", logged_out)
 	quit_button = _button(col, "Quit to desktop", quit)
 
 func _button(col: VBoxContainer, text: String, sig: Signal) -> Button:

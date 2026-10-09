@@ -1,12 +1,12 @@
 class_name TDCreator
 extends CenterContainer
-## The character creator, shown when you play a name that has no character yet: a live
-## preview of your hero and a row of arrows for each choice (skin, face, eyes, hair, hair
-## colour and the starting outfit). Every new character starts in the starting job
+## The character creator, opened from character select: a name, a live preview of your
+## hero and a row of arrows for each choice (skin, face, eyes, hair, hair colour and the
+## starting outfit). Every new character starts in the starting job
 ## (Character.START_JOB); the options come from data/looks/ and the job's `creator_gear`.
 
-## Create was pressed with these choices.
-signal created(made: NewCharacter)
+## Create was pressed with this name and these choices.
+signal created(char_name: String, made: NewCharacter)
 ## Back was pressed.
 signal cancelled
 
@@ -22,7 +22,10 @@ var made: NewCharacter
 var job: JobDef
 var preview := PaperdollView.new()
 var heading: Label
+var name_field: LineEdit
 var create_button: Button
+## Why the server turned the last Create down (a name that's taken...).
+var message: Label
 ## Every choice row's value label, keyed by "look:<kind>" or "outfit:<slot>".
 var values := {}
 var _pose := 0
@@ -47,9 +50,17 @@ func _init() -> void:
 	heading.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	heading.add_theme_stylebox_override("normal", UiSkin.box("creator/banner", 44, 16, 52, 8))
 	left.add_child(heading)
+	name_field = LineEdit.new()
+	name_field.placeholder_text = "Character name"
+	name_field.max_length = CharacterStore.MAX_NAME
+	name_field.alignment = HORIZONTAL_ALIGNMENT_CENTER
+	name_field.custom_minimum_size = Vector2(250, 34)
+	name_field.text_submitted.connect(func(_t: String) -> void: _create())
+	_style_name_field()
+	left.add_child(name_field)
 	# the hero stands on a grassy pedestal
 	var stage := Control.new()
-	stage.custom_minimum_size = Vector2(250, 190)
+	stage.custom_minimum_size = Vector2(250, 176)
 	left.add_child(stage)
 	var pedestal := TextureRect.new()
 	pedestal.texture = UiSkin.tex("creator/pedestal")
@@ -101,22 +112,63 @@ func _init() -> void:
 	buttons.alignment = BoxContainer.ALIGNMENT_CENTER
 	buttons.add_theme_constant_override("separation", 10)
 	buttons.add_child(_wide_button("Back", BUTTON_PLAIN, func() -> void: cancelled.emit()))
-	create_button = _wide_button("Create", BUTTON_GOLD, func() -> void: created.emit(made))
+	create_button = _wide_button("Create", BUTTON_GOLD, _create)
 	buttons.add_child(create_button)
 	right.add_child(Control.new()) # a little space
 	right.add_child(buttons)
+	message = _label("", 13, Palette.BAD)
+	message.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	message.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	message.custom_minimum_size.x = 300
+	message.hide()
+	right.add_child(message)
 	_refresh()
 
-## Starts over for a new character called `char_name`.
-func open(char_name: String) -> void:
+## Starts over for a new character.
+func open() -> void:
 	made = NewCharacter.new(job.id)
-	heading.text = "Create %s" % char_name
+	heading.text = "New character"
+	name_field.text = ""
+	show_message("")
 	preview.facing = 1
 	_pose = 0
 	preview.play(POSES[0])
 	_refresh()
 	show()
-	create_button.grab_focus()
+	name_field.grab_focus()
+
+## A light box with dark ink, to sit on the creator's parchment.
+func _style_name_field() -> void:
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = Color(1, 0.98, 0.92, 0.85)
+	sb.border_color = Palette.INK_SOFT
+	sb.set_border_width_all(2)
+	sb.set_corner_radius_all(8)
+	sb.content_margin_left = 10
+	sb.content_margin_right = 10
+	name_field.add_theme_stylebox_override("normal", sb)
+	var lit := sb.duplicate() as StyleBoxFlat
+	lit.border_color = Palette.GOLD_TRIM
+	name_field.add_theme_stylebox_override("focus", lit)
+	name_field.add_theme_font_override("font", Game.num_font)
+	name_field.add_theme_font_size_override("font_size", 18)
+	name_field.add_theme_color_override("font_color", Palette.INK)
+	name_field.add_theme_color_override("font_placeholder_color", Color(Palette.INK_SOFT, 0.7))
+	name_field.add_theme_color_override("caret_color", Palette.INK)
+
+func show_message(text: String) -> void:
+	message.text = text
+	message.visible = text != ""
+
+## Create: asks for a name first if there isn't one.
+func _create() -> void:
+	var n := CharacterStore.clean_name(name_field.text)
+	if n == "":
+		show_message("Please pick a name.")
+		name_field.grab_focus()
+		return
+	show_message("")
+	created.emit(n, made)
 
 ## The text a choice row shows now.
 func value_text(key: String) -> String:

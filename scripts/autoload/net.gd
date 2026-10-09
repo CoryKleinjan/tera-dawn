@@ -12,13 +12,15 @@ enum Mode { NONE, SINGLE, HOST, CLIENT, DEDICATED }
 const DEFAULT_PORT := 7350
 const MAX_PLAYERS := 32
 
-## The server accepted our character (Game.me is filled in).
+## Logged in: `username` and `characters` are filled in, show character select.
+signal logged_in
+## The account's characters changed (`characters`); `selected` is the one to pick, if any.
+signal characters_changed(selected: String)
+## The server said no (wrong password, a name that's taken...) or couldn't be reached;
+## `reason` says why, in words for the player.
+signal refused(reason: String)
+## The server put our character in the world (Game.me is filled in).
 signal joined
-## Joining didn't work; `reason` says why, in words for the player.
-signal join_failed(reason: String)
-## The server has no character called `char_name`: make one in the character creator, then
-## call `create` (or `stop` to give up).
-signal new_character(char_name: String)
 ## The connection to the server was lost.
 signal disconnected
 
@@ -27,23 +29,29 @@ var mode := Mode.NONE
 var server: TDServer
 ## Where events for the player are shown, when this game has a client.
 var world: TDWorld
-## Where the server keeps characters. Tests point it somewhere else.
+## Where the server keeps accounts and characters. Tests point it somewhere else.
 var save_dir := "user://characters"
-## Whether a server started for this player may bring in the save from before multiplayer.
+## Whether a server started for this player may bring in characters saved before accounts.
 var import_legacy_save := true
-var _name := ""
-## The character creator's choices to join with (NewCharacter.to_dict()), or {} to only
-## load a character that exists.
-var _made := {}
+## The account we're logged in to ("" for the local account of single player and host).
+var username := ""
+## The account's characters as character select shows them: {name, level, job, look}.
+var characters: Array = []
+## [register?, username, password] to send once the connection is up. Cleared as soon as
+## it's sent; the password is never kept anywhere else.
+var _pending: Array = []
 
 func _ready() -> void:
 	multiplayer.peer_disconnected.connect(func(peer: int) -> void:
 		if server:
-			server.leave(peer))
-	multiplayer.connected_to_server.connect(func() -> void: req_join.rpc_id(1, _name, _made))
+			server.disconnected(peer))
+	multiplayer.connected_to_server.connect(func() -> void:
+		if not _pending.is_empty():
+			ask(&"req_register" if _pending[0] else &"req_login", [_pending[1], _pending[2]])
+			_pending = [])
 	multiplayer.connection_failed.connect(func() -> void:
 		stop()
-		join_failed.emit("Couldn't reach the server."))
+		refused.emit("Couldn't reach the server."))
 	multiplayer.server_disconnected.connect(func() -> void:
 		stop()
 		disconnected.emit())
@@ -53,47 +61,45 @@ func is_playing() -> bool:
 
 # ---------- starting and stopping ----------
 
-## Single player: a private server inside this game, not reachable from the network.
-## `made` is the character creator's choices for a new character (see `create`).
-func play_single(char_name: String, made := {}) -> void:
+## Single player: a private server inside this game, not reachable from the network. You
+## play on its local account, so `logged_in` follows at once.
+func play_single() -> void:
 	stop()
 	mode = Mode.SINGLE
 	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
 	_start_server(true)
-	_ask_join(char_name, made)
+	ask(&"req_local_login")
 
-## Host: play, and let other players join this game on `port`. Returns "" or what went wrong.
-func host(char_name: String, port := DEFAULT_PORT, made := {}) -> String:
+## Host: play on the local account, and let other players register and log in to this game
+## on `port`. Returns "" or what went wrong.
+func host(port := DEFAULT_PORT) -> String:
 	stop()
 	var peer := ENetMultiplayerPeer.new()
 	if peer.create_server(port, MAX_PLAYERS) != OK:
 		return "Couldn't open port %d. Is another game using it?" % port
+	if peer.host.dtls_server_setup(TDTls.server_options(save_dir)) != OK:
+		peer.close()
+		return "Couldn't set up encryption."
 	mode = Mode.HOST
 	multiplayer.multiplayer_peer = peer
 	_start_server(true)
-	_ask_join(char_name, made)
+	ask(&"req_local_login")
 	return ""
 
-## Join someone else's server. `joined`, `new_character` or `join_failed` follows.
-func join(char_name: String, address: String, port := DEFAULT_PORT, made := {}) -> String:
+## Connects to a server and logs in (or registers a new account first, if `register`).
+## `logged_in` or `refused` follows. Returns "" or what went wrong right away.
+func log_in(address: String, username_: String, password: String, register := false, port := DEFAULT_PORT) -> String:
 	stop()
 	var peer := ENetMultiplayerPeer.new()
 	if peer.create_client(address, port) != OK:
 		return "Couldn't connect to %s." % address
+	if peer.host.dtls_client_setup(address, TDTls.client_options(address)) != OK:
+		peer.close()
+		return "Couldn't set up encryption."
 	mode = Mode.CLIENT
-	_name = char_name
-	_made = made
+	_pending = [register, username_, password]
 	multiplayer.multiplayer_peer = peer
 	return ""
-
-## Joins with a new character made in the creator, after `new_character`.
-func create(made: NewCharacter) -> void:
-	_ask_join(_name, made.to_dict())
-
-func _ask_join(char_name: String, made: Dictionary) -> void:
-	_name = char_name
-	_made = made
-	req_join.rpc_id(1, char_name, made)
 
 ## A server with no player of its own (run with `-- --server`). Returns "" or what went wrong.
 func run_dedicated(port := DEFAULT_PORT) -> String:
@@ -101,13 +107,16 @@ func run_dedicated(port := DEFAULT_PORT) -> String:
 	var peer := ENetMultiplayerPeer.new()
 	if peer.create_server(port, MAX_PLAYERS) != OK:
 		return "Couldn't open port %d." % port
+	if peer.host.dtls_server_setup(TDTls.server_options(save_dir)) != OK:
+		peer.close()
+		return "Couldn't set up encryption (see %s/tls)." % save_dir
 	mode = Mode.DEDICATED
 	multiplayer.multiplayer_peer = peer
 	_start_server(false)
 	print("Tera Dawn server listening on port %d" % port)
 	return ""
 
-## Leaves the game (saving everyone if this game is the server).
+## Leaves the game and logs out (saving everyone if this game is the server).
 func stop() -> void:
 	if server:
 		server.save_all()
@@ -117,12 +126,40 @@ func stop() -> void:
 		multiplayer.multiplayer_peer.close()
 	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
 	mode = Mode.NONE
+	username = ""
+	characters = []
+	_pending = []
 
 func _start_server(local_player: bool) -> void:
 	server = TDServer.new(save_dir)
 	server.name = "Server"
-	server.import_legacy_save = local_player and import_legacy_save
+	server.local_player = local_player
+	server.lobby.import_legacy_save = local_player and import_legacy_save
 	add_child(server)
+
+# ---------- character select ----------
+
+## Makes a new character on this account. `characters_changed` (with it selected) or
+## `refused` follows.
+func create_character(char_name: String, made: NewCharacter) -> void:
+	ask(&"req_create_character", [char_name, made.to_dict()])
+
+## Deletes one of this account's characters; `typed` is what the player typed to confirm.
+func delete_character(char_name: String, typed: String) -> void:
+	ask(&"req_delete_character", [char_name, typed])
+
+## Plays one of this account's characters. `joined` or `refused` follows.
+func play(char_name: String) -> void:
+	ask(&"req_play", [char_name])
+
+## Leaves the world for character select, still logged in.
+func leave_character() -> void:
+	ask(&"req_leave_character")
+
+## Drops a connection (the server, after too many wrong passwords).
+func kick(peer: int) -> void:
+	if multiplayer.multiplayer_peer is ENetMultiplayerPeer and multiplayer.get_peers().has(peer):
+		multiplayer.multiplayer_peer.disconnect_peer(peer)
 
 ## Sends an event from the server to one peer (skipping peers that have just left).
 func send(peer: int, event: StringName, args: Array) -> void:
@@ -140,9 +177,40 @@ func _sender() -> int:
 # ---------- requests: client -> server ----------
 
 @rpc("any_peer", "call_local", "reliable")
-func req_join(char_name: String, made: Dictionary) -> void:
+func req_register(username_: String, password: String) -> void:
 	if server:
-		server.join(_sender(), char_name, made)
+		server.lobby.on_register(_sender(), username_, password)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_login(username_: String, password: String) -> void:
+	if server:
+		server.lobby.on_login(_sender(), username_, password)
+
+## Single player or host: the player at this game's keyboard logs in to the local account.
+@rpc("any_peer", "call_local", "reliable")
+func req_local_login() -> void:
+	if server:
+		server.lobby.on_local_login(_sender())
+
+@rpc("any_peer", "call_local", "reliable")
+func req_create_character(char_name: String, made: Dictionary) -> void:
+	if server:
+		server.lobby.on_create(_sender(), char_name, made)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_delete_character(char_name: String, typed: String) -> void:
+	if server:
+		server.lobby.on_delete(_sender(), char_name, typed)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_play(char_name: String) -> void:
+	if server:
+		server.lobby.on_play(_sender(), char_name)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_leave_character() -> void:
+	if server:
+		server.lobby.on_leave_character(_sender())
 
 @rpc("any_peer", "call_local", "unreliable_ordered")
 func req_move(at: Vector2, face: int, anim: StringName, climbing: bool) -> void:
@@ -338,21 +406,30 @@ func req_advance(npc_id: StringName, job_id: StringName) -> void:
 
 # ---------- events: server -> client ----------
 
+## Logged in to `name` ("" for the local account): on to character select.
+@rpc("authority", "call_local", "reliable")
+func ev_logged_in(name_: String, slots: Array) -> void:
+	username = name_
+	characters = slots
+	logged_in.emit()
+
+## The account's characters, after making or deleting one or leaving the world.
+@rpc("authority", "call_local", "reliable")
+func ev_characters(slots: Array, selected: String) -> void:
+	characters = slots
+	characters_changed.emit(selected)
+
+## The server said no. With `drop`, it's also closing the connection.
+@rpc("authority", "call_local", "reliable")
+func ev_refused(reason: String, drop: bool) -> void:
+	if drop:
+		stop()
+	refused.emit(reason)
+
 @rpc("authority", "call_local", "reliable")
 func ev_joined(character: Dictionary) -> void:
 	Game.apply_character(character)
 	joined.emit()
-
-@rpc("authority", "call_local", "reliable")
-func ev_join_failed(reason: String) -> void:
-	stop()
-	join_failed.emit(reason)
-
-## There's no character by that name yet: open the character creator.
-@rpc("authority", "call_local", "reliable")
-func ev_new_character(char_name: String) -> void:
-	_name = char_name
-	new_character.emit(char_name)
 
 @rpc("authority", "call_local", "reliable")
 func ev_character(character: Dictionary) -> void:

@@ -406,11 +406,14 @@ func _run() -> void:
 	add_child(world)
 	await _ticks(5)
 	_check(not world.started and world.hud.title.visible, "the game opens on the title screen")
-	world.hud.name_field.text = "Tester"
 	world.hud._on_play()
 	await _ticks(2)
+	var select := world.hud.character_select
+	_check(select.visible and not world.hud.title_card.visible and Net.characters.is_empty(), "Play solo opens an empty character select")
+	select.create_button.pressed.emit()
 	var creator := world.hud.creator
-	_check(creator.visible and not world.hud.title_card.visible and not world.started, "Play with a new name opens the character creator")
+	_check(creator.visible and not select.visible and not world.started, "Create opens the character creator")
+	creator.name_field.text = "Tester"
 	creator.step("look:%d" % LookDef.Kind.HAIR, 1)
 	creator.step("look:%d" % LookDef.Kind.HAIR_COLOR, 2)
 	creator.step("outfit:%d" % EquipDef.Slot.TOP, 1)
@@ -419,8 +422,11 @@ func _run() -> void:
 	_check(creator.preview.look["appearance"] == chosen and creator.preview.look["gear"]["top"] == String(top.id), "the preview shows every choice")
 	creator.create_button.pressed.emit()
 	await _ticks(2)
+	_check(select.visible and select.selected == "Tester" and not world.started, "Create goes back to character select with the new character picked")
+	select.play_button.pressed.emit()
+	await _ticks(2)
 	_me().inv = 100000 # keep monsters from hurting the player mid-test
-	_check(world.started and not world.hud.title.visible and Game.me.name == "Tester", "Create starts a single-player game as the named character")
+	_check(world.started and not world.hud.title.visible and Game.me.name == "Tester", "Play starts a single-player game as the named character")
 	_check(Game.me.appearance.to_dict() == chosen and Game.me.equipment.at(&"top").item == top, "the character has the look and outfit picked")
 	_check(Game.me.job.id == Character.START_JOB, "a new character starts as a Beginner")
 	_check(world.player.rig.paperdoll.look == Game.me.look(), "the hero is drawn with that look")
@@ -675,8 +681,12 @@ func _run() -> void:
 	await _ticks(SimPlayer.FAINT_TICKS + 5)
 	_check(not p.fainted() and world.map.id == Character.START_MAP and Game.me.health.hp > 0, "after fainting the player wakes up in town")
 
-	world.hud._on_leave()
-	_check(Net.mode == Net.Mode.NONE and world.hud.title.visible, "Leave goes back to the title screen")
+	world.hud.show_title(true)
+	world.hud.game_menu.characters_button.pressed.emit()
+	await _ticks(2)
+	_check(world.hud.character_select.visible and not world.started and Net.mode == Net.Mode.SINGLE, "Character select in the menu leaves the world but stays logged in")
+	world.hud.character_select.logout_button.pressed.emit()
+	_check(Net.mode == Net.Mode.NONE and world.hud.title_card.visible, "Log out goes back to the title screen")
 	_check(CharacterStore.new(save_dir).load_character("Tester") != null, "leaving saves the character")
 
 	await _check_multiplayer()
@@ -1344,15 +1354,17 @@ func server_forfeit_check(ch: Character) -> void:
 ## the network: each must see the other, and the bot's attacks must count on the server.
 func _check_multiplayer() -> void:
 	var port := TEST_PORT + OS.get_process_id() % TEST_PORTS
-	var problem := Net.host("Host", port, NewCharacter.new().to_dict())
+	var problem := Net.host(port)
 	for i in 20:
 		if problem == "":
 			break
 		port = TEST_PORT + (port - TEST_PORT + 1) % TEST_PORTS
-		problem = Net.host("Host", port, NewCharacter.new().to_dict())
+		problem = Net.host(port)
 	_check(problem == "", "hosting opens a port (%d)%s" % [port, "" if problem == "" else ": " + problem])
 	if problem != "":
 		return
+	Net.create_character("Host", NewCharacter.new())
+	Net.play("Host")
 	await _ticks(2)
 	_check(world.started and Net.mode == Net.Mode.HOST, "the host plays in their own game")
 	_me().inv = 100000
@@ -1368,7 +1380,8 @@ func _check_multiplayer() -> void:
 				bot_peer = peer
 		if bot_peer != 0:
 			break
-	_check(bot_peer != 0, "the second game joins the host over the network")
+	_check(bot_peer != 0, "the second game registers on the host over an encrypted connection and joins")
+	_check(Net.server.lobby.accounts.exists(BotClient.USERNAME), "the bot's account is saved on the host")
 	if bot_peer == 0:
 		OS.kill(bot)
 		return

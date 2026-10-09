@@ -12,23 +12,32 @@ var world: TDWorld
 var overlay: TDOverlay
 var status: TDStatusBar
 var quickslots: TDQuickslots
-## The dimmed layer over the game that holds the title card, the game menu, the settings
-## screen and the character creator. While it's showing, the game ignores play keys.
+## The dimmed layer over the game that holds the title card, character select, the
+## character creator, the game menu and the settings screen. While it's showing, the game
+## ignores play keys.
 var title: Control
-## The title card (name, Play, Host, Join, Settings, Quit), hidden while the character
-## creator, the game menu or the settings screen is showing.
+## The title card (log in or register on a server, Play solo, Host, Settings, Quit),
+## hidden while any of the other screens on `title` is showing.
 var title_card: Control
-## The key art behind the title screen.
+## The key art behind the title screen and character select.
 var title_backdrop: TextureRect
+var character_select: TDCharacterSelect
+var delete_confirm: TDDeleteConfirm
 var creator: TDCreator
 var game_menu: TDGameMenu
 var settings_menu: TDSettingsMenu
 ## What the settings screen goes back to: the title card or the game menu.
 var _settings_from: Control
 var start_panel: Control
-var name_field: LineEdit
 var address_field: LineEdit
-## Shows why joining didn't work.
+var username_field: LineEdit
+var password_field: LineEdit
+## The second password box, shown while registering.
+var confirm_field: LineEdit
+var confirm_row: Control
+var login_button: Button
+var register_button: Button
+## Shows why logging in didn't work.
 var message: Label
 ## The key hints under the title card, which follow the player's keybinds.
 var keys_help: Label
@@ -254,22 +263,35 @@ func _build_title() -> void:
 	blurb.add_theme_font_size_override("font_size", 16)
 	inner.add_child(blurb)
 
-	# before playing: a name, then single player, host, or join an address
+	# before playing: log in to (or register on) a server, or play solo, or host
 	start_panel = VBoxContainer.new()
 	start_panel.add_theme_constant_override("separation", 10)
 	inner.add_child(start_panel)
-	name_field = _field(Game.player_name, "Your character's name", CharacterStore.MAX_NAME)
-	start_panel.add_child(_row([_label("Name"), name_field]))
-	var play := _menu_button("Play")
-	play.pressed.connect(_on_play)
-	var host := _menu_button("Host")
-	host.tooltip_text = "Play and let friends join you (port %d)" % Net.DEFAULT_PORT
-	host.pressed.connect(_on_host)
-	start_panel.add_child(_row([play, host]))
 	address_field = _field(Game.last_address, "Server address", 64)
-	var join := _menu_button("Join")
-	join.pressed.connect(_on_join)
-	start_panel.add_child(_row([_label("Server"), address_field, join]))
+	username_field = _field(Game.last_username, "Username", AccountStore.MAX_USERNAME)
+	password_field = _field("", "Password", AccountStore.MAX_PASSWORD)
+	password_field.secret = true
+	confirm_field = _field("", "Password again", AccountStore.MAX_PASSWORD)
+	confirm_field.secret = true
+	start_panel.add_child(_row([_titled("Server", address_field), _titled("Username", username_field), _titled("Password", password_field)]))
+	confirm_row = _row([_titled("Confirm password", confirm_field)])
+	confirm_row.hide()
+	start_panel.add_child(confirm_row)
+	for f: LineEdit in [address_field, username_field, password_field]:
+		f.text_submitted.connect(func(_t: String) -> void: _on_log_in())
+	confirm_field.text_submitted.connect(func(_t: String) -> void: _on_register())
+	login_button = _small_menu_button("Log in")
+	login_button.pressed.connect(_on_log_in)
+	register_button = _small_menu_button("Register")
+	register_button.tooltip_text = "Make an account on this server"
+	register_button.pressed.connect(_on_register)
+	var play := _small_menu_button("Play solo")
+	play.tooltip_text = "Play on your own, on this computer"
+	play.pressed.connect(_on_play)
+	var host := _small_menu_button("Host")
+	host.tooltip_text = "Play and let friends register and join you (port %d)" % Net.DEFAULT_PORT
+	host.pressed.connect(_on_host)
+	start_panel.add_child(_row([login_button, register_button, play, host]))
 	message = _label("")
 	message.add_theme_color_override("font_color", Palette.BAD)
 	message.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -289,7 +311,7 @@ func _build_title() -> void:
 	inner.add_child(keys_help)
 	_update_keys_help()
 	Settings.changed.connect(_on_settings_changed)
-	name_field.call_deferred("grab_focus")
+	_focus_login.call_deferred()
 
 	# while playing: the game menu (Esc)
 	game_menu = TDGameMenu.new()
@@ -297,7 +319,8 @@ func _build_title() -> void:
 	title.add_child(game_menu)
 	game_menu.resumed.connect(resume)
 	game_menu.settings_requested.connect(func() -> void: open_settings())
-	game_menu.left.connect(_on_leave)
+	game_menu.to_characters.connect(_on_to_characters)
+	game_menu.logged_out.connect(_on_log_out)
 	game_menu.quit.connect(_quit)
 
 	settings_menu = TDSettingsMenu.new()
@@ -308,24 +331,34 @@ func _build_title() -> void:
 		if _settings_from == game_menu:
 			game_menu.open()
 		else:
-			name_field.grab_focus())
+			_focus_login())
 
-	# a name with no character yet: the creator takes the title card's place
+	# after logging in: character select, the creator and the delete question
+	character_select = TDCharacterSelect.new()
+	character_select.hide()
+	title.add_child(character_select)
+	character_select.play_requested.connect(func(char_name: String) -> void: Net.play(char_name))
+	character_select.create_requested.connect(func() -> void:
+		character_select.hide()
+		creator.open())
+	character_select.delete_requested.connect(func(char_name: String) -> void: delete_confirm.open(char_name))
+	character_select.logged_out.connect(_on_log_out)
 	creator = TDCreator.new()
 	creator.hide()
 	title.add_child(creator)
-	Net.new_character.connect(func(char_name: String) -> void:
-		title_card.hide()
-		creator.open(char_name))
-	creator.created.connect(func(made: NewCharacter) -> void: Net.create(made))
+	creator.created.connect(func(char_name: String, made: NewCharacter) -> void: Net.create_character(char_name, made))
 	creator.cancelled.connect(func() -> void:
-		Net.stop()
-		_close_creator())
+		creator.hide()
+		character_select.show())
+	delete_confirm = TDDeleteConfirm.new()
+	delete_confirm.hide()
+	title.add_child(delete_confirm)
+	delete_confirm.confirmed.connect(func(char_name: String, typed: String) -> void: Net.delete_character(char_name, typed))
 
+	Net.logged_in.connect(_on_logged_in)
+	Net.characters_changed.connect(_on_characters_changed)
+	Net.refused.connect(_on_refused)
 	Net.joined.connect(_on_joined)
-	Net.join_failed.connect(func(reason: String) -> void:
-		_close_creator()
-		_show_message(reason))
 	Net.disconnected.connect(func() -> void:
 		world.stop()
 		show_title(false)
@@ -334,13 +367,28 @@ func _build_title() -> void:
 func _menu_button(text: String) -> Button:
 	return UiSkin.menu_button(text)
 
+func _small_menu_button(text: String) -> Button:
+	return UiSkin.menu_button(text, Vector2(122, 42), 18)
+
 func _field(text: String, hint: String, max_length: int) -> LineEdit:
 	var f := LineEdit.new()
 	f.text = text
 	f.placeholder_text = hint
 	f.max_length = max_length
-	f.custom_minimum_size = Vector2(220, 40)
+	f.custom_minimum_size = Vector2(164, 36)
 	return f
+
+## A field with a small title over it.
+func _titled(title_text: String, field: Control) -> VBoxContainer:
+	var col := VBoxContainer.new()
+	col.add_theme_constant_override("separation", 2)
+	var l := Label.new()
+	l.text = title_text
+	l.add_theme_font_size_override("font_size", 12)
+	l.add_theme_color_override("font_color", Palette.MUTED)
+	col.add_child(l)
+	col.add_child(field)
+	return col
 
 func _label(text: String) -> Label:
 	var l := Label.new()
@@ -357,49 +405,116 @@ func _row(children: Array) -> HBoxContainer:
 		row.add_child(c)
 	return row
 
-## The name typed in, remembered for next time. "" (with a message) if it's no good.
-func _chosen_name() -> String:
-	var n := CharacterStore.clean_name(name_field.text)
-	if n == "":
-		_show_message("Please pick a name.")
-		return ""
-	Game.player_name = n
-	Game.save_settings()
-	return n
-
 func _on_play() -> void:
-	var n := _chosen_name()
-	if n != "":
-		Net.play_single(n)
+	_show_message("")
+	Net.play_single()
 
 func _on_host() -> void:
-	var n := _chosen_name()
-	if n != "":
-		_show_message(Net.host(n))
+	_show_message(Net.host())
 
-func _on_join() -> void:
-	var n := _chosen_name()
+## Log in: hides the register box, then connects with the username and password.
+func _on_log_in() -> void:
+	if confirm_row.visible:
+		confirm_row.hide()
+		confirm_field.text = ""
+	_connect(false)
+
+## Register: the first press asks for the password again, the second makes the account.
+func _on_register() -> void:
+	if not confirm_row.visible:
+		confirm_row.show()
+		confirm_field.grab_focus()
+		_show_message("")
+		return
+	var why := AccountStore.username_problem(username_field.text.strip_edges())
+	if why == "":
+		why = AccountStore.password_problem(password_field.text)
+	if why == "" and confirm_field.text != password_field.text:
+		why = "The passwords don't match."
+	if why != "":
+		_show_message(why)
+		return
+	_connect(true)
+
+func _connect(register: bool) -> void:
 	var address := address_field.text.strip_edges()
-	if n == "" or address == "":
+	var user := username_field.text.strip_edges()
+	if address == "" or user == "" or password_field.text == "":
+		_show_message("Type the server, your username and your password.")
 		return
 	Game.last_address = address
+	Game.last_username = user
 	Game.save_settings()
-	var problem := Net.join(n, address)
+	var problem := Net.log_in(address, user, password_field.text, register)
+	password_field.text = ""
+	confirm_field.text = ""
 	_show_message(problem if problem != "" else "Connecting to %s…" % address)
+
+func _focus_login() -> void:
+	if username_field.text == "":
+		username_field.grab_focus()
+	else:
+		password_field.grab_focus()
+
+## Which server and account character select is for.
+func _where() -> String:
+	match Net.mode:
+		Net.Mode.SINGLE:
+			return "Playing solo on this computer"
+		Net.Mode.HOST:
+			return "Hosting on port %d" % Net.DEFAULT_PORT
+	return "%s on %s" % [Net.username, Game.last_address]
+
+func _on_logged_in() -> void:
+	_show_message("")
+	confirm_row.hide()
+	title_card.hide()
+	creator.hide()
+	character_select.show_characters(Net.characters, "", _where())
+
+func _on_characters_changed(selected: String) -> void:
+	creator.hide()
+	delete_confirm.hide()
+	title_card.hide()
+	title.show()
+	character_select.show_characters(Net.characters, selected)
+
+## The server said no: shown on whichever screen asked.
+func _on_refused(reason: String) -> void:
+	if Net.mode == Net.Mode.NONE or title_card.visible:
+		_back_to_title()
+		_show_message(reason)
+	elif creator.visible:
+		creator.show_message(reason)
+	else:
+		character_select.show_message(reason)
 
 func _on_joined() -> void:
 	_show_message("")
-	_close_creator()
+	creator.hide()
+	character_select.hide()
 	title.hide()
 	world.start()
 
-func _close_creator() -> void:
-	creator.hide()
-	title_card.show()
+## Esc menu: back to character select, still logged in.
+func _on_to_characters() -> void:
+	world.stop(true)
+	game_menu.hide()
+	title_card.hide()
+	title_backdrop.show()
+	title.show()
+	Net.leave_character()
 
-func _on_leave() -> void:
+func _on_log_out() -> void:
 	world.stop()
 	show_title(false)
+
+## Shows the title card alone.
+func _back_to_title() -> void:
+	character_select.hide()
+	creator.hide()
+	delete_confirm.hide()
+	title_card.show()
 
 func _quit() -> void:
 	Net.stop()
@@ -431,14 +546,15 @@ func _show_message(text: String) -> void:
 func show_title(paused: bool) -> void:
 	if settings_menu.visible:
 		settings_menu.close()
-	title_card.visible = not paused
 	title_backdrop.visible = not paused
 	title.show()
 	if paused:
+		title_card.hide()
 		game_menu.open()
 	else:
 		game_menu.hide()
-		name_field.grab_focus()
+		_back_to_title()
+		_focus_login()
 
 ## Back to the game from the game menu.
 func resume() -> void:

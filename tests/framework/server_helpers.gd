@@ -73,7 +73,13 @@ func _init() -> void:
 	_old_server = Net.server
 	add_map(field_def())
 	add_map(town_def())
+	_new_server()
+
+## A server on `dir` that checks passwords at once (on this thread, with few rounds).
+func _new_server() -> void:
+	PasswordHash.rounds = 64
 	server = TDServer.new(dir)
+	server.lobby.background = false
 	Net.server = server
 
 ## Frees the server, deletes its saves and takes out everything put in Content.
@@ -82,6 +88,7 @@ func close() -> void:
 		server.free()
 		server = null
 	Net.server = _old_server
+	PasswordHash.rounds = PasswordHash.ROUNDS
 	Engine.get_main_loop().set_multiplayer(null, ^"/root/Net")
 	for table: String in _added:
 		var t: Dictionary = Content.get(table)
@@ -93,13 +100,14 @@ func close() -> void:
 ## A fresh server on the same save folder (as if it restarted).
 func restart() -> void:
 	server.free()
-	server = TDServer.new(dir)
-	Net.server = server
+	_new_server()
 	api.peers = PackedInt32Array()
 
 static func _wipe(path: String) -> void:
 	if not DirAccess.dir_exists_absolute(path):
 		return
+	for d in DirAccess.get_directories_at(path):
+		_wipe(path.path_join(d))
 	for f in DirAccess.get_files_at(path):
 		DirAccess.remove_absolute(path.path_join(f))
 	DirAccess.remove_absolute(path)
@@ -110,12 +118,11 @@ static func _wipe(path: String) -> void:
 static func made() -> Dictionary:
 	return NewCharacter.new().to_dict()
 
-## Joins `char_name` on `peer` (making them with the creator's defaults if they're new) and
-## puts them on `map` at `x` (on the floor). Clears the events sent so far.
+## Plays `char_name` on `peer` (making them with the creator's defaults if they're new) and
+## puts them on `map` at `x` (on the floor). Each character gets its own account (see
+## `log_in`). Clears the events sent so far.
 func join(peer: int, char_name: String, map := FIELD, x := 300.0) -> SimPlayer:
-	if not api.peers.has(peer):
-		api.peers.append(peer)
-	server.join(peer, char_name, made())
+	play(peer, char_name)
 	var p: SimPlayer = server.sessions.get(peer)
 	if p and map != p.map.def.id:
 		move_to(p, map, x)
@@ -124,9 +131,27 @@ func join(peer: int, char_name: String, map := FIELD, x := 300.0) -> SimPlayer:
 	clear()
 	return p
 
+## Logs `peer` in to `username`'s account without a password (made if it's new).
+func log_in(peer: int, username: String) -> Dictionary:
+	if not api.peers.has(peer):
+		api.peers.append(peer)
+	var a := server.lobby.accounts.load_account(username)
+	if a.is_empty():
+		a = AccountStore.make(username, {})
+		server.lobby.accounts.save(a)
+	server.lobby.log_in(peer, a)
+	return a
+
+## Logs in to the account "acct_<name>", makes `char_name` there if it's new, and plays it.
+func play(peer: int, char_name: String, look := {}) -> void:
+	var a := log_in(peer, "acct_" + char_name.to_lower().replace(" ", "_"))
+	if not AccountStore.owns(a, char_name):
+		server.lobby.on_create(peer, char_name, look if not look.is_empty() else made())
+	server.lobby.on_play(peer, char_name)
+
 ## Takes `peer` off the server the way a disconnect does.
 func leave(peer: int) -> void:
-	server.leave(peer)
+	server.disconnected(peer)
 	var i := api.peers.find(peer)
 	if i >= 0:
 		api.peers.remove_at(i)
