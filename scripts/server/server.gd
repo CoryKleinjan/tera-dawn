@@ -142,13 +142,44 @@ func on_skill(peer: int, skill_id: StringName, at: Vector2, face: int) -> void:
 	var skill: SkillDef = Content.skills.get(skill_id)
 	if p == null or skill == null or p.fainted() or p.cooldown > COOLDOWN_SLACK:
 		return
-	if not p.character.spend_mp(skill.mp_cost):
-		p.map.tell(p, "Not enough MP for %s." % skill.display_name, Color("8cc6ff"))
+	var c := p.character
+	var problem := c.use_problem(skill)
+	if problem != "":
+		p.map.tell(p, problem, Color("8cc6ff"))
 		return
+	c.spend_mp(skill.mp_at(c.skill_level(skill)))
 	p.report_move(at, face, skill.animation, false)
 	p.cooldown = skill.cooldown
 	p.dirty_vitals = true
-	p.map.use_skill(p, skill)
+	if skill.kind == SkillDef.Kind.BUFF:
+		c.add_buff(skill)
+		p.dirty_character = true
+		p.map.broadcast(&"ev_skill", [p.peer, skill.id, p.position.x, p.position.y, p.face, []])
+	else:
+		p.map.use_skill(p, skill)
+
+## Spends a Skill Point on `skill_id`.
+func on_learn_skill(peer: int, skill_id: StringName) -> void:
+	var p := _player(peer)
+	var skill: SkillDef = Content.skills.get(skill_id)
+	if p == null or skill == null:
+		return
+	var problem := p.character.learn(skill)
+	if problem != "":
+		p.map.tell(p, problem, MapInstance.BAD)
+		return
+	p.dirty_character = true
+	p.dirty_vitals = true
+
+## Puts a skill or item on a quickslot (an empty `kind` clears it).
+func on_set_quickslot(peer: int, i: int, kind: StringName, id: StringName) -> void:
+	var p := _player(peer)
+	if p == null or not kind in [&"", &"skill", &"item"]:
+		return
+	if kind == &"skill" and not Content.skills.has(id) or kind == &"item" and not Content.items.has(id):
+		return
+	p.character.set_quickslot(i, kind, id)
+	p.dirty_character = true
 
 func on_portal(peer: int) -> void:
 	var p := _player(peer)

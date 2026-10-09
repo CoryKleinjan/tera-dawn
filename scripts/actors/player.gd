@@ -3,8 +3,8 @@ extends Node2D
 ## Your own character. position is the point between the feet, in game pixels.
 ## Movement and climbing are hand-tuned platformer physics that run right here, so they
 ## feel instant; where you are goes to the server a few times a second. Attacks, portals,
-## looting and potions are requests the server answers (see Net), and attacks are
-## SkillDefs (see Game.SKILL_BINDINGS).
+## looting and potions are requests the server answers (see Net). The attack key uses the
+## basic attack; the quickslot keys use whatever skill or item is on that slot.
 
 const HERO_FRAMES := preload("res://assets/animations/hero.tres")
 const Z := TDStage.Z_PLAYER
@@ -83,6 +83,8 @@ func step() -> void:
 	for t in ["inv", "action_t", "cooldown", "grab_cd", "drop_t", "land_t", "cheer_t", "loot_cd"]:
 		if get(t) > 0:
 			set(t, get(t) - 1)
+	if not Game.me.buffs.is_empty():
+		Game.me.tick_buffs() # the server ends them too; this keeps timers and speed in step
 	_attacks()
 	# hold the loot key to pick things up one after another
 	if Input.is_action_pressed("loot") and loot_cd == 0 and not is_climbing():
@@ -103,19 +105,33 @@ func _report() -> void:
 	Net.ask(&"req_move", [position, face, _reported, is_climbing()])
 
 func _attacks() -> void:
-	if is_climbing() or cooldown > 0:
-		return
-	for action in Game.SKILL_BINDINGS:
-		if Input.is_action_just_pressed(action):
-			_use(Content.skill(Game.SKILL_BINDINGS[action]))
+	# items on quickslots work even mid-swing or on a rope
+	for i in Game.QUICKSLOT_ACTIONS.size():
+		if Input.is_action_just_pressed(Game.QUICKSLOT_ACTIONS[i]):
+			use_quickslot(i)
 			return
+	if Input.is_action_just_pressed("attack"):
+		_use(Content.skill(Character.BASIC_ATTACK))
 
-## Swings right away and asks the server to work out what it hits.
-func _use(skill: SkillDef) -> void:
-	if skill == null:
+## Does what's on quickslot `i`: a skill, or the first stack of an item.
+func use_quickslot(i: int) -> void:
+	var q: Array = Game.me.quickslots[i]
+	if q.is_empty():
 		return
-	if Game.me.mp < skill.mp_cost:
-		world.add_log("Not enough MP for %s." % skill.display_name, Color("8cc6ff"))
+	if q[0] == &"item":
+		var slot := Game.me.inventory.find(Content.items.get(q[1]))
+		if slot >= 0:
+			Net.ask(&"req_use_item", [slot])
+		return
+	_use(Content.skills.get(q[1]))
+
+## Swings right away and asks the server to work out what it hits (or casts a buff).
+func _use(skill: SkillDef) -> void:
+	if skill == null or is_climbing() or cooldown > 0:
+		return
+	var problem := Game.me.use_problem(skill)
+	if problem != "":
+		world.add_log(problem, Color("8cc6ff"))
 		return
 	action_t = skill.action_ticks
 	action_anim = skill.animation

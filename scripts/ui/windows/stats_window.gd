@@ -23,9 +23,8 @@ func _draw_body() -> void:
 	y = _divider(y)
 	y = _row(y, "Ability Points", str(Game.me.ap), Palette.SUN if Game.me.ap > 0 else Palette.MIST)
 	_plus.clear()
-	var gear := Game.me.equipment.bonus()
 	for stat in StatBlock.BASE:
-		var extra := gear.value(stat)
+		var extra := s.value(stat) - Game.me.base.value(stat)
 		var text := str(s.value(stat)) + (" (+%d)" % extra if extra > 0 else "")
 		var main := stat == StringName(Game.me.job.primary_stat)
 		y = _row(y, StatBlock.LABELS[stat], text, Palette.SUN if main else Palette.MIST)

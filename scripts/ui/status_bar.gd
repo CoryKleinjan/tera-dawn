@@ -1,7 +1,7 @@
 class_name TDStatusBar
 extends Control
 ## The bar along the bottom of the screen: level badge, HP, MP and EXP, buttons for the
-## game windows, the skill slots with their cooldowns, and the Dawnshard purse. Drawn from
+## game windows and the Dawnshard purse. The quickslots sit just above it (TDQuickslots). Drawn from
 ## the UI sheet's art.
 
 const HEIGHT := 50.0
@@ -9,7 +9,7 @@ const WINDOW_BUTTON := 32.0
 ## UI sheet art for each window's button. Windows without art yet get a round button
 ## with a symbol from WINDOW_SYMBOLS.
 const WINDOW_ICONS := {"inventory": "bag_button", "equipment": "gear_button", "stats": "stats_button"}
-const WINDOW_SYMBOLS := {"quests": "!"}
+const WINDOW_SYMBOLS := {"quests": "!", "skills": "SP"}
 
 var world: TDWorld
 
@@ -39,33 +39,13 @@ func _draw() -> void:
 	# window buttons
 	for i in TDHud.WINDOW_ACTIONS.size():
 		_window_button(TDHud.WINDOW_ACTIONS[i], _window_button_rect(i))
-	# skill slots
-	x = w - 250
-	for action in Game.SKILL_BINDINGS:
-		_skill_slot(Content.skill(Game.SKILL_BINDINGS[action]), action, Vector2(x, 5))
-		x += 48
 	# Dawnshards
 	var icon := UiSkin.tex("icon_dawnshard")
 	draw_texture_rect(icon, Rect2(w - 140, 8, 36, 33), false)
 	DrawUtil.text(self, Game.num_font, Vector2(w - 100, 32), str(Game.me.shards), 18, Palette.SUN, 1, 4, Palette.NIGHT)
 
-func _skill_slot(skill: SkillDef, action: String, pos: Vector2) -> void:
-	var s := 40.0
-	var r := Rect2(pos, Vector2(s, s))
-	draw_texture_rect(UiSkin.tex("skill_slot"), r, false)
-	if skill and skill.icon:
-		draw_texture_rect(skill.icon, r.grow(-3), false)
-	var p := world.player if world else null
-	if p and skill and p.cooldown > 0:
-		var k := float(p.cooldown) / skill.cooldown
-		draw_rect(Rect2(r.position + Vector2(3, 3), Vector2(s - 6, (s - 6) * clampf(k, 0, 1))), Color(0.05, 0.02, 0.1, 0.6))
-	if skill and Game.me.mp < skill.mp_cost:
-		draw_rect(r.grow(-3), Color(0.05, 0.02, 0.15, 0.55))
-	var key := _key_name(action)
-	DrawUtil.text(self, Game.num_font, pos + Vector2(s - 4, s - 2), key, 12, Palette.MIST, -1, 4, Palette.NIGHT)
-
 func _window_button_rect(i: int) -> Rect2:
-	var left := size.x - 254 - TDHud.WINDOW_ACTIONS.size() * (WINDOW_BUTTON + 2)
+	var left := size.x - 150 - TDHud.WINDOW_ACTIONS.size() * (WINDOW_BUTTON + 2)
 	return Rect2(left + i * (WINDOW_BUTTON + 2), (HEIGHT - WINDOW_BUTTON) / 2.0, WINDOW_BUTTON, WINDOW_BUTTON)
 
 func _window_button(action: String, r: Rect2) -> void:
@@ -77,7 +57,8 @@ func _window_button(action: String, r: Rect2) -> void:
 	else:
 		DrawUtil.ellipse(self, r.get_center(), r.size.x / 2.0 - 2, r.size.y / 2.0 - 2, Color("e9b44c"))
 		DrawUtil.ellipse(self, r.get_center(), r.size.x / 2.0 - 5, r.size.y / 2.0 - 5, Palette.PLUM)
-		DrawUtil.text(self, Game.num_font, r.get_center() + Vector2(0, 7), WINDOW_SYMBOLS.get(action, "?"), 19, Palette.SUN, 0, 4, Palette.NIGHT)
+		var symbol: String = WINDOW_SYMBOLS.get(action, "?")
+		DrawUtil.text(self, Game.num_font, r.get_center() + Vector2(0, 7 if symbol.length() == 1 else 5), symbol, 19 if symbol.length() == 1 else 13, Palette.SUN, 0, 4, Palette.NIGHT)
 	DrawUtil.text(self, Game.num_font, r.end + Vector2(0, -1), _key_name(action), 11, Palette.MIST, -1, 4, Palette.NIGHT)
 
 func _gui_input(event: InputEvent) -> void:
@@ -89,7 +70,7 @@ func _gui_input(event: InputEvent) -> void:
 			world.hud.toggle_window(TDHud.WINDOW_ACTIONS[i])
 			accept_event()
 
-func _key_name(action: String) -> String:
+static func _key_name(action: String) -> String:
 	for e in InputMap.action_get_events(action):
 		if e is InputEventKey:
 			return OS.get_keycode_string((e as InputEventKey).physical_keycode)

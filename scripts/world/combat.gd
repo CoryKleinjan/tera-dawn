@@ -8,13 +8,14 @@ const CRIT_MULTIPLIER := 1.6
 
 ## One damage line from a character's skill against a monster. Returns {damage, crit, miss}.
 static func player_hit(skill: SkillDef, target: MonsterDef, ch: Character) -> Dictionary:
+	var multiplier := skill.damage_at(ch.skill_level(skill))
 	# monsters above the player's level can dodge; accuracy wins that back
 	var miss_chance := clampf((target.level - ch.level) * 0.06 - CharacterStats.accuracy(ch.stats) * 0.004, 0.0, 0.6)
 	if randf() < miss_chance:
 		return {"damage": 0, "crit": false, "miss": true}
 	var crit := randf() < CharacterStats.crit_rate(ch.stats)
 	var spread := ch.damage_range()
-	var dmg := roundi(randi_range(spread.x, spread.y) * skill.damage_multiplier
+	var dmg := roundi(randi_range(spread.x, spread.y) * multiplier
 		* (CRIT_MULTIPLIER if crit else 1.0))
 	# higher-level monsters shrug off some damage
 	dmg = maxi(1, dmg - maxi(0, target.level - ch.level) * 2)

@@ -85,10 +85,14 @@ func _run() -> void:
 		for m in Net.server.maps[&"meadow"].mobs:
 			if m.plat == world.platforms[1]:
 				_place_mob(m, randf_range(300, 380))
+		_me().character.job = Content.job(&"warrior")
+		_me().character.skills[&"dawn_slash"] = 1
+		_me().character.set_quickslot(0, &"skill", &"dawn_slash")
+		_me().dirty_character = true
 		await _physics(40)
-		Input.action_press("skill")
+		Input.action_press("quick_1")
 		await _physics(2)
-		Input.action_release("skill")
+		Input.action_release("quick_1")
 		await _physics(3)
 		await _shot("action")
 	if only == "" or only == "village":
@@ -153,6 +157,29 @@ func _run() -> void:
 		await _shot("jobs")
 		talk.visible = false
 		ch.job = Content.job(&"beginner")
+	if only == "" or only == "skills":
+		# A Warrior's skill book, quickslots and a running buff.
+		ch.job = Content.job(&"warrior")
+		ch.level = maxi(ch.level, 14)
+		ch.sp = 4
+		for pair in [[&"power_strike", 6], [&"dawn_slash", 3], [&"iron_body", 2], [&"toughness", 1], [&"quick_step", 2], [&"second_wind", 1]]:
+			ch.skills[pair[0]] = pair[1]
+		ch.set_quickslot(0, &"skill", &"power_strike")
+		ch.set_quickslot(1, &"skill", &"dawn_slash")
+		ch.set_quickslot(2, &"skill", &"iron_body")
+		ch.set_quickslot(3, &"skill", &"quick_step")
+		ch.add_buff(Content.skill(&"iron_body"))
+		ch.add_buff(Content.skill(&"quick_step"))
+		ch.recalc()
+		_me().dirty_character = true
+		await _physics(5)
+		world.hud.toggle_window("skills")
+		var book: TDSkillWindow = world.hud.windows["skills"]
+		book.tab = 1
+		book.selected = &"dawn_slash"
+		await _frames(3)
+		await _shot("skills")
+		world.hud.toggle_window("skills")
 	if only == "" or only == "players":
 		# Two other players nearby. They're on the server but have no game connected.
 		_teleport(world, Vector2(1300, 620))

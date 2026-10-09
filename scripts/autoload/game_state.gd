@@ -1,11 +1,11 @@
 extends Node
 ## Autoload "Game": this player's side of the game. It keeps a copy of the player's own
-## Character (`me`) that the server refreshes, which skills are on which buttons, the
-## input bindings, fonts and the player's settings (name, last server address).
+## Character (`me`) that the server refreshes, the input bindings (including the eight
+## quickslot keys), fonts and the player's settings (name, last server address).
 ## The real Character lives on the server (see TDServer); to change it, ask through Net.
 
-## Which skill each attack button uses (ids from data/skills/).
-const SKILL_BINDINGS := {"attack": &"basic_attack", "skill": &"dawn_slash"}
+## The input action of each quickslot (Character.quickslots), in order.
+const QUICKSLOT_ACTIONS: Array[String] = ["quick_1", "quick_2", "quick_3", "quick_4", "quick_5", "quick_6", "quick_7", "quick_8"]
 const SETTINGS_PATH := "user://settings.cfg"
 
 ## The server sent a new copy of the whole character (inventory, gear, stats).
@@ -61,12 +61,20 @@ func _setup_input() -> void:
 	_bind("move_down", [KEY_DOWN], [JOY_BUTTON_DPAD_DOWN], JOY_AXIS_LEFT_Y, 1.0)
 	_bind("jump", [KEY_SPACE, KEY_C, KEY_ALT], [JOY_BUTTON_A])
 	_bind("attack", [KEY_X, KEY_CTRL], [JOY_BUTTON_X])
-	_bind("skill", [KEY_A, KEY_SHIFT], [JOY_BUTTON_Y])
+	_bind("quick_1", [KEY_A, KEY_SHIFT], [JOY_BUTTON_Y])
+	_bind("quick_2", [KEY_D], [JOY_BUTTON_RIGHT_SHOULDER])
+	_bind("quick_3", [KEY_F], [JOY_BUTTON_LEFT_SHOULDER])
+	_bind("quick_4", [KEY_G], [])
+	_bind("quick_5", [KEY_V], [])
+	_bind("quick_6", [KEY_B], [])
+	_bind("quick_7", [KEY_N, KEY_DELETE], [])
+	_bind("quick_8", [KEY_M, KEY_END], [])
 	_bind("loot", [KEY_Z], [JOY_BUTTON_B])
 	_bind("inventory", [KEY_I], [JOY_BUTTON_BACK])
 	_bind("equipment", [KEY_E], [])
 	_bind("stats", [KEY_S], [])
 	_bind("quests", [KEY_Q], [])
+	_bind("skills", [KEY_K], [])
 	_bind("pause", [KEY_ESCAPE], [JOY_BUTTON_START])
 	_bind("toggle_fullscreen", [KEY_F11], [])
 
