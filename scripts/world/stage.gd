@@ -17,8 +17,23 @@ const TEXEL := 1.25
 const GROUND_BACK := -9.0
 const GROUND_FRONT := 3.0
 const PLAT_BACK := -2.4
-const PLAT_FRONT := 0.1 # characters stand in front of it so platforms above never hide them
+const PLAT_FRONT := 0.1
 const PLAT_THICK := 0.8
+
+## Draw order. Depth is 3D z: bigger is nearer the camera. Everything the player can touch
+## (climbables, NPCs, monsters, drops, the player) stands in front of all the land, so the
+## ground, platforms and their decoration never hide it. New content should use these.
+## Land: platform front skins sit at LAND_FRONT; decoration and props are clamped behind it.
+## (The grass on the floor's front edge is nearer, but it shows below everyone's feet.)
+const LAND_FRONT := PLAT_FRONT + 0.04
+const Z_CLIMBABLE := 0.2
+const Z_NPC := 0.3
+## Monsters spread over [Z_MONSTER, Z_MONSTER + Z_MONSTER_SPREAD) so overlapping ones don't flicker.
+const Z_MONSTER := 0.38
+const Z_MONSTER_SPREAD := 0.14
+const Z_DROP := 0.56
+const Z_PLAYER := 0.64
+const Z_EFFECT := 0.8
 
 var world: TDWorld
 var camera: Camera3D
@@ -33,6 +48,10 @@ static var _soft_dot: Texture2D
 static var _shadow: Texture2D
 
 # ---------- helpers for everyone ----------
+
+## Clamps the depth of a piece of land decoration so it stays behind everything you can touch.
+static func land_depth(z: float) -> float:
+	return minf(z, LAND_FRONT - 0.02)
 
 static func to3d(p: Vector2, z := 0.0) -> Vector3:
 	return Vector3(p.x / PX, -p.y / PX, z)

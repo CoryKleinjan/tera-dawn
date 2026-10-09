@@ -52,6 +52,28 @@ tools/art/            Slicer, store-art cropper, fx texture generator, contact-s
 tests/                Headless smoke test and screenshot scene
 ```
 
+## Draw order
+
+The world is a 3D diorama, so what covers what depends on depth (3D z, bigger is nearer the
+camera). The layers are constants at the top of `scripts/world/stage.gd`, back to front:
+
+| Layer | Depth | What |
+| --- | --- | --- |
+| Backdrop | far behind | Sky, mountains, distant trees (`BackdropLayerDef.depth`) |
+| Land | up to `LAND_FRONT` | Ground, platforms and their front skins, decoration, props, lanterns, signs, portals |
+| `Z_CLIMBABLE` | 0.2 | Ropes, vines and ladders |
+| `Z_NPC` | 0.3 | NPCs |
+| `Z_MONSTER` | 0.38 to 0.52 | Monsters, each at a slightly different depth so overlapping ones don't flicker |
+| `Z_DROP` | 0.56 | Dawnshards and other drops |
+| `Z_PLAYER` | 0.64 | The hero |
+| `Z_EFFECT` | 0.8 | Skill and hit effects |
+
+Everything you can touch stands in front of all the land, so a platform, bush or prop never
+hides a character, NPC, rope or ladder. Decoration and prop depths in data are clamped with
+`TDStage.land_depth()`, so a `DecorDef` or `PropPlacement` can't be set in front of the
+actors by mistake. Something new that the player interacts with should use one of the `Z_`
+layers (or add one here) rather than a raw number.
+
 ## How to add a monster
 
 1. Get its sprite. A single image goes in `assets/sprites/monsters/<id>.png`; an animated
