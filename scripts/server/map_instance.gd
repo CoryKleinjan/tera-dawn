@@ -245,7 +245,7 @@ func _add_card(p: SimPlayer, m: MonsterDef) -> void:
 		tell(p, "Your %s page is already complete." % m.display_name, Palette.MIST)
 		return
 	p.dirty_character = true
-	tell(p, "Monster Book: %s card (%d/%d)" % [m.display_name, book.cards(m), CardDef.SET], Color("a8e6ff"))
+	tell(p, "Monster Book: %s card (%d/%d)" % [m.display_name, book.cards(m), CardDef.SET], Palette.CARD)
 	if book.complete(m):
 		tell(p, "You completed the %s page!" % m.display_name, Palette.SUN)
 	if book.level() > level:

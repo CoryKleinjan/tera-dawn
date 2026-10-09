@@ -40,7 +40,3 @@ func ground_below(feet: Vector2) -> float:
 		if pl.contains_x(feet.x) and pl.y >= feet.y - 1.0 and pl.y < best:
 			best = pl.y
 	return best
-
-## Where things dropped at `x` above `y` come to rest: the nearest platform below.
-func landing_y(x: float, y: float) -> float:
-	return ground_below(Vector2(x, y))

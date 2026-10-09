@@ -62,7 +62,7 @@ func draw_tag(ci: CanvasItem, at: Vector2, top: Vector2) -> void:
 	var marker := quest_marker() if world.started else ""
 	if marker != "":
 		var bob := sin(Time.get_ticks_msec() / 220.0) * 3.0
-		DrawUtil.text(ci, Game.num_font, top + Vector2(0, -14 + bob), marker, 30, Palette.SUN if marker == "!" else Color("8cf0a6"), 0, 8, Palette.NIGHT)
+		DrawUtil.text(ci, Game.num_font, top + Vector2(0, -14 + bob), marker, 30, Palette.SUN if marker == "!" else Palette.GOOD, 0, 8, Palette.NIGHT)
 	var p := world.player
 	if world.started and absf(p.position.x - position.x) < 50 and absf(p.position.y - position.y) < 8:
 		UiSkin.draw_hint(ci, top + Vector2(0, -10), "↑ Talk")

@@ -64,12 +64,12 @@ func _draw_body() -> void:
 		var c := to_screen(m.world_pos)
 		var on := m.id == hovered
 		if m.town:
-			draw_circle(c, 8.5, Color("e9b44c"))
+			draw_circle(c, 8.5, Palette.GOLD_TRIM)
 			draw_circle(c, 6.0, Palette.PLUM)
 			draw_circle(c, 3.0, Palette.SUN if on else Color("ffe7a8"))
 		else:
 			draw_circle(c, 5.0, Palette.NIGHT)
-			draw_circle(c, 3.5, Palette.SUN if on else Color("c9b8d9"))
+			draw_circle(c, 3.5, Palette.SUN if on else Palette.MUTED)
 		if m.id == here:
 			var pulse := 11.0 + sin(Engine.get_physics_frames() * 0.12) * 2.5
 			draw_arc(c, pulse, 0, TAU, 24, Palette.SUN, 2.0, true)

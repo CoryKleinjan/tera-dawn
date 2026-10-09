@@ -50,10 +50,6 @@ func _row_at(at: Vector2) -> int:
 			return i
 	return -1
 
-func _tab_rect(t: int) -> Rect2:
-	var w := (size.x - GRID_X - PAD) / ItemDef.Tab.size()
-	return Rect2(GRID_X + t * w - 3, LIST_Y - 1, w + 6, 26)
-
 func slot_rect(i: int) -> Rect2:
 	return Rect2(GRID_X + (i % COLS) * (SLOT + GAP), GRID_Y + (i / COLS) * (SLOT + GAP), SLOT, SLOT)
 
@@ -78,28 +74,26 @@ func _draw_body() -> void:
 	for i in range(scroll, mini(scroll + ROWS, shop.items.size())):
 		var e := shop.items[i]
 		var r := row_rect(i)
-		DrawUtil.round_rect(self, r, 6, Color(1, 0.85, 0.45, 0.16) if r.has_point(_hover) else Color(Palette.NIGHT, 0.35))
+		draw_row(r, r.has_point(_hover))
 		draw_slot(Rect2(r.position + Vector2(2, 2), Vector2(SLOT - 4, SLOT - 4)), ItemStack.unrolled(e.item))
 		DrawUtil.text(self, Game.ui_font, Vector2(r.position.x + SLOT + 8, r.position.y + 17), e.item.display_name, 13, Palette.MIST, 1, 3, Palette.NIGHT)
 		var afford := shards >= e.cost()
 		DrawUtil.text(self, Game.num_font, Vector2(r.position.x + SLOT + 8, r.position.y + 35), "%d" % e.cost(), 13,
-			Palette.SUN if afford else Color("ff6b7d"), 1, 3, Palette.NIGHT)
+			Palette.SUN if afford else Palette.BAD, 1, 3, Palette.NIGHT)
 	if shop.items.size() > ROWS:
 		DrawUtil.text(self, Game.ui_font, Vector2(PAD + LIST_W, LIST_Y + ROWS * ROW_H + 8), "scroll for more (%d/%d)" % [scroll + 1, shop.items.size() - ROWS + 1], 10, Color(Palette.MIST, 0.6), -1)
-	for t in ItemDef.Tab.size():
-		draw_tab(_tab_rect(t), ItemDef.TAB_NAMES[t], t == tab)
+	draw_tabs(ItemDef.TAB_NAMES, tab, TAB_Y, GRID_X)
 	for i in Inventory.SLOTS:
 		draw_slot(slot_rect(i), Game.me.inventory.at(tab, i))
 	# amount, Dawnshards and Sell all Etc
-	DrawUtil.text(self, Game.ui_font, Vector2(PAD, size.y - 22), "Amount", 12, Color("c9b8d9"), 1)
+	DrawUtil.text(self, Game.ui_font, Vector2(PAD, size.y - 22), "Amount", 12, Palette.MUTED, 1)
 	for i in AMOUNTS.size():
 		var r := _amount_rect(i)
 		var on := AMOUNTS[i] == amount
 		DrawUtil.round_rect(self, r, 6, Color(Palette.SUN, 0.85) if on else Color(Palette.NIGHT, 0.5))
-		DrawUtil.text(self, Game.num_font, r.get_center() + Vector2(0, 5), "×%d" % AMOUNTS[i], 13, Color("3b2208") if on else Palette.MIST, 0)
+		DrawUtil.text(self, Game.num_font, r.get_center() + Vector2(0, 5), "×%d" % AMOUNTS[i], 13, Palette.INK if on else Palette.MIST, 0)
 	var purse_y := GRID_Y + ceili(Inventory.SLOTS / float(COLS)) * (SLOT + GAP) + 8
-	draw_texture_rect(UiSkin.tex("icon_dawnshard"), Rect2(GRID_X, purse_y, 22, 20), false)
-	DrawUtil.text(self, Game.num_font, Vector2(GRID_X + 28, purse_y + 16), str(shards), 15, Palette.SUN, 1, 4, Palette.NIGHT)
+	draw_shards(Vector2(GRID_X, purse_y + 16), shards)
 	draw_button(_sell_etc_rect(), "Sell all Etc", Game.me.inventory.free_slots(ItemDef.Tab.ETC) < Inventory.SLOTS)
 
 # ---------- input ----------
@@ -111,10 +105,10 @@ func _click(at: Vector2, button: int, double: bool) -> void:
 		return
 	if button != MOUSE_BUTTON_LEFT:
 		return
-	for t in ItemDef.Tab.size():
-		if _tab_rect(t).has_point(at):
-			tab = t as ItemDef.Tab
-			return
+	var t := tab_at(at)
+	if t >= 0:
+		tab = t as ItemDef.Tab
+		return
 	for i in AMOUNTS.size():
 		if _amount_rect(i).has_point(at):
 			amount = AMOUNTS[i]

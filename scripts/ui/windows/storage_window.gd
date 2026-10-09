@@ -32,10 +32,6 @@ func _process(delta: float) -> void:
 		visible = false
 		hud.tooltip.clear(self)
 
-func _tab_rect(t: int) -> Rect2:
-	var w := (size.x - PAD * 2) / ItemDef.Tab.size()
-	return Rect2(PAD + t * w - 3, 36, w + 6, 26)
-
 func slot_rect(i: int, bag: bool) -> Rect2:
 	return Rect2((BAG_X if bag else PAD) + (i % COLS) * (SLOT + GAP), GRID_Y + (i / COLS) * (SLOT + GAP), SLOT, SLOT)
 
@@ -48,24 +44,22 @@ func _slot_at(at: Vector2) -> Array:
 	return [-1, false]
 
 func _draw_body() -> void:
-	for t in ItemDef.Tab.size():
-		draw_tab(_tab_rect(t), ItemDef.TAB_NAMES[t], t == tab)
+	draw_tabs(ItemDef.TAB_NAMES, tab)
 	for i in Inventory.SLOTS:
 		draw_slot(slot_rect(i, false), Game.me.storage.at(tab, i))
 		draw_slot(slot_rect(i, true), Game.me.inventory.at(tab, i))
 	var y := size.y - 22
-	DrawUtil.text(self, Game.ui_font, Vector2(PAD, y), "Stored", 12, Color("c9b8d9"), 1)
-	DrawUtil.text(self, Game.ui_font, Vector2(BAG_X, y), "Your bag", 12, Color("c9b8d9"), 1)
-	draw_texture_rect(UiSkin.tex("icon_dawnshard"), Rect2(size.x - PAD - 92, y - 16, 22, 20), false)
-	DrawUtil.text(self, Game.num_font, Vector2(size.x - PAD - 64, y), str(Game.me.shards), 15, Palette.SUN, 1, 4, Palette.NIGHT)
+	DrawUtil.text(self, Game.ui_font, Vector2(PAD, y), "Stored", 12, Palette.MUTED, 1)
+	DrawUtil.text(self, Game.ui_font, Vector2(BAG_X, y), "Your bag", 12, Palette.MUTED, 1)
+	draw_shards(Vector2(size.x - PAD - 92, y), Game.me.shards)
 
 func _click(at: Vector2, button: int, double: bool) -> void:
 	if button != MOUSE_BUTTON_LEFT:
 		return
-	for t in ItemDef.Tab.size():
-		if _tab_rect(t).has_point(at):
-			tab = t as ItemDef.Tab
-			return
+	var t := tab_at(at)
+	if t >= 0:
+		tab = t as ItemDef.Tab
+		return
 	var hit := _slot_at(at)
 	if double and hit[0] >= 0:
 		if hit[1]:

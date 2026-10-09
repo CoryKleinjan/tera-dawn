@@ -56,7 +56,7 @@ static func style_button(b: Button) -> void:
 	b.add_theme_stylebox_override("focus", box("button_hover", 18, 16))
 	b.add_theme_stylebox_override("pressed", box("button_pressed", 16, 14))
 	for state in ["font_color", "font_hover_color", "font_focus_color", "font_pressed_color"]:
-		b.add_theme_color_override(state, Color("3b2208"))
+		b.add_theme_color_override(state, Palette.INK)
 
 static func use_cursor() -> void:
 	Input.set_custom_mouse_cursor(tex("cursor"), Input.CURSOR_ARROW, Vector2(14, 6))
@@ -105,7 +105,7 @@ static func draw_speech(ci: CanvasItem, bottom_center: Vector2, text: String) ->
 		w = maxf(w, DrawUtil.text_width(font, l, size))
 	var r := Rect2(bottom_center.x - w / 2.0 - 16, bottom_center.y - lines.size() * 16 - 28, w + 32, lines.size() * 16 + 20)
 	panel().draw(ci.get_canvas_item(), r)
-	ci.draw_colored_polygon(PackedVector2Array([bottom_center + Vector2(-7, -9), bottom_center + Vector2(7, -9), bottom_center]), Color("e9b44c"))
+	ci.draw_colored_polygon(PackedVector2Array([bottom_center + Vector2(-7, -9), bottom_center + Vector2(7, -9), bottom_center]), Palette.GOLD_TRIM)
 	for i in lines.size():
 		DrawUtil.text(ci, font, Vector2(bottom_center.x, r.position.y + 24 + i * 16), lines[i], size, Palette.MIST)
 

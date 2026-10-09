@@ -11,6 +11,9 @@ const SNAPSHOT_EVERY := 3
 const SAVE_EVERY := 600
 ## Attack requests may arrive this many ticks early, to allow for network jitter.
 const COOLDOWN_SLACK := 4
+const NOT_ENOUGH_SHARDS := "You don't have enough Dawnshards."
+## The colour of "+N EXP".
+const EXP_COLOR := Color("ffe39a")
 
 var store: CharacterStore
 ## Import the single-player save (user://save.json) as a player's character the first time
@@ -94,7 +97,7 @@ func join(peer: int, raw_name: String) -> void:
 	print("%s joined (peer %d)" % [char_name, peer])
 
 func leave(peer: int) -> void:
-	var p: SimPlayer = sessions.get(peer)
+	var p := player_of(peer)
 	if p == null:
 		return
 	social.left(p)
@@ -134,7 +137,7 @@ func give_xp(p: SimPlayer, amount: int) -> void:
 	var c := p.character
 	var levels := c.gain_xp(amount)
 	p.dirty_vitals = true
-	p.map.tell(p, "+%d EXP" % amount, Color("ffe39a"))
+	p.map.tell(p, "+%d EXP" % amount, EXP_COLOR)
 	if levels > 0:
 		p.dirty_character = true
 		p.map.broadcast(&"ev_level_up", [p.peer, c.level])
@@ -143,11 +146,12 @@ func give_xp(p: SimPlayer, amount: int) -> void:
 
 # ---------- requests from clients (see Net) ----------
 
-func _player(peer: int) -> SimPlayer:
+## The player on this peer, or null.
+func player_of(peer: int) -> SimPlayer:
 	return sessions.get(peer)
 
 func on_move(peer: int, at: Vector2, face: int, anim: StringName, climbing: bool) -> void:
-	var p := _player(peer)
+	var p := player_of(peer)
 	if p and social.shops.has(peer):
 		# minding a shop: stay put
 		if p.position.distance_to(at) > 2.0:
@@ -157,14 +161,14 @@ func on_move(peer: int, at: Vector2, face: int, anim: StringName, climbing: bool
 		Net.send(peer, &"ev_place", [p.position.x, p.position.y])
 
 func on_skill(peer: int, skill_id: StringName, at: Vector2, face: int) -> void:
-	var p := _player(peer)
+	var p := player_of(peer)
 	var skill: SkillDef = Content.skills.get(skill_id)
 	if p == null or skill == null or p.fainted() or p.cooldown > COOLDOWN_SLACK:
 		return
 	var c := p.character
 	var problem := c.use_problem(skill)
 	if problem != "":
-		p.map.tell(p, problem, Color("8cc6ff"))
+		p.map.tell(p, problem, Palette.INFO)
 		return
 	c.spend_mp(skill.mp_at(c.skill_level(skill)))
 	if skill.uses_ammo:
@@ -184,7 +188,7 @@ func on_skill(peer: int, skill_id: StringName, at: Vector2, face: int) -> void:
 
 ## Spends a Skill Point on `skill_id`.
 func on_learn_skill(peer: int, skill_id: StringName) -> void:
-	var p := _player(peer)
+	var p := player_of(peer)
 	var skill: SkillDef = Content.skills.get(skill_id)
 	if p == null or skill == null:
 		return
@@ -197,7 +201,7 @@ func on_learn_skill(peer: int, skill_id: StringName) -> void:
 
 ## Puts a skill or item on a quickslot (an empty `kind` clears it).
 func on_set_quickslot(peer: int, i: int, kind: StringName, id: StringName) -> void:
-	var p := _player(peer)
+	var p := player_of(peer)
 	if p == null or not kind in [&"", &"skill", &"item"]:
 		return
 	if kind == &"skill" and not Content.skills.has(id) or kind == &"item" and not Content.items.has(id):
@@ -206,7 +210,7 @@ func on_set_quickslot(peer: int, i: int, kind: StringName, id: StringName) -> vo
 	p.dirty_character = true
 
 func on_portal(peer: int) -> void:
-	var p := _player(peer)
+	var p := player_of(peer)
 	if p == null or p.fainted():
 		return
 	var portal := p.map.layout.portal_at(p.position)
@@ -214,12 +218,12 @@ func on_portal(peer: int) -> void:
 		_enter_map(p, portal.target_map, portal.target_x)
 
 func on_loot(peer: int) -> void:
-	var p := _player(peer)
+	var p := player_of(peer)
 	if p and not p.climbing:
 		p.map.loot_near(p)
 
 func on_use_item(peer: int, slot: int) -> void:
-	var p := _player(peer)
+	var p := player_of(peer)
 	if p == null:
 		return
 	var stack := p.character.inventory.at(ItemDef.Tab.USE, slot)
@@ -245,7 +249,7 @@ func on_use_item(peer: int, slot: int) -> void:
 		c.inventory.take(ItemDef.Tab.USE, slot, 1)
 		p.item_cd = u.cooldown
 		p.dirty_character = true
-		p.map.tell(p, "%s munches happily. (Fullness %d)" % [pet.display_name, c.pet_full], Color("8cf0a6"))
+		p.map.tell(p, "%s munches happily. (Fullness %d)" % [pet.display_name, c.pet_full], Palette.GOOD)
 		return
 	var dest := &""
 	if u.teleport != &"":
@@ -268,8 +272,8 @@ func on_use_item(peer: int, slot: int) -> void:
 ## Uses what's in Setup slot `slot`: sit on a chair (or get up), or bring out a pet (or
 ## send it home).
 func on_setup(peer: int, slot: int) -> void:
-	var p := _player(peer)
-	if p == null or slot < 0 or slot >= Inventory.SLOTS:
+	var p := player_of(peer)
+	if p == null or not Inventory.valid_slot(ItemDef.Tab.SETUP, slot):
 		return
 	var stack := p.character.inventory.at(ItemDef.Tab.SETUP, slot)
 	if stack == null:
@@ -295,14 +299,14 @@ func on_setup(peer: int, slot: int) -> void:
 			c.pet = pet.id
 			c.pet_full = maxi(c.pet_full, 20)
 			c.count("pets")
-			p.map.tell(p, "%s came out to play! It picks up things near you." % pet.display_name, Color("8cf0a6"))
+			p.map.tell(p, "%s came out to play! It picks up things near you." % pet.display_name, Palette.GOOD)
 			if not pet.chatter.is_empty():
 				p.map.broadcast(&"ev_chat", ["pet", pet.display_name, pet.chatter.pick_random(), p.peer])
 		p.dirty_character = true
 
 ## Uses the scroll in Use slot `use_slot` on the gear in Equip slot `equip_slot`.
 func on_scroll(peer: int, use_slot: int, equip_slot: int) -> void:
-	var p := _player(peer)
+	var p := player_of(peer)
 	if p == null or p.fainted():
 		return
 	var gear := p.character.inventory.at(ItemDef.Tab.EQUIP, equip_slot)
@@ -314,7 +318,7 @@ func on_scroll(peer: int, use_slot: int, equip_slot: int) -> void:
 	p.dirty_character = true
 	if result["worked"]:
 		p.character.count("scrolls")
-		p.map.tell(p, "The scroll worked! %s is now %s." % [name, gear.display_name()], Color("8cf0a6"))
+		p.map.tell(p, "The scroll worked! %s is now %s." % [name, gear.display_name()], Palette.GOOD)
 		p.map.broadcast(&"ev_effect", [&"level_up", p.position.x, p.position.y, 1, peer])
 	else:
 		p.map.tell(p, "The scroll failed. %s has %d upgrades left." % [name, gear.slots_left()], MapInstance.BAD)
@@ -329,9 +333,9 @@ func on_retrieve(peer: int, npc_id: StringName, tab: int, slot: int) -> void:
 	_at_storage(peer, npc_id, tab, slot, func(c: Character) -> String: return c.retrieve(tab, slot))
 
 func _at_storage(peer: int, npc_id: StringName, tab: int, slot: int, change: Callable) -> void:
-	var p := _player(peer)
+	var p := player_of(peer)
 	var npc := p.map.npc_near(p, npc_id) if p else null
-	if npc == null or not npc.storage or tab < 0 or tab >= ItemDef.Tab.size() or slot < 0 or slot >= Inventory.SLOTS:
+	if npc == null or not npc.storage or not Inventory.valid_slot(tab, slot):
 		return
 	var problem: String = change.call(p.character)
 	if problem != "":
@@ -342,7 +346,7 @@ func _at_storage(peer: int, npc_id: StringName, tab: int, slot: int, change: Cal
 
 ## Takes the player on trip `index` of the NPC `npc_id` they stand by, if they can pay.
 func on_travel(peer: int, npc_id: StringName, index: int) -> void:
-	var p := _player(peer)
+	var p := player_of(peer)
 	var npc := p.map.npc_near(p, npc_id) if p and not p.fainted() else null
 	if npc == null or index < 0 or index >= npc.travel.size():
 		return
@@ -350,7 +354,7 @@ func on_travel(peer: int, npc_id: StringName, index: int) -> void:
 	if not Content.maps.has(route.target_map):
 		return
 	if p.character.shards < route.price:
-		p.map.tell(p, "You don't have enough Dawnshards.", MapInstance.BAD)
+		p.map.tell(p, NOT_ENOUGH_SHARDS, MapInstance.BAD)
 		return
 	p.character.shards -= route.price
 	p.dirty_vitals = true
@@ -364,7 +368,7 @@ func on_unequip(peer: int, place: StringName, slot: int) -> void:
 	_change(peer, func(c: Character) -> String: return c.unequip(place, slot))
 
 func on_move_item(peer: int, tab: int, from: int, to: int) -> void:
-	if tab >= 0 and tab < ItemDef.Tab.size() and from >= 0 and from < Inventory.SLOTS and to >= 0 and to < Inventory.SLOTS:
+	if Inventory.valid_slot(tab, from) and Inventory.valid_slot(tab, to):
 		_change(peer, func(c: Character) -> String:
 			c.inventory.move(tab, from, to)
 			return "")
@@ -375,8 +379,8 @@ func on_add_ap(peer: int, stat: StringName) -> void:
 		return "")
 
 func on_drop_item(peer: int, tab: int, slot: int) -> void:
-	var p := _player(peer)
-	if p == null or p.fainted() or tab < 0 or tab >= ItemDef.Tab.size() or slot < 0 or slot >= Inventory.SLOTS:
+	var p := player_of(peer)
+	if p == null or p.fainted() or not Inventory.valid_slot(tab, slot):
 		return
 	var held := p.character.inventory.at(tab, slot)
 	if held and held.item.quest_item:
@@ -410,7 +414,7 @@ func picked_up(p: SimPlayer, item: ItemDef) -> void:
 		for i in q.objectives.size():
 			var o := q.objectives[i]
 			if o.kind == QuestObjective.Kind.COLLECT and o.item == item:
-				p.map.tell(p, "%s: %s %d/%d" % [q.title, o.item.display_name, c.quests.progress(q, i, c), o.count], Color("a8e6ff"))
+				p.map.tell(p, "%s: %s %d/%d" % [q.title, o.item.display_name, c.quests.progress(q, i, c), o.count], Palette.CARD)
 
 ## Tells the player how the quests that just moved on are going.
 func _quest_progress(p: SimPlayer, moved: Array[QuestDef]) -> void:
@@ -420,12 +424,12 @@ func _quest_progress(p: SimPlayer, moved: Array[QuestDef]) -> void:
 		for i in q.objectives.size():
 			var o := q.objectives[i]
 			if o.kind != QuestObjective.Kind.COLLECT:
-				p.map.tell(p, "%s: %s %d/%d" % [q.title, o.describe(), c.quests.progress(q, i, c), o.count], Color("a8e6ff"))
+				p.map.tell(p, "%s: %s %d/%d" % [q.title, o.describe(), c.quests.progress(q, i, c), o.count], Palette.CARD)
 		if c.quests.is_ready(q, c):
 			p.map.tell(p, "%s is ready to hand in." % q.title, Palette.SUN)
 
 func on_quest_accept(peer: int, npc_id: StringName, quest_id: StringName) -> void:
-	var p := _player(peer)
+	var p := player_of(peer)
 	var q: QuestDef = Content.quests.get(quest_id)
 	if p == null or q == null or q.giver != npc_id or p.map.npc_near(p, npc_id) == null:
 		return
@@ -438,7 +442,7 @@ func on_quest_accept(peer: int, npc_id: StringName, quest_id: StringName) -> voi
 	_quest_progress(p, c.quests.record_visit(p.map.def.id))
 
 func on_quest_complete(peer: int, npc_id: StringName, quest_id: StringName) -> void:
-	var p := _player(peer)
+	var p := player_of(peer)
 	var q: QuestDef = Content.quests.get(quest_id)
 	if p == null or q == null or q.turn_in_npc() != npc_id or p.map.npc_near(p, npc_id) == null:
 		return
@@ -452,7 +456,7 @@ func on_quest_complete(peer: int, npc_id: StringName, quest_id: StringName) -> v
 		give_xp(p, q.reward_xp)
 
 func on_quest_forfeit(peer: int, quest_id: StringName) -> void:
-	var p := _player(peer)
+	var p := player_of(peer)
 	var q: QuestDef = Content.quests.get(quest_id)
 	if p and q and p.character.quests.active.has(q.id):
 		p.character.quests.forfeit(q)
@@ -461,7 +465,7 @@ func on_quest_forfeit(peer: int, quest_id: StringName) -> void:
 
 ## Advances the player to `job_id` through the instructor `npc_id` they stand by.
 func on_advance(peer: int, npc_id: StringName, job_id: StringName) -> void:
-	var p := _player(peer)
+	var p := player_of(peer)
 	var npc := p.map.npc_near(p, npc_id) if p else null
 	var next: JobDef = Content.jobs.get(job_id)
 	if npc == null or next == null or not job_id in npc.instructs:
@@ -476,18 +480,23 @@ func on_advance(peer: int, npc_id: StringName, job_id: StringName) -> void:
 	p.map.tell(p, "You are now a %s!" % next.display_name, Palette.SUN)
 	store.save(p.character)
 
+## The NPC `npc_id` if the player stands by it and it keeps a shop, else null.
+func _shop_npc(p: SimPlayer, npc_id: StringName) -> NpcDef:
+	var npc := p.map.npc_near(p, npc_id) if p else null
+	return npc if npc and npc.shop else null
+
 ## Buys `count` of a shop's entry `index` from the NPC `npc_id` the player stands by.
 func on_buy(peer: int, npc_id: StringName, index: int, count: int) -> void:
-	var p := _player(peer)
-	var npc := p.map.npc_near(p, npc_id) if p else null
-	if npc == null or npc.shop == null or index < 0 or index >= npc.shop.items.size():
+	var p := player_of(peer)
+	var npc := _shop_npc(p, npc_id)
+	if npc == null or index < 0 or index >= npc.shop.items.size():
 		return
 	var entry := npc.shop.items[index]
 	count = clampi(count, 1, entry.item.stack_size())
 	var c := p.character
 	var total := entry.cost() * count
 	if c.shards < total:
-		p.map.tell(p, "You don't have enough Dawnshards.", MapInstance.BAD)
+		p.map.tell(p, NOT_ENOUGH_SHARDS, MapInstance.BAD)
 	elif not c.inventory.has_room(entry.item, count):
 		p.map.tell(p, "Your %s inventory is full." % ItemDef.TAB_NAMES[entry.item.tab()], MapInstance.BAD)
 	else:
@@ -498,9 +507,8 @@ func on_buy(peer: int, npc_id: StringName, index: int, count: int) -> void:
 
 ## Sells up to `count` from a bag slot to the NPC `npc_id`'s shop.
 func on_sell(peer: int, npc_id: StringName, tab: int, slot: int, count: int) -> void:
-	var p := _player(peer)
-	var npc := p.map.npc_near(p, npc_id) if p else null
-	if npc == null or npc.shop == null or tab < 0 or tab >= ItemDef.Tab.size() or slot < 0 or slot >= Inventory.SLOTS:
+	var p := player_of(peer)
+	if _shop_npc(p, npc_id) == null or not Inventory.valid_slot(tab, slot):
 		return
 	var stack := p.character.inventory.at(tab, slot)
 	if stack == null:
@@ -516,9 +524,8 @@ func on_sell(peer: int, npc_id: StringName, tab: int, slot: int, count: int) -> 
 
 ## Sells everything in the Etc tab to the NPC `npc_id`'s shop.
 func on_sell_all_etc(peer: int, npc_id: StringName) -> void:
-	var p := _player(peer)
-	var npc := p.map.npc_near(p, npc_id) if p else null
-	if npc == null or npc.shop == null:
+	var p := player_of(peer)
+	if _shop_npc(p, npc_id) == null:
 		return
 	var total := 0
 	for i in Inventory.SLOTS:
@@ -533,7 +540,7 @@ func on_sell_all_etc(peer: int, npc_id: StringName) -> void:
 
 ## Runs a change to the player's character and sends them the result, or why it failed.
 func _change(peer: int, change: Callable) -> void:
-	var p := _player(peer)
+	var p := player_of(peer)
 	if p == null:
 		return
 	var problem: String = change.call(p.character)
