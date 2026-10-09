@@ -81,7 +81,13 @@ func use_slot(i: int) -> void:
 func _hovered(at: Vector2) -> void:
 	var i := slot_at(at)
 	var stack := Game.inventory.at(tab, i) if i >= 0 else null
-	hud.tooltip.show_item(self, stack, get_global_mouse_position())
+	var hint := ""
+	match tab:
+		ItemDef.Tab.EQUIP:
+			hint = "Double-click to equip"
+		ItemDef.Tab.USE:
+			hint = "Double-click to use"
+	hud.tooltip.show_item(self, stack, get_global_mouse_position(), hint, true)
 
 func _get_drag_data(at: Vector2) -> Variant:
 	var i := slot_at(at)

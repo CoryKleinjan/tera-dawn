@@ -28,6 +28,14 @@ func _physics(n: int) -> void:
 	for i in n:
 		await get_tree().physics_frame
 
+## The Equip slot holding an item, or -1.
+func _slot_of(id: StringName) -> int:
+	for i in Inventory.SLOTS:
+		var s := Game.inventory.at(ItemDef.Tab.EQUIP, i)
+		if s and s.item.id == id:
+			return i
+	return -1
+
 func _run() -> void:
 	var args := OS.get_cmdline_user_args()
 	if args.size() > 0:
@@ -91,7 +99,11 @@ func _run() -> void:
 		for action in TDHud.WINDOW_ACTIONS:
 			world.hud.toggle_window(action)
 		var inv: TDInventoryWindow = world.hud.windows["inventory"]
-		world.hud.tooltip.show_item(inv, Game.inventory.at(ItemDef.Tab.EQUIP, 3), inv.global_position + inv.slot_rect(3).get_center())
+		Game.inventory.add(Content.item(&"leaf_cap"))
+		Game.equip(_slot_of(&"leaf_cap"))
+		Game.inventory.add(Content.item(&"ember_helm"))
+		var helm := _slot_of(&"ember_helm")
+		world.hud.tooltip.show_item(inv, Game.inventory.at(ItemDef.Tab.EQUIP, helm), inv.global_position + inv.slot_rect(helm).get_center(), "Double-click to equip", true)
 		await _frames(3)
 		await _shot("windows")
 		for action in TDHud.WINDOW_ACTIONS:

@@ -39,6 +39,10 @@ const BASE: Array[StringName] = [&"strength", &"dexterity", &"intelligence", &"l
 ## Jump height bonus in percent.
 @export var jump := 0
 
+## A bonus as players read it: "+3", "-2", "+5%" for Speed and Jump.
+static func format(stat: StringName, amount: int) -> String:
+	return "%+d%s" % [amount, "%" if stat in [&"speed", &"jump"] else ""]
+
 func value(stat: StringName) -> int:
 	return int(get(stat))
 
