@@ -325,7 +325,7 @@ func on_scroll(peer: int, use_slot: int, equip_slot: int) -> void:
 	if result["worked"]:
 		p.character.count("scrolls")
 		p.map.tell(p, "The scroll worked! %s is now %s." % [name, gear.display_name()], Palette.GOOD)
-		p.map.broadcast(&"ev_effect", [&"level_up", p.position.x, p.position.y, 1, peer])
+		p.map.broadcast(&"ev_effect", [&"celebrate", p.position.x, p.position.y, 1, peer])
 	else:
 		p.map.tell(p, "The scroll failed. %s has %d upgrades left." % [name, gear.slots_left()], MapInstance.BAD)
 		p.map.broadcast(&"ev_effect", [&"monster_poof", p.position.x, p.position.y - 40, 1, 0])
@@ -410,7 +410,7 @@ func check_achievements(p: SimPlayer) -> void:
 	for a in Achievements.check(p.character):
 		p.dirty_character = true
 		Net.send(p.peer, &"ev_achievement", [a["id"]])
-		p.map.broadcast(&"ev_effect", [&"level_up", p.position.x, p.position.y, 1, p.peer])
+		p.map.broadcast(&"ev_effect", [&"celebrate", p.position.x, p.position.y, 1, p.peer])
 
 ## Shows how quests that collect `item` are going after picking one up.
 func picked_up(p: SimPlayer, item: ItemDef) -> void:
@@ -482,7 +482,7 @@ func on_advance(peer: int, npc_id: StringName, job_id: StringName) -> void:
 		return
 	p.dirty_character = true
 	p.dirty_vitals = true
-	p.map.broadcast(&"ev_effect", [&"level_up", p.position.x, p.position.y, 1, p.peer])
+	p.map.broadcast(&"ev_effect", [&"celebrate", p.position.x, p.position.y, 1, p.peer])
 	p.map.tell(p, "You are now a %s!" % next.display_name, Palette.SUN)
 	store.save(p.character)
 

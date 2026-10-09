@@ -404,12 +404,13 @@ func advance_problem(next: JobDef) -> String:
 		return "Make room in your %s inventory first." % ItemDef.TAB_NAMES[full]
 	return ""
 
-## Becomes `next` (see advance_problem) and receives its gifts. Returns why not, or "".
+## Becomes `next` (see advance_problem) and receives its gifts and SP. Returns why not, or "".
 func advance(next: JobDef) -> String:
 	var problem := advance_problem(next)
 	if problem != "":
 		return problem
 	job = next
+	sp += next.advance_sp
 	for g in next.advance_gifts:
 		if g.item is EquipDef:
 			inventory.add_stack(ItemStack.unrolled(g.item, 1))

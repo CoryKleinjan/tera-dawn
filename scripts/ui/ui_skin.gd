@@ -431,6 +431,15 @@ static func draw_monster_hp(ci: CanvasItem, bottom_center: Vector2, width: float
 	var h := 38.0 * scale
 	draw_bar(ci, "monster_hp_1", "monster_hp_2", bottom_center - Vector2(width / 2.0, h), fraction, scale)
 
+## The bar fixed at the top of the screen while a boss is on the map: its name with a
+## BOSS badge, and its HP.
+static func draw_boss_bar(ci: CanvasItem, top_center: Vector2, label: String, fraction: float) -> void:
+	var scale := 1.8
+	var size := tex("monster_hp_1").get_size() * scale
+	DrawUtil.text(ci, Game.num_font, top_center + Vector2(0, 14), "BOSS", 12, Palette.EMBER, 0, 4, Palette.NIGHT)
+	DrawUtil.text(ci, Game.ui_font, top_center + Vector2(0, 30), label, 14, Palette.MIST, 0, 4, Palette.NIGHT)
+	draw_bar(ci, "monster_hp_1", "monster_hp_2", top_center + Vector2(-size.x / 2.0, 30), fraction, scale)
+
 ## A cream speech bubble whose tail points down at `bottom_center`, in dark ink.
 static func draw_speech(ci: CanvasItem, bottom_center: Vector2, text: String) -> void:
 	var font := Game.ui_font

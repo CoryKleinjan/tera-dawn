@@ -251,7 +251,7 @@ func _add_card(p: SimPlayer, m: MonsterDef) -> void:
 	if book.level() > level:
 		p.character.recalc()
 		tell(p, "Your Monster Book reached level %d: +%d to every stat." % [book.level(), book.level() - 1], Palette.SUN)
-		broadcast(&"ev_effect", [&"level_up", p.position.x, p.position.y, 1, p.peer])
+		broadcast(&"ev_effect", [&"celebrate", p.position.x, p.position.y, 1, p.peer])
 
 ## The pet that's out gets hungrier, and picks up what it can reach.
 func _pet_step(p: SimPlayer) -> void:

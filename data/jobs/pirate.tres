@@ -60,3 +60,4 @@ advances_from = &"beginner"
 advance_level = 10
 advance_requirements = SubResource("Resource_1")
 advance_gifts = Array[ExtResource("3_drop_entry")]([SubResource("Resource_2"), SubResource("Resource_3"), SubResource("gift_sub_pistol"), SubResource("gift_sub_bullets")])
+advance_sp = 1

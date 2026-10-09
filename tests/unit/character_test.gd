@@ -519,6 +519,15 @@ func test_advance_changes_job_gives_gifts_and_refills() -> void:
 	check_eq(c.inventory.count_of(potion), 20, "potions")
 	check_eq(Array(c.job_line()), [&"t_next", &"t_job"], "line")
 
+func test_advance_gives_sp() -> void:
+	var setup := _advance_setup()
+	var c: Character = setup[0]
+	var next: JobDef = setup[1]
+	next.advance_sp = 2
+	c.sp = 0
+	check_eq(c.advance(next), "", "advanced")
+	check_eq(c.sp, 2, "SP to learn a first skill")
+
 func test_advance_needs_room_for_gifts() -> void:
 	var setup := _advance_setup()
 	var c: Character = setup[0]

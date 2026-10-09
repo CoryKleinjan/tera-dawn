@@ -40,6 +40,7 @@ func _draw() -> void:
 	UiSkin.draw_hint(self, Vector2(name_x + (DrawUtil.text_width(font, world.map.display_name, 13) + 26) / 2.0, 34), world.map.display_name)
 	var mm := minimap_rect()
 	_draw_minimap(mm)
+	var boss_shown := world.started and _draw_boss_bar(Vector2(v.x / 2, 6))
 	if world.started:
 		_draw_party(Vector2(16, 56))
 		_draw_quest_tracker(Vector2(v.x - TRACKER_W - 8, mm.end.y + 2))
@@ -56,7 +57,7 @@ func _draw() -> void:
 	# map banner
 	if world.banner_t > 0:
 		var a := minf(1.0, minf(world.banner_t / 30.0, (180 - world.banner_t) / 20.0))
-		UiSkin.draw_banner(self, Vector2(v.x / 2, 110), world.banner_text, a)
+		UiSkin.draw_banner(self, Vector2(v.x / 2, 150 if boss_shown else 110), world.banner_text, a)
 	if world.player.fainted():
 		draw_rect(Rect2(Vector2.ZERO, v), Color(Palette.NIGHT, 0.45))
 		DrawUtil.text(self, Game.num_font, Vector2(v.x / 2, v.y / 2 - 10), "You fainted", 40, Palette.MIST)
@@ -82,6 +83,15 @@ func _draw_minimap(mm: Rect2) -> void:
 func _minimap_mark(mark: Array, at: Vector2) -> void:
 	var h: float = mark[1]
 	UiSkin.draw_icon(self, mark[0], Rect2(at - Vector2(h, h) / 2.0, Vector2(h, h)))
+
+## The first living boss on the map, at the top centre where it can't run off the screen.
+## Returns whether there was one.
+func _draw_boss_bar(top_center: Vector2) -> bool:
+	for m in world.mobs():
+		if m.draws_boss_bar():
+			UiSkin.draw_boss_bar(self, top_center, "Lv.%d %s" % [m.def.level, m.def.display_name], m.hp)
+			return true
+	return false
 
 ## Running buffs left of the minimap, newest on the left, with the seconds they have left.
 func _draw_buffs(right_top: Vector2) -> void:
