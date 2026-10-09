@@ -142,7 +142,8 @@ art/
   reference/          Style reference (the hero)
 store/                Steam capsules and key art
 tools/art/            Slicer, store-art cropper, fx texture and item placeholder generators, contact-sheet preview
-tests/                Headless smoke test (with a second game joining), bot client, screenshot scene
+tests/                Test runner (unit/, server/, content/, ui/ suites on framework/), smoke test
+                      (with a second game joining), bot client, screenshot scene, run_all.sh
 ```
 
 ## Draw order
