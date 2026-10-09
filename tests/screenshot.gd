@@ -14,8 +14,13 @@ func _frames(n: int) -> void:
 func _shot(name: String) -> void:
 	var w := get_child(0) as TDWorld
 	if w:
-		w.player.inv = 8 if w.started else 0 # a visible frame of the invincibility blink
+		w.player.inv = 100000 if w.started else 0
+	# Freeze the game and show the player, who may be mid-blink from their invincibility.
+	get_tree().paused = true
+	if w:
+		w.player.rig.set_opacity(1.0)
 	await RenderingServer.frame_post_draw
+	get_tree().paused = false
 	get_viewport().get_texture().get_image().save_png("%s/%s.png" % [out, name])
 	print("saved ", name)
 
@@ -70,12 +75,13 @@ func _run() -> void:
 		await _physics(10)
 		await _shot("village")
 	if only == "" or only == "rope":
-		p.position = Vector2(700, 560)
+		p.position = Vector2(700, 600)
 		await _physics(2)
 		Input.action_press("move_up")
-		await _physics(20)
+		await _physics(16)
 		Input.action_release("move_up")
 		await _shot("rope")
+		p.inv = 100000
 	if only == "" or only == "hollow":
 		world.load_map(&"hollow", 760)
 		p.inv = 100000
