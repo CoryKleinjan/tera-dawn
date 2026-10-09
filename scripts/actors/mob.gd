@@ -1,64 +1,65 @@
 class_name TDMob
 extends Node2D
-## A monster. Its MonsterDef says what it is; this node runs it: it patrols its platform,
-## chases the player for a while after being hit, hurts the player on touch, and comes
-## back some time after it is defeated. Flying monsters do the same in the air.
+## A monster as a player sees it. The server runs the real monster (SimMob) and sends
+## where it is and what it's doing; this glides to that spot and plays the matching
+## animation, HP bar and hit flash.
+
+## Bits of the flags in a monster's snapshot (see SimMob.snapshot).
+const DEAD := 1
+const HURT := 2
+const AGGRO := 4
+const SHOW_HP := 8
+
+## How far it moves toward the server's position each tick (0..1).
+const FOLLOW := 0.35
 
 var world: TDWorld
+var index := 0
 var def: MonsterDef
 var plat: Platform
-var health := Health.new()
-var hurtbox: Hitbox
-
+var target := Vector2.ZERO
 var dir := 1
-var walk_t := 0     # ticks until the next change of direction
-var kx := 0.0       # knockback speed
-var hurt_t := 0
-var aggro := 0      # ticks left chasing the player
-var dead := false
+var hp := 1.0
+var flags := 0
+## False until the server has said where it is.
+var known := false
 var death_t := 0
-var respawn := 0
-var phase := 0.0
-var show_hp := 0    # ticks left showing the HP bar
+var phase := randf() * 6.0
 var z := 0.0
 
 var rig: SpriteRig
 var _last_x := 0.0
 
-static func create(w: TDWorld, d: MonsterDef, p: Platform) -> TDMob:
+static func create(w: TDWorld, i: int, d: MonsterDef, p: Platform) -> TDMob:
 	var m := TDMob.new()
 	m.world = w
+	m.index = i
 	m.def = d
 	m.plat = p
-	m.hurtbox = Hitbox.new(d.size)
-	m._reset()
 	return m
 
-func _reset() -> void:
-	var half := def.size.x / 2.0
-	health.reset(def.max_hp)
-	position = Vector2(randf_range(plat.x + half, plat.x + plat.w - half), plat.y)
-	_last_x = position.x
-	dir = -1 if randf() < 0.5 else 1
-	walk_t = randi_range(60, 200)
-	kx = 0.0
-	hurt_t = 0
-	aggro = 0
-	dead = false
-	death_t = 0
-	show_hp = 0
-	phase = randf() * 6.0
+var dead: bool:
+	get: return flags & DEAD != 0
 
-func hurt(from_face: int) -> void:
-	hurt_t = 14
-	kx = from_face * 3.2
-	aggro = 600
-	show_hp = 240
+## Takes the server's latest [x, y, dir, hp, flags].
+func apply(state: Array) -> void:
+	var was_dead := dead
+	target = Vector2(state[0], state[1])
+	dir = state[2]
+	hp = state[3] / 1000.0
+	flags = state[4]
+	if not known or (was_dead and not dead):
+		position = target # first sight, or back from the dead: no gliding in
+		death_t = 0
+	if dead and not was_dead and known:
+		death_t = 40
+	known = true
 
-func die() -> void:
-	dead = true
-	death_t = 40
-	respawn = randi_range(def.respawn_ticks.x, def.respawn_ticks.y)
+## The server says it was defeated: start fading out now rather than at the next snapshot.
+func kill() -> void:
+	if not dead:
+		flags |= DEAD
+		death_t = 40
 
 ## Feet position including the hover height of flying monsters.
 func body_position() -> Vector2:
@@ -68,46 +69,9 @@ func body_position() -> Vector2:
 
 func step() -> void:
 	phase += 0.08
-	if dead:
-		if death_t > 0:
-			death_t -= 1
-		else:
-			respawn -= 1
-			if respawn <= 0:
-				_reset()
-		return
-	if show_hp > 0:
-		show_hp -= 1
-	if aggro > 0:
-		aggro -= 1
-	var half := def.size.x / 2.0
-	var p := world.player
-	if hurt_t > 0:
-		hurt_t -= 1
-		position.x += kx
-		kx *= 0.82
-	else:
-		var same_plat := not p.fainted() and absf(p.position.y - plat.y) < 6 \
-			and p.position.x > plat.x and p.position.x < plat.x + plat.w
-		if aggro > 0 and same_plat:
-			dir = -1 if p.position.x < position.x else 1
-			position.x += dir * def.speed * 1.3
-		else:
-			walk_t -= 1
-			if walk_t <= 0:
-				walk_t = randi_range(60, 220)
-				dir = 0 if randf() < 0.3 else (-1 if randf() < 0.5 else 1)
-			position.x += dir * def.speed
-	if position.x < plat.x + half:
-		position.x = plat.x + half
-		if dir < 0:
-			dir = 1
-	if position.x > plat.x + plat.w - half:
-		position.x = plat.x + plat.w - half
-		if dir > 0:
-			dir = -1
-	if hurtbox.rect_at(body_position()).intersects(p.hurtbox.rect_at(p.position)):
-		world.hurt_player(def, position.x)
+	position += (target - position) * FOLLOW
+	if death_t > 0:
+		death_t -= 1
 
 # ---------- HD-2D visuals ----------
 
@@ -120,13 +84,17 @@ func _ready() -> void:
 		rig.add_light(def.light_color, def.light_energy, def.size.y)
 	if def.aura_color.a > 0.0:
 		rig.add_aura(def.aura_color, def.size.y * 0.8)
+	rig.set_opacity(0.0)
 
 func _process(_delta: float) -> void:
 	if rig == null or world == null:
 		return
-	var alpha := clampf(death_t / 30.0, 0.0, 1.0) if dead else 1.0
-	rig.set_opacity(alpha)
-	rig.set_flash(hurt_t > 0 and hurt_t % 4 < 2)
+	rig.visible = known and (not dead or death_t > 0)
+	if not rig.visible:
+		return
+	rig.set_opacity(clampf(death_t / 30.0, 0.0, 1.0) if dead else 1.0)
+	var hurt := flags & HURT != 0
+	rig.set_flash(hurt and Engine.get_physics_frames() % 4 < 2)
 	var facing := dir
 	if facing == 0:
 		facing = -1 if world.player.position.x < position.x else 1
@@ -135,9 +103,9 @@ func _process(_delta: float) -> void:
 	_last_x = position.x
 	if dead:
 		rig.play(&"die")
-	elif hurt_t > 0:
+	elif hurt:
 		rig.play(&"hurt")
-	elif aggro > 0 and moving:
+	elif flags & AGGRO != 0 and moving:
 		rig.play(&"attack")
 	elif moving:
 		rig.play(&"move")
@@ -147,9 +115,9 @@ func _process(_delta: float) -> void:
 
 ## Name tag and HP bar, drawn by the overlay at this monster's projected screen position.
 func draw_tag(ci: CanvasItem, at: Vector2, top: Vector2) -> void:
-	if dead:
+	if dead or not known:
 		return
 	var label := "Lv.%d %s" % [def.level, def.display_name]
 	UiSkin.draw_name_tag(ci, at + Vector2(0, 4), label, Palette.MIST, Palette.EMBER if def.boss else Color.TRANSPARENT)
-	if show_hp > 0 or def.boss:
-		UiSkin.draw_monster_hp(ci, top + Vector2(0, -16), maxf(54.0, def.size.x * (1.6 if def.boss else 1.1)), health.fraction())
+	if flags & SHOW_HP != 0 or def.boss:
+		UiSkin.draw_monster_hp(ci, top + Vector2(0, -16), maxf(54.0, def.size.x * (1.6 if def.boss else 1.1)), hp)

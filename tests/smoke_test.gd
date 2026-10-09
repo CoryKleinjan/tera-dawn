@@ -2,6 +2,9 @@ extends Node
 ## Headless smoke test: godot --headless --path . res://tests/smoke_test.tscn
 ## Plays a short scripted session and checks the core loop works.
 
+const SAVE_DIR := "user://smoke_test_characters"
+const TEST_PORT := 7391
+
 var world: TDWorld
 var failures := 0
 
@@ -65,7 +68,7 @@ func _check_content() -> void:
 		if job.starting_stats == null or job.starting_gear.has(null):
 			problems.append("job %s is missing starting stats or gear" % id)
 	_check(problems.is_empty(), "maps, monsters, items and jobs reference valid content %s" % [problems])
-	_check(Content.jobs.has(Game.START_JOB), "the starting job is defined")
+	_check(Content.jobs.has(Character.START_JOB), "the starting job is defined")
 
 func _press(action: String) -> void:
 	var e := InputEventAction.new()
@@ -79,79 +82,108 @@ func _press(action: String) -> void:
 	Input.parse_input_event(e)
 	await _ticks(1)
 
-func _first_filled(tab: int) -> int:
+func _first_filled(c: Character, tab: int) -> int:
 	for i in Inventory.SLOTS:
-		if Game.inventory.at(tab, i) != null:
+		if c.inventory.at(tab, i) != null:
 			return i
 	return -1
 
 ## Inventory, equipment, stats and saving, without the world.
 func _check_character() -> void:
-	Game.new_character()
+	var c := Character.create("Tester")
 	var sword: EquipDef = Content.item(&"training_sword")
-	_check(Game.equipment.at(&"weapon") != null and Game.equipment.at(&"weapon").item == sword, "a new character wears the starting sword")
-	_check(Game.inventory.count_of(Content.item(&"red_potion")) == 5, "a new character carries 5 Red Potions")
-	var dmg := Game.damage_range()
+	_check(c.equipment.at(&"weapon") != null and c.equipment.at(&"weapon").item == sword, "a new character wears the starting sword")
+	_check(c.inventory.count_of(Content.item(&"red_potion")) == 5, "a new character carries 5 Red Potions")
+	var dmg := c.damage_range()
 	_check(dmg.x > 0 and dmg.y >= dmg.x, "the damage range comes from stats and the weapon (%d ~ %d)" % [dmg.x, dmg.y])
 
 	# stacking and a full tab
 	var red: ItemDef = Content.item(&"red_potion")
-	Game.inventory.add(red, 150)
-	_check(Game.inventory.count_of(red) == 155 and Game.inventory.at(ItemDef.Tab.USE, 0).count == 100 and Game.inventory.at(ItemDef.Tab.USE, 1).count == 55, "potions stack up to 100 a slot")
+	c.inventory.add(red, 150)
+	_check(c.inventory.count_of(red) == 155 and c.inventory.at(ItemDef.Tab.USE, 0).count == 100 and c.inventory.at(ItemDef.Tab.USE, 1).count == 55, "potions stack up to 100 a slot")
 	var tusk: ItemDef = Content.item(&"boar_tusk")
-	var left := Game.inventory.add(tusk, 200 * Inventory.SLOTS + 7)
-	_check(left == 7 and not Game.inventory.has_room(tusk), "a full Etc tab hands back what doesn't fit")
-	Game.inventory.clear()
+	var left := c.inventory.add(tusk, 200 * Inventory.SLOTS + 7)
+	_check(left == 7 and not c.inventory.has_room(tusk), "a full Etc tab hands back what doesn't fit")
+	c.inventory.clear()
 
 	# unequip and equip change stats
-	var attack := Game.stats.attack
-	_check(Game.unequip(&"weapon") == "" and Game.stats.attack == attack - sword.stats.attack, "taking off the sword lowers Weapon Attack")
-	_check(Game.equip(_first_filled(ItemDef.Tab.EQUIP)) == "" and Game.stats.attack == attack, "putting it back on restores Weapon Attack")
-	Game.inventory.add(Content.item(&"leaf_cap"))
-	var defense := Game.stats.defense
-	Game.equip(_first_filled(ItemDef.Tab.EQUIP))
-	_check(Game.stats.defense > defense, "wearing a hat raises Weapon Defense")
-	Game.inventory.add(Content.item(&"dawn_blade"))
-	_check(Game.equip(_first_filled(ItemDef.Tab.EQUIP)) != "", "level 1 can't wear the level 8 Dawn Blade")
+	var attack := c.stats.attack
+	_check(c.unequip(&"weapon") == "" and c.stats.attack == attack - sword.stats.attack, "taking off the sword lowers Weapon Attack")
+	_check(c.equip(_first_filled(c, ItemDef.Tab.EQUIP)) == "" and c.stats.attack == attack, "putting it back on restores Weapon Attack")
+	c.inventory.add(Content.item(&"leaf_cap"))
+	var defense := c.stats.defense
+	c.equip(_first_filled(c, ItemDef.Tab.EQUIP))
+	_check(c.stats.defense > defense, "wearing a hat raises Weapon Defense")
+	c.inventory.add(Content.item(&"dawn_blade"))
+	_check(c.equip(_first_filled(c, ItemDef.Tab.EQUIP)) != "", "level 1 can't wear the level 8 Dawn Blade")
 
 	# levels give Ability Points, and STR raises damage
-	Game.gain_xp(Game.xp_need())
-	_check(Game.level == 2 and Game.ap == Content.job(Game.START_JOB).ap_per_level, "levelling up gives Ability Points")
-	var top := Game.damage_range().y
+	c.gain_xp(c.xp_need())
+	_check(c.level == 2 and c.ap == c.job.ap_per_level, "levelling up gives Ability Points")
+	var top := c.damage_range().y
 	for n in 5:
-		Game.add_ap(&"strength")
-	_check(Game.ap == 0 and Game.damage_range().y > top, "spending AP on STR raises damage")
+		c.add_ap(&"strength")
+	_check(c.ap == 0 and c.damage_range().y > top, "spending AP on STR raises damage")
 
 	# saving and loading keeps the bag and the gear
-	Game.inventory.add(tusk, 3)
-	Game.save_game()
-	var inv := JSON.stringify(Game.inventory.to_dict())
-	var worn := JSON.stringify(Game.equipment.to_dict())
-	var strength := Game.base.strength
-	Game.new_character()
-	Game.load_game()
-	_check(JSON.stringify(Game.inventory.to_dict()) == inv and JSON.stringify(Game.equipment.to_dict()) == worn
-		and Game.base.strength == strength, "saving and loading keeps inventory, equipment and stats")
+	c.inventory.add(tusk, 3)
+	var store := CharacterStore.new(SAVE_DIR)
+	store.save(c)
+	var back := store.load_character("Tester")
+	_check(back != null and JSON.stringify(back.inventory.to_dict()) == JSON.stringify(c.inventory.to_dict())
+		and JSON.stringify(back.equipment.to_dict()) == JSON.stringify(c.equipment.to_dict())
+		and back.base.strength == c.base.strength and back.level == 2, "saving and loading keeps inventory, equipment and stats")
+	_check(CharacterStore.clean_name("  Dawn<ling>!  ") == "Dawnling", "character names are cleaned up")
+
+## Empties the test's character folder, so every run starts from new characters.
+func _clear_saves() -> void:
+	DirAccess.make_dir_recursive_absolute(SAVE_DIR)
+	for f in DirAccess.get_files_at(SAVE_DIR):
+		DirAccess.remove_absolute(SAVE_DIR.path_join(f))
+
+## The server's view of this game's own player.
+func _me() -> SimPlayer:
+	return Net.server.sessions.get(multiplayer.get_unique_id())
+
+## Moves the player somewhere instantly, on both sides (a real client can't do this:
+## the server would put it back).
+func _teleport(at: Vector2) -> void:
+	world.player.position = at
+	world.player.vel = Vector2.ZERO
+	_me().position = at
 
 func _run() -> void:
 	_check_content()
-	# Start from a fresh character without touching the real save file.
-	Game.save_path = "user://smoke_test_save.json"
+	_clear_saves()
 	_check_character()
-	Game.new_character()
-	var scene: PackedScene = load("res://scenes/main.tscn")
-	world = scene.instantiate() as TDWorld
+	# Play single player against a server inside this game, with test-only saves.
+	_clear_saves()
+	Net.save_dir = SAVE_DIR
+	Net.import_legacy_save = false
+	world = load("res://scenes/world.tscn").instantiate() as TDWorld
 	add_child(world)
 	await _ticks(5)
-	world.start()
+	_check(not world.started and world.hud.title.visible, "the game opens on the title screen")
+	world.hud.name_field.text = "Tester"
+	world.hud._on_play()
+	await _ticks(2)
+	_check(world.started and not world.hud.title.visible and Game.me.name == "Tester", "Play starts a single-player game as the named character")
+	_check(Net.server != null and _me() != null, "single player runs its own server")
 	var p := world.player
-	p.inv = 100000 # keep monsters from knocking the player around mid-test
+	_me().inv = 100000 # keep monsters from hurting the player mid-test
 	_check(p.on_ground, "player starts on the ground")
 	_check(world.npcs().size() == 2, "the meadow has its two NPCs")
+	await _ticks(5)
+	_check(world.mobs().all(func(m: TDMob) -> bool: return m.known), "the server tells the game where every monster is")
 
 	var x0 := p.position.x
 	await _hold("move_right", 40)
 	_check(p.position.x > x0 + 60, "walking right moves the player")
+	await _ticks(4)
+	_check(absf(_me().position.x - p.position.x) < 6.0, "the server hears where the player walked")
+	var before := _me().position
+	Net.server.on_move(1, before + Vector2(900, 0), 1, &"walk", false)
+	_check(_me().position == before and absf(p.position.x - before.x) < 1.0, "the server refuses an impossible move and puts the player back")
 
 	await _tap("jump")
 	await _ticks(10)
@@ -161,21 +193,22 @@ func _run() -> void:
 
 	# Talk to the village elder.
 	var elder := world.npcs()[0]
-	p.position = Vector2(elder.position.x - 30, 620)
+	_teleport(Vector2(elder.position.x - 30, 620))
 	await _ticks(2)
 	await _tap("move_up")
 	_check(elder.speech() != "", "pressing Up next to an NPC makes them talk")
 
 	# Put a Dewling right in front of the player and hit it until it dies.
-	var mob: TDMob = null
-	for m in world.mobs():
-		if m.def.id == &"dewling" and m.plat == world.platforms[0]:
+	var meadow: MapInstance = Net.server.maps[&"meadow"]
+	var mob: SimMob = null
+	for m in meadow.mobs:
+		if m.def.id == &"dewling" and m.plat == meadow.layout.platforms[0]:
 			mob = m
 			break
-	p.position = Vector2(mob.position.x - 40, 620)
+	_teleport(Vector2(mob.position.x - 40, 620))
 	p.face = 1
-	var xp_before: int = Game.xp + Game.level * 1000
-	var shards: int = Game.shards
+	var xp_before: int = Game.me.xp + Game.me.level * 1000
+	var shards: int = Game.me.shards
 	for i in 12:
 		mob.position.x = p.position.x + 40
 		await _tap("attack")
@@ -183,39 +216,55 @@ func _run() -> void:
 		if mob.dead:
 			break
 	_check(mob.dead, "basic attacks kill a Dewling")
-	_check(Game.xp + Game.level * 1000 > xp_before, "killing a monster gives EXP")
+	await _ticks(4)
+	_check(world.mobs()[mob.index].dead, "the game shows the Dewling defeated")
+	_check(Game.me.xp + Game.me.level * 1000 > xp_before, "killing a monster gives EXP")
 	# Drops land next to the player, so some may already be picked up by now.
-	_check(world.drop_layer.get_child_count() > 0 or Game.shards > shards, "the monster drops Dawnshards")
+	_check(not meadow.drops.is_empty() or Game.me.shards > shards, "the monster drops Dawnshards")
+	_check(world.drops.size() == meadow.drops.size(), "the game shows the same drops as the server")
 	await _ticks(80)
-	for drop in world.drop_layer.get_children():
-		if not is_instance_valid(drop) or not drop.item.is_currency:
-			continue # picked up while walking to an earlier one
-		p.position = Vector2(drop.position.x, 620)
-		await _ticks(5)
-	var currency_left := world.drop_layer.get_children().filter(func(d): return is_instance_valid(d) and not d.taken and d.item.is_currency)
-	_check(Game.shards > shards and currency_left.is_empty(), "walking over Dawnshards picks them up")
+	for d in meadow.drops.values():
+		if d.item.is_currency and not d.taken:
+			_teleport(Vector2(d.flight.position.x, 620))
+			await _ticks(5)
+	var currency_left := meadow.drops.values().filter(func(d: SimDrop) -> bool: return d.item.is_currency)
+	_check(Game.me.shards > shards and currency_left.is_empty(), "walking over Dawnshards picks them up")
 
 	# Items wait for the loot key.
-	for d in world.drop_layer.get_children():
-		d.queue_free()
-	await _ticks(1)
+	for d in meadow.drops.values():
+		meadow._remove_drop(d, 0)
 	var tusk: ItemDef = Content.item(&"boar_tusk")
 	var boots: EquipDef = Content.item(&"leather_boots")
 	for item in [tusk, boots]:
-		var d := TDDrop.create(world, item, 1, p.position + Vector2(0, -20), 620)
-		d.land_x = p.position.x
-		world.drop_layer.add_child(d)
+		meadow.spawn_drop(item, 1, null, DropFlight.create(p.position + Vector2(0, -20), 620, p.position.x), 0)
 	await _ticks(40)
-	_check(world.drop_layer.get_child_count() == 2, "items stay on the ground until looted")
+	_check(meadow.drops.size() == 2 and world.drops.size() == 2, "items stay on the ground until looted")
 	await _hold("loot", 24)
-	_check(Game.inventory.count_of(tusk) == 1 and Game.inventory.count_of(boots) == 1, "the loot key picks up items and gear")
+	_check(Game.me.inventory.count_of(tusk) == 1 and Game.me.inventory.count_of(boots) == 1 and world.drops.is_empty(), "the loot key picks up items and gear")
 
 	# A Red Potion from the Use tab heals.
-	Game.health.set_hp(10)
+	_me().character.health.set_hp(10)
 	var red: ItemDef = Content.item(&"red_potion")
-	var potions := Game.inventory.count_of(red)
-	_check(world.use_item(_first_filled(ItemDef.Tab.USE)) == ""
-		and Game.health.hp > 10 and Game.inventory.count_of(red) == potions - 1, "drinking a Red Potion heals and uses it up")
+	var potions := Game.me.inventory.count_of(red)
+	world.hud.windows["inventory"].tab = ItemDef.Tab.USE
+	world.hud.windows["inventory"].use_slot(_first_filled(Game.me, ItemDef.Tab.USE))
+	await _ticks(1)
+	_check(Game.me.health.hp > 10 and Game.me.inventory.count_of(red) == potions - 1, "drinking a Red Potion heals and uses it up")
+
+	# Gear changes go through the server too.
+	var attack := Game.me.stats.attack
+	world.hud.windows["equipment"]._click(world.hud.windows["equipment"].slot_rect(&"weapon").get_center(), MOUSE_BUTTON_LEFT, true)
+	await _ticks(1)
+	_check(Game.me.equipment.at(&"weapon") == null and Game.me.stats.attack < attack, "double-clicking the worn sword takes it off")
+	world.hud.windows["inventory"].tab = ItemDef.Tab.EQUIP
+	var sword_slot := -1
+	for i in Inventory.SLOTS:
+		var st := Game.me.inventory.at(ItemDef.Tab.EQUIP, i)
+		if st and st.item.id == &"training_sword":
+			sword_slot = i
+	world.hud.windows["inventory"].use_slot(sword_slot)
+	await _ticks(1)
+	_check(Game.me.stats.attack == attack, "double-clicking it in the bag wears it again")
 
 	# The windows open with their keys and Esc closes them.
 	for action in TDHud.WINDOW_ACTIONS:
@@ -226,10 +275,8 @@ func _run() -> void:
 	_check(all_open, "I, E and S open the inventory, equipment and character windows")
 	# Hovering gear in the bag shows its tooltip, compared with what's worn.
 	var inv: TDInventoryWindow = world.hud.windows["inventory"]
-	world.hud.title.hide() # the test started the world without pressing Play
 	inv.tab = ItemDef.Tab.EQUIP
-	Game.inventory.add(Content.item(&"leaf_cap"))
-	var slot := _first_filled(ItemDef.Tab.EQUIP)
+	var slot := _first_filled(Game.me, ItemDef.Tab.EQUIP)
 	var move := InputEventMouseMotion.new()
 	move.position = get_viewport().get_final_transform() * (inv.global_position + inv.slot_rect(slot).get_center())
 	move.global_position = move.position
@@ -237,7 +284,7 @@ func _run() -> void:
 	await _ticks(2)
 	var tip := world.hud.tooltip
 	var lines := tip._lines() if tip.stack else []
-	_check(tip.stack == Game.inventory.at(ItemDef.Tab.EQUIP, slot) and lines.any(func(l): return str(l[0]).begins_with("vs. worn") or str(l[0]) == "Nothing worn in this slot"),
+	_check(tip.stack == Game.me.inventory.at(ItemDef.Tab.EQUIP, slot) and lines.any(func(l): return str(l[0]).begins_with("vs. worn") or str(l[0]) == "Nothing worn in this slot"),
 		"hovering gear in the inventory shows its tooltip and how it compares with what's worn")
 	# The equipment window lists what the gear adds.
 	var gear: TDEquipmentWindow = world.hud.windows["equipment"]
@@ -248,34 +295,110 @@ func _run() -> void:
 	for action in TDHud.WINDOW_ACTIONS:
 		await _press("pause")
 	_check(world.started and not world.hud.windows["stats"].visible, "Esc closes the windows before opening the menu")
+	await _press("pause")
+	_check(world.hud.title.visible and world.hud.pause_panel.visible, "Esc again opens the pause menu")
+	world.hud.resume_button.pressed.emit()
+	_check(not world.hud.title.visible, "Resume closes it")
 
 	# Dawn Slash costs MP and hits several monsters.
-	var mp_before := Game.mp
-	var level := Game.level
+	var mp_before := Game.me.mp
+	var level := Game.me.level
 	p.cooldown = 0
+	_me().cooldown = 0
 	await _tap("skill")
 	_check(p.action_anim == &"slash", "Dawn Slash plays its animation")
 	# MP regen may tick once during the key press, and a kill that levels up refills MP.
-	_check(Game.level > level or mp_before - Game.mp >= Content.skill(&"dawn_slash").mp_cost - 1, "Dawn Slash spends MP")
+	_check(Game.me.level > level or mp_before - Game.me.mp >= Content.skill(&"dawn_slash").mp_cost - 1, "Dawn Slash spends MP")
 
 	# Climb the rope at x=700 up to the platform at y=420.
 	await _ticks(40)
-	p.position = Vector2(700, 620)
-	p.vel = Vector2.ZERO
+	_teleport(Vector2(700, 620))
 	await _ticks(2)
 	await _hold("move_up", 100)
 	_check(is_equal_approx(p.position.y, 420.0) and not p.is_climbing(), "climbing a rope reaches the platform above")
 
 	# Walk through the portal to Ember Hollow.
-	p.position = Vector2(2530, 620)
+	_teleport(Vector2(2530, 620))
 	await _ticks(3)
 	await _tap("move_up")
 	await _ticks(3)
-	_check(world.map.id == &"hollow", "the portal leads to Ember Hollow")
+	_check(world.map.id == &"hollow" and _me().map.def.id == &"hollow", "the portal leads to Ember Hollow")
 	var boss := false
 	for m in world.mobs():
 		boss = boss or m.def.boss
 	_check(boss, "Ember Hollow has its boss")
 
+	# Fainting sends the player back to town.
+	_me().inv = 0
+	_me().character.health.set_hp(1)
+	var hollow: MapInstance = Net.server.maps[&"hollow"]
+	hollow.touch_player(_me(), hollow.mobs[0])
+	_check(p.fainted(), "running out of HP faints the player")
+	await _ticks(SimPlayer.FAINT_TICKS + 5)
+	_check(not p.fainted() and world.map.id == Character.START_MAP and Game.me.health.hp > 0, "after fainting the player wakes up in town")
+
+	world.hud._on_leave()
+	_check(Net.mode == Net.Mode.NONE and world.hud.title.visible, "Leave goes back to the title screen")
+	_check(CharacterStore.new(SAVE_DIR).load_character("Tester") != null, "leaving saves the character")
+
+	await _check_multiplayer()
+
 	print("FAILURES: %d" % failures)
 	get_tree().quit(1 if failures > 0 else 0)
+
+## Hosts a game and has a second copy of the game (tests/bot_client.tscn) join it over
+## the network: each must see the other, and the bot's attacks must count on the server.
+func _check_multiplayer() -> void:
+	_check(Net.host("Host", TEST_PORT) == "", "hosting opens port %d" % TEST_PORT)
+	await _ticks(2)
+	_check(world.started and Net.mode == Net.Mode.HOST, "the host plays in their own game")
+	_me().inv = 100000
+	DirAccess.remove_absolute(BotClient.RESULT_PATH)
+	var bot := OS.create_process(OS.get_executable_path(),
+		["--headless", "--path", ProjectSettings.globalize_path("res://"), "res://tests/bot_client.tscn", "--", str(TEST_PORT)])
+	_check(bot > 0, "a second game starts to join")
+	var bot_peer := 0
+	for i in 1200:
+		await _ticks(1)
+		for peer in Net.server.sessions:
+			if peer != 1:
+				bot_peer = peer
+		if bot_peer != 0:
+			break
+	_check(bot_peer != 0, "the second game joins the host over the network")
+	if bot_peer == 0:
+		OS.kill(bot)
+		return
+	var bot_player: SimPlayer = Net.server.sessions[bot_peer]
+	bot_player.inv = 100000
+	# hold a Dewling in front of the bot until its attacks defeat one
+	var meadow: MapInstance = Net.server.maps[&"meadow"]
+	var level := bot_player.character.level
+	var xp := bot_player.character.xp
+	var seen_name := ""
+	for i in 1200:
+		await _ticks(1)
+		if world.avatars.has(bot_peer):
+			seen_name = world.avatars[bot_peer].char_name
+		for m in meadow.mobs:
+			if m.def.id == &"dewling" and m.plat == meadow.layout.platforms[0] and not m.dead:
+				m.position.x = bot_player.position.x + 40
+				break
+		if bot_player.character.xp != xp or bot_player.character.level != level:
+			break
+	_check(bot_player.character.xp != xp or bot_player.character.level != level, "the joining player's attacks defeat a monster on the server")
+	_check(seen_name == "Bot", "the host sees the other player, with their name")
+	for i in 1200:
+		await _ticks(1)
+		if not OS.is_process_running(bot):
+			break
+	var f := FileAccess.open(BotClient.RESULT_PATH, FileAccess.READ)
+	var result: Variant = JSON.parse_string(f.get_as_text()) if f else null
+	_check(result is Dictionary and result.get("saw_host", false), "the other player sees the host %s" % [result])
+	_check(result is Dictionary and result.get("saw_mobs", false) and result.get("saw_hits", false), "the other player sees the monsters and their own hits")
+	for i in 120:
+		await _ticks(1)
+		if not Net.server.sessions.has(bot_peer):
+			break
+	_check(not Net.server.sessions.has(bot_peer) and not world.avatars.has(bot_peer), "when they quit, they leave the host's map")
+	world.stop()

@@ -1,14 +1,15 @@
 class_name TDWorld
 extends Node2D
-## Owns the current map: platforms, monsters, NPCs, drops, effects, camera and combat.
-## Game logic steps once per physics tick (60 Hz) in 2D game pixels (y down);
-## TDStage renders it as an HD-2D diorama.
+## What the player sees: the map they're on, drawn as an HD-2D diorama by TDStage, with
+## their own hero, the monsters, other players, NPCs, drops and effects, plus the camera
+## and the HUD. The server decides what happens (see TDServer); this shows its events
+## (through Net) and runs your own movement so it feels instant.
+## Logic steps once per physics tick (60 Hz) in 2D game pixels (y down).
 
 const VIEW := Vector2(960, 540)
-## Game pixels between the items a monster drops.
-const DROP_SPACING := 26.0
 
 var map: MapDef
+var layout: MapLayout
 var platforms: Array[Platform] = []
 var started := false
 var tick := 0
@@ -22,16 +23,23 @@ var stage: TDStage
 var mob_layer: Node2D
 var npc_layer: Node2D
 var drop_layer: Node2D
+var avatar_layer: Node2D
 var fx_layer: Node2D
 var hud: TDHud
+## drop id -> TDDrop
+var drops := {}
+## peer id -> TDAvatar
+var avatars := {}
 
 func _ready() -> void:
+	Net.world = self
 	stage = TDStage.new()
 	stage.world = self
 	add_child(stage)
 	mob_layer = _layer()
 	npc_layer = _layer()
 	drop_layer = _layer()
+	avatar_layer = _layer()
 	player = TDPlayer.new()
 	player.world = self
 	add_child(player)
@@ -39,7 +47,14 @@ func _ready() -> void:
 	hud = TDHud.new()
 	hud.world = self
 	add_child(hud)
-	load_map(Game.map_id)
+	# the title screen shows the meadow until the server puts the player somewhere
+	load_map(Character.START_MAP)
+	player.place(map.start_x, platforms[0].y)
+	player.rig.visible = false
+
+func _exit_tree() -> void:
+	if Net.world == self:
+		Net.world = null
 
 func _layer() -> Node2D:
 	var n := Node2D.new()
@@ -48,33 +63,52 @@ func _layer() -> Node2D:
 
 func start() -> void:
 	started = true
-	show_banner(map.display_name)
+	player.rig.visible = true
 
-## Loads a map by id and puts the player on its floor at `x` (or the map's start).
-func load_map(id: StringName, x := -1.0) -> void:
+## Leaves the game and goes back to the title screen.
+func stop() -> void:
+	started = false
+	Net.stop()
+	for a in avatars.values():
+		a.queue_free()
+	avatars.clear()
+	player.rig.visible = false
+
+## The server put the player on a map: build it and show what's on it.
+func enter_map(id: StringName, x: float, state: Dictionary) -> void:
+	load_map(id)
+	player.place(x, platforms[0].y)
+	var mob_states: Array = state.get("mobs", [])
+	var views := mobs()
+	for i in mini(mob_states.size(), views.size()):
+		views[i].apply(mob_states[i])
+	for d in state.get("drops", []):
+		add_drop(d)
+	cam = _camera_target()
+	stage.follow(cam)
+	if started:
+		show_banner(map.display_name)
+
+## Builds a map: its layout, the NPCs, a view for each of its monsters (shown once the
+## server says where they are) and the stage.
+func load_map(id: StringName) -> void:
 	map = Content.map(id)
-	if map == null:
-		map = Content.map(Game.START_MAP)
-	Game.map_id = map.id
-	platforms.clear()
-	platforms.append(Platform.floor_of(map))
-	for d in map.platforms:
-		platforms.append(Platform.from_def(d))
-	for layer in [mob_layer, npc_layer, drop_layer, fx_layer]:
+	layout = MapLayout.new(map)
+	platforms = layout.platforms
+	for layer in [mob_layer, npc_layer, drop_layer, avatar_layer, fx_layer]:
 		for c in layer.get_children():
 			layer.remove_child(c)
 			c.queue_free()
+	drops.clear()
+	avatars.clear()
+	# same order as the server's MapInstance, so index i is the same monster on both sides
 	for s in map.spawns:
 		for i in s.count:
-			mob_layer.add_child(TDMob.create(self, s.monster, platforms[s.platform]))
+			mob_layer.add_child(TDMob.create(self, mob_layer.get_child_count(), s.monster, platforms[s.platform]))
 	for p in map.npcs:
 		npc_layer.add_child(TDNpc.create(self, p, platforms[p.platform]))
-	player.place(x if x >= 0.0 else map.start_x, platforms[0].y)
 	cam = _camera_target()
 	stage.build()
-	if started:
-		show_banner(map.display_name)
-	Game.save_game()
 
 func show_banner(text: String) -> void:
 	banner_text = text
@@ -102,23 +136,17 @@ func npcs() -> Array[TDNpc]:
 		out.append(c as TDNpc)
 	return out
 
-func climbable_near(pos: Vector2) -> ClimbableDef:
-	for c in map.climbables:
-		if absf(pos.x - c.x) < 16 and pos.y > c.top - 2 and pos.y <= c.bottom + 2:
-			return c
-	return null
-
-func portal_at(pos: Vector2) -> PortalDef:
-	for p in map.portals:
-		if absf(pos.x - p.x) < 34 and absf(pos.y - platforms[p.platform].y) < 4:
-			return p
-	return null
-
 func npc_near(pos: Vector2) -> TDNpc:
 	for n in npcs():
 		if absf(pos.x - n.position.x) < 50 and absf(pos.y - n.position.y) < 8:
 			return n
 	return null
+
+## Your own hero for your peer id, another player's avatar, or null.
+func actor(peer: int) -> Node2D:
+	if peer == multiplayer.get_unique_id():
+		return player
+	return avatars.get(peer)
 
 func _camera_target() -> Vector2:
 	return Vector2(
@@ -133,25 +161,20 @@ func _unhandled_input(event: InputEvent) -> void:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED if full else DisplayServer.WINDOW_MODE_FULLSCREEN)
 	elif event.is_action_pressed("pause") and started:
 		if not hud.close_top_window():
-			started = false
 			hud.show_title(true)
-	elif started:
+	elif started and not hud.title.visible:
 		for action in TDHud.WINDOW_ACTIONS:
 			if event.is_action_pressed(action):
 				hud.toggle_window(action)
 
 func _physics_process(_delta: float) -> void:
 	tick += 1
-	if started:
+	# the game carries on behind the menu (it's online), but you stand still
+	if started and not hud.title.visible:
 		player.step()
-	for m in mobs():
-		m.step()
-	for n in npcs():
-		n.step()
-	for d in drop_layer.get_children():
-		(d as TDDrop).step()
-	for f in fx_layer.get_children():
-		f.step()
+	for layer in [mob_layer, npc_layer, avatar_layer, drop_layer, fx_layer]:
+		for c in layer.get_children():
+			c.step()
 	for i in range(log_lines.size() - 1, -1, -1):
 		log_lines[i]["t"] -= 1
 		if log_lines[i]["t"] <= 0:
@@ -160,138 +183,92 @@ func _physics_process(_delta: float) -> void:
 		banner_t -= 1
 	cam += (_camera_target() - cam) * Vector2(0.12, 0.1)
 	stage.follow(cam)
-	if tick % 300 == 0:
-		Game.save_game()
 
-# ---------- combat ----------
+# ---------- events from the server ----------
 
-## Resolves a player skill against the monsters in front of them. Returns how many were hit.
-func use_skill(skill: SkillDef) -> int:
-	var feet := player.position
-	var area := Hitbox.attack_area(feet, player.face, skill.reach, skill.height)
-	var targets: Array[TDMob] = []
-	for m in mobs():
-		if not m.dead and area.intersects(m.hurtbox.rect_at(m.body_position())):
-			targets.append(m)
-	targets.sort_custom(func(a: TDMob, b: TDMob) -> bool:
-		return absf(a.position.x - feet.x) < absf(b.position.x - feet.x))
-	if targets.size() > skill.max_targets:
-		targets.resize(skill.max_targets)
-	for m in targets:
-		for i in skill.hits:
-			if m.dead:
-				break
-			var hit := Combat.player_hit(skill, m.def)
-			var at := m.body_position() + Vector2(0, -m.def.size.y - 10 - i * 30)
-			if hit["miss"]:
-				add_number(at, 0, "miss")
-				continue
-			m.health.damage(hit["damage"])
-			add_number(at, hit["damage"], "crit" if hit["crit"] else "hit")
-			if hit["crit"]:
-				add_effect(Content.effect(&"critical"), m.body_position() + Vector2(0, -m.def.size.y / 2.0), player.face)
-		if m.health.is_dead():
-			kill_mob(m)
-		else:
-			m.hurt(player.face)
-		add_effect(skill.hit_effect, m.body_position() + Vector2(0, -m.def.size.y / 2.0), player.face)
-	return targets.size()
+## Where the monsters and other players are now.
+func apply_snapshot(snap: Dictionary) -> void:
+	var views := mobs()
+	var mob_states: Array = snap.get("mobs", [])
+	for i in mini(mob_states.size(), views.size()):
+		views[i].apply(mob_states[i])
+	var me := multiplayer.get_unique_id()
+	var seen := {}
+	for state in snap.get("players", []):
+		var peer: int = state[0]
+		if peer == me:
+			continue
+		seen[peer] = true
+		if not avatars.has(peer):
+			avatars[peer] = TDAvatar.create(self, peer)
+			avatar_layer.add_child(avatars[peer])
+		avatars[peer].apply(state)
+	for peer in avatars.keys():
+		if not seen.has(peer):
+			remove_avatar(peer)
 
-func kill_mob(m: TDMob) -> void:
-	m.die()
-	add_effect(Content.effect(&"monster_poof"), m.body_position() + Vector2(0, -m.def.size.y / 2.0), 1)
-	var levels := Game.gain_xp(m.def.exp_reward)
-	add_log("+%d EXP" % m.def.exp_reward, Color("ffe39a"))
-	if levels > 0:
+func remove_avatar(peer: int) -> void:
+	var a: TDAvatar = avatars.get(peer)
+	if a:
+		avatars.erase(peer)
+		a.queue_free()
+
+## Someone used a skill: their swing (yours already showed), then the damage on each
+## monster hit. `lines` is [[mob index, [[damage, kind], ...]], ...].
+func show_skill(peer: int, skill: SkillDef, at: Vector2, face: int, lines: Array) -> void:
+	if skill == null:
+		return
+	var who := actor(peer)
+	if who is TDAvatar:
+		(who as TDAvatar).play_skill(skill)
+		add_effect(skill.effect, at + Vector2(0, -40), face)
+	var views := mobs()
+	for line in lines:
+		var m: TDMob = views[line[0]] if line[0] < views.size() else null
+		if m == null:
+			continue
+		var mid := m.body_position() + Vector2(0, -m.def.size.y / 2.0)
+		var hits: Array = line[1]
+		for i in hits.size():
+			var kind: String = hits[i][1]
+			add_number(m.body_position() + Vector2(0, -m.def.size.y - 10 - i * 30), hits[i][0], kind)
+			if kind == "crit":
+				add_effect(Content.effect(&"critical"), mid, face)
+		add_effect(skill.hit_effect, mid, face)
+
+func show_mob_death(index: int) -> void:
+	var views := mobs()
+	if index < views.size():
+		var m := views[index]
+		m.kill()
+		add_effect(Content.effect(&"monster_poof"), m.body_position() + Vector2(0, -m.def.size.y / 2.0), 1)
+
+func show_level_up(peer: int, level: int) -> void:
+	var who := actor(peer)
+	if who == null:
+		return
+	add_effect(Content.effect(&"level_up"), who.position, 1, who)
+	if who == player:
 		player.level_up()
-		add_effect(Content.effect(&"level_up"), player.position, 1)
-		add_log("Level up! You reached Lv. %d" % Game.level, Palette.SUN)
-		if Game.level >= 5:
+		if level >= 5:
 			SteamService.unlock_achievement("REACH_LEVEL_5")
-	var loot := []
-	for entry in m.def.drops:
-		var amount := entry.roll()
-		if amount > 0:
-			loot.append([entry.item, amount])
-	# spread out in a row under the monster, like MapleStory
-	for i in loot.size():
-		var x := clampf(m.position.x + (i - (loot.size() - 1) / 2.0) * DROP_SPACING, m.plat.x + 8, m.plat.x + m.plat.w - 8)
-		var d := TDDrop.create(self, loot[i][0], loot[i][1], m.position + Vector2(0, -20), m.plat.y)
-		d.land_x = x
-		drop_layer.add_child(d)
 
-## Drops a stack from the bag onto the ground at the player's feet.
-func drop_from_player(stack: ItemStack) -> void:
-	var d := TDDrop.create(self, stack.item, stack.count, player.position + Vector2(0, -30), player.platform.y if player.platform else player.position.y)
-	d.stack = stack
-	d.land_x = player.position.x + player.face * 14
+func add_drop(snap: Array) -> void:
+	var d := TDDrop.create(self, snap)
+	if d.item == null or drops.has(d.id):
+		return
+	drops[d.id] = d
 	drop_layer.add_child(d)
-	add_log("Dropped %s" % _amount_name(stack.item, stack.count), Palette.MIST)
 
-## Picks up the nearest drop the player is standing by (the loot key). True if one was taken.
-func loot_near(pos: Vector2) -> bool:
-	var best: TDDrop = null
-	for d in drop_layer.get_children():
-		var drop := d as TDDrop
-		if drop.can_loot(pos) and (best == null or absf(drop.position.x - pos.x) < absf(best.position.x - pos.x)):
-			best = drop
-	return best != null and best.pick_up()
-
-## Puts a picked-up item in the bag. False (with a message) if there's no room.
-func collect(item: ItemDef, amount: int, stack: ItemStack = null) -> bool:
-	if item.is_currency:
-		Game.shards += amount
-	elif stack:
-		if not Game.inventory.add_stack(stack):
-			add_log("Your %s inventory is full." % ItemDef.TAB_NAMES[item.tab()], Color("ff8a99"))
-			return false
-	elif not Game.inventory.has_room(item, amount):
-		add_log("Your %s inventory is full." % ItemDef.TAB_NAMES[item.tab()], Color("ff8a99"))
-		return false
-	else:
-		Game.inventory.add(item, amount)
-	add_log("Picked up %s" % _amount_name(item, amount), Palette.MIST)
-	return true
-
-## Uses the item in Use slot `i` (a potion). Returns why it couldn't, or "".
-func use_item(i: int) -> String:
-	var stack := Game.inventory.at(ItemDef.Tab.USE, i)
-	if stack == null or not stack.item is UseDef:
-		return ""
-	if player.fainted():
-		return "You can't do that right now."
-	if player.item_cd > 0:
-		return "You can't use another item yet."
-	var u := stack.item as UseDef
-	Game.health.heal(u.hp_for(Game.max_hp()))
-	Game.mp = mini(Game.max_mp(), Game.mp + u.mp_for(Game.max_mp()))
-	player.item_cd = u.cooldown
-	Game.inventory.take(ItemDef.Tab.USE, i, 1)
-	add_effect(u.use_effect, player.position + Vector2(0, -40), player.face)
-	return ""
-
-func _amount_name(item: ItemDef, amount: int) -> String:
-	return "%d %s" % [amount, item.display_name] if amount > 1 or item.is_currency else item.display_name
-
-func hurt_player(monster: MonsterDef, from_x: float) -> void:
-	if not started or player.inv > 0 or player.fainted():
+## A drop was picked up (by peer `by`) or vanished (by 0).
+func remove_drop(id: int, by: int) -> void:
+	var d: TDDrop = drops.get(id)
+	if d == null:
 		return
-	var dmg := Combat.monster_hit(monster)
-	if dmg == 0:
-		player.inv = 40
-		add_number(player.position + Vector2(0, -70), 0, "miss")
-		return
-	Game.health.damage(dmg)
-	player.inv = 90
-	add_number(player.position + Vector2(0, -70), dmg, "taken")
-	if not player.is_climbing():
-		player.vel = Vector2(-3.5 if player.position.x < from_x else 3.5, -4.5)
-		player.on_ground = false
-	if Game.health.is_dead():
-		player.faint()
-		var lost := Combat.faint_penalty(Game.xp)
-		Game.xp -= lost
-		add_log("You fainted and lost %d EXP." % lost, Color("ff8a99"))
+	drops.erase(id)
+	if by != 0:
+		add_effect(d.item.pickup_effect, d.position + Vector2(0, -16), 1)
+	d.queue_free()
 
 func add_number(pos: Vector2, value: int, kind: String) -> void:
 	var n := TDFloatText.new()
@@ -301,7 +278,10 @@ func add_number(pos: Vector2, value: int, kind: String) -> void:
 	n.kind = kind
 	fx_layer.add_child(n)
 
-func add_effect(def: EffectDef, pos: Vector2, face: int) -> void:
+## Plays an effect. Effects that follow someone (heal, level up) follow `follow`, or you.
+func add_effect(def: EffectDef, pos: Vector2, face: int, follow: Node2D = null) -> void:
 	if def == null:
 		return
-	fx_layer.add_child(TDEffect.create(self, def, pos, face))
+	if def.follow_player and follow == null:
+		follow = player
+	fx_layer.add_child(TDEffect.create(self, def, pos, face, follow))

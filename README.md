@@ -20,6 +20,7 @@ The game is built to grow: monsters, NPCs, items, skills, effects, maps and biom
 
 ## What's in it
 
+- **Online multiplayer.** Play alone, host a game friends can join, or join someone's server. Other players walk, climb and fight on the same map, with their names over their heads. A dedicated server can run with no window (see below).
 - Two maps: **Dawnrise Meadow** and **Ember Hollow**, joined by portals.
 - Platforms, ropes and ladders, and dropping down through platforms.
 - Basic attack and **Dawn Slash**, a skill that costs 8 MP and hits up to 4 monsters twice.
@@ -29,7 +30,7 @@ The game is built to grow: monsters, NPCs, items, skills, effects, maps and biom
 - **Dawnshards** (currency) dropped by monsters, plus potions, monster parts and gear from per-monster drop tables.
 - MapleStory-style stats: STR, DEX, INT and LUK, 5 Ability Points per level, and a damage range worked out from your main stat and weapon.
 - An **inventory** with Equip, Use and Etc tabs, **equipment** in 12 slots that changes your stats, and a **character** window.
-- Saving to `user://save.json`.
+- Characters saved by the server, one file per name in `user://characters/` (a single-player save from before multiplayer is brought in the first time you play).
 - Keyboard and gamepad controls, fullscreen toggle, title and pause menu.
 
 ## Controls
@@ -53,7 +54,15 @@ The game is built to grow: monsters, NPCs, items, skills, effects, maps and biom
 
 1. Install [Godot 4.3](https://godotengine.org/download) (the standard build; C# isn't needed).
 2. In the Project Manager, choose **Import** and pick this folder's `project.godot`.
-3. Press **F5** to play.
+3. Press **F5** to play. On the title screen, type a name and pick **Play** (just you), **Host** (friends can join you on port 7350) or **Join** (type the host's address).
+
+Run a dedicated server, with no window and no player of its own:
+
+```sh
+godot --headless --path . -- --server --port 7350
+```
+
+Players join it with **Join** and the server's address. It keeps their characters in its own `user://characters/` folder and saves every 10 seconds, on every map change and when they leave. Hosting over the internet needs UDP port 7350 forwarded to the host.
 
 Run the gameplay smoke test headless:
 
@@ -61,9 +70,9 @@ Run the gameplay smoke test headless:
 godot --headless --path . res://tests/smoke_test.tscn
 ```
 
-It checks that all content loads and references real maps, monsters and items, then plays a short scripted session (inventory stacking, equipping and stat changes, Ability Points, saving and loading, then walk, jump, talk to an NPC, kill a monster, loot with the loot key, drink a potion, open the windows, use Dawn Slash, climb, take a portal) and exits non-zero on failure.
+It checks that all content loads and references real maps, monsters and items, then plays a short scripted single-player session (inventory stacking, equipping and stat changes, Ability Points, saving and loading, then walk, jump, talk to an NPC, kill a monster, loot with the loot key, drink a potion, change gear, open the windows, use Dawn Slash, climb, take a portal, faint and wake in town). Then it hosts a game and starts a second copy (`tests/bot_client.tscn`) that joins over the network: each must see the other, and the second player's attacks must defeat a monster on the server. It exits non-zero on failure.
 
-Render screenshots of the title, both maps and a Dawn Slash (needs a GPU or software Vulkan, and a display; `xvfb-run` works on a headless Linux box):
+Render screenshots of the title, both maps, a Dawn Slash and other players (needs a GPU or software Vulkan, and a display; `xvfb-run` works on a headless Linux box):
 
 ```sh
 godot --path . --resolution 1600x900 res://tests/screenshot.tscn -- /path/to/output

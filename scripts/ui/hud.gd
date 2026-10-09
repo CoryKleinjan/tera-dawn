@@ -11,7 +11,13 @@ var world: TDWorld
 var overlay: TDOverlay
 var status: TDStatusBar
 var title: Control
-var play_button: Button
+var start_panel: Control
+var pause_panel: Control
+var resume_button: Button
+var name_field: LineEdit
+var address_field: LineEdit
+## Shows why joining didn't work.
+var message: Label
 var ui_theme: Theme
 ## Holds the windows so raising one never lifts it above the tooltip or the title menu.
 var window_layer: Control
@@ -126,16 +132,45 @@ func _build_title() -> void:
 	blurb.add_theme_font_size_override("font_size", 16)
 	inner.add_child(blurb)
 
-	var buttons := HBoxContainer.new()
-	buttons.alignment = BoxContainer.ALIGNMENT_CENTER
-	buttons.add_theme_constant_override("separation", 16)
-	inner.add_child(buttons)
-	play_button = _menu_button("Play")
-	play_button.pressed.connect(_on_play)
-	buttons.add_child(play_button)
+	# before playing: a name, then single player, host, or join an address
+	start_panel = VBoxContainer.new()
+	start_panel.add_theme_constant_override("separation", 10)
+	inner.add_child(start_panel)
+	name_field = _field(Game.player_name, "Your character's name", CharacterStore.MAX_NAME)
+	start_panel.add_child(_row([_label("Name"), name_field]))
+	var play := _menu_button("Play")
+	play.pressed.connect(_on_play)
+	var host := _menu_button("Host")
+	host.tooltip_text = "Play and let friends join you (port %d)" % Net.DEFAULT_PORT
+	host.pressed.connect(_on_host)
+	start_panel.add_child(_row([play, host]))
+	address_field = _field(Game.last_address, "Server address", 64)
+	var join := _menu_button("Join")
+	join.pressed.connect(_on_join)
+	start_panel.add_child(_row([_label("Server"), address_field, join]))
+	message = _label("")
+	message.add_theme_color_override("font_color", Color("ff8a99"))
+	message.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	start_panel.add_child(message)
+
+	# while playing: the pause menu
+	pause_panel = HBoxContainer.new()
+	pause_panel.alignment = BoxContainer.ALIGNMENT_CENTER
+	pause_panel.add_theme_constant_override("separation", 16)
+	resume_button = _menu_button("Resume")
+	resume_button.pressed.connect(func() -> void: title.hide())
+	pause_panel.add_child(resume_button)
+	var leave := _menu_button("Leave")
+	leave.pressed.connect(_on_leave)
+	pause_panel.add_child(leave)
+	pause_panel.hide()
+	inner.add_child(pause_panel)
+
 	var quit := _menu_button("Quit")
-	quit.pressed.connect(func() -> void: get_tree().quit())
-	buttons.add_child(quit)
+	quit.pressed.connect(func() -> void:
+		Net.stop()
+		get_tree().quit())
+	inner.add_child(_row([quit]))
 
 	var keys := Label.new()
 	keys.text = "Arrows move and climb · Space jump · X attack · A Dawn Slash · Z loot · Up talks and enters portals\nI inventory · E equipment · S character · Esc menu · F11 fullscreen\nGamepad: stick · A jump · X attack · Y Dawn Slash · B loot · Back inventory · Start menu"
@@ -143,7 +178,13 @@ func _build_title() -> void:
 	keys.add_theme_font_size_override("font_size", 12)
 	keys.add_theme_color_override("font_color", Color("c9b8d9"))
 	inner.add_child(keys)
-	play_button.call_deferred("grab_focus")
+	name_field.call_deferred("grab_focus")
+	Net.joined.connect(_on_joined)
+	Net.join_failed.connect(func(reason: String) -> void: _show_message(reason))
+	Net.disconnected.connect(func() -> void:
+		world.stop()
+		show_title(false)
+		_show_message("Lost the connection to the server."))
 
 func _menu_button(text: String) -> Button:
 	var b := Button.new()
@@ -154,11 +195,77 @@ func _menu_button(text: String) -> Button:
 	UiSkin.style_button(b)
 	return b
 
+func _field(text: String, hint: String, max_length: int) -> LineEdit:
+	var f := LineEdit.new()
+	f.text = text
+	f.placeholder_text = hint
+	f.max_length = max_length
+	f.custom_minimum_size = Vector2(220, 40)
+	return f
+
+func _label(text: String) -> Label:
+	var l := Label.new()
+	l.text = text
+	l.custom_minimum_size.x = 60
+	l.add_theme_color_override("font_color", Palette.MIST)
+	return l
+
+func _row(children: Array) -> HBoxContainer:
+	var row := HBoxContainer.new()
+	row.alignment = BoxContainer.ALIGNMENT_CENTER
+	row.add_theme_constant_override("separation", 12)
+	for c in children:
+		row.add_child(c)
+	return row
+
+## The name typed in, remembered for next time. "" (with a message) if it's no good.
+func _chosen_name() -> String:
+	var n := CharacterStore.clean_name(name_field.text)
+	if n == "":
+		_show_message("Please pick a name.")
+		return ""
+	Game.player_name = n
+	Game.save_settings()
+	return n
+
 func _on_play() -> void:
+	var n := _chosen_name()
+	if n != "":
+		Net.play_single(n)
+
+func _on_host() -> void:
+	var n := _chosen_name()
+	if n != "":
+		_show_message(Net.host(n))
+
+func _on_join() -> void:
+	var n := _chosen_name()
+	var address := address_field.text.strip_edges()
+	if n == "" or address == "":
+		return
+	Game.last_address = address
+	Game.save_settings()
+	var problem := Net.join(n, address)
+	_show_message(problem if problem != "" else "Connecting to %s…" % address)
+
+func _on_joined() -> void:
+	_show_message("")
 	title.hide()
 	world.start()
 
+func _on_leave() -> void:
+	world.stop()
+	show_title(false)
+
+func _show_message(text: String) -> void:
+	message.text = text
+
+## The title screen (not playing yet) or the pause menu (playing).
 func show_title(paused: bool) -> void:
-	play_button.text = "Resume" if paused else "Play"
+	start_panel.visible = not paused
+	pause_panel.visible = paused
 	title.show()
-	play_button.grab_focus()
+	if paused:
+		resume_button.grab_focus()
+	else:
+		name_field.grab_focus()

@@ -40,12 +40,12 @@ func _draw_body() -> void:
 			Color("3b2208") if on else Palette.MIST, 0, 0 if on else 3, Palette.NIGHT)
 	var dragged := _dragged_index()
 	for i in Inventory.SLOTS:
-		draw_slot(slot_rect(i), Game.inventory.at(tab, i), i == dragged)
+		draw_slot(slot_rect(i), Game.me.inventory.at(tab, i), i == dragged)
 	# Dawnshards and free space
 	var y := size.y - 22
 	draw_texture_rect(UiSkin.tex("icon_dawnshard"), Rect2(PAD, y - 16, 22, 20), false)
-	DrawUtil.text(self, Game.num_font, Vector2(PAD + 28, y), str(Game.shards), 15, Palette.SUN, 1, 4, Palette.NIGHT)
-	DrawUtil.text(self, Game.ui_font, Vector2(size.x - PAD, y), "%d free" % Game.inventory.free_slots(tab), 11, Color(Palette.MIST, 0.7), -1)
+	DrawUtil.text(self, Game.num_font, Vector2(PAD + 28, y), str(Game.me.shards), 15, Palette.SUN, 1, 4, Palette.NIGHT)
+	DrawUtil.text(self, Game.ui_font, Vector2(size.x - PAD, y), "%d free" % Game.me.inventory.free_slots(tab), 11, Color(Palette.MIST, 0.7), -1)
 
 func _dragged_index() -> int:
 	if not get_viewport().gui_is_dragging():
@@ -66,21 +66,21 @@ func _click(at: Vector2, button: int, double: bool) -> void:
 	if i >= 0 and double:
 		use_slot(i)
 
-## What double-clicking a slot does: wear gear, drink a potion.
+## What double-clicking a slot does: wear gear, drink a potion. The server does it and
+## sends back the result (or why not).
 func use_slot(i: int) -> void:
-	var problem := ""
+	if Game.me.inventory.at(tab, i) == null:
+		return
 	match tab:
 		ItemDef.Tab.EQUIP:
-			problem = Game.equip(i)
+			Net.ask(&"req_equip", [i, &""])
 		ItemDef.Tab.USE:
-			problem = hud.world.use_item(i)
-	if problem != "":
-		hud.world.add_log(problem, Color("ff8a99"))
+			Net.ask(&"req_use_item", [i])
 	hud.tooltip.clear(self)
 
 func _hovered(at: Vector2) -> void:
 	var i := slot_at(at)
-	var stack := Game.inventory.at(tab, i) if i >= 0 else null
+	var stack := Game.me.inventory.at(tab, i) if i >= 0 else null
 	var hint := ""
 	match tab:
 		ItemDef.Tab.EQUIP:
@@ -91,9 +91,9 @@ func _hovered(at: Vector2) -> void:
 
 func _get_drag_data(at: Vector2) -> Variant:
 	var i := slot_at(at)
-	if i < 0 or Game.inventory.at(tab, i) == null:
+	if i < 0 or Game.me.inventory.at(tab, i) == null:
 		return null
-	set_drag_preview(drag_preview(Game.inventory.at(tab, i)))
+	set_drag_preview(drag_preview(Game.me.inventory.at(tab, i)))
 	hud.tooltip.clear(self)
 	_pending = {"from": "inventory", "tab": tab, "index": i}
 	return _pending
@@ -108,11 +108,11 @@ func _can_drop_data(at: Vector2, data: Variant) -> bool:
 func _drop_data(at: Vector2, data: Variant) -> void:
 	var i := slot_at(at)
 	if data["from"] == "inventory":
-		Game.inventory.move(tab, data["index"], i)
+		# move it here right away so it doesn't jump back while the server answers
+		Game.me.inventory.move(tab, data["index"], i)
+		Net.ask(&"req_move_item", [tab, data["index"], i])
 	else:
-		var problem := Game.unequip(data["place"], i)
-		if problem != "":
-			hud.world.add_log(problem, Color("ff8a99"))
+		Net.ask(&"req_unequip", [data["place"], i])
 
 func _notification(what: int) -> void:
 	# dragged out of every window: drop it on the ground
@@ -123,6 +123,4 @@ func _notification(what: int) -> void:
 	if d != null and not get_viewport().gui_is_drag_successful() and not mouse_over_window():
 		var world := hud.world
 		if world.started and not world.player.fainted():
-			var stack := Game.inventory.take(d["tab"], d["index"])
-			if stack:
-				world.drop_from_player(stack)
+			Net.ask(&"req_drop_item", [d["tab"], d["index"]])

@@ -47,6 +47,8 @@ func _draw_minimap(mm: Rect2) -> void:
 		draw_rect(Rect2(inner.position.x + p.x * sx - 2, inner.position.y + world.platforms[p.platform].y * sy - 6, 4, 6), Color("aa8cff"))
 	for n in world.npcs():
 		draw_circle(inner.position + Vector2(n.position.x * sx, n.position.y * sy - 3), 2, Color("8cf0a0"))
+	for a in world.avatars.values():
+		draw_circle(inner.position + Vector2(a.position.x * sx, a.position.y * sy - 3), 2.5, Color("8cc6ff"))
 	var pp := world.player.position
 	draw_circle(inner.position + Vector2(pp.x * sx, pp.y * sy - 3), 3, Palette.SUN)
 
@@ -60,9 +62,12 @@ func _draw_world_text() -> void:
 	for n in world.npcs():
 		if st.in_view(n.position, 0.1):
 			n.draw_tag(self, st.screen(n.position, 0.1), st.screen(n.position + Vector2(0, -n.rig.body.get_item_rect().size.y * n.rig.body.pixel_size * TDStage.PX), 0.1))
+	for a in world.avatars.values():
+		if st.in_view(a.position, TDStage.Z_OTHER_PLAYER):
+			a.draw_tag(self, st.screen(a.position, TDStage.Z_OTHER_PLAYER))
 	var p := world.player
-	if not p.fainted():
-		UiSkin.draw_name_tag(self, st.screen(p.position, TDPlayer.Z) + Vector2(0, 4), "Dawnling", Palette.SUN)
+	if world.started and not p.fainted():
+		UiSkin.draw_name_tag(self, st.screen(p.position, TDPlayer.Z) + Vector2(0, 4), Game.me.name, Palette.SUN)
 	for f in world.fx_layer.get_children():
 		if f is TDFloatText:
 			(f as TDFloatText).draw_at(self, st.screen(f.position, 0.6))

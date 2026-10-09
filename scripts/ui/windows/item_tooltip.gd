@@ -39,7 +39,7 @@ func _lines() -> Array:
 		out.append(["Equip · %s" % e.slot_name(), Color("c9b8d9"), 11])
 		var reqs := e.requirements()
 		for key in reqs:
-			var have := Game.level if key == &"level" else Game.stats.value(key)
+			var have := Game.me.level if key == &"level" else Game.me.stats.value(key)
 			var label: String = "Level" if key == &"level" else StatBlock.LABELS[key]
 			out.append(["Requires %s %d" % [label, reqs[key]], Palette.MIST if have >= reqs[key] else Color("ff6b7d"), 12])
 		var base := e.stats if e.stats else StatBlock.new()
@@ -57,8 +57,8 @@ func _lines() -> Array:
 	elif item is UseDef:
 		var u := item as UseDef
 		out.append(["Use", Color("c9b8d9"), 11])
-		var hp := u.hp_for(Game.max_hp())
-		var mp := u.mp_for(Game.max_mp())
+		var hp := u.hp_for(Game.me.max_hp())
+		var mp := u.mp_for(Game.me.max_mp())
 		if hp > 0:
 			out.append(["Restores %d HP" % hp, Palette.HP, 12])
 		if mp > 0:
@@ -74,7 +74,7 @@ func _lines() -> Array:
 
 ## How wearing this would change each stat, against what's worn where it would go.
 func _comparison(e: EquipDef) -> Array:
-	var worn := Game.equipment.at(Game.equipment.place_for(e))
+	var worn := Game.me.equipment.at(Game.me.equipment.place_for(e))
 	if worn == null:
 		return [["Nothing worn in this slot", Color("8cf0a6"), 11]]
 	var out := [["vs. worn %s:" % worn.item.display_name, Color("c9b8d9"), 11]]

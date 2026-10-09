@@ -1,12 +1,15 @@
 class_name TDPlayer
 extends Node2D
-## The player character. position is the point between the feet, in game pixels.
-## Movement and climbing are hand-tuned platformer physics; attacks are SkillDefs
-## (see Game.SKILL_BINDINGS) resolved by the world.
+## Your own character. position is the point between the feet, in game pixels.
+## Movement and climbing are hand-tuned platformer physics that run right here, so they
+## feel instant; where you are goes to the server a few times a second. Attacks, portals,
+## looting and potions are requests the server answers (see Net), and attacks are
+## SkillDefs (see Game.SKILL_BINDINGS).
 
 const HERO_FRAMES := preload("res://assets/animations/hero.tres")
 const Z := TDStage.Z_PLAYER
-const FAINT_TICKS := 150
+## Ticks between telling the server where you are (60 / 3 = 20 a second).
+const REPORT_EVERY := 3
 
 var world: TDWorld
 var vel := Vector2.ZERO
@@ -22,12 +25,12 @@ var drop_t := 0       # ticks to fall through drop_from
 var action_t := 0     # ticks left in the current attack pose
 var action_anim := &"attack"
 var cooldown := 0     # ticks before the next attack
-var inv := 0          # invincibility ticks after being hit
-var faint_t := 0      # ticks left lying fainted
+var inv := 0          # invincibility (blinking) ticks after being hit
+var down := false     # fainted, until the server sends you back to town
 var land_t := 0       # ticks of the landing pose
 var cheer_t := 0      # ticks of the level-up pose
-var item_cd := 0      # ticks before another potion can be used
-var loot_cd := 0      # ticks before the loot key picks up the next item
+var loot_cd := 0      # ticks before the loot key asks for the next item
+var _reported := &""  # the animation the server last heard about
 var _swing := false   # restart the attack animation on the next frame
 
 var rig: SpriteRig
@@ -42,17 +45,32 @@ func place(x: float, y: float) -> void:
 	vel = Vector2.ZERO
 	climb = null
 	on_ground = true
+	down = false
 	platform = world.platforms[0]
+	_report()
 
 func is_climbing() -> bool:
 	return climb != null
 
 func fainted() -> bool:
-	return faint_t > 0
+	return down
 
+## The server says you fainted. You lie there until it sends you back to town.
 func faint() -> void:
-	faint_t = FAINT_TICKS
+	down = true
 	climb = null
+
+## The server says a monster hit you: blink, and get knocked away from it.
+func knock_back(from_x: float) -> void:
+	inv = 90
+	if not is_climbing():
+		vel = Vector2(-3.5 if position.x < from_x else 3.5, -4.5)
+		on_ground = false
+
+## The server didn't accept where you said you were, and puts you back.
+func correct(at: Vector2) -> void:
+	position = at
+	vel = Vector2.ZERO
 
 func level_up() -> void:
 	cheer_t = 50
@@ -60,38 +78,29 @@ func level_up() -> void:
 # ---------- per tick ----------
 
 func step() -> void:
-	if faint_t > 0:
-		faint_t -= 1
-		if faint_t == 0:
-			_revive()
+	if down:
 		return
-	for t in ["inv", "action_t", "cooldown", "grab_cd", "drop_t", "land_t", "cheer_t", "item_cd", "loot_cd"]:
+	for t in ["inv", "action_t", "cooldown", "grab_cd", "drop_t", "land_t", "cheer_t", "loot_cd"]:
 		if get(t) > 0:
 			set(t, get(t) - 1)
-	if world.tick % 120 == 0:
-		Game.health.heal(2 + Game.level / 3)
-		Game.mp = mini(Game.max_mp(), Game.mp + 2 + Game.level / 4)
-
 	_attacks()
 	# hold the loot key to pick things up one after another
 	if Input.is_action_pressed("loot") and loot_cd == 0 and not is_climbing():
-		if world.loot_near(position):
-			loot_cd = 8
-	if _interact():
-		return
-	if is_climbing():
-		_climb()
-		return
-	if _grab_climbable():
-		return
-	_move()
+		_report()
+		Net.ask(&"req_loot")
+		loot_cd = 8
+	if not _interact():
+		if is_climbing():
+			_climb()
+		elif not _grab_climbable():
+			_move()
+	if world.tick % REPORT_EVERY == 0 or _animation() != _reported:
+		_report()
 
-func _revive() -> void:
-	Game.health.reset(Game.max_hp())
-	Game.health.set_hp(ceili(Game.max_hp() / 2.0))
-	Game.mp = ceili(Game.max_mp() / 2.0)
-	inv = 120
-	world.load_map(Game.START_MAP)
+## Tells the server where you are and what you're doing.
+func _report() -> void:
+	_reported = _animation()
+	Net.ask(&"req_move", [position, face, _reported, is_climbing()])
 
 func _attacks() -> void:
 	if is_climbing() or cooldown > 0:
@@ -101,10 +110,11 @@ func _attacks() -> void:
 			_use(Content.skill(Game.SKILL_BINDINGS[action]))
 			return
 
+## Swings right away and asks the server to work out what it hits.
 func _use(skill: SkillDef) -> void:
 	if skill == null:
 		return
-	if not Game.spend_mp(skill.mp_cost):
+	if Game.me.mp < skill.mp_cost:
 		world.add_log("Not enough MP for %s." % skill.display_name, Color("8cc6ff"))
 		return
 	action_t = skill.action_ticks
@@ -112,16 +122,16 @@ func _use(skill: SkillDef) -> void:
 	cooldown = skill.cooldown
 	cheer_t = 0
 	_swing = true
-	world.use_skill(skill)
+	Net.ask(&"req_skill", [skill.id, position, face])
 	world.add_effect(skill.effect, position + Vector2(0, -40), face)
 
 ## Up on the ground: enter a portal, or talk to the NPC in front of you.
 func _interact() -> bool:
 	if not (Input.is_action_just_pressed("move_up") and on_ground):
 		return false
-	var portal := world.portal_at(position)
-	if portal:
-		world.load_map(portal.target_map, portal.target_x)
+	if world.layout.portal_at(position):
+		_report()
+		Net.ask(&"req_portal")
 		return true
 	var npc := world.npc_near(position)
 	if npc:
@@ -162,7 +172,7 @@ func _leave_climb() -> void:
 func _grab_climbable() -> bool:
 	if grab_cd > 0:
 		return false
-	var c := world.climbable_near(position)
+	var c := world.layout.climbable_near(position)
 	if c == null:
 		return false
 	if Input.is_action_pressed("move_up") and position.y > c.top + 1:
@@ -182,7 +192,7 @@ func _move() -> void:
 	var right := Input.is_action_pressed("move_right")
 	var rooted := action_t > 0 and on_ground
 	var acc := 0.8 if on_ground else 0.28
-	var max_speed := 3.7 * CharacterStats.speed_multiplier(Game.stats)
+	var max_speed := 3.7 * CharacterStats.speed_multiplier(Game.me.stats)
 	if left and not right and not rooted:
 		vel.x = maxf(-max_speed, vel.x - acc)
 		face = -1
@@ -200,7 +210,7 @@ func _move() -> void:
 			drop_t = 16
 			vel.y = 1
 		else:
-			vel.y = -9.8 * CharacterStats.jump_multiplier(Game.stats)
+			vel.y = -9.8 * CharacterStats.jump_multiplier(Game.me.stats)
 		on_ground = false
 
 	vel.y = minf(vel.y + 0.5, 12.0)
@@ -244,7 +254,7 @@ func _animation() -> StringName:
 		return climb.style.climb_animation if moving and climb.style else &"climb_idle"
 	if action_t > 0:
 		return action_anim
-	if inv > 70: # just got hit (the world sets inv = 90)
+	if inv > 70: # just got hit (knock_back sets inv = 90)
 		return &"hurt"
 	if not on_ground:
 		return &"jump" if vel.y < 0 else &"fall"
@@ -263,8 +273,4 @@ func _over_ground() -> bool:
 
 ## The top of whatever is under the feet (for the shadow).
 func _ground_y() -> float:
-	var best := float(world.map.ground_y)
-	for pl in world.platforms:
-		if pl.contains_x(position.x) and pl.y >= position.y - 1.0 and pl.y < best:
-			best = pl.y
-	return best
+	return world.layout.ground_below(position)
