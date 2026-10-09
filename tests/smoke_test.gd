@@ -2,11 +2,19 @@ extends Node
 ## Headless smoke test: godot --headless --path . res://tests/smoke_test.tscn
 ## Plays a short scripted session and checks the core loop works.
 
-const SAVE_DIR := "user://smoke_test_characters"
+## The first port the multiplayer check tries. Each run starts somewhere after it (by its
+## process id) and moves on past ports in use, so smoke tests running side by side on one
+## machine neither fail to host nor join each other's games.
 const TEST_PORT := 7391
+const TEST_PORTS := 400
 
 var world: TDWorld
 var failures := 0
+## Test-only saves, one folder per run: every checkout of the project shares user://, and
+## smoke tests may run side by side.
+var save_dir := "user://smoke_test_characters_%d" % OS.get_process_id()
+## Where the bot client writes what it saw.
+var bot_result := "user://smoke_test_bot_%d.json" % OS.get_process_id()
 
 func _ready() -> void:
 	_run.call_deferred()
@@ -28,6 +36,39 @@ func _hold(action: String, n: int) -> void:
 
 func _tap(action: String) -> void:
 	await _hold(action, 2)
+
+## Waits until `cond` holds, for at most `max_ticks` physics ticks, and says whether it
+## did. Things the server or the windows do a tick or a frame later are waited for this
+## way instead of for a fixed number of ticks; the check that follows reports a timeout.
+func _until(cond: Callable, max_ticks: int) -> bool:
+	for i in max_ticks:
+		if cond.call():
+			return true
+		await _ticks(1)
+	return cond.call()
+
+## Takes everything off a map's ground, so drops left behind by an earlier part of the
+## test can't be picked up by (or instead of) what a later part checks.
+func _clear_drops(map: MapInstance) -> void:
+	for d in map.drops.values():
+		map._remove_drop(d, 0)
+
+## Takes every other living monster on `map` out of play until _release_mobs, so none
+## wanders into an attack meant for another or bumps the player. Returns them.
+func _hold_mobs(map: MapInstance, keep: Array) -> Array[SimMob]:
+	var held: Array[SimMob] = []
+	for m in map.mobs:
+		if not m.dead and m.parent == null and not keep.has(m):
+			m.dead = true
+			m.death_t = 0
+			m.respawn = 1 << 30
+			held.append(m)
+	return held
+
+## Brings monsters taken out by _hold_mobs back on the next tick, as if they respawned.
+func _release_mobs(held: Array[SimMob]) -> void:
+	for m in held:
+		m.respawn = 1
 
 func _check_content() -> void:
 	_check(Content.monsters.size() >= 9, "monster definitions load (%d)" % Content.monsters.size())
@@ -212,11 +253,13 @@ func _press(action: String) -> void:
 	e.action = action
 	e.pressed = true
 	Input.parse_input_event(e)
+	Input.flush_buffered_events()
 	await _ticks(1)
 	e = InputEventAction.new()
 	e.action = action
 	e.pressed = false
 	Input.parse_input_event(e)
+	Input.flush_buffered_events()
 	await _ticks(1)
 
 func _first_filled(c: Character, tab: int) -> int:
@@ -264,7 +307,7 @@ func _check_character() -> void:
 
 	# saving and loading keeps the bag and the gear
 	c.inventory.add(tusk, 3)
-	var store := CharacterStore.new(SAVE_DIR)
+	var store := CharacterStore.new(save_dir)
 	store.save(c)
 	var back := store.load_character("Tester")
 	_check(back != null and JSON.stringify(back.inventory.to_dict()) == JSON.stringify(c.inventory.to_dict())
@@ -334,9 +377,9 @@ func _check_jobs() -> void:
 
 ## Empties the test's character folder, so every run starts from new characters.
 func _clear_saves() -> void:
-	DirAccess.make_dir_recursive_absolute(SAVE_DIR)
-	for f in DirAccess.get_files_at(SAVE_DIR):
-		DirAccess.remove_absolute(SAVE_DIR.path_join(f))
+	DirAccess.make_dir_recursive_absolute(save_dir)
+	for f in DirAccess.get_files_at(save_dir):
+		DirAccess.remove_absolute(save_dir.path_join(f))
 
 ## The server's view of this game's own player.
 func _me() -> SimPlayer:
@@ -350,13 +393,14 @@ func _teleport(at: Vector2) -> void:
 	_me().position = at
 
 func _run() -> void:
+	seed(12345) # monsters wander, drops and hits roll: the same way every run
 	_check_content()
 	_check_balance()
 	_clear_saves()
 	_check_character()
 	# Play single player against a server inside this game, with test-only saves.
 	_clear_saves()
-	Net.save_dir = SAVE_DIR
+	Net.save_dir = save_dir
 	Net.import_legacy_save = false
 	world = load("res://scenes/world.tscn").instantiate() as TDWorld
 	add_child(world)
@@ -454,7 +498,7 @@ func _run() -> void:
 	await _ticks(1)
 	_check(Game.me.shards == 0 and Game.me.inventory.count_of(Content.item(&"elixir")) == 0, "you can't buy what you can't afford")
 	_teleport(Vector2(mira.position.x + 600, 620))
-	await _ticks(2)
+	await _until(func() -> bool: return not shop.visible, 30)
 	_check(not shop.visible, "walking away closes the shop")
 	Net.ask(&"req_buy", [mira.def.id, 0, 1])
 	await _ticks(1)
@@ -467,6 +511,7 @@ func _run() -> void:
 		if m.def.id == &"dewling" and m.plat == meadow.layout.platforms[0]:
 			mob = m
 			break
+	var others := _hold_mobs(meadow, [mob])
 	_teleport(Vector2(mob.position.x - 40, 620))
 	p.face = 1
 	var xp_before: int = Game.me.xp + Game.me.level * 1000
@@ -478,6 +523,7 @@ func _run() -> void:
 		if mob.dead:
 			break
 	_check(mob.dead, "basic attacks kill a Dewling")
+	_release_mobs(others)
 	await _ticks(4)
 	_check(world.mobs()[mob.index].dead, "the game shows the Dewling defeated")
 	_check(Game.me.xp + Game.me.level * 1000 > xp_before, "killing a monster gives EXP")
@@ -544,6 +590,7 @@ func _run() -> void:
 	move.position = get_viewport().get_final_transform() * (inv.global_position + inv.slot_rect(slot).get_center())
 	move.global_position = move.position
 	Input.parse_input_event(move)
+	Input.flush_buffered_events()
 	await _ticks(2)
 	var tip := world.hud.tooltip
 	var lines := tip._lines() if tip.stack else []
@@ -572,6 +619,7 @@ func _run() -> void:
 	await _check_fields()
 	await _check_social()
 	await _check_keepsakes()
+	_me().inv = 100000 # a monster's touch would knock the player off the rope or the portal
 
 	# Dawn Slash costs MP and hits several monsters.
 	var mp_before := Game.me.mp
@@ -594,7 +642,7 @@ func _run() -> void:
 	_teleport(Vector2(2530, 620))
 	await _ticks(3)
 	await _tap("move_up")
-	await _ticks(3)
+	await _until(func() -> bool: return world.map.id == &"hollow", 30)
 	_check(world.map.id == &"hollow" and _me().map.def.id == &"hollow", "the portal leads to Ember Hollow")
 	var boss := false
 	for m in world.mobs():
@@ -615,10 +663,12 @@ func _run() -> void:
 
 	world.hud._on_leave()
 	_check(Net.mode == Net.Mode.NONE and world.hud.title.visible, "Leave goes back to the title screen")
-	_check(CharacterStore.new(SAVE_DIR).load_character("Tester") != null, "leaving saves the character")
+	_check(CharacterStore.new(save_dir).load_character("Tester") != null, "leaving saves the character")
 
 	await _check_multiplayer()
 
+	_clear_saves()
+	DirAccess.remove_absolute(save_dir)
 	print("FAILURES: %d" % failures)
 	get_tree().quit(1 if failures > 0 else 0)
 
@@ -785,6 +835,8 @@ func _check_ranged() -> void:
 	_me().dirty_character = true
 	_teleport(Vector2(1380, 620))
 	var m: SimMob = meadow.mobs.filter(func(x: SimMob) -> bool: return x.plat == meadow.layout.platforms[0] and not x.dead)[0]
+	# only this monster may be in the arrow's way
+	var others := _hold_mobs(meadow, [m])
 	m.position.x = 1380 + 200
 	world.player.face = 1
 	_me().face = 1
@@ -794,11 +846,22 @@ func _check_ranged() -> void:
 	_check(Game.me.basic_attack().id == &"bow_shot", "a bow turns the attack key into a shot")
 	var hp := m.health.hp
 	m.position.x = 1380 + 200
+	m.walk_t = 1000
+	m.dir = 0
+	# the game's view of it has to have glided over too, or the arrow lands at once
+	var view: TDMob = world.mobs()[m.index]
+	await _until(func() -> bool: return absf(view.position.x - m.position.x) < 4.0, 120)
+	var flying := []
+	var spotted := func(c: Node) -> void:
+		if c is TDProjectile:
+			flying.append(c)
+	world.fx_layer.child_entered_tree.connect(spotted)
 	await _tap("attack")
-	var flying := world.fx_layer.get_children().filter(func(c: Node) -> bool: return c is TDProjectile)
+	world.fx_layer.child_entered_tree.disconnect(spotted)
 	_check(not flying.is_empty(), "the arrow flies")
-	await _ticks(20)
+	await _until(func() -> bool: return m.health.hp < hp or m.dead, 20)
 	_check(m.health.hp < hp or m.dead, "it hits a monster 200 pixels away")
+	_release_mobs(others)
 	_check(Game.me.inventory.count_of(arrows) == 49, "and uses one arrow")
 	# no arrows, no shot
 	ch.inventory.remove(arrows, 49)
@@ -848,6 +911,10 @@ func _check_travel() -> void:
 	await _press("worldmap")
 	# Hobb's wagon to Ember Hollow costs 150 Dawnshards.
 	var hobb: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"wagon_driver")[0]
+	# Dawnshards left on the ground from earlier kills would change the purse
+	for id in [&"meadow", &"hollow"]:
+		if Net.server.maps.has(id):
+			_clear_drops(Net.server.maps[id])
 	ch.shards = 1000
 	_me().dirty_vitals = true
 	_me().inv = 100000
@@ -860,7 +927,7 @@ func _check_travel() -> void:
 	talk.choose(labels.find("Travel"))
 	_check(str(talk.options[0][0]).begins_with("Wagon to Ember Hollow"), "the trip lists where it goes and the fare")
 	talk.choose(0)
-	await _ticks(5)
+	await _until(func() -> bool: return world.map.id == &"hollow" and Game.me.shards == 850, 30)
 	_check(world.map.id == &"hollow" and Game.me.shards == 850, "the wagon takes you there for 150 Dawnshards")
 	# A Return Scroll brings you back to town.
 	var scroll: ItemDef = Content.item(&"return_scroll")
@@ -956,11 +1023,14 @@ func _check_fields() -> void:
 	Net.server._enter_map(_me(), &"sunny_slope", 300)
 	await _ticks(3)
 	var slope: MapInstance = Net.server.maps[&"sunny_slope"]
-	var hopper: SimMob = slope.mobs.filter(func(m: SimMob) -> bool: return m.def.jumps)[0]
+	var hopper: SimMob = slope.mobs.filter(func(m: SimMob) -> bool: return m.def.jumps and not m.dead)[0]
 	var hopped := false
-	for i in 400:
+	# a hop starts at random (1 in 80 a tick): give it plenty of ticks
+	for i in 4000:
 		hopper.step()
 		hopped = hopped or hopper.hop > 0.0
+		if hopped:
+			break
 	_check(hopped and hopper.body_position().y <= hopper.plat.y, "a Tide Dewling hops")
 	# an Acorn Sentry never moves and shoots anyone near it; the shot lands where they stood
 	Net.server._enter_map(_me(), &"thornwood", 300)
@@ -968,6 +1038,8 @@ func _check_fields() -> void:
 	var wood: MapInstance = Net.server.maps[&"thornwood"]
 	var sentry: SimMob = wood.mobs.filter(func(m: SimMob) -> bool: return m.def.id == &"acorn_sentry" and not m.dead)[0]
 	var x0 := sentry.position.x
+	# only the sentry: another monster's touch would also leave the player blinking
+	var others := _hold_mobs(wood, [sentry])
 	_teleport(Vector2(sentry.position.x + 150, sentry.plat.y))
 	ch.health.reset(ch.max_hp())
 	var hp: int = ch.health.hp
@@ -986,6 +1058,7 @@ func _check_fields() -> void:
 	_check(shots > 0, "the client sees the sentry's shot fly")
 	_check(landed, "the shot hits a player who stays put")
 	_check(sentry.position.x == x0, "the sentry never moves")
+	_release_mobs(others)
 	_me().inv = 100000
 	# upgrade scrolls: always spend a slot, add their stats when they work
 	var sword: EquipDef = Content.item(&"bronze_sword")
@@ -1128,7 +1201,7 @@ func _check_social() -> void:
 	social.on_answer(ally.peer, id, true)
 	await _ticks(5)
 	_check(ally.character.guild == "Dawnbreakers" and world.avatars[ally.peer].guild == "Dawnbreakers", "guild members show the guild under their name")
-	var reloaded := TDSocial.new(Net.server, SAVE_DIR)
+	var reloaded := TDSocial.new(Net.server, save_dir)
 	_check(reloaded.guild_of("Ally").get("name") == "Dawnbreakers", "guilds are saved")
 	Net.ask(&"req_chat", ["/g hi guild"])
 	await _ticks(2)
@@ -1204,9 +1277,12 @@ func _check_keepsakes() -> void:
 	_check(ch.pet == &"pet_puffpaw" and Game.me.pet == &"pet_puffpaw" and world.player.companion.pet == pup, "double-clicking a pet brings it out")
 	var wing := Content.item(&"petal_wing")
 	var wings := ch.inventory.count_of(wing)
+	# nothing else on the ground for the pet to fetch first
+	_clear_drops(map)
+	await _until(func() -> bool: return absf(me.position.x - world.player.position.x) < 1.0, 30)
 	var x := me.position.x + 110.0
 	map.spawn_drop(wing, 1, null, DropFlight.create(Vector2(x, 600), 620.0, x), me.peer)
-	await _ticks(SimDrop.SETTLE_TICKS + pup.loot_every * 2 + 4)
+	await _until(func() -> bool: return ch.inventory.count_of(wing) == wings + 1, SimDrop.SETTLE_TICKS + pup.loot_every * 2 + 4)
 	_check(ch.inventory.count_of(wing) == wings + 1, "a pet picks up items out of your reach")
 	ch.pet_full = 40
 	Net.ask(&"req_use_item", [Game.me.inventory.find(Content.item(&"pet_snack"))])
@@ -1251,13 +1327,22 @@ func server_forfeit_check(ch: Character) -> void:
 ## Hosts a game and has a second copy of the game (tests/bot_client.tscn) join it over
 ## the network: each must see the other, and the bot's attacks must count on the server.
 func _check_multiplayer() -> void:
-	_check(Net.host("Host", TEST_PORT) == "", "hosting opens port %d" % TEST_PORT)
+	var port := TEST_PORT + OS.get_process_id() % TEST_PORTS
+	var problem := Net.host("Host", port)
+	for i in 20:
+		if problem == "":
+			break
+		port = TEST_PORT + (port - TEST_PORT + 1) % TEST_PORTS
+		problem = Net.host("Host", port)
+	_check(problem == "", "hosting opens a port (%d)%s" % [port, "" if problem == "" else ": " + problem])
+	if problem != "":
+		return
 	await _ticks(2)
 	_check(world.started and Net.mode == Net.Mode.HOST, "the host plays in their own game")
 	_me().inv = 100000
-	DirAccess.remove_absolute(BotClient.RESULT_PATH)
+	DirAccess.remove_absolute(bot_result)
 	var bot := OS.create_process(OS.get_executable_path(),
-		["--headless", "--path", ProjectSettings.globalize_path("res://"), "res://tests/bot_client.tscn", "--", str(TEST_PORT)])
+		["--headless", "--path", ProjectSettings.globalize_path("res://"), "res://tests/bot_client.tscn", "--", str(port), bot_result])
 	_check(bot > 0, "a second game starts to join")
 	var bot_peer := 0
 	for i in 1200:
@@ -1294,8 +1379,10 @@ func _check_multiplayer() -> void:
 		await _ticks(1)
 		if not OS.is_process_running(bot):
 			break
-	var f := FileAccess.open(BotClient.RESULT_PATH, FileAccess.READ)
+	var f := FileAccess.open(bot_result, FileAccess.READ)
 	var result: Variant = JSON.parse_string(f.get_as_text()) if f else null
+	f = null
+	DirAccess.remove_absolute(bot_result)
 	_check(result is Dictionary and result.get("saw_host", false), "the other player sees the host %s" % [result])
 	_check(result is Dictionary and result.get("saw_mobs", false) and result.get("saw_hits", false), "the other player sees the monsters and their own hits")
 	for i in 120:
