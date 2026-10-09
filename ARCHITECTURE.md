@@ -192,6 +192,18 @@ server checks the skill is known and pays its MP (`TDServer.on_skill`), then wor
 it hits (`MapInstance.use_skill`) or starts the buff (`Character.add_buff`, counted down
 in `SimPlayer.step`). Passives and buffs feed into the character's stats in `recalc`.
 
+Ranged and magic skills:
+- A `projectile` (a **ProjectileDef** in `data/projectiles/`: texture, speed, spin, light) makes
+  the skill a shot. The server still decides the hit at once; clients fly one projectile per
+  hit (`TDProjectile`) and pop the damage number when it lands, holding the monster's death
+  until then.
+- `uses_ammo` spends one of the weapon's ammo per hit. A weapon (`EquipDef`) names its
+  `weapon_kind` (bow, claw, gun, wand, sword, knuckle), the `ammo` kind it fires, and an
+  optional `basic_attack` skill that replaces the plain swing (a bow's Shoot). Ammo is an
+  **AmmoDef** (Use tab) whose `attack` adds to Weapon Attack while fired.
+- `weapons` limits a skill to weapon kinds; `magic` uses Magic Attack (INT included) through
+  `CharacterStats.magic_range` instead of the weapon.
+
 Damage is worked out in `scripts/world/combat.gd`, so balance changes stay in one place.
 
 ## Items, equipment and stats

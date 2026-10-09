@@ -223,18 +223,37 @@ func show_skill(peer: int, skill: SkillDef, at: Vector2, face: int, lines: Array
 		(who as TDAvatar).play_skill(skill)
 		add_effect(skill.effect, at + Vector2(0, -40), face)
 	var views := mobs()
+	var from := at + Vector2(face * 20, -42)
+	if skill.projectile and lines.is_empty():
+		# nothing in range: it flies off and fades
+		for i in skill.hits:
+			fx_layer.add_child(TDProjectile.create(self, skill.projectile, from, from + Vector2(face * skill.projectile.max_range, 0), i * 7, null, Callable()))
 	for line in lines:
 		var m: TDMob = views[line[0]] if line[0] < views.size() else null
 		if m == null:
 			continue
-		var mid := m.body_position() + Vector2(0, -m.def.size.y / 2.0)
 		var hits: Array = line[1]
+		if skill.projectile == null:
+			_show_hits(skill, m, hits, face)
+			continue
+		# each hit lands with its own projectile
 		for i in hits.size():
-			var kind: String = hits[i][1]
-			add_number(m.body_position() + Vector2(0, -m.def.size.y - 10 - i * 30), hits[i][0], kind)
-			if kind == "crit":
-				add_effect(Content.effect(&"critical"), mid, face)
-		add_effect(skill.hit_effect, mid, face)
+			m.incoming += 1
+			var land := func() -> void:
+				m.incoming -= 1
+				_show_hits(skill, m, [hits[i]], face, i)
+			fx_layer.add_child(TDProjectile.create(self, skill.projectile, from, Vector2.ZERO, i * 7, m, land))
+
+## Damage numbers and hit effects for `hits` on monster `m` (`first` stacks numbers above
+## earlier ones).
+func _show_hits(skill: SkillDef, m: TDMob, hits: Array, face: int, first := 0) -> void:
+	var mid := m.body_position() + Vector2(0, -m.def.size.y / 2.0)
+	for i in hits.size():
+		var kind: String = hits[i][1]
+		add_number(m.body_position() + Vector2(0, -m.def.size.y - 10 - (first + i) * 30), hits[i][0], kind)
+		if kind == "crit":
+			add_effect(Content.effect(&"critical"), mid, face)
+	add_effect(skill.hit_effect, mid, face)
 
 func show_mob_death(index: int) -> void:
 	var views := mobs()

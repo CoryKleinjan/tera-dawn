@@ -180,6 +180,30 @@ func _run() -> void:
 		await _frames(3)
 		await _shot("skills")
 		world.hud.toggle_window("skills")
+	if only == "" or only == "ranged":
+		# An Archer's Double Shot in flight, and a Magician's Energy Bolt from a second player.
+		ch.job = Content.job(&"archer")
+		ch.equipment.take(&"weapon")
+		ch.equipment.put(&"weapon", ItemStack.exact(Content.item(&"willow_bow")))
+		ch.inventory.add(Content.item(&"feather_arrow"), 300)
+		ch.skills[&"double_shot"] = 5
+		ch.set_quickslot(0, &"skill", &"double_shot")
+		ch.mp = 200
+		ch.recalc()
+		_me().dirty_character = true
+		_teleport(world, Vector2(1300, 620))
+		p.face = 1
+		var ground: Array = Net.server.maps[&"meadow"].mobs.filter(func(m: SimMob) -> bool: return m.plat == Net.server.maps[&"meadow"].layout.platforms[0])
+		for i in mini(2, ground.size()):
+			_place_mob(ground[i], 1560 + i * 60)
+		await _physics(30)
+		_me().cooldown = 0
+		p.cooldown = 0
+		Input.action_press("quick_1")
+		await _physics(2)
+		Input.action_release("quick_1")
+		await _physics(5)
+		await _shot("ranged")
 	if only == "" or only == "players":
 		# Two other players nearby. They're on the server but have no game connected.
 		_teleport(world, Vector2(1300, 620))

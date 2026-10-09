@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="SkillDef" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
+[ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="2_stat_block"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/nimble_body.png" id="3_nimble_body"]
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("2_stat_block")
+accuracy = 1
+avoid = 1
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("2_stat_block")
+accuracy = 2
+avoid = 2
+
+[resource]
+script = ExtResource("1_skill_def")
+id = &"nimble_body"
+display_name = "Nimble Body"
+job = &"thief"
+max_level = 20
+kind = 2
+description = "Light on your feet, quick with your hands: more Accuracy and Avoidability."
+stats = SubResource("Resource_1")
+stats_per_level = SubResource("Resource_2")
+icon = ExtResource("3_nimble_body")
+animation = &"attack"

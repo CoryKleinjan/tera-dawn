@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="SkillDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
+[ext_resource type="Resource" path="res://data/projectiles/arcane_claw.tres" id="2_arcane_claw"]
+[ext_resource type="Resource" path="res://data/effects/hit.tres" id="3_hit"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/arcane_claw.png" id="4_arcane_claw"]
+
+[resource]
+script = ExtResource("1_skill_def")
+id = &"arcane_claw"
+display_name = "Arcane Claw"
+job = &"mage"
+max_level = 20
+description = "Two raking claws of magic that tear at one monster."
+mp_cost = 10
+mp_cost_per_level = 0.5
+cooldown = 30
+action_ticks = 20
+reach = 300.0
+max_targets = 1
+hits = 2
+damage_multiplier = 0.85
+damage_per_level = 0.035
+requires = &"energy_bolt"
+requires_level = 1
+projectile = ExtResource("2_arcane_claw")
+kind = 0
+magic = true
+height = 100.0
+hit_effect = ExtResource("3_hit")
+animation = &"slash"
+icon = ExtResource("4_arcane_claw")

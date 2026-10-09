@@ -22,3 +22,4 @@ sell_price = 10
 slot = 0
 stats = SubResource("stats")
 variance = 1
+weapon_kind = &"sword"

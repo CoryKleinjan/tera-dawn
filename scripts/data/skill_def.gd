@@ -46,6 +46,14 @@ const KIND_NAMES := ["Attack", "Buff", "Passive"]
 @export var hits := 1
 @export var damage_multiplier := 1.0
 @export var damage_per_level := 0.0
+## Uses Magic Attack and INT instead of the weapon (spells).
+@export var magic := false
+## Shown flying to each target. Null for melee.
+@export var projectile: ProjectileDef
+## Spends one of the weapon's ammo per hit.
+@export var uses_ammo := false
+## Weapon kinds it needs (EquipDef.weapon_kind); empty for any.
+@export var weapons: Array[StringName] = []
 
 @export_group("Buffs and passives")
 ## What it adds to the character's stats while a buff lasts, or always for a passive.
@@ -103,7 +111,7 @@ func describe_level(level: int) -> PackedStringArray:
 	if is_active() and mp_at(level) > 0:
 		out.append("MP cost: %d" % mp_at(level))
 	if kind == Kind.ATTACK:
-		var line := "Damage: %d%%" % roundi(damage_at(level) * 100)
+		var line := "%s: %d%%" % ["Magic" if magic else "Damage", roundi(damage_at(level) * 100)]
 		if hits > 1:
 			line += " x%d hits" % hits
 		if max_targets > 1:

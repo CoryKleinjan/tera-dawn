@@ -9,10 +9,17 @@ const BASE_CRIT := 0.12
 
 ## Lowest and highest hit before skills, crits and monster level: the stats window's
 ## "Damage" line. max = (primary × 4 + secondary) × weapon attack / 100.
-static func damage_range(job: JobDef, total: StatBlock) -> Vector2i:
+static func damage_range(job: JobDef, total: StatBlock, extra_attack := 0) -> Vector2i:
 	var primary := total.value(StringName(job.primary_stat))
 	var secondary := total.value(StringName(job.secondary_stat))
-	var top := maxi(1, roundi((primary * 4 + secondary) * total.attack / 100.0 * DAMAGE_SCALE))
+	var top := maxi(1, roundi((primary * 4 + secondary) * (total.attack + extra_attack) / 100.0 * DAMAGE_SCALE))
+	return Vector2i(maxi(1, roundi(top * job.mastery)), top)
+
+## Lowest and highest spell hit before the spell's own multiplier, from Magic Attack (which
+## includes INT): ((M² / 1000) + M) × 1.4, like MapleStory's curve.
+static func magic_range(job: JobDef, total: StatBlock) -> Vector2i:
+	var m := magic_attack(total)
+	var top := maxi(1, roundi((m * m / 1000.0 + m) * 1.4))
 	return Vector2i(maxi(1, roundi(top * job.mastery)), top)
 
 static func magic_attack(total: StatBlock) -> int:
@@ -24,8 +31,8 @@ static func accuracy(total: StatBlock) -> int:
 static func avoid(total: StatBlock) -> int:
 	return total.avoid + roundi(total.dexterity * 0.25 + total.luck * 0.5)
 
-static func crit_rate(_total: StatBlock) -> float:
-	return BASE_CRIT
+static func crit_rate(total: StatBlock) -> float:
+	return BASE_CRIT + total.crit / 100.0
 
 ## Movement multipliers from Speed and Jump, capped like MapleStory (140% and 123%).
 static func speed_multiplier(total: StatBlock) -> float:

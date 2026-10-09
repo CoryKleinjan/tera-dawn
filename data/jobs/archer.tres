@@ -5,6 +5,7 @@
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/equips/willow_bow.tres" id="4_willow_bow"]
 [ext_resource type="Resource" path="res://data/items/use/red_potion.tres" id="5_red_potion"]
+[ext_resource type="Resource" path="res://data/items/ammo/feather_arrow.tres" id="gift_arrows"]
 
 [sub_resource type="Resource" id="Resource_3"]
 script = ExtResource("3_drop_entry")
@@ -24,6 +25,13 @@ max_amount = 1
 script = ExtResource("2_stat_block")
 dexterity = 25
 
+[sub_resource type="Resource" id="gift_sub_arrows"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("gift_arrows")
+chance = 1.0
+min_amount = 1000
+max_amount = 1000
+
 [resource]
 script = ExtResource("1_job_def")
 id = &"archer"
@@ -42,4 +50,4 @@ ap_per_level = 5
 advances_from = &"beginner"
 advance_level = 10
 advance_requirements = SubResource("Resource_1")
-advance_gifts = Array[ExtResource("3_drop_entry")]([SubResource("Resource_2"), SubResource("Resource_3")])
+advance_gifts = Array[ExtResource("3_drop_entry")]([SubResource("Resource_2"), SubResource("Resource_3"), SubResource("gift_sub_arrows")])

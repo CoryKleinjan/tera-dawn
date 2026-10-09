@@ -26,3 +26,4 @@ stats = SubResource("Resource_1")
 variance = 1
 required_strength = 20
 required_dexterity = 15
+weapon_kind = &"knuckle"

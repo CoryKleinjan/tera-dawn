@@ -55,6 +55,10 @@ ICONS = {
     "apprentice_wand": ("wand", "c9a7ff"),
     "iron_claw": ("claw", "a9b4c2"),
     "brass_knuckle": ("knuckle", "e0b64a"),
+    "driftwood_pistol": ("gun", "8a6a4a"),
+    "feather_arrow": ("arrow", "e9dcc0"),
+    "iron_star": ("star", "a9b4c2"),
+    "lead_bullet": ("bullet", "9c8f86"),
 }
 
 

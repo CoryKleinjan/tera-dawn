@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="SkillDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
+[ext_resource type="Resource" path="res://data/projectiles/star.tres" id="2_star"]
+[ext_resource type="Resource" path="res://data/effects/hit.tres" id="3_hit"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/lucky_seven.png" id="4_lucky_seven"]
+
+[resource]
+script = ExtResource("1_skill_def")
+id = &"lucky_seven"
+display_name = "Lucky Seven"
+job = &"thief"
+max_level = 20
+description = "Throw two stars at once at one monster. Luck guides them home."
+mp_cost = 6
+mp_cost_per_level = 0.25
+cooldown = 28
+action_ticks = 18
+reach = 360.0
+max_targets = 1
+hits = 2
+damage_multiplier = 0.85
+damage_per_level = 0.03
+projectile = ExtResource("2_star")
+weapons = Array[StringName]([&"claw"])
+kind = 0
+uses_ammo = true
+height = 90.0
+hit_effect = ExtResource("3_hit")
+icon = ExtResource("4_lucky_seven")
+animation = &"attack"

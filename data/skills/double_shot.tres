@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="SkillDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
+[ext_resource type="Resource" path="res://data/projectiles/arrow.tres" id="2_arrow"]
+[ext_resource type="Resource" path="res://data/effects/hit.tres" id="3_hit"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/double_shot.png" id="4_double_shot"]
+
+[resource]
+script = ExtResource("1_skill_def")
+id = &"double_shot"
+display_name = "Double Shot"
+job = &"archer"
+max_level = 20
+description = "Fire two arrows in quick succession at one monster."
+mp_cost = 6
+mp_cost_per_level = 0.2
+cooldown = 30
+action_ticks = 20
+reach = 380.0
+max_targets = 1
+hits = 2
+damage_multiplier = 0.9
+damage_per_level = 0.03
+projectile = ExtResource("2_arrow")
+weapons = Array[StringName]([&"bow"])
+kind = 0
+uses_ammo = true
+height = 90.0
+hit_effect = ExtResource("3_hit")
+icon = ExtResource("4_double_shot")
+animation = &"attack"

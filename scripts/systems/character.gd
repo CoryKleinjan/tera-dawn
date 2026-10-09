@@ -87,8 +87,59 @@ func max_hp() -> int:
 func max_mp() -> int:
 	return CharacterStats.max_mp(job, level, stats)
 
-func damage_range() -> Vector2i:
-	return CharacterStats.damage_range(job, stats)
+func damage_range(extra_attack := 0) -> Vector2i:
+	return CharacterStats.damage_range(job, stats, extra_attack)
+
+func magic_range() -> Vector2i:
+	return CharacterStats.magic_range(job, stats)
+
+## The weapon worn, or null.
+func weapon() -> EquipDef:
+	var w := equipment.at(&"weapon")
+	return w.equip_def() if w else null
+
+## What the attack key does: the weapon's own attack (a bow shoots) or the plain swing.
+func basic_attack() -> SkillDef:
+	var w := weapon()
+	if w and w.basic_attack:
+		return w.basic_attack
+	return Content.skill(BASIC_ATTACK)
+
+## The Use-tab slot of the ammo the weapon fires (first in the bag), or -1.
+func ammo_slot() -> int:
+	var w := weapon()
+	if w == null or w.ammo == &"":
+		return -1
+	for i in Inventory.SLOTS:
+		var s := inventory.at(ItemDef.Tab.USE, i)
+		if s and s.item is AmmoDef and (s.item as AmmoDef).kind == w.ammo:
+			return i
+	return -1
+
+## The extra Weapon Attack of the ammo that would be fired next.
+func ammo_attack() -> int:
+	var i := ammo_slot()
+	return (inventory.at(ItemDef.Tab.USE, i).item as AmmoDef).attack if i >= 0 else 0
+
+## How much of the weapon's ammo is in the bag.
+func ammo_count() -> int:
+	var w := weapon()
+	if w == null or w.ammo == &"":
+		return 0
+	var n := 0
+	for s in inventory.tabs[ItemDef.Tab.USE]:
+		if s and s.item is AmmoDef and (s.item as AmmoDef).kind == w.ammo:
+			n += s.count
+	return n
+
+## Spends `n` of the weapon's ammo, first stacks first.
+func spend_ammo(n: int) -> void:
+	while n > 0:
+		var i := ammo_slot()
+		if i < 0:
+			return
+		var taken := inventory.take(ItemDef.Tab.USE, i, mini(n, inventory.at(ItemDef.Tab.USE, i).count))
+		n -= taken.count if taken else n
 
 func xp_need(lvl := -1) -> int:
 	if lvl < 0:
@@ -179,6 +230,13 @@ func learn(skill: SkillDef) -> String:
 func use_problem(skill: SkillDef) -> String:
 	if skill == null or not skill.is_active() or skill_level(skill) <= 0:
 		return "You don't know that skill."
+	if skill.innate and skill != basic_attack():
+		return "You can't attack like that with this weapon."
+	var w := weapon()
+	if not skill.weapons.is_empty() and (w == null or not w.weapon_kind in skill.weapons):
+		return "%s needs a %s." % [skill.display_name, " or ".join(skill.weapons)]
+	if skill.uses_ammo and ammo_count() < skill.hits:
+		return "You're out of %ss." % (w.ammo if w and w.ammo != &"" else &"arrow")
 	if mp < skill.mp_at(skill_level(skill)):
 		return "Not enough MP for %s." % skill.display_name
 	return ""
@@ -267,8 +325,10 @@ func advance(next: JobDef) -> String:
 		return problem
 	job = next
 	for g in next.advance_gifts:
-		if g.item:
-			inventory.add_stack(ItemStack.unrolled(g.item, g.min_amount))
+		if g.item is EquipDef:
+			inventory.add_stack(ItemStack.unrolled(g.item, 1))
+		elif g.item:
+			inventory.add(g.item, g.min_amount)
 	recalc()
 	refill()
 	return ""

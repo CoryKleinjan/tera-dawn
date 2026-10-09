@@ -36,7 +36,10 @@ func _lines() -> Array:
 	out.append([item.display_name, Palette.SUN, 15])
 	var e := item as EquipDef
 	if e:
-		out.append(["Equip · %s" % e.slot_name(), Color("c9b8d9"), 11])
+		var kind := " (%s)" % String(e.weapon_kind).capitalize() if e.weapon_kind != &"" else ""
+		out.append(["Equip · %s%s" % [e.slot_name(), kind], Color("c9b8d9"), 11])
+		if e.ammo != &"":
+			out.append(["Fires %ss" % e.ammo, Palette.MIST, 12])
 		if not e.jobs.is_empty():
 			out.append(["%s only" % EquipDef.families_text(e.jobs), Palette.MIST if Game.me.can_use(e.jobs) else Color("ff6b7d"), 12])
 		var reqs := e.requirements()
@@ -65,6 +68,11 @@ func _lines() -> Array:
 			out.append(["Restores %d HP" % hp, Palette.HP, 12])
 		if mp > 0:
 			out.append(["Restores %d MP" % mp, Palette.MP, 12])
+	elif item is AmmoDef:
+		var a := item as AmmoDef
+		out.append(["Ammo · %ss" % String(a.kind).capitalize(), Color("c9b8d9"), 11])
+		if a.attack > 0:
+			out.append(["Weapon Attack +%d when fired" % a.attack, Palette.MIST, 12])
 	else:
 		out.append(["Etc", Color("c9b8d9"), 11])
 	if item.description != "":

@@ -148,6 +148,9 @@ func on_skill(peer: int, skill_id: StringName, at: Vector2, face: int) -> void:
 		p.map.tell(p, problem, Color("8cc6ff"))
 		return
 	c.spend_mp(skill.mp_at(c.skill_level(skill)))
+	if skill.uses_ammo:
+		# the damage counts the ammo being fired, so spend it after the hit is worked out
+		p.dirty_character = true
 	p.report_move(at, face, skill.animation, false)
 	p.cooldown = skill.cooldown
 	p.dirty_vitals = true
@@ -157,6 +160,8 @@ func on_skill(peer: int, skill_id: StringName, at: Vector2, face: int) -> void:
 		p.map.broadcast(&"ev_skill", [p.peer, skill.id, p.position.x, p.position.y, p.face, []])
 	else:
 		p.map.use_skill(p, skill)
+	if skill.uses_ammo:
+		c.spend_ammo(skill.hits)
 
 ## Spends a Skill Point on `skill_id`.
 func on_learn_skill(peer: int, skill_id: StringName) -> void:
