@@ -224,6 +224,27 @@ func _run() -> void:
 	for action in TDHud.WINDOW_ACTIONS:
 		all_open = all_open and world.hud.windows[action].visible
 	_check(all_open, "I, E and S open the inventory, equipment and character windows")
+	# Hovering gear in the bag shows its tooltip, compared with what's worn.
+	var inv: TDInventoryWindow = world.hud.windows["inventory"]
+	world.hud.title.hide() # the test started the world without pressing Play
+	inv.tab = ItemDef.Tab.EQUIP
+	Game.inventory.add(Content.item(&"leaf_cap"))
+	var slot := _first_filled(ItemDef.Tab.EQUIP)
+	var move := InputEventMouseMotion.new()
+	move.position = get_viewport().get_final_transform() * (inv.global_position + inv.slot_rect(slot).get_center())
+	move.global_position = move.position
+	Input.parse_input_event(move)
+	await _ticks(2)
+	var tip := world.hud.tooltip
+	var lines := tip._lines() if tip.stack else []
+	_check(tip.stack == Game.inventory.at(ItemDef.Tab.EQUIP, slot) and lines.any(func(l): return str(l[0]).begins_with("vs. worn") or str(l[0]) == "Nothing worn in this slot"),
+		"hovering gear in the inventory shows its tooltip and how it compares with what's worn")
+	# The equipment window lists what the gear adds.
+	var gear: TDEquipmentWindow = world.hud.windows["equipment"]
+	gear._click(gear.slot_rect(&"weapon").get_center(), MOUSE_BUTTON_LEFT, false)
+	_check(gear.selected == &"weapon", "clicking a worn item shows its own stats in the gear panel")
+	gear._click(gear.slot_rect(&"weapon").get_center(), MOUSE_BUTTON_LEFT, false)
+	_check(gear.selected == &"", "clicking it again shows the whole set's bonuses")
 	for action in TDHud.WINDOW_ACTIONS:
 		await _press("pause")
 	_check(world.started and not world.hud.windows["stats"].visible, "Esc closes the windows before opening the menu")

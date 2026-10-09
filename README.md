@@ -96,4 +96,4 @@ tools/art/         Sheet slicer, store-art cropper, fx textures, contact-sheet p
 3. **Export.** In Godot, install the export templates (Editor → Manage Export Templates). Then use **Project → Export**: presets for Windows, Linux and macOS are already in `export_presets.cfg`. macOS builds need signing and notarization with an Apple Developer account.
 4. **Upload.** Upload the builds with SteamPipe (`steamcmd` + an app build VDF), set up the store page, and submit for review.
 
-In the windows: double-click gear to wear it or a potion to drink it, drag items to rearrange them or onto the equipment window, and drag an item out of every window to drop it on the ground.
+In the windows: double-click gear to wear it or a potion to drink it, drag items to rearrange them or onto the equipment window, and drag an item out of every window to drop it on the ground. Hovering over gear in the inventory shows how it compares with what you're wearing in that slot. The equipment window lists what all your gear adds to each stat; click a worn item to see just its stats.
