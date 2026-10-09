@@ -24,7 +24,8 @@ func _init(s: TDServer, map_def: MapDef) -> void:
 	def = map_def
 	layout = MapLayout.new(map_def)
 	for r in def.roster():
-		var m := SimMob.new(self, mobs.size(), r[0], layout.platforms[r[1]])
+		var plat := layout.platforms[r[1]]
+		var m := SimMob.new(self, mobs.size(), r[0], plat, r[3].patrol_area(plat))
 		if r[2] >= 0:
 			m.sleep()
 			m.parent = mobs[r[2]]

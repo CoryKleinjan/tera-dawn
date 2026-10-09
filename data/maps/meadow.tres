@@ -142,12 +142,14 @@ script = ExtResource("9_spawn_def")
 monster = ExtResource("10_dewling")
 platform = 0
 count = 5
+patrol_from = 900.0
 
 [sub_resource type="Resource" id="Resource_20"]
 script = ExtResource("9_spawn_def")
 monster = ExtResource("11_mossling")
 platform = 0
 count = 2
+patrol_from = 900.0
 
 [sub_resource type="Resource" id="Resource_21"]
 script = ExtResource("9_spawn_def")
