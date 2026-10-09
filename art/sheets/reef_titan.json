@@ -1,0 +1,129 @@
+{
+  "source": "art/source/mon_driftcove.png",
+  "region": [
+    772,
+    730,
+    1536,
+    1024
+  ],
+  "grid": {
+    "rows": [
+      22,
+      98,
+      187,
+      294
+    ],
+    "cols": [
+      0,
+      192,
+      382,
+      572,
+      764
+    ]
+  },
+  "scale": 1.0,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/reef_titan",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "move1",
+      "move2"
+    ],
+    [
+      "move3",
+      "windup",
+      "strike",
+      "special"
+    ],
+    [
+      "hurt",
+      "enraged",
+      "defeated1",
+      "defeated2"
+    ]
+  ],
+  "sets": {
+    "reef_titan": {
+      "frames": {
+        "idle1": "reef_titan:idle1",
+        "idle2": "reef_titan:idle2",
+        "move1": "reef_titan:move1",
+        "move2": "reef_titan:move2",
+        "move3": "reef_titan:move3",
+        "windup": "reef_titan:windup",
+        "strike": "reef_titan:strike",
+        "special": "reef_titan:special",
+        "hurt": "reef_titan:hurt",
+        "enraged": "reef_titan:enraged",
+        "defeated1": "reef_titan:defeated1",
+        "defeated2": "reef_titan:defeated2"
+      },
+      "anchor": "mass",
+      "baseline": "bottom",
+      "out": "assets/sprites/monsters/reef_titan.png",
+      "sprite_frames": "assets/animations/reef_titan.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "move1",
+            "move2",
+            "move3",
+            "move2"
+          ],
+          "fps": 6
+        },
+        "attack": {
+          "frames": [
+            "windup",
+            "strike",
+            "special"
+          ],
+          "fps": 3,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated1",
+            "defeated2"
+          ],
+          "fps": 2,
+          "loop": false
+        }
+      }
+    }
+  },
+  "overrides": {
+    "windup": {
+      "blank_label": 16
+    },
+    "strike": {
+      "blank_label": 16
+    },
+    "special": {
+      "blank_label": 16
+    },
+    "enraged": {
+      "blank_label": 16
+    },
+    "defeated1": {
+      "blank_label": 16
+    }
+  }
+}

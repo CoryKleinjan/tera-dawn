@@ -1,0 +1,57 @@
+{
+  "source": "art/source/ui_social.png",
+  "out_dir": "assets/sprites/ui/social",
+  "scale": 0.5,
+  "alpha": "soft",
+  "label_band": 0.2,
+  "grid_threshold": 0.7,
+  "cells": [
+    [
+      "chat_frame",
+      "chat_input",
+      "invite_card",
+      "friend_row"
+    ],
+    [
+      "online_dot",
+      "offline_dot",
+      "leader_star",
+      "party_hp_frame"
+    ],
+    [
+      "guild_tag",
+      "guild_emblem",
+      "fame_up",
+      "fame_down"
+    ],
+    [
+      "shop_sign",
+      "market_stall",
+      "whisper_icon",
+      "buddy_add_icon"
+    ]
+  ],
+  "overrides": {
+    "leader_star": {
+      "fix": "glow_backdrop",
+      "keep": "largest"
+    },
+    "fame_up": {
+      "fix": "glow_backdrop",
+      "keep": "largest"
+    },
+    "buddy_add_icon": {
+      "fix": "glow_backdrop",
+      "keep": "largest"
+    },
+    "online_dot": {
+      "key": [
+        0.1,
+        0.45
+      ]
+    },
+    "guild_emblem": {
+      "blank_top": 50
+    }
+  }
+}

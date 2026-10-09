@@ -1,0 +1,78 @@
+{
+  "source": "art/source/ui_book.png",
+  "out_dir": "assets/sprites/ui/book",
+  "scale": 0.5,
+  "alpha": "soft",
+  "label_band": 0.2,
+  "grid_threshold": 0.7,
+  "cells": [
+    [
+      "page_cell",
+      "page_cell_complete",
+      "pip_on",
+      "pip_off"
+    ],
+    [
+      "unseen_monster",
+      "book_pages",
+      "badge",
+      "badge_locked"
+    ],
+    [
+      "achievement_row",
+      "achievement_row_done",
+      "achievement_toast",
+      "bookmark"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      1,
+      344,
+      743,
+      1084
+    ],
+    "cols": [
+      [
+        1,
+        358,
+        802,
+        1141,
+        1446
+      ],
+      [
+        1,
+        361,
+        878,
+        1148,
+        1446
+      ],
+      [
+        1,
+        436,
+        875,
+        1188,
+        1446
+      ]
+    ]
+  },
+  "overrides": {
+    "page_cell_complete": {
+      "fix": "glow_backdrop"
+    },
+    "achievement_row_done": {
+      "fix": "glow_backdrop"
+    },
+    "pip_on": {
+      "fix": "glow_backdrop",
+      "keep": "largest"
+    },
+    "badge": {
+      "fix": "glow_backdrop",
+      "keep": "largest"
+    },
+    "book_pages": {
+      "scale": 1.0
+    }
+  }
+}

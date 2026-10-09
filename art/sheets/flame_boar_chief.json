@@ -1,0 +1,126 @@
+{
+  "source": "art/source/monsters_m1.png",
+  "region": [
+    771,
+    652,
+    1536,
+    1024
+  ],
+  "grid": {
+    "rows": [
+      1,
+      102,
+      218,
+      372
+    ],
+    "cols": [
+      0,
+      190,
+      382,
+      573,
+      765
+    ]
+  },
+  "scale": 1.0,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/flame_boar_chief",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "move1",
+      "move2"
+    ],
+    [
+      "move3",
+      "windup",
+      "strike",
+      "special"
+    ],
+    [
+      "hurt",
+      "enraged",
+      "defeated1",
+      "defeated2"
+    ]
+  ],
+  "sets": {
+    "flame_boar_chief": {
+      "frames": {
+        "idle1": "flame_boar_chief:idle1",
+        "idle2": "flame_boar_chief:idle2",
+        "move1": "flame_boar_chief:move1",
+        "move2": "flame_boar_chief:move2",
+        "move3": "flame_boar_chief:move3",
+        "windup": "flame_boar_chief:windup",
+        "strike": "flame_boar_chief:strike",
+        "special": "flame_boar_chief:special",
+        "hurt": "flame_boar_chief:hurt",
+        "enraged": "flame_boar_chief:enraged",
+        "defeated1": "flame_boar_chief:defeated1",
+        "defeated2": "flame_boar_chief:defeated2"
+      },
+      "anchor": "mass",
+      "baseline": "bottom",
+      "out": "assets/sprites/monsters/flame_boar_chief.png",
+      "sprite_frames": "assets/animations/flame_boar_chief.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "move1",
+            "move2",
+            "move3",
+            "move2"
+          ],
+          "fps": 6
+        },
+        "attack": {
+          "frames": [
+            "windup",
+            "strike",
+            "special"
+          ],
+          "fps": 3,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated1",
+            "defeated2"
+          ],
+          "fps": 2,
+          "loop": false
+        }
+      }
+    }
+  },
+  "overrides": {
+    "windup": {
+      "blank_label": 16
+    },
+    "strike": {
+      "blank_label": 16
+    },
+    "special": {
+      "blank_label": 16
+    },
+    "enraged": {
+      "blank_label": 16
+    }
+  }
+}

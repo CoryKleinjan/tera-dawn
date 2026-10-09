@@ -101,14 +101,19 @@ a level 1 character in the starting job (`Character.START_JOB`).
   gear that shows), so everyone sees everyone's hair and gear.
 - **Drawing** is done by `Paperdoll`, which works out the layers from a look;
   `PaperdollSprite` shows it in the world (on `SpriteRig`) and `PaperdollView` in menus (the
-  creator, the equipment window). The hero is still one painted strip, so for now layers are
-  faked on it: `tools/art/hero_regions.py` maps which pixels are hair, skin, eyes, clothes,
-  cape, sword and shield (`hero_regions.png`) and where the head, face and hand are in each
-  frame (`hero_rig.json`). Colours recolour those pixels through the paperdoll shaders, gear
-  not worn hides them, and hats, hairstyles, faces and non-sword weapons are stand-ins drawn
-  in code (`LookShapes`, picked by `EquipDef.look_shape` or the weapon kind, coloured by
-  `EquipDef.look_color` or the icon). When layered art exists, `LookDef.frames` and
-  `EquipDef.worn_frames` replace the stand-ins without code changes.
+  creator, the equipment window). The hero is a bare body strip (`hero.png`) with layers
+  that play frame for frame with it: hair (front, a back part drawn behind him, and a
+  version for under a hat), faces and their irises, a cape and round or kite shields
+  (`assets/animations/paperdoll/`). `tools/art/paperdoll_layers.py` builds them from the
+  paperdoll sheets, together with the body's region map (`hero_regions.png`: skin, chest,
+  shorts, feet) and rig (`hero_rig.json`: head, face, neck, hand and shield per frame, and
+  each weapon's grip). The skin tone and worn tops, bottoms and shoes recolour the body
+  through the paperdoll shaders; hair, irises, capes and shields are greyscale art tinted
+  with the hair, eye or item colour (`EquipDef.look_color` or the icon). Hats (code-drawn
+  stand-ins for now) and weapons (pictures cut from the weapon sheet) are drawn at a rig
+  point and turn with the arm (`LookShapes`, picked by `EquipDef.look_shape` or the weapon
+  kind). `LookDef.frames` and `EquipDef.worn_frames` take any new layered art without code
+  changes.
 
 ### Chairs, pets, the Monster Book and achievements
 

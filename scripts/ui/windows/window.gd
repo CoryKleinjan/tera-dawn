@@ -135,6 +135,11 @@ func add_button(r: Rect2, label: String, action: Callable, enabled := true, smal
 	if enabled:
 		_buttons.append([r, action])
 
+## A button that's only a picture from the UI art (a whisper bubble), brighter on hover.
+func icon_button(r: Rect2, art: String, action: Callable) -> void:
+	UiSkin.draw_icon(self, art, r, UiSkin.LIT if r.has_point(_hover) else Color.WHITE)
+	_buttons.append([r, action])
+
 ## The "+" that spends a point (Ability Points, Skill Points), with its top left at `at`.
 func plus_button(at: Vector2, action: Callable) -> void:
 	var r := Rect2(at, Vector2(PLUS_SIZE, PLUS_SIZE))

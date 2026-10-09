@@ -1,0 +1,105 @@
+{
+  "source": "art/source/driftcove_area.png",
+  "region": [
+    0,
+    43,
+    1032,
+    1024
+  ],
+  "scale": 0.35,
+  "label_band": 0.2,
+  "out_dir": "assets/sprites/tiles/driftcove",
+  "cells": [
+    [
+      "ground_left",
+      "ground_middle",
+      "ground_right",
+      "platform_small",
+      "platform_medium",
+      "platform_large"
+    ],
+    [
+      "edge_grass",
+      "tall_grass",
+      "tree_large",
+      "tree_small",
+      "bush_large",
+      "bush_small"
+    ],
+    [
+      "rock_large",
+      "rock_small",
+      "stump",
+      "flowers",
+      "signature_plant",
+      "fence"
+    ],
+    [
+      "signpost",
+      "lantern_unlit",
+      "lantern_lit",
+      "building_large",
+      "building_small",
+      "signature_prop"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      223,
+      455,
+      668,
+      981
+    ],
+    "cols": [
+      [
+        0,
+        152,
+        310,
+        471,
+        647,
+        815,
+        1032
+      ],
+      [
+        0,
+        152,
+        311,
+        472,
+        646,
+        844,
+        1032
+      ],
+      [
+        0,
+        170,
+        346,
+        472,
+        656,
+        845,
+        1032
+      ],
+      [
+        0,
+        127,
+        276,
+        420,
+        674,
+        857,
+        1032
+      ]
+    ]
+  },
+  "overrides": {
+    "lantern_lit": {
+      "fix": "glow_backdrop",
+      "keep": "largest"
+    },
+    "tree_large": {
+      "keep": "largest"
+    },
+    "tree_small": {
+      "keep": "largest"
+    }
+  }
+}

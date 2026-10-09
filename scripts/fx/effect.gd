@@ -74,8 +74,14 @@ func _sync() -> void:
 
 ## The caption ("LEVEL UP!"), drawn by the overlay so it stays sharp.
 func draw_caption(ci: CanvasItem, at: Vector2) -> void:
-	if def.caption == "":
+	if def.caption == "" and def.caption_art == null:
 		return
 	var k := float(t) / def.duration()
+	if def.caption_art:
+		var size := def.caption_art.get_size() * def.caption_art_width / def.caption_art.get_width()
+		var pop := minf(1.0, t / 8.0)  # springs up from small in the first few frames
+		var c := at + Vector2(0, -120 - k * 40)
+		ci.draw_texture_rect(def.caption_art, Rect2(c - size * pop / 2.0, size * pop), false, Color(1, 1, 1, 1.0 - k * k))
+		return
 	DrawUtil.text(ci, Game.num_font, at + Vector2(0, -110 - k * 40), def.caption, 40,
 		Color(Palette.SUN, 1.0 - k), 0, 10, Color(Palette.PLUM, 1.0 - k))

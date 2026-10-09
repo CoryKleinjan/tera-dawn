@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="Resource" path="res://data/monsters/spore_puff.tres" id="2_spore_puff"]
-[ext_resource type="SpriteFrames" path="res://assets/animations/sproutcap.tres" id="3_sproutcap"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/sporecap.tres" id="3_sporecap"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="5_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/spore_sac.tres" id="6_spore_sac"]
@@ -75,7 +75,6 @@ boss = false
 flying = false
 splits_into = ExtResource("2_spore_puff")
 split_count = 2
-sprite_frames = ExtResource("3_sproutcap")
+sprite_frames = ExtResource("3_sporecap")
 sprite_scale = 1.0
-tint = Color(0.815686, 0.627451, 1.0, 1.0)
 drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7")])

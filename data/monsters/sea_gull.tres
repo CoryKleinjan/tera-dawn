@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MonsterDef" load_steps=18 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/monsters/petal_bat.png" id="2_petal_bat"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/sea_gull.tres" id="2_sea_gull"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/gull_feather.tres" id="5_gull_feather"]
@@ -73,7 +73,6 @@ size = Vector2(40.0, 30.0)
 boss = false
 flying = true
 hover_height = 56.0
-texture = ExtResource("2_petal_bat")
+sprite_frames = ExtResource("2_sea_gull")
 sprite_scale = 1.0
-tint = Color(0.956863, 0.972549, 1.0, 1.0)
 drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7")])

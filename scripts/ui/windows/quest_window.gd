@@ -10,6 +10,10 @@ const LIST_Y := 68.0
 const ROW_H := 24.0
 const LIST_W := 200.0
 const ROWS := 11
+## Pixels per texel of the row art.
+const ROW_SCALE := (ROW_H - 2) / 39.0
+## The marker shown on each quest's row, as over the NPC (UiSkin.QUEST_MARKERS).
+const ROW_MARKERS := {QuestLog.Status.AVAILABLE: "!", QuestLog.Status.ACTIVE: "...", QuestLog.Status.READY: "?"}
 
 var scroll := 0
 
@@ -54,9 +58,14 @@ func _draw_body() -> void:
 	for i in _shown(quests.size()):
 		var q := quests[i]
 		var r := _row_rect(i)
-		draw_row(r, q == selected or r.has_point(_hover))
-		var ready := me.quests.status(q, me) == QuestLog.Status.READY
-		DrawUtil.text(self, Game.ui_font, Vector2(r.position.x + 6, r.end.y - 6), q.title, 12, Palette.SUN if ready else Palette.MIST, 1, 3, Palette.NIGHT)
+		var lit := q == selected or r.has_point(_hover)
+		UiSkin.draw_box(self, UiSkin.option_row(lit), r, ROW_SCALE)
+		var status := me.quests.status(q, me)
+		var ready := status == QuestLog.Status.READY
+		var col := Palette.INK if lit else (Palette.SUN if ready else Palette.MIST)
+		DrawUtil.text(self, Game.ui_font, Vector2(r.position.x + 12, r.end.y - 6), q.title, 12, col, 1, 0 if lit else 3, Palette.NIGHT)
+		if ROW_MARKERS.has(status):
+			UiSkin.draw_quest_marker(self, Vector2(r.end.x - 14, r.end.y - 1), ROW_MARKERS[status], 20)
 	if quests.size() > ROWS:
 		DrawUtil.text(self, Game.ui_font, Vector2(PAD + LIST_W, LIST_Y + ROWS * ROW_H + 8), "scroll for more (%d/%d)" % [scroll + 1, quests.size() - ROWS + 1], 10, Color(Palette.MIST, 0.6), -1)
 	if selected:

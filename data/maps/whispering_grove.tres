@@ -325,6 +325,6 @@ portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_21"), SubRes
 spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_23"), SubResource("Resource_24"), SubResource("Resource_25"), SubResource("Resource_26"), SubResource("Resource_27"), SubResource("Resource_28"), SubResource("Resource_29"), SubResource("Resource_30"), SubResource("Resource_31"), SubResource("Resource_32"), SubResource("Resource_33"), SubResource("Resource_34")])
 props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_35"), SubResource("Resource_36"), SubResource("Resource_37"), SubResource("Resource_38"), SubResource("Resource_39"), SubResource("Resource_40"), SubResource("Resource_41"), SubResource("Resource_42")])
 region = &"greenbough"
-world_pos = Vector2(447.0, 137.0)
+world_pos = Vector2(469.0, 65.0)
 return_map = &"greenbough"
 level_text = "Lv. 16-20"

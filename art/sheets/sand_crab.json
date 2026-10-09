@@ -1,0 +1,98 @@
+{
+  "source": "art/source/mon_driftcove.png",
+  "region": [
+    0,
+    0,
+    764,
+    246
+  ],
+  "grid": {
+    "rows": [
+      34,
+      141,
+      246
+    ],
+    "cols": [
+      0,
+      194,
+      385,
+      575,
+      764
+    ]
+  },
+  "scale": 0.472,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/sand_crab",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "walk1",
+      "walk2"
+    ],
+    [
+      "walk3",
+      "attack",
+      "hurt",
+      "defeated"
+    ]
+  ],
+  "sets": {
+    "sand_crab": {
+      "frames": {
+        "idle1": "sand_crab:idle1",
+        "idle2": "sand_crab:idle2",
+        "walk1": "sand_crab:walk1",
+        "walk2": "sand_crab:walk2",
+        "walk3": "sand_crab:walk3",
+        "attack": "sand_crab:attack",
+        "hurt": "sand_crab:hurt",
+        "defeated": "sand_crab:defeated"
+      },
+      "anchor": "mass",
+      "baseline": "bottom",
+      "out": "assets/sprites/monsters/sand_crab.png",
+      "sprite_frames": "assets/animations/sand_crab.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "walk1",
+            "walk2",
+            "walk3",
+            "walk2"
+          ],
+          "fps": 7
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      }
+    }
+  }
+}

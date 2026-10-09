@@ -1,0 +1,110 @@
+{
+  "source": "art/source/lanternfall_area.png",
+  "region": [
+    1041,
+    43,
+    1536,
+    1024
+  ],
+  "scale": 0.5,
+  "label_band": 0.3,
+  "inset": 5,
+  "out_dir": "assets/sprites/backgrounds/lanternfall",
+  "cells": [
+    [
+      "far"
+    ],
+    [
+      ""
+    ],
+    [
+      "mid"
+    ],
+    [
+      ""
+    ],
+    [
+      "near"
+    ],
+    [
+      ""
+    ],
+    [
+      "clouds"
+    ],
+    [
+      ""
+    ],
+    [
+      "landmark"
+    ],
+    [
+      ""
+    ],
+    [
+      "sky_body"
+    ],
+    [
+      ""
+    ],
+    [
+      "motes"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      140,
+      146,
+      290,
+      295,
+      437,
+      441,
+      558,
+      563,
+      730,
+      736,
+      856,
+      860,
+      981
+    ],
+    "cols": [
+      0,
+      495
+    ]
+  },
+  "overrides": {
+    "far": {
+      "fix": "painted_sky",
+      "extend_bottom": 160
+    },
+    "mid": {
+      "fix": "painted_sky",
+      "extend_bottom": 160
+    },
+    "near": {
+      "fix": "painted_sky",
+      "extend_bottom": 160
+    },
+    "landmark": {
+      "fix": "painted_sky",
+      "extend_bottom": 160
+    },
+    "clouds": {
+      "keep": "split"
+    },
+    "sky_body": {
+      "fix": "sky_body",
+      "alpha": "soft",
+      "crop": [
+        257,
+        7,
+        335,
+        85
+      ]
+    },
+    "motes": {
+      "alpha": "soft"
+    }
+  }
+}

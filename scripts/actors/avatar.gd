@@ -74,7 +74,7 @@ func step() -> void:
 
 func _ready() -> void:
 	rig = SpriteRig.new()
-	rig.setup(TDPlayer.HERO_FRAMES, null, TDStage.TEXEL, 40.0)
+	rig.setup(TDPlayer.HERO_FRAMES, null, TDStage.TEXEL * TDPlayer.HERO_SCALE, 40.0)
 	add_child(rig)
 	companion = TDCompanion.new()
 	add_child(companion)
@@ -102,4 +102,4 @@ func draw_tag(ci: CanvasItem, at: Vector2) -> void:
 	if known and not fainted():
 		UiSkin.draw_name_tag(ci, at + Vector2(0, 4), char_name, Palette.MIST)
 		if guild != "":
-			UiSkin.draw_name_tag(ci, at + Vector2(0, 26), guild, Palette.GUILD)
+			UiSkin.draw_guild_tag(ci, at + Vector2(0, 26), guild)

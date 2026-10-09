@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MonsterDef" load_steps=24 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
-[ext_resource type="SpriteFrames" path="res://assets/animations/ember_boar.tres" id="2_ember_boar"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/cinder_pup.tres" id="2_cinder_pup"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/pup_tooth.tres" id="5_pup_tooth"]
@@ -96,7 +96,6 @@ speed = 1.25
 size = Vector2(39.0, 27.0)
 boss = false
 flying = false
-sprite_frames = ExtResource("2_ember_boar")
-sprite_scale = 0.52
-tint = Color(1.0, 0.752941, 0.501961, 1.0)
+sprite_frames = ExtResource("2_cinder_pup")
+sprite_scale = 1.0
 drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10")])

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MonsterDef" load_steps=17 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/monsters/boulderkin.png" id="2_boulderkin"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/boulderkin.tres" id="2_boulderkin"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/pebble_core.tres" id="loot_pebble_core"]
@@ -69,6 +69,6 @@ attack = 18
 exp_reward = 50
 speed = 0.45
 size = Vector2(64.0, 100.0)
-texture = ExtResource("2_boulderkin")
+sprite_frames = ExtResource("2_boulderkin")
 drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_loot0"), SubResource("Resource_loot1"), SubResource("Resource_loot2"), SubResource("Resource_loot3"), SubResource("Resource_loot4")])
-sprite_scale = 0.62
+sprite_scale = 1.0

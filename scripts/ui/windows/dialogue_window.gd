@@ -7,9 +7,22 @@ extends TDWindow
 ##
 ## To give NPCs something new to offer (storage, travel, ...), add it in `_options()`.
 
-const PORTRAIT := 96.0
-const TEXT_X := PAD + PORTRAIT + 16
+const WIDTH := 540.0
+## The dialogue frame (UiSkin.DIALOGUE_FRAME) is drawn at this many pixels per texel, and
+## grows taller for long speeches.
+const FRAME_SCALE := 0.8
+const FRAME_X := PAD - 6
+## Inside the frame's art, in texels: where the portrait niche's opening is (left, top,
+## right, and how far up from the bottom), and where the text starts and ends.
+const NICHE := Vector4(28, 72, 125, 39)
+const TEXT_LEFT := 168.0
+const TEXT_RIGHT := 36.0
+const TEXT_TOP := 58.0
+const TEXT_BOTTOM := 36.0
+const LINE_H := 17.0
 const ROW_H := 26.0
+## Option rows: pixels per texel of the option row art.
+const ROW_SCALE := 0.6
 ## Walk this far from the NPC and the window closes.
 const REACH := 170.0
 
@@ -20,7 +33,7 @@ var options: Array = []
 var _line := -1
 
 func _init() -> void:
-	super("", Vector2(520, 330))
+	super("", Vector2(WIDTH, 330))
 
 func _ready() -> void:
 	super()
@@ -37,6 +50,7 @@ func open(who: TDNpc) -> void:
 	title = who.def.display_name
 	_line = -1
 	_main_page(who.def.greeting if who.def.greeting != "" else _next_line())
+	_fit()
 	position = (TDWorld.VIEW - size) / 2.0 + Vector2(0, -40)
 	visible = true
 	raise()
@@ -188,12 +202,38 @@ func choose(i: int) -> void:
 		options[i][1].call()
 
 func _option_rect(i: int) -> Rect2:
-	return Rect2(TEXT_X - 6, size.y - PAD - (options.size() - i) * ROW_H, size.x - TEXT_X - PAD + 6, ROW_H - 2)
+	return Rect2(PAD, size.y - PAD - (options.size() - i) * ROW_H, size.x - PAD * 2, ROW_H - 2)
+
+## The frame with the portrait and what they say: tall enough for the text.
+func _frame_rect() -> Rect2:
+	var w := size.x - FRAME_X * 2
+	var natural := UiSkin.tex(UiSkin.DIALOGUE_FRAME[0]).get_height() * FRAME_SCALE
+	var text_h := _lines().size() * LINE_H + (TEXT_TOP + TEXT_BOTTOM) * FRAME_SCALE
+	return Rect2(FRAME_X, TITLE_H + 2, w, maxf(natural, text_h))
+
+## What they say, wrapped to the frame ("" is a paragraph break).
+func _lines() -> PackedStringArray:
+	var out := PackedStringArray()
+	var w := size.x - FRAME_X * 2 - (TEXT_LEFT + TEXT_RIGHT) * FRAME_SCALE
+	for paragraph in text.split("\n"):
+		out.append_array(UiSkin.wrap_text(Game.ui_font, paragraph, 13, w))
+		if paragraph == "":
+			out.append("")
+	return out
+
+## Sizes the window to the frame and the options (the speech and options change as you pick).
+func _fit() -> void:
+	var h := _frame_rect().end.y + 8 + options.size() * ROW_H + PAD - 4
+	if not is_equal_approx(h, size.y):
+		size.y = h
+		position.y = clampf(position.y, 0.0, TDWorld.VIEW.y - h)
 
 func _process(delta: float) -> void:
 	super(delta)
 	if visible and (npc == null or not is_instance_valid(npc) or hud.world.player.position.distance_to(npc.position) > REACH):
 		visible = false
+	if visible:
+		_fit()
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	var k := event as InputEventKey
@@ -204,28 +244,29 @@ func _unhandled_key_input(event: InputEvent) -> void:
 func _draw_body() -> void:
 	if npc == null:
 		return
-	# portrait
-	var box := Rect2(PAD, TITLE_H + 10, PORTRAIT, PORTRAIT + 20)
-	draw_row(box)
+	var frame := _frame_rect()
+	UiSkin.draw_panel(self, UiSkin.DIALOGUE_FRAME, frame, FRAME_SCALE)
+	# their portrait in the niche, their title at its foot
+	var niche := Rect2(frame.position + Vector2(NICHE.x, NICHE.y) * FRAME_SCALE, Vector2.ZERO)
+	niche.end = Vector2(frame.position.x + NICHE.z * FRAME_SCALE, frame.end.y - NICHE.w * FRAME_SCALE)
 	var tex := npc.portrait()
 	if tex:
-		draw_texture_rect(tex, fit(tex, box.grow(-6)), false, npc.def.tint)
+		draw_texture_rect(tex, fit(tex, niche.grow(-4)), false, npc.def.tint)
 	if npc.def.title != "":
-		DrawUtil.text(self, Game.ui_font, Vector2(box.get_center().x, box.end.y + 16), npc.def.title, 11, Palette.MUTED, 0, 3, Palette.NIGHT)
+		DrawUtil.text(self, Game.ui_font, Vector2(niche.get_center().x, niche.end.y - 4), npc.def.title, 11, Palette.MIST, 0, 4, Palette.NIGHT)
 	# what they say
-	var y := TITLE_H + 26
-	for paragraph in text.split("\n"):
-		for l in UiSkin.wrap_text(Game.ui_font, paragraph, 13, size.x - TEXT_X - PAD):
-			DrawUtil.text(self, Game.ui_font, Vector2(TEXT_X, y), l, 13, Palette.MIST, 1, 3, Palette.NIGHT)
-			y += 18
-		if paragraph == "":
-			y += 8
+	var y := frame.position.y + TEXT_TOP * FRAME_SCALE
+	for l in _lines():
+		if l != "":
+			DrawUtil.text(self, Game.ui_font, Vector2(frame.position.x + TEXT_LEFT * FRAME_SCALE, y), l, 13, Palette.MIST, 1, 3, Palette.NIGHT)
+		y += LINE_H if l != "" else LINE_H / 2.0
 	# what you can do
 	for i in options.size():
 		var r := _option_rect(i)
-		if r.has_point(_hover):
-			draw_hilite(r)
-		DrawUtil.text(self, Game.ui_font, Vector2(r.position.x + 8, r.end.y - 7), "%d.  %s" % [i + 1, options[i][0]], 14, Palette.SUN, 1, 3, Palette.NIGHT)
+		var hot := r.has_point(_hover)
+		UiSkin.draw_box(self, UiSkin.option_row(hot), r, ROW_SCALE)
+		DrawUtil.text(self, Game.ui_font, Vector2(r.position.x + 16, r.end.y - 7), "%d.  %s" % [i + 1, options[i][0]], 14,
+			Palette.INK if hot else Palette.SUN, 1, 0 if hot else 3, Palette.NIGHT)
 
 func _click(at: Vector2, button: int, _double: bool) -> void:
 	if button != MOUSE_BUTTON_LEFT:

@@ -1,5 +1,6 @@
-// Dresses the painted hero (see Paperdoll): every pixel belongs to a region of his body
-// (hero_regions.png, red channel = region * 16), and each region can be recoloured or hidden.
+// Dresses the hero's body (see Paperdoll): every pixel belongs to a region of it
+// (hero_regions.png, red channel = region * 16: skin, chest, shorts, feet), and each region
+// can be recoloured or hidden.
 
 uniform sampler2D regions : filter_nearest;
 // One column per region. Row 0: the colour to show it in, alpha = how much (0 keeps the

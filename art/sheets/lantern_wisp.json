@@ -1,0 +1,98 @@
+{
+  "source": "art/source/mon_lanternfall.png",
+  "region": [
+    772,
+    0,
+    1536,
+    255
+  ],
+  "grid": {
+    "rows": [
+      32,
+      143,
+      255
+    ],
+    "cols": [
+      0,
+      191,
+      381,
+      573,
+      764
+    ]
+  },
+  "scale": 0.42,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/lantern_wisp",
+  "cells": [
+    [
+      "hover1",
+      "hover2",
+      "fly1",
+      "fly2"
+    ],
+    [
+      "fly3",
+      "attack",
+      "hurt",
+      "defeated"
+    ]
+  ],
+  "sets": {
+    "lantern_wisp": {
+      "frames": {
+        "hover1": "lantern_wisp:hover1",
+        "hover2": "lantern_wisp:hover2",
+        "fly1": "lantern_wisp:fly1",
+        "fly2": "lantern_wisp:fly2",
+        "fly3": "lantern_wisp:fly3",
+        "attack": "lantern_wisp:attack",
+        "hurt": "lantern_wisp:hurt",
+        "defeated": "lantern_wisp:defeated"
+      },
+      "anchor": "mass",
+      "baseline": "cell",
+      "out": "assets/sprites/monsters/lantern_wisp.png",
+      "sprite_frames": "assets/animations/lantern_wisp.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "hover1",
+            "hover2"
+          ],
+          "fps": 5
+        },
+        "move": {
+          "frames": [
+            "fly1",
+            "fly2",
+            "fly3",
+            "fly2"
+          ],
+          "fps": 8
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      }
+    }
+  }
+}

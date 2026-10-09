@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="Resource" path="res://data/projectiles/mob_bubble.tres" id="2_mob_bubble"]
-[ext_resource type="Texture2D" path="res://assets/sprites/monsters/boulderkin.png" id="3_boulderkin"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/coral_turret.tres" id="3_coral_turret"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="5_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/coral_branch.tres" id="6_coral_branch"]
@@ -108,7 +108,6 @@ flying = false
 stationary = true
 shot = ExtResource("2_mob_bubble")
 aggressive = true
-texture = ExtResource("3_boulderkin")
-sprite_scale = 0.341
-tint = Color(1.0, 0.564706, 0.564706, 1.0)
+sprite_frames = ExtResource("3_coral_turret")
+sprite_scale = 1.0
 drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11")])

@@ -1273,7 +1273,7 @@ func _check_keepsakes() -> void:
 	inv.use_slot(Game.me.inventory.find(stool))
 	await _ticks(3)
 	_check(me.chair == &"wooden_stool" and world.player.sitting == &"wooden_stool" and world.player._animation() == &"sit", "double-clicking a chair sits you on it")
-	_check(ch.achievements.has("take_a_seat") and world.banner_text == "Achievement: Take a Seat", "sitting down earns an achievement")
+	_check(ch.achievements.has("take_a_seat") and world.hud.banners.toasts.any(func(t: Dictionary) -> bool: return t["title"] == "Take a Seat"), "sitting down earns an achievement")
 	ch.health.set_hp(10)
 	var hp := ch.health.hp
 	map.tick = (map.tick / 120 + 1) * 120 - 1

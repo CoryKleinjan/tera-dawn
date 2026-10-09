@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MonsterDef" load_steps=18 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
-[ext_resource type="SpriteFrames" path="res://assets/animations/dewling.tres" id="2_dewling"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/tide_dewling.tres" id="2_tide_dewling"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/tide_droplet.tres" id="5_tide_droplet"]
@@ -73,7 +73,6 @@ size = Vector2(36.0, 30.0)
 boss = false
 flying = false
 jumps = true
-sprite_frames = ExtResource("2_dewling")
+sprite_frames = ExtResource("2_tide_dewling")
 sprite_scale = 1.0
-tint = Color(0.560784, 0.847059, 1.0, 1.0)
 drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7")])

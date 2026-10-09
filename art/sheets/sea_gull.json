@@ -1,0 +1,98 @@
+{
+  "source": "art/source/mon_dawnrise.png",
+  "region": [
+    773,
+    332,
+    1536,
+    648
+  ],
+  "grid": {
+    "rows": [
+      35,
+      172,
+      316
+    ],
+    "cols": [
+      0,
+      192,
+      382,
+      574,
+      763
+    ]
+  },
+  "scale": 0.391,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/sea_gull",
+  "cells": [
+    [
+      "hover1",
+      "hover2",
+      "fly1",
+      "fly2"
+    ],
+    [
+      "fly3",
+      "attack",
+      "hurt",
+      "defeated"
+    ]
+  ],
+  "sets": {
+    "sea_gull": {
+      "frames": {
+        "hover1": "sea_gull:hover1",
+        "hover2": "sea_gull:hover2",
+        "fly1": "sea_gull:fly1",
+        "fly2": "sea_gull:fly2",
+        "fly3": "sea_gull:fly3",
+        "attack": "sea_gull:attack",
+        "hurt": "sea_gull:hurt",
+        "defeated": "sea_gull:defeated"
+      },
+      "anchor": "mass",
+      "baseline": "cell",
+      "out": "assets/sprites/monsters/sea_gull.png",
+      "sprite_frames": "assets/animations/sea_gull.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "hover1",
+            "hover2"
+          ],
+          "fps": 5
+        },
+        "move": {
+          "frames": [
+            "fly1",
+            "fly2",
+            "fly3",
+            "fly2"
+          ],
+          "fps": 8
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      }
+    }
+  }
+}

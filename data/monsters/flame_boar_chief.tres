@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MonsterDef" load_steps=22 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/monsters/flame_boar_chief.png" id="2_flame_boar_chief"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/flame_boar_chief.tres" id="2_flame_boar_chief"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/chief_mane.tres" id="loot_chief_mane"]
@@ -100,7 +100,8 @@ attack = 43
 exp_reward = 399
 speed = 1.0
 size = Vector2(130.0, 110.0)
-texture = ExtResource("2_flame_boar_chief")
+sprite_frames = ExtResource("2_flame_boar_chief")
+sprite_scale = 1.39
 drops = Array[ExtResource("3_drop_entry")]([SubResource("P11_boar_hide_rug"), SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_loot0"), SubResource("Resource_loot1"), SubResource("Resource_loot2"), SubResource("Resource_loot3"), SubResource("Resource_loot4"), SubResource("Resource_loot5"), SubResource("Resource_loot6")])
 boss = true
 light_color = Color(1.0, 0.47843137254901963, 0.22745098039215686, 1.0)
