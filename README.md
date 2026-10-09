@@ -89,13 +89,25 @@ godot --headless --path . -- --server --port 7350
 
 Players join it with **Join** and the server's address. It keeps their characters in its own `user://characters/` folder and saves every 10 seconds, on every map change and when they leave. Hosting over the internet needs UDP port 7350 forwarded to the host.
 
-Run the gameplay smoke test headless:
+## Tests
+
+Run every test headless (this is what CI runs on every pull request):
 
 ```sh
-godot --headless --path . res://tests/smoke_test.tscn
+tests/run_all.sh              # everything, about a minute
+tests/run_all.sh inventory    # only tests whose file or name contains "inventory"
 ```
 
-It checks that all content loads and references real maps, monsters and items, then plays a short scripted single-player session (inventory stacking, equipping and stat changes, Ability Points, saving and loading, then walk, jump, talk to an NPC, kill a monster, loot with the loot key, drink a potion, change gear, open the windows, use Dawn Slash, climb, take a portal, faint and wake in town). Then it hosts a game and starts a second copy (`tests/bot_client.tscn`) that joins over the network: each must see the other, and the second player's attacks must defeat a monster on the server. It exits non-zero on failure.
+It fails if any test fails or if Godot prints a script error. There are two kinds of test:
+
+- **The test runner** (`tests/run_tests.tscn`) runs every `*_test.gd` file in four folders, in under half a minute:
+  - `tests/unit/`: the game's rules on their own (stats and damage, inventory, gear, scrolls, skills, buffs, EXP, quests, the Monster Book, achievements, saving and loading, combat, drop flight, map layout and balance).
+  - `tests/server/`: the server driven directly with pretend players, ticked one step at a time with no window: joining, movement checks, combat, kills, drops, monsters, items, shops, storage, travel, fainting, quests, chairs, pets, achievements, chat, parties, buddies, trades, guilds, fame and player shops.
+  - `tests/content/`: every file in `data/`: ids, names, references between things, numbers in range, maps that join up and items that can be obtained.
+  - `tests/ui/`: every window opened with something in every tab, drawn, clicked, dragged and closed, plus every NPC dialogue, shop and tooltip.
+- **The smoke test** (`tests/smoke_test.tscn`) plays a scripted single-player session through the real game: walking, talking, shopping, fighting, quests, jobs, skills, travel, the social systems, chairs, pets and achievements. Then it hosts a game and has a second copy of the game (`tests/bot_client.tscn`) join over the network.
+
+To add tests, drop a file ending in `_test.gd` into one of the four folders. It `extends TestCase` (`tests/framework/test_case.gd`), and every method starting with `test_` is a test: check things with `check`, `check_eq` and the other checks there. `UnitHelpers`, `ServerHelpers` (`tests/framework/server_helpers.gd`) and `UiHelpers` set up test content, a server or a running game. Every test starts from the same random seed, so tests must not depend on timing or luck.
 
 Render screenshots of the title, both maps, a Dawn Slash and other players (needs a GPU or software Vulkan, and a display; `xvfb-run` works on a headless Linux box):
 
@@ -113,7 +125,7 @@ assets/            Cut sprites and animations (generated from art/), fonts
 art/source/        Cory's raw sheets; art/sheets/ says how to cut each one
 shaders/           Sky, portal, sword trail, level-up beam and screen post-process
 store/             Steam capsules and key art
-tests/             Headless smoke test and screenshot scene
+tests/             Test runner and suites, smoke test, screenshot scene
 tools/art/         Sheet slicer, store-art cropper, fx textures, contact-sheet preview
 ```
 
