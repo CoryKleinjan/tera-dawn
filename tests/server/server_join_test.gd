@@ -92,17 +92,17 @@ func test_players_on_a_map_see_each_other_in_snapshots() -> void:
 	h.join(2, "Ann")
 	h.join(3, "Bob", ServerHarness.FIELD, 700.0)
 	h.step(TDServer.SNAPSHOT_EVERY)
-	var snap: Dictionary = h.last(2, &"ev_snapshot")[0]
-	var names := (snap["players"] as Array).map(func(row: Array) -> String: return row[1])
-	check_has(names, "Bob", "Ann sees Bob")
-	check_has(names, "Ann", "Ann sees herself")
+	var peers := (h.snapshot(2)["players"] as Array).map(func(row: Array) -> int: return row[0])
+	check_has(peers, 3, "Ann sees Bob")
+	check_has(peers, 2, "Ann sees herself")
+	check_eq(h.player_info(2, 3)[0], "Bob", "and his name")
 
 func test_players_on_other_maps_get_no_snapshots_of_yours() -> void:
 	h.join(2, "Ann")
 	h.join(3, "Bob", ServerHarness.TOWN)
 	h.step(TDServer.SNAPSHOT_EVERY)
-	var snap: Dictionary = h.last(3, &"ev_snapshot")[0]
-	check_eq((snap["players"] as Array).size(), 1, "Bob only sees himself")
+	check_eq((h.snapshot(3)["players"] as Array).size(), 1, "Bob only sees himself")
+	check_eq(h.player_info(3, 2), [], "and hears nothing about Ann")
 
 func test_entering_a_map_sends_its_monsters() -> void:
 	var m := ServerHarness.monster()
@@ -133,13 +133,41 @@ func test_the_creators_choices_make_a_beginner_with_that_look() -> void:
 	check_eq(c.equipment.at(&"top").item.id, &"meadow_shirt", "the top picked")
 	check_eq(h.last(2, &"ev_joined")[0]["appearance"]["hair"], "hair_bun", "the client hears it")
 
-func test_others_see_your_look_and_gear_in_snapshots() -> void:
+func test_others_see_your_look_and_gear() -> void:
 	var a := h.join(2, "Ann")
 	h.join(3, "Bob", ServerHarness.FIELD, 700.0)
 	a.character.appearance.hair_color = &"hair_color_copper"
 	h.step(TDServer.SNAPSHOT_EVERY)
-	var rows: Array = h.last(3, &"ev_snapshot")[0]["players"]
-	var ann: Array = rows.filter(func(r: Array) -> bool: return r[0] == 2)[0]
-	check_eq(ann[12], a.character.look(), "Ann's look in her row")
-	check_eq(ann[12]["appearance"]["hair_color"], "hair_color_copper", "her hair colour")
-	check_eq(ann[12]["gear"]["weapon"], "training_sword", "her sword")
+	var look: Dictionary = h.player_info(3, 2)[6]
+	check_eq(look, a.character.look(), "Ann's look in her info")
+	check_eq(look["appearance"]["hair_color"], "hair_color_copper", "her hair colour")
+	check_eq(look["gear"]["weapon"], "training_sword", "her sword")
+
+func test_player_info_is_sent_only_when_it_changes() -> void:
+	var a := h.join(2, "Ann")
+	h.join(3, "Bob", ServerHarness.FIELD, 700.0)
+	h.step(TDServer.SNAPSHOT_EVERY)
+	var before := h.events(3, &"ev_player_info").size()
+	h.step(TDServer.SNAPSHOT_EVERY * 4)
+	check_eq(h.events(3, &"ev_player_info").size(), before, "nothing new while nothing changed")
+	a.character.level = 7
+	h.step(TDServer.SNAPSHOT_EVERY)
+	check_eq(h.player_info(3, 2)[1], 7, "her new level is sent")
+
+func test_a_newcomer_hears_about_everyone_already_there() -> void:
+	h.join(2, "Ann")
+	h.step(TDServer.SNAPSHOT_EVERY * 2)
+	h.join(3, "Bob", ServerHarness.FIELD, 700.0)
+	h.step(TDServer.SNAPSHOT_EVERY)
+	check_eq(h.player_info(3, 2)[0], "Ann", "Bob hears about Ann")
+
+func test_unchanged_monsters_are_left_out_until_a_full_update() -> void:
+	var m := ServerHarness.monster()
+	h.field_with([ServerHarness.spawn(m, 3)])
+	var a := h.join(2, "Ann")
+	var mi: MapInstance = a.map
+	check_eq((SnapshotCodec.decode(mi.snapshot(true))["mobs"] as Array).size(), 3, "a full update has all three")
+	check_eq((SnapshotCodec.decode(mi.snapshot())["mobs"] as Array).size(), 0, "then none while nothing changed")
+	mi.mobs[1].position.x += 40
+	var rows: Array = SnapshotCodec.decode(mi.snapshot())["mobs"]
+	check_eq(rows.map(func(r: Array) -> int: return r[0]), [1], "only the one that moved")

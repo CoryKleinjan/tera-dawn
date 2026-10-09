@@ -45,12 +45,11 @@ func test_opening_puts_the_things_on_sale() -> void:
 	check_eq(ev.slice(0, 3), [2, "Ann", "Leaf Stall"], "owner sees the shop")
 	check_eq(ev[3], [[{"id": "green_leaf", "count": 6}, 300], [{"id": "red_potion", "count": 2}, 20]], "items and prices")
 
-func test_the_shop_sign_shows_in_snapshots() -> void:
+func test_others_see_the_shop_sign() -> void:
 	_open()
 	h.step(TDServer.SNAPSHOT_EVERY)
-	var rows: Array = h.last(3, &"ev_snapshot")[0]["players"]
-	var ann_row: Array = rows.filter(func(r: Array) -> bool: return r[0] == 2)[0]
-	check_eq(ann_row[-1], "Leaf Stall", "sign over Ann")
+	var info: Array = h.player_info(3, 2)
+	check_eq(info[-1], "Leaf Stall", "sign over Ann")
 
 func test_an_empty_title_names_the_shop_after_its_owner() -> void:
 	h.ask(2, &"req_shop_open", ["   ", [[ItemDef.Tab.ETC, 0, 1, 5]]])

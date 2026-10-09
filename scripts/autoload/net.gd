@@ -445,9 +445,15 @@ func ev_enter_map(map_id: StringName, x: float, state: Dictionary) -> void:
 		world.enter_map(map_id, x, state)
 
 @rpc("authority", "call_local", "unreliable_ordered")
-func ev_snapshot(snap: Dictionary) -> void:
+func ev_snapshot(data: PackedByteArray) -> void:
 	if world:
-		world.apply_snapshot(snap)
+		world.apply_snapshot(SnapshotCodec.decode(data))
+
+## Another player's name, level, look and the like, when it changes (see MapInstance.send_player_info).
+@rpc("authority", "call_local", "reliable")
+func ev_player_info(peer: int, info: Array) -> void:
+	if world:
+		world.set_player_info(peer, info)
 
 @rpc("authority", "call_local", "reliable")
 func ev_player_left(peer: int) -> void:

@@ -77,13 +77,11 @@ func test_changing_maps_gets_you_off_the_chair() -> void:
 	h.move_to(p, ServerHarness.TOWN)
 	check_eq(p.chair, &"", "standing")
 
-func test_others_see_your_chair_in_snapshots() -> void:
+func test_others_see_your_chair() -> void:
 	h.join(3, "Bob", ServerHarness.FIELD, 800.0)
 	h.ask(2, &"req_setup", [0])
 	h.step(TDServer.SNAPSHOT_EVERY)
-	var rows: Array = h.last(3, &"ev_snapshot")[0]["players"]
-	var ann: Array = rows.filter(func(r: Array) -> bool: return r[0] == 2)[0]
-	check_eq(ann[10], stool.id, "chair in Ann's row")
+	check_eq(h.player_info(3, 2)[4], stool.id, "chair in Ann's info")
 
 # ---------- pets ----------
 

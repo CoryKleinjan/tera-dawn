@@ -18,6 +18,10 @@ var players := {}
 var mobs: Array[SimMob] = []
 ## drop id -> SimDrop
 var drops := {}
+## Each monster's record as last sent in a snapshot, so unchanged ones can be left out.
+var _sent_mobs: Array[PackedByteArray] = []
+## peer -> the player info (info() + shop sign) last sent to this map's players.
+var _sent_info := {}
 
 func _init(s: TDServer, map_def: MapDef) -> void:
 	server = s
@@ -61,9 +65,12 @@ func add_player(p: SimPlayer, x: float) -> void:
 	p.since_move = 0
 	p.character.map_id = def.id
 	players[p.peer] = p
+	# the newcomer needs everyone's info, and everyone needs theirs: resend it all
+	_sent_info.clear()
 
 func remove_player(p: SimPlayer) -> void:
 	players.erase(p.peer)
+	_sent_info.erase(p.peer)
 	for m in mobs:
 		if m.target == p.peer:
 			m.aggro = 0
@@ -73,11 +80,29 @@ func full_state() -> Dictionary:
 	return {"mobs": mobs.map(func(m: SimMob) -> Array: return m.snapshot()),
 		"drops": drops.values().map(func(d: SimDrop) -> Array: return d.snapshot())}
 
-## Where everyone and everything is, sent to this map's players many times a second.
-func snapshot() -> Dictionary:
-	return {"tick": tick,
-		"mobs": mobs.map(func(m: SimMob) -> Array: return m.snapshot()),
-		"players": players.values().map(func(p: SimPlayer) -> Array: return p.snapshot() + [server.social.shop_title(p.peer)])}
+## Where everyone and everything is, sent to this map's players many times a second as
+## bytes (SnapshotCodec). Monsters that haven't changed since the last one are left out
+## unless `full`, which the server asks for now and then in case an update was lost.
+func snapshot(full := false) -> PackedByteArray:
+	if _sent_mobs.size() != mobs.size():
+		_sent_mobs.resize(mobs.size())
+		full = true
+	var records: Array[PackedByteArray] = []
+	for i in mobs.size():
+		var r := SnapshotCodec.mob_record(i, mobs[i].snapshot())
+		if full or r != _sent_mobs[i]:
+			records.append(r)
+			_sent_mobs[i] = r
+	return SnapshotCodec.encode(tick, records, players.values().map(func(p: SimPlayer) -> Array: return p.motion()))
+
+## Sends this map's players the info (name, level, look, gear, chair, pet, shop sign) of
+## every player whose info changed since it was last sent. Reliable, unlike snapshots.
+func send_player_info() -> void:
+	for p: SimPlayer in players.values():
+		var info := p.info() + [server.social.shop_title(p.peer)]
+		if _sent_info.get(p.peer) != info:
+			_sent_info[p.peer] = info
+			broadcast(&"ev_player_info", [p.peer, info])
 
 ## Sends an event to every player on this map (except `skip`).
 func broadcast(event: StringName, args: Array, skip := 0) -> void:

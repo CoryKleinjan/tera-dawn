@@ -96,9 +96,9 @@ func step() -> bool:
 		dirty_vitals = true
 	return false
 
-## What other clients need to draw this player: [peer, name, x, y, face, animation, level,
-## flags, job, guild, chair, pet] (the map adds their shop sign).
-func snapshot() -> Array:
+## Where this player is and what they're doing, sent many times a second:
+## [peer, x, y, face, animation, flags] (see SnapshotCodec).
+func motion() -> Array:
 	var flags := 0
 	if fainted():
 		flags |= SnapshotFlags.PLAYER_FAINTED
@@ -106,4 +106,9 @@ func snapshot() -> Array:
 		flags |= SnapshotFlags.PLAYER_BLINK
 	if climbing:
 		flags |= SnapshotFlags.PLAYER_CLIMBING
-	return [peer, character.name, position.x, position.y, face, animation, character.level, flags, character.job.id, character.guild, chair, character.pet, character.look()]
+	return [peer, position.x, position.y, face, animation, flags]
+
+## What else other clients need to draw this player, which changes rarely:
+## [name, level, job, guild, chair, pet, look] (the map adds their shop sign).
+func info() -> Array:
+	return [character.name, character.level, character.job.id, character.guild, chair, character.pet, character.look()]

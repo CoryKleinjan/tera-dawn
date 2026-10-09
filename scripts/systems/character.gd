@@ -97,7 +97,7 @@ static func create(char_name: String, job_id := START_JOB, made: NewCharacter = 
 	return c
 
 ## How the character looks to everyone: their appearance and the worn gear that shows
-## (Paperdoll draws it). Sent with every player snapshot.
+## (Paperdoll draws it). Sent in the player info other clients get (ev_player_info).
 func look() -> Dictionary:
 	var gear := {}
 	for place in Paperdoll.SHOWN_PLACES:

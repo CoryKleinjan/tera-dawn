@@ -53,7 +53,11 @@ TDWorld  ───────────────────────�
   hero (`TDPlayer`) moves and climbs on your machine so it feels instant, like MapleStory, and
   reports where it is 20 times a second; the server checks the report is possible and puts you
   back if not. Monsters (`TDMob`), other players (`TDAvatar`) and drops (`TDDrop`) are views
-  that glide to where the server's snapshots say they are.
+  that glide to where the server's snapshots say they are. Snapshots go out 20 times a
+  second as packed bytes (`SnapshotCodec`) so even a busy map fits in one network packet:
+  they hold only positions, facing, HP, animation and flags, and leave out monsters that
+  haven't changed (every monster goes in once a second). A player's name, level, look, gear,
+  chair, pet and shop sign go separately (`ev_player_info`), reliably and only when they change.
 - **Net** (`scripts/autoload/net.gd`) is the whole protocol in one file. `req_*` methods go from
   a client to the server, `ev_*` methods from the server to clients. UI and actors call
   `Net.ask(&"req_…", [args])`; the server answers with events, and `Game.me` (your copy of
@@ -130,7 +134,7 @@ only what the creator offers and makes a level 1 character in the starting job
   colour, each the id of a `LookDef` in `data/looks/`. Add an option by adding a file;
   `creator` and `order` decide whether and where the creator lists it.
 - **Outfit** choices come from the starting job's `creator_gear` (one piece per kind).
-- **Looks** travel in every player snapshot (`Character.look()`: appearance and the worn
+- **Looks** travel in each player's info (`ev_player_info`, sent when it changes; `Character.look()`: appearance and the worn
   gear that shows), so everyone sees everyone's hair and gear.
 - **Drawing** is done by `Paperdoll`, which works out the layers from a look;
   `PaperdollSprite` shows it in the world (on `SpriteRig`) and `PaperdollView` in menus (the
@@ -154,7 +158,7 @@ only what the creator offers and makes a level 1 character in the starting job
   `req_setup`. The server keeps the chair you sit on in `SimPlayer.chair` (moving clears it)
   and adds its regen; the pet that's out is `Character.pet`, with `pet_full` dropping every
   `hunger_ticks` and `MapInstance._pet_step` picking up drops within `loot_reach`. Both go out
-  in the player snapshot, and `TDCompanion` draws them next to you and other players.
+  in the player's info, and `TDCompanion` draws them next to you and other players.
 - **The Monster Book** (`MonsterBook`, on the Character) counts kills and cards per monster.
   `Content` makes a `CardDef` for every monster at startup (`card_<id>`, no files); monsters
   drop it at `CardDef.CHANCE` until your page is full, and picking it up files it in the book
@@ -195,7 +199,7 @@ scripts/
   settings/           SettingsSection and its sections: Keybinds, AudioSettings, VideoSettings
   server/             TDServer, MapInstance, SimPlayer, SimMob, SimDrop, CharacterStore, TDSocial
   server/social/      TDSocial's parts: chat, parties, trade, guilds, player shops
-  net/                SnapshotFlags, the bits both server and client read in snapshots
+  net/                SnapshotFlags (the bits both sides read in snapshots), SnapshotCodec (packs them)
   data/               Resource classes for everything in data/
   systems/            Character (and CharacterCodec, its save format), Appearance, NewCharacter,
                       Inventory, Equipment,
