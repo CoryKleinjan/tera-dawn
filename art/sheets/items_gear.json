@@ -1,0 +1,30 @@
+{
+  "source": "art/source/items_gear.png",
+  "out_dir": "assets/sprites/items",
+  "scale": 0.25,
+  "alpha": "hard",
+  "keep": "largest",
+  "cells": [
+    [
+      "training_sword",
+      "dawn_blade",
+      "ember_cleaver",
+      "oak_shield",
+      "leaf_cap"
+    ],
+    [
+      "ember_helm",
+      "linen_tunic",
+      "trail_pants",
+      "leather_boots",
+      "work_gloves"
+    ],
+    [
+      "petal_cape",
+      "dewdrop_earrings",
+      "sun_pendant",
+      "moss_ring",
+      "cinder_ring"
+    ]
+  ]
+}

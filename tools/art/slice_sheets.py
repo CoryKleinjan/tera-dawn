@@ -468,8 +468,17 @@ def main():
     paths = sorted(os.path.join(SHEETS, f) for f in os.listdir(SHEETS) if f.endswith(".json"))
     if args:
         paths = [p for p in paths if os.path.splitext(os.path.basename(p))[0] in args]
+    # a manifest can land before its sheet does (art still being made)
+    ready = []
+    for p in paths:
+        with open(p) as f:
+            source = json.load(f)["source"]
+        if os.path.exists(os.path.join(ROOT, source)):
+            ready.append(p)
+        else:
+            print(f"{os.path.basename(p)}: skipped, {source} isn't there yet")
     sprites = {}
-    manifests = [process(p, grid_only, sprites) for p in paths]
+    manifests = [process(p, grid_only, sprites) for p in ready]
     if grid_only:
         return
     # animation sets can pull frames from any sheet processed in this run

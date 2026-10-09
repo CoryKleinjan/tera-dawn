@@ -1,0 +1,30 @@
+{
+  "source": "art/source/items_consumables.png",
+  "out_dir": "assets/sprites/items",
+  "scale": 0.25,
+  "alpha": "hard",
+  "keep": "largest",
+  "cells": [
+    [
+      "red_potion",
+      "orange_potion",
+      "white_potion",
+      "blue_potion",
+      "elixir"
+    ],
+    [
+      "dewling_droplet",
+      "moss_tuft",
+      "petal_wing",
+      "sproutcap_cap",
+      "pebble_core"
+    ],
+    [
+      "cinder_horn",
+      "boar_tusk",
+      "ashshell_fragment",
+      "chief_mane",
+      "mana_elixir"
+    ]
+  ]
+}

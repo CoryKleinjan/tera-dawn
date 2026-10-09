@@ -1,0 +1,28 @@
+{
+  "source": "art/source/ui_windows.png",
+  "out_dir": "assets/sprites/ui",
+  "scale": 0.5,
+  "alpha": "soft",
+  "label_band": 0.2,
+  "grid_threshold": 0.7,
+  "cells": [
+    [
+      "window_frame",
+      "window_tab_on",
+      "window_tab_off",
+      "item_slot"
+    ],
+    [
+      "item_slot_hover",
+      "window_close",
+      "stat_plus",
+      "tooltip_frame"
+    ],
+    [
+      "equip_doll_bg",
+      "bag_button",
+      "gear_button",
+      "stats_button"
+    ]
+  ]
+}

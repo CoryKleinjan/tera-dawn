@@ -96,9 +96,16 @@ func draw_slot(r: Rect2, stack: ItemStack, dim := false, label := "") -> void:
 			DrawUtil.text(self, Game.ui_font, r.get_center() + Vector2(0, 4), label, 9, Color(Palette.MIST, 0.45))
 		return
 	if stack.item.icon:
-		draw_texture_rect(stack.item.icon, r.grow(-5), false, Color(1, 1, 1, 0.35 if dim else 1.0))
+		draw_texture_rect(stack.item.icon, fit(stack.item.icon, r.grow(-5)), false, Color(1, 1, 1, 0.35 if dim else 1.0))
 	if stack.count > 1:
 		DrawUtil.text(self, Game.num_font, r.end + Vector2(-4, -3), str(stack.count), 12, Palette.MIST, -1, 4, Palette.NIGHT)
+
+## The largest rect inside `box` with the texture's shape, centred (icons cut from a sheet
+## aren't all square).
+static func fit(tex: Texture2D, box: Rect2) -> Rect2:
+	var k := minf(box.size.x / tex.get_width(), box.size.y / tex.get_height())
+	var s := tex.get_size() * k
+	return Rect2(box.get_center() - s / 2.0, s)
 
 ## A drag preview showing an item's icon under the cursor.
 func drag_preview(stack: ItemStack) -> Control:
@@ -106,6 +113,7 @@ func drag_preview(stack: ItemStack) -> Control:
 	var icon := TextureRect.new()
 	icon.texture = stack.item.icon
 	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	icon.size = Vector2(SLOT, SLOT) - Vector2(10, 10)
 	icon.position = -icon.size / 2.0
 	icon.modulate = Color(1, 1, 1, 0.85)
