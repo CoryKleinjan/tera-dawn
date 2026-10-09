@@ -1,7 +1,7 @@
 class_name Character
 extends RefCounted
 ## One character: name, level, EXP, job, stats, Ability Points, inventory, equipment,
-## Dawnshards, HP, MP and the map they're on. Formulas live in CharacterStats; this only
+## quests, Dawnshards, HP, MP and the map they're on. Formulas live in CharacterStats; this only
 ## holds and changes state.
 ##
 ## The server owns the real Character of every player. Each client keeps a copy of its own
@@ -27,6 +27,7 @@ var base := StatBlock.new()
 var ap := 0
 var inventory := Inventory.new()
 var equipment := Equipment.new()
+var quests := QuestLog.new()
 ## Base stats plus everything worn. Kept up to date by recalc().
 var stats := StatBlock.new()
 
@@ -158,6 +159,7 @@ func to_dict() -> Dictionary:
 		"job": job.id, "base": base.to_dict(), "ap": ap,
 		"hp": health.hp, "mp": mp,
 		"inventory": inventory.to_dict(), "equipment": equipment.to_dict(),
+		"quests": quests.to_dict(),
 	}
 
 ## Loads what to_dict() wrote. Missing or bad values keep the current ones, so older saves
@@ -182,6 +184,8 @@ func load_dict(data: Dictionary) -> void:
 		inventory.load_dict(data["inventory"])
 	if data.get("equipment") is Dictionary:
 		equipment.load_dict(data["equipment"])
+	if data.get("quests") is Dictionary:
+		quests.load_dict(data["quests"])
 	recalc()
 	health.set_hp(maxi(1, int(data.get("hp", max_hp()))))
 	mp = clampi(int(data.get("mp", max_mp())), 0, max_mp())

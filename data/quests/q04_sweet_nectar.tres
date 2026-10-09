@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="QuestDef" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="1_quest_def"]
+[ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="2_quest_objective"]
+[ext_resource type="Resource" path="res://data/items/etc/petal_nectar.tres" id="3_petal_nectar"]
+[ext_resource type="Resource" path="res://data/monsters/petal_bat.tres" id="4_petal_bat"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="5_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="6_white_potion"]
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("5_drop_entry")
+item = ExtResource("6_white_potion")
+chance = 1.0
+min_amount = 5
+max_amount = 5
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("2_quest_objective")
+kind = 1
+item = ExtResource("3_petal_nectar")
+count = 5
+drop_from = ExtResource("4_petal_bat")
+drop_chance = 0.6
+
+[resource]
+script = ExtResource("1_quest_def")
+id = &"q04_sweet_nectar"
+title = "Sweet Nectar"
+giver = &"shopkeeper"
+min_level = 3
+requires = Array[StringName]([&"q02_moss_for_the_stall"])
+repeatable = false
+offer_text = "I'm baking honey cakes for the village, but I'm out of nectar. Petal Bats keep it in their wings. Could you collect five Petal Nectar?"
+progress_text = "Five Petal Nectar. Only the Petal Bats have it, and they flutter up high."
+complete_text = "Mmm, smell that! The first cake is yours. And a few Dawnshards for the trouble."
+objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1")])
+reward_xp = 180
+reward_shards = 200
+reward_items = Array[ExtResource("5_drop_entry")]([SubResource("Resource_2")])

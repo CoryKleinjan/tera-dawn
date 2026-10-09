@@ -103,6 +103,7 @@ func _enter_map(p: SimPlayer, id: StringName, x: float) -> void:
 	var m := map_instance(id)
 	m.add_player(p, x)
 	Net.send(p.peer, &"ev_enter_map", [id, x, m.full_state()])
+	_quest_progress(p, p.character.quests.record_visit(id))
 	store.save(p.character)
 
 ## Sends a fainted player back to town with half their HP and MP.
@@ -206,10 +207,76 @@ func on_drop_item(peer: int, tab: int, slot: int) -> void:
 	var p := _player(peer)
 	if p == null or p.fainted() or tab < 0 or tab >= ItemDef.Tab.size() or slot < 0 or slot >= Inventory.SLOTS:
 		return
+	var held := p.character.inventory.at(tab, slot)
+	if held and held.item.quest_item:
+		p.map.tell(p, "Quest items can't be dropped.", MapInstance.BAD)
+		return
 	var stack := p.character.inventory.take(tab, slot)
 	if stack:
 		p.dirty_character = true
 		p.map.drop_from_player(p, stack)
+
+# ---------- quests ----------
+
+func record_kill(p: SimPlayer, monster: MonsterDef) -> void:
+	_quest_progress(p, p.character.quests.record_kill(monster))
+
+## Shows how quests that collect `item` are going after picking one up.
+func picked_up(p: SimPlayer, item: ItemDef) -> void:
+	var c := p.character
+	for id in c.quests.active:
+		var q: QuestDef = Content.quests.get(id)
+		for i in q.objectives.size():
+			var o := q.objectives[i]
+			if o.kind == QuestObjective.Kind.COLLECT and o.item == item:
+				p.map.tell(p, "%s: %s %d/%d" % [q.title, o.item.display_name, c.quests.progress(q, i, c), o.count], Color("a8e6ff"))
+
+## Tells the player how the quests that just moved on are going.
+func _quest_progress(p: SimPlayer, moved: Array[QuestDef]) -> void:
+	for q in moved:
+		p.dirty_character = true
+		var c := p.character
+		for i in q.objectives.size():
+			var o := q.objectives[i]
+			if o.kind != QuestObjective.Kind.COLLECT:
+				p.map.tell(p, "%s: %s %d/%d" % [q.title, o.describe(), c.quests.progress(q, i, c), o.count], Color("a8e6ff"))
+		if c.quests.is_ready(q, c):
+			p.map.tell(p, "%s is ready to hand in." % q.title, Palette.SUN)
+
+func on_quest_accept(peer: int, npc_id: StringName, quest_id: StringName) -> void:
+	var p := _player(peer)
+	var q: QuestDef = Content.quests.get(quest_id)
+	if p == null or q == null or q.giver != npc_id or p.map.npc_near(p, npc_id) == null:
+		return
+	var c := p.character
+	if c.quests.status(q, c) != QuestLog.Status.AVAILABLE:
+		return
+	c.quests.accept(q)
+	p.dirty_character = true
+	p.map.tell(p, "New quest: %s" % q.title, Palette.SUN)
+	_quest_progress(p, c.quests.record_visit(p.map.def.id))
+
+func on_quest_complete(peer: int, npc_id: StringName, quest_id: StringName) -> void:
+	var p := _player(peer)
+	var q: QuestDef = Content.quests.get(quest_id)
+	if p == null or q == null or q.turn_in_npc() != npc_id or p.map.npc_near(p, npc_id) == null:
+		return
+	var problem := p.character.quests.complete(q, p.character)
+	p.dirty_character = true
+	if problem != "":
+		p.map.tell(p, problem, MapInstance.BAD)
+		return
+	p.map.tell(p, "Quest complete: %s" % q.title, Palette.SUN)
+	if q.reward_xp > 0:
+		give_xp(p, q.reward_xp)
+
+func on_quest_forfeit(peer: int, quest_id: StringName) -> void:
+	var p := _player(peer)
+	var q: QuestDef = Content.quests.get(quest_id)
+	if p and q and p.character.quests.active.has(q.id):
+		p.character.quests.forfeit(q)
+		p.dirty_character = true
+		p.map.tell(p, "Gave up on %s." % q.title, Palette.MIST)
 
 ## Buys `count` of a shop's entry `index` from the NPC `npc_id` the player stands by.
 func on_buy(peer: int, npc_id: StringName, index: int, count: int) -> void:
@@ -240,6 +307,9 @@ func on_sell(peer: int, npc_id: StringName, tab: int, slot: int, count: int) -> 
 	var stack := p.character.inventory.at(tab, slot)
 	if stack == null:
 		return
+	if stack.item.quest_item:
+		p.map.tell(p, "You can't sell quest items.", MapInstance.BAD)
+		return
 	var sold := p.character.inventory.take(tab, slot, clampi(count, 1, stack.count))
 	var total := sold.item.sell_price * sold.count
 	p.character.shards += total
@@ -254,8 +324,9 @@ func on_sell_all_etc(peer: int, npc_id: StringName) -> void:
 		return
 	var total := 0
 	for i in Inventory.SLOTS:
-		var s := p.character.inventory.take(ItemDef.Tab.ETC, i)
-		if s:
+		var held := p.character.inventory.at(ItemDef.Tab.ETC, i)
+		if held and not held.item.quest_item:
+			var s := p.character.inventory.take(ItemDef.Tab.ETC, i)
 			total += s.item.sell_price * s.count
 	if total > 0:
 		p.character.shards += total

@@ -121,6 +121,22 @@ func _run() -> void:
 		await _frames(3)
 		await _shot("shop")
 		world.hud.windows["shop"].visible = false
+	if only == "" or only == "quests":
+		# A quest offer from the elder, the tracker and the quest log.
+		ch.quests.accept(Content.quest(&"q02_moss_for_the_stall"))
+		ch.inventory.add(Content.item(&"moss_tuft"), 4)
+		_me().dirty_character = true
+		var elder := world.npcs()[0]
+		_teleport(world, Vector2(elder.position.x - 40, 620))
+		await _physics(5)
+		elder.talk()
+		var talk: TDDialogueWindow = world.hud.windows["dialogue"]
+		talk.choose(0)
+		world.hud.toggle_window("quests")
+		await _frames(3)
+		await _shot("quests")
+		talk.visible = false
+		world.hud.toggle_window("quests")
 	if only == "" or only == "players":
 		# Two other players nearby. They're on the server but have no game connected.
 		_teleport(world, Vector2(1300, 620))

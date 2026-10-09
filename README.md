@@ -26,6 +26,7 @@ The game is built to grow: monsters, NPCs, items, skills, effects, maps and biom
 - Basic attack and **Dawn Slash**, a skill that costs 8 MP and hits up to 4 monsters twice.
 - Nine monsters, from Dewlings to the Flame Boar Chief boss, with patrol and chase behavior.
 - Two NPCs in the meadow village. Press Up to talk: a dialogue window shows what they offer.
+- **Quests**: six to start, from Elder Rowan and Mira, with kill, collect and visit objectives, a quest item that only drops while you're on its quest, and a repeatable one. A "!" over an NPC means they have a quest for you, "?" means you can hand one in. The quest log (Q) lists what's in progress, available and done, and a tracker under the minimap shows your progress.
 - **Mira's General Store**: buy potions and starter gear, sell anything (1, 10 or 100 at a time, or all your Etc items at once).
 - EXP, leveling, HP and MP regen, fainting and respawn.
 - **Dawnshards** (currency) dropped by monsters, plus potions, monster parts and gear from per-monster drop tables.
@@ -47,6 +48,7 @@ The game is built to grow: monsters, NPCs, items, skills, effects, maps and biom
 | Inventory | I | Back |
 | Equipment | E | |
 | Character info | S | |
+| Quest log | Q | |
 | Enter a portal, talk to an NPC | Up | Up |
 | Pick a dialogue option | 1 to 9, or click | |
 | Close a window, or the menu | Esc | Start |

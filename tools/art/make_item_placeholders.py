@@ -49,6 +49,7 @@ ICONS = {
     "boar_tusk": ("tusk", "f3e6c8"),
     "ashshell_fragment": ("shard", "8f8a99"),
     "chief_mane": ("flame", "ff7a2e"),
+    "petal_nectar": ("potion", "ffc2e0"),
 }
 
 
