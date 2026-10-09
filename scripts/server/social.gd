@@ -334,6 +334,8 @@ func _invite_problem(p: SimPlayer, kind: String, o: SimPlayer) -> String:
 				return "%s is already your buddy." % them
 			if p.character.buddies.size() >= BUDDY_MAX:
 				return "Your buddy list is full."
+			if o.character.buddies.size() >= BUDDY_MAX and not o.character.buddies.has(me):
+				return "%s's buddy list is full." % them
 		"trade":
 			if o.map != p.map:
 				return "%s needs to be on this map to trade." % them
@@ -365,6 +367,10 @@ func on_answer(peer: int, id: int, accept: bool) -> void:
 		return
 	if not accept:
 		_tell(from, "%s said no." % p.character.name)
+		return
+	if inv["kind"] == "buddy" and p.character.buddies.size() >= BUDDY_MAX and not p.character.buddies.has(from.character.name):
+		_tell(p, "Your buddy list is full.", MapInstance.BAD)
+		_tell(from, "%s's buddy list is full." % p.character.name, MapInstance.BAD)
 		return
 	var problem := _invite_problem(from, inv["kind"], p)
 	if problem != "":
