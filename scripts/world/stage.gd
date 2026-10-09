@@ -32,6 +32,8 @@ const Z_NPC := 0.3
 const Z_MONSTER := 0.38
 const Z_MONSTER_SPREAD := 0.14
 const Z_DROP := 0.56
+## Other players stand just behind you, so your own hero is never hidden in a crowd.
+const Z_OTHER_PLAYER := 0.6
 const Z_PLAYER := 0.64
 const Z_EFFECT := 0.8
 

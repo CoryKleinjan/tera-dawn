@@ -44,10 +44,10 @@ func _draw_body() -> void:
 		var s := minf(box.size.x / portrait.get_width(), box.size.y / portrait.get_height()) * 1.3
 		var ps := portrait.get_size() * s
 		draw_texture_rect(portrait, Rect2(box.get_center() - Vector2(ps.x / 2.0, ps.y * 0.55), ps), false)
-	DrawUtil.text(self, Game.ui_font, Vector2(box.get_center().x, box.end.y - 6), "%s Lv. %d" % [Game.job.display_name, Game.level], 11, Palette.MIST, 0, 4, Palette.NIGHT)
+	DrawUtil.text(self, Game.ui_font, Vector2(box.get_center().x, box.end.y - 6), "%s Lv. %d" % [Game.me.job.display_name, Game.me.level], 11, Palette.MIST, 0, 4, Palette.NIGHT)
 	var dragging := _dragged_equip()
 	for p in LAYOUT:
-		var stack := Game.equipment.at(p)
+		var stack := Game.me.equipment.at(p)
 		var r := slot_rect(p)
 		draw_slot(r, stack, p == dragging, Equipment.PLACE_NAMES[p])
 		if _drag_fits(p):
@@ -58,13 +58,13 @@ func _draw_body() -> void:
 
 ## The panel on the right: what the gear adds to each stat.
 func _draw_bonuses() -> void:
-	if selected != &"" and Game.equipment.at(selected) == null:
+	if selected != &"" and Game.me.equipment.at(selected) == null:
 		selected = &""
 	var panel := Rect2(size.x - PAD - PANEL_W, GRID_Y, PANEL_W, 4 * (SLOT + GAP) - GAP)
 	DrawUtil.round_rect(self, panel, 10, Color(Palette.NIGHT, 0.55))
-	var stack := Game.equipment.at(selected) if selected != &"" else null
+	var stack := Game.me.equipment.at(selected) if selected != &"" else null
 	var heading := stack.item.display_name if stack else "Gear bonuses"
-	var bonus := stack.stats if stack else Game.equipment.bonus()
+	var bonus := stack.stats if stack else Game.me.equipment.bonus()
 	var x := panel.position.x + 10
 	var y := panel.position.y + 20
 	DrawUtil.text(self, Game.ui_font, Vector2(x, y), heading, 13, Palette.SUN, 1, 3, Palette.NIGHT)
@@ -86,7 +86,7 @@ func _drag_fits(place: StringName) -> bool:
 	var d: Variant = get_viewport().gui_get_drag_data()
 	if not (d is Dictionary and d.get("from") == "inventory" and d.get("tab") == ItemDef.Tab.EQUIP):
 		return false
-	var stack := Game.inventory.at(ItemDef.Tab.EQUIP, d["index"])
+	var stack := Game.me.inventory.at(ItemDef.Tab.EQUIP, d["index"])
 	return stack != null and Equipment.fits(stack.equip_def(), place)
 
 func _dragged_equip() -> StringName:
@@ -99,22 +99,20 @@ func _click(at: Vector2, button: int, double: bool) -> void:
 	var p := place_at(at)
 	if button == MOUSE_BUTTON_LEFT and not double:
 		# a worn item shows its own stats in the panel; clicking it again shows the whole set
-		selected = p if p != selected and p != &"" and Game.equipment.at(p) != null else &""
+		selected = p if p != selected and p != &"" and Game.me.equipment.at(p) != null else &""
 	if p != &"" and button == MOUSE_BUTTON_LEFT and double:
-		var problem := Game.unequip(p)
-		if problem != "":
-			hud.world.add_log(problem, Color("ff8a99"))
+		Net.ask(&"req_unequip", [p, -1])
 		hud.tooltip.clear(self)
 
 func _hovered(at: Vector2) -> void:
 	var p := place_at(at)
-	hud.tooltip.show_item(self, Game.equipment.at(p) if p != &"" else null, get_global_mouse_position(), "Double-click to take off")
+	hud.tooltip.show_item(self, Game.me.equipment.at(p) if p != &"" else null, get_global_mouse_position(), "Double-click to take off")
 
 func _get_drag_data(at: Vector2) -> Variant:
 	var p := place_at(at)
-	if p == &"" or Game.equipment.at(p) == null:
+	if p == &"" or Game.me.equipment.at(p) == null:
 		return null
-	set_drag_preview(drag_preview(Game.equipment.at(p)))
+	set_drag_preview(drag_preview(Game.me.equipment.at(p)))
 	hud.tooltip.clear(self)
 	return {"from": "equipment", "place": p}
 
@@ -123,6 +121,4 @@ func _can_drop_data(at: Vector2, data: Variant) -> bool:
 		and place_at(at) != &""
 
 func _drop_data(at: Vector2, data: Variant) -> void:
-	var problem := Game.equip(data["index"], place_at(at))
-	if problem != "":
-		hud.world.add_log(problem, Color("ff8a99"))
+	Net.ask(&"req_equip", [data["index"], place_at(at)])

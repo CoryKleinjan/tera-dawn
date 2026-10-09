@@ -1,68 +1,38 @@
 class_name TDDrop
 extends Node2D
-## An item lying on the ground after a monster drops it. Currency is picked up by walking
-## over it; everything else with the loot key (see TDPlayer).
+## An item lying on the ground, as a player sees it. The server keeps the real one
+## (SimDrop) and decides who picks it up; this plays the same flight so it lands in the
+## same spot, and sparkles until the server says it's gone.
 
 var world: TDWorld
+var id := 0
 var item: ItemDef
 var amount := 1
-## Gear dropped from the bag keeps its rolled stats; otherwise null and rolled on pickup.
-var stack: ItemStack
-## Where it lands; NAN means wherever it flies.
-var land_x := NAN
-var vel := Vector2.ZERO
-var floor_y := 0.0
+var flight: DropFlight
 var t := 0
 var spin := randf() * 6.0
-var taken := false
 
 var gem: Sprite3D
 var glow: Sprite3D
 var shine: OmniLight3D
 
-static func create(w: TDWorld, it: ItemDef, n: int, at: Vector2, ground: float) -> TDDrop:
+## Builds one from the server's [id, item id, amount, flight, age].
+static func create(w: TDWorld, snap: Array) -> TDDrop:
 	var d := TDDrop.new()
 	d.world = w
-	d.item = it
-	d.amount = n
-	d.position = at
-	d.floor_y = ground
-	d.vel = Vector2(randf_range(-1.6, 1.6), randf_range(-6, -4))
+	d.id = snap[0]
+	d.item = Content.item(snap[1])
+	d.amount = snap[2]
+	d.flight = DropFlight.from_array(snap[3])
+	d.t = snap[4]
+	d.position = d.flight.position
 	return d
 
 func step() -> void:
 	t += 1
 	spin += 0.1
-	if vel.y != 0.0 or position.y < floor_y:
-		vel.y += 0.45
-		position.y += vel.y
-		if is_nan(land_x):
-			position.x += vel.x
-		else:
-			position.x = lerpf(position.x, land_x, 0.12)
-		if position.y >= floor_y:
-			position.y = floor_y
-			if not is_nan(land_x):
-				position.x = land_x
-			vel = Vector2.ZERO
-	if item.is_currency and can_loot(world.player.position):
-		pick_up()
-	elif t > 3600:
-		queue_free()
-
-## Whether a player standing at `feet` can pick this up now.
-func can_loot(feet: Vector2) -> bool:
-	return not taken and t > 25 and not world.player.fainted() \
-		and absf(position.x - feet.x) < 26 and absf(position.y - feet.y) < 50
-
-## Puts it in the wallet or bag. False if the bag is full (it stays on the ground).
-func pick_up() -> bool:
-	if not world.collect(item, amount, stack):
-		return false
-	taken = true
-	world.add_effect(item.pickup_effect, position + Vector2(0, -16), 1)
-	queue_free()
-	return true
+	flight.step()
+	position = flight.position
 
 func _ready() -> void:
 	var big := item.pile_texture != null and amount >= item.pile_amount
@@ -79,7 +49,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if gem == null:
 		return
-	var resting := vel == Vector2.ZERO
+	var resting := flight.resting()
 	var hover := sin(spin * 2.0) * 2.0 if resting else 0.0
 	var p := TDStage.to3d(position + Vector2(0, -2 - hover), TDStage.Z_DROP)
 	gem.position = p

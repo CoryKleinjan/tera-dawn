@@ -15,20 +15,66 @@ data/*.tres  ──►  Content (autoload)  ──►  World loads a MapDef  ─
   stats and sprite, a map's platforms and spawns, a skill's reach and damage. Every class is a
   Godot `Resource`, so it can be edited in the Godot inspector.
 - **Systems** (`scripts/systems/`) are the character's rules that aren't tied to the world:
-  `Inventory`, `Equipment`, `ItemStack` (one slot's worth of an item, with its own rolled
-  stats for gear) and `CharacterStats` (the MapleStory formulas). `Game` holds the
-  character's state and uses them.
+  `Character` (level, EXP, stats, bag, gear, HP, MP), `Inventory`, `Equipment`, `ItemStack`
+  (one slot's worth of an item, with its own rolled stats for gear) and `CharacterStats` (the
+  MapleStory formulas). The server owns each player's `Character`; `Game.me` is your copy.
 - **Components** (`scripts/components/`) are small reusable parts any actor can use: `Health`,
   `Hitbox` and `SpriteRig` (sprite, animation, shadow, light and aura).
-- **Actors** (`scripts/actors/`) run things in the world: the player, monsters, NPCs and drops.
-- **World** (`scripts/world/`) holds the rules and the map: `world.gd` loads maps and runs
-  combat, `stage.gd` and its builders turn a map into the HD-2D diorama.
+- **Server** (`scripts/server/`) runs the game for everyone (see Multiplayer below).
+- **Actors** (`scripts/actors/`) are what you see in the world: your hero, other players,
+  monsters, NPCs and drops.
+- **World** (`scripts/world/`) shows the map you're on: `world.gd` builds it and shows the
+  server's events, `stage.gd` and its builders turn a map into the HD-2D diorama.
 - **UI** (`scripts/ui/`) draws the HUD from the sliced UI sheet through `UiSkin`.
 - **Art** comes from Cory's sheets in `art/source/`, cut by `tools/art/slice_sheets.py`
   (see `art/sheets/README.md`).
 
 Game logic is 2D: positions are game pixels with y pointing down, and physics ticks 60 times a
 second. Only the stage turns that into 3D (32 game pixels per 3D unit).
+
+## Multiplayer: server and client
+
+Tera Dawn is online, and there is always a server, even in single player. One codebase plays
+three roles:
+
+```
+             requests (req_*)                    events (ev_*)
+TDWorld  ───────────────────────►  TDServer  ─────────────────────►  TDWorld (every player
+(your game)   through Net           MapInstance per map                on that map)
+```
+
+- **Server** (`scripts/server/`): `TDServer` holds every connected player as a `SimPlayer`
+  (their `Character`, position and timers) and runs one `MapInstance` per visited map: its
+  `SimMob`s, the `SimDrop`s on the ground and the players on it. It decides everything that
+  matters: hits, damage, kills, EXP, levels, drops, who picks what up, HP and MP, potions,
+  gear, portals, fainting. `CharacterStore` saves characters, one JSON file per name.
+- **Client** (`scripts/world/`, `scripts/actors/`): `TDWorld` shows the map you're on. Your own
+  hero (`TDPlayer`) moves and climbs on your machine so it feels instant, like MapleStory, and
+  reports where it is 20 times a second; the server checks the report is possible and puts you
+  back if not. Monsters (`TDMob`), other players (`TDAvatar`) and drops (`TDDrop`) are views
+  that glide to where the server's snapshots say they are.
+- **Net** (`scripts/autoload/net.gd`) is the whole protocol in one file. `req_*` methods go from
+  a client to the server, `ev_*` methods from the server to clients. UI and actors call
+  `Net.ask(&"req_…", [args])`; the server answers with events, and `Game.me` (your copy of
+  your Character) is refreshed from them. Never change `Game.me` to make something happen.
+
+The three ways to play all use the same rules: **Play** runs a server inside the game with an
+offline peer (messages never touch the network), **Host** does the same on an ENet port so
+others can join, and `-- --server` (see `scripts/boot.gd`) runs a server with no player.
+
+Shared pieces both sides use: `MapLayout` (a map's platforms, ropes, portals), `DropFlight`
+(how a drop flies and lands, run identically everywhere), `Combat` and `CharacterStats`.
+Monster index `i` is the same monster on both sides because both build them from the map's
+spawns in order.
+
+### How to add something the player does
+
+1. Add a `req_<thing>` to `Net` that calls `server.on_<thing>(_sender(), …)`.
+2. Write `TDServer.on_<thing>`: check it's allowed, change the `Character` or map, and mark
+   `dirty_character` / `dirty_vitals` so the player gets their new state.
+3. If other players should see it, broadcast an `ev_<thing>` from the `MapInstance` and show
+   it in `TDWorld`.
+4. Call `Net.ask(&"req_<thing>", […])` from the UI or `TDPlayer`.
 
 ## Folders
 
@@ -38,12 +84,15 @@ data/                 Content, one .tres per thing
   items/equips/ items/use/ items/etc/            Subfolders are scanned too
   maps/ biomes/ climb_styles/               Maps and how they look
 scripts/
-  autoload/           Content (data index), Game (the character, save, input), SteamService
+  autoload/           Content (data index), Game (your character copy, settings, input),
+                      Net (connections and the protocol), SteamService
+  server/             TDServer, MapInstance, SimPlayer, SimMob, SimDrop, CharacterStore
   data/               Resource classes for everything in data/
-  systems/            Inventory, Equipment, ItemStack, CharacterStats
+  systems/            Character, Inventory, Equipment, ItemStack, CharacterStats
   components/         Health, Hitbox, SpriteRig
-  actors/             Player, Mob, Npc, Drop
-  world/              World (rules), Stage + Terrain/Backdrop/Scenery builders, Platform, Combat
+  actors/             Player (you), Avatar (other players), Mob, Npc, Drop views
+  world/              World (what you see), Stage + Terrain/Backdrop/Scenery builders, MapLayout,
+                      Platform, DropFlight, Combat
   fx/                 Flipbook effects and floating text
   ui/                 HUD, status bar, overlay, UiSkin, Palette
   ui/windows/         Draggable windows (inventory, equipment, character) and the item tooltip
@@ -56,7 +105,7 @@ art/
   reference/          Style reference (the hero)
 store/                Steam capsules and key art
 tools/art/            Slicer, store-art cropper, fx texture and item placeholder generators, contact-sheet preview
-tests/                Headless smoke test and screenshot scene
+tests/                Headless smoke test (with a second game joining), bot client, screenshot scene
 ```
 
 ## Draw order
@@ -72,7 +121,8 @@ camera). The layers are constants at the top of `scripts/world/stage.gd`, back t
 | `Z_NPC` | 0.3 | NPCs |
 | `Z_MONSTER` | 0.38 to 0.52 | Monsters, each at a slightly different depth so overlapping ones don't flicker |
 | `Z_DROP` | 0.56 | Dawnshards and other drops |
-| `Z_PLAYER` | 0.64 | The hero |
+| `Z_OTHER_PLAYER` | 0.6 | Other players |
+| `Z_PLAYER` | 0.64 | Your hero |
 | `Z_EFFECT` | 0.8 | Skill and hit effects |
 
 Everything you can touch stands in front of all the land, so a platform, bush or prop never
@@ -127,7 +177,8 @@ world is usually a new biome plus a few maps that use it.
 2. Effects are **EffectDef**s in `data/effects/`: a flipbook of frames from
    `assets/sprites/effects/`, its speed and size, an optional light and particle burst.
 3. Bind it to a button in `Game.SKILL_BINDINGS` (`scripts/autoload/game_state.gd`). A new
-   button also needs an input action in `Game`'s input bindings.
+   button also needs an input action in `Game`'s input bindings. The server works out what
+   it hits (`MapInstance.use_skill`).
 
 Damage is worked out in `scripts/world/combat.gd`, so balance changes stay in one place.
 
@@ -135,7 +186,7 @@ Damage is worked out in `scripts/world/combat.gd`, so balance changes stay in on
 
 Stats work like MapleStory. A character has base **STR / DEX / INT / LUK** (their job's
 starting stats plus the Ability Points they spend, 5 per level), and everything they wear adds
-a **StatBlock** on top. `Game.stats` is the total. From it, `CharacterStats` works out:
+a **StatBlock** on top. `Character.stats` is the total. From it, `CharacterStats` works out:
 
 - **Damage range**: max = (primary × 4 + secondary) × Weapon Attack / 100 × `DAMAGE_SCALE`,
   min = max × the job's mastery. The job says which stat is primary (STR for warriors).
@@ -173,7 +224,7 @@ for the loot key, and stays there if its tab is full.
 
 Create `data/jobs/<id>.tres` as a **JobDef**: primary and secondary stat, mastery, HP and MP
 growth, Ability Points per level, and what a new character starts with (stats, gear, items).
-`Game.START_JOB` picks the job new characters get; job advancement isn't built yet.
+`Character.START_JOB` picks the job new characters get; job advancement isn't built yet.
 
 ## How to add a window
 

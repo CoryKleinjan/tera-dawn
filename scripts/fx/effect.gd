@@ -6,12 +6,15 @@ extends Node2D
 var world: TDWorld
 var def: EffectDef
 var face := 1
+## The actor it moves with (def.follow_player effects), or null.
+var follow: Node2D
 var t := 0
 var sprite: Sprite3D
 var flash: OmniLight3D
 
-static func create(w: TDWorld, d: EffectDef, at: Vector2, facing: int) -> TDEffect:
+static func create(w: TDWorld, d: EffectDef, at: Vector2, facing: int, follows: Node2D = null) -> TDEffect:
 	var e := TDEffect.new()
+	e.follow = follows
 	e.world = w
 	e.def = d
 	e.position = at
@@ -47,8 +50,8 @@ func _ready() -> void:
 
 func step() -> void:
 	t += 1
-	if def.follow_player:
-		position = world.player.position
+	if is_instance_valid(follow):
+		position = follow.position
 	if t > def.duration():
 		queue_free()
 		return

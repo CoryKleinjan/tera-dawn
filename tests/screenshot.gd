@@ -31,10 +31,24 @@ func _physics(n: int) -> void:
 ## The Equip slot holding an item, or -1.
 func _slot_of(id: StringName) -> int:
 	for i in Inventory.SLOTS:
-		var s := Game.inventory.at(ItemDef.Tab.EQUIP, i)
+		var s := _me().character.inventory.at(ItemDef.Tab.EQUIP, i)
 		if s and s.item.id == id:
 			return i
 	return -1
+
+## The server's side of the player.
+func _me() -> SimPlayer:
+	return Net.server.sessions[1]
+
+## Moves the player instantly on both sides.
+func _teleport(world: TDWorld, at: Vector2) -> void:
+	world.player.position = at
+	world.player.vel = Vector2.ZERO
+	_me().position = at
+
+## Puts a monster somewhere on its platform (on the server, which the game then shows).
+func _place_mob(m: SimMob, x: float) -> void:
+	m.position.x = x
 
 func _run() -> void:
 	var args := OS.get_cmdline_user_args()
@@ -42,32 +56,35 @@ func _run() -> void:
 		out = args[0]
 	DirAccess.make_dir_recursive_absolute(out)
 	var only := args[1] if args.size() > 1 else ""
-	Game.save_path = "user://screenshot_save.json"
-	Game.new_character()
-	Game.level = 9
-	Game.map_id = &"meadow"
-	Game.refill()
-	var world: TDWorld = load("res://scenes/main.tscn").instantiate()
+	Net.save_dir = "user://screenshot_characters"
+	Net.import_legacy_save = false
+	var world: TDWorld = load("res://scenes/world.tscn").instantiate()
 	add_child(world)
 	await _frames(10)
 	if only == "" or only == "title":
 		await _shot("title")
-	world.hud.title.hide()
-	world.start()
+	DirAccess.remove_absolute("user://screenshot_characters/dawnling.json")
+	Net.play_single("Dawnling")
+	var ch := _me().character
+	ch.level = 9
+	ch.recalc()
+	ch.refill()
+	_me().dirty_character = true
 	var p := world.player
-	p.inv = 100000
+	_me().inv = 100000
+	await _physics(2)
 	if only == "" or only == "meadow":
-		p.position = Vector2(1120, 620)
+		_teleport(world, Vector2(1120, 620))
 		p.face = -1
 		await _physics(40)
 		await _shot("meadow")
 	if only == "" or only == "action":
 		# Dawn Slash into a pack of Dewlings on the second platform.
-		p.position = Vector2(230, 500)
+		_teleport(world, Vector2(230, 500))
 		p.face = 1
-		for m in world.mobs():
+		for m in Net.server.maps[&"meadow"].mobs:
 			if m.plat == world.platforms[1]:
-				m.position.x = randf_range(300, 380)
+				_place_mob(m, randf_range(300, 380))
 		await _physics(40)
 		Input.action_press("skill")
 		await _physics(2)
@@ -77,69 +94,88 @@ func _run() -> void:
 	if only == "" or only == "village":
 		# The elder and shopkeeper by the village.
 		var elder := world.npcs()[0]
-		p.position = Vector2(elder.position.x - 40, 620)
+		_teleport(world, Vector2(elder.position.x - 40, 620))
 		p.face = 1
 		await _physics(5)
 		elder.talk()
 		await _physics(10)
 		await _shot("village")
+	if only == "" or only == "players":
+		# Two other players nearby. They're on the server but have no game connected.
+		_teleport(world, Vector2(1300, 620))
+		p.face = 1
+		var meadow: MapInstance = Net.server.maps[&"meadow"]
+		var others := []
+		for i in 2:
+			var other := SimPlayer.new(100 + i, Character.create(["Mossy", "Kestrel"][i]))
+			meadow.add_player(other, 1380.0 + i * 110.0)
+			other.face = -1
+			other.animation = [&"idle", &"walk"][i]
+			others.append(other)
+		await _physics(30)
+		await _shot("players")
+		for other in others:
+			meadow.remove_player(other)
 	if only == "" or only == "windows":
 		# Inventory, equipment and character windows with some loot, one tooltip showing.
 		for id in [&"leather_boots", &"petal_cape", &"moss_ring", &"oak_shield", &"dawn_blade"]:
-			Game.inventory.add(Content.item(id))
+			ch.inventory.add(Content.item(id))
 		for id in [&"boar_tusk", &"petal_wing", &"dewling_droplet"]:
-			Game.inventory.add(Content.item(id), randi_range(3, 40))
-		Game.inventory.add(Content.item(&"blue_potion"), 12)
-		Game.equip(0)
-		Game.ap = 40
+			ch.inventory.add(Content.item(id), randi_range(3, 40))
+		ch.inventory.add(Content.item(&"blue_potion"), 12)
+		ch.equip(0)
+		ch.ap = 40
 		for n in 30:
-			Game.add_ap(&"strength")
-		p.position = Vector2(1120, 620)
+			ch.add_ap(&"strength")
+		ch.inventory.add(Content.item(&"leaf_cap"))
+		ch.equip(_slot_of(&"leaf_cap"))
+		ch.inventory.add(Content.item(&"ember_helm"))
+		_me().dirty_character = true
+		_teleport(world, Vector2(1120, 620))
 		await _physics(5)
 		for action in TDHud.WINDOW_ACTIONS:
 			world.hud.toggle_window(action)
 		var inv: TDInventoryWindow = world.hud.windows["inventory"]
-		Game.inventory.add(Content.item(&"leaf_cap"))
-		Game.equip(_slot_of(&"leaf_cap"))
-		Game.inventory.add(Content.item(&"ember_helm"))
 		var helm := _slot_of(&"ember_helm")
-		world.hud.tooltip.show_item(inv, Game.inventory.at(ItemDef.Tab.EQUIP, helm), inv.global_position + inv.slot_rect(helm).get_center(), "Double-click to equip", true)
+		world.hud.tooltip.show_item(inv, Game.me.inventory.at(ItemDef.Tab.EQUIP, helm), inv.global_position + inv.slot_rect(helm).get_center(), "Double-click to equip", true)
 		await _frames(3)
 		await _shot("windows")
 		for action in TDHud.WINDOW_ACTIONS:
 			world.hud.toggle_window(action)
 	if only == "" or only == "drops":
 		# A spread of loot on the ground: Dawnshards, a potion, an Etc item and gear.
-		p.position = Vector2(1000, 620)
+		_teleport(world, Vector2(1000, 620))
 		p.face = 1
 		var loot := [&"dawnshard", &"red_potion", &"petal_wing", &"dawn_blade", &"elixir", &"leather_boots", &"dawnshard"]
 		for i in loot.size():
-			var d := TDDrop.create(world, Content.item(loot[i]), 3, Vector2(1100, 600), 620)
-			d.land_x = 1100 + (i - (loot.size() - 1) / 2.0) * TDWorld.DROP_SPACING
-			world.drop_layer.add_child(d)
+			var x := 1100 + (i - (loot.size() - 1) / 2.0) * MapInstance.DROP_SPACING
+			Net.server.maps[&"meadow"].spawn_drop(Content.item(loot[i]), 3, null, DropFlight.create(Vector2(1100, 600), 620, x), 0)
 		await _physics(45)
 		await _shot("drops")
 	if only == "" or only == "rope":
-		p.position = Vector2(700, 600)
+		_teleport(world, Vector2(700, 600))
 		await _physics(2)
 		Input.action_press("move_up")
 		await _physics(40)
 		Input.action_release("move_up")
 		await _shot("rope")
-		p.inv = 100000
 	if only == "" or only == "hollow":
-		world.load_map(&"hollow", 760)
-		p.inv = 100000
+		_teleport(world, Vector2(2530, 620))
+		await _physics(3)
+		Input.action_press("move_up")
+		await _physics(2)
+		Input.action_release("move_up")
+		_me().inv = 100000
+		_teleport(world, Vector2(760, 620))
 		await _physics(60)
-		var boar: TDMob = null
-		for m in world.mobs():
-			if m.def.id == &"ember_boar" and m.plat == world.platforms[0]:
-				boar = m
+		var hollow: MapInstance = Net.server.maps[&"hollow"]
+		for m in hollow.mobs:
+			if m.def.id == &"ember_boar" and m.plat == hollow.layout.platforms[0]:
+				_place_mob(m, p.position.x + 150)
 				break
-		if boar:
-			boar.position.x = p.position.x + 150
-		Game.xp = Game.xp_need() - 1
-		world.kill_mob(world.mobs()[0])
+		ch.xp = ch.xp_need() - 1
+		hollow.kill_mob(hollow.mobs[0], _me())
 		await _physics(25)
 		await _shot("hollow")
+	Net.stop()
 	get_tree().quit()
