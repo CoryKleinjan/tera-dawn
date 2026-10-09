@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="EffectDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/effect_def.gd" id="1_effect_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/effects/level_up_1.png" id="2_level_up_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/effects/level_up_2.png" id="3_level_up_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/effects/level_up_3.png" id="4_level_up_3"]
+
+[resource]
+script = ExtResource("1_effect_def")
+id = &"celebrate"
+frames = Array[Texture2D]([ExtResource("2_level_up_1"), ExtResource("3_level_up_2"), ExtResource("4_level_up_3")])
+fps = 12.0
+lifetime = 70
+texel = 1.0
+offset = Vector2(0.0, -50.0)
+energy = 1.6
+follow_player = true
+light_color = Color(0.6, 0.85, 1.0, 1.0)
+light_energy = 3.0
+light_range = 6.0
+burst_color = Color(1.4, 2.0, 2.6, 1.0)
+burst_amount = 18

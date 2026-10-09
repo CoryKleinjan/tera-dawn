@@ -231,6 +231,10 @@ func test_stats_plus_buttons_spend_ability_points() -> void:
 	check_eq(Game.me.base.strength, str_before + 1, "STR after clicking its +")
 	check_eq(Game.me.ap, 2, "AP left")
 
+func test_stats_window_leaves_the_status_bar_visible() -> void:
+	var stats: TDStatsWindow = _open("stats")
+	check(stats.position.y + stats.size.y < TDWorld.VIEW.y - TDStatusBar.HEIGHT, "ends above the HP bar")
+
 func test_stats_hide_plus_buttons_without_points() -> void:
 	var stats: TDStatsWindow = _open("stats")
 	await _redrawn(stats, "stats")

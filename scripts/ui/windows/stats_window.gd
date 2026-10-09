@@ -5,9 +5,12 @@ extends TDWindow
 
 const ROW_H := 17.0
 const COL_VALUE := 112.0
+## Where the right-hand column of combat numbers starts, and its values.
+const COL_RIGHT := 168.0
+const COL_RIGHT_VALUE := 98.0
 
 func _init() -> void:
-	super("Character", Vector2(250, 462))
+	super("Character", Vector2(330, 378))
 
 func _draw_body() -> void:
 	var s := Game.me.stats
@@ -29,22 +32,23 @@ func _draw_body() -> void:
 		if Game.me.ap > 0:
 			plus_button(Vector2(size.x - PAD - 20, y - ROW_H - 15), Net.ask.bind(&"req_add_ap", [stat]))
 	y = _divider(y)
+	# combat numbers in two columns, so the window ends above the status bar's HP
 	var dmg := Game.me.damage_range()
-	y = _row(y, "Damage", "%d ~ %d" % [dmg.x, dmg.y], Palette.SUN)
-	y = _row(y, "Weapon Attack", str(s.attack))
-	y = _row(y, "Magic Attack", str(CharacterStats.magic_attack(s)))
-	y = _row(y, "Weapon Defense", str(s.defense))
-	y = _row(y, "Magic Defense", str(s.magic_defense))
-	y = _row(y, "Accuracy", str(CharacterStats.accuracy(s)))
-	y = _row(y, "Avoidability", str(CharacterStats.avoid(s)))
-	y = _row(y, "Speed", "%d%%" % roundi(CharacterStats.speed_multiplier(s) * 100))
-	y = _row(y, "Jump", "%d%%" % roundi(CharacterStats.jump_multiplier(s) * 100))
-	_row(y, "Critical Rate", "%d%%" % roundi(CharacterStats.crit_rate(s) * 100))
+	y = _pair(y, ["Damage", "%d ~ %d" % [dmg.x, dmg.y], Palette.SUN], ["Critical Rate", "%d%%" % roundi(CharacterStats.crit_rate(s) * 100)])
+	y = _pair(y, ["Weapon Attack", str(s.attack)], ["Magic Attack", str(CharacterStats.magic_attack(s))])
+	y = _pair(y, ["Weapon Defense", str(s.defense)], ["Magic Defense", str(s.magic_defense)])
+	y = _pair(y, ["Accuracy", str(CharacterStats.accuracy(s))], ["Avoidability", str(CharacterStats.avoid(s))])
+	_pair(y, ["Speed", "%d%%" % roundi(CharacterStats.speed_multiplier(s) * 100)], ["Jump", "%d%%" % roundi(CharacterStats.jump_multiplier(s) * 100)])
 
-func _row(y: float, label: String, value: String, col := Palette.MIST) -> float:
-	DrawUtil.text(self, Game.ui_font, Vector2(PAD + 2, y), label, 12, Palette.MUTED, 1)
-	DrawUtil.text(self, Game.ui_font, Vector2(PAD + COL_VALUE, y), value, 12, col, 1, 3, Color(Palette.NIGHT, 0.6))
+func _row(y: float, label: String, value: String, col := Palette.MIST, x := 0.0, value_x := COL_VALUE) -> float:
+	DrawUtil.text(self, Game.ui_font, Vector2(PAD + 2 + x, y), label, 12, Palette.MUTED, 1)
+	DrawUtil.text(self, Game.ui_font, Vector2(PAD + x + value_x, y), value, 12, col, 1, 3, Color(Palette.NIGHT, 0.6))
 	return y + ROW_H
+
+## Two rows side by side, each [label, value] or [label, value, colour].
+func _pair(y: float, left: Array, right: Array) -> float:
+	_row(y, left[0], left[1], left[2] if left.size() > 2 else Palette.MIST)
+	return _row(y, right[0], right[1], right[2] if right.size() > 2 else Palette.MIST, COL_RIGHT, COL_RIGHT_VALUE)
 
 func _divider(y: float) -> float:
 	draw_line(Vector2(PAD, y - 8), Vector2(size.x - PAD, y - 8), Color(Palette.SUN, 0.35), 1.0)
