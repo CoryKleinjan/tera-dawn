@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="NpcDef" load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/npcs/shopkeeper.png" id="2_shopkeeper"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/npc_wagon_driver.tres" id="2_sprite"]
 [ext_resource type="Script" path="res://scripts/data/travel_route.gd" id="3_travel_route"]
 
 [sub_resource type="Resource" id="Resource_1"]
@@ -16,9 +16,7 @@ script = ExtResource("1_npc_def")
 id = &"wagon_driver"
 display_name = "Hobb"
 title = "Wagon Driver"
-texture = ExtResource("2_shopkeeper")
-sprite_scale = 0.95
-tint = Color(0.784314, 0.690196, 1.0, 1.0)
+sprite_frames = ExtResource("2_sprite")
 greeting = "Need a lift? My wagon knows every road on the isle. Costs a few Dawnshards, saves a lot of walking."
 lines = PackedStringArray("Ember Hollow's hot enough to cook an egg on the rocks. Bring potions.", "One day there'll be a proper ship to the mainland. Dawnharbor, they call the port there.", "If you're ever lost, a Return Scroll will bring you back to town. Mira sells them.")
 travel = Array[ExtResource("3_travel_route")]([SubResource("Resource_1")])

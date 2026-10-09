@@ -14,6 +14,10 @@ const GAP := 4.0
 const GRID_Y := 74.0
 const AMOUNTS: Array[int] = [1, 10, 100]
 const REACH := 170.0
+## Pixels per texel of the shop row and amount chip art, and where the row art's item niche is.
+const ROW_SCALE := (ROW_H - 4) / 63.0
+const NICHE := Rect2(11, 10, 42, 42)
+const CHIP_SCALE := 0.68
 
 var npc: TDNpc
 var shop: ShopDef
@@ -74,8 +78,9 @@ func _draw_body() -> void:
 	for i in range(scroll, mini(scroll + ROWS, shop.items.size())):
 		var e := shop.items[i]
 		var r := row_rect(i)
-		draw_row(r, r.has_point(_hover))
-		draw_slot(Rect2(r.position + Vector2(2, 2), Vector2(SLOT - 4, SLOT - 4)), ItemStack.unrolled(e.item))
+		UiSkin.draw_box(self, UiSkin.shop_row(r.has_point(_hover)), r, ROW_SCALE)
+		if e.item.icon:
+			draw_texture_rect(e.item.icon, fit(e.item.icon, Rect2(r.position + NICHE.position * ROW_SCALE, NICHE.size * ROW_SCALE).grow(-1)), false)
 		DrawUtil.text(self, Game.ui_font, Vector2(r.position.x + SLOT + 8, r.position.y + 17), e.item.display_name, 13, Palette.MIST, 1, 3, Palette.NIGHT)
 		var afford := shards >= e.cost()
 		DrawUtil.text(self, Game.num_font, Vector2(r.position.x + SLOT + 8, r.position.y + 35), "%d" % e.cost(), 13,
@@ -90,8 +95,8 @@ func _draw_body() -> void:
 	for i in AMOUNTS.size():
 		var r := _amount_rect(i)
 		var on := AMOUNTS[i] == amount
-		DrawUtil.round_rect(self, r, 6, Color(Palette.SUN, 0.85) if on else Color(Palette.NIGHT, 0.5))
-		DrawUtil.text(self, Game.num_font, r.get_center() + Vector2(0, 5), "×%d" % AMOUNTS[i], 13, Palette.INK if on else Palette.MIST, 0)
+		UiSkin.draw_box(self, UiSkin.amount_chip(on), r, CHIP_SCALE)
+		DrawUtil.text(self, Game.num_font, r.get_center() + Vector2(0, 5), "×%d" % AMOUNTS[i], 13, Palette.INK if on else Palette.MIST, 0, 0 if on else 3, Palette.NIGHT)
 	var purse_y := GRID_Y + ceili(Inventory.SLOTS / float(COLS)) * (SLOT + GAP) + 8
 	draw_shards(Vector2(GRID_X, purse_y + 16), shards)
 	draw_button(_sell_etc_rect(), "Sell all Etc", Game.me.inventory.free_slots(ItemDef.Tab.ETC) < Inventory.SLOTS)

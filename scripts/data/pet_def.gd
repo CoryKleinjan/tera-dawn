@@ -12,7 +12,12 @@ extends ItemDef
 @export var hunger_ticks := 1800
 ## What it says now and then.
 @export var chatter: Array[String] = []
-## How big it is in the world (its icon is used as its body).
+## Its animated body: SpriteFrames with idle, walk, jump and happy. Without it, its icon
+## is its body and it hops along procedurally.
+@export var sprite_frames: SpriteFrames
+## How big the animated body is in the world (1.0: the frames are cut at the hero's pixel size).
+@export var frames_scale := 1.0
+## How big it is in the world when its icon is its body (no `sprite_frames`).
 @export var body_scale := 0.6
 
 func tab() -> Tab:

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MonsterDef" load_steps=18 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/monsters/ashshell.png" id="2_ashshell"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/shell_crab.tres" id="2_shell_crab"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/crab_claw.tres" id="5_crab_claw"]
@@ -72,7 +72,6 @@ speed = 0.4
 size = Vector2(48.0, 36.0)
 boss = false
 flying = false
-texture = ExtResource("2_ashshell")
-sprite_scale = 0.75
-tint = Color(1.0, 0.690196, 0.627451, 1.0)
+sprite_frames = ExtResource("2_shell_crab")
+sprite_scale = 1.0
 drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7")])

@@ -23,8 +23,10 @@ const BAD := Color("ff6b7d")
 const WARN := Color("ffb38a")
 ## General information (system messages, whispers).
 const INFO := Color("8cc6ff")
-## Dark brown text on gold buttons.
+## Dark brown text on gold buttons and on paper (the Monster Book, speech bubbles, invitations).
 const INK := Color("3b2208")
+## Secondary text on paper.
+const INK_SOFT := Color("7a5634")
 ## The gold trim on buttons and frames.
 const GOLD_TRIM := Color("e9b44c")
 ## Hover and selection highlight; use with HILITE_ALPHA.

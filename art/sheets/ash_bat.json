@@ -1,0 +1,98 @@
+{
+  "source": "art/source/mon_emberreach.png",
+  "region": [
+    772,
+    242,
+    1536,
+    464
+  ],
+  "grid": {
+    "rows": [
+      27,
+      125,
+      222
+    ],
+    "cols": [
+      0,
+      192,
+      381,
+      572,
+      764
+    ]
+  },
+  "scale": 0.515,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/ash_bat",
+  "cells": [
+    [
+      "hover1",
+      "hover2",
+      "fly1",
+      "fly2"
+    ],
+    [
+      "fly3",
+      "attack",
+      "hurt",
+      "defeated"
+    ]
+  ],
+  "sets": {
+    "ash_bat": {
+      "frames": {
+        "hover1": "ash_bat:hover1",
+        "hover2": "ash_bat:hover2",
+        "fly1": "ash_bat:fly1",
+        "fly2": "ash_bat:fly2",
+        "fly3": "ash_bat:fly3",
+        "attack": "ash_bat:attack",
+        "hurt": "ash_bat:hurt",
+        "defeated": "ash_bat:defeated"
+      },
+      "anchor": "mass",
+      "baseline": "cell",
+      "out": "assets/sprites/monsters/ash_bat.png",
+      "sprite_frames": "assets/animations/ash_bat.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "hover1",
+            "hover2"
+          ],
+          "fps": 5
+        },
+        "move": {
+          "frames": [
+            "fly1",
+            "fly2",
+            "fly3",
+            "fly2"
+          ],
+          "fps": 8
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      }
+    }
+  }
+}

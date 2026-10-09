@@ -1,67 +1,72 @@
-[gd_resource type="Resource" script_class="BiomeDef" load_steps=46 format=3]
+[gd_resource type="Resource" script_class="BiomeDef" load_steps=53 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/biome_def.gd" id="1_biome_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ground/ember_top.png" id="2_ember_top"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ground/ember_side.png" id="3_ember_side"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ground/ember_soil.png" id="4_ember_soil"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/ground_left.png" id="5_ground_left"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/ground_middle.png" id="6_ground_middle"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/ground_right.png" id="7_ground_right"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/tall_grass.png" id="8_tall_grass"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground/ember_top.png" id="2_ground_top"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground/ember_side.png" id="3_ground_side"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground/ember_soil.png" id="4_ground_soil"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach/ground_left.png" id="5_ground_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach/ground_middle.png" id="6_ground_middle"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach/ground_right.png" id="7_ground_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach/tall_grass.png" id="8_tall_grass"]
 [ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="9_backdrop_layer_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/ember/moon.png" id="10_moon"]
-[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/ember/smoke_1.png" id="11_smoke_1"]
-[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/ember/smoke_2.png" id="12_smoke_2"]
-[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/ember/smoke_3.png" id="13_smoke_3"]
-[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/ember/smoke_4.png" id="14_smoke_4"]
-[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/ember/far_volcanoes.png" id="15_far_volcanoes"]
-[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/ember/mid_crags.png" id="16_mid_crags"]
-[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/ember/motes.png" id="17_motes"]
-[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/ember/near_ridge.png" id="18_near_ridge"]
-[ext_resource type="Script" path="res://scripts/data/decor_def.gd" id="19_decor_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/tree_large.png" id="20_tree_large"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/tree_small.png" id="21_tree_small"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/bush_small.png" id="22_bush_small"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/bush_large.png" id="23_bush_large"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/rock_small.png" id="24_rock_small"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/rock_large.png" id="25_rock_large"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/stump.png" id="26_stump"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/fence.png" id="27_fence"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/fire_lilies.png" id="28_fire_lilies"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/lantern_lit.png" id="29_lantern_lit"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/signpost.png" id="30_signpost"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/portal_1.png" id="31_portal_1"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/portal_2.png" id="32_portal_2"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/portal_3.png" id="33_portal_3"]
-[ext_resource type="Texture2D" path="res://assets/sprites/props/portal_4.png" id="34_portal_4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/emberreach/sky_body.png" id="10_sky_body"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/emberreach/clouds_1.png" id="11_clouds_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/emberreach/clouds_2.png" id="12_clouds_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/emberreach/clouds_3.png" id="13_clouds_3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/emberreach/clouds_4.png" id="14_clouds_4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/emberreach/far.png" id="15_far"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/emberreach/landmark.png" id="16_landmark"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/emberreach/mid.png" id="17_mid"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/emberreach/motes.png" id="18_motes"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/emberreach/near.png" id="19_near"]
+[ext_resource type="Script" path="res://scripts/data/decor_def.gd" id="20_decor_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach/tree_large.png" id="21_tree_large"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach/tree_small.png" id="22_tree_small"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach/bush_large.png" id="23_bush_large"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach/bush_small.png" id="24_bush_small"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach/rock_large.png" id="25_rock_large"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach/rock_small.png" id="26_rock_small"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach/stump.png" id="27_stump"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach/fence.png" id="28_fence"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach/flowers.png" id="29_flowers"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach/signature_plant.png" id="30_signature_plant"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach/building_large.png" id="31_building_large"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach/building_small.png" id="32_building_small"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach/signature_prop.png" id="33_signature_prop"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach/lantern_lit.png" id="34_lantern_lit"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach/signpost.png" id="35_signpost"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/portal_1.png" id="36_portal_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/portal_2.png" id="37_portal_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/portal_3.png" id="38_portal_3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/portal_4.png" id="39_portal_4"]
 
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("9_backdrop_layer_def")
-textures = Array[Texture2D]([ExtResource("10_moon")])
+textures = Array[Texture2D]([ExtResource("10_sky_body")])
 mode = 1
 depth = 170.0
 screen_top = Vector2(0.14, 0.14)
-texel = 2.4
-tint = Color(1.3, 1.15, 1.05, 1.0)
+texel = 4.0
+tint = Color(1.3, 1.1, 1.0, 1.0)
 glow = true
 count = 1
 drift = 0.0
 
 [sub_resource type="Resource" id="Resource_2"]
 script = ExtResource("9_backdrop_layer_def")
-textures = Array[Texture2D]([ExtResource("11_smoke_1"), ExtResource("12_smoke_2"), ExtResource("13_smoke_3"), ExtResource("14_smoke_4")])
+textures = Array[Texture2D]([ExtResource("11_clouds_1"), ExtResource("12_clouds_2"), ExtResource("13_clouds_3"), ExtResource("14_clouds_4")])
 mode = 1
 depth = 130.0
-screen_top = Vector2(0.02, 0.24)
-texel = 2.0
-tint = Color(1.0, 1.0, 1.0, 0.9)
+screen_top = Vector2(0.0, 0.22)
+texel = 2.8
+tint = Color(1.0, 1.0, 1.0, 0.92)
 glow = false
-count = 6
-drift = 0.35
+count = 8
+drift = 0.45
 
 [sub_resource type="Resource" id="Resource_3"]
 script = ExtResource("9_backdrop_layer_def")
-textures = Array[Texture2D]([ExtResource("15_far_volcanoes")])
+textures = Array[Texture2D]([ExtResource("15_far")])
 mode = 0
 depth = 110.0
 screen_top = Vector2(0.2, 0.2)
@@ -73,10 +78,10 @@ drift = 0.0
 
 [sub_resource type="Resource" id="Resource_4"]
 script = ExtResource("9_backdrop_layer_def")
-textures = Array[Texture2D]([ExtResource("16_mid_crags")])
+textures = Array[Texture2D]([ExtResource("16_landmark")])
 mode = 0
-depth = 70.0
-screen_top = Vector2(0.3, 0.3)
+depth = 85.0
+screen_top = Vector2(0.27, 0.27)
 texel = 2.1
 tint = Color(1.0, 1.0, 1.0, 1.0)
 glow = false
@@ -85,7 +90,19 @@ drift = 0.0
 
 [sub_resource type="Resource" id="Resource_5"]
 script = ExtResource("9_backdrop_layer_def")
-textures = Array[Texture2D]([ExtResource("17_motes")])
+textures = Array[Texture2D]([ExtResource("17_mid")])
+mode = 0
+depth = 60.0
+screen_top = Vector2(0.36, 0.36)
+texel = 2.0
+tint = Color(1.0, 1.0, 1.0, 1.0)
+glow = false
+count = 1
+drift = 0.0
+
+[sub_resource type="Resource" id="Resource_6"]
+script = ExtResource("9_backdrop_layer_def")
+textures = Array[Texture2D]([ExtResource("18_motes")])
 mode = 0
 depth = 50.0
 screen_top = Vector2(0.25, 0.25)
@@ -95,9 +112,9 @@ glow = true
 count = 1
 drift = 0.0
 
-[sub_resource type="Resource" id="Resource_6"]
+[sub_resource type="Resource" id="Resource_7"]
 script = ExtResource("9_backdrop_layer_def")
-textures = Array[Texture2D]([ExtResource("18_near_ridge")])
+textures = Array[Texture2D]([ExtResource("19_near")])
 mode = 0
 depth = 34.0
 screen_top = Vector2(0.42, 0.42)
@@ -107,53 +124,63 @@ glow = false
 count = 1
 drift = 0.0
 
-[sub_resource type="Resource" id="Resource_7"]
-script = ExtResource("19_decor_def")
-textures = Array[Texture2D]([ExtResource("20_tree_large"), ExtResource("21_tree_small")])
-spacing = Vector2(180.0, 340.0)
+[sub_resource type="Resource" id="Resource_8"]
+script = ExtResource("20_decor_def")
+textures = Array[Texture2D]([ExtResource("31_building_large"), ExtResource("32_building_small"), ExtResource("33_signature_prop")])
+spacing = Vector2(480.0, 900.0)
+depth = Vector2(-8.8, -7.6)
+scale = Vector2(1.1, 1.3)
+chance = 0.6
+texel = 1.25
+shaded = true
+
+[sub_resource type="Resource" id="Resource_9"]
+script = ExtResource("20_decor_def")
+textures = Array[Texture2D]([ExtResource("21_tree_large"), ExtResource("22_tree_small")])
+spacing = Vector2(170.0, 320.0)
 depth = Vector2(-8.5, -5.5)
 scale = Vector2(1.4, 1.9)
 chance = 1.0
 texel = 1.25
 shaded = true
 
-[sub_resource type="Resource" id="Resource_8"]
-script = ExtResource("19_decor_def")
-textures = Array[Texture2D]([ExtResource("22_bush_small"), ExtResource("23_bush_large")])
-spacing = Vector2(150.0, 280.0)
+[sub_resource type="Resource" id="Resource_10"]
+script = ExtResource("20_decor_def")
+textures = Array[Texture2D]([ExtResource("23_bush_large"), ExtResource("24_bush_small")])
+spacing = Vector2(130.0, 260.0)
 depth = Vector2(-4.6, -2.6)
-scale = Vector2(0.85, 1.15)
+scale = Vector2(0.9, 1.2)
 chance = 1.0
 texel = 1.25
 shaded = true
 
-[sub_resource type="Resource" id="Resource_9"]
-script = ExtResource("19_decor_def")
-textures = Array[Texture2D]([ExtResource("24_rock_small"), ExtResource("25_rock_large"), ExtResource("26_stump"), ExtResource("27_fence")])
+[sub_resource type="Resource" id="Resource_11"]
+script = ExtResource("20_decor_def")
+textures = Array[Texture2D]([ExtResource("25_rock_large"), ExtResource("26_rock_small"), ExtResource("27_stump"), ExtResource("28_fence")])
 spacing = Vector2(240.0, 440.0)
 depth = Vector2(-4.0, -1.8)
-scale = Vector2(0.85, 1.1)
+scale = Vector2(0.9, 1.1)
 chance = 0.7
 texel = 1.25
 shaded = true
 
-[sub_resource type="Resource" id="Resource_10"]
-script = ExtResource("19_decor_def")
-textures = Array[Texture2D]([ExtResource("28_fire_lilies")])
-spacing = Vector2(90.0, 200.0)
+[sub_resource type="Resource" id="Resource_12"]
+script = ExtResource("20_decor_def")
+textures = Array[Texture2D]([ExtResource("29_flowers"), ExtResource("29_flowers"), ExtResource("30_signature_plant")])
+spacing = Vector2(70.0, 160.0)
 depth = Vector2(-3.0, 2.4)
 scale = Vector2(0.6, 0.85)
 chance = 1.0
 texel = 1.25
 shaded = true
 
-[sub_resource type="Resource" id="Resource_11"]
-script = ExtResource("19_decor_def")
-textures = Array[Texture2D]([ExtResource("28_fire_lilies"), ExtResource("22_bush_small")])
-spacing = Vector2(100.0, 200.0)
+[sub_resource type="Resource" id="Resource_13"]
+script = ExtResource("20_decor_def")
+textures = Array[Texture2D]([ExtResource("29_flowers"), ExtResource("24_bush_small")])
+spacing = Vector2(90.0, 190.0)
 depth = Vector2(-2.2, -1.2)
-scale = Vector2(0.55, 0.75)
-chance = 0.55
+scale = Vector2(0.6, 0.8)
+chance = 0.6
 texel = 1.25
 shaded = true
 
@@ -173,17 +200,17 @@ fog_color = Color(0.7529, 0.3529, 0.1882, 1.0)
 mote_color = Color(3.0, 1.2, 0.4, 1.0)
 motes_rise = true
 lantern_light = Color(1.0, 0.5411764705882353, 0.2901960784313726, 1.0)
-ground_top = ExtResource("2_ember_top")
-ground_side = ExtResource("3_ember_side")
-ground_soil = ExtResource("4_ember_soil")
+ground_top = ExtResource("2_ground_top")
+ground_side = ExtResource("3_ground_side")
+ground_soil = ExtResource("4_ground_soil")
 platform_left = ExtResource("5_ground_left")
 platform_middle = ExtResource("6_ground_middle")
 platform_right = ExtResource("7_ground_right")
 platform_texel = 1.0
 edge_grass = Array[Texture2D]([ExtResource("8_tall_grass")])
-backdrop = Array[ExtResource("9_backdrop_layer_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6")])
-ground_decor = Array[ExtResource("19_decor_def")]([SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10")])
-platform_decor = Array[ExtResource("19_decor_def")]([SubResource("Resource_11")])
-lantern = ExtResource("29_lantern_lit")
-signpost = ExtResource("30_signpost")
-portal_frames = Array[Texture2D]([ExtResource("31_portal_1"), ExtResource("32_portal_2"), ExtResource("33_portal_3"), ExtResource("34_portal_4")])
+backdrop = Array[ExtResource("9_backdrop_layer_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7")])
+ground_decor = Array[ExtResource("20_decor_def")]([SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12")])
+platform_decor = Array[ExtResource("20_decor_def")]([SubResource("Resource_13")])
+lantern = ExtResource("34_lantern_lit")
+signpost = ExtResource("35_signpost")
+portal_frames = Array[Texture2D]([ExtResource("36_portal_1"), ExtResource("37_portal_2"), ExtResource("38_portal_3"), ExtResource("39_portal_4")])

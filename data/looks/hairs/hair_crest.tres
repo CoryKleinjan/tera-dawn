@@ -1,11 +1,14 @@
-[gd_resource type="Resource" script_class="LookDef" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="LookDef" load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/look_def.gd" id="1_look_def"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/paperdoll/hair_crest.tres" id="2_frames"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/paperdoll/hair_crest_hat.tres" id="4_hat_frames"]
 
 [resource]
 script = ExtResource("1_look_def")
 id = &"hair_crest"
 display_name = "Crest"
 kind = 3
-shape = &"hair_crest"
 order = 5
+frames = ExtResource("2_frames")
+hat_frames = ExtResource("4_hat_frames")

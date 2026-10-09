@@ -1,0 +1,42 @@
+{
+  "source": "art/source/items_warrior.png",
+  "out_dir": "assets/sprites/items",
+  "scale": 0.3,
+  "alpha": "hard",
+  "keep": "largest",
+  "fix": "glow_backdrop",
+  "cells": [
+    [
+      "bronze_sword",
+      "iron_broadsword",
+      "cinder_greatsword",
+      "steel_bastard_sword",
+      "ravager_blade",
+      "dawnbreaker_claymore"
+    ],
+    [
+      "iron_helm",
+      "bronze_mail",
+      "kite_shield",
+      "emberforge_aegis",
+      "steel_helm",
+      "steel_cuirass"
+    ],
+    [
+      "steel_greaves",
+      "steel_sabatons",
+      "emberplate_helm",
+      "emberplate_cuirass",
+      "emberplate_greaves",
+      "emberplate_sabatons"
+    ],
+    [
+      "sunforged_helm",
+      "sunforged_cuirass",
+      "sunforged_greaves",
+      "sunforged_sabatons",
+      "",
+      ""
+    ]
+  ]
+}

@@ -102,4 +102,4 @@ func draw_tag(ci: CanvasItem, at: Vector2) -> void:
 	if known and not fainted():
 		UiSkin.draw_name_tag(ci, at + Vector2(0, 4), char_name, Palette.MIST)
 		if guild != "":
-			UiSkin.draw_name_tag(ci, at + Vector2(0, 26), guild, Palette.GUILD)
+			UiSkin.draw_guild_tag(ci, at + Vector2(0, 26), guild)

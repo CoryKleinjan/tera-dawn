@@ -1,0 +1,98 @@
+{
+  "source": "art/source/mon_emberreach.png",
+  "region": [
+    0,
+    0,
+    764,
+    235
+  ],
+  "grid": {
+    "rows": [
+      32,
+      132,
+      235
+    ],
+    "cols": [
+      0,
+      193,
+      385,
+      575,
+      764
+    ]
+  },
+  "scale": 0.6,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/slag_slime",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "walk1",
+      "walk2"
+    ],
+    [
+      "walk3",
+      "attack",
+      "hurt",
+      "defeated"
+    ]
+  ],
+  "sets": {
+    "slag_slime": {
+      "frames": {
+        "idle1": "slag_slime:idle1",
+        "idle2": "slag_slime:idle2",
+        "walk1": "slag_slime:walk1",
+        "walk2": "slag_slime:walk2",
+        "walk3": "slag_slime:walk3",
+        "attack": "slag_slime:attack",
+        "hurt": "slag_slime:hurt",
+        "defeated": "slag_slime:defeated"
+      },
+      "anchor": "mass",
+      "baseline": "bottom",
+      "out": "assets/sprites/monsters/slag_slime.png",
+      "sprite_frames": "assets/animations/slag_slime.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "walk1",
+            "walk2",
+            "walk3",
+            "walk2"
+          ],
+          "fps": 7
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      }
+    }
+  }
+}

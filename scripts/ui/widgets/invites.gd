@@ -8,12 +8,19 @@ var pending: Array = []
 var label: Label
 
 func _ready() -> void:
-	add_theme_stylebox_override("panel", UiSkin.panel())
+	var card := UiSkin.box("social/invite_card", 14, 14)
+	card.texture_margin_left = 52
+	card.texture_margin_top = 38
+	card.content_margin_left = 22
+	card.content_margin_right = 20
+	card.content_margin_top = 34
+	card.content_margin_bottom = 16
+	add_theme_stylebox_override("panel", card)
 	var col := VBoxContainer.new()
 	col.add_theme_constant_override("separation", 8)
 	add_child(col)
 	label = Label.new()
-	label.add_theme_color_override("font_color", Palette.MIST)
+	label.add_theme_color_override("font_color", Palette.INK)
 	label.add_theme_font_override("font", Game.ui_font)
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.custom_minimum_size.x = 300

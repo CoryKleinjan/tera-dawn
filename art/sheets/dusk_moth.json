@@ -1,0 +1,98 @@
+{
+  "source": "art/source/mon_lanternfall.png",
+  "region": [
+    0,
+    262,
+    764,
+    506
+  ],
+  "grid": {
+    "rows": [
+      28,
+      135,
+      244
+    ],
+    "cols": [
+      0,
+      193,
+      384,
+      575,
+      764
+    ]
+  },
+  "scale": 0.43,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/dusk_moth",
+  "cells": [
+    [
+      "hover1",
+      "hover2",
+      "fly1",
+      "fly2"
+    ],
+    [
+      "fly3",
+      "attack",
+      "hurt",
+      "defeated"
+    ]
+  ],
+  "sets": {
+    "dusk_moth": {
+      "frames": {
+        "hover1": "dusk_moth:hover1",
+        "hover2": "dusk_moth:hover2",
+        "fly1": "dusk_moth:fly1",
+        "fly2": "dusk_moth:fly2",
+        "fly3": "dusk_moth:fly3",
+        "attack": "dusk_moth:attack",
+        "hurt": "dusk_moth:hurt",
+        "defeated": "dusk_moth:defeated"
+      },
+      "anchor": "mass",
+      "baseline": "cell",
+      "out": "assets/sprites/monsters/dusk_moth.png",
+      "sprite_frames": "assets/animations/dusk_moth.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "hover1",
+            "hover2"
+          ],
+          "fps": 5
+        },
+        "move": {
+          "frames": [
+            "fly1",
+            "fly2",
+            "fly3",
+            "fly2"
+          ],
+          "fps": 8
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      }
+    }
+  }
+}

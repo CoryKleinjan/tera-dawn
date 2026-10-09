@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="PetDef" load_steps=4 format=3]
+[gd_resource type="Resource" script_class="PetDef" load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/pet_def.gd" id="1_pet_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/items/pet_puffpaw.png" id="2_pet_puffpaw"]
 [ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="3_shard_pickup"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/pet_puffpaw.tres" id="4_frames"]
 
 [resource]
 script = ExtResource("1_pet_def")
@@ -10,6 +11,7 @@ id = &"pet_puffpaw"
 display_name = "Puffpaw"
 description = "A fluffy pink pup that loves shiny things. Picks up what you drop nearby."
 icon = ExtResource("2_pet_puffpaw")
+sprite_frames = ExtResource("4_frames")
 sprite_scale = 0.42
 glow_color = Color(1.0, 0.690196, 0.815686, 1.0)
 pickup_effect = ExtResource("3_shard_pickup")

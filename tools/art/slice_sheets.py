@@ -43,6 +43,8 @@ DEFAULTS = {
     "inset": 3,               # pixels trimmed off each cell edge (divider anti-aliasing)
     "save": True,             # False: only used by animation sets, not written on its own
     "key": [0.35, 0.8],       # magenta sheets: magenta-ness at which pixels start / stop being background
+    "strip_labels": False,    # paint over white label letters in the label band before cutting
+    "fix": None,              # a clean-up from FIXES for every cell (e.g. "glow_backdrop" for icon sheets)
 }
 
 
@@ -201,7 +203,7 @@ def key_dark(cell, bg, shadow):
     return cell / 255.0, fg.astype(float)
 
 
-def fix_hero_attack_arc(rgb, alpha):
+def fix_hero_attack_arc(rgb, alpha, source=None):
     """hero_main Attack 2: keep the sword blade, drop the blue slash arc around it (the game draws its own)."""
     cell = (rgb * 255).astype(int)
     m = alpha > 0.5
@@ -224,8 +226,86 @@ def fix_hero_attack_arc(rgb, alpha):
     return cell / 255.0, (m | hole | edge).astype(float)
 
 
+def fix_glow_backdrop(rgb, alpha, source=None):
+    """Icon sheets with a soft warm glow painted behind each item: everything reachable from the
+    cell border through magenta, pink or cream (never orange or gold) is background, so the
+    glow and loose sparkles go and the item's outline stops the fill."""
+    h, w = alpha.shape
+    r, g, b = source[..., 0], source[..., 1], source[..., 2]  # the sheet's own colours, 0..1
+    glow = (r > 0.85) & (b > g * 0.52)  # magenta through pink to cream; orange and gold are art
+    passable = (alpha < 0.5) | glow
+    border = [(0, x) for x in range(w)] + [(h - 1, x) for x in range(w)] + \
+             [(y, 0) for y in range(h)] + [(y, w - 1) for y in range(h)]
+    outside = flood(passable, border)
+    return rgb, np.where(outside, 0.0, alpha)
+
+
+def fix_glow_backdrop_holes(rgb, alpha, source=None):
+    """glow_backdrop, and the glow seen through holes in the item (a ring, a pendant's cord,
+    knuckle dusters) goes too: any enclosed patch of glow colours bigger than a highlight."""
+    rgb, alpha = fix_glow_backdrop(rgb, alpha, source)
+    r, g, b = source[..., 0], source[..., 1], source[..., 2]
+    glow = (alpha > 0) & (r > 0.85) & (b > g * 0.52)
+    lab, n = label(glow)
+    for i in range(1, n + 1):
+        m = lab == i
+        if m.sum() > 300:
+            alpha = np.where(m, 0.0, alpha)
+    return rgb, alpha
+
+
+def fix_painted_sky(rgb, alpha, source=None):
+    """Backdrop strips painted over their own sky (the area sheets): the sky is the smooth
+    gradient reachable from the top of the cell in small colour steps (starting under a magenta
+    label bar if there is one), plus closed-off pockets of the same colours between rigging or
+    branches. All of it becomes background."""
+    h, w = alpha.shape
+    raw = source * 255.0
+    sky = np.zeros((h, w), bool)
+    clear = alpha < 0.5
+    q = deque()
+    for x in range(w):
+        y = 0
+        while y < h - 1 and clear[y, x]:
+            sky[y, x] = True
+            y += 1
+        sky[y, x] = True
+        q.append((y, x))
+    while q:
+        y, x = q.popleft()
+        c = raw[y, x]
+        for dy, dx in N4:
+            ny, nx = y + dy, x + dx
+            if 0 <= ny < h and 0 <= nx < w and not sky[ny, nx] and np.abs(raw[ny, nx] - c).sum() < 22.0:
+                sky[ny, nx] = True
+                q.append((ny, nx))
+    like = np.zeros((h, w), bool)  # pockets: patches in their row's sky colour
+    for y in range(h):
+        if sky[y].sum() >= w * 0.1:
+            like[y] = np.abs(raw[y] - np.median(raw[y][sky[y]], 0)).sum(1) < 30.0
+    lab, n = label(like & ~sky)
+    if n:
+        big = np.bincount(lab.ravel()) >= 30
+        big[0] = False
+        sky |= big[lab]
+    return rgb, np.where(sky, 0.0, alpha)
+
+
+def fix_sky_body(rgb, alpha, source=None):
+    """A sun or moon painted on its own sky: crop the cell to the disc (its width is the
+    diameter, its top the disc's top; a sun on the horizon can be cut off below). Keeps that
+    circle with a soft rim; the painted glow ring goes and the game blooms the disc instead."""
+    h, w = alpha.shape
+    r = w / 2.0
+    yy, xx = np.mgrid[0:h, 0:w]
+    a = np.clip((r - np.hypot(yy + 0.5 - r, xx + 0.5 - r)) / 2.0, 0.0, 1.0)
+    return source.copy(), a
+
+
 # Per-cell clean-ups a manifest can ask for with "fix": "<name>".
-FIXES = {"hero_attack_arc": fix_hero_attack_arc}
+FIXES = {"hero_attack_arc": fix_hero_attack_arc, "glow_backdrop": fix_glow_backdrop,
+         "glow_backdrop_holes": fix_glow_backdrop_holes,
+         "painted_sky": fix_painted_sky, "sky_body": fix_sky_body}
 
 
 def shrink(rgb, alpha, scale):
@@ -256,12 +336,38 @@ def make_seamless(img, blend=0.2):
     return Image.fromarray(out.clip(0, 255).astype(np.uint8))
 
 
+def strip_labels(cell, bg, band):
+    """Paints the white letters of a cell label over with background. A letter is a small
+    patch of near-white pixels in the label band with background all around it, so white
+    art (an eye sparkle, a gull) that has its outline around it is left alone."""
+    top = cell[:band]
+    white = top.min(2) > 185
+    lab, n = label(white)
+    is_bg = np.abs(top - bg).sum(2) < 120
+    for i in range(1, n + 1):
+        m = lab == i
+        ys, xs = np.nonzero(m)
+        if ys.max() - ys.min() > 24 or m.sum() > 400:
+            continue
+        ring = dilate(m, 2) & ~m
+        letter = top[m].min() > 225 and 6 <= ys.max() - ys.min() <= 16  # crisp white, letter-sized
+        if is_bg[ring].mean() > (0.15 if letter else 0.4):
+            top[dilate(m, 2)] = bg
+
+
 def cut_cell(rgb_full, bg, box, opts):
     x0, y0, x1, y1 = box
     ins = opts["inset"]
     cell = rgb_full[y0 + ins:y1 - ins, x0 + ins:x1 - ins].astype(float)
     if opts.get("blank_top"):  # a label that touches the art: paint its rows over with background
         cell[:opts["blank_top"]] = bg
+    if opts.get("strip_labels"):
+        strip_labels(cell, bg, int(opts["label_band"] * cell.shape[0]) if opts["label_band"] < 1 else int(opts["label_band"]))
+    if opts.get("blank_label"):  # a label drawn over the art: paint the box around its white letters
+        rows = cell[:opts["blank_label"]]
+        ys, xs = np.nonzero(rows.min(2) > 200)
+        if len(ys):
+            cell[:ys.max() + 2, max(0, xs.min() - 1):xs.max() + 2] = bg
     for bx0, by0, bx1, by1 in opts.get("blank", []):  # paint rects over with background (a label beside the art)
         cell[by0:by1, bx0:bx1] = bg
     if "crop" in opts:  # [x0, y0, x1, y1] inside the cell, in source pixels
@@ -275,7 +381,7 @@ def cut_cell(rgb_full, bg, box, opts):
     else:
         rgb, alpha = key_magenta(cell, bg, *opts["key"])
     if opts.get("fix"):
-        rgb, alpha = FIXES[opts["fix"]](rgb, alpha)
+        rgb, alpha = FIXES[opts["fix"]](rgb, alpha, source=cell / 255.0)
     rgb, alpha = shrink(rgb, alpha, opts["scale"])
     solid = alpha > (0.5 if opts["alpha"] == "hard" else 0.04)
     lab, n = label(solid)
@@ -289,6 +395,9 @@ def cut_cell(rgb_full, bg, box, opts):
         if m.sum() < opts["min_area"]:
             continue
         if ys.max() < band and (xs.min() < left or ys.max() - ys.min() < band * 0.6):  # the label text
+            continue
+        if opts.get("strip_labels") and ys.max() < band * 1.5 and m.sum() < m.size * 0.01 \
+                and (rgb[m].min(1) > 0.6).mean() > 0.5:  # small pale label leftovers
             continue
         pieces.append(m)
     if not pieces:
@@ -378,7 +487,7 @@ def build_set(name, spec, sprites, out_root):
         frames = [(k, im, ax, b - lowest) for k, im, ax, b in frames]
     half = max(max(ax, im.width - ax) for _, im, ax, _ in frames)
     fw = int(np.ceil(half)) * 2 + 2
-    fh = max(im.height + b for _, im, _, b in frames) + 1
+    fh = max(im.height + b for _, im, _, b in frames) + 1 + spec.get("pad_top", 0)
     strip = Image.new("RGBA", (fw * len(frames), fh), (0, 0, 0, 0))
     index = {}
     for i, (key, im, ax, b) in enumerate(frames):
@@ -419,6 +528,9 @@ def process(manifest_path, grid_only=False, sprites=None):
     sheet_id = os.path.splitext(os.path.basename(manifest_path))[0]
     src = os.path.join(ROOT, man["source"])
     rgb = np.asarray(Image.open(src).convert("RGB")).astype(int)
+    if "region" in man:  # [x0, y0, x1, y1]: only this part of the sheet (one monster of a group sheet)
+        x0, y0, x1, y1 = man["region"]
+        rgb = rgb[y0:y1, x0:x1]
     base = {**DEFAULTS, **{k: v for k, v in man.items() if k in DEFAULTS}}
     bg = np.array(base["background"]) if isinstance(base["background"], list) else background_color(rgb)
     bands = grid_from_manifest(man["grid"], rgb.shape) if "grid" in man else detect_grid(rgb, bg, man.get("grid_threshold", 0.8))

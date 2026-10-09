@@ -1,0 +1,114 @@
+{
+  "source": "art/source/npcs_harbor_3.png",
+  "grid": {
+    "rows": [
+      1,
+      511,
+      1022
+    ],
+    "cols": [
+      1,
+      384,
+      768,
+      1151,
+      1534
+    ]
+  },
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/npcs_harbor_3",
+  "cells": [
+    [
+      "guild_clerk_1",
+      "market_clerk_1",
+      "pet_keeper_1",
+      ""
+    ],
+    [
+      "guild_clerk_2",
+      "market_clerk_2",
+      "pet_keeper_2",
+      ""
+    ]
+  ],
+  "overrides": {
+    "guild_clerk_1": {
+      "scale": 0.205
+    },
+    "guild_clerk_2": {
+      "scale": 0.205
+    },
+    "market_clerk_1": {
+      "scale": 0.201
+    },
+    "market_clerk_2": {
+      "scale": 0.201
+    },
+    "pet_keeper_1": {
+      "scale": 0.193
+    },
+    "pet_keeper_2": {
+      "scale": 0.193
+    }
+  },
+  "sets": {
+    "guild_clerk": {
+      "frames": {
+        "idle1": "npcs_harbor_3:guild_clerk_1",
+        "idle2": "npcs_harbor_3:guild_clerk_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/guild_clerk.png",
+      "sprite_frames": "assets/animations/npc_guild_clerk.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "market_clerk": {
+      "frames": {
+        "idle1": "npcs_harbor_3:market_clerk_1",
+        "idle2": "npcs_harbor_3:market_clerk_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/market_clerk.png",
+      "sprite_frames": "assets/animations/npc_market_clerk.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "pet_keeper": {
+      "frames": {
+        "idle1": "npcs_harbor_3:pet_keeper_1",
+        "idle2": "npcs_harbor_3:pet_keeper_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/pet_keeper.png",
+      "sprite_frames": "assets/animations/npc_pet_keeper.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 1.5
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "source": "art/source/monsters_m1.png",
+  "region": [
+    771,
+    0,
+    1536,
+    294
+  ],
+  "grid": {
+    "rows": [
+      31,
+      161,
+      294
+    ],
+    "cols": [
+      0,
+      190,
+      382,
+      573,
+      765
+    ]
+  },
+  "scale": 0.425,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/petal_bat",
+  "cells": [
+    [
+      "hover1",
+      "hover2",
+      "fly1",
+      "fly2"
+    ],
+    [
+      "fly3",
+      "attack",
+      "hurt",
+      "defeated"
+    ]
+  ],
+  "sets": {
+    "petal_bat": {
+      "frames": {
+        "hover1": "petal_bat:hover1",
+        "hover2": "petal_bat:hover2",
+        "fly1": "petal_bat:fly1",
+        "fly2": "petal_bat:fly2",
+        "fly3": "petal_bat:fly3",
+        "attack": "petal_bat:attack",
+        "hurt": "petal_bat:hurt",
+        "defeated": "petal_bat:defeated"
+      },
+      "anchor": "mass",
+      "baseline": "cell",
+      "out": "assets/sprites/monsters/petal_bat.png",
+      "sprite_frames": "assets/animations/petal_bat.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "hover1",
+            "hover2"
+          ],
+          "fps": 5
+        },
+        "move": {
+          "frames": [
+            "fly1",
+            "fly2",
+            "fly3",
+            "fly2"
+          ],
+          "fps": 8
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      }
+    }
+  }
+}

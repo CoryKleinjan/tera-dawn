@@ -1,0 +1,98 @@
+{
+  "source": "art/source/mon_dawnrise.png",
+  "region": [
+    773,
+    0,
+    1536,
+    322
+  ],
+  "grid": {
+    "rows": [
+      37,
+      174,
+      322
+    ],
+    "cols": [
+      0,
+      192,
+      382,
+      574,
+      763
+    ]
+  },
+  "scale": 0.531,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/sporecap",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "walk1",
+      "walk2"
+    ],
+    [
+      "walk3",
+      "attack",
+      "hurt",
+      "defeated"
+    ]
+  ],
+  "sets": {
+    "sporecap": {
+      "frames": {
+        "idle1": "sporecap:idle1",
+        "idle2": "sporecap:idle2",
+        "walk1": "sporecap:walk1",
+        "walk2": "sporecap:walk2",
+        "walk3": "sporecap:walk3",
+        "attack": "sporecap:attack",
+        "hurt": "sporecap:hurt",
+        "defeated": "sporecap:defeated"
+      },
+      "anchor": "mass",
+      "baseline": "bottom",
+      "out": "assets/sprites/monsters/sporecap.png",
+      "sprite_frames": "assets/animations/sporecap.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "walk1",
+            "walk2",
+            "walk3",
+            "walk2"
+          ],
+          "fps": 7
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      }
+    }
+  }
+}

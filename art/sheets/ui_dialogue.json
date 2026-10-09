@@ -1,0 +1,109 @@
+{
+  "source": "art/source/ui_dialogue.png",
+  "out_dir": "assets/sprites/ui/dialogue",
+  "scale": 0.5,
+  "alpha": "soft",
+  "label_band": 0.2,
+  "grid_threshold": 0.7,
+  "cells": [
+    [
+      "dialogue_frame",
+      "portrait_niche",
+      "option_row",
+      "option_row_hover"
+    ],
+    [
+      "shop_row",
+      "shop_row_hover",
+      "amount_chip",
+      "amount_chip_on"
+    ],
+    [
+      "trade_panel",
+      "trade_ready",
+      "tracker_panel",
+      "quest_complete_banner"
+    ],
+    [
+      "level_up_banner",
+      "job_advance_banner",
+      "shard_counter",
+      "close_small"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      1,
+      267,
+      485,
+      799,
+      1084
+    ],
+    "cols": [
+      [
+        1,
+        483,
+        789,
+        1115,
+        1446
+      ],
+      [
+        1,
+        416,
+        821,
+        1116,
+        1446
+      ],
+      [
+        1,
+        464,
+        784,
+        1095,
+        1446
+      ],
+      [
+        1,
+        383,
+        877,
+        1186,
+        1446
+      ]
+    ]
+  },
+  "overrides": {
+    "option_row_hover": {
+      "fix": "glow_backdrop"
+    },
+    "shop_row_hover": {
+      "fix": "glow_backdrop"
+    },
+    "amount_chip_on": {
+      "fix": "glow_backdrop"
+    },
+    "trade_ready": {
+      "fix": "glow_backdrop",
+      "keep": "largest"
+    },
+    "quest_complete_banner": {
+      "fix": "glow_backdrop",
+      "keep": "largest",
+      "scale": 0.75
+    },
+    "level_up_banner": {
+      "fix": "glow_backdrop",
+      "keep": "largest",
+      "scale": 0.75
+    },
+    "job_advance_banner": {
+      "fix": "glow_backdrop",
+      "keep": "largest",
+      "scale": 0.75
+    },
+    "dialogue_frame": {
+      "scale": 1.0
+    },
+    "trade_panel": {
+      "scale": 0.786
+    }
+  }
+}

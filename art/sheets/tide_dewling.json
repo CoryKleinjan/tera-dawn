@@ -1,0 +1,97 @@
+{
+  "source": "art/source/mon_dawnrise.png",
+  "region": [
+    0,
+    0,
+    764,
+    322
+  ],
+  "grid": {
+    "rows": [
+      37,
+      174,
+      322
+    ],
+    "cols": [
+      0,
+      193,
+      384,
+      575,
+      764
+    ]
+  },
+  "scale": 0.425,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/tide_dewling",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "hop1",
+      "hop2"
+    ],
+    [
+      "hop3",
+      "attack",
+      "hurt",
+      "defeated"
+    ]
+  ],
+  "sets": {
+    "tide_dewling": {
+      "frames": {
+        "idle1": "tide_dewling:idle1",
+        "idle2": "tide_dewling:idle2",
+        "hop1": "tide_dewling:hop1",
+        "hop2": "tide_dewling:hop2",
+        "hop3": "tide_dewling:hop3",
+        "attack": "tide_dewling:attack",
+        "hurt": "tide_dewling:hurt",
+        "defeated": "tide_dewling:defeated"
+      },
+      "anchor": "mass",
+      "baseline": "cell",
+      "out": "assets/sprites/monsters/tide_dewling.png",
+      "sprite_frames": "assets/animations/tide_dewling.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "hop1",
+            "hop2",
+            "hop3"
+          ],
+          "fps": 6
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      }
+    }
+  }
+}

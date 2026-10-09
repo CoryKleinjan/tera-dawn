@@ -281,6 +281,6 @@ portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_16")])
 spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_17"), SubResource("Resource_18"), SubResource("Resource_19"), SubResource("Resource_20"), SubResource("Resource_21"), SubResource("Resource_22"), SubResource("Resource_23"), SubResource("Resource_24"), SubResource("Resource_25"), SubResource("Resource_26"), SubResource("Resource_27")])
 props = Array[ExtResource("14_prop_placement")]([SubResource("Resource_28"), SubResource("Resource_29"), SubResource("Resource_30"), SubResource("Resource_31"), SubResource("Resource_32"), SubResource("Resource_33"), SubResource("Resource_34")])
 region = &"dawnrise_isle"
-world_pos = Vector2(260, 330)
+world_pos = Vector2(204.0, 198.0)
 return_map = &"meadow"
 level_text = "Lv. 6-12"

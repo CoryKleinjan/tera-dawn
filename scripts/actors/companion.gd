@@ -2,7 +2,8 @@ class_name TDCompanion
 extends Node2D
 ## What comes along with a player (yours or someone else's): the chair they're sitting on
 ## and the pet trotting after them. The player moves it each frame with `follow`.
-## Pets and chairs use their item icon as their body until they get their own art.
+## Pets with `sprite_frames` play idle, walk, jump and happy; pets and chairs without art
+## of their own use their item icon as their body.
 
 ## How far behind its owner a pet keeps, in game pixels.
 const PET_GAP := 72.0
@@ -16,7 +17,7 @@ var speech := ""
 var speech_t := 0
 var _walk := 0.0
 var _seat: Sprite3D
-var _body: Sprite3D
+var _body: SpriteBase3D
 var _shadow: Sprite3D
 
 func set_chair(id: StringName) -> void:
@@ -43,7 +44,17 @@ func set_pet(id: StringName, at: Vector2) -> void:
 	_body = null
 	_shadow = null
 	speech_t = 0
-	if pet and pet.icon:
+	if pet and pet.sprite_frames:
+		pet_pos = at
+		var a := AnimatedSprite3D.new()
+		a.sprite_frames = pet.sprite_frames
+		TDStage.style_sprite(a, TDStage.TEXEL * pet.frames_scale)
+		_body = a
+		add_child(_body)
+		_play(&"idle")
+		_shadow = TDStage.shadow_sprite(34)
+		add_child(_shadow)
+	elif pet and pet.icon:
 		pet_pos = at
 		_body = TDStage.sprite(pet.icon, TDStage.TEXEL * pet.body_scale)
 		add_child(_body)
@@ -74,7 +85,16 @@ func follow(owner_feet: Vector2, owner_face: int, z: float, ground: float) -> vo
 		_walk += 0.3
 	else:
 		_walk = 0.0
-	var hop := absf(sin(_walk)) * 6.0
+	var hop := 0.0
+	if _body is AnimatedSprite3D:
+		if absf(ground - pet_pos.y) > 4.0:
+			_play(&"jump") # still dropping or climbing to the owner's ground
+		elif _walk > 0.0:
+			_play(&"walk")
+		else:
+			_play(&"happy" if speech_t > 0 else &"idle")
+	else:
+		hop = absf(sin(_walk)) * 6.0
 	_body.position = TDStage.to3d(pet_pos + Vector2(0, -hop), z + 0.01)
 	_body.flip_h = pet_face < 0
 	_shadow.position = TDStage.to3d(Vector2(pet_pos.x, ground), z - 0.02) + Vector3(0, 0.02, 0)
@@ -85,4 +105,21 @@ func seat_lift() -> float:
 
 ## The top of the pet's head, for its name tag and speech bubble.
 func pet_head() -> Vector2:
+	if _body is AnimatedSprite3D:
+		var a := _body as AnimatedSprite3D
+		var tex := a.sprite_frames.get_frame_texture(a.animation, 0)
+		return pet_pos + Vector2(0, -(tex.get_height() * TDStage.TEXEL * pet.frames_scale if tex else 30.0))
 	return pet_pos + Vector2(0, -(pet.icon.get_height() * TDStage.TEXEL * pet.body_scale if pet and pet.icon else 30.0))
+
+## Plays one of the pet's animations (or idle, if it hasn't got that one), keeping the
+## feet at the bottom of the frame.
+func _play(anim: StringName) -> void:
+	var a := _body as AnimatedSprite3D
+	if not a.sprite_frames.has_animation(anim):
+		anim = &"idle"
+	if a.animation == anim and a.is_playing():
+		return
+	a.play(anim)
+	var tex := a.sprite_frames.get_frame_texture(anim, 0)
+	if tex:
+		a.offset = Vector2(0, tex.get_height() / 2.0)

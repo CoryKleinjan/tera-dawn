@@ -1,46 +1,46 @@
 class_name Paperdoll
 extends RefCounted
 ## How a character looks, worked out from their look (Character.look(): appearance and the
-## gear that shows). The hero is drawn as layers: his body, then hair, face and each piece
-## of gear. PaperdollSprite shows it in the world and PaperdollView in menus.
+## gear that shows). The hero is drawn as layers: a bare body, then hair, face and each piece
+## of gear, each a strip that plays frame for frame with the body. PaperdollSprite shows it
+## in the world and PaperdollView in menus.
 ##
-## The hero is still one painted sprite strip, so for now the layers are faked on it:
-## tools/art/hero_regions.py maps which of his pixels are hair, skin, eyes, tunic, trousers,
-## boots, cape, sword, shield and bracers (hero_regions.png) and where his head, face and
-## hand are in every frame (hero_rig.json). The skin tone, eye and hair colour and the
-## colour of each worn piece recolour those pixels, gear that isn't worn hides them, and
-## hats, hairstyles, faces and weapons other than swords are stand-ins drawn on top
-## (LookShapes). When a look or a piece has layered art (LookDef.frames,
-## EquipDef.worn_frames), that layer is drawn instead of its stand-in.
+## The body (hero.png) comes with a region map (hero_regions.png: which pixels are skin, the
+## chest, the shorts and the feet) and a rig (hero_rig.json: where his head, face, neck, hand
+## and shield are in every frame), both made with the layers by tools/art/paperdoll_layers.py.
+## The skin tone recolours his skin; a worn top, bottom or shoes recolour the chest, shorts
+## or feet until the piece has its own art (EquipDef.worn_frames). Hair, irises, capes and
+## shields are greyscale art tinted with the hair, eye or item colour. Hats and weapons are
+## drawn on top at a rig point (LookShapes): hats are code-drawn stand-ins for now, weapons
+## are pictures cut from the paperdoll sheets.
 
-## The parts of the painted hero, as hero_regions.png numbers them.
+## The parts of the body, as hero_regions.png numbers them. Hair, eyes, cape, weapon, shield
+## and gloves are layers now, so only skin, top, bottom and shoes are on the map.
 enum Region { NONE, HAIR, SKIN, EYES, TOP, BOTTOM, SHOES, CAPE, WEAPON, SHIELD, GLOVES }
 const REGIONS := 11
 ## Worn places that show on the hero, in drawing order (back to front) for layered art.
 const SHOWN_PLACES: Array[StringName] = [&"cape", &"bottom", &"shoes", &"top", &"gloves", &"shield", &"hat", &"weapon"]
-## The region each shown place recolours.
-const PLACE_REGIONS := {
-	&"cape": Region.CAPE, &"bottom": Region.BOTTOM, &"shoes": Region.SHOES, &"top": Region.TOP,
-	&"gloves": Region.GLOVES, &"shield": Region.SHIELD, &"weapon": Region.WEAPON,
-}
-## How strongly a worn piece recolours its region (a little of the painted detail shows).
-const PLACE_STRENGTH := {
-	&"cape": 0.9, &"bottom": 0.85, &"shoes": 0.85, &"top": 0.85, &"gloves": 0.8, &"shield": 0.65, &"weapon": 0.45,
-}
-## What shows where nothing is worn: plain undershirt and shorts; bare places are hidden
-## (cape, shield, weapon) or keep the painted look (gloves are his bracers).
-const BARE := {&"top": Color(0.93, 0.9, 0.82), &"bottom": Color(0.58, 0.56, 0.6)}
-const BARE_HIDDEN: Array[StringName] = [&"cape", &"shield", &"weapon"]
-## Hairstyle stand-ins on top of the head, which a hat covers.
-const UNDER_HAT: Array[StringName] = [&"hair_bun", &"hair_crest"]
+## The body region a worn piece without art of its own recolours.
+const PLACE_REGIONS := {&"bottom": Region.BOTTOM, &"shoes": Region.SHOES, &"top": Region.TOP}
+## How strongly it recolours it (a little of the body's shading shows through).
+const PLACE_STRENGTH := 0.85
+## The chest and feet are skin when nothing is worn there.
+const BARE_SKIN: Array[StringName] = [&"top", &"shoes"]
 
 const FRAMES := preload("res://assets/animations/hero.tres")
 const STRIP := preload("res://assets/sprites/characters/hero.png")
 const MASK := preload("res://assets/sprites/characters/hero_regions.png")
 const RIG_PATH := "res://assets/sprites/characters/hero_rig.json"
+## The art for worn places with no art of their own: tinted with the piece's colour.
+const CAPE := preload("res://assets/animations/paperdoll/cape.tres")
+## The cape seen from behind (climbing), over his back.
+const CAPE_BACK_VIEW := preload("res://assets/animations/paperdoll/cape_back_view.tres")
+const SHIELD := preload("res://assets/animations/paperdoll/shield_round.tres")
+## Shields by EquipDef.look_shape (any other: SHIELD).
+const SHIELDS := {&"kite": preload("res://assets/animations/paperdoll/shield_kite.tres")}
 ## The hero's frame size in pixels; every frame of the strip is this big.
-const FRAME_SIZE := Vector2(132, 91)
-## Hair bigger or smaller than this scales head stand-ins with it.
+const FRAME_SIZE := Vector2(128, 104)
+## Heads bigger or smaller than this scale hat stand-ins with them.
 const HEAD_WIDTH := 40.0
 
 ## A stand-in drawn on the hero.
@@ -52,20 +52,23 @@ class Overlay:
 		shape = s
 		color = c
 
-## A layer of real art, played in step with the hero.
+## A layer of art, played in step with the hero and multiplied by `tint`.
 class Layer:
 	var frames: SpriteFrames
 	var behind := false
+	var tint := Color.WHITE
 
-	func _init(f: SpriteFrames, back: bool) -> void:
+	func _init(f: SpriteFrames, back: bool, t := Color.WHITE) -> void:
 		frames = f
 		behind = back
+		tint = t
 
 ## Per region: colour to recolour it with (alpha: how much, 0 keeps the art's own).
 var tints := PackedColorArray()
 ## Per region: 1 hides it.
 var hidden := PackedFloat32Array()
 var overlays: Array[Overlay] = []
+## Back to front: the ones `behind` go under the body, the rest over it.
 var layers: Array[Layer] = []
 
 static var _rig: Dictionary
@@ -90,51 +93,67 @@ static func dress(look: Dictionary) -> Paperdoll:
 			if e:
 				gear[StringName(place)] = e
 
-	# appearance
+	# the body
 	var skin := a.part(LookDef.Kind.SKIN)
 	if skin and skin.recolors():
 		d.tints[Region.SKIN] = skin.color
-	var eyes := a.part(LookDef.Kind.EYES)
-	if eyes and eyes.recolors():
-		d.tints[Region.EYES] = eyes.color
-	var hair_color := a.part(LookDef.Kind.HAIR_COLOR)
-	var hair_tone := ref_color(Region.HAIR)
-	if hair_color and hair_color.recolors():
-		d.tints[Region.HAIR] = hair_color.color
-		hair_tone = hair_color.color
-	for kind in [LookDef.Kind.HAIR, LookDef.Kind.FACE]:
-		var l := a.part(kind)
-		if l and l.frames:
-			d.layers.append(Layer.new(l.frames, false))
-		elif l and LookShapes.has(l.shape) and not (gear.has(&"hat") and l.shape in UNDER_HAT):
-			d.overlays.append(Overlay.new(l.shape, hair_tone if kind == LookDef.Kind.HAIR else Color.WHITE))
-
-	# gear
-	for place in SHOWN_PLACES:
+	for place in BARE_SKIN:
+		if not gear.has(place):
+			d.tints[PLACE_REGIONS[place]] = d.tints[Region.SKIN]
+	for place in PLACE_REGIONS:
 		var e: EquipDef = gear.get(place)
-		var region: int = PLACE_REGIONS.get(place, Region.NONE)
+		if e and e.worn_frames == null:
+			var c := e.worn_color()
+			c.a = PLACE_STRENGTH
+			d.tints[PLACE_REGIONS[place]] = c
+
+	# behind him
+	var hair := a.part(LookDef.Kind.HAIR)
+	var hair_tone := _look_color(a.part(LookDef.Kind.HAIR_COLOR), Region.HAIR)
+	var cape: EquipDef = gear.get(&"cape")
+	if cape:
+		d._add(cape.worn_frames if cape.worn_frames else CAPE, true, Color.WHITE if cape.worn_frames else cape.worn_color())
+	if hair and not gear.has(&"hat"):
+		d._add(hair.back_frames, true, hair_tone)
+
+	# over him
+	for place in [&"bottom", &"shoes", &"top", &"gloves"]:
+		var e: EquipDef = gear.get(place)
+		if e and e.worn_frames:
+			d._add(e.worn_frames, false)
+			if PLACE_REGIONS.has(place):
+				d.hidden[PLACE_REGIONS[place]] = 1.0
+	if cape and cape.worn_frames == null:
+		d._add(CAPE_BACK_VIEW, false, cape.worn_color())
+	var face := a.part(LookDef.Kind.FACE)
+	if face:
+		d._add(face.frames, false)
+		d._add(face.detail_frames, false, _look_color(a.part(LookDef.Kind.EYES), Region.EYES))
+	if hair:
+		d._add(hair.hat_frames if gear.has(&"hat") and hair.hat_frames else hair.frames, false, hair_tone)
+	var shield: EquipDef = gear.get(&"shield")
+	if shield:
+		if shield.worn_frames:
+			d._add(shield.worn_frames, false)
+		else:
+			d._add(SHIELDS.get(shield.look_shape, SHIELD), false, shield.worn_color())
+	for place in [&"hat", &"weapon"]:
+		var e: EquipDef = gear.get(place)
 		if e == null:
-			if place in BARE_HIDDEN:
-				d.hidden[region] = 1.0
-			elif BARE.has(place):
-				d.tints[region] = BARE[place]
 			continue
 		if e.worn_frames:
-			d.layers.append(Layer.new(e.worn_frames, place == &"cape"))
-			if region != Region.NONE:
-				d.hidden[region] = 1.0
-			continue
-		var shape := e.worn_shape()
-		if place == &"weapon" and shape != &"sword":
-			d.hidden[region] = 1.0 # the painted sword makes way for the stand-in
-		elif region != Region.NONE:
-			var c := e.worn_color()
-			c.a = PLACE_STRENGTH[place]
-			d.tints[region] = c
-			continue
-		if LookShapes.has(shape):
-			d.overlays.append(Overlay.new(shape, e.worn_color()))
+			d._add(e.worn_frames, false)
+		elif LookShapes.has(e.worn_shape()):
+			d.overlays.append(Overlay.new(e.worn_shape(), e.worn_color()))
 	return d
+
+func _add(frames: SpriteFrames, behind: bool, tint := Color.WHITE) -> void:
+	if frames:
+		layers.append(Layer.new(frames, behind, tint))
+
+## A look's colour, or the art's own colour for the region when it keeps it.
+static func _look_color(l: LookDef, region: Region) -> Color:
+	return l.color if l and l.recolors() else ref_color(region)
 
 ## Sets a dressing material's uniforms (paperdoll_sprite or paperdoll_ui shader). The
 ## per-region values go in a tiny texture, one column per region (see paperdoll.gdshaderinc).

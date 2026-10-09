@@ -1,6 +1,6 @@
 {
   "source": "art/source/monsters_npcs.png",
-  "out_dir": "assets/sprites/monsters",
+  "out_dir": "art/build/monsters_npcs",
   "label_band": 0.1,
   "cells": [
     [

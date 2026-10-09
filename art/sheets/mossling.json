@@ -1,0 +1,78 @@
+{
+  "source": "art/source/anim_mossling.png",
+  "scale": 0.157,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/mossling",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "walk1",
+      "walk2"
+    ],
+    [
+      "walk3",
+      "attack",
+      "hurt",
+      "defeated"
+    ]
+  ],
+  "sets": {
+    "mossling": {
+      "frames": {
+        "idle1": "mossling:idle1",
+        "idle2": "mossling:idle2",
+        "walk1": "mossling:walk1",
+        "walk2": "mossling:walk2",
+        "walk3": "mossling:walk3",
+        "attack": "mossling:attack",
+        "hurt": "mossling:hurt",
+        "defeated": "mossling:defeated"
+      },
+      "anchor": "mass",
+      "baseline": "bottom",
+      "out": "assets/sprites/monsters/mossling.png",
+      "sprite_frames": "assets/animations/mossling.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "walk1",
+            "walk2",
+            "walk3",
+            "walk2"
+          ],
+          "fps": 7
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      }
+    }
+  }
+}

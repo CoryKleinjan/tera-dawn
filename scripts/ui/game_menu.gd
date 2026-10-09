@@ -16,7 +16,7 @@ var quit_button: Button
 func _init() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	var card := PanelContainer.new()
-	card.add_theme_stylebox_override("panel", UiSkin.panel())
+	UiSkin.use_panel(card, UiSkin.ARCH_PANEL, Vector4(34, 58, 34, 36))
 	add_child(card)
 	var col := VBoxContainer.new()
 	col.add_theme_constant_override("separation", 10)
@@ -30,6 +30,7 @@ func _init() -> void:
 	heading.add_theme_color_override("font_outline_color", Palette.PLUM)
 	heading.add_theme_constant_override("outline_size", 8)
 	col.add_child(heading)
+	col.add_child(UiSkin.divider())
 	resume_button = _button(col, "Resume", resumed)
 	settings_button = _button(col, "Settings", settings_requested)
 	leave_button = _button(col, "Leave to title", left)

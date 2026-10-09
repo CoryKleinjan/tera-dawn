@@ -28,12 +28,15 @@ trims it.
 | `source` | | The sheet, relative to the repo. |
 | `out_dir` | | Where the sprites go (`<out_dir>/<cell name>.png`). |
 | `cells` | | Cell names, one list per row, left to right. |
+| `region` | | `[x0, y0, x1, y1]`: cut only this part of the sheet, for sheets that hold several things (a group of monsters, a tileset beside its backdrops). Grid rows and columns are then inside the region. |
 | `background` | `"magenta"` | `"magenta"` (soft chroma key), `"dark"` (flood fill from the cell border) or `[r, g, b]`. |
 | `scale` | `0.25` | Shrink factor from sheet pixels to sprite texels. The hero is 0.25; match its pixel size. |
 | `alpha` | `"hard"` | `"hard"` for pixel sprites, `"soft"` for glows, effects and backgrounds. |
 | `key` | `[0.35, 0.8]` | Magenta sheets: how magenta a pixel must be to start and finish fading out. Raise it if purple art is being eaten. |
 | `label_band` | `0.16` | Top part of each cell (fraction of its height) where the label may be. |
+| `strip_labels` | `false` | Paint over the white label letters in the label band first, for small cells where the label sits close to the art. |
 | `blank_top` | | Paint the top N rows of the cell with background, for labels that touch the art. |
+| `blank_label` | | Rows at the top of the cell holding a label drawn over the art: paints the box around the label's white letters with background. |
 | `blank` | | Rects `[[x0, y0, x1, y1], ...]` inside the cell to paint with background, for a label beside art that reaches the top. |
 | `keep` | `"all"` | `"largest"` keeps only the biggest piece; `"split"` saves each piece as `name_1`, `name_2`... |
 | `shadow` | `false` | Dark sheets: also remove the soft drop shadow under the sprite. |
@@ -71,9 +74,10 @@ Godot `SpriteFrames` resource. Frames can come from any manifest, as `"<sheet>:<
 - `baseline`: `"bottom"` puts every frame's lowest pixel on the floor; `"cell"` keeps the
   height the art had in its cell, so hops and jumps stay in the air.
 - `nudge`: `{"frame": [dx, dy]}` fine-tunes one frame.
+- `pad_top`: empty rows added above every frame, so layers drawn over the frames (hair, hats) have room.
 
 Actors look for the animations `idle`, `move` (monsters), `attack`, `hurt` and `die`; the hero
-has its own list in `art/sheets/hero_main.json`.
+has its own list in `art/sheets/paperdoll_body.json`.
 
 ## Picks between versions
 
@@ -90,3 +94,25 @@ after the item ids, replacing the placeholders from `tools/art/make_item_placeho
 `assets/sprites/ui/`, which the game windows and the status bar's window buttons draw with.
 `item_slot_hover` isn't used: its glow kept a pink tint from the magenta key, so the windows
 brighten `item_slot` on hover instead.
+
+## Monsters, NPCs, areas and the paperdoll (art prompts parts 1 to 3)
+
+- **Monster group sheets** (`mon_<area>`, `monsters_m1`) hold several monsters each. Every
+  monster has its own manifest named after its id, cutting its `region` of the group sheet
+  with `strip_labels` and writing `assets/sprites/monsters/<id>.png` and
+  `assets/animations/<id>.tres`. Labels drawn over big monsters are cleared with
+  `blank_label`. `anim_mossling` and `anim_sproutcap` are the picked Mossling and Sproutcap;
+  `sproutcap_extra` is unused.
+- **NPC sheets** (`npcs_<town>`) use a fixed `grid`; each NPC's `scale` override sets its
+  height next to the hero, and its set writes `assets/animations/npc_<id>.tres` (idle).
+- **Area sheets** (`<area>_area`) are cut twice: `<area>_tileset` into
+  `assets/sprites/tiles/<area>/` and `<area>_backgrounds` into `backgrounds/<area>/`. The
+  painted skies use the `painted_sky` and `sky_body` fixes; glowing icons use `glow_backdrop`.
+- **Items, pets, projectiles** cut into `assets/sprites/items/`, `pets/` (and
+  `assets/animations/pet_*.tres`) and `projectiles/`.
+- **The paperdoll**: `paperdoll_body` cuts the bare hero into the hero strip (`pad_top` leaves
+  room for hair). `paperdoll_hair`, `_faces`, `_layers` (cape, gloves, shields per frame) and
+  `_weapons` cut into `art/build/` only; `tools/art/paperdoll_layers.py` places those pieces
+  on every body frame and writes the layers, the region map and the rig. Run it after
+  re-cutting the body. Gloves are cut but not used yet (nothing to anchor them to).
+  `hero_main` (the painted hero) now cuts into `art/build/` for reference.

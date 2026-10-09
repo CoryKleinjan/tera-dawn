@@ -1,0 +1,121 @@
+{
+  "source": "art/source/mon_emberreach.png",
+  "region": [
+    0,
+    712,
+    764,
+    1024
+  ],
+  "grid": {
+    "rows": [
+      28,
+      151,
+      312
+    ],
+    "cols": [
+      0,
+      192,
+      384,
+      575,
+      764
+    ]
+  },
+  "scale": 0.944,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/forge_golem",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "walk1",
+      "walk2"
+    ],
+    [
+      "walk3",
+      "attack",
+      "hurt",
+      "defeated"
+    ]
+  ],
+  "sets": {
+    "forge_golem": {
+      "frames": {
+        "idle1": "forge_golem:idle1",
+        "idle2": "forge_golem:idle2",
+        "walk1": "forge_golem:walk1",
+        "walk2": "forge_golem:walk2",
+        "walk3": "forge_golem:walk3",
+        "attack": "forge_golem:attack",
+        "hurt": "forge_golem:hurt",
+        "defeated": "forge_golem:defeated"
+      },
+      "anchor": "mass",
+      "baseline": "bottom",
+      "out": "assets/sprites/monsters/forge_golem.png",
+      "sprite_frames": "assets/animations/forge_golem.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "walk1",
+            "walk2",
+            "walk3",
+            "walk2"
+          ],
+          "fps": 7
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      }
+    }
+  },
+  "overrides": {
+    "idle1": {
+      "blank_label": 16
+    },
+    "idle2": {
+      "blank_label": 16
+    },
+    "walk1": {
+      "blank_label": 16
+    },
+    "walk2": {
+      "blank_label": 16
+    },
+    "walk3": {
+      "blank_label": 16
+    },
+    "attack": {
+      "blank_label": 16
+    },
+    "hurt": {
+      "blank_label": 16
+    }
+  }
+}

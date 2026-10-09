@@ -1,0 +1,123 @@
+{
+  "source": "art/source/mon_dawnrise.png",
+  "region": [
+    773,
+    658,
+    1536,
+    1024
+  ],
+  "grid": {
+    "rows": [
+      23,
+      129,
+      238,
+      366
+    ],
+    "cols": [
+      0,
+      192,
+      382,
+      572,
+      763
+    ]
+  },
+  "scale": 1.0,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/old_clawbeard",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "move1",
+      "move2"
+    ],
+    [
+      "move3",
+      "windup",
+      "strike",
+      "special"
+    ],
+    [
+      "hurt",
+      "enraged",
+      "defeated1",
+      "defeated2"
+    ]
+  ],
+  "sets": {
+    "old_clawbeard": {
+      "frames": {
+        "idle1": "old_clawbeard:idle1",
+        "idle2": "old_clawbeard:idle2",
+        "move1": "old_clawbeard:move1",
+        "move2": "old_clawbeard:move2",
+        "move3": "old_clawbeard:move3",
+        "windup": "old_clawbeard:windup",
+        "strike": "old_clawbeard:strike",
+        "special": "old_clawbeard:special",
+        "hurt": "old_clawbeard:hurt",
+        "enraged": "old_clawbeard:enraged",
+        "defeated1": "old_clawbeard:defeated1",
+        "defeated2": "old_clawbeard:defeated2"
+      },
+      "anchor": "mass",
+      "baseline": "bottom",
+      "out": "assets/sprites/monsters/old_clawbeard.png",
+      "sprite_frames": "assets/animations/old_clawbeard.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "move1",
+            "move2",
+            "move3",
+            "move2"
+          ],
+          "fps": 6
+        },
+        "attack": {
+          "frames": [
+            "windup",
+            "strike",
+            "special"
+          ],
+          "fps": 3,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated1",
+            "defeated2"
+          ],
+          "fps": 2,
+          "loop": false
+        }
+      }
+    }
+  },
+  "overrides": {
+    "windup": {
+      "blank_label": 16
+    },
+    "strike": {
+      "blank_label": 16
+    },
+    "special": {
+      "blank_label": 16
+    }
+  }
+}

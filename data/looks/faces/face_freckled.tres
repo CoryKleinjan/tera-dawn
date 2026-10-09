@@ -1,11 +1,14 @@
-[gd_resource type="Resource" script_class="LookDef" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="LookDef" load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/look_def.gd" id="1_look_def"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/paperdoll/face_freckled.tres" id="2_frames"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/paperdoll/face_freckled_eyes.tres" id="3_detail_frames"]
 
 [resource]
 script = ExtResource("1_look_def")
 id = &"face_freckled"
 display_name = "Freckled"
 kind = 1
-shape = &"freckles"
 order = 3
+frames = ExtResource("2_frames")
+detail_frames = ExtResource("3_detail_frames")

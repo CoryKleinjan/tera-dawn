@@ -1,81 +1,86 @@
 class_name LookShapes
 extends RefCounted
-## Stand-in pictures for hairstyles, faces, hats and weapons, drawn in code until the hero
-## is drawn in layers. Each shape is a few flat polygons in the hero's pixel scale, filled
-## in the item's colour with a darker and a lighter tone and a dark outline, so it reads
-## like pixel art next to him.
+## Pictures drawn on the hero at a point of his rig (hero_rig.json) rather than as a layer
+## that plays with him: hats, drawn in code as stand-ins until hat art exists, and held
+## weapons, cut from the paperdoll sheets (assets/sprites/characters/weapons/). Hat stand-ins
+## are a few flat polygons in the hero's pixel scale, filled in the item's colour with a
+## darker and a lighter tone and a dark outline, so they read like pixel art next to him;
+## weapon pictures are greyscale and take the item's colour.
 ##
-## A shape says where it sits on the hero (`anchor`, one of the points in hero_rig.json:
-## "head_top", "head", "face" or "grip"), which pixel of the picture goes on that point
-## (`pivot`), whether it's drawn behind him, and for weapons, that it turns with his arm.
-## The picture faces right like the hero; Paperdoll mirrors it.
+## A shape says where it sits on the hero (`anchor`: "head_top" or "grip"), which pixel of
+## the picture goes on that point (`pivot`), whether it's drawn behind him, and for weapons,
+## that it turns with his arm. The picture faces right like the hero; Paperdoll mirrors it.
 ##
-## Add a stand-in by adding an entry to SHAPES and a `_draw_<name>` function.
+## Add a hat by adding an entry to SHAPES and a `_draw_<name>` function; add a weapon kind
+## by cutting its picture (tools/art/paperdoll_layers.py) and listing it in WEAPONS.
 
 ## name -> [anchor, pivot, size, behind, turns with the weapon]
 const SHAPES := {
-	# hairstyles, in the hair colour (anchor "head": the middle of the hair)
-	&"hair_long": [&"head", Vector2(22, 0), Vector2i(36, 38), true, false],
-	&"hair_ponytail": [&"head", Vector2(30, -4), Vector2i(20, 30), true, false],
-	&"hair_twin_tails": [&"head", Vector2(22, 0), Vector2i(44, 30), true, false],
-	&"hair_bun": [&"head", Vector2(19, 26), Vector2i(22, 20), true, false],
-	&"hair_crest": [&"head", Vector2(18, 24), Vector2i(34, 20), false, false],
-	# faces (anchor "face": the middle of the face)
-	&"brows": [&"face", Vector2(9, 8), Vector2i(18, 4), false, false],
-	&"blush": [&"face", Vector2(9, -3), Vector2i(18, 4), false, false],
-	&"freckles": [&"face", Vector2(9, -2), Vector2i(18, 5), false, false],
-	&"bandage": [&"face", Vector2(-5, -2), Vector2i(8, 5), false, false],
-	# hats (anchor "head_top": the top of the hair)
+	# hats (anchor "head_top": the top of the head)
 	&"cap": [&"head_top", Vector2(22, 2), Vector2i(52, 24), false, false],
 	&"helm": [&"head_top", Vector2(22, 1), Vector2i(46, 30), false, false],
 	&"hood": [&"head_top", Vector2(24, 2), Vector2i(50, 46), false, false],
 	&"bandana": [&"head_top", Vector2(22, -8), Vector2i(52, 16), false, false],
 	&"wizard": [&"head_top", Vector2(26, 16), Vector2i(58, 38), false, false],
 	&"tricorn": [&"head_top", Vector2(26, -2), Vector2i(56, 24), false, false],
-	# weapons, pointing right from the hand (anchor "grip")
-	&"bow": [&"grip", Vector2(4, 22), Vector2i(20, 46), false, true],
-	&"wand": [&"grip", Vector2(3, 4), Vector2i(34, 9), false, true],
-	&"staff": [&"grip", Vector2(14, 5), Vector2i(62, 11), false, true],
-	&"claw": [&"grip", Vector2(5, 7), Vector2i(26, 14), false, true],
-	&"knuckle": [&"grip", Vector2(7, 7), Vector2i(16, 14), false, true],
-	&"gun": [&"grip", Vector2(5, 4), Vector2i(26, 16), false, true],
 }
+## Weapon kinds with a picture, pointing right from the hand (anchor "grip"; the pivot is
+## the hand's place on the picture, from hero_rig.json "weapons").
+const WEAPONS: Array[StringName] = [&"sword", &"bow", &"wand", &"staff", &"claw", &"knuckle", &"gun"]
+const WEAPON_DIR := "res://assets/sprites/characters/weapons/"
 
-## Shapes drawn without the dark outline (soft marks on the face).
-const NO_OUTLINE: Array[StringName] = [&"brows", &"blush", &"freckles"]
+## Shapes drawn without the dark outline.
+const NO_OUTLINE: Array[StringName] = []
 
 const INK := Color(0.16, 0.09, 0.12)
 const GOLD := Color(0.98, 0.78, 0.3)
 const WHITE := Color(0.97, 0.96, 0.92)
-const PINK := Color(0.96, 0.55, 0.58)
 
 ## shape + colour -> ImageTexture, drawn once.
 static var _cache := {}
 
 static func has(shape: StringName) -> bool:
-	return SHAPES.has(shape)
+	return SHAPES.has(shape) or shape in WEAPONS
 
 static func anchor(shape: StringName) -> StringName:
-	return SHAPES[shape][0]
+	return &"grip" if shape in WEAPONS else SHAPES[shape][0]
 
 static func pivot(shape: StringName) -> Vector2:
+	if shape in WEAPONS:
+		var p: Variant = Paperdoll.rig().get("weapons", {}).get(String(shape))
+		return Vector2(p[0], p[1]) if p is Array else Vector2.ZERO
 	return SHAPES[shape][1]
 
 static func behind(shape: StringName) -> bool:
-	return SHAPES[shape][3]
+	return false if shape in WEAPONS else SHAPES[shape][3]
 
 static func turns(shape: StringName) -> bool:
-	return SHAPES[shape][4]
+	return shape in WEAPONS or SHAPES[shape][4]
 
 ## The picture of a shape in a colour.
 static func texture(shape: StringName, col: Color) -> Texture2D:
 	var key := "%s/%s" % [shape, col.to_html(false)]
 	if not _cache.has(key):
-		var size: Vector2i = SHAPES[shape][2]
-		var pen := Pen.new(size, col)
-		Callable(LookShapes, "_draw_" + String(shape)).call(pen)
-		_cache[key] = ImageTexture.create_from_image(pen.finish(not shape in NO_OUTLINE))
+		if shape in WEAPONS:
+			_cache[key] = ImageTexture.create_from_image(_tinted(load(WEAPON_DIR + String(shape) + ".png"), col))
+		else:
+			var size: Vector2i = SHAPES[shape][2]
+			var pen := Pen.new(size, col)
+			Callable(LookShapes, "_draw_" + String(shape)).call(pen)
+			_cache[key] = ImageTexture.create_from_image(pen.finish(not shape in NO_OUTLINE))
 	return _cache[key]
+
+## A greyscale picture multiplied by a colour.
+static func _tinted(tex: Texture2D, col: Color) -> Image:
+	var img := tex.get_image()
+	img.decompress()
+	img.convert(Image.FORMAT_RGBA8)
+	for y in img.get_height():
+		for x in img.get_width():
+			var c := img.get_pixel(x, y)
+			if c.a > 0.0:
+				img.set_pixel(x, y, Color(c.r * col.r, c.g * col.g, c.b * col.b, c.a))
+	return img
 
 ## Fills polygons into an image, then outlines everything filled.
 class Pen:
@@ -140,58 +145,6 @@ static func _p(values: Array) -> PackedVector2Array:
 		out.append(Vector2(values[i], values[i + 1]))
 	return out
 
-# ---------- hairstyles ----------
-
-static func _draw_hair_long(p: Pen) -> void:
-	# a curtain of hair falling behind the shoulders (the head's middle is at 22, 0)
-	p.poly(_p([4, 2, 14, -2, 30, 0, 35, 8, 33, 22, 30, 34, 24, 30, 18, 37, 12, 31, 6, 36, 2, 24, 1, 12]), p.base)
-	p.poly(_p([3, 10, 9, 8, 10, 30, 6, 35, 2, 24]), p.dark)
-	p.line(Vector2(16, 6), Vector2(17, 30), 2, p.light)
-
-static func _draw_hair_ponytail(p: Pen) -> void:
-	# tied at the back of the head (14, 3) and swinging down behind
-	p.poly(_p([12, 1, 18, 3, 17, 11, 13, 19, 8, 25, 2, 29, 4, 21, 7, 13, 9, 6]), p.base)
-	p.poly(_p([9, 7, 12, 8, 9, 18, 4, 27, 5, 19]), p.dark)
-	p.line(Vector2(15, 6), Vector2(12, 15), 1.5, p.light)
-	p.ellipse(Vector2(14, 3), Vector2(3, 2.5), GOLD)
-
-static func _draw_hair_twin_tails(p: Pen) -> void:
-	# one tail at the back of the head, one peeking out at the front (the middle is at 22, 0)
-	for x in [6.0, 36.0]:
-		p.poly(_p([x - 3, 4, x + 3, 4, x + 4, 14, x + 2, 24, x - 1, 29, x - 3, 22, x - 4, 12]), p.base)
-		p.poly(_p([x - 3, 8, x - 1, 8, x - 1, 26, x - 3, 22, x - 4, 12]), p.dark)
-		p.ellipse(Vector2(x, 4), Vector2(3, 2), PINK)
-
-static func _draw_hair_bun(p: Pen) -> void:
-	p.ellipse(Vector2(11, 10), Vector2(9, 8), p.base)
-	p.ellipse(Vector2(8, 7), Vector2(4, 3), p.light)
-	p.ellipse(Vector2(13, 14), Vector2(5, 3), p.dark)
-	p.line(Vector2(2, 17), Vector2(20, 17), 2, GOLD)
-
-static func _draw_hair_crest(p: Pen) -> void:
-	p.poly(_p([2, 19, 6, 6, 10, 14, 14, 1, 18, 12, 23, 2, 25, 13, 32, 6, 30, 19]), p.base)
-	p.poly(_p([8, 19, 13, 8, 16, 19]), p.light)
-	p.poly(_p([20, 19, 23, 9, 26, 19]), p.light)
-
-# ---------- faces (drawn in their own colours) ----------
-
-static func _draw_brows(p: Pen) -> void:
-	p.line(Vector2(0, 3), Vector2(6, 1), 1.5, INK)
-	p.line(Vector2(12, 1), Vector2(18, 3), 1.5, INK)
-
-static func _draw_blush(p: Pen) -> void:
-	p.ellipse(Vector2(3, 2), Vector2(2.5, 1.3), PINK)
-	p.ellipse(Vector2(15, 2), Vector2(2.5, 1.3), PINK)
-
-static func _draw_freckles(p: Pen) -> void:
-	var c := Color(0.62, 0.36, 0.24)
-	for at in [Vector2i(1, 1), Vector2i(3, 3), Vector2i(5, 1), Vector2i(13, 1), Vector2i(15, 3), Vector2i(17, 1)]:
-		p.dot(at, c)
-
-static func _draw_bandage(p: Pen) -> void:
-	p.poly(_p([0, 1, 6, 0, 7, 3, 1, 4]), Color(0.96, 0.86, 0.7))
-	p.dot(Vector2i(3, 2), Color(0.8, 0.6, 0.5))
-
 # ---------- hats ----------
 
 static func _draw_cap(p: Pen) -> void:
@@ -234,40 +187,3 @@ static func _draw_tricorn(p: Pen) -> void:
 	p.ellipse(Vector2(27, 10), Vector2(14, 9), p.base, PI, TAU)
 	p.poly(_p([12, 10, 42, 10, 42, 13, 12, 13]), GOLD)
 	p.ellipse(Vector2(24, 5), Vector2(4, 2), p.light)
-
-# ---------- weapons ----------
-
-static func _draw_bow(p: Pen) -> void:
-	p.line(Vector2(2, 22), Vector2(6, 22), 4, Color(0.45, 0.28, 0.16))
-	p.poly(_p([3, 1, 9, 4, 14, 14, 15, 22, 14, 30, 9, 40, 3, 45, 7, 38, 11, 30, 12, 22, 11, 14, 7, 6]), p.base)
-	p.line(Vector2(9, 6), Vector2(13, 20), 1.5, p.light)
-	p.line(Vector2(3, 2), Vector2(3, 44), 1, WHITE)
-
-static func _draw_wand(p: Pen) -> void:
-	p.line(Vector2(0, 4), Vector2(26, 4), 3, Color(0.55, 0.36, 0.2))
-	p.ellipse(Vector2(28, 4), Vector2(4.5, 4), p.base)
-	p.dot(Vector2i(27, 3), WHITE)
-
-static func _draw_staff(p: Pen) -> void:
-	p.line(Vector2(0, 5), Vector2(52, 5), 3.5, Color(0.5, 0.33, 0.2))
-	p.poly(_p([50, 1, 56, 0, 61, 5, 56, 10, 50, 9]), p.dark)
-	p.ellipse(Vector2(56, 5), Vector2(3.5, 3.5), p.base)
-	p.dot(Vector2i(55, 4), WHITE)
-
-static func _draw_claw(p: Pen) -> void:
-	p.poly(_p([0, 3, 10, 2, 11, 12, 0, 11]), p.dark)
-	for y in [3.0, 7.0, 11.0]:
-		p.poly(_p([10, y - 1.5, 24, y - 0.5, 10, y + 1.5]), p.base)
-	p.line(Vector2(12, 6.5), Vector2(22, 6.8), 1, p.light)
-
-static func _draw_knuckle(p: Pen) -> void:
-	p.poly(_p([1, 2, 14, 1, 15, 12, 1, 12]), p.base)
-	for y in [3, 6, 9]:
-		p.dot(Vector2i(13, y), p.light)
-	p.line(Vector2(2, 7), Vector2(10, 7), 2, p.dark)
-
-static func _draw_gun(p: Pen) -> void:
-	p.poly(_p([0, 1, 24, 1, 24, 6, 0, 6]), p.base)
-	p.poly(_p([2, 6, 9, 6, 7, 15, 1, 15]), Color(0.45, 0.28, 0.16))
-	p.line(Vector2(2, 2.5), Vector2(22, 2.5), 1, p.light)
-	p.dot(Vector2i(23, 3), INK)

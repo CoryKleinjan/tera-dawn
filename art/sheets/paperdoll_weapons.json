@@ -1,0 +1,36 @@
+{
+  "source": "art/source/paperdoll_weapons.png",
+  "grid": {
+    "rows": [
+      0,
+      440,
+      887
+    ],
+    "cols": [
+      0,
+      442,
+      885,
+      1329,
+      1774
+    ]
+  },
+  "scale": 1.0,
+  "label_band": 0.16,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/paperdoll/weapons",
+  "cells": [
+    [
+      "sword",
+      "bow",
+      "wand",
+      "staff"
+    ],
+    [
+      "claw",
+      "knuckle",
+      "gun",
+      ""
+    ]
+  ]
+}

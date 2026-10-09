@@ -1,0 +1,97 @@
+{
+  "source": "art/source/mon_ring_road.png",
+  "region": [
+    772,
+    0,
+    1536,
+    336
+  ],
+  "grid": {
+    "rows": [
+      38,
+      185,
+      336
+    ],
+    "cols": [
+      0,
+      192,
+      381,
+      572,
+      764
+    ]
+  },
+  "scale": 0.591,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/marsh_horror",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "hop1",
+      "hop2"
+    ],
+    [
+      "hop3",
+      "attack",
+      "hurt",
+      "defeated"
+    ]
+  ],
+  "sets": {
+    "marsh_horror": {
+      "frames": {
+        "idle1": "marsh_horror:idle1",
+        "idle2": "marsh_horror:idle2",
+        "hop1": "marsh_horror:hop1",
+        "hop2": "marsh_horror:hop2",
+        "hop3": "marsh_horror:hop3",
+        "attack": "marsh_horror:attack",
+        "hurt": "marsh_horror:hurt",
+        "defeated": "marsh_horror:defeated"
+      },
+      "anchor": "mass",
+      "baseline": "cell",
+      "out": "assets/sprites/monsters/marsh_horror.png",
+      "sprite_frames": "assets/animations/marsh_horror.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "hop1",
+            "hop2",
+            "hop3"
+          ],
+          "fps": 6
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      }
+    }
+  }
+}
