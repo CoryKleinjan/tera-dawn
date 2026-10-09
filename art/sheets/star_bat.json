@@ -1,0 +1,98 @@
+{
+  "source": "art/source/mon_lumewood.png",
+  "region": [
+    0,
+    255,
+    764,
+    496
+  ],
+  "grid": {
+    "rows": [
+      27,
+      136,
+      241
+    ],
+    "cols": [
+      0,
+      193,
+      385,
+      575,
+      764
+    ]
+  },
+  "scale": 0.459,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/star_bat",
+  "cells": [
+    [
+      "hover1",
+      "hover2",
+      "fly1",
+      "fly2"
+    ],
+    [
+      "fly3",
+      "attack",
+      "hurt",
+      "defeated"
+    ]
+  ],
+  "sets": {
+    "star_bat": {
+      "frames": {
+        "hover1": "star_bat:hover1",
+        "hover2": "star_bat:hover2",
+        "fly1": "star_bat:fly1",
+        "fly2": "star_bat:fly2",
+        "fly3": "star_bat:fly3",
+        "attack": "star_bat:attack",
+        "hurt": "star_bat:hurt",
+        "defeated": "star_bat:defeated"
+      },
+      "anchor": "mass",
+      "baseline": "cell",
+      "out": "assets/sprites/monsters/star_bat.png",
+      "sprite_frames": "assets/animations/star_bat.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "hover1",
+            "hover2"
+          ],
+          "fps": 5
+        },
+        "move": {
+          "frames": [
+            "fly1",
+            "fly2",
+            "fly3",
+            "fly2"
+          ],
+          "fps": 8
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      }
+    }
+  }
+}

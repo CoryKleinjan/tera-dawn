@@ -60,7 +60,9 @@ func _draw() -> void:
 			var skill := thing as SkillDef
 			if p and p.cooldown > 0:
 				var k := clampf(float(p.cooldown) / skill.cooldown, 0, 1)
-				draw_rect(Rect2(r.position + Vector2(3, 3), Vector2(SLOT - 6, (SLOT - 6) * k)), Color(0.05, 0.02, 0.1, 0.6))
+				var cover := UiSkin.tex("hud/cooldown_cover")
+				var part := Rect2(Vector2.ZERO, cover.get_size() * Vector2(1, k))
+				draw_texture_rect_region(cover, Rect2(r.position + Vector2(3, 3), Vector2(SLOT - 6, (SLOT - 6) * k)), part, Color(1, 1, 1, 0.75))
 			if Game.me.use_problem(skill) != "":
 				draw_rect(r.grow(-3), Color(0.05, 0.02, 0.15, 0.55))
 		elif thing is ItemDef:

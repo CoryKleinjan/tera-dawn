@@ -19,6 +19,8 @@ var title: Control
 ## The title card (log in or register on a server, Play solo, Host, Settings, Quit),
 ## hidden while any of the other screens on `title` is showing.
 var title_card: Control
+## The key art behind the title screen and character select.
+var title_backdrop: TextureRect
 var character_select: TDCharacterSelect
 var delete_confirm: TDDeleteConfirm
 var creator: TDCreator
@@ -222,6 +224,14 @@ func _build_title() -> void:
 	title.theme = ui_theme
 	title.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(title)
+	# the key art behind the title screen and the creator (not behind the Esc menu)
+	title_backdrop = TextureRect.new()
+	title_backdrop.texture = UiSkin.tex("title_backdrop")
+	title_backdrop.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	title_backdrop.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	title_backdrop.set_anchors_preset(Control.PRESET_FULL_RECT)
+	title_backdrop.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	title.add_child(title_backdrop)
 	title_card = CenterContainer.new()
 	title_card.set_anchors_preset(Control.PRESET_FULL_RECT)
 	title.add_child(title_card)
@@ -230,18 +240,12 @@ func _build_title() -> void:
 	col.add_theme_constant_override("separation", 10)
 	title_card.add_child(col)
 
-	var heading := Label.new()
-	heading.text = "Tera Dawn"
-	heading.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	heading.add_theme_font_override("font", Game.num_font)
-	heading.add_theme_font_size_override("font_size", 96)
-	heading.add_theme_color_override("font_color", Palette.SUN)
-	heading.add_theme_color_override("font_outline_color", Palette.PLUM)
-	heading.add_theme_constant_override("outline_size", 18)
-	heading.add_theme_color_override("font_shadow_color", Palette.EMBER)
-	heading.add_theme_constant_override("shadow_offset_y", 6)
-	heading.add_theme_constant_override("shadow_offset_x", 0)
-	col.add_child(heading)
+	var logo := TextureRect.new()
+	logo.texture = UiSkin.tex("logo")
+	logo.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	logo.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	logo.custom_minimum_size = Vector2(420, 124)
+	col.add_child(logo)
 
 	var card := PanelContainer.new()
 	card.add_theme_stylebox_override("panel", UiSkin.panel())
@@ -497,6 +501,7 @@ func _on_to_characters() -> void:
 	world.stop(true)
 	game_menu.hide()
 	title_card.hide()
+	title_backdrop.show()
 	title.show()
 	Net.leave_character()
 
@@ -541,6 +546,7 @@ func _show_message(text: String) -> void:
 func show_title(paused: bool) -> void:
 	if settings_menu.visible:
 		settings_menu.close()
+	title_backdrop.visible = not paused
 	title.show()
 	if paused:
 		title_card.hide()

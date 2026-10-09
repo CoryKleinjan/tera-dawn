@@ -1,0 +1,111 @@
+{
+  "source": "art/source/greenbough_area.png",
+  "region": [
+    1002,
+    0,
+    1536,
+    1024
+  ],
+  "scale": 0.5,
+  "label_band": 0.3,
+  "inset": 5,
+  "out_dir": "assets/sprites/backgrounds/greenbough",
+  "cells": [
+    [
+      "far"
+    ],
+    [
+      ""
+    ],
+    [
+      "mid"
+    ],
+    [
+      ""
+    ],
+    [
+      "near"
+    ],
+    [
+      ""
+    ],
+    [
+      "clouds"
+    ],
+    [
+      ""
+    ],
+    [
+      "landmark"
+    ],
+    [
+      ""
+    ],
+    [
+      "sky_body"
+    ],
+    [
+      ""
+    ],
+    [
+      "motes"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      143,
+      145,
+      284,
+      286,
+      429,
+      431,
+      570,
+      572,
+      755,
+      762,
+      887,
+      889,
+      1022
+    ],
+    "cols": [
+      0,
+      532
+    ]
+  },
+  "overrides": {
+    "far": {
+      "fix": "painted_sky",
+      "extend_bottom": 160
+    },
+    "mid": {
+      "fix": "painted_sky",
+      "extend_bottom": 160
+    },
+    "near": {
+      "fix": "painted_sky",
+      "extend_bottom": 160
+    },
+    "landmark": {
+      "fix": "painted_sky",
+      "extend_bottom": 160
+    },
+    "clouds": {
+      "keep": "split"
+    },
+    "sky_body": {
+      "fix": "sky_body",
+      "alpha": "soft",
+      "crop": [
+        249,
+        21,
+        305,
+        77
+      ]
+    },
+    "motes": {
+      "alpha": "soft",
+      "fix": "glow_backdrop"
+    }
+  }
+}

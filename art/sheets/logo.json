@@ -1,0 +1,23 @@
+{
+  "source": "art/source/logo.png",
+  "out_dir": "assets/sprites/ui",
+  "scale": 0.3,
+  "alpha": "soft",
+  "keep": "all",
+  "label_band": 0,
+  "grid": {
+    "rows": [
+      0,
+      756
+    ],
+    "cols": [
+      0,
+      2079
+    ]
+  },
+  "cells": [
+    [
+      "logo"
+    ]
+  ]
+}

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SkillDef" load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
-[ext_resource type="Resource" path="res://data/effects/dawn_slash.tres" id="2_dawn_slash"]
+[ext_resource type="Resource" path="res://data/effects/somersault_kick.tres" id="2_dawn_slash"]
 [ext_resource type="Resource" path="res://data/effects/hit.tres" id="3_hit"]
 [ext_resource type="Texture2D" path="res://assets/sprites/skills/somersault_kick.png" id="4_somersault_kick"]
 

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EffectDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/effect_def.gd" id="1_effect_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/effects/magic_armor_aura.png" id="2_magic_armor_aura"]
+
+[resource]
+script = ExtResource("1_effect_def")
+id = &"magic_armor_aura"
+frames = Array[Texture2D]([ExtResource("2_magic_armor_aura")])
+lifetime = 50
+texel = 0.75
+offset = Vector2(0.0, -50.0)
+energy = 1.8
+follow_player = true
+light_color = Color(0.6, 0.8, 1.0, 1.0)
+light_energy = 2.0
+light_range = 3.5

@@ -1,16 +1,14 @@
 [gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/npcs/village_elder.png" id="2_village_elder"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/npc_lanternfall_instructor.tres" id="2_sprite"]
 
 [resource]
 script = ExtResource("1_npc_def")
 id = &"lanternfall_instructor"
 display_name = "Shade Vesper"
 title = "Thief Instructor"
-texture = ExtResource("2_village_elder")
-sprite_scale = 0.95
-tint = Color(0.690196, 0.627451, 0.847059, 1.0)
+sprite_frames = ExtResource("2_sprite")
 greeting = "You found me. That's the first test passed. Want the second?"
 lines = PackedStringArray("Advance at level 10, with the stat the path asks for.", "Practise on the fields outside town. That's what they're for.")
 instructs = Array[StringName]([&"thief"])

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MonsterDef" load_steps=24 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
-[ext_resource type="SpriteFrames" path="res://assets/animations/sproutcap.tres" id="2_sproutcap"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/glowcap.tres" id="anim"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/glow_spore.tres" id="5_glow_spore"]
@@ -97,8 +97,7 @@ size = Vector2(40.0, 44.0)
 boss = false
 flying = false
 jumps = true
-sprite_frames = ExtResource("2_sproutcap")
+sprite_frames = ExtResource("anim")
 sprite_scale = 1.0
-tint = Color(0.623529, 0.721569, 1.0, 1.0)
 light_color = Color(0.623529, 0.721569, 1.0, 1.0)
 drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10")])

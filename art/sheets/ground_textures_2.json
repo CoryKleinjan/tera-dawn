@@ -1,0 +1,91 @@
+{
+  "source": "art/source/ground_textures_2.png",
+  "region": [
+    0,
+    0,
+    768,
+    1024
+  ],
+  "scale": 0.3,
+  "label_band": 0.1,
+  "grid_threshold": 0.95,
+  "out_dir": "assets/sprites/ground",
+  "cells": [
+    [
+      "dawnharbor_top",
+      "dawnharbor_side",
+      "dawnharbor_soil"
+    ],
+    [
+      "driftcove_top",
+      "driftcove_side",
+      "driftcove_soil"
+    ],
+    [
+      "greenbough_top",
+      "greenbough_side",
+      "greenbough_soil"
+    ]
+  ],
+  "overrides": {
+    "dawnharbor_top": {
+      "seamless": true,
+      "size": 128,
+      "keep": "largest"
+    },
+    "dawnharbor_side": {
+      "seamless": true,
+      "size": 128,
+      "keep": "largest"
+    },
+    "dawnharbor_soil": {
+      "seamless": true,
+      "size": 128,
+      "keep": "largest"
+    },
+    "driftcove_top": {
+      "seamless": true,
+      "size": 128,
+      "keep": "largest"
+    },
+    "driftcove_side": {
+      "seamless": true,
+      "size": 128,
+      "keep": "largest"
+    },
+    "driftcove_soil": {
+      "seamless": true,
+      "size": 128,
+      "keep": "largest"
+    },
+    "greenbough_top": {
+      "seamless": true,
+      "size": 128,
+      "keep": "largest"
+    },
+    "greenbough_side": {
+      "seamless": true,
+      "size": 128,
+      "keep": "largest"
+    },
+    "greenbough_soil": {
+      "seamless": true,
+      "size": 128,
+      "keep": "largest"
+    }
+  },
+  "grid": {
+    "rows": [
+      77,
+      343,
+      657,
+      1000
+    ],
+    "cols": [
+      7,
+      256,
+      508,
+      757
+    ]
+  }
+}

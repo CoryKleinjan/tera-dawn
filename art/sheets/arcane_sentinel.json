@@ -1,0 +1,113 @@
+{
+  "source": "art/source/mon_lumewood.png",
+  "region": [
+    772,
+    744,
+    1536,
+    1024
+  ],
+  "grid": {
+    "rows": [
+      28,
+      101,
+      181,
+      280
+    ],
+    "cols": [
+      0,
+      191,
+      381,
+      572,
+      764
+    ]
+  },
+  "scale": 1.0,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/arcane_sentinel",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "move1",
+      "move2"
+    ],
+    [
+      "move3",
+      "windup",
+      "strike",
+      "special"
+    ],
+    [
+      "hurt",
+      "enraged",
+      "defeated1",
+      "defeated2"
+    ]
+  ],
+  "sets": {
+    "arcane_sentinel": {
+      "frames": {
+        "idle1": "arcane_sentinel:idle1",
+        "idle2": "arcane_sentinel:idle2",
+        "move1": "arcane_sentinel:move1",
+        "move2": "arcane_sentinel:move2",
+        "move3": "arcane_sentinel:move3",
+        "windup": "arcane_sentinel:windup",
+        "strike": "arcane_sentinel:strike",
+        "special": "arcane_sentinel:special",
+        "hurt": "arcane_sentinel:hurt",
+        "enraged": "arcane_sentinel:enraged",
+        "defeated1": "arcane_sentinel:defeated1",
+        "defeated2": "arcane_sentinel:defeated2"
+      },
+      "anchor": "mass",
+      "baseline": "bottom",
+      "out": "assets/sprites/monsters/arcane_sentinel.png",
+      "sprite_frames": "assets/animations/arcane_sentinel.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "move1",
+            "move2",
+            "move3",
+            "move2"
+          ],
+          "fps": 6
+        },
+        "attack": {
+          "frames": [
+            "windup",
+            "strike",
+            "special"
+          ],
+          "fps": 3,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated1",
+            "defeated2"
+          ],
+          "fps": 2,
+          "loop": false
+        }
+      }
+    }
+  },
+  "inset": 7
+}

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Resource" path="res://data/projectiles/energy_bolt.tres" id="2_energy_bolt"]
-[ext_resource type="Resource" path="res://data/effects/hit.tres" id="3_hit"]
+[ext_resource type="Resource" path="res://data/effects/energy_bolt_hit.tres" id="3_hit"]
 [ext_resource type="Texture2D" path="res://assets/sprites/skills/energy_bolt.png" id="4_energy_bolt"]
 
 [resource]

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EffectDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/effect_def.gd" id="1_effect_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/effects/portal_flash.png" id="2_portal_flash"]
+
+[resource]
+script = ExtResource("1_effect_def")
+id = &"portal_flash"
+frames = Array[Texture2D]([ExtResource("2_portal_flash")])
+lifetime = 30
+texel = 0.8
+offset = Vector2(0.0, -50.0)
+energy = 2.2
+follow_player = true
+light_color = Color(1.0, 0.9, 0.6, 1.0)
+light_energy = 2.0
+light_range = 3.5

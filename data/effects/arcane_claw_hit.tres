@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EffectDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/effect_def.gd" id="1_effect_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/effects/arcane_claw_hit.png" id="2_arcane_claw_hit"]
+
+[resource]
+script = ExtResource("1_effect_def")
+id = &"arcane_claw_hit"
+frames = Array[Texture2D]([ExtResource("2_arcane_claw_hit")])
+lifetime = 18
+texel = 0.5
+energy = 2.0
+light_color = Color(1.0, 0.6, 0.9, 1.0)
+light_energy = 2.0
+light_range = 3.5

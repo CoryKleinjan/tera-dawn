@@ -1,0 +1,38 @@
+{
+  "source": "art/source/skill_effects.png",
+  "scale": 0.5,
+  "alpha": "soft",
+  "label_band": 0.15,
+  "strip_labels": true,
+  "out_dir": "assets/sprites/effects",
+  "cells": [
+    [
+      "power_strike_1",
+      "power_strike_2",
+      "flash_fist_1",
+      "flash_fist_2",
+      "somersault_kick"
+    ],
+    [
+      "energy_bolt_hit",
+      "arcane_claw_hit",
+      "arrow_hit",
+      "star_hit",
+      "bullet_hit"
+    ],
+    [
+      "quick_step_aura",
+      "iron_body_aura",
+      "focus_aura",
+      "magic_armor_aura",
+      "haste_aura"
+    ],
+    [
+      "bullet_time_aura",
+      "buff_rise_1",
+      "buff_rise_2",
+      "mp_restore",
+      "portal_flash"
+    ]
+  ]
+}

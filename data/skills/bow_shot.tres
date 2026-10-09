@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Resource" path="res://data/projectiles/arrow.tres" id="2_arrow"]
-[ext_resource type="Resource" path="res://data/effects/hit.tres" id="3_hit"]
+[ext_resource type="Resource" path="res://data/effects/arrow_hit.tres" id="3_hit"]
 [ext_resource type="Texture2D" path="res://assets/sprites/skills/bow_shot.png" id="4_bow_shot"]
 
 [resource]

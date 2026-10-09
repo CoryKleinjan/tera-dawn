@@ -1,0 +1,98 @@
+{
+  "source": "art/source/mon_lumewood.png",
+  "region": [
+    772,
+    0,
+    1536,
+    247
+  ],
+  "grid": {
+    "rows": [
+      33,
+      140,
+      247
+    ],
+    "cols": [
+      0,
+      192,
+      381,
+      573,
+      764
+    ]
+  },
+  "scale": 0.479,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/lume_wisp",
+  "cells": [
+    [
+      "hover1",
+      "hover2",
+      "fly1",
+      "fly2"
+    ],
+    [
+      "fly3",
+      "attack",
+      "hurt",
+      "defeated"
+    ]
+  ],
+  "sets": {
+    "lume_wisp": {
+      "frames": {
+        "hover1": "lume_wisp:hover1",
+        "hover2": "lume_wisp:hover2",
+        "fly1": "lume_wisp:fly1",
+        "fly2": "lume_wisp:fly2",
+        "fly3": "lume_wisp:fly3",
+        "attack": "lume_wisp:attack",
+        "hurt": "lume_wisp:hurt",
+        "defeated": "lume_wisp:defeated"
+      },
+      "anchor": "mass",
+      "baseline": "cell",
+      "out": "assets/sprites/monsters/lume_wisp.png",
+      "sprite_frames": "assets/animations/lume_wisp.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "hover1",
+            "hover2"
+          ],
+          "fps": 5
+        },
+        "move": {
+          "frames": [
+            "fly1",
+            "fly2",
+            "fly3",
+            "fly2"
+          ],
+          "fps": 8
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      }
+    }
+  }
+}

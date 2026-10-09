@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/data/use_def.gd" id="1_use_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/items/driftcove_scroll.png" id="2_driftcove_scroll"]
 [ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="3_shard_pickup"]
-[ext_resource type="Resource" path="res://data/effects/heal.tres" id="4_heal"]
+[ext_resource type="Resource" path="res://data/effects/portal_flash.tres" id="4_heal"]
 
 [resource]
 script = ExtResource("1_use_def")

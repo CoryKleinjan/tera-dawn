@@ -1,0 +1,45 @@
+{
+  "source": "art/source/skill_icons.png",
+  "out_dir": "assets/sprites/skills",
+  "scale": 0.29,
+  "alpha": "hard",
+  "keep": "largest",
+  "cells": [
+    [
+      "pebble_toss",
+      "quick_step",
+      "second_wind",
+      "power_strike",
+      "iron_body"
+    ],
+    [
+      "toughness",
+      "bow_shot",
+      "double_shot",
+      "arrow_blow",
+      "focus"
+    ],
+    [
+      "critical_shot",
+      "energy_bolt",
+      "arcane_claw",
+      "magic_armor",
+      "mp_boost"
+    ],
+    [
+      "star_throw",
+      "lucky_seven",
+      "star_scatter",
+      "haste",
+      "nimble_body"
+    ],
+    [
+      "gun_shot",
+      "flash_fist",
+      "somersault_kick",
+      "quick_draw",
+      "bullet_time"
+    ]
+  ],
+  "inset": 8
+}

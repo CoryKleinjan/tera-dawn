@@ -1,16 +1,14 @@
 [gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/npcs/shopkeeper.png" id="2_shopkeeper"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/npc_storage_keeper.tres" id="2_sprite"]
 
 [resource]
 script = ExtResource("1_npc_def")
 id = &"storage_keeper"
 display_name = "Brin"
 title = "Storage Keeper"
-texture = ExtResource("2_shopkeeper")
-sprite_scale = 0.95
-tint = Color(0.658824, 0.705882, 0.784314, 1.0)
+sprite_frames = ExtResource("2_sprite")
 greeting = "Brin's vaults, at your service. Whatever you leave with me in one town, you'll find in every town."
 lines = PackedStringArray("Ten Dawnshards a stack. Cheaper than losing it in a cave.", "I've never lost a single potion. Not one.")
 storage = true
