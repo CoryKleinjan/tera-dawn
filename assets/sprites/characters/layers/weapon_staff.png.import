@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0h8n37ltq0my"
-path="res://.godot/imported/knuckle.png-f4632eb0eb4287822dec8b6b88613735.ctex"
+uid="uid://j3saebjvbuer"
+path="res://.godot/imported/weapon_staff.png-65b493590cfd09bd1cac791ade2dc1ba.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/weapons/knuckle.png"
-dest_files=["res://.godot/imported/knuckle.png-f4632eb0eb4287822dec8b6b88613735.ctex"]
+source_file="res://assets/sprites/characters/layers/weapon_staff.png"
+dest_files=["res://.godot/imported/weapon_staff.png-65b493590cfd09bd1cac791ade2dc1ba.ctex"]
 
 [params]
 

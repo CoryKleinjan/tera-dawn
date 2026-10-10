@@ -37,8 +37,8 @@ const SLOT_NAMES := ["Weapon", "Hat", "Top", "Bottom", "Shoes", "Gloves", "Cape"
 ## Layered art of this piece worn, frame for frame like the hero's SpriteFrames. Until it
 ## exists, the piece is shown on the hero with stand-ins (see Paperdoll).
 @export var worn_frames: SpriteFrames
-## The stand-in drawn for hats and weapons (LookShapes): "cap", "helm", "hood", "bandana",
-## "wizard", "tricorn" for hats. Empty: hats use "cap", weapons their `weapon_kind`. For
+## The stand-in drawn for hats (LookShapes): "cap", "helm", "hood", "bandana", "wizard",
+## "tricorn". Empty: hats use "cap" (weapons are drawn by `weapon_kind`, see Paperdoll). For
 ## shields, the shape of the shield art: "kite", or empty for a round one (Paperdoll.SHIELDS).
 @export var look_shape: StringName
 ## The colour it's shown in. Fully transparent takes the main colour of its icon.

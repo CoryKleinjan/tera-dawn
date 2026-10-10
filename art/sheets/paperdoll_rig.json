@@ -1,5 +1,6 @@
 {
-  "_doc": "Hand-placed points on the paperdoll body frames (assets/sprites/characters/hero.png, frame pixels from the top-left, facing right) that tools/art/paperdoll_layers.py can't find by itself. weapon: [x, y, angle] = the hand holding the weapon and the way the weapon points (degrees clockwise from pointing right; 90 is straight down); omit it to hide the weapon in that frame. shield: [x, y] = the middle of the shield (on the front arm, or on his back while climbing); omit it to hide the shield. head_tilt: how far the head is turned (degrees clockwise), 0 when upright. Preview with python3 tools/art/paperdoll_layers.py --preview.",
+  "_doc": "Hand-placed points on the paperdoll body frames (assets/sprites/characters/hero.png, in pixels of a frame_size frame from the top-left, facing right) that tools/art/paperdoll_layers.py can't find by itself. weapon: [x, y, angle] = the fist holding the weapon and the way a sword in it points (degrees clockwise from pointing right; 90 is straight down); omit it and the weapon goes on his back (back views, sit) or is put away. weapon_behind: true when that fist is on the far side of his body, so the weapon draws behind him. shield: [x, y] = the middle of the shield (on the front arm, or on his back while climbing); omit it to hide the shield. head_tilt: how far the head is turned (degrees clockwise), 0 when upright. holds: how each other weapon kind is held: 'like' copies another kind's angles, 'angle' is the angle on any frame not listed, 'frames' gives an angle (or [x, y, angle] to move the fist) per frame. Preview with python3 tools/art/paperdoll_layers.py --preview.",
+  "frame_size": [128, 104],
   "frames": {
     "idle1": {"weapon": [56, 82, 125], "shield": [89, 80]},
     "idle2": {"weapon": [56, 82, 125], "shield": [89, 80]},
@@ -33,5 +34,13 @@
     "faint2": {"head_tilt": -95},
     "levelup": {"weapon": [51, 33, -90], "shield": [80, 76]},
     "sit": {}
+  },
+  "holds": {
+    "wand": {"like": "sword"},
+    "claw": {"like": "sword"},
+    "knuckle": {"like": "sword"},
+    "bow": {"angle": 5, "frames": {"run1": -15, "run2": -15, "run3": -15, "run4": -15, "jump": -20, "fall": 15, "attack1": -25, "attack2": 0, "slash1": -30, "slash2": 0, "slash3": 15, "crouch": 40, "land": 15, "hit": -10, "faint1": 70, "levelup": 0}},
+    "staff": {"angle": -100, "frames": {"run1": -150, "run2": -150, "run3": -150, "run4": -150, "jump": -140, "fall": -160, "attack1": -135, "attack2": 5, "slash1": -150, "slash2": 0, "slash3": 35, "crouch": 175, "land": -110, "hit": -115, "faint1": 120, "levelup": -90}},
+    "gun": {"angle": 100, "frames": {"run1": 160, "run2": 160, "run3": 160, "run4": 165, "jump": 160, "fall": -160, "attack1": -45, "attack2": 0, "slash1": -150, "slash2": -25, "slash3": 30, "crouch": 175, "land": 165, "hit": 135, "hurt": 120, "faint1": 120, "levelup": -90}}
   }
 }

@@ -1,18 +1,16 @@
 class_name LookShapes
 extends RefCounted
 ## Pictures drawn on the hero at a point of his rig (hero_rig.json) rather than as a layer
-## that plays with him: hats, drawn in code as stand-ins until hat art exists, and held
-## weapons, cut from the paperdoll sheets (assets/sprites/characters/weapons/). Hat stand-ins
-## are a few flat polygons in the hero's pixel scale, filled in the item's colour with a
-## darker and a lighter tone and a dark outline, so they read like pixel art next to him;
-## weapon pictures are greyscale and take the item's colour.
+## that plays with him: hats, drawn in code as stand-ins until hat art exists. A stand-in is
+## a few flat polygons in the hero's pixel scale, filled in the item's colour with a darker
+## and a lighter tone and a dark outline, so it reads like pixel art next to him. (Weapons are
+## layers now, held in his fist frame by frame: see Paperdoll.weapon_layers.)
 ##
-## A shape says where it sits on the hero (`anchor`: "head_top" or "grip"), which pixel of
-## the picture goes on that point (`pivot`), whether it's drawn behind him, and for weapons,
-## that it turns with his arm. The picture faces right like the hero; Paperdoll mirrors it.
+## A shape says where it sits on the hero (`anchor`: "head_top"), which pixel of the picture
+## goes on that point (`pivot`) and whether it's drawn behind him. The picture faces right
+## like the hero; Paperdoll mirrors it.
 ##
-## Add a hat by adding an entry to SHAPES and a `_draw_<name>` function; add a weapon kind
-## by cutting its picture (tools/art/paperdoll_layers.py) and listing it in WEAPONS.
+## Add a hat by adding an entry to SHAPES and a `_draw_<name>` function.
 
 ## name -> [anchor, pivot, size, behind, turns with the weapon]
 const SHAPES := {
@@ -24,11 +22,6 @@ const SHAPES := {
 	&"wizard": [&"head_top", Vector2(26, 16), Vector2i(58, 38), false, false],
 	&"tricorn": [&"head_top", Vector2(26, -2), Vector2i(56, 24), false, false],
 }
-## Weapon kinds with a picture, pointing right from the hand (anchor "grip"; the pivot is
-## the hand's place on the picture, from hero_rig.json "weapons").
-const WEAPONS: Array[StringName] = [&"sword", &"bow", &"wand", &"staff", &"claw", &"knuckle", &"gun"]
-const WEAPON_DIR := "res://assets/sprites/characters/weapons/"
-
 ## Shapes drawn without the dark outline.
 const NO_OUTLINE: Array[StringName] = []
 
@@ -40,47 +33,29 @@ const WHITE := Color(0.97, 0.96, 0.92)
 static var _cache := {}
 
 static func has(shape: StringName) -> bool:
-	return SHAPES.has(shape) or shape in WEAPONS
+	return SHAPES.has(shape)
 
 static func anchor(shape: StringName) -> StringName:
-	return &"grip" if shape in WEAPONS else SHAPES[shape][0]
+	return SHAPES[shape][0]
 
 static func pivot(shape: StringName) -> Vector2:
-	if shape in WEAPONS:
-		var p: Variant = Paperdoll.rig().get("weapons", {}).get(String(shape))
-		return Vector2(p[0], p[1]) if p is Array else Vector2.ZERO
 	return SHAPES[shape][1]
 
 static func behind(shape: StringName) -> bool:
-	return false if shape in WEAPONS else SHAPES[shape][3]
+	return SHAPES[shape][3]
 
 static func turns(shape: StringName) -> bool:
-	return shape in WEAPONS or SHAPES[shape][4]
+	return SHAPES[shape][4]
 
 ## The picture of a shape in a colour.
 static func texture(shape: StringName, col: Color) -> Texture2D:
 	var key := "%s/%s" % [shape, col.to_html(false)]
 	if not _cache.has(key):
-		if shape in WEAPONS:
-			_cache[key] = ImageTexture.create_from_image(_tinted(load(WEAPON_DIR + String(shape) + ".png"), col))
-		else:
-			var size: Vector2i = SHAPES[shape][2]
-			var pen := Pen.new(size, col)
-			Callable(LookShapes, "_draw_" + String(shape)).call(pen)
-			_cache[key] = ImageTexture.create_from_image(pen.finish(not shape in NO_OUTLINE))
+		var size: Vector2i = SHAPES[shape][2]
+		var pen := Pen.new(size, col)
+		Callable(LookShapes, "_draw_" + String(shape)).call(pen)
+		_cache[key] = ImageTexture.create_from_image(pen.finish(not shape in NO_OUTLINE))
 	return _cache[key]
-
-## A greyscale picture multiplied by a colour.
-static func _tinted(tex: Texture2D, col: Color) -> Image:
-	var img := tex.get_image()
-	img.decompress()
-	img.convert(Image.FORMAT_RGBA8)
-	for y in img.get_height():
-		for x in img.get_width():
-			var c := img.get_pixel(x, y)
-			if c.a > 0.0:
-				img.set_pixel(x, y, Color(c.r * col.r, c.g * col.g, c.b * col.b, c.a))
-	return img
 
 ## Fills polygons into an image, then outlines everything filled.
 class Pen:
