@@ -4673,11 +4673,11 @@
    ],
    "anchor": null,
    "size": "4K",
-   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel). Redone once: the first answer painted the background grey/brown instead of magenta.",
    "edit": {
     "base": "art/source/room_lanternfall.png",
     "base_scale": 2.31,
-    "text": "This is my sheet of room interior pieces for one area of the game (back wall, doorway, floor tiles and furniture), enlarged so its pixels are big blocks. Redraw EVERY piece as detailed pixel art with pixels about two and a half times smaller, keeping each piece's shape, size, position, colours, light and label exactly, and keeping the floor tiles seamless so they still repeat in both directions. Use the smaller pixels for real detail: wood grain, planks and nails, stone, fabric, glass, books, flames."
+    "text": "This is my sheet of room interior pieces for one area of the game (back wall, doorway, floor tiles and furniture), enlarged so its pixels are big blocks. Redraw EVERY piece as detailed pixel art with pixels about two and a half times smaller, keeping each piece's shape, size, position, colours, light and label exactly, and keeping the floor tiles seamless so they still repeat in both directions. Use the smaller pixels for real detail: wood grain, planks and nails, stone, fabric, glass, books, flames. The background around every piece stays flat pure magenta #FF00FF exactly as in the attached image: never grey, brown, purple or a gradient. Add nothing that is not in the attached image."
    }
   },
   {
@@ -4717,11 +4717,11 @@
    ],
    "anchor": null,
    "size": "4K",
-   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel). Redone once: the first answer painted the background grey/brown instead of magenta.",
    "edit": {
     "base": "art/source/room_meadow.png",
     "base_scale": 2.31,
-    "text": "This is my sheet of room interior pieces for one area of the game (back wall, doorway, floor tiles and furniture), enlarged so its pixels are big blocks. Redraw EVERY piece as detailed pixel art with pixels about two and a half times smaller, keeping each piece's shape, size, position, colours, light and label exactly, and keeping the floor tiles seamless so they still repeat in both directions. Use the smaller pixels for real detail: wood grain, planks and nails, stone, fabric, glass, books, flames."
+    "text": "This is my sheet of room interior pieces for one area of the game (back wall, doorway, floor tiles and furniture), enlarged so its pixels are big blocks. Redraw EVERY piece as detailed pixel art with pixels about two and a half times smaller, keeping each piece's shape, size, position, colours, light and label exactly, and keeping the floor tiles seamless so they still repeat in both directions. Use the smaller pixels for real detail: wood grain, planks and nails, stone, fabric, glass, books, flames. The background around every piece stays flat pure magenta #FF00FF exactly as in the attached image: never grey, brown, purple or a gradient. Add nothing that is not in the attached image."
    }
   }
  ]
