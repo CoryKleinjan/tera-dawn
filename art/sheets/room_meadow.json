@@ -1,0 +1,42 @@
+{
+  "source": "art/source/room_meadow.png",
+  "out_dir": "assets/sprites/rooms/meadow",
+  "scale": 0.45,
+  "label_band": 0.2,
+  "cells": [
+    [
+      "wall",
+      "door",
+      "floor_top",
+      "floor_side"
+    ],
+    [
+      "counter",
+      "shelf",
+      "bookcase",
+      "table"
+    ],
+    [
+      "hearth",
+      "rack",
+      "lamp",
+      "barrel"
+    ]
+  ],
+  "overrides": {
+    "wall": {
+      "scale": 1.15,
+      
+    },
+    "floor_top": {
+      "seamless": true,
+      "size": 128,
+      
+    },
+    "floor_side": {
+      "seamless": true,
+      "size": 128,
+      
+    }
+  }
+}
