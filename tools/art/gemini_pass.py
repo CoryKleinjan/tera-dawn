@@ -58,6 +58,9 @@ CONSISTENCY = """Consistency rules for this sheet (follow them strictly):
 - Characters and creatures stand on one shared baseline: the feet sit the same distance above the bottom edge of every cell.
 - The background of the WHOLE image, inside every cell too, is one flat pure magenta #FF00FF (RGB 255, 0, 255): not grey, white, pink, lilac or a darker purple, with no shadows, gradients or coloured panels. No magenta or pink-purple inside any sprite."""
 GRID_RULE = "- Draw exactly {rows} rows x {cols} columns = {n} equal cells, every cell filled in the order given."
+# Sheets with an "edit" entry send ONE image (its "base") and a short instruction instead of the
+# prompt-file chat. Gemini keeps an edited image's layout far better than it traces an attached one.
+EDIT_RULES = """This is an edit of the attached image, not a new drawing. Keep the image's size, grid, cell borders and labels, and every figure's position, size and pose, exactly as they are; change only what is asked above. Any added art is clean pixel art with the same crisp dark plum-brown outline. The background stays one flat pure magenta #FF00FF (RGB 255, 0, 255) everywhere: never grey, pink or lilac. Answer with the edited image."""
 
 
 def find_key(obj, key):
@@ -202,7 +205,7 @@ class Pass:
 
     def run(self, limit=None, only=None):
         todo = [s for s in self.sheets if s.get("batch") and not self.done(s["id"])
-                and (not only or s["id"] in only)]
+                and (not only or s["id"] in only) and not s.get("edit")]  # edits run in batch mode
         if limit:
             todo = todo[:limit]
         print("%d sheets to make; spent so far $%.2f of $%.2f" % (len(todo), self.spent(), self.budget))
@@ -257,6 +260,37 @@ class Pass:
             wave.append(s)
         return wave
 
+    def edit_base(self, sheet):
+        """The edit's base image padded with its background colour to the closest aspect Gemini
+        offers, so the answer can be scaled back and cropped to the base exactly."""
+        base = os.path.join(gemini_sheet.ROOT, sheet["edit"]["base"])
+        im = Image.open(base).convert("RGB")
+        w, h = im.size
+        aspect = gemini_sheet.closest_aspect(base)
+        a, b = map(int, aspect.split(":"))
+        pw, ph = max(w, round(h * a / b)), max(h, round(w * b / a))
+        padded = Image.new("RGB", (pw, ph), tuple(int(c) for c in sheet_check.background_color(
+            sheet_check.load_rgb(base))))
+        padded.paste(im, (0, 0))
+        path = os.path.join(OUT, "_bases", sheet["id"] + ".png")
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        padded.save(path)
+        return path, aspect, [pw, ph, w, h]
+
+    def edit_request(self, sheet, prepare):
+        base, aspect, unpad = self.edit_base(sheet)
+        body = {"contents": [{"role": "user", "parts": [
+                    prepare(base), {"text": sheet["edit"]["text"] + "\n\n" + EDIT_RULES}]}],
+                "generationConfig": {"responseModalities": ["TEXT", "IMAGE"],
+                                     "imageConfig": {"aspectRatio": aspect, "imageSize": self.size}}}
+        return body, aspect, unpad
+
+    @staticmethod
+    def unpad(path, unpad):
+        """Scale an edit's answer to the padded base's size and crop the padding off."""
+        pw, ph, w, h = unpad
+        Image.open(path).convert("RGB").resize((pw, ph), Image.LANCZOS).crop((0, 0, w, h)).save(path)
+
     def file_part(self, path):
         files = self.state.setdefault("_files", {})
         f = files.get(path)
@@ -275,6 +309,12 @@ class Pass:
             return False
         lines, dests, errors = [], {}, {}
         for s in wave:
+            if s.get("edit"):
+                body, aspect, unpad = self.edit_request(s, self.file_part)
+                lines.append(json.dumps({"key": s["id"], "request": body}))
+                dests[s["id"]] = {"path": self.out_for(s), "refs": [s["edit"]["base"]],
+                                  "aspect": aspect, "unpad": unpad}
+                continue
             log = []
             try:
                 res = gemini_sheet.generate(
@@ -332,6 +372,8 @@ class Pass:
                     if "error" in row:
                         raise gemini_sheet.GeminiError(json.dumps(row["error"])[:300])
                     gemini_sheet.save_image(row["response"], meta_s["path"], log=lambda *_: None)
+                    if meta_s.get("unpad"):
+                        self.unpad(meta_s["path"], meta_s["unpad"])
                     entry["cost"] = each
                     s = self.by_id[sid]
                     entry["check"] = sheet_check.check(meta_s["path"], s.get("cells"), s.get("kind", "still"),

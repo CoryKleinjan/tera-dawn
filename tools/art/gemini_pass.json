@@ -390,11 +390,15 @@
     8
    ],
    "anchor": "paperdoll_body",
-   "note": "One item per image: send only the SHIELD, ROUND line. Today all three (plus old gloves) share paperdoll_layers.png as 16x2 rows each; fence reads 'Batch L6 (one prompt each):'.",
+   "note": "One item per image: send only the SHIELD, ROUND line. Today all three (plus old gloves) share paperdoll_layers.png as 16x2 rows each; fence reads 'Batch L6 (one prompt each):'. Round 3: made by editing the base image instead of the prompt file (Gemini kept breaking the traced layout).",
    "fill": {
     "item": "SHIELD, ROUND"
    },
-   "extra": "- You must answer with the finished image itself, not text.\n- Trace the attached base body sheet cell for cell: the body is the SAME size and in the same place in every cell as in that sheet (it fills most of each cell's height); do not shrink it.\n- Show the round shield on the body's front arm in all 32 poses (on the back in the back views).\n- GREYSCALE applies ONLY to the shield's own pixels. The background stays bright pure magenta #FF00FF everywhere; it is never grey.\n- Lay it out exactly like the attached cape layer sheet (paperdoll_cape): same grid, same magenta background, the body in the same place."
+   "extra": "- You must answer with the finished image itself, not text.\n- Trace the attached base body sheet cell for cell: the body is the SAME size and in the same place in every cell as in that sheet (it fills most of each cell's height); do not shrink it.\n- Show the round shield on the body's front arm in all 32 poses (on the back in the back views).\n- GREYSCALE applies ONLY to the shield's own pixels. The background stays bright pure magenta #FF00FF everywhere; it is never grey.\n- Lay it out exactly like the attached cape layer sheet (paperdoll_cape): same grid, same magenta background, the body in the same place.",
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 poses (8 columns x 4 rows, labelled). On EACH of the 32 figures, draw a small round wooden shield with a woven reed rim and a raised sun-shaped boss, strapped to his front arm (the arm on the right-hand side of the figure, nearest the viewer), about as wide as his head, moving with that arm in every pose. In the back views (21 ROPE 1 to 25 CLIMB IDLE) it hangs flat on the middle of his back. Draw the shield in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline. Then erase the body itself: every pixel of the head, skin and shorts becomes flat magenta #FF00FF, so each cell shows ONLY the shield, in exactly the place and size it had on the body. Where the body was in front of the shield, leave that part of the shield out (a gap is fine). Keep the white labels and the grid lines."
+   }
   },
   {
    "id": "paperdoll_shield_kite",
@@ -748,11 +752,15 @@
     8
    ],
    "anchor": "paperdoll_body",
-   "note": "Part 4 leftover. L5 lists 7 items; send only SHORTS (one sheet per style). New; save name not given in the prompt.",
+   "note": "Part 4 leftover. L5 lists 7 items; send only SHORTS (one sheet per style). New; save name not given in the prompt. Round 3: made by editing the base image instead of the prompt file (Gemini kept breaking the traced layout).",
    "fill": {
     "item": "SHORTS"
    },
-   "extra": "- Trace the attached base body sheet cell for cell: the body is the SAME size and in the same place in every cell as in that sheet (it fills most of each cell's height); do not shrink it.\n- All 32 poses: 8 columns x 4 rows, the same layout as the attached trousers sheet (bottom_trousers_frames) and the base body sheet. Not 16 poses, not 4 columns.\n- The background is bright pure magenta #FF00FF, not lilac or pink."
+   "extra": "- Trace the attached base body sheet cell for cell: the body is the SAME size and in the same place in every cell as in that sheet (it fills most of each cell's height); do not shrink it.\n- All 32 poses: 8 columns x 4 rows, the same layout as the attached trousers sheet (bottom_trousers_frames) and the base body sheet. Not 16 poses, not 4 columns.\n- The background is bright pure magenta #FF00FF, not lilac or pink.",
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 poses (8 columns x 4 rows, labelled). On EACH of the 32 figures, replace his plain shorts with knee-length shorts: the legs rolled up twice into a thick cuff just above the knee, a waistband with a small button tab at the front. They follow his legs in every pose (stride, jump, crouch, sit). Draw the shorts in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline. Then erase the body itself: every pixel of the head, skin and shorts becomes flat magenta #FF00FF, so each cell shows ONLY the shorts, in exactly the place and size it had on the body. Where the body was in front of the shorts, leave that part of the shorts out (a gap is fine). Keep the white labels and the grid lines."
+   }
   },
   {
    "id": "bottom_breeches_frames",
@@ -898,7 +906,7 @@
     8
    ],
    "anchor": "paperdoll_body",
-   "note": "New. Batch attaches the old paperdoll_body.png; runner should swap in the anchor result.",
+   "note": "New. Batch attaches the old paperdoll_body.png; runner should swap in the anchor result. Round 3: made by editing the base image instead of the prompt file (Gemini kept breaking the traced layout).",
    "must_have": {
     "rgb": [
      0,
@@ -942,7 +950,11 @@
      32
     ]
    },
-   "extra": "- The green rod is in EVERY one of these 26 cells, no exceptions: 1-4 IDLE, 5-8 WALK, 9-12 RUN, 13-14 ATTACK, 15 HIT, 16 HURT, 17 JUMP, 18 FALL, 19 LAND, 20 CROUCH, 26-28 DAWN SLASH, 29-30 FAINT, 31 LEVEL UP. Where the hand is behind the body, the visible ends of the rod still show past the body. Exactly ONE rod per cell.\n- No rod in cells 21-25 (ROPE, LADDER, CLIMB IDLE) and 32 SIT.\n- The rod is bright pure green #00FF00 and clearly visible in every one of those 26 cells, even the small poses.\n- Cells that were missed last time, draw the rod in them too: 27 DAWN SLASH 2 (along the slash, in front of the body), 29 FAINT 1 and 30 FAINT 2 (the rod lies on the ground beside the open hand).\n- 25 CLIMB IDLE has NO rod."
+   "extra": "- The green rod is in EVERY one of these 26 cells, no exceptions: 1-4 IDLE, 5-8 WALK, 9-12 RUN, 13-14 ATTACK, 15 HIT, 16 HURT, 17 JUMP, 18 FALL, 19 LAND, 20 CROUCH, 26-28 DAWN SLASH, 29-30 FAINT, 31 LEVEL UP. Where the hand is behind the body, the visible ends of the rod still show past the body. Exactly ONE rod per cell.\n- No rod in cells 21-25 (ROPE, LADDER, CLIMB IDLE) and 32 SIT.\n- The rod is bright pure green #00FF00 and clearly visible in every one of those 26 cells, even the small poses.\n- Cells that were missed last time, draw the rod in them too: 27 DAWN SLASH 2 (along the slash, in front of the body), 29 FAINT 1 and 30 FAINT 2 (the rod lies on the ground beside the open hand).\n- 25 CLIMB IDLE has NO rod.",
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 poses (8 columns x 4 rows, labelled). Keep every figure exactly as it is and add ONE thing: a straight rod of flat pure green #00FF00 (no outline, no shading), about two fingers thick and as long as his forearm, through the closed fist of his SWORD hand: the hand on the LEFT-hand side of the figure (the far hand, behind his body), which holds the sword. The fingers wrap over the rod, so both ends stick out of the fist. The rod points the way a sword blade would: down and back (towards the lower left) when the arms hang (IDLE, WALK, RUN, HIT, HURT, JUMP, FALL, LAND, CROUCH), along the swing in 13-14 ATTACK and 26-28 DAWN SLASH, straight up in 31 LEVEL UP, and lying on the ground beside his open hand in 29-30 FAINT. Where his body is in front of that hand, the body covers the middle of the rod but its ends still show. Exactly ONE rod in each of cells 1-20 and 26-31. NO rod in 21 ROPE 1, 22 ROPE 2, 23 LADDER 1, 24 LADDER 2, 25 CLIMB IDLE and 32 SIT. No other green anywhere."
+   }
   },
   {
    "id": "paperdoll_body_2",
@@ -2477,15 +2489,19 @@
    "replaces": "art/source/dawnharbor_area.png",
    "kind": "still",
    "cells": [
-    7,
+    13,
     1
    ],
    "anchor": "dawnharbor_tileset",
-   "note": "Right region of combined dawnharbor_area.png. Manifest cuts 13x1 (strips + gaps); batch grid is 1x7.",
+   "note": "Right region of combined dawnharbor_area.png. Manifest cuts 13x1 (strips + gaps); batch grid is 1x7. Round 3: made by editing the base image instead of the prompt file (Gemini kept breaking the traced layout).",
    "fill": {
     "area": "dawnharbor"
    },
-   "extra": "- The 7 layers are separate horizontal strips, each with flat magenta above and below it. The painting never fills the whole image: magenta must show between every pair of strips.\n- Use exactly the layout of the attached Lumewood backdrop sheet: 7 full-width strips stacked from top to bottom in ONE column, flat magenta between them. Not two columns."
+   "extra": "- The 7 layers are separate horizontal strips, each with flat magenta above and below it. The painting never fills the whole image: magenta must show between every pair of strips.\n- Use exactly the layout of the attached Lumewood backdrop sheet: 7 full-width strips stacked from top to bottom in ONE column, flat magenta between them. Not two columns.",
+   "edit": {
+    "base": "tools/art/templates/backdrop_strips_7.png",
+    "text": "This image is a template for 7 parallax backdrop layers of DAWNHARBOR, a white-walled port town at sunrise, in my game's style: soft painted pixel art, warm gold light, plum-violet shade. Replace each WHITE strip with the layer named on it, filling that strip edge to edge and staying inside it. The 6 MAGENTA rows between the strips are gaps: leave them untouched, flat magenta #FF00FF, with nothing painted on them, not even sky.\n1. FAR LAYER: sky from navy #1d2f5c at the top through blue #3f6aa0 and peach #f2a98a to cream #ffe0b0, over the open sea with a distant line of hazy blue islands. Fills its strip; seamless left to right.\n2. MID LAYER: rooftops of the port, white walls and blue tiles stepping up a hill, on magenta (no sky behind them). Seamless left to right.\n3. NEAR LAYER: the harbour front, ship masts, rigging and furled sails, on magenta (no sky behind them). Seamless left to right.\n4. CLOUDS: 4 separate soft morning clouds, cream with peach undersides, on magenta.\n5. LANDMARK: a tall white lighthouse on a rocky point with a sun-shaped lamp, on magenta.\n6. SKY BODY: a low warm morning sun with a soft glow ring, on magenta.\n7. MOTES: a scatter of sparkles like sun on water and a few distant gulls, on magenta.\nRemove the white and the label text: in strips 2 to 7 everything that is not part of the layer becomes flat magenta #FF00FF."
+   }
   },
   {
    "id": "driftcove_tileset",
