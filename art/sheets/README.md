@@ -133,11 +133,13 @@ after the item ids, replacing the placeholders from `tools/art/make_item_placeho
   came back on a darker magenta, with soft pink glows or with the sky painted behind a strip
   were evened out first by `tools/art/clean_sheet.py` (it edits the source in place, so run it
   on the original picture). The sun or moon uses `sky_body`; glowing icons use `glow_backdrop`.
-- **Rooms** (`room_<town>`) cut over the stand-ins from `tools/art/make_room_placeholders.py`;
-  a cell the sheet has no painting for (crate, plant, floor_soil, some floors) keeps its stand-in.
-  The back wall repeats sideways: its crop's last columns were cross-faded in the source toward
-  the columns just left of the crop. Floor cells stacked in one column have their own manifest
-  (`room_<town>_floor`, with a `region`).
+- **Rooms** (`room_<town>`, from `room_<town>_fine.png`) cut over the stand-ins from
+  `tools/art/make_room_placeholders.py` (drawn at 2 texels per pixel); a cell the sheet has no
+  painting for (crate, plant, floor_soil, some floors) keeps its stand-in. Like the land, rooms
+  are cut at 2 texels per art pixel (`rooms/` is in TDStage.ART_DENSITY). The back wall has its
+  own finer redraw and manifest (`room_<town>_wall`); it repeats sideways because the source's
+  first columns were cross-faded from the columns past its right edge. Floor cells stacked in
+  one column have their own manifest (`room_<town>_floor`, with a `region`).
 - **Platform pieces** (`platform_pieces_<area>`) cut a left cap, two middles and a right cap
   into `assets/sprites/platforms/<area>/` (the undersides go to `art/build/`). After cutting,
   the slicer runs `tools/art/platform_pieces.py`, which lines up their walking surfaces and

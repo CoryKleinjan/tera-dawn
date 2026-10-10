@@ -24,6 +24,7 @@ const ART_DENSITY := {
 	"res://assets/sprites/ground/": 2.0,
 	"res://assets/sprites/buildings/": 2.0,
 	"res://assets/sprites/backgrounds/": 2.0,
+	"res://assets/sprites/rooms/": 2.0,
 	# the scenery pieces of props/ (dawnshards there are drop items, drawn at their own size)
 	"res://assets/sprites/props/portal_": 2.0,
 	"res://assets/sprites/props/lantern_": 2.0,

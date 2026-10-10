@@ -1,11 +1,11 @@
 {
-  "source": "art/source/room_driftcove.png",
+  "source": "art/source/room_driftcove_fine.png",
   "out_dir": "assets/sprites/rooms/driftcove",
-  "scale": 0.427,
+  "scale": 0.3697,
   "label_band": 0.2,
   "cells": [
     [
-      "wall",
+      "",
       "door",
       ""
     ],
@@ -23,72 +23,63 @@
     ]
   ],
   "overrides": {
-    "wall": {
-      "crop": [
-        37,
-        48,
-        837,
-        480
-      ],
-      "scale": 1.0206
-    },
     "door": {
-      "scale": 0.26
+      "scale": 0.2251
     },
     "counter": {
-      "scale": 0.3226
+      "scale": 0.2793
     },
     "shelf": {
-      "scale": 0.4554
+      "scale": 0.3943
     },
     "bookcase": {
-      "scale": 0.4714
+      "scale": 0.4081
     },
     "table": {
-      "scale": 0.2347
+      "scale": 0.2032
     },
     "hearth": {
-      "scale": 0.5014
+      "scale": 0.4341
     },
     "rack": {
-      "scale": 0.399
+      "scale": 0.3454
     },
     "lamp": {
-      "scale": 0.4552
+      "scale": 0.3941
     },
     "barrel": {
-      "scale": 0.208
+      "scale": 0.1801
     }
   },
   "grid": {
     "rows": [
       0,
-      594,
-      891,
-      1190
+      1372,
+      2058,
+      2749
     ],
     "cols": [
       [
         0,
-        887,
-        1333,
-        1774
+        2049,
+        3079,
+        4098
       ],
       [
         0,
-        440,
-        887,
-        1333,
-        1774
+        1016,
+        2049,
+        3079,
+        4098
       ],
       [
         0,
-        440,
-        887,
-        1333,
-        1774
+        1016,
+        2049,
+        3079,
+        4098
       ]
     ]
   },
-  "inset": 6
+  "inset": 30
 }
