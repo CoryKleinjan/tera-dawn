@@ -2,6 +2,7 @@
 """Make the base image for a backdrop sheet that Gemini fills by editing (gemini_pass.json "edit").
 
     python3 tools/art/strip_template.py tools/art/templates/backdrop_strips_7.png
+    (backdrop_strips_7_tall.png is the same at 1536 x 2731, which gives each strip room)
 
 The image is the backdrop manifests' layout: 13 equal rows, 7 white strips labelled with
 their layer, and flat magenta rows between them. Gemini paints inside the strips and leaves

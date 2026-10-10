@@ -369,9 +369,13 @@
     8
    ],
    "anchor": "paperdoll_body",
-   "note": "One item per image: send only the CAPE line. Today all three (plus old gloves) share paperdoll_layers.png as 16x2 rows each; fence reads 'Batch L6 (one prompt each):'.",
+   "note": "One item per image: send only the CAPE line. Today all three (plus old gloves) share paperdoll_layers.png as 16x2 rows each; fence reads 'Batch L6 (one prompt each):'. Round 5: made by editing the game's body sheet (the first try traced Gemini's broken body).",
    "fill": {
     "item": "CAPE"
+   },
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, draw a short travelling cape that fastens at the throat with a round sun-disc clasp, ragged at the hem, hanging behind his body. It billows back when he runs, blows down when he jumps and up when he falls; in the back views (21-25) it covers his whole back. Draw the cape in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline. Then erase the body itself: every pixel of the head, skin and shorts becomes flat magenta #FF00FF, so each cell shows ONLY the cape, in exactly the place and size it had on the body. Where the body was in front of the cape, leave that part of the cape out (a gap is fine). Keep the white labels and the grid lines."
    }
   },
   {
@@ -471,7 +475,11 @@
     8
    ],
    "anchor": "paperdoll_body",
-   "note": "Fence reads 'Batch L6 redo:'; batch id must be 'L6 redo'. Manifest gloves_frames.json."
+   "note": "Fence reads 'Batch L6 redo:'; batch id must be 'L6 redo'. Manifest gloves_frames.json. Round 5: made by editing the game's body sheet (the first try traced Gemini's broken body).",
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in GLOVES on both hands: fingerless wrapped cloth gloves with a stitched cuff. It follows his body in every pose. Draw the gloves in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline; the body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. Draw ONLY the gloves: nothing else changes. In the attack, slash and climb poses the gloves wrap his gripping hands."
+   }
   },
   {
    "id": "hair_tousled_frames",
@@ -489,9 +497,13 @@
     8
    ],
    "anchor": "paperdoll_body",
-   "note": "H1 lists all six styles; send it for TOUSLED only (one image per style).",
+   "note": "H1 lists all six styles; send it for TOUSLED only (one image per style). Round 5: made by editing the game's body sheet (the first try traced Gemini's broken body).",
    "fill": {
     "style": "TOUSLED"
+   },
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in this hairstyle on his bald head: TOUSLED, short messy spikes like a young adventurer's. It follows his body in every pose. Draw the hair in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline; the body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. Draw ONLY the hair: nothing else changes. In the back views (21-25) show the back of the hair. No face."
    }
   },
   {
@@ -510,9 +522,13 @@
     8
    ],
    "anchor": "paperdoll_body",
-   "note": "H1 lists all six styles; send it for LONG only (one image per style). New (not in game).",
+   "note": "H1 lists all six styles; send it for LONG only (one image per style). New (not in game). Round 5: made by editing the game's body sheet (the first try traced Gemini's broken body).",
    "fill": {
     "style": "LONG"
+   },
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in this hairstyle on his bald head: LONG, straight hair down past the shoulders with a side fringe. It follows his body in every pose. Draw the hair in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline; the body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. Draw ONLY the hair: nothing else changes. The hair sways a little with the motion. In the back views (21-25) show the back of the hair. No face."
    }
   },
   {
@@ -531,9 +547,13 @@
     8
    ],
    "anchor": "paperdoll_body",
-   "note": "H1 lists all six styles; send it for PONYTAIL only (one image per style). New (not in game).",
+   "note": "H1 lists all six styles; send it for PONYTAIL only (one image per style). New (not in game). Round 5: made by editing the game's body sheet (the first try traced Gemini's broken body).",
    "fill": {
     "style": "PONYTAIL"
+   },
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in this hairstyle on his bald head: PONYTAIL, hair pulled back into one high ponytail tied with a cloth band. It follows his body in every pose. Draw the hair in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline; the body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. Draw ONLY the hair: nothing else changes. The ponytail swings behind the head when he runs or jumps. In the back views (21-25) show the back of the hair. No face."
    }
   },
   {
@@ -552,9 +572,13 @@
     8
    ],
    "anchor": "paperdoll_body",
-   "note": "H1 lists all six styles; send it for TWIN TAILS only (one image per style). New (not in game).",
+   "note": "H1 lists all six styles; send it for TWIN TAILS only (one image per style). New (not in game). Round 5: made by editing the game's body sheet (the first try traced Gemini's broken body).",
    "fill": {
     "style": "TWIN TAILS"
+   },
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in this hairstyle on his bald head: TWIN TAILS, two bunches, one on each side, tied with little ribbons. It follows his body in every pose. Draw the hair in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline; the body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. Draw ONLY the hair: nothing else changes. In the back views (21-25) show the back of the hair. No face."
    }
   },
   {
@@ -573,9 +597,13 @@
     8
    ],
    "anchor": "paperdoll_body",
-   "note": "H1 lists all six styles; send it for BUN only (one image per style). New (not in game).",
+   "note": "H1 lists all six styles; send it for BUN only (one image per style). New (not in game). Round 5: made by editing the game's body sheet (the first try traced Gemini's broken body).",
    "fill": {
     "style": "BUN"
+   },
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in this hairstyle on his bald head: BUN, hair wound into a round bun on top of the head with a few loose strands. It follows his body in every pose. Draw the hair in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline; the body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. Draw ONLY the hair: nothing else changes. In the back views (21-25) show the back of the hair. No face."
    }
   },
   {
@@ -594,9 +622,13 @@
     8
    ],
    "anchor": "paperdoll_body",
-   "note": "H1 lists all six styles; send it for CREST only (one image per style). New (not in game).",
+   "note": "H1 lists all six styles; send it for CREST only (one image per style). New (not in game). Round 5: made by editing the game's body sheet (the first try traced Gemini's broken body).",
    "fill": {
     "style": "CREST"
+   },
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in this hairstyle on his bald head: CREST, shaved short at the sides with a tall swept-up crest on top. It follows his body in every pose. Draw the hair in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline; the body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. Draw ONLY the hair: nothing else changes. In the back views (21-25) show the back of the hair. No face."
    }
   },
   {
@@ -613,9 +645,13 @@
     8
    ],
    "anchor": "paperdoll_body",
-   "note": "T1 lists six tops; keep only line 1 (UNDERSHIRT) before sending, fresh request per top. New. Save name follows the hair_<style>_frames convention (none given).",
+   "note": "T1 lists six tops; keep only line 1 (UNDERSHIRT) before sending, fresh request per top. New. Save name follows the hair_<style>_frames convention (none given). Round 5: made by editing the game's body sheet (the first try traced Gemini's broken body).",
    "fill": {
     "top": "1. UNDERSHIRT"
+   },
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in an UNDERSHIRT: a plain fitted sleeveless undershirt with a round neck, tucked into the shorts. It follows his body in every pose. Draw the undershirt in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline; the body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. Draw ONLY the undershirt: nothing else changes."
    }
   },
   {
@@ -632,9 +668,13 @@
     8
    ],
    "anchor": "paperdoll_body",
-   "note": "T1 lists six tops; keep only line 2 (TUNIC) before sending, fresh request per top. New. Save name follows the hair_<style>_frames convention (none given).",
+   "note": "T1 lists six tops; keep only line 2 (TUNIC) before sending, fresh request per top. New. Save name follows the hair_<style>_frames convention (none given). Round 5: made by editing the game's body sheet (the first try traced Gemini's broken body).",
    "fill": {
     "top": "2. TUNIC"
+   },
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in a TUNIC: a short-sleeved tunic to mid-thigh with a stitched hem, a cloth sash at the waist and a little sun-disc toggle at the collar. It follows his body in every pose. Draw the tunic in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline; the body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. Draw ONLY the tunic: nothing else changes."
    }
   },
   {
@@ -651,9 +691,13 @@
     8
    ],
    "anchor": "paperdoll_body",
-   "note": "T1 lists six tops; keep only line 3 (SMOCK) before sending, fresh request per top. New. Save name follows the hair_<style>_frames convention (none given).",
+   "note": "T1 lists six tops; keep only line 3 (SMOCK) before sending, fresh request per top. New. Save name follows the hair_<style>_frames convention (none given). Round 5: made by editing the game's body sheet (the first try traced Gemini's broken body).",
    "fill": {
     "top": "3. SMOCK"
+   },
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in a SMOCK: a loose, puffy smock with wide three-quarter sleeves, gathered at the neck with a drawstring, patched at one elbow. It follows his body in every pose. Draw the smock in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline; the body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. Draw ONLY the smock: nothing else changes."
    }
   },
   {
@@ -670,11 +714,15 @@
     8
    ],
    "anchor": "paperdoll_body",
-   "note": "T1 lists six tops; keep only line 4 (VEST) before sending, fresh request per top. New. Save name follows the hair_<style>_frames convention (none given).",
+   "note": "T1 lists six tops; keep only line 4 (VEST) before sending, fresh request per top. New. Save name follows the hair_<style>_frames convention (none given). Round 5: made by editing the game's body sheet (the first try traced Gemini's broken body).",
    "fill": {
     "top": "4. VEST"
    },
-   "extra": "- Trace the attached base body sheet cell for cell: the body is the SAME size and in the same place in every cell as in that sheet (it fills most of each cell's height); do not shrink it."
+   "extra": "- Trace the attached base body sheet cell for cell: the body is the SAME size and in the same place in every cell as in that sheet (it fills most of each cell's height); do not shrink it.",
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in a VEST: a sleeveless padded vest over a fitted long-sleeved undershirt, with stitched quilting lines and two wooden toggles. It follows his body in every pose. Draw the vest and its undershirt in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline; the body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. Draw ONLY the vest and its undershirt: nothing else changes."
+   }
   },
   {
    "id": "top_robe_frames",
@@ -690,11 +738,15 @@
     8
    ],
    "anchor": "paperdoll_body",
-   "note": "T1 lists six tops; keep only line 5 (ROBE) before sending, fresh request per top. New. Save name follows the hair_<style>_frames convention (none given).",
+   "note": "T1 lists six tops; keep only line 5 (ROBE) before sending, fresh request per top. New. Save name follows the hair_<style>_frames convention (none given). Round 5: made by editing the game's body sheet (the first try traced Gemini's broken body).",
    "fill": {
     "top": "5. ROBE"
    },
-   "extra": "- Trace the attached base body sheet cell for cell: the body is the SAME size and in the same place in every cell as in that sheet (it fills most of each cell's height); do not shrink it."
+   "extra": "- Trace the attached base body sheet cell for cell: the body is the SAME size and in the same place in every cell as in that sheet (it fills most of each cell's height); do not shrink it.",
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in a ROBE: a long wrap robe to the ankles with wide sleeves and a rope belt. It follows his body in every pose. Draw the robe in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline; the body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. Draw ONLY the robe: nothing else changes. In the run and jump poses the hem flares a little, still attached at the waist."
+   }
   },
   {
    "id": "top_coat_frames",
@@ -710,9 +762,13 @@
     8
    ],
    "anchor": "paperdoll_body",
-   "note": "T1 lists six tops; keep only line 6 (COAT) before sending, fresh request per top. New. Save name follows the hair_<style>_frames convention (none given).",
+   "note": "T1 lists six tops; keep only line 6 (COAT) before sending, fresh request per top. New. Save name follows the hair_<style>_frames convention (none given). Round 5: made by editing the game's body sheet (the first try traced Gemini's broken body).",
    "fill": {
     "top": "6. COAT"
+   },
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in a COAT: a knee-length travelling coat, open at the front, with a high folded collar and big cuffs. It follows his body in every pose. Draw the coat in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline; the body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. Draw ONLY the coat: nothing else changes."
    }
   },
   {
@@ -732,9 +788,13 @@
     8
    ],
    "anchor": "paperdoll_body",
-   "note": "Part 4 leftover. L5 lists 7 items; send only TROUSERS (one sheet per style). New; save name not given in the prompt.",
+   "note": "Part 4 leftover. L5 lists 7 items; send only TROUSERS (one sheet per style). New; save name not given in the prompt. Round 5: made by editing the game's body sheet (the first try traced Gemini's broken body).",
    "fill": {
     "item": "TROUSERS"
+   },
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in TROUSERS in place of his plain shorts: straight trousers to the ankle with a patched knee and rolled cuffs. It follows his body in every pose. Draw the trousers in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline; the body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. Draw ONLY the trousers: nothing else changes."
    }
   },
   {
@@ -762,7 +822,7 @@
    "extra": "- Trace the attached base body sheet cell for cell: the body is the SAME size and in the same place in every cell as in that sheet (it fills most of each cell's height); do not shrink it.\n- All 32 poses: 8 columns x 4 rows, the same layout as the attached trousers sheet (bottom_trousers_frames) and the base body sheet. Not 16 poses, not 4 columns.\n- The background is bright pure magenta #FF00FF, not lilac or pink.",
    "edit": {
     "base": "art/source/paperdoll_body.png",
-    "text": "This sheet is my bald base body in 32 poses (8 columns x 4 rows, labelled). On EACH of the 32 figures, replace his plain shorts with knee-length shorts: the legs rolled up twice into a thick cuff just above the knee, a waistband with a small button tab at the front. They follow his legs in every pose (stride, jump, crouch, sit). Draw the shorts in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline. Then erase the body itself: every pixel of the head, skin and shorts becomes flat magenta #FF00FF, so each cell shows ONLY the shorts, in exactly the place and size it had on the body. Where the body was in front of the shorts, leave that part of the shorts out (a gap is fine). Keep the white labels and the grid lines."
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in SHORTS in place of his plain shorts: knee shorts with the legs rolled up twice into a cuff just above the knee and a small button tab at the front, the same size as his legs (not bigger). It follows his body in every pose. Draw the shorts in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline; the body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. Draw ONLY the shorts: nothing else changes."
    }
   },
   {
@@ -782,9 +842,13 @@
     8
    ],
    "anchor": "paperdoll_body",
-   "note": "Part 4 leftover. L5 lists 7 items; send only BREECHES (one sheet per style). New; save name not given in the prompt.",
+   "note": "Part 4 leftover. L5 lists 7 items; send only BREECHES (one sheet per style). New; save name not given in the prompt. Round 5: made by editing the game's body sheet (the first try traced Gemini's broken body).",
    "fill": {
     "item": "BREECHES"
+   },
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in BREECHES in place of his plain shorts: puffy breeches gathered just below the knee with ties. It follows his body in every pose. Draw the breeches in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline; the body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. Draw ONLY the breeches: nothing else changes."
    }
   },
   {
@@ -804,9 +868,13 @@
     8
    ],
    "anchor": "paperdoll_body",
-   "note": "Part 4 leftover. L5 lists 7 items; send only BOOTS (one sheet per style). New; save name not given in the prompt.",
+   "note": "Part 4 leftover. L5 lists 7 items; send only BOOTS (one sheet per style). New; save name not given in the prompt. Round 5: made by editing the game's body sheet (the first try traced Gemini's broken body).",
    "fill": {
     "item": "BOOTS"
+   },
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in BOOTS on his bare feet: soft calf-high boots with a folded cuff and a laced front. It follows his body in every pose. Draw the boots in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline; the body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. Draw ONLY the boots: nothing else changes."
    }
   },
   {
@@ -826,11 +894,15 @@
     8
    ],
    "anchor": "paperdoll_body",
-   "note": "Part 4 leftover. L5 lists 7 items; send only SHOES (one sheet per style). New; save name not given in the prompt.",
+   "note": "Part 4 leftover. L5 lists 7 items; send only SHOES (one sheet per style). New; save name not given in the prompt. Round 5: made by editing the game's body sheet (the first try traced Gemini's broken body).",
    "fill": {
     "item": "SHOES"
    },
-   "extra": "- Trace the attached base body sheet cell for cell: the body is the SAME size and in the same place in every cell as in that sheet (it fills most of each cell's height); do not shrink it."
+   "extra": "- Trace the attached base body sheet cell for cell: the body is the SAME size and in the same place in every cell as in that sheet (it fills most of each cell's height); do not shrink it.",
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in SHOES on his bare feet: light low canvas shoes with a thick stitched sole. It follows his body in every pose. Draw the shoes in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline; the body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. Draw ONLY the shoes: nothing else changes."
+   }
   },
   {
    "id": "shoes_clogs_frames",
@@ -849,9 +921,13 @@
     8
    ],
    "anchor": "paperdoll_body",
-   "note": "Part 4 leftover. L5 lists 7 items; send only CLOGS (one sheet per style). New; save name not given in the prompt.",
+   "note": "Part 4 leftover. L5 lists 7 items; send only CLOGS (one sheet per style). New; save name not given in the prompt. Round 5: made by editing the game's body sheet (the first try traced Gemini's broken body).",
    "fill": {
     "item": "CLOGS"
+   },
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in CLOGS on his bare feet: round wooden clogs with a cloth strap. It follows his body in every pose. Draw the clogs in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline; the body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. Draw ONLY the clogs: nothing else changes."
    }
   },
   {
@@ -871,9 +947,13 @@
     8
    ],
    "anchor": "paperdoll_body",
-   "note": "Part 4 leftover. L5 lists 7 items; send only SANDALS (one sheet per style). New; save name not given in the prompt.",
+   "note": "Part 4 leftover. L5 lists 7 items; send only SANDALS (one sheet per style). New; save name not given in the prompt. Round 5: made by editing the game's body sheet (the first try traced Gemini's broken body).",
    "fill": {
     "item": "SANDALS"
+   },
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in SANDALS on his bare feet: woven reed sandals with straps around the ankle, toes visible. It follows his body in every pose. Draw the sandals in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline; the body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. Draw ONLY the sandals: nothing else changes."
    }
   },
   {
@@ -2496,14 +2576,14 @@
     1
    ],
    "anchor": "dawnharbor_tileset",
-   "note": "Right region of combined dawnharbor_area.png. Manifest cuts 13x1 (strips + gaps); batch grid is 1x7. Round 3: made by editing the base image instead of the prompt file (Gemini kept breaking the traced layout).",
+   "note": "Right region of combined dawnharbor_area.png. Manifest cuts 13x1 (strips + gaps); batch grid is 1x7. Round 3: made by editing the base image instead of the prompt file (Gemini kept breaking the traced layout). Round 5: a tall template (the 3:2 one had strips too short, so layers spilled over).",
    "fill": {
     "area": "dawnharbor"
    },
    "extra": "- The 7 layers are separate horizontal strips, each with flat magenta above and below it. The painting never fills the whole image: magenta must show between every pair of strips.\n- Use exactly the layout of the attached Lumewood backdrop sheet: 7 full-width strips stacked from top to bottom in ONE column, flat magenta between them. Not two columns.",
    "edit": {
-    "base": "tools/art/templates/backdrop_strips_7.png",
-    "text": "This image is a template for 7 parallax backdrop layers of DAWNHARBOR, a white-walled port town at sunrise, in my game's style: soft painted pixel art, warm gold light, plum-violet shade. Replace each WHITE strip with the layer named on it, filling that strip edge to edge and staying inside it. The 6 MAGENTA rows between the strips are gaps: leave them untouched, flat magenta #FF00FF, with nothing painted on them, not even sky.\n1. FAR LAYER: sky from navy #1d2f5c at the top through blue #3f6aa0 and peach #f2a98a to cream #ffe0b0, over the open sea with a distant line of hazy blue islands. Fills its strip; seamless left to right.\n2. MID LAYER: rooftops of the port, white walls and blue tiles stepping up a hill, on magenta (no sky behind them). Seamless left to right.\n3. NEAR LAYER: the harbour front, ship masts, rigging and furled sails, on magenta (no sky behind them). Seamless left to right.\n4. CLOUDS: 4 separate soft morning clouds, cream with peach undersides, on magenta.\n5. LANDMARK: a tall white lighthouse on a rocky point with a sun-shaped lamp, on magenta.\n6. SKY BODY: a low warm morning sun with a soft glow ring, on magenta.\n7. MOTES: a scatter of sparkles like sun on water and a few distant gulls, on magenta.\nRemove the white and the label text: in strips 2 to 7 everything that is not part of the layer becomes flat magenta #FF00FF."
+    "base": "tools/art/templates/backdrop_strips_7_tall.png",
+    "text": "This image is a template for 7 parallax backdrop layers of DAWNHARBOR, a white-walled port town at sunrise, in my game's style: soft painted pixel art, warm gold light, plum-violet shade. Replace each WHITE strip with the layer named on it, filling that strip edge to edge and staying inside it: nothing may cross a strip's top or bottom edge, so make each layer only as tall as its strip. The 6 MAGENTA rows between the strips are gaps: leave them untouched, flat magenta #FF00FF, with nothing painted on them, not even sky.\n1. FAR LAYER: sky from navy #1d2f5c at the top through blue #3f6aa0 and peach #f2a98a to cream #ffe0b0, over the open sea with a distant line of hazy blue islands. Fills its strip; seamless left to right.\n2. MID LAYER: rooftops of the port, white walls and blue tiles stepping up a hill, on magenta (no sky behind them). Seamless left to right.\n3. NEAR LAYER: the harbour front, ship masts, rigging and furled sails, on magenta (no sky behind them). Seamless left to right.\n4. CLOUDS: 4 separate soft morning clouds, cream with peach undersides, on magenta.\n5. LANDMARK: a tall white lighthouse on a rocky point with a sun-shaped lamp, on magenta.\n6. SKY BODY: a low warm morning sun with a soft glow ring, on magenta.\n7. MOTES: a scatter of sparkles like sun on water and a few distant gulls, on magenta.\nRemove the white and the label text: in strips 2 to 7 everything that is not part of the layer becomes flat magenta #FF00FF."
    }
   },
   {
