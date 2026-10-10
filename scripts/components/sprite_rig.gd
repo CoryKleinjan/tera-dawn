@@ -15,9 +15,18 @@ const FALLBACK := {
 	&"move": &"idle", &"attack": &"move", &"hurt": &"idle", &"die": &"hurt",
 	&"walk": &"move", &"run": &"walk", &"fall": &"jump", &"land": &"idle",
 	&"punch": &"attack", &"throw": &"attack", &"shoot": &"attack", &"gun": &"attack",
-	&"cast": &"attack", &"heavy": &"slash", &"slash": &"attack",
+	&"heavy": &"slash", &"slash": &"attack",
 	&"ready": &"idle", &"turn": &"walk", &"skid": &"walk", &"jump_apex": &"jump",
 }
+## Step cycles: going from one to another keeps the step he is on instead of starting over,
+## so speeding up into a run or skidding round doesn't make his legs jump.
+const STEP_CYCLES: Array[StringName] = [&"walk", &"run"]
+## Standing still, an animated actor with a "blink" animation (the hero) shuts its eyes for
+## BLINK_TIME seconds now and then, every BLINK_EVERY.x to BLINK_EVERY.y seconds at random.
+const BLINK_EVERY := Vector2(3.0, 6.0)
+const BLINK_TIME := 0.15
+## How long a flash of colour (pulse(), a buff or spell) takes to fade, in seconds.
+const PULSE_TIME := 0.45
 
 var body: SpriteBase3D
 var shadow: Sprite3D
@@ -40,6 +49,12 @@ var _frozen := false
 var _squash := 0.0
 ## A glow pulsing on the body (a monster winding up an attack), 0 for none.
 var _glow := 0.0
+## Seconds to the next blink, and seconds left of the one showing.
+var _blink_in := randf_range(BLINK_EVERY.x, BLINK_EVERY.y)
+var _blink_t := 0.0
+## A flash of colour fading off the body (see pulse), and how much of it is left (1 to 0).
+var _pulse_color := Color.WHITE
+var _pulse := 0.0
 
 ## Builds the sprite. Pass `frames` for an animated actor or `texture` for a single image.
 ## `texel` is the size of one texture pixel in game pixels.
@@ -99,15 +114,33 @@ func play(anim: StringName, from_start := false) -> void:
 		if not _frames.has_animation(a):
 			a = &"idle"
 		var s := body as AnimatedSprite3D
-		if s.animation != a or from_start:
-			s.play(a)
-			s.frame = 0
-			_fit_offset()
+		if a == &"idle" and s.animation == &"blink" and not from_start:
+			pass # the blink ends by itself (_blink)
+		elif s.animation != a or from_start:
+			_switch(s, a, from_start)
 		elif not s.is_playing() and _frames.get_animation_loop(a):
 			s.play(a)
 	elif a != current or from_start:
 		_t = 0.0
 	current = anim
+
+## Shows animation `a` on the sprite, from its first frame, or (from one step cycle to
+## another) on the same step, as far through it as the last one was.
+func _switch(s: AnimatedSprite3D, a: StringName, from_start: bool) -> void:
+	var keep_step := not from_start and s.animation in STEP_CYCLES and a in STEP_CYCLES
+	var share := 0.0
+	if keep_step:
+		var count := _frames.get_frame_count(s.animation)
+		share = (s.frame + s.frame_progress) / float(count)
+	s.play(a)
+	if keep_step:
+		var at := share * _frames.get_frame_count(a)
+		s.set_frame_and_progress(int(at), at - int(at))
+	else:
+		s.frame = 0
+	_fit_offset()
+	if a != &"idle" and a != &"blink":
+		_blink_in = randf_range(BLINK_EVERY.x, BLINK_EVERY.y)
 
 ## 1 faces right, -1 faces left (the art faces right).
 func face(dir: int) -> void:
@@ -159,7 +192,20 @@ func _apply_modulate() -> void:
 	if _flash:
 		body.modulate = Color(2.2, 1.0, 1.0)
 	else:
-		body.modulate = _tint.lerp(Color(1.9, 1.35, 0.9), _glow * 0.6)
+		var col := _tint.lerp(Color(1.9, 1.35, 0.9), _glow * 0.6)
+		if _pulse > 0.0:
+			# brighter than white, so it reads as light on him rather than paint
+			var bright := Color(_pulse_color.r * 2.2, _pulse_color.g * 2.2, _pulse_color.b * 2.2)
+			col = col.lerp(bright, _pulse * _pulse_color.a * 0.7)
+		body.modulate = col
+
+## A flash of `col` over the body that fades out (a buff or spell going off). Transparent
+## does nothing.
+func pulse(col: Color) -> void:
+	if col.a > 0.0:
+		_pulse_color = col
+		_pulse = 1.0
+		_apply_modulate()
 
 ## A colour the sprite is always tinted with (NPCs and monsters that share art).
 func set_tint(col: Color) -> void:
@@ -175,6 +221,24 @@ func set_opacity(alpha: float) -> void:
 	if aura:
 		aura.emitting = alpha > 0.5
 
+## Counts down to the next blink while standing, and opens the eyes again after it.
+func _blink(delta: float) -> void:
+	var s := body as AnimatedSprite3D
+	if not _frames.has_animation(&"blink") or not (s.animation == &"idle" or s.animation == &"blink"):
+		return
+	if _frozen:
+		return
+	if s.animation == &"blink":
+		_blink_t -= delta
+		if _blink_t <= 0.0:
+			s.play(&"idle")
+			_blink_in = randf_range(BLINK_EVERY.x, BLINK_EVERY.y)
+		return
+	_blink_in -= delta
+	if _blink_in <= 0.0:
+		s.play(&"blink")
+		_blink_t = BLINK_TIME
+
 func _fit_offset() -> void:
 	var tex: Texture2D
 	if body is AnimatedSprite3D:
@@ -189,9 +253,13 @@ func _process(delta: float) -> void:
 	if body == null:
 		return
 	_squash = move_toward(_squash, 0.0, delta * 6.0)
+	if _pulse > 0.0:
+		_pulse = maxf(0.0, _pulse - delta / PULSE_TIME)
+		_apply_modulate()
 	var squash_xy := Vector2(1.0 + 0.18 * _squash, 1.0 - 0.15 * _squash)
 	if _frames:
 		body.scale = Vector3(squash_xy.x, squash_xy.y, 1.0)
+		_blink(delta)
 		return
 	# single-image actors: move the sprite procedurally
 	_t += delta

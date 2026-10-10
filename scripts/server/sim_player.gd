@@ -13,7 +13,7 @@ const MAX_STEP := 16.0
 ## Ticks of invincibility after a monster touch (the client blinks for as long).
 const HURT_INV := 90
 ## The player's hurtbox, the same on the server and the client (TDPlayer).
-const HURTBOX_SIZE := Vector2(28, 64)
+const HURTBOX_SIZE := Vector2(24, 52)
 ## Ticks between HP / MP regeneration, and what's regained each time: a base plus
 ## level / divisor, plus the character's regen bonus and their chair's.
 const REGEN_EVERY := 120

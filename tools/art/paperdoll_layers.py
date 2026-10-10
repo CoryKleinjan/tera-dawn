@@ -40,6 +40,8 @@ points), at the size the drawn body is to his.
 
 How each kind is held (a bow upright, a staff planted, a gun pointed) and which frames hold
 the weapon behind his body are in art/sheets/paperdoll_rig.json ("holds", "weapon_behind").
+Rig angles are the way the weapon points; sword, wand and staff art drawn at a slant on its
+sheet is measured and straightened first (AXIAL), so the angles hold whatever the art.
 
 Hair, cape, shields, gloves and weapons are greyscale; the game tints them (hair colour, the worn
 item's colour). The irises are split off the faces into their own layer for the eye colour.
@@ -80,7 +82,7 @@ LIFT_TO = 200
 # Frames seen from behind: no face, the hair's "from behind" piece, the cape in front.
 BACK_VIEW = ("rope1", "rope2", "ladder1", "ladder2", "climb_idle")
 # The face's expression per frame (anything not listed: normal).
-EXPRESSIONS = {"idle3": "blink", "hit": "ouch", "hurt": "ouch", "faint1": "dizzy", "faint2": "dizzy"}
+EXPRESSIONS = {"blink": "blink", "hit": "ouch", "hurt": "ouch", "faint1": "dizzy", "faint2": "dizzy"}
 HAIRSTYLES = ["tousled", "long", "ponytail", "twin_tails", "bun", "crest"]
 FACES = ["bright", "determined", "rosy", "freckled", "cheeky"]
 WEAPON_KINDS = ["sword", "bow", "wand", "staff", "claw", "knuckle", "gun"]
@@ -104,6 +106,10 @@ FIST = 0.4            # the fist around a grip reaches this far from the grip po
 # Weapons worn on the fist are drawn smaller than the template sheet has them, so they fit
 # his hand rather than swallowing it (the rest keep the sheet's size against the sword).
 WORN_SIZE = {"claw": 0.6, "knuckle": 0.75}
+# Long weapons whose sheets may draw them at a slant (a sword up and to the right): their own
+# axis is measured and turned out, so a rig angle means the same however the art was drawn.
+# The others are drawn the way the rig expects (a gun and claws pointing right, a bow upright).
+AXIAL = ("sword", "wand", "staff")
 # Weapons held in the fist: his fingers draw over the grip. The others are worn on the fist.
 GRIPPED = ("sword", "wand", "staff", "bow", "gun")
 # Weapons carried on his back while he climbs or sits, and at what angle; the rest are put away.
@@ -484,8 +490,10 @@ def posed_gloves(arr, px, hands, reach):
 
 # ---------- weapons ----------
 
-def weapon(piece, s):
-    """A weapon shrunk to game pixels, its green grip dot painted over; returns (image, grip)."""
+def weapon(piece, s, kind):
+    """A weapon shrunk to game pixels, its green grip dot painted over; returns (image, grip,
+    axis): axis is the way its business end points in the picture (degrees clockwise from
+    pointing right), 0 for kinds not in AXIAL."""
     arr = np.asarray(piece.img).astype(int)
     green = (arr[..., 1] > 170) & (arr[..., 0] < 120) & (arr[..., 2] < 120) & (arr[..., 3] > 0)
     # dots drawn off the weapon (beside it on the background, as some held_* sheets have them)
@@ -510,7 +518,36 @@ def weapon(piece, s):
         grey = arr[..., :3].mean(2, keepdims=True)  # the dot's surroundings are grey already
         arr[..., :3] = np.where(ss.dilate(green, 1)[..., None], grey, arr[..., :3])
     img = scaled(Image.fromarray(arr.clip(0, 255).astype(np.uint8), "RGBA"), s)
-    return img, [round(grip[0] * s, 1), round(grip[1] * s, 1)]
+    return img, [round(grip[0] * s, 1), round(grip[1] * s, 1)], drawn_axis(arr) if kind in AXIAL else 0.0
+
+
+def reach(img, grip, axis):
+    """How far a weapon picture reaches past its grip along `axis` (its pixels)."""
+    ys, xs = np.nonzero(np.asarray(img)[..., 3] > 0)
+    c, s = math.cos(math.radians(axis)), math.sin(math.radians(axis))
+    return round(float(((xs - grip[0]) * c + (ys - grip[1]) * s).max()), 1)
+
+
+def length(piece, kind):
+    """A weapon picture's length along the way it points (its width when drawn pointing right)."""
+    arr = np.asarray(piece.img)
+    ys, xs = np.nonzero(arr[..., 3] > 0)
+    a = math.radians(drawn_axis(arr) if kind in AXIAL else 0.0)
+    t = xs * math.cos(a) + ys * math.sin(a)
+    return float(t.max() - t.min() + 1)
+
+
+def drawn_axis(arr):
+    """The direction a long weapon lies along in its picture (degrees clockwise from pointing
+    right): its long axis, taken toward the top (the sheets draw the business end up), or
+    toward the right when it lies flat."""
+    ys, xs = np.nonzero(arr[..., 3] > 0)
+    pts = np.stack([xs - xs.mean(), ys - ys.mean()])
+    vals, vecs = np.linalg.eigh(pts @ pts.T)
+    dx, dy = vecs[:, np.argmax(vals)]
+    if dy > 0.05 or (abs(dy) <= 0.05 and dx < 0):
+        dx, dy = -dx, -dy
+    return round(math.degrees(math.atan2(dy, dx)), 1)
 
 
 def hand_rig(fw):
@@ -596,17 +633,19 @@ def draw_turned(canvas, img, anchor, at, angle):
     canvas.alpha_composite(layer)
 
 
-def weapon_strips(img, grip, kind, names, frames, info, hold, hands, r):
+def weapon_strips(img, grip, axis, kind, names, frames, info, hold, hands, r, far_frames=()):
     """A weapon picture in his hand on every frame: (in front of him, behind him). A held weapon
-    has a hole where his fist wraps it, so his fingers show over the grip."""
+    has a hole where his fist wraps it, so his fingers show over the grip. `far_frames` are
+    frames where this kind goes behind him even if the rig's fist is in front (a long staff
+    planted beside him would otherwise cover his face)."""
     front, behind = [], []
     for n, px, fi in zip(names, frames, info):
         f, b = Image.new("RGBA", (px.shape[1], px.shape[0])), Image.new("RGBA", (px.shape[1], px.shape[0]))
         if hold[n] is not None:
             x, y, angle = hold[n]
             layer = Image.new("RGBA", f.size)
-            draw_turned(layer, img, grip, (x, y), angle)
-            far = hands[n].get("weapon_behind", False)
+            draw_turned(layer, img, grip, (x, y), angle - axis)
+            far = hands[n].get("weapon_behind", False) or n in far_frames
             if kind in GRIPPED and not far:
                 arr = np.asarray(layer).copy()
                 arr[fist_mask(px, (x, y), r * FIST), 3] = 0
@@ -616,7 +655,7 @@ def weapon_strips(img, grip, kind, names, frames, info, hold, hands, r):
             down = -fi["up"]
             at = fi["neck"] + down * fi["r"] * 0.3
             centre = (img.width / 2, img.height / 2)
-            (f if n in BACK_VIEW else b).alpha_composite(_turned_on(f.size, img, centre, at, ON_BACK[kind]))
+            (f if n in BACK_VIEW else b).alpha_composite(_turned_on(f.size, img, centre, at, ON_BACK[kind] - axis))
         front.append(f)
         behind.append(b)
     return front, behind
@@ -853,7 +892,7 @@ def main():
         out = []
         for n, entry in zip(names, rig_frames):
             canvas = blank()
-            p = drawn.get(poses.get(n, ""))
+            p = drawn.get(poses.get(n, poses.get(body_cells[n], "")))  # a frame reusing a cell (blink) uses its pose
             if p and "shield" in entry:
                 img = scaled(p.img, s_sh)
                 place(canvas, img, (img.width / 2, img.height / 2), entry["shield"])
@@ -875,22 +914,22 @@ def main():
         save_layer("gloves", out, fw, fh, index, anims)
 
     # weapons: every kind (greyscale, tinted per item) and every weapon with its own picture
-    s_w = r * SWORD_LENGTH / weapons["sword"].img.width
+    s_w = r * SWORD_LENGTH / length(weapons["sword"], "sword")
     grips = {}
     pictures = [(kind, kind, weapons[kind], True, 1.0) for kind in WEAPON_KINDS]
     drawn_weapons = held_pictures()
     # a held_* sheet is drawn at its own size: it is shrunk so its weapons are, on the median,
     # as long as the template of their kind (keeping their sizes against each other)
-    size = lambda p: max(p.img.size)  # noqa: E731
     by_sheet = {}
     for item, kind, piece, sheet in drawn_weapons:
-        by_sheet.setdefault(sheet, []).append(size(weapons[kind]) / size(piece))
+        by_sheet.setdefault(sheet, []).append(length(weapons[kind], kind) / length(piece, kind))
     pictures += [("item_" + item, kind, piece, False, float(np.median(by_sheet[sheet]))) for item, kind, piece, sheet in drawn_weapons]
     for name, kind, piece, tinted, k in pictures:
-        img, grip = weapon(piece, s_w * WORN_SIZE.get(kind, 1.0) * k)
+        img, grip, axis = weapon(piece, s_w * WORN_SIZE.get(kind, 1.0) * k, kind)
         if tinted:
-            grips[kind] = {"grip": grip, "size": list(img.size)}
-        front, behind = weapon_strips(img, grip, kind, names, frames, info, held[kind], hands, r)
+            grips[kind] = {"grip": grip, "size": list(img.size), "reach": reach(img, grip, axis)}
+        far_frames = hold_spec.get(kind, {}).get("behind", ())
+        front, behind = weapon_strips(img, grip, axis, kind, names, frames, info, held[kind], hands, r, far_frames)
         save_layer(f"weapon_{name}", front, fw, fh, index, anims, tinted)
         if any(im.getbbox() for im in behind):
             save_layer(f"weapon_{name}_behind", behind, fw, fh, index, anims, tinted)

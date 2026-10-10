@@ -284,7 +284,7 @@ func test_skill_weapon_kinds_exist_on_some_weapon() -> void:
 func test_attack_skills_animate_with_a_hero_animation() -> void:
 	var frames := TDPlayer.HERO_FRAMES
 	for s: SkillDef in Content.skills.values():
-		if s.kind != SkillDef.Kind.PASSIVE:
+		if s.kind != SkillDef.Kind.PASSIVE and not WeaponStyle.is_spell(s.animation):
 			check(frames.has_animation(s.animation), "%s: animation %s is not a hero animation" % [Scan.where(s), s.animation])
 
 func test_monsters_that_split_or_shoot_point_at_real_things() -> void:

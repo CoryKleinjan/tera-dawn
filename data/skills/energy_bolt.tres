@@ -28,3 +28,4 @@ height = 100.0
 hit_effect = ExtResource("3_hit")
 animation = &"slash"
 icon = ExtResource("4_energy_bolt")
+flash = Color(0.55, 0.8, 1.0, 1)

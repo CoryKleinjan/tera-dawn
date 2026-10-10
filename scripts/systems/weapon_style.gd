@@ -2,9 +2,10 @@ class_name WeaponStyle
 extends RefCounted
 ## How each kind of weapon fights: which of the hero's animations (assets/animations/hero.tres)
 ## a skill plays with it. A skill names a motion (SkillDef.animation): "attack" is the
-## weapon's own basic blow, "slash" its big one; any other name ("cast", "throw") is played
-## as it is, whatever the weapon. Your own game and everyone watching you work it out the same
-## way from the weapon you wear, so they all see the same motion.
+## weapon's own basic blow, "slash" its big one; any other name ("throw") is played as it
+## is, whatever the weapon, except "cast" (SPELL), which plays nothing. Your own game and
+## everyone watching you work it out the same way from the weapon you wear, so they all see
+## the same motion.
 ##
 ## Add a weapon kind with a row here, its holds in art/sheets/paperdoll_rig.json and its
 ## picture on the paperdoll weapons sheet (see ARCHITECTURE.md "How to add a weapon").
@@ -21,8 +22,11 @@ const MOTIONS := {
 }
 ## With nothing in hand.
 const UNARMED := {&"attack": &"punch", &"slash": &"slash"}
+## The motion of buffs and spells: it plays no animation at all. The hero flashes the skill's
+## colour (SkillDef.flash) and carries on with whatever he was doing.
+const SPELL := &"cast"
 ## Every animation a skill can play (each restarts when the skill is used again).
-const ACTIONS: Array[StringName] = [&"attack", &"slash", &"punch", &"throw", &"shoot", &"gun", &"cast", &"heavy"]
+const ACTIONS: Array[StringName] = [&"attack", &"slash", &"punch", &"throw", &"shoot", &"gun", &"heavy"]
 
 ## The animation a motion plays with a weapon kind (&"" for bare hands).
 static func animation(kind: StringName, motion: StringName) -> StringName:
@@ -32,6 +36,10 @@ static func animation(kind: StringName, motion: StringName) -> StringName:
 ## Whether an animation is a skill being used (not moving about).
 static func is_action(anim: StringName) -> bool:
 	return anim in ACTIONS
+
+## Whether an animation is a buff or spell going off (no motion, a flash instead).
+static func is_spell(anim: StringName) -> bool:
+	return anim == SPELL
 
 ## The kind of weapon a look (Character.look()) holds, or &"" for bare hands.
 static func kind_in(look: Dictionary) -> StringName:
