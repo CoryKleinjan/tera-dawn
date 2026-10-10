@@ -211,7 +211,7 @@ script = ExtResource("8_portal_def")
 x = 50.0
 platform = 0
 target_map = &"dawnrise_village"
-target_x = 2146.0
+target_x = 2026.0
 
 [sub_resource type="Resource" id="Land_1"]
 script = ExtResource("3_platform_def")

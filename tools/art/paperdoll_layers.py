@@ -30,8 +30,8 @@ Writes:
 
 A hairstyle with a sheet drawn in every pose (art/sheets/hair_<style>_frames.json, the body
 wearing the hair on the body sheet's grid) uses that instead of its one front piece: the
-hair is lifted off each pose and set on the hero's head, so it sways with him. Walking and
-running hold one drawing through the whole cycle (HELD_HAIR), so the hair keeps its shape. Under every
+hair is lifted off each pose and set on the hero's head, so it moves with him. Resting, moving and
+climbing each hold one drawing (HELD_HAIR) on every frame of theirs, so the hair keeps its shape. Under every
 hairstyle the top and back of his bald head are repainted in hair greys, so no pose shows
 scalp where the hair doesn't reach.
 
@@ -103,6 +103,10 @@ FACE_AT = (0.2, 0.3)  # and centred this far forward and down from the head's ce
 # up (to the hairline) and down (past the chin) from there. A hat's hair leaves it clear.
 FACE_ZONE = (FACE_AT[0] + SCALP_BACK, 1.0, FACE_AT[1] + SCALP, 0.7)
 BLANK_FACE = 222      # the hair sheet's blank faces are greys at least this pale (of 255)
+# Chibi faces: each eye (with its brow) is drawn this much bigger about its own centre. The eyes
+# are everything above EYE_LINE (a fraction of the normal face's height), left or right of its middle.
+EYE_SCALE = 1.3
+EYE_LINE = 0.6
 NECK = 0.95           # the neck is this far below the head's centre
 SHIELD_HEIGHT = 1.25
 # Clothes sheets (art/sheets/<place>_<style>_frames.json) for these places; styles whose sheet
@@ -384,23 +388,35 @@ def scalp(px, fi, back_view, grey):
 # heads line up with his (the others are placed by the head alone, see posed_hair).
 STEADY_POSES = ("idle1", "idle2", "idle3", "idle4", "walk1", "walk2", "walk3", "walk4")
 
-# Step cycles whose frames all wear one drawn pose's hair, set on each frame's head: the
-# sheets draw the hair afresh in every pose, so cycling through them redraws it every step
-# (spikes and strands jump about, the shade flickers). Holding one drawing, the hair bobs
-# with his head but keeps its shape. The pose to hold is the cleanest drawing of the cycle;
+# Poses that all wear one drawn pose's hair, set on each frame's head (and turned with it):
+# the sheets draw the hair afresh in every pose, and differently each time (hanging in one,
+# blown sideways in the next, a shade lighter or darker), so playing the poses redrew it on
+# every frame and snapped it between shapes whenever an action began. Holding one drawing per
+# family, the hair bobs and tilts with his head but keeps its shape: one at rest, one on the
+# move (streaming back), one from behind while he climbs. Poses in no family (lying in a
+# faint) keep their own. The pose to hold is the cleanest drawing of the family;
 # HELD_HAIR_STYLE picks another for a style whose usual one came out badly.
 HELD_HAIR = {
-    "walk": ("walk1", ("walk1", "walk2", "walk3", "walk4")),
-    "run": ("run2", ("run1", "run2", "run3", "run4")),
+    "rest": ("idle1", ("idle1", "idle2", "idle3", "idle4", "walk1", "walk2", "walk3", "walk4",
+                       "attack1", "attack2", "hit", "hurt", "land", "crouch", "slash1", "slash2",
+                       "slash3", "levelup", "sit", "blink")),
+    "moving": ("run2", ("run1", "run2", "run3", "run4", "jump", "fall")),
+    "climbing": ("ladder1", ("rope1", "rope2", "ladder1", "ladder2", "climb_idle")),
 }
-HELD_HAIR_STYLE = {"bun": {"walk": "walk2"}}  # its walk1 catches a dark speck by the hip
+HELD_HAIR_STYLE = {}
+# A drawn tail or bun no further than this from the head (head radii) is pulled in to touch
+# it; the sheets sometimes leave a gap between a ponytail and the head it hangs from.
+HAIR_REACH = 0.4
+# Styles drawn as a tail alone (no hair on top of the head): their crown comes from the style's
+# one-piece hair under a hat, combed back with its strands, instead of a plain grey cap.
+CROWN_FROM_HAT = ("ponytail",)
 
 
 def held_hair_pose(style, n):
-    """The drawn pose whose hair frame `n` wears for `style`: the cycle's held pose, or `n`."""
-    for cycle, (pose, frames) in HELD_HAIR.items():
+    """The drawn pose whose hair frame `n` wears for `style`: its family's held pose, or `n`."""
+    for family, (pose, frames) in HELD_HAIR.items():
         if n in frames:
-            return HELD_HAIR_STYLE.get(style, {}).get(cycle, pose)
+            return HELD_HAIR_STYLE.get(style, {}).get(family, pose)
     return n
 
 
@@ -486,6 +502,46 @@ def head_link(cells, names, info, frames):
     return float(np.median(ks)), np.median(np.array(offs), axis=0)
 
 
+class Drawn:
+    """A piece made here rather than cut from a sheet (same fields as Piece)."""
+    def __init__(self, img, x, y):
+        self.img, self.x, self.y = img, x, y
+
+
+def chibi(piece, normal):
+    """A face piece with bigger eyes (EYE_SCALE), each grown about its centre on the face's
+    normal expression, so every expression's eyes grow in the same place; the nose, mouth and
+    cheeks below EYE_LINE stay as drawn, which leaves them small and close under the eyes."""
+    if EYE_SCALE == 1:
+        return piece
+    a = np.asarray(piece.img)
+    n = np.asarray(normal.img)[..., 3] > 0
+    w, h = normal.img.size
+    yy, xx = np.mgrid[0:a.shape[0], 0:a.shape[1]]
+    left = xx + piece.x - normal.x < w / 2
+    eyes = yy + piece.y - normal.y < EYE_LINE * h
+    ny, nx = np.nonzero(n)
+    pad = int(max(w, h) * (EYE_SCALE - 1))
+    out = Image.new("RGBA", (a.shape[1] + 2 * pad, a.shape[0] + 2 * pad))
+    rest = a.copy()
+    rest[eyes] = 0
+    out.alpha_composite(Image.fromarray(rest, "RGBA"), (pad, pad))
+    for is_left in (True, False):
+        part = a.copy()
+        part[~(eyes & (left == is_left))] = 0
+        on = (ny < EYE_LINE * h) & ((nx < w / 2) == is_left)
+        if not part[..., 3].any() or not on.any():
+            continue
+        # the eye's centre on the normal face, in this piece's pixels
+        cx = (nx[on].min() + nx[on].max()) / 2 + normal.x - piece.x
+        cy = (ny[on].min() + ny[on].max()) / 2 + normal.y - piece.y
+        img = Image.fromarray(part, "RGBA")
+        big = img.resize((round(img.width * EYE_SCALE), round(img.height * EYE_SCALE)), Image.NEAREST)
+        out.alpha_composite(big, (int(round(pad + cx - cx * EYE_SCALE)), int(round(pad + cy - cy * EYE_SCALE))))
+    box = out.getbbox()
+    return Drawn(out.crop(box), piece.x - pad + box[0], piece.y - pad + box[1])
+
+
 def hides_face(img, fi):
     """Whether hair covers most of the face (the middle of it, where the eyes are)."""
     at = fi["head"] + turned(FACE_AT, fi["tilt"]) * fi["r"]
@@ -509,6 +565,44 @@ def posed_hair(arr, fi, link):
     cut[..., :3] = np.repeat(grey, 3, 2).round().astype(np.uint8)
     return scaled(Image.fromarray(cut, "RGBA"), s), (int(round(at[0])), int(round(at[1])))
 
+
+
+def toned(img, grey):
+    """A greyscale piece brightened or darkened so its middle grey is `grey` (0..255)."""
+    arr = np.asarray(img).astype(float)
+    k = grey / max(hair_grey(img), 1.0)
+    arr[..., :3] = (arr[..., :3] * k).clip(0, 255)
+    return Image.fromarray(arr.round().astype(np.uint8), "RGBA")
+
+
+def pulled_in(img, fi):
+    """Drawn hair with any piece that floats just off his head (a ponytail drawn a little
+    behind the head it hangs from) moved straight in until it touches the head."""
+    arr = np.asarray(img).copy()
+    solid = arr[..., 3] > 0
+    lab, n = ss.label(solid)
+    if n < 1:
+        return img
+    yy, xx = np.mgrid[0:solid.shape[0], 0:solid.shape[1]]
+    dist = np.hypot(xx - fi["head"][0], yy - fi["head"][1]) / fi["r"] - 1.0  # head radii off the head
+    out = np.zeros_like(arr)
+    for i in range(1, n + 1):
+        part = lab == i
+        gap = dist[part].min()
+        if gap <= 0 or gap > HAIR_REACH:
+            out[part] = arr[part]
+            continue
+        # the nearest point of the piece, moved in along the line to the head's centre
+        k = np.argmin(np.where(part, dist, np.inf))
+        py, px_ = divmod(k, solid.shape[1])
+        v = np.array(fi["head"]) - (px_, py)
+        step = v / np.linalg.norm(v) * gap * fi["r"]
+        dx, dy = int(round(step[0])), int(round(step[1]))
+        ys, xs = np.nonzero(part)
+        ty, tx = ys + dy, xs + dx
+        ok = (ty >= 0) & (ty < solid.shape[0]) & (tx >= 0) & (tx < solid.shape[1])
+        out[ty[ok], tx[ok]] = arr[ys[ok], xs[ok]]
+    return Image.fromarray(out, "RGBA")
 
 # ---------- gloves drawn on the body ----------
 
@@ -898,7 +992,7 @@ def main():
     offsets = body_offsets(names, body_cells, fw, fh)
 
     # hair: one transform per style from its front piece, used for all four pieces
-    old = {}
+    old, old_hat = {}, {}
     for style in HAIRSTYLES:
         front = hair[style + "_front"]
         s = r * HAIR_WIDTH / front.img.width
@@ -923,6 +1017,7 @@ def main():
                         canvas = bare_face(canvas, px, fi)
                 out[layer].append(canvas)
         old[style] = out[""]
+        old_hat[style] = out["_hat"]
         for layer, fr in out.items():
             if any(im.getbbox() for im in fr):
                 save_layer(f"hair_{style}{layer}", fr, fw, fh, index, anims, grey=True)
@@ -934,6 +1029,10 @@ def main():
             drawn = cut(f"hair_{style}_frames")
             cells = {n: without_shorts(drawn[body_cells[n]], body_cells[n]) for n in names if body_cells[n] in drawn}
             link = head_link(cells, names, info, frames)
+            # every pose's hair in the held rest drawing's grey, so it doesn't flicker lighter
+            # or darker from one family (or lone pose) to the next
+            rest = held_hair_pose(style, HELD_HAIR["rest"][0])
+            target = hair_grey(Image.fromarray(cells[rest] * hair_mask(cells[rest])[..., None])) if rest in cells else None
             out = []
             for n, fi, px in zip(names, info, frames):
                 canvas = blank()
@@ -943,19 +1042,31 @@ def main():
                     drawn_as = n
                 if drawn_as in cells:
                     hair_img, at = posed_hair(cells[drawn_as], fi, link)
-                    _paste(drawn_hair, hair_img, *at)
+                    if target is not None:
+                        hair_img = toned(hair_img, target)
+                    # a held drawing turns with his head (as far as this frame's head is turned
+                    # from the held pose's)
+                    turn = fi["tilt"] - info[index[drawn_as]]["tilt"]
+                    place(drawn_hair, hair_img, (fi["head"][0] - at[0], fi["head"][1] - at[1]), fi["head"], turn)
+                    drawn_hair = pulled_in(drawn_hair, fi)
                 # where the drawn hair covers the scalp, the scalp only just around it (it fills
                 # slivers where the heads don't quite line up, and doesn't show as a band under a
                 # high hairline); where it leaves the crown bald (a ponytail drawn as the tail
-                # alone), all of it, so the top of his head is hair; in the drawn hair's own grey,
+                # alone), all of it, so the top of his head is hair, with the strands of the
+                # style's one-piece crown on it for CROWN_FROM_HAT; in the drawn hair's own grey,
                 # so it doesn't show as a darker cap
                 tone = hair_grey(drawn_hair) if drawn_hair.getbbox() else 128.0
                 bald = np.asarray(scalp(px, fi, n in BACK_VIEW, tone)).copy()
                 near = ss.dilate(np.asarray(drawn_hair)[..., 3] > 0, 3)
                 top = bald[..., 3] > 0
-                if top.any() and (near & top).sum() > top.sum() * SCALP_COVERED:
+                covered = top.any() and (near & top).sum() > top.sum() * SCALP_COVERED
+                if covered:
                     bald[~near, 3] = 0
                 canvas.alpha_composite(Image.fromarray(bald, "RGBA"))
+                if style in CROWN_FROM_HAT and not covered and n not in BACK_VIEW:
+                    crown = np.asarray(toned(old_hat[style][index[n]], tone)).copy()
+                    crown[~top, 3] = 0
+                    canvas.alpha_composite(Image.fromarray(crown, "RGBA"))
                 if n in BACK_VIEW or not hides_face(drawn_hair, fi):
                     canvas.alpha_composite(drawn_hair)
                 else:  # drawn in a pose too unlike his (lying face down): the one-piece hair
@@ -976,7 +1087,7 @@ def main():
         for n, fi in zip(names, info):
             canvas, iris = blank(), blank()
             if n not in BACK_VIEW:
-                p = faces[face + "_" + EXPRESSIONS.get(n, "normal")]
+                p = chibi(faces[face + "_" + EXPRESSIONS.get(n, "normal")], normal)
                 img = scaled(p.img, s)
                 anchor = ((centre[0] - p.x) * s, (centre[1] - p.y) * s)
                 at = fi["head"] + turned(FACE_AT, fi["tilt"]) * fi["r"]
