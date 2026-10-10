@@ -2,7 +2,7 @@ extends TestCase
 ## The world hangs together: everything placed on a map stands on a real platform inside
 ## the map, every portal has a way back and lands somewhere sensible, every map can be
 ## reached from the starting map, every item can be got somehow, every monster lives
-## somewhere, and there's enough of everything (what tests/smoke_test.gd checks too).
+## somewhere, big monsters don't loom right over NPCs, and there's enough of everything (what tests/smoke_test.gd checks too).
 
 const Scan := preload("res://tests/content/content_scan.gd")
 
@@ -54,6 +54,29 @@ func test_npcs_and_portals_stand_on_their_platform() -> void:
 			if p and p.platform >= 0 and p.platform < layout.platforms.size():
 				check(layout.platforms[p.platform].contains_x(p.x), "%s: portals[%d] at x %s is off platform %d" % [w, i, p.x, p.platform])
 				check_between(p.x, 0, m.width, "%s: portals[%d].x" % [w, i])
+
+## A monster at least this tall (game pixels) is big enough to crowd the NPCs under its ledge.
+const BIG_MONSTER := 80.0
+## How high over an NPC's feet a big monster's ledge must be not to crowd them.
+const NPC_HEADROOM := 260.0
+
+func test_big_monsters_dont_crowd_over_npcs() -> void:
+	for m: MapDef in Content.maps.values():
+		var layout := MapLayout.new(m)
+		for i in m.spawns.size():
+			var s := m.spawns[i]
+			if s == null or s.monster == null or s.platform <= 0 or s.platform >= layout.platforms.size():
+				continue
+			if s.monster.size.y * s.monster.sprite_scale < BIG_MONSTER:
+				continue
+			var area := s.patrol_area(layout.platforms[s.platform])
+			var half := s.monster.size.x * s.monster.sprite_scale / 2.0
+			for n in m.npcs:
+				if n == null or n.platform >= layout.platforms.size():
+					continue
+				var below := layout.platforms[n.platform].y - area.y
+				var under := n.x > area.x - half and n.x < area.x + area.w + half
+				check(not (under and below > 0.0 and below < NPC_HEADROOM), "%s: spawns[%d] (%s) on platform %d stands right over %s" % [Scan.where(m), i, s.monster.id, s.platform, n.npc.id if n.npc else "?"])
 
 func test_portals_dont_overlap() -> void:
 	for m: MapDef in Content.maps.values():

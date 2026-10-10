@@ -34,7 +34,6 @@ func _init() -> void:
 	field = LineEdit.new()
 	field.max_length = CharacterStore.MAX_NAME
 	field.custom_minimum_size = Vector2(220, 40)
-	field.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	field.text_changed.connect(func(_t: String) -> void: _refresh())
 	field.text_submitted.connect(func(_t: String) -> void:
 		if matches():
@@ -56,7 +55,7 @@ func open(name_: String) -> void:
 	char_name = name_
 	question.text = "Delete %s? This can't be undone.\nType %s to confirm." % [char_name, char_name]
 	field.text = ""
-	field.placeholder_text = char_name
+	UiSkin.set_hint(field, char_name)
 	_refresh()
 	show()
 	field.grab_focus()

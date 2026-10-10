@@ -22,7 +22,7 @@ func _ready() -> void:
 	position = Vector2(8, TDWorld.VIEW.y - TDStatusBar.HEIGHT - size.y - 4)
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	field = LineEdit.new()
-	field.placeholder_text = "Say something (Enter)  ·  /w Name, /p, /g, /b, /help"
+	UiSkin.set_hint(field, "Say something (Enter)  ·  /w Name, /p, /g, /b, /help")
 	field.max_length = TDSocial.CHAT_MAX
 	field.position = Vector2(0, size.y - 32)
 	field.size = Vector2(W, 30)
@@ -98,6 +98,8 @@ func _draw() -> void:
 		var frame := UiSkin.box("social/chat_frame", 20, 14)
 		frame.modulate_color = Color(1, 1, 1, 0.85)
 		UiSkin.draw_box(self, frame, Rect2(-6, -6, W + 12, LINES * LINE_H + 16), 0.7)
+	elif not shown.is_empty():
+		_draw_backdrop(shown)
 	for i in shown.size():
 		var l: Dictionary = shown[i]
 		var a := 1.0 if open_box else minf(1.0, l["t"] / 60.0)
@@ -106,3 +108,22 @@ func _draw() -> void:
 		var col: Color = l["color"]
 		col.a = a
 		DrawUtil.text(self, Game.ui_font, Vector2(6, 16 + (LINES - shown.size() + i) * LINE_H), l["text"], 13, col, 1, 4, Color(Palette.NIGHT, 0.8 * a))
+
+## A faint dark backdrop behind the lines still showing while the box is closed, fading with them.
+func _draw_backdrop(shown: Array) -> void:
+	var w := 0.0
+	var first := -1
+	var fade := 0.0
+	for i in shown.size():
+		var a := minf(1.0, shown[i]["t"] / 60.0)
+		if a <= 0.0:
+			continue
+		if first < 0:
+			first = i
+		fade = maxf(fade, a)
+		w = maxf(w, DrawUtil.text_width(Game.ui_font, shown[i]["text"], 13))
+	if first < 0:
+		return
+	var top := 16 + (LINES - shown.size() + first) * LINE_H - 13
+	var bottom := 16 + (LINES - 1) * LINE_H
+	DrawUtil.backdrop(self, Rect2(6, top, w, bottom - top).grow(5), fade)

@@ -53,9 +53,8 @@ func _init() -> void:
 	heading.add_theme_stylebox_override("normal", UiSkin.box("creator/banner", 44, 16, 52, 8))
 	left.add_child(heading)
 	name_field = LineEdit.new()
-	name_field.placeholder_text = "Character name"
+	UiSkin.set_hint(name_field, "Character name")
 	name_field.max_length = CharacterStore.MAX_NAME
-	name_field.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	name_field.custom_minimum_size = Vector2(250, 34)
 	name_field.text_submitted.connect(func(_t: String) -> void: _create())
 	_style_name_field()

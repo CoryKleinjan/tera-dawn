@@ -3,6 +3,12 @@ extends RefCounted
 ## Builds everything that stands on the ground: the biome's scattered trees, bushes and
 ## rocks, the map's hand-placed props, ropes and ladders, portals, lanterns and the sign.
 
+## How much bigger than the biome's art the signpost is drawn, and its depth.
+const SIGN_SCALE := 1.2
+const SIGN_DEPTH := -0.9
+## Space between the top of the signpost (or portal) and the sign's words.
+const SIGN_LABEL_GAP := 6.0
+
 var stage: TDStage
 var root: Node3D
 
@@ -137,18 +143,18 @@ func _lanterns(map: MapDef, biome: BiomeDef, rng: RandomNumberGenerator) -> void
 func _sign(map: MapDef, biome: BiomeDef) -> void:
 	if map.sign_text == "" or biome.signpost == null:
 		return
-	var pos := TDStage.to3d(Vector2(map.sign_x, map.ground_y + 3.0), -0.9)
-	var post := TDStage.sprite(biome.signpost, TDStage.TEXEL * 1.2)
-	post.position = pos
+	var post := TDStage.sprite(biome.signpost, TDStage.TEXEL * SIGN_SCALE)
+	post.position = TDStage.to3d(Vector2(map.sign_x, map.ground_y + 3.0), SIGN_DEPTH)
 	root.add_child(post)
-	var l := Label3D.new()
-	l.text = map.sign_text
-	l.font = Game.ui_font
-	l.font_size = 26
-	l.pixel_size = 1.0 / (TDStage.PX * 2.0)
-	l.modulate = Color("fff3e4")
-	l.outline_modulate = Color("2b1a14")
-	l.outline_size = 8
-	l.position = pos + Vector3(0, biome.signpost.get_height() * 1.2 * TDStage.TEXEL / TDStage.PX + 0.35, 0.06)
-	l.shaded = false
-	root.add_child(l)
+
+## Where the sign's words go (game pixels, their bottom centre), or null for no sign. The
+## overlay draws them, so they stay sharp and in front: over the post, and at least as high
+## as the biome's portal so the portal by the entrance never hides them.
+static func sign_label_at(map: MapDef) -> Variant:
+	var biome := map.biome
+	if map.sign_text == "" or biome == null or biome.signpost == null:
+		return null
+	var h := biome.signpost.get_height() * SIGN_SCALE * TDStage.TEXEL
+	if not biome.portal_frames.is_empty():
+		h = maxf(h, biome.portal_frames[0].get_height() * TDStage.TEXEL)
+	return Vector2(map.sign_x, map.ground_y + 3.0 - h - SIGN_LABEL_GAP)

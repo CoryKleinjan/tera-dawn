@@ -33,6 +33,12 @@ static func round_rect_points(r: Rect2, rad: float) -> PackedVector2Array:
 static func round_rect(ci: CanvasItem, r: Rect2, rad: float, col: Color) -> void:
 	ci.draw_colored_polygon(round_rect_points(r, rad), col)
 
+## The faint dark backdrop behind text drawn straight over the scene (the message log, chat),
+## faded by `alpha` along with its text.
+static func backdrop(ci: CanvasItem, r: Rect2, alpha := 1.0) -> void:
+	if alpha > 0.0:
+		round_rect(ci, r, 6.0, Color(Palette.BACKDROP, Palette.BACKDROP.a * alpha))
+
 ## Draws text anchored at `pos` (baseline). align: -1 right, 0 center, 1 left.
 static func text(ci: CanvasItem, font: Font, pos: Vector2, s: String, size: int, col: Color, align := 0, outline := 0, outline_col := Color(0, 0, 0, 0.8)) -> void:
 	var w := font.get_string_size(s, HORIZONTAL_ALIGNMENT_LEFT, -1, size).x
