@@ -25,18 +25,15 @@
   ],
   "overrides": {
     "wall": {
-      "scale": 1.15,
-      
+      "scale": 1.15
     },
     "floor_top": {
       "seamless": true,
-      "size": 128,
-      
+      "size": 128
     },
     "floor_side": {
       "seamless": true,
-      "size": 128,
-      
+      "size": 128
     }
   }
 }
