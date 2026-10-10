@@ -1,5 +1,6 @@
 {
   "source": "art/source/ui.png",
+  "recolor": "leather",
   "scale": 0.5,
   "alpha": "soft",
   "label_band": 0.2,
@@ -40,6 +41,27 @@
   "overrides": {
     "monster_hp": {
       "keep": "split"
+    },
+    "fill_red": {
+      "recolor": null
+    },
+    "fill_blue": {
+      "recolor": null
+    },
+    "fill_gold": {
+      "recolor": null
+    },
+    "icon_attack": {
+      "recolor": null
+    },
+    "icon_dawn_slash": {
+      "recolor": null
+    },
+    "icon_dawnshard": {
+      "recolor": null
+    },
+    "cursor": {
+      "recolor": null
     }
   }
 }

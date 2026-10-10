@@ -37,7 +37,7 @@ const HINT_H := 22.0
 ## Spaces between the caret and a box's placeholder hint (see set_hint).
 const HINT_ROOM := "  "
 ## How tall the map-name banner is drawn.
-const BANNER_H := 68.0
+const BANNER_H := 56.0
 ## Brighter and darker tints for hover and pressed states of art that has only one state.
 const LIT := Color(1.25, 1.18, 1.05)
 const PRESSED := Color(0.85, 0.8, 0.75)
@@ -213,6 +213,7 @@ static func style_button(b: Button) -> void:
 	b.add_theme_stylebox_override("pressed", box("button_pressed", 16, 14))
 	for state in ["font_color", "font_hover_color", "font_focus_color", "font_pressed_color"]:
 		b.add_theme_color_override(state, Palette.INK)
+	add_motion(b)
 
 ## A tab button (toggle_mode, in a ButtonGroup) from the settings sheet: muted purple, raised
 ## gold when chosen. `icon` (a texture name) shows left of the text.
@@ -376,7 +377,23 @@ static func menu_button(text: String, min_size := Vector2(150, 48), font_size :=
 	b.add_theme_stylebox_override("disabled", _tinted(normal, Color(0.7, 0.65, 0.7, 0.7)))
 	for state in ["font_color", "font_hover_color", "font_focus_color", "font_pressed_color"]:
 		b.add_theme_color_override(state, Palette.INK)
+	add_motion(b)
 	return b
+
+## Buttons swell a little under the mouse and squash when pressed.
+const HOVER_GROW := 1.03
+const PRESS_SQUASH := Vector2(1.04, 0.92)
+const MOTION_TIME := 0.08
+
+## Gives `b` the hover swell and press squash (drawn only: its layout size doesn't change).
+static func add_motion(b: BaseButton) -> void:
+	var to := func(target: Vector2) -> void:
+		b.pivot_offset = b.size / 2.0
+		b.create_tween().tween_property(b, "scale", target, MOTION_TIME).set_trans(Tween.TRANS_SINE)
+	b.mouse_entered.connect(func() -> void: if not b.disabled: to.call(Vector2.ONE * HOVER_GROW))
+	b.mouse_exited.connect(func() -> void: to.call(Vector2.ONE))
+	b.button_down.connect(func() -> void: to.call(PRESS_SQUASH))
+	b.button_up.connect(func() -> void: to.call(Vector2.ONE * (HOVER_GROW if b.is_hovered() else 1.0)))
 
 ## A style brightened, for hover and focus.
 static func lit(sb: StyleBoxTexture) -> StyleBoxTexture:
@@ -396,12 +413,22 @@ static func use_cursor() -> void:
 	Input.set_custom_mouse_cursor(tex("cursor"), Input.CURSOR_ARROW, Vector2(14, 6))
 
 ## A bar: the frame texture with its fill drawn into the groove. `pos` is the frame's top left.
-static func draw_bar(ci: CanvasItem, frame: String, fill: String, pos: Vector2, fraction: float, scale := 1.0, text := "") -> void:
+## `trail` (above `fraction`) shows a pale chunk of what was just lost, and `flash` (0-1)
+## lights the fill up, for bars that animate (TDStatusBar).
+static func draw_bar(ci: CanvasItem, frame: String, fill: String, pos: Vector2, fraction: float, scale := 1.0, text := "", trail := 0.0, flash := 0.0) -> void:
 	var ft := tex(frame)
 	ci.draw_texture_rect(ft, Rect2(pos, ft.get_size() * scale), false)
 	var g: Rect2 = GROOVES[frame]
 	var groove := Rect2(pos + g.position * scale, g.size * scale)
+	if trail > fraction:
+		var from := groove.size.x * clampf(fraction, 0.0, 1.0)
+		var to := groove.size.x * clampf(trail, 0.0, 1.0)
+		DrawUtil.round_rect(ci, Rect2(groove.position.x + maxf(0.0, from - 4.0), groove.position.y + 1.0, to - from + 4.0, groove.size.y - 2.0),
+			groove.size.y / 2.0 - 1.0, Color(Palette.MUTED, 0.85))
 	draw_bar_fill(ci, fill, groove, fraction, scale)
+	if flash > 0.0 and fraction > 0.0:
+		DrawUtil.round_rect(ci, Rect2(groove.position, Vector2(groove.size.x * clampf(fraction, 0.0, 1.0), groove.size.y)),
+			groove.size.y / 2.0, Color(1.0, 0.95, 0.75, 0.6 * flash))
 	if text != "":
 		DrawUtil.text(ci, Game.ui_font, groove.position + Vector2(groove.size.x / 2.0, groove.size.y - 4.0 * scale),
 			text, int(12 * scale), Palette.MIST, 0, 4, Color(0.1, 0.05, 0.15, 0.9))
@@ -524,12 +551,12 @@ static func draw_hint(ci: CanvasItem, bottom_center: Vector2, text: String) -> v
 
 ## The parchment banner with a map's name, faded by `alpha`.
 static func draw_banner(ci: CanvasItem, center: Vector2, text: String, alpha: float) -> void:
-	var w := DrawUtil.text_width(Game.num_font, text, 34) + 140
+	var w := DrawUtil.text_width(Game.num_font, text, 28) + 120
 	ci.draw_set_transform(Vector2.ZERO)
 	var sb := box("area_banner", 34, 18)
 	sb.modulate_color = Color(1, 1, 1, alpha)
 	sb.draw(ci.get_canvas_item(), Rect2(center.x - w / 2.0, center.y - BANNER_H / 2.0, w, BANNER_H))
-	DrawUtil.text(ci, Game.num_font, center + Vector2(0, 12), text, 34, Color("5a3414", alpha), 0, 0)
+	DrawUtil.text(ci, Game.num_font, center + Vector2(0, 10), text, 28, Color("5a3414", alpha), 0, 0)
 
 static func wrap_text(font: Font, text: String, size: int, max_w: float) -> PackedStringArray:
 	var out := PackedStringArray()

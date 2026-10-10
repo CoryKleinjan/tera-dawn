@@ -3,9 +3,10 @@ extends RefCounted
 ## Shared colours for the UI, effects and server messages. Use these instead of writing a
 ## colour by hand, so a colour means the same thing everywhere.
 
-# Base colours.
-const NIGHT := Color("1b1230")
-const PLUM := Color("4b3570")
+# Base colours: the travel leather-and-parchment UI (dark oiled leather, tan leather, brass,
+# parchment cream), with the dawn's sun and ember for highlights.
+const NIGHT := Color("1f140c")
+const PLUM := Color("5c3b22")
 const SUN := Color("ffd166")
 const EMBER := Color("ff7a59")
 const MIST := Color("fff3e4")
@@ -14,7 +15,7 @@ const MP := Color("5aa9ff")
 
 # What a colour means.
 ## Secondary text: labels, descriptions, "level 12".
-const MUTED := Color("c9b8d9")
+const MUTED := Color("d8c4a6")
 ## Good news: a requirement met, a quest ready, a success.
 const GOOD := Color("8cf0a6")
 ## Bad news: unaffordable, unmet, a failure.
@@ -27,8 +28,8 @@ const INFO := Color("8cc6ff")
 const INK := Color("3b2208")
 ## Secondary text on paper.
 const INK_SOFT := Color("7a5634")
-## The gold trim on buttons and frames.
-const GOLD_TRIM := Color("e9b44c")
+## The brass trim on buttons and frames.
+const GOLD_TRIM := Color("d4a759")
 ## Hover and selection highlight; use with HILITE_ALPHA.
 const HILITE := Color(1, 0.85, 0.45)
 const HILITE_ALPHA := 0.18

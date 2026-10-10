@@ -19,6 +19,9 @@ const TAB_TEXT_SHARE := 0.68
 const ROW_ALPHA := 0.4
 const ROW_RADIUS := 6.0
 const PLUS_SIZE := 20.0
+## Opening: the window grows from OPEN_SCALE to full size and fades in over OPEN_TIME seconds.
+const OPEN_TIME := 0.12
+const OPEN_SCALE := 0.94
 
 var hud: TDHud
 var title := ""
@@ -31,21 +34,42 @@ var _tab_rects: Array[Rect2] = []
 var _tab_labels: Array = []
 ## The buttons drawn this frame and what they do: [Rect2, Callable].
 var _buttons: Array = []
+## 0 when the window has just opened, 1 once it has finished growing in.
+var _open_t := 1.0
 
 func _init(window_title: String, window_size: Vector2) -> void:
 	title = window_title
 	size = window_size
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	visible = false
+	visibility_changed.connect(func() -> void:
+		if visible:
+			_open_t = 0.0
+			_apply_open())
 
 func _ready() -> void:
 	mouse_exited.connect(func() -> void:
 		_hover = Vector2(-1, -1)
 		hud.tooltip.clear(self))
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if visible:
+		if _open_t < 1.0:
+			_open_t = minf(1.0, _open_t + delta / OPEN_TIME)
+			_apply_open()
 		queue_redraw()
+
+## Skips the opening animation (and anything else still settling, in subclasses).
+func settle() -> void:
+	_open_t = 1.0
+	_apply_open()
+	queue_redraw()
+
+func _apply_open() -> void:
+	var k := ease(_open_t, 0.4)  # fast at first, gentle at the end
+	pivot_offset = size / 2.0
+	scale = Vector2.ONE * lerpf(OPEN_SCALE, 1.0, k)
+	modulate.a = k
 
 func toggle() -> void:
 	visible = not visible
@@ -72,12 +96,14 @@ func _close_rect() -> Rect2:
 func _gui_input(event: InputEvent) -> void:
 	var mb := event as InputEventMouseButton
 	if mb and mb.pressed:
+		settle()  # a window still growing in would move under the mouse
 		raise()
 		if mb.button_index == MOUSE_BUTTON_LEFT and _close_rect().has_point(mb.position):
 			toggle()
 		elif mb.button_index == MOUSE_BUTTON_LEFT and mb.position.y < TITLE_H:
 			_dragging = true
-			_drag_from = mb.position
+			# in the parent's space, so a window still growing in drags without a jump
+			_drag_from = mb.global_position - position
 		elif not (mb.button_index == MOUSE_BUTTON_LEFT and _press_button(mb.position)):
 			_click(mb.position, mb.button_index, mb.double_click)
 		accept_event()
@@ -88,7 +114,7 @@ func _gui_input(event: InputEvent) -> void:
 		_hover = mm.position
 		if _dragging:
 			var view := get_viewport_rect().size
-			position = (position + mm.position - _drag_from).clamp(Vector2.ZERO, view - size)
+			position = (mm.global_position - _drag_from).clamp(Vector2.ZERO, view - size)
 		_hovered(mm.position)
 
 ## Draws the window's contents. Override.

@@ -77,6 +77,7 @@ func step() -> void:
 func _ready() -> void:
 	rig = SpriteRig.new()
 	rig.setup(TDPlayer.HERO_FRAMES, null, TDStage.TEXEL * TDPlayer.HERO_SCALE, 40.0)
+	rig.add_light(TDPlayer.LIGHT, TDPlayer.LIGHT_ENERGY, 48.0)
 	add_child(rig)
 	companion = TDCompanion.new()
 	add_child(companion)
@@ -87,7 +88,8 @@ func _process(_delta: float) -> void:
 	rig.visible = known
 	var climbing := flags & SnapshotFlags.PLAYER_CLIMBING != 0
 	var airborne := climbing or fainted() or world.layout.ground_below(position) - position.y > 200.0
-	rig.place(position + Vector2(0, -companion.seat_lift()), TDStage.Z_OTHER_PLAYER, NAN if airborne else world.layout.ground_below(position))
+	var at := world.drawn(self)
+	rig.place(at + Vector2(0, -companion.seat_lift()), TDStage.Z_OTHER_PLAYER, NAN if airborne else world.layout.ground_below(position))
 	rig.play(&"faint" if fainted() else animation, _swing)
 	_swing = false
 	rig.face(1 if climbing else face)
@@ -97,7 +99,7 @@ func _process(_delta: float) -> void:
 	companion.visible = known
 	companion.set_chair(chair)
 	companion.set_pet(pet, position)
-	companion.follow(position, face, TDStage.Z_OTHER_PLAYER, world.layout.ground_below(position))
+	companion.follow(at, face, TDStage.Z_OTHER_PLAYER, world.layout.ground_below(position))
 
 ## Their name tag (and guild) under their feet, put in `tags` for the overlay to draw.
 func draw_tag(tags: TDNameTags, at: Vector2) -> void:

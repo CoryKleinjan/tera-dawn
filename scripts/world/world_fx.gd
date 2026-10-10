@@ -19,6 +19,7 @@ func show_skill(peer: int, skill: SkillDef, at: Vector2, face: int, lines: Array
 		(who as TDAvatar).play_skill(skill)
 		add_effect(skill.effect, at + Vector2(0, -40), face)
 	var views := world.mobs()
+	var mine := who == world.player
 	var from := at + Vector2(face * 20, -42)
 	if skill.projectile and lines.is_empty():
 		# nothing in range: it flies off and fades
@@ -30,26 +31,64 @@ func show_skill(peer: int, skill: SkillDef, at: Vector2, face: int, lines: Array
 			continue
 		var hits: Array = line[1]
 		if skill.projectile == null:
-			_show_hits(skill, m, hits, face)
+			_show_hits(skill, m, hits, face, mine)
 			continue
 		# each hit lands with its own projectile
 		for i in hits.size():
 			m.incoming += 1
 			var land := func() -> void:
 				m.incoming -= 1
-				_show_hits(skill, m, [hits[i]], face, i)
+				_show_hits(skill, m, [hits[i]], face, mine, i)
 			world.fx_layer.add_child(TDProjectile.create(world, skill.projectile, from, Vector2.ZERO, i * 7, m, land))
 
+## Hit-stop: how many ticks a blow freezes the monster (and your swing), plain and critical.
+const HIT_STOP := 3
+const CRIT_STOP := 6
+
 ## Damage numbers and hit effects for `hits` on monster `m` (`first` stacks numbers above
-## earlier ones).
-func _show_hits(skill: SkillDef, m: TDMob, hits: Array, face: int, first := 0) -> void:
+## earlier ones). Your own hits also get hit-stop, and crits a little screen shake.
+func _show_hits(skill: SkillDef, m: TDMob, hits: Array, face: int, mine: bool, first := 0) -> void:
 	var mid := m.body_position() + Vector2(0, -m.def.size.y / 2.0)
+	var crit := false
+	var landed := false
 	for i in hits.size():
 		var kind: String = hits[i][1]
 		add_number(m.body_position() + Vector2(0, -m.def.size.y - 10 - (first + i) * 30), hits[i][0], kind)
+		crit = crit or kind == "crit"
+		landed = landed or kind != "miss"
 		if kind == "crit":
 			add_effect(Content.effect(&"critical"), mid, face)
+	if not landed:
+		return
+	var stop := (CRIT_STOP if crit else HIT_STOP) if mine else 0
+	m.hit_react(face, stop)
+	if mine:
+		world.player.hit_stop(stop)
+		if crit:
+			world.shake(0.35)
+	burst(mid, m.def.aura_color if m.def.aura_color.a > 0.0 else Color(1.9, 1.5, 0.9), 8 if crit else 4, 0.6)
 	add_effect(skill.hit_effect, mid, face)
+
+## A quick spray of glowing sparks at a spot (hits, deaths, pickups). Colours may be HDR.
+func burst(at: Vector2, col: Color, amount: int, speed := 1.0) -> void:
+	var p := TDStage.particles(col, amount, 0.16)
+	p.one_shot = true
+	p.explosiveness = 0.95
+	p.lifetime = 0.6
+	p.spread = 180.0
+	p.direction = Vector3.UP
+	p.gravity = Vector3(0, -6.0, 0)
+	p.initial_velocity_min = 2.0 * speed
+	p.initial_velocity_max = 4.5 * speed
+	p.scale_amount_min = 0.5
+	p.scale_amount_max = 1.2
+	var fade := Gradient.new()
+	fade.set_color(1, Color(1, 1, 1, 0))
+	p.color_ramp = fade
+	p.position = TDStage.to3d(at, TDStage.Z_EFFECT)
+	world.stage.map_root.add_child(p)
+	p.emitting = true
+	p.finished.connect(p.queue_free)
 
 ## Monster `index` fired its shot at the point `aim`.
 func show_mob_shot(index: int, aim: Vector2) -> void:
@@ -66,7 +105,22 @@ func show_mob_death(index: int) -> void:
 	if index < views.size():
 		var m := views[index]
 		m.kill()
-		add_effect(Content.effect(&"monster_poof"), m.body_position() + Vector2(0, -m.def.size.y / 2.0), 1)
+		var mid := m.body_position() + Vector2(0, -m.def.size.y / 2.0)
+		add_effect(Content.effect(&"monster_poof"), mid, 1)
+		# a pop of dawn-motes (the monster's spark going free) and a brief flash of light
+		burst(mid, Color(2.2, 1.8, 1.0), 16 if m.def.boss else 10, 1.3 if m.def.boss else 1.0)
+		flash(mid, Color(1.0, 0.85, 0.6), 4.0 if m.def.boss else 2.0)
+		if m.def.boss:
+			world.shake(0.8)
+
+## A brief flash of light at a spot that fades by itself.
+func flash(at: Vector2, col: Color, energy: float) -> void:
+	var l := TDStage.light(col, energy, 5.0)
+	l.position = TDStage.to3d(at, TDStage.Z_EFFECT + 0.6)
+	world.stage.map_root.add_child(l)
+	var tw := l.create_tween()
+	tw.tween_property(l, "light_energy", 0.0, 0.35)
+	tw.tween_callback(l.queue_free)
 
 func show_level_up(peer: int, _level: int) -> void:
 	var who := world.actor(peer)
@@ -85,7 +139,7 @@ func show_gain(kind: StringName, amount: int) -> void:
 			young += 1
 	var n := TDFloatText.new()
 	n.world = world
-	n.position = world.player.position + Vector2(0, -96 - young * 14)
+	n.position = world.player.position + Vector2(0, -108 - young * 14)
 	n.value = amount
 	n.kind = String(kind)
 	world.fx_layer.add_child(n)

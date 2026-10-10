@@ -7,8 +7,12 @@ extends Node2D
 ## basic attack; the quickslot keys use whatever skill or item is on that slot.
 
 const HERO_FRAMES := preload("res://assets/animations/hero.tres")
-## The hero's size against everyone else's art (TDStage.TEXEL): players are drawn a bit smaller.
-const HERO_SCALE := 0.8
+## The hero's size against everyone else's art (TDStage.TEXEL). Early monsters are drawn
+## smaller than the hero, so the player is the clear focus.
+const HERO_SCALE := 1.0
+## A soft warm light that travels with every player, so heroes stand out from the scenery.
+const LIGHT := Color(1.0, 0.86, 0.68)
+const LIGHT_ENERGY := 0.55
 const Z := TDStage.Z_PLAYER
 ## Ticks between telling the server where you are (60 / 3 = 20 a second).
 const REPORT_EVERY := 3
@@ -66,6 +70,7 @@ var _reported := &""  # the animation the server last heard about
 var _swing := false   # restart the attack animation on the next frame
 var speech := ""      # the last thing said in map chat, shown in a bubble
 var speech_t := 0
+var _stop_t := 0      # hit-stop ticks left (the swing holds still, see hit_stop)
 ## The chair you're sitting on (the server said so), or empty. Moving gets you up.
 var sitting: StringName = &""
 
@@ -76,6 +81,7 @@ var companion: TDCompanion
 func _ready() -> void:
 	rig = SpriteRig.new()
 	rig.setup(HERO_FRAMES, null, TDStage.TEXEL * HERO_SCALE, 40.0)
+	rig.add_light(LIGHT, LIGHT_ENERGY, 48.0)
 	add_child(rig)
 	companion = TDCompanion.new()
 	add_child(companion)
@@ -117,8 +123,15 @@ func sit(chair_id: StringName) -> void:
 		vel = Vector2.ZERO
 		action_t = 0
 
-## The server says a monster hit you: blink, and get knocked away from it.
+## Your blow landed: hold the swing still for a few ticks (hit-stop) so it reads as a hit.
+func hit_stop(ticks: int) -> void:
+	if ticks > 0:
+		_stop_t = maxi(_stop_t, ticks)
+		rig.freeze(true)
+
+## The server says a monster hit you: blink, get knocked away from it, and the screen jolts.
 func knock_back(from_x: float) -> void:
+	world.shake(0.3)
 	inv = SimPlayer.HURT_INV
 	if not is_climbing():
 		vel = Vector2(-KNOCKBACK.x if position.x < from_x else KNOCKBACK.x, KNOCKBACK.y)
@@ -136,6 +149,10 @@ func level_up() -> void:
 # ---------- per tick ----------
 
 func step() -> void:
+	if _stop_t > 0:
+		_stop_t -= 1
+		if _stop_t == 0:
+			rig.freeze(false)
 	if speech_t > 0:
 		speech_t -= 1
 	if down:
@@ -238,6 +255,7 @@ func _interact() -> bool:
 	if world.layout.portal_at(position):
 		_report()
 		Net.ask(&"req_portal")
+		world.stage.fade_to(1.0)  # the next map fades back in (TDWorld.enter_map)
 		return true
 	var npc := world.npc_near(position)
 	if npc:
@@ -355,14 +373,15 @@ func _move() -> void:
 func _process(_delta: float) -> void:
 	if rig == null or world == null or world.map == null:
 		return
-	rig.place(position + Vector2(0, -companion.seat_lift()), Z, NAN if is_climbing() or fainted() or not _over_ground() else _ground_y())
+	var at := world.drawn(self)
+	rig.place(at + Vector2(0, -companion.seat_lift()), Z, NAN if is_climbing() or fainted() or not _over_ground() else _ground_y())
 	rig.play(_animation(), _swing)
 	_swing = false
 	rig.face(1 if is_climbing() else face)
 	rig.set_opacity(0.0 if inv > 0 and inv % 8 < 4 and not fainted() else 1.0)
 	companion.set_chair(sitting)
 	companion.set_pet(Game.me.pet, position)
-	companion.follow(position, face, Z, _ground_y())
+	companion.follow(at, face, Z, _ground_y())
 
 func _animation() -> StringName:
 	if fainted():
@@ -374,7 +393,7 @@ func _animation() -> StringName:
 		return climb.style.climb_animation if moving and climb.style else &"climb_idle"
 	if action_t > 0:
 		return action_anim
-	if inv > SimPlayer.HURT_INV - HURT_POSE_TICKS: # just got hit (see knock_back)
+	if inv > SimPlayer.HURT_INV - HURT_POSE_TICKS and inv <= SimPlayer.HURT_INV: # just got hit (see knock_back)
 		return &"hurt"
 	if not on_ground:
 		return &"jump" if vel.y < 0 else &"fall"

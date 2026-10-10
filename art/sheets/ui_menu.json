@@ -1,5 +1,6 @@
 {
   "source": "art/source/ui_menu.png",
+  "recolor": "leather",
   "out_dir": "assets/sprites/ui/menu",
   "scale": 0.5,
   "alpha": "soft",
@@ -52,6 +53,21 @@
     },
     "menu_panel": {
       "scale": 1.0
+    },
+    "icon_controls": {
+      "recolor": null
+    },
+    "icon_audio": {
+      "recolor": null
+    },
+    "icon_video": {
+      "recolor": null
+    },
+    "icon_mute": {
+      "recolor": null
+    },
+    "icon_reset": {
+      "recolor": null
     }
   }
 }

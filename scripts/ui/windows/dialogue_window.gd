@@ -23,13 +23,35 @@ const LINE_H := 17.0
 const ROW_H := 26.0
 ## Option rows: pixels per texel of the option row art.
 const ROW_SCALE := 0.6
+## The speaker's name over their speech: its size, and the room it takes above the text.
+const NAME_SIZE := 18
+const NAME_H := 26.0
+## How fast their words appear, in characters a second. A click on the speech, Space or
+## Enter shows the rest at once.
+const TYPE_SPEED := 70.0
+## The portrait is drawn this much bigger than the niche's opening, standing on its floor,
+## so the bust leans out of the frame.
+const BUST_SCALE := 1.18
+## The small picture before an option, by what it does (UI art names; "" draws none).
+const ICON_NEW_QUEST := "hud/quest_available"
+const ICON_QUEST_READY := "hud/quest_ready"
+const ICON_QUEST_ACTIVE := "hud/quest_in_progress"
+const ICON_SHOP := "icon_dawnshard"
+const ICON_CHAT := "hud/speech_bubble"
+const ICON_SIZE := 18.0
 ## Walk this far from the NPC and the window closes.
 const REACH := 170.0
 
 var npc: TDNpc
-var text := ""
-## [label, Callable] for each thing the player can pick.
+## What they're saying; setting it starts the typewriter over.
+var text := "":
+	set(v):
+		text = v
+		_shown = 0.0
+## [label, Callable, icon] for each thing the player can pick (icon optional, see ICON_*).
 var options: Array = []
+## How many characters of `text` are showing.
+var _shown := 0.0
 var _line := -1
 
 func _init() -> void:
@@ -80,17 +102,17 @@ func _options() -> Array:
 	if def.market:
 		out.append(["Set up a shop", func() -> void:
 			visible = false
-			hud.windows["player_shop"].setup()])
+			hud.windows["player_shop"].setup(), ICON_SHOP])
 	if not def.travel.is_empty():
 		out.append(["Travel", _travel_list])
 	if not _jobs_offered().is_empty():
 		out.append(["Choose a job", _job_list])
 	if not def.lines.is_empty():
-		out.append(["Chat", func() -> void: text = _next_line()])
+		out.append(["Chat", func() -> void: text = _next_line(), ICON_CHAT])
 	if def.shop:
 		out.append(["Open shop", func() -> void:
 			visible = false
-			hud.open_shop(npc)])
+			hud.open_shop(npc), ICON_SHOP])
 	out.append(["Goodbye", func() -> void: visible = false])
 	return out
 
@@ -107,18 +129,18 @@ func _quest_options() -> Array:
 					["Complete the quest", func() -> void:
 						Net.ask(&"req_quest_complete", [npc.def.id, q.id])
 						_main_page(greeting)],
-					["Not yet", func() -> void: _main_page(greeting)]])])
+					["Not yet", func() -> void: _main_page(greeting)]]), ICON_QUEST_READY])
 		elif status == QuestLog.Status.AVAILABLE and q.giver == npc.def.id:
 			out.append(["New quest: %s" % q.title, func() -> void:
 				_page("%s%s\n\n%s\nReward: %s" % [q.offer_text, _job_paths(q), _objective_list(q), q.describe_rewards()], [
 					["Accept", func() -> void:
 						Net.ask(&"req_quest_accept", [npc.def.id, q.id])
 						_main_page(greeting)],
-					["Decline", func() -> void: _main_page(greeting)]])])
+					["Decline", func() -> void: _main_page(greeting)]]), ICON_NEW_QUEST])
 		elif status in [QuestLog.Status.ACTIVE, QuestLog.Status.READY]:
 			out.append(["In progress: %s" % q.title, func() -> void:
 				_page("%s%s\n\n%s" % [q.progress_text, _job_paths(q), _objective_list(q)], [
-					["Back", func() -> void: _main_page(greeting)]])])
+					["Back", func() -> void: _main_page(greeting)]]), ICON_QUEST_ACTIVE])
 	return out
 
 ## Founding a guild: the price, then a name.
@@ -229,7 +251,7 @@ func _option_rect(i: int) -> Rect2:
 func _frame_rect() -> Rect2:
 	var w := size.x - FRAME_X * 2
 	var natural := UiSkin.tex(UiSkin.DIALOGUE_FRAME[0]).get_height() * FRAME_SCALE
-	var text_h := _lines().size() * LINE_H + (TEXT_TOP + TEXT_BOTTOM) * FRAME_SCALE
+	var text_h := NAME_H + _lines().size() * LINE_H + (TEXT_TOP + TEXT_BOTTOM) * FRAME_SCALE
 	return Rect2(FRAME_X, TITLE_H + 2, w, maxf(natural, text_h))
 
 ## What they say, wrapped to the frame ("" is a paragraph break).
@@ -250,8 +272,22 @@ func _fit() -> void:
 		# a longer page grows the window down: keep it above the status bar
 		position.y = clampf(position.y, 0.0, maxf(0.0, TDWorld.VIEW.y - TDStatusBar.HEIGHT - 2 - h))
 
+## Whether their words are still appearing.
+func typing() -> bool:
+	return _shown < text.length()
+
+## Shows the rest of what they're saying at once.
+func finish_typing() -> void:
+	_shown = text.length()
+
+func settle() -> void:
+	super()
+	finish_typing()
+
 func _process(delta: float) -> void:
 	super(delta)
+	if visible and typing():
+		_shown = minf(_shown + TYPE_SPEED * delta, text.length())
 	if visible and (npc == null or not is_instance_valid(npc) or hud.world.player.position.distance_to(npc.position) > REACH):
 		visible = false
 	if visible:
@@ -259,8 +295,13 @@ func _process(delta: float) -> void:
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	var k := event as InputEventKey
-	if visible and k and k.pressed and not k.echo and k.keycode >= KEY_1 and k.keycode <= KEY_9:
+	if not (visible and k and k.pressed and not k.echo):
+		return
+	if k.keycode >= KEY_1 and k.keycode <= KEY_9:
 		choose(k.keycode - KEY_1)
+		get_viewport().set_input_as_handled()
+	elif typing() and k.keycode in [KEY_SPACE, KEY_ENTER, KEY_KP_ENTER]:
+		finish_typing()
 		get_viewport().set_input_as_handled()
 
 func _draw_body() -> void:
@@ -273,25 +314,44 @@ func _draw_body() -> void:
 	niche.end = Vector2(frame.position.x + NICHE.z * FRAME_SCALE, frame.end.y - NICHE.w * FRAME_SCALE)
 	var tex := npc.portrait()
 	if tex:
-		draw_texture_rect(tex, fit(tex, niche.grow(-4)), false, npc.def.tint)
-	if npc.def.title != "":
-		DrawUtil.text(self, Game.ui_font, Vector2(niche.get_center().x, niche.end.y - 4), npc.def.title, 11, Palette.MIST, 0, 4, Palette.NIGHT)
-	# what they say
+		var bust := fit(tex, niche.grow(-4))
+		var big := bust.size * BUST_SCALE
+		bust = Rect2(Vector2(bust.get_center().x - big.x / 2.0, bust.end.y - big.y), big)
+		draw_texture_rect(tex, bust, false, npc.def.tint)
+	# their name, then what they say, appearing a little at a time
+	var left := frame.position.x + TEXT_LEFT * FRAME_SCALE
 	var y := frame.position.y + TEXT_TOP * FRAME_SCALE
+	DrawUtil.text(self, Game.num_font, Vector2(left, y), npc.def.display_name, NAME_SIZE, Palette.SUN, 1, 4, Palette.NIGHT)
+	var name_w := DrawUtil.text_width(Game.num_font, npc.def.display_name, NAME_SIZE)
+	if npc.def.title != "":
+		DrawUtil.text(self, Game.ui_font, Vector2(left + name_w + 10, y - 1), npc.def.title, 12, Palette.MUTED, 1, 3, Palette.NIGHT)
+		name_w += 10 + DrawUtil.text_width(Game.ui_font, npc.def.title, 12)
+	draw_line(Vector2(left, y + 7), Vector2(left + name_w + 24, y + 7), Color(Palette.GOLD_TRIM, 0.6), 1.5)
+	y += NAME_H
+	var left_to_show := int(_shown)
 	for l in _lines():
-		if l != "":
-			DrawUtil.text(self, Game.ui_font, Vector2(frame.position.x + TEXT_LEFT * FRAME_SCALE, y), l, 13, Palette.MIST, 1, 3, Palette.NIGHT)
+		if l != "" and left_to_show > 0:
+			DrawUtil.text(self, Game.ui_font, Vector2(left, y), l.left(left_to_show), 13, Palette.MIST, 1, 3, Palette.NIGHT)
+		left_to_show -= l.length() + 1
 		y += LINE_H if l != "" else LINE_H / 2.0
 	# what you can do
 	for i in options.size():
 		var r := _option_rect(i)
 		var hot := r.has_point(_hover)
 		UiSkin.draw_box(self, UiSkin.option_row(hot), r, ROW_SCALE)
-		DrawUtil.text(self, Game.ui_font, Vector2(r.position.x + 16, r.end.y - 7), "%d.  %s" % [i + 1, options[i][0]], 14,
+		var x := r.position.x + 16
+		var icon: String = options[i][2] if options[i].size() > 2 else ""
+		if icon != "":
+			UiSkin.draw_icon(self, icon, Rect2(x - 4, r.get_center().y - ICON_SIZE / 2.0, ICON_SIZE, ICON_SIZE))
+			x += ICON_SIZE
+		DrawUtil.text(self, Game.ui_font, Vector2(x, r.end.y - 7), "%d.  %s" % [i + 1, options[i][0]], 14,
 			Palette.INK if hot else Palette.SUN, 1, 0 if hot else 3, Palette.NIGHT)
 
 func _click(at: Vector2, button: int, _double: bool) -> void:
 	if button != MOUSE_BUTTON_LEFT:
+		return
+	if typing() and _frame_rect().has_point(at):
+		finish_typing()
 		return
 	for i in options.size():
 		if _option_rect(i).has_point(at):

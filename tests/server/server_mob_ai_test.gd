@@ -147,6 +147,22 @@ func test_stepping_out_of_the_way_dodges_a_shot() -> void:
 	check(m.shots.is_empty(), "the shot landed")
 	check_eq(p.character.health.hp, p.character.max_hp(), "missed her")
 
+func test_a_shooter_winds_up_before_it_fires_only_with_someone_to_aim_at() -> void:
+	var map := h.field_with([ServerHarness.spawn(_shooter())])
+	var m := map.mobs[0]
+	m.position.x = 500.0
+	m.shot_t = SimMob.WINDUP_TICKS + 5
+	h.step(1)
+	check(int(m.snapshot()[4]) & SnapshotFlags.MOB_WINDUP == 0, "nobody in range: no wind-up")
+	h.join(2, "Ann", ServerHarness.FIELD, 300.0)
+	h.step(3)
+	check(int(m.snapshot()[4]) & SnapshotFlags.MOB_WINDUP == 0, "not yet: the shot is still a while off")
+	h.step(2)
+	check(int(m.snapshot()[4]) & SnapshotFlags.MOB_WINDUP != 0, "winding up for the last ticks before the shot")
+	h.step(SimMob.WINDUP_TICKS)
+	check_eq(h.count(2, &"ev_mob_shot"), 1, "then it fires")
+	check(int(m.snapshot()[4]) & SnapshotFlags.MOB_WINDUP == 0, "and the wind-up ends")
+
 func test_shooters_ignore_players_out_of_range() -> void:
 	var map := h.field_with([ServerHarness.spawn(_shooter())])
 	var m := map.mobs[0]

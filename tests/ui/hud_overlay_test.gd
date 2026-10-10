@@ -130,17 +130,23 @@ func test_overlay_draws_everything_it_can_show() -> void:
 	check(await ui.redraw(ui.hud.overlay), "the overlay draws the achievement")
 	check(await ui.redraw(ui.hud.banners), "the toast draws")
 
-func test_achievement_toast_sits_under_the_map_banner() -> void:
-	var overlay := ui.hud.overlay
+func test_popups_take_turns_and_wait_for_the_map_banner() -> void:
+	var banners := ui.hud.banners
+	ui.world.started = true
 	ui.world.show_banner("A Banner")
 	ui.world.show_achievement("first_hunt")
-	check(await ui.redraw(overlay), "the overlay draws the banner")
-	check(ui.hud.banners.toast_top() >= overlay.banner_bottom(), "the toast's top %s is under the banner's bottom %s" % [ui.hud.banners.toast_top(), overlay.banner_bottom()])
-	overlay.banner_y = TDOverlay.BANNER_Y_BOSS
-	check(ui.hud.banners.toast_top() >= overlay.banner_bottom(), "and under it when a boss bar pushes the banner down")
-	ui.hud.banners.ribbon("dialogue/job_advance_banner", "Warrior")
-	ui.hud.banners.clear()
-	check(ui.hud.banners.toasts.is_empty() and ui.hud.banners.ribbons.is_empty(), "clear() takes every toast and ribbon down")
+	banners.ribbon("dialogue/job_advance_banner", "Warrior")
+	banners._process(0.0)
+	check_eq([banners._ribbon_t, banners._toast_t], [0, 0], "nothing counts down while the map banner shows")
+	ui.world.banner_t = 0
+	banners._process(0.0)
+	check_eq([banners._ribbon_t, banners._toast_t], [1, 0], "then the ribbon shows first and the toast waits its turn")
+	for i in TDBanners.RIBBON_TICKS:
+		banners._process(0.0)
+	check(banners.ribbons.is_empty() and banners._toast_t > 0, "the toast shows once the ribbon is done")
+	check(await ui.redraw(banners), "the toast draws")
+	banners.clear()
+	check(banners.toasts.is_empty() and banners.ribbons.is_empty(), "clear() takes every toast and ribbon down")
 
 func test_overlay_draws_the_faint_screen() -> void:
 	ui.world.player.faint()
@@ -290,9 +296,19 @@ func test_play_solo_and_host_have_their_own_row() -> void:
 	check(offline_row != account_row, "a row of their own")
 	var rows := hud.start_panel.get_children()
 	var at := rows.find(offline_row)
-	check(at > rows.find(account_row), "under the account boxes")
-	var label := rows[at - 1] as Label
-	check(label != null and label.text == "Or play without an account", "with a small label over them")
+	check(at == 0 and at < rows.find(account_row), "first, over the account boxes")
+	var label := rows[at + 1] as Label
+	check(label != null and label.text == "Or play online", "with a small label under them for the rest")
+
+func test_the_title_opens_on_a_small_menu_and_play_shows_the_choices() -> void:
+	ui.hud.show_title(false)
+	check(ui.hud.main_menu.visible and not ui.hud.play_page.visible, "Play, Settings and Quit first")
+	ui.hud.menu_play_button.pressed.emit()
+	check(ui.hud.play_page.visible and not ui.hud.main_menu.visible, "Play shows solo, host and online")
+	await ui.press("pause")
+	check(ui.hud.main_menu.visible and not ui.hud.play_page.visible, "Esc goes back to the menu")
+	Net.refused.emit(TDLobby.WRONG_LOGIN)
+	check(ui.hud.play_page.visible and ui.hud.message.visible, "a refusal shows on the Play page, by the boxes")
 
 func test_title_boxes_keep_their_hints_clear_of_the_caret() -> void:
 	for f: LineEdit in [ui.hud.address_field, ui.hud.username_field, ui.hud.password_field, ui.hud.confirm_field]:

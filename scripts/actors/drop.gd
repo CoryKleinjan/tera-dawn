@@ -15,6 +15,13 @@ var spin := randf() * 6.0
 var gem: Sprite3D
 var glow: Sprite3D
 var shine: OmniLight3D
+## Ticks since it landed (for the little bounce), -1 while it's still flying.
+var _landed_t := -1
+## Who picked it up: it flies to them before it goes (see collect).
+var _collector: Node2D
+var _collect_t := 0
+## Ticks a picked-up drop takes to fly to whoever took it.
+const COLLECT_TICKS := 12
 
 ## Builds one from the server's [id, item id, amount, flight, age].
 static func create(w: TDWorld, snap: Array) -> TDDrop:
@@ -31,8 +38,24 @@ static func create(w: TDWorld, snap: Array) -> TDDrop:
 func step() -> void:
 	t += 1
 	spin += 0.1
+	if _collector:
+		_collect_t += 1
+		position = position.lerp(_collector.position + Vector2(0, -34), 0.35)
+		if _collect_t >= COLLECT_TICKS:
+			world.fx.burst(position, Color(item.glow_color, 1.0) * 2.0, 6, 0.6)
+			world.add_effect(item.pickup_effect, position + Vector2(0, 18), 1)
+			queue_free()
+		return
 	flight.step()
 	position = flight.position
+	if flight.resting() and _landed_t < 0:
+		_landed_t = 0
+	elif _landed_t >= 0:
+		_landed_t += 1
+
+## Someone picked it up: fly into their hands, then sparkle and go.
+func collect(by: Node2D) -> void:
+	_collector = by
 
 func _ready() -> void:
 	var big := item.pile_texture != null and amount >= item.pile_amount
@@ -49,10 +72,16 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if gem == null:
 		return
-	var resting := flight.resting()
+	var resting := flight.resting() and _collector == null
 	var hover := sin(spin * 2.0) * 2.0 if resting else 0.0
-	var p := TDStage.to3d(position + Vector2(0, -2 - hover), TDStage.Z_DROP)
+	# one small bounce when it lands
+	if _landed_t >= 0 and _landed_t < 20:
+		hover += absf(sin(_landed_t * 0.32)) * 9.0 * (1.0 - _landed_t / 20.0)
+	var p := TDStage.to3d(world.drawn(self) + Vector2(0, -2 - hover), TDStage.Z_DROP)
 	gem.position = p
+	# spins like a tossed coin while flying, then settles facing you
+	gem.rotation.y = spin * 3.0 if not resting else lerp_angle(gem.rotation.y, 0.0, 0.2)
+	gem.scale = Vector3.ONE * (1.0 - _collect_t / float(COLLECT_TICKS) * 0.6)
 	if item.world_frames.size() > 1 and not (item.pile_texture and amount >= item.pile_amount):
 		gem.texture = item.world_texture(int(spin * 0.8))
 	glow.position = p + Vector3(0, 0.4, -0.02)

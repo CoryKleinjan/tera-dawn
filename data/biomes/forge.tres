@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BiomeDef" load_steps=53 format=3]
+[gd_resource type="Resource" script_class="BiomeDef" load_steps=54 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/biome_def.gd" id="1_biome_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/emberreach_top.png" id="2_ground_top"]
@@ -184,6 +184,16 @@ chance = 0.6
 texel = 1.25
 shaded = true
 
+[sub_resource type="Resource" id="Resource_town"]
+script = ExtResource("20_decor_def")
+textures = Array[Texture2D]([ExtResource("31_building_large"), ExtResource("32_building_small"), ExtResource("31_building_large"), ExtResource("33_signature_prop")])
+spacing = Vector2(170.0, 300.0)
+depth = Vector2(-8.8, -7.0)
+scale = Vector2(1.0, 1.25)
+chance = 0.95
+texel = 1.25
+shaded = true
+
 [resource]
 script = ExtResource("1_biome_def")
 id = &"forge"
@@ -194,6 +204,10 @@ sky_horizon = Color(1.0, 0.6902, 0.3765, 1.0)
 sun_color = Color(1.0, 0.7019607843137254, 0.3607843137254902, 1.0)
 light_color = Color(1.0, 0.8157, 0.6275, 1.0)
 light_energy = 1.7
+cloud_shadows = false
+grade_tint = Color(1.0, 0.96, 0.92, 1)
+grade_lift = Color(0.4, 0.18, 0.2, 1)
+grade_lift_amount = 0.3
 ambient_color = Color(0.47843137254901963, 0.22745098039215686, 0.35294117647058826, 1.0)
 ambient_energy = 0.45
 fog_color = Color(0.7529, 0.3529, 0.1882, 1.0)
@@ -211,6 +225,9 @@ edge_grass = Array[Texture2D]([ExtResource("8_tall_grass")])
 backdrop = Array[ExtResource("9_backdrop_layer_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7")])
 ground_decor = Array[ExtResource("20_decor_def")]([SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12")])
 platform_decor = Array[ExtResource("20_decor_def")]([SubResource("Resource_13")])
+town_decor = Array[ExtResource("20_decor_def")]([SubResource("Resource_town")])
+chimney_smoke = true
+smoke_color = Color(0.45, 0.4, 0.42, 0.4)
 lantern = ExtResource("34_lantern_lit")
 signpost = ExtResource("35_signpost")
 portal_frames = Array[Texture2D]([ExtResource("36_portal_1"), ExtResource("37_portal_2"), ExtResource("38_portal_3"), ExtResource("39_portal_4")])

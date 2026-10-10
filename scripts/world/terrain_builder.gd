@@ -43,7 +43,7 @@ func _build_floor(map: MapDef, ground: Platform, biome: BiomeDef) -> void:
 	for i in 3:
 		sts[i].generate_tangents()
 		sts[i].commit(mesh)
-		mesh.surface_set_material(i, _tile_material(textures[i]))
+		mesh.surface_set_material(i, _top_material(biome) if i == 0 else _tile_material(textures[i]))
 	var mi := MeshInstance3D.new()
 	mi.name = "Floor"
 	mi.mesh = mesh
@@ -52,8 +52,28 @@ func _build_floor(map: MapDef, ground: Platform, biome: BiomeDef) -> void:
 func _tile_material(texture: Texture2D) -> StandardMaterial3D:
 	var m := StandardMaterial3D.new()
 	m.albedo_texture = texture
-	m.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST_WITH_MIPMAPS_ANISOTROPIC
+	m.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
 	m.roughness = 1.0
+	return m
+
+static var _clouds: NoiseTexture2D
+
+## The floor's top, with cloud shadows drifting over it when the biome has them.
+func _top_material(biome: BiomeDef) -> ShaderMaterial:
+	if _clouds == null:
+		var noise := FastNoiseLite.new()
+		noise.frequency = 0.012
+		noise.fractal_octaves = 3
+		_clouds = NoiseTexture2D.new()
+		_clouds.width = 256
+		_clouds.height = 256
+		_clouds.seamless = true
+		_clouds.noise = noise
+	var m := ShaderMaterial.new()
+	m.shader = preload("res://shaders/ground.gdshader")
+	m.set_shader_parameter(&"albedo_tex", biome.ground_top)
+	m.set_shader_parameter(&"clouds", _clouds)
+	m.set_shader_parameter(&"cloud_strength", 0.22 if biome.cloud_shadows else 0.0)
 	return m
 
 func _quad(st: SurfaceTool, pts: Array, uvs: Array, n: Vector3) -> void:
@@ -93,30 +113,48 @@ func _block(sts: Array[SurfaceTool], x0: float, x1: float, y_top: float, y_bot: 
 # ---------- painted platform fronts ----------
 
 ## Lines up the biome's left end, repeating middle and right end along a platform's front,
-## so floating platforms look like the tileset's grassy rock ledges.
+## so floating platforms look like the tileset's grassy rock ledges. Long platforms mix in
+## the second middle piece (and mirror pieces at random) so the pattern doesn't show, and
+## the underside pieces hang below when the biome has them.
 func _platform_front(pl: Platform, biome: BiomeDef) -> void:
 	if biome.platform_middle == null:
 		return
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash(Vector2(pl.x, pl.y))
 	var texel := biome.platform_texel
 	var z := TDStage.LAND_FRONT
 	var left := biome.platform_left
 	var right := biome.platform_right
-	var mid := biome.platform_middle
 	var lw := left.get_width() * texel
 	var rw := right.get_width() * texel
-	var mw := mid.get_width() * texel
+	var mw := biome.platform_middle.get_width() * texel
 	var x0 := pl.x - 8.0
 	var x1 := pl.x + pl.w + 8.0
 	# middle pieces first (behind the ends), overlapping a little so the seams hide in the grass
 	var x := x0 + lw * 0.6
 	var n := 0
 	while x < x1 - rw * 0.6:
+		var mid := biome.platform_middle
+		if biome.platform_middle_alt and rng.randf() < 0.4:
+			mid = biome.platform_middle_alt
 		var s := _front_piece(mid, Vector2(x + mw / 2.0, pl.y), texel, z - 0.005 * (n % 2))
-		s.flip_h = n % 2 == 1
+		s.flip_h = rng.randf() < 0.5
+		_under_piece(biome.platform_under_middle, s, texel)
 		x += mw * 0.8
 		n += 1
-	_front_piece(left, Vector2(x0 + lw / 2.0, pl.y), texel, z + 0.01)
-	_front_piece(right, Vector2(x1 - rw / 2.0, pl.y), texel, z + 0.01)
+	_under_piece(biome.platform_under_left, _front_piece(left, Vector2(x0 + lw / 2.0, pl.y), texel, z + 0.01), texel)
+	_under_piece(biome.platform_under_right, _front_piece(right, Vector2(x1 - rw / 2.0, pl.y), texel, z + 0.01), texel)
+
+## Hangs an underside piece (roots, rock) from the bottom of a skin piece, just behind it.
+func _under_piece(tex: Texture2D, skin: Sprite3D, texel: float) -> void:
+	if tex == null:
+		return
+	var s := TDStage.sprite(tex, texel)
+	s.offset = Vector2(0, -tex.get_height() / 2.0)  # origin at the top centre
+	var bottom := skin.texture.get_height() * texel - 4.0  # skin.position is its top edge; overlap a little
+	s.position = skin.position + Vector3(0, -bottom / TDStage.PX, -0.01)
+	s.flip_h = skin.flip_h
+	root.add_child(s)
 
 ## The game-y span a platform's painted skin covers: x is the top of its grass, y the bottom.
 static func skin_span(d: PlatformDef, biome: BiomeDef) -> Vector2:
