@@ -8,5 +8,5 @@ id = &"lanternfall"
 display_name = "Lanternfall"
 description = "A city of lanterns and alleys, where the Thieves gather."
 color = Color(0.878431, 0.713725, 0.290196, 1.0)
-label_pos = Vector2(700.0, 548.0)
+label_pos = Vector2(680.0, 578.0)
 level_text = "Lv. 10-35"

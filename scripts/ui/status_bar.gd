@@ -9,8 +9,13 @@ const WINDOW_BUTTON := 30.0
 const WINDOW_BUTTON_GAP := 2.0
 ## The EXP bar is drawn a little smaller than its art so the window buttons fit beside it.
 const EXP_SCALE := 0.85
+## The level badge: its left edge (just inside the bar art's gold end cap, BAR_CAP texels
+## wide) and its scale.
+const BAR_CAP := 22.0
+const BADGE_X := BAR_CAP + 2.0
+const BADGE_SCALE := 0.68
 ## The HP and MP bars: where HP starts, their scale, and the space between bars.
-const HP_X := 74.0
+const HP_X := 76.0
 const BAR_SCALE := 0.95
 const BAR_GAP := 6.0
 ## UI sheet art for each window's button. A window without art yet gets a round button
@@ -62,11 +67,11 @@ func trail(bar: String) -> float:
 
 func _draw() -> void:
 	var w := size.x
-	UiSkin.box("hud_bar", 22, 10).draw(get_canvas_item(), Rect2(0, 0, w, HEIGHT))
+	UiSkin.box("hud_bar", BAR_CAP, 10).draw(get_canvas_item(), Rect2(0, 0, w, HEIGHT))
 	# level badge
 	var badge := UiSkin.tex("level_badge")
-	var bs := 0.72
-	var bpos := Vector2(14, (HEIGHT - badge.get_height() * bs) / 2.0)
+	var bs := BADGE_SCALE
+	var bpos := Vector2(BADGE_X, (HEIGHT - badge.get_height() * bs) / 2.0)
 	draw_texture_rect(badge, Rect2(bpos, badge.get_size() * bs), false)
 	var c := bpos + badge.get_size() * bs / 2.0
 	DrawUtil.text(self, Game.ui_font, c + Vector2(0, -5), "Lv", 9, Palette.MIST)

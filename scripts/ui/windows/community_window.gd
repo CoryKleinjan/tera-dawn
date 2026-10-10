@@ -42,7 +42,7 @@ func _draw_body() -> void:
 
 func _bottom_button(label: String, action: Callable, slot := 0) -> void:
 	var w := (size.x - PAD * 2 - 8) / 2.0
-	var r := Rect2(PAD + slot * (w + 8), size.y - 44, w, 32)
+	var r := bottom_button_rect(PAD + slot * (w + 8), w)
 	add_button(r, label, action)
 
 func _draw_buddies() -> void:
