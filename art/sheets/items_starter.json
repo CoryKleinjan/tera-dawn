@@ -1,7 +1,7 @@
 {
   "source": "art/source/items_starter.png",
   "out_dir": "assets/sprites/items",
-  "scale": 0.175,
+  "scale": 0.157,
   "alpha": "hard",
   "keep": "largest",
   "cells": [

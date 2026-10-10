@@ -164,7 +164,8 @@ func test_long_hair_hangs_behind_and_a_hat_swaps_the_hair() -> void:
 	a.hair = &"hair_long"
 	var hair := Content.look(&"hair_long")
 	var bare := Paperdoll.dress(_look(a))
-	check(_layer(bare, hair.back_frames).behind, "the back of long hair is behind him")
+	# hair drawn in every pose holds what hangs behind his head; a one-piece style has a back layer
+	check(hair.back_frames == null or _layer(bare, hair.back_frames).behind, "the back of long hair is behind him")
 	check(not _layer(bare, hair.frames).behind, "the front over him")
 	var hatted := Paperdoll.dress(_look(a, {"hat": "iron_helm"}))
 	check(_layer(hatted, hair.hat_frames) != null, "the under-hat hair")
@@ -206,7 +207,8 @@ func test_a_weapon_is_a_layer_in_his_fist() -> void:
 	var held := Paperdoll.weapon_layers(bow)
 	var front := _layer(d, held["front"])
 	check(front != null and not front.behind, "the bow is drawn over him")
-	check(Color(front.tint, 1.0).is_equal_approx(bow.worn_color()), "in the bow's colour")
+	check(Color(front.tint, 1.0).is_equal_approx(held["tint"]), "in the bow's colour, or its own picture's")
+	check(held["tint"] == Color.WHITE or Color(held["tint"], 1.0).is_equal_approx(bow.worn_color()), "the bow's colour tints the template")
 	check(held.has("behind") == false or _layer(d, held["behind"]).behind, "a behind twin goes under him")
 	check(d.overlays.is_empty(), "no stand-in for a weapon")
 

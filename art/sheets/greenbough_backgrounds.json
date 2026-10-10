@@ -1,111 +1,153 @@
 {
-  "source": "art/source/greenbough_area.png",
-  "region": [
-    1002,
-    0,
-    1536,
-    1024
-  ],
+  "source": "art/source/greenbough_backgrounds.png",
   "scale": 0.5,
   "label_band": 0.3,
-  "inset": 5,
+  "inset": 4,
   "out_dir": "assets/sprites/backgrounds/greenbough",
   "cells": [
     [
-      "far"
-    ],
-    [
+      "far",
       ""
     ],
     [
-      "mid"
-    ],
-    [
+      "mid",
       ""
     ],
     [
-      "near"
-    ],
-    [
+      "near",
       ""
     ],
     [
-      "clouds"
-    ],
-    [
-      ""
-    ],
-    [
-      "landmark"
-    ],
-    [
-      ""
-    ],
-    [
+      "clouds",
       "sky_body"
     ],
     [
+      "landmark",
+      "motes",
       ""
-    ],
-    [
-      "motes"
     ]
   ],
   "grid": {
     "rows": [
-      0,
-      143,
-      145,
-      284,
-      286,
-      429,
-      431,
-      570,
-      572,
-      755,
-      762,
-      887,
-      889,
-      1022
+      20,
+      209,
+      412,
+      599,
+      804,
+      1011
     ],
     "cols": [
-      0,
-      532
+      [
+        20,
+        1024,
+        1517
+      ],
+      [
+        20,
+        1024,
+        1517
+      ],
+      [
+        20,
+        1024,
+        1517
+      ],
+      [
+        20,
+        1024,
+        1517
+      ],
+      [
+        20,
+        509,
+        1024,
+        1517
+      ]
     ]
   },
   "overrides": {
     "far": {
-      "fix": "painted_sky",
-      "extend_bottom": 160
+      "extend_bottom": 160,
+      "blank": [
+        [
+          0,
+          0,
+          185,
+          44
+        ]
+      ],
+      "scale": 0.3442
     },
     "mid": {
-      "fix": "painted_sky",
-      "extend_bottom": 160
+      "extend_bottom": 160,
+      "blank": [
+        [
+          0,
+          0,
+          185,
+          44
+        ]
+      ],
+      "scale": 0.3196
     },
     "near": {
-      "fix": "painted_sky",
-      "extend_bottom": 160
+      "extend_bottom": 160,
+      "blank": [
+        [
+          0,
+          0,
+          185,
+          44
+        ]
+      ],
+      "scale": 0.3278
     },
     "landmark": {
-      "fix": "painted_sky",
-      "extend_bottom": 160
+      "extend_bottom": 160,
+      "blank": [
+        [
+          0,
+          0,
+          185,
+          44
+        ]
+      ],
+      "scale": 0.4301
     },
     "clouds": {
-      "keep": "split"
+      "keep": "split",
+      "blank": [
+        [
+          0,
+          0,
+          185,
+          44
+        ]
+      ],
+      "scale": 0.4305
     },
     "sky_body": {
       "fix": "sky_body",
       "alpha": "soft",
       "crop": [
-        249,
-        21,
-        305,
-        77
-      ]
+        218,
+        61,
+        276,
+        119
+      ],
+      "scale": 0.4828
     },
     "motes": {
       "alpha": "soft",
-      "fix": "glow_backdrop"
+      "blank": [
+        [
+          0,
+          0,
+          185,
+          44
+        ]
+      ],
+      "scale": 0.3089
     }
   }
 }

@@ -257,6 +257,46 @@ def fix_glow_backdrop_holes(rgb, alpha, source=None):
     return rgb, alpha
 
 
+def fix_card_backdrop(rgb, alpha, source=None, pale=0.5):
+    """Icon sheets that draw each item on a framed card (a pastel card, a pale disc behind the
+    item, a dark frame with a dark label tab on its top edge): the frame and tab (dark, grey or
+    white pixels near the cell edge or in the top band) and every pastel or magenta pixel reachable from the
+    cell border are background, so the item's own outline stops the fill."""
+    h, w = alpha.shape
+    r, g, b = source[..., 0], source[..., 1], source[..., 2]
+    yy, xx = np.mgrid[0:h, 0:w]
+    edge = np.minimum(np.minimum(yy, h - 1 - yy), np.minimum(xx, w - 1 - xx))
+    ring = (edge < max(6, 0.06 * min(h, w))) | (yy < 0.16 * h)
+    border = [(0, x) for x in range(w)] + [(h - 1, x) for x in range(w)] + \
+             [(y, 0) for y in range(h)] + [(y, w - 1) for y in range(h)]
+    neutral = (source.max(2) < 0.6) | (source.max(2) - source.min(2) < 0.1)  # dark frame, grey and white tab
+    frame = flood((neutral & ring) | (alpha < 0.5), border)
+    pastel = (r > 0.78) & (source.min(2) > pale) & (r >= g) & (b > g * 0.52)
+    outside = flood(frame | pastel, border)
+    return rgb, np.where(outside, 0.0, alpha)
+
+
+def fix_card_flat(rgb, alpha, source=None):
+    """card_backdrop for an item that runs out of the cell (a blade under the label tab, cut
+    off with `crop`), where a fill from the border would run into it: the card and its disc
+    are the cell's two commonest colours, so a fill from the border through only those colours
+    (and the blend between them) stops at the item's own lighter shades."""
+    h, w = alpha.shape
+    px = (source * 255.0)[alpha > 0.5].reshape(-1, 3)
+    vals, counts = np.unique((px // 6).astype(int), axis=0, return_counts=True)
+    a, b = (vals[np.argsort(counts)[-2:]] * 6 + 3).astype(float)
+    c = source * 255.0
+    d = b - a
+    t = np.clip(((c - a) * d).sum(2) / max((d * d).sum(), 1.0), 0, 1)
+    off = np.linalg.norm(c - (a + t[..., None] * d), axis=2)  # distance from the card-to-disc blend
+    yy, xx = np.mgrid[0:h, 0:w]
+    edge = np.minimum(np.minimum(yy, h - 1 - yy), np.minimum(xx, w - 1 - xx))
+    border = [(0, x) for x in range(w)] + [(h - 1, x) for x in range(w)] + \
+             [(y, 0) for y in range(h)] + [(y, w - 1) for y in range(h)]
+    frame = ((source.max(2) < 0.6) & (edge < max(6, 0.06 * min(h, w)))) | (alpha < 0.5)
+    return rgb, np.where(flood(frame | (off < 16), border), 0.0, alpha)
+
+
 def fix_painted_sky(rgb, alpha, source=None):
     """Backdrop strips painted over their own sky (the area sheets): the sky is the smooth
     gradient reachable from the top of the cell in small colour steps (starting under a magenta
@@ -309,6 +349,33 @@ def fix_sky_body(rgb, alpha, source=None):
 FIXES = {"hero_attack_arc": fix_hero_attack_arc, "glow_backdrop": fix_glow_backdrop,
          "glow_backdrop_holes": fix_glow_backdrop_holes,
          "painted_sky": fix_painted_sky, "sky_body": fix_sky_body}
+def fix_round_top(rgb, alpha, source=None, band=28):
+    """A round button whose rim runs under the cell's label box (blanked with `blank`): the
+    top rows of the rim are rebuilt as a mirror of its bottom rows."""
+    h, w = alpha.shape
+    solid = alpha > 0.5
+    rows = np.nonzero(solid.any(1))[0]
+    cols = np.nonzero(solid.any(0))[0]
+    if not len(rows):
+        return rgb, alpha
+    d = cols.max() - cols.min() + 1
+    bottom = rows.max()
+    top = max(0, bottom - d + 1)
+    cy = (top + bottom) / 2.0
+    rgb, alpha = rgb.copy(), alpha.copy()
+    alpha[:top] = 0
+    for y in range(top, min(band, int(cy))):
+        src = int(round(2 * cy - y))
+        if 0 <= src < h:
+            rgb[y], alpha[y] = rgb[src], alpha[src]
+    return rgb, alpha
+
+
+FIXES["round_top"] = fix_round_top
+FIXES["card_backdrop"] = fix_card_backdrop
+FIXES["card_flat"] = fix_card_flat
+# card_backdrop that also clears a pink glow painted round the item (deeper pinks pass too)
+FIXES["card_glow"] = lambda rgb, alpha, source=None: fix_card_backdrop(rgb, alpha, source, pale=0.2)
 
 
 # ---------- palette changes ----------
@@ -362,7 +429,29 @@ def recolor_leather(rgb):
     return np.clip(rgb * (1 - blend) + out * blend, 0, 1)
 
 
-RECOLORS = {"leather": recolor_leather}
+def recolor_dark_parchment(rgb):
+    """The leather sheets (part 7) fill their panels with pale parchment, but the game writes
+    light text inside its panels: the big pale areas (not stitching or rivets) become dark oiled
+    leather, keeping the parchment's mottling."""
+    lo, hi = rgb.min(-1), rgb.max(-1)
+    cream = (lo > 0.45) & (rgb[..., 0] >= rgb[..., 2]) & (hi - lo < 0.45)
+    lab, n = label(cream)
+    big = np.zeros_like(cream)
+    for i in range(1, n + 1):
+        m = lab == i
+        if m.sum() > cream.size * 0.03:
+            big |= m
+    if not big.any():
+        return rgb
+    v = rgb.mean(-1)
+    shade = np.clip(v / np.median(v[big]), 0.7, 1.3)[..., None]
+    dark = np.array([0.30, 0.225, 0.16]) * shade
+    out = rgb.copy()
+    out[big] = dark[big]
+    return np.clip(out, 0, 1)
+
+
+RECOLORS = {"leather": recolor_leather, "dark_parchment": recolor_dark_parchment}
 
 
 def shrink(rgb, alpha, scale):
@@ -425,6 +514,8 @@ def cut_cell(rgb_full, bg, box, opts):
         ys, xs = np.nonzero(rows.min(2) > 200)
         if len(ys):
             cell[:ys.max() + 2, max(0, xs.min() - 1):xs.max() + 2] = bg
+    for px0, py0, px1, py1, dx in opts.get("patch", []):  # paint a rect with a copy from dx pixels across (an ornament that would stretch)
+        cell[py0:py1, px0:px1] = cell[py0:py1, px0 + dx:px1 + dx].copy()
     for bx0, by0, bx1, by1 in opts.get("blank", []):  # paint rects over with background (a label beside the art)
         cell[by0:by1, bx0:bx1] = bg
     if "crop" in opts:  # [x0, y0, x1, y1] inside the cell, in source pixels
@@ -467,7 +558,7 @@ def cut_cell(rgb_full, bg, box, opts):
     if opts["keep"] == "split":
         biggest = max(m.sum() for m in groups)
         groups = [m for m in groups if m.sum() >= biggest * 0.15]  # crumbs, not pieces
-        groups.sort(key=lambda m: np.nonzero(m)[1].min())
+        groups.sort(key=lambda m: np.nonzero(m)[0 if opts.get("split_by") == "y" else 1].min())  # left to right, or top to bottom
     out = []
     for g in groups:
         reach = dilate(g, 2)  # soft edges around the piece
@@ -622,6 +713,9 @@ def process(manifest_path, grid_only=False, sprites=None):
             for i, p in enumerate(pieces):
                 pname = f"{name}_{i + 1}" if opts["keep"] == "split" else name
                 im = p["image"]
+                if opts.get("flip"):  # drawn facing the other way (a slash arc that should open toward the hero)
+                    im = im.transpose(Image.FLIP_LEFT_RIGHT)
+                    p["x"] = p["cell_w"] - p["x"] - im.width
                 if opts.get("seamless"):
                     side = opts.get("size", min(im.size))
                     im = make_seamless(im.convert("RGB").crop((0, 0, min(im.size), min(im.size)))

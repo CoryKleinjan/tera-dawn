@@ -1,110 +1,159 @@
 {
-  "source": "art/source/driftcove_area.png",
-  "region": [
-    1041,
-    43,
-    1536,
-    1024
-  ],
+  "source": "art/source/driftcove_backgrounds.png",
   "scale": 0.5,
   "label_band": 0.3,
-  "inset": 5,
+  "inset": 4,
   "out_dir": "assets/sprites/backgrounds/driftcove",
   "cells": [
     [
       "far"
     ],
     [
-      ""
-    ],
-    [
       "mid"
-    ],
-    [
-      ""
     ],
     [
       "near"
     ],
     [
-      ""
-    ],
-    [
       "clouds"
-    ],
-    [
-      ""
     ],
     [
       "landmark"
     ],
     [
-      ""
-    ],
-    [
-      "sky_body"
-    ],
-    [
-      ""
-    ],
-    [
+      "",
+      "sky_body",
       "motes"
     ]
   ],
   "grid": {
     "rows": [
       0,
-      141,
-      147,
-      291,
-      297,
-      438,
-      443,
-      561,
-      566,
-      735,
-      740,
-      857,
-      862,
-      981
+      168,
+      335,
+      502,
+      672,
+      847,
+      1030
     ],
     "cols": [
-      0,
-      495
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        509,
+        1027,
+        1536
+      ]
     ]
   },
   "overrides": {
     "far": {
-      "fix": "painted_sky",
-      "extend_bottom": 160
+      "extend_bottom": 160,
+      "blank": [
+        [
+          0,
+          0,
+          200,
+          42
+        ]
+      ],
+      "scale": 0.4015
     },
     "mid": {
-      "fix": "painted_sky",
-      "extend_bottom": 160
+      "extend_bottom": 160,
+      "blank": [
+        [
+          0,
+          0,
+          200,
+          42
+        ]
+      ],
+      "scale": 0.4062
     },
     "near": {
-      "fix": "painted_sky",
-      "extend_bottom": 160
+      "extend_bottom": 160,
+      "blank": [
+        [
+          0,
+          0,
+          200,
+          42
+        ]
+      ],
+      "scale": 0.4125
     },
     "landmark": {
-      "fix": "painted_sky",
-      "extend_bottom": 160
+      "extend_bottom": 160,
+      "blank": [
+        [
+          0,
+          0,
+          200,
+          42
+        ]
+      ],
+      "scale": 0.464
     },
     "clouds": {
-      "keep": "split"
+      "keep": "split",
+      "blank": [
+        [
+          0,
+          0,
+          200,
+          42
+        ],
+        [
+          420,
+          72,
+          655,
+          128
+        ]
+      ],
+      "scale": 0.3498
     },
     "sky_body": {
       "fix": "sky_body",
       "alpha": "soft",
       "crop": [
-        216,
-        27,
-        276,
-        87
-      ]
+        160,
+        15,
+        320,
+        140
+      ],
+      "scale": 0.2419
     },
     "motes": {
-      "alpha": "soft"
+      "alpha": "soft",
+      "blank": [
+        [
+          0,
+          0,
+          200,
+          42
+        ]
+      ],
+      "scale": 0.3638
     }
   }
 }

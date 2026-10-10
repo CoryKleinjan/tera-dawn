@@ -1,0 +1,52 @@
+{
+  "source": "art/source/ui_old.png",
+  "recolor": "leather",
+  "scale": 0.5,
+  "alpha": "soft",
+  "label_band": 0.2,
+  "grid_threshold": 0.7,
+  "out_dir": "assets/sprites/ui",
+  "cells": [
+    [
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "icon_attack",
+      "icon_dawn_slash",
+      "",
+      "icon_dawnshard"
+    ],
+    [
+      "",
+      "",
+      "",
+      ""
+    ]
+  ],
+  "overrides": {
+    "icon_attack": {
+      "recolor": null
+    },
+    "icon_dawn_slash": {
+      "recolor": null
+    },
+    "icon_dawnshard": {
+      "recolor": null
+    }
+  }
+}

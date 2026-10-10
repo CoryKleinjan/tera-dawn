@@ -1,11 +1,5 @@
 {
-  "source": "art/source/ground_textures_2.png",
-  "region": [
-    768,
-    0,
-    1536,
-    1024
-  ],
+  "source": "art/source/ground_textures_3.png",
   "scale": 0.3,
   "label_band": 0.1,
   "grid_threshold": 0.95,
@@ -31,61 +25,106 @@
     "lumewood_top": {
       "seamless": true,
       "size": 128,
-      "keep": "largest"
+      "crop": [
+        108,
+        42,
+        403,
+        337
+      ]
     },
     "lumewood_side": {
       "seamless": true,
       "size": 128,
-      "keep": "largest"
+      "crop": [
+        108,
+        42,
+        403,
+        337
+      ]
     },
     "lumewood_soil": {
       "seamless": true,
       "size": 128,
-      "keep": "largest"
+      "crop": [
+        108,
+        42,
+        403,
+        337
+      ]
     },
     "emberreach_top": {
       "seamless": true,
       "size": 128,
-      "keep": "largest"
+      "crop": [
+        108,
+        42,
+        403,
+        337
+      ]
     },
     "emberreach_side": {
       "seamless": true,
       "size": 128,
-      "keep": "largest"
+      "crop": [
+        108,
+        42,
+        403,
+        337
+      ]
     },
     "emberreach_soil": {
       "seamless": true,
       "size": 128,
-      "keep": "largest"
+      "crop": [
+        108,
+        42,
+        403,
+        337
+      ]
     },
     "lanternfall_top": {
       "seamless": true,
       "size": 128,
-      "keep": "largest"
+      "crop": [
+        108,
+        42,
+        403,
+        337
+      ]
     },
     "lanternfall_side": {
       "seamless": true,
       "size": 128,
-      "keep": "largest"
+      "crop": [
+        108,
+        42,
+        403,
+        337
+      ]
     },
     "lanternfall_soil": {
       "seamless": true,
       "size": 128,
-      "keep": "largest"
+      "crop": [
+        108,
+        42,
+        403,
+        337
+      ]
     }
   },
   "grid": {
     "rows": [
-      77,
+      0,
       343,
-      657,
-      1000
+      687,
+      1030
     ],
     "cols": [
-      11,
-      260,
-      511,
-      761
+      0,
+      510,
+      1025,
+      1536
     ]
   }
 }

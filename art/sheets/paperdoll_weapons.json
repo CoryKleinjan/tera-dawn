@@ -3,14 +3,14 @@
   "grid": {
     "rows": [
       0,
-      440,
-      887
+      594,
+      1190
     ],
     "cols": [
       0,
-      442,
-      885,
-      1329,
+      441,
+      886,
+      1331,
       1774
     ]
   },
@@ -32,5 +32,29 @@
       "gun",
       ""
     ]
-  ]
+  ],
+  "inset": 12,
+  "overrides": {
+    "sword": {
+      "blank_top": 31
+    },
+    "bow": {
+      "blank_top": 31
+    },
+    "wand": {
+      "blank_top": 31
+    },
+    "staff": {
+      "blank_top": 31
+    },
+    "claw": {
+      "blank_top": 32
+    },
+    "knuckle": {
+      "blank_top": 32
+    },
+    "gun": {
+      "blank_top": 32
+    }
+  }
 }

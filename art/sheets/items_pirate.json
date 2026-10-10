@@ -1,7 +1,7 @@
 {
   "source": "art/source/items_pirate.png",
   "out_dir": "assets/sprites/items",
-  "scale": 0.3,
+  "scale": 0.33,
   "alpha": "hard",
   "keep": "largest",
   "fix": "glow_backdrop",
@@ -55,5 +55,24 @@
     "leviathan_fist": {
       "fix": "glow_backdrop_holes"
     }
-  }
+  },
+  "grid": {
+    "rows": [
+      0,
+      258,
+      515,
+      772,
+      1030
+    ],
+    "cols": [
+      0,
+      256,
+      512,
+      768,
+      1024,
+      1280,
+      1536
+    ]
+  },
+  "inset": 6
 }

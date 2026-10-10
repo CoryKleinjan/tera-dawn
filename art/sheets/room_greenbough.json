@@ -1,23 +1,24 @@
 {
   "source": "art/source/room_greenbough.png",
   "out_dir": "assets/sprites/rooms/greenbough",
-  "scale": 0.45,
+  "scale": 0.416,
   "label_band": 0.2,
   "cells": [
     [
       "wall",
       "door",
-      "floor_top",
-      "floor_side"
+      ""
     ],
     [
       "counter",
       "shelf",
       "bookcase",
+      "",
       "table"
     ],
     [
       "hearth",
+      "",
       "rack",
       "lamp",
       "barrel"
@@ -25,15 +26,117 @@
   ],
   "overrides": {
     "wall": {
-      "scale": 1.15
+      "crop": [
+        77,
+        40,
+        503,
+        578
+      ],
+      "scale": 0.8182
     },
-    "floor_top": {
-      "seamless": true,
-      "size": 128
+    "door": {
+      "crop": [
+        0,
+        36,
+        582,
+        582
+      ],
+      "scale": 0.234
     },
-    "floor_side": {
-      "seamless": true,
-      "size": 128
+    "counter": {
+      "crop": [
+        0,
+        38,
+        576,
+        285
+      ],
+      "scale": 0.315
+    },
+    "shelf": {
+      "crop": [
+        0,
+        38,
+        286,
+        285
+      ],
+      "scale": 0.562
+    },
+    "bookcase": {
+      "crop": [
+        0,
+        38,
+        284,
+        285
+      ],
+      "scale": 0.4611
+    },
+    "table": {
+      "crop": [
+        0,
+        38,
+        281,
+        285
+      ],
+      "scale": 0.3558
+    },
+    "hearth": {
+      "crop": [
+        0,
+        39,
+        576,
+        287
+      ]
+    },
+    "lamp": {
+      "crop": [
+        0,
+        38,
+        287,
+        287
+      ],
+      "scale": 0.4579
+    },
+    "barrel": {
+      "crop": [
+        0,
+        39,
+        281,
+        287
+      ],
+      "scale": 0.1888
     }
-  }
+  },
+  "grid": {
+    "rows": [
+      0,
+      594,
+      891,
+      1190
+    ],
+    "cols": [
+      [
+        0,
+        588,
+        1182,
+        1774
+      ],
+      [
+        0,
+        588,
+        886,
+        1182,
+        1481,
+        1774
+      ],
+      [
+        0,
+        588,
+        886,
+        1182,
+        1481,
+        1774
+      ]
+    ]
+  },
+  "inset": 6
 }

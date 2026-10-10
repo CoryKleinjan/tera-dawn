@@ -8,5 +8,4 @@ script = ExtResource("1_building_def")
 id = &"dawnharbor_large"
 texture = ExtResource("2_large")
 height = 320.0
-door_x = 0.38
-chimney = Vector2(0.58, 0.8)
+door_x = 0.47

@@ -1,26 +1,5 @@
 {
-  "source": "art/source/mon_lumewood.png",
-  "region": [
-    772,
-    255,
-    1536,
-    496
-  ],
-  "grid": {
-    "rows": [
-      25,
-      131,
-      241
-    ],
-    "cols": [
-      0,
-      192,
-      381,
-      573,
-      764
-    ]
-  },
-  "scale": 0.492,
+  "source": "art/source/mon_prism_slime.png",
   "label_band": 0.2,
   "strip_labels": true,
   "save": false,
@@ -28,14 +7,23 @@
   "cells": [
     [
       "idle1",
+      "",
       "idle2",
+      "",
       "walk1",
-      "walk2"
+      "",
+      "walk2",
+      "",
+      "walk3"
     ],
     [
-      "walk3",
+      ""
+    ],
+    [
       "attack",
+      "",
       "hurt",
+      "",
       "defeated"
     ]
   ],
@@ -94,5 +82,73 @@
         }
       }
     }
-  }
+  },
+  "grid": {
+    "rows": [
+      51,
+      513,
+      517,
+      1026
+    ],
+    "cols": [
+      [
+        0,
+        267,
+        347,
+        612,
+        646,
+        885,
+        960,
+        1194,
+        1269,
+        1508
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        4,
+        439,
+        527,
+        921,
+        1037,
+        1520
+      ]
+    ]
+  },
+  "inset": 2,
+  "overrides": {
+    "attack": {
+      "blank": [
+        [
+          0,
+          4,
+          188,
+          45
+        ]
+      ]
+    },
+    "hurt": {
+      "blank": [
+        [
+          0,
+          4,
+          135,
+          45
+        ]
+      ]
+    },
+    "defeated": {
+      "blank": [
+        [
+          0,
+          4,
+          234,
+          45
+        ]
+      ]
+    }
+  },
+  "scale": 0.1428
 }

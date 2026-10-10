@@ -1,0 +1,51 @@
+{
+  "source": "art/source/ui_menu_old.png",
+  "recolor": "leather",
+  "out_dir": "assets/sprites/ui/menu",
+  "scale": 0.5,
+  "alpha": "soft",
+  "label_band": 0.2,
+  "grid_threshold": 0.7,
+  "cells": [
+    [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "keycap",
+      "keycap_listening",
+      "keycap_empty",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  ],
+  "overrides": {
+    "keycap_listening": {
+      "fix": "glow_backdrop"
+    }
+  }
+}

@@ -38,13 +38,33 @@ trims it.
 | `blank_top` | | Paint the top N rows of the cell with background, for labels that touch the art. |
 | `blank_label` | | Rows at the top of the cell holding a label drawn over the art: paints the box around the label's white letters with background. |
 | `blank` | | Rects `[[x0, y0, x1, y1], ...]` inside the cell to paint with background, for a label beside art that reaches the top. |
-| `keep` | `"all"` | `"largest"` keeps only the biggest piece; `"split"` saves each piece as `name_1`, `name_2`... |
+| `keep` | `"all"` | `"largest"` keeps only the biggest piece; `"split"` saves each piece as `name_1`, `name_2`... (left to right, or top to bottom with `"split_by": "y"`) |
 | `shadow` | `false` | Dark sheets: also remove the soft drop shadow under the sprite. |
 | `inset` | `3` | Pixels trimmed off every cell edge (the divider lines). |
 | `save` | `true` | `false` keeps cells only for animation sets. |
 | `grid_threshold` | `0.8` | How much of a row or column must be divider-coloured to count as a divider. |
 | `grid` | | Give the cells by hand when detection fails: `{"rows": [y0, y1, y2, ...], "cols": [x0, x1, ...]}` (edges between cells; `cols` can be one list per row). |
-| `overrides` | | Per-cell versions of any key above, plus `crop` `[x0, y0, x1, y1]`, `seamless` (tileable texture, with `size`), `extend_bottom` (pad a backdrop downward), `fix` (a named clean-up from `FIXES`) and `out_dir`. |
+| `overrides` | | Per-cell versions of any key above, plus `crop` `[x0, y0, x1, y1]`, `seamless` (tileable texture, with `size`), `extend_bottom` (pad a backdrop downward), `fix` (a named clean-up from `FIXES`), `recolor` (a palette change from `RECOLORS`), `patch` (`[[x0, y0, x1, y1, dx], ...]`: paint a rect with a copy from dx pixels across, to take out an ornament that would stretch in a 9-slice), `flip` (mirror it left to right) and `out_dir`. |
+
+## Clean-ups and palette changes
+
+`fix` names one of `FIXES` in `tools/art/slice_sheets.py`: `glow_backdrop` (and `_holes`) for the warm glow
+painted behind icons, `card_backdrop` for an item drawn on a framed pastel card or pale disc, `card_glow` (the same,
+also taking a pink glow round the item), `card_flat` (a card fill for an item that runs out of its cell, with
+`crop`), `round_top` (rebuilds the top of a round button whose rim ran under the label box, from its bottom),
+`painted_sky`, `sky_body` and `hero_attack_arc`. `recolor` names one of `RECOLORS`: `dark_parchment` turns the big
+pale parchment areas of the leather UI sheets (part 7) into dark leather, since the game writes light text in its
+panels; `leather` was the stand-in that recoloured the old purple UI.
+
+## The leather UI (art prompts part 7)
+
+`ui`, `ui_windows`, `ui_hud`, `ui_menu`, `ui_dialogue`, `ui_social`, `ui_book` and `ui_creator` cut the leather
+sheets. Cells that span two grid rows have their own manifest with a `region` (`ui_windows_frames`, `ui_menu_panel`,
+`ui_dialogue_rows`, `ui_book_rows`, `ui_creator_frame`). Pieces the leather sheets don't have, or that didn't suit,
+are still cut from the old sheet by a `<sheet>_old` manifest (`art/source/<sheet>_old.png`): the minimap dots and
+portal, the keycaps (light keys for dark letters), the three banners with their words painted in, and the attack and
+Dawnshard icons. Other sheets do the same: `items_parts_2_old` (ash veil, stalker fang), `skill_icons_old` (the thief
+skills), `projectiles_old` (mob wisp) and `skill_effects_old` (portal flash). `ui_map_icons`, `ui_controls_leather` and `ui_extras_leather` are for later (`save` false).
 
 ## Animation sets
 
@@ -81,9 +101,8 @@ has its own list in `art/sheets/paperdoll_body.json`.
 
 ## Picks between versions
 
-Two sheets came in two versions. The game uses `meadow_backgrounds_a` (crisper, clearer
-castle) and `ropes_props_b` (no label remnants, cleaner shards). The other versions still have
-manifests that cut into `art/build/`, which is ignored, so they can be compared or swapped in.
+`meadow_backgrounds` and `ropes_props` each came in two versions once; the repainted sheets
+replaced both, so only `meadow_backgrounds_a` and `ropes_props_b` are left.
 
 ## Item icons and window art
 
@@ -92,26 +111,37 @@ after the item ids, replacing the placeholders from `tools/art/make_item_placeho
 (which never overwrites a real icon). `elixir` and `mana_elixir` are art for future potions.
 `ui_windows` cuts the window frame, tabs, slots, buttons and tooltip into
 `assets/sprites/ui/`, which the game windows and the status bar's window buttons draw with.
-`item_slot_hover` isn't used: its glow kept a pink tint from the magenta key, so the windows
-brighten `item_slot` on hover instead.
+`item_slot_hover` isn't used: the windows brighten `item_slot` on hover instead.
 
 ## Monsters, NPCs, areas and the paperdoll (art prompts parts 1 to 3)
 
-- **Monster group sheets** (`mon_<area>`, `monsters_m1`) hold several monsters each. Every
-  monster has its own manifest named after its id, cutting its `region` of the group sheet
-  with `strip_labels` and writing `assets/sprites/monsters/<id>.png` and
-  `assets/animations/<id>.tres`. Labels drawn over big monsters are cleared with
-  `blank_label`. `anim_mossling` and `anim_sproutcap` are the picked Mossling and Sproutcap;
-  `sproutcap_extra` is unused.
+- **Monster sheets** (`mon_<id>.png`, `anim_<id>.png`, Gemini pass 1) hold one monster each.
+  Every monster has its own manifest named after its id, with a hand-measured `grid` (gap rows
+  and columns between cells are unnamed) and `strip_labels`, writing
+  `assets/sprites/monsters/<id>.png` and `assets/animations/<id>.tres`. Labels and divider
+  lines that touch the art are painted out with per-cell `blank` rects; `scale` keeps each
+  monster's idle height what it was before the swap. `anim_mossling` is still the older
+  sheet; `sproutcap_extra` is cut into `art/build/` only (unused).
 - **NPC sheets** (`npcs_<town>`) use a fixed `grid`; each NPC's `scale` override sets its
   height next to the hero, and its set writes `assets/animations/npc_<id>.tres` (idle).
-- **Area sheets** (`<area>_area`) are cut twice: `<area>_tileset` into
-  `assets/sprites/tiles/<area>/` and `<area>_backgrounds` into `backgrounds/<area>/`. The
-  painted skies use the `painted_sky` and `sky_body` fixes; glowing icons use `glow_backdrop`.
+- **Area sheets**: each area has `<area>_tileset.png`, cut by `<area>_tileset` into
+  `assets/sprites/tiles/<area>/` and by `<area>_buildings` into `buildings/<area>/`, and
+  `<area>_backgrounds.png`, cut by `<area>_backgrounds` into `backgrounds/<area>/`. Sheets that
+  came back on a darker magenta, with soft pink glows or with the sky painted behind a strip
+  were evened out first by `tools/art/clean_sheet.py` (it edits the source in place, so run it
+  on the original picture). The sun or moon uses `sky_body`; glowing icons use `glow_backdrop`.
+- **Rooms** (`room_<town>`) cut over the stand-ins from `tools/art/make_room_placeholders.py`;
+  a cell the sheet has no painting for (crate, plant, floor_soil, some floors) keeps its stand-in.
+  The back wall repeats sideways: its crop's last columns were cross-faded in the source toward
+  the columns just left of the crop. Floor cells stacked in one column have their own manifest
+  (`room_<town>_floor`, with a `region`).
+- **Not in the game yet**: `platform_pieces_<area>`, `climb_tops`, `dawnharbor_midground` and
+  `buildings_<town>` cut into `art/build/` only.
 - **Items, pets, projectiles** cut into `assets/sprites/items/`, `pets/` (and
   `assets/animations/pet_*.tres`) and `projectiles/`.
 - **The paperdoll**: `paperdoll_body` cuts the bare hero into the hero strip (`pad_top` leaves
-  room for hair). `paperdoll_hair`, `_faces`, `_layers` (cape, gloves, shields per frame) and
+  room for hair). `paperdoll_hair`, `_faces`, `_cape`, `_shield_round`, `_shield_kite` (one piece per pose; the kite
+  sheet has its own layout, so its `poses` names the cell each pose uses) and
   `_weapons` cut into `art/build/` only; `tools/art/paperdoll_layers.py` places those pieces
   on every body frame and writes the layers, the region map and the rig. The weapon hand, the weapon's angle, the shield and the head's tilt
   in each frame are placed by hand in `paperdoll_rig.json` (in 128 px frames; the tool scales them to the strip), with how each
@@ -120,3 +150,10 @@ brighten `item_slot` on hover instead.
 - **Held weapons** (`held_*`, art prompts part 8 W2-W6): one weapon per cell, named by item id, pointing right with a green
   grip dot. `paperdoll_layers.py` puts each in his hand on every frame (`weapon_item_<id>`), in its own colours.
   `hero_main` (the painted hero) now cuts into `art/build/` for reference.
+- **Drawn on the body sheet** (`hair_<style>_frames`, `gloves_frames`, `paperdoll_cape`,
+  `paperdoll_shield_round`, `paperdoll_grip`, `top_*_frames`, `bottom_*_frames`, `shoes_*_frames`):
+  made by editing `art/source/paperdoll_body.png`, so they keep its size and `grid` and line up with
+  it pixel for pixel. The cape and round shield sheets hold the item alone; the others show the body
+  wearing it in greys. Tops, bottoms, shoes, `paperdoll_grip` and `paperdoll_hats` have no code yet
+  (cut into `art/build/` only), nor do `paperdoll_body_2`, `hair_tousled_frames_2` and
+  `paperdoll_gloves_2` (new poses drawn on Gemini's own body, for later).

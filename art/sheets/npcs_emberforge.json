@@ -1,19 +1,5 @@
 {
   "source": "art/source/npcs_emberforge.png",
-  "grid": {
-    "rows": [
-      1,
-      511,
-      1022
-    ],
-    "cols": [
-      1,
-      384,
-      768,
-      1151,
-      1534
-    ]
-  },
   "label_band": 0.2,
   "strip_labels": true,
   "save": false,
@@ -21,41 +7,114 @@
   "cells": [
     [
       "emberforge_instructor_1",
+      "",
       "emberforge_shop_1",
+      "",
       "emberforge_store_1",
+      "",
       "emberforge_taxi_1"
     ],
     [
+      ""
+    ],
+    [
       "emberforge_instructor_2",
+      "",
       "emberforge_shop_2",
+      "",
       "emberforge_store_2",
+      "",
       "emberforge_taxi_2"
     ]
   ],
   "overrides": {
     "emberforge_instructor_1": {
-      "scale": 0.214
+      "scale": 0.2107,
+      "blank": [
+        [
+          0,
+          2,
+          215,
+          29
+        ]
+      ]
     },
     "emberforge_instructor_2": {
-      "scale": 0.214
+      "scale": 0.2107,
+      "blank": [
+        [
+          1,
+          0,
+          228,
+          23
+        ]
+      ]
     },
     "emberforge_shop_1": {
-      "scale": 0.207
+      "scale": 0.1941,
+      "blank": [
+        [
+          0,
+          2,
+          197,
+          29
+        ]
+      ]
     },
     "emberforge_shop_2": {
-      "scale": 0.207
+      "scale": 0.1941,
+      "blank": [
+        [
+          0,
+          0,
+          202,
+          23
+        ]
+      ]
     },
     "emberforge_store_1": {
-      "scale": 0.217
+      "scale": 0.2047,
+      "blank": [
+        [
+          0,
+          2,
+          168,
+          29
+        ]
+      ]
     },
     "emberforge_store_2": {
-      "scale": 0.217
+      "scale": 0.2047,
+      "blank": [
+        [
+          0,
+          0,
+          173,
+          23
+        ]
+      ]
     },
     "emberforge_taxi_1": {
-      "scale": 0.19
+      "scale": 0.1908,
+      "blank": [
+        [
+          0,
+          2,
+          296,
+          29
+        ]
+      ]
     },
     "emberforge_taxi_2": {
-      "scale": 0.19
+      "scale": 0.1908,
+      "blank": [
+        [
+          0,
+          0,
+          306,
+          23
+        ]
+      ]
     }
   },
   "sets": {
@@ -135,5 +194,40 @@
         }
       }
     }
-  }
+  },
+  "grid": {
+    "rows": [
+      4,
+      508,
+      524,
+      1027
+    ],
+    "cols": [
+      [
+        0,
+        373,
+        391,
+        748,
+        777,
+        1080,
+        1166,
+        1476
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        380,
+        392,
+        747,
+        778,
+        1079,
+        1164,
+        1476
+      ]
+    ]
+  },
+  "inset": 2
 }

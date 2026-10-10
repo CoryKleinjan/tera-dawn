@@ -1,0 +1,45 @@
+{
+  "source": "art/source/skill_icons_old.png",
+  "out_dir": "assets/sprites/skills",
+  "scale": 0.29,
+  "alpha": "hard",
+  "keep": "largest",
+  "cells": [
+    [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "star_throw",
+      "lucky_seven",
+      "star_scatter",
+      "haste",
+      "nimble_body"
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  ],
+  "inset": 8
+}

@@ -1,0 +1,42 @@
+{
+  "source": "art/source/ui_creator.png",
+  "out_dir": "assets/sprites/ui/creator",
+  "scale": 0.5,
+  "alpha": "soft",
+  "label_band": 0.1,
+  "inset": 6,
+  "region": [
+    0,
+    0,
+    614,
+    520
+  ],
+  "grid": {
+    "rows": [
+      0,
+      520
+    ],
+    "cols": [
+      0,
+      614
+    ]
+  },
+  "cells": [
+    [
+      "frame"
+    ]
+  ],
+  "overrides": {
+    "frame": {
+      "blank": [
+        [
+          0,
+          0,
+          306,
+          39
+        ]
+      ],
+      "scale": 0.28
+    }
+  }
+}

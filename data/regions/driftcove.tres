@@ -8,5 +8,5 @@ id = &"driftcove"
 display_name = "Driftcove"
 description = "Sea caves, wrecks and beaches, ruled by the Pirates."
 color = Color(0.309804, 0.717647, 0.85098, 1.0)
-label_pos = Vector2(229.0, 420.0)
+label_pos = Vector2(180.0, 470.0)
 level_text = "Lv. 10-30"

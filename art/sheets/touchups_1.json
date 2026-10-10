@@ -48,16 +48,19 @@
   ],
   "overrides": {
     "lantern_unlit": {
+      "save": false,
       "scale": 0.2,
       "out_dir": "assets/sprites/tiles/emberreach",
       "keep": "largest"
     },
     "lantern_lit": {
+      "save": false,
       "scale": 0.2,
       "out_dir": "assets/sprites/tiles/emberreach",
       "keep": "largest"
     },
     "near": {
+      "save": false,
       "scale": 0.284,
       "crop": [
         3,

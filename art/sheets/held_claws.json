@@ -16,5 +16,39 @@
       "nightfang_claw",
       "eclipse_claw"
     ]
-  ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      594,
+      1190
+    ],
+    "cols": [
+      0,
+      590,
+      1182,
+      1774
+    ]
+  },
+  "inset": 12,
+  "overrides": {
+    "iron_claw": {
+      "blank_top": 39
+    },
+    "steel_claw": {
+      "blank_top": 39
+    },
+    "viper_claw": {
+      "blank_top": 39
+    },
+    "shadow_claw": {
+      "blank_top": 37
+    },
+    "nightfang_claw": {
+      "blank_top": 37
+    },
+    "eclipse_claw": {
+      "blank_top": 37
+    }
+  }
 }

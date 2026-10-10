@@ -1,19 +1,27 @@
 {
   "source": "art/source/dewling.png",
-  "scale": 0.24,
   "save": false,
   "out_dir": "art/build/dewling",
   "cells": [
     [
       "idle1",
+      "",
       "idle2",
+      "",
       "hop1",
+      "",
       "hop2"
     ],
     [
+      ""
+    ],
+    [
       "hop3",
+      "",
       "attack",
+      "",
       "hurt",
+      "",
       "defeated"
     ]
   ],
@@ -70,5 +78,43 @@
         }
       }
     }
-  }
+  },
+  "grid": {
+    "rows": [
+      0,
+      592,
+      612,
+      1190
+    ],
+    "cols": [
+      [
+        2,
+        363,
+        455,
+        884,
+        901,
+        1255,
+        1347,
+        1708
+      ],
+      [
+        0,
+        1774
+      ],
+      [
+        2,
+        425,
+        454,
+        848,
+        902,
+        1273,
+        1347,
+        1769
+      ]
+    ]
+  },
+  "inset": 2,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "scale": 0.1553
 }

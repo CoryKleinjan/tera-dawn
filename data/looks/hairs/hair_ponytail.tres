@@ -1,8 +1,7 @@
-[gd_resource type="Resource" script_class="LookDef" load_steps=5 format=3]
+[gd_resource type="Resource" script_class="LookDef" load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/look_def.gd" id="1_look_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/paperdoll/hair_ponytail.tres" id="2_frames"]
-[ext_resource type="SpriteFrames" path="res://assets/animations/paperdoll/hair_ponytail_back.tres" id="3_back_frames"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/paperdoll/hair_ponytail_hat.tres" id="4_hat_frames"]
 
 [resource]
@@ -12,5 +11,4 @@ display_name = "Ponytail"
 kind = 3
 order = 2
 frames = ExtResource("2_frames")
-back_frames = ExtResource("3_back_frames")
 hat_frames = ExtResource("4_hat_frames")

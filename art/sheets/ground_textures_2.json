@@ -1,11 +1,5 @@
 {
   "source": "art/source/ground_textures_2.png",
-  "region": [
-    0,
-    0,
-    768,
-    1024
-  ],
   "scale": 0.3,
   "label_band": 0.1,
   "grid_threshold": 0.95,
@@ -31,61 +25,106 @@
     "dawnharbor_top": {
       "seamless": true,
       "size": 128,
-      "keep": "largest"
+      "crop": [
+        108,
+        42,
+        403,
+        337
+      ]
     },
     "dawnharbor_side": {
       "seamless": true,
       "size": 128,
-      "keep": "largest"
+      "crop": [
+        108,
+        42,
+        403,
+        337
+      ]
     },
     "dawnharbor_soil": {
       "seamless": true,
       "size": 128,
-      "keep": "largest"
+      "crop": [
+        108,
+        42,
+        403,
+        337
+      ]
     },
     "driftcove_top": {
       "seamless": true,
       "size": 128,
-      "keep": "largest"
+      "crop": [
+        108,
+        42,
+        403,
+        337
+      ]
     },
     "driftcove_side": {
       "seamless": true,
       "size": 128,
-      "keep": "largest"
+      "crop": [
+        108,
+        42,
+        403,
+        337
+      ]
     },
     "driftcove_soil": {
       "seamless": true,
       "size": 128,
-      "keep": "largest"
+      "crop": [
+        108,
+        42,
+        403,
+        337
+      ]
     },
     "greenbough_top": {
       "seamless": true,
       "size": 128,
-      "keep": "largest"
+      "crop": [
+        108,
+        42,
+        403,
+        337
+      ]
     },
     "greenbough_side": {
       "seamless": true,
       "size": 128,
-      "keep": "largest"
+      "crop": [
+        108,
+        42,
+        403,
+        337
+      ]
     },
     "greenbough_soil": {
       "seamless": true,
       "size": 128,
-      "keep": "largest"
+      "crop": [
+        108,
+        42,
+        403,
+        337
+      ]
     }
   },
   "grid": {
     "rows": [
-      77,
+      0,
       343,
-      657,
-      1000
+      687,
+      1030
     ],
     "cols": [
-      7,
-      256,
-      508,
-      757
+      0,
+      510,
+      1025,
+      1536
     ]
   }
 }

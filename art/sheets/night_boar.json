@@ -1,26 +1,5 @@
 {
-  "source": "art/source/mon_lanternfall.png",
-  "region": [
-    772,
-    262,
-    1536,
-    506
-  ],
-  "grid": {
-    "rows": [
-      28,
-      135,
-      244
-    ],
-    "cols": [
-      0,
-      191,
-      381,
-      572,
-      764
-    ]
-  },
-  "scale": 0.57,
+  "source": "art/source/mon_night_boar.png",
   "label_band": 0.2,
   "strip_labels": true,
   "save": false,
@@ -28,14 +7,23 @@
   "cells": [
     [
       "idle1",
+      "",
       "idle2",
+      "",
       "walk1",
+      "",
       "walk2"
     ],
     [
+      ""
+    ],
+    [
       "walk3",
+      "",
       "attack",
+      "",
       "hurt",
+      "",
       "defeated"
     ]
   ],
@@ -94,5 +82,41 @@
         }
       }
     }
-  }
+  },
+  "grid": {
+    "rows": [
+      0,
+      399,
+      517,
+      916
+    ],
+    "cols": [
+      [
+        0,
+        361,
+        388,
+        746,
+        774,
+        1130,
+        1160,
+        1525
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        361,
+        384,
+        749,
+        770,
+        1131,
+        1156,
+        1530
+      ]
+    ]
+  },
+  "inset": 2,
+  "scale": 0.188
 }

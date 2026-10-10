@@ -2,10 +2,11 @@
 """Build the hero's layers from the part 2 paperdoll sheets.
 
 The hero is drawn in layers: a bald, faceless body (assets/sprites/characters/hero.png, cut
-by the paperdoll_body manifest), with hair, a face and worn gear on top. The hair, face,
-cape and shield sheets draw each piece once (or once per pose) in its own cell, not where it
-sits on every frame, so this tool finds the head, neck and hands in each body frame and
-places the pieces there, writing one strip per layer that lines up frame for frame with
+by the paperdoll_body manifest), with hair, a face and worn gear on top. The hair, face and
+shield sheets draw each piece once (or once per pose) in its own cell, not where it sits on
+every frame, so this tool finds the head, neck and hands in each body frame and places the
+pieces there; the cape sheet is drawn on the body sheet's grid where the cape hangs in each
+pose, so each pose's cape is put where it sits on the body (body_offsets), writing one strip per layer that lines up frame for frame with
 the body. The game plays a layer in step with the body (Paperdoll, PaperdollSprite).
 
     python3 tools/art/slice_sheets.py paperdoll_body   # the body strip first
@@ -90,6 +91,7 @@ HAIR_LIFT = 0.12      # and starts this far above the scalp
 SCALP = 0.1           # the scalp under the hair: the head above this far over its centre,
 SCALP_BACK = 0.45     # and behind this far back of it (any height down to SCALP_NAPE)
 SCALP_NAPE = 0.55
+SCALP_COVERED = 0.6   # drawn hair over this much of the scalp: the scalp is only repainted near it
 FACE_WIDTH = 1.1      # the face (eyes to mouth) is this wide
 FACE_AT = (0.2, 0.3)  # and centred this far forward and down from the head's centre
 NECK = 0.95           # the neck is this far below the head's centre
@@ -226,6 +228,54 @@ def cut(manifest):
     sprites = {}
     ss.process(os.path.join(ss.SHEETS, manifest + ".json"), sprites=sprites)
     return {k.split(":", 1)[1]: Piece(v) for k, v in sprites.items()}
+
+
+def body_offsets(names, cells, fw, fh):
+    """Per frame, (dx, dy) that takes a point of its cell on the body sheet (in cut pixels, from
+    the cell's corner) to the strip frame, the way slice_sheets.build_set put the body there
+    (anchor "head", baseline "bottom"). Sheets drawn by editing the body sheet line up with it
+    pixel for pixel, so their pieces land on the hero with this."""
+    body = cut("paperdoll_body")
+    BODY_PIECES.update(body)
+    out = {}
+    for n in names:
+        p = body[cells[n]]
+        x = round(fw / 2 - ss.head_x(p.img))
+        y = fh - 1 - p.img.height
+        out[n] = (x - p.x, y - p.y)
+    return out
+
+
+BODY_PIECES = {}  # the body sheet's cut cells, by cell name (set by body_offsets)
+
+
+def without_shorts(piece, cell):
+    """The pixels of a piece cut from a sheet of the body wearing something (on the body sheet's
+    grid) as an RGBA array, with the body's grey shorts taken out: they are greys like the worn
+    piece's, so they'd pass for hair or gloves. The shorts are where the body sheet has them."""
+    arr = np.asarray(piece.img).copy()
+    b = BODY_PIECES.get(cell)
+    if b is None:
+        return arr
+    px = np.asarray(b.img).astype(float)
+    mx, mn = px[..., :3].max(2), px[..., :3].min(2)
+    shorts = (px[..., 3] > 0) & (mx - mn < 0.15 * np.maximum(mx, 1)) & (mx > 40) & (mx < 150)
+    shorts = ss.dilate(shorts, 3)
+    h, w = arr.shape[:2]
+    dx, dy = b.x - piece.x, b.y - piece.y
+    out = np.zeros((h, w), bool)
+    ys, xs = np.nonzero(shorts)
+    ys, xs = ys + dy, xs + dx
+    ok = (ys >= 0) & (ys < h) & (xs >= 0) & (xs < w)
+    out[ys[ok], xs[ok]] = True
+    arr[out, 3] = 0
+    return arr
+
+
+def aligned(piece, offset):
+    """A piece of a sheet drawn on the body sheet's grid, put on a blank frame where it sits on
+    the body; returns (image, top-left)."""
+    return piece.img, (piece.x + offset[0], piece.y + offset[1])
 
 
 # ---------- the scalp ----------
@@ -438,6 +488,16 @@ def weapon(piece, s):
     """A weapon shrunk to game pixels, its green grip dot painted over; returns (image, grip)."""
     arr = np.asarray(piece.img).astype(int)
     green = (arr[..., 1] > 170) & (arr[..., 0] < 120) & (arr[..., 2] < 120) & (arr[..., 3] > 0)
+    # dots drawn off the weapon (beside it on the background, as some held_* sheets have them)
+    # are dropped, and don't count for the grip
+    lab, n = ss.label(green)
+    solid = (arr[..., 3] > 0) & ~green
+    for i in range(1, n + 1):
+        dot = lab == i
+        ring = ss.dilate(dot, 3) & ~ss.dilate(green, 0)
+        if ring.any() and solid[ring].mean() < 0.3:
+            arr[dot, 3] = 0
+            green &= ~dot
     gy, gx = np.nonzero(green)
     grip = (gx.mean(), gy.mean()) if len(gx) else (arr.shape[1] * 0.15, arr.shape[0] / 2)
     if len(gx):
@@ -569,7 +629,7 @@ def _turned_on(size, img, anchor, at, angle):
 
 
 def held_pictures():
-    """(item id, weapon kind, piece) for every weapon drawn on a held_*.json sheet that's there."""
+    """(item id, weapon kind, piece, sheet) for every weapon drawn on a held_*.json sheet that's there."""
     kinds = {}
     for folder, _, files in os.walk(ITEMS):
         for f in files:
@@ -591,7 +651,7 @@ def held_pictures():
         for item, piece in cut(f[:-5]).items():
             if item not in kinds:
                 sys.exit(f"{f}: no weapon item called {item}")
-            out.append((item, kinds[item], piece))
+            out.append((item, kinds[item], piece, f[:-5]))
     return out
 
 
@@ -646,8 +706,10 @@ def main():
     ref = info[0]  # idle1: pieces are sized against this frame
     r = ref["r"]
 
-    hair, faces, layers, weapons = cut("paperdoll_hair"), cut("paperdoll_faces"), cut("paperdoll_layers"), cut("paperdoll_weapons")
+    hair, faces, weapons = cut("paperdoll_hair"), cut("paperdoll_faces"), cut("paperdoll_weapons")
     blank = lambda: Image.new("RGBA", (fw, fh))  # noqa: E731
+    body_cells = {n: spec["frames"][n].split(":", 1)[1] for n in names}  # frame -> its cell on the body sheet
+    offsets = body_offsets(names, body_cells, fw, fh)
 
     # hair: one transform per style from its front piece, used for all four pieces
     old = {}
@@ -682,17 +744,25 @@ def main():
         manifest = os.path.join(ss.SHEETS, f"hair_{style}_frames.json")
         if os.path.exists(manifest):
             drawn = cut(f"hair_{style}_frames")
-            cells = {n: np.asarray(drawn[spec["frames"][n].split(":", 1)[1]].img) for n in names
-                     if spec["frames"][n].split(":", 1)[1] in drawn}
+            cells = {n: without_shorts(drawn[body_cells[n]], body_cells[n]) for n in names if body_cells[n] in drawn}
             link = head_link(cells, names, info, frames)
             out = []
             for n, fi, px in zip(names, info, frames):
                 canvas = blank()
-                canvas.alpha_composite(scalp(px, fi, n in BACK_VIEW, 128))
                 drawn_hair = blank()
                 if n in cells:
                     hair_img, at = posed_hair(cells[n], fi, link)
                     _paste(drawn_hair, hair_img, *at)
+                # where the drawn hair covers the scalp, the scalp only just around it (it fills
+                # slivers where the heads don't quite line up, and doesn't show as a band under a
+                # high hairline); where it leaves the crown bald (a ponytail drawn as the tail
+                # alone), all of it, so the top of his head is hair
+                bald = np.asarray(scalp(px, fi, n in BACK_VIEW, 128)).copy()
+                near = ss.dilate(np.asarray(drawn_hair)[..., 3] > 0, 3)
+                top = bald[..., 3] > 0
+                if top.any() and (near & top).sum() > top.sum() * SCALP_COVERED:
+                    bald[~near, 3] = 0
+                canvas.alpha_composite(Image.fromarray(bald, "RGBA"))
                 if n in BACK_VIEW or not hides_face(drawn_hair, fi):
                     canvas.alpha_composite(drawn_hair)
                 else:  # drawn in a pose too unlike his (lying face down): the one-piece hair
@@ -758,30 +828,32 @@ def main():
         rig_frames.append(entry)
 
     # cape: behind the body, except in back views where it hangs over the back
-    cape0 = layers["cape_idle1"]
-    s_cape = (ref["feet_y"] - ref["neck"][1]) * 0.7 / cape0.img.height
+    # (paperdoll_cape is drawn on the body sheet's grid: each pose's cape sits where it hangs)
+    cape = cut("paperdoll_cape")
     behind, front = [], []
-    for n, fi in zip(names, info):
+    for n in names:
         canvas = blank()
-        p = layers.get("cape_" + n)
+        p = cape.get(body_cells[n])
         if p:
-            img = scaled(p.img, s_cape)
-            a = np.asarray(img)[..., 3] > 0
-            ys, xs = np.nonzero(a[: max(2, img.height // 6)])
-            anchor = (xs.mean() if len(xs) else img.width / 2, 1)
-            place(canvas, img, anchor, fi["neck"] - fi["up"] * fi["r"] * 0.15)
+            img, at = aligned(p, offsets[n])
+            _paste(canvas, img, *at)
         (front if n in BACK_VIEW else behind).append(canvas)
         (behind if n in BACK_VIEW else front).append(blank())
     save_layer("cape", behind, fw, fh, index, anims)
     save_layer("cape_back_view", front, fw, fh, index, anims)
 
-    # shields, on the arm (or on the back in back views)
+    # shields, on the arm (or on the back in back views): one picture per pose, put on the rig's
+    # shield point. The round sheet is on the body sheet's grid (cells named by pose); the kite
+    # sheet has its own layout, so its manifest's "poses" names the cell each pose uses.
     for style in ("round", "kite"):
-        s_sh = r * SHIELD_HEIGHT / layers[f"{style}_idle1"].img.height
+        drawn = cut(f"paperdoll_shield_{style}")
+        with open(os.path.join(ss.SHEETS, f"paperdoll_shield_{style}.json")) as f:
+            poses = json.load(f).get("poses", body_cells)
+        s_sh = r * SHIELD_HEIGHT / drawn[poses["idle1"]].img.height
         out = []
         for n, entry in zip(names, rig_frames):
             canvas = blank()
-            p = layers.get(f"{style}_{n}")
+            p = drawn.get(poses.get(n, ""))
             if p and "shield" in entry:
                 img = scaled(p.img, s_sh)
                 place(canvas, img, (img.width / 2, img.height / 2), entry["shield"])
@@ -805,10 +877,17 @@ def main():
     # weapons: every kind (greyscale, tinted per item) and every weapon with its own picture
     s_w = r * SWORD_LENGTH / weapons["sword"].img.width
     grips = {}
-    pictures = [(kind, kind, weapons[kind], True) for kind in WEAPON_KINDS]
-    pictures += [("item_" + item, kind, piece, False) for item, kind, piece in held_pictures()]
-    for name, kind, piece, tinted in pictures:
-        img, grip = weapon(piece, s_w * WORN_SIZE.get(kind, 1.0))
+    pictures = [(kind, kind, weapons[kind], True, 1.0) for kind in WEAPON_KINDS]
+    drawn_weapons = held_pictures()
+    # a held_* sheet is drawn at its own size: it is shrunk so its weapons are, on the median,
+    # as long as the template of their kind (keeping their sizes against each other)
+    size = lambda p: max(p.img.size)  # noqa: E731
+    by_sheet = {}
+    for item, kind, piece, sheet in drawn_weapons:
+        by_sheet.setdefault(sheet, []).append(size(weapons[kind]) / size(piece))
+    pictures += [("item_" + item, kind, piece, False, float(np.median(by_sheet[sheet]))) for item, kind, piece, sheet in drawn_weapons]
+    for name, kind, piece, tinted, k in pictures:
+        img, grip = weapon(piece, s_w * WORN_SIZE.get(kind, 1.0) * k)
         if tinted:
             grips[kind] = {"grip": grip, "size": list(img.size)}
         front, behind = weapon_strips(img, grip, kind, names, frames, info, held[kind], hands, r)

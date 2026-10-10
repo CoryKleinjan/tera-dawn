@@ -8,5 +8,5 @@ id = &"greenbough"
 display_name = "Greenbough Wilds"
 description = "Towering trees and rope bridges, home of the Archers."
 color = Color(0.486275, 0.811765, 0.415686, 1.0)
-label_pos = Vector2(190.0, 91.0)
+label_pos = Vector2(200.0, 100.0)
 level_text = "Lv. 10-30"

@@ -30,9 +30,11 @@ CAPSULES = {
 
 
 def panels(im):
-    """Bounding boxes of the non-white panels, found from the white gutters between them."""
+    """Bounding boxes of the panels, found from the plain gutters between them (the sheet's
+    corner colour: white or dark)."""
     a = np.asarray(im.convert("RGB")).astype(int)
-    art = a.min(2) < 235
+    gutter = np.median(np.concatenate([a[:4, :4], a[:4, -4:], a[-4:, -4:]]).reshape(-1, 3), 0)
+    art = np.abs(a - gutter).sum(2) > 40
     boxes = []
     seen = np.zeros_like(art)
     h, w = art.shape
@@ -56,14 +58,17 @@ def panels(im):
                 if (x1 - x0) > 200 and (y1 - y0) > 200:
                     boxes.append((x0 + 2, y0 + 2, x1 - 1, y1 - 1))
     named = {}
+    wide = []
     for b in boxes:
         bw, bh = b[2] - b[0], b[3] - b[1]
         if bh > bw:
             named["portrait"] = b
-        elif bw > bh * 2.4:
-            named["banner"] = b
         else:
-            named["landscape"] = b
+            wide.append(b)
+    # the biggest wide panel is the landscape one, the other the banner (cropped to its strips)
+    wide.sort(key=lambda b: (b[2] - b[0]) * (b[3] - b[1]), reverse=True)
+    for name, b in zip(["landscape", "banner"], wide):
+        named[name] = b
     return named
 
 

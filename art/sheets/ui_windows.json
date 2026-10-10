@@ -1,45 +1,146 @@
 {
   "source": "art/source/ui_windows.png",
-  "recolor": "leather",
   "out_dir": "assets/sprites/ui",
   "scale": 0.5,
   "alpha": "soft",
   "label_band": 0.2,
-  "grid_threshold": 0.7,
+  "inset": 5,
+  "region": [
+    360,
+    0,
+    1448,
+    971
+  ],
+  "grid": {
+    "rows": [
+      0,
+      323,
+      647,
+      971
+    ],
+    "cols": [
+      0,
+      364,
+      728,
+      1088
+    ]
+  },
   "cells": [
     [
-      "window_frame",
       "window_tab_on",
       "window_tab_off",
       "item_slot"
     ],
     [
-      "item_slot_hover",
       "window_close",
       "stat_plus",
       "tooltip_frame"
     ],
     [
-      "equip_doll_bg",
       "bag_button",
       "gear_button",
       "stats_button"
     ]
   ],
-  "grid": {
-    "rows": [
-      0,
-      360,
-      682,
-      1086
-    ],
-    "cols": [
-      0,
-      367,
-      723,
-      1081,
-      1448
-    ]
-  },
-  "overrides": {}
+  "overrides": {
+    "window_tab_on": {
+      "blank": [
+        [
+          2,
+          0,
+          140,
+          33
+        ]
+      ],
+      "scale": 0.598
+    },
+    "window_tab_off": {
+      "blank": [
+        [
+          1,
+          0,
+          156,
+          33
+        ]
+      ],
+      "scale": 0.6196
+    },
+    "item_slot": {
+      "blank": [
+        [
+          1,
+          0,
+          188,
+          33
+        ]
+      ],
+      "scale": 0.5085
+    },
+    "window_close": {
+      "blank": [
+        [
+          2,
+          0,
+          241,
+          31
+        ]
+      ],
+      "scale": 0.437
+    },
+    "stat_plus": {
+      "blank": [
+        [
+          1,
+          0,
+          189,
+          31
+        ]
+      ],
+      "scale": 0.3725
+    },
+    "tooltip_frame": {
+      "blank": [
+        [
+          1,
+          0,
+          255,
+          31
+        ]
+      ],
+      "scale": 0.4718
+    },
+    "bag_button": {
+      "blank": [
+        [
+          1,
+          0,
+          222,
+          30
+        ]
+      ],
+      "scale": 0.5885
+    },
+    "gear_button": {
+      "blank": [
+        [
+          1,
+          0,
+          235,
+          30
+        ]
+      ],
+      "scale": 0.5885
+    },
+    "stats_button": {
+      "blank": [
+        [
+          0,
+          0,
+          254,
+          30
+        ]
+      ],
+      "scale": 0.5885
+    }
+  }
 }

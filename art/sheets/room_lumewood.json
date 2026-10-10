@@ -1,7 +1,7 @@
 {
   "source": "art/source/room_lumewood.png",
   "out_dir": "assets/sprites/rooms/lumewood",
-  "scale": 0.45,
+  "scale": 0.435,
   "label_band": 0.2,
   "cells": [
     [
@@ -25,15 +25,130 @@
   ],
   "overrides": {
     "wall": {
-      "scale": 1.15
+      "crop": [
+        26,
+        64,
+        408,
+        470
+      ],
+      "scale": 1.082
     },
     "floor_top": {
       "seamless": true,
-      "size": 128
+      "size": 128,
+      "crop": [
+        12,
+        64,
+        418,
+        470
+      ],
+      "scale": 0.45
     },
     "floor_side": {
       "seamless": true,
-      "size": 128
+      "size": 128,
+      "crop": [
+        100,
+        64,
+        330,
+        294
+      ],
+      "scale": 0.45
+    },
+    "counter": {
+      "crop": [
+        0,
+        43,
+        430,
+        375
+      ],
+      "scale": 0.3474
+    },
+    "shelf": {
+      "crop": [
+        0,
+        43,
+        433,
+        375
+      ],
+      "scale": 0.5054
+    },
+    "bookcase": {
+      "crop": [
+        0,
+        43,
+        431,
+        375
+      ]
+    },
+    "table": {
+      "crop": [
+        0,
+        43,
+        432,
+        375
+      ],
+      "scale": 0.2558
+    },
+    "hearth": {
+      "crop": [
+        0,
+        45,
+        430,
+        306
+      ],
+      "scale": 0.4636
+    },
+    "rack": {
+      "crop": [
+        0,
+        43,
+        433,
+        306
+      ],
+      "scale": 0.5441
+    },
+    "lamp": {
+      "crop": [
+        0,
+        43,
+        431,
+        306
+      ]
+    },
+    "barrel": {
+      "crop": [
+        0,
+        43,
+        432,
+        306
+      ],
+      "scale": 0.2214
+    },
+    "door": {
+      "crop": [
+        0,
+        45,
+        433,
+        473
+      ],
+      "scale": 0.2836
     }
-  }
+  },
+  "grid": {
+    "rows": [
+      0,
+      485,
+      872,
+      1190
+    ],
+    "cols": [
+      0,
+      442,
+      887,
+      1330,
+      1774
+    ]
+  },
+  "inset": 6
 }
