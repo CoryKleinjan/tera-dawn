@@ -184,7 +184,8 @@ func _check_balance() -> void:
 			if hits < Balance.BAND.x - 0.2 or hits > Balance.BAND.y:
 				worst += " %s/%s %.1f" % [j, m.id, hits]
 		var kills := Balance.kills_per_level(m.level, m)
-		if kills > 1000.0:
+		# a slime's bits only come with the slime (it pays for both), so nobody levels on bits
+		if kills > 1000.0 and not _only_split_from(m):
 			slow += " %s %.0f" % [m.id, kills]
 	_check(worst == "", "every job beats monsters of its level in a few hits%s" % worst)
 	_check(slow == "", "no monster takes too many kills a level%s" % slow)
@@ -366,7 +367,7 @@ func _check_jobs() -> void:
 	c.base.strength = 35
 	var hp := c.max_hp()
 	_check(c.advance(warrior) == "" and c.job == warrior, "a level 10 Beginner with 35 STR becomes a Warrior")
-	_check(c.inventory.count_of(Content.item(&"bronze_sword")) == 1 and c.max_hp() >= hp, "the Warrior gets a Bronze Sword")
+	_check(c.weapon() == Content.item(&"bronze_sword") and c.max_hp() >= hp, "the Warrior gets a Bronze Sword and wears it")
 	_check(c.advance(mage) != "", "a Warrior can't then become a Magician")
 	var wand: EquipDef = Content.item(&"apprentice_wand")
 	c.inventory.add(wand)
@@ -820,7 +821,7 @@ func _check_job_advance() -> void:
 	_check(talk.options[0][0] == "Become a Magician", "a level 10 Beginner with 20 INT may become a Magician")
 	talk.choose(0)
 	await _ticks(2)
-	_check(Game.me.job.id == &"mage" and Game.me.inventory.count_of(Content.item(&"apprentice_wand")) == 1, "the server makes them a Magician and gives a wand")
+	_check(Game.me.job.id == &"mage" and Game.me.weapon() == Content.item(&"apprentice_wand"), "the server makes them a Magician and hands them a wand to wear")
 	Net.ask(&"req_equip", [Game.me.inventory.find(Content.item(&"apprentice_wand")), &"weapon"])
 	await _ticks(2)
 	_check(world.player.rig.paperdoll.look["gear"].get("weapon") == "apprentice_wand", "the hero is drawn holding the wand once it's worn")
@@ -989,7 +990,7 @@ func _check_travel() -> void:
 	var labels: Array = talk.options.map(func(o: Array) -> String: return o[0])
 	_check(labels.has("Travel"), "the wagon driver offers to travel")
 	talk.choose(labels.find("Travel"))
-	_check(str(talk.options[0][0]).begins_with("Wagon to Ember Hollow"), "the trip lists where it goes and the fare")
+	_check(str(talk.options[0][0]) == "Wagon to Ember Hollow (%s, 150 Dawnshards)" % Content.map(&"hollow").level_text, "the trip lists where it goes, who it's for and the fare: %s" % talk.options[0][0])
 	talk.choose(0)
 	await _until(func() -> bool: return world.map.id == &"hollow" and Game.me.shards == 850, 30)
 	_check(world.map.id == &"hollow" and Game.me.shards == 850, "the wagon takes you there for 150 Dawnshards")
@@ -1469,3 +1470,14 @@ func _check_multiplayer() -> void:
 			break
 	_check(not Net.server.sessions.has(bot_peer) and not world.avatars.has(bot_peer), "when they quit, they leave the host's map")
 	world.stop()
+
+## Whether `m` only appears when another monster splits into it (a slime's bits).
+func _only_split_from(m: MonsterDef) -> bool:
+	var split := false
+	for other: MonsterDef in Content.monsters.values():
+		split = split or other.splits_into == m
+	for map: MapDef in Content.maps.values():
+		for sp in map.spawns:
+			if sp.monster == m:
+				return false
+	return split

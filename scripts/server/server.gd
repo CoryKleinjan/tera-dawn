@@ -150,6 +150,8 @@ func _town_for(p: SimPlayer) -> StringName:
 
 func give_xp(p: SimPlayer, amount: int) -> void:
 	var c := p.character
+	if c.at_max_level():
+		return
 	var levels := c.gain_xp(amount)
 	p.dirty_vitals = true
 	p.map.show_gain(p, &"exp", amount)
@@ -359,7 +361,8 @@ func _at_storage(peer: int, npc_id: StringName, tab: int, slot: int, change: Cal
 	p.dirty_vitals = true
 	store.save(p.character)
 
-## Takes the player on trip `index` of the NPC `npc_id` they stand by, if they can pay.
+## Takes the player on trip `index` of the NPC `npc_id` they stand by, if they can pay its
+## fare (TravelRoute.fare_for: free coaches for Beginners ready for a job).
 func on_travel(peer: int, npc_id: StringName, index: int) -> void:
 	var p := player_of(peer)
 	var npc := p.map.npc_near(p, npc_id) if p and not p.fainted() else null
@@ -368,10 +371,11 @@ func on_travel(peer: int, npc_id: StringName, index: int) -> void:
 	var route := npc.travel[index]
 	if not Content.maps.has(route.target_map):
 		return
-	if p.character.shards < route.price:
+	var fare := route.fare_for(p.character)
+	if p.character.shards < fare:
 		p.map.tell(p, NOT_ENOUGH_SHARDS, MapInstance.BAD)
 		return
-	p.character.shards -= route.price
+	p.character.shards -= fare
 	p.dirty_vitals = true
 	_enter_map(p, route.target_map, route.target_x)
 	p.map.tell(p, "%s to %s." % [route.by, Content.map(route.target_map).display_name], Palette.SUN)
@@ -495,6 +499,8 @@ func on_advance(peer: int, npc_id: StringName, job_id: StringName) -> void:
 	p.dirty_vitals = true
 	p.map.broadcast(&"ev_effect", [&"celebrate", p.position.x, p.position.y, 1, p.peer])
 	p.map.tell(p, "You are now a %s!" % next.display_name, Palette.SUN)
+	if not next.advance_gifts.is_empty():
+		p.map.tell(p, "Your instructor hands you: %s." % next.gifts_text(), Palette.SUN)
 	store.save(p.character)
 
 ## The free Ability Point reset from the instructor `npc_id` of `job_id` the player stands by.

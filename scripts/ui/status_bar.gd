@@ -24,6 +24,8 @@ const WINDOW_ICONS := {"inventory": "bag_button", "equipment": "gear_button", "s
 const TRAIL_HOLD := 0.35
 const TRAIL_DRAIN := 0.9
 const EXP_FLASH := 0.5
+## Shown on the EXP bar (and the stats window) at Character.MAX_LEVEL.
+const MAX_LEVEL_TEXT := "Max level"
 
 var world: TDWorld
 ## The pale chunk's end for HP and MP: [fraction, seconds until it drains].
@@ -73,11 +75,11 @@ func _draw() -> void:
 	DrawUtil.text(self, Game.num_font, c + Vector2(0, 11), str(Game.me.level), 17, Palette.SUN, 0, 4, Palette.NIGHT)
 	# HP, MP, EXP
 	var hp := Game.me.health
-	var need := Game.me.xp_need()
 	UiSkin.draw_bar(self, "hp_frame", "fill_red", Vector2(HP_X, 6), hp.fraction(), BAR_SCALE, "%d / %d" % [hp.hp, hp.max_hp], trail("hp"))
 	UiSkin.draw_bar(self, "mp_frame", "fill_blue", Vector2(_mp_x(), 4), float(Game.me.mp) / Game.me.max_mp(), BAR_SCALE, "%d / %d" % [Game.me.mp, Game.me.max_mp()], trail("mp"))
 	var exp_r := exp_bar_rect()
-	UiSkin.draw_bar(self, "exp_frame", "fill_gold", exp_r.position, float(Game.me.xp) / need, EXP_SCALE, "%.1f%%" % (100.0 * Game.me.xp / need), 0.0, _flash / EXP_FLASH)
+	var exp_fill := 1.0 if Game.me.at_max_level() else float(Game.me.xp) / Game.me.xp_need()
+	UiSkin.draw_bar(self, "exp_frame", "fill_gold", exp_r.position, exp_fill, EXP_SCALE, exp_text(), 0.0, _flash / EXP_FLASH)
 	# window buttons
 	for i in TDHud.WINDOW_ACTIONS.size():
 		_window_button(TDHud.WINDOW_ACTIONS[i], _window_button_rect(i))
@@ -85,6 +87,12 @@ func _draw() -> void:
 	var icon := UiSkin.tex("icon_dawnshard")
 	draw_texture_rect(icon, Rect2(w - 140, 8, 36, 33), false)
 	DrawUtil.text(self, Game.num_font, Vector2(w - 100, 32), str(Game.me.shards), 18, Palette.SUN, 1, 4, Palette.NIGHT)
+
+## What the EXP bar says: "42.5%" of the way to the next level, or "Max level" at the cap.
+func exp_text() -> String:
+	if Game.me.at_max_level():
+		return MAX_LEVEL_TEXT
+	return "%.1f%%" % (100.0 * Game.me.xp / Game.me.xp_need())
 
 func _mp_x() -> float:
 	return HP_X + UiSkin.tex("hp_frame").get_width() * BAR_SCALE + BAR_GAP

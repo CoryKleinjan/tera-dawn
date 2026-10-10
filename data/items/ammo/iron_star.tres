@@ -14,6 +14,6 @@ sprite_scale = 0.4
 glow_color = Color(0.662745, 0.705882, 0.760784, 1.0)
 pickup_effect = ExtResource("3_shard_pickup")
 max_stack = 500
-sell_price = 2
+sell_price = 1
 kind = &"star"
 attack = 15

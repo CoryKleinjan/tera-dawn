@@ -24,6 +24,18 @@ func test_status_bar_draws_any_state() -> void:
 			c.shards = 9999999)
 		check(await ui.redraw(bar), "the status bar draws at level %d" % state[0])
 
+func test_status_bar_says_max_level_at_the_cap() -> void:
+	var bar := ui.hud.status
+	await ui.edit(func(c: Character) -> void:
+		c.level = 20
+		c.xp = c.xp_need() / 4)
+	check_eq(bar.exp_text(), "%.1f%%" % (100.0 * Game.me.xp / Game.me.xp_need()), "how far to the next level")
+	await ui.edit(func(c: Character) -> void:
+		c.level = Character.MAX_LEVEL
+		c.xp = 0)
+	check_eq(bar.exp_text(), "Max level", "at the cap")
+	check(await ui.redraw(bar), "the status bar draws at the cap")
+
 func test_quickslots_hold_skills_and_items() -> void:
 	var slots := ui.hud.quickslots
 	await ui.frames(1)

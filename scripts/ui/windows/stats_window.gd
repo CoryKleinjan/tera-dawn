@@ -59,7 +59,7 @@ func _draw_body() -> void:
 	y = _pair(y, ["Job", Game.me.job.display_name], ["Level", str(Game.me.level)])
 	y = _row(y, "Guild", Game.me.guild if Game.me.guild != "" else "-")
 	y = _row(y, "Fame", str(Game.me.fame), Palette.GOOD if Game.me.fame > 0 else (Palette.WARN if Game.me.fame < 0 else Palette.MIST))
-	y = _row(y, "EXP", "%d / %d" % [Game.me.xp, Game.me.xp_need()])
+	y = _row(y, "EXP", TDStatusBar.MAX_LEVEL_TEXT if Game.me.at_max_level() else "%d / %d" % [Game.me.xp, Game.me.xp_need()])
 	y = _pair(y, ["HP", "%d / %d" % [Game.me.health.hp, Game.me.max_hp()]], ["MP", "%d / %d" % [Game.me.mp, Game.me.max_mp()]], COL_SHORT_VALUE, COL_SHORT_VALUE)
 	y = _divider(y)
 	auto_rect = Rect2()
