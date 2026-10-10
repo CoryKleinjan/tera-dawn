@@ -1,8 +1,7 @@
 {
-  "source": "art/source/meadow_backgrounds_a.png",
-  "scale": 0.5,
+  "source": "art/source/meadow_backgrounds_a_fine.png",
   "label_band": 0.01,
-  "inset": 4,
+  "inset": 11,
   "out_dir": "assets/sprites/backgrounds/meadow",
   "cells": [
     [
@@ -35,63 +34,63 @@
   ],
   "grid": {
     "rows": [
-      24,
-      200,
-      236,
-      386,
-      404,
-      570,
-      580,
-      722,
-      830,
-      1030
+      64,
+      534,
+      630,
+      1031,
+      1079,
+      1522,
+      1549,
+      1928,
+      2216,
+      2750
     ],
     "cols": [
       0,
-      1536
+      4101
     ]
   },
   "overrides": {
     "far_mountains": {
       "crop": [
-        169,
+        451,
         0,
-        1359,
-        165
+        3628,
+        441
       ],
-      "extend_bottom": 160,
-      "scale": 0.4487
+      "extend_bottom": 589,
+      "scale": 0.6185
     },
     "mid_hills": {
       "crop": [
-        169,
+        451,
         0,
-        1359,
-        138
+        3628,
+        368
       ],
-      "extend_bottom": 160,
-      "scale": 0.4106
+      "extend_bottom": 512,
+      "scale": 0.4921
     },
     "near_treeline": {
       "crop": [
-        169,
+        451,
         0,
-        1359,
-        155
+        3628,
+        414
       ],
-      "extend_bottom": 160,
-      "scale": 0.4167
+      "extend_bottom": 461,
+      "scale": 0.4495
     },
     "clouds": {
       "keep": "split",
-      "scale": 0.5671
+      "scale": 0.6797
     },
     "sun": {
       "alpha": "soft",
-      "scale": 0.4062
+      "scale": 0.5842
     },
     "village": {
-      "scale": 0.9762
+      "scale": 1.2285
     }
   }
 }

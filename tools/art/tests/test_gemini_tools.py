@@ -57,6 +57,21 @@ class Request(unittest.TestCase):
                 self.assertEqual(gemini_sheet.closest_aspect(path), want, size)
 
 
+class EditBase(unittest.TestCase):
+    def test_crops_then_enlarges_the_base(self):
+        with tempfile.TemporaryDirectory() as d:
+            src = os.path.join(d, "sheet.png")
+            im = Image.new("RGB", (100, 80), helpers.MAGENTA)
+            im.paste((10, 200, 30), (20, 10, 60, 40))
+            im.save(src)
+            sheet = {"id": "x", "edit": {"base": src, "base_crop": [20, 10, 60, 40], "base_scale": 2}}
+            with mock.patch.object(gemini_pass, "OUT", d):
+                path, aspect, unpad = gemini_pass.Pass.edit_base(None, sheet)
+            self.assertEqual(unpad[2:], [80, 60], "the crop, twice as big")
+            self.assertEqual(Image.open(path).convert("RGB").getpixel((0, 0)), (10, 200, 30))
+            self.assertEqual(aspect, "4:3")
+
+
 class OutPath(unittest.TestCase):
     def test_never_overwrites_an_earlier_try(self):
         with tempfile.TemporaryDirectory() as d, mock.patch.object(gemini_sheet, "OUT_DIR", d):

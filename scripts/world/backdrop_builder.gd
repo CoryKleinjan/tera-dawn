@@ -28,15 +28,16 @@ func drift(delta: float) -> void:
 		if s.position.x > float(s.get_meta("x1")):
 			s.position.x = float(s.get_meta("x0"))
 
-## Texel size in 3D units for a layer at depth z, so it shows `texel` game pixels per texel on screen.
-func _pixel_size(layer: BackdropLayerDef, z: float) -> float:
+## Texel size in 3D units for `tex` at depth z, so its art pixels show `layer.texel` game
+## pixels on screen.
+func _pixel_size(layer: BackdropLayerDef, tex: Texture2D, z: float) -> float:
 	var r := stage.dist - z
-	return layer.texel / TDStage.PX * r / stage.dist
+	return layer.texel / TDStage.art_density(tex) / TDStage.PX * r / stage.dist
 
 ## The x range a layer at depth z must cover so it fills the view from either end of the map.
 func _span(map: MapDef, z: float) -> Vector2:
 	var r := stage.dist - z
-	var half_view := TDWorld.VIEW.x / TDStage.PX / 2.0 * r / stage.dist
+	var half_view := TDWorld.world_view().x / TDStage.PX / 2.0 * r / stage.dist
 	return Vector2(-half_view - 4.0, float(map.width) / TDStage.PX + half_view + 4.0)
 
 func _make(tex: Texture2D, layer: BackdropLayerDef, size: float) -> Sprite3D:
@@ -55,8 +56,8 @@ func _make(tex: Texture2D, layer: BackdropLayerDef, size: float) -> Sprite3D:
 ## One strip repeated across the whole span; every other copy is mirrored so the seams match.
 func _strip(map: MapDef, layer: BackdropLayerDef) -> void:
 	var z := -layer.depth
-	var size := _pixel_size(layer, z)
 	var tex: Texture2D = layer.textures[0]
+	var size := _pixel_size(layer, tex, z)
 	var w := tex.get_width() * size
 	var span := _span(map, z)
 	var top := stage.screen_height(layer.screen_top.x, z)
@@ -72,8 +73,8 @@ func _strip(map: MapDef, layer: BackdropLayerDef) -> void:
 func _scatter(map: MapDef, layer: BackdropLayerDef, rng: RandomNumberGenerator) -> void:
 	for i in layer.count:
 		var z := -layer.depth - i * 3.0
-		var size := _pixel_size(layer, z) * rng.randf_range(0.85, 1.15)
 		var tex: Texture2D = layer.textures[i % layer.textures.size()]
+		var size := _pixel_size(layer, tex, z) * rng.randf_range(0.85, 1.15)
 		var span := _span(map, z)
 		var s := _make(tex, layer, size)
 		var x := rng.randf_range(span.x, span.y) if layer.count > 1 else (span.x + span.y) / 2.0

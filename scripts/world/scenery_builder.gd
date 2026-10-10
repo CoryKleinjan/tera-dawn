@@ -244,7 +244,7 @@ func _portal(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
 			frames.add_frame(&"default", t)
 		var s := AnimatedSprite3D.new()
 		s.sprite_frames = frames
-		TDStage.style_sprite(s, TDStage.TEXEL, false)
+		TDStage.style_sprite(s, TDStage.TEXEL / TDStage.art_density(biome.portal_frames[0]), false)
 		s.alpha_cut = SpriteBase3D.ALPHA_CUT_DISABLED
 		s.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		s.offset = Vector2(0, biome.portal_frames[0].get_height() / 2.0)

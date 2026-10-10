@@ -48,7 +48,9 @@ STATE = os.path.join(OUT, "state.json")
 PRICE = {"gemini-3-pro-image": 0.136, "gemini-3-pro-image-preview": 0.136,
          "gemini-3.1-flash-image": 0.11, "gemini-3.1-flash-image-preview": 0.11}
 BATCH_DISCOUNT = 0.5  # batch mode bills half the standard price
+SIZE_PRICE = {"1K": 1.0, "2K": 1.0, "4K": 1.8}  # 4K output costs about 1.8x the 2K price
 WORKERS = 4
+MAGENTA = (255, 0, 255)
 FILE_LIFETIME = 40 * 3600  # re-upload references older than this (Gemini keeps files 48 hours)
 
 CONSISTENCY = """Consistency rules for this sheet (follow them strictly):
@@ -106,12 +108,17 @@ class Pass:
 
     # --- bookkeeping --------------------------------------------------------------------
 
+    def price_for(self, sheet):
+        """Full price of one try at `sheet`, at its own output size if it sets one."""
+        return self.price * SIZE_PRICE.get(sheet.get("size", self.size), 1.0)
+
     def spent(self):
         """Dollars spent, plus what batch jobs still running will cost."""
         done = sum(v.get("cost", 0) for k, v in self.state.items() if not k.startswith("_"))
         jobs = self.state.get("_jobs", [])
         return done + self.state.get("_redone", {}).get("cost", 0) + \
-            sum(len(j["ids"]) * self.price * BATCH_DISCOUNT for j in jobs if not j.get("collected"))
+            sum(self.price_for(self.by_id.get(i, {})) * BATCH_DISCOUNT
+                for j in jobs if not j.get("collected") for i in j["ids"])
 
     def save(self):
         os.makedirs(OUT, exist_ok=True)
@@ -265,13 +272,29 @@ class Pass:
         """The edit's base image padded with its background colour to the closest aspect Gemini
         offers, so the answer can be scaled back and cropped to the base exactly."""
         base = os.path.join(gemini_sheet.ROOT, sheet["edit"]["base"])
-        im = Image.open(base).convert("RGB")
+        im = Image.open(base)
+        # "base_crop": [x0, y0, x1, y1] of the base to send on its own (one piece of a sheet)
+        crop = sheet["edit"].get("base_crop")
+        if im.mode in ("RGBA", "LA", "P"):
+            # a cut sprite: set it on magenta, the background every sheet is drawn on
+            im = im.convert("RGBA")
+            flat = Image.new("RGBA", im.size, MAGENTA + (255,))
+            flat.alpha_composite(im)
+            im, background = flat.convert("RGB"), MAGENTA
+        else:
+            im = im.convert("RGB")
+            background = tuple(int(c) for c in sheet_check.background_color(sheet_check.load_rgb(base)))
+        if crop:
+            im = im.crop(tuple(crop))
+        # "base_scale": enlarge the base (nearest neighbour) so the answer has room for finer pixels
+        k = sheet["edit"].get("base_scale", 1.0)
+        if k != 1.0:
+            im = im.resize((round(im.width * k), round(im.height * k)), Image.NEAREST)
         w, h = im.size
-        aspect = gemini_sheet.closest_aspect(base)
+        aspect = gemini_sheet.closest_aspect_of(w, h)
         a, b = map(int, aspect.split(":"))
         pw, ph = max(w, round(h * a / b)), max(h, round(w * b / a))
-        padded = Image.new("RGB", (pw, ph), tuple(int(c) for c in sheet_check.background_color(
-            sheet_check.load_rgb(base))))
+        padded = Image.new("RGB", (pw, ph), background)
         padded.paste(im, (0, 0))
         path = os.path.join(OUT, "_bases", sheet["id"] + ".png")
         os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -284,7 +307,7 @@ class Pass:
                     prepare(base)] + [prepare(os.path.join(gemini_sheet.ROOT, r)) for r in sheet["edit"].get("refs", [])] + [
                     {"text": sheet["edit"]["text"] + "\n\n" + EDIT_RULES}]}],
                 "generationConfig": {"responseModalities": ["TEXT", "IMAGE"],
-                                     "imageConfig": {"aspectRatio": aspect, "imageSize": self.size}}}
+                                     "imageConfig": {"aspectRatio": aspect, "imageSize": sheet.get("size", self.size)}}}
         return body, aspect, unpad
 
     @staticmethod
@@ -302,11 +325,13 @@ class Pass:
         return {"file_data": {"mime_type": "image/png", "file_uri": f["uri"]}}
 
     def submit(self, wave):
-        each = self.price * BATCH_DISCOUNT
-        room = int((self.budget - self.spent()) // each)
+        left, room = self.budget - self.spent(), 0
+        while room < len(wave) and left >= self.price_for(wave[room]) * BATCH_DISCOUNT:
+            left -= self.price_for(wave[room]) * BATCH_DISCOUNT
+            room += 1
         if room < len(wave):
-            print("Budget allows %d of the %d sheets in this wave." % (max(room, 0), len(wave)))
-            wave = wave[:max(room, 0)]
+            print("Budget allows %d of the %d sheets in this wave." % (room, len(wave)))
+            wave = wave[:room]
         if not wave:
             return False
         lines, dests, errors = [], {}, {}
@@ -364,8 +389,8 @@ class Pass:
                     if line.strip():
                         row = json.loads(line)
                         by_key[row.get("key")] = row
-            each = self.price * BATCH_DISCOUNT
             for sid, meta_s in job["sheets"].items():
+                each = self.price_for(self.by_id.get(sid, {})) * BATCH_DISCOUNT
                 row = by_key.get(sid)
                 entry = dict(meta_s)
                 try:
@@ -416,7 +441,8 @@ class Pass:
                 break
             n += 1
             made |= set(wave)
-            print("Wave %d: %d sheets, about $%.2f" % (n, len(wave), len(wave) * self.price * BATCH_DISCOUNT))
+            cost = sum(self.price_for(self.by_id[i]) for i in wave) * BATCH_DISCOUNT
+            print("Wave %d: %d sheets, about $%.2f" % (n, len(wave), cost))
 
     # --- report -------------------------------------------------------------------------
 

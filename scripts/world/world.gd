@@ -10,6 +10,10 @@ extends Node2D
 ## width at least 960; a wider or taller window (16:10 like the Steam Deck, ultrawide) shows
 ## more of the world instead of black bars (see _on_resized).
 static var VIEW := Vector2(960, 540)
+## How close the camera is: below 1 shows more of the world around the hero (the HUD keeps
+## its size). Every map must be at least world_view() big on a 16:10 screen, or the camera
+## would show past its edges; content_world_test checks it.
+const CAMERA_ZOOM := 0.88
 ## How far ahead of the hero the camera looks in the direction they walk, in game pixels.
 const LOOK_AHEAD := 70.0
 ## The camera only follows a jump once the hero is this far above or below where they last stood.
@@ -252,10 +256,15 @@ func show_chat(kind: String, from: String, text: String, from_peer: int) -> void
 			who.set(&"speech", text)
 			who.set(&"speech_t", 300)
 
+## How much of the world the camera shows, in game pixels: the canvas, zoomed by CAMERA_ZOOM.
+static func world_view() -> Vector2:
+	return VIEW / CAMERA_ZOOM
+
 func _camera_target() -> Vector2:
+	var view := world_view()
 	return Vector2(
-		clampf(player.position.x + _look - VIEW.x / 2.0, 0, maxf(0.0, float(map.width) - VIEW.x)),
-		clampf(_cam_floor - VIEW.y * 0.62, 0, maxf(0.0, float(map.height) - VIEW.y)))
+		clampf(player.position.x + _look - view.x / 2.0, 0, maxf(0.0, float(map.width) - view.x)),
+		clampf(_cam_floor - view.y * 0.62, 0, maxf(0.0, float(map.height) - view.y)))
 
 ## Puts the camera on the hero at once (a new map, a respawn), with nothing to glide from.
 func snap_camera() -> void:

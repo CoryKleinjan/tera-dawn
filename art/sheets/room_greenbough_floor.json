@@ -1,23 +1,23 @@
 {
-  "source": "art/source/room_greenbough.png",
+  "source": "art/source/room_greenbough_fine.png",
   "out_dir": "assets/sprites/rooms/greenbough",
-  "scale": 0.45,
+  "scale": 0.3896,
   "label_band": 0.2,
   "region": [
-    1182,
+    2730,
     0,
-    1774,
-    594
+    4098,
+    1372
   ],
   "grid": {
     "rows": [
       0,
-      300,
-      594
+      693,
+      1372
     ],
     "cols": [
       0,
-      592
+      1368
     ]
   },
   "cells": [
@@ -28,26 +28,26 @@
       "floor_side"
     ]
   ],
-  "inset": 6,
+  "inset": 14,
   "overrides": {
     "floor_top": {
       "seamless": true,
-      "size": 128,
+      "size": 256,
       "crop": [
-        300,
-        40,
-        548,
-        288
+        693,
+        92,
+        1266,
+        665
       ]
     },
     "floor_side": {
       "seamless": true,
-      "size": 128,
+      "size": 256,
       "crop": [
-        200,
-        110,
-        330,
-        240
+        462,
+        254,
+        762,
+        554
       ]
     }
   }

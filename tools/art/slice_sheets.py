@@ -519,7 +519,15 @@ def recolor_dark_parchment(rgb):
     return np.clip(out, 0, 1)
 
 
-RECOLORS = {"leather": recolor_leather, "dark_parchment": recolor_dark_parchment}
+def recolor_despill(rgb):
+    """Pale art the background tinted (sparkles that came back pinkish white): green comes
+    up to just under red and blue, so they read white or cream, not pink."""
+    out = rgb.copy()
+    out[..., 1] = np.maximum(rgb[..., 1], np.minimum(rgb[..., 0], rgb[..., 2]) - 0.06)
+    return out
+
+
+RECOLORS = {"leather": recolor_leather, "dark_parchment": recolor_dark_parchment, "despill": recolor_despill}
 
 
 # How far "grow" may move a piece's art pixels from the shared size, either way.
