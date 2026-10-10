@@ -15,6 +15,10 @@ const MINIMAP_PLAYER := ["hud/minimap_dot_1", 9.0]
 const MINIMAP_NPC := ["hud/minimap_dot_2", 6.0]
 const MINIMAP_OTHER := ["hud/minimap_dot_3", 6.0]
 const MINIMAP_PORTAL := ["hud/minimap_portal", 10.0]
+## The colour of land (platform tops, the floor's edge) on the minimap.
+const MINIMAP_LAND := Color(0.93, 0.85, 0.62)
+## How round the minimap's backdrop corners are, to sit inside the frame's window.
+const MINIMAP_ROUND := 5.0
 ## The quest tracker's panel: its width, and how many quests it lists.
 const TRACKER_W := 176.0
 const TRACKER_QUESTS := 4
@@ -35,10 +39,6 @@ var world: TDWorld
 var banner_y := BANNER_Y
 ## The name tags of the last frame drawn, where they ended up (for tests).
 var last_tags: TDNameTags
-
-## The bottom of the map-name banner on screen; achievement toasts go under it.
-func banner_bottom() -> float:
-	return banner_y + UiSkin.BANNER_H / 2.0
 
 ## Where the minimap and its frame are on screen.
 static func minimap_rect() -> Rect2:
@@ -109,16 +109,50 @@ func _draw_minimap(mm: Rect2) -> void:
 	var inner := Rect2(mm.position + MINIMAP_INNER.position, MINIMAP_INNER.size)
 	var sx := inner.size.x / float(world.map.width)
 	var sy := inner.size.y / float(world.map.height)
-	for pl in world.platforms:
-		draw_rect(Rect2(inner.position.x + pl.x * sx, inner.position.y + pl.y * sy, maxf(2, pl.w * sx), 2), Color(1, 0.95, 0.9, 0.5))
+	var biome := world.map.biome
+	# the map's own sky behind it, and its floor
+	var sky_top := Color(biome.sky_mid.darkened(0.35), 0.85)
+	var sky_low := Color(biome.sky_low.darkened(0.2), 0.85)
+	var sky := DrawUtil.round_rect_points(inner.grow(1.0), MINIMAP_ROUND)
+	var shades := PackedColorArray()
+	for pt in sky:
+		shades.append(sky_top.lerp(sky_low, (pt.y - inner.position.y) / inner.size.y))
+	draw_polygon(sky, shades)
+	var floor_y := inner.position.y + world.map.ground_y * sy
+	var ground := Rect2(inner.position.x - 1.0, floor_y, inner.size.x + 2.0, inner.end.y + 1.0 - floor_y)
+	DrawUtil.round_rect(self, ground, minf(MINIMAP_ROUND, ground.size.y / 2.0), Color(0.32, 0.22, 0.14, 0.9))
+	draw_line(Vector2(inner.position.x, floor_y), Vector2(inner.end.x, floor_y), MINIMAP_LAND, 1.5)
+	for c in world.map.climbables:
+		draw_line(inner.position + Vector2(c.x * sx, c.top * sy), inner.position + Vector2(c.x * sx, c.bottom * sy), Color(0.85, 0.7, 0.45, 0.8), 1.0)
+	for i in range(1, world.platforms.size()):
+		var pl := world.platforms[i]
+		var r := Rect2(inner.position.x + pl.x * sx, inner.position.y + pl.y * sy - 1.0, maxf(3.0, pl.w * sx), 3.0)
+		draw_rect(r, MINIMAP_LAND)
+		draw_rect(Rect2(r.position + Vector2(0, 2), Vector2(r.size.x, 1)), Color(0.35, 0.24, 0.14, 0.9))
 	for p in world.map.portals:
 		_minimap_mark(MINIMAP_PORTAL, inner.position + Vector2(p.x * sx, world.platforms[p.platform].y * sy - 5))
 	for n in world.npcs():
-		_minimap_mark(MINIMAP_NPC, inner.position + Vector2(n.position.x * sx, n.position.y * sy - 3))
+		var at := inner.position + Vector2(n.position.x * sx, n.position.y * sy - 3)
+		_minimap_mark(MINIMAP_NPC, at)
+		var marker := n.quest_marker()
+		if marker == "!" or marker == "?":
+			# quest givers stand out: a little "!" (new quest) or "?" (ready to hand in) over them
+			DrawUtil.text(self, Game.num_font, at + Vector2(0, -4), marker, 11, Palette.SUN if marker == "!" else Palette.GOOD, 0, 3, Palette.NIGHT)
+	var party := {}
+	for row: Array in Game.social.get("party", {}).get("members", []):
+		party[row[0]] = true
 	for a in world.avatars.values():
-		_minimap_mark(MINIMAP_OTHER, inner.position + Vector2(a.position.x * sx, a.position.y * sy - 3))
+		var at := inner.position + Vector2(a.position.x * sx, a.position.y * sy - 3)
+		if party.has(a.char_name):
+			draw_circle(at, 3.5, Palette.GOOD)  # party members in green
+			draw_arc(at, 3.5, 0, TAU, 12, Palette.NIGHT, 1.0)
+		else:
+			_minimap_mark(MINIMAP_OTHER, at)
 	var pp := world.player.position
-	_minimap_mark(MINIMAP_PLAYER, inner.position + Vector2(pp.x * sx, pp.y * sy - 4))
+	var you := inner.position + Vector2(pp.x * sx, pp.y * sy - 4)
+	var pulse := fmod(Time.get_ticks_msec() / 1000.0, 1.4) / 1.4
+	draw_arc(you, 4.0 + pulse * 6.0, 0, TAU, 16, Color(Palette.SUN, 0.8 * (1.0 - pulse)), 1.5)
+	_minimap_mark(MINIMAP_PLAYER, you)
 
 ## One of the minimap's marks ([texture, height]) centred on `at`.
 func _minimap_mark(mark: Array, at: Vector2) -> void:

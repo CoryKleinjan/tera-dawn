@@ -16,9 +16,16 @@ var quickslots: TDQuickslots
 ## character creator, the game menu and the settings screen. While it's showing, the game
 ## ignores play keys.
 var title: Control
-## The title card (log in or register on a server, Play solo, Host, Settings, Quit),
-## hidden while any of the other screens on `title` is showing.
+## The title card: the logo over a small menu (Play, Settings, Quit), and the Play page
+## (Play solo, Host, or log in or register on a server). Hidden while any of the other
+## screens on `title` is showing.
 var title_card: Control
+## The title card's two pages.
+var main_menu: Control
+var play_page: Control
+var menu_play_button: Button
+## Clouds drifting over the key art.
+var title_clouds: TDTitleClouds
 ## The key art behind the title screen and character select.
 var title_backdrop: TextureRect
 var character_select: TDCharacterSelect
@@ -39,13 +46,19 @@ var confirm_field: LineEdit
 var confirm_row: Control
 var login_button: Button
 var register_button: Button
-## Play solo and Host, on their own row under the account boxes.
+## Play solo and Host, on their own row over the account boxes.
 var play_button: Button
 var host_button: Button
 ## Shows why logging in didn't work.
 var message: Label
-## The key hints under the title card, which follow the player's keybinds.
+## The controls, which follow the player's keybinds: shown over the first map to a new
+## character for their first FIRST_HINT_TIME seconds (the full list is in Settings > Controls).
 var keys_help: Label
+## How long the first-time hints stay up, and how big the title's main buttons are.
+const FIRST_HINT_TIME := 40.0
+const MAIN_BUTTON := Vector2(240, 54)
+const FIRST_HINT_Y := 138.0
+var _hint_t := 0.0
 var ui_theme: Theme
 ## Holds the windows so raising one never lifts it above the tooltip or the title menu.
 var window_layer: Control
@@ -143,10 +156,24 @@ func _build_menu_button() -> void:
 	move_child(cog, window_layer.get_index())
 	menu_cog = cog
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	menu_cog.visible = world != null and world.started
 	# the minimap (drawn by the overlay) only shows once there's a character
 	minimap_button.visible = world != null and world.started
+	_show_first_hints(delta)
+
+## The controls over the first map, for a brand-new character's first moments.
+func _show_first_hints(delta: float) -> void:
+	var playing := world != null and world.started and not title.visible
+	if not playing:
+		_hint_t = 0.0
+	var first := playing and Game.me.level == 1 and world.map.id == Character.START_MAP and _hint_t < FIRST_HINT_TIME
+	keys_help.visible = first
+	if first:
+		_hint_t += delta
+		keys_help.modulate.a = clampf((FIRST_HINT_TIME - _hint_t) / 2.0, 0.0, 1.0) * clampf(_hint_t / 0.5, 0.0, 1.0)
+		keys_help.reset_size()
+		keys_help.position = Vector2((TDWorld.VIEW.x - keys_help.size.x) / 2.0, FIRST_HINT_Y)
 
 func _build_windows() -> void:
 	window_layer = Control.new()
@@ -251,38 +278,53 @@ func _build_title() -> void:
 	title_card = CenterContainer.new()
 	title_card.set_anchors_preset(Control.PRESET_FULL_RECT)
 	title.add_child(title_card)
+	title_clouds = TDTitleClouds.new()
+	title_backdrop.add_child(title_clouds)
 	var col := VBoxContainer.new()
 	col.alignment = BoxContainer.ALIGNMENT_CENTER
-	col.add_theme_constant_override("separation", 4)
+	col.add_theme_constant_override("separation", 10)
 	title_card.add_child(col)
 
 	var logo := TextureRect.new()
 	logo.texture = UiSkin.tex("logo")
 	logo.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	logo.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	logo.custom_minimum_size = Vector2(360, 104)
+	logo.custom_minimum_size = Vector2(520, 150)
 	col.add_child(logo)
 
-	var card := PanelContainer.new()
-	card.add_theme_stylebox_override("panel", UiSkin.panel())
-	col.add_child(card)
-	var inner := VBoxContainer.new()
-	inner.add_theme_constant_override("separation", 8)
-	card.add_child(inner)
+	# first the small menu over the key art: Play, Settings, Quit
+	main_menu = VBoxContainer.new()
+	main_menu.alignment = BoxContainer.ALIGNMENT_CENTER
+	main_menu.add_theme_constant_override("separation", 8)
+	col.add_child(main_menu)
+	menu_play_button = UiSkin.menu_button("Play", MAIN_BUTTON)
+	menu_play_button.pressed.connect(_open_play_page)
+	var settings := UiSkin.menu_button("Settings", MAIN_BUTTON)
+	settings.pressed.connect(func() -> void: open_settings())
+	var quit := UiSkin.menu_button("Quit", MAIN_BUTTON)
+	quit.pressed.connect(_quit)
+	for b: Button in [menu_play_button, settings, quit]:
+		b.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+		main_menu.add_child(b)
 
-	var blurb := Label.new()
-	blurb.text = "The sun is rising over Dawnrise Meadow. Clear out the Dewlings, climb the ropes, and follow the portal east to Ember Hollow."
-	blurb.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	blurb.custom_minimum_size.x = 500
-	blurb.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	blurb.add_theme_color_override("font_color", Palette.MIST)
-	blurb.add_theme_font_size_override("font_size", 16)
-	inner.add_child(blurb)
-
-	# before playing: log in to (or register on) a server, or play solo, or host
+	# Play: on your own, hosting friends, or logging in to (or registering on) a server
+	play_page = PanelContainer.new()
+	play_page.add_theme_stylebox_override("panel", UiSkin.panel())
+	play_page.hide()
+	col.add_child(play_page)
 	start_panel = VBoxContainer.new()
 	start_panel.add_theme_constant_override("separation", 6)
-	inner.add_child(start_panel)
+	play_page.add_child(start_panel)
+	play_button = _small_menu_button("Play solo")
+	play_button.tooltip_text = "Play on your own, on this computer"
+	play_button.pressed.connect(_on_play)
+	host_button = _small_menu_button("Host")
+	host_button.tooltip_text = "Play and let friends register and join you (port %d)" % Net.DEFAULT_PORT
+	host_button.pressed.connect(_on_host)
+	start_panel.add_child(_row([play_button, host_button]))
+	var online := _small_title("Or play online")
+	online.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	start_panel.add_child(online)
 	address_field = _field(Game.last_address, "Server address", 64)
 	username_field = _field(Game.last_username, "Username", AccountStore.MAX_USERNAME)
 	password_field = _field("", "Password", AccountStore.MAX_PASSWORD)
@@ -307,34 +349,32 @@ func _build_title() -> void:
 	register_button.tooltip_text = "Make an account on this server"
 	register_button.pressed.connect(_on_register)
 	start_panel.add_child(_row([login_button, register_button]))
-	# no account needed: on your own, or hosting friends
-	var offline := _small_title("Or play without an account")
-	offline.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	start_panel.add_child(offline)
-	play_button = _small_menu_button("Play solo")
-	play_button.tooltip_text = "Play on your own, on this computer"
-	play_button.pressed.connect(_on_play)
-	host_button = _small_menu_button("Host")
-	host_button.tooltip_text = "Play and let friends register and join you (port %d)" % Net.DEFAULT_PORT
-	host_button.pressed.connect(_on_host)
-	start_panel.add_child(_row([play_button, host_button]))
 	message = _label("")
 	message.add_theme_color_override("font_color", Palette.BAD)
 	message.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	message.hide()
 	start_panel.add_child(message)
+	start_panel.add_child(UiSkin.divider())
+	var back := _small_menu_button("Back")
+	back.pressed.connect(_show_main_menu)
+	start_panel.add_child(_row([back]))
 
-	var settings := _small_menu_button("Settings")
-	settings.pressed.connect(func() -> void: open_settings())
-	var quit := _small_menu_button("Quit")
-	quit.pressed.connect(_quit)
-	inner.add_child(_row([settings, quit]))
-
+	# a new character's first steps: the controls, over the meadow (TDHud._process)
 	keys_help = Label.new()
 	keys_help.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	keys_help.add_theme_font_size_override("font_size", 12)
-	keys_help.add_theme_color_override("font_color", Palette.MUTED)
-	inner.add_child(keys_help)
+	keys_help.add_theme_font_size_override("font_size", 13)
+	keys_help.add_theme_color_override("font_color", Palette.MIST)
+	keys_help.add_theme_color_override("font_outline_color", Palette.NIGHT)
+	keys_help.add_theme_constant_override("outline_size", 5)
+	keys_help.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var plate := StyleBoxFlat.new()
+	plate.bg_color = Color(Palette.NIGHT, 0.55)
+	plate.set_corner_radius_all(10)
+	plate.set_content_margin_all(10)
+	keys_help.add_theme_stylebox_override("normal", plate)
+	keys_help.hide()
+	add_child(keys_help)
+	move_child(keys_help, title.get_index())
 	_update_keys_help()
 	Settings.changed.connect(_on_settings_changed)
 	_focus_login.call_deferred()
@@ -482,7 +522,24 @@ func _connect(register: bool) -> void:
 	confirm_field.text = ""
 	_show_message(problem if problem != "" else "Connecting to %s…" % address)
 
+## The title card's main menu (Play, Settings, Quit).
+func _show_main_menu() -> void:
+	play_page.hide()
+	main_menu.show()
+	_show_message("")
+	menu_play_button.grab_focus.call_deferred()
+
+## The Play page: solo, host, or online.
+func _open_play_page() -> void:
+	main_menu.hide()
+	play_page.show()
+	_focus_login()
+
 func _focus_login() -> void:
+	if not play_page.visible:
+		if menu_play_button.is_visible_in_tree():
+			menu_play_button.grab_focus()
+		return
 	if username_field.text == "":
 		username_field.grab_focus()
 	else:
@@ -587,6 +644,10 @@ func _update_keys_help() -> void:
 func _show_message(text: String) -> void:
 	message.text = text
 	message.visible = text != ""
+	if text != "" and not play_page.visible:
+		# the message sits on the Play page, with the boxes it's about
+		main_menu.hide()
+		play_page.show()
 
 ## The title screen (not playing yet) or the game menu (playing).
 func show_title(paused: bool) -> void:
@@ -600,7 +661,7 @@ func show_title(paused: bool) -> void:
 	else:
 		game_menu.hide()
 		_back_to_title()
-		_focus_login()
+		_show_main_menu()
 
 ## Back to the game from the game menu.
 func resume() -> void:
@@ -618,6 +679,8 @@ func escape() -> void:
 		creator.cancelled.emit()
 	elif character_select.visible:
 		_on_log_out()
+	elif title_card.is_visible_in_tree() and play_page.visible:
+		_show_main_menu()
 	elif not world.started:
 		return
 	elif title.visible:

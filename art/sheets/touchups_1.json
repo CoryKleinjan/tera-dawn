@@ -71,7 +71,8 @@
     "list_row_hover": {
       "scale": 0.14,
       "out_dir": "assets/sprites/ui/menu",
-      "keep": "largest"
+      "keep": "largest",
+      "recolor": "leather"
     },
     "slider_knob_hover": {
       "scale": 0.4,
@@ -82,12 +83,14 @@
         300
       ],
       "out_dir": "assets/sprites/ui/menu",
-      "keep": "largest"
+      "keep": "largest",
+      "recolor": "leather"
     },
     "cooldown_cover": {
       "scale": 0.4,
       "out_dir": "assets/sprites/ui/hud",
-      "keep": "largest"
+      "keep": "largest",
+      "recolor": "leather"
     }
   }
 }

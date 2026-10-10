@@ -5,6 +5,8 @@ extends Control
 ## the description and what double-clicking does. Drawn above every window.
 
 const W := 220.0
+## A new item's card fades in over this many seconds.
+const FADE_IN := 0.1
 
 var stack: ItemStack
 var at := Vector2.ZERO
@@ -12,14 +14,19 @@ var _owner: Control
 var hint := ""
 ## Gear only: also list how it differs from what's worn where it would go.
 var compare := false
+var _alpha := 0.0
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	_alpha = minf(1.0, _alpha + delta / FADE_IN) if stack != null else 0.0
+	modulate.a = _alpha
 	queue_redraw()
 
 ## Shows `s` near `mouse` on behalf of `owner_window` (null hides it), with a `hint` line
 ## at the bottom, and for gear in the bag a comparison with what's worn if `compare_worn`.
 func show_item(owner_window: Control, s: ItemStack, mouse: Vector2, hint_text := "", compare_worn := false) -> void:
 	_owner = owner_window
+	if s == null or stack == null or s.item != stack.item:
+		_alpha = 0.0
 	stack = s
 	at = mouse
 	hint = hint_text

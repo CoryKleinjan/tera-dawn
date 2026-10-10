@@ -213,6 +213,7 @@ static func style_button(b: Button) -> void:
 	b.add_theme_stylebox_override("pressed", box("button_pressed", 16, 14))
 	for state in ["font_color", "font_hover_color", "font_focus_color", "font_pressed_color"]:
 		b.add_theme_color_override(state, Palette.INK)
+	add_motion(b)
 
 ## A tab button (toggle_mode, in a ButtonGroup) from the settings sheet: muted purple, raised
 ## gold when chosen. `icon` (a texture name) shows left of the text.
@@ -376,7 +377,23 @@ static func menu_button(text: String, min_size := Vector2(150, 48), font_size :=
 	b.add_theme_stylebox_override("disabled", _tinted(normal, Color(0.7, 0.65, 0.7, 0.7)))
 	for state in ["font_color", "font_hover_color", "font_focus_color", "font_pressed_color"]:
 		b.add_theme_color_override(state, Palette.INK)
+	add_motion(b)
 	return b
+
+## Buttons swell a little under the mouse and squash when pressed.
+const HOVER_GROW := 1.03
+const PRESS_SQUASH := Vector2(1.04, 0.92)
+const MOTION_TIME := 0.08
+
+## Gives `b` the hover swell and press squash (drawn only: its layout size doesn't change).
+static func add_motion(b: BaseButton) -> void:
+	var to := func(target: Vector2) -> void:
+		b.pivot_offset = b.size / 2.0
+		b.create_tween().tween_property(b, "scale", target, MOTION_TIME).set_trans(Tween.TRANS_SINE)
+	b.mouse_entered.connect(func() -> void: if not b.disabled: to.call(Vector2.ONE * HOVER_GROW))
+	b.mouse_exited.connect(func() -> void: to.call(Vector2.ONE))
+	b.button_down.connect(func() -> void: to.call(PRESS_SQUASH))
+	b.button_up.connect(func() -> void: to.call(Vector2.ONE * (HOVER_GROW if b.is_hovered() else 1.0)))
 
 ## A style brightened, for hover and focus.
 static func lit(sb: StyleBoxTexture) -> StyleBoxTexture:
@@ -396,12 +413,22 @@ static func use_cursor() -> void:
 	Input.set_custom_mouse_cursor(tex("cursor"), Input.CURSOR_ARROW, Vector2(14, 6))
 
 ## A bar: the frame texture with its fill drawn into the groove. `pos` is the frame's top left.
-static func draw_bar(ci: CanvasItem, frame: String, fill: String, pos: Vector2, fraction: float, scale := 1.0, text := "") -> void:
+## `trail` (above `fraction`) shows a pale chunk of what was just lost, and `flash` (0-1)
+## lights the fill up, for bars that animate (TDStatusBar).
+static func draw_bar(ci: CanvasItem, frame: String, fill: String, pos: Vector2, fraction: float, scale := 1.0, text := "", trail := 0.0, flash := 0.0) -> void:
 	var ft := tex(frame)
 	ci.draw_texture_rect(ft, Rect2(pos, ft.get_size() * scale), false)
 	var g: Rect2 = GROOVES[frame]
 	var groove := Rect2(pos + g.position * scale, g.size * scale)
+	if trail > fraction:
+		var from := groove.size.x * clampf(fraction, 0.0, 1.0)
+		var to := groove.size.x * clampf(trail, 0.0, 1.0)
+		DrawUtil.round_rect(ci, Rect2(groove.position.x + maxf(0.0, from - 4.0), groove.position.y + 1.0, to - from + 4.0, groove.size.y - 2.0),
+			groove.size.y / 2.0 - 1.0, Color(Palette.MUTED, 0.85))
 	draw_bar_fill(ci, fill, groove, fraction, scale)
+	if flash > 0.0 and fraction > 0.0:
+		DrawUtil.round_rect(ci, Rect2(groove.position, Vector2(groove.size.x * clampf(fraction, 0.0, 1.0), groove.size.y)),
+			groove.size.y / 2.0, Color(1.0, 0.95, 0.75, 0.6 * flash))
 	if text != "":
 		DrawUtil.text(ci, Game.ui_font, groove.position + Vector2(groove.size.x / 2.0, groove.size.y - 4.0 * scale),
 			text, int(12 * scale), Palette.MIST, 0, 4, Color(0.1, 0.05, 0.15, 0.9))

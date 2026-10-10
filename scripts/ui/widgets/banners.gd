@@ -1,10 +1,11 @@
 class_name TDBanners
 extends Control
 ## Fanfares over the game: a ribbon in the middle of the screen when you complete a quest or
-## advance to a new job, and a toast under the map-name banner for an achievement. It
-## notices quests and jobs from your character as the server refreshes it;
-## TDWorld.show_achievement calls `achievement`. Ribbons take turns; level ups have their
-## own ribbon on the level up effect (EffectDef.caption_art).
+## advance to a new job, and a toast near the top for an achievement. It notices quests and
+## jobs from your character as the server refreshes it; TDWorld.show_achievement calls
+## `achievement`. Everything takes turns, one at a time and never over the map-name banner:
+## ribbons first, then toasts. Level ups have their own ribbon on the level up effect
+## (EffectDef.caption_art).
 
 ## How long a ribbon and a toast stay up, in frames.
 const RIBBON_TICKS := 150
@@ -12,8 +13,6 @@ const TOAST_TICKS := 240
 ## Where they show, and how wide.
 const RIBBON_Y := 190.0
 const RIBBON_W := {"dialogue/quest_complete_banner": 300.0, "dialogue/job_advance_banner": 380.0}
-## The toast sits this far under the map-name banner, so arriving somewhere new shows both.
-const TOAST_GAP := 6.0
 const TOAST_SIZE := Vector2(300, 54)
 ## The toast art's borders in texels (its star sits in the left one), and how it's scaled.
 const TOAST_MARGINS := Vector4(64, 16, 18, 16)
@@ -59,25 +58,30 @@ func ribbon(art: String, line := "") -> void:
 func achievement(a: Dictionary) -> void:
 	toasts.append(a)
 
+## Whether the map-name banner is up: everything here waits for it.
+func _waiting() -> bool:
+	return world.banner_t > 0
+
 func _process(_delta: float) -> void:
 	visible = world != null and world.started
+	queue_redraw()
+	if not visible or _waiting():
+		return
 	if not ribbons.is_empty():
 		_ribbon_t += 1
 		if _ribbon_t >= RIBBON_TICKS:
 			ribbons.pop_front()
 			_ribbon_t = 0
-	if not toasts.is_empty():
+	elif not toasts.is_empty():
 		_toast_t += 1
 		# with more waiting, each one gets less time
 		if _toast_t >= (TOAST_TICKS if toasts.size() == 1 else TOAST_TICKS / 2):
 			toasts.pop_front()
 			_toast_t = 0
-	queue_redraw()
 
-## Where the achievement toast's top is: under the map-name banner (it slides up into place
-## from below, so it never rises into the banner).
+## Where the achievement toast's top is: where the map-name banner shows (they take turns).
 func toast_top() -> float:
-	return world.hud.overlay.banner_bottom() + TOAST_GAP
+	return world.hud.overlay.banner_y - TOAST_SIZE.y / 2.0
 
 ## Takes every ribbon and toast down at once.
 func clear() -> void:
@@ -87,9 +91,11 @@ func clear() -> void:
 	_toast_t = 0
 
 func _draw() -> void:
+	if _waiting():
+		return
 	if not ribbons.is_empty():
 		_draw_ribbon(ribbons[0][0], ribbons[0][1], _ribbon_t)
-	if not toasts.is_empty():
+	elif not toasts.is_empty():
 		_draw_toast(toasts[0], _toast_t, TOAST_TICKS if toasts.size() == 1 else TOAST_TICKS / 2)
 
 ## How far in (0 to 1) something that pops in over `ins` frames and fades over `outs` is.

@@ -290,7 +290,11 @@ func drawn(n: Node2D) -> Vector2:
 	return (before as Vector2).lerp(n.position, Engine.get_physics_interpolation_fraction())
 
 func _on_resized() -> void:
-	var size := get_viewport().get_visible_rect().size
+	fit_to(get_viewport().get_visible_rect().size)
+
+## Lays the camera and HUD out for a screen of `size` (in UI pixels: 960 wide, taller on
+## 16:10 screens like the Steam Deck's).
+func fit_to(size: Vector2) -> void:
 	VIEW = Vector2(maxf(960.0, size.x), maxf(540.0, size.y))
 	if stage and stage.camera:
 		stage.fit_view()

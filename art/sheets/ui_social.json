@@ -1,5 +1,6 @@
 {
   "source": "art/source/ui_social.png",
+  "recolor": "leather",
   "out_dir": "assets/sprites/ui/social",
   "scale": 0.5,
   "alpha": "soft",
@@ -34,11 +35,13 @@
   "overrides": {
     "leader_star": {
       "fix": "glow_backdrop",
-      "keep": "largest"
+      "keep": "largest",
+      "recolor": null
     },
     "fame_up": {
       "fix": "glow_backdrop",
-      "keep": "largest"
+      "keep": "largest",
+      "recolor": null
     },
     "buddy_add_icon": {
       "fix": "glow_backdrop",
@@ -48,10 +51,17 @@
       "key": [
         0.1,
         0.45
-      ]
+      ],
+      "recolor": null
     },
     "guild_emblem": {
       "blank_top": 50
+    },
+    "offline_dot": {
+      "recolor": null
+    },
+    "fame_down": {
+      "recolor": null
     }
   }
 }

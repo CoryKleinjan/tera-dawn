@@ -45,6 +45,7 @@ DEFAULTS = {
     "key": [0.35, 0.8],       # magenta sheets: magenta-ness at which pixels start / stop being background
     "strip_labels": False,    # paint over white label letters in the label band before cutting
     "fix": None,              # a clean-up from FIXES for every cell (e.g. "glow_backdrop" for icon sheets)
+    "recolor": None,          # a palette change from RECOLORS for every cell (e.g. "leather")
 }
 
 
@@ -308,6 +309,60 @@ FIXES = {"hero_attack_arc": fix_hero_attack_arc, "glow_backdrop": fix_glow_backd
          "painted_sky": fix_painted_sky, "sky_body": fix_sky_body}
 
 
+# ---------- palette changes ----------
+
+def rgb_to_hsv(rgb):
+    r, g, b = rgb[..., 0], rgb[..., 1], rgb[..., 2]
+    mx, mn = rgb.max(-1), rgb.min(-1)
+    d = mx - mn
+    h = np.zeros_like(mx)
+    nz = d > 1e-6
+    rm = nz & (mx == r)
+    gm = nz & (mx == g) & ~rm
+    bm = nz & ~rm & ~gm
+    h[rm] = ((g - b)[rm] / d[rm]) % 6
+    h[gm] = (b - r)[gm] / d[gm] + 2
+    h[bm] = (r - g)[bm] / d[bm] + 4
+    h /= 6.0
+    s = np.where(mx > 1e-6, d / np.maximum(mx, 1e-6), 0)
+    return np.stack([h, s, mx], -1)
+
+
+def hsv_to_rgb(hsv):
+    h, s, v = hsv[..., 0] * 6.0, hsv[..., 1], hsv[..., 2]
+    i = np.floor(h).astype(int) % 6
+    f = h - np.floor(h)
+    p, q, t = v * (1 - s), v * (1 - s * f), v * (1 - s * (1 - f))
+    out = np.zeros(hsv.shape)
+    for k, (a, b, c) in enumerate([(v, t, p), (q, v, p), (p, v, t), (p, q, v), (t, p, v), (v, p, q)]):
+        m = i == k
+        out[m] = np.stack([a[m], b[m], c[m]], -1)
+    return out
+
+
+def recolor_leather(rgb):
+    """Stand-in for the leather-and-parchment UI until its sheets are drawn (part 7): the
+    purple and violet of the old UI turns to oiled brown leather and its bright gold to a
+    softer brass. Reds, blues and greens (HP, MP, icons) are left alone."""
+    hsv = rgb_to_hsv(rgb)
+    h, s, v = hsv[..., 0], hsv[..., 1], hsv[..., 2]
+    purple = (h > 0.62) & (h < 0.97) & (s > 0.12)
+    w = np.clip((s - 0.12) / 0.15, 0, 1) * purple
+    nh = np.where(purple, 0.075, h)
+    ns = np.where(purple, np.clip(s * 0.8 + 0.08, 0, 0.75), s)
+    nv = np.where(purple, np.clip(v * 0.95 + 0.02, 0, 1), v)
+    gold = (h > 0.09) & (h < 0.18) & (s > 0.35)
+    nh = np.where(gold, h - (h - 0.1) * 0.35, nh)
+    ns = np.where(gold, s * 0.78, ns)
+    nv = np.where(gold, v * 0.93, nv)
+    out = hsv_to_rgb(np.stack([nh, ns, nv], -1))
+    blend = np.where(purple, w, 1.0)[..., None]
+    return np.clip(rgb * (1 - blend) + out * blend, 0, 1)
+
+
+RECOLORS = {"leather": recolor_leather}
+
+
 def shrink(rgb, alpha, scale):
     h, w = alpha.shape
     nw, nh = max(1, round(w * scale)), max(1, round(h * scale))
@@ -383,6 +438,8 @@ def cut_cell(rgb_full, bg, box, opts):
     if opts.get("fix"):
         rgb, alpha = FIXES[opts["fix"]](rgb, alpha, source=cell / 255.0)
     rgb, alpha = shrink(rgb, alpha, opts["scale"])
+    if opts.get("recolor"):
+        rgb = RECOLORS[opts["recolor"]](rgb)
     solid = alpha > (0.5 if opts["alpha"] == "hard" else 0.04)
     lab, n = label(solid)
     band = label_px * opts["scale"]
@@ -579,7 +636,9 @@ def process(manifest_path, grid_only=False, sprites=None):
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     grid_only = "--grid" in sys.argv
-    paths = sorted(os.path.join(SHEETS, f) for f in os.listdir(SHEETS) if f.endswith(".json"))
+    # touch-up sheets replace pieces of other sheets, so they go last
+    paths = sorted((os.path.join(SHEETS, f) for f in os.listdir(SHEETS) if f.endswith(".json")),
+                   key=lambda p: (os.path.basename(p).startswith("touchups"), p))
     if args:
         paths = [p for p in paths if os.path.splitext(os.path.basename(p))[0] in args]
     # a manifest can land before its sheet does (art still being made)

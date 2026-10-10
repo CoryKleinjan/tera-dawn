@@ -19,6 +19,10 @@ func _shot(name: String) -> void:
 	get_tree().paused = true
 	if w:
 		w.player.rig.set_opacity(1.0)
+		# windows still growing in and speech still typing out show finished
+		for win: TDWindow in w.hud.windows.values():
+			win.settle()
+		w.hud.tooltip.modulate.a = 1.0
 	await RenderingServer.frame_post_draw
 	get_tree().paused = false
 	get_viewport().get_texture().get_image().save_png("%s/%s.png" % [out, name])

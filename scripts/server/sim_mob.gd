@@ -193,6 +193,7 @@ func step() -> void:
 				var aim := _shot_target(chased)
 				if aim:
 					_shoot(aim)
+					winding = false  # the wind-up ends with the shot
 	if def.jumps and not def.flying:
 		if hop <= 0.0 and hurt_t == 0 and randf() < HOP_CHANCE:
 			hop_v = def.jump_power
