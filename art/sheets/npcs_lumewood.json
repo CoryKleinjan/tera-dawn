@@ -1,19 +1,5 @@
 {
   "source": "art/source/npcs_lumewood.png",
-  "grid": {
-    "rows": [
-      1,
-      511,
-      1022
-    ],
-    "cols": [
-      1,
-      384,
-      768,
-      1151,
-      1534
-    ]
-  },
   "label_band": 0.2,
   "strip_labels": true,
   "save": false,
@@ -21,41 +7,162 @@
   "cells": [
     [
       "lumewood_instructor_1",
+      "",
       "lumewood_shop_1",
+      "",
       "lumewood_store_1",
+      "",
       "lumewood_taxi_1"
     ],
     [
+      ""
+    ],
+    [
       "lumewood_instructor_2",
+      "",
       "lumewood_shop_2",
+      "",
       "lumewood_store_2",
+      "",
       "lumewood_taxi_2"
     ]
   ],
   "overrides": {
     "lumewood_instructor_1": {
-      "scale": 0.206
+      "scale": 0.2339,
+      "blank": [
+        [
+          0,
+          4,
+          357,
+          45
+        ],
+        [
+          0,
+          41,
+          118,
+          82
+        ]
+      ]
     },
     "lumewood_instructor_2": {
-      "scale": 0.206
+      "scale": 0.2339,
+      "blank": [
+        [
+          0,
+          0,
+          358,
+          44
+        ],
+        [
+          0,
+          37,
+          125,
+          81
+        ]
+      ]
     },
     "lumewood_shop_1": {
-      "scale": 0.199
+      "scale": 0.2132,
+      "blank": [
+        [
+          0,
+          4,
+          284,
+          45
+        ],
+        [
+          0,
+          41,
+          112,
+          82
+        ]
+      ]
     },
     "lumewood_shop_2": {
-      "scale": 0.199
+      "scale": 0.2132,
+      "blank": [
+        [
+          0,
+          0,
+          286,
+          44
+        ],
+        [
+          0,
+          37,
+          120,
+          81
+        ]
+      ]
     },
     "lumewood_store_1": {
-      "scale": 0.205
+      "scale": 0.2168,
+      "blank": [
+        [
+          0,
+          4,
+          141,
+          45
+        ],
+        [
+          0,
+          41,
+          117,
+          82
+        ]
+      ]
     },
     "lumewood_store_2": {
-      "scale": 0.205
+      "scale": 0.2168,
+      "blank": [
+        [
+          0,
+          0,
+          144,
+          44
+        ],
+        [
+          0,
+          37,
+          126,
+          81
+        ]
+      ]
     },
     "lumewood_taxi_1": {
-      "scale": 0.192
+      "scale": 0.2012,
+      "blank": [
+        [
+          0,
+          4,
+          325,
+          45
+        ],
+        [
+          0,
+          41,
+          112,
+          82
+        ]
+      ]
     },
     "lumewood_taxi_2": {
-      "scale": 0.192
+      "scale": 0.2012,
+      "blank": [
+        [
+          0,
+          0,
+          328,
+          44
+        ],
+        [
+          0,
+          37,
+          120,
+          81
+        ]
+      ]
     }
   },
   "sets": {
@@ -135,5 +242,40 @@
         }
       }
     }
-  }
+  },
+  "grid": {
+    "rows": [
+      0,
+      511,
+      520,
+      1021
+    ],
+    "cols": [
+      [
+        0,
+        361,
+        393,
+        716,
+        774,
+        1079,
+        1166,
+        1495
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        362,
+        394,
+        764,
+        774,
+        1078,
+        1166,
+        1498
+      ]
+    ]
+  },
+  "inset": 2
 }

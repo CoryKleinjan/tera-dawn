@@ -1,19 +1,5 @@
 {
   "source": "art/source/npcs_harbor_3.png",
-  "grid": {
-    "rows": [
-      1,
-      511,
-      1022
-    ],
-    "cols": [
-      1,
-      384,
-      768,
-      1151,
-      1534
-    ]
-  },
   "label_band": 0.2,
   "strip_labels": true,
   "save": false,
@@ -21,35 +7,97 @@
   "cells": [
     [
       "guild_clerk_1",
+      "",
       "market_clerk_1",
+      "",
       "pet_keeper_1",
+      "",
+      ""
+    ],
+    [
       ""
     ],
     [
       "guild_clerk_2",
+      "",
       "market_clerk_2",
+      "",
       "pet_keeper_2",
       ""
     ]
   ],
   "overrides": {
     "guild_clerk_1": {
-      "scale": 0.205
+      "scale": 0.2253,
+      "blank": [
+        [
+          0,
+          0,
+          236,
+          26
+        ]
+      ]
     },
     "guild_clerk_2": {
-      "scale": 0.205
+      "scale": 0.2253,
+      "blank": [
+        [
+          86,
+          0,
+          240,
+          20
+        ]
+      ]
     },
     "market_clerk_1": {
-      "scale": 0.201
+      "scale": 0.2224,
+      "blank": [
+        [
+          0,
+          0,
+          201,
+          26
+        ]
+      ]
     },
     "market_clerk_2": {
-      "scale": 0.201
+      "scale": 0.2224,
+      "blank": [
+        [
+          0,
+          0,
+          68,
+          20
+        ],
+        [
+          108,
+          0,
+          203,
+          20
+        ]
+      ]
     },
     "pet_keeper_1": {
-      "scale": 0.193
+      "scale": 0.204,
+      "blank": [
+        [
+          0,
+          0,
+          184,
+          26
+        ]
+      ]
     },
     "pet_keeper_2": {
-      "scale": 0.193
+      "scale": 0.204,
+      "blank": [
+        [
+          0,
+          0,
+          187,
+          20
+        ]
+      ]
     }
   },
   "sets": {
@@ -110,5 +158,39 @@
         }
       }
     }
-  }
+  },
+  "grid": {
+    "rows": [
+      12,
+      479,
+      537,
+      982
+    ],
+    "cols": [
+      [
+        10,
+        359,
+        400,
+        753,
+        836,
+        1110,
+        1185,
+        1479
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        9,
+        366,
+        400,
+        766,
+        836,
+        1121,
+        1504
+      ]
+    ]
+  },
+  "inset": 2
 }

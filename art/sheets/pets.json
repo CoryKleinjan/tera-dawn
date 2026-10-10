@@ -1,42 +1,68 @@
 {
   "source": "art/source/pets.png",
   "out_dir": "art/build/pets",
-  "scale": 0.3,
   "alpha": "hard",
   "label_band": 0.3,
   "save": false,
   "cells": [
     [
       "puffpaw_idle1",
+      "",
       "puffpaw_idle2",
+      "",
       "puffpaw_walk1",
+      "",
       "puffpaw_walk2",
+      "",
       "puffpaw_walk3",
+      "",
       "puffpaw_walk4",
+      "",
       "puffpaw_jump",
+      "",
       "puffpaw_happy1",
+      "",
       "puffpaw_happy2"
     ],
     [
       "sprout_idle1",
+      "",
       "sprout_idle2",
+      "",
       "sprout_walk1",
+      "",
       "sprout_walk2",
+      "",
       "sprout_walk3",
+      "",
       "sprout_walk4",
+      "",
       "sprout_jump",
+      "",
       "sprout_happy1",
+      "",
       "sprout_happy2"
     ],
     [
+      ""
+    ],
+    [
       "emberkit_idle1",
+      "",
       "emberkit_idle2",
+      "",
       "emberkit_walk1",
+      "",
       "emberkit_walk2",
+      "",
       "emberkit_walk3",
+      "",
       "emberkit_walk4",
+      "",
       "emberkit_jump",
+      "",
       "emberkit_happy1",
+      "",
       "emberkit_happy2"
     ]
   ],
@@ -187,6 +213,234 @@
           "fps": 4
         }
       }
+    }
+  },
+  "grid": {
+    "rows": [
+      4,
+      365,
+      727,
+      730,
+      1092
+    ],
+    "cols": [
+      [
+        6,
+        221,
+        268,
+        491,
+        541,
+        740,
+        771,
+        958,
+        992,
+        1189,
+        1205,
+        1392,
+        1423,
+        1661,
+        1665,
+        1923,
+        1932,
+        2167
+      ],
+      [
+        6,
+        220,
+        245,
+        496,
+        515,
+        730,
+        774,
+        940,
+        991,
+        1189,
+        1210,
+        1383,
+        1421,
+        1660,
+        1663,
+        1884,
+        1934,
+        2169
+      ],
+      [
+        0,
+        2172
+      ],
+      [
+        6,
+        214,
+        268,
+        483,
+        488,
+        741,
+        777,
+        958,
+        990,
+        1189,
+        1207,
+        1389,
+        1426,
+        1667,
+        1674,
+        1924,
+        1936,
+        2164
+      ]
+    ]
+  },
+  "inset": 2,
+  "strip_labels": true,
+  "key": [
+    0.25,
+    0.42
+  ],
+  "overrides": {
+    "puffpaw_jump": {
+      "blank": [
+        [
+          204,
+          0,
+          210,
+          357
+        ]
+      ],
+      "scale": 0.2172
+    },
+    "puffpaw_happy1": {
+      "blank": [
+        [
+          234,
+          0,
+          241,
+          357
+        ]
+      ],
+      "scale": 0.2172
+    },
+    "sprout_idle2": {
+      "blank": [
+        [
+          17,
+          0,
+          23,
+          358
+        ]
+      ],
+      "scale": 0.2047
+    },
+    "sprout_walk1": {
+      "blank": [
+        [
+          20,
+          0,
+          26,
+          358
+        ]
+      ],
+      "scale": 0.2047
+    },
+    "sprout_jump": {
+      "blank": [
+        [
+          206,
+          0,
+          212,
+          358
+        ]
+      ],
+      "scale": 0.2047
+    },
+    "emberkit_walk1": {
+      "blank": [
+        [
+          47,
+          0,
+          53,
+          358
+        ]
+      ],
+      "scale": 0.2215
+    },
+    "emberkit_jump": {
+      "blank": [
+        [
+          201,
+          0,
+          207,
+          358
+        ]
+      ],
+      "scale": 0.2215
+    },
+    "emberkit_happy1": {
+      "blank": [
+        [
+          226,
+          0,
+          232,
+          358
+        ]
+      ],
+      "scale": 0.2215
+    },
+    "puffpaw_idle1": {
+      "scale": 0.2172
+    },
+    "puffpaw_idle2": {
+      "scale": 0.2172
+    },
+    "puffpaw_walk1": {
+      "scale": 0.2172
+    },
+    "puffpaw_walk2": {
+      "scale": 0.2172
+    },
+    "puffpaw_walk3": {
+      "scale": 0.2172
+    },
+    "puffpaw_walk4": {
+      "scale": 0.2172
+    },
+    "puffpaw_happy2": {
+      "scale": 0.2172
+    },
+    "sprout_idle1": {
+      "scale": 0.2047
+    },
+    "sprout_walk2": {
+      "scale": 0.2047
+    },
+    "sprout_walk3": {
+      "scale": 0.2047
+    },
+    "sprout_walk4": {
+      "scale": 0.2047
+    },
+    "sprout_happy1": {
+      "scale": 0.2047
+    },
+    "sprout_happy2": {
+      "scale": 0.2047
+    },
+    "emberkit_idle1": {
+      "scale": 0.2215
+    },
+    "emberkit_idle2": {
+      "scale": 0.2215
+    },
+    "emberkit_walk2": {
+      "scale": 0.2215
+    },
+    "emberkit_walk3": {
+      "scale": 0.2215
+    },
+    "emberkit_walk4": {
+      "scale": 0.2215
+    },
+    "emberkit_happy2": {
+      "scale": 0.2215
     }
   }
 }

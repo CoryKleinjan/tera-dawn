@@ -1,19 +1,5 @@
 {
   "source": "art/source/npcs_driftcove.png",
-  "grid": {
-    "rows": [
-      1,
-      511,
-      1022
-    ],
-    "cols": [
-      1,
-      384,
-      768,
-      1151,
-      1534
-    ]
-  },
   "label_band": 0.2,
   "strip_labels": true,
   "save": false,
@@ -21,41 +7,132 @@
   "cells": [
     [
       "driftcove_instructor_1",
+      "",
       "driftcove_shop_1",
+      "",
       "driftcove_store_1",
+      "",
       "driftcove_taxi_1"
     ],
     [
+      ""
+    ],
+    [
       "driftcove_instructor_2",
+      "",
       "driftcove_shop_2",
+      "",
       "driftcove_store_2",
+      "",
       "driftcove_taxi_2"
     ]
   ],
   "overrides": {
     "driftcove_instructor_1": {
-      "scale": 0.205
+      "scale": 0.2372,
+      "blank": [
+        [
+          0,
+          0,
+          253,
+          26
+        ]
+      ]
     },
     "driftcove_instructor_2": {
-      "scale": 0.205
+      "scale": 0.2372,
+      "blank": [
+        [
+          0,
+          0,
+          247,
+          21
+        ]
+      ]
     },
     "driftcove_shop_1": {
-      "scale": 0.204
+      "scale": 0.2406,
+      "blank": [
+        [
+          0,
+          0,
+          57,
+          26
+        ],
+        [
+          95,
+          0,
+          220,
+          26
+        ]
+      ]
     },
     "driftcove_shop_2": {
-      "scale": 0.204
+      "scale": 0.2406,
+      "blank": [
+        [
+          0,
+          0,
+          211,
+          21
+        ]
+      ]
     },
     "driftcove_store_1": {
-      "scale": 0.221
+      "scale": 0.2411,
+      "blank": [
+        [
+          162,
+          0,
+          286,
+          26
+        ]
+      ]
     },
     "driftcove_store_2": {
-      "scale": 0.221
+      "scale": 0.2411,
+      "blank": [
+        [
+          15,
+          0,
+          72,
+          21
+        ],
+        [
+          141,
+          0,
+          279,
+          21
+        ]
+      ]
     },
     "driftcove_taxi_1": {
-      "scale": 0.191
+      "scale": 0.2215,
+      "blank": [
+        [
+          20,
+          0,
+          83,
+          26
+        ],
+        [
+          197,
+          0,
+          292,
+          26
+        ]
+      ]
     },
     "driftcove_taxi_2": {
-      "scale": 0.191
+      "scale": 0.2215,
+      "blank": [
+        [
+          167,
+          0,
+          260,
+          21
+        ]
+      ]
     }
   },
   "sets": {
@@ -135,5 +212,40 @@
         }
       }
     }
-  }
+  },
+  "grid": {
+    "rows": [
+      12,
+      463,
+      509,
+      980
+    ],
+    "cols": [
+      [
+        11,
+        343,
+        399,
+        748,
+        813,
+        1116,
+        1156,
+        1467
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        16,
+        317,
+        400,
+        682,
+        813,
+        1203,
+        1234,
+        1498
+      ]
+    ]
+  },
+  "inset": 2
 }

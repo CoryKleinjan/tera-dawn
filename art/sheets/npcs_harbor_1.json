@@ -1,19 +1,5 @@
 {
   "source": "art/source/npcs_harbor_1.png",
-  "grid": {
-    "rows": [
-      1,
-      511,
-      1022
-    ],
-    "cols": [
-      1,
-      384,
-      768,
-      1151,
-      1534
-    ]
-  },
   "label_band": 0.2,
   "strip_labels": true,
   "save": false,
@@ -21,41 +7,126 @@
   "cells": [
     [
       "captain_marlo_1",
+      "",
       "guide_sorrel_1",
+      "",
       "wagon_driver_1",
+      "",
       "harbormaster_1"
     ],
     [
+      ""
+    ],
+    [
       "captain_marlo_2",
+      "",
       "guide_sorrel_2",
+      "",
       "wagon_driver_2",
+      "",
       "harbormaster_2"
     ]
   ],
   "overrides": {
     "captain_marlo_1": {
-      "scale": 0.207
+      "scale": 0.2325,
+      "blank": [
+        [
+          0,
+          0,
+          219,
+          26
+        ]
+      ]
     },
     "captain_marlo_2": {
-      "scale": 0.207
+      "scale": 0.2325,
+      "blank": [
+        [
+          0,
+          0,
+          216,
+          20
+        ]
+      ]
     },
     "guide_sorrel_1": {
-      "scale": 0.203
+      "scale": 0.2392,
+      "blank": [
+        [
+          0,
+          0,
+          56,
+          26
+        ],
+        [
+          93,
+          0,
+          230,
+          26
+        ]
+      ]
     },
     "guide_sorrel_2": {
-      "scale": 0.203
+      "scale": 0.2392,
+      "blank": [
+        [
+          104,
+          0,
+          225,
+          20
+        ]
+      ]
     },
     "wagon_driver_1": {
-      "scale": 0.216
+      "scale": 0.2414,
+      "blank": [
+        [
+          15,
+          0,
+          224,
+          26
+        ]
+      ]
     },
     "wagon_driver_2": {
-      "scale": 0.216
+      "scale": 0.2414,
+      "blank": [
+        [
+          15,
+          0,
+          216,
+          20
+        ],
+        [
+          266,
+          0,
+          334,
+          20
+        ]
+      ]
     },
     "harbormaster_1": {
-      "scale": 0.201
+      "scale": 0.2389,
+      "blank": [
+        [
+          0,
+          0,
+          199,
+          26
+        ]
+      ]
     },
     "harbormaster_2": {
-      "scale": 0.201
+      "scale": 0.2389,
+      "blank": [
+        [
+          0,
+          0,
+          191,
+          20
+        ]
+      ]
     }
   },
   "sets": {
@@ -135,5 +206,40 @@
         }
       }
     }
-  }
+  },
+  "grid": {
+    "rows": [
+      12,
+      463,
+      510,
+      980
+    ],
+    "cols": [
+      [
+        12,
+        303,
+        400,
+        792,
+        813,
+        1123,
+        1184,
+        1480
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        15,
+        309,
+        399,
+        797,
+        813,
+        1203,
+        1233,
+        1505
+      ]
+    ]
+  },
+  "inset": 2
 }

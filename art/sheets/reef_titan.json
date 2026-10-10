@@ -1,27 +1,5 @@
 {
-  "source": "art/source/mon_driftcove.png",
-  "region": [
-    772,
-    730,
-    1536,
-    1024
-  ],
-  "grid": {
-    "rows": [
-      22,
-      98,
-      187,
-      294
-    ],
-    "cols": [
-      0,
-      192,
-      382,
-      572,
-      764
-    ]
-  },
-  "scale": 1.0,
+  "source": "art/source/mon_reef_titan.png",
   "label_band": 0.2,
   "strip_labels": true,
   "save": false,
@@ -29,20 +7,35 @@
   "cells": [
     [
       "idle1",
+      "",
       "idle2",
+      "",
       "move1",
+      "",
       "move2"
     ],
     [
+      ""
+    ],
+    [
       "move3",
+      "",
       "windup",
+      "",
       "strike",
+      "",
       "special"
     ],
     [
+      ""
+    ],
+    [
       "hurt",
+      "",
       "enraged",
+      "",
       "defeated1",
+      "",
       "defeated2"
     ]
   ],
@@ -110,20 +103,67 @@
     }
   },
   "overrides": {
-    "windup": {
-      "blank_label": 16
-    },
-    "strike": {
-      "blank_label": 16
-    },
-    "special": {
-      "blank_label": 16
-    },
-    "enraged": {
-      "blank_label": 16
-    },
-    "defeated1": {
-      "blank_label": 16
+    "defeated2": {
+      "blank": [
+        [
+          0,
+          274,
+          361,
+          279
+        ]
+      ]
     }
-  }
+  },
+  "grid": {
+    "rows": [
+      40,
+      312,
+      385,
+      655,
+      719,
+      1010
+    ],
+    "cols": [
+      [
+        46,
+        307,
+        440,
+        700,
+        829,
+        1091,
+        1213,
+        1484
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        48,
+        382,
+        425,
+        735,
+        803,
+        1128,
+        1154,
+        1518
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        16,
+        360,
+        424,
+        769,
+        813,
+        1104,
+        1171,
+        1536
+      ]
+    ]
+  },
+  "inset": 2,
+  "scale": 0.2726
 }

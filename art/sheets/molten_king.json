@@ -1,27 +1,5 @@
 {
-  "source": "art/source/mon_emberreach.png",
-  "region": [
-    772,
-    712,
-    1536,
-    1024
-  ],
-  "grid": {
-    "rows": [
-      27,
-      106,
-      198,
-      312
-    ],
-    "cols": [
-      0,
-      192,
-      383,
-      573,
-      764
-    ]
-  },
-  "scale": 1.0,
+  "source": "art/source/mon_molten_king.png",
   "label_band": 0.2,
   "strip_labels": true,
   "save": false,
@@ -29,20 +7,35 @@
   "cells": [
     [
       "idle1",
+      "",
       "idle2",
+      "",
       "move1",
+      "",
       "move2"
     ],
     [
+      ""
+    ],
+    [
       "move3",
+      "",
       "windup",
+      "",
       "strike",
+      "",
       "special"
     ],
     [
+      ""
+    ],
+    [
       "hurt",
+      "",
       "enraged",
+      "",
       "defeated1",
+      "",
       "defeated2"
     ]
   ],
@@ -110,17 +103,67 @@
     }
   },
   "overrides": {
-    "windup": {
-      "blank_label": 16
-    },
-    "strike": {
-      "blank_label": 16
-    },
-    "special": {
-      "blank_label": 16
-    },
-    "enraged": {
-      "blank_label": 16
+    "defeated2": {
+      "blank": [
+        [
+          0,
+          243,
+          339,
+          248
+        ]
+      ]
     }
-  }
+  },
+  "grid": {
+    "rows": [
+      60,
+      321,
+      354,
+      662,
+      706,
+      979
+    ],
+    "cols": [
+      [
+        50,
+        367,
+        437,
+        744,
+        809,
+        1130,
+        1165,
+        1515
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        28,
+        390,
+        427,
+        754,
+        796,
+        1161,
+        1191,
+        1505
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        57,
+        374,
+        443,
+        757,
+        805,
+        1125,
+        1170,
+        1513
+      ]
+    ]
+  },
+  "inset": 2,
+  "scale": 0.2881
 }
