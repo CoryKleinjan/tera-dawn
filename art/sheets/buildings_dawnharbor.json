@@ -1,0 +1,18 @@
+{
+  "source": "art/source/buildings_dawnharbor.png",
+  "out_dir": "assets/sprites/buildings/dawnharbor",
+  "scale": 0.75,
+  "label_band": 0.2,
+  "cells": [
+    [
+      "store",
+      "hall",
+      "shop"
+    ],
+    [
+      "house_a",
+      "house_b",
+      "landmark"
+    ]
+  ]
+}

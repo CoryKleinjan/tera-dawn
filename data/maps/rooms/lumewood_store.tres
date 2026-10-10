@@ -1,0 +1,111 @@
+[gd_resource type="Resource" script_class="MapDef" load_steps=23 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
+[ext_resource type="Resource" path="res://data/biomes/rooms/lumewood_room.tres" id="2_lumewood"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="3_portal_def"]
+[ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="4_npc_placement"]
+[ext_resource type="Resource" path="res://data/npcs/lumewood_store.tres" id="5_lumewood_store"]
+[ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="6_prop_placement"]
+[ext_resource type="Texture2D" path="res://assets/sprites/rooms/lumewood/shelf.png" id="7_shelf"]
+[ext_resource type="Texture2D" path="res://assets/sprites/rooms/lumewood/counter.png" id="8_counter"]
+[ext_resource type="Texture2D" path="res://assets/sprites/rooms/lumewood/barrel.png" id="9_barrel"]
+[ext_resource type="Texture2D" path="res://assets/sprites/rooms/lumewood/crate.png" id="10_crate"]
+[ext_resource type="Texture2D" path="res://assets/sprites/rooms/lumewood/plant.png" id="11_plant"]
+[ext_resource type="Texture2D" path="res://assets/sprites/rooms/lumewood/lamp.png" id="12_lamp"]
+
+[sub_resource type="Resource" id="Door"]
+script = ExtResource("3_portal_def")
+x = 150.0
+platform = 0
+target_map = &"lumewood"
+target_x = 930.0
+door = true
+
+[sub_resource type="Resource" id="Keeper"]
+script = ExtResource("4_npc_placement")
+npc = ExtResource("5_lumewood_store")
+x = 700.0
+platform = 0
+face = -1
+
+[sub_resource type="Resource" id="Prop_0"]
+script = ExtResource("6_prop_placement")
+texture = ExtResource("7_shelf")
+x = 560.0
+depth = -2.6
+scale = 1.0
+
+[sub_resource type="Resource" id="Prop_1"]
+script = ExtResource("6_prop_placement")
+texture = ExtResource("8_counter")
+x = 760.0
+depth = -0.9
+scale = 1.0
+
+[sub_resource type="Resource" id="Prop_2"]
+script = ExtResource("6_prop_placement")
+texture = ExtResource("7_shelf")
+x = 900.0
+depth = -2.6
+scale = 1.0
+
+[sub_resource type="Resource" id="Prop_3"]
+script = ExtResource("6_prop_placement")
+texture = ExtResource("9_barrel")
+x = 1040.0
+depth = -1.6
+scale = 1.0
+
+[sub_resource type="Resource" id="Prop_4"]
+script = ExtResource("6_prop_placement")
+texture = ExtResource("10_crate")
+x = 1090.0
+depth = -1.9
+scale = 1.0
+
+[sub_resource type="Resource" id="Prop_5"]
+script = ExtResource("6_prop_placement")
+texture = ExtResource("11_plant")
+x = 380.0
+depth = -1.5
+scale = 1.0
+
+[sub_resource type="Resource" id="Prop_6"]
+script = ExtResource("6_prop_placement")
+texture = ExtResource("12_lamp")
+x = 520.0
+depth = -1.0
+scale = 1.0
+y = 300.0
+light_color = Color(1.0, 0.8, 0.5, 1.0)
+light_energy = 2.2
+light_height = 20.0
+
+[sub_resource type="Resource" id="Prop_7"]
+script = ExtResource("6_prop_placement")
+texture = ExtResource("12_lamp")
+x = 940.0
+depth = -1.0
+scale = 1.0
+y = 300.0
+light_color = Color(1.0, 0.8, 0.5, 1.0)
+light_energy = 2.2
+light_height = 20.0
+
+[resource]
+script = ExtResource("1_map_def")
+id = &"lumewood_store"
+display_name = "Moss's General Store"
+sign_text = ""
+biome = ExtResource("2_lumewood")
+width = 1200
+height = 700
+ground_y = 620
+start_x = 240.0
+lantern_spacing = 0.0
+region = &"lumewood"
+return_map = &"lumewood"
+interior = true
+portals = Array[ExtResource("3_portal_def")]([SubResource("Door")])
+npcs = Array[ExtResource("4_npc_placement")]([SubResource("Keeper")])
+props = Array[ExtResource("6_prop_placement")]([SubResource("Prop_0"), SubResource("Prop_1"), SubResource("Prop_2"), SubResource("Prop_3"), SubResource("Prop_4"), SubResource("Prop_5"), SubResource("Prop_6"), SubResource("Prop_7")])

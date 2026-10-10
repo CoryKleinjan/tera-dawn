@@ -79,9 +79,14 @@ func test_biomes_have_their_art() -> void:
 		var b := load(path) as BiomeDef
 		if b == null:
 			continue
-		for f in ["ground_top", "ground_side", "ground_soil", "platform_left", "platform_middle", "platform_right", "lantern", "signpost"]:
+		# a room inside a building has a door out instead of platforms, lanterns, a signpost and portals
+		var room := b.door != null
+		var needs := ["ground_top", "ground_side", "ground_soil"]
+		if not room:
+			needs += ["platform_left", "platform_middle", "platform_right", "lantern", "signpost"]
+		for f in needs:
 			_texture(b.get(f), "%s: %s" % [path, f])
-		check(not b.portal_frames.is_empty(), "%s: portal_frames is empty" % path)
+		check(room or not b.portal_frames.is_empty(), "%s: portal_frames is empty" % path)
 		for k in b.portal_frames.size():
 			_texture(b.portal_frames[k], "%s: portal_frames[%d]" % [path, k])
 		for k in b.edge_grass.size():

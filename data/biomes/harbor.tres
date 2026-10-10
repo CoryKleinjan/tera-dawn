@@ -187,11 +187,11 @@ shaded = true
 
 [sub_resource type="Resource" id="Resource_town"]
 script = ExtResource("20_decor_def")
-textures = Array[Texture2D]([ExtResource("31_building_large"), ExtResource("32_building_small"), ExtResource("31_building_large"), ExtResource("33_signature_prop")])
-spacing = Vector2(170.0, 300.0)
+textures = Array[Texture2D]([ExtResource("33_signature_prop")])
+spacing = Vector2(380.0, 700.0)
 depth = Vector2(-8.8, -7.0)
 scale = Vector2(1.0, 1.25)
-chance = 0.95
+chance = 0.7
 texel = 1.25
 shaded = true
 

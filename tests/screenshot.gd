@@ -336,12 +336,22 @@ func _run() -> void:
 		await _shot("worldmap")
 		world.hud.toggle_window("worldmap")
 	if only == "" or only == "towns":
-		# Every hub town, standing by its instructor.
+		# Every hub town, standing between its store and its hall, and on its raised street.
 		for town in [&"dawnharbor", &"greenbough", &"lumewood", &"emberforge", &"lanternfall", &"driftcove"]:
-			Net.server._enter_map(_me(), town, 1000)
+			Net.server._enter_map(_me(), town, 1180)
 			await _physics(40)
 			await _frames(3)
 			await _shot("town_" + town)
+		Net.server._enter_map(_me(), &"meadow", 300)
+		await _physics(10)
+	if only == "" or only == "rooms":
+		# Inside every building you can walk into.
+		for m: MapDef in Content.maps.values():
+			if m.interior:
+				Net.server._enter_map(_me(), m.id, 520)
+				await _physics(40)
+				await _frames(3)
+				await _shot("room_" + m.id)
 		Net.server._enter_map(_me(), &"meadow", 300)
 		await _physics(10)
 	if only == "" or only == "fields":

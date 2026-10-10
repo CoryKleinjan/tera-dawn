@@ -75,9 +75,11 @@ func _check_content() -> void:
 	_check(Content.maps.has(&"meadow") and Content.maps.has(&"hollow"), "the starting maps load")
 	var towns := Content.maps.values().filter(func(m: MapDef) -> bool: return m.town)
 	_check(towns.size() >= 7, "there are hub towns (%d)" % towns.size())
+	# instructors teach in their halls, rooms inside the towns
+	var town_and_rooms := Content.maps.values().filter(func(m: MapDef) -> bool: return m.town or m.interior)
 	for id in [&"warrior", &"archer", &"mage", &"thief", &"pirate"]:
 		var teaches := false
-		for m in towns:
+		for m in town_and_rooms:
 			for n in m.npcs:
 				teaches = teaches or id in n.npc.instructs
 		_check(teaches, "some town's instructor teaches %s" % id)
@@ -432,7 +434,7 @@ func _run() -> void:
 	_check(Net.server != null and _me() != null, "single player runs its own server")
 	var p := world.player
 	_check(p.on_ground, "player starts on the ground")
-	_check(world.npcs().size() == 5, "the meadow has its five NPCs")
+	_check(world.npcs().size() == 4, "the meadow has its four NPCs (Mira keeps shop indoors)")
 	await _ticks(5)
 	_check(world.mobs().all(func(m: TDMob) -> bool: return m.known), "the server tells the game where every monster is")
 
@@ -465,6 +467,16 @@ func _run() -> void:
 	talk.choose(talk.options.size() - 1)
 	_check(not talk.visible, "Goodbye closes the dialogue")
 
+	# Mira's shop is a room inside her house: walk in through its door.
+	var door: PortalDef = Content.map(&"meadow").portals.filter(func(d: PortalDef) -> bool: return d.target_map == &"meadow_store")[0]
+	_check(door.door and Content.map(&"meadow").buildings.any(func(b: BuildingPlacement) -> bool: return b.x == door.x),
+		"the shop's door is a doorway in a building")
+	_teleport(Vector2(door.x, 620))
+	await _ticks(2)
+	await _tap("move_up")
+	await _ticks(4)
+	_check(world.map.id == &"meadow_store" and world.map.interior, "pressing Up in the doorway walks into the shop")
+	_check(world.map.outside() == &"meadow", "the shop is inside the meadow village")
 	# Mira runs a shop: buy potions, sell monster parts.
 	var mira: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.shop != null)[0]
 	_teleport(Vector2(mira.position.x - 30, 620))
@@ -515,12 +527,19 @@ func _run() -> void:
 	shop.buy(4)
 	await _ticks(1)
 	_check(Game.me.shards == 0 and Game.me.inventory.count_of(Content.item(&"elixir")) == 0, "you can't buy what you can't afford")
-	_teleport(Vector2(mira.position.x + 600, 620))
+	_teleport(Vector2(mira.position.x + 450, 620))
 	await _until(func() -> bool: return not shop.visible, 30)
 	_check(not shop.visible, "walking away closes the shop")
 	Net.ask(&"req_buy", [mira.def.id, 0, 1])
 	await _ticks(1)
-	_check(Game.me.inventory.count_of(red_potion) == reds + 10, "the server won't sell from across the map")
+	_check(Game.me.inventory.count_of(red_potion) == reds + 10, "the server won't sell from across the room")
+	# and back out into the village, beside the door
+	var out: PortalDef = world.map.portals[0]
+	_teleport(Vector2(out.x, 620))
+	await _ticks(2)
+	await _tap("move_up")
+	await _ticks(4)
+	_check(world.map.id == &"meadow" and absf(world.player.position.x - door.x) < 120, "the room's door leads back out beside the shop")
 
 	# Put a Dewling right in front of the player and hit it until it dies.
 	var meadow: MapInstance = Net.server.maps[&"meadow"]
@@ -764,6 +783,9 @@ func _check_job_advance() -> void:
 	Net.server._enter_map(_me(), &"lumewood", 300)
 	await _ticks(3)
 	_check(world.map.id == &"lumewood" and world.map.town, "Lumewood is a town")
+	Net.server._enter_map(_me(), &"lumewood_hall", 240)
+	await _ticks(3)
+	_check(world.map.outside() == &"lumewood", "the Magicians' Library is a room in Lumewood")
 	var guide: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"lumewood_instructor")[0]
 	ch.job = Content.job(&"beginner")
 	ch.level = maxi(ch.level, 10)
@@ -1215,6 +1237,10 @@ func _check_social() -> void:
 	await _ticks(3)
 	ch.shards = TDSocial.GUILD_COST + 100
 	ch.level = maxi(ch.level, TDSocial.GUILD_LEVEL)
+	# Hollis keeps the guild register in Dawnharbor's Guild Hall
+	Net.server._enter_map(_me(), &"dawnharbor_guild", 240)
+	Net.server._enter_map(ally, &"dawnharbor_guild", 400)
+	await _ticks(3)
 	var clerk: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"guild_clerk")[0]
 	_teleport(Vector2(clerk.position.x - 30, clerk.position.y))
 	await _ticks(2)
@@ -1232,6 +1258,8 @@ func _check_social() -> void:
 	await _ticks(2)
 	_check(str(chat.lines[-1]["text"]) == "[Guild] %s: hi guild" % ch.name, "/g talks to the guild")
 	# a player shop in the free market
+	Net.server._enter_map(_me(), &"dawnharbor", 300)
+	await _ticks(3)
 	var market: PortalDef = Content.map(&"dawnharbor").portals.filter(func(p: PortalDef) -> bool: return p.target_map == &"free_market")[0]
 	_teleport(Vector2(market.x, 620))
 	await _ticks(2)

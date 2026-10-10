@@ -249,6 +249,9 @@ func test_use_items_have_sane_numbers() -> void:
 
 func test_level_texts_are_readable() -> void:
 	for m: MapDef in Content.maps.values():
+		if m.interior:
+			check(m.level_text == "", "%s: a room inside a building isn't on the world map, so has no level_text" % Scan.where(m))
+			continue
 		if m.level_text == "Town":
 			check(m.town, "%s: level_text says Town but town is false" % Scan.where(m))
 			continue

@@ -47,7 +47,7 @@ func _draw_body() -> void:
 				if dest and dest.world_pos != Vector2.ZERO:
 					draw_dashed_line(to_screen(m.world_pos), to_screen(dest.world_pos), Color(Palette.MIST, 0.7), 2.0, 7.0)
 	# the maps
-	var here: StringName = hud.world.map.id if hud and hud.world and hud.world.map else &""
+	var here: StringName = hud.world.map.outside() if hud and hud.world and hud.world.map else &""
 	for m in maps:
 		var c := to_screen(m.world_pos)
 		var on := m.id == hovered
@@ -87,7 +87,7 @@ func _draw_info(m: MapDef) -> void:
 		bits.append(r.display_name)
 	if m.level_text != "":
 		bits.append(m.level_text)
-	if hud and hud.world and hud.world.map and m.id == hud.world.map.id:
+	if hud and hud.world and hud.world.map and m.id == hud.world.map.outside():
 		bits.append("You are here")
 	DrawUtil.text(self, Game.ui_font, Vector2(INFO_X, y + 18), "  ·  ".join(bits), 12, Palette.MIST, 1, 3, Palette.NIGHT)
 

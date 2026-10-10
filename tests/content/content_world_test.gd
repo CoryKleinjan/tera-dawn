@@ -357,7 +357,45 @@ func test_every_first_job_is_taught_in_a_town() -> void:
 		check(Content.jobs.has(id) and Content.jobs[id].advances_from == Character.START_JOB, "%s is a first job" % id)
 		var teaches := false
 		for m: MapDef in Content.maps.values():
-			if m.town:
+			if m.town or m.interior and Content.maps.get(m.outside(), m).town:
 				for p in m.npcs:
 					teaches = teaches or (p.npc != null and id in p.npc.instructs)
 		check(teaches, "some town's instructor teaches %s" % id)
+
+func test_buildings_stand_on_their_platform() -> void:
+	for m: MapDef in Content.maps.values():
+		var layout := MapLayout.new(m)
+		for i in m.buildings.size():
+			var b := m.buildings[i]
+			var w := "%s: buildings[%d]" % [Scan.where(m), i]
+			if not check(b != null and b.building != null and b.building.texture != null, w + " has no building picture"):
+				continue
+			if check(b.platform >= 0 and b.platform < layout.platforms.size(), "%s.platform %d, the map has 0..%d" % [w, b.platform, layout.platforms.size() - 1]):
+				check(layout.platforms[b.platform].contains_x(b.x), "%s: its door at x %s is off platform %d" % [w, b.x, b.platform])
+			check(b.depth < 0.0, "%s.depth %s must be behind the walking line" % [w, b.depth])
+
+func test_town_doors_are_in_a_building() -> void:
+	# a door is a building's doorway: it stands where a building on that platform has its door
+	for m: MapDef in Content.maps.values():
+		if m.interior:
+			continue
+		for i in m.portals.size():
+			var p := m.portals[i]
+			if p and p.door:
+				check(m.buildings.any(func(b: BuildingPlacement) -> bool: return b.platform == p.platform and absf(b.x - p.x) < 4.0),
+					"%s: portals[%d] is a door but no building has its door at x %s" % [Scan.where(m), i, p.x])
+
+func test_rooms_have_one_door_out_to_their_town() -> void:
+	for m: MapDef in Content.maps.values():
+		if not m.interior:
+			continue
+		var w := Scan.where(m)
+		check(not m.town and m.spawns.is_empty(), "%s: a room is not a town and has no monsters" % w)
+		check(m.world_pos == Vector2.ZERO, "%s: a room isn't drawn on the world map (its town is)" % w)
+		if check(m.portals.size() == 1, "%s: a room has one door, it has %d portals" % [w, m.portals.size()]):
+			var out := m.portals[0]
+			check(out.door, "%s: its way out is a door" % w)
+			check(out.target_map == m.return_map, "%s: its door leads to %s, its return_map is %s" % [w, out.target_map, m.return_map])
+			var town: MapDef = Content.maps.get(m.return_map)
+			if town:
+				check(town.portals.any(func(d: PortalDef) -> bool: return d.door and d.target_map == m.id), "%s: %s has no door into it" % [w, town.id])
