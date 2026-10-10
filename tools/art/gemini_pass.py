@@ -59,7 +59,8 @@ CONSISTENCY = """Consistency rules for this sheet (follow them strictly):
 - The background of the WHOLE image, inside every cell too, is one flat pure magenta #FF00FF (RGB 255, 0, 255): not grey, white, pink, lilac or a darker purple, with no shadows, gradients or coloured panels. No magenta or pink-purple inside any sprite."""
 GRID_RULE = "- Draw exactly {rows} rows x {cols} columns = {n} equal cells, every cell filled in the order given."
 # Sheets with an "edit" entry send ONE image (its "base") and a short instruction instead of the
-# prompt-file chat. Gemini keeps an edited image's layout far better than it traces an attached one.
+# prompt-file chat (plus any "refs" after it). Gemini keeps an edited image's layout far better
+# than it traces an attached one, and a result can be edited again to fix only its bad cells.
 EDIT_RULES = """This is an edit of the attached image, not a new drawing. Keep the image's size, grid, cell borders and labels, and every figure's position, size and pose, exactly as they are; change only what is asked above. Any added art is clean pixel art with the same crisp dark plum-brown outline. The background stays one flat pure magenta #FF00FF (RGB 255, 0, 255) everywhere: never grey, pink or lilac. Answer with the edited image."""
 
 
@@ -280,7 +281,8 @@ class Pass:
     def edit_request(self, sheet, prepare):
         base, aspect, unpad = self.edit_base(sheet)
         body = {"contents": [{"role": "user", "parts": [
-                    prepare(base), {"text": sheet["edit"]["text"] + "\n\n" + EDIT_RULES}]}],
+                    prepare(base)] + [prepare(os.path.join(gemini_sheet.ROOT, r)) for r in sheet["edit"].get("refs", [])] + [
+                    {"text": sheet["edit"]["text"] + "\n\n" + EDIT_RULES}]}],
                 "generationConfig": {"responseModalities": ["TEXT", "IMAGE"],
                                      "imageConfig": {"aspectRatio": aspect, "imageSize": self.size}}}
         return body, aspect, unpad

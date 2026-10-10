@@ -390,14 +390,17 @@
     8
    ],
    "anchor": "paperdoll_body",
-   "note": "One item per image: send only the SHIELD, ROUND line. Today all three (plus old gloves) share paperdoll_layers.png as 16x2 rows each; fence reads 'Batch L6 (one prompt each):'. Round 3: made by editing the base image instead of the prompt file (Gemini kept breaking the traced layout).",
+   "note": "One item per image: send only the SHIELD, ROUND line. Today all three (plus old gloves) share paperdoll_layers.png as 16x2 rows each; fence reads 'Batch L6 (one prompt each):'. Round 3/4: made by editing the base image instead of the prompt file (Gemini kept breaking the traced layout). Round 4 edits the round-3 result to fix only its bad cells.",
    "fill": {
     "item": "SHIELD, ROUND"
    },
    "extra": "- You must answer with the finished image itself, not text.\n- Trace the attached base body sheet cell for cell: the body is the SAME size and in the same place in every cell as in that sheet (it fills most of each cell's height); do not shrink it.\n- Show the round shield on the body's front arm in all 32 poses (on the back in the back views).\n- GREYSCALE applies ONLY to the shield's own pixels. The background stays bright pure magenta #FF00FF everywhere; it is never grey.\n- Lay it out exactly like the attached cape layer sheet (paperdoll_cape): same grid, same magenta background, the body in the same place.",
    "edit": {
-    "base": "art/source/paperdoll_body.png",
-    "text": "This sheet is my bald base body in 32 poses (8 columns x 4 rows, labelled). On EACH of the 32 figures, draw a small round wooden shield with a woven reed rim and a raised sun-shaped boss, strapped to his front arm (the arm on the right-hand side of the figure, nearest the viewer), about as wide as his head, moving with that arm in every pose. In the back views (21 ROPE 1 to 25 CLIMB IDLE) it hangs flat on the middle of his back. Draw the shield in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline. Then erase the body itself: every pixel of the head, skin and shorts becomes flat magenta #FF00FF, so each cell shows ONLY the shield, in exactly the place and size it had on the body. Where the body was in front of the shield, leave that part of the shield out (a gap is fine). Keep the white labels and the grid lines."
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/paperdoll_shield_round_3.png",
+    "refs": [
+     "art/source/paperdoll_body.png"
+    ],
+    "text": "The first image is a shield layer sheet: 32 labelled cells (8 columns x 4 rows) on magenta, each showing ONLY a small greyscale round shield where it sits on my character in that pose. The second image is the character's body sheet with the same grid, for reference only: it shows where the body is in each cell.\nCells 1-20 are right: keep them EXACTLY as they are. Cells 21-32 are wrong (a giant shield fills the cell). Redraw only cells 21-32: erase everything there except the label, then draw the SAME small shield as in cell 1 (the same size, the same greyscale look), placed where it belongs on the body in that cell of the second image:\n- 21 ROPE 1, 22 ROPE 2, 23 LADDER 1, 24 LADDER 2, 25 CLIMB IDLE (back views): flat on the middle of his back.\n- 26-28 DAWN SLASH, 29-30 FAINT, 31 LEVEL UP, 32 SIT: on his front arm (the arm on the right-hand side of the figure), following that arm.\nEach of cells 21-32 shows only that one small shield on flat magenta #FF00FF: no body, no giant shield, no pink silhouette."
    }
   },
   {
@@ -906,7 +909,7 @@
     8
    ],
    "anchor": "paperdoll_body",
-   "note": "New. Batch attaches the old paperdoll_body.png; runner should swap in the anchor result. Round 3: made by editing the base image instead of the prompt file (Gemini kept breaking the traced layout).",
+   "note": "New. Batch attaches the old paperdoll_body.png; runner should swap in the anchor result. Round 3/4: made by editing the base image instead of the prompt file (Gemini kept breaking the traced layout). Round 4 edits the round-3 result to fix only its bad cells.",
    "must_have": {
     "rgb": [
      0,
@@ -952,8 +955,8 @@
    },
    "extra": "- The green rod is in EVERY one of these 26 cells, no exceptions: 1-4 IDLE, 5-8 WALK, 9-12 RUN, 13-14 ATTACK, 15 HIT, 16 HURT, 17 JUMP, 18 FALL, 19 LAND, 20 CROUCH, 26-28 DAWN SLASH, 29-30 FAINT, 31 LEVEL UP. Where the hand is behind the body, the visible ends of the rod still show past the body. Exactly ONE rod per cell.\n- No rod in cells 21-25 (ROPE, LADDER, CLIMB IDLE) and 32 SIT.\n- The rod is bright pure green #00FF00 and clearly visible in every one of those 26 cells, even the small poses.\n- Cells that were missed last time, draw the rod in them too: 27 DAWN SLASH 2 (along the slash, in front of the body), 29 FAINT 1 and 30 FAINT 2 (the rod lies on the ground beside the open hand).\n- 25 CLIMB IDLE has NO rod.",
    "edit": {
-    "base": "art/source/paperdoll_body.png",
-    "text": "This sheet is my bald base body in 32 poses (8 columns x 4 rows, labelled). Keep every figure exactly as it is and add ONE thing: a straight rod of flat pure green #00FF00 (no outline, no shading), about two fingers thick and as long as his forearm, through the closed fist of his SWORD hand: the hand on the LEFT-hand side of the figure (the far hand, behind his body), which holds the sword. The fingers wrap over the rod, so both ends stick out of the fist. The rod points the way a sword blade would: down and back (towards the lower left) when the arms hang (IDLE, WALK, RUN, HIT, HURT, JUMP, FALL, LAND, CROUCH), along the swing in 13-14 ATTACK and 26-28 DAWN SLASH, straight up in 31 LEVEL UP, and lying on the ground beside his open hand in 29-30 FAINT. Where his body is in front of that hand, the body covers the middle of the rod but its ends still show. Exactly ONE rod in each of cells 1-20 and 26-31. NO rod in 21 ROPE 1, 22 ROPE 2, 23 LADDER 1, 24 LADDER 2, 25 CLIMB IDLE and 32 SIT. No other green anywhere."
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/paperdoll_grip_4.png",
+    "text": "The first image is my grip guide sheet: a bald base body in 32 labelled poses with a flat green #00FF00 rod in his sword hand. Most cells are already right; keep cells 1-4 and 9-24 and 26-32 EXACTLY as they are. Fix only these:\n- Cells 5 WALK 1, 6 WALK 2, 7 WALK 3 and 8 WALK 4 have no rod. Add one in each, exactly like the rod in cells 1-4: through the closed fist of the hand on the LEFT-hand side of the figure, pointing down and back towards the lower left, flat pure green #00FF00, no outline, the same thickness and length as in cell 1. The fingers wrap over it.\n- Cell 25 CLIMB IDLE must have NO rod: remove the green rod there and restore the body and the magenta behind it.\nDo not move, redraw or re-pose any figure, and add no other green."
    }
   },
   {
