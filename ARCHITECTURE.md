@@ -358,7 +358,12 @@ The same NpcDef can stand in several maps (Brin is in every town).
 
 Travel NPCs (ships, wagons) list **TravelRoute**s in `NpcDef.travel` (destination, arrival x,
 fare, "Ship"/"Wagon"); their dialogue offers "Travel" and `TDServer.on_travel` moves the
-player. A **UseDef** with `teleport` set to a map id, or to `town`, is a return scroll.
+player. A route with `free_for_beginners` costs nothing for a Beginner who has reached
+the first job level (`JobDef.first_advance_level`); Rook's coaches from Dawnharbor to the
+job towns are free this way. `TravelRoute.fare_for(character)` is the one place that
+decides the fare, for the server and for the dialogue. Each trip's label also shows the
+destination's `MapDef.level_text` unless it's a town ("Wagon to Ember Hollow (Lv. 6-12,
+150 Dawnshards)", `TDDialogueWindow.travel_label`). A **UseDef** with `teleport` set to a map id, or to `town`, is a return scroll.
 
 The smoke test checks that every portal points at a real map and every spawn at a real
 platform, so a typo fails the test instead of the game.
@@ -467,6 +472,10 @@ a **StatBlock** on top. `Character.stats` is the total. From it, `CharacterStats
 
 `Combat` uses those numbers, so all balance lives in `character_stats.gd` and `combat.gd`.
 
+Levels: `Character.xp_need` is the EXP curve (one formula, steeper from Lv 10, tuned with the
+pace bot for about 2 hours to Lv 10 and 40 to the cap, quests included). `Character.MAX_LEVEL`
+(35) is the cap: EXP stops there and the status bar and stats window say "Max level".
+
 There are four inventory tabs, and the class of the item decides which one it goes in:
 
 | Class | Tab | What |
@@ -528,7 +537,9 @@ and a `tint` the hero is drawn in until the job has its own art.
 
 Everyone starts as `Character.START_JOB` (the Beginner, which lists starting stats, gear and
 items). A job that others reach sets `advances_from`, `advance_level`, `advance_requirements`
-(base STR/DEX/INT/LUK) and `advance_gifts`. To let an NPC hand it out, add its id to that
+(base STR/DEX/INT/LUK) and `advance_gifts`: the job's basic shop weapon (the first weapon
+listed is worn at once in place of a Beginner's weapon; one of the job's own line stays on),
+its ammo and potions. Better weapons only drop. To let an NPC hand it out, add its id to that
 NPC's `instructs`: their dialogue then offers "Choose a job", and the server
 (`TDServer.on_advance` → `Character.advance`) checks the requirements again before changing it.
 A Beginner short of a job's stats may also ask its instructor for one free Ability Point reset

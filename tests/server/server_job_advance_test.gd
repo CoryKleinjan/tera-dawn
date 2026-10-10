@@ -46,9 +46,29 @@ func test_advancing_changes_the_job_and_hands_out_the_gifts_and_sp() -> void:
 	_advance()
 	check_eq(c.job, mage, "a Magician now")
 	check_eq(c.sp, sp + mage.advance_sp, "the job's Skill Points")
-	check_eq(c.inventory.count_of(wand), 1, "the wand")
+	check_eq(c.weapon(), wand, "the wand, worn at once")
 	check_eq(c.inventory.count_of(blue), 30, "the mana potions")
 	check(h.told(2, "You are now a Magician!"), "told")
+	check(h.told(2, "Your instructor hands you: Apprentice Wand, 30 Blue Potion."), "told what was handed over")
+
+func test_every_job_gets_its_basic_weapon_worn_and_its_ammo() -> void:
+	for job in JobDef.paths_from(Character.START_JOB):
+		var who := Character.create("Gift" + String(job.id), Character.START_JOB)
+		who.level = job.advance_level
+		if job.advance_requirements:
+			for stat in StatBlock.BASE:
+				who.base.set(stat, maxi(who.base.value(stat), job.advance_requirements.value(stat)))
+		who.recalc()
+		var old := who.weapon()
+		check_eq(who.advance(job), "", "%s: advanced" % job.id)
+		var w := who.weapon()
+		if not check(w != null and job.family in w.jobs, "%s: wears a %s weapon, not %s" % [job.id, job.family, w.id if w else "nothing"]):
+			continue
+		check_eq(w, job.advance_gifts[0].item, "%s: the first gift is the weapon worn" % job.id)
+		if old:
+			check(who.inventory.count_of(old) == 1, "%s: the old weapon goes to the bag" % job.id)
+		if w.ammo != &"":
+			check(who.ammo_count() >= 300, "%s: ammo to start with (%d)" % [job.id, who.ammo_count()])
 
 func test_advancing_is_celebrated_and_sent_to_the_player() -> void:
 	_ready_for_mage()
@@ -124,7 +144,8 @@ func test_a_job_can_only_be_chosen_once() -> void:
 	var sp := c.sp
 	_advance()
 	check_eq(c.sp, sp, "no second round of Skill Points")
-	check_eq(c.inventory.count_of(wand), 1, "no second wand")
+	check_eq(c.weapon(), wand, "the first wand is worn")
+	check_eq(c.inventory.count_of(wand), 0, "no second wand")
 	check(h.told(2, "A Magician can't become a Magician."), "told")
 
 func test_unknown_players_are_ignored() -> void:

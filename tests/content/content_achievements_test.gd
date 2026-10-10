@@ -80,6 +80,7 @@ func test_goals_are_reachable() -> void:
 	for a: Dictionary in Achievements.LIST:
 		if a["kind"] == "level":
 			check(c.xp_need(int(a["goal"])) > 0, "achievement %s: level %d has no EXP curve" % [a["id"], a["goal"]])
+			check(int(a["goal"]) <= Character.MAX_LEVEL, "achievement %s: level %d is past the Lv %d cap" % [a["id"], a["goal"], Character.MAX_LEVEL])
 		if a["kind"] == "maps":
 			check(int(a["goal"]) <= Content.maps.size(), "achievement %s: visit %d maps, but there are %d" % [a["id"], a["goal"], Content.maps.size()])
 		if a["kind"] == "pages":

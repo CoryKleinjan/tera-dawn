@@ -184,3 +184,38 @@ func test_giving_up_a_quest() -> void:
 	check(h.told(2, "Gave up on Test Q Kill."), "told")
 	h.ask(2, &"req_quest_accept", [&"test_giver", q_kill.id])
 	check(c.quests.active.has(q_kill.id), "can be taken again")
+
+# ---------- real content ----------
+
+## Puts the player beside NPC `npc_id` on the real map `map_id`, standing on its platform.
+func _beside(map_id: StringName, npc_id: StringName) -> void:
+	h.move_to(p, map_id)
+	for at in Content.map(map_id).npcs:
+		if at.npc.id == npc_id:
+			h.place(p, at.x, p.map.layout.platforms[at.platform].y)
+			return
+	check(false, "%s isn't on %s" % [npc_id, map_id])
+
+func test_choosing_a_path_is_handed_in_to_the_harbormaster_in_dawnharbor() -> void:
+	var q: QuestDef = Content.quests[&"q07_choosing_a_path"]
+	check_eq(q.turn_in_npc(), &"harbormaster", "handed in at the docks")
+	c.level = q.min_level
+	_beside(&"dawnrise_village", q.giver)
+	h.ask(2, &"req_quest_accept", [q.giver, q.id])
+	if not check(c.quests.active.has(q.id), "taken from Sorrel"):
+		return
+	_beside(&"dawnharbor", &"harbormaster")
+	check_eq(c.quests.status(q, c), QuestLog.Status.READY, "reaching Dawnharbor finishes it")
+	h.ask(2, &"req_quest_complete", [&"harbormaster", q.id])
+	check_eq(c.quests.done.get(q.id), 1, "handed in to Harbormaster Ines")
+	check(h.told(2, "Quest complete: Choosing a Path"), "told")
+
+func test_choosing_a_path_is_not_handed_in_back_on_the_isle() -> void:
+	var q: QuestDef = Content.quests[&"q07_choosing_a_path"]
+	c.level = q.min_level
+	_beside(&"dawnrise_village", q.giver)
+	h.ask(2, &"req_quest_accept", [q.giver, q.id])
+	_beside(&"dawnharbor", &"harbormaster")
+	_beside(&"dawnrise_village", q.giver)
+	h.ask(2, &"req_quest_complete", [q.giver, q.id])
+	check(c.quests.active.has(q.id), "Sorrel doesn't take it back")
