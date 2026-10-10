@@ -8,6 +8,8 @@ extends Resource
 @export var display_name := ""
 ## Shown on the signpost at the map's entrance (empty for no sign).
 @export var sign_text := ""
+## Which entrance the signpost stands by: the floor portal nearest this x. The post stands
+## SceneryBuilder.SIGN_FROM_PORTAL inward from it (here, on a map with no portal on the floor).
 @export var sign_x := 120.0
 @export var biome: BiomeDef
 @export var width := 2600

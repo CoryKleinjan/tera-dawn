@@ -1,6 +1,11 @@
 class_name DrawUtil
 extends RefCounted
 ## Small drawing helpers for the overlay: rounded boxes and outlined text.
+## Filled shapes smaller than MIN_SIZE (a bar at a sliver of fill) are skipped: the renderer
+## can't triangulate a collapsed polygon and logs an error every frame instead.
+
+## The smallest width or height, in pixels, a filled shape is drawn at.
+const MIN_SIZE := 1.0
 
 static func ellipse_points(c: Vector2, rx: float, ry: float, from := 0.0, to := TAU, segs := 24) -> PackedVector2Array:
 	var pts := PackedVector2Array()
@@ -12,11 +17,17 @@ static func ellipse_points(c: Vector2, rx: float, ry: float, from := 0.0, to := 
 	return pts
 
 static func ellipse(ci: CanvasItem, c: Vector2, rx: float, ry: float, col: Color) -> void:
-	ci.draw_colored_polygon(ellipse_points(c, rx, ry), col)
+	if big_enough(Vector2(rx, ry) * 2.0):
+		fill(ci, ellipse_points(c, rx, ry), col)
 
+## The outline of a box with rounded corners. A radius too small to show gives the plain
+## four corners rather than corners folded back on themselves.
 static func round_rect_points(r: Rect2, rad: float) -> PackedVector2Array:
 	rad = minf(rad, minf(r.size.x, r.size.y) / 2.0 - 0.5)
 	var pts := PackedVector2Array()
+	if rad < 0.5:
+		pts.append_array([r.position, Vector2(r.end.x, r.position.y), r.end, Vector2(r.position.x, r.end.y)])
+		return pts
 	var centers := [
 		Vector2(r.end.x - rad, r.position.y + rad),
 		Vector2(r.end.x - rad, r.end.y - rad),
@@ -31,7 +42,26 @@ static func round_rect_points(r: Rect2, rad: float) -> PackedVector2Array:
 	return pts
 
 static func round_rect(ci: CanvasItem, r: Rect2, rad: float, col: Color) -> void:
-	ci.draw_colored_polygon(round_rect_points(r, rad), col)
+	if big_enough(r.size):
+		fill(ci, round_rect_points(r, rad), col)
+
+## Whether a filled shape this big is drawn at all (see MIN_SIZE).
+static func big_enough(size: Vector2) -> bool:
+	return size.x >= MIN_SIZE and size.y >= MIN_SIZE
+
+## Fills a polygon, unless it has collapsed to fewer than three different points.
+static func fill(ci: CanvasItem, pts: PackedVector2Array, col: Color) -> void:
+	if fillable(pts):
+		ci.draw_colored_polygon(pts, col)
+
+## Whether a polygon has at least three different points, so it can be filled.
+static func fillable(pts: PackedVector2Array) -> bool:
+	var seen := {}
+	for p in pts:
+		seen[p] = true
+		if seen.size() >= 3:
+			return true
+	return false
 
 ## The faint dark backdrop behind text drawn straight over the scene (the message log, chat),
 ## faded by `alpha` along with its text.

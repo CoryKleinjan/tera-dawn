@@ -4,12 +4,15 @@ extends Control
 ## setup: each holds a skill or an item and is used with its key (Game.QUICKSLOT_ACTIONS)
 ## or a click. Drag a skill from the skill window or a potion from the inventory onto a
 ## slot, drag slots to swap them, and right-click or drag one off to clear it. The slots
-## are saved with the character (Character.quickslots).
+## are saved with the character (Character.quickslots). The panel fades to see-through while
+## the hero or an NPC near them is behind it (TDHud.fade_over_people).
 
 const COLS := 4
 const SLOT := 36.0
 const GAP := 3.0
 const PAD := 5.0
+## How far in from the screen's right edge, and up from the status bar, the panel sits.
+const MARGIN := Vector2(6, 4)
 
 var world: TDWorld
 var hud: TDHud
@@ -17,9 +20,13 @@ var _hover := -1
 ## The drag this panel started, kept for NOTIFICATION_DRAG_END.
 var _pending: Variant = null
 
-func _ready() -> void:
+## The panel's size: COLS slots across, as many rows as it takes.
+static func panel_size() -> Vector2:
 	var rows := ceili(Character.QUICKSLOTS / float(COLS))
-	size = Vector2(PAD * 2 + COLS * (SLOT + GAP) - GAP, PAD * 2 + rows * (SLOT + GAP) - GAP)
+	return Vector2(PAD * 2 + COLS * (SLOT + GAP) - GAP, PAD * 2 + rows * (SLOT + GAP) - GAP)
+
+func _ready() -> void:
+	size = panel_size()
 	fit_view()
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	mouse_exited.connect(func() -> void:
@@ -28,10 +35,12 @@ func _ready() -> void:
 
 ## Bottom right, above the status bar (called again when the window is resized).
 func fit_view() -> void:
-	position = TDWorld.VIEW - size - Vector2(6, TDStatusBar.HEIGHT + 4)
+	position = TDWorld.VIEW - size - Vector2(MARGIN.x, TDStatusBar.HEIGHT + MARGIN.y)
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	visible = world != null and world.started
+	if visible:
+		hud.fade_over_people(self, delta)
 	queue_redraw()
 
 func slot_rect(i: int) -> Rect2:

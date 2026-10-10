@@ -18,7 +18,7 @@ script = ExtResource("5_portal_def")
 x = 60.0
 platform = 0
 target_map = &"cinder_pass"
-target_x = 2480.0
+target_x = 2360.0
 
 [sub_resource type="Resource" id="Portal_mid"]
 script = ExtResource("5_portal_def")

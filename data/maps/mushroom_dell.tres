@@ -130,7 +130,7 @@ script = ExtResource("7_portal_def")
 x = 60.0
 platform = 0
 target_map = &"tidal_flats"
-target_x = 1880.0
+target_x = 1760.0
 
 [sub_resource type="Resource" id="Resource_18"]
 script = ExtResource("4_climbable_def")

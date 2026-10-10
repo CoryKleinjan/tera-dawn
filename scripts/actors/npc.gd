@@ -22,6 +22,10 @@ func _ready() -> void:
 	rig.set_tint(def.tint)
 	add_child(rig)
 
+## How big they're drawn, in game pixels (feet to the top of their art).
+func body_size() -> Vector2:
+	return rig.body.get_item_rect().size * rig.body.pixel_size * TDStage.PX
+
 ## Opens their dialogue window.
 func talk() -> void:
 	world.hud.open_dialogue(self)

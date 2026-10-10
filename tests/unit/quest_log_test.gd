@@ -261,3 +261,51 @@ func test_complete_counts_topping_up_stacks_toward_room() -> void:
 	c.inventory.remove(junk, 1)
 	check_eq(c.quests.complete(q, c), "", "one free slot and the stack's room is enough")
 	check_eq(c.inventory.count_of(potion), 15, "all rewards paid")
+
+# ---------- the quest tracker's pick ----------
+
+## A map with `spawned` living on it.
+func _map(id: StringName, spawned: Array[MonsterDef] = []) -> MapDef:
+	var m := MapDef.new()
+	m.id = id
+	for monster in spawned:
+		var s := SpawnDef.new()
+		s.monster = monster
+		m.spawns.append(s)
+	return m
+
+func test_objectives_know_where_they_can_be_done() -> void:
+	var here := _map(&"t_here", [mob])
+	var empty := _map(&"t_far")
+	var kill := _kill_quest().objectives[0]
+	check(kill.can_do_on(here) and not kill.can_do_on(empty), "kill: where the monster lives")
+	check(_collect_quest(&"t_c", 5, mob).objectives[0].can_do_on(here), "collect: where the quest item drops")
+	var dropper := fx.monster(&"t_dropper")
+	dropper.drops.append(UnitHelpers.drop(loot))
+	check(_collect_quest().objectives[0].can_do_on(_map(&"t_d", [dropper])), "collect: where a monster drops it anyway")
+	check(not _collect_quest().objectives[0].can_do_on(here), "collect: not where nothing drops it")
+	var visit := _visit_quest().objectives[0]
+	check(visit.can_do_on(empty) and not visit.can_do_on(here), "visit: the map to reach")
+
+func test_tracker_shows_ready_then_here_then_the_rest_in_order_taken() -> void:
+	var here := _map(&"t_here", [mob])
+	var away: Array[QuestDef] = []
+	for i in 3:
+		away.append(_visit_quest(StringName("t_away_%d" % i), &"t_nowhere"))
+	var kill := _kill_quest(&"t_kill_here", 2)
+	var ready := _visit_quest(&"t_ready", &"t_far")
+	for q in [away[0], away[1], kill, away[2], ready]:
+		c.quests.accept(q)
+	c.quests.record_visit(&"t_far")
+	var want: Array[QuestDef] = [ready, kill, away[0]]
+	check_eq(c.quests.tracked(c, here, 3), want, "ready first, then the one to do here, then the oldest")
+	want = [ready, kill, away[0], away[1], away[2]]
+	check_eq(c.quests.tracked(c, here, 10), want, "the rest in the order taken")
+	want = [ready, away[0], away[1]]
+	check_eq(c.quests.tracked(c, _map(&"t_elsewhere"), 3), want, "nothing to do on another map: the oldest after the ready one")
+	c.quests.record_kill(mob)
+	c.quests.record_kill(mob)
+	want = [kill, ready, away[0]]
+	check_eq(c.quests.tracked(c, here, 3), want, "a finished kill quest is ready too, both in the order taken")
+	check_eq(c.quests.tracked(c, null, 2).size(), 2, "at most the limit")
+	check_eq(c.quests.active.size(), 5, "every quest stays in the log")
