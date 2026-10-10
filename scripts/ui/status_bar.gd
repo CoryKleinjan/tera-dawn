@@ -9,10 +9,12 @@ const WINDOW_BUTTON := 30.0
 const WINDOW_BUTTON_GAP := 2.0
 ## The EXP bar is drawn a little smaller than its art so the window buttons fit beside it.
 const EXP_SCALE := 0.85
-## The level badge: its left edge (just inside the bar art's gold end cap, BAR_CAP texels
-## wide) and its scale.
-const BAR_CAP := 22.0
-const BADGE_X := BAR_CAP + 2.0
+## The bar art: each end's gold cap and its dark rim, in texels. The art is drawn at one
+## scale to fit HEIGHT, and the leather between the caps repeats along the bar instead of
+## stretching, so its stitching stays sharp at any width.
+const BAR_CAP := 36.0
+## The level badge: its left edge (just inside the gold end cap) and its scale.
+const BADGE_X := 28.0
 const BADGE_SCALE := 0.68
 ## The HP and MP bars: where HP starts, their scale, and the space between bars.
 const HP_X := 76.0
@@ -69,7 +71,8 @@ func trail(bar: String) -> float:
 
 func _draw() -> void:
 	var w := size.x
-	UiSkin.box("hud_bar", BAR_CAP, 10).draw(get_canvas_item(), Rect2(0, 0, w, HEIGHT))
+	var art := UiSkin.tex("hud_bar")
+	UiSkin.draw_box(self, _bar_box(), Rect2(0, 0, w, HEIGHT), HEIGHT / art.get_height())
 	# level badge
 	var badge := UiSkin.tex("level_badge")
 	var bs := BADGE_SCALE
@@ -152,3 +155,11 @@ static func _key_name(action: String) -> String:
 		if e is InputEventKey:
 			return OS.get_keycode_string((e as InputEventKey).physical_keycode)
 	return ""
+
+## The bar art as a nine-patch whose middle repeats across rather than stretching.
+static var _bar_sb: StyleBoxTexture
+static func _bar_box() -> StyleBoxTexture:
+	if _bar_sb == null:
+		_bar_sb = UiSkin.box("hud_bar", BAR_CAP, 0).duplicate()
+		_bar_sb.axis_stretch_horizontal = StyleBoxTexture.AXIS_STRETCH_MODE_TILE_FIT
+	return _bar_sb
