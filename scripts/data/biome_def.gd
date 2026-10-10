@@ -22,23 +22,24 @@ extends Resource
 @export var lantern_light := Color("ffc070")
 
 @export_group("Ground")
-## Seamless textures for the solid floor and platform blocks.
+## Seamless textures for the solid floor block (the only land with 3D depth).
 @export var ground_top: Texture2D
 @export var ground_side: Texture2D
 @export var ground_soil: Texture2D
-## The painted front of a floating platform: left end, repeating middle, right end.
+## The painted front of a floating platform: left end, repeating middle, right end. Floating
+## platforms are only this skin, with no 3D block behind it.
 @export var platform_left: Texture2D
 @export var platform_middle: Texture2D
 @export var platform_right: Texture2D
 @export var platform_texel := 1.0
-## Grass blades along the front edge of the floor and platforms.
+## Grass blades: a short fringe along the floor's front edge, and tufts behind platform skins.
 @export var edge_grass: Array[Texture2D] = []
 
 @export_group("Scenery")
 @export var backdrop: Array[BackdropLayerDef] = []
 ## Scattered along the floor of every map in this biome.
 @export var ground_decor: Array[DecorDef] = []
-## Scattered along the back of every floating platform.
+## Scattered along every floating platform, just behind its skin (keep `depth` near 0, like -0.6 to -0.2).
 @export var platform_decor: Array[DecorDef] = []
 @export var lantern: Texture2D
 @export var signpost: Texture2D

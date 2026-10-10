@@ -11,7 +11,7 @@ The game is built to grow: monsters, NPCs, items, skills, effects, maps and biom
 ## How the HD-2D view works
 
 - Game logic runs in 2D pixel coordinates exactly as before. `scripts/world/stage.gd` turns the map into 3D: one 3D unit is 32 game pixels, and one sprite texel is 1.25 game pixels.
-- Platforms are textured 3D blocks with depth. Characters, monsters and props are lit `Sprite3D`s with nearest-neighbour filtering that cast shadows.
+- The floor is a textured 3D block with depth; floating platforms are flat painted front skins. Characters, monsters and props are lit `Sprite3D`s with nearest-neighbour filtering that cast shadows.
 - A perspective camera tilted 9° down gives real parallax to trees, ridges and clouds placed at different depths.
 - `WorldEnvironment` adds glow, SSAO, depth fog and filmic tonemapping; camera attributes add near and far depth of field. `shaders/post.gdshader` adds tilt-shift blur at the screen edges and a vignette.
 - Portals, lanterns, Dawnshards, Ember Boar manes and skills carry their own lights and particles.
