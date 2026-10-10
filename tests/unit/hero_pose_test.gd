@@ -92,3 +92,17 @@ func test_speeding_up_into_a_run_keeps_his_step() -> void:
 	rig.play(&"walk")
 	check_eq(body.frame, 0, "starting from a stand begins the cycle")
 	rig.queue_free()
+
+func test_weapons_are_held_in_the_right_spot() -> void:
+	# grip_share: where the fist sits along the weapon, 0 = the back end, 1 = the tip
+	var weapons: Dictionary = Paperdoll.rig().get("weapons", {})
+	check(not weapons.is_empty(), "the rig records where each weapon is held")
+	for name in weapons:
+		var w: Dictionary = weapons[name]
+		var share: float = w.get("grip_share", -1.0)
+		match w.get("kind"):
+			"sword":
+				check(share >= 0.0 and share < 0.3, "%s is held by the handle (%.2f along)" % [name, share])
+			"wand", "staff":
+				check(share > 0.35 and share < 0.65, "%s is held near the middle (%.2f along)" % [name, share])
+		check_eq(int(w.get("dots_left", -1)), 0, "%s has no grip-marker dots left in the art" % name)

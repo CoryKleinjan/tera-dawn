@@ -627,34 +627,131 @@ def worn_sheets():
 # ---------- weapons ----------
 
 def weapon(piece, s, kind):
-    """A weapon shrunk to game pixels, its green grip dot painted over; returns (image, grip,
+    """A weapon shrunk to game pixels, its green grip dots painted out; returns (image, grip,
     axis): axis is the way its business end points in the picture (degrees clockwise from
-    pointing right), 0 for kinds not in AXIAL."""
+    pointing right), 0 for kinds not in AXIAL. Where his fist goes (see grip_point) is
+    worked out from the weapon's shape for blades, wands, staffs and guns, since the sheets'
+    dots are often off (on a crossguard, several for two hands, or none)."""
     arr = np.asarray(piece.img).astype(int)
     green = (arr[..., 1] > 170) & (arr[..., 0] < 120) & (arr[..., 2] < 120) & (arr[..., 3] > 0)
-    # dots drawn off the weapon (beside it on the background, as some held_* sheets have them)
-    # are dropped, and don't count for the grip
-    lab, n = ss.label(green)
-    solid = (arr[..., 3] > 0) & ~green
-    for i in range(1, n + 1):
-        dot = lab == i
-        ring = ss.dilate(dot, 3) & ~ss.dilate(green, 0)
-        if ring.any() and solid[ring].mean() < 0.3:
-            arr[dot, 3] = 0
-            green &= ~dot
-    gy, gx = np.nonzero(green)
-    grip = (gx.mean(), gy.mean()) if len(gx) else (arr.shape[1] * 0.15, arr.shape[0] / 2)
-    if len(gx):
-        solid = (arr[..., 3] > 0) & ~green
-        fill = arr[solid][:, :3].mean(0)
-        near = ss.dilate(green, 2) & solid
-        if near.any():
-            fill = arr[near][:, :3].mean(0)
-        arr[ss.dilate(green, 1) & (arr[..., 3] > 0), :3] = fill
-        grey = arr[..., :3].mean(2, keepdims=True)  # the dot's surroundings are grey already
-        arr[..., :3] = np.where(ss.dilate(green, 1)[..., None], grey, arr[..., :3])
+    opaque = arr[..., 3] > 0
+    # dots drawn off the weapon (beside it on the background, as some held_* sheets have
+    # them) are islands of their own: dropped with their outline, and don't count
+    parts, n = ss.label(opaque)
+    if n > 1:
+        sizes = np.bincount(parts.ravel())[1:]
+        main = int(sizes.argmax()) + 1
+        for i in range(1, n + 1):
+            if i != main and green[parts == i].any():
+                arr[parts == i, 3] = 0
+        opaque = arr[..., 3] > 0
+        green &= opaque
+    dots = dot_centres(green)
+    axis = drawn_axis(arr) if kind in AXIAL else 0.0
+    grip = grip_point(arr, kind, axis, dots)
+    if green.any():
+        # the dot, its shading and its thick dark outline are filled in from the weapon
+        # around them
+        rgb = arr[..., :3]
+        greenish = (rgb[..., 1] > rgb[..., 0] + 20) & (rgb[..., 1] > rgb[..., 2] + 20)
+        dark = rgb.max(2) < 80
+        near = ss.dilate(green, 6)
+        inpaint(arr, (ss.dilate(green, 2) | (near & (greenish | dark))) & opaque)
     img = scaled(Image.fromarray(arr.clip(0, 255).astype(np.uint8), "RGBA"), s)
-    return img, [round(grip[0] * s, 1), round(grip[1] * s, 1)], drawn_axis(arr) if kind in AXIAL else 0.0
+    return img, [round(grip[0] * s, 1), round(grip[1] * s, 1)], axis
+
+
+def dot_centres(green):
+    """The middle of each green dot (a cluster of dots drawn together counts as one)."""
+    lab, n = ss.label(ss.dilate(green, 6))
+    out = []
+    for i in range(1, n + 1):
+        ys, xs = np.nonzero((lab == i) & green)
+        if len(xs):
+            out.append((float(xs.mean()), float(ys.mean())))
+    return out
+
+
+def inpaint(arr, hole):
+    """Fills the `hole` pixels of an RGBA array with the colours around them, growing in
+    from the edge (each pixel takes the mean of its already-filled neighbours)."""
+    hole = hole.copy()
+    known = (arr[..., 3] > 0) & ~hole
+    while hole.any():
+        acc = np.zeros(arr.shape[:2] + (3,))
+        cnt = np.zeros(arr.shape[:2])
+        for dy in (-1, 0, 1):
+            for dx in (-1, 0, 1):
+                if dy or dx:
+                    k = np.roll(np.roll(known, dy, 0), dx, 1)
+                    acc += np.roll(np.roll(arr[..., :3], dy, 0), dx, 1) * k[..., None]
+                    cnt += k
+        ready = hole & (cnt > 0)
+        if not ready.any():
+            break
+        arr[ready, :3] = (acc[ready] / cnt[ready, None]).round().astype(int)
+        known |= ready
+        hole &= ~ready
+
+
+def _along(arr, axis):
+    """Each opaque pixel's (x, y), its distance along `axis` and across it."""
+    ys, xs = np.nonzero(arr[..., 3] > 0)
+    c, s = math.cos(math.radians(axis)), math.sin(math.radians(axis))
+    return xs, ys, xs * c + ys * s, -xs * s + ys * c
+
+
+def _on_axis(arr, axis, t):
+    """The point at distance `t` along `axis`, in the middle of the weapon's width there."""
+    xs, ys, a, b = _along(arr, axis)
+    near = np.abs(a - t) <= max(1.0, (a.max() - a.min()) * 0.02)
+    m = float(b[near].mean()) if near.any() else float(b.mean())
+    c, s = math.cos(math.radians(axis)), math.sin(math.radians(axis))
+    return (t * c - m * s, t * s + m * c)
+
+
+def grip_point(arr, kind, axis, dots):
+    """Where his fist closes on a weapon picture (its pixels):
+    - a blade (sword kind): in the middle of the handle, between the pommel and the crossguard
+      (the first place, going up from the pommel, that gets much wider than the handle);
+    - a wand or staff: halfway along the shaft;
+    - a gun: on the pistol grip (the dot nearest its back, or the part hanging below the
+      barrel at the back when it has no dot);
+    - anything else (bows, claws, knuckles): its dot, or a guess near its back end."""
+    xs, ys, a, b = _along(arr, axis)
+    lo, hi = float(a.min()), float(a.max())
+    span = hi - lo
+    if kind == "sword":
+        bins = np.linspace(lo, hi, 41)
+        width = np.array([np.ptp(b[(a >= bins[i]) & (a < bins[i + 1])]) if ((a >= bins[i]) & (a < bins[i + 1])).any() else 0
+                          for i in range(40)])
+        handle = float(np.median(width[2:8]))
+        guard = next((i for i in range(4, 30) if width[i] > handle * 1.7), 8)
+        return _on_axis(arr, axis, lo + span * (0.04 + guard / 40) / 2)
+    if kind in ("wand", "staff"):
+        return _on_axis(arr, axis, lo + span / 2)
+    c, s = math.cos(math.radians(axis)), math.sin(math.radians(axis))
+    if dots:
+        return min(dots, key=lambda d: d[0] * c + d[1] * s)  # the back hand
+    if kind == "gun":
+        back = a < lo + span * 0.35
+        below = back & (ys > np.median(ys))
+        if below.any():
+            return (float(xs[below].mean()), float(np.percentile(ys[below], 30)))
+    return (float(arr.shape[1] * 0.15), float(arr.shape[0] / 2))
+
+
+def grip_share(img, grip, axis):
+    """How far along a weapon picture (0 its back end, 1 its tip) the grip is."""
+    _, _, a, _ = _along(np.asarray(img), axis)
+    g = grip[0] * math.cos(math.radians(axis)) + grip[1] * math.sin(math.radians(axis))
+    return round(float((g - a.min()) / max(1.0, a.max() - a.min())), 3)
+
+
+def dots_left(img):
+    """Green dot pixels still showing in a weapon picture (should be none)."""
+    arr = np.asarray(img).astype(int)
+    return int(((arr[..., 1] > 170) & (arr[..., 0] < 120) & (arr[..., 2] < 120) & (arr[..., 3] > 0)).sum())
 
 
 def reach(img, grip, axis):
@@ -675,13 +772,13 @@ def length(piece, kind):
 
 def drawn_axis(arr):
     """The direction a long weapon lies along in its picture (degrees clockwise from pointing
-    right): its long axis, taken toward the top (the sheets draw the business end up), or
-    toward the right when it lies flat."""
+    right): its long axis, taken toward the right (the sheets draw the business end to the
+    right, flat or slanting up), or toward the top when it stands upright."""
     ys, xs = np.nonzero(arr[..., 3] > 0)
     pts = np.stack([xs - xs.mean(), ys - ys.mean()])
     vals, vecs = np.linalg.eigh(pts @ pts.T)
     dx, dy = vecs[:, np.argmax(vals)]
-    if dy > 0.05 or (abs(dy) <= 0.05 and dx < 0):
+    if dx < -0.05 or (abs(dx) <= 0.05 and dy > 0):
         dx, dy = -dx, -dy
     return round(math.degrees(math.atan2(dy, dx)), 1)
 
@@ -1094,8 +1191,9 @@ def main():
     pictures += [("item_" + item, kind, piece, False, float(np.median(by_sheet[sheet]))) for item, kind, piece, sheet in drawn_weapons]
     for name, kind, piece, tinted, k in pictures:
         img, grip, axis = weapon(piece, s_w * WORN_SIZE.get(kind, 1.0) * k, kind)
-        if tinted:
-            grips[kind] = {"grip": grip, "size": list(img.size), "reach": reach(img, grip, axis)}
+        entry = {"grip": grip, "size": list(img.size), "reach": reach(img, grip, axis),
+                 "kind": kind, "grip_share": grip_share(img, grip, axis), "dots_left": dots_left(img)}
+        grips[kind if tinted else name] = entry
         far_frames = hold_spec.get(kind, {}).get("behind", ())
         front, behind = weapon_strips(img, grip, axis, kind, names, frames, info, held[kind], hands, r, far_frames)
         save_layer(f"weapon_{name}", front, fw, fh, index, anims, tinted)
