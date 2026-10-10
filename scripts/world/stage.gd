@@ -3,7 +3,7 @@ extends Node3D
 ## The HD-2D view of the map: pixel-art sprites standing in a lit 3D diorama.
 ## Gameplay stays 2D (game pixels, y down); this node owns the camera, sky, light and
 ## post effects, and asks the builders to turn the map into 3D:
-##   TerrainBuilder  the floor block and the platforms' painted front skins
+##   TerrainBuilder  the painted front skins of the floor and the platforms
 ##   BackdropBuilder the parallax mountains, trees, clouds and sun
 ##   SceneryBuilder  props, climbables, portals, lanterns and signs
 ## One 3D unit is PX game pixels. Static helpers here make sprites and lights for everyone.
@@ -33,10 +33,13 @@ const ART_DENSITY := {
 	"res://assets/sprites/props/vine_": 2.0,
 }
 
-## The floor is the only land with depth: a block from GROUND_BACK to GROUND_FRONT whose top
-## the characters walk on. Floating platforms are flat painted skins at LAND_FRONT.
-const GROUND_BACK := -9.0
-const GROUND_FRONT := 3.0
+## Land is flat, like a 2D game: the floor and the floating platforms are painted front skins
+## at LAND_FRONT, with no ground running back into the scene. What stands on the land (trees,
+## houses, props, signs) lives in a thin layer just behind the skins. Content gives depths from
+## 0 back to SCENERY_DEEP, and land_depth squeezes them into the SCENERY_LAYER units behind
+## LAND_FRONT, keeping their front-to-back order (see stand_on_land).
+const SCENERY_DEEP := 9.0
+const SCENERY_LAYER := 0.9
 
 ## Draw order. Depth is 3D z: bigger is nearer the camera. Everything the player can touch
 ## (climbables, NPCs, monsters, drops, the player) stands in front of all the land, so the
@@ -77,9 +80,39 @@ static var _shadow: Texture2D
 
 # ---------- helpers for everyone ----------
 
-## Clamps the depth of a piece of land decoration so it stays behind everything you can touch.
+## Where a piece of land decoration with content depth `z` (0 at the land's front, down to
+## -SCENERY_DEEP) really stands: in the thin layer behind the land's front skins, in the same
+## order, and always behind everything you can touch.
 static func land_depth(z: float) -> float:
-	return minf(z, LAND_FRONT - 0.02)
+	var front := LAND_FRONT - 0.02
+	if z >= front:
+		return front
+	return lerpf(front, -SCENERY_LAYER, clampf((front - z) / (front + SCENERY_DEEP), 0.0, 1.0))
+
+## Stands `s` (origin at its bottom centre) on the land at `foot` (game pixels), at content
+## depth `z`: at its land_depth, scaled so it shows as big as it would at `z`, and sunk
+## (land_sink) so its base tucks behind the land's grass edge instead of floating over it.
+## Pass keep_size = false for art sized for the play line (buildings).
+static func stand_on_land(s: SpriteBase3D, foot: Vector2, z: float, keep_size := true) -> void:
+	var d := land_depth(z)
+	if keep_size:
+		var cam_z := cos(deg_to_rad(PITCH)) * view_distance()
+		s.pixel_size *= (cam_z - d) / (cam_z - minf(z, d))
+	s.position = to3d(foot, d) + Vector3(0, -land_sink(d, foot.y), 0)
+
+## How far (3D units) something at depth `z` standing on land whose top is at game-y `surface`
+## must sink so its base never shows above the land's front edge. The camera looks down on
+## the land, so things further back appear higher; most of all when the camera is at the top
+## of the map.
+static func land_sink(z: float, surface: float) -> float:
+	var pitch := deg_to_rad(PITCH)
+	var dist_ := view_distance()
+	var above := (surface - TDWorld.world_view().y / 2.0) / PX + sin(pitch) * dist_
+	return maxf(0.0, above) * maxf(0.0, LAND_FRONT - z) / (cos(pitch) * dist_ - LAND_FRONT)
+
+## The camera distance that shows TDWorld.world_view().y game pixels at the play line.
+static func view_distance() -> float:
+	return (TDWorld.world_view().y / PX) / 2.0 / tan(deg_to_rad(FOV / 2.0))
 
 ## Texels per art pixel of `texture` (ART_DENSITY; a built texture can carry its own as
 ## the "art_density" meta).
@@ -336,7 +369,7 @@ func _apply_biome(b: BiomeDef) -> void:
 
 ## The camera distance that shows TDWorld.world_view().y game pixels at the play line.
 func _fit_distance() -> void:
-	dist = (TDWorld.world_view().y / PX) / 2.0 / tan(deg_to_rad(FOV / 2.0))
+	dist = view_distance()
 
 ## The window changed shape: refit the camera and rebuild the scenery for the new view.
 func fit_view() -> void:
@@ -434,6 +467,18 @@ func screen_height(frac: float, z: float) -> float:
 	var cam_z := cos(pitch) * dist
 	var rel := atan((0.5 - frac) * 2.0 * tan(deg_to_rad(FOV / 2.0)))
 	return cam_y + tan(rel - pitch) * (cam_z - z)
+
+## The inverse of screen_height: how far down the screen (0 top, 1 bottom) world height `h`
+## at depth z appears when the camera is in the middle of its vertical range.
+func screen_frac(h: float, z: float) -> float:
+	var view := TDWorld.world_view()
+	var cam_mid := (float(world.map.height) - view.y) / 2.0
+	var target_y := -(cam_mid + view.y / 2.0) / PX
+	var pitch := deg_to_rad(PITCH)
+	var cam_y := target_y + sin(pitch) * dist
+	var cam_z := cos(pitch) * dist
+	var rel := atan((h - cam_y) / (cam_z - z)) + pitch
+	return 0.5 - tan(rel) / (2.0 * tan(deg_to_rad(FOV / 2.0)))
 
 func _process(delta: float) -> void:
 	if backdrop:

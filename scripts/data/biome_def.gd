@@ -31,24 +31,25 @@ extends Resource
 ## Soft beams of sunlight slanting through the scene (dawn meadows, forests).
 @export var light_shafts := false
 @export var light_shaft_color := Color(1.0, 0.85, 0.6, 0.12)
-## Slow cloud shadows drifting across the floor.
+## Unused since the floor went flat (it has no top for cloud shadows to drift over).
 @export var cloud_shadows := true
 
 @export_group("Ground")
-## Seamless textures for the solid floor block (the only land with 3D depth).
+## Seamless textures for the floor's painted front: rock (side) in a band under its grass
+## edge, then soil below. ground_top is unused since the floor went flat.
 @export var ground_top: Texture2D
 @export var ground_side: Texture2D
 @export var ground_soil: Texture2D
 ## The painted front of a floating platform (art/sheets/platform_pieces_<area>.json): its
 ## left end, the middle and a second middle mixed in, and its right end. PlatformSkin sets
 ## them edge to edge for each platform's width. Floating platforms are only this skin, with
-## no 3D block behind it.
+## no 3D block behind it, and the floor's top edge is its middles repeated.
 @export var platform_left: Texture2D
 @export var platform_middle: Texture2D
 ## Optional: middles alternate between this and platform_middle so long platforms don't repeat.
 @export var platform_middle_alt: Texture2D
 @export var platform_right: Texture2D
-## Grass blades: a short fringe along the floor's front edge, and tufts behind platform skins.
+## Grass blades: tufts peeking over the top edge of the floor and platforms, from behind.
 @export var edge_grass: Array[Texture2D] = []
 
 @export_group("Scenery")

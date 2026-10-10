@@ -61,13 +61,13 @@ func build(map: MapDef, platforms: Array[Platform], rng: RandomNumberGenerator) 
 ## (some slots stay empty, by the rule's `chance`).
 func _back_houses(rule: DecorDef, map: MapDef, rng: RandomNumberGenerator) -> Array[Sprite3D]:
 	var placed: Array[Sprite3D] = []
-	var z := TDStage.land_depth((rule.depth.x + rule.depth.y) * 0.5)
+	var z := (rule.depth.x + rule.depth.y) * 0.5
 	for x in back_house_slots(rule, map):
 		if rng.randf() >= rule.chance:
 			continue
 		var tex: Texture2D = rule.textures[rng.randi() % rule.textures.size()]
 		var s := TDStage.sprite(tex, rule.texel * rule.scale.y, rule.shaded)
-		s.position = TDStage.to3d(Vector2(x, map.ground_y + 3.0), z)
+		TDStage.stand_on_land(s, Vector2(x, map.ground_y + 3.0), z)
 		s.flip_h = rng.randf() < 0.5
 		root.add_child(s)
 		placed.append(s)
@@ -113,7 +113,7 @@ func _scatter(rule: DecorDef, x0: float, x1: float, y: float, rng: RandomNumberG
 		if rng.randf() < rule.chance:
 			var tex: Texture2D = rule.textures[rng.randi() % rule.textures.size()]
 			var s := TDStage.sprite(tex, rule.texel * rng.randf_range(rule.scale.x, rule.scale.y), rule.shaded)
-			s.position = TDStage.to3d(Vector2(x, y + 3.0), rng.randf_range(TDStage.land_depth(rule.depth.x), TDStage.land_depth(rule.depth.y)))
+			TDStage.stand_on_land(s, Vector2(x, y + 3.0), rng.randf_range(rule.depth.x, rule.depth.y))
 			s.flip_h = rng.randf() < 0.5
 			root.add_child(s)
 			placed.append(s)
@@ -177,7 +177,7 @@ func _prop(p: PropPlacement, map: MapDef) -> void:
 		return
 	var y := p.y if p.y >= 0.0 else float(map.ground_y) + 3.0
 	var s := TDStage.sprite(p.texture, TDStage.TEXEL * p.scale)
-	s.position = TDStage.to3d(Vector2(p.x, y), TDStage.land_depth(p.depth))
+	TDStage.stand_on_land(s, Vector2(p.x, y), p.depth)
 	s.flip_h = p.flip
 	root.add_child(s)
 	if p.light_color.a > 0.0:
@@ -193,7 +193,7 @@ func _building(b: BuildingPlacement, pl: Platform, biome: BiomeDef) -> void:
 		return
 	var z := TDStage.land_depth(b.depth)
 	var s := TDStage.sprite(d.texture, d.texel() * b.scale * (stage.dist - z) / stage.dist)
-	s.position = TDStage.to3d(Vector2(b.center_x(), pl.y + 3.0), z)
+	TDStage.stand_on_land(s, Vector2(b.center_x(), pl.y + 3.0), b.depth, false)
 	s.flip_h = b.flip
 	s.modulate = b.tint
 	root.add_child(s)
@@ -209,11 +209,12 @@ func _door(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
 	var height := 60.0
 	if biome.door:
 		var s := TDStage.sprite(biome.door)
-		s.position = TDStage.to3d(base, TDStage.land_depth(-2.0))
+		TDStage.stand_on_land(s, base, -2.0)
 		root.add_child(s)
 		height = TDStage.art_size(biome.door).y
 	var l := TDStage.light(DOOR_LIGHT, 1.6, 3.5)
-	l.position = TDStage.to3d(base + Vector2(0, -height * 0.45), -0.8)
+	# in front of the doorway, so it lights the door and the land's front around it
+	l.position = TDStage.to3d(base + Vector2(0, -height * 0.45), TDStage.LAND_FRONT + 0.5)
 	root.add_child(l)
 
 ## A rope or ladder: the style's top piece, its middle piece repeated, and its bottom piece.
@@ -246,7 +247,7 @@ func _climbable(c: ClimbableDef) -> void:
 
 func _portal(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
 	var base := Vector2(p.x, pl.y + 4.0)
-	var at := TDStage.to3d(base, -0.3)
+	var at := TDStage.to3d(base, TDStage.land_depth(-0.3))
 	if not biome.portal_frames.is_empty():
 		var frames := SpriteFrames.new()
 		frames.set_animation_speed(&"default", 6.0)
@@ -281,12 +282,12 @@ func _lanterns(map: MapDef, biome: BiomeDef, rng: RandomNumberGenerator) -> void
 		return
 	var x := 320.0
 	while x < map.width - 120.0:
-		var pos := TDStage.to3d(Vector2(x, map.ground_y + 3.0), -1.3)
 		var post := TDStage.sprite(biome.lantern)
-		post.position = pos
+		TDStage.stand_on_land(post, Vector2(x, map.ground_y + 3.0), -1.3)
+		var pos := post.position
 		root.add_child(post)
 		# the lamp hangs off the right of the post, near the top
-		var size := TDStage.art_size(biome.lantern) / TDStage.PX
+		var size := post.texture.get_size() * post.pixel_size
 		var lamp := pos + Vector3(size.x * 0.22, size.y * 0.62, 0.05)
 		var g := TDStage.glow_sprite(load("res://assets/sprites/fx/glow.png"), Color(biome.lantern_light, 0.5) * 1.5)
 		g.position = lamp
@@ -302,7 +303,7 @@ func _sign(map: MapDef, biome: BiomeDef) -> void:
 	if map.sign_text == "" or biome.signpost == null:
 		return
 	var post := TDStage.sprite(biome.signpost, TDStage.TEXEL * SIGN_SCALE)
-	post.position = TDStage.to3d(Vector2(map.sign_x, map.ground_y + 3.0), SIGN_DEPTH)
+	TDStage.stand_on_land(post, Vector2(map.sign_x, map.ground_y + 3.0), SIGN_DEPTH)
 	root.add_child(post)
 
 ## Where the sign's words go (game pixels, their bottom centre), or null for no sign. The

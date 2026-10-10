@@ -1,7 +1,7 @@
 class_name TerrainBuilder
 extends RefCounted
-## Builds the ground of a map: the textured 3D block of the floor, the painted front skin of
-## every floating platform (flat, with no 3D block behind it), and grass along the edges.
+## Builds the land of a map, all flat like a 2D game: the painted front of the floor, the
+## painted front skin of every floating platform, and grass peeking over their top edges.
 
 
 var stage: TDStage
@@ -23,94 +23,87 @@ func build(map: MapDef, platforms: Array[Platform]) -> void:
 
 # ---------- the floor ----------
 
-## The floor is the only land with depth: characters stand on its top, which runs back
-## into the scene. Floating platforms are just their painted front skin.
-func _build_floor(map: MapDef, ground: Platform, biome: BiomeDef) -> void:
-	var sts: Array[SurfaceTool] = []
-	for i in 3:
-		var st := SurfaceTool.new()
-		st.begin(Mesh.PRIMITIVE_TRIANGLES)
-		sts.append(st)
-	var w := float(map.width) / TDStage.PX
-	var h := float(map.height) / TDStage.PX
-	var textures := [biome.ground_top, biome.ground_side, biome.ground_soil]
-	var ts: Array[float] = []
-	for tex: Texture2D in textures:
-		ts.append(TDStage.art_size(tex).x / TDStage.PX)
-	_block(sts, ts, -40.0, w + 40.0, -ground.y / TDStage.PX, -h - 20.0, TDStage.GROUND_BACK, TDStage.GROUND_FRONT)
-	var mesh := ArrayMesh.new()
-	for i in 3:
-		sts[i].generate_tangents()
-		sts[i].commit(mesh)
-		mesh.surface_set_material(i, _top_material(biome) if i == 0 else _tile_material(textures[i]))
-	var mi := MeshInstance3D.new()
-	mi.name = "Floor"
-	mi.mesh = mesh
-	root.add_child(mi)
+## How far past each side of the map the floor runs, in game pixels, so no edge shows when
+## the view is wider than the map.
+const FLOOR_MARGIN := 1280.0
+## Middle pieces in one repeat of the floor's top edge.
+const FLOOR_EDGE_PIECES := 4
+## How far below the walking line the floor's rock and soil start, in game pixels: inside the
+## solid part of the edge picture, so its ragged underside overlaps them.
+const FLOOR_FILL_TOP := 10.0
+## How tall the band of rock under the floor's edge is before plain soil, in game pixels.
+const FLOOR_ROCK := 128.0
 
-func _tile_material(texture: Texture2D) -> StandardMaterial3D:
+## The floor is flat, like the floating platforms: its top edge is the biome's platform middle
+## pieces repeated along the whole map (the walking surface row on the floor's top), and the
+## biome's rock and soil textures fill below it down past the bottom of the map.
+func _build_floor(map: MapDef, ground: Platform, biome: BiomeDef) -> void:
+	var x0 := -FLOOR_MARGIN
+	var x1 := map.width + FLOOR_MARGIN
+	var fill_top := ground.y
+	if biome.platform_middle:
+		var tex := floor_edge(biome)
+		var t := PlatformSkin.texel(biome)
+		var top := PlatformSkin.span(biome, ground.y).x
+		var tile := Vector2(tex.get_width(), tex.get_height()) * t
+		root.add_child(_strip("FloorEdge", tex, Rect2(x0, top, x1 - x0, tile.y), tile, TDStage.LAND_FRONT))
+		fill_top = ground.y + FLOOR_FILL_TOP
+	var bottom := float(map.height) + FLOOR_MARGIN
+	var rock_bottom := minf(fill_top + FLOOR_ROCK, bottom)
+	var z := TDStage.LAND_FRONT - 0.01
+	root.add_child(_strip("FloorRock", biome.ground_side, Rect2(x0, fill_top, x1 - x0, rock_bottom - fill_top), TDStage.art_size(biome.ground_side), z))
+	root.add_child(_strip("FloorSoil", biome.ground_soil, Rect2(x0, rock_bottom, x1 - x0, bottom - rock_bottom), TDStage.art_size(biome.ground_soil), z))
+
+## The floor's top edge: FLOOR_EDGE_PIECES of the biome's platform middles joined like a
+## platform's skin, cut so it repeats seamlessly. The first middle stands in for both caps,
+## and the picture runs from a column of the first one to the same column of the last, where
+## neither is blended with its neighbour, so each copy meets the next exactly.
+static var _edges := {}
+
+static func floor_edge(biome: BiomeDef) -> ImageTexture:
+	var key := biome.resource_path if biome.resource_path else str(biome.get_instance_id())
+	if not _edges.has(key):
+		var parts := PlatformSkin.pieces(biome)
+		var middles := parts.slice(1, parts.size() - 1)
+		var first: Image = middles[0]
+		var row: Array[Image] = [first]
+		row.append_array(middles.slice(1))
+		row.append(first)
+		row.append(first)
+		var cols := first.get_width()
+		for i in FLOOR_EDGE_PIECES - 1:
+			cols += middles[(i + 1) % middles.size()].get_width() - PlatformSkin.OVERLAP
+		cols += first.get_width() - PlatformSkin.OVERLAP
+		var img := PlatformSkin.compose(row, cols)
+		var period := cols - first.get_width()
+		img = img.get_region(Rect2i(PlatformSkin.OVERLAP, 0, period, img.get_height()))
+		img.generate_mipmaps()
+		var tex := ImageTexture.create_from_image(img)
+		tex.set_meta(&"art_density", TDStage.art_density(biome.platform_middle))
+		_edges[key] = tex
+	return _edges[key]
+
+## A flat strip facing the camera at depth z covering `rect` (game pixels), with `texture`
+## repeating every `tile` game pixels across and down.
+func _strip(name_: String, texture: Texture2D, rect: Rect2, tile: Vector2, z: float) -> MeshInstance3D:
+	var q := QuadMesh.new()
+	q.size = rect.size / TDStage.PX
 	var m := StandardMaterial3D.new()
 	m.albedo_texture = texture
 	m.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
+	m.texture_repeat = true
+	m.uv1_scale = Vector3(rect.size.x / tile.x, rect.size.y / tile.y, 1.0)
+	m.uv1_offset = Vector3(rect.position.x / tile.x, 0.0, 0.0)
+	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_SCISSOR
+	m.alpha_scissor_threshold = 0.5
+	m.alpha_antialiasing_mode = BaseMaterial3D.ALPHA_ANTIALIASING_ALPHA_TO_COVERAGE
 	m.roughness = 1.0
-	return m
-
-static var _clouds: NoiseTexture2D
-
-## The floor's top, with cloud shadows drifting over it when the biome has them.
-func _top_material(biome: BiomeDef) -> ShaderMaterial:
-	if _clouds == null:
-		var noise := FastNoiseLite.new()
-		noise.frequency = 0.012
-		noise.fractal_octaves = 3
-		_clouds = NoiseTexture2D.new()
-		_clouds.width = 256
-		_clouds.height = 256
-		_clouds.seamless = true
-		_clouds.noise = noise
-	var m := ShaderMaterial.new()
-	m.shader = preload("res://shaders/ground.gdshader")
-	m.set_shader_parameter(&"albedo_tex", biome.ground_top)
-	m.set_shader_parameter(&"clouds", _clouds)
-	m.set_shader_parameter(&"cloud_strength", 0.22 if biome.cloud_shadows else 0.0)
-	return m
-
-func _quad(st: SurfaceTool, pts: Array, uvs: Array, n: Vector3) -> void:
-	for i in [0, 1, 2, 0, 2, 3]:
-		st.set_normal(n)
-		st.set_uv(uvs[i])
-		st.add_vertex(pts[i])
-
-## A block of earth: grass on top, a band of cliff face under the top edge, soil below.
-## sts: [top, side, soil] surface tools.
-## ts: how many 3D units each surface's texture covers before it repeats.
-func _block(sts: Array[SurfaceTool], ts: Array[float], x0: float, x1: float, y_top: float, y_bot: float, z0: float, z1: float) -> void:
-	var t := ts[0]
-	_quad(sts[0], [Vector3(x0, y_top, z0), Vector3(x1, y_top, z0), Vector3(x1, y_top, z1), Vector3(x0, y_top, z1)],
-		[Vector2(x0, z0) / t, Vector2(x1, z0) / t, Vector2(x1, z1) / t, Vector2(x0, z1) / t], Vector3.UP)
-	var lip_bot := maxf(y_bot, y_top - 4.0)
-	var side := ts[1]
-	var soil := ts[2]
-	for face in [[z1, Vector3.BACK], [z0, Vector3.FORWARD]]:
-		var z: float = face[0]
-		var a := x0 if face[1] == Vector3.BACK else x1
-		var b := x1 if face[1] == Vector3.BACK else x0
-		_quad(sts[1], [Vector3(a, y_top, z), Vector3(b, y_top, z), Vector3(b, lip_bot, z), Vector3(a, lip_bot, z)],
-			[Vector2(a / side, 0), Vector2(b / side, 0), Vector2(b / side, (y_top - lip_bot) / side), Vector2(a / side, (y_top - lip_bot) / side)], face[1])
-		if lip_bot > y_bot:
-			_quad(sts[2], [Vector3(a, lip_bot, z), Vector3(b, lip_bot, z), Vector3(b, y_bot, z), Vector3(a, y_bot, z)],
-				[Vector2(a, lip_bot) / soil, Vector2(b, lip_bot) / soil, Vector2(b, y_bot) / soil, Vector2(a, y_bot) / soil], face[1])
-	for end in [[x0, Vector3.LEFT, z0, z1], [x1, Vector3.RIGHT, z1, z0]]:
-		var x: float = end[0]
-		var za: float = end[2]
-		var zb: float = end[3]
-		_quad(sts[1], [Vector3(x, y_top, za), Vector3(x, y_top, zb), Vector3(x, lip_bot, zb), Vector3(x, lip_bot, za)],
-			[Vector2(za / side, 0), Vector2(zb / side, 0), Vector2(zb / side, (y_top - lip_bot) / side), Vector2(za / side, (y_top - lip_bot) / side)], end[1])
-		if lip_bot > y_bot:
-			_quad(sts[2], [Vector3(x, lip_bot, za), Vector3(x, lip_bot, zb), Vector3(x, y_bot, zb), Vector3(x, y_bot, za)],
-				[Vector2(za, lip_bot) / soil, Vector2(zb, lip_bot) / soil, Vector2(zb, y_bot) / soil, Vector2(za, y_bot) / soil], end[1])
-	_quad(sts[2], [Vector3(x0, y_bot, z1), Vector3(x1, y_bot, z1), Vector3(x1, y_bot, z0), Vector3(x0, y_bot, z0)],
-		[Vector2(x0, z1) / soil, Vector2(x1, z1) / soil, Vector2(x1, z0) / soil, Vector2(x0, z0) / soil], Vector3.DOWN)
+	q.material = m
+	var mi := MeshInstance3D.new()
+	mi.name = name_
+	mi.mesh = q
+	mi.position = TDStage.to3d(rect.get_center(), z)
+	return mi
 
 # ---------- painted platform fronts ----------
 
@@ -145,33 +138,25 @@ func _platform_look(pl: Platform, d: PlatformDef) -> void:
 
 # ---------- grass along the edges ----------
 
-## How far the floor's front-edge grass may rise above the edge, in game pixels. The edge is
-## nearer the camera than the actors, so it shows a little below their feet; a short fringe
-## frames the bottom of the view without hiding anyone's legs.
-const FRINGE_RISE := 6.0
-
 func _edge_grass(map: MapDef, platforms: Array[Platform], biome: BiomeDef) -> void:
 	if biome.edge_grass.is_empty():
 		return
 	var rng := RandomNumberGenerator.new()
 	rng.seed = hash(map.id) + 7
-	var x := -300.0
-	while x < map.width + 300.0:
-		# in front of the floor's front face, sunk so only the tips rise above the edge
-		var s := _grass(biome, rng, Vector2(x, map.ground_y), TDStage.GROUND_FRONT + 0.05)
-		var tall := s.texture.get_height() * s.pixel_size * TDStage.PX
-		s.position.y -= maxf(0.0, tall - FRINGE_RISE) / TDStage.PX
-		x += rng.randf_range(40.0, 70.0)
+	_grass_along(biome, rng, -300.0, map.width + 300.0, map.ground_y)
 	for i in range(1, platforms.size()):
 		if map.platforms[i - 1].look:
 			continue # painted land brings its own grass
 		var pl := platforms[i]
-		x = pl.x + 20.0
-		while x < pl.x + pl.w - 20.0:
-			if rng.randf() < 0.5:
-				# just behind the skin, peeking over its top edge
-				_grass(biome, rng, Vector2(x, pl.y), TDStage.land_depth(TDStage.LAND_FRONT - rng.randf_range(0.03, 0.06)))
-			x += rng.randf_range(50.0, 90.0)
+		_grass_along(biome, rng, pl.x + 20.0, pl.x + pl.w - 20.0, pl.y)
+
+## Tufts along [x0, x1] just behind the land's front skin, peeking over its top edge at y.
+func _grass_along(biome: BiomeDef, rng: RandomNumberGenerator, x0: float, x1: float, y: float) -> void:
+	var x := x0
+	while x < x1:
+		if rng.randf() < 0.5:
+			_grass(biome, rng, Vector2(x, y), TDStage.land_depth(TDStage.LAND_FRONT - rng.randf_range(0.03, 0.06)))
+		x += rng.randf_range(50.0, 90.0)
 
 ## A tuft of edge grass, at or a little under the land art's pixel size.
 func _grass(biome: BiomeDef, rng: RandomNumberGenerator, at: Vector2, z: float) -> Sprite3D:
