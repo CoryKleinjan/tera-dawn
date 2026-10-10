@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="BiomeDef" load_steps=53 format=3]
+[gd_resource type="Resource" script_class="BiomeDef" load_steps=55 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/biome_def.gd" id="1_biome_def"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/sea_gull.tres" id="90_gulls"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/dawnharbor_top.png" id="2_ground_top"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/dawnharbor_side.png" id="3_ground_side"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/dawnharbor_soil.png" id="4_ground_soil"]
@@ -184,6 +185,16 @@ chance = 0.6
 texel = 1.25
 shaded = true
 
+[sub_resource type="Resource" id="Resource_town"]
+script = ExtResource("20_decor_def")
+textures = Array[Texture2D]([ExtResource("31_building_large"), ExtResource("32_building_small"), ExtResource("31_building_large"), ExtResource("33_signature_prop")])
+spacing = Vector2(170.0, 300.0)
+depth = Vector2(-8.8, -7.0)
+scale = Vector2(1.0, 1.25)
+chance = 0.95
+texel = 1.25
+shaded = true
+
 [resource]
 script = ExtResource("1_biome_def")
 id = &"harbor"
@@ -213,6 +224,10 @@ edge_grass = Array[Texture2D]([ExtResource("8_tall_grass")])
 backdrop = Array[ExtResource("9_backdrop_layer_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7")])
 ground_decor = Array[ExtResource("20_decor_def")]([SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12")])
 platform_decor = Array[ExtResource("20_decor_def")]([SubResource("Resource_13")])
+town_decor = Array[ExtResource("20_decor_def")]([SubResource("Resource_town")])
+flyers = ExtResource("90_gulls")
+flyer_count = 5
+chimney_smoke = true
 lantern = ExtResource("34_lantern_lit")
 signpost = ExtResource("35_signpost")
 portal_frames = Array[Texture2D]([ExtResource("36_portal_1"), ExtResource("37_portal_2"), ExtResource("38_portal_3"), ExtResource("39_portal_4")])

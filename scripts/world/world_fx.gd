@@ -85,7 +85,7 @@ func show_gain(kind: StringName, amount: int) -> void:
 			young += 1
 	var n := TDFloatText.new()
 	n.world = world
-	n.position = world.player.position + Vector2(0, -96 - young * 14)
+	n.position = world.player.position + Vector2(0, -108 - young * 14)
 	n.value = amount
 	n.kind = String(kind)
 	world.fx_layer.add_child(n)

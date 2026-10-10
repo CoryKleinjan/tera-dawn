@@ -7,8 +7,12 @@ extends Node2D
 ## basic attack; the quickslot keys use whatever skill or item is on that slot.
 
 const HERO_FRAMES := preload("res://assets/animations/hero.tres")
-## The hero's size against everyone else's art (TDStage.TEXEL): players are drawn a bit smaller.
-const HERO_SCALE := 0.8
+## The hero's size against everyone else's art (TDStage.TEXEL). Early monsters are drawn
+## smaller than the hero, so the player is the clear focus.
+const HERO_SCALE := 1.0
+## A soft warm light that travels with every player, so heroes stand out from the scenery.
+const LIGHT := Color(1.0, 0.86, 0.68)
+const LIGHT_ENERGY := 0.55
 const Z := TDStage.Z_PLAYER
 ## Ticks between telling the server where you are (60 / 3 = 20 a second).
 const REPORT_EVERY := 3
@@ -76,6 +80,7 @@ var companion: TDCompanion
 func _ready() -> void:
 	rig = SpriteRig.new()
 	rig.setup(HERO_FRAMES, null, TDStage.TEXEL * HERO_SCALE, 40.0)
+	rig.add_light(LIGHT, LIGHT_ENERGY, 48.0)
 	add_child(rig)
 	companion = TDCompanion.new()
 	add_child(companion)
@@ -376,7 +381,7 @@ func _animation() -> StringName:
 		return climb.style.climb_animation if moving and climb.style else &"climb_idle"
 	if action_t > 0:
 		return action_anim
-	if inv > SimPlayer.HURT_INV - HURT_POSE_TICKS: # just got hit (see knock_back)
+	if inv > SimPlayer.HURT_INV - HURT_POSE_TICKS and inv <= SimPlayer.HURT_INV: # just got hit (see knock_back)
 		return &"hurt"
 	if not on_ground:
 		return &"jump" if vel.y < 0 else &"fall"

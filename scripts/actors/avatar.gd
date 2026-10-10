@@ -77,6 +77,7 @@ func step() -> void:
 func _ready() -> void:
 	rig = SpriteRig.new()
 	rig.setup(TDPlayer.HERO_FRAMES, null, TDStage.TEXEL * TDPlayer.HERO_SCALE, 40.0)
+	rig.add_light(TDPlayer.LIGHT, TDPlayer.LIGHT_ENERGY, 48.0)
 	add_child(rig)
 	companion = TDCompanion.new()
 	add_child(companion)

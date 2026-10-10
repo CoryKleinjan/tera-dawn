@@ -22,6 +22,11 @@ func build(map: MapDef, platforms: Array[Platform], rng: RandomNumberGenerator) 
 	var biome := map.biome
 	for rule in biome.ground_decor:
 		_scatter(rule, -300.0, map.width + 300.0, map.ground_y, rng)
+	if map.town:
+		for rule in biome.town_decor:
+			for s in _scatter(rule, -300.0, map.width + 300.0, map.ground_y, rng):
+				if biome.chimney_smoke and s.texture.get_height() * s.pixel_size * TDStage.PX > 90.0:
+					_smoke(s, biome)
 	for i in range(1, platforms.size()):
 		var pl := platforms[i]
 		for rule in biome.platform_decor:
@@ -34,11 +39,13 @@ func build(map: MapDef, platforms: Array[Platform], rng: RandomNumberGenerator) 
 		_portal(p, platforms[p.platform], biome)
 	_lanterns(map, biome, rng)
 	_sign(map, biome)
+	_flyers(map, biome, rng)
 
-## Drops pieces from a DecorDef along [x0, x1] on the surface at y.
-func _scatter(rule: DecorDef, x0: float, x1: float, y: float, rng: RandomNumberGenerator) -> void:
+## Drops pieces from a DecorDef along [x0, x1] on the surface at y. Returns the sprites.
+func _scatter(rule: DecorDef, x0: float, x1: float, y: float, rng: RandomNumberGenerator) -> Array[Sprite3D]:
+	var placed: Array[Sprite3D] = []
 	if rule.textures.is_empty():
-		return
+		return placed
 	var x := x0 + rng.randf_range(0.0, rule.spacing.x)
 	while x < x1:
 		if rng.randf() < rule.chance:
@@ -47,7 +54,63 @@ func _scatter(rule: DecorDef, x0: float, x1: float, y: float, rng: RandomNumberG
 			s.position = TDStage.to3d(Vector2(x, y + 3.0), rng.randf_range(TDStage.land_depth(rule.depth.x), TDStage.land_depth(rule.depth.y)))
 			s.flip_h = rng.randf() < 0.5
 			root.add_child(s)
+			placed.append(s)
 		x += rng.randf_range(rule.spacing.x, rule.spacing.y)
+	return placed
+
+## A thin column of smoke rising from the top of a building.
+func _smoke(building: Sprite3D, biome: BiomeDef) -> void:
+	var h := building.texture.get_height() * building.pixel_size
+	var w := building.texture.get_width() * building.pixel_size
+	var p := CPUParticles3D.new()
+	p.amount = 14
+	p.lifetime = 5.0
+	p.preprocess = 5.0
+	var q := QuadMesh.new()
+	q.size = Vector2(0.9, 0.9)
+	var m := TDStage.additive_material(biome.smoke_color)
+	m.blend_mode = BaseMaterial3D.BLEND_MODE_MIX
+	q.material = m
+	p.mesh = q
+	p.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	p.direction = Vector3(0.3, 1, 0)
+	p.spread = 8.0
+	p.gravity = Vector3(0.15, 0.25, 0)
+	p.initial_velocity_min = 0.3
+	p.initial_velocity_max = 0.5
+	p.scale_amount_min = 0.5
+	p.scale_amount_max = 1.0
+	var grow := Curve.new()
+	grow.add_point(Vector2(0, 0.4))
+	grow.add_point(Vector2(1, 1.6))
+	p.scale_amount_curve = grow
+	var fade := Gradient.new()
+	fade.set_color(0, Color(1, 1, 1, 0))
+	fade.set_color(1, Color(1, 1, 1, 0))
+	fade.add_point(0.15, Color(1, 1, 1, 1))
+	p.color_ramp = fade
+	p.position = building.position + Vector3((0.2 if building.flip_h else -0.2) * w, h * 0.92, 0.0)
+	root.add_child(p)
+
+## Birds crossing the sky behind the town (BiomeDef.flyers).
+func _flyers(map: MapDef, biome: BiomeDef, rng: RandomNumberGenerator) -> void:
+	if biome.flyers == null or biome.flyer_count <= 0:
+		return
+	var anim := &"move" if biome.flyers.has_animation(&"move") else &"idle"
+	var span := Vector2(-400.0, map.width + 400.0) / TDStage.PX
+	for i in biome.flyer_count:
+		var f := TDFlyer.new()
+		f.sprite_frames = biome.flyers
+		TDStage.style_sprite(f, TDStage.TEXEL * rng.randf_range(0.45, 0.7))
+		f.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		f.span = span
+		f.speed = rng.randf_range(0.8, 1.6) * (1.0 if rng.randf() < 0.5 else -1.0)
+		f.flip_h = f.speed < 0.0
+		f.base_y = -(map.ground_y - rng.randf_range(260.0, 420.0)) / TDStage.PX
+		f.position = Vector3(rng.randf_range(span.x, span.y), f.base_y, rng.randf_range(-16.0, -10.0))
+		f.play(anim)
+		f.speed_scale = rng.randf_range(0.8, 1.2)
+		root.add_child(f)
 
 func _prop(p: PropPlacement, map: MapDef) -> void:
 	if p.texture == null:
@@ -139,6 +202,8 @@ func _lanterns(map: MapDef, biome: BiomeDef, rng: RandomNumberGenerator) -> void
 		root.add_child(g)
 		var l := TDStage.light(biome.lantern_light, 2.2, 6.0)
 		l.position = lamp + Vector3(0, 0, 0.5)
+		l.set_meta(&"energy", l.light_energy)
+		l.add_to_group(&"flicker")
 		root.add_child(l)
 		x += rng.randf_range(map.lantern_spacing * 0.85, map.lantern_spacing * 1.15)
 

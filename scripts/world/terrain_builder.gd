@@ -113,30 +113,48 @@ func _block(sts: Array[SurfaceTool], x0: float, x1: float, y_top: float, y_bot: 
 # ---------- painted platform fronts ----------
 
 ## Lines up the biome's left end, repeating middle and right end along a platform's front,
-## so floating platforms look like the tileset's grassy rock ledges.
+## so floating platforms look like the tileset's grassy rock ledges. Long platforms mix in
+## the second middle piece (and mirror pieces at random) so the pattern doesn't show, and
+## the underside pieces hang below when the biome has them.
 func _platform_front(pl: Platform, biome: BiomeDef) -> void:
 	if biome.platform_middle == null:
 		return
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash(Vector2(pl.x, pl.y))
 	var texel := biome.platform_texel
 	var z := TDStage.LAND_FRONT
 	var left := biome.platform_left
 	var right := biome.platform_right
-	var mid := biome.platform_middle
 	var lw := left.get_width() * texel
 	var rw := right.get_width() * texel
-	var mw := mid.get_width() * texel
+	var mw := biome.platform_middle.get_width() * texel
 	var x0 := pl.x - 8.0
 	var x1 := pl.x + pl.w + 8.0
 	# middle pieces first (behind the ends), overlapping a little so the seams hide in the grass
 	var x := x0 + lw * 0.6
 	var n := 0
 	while x < x1 - rw * 0.6:
+		var mid := biome.platform_middle
+		if biome.platform_middle_alt and rng.randf() < 0.4:
+			mid = biome.platform_middle_alt
 		var s := _front_piece(mid, Vector2(x + mw / 2.0, pl.y), texel, z - 0.005 * (n % 2))
-		s.flip_h = n % 2 == 1
+		s.flip_h = rng.randf() < 0.5
+		_under_piece(biome.platform_under_middle, s, texel)
 		x += mw * 0.8
 		n += 1
-	_front_piece(left, Vector2(x0 + lw / 2.0, pl.y), texel, z + 0.01)
-	_front_piece(right, Vector2(x1 - rw / 2.0, pl.y), texel, z + 0.01)
+	_under_piece(biome.platform_under_left, _front_piece(left, Vector2(x0 + lw / 2.0, pl.y), texel, z + 0.01), texel)
+	_under_piece(biome.platform_under_right, _front_piece(right, Vector2(x1 - rw / 2.0, pl.y), texel, z + 0.01), texel)
+
+## Hangs an underside piece (roots, rock) from the bottom of a skin piece, just behind it.
+func _under_piece(tex: Texture2D, skin: Sprite3D, texel: float) -> void:
+	if tex == null:
+		return
+	var s := TDStage.sprite(tex, texel)
+	s.offset = Vector2(0, -tex.get_height() / 2.0)  # origin at the top centre
+	var bottom := skin.texture.get_height() * texel - 4.0  # skin.position is its top edge; overlap a little
+	s.position = skin.position + Vector3(0, -bottom / TDStage.PX, -0.01)
+	s.flip_h = skin.flip_h
+	root.add_child(s)
 
 ## The game-y span a platform's painted skin covers: x is the top of its grass, y the bottom.
 static func skin_span(d: PlatformDef, biome: BiomeDef) -> Vector2:

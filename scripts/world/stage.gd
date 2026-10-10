@@ -403,6 +403,9 @@ func _process(delta: float) -> void:
 		fade = move_toward(fade, _fade_target, delta / FADE_TIME)
 		post_material.set_shader_parameter(&"fade", fade)
 	var t := Time.get_ticks_msec() / 1000.0
+	for l: OmniLight3D in get_tree().get_nodes_in_group(&"flicker"):
+		var seed_ := float(l.get_instance_id() % 997)
+		l.light_energy = float(l.get_meta(&"energy")) * (0.88 + 0.08 * sin(t * 7.0 + seed_) + 0.04 * sin(t * 13.0 + seed_ * 2.0))
 	for beam: MeshInstance3D in get_tree().get_nodes_in_group(&"light_shaft"):
 		var m := beam.material_override as StandardMaterial3D
 		m.albedo_color.a = float(beam.get_meta(&"alpha")) * (0.7 + 0.3 * sin(t * 0.4 + float(beam.get_meta(&"phase"))))
