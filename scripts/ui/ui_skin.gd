@@ -27,6 +27,17 @@ const SPEECH_BODY := Rect2(0, 0, 144, 82)
 const SPEECH_TAIL := Rect2(36, 76, 34, 23)
 ## Where the tail's tip is inside SPEECH_TAIL.
 const SPEECH_TIP := Vector2(6, 23)
+## The plaque (name_tag) behind name tags and hints: its end caps and trim in texels (the
+## caps' gold diamonds sit inside them), and the room left between the text and a cap.
+const PLAQUE_MARGINS := Vector2(20, 9)
+const PLAQUE_PAD := 2.0
+## How tall name tags and hints are drawn.
+const NAME_TAG_H := 19.0
+const HINT_H := 22.0
+## Spaces between the caret and a box's placeholder hint (see set_hint).
+const HINT_ROOM := "  "
+## How tall the map-name banner is drawn.
+const BANNER_H := 68.0
 ## Brighter and darker tints for hover and pressed states of art that has only one state.
 const LIT := Color(1.25, 1.18, 1.05)
 const PRESSED := Color(0.85, 0.8, 0.75)
@@ -259,6 +270,12 @@ static func style_field(f: LineEdit, art: String, margins: Vector4, scale := 1.0
 	f.add_theme_color_override("font_placeholder_color", Color(Palette.MUTED, 0.8))
 	f.add_theme_color_override("caret_color", Palette.SUN)
 
+## Sets a box's placeholder hint with a little room before it, so the caret (where the first
+## letter would go, which is where the hint starts) doesn't blink over it. Keep a box with a
+## hint left-aligned: an empty centred box puts its caret in the middle, on the hint.
+static func set_hint(f: LineEdit, hint: String) -> void:
+	f.placeholder_text = HINT_ROOM + hint
+
 ## A slider: a dark groove, a glowing gold fill and the sun knob.
 static func style_slider(s: HSlider) -> void:
 	var track := box("menu/slider_track", 10, 0)
@@ -399,15 +416,23 @@ static func draw_bar_fill(ci: CanvasItem, fill: String, groove: Rect2, fraction:
 	else:
 		box(fill, 10, 0).draw(ci.get_canvas_item(), Rect2(groove.position, Vector2(w, groove.size.y)))
 
+## How wide a plaque `h` pixels tall must be to hold text `text_w` wide between its end caps.
+static func plaque_width(text_w: float, h: float) -> float:
+	return text_w + 2.0 * (PLAQUE_MARGINS.x * h / tex("name_tag").get_height() + PLAQUE_PAD)
+
+## The small dark plaque with gold end caps (name tags, hints), scaled to the height of `r`
+## so the caps keep their shape and only the middle stretches.
+static func draw_plaque(ci: CanvasItem, r: Rect2) -> void:
+	draw_box(ci, box("name_tag", PLAQUE_MARGINS.x, PLAQUE_MARGINS.y), r, r.size.y / tex("name_tag").get_height())
+
 ## Where a name tag with its top centre at `top_center` sits on screen.
 static func name_tag_rect(top_center: Vector2, label: String) -> Rect2:
-	var w := DrawUtil.text_width(Game.ui_font, label, 11) + 22
-	return Rect2(top_center.x - w / 2.0, top_center.y, w, 19)
+	var w := plaque_width(DrawUtil.text_width(Game.ui_font, label, 11), NAME_TAG_H)
+	return Rect2(top_center.x - w / 2.0, top_center.y, w, NAME_TAG_H)
 
 ## The plaque under a character's feet with their name.
 static func draw_name_tag(ci: CanvasItem, top_center: Vector2, label: String, col: Color, badge := Color.TRANSPARENT) -> void:
-	var r := name_tag_rect(top_center, label)
-	box("name_tag", 12, 8).draw(ci.get_canvas_item(), r)
+	draw_plaque(ci, name_tag_rect(top_center, label))
 	DrawUtil.text(ci, Game.ui_font, top_center + Vector2(0, 14), label, 11, col)
 	if badge.a > 0.0:
 		DrawUtil.text(ci, Game.num_font, top_center + Vector2(0, 32), "BOSS", 12, badge, 0, 4, Palette.NIGHT)
@@ -487,10 +512,14 @@ static func draw_speech(ci: CanvasItem, bottom_center: Vector2, text: String) ->
 	for i in lines.size():
 		DrawUtil.text(ci, font, Vector2(bottom_center.x, r.position.y + 19 + i * 16), lines[i], size, Palette.INK)
 
+## How wide `draw_hint` draws a hint with this text.
+static func hint_width(text: String) -> float:
+	return plaque_width(DrawUtil.text_width(Game.ui_font, text, 13), HINT_H)
+
 ## A small floating hint ("↑ Talk", "↑ to Ember Hollow").
 static func draw_hint(ci: CanvasItem, bottom_center: Vector2, text: String) -> void:
-	var w := DrawUtil.text_width(Game.ui_font, text, 13) + 26
-	box("name_tag", 12, 8).draw(ci.get_canvas_item(), Rect2(bottom_center.x - w / 2.0, bottom_center.y - 22, w, 22))
+	var w := hint_width(text)
+	draw_plaque(ci, Rect2(bottom_center.x - w / 2.0, bottom_center.y - HINT_H, w, HINT_H))
 	DrawUtil.text(ci, Game.ui_font, bottom_center + Vector2(0, -6), text, 13, Palette.MIST)
 
 ## The parchment banner with a map's name, faded by `alpha`.
@@ -499,7 +528,7 @@ static func draw_banner(ci: CanvasItem, center: Vector2, text: String, alpha: fl
 	ci.draw_set_transform(Vector2.ZERO)
 	var sb := box("area_banner", 34, 18)
 	sb.modulate_color = Color(1, 1, 1, alpha)
-	sb.draw(ci.get_canvas_item(), Rect2(center.x - w / 2.0, center.y - 34, w, 68))
+	sb.draw(ci.get_canvas_item(), Rect2(center.x - w / 2.0, center.y - BANNER_H / 2.0, w, BANNER_H))
 	DrawUtil.text(ci, Game.num_font, center + Vector2(0, 12), text, 34, Color("5a3414", alpha), 0, 0)
 
 static func wrap_text(font: Font, text: String, size: int, max_w: float) -> PackedStringArray:

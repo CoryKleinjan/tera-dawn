@@ -23,6 +23,9 @@ func _shot(name: String) -> void:
 	get_tree().paused = false
 	get_viewport().get_texture().get_image().save_png("%s/%s.png" % [out, name])
 	print("saved ", name)
+	# achievement toasts and job ribbons belong to the moment they popped up in, not later shots
+	if w:
+		w.hud.banners.clear()
 
 func _physics(n: int) -> void:
 	for i in n:
@@ -186,12 +189,18 @@ func _run() -> void:
 			meadow.remove_player(m)
 		await _physics(3)
 	if only == "" or only == "village":
-		# The elder and shopkeeper by the village.
+		# The elder and shopkeeper by the village, with a few lines in the log and the chat.
 		var elder := world.npcs()[0]
 		_teleport(world, Vector2(elder.position.x - 40, 620))
 		p.face = 1
+		world.show_pickup(Content.item(&"moss_tuft"), 3)
+		world.add_log("Quest accepted: Moss for the Stall", Palette.SUN)
+		world.hud.chat.add("all", "Mossy", "Anyone heading to Ember Hollow?")
+		world.hud.chat.add("party", "Kestrel", "On my way!")
 		await _physics(15)
 		await _shot("village")
+		world.log_lines.clear()
+		world.hud.chat.lines.clear()
 	if only == "" or only == "dialogue":
 		# Talking to the elder.
 		var elder := world.npcs()[0]

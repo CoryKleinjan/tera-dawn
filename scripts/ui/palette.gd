@@ -32,6 +32,8 @@ const GOLD_TRIM := Color("e9b44c")
 ## Hover and selection highlight; use with HILITE_ALPHA.
 const HILITE := Color(1, 0.85, 0.45)
 const HILITE_ALPHA := 0.18
+## The faint dark backdrop behind text drawn straight over the scene (the message log, chat).
+const BACKDROP := Color(NIGHT, 0.4)
 
 # Accents for particular things.
 const PET := Color("ffd9a8")

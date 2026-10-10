@@ -1,7 +1,8 @@
 extends TestCase
 ## The always-on HUD: the status bar, the quickslots, the chat box, invitation cards, the
 ## text prompt and the overlay (log, banner, party, quest tracker, buffs, fainting) all draw
-## with something to show, and their hit tests and buttons work.
+## with something to show, and their hit tests and buttons work. Name tags fit their names,
+## and the log, toasts and the map's sign keep clear of what's under them.
 
 var ui: UiHelpers
 
@@ -122,9 +123,24 @@ func test_overlay_draws_everything_it_can_show() -> void:
 	ui.world.show_banner("A Banner")
 	check_eq(ui.world.log_lines.size(), 6, "the log keeps the last 6 lines")
 	check(await ui.redraw(ui.hud.overlay), "the overlay draws")
+	ui.world.log_lines.clear()
 	ui.world.show_achievement("first_hunt")
 	check(ui.hud.banners.toasts.any(func(t: Dictionary) -> bool: return t["title"] == "First Hunt"), "an achievement shows a toast")
+	check(ui.world.log_lines.is_empty(), "and no log line as well")
 	check(await ui.redraw(ui.hud.overlay), "the overlay draws the achievement")
+	check(await ui.redraw(ui.hud.banners), "the toast draws")
+
+func test_achievement_toast_sits_under_the_map_banner() -> void:
+	var overlay := ui.hud.overlay
+	ui.world.show_banner("A Banner")
+	ui.world.show_achievement("first_hunt")
+	check(await ui.redraw(overlay), "the overlay draws the banner")
+	check(ui.hud.banners.toast_top() >= overlay.banner_bottom(), "the toast's top %s is under the banner's bottom %s" % [ui.hud.banners.toast_top(), overlay.banner_bottom()])
+	overlay.banner_y = TDOverlay.BANNER_Y_BOSS
+	check(ui.hud.banners.toast_top() >= overlay.banner_bottom(), "and under it when a boss bar pushes the banner down")
+	ui.hud.banners.ribbon("dialogue/job_advance_banner", "Warrior")
+	ui.hud.banners.clear()
+	check(ui.hud.banners.toasts.is_empty() and ui.hud.banners.ribbons.is_empty(), "clear() takes every toast and ribbon down")
 
 func test_overlay_draws_the_faint_screen() -> void:
 	ui.world.player.faint()
@@ -182,7 +198,46 @@ func test_monster_tags_show_only_when_hurt_or_a_boss() -> void:
 	check(await ui.redraw(ui.hud.overlay), "the overlay draws the tags")
 	check(ui.hud.overlay.last_tags != null and not ui.hud.overlay.last_tags.tags.is_empty(), "your own tag at least was gathered")
 
+func test_name_tags_fit_their_names_between_the_end_caps() -> void:
+	var tex_h := UiSkin.tex("name_tag").get_height()
+	var cap := UiSkin.PLAQUE_MARGINS.x * UiSkin.NAME_TAG_H / tex_h
+	for label in ["Elder Rowan", "Guide Sorrel", "Fletcher Wynn", "Al"]:
+		var r := UiSkin.name_tag_rect(Vector2(100, 50), label)
+		var text_w := DrawUtil.text_width(Game.ui_font, label, 11)
+		check(r.size.x >= text_w + 2.0 * cap, "%s: tag %s wide holds text %s plus two caps of %s" % [label, r.size.x, text_w, cap])
+		check_near(r.get_center().x, 100.0, "%s: centred" % label)
+	var hint := "↑ to Ember Hollow"
+	check(UiSkin.hint_width(hint) >= DrawUtil.text_width(Game.ui_font, hint, 13) + 2.0 * UiSkin.PLAQUE_MARGINS.x * UiSkin.HINT_H / tex_h, "hints fit too")
+
+func test_the_map_sign_is_drawn_sharp_over_the_portal() -> void:
+	var m := ui.world.map
+	var at: Variant = SceneryBuilder.sign_label_at(m)
+	if not check(at != null, "%s has a sign" % m.id):
+		return
+	check_eq((at as Vector2).x, m.sign_x, "the words stand over the post")
+	var portal_h := m.biome.portal_frames[0].get_height() * TDStage.TEXEL if not m.biome.portal_frames.is_empty() else 0.0
+	check((at as Vector2).y < m.ground_y - portal_h, "and higher than the portal art (%s)" % at)
+	var labels := ui.world.stage.find_children("*", "Label3D", true, false)
+	check(labels.is_empty(), "no text in the 3D stage, where depth of field would blur it")
+	ui.teleport(Vector2(m.sign_x + 60, m.ground_y))
+	await ui.ticks(5)
+	check(await ui.redraw(ui.hud.overlay), "the overlay draws the sign")
+
 # ---------- message log and gains ----------
+
+func test_log_sits_above_the_name_tags_on_the_floor() -> void:
+	ui.teleport(Vector2(400, ui.world.map.ground_y))
+	await ui.ticks(30)
+	var st := ui.world.stage
+	var feet := st.screen(Vector2(400, ui.world.map.ground_y), TDStage.Z_NPC)
+	var tag_top := UiSkin.name_tag_rect(feet + Vector2(0, 4), "Elder Rowan").position.y
+	check(ui.hud.overlay.log_bottom() < tag_top, "the log's newest line (%s) is above the floor's name tags (%s)" % [ui.hud.overlay.log_bottom(), tag_top])
+	check(ui.hud.overlay.log_bottom() <= TDWorld.VIEW.y - TDStatusBar.HEIGHT, "and above the status bar")
+	for i in 3:
+		ui.world.add_log("Line %d" % i, Palette.MIST)
+	ui.hud.chat.add("all", "Mossy", "Hello")
+	check(await ui.redraw(ui.hud.overlay), "the log draws on its backdrop")
+	check(await ui.redraw(ui.hud.chat), "the chat draws on its backdrop")
 
 func test_pickups_of_the_same_item_merge() -> void:
 	var tuft: ItemDef = Content.items.values().filter(func(i: ItemDef) -> bool: return not i.is_currency and i.stack_size() > 1)[0]
@@ -225,6 +280,24 @@ func test_title_screen_hides_the_status_bar_and_minimap() -> void:
 	check(not ui.hud.status.visible, "no status bar before there's a character")
 	check(not ui.hud.minimap_button.visible, "no minimap button either")
 	check(await ui.redraw(ui.hud.overlay), "the overlay draws without the minimap")
+
+func test_play_solo_and_host_have_their_own_row() -> void:
+	var hud := ui.hud
+	var account_row := hud.login_button.get_parent()
+	check(hud.register_button.get_parent() == account_row, "Log in and Register share a row")
+	check(hud.play_button.get_parent() == hud.host_button.get_parent(), "Play solo and Host share a row")
+	var offline_row := hud.play_button.get_parent()
+	check(offline_row != account_row, "a row of their own")
+	var rows := hud.start_panel.get_children()
+	var at := rows.find(offline_row)
+	check(at > rows.find(account_row), "under the account boxes")
+	var label := rows[at - 1] as Label
+	check(label != null and label.text == "Or play without an account", "with a small label over them")
+
+func test_title_boxes_keep_their_hints_clear_of_the_caret() -> void:
+	for f: LineEdit in [ui.hud.address_field, ui.hud.username_field, ui.hud.password_field, ui.hud.confirm_field]:
+		check(f.placeholder_text.begins_with(UiSkin.HINT_ROOM), "%s: room between the caret and the hint" % f.placeholder_text.strip_edges())
+		check_eq(f.alignment, HORIZONTAL_ALIGNMENT_LEFT, "%s: left-aligned, so an empty box's caret starts before the hint" % f.placeholder_text.strip_edges())
 
 func test_title_hints_name_the_real_keys() -> void:
 	var text := ui.hud.keys_help.text

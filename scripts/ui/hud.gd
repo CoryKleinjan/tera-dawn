@@ -37,6 +37,9 @@ var confirm_field: LineEdit
 var confirm_row: Control
 var login_button: Button
 var register_button: Button
+## Play solo and Host, on their own row under the account boxes.
+var play_button: Button
+var host_button: Button
 ## Shows why logging in didn't work.
 var message: Label
 ## The key hints under the title card, which follow the player's keybinds.
@@ -237,21 +240,21 @@ func _build_title() -> void:
 	title.add_child(title_card)
 	var col := VBoxContainer.new()
 	col.alignment = BoxContainer.ALIGNMENT_CENTER
-	col.add_theme_constant_override("separation", 10)
+	col.add_theme_constant_override("separation", 4)
 	title_card.add_child(col)
 
 	var logo := TextureRect.new()
 	logo.texture = UiSkin.tex("logo")
 	logo.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	logo.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	logo.custom_minimum_size = Vector2(420, 124)
+	logo.custom_minimum_size = Vector2(360, 104)
 	col.add_child(logo)
 
 	var card := PanelContainer.new()
 	card.add_theme_stylebox_override("panel", UiSkin.panel())
 	col.add_child(card)
 	var inner := VBoxContainer.new()
-	inner.add_theme_constant_override("separation", 12)
+	inner.add_theme_constant_override("separation", 8)
 	card.add_child(inner)
 
 	var blurb := Label.new()
@@ -265,7 +268,7 @@ func _build_title() -> void:
 
 	# before playing: log in to (or register on) a server, or play solo, or host
 	start_panel = VBoxContainer.new()
-	start_panel.add_theme_constant_override("separation", 10)
+	start_panel.add_theme_constant_override("separation", 6)
 	inner.add_child(start_panel)
 	address_field = _field(Game.last_address, "Server address", 64)
 	username_field = _field(Game.last_username, "Username", AccountStore.MAX_USERNAME)
@@ -285,22 +288,27 @@ func _build_title() -> void:
 	register_button = _small_menu_button("Register")
 	register_button.tooltip_text = "Make an account on this server"
 	register_button.pressed.connect(_on_register)
-	var play := _small_menu_button("Play solo")
-	play.tooltip_text = "Play on your own, on this computer"
-	play.pressed.connect(_on_play)
-	var host := _small_menu_button("Host")
-	host.tooltip_text = "Play and let friends register and join you (port %d)" % Net.DEFAULT_PORT
-	host.pressed.connect(_on_host)
-	start_panel.add_child(_row([login_button, register_button, play, host]))
+	start_panel.add_child(_row([login_button, register_button]))
+	# no account needed: on your own, or hosting friends
+	var offline := _small_title("Or play without an account")
+	offline.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	start_panel.add_child(offline)
+	play_button = _small_menu_button("Play solo")
+	play_button.tooltip_text = "Play on your own, on this computer"
+	play_button.pressed.connect(_on_play)
+	host_button = _small_menu_button("Host")
+	host_button.tooltip_text = "Play and let friends register and join you (port %d)" % Net.DEFAULT_PORT
+	host_button.pressed.connect(_on_host)
+	start_panel.add_child(_row([play_button, host_button]))
 	message = _label("")
 	message.add_theme_color_override("font_color", Palette.BAD)
 	message.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	message.hide()
 	start_panel.add_child(message)
 
-	var settings := _menu_button("Settings")
+	var settings := _small_menu_button("Settings")
 	settings.pressed.connect(func() -> void: open_settings())
-	var quit := _menu_button("Quit")
+	var quit := _small_menu_button("Quit")
 	quit.pressed.connect(_quit)
 	inner.add_child(_row([settings, quit]))
 
@@ -364,16 +372,13 @@ func _build_title() -> void:
 		show_title(false)
 		_show_message("Lost the connection to the server."))
 
-func _menu_button(text: String) -> Button:
-	return UiSkin.menu_button(text)
-
 func _small_menu_button(text: String) -> Button:
 	return UiSkin.menu_button(text, Vector2(122, 42), 18)
 
 func _field(text: String, hint: String, max_length: int) -> LineEdit:
 	var f := LineEdit.new()
 	f.text = text
-	f.placeholder_text = hint
+	UiSkin.set_hint(f, hint)
 	f.max_length = max_length
 	f.custom_minimum_size = Vector2(164, 36)
 	return f
@@ -382,13 +387,17 @@ func _field(text: String, hint: String, max_length: int) -> LineEdit:
 func _titled(title_text: String, field: Control) -> VBoxContainer:
 	var col := VBoxContainer.new()
 	col.add_theme_constant_override("separation", 2)
-	var l := Label.new()
-	l.text = title_text
-	l.add_theme_font_size_override("font_size", 12)
-	l.add_theme_color_override("font_color", Palette.MUTED)
-	col.add_child(l)
+	col.add_child(_small_title(title_text))
 	col.add_child(field)
 	return col
+
+## A small muted label, like the titles over the title card's boxes.
+func _small_title(text: String) -> Label:
+	var l := Label.new()
+	l.text = text
+	l.add_theme_font_size_override("font_size", 12)
+	l.add_theme_color_override("font_color", Palette.MUTED)
+	return l
 
 func _label(text: String) -> Label:
 	var l := Label.new()

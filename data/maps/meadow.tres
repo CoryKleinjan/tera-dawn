@@ -172,7 +172,7 @@ count = 2
 [sub_resource type="Resource" id="Resource_37"]
 script = ExtResource("9_spawn_def")
 monster = ExtResource("12_boulderkin")
-platform = 2
+platform = 3
 count = 2
 
 [sub_resource type="Resource" id="Resource_24"]

@@ -32,6 +32,12 @@ func test_create_on_character_select_opens_the_creator() -> void:
 	check(not ui.world.started, "not playing yet")
 	check_eq(ui.hud.creator.heading.text, "New character", "heading")
 
+func test_name_box_keeps_its_hint_clear_of_the_caret() -> void:
+	await _play("")
+	var f := ui.hud.creator.name_field
+	check(f.placeholder_text.begins_with(UiSkin.HINT_ROOM), "room between the caret and the hint")
+	check_eq(f.alignment, HORIZONTAL_ALIGNMENT_LEFT, "left-aligned: an empty centred box puts its caret on the hint")
+
 func test_every_row_steps_through_its_options_and_the_preview_follows() -> void:
 	await _play("Fresh")
 	var c := ui.hud.creator

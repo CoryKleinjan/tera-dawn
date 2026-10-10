@@ -20,9 +20,26 @@ const MINIMAP_PORTAL := ["hud/minimap_portal", 10.0]
 const TRACKER_W := 176.0
 const TRACKER_QUESTS := 4
 
+## The message log: text size, line spacing, the backdrop's margin around the text, and how
+## far above the floor (where name tags start) its newest line sits.
+const LOG_SIZE := 13
+const LOG_LINE_H := 18.0
+const LOG_PAD := 5.0
+const LOG_ABOVE_TAGS := 10.0
+
+## Where the map-name banner's middle is, normally and when a boss bar is at the top.
+const BANNER_Y := 110.0
+const BANNER_Y_BOSS := 150.0
+
 var world: TDWorld
+## Where the map-name banner's middle is this frame (lower while a boss bar shows).
+var banner_y := BANNER_Y
 ## The name tags of the last frame drawn, where they ended up (for tests).
 var last_tags: TDNameTags
+
+## The bottom of the map-name banner on screen; achievement toasts go under it.
+func banner_bottom() -> float:
+	return banner_y + UiSkin.BANNER_H / 2.0
 
 ## Where the minimap and its frame are on screen.
 static func minimap_rect() -> Rect2:
@@ -39,7 +56,7 @@ func _draw() -> void:
 	_draw_world_text()
 	# map name
 	var name_x := MENU_BUTTON.end.x + 6 if world.started else 16.0
-	UiSkin.draw_hint(self, Vector2(name_x + (DrawUtil.text_width(font, world.map.display_name, 13) + 26) / 2.0, 34), world.map.display_name)
+	UiSkin.draw_hint(self, Vector2(name_x + UiSkin.hint_width(world.map.display_name) / 2.0, 34), world.map.display_name)
 	var mm := minimap_rect()
 	if world.started:
 		_draw_minimap(mm)
@@ -48,23 +65,43 @@ func _draw() -> void:
 		_draw_party(Vector2(16, 56))
 		_draw_quest_tracker(Vector2(v.x - TRACKER_W - 8, mm.end.y + 2))
 		_draw_buffs(Vector2(mm.position.x - 6, 10))
-	# message log, newest at the bottom, above the status bar and left of the quickslots
-	var log_right := v.x - 12 - (world.hud.quickslots.size.x + 6 if world.started else 0.0)
-	var n := world.log_lines.size()
-	for i in n:
-		var line: Dictionary = world.log_lines[i]
-		var y := v.y - TDStatusBar.HEIGHT - 12 - (n - 1 - i) * 18
-		var col: Color = line["color"]
-		col.a = minf(1.0, line["t"] / 40.0)
-		DrawUtil.text(self, font, Vector2(log_right, y), line["text"], 13, col, -1, 4, Color(Palette.NIGHT, 0.8 * col.a))
+	_draw_log(v.x - 12 - (world.hud.quickslots.size.x + 6 if world.started else 0.0), log_bottom())
 	# map banner
+	banner_y = BANNER_Y_BOSS if boss_shown else BANNER_Y
 	if world.banner_t > 0:
 		var a := minf(1.0, minf(world.banner_t / 30.0, (180 - world.banner_t) / 20.0))
-		UiSkin.draw_banner(self, Vector2(v.x / 2, 150 if boss_shown else 110), world.banner_text, a)
+		UiSkin.draw_banner(self, Vector2(v.x / 2, banner_y), world.banner_text, a)
 	if world.player.fainted():
 		draw_rect(Rect2(Vector2.ZERO, v), Color(Palette.NIGHT, 0.45))
 		DrawUtil.text(self, Game.num_font, Vector2(v.x / 2, v.y / 2 - 10), "You fainted", 40, Palette.MIST)
 		DrawUtil.text(self, font, Vector2(v.x / 2, v.y / 2 + 22), "Returning to %s…" % Content.map(world.map.return_town()).display_name, 16, Palette.MIST)
+
+## Where the message log's newest line sits (its baseline): above the status bar, and above
+## the name tags of anyone standing on the floor when the floor is in view.
+func log_bottom() -> float:
+	var v := TDWorld.VIEW
+	var bottom := v.y - TDStatusBar.HEIGHT - 12
+	var floor_y := world.stage.screen(Vector2(world.cam.x + v.x / 2.0, world.map.ground_y), TDStage.Z_NPC).y
+	return minf(bottom, floor_y - LOG_ABOVE_TAGS)
+
+## The message log, newest at the bottom, right-aligned to `right`, on a faint backdrop.
+func _draw_log(right: float, bottom: float) -> void:
+	var n := world.log_lines.size()
+	if n == 0:
+		return
+	var font := Game.ui_font
+	var w := 0.0
+	var fade := 0.0
+	for line in world.log_lines:
+		w = maxf(w, DrawUtil.text_width(font, line["text"], LOG_SIZE))
+		fade = maxf(fade, minf(1.0, line["t"] / 40.0))
+	var top := bottom - (n - 1) * LOG_LINE_H - LOG_SIZE
+	DrawUtil.backdrop(self, Rect2(right - w, top, w, bottom - top).grow(LOG_PAD), fade)
+	for i in n:
+		var line: Dictionary = world.log_lines[i]
+		var col: Color = line["color"]
+		col.a = minf(1.0, line["t"] / 40.0)
+		DrawUtil.text(self, font, Vector2(right, bottom - (n - 1 - i) * LOG_LINE_H), line["text"], LOG_SIZE, col, -1, 4, Color(Palette.NIGHT, 0.8 * col.a))
 
 func _draw_minimap(mm: Rect2) -> void:
 	draw_texture_rect(UiSkin.tex("hud/minimap_frame"), mm, false)
@@ -163,10 +200,13 @@ func _draw_pet(c: TDCompanion, z: float, shown: bool, tags: TDNameTags) -> void:
 	if c.speech_t > 0:
 		UiSkin.draw_speech(self, world.stage.screen(c.pet_head(), z) + Vector2(0, -6), c.speech)
 
-## Everything drawn at a spot in the world: name tags (gathered first and nudged apart,
-## yours on top), HP bars, quest markers, speech, floating numbers and portal hints.
+## Everything drawn at a spot in the world: the map's sign, name tags (gathered first and
+## nudged apart, yours on top), HP bars, quest markers, speech, floating numbers and portal hints.
 func _draw_world_text() -> void:
 	var st := world.stage
+	var sign_at: Variant = SceneryBuilder.sign_label_at(world.map)
+	if sign_at != null and st.in_view(sign_at, SceneryBuilder.SIGN_DEPTH):
+		UiSkin.draw_hint(self, st.screen(sign_at, SceneryBuilder.SIGN_DEPTH), world.map.sign_text)
 	var tags := TDNameTags.new()
 	last_tags = tags
 	for m in world.mobs():

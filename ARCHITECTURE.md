@@ -249,6 +249,10 @@ hides a character, NPC, rope or ladder. Decoration and prop depths in data are c
 actors by mistake. Something new that the player interacts with should use one of the `Z_`
 layers (or add one here) rather than a raw number.
 
+Text that belongs to a spot in the world (name tags, the map's sign, hints, damage numbers)
+is never put in the 3D stage: `TDOverlay` projects the spot to the screen and draws it there,
+so depth of field never blurs it and nothing in the world covers it.
+
 ## How to add a monster
 
 1. Get its sprite. A single image goes in `assets/sprites/monsters/<id>.png`; an animated

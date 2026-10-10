@@ -132,13 +132,12 @@ func show_banner(text: String) -> void:
 	banner_text = text
 	banner_t = 180
 
-## You reached an achievement: say so, and unlock it on Steam.
+## You reached an achievement: pop up its toast, and unlock it on Steam.
 func show_achievement(id: String) -> void:
 	var a := Achievements.find(id)
 	if a.is_empty():
 		return
 	hud.banners.achievement(a)
-	add_log("Achievement unlocked: %s (%s)" % [a["title"], a["text"]], Palette.SUN)
 	SteamService.unlock_achievement(a["steam"])
 
 ## Adds a line to the message log (the last six show, each for five seconds). The same
