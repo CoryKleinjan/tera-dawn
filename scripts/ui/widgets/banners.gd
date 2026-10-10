@@ -1,7 +1,7 @@
 class_name TDBanners
 extends Control
 ## Fanfares over the game: a ribbon in the middle of the screen when you complete a quest or
-## advance to a new job, and a toast near the top for an achievement. It notices quests and
+## advance to a new job, and a toast at the bottom for an achievement. It notices quests and
 ## jobs from your character as the server refreshes it; TDWorld.show_achievement calls
 ## `achievement`. Everything takes turns, one at a time and never over the map-name banner:
 ## ribbons first, then toasts. Level ups have their own ribbon on the level up effect
@@ -10,10 +10,13 @@ extends Control
 ## How long a ribbon and a toast stay up, in frames.
 const RIBBON_TICKS := 150
 const TOAST_TICKS := 240
-## Where they show, and how wide.
+## Where they show, and how wide. The toast sits TOAST_GAP above the status bar, in the
+## middle of the screen but clear of the chat box and the quickslots, so it never covers a
+## window's title.
 const RIBBON_Y := 190.0
 const RIBBON_W := {"dialogue/quest_complete_banner": 300.0, "dialogue/job_advance_banner": 380.0}
 const TOAST_SIZE := Vector2(300, 54)
+const TOAST_GAP := 6.0
 ## The toast art's borders in texels (its star sits in the left one), and how it's scaled.
 const TOAST_MARGINS := Vector4(64, 16, 18, 16)
 const TOAST_SCALE := 0.8
@@ -79,9 +82,15 @@ func _process(_delta: float) -> void:
 			toasts.pop_front()
 			_toast_t = 0
 
-## Where the achievement toast's top is: where the map-name banner shows (they take turns).
-func toast_top() -> float:
-	return world.hud.overlay.banner_y - TOAST_SIZE.y / 2.0
+## Where the achievement toast is once it has popped in: bottom centre, just above the
+## status bar, moved sideways if it would touch the chat box or the quickslots.
+func toast_rect() -> Rect2:
+	var top := TDWorld.VIEW.y - TDStatusBar.HEIGHT - TOAST_GAP - TOAST_SIZE.y
+	var x := (TDWorld.VIEW.x - TOAST_SIZE.x) / 2.0
+	var hud := world.hud
+	x = maxf(x, hud.chat.position.x + hud.chat.size.x + TOAST_GAP)
+	x = minf(x, hud.quickslots.position.x - TOAST_GAP - TOAST_SIZE.x)
+	return Rect2(Vector2(x, top), TOAST_SIZE)
 
 ## Takes every ribbon and toast down at once.
 func clear() -> void:
@@ -114,7 +123,8 @@ func _draw_ribbon(art: String, line: String, t: int) -> void:
 
 func _draw_toast(ach: Dictionary, t: int, total: int) -> void:
 	var a := _fade(t, total, 12, 30)
-	var r := Rect2(Vector2((TDWorld.VIEW.x - TOAST_SIZE.x) / 2.0, toast_top() + (1.0 - a) * 20.0), TOAST_SIZE)
+	var r := toast_rect()
+	r.position.y += (1.0 - a) * 20.0  # rising into place
 	var sb := UiSkin.box("book/achievement_toast", TOAST_MARGINS.z, TOAST_MARGINS.y).duplicate() as StyleBoxTexture
 	sb.texture_margin_left = TOAST_MARGINS.x
 	sb.modulate_color = Color(1, 1, 1, a)

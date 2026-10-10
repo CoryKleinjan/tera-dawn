@@ -21,10 +21,6 @@ const MINIMAP_PORTAL := ["hud/minimap_portal", 10.0]
 const MINIMAP_LAND := Color(0.93, 0.85, 0.62)
 ## How round the minimap's backdrop corners are, to sit inside the frame's window.
 const MINIMAP_ROUND := 5.0
-## The quest tracker's panel: its width, and how many quests it lists.
-const TRACKER_W := 176.0
-const TRACKER_QUESTS := 4
-
 ## The message log: text size, line spacing, the backdrop's margin around the text, and how
 ## far above the floor (where name tags start) its newest line sits.
 const LOG_SIZE := 13
@@ -64,7 +60,6 @@ func _draw() -> void:
 	var boss_shown := world.started and _draw_boss_bar(Vector2(v.x / 2, 6))
 	if world.started:
 		_draw_party(Vector2(16, 56))
-		_draw_quest_tracker(Vector2(v.x - TRACKER_W - 8, mm.end.y + 2))
 		_draw_buffs(Vector2(mm.position.x - 6, 10))
 	_draw_log(v.x - 12 - (world.hud.quickslots.size.x + 6 if world.started else 0.0), log_bottom())
 	# map banner
@@ -219,33 +214,6 @@ func _draw_party(at: Vector2) -> void:
 		UiSkin.draw_party_hp(self, Vector2(at.x - 2, y + 12), 100, float(m[4]))
 		y += 30
 
-## Quests in progress and how far along they are, on a panel under the minimap.
-func _draw_quest_tracker(at: Vector2) -> void:
-	var me := Game.me
-	var lines := []  # [text, indent, colour, size]
-	var shown := 0
-	for id in me.quests.active:
-		var q: QuestDef = Content.quests.get(id)
-		if q == null or shown >= TRACKER_QUESTS:
-			continue
-		shown += 1
-		lines.append([q.title, 0, Palette.SUN, 12])
-		if me.quests.is_ready(q, me):
-			lines.append(["Ready to hand in", 8, Palette.GOOD, 11])
-		else:
-			for i in q.objectives.size():
-				var o := q.objectives[i]
-				var have := me.quests.progress(q, i, me)
-				lines.append(["%s %d/%d" % [o.describe(), have, o.count], 8, Palette.GOOD if have >= o.count else Palette.MIST, 11])
-	if lines.is_empty():
-		return
-	var h := 26.0 + lines.size() * 15
-	UiSkin.draw_panel(self, UiSkin.TRACKER_PANEL, Rect2(at, Vector2(TRACKER_W, h)), 0.6)
-	var y := at.y + 26
-	for l in lines:
-		DrawUtil.text(self, Game.ui_font, Vector2(at.x + 12 + l[1], y), l[0], l[3], l[2], 1, 4, Palette.NIGHT)
-		y += 15
-
 ## A pet's name under it (into `tags`) and what it's saying over it.
 func _draw_pet(c: TDCompanion, z: float, shown: bool, tags: TDNameTags) -> void:
 	if c == null or c.pet == null or not shown or not world.stage.in_view(c.pet_pos, z):
@@ -270,7 +238,7 @@ func _draw_world_text() -> void:
 		m.draw_tag(self, st.screen(world.drawn(m), m.z), st.screen(body + Vector2(0, -m.def.size.y), m.z), tags)
 	for n in world.npcs():
 		if st.in_view(n.position, 0.1):
-			n.draw_tag(self, st.screen(n.position, 0.1), st.screen(n.position + Vector2(0, -n.rig.body.get_item_rect().size.y * n.rig.body.pixel_size * TDStage.PX), 0.1), tags)
+			n.draw_tag(self, st.screen(n.position, 0.1), st.screen(n.position + Vector2(0, -n.body_size().y), 0.1), tags)
 	for a in world.avatars.values():
 		if st.in_view(a.position, TDStage.Z_OTHER_PLAYER):
 			var feet := st.screen(world.drawn(a), TDStage.Z_OTHER_PLAYER)
