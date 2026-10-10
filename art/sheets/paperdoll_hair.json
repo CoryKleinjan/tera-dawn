@@ -3,23 +3,26 @@
   "grid": {
     "rows": [
       0,
-      175,
-      367,
-      559,
-      740,
-      924,
-      1086
+      169,
+      387,
+      558,
+      780,
+      971
     ],
     "cols": [
       0,
-      361,
-      723,
-      1086,
+      180,
+      371,
+      549,
+      726,
+      906,
+      1087,
+      1267,
       1448
     ]
   },
   "scale": 1.0,
-  "label_band": 0.2,
+  "label_band": 0.24,
   "strip_labels": true,
   "save": false,
   "out_dir": "art/build/paperdoll/hair",
@@ -28,27 +31,37 @@
       "tousled_front",
       "tousled_back",
       "tousled_behind",
-      "tousled_hat"
+      "tousled_hat",
+      "",
+      "",
+      "",
+      ""
     ],
     [
       "long_front",
       "long_back",
       "long_behind",
-      "long_hat"
+      "long_hat",
+      "",
+      "",
+      "",
+      ""
     ],
     [
       "ponytail_front",
       "ponytail_back",
       "ponytail_behind",
-      "ponytail_hat"
+      "ponytail_hat",
+      "",
+      "",
+      "",
+      ""
     ],
     [
       "twin_tails_front",
       "twin_tails_back",
       "twin_tails_behind",
-      "twin_tails_hat"
-    ],
-    [
+      "twin_tails_hat",
       "bun_front",
       "bun_back",
       "bun_behind",
@@ -58,7 +71,113 @@
       "crest_front",
       "crest_back",
       "crest_behind",
-      "crest_hat"
+      "crest_hat",
+      "",
+      "",
+      "",
+      ""
     ]
-  ]
+  ],
+  "overrides": {
+    "tousled_front": {
+      "blank_top": 31
+    },
+    "tousled_back": {
+      "blank_top": 31
+    },
+    "tousled_behind": {
+      "blank": [
+        [
+          15,
+          0,
+          155,
+          40
+        ]
+      ]
+    },
+    "tousled_hat": {
+      "blank": [
+        [
+          10,
+          0,
+          160,
+          41
+        ]
+      ]
+    },
+    "long_front": {
+      "blank_top": 32
+    },
+    "long_back": {
+      "blank_top": 32
+    },
+    "long_behind": {
+      "blank_top": 30
+    },
+    "long_hat": {
+      "blank_top": 30
+    },
+    "ponytail_front": {
+      "blank_top": 23
+    },
+    "ponytail_back": {
+      "blank_top": 24
+    },
+    "ponytail_behind": {
+      "blank": [
+        [
+          7,
+          0,
+          165,
+          52
+        ]
+      ]
+    },
+    "ponytail_hat": {
+      "blank": [
+        [
+          2,
+          0,
+          169,
+          36
+        ]
+      ]
+    },
+    "twin_tails_front": {
+      "blank_top": 46
+    },
+    "twin_tails_back": {
+      "blank_top": 31
+    },
+    "twin_tails_behind": {
+      "blank_top": 44
+    },
+    "twin_tails_hat": {
+      "blank_top": 45
+    },
+    "bun_front": {
+      "blank_top": 31
+    },
+    "bun_back": {
+      "blank_top": 31
+    },
+    "bun_behind": {
+      "blank_top": 31
+    },
+    "bun_hat": {
+      "blank_top": 31
+    },
+    "crest_front": {
+      "blank_top": 31
+    },
+    "crest_back": {
+      "blank_top": 31
+    },
+    "crest_behind": {
+      "blank_top": 45
+    },
+    "crest_hat": {
+      "blank_top": 47
+    }
+  }
 }

@@ -1,0 +1,169 @@
+{
+  "source": "art/source/bottom_breeches_frames.png",
+  "grid": {
+    "rows": [
+      0,
+      222,
+      447,
+      667,
+      887
+    ],
+    "cols": [
+      0,
+      221,
+      442,
+      664,
+      886,
+      1108,
+      1329,
+      1551,
+      1774
+    ]
+  },
+  "scale": 1.0,
+  "label_band": 0.18,
+  "strip_labels": true,
+  "keep": "largest",
+  "save": false,
+  "out_dir": "art/build/bottom_breeches_frames",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "idle3",
+      "idle4",
+      "walk1",
+      "walk2",
+      "walk3",
+      "walk4"
+    ],
+    [
+      "run1",
+      "run2",
+      "run3",
+      "run4",
+      "attack1",
+      "attack2",
+      "hit",
+      "hurt"
+    ],
+    [
+      "jump",
+      "fall",
+      "land",
+      "crouch",
+      "rope1",
+      "rope2",
+      "ladder1",
+      "ladder2"
+    ],
+    [
+      "climb_idle",
+      "slash1",
+      "slash2",
+      "slash3",
+      "faint1",
+      "faint2",
+      "levelup",
+      "sit"
+    ]
+  ],
+  "overrides": {
+    "idle1": {
+      "blank_top": 30
+    },
+    "idle2": {
+      "blank_top": 29
+    },
+    "idle3": {
+      "blank_top": 30
+    },
+    "idle4": {
+      "blank_top": 30
+    },
+    "walk1": {
+      "blank_top": 30
+    },
+    "walk2": {
+      "blank_top": 30
+    },
+    "walk3": {
+      "blank_top": 30
+    },
+    "walk4": {
+      "blank_top": 30
+    },
+    "run1": {
+      "blank_top": 29
+    },
+    "run2": {
+      "blank_top": 30
+    },
+    "run3": {
+      "blank_top": 29
+    },
+    "run4": {
+      "blank_top": 29
+    },
+    "attack1": {
+      "blank_top": 30
+    },
+    "attack2": {
+      "blank_top": 29
+    },
+    "hit": {
+      "blank_top": 30
+    },
+    "hurt": {
+      "blank_top": 29
+    },
+    "jump": {
+      "blank_top": 31
+    },
+    "fall": {
+      "blank_top": 31
+    },
+    "land": {
+      "blank_top": 32
+    },
+    "crouch": {
+      "blank_top": 31
+    },
+    "rope1": {
+      "blank_top": 32
+    },
+    "rope2": {
+      "blank_top": 32
+    },
+    "ladder1": {
+      "blank_top": 31
+    },
+    "ladder2": {
+      "blank_top": 32
+    },
+    "climb_idle": {
+      "blank_top": 33
+    },
+    "slash1": {
+      "blank_top": 31
+    },
+    "slash2": {
+      "blank_top": 31
+    },
+    "slash3": {
+      "blank_top": 31
+    },
+    "faint1": {
+      "blank_top": 33
+    },
+    "faint2": {
+      "blank_top": 33
+    },
+    "levelup": {
+      "blank_top": 32
+    },
+    "sit": {
+      "blank_top": 32
+    }
+  }
+}

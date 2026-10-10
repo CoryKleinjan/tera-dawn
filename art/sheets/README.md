@@ -111,7 +111,8 @@ brighten `item_slot` on hover instead.
 - **Items, pets, projectiles** cut into `assets/sprites/items/`, `pets/` (and
   `assets/animations/pet_*.tres`) and `projectiles/`.
 - **The paperdoll**: `paperdoll_body` cuts the bare hero into the hero strip (`pad_top` leaves
-  room for hair). `paperdoll_hair`, `_faces`, `_layers` (cape, gloves, shields per frame) and
+  room for hair). `paperdoll_hair`, `_faces`, `_cape`, `_shield_round`, `_shield_kite` (one piece per pose; the kite
+  sheet has its own layout, so its `poses` names the cell each pose uses) and
   `_weapons` cut into `art/build/` only; `tools/art/paperdoll_layers.py` places those pieces
   on every body frame and writes the layers, the region map and the rig. The weapon hand, the weapon's angle, the shield and the head's tilt
   in each frame are placed by hand in `paperdoll_rig.json` (in 128 px frames; the tool scales them to the strip), with how each
@@ -120,3 +121,10 @@ brighten `item_slot` on hover instead.
 - **Held weapons** (`held_*`, art prompts part 8 W2-W6): one weapon per cell, named by item id, pointing right with a green
   grip dot. `paperdoll_layers.py` puts each in his hand on every frame (`weapon_item_<id>`), in its own colours.
   `hero_main` (the painted hero) now cuts into `art/build/` for reference.
+- **Drawn on the body sheet** (`hair_<style>_frames`, `gloves_frames`, `paperdoll_cape`,
+  `paperdoll_shield_round`, `paperdoll_grip`, `top_*_frames`, `bottom_*_frames`, `shoes_*_frames`):
+  made by editing `art/source/paperdoll_body.png`, so they keep its size and `grid` and line up with
+  it pixel for pixel. The cape and round shield sheets hold the item alone; the others show the body
+  wearing it in greys. Tops, bottoms, shoes, `paperdoll_grip` and `paperdoll_hats` have no code yet
+  (cut into `art/build/` only), nor do `paperdoll_body_2`, `hair_tousled_frames_2` and
+  `paperdoll_gloves_2` (new poses drawn on Gemini's own body, for later).

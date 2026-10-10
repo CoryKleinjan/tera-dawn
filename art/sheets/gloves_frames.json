@@ -1,8 +1,29 @@
 {
   "source": "art/source/paperdoll_gloves.png",
+  "grid": {
+    "rows": [
+      0,
+      222,
+      447,
+      667,
+      887
+    ],
+    "cols": [
+      0,
+      221,
+      442,
+      664,
+      886,
+      1108,
+      1329,
+      1551,
+      1774
+    ]
+  },
   "scale": 1.0,
   "label_band": 0.17,
   "strip_labels": true,
+  "keep": "all",
   "save": false,
   "out_dir": "art/build/gloves_frames",
   "cells": [
@@ -47,24 +68,102 @@
       "sit"
     ]
   ],
-  "grid": {
-    "rows": [
-      66,
-      265,
-      470,
-      684,
-      886
-    ],
-    "cols": [
-      1,
-      221,
-      443,
-      665,
-      887,
-      1108,
-      1331,
-      1552,
-      1773
-    ]
+  "overrides": {
+    "idle1": {
+      "blank_top": 29
+    },
+    "idle2": {
+      "blank_top": 29
+    },
+    "idle3": {
+      "blank_top": 29
+    },
+    "idle4": {
+      "blank_top": 29
+    },
+    "walk1": {
+      "blank_top": 29
+    },
+    "walk2": {
+      "blank_top": 29
+    },
+    "walk3": {
+      "blank_top": 29
+    },
+    "walk4": {
+      "blank_top": 29
+    },
+    "run1": {
+      "blank_top": 28
+    },
+    "run2": {
+      "blank_top": 29
+    },
+    "run3": {
+      "blank_top": 28
+    },
+    "run4": {
+      "blank_top": 28
+    },
+    "attack1": {
+      "blank_top": 28
+    },
+    "attack2": {
+      "blank_top": 28
+    },
+    "hit": {
+      "blank_top": 28
+    },
+    "hurt": {
+      "blank_top": 28
+    },
+    "jump": {
+      "blank_top": 30
+    },
+    "fall": {
+      "blank_top": 30
+    },
+    "land": {
+      "blank_top": 30
+    },
+    "crouch": {
+      "blank_top": 30
+    },
+    "rope1": {
+      "blank_top": 30
+    },
+    "rope2": {
+      "blank_top": 30
+    },
+    "ladder1": {
+      "blank_top": 30
+    },
+    "ladder2": {
+      "blank_top": 30
+    },
+    "climb_idle": {
+      "blank_top": 32
+    },
+    "slash1": {
+      "blank_top": 31
+    },
+    "slash2": {
+      "blank_top": 30
+    },
+    "slash3": {
+      "blank_top": 31
+    },
+    "faint1": {
+      "blank_top": 32
+    },
+    "faint2": {
+      "blank_top": 32
+    },
+    "levelup": {
+      "blank_top": 32
+    },
+    "sit": {
+      "blank_top": 32
+    }
   }
 }

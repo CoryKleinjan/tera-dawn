@@ -1,0 +1,249 @@
+{
+  "source": "art/source/paperdoll_shield_kite.png",
+  "grid": {
+    "rows": [
+      0,
+      180,
+      364,
+      593,
+      828,
+      1030
+    ],
+    "cols": [
+      [
+        0,
+        187,
+        381,
+        574,
+        767,
+        960,
+        1154,
+        1348,
+        1536
+      ],
+      [
+        0,
+        187,
+        381,
+        574,
+        767,
+        960,
+        1154,
+        1348,
+        1536
+      ],
+      [
+        0,
+        187,
+        381,
+        574,
+        767,
+        960,
+        1154,
+        1348,
+        1536
+      ],
+      [
+        0,
+        187,
+        381,
+        767,
+        1154,
+        1536
+      ],
+      [
+        0,
+        381,
+        767,
+        1154,
+        1536
+      ]
+    ]
+  },
+  "scale": 1.0,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "keep": "largest",
+  "save": false,
+  "out_dir": "art/build/paperdoll/shield_kite",
+  "cells": [
+    [
+      "k01",
+      "k02",
+      "k03",
+      "k04",
+      "k05",
+      "k06",
+      "k07",
+      "k08"
+    ],
+    [
+      "k09",
+      "k10",
+      "k11",
+      "k12",
+      "k13",
+      "k14",
+      "k15",
+      "k16"
+    ],
+    [
+      "k17",
+      "k18",
+      "k19",
+      "k20",
+      "k21",
+      "k22",
+      "k23",
+      "k24"
+    ],
+    [
+      "k25",
+      "k26",
+      "k27",
+      "k28",
+      "k29"
+    ],
+    [
+      "k30",
+      "k31",
+      "k32",
+      "k33"
+    ]
+  ],
+  "poses": {
+    "idle1": "k01",
+    "idle2": "k02",
+    "idle3": "k08",
+    "idle4": "k09",
+    "walk1": "k01",
+    "walk2": "k02",
+    "walk3": "k08",
+    "walk4": "k09",
+    "run1": "k27",
+    "run2": "k29",
+    "run3": "k27",
+    "run4": "k29",
+    "attack1": "k30",
+    "attack2": "k29",
+    "hit": "k17",
+    "hurt": "k22",
+    "jump": "k27",
+    "fall": "k15",
+    "land": "k16",
+    "crouch": "k31",
+    "rope1": "k22",
+    "rope2": "k17",
+    "ladder1": "k22",
+    "ladder2": "k17",
+    "climb_idle": "k22",
+    "slash1": "k30",
+    "slash2": "k27",
+    "slash3": "k29",
+    "faint1": "k15",
+    "faint2": "k31",
+    "levelup": "k32",
+    "sit": "k32"
+  },
+  "overrides": {
+    "k01": {
+      "blank_top": 33
+    },
+    "k02": {
+      "blank_top": 33
+    },
+    "k03": {
+      "blank_top": 33
+    },
+    "k04": {
+      "blank_top": 33
+    },
+    "k05": {
+      "blank_top": 33
+    },
+    "k06": {
+      "blank_top": 33
+    },
+    "k07": {
+      "blank_top": 34
+    },
+    "k08": {
+      "blank_top": 33
+    },
+    "k09": {
+      "blank_top": 34
+    },
+    "k10": {
+      "blank_top": 34
+    },
+    "k11": {
+      "blank_top": 34
+    },
+    "k12": {
+      "blank_top": 34
+    },
+    "k13": {
+      "blank_top": 34
+    },
+    "k14": {
+      "blank_top": 34
+    },
+    "k15": {
+      "blank_top": 34
+    },
+    "k16": {
+      "blank_top": 34
+    },
+    "k17": {
+      "blank_top": 30
+    },
+    "k18": {
+      "blank_top": 30
+    },
+    "k19": {
+      "blank_top": 30
+    },
+    "k20": {
+      "blank_top": 30
+    },
+    "k21": {
+      "blank_top": 30
+    },
+    "k22": {
+      "blank_top": 30
+    },
+    "k23": {
+      "blank_top": 30
+    },
+    "k24": {
+      "blank_top": 30
+    },
+    "k25": {
+      "blank_top": 31
+    },
+    "k26": {
+      "blank_top": 31
+    },
+    "k27": {
+      "blank_top": 31
+    },
+    "k28": {
+      "blank_top": 31
+    },
+    "k29": {
+      "blank_top": 31
+    },
+    "k30": {
+      "blank_top": 33
+    },
+    "k31": {
+      "blank_top": 33
+    },
+    "k32": {
+      "blank_top": 33
+    },
+    "k33": {
+      "blank_top": 33
+    }
+  }
+}

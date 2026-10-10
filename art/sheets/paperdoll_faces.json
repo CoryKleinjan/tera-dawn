@@ -3,23 +3,23 @@
   "grid": {
     "rows": [
       0,
-      223,
-      447,
-      671,
-      895,
-      1122
+      187,
+      375,
+      564,
+      753,
+      941
     ],
     "cols": [
       0,
-      349,
+      347,
       700,
-      1050,
+      1053,
       1402
     ]
   },
   "scale": 1.0,
-  "label_band": 0.22,
-  "strip_labels": true,
+  "label_band": 0.05,
+  "strip_labels": false,
   "save": false,
   "out_dir": "art/build/paperdoll/faces",
   "cells": [
@@ -53,5 +53,6 @@
       "cheeky_ouch",
       "cheeky_dizzy"
     ]
-  ]
+  ],
+  "inset": 7
 }
