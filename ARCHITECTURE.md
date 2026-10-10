@@ -1,6 +1,6 @@
-# Tera Dawn architecture
+# Tera's Dawn architecture
 
-Tera Dawn is meant to grow into a much larger game, so content lives in data files and the
+Tera's Dawn is meant to grow into a much larger game, so content lives in data files and the
 code is split into small pieces that each do one job. Adding a monster, a map or a skill
 should never mean editing game code.
 
@@ -35,7 +35,7 @@ second. Only the stage turns that into 3D (32 game pixels per 3D unit).
 
 ## Multiplayer: server and client
 
-Tera Dawn is online, and there is always a server, even in single player. One codebase plays
+Tera's Dawn is online, and there is always a server, even in single player. One codebase plays
 three roles:
 
 ```

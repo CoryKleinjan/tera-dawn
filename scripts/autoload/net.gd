@@ -129,7 +129,7 @@ func run_dedicated(port := DEFAULT_PORT) -> String:
 	mode = Mode.DEDICATED
 	multiplayer.multiplayer_peer = peer
 	_start_server(false)
-	print("Tera Dawn server listening on port %d" % port)
+	print("Tera's Dawn server listening on port %d" % port)
 	return ""
 
 ## Whether other players are connected to the game this one hosts.

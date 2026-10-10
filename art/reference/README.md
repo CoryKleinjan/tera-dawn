@@ -1,6 +1,6 @@
 # Art reference
 
-`hero.png` is Cory's hero and the style reference for all of Tera Dawn's art:
+`hero.png` is Cory's hero and the style reference for all of the art in Tera's Dawn:
 every sprite, monster, prop and tile should match him.
 
 What to match:

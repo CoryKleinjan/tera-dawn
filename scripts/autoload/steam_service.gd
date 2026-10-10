@@ -4,7 +4,7 @@ extends Node
 ## Install the GodotSteam GDExtension (addons/godotsteam) and set APP_ID to your
 ## Steamworks app ID. Until then every call here is a harmless no-op.
 
-const APP_ID := 480 # Valve's public test app "Spacewar". Replace with Tera Dawn's app ID.
+const APP_ID := 480 # Valve's public test app "Spacewar". Replace with the Tera's Dawn app ID.
 
 var steam: Object = null
 var enabled := false

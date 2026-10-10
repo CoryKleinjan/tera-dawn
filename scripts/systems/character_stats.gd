@@ -3,7 +3,7 @@ extends RefCounted
 ## MapleStory-style formulas that turn a character's stats into what they do in combat.
 ## Balance lives here (and in Combat), so tuning never means hunting through actors.
 
-## MapleStory's damage formula times this, so numbers fit Tera Dawn's monsters.
+## MapleStory's damage formula times this, so numbers fit the game's monsters.
 const DAMAGE_SCALE := 2.0
 const BASE_CRIT := 0.12
 
