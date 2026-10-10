@@ -1,0 +1,3794 @@
+{
+ "model": "gemini-3-pro-image",
+ "size": "2K",
+ "budget": 25.0,
+ "notes": [
+  "One entry per target sheet, from its newest prompt, in run order: every anchor comes before the entries that attach it.",
+  "anchor: the id of an earlier entry whose result is attached as an extra reference.",
+  "fill: which item of a list batch this entry draws (item/style/top), or which monster/area it is (name/area, for reading only).",
+  "replaces / also_replaces: the art/source sheet(s) this would replace. Nothing is replaced automatically.",
+  "batch null: no prompt exists (listed so the list covers every sheet), never run."
+ ],
+ "sheets": [
+  {
+   "id": "hero_main",
+   "prompts": null,
+   "batch": null,
+   "with": null,
+   "refs": [],
+   "save": "hero_main.png",
+   "replaces": "art/source/hero_main.png",
+   "kind": "anim",
+   "cells": [
+    4,
+    4
+   ],
+   "anchor": null,
+   "note": "No prompt: Cory's original hero sheet (part 1 calls it hero_spritesheet.png, 'already done'); it is the style reference every Message 0 attaches. Not run; later entries anchor on the existing file."
+  },
+  {
+   "id": "meadow_tileset",
+   "prompts": null,
+   "batch": null,
+   "with": null,
+   "refs": [],
+   "save": "meadow_tileset.png",
+   "replaces": "art/source/meadow_tileset.png",
+   "kind": "still",
+   "cells": [
+    5,
+    8
+   ],
+   "anchor": null,
+   "note": "No prompt: Cory's original environment tileset (part 1 'environment-tileset.png', 'already done'). Area tilesets W1a-W6a copy it. Not run."
+  },
+  {
+   "id": "paperdoll_body",
+   "prompts": "tera-dawn-chatgpt-art-prompts-2.md",
+   "batch": "L1",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_body.png",
+   "replaces": "art/source/paperdoll_body.png",
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "hero_main",
+   "note": "Bare base body, 32 poses; anchor for every paperdoll/hair/top/glove/weapon sheet."
+  },
+  {
+   "id": "ui_leather",
+   "prompts": "tera-dawn-chatgpt-art-prompts-7.md",
+   "batch": "U1",
+   "with": "U",
+   "refs": [],
+   "save": "ui_leather.png",
+   "replaces": "art/source/ui.png",
+   "kind": "still",
+   "cells": [
+    5,
+    4
+   ],
+   "anchor": null,
+   "note": "Leather UI style anchor; U2-U11 attach its result. 'Name it' line sits after the fence, so the script's own save name is part7_u1."
+  },
+  {
+   "id": "dewling",
+   "prompts": "tera-dawn-chatgpt-art-prompts.md",
+   "batch": "2",
+   "with": null,
+   "refs": [],
+   "save": "dewling.png",
+   "replaces": "art/source/dewling.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "hero_main",
+   "note": "Monster style anchor (first monster); regional M-batch anchors attach it."
+  },
+  {
+   "id": "monsters_npcs",
+   "prompts": "tera-dawn-chatgpt-art-prompts.md",
+   "batch": "14",
+   "with": null,
+   "refs": [],
+   "save": "monsters_npcs.png",
+   "replaces": "art/source/monsters_npcs.png",
+   "kind": "still",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "dewling",
+   "note": "Design sheet: idle of Mossling..Flame Boar Chief + Elder Rowan and Mira. Anchor for M1a-f and the NPC family."
+  },
+  {
+   "id": "items_gear",
+   "prompts": "tera-dawn-chatgpt-art-prompts.md",
+   "batch": "15",
+   "with": null,
+   "refs": [],
+   "save": "items_gear.png",
+   "replaces": "art/source/items_gear.png",
+   "kind": "still",
+   "cells": [
+    3,
+    5
+   ],
+   "anchor": "hero_main",
+   "note": "Item icon family anchor."
+  },
+  {
+   "id": "npcs_harbor_1",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "N1, LAYOUT NPC",
+   "with": "N",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png"
+   ],
+   "save": "npcs_harbor_1.png",
+   "replaces": "art/source/npcs_harbor_1.png",
+   "kind": "still",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "monsters_npcs",
+   "note": "NPC family anchor. Fence reads 'Batch N1, LAYOUT NPC:' so the batch id must include ', LAYOUT NPC'. Save name npcs_<group>.png is a template in the section text."
+  },
+  {
+   "id": "hero_extras",
+   "prompts": "tera-dawn-chatgpt-art-prompts.md",
+   "batch": "1",
+   "with": null,
+   "refs": [],
+   "save": "hero_extras.png",
+   "replaces": "art/source/hero_extras.png",
+   "kind": "anim",
+   "cells": [
+    4,
+    4
+   ],
+   "anchor": "hero_main",
+   "note": "hero_extras_v2.png is a second take of the same Batch 1 (rope-climb frames); one regen covers both.",
+   "also_replaces": [
+    "art/source/hero_extras_v2.png"
+   ]
+  },
+  {
+   "id": "anim_sproutcap",
+   "prompts": "tera-dawn-chatgpt-art-prompts.md",
+   "batch": "3",
+   "with": null,
+   "refs": [],
+   "save": "anim_sproutcap.png",
+   "replaces": "art/source/anim_sproutcap.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "dewling",
+   "note": ""
+  },
+  {
+   "id": "ember_boar",
+   "prompts": "tera-dawn-chatgpt-art-prompts.md",
+   "batch": "4",
+   "with": null,
+   "refs": [],
+   "save": "ember_boar.png",
+   "replaces": "art/source/ember_boar.png",
+   "kind": "anim",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": "dewling",
+   "note": ""
+  },
+  {
+   "id": "ropes_props",
+   "prompts": "tera-dawn-chatgpt-art-prompts.md",
+   "batch": "5",
+   "with": null,
+   "refs": [],
+   "save": "ropes_props_b.png",
+   "replaces": "art/source/ropes_props_b.png",
+   "kind": "still",
+   "cells": [
+    4,
+    5
+   ],
+   "anchor": "meadow_tileset",
+   "note": "ropes_props_a.png is an earlier take of Batch 5 (cut to art/build only); one regen covers both.",
+   "also_replaces": [
+    "art/source/ropes_props_a.png"
+   ]
+  },
+  {
+   "id": "ember_tileset",
+   "prompts": "tera-dawn-chatgpt-art-prompts.md",
+   "batch": "6",
+   "with": null,
+   "refs": [],
+   "save": "ember_tileset.png",
+   "replaces": "art/source/ember_tileset.png",
+   "kind": "still",
+   "cells": [
+    4,
+    6
+   ],
+   "anchor": "meadow_tileset",
+   "note": ""
+  },
+  {
+   "id": "ground_textures",
+   "prompts": "tera-dawn-chatgpt-art-prompts.md",
+   "batch": "7",
+   "with": null,
+   "refs": [],
+   "save": "ground_textures.png",
+   "replaces": "art/source/ground_textures.png",
+   "kind": "still",
+   "cells": [
+    2,
+    3
+   ],
+   "anchor": "meadow_tileset",
+   "note": ""
+  },
+  {
+   "id": "meadow_backgrounds",
+   "prompts": "tera-dawn-chatgpt-art-prompts.md",
+   "batch": "8",
+   "with": null,
+   "refs": [],
+   "save": "meadow_backgrounds_a.png",
+   "replaces": "art/source/meadow_backgrounds_a.png",
+   "kind": "still",
+   "cells": [
+    6,
+    1
+   ],
+   "anchor": "meadow_tileset",
+   "note": "meadow_backgrounds_b.png is a second take of Batch 8 (art/build only); one regen covers both.",
+   "also_replaces": [
+    "art/source/meadow_backgrounds_b.png"
+   ]
+  },
+  {
+   "id": "ember_backgrounds",
+   "prompts": "tera-dawn-chatgpt-art-prompts.md",
+   "batch": "9",
+   "with": null,
+   "refs": [],
+   "save": "ember_backgrounds.png",
+   "replaces": "art/source/ember_backgrounds.png",
+   "kind": "still",
+   "cells": [
+    6,
+    1
+   ],
+   "anchor": "ember_tileset",
+   "note": ""
+  },
+  {
+   "id": "effects",
+   "prompts": "tera-dawn-chatgpt-art-prompts.md",
+   "batch": "10",
+   "with": null,
+   "refs": [],
+   "save": "effects.png",
+   "replaces": "art/source/effects.png",
+   "kind": "still",
+   "cells": [
+    4,
+    5
+   ],
+   "anchor": "hero_main",
+   "note": ""
+  },
+  {
+   "id": "key_art",
+   "prompts": "tera-dawn-chatgpt-art-prompts.md",
+   "batch": "13",
+   "with": null,
+   "refs": [],
+   "save": "key_art.png",
+   "replaces": "art/source/key_art.png",
+   "kind": "still",
+   "cells": null,
+   "anchor": "hero_main",
+   "note": "Three framings (16:9, 2:3, 2.1:1) in one image, cut by tools/art/make_store_art.py; no manifest."
+  },
+  {
+   "id": "items_consumables",
+   "prompts": "tera-dawn-chatgpt-art-prompts.md",
+   "batch": "16",
+   "with": null,
+   "refs": [],
+   "save": "items_consumables.png",
+   "replaces": "art/source/items_consumables.png",
+   "kind": "still",
+   "cells": [
+    3,
+    5
+   ],
+   "anchor": "items_gear",
+   "note": ""
+  },
+  {
+   "id": "paperdoll_faces",
+   "prompts": "tera-dawn-chatgpt-art-prompts-2.md",
+   "batch": "L2",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_faces.png",
+   "replaces": "art/source/paperdoll_faces.png",
+   "kind": "still",
+   "cells": [
+    5,
+    4
+   ],
+   "anchor": "paperdoll_body",
+   "note": ""
+  },
+  {
+   "id": "paperdoll_hair",
+   "prompts": "tera-dawn-chatgpt-art-prompts-2.md",
+   "batch": "L3",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_hair.png",
+   "replaces": "art/source/paperdoll_hair.png",
+   "kind": "still",
+   "cells": [
+    6,
+    4
+   ],
+   "anchor": "paperdoll_body",
+   "note": "Front/back/behind/hat pieces per style; part 5 hair sheets attach it."
+  },
+  {
+   "id": "paperdoll_cape",
+   "prompts": "tera-dawn-chatgpt-art-prompts-2.md",
+   "batch": "L6 (one prompt each)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_cape.png",
+   "replaces": "art/source/paperdoll_layers.png",
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "One item per image: send only the CAPE line. Today all three (plus old gloves) share paperdoll_layers.png as 16x2 rows each; fence reads 'Batch L6 (one prompt each):'.",
+   "fill": {
+    "item": "CAPE"
+   }
+  },
+  {
+   "id": "paperdoll_shield_round",
+   "prompts": "tera-dawn-chatgpt-art-prompts-2.md",
+   "batch": "L6 (one prompt each)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_shield_round.png",
+   "replaces": "art/source/paperdoll_layers.png",
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "One item per image: send only the SHIELD, ROUND line. Today all three (plus old gloves) share paperdoll_layers.png as 16x2 rows each; fence reads 'Batch L6 (one prompt each):'.",
+   "fill": {
+    "item": "SHIELD, ROUND"
+   }
+  },
+  {
+   "id": "paperdoll_shield_kite",
+   "prompts": "tera-dawn-chatgpt-art-prompts-2.md",
+   "batch": "L6 (one prompt each)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_shield_kite.png",
+   "replaces": "art/source/paperdoll_layers.png",
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "One item per image: send only the SHIELD, KITE line. Today all three (plus old gloves) share paperdoll_layers.png as 16x2 rows each; fence reads 'Batch L6 (one prompt each):'.",
+   "fill": {
+    "item": "SHIELD, KITE"
+   }
+  },
+  {
+   "id": "paperdoll_weapons",
+   "prompts": "tera-dawn-chatgpt-art-prompts-2.md",
+   "batch": "L8",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_weapons.png",
+   "replaces": "art/source/paperdoll_weapons.png",
+   "kind": "still",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "paperdoll_body",
+   "note": "Greyscale templates; W2-W6 (part 8) attach them for size."
+  },
+  {
+   "id": "items_starter",
+   "prompts": "tera-dawn-chatgpt-art-prompts-2.md",
+   "batch": "L10",
+   "with": null,
+   "refs": [],
+   "save": "items_starter.png",
+   "replaces": "art/source/items_starter.png",
+   "kind": "still",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "items_gear",
+   "note": ""
+  },
+  {
+   "id": "paperdoll_gloves",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L6 redo",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "paperdoll_gloves.png",
+   "replaces": "art/source/paperdoll_gloves.png",
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "Fence reads 'Batch L6 redo:'; batch id must be 'L6 redo'. Manifest gloves_frames.json."
+  },
+  {
+   "id": "hair_tousled_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-5.md",
+   "batch": "H1",
+   "with": "H",
+   "refs": [
+    "paperdoll_hair.png"
+   ],
+   "save": "hair_tousled_frames.png",
+   "replaces": "art/source/hair_tousled_frames.png",
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "H1 lists all six styles; send it for TOUSLED only (one image per style).",
+   "fill": {
+    "style": "TOUSLED"
+   }
+  },
+  {
+   "id": "hair_long_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-5.md",
+   "batch": "H1",
+   "with": "H",
+   "refs": [
+    "paperdoll_hair.png"
+   ],
+   "save": "hair_long_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "H1 lists all six styles; send it for LONG only (one image per style). New (not in game).",
+   "fill": {
+    "style": "LONG"
+   }
+  },
+  {
+   "id": "hair_ponytail_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-5.md",
+   "batch": "H1",
+   "with": "H",
+   "refs": [
+    "paperdoll_hair.png"
+   ],
+   "save": "hair_ponytail_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "H1 lists all six styles; send it for PONYTAIL only (one image per style). New (not in game).",
+   "fill": {
+    "style": "PONYTAIL"
+   }
+  },
+  {
+   "id": "hair_twin_tails_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-5.md",
+   "batch": "H1",
+   "with": "H",
+   "refs": [
+    "paperdoll_hair.png"
+   ],
+   "save": "hair_twin_tails_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "H1 lists all six styles; send it for TWIN TAILS only (one image per style). New (not in game).",
+   "fill": {
+    "style": "TWIN TAILS"
+   }
+  },
+  {
+   "id": "hair_bun_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-5.md",
+   "batch": "H1",
+   "with": "H",
+   "refs": [
+    "paperdoll_hair.png"
+   ],
+   "save": "hair_bun_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "H1 lists all six styles; send it for BUN only (one image per style). New (not in game).",
+   "fill": {
+    "style": "BUN"
+   }
+  },
+  {
+   "id": "hair_crest_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-5.md",
+   "batch": "H1",
+   "with": "H",
+   "refs": [
+    "paperdoll_hair.png"
+   ],
+   "save": "hair_crest_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "H1 lists all six styles; send it for CREST only (one image per style). New (not in game).",
+   "fill": {
+    "style": "CREST"
+   }
+  },
+  {
+   "id": "top_undershirt_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-6.md",
+   "batch": "T1",
+   "with": "T",
+   "refs": [],
+   "save": "top_undershirt_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "T1 lists six tops; keep only line 1 (UNDERSHIRT) before sending, fresh request per top. New. Save name follows the hair_<style>_frames convention (none given).",
+   "fill": {
+    "top": "1. UNDERSHIRT"
+   }
+  },
+  {
+   "id": "top_tunic_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-6.md",
+   "batch": "T1",
+   "with": "T",
+   "refs": [],
+   "save": "top_tunic_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "T1 lists six tops; keep only line 2 (TUNIC) before sending, fresh request per top. New. Save name follows the hair_<style>_frames convention (none given).",
+   "fill": {
+    "top": "2. TUNIC"
+   }
+  },
+  {
+   "id": "top_smock_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-6.md",
+   "batch": "T1",
+   "with": "T",
+   "refs": [],
+   "save": "top_smock_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "T1 lists six tops; keep only line 3 (SMOCK) before sending, fresh request per top. New. Save name follows the hair_<style>_frames convention (none given).",
+   "fill": {
+    "top": "3. SMOCK"
+   }
+  },
+  {
+   "id": "top_vest_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-6.md",
+   "batch": "T1",
+   "with": "T",
+   "refs": [],
+   "save": "top_vest_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "T1 lists six tops; keep only line 4 (VEST) before sending, fresh request per top. New. Save name follows the hair_<style>_frames convention (none given).",
+   "fill": {
+    "top": "4. VEST"
+   }
+  },
+  {
+   "id": "top_robe_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-6.md",
+   "batch": "T1",
+   "with": "T",
+   "refs": [],
+   "save": "top_robe_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "T1 lists six tops; keep only line 5 (ROBE) before sending, fresh request per top. New. Save name follows the hair_<style>_frames convention (none given).",
+   "fill": {
+    "top": "5. ROBE"
+   }
+  },
+  {
+   "id": "top_coat_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-6.md",
+   "batch": "T1",
+   "with": "T",
+   "refs": [],
+   "save": "top_coat_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "T1 lists six tops; keep only line 6 (COAT) before sending, fresh request per top. New. Save name follows the hair_<style>_frames convention (none given).",
+   "fill": {
+    "top": "6. COAT"
+   }
+  },
+  {
+   "id": "bottom_trousers_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "bottom_trousers_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "Part 4 leftover. L5 lists 7 items; send only TROUSERS (one sheet per style). New; save name not given in the prompt.",
+   "fill": {
+    "item": "TROUSERS"
+   }
+  },
+  {
+   "id": "bottom_shorts_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "bottom_shorts_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "Part 4 leftover. L5 lists 7 items; send only SHORTS (one sheet per style). New; save name not given in the prompt.",
+   "fill": {
+    "item": "SHORTS"
+   }
+  },
+  {
+   "id": "bottom_breeches_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "bottom_breeches_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "Part 4 leftover. L5 lists 7 items; send only BREECHES (one sheet per style). New; save name not given in the prompt.",
+   "fill": {
+    "item": "BREECHES"
+   }
+  },
+  {
+   "id": "shoes_boots_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "shoes_boots_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "Part 4 leftover. L5 lists 7 items; send only BOOTS (one sheet per style). New; save name not given in the prompt.",
+   "fill": {
+    "item": "BOOTS"
+   }
+  },
+  {
+   "id": "shoes_shoes_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "shoes_shoes_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "Part 4 leftover. L5 lists 7 items; send only SHOES (one sheet per style). New; save name not given in the prompt.",
+   "fill": {
+    "item": "SHOES"
+   }
+  },
+  {
+   "id": "shoes_clogs_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "shoes_clogs_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "Part 4 leftover. L5 lists 7 items; send only CLOGS (one sheet per style). New; save name not given in the prompt.",
+   "fill": {
+    "item": "CLOGS"
+   }
+  },
+  {
+   "id": "shoes_sandals_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "shoes_sandals_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "Part 4 leftover. L5 lists 7 items; send only SANDALS (one sheet per style). New; save name not given in the prompt.",
+   "fill": {
+    "item": "SANDALS"
+   }
+  },
+  {
+   "id": "paperdoll_hats",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L7",
+   "with": null,
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "paperdoll_hats.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": "paperdoll_body",
+   "note": "Part 4 leftover (hats are still code stand-ins). New. Part 2 L7 is the same text, superseded."
+  },
+  {
+   "id": "paperdoll_grip",
+   "prompts": "tera-dawn-chatgpt-art-prompts-8.md",
+   "batch": "W1",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_grip.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "New. Batch attaches the old paperdoll_body.png; runner should swap in the anchor result.",
+   "must_have": {
+    "rgb": [
+     0,
+     255,
+     0
+    ],
+    "in": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15,
+     16,
+     17,
+     18,
+     19,
+     20,
+     26,
+     27,
+     28,
+     29,
+     30,
+     31
+    ],
+    "not_in": [
+     21,
+     22,
+     23,
+     24,
+     25,
+     32
+    ]
+   },
+   "extra": "- The green rod is in EVERY one of these 26 cells, no exceptions: 1-4 IDLE, 5-8 WALK, 9-12 RUN, 13-14 ATTACK, 15 HIT, 16 HURT, 17 JUMP, 18 FALL, 19 LAND, 20 CROUCH, 26-28 DAWN SLASH, 29-30 FAINT, 31 LEVEL UP. Where the hand is behind the body, the visible ends of the rod still show past the body. Exactly ONE rod per cell.\n- No rod in cells 21-25 (ROPE, LADDER, CLIMB IDLE) and 32 SIT."
+  },
+  {
+   "id": "paperdoll_body_2",
+   "prompts": "tera-dawn-chatgpt-art-prompts-8.md",
+   "batch": "B1",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_body_2.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "New 32 poses; anchor for B2/B3."
+  },
+  {
+   "id": "hair_tousled_frames_2",
+   "prompts": "tera-dawn-chatgpt-art-prompts-8.md",
+   "batch": "B2",
+   "with": null,
+   "refs": [
+    "hair_tousled_frames.png"
+   ],
+   "save": "hair_tousled_frames_2.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body_2",
+   "note": "New. Also attach the hair_tousled_frames result. The batch says to repeat it for the other five styles; not listed here (5 more calls) until those hair sheets pass."
+  },
+  {
+   "id": "paperdoll_gloves_2",
+   "prompts": "tera-dawn-chatgpt-art-prompts-8.md",
+   "batch": "B3",
+   "with": null,
+   "refs": [
+    "paperdoll_gloves.png"
+   ],
+   "save": "paperdoll_gloves_2.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body_2",
+   "note": "New. Also attach the paperdoll_gloves result."
+  },
+  {
+   "id": "held_swords",
+   "prompts": "tera-dawn-chatgpt-art-prompts-8.md",
+   "batch": "W2",
+   "with": "W",
+   "refs": [],
+   "save": "held_swords.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    3,
+    3
+   ],
+   "anchor": "paperdoll_body",
+   "note": "New (manifest exists, no PNG yet). Match items_warrior.png icons; consider also attaching that icon sheet's regen result."
+  },
+  {
+   "id": "held_bows",
+   "prompts": "tera-dawn-chatgpt-art-prompts-8.md",
+   "batch": "W3",
+   "with": "W",
+   "refs": [],
+   "save": "held_bows.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    3
+   ],
+   "anchor": "paperdoll_body",
+   "note": "New (manifest exists, no PNG yet). Match items_archer.png icons; consider also attaching that icon sheet's regen result."
+  },
+  {
+   "id": "held_magic",
+   "prompts": "tera-dawn-chatgpt-art-prompts-8.md",
+   "batch": "W4",
+   "with": "W",
+   "refs": [],
+   "save": "held_magic.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    3
+   ],
+   "anchor": "paperdoll_body",
+   "note": "New (manifest exists, no PNG yet). Match items_magician.png icons; consider also attaching that icon sheet's regen result."
+  },
+  {
+   "id": "held_claws",
+   "prompts": "tera-dawn-chatgpt-art-prompts-8.md",
+   "batch": "W5",
+   "with": "W",
+   "refs": [],
+   "save": "held_claws.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    3
+   ],
+   "anchor": "paperdoll_body",
+   "note": "New (manifest exists, no PNG yet). Match items_thief.png icons; consider also attaching that icon sheet's regen result."
+  },
+  {
+   "id": "held_pirate",
+   "prompts": "tera-dawn-chatgpt-art-prompts-8.md",
+   "batch": "W6",
+   "with": "W",
+   "refs": [],
+   "save": "held_pirate.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    5
+   ],
+   "anchor": "paperdoll_body",
+   "note": "New (manifest exists, no PNG yet). Match items_pirate.png icons; consider also attaching that icon sheet's regen result."
+  },
+  {
+   "id": "anim_mossling",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M1a",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "anim_mossling.png",
+   "replaces": "art/source/anim_mossling.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "monsters_npcs",
+   "note": "Layout WALKER. Copies its idle cell from monsters_npcs.",
+   "fill": {
+    "name": "mossling"
+   }
+  },
+  {
+   "id": "anim_petal_bat",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M1b",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "dewling.png",
+    "ember_boar.png",
+    "monsters_npcs.png"
+   ],
+   "save": "anim_petal_bat.png",
+   "replaces": "art/source/monsters_m1.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "monsters_npcs",
+   "note": "Region of combined sheet monsters_m1.png. Layout FLIER. Copies its idle cell from monsters_npcs.",
+   "fill": {
+    "name": "petal_bat"
+   }
+  },
+  {
+   "id": "anim_cinder_imp",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M1c",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "dewling.png",
+    "ember_boar.png",
+    "monsters_npcs.png"
+   ],
+   "save": "anim_cinder_imp.png",
+   "replaces": "art/source/monsters_m1.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "monsters_npcs",
+   "note": "Region of combined sheet monsters_m1.png. Layout WALKER. Copies its idle cell from monsters_npcs.",
+   "fill": {
+    "name": "cinder_imp"
+   }
+  },
+  {
+   "id": "anim_ashshell",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M1d",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "dewling.png",
+    "ember_boar.png",
+    "monsters_npcs.png"
+   ],
+   "save": "anim_ashshell.png",
+   "replaces": "art/source/monsters_m1.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "monsters_npcs",
+   "note": "Region of combined sheet monsters_m1.png. Layout WALKER. Copies its idle cell from monsters_npcs.",
+   "fill": {
+    "name": "ashshell"
+   }
+  },
+  {
+   "id": "anim_boulderkin",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M1e",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "dewling.png",
+    "ember_boar.png",
+    "monsters_npcs.png"
+   ],
+   "save": "anim_boulderkin.png",
+   "replaces": "art/source/monsters_m1.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "monsters_npcs",
+   "note": "Region of combined sheet monsters_m1.png. Layout WALKER. Copies its idle cell from monsters_npcs.",
+   "fill": {
+    "name": "boulderkin"
+   }
+  },
+  {
+   "id": "anim_flame_boar_chief",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M1f",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "dewling.png",
+    "ember_boar.png",
+    "monsters_npcs.png"
+   ],
+   "save": "anim_flame_boar_chief.png",
+   "replaces": "art/source/monsters_m1.png",
+   "kind": "anim",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": "monsters_npcs",
+   "note": "Region of combined sheet monsters_m1.png. Layout BOSS. Copies its idle cell from monsters_npcs.",
+   "fill": {
+    "name": "flame_boar_chief"
+   }
+  },
+  {
+   "id": "sproutcap_extra",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M2",
+   "with": null,
+   "refs": [],
+   "save": "sproutcap_extra.png",
+   "replaces": "art/source/sproutcap_extra.png",
+   "kind": "anim",
+   "cells": [
+    1,
+    3
+   ],
+   "anchor": "anim_sproutcap",
+   "note": "Attaches assets/sprites/monsters/sproutcap.png (the cut sprite). No manifest; frames are wired via sproutcap.json sets."
+  },
+  {
+   "id": "mon_tide_dewling",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M3a",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_tide_dewling.png",
+   "replaces": "art/source/mon_dawnrise.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "dewling",
+   "note": "Family anchor for M3. Region of combined sheet mon_dawnrise.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout HOPPER.",
+   "fill": {
+    "name": "tide_dewling"
+   }
+  },
+  {
+   "id": "mon_sporecap",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M3b",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_sporecap.png",
+   "replaces": "art/source/mon_dawnrise.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_tide_dewling",
+   "note": "Region of combined sheet mon_dawnrise.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout WALKER.",
+   "fill": {
+    "name": "sporecap"
+   }
+  },
+  {
+   "id": "mon_spore_puff",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M3c",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_spore_puff.png",
+   "replaces": "art/source/mon_dawnrise.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_tide_dewling",
+   "note": "Region of combined sheet mon_dawnrise.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout HOPPER.",
+   "fill": {
+    "name": "spore_puff"
+   }
+  },
+  {
+   "id": "mon_sea_gull",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M3d",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_sea_gull.png",
+   "replaces": "art/source/mon_dawnrise.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_tide_dewling",
+   "note": "Region of combined sheet mon_dawnrise.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout FLIER.",
+   "fill": {
+    "name": "sea_gull"
+   }
+  },
+  {
+   "id": "mon_shell_crab",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M3e",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_shell_crab.png",
+   "replaces": "art/source/mon_dawnrise.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_tide_dewling",
+   "note": "Region of combined sheet mon_dawnrise.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout WALKER.",
+   "fill": {
+    "name": "shell_crab"
+   }
+  },
+  {
+   "id": "mon_old_clawbeard",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M3f",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_old_clawbeard.png",
+   "replaces": "art/source/mon_dawnrise.png",
+   "kind": "anim",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": "mon_tide_dewling",
+   "note": "Region of combined sheet mon_dawnrise.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout BOSS.",
+   "fill": {
+    "name": "old_clawbeard"
+   }
+  },
+  {
+   "id": "mon_thornling",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M4a",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_thornling.png",
+   "replaces": "art/source/mon_greenbough.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "dewling",
+   "note": "Family anchor for M4. Region of combined sheet mon_greenbough.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout WALKER.",
+   "fill": {
+    "name": "thornling"
+   }
+  },
+  {
+   "id": "mon_leafwing",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M4b",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_leafwing.png",
+   "replaces": "art/source/mon_greenbough.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_thornling",
+   "note": "Region of combined sheet mon_greenbough.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout FLIER.",
+   "fill": {
+    "name": "leafwing"
+   }
+  },
+  {
+   "id": "mon_bramble_boar",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M4c",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_bramble_boar.png",
+   "replaces": "art/source/mon_greenbough.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_thornling",
+   "note": "Region of combined sheet mon_greenbough.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout WALKER.",
+   "fill": {
+    "name": "bramble_boar"
+   }
+  },
+  {
+   "id": "mon_acorn_sentry",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M4d",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_acorn_sentry.png",
+   "replaces": "art/source/mon_greenbough.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_thornling",
+   "note": "Region of combined sheet mon_greenbough.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout TURRET.",
+   "fill": {
+    "name": "acorn_sentry"
+   }
+  },
+  {
+   "id": "mon_barkcap",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M4e",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_barkcap.png",
+   "replaces": "art/source/mon_greenbough.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_thornling",
+   "note": "Region of combined sheet mon_greenbough.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout HOPPER.",
+   "fill": {
+    "name": "barkcap"
+   }
+  },
+  {
+   "id": "mon_grove_wisp",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M4f",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_grove_wisp.png",
+   "replaces": "art/source/mon_greenbough.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_thornling",
+   "note": "Region of combined sheet mon_greenbough.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout FLIER.",
+   "fill": {
+    "name": "grove_wisp"
+   }
+  },
+  {
+   "id": "mon_elder_treant",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M4g",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_elder_treant.png",
+   "replaces": "art/source/mon_greenbough.png",
+   "kind": "anim",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": "mon_thornling",
+   "note": "Region of combined sheet mon_greenbough.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout BOSS. Manifest cuts it as 2x6; LAYOUT BOSS is 3x4.",
+   "fill": {
+    "name": "elder_treant"
+   }
+  },
+  {
+   "id": "mon_glowcap",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M5a",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_glowcap.png",
+   "replaces": "art/source/mon_lumewood.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "dewling",
+   "note": "Family anchor for M5. Region of combined sheet mon_lumewood.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout HOPPER.",
+   "fill": {
+    "name": "glowcap"
+   }
+  },
+  {
+   "id": "mon_lume_wisp",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M5b",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_lume_wisp.png",
+   "replaces": "art/source/mon_lumewood.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_glowcap",
+   "note": "Region of combined sheet mon_lumewood.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout FLIER.",
+   "fill": {
+    "name": "lume_wisp"
+   }
+  },
+  {
+   "id": "mon_star_bat",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M5c",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_star_bat.png",
+   "replaces": "art/source/mon_lumewood.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_glowcap",
+   "note": "Region of combined sheet mon_lumewood.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout FLIER.",
+   "fill": {
+    "name": "star_bat"
+   }
+  },
+  {
+   "id": "mon_prism_slime",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M5d",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_prism_slime.png",
+   "replaces": "art/source/mon_lumewood.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_glowcap",
+   "note": "Region of combined sheet mon_lumewood.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout WALKER.",
+   "fill": {
+    "name": "prism_slime"
+   }
+  },
+  {
+   "id": "mon_prism_bit",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M5e",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_prism_bit.png",
+   "replaces": "art/source/mon_lumewood.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_glowcap",
+   "note": "Region of combined sheet mon_lumewood.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout HOPPER.",
+   "fill": {
+    "name": "prism_bit"
+   }
+  },
+  {
+   "id": "mon_crystal_golem",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M5f",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_crystal_golem.png",
+   "replaces": "art/source/mon_lumewood.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_glowcap",
+   "note": "Region of combined sheet mon_lumewood.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout WALKER.",
+   "fill": {
+    "name": "crystal_golem"
+   }
+  },
+  {
+   "id": "mon_spell_imp",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M5g",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_spell_imp.png",
+   "replaces": "art/source/mon_lumewood.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_glowcap",
+   "note": "Region of combined sheet mon_lumewood.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout WALKER.",
+   "fill": {
+    "name": "spell_imp"
+   }
+  },
+  {
+   "id": "mon_arcane_sentinel",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M5h",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_arcane_sentinel.png",
+   "replaces": "art/source/mon_lumewood.png",
+   "kind": "anim",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": "mon_glowcap",
+   "note": "Region of combined sheet mon_lumewood.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout BOSS.",
+   "fill": {
+    "name": "arcane_sentinel"
+   }
+  },
+  {
+   "id": "mon_slag_slime",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M6a",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_slag_slime.png",
+   "replaces": "art/source/mon_emberreach.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "dewling",
+   "note": "Family anchor for M6. Region of combined sheet mon_emberreach.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout WALKER.",
+   "fill": {
+    "name": "slag_slime"
+   }
+  },
+  {
+   "id": "mon_slag_bit",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M6b",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_slag_bit.png",
+   "replaces": "art/source/mon_emberreach.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_slag_slime",
+   "note": "Region of combined sheet mon_emberreach.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout HOPPER.",
+   "fill": {
+    "name": "slag_bit"
+   }
+  },
+  {
+   "id": "mon_cinder_pup",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M6c",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_cinder_pup.png",
+   "replaces": "art/source/mon_emberreach.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_slag_slime",
+   "note": "Region of combined sheet mon_emberreach.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout WALKER.",
+   "fill": {
+    "name": "cinder_pup"
+   }
+  },
+  {
+   "id": "mon_ash_bat",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M6d",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_ash_bat.png",
+   "replaces": "art/source/mon_emberreach.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_slag_slime",
+   "note": "Region of combined sheet mon_emberreach.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout FLIER.",
+   "fill": {
+    "name": "ash_bat"
+   }
+  },
+  {
+   "id": "mon_fire_imp_archer",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M6e",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_fire_imp_archer.png",
+   "replaces": "art/source/mon_emberreach.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_slag_slime",
+   "note": "Region of combined sheet mon_emberreach.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout WALKER.",
+   "fill": {
+    "name": "fire_imp_archer"
+   }
+  },
+  {
+   "id": "mon_magma_shell",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M6f",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_magma_shell.png",
+   "replaces": "art/source/mon_emberreach.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_slag_slime",
+   "note": "Region of combined sheet mon_emberreach.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout WALKER.",
+   "fill": {
+    "name": "magma_shell"
+   }
+  },
+  {
+   "id": "mon_forge_golem",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M6g",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_forge_golem.png",
+   "replaces": "art/source/mon_emberreach.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_slag_slime",
+   "note": "Region of combined sheet mon_emberreach.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout WALKER.",
+   "fill": {
+    "name": "forge_golem"
+   }
+  },
+  {
+   "id": "mon_molten_king",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M6h",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_molten_king.png",
+   "replaces": "art/source/mon_emberreach.png",
+   "kind": "anim",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": "mon_slag_slime",
+   "note": "Region of combined sheet mon_emberreach.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout BOSS.",
+   "fill": {
+    "name": "molten_king"
+   }
+  },
+  {
+   "id": "mon_shade_imp",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M7a",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_shade_imp.png",
+   "replaces": "art/source/mon_lanternfall.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "dewling",
+   "note": "Family anchor for M7. Region of combined sheet mon_lanternfall.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout WALKER.",
+   "fill": {
+    "name": "shade_imp"
+   }
+  },
+  {
+   "id": "mon_lantern_wisp",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M7b",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_lantern_wisp.png",
+   "replaces": "art/source/mon_lanternfall.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_shade_imp",
+   "note": "Region of combined sheet mon_lanternfall.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout FLIER.",
+   "fill": {
+    "name": "lantern_wisp"
+   }
+  },
+  {
+   "id": "mon_dusk_moth",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M7c",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_dusk_moth.png",
+   "replaces": "art/source/mon_lanternfall.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_shade_imp",
+   "note": "Region of combined sheet mon_lanternfall.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout FLIER.",
+   "fill": {
+    "name": "dusk_moth"
+   }
+  },
+  {
+   "id": "mon_night_boar",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M7d",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_night_boar.png",
+   "replaces": "art/source/mon_lanternfall.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_shade_imp",
+   "note": "Region of combined sheet mon_lanternfall.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout WALKER.",
+   "fill": {
+    "name": "night_boar"
+   }
+  },
+  {
+   "id": "mon_gloomcap",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M7e",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_gloomcap.png",
+   "replaces": "art/source/mon_lanternfall.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_shade_imp",
+   "note": "Region of combined sheet mon_lanternfall.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout HOPPER.",
+   "fill": {
+    "name": "gloomcap"
+   }
+  },
+  {
+   "id": "mon_crypt_shell",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M7f",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_crypt_shell.png",
+   "replaces": "art/source/mon_lanternfall.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_shade_imp",
+   "note": "Region of combined sheet mon_lanternfall.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout WALKER.",
+   "fill": {
+    "name": "crypt_shell"
+   }
+  },
+  {
+   "id": "mon_lantern_wraith",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M7g",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_lantern_wraith.png",
+   "replaces": "art/source/mon_lanternfall.png",
+   "kind": "anim",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": "mon_shade_imp",
+   "note": "Region of combined sheet mon_lanternfall.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout BOSS. Manifest cuts it as 2x6; LAYOUT BOSS is 3x4.",
+   "fill": {
+    "name": "lantern_wraith"
+   }
+  },
+  {
+   "id": "mon_sand_crab",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M8a",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_sand_crab.png",
+   "replaces": "art/source/mon_driftcove.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "dewling",
+   "note": "Family anchor for M8. Region of combined sheet mon_driftcove.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout WALKER.",
+   "fill": {
+    "name": "sand_crab"
+   }
+  },
+  {
+   "id": "mon_tide_slime",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M8b",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_tide_slime.png",
+   "replaces": "art/source/mon_driftcove.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_sand_crab",
+   "note": "Region of combined sheet mon_driftcove.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout WALKER.",
+   "fill": {
+    "name": "tide_slime"
+   }
+  },
+  {
+   "id": "mon_tide_bit",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M8c",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_tide_bit.png",
+   "replaces": "art/source/mon_driftcove.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_sand_crab",
+   "note": "Region of combined sheet mon_driftcove.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout HOPPER.",
+   "fill": {
+    "name": "tide_bit"
+   }
+  },
+  {
+   "id": "mon_reef_gull",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M8d",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_reef_gull.png",
+   "replaces": "art/source/mon_driftcove.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_sand_crab",
+   "note": "Region of combined sheet mon_driftcove.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout FLIER.",
+   "fill": {
+    "name": "reef_gull"
+   }
+  },
+  {
+   "id": "mon_coral_turret",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M8e",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_coral_turret.png",
+   "replaces": "art/source/mon_driftcove.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_sand_crab",
+   "note": "Region of combined sheet mon_driftcove.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout TURRET.",
+   "fill": {
+    "name": "coral_turret"
+   }
+  },
+  {
+   "id": "mon_kelp_lurker",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M8f",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_kelp_lurker.png",
+   "replaces": "art/source/mon_driftcove.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_sand_crab",
+   "note": "Region of combined sheet mon_driftcove.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout HOPPER.",
+   "fill": {
+    "name": "kelp_lurker"
+   }
+  },
+  {
+   "id": "mon_barnacle_boar",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M8g",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_barnacle_boar.png",
+   "replaces": "art/source/mon_driftcove.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_sand_crab",
+   "note": "Region of combined sheet mon_driftcove.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout WALKER.",
+   "fill": {
+    "name": "barnacle_boar"
+   }
+  },
+  {
+   "id": "mon_reef_titan",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M8h",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_reef_titan.png",
+   "replaces": "art/source/mon_driftcove.png",
+   "kind": "anim",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": "mon_sand_crab",
+   "note": "Region of combined sheet mon_driftcove.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout BOSS.",
+   "fill": {
+    "name": "reef_titan"
+   }
+  },
+  {
+   "id": "mon_cliff_harpy",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M9a",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_cliff_harpy.png",
+   "replaces": "art/source/mon_ring_road.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "dewling",
+   "note": "Family anchor for M9. Region of combined sheet mon_ring_road.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout FLIER.",
+   "fill": {
+    "name": "cliff_harpy"
+   }
+  },
+  {
+   "id": "mon_marsh_horror",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M9b",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_marsh_horror.png",
+   "replaces": "art/source/mon_ring_road.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_cliff_harpy",
+   "note": "Region of combined sheet mon_ring_road.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout HOPPER.",
+   "fill": {
+    "name": "marsh_horror"
+   }
+  },
+  {
+   "id": "mon_starfall_golem",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M9c",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_starfall_golem.png",
+   "replaces": "art/source/mon_ring_road.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_cliff_harpy",
+   "note": "Region of combined sheet mon_ring_road.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout WALKER.",
+   "fill": {
+    "name": "starfall_golem"
+   }
+  },
+  {
+   "id": "mon_cinder_hog",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M9d",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_cinder_hog.png",
+   "replaces": "art/source/mon_ring_road.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_cliff_harpy",
+   "note": "Region of combined sheet mon_ring_road.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout WALKER.",
+   "fill": {
+    "name": "cinder_hog"
+   }
+  },
+  {
+   "id": "mon_ash_wraith",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M9e",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_ash_wraith.png",
+   "replaces": "art/source/mon_ring_road.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_cliff_harpy",
+   "note": "Region of combined sheet mon_ring_road.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout FLIER.",
+   "fill": {
+    "name": "ash_wraith"
+   }
+  },
+  {
+   "id": "mon_dusk_stalker",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "M9f",
+   "with": "M",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "dewling.png",
+    "ember_boar.png"
+   ],
+   "save": "mon_dusk_stalker.png",
+   "replaces": "art/source/mon_ring_road.png",
+   "kind": "anim",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "mon_cliff_harpy",
+   "note": "Region of combined sheet mon_ring_road.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout WALKER. Script context for M9f runs into the Areas section (picks up <area>_tileset.png save line and area refs): pass --out.",
+   "fill": {
+    "name": "dusk_stalker"
+   }
+  },
+  {
+   "id": "dawnharbor_tileset",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "W1a",
+   "with": null,
+   "refs": [
+    "meadow_tileset.png"
+   ],
+   "save": "dawnharbor_tileset.png",
+   "replaces": "art/source/dawnharbor_area.png",
+   "kind": "still",
+   "cells": [
+    4,
+    6
+   ],
+   "anchor": "meadow_tileset",
+   "note": "Left region of combined dawnharbor_area.png (tileset + backdrops in one image today).",
+   "fill": {
+    "area": "dawnharbor"
+   }
+  },
+  {
+   "id": "dawnharbor_backgrounds",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "W1b",
+   "with": null,
+   "refs": [
+    "meadow_backgrounds_a.png"
+   ],
+   "save": "dawnharbor_backgrounds.png",
+   "replaces": "art/source/dawnharbor_area.png",
+   "kind": "still",
+   "cells": [
+    7,
+    1
+   ],
+   "anchor": "dawnharbor_tileset",
+   "note": "Right region of combined dawnharbor_area.png. Manifest cuts 13x1 (strips + gaps); batch grid is 1x7.",
+   "fill": {
+    "area": "dawnharbor"
+   }
+  },
+  {
+   "id": "driftcove_tileset",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "W2a",
+   "with": null,
+   "refs": [
+    "meadow_tileset.png"
+   ],
+   "save": "driftcove_tileset.png",
+   "replaces": "art/source/driftcove_area.png",
+   "kind": "still",
+   "cells": [
+    4,
+    6
+   ],
+   "anchor": "meadow_tileset",
+   "note": "Left region of combined driftcove_area.png (tileset + backdrops in one image today).",
+   "fill": {
+    "area": "driftcove"
+   }
+  },
+  {
+   "id": "driftcove_backgrounds",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "W2b",
+   "with": null,
+   "refs": [
+    "meadow_backgrounds_a.png"
+   ],
+   "save": "driftcove_backgrounds.png",
+   "replaces": "art/source/driftcove_area.png",
+   "kind": "still",
+   "cells": [
+    7,
+    1
+   ],
+   "anchor": "driftcove_tileset",
+   "note": "Right region of combined driftcove_area.png. Manifest cuts 13x1 (strips + gaps); batch grid is 1x7.",
+   "fill": {
+    "area": "driftcove"
+   }
+  },
+  {
+   "id": "greenbough_tileset",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "W3a",
+   "with": null,
+   "refs": [
+    "meadow_tileset.png"
+   ],
+   "save": "greenbough_tileset.png",
+   "replaces": "art/source/greenbough_area.png",
+   "kind": "still",
+   "cells": [
+    4,
+    6
+   ],
+   "anchor": "meadow_tileset",
+   "note": "Left region of combined greenbough_area.png (tileset + backdrops in one image today). Part 4 W3a supersedes part 3.",
+   "fill": {
+    "area": "greenbough"
+   }
+  },
+  {
+   "id": "greenbough_backgrounds",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "W3b",
+   "with": null,
+   "refs": [
+    "meadow_backgrounds_a.png"
+   ],
+   "save": "greenbough_backgrounds.png",
+   "replaces": "art/source/greenbough_area.png",
+   "kind": "still",
+   "cells": [
+    7,
+    1
+   ],
+   "anchor": "greenbough_tileset",
+   "note": "Right region of combined greenbough_area.png. Manifest cuts 13x1 (strips + gaps); batch grid is 1x7. Part 4 W3b; script context picks up npcs_lumewood.png from the NPC section after it (harmless).",
+   "fill": {
+    "area": "greenbough"
+   }
+  },
+  {
+   "id": "lumewood_tileset",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "W4a",
+   "with": null,
+   "refs": [
+    "meadow_tileset.png"
+   ],
+   "save": "lumewood_tileset.png",
+   "replaces": "art/source/lumewood_area.png",
+   "kind": "still",
+   "cells": [
+    4,
+    6
+   ],
+   "anchor": "meadow_tileset",
+   "note": "Left region of combined lumewood_area.png (tileset + backdrops in one image today).",
+   "fill": {
+    "area": "lumewood"
+   }
+  },
+  {
+   "id": "lumewood_backgrounds",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "W4b",
+   "with": null,
+   "refs": [
+    "meadow_backgrounds_a.png"
+   ],
+   "save": "lumewood_backgrounds.png",
+   "replaces": "art/source/lumewood_area.png",
+   "kind": "still",
+   "cells": [
+    7,
+    1
+   ],
+   "anchor": "lumewood_tileset",
+   "note": "Right region of combined lumewood_area.png. Manifest cuts 13x1 (strips + gaps); batch grid is 1x7. Includes X1b fix (near layer ragged top).",
+   "fill": {
+    "area": "lumewood"
+   }
+  },
+  {
+   "id": "emberreach_tileset",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "W5a",
+   "with": null,
+   "refs": [
+    "meadow_tileset.png"
+   ],
+   "save": "emberreach_tileset.png",
+   "replaces": "art/source/emberreach_area.png",
+   "kind": "still",
+   "cells": [
+    4,
+    6
+   ],
+   "anchor": "meadow_tileset",
+   "note": "Left region of combined emberreach_area.png (tileset + backdrops in one image today). Includes X1a fix (cells 20-21 lantern, no halo).",
+   "fill": {
+    "area": "emberreach"
+   }
+  },
+  {
+   "id": "emberreach_backgrounds",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "W5b",
+   "with": null,
+   "refs": [
+    "meadow_backgrounds_a.png"
+   ],
+   "save": "emberreach_backgrounds.png",
+   "replaces": "art/source/emberreach_area.png",
+   "kind": "still",
+   "cells": [
+    7,
+    1
+   ],
+   "anchor": "emberreach_tileset",
+   "note": "Right region of combined emberreach_area.png. Manifest cuts 13x1 (strips + gaps); batch grid is 1x7.",
+   "fill": {
+    "area": "emberreach"
+   }
+  },
+  {
+   "id": "lanternfall_tileset",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "W6a",
+   "with": null,
+   "refs": [
+    "meadow_tileset.png"
+   ],
+   "save": "lanternfall_tileset.png",
+   "replaces": "art/source/lanternfall_area.png",
+   "kind": "still",
+   "cells": [
+    4,
+    6
+   ],
+   "anchor": "meadow_tileset",
+   "note": "Left region of combined lanternfall_area.png (tileset + backdrops in one image today).",
+   "fill": {
+    "area": "lanternfall"
+   }
+  },
+  {
+   "id": "lanternfall_backgrounds",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "W6b",
+   "with": null,
+   "refs": [
+    "meadow_backgrounds_a.png"
+   ],
+   "save": "lanternfall_backgrounds.png",
+   "replaces": "art/source/lanternfall_area.png",
+   "kind": "still",
+   "cells": [
+    7,
+    1
+   ],
+   "anchor": "lanternfall_tileset",
+   "note": "Right region of combined lanternfall_area.png. Manifest cuts 13x1 (strips + gaps); batch grid is 1x7.",
+   "fill": {
+    "area": "lanternfall"
+   }
+  },
+  {
+   "id": "ground_textures_2",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "W7a",
+   "with": null,
+   "refs": [],
+   "save": "ground_textures_2.png",
+   "replaces": "art/source/ground_textures_2.png",
+   "kind": "still",
+   "cells": [
+    3,
+    3
+   ],
+   "anchor": "ground_textures",
+   "note": "Left half of ground_textures_2.png (manifest ground_textures_2, region). Section 'Save as' names ground_textures_3.png too, which the script then treats as a missing reference."
+  },
+  {
+   "id": "ground_textures_3",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "W7b",
+   "with": null,
+   "refs": [
+    "ground_textures.png"
+   ],
+   "save": "ground_textures_3.png",
+   "replaces": "art/source/ground_textures_2.png",
+   "kind": "still",
+   "cells": [
+    3,
+    3
+   ],
+   "anchor": "ground_textures_2",
+   "note": "Right half of ground_textures_2.png (manifest ground_textures_3, region). Script context runs into the NPC section (save npcs_<group>.png, refs hero/monsters_npcs): pass --out."
+  },
+  {
+   "id": "npcs_harbor_2",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "N2, LAYOUT NPC",
+   "with": "N",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png"
+   ],
+   "save": "npcs_harbor_2.png",
+   "replaces": "art/source/npcs_harbor_2.png",
+   "kind": "still",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "npcs_harbor_1",
+   "note": "Fence reads 'Batch N2, LAYOUT NPC:'."
+  },
+  {
+   "id": "npcs_harbor_3",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "N3, LAYOUT NPC (only three columns used; leave the fourth empty)",
+   "with": "N",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png"
+   ],
+   "save": "npcs_harbor_3.png",
+   "replaces": "art/source/npcs_harbor_3.png",
+   "kind": "still",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "npcs_harbor_1",
+   "note": "N3 uses three columns; fence has a parenthesis, so the id is the whole text before the colon. "
+  },
+  {
+   "id": "npcs_greenbough",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "N4, LAYOUT NPC",
+   "with": "N",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "npcs_lumewood.png"
+   ],
+   "save": "npcs_greenbough.png",
+   "replaces": "art/source/npcs_greenbough.png",
+   "kind": "still",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "npcs_harbor_1",
+   "note": "Part 4 version (newest). Fence reads 'Batch N4, LAYOUT NPC:'."
+  },
+  {
+   "id": "npcs_lumewood",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "N5, LAYOUT NPC",
+   "with": "N",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png"
+   ],
+   "save": "npcs_lumewood.png",
+   "replaces": "art/source/npcs_lumewood.png",
+   "kind": "still",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "npcs_harbor_1",
+   "note": "Fence reads 'Batch N5, LAYOUT NPC:'."
+  },
+  {
+   "id": "npcs_emberforge",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "N6, LAYOUT NPC",
+   "with": "N",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png"
+   ],
+   "save": "npcs_emberforge.png",
+   "replaces": "art/source/npcs_emberforge.png",
+   "kind": "still",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "npcs_harbor_1",
+   "note": "Fence reads 'Batch N6, LAYOUT NPC:'."
+  },
+  {
+   "id": "npcs_lanternfall",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "N7, LAYOUT NPC",
+   "with": "N",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png",
+    "npcs_lumewood.png"
+   ],
+   "save": "npcs_lanternfall.png",
+   "replaces": "art/source/npcs_lanternfall.png",
+   "kind": "still",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "npcs_harbor_1",
+   "note": "Part 4 version (newest). Fence reads 'Batch N7, LAYOUT NPC:'."
+  },
+  {
+   "id": "npcs_driftcove",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "N8, LAYOUT NPC",
+   "with": "N",
+   "refs": [
+    "hero_main.png",
+    "monsters_npcs.png"
+   ],
+   "save": "npcs_driftcove.png",
+   "replaces": "art/source/npcs_driftcove.png",
+   "kind": "still",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "npcs_harbor_1",
+   "note": "Fence reads 'Batch N8, LAYOUT NPC:'."
+  },
+  {
+   "id": "pets",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "P1",
+   "with": null,
+   "refs": [
+    "hero_main.png"
+   ],
+   "save": "pets.png",
+   "replaces": "art/source/pets.png",
+   "kind": "still",
+   "cells": [
+    3,
+    9
+   ],
+   "anchor": "hero_main",
+   "note": "3 pets x 9 frames; also cut as pets_icons."
+  },
+  {
+   "id": "chairs",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "P2",
+   "with": null,
+   "refs": [
+    "hero_main.png"
+   ],
+   "save": "chairs.png",
+   "replaces": "art/source/chairs.png",
+   "kind": "still",
+   "cells": [
+    3,
+    3
+   ],
+   "anchor": "hero_main",
+   "note": "Part 4 P2 (newest)."
+  },
+  {
+   "id": "items_warrior",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "I1",
+   "with": null,
+   "refs": [
+    "items_gear.png",
+    "items_consumables.png"
+   ],
+   "save": "items_warrior.png",
+   "replaces": "art/source/items_warrior.png",
+   "kind": "still",
+   "cells": [
+    4,
+    6
+   ],
+   "anchor": "items_gear",
+   "note": "Section says attach items_gear + items_consumables every time."
+  },
+  {
+   "id": "items_archer",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "I2",
+   "with": null,
+   "refs": [
+    "items_gear.png",
+    "items_consumables.png",
+    "items_warrior.png"
+   ],
+   "save": "items_archer.png",
+   "replaces": "art/source/items_archer.png",
+   "kind": "still",
+   "cells": [
+    4,
+    6
+   ],
+   "anchor": "items_warrior",
+   "note": "Section says attach items_gear + items_consumables every time."
+  },
+  {
+   "id": "items_magician",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "I3",
+   "with": null,
+   "refs": [
+    "items_gear.png",
+    "items_consumables.png",
+    "items_warrior.png"
+   ],
+   "save": "items_magician.png",
+   "replaces": "art/source/items_magician.png",
+   "kind": "still",
+   "cells": [
+    4,
+    5
+   ],
+   "anchor": "items_warrior",
+   "note": "Part 4 I3 (newest). Section says attach items_gear + items_consumables every time."
+  },
+  {
+   "id": "items_thief",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "I4",
+   "with": null,
+   "refs": [
+    "items_gear.png",
+    "items_consumables.png",
+    "items_warrior.png"
+   ],
+   "save": "items_thief.png",
+   "replaces": "art/source/items_thief.png",
+   "kind": "still",
+   "cells": [
+    4,
+    6
+   ],
+   "anchor": "items_warrior",
+   "note": "Section says attach items_gear + items_consumables every time."
+  },
+  {
+   "id": "items_pirate",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "I5",
+   "with": null,
+   "refs": [
+    "items_gear.png",
+    "items_consumables.png",
+    "items_warrior.png"
+   ],
+   "save": "items_pirate.png",
+   "replaces": "art/source/items_pirate.png",
+   "kind": "still",
+   "cells": [
+    4,
+    6
+   ],
+   "anchor": "items_warrior",
+   "note": "Section says attach items_gear + items_consumables every time."
+  },
+  {
+   "id": "items_accessories",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "I6",
+   "with": null,
+   "refs": [
+    "items_gear.png",
+    "items_consumables.png",
+    "items_warrior.png"
+   ],
+   "save": "items_accessories.png",
+   "replaces": "art/source/items_accessories.png",
+   "kind": "still",
+   "cells": [
+    4,
+    5
+   ],
+   "anchor": "items_warrior",
+   "note": "Section says attach items_gear + items_consumables every time."
+  },
+  {
+   "id": "items_parts_1",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "I7",
+   "with": null,
+   "refs": [
+    "items_gear.png",
+    "items_consumables.png",
+    "items_warrior.png"
+   ],
+   "save": "items_parts_1.png",
+   "replaces": "art/source/items_parts_1.png",
+   "kind": "still",
+   "cells": [
+    5,
+    5
+   ],
+   "anchor": "items_warrior",
+   "note": "Section says attach items_gear + items_consumables every time."
+  },
+  {
+   "id": "items_parts_2",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "I8",
+   "with": null,
+   "refs": [
+    "items_gear.png",
+    "items_consumables.png",
+    "items_warrior.png"
+   ],
+   "save": "items_parts_2.png",
+   "replaces": "art/source/items_parts_2.png",
+   "kind": "still",
+   "cells": [
+    5,
+    5
+   ],
+   "anchor": "items_warrior",
+   "note": "Section says attach items_gear + items_consumables every time."
+  },
+  {
+   "id": "items_charms_food",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "I9",
+   "with": null,
+   "refs": [
+    "items_gear.png",
+    "items_consumables.png",
+    "items_warrior.png"
+   ],
+   "save": "items_charms_food.png",
+   "replaces": "art/source/items_charms_food.png",
+   "kind": "still",
+   "cells": [
+    4,
+    6
+   ],
+   "anchor": "items_warrior",
+   "note": "Section says attach items_gear + items_consumables every time."
+  },
+  {
+   "id": "items_scrolls",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "I10",
+   "with": null,
+   "refs": [
+    "items_gear.png",
+    "items_consumables.png",
+    "items_warrior.png"
+   ],
+   "save": "items_scrolls.png",
+   "replaces": "art/source/items_scrolls.png",
+   "kind": "still",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "items_warrior",
+   "note": "Section says attach items_gear + items_consumables every time."
+  },
+  {
+   "id": "skill_icons",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "S1",
+   "with": null,
+   "refs": [],
+   "save": "skill_icons.png",
+   "replaces": "art/source/skill_icons.png",
+   "kind": "still",
+   "cells": [
+    5,
+    5
+   ],
+   "anchor": "ui_leather",
+   "note": "Prompt saves as skills.png; game file is skill_icons.png. Attaches assets/sprites/ui/icon_dawn_slash.png (old purple frame)."
+  },
+  {
+   "id": "projectiles",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "S2",
+   "with": null,
+   "refs": [],
+   "save": "projectiles.png",
+   "replaces": "art/source/projectiles.png",
+   "kind": "still",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": "effects",
+   "note": ""
+  },
+  {
+   "id": "skill_effects",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "S3",
+   "with": null,
+   "refs": [],
+   "save": "skill_effects.png",
+   "replaces": "art/source/skill_effects.png",
+   "kind": "still",
+   "cells": [
+    4,
+    5
+   ],
+   "anchor": "effects",
+   "note": "Prompt saves as effects_skills.png; game file is skill_effects.png."
+  },
+  {
+   "id": "ui_windows_leather",
+   "prompts": "tera-dawn-chatgpt-art-prompts-7.md",
+   "batch": "U2",
+   "with": "U",
+   "refs": [],
+   "save": "ui_windows_leather.png",
+   "replaces": "art/source/ui_windows.png",
+   "kind": "still",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": "ui_leather",
+   "note": "'Name it' sits after the fence (script would save part7_u2)."
+  },
+  {
+   "id": "ui_hud_leather",
+   "prompts": "tera-dawn-chatgpt-art-prompts-7.md",
+   "batch": "U3",
+   "with": "U",
+   "refs": [],
+   "save": "ui_hud_leather.png",
+   "replaces": "art/source/ui_hud.png",
+   "kind": "still",
+   "cells": [
+    4,
+    4
+   ],
+   "anchor": "ui_leather",
+   "note": "'Name it' sits after the fence (script would save part7_u3). Batch attaches ui_leather.png by name: runner must pass the U1 result (it only resolves if saved as ui_leather_gemini.png). Also covers touchups_1 cooldown_cover. Some cells changed vs old manifest."
+  },
+  {
+   "id": "ui_menu_leather",
+   "prompts": "tera-dawn-chatgpt-art-prompts-7.md",
+   "batch": "U4",
+   "with": "U",
+   "refs": [],
+   "save": "ui_menu_leather.png",
+   "replaces": "art/source/ui_menu.png",
+   "kind": "still",
+   "cells": [
+    5,
+    5
+   ],
+   "anchor": "ui_leather",
+   "note": "'Name it' sits after the fence (script would save part7_u4). Batch attaches ui_leather.png by name: runner must pass the U1 result (it only resolves if saved as ui_leather_gemini.png)."
+  },
+  {
+   "id": "ui_dialogue_leather",
+   "prompts": "tera-dawn-chatgpt-art-prompts-7.md",
+   "batch": "U5",
+   "with": "U",
+   "refs": [],
+   "save": "ui_dialogue_leather.png",
+   "replaces": "art/source/ui_dialogue.png",
+   "kind": "still",
+   "cells": [
+    4,
+    4
+   ],
+   "anchor": "ui_leather",
+   "note": "'Name it' sits after the fence (script would save part7_u5). Batch attaches ui_leather.png by name: runner must pass the U1 result (it only resolves if saved as ui_leather_gemini.png). Some cells changed vs old manifest."
+  },
+  {
+   "id": "ui_social_leather",
+   "prompts": "tera-dawn-chatgpt-art-prompts-7.md",
+   "batch": "U6",
+   "with": "U",
+   "refs": [],
+   "save": "ui_social_leather.png",
+   "replaces": "art/source/ui_social.png",
+   "kind": "still",
+   "cells": [
+    4,
+    4
+   ],
+   "anchor": "ui_leather",
+   "note": "'Name it' sits after the fence (script would save part7_u6). Batch attaches ui_leather.png by name: runner must pass the U1 result (it only resolves if saved as ui_leather_gemini.png)."
+  },
+  {
+   "id": "ui_book_leather",
+   "prompts": "tera-dawn-chatgpt-art-prompts-7.md",
+   "batch": "U7",
+   "with": "U",
+   "refs": [],
+   "save": "ui_book_leather.png",
+   "replaces": "art/source/ui_book.png",
+   "kind": "still",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": "ui_leather",
+   "note": "'Name it' sits after the fence (script would save part7_u7). Batch attaches ui_leather.png by name: runner must pass the U1 result (it only resolves if saved as ui_leather_gemini.png)."
+  },
+  {
+   "id": "ui_creator_leather",
+   "prompts": "tera-dawn-chatgpt-art-prompts-7.md",
+   "batch": "U8",
+   "with": "U",
+   "refs": [],
+   "save": "ui_creator_leather.png",
+   "replaces": "art/source/ui_creator.png",
+   "kind": "still",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": "ui_leather",
+   "note": "'Name it' sits after the fence (script would save part7_u8). Batch attaches ui_leather.png by name: runner must pass the U1 result (it only resolves if saved as ui_leather_gemini.png)."
+  },
+  {
+   "id": "ui_map_icons",
+   "prompts": "tera-dawn-chatgpt-art-prompts-7.md",
+   "batch": "U9",
+   "with": "U",
+   "refs": [],
+   "save": "ui_map_icons.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    4,
+    4
+   ],
+   "anchor": "ui_leather",
+   "note": "'Name it' sits after the fence (script would save part7_u9). New; also replaces part 3 U6b world_map_markers (never made)."
+  },
+  {
+   "id": "ui_controls_leather",
+   "prompts": "tera-dawn-chatgpt-art-prompts-7.md",
+   "batch": "U10",
+   "with": "U",
+   "refs": [],
+   "save": "ui_controls_leather.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    4,
+    4
+   ],
+   "anchor": "ui_leather",
+   "note": "'Name it' sits after the fence (script would save part7_u10). New; covers touchups_1 list_row_hover / slider_knob_hover (X1c)."
+  },
+  {
+   "id": "ui_extras_leather",
+   "prompts": "tera-dawn-chatgpt-art-prompts-7.md",
+   "batch": "U11",
+   "with": "U",
+   "refs": [],
+   "save": "ui_extras_leather.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    4,
+    4
+   ],
+   "anchor": "ui_leather",
+   "note": "'Name it' sits after the fence (script would save part7_u11). New. Some cells changed vs old manifest."
+  },
+  {
+   "id": "world_map",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "U6a",
+   "with": null,
+   "refs": [],
+   "save": "world_map.png",
+   "replaces": "art/source/world_map.png",
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": "ui_leather",
+   "note": "Section line 'Save the painting as' isn't matched, so world_map.png (the old map) and world_map_markers.png become references; world_map_markers.png doesn't exist. Prompt still says purple-blue sea / old UI."
+  },
+  {
+   "id": "logo",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "U7a",
+   "with": null,
+   "refs": [
+    "art/source/logo.png"
+   ],
+   "save": "logo.png",
+   "replaces": "art/source/logo.png",
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": "ui_leather",
+   "note": "Part 4 U7a (rename to TERA'S DAWN). Part 3 U7a and part 1 Batch 12 superseded. Attaches the current logo.png + ui_menu.png."
+  },
+  {
+   "id": "title_backdrop",
+   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
+   "batch": "U7b",
+   "with": null,
+   "refs": [
+    "hero_main.png",
+    "meadow_tileset.png",
+    "meadow_backgrounds_a.png"
+   ],
+   "save": "title_backdrop.png",
+   "replaces": "assets/sprites/ui/title_backdrop.png",
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": "meadow_tileset",
+   "note": "Not in art/source (lives in assets/sprites/ui/), but the game uses it. Section 'Save as' lists logo.png and title_backdrop.png, so logo.png becomes a ref."
+  },
+  {
+   "id": "touchups_1",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": null,
+   "with": null,
+   "refs": [],
+   "save": "touchups_1.png",
+   "replaces": "art/source/touchups_1.png",
+   "kind": "still",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": null,
+   "note": "Superseded, not run: X1a-X1c patched cells of emberreach tileset (W5a), lumewood near strip (W4b) and purple UI hovers (now part 7 U3/U10). Regenerating those sheets covers it.",
+   "skip": true
+  },
+  {
+   "id": "platform_pieces_meadow",
+   "prompts": "tera-dawn-chatgpt-art-prompts-7.md",
+   "batch": "P1",
+   "with": "P",
+   "refs": [
+    "meadow_tileset.png"
+   ],
+   "save": "platform_pieces_meadow.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "meadow_tileset",
+   "note": "New. P1's 'Attach meadow_tileset.png' line sits after the fence under a shared heading, so it is passed as a ref. Batch attaches the OLD area sheet; runner should add the meadow_tileset result."
+  },
+  {
+   "id": "platform_pieces_greenbough",
+   "prompts": "tera-dawn-chatgpt-art-prompts-7.md",
+   "batch": "P2",
+   "with": "P",
+   "refs": [],
+   "save": "platform_pieces_greenbough.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "greenbough_tileset",
+   "note": "New. Batch attaches the OLD area sheet; runner should add the greenbough_tileset result."
+  },
+  {
+   "id": "platform_pieces_lumewood",
+   "prompts": "tera-dawn-chatgpt-art-prompts-7.md",
+   "batch": "P3",
+   "with": "P",
+   "refs": [],
+   "save": "platform_pieces_lumewood.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "lumewood_tileset",
+   "note": "New. Batch attaches the OLD area sheet; runner should add the lumewood_tileset result."
+  },
+  {
+   "id": "platform_pieces_ember",
+   "prompts": "tera-dawn-chatgpt-art-prompts-7.md",
+   "batch": "P4",
+   "with": "P",
+   "refs": [],
+   "save": "platform_pieces_ember.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "ember_tileset",
+   "note": "New. Batch attaches the OLD area sheet; runner should add the ember_tileset result."
+  },
+  {
+   "id": "platform_pieces_emberreach",
+   "prompts": "tera-dawn-chatgpt-art-prompts-7.md",
+   "batch": "P5",
+   "with": "P",
+   "refs": [],
+   "save": "platform_pieces_emberreach.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "emberreach_tileset",
+   "note": "New. Batch attaches the OLD area sheet; runner should add the emberreach_tileset result."
+  },
+  {
+   "id": "platform_pieces_lanternfall",
+   "prompts": "tera-dawn-chatgpt-art-prompts-7.md",
+   "batch": "P6",
+   "with": "P",
+   "refs": [],
+   "save": "platform_pieces_lanternfall.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "lanternfall_tileset",
+   "note": "New. Batch attaches the OLD area sheet; runner should add the lanternfall_tileset result."
+  },
+  {
+   "id": "platform_pieces_driftcove",
+   "prompts": "tera-dawn-chatgpt-art-prompts-7.md",
+   "batch": "P7",
+   "with": "P",
+   "refs": [],
+   "save": "platform_pieces_driftcove.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "driftcove_tileset",
+   "note": "New. Batch attaches the OLD area sheet; runner should add the driftcove_tileset result."
+  },
+  {
+   "id": "platform_pieces_dawnharbor",
+   "prompts": "tera-dawn-chatgpt-art-prompts-7.md",
+   "batch": "P8",
+   "with": "P",
+   "refs": [],
+   "save": "platform_pieces_dawnharbor.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "dawnharbor_tileset",
+   "note": "New. Batch attaches the OLD area sheet; runner should add the dawnharbor_tileset result."
+  },
+  {
+   "id": "climb_tops",
+   "prompts": "tera-dawn-chatgpt-art-prompts-7.md",
+   "batch": "R1",
+   "with": null,
+   "refs": [],
+   "save": "climb_tops.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": "ropes_props",
+   "note": "New. Attaches art/source/ropes_props_b.png."
+  },
+  {
+   "id": "dawnharbor_midground",
+   "prompts": "tera-dawn-chatgpt-art-prompts-7.md",
+   "batch": "H1",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_midground.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    3,
+    1
+   ],
+   "anchor": "dawnharbor_backgrounds",
+   "note": "New. Attaches art/source/dawnharbor_area.png."
+  },
+  {
+   "id": "buildings_dawnharbor",
+   "prompts": "tera-dawn-chatgpt-art-prompts-9.md",
+   "batch": "B2",
+   "with": "B",
+   "refs": [
+    "hero_main.png",
+    "dawnharbor_area.png"
+   ],
+   "save": "buildings_dawnharbor.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    3
+   ],
+   "anchor": null,
+   "note": "Do first: anchor for the other towns. New (manifest exists). NOT parseable: fence at part 9 line 86 starts 'Town:', no 'Batch B2:'."
+  },
+  {
+   "id": "buildings_meadow",
+   "prompts": "tera-dawn-chatgpt-art-prompts-9.md",
+   "batch": "B1",
+   "with": "B",
+   "refs": [
+    "hero_main.png",
+    "meadow_tileset.png"
+   ],
+   "save": "buildings_meadow.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    3
+   ],
+   "anchor": "buildings_dawnharbor",
+   "note": "New (manifest exists). NOT parseable: fence at part 9 line 74 starts 'Town:', no 'Batch B1:'."
+  },
+  {
+   "id": "buildings_greenbough",
+   "prompts": "tera-dawn-chatgpt-art-prompts-9.md",
+   "batch": "B3",
+   "with": "B",
+   "refs": [
+    "hero_main.png",
+    "greenbough_area.png"
+   ],
+   "save": "buildings_greenbough.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    3
+   ],
+   "anchor": "buildings_dawnharbor",
+   "note": "New (manifest exists). NOT parseable: fence at part 9 line 98 starts 'Town:', no 'Batch B3:'."
+  },
+  {
+   "id": "buildings_lumewood",
+   "prompts": "tera-dawn-chatgpt-art-prompts-9.md",
+   "batch": "B4",
+   "with": "B",
+   "refs": [
+    "hero_main.png",
+    "lumewood_area.png"
+   ],
+   "save": "buildings_lumewood.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    3
+   ],
+   "anchor": "buildings_dawnharbor",
+   "note": "New (manifest exists). NOT parseable: fence at part 9 line 110 starts 'Town:', no 'Batch B4:'."
+  },
+  {
+   "id": "buildings_emberforge",
+   "prompts": "tera-dawn-chatgpt-art-prompts-9.md",
+   "batch": "B5",
+   "with": "B",
+   "refs": [
+    "hero_main.png",
+    "emberreach_area.png"
+   ],
+   "save": "buildings_emberforge.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    3
+   ],
+   "anchor": "buildings_dawnharbor",
+   "note": "New (manifest exists). NOT parseable: fence at part 9 line 122 starts 'Town:', no 'Batch B5:'."
+  },
+  {
+   "id": "buildings_lanternfall",
+   "prompts": "tera-dawn-chatgpt-art-prompts-9.md",
+   "batch": "B6",
+   "with": "B",
+   "refs": [
+    "hero_main.png",
+    "lanternfall_area.png"
+   ],
+   "save": "buildings_lanternfall.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    3
+   ],
+   "anchor": "buildings_dawnharbor",
+   "note": "New (manifest exists). NOT parseable: fence at part 9 line 134 starts 'Town:', no 'Batch B6:'."
+  },
+  {
+   "id": "buildings_driftcove",
+   "prompts": "tera-dawn-chatgpt-art-prompts-9.md",
+   "batch": "B7",
+   "with": "B",
+   "refs": [
+    "hero_main.png",
+    "driftcove_area.png"
+   ],
+   "save": "buildings_driftcove.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    3
+   ],
+   "anchor": "buildings_dawnharbor",
+   "note": "New (manifest exists). NOT parseable: fence at part 9 line 146 starts 'Town:', no 'Batch B7:'."
+  },
+  {
+   "id": "room_meadow",
+   "prompts": "tera-dawn-chatgpt-art-prompts-9.md",
+   "batch": "R1",
+   "with": "R",
+   "refs": [
+    "hero_main.png",
+    "buildings_meadow.png"
+   ],
+   "save": "room_meadow.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": "buildings_meadow",
+   "note": "New (manifest exists). NOT parseable: fence at part 9 line 183 starts 'R1. Room:', no 'Batch R1:'."
+  },
+  {
+   "id": "room_dawnharbor",
+   "prompts": "tera-dawn-chatgpt-art-prompts-9.md",
+   "batch": "R2",
+   "with": "R",
+   "refs": [
+    "hero_main.png",
+    "buildings_dawnharbor.png"
+   ],
+   "save": "room_dawnharbor.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": "buildings_dawnharbor",
+   "note": "New (manifest exists). NOT parseable: fence at part 9 line 186 starts 'R2. Room:', no 'Batch R2:'."
+  },
+  {
+   "id": "room_greenbough",
+   "prompts": "tera-dawn-chatgpt-art-prompts-9.md",
+   "batch": "R3",
+   "with": "R",
+   "refs": [
+    "hero_main.png",
+    "buildings_greenbough.png"
+   ],
+   "save": "room_greenbough.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": "buildings_greenbough",
+   "note": "New (manifest exists). NOT parseable: fence at part 9 line 189 starts 'R3. Room:', no 'Batch R3:'."
+  },
+  {
+   "id": "room_lumewood",
+   "prompts": "tera-dawn-chatgpt-art-prompts-9.md",
+   "batch": "R4",
+   "with": "R",
+   "refs": [
+    "hero_main.png",
+    "buildings_lumewood.png"
+   ],
+   "save": "room_lumewood.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": "buildings_lumewood",
+   "note": "New (manifest exists). NOT parseable: fence at part 9 line 192 starts 'R4. Room:', no 'Batch R4:'."
+  },
+  {
+   "id": "room_emberforge",
+   "prompts": "tera-dawn-chatgpt-art-prompts-9.md",
+   "batch": "R5",
+   "with": "R",
+   "refs": [
+    "hero_main.png",
+    "buildings_emberforge.png"
+   ],
+   "save": "room_emberforge.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": "buildings_emberforge",
+   "note": "New (manifest exists). NOT parseable: fence at part 9 line 195 starts 'R5. Room:', no 'Batch R5:'."
+  },
+  {
+   "id": "room_lanternfall",
+   "prompts": "tera-dawn-chatgpt-art-prompts-9.md",
+   "batch": "R6",
+   "with": "R",
+   "refs": [
+    "hero_main.png",
+    "buildings_lanternfall.png"
+   ],
+   "save": "room_lanternfall.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": "buildings_lanternfall",
+   "note": "New (manifest exists). NOT parseable: fence at part 9 line 198 starts 'R6. Room:', no 'Batch R6:'."
+  },
+  {
+   "id": "room_driftcove",
+   "prompts": "tera-dawn-chatgpt-art-prompts-9.md",
+   "batch": "R7",
+   "with": "R",
+   "refs": [
+    "hero_main.png",
+    "buildings_driftcove.png"
+   ],
+   "save": "room_driftcove.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": "buildings_driftcove",
+   "note": "New (manifest exists). NOT parseable: fence at part 9 line 201 starts 'R7. Room:', no 'Batch R7:'."
+  }
+ ]
+}
