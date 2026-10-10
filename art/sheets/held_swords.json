@@ -21,5 +21,49 @@
       "ravager_blade",
       "dawnbreaker_claymore"
     ]
-  ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      397,
+      792,
+      1190
+    ],
+    "cols": [
+      0,
+      589,
+      1183,
+      1774
+    ]
+  },
+  "inset": 12,
+  "overrides": {
+    "training_sword": {
+      "blank_top": 24
+    },
+    "bronze_sword": {
+      "blank_top": 24
+    },
+    "iron_broadsword": {
+      "blank_top": 24
+    },
+    "steel_bastard_sword": {
+      "blank_top": 25
+    },
+    "ember_cleaver": {
+      "blank_top": 22
+    },
+    "dawn_blade": {
+      "blank_top": 22
+    },
+    "cinder_greatsword": {
+      "blank_top": 26
+    },
+    "ravager_blade": {
+      "blank_top": 23
+    },
+    "dawnbreaker_claymore": {
+      "blank_top": 26
+    }
+  }
 }
