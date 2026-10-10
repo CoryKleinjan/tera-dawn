@@ -1,6 +1,6 @@
 {
   "source": "art/source/buildings_lanternfall.png",
-  "out_dir": "assets/sprites/buildings/lanternfall",
+  "out_dir": "art/build/buildings_lanternfall",
   "scale": 0.75,
   "label_band": 0.2,
   "cells": [
@@ -14,5 +14,20 @@
       "house_b",
       "landmark"
     ]
-  ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      595,
+      1190
+    ],
+    "cols": [
+      0,
+      591,
+      1183,
+      1774
+    ]
+  },
+  "inset": 6,
+  "keep": "largest"
 }

@@ -1,0 +1,127 @@
+{
+  "source": "art/source/platform_pieces_driftcove.png",
+  "out_dir": "art/build/platform_pieces_driftcove",
+  "scale": 0.3,
+  "label_band": 0.2,
+  "inset": 6,
+  "keep": "largest",
+  "grid": {
+    "rows": [
+      0,
+      604,
+      906,
+      1190
+    ],
+    "cols": [
+      [
+        0,
+        295,
+        592,
+        887,
+        1182,
+        1480,
+        1774
+      ],
+      [
+        0,
+        295,
+        592,
+        887,
+        1182,
+        1480,
+        1774
+      ],
+      [
+        0,
+        1774
+      ]
+    ]
+  },
+  "cells": [
+    [
+      "cap_left",
+      "middle_a",
+      "",
+      "middle_b",
+      "",
+      "cap_right"
+    ],
+    [
+      "under_left",
+      "under_middle_a",
+      "",
+      "under_middle_b",
+      "",
+      "under_right"
+    ],
+    [
+      ""
+    ]
+  ],
+  "overrides": {
+    "cap_left": {
+      "crop": [
+        0,
+        27,
+        283,
+        592
+      ]
+    },
+    "middle_a": {
+      "crop": [
+        0,
+        27,
+        285,
+        592
+      ]
+    },
+    "middle_b": {
+      "crop": [
+        0,
+        27,
+        283,
+        592
+      ]
+    },
+    "cap_right": {
+      "crop": [
+        0,
+        27,
+        282,
+        592
+      ]
+    },
+    "under_left": {
+      "crop": [
+        0,
+        18,
+        283,
+        290
+      ]
+    },
+    "under_middle_a": {
+      "crop": [
+        0,
+        18,
+        285,
+        290
+      ]
+    },
+    "under_middle_b": {
+      "crop": [
+        0,
+        32,
+        283,
+        290
+      ]
+    },
+    "under_right": {
+      "crop": [
+        0,
+        18,
+        282,
+        290
+      ]
+    }
+  }
+}

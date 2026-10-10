@@ -2,6 +2,11 @@
   "source": "art/source/ember_backgrounds.png",
   "scale": 0.5,
   "label_band": 0.3,
+  "inset": 4,
+  "key": [
+    0.6,
+    0.85
+  ],
   "out_dir": "assets/sprites/backgrounds/ember",
   "cells": [
     [
@@ -17,35 +22,114 @@
       "smoke"
     ],
     [
-      "motes"
-    ],
-    [
+      "motes",
       "moon"
     ]
   ],
+  "grid": {
+    "rows": [
+      0,
+      205,
+      410,
+      614,
+      822,
+      1030
+    ],
+    "cols": [
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        768,
+        1536
+      ]
+    ]
+  },
   "overrides": {
     "far_volcanoes": {
-      "extend_bottom": 160
+      "extend_bottom": 160,
+      "blank": [
+        [
+          0,
+          0,
+          300,
+          42
+        ]
+      ],
+      "scale": 0.466
     },
     "mid_crags": {
-      "extend_bottom": 160
+      "extend_bottom": 160,
+      "blank": [
+        [
+          0,
+          0,
+          300,
+          42
+        ]
+      ],
+      "scale": 0.3418
     },
     "near_ridge": {
-      "extend_bottom": 160
+      "extend_bottom": 160,
+      "blank": [
+        [
+          0,
+          0,
+          300,
+          42
+        ]
+      ],
+      "scale": 0.3656
     },
     "smoke": {
       "keep": "split",
-      "blank_top": 33
+      "blank": [
+        [
+          0,
+          0,
+          300,
+          42
+        ]
+      ],
+      "scale": 0.4162
     },
     "motes": {
-      "alpha": "soft"
+      "alpha": "soft",
+      "blank": [
+        [
+          0,
+          0,
+          300,
+          42
+        ]
+      ],
+      "scale": 0.6794
     },
     "moon": {
-      "alpha": "soft"
+      "fix": "sky_body",
+      "alpha": "soft",
+      "crop": [
+        302,
+        18,
+        465,
+        181
+      ],
+      "scale": 0.4268
     }
-  },
-  "key": [
-    0.6,
-    0.85
-  ]
+  }
 }

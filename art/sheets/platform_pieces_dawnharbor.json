@@ -1,0 +1,119 @@
+{
+  "source": "art/source/platform_pieces_dawnharbor.png",
+  "out_dir": "art/build/platform_pieces_dawnharbor",
+  "scale": 0.3,
+  "label_band": 0.2,
+  "inset": 6,
+  "keep": "largest",
+  "grid": {
+    "rows": [
+      0,
+      305,
+      600,
+      1190
+    ],
+    "cols": [
+      [
+        0,
+        295,
+        887,
+        1483,
+        1774
+      ],
+      [
+        0,
+        295,
+        887,
+        1483,
+        1774
+      ],
+      [
+        0,
+        1774
+      ]
+    ]
+  },
+  "cells": [
+    [
+      "cap_left",
+      "middle_a",
+      "middle_b",
+      "cap_right"
+    ],
+    [
+      "under_left",
+      "under_middle_a",
+      "under_middle_b",
+      "under_right"
+    ],
+    [
+      ""
+    ]
+  ],
+  "overrides": {
+    "cap_left": {
+      "crop": [
+        0,
+        26,
+        283,
+        293
+      ]
+    },
+    "middle_a": {
+      "crop": [
+        0,
+        26,
+        580,
+        293
+      ]
+    },
+    "middle_b": {
+      "crop": [
+        0,
+        26,
+        584,
+        293
+      ]
+    },
+    "cap_right": {
+      "crop": [
+        0,
+        26,
+        279,
+        293
+      ]
+    },
+    "under_left": {
+      "crop": [
+        0,
+        20,
+        283,
+        283
+      ]
+    },
+    "under_middle_a": {
+      "crop": [
+        0,
+        20,
+        580,
+        283
+      ]
+    },
+    "under_middle_b": {
+      "crop": [
+        0,
+        20,
+        584,
+        283
+      ]
+    },
+    "under_right": {
+      "crop": [
+        0,
+        20,
+        279,
+        283
+      ]
+    }
+  }
+}

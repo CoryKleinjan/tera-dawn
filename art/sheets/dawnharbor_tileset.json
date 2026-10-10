@@ -1,12 +1,6 @@
 {
-  "source": "art/source/dawnharbor_area.png",
-  "region": [
-    0,
-    43,
-    1034,
-    1024
-  ],
-  "scale": 0.35,
+  "source": "art/source/dawnharbor_tileset.png",
+  "scale": 0.279,
   "label_band": 0.2,
   "out_dir": "assets/sprites/tiles/dawnharbor",
   "cells": [
@@ -46,56 +40,232 @@
   "grid": {
     "rows": [
       0,
-      224,
-      457,
-      663,
-      981
+      257,
+      514,
+      772,
+      1030
     ],
     "cols": [
-      [
-        0,
-        153,
-        313,
-        475,
-        644,
-        810,
-        1034
-      ],
-      [
-        0,
-        153,
-        313,
-        515,
-        644,
-        842,
-        1034
-      ],
-      [
-        0,
-        176,
-        351,
-        487,
-        663,
-        852,
-        1034
-      ],
-      [
-        0,
-        137,
-        284,
-        442,
-        676,
-        854,
-        1034
-      ]
+      0,
+      252,
+      509,
+      767,
+      1025,
+      1283,
+      1536
     ]
   },
   "overrides": {
     "lantern_lit": {
-      "fix": "glow_backdrop"
+      "fix": "glow_backdrop",
+      "scale": 0.4038,
+      "crop": [
+        0,
+        26,
+        252,
+        252
+      ]
+    },
+    "ground_left": {
+      "scale": 0.2159,
+      "crop": [
+        0,
+        25,
+        246,
+        251
+      ]
+    },
+    "ground_middle": {
+      "scale": 0.2159,
+      "crop": [
+        0,
+        25,
+        251,
+        251
+      ]
+    },
+    "ground_right": {
+      "scale": 0.2159,
+      "crop": [
+        0,
+        25,
+        252,
+        251
+      ]
+    },
+    "platform_small": {
+      "scale": 0.2522,
+      "crop": [
+        0,
+        25,
+        252,
+        251
+      ]
+    },
+    "platform_medium": {
+      "scale": 0.2428,
+      "crop": [
+        0,
+        25,
+        252,
+        251
+      ]
+    },
+    "platform_large": {
+      "crop": [
+        0,
+        25,
+        247,
+        251
+      ]
+    },
+    "edge_grass": {
+      "crop": [
+        0,
+        26,
+        246,
+        251
+      ]
+    },
+    "tall_grass": {
+      "scale": 0.2548,
+      "crop": [
+        0,
+        26,
+        251,
+        251
+      ]
+    },
+    "tree_large": {
+      "crop": [
+        0,
+        26,
+        252,
+        251
+      ]
+    },
+    "tree_small": {
+      "crop": [
+        0,
+        26,
+        252,
+        251
+      ],
+      "scale": 0.2655
+    },
+    "bush_large": {
+      "scale": 0.2951,
+      "crop": [
+        0,
+        26,
+        252,
+        251
+      ]
+    },
+    "bush_small": {
+      "crop": [
+        0,
+        26,
+        247,
+        251
+      ]
+    },
+    "rock_large": {
+      "crop": [
+        0,
+        26,
+        246,
+        252
+      ]
+    },
+    "rock_small": {
+      "scale": 0.2468,
+      "crop": [
+        0,
+        26,
+        251,
+        252
+      ]
+    },
+    "stump": {
+      "scale": 0.363,
+      "crop": [
+        0,
+        26,
+        252,
+        252
+      ]
+    },
+    "flowers": {
+      "scale": 0.248,
+      "crop": [
+        0,
+        26,
+        252,
+        252
+      ]
     },
     "signature_plant": {
-      "blank_top": 50
+      "crop": [
+        0,
+        26,
+        252,
+        252
+      ],
+      "scale": 0.2679
+    },
+    "fence": {
+      "crop": [
+        0,
+        26,
+        247,
+        252
+      ]
+    },
+    "signpost": {
+      "scale": 0.302,
+      "crop": [
+        0,
+        26,
+        246,
+        252
+      ]
+    },
+    "lantern_unlit": {
+      "scale": 0.4038,
+      "crop": [
+        0,
+        26,
+        251,
+        252
+      ]
+    },
+    "building_large": {
+      "scale": 0.3982,
+      "crop": [
+        0,
+        26,
+        252,
+        252
+      ]
+    },
+    "building_small": {
+      "scale": 0.3674,
+      "crop": [
+        0,
+        26,
+        252,
+        252
+      ]
+    },
+    "signature_prop": {
+      "scale": 0.305,
+      "crop": [
+        0,
+        26,
+        247,
+        252
+      ]
     }
   }
 }

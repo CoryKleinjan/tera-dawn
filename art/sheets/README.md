@@ -81,9 +81,8 @@ has its own list in `art/sheets/paperdoll_body.json`.
 
 ## Picks between versions
 
-Two sheets came in two versions. The game uses `meadow_backgrounds_a` (crisper, clearer
-castle) and `ropes_props_b` (no label remnants, cleaner shards). The other versions still have
-manifests that cut into `art/build/`, which is ignored, so they can be compared or swapped in.
+`meadow_backgrounds` and `ropes_props` each came in two versions once; the repainted sheets
+replaced both, so only `meadow_backgrounds_a` and `ropes_props_b` are left.
 
 ## Item icons and window art
 
@@ -105,9 +104,19 @@ brighten `item_slot` on hover instead.
   `sproutcap_extra` is unused.
 - **NPC sheets** (`npcs_<town>`) use a fixed `grid`; each NPC's `scale` override sets its
   height next to the hero, and its set writes `assets/animations/npc_<id>.tres` (idle).
-- **Area sheets** (`<area>_area`) are cut twice: `<area>_tileset` into
-  `assets/sprites/tiles/<area>/` and `<area>_backgrounds` into `backgrounds/<area>/`. The
-  painted skies use the `painted_sky` and `sky_body` fixes; glowing icons use `glow_backdrop`.
+- **Area sheets**: each area has `<area>_tileset.png`, cut by `<area>_tileset` into
+  `assets/sprites/tiles/<area>/` and by `<area>_buildings` into `buildings/<area>/`, and
+  `<area>_backgrounds.png`, cut by `<area>_backgrounds` into `backgrounds/<area>/`. Sheets that
+  came back on a darker magenta, with soft pink glows or with the sky painted behind a strip
+  were evened out first by `tools/art/clean_sheet.py` (it edits the source in place, so run it
+  on the original picture). The sun or moon uses `sky_body`; glowing icons use `glow_backdrop`.
+- **Rooms** (`room_<town>`) cut over the stand-ins from `tools/art/make_room_placeholders.py`;
+  a cell the sheet has no painting for (crate, plant, floor_soil, some floors) keeps its stand-in.
+  The back wall repeats sideways: its crop's last columns were cross-faded in the source toward
+  the columns just left of the crop. Floor cells stacked in one column have their own manifest
+  (`room_<town>_floor`, with a `region`).
+- **Not in the game yet**: `platform_pieces_<area>`, `climb_tops`, `dawnharbor_midground` and
+  `buildings_<town>` cut into `art/build/` only.
 - **Items, pets, projectiles** cut into `assets/sprites/items/`, `pets/` (and
   `assets/animations/pet_*.tres`) and `projectiles/`.
 - **The paperdoll**: `paperdoll_body` cuts the bare hero into the hero strip (`pad_top` leaves

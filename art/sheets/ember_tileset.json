@@ -1,7 +1,7 @@
 {
   "source": "art/source/ember_tileset.png",
-  "scale": 0.35,
-  "label_band": 0.16,
+  "scale": 0.422,
+  "label_band": 0.2,
   "out_dir": "assets/sprites/tiles/ember",
   "cells": [
     [
@@ -9,26 +9,32 @@
       "ground_left",
       "ground_right",
       "corner_small",
-      "platform_small",
-      "platform_medium"
+      "corner_slope"
     ],
     [
+      "platform_small",
+      "platform_medium",
       "platform_large",
       "slope_up",
-      "slope_down",
+      "slope_down"
+    ],
+    [
+      "arch",
       "tall_ledge",
+      "ledge_overhang",
       "ledge_roots",
       "floating_rock"
     ],
     [
       "bush_small",
       "bush_large",
+      "bush_wide",
       "tree_small",
       "tree_large",
-      "stump",
-      "rock_small"
+      "stump"
     ],
     [
+      "rock_small",
       "rock_large",
       "crystals",
       "steam_vent",
@@ -38,8 +44,335 @@
     ]
   ],
   "overrides": {
+    "corner_slope": {
+      "save": false,
+      "crop": [
+        0,
+        32,
+        281,
+        211
+      ],
+      "scale": 0.35
+    },
+    "arch": {
+      "save": false,
+      "crop": [
+        0,
+        27,
+        432,
+        230
+      ],
+      "scale": 0.35
+    },
+    "ledge_overhang": {
+      "save": false,
+      "crop": [
+        0,
+        27,
+        286,
+        230
+      ],
+      "scale": 0.35
+    },
+    "bush_wide": {
+      "save": false,
+      "crop": [
+        0,
+        28,
+        303,
+        194
+      ],
+      "scale": 0.35
+    },
+    "ground_middle": {
+      "crop": [
+        0,
+        32,
+        383,
+        211
+      ]
+    },
+    "ground_left": {
+      "crop": [
+        0,
+        32,
+        286,
+        211
+      ]
+    },
+    "ground_right": {
+      "crop": [
+        0,
+        32,
+        289,
+        211
+      ]
+    },
+    "corner_small": {
+      "crop": [
+        0,
+        32,
+        267,
+        211
+      ],
+      "scale": 0.3536
+    },
+    "platform_small": {
+      "crop": [
+        0,
+        28,
+        221,
+        189
+      ],
+      "scale": 0.348
+    },
+    "platform_medium": {
+      "crop": [
+        0,
+        28,
+        291,
+        189
+      ],
+      "scale": 0.3293
+    },
+    "platform_large": {
+      "crop": [
+        0,
+        28,
+        422,
+        189
+      ],
+      "scale": 0.3531
+    },
+    "slope_up": {
+      "crop": [
+        0,
+        28,
+        289,
+        189
+      ],
+      "scale": 0.3663
+    },
+    "slope_down": {
+      "crop": [
+        0,
+        28,
+        283,
+        189
+      ],
+      "scale": 0.3695
+    },
+    "tall_ledge": {
+      "crop": [
+        0,
+        27,
+        224,
+        230
+      ],
+      "scale": 0.3493
+    },
+    "ledge_roots": {
+      "crop": [
+        0,
+        27,
+        303,
+        230
+      ],
+      "scale": 0.3252
+    },
+    "floating_rock": {
+      "crop": [
+        0,
+        27,
+        261,
+        230
+      ],
+      "scale": 0.3578
+    },
+    "bush_small": {
+      "crop": [
+        0,
+        49,
+        188,
+        194
+      ],
+      "scale": 0.5072
+    },
+    "bush_large": {
+      "crop": [
+        0,
+        49,
+        238,
+        194
+      ],
+      "scale": 0.5051
+    },
+    "tree_small": {
+      "crop": [
+        0,
+        49,
+        214,
+        194
+      ],
+      "scale": 0.4572
+    },
+    "tree_large": {
+      "blank": [
+        [
+          0,
+          0,
+          154,
+          33
+        ],
+        [
+          0,
+          33,
+          95,
+          58
+        ],
+        [
+          0,
+          58,
+          80,
+          76
+        ]
+      ],
+      "scale": 0.3854
+    },
+    "stump": {
+      "crop": [
+        0,
+        28,
+        234,
+        194
+      ]
+    },
+    "rock_small": {
+      "crop": [
+        0,
+        48,
+        155,
+        176
+      ],
+      "scale": 0.7544
+    },
+    "rock_large": {
+      "crop": [
+        0,
+        48,
+        186,
+        176
+      ],
+      "scale": 0.5719
+    },
+    "crystals": {
+      "fix": "glow_backdrop",
+      "scale": 0.589,
+      "blank": [
+        [
+          0,
+          0,
+          180,
+          30
+        ],
+        [
+          0,
+          30,
+          90,
+          50
+        ]
+      ]
+    },
     "steam_vent": {
-      "blank_top": 30
+      "crop": [
+        0,
+        27,
+        272,
+        176
+      ],
+      "scale": 0.4778
+    },
+    "fence": {
+      "crop": [
+        0,
+        27,
+        338,
+        176
+      ],
+      "scale": 0.3654
+    },
+    "fire_lilies": {
+      "crop": [
+        0,
+        27,
+        181,
+        176
+      ],
+      "scale": 0.4705
+    },
+    "tall_grass": {
+      "crop": [
+        0,
+        48,
+        169,
+        176
+      ],
+      "scale": 0.487
     }
+  },
+  "grid": {
+    "rows": [
+      0,
+      217,
+      412,
+      648,
+      848,
+      1030
+    ],
+    "cols": [
+      [
+        0,
+        389,
+        681,
+        976,
+        1249,
+        1536
+      ],
+      [
+        0,
+        227,
+        524,
+        952,
+        1247,
+        1536
+      ],
+      [
+        0,
+        438,
+        668,
+        960,
+        1269,
+        1536
+      ],
+      [
+        0,
+        194,
+        438,
+        747,
+        967,
+        1296,
+        1536
+      ],
+      [
+        0,
+        161,
+        353,
+        552,
+        830,
+        1174,
+        1361,
+        1536
+      ]
+    ]
   }
 }

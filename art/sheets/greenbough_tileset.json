@@ -1,12 +1,6 @@
 {
-  "source": "art/source/greenbough_area.png",
-  "region": [
-    0,
-    0,
-    995,
-    1024
-  ],
-  "scale": 0.35,
+  "source": "art/source/greenbough_tileset.png",
+  "scale": 0.26,
   "label_band": 0.2,
   "out_dir": "assets/sprites/tiles/greenbough",
   "cells": [
@@ -46,56 +40,266 @@
   "grid": {
     "rows": [
       0,
-      244,
-      505,
-      719,
-      1022
+      224,
+      463,
+      708,
+      1030
     ],
     "cols": [
       [
         0,
-        164,
-        323,
-        495,
-        641,
-        804,
-        992
+        231,
+        466,
+        701,
+        968,
+        1255,
+        1536
       ],
       [
         0,
-        164,
-        323,
-        495,
-        641,
-        804,
-        992
+        232,
+        467,
+        742,
+        990,
+        1255,
+        1536
       ],
       [
         0,
-        164,
-        323,
-        495,
-        641,
-        804,
-        992
-      ],
-      [
-        0,
-        164,
-        323,
+        232,
         468,
-        677,
-        836,
-        992
+        734,
+        1010,
+        1280,
+        1536
+      ],
+      [
+        0,
+        232,
+        481,
+        729,
+        1018,
+        1286,
+        1536
       ]
     ]
   },
   "overrides": {
     "lantern_lit": {
-      "fix": null,
+      "fix": "glow_backdrop",
       "key": [
         0.15,
         0.4
+      ],
+      "crop": [
+        0,
+        35,
+        242,
+        286
+      ],
+      "scale": 0.2695
+    },
+    "ground_left": {
+      "scale": 0.35,
+      "crop": [
+        0,
+        27,
+        225,
+        218
+      ]
+    },
+    "ground_middle": {
+      "scale": 0.35,
+      "crop": [
+        0,
+        27,
+        229,
+        218
+      ]
+    },
+    "ground_right": {
+      "scale": 0.35,
+      "crop": [
+        0,
+        27,
+        229,
+        218
+      ]
+    },
+    "platform_small": {
+      "scale": 0.1621,
+      "crop": [
+        0,
+        27,
+        261,
+        218
+      ]
+    },
+    "platform_medium": {
+      "scale": 0.2383,
+      "crop": [
+        0,
+        27,
+        281,
+        218
+      ]
+    },
+    "platform_large": {
+      "crop": [
+        0,
+        27,
+        275,
+        218
+      ]
+    },
+    "edge_grass": {
+      "scale": 0.2293,
+      "crop": [
+        0,
+        29,
+        226,
+        233
+      ]
+    },
+    "tall_grass": {
+      "crop": [
+        0,
+        29,
+        229,
+        233
+      ]
+    },
+    "tree_large": {
+      "scale": 0.2816,
+      "crop": [
+        0,
+        29,
+        269,
+        233
+      ]
+    },
+    "tree_small": {
+      "scale": 0.2966,
+      "crop": [
+        0,
+        29,
+        242,
+        233
+      ]
+    },
+    "bush_large": {
+      "scale": 0.2165,
+      "crop": [
+        0,
+        29,
+        259,
+        233
+      ]
+    },
+    "bush_small": {
+      "scale": 0.2196,
+      "crop": [
+        0,
+        29,
+        275,
+        233
+      ]
+    },
+    "rock_large": {
+      "scale": 0.2384,
+      "crop": [
+        0,
+        26,
+        226,
+        239
+      ]
+    },
+    "rock_small": {
+      "scale": 0.222,
+      "crop": [
+        0,
+        26,
+        230,
+        239
+      ]
+    },
+    "stump": {
+      "scale": 0.2291,
+      "crop": [
+        0,
+        26,
+        260,
+        239
+      ]
+    },
+    "flowers": {
+      "scale": 0.235,
+      "crop": [
+        0,
+        26,
+        270,
+        239
+      ]
+    },
+    "signature_plant": {
+      "crop": [
+        0,
+        26,
+        264,
+        239
+      ],
+      "fix": "glow_backdrop"
+    },
+    "fence": {
+      "crop": [
+        0,
+        26,
+        250,
+        239
+      ],
+      "scale": 0.2686
+    },
+    "signpost": {
+      "crop": [
+        0,
+        36,
+        226,
+        286
+      ]
+    },
+    "lantern_unlit": {
+      "crop": [
+        0,
+        35,
+        243,
+        286
+      ],
+      "scale": 0.2695
+    },
+    "building_large": {
+      "scale": 0.302,
+      "crop": [
+        0,
+        36,
+        283,
+        286
+      ]
+    },
+    "building_small": {
+      "scale": 0.2379,
+      "crop": [
+        0,
+        35,
+        262,
+        286
+      ]
+    },
+    "signature_prop": {
+      "crop": [
+        0,
+        35,
+        244,
+        286
       ]
     }
   }
