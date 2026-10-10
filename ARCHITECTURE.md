@@ -338,7 +338,7 @@ so depth of field never blurs it and nothing in the world covers it.
 4. Connect it: add a **PortalDef** on an existing map whose `target_map` is the new id, and a
    portal back.
 5. Place it in the world: its `region` (a **RegionDef** in `data/regions/`), `world_pos` on
-   the world map (1000 x 600 units), `level_text`, and either `town = true` or the
+   the world map (pixels of the painting, `TDWorldMapWindow.WORLD`), `level_text`, and either `town = true` or the
    `return_map` where fainting and Return Scrolls send you.
 
 An NpcDef with `storage = true` keeps the player's storage (`Character.storage`, an

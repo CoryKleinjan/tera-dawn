@@ -92,8 +92,8 @@ func _draw_body() -> void:
 		draw_label(r.position + Vector2(46, 16), stack.display_name() + (" ×%d" % n if n > 1 else ""), Palette.MIST, 13)
 		DrawUtil.text(self, Game.num_font, r.position + Vector2(46, 32), "%d Dawnshards" % _price(i), 12, Palette.SUN, 1, 3, Palette.NIGHT)
 	var w := (size.x - PAD * 2 - 8) / 2.0
-	var left := Rect2(PAD, size.y - 44, w, 32)
-	var right := Rect2(left.end.x + 8, left.position.y, w, 32)
+	var left := bottom_button_rect(PAD, w)
+	var right := Rect2(left.end.x + 8, left.position.y, w, BOTTOM_BUTTON_H)
 	match mode:
 		Mode.SETUP:
 			add_button(left, "Name", _rename)

@@ -3,13 +3,16 @@ extends TDWindow
 ## The world map (W): the painted map (assets/sprites/ui/world_map.png) with every region's
 ## name, every map as a dot (towns bigger, with a gold ring), travel routes as dashed lines,
 ## and where you are. Hover a dot to read the map's name, region and level range. Positions
-## come from MapDef.world_pos and RegionDef.label_pos, in world-map units (1000 x 600), which
-## cover the whole painting: a map's world_pos is where it is drawn on the painting.
+## come from MapDef.world_pos and RegionDef.label_pos, in world-map units: the painting's own
+## pixels (WORLD), so a map's world_pos is the spot it is drawn at on the painting. A new
+## painting means placing every dot and region name on it again.
 
-const WORLD := Vector2(1000, 600)
+## The painting's size in pixels: the world-map units.
+const WORLD := Vector2(955, 629)
 const NODE_PICK := 12.0
-## How big the painting is drawn: 1000 x 600 world units at this many pixels each.
-const MAP_SCALE := 0.66
+## How big the painting is drawn: screen pixels per world-map unit (the same both ways, so
+## the painting keeps its shape).
+const MAP_SCALE := 0.63
 ## The strip under the painting for the hovered map, and how far its text sits in from the frame.
 const INFO_H := 58.0
 const INFO_X := PAD + 10

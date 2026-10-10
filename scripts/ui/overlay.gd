@@ -8,8 +8,10 @@ extends Control
 ## The game menu's cog in the top left corner (a button TDHud puts there); the map name sits right of it.
 const MENU_BUTTON := Rect2(8, 6, 34, 34)
 ## The minimap's top left; it's drawn at its frame art's own size (see minimap_rect).
-## Inside hud/minimap_frame, in texels: where the map is drawn.
-const MINIMAP_INNER := Rect2(10, 36, 158, 52)
+## Inside hud/minimap_frame, in texels: where the map is drawn. The frame's dark window runs
+## from x 12 to 170 and y 24 to 88; the map keeps clear of its side posts, of the sun
+## medallion hanging into its top (down to y 36) and of the stitching along its bottom.
+const MINIMAP_INNER := Rect2(14, 38, 154, 47)
 ## Minimap marks: texture, and its height in pixels.
 const MINIMAP_PLAYER := ["hud/minimap_dot_1", 9.0]
 const MINIMAP_NPC := ["hud/minimap_dot_2", 6.0]

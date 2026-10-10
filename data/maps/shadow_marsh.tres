@@ -353,6 +353,6 @@ portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_27"), SubRes
 spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_29"), SubResource("Resource_30"), SubResource("Resource_31"), SubResource("Resource_32"), SubResource("Resource_33"), SubResource("Resource_34"), SubResource("Resource_35"), SubResource("Resource_36"), SubResource("Resource_37"), SubResource("Resource_38"), SubResource("Resource_39"), SubResource("Resource_40"), SubResource("Resource_41"), SubResource("Resource_42"), SubResource("Resource_43")])
 props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_44"), SubResource("Resource_45"), SubResource("Resource_46"), SubResource("Resource_47"), SubResource("Resource_48")])
 region = &"lanternfall"
-world_pos = Vector2(560.0, 409.0)
+world_pos = Vector2(522.0, 432.0)
 return_map = &"lanternfall"
 level_text = "Lv. 22-26"
