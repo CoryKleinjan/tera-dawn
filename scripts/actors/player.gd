@@ -277,8 +277,10 @@ func _interact() -> bool:
 		return false
 	if world.layout.portal_at(position):
 		_report()
+		# fade out before asking: a local server answers at once, and the next map's
+		# fade-in (TDWorld.enter_map) must come after this
+		world.stage.fade_to(1.0)
 		Net.ask(&"req_portal")
-		world.stage.fade_to(1.0)  # the next map fades back in (TDWorld.enter_map)
 		return true
 	var npc := world.npc_near(position)
 	if npc:
