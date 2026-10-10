@@ -120,11 +120,8 @@ class Colour(unittest.TestCase):
         rgb = np.array([[[0.9, 0.1, 0.1], [0.1, 0.8, 0.2], [0.2, 0.4, 0.9]]])
         self.assertTrue(np.allclose(ss.recolor_leather(rgb), rgb))
 
-    @unittest.expectedFailure
     def test_leather_recolour_leaves_deep_blues_alone(self):
-        # Known bug: the "purple" hue range starts at 0.62, which takes in pure and royal
-        # blue (hue 0.65 to 0.67), so an MP-bar blue turns brown although the docstring says
-        # blues are left alone. Remove expectedFailure once the range is fixed.
+        # pure and royal blue sit in the purple hue range, but have no more red than green
         rgb = np.array([[[0.0, 0.0, 1.0], [0.1, 0.2, 0.9]]])
         self.assertTrue(np.allclose(ss.recolor_leather(rgb), rgb))
 

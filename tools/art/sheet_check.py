@@ -30,12 +30,13 @@ import numpy as np
 from PIL import Image
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from slice_sheets import background_color, detect_grid, key_magenta  # noqa: E402
+from slice_sheets import background_color, detect_grid, dilate, key_magenta, label  # noqa: E402
 
 
 MAGENTA = np.array([255, 0, 255])
 LABEL_BAND = 0.16  # top of each cell where the white label sits
 FRAME_AREA_RANGE = (0.55, 1.8)  # allowed frame area relative to the sheet's median frame
+BACKGROUND_NEAR = 60  # colour distance (summed over R, G, B) that still counts as the background
 
 
 def load_rgb(path):
@@ -100,6 +101,37 @@ def palette_distance(pixels, pal):
     return float(np.mean(d))
 
 
+def is_pink(pixels):
+    """Bright pink-purple: what the magenta key cuts out."""
+    return (pixels[..., 0] > 200) & (pixels[..., 2] > 200) & (pixels[..., 1] < 80)
+
+
+def magenta_in_art(rgb, bg, boxes):
+    """(pink pixels in the art, art pixels) over every cell. The key cuts out every pink pixel,
+    so pink can't be told apart by its alpha. Pink-purple painted on the art is a different
+    shade from the background, though: count pink pixels that aren't the background's colour
+    (the sheet's, or the cell's own), leaving out the 2 px next to it where art edges blend
+    into it. Gaps in the art, like the space inside a bow, are the background's colour, so
+    they don't count; exact #FF00FF painted on the art can't be told from a gap either."""
+    pink_in_art = art = 0
+    for box in boxes:
+        mask, cell = sprite_mask(rgb, bg, box)
+        if not mask.any():
+            continue
+        # Gemini sometimes tints a cell's background, so the cell's own main colour counts too
+        background = (np.abs(cell - bg).sum(2) < BACKGROUND_NEAR) | \
+                     (np.abs(cell - background_color(cell)).sum(2) < BACKGROUND_NEAR)
+        pink = is_pink(cell) & ~dilate(background, 2)
+        # pink reaching the cell's edge is a neighbour's background where the sheet's grid
+        # drifts from even cells, not paint on the art
+        lab, _ = label(pink)
+        edge = np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))
+        pink &= ~np.isin(lab, edge[edge > 0])
+        pink_in_art += int(pink.sum())
+        art += int(mask.sum())
+    return pink_in_art, art
+
+
 def opaque_pixels(rgb, bg, boxes):
     out = []
     for box in boxes:
@@ -159,12 +191,13 @@ def check(path, cells=None, kind="still", anchor=None, must_have=None):
         add("frame sizes", "pass" if not odd else "fail",
             "all frames similar" if not odd else "frames %s are a different size" % ", ".join(map(str, odd)))
 
-    art = opaque_pixels(rgb, bg, boxes)
-    if len(art):
-        pink = (art[:, 0] > 200) & (art[:, 2] > 200) & (art[:, 1] < 80)
-        share = float(pink.mean())
+    pink, art_area = magenta_in_art(rgb, bg, boxes)
+    if art_area:
+        share = pink / art_area
         add("magenta in sprites", "pass" if share < 0.01 else ("warn" if share < 0.03 else "fail"),
-            "%.1f%% of art pixels are magenta" % (share * 100))
+            "%.1f%% of the art is magenta" % (share * 100))
+
+    art = opaque_pixels(rgb, bg, boxes)
 
     if anchor and len(art):
         a_rgb = load_rgb(anchor)

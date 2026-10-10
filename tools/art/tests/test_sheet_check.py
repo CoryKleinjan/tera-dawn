@@ -80,17 +80,26 @@ class Check(unittest.TestCase):
         result = statuses(sc.check(self._save(rgb), cells=[1, 4], kind="anim"))
         self.assertEqual(result["frame sizes"], "fail")
 
-    @unittest.expectedFailure
-    def test_magenta_left_in_the_art_fails(self):
-        # Known bug: the check counts pink pixels among those key_magenta keeps fully opaque
-        # (alpha > 0.99), but key_magenta makes every pixel with R and B over 200 and G under
-        # 80 at least 30% see-through, so the check can never find one and always passes.
-        # Remove expectedFailure once the check looks at the art before keying.
+    def test_magenta_painted_on_the_art_fails(self):
         rgb = helpers.sheet(1, 2, cell=80, sprite_size=30)
-        for x0 in (25, 105):
-            rgb[50:60, x0:x0 + 30] = (240, 40, 240)  # a magenta stripe inside each sprite
+        for x0 in (30, 110):
+            rgb[50:60, x0:x0 + 20] = (230, 50, 220)  # pink-purple paint inside each sprite
         result = statuses(sc.check(self._save(rgb), cells=[1, 2]))
-        self.assertIn(result["magenta in sprites"], ("warn", "fail"))
+        self.assertEqual(result["magenta in sprites"], "fail")
+
+    def test_gaps_in_the_art_dont_count_as_magenta(self):
+        rgb = helpers.sheet(1, 2, cell=80, sprite_size=30)
+        for x0 in (30, 110):
+            rgb[50:60, x0:x0 + 20] = helpers.MAGENTA  # a hole showing the background
+        result = statuses(sc.check(self._save(rgb), cells=[1, 2]))
+        self.assertEqual(result["magenta in sprites"], "pass")
+
+    def test_a_tinted_cell_background_doesnt_count_as_magenta(self):
+        rgb = helpers.sheet(1, 3, cell=80, sprite_size=30)
+        cell = rgb[2:78, 162:238]
+        cell[(cell == helpers.MAGENTA).all(2)] = (225, 40, 225)  # Gemini tinted this cell
+        result = statuses(sc.check(self._save(rgb), cells=[1, 3]))
+        self.assertEqual(result["magenta in sprites"], "pass")
 
     def test_must_have_finds_missing_and_extra_colour(self):
         rgb = helpers.sheet(1, 3)
