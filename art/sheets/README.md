@@ -97,12 +97,13 @@ brighten `item_slot` on hover instead.
 
 ## Monsters, NPCs, areas and the paperdoll (art prompts parts 1 to 3)
 
-- **Monster group sheets** (`mon_<area>`, `monsters_m1`) hold several monsters each. Every
-  monster has its own manifest named after its id, cutting its `region` of the group sheet
-  with `strip_labels` and writing `assets/sprites/monsters/<id>.png` and
-  `assets/animations/<id>.tres`. Labels drawn over big monsters are cleared with
-  `blank_label`. `anim_mossling` and `anim_sproutcap` are the picked Mossling and Sproutcap;
-  `sproutcap_extra` is unused.
+- **Monster sheets** (`mon_<id>.png`, `anim_<id>.png`, Gemini pass 1) hold one monster each.
+  Every monster has its own manifest named after its id, with a hand-measured `grid` (gap rows
+  and columns between cells are unnamed) and `strip_labels`, writing
+  `assets/sprites/monsters/<id>.png` and `assets/animations/<id>.tres`. Labels and divider
+  lines that touch the art are painted out with per-cell `blank` rects; `scale` keeps each
+  monster's idle height what it was before the swap. `anim_mossling` is still the older
+  sheet; `sproutcap_extra` is cut into `art/build/` only (unused).
 - **NPC sheets** (`npcs_<town>`) use a fixed `grid`; each NPC's `scale` override sets its
   height next to the hero, and its set writes `assets/animations/npc_<id>.tres` (idle).
 - **Area sheets** (`<area>_area`) are cut twice: `<area>_tileset` into

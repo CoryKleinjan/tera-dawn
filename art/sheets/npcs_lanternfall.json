@@ -1,19 +1,5 @@
 {
   "source": "art/source/npcs_lanternfall.png",
-  "grid": {
-    "rows": [
-      1,
-      511,
-      1022
-    ],
-    "cols": [
-      1,
-      383,
-      768,
-      1151,
-      1534
-    ]
-  },
   "label_band": 0.2,
   "strip_labels": true,
   "save": false,
@@ -21,41 +7,50 @@
   "cells": [
     [
       "lanternfall_instructor_1",
+      "",
       "lanternfall_shop_1",
+      "",
       "lanternfall_store_1",
+      "",
       "lanternfall_taxi_1"
     ],
     [
+      ""
+    ],
+    [
       "lanternfall_instructor_2",
+      "",
       "lanternfall_shop_2",
+      "",
       "lanternfall_store_2",
+      "",
       "lanternfall_taxi_2"
     ]
   ],
   "overrides": {
     "lanternfall_instructor_1": {
-      "scale": 0.205
+      "scale": 0.1775
     },
     "lanternfall_instructor_2": {
-      "scale": 0.205
+      "scale": 0.1775
     },
     "lanternfall_shop_1": {
-      "scale": 0.205
+      "scale": 0.1805
     },
     "lanternfall_shop_2": {
-      "scale": 0.205
+      "scale": 0.1805
     },
     "lanternfall_store_1": {
-      "scale": 0.205
+      "scale": 0.1837
     },
     "lanternfall_store_2": {
-      "scale": 0.205
+      "scale": 0.1837
     },
     "lanternfall_taxi_1": {
-      "scale": 0.205
+      "scale": 0.1825
     },
     "lanternfall_taxi_2": {
-      "scale": 0.205
+      "scale": 0.1825
     }
   },
   "sets": {
@@ -135,5 +130,40 @@
         }
       }
     }
-  }
+  },
+  "grid": {
+    "rows": [
+      5,
+      505,
+      517,
+      1026
+    ],
+    "cols": [
+      [
+        5,
+        342,
+        397,
+        701,
+        788,
+        1121,
+        1174,
+        1501
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        5,
+        319,
+        396,
+        710,
+        782,
+        1120,
+        1167,
+        1503
+      ]
+    ]
+  },
+  "inset": 2
 }

@@ -1,19 +1,5 @@
 {
   "source": "art/source/npcs_greenbough.png",
-  "grid": {
-    "rows": [
-      1,
-      511,
-      1022
-    ],
-    "cols": [
-      1,
-      383,
-      768,
-      1151,
-      1534
-    ]
-  },
   "label_band": 0.2,
   "strip_labels": true,
   "save": false,
@@ -21,41 +7,162 @@
   "cells": [
     [
       "greenbough_instructor_1",
+      "",
       "greenbough_shop_1",
+      "",
       "greenbough_store_1",
+      "",
       "greenbough_taxi_1"
     ],
     [
+      ""
+    ],
+    [
       "greenbough_instructor_2",
+      "",
       "greenbough_shop_2",
+      "",
       "greenbough_store_2",
+      "",
       "greenbough_taxi_2"
     ]
   ],
   "overrides": {
     "greenbough_instructor_1": {
-      "scale": 0.205
+      "scale": 0.1807,
+      "blank": [
+        [
+          0,
+          8,
+          223,
+          39
+        ],
+        [
+          46,
+          39,
+          155,
+          70
+        ]
+      ]
     },
     "greenbough_instructor_2": {
-      "scale": 0.205
+      "scale": 0.1807,
+      "blank": [
+        [
+          0,
+          0,
+          226,
+          29
+        ],
+        [
+          46,
+          27,
+          156,
+          61
+        ]
+      ]
     },
     "greenbough_shop_1": {
-      "scale": 0.205
+      "scale": 0.1783,
+      "blank": [
+        [
+          11,
+          8,
+          290,
+          39
+        ],
+        [
+          64,
+          39,
+          172,
+          70
+        ]
+      ]
     },
     "greenbough_shop_2": {
-      "scale": 0.205
+      "scale": 0.1783,
+      "blank": [
+        [
+          11,
+          0,
+          290,
+          29
+        ],
+        [
+          64,
+          27,
+          173,
+          61
+        ]
+      ]
     },
     "greenbough_store_1": {
-      "scale": 0.205
+      "scale": 0.1769,
+      "blank": [
+        [
+          0,
+          8,
+          137,
+          39
+        ],
+        [
+          46,
+          39,
+          274,
+          70
+        ]
+      ]
     },
     "greenbough_store_2": {
-      "scale": 0.205
+      "scale": 0.1769,
+      "blank": [
+        [
+          0,
+          0,
+          136,
+          29
+        ],
+        [
+          44,
+          27,
+          154,
+          61
+        ]
+      ]
     },
     "greenbough_taxi_1": {
-      "scale": 0.205
+      "scale": 0.1662,
+      "blank": [
+        [
+          0,
+          8,
+          286,
+          39
+        ],
+        [
+          44,
+          39,
+          152,
+          70
+        ]
+      ]
     },
     "greenbough_taxi_2": {
-      "scale": 0.205
+      "scale": 0.1662,
+      "blank": [
+        [
+          11,
+          0,
+          309,
+          29
+        ],
+        [
+          66,
+          27,
+          175,
+          61
+        ]
+      ]
     }
   },
   "sets": {
@@ -135,5 +242,40 @@
         }
       }
     }
-  }
+  },
+  "grid": {
+    "rows": [
+      2,
+      505,
+      526,
+      1028
+    ],
+    "cols": [
+      [
+        20,
+        319,
+        384,
+        730,
+        789,
+        1094,
+        1177,
+        1502
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        19,
+        306,
+        384,
+        767,
+        790,
+        1095,
+        1155,
+        1515
+      ]
+    ]
+  },
+  "inset": 2
 }

@@ -1,26 +1,5 @@
 {
-  "source": "art/source/mon_dawnrise.png",
-  "region": [
-    0,
-    0,
-    764,
-    322
-  ],
-  "grid": {
-    "rows": [
-      37,
-      174,
-      322
-    ],
-    "cols": [
-      0,
-      193,
-      384,
-      575,
-      764
-    ]
-  },
-  "scale": 0.425,
+  "source": "art/source/mon_tide_dewling.png",
   "label_band": 0.2,
   "strip_labels": true,
   "save": false,
@@ -28,14 +7,23 @@
   "cells": [
     [
       "idle1",
+      "",
       "idle2",
+      "",
       "hop1",
+      "",
       "hop2"
     ],
     [
+      ""
+    ],
+    [
       "hop3",
+      "",
       "attack",
+      "",
       "hurt",
+      "",
       "defeated"
     ]
   ],
@@ -93,5 +81,41 @@
         }
       }
     }
-  }
+  },
+  "grid": {
+    "rows": [
+      0,
+      439,
+      520,
+      948
+    ],
+    "cols": [
+      [
+        88,
+        283,
+        475,
+        764,
+        862,
+        1061,
+        1258,
+        1442
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        83,
+        288,
+        469,
+        764,
+        804,
+        1092,
+        1223,
+        1531
+      ]
+    ]
+  },
+  "inset": 2,
+  "scale": 0.1074
 }

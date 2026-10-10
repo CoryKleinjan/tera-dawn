@@ -1,26 +1,5 @@
 {
-  "source": "art/source/mon_emberreach.png",
-  "region": [
-    772,
-    472,
-    1536,
-    705
-  ],
-  "grid": {
-    "rows": [
-      26,
-      128,
-      233
-    ],
-    "cols": [
-      0,
-      192,
-      383,
-      573,
-      764
-    ]
-  },
-  "scale": 0.576,
+  "source": "art/source/mon_magma_shell.png",
   "label_band": 0.2,
   "strip_labels": true,
   "save": false,
@@ -28,14 +7,23 @@
   "cells": [
     [
       "idle1",
+      "",
       "idle2",
+      "",
       "walk1",
+      "",
       "walk2"
     ],
     [
+      ""
+    ],
+    [
       "walk3",
+      "",
       "attack",
+      "",
       "hurt",
+      "",
       "defeated"
     ]
   ],
@@ -94,5 +82,41 @@
         }
       }
     }
-  }
+  },
+  "grid": {
+    "rows": [
+      4,
+      442,
+      524,
+      958
+    ],
+    "cols": [
+      [
+        0,
+        340,
+        392,
+        727,
+        782,
+        1115,
+        1162,
+        1505
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        348,
+        391,
+        756,
+        780,
+        1137,
+        1162,
+        1524
+      ]
+    ]
+  },
+  "inset": 2,
+  "scale": 0.1627
 }

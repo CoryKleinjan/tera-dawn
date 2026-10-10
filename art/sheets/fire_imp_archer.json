@@ -1,26 +1,5 @@
 {
-  "source": "art/source/mon_emberreach.png",
-  "region": [
-    0,
-    472,
-    764,
-    705
-  ],
-  "grid": {
-    "rows": [
-      26,
-      138,
-      233
-    ],
-    "cols": [
-      0,
-      192,
-      384,
-      575,
-      764
-    ]
-  },
-  "scale": 0.637,
+  "source": "art/source/mon_fire_imp_archer.png",
   "label_band": 0.2,
   "strip_labels": true,
   "save": false,
@@ -28,14 +7,23 @@
   "cells": [
     [
       "idle1",
+      "",
       "idle2",
+      "",
       "walk1",
+      "",
       "walk2"
     ],
     [
+      ""
+    ],
+    [
       "walk3",
+      "",
       "attack",
+      "",
       "hurt",
+      "",
       "defeated"
     ]
   ],
@@ -94,5 +82,41 @@
         }
       }
     }
-  }
+  },
+  "grid": {
+    "rows": [
+      0,
+      512,
+      519,
+      1030
+    ],
+    "cols": [
+      [
+        12,
+        325,
+        398,
+        710,
+        784,
+        1096,
+        1162,
+        1487
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        5,
+        326,
+        396,
+        715,
+        787,
+        1108,
+        1163,
+        1526
+      ]
+    ]
+  },
+  "inset": 2,
+  "scale": 0.1864
 }

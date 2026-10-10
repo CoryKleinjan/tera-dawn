@@ -5,43 +5,89 @@
   "cells": [
     [
       "mossling",
+      "",
       "petal_bat",
+      "",
       "cinder_imp",
+      "",
       "ashshell"
     ],
     [
+      ""
+    ],
+    [
       "boulderkin",
+      "",
       "flame_boar_chief",
+      "",
       "village_elder",
+      "",
       "shopkeeper"
     ]
   ],
   "overrides": {
     "mossling": {
-      "scale": 0.19
+      "scale": 0.1884
     },
     "petal_bat": {
-      "scale": 0.17
+      "scale": 0.1482
     },
     "cinder_imp": {
-      "scale": 0.2
+      "scale": 0.2052
     },
     "ashshell": {
-      "scale": 0.21
+      "scale": 0.1734
     },
     "boulderkin": {
-      "scale": 0.27
+      "scale": 0.2727
     },
     "flame_boar_chief": {
-      "scale": 0.31
+      "scale": 0.3347
     },
     "village_elder": {
-      "scale": 0.24,
+      "scale": 0.2219,
       "out_dir": "assets/sprites/npcs"
     },
     "shopkeeper": {
-      "scale": 0.21,
+      "scale": 0.2177,
       "out_dir": "assets/sprites/npcs"
     }
-  }
+  },
+  "grid": {
+    "rows": [
+      0,
+      512,
+      518,
+      1030
+    ],
+    "cols": [
+      [
+        0,
+        293,
+        394,
+        746,
+        780,
+        1056,
+        1166,
+        1510
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        366,
+        394,
+        752,
+        780,
+        1097,
+        1166,
+        1464
+      ]
+    ]
+  },
+  "inset": 2,
+  "strip_labels": true,
+  "save": true
 }

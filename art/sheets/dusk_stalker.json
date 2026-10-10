@@ -1,26 +1,5 @@
 {
-  "source": "art/source/mon_ring_road.png",
-  "region": [
-    772,
-    688,
-    1536,
-    1024
-  ],
-  "grid": {
-    "rows": [
-      31,
-      161,
-      336
-    ],
-    "cols": [
-      0,
-      192,
-      381,
-      572,
-      764
-    ]
-  },
-  "scale": 0.531,
+  "source": "art/source/mon_dusk_stalker.png",
   "label_band": 0.2,
   "strip_labels": true,
   "save": false,
@@ -28,14 +7,23 @@
   "cells": [
     [
       "idle1",
+      "",
       "idle2",
+      "",
       "walk1",
+      "",
       "walk2"
     ],
     [
+      ""
+    ],
+    [
       "walk3",
+      "",
       "attack",
+      "",
       "hurt",
+      "",
       "defeated"
     ]
   ],
@@ -94,5 +82,41 @@
         }
       }
     }
-  }
+  },
+  "grid": {
+    "rows": [
+      6,
+      453,
+      527,
+      941
+    ],
+    "cols": [
+      [
+        2,
+        349,
+        394,
+        731,
+        786,
+        1123,
+        1160,
+        1513
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        347,
+        394,
+        746,
+        784,
+        1122,
+        1167,
+        1515
+      ]
+    ]
+  },
+  "inset": 2,
+  "scale": 0.2662
 }
