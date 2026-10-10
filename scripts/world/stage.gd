@@ -3,7 +3,7 @@ extends Node3D
 ## The HD-2D view of the map: pixel-art sprites standing in a lit 3D diorama.
 ## Gameplay stays 2D (game pixels, y down); this node owns the camera, sky, light and
 ## post effects, and asks the builders to turn the map into 3D:
-##   TerrainBuilder  the floor and platform blocks and their painted fronts
+##   TerrainBuilder  the floor block and the platforms' painted front skins
 ##   BackdropBuilder the parallax mountains, trees, clouds and sun
 ##   SceneryBuilder  props, climbables, portals, lanterns and signs
 ## One 3D unit is PX game pixels. Static helpers here make sprites and lights for everyone.
@@ -14,18 +14,17 @@ const PITCH := 9.0 # degrees the camera looks down
 ## Size of one sprite texel in game pixels, for characters and props.
 const TEXEL := 1.25
 
+## The floor is the only land with depth: a block from GROUND_BACK to GROUND_FRONT whose top
+## the characters walk on. Floating platforms are flat painted skins at LAND_FRONT.
 const GROUND_BACK := -9.0
 const GROUND_FRONT := 3.0
-const PLAT_BACK := -2.4
-const PLAT_FRONT := 0.1
-const PLAT_THICK := 0.8
 
 ## Draw order. Depth is 3D z: bigger is nearer the camera. Everything the player can touch
 ## (climbables, NPCs, monsters, drops, the player) stands in front of all the land, so the
 ## ground, platforms and their decoration never hide it. New content should use these.
 ## Land: platform front skins sit at LAND_FRONT; decoration and props are clamped behind it.
 ## (The grass on the floor's front edge is nearer, but it shows below everyone's feet.)
-const LAND_FRONT := PLAT_FRONT + 0.04
+const LAND_FRONT := 0.14
 const Z_CLIMBABLE := 0.2
 const Z_NPC := 0.3
 ## Monsters spread over [Z_MONSTER, Z_MONSTER + Z_MONSTER_SPREAD) so overlapping ones don't flicker.

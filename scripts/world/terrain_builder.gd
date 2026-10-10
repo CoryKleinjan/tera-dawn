@@ -1,10 +1,12 @@
 class_name TerrainBuilder
 extends RefCounted
-## Builds the ground of a map: textured 3D blocks for the floor and each platform, the
-## painted rocky front of every floating platform, and grass along the front edges.
+## Builds the ground of a map: the textured 3D block of the floor, the painted front skin of
+## every floating platform (flat, with no 3D block behind it), and grass along the edges.
 
 ## The ground textures repeat every this many 3D units (128 texels = 4 units = 128 px).
 const TILE_UNITS := 4.0
+## How many texels of a biome platform skin's grass rise above the platform's top edge.
+const SKIN_GRASS := 9.0
 
 var stage: TDStage
 var root: Node3D
@@ -15,7 +17,7 @@ func _init(s: TDStage, r: Node3D) -> void:
 
 func build(map: MapDef, platforms: Array[Platform]) -> void:
 	var biome := map.biome
-	_build_blocks(map, platforms, biome)
+	_build_floor(map, platforms[0], biome)
 	for i in range(1, platforms.size()):
 		if map.platforms[i - 1].look:
 			_platform_look(platforms[i], map.platforms[i - 1])
@@ -23,9 +25,11 @@ func build(map: MapDef, platforms: Array[Platform]) -> void:
 			_platform_front(platforms[i], biome)
 	_edge_grass(map, platforms, biome)
 
-# ---------- blocks ----------
+# ---------- the floor ----------
 
-func _build_blocks(map: MapDef, platforms: Array[Platform], biome: BiomeDef) -> void:
+## The floor is the only land with depth: characters stand on its top, which runs back
+## into the scene. Floating platforms are just their painted front skin.
+func _build_floor(map: MapDef, ground: Platform, biome: BiomeDef) -> void:
 	var sts: Array[SurfaceTool] = []
 	for i in 3:
 		var st := SurfaceTool.new()
@@ -33,16 +37,7 @@ func _build_blocks(map: MapDef, platforms: Array[Platform], biome: BiomeDef) -> 
 		sts.append(st)
 	var w := float(map.width) / TDStage.PX
 	var h := float(map.height) / TDStage.PX
-	for i in platforms.size():
-		var pl := platforms[i]
-		if i > 0 and map.platforms[i - 1].look:
-			continue # a painted piece of land is its own block
-		var top := -pl.y / TDStage.PX
-		if pl.solid:
-			_block(sts, -40.0, w + 40.0, top, -h - 20.0, TDStage.GROUND_BACK, TDStage.GROUND_FRONT)
-		else:
-			_block(sts, pl.x / TDStage.PX, (pl.x + pl.w) / TDStage.PX, top, top - TDStage.PLAT_THICK,
-				TDStage.PLAT_BACK, TDStage.PLAT_FRONT)
+	_block(sts, -40.0, w + 40.0, -ground.y / TDStage.PX, -h - 20.0, TDStage.GROUND_BACK, TDStage.GROUND_FRONT)
 	var mesh := ArrayMesh.new()
 	var textures := [biome.ground_top, biome.ground_side, biome.ground_soil]
 	for i in 3:
@@ -50,6 +45,7 @@ func _build_blocks(map: MapDef, platforms: Array[Platform], biome: BiomeDef) -> 
 		sts[i].commit(mesh)
 		mesh.surface_set_material(i, _tile_material(textures[i]))
 	var mi := MeshInstance3D.new()
+	mi.name = "Floor"
 	mi.mesh = mesh
 	root.add_child(mi)
 
@@ -122,6 +118,17 @@ func _platform_front(pl: Platform, biome: BiomeDef) -> void:
 	_front_piece(left, Vector2(x0 + lw / 2.0, pl.y), texel, z + 0.01)
 	_front_piece(right, Vector2(x1 - rw / 2.0, pl.y), texel, z + 0.01)
 
+## The game-y span a platform's painted skin covers: x is the top of its grass, y the bottom.
+static func skin_span(d: PlatformDef, biome: BiomeDef) -> Vector2:
+	if d.look:
+		var t := d.look_texel()
+		return Vector2(d.y - PlatformDef.LOOK_GRASS * t, d.y - PlatformDef.LOOK_GRASS * t + d.look.get_height() * t)
+	if biome == null or biome.platform_middle == null:
+		return Vector2(d.y, d.y)
+	var texel := biome.platform_texel
+	var top := d.y - SKIN_GRASS * texel
+	return Vector2(top, top + biome.platform_middle.get_height() * texel)
+
 ## A platform drawn as one painted piece of land, hung so its grass rises above the top edge.
 func _platform_look(pl: Platform, d: PlatformDef) -> void:
 	var texel := d.look_texel()
@@ -134,11 +141,16 @@ func _platform_look(pl: Platform, d: PlatformDef) -> void:
 func _front_piece(tex: Texture2D, top_center: Vector2, texel: float, z: float) -> Sprite3D:
 	var s := TDStage.sprite(tex, texel)
 	s.offset = Vector2(0, -tex.get_height() / 2.0)  # origin at the top centre
-	s.position = TDStage.to3d(top_center + Vector2(0, -9.0 * texel), z)  # the grass tips rise above the edge
+	s.position = TDStage.to3d(top_center + Vector2(0, -SKIN_GRASS * texel), z)  # the grass tips rise above the edge
 	root.add_child(s)
 	return s
 
 # ---------- grass along the edges ----------
+
+## How far the floor's front-edge grass may rise above the edge, in game pixels. The edge is
+## nearer the camera than the actors, so it shows a little below their feet; a short fringe
+## frames the bottom of the view without hiding anyone's legs.
+const FRINGE_RISE := 6.0
 
 func _edge_grass(map: MapDef, platforms: Array[Platform], biome: BiomeDef) -> void:
 	if biome.edge_grass.is_empty():
@@ -147,20 +159,28 @@ func _edge_grass(map: MapDef, platforms: Array[Platform], biome: BiomeDef) -> vo
 	rng.seed = hash(map.id) + 7
 	var x := -300.0
 	while x < map.width + 300.0:
-		_grass(biome, rng, Vector2(x, map.ground_y), TDStage.GROUND_FRONT - 0.05)
+		# in front of the floor's front face, sunk so only the tips rise above the edge
+		var s := _grass(biome, rng, Vector2(x, map.ground_y), TDStage.GROUND_FRONT + 0.05)
+		var tall := s.texture.get_height() * s.pixel_size * TDStage.PX
+		s.position.y -= maxf(0.0, tall - FRINGE_RISE) / TDStage.PX
 		x += rng.randf_range(40.0, 70.0)
 	for i in range(1, platforms.size()):
+		if map.platforms[i - 1].look:
+			continue # painted land brings its own grass
 		var pl := platforms[i]
 		x = pl.x + 20.0
 		while x < pl.x + pl.w - 20.0:
 			if rng.randf() < 0.5:
-				_grass(biome, rng, Vector2(x, pl.y), rng.randf_range(TDStage.PLAT_BACK + 0.3, -0.8))
+				# just behind the skin, peeking over its top edge
+				var s := _grass(biome, rng, Vector2(x, pl.y), TDStage.land_depth(TDStage.LAND_FRONT - rng.randf_range(0.03, 0.06)))
+				s.pixel_size *= 0.75
 			x += rng.randf_range(50.0, 90.0)
 
-func _grass(biome: BiomeDef, rng: RandomNumberGenerator, at: Vector2, z: float) -> void:
+func _grass(biome: BiomeDef, rng: RandomNumberGenerator, at: Vector2, z: float) -> Sprite3D:
 	var tex: Texture2D = biome.edge_grass[rng.randi() % biome.edge_grass.size()]
 	var s := TDStage.sprite(tex, rng.randf_range(0.8, 1.05))
 	s.position = TDStage.to3d(at + Vector2(0, 4), z)
 	s.flip_h = rng.randf() < 0.5
 	s.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	root.add_child(s)
+	return s
