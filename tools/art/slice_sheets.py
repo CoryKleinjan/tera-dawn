@@ -226,7 +226,8 @@ def defringe(rgb, alpha, bg, band=3, lean=0.04, fit=0.22):
         near_cut = near_cut | _shifted(near_cut, 1, 0) | _shifted(near_cut, -1, 0) | \
             _shifted(near_cut, 0, 1) | _shifted(near_cut, 0, -1)
     leans = np.minimum(rgb[..., 0], rgb[..., 2]) - rgb[..., 1]
-    suspect = solid & near_cut & (leans > lean)
+    # the background's own hue: red and blue about even (pink or rose art leans one way)
+    suspect = solid & near_cut & (leans > lean) & (np.abs(rgb[..., 0] - rgb[..., 2]) < 0.2)
     if not suspect.any():
         return rgb, alpha
     # the art each suspect pixel sits on: the mean of the nearest clean pixels, spread inward ring by ring
