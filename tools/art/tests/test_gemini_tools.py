@@ -107,16 +107,19 @@ class RunList(unittest.TestCase):
                     self.assertEqual(len(s["cells"]), 2)
                     self.assertTrue(all(isinstance(n, int) and n > 0 for n in s["cells"]))
 
-    def test_edits_have_a_base_image_in_the_repo_and_an_instruction(self):
+    def test_edits_have_a_base_image_and_an_instruction(self):
         for s in self.sheets:
             if not s.get("edit"):
                 continue
             with self.subTest(s["id"]):
-                base = os.path.join(gemini_sheet.ROOT, s["edit"]["base"])
-                self.assertTrue(os.path.isfile(base), base)
                 self.assertTrue(s["edit"].get("text", "").strip())
-                for r in s["edit"].get("refs", []):
-                    self.assertTrue(os.path.isfile(os.path.join(gemini_sheet.ROOT, r)), r)
+                for path in [s["edit"]["base"]] + s["edit"].get("refs", []):
+                    if os.path.isabs(path):
+                        # an earlier Gemini result in the project's shared folder, not in the repo
+                        # (and not on CI): only check where it points
+                        self.assertTrue(path.startswith(gemini_sheet.PROJECT_FILES), path)
+                    else:
+                        self.assertTrue(os.path.isfile(os.path.join(gemini_sheet.ROOT, path)), path)
 
     def test_anchors_name_other_sheets_or_files(self):
         ids = {s["id"] for s in self.sheets}
