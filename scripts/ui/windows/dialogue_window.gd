@@ -16,8 +16,8 @@ const FRAME_X := PAD - 6
 ## right, and how far up from the bottom), and where the text starts and ends.
 const NICHE := Vector4(28, 72, 125, 39)
 const TEXT_LEFT := 168.0
-const TEXT_RIGHT := 36.0
-const TEXT_TOP := 58.0
+const TEXT_RIGHT := 46.0
+const TEXT_TOP := 70.0
 const TEXT_BOTTOM := 36.0
 const LINE_H := 17.0
 const ROW_H := 26.0
@@ -247,7 +247,8 @@ func _fit() -> void:
 	var h := _frame_rect().end.y + 8 + options.size() * ROW_H + PAD - 4
 	if not is_equal_approx(h, size.y):
 		size.y = h
-		position.y = clampf(position.y, 0.0, TDWorld.VIEW.y - h)
+		# a longer page grows the window down: keep it above the status bar
+		position.y = clampf(position.y, 0.0, maxf(0.0, TDWorld.VIEW.y - TDStatusBar.HEIGHT - 2 - h))
 
 func _process(delta: float) -> void:
 	super(delta)

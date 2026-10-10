@@ -8,6 +8,10 @@ const TABS := ["Buddies", "Party", "Guild"]
 const LIST_Y := 72.0
 const ROW_H := 30.0
 const ROWS := 8
+## A party row: the member's HP bar, the Kick button, and the space between them.
+const PARTY_HP_W := 80.0
+const KICK_W := 38.0
+const BUTTON_GAP := 8.0
 ## Pixels per texel of the friend row art, and the middle of its round niche in texels.
 const ROW_SCALE := (ROW_H - 4) / 61.0
 const NICHE_CENTER := Vector2(42, 30)
@@ -75,15 +79,24 @@ func _draw_party() -> void:
 			x = 20.0
 		draw_label(r.position + Vector2(x, 12), m[0], Palette.SUN, 12)
 		draw_label(r.position + Vector2(6, 24), "Lv. %d %s  ·  %s" % [m[2], j.display_name if j else "", Content.map(StringName(m[5])).display_name if Content.maps.has(StringName(m[5])) else ""], Palette.MUTED, 10)
-		UiSkin.draw_party_hp(self, r.position + Vector2(190, 4), 80, float(m[4]))
+		UiSkin.draw_party_hp(self, party_hp_rect(r).position, PARTY_HP_W, float(m[4]))
 		var who: String = m[0]
 		if lead and who != Game.me.name:
-			add_button(Rect2(r.end.x - 40, r.position.y + 3, 38, 20), "Kick", func() -> void: Net.ask(&"req_social", [&"kick", who]), true, true)
+			add_button(kick_rect(r), "Kick", func() -> void: Net.ask(&"req_social", [&"kick", who]), true, true)
 	if lead:
 		_bottom_button("Invite", func() -> void:
 			hud.prompt.ask("Who do you want to invite?", "", func(n: String) -> void: Net.ask(&"req_social", [&"party", n])))
 	if not party.is_empty():
 		_bottom_button("Leave party", func() -> void: Net.ask(&"req_social", [&"leave_party", ""]), 1)
+
+## Where a party row's Kick button goes.
+func kick_rect(row: Rect2) -> Rect2:
+	return Rect2(row.end.x - KICK_W - 2, row.position.y + 3, KICK_W, 20)
+
+## Where a party row's HP bar goes: a gap short of the Kick button, whether or not it's there.
+func party_hp_rect(row: Rect2) -> Rect2:
+	var art := UiSkin.tex("social/party_hp_frame")
+	return Rect2(kick_rect(row).position.x - BUTTON_GAP - PARTY_HP_W, row.position.y + 4, PARTY_HP_W, art.get_height() * PARTY_HP_W / art.get_width())
 
 func _draw_guild() -> void:
 	var g: Dictionary = Game.social.get("guild", {})

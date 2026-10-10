@@ -53,3 +53,10 @@ static func text(ci: CanvasItem, font: Font, pos: Vector2, s: String, size: int,
 
 static func text_width(font: Font, s: String, size: int) -> float:
 	return font.get_string_size(s, HORIZONTAL_ALIGNMENT_LEFT, -1, size).x
+
+## The largest font size up to `size` (and no smaller than `min_size`) at which `s` fits in
+## `max_w` pixels, for labels on art of a fixed width (tabs, slots, chips).
+static func fit_size(font: Font, s: String, size: int, max_w: float, min_size := 8) -> int:
+	while size > min_size and text_width(font, s, size) > max_w:
+		size -= 1
+	return size

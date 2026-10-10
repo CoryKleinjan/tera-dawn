@@ -10,7 +10,9 @@ const WORLD := Vector2(1000, 600)
 const NODE_PICK := 12.0
 ## How big the painting is drawn: 1000 x 600 world units at this many pixels each.
 const MAP_SCALE := 0.66
-const INFO_H := 52.0
+## The strip under the painting for the hovered map, and how far its text sits in from the frame.
+const INFO_H := 58.0
+const INFO_X := PAD + 10
 
 var hovered: StringName = &""
 
@@ -76,10 +78,10 @@ func _draw_body() -> void:
 func _draw_info(m: MapDef) -> void:
 	if m == null:
 		return
-	var y := size.y - INFO_H + 22
+	var y := size.y - INFO_H + 23
 	var r: RegionDef = Content.regions.get(m.region)
 	var name := m.display_name + ("  ·  Town" if m.town else "")
-	DrawUtil.text(self, Game.num_font, Vector2(PAD + 4, y), name, 16, Palette.SUN, 1, 4, Palette.NIGHT)
+	DrawUtil.text(self, Game.num_font, Vector2(INFO_X, y), name, 16, Palette.SUN, 1, 4, Palette.NIGHT)
 	var bits := []
 	if r:
 		bits.append(r.display_name)
@@ -87,7 +89,7 @@ func _draw_info(m: MapDef) -> void:
 		bits.append(m.level_text)
 	if hud and hud.world and hud.world.map and m.id == hud.world.map.id:
 		bits.append("You are here")
-	DrawUtil.text(self, Game.ui_font, Vector2(PAD + 4, y + 18), "  ·  ".join(bits), 12, Palette.MIST, 1, 3, Palette.NIGHT)
+	DrawUtil.text(self, Game.ui_font, Vector2(INFO_X, y + 18), "  ·  ".join(bits), 12, Palette.MIST, 1, 3, Palette.NIGHT)
 
 ## The screen area a region's name (and level range) covers, for keeping dots off it.
 func label_rect(r: RegionDef) -> Rect2:

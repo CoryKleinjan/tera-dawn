@@ -18,6 +18,9 @@ const REACH := 170.0
 const ROW_SCALE := (ROW_H - 4) / 63.0
 const NICHE := Rect2(11, 10, 42, 42)
 const CHIP_SCALE := 0.68
+## The amount chips: wide enough for "×100" between the art's end caps.
+const CHIP_W := 62.0
+const CHIP_CAPS := 2 * 20 * CHIP_SCALE
 
 var npc: TDNpc
 var shop: ShopDef
@@ -64,7 +67,7 @@ func _slot_at(at: Vector2) -> int:
 	return -1
 
 func _amount_rect(i: int) -> Rect2:
-	return Rect2(PAD + 78 + i * 52, size.y - 42, 46, 28)
+	return Rect2(PAD + 78 + i * (CHIP_W + 6), size.y - 42, CHIP_W, 28)
 
 func _sell_etc_rect() -> Rect2:
 	return Rect2(size.x - PAD - 132, size.y - 46, 132, 34)
@@ -96,7 +99,8 @@ func _draw_body() -> void:
 		var r := _amount_rect(i)
 		var on := AMOUNTS[i] == amount
 		UiSkin.draw_box(self, UiSkin.amount_chip(on), r, CHIP_SCALE)
-		DrawUtil.text(self, Game.num_font, r.get_center() + Vector2(0, 5), "×%d" % AMOUNTS[i], 13, Palette.INK if on else Palette.MIST, 0, 0 if on else 3, Palette.NIGHT)
+		var label := "×%d" % AMOUNTS[i]
+		DrawUtil.text(self, Game.num_font, r.get_center() + Vector2(0, 5), label, DrawUtil.fit_size(Game.num_font, label, 13, CHIP_W - CHIP_CAPS), Palette.INK if on else Palette.MIST, 0, 0 if on else 3, Palette.NIGHT)
 	var purse_y := GRID_Y + ceili(Inventory.SLOTS / float(COLS)) * (SLOT + GAP) + 8
 	draw_shards(Vector2(GRID_X, purse_y + 16), shards)
 	draw_button(_sell_etc_rect(), "Sell all Etc", Game.me.inventory.free_slots(ItemDef.Tab.ETC) < Inventory.SLOTS)
