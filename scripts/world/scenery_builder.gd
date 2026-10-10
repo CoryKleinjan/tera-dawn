@@ -47,7 +47,7 @@ func build(map: MapDef, platforms: Array[Platform], rng: RandomNumberGenerator) 
 	for b in map.buildings:
 		_building(b, platforms[b.platform], biome)
 	for c in map.climbables:
-		_climbable(c)
+		_climbable(c, platforms)
 	for p in map.portals:
 		if p.door:
 			_door(p, platforms[p.platform], biome)
@@ -219,11 +219,12 @@ func _door(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
 ## A rope or ladder: its style's pieces stacked edge to edge (ClimbStyleDef.pieces). Each piece
 ## is drawn one texture pixel taller than its slot, so the joints never show a hairline gap; the
 ## next piece covers the extra row.
-func _climbable(c: ClimbableDef) -> void:
+func _climbable(c: ClimbableDef, platforms: Array[Platform]) -> void:
 	var st := c.style
 	if st == null:
 		return
 	var z := TDStage.Z_CLIMBABLE
+	var flip := st.top_flipped(ClimbStyleDef.ledge_room(c.x, c.top, platforms))
 	for p in st.pieces(c.top, c.bottom):
 		var tex: Texture2D = p.texture
 		var s := TDStage.sprite(tex, st.texel)
@@ -231,6 +232,7 @@ func _climbable(c: ClimbableDef) -> void:
 		s.scale.y = (p.height + st.texel / TDStage.art_density(tex)) / art_h
 		s.offset = Vector2(0, -tex.get_height() / 2.0)  # hang from the top edge
 		s.position = TDStage.to3d(Vector2(c.x, p.y), z)
+		s.flip_h = flip and tex == st.top
 		root.add_child(s)
 		z += 0.001  # each piece just in front of the one above, so the joints don't flicker
 

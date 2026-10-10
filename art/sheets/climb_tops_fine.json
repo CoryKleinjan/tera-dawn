@@ -1,0 +1,73 @@
+{
+  "source": "art/source/climb_tops_fine.png",
+  "out_dir": "assets/sprites/props",
+  "label_band": 0.2,
+  "inset": 20,
+  "keep": "largest",
+  "grid": {
+    "rows": [
+      0,
+      1429,
+      2858
+    ],
+    "cols": [
+      0,
+      880,
+      1773,
+      2666,
+      3548
+    ]
+  },
+  "cells": [
+    [
+      "rope_top",
+      "",
+      "vine_top",
+      ""
+    ],
+    [
+      "rope_ladder_top",
+      "",
+      "",
+      ""
+    ]
+  ],
+  "overrides": {
+    "rope_top": {
+      "scale": 0.213,
+      "crop": [
+        0,
+        0,
+        873,
+        620
+      ]
+    },
+    "vine_top": {
+      "scale": 0.147,
+      "crop": [
+        0,
+        0,
+        886,
+        1060
+      ]
+    },
+    "rope_ladder_top": {
+      "scale": 0.112,
+      "crop": [
+        0,
+        0,
+        873,
+        640
+      ],
+      "keep": "all",
+      "blank": [
+        [
+          0,
+          0,
+          730,
+          108
+        ]
+      ]
+    }
+  }
+}

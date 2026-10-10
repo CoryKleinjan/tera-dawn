@@ -159,7 +159,11 @@ after the item ids, replacing the placeholders from `tools/art/make_item_placeho
   `tools/art/climb_pieces.py`, which centres each middle piece on its rope or rails (leaning a
   vine back so its ends meet), and cuts and pads each end piece so it carries on from a middle
   piece (same centre line, a ladder's rungs keep their spacing). The game stacks the pieces
-  edge to edge (`ClimbStyleDef.pieces`), so an end piece needs no hand offsets.
+  edge to edge (`ClimbStyleDef.pieces`), so an end piece needs no hand offsets. The rope, vine
+  and rope ladder tops come from `climb_tops_fine` (a Gemini edit with the land taken out; each
+  cell's `scale` matches its rope's width to the middle piece's, its `crop` keeps the anchor and a
+  short tail). A climb style's pieces may come from several sheets: cutting any of them lines up
+  that style again. `top_rise` on the style sets how far its top piece rises above the ledge.
 - **Not in the game yet**: `climb_tops`, `dawnharbor_midground` and `buildings_<town>` cut into
   `art/build/` only.
 - **Items, pets, projectiles** cut into `assets/sprites/items/`, `pets/` (and

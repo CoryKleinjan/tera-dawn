@@ -4,7 +4,7 @@
   "out_dir": "assets/sprites/props",
   "cells": [
     [
-      "rope_top",
+      "",
       "rope_middle",
       "rope_bottom",
       "vine_middle",
@@ -176,15 +176,6 @@
       ],
       "scale": 0.144
     },
-    "rope_top": {
-      "crop": [
-        0,
-        60,
-        620,
-        520
-      ],
-      "scale": 0.2439
-    },
     "rope_middle": {
       "crop": [
         0,
@@ -247,14 +238,17 @@
       "bottom": "ladder_bottom"
     },
     "rope": {
+      "top": "rope_top",
       "middle": "rope_middle",
       "bottom": "rope_bottom"
     },
     "rope_ladder": {
+      "top": "rope_ladder_top",
       "middle": "rope_ladder_middle",
       "bottom": "rope_ladder_bottom"
     },
     "vine": {
+      "top": "vine_top",
       "middle": "vine_middle",
       "bottom": "vine_bottom"
     }

@@ -54,3 +54,12 @@ func test_no_end_pieces() -> void:
 	check_eq(p.size(), 3, "three middles fill it")
 	check_near(p[-1].y + p[-1].height, 90.0 + ClimbStyleDef.BOTTOM_SINK, "down into the floor")
 	_check_touching(p)
+
+func test_top_piece_with_a_peg_to_one_side_flips_toward_the_wider_side() -> void:
+	var img := Image.create(40, 10, false, Image.FORMAT_RGBA8)
+	img.fill_rect(Rect2i(0, 0, 24, 10), Color.WHITE)  # 20 px left of the line, 4 px right
+	style.top = ImageTexture.create_from_image(img)
+	check_eq(ClimbStyleDef.solid_reach(style.top, 1.0), Vector2(20, 4), "reaches 20 left, 4 right")
+	check(not style.top_flipped(Vector2(30, 10)), "room on the left: as drawn")
+	check(style.top_flipped(Vector2(10, 30)), "near the left end: mirrored")
+	check(not style.top_flipped(Vector2(INF, INF)), "on the floor: as drawn")

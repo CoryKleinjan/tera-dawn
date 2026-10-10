@@ -20,15 +20,20 @@ they like. So for each style this script:
    rungs keep their spacing into it). The top piece likewise ends like a middle ends.
    Each end piece is cut there and padded so the joint lands on the centre line.
 
-Manifest section, one entry per climb style (any of "top"/"bottom" may be left out):
+Manifest section, one entry per climb style (any of "top"/"bottom" may be left out). The
+pieces are files in that manifest's out_dir and may be cut from other sheets (the rope tops
+come from climb_tops_fine); the slicer lines up every style with a piece it just cut:
     "climb": {"ladder": {"top": "ladder_top", "middle": "ladder_middle", "bottom": "ladder_bottom"}}
 """
+import glob
+import json
 import os
 
 import numpy as np
 from PIL import Image
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
+SHEETS = os.path.join(ROOT, "art", "sheets")
 SOLID = 127
 WINDOW = 16       # rows compared where a middle piece joins itself (fewer when it is short)
 CROP_COST = 0.004  # mismatch an extra dropped row must save to be worth dropping
@@ -105,6 +110,31 @@ def centroid(a):
     return (cols * (np.arange(len(cols)) + 0.5)).sum() / max(1.0, cols.sum())
 
 
+def fit_end(piece, m, mid_c, at_top):
+    """An end piece cut and padded so it carries on from middle mask `m` (centred on mid_c):
+    a bottom piece's top rows (at_top) continue the middle's top rows, a top piece's bottom rows
+    end like the middle's bottom rows. Each cut changes the rows compared, so it looks again
+    until nothing moves (dropping at most MAX_CROP of the piece in all)."""
+    piece = trim_rows(piece)
+    budget = int(len(piece) * MAX_CROP)
+    for _ in range(4):
+        p = solid(piece)
+        n = min(len(m), len(p) // 2)
+        crops = range(0, max(1, min(len(m), budget, len(p) - n) + 1))
+        if at_top:
+            d, k = best_join(m[:n], p, crops, lambda k: p[k:k + n])
+            piece = piece[k:]
+        else:
+            d, k = best_join(m[-n:], p, crops, lambda k: p[len(p) - k - n:len(p) - k])
+            piece = piece[:len(piece) - k]
+        budget -= k
+        before = piece.shape[1]
+        piece = centre_on(piece, mid_c - d)
+        if k == 0 and piece.shape[1] == before:
+            break
+    return piece
+
+
 def line_up(top, middle, bottom):
     """The three pieces (RGBA arrays; top and bottom may be None) lined up as described above."""
     middle = trim_rows(middle)
@@ -124,19 +154,9 @@ def line_up(top, middle, bottom):
     m = solid(middle)
     mid_c = middle.shape[1] / 2
     if bottom is not None:
-        bottom = trim_rows(bottom)
-        b = solid(bottom)
-        n = min(len(m), len(b) // 2)
-        crops = range(0, max(1, min(len(m), int(len(b) * MAX_CROP), len(b) - n)))
-        d, k = best_join(m[:n], b, crops, lambda k: b[k:k + n])
-        bottom = centre_on(bottom[k:], mid_c - d)
+        bottom = fit_end(bottom, m, mid_c, at_top=True)
     if top is not None:
-        top = trim_rows(top)
-        t = solid(top)
-        n = min(len(m), len(t) // 2)
-        crops = range(0, max(1, min(len(m), int(len(t) * MAX_CROP), len(t) - n)))
-        d, k = best_join(m[-n:], t, crops, lambda k: t[len(t) - k - n:len(t) - k])
-        top = centre_on(top[:len(top) - k], mid_c - d)
+        top = fit_end(top, m, mid_c, at_top=False)
     return top, middle, bottom
 
 
@@ -155,3 +175,15 @@ def prepare(manifest):
             if a is not None:
                 Image.fromarray(a).save(paths[k])
         print(f"  climb {style}: pieces lined up")
+
+
+def prepare_for(cut):
+    """Line up every climb style (in any manifest) that has a piece among the names in `cut`."""
+    for path in sorted(glob.glob(os.path.join(SHEETS, "*.json"))):
+        with open(path) as f:
+            man = json.load(f)
+        if not isinstance(man, dict) or "climb" not in man:
+            continue
+        styles = {k: v for k, v in man["climb"].items() if cut & set(v.values())}
+        if styles:
+            prepare({**man, "climb": styles})
