@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """Run the whole Gemini art pass: every sheet in tools/art/gemini_pass.json, once each.
 
-    python3 tools/art/gemini_pass.py --dry-run          # check every entry's batch and refs, free
-    python3 tools/art/gemini_pass.py --limit 3          # make the next 3 sheets (paid)
-    python3 tools/art/gemini_pass.py                    # make everything still missing (paid)
+    python3 tools/art/gemini_pass.py --dry-run          # the waves batch mode would send and their cost, free
+    python3 tools/art/gemini_pass.py --wait             # make everything still missing, batch mode (paid)
+    python3 tools/art/gemini_pass.py --redo ID --wait   # make one sheet again (only when Cory asks)
     python3 tools/art/gemini_pass.py --report           # rebuild report.md and the contact sheet
-    python3 tools/art/gemini_pass.py --batch --wait     # the same through Gemini's batch mode
+    python3 tools/art/gemini_pass.py --now --dry-run    # check every entry's batch and refs, free
+    python3 tools/art/gemini_pass.py --now --limit 3    # one by one at full price, no waiting
 
 Results go to art-sheets/gemini-pass-1/ in the project files, never into the game. Each sheet
 is ONE request: a sheet that already has a result, or whose request failed, is skipped on
@@ -17,10 +18,12 @@ whose "anchor" is another entry wait for that entry and attach its result, so a 
 sheets matches one model. Every request gets CONSISTENCY added to its batch text, which keeps
 the prompt files themselves usable in ChatGPT. Each result is checked by sheet_check.py.
 
-Batch mode costs half as much and takes longer (Google promises results within a day; usually
+Batch mode is the default (Cory: all art goes through it to keep costs down). It costs half
+as much and takes longer (Google promises results within a day; usually
 far sooner). Sheets go up in waves: every sheet whose anchor is made goes in the next wave, so a
 family's anchor comes back before the sheets that attach it. --batch does one step (collect a
 finished wave, then submit the next) and exits; --wait keeps stepping until everything is made.
+--limit and --only apply to --now runs.
 References are uploaded once with the Files API, which keeps them for 48 hours.
 """
 import argparse
@@ -53,7 +56,7 @@ CONSISTENCY = """Consistency rules for this sheet (follow them strictly):
 - If a sheet with the same grid is attached, trace its poses, cell positions and sprite sizes exactly.
 - Same pixel size, the same crisp dark plum-brown outline, the same light from the upper left and the same warm-gold rim light in every cell.
 - Characters and creatures stand on one shared baseline: the feet sit the same distance above the bottom edge of every cell.
-- Flat pure magenta #FF00FF background with no shadows or gradients, and no magenta or pink-purple inside any sprite."""
+- The background of the WHOLE image, inside every cell too, is one flat pure magenta #FF00FF (RGB 255, 0, 255): not grey, white, pink, lilac or a darker purple, with no shadows, gradients or coloured panels. No magenta or pink-purple inside any sprite."""
 GRID_RULE = "- Draw exactly {rows} rows x {cols} columns = {n} equal cells, every cell filled in the order given."
 
 
@@ -428,22 +431,25 @@ def main():
     ap.add_argument("--budget", type=float, help="dollar cap for the whole pass (default: the list's)")
     ap.add_argument("--report", action="store_true", help="only rebuild report.md and contact_sheet.jpg")
     ap.add_argument("--recheck", action="store_true", help="check every result again, then rebuild the report")
-    ap.add_argument("--batch", action="store_true", help="use Gemini's batch mode (half price, slower)")
+    ap.add_argument("--now", action="store_true",
+                    help="send requests one by one at full price instead of batch mode (Cory: use batch for all art)")
+    ap.add_argument("--batch", action="store_true", help="batch mode, the default (kept for old commands)")
     ap.add_argument("--wait", action="store_true", help="with --batch: keep going until every wave is in")
     args = ap.parse_args()
 
     spec = load_list()
     p = Pass(spec, args.budget or spec.get("budget", 25.0), args.dry_run)
     for sid in args.redo:
-        if p.state.pop(sid, None) is not None:
+        old = p.state.pop(sid, None)
+        if old is not None:
             # The old result stays on disk; only its record goes. Its cost stays counted.
-            p.state.setdefault("_redone", {"cost": 0})["cost"] += p.price
+            p.state.setdefault("_redone", {"cost": 0})["cost"] += old.get("cost", 0)
     if args.redo:
         p.save()
     if args.report or args.recheck:
         p.recheck() if args.recheck else p.report()
         return
-    if args.batch:
+    if not args.now:
         if args.dry_run:
             p.plan_batch()
         else:

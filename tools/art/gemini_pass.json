@@ -391,7 +391,8 @@
    "note": "One item per image: send only the SHIELD, ROUND line. Today all three (plus old gloves) share paperdoll_layers.png as 16x2 rows each; fence reads 'Batch L6 (one prompt each):'.",
    "fill": {
     "item": "SHIELD, ROUND"
-   }
+   },
+   "extra": "- You must answer with the finished image itself, not text.\n- Trace the attached base body sheet cell for cell: the body is the SAME size and in the same place in every cell as in that sheet (it fills most of each cell's height); do not shrink it.\n- Show the round shield on the body's front arm in all 32 poses (on the back in the back views)."
   },
   {
    "id": "paperdoll_shield_kite",
@@ -663,7 +664,8 @@
    "note": "T1 lists six tops; keep only line 4 (VEST) before sending, fresh request per top. New. Save name follows the hair_<style>_frames convention (none given).",
    "fill": {
     "top": "4. VEST"
-   }
+   },
+   "extra": "- Trace the attached base body sheet cell for cell: the body is the SAME size and in the same place in every cell as in that sheet (it fills most of each cell's height); do not shrink it."
   },
   {
    "id": "top_robe_frames",
@@ -682,7 +684,8 @@
    "note": "T1 lists six tops; keep only line 5 (ROBE) before sending, fresh request per top. New. Save name follows the hair_<style>_frames convention (none given).",
    "fill": {
     "top": "5. ROBE"
-   }
+   },
+   "extra": "- Trace the attached base body sheet cell for cell: the body is the SAME size and in the same place in every cell as in that sheet (it fills most of each cell's height); do not shrink it."
   },
   {
    "id": "top_coat_frames",
@@ -745,7 +748,8 @@
    "note": "Part 4 leftover. L5 lists 7 items; send only SHORTS (one sheet per style). New; save name not given in the prompt.",
    "fill": {
     "item": "SHORTS"
-   }
+   },
+   "extra": "- Trace the attached base body sheet cell for cell: the body is the SAME size and in the same place in every cell as in that sheet (it fills most of each cell's height); do not shrink it."
   },
   {
    "id": "bottom_breeches_frames",
@@ -811,7 +815,8 @@
    "note": "Part 4 leftover. L5 lists 7 items; send only SHOES (one sheet per style). New; save name not given in the prompt.",
    "fill": {
     "item": "SHOES"
-   }
+   },
+   "extra": "- Trace the attached base body sheet cell for cell: the body is the SAME size and in the same place in every cell as in that sheet (it fills most of each cell's height); do not shrink it."
   },
   {
    "id": "shoes_clogs_frames",
@@ -934,7 +939,7 @@
      32
     ]
    },
-   "extra": "- The green rod is in EVERY one of these 26 cells, no exceptions: 1-4 IDLE, 5-8 WALK, 9-12 RUN, 13-14 ATTACK, 15 HIT, 16 HURT, 17 JUMP, 18 FALL, 19 LAND, 20 CROUCH, 26-28 DAWN SLASH, 29-30 FAINT, 31 LEVEL UP. Where the hand is behind the body, the visible ends of the rod still show past the body. Exactly ONE rod per cell.\n- No rod in cells 21-25 (ROPE, LADDER, CLIMB IDLE) and 32 SIT."
+   "extra": "- The green rod is in EVERY one of these 26 cells, no exceptions: 1-4 IDLE, 5-8 WALK, 9-12 RUN, 13-14 ATTACK, 15 HIT, 16 HURT, 17 JUMP, 18 FALL, 19 LAND, 20 CROUCH, 26-28 DAWN SLASH, 29-30 FAINT, 31 LEVEL UP. Where the hand is behind the body, the visible ends of the rod still show past the body. Exactly ONE rod per cell.\n- No rod in cells 21-25 (ROPE, LADDER, CLIMB IDLE) and 32 SIT.\n- The rod is bright pure green #00FF00 and clearly visible in every one of those 26 cells, even the small poses."
   },
   {
    "id": "paperdoll_body_2",
@@ -986,7 +991,8 @@
     8
    ],
    "anchor": "paperdoll_body_2",
-   "note": "New. Also attach the paperdoll_gloves result."
+   "note": "New. Also attach the paperdoll_gloves result.",
+   "extra": "- Trace the attached new-poses body sheet (paperdoll_body_2) cell for cell: same body size and position in all 32 cells; only the gloves are added."
   },
   {
    "id": "held_swords",
@@ -1225,7 +1231,8 @@
     3
    ],
    "anchor": "anim_sproutcap",
-   "note": "Attaches assets/sprites/monsters/sproutcap.png (the cut sprite). No manifest; frames are wired via sproutcap.json sets."
+   "note": "Attaches assets/sprites/monsters/sproutcap.png (the cut sprite). No manifest; frames are wired via sproutcap.json sets.",
+   "extra": "- Nothing is drawn behind the creature: no coloured tile, panel, card, frame, sky or wall. The creature sits directly on the flat magenta."
   },
   {
    "id": "mon_tide_dewling",
@@ -1369,7 +1376,8 @@
    "note": "Region of combined sheet mon_dawnrise.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout BOSS.",
    "fill": {
     "name": "old_clawbeard"
-   }
+   },
+   "extra": "- Nothing is drawn behind the creature: no coloured tile, panel, card, frame, sky or wall. The creature sits directly on the flat magenta."
   },
   {
    "id": "mon_thornling",
@@ -1489,7 +1497,8 @@
    "note": "Region of combined sheet mon_greenbough.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout HOPPER.",
    "fill": {
     "name": "barkcap"
-   }
+   },
+   "extra": "- Nothing is drawn behind the creature: no coloured tile, panel, card, frame, sky or wall. The creature sits directly on the flat magenta."
   },
   {
    "id": "mon_grove_wisp",
@@ -1561,7 +1570,8 @@
    "note": "Family anchor for M5. Region of combined sheet mon_lumewood.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout HOPPER.",
    "fill": {
     "name": "glowcap"
-   }
+   },
+   "extra": "- Nothing is drawn behind the creature: no coloured tile, panel, card, frame, sky or wall. The creature sits directly on the flat magenta."
   },
   {
    "id": "mon_lume_wisp",
@@ -1753,7 +1763,8 @@
    "note": "Family anchor for M6. Region of combined sheet mon_emberreach.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout WALKER.",
    "fill": {
     "name": "slag_slime"
-   }
+   },
+   "extra": "- Nothing is drawn behind the creature: no coloured tile, panel, card, frame, sky or wall. The creature sits directly on the flat magenta."
   },
   {
    "id": "mon_slag_bit",
@@ -1801,7 +1812,8 @@
    "note": "Region of combined sheet mon_emberreach.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout WALKER.",
    "fill": {
     "name": "cinder_pup"
-   }
+   },
+   "extra": "- Nothing is drawn behind the creature: no coloured tile, panel, card, frame, sky or wall. The creature sits directly on the flat magenta."
   },
   {
    "id": "mon_ash_bat",
@@ -1945,7 +1957,8 @@
    "note": "Family anchor for M7. Region of combined sheet mon_lanternfall.png (today one image holds the whole region; the prompt asks one sheet per monster). Layout WALKER.",
    "fill": {
     "name": "shade_imp"
-   }
+   },
+   "extra": "- Nothing is drawn behind the creature: no coloured tile, panel, card, frame, sky or wall. The creature sits directly on the flat magenta."
   },
   {
    "id": "mon_lantern_wisp",
@@ -2467,7 +2480,8 @@
    "note": "Right region of combined dawnharbor_area.png. Manifest cuts 13x1 (strips + gaps); batch grid is 1x7.",
    "fill": {
     "area": "dawnharbor"
-   }
+   },
+   "extra": "- The 7 layers are separate horizontal strips, each with flat magenta above and below it. The painting never fills the whole image: magenta must show between every pair of strips."
   },
   {
    "id": "driftcove_tileset",
@@ -2593,7 +2607,8 @@
    "note": "Right region of combined lumewood_area.png. Manifest cuts 13x1 (strips + gaps); batch grid is 1x7. Includes X1b fix (near layer ragged top).",
    "fill": {
     "area": "lumewood"
-   }
+   },
+   "extra": "- The 7 layers are separate horizontal strips, each with flat magenta above and below it. The painting never fills the whole image: magenta must show between every pair of strips."
   },
   {
    "id": "emberreach_tileset",
@@ -2941,7 +2956,8 @@
     5
    ],
    "anchor": "items_warrior",
-   "note": "Part 4 I3 (newest). Section says attach items_gear + items_consumables every time."
+   "note": "Part 4 I3 (newest). Section says attach items_gear + items_consumables every time.",
+   "extra": "- Nothing is drawn behind the item: no coloured tile, panel, card, frame, sky or wall. The item sits directly on the flat magenta."
   },
   {
    "id": "items_thief",
@@ -3001,7 +3017,8 @@
     5
    ],
    "anchor": "items_warrior",
-   "note": "Section says attach items_gear + items_consumables every time."
+   "note": "Section says attach items_gear + items_consumables every time.",
+   "extra": "- Nothing is drawn behind the item: no coloured tile, panel, card, frame, sky or wall. The item sits directly on the flat magenta."
   },
   {
    "id": "items_parts_1",
@@ -3021,7 +3038,8 @@
     5
    ],
    "anchor": "items_warrior",
-   "note": "Section says attach items_gear + items_consumables every time."
+   "note": "Section says attach items_gear + items_consumables every time.",
+   "extra": "- Nothing is drawn behind the item: no coloured tile, panel, card, frame, sky or wall. The item sits directly on the flat magenta."
   },
   {
    "id": "items_parts_2",
@@ -3097,7 +3115,8 @@
     5
    ],
    "anchor": "ui_leather",
-   "note": "Prompt saves as skills.png; game file is skill_icons.png. Attaches assets/sprites/ui/icon_dawn_slash.png (old purple frame)."
+   "note": "Prompt saves as skills.png; game file is skill_icons.png. Attaches assets/sprites/ui/icon_dawn_slash.png (old purple frame).",
+   "extra": "- Nothing is drawn behind the icon: no coloured tile, panel, card, frame, sky or wall. The icon sits directly on the flat magenta. Each icon's own round or square badge shape is fine; the space around it is magenta."
   },
   {
    "id": "projectiles",
@@ -3257,7 +3276,8 @@
     4
    ],
    "anchor": "ui_leather",
-   "note": "'Name it' sits after the fence (script would save part7_u9). New; also replaces part 3 U6b world_map_markers (never made)."
+   "note": "'Name it' sits after the fence (script would save part7_u9). New; also replaces part 3 U6b world_map_markers (never made).",
+   "extra": "- Nothing is drawn behind the icon: no coloured tile, panel, card, frame, sky or wall. The icon sits directly on the flat magenta."
   },
   {
    "id": "ui_controls_leather",
@@ -3394,7 +3414,8 @@
     4
    ],
    "anchor": "greenbough_tileset",
-   "note": "New. Batch attaches the OLD area sheet; runner should add the greenbough_tileset result."
+   "note": "New. Batch attaches the OLD area sheet; runner should add the greenbough_tileset result.",
+   "extra": "- You must answer with the finished image itself, not text."
   },
   {
    "id": "platform_pieces_lumewood",
@@ -3617,7 +3638,8 @@
     3
    ],
    "anchor": "buildings_dawnharbor",
-   "note": "New (manifest exists). NOT parseable: fence at part 9 line 122 starts 'Town:', no 'Batch B5:'."
+   "note": "New (manifest exists). NOT parseable: fence at part 9 line 122 starts 'Town:', no 'Batch B5:'.",
+   "extra": "- Nothing is drawn behind the building: no coloured tile, panel, card, frame, sky or wall. The building sits directly on the flat magenta. No glow, smoke cloud or sky fills the cell."
   },
   {
    "id": "buildings_lanternfall",
@@ -3674,7 +3696,8 @@
     4
    ],
    "anchor": "buildings_meadow",
-   "note": "New (manifest exists). NOT parseable: fence at part 9 line 183 starts 'R1. Room:', no 'Batch R1:'."
+   "note": "New (manifest exists). NOT parseable: fence at part 9 line 183 starts 'R1. Room:', no 'Batch R1:'.",
+   "extra": "- Nothing is drawn behind the piece: no coloured tile, panel, card, frame, sky or wall. The piece sits directly on the flat magenta."
   },
   {
    "id": "room_dawnharbor",
@@ -3788,7 +3811,8 @@
     4
    ],
    "anchor": "buildings_driftcove",
-   "note": "New (manifest exists). NOT parseable: fence at part 9 line 201 starts 'R7. Room:', no 'Batch R7:'."
+   "note": "New (manifest exists). NOT parseable: fence at part 9 line 201 starts 'R7. Room:', no 'Batch R7:'.",
+   "extra": "- You must answer with the finished image itself, not text."
   }
  ]
 }

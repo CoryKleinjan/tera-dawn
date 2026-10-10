@@ -16,7 +16,9 @@ is looked up there). The batch is found by its fenced block starting "Batch <ID>
 References come from the file's own "Attach" lines (the intro's and the batch's), plus any
 --ref, looked up by name in art-prompts/part-*-references/, art-sheets/ and the repo.
 
-Every run is ONE request and never retries, because each image costs money
+For anything more than a one-off test, add the sheet to tools/art/gemini_pass.json and make it
+with tools/art/gemini_pass.py, which uses Gemini's batch mode at half the price. Every run of
+this script is ONE request and never retries, because each image costs money
 (about $0.10 at 2K with gemini-3.1-flash-image). Needs GEMINI_API_KEY in the environment
 and generativelanguage.googleapis.com allowed by the network policy. Standard library only
 (plus Pillow, which the other art tools already use).
