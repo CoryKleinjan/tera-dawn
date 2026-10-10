@@ -379,7 +379,9 @@
    "prompts": "tera-dawn-chatgpt-art-prompts-2.md",
    "batch": "L6 (one prompt each)",
    "with": null,
-   "refs": [],
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/paperdoll_cape.png"
+   ],
    "save": "paperdoll_shield_round.png",
    "replaces": "art/source/paperdoll_layers.png",
    "kind": "anim",
@@ -392,7 +394,7 @@
    "fill": {
     "item": "SHIELD, ROUND"
    },
-   "extra": "- You must answer with the finished image itself, not text.\n- Trace the attached base body sheet cell for cell: the body is the SAME size and in the same place in every cell as in that sheet (it fills most of each cell's height); do not shrink it.\n- Show the round shield on the body's front arm in all 32 poses (on the back in the back views)."
+   "extra": "- You must answer with the finished image itself, not text.\n- Trace the attached base body sheet cell for cell: the body is the SAME size and in the same place in every cell as in that sheet (it fills most of each cell's height); do not shrink it.\n- Show the round shield on the body's front arm in all 32 poses (on the back in the back views).\n- GREYSCALE applies ONLY to the shield's own pixels. The background stays bright pure magenta #FF00FF everywhere; it is never grey.\n- Lay it out exactly like the attached cape layer sheet (paperdoll_cape): same grid, same magenta background, the body in the same place."
   },
   {
    "id": "paperdoll_shield_kite",
@@ -735,7 +737,8 @@
    "with": "L",
    "refs": [
     "hero_main.png",
-    "paperdoll_body.png"
+    "paperdoll_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/bottom_trousers_frames.png"
    ],
    "save": "bottom_shorts_frames.png",
    "replaces": null,
@@ -749,7 +752,7 @@
    "fill": {
     "item": "SHORTS"
    },
-   "extra": "- Trace the attached base body sheet cell for cell: the body is the SAME size and in the same place in every cell as in that sheet (it fills most of each cell's height); do not shrink it."
+   "extra": "- Trace the attached base body sheet cell for cell: the body is the SAME size and in the same place in every cell as in that sheet (it fills most of each cell's height); do not shrink it.\n- All 32 poses: 8 columns x 4 rows, the same layout as the attached trousers sheet (bottom_trousers_frames) and the base body sheet. Not 16 poses, not 4 columns.\n- The background is bright pure magenta #FF00FF, not lilac or pink."
   },
   {
    "id": "bottom_breeches_frames",
@@ -939,7 +942,7 @@
      32
     ]
    },
-   "extra": "- The green rod is in EVERY one of these 26 cells, no exceptions: 1-4 IDLE, 5-8 WALK, 9-12 RUN, 13-14 ATTACK, 15 HIT, 16 HURT, 17 JUMP, 18 FALL, 19 LAND, 20 CROUCH, 26-28 DAWN SLASH, 29-30 FAINT, 31 LEVEL UP. Where the hand is behind the body, the visible ends of the rod still show past the body. Exactly ONE rod per cell.\n- No rod in cells 21-25 (ROPE, LADDER, CLIMB IDLE) and 32 SIT.\n- The rod is bright pure green #00FF00 and clearly visible in every one of those 26 cells, even the small poses."
+   "extra": "- The green rod is in EVERY one of these 26 cells, no exceptions: 1-4 IDLE, 5-8 WALK, 9-12 RUN, 13-14 ATTACK, 15 HIT, 16 HURT, 17 JUMP, 18 FALL, 19 LAND, 20 CROUCH, 26-28 DAWN SLASH, 29-30 FAINT, 31 LEVEL UP. Where the hand is behind the body, the visible ends of the rod still show past the body. Exactly ONE rod per cell.\n- No rod in cells 21-25 (ROPE, LADDER, CLIMB IDLE) and 32 SIT.\n- The rod is bright pure green #00FF00 and clearly visible in every one of those 26 cells, even the small poses.\n- Cells that were missed last time, draw the rod in them too: 27 DAWN SLASH 2 (along the slash, in front of the body), 29 FAINT 1 and 30 FAINT 2 (the rod lies on the ground beside the open hand).\n- 25 CLIMB IDLE has NO rod."
   },
   {
    "id": "paperdoll_body_2",
@@ -1813,7 +1816,7 @@
    "fill": {
     "name": "cinder_pup"
    },
-   "extra": "- Nothing is drawn behind the creature: no coloured tile, panel, card, frame, sky or wall. The creature sits directly on the flat magenta."
+   "extra": "- Nothing is drawn behind the creature: no coloured tile, panel, card, frame, sky or wall. The creature sits directly on the flat magenta.\n- Every cell has the same flat pure magenta background. No lighter or darker tile behind alternate cells."
   },
   {
    "id": "mon_ash_bat",
@@ -2467,7 +2470,8 @@
    "batch": "W1b",
    "with": null,
    "refs": [
-    "meadow_backgrounds_a.png"
+    "meadow_backgrounds_a.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/lumewood_backgrounds_2.png"
    ],
    "save": "dawnharbor_backgrounds.png",
    "replaces": "art/source/dawnharbor_area.png",
@@ -2481,7 +2485,7 @@
    "fill": {
     "area": "dawnharbor"
    },
-   "extra": "- The 7 layers are separate horizontal strips, each with flat magenta above and below it. The painting never fills the whole image: magenta must show between every pair of strips."
+   "extra": "- The 7 layers are separate horizontal strips, each with flat magenta above and below it. The painting never fills the whole image: magenta must show between every pair of strips.\n- Use exactly the layout of the attached Lumewood backdrop sheet: 7 full-width strips stacked from top to bottom in ONE column, flat magenta between them. Not two columns."
   },
   {
    "id": "driftcove_tileset",
