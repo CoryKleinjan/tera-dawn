@@ -273,6 +273,8 @@ class Pass:
         offers, so the answer can be scaled back and cropped to the base exactly."""
         base = os.path.join(gemini_sheet.ROOT, sheet["edit"]["base"])
         im = Image.open(base)
+        # "base_crop": [x0, y0, x1, y1] of the base to send on its own (one piece of a sheet)
+        crop = sheet["edit"].get("base_crop")
         if im.mode in ("RGBA", "LA", "P"):
             # a cut sprite: set it on magenta, the background every sheet is drawn on
             im = im.convert("RGBA")
@@ -282,6 +284,8 @@ class Pass:
         else:
             im = im.convert("RGB")
             background = tuple(int(c) for c in sheet_check.background_color(sheet_check.load_rgb(base)))
+        if crop:
+            im = im.crop(tuple(crop))
         # "base_scale": enlarge the base (nearest neighbour) so the answer has room for finer pixels
         k = sheet["edit"].get("base_scale", 1.0)
         if k != 1.0:
