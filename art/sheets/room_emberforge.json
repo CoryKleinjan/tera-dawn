@@ -1,14 +1,13 @@
 {
   "source": "art/source/room_emberforge.png",
   "out_dir": "assets/sprites/rooms/emberforge",
-  "scale": 0.45,
+  "scale": 0.443,
   "label_band": 0.2,
   "cells": [
     [
       "wall",
       "door",
-      "floor_top",
-      "floor_side"
+      "floor_top"
     ],
     [
       "counter",
@@ -25,15 +24,82 @@
   ],
   "overrides": {
     "wall": {
-      "scale": 1.15
+      "crop": [
+        68,
+        48,
+        818,
+        492
+      ],
+      "scale": 0.99
     },
     "floor_top": {
       "seamless": true,
-      "size": 128
+      "size": 128,
+      "crop": [
+        0,
+        56,
+        429,
+        485
+      ],
+      "scale": 0.45
     },
-    "floor_side": {
-      "seamless": true,
-      "size": 128
+    "door": {
+      "scale": 0.2836
+    },
+    "counter": {
+      "scale": 0.4274
+    },
+    "shelf": {
+      "scale": 0.635
+    },
+    "bookcase": {
+      "scale": 0.4589
+    },
+    "table": {
+      "scale": 0.2913
+    },
+    "hearth": {
+      "scale": 0.5357
+    },
+    "rack": {
+      "scale": 0.345
+    },
+    "lamp": {
+      "scale": 0.4911
+    },
+    "barrel": {
+      "scale": 0.2498
     }
-  }
+  },
+  "grid": {
+    "rows": [
+      0,
+      544,
+      872,
+      1190
+    ],
+    "cols": [
+      [
+        0,
+        887,
+        1333,
+        1774
+      ],
+      [
+        0,
+        440,
+        887,
+        1333,
+        1774
+      ],
+      [
+        0,
+        440,
+        887,
+        1333,
+        1774
+      ]
+    ]
+  },
+  "inset": 6
 }

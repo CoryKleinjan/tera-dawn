@@ -1,7 +1,7 @@
 {
   "source": "art/source/room_meadow.png",
   "out_dir": "assets/sprites/rooms/meadow",
-  "scale": 0.45,
+  "scale": 0.365,
   "label_band": 0.2,
   "cells": [
     [
@@ -25,15 +25,130 @@
   ],
   "overrides": {
     "wall": {
-      "scale": 1.15
+      "crop": [
+        24,
+        40,
+        425,
+        378
+      ],
+      "scale": 1.3026
     },
     "floor_top": {
       "seamless": true,
-      "size": 128
+      "size": 128,
+      "crop": [
+        46,
+        40,
+        386,
+        380
+      ],
+      "scale": 0.45
     },
     "floor_side": {
       "seamless": true,
-      "size": 128
+      "size": 128,
+      "crop": [
+        70,
+        40,
+        360,
+        330
+      ],
+      "scale": 0.45
+    },
+    "door": {
+      "crop": [
+        93,
+        87,
+        343,
+        380
+      ]
+    },
+    "counter": {
+      "crop": [
+        0,
+        31,
+        430,
+        386
+      ],
+      "scale": 0.303
+    },
+    "shelf": {
+      "crop": [
+        0,
+        31,
+        433,
+        386
+      ],
+      "scale": 0.594
+    },
+    "bookcase": {
+      "crop": [
+        0,
+        31,
+        432,
+        386
+      ]
+    },
+    "table": {
+      "crop": [
+        0,
+        31,
+        431,
+        386
+      ],
+      "scale": 0.2259
+    },
+    "hearth": {
+      "crop": [
+        0,
+        33,
+        430,
+        384
+      ],
+      "scale": 0.3888
+    },
+    "rack": {
+      "crop": [
+        0,
+        30,
+        433,
+        384
+      ],
+      "scale": 0.3191
+    },
+    "lamp": {
+      "crop": [
+        0,
+        30,
+        432,
+        384
+      ],
+      "scale": 0.4229
+    },
+    "barrel": {
+      "crop": [
+        0,
+        30,
+        431,
+        384
+      ],
+      "scale": 0.1501
     }
-  }
+  },
+  "grid": {
+    "rows": [
+      0,
+      396,
+      794,
+      1190
+    ],
+    "cols": [
+      0,
+      442,
+      887,
+      1331,
+      1774
+    ]
+  },
+  "inset": 6
 }

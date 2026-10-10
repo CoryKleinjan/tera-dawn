@@ -20,32 +20,75 @@
     "meadow_top": {
       "seamless": true,
       "size": 128,
-      "keep": "largest"
+      "crop": [
+        26,
+        42,
+        446,
+        462
+      ]
     },
     "meadow_side": {
       "seamless": true,
       "size": 128,
-      "keep": "largest"
+      "crop": [
+        26,
+        42,
+        446,
+        462
+      ]
     },
     "meadow_soil": {
       "seamless": true,
       "size": 128,
-      "keep": "largest"
+      "crop": [
+        26,
+        42,
+        446,
+        462
+      ]
     },
     "ember_top": {
       "seamless": true,
       "size": 128,
-      "keep": "largest"
+      "crop": [
+        26,
+        42,
+        446,
+        462
+      ]
     },
     "ember_side": {
       "seamless": true,
       "size": 128,
-      "keep": "largest"
+      "crop": [
+        26,
+        42,
+        446,
+        462
+      ]
     },
     "ember_soil": {
       "seamless": true,
       "size": 128,
-      "keep": "largest"
+      "crop": [
+        26,
+        42,
+        446,
+        462
+      ]
     }
+  },
+  "grid": {
+    "rows": [
+      40,
+      515,
+      990
+    ],
+    "cols": [
+      37,
+      520,
+      1016,
+      1499
+    ]
   }
 }

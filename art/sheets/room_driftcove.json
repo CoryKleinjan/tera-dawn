@@ -1,14 +1,13 @@
 {
   "source": "art/source/room_driftcove.png",
   "out_dir": "assets/sprites/rooms/driftcove",
-  "scale": 0.45,
+  "scale": 0.427,
   "label_band": 0.2,
   "cells": [
     [
       "wall",
       "door",
-      "floor_top",
-      "floor_side"
+      ""
     ],
     [
       "counter",
@@ -25,15 +24,71 @@
   ],
   "overrides": {
     "wall": {
-      "scale": 1.15
+      "crop": [
+        37,
+        48,
+        837,
+        480
+      ],
+      "scale": 1.0206
     },
-    "floor_top": {
-      "seamless": true,
-      "size": 128
+    "door": {
+      "scale": 0.26
     },
-    "floor_side": {
-      "seamless": true,
-      "size": 128
+    "counter": {
+      "scale": 0.3226
+    },
+    "shelf": {
+      "scale": 0.4554
+    },
+    "bookcase": {
+      "scale": 0.4714
+    },
+    "table": {
+      "scale": 0.2347
+    },
+    "hearth": {
+      "scale": 0.5014
+    },
+    "rack": {
+      "scale": 0.399
+    },
+    "lamp": {
+      "scale": 0.4552
+    },
+    "barrel": {
+      "scale": 0.208
     }
-  }
+  },
+  "grid": {
+    "rows": [
+      0,
+      594,
+      891,
+      1190
+    ],
+    "cols": [
+      [
+        0,
+        887,
+        1333,
+        1774
+      ],
+      [
+        0,
+        440,
+        887,
+        1333,
+        1774
+      ],
+      [
+        0,
+        440,
+        887,
+        1333,
+        1774
+      ]
+    ]
+  },
+  "inset": 6
 }

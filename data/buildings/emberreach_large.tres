@@ -8,5 +8,5 @@ script = ExtResource("1_building_def")
 id = &"emberreach_large"
 texture = ExtResource("2_large")
 height = 320.0
-door_x = 0.45
-chimney = Vector2(0.72, 0.88)
+door_x = 0.5
+chimney = Vector2(0.5, 0.97)

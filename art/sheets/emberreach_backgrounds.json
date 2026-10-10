@@ -1,110 +1,158 @@
 {
-  "source": "art/source/emberreach_area.png",
-  "region": [
-    1040,
-    43,
-    1536,
-    1024
-  ],
+  "source": "art/source/emberreach_backgrounds.png",
   "scale": 0.5,
   "label_band": 0.3,
-  "inset": 5,
+  "inset": 4,
   "out_dir": "assets/sprites/backgrounds/emberreach",
   "cells": [
     [
       "far"
     ],
     [
-      ""
-    ],
-    [
       "mid"
-    ],
-    [
-      ""
     ],
     [
       "near"
     ],
     [
-      ""
+      "clouds_1",
+      "clouds_2",
+      "clouds_3",
+      "clouds_4"
     ],
     [
-      "clouds"
-    ],
-    [
-      ""
-    ],
-    [
-      "landmark"
-    ],
-    [
-      ""
-    ],
-    [
-      "sky_body"
-    ],
-    [
-      ""
-    ],
-    [
+      "landmark",
+      "sky_body",
       "motes"
     ]
   ],
   "grid": {
     "rows": [
       0,
-      139,
-      145,
-      290,
-      294,
-      437,
-      442,
-      559,
-      564,
-      731,
-      735,
-      856,
-      860,
-      981
+      170,
+      343,
+      515,
+      685,
+      1030
     ],
     "cols": [
-      0,
-      496
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        382,
+        768,
+        1155,
+        1536
+      ],
+      [
+        0,
+        768,
+        1155,
+        1536
+      ]
     ]
   },
   "overrides": {
     "far": {
-      "fix": "painted_sky",
-      "extend_bottom": 160
+      "extend_bottom": 160,
+      "blank": [
+        [
+          0,
+          0,
+          200,
+          42
+        ]
+      ],
+      "scale": 0.2722
     },
     "mid": {
-      "fix": "painted_sky",
-      "extend_bottom": 160
+      "extend_bottom": 160,
+      "blank": [
+        [
+          0,
+          0,
+          200,
+          42
+        ]
+      ],
+      "scale": 0.3632
     },
     "near": {
-      "fix": "painted_sky",
-      "extend_bottom": 160
-    },
-    "landmark": {
-      "fix": "painted_sky",
-      "extend_bottom": 160
-    },
-    "clouds": {
-      "keep": "split"
+      "extend_bottom": 160,
+      "blank": [
+        [
+          0,
+          0,
+          200,
+          42
+        ]
+      ],
+      "scale": 0.4031
     },
     "sky_body": {
       "fix": "sky_body",
       "alpha": "soft",
       "crop": [
-        205,
-        12,
-        290,
-        97
-      ]
+        99,
+        78,
+        279,
+        258
+      ],
+      "scale": 0.2333
     },
     "motes": {
-      "alpha": "soft"
+      "alpha": "soft",
+      "blank": [
+        [
+          0,
+          0,
+          200,
+          42
+        ]
+      ],
+      "scale": 0.3823
+    },
+    "clouds_1": {
+      "blank": [
+        [
+          0,
+          0,
+          200,
+          42
+        ]
+      ],
+      "scale": 0.3703
+    },
+    "landmark": {
+      "blank": [
+        [
+          0,
+          0,
+          200,
+          42
+        ]
+      ],
+      "scale": 0.2377
+    },
+    "clouds_2": {
+      "scale": 0.2674
+    },
+    "clouds_3": {
+      "scale": 0.2764
+    },
+    "clouds_4": {
+      "scale": 0.2984
     }
   }
 }

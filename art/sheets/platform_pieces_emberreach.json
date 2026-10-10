@@ -1,0 +1,36 @@
+{
+  "source": "art/source/platform_pieces_emberreach.png",
+  "out_dir": "art/build/platform_pieces_emberreach",
+  "scale": 0.3,
+  "label_band": 0.2,
+  "inset": 6,
+  "keep": "largest",
+  "grid": {
+    "rows": [
+      0,
+      594,
+      1190
+    ],
+    "cols": [
+      0,
+      295,
+      887,
+      1483,
+      1774
+    ]
+  },
+  "cells": [
+    [
+      "cap_left",
+      "middle_a",
+      "middle_b",
+      "cap_right"
+    ],
+    [
+      "under_left",
+      "under_middle_a",
+      "under_middle_b",
+      "under_right"
+    ]
+  ]
+}

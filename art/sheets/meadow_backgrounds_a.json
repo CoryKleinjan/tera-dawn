@@ -1,17 +1,27 @@
 {
   "source": "art/source/meadow_backgrounds_a.png",
   "scale": 0.5,
-  "label_band": 0.3,
+  "label_band": 0.01,
+  "inset": 4,
   "out_dir": "assets/sprites/backgrounds/meadow",
   "cells": [
     [
       "far_mountains"
     ],
     [
+      ""
+    ],
+    [
       "mid_hills"
     ],
     [
+      ""
+    ],
+    [
       "near_treeline"
+    ],
+    [
+      ""
     ],
     [
       "clouds"
@@ -23,24 +33,65 @@
       "sun"
     ]
   ],
+  "grid": {
+    "rows": [
+      24,
+      200,
+      236,
+      386,
+      404,
+      570,
+      580,
+      722,
+      830,
+      1030
+    ],
+    "cols": [
+      0,
+      1536
+    ]
+  },
   "overrides": {
     "far_mountains": {
-      "extend_bottom": 160
+      "crop": [
+        169,
+        0,
+        1359,
+        165
+      ],
+      "extend_bottom": 160,
+      "scale": 0.4487
     },
     "mid_hills": {
-      "extend_bottom": 160
+      "crop": [
+        169,
+        0,
+        1359,
+        138
+      ],
+      "extend_bottom": 160,
+      "scale": 0.4106
     },
     "near_treeline": {
-      "extend_bottom": 160
-    },
-    "village": {
-      "extend_bottom": 160
+      "crop": [
+        169,
+        0,
+        1359,
+        155
+      ],
+      "extend_bottom": 160,
+      "scale": 0.4167
     },
     "clouds": {
-      "keep": "split"
+      "keep": "split",
+      "scale": 0.5671
     },
     "sun": {
-      "alpha": "soft"
+      "alpha": "soft",
+      "scale": 0.4062
+    },
+    "village": {
+      "scale": 0.9762
     }
   }
 }

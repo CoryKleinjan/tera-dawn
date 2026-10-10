@@ -1,12 +1,6 @@
 {
-  "source": "art/source/lumewood_area.png",
-  "region": [
-    0,
-    43,
-    997,
-    1024
-  ],
-  "scale": 0.35,
+  "source": "art/source/lumewood_tileset.png",
+  "scale": 0.286,
   "label_band": 0.2,
   "out_dir": "assets/sprites/tiles/lumewood",
   "cells": [
@@ -46,56 +40,237 @@
   "grid": {
     "rows": [
       0,
-      221,
-      455,
-      664,
-      981
+      257,
+      514,
+      772,
+      1030
     ],
     "cols": [
-      [
-        0,
-        150,
-        306,
-        466,
-        643,
-        813,
-        997
-      ],
-      [
-        0,
-        151,
-        306,
-        514,
-        641,
-        826,
-        997
-      ],
-      [
-        0,
-        166,
-        328,
-        479,
-        647,
-        810,
-        997
-      ],
-      [
-        0,
-        130,
-        275,
-        420,
-        646,
-        826,
-        997
-      ]
+      0,
+      252,
+      509,
+      767,
+      1025,
+      1283,
+      1536
     ]
   },
   "overrides": {
     "lantern_lit": {
-      "fix": null,
+      "fix": "glow_backdrop",
       "key": [
         0.15,
         0.4
+      ],
+      "scale": 0.5562,
+      "crop": [
+        0,
+        0,
+        252,
+        227
+      ]
+    },
+    "ground_left": {
+      "scale": 0.2609,
+      "crop": [
+        0,
+        0,
+        246,
+        201
+      ]
+    },
+    "ground_middle": {
+      "scale": 0.2609,
+      "crop": [
+        0,
+        0,
+        251,
+        226
+      ]
+    },
+    "ground_right": {
+      "scale": 0.2609,
+      "crop": [
+        0,
+        0,
+        252,
+        201
+      ]
+    },
+    "platform_small": {
+      "scale": 0.2524,
+      "crop": [
+        0,
+        0,
+        252,
+        226
+      ]
+    },
+    "platform_medium": {
+      "scale": 0.2447,
+      "crop": [
+        0,
+        0,
+        252,
+        226
+      ]
+    },
+    "platform_large": {
+      "crop": [
+        0,
+        0,
+        247,
+        226
+      ],
+      "scale": 0.273
+    },
+    "edge_grass": {
+      "scale": 0.2699,
+      "crop": [
+        0,
+        0,
+        246,
+        201
+      ]
+    },
+    "tall_grass": {
+      "scale": 0.267,
+      "crop": [
+        0,
+        0,
+        251,
+        226
+      ]
+    },
+    "tree_large": {
+      "scale": 0.296,
+      "crop": [
+        0,
+        0,
+        252,
+        226
+      ]
+    },
+    "tree_small": {
+      "crop": [
+        0,
+        0,
+        252,
+        226
+      ],
+      "scale": 0.2492
+    },
+    "bush_large": {
+      "crop": [
+        0,
+        0,
+        252,
+        226
+      ]
+    },
+    "bush_small": {
+      "crop": [
+        0,
+        0,
+        247,
+        226
+      ],
+      "scale": 0.2722
+    },
+    "rock_large": {
+      "scale": 0.306,
+      "crop": [
+        0,
+        0,
+        246,
+        227
+      ]
+    },
+    "rock_small": {
+      "crop": [
+        0,
+        0,
+        251,
+        227
+      ],
+      "scale": 0.295
+    },
+    "stump": {
+      "scale": 0.2434,
+      "crop": [
+        0,
+        0,
+        252,
+        227
+      ]
+    },
+    "flowers": {
+      "crop": [
+        0,
+        0,
+        252,
+        227
+      ]
+    },
+    "signature_plant": {
+      "crop": [
+        0,
+        0,
+        252,
+        227
+      ]
+    },
+    "fence": {
+      "crop": [
+        0,
+        0,
+        247,
+        227
+      ]
+    },
+    "signpost": {
+      "scale": 0.3971,
+      "crop": [
+        0,
+        0,
+        246,
+        227
+      ]
+    },
+    "lantern_unlit": {
+      "scale": 0.5562,
+      "crop": [
+        0,
+        0,
+        251,
+        229
+      ]
+    },
+    "building_large": {
+      "scale": 0.5214,
+      "crop": [
+        0,
+        0,
+        252,
+        229
+      ]
+    },
+    "building_small": {
+      "scale": 0.3332,
+      "crop": [
+        0,
+        0,
+        252,
+        229
+      ]
+    },
+    "signature_prop": {
+      "scale": 0.3614,
+      "crop": [
+        0,
+        0,
+        247,
+        227
       ]
     }
   }

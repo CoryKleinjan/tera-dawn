@@ -1,51 +1,25 @@
 {
-  "source": "art/source/lumewood_area.png",
-  "region": [
-    1007,
-    43,
-    1536,
-    1024
-  ],
+  "source": "art/source/lumewood_backgrounds.png",
   "scale": 0.5,
   "label_band": 0.3,
-  "inset": 5,
+  "inset": 4,
   "out_dir": "assets/sprites/backgrounds/lumewood",
   "cells": [
     [
       "far"
     ],
     [
-      ""
-    ],
-    [
       "mid"
-    ],
-    [
-      ""
     ],
     [
       "near"
     ],
     [
-      ""
-    ],
-    [
       "clouds"
     ],
     [
-      ""
-    ],
-    [
-      "landmark"
-    ],
-    [
-      ""
-    ],
-    [
+      "landmark",
       "sky_body"
-    ],
-    [
-      ""
     ],
     [
       "motes"
@@ -54,57 +28,153 @@
   "grid": {
     "rows": [
       0,
-      139,
-      145,
-      288,
-      293,
-      437,
-      442,
-      558,
-      564,
-      732,
-      737,
-      856,
-      860,
-      981
+      179,
+      335,
+      502,
+      675,
+      847,
+      1030
     ],
     "cols": [
-      0,
-      529
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        768,
+        1536
+      ],
+      [
+        0,
+        1536
+      ]
     ]
   },
   "overrides": {
     "far": {
-      "fix": "painted_sky",
-      "extend_bottom": 160
+      "extend_bottom": 160,
+      "blank": [
+        [
+          0,
+          0,
+          200,
+          42
+        ]
+      ],
+      "scale": 0.3664
     },
     "mid": {
-      "fix": "painted_sky",
-      "extend_bottom": 160
+      "extend_bottom": 160,
+      "blank": [
+        [
+          0,
+          0,
+          200,
+          42
+        ]
+      ],
+      "scale": 0.4459
     },
     "near": {
-      "fix": "painted_sky",
-      "extend_bottom": 160
+      "extend_bottom": 160,
+      "blank": [
+        [
+          0,
+          0,
+          200,
+          42
+        ]
+      ],
+      "scale": 0.4317
     },
     "landmark": {
-      "fix": "painted_sky",
-      "extend_bottom": 160
+      "blank": [
+        [
+          0,
+          0,
+          200,
+          42
+        ],
+        [
+          526,
+          0,
+          742,
+          72
+        ]
+      ],
+      "scale": 0.4756
     },
     "clouds": {
-      "keep": "split"
+      "keep": "split",
+      "blank": [
+        [
+          0,
+          0,
+          200,
+          42
+        ],
+        [
+          1095,
+          26,
+          1232,
+          160
+        ],
+        [
+          526,
+          116,
+          742,
+          170
+        ]
+      ],
+      "scale": 0.2882
     },
     "sky_body": {
       "fix": "sky_body",
       "alpha": "soft",
       "crop": [
-        224,
-        11,
-        310,
-        97
-      ]
+        380,
+        10,
+        540,
+        164
+      ],
+      "scale": 0.2792
     },
     "motes": {
-      "alpha": "soft"
+      "alpha": "soft",
+      "blank": [
+        [
+          0,
+          0,
+          200,
+          42
+        ],
+        [
+          50,
+          0,
+          215,
+          105
+        ],
+        [
+          1318,
+          0,
+          1500,
+          135
+        ]
+      ],
+      "scale": 0.2732
     }
   }
 }

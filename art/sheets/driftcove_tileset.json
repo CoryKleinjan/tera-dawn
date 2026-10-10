@@ -1,12 +1,6 @@
 {
-  "source": "art/source/driftcove_area.png",
-  "region": [
-    0,
-    43,
-    1032,
-    1024
-  ],
-  "scale": 0.35,
+  "source": "art/source/driftcove_tileset.png",
+  "scale": 0.284,
   "label_band": 0.2,
   "out_dir": "assets/sprites/tiles/driftcove",
   "cells": [
@@ -46,60 +40,234 @@
   "grid": {
     "rows": [
       0,
-      223,
-      455,
-      668,
-      981
+      257,
+      514,
+      772,
+      1030
     ],
     "cols": [
-      [
-        0,
-        152,
-        310,
-        471,
-        647,
-        815,
-        1032
-      ],
-      [
-        0,
-        152,
-        311,
-        472,
-        646,
-        844,
-        1032
-      ],
-      [
-        0,
-        170,
-        346,
-        472,
-        656,
-        845,
-        1032
-      ],
-      [
-        0,
-        127,
-        276,
-        420,
-        674,
-        857,
-        1032
-      ]
+      0,
+      252,
+      509,
+      767,
+      1025,
+      1283,
+      1536
     ]
   },
   "overrides": {
     "lantern_lit": {
       "fix": "glow_backdrop",
-      "keep": "largest"
+      "keep": "largest",
+      "scale": 0.3409,
+      "crop": [
+        0,
+        26,
+        252,
+        252
+      ]
     },
     "tree_large": {
-      "keep": "largest"
+      "keep": "largest",
+      "crop": [
+        0,
+        26,
+        252,
+        251
+      ],
+      "scale": 0.2525
     },
     "tree_small": {
-      "keep": "largest"
+      "keep": "largest",
+      "crop": [
+        0,
+        26,
+        252,
+        251
+      ],
+      "scale": 0.2943
+    },
+    "ground_left": {
+      "scale": 0.1925,
+      "crop": [
+        0,
+        25,
+        246,
+        251
+      ]
+    },
+    "ground_middle": {
+      "scale": 0.1925,
+      "crop": [
+        0,
+        25,
+        251,
+        251
+      ]
+    },
+    "ground_right": {
+      "scale": 0.1925,
+      "crop": [
+        0,
+        25,
+        252,
+        251
+      ]
+    },
+    "platform_small": {
+      "scale": 0.2422,
+      "crop": [
+        0,
+        25,
+        252,
+        251
+      ]
+    },
+    "platform_medium": {
+      "crop": [
+        0,
+        25,
+        252,
+        251
+      ]
+    },
+    "platform_large": {
+      "crop": [
+        0,
+        25,
+        247,
+        251
+      ]
+    },
+    "edge_grass": {
+      "scale": 0.2536,
+      "crop": [
+        0,
+        26,
+        246,
+        251
+      ]
+    },
+    "tall_grass": {
+      "crop": [
+        0,
+        26,
+        251,
+        251
+      ]
+    },
+    "bush_large": {
+      "crop": [
+        0,
+        26,
+        252,
+        251
+      ]
+    },
+    "bush_small": {
+      "scale": 0.2523,
+      "crop": [
+        0,
+        26,
+        247,
+        251
+      ]
+    },
+    "rock_large": {
+      "crop": [
+        0,
+        26,
+        246,
+        252
+      ]
+    },
+    "rock_small": {
+      "scale": 0.3036,
+      "crop": [
+        0,
+        26,
+        251,
+        252
+      ]
+    },
+    "stump": {
+      "crop": [
+        0,
+        26,
+        252,
+        252
+      ],
+      "scale": 0.2967
+    },
+    "flowers": {
+      "scale": 0.2603,
+      "crop": [
+        0,
+        26,
+        252,
+        252
+      ]
+    },
+    "signature_plant": {
+      "crop": [
+        0,
+        26,
+        252,
+        252
+      ],
+      "fix": "glow_backdrop"
+    },
+    "fence": {
+      "crop": [
+        0,
+        26,
+        247,
+        252
+      ]
+    },
+    "signpost": {
+      "scale": 0.3081,
+      "crop": [
+        0,
+        26,
+        246,
+        252
+      ]
+    },
+    "lantern_unlit": {
+      "scale": 0.3409,
+      "crop": [
+        0,
+        26,
+        251,
+        252
+      ]
+    },
+    "building_large": {
+      "scale": 0.3994,
+      "crop": [
+        0,
+        26,
+        252,
+        252
+      ]
+    },
+    "building_small": {
+      "scale": 0.3116,
+      "crop": [
+        0,
+        26,
+        252,
+        252
+      ]
+    },
+    "signature_prop": {
+      "crop": [
+        0,
+        26,
+        247,
+        252
+      ]
     }
   }
 }

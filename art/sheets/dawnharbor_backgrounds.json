@@ -1,14 +1,8 @@
 {
-  "source": "art/source/dawnharbor_area.png",
-  "region": [
-    1041,
-    43,
-    1536,
-    1024
-  ],
+  "source": "art/source/dawnharbor_backgrounds.png",
   "scale": 0.5,
-  "label_band": 0.3,
-  "inset": 5,
+  "label_band": 0.01,
+  "inset": 4,
   "out_dir": "assets/sprites/backgrounds/dawnharbor",
   "cells": [
     [
@@ -54,57 +48,59 @@
   "grid": {
     "rows": [
       0,
-      141,
-      146,
-      291,
-      296,
-      437,
-      442,
-      562,
-      566,
-      722,
-      727,
-      854,
-      858,
-      981
+      527,
+      660,
+      1064,
+      1180,
+      1586,
+      1675,
+      1851,
+      1928,
+      2153,
+      2253,
+      2395,
+      2500,
+      2731
     ],
     "cols": [
       0,
-      495
+      1536
     ]
   },
   "overrides": {
     "far": {
-      "fix": "painted_sky",
-      "extend_bottom": 160
+      "extend_bottom": 160,
+      "scale": 0.0618
     },
     "mid": {
-      "fix": "painted_sky",
-      "extend_bottom": 160
+      "extend_bottom": 160,
+      "scale": 0.1515
     },
     "near": {
-      "fix": "painted_sky",
-      "extend_bottom": 160
+      "extend_bottom": 160,
+      "scale": 0.1633
     },
     "landmark": {
-      "fix": "painted_sky",
-      "extend_bottom": 160
+      "scale": 0.338
     },
     "clouds": {
-      "keep": "split"
+      "keep": "split",
+      "scale": 0.2748
     },
     "sky_body": {
       "fix": "sky_body",
       "alpha": "soft",
       "crop": [
-        224,
-        30,
-        288,
-        96
-      ]
+        678,
+        45,
+        852,
+        134
+      ],
+      "scale": 0.3636
     },
     "motes": {
-      "alpha": "soft"
+      "alpha": "soft",
+      "scale": 0.2308
     }
   }
 }
