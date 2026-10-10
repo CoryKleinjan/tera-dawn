@@ -1,0 +1,22 @@
+{
+  "source": "art/source/building_driftcove_small.png",
+  "art_px": 5.115,
+  "out_dir": "assets/sprites/buildings/driftcove",
+  "label_band": 0,
+  "inset": 0,
+  "grid": {
+    "rows": [
+      0,
+      1023
+    ],
+    "cols": [
+      0,
+      945
+    ]
+  },
+  "cells": [
+    [
+      "small"
+    ]
+  ]
+}

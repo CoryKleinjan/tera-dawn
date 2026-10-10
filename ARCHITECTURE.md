@@ -286,9 +286,11 @@ on a platform stand just behind the skin. The skin is one picture per platform w
 (`PlatformSkin`): the biome's left cap, middles and right cap, overlapped and joined where they
 match best, so a long platform never reads as small ones pasted together.
 
-All land art (tiles, platform pieces, ground textures) is cut at two texels per art pixel and
-drawn at `TDStage.TEXEL` game pixels per art pixel (`TDStage.art_density`, `art_size`), so
-every piece of land shows one pixel size. Data sizes it only within a narrow band (a
+All environment art (tiles, platform pieces, ground textures, buildings, ropes and ladders,
+lanterns, portals, backdrop layers and room interiors) is cut at two texels per art pixel and drawn at
+`TDStage.TEXEL` game pixels per art pixel (`TDStage.art_density`, `art_size`), so the whole
+screen shows one pixel size. Backdrop layers are cut to the size they show at, so depth
+doesn't change it; a building's art is cut to its `height`. Data sizes it only within a narrow band (a
 manifest's `grow`, a decor or prop `scale`); `tools/art/land_pixels.py --check` and the tests
 keep it there. The floor's front-edge grass is nearer than the
 actors but sunk so its tips stop at the feet line (`TerrainBuilder.FRINGE_RISE`).
@@ -382,9 +384,9 @@ door you walk through by pressing Up, into a small room that is its own map.
    "↑ Out to …", and the minimap shows a little lit doorway.
 
 A room's biome (`data/biomes/rooms/<town>_room.tres`) has a `wall` strip as its only backdrop
-layer, a plank floor, warm low light and a `door`. Its stand-in art comes from
-`tools/art/make_room_placeholders.py`; part 9 of the art prompts asks for the painted pieces,
-which land on the same file names. `tests/content/content_world_test.gd` checks every door is
+layer, a plank floor, warm low light and a `door`. Its painted pieces are cut from the
+`room_<town>` sheets over stand-in art from `tools/art/make_room_placeholders.py`, on the same
+file names, at the shared pixel size. `tests/content/content_world_test.gd` checks every door is
 in a building and every room has one door back to the town that leads into it.
 
 ### Town layout

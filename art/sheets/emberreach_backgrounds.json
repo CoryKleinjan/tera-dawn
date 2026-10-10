@@ -1,8 +1,7 @@
 {
-  "source": "art/source/emberreach_backgrounds.png",
-  "scale": 0.5,
+  "source": "art/source/emberreach_backgrounds_fine.png",
   "label_band": 0.3,
-  "inset": 4,
+  "inset": 11,
   "out_dir": "assets/sprites/backgrounds/emberreach",
   "cells": [
     [
@@ -29,87 +28,87 @@
   "grid": {
     "rows": [
       0,
-      170,
-      343,
-      515,
-      685,
-      1030
+      454,
+      916,
+      1375,
+      1829,
+      2750
     ],
     "cols": [
       [
         0,
-        1536
+        4101
       ],
       [
         0,
-        1536
+        4101
       ],
       [
         0,
-        1536
+        4101
       ],
       [
         0,
-        382,
-        768,
-        1155,
-        1536
+        1020,
+        2050,
+        3084,
+        4101
       ],
       [
         0,
-        768,
-        1155,
-        1536
+        2050,
+        3084,
+        4101
       ]
     ]
   },
   "overrides": {
     "far": {
-      "extend_bottom": 160,
+      "extend_bottom": 589,
       "blank": [
         [
           0,
           0,
-          200,
-          42
+          534,
+          112
         ]
       ],
-      "scale": 0.2722
+      "scale": 0.3752
     },
     "mid": {
-      "extend_bottom": 160,
+      "extend_bottom": 512,
       "blank": [
         [
           0,
           0,
-          200,
-          42
+          534,
+          112
         ]
       ],
-      "scale": 0.3632
+      "scale": 0.4353
     },
     "near": {
-      "extend_bottom": 160,
+      "extend_bottom": 461,
       "blank": [
         [
           0,
           0,
-          200,
-          42
+          534,
+          112
         ]
       ],
-      "scale": 0.4031
+      "scale": 0.4348
     },
     "sky_body": {
       "fix": "sky_body",
       "alpha": "soft",
       "crop": [
-        99,
-        78,
-        279,
-        258
+        264,
+        208,
+        745,
+        689
       ],
-      "scale": 0.2333
+      "scale": 0.5592
     },
     "motes": {
       "alpha": "soft",
@@ -117,42 +116,42 @@
         [
           0,
           0,
-          200,
-          42
+          534,
+          112
         ]
       ],
-      "scale": 0.3823
+      "scale": 0.4582
     },
     "clouds_1": {
       "blank": [
         [
           0,
           0,
-          200,
-          42
+          534,
+          112
         ]
       ],
-      "scale": 0.3703
+      "scale": 0.6213
     },
     "landmark": {
       "blank": [
         [
           0,
           0,
-          200,
-          42
+          534,
+          112
         ]
       ],
-      "scale": 0.2377
+      "scale": 0.2991
     },
     "clouds_2": {
-      "scale": 0.2674
+      "scale": 0.4487
     },
     "clouds_3": {
-      "scale": 0.2764
+      "scale": 0.4638
     },
     "clouds_4": {
-      "scale": 0.2984
+      "scale": 0.5007
     }
   }
 }

@@ -1,8 +1,7 @@
 {
-  "source": "art/source/greenbough_backgrounds.png",
-  "scale": 0.5,
+  "source": "art/source/greenbough_backgrounds_fine.png",
   "label_band": 0.3,
-  "inset": 4,
+  "inset": 11,
   "out_dir": "assets/sprites/backgrounds/greenbough",
   "cells": [
     [
@@ -29,90 +28,90 @@
   ],
   "grid": {
     "rows": [
-      20,
-      209,
-      412,
-      599,
-      804,
-      1011
+      53,
+      558,
+      1100,
+      1599,
+      2147,
+      2699
     ],
     "cols": [
       [
-        20,
-        1024,
-        1517
+        53,
+        2734,
+        4050
       ],
       [
-        20,
-        1024,
-        1517
+        53,
+        2734,
+        4050
       ],
       [
-        20,
-        1024,
-        1517
+        53,
+        2734,
+        4050
       ],
       [
-        20,
-        1024,
-        1517
+        53,
+        2734,
+        4050
       ],
       [
-        20,
-        509,
-        1024,
-        1517
+        53,
+        1359,
+        2734,
+        4050
       ]
     ]
   },
   "overrides": {
     "far": {
-      "extend_bottom": 160,
+      "extend_bottom": 589,
       "blank": [
         [
           0,
           0,
-          185,
-          44
+          494,
+          117
         ]
       ],
-      "scale": 0.3442
+      "scale": 0.4744
     },
     "mid": {
-      "extend_bottom": 160,
+      "extend_bottom": 512,
       "blank": [
         [
           0,
           0,
-          185,
-          44
+          494,
+          117
         ]
       ],
-      "scale": 0.3196
+      "scale": 0.3831
     },
     "near": {
-      "extend_bottom": 160,
+      "extend_bottom": 461,
       "blank": [
         [
           0,
           0,
-          185,
-          44
+          494,
+          117
         ]
       ],
-      "scale": 0.3278
+      "scale": 0.3536
     },
     "landmark": {
-      "extend_bottom": 160,
+      "extend_bottom": 538,
       "blank": [
         [
           0,
           0,
-          185,
-          44
+          494,
+          117
         ]
       ],
-      "scale": 0.4301
+      "scale": 0.5413
     },
     "clouds": {
       "keep": "split",
@@ -120,22 +119,26 @@
         [
           0,
           0,
-          185,
-          44
+          494,
+          117
         ]
       ],
-      "scale": 0.4305
+      "scale": 0.7224,
+      "key": [
+        0.08,
+        0.3
+      ]
     },
     "sky_body": {
       "fix": "sky_body",
       "alpha": "soft",
       "crop": [
-        218,
-        61,
-        276,
-        119
+        582,
+        163,
+        737,
+        318
       ],
-      "scale": 0.4828
+      "scale": 1.1573
     },
     "motes": {
       "alpha": "soft",
@@ -143,11 +146,11 @@
         [
           0,
           0,
-          185,
-          44
+          494,
+          117
         ]
       ],
-      "scale": 0.3089
+      "scale": 0.3702
     }
   }
 }

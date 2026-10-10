@@ -1,6 +1,5 @@
 {
-  "source": "art/source/ropes_props_b.png",
-  "scale": 0.25,
+  "source": "art/source/ropes_props_fine.png",
   "label_band": 0.2,
   "out_dir": "assets/sprites/props",
   "cells": [
@@ -38,201 +37,207 @@
       "alpha": "soft",
       "crop": [
         0,
-        26,
-        248,
-        206
+        65,
+        620,
+        515
       ],
-      "scale": 0.4417
+      "scale": 0.3534
     },
     "portal_2": {
       "alpha": "soft",
       "crop": [
         0,
-        26,
-        255,
-        206
+        65,
+        638,
+        515
       ],
-      "scale": 0.4125
+      "scale": 0.33
     },
     "portal_3": {
       "alpha": "soft",
       "crop": [
         0,
-        26,
-        255,
-        206
+        65,
+        638,
+        515
       ],
-      "scale": 0.41
+      "scale": 0.328
     },
     "portal_4": {
       "alpha": "soft",
       "crop": [
         0,
-        26,
-        256,
-        206
+        65,
+        640,
+        515
       ],
-      "scale": 0.4081
+      "scale": 0.3265
     },
     "portal_base": {
       "crop": [
         0,
-        22,
-        248,
-        206
+        55,
+        620,
+        515
       ],
-      "scale": 0.4142
+      "scale": 0.3314
     },
     "lantern_lit": {
       "crop": [
         0,
-        24,
-        255,
-        209
+        60,
+        638,
+        522
       ],
       "fix": "glow_backdrop",
-      "scale": 0.5872
+      "scale": 0.4698
     },
     "lantern_unlit": {
       "crop": [
         0,
-        24,
-        248,
-        209
+        60,
+        600,
+        522
       ],
-      "scale": 0.5872
+      "scale": 0.4698
     },
     "dawnshard_1": {
       "crop": [
         0,
-        22,
-        255,
-        209
+        55,
+        638,
+        522
       ],
       "fix": "glow_backdrop",
-      "scale": 0.2353
+      "scale": 0.0941
     },
     "dawnshard_2": {
       "crop": [
         0,
-        22,
-        256,
-        209
+        55,
+        640,
+        522
       ],
-      "fix": "glow_backdrop"
+      "fix": "glow_backdrop",
+      "scale": 0.1
     },
     "dawnshard_pile": {
       "crop": [
         0,
-        22,
-        248,
-        209
+        55,
+        620,
+        522
       ],
       "fix": "glow_backdrop",
-      "scale": 0.2393
+      "scale": 0.0957
     },
     "ladder_top": {
       "crop": [
         0,
-        22,
-        248,
-        206
-      ]
+        55,
+        620,
+        515
+      ],
+      "scale": 0.144
     },
     "ladder_middle": {
       "crop": [
         0,
-        50,
-        255,
-        189
-      ]
+        125,
+        638,
+        472
+      ],
+      "scale": 0.144
     },
     "ladder_bottom": {
       "crop": [
         0,
-        22,
-        255,
-        206
-      ]
+        55,
+        638,
+        515
+      ],
+      "scale": 0.144
     },
     "rope_ladder_middle": {
       "crop": [
         0,
-        45,
-        256,
-        197
-      ]
+        112,
+        640,
+        492
+      ],
+      "scale": 0.144
     },
     "rope_ladder_bottom": {
       "crop": [
         0,
-        22,
-        248,
-        206
-      ]
+        55,
+        620,
+        515
+      ],
+      "scale": 0.144
     },
     "rope_top": {
       "crop": [
         0,
-        24,
-        248,
-        208
+        60,
+        620,
+        520
       ],
-      "scale": 0.3811
+      "scale": 0.2439
     },
     "rope_middle": {
       "crop": [
         0,
-        32,
-        255,
-        168
+        80,
+        638,
+        420
       ],
-      "scale": 0.1842
+      "scale": 0.1179
     },
     "rope_bottom": {
       "crop": [
         0,
-        24,
-        255,
-        208
+        60,
+        638,
+        520
       ],
-      "scale": 0.1842
+      "scale": 0.1179
     },
     "vine_middle": {
       "crop": [
         0,
-        24,
-        256,
-        207
+        60,
+        640,
+        518
       ],
-      "scale": 0.2245
+      "scale": 0.1293
     },
     "vine_bottom": {
       "crop": [
         0,
-        24,
-        248,
-        208
+        60,
+        620,
+        520
       ],
-      "scale": 0.2245
+      "scale": 0.1293
     }
   },
   "grid": {
     "rows": [
       0,
-      236,
-      470,
-      704,
-      941
+      590,
+      1175,
+      1760,
+      2352
     ],
     "cols": [
       0,
-      276,
-      559,
-      842,
-      1126,
-      1402
+      690,
+      1398,
+      2105,
+      2815,
+      3505
     ]
   },
-  "inset": 14
+  "inset": 35
 }

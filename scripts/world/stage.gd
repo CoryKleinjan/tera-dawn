@@ -22,6 +22,15 @@ const ART_DENSITY := {
 	"res://assets/sprites/tiles/": 2.0,
 	"res://assets/sprites/platforms/": 2.0,
 	"res://assets/sprites/ground/": 2.0,
+	"res://assets/sprites/buildings/": 2.0,
+	"res://assets/sprites/backgrounds/": 2.0,
+	"res://assets/sprites/rooms/": 2.0,
+	# the scenery pieces of props/ (dawnshards there are drop items, drawn at their own size)
+	"res://assets/sprites/props/portal_": 2.0,
+	"res://assets/sprites/props/lantern_": 2.0,
+	"res://assets/sprites/props/ladder_": 2.0,
+	"res://assets/sprites/props/rope": 2.0,
+	"res://assets/sprites/props/vine_": 2.0,
 }
 
 ## The floor is the only land with depth: a block from GROUND_BACK to GROUND_FRONT whose top
@@ -325,9 +334,9 @@ func _apply_biome(b: BiomeDef) -> void:
 	motes.gravity = Vector3(0, 0.35 if b.motes_rise else 0.05, 0)
 	motes.direction = Vector3(0.2 if b.motes_rise else 0.3, 1, 0)
 
-## The camera distance that shows TDWorld.VIEW.y game pixels at the play line.
+## The camera distance that shows TDWorld.world_view().y game pixels at the play line.
 func _fit_distance() -> void:
-	dist = (TDWorld.VIEW.y / PX) / 2.0 / tan(deg_to_rad(FOV / 2.0))
+	dist = (TDWorld.world_view().y / PX) / 2.0 / tan(deg_to_rad(FOV / 2.0))
 
 ## The window changed shape: refit the camera and rebuild the scenery for the new view.
 func fit_view() -> void:
@@ -400,8 +409,9 @@ func set_faded(v: float) -> void:
 
 # ---------- camera ----------
 
+## Aims the camera so the world_view()-sized box at `cam` (its top left) fills the screen.
 func follow(cam: Vector2) -> void:
-	var target := to3d(cam + TDWorld.VIEW / 2.0)
+	var target := to3d(cam + TDWorld.world_view() / 2.0)
 	var pitch := deg_to_rad(PITCH)
 	camera.position = target + Vector3(0, sin(pitch), cos(pitch)) * dist
 	motes.position = Vector3(target.x, target.y, 1.0)
@@ -416,8 +426,9 @@ func in_view(p: Vector2, z := 0.0) -> bool:
 ## World height (3D y) at depth z that appears `frac` of the way down the screen
 ## when the camera is in the middle of its vertical range.
 func screen_height(frac: float, z: float) -> float:
-	var cam_mid := (float(world.map.height) - TDWorld.VIEW.y) / 2.0
-	var target_y := -(cam_mid + TDWorld.VIEW.y / 2.0) / PX
+	var view := TDWorld.world_view()
+	var cam_mid := (float(world.map.height) - view.y) / 2.0
+	var target_y := -(cam_mid + view.y / 2.0) / PX
 	var pitch := deg_to_rad(PITCH)
 	var cam_y := target_y + sin(pitch) * dist
 	var cam_z := cos(pitch) * dist

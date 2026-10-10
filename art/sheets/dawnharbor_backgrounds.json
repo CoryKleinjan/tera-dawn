@@ -1,8 +1,7 @@
 {
-  "source": "art/source/dawnharbor_backgrounds.png",
-  "scale": 0.5,
+  "source": "art/source/dawnharbor_backgrounds_fine.png",
   "label_band": 0.01,
-  "inset": 4,
+  "inset": 6,
   "out_dir": "assets/sprites/backgrounds/dawnharbor",
   "cells": [
     [
@@ -48,59 +47,60 @@
   "grid": {
     "rows": [
       0,
-      527,
-      660,
-      1064,
-      1180,
-      1586,
-      1675,
-      1851,
-      1928,
-      2153,
-      2253,
-      2395,
-      2500,
-      2731
+      790,
+      990,
+      1596,
+      1770,
+      2379,
+      2512,
+      2776,
+      2892,
+      3230,
+      3380,
+      3592,
+      3750,
+      4096
     ],
     "cols": [
       0,
-      1536
+      2304
     ]
   },
   "overrides": {
     "far": {
-      "extend_bottom": 160,
-      "scale": 0.0618
+      "extend_bottom": 589,
+      "scale": 0.1516
     },
     "mid": {
-      "extend_bottom": 160,
-      "scale": 0.1515
+      "extend_bottom": 512,
+      "scale": 0.3232
     },
     "near": {
-      "extend_bottom": 160,
-      "scale": 0.1633
+      "extend_bottom": 461,
+      "scale": 0.3135
     },
     "landmark": {
-      "scale": 0.338
+      "scale": 0.7571
     },
     "clouds": {
       "keep": "split",
-      "scale": 0.2748
+      "scale": 0.8207
     },
     "sky_body": {
       "fix": "sky_body",
       "alpha": "soft",
       "crop": [
-        678,
-        45,
-        852,
-        134
+        1017,
+        68,
+        1278,
+        201
       ],
-      "scale": 0.3636
+      "scale": 1.5514
     },
     "motes": {
       "alpha": "soft",
-      "scale": 0.2308
+      "scale": 0.4924,
+      "recolor": "despill"
     }
   }
 }

@@ -12,8 +12,9 @@ enum Mode { STRIP, SCATTER }
 ## Where the top of the layer sits on screen (0 top, 1 bottom) when the camera is mid-map.
 ## Scattered pieces are placed between x and y.
 @export var screen_top := Vector2(0.35, 0.35)
-## On-screen size of one texel in game pixels.
-@export var texel := 2.0
+## On-screen game pixels per art pixel (TDStage.art_density). Area backdrops are cut to
+## their on-screen size, so they show at TDStage.TEXEL like the land in front.
+@export var texel := TDStage.TEXEL
 @export var tint := Color.WHITE
 ## Glowing layers (the sun, embers) ignore lighting and fog and can bloom.
 @export var glow := false

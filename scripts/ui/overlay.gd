@@ -84,7 +84,7 @@ func _draw() -> void:
 func log_bottom() -> float:
 	var v := TDWorld.VIEW
 	var bottom := v.y - TDStatusBar.HEIGHT - 12
-	var floor_y := world.stage.screen(Vector2(world.cam.x + v.x / 2.0, world.map.ground_y), TDStage.Z_NPC).y
+	var floor_y := world.stage.screen(Vector2(world.cam.x + TDWorld.world_view().x / 2.0, world.map.ground_y), TDStage.Z_NPC).y
 	return minf(bottom, floor_y - LOG_ABOVE_TAGS)
 
 ## The message log, newest at the bottom, right-aligned to `right`, on a faint backdrop.

@@ -1,11 +1,11 @@
 {
-  "source": "art/source/room_meadow.png",
+  "source": "art/source/room_meadow_fine.png",
   "out_dir": "assets/sprites/rooms/meadow",
-  "scale": 0.365,
+  "scale": 0.316,
   "label_band": 0.2,
   "cells": [
     [
-      "wall",
+      "",
       "door",
       "floor_top",
       "floor_side"
@@ -24,131 +24,122 @@
     ]
   ],
   "overrides": {
-    "wall": {
-      "crop": [
-        24,
-        40,
-        425,
-        378
-      ],
-      "scale": 1.3026
-    },
     "floor_top": {
       "seamless": true,
-      "size": 128,
+      "size": 256,
       "crop": [
-        46,
-        40,
-        386,
-        380
+        90,
+        76,
+        876,
+        862
       ],
-      "scale": 0.45
+      "scale": 0.3896
     },
     "floor_side": {
       "seamless": true,
-      "size": 128,
+      "size": 256,
       "crop": [
-        70,
-        40,
-        360,
-        330
+        146,
+        76,
+        816,
+        746
       ],
-      "scale": 0.45
+      "scale": 0.3896
     },
     "door": {
       "crop": [
-        93,
-        87,
-        343,
-        380
+        199,
+        185,
+        776,
+        862
       ]
     },
     "counter": {
       "crop": [
         0,
-        31,
-        430,
-        386
+        56,
+        977,
+        876
       ],
-      "scale": 0.303
+      "scale": 0.2623
     },
     "shelf": {
       "crop": [
         0,
-        31,
-        433,
-        386
+        56,
+        984,
+        876
       ],
-      "scale": 0.594
+      "scale": 0.5143
     },
     "bookcase": {
       "crop": [
         0,
-        31,
-        432,
-        386
+        56,
+        982,
+        876
       ]
     },
     "table": {
       "crop": [
         0,
-        31,
-        431,
-        386
+        56,
+        980,
+        876
       ],
-      "scale": 0.2259
+      "scale": 0.1956
     },
     "hearth": {
       "crop": [
         0,
-        33,
-        430,
-        384
+        60,
+        977,
+        871
       ],
-      "scale": 0.3888
+      "scale": 0.3366
     },
     "rack": {
       "crop": [
         0,
-        30,
-        433,
-        384
+        53,
+        984,
+        871
       ],
-      "scale": 0.3191
+      "scale": 0.2763
     },
     "lamp": {
       "crop": [
         0,
-        30,
-        432,
-        384
+        53,
+        982,
+        871
       ],
-      "scale": 0.4229
+      "scale": 0.3661
     },
     "barrel": {
       "crop": [
         0,
-        30,
-        431,
-        384
+        53,
+        980,
+        871
       ],
-      "scale": 0.1501
+      "scale": 0.13
     }
   },
   "grid": {
     "rows": [
       0,
-      396,
-      794,
-      1190
+      915,
+      1834,
+      2749
     ],
     "cols": [
       0,
-      442,
-      887,
-      1331,
-      1774
+      1021,
+      2049,
+      3075,
+      4098
     ]
   },
-  "inset": 6
+  "inset": 30
 }
