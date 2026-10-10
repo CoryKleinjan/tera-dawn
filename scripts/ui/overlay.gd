@@ -274,17 +274,17 @@ func _draw_world_text() -> void:
 			var feet := st.screen(world.drawn(a), TDStage.Z_OTHER_PLAYER)
 			a.draw_tag(tags, feet)
 			if a.shop_title != "":
-				UiSkin.draw_shop_sign(self, feet + Vector2(0, -94), a.shop_title)
+				UiSkin.draw_shop_sign(self, feet + Vector2(0, -TDPlayer.HEIGHT + 3), a.shop_title)
 			elif a.speech_t > 0:
-				UiSkin.draw_speech(self, feet + Vector2(0, -98), a.speech)
+				UiSkin.draw_speech(self, feet + Vector2(0, -TDPlayer.HEIGHT - 1), a.speech)
 	var p := world.player
 	if world.started and not p.fainted():
 		var feet := st.screen(world.drawn(p), TDPlayer.Z)
 		tags.add_name(feet + Vector2(0, 4), Game.me.name, Palette.SUN, Game.me.guild, true)
 		if world.hud.selling():
-			UiSkin.draw_shop_sign(self, feet + Vector2(0, -94), world.hud.windows["player_shop"].shop_title)
+			UiSkin.draw_shop_sign(self, feet + Vector2(0, -TDPlayer.HEIGHT + 3), world.hud.windows["player_shop"].shop_title)
 		elif p.speech_t > 0:
-			UiSkin.draw_speech(self, feet + Vector2(0, -98), p.speech)
+			UiSkin.draw_speech(self, feet + Vector2(0, -TDPlayer.HEIGHT - 1), p.speech)
 	_draw_pet(world.player.companion, TDPlayer.Z, world.started and not p.fainted(), tags)
 	for a in world.avatars.values():
 		_draw_pet(a.companion, TDStage.Z_OTHER_PLAYER, a.known, tags)

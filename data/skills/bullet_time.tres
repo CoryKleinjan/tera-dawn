@@ -34,3 +34,4 @@ duration_per_level = 6.0
 effect = ExtResource("3_heal")
 icon = ExtResource("4_bullet_time")
 animation = &"cast"
+flash = Color(1.0, 0.72, 0.3, 1)

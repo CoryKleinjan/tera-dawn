@@ -166,10 +166,15 @@ only what the creator offers and makes a level 1 character in the starting job
   the painted sheet's full resolution: `Paperdoll.ART_SCALE` strip pixels make one hero pixel.
 - **Animation**: each weapon fights its own way (`WeaponStyle`): a skill's motion ("attack",
   "slash") becomes the weapon's own animation (a bow shoots, a claw throws, knuckles punch, a
-  staff smashes), and "cast" and other names play as they are. Frames have their own
-  durations (a held wind-up), and `TDPlayer` adds a ready stance after fighting, a run at top
-  speed, a turn, the top of a jump and a walk that keeps step with his speed. Poses not drawn
-  yet fall back to the nearest one (`SpriteRig.FALLBACK`). `WeaponTrail` draws the streak a
+  staff smashes), and other names play as they are, except "cast" (`WeaponStyle.SPELL`):
+  buffs and spells make no motion, the hero flashes the skill's colour (`SkillDef.flash`,
+  `SpriteRig.pulse`). Frames have their own durations (a held wind-up), and `TDPlayer` adds a
+  ready stance after fighting, a run at top speed, a turn, the top of a jump, a landing crouch
+  only after a real drop and a walk that keeps step with his speed (walk and run share the
+  step, `SpriteRig.STEP_CYCLES`). Standing, he holds still and blinks now and then (the
+  "blink" animation, `SpriteRig.BLINK_EVERY`). Held weapons point forward on every resting and
+  moving frame (`tests/unit/hero_pose_test.gd`). Poses not drawn yet fall back to the nearest
+  one (`SpriteRig.FALLBACK`). `WeaponTrail` draws the streak a
   swung blade leaves and the flash of a shot.
 
 ### Chairs, pets, the Monster Book and achievements
@@ -462,7 +467,9 @@ for the loot key, and stays there if its tab is full.
   `python3 tools/art/paperdoll_layers.py`.
 - **A new weapon kind**: draw its greyscale template on the paperdoll weapons sheet (add its
   cell to `paperdoll_weapons.json` and `WEAPON_KINDS` in `paperdoll_layers.py`), say how it's
-  held in `art/sheets/paperdoll_rig.json` "holds" ("like" another kind, or an angle per frame;
+  held in `art/sheets/paperdoll_rig.json` "holds" ("like" another kind, or an angle per frame,
+  "behind" for frames it goes behind him; a long weapon drawn slanted is straightened, see
+  `AXIAL`;
   add it to `GRIPPED` if the fingers wrap it, `ON_BACK` if it's carried on the back), give it
   a row in `WeaponStyle.MOTIONS`, then run the tool and check `art/build/paperdoll_preview.png`
   (one row of frames per kind).

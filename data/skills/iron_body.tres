@@ -32,3 +32,4 @@ duration_per_level = 8.0
 animation = &"cast"
 effect = ExtResource("3_heal")
 icon = ExtResource("4_iron_body")
+flash = Color(0.62, 0.74, 1.0, 1)

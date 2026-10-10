@@ -1,6 +1,7 @@
 extends TestCase
 ## How each weapon fights (WeaponStyle) and the hero animations that carry it: every motion
-## plays an animation the hero has, with the weapon in his hand on every frame of it.
+## plays an animation the hero has, with the weapon in his hand on every frame of it, except
+## buffs and spells, which play none (a flash of the skill's colour instead).
 
 const KINDS: Array[StringName] = [&"sword", &"bow", &"wand", &"staff", &"claw", &"knuckle", &"gun"]
 
@@ -15,7 +16,9 @@ func test_each_weapon_kind_has_its_own_motions() -> void:
 	check_eq(WeaponStyle.animation(&"knuckle", &"attack"), &"punch", "knuckles punch")
 	check_eq(WeaponStyle.animation(&"staff", &"attack"), &"heavy", "a staff smashes two-handed")
 	check_eq(WeaponStyle.animation(&"", &"attack"), &"punch", "bare hands punch")
-	check_eq(WeaponStyle.animation(&"bow", &"cast"), &"cast", "a named animation plays as it is")
+	check_eq(WeaponStyle.animation(&"bow", &"throw"), &"throw", "a named animation plays as it is")
+	check(WeaponStyle.is_spell(WeaponStyle.animation(&"bow", &"cast")), "cast is a spell whatever the weapon")
+	check(WeaponStyle.is_spell(WeaponStyle.animation(&"wand", &"slash")), "a wand's big move is a spell")
 
 func test_every_weapon_in_the_game_has_a_style() -> void:
 	for item in Content.items.values():
@@ -34,6 +37,9 @@ func test_every_motion_is_a_hero_animation_holding_the_weapon() -> void:
 	for kind in KINDS:
 		for motion in [&"attack", &"slash"]:
 			var anim := WeaponStyle.animation(kind, motion)
+			if WeaponStyle.is_spell(anim):
+				check(not frames.has_animation(anim), "spells (%s %s) have no pose" % [kind, motion])
+				continue
 			check(frames.has_animation(anim), "%s %s plays %s, which the hero has" % [kind, motion, anim])
 			if not frames.has_animation(anim):
 				continue
@@ -63,3 +69,14 @@ func test_the_walk_keeps_step_with_him() -> void:
 	check_near(TDPlayer.stride_speed(&"walk", TDPlayer.STRIDE_SPEED), 1.0, "as drawn at stride speed")
 	check(TDPlayer.stride_speed(&"walk", 1.0) < TDPlayer.stride_speed(&"walk", 3.0), "slower when he's slower")
 	check_eq(TDPlayer.stride_speed(&"attack", 3.0), 1.0, "a swing isn't sped up")
+
+func test_buffs_and_spells_flash_their_own_colour() -> void:
+	var seen := {}
+	for skill: SkillDef in Content.skills.values():
+		var spell := skill.kind == SkillDef.Kind.BUFF or skill.magic or WeaponStyle.is_spell(skill.animation)
+		if not spell:
+			continue
+		check(skill.flash.a > 0.0, "%s flashes a colour" % skill.id)
+		var key := skill.flash.to_html()
+		check(not seen.has(key), "%s has its own colour (%s has it too)" % [skill.id, seen.get(key, "")])
+		seen[key] = skill.id

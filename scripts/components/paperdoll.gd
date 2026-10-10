@@ -267,7 +267,9 @@ static func hold(frame: int, kind: StringName) -> Variant:
 ## How far a weapon kind reaches past the fist, in frame pixels.
 static func weapon_reach(kind: StringName) -> float:
 	var w: Variant = rig().get("weapons", {}).get(String(kind))
-	return float(w["size"][0]) - float(w["grip"][0]) if w is Dictionary else 0.0
+	if not w is Dictionary:
+		return 0.0
+	return float(w.get("reach", float(w["size"][0]) - float(w["grip"][0])))
 
 ## How far the head is turned on a frame (degrees clockwise, 0 upright); hats turn with it.
 static func head_angle(frame: int) -> float:
