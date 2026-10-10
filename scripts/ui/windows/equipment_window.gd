@@ -20,6 +20,8 @@ const ROW_H := 16.0
 
 ## Your hero, dressed in what you wear.
 var doll := PaperdollView.new()
+## Job and level under the hero, on a layer above the doll so the hero's feet never cover it.
+var caption := Control.new()
 ## The worn item whose stats the panel shows, or &"" for the whole set.
 var selected: StringName = &""
 
@@ -31,6 +33,9 @@ func _init() -> void:
 	doll.position = box.get_center() - Vector2(doll.size.x / 2.0, doll.size.y * 0.55)
 	doll.max_zoom = s
 	add_child(doll)
+	caption.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	caption.draw.connect(_draw_caption)
+	add_child(caption)
 
 func _portrait_box() -> Rect2:
 	return Rect2(PAD + SLOT + GAP, GRID_Y + SLOT + GAP, SLOT * 2 + GAP, SLOT * 2 + GAP)
@@ -50,7 +55,7 @@ func _draw_body() -> void:
 	var box := _portrait_box()
 	draw_texture_rect(UiSkin.tex("equip_doll_bg"), box, false)
 	doll.set_look(Game.me.look())
-	DrawUtil.text(self, Game.ui_font, Vector2(box.get_center().x, box.end.y - 6), "%s Lv. %d" % [Game.me.job.display_name, Game.me.level], 11, Palette.MIST, 0, 4, Palette.NIGHT)
+	caption.queue_redraw()
 	var dragging := _dragged_equip()
 	for p in LAYOUT:
 		var stack := Game.me.equipment.at(p)
@@ -61,6 +66,11 @@ func _draw_body() -> void:
 		if p == selected and stack:
 			draw_rect(r.grow(-2), Palette.SUN, false, 2.0)
 	_draw_bonuses()
+
+func _draw_caption() -> void:
+	var box := _portrait_box()
+	DrawUtil.text(caption, Game.ui_font, Vector2(box.get_center().x, box.end.y - 6), "%s Lv. %d" % [Game.me.job.display_name, Game.me.level],
+		DrawUtil.fit_size(Game.ui_font, "%s Lv. %d" % [Game.me.job.display_name, Game.me.level], 11, box.size.x - 8), Palette.MIST, 0, 4, Palette.NIGHT)
 
 ## The panel on the right: what the gear adds to each stat.
 func _draw_bonuses() -> void:

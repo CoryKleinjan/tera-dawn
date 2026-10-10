@@ -148,7 +148,7 @@ func _build_windows() -> void:
 	var equipment := TDEquipmentWindow.new()
 	equipment.position = Vector2(inventory.position.x - equipment.size.x - 10, 70)
 	var stats := TDStatsWindow.new()
-	stats.position = Vector2(16, 56)
+	stats.position = Vector2(16, 50)
 	var quests := TDQuestWindow.new()
 	quests.position = Vector2(16, 120)
 	var worldmap := TDWorldMapWindow.new()

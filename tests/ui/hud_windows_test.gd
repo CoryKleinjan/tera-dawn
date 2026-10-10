@@ -211,7 +211,7 @@ func _plus_rects(win: TDWindow) -> Array[Rect2]:
 	var out: Array[Rect2] = []
 	for b in win._buttons:
 		var r: Rect2 = b[0]
-		if r.size == Vector2(TDWindow.PLUS_SIZE, TDWindow.PLUS_SIZE):
+		if r.size.x == r.size.y: # the "+" buttons are the only square ones
 			out.append(r)
 	return out
 

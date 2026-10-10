@@ -6,18 +6,22 @@ extends TDWindow
 ## still needs, so points don't go where they shut a path.
 
 const ROW_H := 17.0
+## The Ability Points row and the four stat rows are taller, so each "+" (STAT_PLUS tall)
+## has a gap above and below it.
+const STAT_ROW_H := 20.0
+const STAT_PLUS := 16.0
+## How far above a row's baseline the middle of its text sits (12 px text).
+const TEXT_MID := 4.0
 const COL_VALUE := 112.0
 ## Where the right-hand column of combat numbers starts, and its values.
 const COL_RIGHT := 168.0
 const COL_RIGHT_VALUE := 98.0
 ## Pairs with short labels (HP and MP) put their values closer.
 const COL_SHORT_VALUE := 40.0
-## Room under the last row, inside the frame.
-const BOTTOM := 25.0
 ## The window's height without the job paths, and the paths' rows.
-const BASE_H := 344.0
+const BASE_H := 354.0
 const PATH_ROW_H := 13.0
-const PATHS_TOP := 20.0
+const PATHS_TOP := 18.0
 const AUTO_SIZE := Vector2(46, 20)
 
 ## Where the last row ended when the window was last drawn (for checking it fits).
@@ -58,19 +62,20 @@ func _draw_body() -> void:
 	y = _row(y, "EXP", "%d / %d" % [Game.me.xp, Game.me.xp_need()])
 	y = _pair(y, ["HP", "%d / %d" % [Game.me.health.hp, Game.me.max_hp()]], ["MP", "%d / %d" % [Game.me.mp, Game.me.max_mp()]], COL_SHORT_VALUE, COL_SHORT_VALUE)
 	y = _divider(y)
-	y = _row(y, "Ability Points", str(Game.me.ap), Palette.SUN if Game.me.ap > 0 else Palette.MIST)
 	auto_rect = Rect2()
 	if Game.me.ap > 0 and not Game.me.job.is_starting_job():
-		auto_rect = Rect2(Vector2(size.x - PAD - AUTO_SIZE.x, y - ROW_H - 15), AUTO_SIZE)
+		# left of the "+" column, so it never touches the STR "+" under it
+		auto_rect = Rect2(Vector2(_plus_x() - 6 - AUTO_SIZE.x, y - TEXT_MID - AUTO_SIZE.y / 2.0), AUTO_SIZE)
 		add_button(auto_rect, "Auto", auto_assign, true, true)
+	y = _row(y, "Ability Points", str(Game.me.ap), Palette.SUN if Game.me.ap > 0 else Palette.MIST, 0.0, COL_VALUE, STAT_ROW_H)
 	var main_stat := Game.me.job.damage_stats(s)[0]
 	for stat in StatBlock.BASE:
 		var extra := s.value(stat) - Game.me.base.value(stat)
 		var text := str(s.value(stat)) + (" (+%d)" % extra if extra > 0 else "")
-		y = _row(y, StatBlock.LABELS[stat], text, Palette.SUN if stat == main_stat else Palette.MIST)
 		if Game.me.ap > 0:
-			plus_button(Vector2(size.x - PAD - 20, y - ROW_H - 15), Net.ask.bind(&"req_add_ap", [stat]))
-	y = _divider(y)
+			plus_button(Vector2(_plus_x(), y - TEXT_MID - STAT_PLUS / 2.0), Net.ask.bind(&"req_add_ap", [stat]), STAT_PLUS)
+		y = _row(y, StatBlock.LABELS[stat], text, Palette.SUN if stat == main_stat else Palette.MIST, 0.0, COL_VALUE, STAT_ROW_H)
+	y = _divider(y - STAT_ROW_H + ROW_H)
 	# combat numbers in two columns, so the window ends above the status bar's HP
 	var dmg := Game.me.damage_range()
 	y = _pair(y, ["Damage", "%d ~ %d" % [dmg.x, dmg.y], Palette.SUN], ["Critical Rate", "%d%%" % roundi(CharacterStats.crit_rate(s) * 100)])
@@ -119,10 +124,14 @@ func auto_assign() -> void:
 			Net.ask(&"req_add_ap_many", [stat, plan[stat]])
 			plan.erase(stat)
 
-func _row(y: float, label: String, value: String, col := Palette.MIST, x := 0.0, value_x := COL_VALUE) -> float:
+## Where the column of "+" buttons starts.
+func _plus_x() -> float:
+	return size.x - PAD - 2 - STAT_PLUS
+
+func _row(y: float, label: String, value: String, col := Palette.MIST, x := 0.0, value_x := COL_VALUE, step := ROW_H) -> float:
 	DrawUtil.text(self, Game.ui_font, Vector2(PAD + 2 + x, y), label, 12, Palette.MUTED, 1)
 	DrawUtil.text(self, Game.ui_font, Vector2(PAD + x + value_x, y), value, 12, col, 1, 3, Color(Palette.NIGHT, 0.6))
-	return y + ROW_H
+	return y + step
 
 ## Two rows side by side, each [label, value] or [label, value, colour], with the values
 ## `left_value_x` and `right_value_x` from their labels.

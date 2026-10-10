@@ -5,7 +5,14 @@ extends Control
 ## the UI sheet's art.
 
 const HEIGHT := 50.0
-const WINDOW_BUTTON := 32.0
+const WINDOW_BUTTON := 30.0
+const WINDOW_BUTTON_GAP := 2.0
+## The EXP bar is drawn a little smaller than its art so the window buttons fit beside it.
+const EXP_SCALE := 0.85
+## The HP and MP bars: where HP starts, their scale, and the space between bars.
+const HP_X := 74.0
+const BAR_SCALE := 0.95
+const BAR_GAP := 6.0
 ## UI sheet art for each window's button. A window without art yet gets a round button
 ## with the first letter of its action.
 const WINDOW_ICONS := {"inventory": "bag_button", "equipment": "gear_button", "stats": "stats_button",
@@ -33,12 +40,10 @@ func _draw() -> void:
 	# HP, MP, EXP
 	var hp := Game.me.health
 	var need := Game.me.xp_need()
-	var x := 74.0
-	UiSkin.draw_bar(self, "hp_frame", "fill_red", Vector2(x, 6), hp.fraction(), 0.95, "%d / %d" % [hp.hp, hp.max_hp])
-	x += 165 * 0.95 + 6
-	UiSkin.draw_bar(self, "mp_frame", "fill_blue", Vector2(x, 4), float(Game.me.mp) / Game.me.max_mp(), 0.95, "%d / %d" % [Game.me.mp, Game.me.max_mp()])
-	x += 168 * 0.95 + 6
-	UiSkin.draw_bar(self, "exp_frame", "fill_gold", Vector2(x, 10), float(Game.me.xp) / need, 1.0, "%.1f%%" % (100.0 * Game.me.xp / need))
+	UiSkin.draw_bar(self, "hp_frame", "fill_red", Vector2(HP_X, 6), hp.fraction(), BAR_SCALE, "%d / %d" % [hp.hp, hp.max_hp])
+	UiSkin.draw_bar(self, "mp_frame", "fill_blue", Vector2(_mp_x(), 4), float(Game.me.mp) / Game.me.max_mp(), BAR_SCALE, "%d / %d" % [Game.me.mp, Game.me.max_mp()])
+	var exp_r := exp_bar_rect()
+	UiSkin.draw_bar(self, "exp_frame", "fill_gold", exp_r.position, float(Game.me.xp) / need, EXP_SCALE, "%.1f%%" % (100.0 * Game.me.xp / need))
 	# window buttons
 	for i in TDHud.WINDOW_ACTIONS.size():
 		_window_button(TDHud.WINDOW_ACTIONS[i], _window_button_rect(i))
@@ -47,9 +52,18 @@ func _draw() -> void:
 	draw_texture_rect(icon, Rect2(w - 140, 8, 36, 33), false)
 	DrawUtil.text(self, Game.num_font, Vector2(w - 100, 32), str(Game.me.shards), 18, Palette.SUN, 1, 4, Palette.NIGHT)
 
+func _mp_x() -> float:
+	return HP_X + UiSkin.tex("hp_frame").get_width() * BAR_SCALE + BAR_GAP
+
+## Where the EXP bar's frame is drawn, vertically centred in the bar.
+func exp_bar_rect() -> Rect2:
+	var s := UiSkin.tex("exp_frame").get_size() * EXP_SCALE
+	var x := _mp_x() + UiSkin.tex("mp_frame").get_width() * BAR_SCALE + BAR_GAP
+	return Rect2(Vector2(x, (HEIGHT - s.y) / 2.0), s)
+
 func _window_button_rect(i: int) -> Rect2:
-	var left := size.x - 150 - TDHud.WINDOW_ACTIONS.size() * (WINDOW_BUTTON + 2)
-	return Rect2(left + i * (WINDOW_BUTTON + 2), (HEIGHT - WINDOW_BUTTON) / 2.0, WINDOW_BUTTON, WINDOW_BUTTON)
+	var left := size.x - 150 - TDHud.WINDOW_ACTIONS.size() * (WINDOW_BUTTON + WINDOW_BUTTON_GAP)
+	return Rect2(left + i * (WINDOW_BUTTON + WINDOW_BUTTON_GAP), (HEIGHT - WINDOW_BUTTON) / 2.0, WINDOW_BUTTON, WINDOW_BUTTON)
 
 func _window_button(action: String, r: Rect2) -> void:
 	var open: bool = world != null and world.hud.windows[action].visible

@@ -13,6 +13,8 @@ const CLOSE_SIZE := 20.0
 const TAB_Y := 36.0
 const TAB_H := 26.0
 const TAB_MAX_W := 150.0
+## The share of a tab's width between its art's pointed ends, where the label goes.
+const TAB_TEXT_SHARE := 0.68
 ## List rows and panels: one darkness and one corner radius everywhere.
 const ROW_ALPHA := 0.4
 const ROW_RADIUS := 6.0
@@ -25,6 +27,8 @@ var _drag_from := Vector2.ZERO
 var _hover := Vector2(-1, -1)
 ## The tabs drawn last frame, for `tab_at`.
 var _tab_rects: Array[Rect2] = []
+## Their labels, in the same order.
+var _tab_labels: Array = []
 ## The buttons drawn this frame and what they do: [Rect2, Callable].
 var _buttons: Array = []
 
@@ -107,7 +111,8 @@ func draw_slot(r: Rect2, stack: ItemStack, dim := false, label := "") -> void:
 		draw_hilite(r.grow(-4), 5)
 	if stack == null:
 		if label != "":
-			DrawUtil.text(self, Game.ui_font, r.get_center() + Vector2(0, 4), label, 9, Color(Palette.MIST, 0.45))
+			DrawUtil.text(self, Game.ui_font, r.get_center() + Vector2(0, 4), label,
+				DrawUtil.fit_size(Game.ui_font, label, 9, r.size.x - 8, 7), Color(Palette.MIST, 0.45))
 		return
 	if stack.item.icon:
 		draw_texture_rect(stack.item.icon, fit(stack.item.icon, r.grow(-5)), false, Color(1, 1, 1, 0.35 if dim else 1.0))
@@ -140,9 +145,10 @@ func icon_button(r: Rect2, art: String, action: Callable) -> void:
 	UiSkin.draw_icon(self, art, r, UiSkin.LIT if r.has_point(_hover) else Color.WHITE)
 	_buttons.append([r, action])
 
-## The "+" that spends a point (Ability Points, Skill Points), with its top left at `at`.
-func plus_button(at: Vector2, action: Callable) -> void:
-	var r := Rect2(at, Vector2(PLUS_SIZE, PLUS_SIZE))
+## The "+" that spends a point (Ability Points, Skill Points), `side` pixels square with its
+## top left at `at`.
+func plus_button(at: Vector2, action: Callable, side := PLUS_SIZE) -> void:
+	var r := Rect2(at, Vector2(side, side))
 	draw_texture_rect(UiSkin.tex("stat_plus"), r, false, Color(1.25, 1.2, 1.1) if r.has_point(_hover) else Color.WHITE)
 	_buttons.append([r, action])
 
@@ -155,10 +161,19 @@ func _press_button(at: Vector2) -> bool:
 	return false
 
 ## A tab along the top of a window: lit when `on`.
+## The label shrinks to fit between the tab art's pointed ends.
 func draw_tab(r: Rect2, label: String, on: bool) -> void:
 	draw_texture_rect(UiSkin.tex("window_tab_on" if on else "window_tab_off"), r, false)
-	DrawUtil.text(self, Game.ui_font, r.get_center() + Vector2(0, 5), label, 13,
+	DrawUtil.text(self, Game.ui_font, r.get_center() + Vector2(0, 5), label, tab_font_size(r, label),
 		Palette.INK if on else Palette.MIST, 0, 0 if on else 3, Palette.NIGHT)
+
+## The font size of a tab's label: 13, or smaller when the tab is too narrow for it.
+static func tab_font_size(r: Rect2, label: String) -> int:
+	return DrawUtil.fit_size(Game.ui_font, label, 13, tab_text_width(r))
+
+## How much of a tab's width is free for its label (the art's pointed ends take the rest).
+static func tab_text_width(r: Rect2) -> float:
+	return r.size.x * TAB_TEXT_SHARE
 
 ## A row of tabs at `y` sharing the width from `left` to `right` (the window's padding by
 ## default), with `current` lit. `tab_at` says which one a click hit.
@@ -167,6 +182,7 @@ func draw_tabs(labels: Array, current: int, y := TAB_Y, left := PAD, right := -1
 		right = size.x - PAD
 	var w := minf(TAB_MAX_W, (right - left) / labels.size())
 	_tab_rects.clear()
+	_tab_labels = labels.duplicate()
 	for i in labels.size():
 		var r := Rect2(left + i * w - 3, y - 1, w + 6, TAB_H)
 		_tab_rects.append(r)

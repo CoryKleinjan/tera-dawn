@@ -73,39 +73,58 @@ func _draw_body() -> void:
 
 func _draw_details(q: QuestDef, box: Rect2) -> void:
 	draw_row(box)
-	var me := Game.me
 	var x := box.position.x + 10
-	var w := box.size.x - 20
 	var y := box.position.y + 22
 	DrawUtil.text(self, Game.num_font, Vector2(x, y), q.title, 15, Palette.SUN, 1, 3, Palette.NIGHT)
-	y += 20
+	var bottom := (_forfeit_rect().position.y if page == Page.ACTIVE else box.end.y) - 8
+	for l in detail_lines(q, box.size.x - 20, bottom - y):
+		y += l[0]
+		DrawUtil.text(self, Game.ui_font, Vector2(x, y), l[1], l[2], l[3], 1, l[4], Palette.NIGHT)
+	if page == Page.ACTIVE:
+		draw_button(_forfeit_rect(), "Give up")
+
+## The lines under a quest's title, each [space above it, text, size, colour, outline], fitting
+## in `room` pixels at most `w` wide: who gives it, the story, the objectives, the level and
+## the reward. When it's too long the story is cut short ("…"), never the rest.
+func detail_lines(q: QuestDef, w: float, room: float) -> Array:
+	var me := Game.me
 	var giver: NpcDef = Content.npcs.get(q.giver)
 	var turn_in: NpcDef = Content.npcs.get(q.turn_in_npc())
 	var who := "From %s" % (giver.display_name if giver else "?")
 	if turn_in != giver and turn_in:
 		who += " · hand in to %s" % turn_in.display_name
-	DrawUtil.text(self, Game.ui_font, Vector2(x, y), who, 11, Palette.MUTED, 1)
-	y += 8
+	var head := [[20.0, who, 11, Palette.MUTED, 0]]
+	var story := []
 	var text := q.offer_text if page == Page.AVAILABLE else q.progress_text
 	for l in UiSkin.wrap_text(Game.ui_font, text, 11, w):
-		y += 15
-		DrawUtil.text(self, Game.ui_font, Vector2(x, y), l, 11, Color(Palette.MIST, 0.85), 1)
-	y += 24
+		story.append([15.0 if story.size() > 0 else 23.0, l, 11, Color(Palette.MIST, 0.85), 0])
+	var tail := []
 	for i in q.objectives.size():
 		var o := q.objectives[i]
 		var have := me.quests.progress(q, i, me) if me.quests.active.has(q.id) else (o.count if page == Page.DONE else 0)
 		var col := Palette.GOOD if have >= o.count else Palette.MIST
-		DrawUtil.text(self, Game.ui_font, Vector2(x, y), "• %s  %d/%d" % [o.describe(), have, o.count], 12, col, 1, 3, Palette.NIGHT)
-		y += 18
-	y += 6
+		tail.append([24.0 if i == 0 else 18.0, "• %s  %d/%d" % [o.describe(), have, o.count], 12, col, 3])
+	var gap := 30.0 if tail.is_empty() else 24.0
 	if q.min_level > 1:
-		DrawUtil.text(self, Game.ui_font, Vector2(x, y), "Level %d+" % q.min_level, 11, Palette.MUTED, 1)
-		y += 16
+		tail.append([gap, "Level %d+" % q.min_level, 11, Palette.MUTED, 0])
+		gap = 16.0
 	for l in UiSkin.wrap_text(Game.ui_font, "Reward: %s" % q.describe_rewards(), 11, w):
-		DrawUtil.text(self, Game.ui_font, Vector2(x, y), l, 11, Palette.SUN, 1)
-		y += 15
-	if page == Page.ACTIVE:
-		draw_button(_forfeit_rect(), "Give up")
+		tail.append([gap, l, 11, Palette.SUN, 0])
+		gap = 15.0
+	var used := 0.0
+	for l in head + tail:
+		used += l[0]
+	while not story.is_empty() and used + _height(story) > room:
+		story.pop_back()
+		if not story.is_empty():
+			story[-1][1] = (story[-1][1] as String).trim_suffix(".") + "…"
+	return head + story + tail
+
+static func _height(lines: Array) -> float:
+	var h := 0.0
+	for l in lines:
+		h += l[0]
+	return h
 
 func _click(at: Vector2, button: int, _double: bool) -> void:
 	if button == MOUSE_BUTTON_WHEEL_UP or button == MOUSE_BUTTON_WHEEL_DOWN:
