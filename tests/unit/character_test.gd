@@ -415,6 +415,47 @@ func test_skill_def_level_math() -> void:
 	check_near(s.damage_at(0), 1.6, "level 0 treated as 1")
 	check_eq(s.regen_hp_at(0), 0, "no regen unlearned")
 
+func test_skill_def_regen_per_level() -> void:
+	var s := fx.skill(&"t_regen", SkillDef.Kind.PASSIVE)
+	s.regen_hp = 5
+	s.regen_hp_per_level = 2
+	s.regen_mp = 3
+	s.regen_mp_per_level = 1
+	check_eq(s.regen_hp_at(1), 5, "HP level 1")
+	check_eq(s.regen_hp_at(4), 11, "HP level 4")
+	check_eq(s.regen_mp_at(0), 0, "no MP regen unlearned")
+	check_eq(s.regen_mp_at(1), 3, "MP level 1")
+	check_eq(s.regen_mp_at(10), 12, "MP level 10")
+
+func test_skill_flash_color_defaults_until_set() -> void:
+	var s := fx.skill()
+	check_eq(s.flash_color(), SkillDef.DEFAULT_FLASH, "no colour set: the default flash")
+	s.flash = Color(0.4, 0.6, 1.0)
+	check_eq(s.flash_color(), Color(0.4, 0.6, 1.0), "its own colour once set")
+	s.flash = Color(0.4, 0.6, 1.0, 0.0)
+	check_eq(s.flash_color(), SkillDef.DEFAULT_FLASH, "a see-through colour counts as unset")
+
+func test_skill_describe_level_lines() -> void:
+	var s := fx.skill()
+	s.mp_cost = 6
+	s.damage_multiplier = 1.5
+	s.hits = 2
+	s.max_targets = 3
+	check_eq(Array(s.describe_level(0)), [], "nothing at level 0")
+	check_eq(Array(s.describe_level(1)), ["MP cost: 6", "Damage: 150% x2 hits, up to 3 monsters"], "an attack")
+	s.magic = true
+	check_eq(s.describe_level(1)[1], "Magic: 150% x2 hits, up to 3 monsters", "a spell says Magic")
+
+func test_skill_describe_level_buff_and_passive() -> void:
+	var buff := fx.skill(&"t_buff", SkillDef.Kind.BUFF)
+	buff.stats = UnitHelpers.stats({"attack": 5})
+	buff.duration = 30.0
+	check_eq(Array(buff.describe_level(1)), ["Weapon Attack +5", "Lasts 30 seconds"], "a free buff")
+	var passive := fx.skill(&"t_passive", SkillDef.Kind.PASSIVE)
+	passive.mp_cost = 9
+	passive.regen_mp = 4
+	check_eq(Array(passive.describe_level(1)), ["MP recovery +4"], "a passive shows no MP cost")
+
 # ---------- quickslots ----------
 
 func test_quickslots_set_swap_and_clear() -> void:

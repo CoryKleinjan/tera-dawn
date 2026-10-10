@@ -110,12 +110,18 @@ It fails if any test fails or if Godot prints a script error. There are two kind
 
 - **The test runner** (`tests/run_tests.tscn`) runs every `*_test.gd` file in four folders, in under half a minute:
   - `tests/unit/`: the game's rules on their own (stats and damage, inventory, gear, scrolls, skills, buffs, EXP, quests, the Monster Book, achievements, saving and loading, combat, drop flight, map layout and balance).
-  - `tests/server/`: the server driven directly with pretend players, ticked one step at a time with no window: joining, movement checks, combat, kills, drops, monsters, items, shops, storage, travel, fainting, quests, chairs, pets, achievements, chat, parties, buddies, trades, guilds, fame and player shops.
+  - `tests/server/`: the server driven directly with pretend players, ticked one step at a time with no window: joining, movement checks, combat, kills, drops, monsters, items, quickslots, shops, storage, travel, job advancement, fainting, quests, chairs, pets, achievements, chat, parties, buddies, trades, guilds, fame and player shops.
   - `tests/content/`: every file in `data/`: ids, names, references between things, numbers in range, maps that join up and items that can be obtained.
   - `tests/ui/`: every window opened with something in every tab, drawn, clicked, dragged and closed, plus every NPC dialogue, shop and tooltip.
 - **The smoke test** (`tests/smoke_test.tscn`) plays a scripted single-player session through the real game: walking, talking, shopping, fighting, quests, jobs, skills, travel, the social systems, chairs, pets and achievements. Then it hosts a game and has a second copy of the game (`tests/bot_client.tscn`) join over the network.
 
 To add tests, drop a file ending in `_test.gd` into one of the four folders. It `extends TestCase` (`tests/framework/test_case.gd`), and every method starting with `test_` is a test: check things with `check`, `check_eq` and the other checks there. `UnitHelpers`, `ServerHelpers` (`tests/framework/server_helpers.gd`) and `UiHelpers` set up test content, a server or a running game. Every test starts from the same random seed, so tests must not depend on timing or luck.
+
+The art tools in `tools/art/` have their own tests (`tools/art/tests/`, Python's built-in `unittest`, needing only numpy and Pillow). They draw small sheets in code, so they read no real art and never call Gemini. CI runs them too:
+
+```sh
+python3 -m unittest discover -s tools/art/tests -t tools/art/tests
+```
 
 Render screenshots of the title, both maps, a Dawn Slash and other players (needs a GPU or software Vulkan, and a display; `xvfb-run` works on a headless Linux box):
 
