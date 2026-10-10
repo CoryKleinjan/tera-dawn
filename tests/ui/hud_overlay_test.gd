@@ -187,6 +187,7 @@ func test_name_tags_nudge_apart_and_yours_stays_put() -> void:
 	check_eq(order, [0, 2, 1], "your tag draws last, on top")
 
 func test_monster_tags_show_only_when_hurt_or_a_boss() -> void:
+	await ui.enter_map(&"meadow", 200)
 	var mobs := ui.world.mobs()
 	if not check(not mobs.is_empty(), "the meadow has monsters"):
 		return

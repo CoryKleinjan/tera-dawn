@@ -78,6 +78,11 @@ func edit(change: Callable) -> void:
 	player().dirty_character = true
 	await ticks(2)
 
+## Sends the player to map `id` at `x` and waits until the game has built it.
+func enter_map(id: StringName, x: float) -> void:
+	Net.server._enter_map(player(), id, x)
+	await ticks(3)
+
 ## Moves the player instantly on both sides.
 func teleport(at: Vector2) -> void:
 	world.player.position = at

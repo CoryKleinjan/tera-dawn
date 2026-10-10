@@ -17,8 +17,8 @@
 script = ExtResource("3_portal_def")
 x = 150.0
 platform = 0
-target_map = &"meadow"
-target_x = 750.0
+target_map = &"dawnrise_village"
+target_x = 1515.0
 door = true
 
 [sub_resource type="Resource" id="Keeper"]
@@ -104,7 +104,7 @@ ground_y = 620
 start_x = 240.0
 lantern_spacing = 0.0
 region = &"dawnrise_isle"
-return_map = &"meadow"
+return_map = &"dawnrise_village"
 interior = true
 portals = Array[ExtResource("3_portal_def")]([SubResource("Door")])
 npcs = Array[ExtResource("4_npc_placement")]([SubResource("Keeper")])

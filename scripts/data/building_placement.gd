@@ -22,3 +22,12 @@ extends Resource
 ## The x of the building's middle (its picture is centred there).
 func center_x() -> float:
 	return x - building.door_offset(flip) * scale if building else x
+
+## How wide it stands, in game pixels.
+func width() -> float:
+	return building.width() * scale if building else 0.0
+
+## Its left and right edges (x and y), in game pixels.
+func span() -> Vector2:
+	var c := center_x()
+	return Vector2(c - width() * 0.5, c + width() * 0.5)

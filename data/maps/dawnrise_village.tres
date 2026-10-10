@@ -1,0 +1,125 @@
+[gd_resource type="Resource" script_class="MapDef" load_steps=24 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
+[ext_resource type="Resource" path="res://data/biomes/meadow.tres" id="2_meadow"]
+[ext_resource type="Script" path="res://scripts/data/building_placement.gd" id="bp_script"]
+[ext_resource type="Resource" path="res://data/buildings/dawnharbor_large.tres" id="bld_large"]
+[ext_resource type="Resource" path="res://data/buildings/dawnharbor_small.tres" id="bld_small"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="4_portal_def"]
+[ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="5_npc_placement"]
+[ext_resource type="Resource" path="res://data/npcs/village_elder.tres" id="16_village_elder"]
+[ext_resource type="Resource" path="res://data/npcs/guide_sorrel.tres" id="40_guide_sorrel"]
+[ext_resource type="Resource" path="res://data/npcs/wagon_driver.tres" id="41_wagon_driver"]
+[ext_resource type="Resource" path="res://data/npcs/captain_marlo.tres" id="42_captain_marlo"]
+
+[sub_resource type="Resource" id="House_west"]
+script = ExtResource("bp_script")
+building = ExtResource("bld_small")
+x = 553.0
+platform = 0
+depth = -2.4
+tint = Color(1.0, 0.94, 0.88, 1.0)
+
+[sub_resource type="Resource" id="House_elder"]
+script = ExtResource("bp_script")
+building = ExtResource("bld_large")
+x = 983.0
+platform = 0
+depth = -2.4
+
+[sub_resource type="Resource" id="House_store"]
+script = ExtResource("bp_script")
+building = ExtResource("bld_small")
+x = 1445.0
+platform = 0
+flip = true
+scale = 1.1
+depth = -2.4
+
+[sub_resource type="Resource" id="House_east"]
+script = ExtResource("bp_script")
+building = ExtResource("bld_large")
+x = 1897.0
+platform = 0
+flip = true
+scale = 0.95
+depth = -2.4
+tint = Color(0.92, 0.92, 1.0, 1.0)
+
+[sub_resource type="Resource" id="Npc_hobb"]
+script = ExtResource("5_npc_placement")
+npc = ExtResource("41_wagon_driver")
+x = 330.0
+platform = 0
+face = 1
+
+[sub_resource type="Resource" id="Npc_marlo"]
+script = ExtResource("5_npc_placement")
+npc = ExtResource("42_captain_marlo")
+x = 747.0
+platform = 0
+face = -1
+
+[sub_resource type="Resource" id="Npc_elder"]
+script = ExtResource("5_npc_placement")
+npc = ExtResource("16_village_elder")
+x = 1240.0
+platform = 0
+face = -1
+
+[sub_resource type="Resource" id="Npc_sorrel"]
+script = ExtResource("5_npc_placement")
+npc = ExtResource("40_guide_sorrel")
+x = 1649.0
+platform = 0
+face = -1
+
+[sub_resource type="Resource" id="Portal_west"]
+script = ExtResource("4_portal_def")
+x = 60.0
+platform = 0
+target_map = &"sunny_slope"
+target_x = 2880.0
+
+[sub_resource type="Resource" id="Portal_east"]
+script = ExtResource("4_portal_def")
+x = 2206.0
+platform = 0
+target_map = &"meadow"
+target_x = 110.0
+
+[sub_resource type="Resource" id="Door_elder"]
+script = ExtResource("4_portal_def")
+x = 983.0
+platform = 0
+target_map = &"meadow_elder"
+target_x = 240.0
+door = true
+
+[sub_resource type="Resource" id="Door_store"]
+script = ExtResource("4_portal_def")
+x = 1445.0
+platform = 0
+target_map = &"meadow_store"
+target_x = 240.0
+door = true
+
+[resource]
+script = ExtResource("1_map_def")
+id = &"dawnrise_village"
+display_name = "Dawnrise Village"
+sign_text = "Dawnrise Village"
+sign_x = 180.0
+biome = ExtResource("2_meadow")
+width = 2266
+height = 700
+ground_y = 620
+start_x = 260.0
+lantern_spacing = 330.0
+region = &"dawnrise_isle"
+world_pos = Vector2(110.0, 246.0)
+town = true
+level_text = "Town"
+portals = Array[ExtResource("4_portal_def")]([SubResource("Portal_west"), SubResource("Portal_east"), SubResource("Door_elder"), SubResource("Door_store")])
+npcs = Array[ExtResource("5_npc_placement")]([SubResource("Npc_elder"), SubResource("Npc_sorrel"), SubResource("Npc_hobb"), SubResource("Npc_marlo")])
+buildings = Array[ExtResource("bp_script")]([SubResource("House_west"), SubResource("House_elder"), SubResource("House_store"), SubResource("House_east")])

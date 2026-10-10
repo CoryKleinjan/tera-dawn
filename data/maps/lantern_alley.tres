@@ -165,7 +165,7 @@ script = ExtResource("7_portal_def")
 x = 60.0
 platform = 0
 target_map = &"lanternfall"
-target_x = 2700.0
+target_x = 1979.0
 
 [sub_resource type="Resource" id="Resource_20"]
 script = ExtResource("4_climbable_def")
