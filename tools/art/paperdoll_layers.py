@@ -79,6 +79,8 @@ DEFAULT_HAIR = (0.55, 0.33, 0.2)
 DEFAULT_EYES = (0.25, 0.42, 0.75)
 # Greyscale art's middle grey is brightened to this (of 255); see lift().
 LIFT_TO = 200
+# Tinted art darker than this is outline: lift() keeps it grey, without the sheets' plum cast.
+OUTLINE_DARK = 110
 
 # Frames seen from behind: no face, the hair's "from behind" piece, the cape in front.
 BACK_VIEW = ("rope1", "rope2", "ladder1", "ladder2", "climb_idle")
@@ -836,18 +838,29 @@ def lift(img):
     that colour, with the art's shading."""
     arr = np.asarray(img).astype(float)
     solid = arr[..., 3] > 0
+    # the sheets' dark plum outline would come out of the brightening (and the tint) as a
+    # magenta line, so dark pixels leaning magenta go to their own grey first
+    rgb = arr[..., :3]
+    plum = solid & (rgb.max(2) < OUTLINE_DARK) & (np.minimum(rgb[..., 0], rgb[..., 2]) > rgb[..., 1])
+    rgb[plum] = rgb[plum].mean(1, keepdims=True)
     if solid.any():
         mid = max(np.median(arr[solid][:, :3].mean(1)), 1)
         arr[..., :3] = (arr[..., :3] * LIFT_TO / mid).clip(0, 255)
     return Image.fromarray(arr.round().astype(np.uint8), "RGBA")
 
 
-def save_layer(name, frames, fw, fh, index, anims, tinted=True):
+def save_layer(name, frames, fw, fh, index, anims, tinted=True, grey=False):
+    """Writes a layer strip and its SpriteFrames. `grey` drops all colour first, for art
+    that is only ever shown tinted (hair: the sheets leave pink in the highlights)."""
     os.makedirs(LAYERS, exist_ok=True)
     os.makedirs(ANIMS, exist_ok=True)
     strip = Image.new("RGBA", (fw * len(frames), fh))
     for i, im in enumerate(frames):
         strip.alpha_composite(im, (i * fw, 0))
+    if grey:
+        arr = np.asarray(strip).copy()
+        arr[..., :3] = arr[..., :3].mean(2, keepdims=True).round().astype(np.uint8)
+        strip = Image.fromarray(arr, "RGBA")
     if tinted:
         strip = lift(strip)
     png = os.path.join(LAYERS, name + ".png")
@@ -912,7 +925,7 @@ def main():
         old[style] = out[""]
         for layer, fr in out.items():
             if any(im.getbbox() for im in fr):
-                save_layer(f"hair_{style}{layer}", fr, fw, fh, index, anims)
+                save_layer(f"hair_{style}{layer}", fr, fw, fh, index, anims, grey=True)
 
     # hairstyles drawn in every pose (hair_<style>_frames sheets) replace the front piece
     for style in HAIRSTYLES:
@@ -948,7 +961,7 @@ def main():
                 else:  # drawn in a pose too unlike his (lying face down): the one-piece hair
                     canvas = old[style][index[n]]
                 out.append(canvas)
-            save_layer(f"hair_{style}", out, fw, fh, index, anims)
+            save_layer(f"hair_{style}", out, fw, fh, index, anims, grey=True)
             for gone in ("_back",):  # the drawn poses include the hair behind the head
                 for path in (os.path.join(LAYERS, f"hair_{style}{gone}.png"), os.path.join(ANIMS, f"hair_{style}{gone}.tres")):
                     if os.path.exists(path):

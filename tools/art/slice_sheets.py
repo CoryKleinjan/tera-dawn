@@ -13,7 +13,8 @@ no code changes. See art/sheets/README.md for the manifest format.
 Steps for each cell:
 1. Find the cells: thin divider lines are detected automatically (or given in the manifest).
 2. Remove the background: magenta sheets get a soft chroma key with the magenta
-   unmixed from the edge colours; dark sheets are flood-filled from the cell border.
+   unmixed from the edge colours, then a defringe pass for the dark outline pixels the key
+   kept that are still part magenta; dark sheets are flood-filled from the cell border.
 3. Drop the white label in the cell's top-left corner and any specks.
 4. Shrink to the game's scale (premultiplied box filter), harden the alpha for
    pixel-art sprites, and trim to the opaque pixels.
@@ -48,6 +49,7 @@ DEFAULTS = {
     "inset": 3,               # pixels trimmed off each cell edge (divider anti-aliasing)
     "save": True,             # False: only used by animation sets, not written on its own
     "key": [0.35, 0.8],       # magenta sheets: magenta-ness at which pixels start / stop being background
+    "defringe": True,         # magenta sheets: take the magenta out of the outline pixels at the cut edge
     "strip_labels": False,    # paint over white label letters in the label band before cutting
     "fix": None,              # a clean-up from FIXES for every cell (e.g. "glow_backdrop" for icon sheets)
     "recolor": None,          # a palette change from RECOLORS for every cell (e.g. "leather")
@@ -196,6 +198,63 @@ def key_magenta(cell, bg, lo=0.35, hi=0.8):
     rgb[..., 0] -= spill * 0.85
     rgb[..., 2] -= spill * 0.85
     return np.clip(rgb, 0, 1), alpha
+
+
+def _shifted(x, dy, dx):
+    """`x` moved by (dy, dx), with zeros (not wrap-around) coming in at the edges."""
+    out = np.zeros_like(x)
+    h, w = x.shape[:2]
+    out[max(dy, 0):h + min(dy, 0), max(dx, 0):w + min(dx, 0)] = \
+        x[max(-dy, 0):h + min(-dy, 0), max(-dx, 0):w + min(-dx, 0)]
+    return out
+
+
+def defringe(rgb, alpha, bg, band=3, lean=0.04, fit=0.22):
+    """Takes the background out of the rim of solid pixels the key left around the art.
+    Gemini blends the dark outline into the magenta, and a dark blend (plum, about RGB
+    96, 16, 80) isn't magenta enough for the key, so it stays solid and shows as a thin
+    magenta line in the game. Each solid pixel within `band` pixels of the cut edge (or of
+    the cell edge, for art cut off by it) that leans magenta is compared with the clean art just inside it: when it is a mix of that
+    art and the background, it gets the art's colour and loses the background's share of
+    its alpha (so mostly-background pixels drop out). Real purple or pink art matches the
+    art beside it, so it stays as drawn. Clearly magenta slivers with no art near them go."""
+    bg = np.asarray(bg, float) / 255.0
+    solid = alpha > 0.5
+    near_cut = ~solid
+    near_cut[[0, -1], :] = near_cut[:, [0, -1]] = True  # art cut off by the cell edge or a crop
+    for _ in range(band):
+        near_cut = near_cut | _shifted(near_cut, 1, 0) | _shifted(near_cut, -1, 0) | \
+            _shifted(near_cut, 0, 1) | _shifted(near_cut, 0, -1)
+    leans = np.minimum(rgb[..., 0], rgb[..., 2]) - rgb[..., 1]
+    # the background's own hue: red and blue about even (pink or rose art leans one way)
+    suspect = solid & near_cut & (leans > lean) & (np.abs(rgb[..., 0] - rgb[..., 2]) < 0.2)
+    if not suspect.any():
+        return rgb, alpha
+    # the art each suspect pixel sits on: the mean of the nearest clean pixels, spread inward ring by ring
+    art = np.where((solid & ~suspect)[..., None], rgb, 0.0)
+    known = solid & ~suspect
+    for _ in range(band * 3):
+        todo = suspect & ~known
+        if not todo.any():
+            break
+        total, count = np.zeros_like(art), np.zeros(alpha.shape)
+        for dy, dx in N8:
+            total += _shifted(art, dy, dx)
+            count += _shifted(known.astype(float), dy, dx)
+        new = todo & (count > 0)
+        art[new] = total[new] / count[new][:, None]
+        known |= new
+    # how much background is in each pixel, along the line from its art to the background
+    d = bg - art
+    t = np.clip(((rgb - art) * d).sum(2) / np.maximum((d * d).sum(2), 1e-6), 0, 1)
+    off_line = np.linalg.norm(rgb - (art + t[..., None] * d), axis=2)
+    fringe = suspect & known & (off_line < fit) & (t > 0.03)
+    rgb, alpha = rgb.copy(), alpha.copy()
+    rgb[fringe] = art[fringe]
+    alpha[fringe] = np.minimum(alpha[fringe], 1 - t[fringe])
+    # clearly magenta specks and slivers with no art anywhere near (a divider line a crop caught)
+    alpha[suspect & ~known & (leans > 0.15)] = 0.0
+    return rgb, alpha
 
 
 def key_dark(cell, bg, shadow):
@@ -552,6 +611,8 @@ def cut_cell(rgb_full, bg, box, opts):
         rgb, alpha = key_dark(cell, bg, opts["shadow"])
     else:
         rgb, alpha = key_magenta(cell, bg, *opts["key"])
+        if opts["defringe"]:
+            rgb, alpha = defringe(rgb, alpha, bg)
     if opts.get("fix"):
         rgb, alpha = FIXES[opts["fix"]](rgb, alpha, source=cell / 255.0)
     rgb, alpha = shrink(rgb, alpha, opts["scale"])
@@ -772,7 +833,9 @@ def main():
     ready = []
     for p in paths:
         with open(p) as f:
-            source = json.load(f)["source"]
+            source = json.load(f).get("source")
+        if source is None:  # not a sheet (paperdoll_rig.json is read by paperdoll_layers.py)
+            continue
         if os.path.exists(os.path.join(ROOT, source)):
             ready.append(p)
         else:
