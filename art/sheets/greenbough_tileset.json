@@ -1,6 +1,7 @@
 {
   "source": "art/source/greenbough_tileset.png",
-  "scale": 0.26,
+  "art_px": 3.75,
+  "grow": 0.98,
   "label_band": 0.2,
   "out_dir": "assets/sprites/tiles/greenbough",
   "cells": [
@@ -97,52 +98,52 @@
         242,
         286
       ],
-      "scale": 0.2695
+      "grow": 1.01
     },
     "ground_left": {
-      "scale": 0.35,
       "crop": [
         0,
         27,
         225,
         218
-      ]
+      ],
+      "grow": 1.25
     },
     "ground_middle": {
-      "scale": 0.35,
       "crop": [
         0,
         27,
         229,
         218
-      ]
+      ],
+      "grow": 1.25
     },
     "ground_right": {
-      "scale": 0.35,
       "crop": [
         0,
         27,
         229,
         218
-      ]
+      ],
+      "grow": 1.25
     },
     "platform_small": {
-      "scale": 0.1621,
       "crop": [
         0,
         27,
         261,
         218
-      ]
+      ],
+      "grow": 0.8
     },
     "platform_medium": {
-      "scale": 0.2383,
       "crop": [
         0,
         27,
         281,
         218
-      ]
+      ],
+      "grow": 0.89
     },
     "platform_large": {
       "crop": [
@@ -153,13 +154,13 @@
       ]
     },
     "edge_grass": {
-      "scale": 0.2293,
       "crop": [
         0,
         29,
         226,
         233
-      ]
+      ],
+      "grow": 0.86
     },
     "tall_grass": {
       "crop": [
@@ -170,76 +171,76 @@
       ]
     },
     "tree_large": {
-      "scale": 0.2816,
       "crop": [
         0,
         29,
         269,
         233
-      ]
+      ],
+      "grow": 1.06
     },
     "tree_small": {
-      "scale": 0.2966,
       "crop": [
         0,
         29,
         242,
         233
-      ]
+      ],
+      "grow": 1.11
     },
     "bush_large": {
-      "scale": 0.2165,
       "crop": [
         0,
         29,
         259,
         233
-      ]
+      ],
+      "grow": 0.81
     },
     "bush_small": {
-      "scale": 0.2196,
       "crop": [
         0,
         29,
         275,
         233
-      ]
+      ],
+      "grow": 0.82
     },
     "rock_large": {
-      "scale": 0.2384,
       "crop": [
         0,
         26,
         226,
         239
-      ]
+      ],
+      "grow": 0.89
     },
     "rock_small": {
-      "scale": 0.222,
       "crop": [
         0,
         26,
         230,
         239
-      ]
+      ],
+      "grow": 0.83
     },
     "stump": {
-      "scale": 0.2291,
       "crop": [
         0,
         26,
         260,
         239
-      ]
+      ],
+      "grow": 0.86
     },
     "flowers": {
-      "scale": 0.235,
       "crop": [
         0,
         26,
         270,
         239
-      ]
+      ],
+      "grow": 0.88
     },
     "signature_plant": {
       "crop": [
@@ -257,7 +258,7 @@
         250,
         239
       ],
-      "scale": 0.2686
+      "grow": 1.01
     },
     "signpost": {
       "crop": [
@@ -274,25 +275,25 @@
         243,
         286
       ],
-      "scale": 0.2695
+      "grow": 1.01
     },
     "building_large": {
-      "scale": 0.302,
       "crop": [
         0,
         36,
         283,
         286
-      ]
+      ],
+      "grow": 1.13
     },
     "building_small": {
-      "scale": 0.2379,
       "crop": [
         0,
         35,
         262,
         286
-      ]
+      ],
+      "grow": 0.89
     },
     "signature_prop": {
       "crop": [

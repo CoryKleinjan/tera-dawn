@@ -1,12 +1,13 @@
-[gd_resource type="Resource" script_class="BiomeDef" load_steps=46 format=3]
+[gd_resource type="Resource" script_class="BiomeDef" load_steps=47 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/biome_def.gd" id="1_biome_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/ember_top.png" id="2_ember_top"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/ember_side.png" id="3_ember_side"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/ember_soil.png" id="4_ember_soil"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/ground_left.png" id="5_ground_left"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/ground_middle.png" id="6_ground_middle"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/ground_right.png" id="7_ground_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/ember/cap_left.png" id="5_platform_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/ember/middle_a.png" id="6_platform_middle"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/ember/cap_right.png" id="7_platform_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/ember/middle_b.png" id="7b_platform_middle_alt"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/tall_grass.png" id="8_tall_grass"]
 [ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="9_backdrop_layer_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/ember/moon.png" id="10_moon"]
@@ -112,7 +113,7 @@ script = ExtResource("19_decor_def")
 textures = Array[Texture2D]([ExtResource("20_tree_large"), ExtResource("21_tree_small")])
 spacing = Vector2(180.0, 340.0)
 depth = Vector2(-8.5, -5.5)
-scale = Vector2(1.4, 1.9)
+scale = Vector2(1.04, 1.04)
 chance = 1.0
 texel = 1.25
 shaded = true
@@ -122,7 +123,7 @@ script = ExtResource("19_decor_def")
 textures = Array[Texture2D]([ExtResource("22_bush_small"), ExtResource("23_bush_large")])
 spacing = Vector2(150.0, 280.0)
 depth = Vector2(-4.6, -2.6)
-scale = Vector2(0.85, 1.15)
+scale = Vector2(0.85, 1.04)
 chance = 1.0
 texel = 1.25
 shaded = true
@@ -132,7 +133,7 @@ script = ExtResource("19_decor_def")
 textures = Array[Texture2D]([ExtResource("24_rock_small"), ExtResource("25_rock_large"), ExtResource("26_stump"), ExtResource("27_fence")])
 spacing = Vector2(240.0, 440.0)
 depth = Vector2(-4.0, -1.8)
-scale = Vector2(0.85, 1.1)
+scale = Vector2(0.85, 1.04)
 chance = 0.7
 texel = 1.25
 shaded = true
@@ -142,7 +143,7 @@ script = ExtResource("19_decor_def")
 textures = Array[Texture2D]([ExtResource("28_fire_lilies")])
 spacing = Vector2(90.0, 200.0)
 depth = Vector2(-3.0, 2.4)
-scale = Vector2(0.6, 0.85)
+scale = Vector2(0.75, 0.85)
 chance = 1.0
 texel = 1.25
 shaded = true
@@ -152,7 +153,7 @@ script = ExtResource("19_decor_def")
 textures = Array[Texture2D]([ExtResource("28_fire_lilies"), ExtResource("22_bush_small")])
 spacing = Vector2(100.0, 200.0)
 depth = Vector2(-0.6, -0.2)
-scale = Vector2(0.55, 0.75)
+scale = Vector2(0.75, 0.75)
 chance = 0.55
 texel = 1.25
 shaded = true
@@ -180,10 +181,10 @@ lantern_light = Color(1.0, 0.5411764705882353, 0.2901960784313726, 1.0)
 ground_top = ExtResource("2_ember_top")
 ground_side = ExtResource("3_ember_side")
 ground_soil = ExtResource("4_ember_soil")
-platform_left = ExtResource("5_ground_left")
-platform_middle = ExtResource("6_ground_middle")
-platform_right = ExtResource("7_ground_right")
-platform_texel = 1.0
+platform_left = ExtResource("5_platform_left")
+platform_middle = ExtResource("6_platform_middle")
+platform_middle_alt = ExtResource("7b_platform_middle_alt")
+platform_right = ExtResource("7_platform_right")
 edge_grass = Array[Texture2D]([ExtResource("8_tall_grass")])
 backdrop = Array[ExtResource("9_backdrop_layer_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6")])
 ground_decor = Array[ExtResource("19_decor_def")]([SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10")])

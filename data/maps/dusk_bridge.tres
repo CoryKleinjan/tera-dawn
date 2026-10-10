@@ -23,7 +23,7 @@ texture = ExtResource("15_stump")
 x = 517.0
 y = -1.0
 depth = -5.1
-scale = 1.44
+scale = 1.04
 flip = false
 
 [sub_resource type="Resource" id="Resource_27"]
@@ -41,7 +41,7 @@ texture = ExtResource("16_fire_lilies")
 x = 1080.0
 y = -1.0
 depth = -6.5
-scale = 1.43
+scale = 1.04
 flip = false
 
 [sub_resource type="Resource" id="Resource_25"]
@@ -50,7 +50,7 @@ texture = ExtResource("15_stump")
 x = 715.0
 y = -1.0
 depth = -7.3
-scale = 1.07
+scale = 1.04
 flip = true
 
 [sub_resource type="Resource" id="Resource_23"]
@@ -59,7 +59,7 @@ texture = ExtResource("13_tree_small")
 x = 1974.0
 y = -1.0
 depth = -6.8
-scale = 1.36
+scale = 1.04
 flip = false
 
 [sub_resource type="Resource" id="Resource_22"]

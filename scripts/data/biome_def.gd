@@ -39,19 +39,15 @@ extends Resource
 @export var ground_top: Texture2D
 @export var ground_side: Texture2D
 @export var ground_soil: Texture2D
-## The painted front of a floating platform: left end, repeating middle, right end. Floating
-## platforms are only this skin, with no 3D block behind it.
+## The painted front of a floating platform (art/sheets/platform_pieces_<area>.json): its
+## left end, the middle and a second middle mixed in, and its right end. PlatformSkin sets
+## them edge to edge for each platform's width. Floating platforms are only this skin, with
+## no 3D block behind it.
 @export var platform_left: Texture2D
 @export var platform_middle: Texture2D
-@export var platform_right: Texture2D
-## A second middle piece mixed in with the first so long platforms don't repeat (optional).
+## Optional: middles alternate between this and platform_middle so long platforms don't repeat.
 @export var platform_middle_alt: Texture2D
-## Hanging roots, rock or beams drawn under the skin: under the left end, the middle pieces
-## and the right end (all optional; part 7 sheets P1-P8).
-@export var platform_under_left: Texture2D
-@export var platform_under_middle: Texture2D
-@export var platform_under_right: Texture2D
-@export var platform_texel := 1.0
+@export var platform_right: Texture2D
 ## Grass blades: a short fringe along the floor's front edge, and tufts behind platform skins.
 @export var edge_grass: Array[Texture2D] = []
 

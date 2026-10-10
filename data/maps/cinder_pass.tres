@@ -20,7 +20,7 @@ texture = ExtResource("13_steam_vent")
 x = 2007.0
 y = -1.0
 depth = -7.3
-scale = 1.39
+scale = 1.04
 flip = true
 
 [sub_resource type="Resource" id="Resource_23"]

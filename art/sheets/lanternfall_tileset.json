@@ -1,6 +1,7 @@
 {
   "source": "art/source/lanternfall_tileset.png",
-  "scale": 0.276,
+  "art_px": 3.0,
+  "grow": 0.83,
   "label_band": 0.2,
   "out_dir": "assets/sprites/tiles/lanternfall",
   "cells": [
@@ -58,40 +59,40 @@
   "overrides": {
     "lantern_lit": {
       "fix": "glow_backdrop",
-      "scale": 0.3211,
       "crop": [
         0,
         0,
         252,
         226
-      ]
+      ],
+      "grow": 0.96
     },
     "ground_left": {
-      "scale": 0.1861,
       "crop": [
         0,
         0,
         246,
         226
-      ]
+      ],
+      "grow": 0.8
     },
     "ground_middle": {
-      "scale": 0.1861,
       "crop": [
         0,
         0,
         251,
         226
-      ]
+      ],
+      "grow": 0.8
     },
     "ground_right": {
-      "scale": 0.1861,
       "crop": [
         0,
         0,
         252,
         226
-      ]
+      ],
+      "grow": 0.8
     },
     "platform_small": {
       "crop": [
@@ -102,13 +103,13 @@
       ]
     },
     "platform_medium": {
-      "scale": 0.2011,
       "crop": [
         0,
         0,
         252,
         227
-      ]
+      ],
+      "grow": 0.8
     },
     "platform_large": {
       "crop": [
@@ -119,13 +120,13 @@
       ]
     },
     "edge_grass": {
-      "scale": 0.214,
       "crop": [
         0,
         0,
         246,
         226
-      ]
+      ],
+      "grow": 0.8
     },
     "tall_grass": {
       "crop": [
@@ -134,17 +135,17 @@
         251,
         226
       ],
-      "scale": 0.2857
+      "grow": 0.86
     },
     "tree_large": {
-      "scale": 0.3073,
       "crop": [
         0,
         0,
         252,
         226
       ],
-      "fix": "glow_backdrop_holes"
+      "fix": "glow_backdrop_holes",
+      "grow": 0.92
     },
     "tree_small": {
       "crop": [
@@ -153,7 +154,7 @@
         252,
         226
       ],
-      "scale": 0.2664
+      "grow": 0.8
     },
     "bush_large": {
       "crop": [
@@ -162,7 +163,7 @@
         252,
         226
       ],
-      "scale": 0.2664
+      "grow": 0.8
     },
     "bush_small": {
       "crop": [
@@ -171,25 +172,25 @@
         247,
         226
       ],
-      "scale": 0.3083
+      "grow": 0.92
     },
     "rock_large": {
-      "scale": 0.3006,
       "crop": [
         0,
         0,
         246,
         227
-      ]
+      ],
+      "grow": 0.9
     },
     "rock_small": {
-      "scale": 0.2621,
       "crop": [
         0,
         0,
         251,
         227
-      ]
+      ],
+      "grow": 0.8
     },
     "stump": {
       "crop": [
@@ -215,61 +216,61 @@
         227
       ],
       "fix": "glow_backdrop",
-      "scale": 0.2638
+      "grow": 0.8
     },
     "fence": {
-      "scale": 0.2857,
       "crop": [
         0,
         0,
         247,
         227
-      ]
+      ],
+      "grow": 0.86
     },
     "signpost": {
-      "scale": 0.3638,
       "crop": [
         0,
         0,
         246,
         226
-      ]
+      ],
+      "grow": 1.09
     },
     "lantern_unlit": {
-      "scale": 0.3211,
       "crop": [
         0,
         0,
         251,
         226
-      ]
+      ],
+      "grow": 0.96
     },
     "building_large": {
-      "scale": 0.4796,
       "crop": [
         0,
         0,
         252,
         226
-      ]
+      ],
+      "grow": 1.25
     },
     "building_small": {
-      "scale": 0.4147,
       "crop": [
         0,
         0,
         252,
         226
-      ]
+      ],
+      "grow": 1.24
     },
     "signature_prop": {
-      "scale": 0.4828,
       "crop": [
         0,
         0,
         247,
         226
-      ]
+      ],
+      "grow": 1.25
     }
   }
 }

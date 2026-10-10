@@ -53,7 +53,7 @@ func test_map_signs_stand_inward_from_the_entrance_clear_of_portals() -> void:
 			continue
 		var x := SceneryBuilder.sign_post_x(m)
 		var half := UiSkin.hint_width(m.sign_text) / 2.0
-		var portal_half := m.biome.portal_frames[0].get_width() * TDStage.TEXEL / 2.0 if not m.biome.portal_frames.is_empty() else 34.0
+		var portal_half := TDStage.art_size(m.biome.portal_frames[0]).x / 2.0 if not m.biome.portal_frames.is_empty() else 34.0
 		check_between(x, 0, m.width, "%s: the sign at x %s is on the map" % [Scan.where(m), x])
 		var nearest := INF
 		for p in m.portals:

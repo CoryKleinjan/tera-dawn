@@ -29,7 +29,7 @@
   {
    "id": "meadow_tileset",
    "prompts": null,
-   "batch": null,
+   "batch": "meadow tileset (edit)",
    "with": null,
    "refs": [],
    "save": "meadow_tileset.png",
@@ -40,7 +40,14 @@
     8
    ],
    "anchor": null,
-   "note": "No prompt: Cory's original environment tileset (part 1 'environment-tileset.png', 'already done'). Area tilesets W1a-W6a copy it. Not run."
+   "note": "Cory's original painted tileset (part 1). 2026-10-10 environment-resolution thread: redrawn as pixel art by editing the old sheet, so the start area matches the Gemini area tilesets (same pixel size as greenbough_tileset).",
+   "edit": {
+    "base": "art/source/meadow_tileset.png",
+    "refs": [
+     "art/source/greenbough_tileset.png"
+    ],
+    "text": "This sheet is my meadow tileset: 29 labelled pieces of grassy land, bushes, trees, rocks, a fence, a signpost, flowers and tall grass, in a grid of 5 rows. Redraw EVERY piece as crisp pixel art in exactly the style of the second attached image (my Greenbough tileset): the same chunky pixel size (one art pixel is about 4 image pixels wide), the same flat shading with few colours, and the same crisp dark plum-brown outline. Keep each piece's shape, size, position, colours and label exactly as in my sheet; only the rendering changes from smooth painting to pixel art. Replace the dark navy background and the cell divider fill with one flat pure magenta #FF00FF everywhere, keeping thin dark divider lines between the cells. No drop shadows under the pieces."
+   }
   },
   {
    "id": "paperdoll_body",

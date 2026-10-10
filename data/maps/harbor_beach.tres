@@ -24,7 +24,7 @@ texture = ExtResource("18_tree_large")
 x = 2411.0
 y = -1.0
 depth = -7.2
-scale = 1.43
+scale = 1.3
 flip = true
 
 [sub_resource type="Resource" id="Resource_42"]
@@ -51,7 +51,7 @@ texture = ExtResource("15_stump")
 x = 2375.0
 y = -1.0
 depth = -2.4
-scale = 1.47
+scale = 1.3
 flip = true
 
 [sub_resource type="Resource" id="Resource_39"]

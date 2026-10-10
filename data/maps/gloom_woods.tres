@@ -23,7 +23,7 @@ texture = ExtResource("17_tree_small")
 x = 1828.0
 y = -1.0
 depth = -4.7
-scale = 1.17
+scale = 1.04
 flip = false
 
 [sub_resource type="Resource" id="Resource_39"]
@@ -32,7 +32,7 @@ texture = ExtResource("15_rock_large")
 x = 2536.0
 y = -1.0
 depth = -3.3
-scale = 1.33
+scale = 1.04
 flip = false
 
 [sub_resource type="Resource" id="Resource_38"]
@@ -41,7 +41,7 @@ texture = ExtResource("16_stump")
 x = 734.0
 y = -1.0
 depth = -7.2
-scale = 1.18
+scale = 1.04
 flip = false
 
 [sub_resource type="Resource" id="Resource_37"]
@@ -50,7 +50,7 @@ texture = ExtResource("15_rock_large")
 x = 2430.0
 y = -1.0
 depth = -6.9
-scale = 1.25
+scale = 1.04
 flip = false
 
 [sub_resource type="Resource" id="Resource_35"]

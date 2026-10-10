@@ -8,8 +8,10 @@ extends RefCounted
 ## The body (hero.png) comes with a region map (hero_regions.png: which pixels are skin, the
 ## chest, the shorts and the feet) and a rig (hero_rig.json: where his head, face, neck, hand
 ## and shield are in every frame), both made with the layers by tools/art/paperdoll_layers.py.
-## The skin tone recolours his skin; a worn top, bottom or shoes recolour the chest, shorts
-## or feet until the piece has its own art (EquipDef.worn_frames). Hair, irises, capes,
+## The skin tone recolours his skin. A worn top, bottom or shoes is a greyscale cut tinted with
+## its colour (EquipDef.worn_style: a tunic, boots...) over the bare skin, or its own art
+## (EquipDef.worn_frames); with neither it recolours the chest, shorts or feet. A bottom's cut
+## also recolours the shorts, so no grey shows at its edges. Hair, irises, capes,
 ## shields and gloves are greyscale art tinted with the hair, eye or item colour. The weapon
 ## is a layer too, already placed in his fist on every frame by paperdoll_layers.py, with a
 ## hole where his fingers wrap the grip (see weapon_layers); a weapon kind is held its own way
@@ -117,9 +119,17 @@ static func dress(look: Dictionary) -> Paperdoll:
 	for place in BARE_SKIN:
 		if not gear.has(place):
 			d.tints[PLACE_REGIONS[place]] = d.tints[Region.SKIN]
+	var cuts := {}  # place -> the worn_style layer it's drawn with
 	for place in PLACE_REGIONS:
 		var e: EquipDef = gear.get(place)
-		if e and e.worn_frames == null:
+		if e == null or e.worn_frames:
+			continue
+		var cut := worn_cut(e)
+		if cut:
+			cuts[place] = cut
+		if cut and place in BARE_SKIN:  # the cut covers what it covers; skin shows around it
+			d.tints[PLACE_REGIONS[place]] = d.tints[Region.SKIN]
+		else:
 			var c := e.worn_color()
 			c.a = PLACE_STRENGTH
 			d.tints[PLACE_REGIONS[place]] = c
@@ -147,6 +157,8 @@ static func dress(look: Dictionary) -> Paperdoll:
 			d._add(e.worn_frames, false)
 			if PLACE_REGIONS.has(place):
 				d.hidden[PLACE_REGIONS[place]] = 1.0
+		elif cuts.has(place):
+			d._add(cuts[place], false, e.worn_color())
 		elif e and place == &"gloves":
 			d._add(GLOVES, false, e.worn_color())
 	if cape and cape.worn_frames == null:
@@ -186,6 +198,11 @@ static func weapon_layers(e: EquipDef) -> Dictionary:
 	if not ResourceLoader.exists(WEAPON_DIR + String(kind) + ".tres"):
 		kind = DEFAULT_WEAPON
 	return _weapon_frames(WEAPON_DIR + String(kind), e.worn_color())
+
+## The greyscale layer a top, bottom or shoes is worn as (EquipDef.worn_style), or null.
+static func worn_cut(e: EquipDef) -> SpriteFrames:
+	var path := e.worn_style_path()
+	return load(path) if path != "" and ResourceLoader.exists(path) else null
 
 ## The kind of weapon an item is held as (a weapon without a kind is a sword).
 static func kind_of(e: EquipDef) -> StringName:
