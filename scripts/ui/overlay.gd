@@ -8,10 +8,11 @@ extends Control
 ## The game menu's cog in the top left corner (a button TDHud puts there); the map name sits right of it.
 const MENU_BUTTON := Rect2(8, 6, 34, 34)
 ## The minimap's top left; it's drawn at its frame art's own size (see minimap_rect).
-## Inside hud/minimap_frame, in texels: where the map is drawn. The frame's dark window runs
-## from x 12 to 170 and y 24 to 88; the map keeps clear of its side posts, of the sun
-## medallion hanging into its top (down to y 36) and of the stitching along its bottom.
-const MINIMAP_INNER := Rect2(14, 38, 154, 47)
+## Inside hud/minimap_frame, in texels: where the map is drawn, filling the frame's whole dark
+## window (x 13 to 170, y 25 to 88).
+const MINIMAP_INNER := Rect2(13, 25, 157, 63)
+## The frame's sun medallion, which hangs down into the window: drawn again over the map.
+const MINIMAP_MEDALLION := Rect2(72, 0, 39, 38)
 ## Minimap marks: texture, and its height in pixels.
 const MINIMAP_PLAYER := ["hud/minimap_dot_1", 9.0]
 const MINIMAP_NPC := ["hud/minimap_dot_2", 6.0]
@@ -159,6 +160,25 @@ func _draw_minimap(mm: Rect2) -> void:
 	var pulse := fmod(Time.get_ticks_msec() / 1000.0, 1.4) / 1.4
 	draw_arc(you, 4.0 + pulse * 6.0, 0, TAU, 16, Color(Palette.SUN, 0.8 * (1.0 - pulse)), 1.5)
 	_minimap_mark(MINIMAP_PLAYER, you)
+	draw_texture(_medallion(), mm.position + MINIMAP_MEDALLION.position)
+
+## The frame's sun medallion with the window's dark leather around it cut away, so it hangs
+## over the map without a dark box behind it.
+static var _medallion_tex: Texture2D
+static func _medallion() -> Texture2D:
+	if _medallion_tex == null:
+		var frame := UiSkin.tex("hud/minimap_frame").get_image()
+		frame.decompress()
+		var img := frame.get_region(MINIMAP_MEDALLION)
+		var window := frame.get_pixelv(MINIMAP_INNER.get_center())
+		img.convert(Image.FORMAT_RGBA8)
+		for y in range(int(MINIMAP_INNER.position.y - MINIMAP_MEDALLION.position.y), img.get_height()):
+			for x in img.get_width():
+				var c := img.get_pixel(x, y)
+				if maxf(maxf(absf(c.r - window.r), absf(c.g - window.g)), absf(c.b - window.b)) <= 6.0 / 255.0:
+					img.set_pixel(x, y, Color.TRANSPARENT)
+		_medallion_tex = ImageTexture.create_from_image(img)
+	return _medallion_tex
 
 ## One of the minimap's marks ([texture, height]) centred on `at`.
 func _minimap_mark(mark: Array, at: Vector2) -> void:
