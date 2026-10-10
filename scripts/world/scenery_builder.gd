@@ -7,6 +7,9 @@ extends RefCounted
 ## How much bigger than the biome's art the signpost is drawn, and its depth.
 const SIGN_SCALE := 1.2
 const SIGN_DEPTH := -0.9
+## How far inward from the entrance portal the signpost stands, so its words read as this
+## map's name rather than as where that portal goes.
+const SIGN_FROM_PORTAL := 200.0
 ## Warm light standing in a doorway.
 const DOOR_LIGHT := Color("ffc47a")
 ## Space between the top of the signpost (or portal) and the sign's words.
@@ -302,13 +305,24 @@ func _sign(map: MapDef, biome: BiomeDef) -> void:
 	if map.sign_text == "" or biome.signpost == null:
 		return
 	var post := TDStage.sprite(biome.signpost, TDStage.TEXEL * SIGN_SCALE)
-	post.position = TDStage.to3d(Vector2(map.sign_x, map.ground_y + 3.0), SIGN_DEPTH)
+	post.position = TDStage.to3d(Vector2(sign_post_x(map), map.ground_y + 3.0), SIGN_DEPTH)
 	root.add_child(post)
+
+## Where the signpost stands: SIGN_FROM_PORTAL inward from the entrance, the floor portal
+## nearest the map's `sign_x` (or at `sign_x` on a map with no portal on the floor).
+static func sign_post_x(map: MapDef) -> float:
+	var entrance: PortalDef = null
+	for p in map.portals:
+		if p.platform == 0 and not p.door and (entrance == null or absf(p.x - map.sign_x) < absf(entrance.x - map.sign_x)):
+			entrance = p
+	if entrance == null:
+		return map.sign_x
+	var inward := 1.0 if entrance.x < map.width / 2.0 else -1.0
+	return entrance.x + inward * SIGN_FROM_PORTAL
 
 ## Where the sign's words go (game pixels, their bottom centre), or null for no sign. The
 ## overlay draws them, so they stay sharp and in front: over the post, at least as high as
-## the biome's portal so the portal by the entrance never hides them, and above any platform
-## skin they would otherwise sit on.
+## the biome's portal, and above any platform skin they would otherwise sit on.
 static func sign_label_at(map: MapDef) -> Variant:
 	var biome := map.biome
 	if map.sign_text == "" or biome == null or biome.signpost == null:
@@ -316,15 +330,16 @@ static func sign_label_at(map: MapDef) -> Variant:
 	var h := TDStage.art_size(biome.signpost, TDStage.TEXEL * SIGN_SCALE).y
 	if not biome.portal_frames.is_empty():
 		h = maxf(h, TDStage.art_size(biome.portal_frames[0]).y)
+	var x := sign_post_x(map)
 	var y := map.ground_y + 3.0 - h - SIGN_LABEL_GAP
 	var moved := true
 	while moved: # lifting the words over one platform can put them in the one above
 		moved = false
 		for d in map.platforms:
-			if map.sign_x < d.x or map.sign_x > d.x + d.width:
+			if x < d.x or x > d.x + d.width:
 				continue
 			var skin := TerrainBuilder.skin_span(d, biome)
 			if y > skin.x and y - SIGN_LABEL_H < skin.y:
 				y = skin.x - SIGN_LABEL_GAP
 				moved = true
-	return Vector2(map.sign_x, y)
+	return Vector2(x, y)

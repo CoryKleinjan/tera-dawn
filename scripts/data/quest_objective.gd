@@ -27,3 +27,15 @@ func describe() -> String:
 		_:
 			var m: MapDef = Content.maps.get(map)
 			return "Reach %s" % (m.display_name if m else String(map))
+
+## Whether this can be worked on at `m`: its monster (or one dropping its item) lives there,
+## or it's the map to reach.
+func can_do_on(m: MapDef) -> bool:
+	match kind:
+		Kind.KILL:
+			return m.spawns.any(func(s: SpawnDef) -> bool: return s.monster == monster)
+		Kind.COLLECT:
+			return m.spawns.any(func(s: SpawnDef) -> bool: return s.monster and (s.monster == drop_from
+					or s.monster.drops.any(func(d: DropEntry) -> bool: return d.item == item)))
+		_:
+			return m.id == map

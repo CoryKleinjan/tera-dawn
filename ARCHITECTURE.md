@@ -338,7 +338,10 @@ so depth of field never blurs it and nothing in the world covers it.
    A platform more than about 90 px above the one below needs a rope or ladder. A map can
    be taller than 700 (more floors, more exits); keep `ground_y` 80 above `height`.
 4. Connect it: add a **PortalDef** on an existing map whose `target_map` is the new id, and a
-   portal back.
+   portal back. Players arriving (a portal's or travel route's `target_x`) and NPCs stay at
+   least the quickslot panel's width plus a hero from the map's right edge, so the panel never
+   covers them (`tests/content/content_world_test.gd`). The welcome signpost (`sign_text`)
+   stands `SceneryBuilder.SIGN_FROM_PORTAL` inward from the floor portal nearest `sign_x`.
 5. Place it in the world: its `region` (a **RegionDef** in `data/regions/`), `world_pos` on
    the world map (pixels of the painting, `TDWorldMapWindow.WORLD`), `level_text`, and either `town = true` or the
    `return_map` where fainting and Return Scrolls send you.

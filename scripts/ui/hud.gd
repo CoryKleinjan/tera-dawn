@@ -12,6 +12,7 @@ var world: TDWorld
 var overlay: TDOverlay
 var status: TDStatusBar
 var quickslots: TDQuickslots
+var tracker: TDQuestTracker
 ## The dimmed layer over the game that holds the title card, character select, the
 ## character creator, the game menu and the settings screen. While it's showing, the game
 ## ignores play keys.
@@ -51,14 +52,30 @@ var play_button: Button
 var host_button: Button
 ## Shows why logging in didn't work.
 var message: Label
-## The controls, which follow the player's keybinds: shown over the first map to a new
-## character for their first FIRST_HINT_TIME seconds (the full list is in Settings > Controls).
+## The HUD pieces over the scene's right side (the quickslots, the quest tracker) fade to
+## SEE_THROUGH while the hero or an NPC within SEE_THROUGH_RANGE of them is behind one, at
+## SEE_THROUGH_SPEED (alpha a second).
+const SEE_THROUGH := 0.25
+const SEE_THROUGH_SPEED := 4.0
+const SEE_THROUGH_RANGE := 400.0
+## The controls, which follow the player's keybinds, for a new character's first moments
+## (the full list is in Settings > Controls): in town the keys for getting about, talking and
+## the windows, and on their first field the keys for fighting. Each shows for
+## FIRST_HINT_TIME seconds, counted only while no window is open over the game.
 var keys_help: Label
-## How long the first-time hints stay up, and how big the title's main buttons are.
+## The two first-time hints: in a town, and on a hunting field.
+enum Hint { TOWN, FIELD }
+## How long each first-time hint stays up, and how big the title's main buttons are.
 const FIRST_HINT_TIME := 40.0
 const MAIN_BUTTON := Vector2(240, 54)
 const FIRST_HINT_Y := 138.0
-var _hint_t := 0.0
+## Hint -> its text, built from the player's keybinds (_update_keys_help).
+var hint_texts := {}
+## Hint -> how long it has shown so far.
+var _hint_t := {Hint.TOWN: 0.0, Hint.FIELD: 0.0}
+## The character the first-time hints are for: one that was level 1 when it came into the
+## game ("" for none, so an old character never sees them).
+var _hint_for := ""
 var ui_theme: Theme
 ## Holds the windows so raising one never lifts it above the tooltip or the title menu.
 var window_layer: Control
@@ -87,6 +104,9 @@ func _ready() -> void:
 	overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
 	overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(overlay)
+	tracker = TDQuestTracker.new()
+	tracker.world = world
+	add_child(tracker)
 	status = TDStatusBar.new()
 	status.world = world
 	status.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
@@ -132,6 +152,7 @@ func fit_view() -> void:
 	if quickslots == null:
 		return
 	quickslots.fit_view()
+	tracker.fit_view()
 	chat.fit_view()
 	minimap_button.position = TDOverlay.minimap_rect().position
 	for w: TDWindow in windows.values():
@@ -162,18 +183,64 @@ func _process(delta: float) -> void:
 	minimap_button.visible = world != null and world.started
 	_show_first_hints(delta)
 
-## The controls over the first map, for a brand-new character's first moments.
+## The first-time controls, for a brand-new character: the town hint while they're in a town,
+## the field hint on their first field. Hidden (and its time paused) behind any window, so it
+## never covers a dialogue.
 func _show_first_hints(delta: float) -> void:
-	var playing := world != null and world.started and not title.visible
-	if not playing:
-		_hint_t = 0.0
-	var first := playing and Game.me.level == 1 and world.map.id == Character.START_MAP and _hint_t < FIRST_HINT_TIME
-	keys_help.visible = first
-	if first:
-		_hint_t += delta
-		keys_help.modulate.a = clampf((FIRST_HINT_TIME - _hint_t) / 2.0, 0.0, 1.0) * clampf(_hint_t / 0.5, 0.0, 1.0)
-		keys_help.reset_size()
-		keys_help.position = Vector2((TDWorld.VIEW.x - keys_help.size.x) / 2.0, FIRST_HINT_Y)
+	if world == null or not world.started:
+		_hint_for = ""
+		keys_help.hide()
+		return
+	if _hint_for != Game.me.name:
+		# a new character to hint for: start both hints again
+		_hint_for = Game.me.name if Game.me.level == 1 else ""
+		for kind in _hint_t:
+			_hint_t[kind] = 0.0
+	var kind := hint_kind()
+	var t: float = _hint_t[kind]
+	keys_help.visible = _hint_for != "" and t < FIRST_HINT_TIME and not title.visible and not any_window_open()
+	if not keys_help.visible:
+		return
+	t += delta
+	_hint_t[kind] = t
+	keys_help.text = hint_texts[kind]
+	keys_help.modulate.a = clampf((FIRST_HINT_TIME - t) / 2.0, 0.0, 1.0) * clampf(t / 0.5, 0.0, 1.0)
+	keys_help.reset_size()
+	keys_help.position = Vector2((TDWorld.VIEW.x - keys_help.size.x) / 2.0, FIRST_HINT_Y)
+
+## Which first-time hint fits the map you're on.
+func hint_kind() -> Hint:
+	return Hint.TOWN if world.map.town else Hint.FIELD
+
+## Fades a HUD piece toward see-through while it covers someone (covers_people), and back.
+func fade_over_people(piece: Control, delta: float) -> void:
+	var target := SEE_THROUGH if covers_people(piece.get_global_rect()) else 1.0
+	piece.modulate.a = move_toward(piece.modulate.a, target, SEE_THROUGH_SPEED * delta)
+
+## Whether screen rect `r` covers the hero or an NPC near them.
+func covers_people(r: Rect2) -> bool:
+	if world == null or not world.started or r.size == Vector2.ZERO:
+		return false
+	var p := world.player
+	if r.intersects(screen_rect(world.drawn(p), Vector2(TDPlayer.WIDTH, TDPlayer.HEIGHT), TDPlayer.Z)):
+		return true
+	for n in world.npcs():
+		if absf(n.position.x - p.position.x) <= SEE_THROUGH_RANGE and r.intersects(screen_rect(n.position, n.body_size(), TDStage.Z_NPC)):
+			return true
+	return false
+
+## Where someone standing at `feet` (game pixels), `body` big, appears on the screen.
+func screen_rect(feet: Vector2, body: Vector2, z: float) -> Rect2:
+	var top_left := world.stage.screen(feet + Vector2(-body.x / 2.0, -body.y), z)
+	var bottom_right := world.stage.screen(feet + Vector2(body.x / 2.0, 0.0), z)
+	return Rect2(top_left, bottom_right - top_left).abs()
+
+## Whether any window (a game window, a dialogue, a shop...) is open over the game.
+func any_window_open() -> bool:
+	for w: TDWindow in windows.values():
+		if w.visible:
+			return true
+	return false
 
 func _build_windows() -> void:
 	window_layer = Control.new()
@@ -359,7 +426,7 @@ func _build_title() -> void:
 	back.pressed.connect(_show_main_menu)
 	start_panel.add_child(_row([back]))
 
-	# a new character's first steps: the controls, over the meadow (TDHud._process)
+	# a new character's first steps: the controls (TDHud._show_first_hints)
 	keys_help = Label.new()
 	keys_help.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	keys_help.add_theme_font_size_override("font_size", 13)
@@ -627,8 +694,9 @@ func _on_settings_changed(section: SettingsSection) -> void:
 	if section is Keybinds:
 		_update_keys_help()
 
-## The hints under the title card, naming the player's own keys: moving and fighting, the
-## first quickslots (empty for a new character, so no skill is named), then every window key.
+## The first-time hints, naming the player's own keys. The town hint: moving, jumping,
+## talking, every window key and the menu. The field hint: fighting, picking up and the first
+## quickslots (empty for a new character, so no skill is named).
 func _update_keys_help() -> void:
 	var k := func(action: String) -> String: return TDStatusBar._key_name(action)
 	var slots := []
@@ -637,9 +705,10 @@ func _update_keys_help() -> void:
 	var window_keys := []
 	for action in WINDOW_ACTIONS:
 		window_keys.append("%s %s" % [k.call(action), String(Keybinds.info(action)["label"]).to_lower()])
-	keys_help.text = "%s %s move and climb · %s jump · %s attack · %s loot · %s talks and enters portals · %s… quickslots\n%s\nEsc menu · %s fullscreen · Gamepads work too" % [
-		k.call("move_left"), k.call("move_right"), k.call("jump"), k.call("attack"), k.call("loot"), k.call("move_up"), ", ".join(slots),
-		" · ".join(window_keys), k.call("toggle_fullscreen")]
+	hint_texts[Hint.TOWN] = "%s %s move and climb · %s jump · %s talks and enters portals\n%s\nEsc menu · %s fullscreen · Gamepads work too" % [
+		k.call("move_left"), k.call("move_right"), k.call("jump"), k.call("move_up"), " · ".join(window_keys), k.call("toggle_fullscreen")]
+	hint_texts[Hint.FIELD] = "%s attack · %s loot · %s… quickslots" % [k.call("attack"), k.call("loot"), ", ".join(slots)]
+	keys_help.text = hint_texts[hint_kind() if world != null and world.map != null else Hint.TOWN]
 
 func _show_message(text: String) -> void:
 	message.text = text
