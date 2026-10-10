@@ -28,9 +28,9 @@ var _texel := 1.0
 var _frame_size := Vector2.ONE
 var _mesh := ImmediateMesh.new()
 ## Streaks still fading: {from: [grip, angle], to: [grip, angle], reach, colour, t}.
-var _streaks: Array[Dictionary] = []
+var _streaks := []
 ## Flashes still fading: {at: frame pixels, t}.
-var _flashes: Array[Dictionary] = []
+var _flashes := []
 ## Hit-stop holds the streak still too.
 var paused := false
 

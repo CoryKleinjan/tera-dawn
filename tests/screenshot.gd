@@ -122,6 +122,28 @@ func _run() -> void:
 		p.face = -1
 		await _physics(40)
 		await _shot("meadow")
+	if only == "" or only == "hero":
+		# The hero just after the blow with each kind of weapon: the weapon in his fist, its
+		# own motion, and a swung blade's streak (shown without the server, so no ammo needed).
+		_teleport(world, Vector2(1120, 620))
+		p.face = 1
+		var kept: ItemStack = ch.equipment.take(&"weapon")
+		for id in [&"dawn_blade", &"willow_bow", &"oak_staff", &"iron_claw", &"flintlock"]:
+			ch.equipment.take(&"weapon")
+			ch.equipment.put(&"weapon", ItemStack.exact(Content.item(id)))
+			ch.recalc()
+			_me().dirty_character = true
+			await _physics(60)
+			p.action_anim = WeaponStyle.animation_for(ch.look(), &"attack")
+			p.action_t = 40
+			p._swing = true
+			await _physics(17)
+			await _shot("hero_" + String(Paperdoll.kind_of(Content.item(id) as EquipDef)))
+		ch.equipment.take(&"weapon")
+		if kept:
+			ch.equipment.put(&"weapon", kept)
+		ch.recalc()
+		_me().dirty_character = true
 	if only == "" or only == "action":
 		# Dawn Slash into a pack of Dewlings on the second platform.
 		_teleport(world, Vector2(230, 500))
