@@ -103,6 +103,10 @@ FACE_AT = (0.2, 0.3)  # and centred this far forward and down from the head's ce
 # up (to the hairline) and down (past the chin) from there. A hat's hair leaves it clear.
 FACE_ZONE = (FACE_AT[0] + SCALP_BACK, 1.0, FACE_AT[1] + SCALP, 0.7)
 BLANK_FACE = 222      # the hair sheet's blank faces are greys at least this pale (of 255)
+# Chibi faces: each eye (with its brow) is drawn this much bigger about its own centre. The eyes
+# are everything above EYE_LINE (a fraction of the normal face's height), left or right of its middle.
+EYE_SCALE = 1.3
+EYE_LINE = 0.6
 NECK = 0.95           # the neck is this far below the head's centre
 SHIELD_HEIGHT = 1.25
 # Clothes sheets (art/sheets/<place>_<style>_frames.json) for these places; styles whose sheet
@@ -484,6 +488,46 @@ def head_link(cells, names, info, frames):
         ks.append(s * r / fi["r"])
         offs.append((np.array([x, y]) + c * s - fi["head"]) / fi["r"])
     return float(np.median(ks)), np.median(np.array(offs), axis=0)
+
+
+class Drawn:
+    """A piece made here rather than cut from a sheet (same fields as Piece)."""
+    def __init__(self, img, x, y):
+        self.img, self.x, self.y = img, x, y
+
+
+def chibi(piece, normal):
+    """A face piece with bigger eyes (EYE_SCALE), each grown about its centre on the face's
+    normal expression, so every expression's eyes grow in the same place; the nose, mouth and
+    cheeks below EYE_LINE stay as drawn, which leaves them small and close under the eyes."""
+    if EYE_SCALE == 1:
+        return piece
+    a = np.asarray(piece.img)
+    n = np.asarray(normal.img)[..., 3] > 0
+    w, h = normal.img.size
+    yy, xx = np.mgrid[0:a.shape[0], 0:a.shape[1]]
+    left = xx + piece.x - normal.x < w / 2
+    eyes = yy + piece.y - normal.y < EYE_LINE * h
+    ny, nx = np.nonzero(n)
+    pad = int(max(w, h) * (EYE_SCALE - 1))
+    out = Image.new("RGBA", (a.shape[1] + 2 * pad, a.shape[0] + 2 * pad))
+    rest = a.copy()
+    rest[eyes] = 0
+    out.alpha_composite(Image.fromarray(rest, "RGBA"), (pad, pad))
+    for is_left in (True, False):
+        part = a.copy()
+        part[~(eyes & (left == is_left))] = 0
+        on = (ny < EYE_LINE * h) & ((nx < w / 2) == is_left)
+        if not part[..., 3].any() or not on.any():
+            continue
+        # the eye's centre on the normal face, in this piece's pixels
+        cx = (nx[on].min() + nx[on].max()) / 2 + normal.x - piece.x
+        cy = (ny[on].min() + ny[on].max()) / 2 + normal.y - piece.y
+        img = Image.fromarray(part, "RGBA")
+        big = img.resize((round(img.width * EYE_SCALE), round(img.height * EYE_SCALE)), Image.NEAREST)
+        out.alpha_composite(big, (int(round(pad + cx - cx * EYE_SCALE)), int(round(pad + cy - cy * EYE_SCALE))))
+    box = out.getbbox()
+    return Drawn(out.crop(box), piece.x - pad + box[0], piece.y - pad + box[1])
 
 
 def hides_face(img, fi):
@@ -976,7 +1020,7 @@ def main():
         for n, fi in zip(names, info):
             canvas, iris = blank(), blank()
             if n not in BACK_VIEW:
-                p = faces[face + "_" + EXPRESSIONS.get(n, "normal")]
+                p = chibi(faces[face + "_" + EXPRESSIONS.get(n, "normal")], normal)
                 img = scaled(p.img, s)
                 anchor = ((centre[0] - p.x) * s, (centre[1] - p.y) * s)
                 at = fi["head"] + turned(FACE_AT, fi["tilt"]) * fi["r"]

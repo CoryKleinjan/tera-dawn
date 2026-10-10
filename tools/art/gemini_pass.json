@@ -352,7 +352,7 @@
     4
    ],
    "anchor": "paperdoll_body",
-   "note": " 2026-10-10 chibi-faces thread: edit of the game's sheet to make the faces more chibi (bigger, lower eyes; tiny nose and mouth). Run with --redo ID; result lands as <save>_2.png.",
+   "note": " 2026-10-10 chibi-faces thread: edit of the game's sheet to make the faces more chibi (bigger, lower eyes; tiny nose and mouth). Run with --redo ID; result lands as <save>_2.png. Result (paperdoll_faces_2.png) drew a whole skin head behind every face, so it is not used: the hero's eyes are made bigger in code instead (EYE_SCALE in paperdoll_layers.py).",
    "edit": {
     "base": "art/source/paperdoll_faces.png",
     "text": "This sheet is my hero's face layer: 5 faces (one per row) x 4 expressions (normal, blink, ouch, dizzy), only the eyes, brows, nose, mouth and face marks floating on magenta (no head, no skin). Redraw every cell more CHIBI, in the same cell and the same expression: the eyes much bigger and taller and rounder (about 1.4x taller than now and a bit wider), with big white highlight shines, sitting closer together; the brows a short way above the eyes; a tiny dot nose; the mouth small and close under the eyes. Keep each row's personality (bright, determined, rosy with blush, freckled, cheeky with a bandage plaster) and its marks. Keep the IRISES drawn in plain GREYS (no colour) exactly like now, since the game tints them; keep the closed-eye blink, the >< ouch eyes and the swirl dizzy eyes."
