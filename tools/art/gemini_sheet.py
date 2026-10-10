@@ -24,6 +24,7 @@ and generativelanguage.googleapis.com allowed by the network policy. Standard li
 import argparse
 import base64
 import glob
+import http.client as http_client
 import io
 import json
 import os
@@ -241,10 +242,16 @@ def upload_file(data, mime, display_name):
     return json.loads(body)["file"]
 
 
-def download_file(name):
-    """The bytes of a Files API file, e.g. a batch job's results (files/...)."""
-    body, _ = http(API.replace("/v1beta", "/download/v1beta") + "/%s:download?alt=media" % name)
-    return body
+def download_file(name, attempts=3):
+    """The bytes of a Files API file, e.g. a batch job's results (files/...). Downloads are free,
+    so a cut-off transfer is tried again."""
+    url = API.replace("/v1beta", "/download/v1beta") + "/%s:download?alt=media" % name
+    for attempt in range(attempts):
+        try:
+            return http(url)[0]
+        except http_client.IncompleteRead:
+            if attempt == attempts - 1:
+                raise GeminiError("The download of %s kept getting cut off." % name)
 
 
 def image_part(path):
