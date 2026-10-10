@@ -415,7 +415,9 @@ def recolor_leather(rgb):
     softer brass. Reds, blues and greens (HP, MP, icons) are left alone."""
     hsv = rgb_to_hsv(rgb)
     h, s, v = hsv[..., 0], hsv[..., 1], hsv[..., 2]
-    purple = (h > 0.62) & (h < 0.97) & (s > 0.12)
+    # Purple has more red than green; pure and royal blue (hue 0.64 to 0.67, like the MP bar
+    # and the cooldown sweep) share the hue range but not that, so they stay blue.
+    purple = (h > 0.62) & (h < 0.97) & (s > 0.12) & (rgb[..., 0] > rgb[..., 1] + 0.02)
     w = np.clip((s - 0.12) / 0.15, 0, 1) * purple
     nh = np.where(purple, 0.075, h)
     ns = np.where(purple, np.clip(s * 0.8 + 0.08, 0, 0.75), s)
