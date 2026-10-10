@@ -147,6 +147,44 @@ func test_room_for_needs_a_free_slot_per_stack_per_tab() -> void:
 	check(bag.room_for([ItemStack.create(fx.use())]), "other tab has room")
 	check(bag.room_for([]), "nothing always fits")
 
+func test_tab_without_room_fits_when_everything_fits() -> void:
+	check_eq(bag.tab_without_room([[fx.equip(), 1], [fx.use(), 30]]), -1, "an empty bag fits")
+	check_eq(bag.tab_without_room([]), -1, "nothing always fits")
+
+func test_tab_without_room_names_the_full_tab() -> void:
+	var e := fx.equip()
+	bag.add(e, Inventory.SLOTS)
+	check_eq(bag.tab_without_room([[fx.use(), 1], [fx.equip(&"t_other"), 1]]), ItemDef.Tab.EQUIP, "gear has nowhere to go")
+
+func test_tab_without_room_counts_topping_up_stacks() -> void:
+	var x := fx.etc(&"t_etc", 10)
+	bag.add(x, Inventory.SLOTS * 10 - 4)
+	check_eq(bag.tab_without_room([[x, 4]]), -1, "tops up the last stack exactly")
+	check_eq(bag.tab_without_room([[x, 5]]), ItemDef.Tab.ETC, "one too many")
+
+func test_tab_without_room_adds_up_the_same_item_asked_twice() -> void:
+	var x := fx.etc(&"t_etc", 10)
+	bag.add(x, (Inventory.SLOTS - 1) * 10)
+	check_eq(bag.tab_without_room([[x, 6], [x, 4]]), -1, "10 fill the one free slot")
+	check_eq(bag.tab_without_room([[x, 6], [x, 5]]), ItemDef.Tab.ETC, "11 need two slots")
+
+func test_tab_without_room_items_share_a_tabs_free_slots() -> void:
+	var a := fx.etc(&"t_a", 10)
+	var b := fx.etc(&"t_b", 10)
+	bag.add(fx.etc(&"t_junk", 10), (Inventory.SLOTS - 1) * 10)
+	check_eq(bag.tab_without_room([[a, 1]]), -1, "one item fits the free slot")
+	check_eq(bag.tab_without_room([[a, 1], [b, 1]]), ItemDef.Tab.ETC, "two items can't share it")
+
+func test_tab_without_room_rounds_stacks_up() -> void:
+	var x := fx.etc(&"t_etc", 10)
+	bag.add(fx.etc(&"t_junk", 10), (Inventory.SLOTS - 2) * 10)
+	check_eq(bag.tab_without_room([[x, 20]]), -1, "two full stacks in two slots")
+	check_eq(bag.tab_without_room([[x, 21]]), ItemDef.Tab.ETC, "21 need a third slot")
+
+func test_tab_without_room_skips_empty_entries() -> void:
+	bag.add(fx.equip(), Inventory.SLOTS)
+	check_eq(bag.tab_without_room([[null, 5]]), -1, "an empty gift line asks for nothing")
+
 func test_take_all_empties_slot_and_returns_same_stack() -> void:
 	var x := fx.etc()
 	bag.add(x, 7)

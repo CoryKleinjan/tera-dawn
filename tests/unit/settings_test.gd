@@ -40,6 +40,28 @@ func test_escape_always_opens_the_menu() -> void:
 	k.clear_key("pause", 0)
 	check_eq(k.key("pause", 0), KEY_ESCAPE, "the menu key can't be changed or cleared")
 
+func test_actions_are_grouped_in_order() -> void:
+	var quick := Keybinds.in_group("Quickslots")
+	check_eq(quick.size(), 8, "eight quickslot actions")
+	check_eq(quick[0], "quick_1", "in order")
+	check_eq(quick[-1], "quick_8", "in order")
+	var total := 0
+	for g in Keybinds.GROUPS:
+		total += Keybinds.in_group(g).size()
+	check_eq(total, Keybinds.ACTIONS.size(), "every action is in one of the groups")
+	check_eq(Keybinds.in_group("Nope").size(), 0, "an unknown group is empty")
+
+func test_key_names() -> void:
+	check_eq(Keybinds.key_text(0), "", "an empty slot shows nothing")
+	check_eq(Keybinds.key_text(KEY_X), "X", "a letter")
+	check_eq(Keybinds.key_text(KEY_SPACE), "Space", "a named key")
+
+func test_only_the_menu_key_is_reserved() -> void:
+	var k := Keybinds.new()
+	k.reset()
+	check(k.reserved(KEY_ESCAPE), "Esc is the menu's")
+	check(not k.reserved(KEY_X), "X belongs to an action that can change")
+
 func test_keys_save_and_load() -> void:
 	var k := Keybinds.new()
 	k.reset()
