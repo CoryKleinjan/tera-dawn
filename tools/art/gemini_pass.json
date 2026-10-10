@@ -4199,6 +4199,31 @@
    }
   },
   {
+   "id": "climb_tops_fine",
+   "prompts": null,
+   "batch": "climb tops (edit, no land, finer pixels)",
+   "with": null,
+   "refs": [],
+   "save": "climb_tops_fine.png",
+   "replaces": "art/source/climb_tops.png",
+   "kind": "still",
+   "cells": [
+    2,
+    4
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-10 rope and ladder alignment thread: the anchors at the top of ropes, vines and rope ladders (cells 1, 3, 5 used). The game draws them over its own ledge, so the land is taken out; finer pixels to match ropes_props_fine.",
+   "edit": {
+    "base": "art/source/climb_tops.png",
+    "base_scale": 2.0,
+    "refs": [
+     "art/source/ropes_props_fine.png"
+    ],
+    "text": "This is my sheet of 8 anchors at the top of ropes, vines and ladders, enlarged so its pixels are big blocks. Make two changes in EVERY cell. 1) Take out all the land: the grassy ledge, soil, rock, tree trunk and roots, stone block and wooden beam are gone, replaced by the flat magenta background. Keep only the anchor itself (peg, branch stub, vine coil, hooks, pegs, ring, chain plate) and what hangs from it; where a peg or post went into the ground, end it in a flat cut. 2) Redraw what is left as detailed pixel art with pixels about two times smaller, in exactly the style, pixel size, outline and colours of the second attached image (my ropes and ladders sheet). The rope, vine or ladder hanging from each anchor runs straight down, centred in its cell, off the bottom edge of the cell, and is exactly as wide as the matching rope, vine or rope ladder in the second image. Keep each cell's label."
+   }
+  },
+  {
    "id": "meadow_backgrounds_fine",
    "prompts": null,
    "batch": "meadow backgrounds (edit, finer pixels)",
