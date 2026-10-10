@@ -7,6 +7,8 @@ extends Node3D
 ## SpriteRig.dress() makes one; give it a look with `set_look`.
 
 const SHADER := preload("res://shaders/paperdoll_sprite.gdshader")
+## The layers' own: lit like the body, with the same light floor (character_light.gdshaderinc).
+const LAYER_SHADER := preload("res://shaders/paperdoll_layer.gdshader")
 ## How far pictures sit in front of (or behind) the body, in 3D units. Layers are spread
 ## within that, in drawing order.
 const DEPTH := 0.01
@@ -60,6 +62,7 @@ func set_look(new_look: Dictionary) -> void:
 		var a := AnimatedSprite3D.new()
 		a.sprite_frames = l.frames
 		TDStage.style_sprite(a, _texel)
+		a.material_override = _layer_material(l.frames)
 		# back to front: behind ones under the body (z < 0), the rest between it and the pictures
 		a.position.z = DEPTH * (0.8 * (i + 1) / (count + 1) - (1.0 if l.behind else 0.0))
 		add_child(a)
@@ -104,6 +107,14 @@ func sync() -> void:
 		a.offset = body.offset
 		a.flip_h = mirror
 		a.modulate = body.modulate * doll.layers[i].tint
+
+## A layer's material: its frames are regions of one strip, which the shader samples.
+static func _layer_material(frames: SpriteFrames) -> ShaderMaterial:
+	var mat := ShaderMaterial.new()
+	mat.shader = LAYER_SHADER
+	var tex := frames.get_frame_texture(&"idle", 0) if frames.has_animation(&"idle") else null
+	mat.set_shader_parameter(&"strip", tex.atlas if tex is AtlasTexture else tex)
+	return mat
 
 ## A point of the frame (pixels from its top-left) in the body's own space, whose origin
 ## is the bottom middle of the frame.

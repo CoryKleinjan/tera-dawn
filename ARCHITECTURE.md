@@ -153,9 +153,14 @@ only what the creator offers and makes a level 1 character in the starting job
   (`assets/animations/paperdoll/`). `tools/art/paperdoll_layers.py` builds them from the
   paperdoll sheets, together with the body's region map (`hero_regions.png`: skin, chest,
   shorts, feet) and rig (`hero_rig.json`: head, face, neck, hand and shield per frame, and
-  how each weapon kind is held). The skin tone and worn tops, bottoms and shoes recolour the body
-  through the paperdoll shaders; hair, irises, capes and shields are greyscale art tinted
-  with the hair, eye or item colour (`EquipDef.look_color` or the icon). The **weapon** is a
+  how each weapon kind is held). The skin tone recolours the body through the paperdoll
+  shaders. Worn tops, bottoms and shoes are greyscale cuts (`top_tunic`, `bottom_trousers`,
+  `shoes_boots`...) lifted off sheets of the body wearing them; each item names its cut in
+  `EquipDef.worn_style`. Hair, irises, capes, shields, gloves and those cuts are greyscale art
+  tinted with the hair, eye or item colour (`EquipDef.look_color` or the icon). Under a hat
+  the hair's `_hat` layer leaves the face clear. In the 3D stage the hero and his layers have
+  a small light floor (`shaders/character_light.gdshaderinc`), so shade never makes him a
+  silhouette. The **weapon** is a
   layer too (`Paperdoll.weapon_layers`): already placed in his fist on every frame, with a
   hole where his fingers wrap the grip, behind him on far-hand frames and on his back while
   he climbs or sits. Each kind is held its own way (a bow upright, a staff planted; "holds"
@@ -466,7 +471,10 @@ and Shield (`EquipDef.Slot` and `Equipment.PLACES_FOR`). Adding a slot means add
    the script.
 2. Create the `.tres` in `data/items/equips/`, `use/` or `etc/` as an **EquipDef**, **UseDef**
    or **ItemDef**. Fill in `id`, name, description, icon and `sell_price`; for gear, the slot,
-   requirements and a **StatBlock** in `stats`.
+   requirements and a **StatBlock** in `stats`. A top, bottom or shoes also needs a
+   `worn_style`, the cut it's drawn in on the hero (tops: tunic, coat, robe, vest, undershirt;
+   bottoms: trousers, breeches; shoes: shoes, boots, sandals, clogs), tinted with its colour;
+   `tests/unit/appearance_test.gd` checks the cut exists.
 3. Make something drop it: a **DropEntry** on a monster's `drops` (item, chance from 0 to 1,
    amount range). Rare gear is usually 1 to 4%.
 
@@ -578,6 +586,15 @@ checks the player is standing by that NPC before buying or selling (`TDServer.on
 Drop the sheet in `art/source/`, write a manifest in `art/sheets/`, and run
 `python3 tools/art/slice_sheets.py <name>`. `art/sheets/README.md` explains the manifest. The
 cut sprites land in `assets/sprites/`, ready to be referenced from data.
+
+Hero layers come from `python3 tools/art/paperdoll_layers.py` instead (after
+`slice_sheets.py paperdoll_body`). A new **clothing cut** is a sheet of the body wearing the
+piece in every pose, on the body sheet's grid, item in greys: `art/source/<place>_<style>_frames.png`
+with a manifest `art/sheets/<place>_<style>_frames.json` (copy `top_tunic_frames.json`; place
+is top, bottom or shoes). The tool lifts the piece off each pose into
+`layers/<place>_<style>.png`, and any item with `worn_style = &"<style>"` wears it. A sheet that
+came back unusable goes in `WORN_BROKEN` in the tool (now: shorts, smock), and its items wear
+the nearest cut (Berry Smock a tunic, Rolled Shorts breeches).
 
 Sheets can also be generated straight from a prompt file with Google's Gemini image model:
 `python3 tools/art/gemini_sheet.py tera-dawn-chatgpt-art-prompts-8.md W1` sends Message 0, the

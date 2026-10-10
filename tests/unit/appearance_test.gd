@@ -177,8 +177,66 @@ func test_bare_places_and_worn_clothes() -> void:
 	check_eq(d.tints[Paperdoll.Region.BOTTOM].a, 0.0, "his own shorts")
 	var top := Content.item(&"berry_smock") as EquipDef
 	var dressed := Paperdoll.dress(_look(Appearance.new(), {"top": "berry_smock"}))
-	check(Color(dressed.tints[Paperdoll.Region.TOP], 1.0).is_equal_approx(top.worn_color()), "a top colours his chest")
-	check_ne(dressed.tints[Paperdoll.Region.TOP], Paperdoll.dress(_look(Appearance.new(), {"top": "linen_tunic"})).tints[Paperdoll.Region.TOP], "two tops look different")
+	var cut := _layer(dressed, Paperdoll.worn_cut(top))
+	check(cut != null and not cut.behind, "a top is its cut, over him")
+	check(Color(cut.tint, 1.0).is_equal_approx(top.worn_color()), "in its colour")
+	check_eq(dressed.tints[Paperdoll.Region.TOP], dressed.tints[Paperdoll.Region.SKIN], "skin shows around it")
+	var tunic := Paperdoll.dress(_look(Appearance.new(), {"top": "linen_tunic"}))
+	check_ne(cut.tint, _layer(tunic, Paperdoll.worn_cut(Content.item(&"linen_tunic"))).tint, "two tops look different")
+	var pants := Content.item(&"trail_pants") as EquipDef
+	var legs := Paperdoll.dress(_look(Appearance.new(), {"bottom": "trail_pants"}))
+	check(_layer(legs, Paperdoll.worn_cut(pants)) != null, "a bottom is its cut")
+	check(Color(legs.tints[Paperdoll.Region.BOTTOM], 1.0).is_equal_approx(pants.worn_color()), "over his shorts in its colour, so no grey shows at its edges")
+
+func test_every_top_bottom_and_pair_of_shoes_has_a_cut() -> void:
+	for item in Content.items.values():
+		var e := item as EquipDef
+		if e and EquipDef.WORN_STYLE_PLACES.has(e.slot) and e.worn_frames == null:
+			check_ne(e.worn_style, &"", "%s has a worn_style" % e.id)
+			var cut := Paperdoll.worn_cut(e)
+			check(cut != null, "%s: %s exists" % [e.id, e.worn_style_path()])
+			if cut:
+				for anim in Paperdoll.FRAMES.get_animation_names():
+					check_eq(cut.get_frame_count(anim), Paperdoll.FRAMES.get_frame_count(anim), "%s %s plays with the body" % [e.id, anim])
+
+func test_the_creator_preview_shows_the_starting_outfit() -> void:
+	var n := NewCharacter.new()
+	var gear := {}
+	for kind in [EquipDef.Slot.TOP, EquipDef.Slot.BOTTOM, EquipDef.Slot.SHOES]:
+		gear[EquipDef.WORN_STYLE_PLACES[kind]] = String(n.outfit[kind].id)
+	var d := Paperdoll.dress(_look(n.appearance, gear))
+	for kind in [EquipDef.Slot.TOP, EquipDef.Slot.BOTTOM, EquipDef.Slot.SHOES]:
+		check(_layer(d, Paperdoll.worn_cut(n.outfit[kind])) != null, "%s shows" % n.outfit[kind].id)
+
+## Where the face's middle is on a rig frame (paperdoll_layers.py FACE_AT: forward and down
+## from the head's centre, in head radii, turned with the head).
+func _face_centre(f: Dictionary) -> Vector2:
+	var r := float(f["head_size"][0]) / 2.0
+	var head := Vector2(f["head"][0], f["head"][1])
+	return head + (Vector2(0.2, 0.3) * r).rotated(deg_to_rad(float(f["head_angle"])))
+
+func test_hair_under_a_hat_leaves_the_face_clear() -> void:
+	var frames: Array = Paperdoll.rig()["frames"]
+	for hair in Content.looks_of(LookDef.Kind.HAIR):
+		if hair.hat_frames == null:
+			continue
+		var img := (hair.hat_frames.get_frame_texture(&"idle", 0) as AtlasTexture).atlas.get_image()
+		if img.is_compressed():
+			img.decompress()
+		for i in frames.size():
+			var f: Dictionary = frames[i]
+			if f["back"]:
+				continue
+			var r := float(f["head_size"][0]) / 2.0
+			var at := _face_centre(f) + Vector2(i * Paperdoll.FRAME_SIZE.x, 0)
+			var covered := 0
+			var total := 0
+			for y in range(int(at.y - r * 0.4), int(at.y + r * 0.4) + 1):
+				for x in range(int(at.x - r * 0.4), int(at.x + r * 0.4) + 1):
+					if Vector2(x, y).distance_to(at) <= r * 0.4:
+						total += 1
+						covered += 1 if img.get_pixel(x, y).a > 0.5 else 0
+			check(covered <= total * 0.02, "%s frame %s: the face shows under a hat (%d of %d covered)" % [hair.id, f["name"], covered, total])
 
 func test_a_cape_and_shield_are_tinted_layers() -> void:
 	var cape := Content.item(&"petal_cape") as EquipDef
