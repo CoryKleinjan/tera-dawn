@@ -1,7 +1,7 @@
 {
   "source": "art/source/items_gear.png",
   "out_dir": "assets/sprites/items",
-  "scale": 0.25,
+  "scale": 0.31,
   "alpha": "hard",
   "keep": "largest",
   "cells": [
@@ -30,6 +30,33 @@
   "overrides": {
     "dewdrop_earrings": {
       "keep": "all"
+    },
+    "sun_pendant": {
+      "fix": "glow_backdrop_holes"
+    },
+    "moss_ring": {
+      "fix": "glow_backdrop_holes"
+    },
+    "cinder_ring": {
+      "fix": "glow_backdrop_holes"
     }
-  }
+  },
+  "grid": {
+    "rows": [
+      0,
+      340,
+      690,
+      1030
+    ],
+    "cols": [
+      0,
+      304,
+      613,
+      922,
+      1231,
+      1536
+    ]
+  },
+  "fix": "glow_backdrop",
+  "label_band": 0.24
 }

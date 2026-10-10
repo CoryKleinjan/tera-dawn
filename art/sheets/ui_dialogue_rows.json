@@ -1,0 +1,63 @@
+{
+  "source": "art/source/ui_dialogue.png",
+  "out_dir": "assets/sprites/ui/dialogue",
+  "scale": 0.5,
+  "alpha": "soft",
+  "label_band": 0.3,
+  "inset": 6,
+  "recolor": "dark_parchment",
+  "background": [
+    254,
+    1,
+    249
+  ],
+  "region": [
+    928,
+    0,
+    1448,
+    310
+  ],
+  "grid": {
+    "rows": [
+      0,
+      155,
+      310
+    ],
+    "cols": [
+      0,
+      520
+    ]
+  },
+  "cells": [
+    [
+      "option_row"
+    ],
+    [
+      "option_row_hover"
+    ]
+  ],
+  "overrides": {
+    "option_row": {
+      "blank": [
+        [
+          2,
+          0,
+          195,
+          30
+        ]
+      ],
+      "scale": 0.4569
+    },
+    "option_row_hover": {
+      "blank": [
+        [
+          2,
+          0,
+          284,
+          31
+        ]
+      ],
+      "scale": 0.4485
+    }
+  }
+}

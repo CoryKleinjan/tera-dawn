@@ -1,7 +1,7 @@
 {
   "source": "art/source/skill_icons.png",
   "out_dir": "assets/sprites/skills",
-  "scale": 0.29,
+  "scale": 0.32,
   "alpha": "hard",
   "keep": "largest",
   "cells": [
@@ -10,36 +10,65 @@
       "quick_step",
       "second_wind",
       "power_strike",
-      "iron_body"
+      "iron_body",
+      ""
     ],
     [
       "toughness",
       "bow_shot",
       "double_shot",
       "arrow_blow",
-      "focus"
+      "focus",
+      "critical_shot"
     ],
     [
-      "critical_shot",
+      "",
       "energy_bolt",
       "arcane_claw",
       "magic_armor",
-      "mp_boost"
-    ],
-    [
-      "star_throw",
-      "lucky_seven",
-      "star_scatter",
-      "haste",
-      "nimble_body"
+      "mp_boost",
+      ""
     ],
     [
       "gun_shot",
       "flash_fist",
       "somersault_kick",
       "quick_draw",
-      "bullet_time"
+      "bullet_time",
+      ""
     ]
   ],
-  "inset": 8
+  "inset": 4,
+  "grid": {
+    "rows": [
+      0,
+      212,
+      423,
+      634,
+      846
+    ],
+    "cols": [
+      0,
+      210,
+      420,
+      630,
+      841,
+      1051,
+      1261
+    ]
+  },
+  "overrides": {
+    "energy_bolt": {
+      "blank_top": 22
+    },
+    "arcane_claw": {
+      "blank_top": 22
+    },
+    "magic_armor": {
+      "blank_top": 22
+    },
+    "mp_boost": {
+      "blank_top": 22
+    }
+  }
 }

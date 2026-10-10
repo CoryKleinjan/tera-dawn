@@ -1,0 +1,73 @@
+{
+  "source": "art/source/ui_windows.png",
+  "out_dir": "assets/sprites/ui",
+  "scale": 0.5,
+  "alpha": "soft",
+  "label_band": 0.2,
+  "inset": 5,
+  "region": [
+    0,
+    0,
+    360,
+    971
+  ],
+  "grid": {
+    "rows": [
+      0,
+      348,
+      647,
+      971
+    ],
+    "cols": [
+      0,
+      360
+    ]
+  },
+  "cells": [
+    [
+      "window_frame"
+    ],
+    [
+      "item_slot_hover"
+    ],
+    [
+      "equip_doll_bg"
+    ]
+  ],
+  "overrides": {
+    "window_frame": {
+      "blank": [
+        [
+          0,
+          0,
+          242,
+          33
+        ]
+      ],
+      "scale": 0.375
+    },
+    "item_slot_hover": {
+      "blank": [
+        [
+          0,
+          0,
+          278,
+          33
+        ]
+      ],
+      "scale": 0.6017
+    },
+    "equip_doll_bg": {
+      "blank": [
+        [
+          0,
+          0,
+          354,
+          32
+        ]
+      ],
+      "scale": 0.572
+    }
+  },
+  "recolor": "dark_parchment"
+}

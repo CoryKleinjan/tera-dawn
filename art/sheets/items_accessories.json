@@ -1,7 +1,7 @@
 {
   "source": "art/source/items_accessories.png",
   "out_dir": "assets/sprites/items",
-  "scale": 0.275,
+  "scale": 0.3,
   "alpha": "hard",
   "keep": "largest",
   "fix": "glow_backdrop",
@@ -53,6 +53,44 @@
     },
     "ember_earrings": {
       "keep": "all"
+    },
+    "sandals": {
+      "keep": "all"
+    },
+    "hiking_boots": {
+      "keep": "all"
+    },
+    "windstep_boots": {
+      "keep": "all"
+    },
+    "ranger_breeches": {
+      "keep": "all"
+    },
+    "lead_bullet": {
+      "keep": "all"
     }
-  }
+  },
+  "grid": {
+    "rows": [
+      0,
+      235,
+      470,
+      706,
+      941
+    ],
+    "cols": [
+      0,
+      280,
+      561,
+      841,
+      1122,
+      1402
+    ]
+  },
+  "inset": 2,
+  "key": [
+    0.2,
+    0.45
+  ],
+  "label_band": 0
 }

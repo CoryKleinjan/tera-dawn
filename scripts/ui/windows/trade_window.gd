@@ -11,9 +11,9 @@ const PANEL := "dialogue/trade_panel"
 const PANEL_AT := Vector2(PAD - 6, TITLE_H + 4)
 ## Where the painted slots are on the panel art, in texels: each grid's first slot, and the
 ## step to the next column and row.
-const GRID_LEFT := Vector2(28, 64)
-const GRID_RIGHT := Vector2(196, 64)
-const PITCH := Vector2(44, 43)
+const GRID_LEFT := Vector2(26, 73)
+const GRID_RIGHT := Vector2(218, 73)
+const PITCH := Vector2(50, 50)
 const SHARDS_H := 28.0
 
 ## The server's last word: {"partner", "mine": {...}, "theirs": {...}} (see TDSocial).

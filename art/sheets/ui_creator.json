@@ -3,12 +3,16 @@
   "out_dir": "assets/sprites/ui/creator",
   "scale": 0.5,
   "alpha": "soft",
-  "label_band": 0.0,
+  "label_band": 0.15,
   "cells": [
     [
-      "frame",
+      "",
       "pedestal",
-      "name_field",
+      "name_field"
+    ],
+    [
+      "",
+      "",
       "arrow_left"
     ],
     [
@@ -26,12 +30,167 @@
   ],
   "overrides": {
     "buttons": {
-      "keep": "split"
+      "keep": "split",
+      "split_by": "y",
+      "blank": [
+        [
+          4,
+          0,
+          330,
+          31
+        ]
+      ],
+      "scale": 0.5843
     },
     "pedestal": {
-      "alpha": "hard",
       "keep": "largest",
-      "fix": "glow_backdrop"
+      "blank": [
+        [
+          3,
+          0,
+          151,
+          28
+        ]
+      ],
+      "scale": 0.5705
+    },
+    "arrow_right": {
+      "flip": true,
+      "blank": [
+        [
+          0,
+          0,
+          191,
+          31
+        ]
+      ],
+      "scale": 0.5
+    },
+    "name_field": {
+      "blank": [
+        [
+          2,
+          0,
+          169,
+          28
+        ]
+      ],
+      "scale": 0.375
+    },
+    "arrow_left": {
+      "blank": [
+        [
+          2,
+          0,
+          179,
+          31
+        ]
+      ],
+      "scale": 0.414
+    },
+    "arrow_right_hover": {
+      "blank": [
+        [
+          3,
+          0,
+          275,
+          31
+        ]
+      ],
+      "scale": 0.5776
+    },
+    "swatch": {
+      "blank": [
+        [
+          3,
+          0,
+          131,
+          30
+        ]
+      ],
+      "scale": 0.5891
+    },
+    "swatch_on": {
+      "blank": [
+        [
+          2,
+          0,
+          143,
+          31
+        ]
+      ],
+      "scale": 0.6087
+    },
+    "random": {
+      "blank": [
+        [
+          0,
+          0,
+          106,
+          30
+        ]
+      ],
+      "scale": 0.5345
+    },
+    "reset": {
+      "blank": [
+        [
+          4,
+          0,
+          82,
+          30
+        ]
+      ],
+      "scale": 0.5085
+    },
+    "banner": {
+      "blank": [
+        [
+          4,
+          0,
+          202,
+          30
+        ]
+      ],
+      "scale": 0.3691
     }
-  }
+  },
+  "grid": {
+    "rows": [
+      0,
+      259,
+      520,
+      811,
+      1081
+    ],
+    "cols": [
+      [
+        0,
+        614,
+        941,
+        1448
+      ],
+      [
+        0,
+        614,
+        1086,
+        1448
+      ],
+      [
+        0,
+        304,
+        677,
+        1086,
+        1448
+      ],
+      [
+        0,
+        304,
+        579,
+        957,
+        1448
+      ]
+    ]
+  },
+  "inset": 6
 }

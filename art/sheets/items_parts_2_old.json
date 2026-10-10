@@ -1,0 +1,45 @@
+{
+  "source": "art/source/items_parts_2_old.png",
+  "out_dir": "assets/sprites/items",
+  "scale": 0.3,
+  "alpha": "hard",
+  "keep": "largest",
+  "fix": "glow_backdrop",
+  "cells": [
+    [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "ash_veil"
+    ],
+    [
+      "stalker_fang",
+      "",
+      "",
+      "",
+      ""
+    ]
+  ]
+}

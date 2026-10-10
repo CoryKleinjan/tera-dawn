@@ -1,7 +1,7 @@
 {
   "source": "art/source/items_parts_2.png",
   "out_dir": "assets/sprites/items",
-  "scale": 0.3,
+  "scale": 0.386,
   "alpha": "hard",
   "keep": "largest",
   "fix": "glow_backdrop",
@@ -32,14 +32,68 @@
       "marsh_moss",
       "fallen_star",
       "hog_mane",
-      "ash_veil"
-    ],
-    [
-      "stalker_fang",
       "petal_nectar",
-      "monster_card",
-      "",
-      ""
+      "monster_card"
     ]
-  ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      212,
+      423,
+      634,
+      846
+    ],
+    "cols": [
+      [
+        0,
+        252,
+        504,
+        757,
+        1009,
+        1261
+      ],
+      [
+        0,
+        252,
+        504,
+        757,
+        1009,
+        1261
+      ],
+      [
+        0,
+        252,
+        504,
+        757,
+        1009,
+        1261
+      ],
+      [
+        0,
+        208,
+        420,
+        630,
+        841,
+        1053,
+        1261
+      ]
+    ]
+  },
+  "inset": 6,
+  "strip_labels": true,
+  "overrides": {
+    "fallen_star": {
+      "fix": "card_glow"
+    },
+    "petal_nectar": {
+      "fix": "card_glow"
+    },
+    "wick_ember": {
+      "fix": "card_glow"
+    },
+    "titan_coral": {
+      "fix": null
+    }
+  }
 }

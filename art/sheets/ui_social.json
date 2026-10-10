@@ -1,11 +1,9 @@
 {
   "source": "art/source/ui_social.png",
-  "recolor": "leather",
   "out_dir": "assets/sprites/ui/social",
   "scale": 0.5,
   "alpha": "soft",
   "label_band": 0.2,
-  "grid_threshold": 0.7,
   "cells": [
     [
       "chat_frame",
@@ -34,34 +32,201 @@
   ],
   "overrides": {
     "leader_star": {
-      "fix": "glow_backdrop",
       "keep": "largest",
-      "recolor": null
-    },
-    "fame_up": {
-      "fix": "glow_backdrop",
-      "keep": "largest",
-      "recolor": null
-    },
-    "buddy_add_icon": {
-      "fix": "glow_backdrop",
-      "keep": "largest"
-    },
-    "online_dot": {
-      "key": [
-        0.1,
-        0.45
-      ],
-      "recolor": null
-    },
-    "guild_emblem": {
-      "blank_top": 50
-    },
-    "offline_dot": {
-      "recolor": null
+      "scale": 0.8027,
+      "blank": [
+        [
+          0,
+          0,
+          285,
+          27
+        ]
+      ]
     },
     "fame_down": {
-      "recolor": null
+      "keep": "largest",
+      "scale": 0.708,
+      "blank": [
+        [
+          0,
+          0,
+          186,
+          27
+        ]
+      ]
+    },
+    "chat_frame": {
+      "scale": 0.5883,
+      "blank": [
+        [
+          0,
+          0,
+          232,
+          28
+        ]
+      ]
+    },
+    "chat_input": {
+      "scale": 0.5,
+      "blank": [
+        [
+          0,
+          0,
+          238,
+          28
+        ]
+      ],
+      "recolor": "dark_parchment"
+    },
+    "invite_card": {
+      "scale": 0.5584,
+      "blank": [
+        [
+          0,
+          0,
+          184,
+          28
+        ]
+      ]
+    },
+    "friend_row": {
+      "scale": 0.5543,
+      "blank": [
+        [
+          0,
+          0,
+          182,
+          28
+        ]
+      ],
+      "recolor": "dark_parchment"
+    },
+    "online_dot": {
+      "scale": 0.9402,
+      "blank": [
+        [
+          0,
+          0,
+          172,
+          27
+        ]
+      ]
+    },
+    "offline_dot": {
+      "scale": 0.6333,
+      "blank": [
+        [
+          0,
+          0,
+          191,
+          27
+        ]
+      ]
+    },
+    "party_hp_frame": {
+      "scale": 0.5493,
+      "blank": [
+        [
+          0,
+          0,
+          299,
+          27
+        ]
+      ]
+    },
+    "guild_tag": {
+      "scale": 0.702,
+      "blank": [
+        [
+          0,
+          0,
+          230,
+          27
+        ]
+      ]
+    },
+    "guild_emblem": {
+      "scale": 0.8887,
+      "blank": [
+        [
+          0,
+          0,
+          313,
+          27
+        ]
+      ]
+    },
+    "fame_up": {
+      "scale": 0.6694,
+      "blank": [
+        [
+          0,
+          0,
+          141,
+          27
+        ]
+      ]
+    },
+    "shop_sign": {
+      "scale": 0.5616,
+      "blank": [
+        [
+          0,
+          0,
+          164,
+          27
+        ]
+      ]
+    },
+    "market_stall": {
+      "scale": 0.5365,
+      "blank": [
+        [
+          0,
+          0,
+          226,
+          27
+        ]
+      ]
+    },
+    "whisper_icon": {
+      "scale": 0.6463,
+      "blank": [
+        [
+          0,
+          0,
+          214,
+          27
+        ]
+      ]
+    },
+    "buddy_add_icon": {
+      "scale": 0.7241,
+      "blank": [
+        [
+          0,
+          0,
+          243,
+          27
+        ]
+      ]
     }
-  }
+  },
+  "grid": {
+    "rows": [
+      0,
+      195,
+      388,
+      582,
+      971
+    ],
+    "cols": [
+      0,
+      359,
+      723,
+      1087,
+      1448
+    ]
+  },
+  "inset": 5
 }

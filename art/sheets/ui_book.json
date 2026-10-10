@@ -3,8 +3,7 @@
   "out_dir": "assets/sprites/ui/book",
   "scale": 0.5,
   "alpha": "soft",
-  "label_band": 0.2,
-  "grid_threshold": 0.7,
+  "label_band": 0.12,
   "cells": [
     [
       "page_cell",
@@ -19,60 +18,157 @@
       "badge_locked"
     ],
     [
-      "achievement_row",
-      "achievement_row_done",
+      "",
       "achievement_toast",
       "bookmark"
     ]
   ],
   "grid": {
     "rows": [
-      1,
-      344,
-      743,
-      1084
+      0,
+      360,
+      722,
+      1081
     ],
     "cols": [
       [
-        1,
-        358,
-        802,
-        1141,
-        1446
+        0,
+        362,
+        724,
+        1086,
+        1448
       ],
       [
-        1,
-        361,
-        878,
-        1148,
-        1446
+        0,
+        362,
+        854,
+        1157,
+        1448
       ],
       [
-        1,
-        436,
-        875,
-        1188,
-        1446
+        0,
+        724,
+        1086,
+        1448
       ]
     ]
   },
   "overrides": {
-    "page_cell_complete": {
-      "fix": "glow_backdrop"
-    },
-    "achievement_row_done": {
-      "fix": "glow_backdrop"
-    },
     "pip_on": {
-      "fix": "glow_backdrop",
-      "keep": "largest"
+      "keep": "largest",
+      "blank": [
+        [
+          3,
+          0,
+          171,
+          27
+        ]
+      ],
+      "scale": 0.6174
+    },
+    "pip_off": {
+      "keep": "largest",
+      "blank": [
+        [
+          3,
+          0,
+          184,
+          27
+        ]
+      ],
+      "scale": 0.4515
     },
     "badge": {
-      "fix": "glow_backdrop",
-      "keep": "largest"
+      "keep": "largest",
+      "blank": [
+        [
+          2,
+          0,
+          263,
+          30
+        ]
+      ],
+      "scale": 0.5
+    },
+    "badge_locked": {
+      "keep": "largest",
+      "blank": [
+        [
+          3,
+          0,
+          276,
+          30
+        ]
+      ],
+      "scale": 0.5121
+    },
+    "unseen_monster": {
+      "keep": "largest",
+      "blank": [
+        [
+          1,
+          0,
+          225,
+          30
+        ]
+      ],
+      "scale": 0.5662
+    },
+    "page_cell": {
+      "blank": [
+        [
+          1,
+          0,
+          208,
+          27
+        ]
+      ],
+      "scale": 0.4198
+    },
+    "page_cell_complete": {
+      "blank": [
+        [
+          2,
+          0,
+          332,
+          27
+        ]
+      ],
+      "scale": 0.4209
     },
     "book_pages": {
-      "scale": 1.0
+      "blank": [
+        [
+          2,
+          0,
+          167,
+          30
+        ]
+      ],
+      "scale": 1.15
+    },
+    "achievement_toast": {
+      "blank": [
+        [
+          3,
+          0,
+          267,
+          29
+        ]
+      ],
+      "scale": 0.4605
+    },
+    "bookmark": {
+      "blank": [
+        [
+          3,
+          0,
+          160,
+          29
+        ]
+      ],
+      "scale": 0.4869
     }
-  }
+  },
+  "inset": 6
 }

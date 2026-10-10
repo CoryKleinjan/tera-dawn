@@ -1,7 +1,7 @@
 {
   "source": "art/source/items_parts_1.png",
   "out_dir": "assets/sprites/items",
-  "scale": 0.3,
+  "scale": 0.478,
   "alpha": "hard",
   "keep": "largest",
   "fix": "glow_backdrop",
@@ -41,5 +41,29 @@
       "magma_plate",
       "forge_rivet"
     ]
-  ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      169,
+      338,
+      508,
+      677,
+      846
+    ],
+    "cols": [
+      0,
+      252,
+      504,
+      757,
+      1009,
+      1261
+    ]
+  },
+  "inset": 6,
+  "overrides": {
+    "grove_spark": {
+      "fix": "card_glow"
+    }
+  }
 }

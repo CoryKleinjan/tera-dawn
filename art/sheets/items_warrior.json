@@ -1,10 +1,10 @@
 {
   "source": "art/source/items_warrior.png",
   "out_dir": "assets/sprites/items",
-  "scale": 0.3,
+  "scale": 0.335,
   "alpha": "hard",
   "keep": "largest",
-  "fix": "glow_backdrop",
+  "fix": "card_backdrop",
   "cells": [
     [
       "bronze_sword",
@@ -38,5 +38,54 @@
       "",
       ""
     ]
-  ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      258,
+      515,
+      772,
+      1030
+    ],
+    "cols": [
+      0,
+      256,
+      512,
+      768,
+      1024,
+      1280,
+      1536
+    ]
+  },
+  "inset": 8,
+  "label_band": 0.2,
+  "overrides": {
+    "steel_greaves": {
+      "keep": "all"
+    },
+    "steel_sabatons": {
+      "keep": "all"
+    },
+    "emberplate_greaves": {
+      "keep": "all"
+    },
+    "emberplate_sabatons": {
+      "keep": "all"
+    },
+    "sunforged_greaves": {
+      "keep": "all"
+    },
+    "sunforged_sabatons": {
+      "keep": "all"
+    },
+    "dawnbreaker_claymore": {
+      "fix": "card_flat",
+      "crop": [
+        0,
+        33,
+        240,
+        242
+      ]
+    }
+  }
 }

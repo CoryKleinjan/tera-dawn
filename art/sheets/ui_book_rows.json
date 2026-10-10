@@ -1,0 +1,57 @@
+{
+  "source": "art/source/ui_book.png",
+  "out_dir": "assets/sprites/ui/book",
+  "scale": 0.5,
+  "alpha": "soft",
+  "label_band": 0.2,
+  "inset": 6,
+  "recolor": "dark_parchment",
+  "region": [
+    0,
+    722,
+    470,
+    1081
+  ],
+  "grid": {
+    "rows": [
+      0,
+      184,
+      359
+    ],
+    "cols": [
+      0,
+      470
+    ]
+  },
+  "cells": [
+    [
+      "achievement_row"
+    ],
+    [
+      "achievement_row_done"
+    ]
+  ],
+  "overrides": {
+    "achievement_row": {
+      "scale": 0.4741,
+      "blank_top": 38
+    },
+    "achievement_row_done": {
+      "scale": 0.46,
+      "patch": [
+        [
+          212,
+          0,
+          280,
+          64,
+          -80
+        ]
+      ]
+    }
+  },
+  "background": [
+    254,
+    1,
+    249
+  ]
+}

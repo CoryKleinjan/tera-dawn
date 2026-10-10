@@ -1,0 +1,38 @@
+{
+  "source": "art/source/skill_effects_old.png",
+  "scale": 0.5,
+  "alpha": "soft",
+  "label_band": 0.15,
+  "strip_labels": true,
+  "out_dir": "assets/sprites/effects",
+  "cells": [
+    [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "portal_flash"
+    ]
+  ]
+}
