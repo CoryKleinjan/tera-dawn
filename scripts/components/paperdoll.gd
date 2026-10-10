@@ -49,9 +49,13 @@ const DEFAULT_WEAPON := &"sword"
 ## Shields by EquipDef.look_shape (any other: SHIELD).
 const SHIELDS := {&"kite": preload("res://assets/animations/paperdoll/shield_kite.tres")}
 ## The hero's frame size in pixels; every frame of the strip is this big.
-const FRAME_SIZE := Vector2(128, 104)
-## Heads bigger or smaller than this scale hat stand-ins with them.
-const HEAD_WIDTH := 40.0
+const FRAME_SIZE := Vector2(256, 207)
+## How many strip pixels make one "hero pixel", the unit the game sizes him in (TDStage.TEXEL)
+## and hat stand-ins are drawn in: the strip is cut at the full resolution of the painted
+## sheet, twice as fine as the hero is sized.
+const ART_SCALE := 2.0
+## Heads bigger or smaller than this (strip pixels) scale hat stand-ins with them.
+const HEAD_WIDTH := 40.0 * ART_SCALE
 
 ## A stand-in drawn on the hero.
 class Overlay:
@@ -288,6 +292,7 @@ static func place_overlay(shape: StringName, frame: int, mirror := false) -> Var
 		var head: Variant = anchor(frame, &"head_size")
 		if head != null:
 			scale = clampf(head.x / HEAD_WIDTH, 0.85, 1.2)
+		scale *= ART_SCALE
 		angle = deg_to_rad(head_angle(frame))
 	var size := LookShapes.texture(shape, Color.WHITE).get_size()
 	var centre: Vector2 = at + ((size / 2.0 - LookShapes.pivot(shape)) * scale).rotated(angle)

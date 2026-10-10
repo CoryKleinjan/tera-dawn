@@ -98,7 +98,7 @@ var companion: TDCompanion
 
 func _ready() -> void:
 	rig = SpriteRig.new()
-	rig.setup(HERO_FRAMES, null, TDStage.TEXEL * HERO_SCALE, 40.0)
+	rig.setup(HERO_FRAMES, null, TDStage.TEXEL * HERO_SCALE / Paperdoll.ART_SCALE, 40.0)
 	rig.add_light(LIGHT, LIGHT_ENERGY, 48.0)
 	add_child(rig)
 	companion = TDCompanion.new()

@@ -1,0 +1,20 @@
+{
+  "source": "art/source/held_claws.png",
+  "scale": 1.0,
+  "label_band": 0.16,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/paperdoll/held_claws",
+  "cells": [
+    [
+      "iron_claw",
+      "steel_claw",
+      "viper_claw"
+    ],
+    [
+      "shadow_claw",
+      "nightfang_claw",
+      "eclipse_claw"
+    ]
+  ]
+}

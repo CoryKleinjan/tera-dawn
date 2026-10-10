@@ -20,7 +20,7 @@
       1774
     ]
   },
-  "scale": 0.5,
+  "scale": 1.0,
   "label_band": 0.18,
   "strip_labels": true,
   "keep": "largest",
@@ -311,7 +311,7 @@
       },
       "out": "assets/sprites/characters/hero.png",
       "sprite_frames": "assets/animations/hero.tres",
-      "pad_top": 18
+      "pad_top": 36
     }
   }
 }

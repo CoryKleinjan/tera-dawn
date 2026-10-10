@@ -253,14 +253,14 @@ func test_stand_ins_sit_on_the_hero_and_mirror() -> void:
 	var idle := Paperdoll.frame_index(Paperdoll.FRAMES.get_frame_texture(&"idle", 0))
 	var hat: Dictionary = Paperdoll.place_overlay(&"cap", idle)
 	var head: Vector2 = Paperdoll.anchor(idle, &"head")
-	check(absf(hat["centre"].x - head.x) < 12 and hat["centre"].y < head.y, "a cap sits on top of the head")
+	check(absf(hat["centre"].x - head.x) < 12 * Paperdoll.ART_SCALE and hat["centre"].y < head.y, "a cap sits on top of the head")
 	var left: Dictionary = Paperdoll.place_overlay(&"cap", idle, true)
 	check_near(left["centre"].x, Paperdoll.FRAME_SIZE.x - hat["centre"].x, "mirrored across the frame")
 	var climbing := Paperdoll.frame_index(Paperdoll.FRAMES.get_frame_texture(&"rope", 0))
 	check(Paperdoll.anchor(climbing, &"face") == null, "no face while climbing away from the camera")
 	var cap: Dictionary = Paperdoll.place_overlay(&"cap", climbing)
 	var top: Vector2 = Paperdoll.anchor(climbing, &"head_top")
-	check(absf(cap["centre"].x - top.x) < 8, "a hat stays on his head while he climbs")
+	check(absf(cap["centre"].x - top.x) < 8 * Paperdoll.ART_SCALE, "a hat stays on his head while he climbs")
 
 func test_the_weapon_hand_and_shield_sit_on_the_body() -> void:
 	var img := Paperdoll.MASK.get_image()
@@ -272,8 +272,9 @@ func test_the_weapon_hand_and_shield_sit_on_the_body() -> void:
 			if at == null:
 				continue
 			var on_body := false
-			for dy in range(-3, 4):
-				for dx in range(-3, 4):
+			var near := int(3 * Paperdoll.ART_SCALE)
+			for dy in range(-near, near + 1):
+				for dx in range(-near, near + 1):
 					var p := Vector2i(at) + Vector2i(i * int(Paperdoll.FRAME_SIZE.x) + dx, dy)
 					if p.x >= i * Paperdoll.FRAME_SIZE.x and p.x < (i + 1) * Paperdoll.FRAME_SIZE.x and p.y >= 0 and p.y < img.get_height():
 						on_body = on_body or img.get_pixelv(p).a > 0.5

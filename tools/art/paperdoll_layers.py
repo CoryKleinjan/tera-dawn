@@ -99,6 +99,9 @@ SWORD_LENGTH = 1.9    # every weapon is drawn at the scale that makes the sword 
 WEAPON_LENGTH = 20    # rig "tip" is this far from "grip" along the weapon (only its direction matters)
 FIST = 0.4            # the fist around a grip reaches this far from the grip point (head radii)
 
+# Weapons worn on the fist are drawn smaller than the template sheet has them, so they fit
+# his hand rather than swallowing it (the rest keep the sheet's size against the sword).
+WORN_SIZE = {"claw": 0.6, "knuckle": 0.75}
 # Weapons held in the fist: his fingers draw over the grip. The others are worn on the fist.
 GRIPPED = ("sword", "wand", "staff", "bow", "gun")
 # Weapons carried on his back while he climbs or sits, and at what angle; the rest are put away.
@@ -568,9 +571,11 @@ def _turned_on(size, img, anchor, at, angle):
 def held_pictures():
     """(item id, weapon kind, piece) for every weapon drawn on a held_*.json sheet that's there."""
     kinds = {}
-    for f in os.listdir(ITEMS) if os.path.isdir(ITEMS) else []:
-        if f.endswith(".tres"):
-            with open(os.path.join(ITEMS, f)) as fh:
+    for folder, _, files in os.walk(ITEMS):
+        for f in files:
+            if not f.endswith(".tres"):
+                continue
+            with open(os.path.join(folder, f)) as fh:
                 text = fh.read()
             item, kind = re.search(r'^id = &"(\w+)"', text, re.M), re.search(r'^weapon_kind = &"(\w+)"', text, re.M)
             if item and kind:
@@ -803,7 +808,7 @@ def main():
     pictures = [(kind, kind, weapons[kind], True) for kind in WEAPON_KINDS]
     pictures += [("item_" + item, kind, piece, False) for item, kind, piece in held_pictures()]
     for name, kind, piece, tinted in pictures:
-        img, grip = weapon(piece, s_w)
+        img, grip = weapon(piece, s_w * WORN_SIZE.get(kind, 1.0))
         if tinted:
             grips[kind] = {"grip": grip, "size": list(img.size)}
         front, behind = weapon_strips(img, grip, kind, names, frames, info, held[kind], hands, r)
