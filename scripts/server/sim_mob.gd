@@ -34,6 +34,8 @@ const WAKE_HOP := 5.0
 const SHOT_Y_RANGE := 180.0
 ## Ticks it stands still after shooting, and the most extra random wait before the next shot.
 const CAST_TICKS := 24
+## For this many ticks before a shot, clients see it wind up (MOB_WINDUP), so it's fair.
+const WINDUP_TICKS := 22
 const SHOT_JITTER := 40
 ## Shortest wait before its first shot.
 const FIRST_SHOT_TICKS := 30
@@ -64,6 +66,7 @@ var show_hp := 0    # ticks left showing the HP bar
 var hop := 0.0      # height of a hop above the platform
 var hop_v := 0.0
 var shot_t := 0     # ticks until it may shoot again
+var winding := false # about to shoot someone in range (shown as a wind-up glow)
 var cast_t := 0     # ticks it stands still after shooting
 ## Shots in the air: [peer, ticks left, where it lands].
 var shots := []
@@ -163,11 +166,13 @@ func step() -> void:
 	var half := def.size.x / 2.0
 	if hurt_t > 0:
 		hurt_t -= 1
+		winding = false
 		if not def.stationary:
 			position.x += kx
 		kx *= KNOCKBACK_DECAY
 	elif cast_t > 0:
 		cast_t -= 1
+		winding = false
 	else:
 		var chased := map.players.get(target) as SimPlayer if aggro > 0 else null
 		if def.stationary:
@@ -183,6 +188,7 @@ func step() -> void:
 			position.x += dir * def.speed
 		if def.shot:
 			shot_t -= 1
+			winding = shot_t <= WINDUP_TICKS and _shot_target(chased) != null
 			if shot_t <= 0:
 				var aim := _shot_target(chased)
 				if aim:
@@ -262,4 +268,6 @@ func snapshot() -> Array:
 		flags |= SnapshotFlags.MOB_SHOW_HP
 	if cast_t > 0:
 		flags |= SnapshotFlags.MOB_CASTING
+	if winding and not dead:
+		flags |= SnapshotFlags.MOB_WINDUP
 	return [position.x, position.y - hop, dir, roundi(health.fraction() * 1000.0), flags]

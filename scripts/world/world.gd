@@ -400,9 +400,14 @@ func remove_drop(id: int, by: int) -> void:
 	if d == null:
 		return
 	drops.erase(id)
-	if by != 0:
+	var taker := actor(by) if by != 0 else null
+	if taker:
+		d.collect(taker)  # it flies to them, then sparkles
+	elif by != 0:
 		add_effect(d.item.pickup_effect, d.position + Vector2(0, -16), 1)
-	d.queue_free()
+		d.queue_free()
+	else:
+		d.queue_free()
 
 # ---------- presentation (see TDWorldFx) ----------
 

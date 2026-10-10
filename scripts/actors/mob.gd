@@ -25,6 +25,9 @@ var z := 0.0
 
 var rig: SpriteRig
 var _last_x := 0.0
+## Hit reaction: how far it is pushed back (game pixels, fading) and hit-stop ticks left.
+var _recoil := 0.0
+var _stop_t := 0
 
 static func create(w: TDWorld, i: int, d: MonsterDef, p: Platform) -> TDMob:
 	var m := TDMob.new()
@@ -57,15 +60,31 @@ func kill() -> void:
 		flags |= SnapshotFlags.MOB_DEAD
 		death_t = SimMob.DEATH_FADE_TICKS
 
+## It was hit (by an attack facing `face`): a squash, a small push back and, for your own
+## hits, a few frames of hit-stop so the blow lands.
+func hit_react(face: int, stop_ticks := 0) -> void:
+	_recoil = 6.0 * face
+	_stop_t = maxi(_stop_t, stop_ticks)
+	if rig:
+		rig.squash(1.0)
+
 ## Feet position including the hover height of flying monsters.
 func body_position() -> Vector2:
 	return position + SimMob.hover_offset(def, phase)
 
-## body_position() where it is drawn this frame (between ticks, see TDWorld.drawn).
+## body_position() where it is drawn this frame (between ticks, see TDWorld.drawn), with
+## its hit recoil.
 func drawn_body_position() -> Vector2:
-	return world.drawn(self) + SimMob.hover_offset(def, phase)
+	return world.drawn(self) + SimMob.hover_offset(def, phase) + Vector2(_recoil, 0)
 
 func step() -> void:
+	_recoil *= 0.75
+	if _stop_t > 0:
+		# hit-stop: hold still for a moment
+		_stop_t -= 1
+		if rig:
+			rig.freeze(_stop_t > 0)
+		return
 	phase += 0.08
 	position += (target - position) * FOLLOW
 	if death_t > 0 and incoming <= 0:
@@ -96,6 +115,9 @@ func _process(_delta: float) -> void:
 	rig.set_opacity(clampf(death_t / 30.0, 0.0, 1.0) if fallen else 1.0)
 	var hurt := flags & SnapshotFlags.MOB_HURT != 0
 	rig.set_flash(hurt and Engine.get_physics_frames() % 4 < 2)
+	# winding up a shot: a warm pulse, so the attack never comes out of nowhere
+	var winding := flags & SnapshotFlags.MOB_WINDUP != 0 and not dead
+	rig.set_glow(0.5 + 0.5 * sin(Time.get_ticks_msec() / 45.0) if winding else 0.0)
 	var facing := dir
 	if facing == 0:
 		facing = -1 if world.player.position.x < position.x else 1

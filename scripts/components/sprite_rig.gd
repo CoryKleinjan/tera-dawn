@@ -27,6 +27,10 @@ var _frames: SpriteFrames
 var _flash := false
 var _tint := Color.WHITE
 var _lift := 0.0
+## How squashed the body is right now by a hit (0 none, 1 most); see squash().
+var _squash := 0.0
+## A glow pulsing on the body (a monster winding up an attack), 0 for none.
+var _glow := 0.0
 
 ## Builds the sprite. Pass `frames` for an animated actor or `texture` for a single image.
 ## `texel` is the size of one texture pixel in game pixels.
@@ -115,13 +119,33 @@ func place(feet: Vector2, z: float, shadow_y := NAN) -> void:
 func set_flash(on: bool) -> void:
 	if on != _flash:
 		_flash = on
-		body.modulate = Color(2.2, 1.0, 1.0) if on else _tint
+		_apply_modulate()
+
+## Squashes the body for a moment (taking a hit); it springs back by itself.
+func squash(amount := 1.0) -> void:
+	_squash = maxf(_squash, amount)
+
+## Freezes the animation for a few frames (hit-stop) or lets it run again.
+func freeze(on: bool) -> void:
+	if body is AnimatedSprite3D:
+		(body as AnimatedSprite3D).speed_scale = 0.0 if on else 1.0
+
+## A warm pulsing glow (0 off .. 1 full), e.g. a monster about to strike.
+func set_glow(amount: float) -> void:
+	if not is_equal_approx(amount, _glow):
+		_glow = amount
+		_apply_modulate()
+
+func _apply_modulate() -> void:
+	if _flash:
+		body.modulate = Color(2.2, 1.0, 1.0)
+	else:
+		body.modulate = _tint.lerp(Color(1.9, 1.35, 0.9), _glow * 0.6)
 
 ## A colour the sprite is always tinted with (NPCs and monsters that share art).
 func set_tint(col: Color) -> void:
 	_tint = col
-	if not _flash:
-		body.modulate = col
+	_apply_modulate()
 
 ## 1 is solid, 0 is invisible.
 func set_opacity(alpha: float) -> void:
@@ -143,7 +167,12 @@ func _fit_offset() -> void:
 		body.offset = Vector2(0, tex.get_height() / 2.0)  # origin at the bottom centre
 
 func _process(delta: float) -> void:
-	if _frames or body == null:
+	if body == null:
+		return
+	_squash = move_toward(_squash, 0.0, delta * 6.0)
+	var squash_xy := Vector2(1.0 + 0.18 * _squash, 1.0 - 0.15 * _squash)
+	if _frames:
+		body.scale = Vector3(squash_xy.x, squash_xy.y, 1.0)
 		return
 	# single-image actors: move the sprite procedurally
 	_t += delta
@@ -168,6 +197,6 @@ func _process(delta: float) -> void:
 			var breath := sin(_t * 2.6)
 			sy = 1.0 + breath * 0.035
 			sx = 1.0 - breath * 0.025
-	body.scale = Vector3(sx, sy, 1.0)
+	body.scale = Vector3(sx * squash_xy.x, sy * squash_xy.y, 1.0)
 	body.rotation.z = rot
 	_lift = lift

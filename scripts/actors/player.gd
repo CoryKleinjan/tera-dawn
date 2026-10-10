@@ -70,6 +70,7 @@ var _reported := &""  # the animation the server last heard about
 var _swing := false   # restart the attack animation on the next frame
 var speech := ""      # the last thing said in map chat, shown in a bubble
 var speech_t := 0
+var _stop_t := 0      # hit-stop ticks left (the swing holds still, see hit_stop)
 ## The chair you're sitting on (the server said so), or empty. Moving gets you up.
 var sitting: StringName = &""
 
@@ -122,8 +123,15 @@ func sit(chair_id: StringName) -> void:
 		vel = Vector2.ZERO
 		action_t = 0
 
-## The server says a monster hit you: blink, and get knocked away from it.
+## Your blow landed: hold the swing still for a few ticks (hit-stop) so it reads as a hit.
+func hit_stop(ticks: int) -> void:
+	if ticks > 0:
+		_stop_t = maxi(_stop_t, ticks)
+		rig.freeze(true)
+
+## The server says a monster hit you: blink, get knocked away from it, and the screen jolts.
 func knock_back(from_x: float) -> void:
+	world.shake(0.3)
 	inv = SimPlayer.HURT_INV
 	if not is_climbing():
 		vel = Vector2(-KNOCKBACK.x if position.x < from_x else KNOCKBACK.x, KNOCKBACK.y)
@@ -141,6 +149,10 @@ func level_up() -> void:
 # ---------- per tick ----------
 
 func step() -> void:
+	if _stop_t > 0:
+		_stop_t -= 1
+		if _stop_t == 0:
+			rig.freeze(false)
 	if speech_t > 0:
 		speech_t -= 1
 	if down:

@@ -30,7 +30,7 @@ extends Resource
 @export_range(0.0, 2.0) var grade_saturation := 1.05
 ## Soft beams of sunlight slanting through the scene (dawn meadows, forests).
 @export var light_shafts := false
-@export var light_shaft_color := Color(1.0, 0.85, 0.6, 0.18)
+@export var light_shaft_color := Color(1.0, 0.85, 0.6, 0.12)
 ## Slow cloud shadows drifting across the floor.
 @export var cloud_shadows := true
 
