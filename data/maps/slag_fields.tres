@@ -20,7 +20,7 @@ texture = ExtResource("15_tree_large")
 x = 865.0
 y = -1.0
 depth = -5.3
-scale = 1.25
+scale = 1.04
 flip = false
 
 [sub_resource type="Resource" id="Resource_33"]
@@ -29,7 +29,7 @@ texture = ExtResource("14_tree_small")
 x = 2329.0
 y = -1.0
 depth = -6.0
-scale = 1.1
+scale = 1.04
 flip = false
 
 [sub_resource type="Resource" id="Resource_32"]
@@ -38,7 +38,7 @@ texture = ExtResource("13_crystals")
 x = 1969.0
 y = -1.0
 depth = -7.0
-scale = 1.3
+scale = 1.04
 flip = true
 
 [sub_resource type="Resource" id="Resource_31"]
@@ -47,7 +47,7 @@ texture = ExtResource("13_crystals")
 x = 1827.0
 y = -1.0
 depth = -2.5
-scale = 1.12
+scale = 1.04
 flip = true
 
 [sub_resource type="Resource" id="Resource_28"]

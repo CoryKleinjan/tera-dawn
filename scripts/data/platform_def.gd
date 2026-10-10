@@ -4,7 +4,7 @@ extends Resource
 
 ## Share of a `look` picture's width you can stand on (its ends are rounded rock and grass).
 const LOOK_SPAN := 0.72
-## Texels of a `look` picture's grass that rise above the top edge.
+## Art pixels of a `look` picture's grass that rise above the top edge.
 const LOOK_GRASS := 7.0
 
 @export var x := 0.0
@@ -20,4 +20,8 @@ const LOOK_GRASS := 7.0
 ## Game pixels per texel of `look`.
 func look_texel() -> float:
 	return width / (look.get_width() * LOOK_SPAN) if look else 0.0
+
+## How far a `look` picture's grass rises above the top edge, in game pixels.
+func look_grass() -> float:
+	return LOOK_GRASS * look_texel() * TDStage.art_density(look) if look else 0.0
 

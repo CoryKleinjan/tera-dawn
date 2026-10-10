@@ -32,7 +32,7 @@ texture = ExtResource("16_crystals")
 x = 829.0
 y = -1.0
 depth = -6.1
-scale = 1.27
+scale = 1.04
 flip = true
 
 [sub_resource type="Resource" id="Resource_26"]
@@ -59,7 +59,7 @@ texture = ExtResource("14_steam_vent")
 x = 1307.0
 y = -1.0
 depth = -3.0
-scale = 1.44
+scale = 1.04
 flip = true
 
 [sub_resource type="Resource" id="Resource_22"]

@@ -1,6 +1,6 @@
 {
   "source": "art/source/ground_textures_2.png",
-  "scale": 0.3,
+  "art_px": 3.5,
   "label_band": 0.1,
   "grid_threshold": 0.95,
   "out_dir": "assets/sprites/ground",
@@ -24,7 +24,6 @@
   "overrides": {
     "dawnharbor_top": {
       "seamless": true,
-      "size": 128,
       "crop": [
         108,
         42,
@@ -34,7 +33,6 @@
     },
     "dawnharbor_side": {
       "seamless": true,
-      "size": 128,
       "crop": [
         108,
         42,
@@ -44,7 +42,6 @@
     },
     "dawnharbor_soil": {
       "seamless": true,
-      "size": 128,
       "crop": [
         108,
         42,
@@ -54,7 +51,6 @@
     },
     "driftcove_top": {
       "seamless": true,
-      "size": 128,
       "crop": [
         108,
         42,
@@ -64,7 +60,6 @@
     },
     "driftcove_side": {
       "seamless": true,
-      "size": 128,
       "crop": [
         108,
         42,
@@ -74,7 +69,6 @@
     },
     "driftcove_soil": {
       "seamless": true,
-      "size": 128,
       "crop": [
         108,
         42,
@@ -84,7 +78,6 @@
     },
     "greenbough_top": {
       "seamless": true,
-      "size": 128,
       "crop": [
         108,
         42,
@@ -94,7 +87,6 @@
     },
     "greenbough_side": {
       "seamless": true,
-      "size": 128,
       "crop": [
         108,
         42,
@@ -104,7 +96,6 @@
     },
     "greenbough_soil": {
       "seamless": true,
-      "size": 128,
       "crop": [
         108,
         42,

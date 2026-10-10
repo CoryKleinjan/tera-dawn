@@ -1,9 +1,9 @@
 {
   "source": "art/source/platform_pieces_driftcove.png",
-  "out_dir": "art/build/platform_pieces_driftcove",
-  "scale": 0.3,
+  "art_px": 3.75,
+  "out_dir": "assets/sprites/platforms/driftcove",
   "label_band": 0.2,
-  "inset": 6,
+  "inset": 12,
   "keep": "largest",
   "grid": {
     "rows": [
@@ -62,42 +62,71 @@
     "cap_left": {
       "crop": [
         0,
-        27,
-        283,
-        592
+        15,
+        205,
+        572
+      ],
+      "patch_rows": [
+        [
+          283,
+          296,
+          -14
+        ]
       ]
     },
     "middle_a": {
       "crop": [
         0,
-        27,
+        15,
         285,
-        592
+        572
+      ],
+      "patch_rows": [
+        [
+          283,
+          296,
+          -14
+        ]
       ]
     },
     "middle_b": {
       "crop": [
         0,
-        27,
-        283,
-        592
+        15,
+        185,
+        572
+      ],
+      "patch_rows": [
+        [
+          283,
+          296,
+          -14
+        ]
       ]
     },
     "cap_right": {
       "crop": [
         0,
-        27,
+        15,
         282,
-        592
+        572
+      ],
+      "patch_rows": [
+        [
+          283,
+          296,
+          -14
+        ]
       ]
     },
     "under_left": {
       "crop": [
         0,
         18,
-        283,
+        205,
         290
-      ]
+      ],
+      "out_dir": "art/build/platform_pieces_driftcove"
     },
     "under_middle_a": {
       "crop": [
@@ -105,15 +134,17 @@
         18,
         285,
         290
-      ]
+      ],
+      "out_dir": "art/build/platform_pieces_driftcove"
     },
     "under_middle_b": {
       "crop": [
         0,
         32,
-        283,
+        185,
         290
-      ]
+      ],
+      "out_dir": "art/build/platform_pieces_driftcove"
     },
     "under_right": {
       "crop": [
@@ -121,7 +152,13 @@
         18,
         282,
         290
-      ]
+      ],
+      "out_dir": "art/build/platform_pieces_driftcove"
     }
+  },
+  "platform": {
+    "bottom": "under",
+    "max_depth": 110,
+    "top_share": 0.3
   }
 }

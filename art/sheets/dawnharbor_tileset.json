@@ -1,6 +1,7 @@
 {
   "source": "art/source/dawnharbor_tileset.png",
-  "scale": 0.279,
+  "art_px": 3.0,
+  "grow": 0.84,
   "label_band": 0.2,
   "out_dir": "assets/sprites/tiles/dawnharbor",
   "cells": [
@@ -58,58 +59,58 @@
   "overrides": {
     "lantern_lit": {
       "fix": "glow_backdrop",
-      "scale": 0.4038,
       "crop": [
         0,
         26,
         252,
         252
-      ]
+      ],
+      "grow": 1.21
     },
     "ground_left": {
-      "scale": 0.2159,
       "crop": [
         0,
         25,
         246,
         251
-      ]
+      ],
+      "grow": 0.8
     },
     "ground_middle": {
-      "scale": 0.2159,
       "crop": [
         0,
         25,
         251,
         251
-      ]
+      ],
+      "grow": 0.8
     },
     "ground_right": {
-      "scale": 0.2159,
       "crop": [
         0,
         25,
         252,
         251
-      ]
+      ],
+      "grow": 0.8
     },
     "platform_small": {
-      "scale": 0.2522,
       "crop": [
         0,
         25,
         252,
         251
-      ]
+      ],
+      "grow": 0.8
     },
     "platform_medium": {
-      "scale": 0.2428,
       "crop": [
         0,
         25,
         252,
         251
-      ]
+      ],
+      "grow": 0.8
     },
     "platform_large": {
       "crop": [
@@ -128,13 +129,13 @@
       ]
     },
     "tall_grass": {
-      "scale": 0.2548,
       "crop": [
         0,
         26,
         251,
         251
-      ]
+      ],
+      "grow": 0.8
     },
     "tree_large": {
       "crop": [
@@ -151,16 +152,16 @@
         252,
         251
       ],
-      "scale": 0.2655
+      "grow": 0.8
     },
     "bush_large": {
-      "scale": 0.2951,
       "crop": [
         0,
         26,
         252,
         251
-      ]
+      ],
+      "grow": 0.89
     },
     "bush_small": {
       "crop": [
@@ -179,31 +180,31 @@
       ]
     },
     "rock_small": {
-      "scale": 0.2468,
       "crop": [
         0,
         26,
         251,
         252
-      ]
+      ],
+      "grow": 0.8
     },
     "stump": {
-      "scale": 0.363,
       "crop": [
         0,
         26,
         252,
         252
-      ]
+      ],
+      "grow": 1.09
     },
     "flowers": {
-      "scale": 0.248,
       "crop": [
         0,
         26,
         252,
         252
-      ]
+      ],
+      "grow": 0.8
     },
     "signature_plant": {
       "crop": [
@@ -212,7 +213,7 @@
         252,
         252
       ],
-      "scale": 0.2679
+      "grow": 0.8
     },
     "fence": {
       "crop": [
@@ -223,49 +224,49 @@
       ]
     },
     "signpost": {
-      "scale": 0.302,
       "crop": [
         0,
         26,
         246,
         252
-      ]
+      ],
+      "grow": 0.91
     },
     "lantern_unlit": {
-      "scale": 0.4038,
       "crop": [
         0,
         26,
         251,
         252
-      ]
+      ],
+      "grow": 1.21
     },
     "building_large": {
-      "scale": 0.3982,
       "crop": [
         0,
         26,
         252,
         252
-      ]
+      ],
+      "grow": 1.19
     },
     "building_small": {
-      "scale": 0.3674,
       "crop": [
         0,
         26,
         252,
         252
-      ]
+      ],
+      "grow": 1.1
     },
     "signature_prop": {
-      "scale": 0.305,
       "crop": [
         0,
         26,
         247,
         252
-      ]
+      ],
+      "grow": 0.92
     }
   }
 }

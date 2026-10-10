@@ -22,7 +22,7 @@ texture = ExtResource("12_tree_small")
 x = 288.0
 y = -1.0
 depth = -3.5
-scale = 1.42
+scale = 1.3
 flip = false
 
 [sub_resource type="Resource" id="Resource_38"]
@@ -49,7 +49,7 @@ texture = ExtResource("14_flowers_yellow")
 x = 814.0
 y = -1.0
 depth = -5.0
-scale = 1.36
+scale = 1.3
 flip = false
 
 [sub_resource type="Resource" id="Resource_33"]
@@ -58,7 +58,7 @@ texture = ExtResource("13_bush_large")
 x = 1912.0
 y = -1.0
 depth = -4.5
-scale = 1.34
+scale = 1.3
 flip = true
 
 [sub_resource type="Resource" id="Resource_32"]

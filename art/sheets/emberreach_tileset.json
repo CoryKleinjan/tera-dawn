@@ -1,6 +1,7 @@
 {
   "source": "art/source/emberreach_tileset.png",
-  "scale": 0.289,
+  "art_px": 3.5,
+  "grow": 1.01,
   "label_band": 0.2,
   "out_dir": "assets/sprites/tiles/emberreach",
   "cells": [
@@ -58,13 +59,13 @@
   "overrides": {
     "lantern_lit": {
       "fix": "glow_backdrop",
-      "scale": 0.3827,
       "crop": [
         0,
         55,
         252,
         252
-      ]
+      ],
+      "grow": 1.25
     },
     "ground_left": {
       "crop": [
@@ -94,22 +95,22 @@
       "keep": "largest"
     },
     "platform_small": {
-      "scale": 0.31,
       "crop": [
         0,
         55,
         252,
         251
-      ]
+      ],
+      "grow": 1.08
     },
     "platform_medium": {
-      "scale": 0.3175,
       "crop": [
         0,
         55,
         252,
         251
-      ]
+      ],
+      "grow": 1.11
     },
     "platform_large": {
       "crop": [
@@ -126,25 +127,25 @@
         246,
         251
       ],
-      "scale": 0.3128
+      "grow": 1.09
     },
     "tall_grass": {
-      "scale": 0.2526,
       "crop": [
         0,
         31,
         251,
         251
-      ]
+      ],
+      "grow": 0.88
     },
     "tree_large": {
-      "scale": 0.2472,
       "crop": [
         0,
         31,
         252,
         251
-      ]
+      ],
+      "grow": 0.87
     },
     "tree_small": {
       "crop": [
@@ -153,7 +154,7 @@
         252,
         251
       ],
-      "scale": 0.2491
+      "grow": 0.87
     },
     "bush_large": {
       "crop": [
@@ -162,16 +163,16 @@
         252,
         251
       ],
-      "scale": 0.2777
+      "grow": 0.97
     },
     "bush_small": {
-      "scale": 0.4343,
       "crop": [
         0,
         31,
         247,
         251
-      ]
+      ],
+      "grow": 1.25
     },
     "rock_large": {
       "crop": [
@@ -180,97 +181,97 @@
         246,
         252
       ],
-      "scale": 0.2724
+      "grow": 0.95
     },
     "rock_small": {
-      "scale": 0.2167,
       "crop": [
         0,
         31,
         251,
         252
-      ]
+      ],
+      "grow": 0.8
     },
     "stump": {
-      "scale": 0.2258,
       "crop": [
         0,
         31,
         252,
         252
-      ]
+      ],
+      "grow": 0.8
     },
     "flowers": {
-      "scale": 0.2643,
       "crop": [
         0,
         31,
         252,
         252
-      ]
+      ],
+      "grow": 0.93
     },
     "signature_plant": {
-      "scale": 0.3157,
       "crop": [
         0,
         31,
         252,
         252
-      ]
+      ],
+      "grow": 1.1
     },
     "fence": {
-      "scale": 0.2569,
       "crop": [
         0,
         31,
         247,
         252
-      ]
+      ],
+      "grow": 0.9
     },
     "signpost": {
-      "scale": 0.3169,
       "crop": [
         0,
         30,
         246,
         252
-      ]
+      ],
+      "grow": 1.11
     },
     "lantern_unlit": {
-      "scale": 0.3827,
       "crop": [
         0,
         55,
         251,
         252
-      ]
+      ],
+      "grow": 1.25
     },
     "building_large": {
-      "scale": 0.4048,
       "crop": [
         0,
         55,
         252,
         252
-      ]
+      ],
+      "grow": 1.25
     },
     "building_small": {
-      "scale": 0.3574,
       "crop": [
         0,
         55,
         252,
         252
-      ]
+      ],
+      "grow": 1.25
     },
     "signature_prop": {
-      "scale": 0.327,
       "crop": [
         0,
         30,
         247,
         252
-      ]
+      ],
+      "grow": 1.14
     }
   }
 }
