@@ -401,7 +401,6 @@ func _run() -> void:
 	# Play single player against a server inside this game, with test-only saves.
 	_clear_saves()
 	Net.save_dir = save_dir
-	Net.import_legacy_save = false
 	world = load("res://scenes/world.tscn").instantiate() as TDWorld
 	add_child(world)
 	await _ticks(5)

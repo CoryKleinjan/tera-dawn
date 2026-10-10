@@ -87,8 +87,10 @@ func stop(stay_connected := false) -> void:
 	player.rig.visible = false
 	Game.social = {}
 	hud.invites.clear()
-	for w in ["player", "trade", "player_shop", "community"]:
-		hud.windows[w].visible = false
+	hud.chat.clear()
+	hud.prompt.answer(false)
+	for w: TDWindow in hud.windows.values():
+		w.visible = false
 
 ## The server put the player on a map: build it and show what's on it.
 func enter_map(id: StringName, x: float, state: Dictionary) -> void:
@@ -247,7 +249,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		var a := avatar_at(event.position)
 		if a:
 			click_avatar(a)
-	elif event.is_action_pressed("pause") and started:
+	elif event.is_action_pressed("pause"):
 		hud.escape()
 	elif started and not hud.title.visible:
 		for action in TDHud.WINDOW_ACTIONS:

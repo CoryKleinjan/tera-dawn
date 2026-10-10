@@ -83,6 +83,10 @@ func show_characters(list: Array, pick := "", where := "") -> void:
 	show_message("")
 	_refresh()
 	show()
+	focus_button()
+
+## Puts the keyboard focus on Play, or on Create when there's nothing to play.
+func focus_button() -> void:
 	(play_button if selected != "" else create_button).grab_focus()
 
 ## Picks a character by name.

@@ -28,6 +28,8 @@ var create_button: Button
 var message: Label
 ## Every choice row's value label, keyed by "look:<kind>" or "outfit:<slot>".
 var values := {}
+## Waiting for the server to answer a Create; another Create meanwhile is ignored.
+var pending := false
 var _pose := 0
 
 func _init() -> void:
@@ -130,6 +132,7 @@ func open() -> void:
 	heading.text = "New character"
 	name_field.text = ""
 	show_message("")
+	_set_pending(false)
 	preview.facing = 1
 	_pose = 0
 	preview.play(POSES[0])
@@ -160,15 +163,27 @@ func show_message(text: String) -> void:
 	message.text = text
 	message.visible = text != ""
 
-## Create: asks for a name first if there isn't one.
+## The server turned the Create down: says why and lets the player try again.
+func refused(reason: String) -> void:
+	_set_pending(false)
+	show_message(reason)
+
+## Create: asks for a name first if there isn't one. Once sent, waits for the answer.
 func _create() -> void:
+	if pending:
+		return
 	var n := CharacterStore.clean_name(name_field.text)
 	if n == "":
 		show_message("Please pick a name.")
 		name_field.grab_focus()
 		return
 	show_message("")
+	_set_pending(true)
 	created.emit(n, made)
+
+func _set_pending(on: bool) -> void:
+	pending = on
+	create_button.disabled = on
 
 ## The text a choice row shows now.
 func value_text(key: String) -> String:

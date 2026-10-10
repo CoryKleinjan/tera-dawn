@@ -143,14 +143,23 @@ func left(p: SimPlayer) -> void:
 	_sent.erase(peer)
 
 ## A character was deleted: out of their guild (handing it on, or ending it if they were
-## the last one) and off the buddy lists of everyone online. Offline buddy lists drop them
-## when those players next join.
+## the last one), and off every character's buddy list and fame records, online or saved,
+## so a new character with the name starts with none of it.
 func forget(char_name: String) -> void:
 	guild.forget(char_name)
 	for other: SimPlayer in server.sessions.values():
-		if other.character.buddies.has(char_name):
-			other.character.buddies.erase(char_name)
+		if _drop_name(other.character, char_name):
 			other.dirty_character = true
+	for c in server.store.saved_characters():
+		if player_named(c.name) == null and _drop_name(c, char_name):
+			server.store.save(c)
+
+## Takes `char_name` off `c`'s buddies and the fame it gave. True if anything changed.
+static func _drop_name(c: Character, char_name: String) -> bool:
+	var had := c.buddies.has(char_name) or c.fame_given.has(char_name)
+	c.buddies.erase(char_name)
+	c.fame_given.erase(char_name)
+	return had
 
 ## A player moved to another map: trades, their shop and shop visits end.
 func changed_map(p: SimPlayer) -> void:

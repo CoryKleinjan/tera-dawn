@@ -98,11 +98,15 @@ func disconnected(peer: int) -> void:
 	leave(peer)
 	lobby.dropped(peer)
 
-## Takes a player out of the world (saving them). They stay logged in.
+## Takes a player out of the world (saving them). They stay logged in. A player who leaves
+## while fainted is revived first, so they come back in town.
 func leave(peer: int) -> void:
 	var p := player_of(peer)
 	if p == null:
 		return
+	if p.fainted():
+		_wake(p)
+		p.character.map_id = _town_for(p)
 	social.left(p)
 	sessions.erase(peer)
 	p.map.remove_player(p)
@@ -125,16 +129,24 @@ func _enter_map(p: SimPlayer, id: StringName, x: float) -> void:
 
 ## Sends a fainted player back to town with half their HP and MP.
 func revive(p: SimPlayer) -> void:
+	_wake(p)
+	var town := _town_for(p)
+	_enter_map(p, town, Content.map(town).start_x)
+
+## Gets a fainted player up with half their HP and MP and a moment of invincibility.
+func _wake(p: SimPlayer) -> void:
 	var c := p.character
 	c.health.reset(c.max_hp())
 	c.health.set_hp(ceili(c.max_hp() / 2.0))
 	c.mp = ceili(c.max_mp() / 2.0)
+	p.faint_t = 0
 	p.inv = 120
 	p.dirty_vitals = true
+
+## The town a fainted player wakes up in.
+func _town_for(p: SimPlayer) -> StringName:
 	var town := p.map.def.return_town() if p.map else Character.START_MAP
-	if not Content.maps.has(town):
-		town = Character.START_MAP
-	_enter_map(p, town, Content.map(town).start_x)
+	return town if Content.maps.has(town) else Character.START_MAP
 
 func give_xp(p: SimPlayer, amount: int) -> void:
 	var c := p.character

@@ -16,7 +16,6 @@ var test: Node
 var world: TDWorld
 var hud: TDHud
 var _save_dir := ""
-var _import_legacy := true
 var _username := ""
 
 func _init(owner: Node) -> void:
@@ -35,10 +34,8 @@ func start(char_name := "Uitester") -> void:
 ## Opens the game on its title screen, not playing yet.
 func open_title() -> void:
 	_save_dir = Net.save_dir
-	_import_legacy = Net.import_legacy_save
 	_username = Game.last_username
 	Net.save_dir = SAVE_DIR
-	Net.import_legacy_save = false
 	clear_saves()
 	world = load("res://scenes/world.tscn").instantiate() as TDWorld
 	test.add_child(world)
@@ -54,7 +51,6 @@ func stop() -> void:
 		hud = null
 	Net.stop()
 	Net.save_dir = _save_dir
-	Net.import_legacy_save = _import_legacy
 	Game.social = {}
 	Game.last_username = _username
 	Game.me = Character.create("")

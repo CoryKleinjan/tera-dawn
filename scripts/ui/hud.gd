@@ -23,6 +23,8 @@ var title_card: Control
 var title_backdrop: TextureRect
 var character_select: TDCharacterSelect
 var delete_confirm: TDDeleteConfirm
+## Asks a host before logging out ends the game for the friends playing on it.
+var confirm: TDConfirm
 var creator: TDCreator
 var game_menu: TDGameMenu
 var settings_menu: TDSettingsMenu
@@ -277,8 +279,13 @@ func _build_title() -> void:
 	confirm_row = _row([_titled("Confirm password", confirm_field)])
 	confirm_row.hide()
 	start_panel.add_child(confirm_row)
+	# Enter logs in, or registers while the second password box is showing
 	for f: LineEdit in [address_field, username_field, password_field]:
-		f.text_submitted.connect(func(_t: String) -> void: _on_log_in())
+		f.text_submitted.connect(func(_t: String) -> void:
+			if confirm_row.visible:
+				_on_register()
+			else:
+				_on_log_in())
 	confirm_field.text_submitted.connect(func(_t: String) -> void: _on_register())
 	login_button = _small_menu_button("Log in")
 	login_button.pressed.connect(_on_log_in)
@@ -349,20 +356,25 @@ func _build_title() -> void:
 	creator.created.connect(func(char_name: String, made: NewCharacter) -> void: Net.create_character(char_name, made))
 	creator.cancelled.connect(func() -> void:
 		creator.hide()
-		character_select.show())
+		character_select.show()
+		character_select.focus_button())
 	delete_confirm = TDDeleteConfirm.new()
 	delete_confirm.hide()
 	title.add_child(delete_confirm)
 	delete_confirm.confirmed.connect(func(char_name: String, typed: String) -> void: Net.delete_character(char_name, typed))
+	delete_confirm.cancelled.connect(character_select.focus_button)
+	confirm = TDConfirm.new()
+	confirm.hide()
+	title.add_child(confirm)
 
 	Net.logged_in.connect(_on_logged_in)
 	Net.characters_changed.connect(_on_characters_changed)
 	Net.refused.connect(_on_refused)
 	Net.joined.connect(_on_joined)
-	Net.disconnected.connect(func() -> void:
+	Net.disconnected.connect(func(why: String) -> void:
 		world.stop()
 		show_title(false)
-		_show_message("Lost the connection to the server."))
+		_show_message(why))
 
 func _menu_button(text: String) -> Button:
 	return UiSkin.menu_button(text)
@@ -479,13 +491,18 @@ func _on_characters_changed(selected: String) -> void:
 	title.show()
 	character_select.show_characters(Net.characters, selected)
 
-## The server said no: shown on whichever screen asked.
+## The server said no: shown on whichever screen asked. If it also dropped us (the
+## account was logged in from somewhere else), back to the title.
 func _on_refused(reason: String) -> void:
-	if Net.mode == Net.Mode.NONE or title_card.visible:
+	if Net.mode == Net.Mode.NONE:
+		world.stop()
+		show_title(false)
+		_show_message(reason)
+	elif title_card.visible:
 		_back_to_title()
 		_show_message(reason)
 	elif creator.visible:
-		creator.show_message(reason)
+		creator.refused(reason)
 	else:
 		character_select.show_message(reason)
 
@@ -505,7 +522,15 @@ func _on_to_characters() -> void:
 	title.show()
 	Net.leave_character()
 
+## Log out (game menu or character select). A host with friends playing is asked first,
+## since it ends the game for them.
 func _on_log_out() -> void:
+	if Net.has_guests():
+		confirm.open("Friends are playing on your game. Log out and end it for them?", "Log out", _log_out)
+	else:
+		_log_out()
+
+func _log_out() -> void:
 	world.stop()
 	show_title(false)
 
@@ -514,6 +539,7 @@ func _back_to_title() -> void:
 	character_select.hide()
 	creator.hide()
 	delete_confirm.hide()
+	confirm.hide()
 	title_card.show()
 
 func _quit() -> void:
@@ -561,9 +587,20 @@ func resume() -> void:
 	game_menu.hide()
 	title.hide()
 
-## Esc while playing: closes the top window, or opens the game menu, or closes it again.
+## Esc. While playing: closes the top window, or opens the game menu, or closes it again.
+## Before that: a question is cancelled, the creator goes back, and character select logs out.
 func escape() -> void:
-	if title.visible:
+	if confirm.visible:
+		confirm.cancel()
+	elif delete_confirm.visible:
+		delete_confirm.cancel()
+	elif creator.visible:
+		creator.cancelled.emit()
+	elif character_select.visible:
+		_on_log_out()
+	elif not world.started:
+		return
+	elif title.visible:
 		if game_menu.visible:
 			resume()
 	elif not close_top_window():

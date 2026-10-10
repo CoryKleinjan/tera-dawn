@@ -45,9 +45,7 @@ func _init() -> void:
 	row.add_theme_constant_override("separation", 12)
 	col.add_child(row)
 	cancel_button = UiSkin.menu_button("Cancel", Vector2(130, 44), 20)
-	cancel_button.pressed.connect(func() -> void:
-		hide()
-		cancelled.emit())
+	cancel_button.pressed.connect(cancel)
 	row.add_child(cancel_button)
 	delete_button = UiSkin.menu_button("Delete", Vector2(130, 44), 20)
 	delete_button.pressed.connect(_confirm)
@@ -62,6 +60,11 @@ func open(name_: String) -> void:
 	_refresh()
 	show()
 	field.grab_focus()
+
+## Closes without deleting.
+func cancel() -> void:
+	hide()
+	cancelled.emit()
 
 ## Whether what's typed is the character's name (any case).
 func matches() -> bool:

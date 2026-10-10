@@ -11,6 +11,11 @@ enum Mode { NONE, SINGLE, HOST, CLIENT, DEDICATED }
 
 const DEFAULT_PORT := 7350
 const MAX_PLAYERS := 32
+const LOST := "Lost the connection to the server."
+const HOST_ENDED := "The host ended the game."
+## Physics ticks a host's connection stays open after it stops, so the players connected
+## to it get told the game ended (closing at once would drop the message).
+const GOODBYE_TICKS := 30
 
 ## Logged in: `username` and `characters` are filled in, show character select.
 signal logged_in
@@ -21,8 +26,9 @@ signal characters_changed(selected: String)
 signal refused(reason: String)
 ## The server put our character in the world (Game.me is filled in).
 signal joined
-## The connection to the server was lost.
-signal disconnected
+## The connection to the server closed: lost, or the host ended the game. `why` says
+## which, in words for the player.
+signal disconnected(why: String)
 
 var mode := Mode.NONE
 ## The server, when this game runs one (single player, host or dedicated).
@@ -31,8 +37,6 @@ var server: TDServer
 var world: TDWorld
 ## Where the server keeps accounts and characters. Tests point it somewhere else.
 var save_dir := "user://characters"
-## Whether a server started for this player may bring in characters saved before accounts.
-var import_legacy_save := true
 ## The account we're logged in to ("" for the local account of single player and host).
 var username := ""
 ## The account's characters as character select shows them: {name, level, job, look}.
@@ -40,6 +44,9 @@ var characters: Array = []
 ## [register?, username, password] to send once the connection is up. Cleared as soon as
 ## it's sent; the password is never kept anywhere else.
 var _pending: Array = []
+## A host's connection after it stopped, open for `_leaving_t` more ticks (GOODBYE_TICKS).
+var _leaving: ENetMultiplayerPeer
+var _leaving_t := 0
 
 func _ready() -> void:
 	multiplayer.peer_disconnected.connect(func(peer: int) -> void:
@@ -54,7 +61,14 @@ func _ready() -> void:
 		refused.emit("Couldn't reach the server."))
 	multiplayer.server_disconnected.connect(func() -> void:
 		stop()
-		disconnected.emit())
+		disconnected.emit(LOST))
+
+func _physics_process(_delta: float) -> void:
+	if _leaving:
+		_leaving.poll()
+		_leaving_t -= 1
+		if _leaving_t <= 0:
+			_close_leaving()
 
 func is_playing() -> bool:
 	return mode != Mode.NONE and mode != Mode.DEDICATED
@@ -74,6 +88,7 @@ func play_single() -> void:
 ## on `port`. Returns "" or what went wrong.
 func host(port := DEFAULT_PORT) -> String:
 	stop()
+	_close_leaving()
 	var peer := ENetMultiplayerPeer.new()
 	if peer.create_server(port, MAX_PLAYERS) != OK:
 		return "Couldn't open port %d. Is another game using it?" % port
@@ -104,6 +119,7 @@ func log_in(address: String, username_: String, password: String, register := fa
 ## A server with no player of its own (run with `-- --server`). Returns "" or what went wrong.
 func run_dedicated(port := DEFAULT_PORT) -> String:
 	stop()
+	_close_leaving()
 	var peer := ENetMultiplayerPeer.new()
 	if peer.create_server(port, MAX_PLAYERS) != OK:
 		return "Couldn't open port %d." % port
@@ -116,25 +132,49 @@ func run_dedicated(port := DEFAULT_PORT) -> String:
 	print("Tera Dawn server listening on port %d" % port)
 	return ""
 
-## Leaves the game and logs out (saving everyone if this game is the server).
+## Whether other players are connected to the game this one hosts.
+func has_guests() -> bool:
+	return mode == Mode.HOST and not multiplayer.get_peers().is_empty()
+
+## Leaves the game and logs out (saving everyone if this game is the server). A host tells
+## the players connected to it that the game has ended.
 func stop() -> void:
+	var guests := has_guests()
+	if guests:
+		for peer in multiplayer.get_peers():
+			send(peer, &"ev_host_ended", [])
 	if server:
 		server.save_all()
 		server.queue_free()
 		server = null
-	if multiplayer.multiplayer_peer and not multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
-		multiplayer.multiplayer_peer.close()
+	var old := multiplayer.multiplayer_peer
 	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
+	if guests:
+		_close_later(old as ENetMultiplayerPeer)
+	elif old and not old is OfflineMultiplayerPeer:
+		old.close()
 	mode = Mode.NONE
 	username = ""
 	characters = []
 	_pending = []
 
+## Keeps a stopped host's connection open for GOODBYE_TICKS so what was just sent (the
+## game ending) gets there. Sent at once too, in case the game is quitting.
+func _close_later(peer: ENetMultiplayerPeer) -> void:
+	_close_leaving()
+	peer.host.flush()
+	_leaving = peer
+	_leaving_t = GOODBYE_TICKS
+
+func _close_leaving() -> void:
+	if _leaving:
+		_leaving.close()
+		_leaving = null
+
 func _start_server(local_player: bool) -> void:
 	server = TDServer.new(save_dir)
 	server.name = "Server"
 	server.local_player = local_player
-	server.lobby.import_legacy_save = local_player and import_legacy_save
 	add_child(server)
 
 # ---------- character select ----------
@@ -155,6 +195,13 @@ func play(char_name: String) -> void:
 ## Leaves the world for character select, still logged in.
 func leave_character() -> void:
 	ask(&"req_leave_character")
+
+## Where a connection comes from (its IP address), or "peer <id>" when that isn't known
+## (single player, tests).
+func address_of(peer: int) -> String:
+	var enet := multiplayer.multiplayer_peer as ENetMultiplayerPeer
+	var conn: ENetPacketPeer = enet.get_peer(peer) if enet and multiplayer.get_peers().has(peer) else null
+	return conn.get_remote_address() if conn else "peer %d" % peer
 
 ## Drops a connection (the server, after too many wrong passwords).
 func kick(peer: int) -> void:
@@ -425,6 +472,12 @@ func ev_refused(reason: String, drop: bool) -> void:
 	if drop:
 		stop()
 	refused.emit(reason)
+
+## The host ended the game it was running (see `stop`).
+@rpc("authority", "call_local", "reliable")
+func ev_host_ended() -> void:
+	stop()
+	disconnected.emit(HOST_ENDED)
 
 @rpc("authority", "call_local", "reliable")
 func ev_joined(character: Dictionary) -> void:

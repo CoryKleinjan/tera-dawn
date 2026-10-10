@@ -56,6 +56,12 @@ func close() -> void:
 	field.visible = false
 	field.release_focus()
 
+## Forgets every line and closes the box (leaving the world: the next character starts clean).
+func clear() -> void:
+	lines.clear()
+	field.text = ""
+	close()
+
 func _send(text: String) -> void:
 	if text.strip_edges() != "":
 		Net.ask(&"req_chat", [text])
