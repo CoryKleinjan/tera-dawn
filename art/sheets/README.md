@@ -145,6 +145,12 @@ after the item ids, replacing the placeholders from `tools/art/make_item_placeho
   "under"` to take the underside from the under pieces). The game joins them into one picture
   per platform (`PlatformSkin`). Cut a clipped ornament off a piece's inner edge with `crop`
   rather than leave it: the game cuts through it where pieces join.
+- **Buildings** (`building_<area>_<large|small>`) are one building per sheet, Gemini edits of
+  the old tileset cuts at four times the detail. Each manifest's `art_px` is the sheet's
+  height over the building's art height (its BuildingDef `height` / TDStage.TEXEL), so it shows
+  at the shared pixel size and its set height. The old `<area>_buildings` tileset cuts are gone.
+- **Backdrops and ropes/props** are cut from the finer Gemini redraws (`*_fine.png`); each
+  cell's `scale` makes it two texels per art pixel at the size it shows on screen.
 - **Not in the game yet**: `climb_tops`, `dawnharbor_midground` and `buildings_<town>` cut into
   `art/build/` only.
 - **Items, pets, projectiles** cut into `assets/sprites/items/`, `pets/` (and

@@ -222,7 +222,7 @@ func test_the_map_sign_is_drawn_sharp_over_the_portal() -> void:
 	if not check(at != null, "%s has a sign" % m.id):
 		return
 	check_eq((at as Vector2).x, m.sign_x, "the words stand over the post")
-	var portal_h := m.biome.portal_frames[0].get_height() * TDStage.TEXEL if not m.biome.portal_frames.is_empty() else 0.0
+	var portal_h := TDStage.art_size(m.biome.portal_frames[0]).y if not m.biome.portal_frames.is_empty() else 0.0
 	check((at as Vector2).y < m.ground_y - portal_h, "and higher than the portal art (%s)" % at)
 	var labels := ui.world.stage.find_children("*", "Label3D", true, false)
 	check(labels.is_empty(), "no text in the 3D stage, where depth of field would blur it")

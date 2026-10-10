@@ -9,5 +9,5 @@ script = ExtResource("1_climb_style_def")
 id = &"rope"
 middle = ExtResource("2_rope_middle")
 bottom = ExtResource("3_rope_bottom")
-texel = 1.0
+texel = 1.25
 climb_animation = &"rope"

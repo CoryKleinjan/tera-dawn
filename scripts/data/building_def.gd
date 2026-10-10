@@ -16,13 +16,14 @@ extends Resource
 ## Where chimney smoke rises from (share across and up the picture). x below 0 means none.
 @export var chimney := Vector2(-1.0, 0.0)
 
-## Game pixels per texel of the picture.
+## Game pixels per art pixel of the picture (TDStage.art_density). The building art is cut
+## so this is TDStage.TEXEL, like all the land around it.
 func texel() -> float:
-	return height / texture.get_height() if texture else 1.0
+	return height / texture.get_height() * TDStage.art_density(texture) if texture else 1.0
 
 ## Its width in game pixels.
 func width() -> float:
-	return texture.get_width() * texel() if texture else 0.0
+	return texture.get_width() * height / texture.get_height() if texture else 0.0
 
 ## How far the doorway's middle is from the picture's middle, in game pixels (flipped or not).
 func door_offset(flip: bool) -> float:

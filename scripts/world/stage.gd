@@ -22,6 +22,14 @@ const ART_DENSITY := {
 	"res://assets/sprites/tiles/": 2.0,
 	"res://assets/sprites/platforms/": 2.0,
 	"res://assets/sprites/ground/": 2.0,
+	"res://assets/sprites/buildings/": 2.0,
+	"res://assets/sprites/backgrounds/": 2.0,
+	# the scenery pieces of props/ (dawnshards there are drop items, drawn at their own size)
+	"res://assets/sprites/props/portal_": 2.0,
+	"res://assets/sprites/props/lantern_": 2.0,
+	"res://assets/sprites/props/ladder_": 2.0,
+	"res://assets/sprites/props/rope": 2.0,
+	"res://assets/sprites/props/vine_": 2.0,
 }
 
 ## The floor is the only land with depth: a block from GROUND_BACK to GROUND_FRONT whose top

@@ -1,8 +1,7 @@
 {
-  "source": "art/source/driftcove_backgrounds.png",
-  "scale": 0.5,
+  "source": "art/source/driftcove_backgrounds_fine.png",
   "label_band": 0.3,
-  "inset": 4,
+  "inset": 11,
   "out_dir": "assets/sprites/backgrounds/driftcove",
   "cells": [
     [
@@ -29,90 +28,90 @@
   "grid": {
     "rows": [
       0,
-      168,
-      335,
-      502,
-      672,
-      847,
-      1030
+      449,
+      894,
+      1340,
+      1794,
+      2261,
+      2750
     ],
     "cols": [
       [
         0,
-        1536
+        4101
       ],
       [
         0,
-        1536
+        4101
       ],
       [
         0,
-        1536
+        4101
       ],
       [
         0,
-        1536
+        4101
       ],
       [
         0,
-        1536
+        4101
       ],
       [
         0,
-        509,
-        1027,
-        1536
+        1359,
+        2742,
+        4101
       ]
     ]
   },
   "overrides": {
     "far": {
-      "extend_bottom": 160,
+      "extend_bottom": 589,
       "blank": [
         [
           0,
           0,
-          200,
-          42
+          534,
+          112
         ]
       ],
-      "scale": 0.4015
+      "scale": 0.5534
     },
     "mid": {
-      "extend_bottom": 160,
+      "extend_bottom": 512,
       "blank": [
         [
           0,
           0,
-          200,
-          42
+          534,
+          112
         ]
       ],
-      "scale": 0.4062
+      "scale": 0.4868
     },
     "near": {
-      "extend_bottom": 160,
+      "extend_bottom": 461,
       "blank": [
         [
           0,
           0,
-          200,
-          42
+          534,
+          112
         ]
       ],
-      "scale": 0.4125
+      "scale": 0.445
     },
     "landmark": {
-      "extend_bottom": 160,
+      "extend_bottom": 538,
       "blank": [
         [
           0,
           0,
-          200,
-          42
+          534,
+          112
         ]
       ],
-      "scale": 0.464
+      "scale": 0.5839
     },
     "clouds": {
       "keep": "split",
@@ -120,28 +119,28 @@
         [
           0,
           0,
-          200,
-          42
+          534,
+          112
         ],
         [
-          420,
-          72,
-          655,
-          128
+          1121,
+          192,
+          1749,
+          342
         ]
       ],
-      "scale": 0.3498
+      "scale": 0.5869
     },
     "sky_body": {
       "fix": "sky_body",
       "alpha": "soft",
       "crop": [
-        160,
-        15,
-        320,
-        140
+        427,
+        40,
+        854,
+        374
       ],
-      "scale": 0.2419
+      "scale": 0.5799
     },
     "motes": {
       "alpha": "soft",
@@ -149,11 +148,11 @@
         [
           0,
           0,
-          200,
-          42
+          534,
+          112
         ]
       ],
-      "scale": 0.3638
+      "scale": 0.436
     }
   }
 }

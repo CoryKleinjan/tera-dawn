@@ -238,7 +238,7 @@ func _climbable(c: ClimbableDef) -> void:
 		s.position = TDStage.to3d(Vector2(c.x, y), z)
 		# the last piece may poke past the bottom; it hides behind the bottom piece or the floor
 		root.add_child(s)
-		y += mid_h - texel
+		y += mid_h - texel / TDStage.art_density(st.middle)  # overlap one texel
 	if st.bottom:
 		var b := TDStage.sprite(st.bottom, texel)
 		b.position = TDStage.to3d(Vector2(c.x, c.bottom + 2.0), z + 0.01)
@@ -254,7 +254,7 @@ func _portal(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
 			frames.add_frame(&"default", t)
 		var s := AnimatedSprite3D.new()
 		s.sprite_frames = frames
-		TDStage.style_sprite(s, TDStage.TEXEL, false)
+		TDStage.style_sprite(s, TDStage.TEXEL / TDStage.art_density(biome.portal_frames[0]), false)
 		s.alpha_cut = SpriteBase3D.ALPHA_CUT_DISABLED
 		s.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		s.offset = Vector2(0, biome.portal_frames[0].get_height() / 2.0)
