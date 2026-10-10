@@ -1,13 +1,14 @@
-[gd_resource type="Resource" script_class="BiomeDef" load_steps=55 format=3]
+[gd_resource type="Resource" script_class="BiomeDef" load_steps=56 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/biome_def.gd" id="1_biome_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/sea_gull.tres" id="90_gulls"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/dawnharbor_top.png" id="2_ground_top"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/dawnharbor_side.png" id="3_ground_side"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/dawnharbor_soil.png" id="4_ground_soil"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/ground_left.png" id="5_ground_left"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/ground_middle.png" id="6_ground_middle"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/ground_right.png" id="7_ground_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor/cap_left.png" id="5_platform_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor/middle_a.png" id="6_platform_middle"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor/cap_right.png" id="7_platform_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor/middle_b.png" id="7b_platform_middle_alt"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/tall_grass.png" id="8_tall_grass"]
 [ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="9_backdrop_layer_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/dawnharbor/sky_body.png" id="10_sky_body"]
@@ -47,7 +48,6 @@ textures = Array[Texture2D]([ExtResource("10_sky_body")])
 mode = 1
 depth = 170.0
 screen_top = Vector2(0.14, 0.14)
-texel = 4.0
 tint = Color(1.3, 1.2, 1.1, 1.0)
 glow = true
 count = 1
@@ -59,7 +59,6 @@ textures = Array[Texture2D]([ExtResource("11_clouds_1"), ExtResource("12_clouds_
 mode = 1
 depth = 130.0
 screen_top = Vector2(0.0, 0.22)
-texel = 2.8
 tint = Color(1.0, 1.0, 1.0, 0.92)
 glow = false
 count = 8
@@ -71,7 +70,6 @@ textures = Array[Texture2D]([ExtResource("15_far")])
 mode = 0
 depth = 110.0
 screen_top = Vector2(0.2, 0.2)
-texel = 2.3
 tint = Color(1.0, 1.0, 1.0, 1.0)
 glow = false
 count = 1
@@ -83,7 +81,6 @@ textures = Array[Texture2D]([ExtResource("16_landmark")])
 mode = 1
 depth = 85.0
 screen_top = Vector2(0.27, 0.27)
-texel = 2.1
 tint = Color(1.0, 1.0, 1.0, 1.0)
 glow = false
 count = 1
@@ -95,7 +92,6 @@ textures = Array[Texture2D]([ExtResource("17_mid")])
 mode = 0
 depth = 60.0
 screen_top = Vector2(0.36, 0.36)
-texel = 2.0
 tint = Color(1.0, 1.0, 1.0, 1.0)
 glow = false
 count = 1
@@ -107,7 +103,6 @@ textures = Array[Texture2D]([ExtResource("18_motes")])
 mode = 0
 depth = 50.0
 screen_top = Vector2(0.25, 0.25)
-texel = 2.0
 tint = Color(1.4, 1.4, 1.4, 0.75)
 glow = true
 count = 1
@@ -119,7 +114,6 @@ textures = Array[Texture2D]([ExtResource("19_near")])
 mode = 0
 depth = 34.0
 screen_top = Vector2(0.42, 0.42)
-texel = 1.8
 tint = Color(1.0, 1.0, 1.0, 1.0)
 glow = false
 count = 1
@@ -130,7 +124,7 @@ script = ExtResource("20_decor_def")
 textures = Array[Texture2D]([ExtResource("31_building_large"), ExtResource("32_building_small"), ExtResource("33_signature_prop")])
 spacing = Vector2(480.0, 900.0)
 depth = Vector2(-8.8, -7.6)
-scale = Vector2(1.1, 1.3)
+scale = Vector2(1.09, 1.09)
 chance = 0.6
 texel = 1.25
 shaded = true
@@ -140,7 +134,7 @@ script = ExtResource("20_decor_def")
 textures = Array[Texture2D]([ExtResource("21_tree_large"), ExtResource("22_tree_small")])
 spacing = Vector2(170.0, 320.0)
 depth = Vector2(-8.5, -5.5)
-scale = Vector2(1.4, 1.9)
+scale = Vector2(1.3, 1.3)
 chance = 1.0
 texel = 1.25
 shaded = true
@@ -160,7 +154,7 @@ script = ExtResource("20_decor_def")
 textures = Array[Texture2D]([ExtResource("25_rock_large"), ExtResource("26_rock_small"), ExtResource("27_stump"), ExtResource("28_fence")])
 spacing = Vector2(240.0, 440.0)
 depth = Vector2(-4.0, -1.8)
-scale = Vector2(0.9, 1.1)
+scale = Vector2(0.94, 1.1)
 chance = 0.7
 texel = 1.25
 shaded = true
@@ -170,7 +164,7 @@ script = ExtResource("20_decor_def")
 textures = Array[Texture2D]([ExtResource("29_flowers"), ExtResource("29_flowers"), ExtResource("30_signature_plant")])
 spacing = Vector2(70.0, 160.0)
 depth = Vector2(-3.0, 2.4)
-scale = Vector2(0.6, 0.85)
+scale = Vector2(0.94, 0.94)
 chance = 1.0
 texel = 1.25
 shaded = true
@@ -180,7 +174,7 @@ script = ExtResource("20_decor_def")
 textures = Array[Texture2D]([ExtResource("29_flowers"), ExtResource("24_bush_small")])
 spacing = Vector2(90.0, 190.0)
 depth = Vector2(-0.6, -0.2)
-scale = Vector2(0.6, 0.8)
+scale = Vector2(0.94, 0.94)
 chance = 0.6
 texel = 1.25
 shaded = true
@@ -190,7 +184,7 @@ script = ExtResource("20_decor_def")
 textures = Array[Texture2D]([ExtResource("33_signature_prop")])
 spacing = Vector2(380.0, 700.0)
 depth = Vector2(-8.8, -7.0)
-scale = Vector2(1.0, 1.25)
+scale = Vector2(1.0, 1.07)
 chance = 0.7
 texel = 1.25
 shaded = true
@@ -216,10 +210,10 @@ lantern_light = Color(1.0, 0.7529411764705882, 0.4392156862745098, 1.0)
 ground_top = ExtResource("2_ground_top")
 ground_side = ExtResource("3_ground_side")
 ground_soil = ExtResource("4_ground_soil")
-platform_left = ExtResource("5_ground_left")
-platform_middle = ExtResource("6_ground_middle")
-platform_right = ExtResource("7_ground_right")
-platform_texel = 1.0
+platform_left = ExtResource("5_platform_left")
+platform_middle = ExtResource("6_platform_middle")
+platform_middle_alt = ExtResource("7b_platform_middle_alt")
+platform_right = ExtResource("7_platform_right")
 edge_grass = Array[Texture2D]([ExtResource("8_tall_grass")])
 backdrop = Array[ExtResource("9_backdrop_layer_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7")])
 ground_decor = Array[ExtResource("20_decor_def")]([SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12")])

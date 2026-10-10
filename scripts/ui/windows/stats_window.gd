@@ -16,8 +16,8 @@ const COL_VALUE := 112.0
 ## Where the right-hand column of combat numbers starts, and its values.
 const COL_RIGHT := 168.0
 const COL_RIGHT_VALUE := 98.0
-## Pairs with short labels (HP and MP) put their values closer.
-const COL_SHORT_VALUE := 40.0
+## The room kept between a left-hand value and the right-hand column's label.
+const COL_GAP := 8.0
 ## The window's height without the job paths, and the paths' rows.
 const BASE_H := 354.0
 const PATH_ROW_H := 13.0
@@ -57,10 +57,12 @@ func _draw_body() -> void:
 	var s := Game.me.stats
 	var y := 52.0
 	y = _pair(y, ["Job", Game.me.job.display_name], ["Level", str(Game.me.level)])
-	y = _row(y, "Guild", Game.me.guild if Game.me.guild != "" else "-")
-	y = _row(y, "Fame", str(Game.me.fame), Palette.GOOD if Game.me.fame > 0 else (Palette.WARN if Game.me.fame < 0 else Palette.MIST))
+	y = _pair(y, ["Guild", Game.me.guild if Game.me.guild != "" else "-"],
+		["Fame", str(Game.me.fame), Palette.GOOD if Game.me.fame > 0 else (Palette.WARN if Game.me.fame < 0 else Palette.MIST)])
+	# the long numbers get a row each, so they line up with the values above
 	y = _row(y, "EXP", TDStatusBar.MAX_LEVEL_TEXT if Game.me.at_max_level() else "%d / %d" % [Game.me.xp, Game.me.xp_need()])
-	y = _pair(y, ["HP", "%d / %d" % [Game.me.health.hp, Game.me.max_hp()]], ["MP", "%d / %d" % [Game.me.mp, Game.me.max_mp()]], COL_SHORT_VALUE, COL_SHORT_VALUE)
+	y = _row(y, "HP", "%d / %d" % [Game.me.health.hp, Game.me.max_hp()])
+	y = _row(y, "MP", "%d / %d" % [Game.me.mp, Game.me.max_mp()])
 	y = _divider(y)
 	auto_rect = Rect2()
 	if Game.me.ap > 0 and not Game.me.job.is_starting_job():
@@ -128,16 +130,19 @@ func auto_assign() -> void:
 func _plus_x() -> float:
 	return size.x - PAD - 2 - STAT_PLUS
 
-func _row(y: float, label: String, value: String, col := Palette.MIST, x := 0.0, value_x := COL_VALUE, step := ROW_H) -> float:
+## A label and its value, the value `value_x` from the label (so values line up in columns),
+## shrunk if it's wider than `value_w`.
+func _row(y: float, label: String, value: String, col := Palette.MIST, x := 0.0, value_x := COL_VALUE, step := ROW_H, value_w := INF) -> float:
 	DrawUtil.text(self, Game.ui_font, Vector2(PAD + 2 + x, y), label, 12, Palette.MUTED, 1)
-	DrawUtil.text(self, Game.ui_font, Vector2(PAD + x + value_x, y), value, 12, col, 1, 3, Color(Palette.NIGHT, 0.6))
+	DrawUtil.text(self, Game.ui_font, Vector2(PAD + x + value_x, y), value, DrawUtil.fit_size(Game.ui_font, value, 12, value_w, 9), col, 1, 3, Color(Palette.NIGHT, 0.6))
 	return y + step
 
-## Two rows side by side, each [label, value] or [label, value, colour], with the values
-## `left_value_x` and `right_value_x` from their labels.
-func _pair(y: float, left: Array, right: Array, left_value_x := COL_VALUE, right_value_x := COL_RIGHT_VALUE) -> float:
-	_row(y, left[0], left[1], left[2] if left.size() > 2 else Palette.MIST, 0.0, left_value_x)
-	return _row(y, right[0], right[1], right[2] if right.size() > 2 else Palette.MIST, COL_RIGHT, right_value_x)
+## Two rows side by side, each [label, value] or [label, value, colour], their values in the
+## same columns as every other row's. A long value shrinks rather than run into the right-hand
+## label or the frame.
+func _pair(y: float, left: Array, right: Array) -> float:
+	_row(y, left[0], left[1], left[2] if left.size() > 2 else Palette.MIST, 0.0, COL_VALUE, ROW_H, COL_RIGHT - COL_VALUE - COL_GAP)
+	return _row(y, right[0], right[1], right[2] if right.size() > 2 else Palette.MIST, COL_RIGHT, COL_RIGHT_VALUE, ROW_H, size.x - PAD * 2 - COL_RIGHT - COL_RIGHT_VALUE)
 
 func _divider(y: float) -> float:
 	draw_line(Vector2(PAD, y - 8), Vector2(size.x - PAD, y - 8), Color(Palette.SUN, 0.35), 1.0)

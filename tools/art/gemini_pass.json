@@ -29,7 +29,7 @@
   {
    "id": "meadow_tileset",
    "prompts": null,
-   "batch": null,
+   "batch": "meadow tileset (edit)",
    "with": null,
    "refs": [],
    "save": "meadow_tileset.png",
@@ -40,7 +40,14 @@
     8
    ],
    "anchor": null,
-   "note": "No prompt: Cory's original environment tileset (part 1 'environment-tileset.png', 'already done'). Area tilesets W1a-W6a copy it. Not run."
+   "note": "Cory's original painted tileset (part 1). 2026-10-10 environment-resolution thread: redrawn as pixel art by editing the old sheet, so the start area matches the Gemini area tilesets (same pixel size as greenbough_tileset).",
+   "edit": {
+    "base": "art/source/meadow_tileset.png",
+    "refs": [
+     "art/source/greenbough_tileset.png"
+    ],
+    "text": "This sheet is my meadow tileset: 29 labelled pieces of grassy land, bushes, trees, rocks, a fence, a signpost, flowers and tall grass, in a grid of 5 rows. Redraw EVERY piece as crisp pixel art in exactly the style of the second attached image (my Greenbough tileset): the same chunky pixel size (one art pixel is about 4 image pixels wide), the same flat shading with few colours, and the same crisp dark plum-brown outline. Keep each piece's shape, size, position, colours and label exactly as in my sheet; only the rendering changes from smooth painting to pixel art. Replace the dark navy background and the cell divider fill with one flat pure magenta #FF00FF everywhere, keeping thin dark divider lines between the cells. No drop shadows under the pieces."
+   }
   },
   {
    "id": "paperdoll_body",
@@ -3916,6 +3923,806 @@
    "anchor": "buildings_driftcove",
    "note": "New (manifest exists). NOT parseable: fence at part 9 line 201 starts 'R7. Room:', no 'Batch R7:'.",
    "extra": "- You must answer with the finished image itself, not text."
+  },
+  {
+   "id": "building_dawnharbor_large",
+   "prompts": null,
+   "batch": "building dawnharbor large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_dawnharbor_large.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "assets/sprites/buildings/dawnharbor/large.png",
+    "base_scale": 4.76,
+    "text": "This is one building from my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same building with the same outline shape, size, proportions, colours, roof, windows, signs and door in the same places, the same crisp dark plum-brown outline and the same light from the upper left. Use the smaller pixels for real detail the big blocks could not show: wood grain, roof tiles or shingles, stone courses, window frames and panes, hinges, trims. It stays one single building, filling the image the same way. Nothing else in the picture: no ground, grass, shadow, people or sky; the background is flat pure magenta #FF00FF."
+   }
+  },
+  {
+   "id": "building_dawnharbor_small",
+   "prompts": null,
+   "batch": "building dawnharbor small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_dawnharbor_small.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "assets/sprites/buildings/dawnharbor/small.png",
+    "base_scale": 5.63,
+    "text": "This is one building from my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same building with the same outline shape, size, proportions, colours, roof, windows, signs and door in the same places, the same crisp dark plum-brown outline and the same light from the upper left. Use the smaller pixels for real detail the big blocks could not show: wood grain, roof tiles or shingles, stone courses, window frames and panes, hinges, trims. It stays one single building, filling the image the same way. Nothing else in the picture: no ground, grass, shadow, people or sky; the background is flat pure magenta #FF00FF."
+   }
+  },
+  {
+   "id": "building_driftcove_large",
+   "prompts": null,
+   "batch": "building driftcove large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_driftcove_large.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "assets/sprites/buildings/driftcove/large.png",
+    "base_scale": 5.02,
+    "text": "This is one building from my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same building with the same outline shape, size, proportions, colours, roof, windows, signs and door in the same places, the same crisp dark plum-brown outline and the same light from the upper left. Use the smaller pixels for real detail the big blocks could not show: wood grain, roof tiles or shingles, stone courses, window frames and panes, hinges, trims. It stays one single building, filling the image the same way. Nothing else in the picture: no ground, grass, shadow, people or sky; the background is flat pure magenta #FF00FF."
+   }
+  },
+  {
+   "id": "building_driftcove_small",
+   "prompts": null,
+   "batch": "building driftcove small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_driftcove_small.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "assets/sprites/buildings/driftcove/small.png",
+    "base_scale": 4.63,
+    "text": "This is one building from my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same building with the same outline shape, size, proportions, colours, roof, windows, signs and door in the same places, the same crisp dark plum-brown outline and the same light from the upper left. Use the smaller pixels for real detail the big blocks could not show: wood grain, roof tiles or shingles, stone courses, window frames and panes, hinges, trims. It stays one single building, filling the image the same way. Nothing else in the picture: no ground, grass, shadow, people or sky; the background is flat pure magenta #FF00FF."
+   }
+  },
+  {
+   "id": "building_emberreach_large",
+   "prompts": null,
+   "batch": "building emberreach large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_emberreach_large.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "assets/sprites/buildings/emberreach/large.png",
+    "base_scale": 5.22,
+    "text": "This is one building from my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same building with the same outline shape, size, proportions, colours, roof, windows, signs and door in the same places, the same crisp dark plum-brown outline and the same light from the upper left. Use the smaller pixels for real detail the big blocks could not show: wood grain, roof tiles or shingles, stone courses, window frames and panes, hinges, trims. It stays one single building, filling the image the same way. Nothing else in the picture: no ground, grass, shadow, people or sky; the background is flat pure magenta #FF00FF."
+   }
+  },
+  {
+   "id": "building_emberreach_small",
+   "prompts": null,
+   "batch": "building emberreach small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_emberreach_small.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "assets/sprites/buildings/emberreach/small.png",
+    "base_scale": 5.45,
+    "text": "This is one building from my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same building with the same outline shape, size, proportions, colours, roof, windows, signs and door in the same places, the same crisp dark plum-brown outline and the same light from the upper left. Use the smaller pixels for real detail the big blocks could not show: wood grain, roof tiles or shingles, stone courses, window frames and panes, hinges, trims. It stays one single building, filling the image the same way. Nothing else in the picture: no ground, grass, shadow, people or sky; the background is flat pure magenta #FF00FF."
+   }
+  },
+  {
+   "id": "building_greenbough_large",
+   "prompts": null,
+   "batch": "building greenbough large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_greenbough_large.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "assets/sprites/buildings/greenbough/large.png",
+    "base_scale": 4.25,
+    "text": "This is one building from my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same building with the same outline shape, size, proportions, colours, roof, windows, signs and door in the same places, the same crisp dark plum-brown outline and the same light from the upper left. Use the smaller pixels for real detail the big blocks could not show: wood grain, roof tiles or shingles, stone courses, window frames and panes, hinges, trims. It stays one single building, filling the image the same way. Nothing else in the picture: no ground, grass, shadow, people or sky; the background is flat pure magenta #FF00FF."
+   }
+  },
+  {
+   "id": "building_greenbough_small",
+   "prompts": null,
+   "batch": "building greenbough small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_greenbough_small.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "assets/sprites/buildings/greenbough/small.png",
+    "base_scale": 4.3,
+    "text": "This is one building from my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same building with the same outline shape, size, proportions, colours, roof, windows, signs and door in the same places, the same crisp dark plum-brown outline and the same light from the upper left. Use the smaller pixels for real detail the big blocks could not show: wood grain, roof tiles or shingles, stone courses, window frames and panes, hinges, trims. It stays one single building, filling the image the same way. Nothing else in the picture: no ground, grass, shadow, people or sky; the background is flat pure magenta #FF00FF."
+   }
+  },
+  {
+   "id": "building_lanternfall_large",
+   "prompts": null,
+   "batch": "building lanternfall large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_lanternfall_large.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "assets/sprites/buildings/lanternfall/large.png",
+    "base_scale": 4.7,
+    "text": "This is one building from my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same building with the same outline shape, size, proportions, colours, roof, windows, signs and door in the same places, the same crisp dark plum-brown outline and the same light from the upper left. Use the smaller pixels for real detail the big blocks could not show: wood grain, roof tiles or shingles, stone courses, window frames and panes, hinges, trims. It stays one single building, filling the image the same way. Nothing else in the picture: no ground, grass, shadow, people or sky; the background is flat pure magenta #FF00FF."
+   }
+  },
+  {
+   "id": "building_lanternfall_small",
+   "prompts": null,
+   "batch": "building lanternfall small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_lanternfall_small.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "assets/sprites/buildings/lanternfall/small.png",
+    "base_scale": 5.85,
+    "text": "This is one building from my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same building with the same outline shape, size, proportions, colours, roof, windows, signs and door in the same places, the same crisp dark plum-brown outline and the same light from the upper left. Use the smaller pixels for real detail the big blocks could not show: wood grain, roof tiles or shingles, stone courses, window frames and panes, hinges, trims. It stays one single building, filling the image the same way. Nothing else in the picture: no ground, grass, shadow, people or sky; the background is flat pure magenta #FF00FF."
+   }
+  },
+  {
+   "id": "building_lumewood_large",
+   "prompts": null,
+   "batch": "building lumewood large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_lumewood_large.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "assets/sprites/buildings/lumewood/large.png",
+    "base_scale": 4.68,
+    "text": "This is one building from my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same building with the same outline shape, size, proportions, colours, roof, windows, signs and door in the same places, the same crisp dark plum-brown outline and the same light from the upper left. Use the smaller pixels for real detail the big blocks could not show: wood grain, roof tiles or shingles, stone courses, window frames and panes, hinges, trims. It stays one single building, filling the image the same way. Nothing else in the picture: no ground, grass, shadow, people or sky; the background is flat pure magenta #FF00FF."
+   }
+  },
+  {
+   "id": "building_lumewood_small",
+   "prompts": null,
+   "batch": "building lumewood small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_lumewood_small.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "assets/sprites/buildings/lumewood/small.png",
+    "base_scale": 5.28,
+    "text": "This is one building from my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same building with the same outline shape, size, proportions, colours, roof, windows, signs and door in the same places, the same crisp dark plum-brown outline and the same light from the upper left. Use the smaller pixels for real detail the big blocks could not show: wood grain, roof tiles or shingles, stone courses, window frames and panes, hinges, trims. It stays one single building, filling the image the same way. Nothing else in the picture: no ground, grass, shadow, people or sky; the background is flat pure magenta #FF00FF."
+   }
+  },
+  {
+   "id": "ropes_props_fine",
+   "prompts": null,
+   "batch": "ropes and props (edit, finer pixels)",
+   "with": null,
+   "refs": [],
+   "save": "ropes_props_fine.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    4,
+    5
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "art/source/ropes_props_b.png",
+    "base_scale": 2.5,
+    "text": "This is my sheet of ropes, ladders, vines, portal frames, a portal stone base, lantern posts and dawnshard crystals, enlarged so its pixels are big blocks. Redraw EVERY piece as detailed pixel art with pixels about two and a half times smaller, keeping each piece's shape, size, position, colours and label exactly. Use the smaller pixels for real detail: rope twists, wood grain, iron fittings, the lantern's glass and flame, the swirl and sparkles in the portal, crystal facets."
+   }
+  },
+  {
+   "id": "meadow_backgrounds_fine",
+   "prompts": null,
+   "batch": "meadow backgrounds (edit, finer pixels)",
+   "with": null,
+   "refs": [],
+   "save": "meadow_backgrounds_a_fine.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    6,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "art/source/meadow_backgrounds_a.png",
+    "base_scale": 2.67,
+    "text": "This is my sheet of parallax background layers for one area of the game, enlarged so its pixels are big blocks. Redraw EVERY layer and piece as detailed pixel art with pixels about two and a half times smaller, keeping each one's shape, size, position, colours, light and label exactly, and keeping every strip's left and right edges matching so it still tiles sideways. Use the smaller pixels for real detail: individual trees and leaves, rock faces, rooftops and windows, wave crests, cloud puffs."
+   }
+  },
+  {
+   "id": "ember_backgrounds_fine",
+   "prompts": null,
+   "batch": "ember backgrounds (edit, finer pixels)",
+   "with": null,
+   "refs": [],
+   "save": "ember_backgrounds_fine.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    6,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "art/source/ember_backgrounds.png",
+    "base_scale": 2.67,
+    "text": "This is my sheet of parallax background layers for one area of the game, enlarged so its pixels are big blocks. Redraw EVERY layer and piece as detailed pixel art with pixels about two and a half times smaller, keeping each one's shape, size, position, colours, light and label exactly, and keeping every strip's left and right edges matching so it still tiles sideways. Use the smaller pixels for real detail: individual trees and leaves, rock faces, rooftops and windows, wave crests, cloud puffs."
+   }
+  },
+  {
+   "id": "dawnharbor_backgrounds_fine",
+   "prompts": null,
+   "batch": "dawnharbor backgrounds (edit, finer pixels)",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_backgrounds_fine.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    13,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "art/source/dawnharbor_backgrounds.png",
+    "base_scale": 1.5,
+    "text": "This is my sheet of parallax background layers for one area of the game, enlarged so its pixels are big blocks. Redraw EVERY layer and piece as detailed pixel art with pixels about one and a half times smaller, keeping each one's shape, size, position, colours, light and label exactly, and keeping every strip's left and right edges matching so it still tiles sideways. Use the smaller pixels for real detail: individual trees and leaves, rock faces, rooftops and windows, wave crests, cloud puffs."
+   }
+  },
+  {
+   "id": "driftcove_backgrounds_fine",
+   "prompts": null,
+   "batch": "driftcove backgrounds (edit, finer pixels)",
+   "with": null,
+   "refs": [],
+   "save": "driftcove_backgrounds_fine.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    7,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "art/source/driftcove_backgrounds.png",
+    "base_scale": 2.67,
+    "text": "This is my sheet of parallax background layers for one area of the game, enlarged so its pixels are big blocks. Redraw EVERY layer and piece as detailed pixel art with pixels about two and a half times smaller, keeping each one's shape, size, position, colours, light and label exactly, and keeping every strip's left and right edges matching so it still tiles sideways. Use the smaller pixels for real detail: individual trees and leaves, rock faces, rooftops and windows, wave crests, cloud puffs."
+   }
+  },
+  {
+   "id": "greenbough_backgrounds_fine",
+   "prompts": null,
+   "batch": "greenbough backgrounds (edit, finer pixels)",
+   "with": null,
+   "refs": [],
+   "save": "greenbough_backgrounds_fine.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    7,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "art/source/greenbough_backgrounds.png",
+    "base_scale": 2.67,
+    "text": "This is my sheet of parallax background layers for one area of the game, enlarged so its pixels are big blocks. Redraw EVERY layer and piece as detailed pixel art with pixels about two and a half times smaller, keeping each one's shape, size, position, colours, light and label exactly, and keeping every strip's left and right edges matching so it still tiles sideways. Use the smaller pixels for real detail: individual trees and leaves, rock faces, rooftops and windows, wave crests, cloud puffs."
+   }
+  },
+  {
+   "id": "lumewood_backgrounds_fine",
+   "prompts": null,
+   "batch": "lumewood backgrounds (edit, finer pixels)",
+   "with": null,
+   "refs": [],
+   "save": "lumewood_backgrounds_fine.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    7,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "art/source/lumewood_backgrounds.png",
+    "base_scale": 2.67,
+    "text": "This is my sheet of parallax background layers for one area of the game, enlarged so its pixels are big blocks. Redraw EVERY layer and piece as detailed pixel art with pixels about two and a half times smaller, keeping each one's shape, size, position, colours, light and label exactly, and keeping every strip's left and right edges matching so it still tiles sideways. Use the smaller pixels for real detail: individual trees and leaves, rock faces, rooftops and windows, wave crests, cloud puffs."
+   }
+  },
+  {
+   "id": "emberreach_backgrounds_fine",
+   "prompts": null,
+   "batch": "emberreach backgrounds (edit, finer pixels)",
+   "with": null,
+   "refs": [],
+   "save": "emberreach_backgrounds_fine.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    7,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "art/source/emberreach_backgrounds.png",
+    "base_scale": 2.67,
+    "text": "This is my sheet of parallax background layers for one area of the game, enlarged so its pixels are big blocks. Redraw EVERY layer and piece as detailed pixel art with pixels about two and a half times smaller, keeping each one's shape, size, position, colours, light and label exactly, and keeping every strip's left and right edges matching so it still tiles sideways. Use the smaller pixels for real detail: individual trees and leaves, rock faces, rooftops and windows, wave crests, cloud puffs."
+   }
+  },
+  {
+   "id": "lanternfall_backgrounds_fine",
+   "prompts": null,
+   "batch": "lanternfall backgrounds (edit, finer pixels)",
+   "with": null,
+   "refs": [],
+   "save": "lanternfall_backgrounds_fine.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    7,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "art/source/lanternfall_backgrounds.png",
+    "base_scale": 2.67,
+    "text": "This is my sheet of parallax background layers for one area of the game, enlarged so its pixels are big blocks. Redraw EVERY layer and piece as detailed pixel art with pixels about two and a half times smaller, keeping each one's shape, size, position, colours, light and label exactly, and keeping every strip's left and right edges matching so it still tiles sideways. Use the smaller pixels for real detail: individual trees and leaves, rock faces, rooftops and windows, wave crests, cloud puffs."
+   }
+  },
+  {
+   "id": "room_dawnharbor_wall",
+   "prompts": null,
+   "batch": "room dawnharbor back wall (edit, finer pixels)",
+   "with": null,
+   "refs": [],
+   "save": "room_dawnharbor_wall.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "art/source/room_dawnharbor.png",
+    "base_crop": [
+     478,
+     51,
+     848,
+     515
+    ],
+    "base_scale": 8.83,
+    "text": "This is the back wall of a room in my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same wall with the same beams, panelling, windows, hangings and decorations in the same places, the same colours and the same warm indoor light. Use the smaller pixels for real detail the big blocks could not show: wood grain, plaster texture, stone courses, window frames and panes, fabric weave, leaves and petals. It fills the whole image edge to edge like now, and its left and right edges still match so it tiles sideways. No people, no labels, no border."
+   }
+  },
+  {
+   "id": "room_driftcove_wall",
+   "prompts": null,
+   "batch": "room driftcove back wall (edit, finer pixels)",
+   "with": null,
+   "refs": [],
+   "save": "room_driftcove_wall.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "art/source/room_driftcove.png",
+    "base_crop": [
+     37,
+     51,
+     837,
+     480
+    ],
+    "base_scale": 5.12,
+    "text": "This is the back wall of a room in my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same wall with the same beams, panelling, windows, hangings and decorations in the same places, the same colours and the same warm indoor light. Use the smaller pixels for real detail the big blocks could not show: wood grain, plaster texture, stone courses, window frames and panes, fabric weave, leaves and petals. It fills the whole image edge to edge like now, and its left and right edges still match so it tiles sideways. No people, no labels, no border."
+   }
+  },
+  {
+   "id": "room_emberforge_wall",
+   "prompts": null,
+   "batch": "room emberforge back wall (edit, finer pixels)",
+   "with": null,
+   "refs": [],
+   "save": "room_emberforge_wall.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "art/source/room_emberforge.png",
+    "base_crop": [
+     68,
+     51,
+     818,
+     492
+    ],
+    "base_scale": 5.46,
+    "text": "This is the back wall of a room in my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same wall with the same beams, panelling, windows, hangings and decorations in the same places, the same colours and the same warm indoor light. Use the smaller pixels for real detail the big blocks could not show: wood grain, plaster texture, stone courses, window frames and panes, fabric weave, leaves and petals. It fills the whole image edge to edge like now, and its left and right edges still match so it tiles sideways. No people, no labels, no border."
+   }
+  },
+  {
+   "id": "room_greenbough_wall",
+   "prompts": null,
+   "batch": "room greenbough back wall (edit, finer pixels)",
+   "with": null,
+   "refs": [],
+   "save": "room_greenbough_wall.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "art/source/room_greenbough.png",
+    "base_crop": [
+     77,
+     40,
+     503,
+     578
+    ],
+    "base_scale": 7.61,
+    "text": "This is the back wall of a room in my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same wall with the same beams, panelling, windows, hangings and decorations in the same places, the same colours and the same warm indoor light. Use the smaller pixels for real detail the big blocks could not show: wood grain, plaster texture, stone courses, window frames and panes, fabric weave, leaves and petals. It fills the whole image edge to edge like now, and its left and right edges still match so it tiles sideways. No people, no labels, no border."
+   }
+  },
+  {
+   "id": "room_lanternfall_wall",
+   "prompts": null,
+   "batch": "room lanternfall back wall (edit, finer pixels)",
+   "with": null,
+   "refs": [],
+   "save": "room_lanternfall_wall.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "art/source/room_lanternfall.png",
+    "base_crop": [
+     28,
+     54,
+     408,
+     492
+    ],
+    "base_scale": 9.35,
+    "text": "This is the back wall of a room in my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same wall with the same beams, panelling, windows, hangings and decorations in the same places, the same colours and the same warm indoor light. Use the smaller pixels for real detail the big blocks could not show: wood grain, plaster texture, stone courses, window frames and panes, fabric weave, leaves and petals. It fills the whole image edge to edge like now, and its left and right edges still match so it tiles sideways. No people, no labels, no border."
+   }
+  },
+  {
+   "id": "room_lumewood_wall",
+   "prompts": null,
+   "batch": "room lumewood back wall (edit, finer pixels)",
+   "with": null,
+   "refs": [],
+   "save": "room_lumewood_wall.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "art/source/room_lumewood.png",
+    "base_crop": [
+     26,
+     67,
+     408,
+     470
+    ],
+    "base_scale": 10.16,
+    "text": "This is the back wall of a room in my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same wall with the same beams, panelling, windows, hangings and decorations in the same places, the same colours and the same warm indoor light. Use the smaller pixels for real detail the big blocks could not show: wood grain, plaster texture, stone courses, window frames and panes, fabric weave, leaves and petals. It fills the whole image edge to edge like now, and its left and right edges still match so it tiles sideways. No people, no labels, no border."
+   }
+  },
+  {
+   "id": "room_meadow_wall",
+   "prompts": null,
+   "batch": "room meadow back wall (edit, finer pixels)",
+   "with": null,
+   "refs": [],
+   "save": "room_meadow_wall.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "art/source/room_meadow.png",
+    "base_crop": [
+     24,
+     43,
+     425,
+     378
+    ],
+    "base_scale": 10.21,
+    "text": "This is the back wall of a room in my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same wall with the same beams, panelling, windows, hangings and decorations in the same places, the same colours and the same warm indoor light. Use the smaller pixels for real detail the big blocks could not show: wood grain, plaster texture, stone courses, window frames and panes, fabric weave, leaves and petals. It fills the whole image edge to edge like now, and its left and right edges still match so it tiles sideways. No people, no labels, no border."
+   }
+  },
+  {
+   "id": "room_dawnharbor_fine",
+   "prompts": null,
+   "batch": "room dawnharbor sheet (edit, finer pixels)",
+   "with": null,
+   "refs": [],
+   "save": "room_dawnharbor_fine.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "art/source/room_dawnharbor.png",
+    "base_scale": 2.31,
+    "text": "This is my sheet of room interior pieces for one area of the game (back wall, doorway, floor tiles and furniture), enlarged so its pixels are big blocks. Redraw EVERY piece as detailed pixel art with pixels about two and a half times smaller, keeping each piece's shape, size, position, colours, light and label exactly, and keeping the floor tiles seamless so they still repeat in both directions. Use the smaller pixels for real detail: wood grain, planks and nails, stone, fabric, glass, books, flames."
+   }
+  },
+  {
+   "id": "room_driftcove_fine",
+   "prompts": null,
+   "batch": "room driftcove sheet (edit, finer pixels)",
+   "with": null,
+   "refs": [],
+   "save": "room_driftcove_fine.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "art/source/room_driftcove.png",
+    "base_scale": 2.31,
+    "text": "This is my sheet of room interior pieces for one area of the game (back wall, doorway, floor tiles and furniture), enlarged so its pixels are big blocks. Redraw EVERY piece as detailed pixel art with pixels about two and a half times smaller, keeping each piece's shape, size, position, colours, light and label exactly, and keeping the floor tiles seamless so they still repeat in both directions. Use the smaller pixels for real detail: wood grain, planks and nails, stone, fabric, glass, books, flames."
+   }
+  },
+  {
+   "id": "room_emberforge_fine",
+   "prompts": null,
+   "batch": "room emberforge sheet (edit, finer pixels)",
+   "with": null,
+   "refs": [],
+   "save": "room_emberforge_fine.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "art/source/room_emberforge.png",
+    "base_scale": 2.31,
+    "text": "This is my sheet of room interior pieces for one area of the game (back wall, doorway, floor tiles and furniture), enlarged so its pixels are big blocks. Redraw EVERY piece as detailed pixel art with pixels about two and a half times smaller, keeping each piece's shape, size, position, colours, light and label exactly, and keeping the floor tiles seamless so they still repeat in both directions. Use the smaller pixels for real detail: wood grain, planks and nails, stone, fabric, glass, books, flames."
+   }
+  },
+  {
+   "id": "room_greenbough_fine",
+   "prompts": null,
+   "batch": "room greenbough sheet (edit, finer pixels)",
+   "with": null,
+   "refs": [],
+   "save": "room_greenbough_fine.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "art/source/room_greenbough.png",
+    "base_scale": 2.31,
+    "text": "This is my sheet of room interior pieces for one area of the game (back wall, doorway, floor tiles and furniture), enlarged so its pixels are big blocks. Redraw EVERY piece as detailed pixel art with pixels about two and a half times smaller, keeping each piece's shape, size, position, colours, light and label exactly, and keeping the floor tiles seamless so they still repeat in both directions. Use the smaller pixels for real detail: wood grain, planks and nails, stone, fabric, glass, books, flames."
+   }
+  },
+  {
+   "id": "room_lanternfall_fine",
+   "prompts": null,
+   "batch": "room lanternfall sheet (edit, finer pixels)",
+   "with": null,
+   "refs": [],
+   "save": "room_lanternfall_fine.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel). Redone once: the first answer painted the background grey/brown instead of magenta.",
+   "edit": {
+    "base": "art/source/room_lanternfall.png",
+    "base_scale": 2.31,
+    "text": "This is my sheet of room interior pieces for one area of the game (back wall, doorway, floor tiles and furniture), enlarged so its pixels are big blocks. Redraw EVERY piece as detailed pixel art with pixels about two and a half times smaller, keeping each piece's shape, size, position, colours, light and label exactly, and keeping the floor tiles seamless so they still repeat in both directions. Use the smaller pixels for real detail: wood grain, planks and nails, stone, fabric, glass, books, flames. The background around every piece stays flat pure magenta #FF00FF exactly as in the attached image: never grey, brown, purple or a gradient. Add nothing that is not in the attached image."
+   }
+  },
+  {
+   "id": "room_lumewood_fine",
+   "prompts": null,
+   "batch": "room lumewood sheet (edit, finer pixels)",
+   "with": null,
+   "refs": [],
+   "save": "room_lumewood_fine.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel).",
+   "edit": {
+    "base": "art/source/room_lumewood.png",
+    "base_scale": 2.31,
+    "text": "This is my sheet of room interior pieces for one area of the game (back wall, doorway, floor tiles and furniture), enlarged so its pixels are big blocks. Redraw EVERY piece as detailed pixel art with pixels about two and a half times smaller, keeping each piece's shape, size, position, colours, light and label exactly, and keeping the floor tiles seamless so they still repeat in both directions. Use the smaller pixels for real detail: wood grain, planks and nails, stone, fabric, glass, books, flames."
+   }
+  },
+  {
+   "id": "room_meadow_fine",
+   "prompts": null,
+   "batch": "room meadow sheet (edit, finer pixels)",
+   "with": null,
+   "refs": [],
+   "save": "room_meadow_fine.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel). Redone once: the first answer painted the background grey/brown instead of magenta.",
+   "edit": {
+    "base": "art/source/room_meadow.png",
+    "base_scale": 2.31,
+    "text": "This is my sheet of room interior pieces for one area of the game (back wall, doorway, floor tiles and furniture), enlarged so its pixels are big blocks. Redraw EVERY piece as detailed pixel art with pixels about two and a half times smaller, keeping each piece's shape, size, position, colours, light and label exactly, and keeping the floor tiles seamless so they still repeat in both directions. Use the smaller pixels for real detail: wood grain, planks and nails, stone, fabric, glass, books, flames. The background around every piece stays flat pure magenta #FF00FF exactly as in the attached image: never grey, brown, purple or a gradient. Add nothing that is not in the attached image."
+   }
   }
  ]
 }

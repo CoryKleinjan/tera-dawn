@@ -11,8 +11,9 @@ const COLS := 6
 const ROWS := 5
 const CELL := 46.0
 ## The open book (UiSkin.draw_book) the Monster Book is drawn in: its top left, how many
-## pixels per texel, and its page margins in pixels at that scale.
-const BOOK_AT := Vector2(PAD - 6, 92)
+## pixels per texel, and its page margins in pixels at that scale. Its covers sit inside the
+## window frame, PAD in from each side.
+const BOOK_AT := Vector2(PAD, 92)
 const BOOK_SCALE := 0.5
 const PAGE_MARGIN := Vector2(20, 22)
 const GRID := BOOK_AT + PAGE_MARGIN + Vector2(2, 2)

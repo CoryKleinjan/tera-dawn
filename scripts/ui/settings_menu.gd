@@ -10,6 +10,8 @@ extends CenterContainer
 ## Back (or Esc) was pressed; the settings are saved.
 signal closed
 
+## Every page is this big (the Controls list scrolls), so the screen keeps its size from tab
+## to tab.
 const TAB_SIZE := Vector2(640, 280)
 
 var tab_buttons: Array[Button] = []
@@ -45,7 +47,7 @@ var _sizes: Array[Vector2i] = []
 func _init() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	var card := PanelContainer.new()
-	UiSkin.use_panel(card, UiSkin.ARCH_PANEL, Vector4(30, 40, 30, 22), 0.7)
+	UiSkin.use_panel(card, UiSkin.ARCH_PANEL, Vector4(30, 40, 30, 40), 0.7)
 	add_child(card)
 	var col := VBoxContainer.new()
 	col.add_theme_constant_override("separation", 8)
@@ -312,8 +314,14 @@ func _build_video() -> Control:
 	ao_box = _video_toggle("Ambient occlusion (soft contact shadows)", "ambient_occlusion")
 	fog_box = _video_toggle("Depth fog", "fog")
 	shake_box = _video_toggle("Screen shake", "screen_shake")
-	for box in [vsync_box, bloom_box, ao_box, fog_box, shake_box]:
-		page.add_child(box)
+	# the switches in two columns (short names left, the long effect names right), so the
+	# page is no taller than the others
+	var switches := GridContainer.new()
+	switches.columns = 2
+	switches.add_theme_constant_override("h_separation", 18)
+	page.add_child(switches)
+	for box in [vsync_box, bloom_box, fog_box, ao_box, shake_box]:
+		switches.add_child(box)
 	var hint := _label("Turning off bloom, ambient occlusion or fog helps slower computers.", 12, Palette.MUTED)
 	page.add_child(hint)
 	return page

@@ -1,9 +1,9 @@
 {
   "source": "art/source/platform_pieces_lanternfall.png",
-  "out_dir": "art/build/platform_pieces_lanternfall",
-  "scale": 0.3,
+  "art_px": 4.5,
+  "out_dir": "assets/sprites/platforms/lanternfall",
   "label_band": 0.2,
-  "inset": 6,
+  "inset": 10,
   "keep": "largest",
   "grid": {
     "rows": [
@@ -32,5 +32,19 @@
       "under_middle_b",
       "under_right"
     ]
-  ]
+  ],
+  "overrides": {
+    "under_left": {
+      "out_dir": "art/build/platform_pieces_lanternfall"
+    },
+    "under_middle_a": {
+      "out_dir": "art/build/platform_pieces_lanternfall"
+    },
+    "under_middle_b": {
+      "out_dir": "art/build/platform_pieces_lanternfall"
+    },
+    "under_right": {
+      "out_dir": "art/build/platform_pieces_lanternfall"
+    }
+  }
 }

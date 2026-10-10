@@ -36,8 +36,15 @@ const NAME_TAG_H := 19.0
 const HINT_H := 22.0
 ## Spaces between the caret and a box's placeholder hint (see set_hint).
 const HINT_ROOM := "  "
-## How tall the map-name banner is drawn.
+## The settings tabs' art: how far in from each side the lit tab's stud ends, and how far in
+## the label and icon start.
+const TAB_STUD := 28.0
+const TAB_PAD := 32.0
+## How tall the map-name banner is drawn, the middle row of its parchment band (the art's
+## top half, in texels: the ribbon tails hang below it), and its text size.
 const BANNER_H := 56.0
+const BANNER_BAND_MID := 13.5
+const BANNER_TEXT := 26
 ## Brighter and darker tints for hover and pressed states of art that has only one state.
 const LIT := Color(1.25, 1.18, 1.05)
 const PRESSED := Color(0.85, 0.8, 0.75)
@@ -174,7 +181,9 @@ const BOOK := ["book/book_pages", Vector4(40, 44, 40, 48), Vector2(30, 0)]
 
 ## Panels with an ornament in the middle of an edge (draw them with draw_panel):
 ## [texture, margins (left, top, right, bottom), middle kept (across, down)], in texels.
-const ARCH_PANEL := ["menu/menu_panel", Vector4(30, 56, 30, 28), Vector2(70, 34)]
+## The arch panel's bottom border takes in the light trim under its dark middle, so content
+## padded past it never sits on the trim.
+const ARCH_PANEL := ["menu/menu_panel", Vector4(30, 56, 30, 44), Vector2(70, 34)]
 const TRACKER_PANEL := ["dialogue/tracker_panel", Vector4(16, 32, 16, 12), Vector2(44, 0)]
 const GUILD_TAG := ["social/guild_tag", Vector4(46, 28, 46, 18), Vector2(56, 0)]
 const SHOP_SIGN := ["social/shop_sign", Vector4(40, 50, 40, 20), Vector2(50, 0)]
@@ -217,9 +226,11 @@ static func style_button(b: Button) -> void:
 
 ## A tab button (toggle_mode, in a ButtonGroup) from the settings sheet: muted purple, raised
 ## gold when chosen. `icon` (a texture name) shows left of the text.
+## The lit tab's ends hold a brass stud (TAB_STUD texels in from each side), so both states
+## keep their label TAB_PAD in, past it.
 static func style_tab(b: Button, icon := "") -> void:
-	var off := box("menu/tab_off", 22, 12, 18, 4)
-	var on := box("menu/tab_on", 22, 12, 18, 4)
+	var off := box("menu/tab_off", 22, 12, TAB_PAD, 4)
+	var on := box("menu/tab_on", TAB_STUD, 12, TAB_PAD, 4)
 	b.add_theme_stylebox_override("normal", off)
 	b.add_theme_stylebox_override("hover", _tinted(off, LIT))
 	b.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
@@ -549,14 +560,20 @@ static func draw_hint(ci: CanvasItem, bottom_center: Vector2, text: String) -> v
 	draw_plaque(ci, Rect2(bottom_center.x - w / 2.0, bottom_center.y - HINT_H, w, HINT_H))
 	DrawUtil.text(ci, Game.ui_font, bottom_center + Vector2(0, -6), text, 13, Palette.MIST)
 
-## The parchment banner with a map's name, faded by `alpha`.
+## The parchment banner with a map's name, faded by `alpha`: the name sits in the middle of
+## the parchment band, which is centred on `center`.
 static func draw_banner(ci: CanvasItem, center: Vector2, text: String, alpha: float) -> void:
-	var w := DrawUtil.text_width(Game.num_font, text, 28) + 120
 	ci.draw_set_transform(Vector2.ZERO)
 	var sb := box("area_banner", 34, 18)
 	sb.modulate_color = Color(1, 1, 1, alpha)
-	sb.draw(ci.get_canvas_item(), Rect2(center.x - w / 2.0, center.y - BANNER_H / 2.0, w, BANNER_H))
-	DrawUtil.text(ci, Game.num_font, center + Vector2(0, 10), text, 28, Color("5a3414", alpha), 0, 0)
+	sb.draw(ci.get_canvas_item(), banner_rect(center, text))
+	DrawUtil.text(ci, Game.num_font, Vector2(center.x, DrawUtil.cap_baseline(center.y, BANNER_TEXT)), text, BANNER_TEXT, Color("5a3414", alpha), 0, 0)
+
+## Where the map-name banner's art is drawn for `text`, its parchment band centred on `center`
+## (the band lies inside the art's top margin, so stretching never moves it).
+static func banner_rect(center: Vector2, text: String) -> Rect2:
+	var w := DrawUtil.text_width(Game.num_font, text, BANNER_TEXT) + 120
+	return Rect2(center.x - w / 2.0, center.y - BANNER_BAND_MID, w, BANNER_H)
 
 static func wrap_text(font: Font, text: String, size: int, max_w: float) -> PackedStringArray:
 	var out := PackedStringArray()

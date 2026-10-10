@@ -59,6 +59,13 @@ func test_stat_plus_buttons_and_auto_keep_apart() -> void:
 		check(stats.position.y + stats.size.y < TDWorld.VIEW.y - TDStatusBar.HEIGHT, "%s: the window ends above the status bar" % pair[0])
 		check(stats.content_end <= stats.size.y - 16, "%s: the rows fit" % pair[0])
 
+func test_every_window_opens_above_the_status_bar() -> void:
+	await _spender(&"beginner", 9)  # a Beginner's Character window is its tallest
+	for key in TDHud.WINDOW_ACTIONS:
+		var w := await _open(key)
+		check(TDWindow.room().encloses(w.get_rect()), "%s: the window (%s) stays on screen and above the status bar" % [key, w.get_rect()])
+		w.visible = false
+
 func test_every_window_keeps_its_buttons_apart() -> void:
 	await _spender(&"warrior", 30)
 	Game.social = {

@@ -66,7 +66,7 @@ func _shards_rect(theirs := false) -> Rect2:
 	return Rect2(grid.position.x - 6, top, grid.size.x + 12, SHARDS_H)
 
 func _trade_rect() -> Rect2:
-	return Rect2(PAD, size.y - 44, (size.x - PAD * 2 - 8) / 2.0, 32)
+	return bottom_button_rect(PAD, (size.x - PAD * 2 - 8) / 2.0)
 
 func _cancel_rect() -> Rect2:
 	var r := _trade_rect()

@@ -22,7 +22,7 @@ texture = ExtResource("12_tree_small")
 x = 288.0
 y = -1.0
 depth = -3.5
-scale = 1.42
+scale = 1.3
 flip = false
 
 [sub_resource type="Resource" id="Resource_38"]
@@ -49,7 +49,7 @@ texture = ExtResource("14_flowers_yellow")
 x = 814.0
 y = -1.0
 depth = -5.0
-scale = 1.36
+scale = 1.3
 flip = false
 
 [sub_resource type="Resource" id="Resource_33"]
@@ -58,7 +58,7 @@ texture = ExtResource("13_bush_large")
 x = 1912.0
 y = -1.0
 depth = -4.5
-scale = 1.34
+scale = 1.3
 flip = true
 
 [sub_resource type="Resource" id="Resource_32"]
@@ -324,6 +324,6 @@ portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_19"), SubRes
 spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_21"), SubResource("Resource_22"), SubResource("Resource_23"), SubResource("Resource_24"), SubResource("Resource_25"), SubResource("Resource_26"), SubResource("Resource_27"), SubResource("Resource_28"), SubResource("Resource_29"), SubResource("Resource_30"), SubResource("Resource_31")])
 props = Array[ExtResource("11_prop_placement")]([SubResource("Resource_32"), SubResource("Resource_33"), SubResource("Resource_34"), SubResource("Resource_35"), SubResource("Resource_38"), SubResource("Resource_39")])
 region = &"lumewood"
-world_pos = Vector2(608.0, 92.0)
+world_pos = Vector2(580.0, 120.0)
 return_map = &"lumewood"
 level_text = "Lv. 10-13"

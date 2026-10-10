@@ -22,6 +22,7 @@ glow_color = Color(1.0, 0.819608, 0.4, 1.0)
 pickup_effect = ExtResource("3_shard_pickup")
 sell_price = 5338
 slot = 2
+worn_style = &"tunic"
 jobs = Array[StringName]([&"warrior"])
 required_level = 35
 stats = SubResource("Resource_1")

@@ -1,11 +1,11 @@
 {
-  "source": "art/source/room_lanternfall.png",
+  "source": "art/source/room_lanternfall_fine.png",
   "out_dir": "assets/sprites/rooms/lanternfall",
-  "scale": 0.384,
+  "scale": 0.3325,
   "label_band": 0.2,
   "cells": [
     [
-      "wall",
+      "",
       "door",
       "floor_top",
       ""
@@ -24,68 +24,59 @@
     ]
   ],
   "overrides": {
-    "wall": {
-      "crop": [
-        28,
-        52,
-        408,
-        492
-      ],
-      "scale": 1.0
-    },
     "floor_top": {
       "seamless": true,
-      "size": 128,
+      "size": 256,
       "crop": [
         0,
-        54,
-        432,
-        486
+        109,
+        982,
+        1107
       ],
-      "scale": 0.45
+      "scale": 0.3896
     },
     "door": {
-      "scale": 0.2615
+      "scale": 0.2264
     },
     "counter": {
-      "scale": 0.3374
+      "scale": 0.2921
     },
     "shelf": {
-      "scale": 0.4548
+      "scale": 0.3938
     },
     "bookcase": {
-      "scale": 0.431
+      "scale": 0.3732
     },
     "table": {
-      "scale": 0.2599
+      "scale": 0.225
     },
     "hearth": {
-      "scale": 0.5637
+      "scale": 0.488
     },
     "rack": {
-      "scale": 0.4129
+      "scale": 0.3575
     },
     "lamp": {
-      "scale": 0.3558
+      "scale": 0.308
     },
     "barrel": {
-      "scale": 0.1855
+      "scale": 0.1606
     }
   },
   "grid": {
     "rows": [
       0,
-      528,
-      874,
-      1190
+      1220,
+      2019,
+      2749
     ],
     "cols": [
       0,
-      440,
-      887,
-      1331,
-      1774
+      1016,
+      2049,
+      3075,
+      4098
     ]
   },
-  "inset": 6
+  "inset": 30
 }

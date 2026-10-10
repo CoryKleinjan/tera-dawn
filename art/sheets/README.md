@@ -30,9 +30,13 @@ trims it.
 | `cells` | | Cell names, one list per row, left to right. |
 | `region` | | `[x0, y0, x1, y1]`: cut only this part of the sheet, for sheets that hold several things (a group of monsters, a tileset beside its backdrops). Grid rows and columns are then inside the region. |
 | `background` | `"magenta"` | `"magenta"` (soft chroma key), `"dark"` (flood fill from the cell border) or `[r, g, b]`. |
-| `scale` | `0.25` | Shrink factor from sheet pixels to sprite texels. The hero is 0.25; match its pixel size. |
+| `scale` | `0.25` | Shrink factor from sheet pixels to sprite texels. The hero is 0.25; match its pixel size. Land art uses `art_px` instead. |
+| `art_px` | | Land art (tiles, platform pieces, ground textures): sheet pixels per art pixel, measured on the sheet. Sets `scale` to `density / art_px x grow`, so every piece of land shows at one on-screen pixel size (`TDStage.TEXEL` game px per art pixel; `TDStage.art_density`). |
+| `density` | `2` | With `art_px`: texels cut per art pixel. The game reads 2 for everything under `tiles/`, `platforms/` and `ground/`. |
+| `grow` | `1.0` | With `art_px`: how much bigger or smaller a piece is drawn than its sheet's pixel size, 0.8 to 1.25 (a piece Gemini drew too small or too big next to its neighbours). `tools/art/land_pixels.py --check` checks grow x every decor and prop scale stays within 0.75 to 1.3. |
 | `alpha` | `"hard"` | `"hard"` for pixel sprites, `"soft"` for glows, effects and backgrounds. |
 | `key` | `[0.35, 0.8]` | Magenta sheets: how magenta a pixel must be to start and finish fading out. Raise it if purple art is being eaten. |
+| `defringe` | `true` | Magenta sheets: after the key, take the magenta out of the dark outline pixels at the cut edge (Gemini blends its outline into the background, which would show as a thin magenta line). Set `false` for a cell whose purple art it wrongly trims. |
 | `label_band` | `0.16` | Top part of each cell (fraction of its height) where the label may be. |
 | `strip_labels` | `false` | Paint over the white label letters in the label band first, for small cells where the label sits close to the art. |
 | `blank_top` | | Paint the top N rows of the cell with background, for labels that touch the art. |
@@ -44,7 +48,7 @@ trims it.
 | `save` | `true` | `false` keeps cells only for animation sets. |
 | `grid_threshold` | `0.8` | How much of a row or column must be divider-coloured to count as a divider. |
 | `grid` | | Give the cells by hand when detection fails: `{"rows": [y0, y1, y2, ...], "cols": [x0, x1, ...]}` (edges between cells; `cols` can be one list per row). |
-| `overrides` | | Per-cell versions of any key above, plus `crop` `[x0, y0, x1, y1]`, `seamless` (tileable texture, with `size`), `extend_bottom` (pad a backdrop downward), `fix` (a named clean-up from `FIXES`), `recolor` (a palette change from `RECOLORS`), `patch` (`[[x0, y0, x1, y1, dx], ...]`: paint a rect with a copy from dx pixels across, to take out an ornament that would stretch in a 9-slice), `flip` (mirror it left to right) and `out_dir`. |
+| `overrides` | | Per-cell versions of any key above, plus `crop` `[x0, y0, x1, y1]`, `seamless` (tileable texture, with `size`), `extend_bottom` (pad a backdrop downward), `fix` (a named clean-up from `FIXES`), `recolor` (a palette change from `RECOLORS`), `patch` (`[[x0, y0, x1, y1, dx], ...]`: paint a rect with a copy from dx pixels across, to take out an ornament that would stretch in a 9-slice), `flip` (mirror it left to right), `patch_rows` (`[[y0, y1, dy], ...]`: replace rows y0 to y1 with the rows dy away, to take out a divider line drawn across the art) and `out_dir`. |
 
 ## Clean-ups and palette changes
 
@@ -130,13 +134,28 @@ after the item ids, replacing the placeholders from `tools/art/make_item_placeho
   came back on a darker magenta, with soft pink glows or with the sky painted behind a strip
   were evened out first by `tools/art/clean_sheet.py` (it edits the source in place, so run it
   on the original picture). The sun or moon uses `sky_body`; glowing icons use `glow_backdrop`.
-- **Rooms** (`room_<town>`) cut over the stand-ins from `tools/art/make_room_placeholders.py`;
-  a cell the sheet has no painting for (crate, plant, floor_soil, some floors) keeps its stand-in.
-  The back wall repeats sideways: its crop's last columns were cross-faded in the source toward
-  the columns just left of the crop. Floor cells stacked in one column have their own manifest
-  (`room_<town>_floor`, with a `region`).
-- **Not in the game yet**: `platform_pieces_<area>`, `climb_tops`, `dawnharbor_midground` and
-  `buildings_<town>` cut into `art/build/` only.
+- **Rooms** (`room_<town>`, from `room_<town>_fine.png`) cut over the stand-ins from
+  `tools/art/make_room_placeholders.py` (drawn at 2 texels per pixel); a cell the sheet has no
+  painting for (crate, plant, floor_soil, some floors) keeps its stand-in. Like the land, rooms
+  are cut at 2 texels per art pixel (`rooms/` is in TDStage.ART_DENSITY). The back wall has its
+  own finer redraw and manifest (`room_<town>_wall`); it repeats sideways because the source's
+  first columns were cross-faded from the columns past its right edge. Floor cells stacked in
+  one column have their own manifest (`room_<town>_floor`, with a `region`).
+- **Platform pieces** (`platform_pieces_<area>`) cut a left cap, two middles and a right cap
+  into `assets/sprites/platforms/<area>/` (the undersides go to `art/build/`). After cutting,
+  the slicer runs `tools/art/platform_pieces.py`, which lines up their walking surfaces and
+  thins them to the manifest's `"platform"` options (`max_depth`, `top_share`, and `"bottom":
+  "under"` to take the underside from the under pieces). The game joins them into one picture
+  per platform (`PlatformSkin`). Cut a clipped ornament off a piece's inner edge with `crop`
+  rather than leave it: the game cuts through it where pieces join.
+- **Buildings** (`building_<area>_<large|small>`) are one building per sheet, Gemini edits of
+  the old tileset cuts at four times the detail. Each manifest's `art_px` is the sheet's
+  height over the building's art height (its BuildingDef `height` / TDStage.TEXEL), so it shows
+  at the shared pixel size and its set height. The old `<area>_buildings` tileset cuts are gone.
+- **Backdrops and ropes/props** are cut from the finer Gemini redraws (`*_fine.png`); each
+  cell's `scale` makes it two texels per art pixel at the size it shows on screen.
+- **Not in the game yet**: `climb_tops`, `dawnharbor_midground` and `buildings_<town>` cut into
+  `art/build/` only.
 - **Items, pets, projectiles** cut into `assets/sprites/items/`, `pets/` (and
   `assets/animations/pet_*.tres`) and `projectiles/`.
 - **The paperdoll**: `paperdoll_body` cuts the bare hero into the hero strip (`pad_top` leaves

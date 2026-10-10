@@ -23,7 +23,7 @@ texture = ExtResource("17_tree_small")
 x = 1828.0
 y = -1.0
 depth = -4.7
-scale = 1.17
+scale = 1.04
 flip = false
 
 [sub_resource type="Resource" id="Resource_39"]
@@ -32,7 +32,7 @@ texture = ExtResource("15_rock_large")
 x = 2536.0
 y = -1.0
 depth = -3.3
-scale = 1.33
+scale = 1.04
 flip = false
 
 [sub_resource type="Resource" id="Resource_38"]
@@ -41,7 +41,7 @@ texture = ExtResource("16_stump")
 x = 734.0
 y = -1.0
 depth = -7.2
-scale = 1.18
+scale = 1.04
 flip = false
 
 [sub_resource type="Resource" id="Resource_37"]
@@ -50,7 +50,7 @@ texture = ExtResource("15_rock_large")
 x = 2430.0
 y = -1.0
 depth = -6.9
-scale = 1.25
+scale = 1.04
 flip = false
 
 [sub_resource type="Resource" id="Resource_35"]
@@ -302,6 +302,6 @@ portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_21"), SubRes
 spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_23"), SubResource("Resource_24"), SubResource("Resource_25"), SubResource("Resource_26"), SubResource("Resource_27"), SubResource("Resource_28"), SubResource("Resource_29"), SubResource("Resource_30"), SubResource("Resource_31"), SubResource("Resource_32"), SubResource("Resource_33"), SubResource("Resource_34")])
 props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_35"), SubResource("Resource_37"), SubResource("Resource_38"), SubResource("Resource_39"), SubResource("Resource_40")])
 region = &"lanternfall"
-world_pos = Vector2(765.0, 355.0)
+world_pos = Vector2(565.0, 372.0)
 return_map = &"lanternfall"
 level_text = "Lv. 13-17"

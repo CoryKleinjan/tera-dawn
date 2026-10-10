@@ -22,7 +22,7 @@ texture = ExtResource("14_steam_vent")
 x = 555.0
 y = -1.0
 depth = -3.8
-scale = 1.48
+scale = 1.04
 flip = true
 
 [sub_resource type="Resource" id="Resource_43"]
@@ -31,7 +31,7 @@ texture = ExtResource("17_tree_small")
 x = 218.0
 y = -1.0
 depth = -6.8
-scale = 1.2
+scale = 1.04
 flip = true
 
 [sub_resource type="Resource" id="Resource_42"]
@@ -40,7 +40,7 @@ texture = ExtResource("13_stump")
 x = 2253.0
 y = -1.0
 depth = -2.6
-scale = 1.5
+scale = 1.04
 flip = false
 
 [sub_resource type="Resource" id="Resource_40"]
@@ -49,7 +49,7 @@ texture = ExtResource("15_crystals")
 x = 2563.0
 y = -1.0
 depth = -6.1
-scale = 1.07
+scale = 1.04
 flip = true
 
 [sub_resource type="Resource" id="Resource_39"]
@@ -58,7 +58,7 @@ texture = ExtResource("14_steam_vent")
 x = 2532.0
 y = -1.0
 depth = -3.9
-scale = 1.23
+scale = 1.04
 flip = true
 
 [sub_resource type="Resource" id="Resource_38"]
@@ -67,7 +67,7 @@ texture = ExtResource("13_stump")
 x = 342.0
 y = -1.0
 depth = -6.7
-scale = 1.18
+scale = 1.04
 flip = false
 
 [sub_resource type="Resource" id="Resource_37"]
@@ -362,6 +362,6 @@ portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_23"), SubRes
 spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_25"), SubResource("Resource_26"), SubResource("Resource_27"), SubResource("Resource_28"), SubResource("Resource_29"), SubResource("Resource_30"), SubResource("Resource_31"), SubResource("Resource_32"), SubResource("Resource_33"), SubResource("Resource_34"), SubResource("Resource_35"), SubResource("Resource_36"), SubResource("Resource_37")])
 props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_38"), SubResource("Resource_39"), SubResource("Resource_40"), SubResource("Resource_42"), SubResource("Resource_43"), SubResource("Resource_45")])
 region = &"emberreach"
-world_pos = Vector2(874.0, 370.0)
+world_pos = Vector2(842.0, 322.0)
 return_map = &"emberforge"
 level_text = "Lv. 17-22"

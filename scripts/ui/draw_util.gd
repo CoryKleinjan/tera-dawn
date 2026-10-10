@@ -51,6 +51,13 @@ static func text(ci: CanvasItem, font: Font, pos: Vector2, s: String, size: int,
 		ci.draw_string_outline(font, p, s, HORIZONTAL_ALIGNMENT_LEFT, -1, size, outline, outline_col)
 	ci.draw_string(font, p, s, HORIZONTAL_ALIGNMENT_LEFT, -1, size, col)
 
+## How tall the UI fonts' capitals are, as a share of the font size.
+const CAP_HEIGHT := 0.7
+
+## The baseline that puts the middle of a line's capitals, `size` big, on height `y`.
+static func cap_baseline(y: float, size: int) -> float:
+	return y + size * CAP_HEIGHT / 2.0
+
 static func text_width(font: Font, s: String, size: int) -> float:
 	return font.get_string_size(s, HORIZONTAL_ALIGNMENT_LEFT, -1, size).x
 

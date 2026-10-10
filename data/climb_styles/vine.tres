@@ -9,5 +9,5 @@ script = ExtResource("1_climb_style_def")
 id = &"vine"
 middle = ExtResource("2_vine_middle")
 bottom = ExtResource("3_vine_bottom")
-texel = 0.9
+texel = 1.25
 climb_animation = &"rope"

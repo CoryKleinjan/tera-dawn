@@ -38,14 +38,32 @@ func test_only_the_floor_is_a_block() -> void:
 	check_near(box.end.y, -map.ground_y / TDStage.PX, "nothing built above the floor's top")
 
 func test_platforms_are_flat_skins_at_land_front() -> void:
-	var floor_top := -map.ground_y / TDStage.PX
-	var skins := 0
-	for s in _sprites():
-		if s.position.y > floor_top + 1.0:
-			check(s.position.z <= TDStage.LAND_FRONT + 0.011, "platform pieces stay behind the actors")
-			if s.position.z >= TDStage.LAND_FRONT - 0.006:
-				skins += 1
-	check(skins >= 4, "each platform gets its front skin")
+	var skins := _sprites().filter(func(s: Sprite3D) -> bool: return s.texture is ImageTexture)
+	check_eq(skins.size(), map.platforms.size(), "each platform gets one front skin picture")
+	for s: Sprite3D in skins:
+		check_near(s.position.z, TDStage.LAND_FRONT, "the skin stays behind the actors")
+
+func test_skins_are_as_wide_as_their_platform() -> void:
+	var skins := _sprites().filter(func(s: Sprite3D) -> bool: return s.texture is ImageTexture)
+	skins.sort_custom(func(a: Sprite3D, b: Sprite3D) -> bool: return a.position.x < b.position.x)
+	for i in skins.size():
+		var d := map.platforms[i]
+		var s: Sprite3D = skins[i]
+		var shown := s.texture.get_width() * s.pixel_size * TDStage.PX
+		check_near(shown, d.width + 2.0 * PlatformSkin.OVERHANG, "platform %d's skin covers it and its overhang" % i, 1.0)
+		check_near(s.position.x * TDStage.PX, d.x + d.width / 2.0, "platform %d's skin is centred on it" % i, 0.5)
+		# the skin hangs from its top edge; the walking surface row lands on the platform's top
+		var surface_y := -s.position.y * TDStage.PX + PlatformSkin.surface_row(map.biome) * s.pixel_size * TDStage.PX
+		check_near(surface_y, d.y, "platform %d's walking surface is its top edge" % i, 0.5)
+
+func test_land_art_shows_at_one_pixel_size() -> void:
+	for s: Sprite3D in _sprites():
+		var density := TDStage.art_density(s.texture)
+		if density == 1.0:
+			continue
+		# game pixels per art pixel: the platform skins exactly TEXEL, the edge grass close to it
+		var art_px := s.pixel_size * TDStage.PX * density
+		check_between(art_px, TDStage.TEXEL * 0.75, TDStage.TEXEL * 1.3, "%s shows near the shared pixel size" % s.texture.resource_path)
 
 func test_floor_grass_stops_at_the_feet_line() -> void:
 	var edge := -map.ground_y / TDStage.PX
