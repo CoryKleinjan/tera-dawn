@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Tera Dawn"
+config/name="Tera's Dawn"
 config/description="A 2D side-scrolling action RPG."
 config/version="0.1.0"
 run/main_scene="res://scenes/main.tscn"

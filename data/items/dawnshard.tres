@@ -11,7 +11,7 @@
 script = ExtResource("1_item_def")
 id = &"dawnshard"
 display_name = "Dawnshards"
-description = "Golden crystals of morning light. Everyone in Tera Dawn trades in them."
+description = "Golden crystals of morning light. Everyone in Tera's Dawn trades in them."
 icon = ExtResource("2_icon_dawnshard")
 world_frames = Array[Texture2D]([ExtResource("3_dawnshard_1"), ExtResource("4_dawnshard_2")])
 pile_texture = ExtResource("5_dawnshard_pile")

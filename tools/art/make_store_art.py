@@ -4,7 +4,7 @@
 The sheet has a wide landscape panel (top left), a long banner (bottom left) and a
 tall portrait panel (right) on a white background. Each panel is saved at full size
 in store/source/, then cropped (never stretched) to each Steam capsule's aspect ratio
-and resized in store/. Capsules still need the Tera Dawn logo added before upload:
+and resized in store/. Capsules still need the Tera's Dawn logo added before upload:
 Steam requires the game's name to be legible on every capsule.
 
     python3 tools/art/make_store_art.py

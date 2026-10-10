@@ -31,7 +31,7 @@ static func server_options(save_folder: String) -> TLSOptions:
 	if not have or key.load(dir.path_join(KEY_FILE)) != OK or cert.load(dir.path_join(CERT_FILE)) != OK:
 		var crypto := Crypto.new()
 		key = crypto.generate_rsa(2048)
-		cert = crypto.generate_self_signed_certificate(key, "CN=Tera Dawn server,O=Tera Dawn", "20250101000000", "20450101000000")
+		cert = crypto.generate_self_signed_certificate(key, "CN=Tera's Dawn server,O=Tera's Dawn", "20250101000000", "20450101000000")
 		key.save(dir.path_join(KEY_FILE))
 		cert.save(dir.path_join(CERT_FILE))
 	return TLSOptions.server(key, cert)
