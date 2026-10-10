@@ -43,7 +43,7 @@ func _build_floor(map: MapDef, ground: Platform, biome: BiomeDef) -> void:
 	for i in 3:
 		sts[i].generate_tangents()
 		sts[i].commit(mesh)
-		mesh.surface_set_material(i, _tile_material(textures[i]))
+		mesh.surface_set_material(i, _top_material(biome) if i == 0 else _tile_material(textures[i]))
 	var mi := MeshInstance3D.new()
 	mi.name = "Floor"
 	mi.mesh = mesh
@@ -52,8 +52,28 @@ func _build_floor(map: MapDef, ground: Platform, biome: BiomeDef) -> void:
 func _tile_material(texture: Texture2D) -> StandardMaterial3D:
 	var m := StandardMaterial3D.new()
 	m.albedo_texture = texture
-	m.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST_WITH_MIPMAPS_ANISOTROPIC
+	m.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
 	m.roughness = 1.0
+	return m
+
+static var _clouds: NoiseTexture2D
+
+## The floor's top, with cloud shadows drifting over it when the biome has them.
+func _top_material(biome: BiomeDef) -> ShaderMaterial:
+	if _clouds == null:
+		var noise := FastNoiseLite.new()
+		noise.frequency = 0.012
+		noise.fractal_octaves = 3
+		_clouds = NoiseTexture2D.new()
+		_clouds.width = 256
+		_clouds.height = 256
+		_clouds.seamless = true
+		_clouds.noise = noise
+	var m := ShaderMaterial.new()
+	m.shader = preload("res://shaders/ground.gdshader")
+	m.set_shader_parameter(&"albedo_tex", biome.ground_top)
+	m.set_shader_parameter(&"clouds", _clouds)
+	m.set_shader_parameter(&"cloud_strength", 0.22 if biome.cloud_shadows else 0.0)
 	return m
 
 func _quad(st: SurfaceTool, pts: Array, uvs: Array, n: Vector3) -> void:

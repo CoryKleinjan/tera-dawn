@@ -8,7 +8,6 @@ extends Control
 ## The game menu's cog in the top left corner (a button TDHud puts there); the map name sits right of it.
 const MENU_BUTTON := Rect2(8, 6, 34, 34)
 ## The minimap's top left; it's drawn at its frame art's own size (see minimap_rect).
-const MINIMAP_AT := Vector2(TDWorld.VIEW.x - 189, 4)
 ## Inside hud/minimap_frame, in texels: where the map is drawn.
 const MINIMAP_INNER := Rect2(18, 28, 147, 58)
 ## Minimap marks: texture, and its height in pixels.
@@ -28,7 +27,7 @@ const LOG_PAD := 5.0
 const LOG_ABOVE_TAGS := 10.0
 
 ## Where the map-name banner's middle is, normally and when a boss bar is at the top.
-const BANNER_Y := 110.0
+const BANNER_Y := 92.0
 const BANNER_Y_BOSS := 150.0
 
 var world: TDWorld
@@ -43,7 +42,7 @@ func banner_bottom() -> float:
 
 ## Where the minimap and its frame are on screen.
 static func minimap_rect() -> Rect2:
-	return Rect2(MINIMAP_AT, UiSkin.tex("hud/minimap_frame").get_size())
+	return Rect2(Vector2(TDWorld.VIEW.x - 189, 4), UiSkin.tex("hud/minimap_frame").get_size())
 
 func _process(_delta: float) -> void:
 	queue_redraw()
@@ -69,8 +68,10 @@ func _draw() -> void:
 	# map banner
 	banner_y = BANNER_Y_BOSS if boss_shown else BANNER_Y
 	if world.banner_t > 0:
-		var a := minf(1.0, minf(world.banner_t / 30.0, (180 - world.banner_t) / 20.0))
-		UiSkin.draw_banner(self, Vector2(v.x / 2, banner_y), world.banner_text, a)
+		var shown := float(TDWorld.BANNER_TICKS - world.banner_t)  # negative while it waits
+		var a := clampf(minf(world.banner_t / 30.0, shown / 20.0), 0.0, 1.0)
+		if a > 0.0:
+			UiSkin.draw_banner(self, Vector2(v.x / 2, banner_y - (1.0 - a) * 10.0), world.banner_text, a)
 	if world.player.fainted():
 		draw_rect(Rect2(Vector2.ZERO, v), Color(Palette.NIGHT, 0.45))
 		DrawUtil.text(self, Game.num_font, Vector2(v.x / 2, v.y / 2 - 10), "You fainted", 40, Palette.MIST)
@@ -210,16 +211,16 @@ func _draw_world_text() -> void:
 	var tags := TDNameTags.new()
 	last_tags = tags
 	for m in world.mobs():
-		var body := m.body_position()
+		var body := m.drawn_body_position()
 		if not st.in_view(body, m.z):
 			continue
-		m.draw_tag(self, st.screen(m.position, m.z), st.screen(body + Vector2(0, -m.def.size.y), m.z), tags)
+		m.draw_tag(self, st.screen(world.drawn(m), m.z), st.screen(body + Vector2(0, -m.def.size.y), m.z), tags)
 	for n in world.npcs():
 		if st.in_view(n.position, 0.1):
 			n.draw_tag(self, st.screen(n.position, 0.1), st.screen(n.position + Vector2(0, -n.rig.body.get_item_rect().size.y * n.rig.body.pixel_size * TDStage.PX), 0.1), tags)
 	for a in world.avatars.values():
 		if st.in_view(a.position, TDStage.Z_OTHER_PLAYER):
-			var feet := st.screen(a.position, TDStage.Z_OTHER_PLAYER)
+			var feet := st.screen(world.drawn(a), TDStage.Z_OTHER_PLAYER)
 			a.draw_tag(tags, feet)
 			if a.shop_title != "":
 				UiSkin.draw_shop_sign(self, feet + Vector2(0, -80), a.shop_title)
@@ -227,7 +228,7 @@ func _draw_world_text() -> void:
 				UiSkin.draw_speech(self, feet + Vector2(0, -84), a.speech)
 	var p := world.player
 	if world.started and not p.fainted():
-		var feet := st.screen(p.position, TDPlayer.Z)
+		var feet := st.screen(world.drawn(p), TDPlayer.Z)
 		tags.add_name(feet + Vector2(0, 4), Game.me.name, Palette.SUN, Game.me.guild, true)
 		if world.hud.selling():
 			UiSkin.draw_shop_sign(self, feet + Vector2(0, -80), world.hud.windows["player_shop"].shop_title)
@@ -239,7 +240,7 @@ func _draw_world_text() -> void:
 	tags.draw(self)
 	for f in world.fx_layer.get_children():
 		if f is TDFloatText:
-			(f as TDFloatText).draw_at(self, st.screen(f.position, 0.6))
+			(f as TDFloatText).draw_at(self, st.screen(world.drawn(f), 0.6))
 		elif f is TDEffect:
 			(f as TDEffect).draw_caption(self, st.screen(f.position, 0.2))
 	for portal in world.map.portals:

@@ -61,6 +61,10 @@ func kill() -> void:
 func body_position() -> Vector2:
 	return position + SimMob.hover_offset(def, phase)
 
+## body_position() where it is drawn this frame (between ticks, see TDWorld.drawn).
+func drawn_body_position() -> Vector2:
+	return world.drawn(self) + SimMob.hover_offset(def, phase)
+
 func step() -> void:
 	phase += 0.08
 	position += (target - position) * FOLLOW
@@ -110,7 +114,7 @@ func _process(_delta: float) -> void:
 		rig.play(&"move")
 	else:
 		rig.play(&"idle")
-	rig.place(body_position(), z, NAN if dead else plat.y)
+	rig.place(drawn_body_position(), z, NAN if dead else plat.y)
 
 ## HP bar and name tag, drawn by the overlay at this monster's projected screen position
 ## (the tag goes in `tags`, which keeps tags apart). A boss's HP is on the boss bar at the

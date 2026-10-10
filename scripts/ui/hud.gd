@@ -113,6 +113,17 @@ func _ready() -> void:
 	_build_menu_button()
 	_build_title()
 
+## The window changed shape (TDWorld.VIEW): move the pieces pinned to the right and bottom
+## edges, and pull open windows back into view.
+func fit_view() -> void:
+	if quickslots == null:
+		return
+	quickslots.fit_view()
+	chat.fit_view()
+	minimap_button.position = TDOverlay.minimap_rect().position
+	for w: TDWindow in windows.values():
+		w.position = w.position.clamp(Vector2.ZERO, (TDWorld.VIEW - w.size).max(Vector2.ZERO))
+
 ## The cog in the top left corner: the game menu, for playing with the mouse (Esc does the same).
 func _build_menu_button() -> void:
 	var cog := TextureButton.new()

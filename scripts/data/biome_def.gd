@@ -21,6 +21,19 @@ extends Resource
 @export var motes_rise := false
 @export var lantern_light := Color("ffc070")
 
+@export_group("Atmosphere")
+## Colour grade of the finished picture (post.gdshader): a multiply tint, a colour the
+## shadows lean toward and how much, and saturation (1 = unchanged).
+@export var grade_tint := Color(1.0, 0.98, 0.95)
+@export var grade_lift := Color("4a3a78")
+@export_range(0.0, 1.0) var grade_lift_amount := 0.25
+@export_range(0.0, 2.0) var grade_saturation := 1.05
+## Soft beams of sunlight slanting through the scene (dawn meadows, forests).
+@export var light_shafts := false
+@export var light_shaft_color := Color(1.0, 0.85, 0.6, 0.18)
+## Slow cloud shadows drifting across the floor.
+@export var cloud_shadows := true
+
 @export_group("Ground")
 ## Seamless textures for the solid floor block (the only land with 3D depth).
 @export var ground_top: Texture2D

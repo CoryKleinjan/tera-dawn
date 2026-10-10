@@ -35,6 +35,8 @@ const Z_DROP := 0.56
 const Z_OTHER_PLAYER := 0.6
 const Z_PLAYER := 0.64
 const Z_EFFECT := 0.8
+## Seconds a map change takes to fade out (and again to fade in).
+const FADE_TIME := 0.25
 
 var world: TDWorld
 var camera: Camera3D
@@ -44,6 +46,12 @@ var map_root: Node3D
 var motes: CPUParticles3D
 var backdrop: BackdropBuilder
 var dist := 0.0
+var camera_attrs: CameraAttributesPractical
+## The finishing pass (post.gdshader): blur, grade and the fade between maps.
+var post_material: ShaderMaterial
+## 0 shows the scene, 1 is faded out (see fade_to).
+var fade := 0.0
+var _fade_target := 0.0
 
 static var _soft_dot: Texture2D
 static var _shadow: Texture2D
@@ -57,12 +65,15 @@ static func land_depth(z: float) -> float:
 static func to3d(p: Vector2, z := 0.0) -> Vector3:
 	return Vector3(p.x / PX, -p.y / PX, z)
 
-## Pixel-art defaults: crisp texels, cut-out alpha, lit, origin at the bottom centre.
+## Sprite defaults: smooth (the art is painted, and nearest-neighbour at a non-whole scale
+## makes jagged, shimmering edges), cut-out alpha with soft edges (alpha to coverage, needs
+## the stage's MSAA), lit, origin at the bottom centre.
 static func style_sprite(s: SpriteBase3D, texel := TEXEL, shaded := true) -> void:
 	s.pixel_size = texel / PX
 	s.centered = true
-	s.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+	s.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
 	s.alpha_cut = SpriteBase3D.ALPHA_CUT_DISCARD
+	s.alpha_antialiasing_mode = BaseMaterial3D.ALPHA_ANTIALIASING_ALPHA_TO_COVERAGE
 	s.shaded = shaded
 	s.double_sided = true
 
@@ -131,7 +142,7 @@ static func particles(col: Color, amount: int, size: float) -> CPUParticles3D:
 # ---------- camera, sky and post effects ----------
 
 func _ready() -> void:
-	dist = (TDWorld.VIEW.y / PX) / 2.0 / tan(deg_to_rad(FOV / 2.0))
+	_fit_distance()
 	camera = Camera3D.new()
 	camera.fov = FOV
 	camera.near = 1.0
@@ -139,6 +150,8 @@ func _ready() -> void:
 	camera.rotation_degrees = Vector3(-PITCH, 0, 0)
 	add_child(camera)
 	camera.make_current()
+	# soft sprite edges (alpha to coverage, see style_sprite)
+	get_viewport().msaa_3d = Viewport.MSAA_4X
 	_build_environment()
 	_build_sun()
 	_build_motes()
@@ -183,15 +196,13 @@ func _build_environment() -> void:
 	Settings.changed.connect(_on_settings_changed)
 	var we := WorldEnvironment.new()
 	we.environment = env
-	var attrs := CameraAttributesPractical.new()
-	attrs.dof_blur_far_enabled = true
-	attrs.dof_blur_far_distance = dist + 3.0
-	attrs.dof_blur_far_transition = 14.0
-	attrs.dof_blur_near_enabled = true
-	attrs.dof_blur_near_distance = dist - 6.0
-	attrs.dof_blur_near_transition = 5.0
-	attrs.dof_blur_amount = 0.12
-	we.camera_attributes = attrs
+	camera_attrs = CameraAttributesPractical.new()
+	camera_attrs.dof_blur_far_enabled = true
+	camera_attrs.dof_blur_far_transition = 14.0
+	camera_attrs.dof_blur_near_enabled = true
+	camera_attrs.dof_blur_near_distance = dist - 6.0
+	camera_attrs.dof_blur_near_transition = 5.0
+	we.camera_attributes = camera_attrs
 	add_child(we)
 
 func _on_settings_changed(section: SettingsSection) -> void:
@@ -240,9 +251,9 @@ func _build_post() -> void:
 	var post := ColorRect.new()
 	post.set_anchors_preset(Control.PRESET_FULL_RECT)
 	post.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var post_mat := ShaderMaterial.new()
-	post_mat.shader = load("res://shaders/post.gdshader")
-	post.material = post_mat
+	post_material = ShaderMaterial.new()
+	post_material.shader = load("res://shaders/post.gdshader")
+	post.material = post_material
 	post_layer.add_child(post)
 	add_child(post_layer)
 
@@ -258,10 +269,13 @@ func build() -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = hash(map.id)
 	_apply_biome(biome)
+	_apply_place(map)
 	TerrainBuilder.new(self, map_root).build(map, world.platforms)
 	backdrop = BackdropBuilder.new(self, map_root)
 	backdrop.build(map, rng)
 	SceneryBuilder.new(self, map_root).build(map, world.platforms, rng)
+	if biome.light_shafts:
+		_build_light_shafts(map, biome, rng)
 	follow(world.cam)
 
 func _apply_biome(b: BiomeDef) -> void:
@@ -276,9 +290,85 @@ func _apply_biome(b: BiomeDef) -> void:
 	env.fog_light_color = b.fog_color
 	sun.light_color = b.light_color
 	sun.light_energy = b.light_energy
+	post_material.set_shader_parameter(&"tint", b.grade_tint)
+	post_material.set_shader_parameter(&"lift", b.grade_lift)
+	post_material.set_shader_parameter(&"lift_amount", b.grade_lift_amount)
+	post_material.set_shader_parameter(&"saturation", b.grade_saturation)
 	((motes.mesh as PrimitiveMesh).material as StandardMaterial3D).albedo_color = b.mote_color
 	motes.gravity = Vector3(0, 0.35 if b.motes_rise else 0.05, 0)
 	motes.direction = Vector3(0.2 if b.motes_rise else 0.3, 1, 0)
+
+## The camera distance that shows TDWorld.VIEW.y game pixels at the play line.
+func _fit_distance() -> void:
+	dist = (TDWorld.VIEW.y / PX) / 2.0 / tan(deg_to_rad(FOV / 2.0))
+
+## The window changed shape: refit the camera and rebuild the scenery for the new view.
+func fit_view() -> void:
+	_fit_distance()
+	env.fog_depth_begin = dist + 12.0
+	env.fog_depth_end = dist + 160.0
+	camera_attrs.dof_blur_near_distance = dist - 6.0
+	sun.directional_shadow_max_distance = dist + 30.0
+	if world.map and map_root:
+		build()
+
+## Towns are for looking around: their backdrop is kept clearer (less fog and blur) than a
+## hunting field's, where the eye should stay on the play line.
+func _apply_place(map: MapDef) -> void:
+	env.fog_density = 0.35 if map.town else 0.6
+	camera_attrs.dof_blur_far_distance = dist + (10.0 if map.town else 3.0)
+	camera_attrs.dof_blur_amount = 0.07 if map.town else 0.12
+
+## Soft slanting beams of sunlight between the backdrop and the play line, gently pulsing.
+func _build_light_shafts(map: MapDef, biome: BiomeDef, rng: RandomNumberGenerator) -> void:
+	var x := rng.randf_range(100.0, 400.0)
+	while x < map.width:
+		var mat := StandardMaterial3D.new()
+		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		mat.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+		mat.albedo_texture = _beam_texture()
+		mat.disable_receive_shadows = true
+		mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+		var c := biome.light_shaft_color
+		mat.albedo_color = c
+		var q := QuadMesh.new()
+		q.size = Vector2(rng.randf_range(1.5, 3.5), map.height / PX * 1.2)
+		var beam := MeshInstance3D.new()
+		beam.mesh = q
+		beam.material_override = mat
+		beam.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		beam.position = Vector3(x / PX, -map.height / PX * 0.45, rng.randf_range(-7.0, -3.5))
+		beam.rotation_degrees = Vector3(0, 0, rng.randf_range(-24.0, -16.0))
+		beam.set_meta(&"alpha", c.a * rng.randf_range(0.6, 1.0))
+		beam.set_meta(&"phase", rng.randf() * TAU)
+		beam.add_to_group(&"light_shaft")
+		map_root.add_child(beam)
+		x += rng.randf_range(260.0, 520.0)
+
+static var _beam: ImageTexture
+
+## A soft beam: bright down the middle, fading at the sides and toward the bottom.
+static func _beam_texture() -> ImageTexture:
+	if _beam == null:
+		var img := Image.create(32, 128, false, Image.FORMAT_RGBA8)
+		for y in 128:
+			var down := 1.0 - y / 127.0
+			for x in 32:
+				var across := 1.0 - absf(x / 31.0 - 0.5) * 2.0
+				img.set_pixel(x, y, Color(1, 1, 1, smoothstep(0.0, 1.0, across) * smoothstep(0.0, 0.7, down)))
+		_beam = ImageTexture.create_from_image(img)
+	return _beam
+
+## Fades the scene out (to 1) or back in (to 0) over the next few frames (map changes).
+func fade_to(target: float) -> void:
+	_fade_target = target
+
+## Fades out at once (the next map starts dark and fades in).
+func set_faded(v: float) -> void:
+	fade = v
+	_fade_target = v
+	post_material.set_shader_parameter(&"fade", v)
 
 # ---------- camera ----------
 
@@ -309,3 +399,10 @@ func screen_height(frac: float, z: float) -> float:
 func _process(delta: float) -> void:
 	if backdrop:
 		backdrop.drift(delta)
+	if fade != _fade_target:
+		fade = move_toward(fade, _fade_target, delta / FADE_TIME)
+		post_material.set_shader_parameter(&"fade", fade)
+	var t := Time.get_ticks_msec() / 1000.0
+	for beam: MeshInstance3D in get_tree().get_nodes_in_group(&"light_shaft"):
+		var m := beam.material_override as StandardMaterial3D
+		m.albedo_color.a = float(beam.get_meta(&"alpha")) * (0.7 + 0.3 * sin(t * 0.4 + float(beam.get_meta(&"phase"))))

@@ -37,7 +37,7 @@ const HINT_H := 22.0
 ## Spaces between the caret and a box's placeholder hint (see set_hint).
 const HINT_ROOM := "  "
 ## How tall the map-name banner is drawn.
-const BANNER_H := 68.0
+const BANNER_H := 56.0
 ## Brighter and darker tints for hover and pressed states of art that has only one state.
 const LIT := Color(1.25, 1.18, 1.05)
 const PRESSED := Color(0.85, 0.8, 0.75)
@@ -524,12 +524,12 @@ static func draw_hint(ci: CanvasItem, bottom_center: Vector2, text: String) -> v
 
 ## The parchment banner with a map's name, faded by `alpha`.
 static func draw_banner(ci: CanvasItem, center: Vector2, text: String, alpha: float) -> void:
-	var w := DrawUtil.text_width(Game.num_font, text, 34) + 140
+	var w := DrawUtil.text_width(Game.num_font, text, 28) + 120
 	ci.draw_set_transform(Vector2.ZERO)
 	var sb := box("area_banner", 34, 18)
 	sb.modulate_color = Color(1, 1, 1, alpha)
 	sb.draw(ci.get_canvas_item(), Rect2(center.x - w / 2.0, center.y - BANNER_H / 2.0, w, BANNER_H))
-	DrawUtil.text(ci, Game.num_font, center + Vector2(0, 12), text, 34, Color("5a3414", alpha), 0, 0)
+	DrawUtil.text(ci, Game.num_font, center + Vector2(0, 10), text, 28, Color("5a3414", alpha), 0, 0)
 
 static func wrap_text(font: Font, text: String, size: int, max_w: float) -> PackedStringArray:
 	var out := PackedStringArray()

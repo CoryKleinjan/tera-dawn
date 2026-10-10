@@ -17,9 +17,13 @@ var field: LineEdit
 ## {"text", "color", "t"}
 var lines: Array = []
 
+## Bottom left, above the status bar (called again when the window is resized).
+func fit_view() -> void:
+	position = Vector2(8, TDWorld.VIEW.y - TDStatusBar.HEIGHT - size.y - 4)
+
 func _ready() -> void:
 	size = Vector2(W, LINES * LINE_H + 38)
-	position = Vector2(8, TDWorld.VIEW.y - TDStatusBar.HEIGHT - size.y - 4)
+	fit_view()
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	field = LineEdit.new()
 	UiSkin.set_hint(field, "Say something (Enter)  ·  /w Name, /p, /g, /b, /help")

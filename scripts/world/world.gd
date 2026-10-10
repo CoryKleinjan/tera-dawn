@@ -6,10 +6,21 @@ extends Node2D
 ## (through Net) and runs your own movement so it feels instant.
 ## Logic steps once per physics tick (60 Hz) in 2D game pixels (y down).
 
-const VIEW := Vector2(960, 540)
+## The size of the game's canvas in game pixels. The height is always at least 540 and the
+## width at least 960; a wider or taller window (16:10 like the Steam Deck, ultrawide) shows
+## more of the world instead of black bars (see _on_resized).
+static var VIEW := Vector2(960, 540)
+## How far ahead of the hero the camera looks in the direction they walk, in game pixels.
+const LOOK_AHEAD := 70.0
+## The camera only follows a jump once the hero is this far above or below where they last stood.
+const CAM_DEAD_ZONE := 90.0
 ## Picking up more of an item within this many ticks of the last time adds to its log line
 ## ("Picked up 3 Moss Tuft") instead of writing another.
 const PICKUP_MERGE_TICKS := 120
+## How long the map-name banner shows, and how long it waits first (so it arrives after the
+## fade into a new map).
+const BANNER_TICKS := 150
+const BANNER_DELAY := 16
 
 var map: MapDef
 var layout: MapLayout
@@ -17,6 +28,13 @@ var platforms: Array[Platform] = []
 var started := false
 var tick := 0
 var cam := Vector2.ZERO
+var _cam_prev := Vector2.ZERO
+var _look := 0.0
+var _cam_floor := 0.0
+## Screen shake strength (0..1); it fades by itself (see shake()).
+var _shake := 0.0
+## node -> where it was at the last tick, for drawing between ticks (see drawn()).
+var _prev := {}
 var banner_text := ""
 var banner_t := 0
 var log_lines: Array[Dictionary] = []
@@ -41,6 +59,8 @@ var player_infos := {}
 
 func _ready() -> void:
 	Net.world = self
+	get_viewport().size_changed.connect(_on_resized)
+	_on_resized()
 	stage = TDStage.new()
 	stage.world = self
 	add_child(stage)
@@ -59,6 +79,7 @@ func _ready() -> void:
 	# the title screen shows the meadow until the server puts the player somewhere
 	load_map(Character.START_MAP)
 	player.place(map.start_x, platforms[0].y)
+	snap_camera()
 	player.rig.visible = false
 
 func _exit_tree() -> void:
@@ -104,8 +125,10 @@ func enter_map(id: StringName, x: float, state: Dictionary) -> void:
 		views[i].apply(mob_states[i])
 	for d in state.get("drops", []):
 		add_drop(d)
-	cam = _camera_target()
-	stage.follow(cam)
+	snap_camera()
+	# the new map fades in from dark (the portal faded the old one out)
+	stage.set_faded(1.0)
+	stage.fade_to(0.0)
 	if started:
 		show_banner(map.display_name)
 
@@ -132,7 +155,7 @@ func load_map(id: StringName) -> void:
 
 func show_banner(text: String) -> void:
 	banner_text = text
-	banner_t = 180
+	banner_t = BANNER_TICKS + BANNER_DELAY
 
 ## You reached an achievement: pop up its toast, and unlock it on Steam.
 func show_achievement(id: String) -> void:
@@ -231,8 +254,48 @@ func show_chat(kind: String, from: String, text: String, from_peer: int) -> void
 
 func _camera_target() -> Vector2:
 	return Vector2(
-		clampf(player.position.x - VIEW.x / 2.0, 0, float(map.width) - VIEW.x),
-		clampf(player.position.y - VIEW.y * 0.62, 0, float(map.height) - VIEW.y))
+		clampf(player.position.x + _look - VIEW.x / 2.0, 0, maxf(0.0, float(map.width) - VIEW.x)),
+		clampf(_cam_floor - VIEW.y * 0.62, 0, maxf(0.0, float(map.height) - VIEW.y)))
+
+## Puts the camera on the hero at once (a new map, a respawn), with nothing to glide from.
+func snap_camera() -> void:
+	_cam_floor = player.position.y
+	_look = 0.0
+	cam = _camera_target()
+	_cam_prev = cam
+	_prev.clear()
+	stage.follow(cam)
+
+## Moves the camera's aim one tick: a little ahead of the way the hero walks, and up or
+## down only once they land somewhere new (or jump or fall well past where they stood).
+func _aim_camera() -> void:
+	if absf(player.vel.x) > 0.3:
+		_look = move_toward(_look, player.face * LOOK_AHEAD, 1.6)
+	var y := player.position.y
+	if player.on_ground or player.is_climbing() or absf(y - _cam_floor) > CAM_DEAD_ZONE:
+		_cam_floor += (y - _cam_floor) * (1.0 if absf(y - _cam_floor) > 400.0 else 0.25)
+
+## Shakes the screen (a crit, a boss slam, getting hit): 0.3 is a nudge, 1 is a big hit.
+## Off when the player turned screen shake off in the video settings.
+func shake(amount: float) -> void:
+	if Settings.video.screen_shake:
+		_shake = minf(1.0, maxf(_shake, amount))
+
+## Where a node that moves once per tick should be drawn this frame: between where it was at
+## the last two ticks, so movement is smooth on any screen (120 Hz, 144 Hz, the Deck's 40 Hz).
+func drawn(n: Node2D) -> Vector2:
+	var before: Variant = _prev.get(n)
+	if before == null or (before as Vector2).distance_to(n.position) > 64.0:
+		return n.position  # new, or it jumped (a portal, a respawn): no gliding
+	return (before as Vector2).lerp(n.position, Engine.get_physics_interpolation_fraction())
+
+func _on_resized() -> void:
+	var size := get_viewport().get_visible_rect().size
+	VIEW = Vector2(maxf(960.0, size.x), maxf(540.0, size.y))
+	if stage and stage.camera:
+		stage.fit_view()
+	if hud:
+		hud.fit_view()
 
 # ---------- loop ----------
 
@@ -257,11 +320,14 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(_delta: float) -> void:
 	tick += 1
+	_prev.clear()
+	_prev[player] = player.position
 	# the game carries on behind the menu (it's online), but you stand still
 	if started and not hud.title.visible:
 		player.step()
 	for layer in [mob_layer, npc_layer, avatar_layer, drop_layer, fx_layer]:
 		for c in layer.get_children():
+			_prev[c] = c.position
 			c.step()
 	for i in range(log_lines.size() - 1, -1, -1):
 		log_lines[i]["t"] -= 1
@@ -269,8 +335,18 @@ func _physics_process(_delta: float) -> void:
 			log_lines.remove_at(i)
 	if banner_t > 0:
 		banner_t -= 1
+	_cam_prev = cam
+	_aim_camera()
 	cam += (_camera_target() - cam) * Vector2(0.12, 0.1)
-	stage.follow(cam)
+	_shake = maxf(0.0, _shake - 0.04)
+
+func _process(_delta: float) -> void:
+	var at := _cam_prev.lerp(cam, Engine.get_physics_interpolation_fraction())
+	if _shake > 0.0:
+		var t := Time.get_ticks_msec() / 1000.0
+		var k := _shake * _shake * 9.0
+		at += Vector2(sin(t * 71.0), cos(t * 53.0)) * k
+	stage.follow(at)
 
 # ---------- events from the server ----------
 

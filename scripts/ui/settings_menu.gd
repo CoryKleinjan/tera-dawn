@@ -39,6 +39,7 @@ var vsync_box: CheckBox
 var bloom_box: CheckBox
 var ao_box: CheckBox
 var fog_box: CheckBox
+var shake_box: CheckBox
 var _sizes: Array[Vector2i] = []
 
 func _init() -> void:
@@ -149,6 +150,7 @@ func refresh() -> void:
 	bloom_box.set_pressed_no_signal(v.bloom)
 	ao_box.set_pressed_no_signal(v.ambient_occlusion)
 	fog_box.set_pressed_no_signal(v.fog)
+	shake_box.set_pressed_no_signal(v.screen_shake)
 
 # ---------- controls ----------
 
@@ -309,7 +311,8 @@ func _build_video() -> Control:
 	bloom_box = _video_toggle("Bloom (glowing lights and sun)", "bloom")
 	ao_box = _video_toggle("Ambient occlusion (soft contact shadows)", "ambient_occlusion")
 	fog_box = _video_toggle("Depth fog", "fog")
-	for box in [vsync_box, bloom_box, ao_box, fog_box]:
+	shake_box = _video_toggle("Screen shake", "screen_shake")
+	for box in [vsync_box, bloom_box, ao_box, fog_box, shake_box]:
 		page.add_child(box)
 	var hint := _label("Turning off bloom, ambient occlusion or fog helps slower computers.", 12, Palette.MUTED)
 	page.add_child(hint)

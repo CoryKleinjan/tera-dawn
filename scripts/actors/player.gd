@@ -238,6 +238,7 @@ func _interact() -> bool:
 	if world.layout.portal_at(position):
 		_report()
 		Net.ask(&"req_portal")
+		world.stage.fade_to(1.0)  # the next map fades back in (TDWorld.enter_map)
 		return true
 	var npc := world.npc_near(position)
 	if npc:
@@ -355,14 +356,15 @@ func _move() -> void:
 func _process(_delta: float) -> void:
 	if rig == null or world == null or world.map == null:
 		return
-	rig.place(position + Vector2(0, -companion.seat_lift()), Z, NAN if is_climbing() or fainted() or not _over_ground() else _ground_y())
+	var at := world.drawn(self)
+	rig.place(at + Vector2(0, -companion.seat_lift()), Z, NAN if is_climbing() or fainted() or not _over_ground() else _ground_y())
 	rig.play(_animation(), _swing)
 	_swing = false
 	rig.face(1 if is_climbing() else face)
 	rig.set_opacity(0.0 if inv > 0 and inv % 8 < 4 and not fainted() else 1.0)
 	companion.set_chair(sitting)
 	companion.set_pet(Game.me.pet, position)
-	companion.follow(position, face, Z, _ground_y())
+	companion.follow(at, face, Z, _ground_y())
 
 func _animation() -> StringName:
 	if fainted():

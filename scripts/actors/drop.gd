@@ -51,7 +51,7 @@ func _process(_delta: float) -> void:
 		return
 	var resting := flight.resting()
 	var hover := sin(spin * 2.0) * 2.0 if resting else 0.0
-	var p := TDStage.to3d(position + Vector2(0, -2 - hover), TDStage.Z_DROP)
+	var p := TDStage.to3d(world.drawn(self) + Vector2(0, -2 - hover), TDStage.Z_DROP)
 	gem.position = p
 	if item.world_frames.size() > 1 and not (item.pile_texture and amount >= item.pile_amount):
 		gem.texture = item.world_texture(int(spin * 0.8))

@@ -20,11 +20,15 @@ var _pending: Variant = null
 func _ready() -> void:
 	var rows := ceili(Character.QUICKSLOTS / float(COLS))
 	size = Vector2(PAD * 2 + COLS * (SLOT + GAP) - GAP, PAD * 2 + rows * (SLOT + GAP) - GAP)
-	position = TDWorld.VIEW - size - Vector2(6, TDStatusBar.HEIGHT + 4)
+	fit_view()
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	mouse_exited.connect(func() -> void:
 		_hover = -1
 		hud.tooltip.clear(self))
+
+## Bottom right, above the status bar (called again when the window is resized).
+func fit_view() -> void:
+	position = TDWorld.VIEW - size - Vector2(6, TDStatusBar.HEIGHT + 4)
 
 func _process(_delta: float) -> void:
 	visible = world != null and world.started

@@ -5,8 +5,9 @@ extends SettingsSection
 
 enum WindowMode { WINDOWED, FULLSCREEN, BORDERLESS }
 const WINDOW_MODE_NAMES: Array[String] = ["Windowed", "Fullscreen", "Borderless fullscreen"]
-## Window sizes offered in windowed mode (the game draws at 960x540 and scales up).
-const WINDOW_SIZES: Array[Vector2i] = [Vector2i(960, 540), Vector2i(1280, 720), Vector2i(1600, 900), Vector2i(1920, 1080), Vector2i(2560, 1440), Vector2i(3840, 2160)]
+## Window sizes offered in windowed mode (the game draws at 960x540 or a little more for other
+## shapes, see TDWorld.VIEW, and scales up).
+const WINDOW_SIZES: Array[Vector2i] = [Vector2i(960, 540), Vector2i(1280, 720), Vector2i(1280, 800), Vector2i(1600, 900), Vector2i(1920, 1080), Vector2i(2560, 1440), Vector2i(3840, 2160)]
 ## Frame rate caps offered; 0 is no cap.
 const FPS_CAPS: Array[int] = [0, 30, 60, 120, 144, 240]
 
@@ -17,6 +18,8 @@ var max_fps := 0
 var bloom := true
 var ambient_occlusion := true
 var fog := true
+## Hits, crits and boss slams shake the screen a little.
+var screen_shake := true
 
 # What the window was last set to, so changing an effect doesn't move or resize it.
 var _shown_mode := -1
@@ -33,6 +36,7 @@ func reset() -> void:
 	bloom = true
 	ambient_occlusion = true
 	fog = true
+	screen_shake = true
 
 func load_from(cfg: ConfigFile) -> void:
 	var s := section()
@@ -49,6 +53,7 @@ func load_from(cfg: ConfigFile) -> void:
 	bloom = bool(cfg.get_value(s, "bloom", bloom))
 	ambient_occlusion = bool(cfg.get_value(s, "ambient_occlusion", ambient_occlusion))
 	fog = bool(cfg.get_value(s, "fog", fog))
+	screen_shake = bool(cfg.get_value(s, "screen_shake", screen_shake))
 
 func save_to(cfg: ConfigFile) -> void:
 	var s := section()
@@ -59,6 +64,7 @@ func save_to(cfg: ConfigFile) -> void:
 	cfg.set_value(s, "bloom", bloom)
 	cfg.set_value(s, "ambient_occlusion", ambient_occlusion)
 	cfg.set_value(s, "fog", fog)
+	cfg.set_value(s, "screen_shake", screen_shake)
 
 ## F11: between a window and borderless fullscreen.
 func toggle_fullscreen() -> void:
