@@ -16,6 +16,6 @@ glow_color = Color(1.0, 0.819608, 0.4, 1.0)
 pickup_effect = ExtResource("3_shard_pickup")
 max_stack = 100
 sell_price = 37
-teleport = &"meadow"
+teleport = &"dawnrise_village"
 use_effect = ExtResource("4_heal")
 cooldown = 60

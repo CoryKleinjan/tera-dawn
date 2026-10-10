@@ -13,6 +13,7 @@ var me: TDPlayer
 func before_each() -> void:
 	ui = UiHelpers.new(self)
 	await ui.start()
+	await ui.enter_map(&"meadow", 200)
 	me = ui.world.player
 
 func after_each() -> void:

@@ -10,7 +10,7 @@ extends RefCounted
 ## Base stats, gear or Ability Points changed: anything showing stats should refresh.
 signal stats_changed
 
-const START_MAP := &"meadow"
+const START_MAP := &"dawnrise_village"
 const START_JOB := &"beginner"
 ## Quickslots on the HUD, each bound to a key (quick_1 ... quick_8).
 const QUICKSLOTS := 8

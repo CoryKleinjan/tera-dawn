@@ -306,5 +306,5 @@ spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_17"), SubResou
 props = Array[ExtResource("14_prop_placement")]([SubResource("Resource_30"), SubResource("Resource_31"), SubResource("Resource_32")])
 region = &"dawnrise_isle"
 world_pos = Vector2(220.0, 228.0)
-return_map = &"meadow"
+return_map = &"dawnrise_village"
 level_text = "Lv. 6-12"

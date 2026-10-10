@@ -13,6 +13,10 @@ const DOOR_LIGHT := Color("ffc47a")
 const SIGN_LABEL_GAP := 6.0
 ## Room the sign's words need above their bottom edge, so no platform skin runs through them.
 const SIGN_LABEL_H := 22.0
+## Open ground between two of a town's background houses (`town_decor`), and the least
+## between one and a building's edge, in game pixels.
+const BACK_HOUSE_GAP := 100.0
+const BACK_HOUSE_CLEAR := 20.0
 
 var stage: TDStage
 var root: Node3D
@@ -27,7 +31,9 @@ func build(map: MapDef, platforms: Array[Platform], rng: RandomNumberGenerator) 
 		_scatter(rule, -300.0, map.width + 300.0, map.ground_y, rng)
 	if map.town:
 		for rule in biome.town_decor:
-			for s in _scatter(rule, -300.0, map.width + 300.0, map.ground_y, rng):
+			var houses := _scatter(rule, -300.0, map.width + 300.0, map.ground_y, rng) if map.buildings.is_empty() \
+					else _back_houses(rule, map, rng)
+			for s in houses:
 				if biome.chimney_smoke and s.texture.get_height() * s.pixel_size * TDStage.PX > 90.0:
 					var h := s.texture.get_height() * s.pixel_size
 					var w := s.texture.get_width() * s.pixel_size
@@ -50,6 +56,52 @@ func build(map: MapDef, platforms: Array[Platform], rng: RandomNumberGenerator) 
 	_lanterns(map, biome, rng)
 	_sign(map, biome)
 	_flyers(map, biome, rng)
+
+## A town's background houses: one per `back_house_slots`, all at the same size and depth
+## (some slots stay empty, by the rule's `chance`).
+func _back_houses(rule: DecorDef, map: MapDef, rng: RandomNumberGenerator) -> Array[Sprite3D]:
+	var placed: Array[Sprite3D] = []
+	var z := TDStage.land_depth((rule.depth.x + rule.depth.y) * 0.5)
+	for x in back_house_slots(rule, map):
+		if rng.randf() >= rule.chance:
+			continue
+		var tex: Texture2D = rule.textures[rng.randi() % rule.textures.size()]
+		var s := TDStage.sprite(tex, rule.texel * rule.scale.y, rule.shaded)
+		s.position = TDStage.to3d(Vector2(x, map.ground_y + 3.0), z)
+		s.flip_h = rng.randf() < 0.5
+		root.add_child(s)
+		placed.append(s)
+	return placed
+
+## Where a town with buildings stands its background houses: the x of each one's middle.
+## They keep `BACK_HOUSE_GAP` apart and never stand straight behind a building, so the
+## street reads clearly (a town without buildings scatters them like any decor).
+static func back_house_slots(rule: DecorDef, map: MapDef) -> Array[float]:
+	var out: Array[float] = []
+	var w := back_house_width(rule)
+	if w <= 0.0:
+		return out
+	var half := w * 0.5
+	var x := half
+	while x <= map.width - half:
+		var past := -INF
+		for b in map.buildings:
+			var span := b.span()
+			if x + half + BACK_HOUSE_CLEAR > span.x and x - half - BACK_HOUSE_CLEAR < span.y:
+				past = maxf(past, span.y)
+		if past > -INF:
+			x = past + BACK_HOUSE_CLEAR + half + 0.5
+			continue
+		out.append(x)
+		x += w + BACK_HOUSE_GAP
+	return out
+
+## How wide a background house stands (its widest picture), in game pixels.
+static func back_house_width(rule: DecorDef) -> float:
+	var widest := 0.0
+	for t in rule.textures:
+		widest = maxf(widest, t.get_width())
+	return widest * rule.texel * rule.scale.y
 
 ## Drops pieces from a DecorDef along [x0, x1] on the surface at y. Returns the sprites.
 func _scatter(rule: DecorDef, x0: float, x1: float, y: float, rng: RandomNumberGenerator) -> Array[Sprite3D]:

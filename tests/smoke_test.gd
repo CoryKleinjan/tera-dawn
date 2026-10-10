@@ -434,7 +434,7 @@ func _run() -> void:
 	_check(Net.server != null and _me() != null, "single player runs its own server")
 	var p := world.player
 	_check(p.on_ground, "player starts on the ground")
-	_check(world.npcs().size() == 4, "the meadow has its four NPCs (Mira keeps shop indoors)")
+	_check(world.npcs().size() == 4, "the village has its four NPCs (Mira keeps shop indoors)")
 	await _ticks(5)
 	_check(world.mobs().all(func(m: TDMob) -> bool: return m.known), "the server tells the game where every monster is")
 
@@ -468,15 +468,15 @@ func _run() -> void:
 	_check(not talk.visible, "Goodbye closes the dialogue")
 
 	# Mira's shop is a room inside her house: walk in through its door.
-	var door: PortalDef = Content.map(&"meadow").portals.filter(func(d: PortalDef) -> bool: return d.target_map == &"meadow_store")[0]
-	_check(door.door and Content.map(&"meadow").buildings.any(func(b: BuildingPlacement) -> bool: return b.x == door.x),
+	var door: PortalDef = Content.map(Character.START_MAP).portals.filter(func(d: PortalDef) -> bool: return d.target_map == &"meadow_store")[0]
+	_check(door.door and Content.map(Character.START_MAP).buildings.any(func(b: BuildingPlacement) -> bool: return b.x == door.x),
 		"the shop's door is a doorway in a building")
 	_teleport(Vector2(door.x, 620))
 	await _ticks(2)
 	await _tap("move_up")
 	await _ticks(4)
 	_check(world.map.id == &"meadow_store" and world.map.interior, "pressing Up in the doorway walks into the shop")
-	_check(world.map.outside() == &"meadow", "the shop is inside the meadow village")
+	_check(world.map.outside() == Character.START_MAP, "the shop is inside the village")
 	# Mira runs a shop: buy potions, sell monster parts.
 	var mira: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.shop != null)[0]
 	_teleport(Vector2(mira.position.x - 30, 620))
@@ -539,7 +539,14 @@ func _run() -> void:
 	await _ticks(2)
 	await _tap("move_up")
 	await _ticks(4)
-	_check(world.map.id == &"meadow" and absf(world.player.position.x - door.x) < 120, "the room's door leads back out beside the shop")
+	_check(world.map.id == Character.START_MAP and absf(world.player.position.x - door.x) < 120, "the room's door leads back out beside the shop")
+	# the hunting starts in the meadow, through the village's east exit
+	var to_meadow: PortalDef = world.map.portals.filter(func(d: PortalDef) -> bool: return d.target_map == &"meadow")[0]
+	_teleport(Vector2(to_meadow.x, 620))
+	await _ticks(2)
+	await _tap("move_up")
+	await _ticks(4)
+	_check(world.map.id == &"meadow" and not world.map.town and not world.mobs().is_empty(), "the village's east exit leads to the meadow, where the monsters are")
 
 	# Put a Dewling right in front of the player and hit it until it dies.
 	var meadow: MapInstance = Net.server.maps[&"meadow"]
@@ -719,7 +726,9 @@ func _run() -> void:
 ## Takes Elder Rowan's first quest, does it, hands it in; then a quest whose item only
 ## drops while you're on it.
 func _check_quests() -> void:
-	var meadow: MapInstance = Net.server.maps[&"meadow"]
+	Net.server._enter_map(_me(), Character.START_MAP, 300)
+	await _ticks(3)
+	var meadow: MapInstance = Net.server.map_instance(&"meadow")
 	var elder := world.npcs()[0]
 	var q1: QuestDef = Content.quest(&"q01_dewling_trouble")
 	_teleport(Vector2(elder.position.x - 30, 620))
@@ -952,6 +961,8 @@ func _check_ranged() -> void:
 ## The world map, Hobb's wagon, return scrolls, and waking up in the right town.
 func _check_travel() -> void:
 	var ch := _me().character
+	Net.server._enter_map(_me(), Character.START_MAP, 300)
+	await _ticks(3)
 	await _press("worldmap")
 	var wm: TDWorldMapWindow = world.hud.windows["worldmap"]
 	_check(wm.visible and TDWorldMapWindow.placed().size() >= 2, "W opens the world map with the maps on it")
@@ -987,12 +998,12 @@ func _check_travel() -> void:
 	world.hud.windows["inventory"].tab = ItemDef.Tab.USE
 	world.hud.windows["inventory"].use_slot(Game.me.inventory.find(scroll))
 	await _ticks(3)
-	_check(world.map.id == &"meadow" and Game.me.inventory.count_of(scroll) == 1, "a Return Scroll takes you back to town")
+	_check(world.map.id == Character.START_MAP and Game.me.inventory.count_of(scroll) == 1, "a Return Scroll takes you back to town")
 	_me().item_cd = 0
 	world.hud.windows["inventory"].use_slot(Game.me.inventory.find(scroll))
 	await _ticks(2)
 	_check(Game.me.inventory.count_of(scroll) == 1, "it isn't used up when you're already in town")
-	_check(Content.map(&"hollow").return_town() == &"meadow" and Content.map(&"meadow").return_town() == &"meadow", "maps know their town")
+	_check(Content.map(&"hollow").return_town() == Character.START_MAP and Content.map(&"meadow").return_town() == Character.START_MAP, "maps know their town")
 	# Captain Marlo's ship to Dawnharbor, then Brin's storage, then Rook's coach.
 	var marlo: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"captain_marlo")[0]
 	_teleport(Vector2(marlo.position.x - 30, 620))
@@ -1037,21 +1048,21 @@ func _check_travel() -> void:
 	talk.choose(0)
 	await _ticks(3)
 	_check(world.map.id == &"greenbough", "the coach takes you to Greenbough")
-	Net.server._enter_map(_me(), &"meadow", 300)
+	Net.server._enter_map(_me(), Character.START_MAP, 300)
 	await _ticks(3)
 
-## The new field maps: walking west out of the meadow, monsters that split, hop and shoot,
+## The new field maps: walking west out of the village, monsters that split, hop and shoot,
 ## and upgrade scrolls.
 func _check_fields() -> void:
 	var ch := _me().character
 	# a monster bumping you off the portal would make this flaky
 	_me().inv = 100000
-	var west: PortalDef = Content.map(&"meadow").portals.filter(func(p: PortalDef) -> bool: return p.target_map == &"sunny_slope")[0]
+	var west: PortalDef = Content.map(Character.START_MAP).portals.filter(func(p: PortalDef) -> bool: return p.target_map == &"sunny_slope")[0]
 	_teleport(Vector2(west.x, 620))
 	await _ticks(2)
 	await _tap("move_up")
 	await _ticks(4)
-	_check(world.map.id == &"sunny_slope", "the meadow's west portal leads to Sunny Slope")
+	_check(world.map.id == &"sunny_slope", "the village's west portal leads to Sunny Slope")
 	_me().inv = 0
 	# a Sporecap splits into Spore Puffs when it's defeated
 	Net.server._enter_map(_me(), &"mushroom_dell", 300)
@@ -1417,6 +1428,9 @@ func _check_multiplayer() -> void:
 		return
 	var bot_player: SimPlayer = Net.server.sessions[bot_peer]
 	bot_player.inv = 100000
+	# both players go out to the meadow, where the monsters are (the village has none)
+	Net.server._enter_map(_me(), &"meadow", 360)
+	Net.server._enter_map(bot_player, &"meadow", 300)
 	# hold a Dewling in front of the bot until its attacks defeat one
 	var meadow: MapInstance = Net.server.maps[&"meadow"]
 	var level := bot_player.character.level
@@ -1428,7 +1442,7 @@ func _check_multiplayer() -> void:
 			seen_name = world.avatars[bot_peer].char_name
 		for m in meadow.mobs:
 			if m.def.id == &"dewling" and m.plat == meadow.layout.platforms[0] and not m.dead:
-				m.area = m.plat # floor Dewlings keep out of the village, where the bot stands
+				m.area = m.plat # floor Dewlings keep away from the meadow's entrance, where the bot stands
 				m.position.x = bot_player.position.x + 40
 				break
 		if bot_player.character.xp != xp or bot_player.character.level != level:

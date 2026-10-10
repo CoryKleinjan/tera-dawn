@@ -369,6 +369,21 @@ layer, a plank floor, warm low light and a `door`. Its stand-in art comes from
 which land on the same file names. `tests/content/content_world_test.gd` checks every door is
 in a building and every room has one door back to the town that leads into it.
 
+### Town layout
+
+A town is one street on the floor, laid out left to right: the west exit, the sign and the
+taxi, then the buildings with about 160 px of open ground between them (an NPC can stand in
+a gap, an exit gets a wider gap of its own), then the east exit. The map is only as wide as
+that row needs. Towns have **no monsters**: hunting happens in the fields next door (the
+start town, Dawnrise Village, leads east into Dawnrise Meadow).
+
+The biome's `town_decor` (small houses far behind the street) don't scatter randomly in a
+town with buildings: `SceneryBuilder.back_house_slots` stands them in one row,
+`BACK_HOUSE_GAP` apart and never straight behind a building.
+`tests/content/content_town_test.gd` checks all of this against the real picture sizes, so
+when new building art comes in wider or narrower, the test names the buildings that now sit
+too close and you nudge their `x` (and the doors, NPCs and the portals that lead in).
+
 ## How to add a skill
 
 1. Create `data/skills/<id>.tres` as a **SkillDef**: its `kind` (attack, buff or passive),
