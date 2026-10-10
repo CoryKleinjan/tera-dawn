@@ -557,6 +557,15 @@ Drop the sheet in `art/source/`, write a manifest in `art/sheets/`, and run
 `python3 tools/art/slice_sheets.py <name>`. `art/sheets/README.md` explains the manifest. The
 cut sprites land in `assets/sprites/`, ready to be referenced from data.
 
+Sheets can also be generated straight from a prompt file with Google's Gemini image model:
+`python3 tools/art/gemini_sheet.py tera-dawn-chatgpt-art-prompts-8.md W1` sends Message 0, the
+batch and the references its "Attach" lines name, and saves one PNG to the project's
+`art-sheets/` folder as `<save name>_gemini.png`. Add `--with U` (or P, W, M, N) for a layout
+message, `--ref` for extra references and `--dry-run` to see what would be sent. Each run is one
+paid request (about $0.10) and never retries. It needs `GEMINI_API_KEY` in the environment and
+`generativelanguage.googleapis.com` allowed by the network policy. Check the result like any
+upload before it goes in `art/source/`.
+
 ## Conventions
 
 - Ids are `StringName`s in snake_case and match the file name (`data/monsters/ember_boar.tres`
