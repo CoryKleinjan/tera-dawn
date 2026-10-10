@@ -36,7 +36,7 @@ func _pixel_size(layer: BackdropLayerDef, z: float) -> float:
 ## The x range a layer at depth z must cover so it fills the view from either end of the map.
 func _span(map: MapDef, z: float) -> Vector2:
 	var r := stage.dist - z
-	var half_view := TDWorld.VIEW.x / TDStage.PX / 2.0 * r / stage.dist
+	var half_view := TDWorld.world_view().x / TDStage.PX / 2.0 * r / stage.dist
 	return Vector2(-half_view - 4.0, float(map.width) / TDStage.PX + half_view + 4.0)
 
 func _make(tex: Texture2D, layer: BackdropLayerDef, size: float) -> Sprite3D:
