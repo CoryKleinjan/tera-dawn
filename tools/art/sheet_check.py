@@ -17,7 +17,7 @@ Checks:
 - frame sizes (animation sheets): each frame's sprite area stays near the others, which
   catches frames where the character was redrawn bigger, smaller or as someone else
 - magenta in sprites: no pink-purple inside the art (it would be cut out with the background)
-- palette (with --anchor): the sprite colours sit close to the anchor sheet's colours
+- palette (with --anchor): the sprite colours sit close to the anchor sheet's colours (a warning only)
 - must have (with --must-have): a colour (e.g. W1's green grip rod) is in the cells that need it
   and absent from the cells that must not have it
 """
@@ -118,9 +118,15 @@ def check(path, cells=None, kind="still", anchor=None, must_have=None):
         results.append({"check": name, "status": status, "detail": detail})
 
     is_magenta = np.abs(bg - MAGENTA).sum() < 90
-    add("background", "pass" if is_magenta else ("fail" if cells else "warn"),
-        "main colour %s" % list(map(int, bg)))
-    if not is_magenta:
+    # A darker or pinker magenta still keys (the slicer keys against the sheet's own colour).
+    magenta_ish = bg[1] < 0.45 * min(bg[0], bg[2]) and abs(int(bg[0]) - int(bg[2])) < 60
+    if is_magenta:
+        add("background", "pass", "flat magenta")
+    elif magenta_ish:
+        add("background", "warn", "a darker magenta %s" % list(map(int, bg)))
+    else:
+        add("background", "fail" if cells else "warn", "not magenta: main colour %s" % list(map(int, bg)))
+    if not (is_magenta or magenta_ish):
         # Scenes (backdrops, key art, the world map) are painted edge to edge: nothing more to check.
         return summarise(path, results)
 
@@ -166,7 +172,9 @@ def check(path, cells=None, kind="still", anchor=None, must_have=None):
         a_art = opaque_pixels(a_rgb, a_bg, cells_of(detect_grid(a_rgb, a_bg)))
         if len(a_art):
             dist = palette_distance(art, palette(a_art))
-            add("palette", "pass" if dist < 28 else ("warn" if dist < 45 else "fail"),
+            # Only a warning: a family anchor (e.g. the first monster of a region) is a different
+            # creature, so its colours are a guide, not a rule.
+            add("palette", "pass" if dist < 35 else "warn",
                 "average distance to %s's colours: %.0f" % (os.path.basename(anchor), dist))
 
     if must_have:

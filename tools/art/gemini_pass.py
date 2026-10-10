@@ -177,8 +177,18 @@ class Pass:
         if res["path"]:
             entry["check"] = sheet_check.check(
                 res["path"], sheet.get("cells"), sheet.get("kind", "still"),
-                anchor or self.replaced(sheet), sheet.get("must_have"))
+                self.replaced(sheet) or anchor, sheet.get("must_have"))
         return entry
+
+    def recheck(self):
+        """Run sheet_check again on every result (free), e.g. after the checker changed."""
+        for s in self.sheets:
+            e = self.state.get(s["id"])
+            if e and e.get("path") and os.path.exists(e["path"]):
+                e["check"] = sheet_check.check(e["path"], s.get("cells"), s.get("kind", "still"),
+                                               self.replaced(s) or self.anchor_result(s), s.get("must_have"))
+        self.save()
+        self.report()
 
     def replaced(self, sheet):
         r = sheet.get("replaces")
@@ -322,7 +332,7 @@ class Pass:
                     entry["cost"] = each
                     s = self.by_id[sid]
                     entry["check"] = sheet_check.check(meta_s["path"], s.get("cells"), s.get("kind", "still"),
-                                                       self.anchor_result(s) or self.replaced(s), s.get("must_have"))
+                                                       self.replaced(s) or self.anchor_result(s), s.get("must_have"))
                 except gemini_sheet.GeminiError as e:
                     entry = {"error": str(e).splitlines()[0][:300],
                              "cost": each if row and "response" in row else 0}
@@ -417,6 +427,7 @@ def main():
     ap.add_argument("--redo", action="append", default=[], help="forget this id's result so it is made again")
     ap.add_argument("--budget", type=float, help="dollar cap for the whole pass (default: the list's)")
     ap.add_argument("--report", action="store_true", help="only rebuild report.md and contact_sheet.png")
+    ap.add_argument("--recheck", action="store_true", help="check every result again, then rebuild the report")
     ap.add_argument("--batch", action="store_true", help="use Gemini's batch mode (half price, slower)")
     ap.add_argument("--wait", action="store_true", help="with --batch: keep going until every wave is in")
     args = ap.parse_args()
@@ -429,8 +440,8 @@ def main():
             p.state.setdefault("_redone", {"cost": 0})["cost"] += p.price
     if args.redo:
         p.save()
-    if args.report:
-        p.report()
+    if args.report or args.recheck:
+        p.recheck() if args.recheck else p.report()
         return
     if args.batch:
         if args.dry_run:
