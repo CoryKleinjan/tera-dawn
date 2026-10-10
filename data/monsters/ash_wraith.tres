@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=45 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=53 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="Resource" path="res://data/projectiles/mob_shadow.tres" id="2_mob_shadow"]
@@ -24,6 +24,10 @@
 [ext_resource type="Resource" path="res://data/items/equips/sunforged_cuirass.tres" id="d35_sunforged_cuirass"]
 [ext_resource type="Resource" path="res://data/items/equips/sunforged_greaves.tres" id="d35_sunforged_greaves"]
 [ext_resource type="Resource" path="res://data/items/equips/sunforged_sabatons.tres" id="d35_sunforged_sabatons"]
+[ext_resource type="Resource" path="res://data/items/equips/ravager_blade.tres" id="w2_ravager_blade"]
+[ext_resource type="Resource" path="res://data/items/equips/gale_bow.tres" id="w2_gale_bow"]
+[ext_resource type="Resource" path="res://data/items/equips/starfall_staff.tres" id="w2_starfall_staff"]
+[ext_resource type="Resource" path="res://data/items/equips/aurora_wand.tres" id="w2_aurora_wand"]
 
 [sub_resource type="Resource" id="Resource_11"]
 script = ExtResource("4_drop_entry")
@@ -99,8 +103,8 @@ max_amount = 1
 script = ExtResource("4_drop_entry")
 item = ExtResource("5_dawnshard")
 chance = 1.0
-min_amount = 46
-max_amount = 93
+min_amount = 28
+max_amount = 56
 
 [sub_resource type="Resource" id="Drop35_dawnbreaker_claymore"]
 script = ExtResource("4_drop_entry")
@@ -165,13 +169,41 @@ chance = 0.015
 min_amount = 1
 max_amount = 1
 
+[sub_resource type="Resource" id="Drop2_ravager_blade"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("w2_ravager_blade")
+chance = 0.0225
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Drop2_gale_bow"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("w2_gale_bow")
+chance = 0.0225
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Drop2_starfall_staff"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("w2_starfall_staff")
+chance = 0.0225
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Drop2_aurora_wand"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("w2_aurora_wand")
+chance = 0.0225
+min_amount = 1
+max_amount = 1
+
 [resource]
 script = ExtResource("1_monster_def")
 id = &"ash_wraith"
 display_name = "Ash Wraith"
 level = 31
 max_hp = 6499
-attack = 90
+attack = 77
 exp_reward = 935
 speed = 1.3
 size = Vector2(36.0, 56.0)
@@ -181,4 +213,4 @@ hover_height = 60.0
 shot = ExtResource("2_mob_shadow")
 sprite_frames = ExtResource("3_ash_wraith")
 sprite_scale = 1.0
-drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Drop35_dawnbreaker_claymore"), SubResource("Drop35_emberforge_aegis"), SubResource("Drop35_emberplate_helm"), SubResource("Drop35_emberplate_greaves"), SubResource("Drop35_emberplate_sabatons"), SubResource("Drop35_sunforged_helm"), SubResource("Drop35_sunforged_cuirass"), SubResource("Drop35_sunforged_greaves"), SubResource("Drop35_sunforged_sabatons")])
+drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Drop35_dawnbreaker_claymore"), SubResource("Drop35_emberforge_aegis"), SubResource("Drop35_emberplate_helm"), SubResource("Drop35_emberplate_greaves"), SubResource("Drop35_emberplate_sabatons"), SubResource("Drop35_sunforged_helm"), SubResource("Drop35_sunforged_cuirass"), SubResource("Drop35_sunforged_greaves"), SubResource("Drop35_sunforged_sabatons"), SubResource("Drop2_ravager_blade"), SubResource("Drop2_gale_bow"), SubResource("Drop2_starfall_staff"), SubResource("Drop2_aurora_wand")])

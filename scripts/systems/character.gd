@@ -33,6 +33,8 @@ var job: JobDef
 var base := StatBlock.new()
 ## Unspent Ability Points.
 var ap := 0
+## Whether the one free Ability Point reset a job instructor gives a Beginner is used up.
+var ap_reset_used := false
 var inventory := Inventory.new()
 ## Kept by storage keepers in town.
 var storage := Inventory.new()
@@ -270,6 +272,44 @@ func stats_short_of(next: JobDef) -> Dictionary:
 			if base.value(stat) < need:
 				out[stat] = need
 	return out
+
+## Ability Points spent so far: how far the base stats are above the job's starting stats.
+func spent_ap() -> int:
+	var out := 0
+	for stat in StatBlock.BASE:
+		out += maxi(0, base.value(stat) - _starting_stat(stat))
+	return out
+
+func _starting_stat(stat: StringName) -> int:
+	return job.starting_stats.value(stat) if job.starting_stats else 0
+
+## Why a `next` instructor can't hand out the free Ability Point reset, or "" if they can:
+## once per character, for a Beginner who has spent points but lacks the stats `next` asks for.
+func ap_reset_problem(next: JobDef) -> String:
+	if not job.is_starting_job():
+		return "Only a %s can have their Ability Points reset." % job.display_name
+	if ap_reset_used:
+		return "You've already had your free reset."
+	if stats_short_of(next).is_empty():
+		return "You already have the stats a %s needs." % next.display_name
+	if spent_ap() == 0:
+		return "You haven't spent any Ability Points yet."
+	return ""
+
+## The free reset (see ap_reset_problem): base stats go back to the job's starting stats and
+## every point spent comes back to spend again. Returns why not, or "".
+func reset_ap(next: JobDef) -> String:
+	var problem := ap_reset_problem(next)
+	if problem != "":
+		return problem
+	for stat in StatBlock.BASE:
+		var extra := base.value(stat) - _starting_stat(stat)
+		if extra > 0:
+			ap += extra
+			base.set(stat, _starting_stat(stat))
+	ap_reset_used = true
+	recalc()
+	return ""
 
 # ---------- skills ----------
 

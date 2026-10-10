@@ -7,7 +7,7 @@
 
 [sub_resource type="Resource" id="stats"]
 script = ExtResource("stat_block")
-attack = 38
+attack = 30
 strength = 2
 
 [resource]

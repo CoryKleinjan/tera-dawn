@@ -10,6 +10,6 @@ display_name = "Archmage Celest"
 title = "Magician Instructor"
 sprite_frames = ExtResource("2_sprite")
 greeting = "The light here listens to those who listen first. Do you wish to study magic?"
-lines = PackedStringArray("Advance at level 8, with the stat the path asks for.", "Practise on the fields outside town. That's what they're for.")
+lines = PackedStringArray("Advance at level 10, with the stat the path asks for.", "Practise on the fields outside town. That's what they're for.")
 instructs = Array[StringName]([&"mage"])
 storage = false

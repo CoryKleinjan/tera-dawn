@@ -19,6 +19,7 @@ func _rich() -> Character:
 	c.xp = 345
 	c.shards = 9876
 	c.ap = 4
+	c.ap_reset_used = true
 	c.sp = 2
 	c.map_id = Content.maps.keys()[0]
 	var sword := fx.equip(&"t_sword", EquipDef.Slot.WEAPON, {"attack": 20}, 3)
@@ -80,6 +81,7 @@ func test_round_trip_basics() -> void:
 	check_eq(b.xp, 345, "xp")
 	check_eq(b.shards, 9876, "shards")
 	check_eq(b.ap, 4, "AP")
+	check(b.ap_reset_used, "free AP reset used")
 	check_eq(b.sp, 2, "SP")
 	check_eq(b.map_id, c.map_id, "map")
 	check(b.job == c.job, "job")

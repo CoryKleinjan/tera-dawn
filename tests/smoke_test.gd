@@ -767,7 +767,7 @@ func _check_job_advance() -> void:
 	_check(world.map.id == &"lumewood" and world.map.town, "Lumewood is a town")
 	var guide: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"lumewood_instructor")[0]
 	ch.job = Content.job(&"beginner")
-	ch.level = maxi(ch.level, 8)
+	ch.level = maxi(ch.level, 10)
 	ch.base.intelligence = 20
 	_me().dirty_character = true
 	await _ticks(2)
@@ -781,7 +781,7 @@ func _check_job_advance() -> void:
 	labels = talk.options.map(func(o: Array) -> String: return o[0])
 	_check(labels == ["Magician", "Back"], "Lumewood's instructor teaches Magicians")
 	talk.choose(labels.find("Magician"))
-	_check(talk.options[0][0] == "Become a Magician", "a level 8 Beginner with 20 INT may become a Magician")
+	_check(talk.options[0][0] == "Become a Magician", "a level 10 Beginner with 20 INT may become a Magician")
 	talk.choose(0)
 	await _ticks(2)
 	_check(Game.me.job.id == &"mage" and Game.me.inventory.count_of(Content.item(&"apprentice_wand")) == 1, "the server makes them a Magician and gives a wand")

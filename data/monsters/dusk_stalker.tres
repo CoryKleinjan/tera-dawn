@@ -96,8 +96,8 @@ max_amount = 1
 script = ExtResource("3_drop_entry")
 item = ExtResource("4_dawnshard")
 chance = 1.0
-min_amount = 49
-max_amount = 99
+min_amount = 29
+max_amount = 59
 
 [sub_resource type="Resource" id="Drop35_eclipse_claw"]
 script = ExtResource("3_drop_entry")

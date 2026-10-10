@@ -485,6 +485,22 @@ func on_advance(peer: int, npc_id: StringName, job_id: StringName) -> void:
 	p.map.tell(p, "You are now a %s!" % next.display_name, Palette.SUN)
 	store.save(p.character)
 
+## The free Ability Point reset from the instructor `npc_id` of `job_id` the player stands by.
+func on_reset_ap(peer: int, npc_id: StringName, job_id: StringName) -> void:
+	var p := player_of(peer)
+	var npc := p.map.npc_near(p, npc_id) if p else null
+	var next: JobDef = Content.jobs.get(job_id)
+	if npc == null or next == null or not job_id in npc.instructs:
+		return
+	var problem := p.character.reset_ap(next)
+	if problem != "":
+		p.map.tell(p, problem, MapInstance.BAD)
+		return
+	p.dirty_character = true
+	p.dirty_vitals = true
+	p.map.tell(p, "Your Ability Points are back: %d to spend." % p.character.ap, Palette.SUN)
+	store.save(p.character)
+
 ## The NPC `npc_id` if the player stands by it and it keeps a shop, else null.
 func _shop_npc(p: SimPlayer, npc_id: StringName) -> NpcDef:
 	var npc := p.map.npc_near(p, npc_id) if p else null
