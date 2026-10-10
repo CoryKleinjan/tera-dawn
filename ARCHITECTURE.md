@@ -243,7 +243,7 @@ camera). The layers are constants at the top of `scripts/world/stage.gd`, back t
 | Layer | Depth | What |
 | --- | --- | --- |
 | Backdrop | far behind | Sky, mountains, distant trees (`BackdropLayerDef.depth`) |
-| Land | up to `LAND_FRONT` | Ground, platforms and their front skins, decoration, props, lanterns, signs, portals |
+| Land | up to `LAND_FRONT` | The floor block, platforms (flat painted front skins), decoration, props, lanterns, signs, portals |
 | `Z_CLIMBABLE` | 0.2 | Ropes, vines and ladders |
 | `Z_NPC` | 0.3 | NPCs |
 | `Z_MONSTER` | 0.38 to 0.52 | Monsters, each at a slightly different depth so overlapping ones don't flicker |
@@ -257,6 +257,11 @@ hides a character, NPC, rope or ladder. Decoration and prop depths in data are c
 `TDStage.land_depth()`, so a `DecorDef` or `PropPlacement` can't be set in front of the
 actors by mistake. Something new that the player interacts with should use one of the `Z_`
 layers (or add one here) rather than a raw number.
+
+Only the floor is a 3D block (its top runs back into the scene). Floating platforms have no
+depth: each is just its painted front skin at `LAND_FRONT`, so grass, decoration and portals
+on a platform stand just behind the skin. The floor's front-edge grass is nearer than the
+actors but sunk so its tips stop at the feet line (`TerrainBuilder.FRINGE_RISE`).
 
 Text that belongs to a spot in the world (name tags, the map's sign, hints, damage numbers)
 is never put in the 3D stage: `TDOverlay` projects the spot to the screen and draws it there,

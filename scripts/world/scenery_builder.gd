@@ -8,6 +8,8 @@ const SIGN_SCALE := 1.2
 const SIGN_DEPTH := -0.9
 ## Space between the top of the signpost (or portal) and the sign's words.
 const SIGN_LABEL_GAP := 6.0
+## Room the sign's words need above their bottom edge, so no platform skin runs through them.
+const SIGN_LABEL_H := 22.0
 
 var stage: TDStage
 var root: Node3D
@@ -148,8 +150,9 @@ func _sign(map: MapDef, biome: BiomeDef) -> void:
 	root.add_child(post)
 
 ## Where the sign's words go (game pixels, their bottom centre), or null for no sign. The
-## overlay draws them, so they stay sharp and in front: over the post, and at least as high
-## as the biome's portal so the portal by the entrance never hides them.
+## overlay draws them, so they stay sharp and in front: over the post, at least as high as
+## the biome's portal so the portal by the entrance never hides them, and above any platform
+## skin they would otherwise sit on.
 static func sign_label_at(map: MapDef) -> Variant:
 	var biome := map.biome
 	if map.sign_text == "" or biome == null or biome.signpost == null:
@@ -157,4 +160,15 @@ static func sign_label_at(map: MapDef) -> Variant:
 	var h := biome.signpost.get_height() * SIGN_SCALE * TDStage.TEXEL
 	if not biome.portal_frames.is_empty():
 		h = maxf(h, biome.portal_frames[0].get_height() * TDStage.TEXEL)
-	return Vector2(map.sign_x, map.ground_y + 3.0 - h - SIGN_LABEL_GAP)
+	var y := map.ground_y + 3.0 - h - SIGN_LABEL_GAP
+	var moved := true
+	while moved: # lifting the words over one platform can put them in the one above
+		moved = false
+		for d in map.platforms:
+			if map.sign_x < d.x or map.sign_x > d.x + d.width:
+				continue
+			var skin := TerrainBuilder.skin_span(d, biome)
+			if y > skin.x and y - SIGN_LABEL_H < skin.y:
+				y = skin.x - SIGN_LABEL_GAP
+				moved = true
+	return Vector2(map.sign_x, y)
