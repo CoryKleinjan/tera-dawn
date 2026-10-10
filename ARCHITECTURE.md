@@ -153,13 +153,24 @@ only what the creator offers and makes a level 1 character in the starting job
   (`assets/animations/paperdoll/`). `tools/art/paperdoll_layers.py` builds them from the
   paperdoll sheets, together with the body's region map (`hero_regions.png`: skin, chest,
   shorts, feet) and rig (`hero_rig.json`: head, face, neck, hand and shield per frame, and
-  each weapon's grip). The skin tone and worn tops, bottoms and shoes recolour the body
+  how each weapon kind is held). The skin tone and worn tops, bottoms and shoes recolour the body
   through the paperdoll shaders; hair, irises, capes and shields are greyscale art tinted
-  with the hair, eye or item colour (`EquipDef.look_color` or the icon). Hats (code-drawn
-  stand-ins for now) and weapons (pictures cut from the weapon sheet) are drawn at a rig
-  point and turn with the arm (`LookShapes`, picked by `EquipDef.look_shape` or the weapon
-  kind). `LookDef.frames` and `EquipDef.worn_frames` take any new layered art without code
-  changes.
+  with the hair, eye or item colour (`EquipDef.look_color` or the icon). The **weapon** is a
+  layer too (`Paperdoll.weapon_layers`): already placed in his fist on every frame, with a
+  hole where his fingers wrap the grip, behind him on far-hand frames and on his back while
+  he climbs or sits. Each kind is held its own way (a bow upright, a staff planted; "holds"
+  in `art/sheets/paperdoll_rig.json`), and a weapon with its own held picture uses it in its
+  own colours instead of its kind's tinted one. Hats are code-drawn stand-ins drawn at a rig
+  point (`LookShapes`, picked by `EquipDef.look_shape`). `LookDef.frames` and
+  `EquipDef.worn_frames` take any new layered art without code changes. The strip is cut at
+  the painted sheet's full resolution: `Paperdoll.ART_SCALE` strip pixels make one hero pixel.
+- **Animation**: each weapon fights its own way (`WeaponStyle`): a skill's motion ("attack",
+  "slash") becomes the weapon's own animation (a bow shoots, a claw throws, knuckles punch, a
+  staff smashes), and "cast" and other names play as they are. Frames have their own
+  durations (a held wind-up), and `TDPlayer` adds a ready stance after fighting, a run at top
+  speed, a turn, the top of a jump and a walk that keeps step with his speed. Poses not drawn
+  yet fall back to the nearest one (`SpriteRig.FALLBACK`). `WeaponTrail` draws the streak a
+  swung blade leaves and the flash of a shot.
 
 ### Chairs, pets, the Monster Book and achievements
 
@@ -410,6 +421,24 @@ and Shield (`EquipDef.Slot` and `Equipment.PLACES_FOR`). Adding a slot means add
 
 Dawnshards go straight to the wallet when walked over; everything else waits on the ground
 for the loot key, and stays there if its tab is full.
+
+## How to add a weapon
+
+- **A new weapon item** of an existing kind is just an item (above) with its `weapon_kind`.
+  It's drawn with its kind's greyscale picture in its own colour. To give it its own held
+  picture, draw it on a `held_*` sheet (art prompts part 8, Message W: pointing right, a green
+  grip dot), name its cell by the item id in `art/sheets/held_<group>.json`, and run
+  `python3 tools/art/paperdoll_layers.py`.
+- **A new weapon kind**: draw its greyscale template on the paperdoll weapons sheet (add its
+  cell to `paperdoll_weapons.json` and `WEAPON_KINDS` in `paperdoll_layers.py`), say how it's
+  held in `art/sheets/paperdoll_rig.json` "holds" ("like" another kind, or an angle per frame;
+  add it to `GRIPPED` if the fingers wrap it, `ON_BACK` if it's carried on the back), give it
+  a row in `WeaponStyle.MOTIONS`, then run the tool and check `art/build/paperdoll_preview.png`
+  (one row of frames per kind).
+- **A new motion**: add the animation to the hero set in `art/sheets/paperdoll_body.json`
+  (frames, fps, per-frame `durations`), point the kinds that use it at it in
+  `WeaponStyle.MOTIONS`, list it in `WeaponStyle.ACTIONS`, and give it a `SpriteRig.FALLBACK`
+  for sprites that don't have it.
 
 ## How to add a job
 

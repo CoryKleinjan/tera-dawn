@@ -1,0 +1,25 @@
+{
+  "source": "art/source/held_swords.png",
+  "scale": 1.0,
+  "label_band": 0.16,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/paperdoll/held_swords",
+  "cells": [
+    [
+      "training_sword",
+      "bronze_sword",
+      "iron_broadsword"
+    ],
+    [
+      "steel_bastard_sword",
+      "ember_cleaver",
+      "dawn_blade"
+    ],
+    [
+      "cinder_greatsword",
+      "ravager_blade",
+      "dawnbreaker_claymore"
+    ]
+  ]
+}

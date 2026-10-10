@@ -1,0 +1,20 @@
+{
+  "source": "art/source/held_bows.png",
+  "scale": 1.0,
+  "label_band": 0.16,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/paperdoll/held_bows",
+  "cells": [
+    [
+      "hunter_bow",
+      "willow_bow",
+      "elmwood_longbow"
+    ],
+    [
+      "composite_bow",
+      "gale_bow",
+      "skyreach_bow"
+    ]
+  ]
+}

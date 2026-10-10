@@ -90,6 +90,33 @@ func burst(at: Vector2, col: Color, amount: int, speed := 1.0) -> void:
 	p.emitting = true
 	p.finished.connect(p.queue_free)
 
+## A little puff of dust kicked up at someone's feet: landing (`dir` 0, both ways) or
+## skidding round (`dir` the way it sprays, -1 or 1).
+func dust(feet: Vector2, dir: int, amount: int) -> void:
+	var p := TDStage.particles(DUST, amount, 0.22)
+	(p.mesh.material as StandardMaterial3D).blend_mode = BaseMaterial3D.BLEND_MODE_MIX  # dust doesn't glow
+	p.one_shot = true
+	p.explosiveness = 0.9
+	p.lifetime = 0.45
+	p.direction = Vector3(dir, 0.6, 0).normalized() if dir != 0 else Vector3.UP
+	p.spread = 35.0 if dir != 0 else 80.0
+	p.gravity = Vector3(0, -1.5, 0)
+	p.initial_velocity_min = 0.6
+	p.initial_velocity_max = 1.6
+	p.scale_amount_min = 0.7
+	p.scale_amount_max = 1.4
+	var fade := Gradient.new()
+	fade.set_color(0, DUST)
+	fade.set_color(1, Color(DUST, 0.0))
+	p.color_ramp = fade
+	p.position = TDStage.to3d(feet + Vector2(0, -2), TDStage.Z_EFFECT)
+	world.stage.map_root.add_child(p)
+	p.emitting = true
+	p.finished.connect(p.queue_free)
+
+## Dust's colour: pale sandy brown, not glowing.
+const DUST := Color(0.82, 0.74, 0.6, 0.6)
+
 ## Monster `index` fired its shot at the point `aim`.
 func show_mob_shot(index: int, aim: Vector2) -> void:
 	var views := world.mobs()

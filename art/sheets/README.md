@@ -114,5 +114,9 @@ brighten `item_slot` on hover instead.
   room for hair). `paperdoll_hair`, `_faces`, `_layers` (cape, gloves, shields per frame) and
   `_weapons` cut into `art/build/` only; `tools/art/paperdoll_layers.py` places those pieces
   on every body frame and writes the layers, the region map and the rig. The weapon hand, the weapon's angle, the shield and the head's tilt
-  in each frame are placed by hand in `paperdoll_rig.json`. Run it after re-cutting the body. Gloves are cut but not used yet (nothing to anchor them to).
+  in each frame are placed by hand in `paperdoll_rig.json` (in 128 px frames; the tool scales them to the strip), with how each
+  weapon kind is held ("holds") and which frames hold it behind him (`weapon_behind`). Run it after re-cutting the body.
+  `--preview` writes `art/build/paperdoll_preview.png`: every frame with each weapon kind in his hand.
+- **Held weapons** (`held_*`, art prompts part 8 W2-W6): one weapon per cell, named by item id, pointing right with a green
+  grip dot. `paperdoll_layers.py` puts each in his hand on every frame (`weapon_item_<id>`), in its own colours.
   `hero_main` (the painted hero) now cuts into `art/build/` for reference.

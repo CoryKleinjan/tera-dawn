@@ -44,6 +44,21 @@ const HURT_POSE_TICKS := 20
 const CHEER_TICKS := 50
 ## Ticks between asking the server for the next item while the loot key is held.
 const LOOT_EVERY := 4
+## Ticks of the combat-ready stance after an attack, before he relaxes into idle.
+const READY_TICKS := 120
+## Ticks of the turn pose when he turns round while moving fast on the ground.
+const TURN_TICKS := 5
+## Ground speed above which turning round skids (kicks up dust and shows the turn pose).
+const TURN_SPEED := 1.6
+## Ticks at (nearly) top speed before the walk becomes a run.
+const RUN_AFTER := 24
+## Share of top speed that counts as running flat out.
+const RUN_SHARE := 0.9
+## Vertical speed under which a jump shows its top-of-the-arc pose.
+const APEX_SPEED := 1.2
+## The walk and run cycles play at their drawn speed at this ground speed (game pixels a
+## tick), faster or slower in step with him, so his feet don't slide.
+const STRIDE_SPEED := 3.7
 
 var world: TDWorld
 var vel := Vector2.ZERO
@@ -63,6 +78,9 @@ var inv := 0          # invincibility (blinking) ticks after being hit
 var down := false     # fainted, until the server sends you back to town
 var land_t := 0       # ticks of the landing pose
 var cheer_t := 0      # ticks of the level-up pose
+var ready_t := 0      # ticks of the combat-ready stance left after an attack
+var turn_t := 0       # ticks of the turn pose
+var run_t := 0        # ticks spent at top speed (a run after RUN_AFTER)
 var loot_cd := 0      # ticks before the loot key asks for the next item
 ## Coyote time and jump buffering (see JumpGrace).
 var jump_grace := JumpGrace.new()
@@ -80,7 +98,7 @@ var companion: TDCompanion
 
 func _ready() -> void:
 	rig = SpriteRig.new()
-	rig.setup(HERO_FRAMES, null, TDStage.TEXEL * HERO_SCALE, 40.0)
+	rig.setup(HERO_FRAMES, null, TDStage.TEXEL * HERO_SCALE / Paperdoll.ART_SCALE, 40.0)
 	rig.add_light(LIGHT, LIGHT_ENERGY, 48.0)
 	add_child(rig)
 	companion = TDCompanion.new()
@@ -161,6 +179,10 @@ func step() -> void:
 		inv -= 1
 	if action_t > 0:
 		action_t -= 1
+	elif ready_t > 0:
+		ready_t -= 1
+	if turn_t > 0:
+		turn_t -= 1
 	if cooldown > 0:
 		cooldown -= 1
 	if grab_cd > 0:
@@ -241,7 +263,8 @@ func _use(skill: SkillDef) -> void:
 		world.add_log(problem, Palette.INFO)
 		return
 	action_t = skill.action_ticks
-	action_anim = skill.animation
+	action_anim = WeaponStyle.animation_for(Game.me.look(), skill.animation)
+	ready_t = READY_TICKS
 	cooldown = skill.cooldown
 	cheer_t = 0
 	_swing = true
@@ -320,6 +343,7 @@ func _move() -> void:
 	var rooted := action_t > 0 and on_ground
 	var acc := ACCEL_GROUND if on_ground else ACCEL_AIR
 	var max_speed := RUN_SPEED * CharacterStats.speed_multiplier(Game.me.stats)
+	var was_face := face
 	if left and not right and not rooted:
 		vel.x = maxf(-max_speed, vel.x - acc)
 		face = -1
@@ -330,6 +354,10 @@ func _move() -> void:
 		vel.x *= FRICTION_GROUND if on_ground else FRICTION_AIR
 	if absf(vel.x) < 0.05:
 		vel.x = 0
+	if face != was_face and on_ground and absf(vel.x) > TURN_SPEED:
+		turn_t = TURN_TICKS
+		world.fx.dust(position, -face, 5)
+	run_t = run_t + 1 if on_ground and absf(vel.x) >= max_speed * RUN_SHARE else 0
 
 	# a jump works a few ticks after walking off a ledge, and a press just before
 	# landing goes off on landing (see JumpGrace); dropping through needs footing
@@ -362,6 +390,7 @@ func _move() -> void:
 				platform = pl
 				if was_falling:
 					land_t = LAND_TICKS
+					world.fx.dust(position, 0, 6)
 				break
 	if position.y > float(world.map.height):
 		position.y = float(world.map.ground_y)
@@ -375,7 +404,9 @@ func _process(_delta: float) -> void:
 		return
 	var at := world.drawn(self)
 	rig.place(at + Vector2(0, -companion.seat_lift()), Z, NAN if is_climbing() or fainted() or not _over_ground() else _ground_y())
-	rig.play(_animation(), _swing)
+	var anim := _animation()
+	rig.play(anim, _swing)
+	rig.set_speed(stride_speed(anim, vel.x))
 	_swing = false
 	rig.face(1 if is_climbing() else face)
 	rig.set_opacity(0.0 if inv > 0 and inv % 8 < 4 and not fainted() else 1.0)
@@ -396,16 +427,28 @@ func _animation() -> StringName:
 	if inv > SimPlayer.HURT_INV - HURT_POSE_TICKS and inv <= SimPlayer.HURT_INV: # just got hit (see knock_back)
 		return &"hurt"
 	if not on_ground:
+		if absf(vel.y) < APEX_SPEED:
+			return &"jump_apex"
 		return &"jump" if vel.y < 0 else &"fall"
 	if land_t > 0:
 		return &"land"
 	if cheer_t > 0:
 		return &"level_up"
+	if turn_t > 0:
+		return &"turn"
 	if absf(vel.x) > 0.3:
-		return &"walk"
+		return &"run" if run_t >= RUN_AFTER else &"walk"
 	if _held("move_down"):
 		return &"crouch"
+	if ready_t > 0:
+		return &"ready"
 	return &"idle"
+
+## How fast an animation plays for a ground speed: walking and running keep step with him.
+static func stride_speed(anim: StringName, speed_x: float) -> float:
+	if anim in [&"walk", &"run"]:
+		return clampf(absf(speed_x) / STRIDE_SPEED, 0.55, 1.4)
+	return 1.0
 
 func _over_ground() -> bool:
 	return on_ground or _ground_y() - position.y < 200.0

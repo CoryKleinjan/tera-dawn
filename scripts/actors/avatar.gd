@@ -29,6 +29,8 @@ var pet: StringName = &""
 ## Their appearance and the gear that shows (Character.look()).
 var look := {}
 var _swing := false
+## How far they moved sideways on the last tick (their walk keeps step with it).
+var _moved_x := 0.0
 
 static func create(w: TDWorld, peer_id: int) -> TDAvatar:
 	var a := TDAvatar.new()
@@ -40,8 +42,10 @@ static func create(w: TDWorld, peer_id: int) -> TDAvatar:
 func apply(state: Array) -> void:
 	target = Vector2(state[1], state[2])
 	face = state[3]
-	var anim := StringName(state[4])
-	_swing = _swing or (anim != animation and anim in [&"attack", &"slash"])
+	# their own game sends the animation it plays; the server passes on a skill's motion,
+	# which plays as their weapon does it (WeaponStyle)
+	var anim := WeaponStyle.animation_for(look, StringName(state[4]))
+	_swing = _swing or (anim != animation and WeaponStyle.is_action(anim))
 	animation = anim
 	flags = state[5]
 	if not known or position.distance_to(target) > 300.0:
@@ -63,20 +67,22 @@ func apply_info(info: Array) -> void:
 ## They used a skill: restart its animation even if it's the same one as last time.
 func play_skill(skill: SkillDef) -> void:
 	if skill:
-		animation = skill.animation
+		animation = WeaponStyle.animation_for(look, skill.animation)
 		_swing = true
 
 func fainted() -> bool:
 	return flags & SnapshotFlags.PLAYER_FAINTED != 0
 
 func step() -> void:
+	var before := position.x
 	position += (target - position) * FOLLOW
+	_moved_x = position.x - before
 	if speech_t > 0:
 		speech_t -= 1
 
 func _ready() -> void:
 	rig = SpriteRig.new()
-	rig.setup(TDPlayer.HERO_FRAMES, null, TDStage.TEXEL * TDPlayer.HERO_SCALE, 40.0)
+	rig.setup(TDPlayer.HERO_FRAMES, null, TDStage.TEXEL * TDPlayer.HERO_SCALE / Paperdoll.ART_SCALE, 40.0)
 	rig.add_light(TDPlayer.LIGHT, TDPlayer.LIGHT_ENERGY, 48.0)
 	add_child(rig)
 	companion = TDCompanion.new()
@@ -91,6 +97,7 @@ func _process(_delta: float) -> void:
 	var at := world.drawn(self)
 	rig.place(at + Vector2(0, -companion.seat_lift()), TDStage.Z_OTHER_PLAYER, NAN if airborne else world.layout.ground_below(position))
 	rig.play(&"faint" if fainted() else animation, _swing)
+	rig.set_speed(TDPlayer.stride_speed(animation, _moved_x))
 	_swing = false
 	rig.face(1 if climbing else face)
 	rig.dress(look)

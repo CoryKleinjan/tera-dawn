@@ -1,0 +1,45 @@
+class_name WeaponStyle
+extends RefCounted
+## How each kind of weapon fights: which of the hero's animations (assets/animations/hero.tres)
+## a skill plays with it. A skill names a motion (SkillDef.animation): "attack" is the
+## weapon's own basic blow, "slash" its big one; any other name ("cast", "throw") is played
+## as it is, whatever the weapon. Your own game and everyone watching you work it out the same
+## way from the weapon you wear, so they all see the same motion.
+##
+## Add a weapon kind with a row here, its holds in art/sheets/paperdoll_rig.json and its
+## picture on the paperdoll weapons sheet (see ARCHITECTURE.md "How to add a weapon").
+
+## weapon kind -> {motion: animation}
+const MOTIONS := {
+	&"sword": {&"attack": &"attack", &"slash": &"slash"},
+	&"wand": {&"attack": &"attack", &"slash": &"cast"},
+	&"staff": {&"attack": &"heavy", &"slash": &"cast"},
+	&"bow": {&"attack": &"shoot", &"slash": &"shoot"},
+	&"gun": {&"attack": &"gun", &"slash": &"gun"},
+	&"claw": {&"attack": &"throw", &"slash": &"throw"},
+	&"knuckle": {&"attack": &"punch", &"slash": &"slash"},
+}
+## With nothing in hand.
+const UNARMED := {&"attack": &"punch", &"slash": &"slash"}
+## Every animation a skill can play (each restarts when the skill is used again).
+const ACTIONS: Array[StringName] = [&"attack", &"slash", &"punch", &"throw", &"shoot", &"gun", &"cast", &"heavy"]
+
+## The animation a motion plays with a weapon kind (&"" for bare hands).
+static func animation(kind: StringName, motion: StringName) -> StringName:
+	var row: Dictionary = MOTIONS.get(kind, MOTIONS[Paperdoll.DEFAULT_WEAPON]) if kind != &"" else UNARMED
+	return row.get(motion, motion)
+
+## Whether an animation is a skill being used (not moving about).
+static func is_action(anim: StringName) -> bool:
+	return anim in ACTIONS
+
+## The kind of weapon a look (Character.look()) holds, or &"" for bare hands.
+static func kind_in(look: Dictionary) -> StringName:
+	var gear: Variant = look.get("gear")
+	if not gear is Dictionary or not gear.has("weapon"):
+		return &""
+	return Paperdoll.kind_of(Content.items.get(StringName(str(gear["weapon"]))) as EquipDef)
+
+## What someone wearing `look` plays for a motion.
+static func animation_for(look: Dictionary, motion: StringName) -> StringName:
+	return animation(kind_in(look), motion)

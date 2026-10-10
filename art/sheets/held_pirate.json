@@ -1,0 +1,24 @@
+{
+  "source": "art/source/held_pirate.png",
+  "scale": 1.0,
+  "label_band": 0.16,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/paperdoll/held_pirate",
+  "cells": [
+    [
+      "brass_knuckle",
+      "iron_knuckle",
+      "barnacle_knuckle",
+      "stormbreaker_knuckle",
+      "leviathan_fist"
+    ],
+    [
+      "flintlock",
+      "driftwood_pistol",
+      "saltwood_pistol",
+      "stormcaller",
+      "leviathan_hand_cannon"
+    ]
+  ]
+}

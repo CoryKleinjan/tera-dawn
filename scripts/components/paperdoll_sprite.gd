@@ -18,6 +18,12 @@ var _material: ShaderMaterial
 var _texel := 1.0
 var _overlays: Array[Sprite3D] = []
 var _layers: Array[AnimatedSprite3D] = []
+## The streak his weapon leaves and the flash of a shot.
+var trail: WeaponTrail
+## The animation and frame showing last time (the trail sweeps between frames).
+var _anim := &""
+var _index := -1
+var _frame := -1
 
 func _init(sprite: AnimatedSprite3D, texel: float) -> void:
 	body = sprite
@@ -26,6 +32,9 @@ func _init(sprite: AnimatedSprite3D, texel: float) -> void:
 	_material.shader = SHADER
 	_material.set_shader_parameter(&"strip", Paperdoll.STRIP)
 	body.material_override = _material
+	trail = WeaponTrail.new(body.pixel_size, Paperdoll.FRAME_SIZE)
+	trail.position.z = DEPTH * 1.2
+	add_child(trail)
 	set_look({})
 
 ## Dresses the hero in a look (Character.look()). Does nothing if it hasn't changed.
@@ -67,6 +76,14 @@ func sync() -> void:
 	var tex := body.sprite_frames.get_frame_texture(body.animation, body.frame)
 	var frame := Paperdoll.frame_index(tex)
 	var mirror := body.flip_h
+	if body.animation != _anim or body.frame != _index:
+		# one frame on in the same animation: the weapon swept from the last frame to this one
+		var prev := _frame if body.animation == _anim and body.frame == _index + 1 else -1
+		trail.advance(body.animation, body.frame, prev, frame, doll.weapon_kind, doll.weapon_tint, mirror)
+		_anim = body.animation
+		_index = body.frame
+		_frame = frame
+	trail.paused = body.speed_scale == 0.0
 	for i in _overlays.size():
 		var s := _overlays[i]
 		var shape := doll.overlays[i].shape

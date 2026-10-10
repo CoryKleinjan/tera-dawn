@@ -20,7 +20,7 @@
       1774
     ]
   },
-  "scale": 0.5,
+  "scale": 1.0,
   "label_band": 0.18,
   "strip_labels": true,
   "keep": "largest",
@@ -149,7 +149,11 @@
             "attack1",
             "attack2"
           ],
-          "fps": 8,
+          "fps": 10,
+          "durations": [
+            1.5,
+            1
+          ],
           "loop": false
         },
         "slash": {
@@ -158,7 +162,84 @@
             "slash2",
             "slash3"
           ],
-          "fps": 9,
+          "fps": 10,
+          "durations": [
+            1.5,
+            0.8,
+            1.6
+          ],
+          "loop": false
+        },
+        "punch": {
+          "frames": [
+            "attack1",
+            "attack2"
+          ],
+          "fps": 12,
+          "durations": [
+            1.2,
+            1
+          ],
+          "loop": false
+        },
+        "throw": {
+          "frames": [
+            "attack1",
+            "attack2"
+          ],
+          "fps": 12,
+          "durations": [
+            1.4,
+            1
+          ],
+          "loop": false
+        },
+        "shoot": {
+          "frames": [
+            "slash2",
+            "attack2"
+          ],
+          "fps": 8,
+          "durations": [
+            1.6,
+            1
+          ],
+          "loop": false
+        },
+        "gun": {
+          "frames": [
+            "attack2",
+            "slash2"
+          ],
+          "fps": 10,
+          "durations": [
+            1.4,
+            1
+          ],
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            "levelup",
+            "attack2"
+          ],
+          "fps": 8,
+          "durations": [
+            1.4,
+            1
+          ],
+          "loop": false
+        },
+        "heavy": {
+          "frames": [
+            "slash1",
+            "slash3"
+          ],
+          "fps": 8,
+          "durations": [
+            1.8,
+            1
+          ],
           "loop": false
         },
         "hit": {
@@ -230,7 +311,7 @@
       },
       "out": "assets/sprites/characters/hero.png",
       "sprite_frames": "assets/animations/hero.tres",
-      "pad_top": 18
+      "pad_top": 36
     }
   }
 }

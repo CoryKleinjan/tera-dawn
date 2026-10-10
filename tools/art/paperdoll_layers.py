@@ -22,7 +22,10 @@ Writes:
 - assets/sprites/characters/layers/*.png and assets/animations/paperdoll/*.tres: hair (front,
   back, under a hat) per hairstyle, face and eyes per face, cape (behind, and in front for
   back views), round and kite shields, gloves.
-- assets/sprites/characters/weapons/<kind>.png: held weapons, pointing right, greyscale.
+- layers/weapon_<kind>.png (+ _behind): each weapon kind in his fist in every frame, greyscale,
+  with a hole where his fingers wrap the grip so the hand shows over it; on his back while he
+  climbs or sits. layers/weapon_item_<id>.png: the same for a weapon with its own held picture
+  (art/sheets/held_*.json, cells named by item id), in full colour.
 
 A hairstyle with a sheet drawn in every pose (art/sheets/hair_<style>_frames.json, the body
 wearing the hair on the body sheet's grid) uses that instead of its one front piece: the
@@ -34,13 +37,18 @@ Gloves come from a sheet of the body wearing them in every pose (art/sheets/glov
 each pose's two gloves are lifted off and set on the hero's hands (the rig's grip and shield
 points), at the size the drawn body is to his.
 
+How each kind is held (a bow upright, a staff planted, a gun pointed) and which frames hold
+the weapon behind his body are in art/sheets/paperdoll_rig.json ("holds", "weapon_behind").
+
 Hair, cape, shields, gloves and weapons are greyscale; the game tints them (hair colour, the worn
 item's colour). The irises are split off the faces into their own layer for the eye colour.
 """
 import json
 import math
 import os
+import re
 import sys
+from collections import deque
 
 import numpy as np
 from PIL import Image
@@ -54,7 +62,6 @@ STRIP = os.path.join(CHAR, "hero.png")
 MASK = os.path.join(CHAR, "hero_regions.png")
 RIG = os.path.join(CHAR, "hero_rig.json")
 LAYERS = os.path.join(CHAR, "layers")
-WEAPONS = os.path.join(CHAR, "weapons")
 ANIMS = os.path.join(ROOT, "assets", "animations", "paperdoll")
 BODY_MANIFEST = os.path.join(ss.SHEETS, "paperdoll_body.json")
 PREVIEW = os.path.join(ROOT, "art", "build", "paperdoll_preview.png")
@@ -90,6 +97,23 @@ SHIELD_HEIGHT = 1.25
 GLOVE_REACH = 0.9     # a glove is put on a hand only if the drawn one is this near it (head radii)
 SWORD_LENGTH = 1.9    # every weapon is drawn at the scale that makes the sword this long
 WEAPON_LENGTH = 20    # rig "tip" is this far from "grip" along the weapon (only its direction matters)
+FIST = 0.4            # the fist around a grip reaches this far from the grip point (head radii)
+
+# Weapons worn on the fist are drawn smaller than the template sheet has them, so they fit
+# his hand rather than swallowing it (the rest keep the sheet's size against the sword).
+WORN_SIZE = {"claw": 0.6, "knuckle": 0.75}
+# Weapons held in the fist: his fingers draw over the grip. The others are worn on the fist.
+GRIPPED = ("sword", "wand", "staff", "bow", "gun")
+# Weapons carried on his back while he climbs or sits, and at what angle; the rest are put away.
+ON_BACK = {"sword": 125, "staff": -70, "bow": 60}
+SHEATHED = BACK_VIEW + ("sit",)
+# Sheets of weapons with their own held picture: one cell per weapon, named by item id.
+HELD_SHEETS = "held_"
+ITEMS = os.path.join(ROOT, "data", "items")
+
+# The scale the body sheet is cut at (paperdoll_body.json): sheets drawn on its grid fit the
+# hero at about this scale. Set by frame_names().
+BODY_SCALE = 0.5
 
 # Where the weapon hand and shield are, and how the head is tilted, per frame: placed by hand,
 # since the hands are hard to tell apart from the rest of the body.
@@ -99,8 +123,11 @@ HAND_RIG = os.path.join(ss.SHEETS, "paperdoll_rig.json")
 # ---------- reading the body ----------
 
 def frame_names():
+    global BODY_SCALE
     with open(BODY_MANIFEST) as f:
-        spec = json.load(f)["sets"]["hero"]
+        man = json.load(f)
+    BODY_SCALE = man["scale"]
+    spec = man["sets"]["hero"]
     return list(spec["frames"]), spec
 
 
@@ -269,8 +296,13 @@ def drawn_head(arr):
     return np.array([xs.mean(), ys.mean()]), float(r)
 
 
-def body_fit(arr, hair, px, scales=(0.46, 0.48, 0.5, 0.52, 0.54)):
-    """Lines the body a pose was drawn on up with the hero's: (scale, x, y) of the best overlap."""
+def body_fit(arr, hair, px, scales=None):
+    """Lines the body a pose was drawn on up with the hero's: (scale, x, y) of the best overlap.
+    The sheets are drawn at the size of the body sheet's cells, so the scale is near the body's
+    own cut scale (BODY_SCALE)."""
+    if scales is None:
+        scales = [BODY_SCALE * k for k in (0.92, 0.96, 1.0, 1.04, 1.08)]
+    slack = int(round(24 * BODY_SCALE))
     figure = (arr[..., 3] > 0) & ~ss.dilate(hair, 1)
     ours = px[..., 3] > 127
     oy, ox = np.nonzero(ours)
@@ -283,8 +315,8 @@ def body_fit(arr, hair, px, scales=(0.46, 0.48, 0.5, 0.52, 0.54)):
             continue
         x0 = int(round(ox.mean() - mx_.mean()))
         y0 = int(oy.max() - my.max())
-        for dy in range(-12, 13):
-            for dx in range(-12, 13):
+        for dy in range(-slack, slack + 1):
+            for dx in range(-slack, slack + 1):
                 score = overlap(m, ours, x0 + dx, y0 + dy)
                 if best is None or score > best[0]:
                     best = (score, s, x0 + dx, y0 + dy)
@@ -421,6 +453,148 @@ def weapon(piece, s):
     return img, [round(grip[0] * s, 1), round(grip[1] * s, 1)]
 
 
+def hand_rig(fw):
+    """paperdoll_rig.json's frames and holds, its points scaled from the frame size they were
+    placed on to the strip's."""
+    with open(HAND_RIG) as f:
+        spec = json.load(f)
+    k = fw / spec.get("frame_size", [fw])[0]
+    frames = {}
+    for n, h in spec["frames"].items():
+        h = dict(h)
+        if "weapon" in h:
+            h["weapon"] = [h["weapon"][0] * k, h["weapon"][1] * k, h["weapon"][2]]
+        if "shield" in h:
+            h["shield"] = [h["shield"][0] * k, h["shield"][1] * k]
+        frames[n] = h
+    holds = {}
+    for kind, h in spec.get("holds", {}).items():
+        h = dict(h)
+        h["frames"] = {n: [v[0] * k, v[1] * k, v[2]] if isinstance(v, list) else v for n, v in h.get("frames", {}).items()}
+        holds[kind] = h
+    return frames, holds
+
+
+def holds(hands, spec, names):
+    """Per weapon kind, per frame: [x, y, angle] of the fist and the weapon in it (the sword's
+    are the hand-placed "weapon" points), or None when the weapon isn't in his hand."""
+    out = {"sword": {n: hands[n].get("weapon") for n in names}}
+
+    def resolve(kind):
+        if kind not in out:
+            h = spec.get(kind, {"like": "sword"})
+            base = resolve(h["like"]) if "like" in h else out["sword"]
+            frames = {}
+            for n in names:
+                v = h.get("frames", {}).get(n, h.get("angle"))
+                if base[n] is None:
+                    frames[n] = None
+                elif isinstance(v, list):
+                    frames[n] = [round(float(c), 1) for c in v]
+                else:
+                    frames[n] = [base[n][0], base[n][1], base[n][2] if v is None else v]
+            out[kind] = frames
+        return out[kind]
+
+    for kind in WEAPON_KINDS:
+        resolve(kind)
+    return out
+
+
+def fist_mask(px, grip, reach):
+    """The fist around `grip` on a body frame: the pixels inside its outline that a flood from the
+    grip reaches without crossing the outline or going further than `reach`, plus the outline
+    around them."""
+    a = px[..., 3] > 127
+    inside = a & (px[..., :3].max(2) > 90)
+    h, w = a.shape
+    yy, xx = np.mgrid[0:h, 0:w]
+    near = (xx - grip[0]) ** 2 + (yy - grip[1]) ** 2 <= reach ** 2
+    ok = inside & near
+    if not ok.any():
+        return np.zeros(a.shape, bool)
+    d = np.where(ok, (xx - grip[0]) ** 2 + (yy - grip[1]) ** 2, np.inf)
+    sy, sx = np.unravel_index(np.argmin(d), d.shape)
+    seen = np.zeros(a.shape, bool)
+    seen[sy, sx] = True
+    todo = deque([(sy, sx)])
+    while todo:
+        y, x = todo.popleft()
+        for ny, nx in ((y + 1, x), (y - 1, x), (y, x + 1), (y, x - 1)):
+            if 0 <= ny < h and 0 <= nx < w and ok[ny, nx] and not seen[ny, nx]:
+                seen[ny, nx] = True
+                todo.append((ny, nx))
+    return ss.dilate(seen, 1) & a
+
+
+def draw_turned(canvas, img, anchor, at, angle):
+    """Draws `img` on `canvas` with its point `anchor` exactly on `at` (sub-pixel), turned by
+    `angle` degrees clockwise, smoothly (the game filters sprites smoothly too)."""
+    c, s = math.cos(math.radians(angle)), math.sin(math.radians(angle))
+    m = (c, s, anchor[0] - c * at[0] - s * at[1], -s, c, anchor[1] + s * at[0] - c * at[1])
+    layer = img.convert("RGBa").transform(canvas.size, Image.AFFINE, m, resample=Image.BICUBIC).convert("RGBA")
+    canvas.alpha_composite(layer)
+
+
+def weapon_strips(img, grip, kind, names, frames, info, hold, hands, r):
+    """A weapon picture in his hand on every frame: (in front of him, behind him). A held weapon
+    has a hole where his fist wraps it, so his fingers show over the grip."""
+    front, behind = [], []
+    for n, px, fi in zip(names, frames, info):
+        f, b = Image.new("RGBA", (px.shape[1], px.shape[0])), Image.new("RGBA", (px.shape[1], px.shape[0]))
+        if hold[n] is not None:
+            x, y, angle = hold[n]
+            layer = Image.new("RGBA", f.size)
+            draw_turned(layer, img, grip, (x, y), angle)
+            far = hands[n].get("weapon_behind", False)
+            if kind in GRIPPED and not far:
+                arr = np.asarray(layer).copy()
+                arr[fist_mask(px, (x, y), r * FIST), 3] = 0
+                layer = Image.fromarray(arr, "RGBA")
+            (b if far else f).alpha_composite(layer)
+        elif kind in ON_BACK and n in SHEATHED:
+            down = -fi["up"]
+            at = fi["neck"] + down * fi["r"] * 0.3
+            centre = (img.width / 2, img.height / 2)
+            (f if n in BACK_VIEW else b).alpha_composite(_turned_on(f.size, img, centre, at, ON_BACK[kind]))
+        front.append(f)
+        behind.append(b)
+    return front, behind
+
+
+def _turned_on(size, img, anchor, at, angle):
+    layer = Image.new("RGBA", size)
+    draw_turned(layer, img, anchor, at, angle)
+    return layer
+
+
+def held_pictures():
+    """(item id, weapon kind, piece) for every weapon drawn on a held_*.json sheet that's there."""
+    kinds = {}
+    for folder, _, files in os.walk(ITEMS):
+        for f in files:
+            if not f.endswith(".tres"):
+                continue
+            with open(os.path.join(folder, f)) as fh:
+                text = fh.read()
+            item, kind = re.search(r'^id = &"(\w+)"', text, re.M), re.search(r'^weapon_kind = &"(\w+)"', text, re.M)
+            if item and kind:
+                kinds[item.group(1)] = kind.group(1)
+    out = []
+    for f in sorted(os.listdir(ss.SHEETS)):
+        if not (f.startswith(HELD_SHEETS) and f.endswith(".json")):
+            continue
+        with open(os.path.join(ss.SHEETS, f)) as fh:
+            source = json.load(fh)["source"]
+        if not os.path.exists(os.path.join(ROOT, source)):
+            continue
+        for item, piece in cut(f[:-5]).items():
+            if item not in kinds:
+                sys.exit(f"{f}: no weapon item called {item}")
+            out.append((item, kinds[item], piece))
+    return out
+
+
 # ---------- writing ----------
 
 def lift(img):
@@ -463,8 +637,7 @@ def main():
     fw, fh = strip.width // len(names), strip.height
     frames = [np.asarray(strip.crop((i * fw, 0, (i + 1) * fw, fh))) for i in range(len(names))]
     info = [analyse(f) for f in frames]
-    with open(HAND_RIG) as f:
-        hands = json.load(f)["frames"]
+    hands, hold_spec = hand_rig(fw)
     missing = [n for n in names if n not in hands]
     if missing:
         sys.exit(f"{os.path.relpath(HAND_RIG, ROOT)} has no entry for {missing}")
@@ -559,6 +732,7 @@ def main():
         save_layer(f"face_{face}_eyes", eyes, fw, fh, index, anims)
 
     # the rig: the head, face and neck found on the body, the hands placed by hand
+    held = holds(hands, hold_spec, names)
     rig_frames = []
     for n, fi in zip(names, info):
         h = hands[n]
@@ -574,6 +748,9 @@ def main():
             x, y, angle = h["weapon"]
             entry["grip"] = [x, y]
             entry["tip"] = r2(np.array([x, y]) + turned((WEAPON_LENGTH, 0), angle))
+            entry["holds"] = {k: held[k][n] for k in WEAPON_KINDS if held[k][n] is not None}
+            if h.get("weapon_behind"):
+                entry["weapon_behind"] = True
         if "shield" in h:
             entry["shield"] = list(h["shield"])
         if n not in BACK_VIEW:
@@ -618,21 +795,26 @@ def main():
         for n, px, entry in zip(names, frames, rig_frames):
             canvas = blank()
             cell = drawn.get(spec["frames"][n].split(":", 1)[1])
-            hands = [entry[k] for k in ("grip", "shield") if k in entry]
-            if cell and hands and n not in BACK_VIEW:  # climbing: his hands are off the rig's points
-                for img, at in posed_gloves(np.asarray(cell.img), px, hands, r * GLOVE_REACH):
+            points = [entry[k] for k in ("grip", "shield") if k in entry]
+            if cell and points and n not in BACK_VIEW:  # climbing: his hands are off the rig's points
+                for img, at in posed_gloves(np.asarray(cell.img), px, points, r * GLOVE_REACH):
                     _paste(canvas, img, *at)
             out.append(canvas)
         save_layer("gloves", out, fw, fh, index, anims)
 
-    # weapons
-    os.makedirs(WEAPONS, exist_ok=True)
+    # weapons: every kind (greyscale, tinted per item) and every weapon with its own picture
     s_w = r * SWORD_LENGTH / weapons["sword"].img.width
     grips = {}
-    for kind in WEAPON_KINDS:
-        img, grip = weapon(weapons[kind], s_w)
-        lift(img).save(os.path.join(WEAPONS, kind + ".png"))
-        grips[kind] = grip
+    pictures = [(kind, kind, weapons[kind], True) for kind in WEAPON_KINDS]
+    pictures += [("item_" + item, kind, piece, False) for item, kind, piece in held_pictures()]
+    for name, kind, piece, tinted in pictures:
+        img, grip = weapon(piece, s_w * WORN_SIZE.get(kind, 1.0))
+        if tinted:
+            grips[kind] = {"grip": grip, "size": list(img.size)}
+        front, behind = weapon_strips(img, grip, kind, names, frames, info, held[kind], hands, r)
+        save_layer(f"weapon_{name}", front, fw, fh, index, anims, tinted)
+        if any(im.getbbox() for im in behind):
+            save_layer(f"weapon_{name}_behind", behind, fw, fh, index, anims, tinted)
 
     # the region mask and the rig
     mask = Image.new("RGBA", strip.size)
@@ -664,33 +846,39 @@ def main():
 
 
 def preview(names, fw, fh, rig_frames):
-    """Every frame with long hair, a face, the cape, a shield and a sword."""
+    """Every frame with each weapon kind in his hand (one row of frames per kind, split in two),
+    wearing tousled hair, a face, the cape and, with the sword, a shield."""
     load = lambda n: Image.open(os.path.join(LAYERS, n + ".png"))  # noqa: E731
+    have = lambda n: os.path.exists(os.path.join(LAYERS, n + ".png"))  # noqa: E731
     body = Image.open(STRIP)
     tint = lambda im, c: Image.fromarray((np.asarray(im).astype(float) * (list(c) + [1])).astype(np.uint8), "RGBA")  # noqa: E731
-    stack = [tint(load("cape"), (0.8, 0.25, 0.25)), tint(load("hair_long_back"), DEFAULT_HAIR), body,
-             tint(load("cape_back_view"), (0.8, 0.25, 0.25)), load("face_bright"),
-             tint(load("face_bright_eyes"), (0.3, 0.6, 1.0)), tint(load("hair_long"), DEFAULT_HAIR),
-             tint(load("shield_round"), (0.8, 0.7, 0.4))]
-    out = Image.new("RGBA", body.size, (70, 100, 70, 255))
-    for im in stack:
-        out.alpha_composite(im)
-    sword = Image.open(os.path.join(WEAPONS, "sword.png"))
-    with open(RIG) as f:
-        grip = json.load(f)["weapons"]["sword"]
-    for i, e in enumerate(rig_frames):
-        if "grip" in e and "tip" in e:
-            ang = math.degrees(math.atan2(e["tip"][1] - e["grip"][1], e["tip"][0] - e["grip"][0]))
-            place_on = Image.new("RGBA", (fw, fh))
-            place(place_on, sword, grip, e["grip"], ang)
-            out.alpha_composite(place_on, (i * fw, 0))
+    steel, wood = (0.85, 0.87, 0.92), (0.75, 0.55, 0.35)
+    colours = {"sword": steel, "wand": wood, "staff": wood, "bow": wood, "gun": wood, "claw": steel, "knuckle": (0.85, 0.7, 0.4)}
+    rows = []
+    for kind in WEAPON_KINDS:
+        hair = "hair_tousled" if have("hair_tousled") else "hair_long"
+        stack = [tint(load("cape"), (0.8, 0.25, 0.25))]
+        if have(hair + "_back"):
+            stack.append(tint(load(hair + "_back"), DEFAULT_HAIR))
+        if have(f"weapon_{kind}_behind"):
+            stack.append(tint(load(f"weapon_{kind}_behind"), colours[kind]))
+        stack += [body, tint(load("cape_back_view"), (0.8, 0.25, 0.25)), load("face_bright"),
+                  tint(load("face_bright_eyes"), (0.3, 0.6, 1.0)), tint(load(hair), DEFAULT_HAIR),
+                  tint(load(f"weapon_{kind}"), colours[kind])]
+        if kind == "sword":
+            stack.append(tint(load("shield_round"), (0.8, 0.7, 0.4)))
+        out = Image.new("RGBA", body.size, (70, 100, 70, 255))
+        for im in stack:
+            out.alpha_composite(im)
+        rows.append(out)
+    half = (len(names) + 1) // 2
+    sheet = Image.new("RGBA", (fw * half, fh * 2 * len(rows)))
+    for i, out in enumerate(rows):
+        sheet.paste(out.crop((0, 0, fw * half, fh)), (0, fh * 2 * i))
+        sheet.paste(out.crop((fw * half, 0, fw * len(names), fh)), (0, fh * (2 * i + 1)))
     os.makedirs(os.path.dirname(PREVIEW), exist_ok=True)
-    half = len(names) // 2
-    two = Image.new("RGBA", (fw * half, fh * 2))
-    two.paste(out.crop((0, 0, fw * half, fh)), (0, 0))
-    two.paste(out.crop((fw * half, 0, fw * len(names), fh)), (0, fh))
-    two.resize((two.width * 2, two.height * 2), Image.NEAREST).save(PREVIEW)
-    print(f"preview: {os.path.relpath(PREVIEW, ROOT)}")
+    sheet.save(PREVIEW)
+    print(f"preview: {os.path.relpath(PREVIEW, ROOT)} (rows: {', '.join(WEAPON_KINDS)})")
 
 
 if __name__ == "__main__":

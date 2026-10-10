@@ -17,7 +17,8 @@ var facing := 1:
 ## Animation clock in seconds; `playing` false holds the current frame.
 var time := 0.0
 var playing := true
-## The largest the hero is drawn, in screen pixels per hero pixel.
+## The largest the hero is drawn, in screen pixels per hero pixel (Paperdoll.ART_SCALE strip
+## pixels).
 var max_zoom := 4.0
 
 var _back := Control.new()
@@ -72,7 +73,7 @@ func _redraw() -> void:
 
 ## Hero pixels -> this control's pixels: [scale, top-left of the frame].
 func _frame_box() -> Array:
-	var s := minf(minf(size.x / Paperdoll.FRAME_SIZE.x, size.y / Paperdoll.FRAME_SIZE.y), max_zoom)
+	var s := minf(minf(size.x / Paperdoll.FRAME_SIZE.x, size.y / Paperdoll.FRAME_SIZE.y), max_zoom / Paperdoll.ART_SCALE)
 	var origin := Vector2((size.x - Paperdoll.FRAME_SIZE.x * s) / 2.0, size.y - Paperdoll.FRAME_SIZE.y * s)
 	return [s, origin]
 

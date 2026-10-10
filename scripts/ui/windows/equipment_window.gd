@@ -31,7 +31,7 @@ func _init() -> void:
 	var s := minf(box.size.x / Paperdoll.FRAME_SIZE.x, box.size.y / Paperdoll.FRAME_SIZE.y) * 1.3
 	doll.size = Paperdoll.FRAME_SIZE * s
 	doll.position = box.get_center() - Vector2(doll.size.x / 2.0, doll.size.y * 0.55)
-	doll.max_zoom = s
+	doll.max_zoom = s * Paperdoll.ART_SCALE
 	add_child(doll)
 	caption.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	caption.draw.connect(_draw_caption)

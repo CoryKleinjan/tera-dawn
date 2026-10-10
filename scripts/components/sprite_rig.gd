@@ -9,9 +9,14 @@ extends Node3D
 ## animates it procedurally (breathing, hopping, recoiling, flattening).
 
 ## The usual animation names. A SpriteFrames without one of these falls back along FALLBACK.
+## The hero's weapon motions (WeaponStyle) and the poses still to be drawn (ready stance,
+## turn, skid, top of a jump) fall back to the nearest one he has.
 const FALLBACK := {
 	&"move": &"idle", &"attack": &"move", &"hurt": &"idle", &"die": &"hurt",
 	&"walk": &"move", &"run": &"walk", &"fall": &"jump", &"land": &"idle",
+	&"punch": &"attack", &"throw": &"attack", &"shoot": &"attack", &"gun": &"attack",
+	&"cast": &"attack", &"heavy": &"slash", &"slash": &"attack",
+	&"ready": &"idle", &"turn": &"walk", &"skid": &"walk", &"jump_apex": &"jump",
 }
 
 var body: SpriteBase3D
@@ -27,6 +32,10 @@ var _frames: SpriteFrames
 var _flash := false
 var _tint := Color.WHITE
 var _lift := 0.0
+## How fast the animation plays (a walk matched to the walking speed), and whether hit-stop
+## holds it still.
+var _speed := 1.0
+var _frozen := false
 ## How squashed the body is right now by a hit (0 none, 1 most); see squash().
 var _squash := 0.0
 ## A glow pulsing on the body (a monster winding up an attack), 0 for none.
@@ -127,8 +136,18 @@ func squash(amount := 1.0) -> void:
 
 ## Freezes the animation for a few frames (hit-stop) or lets it run again.
 func freeze(on: bool) -> void:
+	_frozen = on
+	_apply_speed()
+
+## Plays the animation faster or slower (1 is as drawn), e.g. the walk cycle matched to how
+## fast the actor moves so the feet don't slide.
+func set_speed(scale: float) -> void:
+	_speed = scale
+	_apply_speed()
+
+func _apply_speed() -> void:
 	if body is AnimatedSprite3D:
-		(body as AnimatedSprite3D).speed_scale = 0.0 if on else 1.0
+		(body as AnimatedSprite3D).speed_scale = 0.0 if _frozen else _speed
 
 ## A warm pulsing glow (0 off .. 1 full), e.g. a monster about to strike.
 func set_glow(amount: float) -> void:

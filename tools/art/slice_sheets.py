@@ -20,6 +20,8 @@ Steps for each cell:
 
 Animation sets (the "sets" block of a manifest) lay frames out on one strip with
 the feet on a shared baseline and write a Godot SpriteFrames resource next to it.
+An animation lists its "frames", "fps", "loop" and optionally "durations": how long each
+frame shows, counted in frames at that fps (so 2 holds a wind-up twice as long).
 """
 import json
 import os
@@ -569,7 +571,12 @@ def write_sprite_frames(path, texture, fw, fh, index, anims):
                   f"region = Rect2({i * fw}, 0, {fw}, {fh})", ""]
     entries = []
     for name, a in anims.items():
-        frames = ", ".join('{"duration": 1.0, "texture": SubResource("f%d")}' % index[f] for f in a["frames"])
+        # "durations": how long each frame shows, in frames at "fps" (a wind-up held longer, a fast impact)
+        durations = a.get("durations", [1.0] * len(a["frames"]))
+        if len(durations) != len(a["frames"]):
+            sys.exit(f"{path}: animation {name} has {len(a['frames'])} frames but {len(durations)} durations")
+        frames = ", ".join('{"duration": %s, "texture": SubResource("f%d")}' % (float(d), index[f])
+                           for f, d in zip(a["frames"], durations))
         entries.append('{"frames": [%s], "loop": %s, "name": &"%s", "speed": %s}'
                        % (frames, "true" if a.get("loop", True) else "false", name, float(a.get("fps", 8))))
     lines += ["[resource]", "animations = [" + ", ".join(entries) + "]", ""]
