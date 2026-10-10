@@ -5,6 +5,7 @@
     python3 tools/art/gemini_pass.py --limit 3          # make the next 3 sheets (paid)
     python3 tools/art/gemini_pass.py                    # make everything still missing (paid)
     python3 tools/art/gemini_pass.py --report           # rebuild report.md and the contact sheet
+    python3 tools/art/gemini_pass.py --batch --wait     # the same through Gemini's batch mode
 
 Results go to art-sheets/gemini-pass-1/ in the project files, never into the game. Each sheet
 is ONE request: a sheet that already has a result, or whose request failed, is skipped on
@@ -15,6 +16,12 @@ The run stops before it would go over the budget (the list's "budget", or --budg
 whose "anchor" is another entry wait for that entry and attach its result, so a family of
 sheets matches one model. Every request gets CONSISTENCY added to its batch text, which keeps
 the prompt files themselves usable in ChatGPT. Each result is checked by sheet_check.py.
+
+Batch mode costs half as much and takes longer (Google promises results within a day; usually
+far sooner). Sheets go up in waves: every sheet whose anchor is made goes in the next wave, so a
+family's anchor comes back before the sheets that attach it. --batch does one step (collect a
+finished wave, then submit the next) and exits; --wait keeps stepping until everything is made.
+References are uploaded once with the Files API, which keeps them for 48 hours.
 """
 import argparse
 import json
@@ -22,6 +29,7 @@ import os
 import sys
 import threading
 import time
+import urllib.parse
 from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 
 from PIL import Image, ImageDraw
@@ -36,7 +44,9 @@ STATE = os.path.join(OUT, "state.json")
 # Estimated dollars per image at 2K: Google's list price ($0.134 for Pro) plus the attached references.
 PRICE = {"gemini-3-pro-image": 0.136, "gemini-3-pro-image-preview": 0.136,
          "gemini-3.1-flash-image": 0.11, "gemini-3.1-flash-image-preview": 0.11}
+BATCH_DISCOUNT = 0.5  # batch mode bills half the standard price
 WORKERS = 4
+FILE_LIFETIME = 40 * 3600  # re-upload references older than this (Gemini keeps files 48 hours)
 
 CONSISTENCY = """Consistency rules for this sheet (follow them strictly):
 - Every cell shows the SAME character or object as the other cells and as any attached sheet of it: the same height, head size, proportions, outline thickness and exact colours. Only the pose or the item changes from cell to cell.
@@ -45,6 +55,20 @@ CONSISTENCY = """Consistency rules for this sheet (follow them strictly):
 - Characters and creatures stand on one shared baseline: the feet sit the same distance above the bottom edge of every cell.
 - Flat pure magenta #FF00FF background with no shadows or gradients, and no magenta or pink-purple inside any sprite."""
 GRID_RULE = "- Draw exactly {rows} rows x {cols} columns = {n} equal cells, every cell filled in the order given."
+
+
+def find_key(obj, key):
+    """The first value of `key` anywhere in a nested JSON object."""
+    if isinstance(obj, dict):
+        if key in obj:
+            return obj[key]
+        obj = list(obj.values())
+    if isinstance(obj, list):
+        for v in obj:
+            found = find_key(v, key)
+            if found:
+                return found
+    return None
 
 
 def load_list():
@@ -76,7 +100,11 @@ class Pass:
     # --- bookkeeping --------------------------------------------------------------------
 
     def spent(self):
-        return sum(v.get("cost", 0) for v in self.state.values())
+        """Dollars spent, plus what batch jobs still running will cost."""
+        done = sum(v.get("cost", 0) for k, v in self.state.items() if not k.startswith("_"))
+        jobs = self.state.get("_jobs", [])
+        return done + self.state.get("_redone", {}).get("cost", 0) + \
+            sum(len(j["ids"]) * self.price * BATCH_DISCOUNT for j in jobs if not j.get("collected"))
 
     def save(self):
         os.makedirs(OUT, exist_ok=True)
@@ -87,6 +115,9 @@ class Pass:
 
     def done(self, sid):
         return sid in self.state
+
+    def queued(self):
+        return {i for j in self.state.get("_jobs", []) if not j.get("collected") for i in j["ids"]}
 
     def anchor_result(self, sheet):
         a = sheet.get("anchor")
@@ -109,16 +140,26 @@ class Pass:
         fill = sheet.get("fill") or {}
         return next((fill[k] for k in ("item", "style", "top") if k in fill), None)
 
-    def run_one(self, sheet):
+    def refs_for(self, sheet):
         refs = list(sheet.get("refs", []))
         anchor = self.anchor_result(sheet)
         if anchor:
             refs.append(anchor)
-        out = os.path.join(OUT, sheet["save"] if sheet.get("save") else sheet["id"] + ".png")
-        n = 2
+        return refs
+
+    @staticmethod
+    def out_for(sheet):
+        stem = os.path.splitext(sheet.get("save") or sheet["id"] + ".png")[0]
+        out, n = os.path.join(OUT, stem + ".png"), 2
         while os.path.exists(out):  # a redo keeps the earlier result
-            out = os.path.join(OUT, "%s_%d.png" % (os.path.splitext(sheet.get("save") or sheet["id"])[0], n))
+            out = os.path.join(OUT, "%s_%d.png" % (stem, n))
             n += 1
+        return out
+
+    def run_one(self, sheet):
+        refs = self.refs_for(sheet)
+        anchor = self.anchor_result(sheet)
+        out = self.out_for(sheet)
         lines = []
         started = time.time()
         try:
@@ -188,6 +229,138 @@ class Pass:
         if not self.dry_run:
             self.report()
 
+    # --- batch mode ---------------------------------------------------------------------
+
+    def next_wave(self):
+        """Sheets that can go now: not made, not queued, and their anchor (if it runs) is made."""
+        queued = self.queued()
+        wave = []
+        for s in self.sheets:
+            if not s.get("batch") or self.done(s["id"]) or s["id"] in queued:
+                continue
+            a = s.get("anchor")
+            if a and self.by_id.get(a, {}).get("batch") and not self.done(a):
+                continue
+            wave.append(s)
+        return wave
+
+    def file_part(self, path):
+        files = self.state.setdefault("_files", {})
+        f = files.get(path)
+        if not f or time.time() - f["at"] > FILE_LIFETIME:
+            res = gemini_sheet.upload_file(open(path, "rb").read(), "image/png", os.path.basename(path))
+            f = files[path] = {"uri": res["uri"], "at": time.time()}
+        return {"file_data": {"mime_type": "image/png", "file_uri": f["uri"]}}
+
+    def submit(self, wave):
+        each = self.price * BATCH_DISCOUNT
+        room = int((self.budget - self.spent()) // each)
+        if room < len(wave):
+            print("Budget allows %d of the %d sheets in this wave." % (max(room, 0), len(wave)))
+            wave = wave[:max(room, 0)]
+        if not wave:
+            return False
+        lines, dests, errors = [], {}, {}
+        for s in wave:
+            log = []
+            try:
+                res = gemini_sheet.generate(
+                    s["prompts"], s["batch"], s.get("with"), self.refs_for(s), self.model, self.size,
+                    s.get("aspect"), self.out_for(s), self.request_text(s), self.pick(s),
+                    later=self.saves - {s.get("save")}, log=log.append, prepare=self.file_part)
+            except (gemini_sheet.GeminiError, OSError) as e:
+                errors[s["id"]] = {"error": str(e).splitlines()[0][:300], "cost": 0}
+                continue
+            lines.append(json.dumps({"key": s["id"], "request": res["body"]}))
+            dests[s["id"]] = {"path": res["dest"], "refs": [os.path.basename(r) for r in res["refs"]],
+                              "aspect": res["aspect"]}
+        self.state.update(errors)
+        if not lines:
+            self.save()
+            return bool(errors)
+        n = len(self.state.get("_jobs", [])) + 1
+        upload = gemini_sheet.upload_file(("\n".join(lines) + "\n").encode(), "jsonl",
+                                          "gemini-pass-1-wave-%d" % n)
+        job = gemini_sheet.call("POST", "/models/%s:batchGenerateContent" % self.model, {
+            "batch": {"display_name": "gemini-pass-1-wave-%d" % n, "input_config": {"file_name": upload["name"]}}})
+        self.state.setdefault("_jobs", []).append(
+            {"name": job["name"], "wave": n, "ids": list(dests), "sheets": dests, "at": time.time()})
+        self.save()
+        print("Submitted wave %d: %d sheets (%s)" % (n, len(dests), job["name"]))
+        return True
+
+    def collect(self):
+        """Save the results of finished batch jobs. Returns how many jobs are still running."""
+        running = 0
+        for job in self.state.get("_jobs", []):
+            if job.get("collected"):
+                continue
+            info = gemini_sheet.call("GET", "/" + urllib.parse.quote(job["name"]))
+            meta = info.get("metadata", {})
+            state = meta.get("state") or info.get("state", "")
+            if not info.get("done") and not any(w in state for w in ("SUCCEEDED", "FAILED", "CANCELLED", "EXPIRED")):
+                running += 1
+                print("Wave %d: %s" % (job["wave"], state or "running"))
+                continue
+            results = find_key(info, "responsesFile")
+            by_key = {}
+            if results:
+                for line in gemini_sheet.download_file(results).decode().splitlines():
+                    if line.strip():
+                        row = json.loads(line)
+                        by_key[row.get("key")] = row
+            each = self.price * BATCH_DISCOUNT
+            for sid, meta_s in job["sheets"].items():
+                row = by_key.get(sid)
+                entry = dict(meta_s)
+                try:
+                    if not row:
+                        raise gemini_sheet.GeminiError("No result for this sheet (job %s)." % state)
+                    if "error" in row:
+                        raise gemini_sheet.GeminiError(json.dumps(row["error"])[:300])
+                    gemini_sheet.save_image(row["response"], meta_s["path"], log=lambda *_: None)
+                    entry["cost"] = each
+                    s = self.by_id[sid]
+                    entry["check"] = sheet_check.check(meta_s["path"], s.get("cells"), s.get("kind", "still"),
+                                                       self.anchor_result(s) or self.replaced(s), s.get("must_have"))
+                except gemini_sheet.GeminiError as e:
+                    entry = {"error": str(e).splitlines()[0][:300],
+                             "cost": each if row and "response" in row else 0}
+                self.state[sid] = entry
+            job["collected"] = True
+            self.save()
+            print("Wave %d collected (%s)." % (job["wave"], state))
+        return running
+
+    def run_batch(self, wait=False):
+        while True:
+            running = self.collect()
+            if not running:
+                wave = self.next_wave()
+                if not wave:
+                    print("Nothing left to make. Spent about $%.2f." % self.spent())
+                    self.report()
+                    return
+                if not self.submit(wave):
+                    print("Stopping: no budget left for the next wave.")
+                    self.report()
+                    return
+            if not wait:
+                return
+            time.sleep(60)
+
+    def plan_batch(self):
+        """Free: the waves batch mode would send, assuming every sheet comes back."""
+        made, n = set(self.state), 0
+        while True:
+            wave = [s["id"] for s in self.sheets if s.get("batch") and s["id"] not in made and
+                    not (s.get("anchor") and self.by_id.get(s["anchor"], {}).get("batch") and s["anchor"] not in made)]
+            if not wave:
+                break
+            n += 1
+            made |= set(wave)
+            print("Wave %d: %d sheets, about $%.2f" % (n, len(wave), len(wave) * self.price * BATCH_DISCOUNT))
+
     # --- report -------------------------------------------------------------------------
 
     def report(self):
@@ -244,6 +417,8 @@ def main():
     ap.add_argument("--redo", action="append", default=[], help="forget this id's result so it is made again")
     ap.add_argument("--budget", type=float, help="dollar cap for the whole pass (default: the list's)")
     ap.add_argument("--report", action="store_true", help="only rebuild report.md and contact_sheet.png")
+    ap.add_argument("--batch", action="store_true", help="use Gemini's batch mode (half price, slower)")
+    ap.add_argument("--wait", action="store_true", help="with --batch: keep going until every wave is in")
     args = ap.parse_args()
 
     spec = load_list()
@@ -256,6 +431,12 @@ def main():
         p.save()
     if args.report:
         p.report()
+        return
+    if args.batch:
+        if args.dry_run:
+            p.plan_batch()
+        else:
+            p.run_batch(args.wait)
         return
     p.run(args.limit, set(args.only.split(",")) if args.only else None)
 

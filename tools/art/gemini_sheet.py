@@ -217,13 +217,43 @@ def call(method, path, body=None):
         raise GeminiError("Gemini API error %d:\n%s" % (e.code, detail[:2000]))
 
 
+def http(url, data=None, headers=None, method=None):
+    """A raw request to the API host (file uploads and downloads); returns (body, headers)."""
+    req = urllib.request.Request(url, data=data, method=method,
+                                 headers={"x-goog-api-key": api_key(), **(headers or {})})
+    try:
+        with urllib.request.urlopen(req, timeout=600) as r:
+            return r.read(), r.headers
+    except urllib.error.HTTPError as e:
+        raise GeminiError("Gemini API error %d:\n%s" % (e.code, e.read().decode(errors="replace")[:2000]))
+
+
+def upload_file(data, mime, display_name):
+    """Upload bytes with the Files API (kept 48 hours); returns the file resource."""
+    base = API.replace("/v1beta", "/upload/v1beta") + "/files"
+    _, h = http(base, json.dumps({"file": {"display_name": display_name}}).encode(), {
+        "X-Goog-Upload-Protocol": "resumable", "X-Goog-Upload-Command": "start",
+        "X-Goog-Upload-Header-Content-Length": str(len(data)),
+        "X-Goog-Upload-Header-Content-Type": mime, "Content-Type": "application/json"}, "POST")
+    body, _ = http(h["X-Goog-Upload-URL"], data, {
+        "X-Goog-Upload-Command": "upload, finalize", "X-Goog-Upload-Offset": "0",
+        "Content-Length": str(len(data))}, "POST")
+    return json.loads(body)["file"]
+
+
+def download_file(name):
+    """The bytes of a Files API file, e.g. a batch job's results (files/...)."""
+    body, _ = http(API.replace("/v1beta", "/download/v1beta") + "/%s:download?alt=media" % name)
+    return body
+
+
 def image_part(path):
     data = open(path, "rb").read()
     return {"inline_data": {"mime_type": "image/png", "data": base64.b64encode(data).decode()}}
 
 
-def build_request(message0, layout, batch, refs, aspect, size):
-    first = [image_part(p) for p in refs]
+def build_request(message0, layout, batch, refs, aspect, size, image=image_part):
+    first = [image(p) for p in refs]
     first.append({"text": message0 + ("\n\n" + layout if layout else "")})
     return {
         "contents": [
@@ -263,8 +293,13 @@ def out_path(save_name, batch_id, part):
 
 
 def generate(prompts_file, batch_id, layout=None, extra_refs=(), model=DEFAULT_MODEL, size="2K",
-             aspect=None, out=None, extra_text=None, pick=None, later=(), dry_run=False, log=print):
+             aspect=None, out=None, extra_text=None, pick=None, later=(), dry_run=False, log=print,
+             prepare=None):
     """Make one sheet: ONE request, never retried. Returns {"path", "refs", "aspect", "usage"}.
+
+    prepare, if given, is a function that turns a reference path into a request part (e.g. an
+    uploaded file); the request is then built and returned as "body" instead of being sent, for
+    Gemini's batch mode.
 
     extra_text is appended to the batch (e.g. the full pass's consistency rules). pick names one
     item of a batch that lists several to draw one per image (H1's styles, T1's tops): the other
@@ -300,23 +335,33 @@ def generate(prompts_file, batch_id, layout=None, extra_refs=(), model=DEFAULT_M
         log("\n--- Batch ---\n" + batch)
         return result
 
+    if prepare:
+        result["body"] = build_request(message0, layout_text, batch, refs, aspect, size, prepare)
+        result["dest"] = dest
+        return result
     body = build_request(message0, layout_text, batch, refs, aspect, size)
     resp = call("POST", "/models/%s:generateContent" % model, body)
+    result["usage"] = resp.get("usageMetadata", {})
+    result["path"] = save_image(resp, dest, log)
+    return result
+
+
+def save_image(resp, dest, log=print):
+    """Save the image in a generateContent response as a PNG at dest; returns dest."""
     parts = (resp.get("candidates") or [{}])[0].get("content", {}).get("parts", [])
     for p in parts:
         if p.get("text"):
             log("Gemini says: " + p["text"].strip())
     images = [p for p in parts if "inlineData" in p or "inline_data" in p]
-    result["usage"] = resp.get("usageMetadata", {})
     if not images:
         reason = (resp.get("candidates") or [{}])[0].get("finishReason") or resp.get("promptFeedback")
         raise GeminiError("No image came back (%s)." % reason)
     data = base64.b64decode((images[-1].get("inlineData") or images[-1]["inline_data"])["data"])
     os.makedirs(os.path.dirname(dest), exist_ok=True)
     Image.open(io.BytesIO(data)).save(dest)  # normalise to PNG whatever the API sent
-    log("Saved %s (%dx%d), tokens %s" % (dest, *Image.open(dest).size, result["usage"].get("totalTokenCount", "?")))
-    result["path"] = dest
-    return result
+    log("Saved %s (%dx%d), tokens %s" % (dest, *Image.open(dest).size,
+                                          resp.get("usageMetadata", {}).get("totalTokenCount", "?")))
+    return dest
 
 
 def main():
