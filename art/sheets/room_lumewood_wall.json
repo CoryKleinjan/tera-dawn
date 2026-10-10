@@ -1,0 +1,27 @@
+{
+  "source": "art/source/room_lumewood_wall.png",
+  "out_dir": "assets/sprites/rooms/lumewood",
+  "background": [
+    255,
+    0,
+    255
+  ],
+  "scale": 0.2471,
+  "label_band": 0,
+  "inset": 0,
+  "grid": {
+    "rows": [
+      0,
+      4094
+    ],
+    "cols": [
+      0,
+      3726
+    ]
+  },
+  "cells": [
+    [
+      "wall"
+    ]
+  ]
+}

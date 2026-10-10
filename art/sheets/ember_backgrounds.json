@@ -1,8 +1,7 @@
 {
-  "source": "art/source/ember_backgrounds.png",
-  "scale": 0.5,
+  "source": "art/source/ember_backgrounds_fine.png",
   "label_band": 0.3,
-  "inset": 4,
+  "inset": 11,
   "key": [
     0.6,
     0.85
@@ -29,72 +28,72 @@
   "grid": {
     "rows": [
       0,
-      205,
-      410,
-      614,
-      822,
-      1030
+      547,
+      1095,
+      1639,
+      2195,
+      2750
     ],
     "cols": [
       [
         0,
-        1536
+        4101
       ],
       [
         0,
-        1536
+        4101
       ],
       [
         0,
-        1536
+        4101
       ],
       [
         0,
-        1536
+        4101
       ],
       [
         0,
-        768,
-        1536
+        2050,
+        4101
       ]
     ]
   },
   "overrides": {
     "far_volcanoes": {
-      "extend_bottom": 160,
+      "extend_bottom": 589,
       "blank": [
         [
           0,
           0,
-          300,
-          42
+          801,
+          112
         ]
       ],
-      "scale": 0.466
+      "scale": 0.6423
     },
     "mid_crags": {
-      "extend_bottom": 160,
+      "extend_bottom": 538,
       "blank": [
         [
           0,
           0,
-          300,
-          42
+          801,
+          112
         ]
       ],
-      "scale": 0.3418
+      "scale": 0.4301
     },
     "near_ridge": {
-      "extend_bottom": 160,
+      "extend_bottom": 461,
       "blank": [
         [
           0,
           0,
-          300,
-          42
+          801,
+          112
         ]
       ],
-      "scale": 0.3656
+      "scale": 0.3944
     },
     "smoke": {
       "keep": "split",
@@ -102,11 +101,11 @@
         [
           0,
           0,
-          300,
-          42
+          801,
+          112
         ]
       ],
-      "scale": 0.4162
+      "scale": 0.4988
     },
     "motes": {
       "alpha": "soft",
@@ -114,22 +113,22 @@
         [
           0,
           0,
-          300,
-          42
+          801,
+          112
         ]
       ],
-      "scale": 0.6794
+      "scale": 0.8143
     },
     "moon": {
       "fix": "sky_body",
       "alpha": "soft",
       "crop": [
-        302,
-        18,
-        465,
-        181
+        806,
+        48,
+        1242,
+        483
       ],
-      "scale": 0.4268
+      "scale": 0.6138
     }
   }
 }

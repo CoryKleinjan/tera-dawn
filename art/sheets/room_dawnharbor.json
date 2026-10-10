@@ -1,12 +1,12 @@
 {
-  "source": "art/source/room_dawnharbor.png",
+  "source": "art/source/room_dawnharbor_fine.png",
   "out_dir": "assets/sprites/rooms/dawnharbor",
-  "scale": 0.389,
+  "scale": 0.3368,
   "label_band": 0.2,
   "cells": [
     [
       "",
-      "wall",
+      "",
       "door",
       "floor_side"
     ],
@@ -24,68 +24,60 @@
     ]
   ],
   "overrides": {
-    "wall": {
-      "crop": [
-        38,
-        48,
-        408,
-        515
-      ],
-      "scale": 0.9429
-    },
     "floor_side": {
       "seamless": true,
-      "size": 128,
+      "size": 256,
       "crop": [
-        110,
-        195,
-        320,
-        405
+        238,
+        434,
+        723,
+        920
       ],
-      "scale": 0.45
+      "scale": 0.3896
     },
     "door": {
       "crop": [
-        52,
-        85,
-        383,
-        515
+        104,
+        180,
+        869,
+        1174
       ],
-      "scale": 0.2412
+      "scale": 0.2088
     },
     "counter": {
-      "scale": 0.3432
+      "scale": 0.2971
     },
     "bookcase": {
-      "scale": 0.4641
+      "scale": 0.4018
     },
     "table": {
-      "scale": 0.2646
+      "scale": 0.2291
     },
     "hearth": {
-      "scale": 0.4653
+      "scale": 0.4028
     },
     "lamp": {
-      "scale": 0.4208
+      "scale": 0.3643,
+      "keep": "largest"
     },
     "barrel": {
-      "scale": 0.1798
+      "scale": 0.1557
     }
   },
   "grid": {
     "rows": [
       0,
-      532,
-      872,
-      1190
+      1229,
+      2014,
+      2749
     ],
     "cols": [
       0,
-      440,
-      887,
-      1333,
-      1774
+      1016,
+      2049,
+      3079,
+      4098
     ]
   },
-  "inset": 6
+  "inset": 30
 }

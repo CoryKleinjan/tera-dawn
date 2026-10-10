@@ -1,23 +1,23 @@
 {
-  "source": "art/source/room_driftcove.png",
+  "source": "art/source/room_driftcove_fine.png",
   "out_dir": "assets/sprites/rooms/driftcove",
-  "scale": 0.45,
+  "scale": 0.3896,
   "label_band": 0.2,
   "region": [
-    1333,
+    3079,
     0,
-    1774,
-    594
+    4098,
+    1372
   ],
   "grid": {
     "rows": [
       0,
-      300,
-      594
+      693,
+      1372
     ],
     "cols": [
       0,
-      441
+      1019
     ]
   },
   "cells": [
@@ -28,26 +28,26 @@
       "floor_side"
     ]
   ],
-  "inset": 6,
+  "inset": 14,
   "overrides": {
     "floor_top": {
       "seamless": true,
-      "size": 128,
+      "size": 256,
       "crop": [
-        95,
-        47,
-        335,
-        287
+        219,
+        109,
+        774,
+        663
       ]
     },
     "floor_side": {
       "seamless": true,
-      "size": 128,
+      "size": 256,
       "crop": [
-        130,
-        45,
         300,
-        215
+        104,
+        693,
+        497
       ]
     }
   }

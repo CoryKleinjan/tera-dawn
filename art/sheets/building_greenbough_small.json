@@ -1,0 +1,22 @@
+{
+  "source": "art/source/building_greenbough_small.png",
+  "art_px": 5.115,
+  "out_dir": "assets/sprites/buildings/greenbough",
+  "label_band": 0,
+  "inset": 0,
+  "grid": {
+    "rows": [
+      0,
+      1023
+    ],
+    "cols": [
+      0,
+      1127
+    ]
+  },
+  "cells": [
+    [
+      "small"
+    ]
+  ]
+}

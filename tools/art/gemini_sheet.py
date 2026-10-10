@@ -192,7 +192,11 @@ def collect_refs(prompts, context, save_name, extra, outputs=(), later=()):
 
 
 def closest_aspect(path):
-    w, h = Image.open(path).size
+    return closest_aspect_of(*Image.open(path).size)
+
+
+def closest_aspect_of(w, h):
+    """The aspect ratio Gemini offers that is closest to w x h."""
     return min(ASPECTS, key=lambda a: abs(int(a.split(":")[0]) / int(a.split(":")[1]) - w / h))
 
 
