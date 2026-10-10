@@ -69,7 +69,9 @@ const KIND_NAMES := ["Attack", "Buff", "Passive"]
 @export var regen_mp_per_level := 0
 
 @export_group("Look")
-## Player animation to play (see assets/animations/hero.tres).
+## The motion the player makes: "attack" (the weapon's own basic blow) or "slash" (its big
+## one) are worked out from the weapon worn (WeaponStyle); any other name is a hero animation
+## played as it is (assets/animations/hero.tres), like "cast" for spells and buffs.
 @export var animation := &"attack"
 ## Played in front of the player, flipped with their facing.
 @export var effect: EffectDef

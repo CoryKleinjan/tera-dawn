@@ -33,4 +33,4 @@ duration = 60.0
 duration_per_level = 9.0
 effect = ExtResource("3_heal")
 icon = ExtResource("4_magic_armor")
-animation = &"attack"
+animation = &"cast"

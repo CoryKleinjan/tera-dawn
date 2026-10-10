@@ -108,6 +108,10 @@ SHEATHED = BACK_VIEW + ("sit",)
 HELD_SHEETS = "held_"
 ITEMS = os.path.join(ROOT, "data", "items")
 
+# The scale the body sheet is cut at (paperdoll_body.json): sheets drawn on its grid fit the
+# hero at about this scale. Set by frame_names().
+BODY_SCALE = 0.5
+
 # Where the weapon hand and shield are, and how the head is tilted, per frame: placed by hand,
 # since the hands are hard to tell apart from the rest of the body.
 HAND_RIG = os.path.join(ss.SHEETS, "paperdoll_rig.json")
@@ -116,8 +120,11 @@ HAND_RIG = os.path.join(ss.SHEETS, "paperdoll_rig.json")
 # ---------- reading the body ----------
 
 def frame_names():
+    global BODY_SCALE
     with open(BODY_MANIFEST) as f:
-        spec = json.load(f)["sets"]["hero"]
+        man = json.load(f)
+    BODY_SCALE = man["scale"]
+    spec = man["sets"]["hero"]
     return list(spec["frames"]), spec
 
 
@@ -286,8 +293,13 @@ def drawn_head(arr):
     return np.array([xs.mean(), ys.mean()]), float(r)
 
 
-def body_fit(arr, hair, px, scales=(0.46, 0.48, 0.5, 0.52, 0.54)):
-    """Lines the body a pose was drawn on up with the hero's: (scale, x, y) of the best overlap."""
+def body_fit(arr, hair, px, scales=None):
+    """Lines the body a pose was drawn on up with the hero's: (scale, x, y) of the best overlap.
+    The sheets are drawn at the size of the body sheet's cells, so the scale is near the body's
+    own cut scale (BODY_SCALE)."""
+    if scales is None:
+        scales = [BODY_SCALE * k for k in (0.92, 0.96, 1.0, 1.04, 1.08)]
+    slack = int(round(24 * BODY_SCALE))
     figure = (arr[..., 3] > 0) & ~ss.dilate(hair, 1)
     ours = px[..., 3] > 127
     oy, ox = np.nonzero(ours)
@@ -300,8 +312,8 @@ def body_fit(arr, hair, px, scales=(0.46, 0.48, 0.5, 0.52, 0.54)):
             continue
         x0 = int(round(ox.mean() - mx_.mean()))
         y0 = int(oy.max() - my.max())
-        for dy in range(-12, 13):
-            for dx in range(-12, 13):
+        for dy in range(-slack, slack + 1):
+            for dx in range(-slack, slack + 1):
                 score = overlap(m, ours, x0 + dx, y0 + dy)
                 if best is None or score > best[0]:
                     best = (score, s, x0 + dx, y0 + dy)

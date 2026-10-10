@@ -80,6 +80,9 @@ var hidden := PackedFloat32Array()
 var overlays: Array[Overlay] = []
 ## Back to front: the ones `behind` go under the body, the rest over it.
 var layers: Array[Layer] = []
+## The kind of weapon in his hand (&"" bare-handed) and its colour (its streak when swung).
+var weapon_kind := &""
+var weapon_tint := Color.WHITE
 
 static var _rig: Dictionary
 static var _refs: PackedVector3Array
@@ -127,6 +130,9 @@ static func dress(look: Dictionary) -> Paperdoll:
 		d._add(hair.back_frames, true, hair_tone)
 	var weapon: EquipDef = gear.get(&"weapon")
 	var held := weapon_layers(weapon) if weapon and weapon.worn_frames == null else {}
+	if weapon:
+		d.weapon_kind = kind_of(weapon)
+		d.weapon_tint = weapon.worn_color()
 	if held.has("behind"):
 		d._add(held["behind"], true, held["tint"])
 
@@ -172,13 +178,13 @@ static func weapon_layers(e: EquipDef) -> Dictionary:
 	var own := WEAPON_DIR + "item_" + String(e.id)
 	if ResourceLoader.exists(own + ".tres"):
 		return _weapon_frames(own, Color.WHITE)
-	var kind := weapon_kind(e)
+	var kind := kind_of(e)
 	if not ResourceLoader.exists(WEAPON_DIR + String(kind) + ".tres"):
 		kind = DEFAULT_WEAPON
 	return _weapon_frames(WEAPON_DIR + String(kind), e.worn_color())
 
 ## The kind of weapon an item is held as (a weapon without a kind is a sword).
-static func weapon_kind(e: EquipDef) -> StringName:
+static func kind_of(e: EquipDef) -> StringName:
 	return e.weapon_kind if e and e.weapon_kind != &"" else DEFAULT_WEAPON
 
 static func _weapon_frames(base: String, tint: Color) -> Dictionary:

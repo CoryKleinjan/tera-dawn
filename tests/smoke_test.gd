@@ -646,7 +646,7 @@ func _run() -> void:
 	p.cooldown = 0
 	_me().cooldown = 0
 	await _tap("quick_2")
-	_check(p.action_anim == &"slash", "Dawn Slash plays its animation")
+	_check(p.action_anim == WeaponStyle.animation_for(Game.me.look(), &"slash"), "Dawn Slash plays its motion for the weapon in hand")
 	# MP regen may tick once during the key press, and a kill that levels up refills MP.
 	_check(Game.me.level > level or mp_before - Game.me.mp >= Content.skill(&"dawn_slash").mp_at(1) - 1, "Dawn Slash spends MP")
 

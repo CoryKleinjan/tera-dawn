@@ -30,6 +30,6 @@ stats = SubResource("Resource_1")
 stats_per_level = SubResource("Resource_2")
 duration = 30.0
 duration_per_level = 30.0
-animation = &"attack"
+animation = &"cast"
 effect = ExtResource("3_heal")
 icon = ExtResource("4_quick_step")

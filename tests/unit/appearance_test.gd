@@ -216,7 +216,7 @@ func test_every_weapon_has_layers_and_a_hold() -> void:
 		if e and e.slot == EquipDef.Slot.WEAPON and e.worn_frames == null:
 			var held := Paperdoll.weapon_layers(e)
 			check(held["front"] is SpriteFrames, "%s has a layer" % e.id)
-			check(Paperdoll.weapon_reach(Paperdoll.weapon_kind(e)) > 0.0, "%s reaches past the fist" % e.id)
+			check(Paperdoll.weapon_reach(Paperdoll.kind_of(e)) > 0.0, "%s reaches past the fist" % e.id)
 	var attack := Paperdoll.frame_index(Paperdoll.FRAMES.get_frame_texture(&"attack", 1))
 	for kind in ["sword", "bow", "wand", "staff", "claw", "knuckle", "gun"]:
 		check(Paperdoll.hold(attack, kind) != null, "%s is in his hand mid-attack" % kind)
