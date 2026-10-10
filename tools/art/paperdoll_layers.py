@@ -30,7 +30,8 @@ Writes:
 
 A hairstyle with a sheet drawn in every pose (art/sheets/hair_<style>_frames.json, the body
 wearing the hair on the body sheet's grid) uses that instead of its one front piece: the
-hair is lifted off each pose and set on the hero's head, so it sways with him. Under every
+hair is lifted off each pose and set on the hero's head, so it sways with him. Walking and
+running hold one drawing through the whole cycle (HELD_HAIR), so the hair keeps its shape. Under every
 hairstyle the top and back of his bald head are repainted in hair greys, so no pose shows
 scalp where the hair doesn't reach.
 
@@ -380,6 +381,25 @@ def scalp(px, fi, back_view, grey):
 # Poses where the drawn body matches the hero's closely enough to measure how the drawn
 # heads line up with his (the others are placed by the head alone, see posed_hair).
 STEADY_POSES = ("idle1", "idle2", "idle3", "idle4", "walk1", "walk2", "walk3", "walk4")
+
+# Step cycles whose frames all wear one drawn pose's hair, set on each frame's head: the
+# sheets draw the hair afresh in every pose, so cycling through them redraws it every step
+# (spikes and strands jump about, the shade flickers). Holding one drawing, the hair bobs
+# with his head but keeps its shape. The pose to hold is the cleanest drawing of the cycle;
+# HELD_HAIR_STYLE picks another for a style whose usual one came out badly.
+HELD_HAIR = {
+    "walk": ("walk1", ("walk1", "walk2", "walk3", "walk4")),
+    "run": ("run2", ("run1", "run2", "run3", "run4")),
+}
+HELD_HAIR_STYLE = {"bun": {"walk": "walk2"}}  # its walk1 catches a dark speck by the hip
+
+
+def held_hair_pose(style, n):
+    """The drawn pose whose hair frame `n` wears for `style`: the cycle's held pose, or `n`."""
+    for cycle, (pose, frames) in HELD_HAIR.items():
+        if n in frames:
+            return HELD_HAIR_STYLE.get(style, {}).get(cycle, pose)
+    return n
 
 
 def hair_mask(arr):
@@ -905,8 +925,11 @@ def main():
             for n, fi, px in zip(names, info, frames):
                 canvas = blank()
                 drawn_hair = blank()
-                if n in cells:
-                    hair_img, at = posed_hair(cells[n], fi, link)
+                drawn_as = held_hair_pose(style, n)
+                if drawn_as not in cells:
+                    drawn_as = n
+                if drawn_as in cells:
+                    hair_img, at = posed_hair(cells[drawn_as], fi, link)
                     _paste(drawn_hair, hair_img, *at)
                 # where the drawn hair covers the scalp, the scalp only just around it (it fills
                 # slivers where the heads don't quite line up, and doesn't show as a band under a
