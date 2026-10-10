@@ -4,17 +4,76 @@
   "scale": 0.08,
   "alpha": "soft",
   "cells": [
-    ["arrow", "star", "bullet", "pebble"],
-    ["energy_bolt", "arcane_claw", "mob_seed", "mob_bolt"],
-    ["mob_ember", "mob_bubble", "mob_wisp", "mob_shadow"]
+    [
+      "arrow",
+      "star",
+      "bullet",
+      "pebble"
+    ],
+    [
+      "energy_bolt",
+      "arcane_claw",
+      "mob_seed",
+      "mob_bolt"
+    ],
+    [
+      "mob_ember",
+      "mob_bubble",
+      "",
+      "mob_shadow"
+    ]
   ],
   "overrides": {
-    "arrow": {"scale": 0.1, "alpha": "hard"},
-    "star": {"scale": 0.075},
-    "bullet": {"scale": 0.12},
-    "pebble": {"scale": 0.1},
-    "energy_bolt": {"scale": 0.1},
-    "arcane_claw": {"scale": 0.09},
-    "mob_seed": {"scale": 0.07}
-  }
+    "arrow": {
+      "scale": 0.133,
+      "alpha": "hard"
+    },
+    "star": {
+      "scale": 0.1201
+    },
+    "bullet": {
+      "scale": 0.2248
+    },
+    "pebble": {
+      "scale": 0.1911
+    },
+    "energy_bolt": {
+      "scale": 0.1623
+    },
+    "arcane_claw": {
+      "scale": 0.1319
+    },
+    "mob_seed": {
+      "scale": 0.1172
+    },
+    "mob_bolt": {
+      "scale": 0.16
+    },
+    "mob_ember": {
+      "scale": 0.1757
+    },
+    "mob_bubble": {
+      "scale": 0.1478
+    },
+    "mob_shadow": {
+      "scale": 0.1232
+    }
+  },
+  "grid": {
+    "rows": [
+      0,
+      324,
+      646,
+      971
+    ],
+    "cols": [
+      0,
+      360,
+      724,
+      1086,
+      1448
+    ]
+  },
+  "inset": 12,
+  "label_band": 0.2
 }

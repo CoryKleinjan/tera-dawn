@@ -1,0 +1,94 @@
+{
+  "source": "art/source/ui_dialogue_old.png",
+  "recolor": "leather",
+  "out_dir": "assets/sprites/ui/dialogue",
+  "scale": 0.5,
+  "alpha": "soft",
+  "label_band": 0.2,
+  "grid_threshold": 0.7,
+  "cells": [
+    [
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "quest_complete_banner"
+    ],
+    [
+      "level_up_banner",
+      "job_advance_banner",
+      "",
+      ""
+    ]
+  ],
+  "grid": {
+    "rows": [
+      1,
+      267,
+      485,
+      799,
+      1084
+    ],
+    "cols": [
+      [
+        1,
+        483,
+        789,
+        1115,
+        1446
+      ],
+      [
+        1,
+        416,
+        821,
+        1116,
+        1446
+      ],
+      [
+        1,
+        464,
+        784,
+        1095,
+        1446
+      ],
+      [
+        1,
+        383,
+        877,
+        1186,
+        1446
+      ]
+    ]
+  },
+  "overrides": {
+    "quest_complete_banner": {
+      "fix": "glow_backdrop",
+      "keep": "largest",
+      "scale": 0.75,
+      "recolor": null
+    },
+    "level_up_banner": {
+      "fix": "glow_backdrop",
+      "keep": "largest",
+      "scale": 0.75,
+      "recolor": null
+    },
+    "job_advance_banner": {
+      "fix": "glow_backdrop",
+      "keep": "largest",
+      "scale": 0.75,
+      "recolor": null
+    }
+  }
+}

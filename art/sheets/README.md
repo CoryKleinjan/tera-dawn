@@ -38,13 +38,33 @@ trims it.
 | `blank_top` | | Paint the top N rows of the cell with background, for labels that touch the art. |
 | `blank_label` | | Rows at the top of the cell holding a label drawn over the art: paints the box around the label's white letters with background. |
 | `blank` | | Rects `[[x0, y0, x1, y1], ...]` inside the cell to paint with background, for a label beside art that reaches the top. |
-| `keep` | `"all"` | `"largest"` keeps only the biggest piece; `"split"` saves each piece as `name_1`, `name_2`... |
+| `keep` | `"all"` | `"largest"` keeps only the biggest piece; `"split"` saves each piece as `name_1`, `name_2`... (left to right, or top to bottom with `"split_by": "y"`) |
 | `shadow` | `false` | Dark sheets: also remove the soft drop shadow under the sprite. |
 | `inset` | `3` | Pixels trimmed off every cell edge (the divider lines). |
 | `save` | `true` | `false` keeps cells only for animation sets. |
 | `grid_threshold` | `0.8` | How much of a row or column must be divider-coloured to count as a divider. |
 | `grid` | | Give the cells by hand when detection fails: `{"rows": [y0, y1, y2, ...], "cols": [x0, x1, ...]}` (edges between cells; `cols` can be one list per row). |
-| `overrides` | | Per-cell versions of any key above, plus `crop` `[x0, y0, x1, y1]`, `seamless` (tileable texture, with `size`), `extend_bottom` (pad a backdrop downward), `fix` (a named clean-up from `FIXES`) and `out_dir`. |
+| `overrides` | | Per-cell versions of any key above, plus `crop` `[x0, y0, x1, y1]`, `seamless` (tileable texture, with `size`), `extend_bottom` (pad a backdrop downward), `fix` (a named clean-up from `FIXES`), `recolor` (a palette change from `RECOLORS`), `patch` (`[[x0, y0, x1, y1, dx], ...]`: paint a rect with a copy from dx pixels across, to take out an ornament that would stretch in a 9-slice), `flip` (mirror it left to right) and `out_dir`. |
+
+## Clean-ups and palette changes
+
+`fix` names one of `FIXES` in `tools/art/slice_sheets.py`: `glow_backdrop` (and `_holes`) for the warm glow
+painted behind icons, `card_backdrop` for an item drawn on a framed pastel card or pale disc, `card_glow` (the same,
+also taking a pink glow round the item), `card_flat` (a card fill for an item that runs out of its cell, with
+`crop`), `round_top` (rebuilds the top of a round button whose rim ran under the label box, from its bottom),
+`painted_sky`, `sky_body` and `hero_attack_arc`. `recolor` names one of `RECOLORS`: `dark_parchment` turns the big
+pale parchment areas of the leather UI sheets (part 7) into dark leather, since the game writes light text in its
+panels; `leather` was the stand-in that recoloured the old purple UI.
+
+## The leather UI (art prompts part 7)
+
+`ui`, `ui_windows`, `ui_hud`, `ui_menu`, `ui_dialogue`, `ui_social`, `ui_book` and `ui_creator` cut the leather
+sheets. Cells that span two grid rows have their own manifest with a `region` (`ui_windows_frames`, `ui_menu_panel`,
+`ui_dialogue_rows`, `ui_book_rows`, `ui_creator_frame`). Pieces the leather sheets don't have, or that didn't suit,
+are still cut from the old sheet by a `<sheet>_old` manifest (`art/source/<sheet>_old.png`): the minimap dots and
+portal, the keycaps (light keys for dark letters), the three banners with their words painted in, and the attack and
+Dawnshard icons. Other sheets do the same: `items_parts_2_old` (ash veil, stalker fang), `skill_icons_old` (the thief
+skills), `projectiles_old` (mob wisp) and `skill_effects_old` (portal flash). `ui_map_icons`, `ui_controls_leather` and `ui_extras_leather` are for later (`save` false).
 
 ## Animation sets
 
@@ -92,8 +112,7 @@ after the item ids, replacing the placeholders from `tools/art/make_item_placeho
 (which never overwrites a real icon). `elixir` and `mana_elixir` are art for future potions.
 `ui_windows` cuts the window frame, tabs, slots, buttons and tooltip into
 `assets/sprites/ui/`, which the game windows and the status bar's window buttons draw with.
-`item_slot_hover` isn't used: its glow kept a pink tint from the magenta key, so the windows
-brighten `item_slot` on hover instead.
+`item_slot_hover` isn't used: the windows brighten `item_slot` on hover instead.
 
 ## Monsters, NPCs, areas and the paperdoll (art prompts parts 1 to 3)
 

@@ -9,7 +9,7 @@ extends Control
 const MENU_BUTTON := Rect2(8, 6, 34, 34)
 ## The minimap's top left; it's drawn at its frame art's own size (see minimap_rect).
 ## Inside hud/minimap_frame, in texels: where the map is drawn.
-const MINIMAP_INNER := Rect2(18, 28, 147, 58)
+const MINIMAP_INNER := Rect2(10, 36, 158, 52)
 ## Minimap marks: texture, and its height in pixels.
 const MINIMAP_PLAYER := ["hud/minimap_dot_1", 9.0]
 const MINIMAP_NPC := ["hud/minimap_dot_2", 6.0]

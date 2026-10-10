@@ -1,0 +1,26 @@
+{
+  "source": "art/source/projectiles_old.png",
+  "out_dir": "assets/sprites/projectiles",
+  "scale": 0.08,
+  "alpha": "soft",
+  "cells": [
+    [
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "mob_wisp",
+      ""
+    ]
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "source": "art/source/items_consumables.png",
   "out_dir": "assets/sprites/items",
-  "scale": 0.25,
+  "scale": 0.315,
   "alpha": "hard",
   "keep": "largest",
   "cells": [
@@ -27,32 +27,31 @@
       "mana_elixir"
     ]
   ],
+  "strip_labels": true,
+  "label_band": 0.4,
   "grid": {
     "rows": [
       0,
-      353,
-      681,
-      1024
+      355,
+      674,
+      1030
     ],
     "cols": [
       0,
-      316,
-      620,
-      924,
-      1229,
+      318,
+      618,
+      917,
+      1217,
       1536
     ]
   },
   "overrides": {
-    "mana_elixir": {
-      "blank": [
-        [
-          0,
-          0,
-          204,
-          50
-        ]
-      ]
+    "white_potion": {
+      "key": [
+        0.1,
+        0.3
+      ],
+      "fix": "glow_backdrop"
     }
   }
 }

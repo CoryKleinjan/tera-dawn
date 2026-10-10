@@ -289,7 +289,7 @@ func _build_title() -> void:
 	logo.texture = UiSkin.tex("logo")
 	logo.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	logo.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	logo.custom_minimum_size = Vector2(520, 150)
+	logo.custom_minimum_size = Vector2(520, 190)  # the logo is two lines (TERA'S over DAWN)
 	col.add_child(logo)
 
 	# first the small menu over the key art: Play, Settings, Quit

@@ -1,73 +1,330 @@
 {
   "source": "art/source/ui_menu.png",
-  "recolor": "leather",
   "out_dir": "assets/sprites/ui/menu",
   "scale": 0.5,
   "alpha": "soft",
-  "label_band": 0.2,
-  "grid_threshold": 0.7,
+  "label_band": 0.15,
   "cells": [
     [
-      "menu_panel",
+      "",
       "settings_panel",
       "tab_on",
       "tab_off",
       "wide_button"
     ],
     [
+      "",
       "slider_track",
       "slider_fill",
       "slider_knob",
-      "slider_knob_hover",
+      "",
       "checkbox_off"
     ],
     [
       "checkbox_on",
       "dropdown",
       "dropdown_list",
-      "list_row_hover",
+      "",
       "scroll_track"
     ],
     [
       "scroll_grabber",
-      "keycap",
-      "keycap_listening",
-      "keycap_empty",
-      "icon_controls"
+      "",
+      "",
+      "",
+      "icon_controls",
+      "",
+      ""
     ],
     [
       "icon_audio",
       "icon_video",
       "icon_mute",
       "icon_reset",
-      "divider"
+      "divider",
+      ""
     ]
   ],
   "overrides": {
-    "keycap_listening": {
-      "fix": "glow_backdrop"
+    "settings_panel": {
+      "recolor": "dark_parchment",
+      "blank": [
+        [
+          0,
+          0,
+          144,
+          17
+        ]
+      ],
+      "scale": 0.947
     },
-    "slider_knob_hover": {
-      "fix": "glow_backdrop",
-      "keep": "largest"
+    "dropdown": {
+      "recolor": "dark_parchment",
+      "blank": [
+        [
+          0,
+          0,
+          131,
+          17
+        ]
+      ],
+      "scale": 0.549
     },
-    "menu_panel": {
-      "scale": 1.0
+    "dropdown_list": {
+      "recolor": "dark_parchment",
+      "blank": [
+        [
+          0,
+          0,
+          136,
+          17
+        ]
+      ],
+      "scale": 0.6263
+    },
+    "tab_on": {
+      "blank": [
+        [
+          0,
+          0,
+          66,
+          17
+        ]
+      ],
+      "scale": 0.78
+    },
+    "tab_off": {
+      "blank": [
+        [
+          0,
+          0,
+          114,
+          17
+        ],
+        [
+          0,
+          117,
+          207,
+          194
+        ]
+      ],
+      "scale": 0.78
+    },
+    "wide_button": {
+      "blank": [
+        [
+          0,
+          0,
+          103,
+          17
+        ]
+      ],
+      "scale": 0.5086
+    },
+    "slider_track": {
+      "blank": [
+        [
+          0,
+          0,
+          106,
+          16
+        ]
+      ],
+      "scale": 0.5138
+    },
+    "slider_fill": {
+      "blank": [
+        [
+          0,
+          0,
+          153,
+          16
+        ]
+      ],
+      "scale": 0.5402
+    },
+    "slider_knob": {
+      "blank": [
+        [
+          0,
+          0,
+          117,
+          16
+        ]
+      ],
+      "scale": 0.6142
+    },
+    "checkbox_off": {
+      "blank": [
+        [
+          0,
+          0,
+          97,
+          16
+        ]
+      ],
+      "scale": 0.4878
+    },
+    "checkbox_on": {
+      "blank": [
+        [
+          0,
+          0,
+          92,
+          17
+        ]
+      ],
+      "scale": 0.5734
+    },
+    "scroll_track": {
+      "blank": [
+        [
+          0,
+          0,
+          125,
+          17
+        ]
+      ],
+      "scale": 0.5644
+    },
+    "scroll_grabber": {
+      "blank": [
+        [
+          0,
+          0,
+          74,
+          17
+        ]
+      ],
+      "scale": 0.5475
     },
     "icon_controls": {
-      "recolor": null
+      "blank": [
+        [
+          0,
+          0,
+          154,
+          17
+        ]
+      ],
+      "scale": 0.9551
     },
     "icon_audio": {
-      "recolor": null
+      "blank": [
+        [
+          0,
+          0,
+          99,
+          17
+        ]
+      ],
+      "scale": 0.93
     },
     "icon_video": {
-      "recolor": null
+      "blank": [
+        [
+          0,
+          0,
+          104,
+          17
+        ]
+      ],
+      "scale": 0.9834
     },
     "icon_mute": {
-      "recolor": null
+      "blank": [
+        [
+          0,
+          0,
+          99,
+          17
+        ]
+      ],
+      "scale": 1.0156
     },
     "icon_reset": {
-      "recolor": null
+      "blank": [
+        [
+          0,
+          0,
+          107,
+          17
+        ]
+      ],
+      "scale": 0.9948
+    },
+    "divider": {
+      "blank": [
+        [
+          0,
+          0,
+          122,
+          17
+        ]
+      ],
+      "scale": 0.6606
     }
+  },
+  "background": [
+    254,
+    1,
+    249
+  ],
+  "inset": 5,
+  "grid": {
+    "rows": [
+      0,
+      194,
+      356,
+      529,
+      683,
+      846
+    ],
+    "cols": [
+      [
+        0,
+        249,
+        490,
+        720,
+        927,
+        1261
+      ],
+      [
+        0,
+        249,
+        490,
+        757,
+        927,
+        1096,
+        1261
+      ],
+      [
+        0,
+        163,
+        491,
+        757,
+        1096,
+        1261
+      ],
+      [
+        0,
+        163,
+        328,
+        490,
+        693,
+        927,
+        1096,
+        1261
+      ],
+      [
+        0,
+        163,
+        328,
+        490,
+        659,
+        927,
+        1261
+      ]
+    ]
   }
 }

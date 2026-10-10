@@ -14,19 +14,19 @@ extends RefCounted
 const DIR := "res://assets/sprites/ui/"
 ## Where each bar frame's empty groove is, in texels: Rect2(x, y, w, h).
 const GROOVES := {
-	"hp_frame": Rect2(42, 10, 108, 18),
-	"mp_frame": Rect2(37, 12, 116, 18),
-	"exp_frame": Rect2(27, 7, 131, 13),
-	"monster_hp_1": Rect2(38, 9, 83, 17),
-	"social/party_hp_frame": Rect2(20, 11, 145, 9),
+	"hp_frame": Rect2(40, 10, 92, 21),
+	"mp_frame": Rect2(42, 12, 92, 21),
+	"exp_frame": Rect2(28, 9, 124, 12),
+	"monster_hp_1": Rect2(36, 9, 92, 18),
+	"social/party_hp_frame": Rect2(10, 8, 164, 11),
 }
 ## The quest marker over an NPC for each QuestLog-like state TDNpc.quest_marker() returns.
 const QUEST_MARKERS := {"!": "hud/quest_available", "?": "hud/quest_ready", "...": "hud/quest_in_progress"}
 ## The speech bubble's body and tail inside hud/speech_bubble, in texels.
-const SPEECH_BODY := Rect2(0, 0, 144, 82)
-const SPEECH_TAIL := Rect2(36, 76, 34, 23)
+const SPEECH_BODY := Rect2(0, 0, 144, 103)
+const SPEECH_TAIL := Rect2(24, 98, 34, 28)
 ## Where the tail's tip is inside SPEECH_TAIL.
-const SPEECH_TIP := Vector2(6, 23)
+const SPEECH_TIP := Vector2(3, 27)
 ## The plaque (name_tag) behind name tags and hints: its end caps and trim in texels (the
 ## caps' gold diamonds sit inside them), and the room left between the text and a cap.
 const PLAQUE_MARGINS := Vector2(20, 9)
@@ -179,7 +179,7 @@ const TRACKER_PANEL := ["dialogue/tracker_panel", Vector4(16, 32, 16, 12), Vecto
 const GUILD_TAG := ["social/guild_tag", Vector4(46, 28, 46, 18), Vector2(56, 0)]
 const SHOP_SIGN := ["social/shop_sign", Vector4(40, 50, 40, 20), Vector2(50, 0)]
 const DIVIDER := ["menu/divider", Vector4(12, 0, 12, 0), Vector2(40, 0)]
-const CREATOR_FRAME := ["creator/frame", Vector4(22, 48, 22, 22), Vector2(70, 0)]
+const CREATOR_FRAME := ["creator/frame", Vector4(22, 34, 22, 24), Vector2(70, 0)]
 const DIALOGUE_FRAME := ["dialogue/dialogue_frame", Vector4(160, 52, 30, 34), Vector2(100, 50)]
 
 ## Draws one of the panels above.
@@ -198,8 +198,8 @@ static func draw_book(ci: CanvasItem, r: Rect2, left_w: float, scale := 1.0) -> 
 
 ## The game windows' frame (inventory, equipment, character): gold trim and a title strip.
 static func window_frame() -> StyleBoxTexture:
-	var sb := box("window_frame", 22, 24)
-	sb.texture_margin_bottom = 20
+	var sb := box("window_frame", 16, 30)
+	sb.texture_margin_bottom = 14
 	return sb
 
 static func tooltip_frame() -> StyleBoxTexture:
@@ -410,7 +410,7 @@ static func _tinted(sb: StyleBoxTexture, tint: Color) -> StyleBoxTexture:
 	return out
 
 static func use_cursor() -> void:
-	Input.set_custom_mouse_cursor(tex("cursor"), Input.CURSOR_ARROW, Vector2(14, 6))
+	Input.set_custom_mouse_cursor(tex("cursor"), Input.CURSOR_ARROW, Vector2(3, 3))
 
 ## A bar: the frame texture with its fill drawn into the groove. `pos` is the frame's top left.
 ## `trail` (above `fraction`) shows a pale chunk of what was just lost, and `flash` (0-1)
@@ -504,7 +504,7 @@ static func draw_party_hp(ci: CanvasItem, pos: Vector2, width: float, fraction: 
 
 ## A monster HP bar centred above it.
 static func draw_monster_hp(ci: CanvasItem, bottom_center: Vector2, width: float, fraction: float) -> void:
-	var scale := width / 134.0
+	var scale := width / 135.0
 	var h := 38.0 * scale
 	draw_bar(ci, "monster_hp_1", "monster_hp_2", bottom_center - Vector2(width / 2.0, h), fraction, scale)
 

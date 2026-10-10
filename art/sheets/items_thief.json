@@ -1,7 +1,7 @@
 {
   "source": "art/source/items_thief.png",
   "out_dir": "assets/sprites/items",
-  "scale": 0.3,
+  "scale": 0.331,
   "alpha": "hard",
   "keep": "largest",
   "fix": "glow_backdrop",
@@ -38,5 +38,29 @@
       "",
       ""
     ]
-  ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      258,
+      515,
+      772,
+      1030
+    ],
+    "cols": [
+      0,
+      256,
+      512,
+      768,
+      1024,
+      1280,
+      1536
+    ]
+  },
+  "inset": 6,
+  "overrides": {
+    "nightfang_shoes": {
+      "keep": "all"
+    }
+  }
 }

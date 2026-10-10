@@ -1,10 +1,10 @@
 {
   "source": "art/source/items_charms_food.png",
   "out_dir": "assets/sprites/items",
-  "scale": 0.3,
+  "scale": 0.331,
   "alpha": "hard",
   "keep": "largest",
-  "fix": "glow_backdrop",
+  "fix": "card_backdrop",
   "cells": [
     [
       "scroll_weapon_att_10",
@@ -38,5 +38,38 @@
       "pet_snack",
       ""
     ]
-  ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      258,
+      515,
+      772,
+      1030
+    ],
+    "cols": [
+      0,
+      256,
+      512,
+      768,
+      1024,
+      1280,
+      1536
+    ]
+  },
+  "inset": 6,
+  "overrides": {
+    "scroll_weapon_att_10": {
+      "fix": "card_glow"
+    },
+    "scroll_weapon_matt_10": {
+      "fix": "card_glow"
+    },
+    "scroll_armor_def_10": {
+      "fix": "card_glow"
+    },
+    "scroll_gloves_att_10": {
+      "fix": "card_glow"
+    }
+  }
 }

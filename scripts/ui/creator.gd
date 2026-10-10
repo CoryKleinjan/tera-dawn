@@ -15,8 +15,8 @@ const POSES: Array[StringName] = [&"idle", &"walk", &"attack", &"level_up"]
 ## The pedestal under the preview, in screen pixels.
 const PEDESTAL := Vector2(150, 75)
 ## The two bars on the creator sheet (cut as one cell, so numbered by the slicer).
-const BUTTON_PLAIN := "creator/buttons_1"
-const BUTTON_GOLD := "creator/buttons_2"
+const BUTTON_PLAIN := "creator/buttons_2"  # the new sheet has the gold (orange) one on top
+const BUTTON_GOLD := "creator/buttons_1"
 
 var made: NewCharacter
 var job: JobDef
@@ -267,6 +267,9 @@ func _wide_button(text: String, art: String, pressed: Callable) -> Button:
 	b.add_theme_stylebox_override("hover", UiSkin.lit(sb))
 	b.add_theme_stylebox_override("focus", UiSkin.lit(sb))
 	b.add_theme_stylebox_override("pressed", UiSkin.pressed(sb))
+	if art == BUTTON_PLAIN:  # the plain bar is dark leather: light letters
+		for state in ["font_color", "font_hover_color", "font_focus_color", "font_pressed_color"]:
+			b.add_theme_color_override(state, Palette.MIST)
 	return b
 
 func _small_button(text: String, pressed: Callable) -> Button:

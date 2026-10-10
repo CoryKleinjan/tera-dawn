@@ -1,0 +1,214 @@
+{
+  "source": "art/source/ui_map_icons.png",
+  "out_dir": "art/build/ui_map_icons",
+  "save": false,
+  "note": "Part 7 U9 world map and minimap markers, for later: nothing in the game loads them yet. Labels sit under each icon.",
+  "scale": 0.25,
+  "alpha": "soft",
+  "label_band": 0,
+  "inset": 5,
+  "grid": {
+    "rows": [
+      0,
+      297,
+      594,
+      891,
+      1190
+    ],
+    "cols": [
+      0,
+      443,
+      887,
+      1330,
+      1774
+    ]
+  },
+  "cells": [
+    [
+      "map_player",
+      "map_party_member",
+      "map_other_player",
+      "map_npc"
+    ],
+    [
+      "map_quest_giver",
+      "map_quest_ready",
+      "map_portal",
+      "map_boss"
+    ],
+    [
+      "minimap_paper",
+      "map_platform_bar",
+      "town_marker",
+      "town_marker_hover"
+    ],
+    [
+      "field_marker",
+      "field_marker_hover",
+      "you_are_here",
+      "region_label_ribbon"
+    ]
+  ],
+  "overrides": {
+    "map_player": {
+      "blank": [
+        [
+          0,
+          245,
+          450,
+          300
+        ]
+      ]
+    },
+    "map_party_member": {
+      "blank": [
+        [
+          0,
+          245,
+          450,
+          300
+        ]
+      ]
+    },
+    "map_other_player": {
+      "blank": [
+        [
+          0,
+          245,
+          450,
+          300
+        ]
+      ]
+    },
+    "map_npc": {
+      "blank": [
+        [
+          0,
+          245,
+          450,
+          300
+        ]
+      ]
+    },
+    "map_quest_giver": {
+      "blank": [
+        [
+          0,
+          245,
+          450,
+          300
+        ]
+      ]
+    },
+    "map_quest_ready": {
+      "blank": [
+        [
+          0,
+          245,
+          450,
+          300
+        ]
+      ]
+    },
+    "map_portal": {
+      "blank": [
+        [
+          0,
+          245,
+          450,
+          300
+        ]
+      ]
+    },
+    "map_boss": {
+      "blank": [
+        [
+          0,
+          245,
+          450,
+          300
+        ]
+      ]
+    },
+    "minimap_paper": {
+      "blank": [
+        [
+          0,
+          245,
+          450,
+          300
+        ]
+      ]
+    },
+    "map_platform_bar": {
+      "blank": [
+        [
+          0,
+          245,
+          450,
+          300
+        ]
+      ]
+    },
+    "town_marker": {
+      "blank": [
+        [
+          0,
+          245,
+          450,
+          300
+        ]
+      ]
+    },
+    "town_marker_hover": {
+      "blank": [
+        [
+          0,
+          245,
+          450,
+          300
+        ]
+      ]
+    },
+    "field_marker": {
+      "blank": [
+        [
+          0,
+          245,
+          450,
+          300
+        ]
+      ]
+    },
+    "field_marker_hover": {
+      "blank": [
+        [
+          0,
+          245,
+          450,
+          300
+        ]
+      ]
+    },
+    "you_are_here": {
+      "blank": [
+        [
+          0,
+          245,
+          450,
+          300
+        ]
+      ]
+    },
+    "region_label_ribbon": {
+      "blank": [
+        [
+          0,
+          245,
+          450,
+          300
+        ]
+      ]
+    }
+  }
+}

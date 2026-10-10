@@ -1,0 +1,40 @@
+{
+  "source": "art/source/ui_hud_old.png",
+  "recolor": "leather",
+  "out_dir": "assets/sprites/ui/hud",
+  "scale": 0.5,
+  "alpha": "soft",
+  "label_band": 0.2,
+  "grid_threshold": 0.7,
+  "cells": [
+    [
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "minimap_dot",
+      "minimap_portal"
+    ],
+    [
+      "",
+      "",
+      "",
+      ""
+    ]
+  ],
+  "overrides": {
+    "minimap_dot": {
+      "keep": "split"
+    }
+  }
+}
