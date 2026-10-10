@@ -100,8 +100,8 @@ static func back_house_slots(rule: DecorDef, map: MapDef) -> Array[float]:
 static func back_house_width(rule: DecorDef) -> float:
 	var widest := 0.0
 	for t in rule.textures:
-		widest = maxf(widest, t.get_width())
-	return widest * rule.texel * rule.scale.y
+		widest = maxf(widest, TDStage.art_size(t, rule.texel * rule.scale.y).x)
+	return widest
 
 ## Drops pieces from a DecorDef along [x0, x1] on the surface at y. Returns the sprites.
 func _scatter(rule: DecorDef, x0: float, x1: float, y: float, rng: RandomNumberGenerator) -> Array[Sprite3D]:
@@ -211,7 +211,7 @@ func _door(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
 		var s := TDStage.sprite(biome.door)
 		s.position = TDStage.to3d(base, TDStage.land_depth(-2.0))
 		root.add_child(s)
-		height = biome.door.get_height() * TDStage.TEXEL
+		height = TDStage.art_size(biome.door).y
 	var l := TDStage.light(DOOR_LIGHT, 1.6, 3.5)
 	l.position = TDStage.to3d(base + Vector2(0, -height * 0.45), -0.8)
 	root.add_child(l)
@@ -229,9 +229,9 @@ func _climbable(c: ClimbableDef) -> void:
 		top.offset = Vector2(0, -st.top.get_height() / 2.0)
 		top.position = TDStage.to3d(Vector2(c.x, y), z)
 		root.add_child(top)
-		y += st.top.get_height() * texel * 0.9
-	var bottom_h := st.bottom.get_height() * texel if st.bottom else 0.0
-	var mid_h := st.middle.get_height() * texel
+		y += TDStage.art_size(st.top, texel).y * 0.9
+	var bottom_h := TDStage.art_size(st.bottom, texel).y if st.bottom else 0.0
+	var mid_h := TDStage.art_size(st.middle, texel).y
 	while y < c.bottom - bottom_h - 2.0:
 		var s := TDStage.sprite(st.middle, texel)
 		s.offset = Vector2(0, -st.middle.get_height() / 2.0)  # hang from the top
@@ -286,8 +286,8 @@ func _lanterns(map: MapDef, biome: BiomeDef, rng: RandomNumberGenerator) -> void
 		post.position = pos
 		root.add_child(post)
 		# the lamp hangs off the right of the post, near the top
-		var lamp := pos + Vector3(biome.lantern.get_width() * 0.22 * TDStage.TEXEL / TDStage.PX,
-			biome.lantern.get_height() * 0.62 * TDStage.TEXEL / TDStage.PX, 0.05)
+		var size := TDStage.art_size(biome.lantern) / TDStage.PX
+		var lamp := pos + Vector3(size.x * 0.22, size.y * 0.62, 0.05)
 		var g := TDStage.glow_sprite(load("res://assets/sprites/fx/glow.png"), Color(biome.lantern_light, 0.5) * 1.5)
 		g.position = lamp
 		root.add_child(g)
@@ -313,9 +313,9 @@ static func sign_label_at(map: MapDef) -> Variant:
 	var biome := map.biome
 	if map.sign_text == "" or biome == null or biome.signpost == null:
 		return null
-	var h := biome.signpost.get_height() * SIGN_SCALE * TDStage.TEXEL
+	var h := TDStage.art_size(biome.signpost, TDStage.TEXEL * SIGN_SCALE).y
 	if not biome.portal_frames.is_empty():
-		h = maxf(h, biome.portal_frames[0].get_height() * TDStage.TEXEL)
+		h = maxf(h, TDStage.art_size(biome.portal_frames[0]).y)
 	var y := map.ground_y + 3.0 - h - SIGN_LABEL_GAP
 	var moved := true
 	while moved: # lifting the words over one platform can put them in the one above

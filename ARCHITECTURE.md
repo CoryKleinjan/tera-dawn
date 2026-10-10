@@ -277,7 +277,15 @@ layers (or add one here) rather than a raw number.
 
 Only the floor is a 3D block (its top runs back into the scene). Floating platforms have no
 depth: each is just its painted front skin at `LAND_FRONT`, so grass, decoration and portals
-on a platform stand just behind the skin. The floor's front-edge grass is nearer than the
+on a platform stand just behind the skin. The skin is one picture per platform width
+(`PlatformSkin`): the biome's left cap, middles and right cap, overlapped and joined where they
+match best, so a long platform never reads as small ones pasted together.
+
+All land art (tiles, platform pieces, ground textures) is cut at two texels per art pixel and
+drawn at `TDStage.TEXEL` game pixels per art pixel (`TDStage.art_density`, `art_size`), so
+every piece of land shows one pixel size. Data sizes it only within a narrow band (a
+manifest's `grow`, a decor or prop `scale`); `tools/art/land_pixels.py --check` and the tests
+keep it there. The floor's front-edge grass is nearer than the
 actors but sunk so its tips stop at the feet line (`TerrainBuilder.FRINGE_RISE`).
 
 Text that belongs to a spot in the world (name tags, the map's sign, hints, damage numbers)

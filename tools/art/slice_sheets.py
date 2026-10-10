@@ -31,6 +31,9 @@ from collections import deque
 import numpy as np
 from PIL import Image
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import platform_pieces  # noqa: E402
+
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
 SHEETS = os.path.join(ROOT, "art", "sheets")
 
@@ -48,6 +51,9 @@ DEFAULTS = {
     "strip_labels": False,    # paint over white label letters in the label band before cutting
     "fix": None,              # a clean-up from FIXES for every cell (e.g. "glow_backdrop" for icon sheets)
     "recolor": None,          # a palette change from RECOLORS for every cell (e.g. "leather")
+    "art_px": None,           # sheet pixels per art pixel (Gemini draws each sheet at its own pixel size); sets scale
+    "density": 2,             # with art_px: sprite texels per art pixel
+    "grow": 1.0,              # with art_px: draw this piece a little bigger or smaller (0.8 to 1.25)
 }
 
 
@@ -456,6 +462,20 @@ def recolor_dark_parchment(rgb):
 RECOLORS = {"leather": recolor_leather, "dark_parchment": recolor_dark_parchment}
 
 
+# How far "grow" may move a piece's art pixels from the shared size, either way.
+GROW_RANGE = (0.8, 1.25)
+
+
+def art_scale(opts):
+    """The shrink that puts `density` texels on every art pixel of a sheet drawn at `art_px`
+    sheet pixels per art pixel (times `grow`). Land art is all cut this way, so the game
+    draws every piece of it at about one on-screen pixel size (TDStage.art_density)."""
+    lo, hi = GROW_RANGE
+    if not lo <= opts["grow"] <= hi:
+        sys.exit(f"grow {opts['grow']} is outside {lo}..{hi}: the piece would stand out from the land around it")
+    return opts["density"] / opts["art_px"] * opts["grow"]
+
+
 def shrink(rgb, alpha, scale):
     h, w = alpha.shape
     nw, nh = max(1, round(w * scale)), max(1, round(h * scale))
@@ -518,6 +538,8 @@ def cut_cell(rgb_full, bg, box, opts):
             cell[:ys.max() + 2, max(0, xs.min() - 1):xs.max() + 2] = bg
     for px0, py0, px1, py1, dx in opts.get("patch", []):  # paint a rect with a copy from dx pixels across (an ornament that would stretch)
         cell[py0:py1, px0:px1] = cell[py0:py1, px0 + dx:px1 + dx].copy()
+    for ry0, ry1, dy in opts.get("patch_rows", []):  # paint rows with a copy from dy rows away (a divider line drawn through the art)
+        cell[ry0:ry1] = cell[ry0 + dy:ry1 + dy].copy()
     for bx0, by0, bx1, by1 in opts.get("blank", []):  # paint rects over with background (a label beside the art)
         cell[by0:by1, bx0:bx1] = bg
     if "crop" in opts:  # [x0, y0, x1, y1] inside the cell, in source pixels
@@ -708,6 +730,8 @@ def process(manifest_path, grid_only=False, sprites=None):
             if not name:
                 continue
             opts = {**base, **man.get("overrides", {}).get(name, {})}
+            if opts["art_px"]:
+                opts["scale"] = art_scale(opts)
             pieces = cut_cell(rgb, bg, (x0, y0, x1, y1), opts)
             if not pieces:
                 print(f"  {name}: nothing found")
@@ -765,6 +789,11 @@ def main():
                 print(f"  set {name}: skipped, run its sheets too ({missing[:3]}...)")
                 continue
             build_set(name, spec, sprites, ROOT)
+    # platform pieces get lined up and thinned for the game once they're cut
+    for p in ready:
+        name = os.path.splitext(os.path.basename(p))[0]
+        if name.startswith("platform_pieces_"):
+            platform_pieces.prepare(name[len("platform_pieces_"):])
 
 
 if __name__ == "__main__":

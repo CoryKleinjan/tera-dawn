@@ -1,7 +1,7 @@
 {
   "source": "art/source/meadow_tileset.png",
+  "art_px": 2.86,
   "background": "dark",
-  "scale": 0.35,
   "label_band": 0.2,
   "out_dir": "assets/sprites/tiles/meadow",
   "cells": [

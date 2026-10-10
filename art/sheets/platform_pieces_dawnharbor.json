@@ -1,7 +1,7 @@
 {
   "source": "art/source/platform_pieces_dawnharbor.png",
-  "out_dir": "art/build/platform_pieces_dawnharbor",
-  "scale": 0.3,
+  "art_px": 4.5,
+  "out_dir": "assets/sprites/platforms/dawnharbor",
   "label_band": 0.2,
   "inset": 6,
   "keep": "largest",
@@ -56,7 +56,7 @@
         0,
         26,
         283,
-        293
+        284
       ]
     },
     "middle_a": {
@@ -64,7 +64,7 @@
         0,
         26,
         580,
-        293
+        284
       ]
     },
     "middle_b": {
@@ -72,7 +72,7 @@
         0,
         26,
         584,
-        293
+        284
       ]
     },
     "cap_right": {
@@ -80,7 +80,7 @@
         0,
         26,
         279,
-        293
+        284
       ]
     },
     "under_left": {
@@ -89,7 +89,8 @@
         20,
         283,
         283
-      ]
+      ],
+      "out_dir": "art/build/platform_pieces_dawnharbor"
     },
     "under_middle_a": {
       "crop": [
@@ -97,7 +98,8 @@
         20,
         580,
         283
-      ]
+      ],
+      "out_dir": "art/build/platform_pieces_dawnharbor"
     },
     "under_middle_b": {
       "crop": [
@@ -105,7 +107,8 @@
         20,
         584,
         283
-      ]
+      ],
+      "out_dir": "art/build/platform_pieces_dawnharbor"
     },
     "under_right": {
       "crop": [
@@ -113,7 +116,8 @@
         20,
         279,
         283
-      ]
+      ],
+      "out_dir": "art/build/platform_pieces_dawnharbor"
     }
   }
 }

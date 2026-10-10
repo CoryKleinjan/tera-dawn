@@ -29,7 +29,7 @@ texture = ExtResource("12_stump")
 x = 2088.0
 y = -1.0
 depth = -4.8
-scale = 1.47
+scale = 1.3
 flip = false
 
 [sub_resource type="Resource" id="Resource_30"]

@@ -23,7 +23,7 @@ texture = ExtResource("16_rock_large")
 x = 738.0
 y = -1.0
 depth = -3.2
-scale = 1.4
+scale = 1.3
 flip = false
 
 [sub_resource type="Resource" id="Resource_36"]
@@ -41,7 +41,7 @@ texture = ExtResource("13_tall_grass")
 x = 1034.0
 y = -1.0
 depth = -7.6
-scale = 1.45
+scale = 1.3
 flip = false
 
 [sub_resource type="Resource" id="Resource_34"]
