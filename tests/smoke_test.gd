@@ -682,6 +682,8 @@ func _run() -> void:
 	await _tap("move_up")
 	await _until(func() -> bool: return world.map.id == &"hollow", 30)
 	_check(world.map.id == &"hollow" and _me().map.def.id == &"hollow", "the portal leads to Ember Hollow")
+	await _ticks(60)
+	_check(world.stage.fade < 0.05, "the new map fades back in after a portal (fade %.2f)" % world.stage.fade)
 	var boss := false
 	for m in world.mobs():
 		boss = boss or m.def.boss
