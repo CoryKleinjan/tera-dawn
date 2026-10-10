@@ -17,12 +17,14 @@ class DrawnAxis(unittest.TestCase):
     def test_an_upright_weapon_points_up(self):
         self.assertAlmostEqual(pl.drawn_axis(helpers.rod(90)), -90.0, delta=1.0)
 
-    def test_a_slanted_weapon_is_taken_toward_the_top(self):
+    def test_a_slanted_weapon_is_taken_toward_the_right(self):
         # up and to the right, as the weapon sheets draw a sword
         self.assertAlmostEqual(pl.drawn_axis(helpers.rod(-45)), -45.0, delta=1.5)
-        # the same line drawn the other way round is still read toward the top
+        # the same line drawn the other way round is still read toward the right
         self.assertAlmostEqual(pl.drawn_axis(helpers.rod(135)), -45.0, delta=1.5)
-        self.assertAlmostEqual(pl.drawn_axis(helpers.rod(45)), -135.0, delta=1.5)
+        # an item drawn pointing right and dipping down keeps its tip on the right
+        self.assertAlmostEqual(pl.drawn_axis(helpers.rod(45)), 45.0, delta=1.5)
+        self.assertAlmostEqual(pl.drawn_axis(helpers.rod(-135)), 45.0, delta=1.5)
 
 
 class Turning(unittest.TestCase):
