@@ -90,14 +90,25 @@ WEAPON_KINDS = ["sword", "bow", "wand", "staff", "claw", "knuckle", "gun"]
 # Sizes against the head's radius r (measured on the body).
 HAIR_WIDTH = 2.5      # a hairstyle's front piece is this wide
 HAIR_LIFT = 0.12      # and starts this far above the scalp
-SCALP = 0.1           # the scalp under the hair: the head above this far over its centre,
-SCALP_BACK = 0.45     # and behind this far back of it (any height down to SCALP_NAPE)
-SCALP_NAPE = 0.55
+SCALP = 0.1           # the scalp under the hair: the head down to a hairline this far over its centre,
+SCALP_BACK = 0.45     # and behind this far back of it (any height down to SCALP_NAPE), rounded off
+SCALP_NAPE = 0.55     # around the face (FACE_ZONE)
 SCALP_COVERED = 0.6   # drawn hair over this much of the scalp: the scalp is only repainted near it
 FACE_WIDTH = 1.1      # the face (eyes to mouth) is this wide
 FACE_AT = (0.2, 0.3)  # and centred this far forward and down from the head's centre
+# The face's bare skin, as an egg around FACE_AT: how far it reaches back (to the ear), forward,
+# up (to the hairline) and down (past the chin) from there. A hat's hair leaves it clear.
+FACE_ZONE = (FACE_AT[0] + SCALP_BACK, 1.0, FACE_AT[1] + SCALP, 0.7)
+BLANK_FACE = 222      # the hair sheet's blank faces are greys at least this pale (of 255)
 NECK = 0.95           # the neck is this far below the head's centre
 SHIELD_HEIGHT = 1.25
+# Clothes sheets (art/sheets/<place>_<style>_frames.json) for these places; styles whose sheet
+# came back unusable are skipped (their items wear the nearest cut, see EquipDef.worn_style).
+WORN_PLACES = ("top", "bottom", "shoes")
+WORN_BROKEN = ("shorts", "smock")
+WORN_SHORTS_GREY = 150  # the body's shorts are greys darker than this
+WORN_OUTLINE = 90       # and outlines darker than this
+WORN_FRINGE = 110       # pale edge pixels at the figure's edge are background fringe
 GLOVE_REACH = 0.9     # a glove is put on a hand only if the drawn one is this near it (head radii)
 SWORD_LENGTH = 1.9    # every weapon is drawn at the scale that makes the sword this long
 WEAPON_LENGTH = 20    # rig "tip" is this far from "grip" along the weapon (only its direction matters)
@@ -260,22 +271,27 @@ def without_shorts(piece, cell):
     grid) as an RGBA array, with the body's grey shorts taken out: they are greys like the worn
     piece's, so they'd pass for hair or gloves. The shorts are where the body sheet has them."""
     arr = np.asarray(piece.img).copy()
+    arr[shorts_mask(piece, cell, 3), 3] = 0
+    return arr
+
+
+def shorts_mask(piece, cell, grow):
+    """Where the body sheet has its grey shorts, on a piece of a sheet drawn on its grid (a
+    bool mask the piece's size), grown by `grow` pixels, since a redrawn sheet may sit a pixel
+    or two off the body."""
+    h, w = piece.img.height, piece.img.width
+    out = np.zeros((h, w), bool)
     b = BODY_PIECES.get(cell)
     if b is None:
-        return arr
+        return out
     px = np.asarray(b.img).astype(float)
     mx, mn = px[..., :3].max(2), px[..., :3].min(2)
-    shorts = (px[..., 3] > 0) & (mx - mn < 0.15 * np.maximum(mx, 1)) & (mx > 40) & (mx < 150)
-    shorts = ss.dilate(shorts, 3)
-    h, w = arr.shape[:2]
-    dx, dy = b.x - piece.x, b.y - piece.y
-    out = np.zeros((h, w), bool)
+    shorts = ss.dilate((px[..., 3] > 0) & (mx - mn < 0.15 * np.maximum(mx, 1)) & (mx > 40) & (mx < 150), grow)
     ys, xs = np.nonzero(shorts)
-    ys, xs = ys + dy, xs + dx
+    ys, xs = ys + b.y - piece.y, xs + b.x - piece.x
     ok = (ys >= 0) & (ys < h) & (xs >= 0) & (xs < w)
     out[ys[ok], xs[ok]] = True
-    arr[out, 3] = 0
-    return arr
+    return out
 
 
 def aligned(piece, offset):
@@ -293,22 +309,61 @@ def hair_grey(img):
     return float(np.median(arr[solid][:, :3].mean(1))) if solid.any() else 128.0
 
 
+def head_axes(shape, fi, centre):
+    """Per pixel of a frame: how far it is (head radii) ahead of and above `centre`, along the
+    head's own forward and up (turned with its tilt)."""
+    h, w = shape[:2]
+    yy, xx = np.mgrid[0:h, 0:w]
+    dx, dy = xx - centre[0], yy - centre[1]
+    up, fwd = turned((0, -1), fi["tilt"]), turned((1, 0), fi["tilt"])
+    return (dx * fwd[0] + dy * fwd[1]) / fi["r"], (dx * up[0] + dy * up[1]) / fi["r"]
+
+
+def face_zone(px, fi):
+    """The face on a body frame, forehead to chin and ear to cheek: the part of the head inside
+    an egg around the face's centre (FACE_ZONE), as a bool mask. No hair is drawn there under a
+    hat, and the scalp's hairline follows its rounded top instead of a straight cut."""
+    back, front, top, bottom = FACE_ZONE
+    ahead, above = head_axes(px.shape, fi, fi["head"] + turned(FACE_AT, fi["tilt"]) * fi["r"])
+    sx = np.where(ahead < 0, back, front)
+    sy = np.where(above > 0, top, bottom)
+    near = np.hypot(*head_axes(px.shape, fi, fi["head"])) <= 1.1  # the head, not the neck below it
+    return ((ahead / sx) ** 2 + (above / sy) ** 2 <= 1) & near & (px[..., 3] > 127)
+
+
+def bare_face(img, px, fi):
+    """A hair-under-a-hat layer with the face cut out of it, so the hero's face shows through:
+    the face_zone, and the rest of the blank face the sheet draws inside the hair (its palest
+    greys, where they run on from the face zone below the eyes: the cheek and jaw), with its
+    outline."""
+    arr = np.asarray(img).copy()
+    zone = face_zone(px, fi)
+    rgb = arr[..., :3].astype(int)
+    blank = (arr[..., 3] > 0) & (rgb.min(2) >= BLANK_FACE) & (rgb.max(2) - rgb.min(2) < 12)
+    ahead, above = head_axes(px.shape, fi, fi["head"])
+    blank &= (np.hypot(ahead, above) <= 1.45) & (above < 0)  # cheek and jaw: not pale streaks in the bangs
+    lab, n = ss.label(blank | zone)
+    if n:
+        clear = np.isin(lab, np.unique(lab[zone]))
+        arr[ss.dilate(clear, 1) & (rgb.min(2) >= BLANK_FACE - 40), 3] = 0  # and its soft edge
+        # and the blank's own outline where it runs across his cheek and jaw (the drawn blank
+        # is a little smaller than his face), so no line is left on his skin
+        arr[ss.dilate(clear, 3) & (above < 0) & ((rgb.max(2) < BLANK_FACE - 60) | (rgb.min(2) >= BLANK_FACE - 80)), 3] = 0
+        arr[clear, 3] = 0
+    return Image.fromarray(arr, "RGBA")
+
+
 def scalp(px, fi, back_view, grey):
     """The top and back of the bald head in one body frame, repainted in hair greys with the
     head's own shading. It goes under the hairstyle, so no pose shows a bald patch where the
-    hair piece doesn't reach (the back of the head in a slash, the crown when he looks up)."""
+    hair piece doesn't reach (the back of the head in a slash, the crown when he looks up).
+    Facing us, it stops at a hairline around the face (face_zone)."""
     h, w = px.shape[:2]
-    yy, xx = np.mgrid[0:h, 0:w]
-    dx, dy = xx - fi["head"][0], yy - fi["head"][1]
-    r = fi["r"]
-    up, fwd = turned((0, -1), fi["tilt"]), turned((1, 0), fi["tilt"])
-    above = (dx * up[0] + dy * up[1]) / r
-    ahead = (dx * fwd[0] + dy * fwd[1]) / r
-    head = (dx * dx + dy * dy <= (1.45 * r) ** 2) & (px[..., 3] > 127)
-    if back_view:
-        on = head & (above > -SCALP_NAPE)
-    else:
-        on = head & ((above > SCALP) | ((ahead < -SCALP_BACK) & (above > -SCALP_NAPE)))
+    ahead, above = head_axes(px.shape, fi, fi["head"])
+    head = (ahead ** 2 + above ** 2 <= 1.45 ** 2) & (px[..., 3] > 127)
+    on = head & (above > -SCALP_NAPE)
+    if not back_view:
+        on &= ~face_zone(px, fi)
     rgb = px[..., :3].astype(float)
     lum = rgb.mean(2)
     skin = on & (lum > 90)
@@ -485,6 +540,65 @@ def posed_gloves(arr, px, hands, reach):
         cut[..., :3] = np.repeat(grey, 3, 2).round().astype(np.uint8)
         img = scaled(Image.fromarray(cut, "RGBA"), s)
         out.append((img, (int(round(hand[0] - img.width / 2)), int(round(hand[1] - img.height / 2)))))
+    return out
+
+
+# ---------- clothes drawn on the body ----------
+
+def posed_worn(piece, cell, px, place):
+    """The clothes of one drawn pose of a <place>_<style>_frames sheet (the body wearing a top,
+    a bottom or shoes), lifted off the body in greys and fitted onto the hero's frame. The
+    sheets keep the body's grey shorts: a bottom is drawn over them, so they count as part of
+    it; for a top or shoes they're the body, so the shorts' dark greys are left out (a light
+    tunic hem over them stays). Returns (image, top-left), or None if nothing was found."""
+    arr = np.asarray(piece.img)
+    if not (arr[..., 3] > 0).any():
+        return None
+    ys = np.nonzero(arr[..., 3] > 0)[0]
+    ours = np.nonzero(px[..., 3] > 127)[0]
+    base = (ours.max() - ours.min() + 1) / (ys.max() - ys.min() + 1)
+    s, x, y = body_fit(arr, np.zeros(arr.shape[:2], bool), px, [base * k for k in (0.92, 0.96, 1.0, 1.04, 1.08)])
+    mask = worn_mask(arr)
+    # the pale fringe some sheets leave around the whole figure isn't the clothes
+    mask &= ~(ss.dilate(arr[..., 3] == 0, 2) & (arr[..., :3].max(2) > WORN_FRINGE))
+    # nothing is worn on the (bald, skin) head: its outline is the body's
+    rgb = arr[..., :3].astype(int)
+    skin = arr.copy()
+    skin[..., 3] = np.where((rgb[..., 0] > 150) & (rgb[..., 0] > rgb[..., 2] + 40), arr[..., 3], 0)
+    c, r = drawn_head(skin)
+    yy, xx = np.mgrid[0:arr.shape[0], 0:arr.shape[1]]
+    mask &= (xx - c[0]) ** 2 + (yy - c[1]) ** 2 > (r * 1.05) ** 2
+    if place != "bottom":
+        mask &= ~(shorts_mask(piece, cell, 4) & (arr[..., :3].max(2) < WORN_SHORTS_GREY))
+    # drop specks and bits of the body's outline caught off the clothes (pieces mostly of
+    # outline darks rather than the clothes' own greys)
+    lab, n = ss.label(mask)
+    if not n:
+        return None
+    sizes = np.bincount(lab.ravel())[1:]
+    filled = np.bincount(lab.ravel(), weights=(arr[..., :3].max(2) >= WORN_OUTLINE).ravel())[1:]
+    keep = (sizes >= max(sizes.max() * 0.05, 6)) & (filled >= sizes * 0.4)
+    mask = np.isin(lab, 1 + np.nonzero(keep)[0])
+    if not mask.any():
+        return None
+    cut = arr.copy()
+    cut[~mask] = 0
+    # the sheets draw a piece paler in some poses than others: each pose's greys are brought
+    # to the same middle grey, so the tinted piece doesn't flicker as he moves
+    grey = cut[..., :3].astype(float).mean(2, keepdims=True)
+    grey *= 128 / max(np.median(grey[mask]), 1)
+    cut[..., :3] = np.repeat(grey, 3, 2).clip(0, 255).round().astype(np.uint8)
+    return scaled(Image.fromarray(cut, "RGBA"), s), (int(round(x)), int(round(y)))
+
+
+def worn_sheets():
+    """(place, style) of every clothes sheet there is: art/sheets/<place>_<style>_frames.json
+    for the places in WORN_PLACES (the body wearing that piece in every pose)."""
+    out = []
+    for f in sorted(os.listdir(ss.SHEETS)):
+        m = re.fullmatch(r"(%s)_(\w+)_frames\.json" % "|".join(WORN_PLACES), f)
+        if m and m.group(2) not in WORN_BROKEN:
+            out.append((m.group(1), m.group(2)))
     return out
 
 
@@ -772,6 +886,8 @@ def main():
                     img = scaled(p.img, fs)
                     anchor = ((head_cell[0] - p.x) * fs, (head_cell[1] - p.y) * fs)
                     place(canvas, img, anchor, fi["head"], fi["tilt"])
+                    if layer == "_hat" and not back_view:  # the sheet draws a blank face in it
+                        canvas = bare_face(canvas, px, fi)
                 out[layer].append(canvas)
         old[style] = out[""]
         for layer, fr in out.items():
@@ -795,8 +911,10 @@ def main():
                 # where the drawn hair covers the scalp, the scalp only just around it (it fills
                 # slivers where the heads don't quite line up, and doesn't show as a band under a
                 # high hairline); where it leaves the crown bald (a ponytail drawn as the tail
-                # alone), all of it, so the top of his head is hair
-                bald = np.asarray(scalp(px, fi, n in BACK_VIEW, 128)).copy()
+                # alone), all of it, so the top of his head is hair; in the drawn hair's own grey,
+                # so it doesn't show as a darker cap
+                tone = hair_grey(drawn_hair) if drawn_hair.getbbox() else 128.0
+                bald = np.asarray(scalp(px, fi, n in BACK_VIEW, tone)).copy()
                 near = ss.dilate(np.asarray(drawn_hair)[..., 3] > 0, 3)
                 top = bald[..., 3] > 0
                 if top.any() and (near & top).sum() > top.sum() * SCALP_COVERED:
@@ -912,6 +1030,20 @@ def main():
                     _paste(canvas, img, *at)
             out.append(canvas)
         save_layer("gloves", out, fw, fh, index, anims)
+
+    # tops, bottoms and shoes, one layer per cut (EquipDef.worn_style)
+    for where, style in worn_sheets():
+        drawn = cut(f"{where}_{style}_frames")
+        out = []
+        for n, px in zip(names, frames):
+            canvas = blank()
+            cell = body_cells[n]
+            if cell in drawn:
+                worn = posed_worn(drawn[cell], cell, px, where)
+                if worn:
+                    _paste(canvas, worn[0], *worn[1])
+            out.append(canvas)
+        save_layer(f"{where}_{style}", out, fw, fh, index, anims)
 
     # weapons: every kind (greyscale, tinted per item) and every weapon with its own picture
     s_w = r * SWORD_LENGTH / length(weapons["sword"], "sword")

@@ -22,6 +22,7 @@ glow_color = Color(0.623529, 0.878431, 0.752941, 1.0)
 pickup_effect = ExtResource("3_shard_pickup")
 sell_price = 4175
 slot = 4
+worn_style = &"boots"
 jobs = Array[StringName]([&"archer"])
 required_level = 30
 stats = SubResource("Resource_1")
