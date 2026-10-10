@@ -45,6 +45,8 @@ func apply(state: Array) -> void:
 	# their own game sends the animation it plays; the server passes on a skill's motion,
 	# which plays as their weapon does it (WeaponStyle)
 	var anim := WeaponStyle.animation_for(look, StringName(state[4]))
+	if WeaponStyle.is_spell(anim):
+		anim = &"idle" # spells make no motion (play_skill flashes them)
 	_swing = _swing or (anim != animation and WeaponStyle.is_action(anim))
 	animation = anim
 	flags = state[5]
@@ -64,11 +66,18 @@ func apply_info(info: Array) -> void:
 		look = info[6]
 	shop_title = str(info[7])
 
-## They used a skill: restart its animation even if it's the same one as last time.
+## They used a skill: restart its animation even if it's the same one as last time (a buff
+## or spell makes no motion: they flash its colour instead).
 func play_skill(skill: SkillDef) -> void:
-	if skill:
-		animation = WeaponStyle.animation_for(look, skill.animation)
-		_swing = true
+	if skill == null:
+		return
+	var anim := WeaponStyle.animation_for(look, skill.animation)
+	if WeaponStyle.is_spell(anim):
+		if rig:
+			rig.pulse(skill.flash_color())
+		return
+	animation = anim
+	_swing = true
 
 func fainted() -> bool:
 	return flags & SnapshotFlags.PLAYER_FAINTED != 0
@@ -82,8 +91,8 @@ func step() -> void:
 
 func _ready() -> void:
 	rig = SpriteRig.new()
-	rig.setup(TDPlayer.HERO_FRAMES, null, TDStage.TEXEL * TDPlayer.HERO_SCALE / Paperdoll.ART_SCALE, 40.0)
-	rig.add_light(TDPlayer.LIGHT, TDPlayer.LIGHT_ENERGY, 48.0)
+	rig.setup(TDPlayer.HERO_FRAMES, null, TDStage.TEXEL * TDPlayer.HERO_SCALE / Paperdoll.ART_SCALE, TDPlayer.SHADOW_WIDTH)
+	rig.add_light(TDPlayer.LIGHT, TDPlayer.LIGHT_ENERGY, TDPlayer.LIGHT_HEIGHT)
 	add_child(rig)
 	companion = TDCompanion.new()
 	add_child(companion)

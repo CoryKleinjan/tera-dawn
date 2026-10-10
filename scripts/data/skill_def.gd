@@ -12,6 +12,9 @@ extends Resource
 
 enum Kind { ATTACK, BUFF, PASSIVE }
 const KIND_NAMES := ["Attack", "Buff", "Passive"]
+## The flash of a skill that goes off as a spell without a colour of its own (an attack with
+## a wand's or staff's spell motion, like Dawn Slash in a Magician's hands): soft dawn gold.
+const DEFAULT_FLASH := Color(1.0, 0.9, 0.65)
 
 @export var id: StringName
 @export var display_name := ""
@@ -71,8 +74,12 @@ const KIND_NAMES := ["Attack", "Buff", "Passive"]
 @export_group("Look")
 ## The motion the player makes: "attack" (the weapon's own basic blow) or "slash" (its big
 ## one) are worked out from the weapon worn (WeaponStyle); any other name is a hero animation
-## played as it is (assets/animations/hero.tres), like "cast" for spells and buffs.
+## played as it is (assets/animations/hero.tres). "cast" (buffs, and a wand's or staff's
+## spells) makes no motion at all: the player flashes `flash` instead (WeaponStyle.SPELL).
 @export var animation := &"attack"
+## The colour the player flashes when a buff or spell goes off, each skill its own.
+## Transparent: DEFAULT_FLASH (see flash_color).
+@export var flash := Color(0, 0, 0, 0)
 ## Played in front of the player, flipped with their facing.
 @export var effect: EffectDef
 ## Played on each monster hit.
@@ -129,3 +136,7 @@ func describe_level(level: int) -> PackedStringArray:
 	if kind == Kind.BUFF:
 		out.append("Lasts %d seconds" % roundi(duration_ticks(level) / 60.0))
 	return out
+
+## The colour the player flashes when this goes off as a buff or spell.
+func flash_color() -> Color:
+	return flash if flash.a > 0.0 else DEFAULT_FLASH

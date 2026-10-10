@@ -7,9 +7,15 @@ extends Node2D
 ## basic attack; the quickslot keys use whatever skill or item is on that slot.
 
 const HERO_FRAMES := preload("res://assets/animations/hero.tres")
-## The hero's size against everyone else's art (TDStage.TEXEL). Early monsters are drawn
-## smaller than the hero, so the player is the clear focus.
-const HERO_SCALE := 1.0
+## The hero's size against everyone else's art (TDStage.TEXEL): a little smaller than the
+## townsfolk (NPC art), so heroes read as young adventurers among grown-ups.
+const HERO_SCALE := 0.8
+## How tall he stands, feet to the top of his head, in game pixels at HERO_SCALE: speech
+## bubbles and shop signs go just over it.
+const HEIGHT := 78.0
+## The soft shadow under his feet, and where his light sits above them (game pixels).
+const SHADOW_WIDTH := 32.0
+const LIGHT_HEIGHT := 38.0
 ## A soft warm light that travels with every player, so heroes stand out from the scenery.
 const LIGHT := Color(1.0, 0.86, 0.68)
 const LIGHT_ENERGY := 0.55
@@ -34,6 +40,9 @@ const MAX_FALL := 12.0
 const DROP_TICKS := 16
 ## Ticks of the landing pose after a fall.
 const LAND_TICKS := 6
+## How much faster than his own jump takes off (game pixels a tick) he must be falling for
+## touching down to show the landing pose: a drop from higher than a plain jump, not every hop.
+const HARD_LANDING := 1.5
 ## Closest the feet get to the map's left and right edges.
 const EDGE := 14.0
 ## Knockback speed when a monster hits you (away from it, and up).
@@ -98,8 +107,8 @@ var companion: TDCompanion
 
 func _ready() -> void:
 	rig = SpriteRig.new()
-	rig.setup(HERO_FRAMES, null, TDStage.TEXEL * HERO_SCALE / Paperdoll.ART_SCALE, 40.0)
-	rig.add_light(LIGHT, LIGHT_ENERGY, 48.0)
+	rig.setup(HERO_FRAMES, null, TDStage.TEXEL * HERO_SCALE / Paperdoll.ART_SCALE, SHADOW_WIDTH)
+	rig.add_light(LIGHT, LIGHT_ENERGY, LIGHT_HEIGHT)
 	add_child(rig)
 	companion = TDCompanion.new()
 	add_child(companion)
@@ -262,12 +271,17 @@ func _use(skill: SkillDef) -> void:
 	if problem != "":
 		world.add_log(problem, Palette.INFO)
 		return
-	action_t = skill.action_ticks
-	action_anim = WeaponStyle.animation_for(Game.me.look(), skill.animation)
-	ready_t = READY_TICKS
 	cooldown = skill.cooldown
-	cheer_t = 0
-	_swing = true
+	var anim := WeaponStyle.animation_for(Game.me.look(), skill.animation)
+	if WeaponStyle.is_spell(anim):
+		# buffs and spells make no motion: he flashes the skill's colour and carries on
+		rig.pulse(skill.flash_color())
+	else:
+		action_t = skill.action_ticks
+		action_anim = anim
+		ready_t = READY_TICKS
+		cheer_t = 0
+		_swing = true
 	Net.ask(&"req_skill", [skill.id, position, face])
 	world.add_effect(skill.effect, position + Vector2(0, -40), face)
 
@@ -377,6 +391,7 @@ func _move() -> void:
 
 	vel.y = minf(vel.y + GRAVITY, MAX_FALL)
 	var prev_y := position.y
+	var hard_landing := vel.y > -JUMP_SPEED * CharacterStats.jump_multiplier(Game.me.stats) + HARD_LANDING
 	var was_falling := vel.y > 4.0
 	position.x = clampf(position.x + vel.x, EDGE, float(world.map.width) - EDGE)
 	position.y += vel.y
@@ -390,9 +405,10 @@ func _move() -> void:
 				vel.y = 0
 				on_ground = true
 				platform = pl
-				if was_falling:
+				if hard_landing:
 					land_t = LAND_TICKS
-					world.fx.dust(position, 0, 6)
+				if was_falling:
+					world.fx.dust(position, 0, 6 if hard_landing else 3)
 				break
 	if position.y > float(world.map.height):
 		position.y = float(world.map.ground_y)
