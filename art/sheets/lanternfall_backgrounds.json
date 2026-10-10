@@ -1,8 +1,7 @@
 {
-  "source": "art/source/lanternfall_backgrounds.png",
-  "scale": 0.5,
+  "source": "art/source/lanternfall_backgrounds_fine.png",
   "label_band": 0.3,
-  "inset": 4,
+  "inset": 11,
   "out_dir": "assets/sprites/backgrounds/lanternfall",
   "cells": [
     [
@@ -29,99 +28,99 @@
   "grid": {
     "rows": [
       0,
-      247,
-      474,
-      672,
-      849,
-      1030
+      659,
+      1266,
+      1794,
+      2267,
+      2750
     ],
     "cols": [
       [
         0,
-        1536
+        4101
       ],
       [
         0,
-        1536
+        4101
       ],
       [
         0,
-        1536
+        4101
       ],
       [
         0,
-        400,
-        720,
-        1150,
-        1536
+        1068,
+        1922,
+        3070,
+        4101
       ],
       [
         0,
-        381,
-        768,
-        1536
+        1017,
+        2050,
+        4101
       ]
     ]
   },
   "overrides": {
     "far": {
-      "extend_bottom": 160,
+      "extend_bottom": 589,
       "blank": [
         [
           0,
           0,
-          200,
-          42
+          534,
+          112
         ]
       ],
-      "scale": 0.2983
+      "scale": 0.4112
     },
     "mid": {
-      "extend_bottom": 160,
+      "extend_bottom": 512,
       "blank": [
         [
           0,
           0,
-          200,
-          42
+          534,
+          112
         ]
       ],
-      "scale": 0.3045
+      "scale": 0.365
     },
     "near": {
-      "extend_bottom": 160,
+      "extend_bottom": 461,
       "blank": [
         [
           0,
           0,
-          200,
-          42
+          534,
+          112
         ]
       ],
-      "scale": 0.3474
+      "scale": 0.3747
     },
     "landmark": {
       "blank": [
         [
           0,
           0,
-          200,
-          42
+          534,
+          112
         ]
       ],
       "keep": "largest",
-      "scale": 0.4535
+      "scale": 0.5707
     },
     "sky_body": {
       "fix": "sky_body",
       "alpha": "soft",
       "crop": [
-        167,
-        13,
-        315,
-        161
+        446,
+        35,
+        841,
+        430
       ],
-      "scale": 0.2635
+      "scale": 0.6316
     },
     "motes": {
       "alpha": "soft",
@@ -129,67 +128,67 @@
         [
           0,
           0,
-          200,
-          42
+          534,
+          112
         ]
       ],
-      "scale": 0.31
+      "scale": 0.3715
     },
     "clouds_1": {
       "blank": [
         [
           0,
           0,
-          385,
-          42
+          1028,
+          112
         ],
         [
-          215,
-          118,
-          305,
-          169
+          574,
+          315,
+          814,
+          451
         ]
       ],
-      "scale": 0.4579
+      "scale": 0.7683
     },
     "clouds_2": {
       "blank": [
         [
-          150,
-          94,
-          320,
-          169
+          400,
+          251,
+          854,
+          451
         ]
       ],
-      "scale": 0.4476
+      "scale": 0.7511
     },
     "clouds_3": {
       "blank": [
         [
           0,
           0,
-          280,
-          169
+          748,
+          451
         ],
         [
-          280,
-          120,
-          430,
-          169
+          748,
+          320,
+          1148,
+          451
         ]
       ],
-      "scale": 0.5502
+      "scale": 0.9232
     },
     "clouds_4": {
       "blank": [
         [
           0,
-          116,
-          386,
-          169
+          310,
+          1031,
+          451
         ]
       ],
-      "scale": 0.4717
+      "scale": 0.7915
     }
   }
 }

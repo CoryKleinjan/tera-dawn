@@ -33,7 +33,7 @@ var selected := ""
 func _init() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	var card := PanelContainer.new()
-	UiSkin.use_panel(card, UiSkin.ARCH_PANEL, Vector4(40, 62, 40, 36))
+	UiSkin.use_panel(card, UiSkin.ARCH_PANEL, Vector4(40, 62, 40, 52))
 	add_child(card)
 	var col := VBoxContainer.new()
 	col.add_theme_constant_override("separation", 10)

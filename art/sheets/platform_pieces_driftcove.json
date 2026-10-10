@@ -1,163 +1,53 @@
 {
   "source": "art/source/platform_pieces_driftcove.png",
-  "art_px": 3.75,
+  "art_px": 4.7,
   "out_dir": "assets/sprites/platforms/driftcove",
-  "label_band": 0.2,
-  "inset": 12,
+  "label_band": 0.12,
+  "inset": 6,
   "keep": "largest",
   "grid": {
     "rows": [
       0,
-      604,
-      906,
-      1190
+      847,
+      1696
     ],
     "cols": [
-      [
-        0,
-        295,
-        592,
-        887,
-        1182,
-        1480,
-        1774
-      ],
-      [
-        0,
-        295,
-        592,
-        887,
-        1182,
-        1480,
-        1774
-      ],
-      [
-        0,
-        1774
-      ]
+      0,
+      627,
+      1263,
+      1899,
+      2528
     ]
   },
   "cells": [
     [
       "cap_left",
       "middle_a",
-      "",
       "middle_b",
-      "",
       "cap_right"
     ],
     [
       "under_left",
       "under_middle_a",
-      "",
       "under_middle_b",
-      "",
       "under_right"
-    ],
-    [
-      ""
     ]
   ],
   "overrides": {
-    "cap_left": {
-      "crop": [
-        0,
-        15,
-        205,
-        572
-      ],
-      "patch_rows": [
-        [
-          283,
-          296,
-          -14
-        ]
-      ]
-    },
-    "middle_a": {
-      "crop": [
-        0,
-        15,
-        285,
-        572
-      ],
-      "patch_rows": [
-        [
-          283,
-          296,
-          -14
-        ]
-      ]
-    },
-    "middle_b": {
-      "crop": [
-        0,
-        15,
-        185,
-        572
-      ],
-      "patch_rows": [
-        [
-          283,
-          296,
-          -14
-        ]
-      ]
-    },
-    "cap_right": {
-      "crop": [
-        0,
-        15,
-        282,
-        572
-      ],
-      "patch_rows": [
-        [
-          283,
-          296,
-          -14
-        ]
-      ]
-    },
     "under_left": {
-      "crop": [
-        0,
-        18,
-        205,
-        290
-      ],
       "out_dir": "art/build/platform_pieces_driftcove"
     },
     "under_middle_a": {
-      "crop": [
-        0,
-        18,
-        285,
-        290
-      ],
       "out_dir": "art/build/platform_pieces_driftcove"
     },
     "under_middle_b": {
-      "crop": [
-        0,
-        32,
-        185,
-        290
-      ],
       "out_dir": "art/build/platform_pieces_driftcove"
     },
     "under_right": {
-      "crop": [
-        0,
-        18,
-        282,
-        290
-      ],
       "out_dir": "art/build/platform_pieces_driftcove"
     }
   },
   "platform": {
-    "bottom": "under",
     "max_depth": 110,
     "top_share": 0.3
   }

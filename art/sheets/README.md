@@ -36,6 +36,7 @@ trims it.
 | `grow` | `1.0` | With `art_px`: how much bigger or smaller a piece is drawn than its sheet's pixel size, 0.8 to 1.25 (a piece Gemini drew too small or too big next to its neighbours). `tools/art/land_pixels.py --check` checks grow x every decor and prop scale stays within 0.75 to 1.3. |
 | `alpha` | `"hard"` | `"hard"` for pixel sprites, `"soft"` for glows, effects and backgrounds. |
 | `key` | `[0.35, 0.8]` | Magenta sheets: how magenta a pixel must be to start and finish fading out. Raise it if purple art is being eaten. |
+| `defringe` | `true` | Magenta sheets: after the key, take the magenta out of the dark outline pixels at the cut edge (Gemini blends its outline into the background, which would show as a thin magenta line). Set `false` for a cell whose purple art it wrongly trims. |
 | `label_band` | `0.16` | Top part of each cell (fraction of its height) where the label may be. |
 | `strip_labels` | `false` | Paint over the white label letters in the label band first, for small cells where the label sits close to the art. |
 | `blank_top` | | Paint the top N rows of the cell with background, for labels that touch the art. |
@@ -133,11 +134,13 @@ after the item ids, replacing the placeholders from `tools/art/make_item_placeho
   came back on a darker magenta, with soft pink glows or with the sky painted behind a strip
   were evened out first by `tools/art/clean_sheet.py` (it edits the source in place, so run it
   on the original picture). The sun or moon uses `sky_body`; glowing icons use `glow_backdrop`.
-- **Rooms** (`room_<town>`) cut over the stand-ins from `tools/art/make_room_placeholders.py`;
-  a cell the sheet has no painting for (crate, plant, floor_soil, some floors) keeps its stand-in.
-  The back wall repeats sideways: its crop's last columns were cross-faded in the source toward
-  the columns just left of the crop. Floor cells stacked in one column have their own manifest
-  (`room_<town>_floor`, with a `region`).
+- **Rooms** (`room_<town>`, from `room_<town>_fine.png`) cut over the stand-ins from
+  `tools/art/make_room_placeholders.py` (drawn at 2 texels per pixel); a cell the sheet has no
+  painting for (crate, plant, floor_soil, some floors) keeps its stand-in. Like the land, rooms
+  are cut at 2 texels per art pixel (`rooms/` is in TDStage.ART_DENSITY). The back wall has its
+  own finer redraw and manifest (`room_<town>_wall`); it repeats sideways because the source's
+  first columns were cross-faded from the columns past its right edge. Floor cells stacked in
+  one column have their own manifest (`room_<town>_floor`, with a `region`).
 - **Platform pieces** (`platform_pieces_<area>`) cut a left cap, two middles and a right cap
   into `assets/sprites/platforms/<area>/` (the undersides go to `art/build/`). After cutting,
   the slicer runs `tools/art/platform_pieces.py`, which lines up their walking surfaces and
@@ -145,6 +148,12 @@ after the item ids, replacing the placeholders from `tools/art/make_item_placeho
   "under"` to take the underside from the under pieces). The game joins them into one picture
   per platform (`PlatformSkin`). Cut a clipped ornament off a piece's inner edge with `crop`
   rather than leave it: the game cuts through it where pieces join.
+- **Buildings** (`building_<area>_<large|small>`) are one building per sheet, Gemini edits of
+  the old tileset cuts at four times the detail. Each manifest's `art_px` is the sheet's
+  height over the building's art height (its BuildingDef `height` / TDStage.TEXEL), so it shows
+  at the shared pixel size and its set height. The old `<area>_buildings` tileset cuts are gone.
+- **Backdrops and ropes/props** are cut from the finer Gemini redraws (`*_fine.png`); each
+  cell's `scale` makes it two texels per art pixel at the size it shows on screen.
 - **Not in the game yet**: `climb_tops`, `dawnharbor_midground` and `buildings_<town>` cut into
   `art/build/` only.
 - **Items, pets, projectiles** cut into `assets/sprites/items/`, `pets/` (and

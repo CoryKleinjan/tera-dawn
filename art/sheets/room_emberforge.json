@@ -1,11 +1,11 @@
 {
-  "source": "art/source/room_emberforge.png",
+  "source": "art/source/room_emberforge_fine.png",
   "out_dir": "assets/sprites/rooms/emberforge",
-  "scale": 0.443,
+  "scale": 0.3835,
   "label_band": 0.2,
   "cells": [
     [
-      "wall",
+      "",
       "door",
       "floor_top"
     ],
@@ -23,83 +23,74 @@
     ]
   ],
   "overrides": {
-    "wall": {
-      "crop": [
-        68,
-        48,
-        818,
-        492
-      ],
-      "scale": 0.99
-    },
     "floor_top": {
       "seamless": true,
-      "size": 128,
+      "size": 256,
       "crop": [
         0,
-        56,
-        429,
-        485
+        113,
+        975,
+        1104
       ],
-      "scale": 0.45
+      "scale": 0.3896
     },
     "door": {
-      "scale": 0.2836
+      "scale": 0.2455
     },
     "counter": {
-      "scale": 0.4274
+      "scale": 0.37
     },
     "shelf": {
-      "scale": 0.635
+      "scale": 0.5498
     },
     "bookcase": {
-      "scale": 0.4589
+      "scale": 0.3973
     },
     "table": {
-      "scale": 0.2913
+      "scale": 0.2522
     },
     "hearth": {
-      "scale": 0.5357
+      "scale": 0.4638
     },
     "rack": {
-      "scale": 0.345
+      "scale": 0.2987
     },
     "lamp": {
-      "scale": 0.4911
+      "scale": 0.4252
     },
     "barrel": {
-      "scale": 0.2498
+      "scale": 0.2163
     }
   },
   "grid": {
     "rows": [
       0,
-      544,
-      872,
-      1190
+      1257,
+      2014,
+      2749
     ],
     "cols": [
       [
         0,
-        887,
-        1333,
-        1774
+        2049,
+        3079,
+        4098
       ],
       [
         0,
-        440,
-        887,
-        1333,
-        1774
+        1016,
+        2049,
+        3079,
+        4098
       ],
       [
         0,
-        440,
-        887,
-        1333,
-        1774
+        1016,
+        2049,
+        3079,
+        4098
       ]
     ]
   },
-  "inset": 6
+  "inset": 30
 }

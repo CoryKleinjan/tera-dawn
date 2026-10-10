@@ -475,6 +475,13 @@ func test_world_map_hover_finds_every_placed_map() -> void:
 	wm._hovered(Vector2(-50, -50))
 	check_eq(wm.hovered, &"", "hovering outside the map finds nothing")
 
+func test_world_map_painting_keeps_its_shape() -> void:
+	# world_pos values are pixels of this painting: a repaint must place every dot again
+	check_eq(UiSkin.tex("world_map").get_size(), TDWorldMapWindow.WORLD, "the world-map units are the painting's pixels")
+	var wm: TDWorldMapWindow = _open("worldmap")
+	var a := wm._area()
+	check(absf(a.size.aspect() - TDWorldMapWindow.WORLD.aspect()) < 0.01, "the painting is drawn unstretched (%s)" % a.size)
+
 func test_world_map_dots_dont_overlap() -> void:
 	var wm: TDWorldMapWindow = _open("worldmap")
 	var placed := TDWorldMapWindow.placed()

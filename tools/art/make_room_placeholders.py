@@ -4,8 +4,9 @@ assets/sprites/rooms/<style>/: the back wall (a strip the backdrop repeats), the
 top and front textures, the doorway out, and furniture (counter, shelves, bookcase,
 table, barrels, crates, hearth, weapon rack, banner, hanging lamp, potted plant).
 
-Part 9 of the art prompts asks for the painted versions; a sheet cut by slice_sheets.py
-into the same folder replaces these with no data changes.
+The room sheets (art/sheets/room_<town>*.json) cut by slice_sheets.py into the same folder
+replace most of these with no data changes, so run this first and slice after. Pieces are
+saved at 2 texels per drawn pixel, the density of everything in rooms/ (TDStage.ART_DENSITY).
 
     python3 tools/art/make_room_placeholders.py            # every style
     python3 tools/art/make_room_placeholders.py lumewood   # only these
@@ -38,6 +39,7 @@ STYLES = {
 }
 
 INK_ALPHA = 255
+DENSITY = 2
 
 
 def shade(c, f):
@@ -360,7 +362,9 @@ def main():
         out = os.path.join(OUT, name)
         os.makedirs(out, exist_ok=True)
         for piece, draw in PIECES.items():
-            draw(STYLES[name]).save(os.path.join(out, piece + ".png"))
+            im = draw(STYLES[name])
+            # two texels per drawn pixel, like the painted room art (TDStage.ART_DENSITY)
+            im.resize((im.width * DENSITY, im.height * DENSITY), Image.NEAREST).save(os.path.join(out, piece + ".png"))
         print(f"{name}: {len(PIECES)} pieces -> assets/sprites/rooms/{name}")
 
 

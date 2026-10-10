@@ -202,6 +202,6 @@ portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_9")])
 spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16")])
 props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_17"), SubResource("Resource_18"), SubResource("Resource_19"), SubResource("Resource_20"), SubResource("Resource_22"), SubResource("Resource_23")])
 region = &"driftcove"
-world_pos = Vector2(345.0, 424.0)
+world_pos = Vector2(330.0, 458.0)
 return_map = &"driftcove"
 level_text = "Lv. 22-30"

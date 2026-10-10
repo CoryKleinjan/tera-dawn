@@ -1,0 +1,27 @@
+{
+  "source": "art/source/room_driftcove_wall.png",
+  "out_dir": "assets/sprites/rooms/driftcove",
+  "background": [
+    255,
+    0,
+    255
+  ],
+  "scale": 0.4625,
+  "label_band": 0,
+  "inset": 0,
+  "grid": {
+    "rows": [
+      0,
+      2196
+    ],
+    "cols": [
+      0,
+      3932
+    ]
+  },
+  "cells": [
+    [
+      "wall"
+    ]
+  ]
+}

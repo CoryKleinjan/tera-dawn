@@ -13,12 +13,24 @@ const CLOSE_SIZE := 20.0
 const TAB_Y := 36.0
 const TAB_H := 26.0
 const TAB_MAX_W := 150.0
-## The share of a tab's width between its art's pointed ends, where the label goes.
-const TAB_TEXT_SHARE := 0.68
+## Tabs fill their row unless that makes them wider than TAB_MAX_W by more than this share:
+## then they're TAB_MAX_W, from the left.
+const TAB_STRETCH := 1.25
+## The share of a tab's width between the brass studs at its art's ends (texels 30 to 140
+## of 179), where the label goes, less a little room on each side.
+const TAB_TEXT_SHARE := 0.58
 ## List rows and panels: one darkness and one corner radius everywhere.
 const ROW_ALPHA := 0.4
 const ROW_RADIUS := 6.0
 const PLUS_SIZE := 20.0
+## The button art's ends in texels (curl and stud, kept unstretched), and the middle of the
+## face between its stitched lines.
+const BUTTON_END := 16.0
+const BUTTON_FACE_MID := 23.0
+## Buttons along a window's bottom: how tall, and how far up from the window's bottom edge
+## (clear of the frame's bottom trim).
+const BOTTOM_BUTTON_H := 32.0
+const BOTTOM_BUTTON_INSET := 16.0
 ## Opening: the window grows from OPEN_SCALE to full size and fades in over OPEN_TIME seconds.
 const OPEN_TIME := 0.12
 const OPEN_SCALE := 0.94
@@ -54,6 +66,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if visible:
+		keep_on_screen()  # however it was placed or has grown, never under the status bar
 		if _open_t < 1.0:
 			_open_t = minf(1.0, _open_t + delta / OPEN_TIME)
 			_apply_open()
@@ -77,6 +90,20 @@ func toggle() -> void:
 		raise()
 	else:
 		hud.tooltip.clear(self)
+
+## The part of the screen windows stay inside: all of it above the status bar.
+static func room() -> Rect2:
+	return Rect2(Vector2.ZERO, TDWorld.VIEW - Vector2(0, TDStatusBar.HEIGHT))
+
+## Moves the window back inside `room` if any of it is outside (its top left wins when it's
+## bigger than the room).
+func keep_on_screen() -> void:
+	position = clamp_to_room(position)
+
+## Where a window at `at` goes to stay inside `room`.
+func clamp_to_room(at: Vector2) -> Vector2:
+	var r := room()
+	return at.clamp(r.position, (r.end - size).max(r.position))
 
 func raise() -> void:
 	get_parent().move_child(self, -1)
@@ -113,8 +140,7 @@ func _gui_input(event: InputEvent) -> void:
 	if mm:
 		_hover = mm.position
 		if _dragging:
-			var view := get_viewport_rect().size
-			position = (mm.global_position - _drag_from).clamp(Vector2.ZERO, view - size)
+			position = clamp_to_room(mm.global_position - _drag_from)
 		_hovered(mm.position)
 
 ## Draws the window's contents. Override.
@@ -146,18 +172,23 @@ func draw_slot(r: Rect2, stack: ItemStack, dim := false, label := "") -> void:
 		DrawUtil.text(self, Game.num_font, r.end + Vector2(-4, -3), str(stack.count), 12, Palette.MIST, -1, 4, Palette.NIGHT)
 
 ## A button drawn with the UI sheet's button art; dimmed when it can't be used. `small` is
-## the short kind that fits in a list row. Use `add_button` to make it do something.
+## the short kind that fits in a list row. The art is scaled to the button's height (only its
+## middle stretches sideways), so its stitching keeps its shape and the label sits between
+## the stitched lines. Use `add_button` to make it do something.
 func draw_button(r: Rect2, label: String, enabled := true, small := false) -> void:
 	var hot := enabled and r.has_point(_hover)
-	var art := UiSkin.box("button_hover" if hot else "button_normal", 16, 14)
-	if small:  # the same art at half size, so its trim isn't squeezed
-		draw_set_transform(r.position, 0.0, Vector2(0.5, 0.5))
-		art.draw(get_canvas_item(), Rect2(Vector2.ZERO, r.size * 2.0))
-		draw_set_transform(Vector2.ZERO)
-	else:
-		art.draw(get_canvas_item(), r)
-	DrawUtil.text(self, Game.num_font if not small else Game.ui_font, r.get_center() + Vector2(0, 4 if small else 6), label,
-		11 if small else 15, Palette.INK if enabled else Color(Palette.INK, 0.4), 0)
+	var art := "button_hover" if hot else "button_normal"
+	var k := r.size.y / UiSkin.tex(art).get_height()
+	UiSkin.draw_box(self, UiSkin.box(art, BUTTON_END, 0), r, k)
+	var font_size := 11 if small else 15
+	var mid := r.position.y + BUTTON_FACE_MID * k
+	DrawUtil.text(self, Game.num_font if not small else Game.ui_font, Vector2(r.get_center().x, DrawUtil.cap_baseline(mid, font_size)), label,
+		font_size, Palette.INK if enabled else Color(Palette.INK, 0.4), 0)
+
+## Where a window's button along its bottom edge goes: `x` from the left, `w` wide, inside
+## the frame's bottom trim.
+func bottom_button_rect(x: float, w: float) -> Rect2:
+	return Rect2(x, size.y - BOTTOM_BUTTON_INSET - BOTTOM_BUTTON_H, w, BOTTOM_BUTTON_H)
 
 ## A button that calls `action` when clicked (only while `enabled`). Call it while drawing:
 ## the buttons drawn last are the ones a click can press.
@@ -187,17 +218,18 @@ func _press_button(at: Vector2) -> bool:
 	return false
 
 ## A tab along the top of a window: lit when `on`.
-## The label shrinks to fit between the tab art's pointed ends.
+## The label shrinks to fit between the brass studs at the tab art's ends.
 func draw_tab(r: Rect2, label: String, on: bool) -> void:
 	draw_texture_rect(UiSkin.tex("window_tab_on" if on else "window_tab_off"), r, false)
-	DrawUtil.text(self, Game.ui_font, r.get_center() + Vector2(0, 5), label, tab_font_size(r, label),
+	var font_size := tab_font_size(r, label)
+	DrawUtil.text(self, Game.ui_font, Vector2(r.get_center().x, DrawUtil.cap_baseline(r.get_center().y, font_size)), label, font_size,
 		Palette.INK if on else Palette.MIST, 0, 0 if on else 3, Palette.NIGHT)
 
 ## The font size of a tab's label: 13, or smaller when the tab is too narrow for it.
 static func tab_font_size(r: Rect2, label: String) -> int:
 	return DrawUtil.fit_size(Game.ui_font, label, 13, tab_text_width(r))
 
-## How much of a tab's width is free for its label (the art's pointed ends take the rest).
+## How much of a tab's width is free for its label: the room between its studs.
 static func tab_text_width(r: Rect2) -> float:
 	return r.size.x * TAB_TEXT_SHARE
 
@@ -206,7 +238,9 @@ static func tab_text_width(r: Rect2) -> float:
 func draw_tabs(labels: Array, current: int, y := TAB_Y, left := PAD, right := -1.0) -> void:
 	if right < 0.0:
 		right = size.x - PAD
-	var w := minf(TAB_MAX_W, (right - left) / labels.size())
+	var w := (right - left) / labels.size()
+	if w > TAB_MAX_W * TAB_STRETCH:
+		w = TAB_MAX_W
 	_tab_rects.clear()
 	_tab_labels = labels.duplicate()
 	for i in labels.size():

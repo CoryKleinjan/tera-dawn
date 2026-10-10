@@ -24,7 +24,8 @@ extends Resource
 @export_group("World")
 ## The RegionDef it belongs to.
 @export var region: StringName
-## Where it sits on the world map, in world-map units (1000 x 600).
+## Where it sits on the world map, in world-map units (pixels of the world map painting,
+## TDWorldMapWindow.WORLD).
 @export var world_pos := Vector2.ZERO
 ## Towns are safe places to respawn and where return scrolls take you.
 @export var town := false

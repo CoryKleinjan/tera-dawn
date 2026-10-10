@@ -1,11 +1,11 @@
 {
-  "source": "art/source/room_lumewood.png",
+  "source": "art/source/room_lumewood_fine.png",
   "out_dir": "assets/sprites/rooms/lumewood",
-  "scale": 0.435,
+  "scale": 0.3766,
   "label_band": 0.2,
   "cells": [
     [
-      "wall",
+      "",
       "door",
       "floor_top",
       "floor_side"
@@ -24,131 +24,122 @@
     ]
   ],
   "overrides": {
-    "wall": {
-      "crop": [
-        26,
-        64,
-        408,
-        470
-      ],
-      "scale": 1.082
-    },
     "floor_top": {
       "seamless": true,
-      "size": 128,
+      "size": 256,
       "crop": [
         12,
-        64,
-        418,
-        470
+        132,
+        950,
+        1070
       ],
-      "scale": 0.45
+      "scale": 0.3896
     },
     "floor_side": {
       "seamless": true,
-      "size": 128,
+      "size": 256,
       "crop": [
-        100,
-        64,
-        330,
-        294
+        215,
+        132,
+        746,
+        663
       ],
-      "scale": 0.45
+      "scale": 0.3896
     },
     "counter": {
       "crop": [
         0,
-        43,
-        430,
-        375
+        83,
+        977,
+        850
       ],
-      "scale": 0.3474
+      "scale": 0.3008
     },
     "shelf": {
       "crop": [
         0,
-        43,
-        433,
-        375
+        83,
+        984,
+        850
       ],
-      "scale": 0.5054
+      "scale": 0.4376
     },
     "bookcase": {
       "crop": [
         0,
-        43,
-        431,
-        375
+        83,
+        980,
+        850
       ]
     },
     "table": {
       "crop": [
         0,
-        43,
-        432,
-        375
+        83,
+        982,
+        850
       ],
-      "scale": 0.2558
+      "scale": 0.2215
     },
     "hearth": {
       "crop": [
         0,
-        45,
-        430,
-        306
+        88,
+        977,
+        691
       ],
-      "scale": 0.4636
+      "scale": 0.4014
     },
     "rack": {
       "crop": [
         0,
-        43,
-        433,
-        306
+        83,
+        984,
+        691
       ],
-      "scale": 0.5441
+      "scale": 0.4711
     },
     "lamp": {
       "crop": [
         0,
-        43,
-        431,
-        306
+        83,
+        980,
+        691
       ]
     },
     "barrel": {
       "crop": [
         0,
-        43,
-        432,
-        306
+        83,
+        982,
+        691
       ],
-      "scale": 0.2214
+      "scale": 0.1917
     },
     "door": {
       "crop": [
         0,
-        45,
-        433,
-        473
+        88,
+        984,
+        1077
       ],
-      "scale": 0.2836
+      "scale": 0.2455
     }
   },
   "grid": {
     "rows": [
       0,
-      485,
-      872,
-      1190
+      1120,
+      2014,
+      2749
     ],
     "cols": [
       0,
-      442,
-      887,
-      1330,
-      1774
+      1021,
+      2049,
+      3072,
+      4098
     ]
   },
-  "inset": 6
+  "inset": 30
 }

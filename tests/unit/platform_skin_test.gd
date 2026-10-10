@@ -10,13 +10,6 @@ const SURFACE_BAND := 12
 func _biome(id: String) -> BiomeDef:
 	return load("res://data/biomes/%s.tres" % id)
 
-## The texel columns where pieces were joined: each piece's first column after the first.
-func _joins(parts: Array[Image], cols: int) -> Array[int]:
-	var out: Array[int] = []
-	for p in PlatformSkin.layout(parts, cols).slice(1):
-		out.append(p[1])
-	return out
-
 func test_skin_is_exactly_as_wide_as_asked() -> void:
 	for id in BIOMES:
 		var parts := PlatformSkin.pieces(_biome(id))
@@ -60,7 +53,7 @@ func test_joins_are_no_harder_than_the_art_itself() -> void:
 		var b := _biome(id)
 		var parts := PlatformSkin.pieces(b)
 		var img := PlatformSkin.compose(parts, 1600)
-		var joins := _joins(parts, 1600)
+		var placed := PlatformSkin.layout(parts, 1600)
 		# how much neighbouring columns differ, everywhere in the skin
 		var diffs: Array[float] = []
 		for x in range(1, img.get_width()):
@@ -68,10 +61,16 @@ func test_joins_are_no_harder_than_the_art_itself() -> void:
 		var sorted := diffs.duplicate()
 		sorted.sort()
 		var typical: float = sorted[int(sorted.size() * 0.9)]
-		for j in joins:
-			# the swap-over happens somewhere in the overlap band; no column in it may stand out
-			for x in range(j + 1, j + PlatformSkin.MAX_OVERLAP):
-				check(diffs[x - 1] <= typical * 1.5 + 0.02, "%s: the join at %d is as smooth as the art (%.3f vs %.3f)" % [id, j, diffs[x - 1], typical])
+		for k in range(1, placed.size()):
+			var prev: Image = placed[k - 1][0]
+			var px: int = placed[k - 1][1]
+			var piece: Image = placed[k][0]
+			var j: int = placed[k][1]
+			# the swap-over happens somewhere in the overlap; no column in it may differ from its
+			# neighbour more than the art does there (in either piece) or than the art usually does
+			for x in range(j + 1, px + prev.get_width()):
+				var art := maxf(typical, maxf(_column_diff(prev, x - px), _column_diff(piece, x - j)))
+				check(diffs[x - 1] <= art * 1.5 + 0.02, "%s: the join at %d (column %d) is as smooth as the art (%.3f vs %.3f)" % [id, j, x, diffs[x - 1], art])
 
 ## Mean premultiplied colour difference between column x-1 and column x.
 func _column_diff(img: Image, x: int) -> float:
