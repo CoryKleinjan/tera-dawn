@@ -313,11 +313,12 @@ func fit_view() -> void:
 		build()
 
 ## Towns are for looking around: their backdrop is kept clearer (less fog and blur) than a
-## hunting field's, where the eye should stay on the play line.
+## hunting field's, where the eye should stay on the play line. A room's back wall is close,
+## so it stays sharp with no haze.
 func _apply_place(map: MapDef) -> void:
-	env.fog_density = 0.35 if map.town else 0.6
-	camera_attrs.dof_blur_far_distance = dist + (10.0 if map.town else 3.0)
-	camera_attrs.dof_blur_amount = 0.07 if map.town else 0.12
+	env.fog_density = 0.0 if map.interior else 0.35 if map.town else 0.6
+	camera_attrs.dof_blur_far_distance = dist + (14.0 if map.interior else 10.0 if map.town else 3.0)
+	camera_attrs.dof_blur_amount = 0.04 if map.interior else 0.07 if map.town else 0.12
 
 ## Soft slanting beams of sunlight between the backdrop and the play line, gently pulsing.
 func _build_light_shafts(map: MapDef, biome: BiomeDef, rng: RandomNumberGenerator) -> void:

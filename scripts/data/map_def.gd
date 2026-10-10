@@ -33,6 +33,9 @@ extends Resource
 @export var return_map: StringName
 ## "Lv. 10-15": who it's for, shown on the world map.
 @export var level_text := ""
+## Inside a building: a small room with a wall instead of sky, entered by a door from
+## `return_map` (the town it stands in). The world map shows you in that town.
+@export var interior := false
 
 @export_group("Layout")
 ## One-way platforms, numbered from 1 in this order (0 is the floor).
@@ -47,12 +50,18 @@ extends Resource
 @export_group("Set dressing")
 ## Hand-placed scenery on top of the biome's random decoration.
 @export var props: Array[PropPlacement] = []
+## The houses, shops and halls standing along a town's streets.
+@export var buildings: Array[BuildingPlacement] = []
 
 ## The town this map sends you back to (see `return_map`).
 func return_town() -> StringName:
 	if return_map != &"":
 		return return_map
 	return id if town else Character.START_MAP
+
+## The map you're "in" on the world map: the town outside, for a room inside a building.
+func outside() -> StringName:
+	return return_town() if interior else id
 
 ## The maps its portals lead to.
 func neighbours() -> Array[StringName]:

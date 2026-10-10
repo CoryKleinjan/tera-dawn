@@ -462,7 +462,8 @@ func test_quest_give_up_button_forfeits_through_the_server() -> void:
 func test_world_map_hover_finds_every_placed_map() -> void:
 	var wm: TDWorldMapWindow = _open("worldmap")
 	var placed := TDWorldMapWindow.placed()
-	check(placed.size() == Content.maps.size(), "every map is on the world map (%d of %d)" % [placed.size(), Content.maps.size()])
+	var outdoors := Content.maps.values().filter(func(m: MapDef) -> bool: return not m.interior)
+	check(placed.size() == outdoors.size(), "every map outdoors is on the world map (%d of %d)" % [placed.size(), outdoors.size()])
 	for m in placed:
 		var at := wm.to_screen(m.world_pos)
 		check(wm._area().has_point(at), "%s: its dot at %s lies inside the map area" % [m.id, at])
@@ -719,6 +720,9 @@ func test_every_shop_draws_and_scrolls() -> void:
 func test_shop_double_click_buys_through_the_server() -> void:
 	var keeper: NpcDef = Content.npcs[&"shopkeeper"]
 	await ui.edit(func(c: Character) -> void: c.shards = 100000)
+	# Mira keeps her shop inside her house in the village
+	Net.server._enter_map(ui.player(), &"meadow_store", 240)
+	await ui.ticks(3)
 	var npc: TDNpc = ui.world.npcs().filter(func(n: TDNpc) -> bool: return n.def == keeper)[0]
 	ui.teleport(npc.position + Vector2(-20, 0))
 	await ui.ticks(2)

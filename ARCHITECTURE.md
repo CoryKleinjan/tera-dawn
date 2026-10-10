@@ -211,7 +211,8 @@ monster of its level; `tests/balance_report.tscn` prints the full table when tun
 data/                 Content, one .tres per thing
   monsters/ npcs/ items/ skills/ effects/ jobs/ looks/   Looked up by id through Content
   items/equips/ items/use/ items/etc/ items/setup/   Subfolders are scanned too
-  maps/ biomes/ climb_styles/               Maps and how they look
+  maps/ biomes/ climb_styles/ buildings/    Maps and how they look (maps/rooms/ and
+                                            biomes/rooms/: the insides of buildings)
 scripts/
   autoload/           Settings (controls, audio, video, saved to settings.cfg), Content (data
                       index), Game (your character copy, name and server address), Net
@@ -254,7 +255,7 @@ camera). The layers are constants at the top of `scripts/world/stage.gd`, back t
 | Layer | Depth | What |
 | --- | --- | --- |
 | Backdrop | far behind | Sky, mountains, distant trees (`BackdropLayerDef.depth`) |
-| Land | up to `LAND_FRONT` | The floor block, platforms (flat painted front skins), decoration, props, lanterns, signs, portals |
+| Land | up to `LAND_FRONT` | The floor block, platforms (flat painted front skins), buildings, decoration, props, lanterns, signs, portals |
 | `Z_CLIMBABLE` | 0.2 | Ropes, vines and ladders |
 | `Z_NPC` | 0.3 | NPCs |
 | `Z_MONSTER` | 0.38 to 0.52 | Monsters, each at a slightly different depth so overlapping ones don't flicker |
@@ -337,6 +338,36 @@ A **BiomeDef** is the look shared by many maps: sky and light colours, ground an
 textures, parallax backdrop layers (`BackdropLayerDef`: a tiled strip or scattered pieces at a
 depth), random decoration (`DecorDef`), lantern, signpost and portal art. A new region of the
 world is usually a new biome plus a few maps that use it.
+
+## How to add a building
+
+Towns are a street of buildings in the MapleStory way: each stands at full size right behind
+the walking line (a house about 2.5 heroes tall, a shop or hall 3 to 3.5), and some have a
+door you walk through by pressing Up, into a small room that is its own map.
+
+1. **The picture**: a **BuildingDef** in `data/buildings/<id>.tres`: its `texture` (cut from a
+   building sheet into `assets/sprites/buildings/<town>/`), the `height` it stands on screen,
+   `door_x` (the middle of its doorway, 0 at the picture's left edge to 1 at its right) and
+   an optional `chimney` that smokes when the biome has `chimney_smoke`.
+2. **On the street**: add a **BuildingPlacement** to the town's `buildings`. Its `x` is where
+   its door is, so NPCs and doors line up with the doorway; `platform`, `flip`, `scale` and a
+   `tint` let one picture stand in for several houses. It stands at `depth` -2 (behind the
+   lanterns and the people) and is sized to keep its `height` there.
+3. **Making it enterable**: create the room, a **MapDef** in `data/maps/rooms/<id>.tres` with
+   `interior = true`, `return_map` set to the town (so return scrolls and the world map treat
+   it as the town), its town's `region`, no `world_pos` or `level_text`, a biome from
+   `data/biomes/rooms/`, NPCs and furniture `props`, and one **PortalDef** with `door = true`
+   leading back out beside the building. Then add a door portal (`door = true`) to the town
+   at the building's `x` and platform, leading into the room.
+   Doors draw no swirl: the building's picture is the door and a warm light stands in it (in a
+   room, the biome's `door` picture on the back wall). The overlay says "↑ Enter …" or
+   "↑ Out to …", and the minimap shows a little lit doorway.
+
+A room's biome (`data/biomes/rooms/<town>_room.tres`) has a `wall` strip as its only backdrop
+layer, a plank floor, warm low light and a `door`. Its stand-in art comes from
+`tools/art/make_room_placeholders.py`; part 9 of the art prompts asks for the painted pieces,
+which land on the same file names. `tests/content/content_world_test.gd` checks every door is
+in a building and every room has one door back to the town that leads into it.
 
 ## How to add a skill
 

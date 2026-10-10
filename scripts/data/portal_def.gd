@@ -9,3 +9,6 @@ extends Resource
 @export var target_map: StringName
 ## Where the player arrives on that map's floor.
 @export var target_x := 100.0
+## A building's door rather than a swirl: drawn as a warm doorway (the building's own
+## picture has the door; inside, the biome's `door` picture), entered the same way.
+@export var door := false

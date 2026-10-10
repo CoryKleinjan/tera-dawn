@@ -1,11 +1,14 @@
 class_name SceneryBuilder
 extends RefCounted
 ## Builds everything that stands on the ground: the biome's scattered trees, bushes and
-## rocks, the map's hand-placed props, ropes and ladders, portals, lanterns and the sign.
+## rocks, the map's buildings and hand-placed props, ropes and ladders, portals and doors,
+## lanterns and the sign.
 
 ## How much bigger than the biome's art the signpost is drawn, and its depth.
 const SIGN_SCALE := 1.2
 const SIGN_DEPTH := -0.9
+## Warm light standing in a doorway.
+const DOOR_LIGHT := Color("ffc47a")
 ## Space between the top of the signpost (or portal) and the sign's words.
 const SIGN_LABEL_GAP := 6.0
 ## Room the sign's words need above their bottom edge, so no platform skin runs through them.
@@ -26,17 +29,24 @@ func build(map: MapDef, platforms: Array[Platform], rng: RandomNumberGenerator) 
 		for rule in biome.town_decor:
 			for s in _scatter(rule, -300.0, map.width + 300.0, map.ground_y, rng):
 				if biome.chimney_smoke and s.texture.get_height() * s.pixel_size * TDStage.PX > 90.0:
-					_smoke(s, biome)
+					var h := s.texture.get_height() * s.pixel_size
+					var w := s.texture.get_width() * s.pixel_size
+					_smoke(s.position + Vector3((0.2 if s.flip_h else -0.2) * w, h * 0.92, 0.0), biome)
 	for i in range(1, platforms.size()):
 		var pl := platforms[i]
 		for rule in biome.platform_decor:
 			_scatter(rule, pl.x + 30.0, pl.x + pl.w - 30.0, pl.y, rng)
 	for p in map.props:
 		_prop(p, map)
+	for b in map.buildings:
+		_building(b, platforms[b.platform], biome)
 	for c in map.climbables:
 		_climbable(c)
 	for p in map.portals:
-		_portal(p, platforms[p.platform], biome)
+		if p.door:
+			_door(p, platforms[p.platform], biome)
+		else:
+			_portal(p, platforms[p.platform], biome)
 	_lanterns(map, biome, rng)
 	_sign(map, biome)
 	_flyers(map, biome, rng)
@@ -58,10 +68,8 @@ func _scatter(rule: DecorDef, x0: float, x1: float, y: float, rng: RandomNumberG
 		x += rng.randf_range(rule.spacing.x, rule.spacing.y)
 	return placed
 
-## A thin column of smoke rising from the top of a building.
-func _smoke(building: Sprite3D, biome: BiomeDef) -> void:
-	var h := building.texture.get_height() * building.pixel_size
-	var w := building.texture.get_width() * building.pixel_size
+## A thin column of smoke rising from a chimney at `at`.
+func _smoke(at: Vector3, biome: BiomeDef) -> void:
 	var p := CPUParticles3D.new()
 	p.amount = 14
 	p.lifetime = 5.0
@@ -89,7 +97,7 @@ func _smoke(building: Sprite3D, biome: BiomeDef) -> void:
 	fade.set_color(1, Color(1, 1, 1, 0))
 	fade.add_point(0.15, Color(1, 1, 1, 1))
 	p.color_ramp = fade
-	p.position = building.position + Vector3((0.2 if building.flip_h else -0.2) * w, h * 0.92, 0.0)
+	p.position = at
 	root.add_child(p)
 
 ## Birds crossing the sky behind the town (BiomeDef.flyers).
@@ -124,6 +132,37 @@ func _prop(p: PropPlacement, map: MapDef) -> void:
 		var l := TDStage.light(p.light_color, p.light_energy, 4.0)
 		l.position = s.position + Vector3(0, p.light_height / TDStage.PX, 0.6)
 		root.add_child(l)
+
+## A building standing at full size just behind the walking line, its door at `b.x`.
+## Sized so it shows `height` game pixels tall at the play line despite standing further back.
+func _building(b: BuildingPlacement, pl: Platform, biome: BiomeDef) -> void:
+	var d := b.building
+	if d == null or d.texture == null:
+		return
+	var z := TDStage.land_depth(b.depth)
+	var s := TDStage.sprite(d.texture, d.texel() * b.scale * (stage.dist - z) / stage.dist)
+	s.position = TDStage.to3d(Vector2(b.center_x(), pl.y + 3.0), z)
+	s.flip_h = b.flip
+	s.modulate = b.tint
+	root.add_child(s)
+	if biome.chimney_smoke and d.chimney.x >= 0.0:
+		var across := (d.chimney.x - 0.5) * (-1.0 if b.flip else 1.0)
+		var size := s.texture.get_size() * s.pixel_size
+		_smoke(s.position + Vector3(across * size.x, d.chimney.y * size.y, 0.0), biome)
+
+## A door: a warm light in the doorway (a building's picture has the door itself; in a room
+## the biome's door picture stands on the back wall). Up enters it like any portal.
+func _door(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
+	var base := Vector2(p.x, pl.y + 3.0)
+	var height := 60.0
+	if biome.door:
+		var s := TDStage.sprite(biome.door)
+		s.position = TDStage.to3d(base, TDStage.land_depth(-2.0))
+		root.add_child(s)
+		height = biome.door.get_height() * TDStage.TEXEL
+	var l := TDStage.light(DOOR_LIGHT, 1.6, 3.5)
+	l.position = TDStage.to3d(base + Vector2(0, -height * 0.45), -0.8)
+	root.add_child(l)
 
 ## A rope or ladder: the style's top piece, its middle piece repeated, and its bottom piece.
 func _climbable(c: ClimbableDef) -> void:

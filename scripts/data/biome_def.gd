@@ -67,12 +67,14 @@ extends Resource
 @export var lantern: Texture2D
 @export var signpost: Texture2D
 @export var portal_frames: Array[Texture2D] = []
+## Rooms inside buildings: the doorway out, drawn on the back wall at every door portal.
+@export var door: Texture2D
 
 @export_group("Ambient life")
 ## Birds or other small creatures crossing the sky behind the scene (their "move" or
 ## "idle" animation), and how many.
 @export var flyers: SpriteFrames
 @export var flyer_count := 0
-## Smoke curling up from the town's houses (town_decor).
+## Smoke curling up from the town's houses (town_decor, and buildings with a chimney).
 @export var chimney_smoke := false
 @export var smoke_color := Color(0.85, 0.82, 0.8, 0.35)

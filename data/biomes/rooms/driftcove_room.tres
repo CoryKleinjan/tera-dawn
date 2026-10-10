@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="BiomeDef" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/biome_def.gd" id="1_biome_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/rooms/driftcove/floor_top.png" id="2_floor_top"]
+[ext_resource type="Texture2D" path="res://assets/sprites/rooms/driftcove/floor_side.png" id="3_floor_side"]
+[ext_resource type="Texture2D" path="res://assets/sprites/rooms/driftcove/floor_soil.png" id="4_floor_soil"]
+[ext_resource type="Texture2D" path="res://assets/sprites/rooms/driftcove/wall.png" id="5_wall"]
+[ext_resource type="Texture2D" path="res://assets/sprites/rooms/driftcove/door.png" id="6_door"]
+[ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="7_backdrop_layer_def"]
+
+[sub_resource type="Resource" id="Wall"]
+script = ExtResource("7_backdrop_layer_def")
+textures = Array[Texture2D]([ExtResource("5_wall")])
+mode = 0
+depth = 10.5
+screen_top = Vector2(-0.04, -0.04)
+texel = 1.45
+tint = Color(1.0, 1.0, 1.0, 1.0)
+glow = false
+count = 1
+drift = 0.0
+
+[resource]
+script = ExtResource("1_biome_def")
+id = &"driftcove_room"
+sky_top = Color(0.2, 0.16, 0.12, 1.0)
+sky_mid = Color(0.2, 0.16, 0.12, 1.0)
+sky_low = Color(0.2, 0.16, 0.12, 1.0)
+sky_horizon = Color(0.2, 0.16, 0.12, 1.0)
+sun_color = Color(1.0, 0.82, 0.6, 1.0)
+light_color = Color(1.0, 0.82, 0.6, 1.0)
+light_energy = 0.8
+ambient_color = Color(0.5, 0.46, 0.44, 1.0)
+ambient_energy = 0.6
+fog_color = Color(0.2, 0.16, 0.12, 1.0)
+mote_color = Color(1.1, 0.95, 0.65, 1.0)
+lantern_light = Color(1.0, 0.82, 0.6, 1.0)
+grade_tint = Color(0.98, 0.97, 0.94, 1.0)
+grade_lift = Color(0.2, 0.16, 0.12, 1.0)
+grade_lift_amount = 0.15
+grade_saturation = 1.05
+light_shafts = false
+cloud_shadows = false
+ground_top = ExtResource("2_floor_top")
+ground_side = ExtResource("3_floor_side")
+ground_soil = ExtResource("4_floor_soil")
+backdrop = Array[ExtResource("7_backdrop_layer_def")]([SubResource("Wall")])
+door = ExtResource("6_door")

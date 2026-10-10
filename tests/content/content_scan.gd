@@ -24,6 +24,7 @@ const EXPECTED := {
 	"quests": ["QuestDef"],
 	"regions": ["RegionDef"],
 	"biomes": ["BiomeDef"],
+	"buildings": ["BuildingDef"],
 	"climb_styles": ["ClimbStyleDef"],
 	"projectiles": ["ProjectileDef"],
 	"looks": ["LookDef"],

@@ -130,7 +130,11 @@ func _draw_minimap(mm: Rect2) -> void:
 		draw_rect(r, MINIMAP_LAND)
 		draw_rect(Rect2(r.position + Vector2(0, 2), Vector2(r.size.x, 1)), Color(0.35, 0.24, 0.14, 0.9))
 	for p in world.map.portals:
-		_minimap_mark(MINIMAP_PORTAL, inner.position + Vector2(p.x * sx, world.platforms[p.platform].y * sy - 5))
+		var at := inner.position + Vector2(p.x * sx, world.platforms[p.platform].y * sy - 5)
+		if p.door:
+			_minimap_door(at)
+		else:
+			_minimap_mark(MINIMAP_PORTAL, at)
 	for n in world.npcs():
 		var at := inner.position + Vector2(n.position.x * sx, n.position.y * sy - 3)
 		_minimap_mark(MINIMAP_NPC, at)
@@ -158,6 +162,19 @@ func _draw_minimap(mm: Rect2) -> void:
 func _minimap_mark(mark: Array, at: Vector2) -> void:
 	var h: float = mark[1]
 	UiSkin.draw_icon(self, mark[0], Rect2(at - Vector2(h, h) / 2.0, Vector2(h, h)))
+
+## What the hint over a portal or door says.
+func _portal_hint(portal: PortalDef, target: MapDef) -> String:
+	var name := target.display_name if target else "?"
+	if portal.door:
+		return ("↑ Out to %s" if world.map.interior else "↑ Enter %s") % name
+	return "↑ to %s" % name
+
+## A building's door on the minimap: a little lit doorway.
+func _minimap_door(at: Vector2) -> void:
+	var r := Rect2(at + Vector2(-2.5, -3.0), Vector2(5.0, 7.0))
+	draw_rect(r.grow(1.0), Palette.NIGHT)
+	draw_rect(r, Palette.SUN)
 
 ## The first living boss on the map, at the top centre where it can't run off the screen.
 ## Returns whether there was one.
@@ -281,4 +298,4 @@ func _draw_world_text() -> void:
 		var base := Vector2(portal.x, world.platforms[portal.platform].y)
 		if world.started and absf(p.position.x - base.x) < 60 and absf(p.position.y - base.y) < 8:
 			var target := Content.map(portal.target_map)
-			UiSkin.draw_hint(self, st.screen(base + Vector2(0, -128), -0.3), "↑ to %s" % (target.display_name if target else "?"))
+			UiSkin.draw_hint(self, st.screen(base + Vector2(0, -128), -0.3), _portal_hint(portal, target))
