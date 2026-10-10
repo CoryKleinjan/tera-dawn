@@ -97,8 +97,8 @@ max_amount = 1
 script = ExtResource("3_drop_entry")
 item = ExtResource("4_dawnshard")
 chance = 1.0
-min_amount = 34
-max_amount = 69
+min_amount = 20
+max_amount = 41
 
 [resource]
 script = ExtResource("1_monster_def")

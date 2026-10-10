@@ -80,6 +80,33 @@ func test_items_have_sane_prices_and_stacks() -> void:
 		if not i.quest_item and not i.is_currency:
 			check(i.sell_price >= 1, "%s: sell_price is 0, so shops won't pay for it" % w)
 
+## Each weapon from level 15 to 35 drops from at least two monsters, one of them not a
+## boss, so nobody waits on a single spawn for their next weapon.
+func test_mid_game_weapons_drop_in_two_places() -> void:
+	for i: ItemDef in Content.items.values():
+		var e := i as EquipDef
+		if e == null or e.weapon_kind == &"" or e.required_level < 15 or e.required_level > 35:
+			continue
+		var sources := 0
+		var from_a_regular := false
+		for m: MonsterDef in Content.monsters.values():
+			if m.drops.any(func(d: DropEntry) -> bool: return d.item == e):
+				sources += 1
+				from_a_regular = from_a_regular or not m.boss
+		check(sources >= 2, "%s: drops from %d monster(s), want at least 2" % [Scan.where(e), sources])
+		check(from_a_regular, "%s: only a boss drops it" % Scan.where(e))
+
+## Better weapons come only from monsters: shops sell nothing above a first job's weapon.
+func test_shops_only_sell_basic_weapons() -> void:
+	var first_job_level := 0
+	for j in JobDef.paths_from(Character.START_JOB):
+		first_job_level = maxi(first_job_level, j.advance_level)
+	for s: ShopDef in Content.shops.values():
+		for e in s.items:
+			var w := e.item as EquipDef
+			if w and w.weapon_kind != &"":
+				check(w.required_level <= first_job_level, "%s: sells %s (level %d), a weapon only monsters should drop" % [Scan.where(s), w.id, w.required_level])
+
 func test_shops_never_pay_more_than_they_charge() -> void:
 	for s: ShopDef in Content.shops.values():
 		for i in s.items.size():

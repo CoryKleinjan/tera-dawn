@@ -168,6 +168,7 @@ func _job_list() -> void:
 	_page("Which path calls to you?", opts)
 
 ## One job: what it is, what it takes (in red what you don't have yet), and the choice.
+## A Beginner without the stats it asks for may also take the one free AP reset.
 func _job_page(j: JobDef) -> void:
 	var problem := Game.me.advance_problem(j)
 	var say := "%s\n\nRequires: %s" % [j.description, ", ".join(j.requirement_lines())]
@@ -178,8 +179,18 @@ func _job_page(j: JobDef) -> void:
 		opts.append(["Become a %s" % j.display_name, func() -> void:
 			Net.ask(&"req_advance", [npc.def.id, j.id])
 			visible = false])
+	if Game.me.ap_reset_problem(j) == "":
+		opts.append(["Reset my Ability Points", _reset_ap_page.bind(j)])
 	opts.append(["Back", _job_list])
 	_page(say, opts)
+
+## The free AP reset: what it does, once, and the choice.
+func _reset_ap_page(j: JobDef) -> void:
+	_page("Built the wrong way? Once, and only once, I can give back all %d Ability Points you've spent. Your stats go back to where you started, so you can put them where a %s needs them." % [Game.me.spent_ap(), j.display_name], [
+		["Reset them", func() -> void:
+			Net.ask(&"req_reset_ap", [npc.def.id, j.id])
+			visible = false],
+		["Back", _job_page.bind(j)]])
 
 ## For a quest that lists the job paths: a paragraph naming each job a Beginner can
 ## advance into and what it takes ("Warrior: Level 10, 35 STR"). "" for other quests.

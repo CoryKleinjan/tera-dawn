@@ -18,6 +18,9 @@ extends Resource
 ## The stat that drives damage (STR for warriors) and the one that helps a little.
 @export_enum("strength", "dexterity", "intelligence", "luck") var primary_stat := "strength"
 @export_enum("strength", "dexterity", "intelligence", "luck") var secondary_stat := "dexterity"
+## Hit with whichever of STR, DEX, INT or LUK is highest instead of `primary_stat`, so any
+## build works (the Beginner, who hasn't picked a path yet).
+@export var uses_best_stat := false
 ## The lowest hit as a fraction of the highest (MapleStory's mastery).
 @export_range(0.1, 0.95) var mastery := 0.6
 
@@ -51,6 +54,21 @@ extends Resource
 ## The outfit pieces the character creator offers a new character of this job, any kinds of
 ## gear; the creator lets them pick one of each kind (see NewCharacter).
 @export var creator_gear: Array[EquipDef] = []
+
+## The stats behind weapon damage for these `total` stats: [main, helper]. Usually
+## `primary_stat` and `secondary_stat`; with `uses_best_stat` the main one is the highest
+## (`primary_stat` wins ties) and the helper is `secondary_stat`, or `primary_stat` when
+## the highest is the secondary one.
+func damage_stats(total: StatBlock) -> Array[StringName]:
+	var main := StringName(primary_stat)
+	var helper := StringName(secondary_stat)
+	if uses_best_stat:
+		for stat in StatBlock.BASE:
+			if total.value(stat) > total.value(main):
+				main = stat
+		if helper == main:
+			helper = StringName(primary_stat)
+	return [main, helper]
 
 ## What advancing takes, as readable lines ("Level 10", "35 STR").
 func requirement_lines() -> PackedStringArray:

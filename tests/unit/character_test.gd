@@ -591,6 +591,45 @@ func test_requirement_lines() -> void:
 	var next: JobDef = setup[1]
 	check_eq(Array(next.requirement_lines()), ["Level 10", "35 STR"], "lines")
 
+## A Beginner (starting STR 12, DEX 5) who put 18 points in STR and a path asking for 30 INT.
+func _reset_setup() -> Array:
+	var first := fx.job(&"t_job")
+	first.starting_stats = UnitHelpers.stats({"strength": 12, "dexterity": 5})
+	var next := fx.job(&"t_mind", &"t_mage", &"t_job")
+	next.advance_requirements = UnitHelpers.stats({"intelligence": 30})
+	var c := fx.character(first, {"strength": 30, "dexterity": 5})
+	c.ap = 2
+	return [c, next]
+
+func test_ap_reset_gives_back_every_spent_point_once() -> void:
+	var setup := _reset_setup()
+	var c: Character = setup[0]
+	var next: JobDef = setup[1]
+	check_eq(c.spent_ap(), 18, "18 points in STR")
+	check_eq(c.reset_ap(next), "", "reset")
+	check_eq(c.base.strength, 12, "back to the starting STR")
+	check_eq(c.base.dexterity, 5, "DEX untouched")
+	check_eq(c.ap, 20, "18 back plus the 2 unspent")
+	check_eq(c.stats.strength, 12, "totals worked out again")
+	check(c.ap_reset_used, "used up")
+	c.add_ap(&"strength", 5)
+	check_ne(c.reset_ap(next), "", "only once")
+	check_eq(c.base.strength, 17, "the second one changes nothing")
+
+func test_ap_reset_only_for_a_beginner_short_of_the_stats() -> void:
+	var setup := _reset_setup()
+	var c: Character = setup[0]
+	var next: JobDef = setup[1]
+	c.base.intelligence = 30
+	check_ne(c.ap_reset_problem(next), "", "already has the INT")
+	c.base.intelligence = 0
+	c.base.strength = 12
+	check_ne(c.ap_reset_problem(next), "", "nothing spent")
+	c.base.strength = 30
+	check_eq(c.ap_reset_problem(next), "", "spent and short")
+	c.job = next
+	check_ne(c.ap_reset_problem(next), "", "not a Beginner any more")
+
 # ---------- tallies, maps, pets ----------
 
 func test_count_tallies() -> void:

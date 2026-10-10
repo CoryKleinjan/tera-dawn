@@ -404,6 +404,11 @@ func req_advance(npc_id: StringName, job_id: StringName) -> void:
 	if server:
 		server.on_advance(_sender(), npc_id, job_id)
 
+@rpc("any_peer", "call_local", "reliable")
+func req_reset_ap(npc_id: StringName, job_id: StringName) -> void:
+	if server:
+		server.on_reset_ap(_sender(), npc_id, job_id)
+
 # ---------- events: server -> client ----------
 
 ## Logged in to `name` ("" for the local account): on to character select.

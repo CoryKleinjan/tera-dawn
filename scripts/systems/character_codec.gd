@@ -7,7 +7,7 @@ extends RefCounted
 static func to_dict(c: Character) -> Dictionary:
 	return {
 		"name": c.name, "appearance": c.appearance.to_dict(), "level": c.level, "xp": c.xp, "shards": c.shards, "map_id": c.map_id,
-		"job": c.job.id, "base": c.base.to_dict(), "ap": c.ap,
+		"job": c.job.id, "base": c.base.to_dict(), "ap": c.ap, "ap_reset_used": c.ap_reset_used,
 		"hp": c.health.hp, "mp": c.mp,
 		"inventory": c.inventory.to_dict(), "equipment": c.equipment.to_dict(), "storage": c.storage.to_dict(),
 		"quests": c.quests.to_dict(),
@@ -44,6 +44,7 @@ static func load_dict(c: Character, data: Dictionary) -> void:
 	else:
 		# a save from before stats existed: hand out the points for the levels it has
 		c.ap = (c.level - 1) * c.job.ap_per_level
+	c.ap_reset_used = bool(data.get("ap_reset_used", c.ap_reset_used))
 	if data.get("inventory") is Dictionary:
 		c.inventory.load_dict(data["inventory"])
 	if data.get("equipment") is Dictionary:

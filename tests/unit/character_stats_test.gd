@@ -31,6 +31,21 @@ func test_damage_range_uses_the_jobs_own_stats() -> void:
 	# archer-like: (10 × 4 + 100) × 0.2 = 28
 	check_eq(CharacterStats.damage_range(_job("dexterity", "strength"), s).y, 28, "dex main")
 
+func test_a_job_that_uses_its_best_stat_hits_with_the_highest() -> void:
+	var j := _job("strength", "dexterity")
+	j.uses_best_stat = true
+	var s := UnitHelpers.stats({"strength": 10, "dexterity": 15, "intelligence": 40, "attack": 10})
+	check_eq(j.damage_stats(s), [&"intelligence", &"dexterity"], "INT is highest, DEX still helps")
+	# (40 × 4 + 15) × 10 / 100 × 2 = 35
+	check_eq(CharacterStats.damage_range(j, s).y, 35, "INT main")
+	s.intelligence = 4
+	check_eq(j.damage_stats(s), [&"dexterity", &"strength"], "DEX highest: STR helps instead")
+	s.strength = 15
+	check_eq(j.damage_stats(s), [&"strength", &"dexterity"], "a tie goes to the primary stat")
+	j.uses_best_stat = false
+	s.luck = 99
+	check_eq(j.damage_stats(s), [&"strength", &"dexterity"], "other jobs keep their own stats")
+
 func test_more_main_stat_means_more_damage_than_more_secondary() -> void:
 	var j := _job("strength", "dexterity")
 	var base := CharacterStats.damage_range(j, UnitHelpers.stats({"strength": 20, "dexterity": 20, "attack": 20})).y

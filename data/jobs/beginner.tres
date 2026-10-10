@@ -39,6 +39,7 @@ family = &"beginner"
 tint = Color(1.0, 1.0, 1.0, 1.0)
 primary_stat = "strength"
 secondary_stat = "dexterity"
+uses_best_stat = true
 mastery = 0.4
 description = "Everyone starts here. Train on the meadow, then pick a path at level 10."
 base_hp = 50

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=24 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=26 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/bramble_boar.tres" id="2_bramble_boar"]
@@ -13,6 +13,7 @@
 [ext_resource type="Resource" path="res://data/items/equips/copper_ring.tres" id="11_copper_ring"]
 [ext_resource type="Resource" path="res://data/items/equips/canvas_gloves.tres" id="12_canvas_gloves"]
 [ext_resource type="Resource" path="res://data/items/equips/traveler_cape.tres" id="13_traveler_cape"]
+[ext_resource type="Resource" path="res://data/items/equips/hunter_bow.tres" id="w2_hunter_bow"]
 
 [sub_resource type="Resource" id="Resource_10"]
 script = ExtResource("3_drop_entry")
@@ -81,8 +82,15 @@ max_amount = 1
 script = ExtResource("3_drop_entry")
 item = ExtResource("4_dawnshard")
 chance = 1.0
-min_amount = 21
-max_amount = 42
+min_amount = 13
+max_amount = 25
+
+[sub_resource type="Resource" id="Drop2_hunter_bow"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("w2_hunter_bow")
+chance = 0.0225
+min_amount = 1
+max_amount = 1
 
 [resource]
 script = ExtResource("1_monster_def")
@@ -98,4 +106,4 @@ boss = false
 flying = false
 sprite_frames = ExtResource("2_bramble_boar")
 sprite_scale = 1.0
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Drop2_hunter_bow")])

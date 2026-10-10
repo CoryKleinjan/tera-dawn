@@ -153,8 +153,8 @@ max_amount = 1
 script = ExtResource("4_drop_entry")
 item = ExtResource("5_dawnshard")
 chance = 1.0
-min_amount = 336
-max_amount = 672
+min_amount = 202
+max_amount = 403
 
 [sub_resource type="Resource" id="P11_stump_seat"]
 script = ExtResource("4_drop_entry")

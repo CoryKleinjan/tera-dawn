@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=26 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=28 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/kelp_lurker.tres" id="2_kelp_lurker"]
@@ -14,6 +14,7 @@
 [ext_resource type="Resource" path="res://data/items/equips/acorn_pendant.tres" id="12_acorn_pendant"]
 [ext_resource type="Resource" path="res://data/items/equips/brigand_gloves.tres" id="13_brigand_gloves"]
 [ext_resource type="Resource" path="res://data/items/equips/copper_ring.tres" id="14_copper_ring"]
+[ext_resource type="Resource" path="res://data/items/equips/cinder_greatsword.tres" id="w2_cinder_greatsword"]
 
 [sub_resource type="Resource" id="Resource_11"]
 script = ExtResource("3_drop_entry")
@@ -89,8 +90,15 @@ max_amount = 1
 script = ExtResource("3_drop_entry")
 item = ExtResource("4_dawnshard")
 chance = 1.0
-min_amount = 30
-max_amount = 60
+min_amount = 18
+max_amount = 36
+
+[sub_resource type="Resource" id="Drop2_cinder_greatsword"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("w2_cinder_greatsword")
+chance = 0.0225
+min_amount = 1
+max_amount = 1
 
 [resource]
 script = ExtResource("1_monster_def")
@@ -107,4 +115,4 @@ flying = false
 jumps = true
 sprite_frames = ExtResource("2_kelp_lurker")
 sprite_scale = 1.0
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Drop2_cinder_greatsword")])

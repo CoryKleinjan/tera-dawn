@@ -10,5 +10,5 @@ display_name = "Guide Sorrel"
 title = "Job Guide"
 sprite_frames = ExtResource("2_sprite")
 greeting = "Every hero in Tera Dawn walked this meadow once. When you're ready to choose a path, the mainland's job towns will teach you."
-lines = PackedStringArray("Warriors train in Emberforge, Archers in Greenbough, Magicians in Lumewood, Thieves in Lanternfall, Pirates in Driftcove.", "Magicians may begin their studies at level 8. Everyone else waits until 10.", "Put your Ability Points into the stat your path needs. A job asks for it before it takes you.", "Captain Marlo's ship takes you to Dawnharbor. From there, Rook's coach goes everywhere.")
+lines = PackedStringArray("Warriors train in Emberforge, Archers in Greenbough, Magicians in Lumewood, Thieves in Lanternfall, Pirates in Driftcove.", "Every path opens at level 10, once you have the stat it asks for.", "Put your Ability Points into the stat your path needs. A job asks for it before it takes you.", "Captain Marlo's ship takes you to Dawnharbor. From there, Rook's coach goes everywhere.")
 storage = false

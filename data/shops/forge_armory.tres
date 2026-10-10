@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShopDef" load_steps=21 format=3]
+[gd_resource type="Resource" script_class="ShopDef" load_steps=25 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/shop_def.gd" id="1_shop_def"]
 [ext_resource type="Script" path="res://scripts/data/shop_entry.gd" id="2_shop_entry"]
@@ -11,6 +11,8 @@
 [ext_resource type="Resource" path="res://data/items/equips/steel_sabatons.tres" id="12_steel_sabatons"]
 [ext_resource type="Resource" path="res://data/items/equips/oak_shield.tres" id="13_oak_shield"]
 [ext_resource type="Resource" path="res://data/items/equips/kite_shield.tres" id="14_kite_shield"]
+[ext_resource type="Resource" path="res://data/items/setup/ember_throne.tres" id="s_ember_throne"]
+[ext_resource type="Resource" path="res://data/items/setup/boar_hide_rug.tres" id="s_boar_hide_rug"]
 
 [sub_resource type="Resource" id="Resource_12"]
 script = ExtResource("2_shop_entry")
@@ -57,8 +59,18 @@ script = ExtResource("2_shop_entry")
 item = ExtResource("3_bronze_sword")
 price = 0
 
+[sub_resource type="Resource" id="Entry_ember_throne"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("s_ember_throne")
+price = 6000
+
+[sub_resource type="Resource" id="Entry_boar_hide_rug"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("s_boar_hide_rug")
+price = 6000
+
 [resource]
 script = ExtResource("1_shop_def")
 id = &"forge_armory"
 display_name = "Emberforge Armory"
-items = Array[ExtResource("2_shop_entry")]([SubResource("Resource_1"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12")])
+items = Array[ExtResource("2_shop_entry")]([SubResource("Resource_1"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Entry_ember_throne"), SubResource("Entry_boar_hide_rug")])

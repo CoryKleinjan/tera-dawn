@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShopDef" load_steps=23 format=3]
+[gd_resource type="Resource" script_class="ShopDef" load_steps=25 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/shop_def.gd" id="1_shop_def"]
 [ext_resource type="Script" path="res://scripts/data/shop_entry.gd" id="2_shop_entry"]
@@ -12,6 +12,7 @@
 [ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="13_blue_potion"]
 [ext_resource type="Resource" path="res://data/items/use/mana_tea.tres" id="14_mana_tea"]
 [ext_resource type="Resource" path="res://data/items/use/mana_elixir.tres" id="15_mana_elixir"]
+[ext_resource type="Resource" path="res://data/items/setup/crystal_chair.tres" id="s_crystal_chair"]
 
 [sub_resource type="Resource" id="Resource_13"]
 script = ExtResource("2_shop_entry")
@@ -63,8 +64,13 @@ script = ExtResource("2_shop_entry")
 item = ExtResource("3_apprentice_wand")
 price = 0
 
+[sub_resource type="Resource" id="Entry_crystal_chair"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("s_crystal_chair")
+price = 6000
+
 [resource]
 script = ExtResource("1_shop_def")
 id = &"arcanum"
 display_name = "Lumewood Arcanum"
-items = Array[ExtResource("2_shop_entry")]([SubResource("Resource_1"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13")])
+items = Array[ExtResource("2_shop_entry")]([SubResource("Resource_1"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Entry_crystal_chair")])

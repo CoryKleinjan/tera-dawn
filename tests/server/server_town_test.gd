@@ -1,6 +1,7 @@
 extends TestCase
 ## Town services through the server: NPC shops (buying, selling, not enough Dawnshards),
-## storage and its fee, portals, and paid travel (wagons and ships).
+## storage and its fee, portals, paid travel (wagons and ships) and a job instructor's
+## free Ability Point reset.
 
 const ServerHarness := preload("res://tests/framework/server_helpers.gd")
 
@@ -8,6 +9,7 @@ const MERCHANT_X := 400.0
 const KEEPER_X := 800.0
 const DRIVER_X := 1200.0
 const PORTAL_X := 1900.0
+const INSTRUCTOR_X := 1550.0
 
 var h: ServerHarness
 var p: SimPlayer
@@ -29,6 +31,7 @@ func before_each() -> void:
 	route.price = 100
 	route.by = "Wagon"
 	ServerHarness.npc(town, &"test_driver", DRIVER_X).travel = [route]
+	ServerHarness.npc(town, &"test_instructor", INSTRUCTOR_X).instructs = [&"mage"]
 	var portal := PortalDef.new()
 	portal.x = PORTAL_X
 	portal.target_map = ServerHarness.FIELD
@@ -214,3 +217,43 @@ func test_travel_needs_you_by_the_driver() -> void:
 	h.ask(2, &"req_travel", [&"test_driver", 0])
 	check_eq(p.map.def.id, ServerHarness.TOWN, "still in town")
 	check_eq(c.shards, 150, "nothing paid")
+
+# ---------- job instructors ----------
+
+## A Beginner who put 20 points into STR instead of the INT a Magician needs.
+func _misbuilt() -> int:
+	var start := c.job.starting_stats.strength
+	c.base.strength = start + 20
+	c.ap = 0
+	c.recalc()
+	return start
+
+func test_an_instructor_resets_a_misbuilt_beginners_ap_once() -> void:
+	var start := _misbuilt()
+	h.place(p, INSTRUCTOR_X)
+	h.ask(2, &"req_reset_ap", [&"test_instructor", &"mage"])
+	check_eq(c.base.strength, start, "STR back where it started")
+	check_eq(c.ap, 20, "every point back")
+	check(c.ap_reset_used, "used up")
+	check(h.told(2, "Your Ability Points are back: 20 to spend."), "told")
+	c.add_ap(&"strength", 20)
+	h.ask(2, &"req_reset_ap", [&"test_instructor", &"mage"])
+	check_eq(c.ap, 0, "no second reset")
+	check(h.told(2, "You've already had your free reset."), "told why")
+
+func test_no_ap_reset_once_the_stats_are_there() -> void:
+	_misbuilt()
+	c.base.intelligence = 20
+	h.place(p, INSTRUCTOR_X)
+	h.ask(2, &"req_reset_ap", [&"test_instructor", &"mage"])
+	check_eq(c.ap, 0, "nothing back")
+	check(not c.ap_reset_used, "still unused")
+
+func test_ap_reset_needs_you_by_an_instructor_of_that_job() -> void:
+	_misbuilt()
+	h.ask(2, &"req_reset_ap", [&"test_instructor", &"mage"])
+	check_eq(c.ap, 0, "too far away")
+	h.place(p, INSTRUCTOR_X)
+	h.ask(2, &"req_reset_ap", [&"test_instructor", &"warrior"])
+	check_eq(c.ap, 0, "they don't teach Warriors")
+	check(not c.ap_reset_used, "still unused")

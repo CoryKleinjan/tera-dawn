@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShopDef" load_steps=21 format=3]
+[gd_resource type="Resource" script_class="ShopDef" load_steps=25 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/shop_def.gd" id="1_shop_def"]
 [ext_resource type="Script" path="res://scripts/data/shop_entry.gd" id="2_shop_entry"]
@@ -11,6 +11,8 @@
 [ext_resource type="Resource" path="res://data/items/equips/deckhand_trousers.tres" id="13_deckhand_trousers"]
 [ext_resource type="Resource" path="res://data/items/equips/deckhand_boots.tres" id="14_deckhand_boots"]
 [ext_resource type="Resource" path="res://data/items/ammo/lead_bullet.tres" id="15_lead_bullet"]
+[ext_resource type="Resource" path="res://data/items/setup/coral_seat.tres" id="s_coral_seat"]
+[ext_resource type="Resource" path="res://data/items/setup/barrel_seat.tres" id="s_barrel_seat"]
 
 [sub_resource type="Resource" id="Resource_13"]
 script = ExtResource("2_shop_entry")
@@ -57,8 +59,18 @@ script = ExtResource("2_shop_entry")
 item = ExtResource("3_brass_knuckle")
 price = 0
 
+[sub_resource type="Resource" id="Entry_coral_seat"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("s_coral_seat")
+price = 6000
+
+[sub_resource type="Resource" id="Entry_barrel_seat"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("s_barrel_seat")
+price = 6000
+
 [resource]
 script = ExtResource("1_shop_def")
 id = &"shipwright"
 display_name = "Driftcove Outfitter"
-items = Array[ExtResource("2_shop_entry")]([SubResource("Resource_1"), SubResource("Resource_4"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13")])
+items = Array[ExtResource("2_shop_entry")]([SubResource("Resource_1"), SubResource("Resource_4"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Entry_coral_seat"), SubResource("Entry_barrel_seat")])

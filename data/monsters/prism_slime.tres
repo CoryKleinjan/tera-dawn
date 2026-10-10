@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=25 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=27 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="Resource" path="res://data/monsters/prism_bit.tres" id="2_prism_bit"]
@@ -14,6 +14,7 @@
 [ext_resource type="Resource" path="res://data/items/equips/traveler_cape.tres" id="12_traveler_cape"]
 [ext_resource type="Resource" path="res://data/items/equips/shell_earrings.tres" id="13_shell_earrings"]
 [ext_resource type="Resource" path="res://data/items/equips/copper_ring.tres" id="14_copper_ring"]
+[ext_resource type="Resource" path="res://data/items/equips/oak_staff.tres" id="w2_oak_staff"]
 
 [sub_resource type="Resource" id="Resource_10"]
 script = ExtResource("4_drop_entry")
@@ -82,8 +83,15 @@ max_amount = 1
 script = ExtResource("4_drop_entry")
 item = ExtResource("5_dawnshard")
 chance = 1.0
-min_amount = 25
-max_amount = 51
+min_amount = 15
+max_amount = 31
+
+[sub_resource type="Resource" id="Drop2_oak_staff"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("w2_oak_staff")
+chance = 0.0225
+min_amount = 1
+max_amount = 1
 
 [resource]
 script = ExtResource("1_monster_def")
@@ -101,4 +109,4 @@ splits_into = ExtResource("2_prism_bit")
 split_count = 3
 sprite_frames = ExtResource("anim")
 sprite_scale = 1.0
-drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10")])
+drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Drop2_oak_staff")])

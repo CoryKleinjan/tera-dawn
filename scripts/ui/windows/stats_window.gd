@@ -63,11 +63,11 @@ func _draw_body() -> void:
 	if Game.me.ap > 0 and not Game.me.job.is_starting_job():
 		auto_rect = Rect2(Vector2(size.x - PAD - AUTO_SIZE.x, y - ROW_H - 15), AUTO_SIZE)
 		add_button(auto_rect, "Auto", auto_assign, true, true)
+	var main_stat := Game.me.job.damage_stats(s)[0]
 	for stat in StatBlock.BASE:
 		var extra := s.value(stat) - Game.me.base.value(stat)
 		var text := str(s.value(stat)) + (" (+%d)" % extra if extra > 0 else "")
-		var main := stat == StringName(Game.me.job.primary_stat)
-		y = _row(y, StatBlock.LABELS[stat], text, Palette.SUN if main else Palette.MIST)
+		y = _row(y, StatBlock.LABELS[stat], text, Palette.SUN if stat == main_stat else Palette.MIST)
 		if Game.me.ap > 0:
 			plus_button(Vector2(size.x - PAD - 20, y - ROW_H - 15), Net.ask.bind(&"req_add_ap", [stat]))
 	y = _divider(y)

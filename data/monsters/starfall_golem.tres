@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=26 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=30 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/starfall_golem.tres" id="2_starfall_golem"]
@@ -14,6 +14,8 @@
 [ext_resource type="Resource" path="res://data/items/equips/viper_pants.tres" id="12_viper_pants"]
 [ext_resource type="Resource" path="res://data/items/equips/starlit_cape.tres" id="13_starlit_cape"]
 [ext_resource type="Resource" path="res://data/items/equips/moonstone_wand.tres" id="14_moonstone_wand"]
+[ext_resource type="Resource" path="res://data/items/equips/stormcaller.tres" id="w2_stormcaller"]
+[ext_resource type="Resource" path="res://data/items/equips/stormbreaker_knuckle.tres" id="w2_stormbreaker_knuckle"]
 
 [sub_resource type="Resource" id="Resource_11"]
 script = ExtResource("3_drop_entry")
@@ -89,8 +91,22 @@ max_amount = 1
 script = ExtResource("3_drop_entry")
 item = ExtResource("4_dawnshard")
 chance = 1.0
-min_amount = 40
-max_amount = 81
+min_amount = 24
+max_amount = 49
+
+[sub_resource type="Resource" id="Drop2_stormcaller"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("w2_stormcaller")
+chance = 0.0225
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Drop2_stormbreaker_knuckle"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("w2_stormbreaker_knuckle")
+chance = 0.0225
+min_amount = 1
+max_amount = 1
 
 [resource]
 script = ExtResource("1_monster_def")
@@ -107,4 +123,4 @@ flying = false
 sprite_frames = ExtResource("2_starfall_golem")
 sprite_scale = 1.0
 light_color = Color(0.878431, 0.878431, 1.0, 1.0)
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Drop2_stormcaller"), SubResource("Drop2_stormbreaker_knuckle")])
