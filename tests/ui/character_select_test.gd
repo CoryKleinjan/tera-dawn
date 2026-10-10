@@ -139,3 +139,120 @@ func test_logging_in_remembers_the_username_and_server_but_not_the_password() ->
 	check_eq(ui.hud.password_field.text, "", "the box is cleared once sent")
 	DirAccess.remove_absolute(Settings.path)
 	Settings.path = path
+
+func test_enter_registers_while_the_second_password_box_shows() -> void:
+	ui.hud.address_field.text = "127.0.0.1"
+	ui.hud.username_field.text = "rowan"
+	ui.hud.password_field.text = "longenough"
+	ui.hud.register_button.pressed.emit()
+	ui.hud.confirm_field.text = "different!"
+	for f: LineEdit in [ui.hud.address_field, ui.hud.username_field, ui.hud.password_field]:
+		f.text_submitted.emit(f.text)
+		check(ui.hud.confirm_row.visible, "Enter in %s keeps registering" % f.placeholder_text)
+		check_eq(ui.hud.message.text, "The passwords don't match.", "and checks the second box")
+	check_eq(Net.mode, Net.Mode.NONE, "nothing sent")
+
+func test_escape_on_character_select_logs_out() -> void:
+	await _solo()
+	await ui.press("pause")
+	check(ui.hud.title_card.visible and not ui.hud.character_select.visible, "title card")
+	check_eq(Net.mode, Net.Mode.NONE, "logged out")
+
+func test_escape_in_the_creator_goes_back() -> void:
+	await _solo()
+	ui.hud.character_select.create_button.pressed.emit()
+	check(ui.hud.creator.visible, "creator open")
+	await ui.press("pause")
+	check(not ui.hud.creator.visible and ui.hud.character_select.visible, "back on character select")
+	check(ui.hud.character_select.create_button.has_focus(), "Create has the focus")
+	check_eq(Net.mode, Net.Mode.SINGLE, "still logged in")
+
+func test_escape_cancels_deleting() -> void:
+	await _solo()
+	await _make(["Ann"])
+	ui.hud.character_select.delete_button.pressed.emit()
+	await ui.press("pause")
+	check(not ui.hud.delete_confirm.visible and ui.hud.character_select.visible, "back on character select")
+	check(ui.hud.character_select.play_button.has_focus(), "Play has the focus")
+	check_eq(Net.characters.size(), 1, "not deleted")
+	check_eq(Net.mode, Net.Mode.SINGLE, "still logged in")
+
+func test_cancel_puts_the_focus_back_on_play() -> void:
+	await _solo()
+	await _make(["Ann"])
+	ui.hud.character_select.delete_button.pressed.emit()
+	ui.hud.delete_confirm.cancel_button.pressed.emit()
+	check(ui.hud.character_select.play_button.has_focus(), "Play has the focus")
+
+func test_a_second_create_before_the_answer_is_ignored() -> void:
+	await _solo()
+	ui.hud.character_select.create_button.pressed.emit()
+	var creator := ui.hud.creator
+	creator.name_field.text = "Ann"
+	creator.name_field.text_submitted.emit("Ann")
+	check(creator.create_button.disabled, "Create waits for the answer")
+	creator.create_button.pressed.emit()
+	await ui.ticks(2)
+	check_eq(Net.characters.size(), 1, "made once")
+	check(not creator.visible and ui.hud.character_select.visible, "back on character select")
+	check_eq(ui.hud.character_select.message.text, "", "no 'Ann is taken'")
+	ui.hud.character_select.create_button.pressed.emit()
+	check(not creator.create_button.disabled, "a new character can be made again")
+
+func test_a_refused_create_can_be_tried_again() -> void:
+	await _solo()
+	await _make(["Ann"])
+	ui.hud.character_select.create_button.pressed.emit()
+	var creator := ui.hud.creator
+	creator.name_field.text = "Ann"
+	creator.create_button.pressed.emit()
+	await ui.ticks(2)
+	check_eq(creator.message.text, "Ann is taken. Try another name.", "says why")
+	check(not creator.create_button.disabled, "Create works again")
+
+func test_leaving_the_world_clears_the_chat_and_closes_windows() -> void:
+	await _solo()
+	await _make(["Ann"])
+	Net.play("Ann")
+	await ui.ticks(3)
+	ui.world.show_chat("all", "Ann", "hello", 1)
+	ui.hud.windows["dialogue"].visible = true
+	ui.hud.windows["inventory"].visible = true
+	ui.hud.show_title(true)
+	ui.hud.game_menu.characters_button.pressed.emit()
+	await ui.ticks(3)
+	check_eq(ui.hud.chat.lines, [], "chat history gone")
+	for key: String in ui.hud.windows:
+		check(not ui.hud.windows[key].visible, "%s window closed" % key)
+
+func test_a_dialogue_left_open_doesnt_answer_number_keys_on_character_select() -> void:
+	await _solo()
+	await _make(["Ann"])
+	Net.play("Ann")
+	await ui.ticks(3)
+	var ids := Content.npcs.keys()
+	ids.sort()
+	var talk: TDDialogueWindow = ui.hud.windows["dialogue"]
+	ui.hud.open_dialogue(ui.npc_beside(Content.npcs[ids[0]]))
+	check(talk.visible, "talking")
+	ui.hud.show_title(true)
+	ui.hud.game_menu.characters_button.pressed.emit()
+	await ui.ticks(3)
+	check(not talk.visible, "the dialogue closed")
+	var key := InputEventKey.new()
+	key.keycode = KEY_1
+	key.pressed = true
+	get_viewport().push_input(key)
+	await ui.frames(2)
+	check(ui.hud.character_select.visible and not talk.visible, "1 does nothing there")
+
+func test_being_dropped_while_playing_goes_back_to_the_title() -> void:
+	await _solo()
+	await _make(["Ann"])
+	Net.play("Ann")
+	await ui.ticks(3)
+	Net.ev_refused(TDLobby.TAKEN_OVER, true)
+	await ui.ticks(1)
+	check(not ui.world.started, "out of the world")
+	check(ui.hud.title.visible and ui.hud.title_card.visible, "on the title card")
+	check_eq(ui.hud.message.text, TDLobby.TAKEN_OVER, "says why")

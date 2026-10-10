@@ -48,7 +48,7 @@ The game is built to grow: monsters, NPCs, items, skills, effects, maps and biom
 - **Dawnshards** (currency) dropped by monsters, plus potions, monster parts and gear from per-monster drop tables.
 - MapleStory-style stats: STR, DEX, INT and LUK, 5 Ability Points per level, and a damage range worked out from your main stat and weapon.
 - An **inventory** with Equip, Use, Etc and Setup tabs, **equipment** in 12 slots that changes your stats, and a **character** window.
-- Characters saved by the server, one file per name in `user://characters/`, each owned by one account on that server (characters from before accounts, and a single-player save from before multiplayer, join your local account the first time you play solo or host).
+- Characters saved by the server, one file per name in `user://characters/`, each owned by one account on that server.
 - Keyboard and gamepad controls, fullscreen toggle, title and pause menu.
 
 ## Controls

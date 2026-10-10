@@ -31,9 +31,8 @@ func exists(char_name: String) -> bool:
 func load_character(char_name: String) -> Character:
 	return load_file(_path(char_name), char_name)
 
-## Reads a character from any save file (also the single-player save from before
-## multiplayer), named `char_name` or, if that's "", the name saved in the file. Null if
-## it's missing or unreadable.
+## Reads a character from a save file, named `char_name` or, if that's "", the name saved
+## in the file. Null if it's missing or unreadable.
 static func load_file(path: String, char_name: String) -> Character:
 	if not FileAccess.file_exists(path):
 		return null
@@ -48,14 +47,27 @@ static func load_file(path: String, char_name: String) -> Character:
 	c.name = char_name
 	return c
 
-## The name of every character saved here.
-func saved_names() -> Array[String]:
-	var out: Array[String] = []
+## The name saved in the file `char_name` would use, or "" if there's none. Names that only
+## differ in case or by a space for an _ share a file, so this may be spelled differently.
+func saved_name(char_name: String) -> String:
+	var c := load_file(_path(char_name), "")
+	return c.name if c else ""
+
+## Every character saved here.
+func saved_characters() -> Array[Character]:
+	var out: Array[Character] = []
 	for f in DirAccess.get_files_at(folder):
 		if f.ends_with(".json"):
 			var c := load_file(folder.path_join(f), "")
 			if c and c.name != "":
-				out.append(c.name)
+				out.append(c)
+	return out
+
+## The name of every character saved here.
+func saved_names() -> Array[String]:
+	var out: Array[String] = []
+	for c in saved_characters():
+		out.append(c.name)
 	return out
 
 ## Moves a character's save to `deleted/` (replacing an older deleted one of that name).

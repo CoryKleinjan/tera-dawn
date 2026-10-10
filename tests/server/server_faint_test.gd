@@ -71,3 +71,19 @@ func test_a_map_without_a_return_map_sends_you_to_the_start_map() -> void:
 	p.faint_t = 1
 	h.step(1)
 	check_eq(p.map.def.id, Character.START_MAP, "back at the start")
+
+func test_leaving_while_fainted_wakes_you_in_town() -> void:
+	h.step(1)
+	check(p.fainted(), "fainted")
+	h.ask(2, &"req_leave_character")
+	var saved := h.server.store.load_character("Ann")
+	check_eq(saved.map_id, ServerHarness.TOWN, "saved in the field's town")
+	check_eq(saved.health.hp, ceili(saved.max_hp() / 2.0), "with half HP")
+	h.ask(2, &"req_play", ["Ann"])
+	check_eq(h.server.player_of(2).map.def.id, ServerHarness.TOWN, "and comes back there")
+	check(not h.server.player_of(2).fainted(), "awake")
+
+func test_disconnecting_while_fainted_wakes_you_in_town() -> void:
+	h.step(1)
+	h.leave(2)
+	check_eq(h.server.store.load_character("Ann").map_id, ServerHarness.TOWN, "saved in the field's town")

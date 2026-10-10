@@ -76,21 +76,27 @@ it was made on. Nothing is shared between servers, so characters never move to a
   it's in the world: `req_register` / `req_login` (answered with `ev_logged_in` or
   `ev_refused`), then character select: `req_create_character`, `req_delete_character`
   (the player must type the name), `req_play` (into the world, `ev_joined`) and
-  `req_leave_character` (back to the list). `ev_characters` sends the list again. Every other
-  request is ignored until a character is in the world, because the server finds the player
-  by peer first. An account has at most `TDLobby.MAX_CHARACTERS` characters.
+  `req_leave_character` (back to the list; leaving while fainted wakes you in town first).
+  `ev_characters` sends the list again. Every other request is ignored until a character is
+  in the world, because the server finds the player by peer first. An account has at most `TDLobby.MAX_CHARACTERS` characters. Logging in
+  with the right password while the account is logged in somewhere else (a crashed game,
+  say) takes over: the old connection is told why, its character is saved and it's dropped.
 - **`AccountStore`** keeps accounts in `<save folder>/accounts/`: the username, a
   `PasswordHash` record and the names of the account's characters. Passwords are never
   stored: `PasswordHash` is PBKDF2-HMAC-SHA256 with a random salt and 100,000 rounds (kept per
   record, so it can be raised). Checking a password runs on a worker thread.
-- **`LoginGuard`** drops a connection after 5 wrong passwords and locks a username for 30
-  seconds after 5 wrong passwords in a row. A wrong username and a wrong password get the same
-  answer and take as long.
+- **`LoginGuard`** counts wrong passwords by where they come from (`Net.address_of`, the
+  connection's IP address), so a stranger can't lock the owner out: it drops a connection
+  after 5 wrong passwords, locks a username for 30 seconds for an address that got it wrong 5
+  times in a row, and makes an address wait after each wrong password, whatever the username
+  (1 s, then 2, 4... up to a minute, until it gets one right). A wrong username and a wrong
+  password get the same answer and take as long.
 - **The local account** (`AccountStore.LOCAL`): in single player and when hosting, the
-  player at the keyboard (peer 1) logs in with `req_local_login` and no password. The first
-  time, it takes in characters saved before accounts that no account owns.
+  player at the keyboard (peer 1) logs in with `req_local_login` and no password.
 - **`CharacterStore`** still keeps one file per character name (names are unique on a
-  server); a deleted character's file moves to `deleted/` for the server's owner.
+  server, in any case; a name whose file another name already uses, like `Al pha` and
+  `Al_pha`, is refused as too close). A deleted character's file moves to `deleted/` for the
+  server's owner, and its name comes off every character's buddy list and fame records.
 - **Encryption** (`TDTls`): host and dedicated servers turn on DTLS for ENet with the key and
   certificate in `<save folder>/tls/` (a self-signed pair is made the first time). Clients
   always encrypt; they check the server's identity only when the game ships its certificate
@@ -99,6 +105,9 @@ it was made on. Nothing is shared between servers, so characters never move to a
   connection is up (the password isn't kept), the title card (`TDHud`) has the login and
   register boxes, `TDCharacterSelect` shows the list and `TDDeleteConfirm` asks before
   deleting. `settings.cfg` remembers the last username and server, never the password.
+- A host that logs out with friends connected is asked first (`TDConfirm`). Whenever a host
+  stops, its friends get `ev_host_ended` ("The host ended the game."), and the connection
+  stays open a moment (`Net.GOODBYE_TICKS`) so it gets there.
 
 Shared pieces both sides use: `MapLayout` (a map's platforms, ropes, portals), `DropFlight`
 (how a drop flies and lands, run identically everywhere), `Combat` and `CharacterStats`.

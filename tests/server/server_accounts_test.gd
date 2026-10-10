@@ -25,6 +25,10 @@ func _login(peer: int, user: String, password := "a good password") -> void:
 		h.api.peers.append(peer)
 	h.ask(peer, &"req_login", [user, password])
 
+## Lets the wait after a wrong password run out.
+func _wait_out() -> void:
+	h.server.tick += LoginGuard.MAX_WAIT_TICKS
+
 func _refusal(peer: int) -> String:
 	var r := h.last(peer, &"ev_refused")
 	return r[0] if not r.is_empty() else ""
@@ -77,16 +81,34 @@ func test_a_wrong_password_and_an_unknown_username_say_the_same() -> void:
 	check_eq(h.last(4, &"ev_refused"), [TDLobby.WRONG_LOGIN, false], "unknown username")
 	check(lobby.account_of(3).is_empty() and lobby.account_of(4).is_empty(), "neither logged in")
 
-func test_an_account_logs_in_once_at_a_time() -> void:
+func test_logging_in_again_takes_over_from_the_old_connection() -> void:
 	_register(2, "rowan")
+	h.ask(2, &"req_create_character", ["Ann", ServerHarness.made()])
+	h.ask(2, &"req_play", ["Ann"])
+	h.server.player_of(2).character.shards = 42
 	_login(3, "rowan")
-	check_eq(_refusal(3), "That account is already logged in.", "refused")
+	check_eq(h.last(3, &"ev_logged_in")[0], "rowan", "the new connection is logged in")
+	check_eq(h.last(2, &"ev_refused"), [TDLobby.TAKEN_OVER, true], "the old one is told and dropped")
+	check(lobby.account_of(2).is_empty(), "the old one is logged out")
+	check(h.server.player_of(2) == null, "and out of the world")
+	check_eq(h.server.store.load_character("Ann").shards, 42, "its character was saved")
+	h.ask(3, &"req_play", ["Ann"])
+	check(h.server.player_of(3) != null, "the character can be played again at once")
+	h.step(TDLobby.KICK_TICKS)
+	check(not lobby._kicks.has(2), "the old connection is closed")
+
+func test_a_wrong_password_doesnt_take_over() -> void:
+	_register(2, "rowan")
+	_login(3, "rowan", "not the password")
+	check_eq(lobby.account_of(2)["username"], "rowan", "still logged in")
+	check_eq(h.count(2, &"ev_refused"), 0, "and not told anything")
 
 func test_too_many_wrong_passwords_drop_the_connection() -> void:
 	_register(2, "rowan")
 	h.leave(2)
 	for i in LoginGuard.MAX_TRIES - 1:
 		_login(3, "rowan", "guess %d" % i)
+		_wait_out()
 	check_eq(h.last(3, &"ev_refused")[1], false, "still connected")
 	_login(3, "rowan", "last guess")
 	check_eq(h.last(3, &"ev_refused"), [TDLobby.WRONG_LOGIN, true], "told it's dropped")
@@ -95,16 +117,27 @@ func test_too_many_wrong_passwords_drop_the_connection() -> void:
 	h.step(TDLobby.KICK_TICKS)
 	check(not lobby._kicks.has(3), "dropped")
 
-func test_a_username_with_too_many_wrong_passwords_waits() -> void:
+func test_after_a_wrong_password_the_connection_waits_whatever_the_username() -> void:
+	_register(2, "rowan")
+	_register(3, "mira")
+	h.leave(2)
+	h.leave(3)
+	_login(4, "rowan", "a wrong guess")
+	_login(4, "mira", "another guess")
+	check_eq(_refusal(4), TDLobby.TOO_MANY, "has to wait, even for another account")
+	h.server.tick += LoginGuard.FIRST_WAIT_TICKS
+	_login(4, "mira")
+	check_eq(h.last(4, &"ev_logged_in")[0], "mira", "a second later it can try")
+
+func test_a_strangers_wrong_passwords_dont_lock_the_owner_out() -> void:
 	_register(2, "rowan")
 	h.leave(2)
 	for i in LoginGuard.MAX_TRIES:
-		_login(10 + i, "rowan", "guess %d" % i)
+		_login(10, "rowan", "guess %d" % i)
+		_wait_out()
+	check_eq(h.last(10, &"ev_refused"), [TDLobby.WRONG_LOGIN, true], "the stranger is dropped")
 	_login(20, "rowan")
-	check_eq(_refusal(20), "Too many wrong passwords. Wait a little and try again.", "locked, even with the right one")
-	h.server.tick += LoginGuard.LOCK_TICKS
-	_login(21, "rowan")
-	check_eq(h.last(21, &"ev_logged_in")[0], "rowan", "works again later")
+	check_eq(h.last(20, &"ev_logged_in")[0], "rowan", "the owner, from elsewhere, gets in")
 
 func test_logging_in_checks_passwords_off_the_game_thread() -> void:
 	lobby.background = true
@@ -137,18 +170,16 @@ func test_only_this_games_own_player_gets_the_local_account() -> void:
 	check_eq(lobby.account_of(1)["username"], AccountStore.LOCAL, "the host's own player")
 	check_eq(h.last(1, &"ev_logged_in")[0], "", "shown without a username")
 
-func test_the_local_account_takes_in_characters_from_before_accounts() -> void:
-	var old := Character.create("Oldie")
-	h.server.store.save(old)
-	h.join(3, "Owned") # someone else's, from an account
-	h.leave(3)
-	h.server.local_player = true
-	lobby.import_legacy_save = true
-	h.api.peers.append(1)
-	h.ask(1, &"req_local_login")
-	check_eq(lobby.account_of(1)["characters"], ["Oldie"] as Array[String], "the unowned one only")
-
 # ---------- characters ----------
+
+func test_a_name_sharing_a_save_file_with_another_is_too_close() -> void:
+	_register(2, "rowan")
+	h.ask(2, &"req_create_character", ["Al pha", ServerHarness.made()])
+	h.ask(2, &"req_create_character", ["Al_pha", ServerHarness.made()])
+	check_eq(_refusal(2), "That name is too close to an existing one.", "a space for an _")
+	h.ask(2, &"req_create_character", ["al PHA", ServerHarness.made()])
+	check_eq(_refusal(2), "al PHA is taken. Try another name.", "the same name in another case is taken")
+	check_eq(h.server.store.load_character("Al pha").name, "Al pha", "the first one is untouched")
 
 func test_making_a_character_adds_it_to_the_account() -> void:
 	_register(2, "rowan")
@@ -213,6 +244,26 @@ func test_deleting_takes_the_character_out_of_its_guild_and_buddy_lists() -> voi
 	check_eq(h.server.social.guilds["dawn"]["members"], ["Bob"], "out of the guild")
 	check_eq(h.server.social.guilds["dawn"]["master"], "Bob", "the guild passes on")
 	check(not bob.character.buddies.has("Ann"), "off Bob's buddies")
+
+func test_deleting_takes_the_character_off_saved_buddy_lists_and_fame_records() -> void:
+	var cy := Character.create("Cy")
+	cy.buddies.append("Ann")
+	cy.buddies.append("Dee")
+	cy.fame_given["Ann"] = 100
+	cy.fame_given["Dee"] = 100
+	h.server.store.save(cy)
+	_register(2, "rowan")
+	h.ask(2, &"req_create_character", ["Ann", ServerHarness.made()])
+	h.ask(2, &"req_delete_character", ["Ann", "Ann"])
+	var saved := h.server.store.load_character("Cy")
+	check_eq(saved.buddies, ["Dee"] as Array[String], "off an offline buddy list")
+	check_eq(saved.fame_given, {"Dee": 100}, "and out of its fame records")
+	h.ask(2, &"req_create_character", ["Ann", ServerHarness.made()])
+	var cy_account := AccountStore.make("acct_cy", {})
+	cy_account["characters"].append("Cy")
+	lobby.accounts.save(cy_account)
+	var p := h.join(3, "Cy")
+	check(not p.character.buddies.has("Ann"), "a new Ann isn't Cy's buddy")
 
 func test_leaving_the_world_goes_back_to_character_select() -> void:
 	_register(2, "rowan")
