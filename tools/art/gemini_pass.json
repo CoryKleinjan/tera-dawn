@@ -2890,10 +2890,10 @@
     4
    ],
    "anchor": "npcs_harbor_1",
-   "note": "N3 uses three columns; fence has a parenthesis, so the id is the whole text before the colon.  2026-10-10 chibi-faces thread: edit of the game's sheet to make the faces more chibi (bigger, lower eyes; tiny nose and mouth). Run with --redo ID; result lands as <save>_2.png.",
+   "note": "N3 uses three columns; fence has a parenthesis, so the id is the whole text before the colon.  2026-10-10 chibi-faces thread: edit of the game's sheet to make the faces more chibi (bigger, lower eyes; tiny nose and mouth). Run with --redo ID; result lands as <save>_2.png. Round 2: the first chibi edit gave beardless men beards (and harbor_3 a lilac background), so the text now forbids both.",
    "edit": {
     "base": "art/source/npcs_harbor_3.png",
-    "text": "This sheet is my NPC sprite sheet: labelled characters standing in a grid on a magenta background. Make every face more CHIBI, like a cute chibi anime/MapleStory-style character: big, tall, rounded eyes (about 1.4x taller than now, with large bright highlight shines), set a little LOWER on the face and a little closer together, so there is a big forehead above them; a tiny nose (a dot or a short line, or none); a small mouth close under the eyes; soft round cheeks (a light blush is fine). Keep each character's identity: same hair, hat, beard, skin tone, eye colour, outfit, props, colours and pose. Do NOT change body proportions, head size, outlines or anything below the chin."
+    "text": "This sheet is my NPC sprite sheet: labelled characters standing in a grid on a magenta background. Make every face more CHIBI, like a cute chibi anime/MapleStory-style character: big, tall, rounded eyes (about 1.4x taller than now, with large bright highlight shines), set a little LOWER on the face and a little closer together, so there is a big forehead above them; a tiny nose (a dot or a short line, or none); a small mouth close under the eyes; soft round cheeks (a light blush is fine). Keep each character's identity: same hair, hat, beard, skin tone, eye colour, outfit, props, colours and pose. Do NOT change body proportions, head size, outlines or anything below the chin. Do NOT add beards, stubble or moustaches to anyone who has none, and do not age anyone up: every character keeps exactly the facial hair and age they have now, in both of their cells. The background stays exactly the flat pure magenta #FF00FF it is now."
    }
   },
   {
@@ -2914,10 +2914,10 @@
     4
    ],
    "anchor": "npcs_harbor_1",
-   "note": "Part 4 version (newest). Fence reads 'Batch N4, LAYOUT NPC:'. 2026-10-10 chibi-faces thread: edit of the game's sheet to make the faces more chibi (bigger, lower eyes; tiny nose and mouth). Run with --redo ID; result lands as <save>_2.png.",
+   "note": "Part 4 version (newest). Fence reads 'Batch N4, LAYOUT NPC:'. 2026-10-10 chibi-faces thread: edit of the game's sheet to make the faces more chibi (bigger, lower eyes; tiny nose and mouth). Run with --redo ID; result lands as <save>_2.png. Round 2: the first chibi edit gave beardless men beards (and harbor_3 a lilac background), so the text now forbids both.",
    "edit": {
     "base": "art/source/npcs_greenbough.png",
-    "text": "This sheet is my NPC sprite sheet: labelled characters standing in a grid on a magenta background. Make every face more CHIBI, like a cute chibi anime/MapleStory-style character: big, tall, rounded eyes (about 1.4x taller than now, with large bright highlight shines), set a little LOWER on the face and a little closer together, so there is a big forehead above them; a tiny nose (a dot or a short line, or none); a small mouth close under the eyes; soft round cheeks (a light blush is fine). Keep each character's identity: same hair, hat, beard, skin tone, eye colour, outfit, props, colours and pose. Do NOT change body proportions, head size, outlines or anything below the chin."
+    "text": "This sheet is my NPC sprite sheet: labelled characters standing in a grid on a magenta background. Make every face more CHIBI, like a cute chibi anime/MapleStory-style character: big, tall, rounded eyes (about 1.4x taller than now, with large bright highlight shines), set a little LOWER on the face and a little closer together, so there is a big forehead above them; a tiny nose (a dot or a short line, or none); a small mouth close under the eyes; soft round cheeks (a light blush is fine). Keep each character's identity: same hair, hat, beard, skin tone, eye colour, outfit, props, colours and pose. Do NOT change body proportions, head size, outlines or anything below the chin. Do NOT add beards, stubble or moustaches to anyone who has none, and do not age anyone up: every character keeps exactly the facial hair and age they have now, in both of their cells. The background stays exactly the flat pure magenta #FF00FF it is now."
    }
   },
   {
