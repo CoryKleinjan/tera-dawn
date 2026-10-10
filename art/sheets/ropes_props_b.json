@@ -234,5 +234,24 @@
       1402
     ]
   },
-  "inset": 14
+  "inset": 14,
+  "climb": {
+    "ladder": {
+      "top": "ladder_top",
+      "middle": "ladder_middle",
+      "bottom": "ladder_bottom"
+    },
+    "rope": {
+      "middle": "rope_middle",
+      "bottom": "rope_bottom"
+    },
+    "rope_ladder": {
+      "middle": "rope_ladder_middle",
+      "bottom": "rope_ladder_bottom"
+    },
+    "vine": {
+      "middle": "vine_middle",
+      "bottom": "vine_bottom"
+    }
+  }
 }

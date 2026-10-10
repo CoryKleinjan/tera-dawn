@@ -216,33 +216,23 @@ func _door(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
 	l.position = TDStage.to3d(base + Vector2(0, -height * 0.45), -0.8)
 	root.add_child(l)
 
-## A rope or ladder: the style's top piece, its middle piece repeated, and its bottom piece.
+## A rope or ladder: its style's pieces stacked edge to edge (ClimbStyleDef.pieces). Each piece
+## is drawn one texture pixel taller than its slot, so the joints never show a hairline gap; the
+## next piece covers the extra row.
 func _climbable(c: ClimbableDef) -> void:
 	var st := c.style
-	if st == null or st.middle == null:
+	if st == null:
 		return
 	var z := TDStage.Z_CLIMBABLE
-	var texel := st.texel
-	var y := c.top
-	if st.top:
-		var top := TDStage.sprite(st.top, texel)
-		top.offset = Vector2(0, -st.top.get_height() / 2.0)
-		top.position = TDStage.to3d(Vector2(c.x, y), z)
-		root.add_child(top)
-		y += TDStage.art_size(st.top, texel).y * 0.9
-	var bottom_h := TDStage.art_size(st.bottom, texel).y if st.bottom else 0.0
-	var mid_h := TDStage.art_size(st.middle, texel).y
-	while y < c.bottom - bottom_h - 2.0:
-		var s := TDStage.sprite(st.middle, texel)
-		s.offset = Vector2(0, -st.middle.get_height() / 2.0)  # hang from the top
-		s.position = TDStage.to3d(Vector2(c.x, y), z)
-		# the last piece may poke past the bottom; it hides behind the bottom piece or the floor
+	for p in st.pieces(c.top, c.bottom):
+		var tex: Texture2D = p.texture
+		var s := TDStage.sprite(tex, st.texel)
+		var art_h := TDStage.art_size(tex, st.texel).y
+		s.scale.y = (p.height + st.texel / TDStage.art_density(tex)) / art_h
+		s.offset = Vector2(0, -tex.get_height() / 2.0)  # hang from the top edge
+		s.position = TDStage.to3d(Vector2(c.x, p.y), z)
 		root.add_child(s)
-		y += mid_h - texel
-	if st.bottom:
-		var b := TDStage.sprite(st.bottom, texel)
-		b.position = TDStage.to3d(Vector2(c.x, c.bottom + 2.0), z + 0.01)
-		root.add_child(b)
+		z += 0.001  # each piece just in front of the one above, so the joints don't flicker
 
 func _portal(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
 	var base := Vector2(p.x, pl.y + 4.0)

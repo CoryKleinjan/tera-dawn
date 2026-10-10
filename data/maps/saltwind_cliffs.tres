@@ -209,7 +209,7 @@ style = ExtResource("5_rope_ladder")
 
 [sub_resource type="Resource" id="Resource_14"]
 script = ExtResource("4_climbable_def")
-x = 1180.0
+x = 1168.0
 top = 280.0
 bottom = 390.0
 style = ExtResource("6_rope")

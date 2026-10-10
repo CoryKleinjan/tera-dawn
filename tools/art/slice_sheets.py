@@ -33,6 +33,7 @@ import numpy as np
 from PIL import Image
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import climb_pieces  # noqa: E402
 import platform_pieces  # noqa: E402
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
@@ -857,6 +858,10 @@ def main():
         name = os.path.splitext(os.path.basename(p))[0]
         if name.startswith("platform_pieces_"):
             platform_pieces.prepare(name[len("platform_pieces_"):])
+    # rope and ladder pieces get lined up on their rope or rails
+    for man in manifests:
+        if "climb" in man:
+            climb_pieces.prepare(man)
 
 
 if __name__ == "__main__":

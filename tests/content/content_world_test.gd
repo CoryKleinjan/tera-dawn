@@ -127,6 +127,32 @@ func test_climbables_lie_inside_the_map_and_reach_a_platform() -> void:
 				lands = lands or (pl.contains_x(c.x) and absf(pl.y - c.top) <= 40)
 			check(lands, "%s: climbables[%d] at x %s tops out at %s with no platform there" % [w, i, c.x, c.top])
 
+## A rope or ladder hangs from the platform its top is on and stands on the floor its bottom
+## reaches, with its widest piece clear of both platforms' ends (else it hangs off a ledge).
+func test_climbables_fit_on_their_platforms() -> void:
+	for m: MapDef in Content.maps.values():
+		var w := Scan.where(m)
+		var layout := MapLayout.new(m)
+		for i in m.climbables.size():
+			var c := m.climbables[i]
+			if c == null or c.style == null:
+				continue
+			var half := 0.0
+			for t: Texture2D in [c.style.top, c.style.middle, c.style.bottom]:
+				if t:
+					half = maxf(half, TDStage.art_size(t, c.style.texel).x / 2.0)
+			for end in [c.top, c.bottom]:
+				var under: Platform = null
+				for pl in layout.platforms:
+					if pl.contains_x(c.x) and absf(pl.y - end) < 1.0:
+						under = pl
+				if not check(under != null, "%s: climbables[%d] at x %s has no platform at y %s" % [w, i, c.x, end]):
+					continue
+				if under.solid:
+					continue
+				var room := minf(c.x - under.x, under.x + under.w - c.x)
+				check(room >= half, "%s: climbables[%d] at x %s is %s px from the end of the platform at y %s; its art needs %s" % [w, i, c.x, room, end, snappedf(half, 0.1)])
+
 func test_npcs_and_starts_are_inside_the_map() -> void:
 	for m: MapDef in Content.maps.values():
 		for i in m.npcs.size():

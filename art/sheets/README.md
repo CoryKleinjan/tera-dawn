@@ -47,6 +47,7 @@ trims it.
 | `inset` | `3` | Pixels trimmed off every cell edge (the divider lines). |
 | `save` | `true` | `false` keeps cells only for animation sets. |
 | `grid_threshold` | `0.8` | How much of a row or column must be divider-coloured to count as a divider. |
+| `climb` | | Rope and ladder pieces to line up after cutting, one entry per climb style: `{"ladder": {"top": "ladder_top", "middle": "ladder_middle", "bottom": "ladder_bottom"}}` (`top` and `bottom` optional). See **Climb pieces** below. |
 | `grid` | | Give the cells by hand when detection fails: `{"rows": [y0, y1, y2, ...], "cols": [x0, x1, ...]}` (edges between cells; `cols` can be one list per row). |
 | `overrides` | | Per-cell versions of any key above, plus `crop` `[x0, y0, x1, y1]`, `seamless` (tileable texture, with `size`), `extend_bottom` (pad a backdrop downward), `fix` (a named clean-up from `FIXES`), `recolor` (a palette change from `RECOLORS`), `patch` (`[[x0, y0, x1, y1, dx], ...]`: paint a rect with a copy from dx pixels across, to take out an ornament that would stretch in a 9-slice), `flip` (mirror it left to right), `patch_rows` (`[[y0, y1, dy], ...]`: replace rows y0 to y1 with the rows dy away, to take out a divider line drawn across the art) and `out_dir`. |
 
@@ -146,6 +147,11 @@ after the item ids, replacing the placeholders from `tools/art/make_item_placeho
   "under"` to take the underside from the under pieces). The game joins them into one picture
   per platform (`PlatformSkin`). Cut a clipped ornament off a piece's inner edge with `crop`
   rather than leave it: the game cuts through it where pieces join.
+- **Climb pieces** (`ropes_props_b`, its `"climb"` section): after cutting, the slicer runs
+  `tools/art/climb_pieces.py`, which centres each middle piece on its rope or rails (leaning a
+  vine back so its ends meet), and cuts and pads each end piece so it carries on from a middle
+  piece (same centre line, a ladder's rungs keep their spacing). The game stacks the pieces
+  edge to edge (`ClimbStyleDef.pieces`), so an end piece needs no hand offsets.
 - **Not in the game yet**: `climb_tops`, `dawnharbor_midground` and `buildings_<town>` cut into
   `art/build/` only.
 - **Items, pets, projectiles** cut into `assets/sprites/items/`, `pets/` (and
