@@ -13,6 +13,8 @@ const HERO_SCALE := 0.8
 ## How tall he stands, feet to the top of his head, in game pixels at HERO_SCALE: speech
 ## bubbles and shop signs go just over it.
 const HEIGHT := 78.0
+## About how wide he is drawn, in game pixels: what the HUD keeps out of the way of.
+const WIDTH := 48.0
 ## The soft shadow under his feet, and where his light sits above them (game pixels).
 const SHADOW_WIDTH := 32.0
 const LIGHT_HEIGHT := 38.0

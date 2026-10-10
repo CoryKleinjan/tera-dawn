@@ -16,6 +16,8 @@ const START_JOB := &"beginner"
 const QUICKSLOTS := 8
 ## The innate attack bound to the attack key.
 const BASIC_ATTACK := &"basic_attack"
+## The level cap: EXP stops here, as there are no fields for higher levels yet.
+const MAX_LEVEL := 35
 ## What a storage keeper charges to store one stack.
 const STORE_FEE := 10
 
@@ -187,25 +189,40 @@ func spend_ammo(n: int) -> void:
 func xp_need(lvl := -1) -> int:
 	if lvl < 0:
 		lvl = level
-	# Intended pace, for a quick player hunting monsters near their level: about 1 minute
-	# for Lv 1, 2 hours to Lv 10 (the job), 10 to Lv 20, 27 to Lv 30 and 40 to the Lv 35
-	# cap, about classic MapleStory. It comes from the 75-minute playtest: EXP earned per
-	# minute (kills and quests) was about 33 * lvl^1.3, and minutes per level are meant to
-	# grow as about 1.5 * lvl^1.32, so a level takes their product, about 50 * lvl^2.6
-	# (53 lands the cap on 40 hours). Quest EXP rewards are scaled to match; change them
-	# together.
-	const SCALE := 53.0
-	const GROWTH := 2.6
-	return int(floor(SCALE * pow(lvl, GROWTH)))
+	# Intended pace, quests included, for a player hunting monsters near their level: about
+	# 2 hours to Lv 10 (the first job) and 40 to the Lv 35 cap. Up to JOB_LEVEL a level takes
+	# SCALE * lvl^GROWTH EXP; after it, the Lv 10 amount times (lvl / JOB_LEVEL)^JOB_GROWTH.
+	# The island quests pay most of the EXP to Lv 10 (about 85,000 of 110,000), so the early
+	# levels are steep enough that hunting still fills the 2 hours. Tuned with the pace bot
+	# (playtest/pace-run-3.md in the project files): Lv 10 in 82-119 minutes without any EXP
+	# boost, Lv 35 in 250-300 bot minutes at 10x kill EXP (about 31-49 hours; Magicians are
+	# slower). Quest EXP rewards are left as they were, so quests stay worth doing; change
+	# them together.
+	const SCALE := 55.0
+	const GROWTH := 3.0
+	const JOB_LEVEL := 10
+	const JOB_GROWTH := 1.8
+	if lvl <= JOB_LEVEL:
+		return int(floor(SCALE * pow(lvl, GROWTH)))
+	return int(floor(SCALE * pow(JOB_LEVEL, GROWTH) * pow(float(lvl) / JOB_LEVEL, JOB_GROWTH)))
 
-## Adds EXP and returns how many levels were gained.
+## Whether the character is at MAX_LEVEL, where EXP stops.
+func at_max_level() -> bool:
+	return level >= MAX_LEVEL
+
+## Adds EXP and returns how many levels were gained. At MAX_LEVEL EXP stops (kept at 0).
 func gain_xp(n: int) -> int:
+	if at_max_level():
+		xp = 0
+		return 0
 	xp += n
 	var gained := 0
-	while xp >= xp_need():
+	while not at_max_level() and xp >= xp_need():
 		xp -= xp_need()
 		level += 1
 		gained += 1
+	if at_max_level():
+		xp = 0
 	if gained > 0:
 		ap += gained * job.ap_per_level
 		sp += gained * job.sp_per_level
@@ -507,8 +524,26 @@ func advance(next: JobDef) -> String:
 		elif g.item:
 			inventory.add(g.item, g.min_amount)
 	recalc()
+	_wear_advance_weapon(next)
 	refill()
 	return ""
+
+## Wears the first weapon among `next`'s gifts when the one worn isn't made for the new job
+## (the Beginner's Training Sword), so a new Magician casts with the wand just handed over.
+## A weapon of the job's own line that the player found stays on.
+func _wear_advance_weapon(next: JobDef) -> void:
+	var worn := weapon()
+	if worn and next.family in worn.jobs:
+		return
+	for g in next.advance_gifts:
+		var e := g.item as EquipDef
+		if e == null or e.slot != EquipDef.Slot.WEAPON:
+			continue
+		for i in Inventory.SLOTS:
+			var s := inventory.at(ItemDef.Tab.EQUIP, i)
+			if s and s.item == e:
+				equip(i)
+				return
 
 ## Whether this job can use gear meant for `families` (empty means anyone).
 func can_use(families: Array[StringName]) -> bool:

@@ -40,7 +40,9 @@ extends Resource
 @export var advance_level := 10
 ## Base stats (STR, DEX, INT, LUK, before gear) needed to advance.
 @export var advance_requirements: StatBlock
-## Items handed over when advancing (each gives `min_amount`).
+## Items handed over when advancing (each gives `min_amount`): the job's basic weapon (the
+## first weapon here is worn right away, see Character.advance), its ammo and potions.
+## Better weapons only drop.
 @export var advance_gifts: Array[DropEntry] = []
 ## Skill Points handed over when advancing, so the new job has something to learn right away.
 @export var advance_sp := 0
@@ -80,6 +82,14 @@ func requirement_lines() -> PackedStringArray:
 				out.append("%d %s" % [n, StatBlock.LABELS[stat]])
 	return out
 
+## "Apprentice Wand, 30 Blue Potion": the advance gifts, for the message on advancing.
+func gifts_text() -> String:
+	var parts := PackedStringArray()
+	for g in advance_gifts:
+		if g.item:
+			parts.append(g.item.display_name if g.item is EquipDef or g.min_amount <= 1 else "%d %s" % [g.min_amount, g.item.display_name])
+	return ", ".join(parts)
+
 ## Whether this is a starting job (Beginner): one you don't advance into.
 func is_starting_job() -> bool:
 	return advances_from == &""
@@ -94,6 +104,12 @@ static func paths_from(from: StringName) -> Array[JobDef]:
 	out.sort_custom(func(a: JobDef, b: JobDef) -> bool:
 		return a.display_name < b.display_name if a.advance_level == b.advance_level else a.advance_level < b.advance_level)
 	return out
+
+## The lowest level at which a character of job `from` can advance into another job, or
+## a level nobody reaches when no job advances from it.
+static func first_advance_level(from: StringName) -> int:
+	var paths := paths_from(from)
+	return paths[0].advance_level if not paths.is_empty() else 1 << 30
 
 ## "Warrior: Level 10, 35 STR", for lists of the paths open to a Beginner.
 func path_line() -> String:

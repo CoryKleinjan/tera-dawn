@@ -53,6 +53,34 @@ func accept(q: QuestDef) -> void:
 func forfeit(q: QuestDef) -> void:
 	active.erase(q.id)
 
+## The quests worth showing on the tracker while on map `m`, at most `limit`: ready to hand
+## in first, then those with something left to do here, then the rest, each group in the
+## order they were taken.
+func tracked(c: Character, m: MapDef, limit: int) -> Array[QuestDef]:
+	var ready: Array[QuestDef] = []
+	var here: Array[QuestDef] = []
+	var rest: Array[QuestDef] = []
+	for id in active:
+		var q: QuestDef = Content.quests.get(id)
+		if q == null:
+			continue
+		if is_ready(q, c):
+			ready.append(q)
+		elif m and _to_do_on(q, c, m):
+			here.append(q)
+		else:
+			rest.append(q)
+	ready.append_array(here)
+	ready.append_array(rest)
+	return ready.slice(0, limit)
+
+## Whether quest `q` has an unfinished objective that can be worked on at `m`.
+func _to_do_on(q: QuestDef, c: Character, m: MapDef) -> bool:
+	for i in q.objectives.size():
+		if progress(q, i, c) < q.objectives[i].count and q.objectives[i].can_do_on(m):
+			return true
+	return false
+
 ## Counts a defeated monster toward every quest that wants it. Returns the quests it moved on.
 func record_kill(monster: MonsterDef) -> Array[QuestDef]:
 	return _bump(func(o: QuestObjective) -> bool: return o.kind == QuestObjective.Kind.KILL and o.monster == monster)

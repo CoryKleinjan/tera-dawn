@@ -7,6 +7,9 @@ extends RefCounted
 ## How much bigger than the biome's art the signpost is drawn, and its depth.
 const SIGN_SCALE := 1.2
 const SIGN_DEPTH := -0.9
+## How far inward from the entrance portal the signpost stands, so its words read as this
+## map's name rather than as where that portal goes.
+const SIGN_FROM_PORTAL := 200.0
 ## Warm light standing in a doorway.
 const DOOR_LIGHT := Color("ffc47a")
 ## Space between the top of the signpost (or portal) and the sign's words.
@@ -47,7 +50,7 @@ func build(map: MapDef, platforms: Array[Platform], rng: RandomNumberGenerator) 
 	for b in map.buildings:
 		_building(b, platforms[b.platform], biome)
 	for c in map.climbables:
-		_climbable(c)
+		_climbable(c, platforms)
 	for p in map.portals:
 		if p.door:
 			_door(p, platforms[p.platform], biome)
@@ -61,13 +64,13 @@ func build(map: MapDef, platforms: Array[Platform], rng: RandomNumberGenerator) 
 ## (some slots stay empty, by the rule's `chance`).
 func _back_houses(rule: DecorDef, map: MapDef, rng: RandomNumberGenerator) -> Array[Sprite3D]:
 	var placed: Array[Sprite3D] = []
-	var z := TDStage.land_depth((rule.depth.x + rule.depth.y) * 0.5)
+	var z := (rule.depth.x + rule.depth.y) * 0.5
 	for x in back_house_slots(rule, map):
 		if rng.randf() >= rule.chance:
 			continue
 		var tex: Texture2D = rule.textures[rng.randi() % rule.textures.size()]
 		var s := TDStage.sprite(tex, rule.texel * rule.scale.y, rule.shaded)
-		s.position = TDStage.to3d(Vector2(x, map.ground_y + 3.0), z)
+		TDStage.stand_on_land(s, Vector2(x, map.ground_y + 3.0), z)
 		s.flip_h = rng.randf() < 0.5
 		root.add_child(s)
 		placed.append(s)
@@ -113,7 +116,7 @@ func _scatter(rule: DecorDef, x0: float, x1: float, y: float, rng: RandomNumberG
 		if rng.randf() < rule.chance:
 			var tex: Texture2D = rule.textures[rng.randi() % rule.textures.size()]
 			var s := TDStage.sprite(tex, rule.texel * rng.randf_range(rule.scale.x, rule.scale.y), rule.shaded)
-			s.position = TDStage.to3d(Vector2(x, y + 3.0), rng.randf_range(TDStage.land_depth(rule.depth.x), TDStage.land_depth(rule.depth.y)))
+			TDStage.stand_on_land(s, Vector2(x, y + 3.0), rng.randf_range(rule.depth.x, rule.depth.y))
 			s.flip_h = rng.randf() < 0.5
 			root.add_child(s)
 			placed.append(s)
@@ -177,7 +180,7 @@ func _prop(p: PropPlacement, map: MapDef) -> void:
 		return
 	var y := p.y if p.y >= 0.0 else float(map.ground_y) + 3.0
 	var s := TDStage.sprite(p.texture, TDStage.TEXEL * p.scale)
-	s.position = TDStage.to3d(Vector2(p.x, y), TDStage.land_depth(p.depth))
+	TDStage.stand_on_land(s, Vector2(p.x, y), p.depth)
 	s.flip_h = p.flip
 	root.add_child(s)
 	if p.light_color.a > 0.0:
@@ -193,7 +196,7 @@ func _building(b: BuildingPlacement, pl: Platform, biome: BiomeDef) -> void:
 		return
 	var z := TDStage.land_depth(b.depth)
 	var s := TDStage.sprite(d.texture, d.texel() * b.scale * (stage.dist - z) / stage.dist)
-	s.position = TDStage.to3d(Vector2(b.center_x(), pl.y + 3.0), z)
+	TDStage.stand_on_land(s, Vector2(b.center_x(), pl.y + 3.0), b.depth, false)
 	s.flip_h = b.flip
 	s.modulate = b.tint
 	root.add_child(s)
@@ -209,44 +212,37 @@ func _door(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
 	var height := 60.0
 	if biome.door:
 		var s := TDStage.sprite(biome.door)
-		s.position = TDStage.to3d(base, TDStage.land_depth(-2.0))
+		TDStage.stand_on_land(s, base, -2.0)
 		root.add_child(s)
 		height = TDStage.art_size(biome.door).y
 	var l := TDStage.light(DOOR_LIGHT, 1.6, 3.5)
-	l.position = TDStage.to3d(base + Vector2(0, -height * 0.45), -0.8)
+	# in front of the doorway, so it lights the door and the land's front around it
+	l.position = TDStage.to3d(base + Vector2(0, -height * 0.45), TDStage.LAND_FRONT + 0.5)
 	root.add_child(l)
 
-## A rope or ladder: the style's top piece, its middle piece repeated, and its bottom piece.
-func _climbable(c: ClimbableDef) -> void:
+## A rope or ladder: its style's pieces stacked edge to edge (ClimbStyleDef.pieces). Each piece
+## is drawn one texture pixel taller than its slot, so the joints never show a hairline gap; the
+## next piece covers the extra row.
+func _climbable(c: ClimbableDef, platforms: Array[Platform]) -> void:
 	var st := c.style
-	if st == null or st.middle == null:
+	if st == null:
 		return
 	var z := TDStage.Z_CLIMBABLE
-	var texel := st.texel
-	var y := c.top
-	if st.top:
-		var top := TDStage.sprite(st.top, texel)
-		top.offset = Vector2(0, -st.top.get_height() / 2.0)
-		top.position = TDStage.to3d(Vector2(c.x, y), z)
-		root.add_child(top)
-		y += TDStage.art_size(st.top, texel).y * 0.9
-	var bottom_h := TDStage.art_size(st.bottom, texel).y if st.bottom else 0.0
-	var mid_h := TDStage.art_size(st.middle, texel).y
-	while y < c.bottom - bottom_h - 2.0:
-		var s := TDStage.sprite(st.middle, texel)
-		s.offset = Vector2(0, -st.middle.get_height() / 2.0)  # hang from the top
-		s.position = TDStage.to3d(Vector2(c.x, y), z)
-		# the last piece may poke past the bottom; it hides behind the bottom piece or the floor
+	var flip := st.top_flipped(ClimbStyleDef.ledge_room(c.x, c.top, platforms))
+	for p in st.pieces(c.top, c.bottom):
+		var tex: Texture2D = p.texture
+		var s := TDStage.sprite(tex, st.texel)
+		var art_h := TDStage.art_size(tex, st.texel).y
+		s.scale.y = (p.height + st.texel / TDStage.art_density(tex)) / art_h
+		s.offset = Vector2(0, -tex.get_height() / 2.0)  # hang from the top edge
+		s.position = TDStage.to3d(Vector2(c.x, p.y), z)
+		s.flip_h = flip and tex == st.top
 		root.add_child(s)
-		y += mid_h - texel / TDStage.art_density(st.middle)  # overlap one texel
-	if st.bottom:
-		var b := TDStage.sprite(st.bottom, texel)
-		b.position = TDStage.to3d(Vector2(c.x, c.bottom + 2.0), z + 0.01)
-		root.add_child(b)
+		z += 0.001  # each piece just in front of the one above, so the joints don't flicker
 
 func _portal(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
 	var base := Vector2(p.x, pl.y + 4.0)
-	var at := TDStage.to3d(base, -0.3)
+	var at := TDStage.to3d(base, TDStage.land_depth(-0.3))
 	if not biome.portal_frames.is_empty():
 		var frames := SpriteFrames.new()
 		frames.set_animation_speed(&"default", 6.0)
@@ -281,12 +277,12 @@ func _lanterns(map: MapDef, biome: BiomeDef, rng: RandomNumberGenerator) -> void
 		return
 	var x := 320.0
 	while x < map.width - 120.0:
-		var pos := TDStage.to3d(Vector2(x, map.ground_y + 3.0), -1.3)
 		var post := TDStage.sprite(biome.lantern)
-		post.position = pos
+		TDStage.stand_on_land(post, Vector2(x, map.ground_y + 3.0), -1.3)
+		var pos := post.position
 		root.add_child(post)
 		# the lamp hangs off the right of the post, near the top
-		var size := TDStage.art_size(biome.lantern) / TDStage.PX
+		var size := post.texture.get_size() * post.pixel_size
 		var lamp := pos + Vector3(size.x * 0.22, size.y * 0.62, 0.05)
 		var g := TDStage.glow_sprite(load("res://assets/sprites/fx/glow.png"), Color(biome.lantern_light, 0.5) * 1.5)
 		g.position = lamp
@@ -302,13 +298,24 @@ func _sign(map: MapDef, biome: BiomeDef) -> void:
 	if map.sign_text == "" or biome.signpost == null:
 		return
 	var post := TDStage.sprite(biome.signpost, TDStage.TEXEL * SIGN_SCALE)
-	post.position = TDStage.to3d(Vector2(map.sign_x, map.ground_y + 3.0), SIGN_DEPTH)
+	TDStage.stand_on_land(post, Vector2(sign_post_x(map), map.ground_y + 3.0), SIGN_DEPTH)
 	root.add_child(post)
+
+## Where the signpost stands: SIGN_FROM_PORTAL inward from the entrance, the floor portal
+## nearest the map's `sign_x` (or at `sign_x` on a map with no portal on the floor).
+static func sign_post_x(map: MapDef) -> float:
+	var entrance: PortalDef = null
+	for p in map.portals:
+		if p.platform == 0 and not p.door and (entrance == null or absf(p.x - map.sign_x) < absf(entrance.x - map.sign_x)):
+			entrance = p
+	if entrance == null:
+		return map.sign_x
+	var inward := 1.0 if entrance.x < map.width / 2.0 else -1.0
+	return entrance.x + inward * SIGN_FROM_PORTAL
 
 ## Where the sign's words go (game pixels, their bottom centre), or null for no sign. The
 ## overlay draws them, so they stay sharp and in front: over the post, at least as high as
-## the biome's portal so the portal by the entrance never hides them, and above any platform
-## skin they would otherwise sit on.
+## the biome's portal, and above any platform skin they would otherwise sit on.
 static func sign_label_at(map: MapDef) -> Variant:
 	var biome := map.biome
 	if map.sign_text == "" or biome == null or biome.signpost == null:
@@ -316,15 +323,16 @@ static func sign_label_at(map: MapDef) -> Variant:
 	var h := TDStage.art_size(biome.signpost, TDStage.TEXEL * SIGN_SCALE).y
 	if not biome.portal_frames.is_empty():
 		h = maxf(h, TDStage.art_size(biome.portal_frames[0]).y)
+	var x := sign_post_x(map)
 	var y := map.ground_y + 3.0 - h - SIGN_LABEL_GAP
 	var moved := true
 	while moved: # lifting the words over one platform can put them in the one above
 		moved = false
 		for d in map.platforms:
-			if map.sign_x < d.x or map.sign_x > d.x + d.width:
+			if x < d.x or x > d.x + d.width:
 				continue
 			var skin := TerrainBuilder.skin_span(d, biome)
 			if y > skin.x and y - SIGN_LABEL_H < skin.y:
 				y = skin.x - SIGN_LABEL_GAP
 				moved = true
-	return Vector2(map.sign_x, y)
+	return Vector2(x, y)

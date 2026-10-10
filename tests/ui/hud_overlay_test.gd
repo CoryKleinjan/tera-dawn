@@ -2,7 +2,9 @@ extends TestCase
 ## The always-on HUD: the status bar, the quickslots, the chat box, invitation cards, the
 ## text prompt and the overlay (log, banner, party, quest tracker, buffs, fainting) all draw
 ## with something to show, and their hit tests and buttons work. Name tags fit their names,
-## and the log, toasts and the map's sign keep clear of what's under them.
+## and the log, toasts and the map's sign keep clear of what's under them. The quickslots and
+## quest tracker fade over the hero, the tracker lists three quests, and the first-time hints
+## show town keys in town, fighting keys on the first field, and never over a window.
 
 var ui: UiHelpers
 
@@ -23,6 +25,18 @@ func test_status_bar_draws_any_state() -> void:
 			c.mp = state[1]
 			c.shards = 9999999)
 		check(await ui.redraw(bar), "the status bar draws at level %d" % state[0])
+
+func test_status_bar_says_max_level_at_the_cap() -> void:
+	var bar := ui.hud.status
+	await ui.edit(func(c: Character) -> void:
+		c.level = 20
+		c.xp = c.xp_need() / 4)
+	check_eq(bar.exp_text(), "%.1f%%" % (100.0 * Game.me.xp / Game.me.xp_need()), "how far to the next level")
+	await ui.edit(func(c: Character) -> void:
+		c.level = Character.MAX_LEVEL
+		c.xp = 0)
+	check_eq(bar.exp_text(), "Max level", "at the cap")
+	check(await ui.redraw(bar), "the status bar draws at the cap")
 
 func test_quickslots_hold_skills_and_items() -> void:
 	var slots := ui.hud.quickslots
@@ -148,6 +162,61 @@ func test_popups_take_turns_and_wait_for_the_map_banner() -> void:
 	banners.clear()
 	check(banners.toasts.is_empty() and banners.ribbons.is_empty(), "clear() takes every toast and ribbon down")
 
+func test_the_achievement_toast_sits_at_the_bottom_clear_of_the_hud() -> void:
+	var r := ui.hud.banners.toast_rect()
+	check(r.end.y <= TDWorld.VIEW.y - TDStatusBar.HEIGHT, "above the status bar: %s" % r)
+	check(r.end.y >= TDWorld.VIEW.y - TDStatusBar.HEIGHT - 20, "just above it: %s" % r)
+	check(not r.intersects(ui.hud.quickslots.get_global_rect()), "clear of the quickslots: %s" % r)
+	check(not r.intersects(ui.hud.chat.get_global_rect()), "clear of the chat box: %s" % r)
+	check(absf(r.get_center().x - TDWorld.VIEW.x / 2.0) < 120, "near the middle: %s" % r)
+	for w: TDWindow in ui.hud.windows.values():
+		check(r.position.y > w.position.y + 40, "below %s's title" % w.get_class())
+
+func test_quickslots_and_tracker_fade_over_the_hero() -> void:
+	var hud := ui.hud
+	await ui.edit(func(c: Character) -> void:
+		for q: QuestDef in Content.quests.values().slice(0, 2):
+			c.quests.accept(q))
+	ui.teleport(Vector2(400, ui.world.map.ground_y))
+	ui.world.snap_camera()
+	await ui.frames(5)
+	var hero := hud.screen_rect(ui.world.drawn(ui.world.player), Vector2(TDPlayer.WIDTH, TDPlayer.HEIGHT), TDPlayer.Z)
+	check(hero.size.x > 20 and hero.size.y > 50, "the hero's screen rect is about his size: %s" % hero)
+	check(hud.covers_people(hero) and not hud.covers_people(Rect2()), "a panel over the hero covers him; an empty one nobody")
+	check_eq(hud.quickslots.modulate.a, 1.0, "the quickslots are solid while nobody is behind them")
+	check(hud.tracker.visible and hud.tracker.size.y > 0, "the tracker shows the quests")
+	# the hero walks behind the panels (moved over him here, since where he ends up under
+	# them depends on the window's shape)
+	for piece: Control in [hud.quickslots, hud.tracker]:
+		piece.position = hero.get_center() - piece.size / 2.0
+	await _wait_until(func() -> bool: return hud.quickslots.modulate.a <= TDHud.SEE_THROUGH and hud.tracker.modulate.a <= TDHud.SEE_THROUGH)
+	check_near(hud.quickslots.modulate.a, TDHud.SEE_THROUGH, "the quickslots fade to see-through", 0.05)
+	check_near(hud.tracker.modulate.a, TDHud.SEE_THROUGH, "so does the tracker", 0.05)
+	hud.quickslots.fit_view()
+	hud.tracker.fit_view()
+	await _wait_until(func() -> bool: return hud.quickslots.modulate.a >= 1.0 and hud.tracker.modulate.a >= 1.0)
+	check_eq([hud.quickslots.modulate.a, hud.tracker.modulate.a], [1.0, 1.0], "and come back once he's out from under them")
+	var npc := ui.npc_beside(Content.npcs.values()[0])
+	await ui.frames(2)
+	check(hud.covers_people(hud.screen_rect(npc.position, npc.body_size(), TDStage.Z_NPC)), "an NPC nearby counts too")
+
+## Waits frames until `done` is true, up to two seconds.
+func _wait_until(done: Callable) -> void:
+	var until := Time.get_ticks_msec() + 2000
+	while not done.call() and Time.get_ticks_msec() < until:
+		await ui.frames(1)
+
+func test_the_tracker_lists_at_most_three_quests() -> void:
+	await ui.edit(func(c: Character) -> void:
+		for q: QuestDef in Content.quests.values().slice(0, 6):
+			c.quests.accept(q))
+	await ui.frames(3)
+	var tracker := ui.hud.tracker
+	check_eq(tracker.quests().size(), TDQuestTracker.QUESTS, "three quests on the tracker")
+	check_eq(TDQuestTracker.QUESTS, 3, "three at most")
+	check_eq(Game.me.quests.active.size(), 6, "all six in the quest log")
+	check(await ui.redraw(tracker), "the tracker draws")
+
 func test_overlay_draws_the_faint_screen() -> void:
 	ui.world.player.faint()
 	check(ui.world.player.fainted(), "the player is fainted")
@@ -216,17 +285,17 @@ func test_name_tags_fit_their_names_between_the_end_caps() -> void:
 	var hint := "↑ to Ember Hollow"
 	check(UiSkin.hint_width(hint) >= DrawUtil.text_width(Game.ui_font, hint, 13) + 2.0 * UiSkin.PLAQUE_MARGINS.x * UiSkin.HINT_H / tex_h, "hints fit too")
 
-func test_the_map_sign_is_drawn_sharp_over_the_portal() -> void:
+func test_the_map_sign_is_drawn_sharp_and_high() -> void:
 	var m := ui.world.map
 	var at: Variant = SceneryBuilder.sign_label_at(m)
 	if not check(at != null, "%s has a sign" % m.id):
 		return
-	check_eq((at as Vector2).x, m.sign_x, "the words stand over the post")
+	check_eq((at as Vector2).x, SceneryBuilder.sign_post_x(m), "the words stand over the post")
 	var portal_h := TDStage.art_size(m.biome.portal_frames[0]).y if not m.biome.portal_frames.is_empty() else 0.0
 	check((at as Vector2).y < m.ground_y - portal_h, "and higher than the portal art (%s)" % at)
 	var labels := ui.world.stage.find_children("*", "Label3D", true, false)
 	check(labels.is_empty(), "no text in the 3D stage, where depth of field would blur it")
-	ui.teleport(Vector2(m.sign_x + 60, m.ground_y))
+	ui.teleport(Vector2(SceneryBuilder.sign_post_x(m) + 60, m.ground_y))
 	await ui.ticks(5)
 	check(await ui.redraw(ui.hud.overlay), "the overlay draws the sign")
 
@@ -316,9 +385,55 @@ func test_title_boxes_keep_their_hints_clear_of_the_caret() -> void:
 		check(f.placeholder_text.begins_with(UiSkin.HINT_ROOM), "%s: room between the caret and the hint" % f.placeholder_text.strip_edges())
 		check_eq(f.alignment, HORIZONTAL_ALIGNMENT_LEFT, "%s: left-aligned, so an empty box's caret starts before the hint" % f.placeholder_text.strip_edges())
 
-func test_title_hints_name_the_real_keys() -> void:
-	var text := ui.hud.keys_help.text
-	check(not text.contains("Dawn Slash"), "no skill a new character doesn't have")
-	check(text.contains("A, D, F, G… quickslots"), "the quickslot keys: %s" % text)
+func test_first_hints_name_the_real_keys() -> void:
+	var town: String = ui.hud.hint_texts[TDHud.Hint.TOWN]
+	var field: String = ui.hud.hint_texts[TDHud.Hint.FIELD]
+	check(not field.contains("Dawn Slash"), "no skill a new character doesn't have")
+	check(field.contains("A, D, F, G… quickslots"), "the quickslot keys: %s" % field)
+	check(field.contains("%s attack" % TDStatusBar._key_name("attack")) and field.contains("%s loot" % TDStatusBar._key_name("loot")), "attack and loot: %s" % field)
 	for pair in [["K", "skills"], ["Q", "quests"], ["W", "world map"], ["O", "community"], ["L", "collection"], ["S", "character"], ["I", "inventory"]]:
-		check(text.contains("%s %s" % pair), "names %s %s" % pair)
+		check(town.contains("%s %s" % pair), "names %s %s" % pair)
+	check(town.contains("jump") and town.contains("talks") and town.contains("Esc menu"), "moving, talking and the menu: %s" % town)
+	check(not town.contains("attack") and not town.contains("loot") and not town.contains("quickslots"), "no fighting keys in town: %s" % town)
+
+func test_first_hints_show_the_town_keys_then_the_field_keys() -> void:
+	var hud := ui.hud
+	check(ui.world.map.town, "a new character starts in a town")
+	await ui.frames(3)
+	check(hud.keys_help.visible and hud.keys_help.text == hud.hint_texts[TDHud.Hint.TOWN], "the town hint shows: %s" % hud.keys_help.text)
+	await ui.enter_map(&"meadow", 300)
+	await ui.frames(3)
+	check(hud.keys_help.visible and hud.keys_help.text == hud.hint_texts[TDHud.Hint.FIELD], "the field hint shows on the first field")
+	hud._hint_t[TDHud.Hint.FIELD] = TDHud.FIRST_HINT_TIME
+	await ui.frames(2)
+	check(not hud.keys_help.visible, "each hint goes once its time is up")
+	await ui.enter_map(Character.START_MAP, 300)
+	await ui.frames(2)
+	check(hud.keys_help.visible and hud.keys_help.text == hud.hint_texts[TDHud.Hint.TOWN], "the town hint keeps its own time")
+
+func test_first_hints_hide_and_wait_behind_windows() -> void:
+	var hud := ui.hud
+	await ui.frames(3)
+	check(hud.keys_help.visible, "the hint shows")
+	hud.toggle_window("quests")
+	await ui.frames(1)
+	var t: float = hud._hint_t[TDHud.Hint.TOWN]
+	await ui.frames(10)
+	check(not hud.keys_help.visible, "a window hides it")
+	check_eq(hud._hint_t[TDHud.Hint.TOWN], t, "and its time waits")
+	hud.toggle_window("quests")
+	var elder: NpcDef = Content.npcs.values().filter(func(d: NpcDef) -> bool: return not Content.quests_of(d.id).is_empty())[0]
+	hud.open_dialogue(ui.npc_beside(elder))
+	await ui.frames(2)
+	check(hud.windows["dialogue"].visible and not hud.keys_help.visible, "so does a dialogue")
+	hud.close_top_window()
+	await ui.frames(2)
+	check(hud.keys_help.visible and hud._hint_t[TDHud.Hint.TOWN] > t, "back once it's closed, counting on")
+
+func test_first_hints_are_only_for_new_characters() -> void:
+	ui.world.stop(true)
+	await ui.frames(1)
+	await ui.edit(func(c: Character) -> void: c.level = 5)
+	ui.world.start()
+	await ui.frames(3)
+	check(not ui.hud.keys_help.visible, "a character past level 1 sees no first-time hint")

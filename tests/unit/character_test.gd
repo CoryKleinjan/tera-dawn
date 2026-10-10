@@ -15,11 +15,12 @@ func after_each() -> void:
 
 func test_xp_need_formula() -> void:
 	var c := fx.character()
-	var want := {1: 53, 2: 321, 3: 922, 5: 3480, 10: 21099, 30: 367105}
+	# 55 * lvl^3 up to Lv 10, then 55,000 * (lvl / 10)^1.8
+	var want := {1: 55, 2: 440, 3: 1485, 5: 6875, 10: 55000, 11: 65293, 20: 191521, 30: 397357, 35: 524427}
 	for lvl in want:
 		check_eq(c.xp_need(lvl), want[lvl], "level %d" % lvl)
 	c.level = 5
-	check_eq(c.xp_need(), 3480, "defaults to own level")
+	check_eq(c.xp_need(), 6875, "defaults to own level")
 
 func test_xp_need_always_grows() -> void:
 	var c := fx.character()
@@ -36,23 +37,42 @@ func test_gain_xp_below_need_keeps_level() -> void:
 
 func test_gain_xp_exactly_need_levels_up_with_zero_left() -> void:
 	var c := fx.character()
-	check_eq(c.gain_xp(53), 1, "one level")
+	check_eq(c.gain_xp(55), 1, "one level")
 	check_eq(c.level, 2, "level 2")
 	check_eq(c.xp, 0, "nothing left over")
 
 func test_gain_xp_many_levels_at_once() -> void:
 	var c := fx.character()
-	check_eq(c.gain_xp(53 + 321 + 922 + 10), 3, "three levels")
+	check_eq(c.gain_xp(55 + 440 + 1485 + 10), 3, "three levels")
 	check_eq(c.level, 4, "level 4")
 	check_eq(c.xp, 10, "leftover")
 	check_eq(c.ap, 15, "5 AP a level")
 	check_eq(c.sp, 9, "3 SP a level")
 
+func test_exp_stops_at_the_level_cap() -> void:
+	var c := fx.character()
+	c.level = Character.MAX_LEVEL - 1
+	c.xp = c.xp_need() - 10
+	check_eq(c.gain_xp(c.xp_need() * 3), 1, "one level, to the cap")
+	check_eq(c.level, Character.MAX_LEVEL, "at the cap")
+	check(c.at_max_level(), "at max level")
+	check_eq(c.xp, 0, "the rest is dropped")
+	check_eq(c.gain_xp(1000), 0, "no more levels")
+	check_eq(c.xp, 0, "and no EXP")
+	check_eq(c.level, Character.MAX_LEVEL, "still at the cap")
+
+func test_many_levels_at_once_stop_at_the_cap() -> void:
+	var c := fx.character()
+	c.level = Character.MAX_LEVEL - 3
+	check_eq(c.gain_xp(1 << 40), 3, "three levels and no further")
+	check_eq(c.level, Character.MAX_LEVEL, "capped")
+	check_eq(c.ap, 15, "AP for the three levels only")
+
 func test_level_up_raises_max_and_refills() -> void:
 	var c := fx.character()
 	c.health.damage(30)
 	c.spend_mp(10)
-	c.gain_xp(53)
+	c.gain_xp(55)
 	check_eq(c.max_hp(), 70, "50 + 2 × 10")
 	check_eq(c.health.max_hp, 70, "health max follows")
 	check_eq(c.health.hp, 70, "refilled")
@@ -605,7 +625,8 @@ func test_advance_changes_job_gives_gifts_and_refills() -> void:
 	check_eq(c.job.id, &"t_next", "new job")
 	check_eq(c.max_hp(), 50 + 10 * 20, "new job's HP growth")
 	check_eq(c.health.hp, c.max_hp(), "refilled")
-	check_eq(c.inventory.at(ItemDef.Tab.EQUIP, 0).stats.attack, 17, "gift gear unrolled")
+	check_eq(c.weapon(), sword, "the gift weapon is worn")
+	check_eq(c.equipment.at(&"weapon").stats.attack, 17, "gift gear unrolled")
 	check_eq(c.inventory.count_of(potion), 20, "potions")
 	check_eq(Array(c.job_line()), [&"t_next", &"t_job"], "line")
 
@@ -626,6 +647,43 @@ func test_advance_needs_room_for_gifts() -> void:
 	c.inventory.add(fx.equip(&"t_junk"), Inventory.SLOTS)
 	check_ne(c.advance(next), "", "no room")
 	check_eq(c.job.id, &"t_job", "not advanced")
+
+func test_advance_swaps_a_beginner_weapon_for_the_gift() -> void:
+	var setup := _advance_setup()
+	var c: Character = setup[0]
+	var next: JobDef = setup[1]
+	var stick := fx.equip(&"t_stick")
+	var gift := fx.equip(&"t_gift_blade")
+	gift.jobs = [&"t_warrior"]
+	c.equipment.put(&"weapon", ItemStack.exact(stick))
+	next.advance_gifts = [UnitHelpers.drop(fx.use(&"t_potion"), 5), UnitHelpers.drop(gift)]
+	check_eq(c.advance(next), "", "advanced")
+	check_eq(c.weapon(), gift, "the first weapon gift is worn, even after other gifts")
+	check_eq(c.inventory.count_of(stick), 1, "the old weapon is in the bag")
+
+func test_advance_keeps_a_weapon_of_the_new_line_on() -> void:
+	var setup := _advance_setup()
+	var c: Character = setup[0]
+	var next: JobDef = setup[1]
+	var found := fx.equip(&"t_found_blade")
+	found.jobs = [&"t_warrior"]
+	var gift := fx.equip(&"t_gift_blade")
+	c.equipment.put(&"weapon", ItemStack.exact(found))
+	next.advance_gifts = [UnitHelpers.drop(gift)]
+	check_eq(c.advance(next), "", "advanced")
+	check_eq(c.weapon(), found, "a weapon made for the job stays on")
+	check_eq(c.inventory.count_of(gift), 1, "the gift goes to the bag")
+
+func test_advance_leaves_a_gift_weapon_it_cant_wear_in_the_bag() -> void:
+	var setup := _advance_setup()
+	var c: Character = setup[0]
+	var next: JobDef = setup[1]
+	var heavy := fx.equip(&"t_heavy")
+	heavy.required_level = 50
+	next.advance_gifts = [UnitHelpers.drop(heavy)]
+	check_eq(c.advance(next), "", "advanced")
+	check_eq(c.weapon(), null, "too heavy to wear")
+	check_eq(c.inventory.count_of(heavy), 1, "in the bag")
 
 func test_requirement_lines() -> void:
 	var setup := _advance_setup()

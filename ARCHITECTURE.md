@@ -265,7 +265,7 @@ camera). The layers are constants at the top of `scripts/world/stage.gd`, back t
 | Layer | Depth | What |
 | --- | --- | --- |
 | Backdrop | far behind | Sky, mountains, distant trees (`BackdropLayerDef.depth`) |
-| Land | up to `LAND_FRONT` | The floor block, platforms (flat painted front skins), buildings, decoration, props, lanterns, signs, portals |
+| Land | `-SCENERY_LAYER` to `LAND_FRONT` | The floor and platforms (flat painted front skins), and just behind them buildings, decoration, props, lanterns, signs, portals |
 | `Z_CLIMBABLE` | 0.2 | Ropes, vines and ladders |
 | `Z_NPC` | 0.3 | NPCs |
 | `Z_MONSTER` | 0.38 to 0.52 | Monsters, each at a slightly different depth so overlapping ones don't flicker |
@@ -275,14 +275,20 @@ camera). The layers are constants at the top of `scripts/world/stage.gd`, back t
 | `Z_EFFECT` | 0.8 | Skill and hit effects |
 
 Everything you can touch stands in front of all the land, so a platform, bush or prop never
-hides a character, NPC, rope or ladder. Decoration and prop depths in data are clamped with
-`TDStage.land_depth()`, so a `DecorDef` or `PropPlacement` can't be set in front of the
-actors by mistake. Something new that the player interacts with should use one of the `Z_`
+hides a character, NPC, rope or ladder. Decoration and prop depths in data (0 down to
+`-SCENERY_DEEP`) go through `TDStage.land_depth()`, which squeezes them into the thin
+`SCENERY_LAYER` behind the land's front in the same order, so a `DecorDef` or `PropPlacement`
+can't be set in front of the actors by mistake. Something new that the player interacts with should use one of the `Z_`
 layers (or add one here) rather than a raw number.
 
-Only the floor is a 3D block (its top runs back into the scene). Floating platforms have no
-depth: each is just its painted front skin at `LAND_FRONT`, so grass, decoration and portals
-on a platform stand just behind the skin. The skin is one picture per platform width
+Land is flat, like a 2D game: no ground runs back into the scene. Each floating platform is
+just its painted front skin at `LAND_FRONT`, and the floor is the same kind of picture: the
+biome's platform middles repeated along its walking line (`TerrainBuilder.floor_edge`), with
+its rock and soil textures filling below. Things standing on land go through
+`TDStage.stand_on_land()`: at their `land_depth`, scaled to show as big as at their data depth,
+and sunk (`land_sink`) so their base tucks behind the grass edge at any camera height. The
+backdrop strip whose bottom shows lowest gets a skirt fading on down behind the floor
+(`BackdropBuilder._skirt`), since no ground top covers that edge any more. The skin is one picture per platform width
 (`PlatformSkin`): the biome's left cap, middles and right cap, overlapped and joined where they
 match best, so a long platform never reads as small ones pasted together.
 
@@ -292,8 +298,8 @@ lanterns, portals, backdrop layers and room interiors) is cut at two texels per 
 screen shows one pixel size. Backdrop layers are cut to the size they show at, so depth
 doesn't change it; a building's art is cut to its `height`. Data sizes it only within a narrow band (a
 manifest's `grow`, a decor or prop `scale`); `tools/art/land_pixels.py --check` and the tests
-keep it there. The floor's front-edge grass is nearer than the
-actors but sunk so its tips stop at the feet line (`TerrainBuilder.FRINGE_RISE`).
+keep it there. Edge grass on the floor and platforms stands just behind the skin and peeks
+over its top edge.
 
 Text that belongs to a spot in the world (name tags, the map's sign, hints, damage numbers)
 is never put in the 3D stage: `TDOverlay` projects the spot to the screen and draws it there,
@@ -338,7 +344,10 @@ so depth of field never blurs it and nothing in the world covers it.
    A platform more than about 90 px above the one below needs a rope or ladder. A map can
    be taller than 700 (more floors, more exits); keep `ground_y` 80 above `height`.
 4. Connect it: add a **PortalDef** on an existing map whose `target_map` is the new id, and a
-   portal back.
+   portal back. Players arriving (a portal's or travel route's `target_x`) and NPCs stay at
+   least the quickslot panel's width plus a hero from the map's right edge, so the panel never
+   covers them (`tests/content/content_world_test.gd`). The welcome signpost (`sign_text`)
+   stands `SceneryBuilder.SIGN_FROM_PORTAL` inward from the floor portal nearest `sign_x`.
 5. Place it in the world: its `region` (a **RegionDef** in `data/regions/`), `world_pos` on
    the world map (pixels of the painting, `TDWorldMapWindow.WORLD`), `level_text`, and either `town = true` or the
    `return_map` where fainting and Return Scrolls send you.
@@ -349,7 +358,12 @@ The same NpcDef can stand in several maps (Brin is in every town).
 
 Travel NPCs (ships, wagons) list **TravelRoute**s in `NpcDef.travel` (destination, arrival x,
 fare, "Ship"/"Wagon"); their dialogue offers "Travel" and `TDServer.on_travel` moves the
-player. A **UseDef** with `teleport` set to a map id, or to `town`, is a return scroll.
+player. A route with `free_for_beginners` costs nothing for a Beginner who has reached
+the first job level (`JobDef.first_advance_level`); Rook's coaches from Dawnharbor to the
+job towns are free this way. `TravelRoute.fare_for(character)` is the one place that
+decides the fare, for the server and for the dialogue. Each trip's label also shows the
+destination's `MapDef.level_text` unless it's a town ("Wagon to Ember Hollow (Lv. 6-12,
+150 Dawnshards)", `TDDialogueWindow.travel_label`). A **UseDef** with `teleport` set to a map id, or to `town`, is a return scroll.
 
 The smoke test checks that every portal points at a real map and every spawn at a real
 platform, so a typo fails the test instead of the game.
@@ -458,6 +472,10 @@ a **StatBlock** on top. `Character.stats` is the total. From it, `CharacterStats
 
 `Combat` uses those numbers, so all balance lives in `character_stats.gd` and `combat.gd`.
 
+Levels: `Character.xp_need` is the EXP curve (one formula, steeper from Lv 10, tuned with the
+pace bot for about 2 hours to Lv 10 and 40 to the cap, quests included). `Character.MAX_LEVEL`
+(35) is the cap: EXP stops there and the status bar and stats window say "Max level".
+
 There are four inventory tabs, and the class of the item decides which one it goes in:
 
 | Class | Tab | What |
@@ -519,7 +537,9 @@ and a `tint` the hero is drawn in until the job has its own art.
 
 Everyone starts as `Character.START_JOB` (the Beginner, which lists starting stats, gear and
 items). A job that others reach sets `advances_from`, `advance_level`, `advance_requirements`
-(base STR/DEX/INT/LUK) and `advance_gifts`. To let an NPC hand it out, add its id to that
+(base STR/DEX/INT/LUK) and `advance_gifts`: the job's basic shop weapon (the first weapon
+listed is worn at once in place of a Beginner's weapon; one of the job's own line stays on),
+its ammo and potions. Better weapons only drop. To let an NPC hand it out, add its id to that
 NPC's `instructs`: their dialogue then offers "Choose a job", and the server
 (`TDServer.on_advance` → `Character.advance`) checks the requirements again before changing it.
 A Beginner short of a job's stats may also ask its instructor for one free Ability Point reset
