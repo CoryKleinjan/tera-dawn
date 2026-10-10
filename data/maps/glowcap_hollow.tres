@@ -281,7 +281,7 @@ width = 140.0
 
 [sub_resource type="Resource" id="Rope_9_0"]
 script = ExtResource("4_climbable_def")
-x = 650.0
+x = 648.0
 top = 370.0
 bottom = 550.0
 style = ExtResource("6_rope")

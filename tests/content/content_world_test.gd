@@ -166,6 +166,30 @@ func test_climbables_lie_inside_the_map_and_reach_a_platform() -> void:
 				lands = lands or (pl.contains_x(c.x) and absf(pl.y - c.top) <= 40)
 			check(lands, "%s: climbables[%d] at x %s tops out at %s with no platform there" % [w, i, c.x, c.top])
 
+## A rope or ladder hangs from the platform its top is on and stands on the floor its bottom
+## reaches, with its end pieces clear of those platforms' ends (else it hangs off a ledge).
+## Each side is measured from the line to the end piece's solid pixels on that side, with the
+## top piece mirrored as the game draws it.
+func test_climbables_fit_on_their_platforms() -> void:
+	for m: MapDef in Content.maps.values():
+		var w := Scan.where(m)
+		var layout := MapLayout.new(m)
+		for i in m.climbables.size():
+			var c := m.climbables[i]
+			if c == null or c.style == null:
+				continue
+			var st := c.style
+			for end in [[c.top, st.top if st.top else st.middle], [c.bottom, st.bottom if st.bottom else st.middle]]:
+				if not check(layout.platforms.any(func(pl: Platform) -> bool: return pl.contains_x(c.x) and absf(pl.y - end[0]) < 1.0),
+						"%s: climbables[%d] at x %s has no platform at y %s" % [w, i, c.x, end[0]]):
+					continue
+				var room := ClimbStyleDef.ledge_room(c.x, end[0], layout.platforms)
+				var reach := ClimbStyleDef.solid_reach(end[1], st.texel)
+				if end[1] == st.top and st.top_flipped(room):
+					reach = Vector2(reach.y, reach.x)
+				check(room.x >= reach.x and room.y >= reach.y,
+						"%s: climbables[%d] at x %s hangs over the end of the platform at y %s (its art reaches %s px left, %s px right)" % [w, i, c.x, end[0], snappedf(reach.x, 0.1), snappedf(reach.y, 0.1)])
+
 func test_npcs_and_starts_are_inside_the_map() -> void:
 	for m: MapDef in Content.maps.values():
 		for i in m.npcs.size():
