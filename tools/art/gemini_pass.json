@@ -697,7 +697,7 @@
    },
    "edit": {
     "base": "art/source/paperdoll_body.png",
-    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in a SMOCK: a loose, puffy smock with wide three-quarter sleeves, gathered at the neck with a drawstring, patched at one elbow. It follows his body in every pose. Draw the smock in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline; the body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. Draw ONLY the smock: nothing else changes."
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in a SMOCK: a loose, puffy smock with wide three-quarter sleeves, gathered at the neck with a drawstring, patched at one elbow. It follows his body in every pose. Draw the smock in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline; the body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. The smock is fitted to HIS body size: no bigger than his torso and arms, never a giant shirt behind him. Draw ONLY the smock: nothing else changes."
    }
   },
   {
