@@ -416,7 +416,7 @@ class Pass:
             status = e.get("check", {}).get("status", "?")
             draw.rectangle([x + 2, y + 2, x + thumb - 3, y + th - 3], outline=colour.get(status, (150, 150, 150)), width=2)
             draw.text((x + 6, y + th - 18), "%s (%s)" % (sid, status), fill=(240, 240, 240))
-        sheet.save(os.path.join(OUT, "contact_sheet.png"))
+        sheet.save(os.path.join(OUT, "contact_sheet.jpg"), quality=88)  # a PNG of ~180 sheets is too big to preview
 
 
 def main():
@@ -426,7 +426,7 @@ def main():
     ap.add_argument("--only", help="comma-separated ids to make")
     ap.add_argument("--redo", action="append", default=[], help="forget this id's result so it is made again")
     ap.add_argument("--budget", type=float, help="dollar cap for the whole pass (default: the list's)")
-    ap.add_argument("--report", action="store_true", help="only rebuild report.md and contact_sheet.png")
+    ap.add_argument("--report", action="store_true", help="only rebuild report.md and contact_sheet.jpg")
     ap.add_argument("--recheck", action="store_true", help="check every result again, then rebuild the report")
     ap.add_argument("--batch", action="store_true", help="use Gemini's batch mode (half price, slower)")
     ap.add_argument("--wait", action="store_true", help="with --batch: keep going until every wave is in")
