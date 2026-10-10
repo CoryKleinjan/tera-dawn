@@ -103,6 +103,47 @@ class Keying(unittest.TestCase):
         self.assertEqual(alpha[7, 7], 1.0)
         self.assertEqual(alpha[10, 10], 1.0)
 
+    def _outlined(self, fill):
+        """A magenta cell with a filled square in a dark outline, and a ring of the outline
+        blended a third into the magenta around it (how Gemini draws edges)."""
+        cell = np.zeros((24, 24, 3), float)
+        cell[:] = helpers.MAGENTA
+        outline = np.array((40.0, 30.0, 25.0))
+        cell[5:19, 5:19] = 0.65 * outline + 0.35 * np.array(helpers.MAGENTA)  # dark plum rim
+        cell[6:18, 6:18] = outline
+        cell[8:16, 8:16] = fill
+        return cell
+
+    def test_defringe_takes_the_magenta_out_of_a_dark_rim(self):
+        bg = np.array(helpers.MAGENTA)
+        rgb, alpha = ss.key_magenta(self._outlined((200, 160, 90)), bg)
+        self.assertGreater(alpha[5, 12], 0.5, msg="the key alone keeps the dark magenta rim")
+        rgb, alpha = ss.defringe(rgb, alpha, bg)
+        rim = rgb[5, 12]
+        self.assertLess(min(rim[0], rim[2]) - rim[1], 0.04, msg="the rim no longer leans magenta")
+        self.assertAlmostEqual(alpha[5, 12], 0.65, delta=0.1, msg="it keeps the art's share as alpha")
+        self.assertAlmostEqual(alpha[12, 12], 1.0)
+
+    def test_defringe_keeps_purple_art(self):
+        bg = np.array(helpers.MAGENTA)
+        cell = np.zeros((24, 24, 3), float)
+        cell[:] = helpers.MAGENTA
+        cell[6:18, 6:18] = (150, 60, 170)  # a purple sprite up to the cut edge
+        rgb, alpha = ss.key_magenta(cell, bg)
+        out, out_alpha = ss.defringe(rgb, alpha, bg)
+        self.assertTrue(np.allclose(out[6:18, 6:18], rgb[6:18, 6:18]))
+        self.assertTrue(np.allclose(out_alpha, alpha))
+
+    def test_defringe_drops_magenta_slivers_with_no_art_near(self):
+        bg = np.array(helpers.MAGENTA)
+        cell = np.zeros((24, 24, 3), float)
+        cell[:] = helpers.MAGENTA
+        cell[0] = (120, 30, 100)  # a divider line a crop caught
+        rgb, alpha = ss.key_magenta(cell, bg)
+        self.assertGreater(alpha[0, 12], 0.5)
+        _, alpha = ss.defringe(rgb, alpha, bg)
+        self.assertEqual(alpha[0, 12], 0.0)
+
 
 class Colour(unittest.TestCase):
     def test_hsv_round_trip(self):

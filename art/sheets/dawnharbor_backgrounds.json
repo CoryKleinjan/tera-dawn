@@ -99,7 +99,8 @@
     },
     "motes": {
       "alpha": "soft",
-      "scale": 0.4924
+      "scale": 0.4924,
+      "recolor": "despill"
     }
   }
 }
