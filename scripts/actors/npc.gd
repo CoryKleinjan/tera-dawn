@@ -18,7 +18,7 @@ static func create(w: TDWorld, placement: NpcPlacement, p: Platform) -> TDNpc:
 
 func _ready() -> void:
 	rig = SpriteRig.new()
-	rig.setup(def.sprite_frames, def.texture, TDStage.TEXEL * def.sprite_scale, 40.0)
+	rig.setup(def.sprite_frames, def.texture, TDStage.TEXEL * def.sprite_scale)
 	rig.set_tint(def.tint)
 	add_child(rig)
 
@@ -58,7 +58,7 @@ func step() -> void:
 func _process(_delta: float) -> void:
 	if rig == null:
 		return
-	rig.place(position, TDStage.Z_NPC, position.y)
+	rig.place(position, TDStage.Z_NPC)
 	rig.face(face)
 
 ## Name tag (and title) under the NPC, put in `tags`, which keeps tags apart; the quest
