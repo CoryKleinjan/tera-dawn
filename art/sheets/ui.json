@@ -7,7 +7,7 @@
   "out_dir": "assets/sprites/ui",
   "cells": [
     [
-      "hud_bar",
+      "",
       "hp_frame",
       "mp_frame",
       "exp_frame"
@@ -50,18 +50,6 @@
       ],
       "scale": 0.4252,
       "split_by": "y"
-    },
-    "hud_bar": {
-      "blank": [
-        [
-          0,
-          0,
-          128,
-          29
-        ]
-      ],
-      "scale": 1.0,
-      "seamless_middle": 36
     },
     "hp_frame": {
       "blank": [
