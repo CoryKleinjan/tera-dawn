@@ -3,6 +3,10 @@ extends Node2D
 ## A townsperson standing on a platform. Walk up and press Up to open their dialogue
 ## window (see TDDialogueWindow).
 
+## Everyone's NPC art is drawn this much smaller than other art (TDStage.TEXEL), so the
+## townsfolk stand a little taller than the hero (TDPlayer.HERO_SCALE), as in MapleStory.
+const SCALE := 0.78
+
 var world: TDWorld
 var def: NpcDef
 var face := 1
@@ -18,10 +22,14 @@ static func create(w: TDWorld, placement: NpcPlacement, p: Platform) -> TDNpc:
 
 func _ready() -> void:
 	rig = SpriteRig.new()
-	rig.setup(def.sprite_frames, def.texture, TDStage.TEXEL * def.sprite_scale)
+	rig.setup(def.sprite_frames, def.texture, texel(def))
 	rig.set_tint(def.tint)
 	add_child(rig)
 	rig.hold_still()
+
+## Game pixels per art pixel for `npc`'s art.
+static func texel(npc: NpcDef) -> float:
+	return TDStage.TEXEL * SCALE * npc.sprite_scale
 
 ## How big they're drawn, in game pixels (feet to the top of their art).
 func body_size() -> Vector2:

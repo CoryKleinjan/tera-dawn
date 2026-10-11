@@ -11,6 +11,6 @@ id = &"rope_ladder"
 middle = ExtResource("2_rope_ladder_middle")
 top = ExtResource("9_rope_ladder_top")
 bottom = ExtResource("3_rope_ladder_bottom")
-texel = 1.25
+texel = 1.0
 top_rise = 0.6
 climb_animation = &"ladder"

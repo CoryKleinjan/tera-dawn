@@ -11,6 +11,6 @@ id = &"vine"
 middle = ExtResource("2_vine_middle")
 top = ExtResource("9_vine_top")
 bottom = ExtResource("3_vine_bottom")
-texel = 1.25
+texel = 1.0
 top_rise = 0.55
 climb_animation = &"rope"

@@ -239,7 +239,7 @@ func _shoot(p: SimPlayer) -> void:
 	dir = -1 if p.position.x < position.x else 1
 	shot_t = def.shot_cooldown + randi_range(0, SHOT_JITTER)
 	cast_t = CAST_TICKS
-	var aim := p.position + Vector2(0, -30)
+	var aim := p.position + Vector2(0, -SimPlayer.CHEST)
 	var ticks := ceili(muzzle().distance_to(aim) / maxf(1.0, def.shot.speed))
 	shots.append([p.peer, ticks, aim])
 	map.broadcast(&"ev_mob_shot", [index, aim.x, aim.y])
