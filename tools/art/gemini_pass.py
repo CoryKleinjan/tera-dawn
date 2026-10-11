@@ -294,6 +294,14 @@ class Pass:
         k = sheet["edit"].get("base_scale", 1.0)
         if k != 1.0:
             im = im.resize((round(im.width * k), round(im.height * k)), Image.NEAREST)
+        # "base_margin": add this share of the base's size as background on every side, so a
+        # redraw has room to finish a subject that runs off the edge (roof ends, chimney tops)
+        m = sheet["edit"].get("base_margin", 0.0)
+        if m:
+            mx, my = round(im.width * m), round(im.height * m)
+            framed = Image.new("RGB", (im.width + 2 * mx, im.height + 2 * my), background)
+            framed.paste(im, (mx, my))
+            im = framed
         w, h = im.size
         aspect = gemini_sheet.closest_aspect_of(w, h)
         a, b = map(int, aspect.split(":"))

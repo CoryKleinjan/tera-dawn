@@ -19,7 +19,7 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
    Effects the game fires on its own rather than through a skill or item (celebrate, monster
    poof, level up, critical) are named as constants on `EffectDef`; code uses those, never
    the id as a string.
-3. Give it an icon (until there's art, add it to `tools/art/make_skill_placeholders.py`).
+3. Give it an icon: a painted cell on a skill icon sheet (a Gemini edit in `tools/art/gemini_pass.json`).
 
 It then appears in its job's tab of the skill window (K). Players spend Skill Points on it
 (`SkillBook.learn`, checked by `ServerJobs.on_learn_skill`), and a newly learned attack or
@@ -35,7 +35,7 @@ Ranged and magic skills:
   hit (`TDProjectile`) and pop the damage number when it lands, holding the monster's death
   until then.
 - `uses_ammo` spends one of the weapon's ammo per hit. A weapon (`EquipDef`) names its
-  `weapon_kind` (bow, claw, gun, wand, sword, knuckle), the `ammo` kind it fires, and an
+  `weapon_kind` (sword, bow, wand, staff, claw, knuckle, gun), the `ammo` kind it fires, and an
   optional `basic_attack` skill that replaces the plain swing (a bow's Shoot). Ammo is an
   **AmmoDef** (Use tab) whose `attack` adds to Weapon Attack while fired.
 - `weapons` limits a skill to weapon kinds; `magic` uses Magic Attack (INT included) through

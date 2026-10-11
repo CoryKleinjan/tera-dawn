@@ -700,25 +700,6 @@
    }
   },
   {
-   "id": "hero_extras",
-   "prompts": "tera-dawn-chatgpt-art-prompts.md",
-   "batch": "1",
-   "with": null,
-   "refs": [],
-   "save": "hero_extras.png",
-   "replaces": "art/source/hero_extras.png",
-   "kind": "anim",
-   "cells": [
-    4,
-    4
-   ],
-   "anchor": "hero_main",
-   "note": "hero_extras_v2.png is a second take of the same Batch 1 (rope-climb frames); one regen covers both.",
-   "also_replaces": [
-    "art/source/hero_extras_v2.png"
-   ]
-  },
-  {
    "id": "anim_sproutcap",
    "prompts": "tera-dawn-chatgpt-art-prompts.md",
    "batch": "3",
@@ -751,25 +732,6 @@
    "note": ""
   },
   {
-   "id": "ropes_props",
-   "prompts": "tera-dawn-chatgpt-art-prompts.md",
-   "batch": "5",
-   "with": null,
-   "refs": [],
-   "save": "ropes_props_b.png",
-   "replaces": "art/source/ropes_props_b.png",
-   "kind": "still",
-   "cells": [
-    4,
-    5
-   ],
-   "anchor": "meadow_tileset",
-   "note": "ropes_props_a.png is an earlier take of Batch 5 (cut to art/build only); one regen covers both.",
-   "also_replaces": [
-    "art/source/ropes_props_a.png"
-   ]
-  },
-  {
    "id": "ember_tileset",
    "prompts": "tera-dawn-chatgpt-art-prompts.md",
    "batch": "6",
@@ -799,41 +761,6 @@
     3
    ],
    "anchor": "meadow_tileset",
-   "note": ""
-  },
-  {
-   "id": "meadow_backgrounds",
-   "prompts": "tera-dawn-chatgpt-art-prompts.md",
-   "batch": "8",
-   "with": null,
-   "refs": [],
-   "save": "meadow_backgrounds_a.png",
-   "replaces": "art/source/meadow_backgrounds_a.png",
-   "kind": "still",
-   "cells": [
-    6,
-    1
-   ],
-   "anchor": "meadow_tileset",
-   "note": "meadow_backgrounds_b.png is a second take of Batch 8 (art/build only); one regen covers both.",
-   "also_replaces": [
-    "art/source/meadow_backgrounds_b.png"
-   ]
-  },
-  {
-   "id": "ember_backgrounds",
-   "prompts": "tera-dawn-chatgpt-art-prompts.md",
-   "batch": "9",
-   "with": null,
-   "refs": [],
-   "save": "ember_backgrounds.png",
-   "replaces": "art/source/ember_backgrounds.png",
-   "kind": "still",
-   "cells": [
-    6,
-    1
-   ],
-   "anchor": "ember_tileset",
    "note": ""
   },
   {
@@ -1896,23 +1823,6 @@
    "fill": {
     "name": "flame_boar_chief"
    }
-  },
-  {
-   "id": "sproutcap_extra",
-   "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
-   "batch": "M2",
-   "with": null,
-   "refs": [],
-   "save": "sproutcap_extra.png",
-   "replaces": "art/source/sproutcap_extra.png",
-   "kind": "anim",
-   "cells": [
-    1,
-    3
-   ],
-   "anchor": "anim_sproutcap",
-   "note": "Attaches assets/sprites/monsters/sproutcap.png (the cut sprite). No manifest; frames are wired via sproutcap.json sets.",
-   "extra": "- Nothing is drawn behind the creature: no coloured tile, panel, card, frame, sky or wall. The creature sits directly on the flat magenta."
   },
   {
    "id": "mon_tide_dewling",
@@ -4227,22 +4137,6 @@
    "note": "New. Batch attaches the OLD area sheet; runner should add the dawnharbor_tileset result."
   },
   {
-   "id": "climb_tops",
-   "prompts": "tera-dawn-chatgpt-art-prompts-7.md",
-   "batch": "R1",
-   "with": null,
-   "refs": [],
-   "save": "climb_tops.png",
-   "replaces": null,
-   "kind": "still",
-   "cells": [
-    2,
-    4
-   ],
-   "anchor": "ropes_props",
-   "note": "New. Attaches art/source/ropes_props_b.png."
-  },
-  {
    "id": "dawnharbor_midground",
    "prompts": "tera-dawn-chatgpt-art-prompts-7.md",
    "batch": "H1",
@@ -4777,579 +4671,6 @@
     "base": "assets/sprites/buildings/lumewood/small.png",
     "base_scale": 5.28,
     "text": "This is one building from my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same building with the same outline shape, size, proportions, colours, roof, windows, signs and door in the same places, the same crisp dark plum-brown outline and the same light from the upper left. Use the smaller pixels for real detail the big blocks could not show: wood grain, roof tiles or shingles, stone courses, window frames and panes, hinges, trims. It stays one single building, filling the image the same way. Nothing else in the picture: no ground, grass, shadow, people or sky; the background is flat pure magenta #FF00FF."
-   }
-  },
-  {
-   "id": "ropes_props_fine",
-   "prompts": null,
-   "batch": "ropes and props (edit, finer pixels)",
-   "with": null,
-   "refs": [],
-   "save": "ropes_props_fine.png",
-   "replaces": null,
-   "kind": "still",
-   "cells": [
-    4,
-    5
-   ],
-   "anchor": null,
-   "size": "4K",
-   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
-   "edit": {
-    "base": "art/source/ropes_props_b.png",
-    "base_scale": 2.5,
-    "text": "This is my sheet of ropes, ladders, vines, portal frames, a portal stone base, lantern posts and dawnshard crystals, enlarged so its pixels are big blocks. Redraw EVERY piece as detailed pixel art with pixels about two and a half times smaller, keeping each piece's shape, size, position, colours and label exactly. Use the smaller pixels for real detail: rope twists, wood grain, iron fittings, the lantern's glass and flame, the swirl and sparkles in the portal, crystal facets."
-   }
-  },
-  {
-   "id": "climb_tops_fine",
-   "prompts": null,
-   "batch": "climb tops (edit, no land, finer pixels)",
-   "with": null,
-   "refs": [],
-   "save": "climb_tops_fine.png",
-   "replaces": "art/source/climb_tops.png",
-   "kind": "still",
-   "cells": [
-    2,
-    4
-   ],
-   "anchor": null,
-   "size": "4K",
-   "note": "2026-10-10 rope and ladder alignment thread: the anchors at the top of ropes, vines and rope ladders (cells 1, 3, 5 used). The game draws them over its own ledge, so the land is taken out; finer pixels to match ropes_props_fine.",
-   "edit": {
-    "base": "art/source/climb_tops.png",
-    "base_scale": 2.0,
-    "refs": [
-     "art/source/ropes_props_fine.png"
-    ],
-    "text": "This is my sheet of 8 anchors at the top of ropes, vines and ladders, enlarged so its pixels are big blocks. Make two changes in EVERY cell. 1) Take out all the land: the grassy ledge, soil, rock, tree trunk and roots, stone block and wooden beam are gone, replaced by the flat magenta background. Keep only the anchor itself (peg, branch stub, vine coil, hooks, pegs, ring, chain plate) and what hangs from it; where a peg or post went into the ground, end it in a flat cut. 2) Redraw what is left as detailed pixel art with pixels about two times smaller, in exactly the style, pixel size, outline and colours of the second attached image (my ropes and ladders sheet). The rope, vine or ladder hanging from each anchor runs straight down, centred in its cell, off the bottom edge of the cell, and is exactly as wide as the matching rope, vine or rope ladder in the second image. Keep each cell's label."
-   }
-  },
-  {
-   "id": "meadow_backgrounds_fine",
-   "prompts": null,
-   "batch": "meadow backgrounds (edit, finer pixels)",
-   "with": null,
-   "refs": [],
-   "save": "meadow_backgrounds_a_fine.png",
-   "replaces": null,
-   "kind": "still",
-   "cells": [
-    6,
-    1
-   ],
-   "anchor": null,
-   "size": "4K",
-   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
-   "edit": {
-    "base": "art/source/meadow_backgrounds_a.png",
-    "base_scale": 2.67,
-    "text": "This is my sheet of parallax background layers for one area of the game, enlarged so its pixels are big blocks. Redraw EVERY layer and piece as detailed pixel art with pixels about two and a half times smaller, keeping each one's shape, size, position, colours, light and label exactly, and keeping every strip's left and right edges matching so it still tiles sideways. Use the smaller pixels for real detail: individual trees and leaves, rock faces, rooftops and windows, wave crests, cloud puffs."
-   }
-  },
-  {
-   "id": "ember_backgrounds_fine",
-   "prompts": null,
-   "batch": "ember backgrounds (edit, finer pixels)",
-   "with": null,
-   "refs": [],
-   "save": "ember_backgrounds_fine.png",
-   "replaces": null,
-   "kind": "still",
-   "cells": [
-    6,
-    1
-   ],
-   "anchor": null,
-   "size": "4K",
-   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
-   "edit": {
-    "base": "art/source/ember_backgrounds.png",
-    "base_scale": 2.67,
-    "text": "This is my sheet of parallax background layers for one area of the game, enlarged so its pixels are big blocks. Redraw EVERY layer and piece as detailed pixel art with pixels about two and a half times smaller, keeping each one's shape, size, position, colours, light and label exactly, and keeping every strip's left and right edges matching so it still tiles sideways. Use the smaller pixels for real detail: individual trees and leaves, rock faces, rooftops and windows, wave crests, cloud puffs."
-   }
-  },
-  {
-   "id": "dawnharbor_backgrounds_fine",
-   "prompts": null,
-   "batch": "dawnharbor backgrounds (edit, finer pixels)",
-   "with": null,
-   "refs": [],
-   "save": "dawnharbor_backgrounds_fine.png",
-   "replaces": null,
-   "kind": "still",
-   "cells": [
-    13,
-    1
-   ],
-   "anchor": null,
-   "size": "4K",
-   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
-   "edit": {
-    "base": "art/source/dawnharbor_backgrounds.png",
-    "base_scale": 1.5,
-    "text": "This is my sheet of parallax background layers for one area of the game, enlarged so its pixels are big blocks. Redraw EVERY layer and piece as detailed pixel art with pixels about one and a half times smaller, keeping each one's shape, size, position, colours, light and label exactly, and keeping every strip's left and right edges matching so it still tiles sideways. Use the smaller pixels for real detail: individual trees and leaves, rock faces, rooftops and windows, wave crests, cloud puffs."
-   }
-  },
-  {
-   "id": "driftcove_backgrounds_fine",
-   "prompts": null,
-   "batch": "driftcove backgrounds (edit, finer pixels)",
-   "with": null,
-   "refs": [],
-   "save": "driftcove_backgrounds_fine.png",
-   "replaces": null,
-   "kind": "still",
-   "cells": [
-    7,
-    1
-   ],
-   "anchor": null,
-   "size": "4K",
-   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
-   "edit": {
-    "base": "art/source/driftcove_backgrounds.png",
-    "base_scale": 2.67,
-    "text": "This is my sheet of parallax background layers for one area of the game, enlarged so its pixels are big blocks. Redraw EVERY layer and piece as detailed pixel art with pixels about two and a half times smaller, keeping each one's shape, size, position, colours, light and label exactly, and keeping every strip's left and right edges matching so it still tiles sideways. Use the smaller pixels for real detail: individual trees and leaves, rock faces, rooftops and windows, wave crests, cloud puffs."
-   }
-  },
-  {
-   "id": "greenbough_backgrounds_fine",
-   "prompts": null,
-   "batch": "greenbough backgrounds (edit, finer pixels)",
-   "with": null,
-   "refs": [],
-   "save": "greenbough_backgrounds_fine.png",
-   "replaces": null,
-   "kind": "still",
-   "cells": [
-    7,
-    1
-   ],
-   "anchor": null,
-   "size": "4K",
-   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
-   "edit": {
-    "base": "art/source/greenbough_backgrounds.png",
-    "base_scale": 2.67,
-    "text": "This is my sheet of parallax background layers for one area of the game, enlarged so its pixels are big blocks. Redraw EVERY layer and piece as detailed pixel art with pixels about two and a half times smaller, keeping each one's shape, size, position, colours, light and label exactly, and keeping every strip's left and right edges matching so it still tiles sideways. Use the smaller pixels for real detail: individual trees and leaves, rock faces, rooftops and windows, wave crests, cloud puffs."
-   }
-  },
-  {
-   "id": "lumewood_backgrounds_fine",
-   "prompts": null,
-   "batch": "lumewood backgrounds (edit, finer pixels)",
-   "with": null,
-   "refs": [],
-   "save": "lumewood_backgrounds_fine.png",
-   "replaces": null,
-   "kind": "still",
-   "cells": [
-    7,
-    1
-   ],
-   "anchor": null,
-   "size": "4K",
-   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
-   "edit": {
-    "base": "art/source/lumewood_backgrounds.png",
-    "base_scale": 2.67,
-    "text": "This is my sheet of parallax background layers for one area of the game, enlarged so its pixels are big blocks. Redraw EVERY layer and piece as detailed pixel art with pixels about two and a half times smaller, keeping each one's shape, size, position, colours, light and label exactly, and keeping every strip's left and right edges matching so it still tiles sideways. Use the smaller pixels for real detail: individual trees and leaves, rock faces, rooftops and windows, wave crests, cloud puffs."
-   }
-  },
-  {
-   "id": "emberreach_backgrounds_fine",
-   "prompts": null,
-   "batch": "emberreach backgrounds (edit, finer pixels)",
-   "with": null,
-   "refs": [],
-   "save": "emberreach_backgrounds_fine.png",
-   "replaces": null,
-   "kind": "still",
-   "cells": [
-    7,
-    1
-   ],
-   "anchor": null,
-   "size": "4K",
-   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
-   "edit": {
-    "base": "art/source/emberreach_backgrounds.png",
-    "base_scale": 2.67,
-    "text": "This is my sheet of parallax background layers for one area of the game, enlarged so its pixels are big blocks. Redraw EVERY layer and piece as detailed pixel art with pixels about two and a half times smaller, keeping each one's shape, size, position, colours, light and label exactly, and keeping every strip's left and right edges matching so it still tiles sideways. Use the smaller pixels for real detail: individual trees and leaves, rock faces, rooftops and windows, wave crests, cloud puffs."
-   }
-  },
-  {
-   "id": "lanternfall_backgrounds_fine",
-   "prompts": null,
-   "batch": "lanternfall backgrounds (edit, finer pixels)",
-   "with": null,
-   "refs": [],
-   "save": "lanternfall_backgrounds_fine.png",
-   "replaces": null,
-   "kind": "still",
-   "cells": [
-    7,
-    1
-   ],
-   "anchor": null,
-   "size": "4K",
-   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
-   "edit": {
-    "base": "art/source/lanternfall_backgrounds.png",
-    "base_scale": 2.67,
-    "text": "This is my sheet of parallax background layers for one area of the game, enlarged so its pixels are big blocks. Redraw EVERY layer and piece as detailed pixel art with pixels about two and a half times smaller, keeping each one's shape, size, position, colours, light and label exactly, and keeping every strip's left and right edges matching so it still tiles sideways. Use the smaller pixels for real detail: individual trees and leaves, rock faces, rooftops and windows, wave crests, cloud puffs."
-   }
-  },
-  {
-   "id": "room_dawnharbor_wall",
-   "prompts": null,
-   "batch": "room dawnharbor back wall (edit, finer pixels)",
-   "with": null,
-   "refs": [],
-   "save": "room_dawnharbor_wall.png",
-   "replaces": null,
-   "kind": "still",
-   "cells": [
-    1,
-    1
-   ],
-   "anchor": null,
-   "size": "4K",
-   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel).",
-   "edit": {
-    "base": "art/source/room_dawnharbor.png",
-    "base_crop": [
-     478,
-     51,
-     848,
-     515
-    ],
-    "base_scale": 8.83,
-    "text": "This is the back wall of a room in my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same wall with the same beams, panelling, windows, hangings and decorations in the same places, the same colours and the same warm indoor light. Use the smaller pixels for real detail the big blocks could not show: wood grain, plaster texture, stone courses, window frames and panes, fabric weave, leaves and petals. It fills the whole image edge to edge like now, and its left and right edges still match so it tiles sideways. No people, no labels, no border."
-   }
-  },
-  {
-   "id": "room_driftcove_wall",
-   "prompts": null,
-   "batch": "room driftcove back wall (edit, finer pixels)",
-   "with": null,
-   "refs": [],
-   "save": "room_driftcove_wall.png",
-   "replaces": null,
-   "kind": "still",
-   "cells": [
-    1,
-    1
-   ],
-   "anchor": null,
-   "size": "4K",
-   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel).",
-   "edit": {
-    "base": "art/source/room_driftcove.png",
-    "base_crop": [
-     37,
-     51,
-     837,
-     480
-    ],
-    "base_scale": 5.12,
-    "text": "This is the back wall of a room in my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same wall with the same beams, panelling, windows, hangings and decorations in the same places, the same colours and the same warm indoor light. Use the smaller pixels for real detail the big blocks could not show: wood grain, plaster texture, stone courses, window frames and panes, fabric weave, leaves and petals. It fills the whole image edge to edge like now, and its left and right edges still match so it tiles sideways. No people, no labels, no border."
-   }
-  },
-  {
-   "id": "room_emberforge_wall",
-   "prompts": null,
-   "batch": "room emberforge back wall (edit, finer pixels)",
-   "with": null,
-   "refs": [],
-   "save": "room_emberforge_wall.png",
-   "replaces": null,
-   "kind": "still",
-   "cells": [
-    1,
-    1
-   ],
-   "anchor": null,
-   "size": "4K",
-   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel).",
-   "edit": {
-    "base": "art/source/room_emberforge.png",
-    "base_crop": [
-     68,
-     51,
-     818,
-     492
-    ],
-    "base_scale": 5.46,
-    "text": "This is the back wall of a room in my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same wall with the same beams, panelling, windows, hangings and decorations in the same places, the same colours and the same warm indoor light. Use the smaller pixels for real detail the big blocks could not show: wood grain, plaster texture, stone courses, window frames and panes, fabric weave, leaves and petals. It fills the whole image edge to edge like now, and its left and right edges still match so it tiles sideways. No people, no labels, no border."
-   }
-  },
-  {
-   "id": "room_greenbough_wall",
-   "prompts": null,
-   "batch": "room greenbough back wall (edit, finer pixels)",
-   "with": null,
-   "refs": [],
-   "save": "room_greenbough_wall.png",
-   "replaces": null,
-   "kind": "still",
-   "cells": [
-    1,
-    1
-   ],
-   "anchor": null,
-   "size": "4K",
-   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel).",
-   "edit": {
-    "base": "art/source/room_greenbough.png",
-    "base_crop": [
-     77,
-     40,
-     503,
-     578
-    ],
-    "base_scale": 7.61,
-    "text": "This is the back wall of a room in my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same wall with the same beams, panelling, windows, hangings and decorations in the same places, the same colours and the same warm indoor light. Use the smaller pixels for real detail the big blocks could not show: wood grain, plaster texture, stone courses, window frames and panes, fabric weave, leaves and petals. It fills the whole image edge to edge like now, and its left and right edges still match so it tiles sideways. No people, no labels, no border."
-   }
-  },
-  {
-   "id": "room_lanternfall_wall",
-   "prompts": null,
-   "batch": "room lanternfall back wall (edit, finer pixels)",
-   "with": null,
-   "refs": [],
-   "save": "room_lanternfall_wall.png",
-   "replaces": null,
-   "kind": "still",
-   "cells": [
-    1,
-    1
-   ],
-   "anchor": null,
-   "size": "4K",
-   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel).",
-   "edit": {
-    "base": "art/source/room_lanternfall.png",
-    "base_crop": [
-     28,
-     54,
-     408,
-     492
-    ],
-    "base_scale": 9.35,
-    "text": "This is the back wall of a room in my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same wall with the same beams, panelling, windows, hangings and decorations in the same places, the same colours and the same warm indoor light. Use the smaller pixels for real detail the big blocks could not show: wood grain, plaster texture, stone courses, window frames and panes, fabric weave, leaves and petals. It fills the whole image edge to edge like now, and its left and right edges still match so it tiles sideways. No people, no labels, no border."
-   }
-  },
-  {
-   "id": "room_lumewood_wall",
-   "prompts": null,
-   "batch": "room lumewood back wall (edit, finer pixels)",
-   "with": null,
-   "refs": [],
-   "save": "room_lumewood_wall.png",
-   "replaces": null,
-   "kind": "still",
-   "cells": [
-    1,
-    1
-   ],
-   "anchor": null,
-   "size": "4K",
-   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel).",
-   "edit": {
-    "base": "art/source/room_lumewood.png",
-    "base_crop": [
-     26,
-     67,
-     408,
-     470
-    ],
-    "base_scale": 10.16,
-    "text": "This is the back wall of a room in my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same wall with the same beams, panelling, windows, hangings and decorations in the same places, the same colours and the same warm indoor light. Use the smaller pixels for real detail the big blocks could not show: wood grain, plaster texture, stone courses, window frames and panes, fabric weave, leaves and petals. It fills the whole image edge to edge like now, and its left and right edges still match so it tiles sideways. No people, no labels, no border."
-   }
-  },
-  {
-   "id": "room_meadow_wall",
-   "prompts": null,
-   "batch": "room meadow back wall (edit, finer pixels)",
-   "with": null,
-   "refs": [],
-   "save": "room_meadow_wall.png",
-   "replaces": null,
-   "kind": "still",
-   "cells": [
-    1,
-    1
-   ],
-   "anchor": null,
-   "size": "4K",
-   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel).",
-   "edit": {
-    "base": "art/source/room_meadow.png",
-    "base_crop": [
-     24,
-     43,
-     425,
-     378
-    ],
-    "base_scale": 10.21,
-    "text": "This is the back wall of a room in my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same wall with the same beams, panelling, windows, hangings and decorations in the same places, the same colours and the same warm indoor light. Use the smaller pixels for real detail the big blocks could not show: wood grain, plaster texture, stone courses, window frames and panes, fabric weave, leaves and petals. It fills the whole image edge to edge like now, and its left and right edges still match so it tiles sideways. No people, no labels, no border."
-   }
-  },
-  {
-   "id": "room_dawnharbor_fine",
-   "prompts": null,
-   "batch": "room dawnharbor sheet (edit, finer pixels)",
-   "with": null,
-   "refs": [],
-   "save": "room_dawnharbor_fine.png",
-   "replaces": null,
-   "kind": "still",
-   "cells": [
-    3,
-    4
-   ],
-   "anchor": null,
-   "size": "4K",
-   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel).",
-   "edit": {
-    "base": "art/source/room_dawnharbor.png",
-    "base_scale": 2.31,
-    "text": "This is my sheet of room interior pieces for one area of the game (back wall, doorway, floor tiles and furniture), enlarged so its pixels are big blocks. Redraw EVERY piece as detailed pixel art with pixels about two and a half times smaller, keeping each piece's shape, size, position, colours, light and label exactly, and keeping the floor tiles seamless so they still repeat in both directions. Use the smaller pixels for real detail: wood grain, planks and nails, stone, fabric, glass, books, flames."
-   }
-  },
-  {
-   "id": "room_driftcove_fine",
-   "prompts": null,
-   "batch": "room driftcove sheet (edit, finer pixels)",
-   "with": null,
-   "refs": [],
-   "save": "room_driftcove_fine.png",
-   "replaces": null,
-   "kind": "still",
-   "cells": [
-    3,
-    4
-   ],
-   "anchor": null,
-   "size": "4K",
-   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel).",
-   "edit": {
-    "base": "art/source/room_driftcove.png",
-    "base_scale": 2.31,
-    "text": "This is my sheet of room interior pieces for one area of the game (back wall, doorway, floor tiles and furniture), enlarged so its pixels are big blocks. Redraw EVERY piece as detailed pixel art with pixels about two and a half times smaller, keeping each piece's shape, size, position, colours, light and label exactly, and keeping the floor tiles seamless so they still repeat in both directions. Use the smaller pixels for real detail: wood grain, planks and nails, stone, fabric, glass, books, flames."
-   }
-  },
-  {
-   "id": "room_emberforge_fine",
-   "prompts": null,
-   "batch": "room emberforge sheet (edit, finer pixels)",
-   "with": null,
-   "refs": [],
-   "save": "room_emberforge_fine.png",
-   "replaces": null,
-   "kind": "still",
-   "cells": [
-    3,
-    4
-   ],
-   "anchor": null,
-   "size": "4K",
-   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel).",
-   "edit": {
-    "base": "art/source/room_emberforge.png",
-    "base_scale": 2.31,
-    "text": "This is my sheet of room interior pieces for one area of the game (back wall, doorway, floor tiles and furniture), enlarged so its pixels are big blocks. Redraw EVERY piece as detailed pixel art with pixels about two and a half times smaller, keeping each piece's shape, size, position, colours, light and label exactly, and keeping the floor tiles seamless so they still repeat in both directions. Use the smaller pixels for real detail: wood grain, planks and nails, stone, fabric, glass, books, flames."
-   }
-  },
-  {
-   "id": "room_greenbough_fine",
-   "prompts": null,
-   "batch": "room greenbough sheet (edit, finer pixels)",
-   "with": null,
-   "refs": [],
-   "save": "room_greenbough_fine.png",
-   "replaces": null,
-   "kind": "still",
-   "cells": [
-    3,
-    4
-   ],
-   "anchor": null,
-   "size": "4K",
-   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel).",
-   "edit": {
-    "base": "art/source/room_greenbough.png",
-    "base_scale": 2.31,
-    "text": "This is my sheet of room interior pieces for one area of the game (back wall, doorway, floor tiles and furniture), enlarged so its pixels are big blocks. Redraw EVERY piece as detailed pixel art with pixels about two and a half times smaller, keeping each piece's shape, size, position, colours, light and label exactly, and keeping the floor tiles seamless so they still repeat in both directions. Use the smaller pixels for real detail: wood grain, planks and nails, stone, fabric, glass, books, flames."
-   }
-  },
-  {
-   "id": "room_lanternfall_fine",
-   "prompts": null,
-   "batch": "room lanternfall sheet (edit, finer pixels)",
-   "with": null,
-   "refs": [],
-   "save": "room_lanternfall_fine.png",
-   "replaces": null,
-   "kind": "still",
-   "cells": [
-    3,
-    4
-   ],
-   "anchor": null,
-   "size": "4K",
-   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel). Redone once: the first answer painted the background grey/brown instead of magenta.",
-   "edit": {
-    "base": "art/source/room_lanternfall.png",
-    "base_scale": 2.31,
-    "text": "This is my sheet of room interior pieces for one area of the game (back wall, doorway, floor tiles and furniture), enlarged so its pixels are big blocks. Redraw EVERY piece as detailed pixel art with pixels about two and a half times smaller, keeping each piece's shape, size, position, colours, light and label exactly, and keeping the floor tiles seamless so they still repeat in both directions. Use the smaller pixels for real detail: wood grain, planks and nails, stone, fabric, glass, books, flames. The background around every piece stays flat pure magenta #FF00FF exactly as in the attached image: never grey, brown, purple or a gradient. Add nothing that is not in the attached image."
-   }
-  },
-  {
-   "id": "room_lumewood_fine",
-   "prompts": null,
-   "batch": "room lumewood sheet (edit, finer pixels)",
-   "with": null,
-   "refs": [],
-   "save": "room_lumewood_fine.png",
-   "replaces": null,
-   "kind": "still",
-   "cells": [
-    3,
-    4
-   ],
-   "anchor": null,
-   "size": "4K",
-   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel).",
-   "edit": {
-    "base": "art/source/room_lumewood.png",
-    "base_scale": 2.31,
-    "text": "This is my sheet of room interior pieces for one area of the game (back wall, doorway, floor tiles and furniture), enlarged so its pixels are big blocks. Redraw EVERY piece as detailed pixel art with pixels about two and a half times smaller, keeping each piece's shape, size, position, colours, light and label exactly, and keeping the floor tiles seamless so they still repeat in both directions. Use the smaller pixels for real detail: wood grain, planks and nails, stone, fabric, glass, books, flames."
-   }
-  },
-  {
-   "id": "room_meadow_fine",
-   "prompts": null,
-   "batch": "room meadow sheet (edit, finer pixels)",
-   "with": null,
-   "refs": [],
-   "save": "room_meadow_fine.png",
-   "replaces": null,
-   "kind": "still",
-   "cells": [
-    3,
-    4
-   ],
-   "anchor": null,
-   "size": "4K",
-   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so room interiors show at the land's pixel size (TDStage.TEXEL game px per art pixel). Redone once: the first answer painted the background grey/brown instead of magenta.",
-   "edit": {
-    "base": "art/source/room_meadow.png",
-    "base_scale": 2.31,
-    "text": "This is my sheet of room interior pieces for one area of the game (back wall, doorway, floor tiles and furniture), enlarged so its pixels are big blocks. Redraw EVERY piece as detailed pixel art with pixels about two and a half times smaller, keeping each piece's shape, size, position, colours, light and label exactly, and keeping the floor tiles seamless so they still repeat in both directions. Use the smaller pixels for real detail: wood grain, planks and nails, stone, fabric, glass, books, flames. The background around every piece stays flat pure magenta #FF00FF exactly as in the attached image: never grey, brown, purple or a gradient. Add nothing that is not in the attached image."
    }
   },
   {
@@ -10501,6 +9822,723 @@
     "refs": [
      "art/source/building_lanternfall_small.png",
      "art/source/building_emberreach_large.png"
+    ]
+   }
+  },
+  {
+   "id": "paint_logo",
+   "prompts": null,
+   "batch": "painted look: paint_logo (edit)",
+   "with": null,
+   "refs": [],
+   "save": "logo_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 library + repo cleanup thread: one of the last pixel-art pieces the game used, repainted (Cory chose 'Repaint all' 13:42Z).",
+   "edit": {
+    "base": "art/source/logo.png",
+    "text": "Repaint this whole image as soft hand-painted art, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look; every curve and diagonal edge is smooth. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same title lettering spelling TERA'S DAWN letter for letter, the same sun, leaf, icons, shapes, sizes, positions, colours and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_world_map_2",
+   "prompts": null,
+   "batch": "painted look: paint_world_map_2 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "world_map_painted_v2.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 library + repo cleanup thread: one of the last pixel-art pieces the game used, repainted (Cory chose 'Repaint all' 13:42Z).",
+   "edit": {
+    "base": "art/source/world_map.png",
+    "text": "Repaint this whole image as soft hand-painted art, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look; every curve and diagonal edge is smooth. Edges and outlines stay crisp and clean, not blurry. Paint the land, sea, forests, towns, roads and the parchment frame with real brush strokes; the little towns and trees are painted shapes, not pixel sprites. Keep everything else exactly the same: every island, coastline, town, road, forest and landmark stays in exactly the same place with the same shape, size and colours, so markers placed on the old map still line up. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_room_props",
+   "prompts": null,
+   "batch": "painted look: paint_room_props (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_props_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 library + repo cleanup thread: one of the last pixel-art pieces the game used, repainted (Cory chose 'Repaint all' 13:42Z).",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/room-props/room_props_base.png",
+    "text": "Repaint this whole image as soft hand-painted art, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look; every curve and diagonal edge is smooth. Edges and outlines stay crisp and clean, not blurry. This is a grid of room furniture and floor textures for seven towns (one town per row): a wooden crate, a potted plant, a floor soil texture and, in some rows, a floor side or floor top texture. Keep the grid, the dark divider lines and every item's size, position, shape and colours exactly the same; each texture still fills its square and must tile seamlessly left to right and top to bottom. Every flat magenta #FF00FF area stays flat magenta #FF00FF, empty cells stay empty, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_room_items",
+   "prompts": null,
+   "batch": "painted look: paint_room_items (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_items_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 library + repo cleanup thread: redo of the crates and plants from paint_room_props, which came back with walls painted behind them (Cory OK'd the redo 14:15Z). Floors come from room_props_painted.png.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/room-props/room_items_base.png",
+    "text": "Repaint each object in this image as soft hand-painted art, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering; every curve and diagonal edge is smooth, and edges stay crisp, not blurry. The image is a 4 by 4 grid of separate game sprites on a flat magenta background: wooden crates (each a different wood colour) and potted green plants in terracotta pots, and two empty cells at the bottom right. These are cut-out sprites, NOT a scene: the background of every cell must stay pure flat magenta #FF00FF, exactly as in the original. Do not paint any wall, floor, room, shadow, glow, gradient or texture behind or around the objects; the only things that are not magenta are the objects and the thin dark grid lines. Keep each object's size, position, shape and colour the same, keep the grid lines, keep the two empty cells empty, and add nothing new."
+   }
+  },
+  {
+   "id": "front_building_emberreach_large",
+   "prompts": null,
+   "batch": "front-view building: emberreach_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_emberreach_large_front.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 buildings round 2 (Cory): pure front view, no roof tops, wall base flat along the whole bottom, nothing below it, sits on the ground.",
+   "edit": {
+    "base": "art/source/building_emberreach_large.png",
+    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a stone forge hall: grey-brown stone walls, orange clay tile roofs on the main hall and both side wings, the tall square stone chimney in the middle, the big arched double wooden door glowing with forge light, and the warm glowing windows either side, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true
+   }
+  },
+  {
+   "id": "front_building_dawnharbor_large",
+   "prompts": null,
+   "batch": "front-view building: dawnharbor_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_dawnharbor_large_front.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 buildings round 2 (Cory): pure front view, no roof tops, wall base flat along the whole bottom, nothing below it, sits on the ground.",
+   "edit": {
+    "base": "art/source/building_dawnharbor_large.png",
+    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a harbour town hall: white plaster walls with timber trim and a stone base, blue slate roofs (main gable and the lower side wing, both seen straight-on), the golden sun weathervane on the peak, the round window in the gable, the wooden front door with windows either side, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true,
+    "base_margin": 0.08
+   }
+  },
+  {
+   "id": "front_building_dawnharbor_small",
+   "prompts": null,
+   "batch": "front-view building: dawnharbor_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_dawnharbor_small_front.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 buildings round 2 (Cory): pure front view, no roof tops, wall base flat along the whole bottom, nothing below it, sits on the ground.",
+   "edit": {
+    "base": "art/source/building_dawnharbor_small.png",
+    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a fish market stall: the blue and white striped awning across the top, wooden posts, the hanging fish under the awning and fish and a pot on the counter. The counter front is a solid wooden panel that reaches all the way down to the ground, with no legs or gaps under it, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true,
+    "base_margin": 0.08
+   }
+  },
+  {
+   "id": "front_building_driftcove_large",
+   "prompts": null,
+   "batch": "front-view building: driftcove_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_driftcove_large_front.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 buildings round 2 (Cory): pure front view, no roof tops, wall base flat along the whole bottom, nothing below it, sits on the ground.",
+   "edit": {
+    "base": "art/source/building_driftcove_large.png",
+    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a wooden sailing ship pulled up on the beach, drawn as a pure side profile with the bow to the right: curved hull planks, a row of portholes, the deck rail, the mast with its rigging and barrels peeking over the rail, no deck seen from above. Its hull is half-buried in sand so the bottom of the hull is cut by one straight level line along the ground, the whole width of the ship, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true,
+    "base_margin": 0.08
+   }
+  },
+  {
+   "id": "front_building_driftcove_small",
+   "prompts": null,
+   "batch": "front-view building: driftcove_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_driftcove_small_front.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 buildings round 2 (Cory): pure front view, no roof tops, wall base flat along the whole bottom, nothing below it, sits on the ground.",
+   "edit": {
+    "base": "art/source/building_driftcove_small.png",
+    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a wooden fisherman's hut standing directly on the ground (no stilts, no deck, no ladder): weathered plank walls, a plank door in the middle, a small window, the patched cream sail-cloth canopy draped straight across the top, and the little red flag on a pole at the side, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true,
+    "base_margin": 0.08
+   }
+  },
+  {
+   "id": "front_building_emberreach_small",
+   "prompts": null,
+   "batch": "front-view building: emberreach_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_emberreach_small_front.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 buildings round 2 (Cory): pure front view, no roof tops, wall base flat along the whole bottom, nothing below it, sits on the ground.",
+   "edit": {
+    "base": "art/source/building_emberreach_small.png",
+    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a stone smithy: stone walls, an orange clay tile roof seen straight-on, the square stone chimney with a little grey smoke, the glowing forge fire in its arched hearth set into the front wall and a small window. No anvil, stumps or tools standing in front of it, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true,
+    "base_margin": 0.08
+   }
+  },
+  {
+   "id": "front_building_greenbough_large",
+   "prompts": null,
+   "batch": "front-view building: greenbough_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_greenbough_large_front.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 buildings round 2 (Cory): pure front view, no roof tops, wall base flat along the whole bottom, nothing below it, sits on the ground.",
+   "edit": {
+    "base": "art/source/building_greenbough_large.png",
+    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a treehouse in a giant oak: the thick trunk standing straight up from the ground, its base cut flat where it meets the ground (no roots spreading out), the leafy crown, the wooden hut up in the branches, the ladder up the trunk and the small arched window in the trunk. The whole crown fits inside the picture, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true,
+    "base_margin": 0.08
+   }
+  },
+  {
+   "id": "front_building_greenbough_small",
+   "prompts": null,
+   "batch": "front-view building: greenbough_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_greenbough_small_front.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 buildings round 2 (Cory): pure front view, no roof tops, wall base flat along the whole bottom, nothing below it, sits on the ground.",
+   "edit": {
+    "base": "art/source/building_greenbough_small.png",
+    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a round thatched hut standing directly on the ground (no branch, no platform, no ladder): golden thatch roof with its tied top knot, plank walls, the door and the round window, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true,
+    "base_margin": 0.08
+   }
+  },
+  {
+   "id": "front_building_lanternfall_large",
+   "prompts": null,
+   "batch": "front-view building: lanternfall_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_lanternfall_large_front.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 buildings round 2 (Cory): pure front view, no roof tops, wall base flat along the whole bottom, nothing below it, sits on the ground.",
+   "edit": {
+    "base": "art/source/building_lanternfall_large.png",
+    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a tall two-storey half-timbered townhouse: dark timber frame over pale plaster, a stone ground floor, a steep brown shingle gable roof seen straight-on, warm glowing windows on both floors, the front door and the hanging lantern, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true,
+    "base_margin": 0.08
+   }
+  },
+  {
+   "id": "front_building_lanternfall_small",
+   "prompts": null,
+   "batch": "front-view building: lanternfall_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_lanternfall_small_front.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 buildings round 2 (Cory): pure front view, no roof tops, wall base flat along the whole bottom, nothing below it, sits on the ground.",
+   "edit": {
+    "base": "art/source/building_lanternfall_small.png",
+    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a small half-timbered house: terracotta tile gable roof with moss seen straight-on, timber frame, pale plaster, stone base, the shuttered window, the purple curtain doorway and the hanging lantern, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true,
+    "base_margin": 0.08
+   }
+  },
+  {
+   "id": "front_building_lumewood_large",
+   "prompts": null,
+   "batch": "front-view building: lumewood_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_lumewood_large_front.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 buildings round 2 (Cory): pure front view, no roof tops, wall base flat along the whole bottom, nothing below it, sits on the ground.",
+   "edit": {
+    "base": "art/source/building_lumewood_large.png",
+    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a round stone wizard tower drawn as a flat front silhouette: pale stone walls with straight vertical sides, the crystal glass dome roof shown only as its front half-circle outline with brass ribs and the blue crystal spire on top, round windows with glowing blue panes and the arched wooden door. Its base is straight and flat along the ground, not curved, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true,
+    "base_margin": 0.08
+   }
+  },
+  {
+   "id": "front_building_lumewood_small",
+   "prompts": null,
+   "batch": "front-view building: lumewood_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_lumewood_small_front.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 buildings round 2 (Cory): pure front view, no roof tops, wall base flat along the whole bottom, nothing below it, sits on the ground.",
+   "edit": {
+    "base": "art/source/building_lumewood_small.png",
+    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a giant blue mushroom house: the blue scalloped cap seen straight from the side (its underside edge level, no top surface seen from above), the cream stalk walls with a straight flat base on the ground, the round window and the arched wooden door. The whole cap fits inside the picture, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true,
+    "base_margin": 0.08
+   }
+  },
+  {
+   "id": "front2_building_dawnharbor_small",
+   "prompts": null,
+   "batch": "front-view building redo: dawnharbor_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_dawnharbor_small_front2.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 15:43Z 'the fish stand still looks wrong'): counter was seen from above, fish too big, awning sat on a plank.",
+   "edit": {
+    "base": "art/source/building_dawnharbor_small.png",
+    "text": "Redraw this fish market stall from my 2D side-scrolling game as a pure front elevation, like a flat theatre backdrop: the camera looks straight at the front at eye level. Strict rules: 1) Nothing is seen from above. No counter top, no table surface, no looking down into pots, crates or trays. Every object shows only its front side. 2) No perspective: every horizontal line level, every post vertical, left-right balanced. 3) The stall: two straight wooden corner posts holding a blue and white striped awning across the top, the awning seen straight-on as a flat striped band with a scalloped lower edge; a small wooden sign board on top of the awning. Under the awning, a wooden rail with five or six small fish hanging by their tails, each fish small, about one twelfth of the stall's width. Behind the counter, a plain dark wooden back wall. 4) The counter: a solid wooden front panel about one third of the stall's height, running from post to post and reaching all the way down to the ground. On the counter's front edge stand three small wooden crates seen only from the front, with just the heads and tails of a few small fish peeking over the top rim. 5) The bottom of the stall is one straight, solid horizontal line from post to post. Nothing below it or in front of it: no legs, steps, barrels, ground patch or shadow. 6) The whole stall fits inside the picture with a clear band of magenta on every side. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true,
+    "base_margin": 0.08
+   }
+  },
+  {
+   "id": "front2_building_greenbough_large",
+   "prompts": null,
+   "batch": "front-view building redo: greenbough_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_greenbough_large_front2.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 15:44Z yes): crown came back cut off at the top and right edges.",
+   "edit": {
+    "base": "art/source/building_greenbough_large.png",
+    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a treehouse in a giant oak: the thick trunk standing straight up from the ground, its base cut flat where it meets the ground (no roots spreading out), the leafy crown, the wooden hut up in the branches, the ladder up the trunk and the small arched window in the trunk. The leafy crown is a complete rounded shape with its own painted outline on every side, finished and not cut off at the top or right; the whole crown fits well inside the picture, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true,
+    "base_margin": 0.15
+   }
+  },
+  {
+   "id": "npcstyle_building_dawnharbor_large",
+   "prompts": null,
+   "batch": "NPC-style building test: dawnharbor_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_dawnharbor_large_npcstyle.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 21:39Z): buildings must match the NPCs' style; also wing bases must reach the ground (21:36Z). Test before the other 11.",
+   "edit": {
+    "base": "art/source/building_dawnharbor_large.png",
+    "text": "The first image is a house from my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have. Repaint the house in the SAME art style as those characters: the same soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, the same rich warm saturated colours, the same bold dark brown outlines of the same thickness relative to the details, and the same amount of hand-painted detail (wood grain on the timbers and door, worn and chipped spots, mortar lines and slight colour variation between the stones and roof tiles, curtains or warm light in the windows). Keep the house itself: the same shape, the same front-on view, the cream walls with brown timber framing, the blue tiled roofs, the octagonal window, the wooden door, the side wings and the sun weathervane, with the same colours made richer. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole house is ONE straight horizontal line: the stone base of the middle AND of both side wings reaches down to the same ground line, edge to edge, with nothing hanging lower and no wing standing higher than the middle. Nothing below the base or in front of it: no steps, path, ground patch or shadow. 3) The whole house, weathervane included, fits inside the picture with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the house. Do not draw any characters.",
+    "new_view": true,
+    "base_margin": 0.08,
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ]
+   }
+  },
+  {
+   "id": "npcstyle_building_dawnharbor_small",
+   "prompts": null,
+   "batch": "NPC-style building: dawnharbor_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_dawnharbor_small_npcstyle.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 21:56Z 'yes this is better'): restyle to match the NPCs, like the Dawnharbor house test.",
+   "edit": {
+    "base": "art/source/building_dawnharbor_small.png",
+    "text": "The first image is a building from my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have. Repaint the building in the SAME art style as those characters: the same soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, the same rich warm saturated colours, the same bold dark brown outlines of the same thickness relative to the details, and the same amount of hand-painted detail (wood grain, worn and chipped spots, slight colour variation between stones, planks, tiles or thatch, warm light in any windows). Keep the building itself: a fish market stall: two wooden corner posts, the blue and white striped awning with its scalloped edge and the small sign board on top, small fish hanging by their tails from a rail under the awning, and three wooden crates of fish on the solid wooden counter front that reaches the ground. Keep its shape, its front-on view and its colours, with the colours made richer. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof or top surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: every part of it, middle and any side wings, reaches down to the same ground line, edge to edge, with nothing hanging lower and no part standing higher. Nothing below the base or in front of it: no steps, path, ground patch, ground line or shadow. 3) The whole building fits inside the picture with a clear band of magenta on every side; nothing is cut off. 4) Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building. Do not draw any characters.",
+    "new_view": true,
+    "base_margin": 0.08,
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ]
+   }
+  },
+  {
+   "id": "npcstyle_building_driftcove_large",
+   "prompts": null,
+   "batch": "NPC-style building: driftcove_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_driftcove_large_npcstyle.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 21:56Z 'yes this is better'): restyle to match the NPCs, like the Dawnharbor house test.",
+   "edit": {
+    "base": "art/source/building_driftcove_large.png",
+    "text": "The first image is a building from my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have. Repaint the building in the SAME art style as those characters: the same soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, the same rich warm saturated colours, the same bold dark brown outlines of the same thickness relative to the details, and the same amount of hand-painted detail (wood grain, worn and chipped spots, slight colour variation between stones, planks, tiles or thatch, warm light in any windows). Keep the building itself: a wooden sailing ship pulled up on the beach, drawn as a pure side profile with the bow to the right: curved hull planks, a row of portholes, the deck rail, the mast with its rigging and barrels peeking over the rail, no deck seen from above. Its hull is half-buried in sand so the bottom of the hull is cut by one straight level line along the ground, the whole width of the ship. Keep its shape, its front-on view and its colours, with the colours made richer. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof or top surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: every part of it, middle and any side wings, reaches down to the same ground line, edge to edge, with nothing hanging lower and no part standing higher. Nothing below the base or in front of it: no steps, path, ground patch, ground line or shadow. 3) The whole building fits inside the picture with a clear band of magenta on every side; nothing is cut off. 4) Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building. Do not draw any characters.",
+    "new_view": true,
+    "base_margin": 0.08,
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ]
+   }
+  },
+  {
+   "id": "npcstyle_building_driftcove_small",
+   "prompts": null,
+   "batch": "NPC-style building: driftcove_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_driftcove_small_npcstyle.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 21:56Z 'yes this is better'): restyle to match the NPCs, like the Dawnharbor house test.",
+   "edit": {
+    "base": "art/source/building_driftcove_small.png",
+    "text": "The first image is a building from my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have. Repaint the building in the SAME art style as those characters: the same soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, the same rich warm saturated colours, the same bold dark brown outlines of the same thickness relative to the details, and the same amount of hand-painted detail (wood grain, worn and chipped spots, slight colour variation between stones, planks, tiles or thatch, warm light in any windows). Keep the building itself: a wooden fisherman's hut standing directly on the ground (no stilts, no deck, no ladder): weathered plank walls, a plank door in the middle, a small window, the patched cream sail-cloth canopy draped straight across the top, and the little red flag on a pole at the side. Keep its shape, its front-on view and its colours, with the colours made richer. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof or top surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: every part of it, middle and any side wings, reaches down to the same ground line, edge to edge, with nothing hanging lower and no part standing higher. Nothing below the base or in front of it: no steps, path, ground patch, ground line or shadow. 3) The whole building fits inside the picture with a clear band of magenta on every side; nothing is cut off. 4) Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building. Do not draw any characters.",
+    "new_view": true,
+    "base_margin": 0.08,
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ]
+   }
+  },
+  {
+   "id": "npcstyle_building_emberreach_large",
+   "prompts": null,
+   "batch": "NPC-style building: emberreach_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_emberreach_large_npcstyle.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 21:56Z 'yes this is better'): restyle to match the NPCs, like the Dawnharbor house test.",
+   "edit": {
+    "base": "art/source/building_emberreach_large.png",
+    "text": "The first image is a building from my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have. Repaint the building in the SAME art style as those characters: the same soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, the same rich warm saturated colours, the same bold dark brown outlines of the same thickness relative to the details, and the same amount of hand-painted detail (wood grain, worn and chipped spots, slight colour variation between stones, planks, tiles or thatch, warm light in any windows). Keep the building itself: a stone forge hall: grey-brown stone walls, orange clay tile roofs on the main hall and both side wings, the tall square stone chimney in the middle, the big arched double wooden door glowing with forge light, and the warm glowing windows either side. Keep its shape, its front-on view and its colours, with the colours made richer. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof or top surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: every part of it, middle and any side wings, reaches down to the same ground line, edge to edge, with nothing hanging lower and no part standing higher. Nothing below the base or in front of it: no steps, path, ground patch, ground line or shadow. 3) The whole building fits inside the picture with a clear band of magenta on every side; nothing is cut off. 4) Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building. Do not draw any characters.",
+    "new_view": true,
+    "base_margin": 0.08,
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ]
+   }
+  },
+  {
+   "id": "npcstyle_building_emberreach_small",
+   "prompts": null,
+   "batch": "NPC-style building: emberreach_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_emberreach_small_npcstyle.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 21:56Z 'yes this is better'): restyle to match the NPCs, like the Dawnharbor house test.",
+   "edit": {
+    "base": "art/source/building_emberreach_small.png",
+    "text": "The first image is a building from my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have. Repaint the building in the SAME art style as those characters: the same soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, the same rich warm saturated colours, the same bold dark brown outlines of the same thickness relative to the details, and the same amount of hand-painted detail (wood grain, worn and chipped spots, slight colour variation between stones, planks, tiles or thatch, warm light in any windows). Keep the building itself: a stone smithy: stone walls, an orange clay tile roof seen straight-on, the square stone chimney with a little grey smoke, the glowing forge fire in its arched hearth set into the front wall and a small window. No anvil, stumps or tools standing in front of it. Keep its shape, its front-on view and its colours, with the colours made richer. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof or top surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: every part of it, middle and any side wings, reaches down to the same ground line, edge to edge, with nothing hanging lower and no part standing higher. Nothing below the base or in front of it: no steps, path, ground patch, ground line or shadow. 3) The whole building fits inside the picture with a clear band of magenta on every side; nothing is cut off. 4) Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building. Do not draw any characters.",
+    "new_view": true,
+    "base_margin": 0.08,
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ]
+   }
+  },
+  {
+   "id": "npcstyle_building_greenbough_large",
+   "prompts": null,
+   "batch": "NPC-style building: greenbough_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_greenbough_large_npcstyle.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 21:56Z 'yes this is better'): restyle to match the NPCs, like the Dawnharbor house test.",
+   "edit": {
+    "base": "art/source/building_greenbough_large.png",
+    "text": "The first image is a building from my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have. Repaint the building in the SAME art style as those characters: the same soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, the same rich warm saturated colours, the same bold dark brown outlines of the same thickness relative to the details, and the same amount of hand-painted detail (wood grain, worn and chipped spots, slight colour variation between stones, planks, tiles or thatch, warm light in any windows). Keep the building itself: a treehouse in a giant oak: the thick trunk standing straight up from the ground, its base cut flat where it meets the ground (no roots spreading out), the leafy crown, the wooden hut up in the branches, the ladder up the trunk and the small arched window in the trunk. Keep its shape, its front-on view and its colours, with the colours made richer. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof or top surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: every part of it, middle and any side wings, reaches down to the same ground line, edge to edge, with nothing hanging lower and no part standing higher. Nothing below the base or in front of it: no steps, path, ground patch, ground line or shadow. 3) The whole building fits inside the picture with a clear band of magenta on every side; nothing is cut off. 4) Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building. Do not draw any characters.",
+    "new_view": true,
+    "base_margin": 0.08,
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ]
+   }
+  },
+  {
+   "id": "npcstyle_building_greenbough_small",
+   "prompts": null,
+   "batch": "NPC-style building: greenbough_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_greenbough_small_npcstyle.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 21:56Z 'yes this is better'): restyle to match the NPCs, like the Dawnharbor house test.",
+   "edit": {
+    "base": "art/source/building_greenbough_small.png",
+    "text": "The first image is a building from my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have. Repaint the building in the SAME art style as those characters: the same soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, the same rich warm saturated colours, the same bold dark brown outlines of the same thickness relative to the details, and the same amount of hand-painted detail (wood grain, worn and chipped spots, slight colour variation between stones, planks, tiles or thatch, warm light in any windows). Keep the building itself: a round thatched hut standing directly on the ground (no branch, no platform, no ladder): golden thatch roof with its tied top knot, plank walls, the door and the round window. Keep its shape, its front-on view and its colours, with the colours made richer. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof or top surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: every part of it, middle and any side wings, reaches down to the same ground line, edge to edge, with nothing hanging lower and no part standing higher. Nothing below the base or in front of it: no steps, path, ground patch, ground line or shadow. 3) The whole building fits inside the picture with a clear band of magenta on every side; nothing is cut off. 4) Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building. Do not draw any characters.",
+    "new_view": true,
+    "base_margin": 0.08,
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ]
+   }
+  },
+  {
+   "id": "npcstyle_building_lanternfall_large",
+   "prompts": null,
+   "batch": "NPC-style building: lanternfall_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_lanternfall_large_npcstyle.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 21:56Z 'yes this is better'): restyle to match the NPCs, like the Dawnharbor house test.",
+   "edit": {
+    "base": "art/source/building_lanternfall_large.png",
+    "text": "The first image is a building from my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have. Repaint the building in the SAME art style as those characters: the same soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, the same rich warm saturated colours, the same bold dark brown outlines of the same thickness relative to the details, and the same amount of hand-painted detail (wood grain, worn and chipped spots, slight colour variation between stones, planks, tiles or thatch, warm light in any windows). Keep the building itself: a tall two-storey half-timbered townhouse: dark timber frame over pale plaster, a stone ground floor, a steep brown shingle gable roof seen straight-on, warm glowing windows on both floors, the front door and the hanging lantern. Keep its shape, its front-on view and its colours, with the colours made richer. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof or top surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: every part of it, middle and any side wings, reaches down to the same ground line, edge to edge, with nothing hanging lower and no part standing higher. Nothing below the base or in front of it: no steps, path, ground patch, ground line or shadow. 3) The whole building fits inside the picture with a clear band of magenta on every side; nothing is cut off. 4) Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building. Do not draw any characters.",
+    "new_view": true,
+    "base_margin": 0.08,
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ]
+   }
+  },
+  {
+   "id": "npcstyle_building_lanternfall_small",
+   "prompts": null,
+   "batch": "NPC-style building: lanternfall_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_lanternfall_small_npcstyle.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 21:56Z 'yes this is better'): restyle to match the NPCs, like the Dawnharbor house test.",
+   "edit": {
+    "base": "art/source/building_lanternfall_small.png",
+    "text": "The first image is a building from my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have. Repaint the building in the SAME art style as those characters: the same soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, the same rich warm saturated colours, the same bold dark brown outlines of the same thickness relative to the details, and the same amount of hand-painted detail (wood grain, worn and chipped spots, slight colour variation between stones, planks, tiles or thatch, warm light in any windows). Keep the building itself: a small half-timbered house: terracotta tile gable roof with moss seen straight-on, timber frame, pale plaster, stone base, the shuttered window, the purple curtain doorway and the hanging lantern. Keep its shape, its front-on view and its colours, with the colours made richer. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof or top surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: every part of it, middle and any side wings, reaches down to the same ground line, edge to edge, with nothing hanging lower and no part standing higher. Nothing below the base or in front of it: no steps, path, ground patch, ground line or shadow. 3) The whole building fits inside the picture with a clear band of magenta on every side; nothing is cut off. 4) Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building. Do not draw any characters.",
+    "new_view": true,
+    "base_margin": 0.08,
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ]
+   }
+  },
+  {
+   "id": "npcstyle_building_lumewood_large",
+   "prompts": null,
+   "batch": "NPC-style building: lumewood_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_lumewood_large_npcstyle.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 21:56Z 'yes this is better'): restyle to match the NPCs, like the Dawnharbor house test.",
+   "edit": {
+    "base": "art/source/building_lumewood_large.png",
+    "text": "The first image is a building from my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have. Repaint the building in the SAME art style as those characters: the same soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, the same rich warm saturated colours, the same bold dark brown outlines of the same thickness relative to the details, and the same amount of hand-painted detail (wood grain, worn and chipped spots, slight colour variation between stones, planks, tiles or thatch, warm light in any windows). Keep the building itself: a round stone wizard tower drawn as a flat front silhouette: pale stone walls with straight vertical sides, the crystal glass dome roof shown only as its front half-circle outline with brass ribs and the blue crystal spire on top, round windows with glowing blue panes and the arched wooden door. Its base is straight and flat along the ground, not curved. Keep its shape, its front-on view and its colours, with the colours made richer. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof or top surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: every part of it, middle and any side wings, reaches down to the same ground line, edge to edge, with nothing hanging lower and no part standing higher. Nothing below the base or in front of it: no steps, path, ground patch, ground line or shadow. 3) The whole building fits inside the picture with a clear band of magenta on every side; nothing is cut off. 4) Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building. Do not draw any characters.",
+    "new_view": true,
+    "base_margin": 0.08,
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ]
+   }
+  },
+  {
+   "id": "npcstyle_building_lumewood_small",
+   "prompts": null,
+   "batch": "NPC-style building: lumewood_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_lumewood_small_npcstyle.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 21:56Z 'yes this is better'): restyle to match the NPCs, like the Dawnharbor house test.",
+   "edit": {
+    "base": "art/source/building_lumewood_small.png",
+    "text": "The first image is a building from my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have. Repaint the building in the SAME art style as those characters: the same soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, the same rich warm saturated colours, the same bold dark brown outlines of the same thickness relative to the details, and the same amount of hand-painted detail (wood grain, worn and chipped spots, slight colour variation between stones, planks, tiles or thatch, warm light in any windows). Keep the building itself: a giant blue mushroom house: the blue scalloped cap seen straight from the side (its underside edge level, no top surface seen from above), the cream stalk walls with a straight flat base on the ground, the round window and the arched wooden door. The whole cap fits inside the picture. Keep its shape, its front-on view and its colours, with the colours made richer. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof or top surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: every part of it, middle and any side wings, reaches down to the same ground line, edge to edge, with nothing hanging lower and no part standing higher. Nothing below the base or in front of it: no steps, path, ground patch, ground line or shadow. 3) The whole building fits inside the picture with a clear band of magenta on every side; nothing is cut off. 4) Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building. Do not draw any characters.",
+    "new_view": true,
+    "base_margin": 0.08,
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
     ]
    }
   },

@@ -40,15 +40,16 @@ and Shield (`EquipDef.Slot` and `Equipment.PLACES_FOR`). Adding a slot means add
 
 ## How to add an item or piece of gear
 
-1. Give it an icon in `assets/sprites/items/<id>.png`. Until there's real art, add it to
-   `ICONS` in `tools/art/make_item_placeholders.py` (or `tools/art/item_icons.json`) and run
-   the script.
+1. Give it an icon in `assets/sprites/items/<id>.png`: a painted cell on an item sheet (a Gemini
+   edit in `tools/art/gemini_pass.json`, cut by its `art/sheets/items_*.json` manifest). Gear's
+   icon shows the same object the hero wears (shape, colours, details).
 2. Create the `.tres` in `data/items/equips/`, `use/` or `etc/` as an **EquipDef**, **UseDef**
    or **ItemDef**. Fill in `id`, name, description, icon and `sell_price`; for gear, the slot,
    requirements and a **StatBlock** in `stats`. A top, bottom or shoes also needs a
-   `worn_style`, the cut it's drawn in on the hero (tops: tunic, coat, robe, vest, undershirt;
-   bottoms: trousers, breeches; shoes: shoes, boots, sandals, clogs), tinted with its colour;
-   `tests/unit/appearance_test.gd` checks the cut exists.
+   `worn_style`, the cut it's drawn in on the hero (tops: tunic, coat, robe, vest, plate,
+   undershirt; bottoms: trousers, pants, breeches, shorts, greaves; shoes: shoes, boots,
+   sandals, clogs, sabatons), tinted with its colour; `tests/unit/appearance_test.gd` checks
+   the cut exists.
 3. Make something drop it: a **DropEntry** on a monster's `drops` (item, chance from 0 to 1,
    amount range). Rare gear is usually 1 to 4%.
 
@@ -69,16 +70,16 @@ for the loot key, and stays there if its tab is full.
   `art/sheets/shield_backs.json` (its face is its icon), a hat its side and behind views on a
   `hats_items_*` sheet with its heads-erased `_only` twin (Gemini edits of `paperdoll_hats`).
   Without them it is drawn with its shape's tinted art.
-- **A new top, bottom, pair of shoes, gloves or cape**: add a Gemini edit of the body sheet with
+- **A new top, bottom, pair of shoes or cape**: add a Gemini edit of the body sheet with
   the icon as reference (see the `wg_worn_*` entries in `tools/art/gemini_pass.json`), save the
   result as `art/source/worn/<item id>.png` and run the tool (`worn_item_<id>`). Until then it
-  wears its `worn_style` cut in its colour.
+  wears its `worn_style` cut in its colour. **New gloves** get a cuffless mitten painted from
+  their icon on `art/sheets/glove_mittens.json` (one piece per hand, `glove_item_<id>_1/_2`).
 - **A new weapon kind**: draw its greyscale template on the paperdoll weapons sheet (add its
   cell to `paperdoll_weapons.json` and `WEAPON_KINDS` in `tools/art/paperdoll/common.py`), say how it's
   held in `art/sheets/paperdoll_rig.json` "holds" ("like" another kind, or an angle per frame,
-  "behind" for frames it goes behind him; a long weapon drawn slanted is straightened, see
-  `AXIAL`;
-  add it to `GRIPPED` if the fingers wrap it, `ON_BACK` if it's carried on the back), give it
+  "behind" for frames it goes behind him; add it to `AXIAL` if a long weapon drawn slanted
+  should be straightened, `GRIPPED` if the fingers wrap it, `ON_BACK` if it's carried on the back), give it
   a row in `WeaponStyle.MOTIONS`, then run the tool and check `art/build/paperdoll_preview.png`
   (one row of frames per kind).
 - **A new motion**: add the animation to the hero set in `art/sheets/paperdoll_body.json`

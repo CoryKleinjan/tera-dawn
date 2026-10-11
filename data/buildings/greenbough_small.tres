@@ -7,5 +7,5 @@
 script = ExtResource("1_building_def")
 id = &"greenbough_small"
 texture = ExtResource("2_small")
-height = 250.0
-door_x = 0.52
+height = 278.1
+door_x = 0.47

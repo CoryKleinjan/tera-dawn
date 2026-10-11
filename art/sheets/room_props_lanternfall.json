@@ -1,0 +1,52 @@
+{
+  "source": "art/source/room_props.png",
+  "note": "Painted crate, plant and floor textures for the lanternfall rooms (Gemini edits of the old stand-ins, one town per row: floors from paint_room_props, crate and plant from paint_room_items, outline pixels the magenta tinted repainted plum-brown). Cut at 2 texels per art pixel like the rest of rooms/.",
+  "region": [
+    0,
+    2176,
+    2176,
+    2720
+  ],
+  "out_dir": "assets/sprites/rooms/lanternfall",
+  "scale": 0.5,
+  "keep": "largest",
+  "label_band": 0,
+  "inset": 6,
+  "grid": {
+    "rows": [
+      0,
+      544
+    ],
+    "cols": [
+      0,
+      544,
+      1088,
+      1632,
+      2176
+    ]
+  },
+  "cells": [
+    [
+      "crate",
+      "plant",
+      "floor_soil",
+      "floor_side"
+    ]
+  ],
+  "overrides": {
+    "floor_soil": {
+      "seamless": true, "inset": 28,
+      "size": 256,
+      "keep": "all"
+    },
+    "floor_side": {
+      "seamless": true, "inset": 28,
+      "size": 256,
+      "keep": "all"
+    },
+    "crate": {"flat_bottom": 3},
+    "plant": {
+      "keep": "all", "flat_bottom": 3
+    }
+  }
+}
