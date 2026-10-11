@@ -19,8 +19,8 @@ wrapped next to the long end.
     python3 tools/art/grip_guide.py closeups DIR GUIDE.png
         close-ups of the guide's weapon hands, a few per image (Gemini redraws a hand
         when it is big in the picture; see GROUPS)
-    python3 tools/art/grip_guide.py closeup-hands EDIT_1.png EDIT_2.png ...
-        put the hands from the edited close-ups on the body sheet
+    python3 tools/art/grip_guide.py closeup-hands EDIT_1.png EDIT_2.png ... [--only jump,fall]
+        put the hands from the edited close-ups on the body sheet (only those cells')
 
 `hands` takes only the hand around each rod from the edit (the rod taken out and painted
 over) and pastes it into art/source/paperdoll_body.png, so nothing else on the sheet moves.
@@ -46,6 +46,8 @@ BLADE = 1.4      # the rod reaches this far past the grip on the blade side (hea
 POMMEL = 0.45    # and this far on the pommel side
 THICK = 0.13     # rod thickness (head radii)
 ROD_EDGE = 3     # pixels around the rod that are its outline, painted over with it
+BG_NEAR = 60     # colour distance (summed RGB) that counts as background, reached from the border
+BG_EXACT = 30    # and anywhere
 HAND = 0.55      # the hand taken from the edit reaches this far from the grip (head radii)
 # Gemini's tan shadowed leg is turned this far toward his skin's hue (0-1), keeps this much of
 # its saturation and is lightened by this much: a soft shade of his skin.
@@ -153,15 +155,20 @@ def _rgb(hsv):
 
 
 def solid(arr, box):
-    """The cell `box` of an RGB sheet as RGBA, its background (whatever magenta the cell's
-    border has) clear."""
+    """The cell `box` of an RGB sheet as RGBA, its background clear. Gemini doesn't always keep
+    the magenta (some edits come back pink-grey, near his skin), so the background is whatever
+    colour the cell's border has, reaching in from the border; gaps it can't reach (between an
+    arm and his body) only where they match it closely."""
     x0, y0, x1, y1 = box
     cell = arr[y0:y1, x0:x1, :3].astype(int)
     border = np.concatenate([cell[2], cell[-3], cell[:, 2], cell[:, -3]])
-    bg = np.median(border, 0)
+    dist = np.abs(cell - np.median(border, 0)).sum(2)
+    lab, _ = ss.label(dist < BG_NEAR)
+    edge = np.unique(np.concatenate([lab[:3].ravel(), lab[-3:].ravel(), lab[:, :3].ravel(), lab[:, -3:].ravel()]))
+    bg = np.isin(lab, edge[edge > 0]) | (dist < BG_EXACT)
     out = np.zeros(cell.shape[:2] + (4,), np.uint8)
     out[..., :3] = cell
-    out[..., 3] = np.where(np.abs(cell - bg).sum(2) < 90, 0, 255)
+    out[..., 3] = np.where(bg, 0, 255)
     return out
 
 
@@ -201,7 +208,7 @@ def hands(path, whole=(), rods_path=None):
     edit = _sheet(path, size)
     rods = rod_mask(_sheet(rods_path, size) if rods_path else edit)
     painted = np.dstack([edit, np.full(edit.shape[:2], 255, np.uint8)])
-    pl.inpaint(painted, ss.dilate(rods, ROD_EDGE))  # in place
+    pl.inpaint(painted, ss.dilate(rod_mask(edit), ROD_EDGE))  # in place: the edit's own rods
     painted = painted[..., :3]
 
     # cells the edit redrew whole: copied over, rod painted out, background made pure magenta
@@ -259,6 +266,12 @@ def _panel(r):
     return 2 * round(r * PANEL)
 
 
+def _pinkish(arr):
+    """Edge pixels blended with the magenta background (kept out of a pasted hand)."""
+    rgb = arr[..., :3].astype(int)
+    return (rgb[..., 2] > rgb[..., 1] + 40) & (rgb[..., 0] > rgb[..., 1] + 40)
+
+
 def closeups(out_dir, guide_path):
     """Writes closeup_<n>.png from the guide image, one per GROUPS entry."""
     found, r = grips()
@@ -276,9 +289,9 @@ def closeups(out_dir, guide_path):
         print(f"close-up: {path} ({', '.join(group)})")
 
 
-def closeup_hands(paths):
+def closeup_hands(paths, only=None):
     """Puts the hands from edited close-ups (closeup_<n>.png results, in GROUPS order) on the
-    body sheet."""
+    body sheet: every cell's, or the cells in `only` (where the edit really redrew the hand)."""
     found, r = grips()
     p = _panel(r)
     body = np.asarray(Image.open(BODY).convert("RGB")).copy()
@@ -287,12 +300,14 @@ def closeup_hands(paths):
         size = (len(group) * (p * ZOOM + GAP) + GAP, p * ZOOM + 2 * GAP)
         edit = _sheet(path, size)
         for i, c in enumerate(group):
+            if only and c not in only:
+                continue
             x0 = GAP + i * (p * ZOOM + GAP)
             panel = Image.fromarray(edit[GAP:GAP + p * ZOOM, x0:x0 + p * ZOOM]).resize((p, p), Image.LANCZOS)
             arr = np.dstack([np.asarray(panel), np.full((p, p), 255, np.uint8)])
             pl.inpaint(arr, ss.dilate(rod_mask(arr), 1))  # in place
             new = solid(arr[..., :3], (0, 0, p, p))
-            hand = pl.fist_mask(new, (p / 2, p / 2), r * HAND)
+            hand = pl.fist_mask(new, (p / 2, p / 2), r * HAND) & ~_pinkish(new)
             (x, y), _ = found[c]
             bx, by = round(x) - p // 2, round(y) - p // 2
             region = body[by:by + p, bx:bx + p]
@@ -314,6 +329,7 @@ if __name__ == "__main__":
     elif len(args) >= 3 and args[0] == "closeups":
         closeups(args[1], args[2])
     elif len(args) >= 2 and args[0] == "closeup-hands":
-        closeup_hands(args[1:])
+        only = args[args.index("--only") + 1].split(",") if "--only" in args else None
+        closeup_hands([a for i, a in enumerate(args[1:], 1) if a != "--only" and args[i - 1] != "--only"], only)
     else:
         sys.exit(__doc__)
