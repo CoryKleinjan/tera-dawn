@@ -359,6 +359,26 @@
    }
   },
   {
+   "id": "paperdoll_faces_older",
+   "prompts": null,
+   "batch": "hero faces: painted, less childlike (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_faces_older.png",
+   "replaces": "art/source/paperdoll_faces.png",
+   "kind": "still",
+   "cells": [
+    5,
+    4
+   ],
+   "anchor": null,
+   "note": "2026-10-11 bigger-faces thread: Cory wants faces chibi but not so childlike, painted like the NPCs, proportions like his reference (almond eyes, clear brows, small nose, closed smile). Picked 'close to reference'.",
+   "edit": {
+    "base": "art/source/paperdoll_faces.png",
+    "text": "This sheet is my 2D game hero's face layer: 5 faces (one per row) x 4 expressions (normal, blink, ouch, dizzy). Each cell holds ONLY the facial features (brows, eyes, nose, mouth and face marks) floating on flat magenta: there is no head and no skin, and there must be none in your result either: do not draw a face shape, head, skin colour, ears or hair anywhere; between and around the features is pure magenta #FF00FF. Repaint every cell's features in a soft PAINTED style (smooth painted shading, no visible pixels, thin dark plum-brown lines), in the same cell and the same expression, and make them less childlike, like a stylised chibi teen or young adult rather than a baby: the eyes SMALLER than now (about 60% of their current height) and almond shaped, with a dark upper lid line, a small white shine and a round iris that fills most of the eye; clear, slightly thick brows a little above the eyes; a small simple nose line; a small closed-mouth smile. Keep each row's personality (bright and friendly; determined with lowered brows and a confident smirk; rosy with soft pink blush on the cheeks; freckled with light freckles; cheeky with a raised brow, a grin and a small bandage plaster on one cheek) and its marks. Keep the IRISES drawn in plain neutral GREYS (no colour at all), since the game tints them. Keep the closed-eye blink (curved closed lids), the >< squeezed ouch eyes and the swirl dizzy eyes. Keep every cell's features at the same position and spacing as now, centred in their cell."
+   }
+  },
+  {
    "id": "paperdoll_hair",
    "prompts": "tera-dawn-chatgpt-art-prompts-2.md",
    "batch": "L3",
