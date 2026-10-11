@@ -44,8 +44,9 @@
       "size": 256,
       "keep": "all"
     },
+    "crate": {"flat_bottom": 3},
     "plant": {
-      "keep": "all"
+      "keep": "all", "flat_bottom": 3
     }
   }
 }
