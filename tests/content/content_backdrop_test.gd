@@ -17,9 +17,9 @@ func _centers(m: MapDef) -> Array[float]:
 
 ## Where the top of the floor's painted edge stands, in game y.
 func _floor_top(m: MapDef) -> float:
-	if m.biome.platform_middle == null:
+	if m.look().platform_middle == null:
 		return float(m.ground_y)
-	return PlatformSkin.span(m.biome, m.ground_y).x
+	return PlatformSkin.span(m.look(), m.ground_y).x
 
 ## The strip layer nearest the camera (its bottom shows lowest), or null.
 func _nearest_strip(b: BiomeDef) -> BackdropLayerDef:
@@ -32,7 +32,7 @@ func _nearest_strip(b: BiomeDef) -> BackdropLayerDef:
 
 func test_nearest_backdrop_reaches_the_floor() -> void:
 	for m: MapDef in Content.maps.values():
-		var near := _nearest_strip(m.biome)
+		var near := _nearest_strip(m.look())
 		if near == null:
 			continue
 		var bottom := BackdropBuilder.strip_edges(m, near).y
@@ -52,7 +52,7 @@ func test_buildings_stand_on_the_walking_line() -> void:
 		for b in m.buildings:
 			var pl := layout.platforms[b.platform]
 			var s := SceneryBuilder.building_sprite(b, pl.y)
-			var top := TerrainBuilder.skin_span(m.platforms[b.platform - 1], m.biome).x if b.platform > 0 else _floor_top(m)
+			var top := TerrainBuilder.skin_span(m.platforms[b.platform - 1], m.look()).x if b.platform > 0 else _floor_top(m)
 			for c in _centers(m):
 				var base := TDStage.screen_frac_at(s.position.y, s.position.z, c)
 				var walk := TDStage.screen_frac_at(TDStage.to3d(Vector2(0, pl.y)).y, TDStage.LAND_FRONT, c)

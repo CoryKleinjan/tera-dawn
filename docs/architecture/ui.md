@@ -31,6 +31,17 @@ keep the default, so an old or hand-edited file never breaks the game.
   (bloom, ambient occlusion, fog). `TDStage` turns those on and off when `Settings.changed`
   fires.
 
+- **DevSettings** holds developer-only switches, on a Developer tab that only debug builds
+  (the editor, a debug export) show; a release build ignores them. `test_characters` makes
+  Play solo and Host log in to a test account (`TestCharacters.ACCOUNT`) with a
+  `Character.MAX_LEVEL` character of every job in the best gear it can wear, every skill
+  at its highest level and `TestCharacters.SHARDS` Dawnshards. They're made the first time
+  (`TDLobby.on_local_login`), kept as played after that, and made again after "Rebuild test
+  characters". Everything is picked from the data (`TestCharacters.best_gear_for`), so new
+  jobs, skills and gear show up with no code change. The player's own characters stay on
+  `AccountStore.LOCAL`, untouched. Character select shows `TDLobby.MAX_CHARACTERS` slots,
+  so raise it when there are more jobs than that.
+
 The settings screen (`TDSettingsMenu`) changes a section, calls `Settings.apply(section)` so
 the change shows at once, and `Settings.save()` when it closes. To add a setting, add the
 field to its section (all four methods) and a widget on that section's tab; to add a group,

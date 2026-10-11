@@ -12,6 +12,8 @@ extends RefCounted
 ## world_map.png is the painted world map.
 
 const DIR := "res://assets/sprites/ui/"
+## The smallest text draw_bar writes on a bar.
+const BAR_TEXT_MIN := 9
 ## Where each bar frame's empty groove is, in texels: Rect2(x, y, w, h).
 const GROOVES := {
 	"hp_frame": Rect2(40, 10, 92, 21),
@@ -447,8 +449,10 @@ static func draw_bar(ci: CanvasItem, frame: String, fill: String, pos: Vector2, 
 		DrawUtil.round_rect(ci, Rect2(groove.position, Vector2(groove.size.x * clampf(fraction, 0.0, 1.0), groove.size.y)),
 			groove.size.y / 2.0, Color(1.0, 0.95, 0.75, 0.6 * flash))
 	if text != "":
-		DrawUtil.text(ci, Game.ui_font, groove.position + Vector2(groove.size.x / 2.0, groove.size.y - 4.0 * scale),
-			text, int(12 * scale), Palette.MIST, 0, 4, Color(0.1, 0.05, 0.15, 0.9))
+		# never smaller than BAR_TEXT_MIN, so a bar drawn small stays readable
+		var ts := maxi(int(12 * scale), BAR_TEXT_MIN)
+		DrawUtil.text(ci, Game.ui_font, Vector2(groove.get_center().x, groove.get_center().y + ts * 0.36),
+			text, ts, Palette.MIST, 0, 4, Color(0.1, 0.05, 0.15, 0.9))
 
 ## A bar's fill pill across the left `fraction` of `groove`.
 static func draw_bar_fill(ci: CanvasItem, fill: String, groove: Rect2, fraction: float, scale := 1.0) -> void:
@@ -582,7 +586,7 @@ static func draw_speech(ci: CanvasItem, bottom_center: Vector2, text: String) ->
 static func hint_width(text: String) -> float:
 	return plaque_width(DrawUtil.text_width(Game.ui_font, text, 13), HINT_H)
 
-## A small floating hint ("↑ Talk", "↑ to Ember Hollow").
+## A small floating hint ("↑ Talk", "↑ to Fern Hollow").
 static func draw_hint(ci: CanvasItem, bottom_center: Vector2, text: String) -> void:
 	var w := hint_width(text)
 	draw_plaque(ci, Rect2(bottom_center.x - w / 2.0, bottom_center.y - HINT_H, w, HINT_H))

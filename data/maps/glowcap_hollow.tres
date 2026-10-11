@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=56 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=58 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/lumewood.tres" id="2_lumewood"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/bush_large.png" id="13_bush_large"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/flowers_yellow.png" id="14_flowers_yellow"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/stump.png" id="17_stump"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 
 [sub_resource type="Resource" id="Resource_39"]
 script = ExtResource("11_prop_placement")
@@ -286,11 +287,18 @@ top = 370.0
 bottom = 550.0
 style = ExtResource("6_rope")
 
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+mote_color = Color(0.8, 2.4, 2.2, 1)
+fog_color = Color(0.2275, 0.4784, 0.6039, 1)
+sky_low = Color(0.2902, 0.5412, 0.8157, 1)
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"glowcap_hollow"
 display_name = "Glowcap Hollow"
 biome = ExtResource("2_lumewood")
+variant = SubResource("Variant")
 width = 2800
 height = 900
 ground_y = 820

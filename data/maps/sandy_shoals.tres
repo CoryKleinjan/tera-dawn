@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=64 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=66 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/coast.tres" id="2_coast"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/flowers_yellow.png" id="15_flowers_yellow"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tall_grass.png" id="16_tall_grass"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_large.png" id="17_tree_large"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 [sub_resource type="Resource" id="Resource_47"]
 script = ExtResource("12_prop_placement")
 texture = ExtResource("17_tree_large")
@@ -327,11 +328,17 @@ x = 1180.0
 y = 540.0
 width = 140.0
 
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+light_energy = 2.1
+grade_saturation = 1.14
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"sandy_shoals"
 display_name = "Sandy Shoals"
 biome = ExtResource("2_coast")
+variant = SubResource("Variant")
 width = 2800
 height = 700
 ground_y = 620

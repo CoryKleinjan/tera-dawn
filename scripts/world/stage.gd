@@ -326,7 +326,7 @@ func build() -> void:
 	map_root = Node3D.new()
 	add_child(map_root)
 	var map := world.map
-	var biome := map.biome
+	var biome := map.look()
 	var rng := RandomNumberGenerator.new()
 	rng.seed = hash(map.id)
 	_apply_biome(biome)

@@ -4,6 +4,7 @@ extends CenterContainer
 ##   Controls  two keys for every action (Keybinds); click one, then press the new key
 ##   Audio     a volume slider for each bus and a mute (AudioSettings)
 ##   Video     the window, frame rate and HD-2D effects (VideoSettings)
+##   Developer test characters (DevSettings); debug builds only
 ## Every change is applied at once through the Settings autoload and saved when the screen
 ## closes. To add a tab, write a `_build_<name>` page and list it in `_init`.
 
@@ -44,6 +45,10 @@ var fog_box: CheckBox
 var shake_box: CheckBox
 var _sizes: Array[Vector2i] = []
 
+## Developer
+var test_box: CheckBox
+var rebuild_note: Label
+
 func _init() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	var card := PanelContainer.new()
@@ -65,8 +70,11 @@ func _init() -> void:
 	tabs_row.add_theme_constant_override("separation", 8)
 	col.add_child(tabs_row)
 	var group := ButtonGroup.new()
-	for page in [["Controls", _build_controls(), Settings.keybinds, "menu/icon_controls"], ["Audio", _build_audio(), Settings.audio, "menu/icon_audio"],
-			["Video", _build_video(), Settings.video, "menu/icon_video"]]:
+	var page_list := [["Controls", _build_controls(), Settings.keybinds, "menu/icon_controls"], ["Audio", _build_audio(), Settings.audio, "menu/icon_audio"],
+			["Video", _build_video(), Settings.video, "menu/icon_video"]]
+	if TestCharacters.allowed():
+		page_list.append(["Developer", _build_developer(), Settings.dev, ""])
+	for page in page_list:
 		var b := Button.new()
 		b.text = page[0]
 		b.custom_minimum_size = Vector2(140, 38)
@@ -153,6 +161,9 @@ func refresh() -> void:
 	ao_box.set_pressed_no_signal(v.ambient_occlusion)
 	fog_box.set_pressed_no_signal(v.fog)
 	shake_box.set_pressed_no_signal(v.screen_shake)
+	if test_box:
+		test_box.set_pressed_no_signal(Settings.dev.test_characters)
+		rebuild_note.text = "They'll be made again the next time you play." if Settings.dev.rebuild_next else ""
 
 # ---------- controls ----------
 
@@ -336,6 +347,27 @@ func _grid_row(grid: GridContainer, text: String, control: Control) -> void:
 	l.custom_minimum_size.x = 180
 	grid.add_child(l)
 	grid.add_child(control)
+
+# ---------- developer ----------
+
+func _build_developer() -> Control:
+	var page := VBoxContainer.new()
+	page.add_theme_constant_override("separation", 10)
+	test_box = _check_box("Test characters", func(on: bool) -> void:
+		Settings.dev.test_characters = on
+		Settings.apply(Settings.dev))
+	page.add_child(test_box)
+	page.add_child(_label("Play solo and Host use a test account with a Lv %d character of every job in its best gear.\nYour own characters stay as they are; turn this off to get back to them." % Character.MAX_LEVEL, 12, Palette.MUTED))
+	var rebuild := UiSkin.menu_button("Rebuild test characters", Vector2(280, 40), 16)
+	rebuild.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	rebuild.pressed.connect(func() -> void:
+		Settings.dev.rebuild_next = true
+		refresh())
+	page.add_child(rebuild)
+	rebuild_note = _label("", 12, Palette.MUTED)
+	page.add_child(rebuild_note)
+	page.add_child(_label("Only in debug builds; a release build never shows or uses this.", 12, Palette.MUTED))
+	return page
 
 # ---------- little builders ----------
 

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=62 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=64 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/harbor.tres" id="2_harbor"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/rock_large.png" id="16_rock_large"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tall_grass.png" id="17_tall_grass"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_large.png" id="18_tree_large"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 
 [sub_resource type="Resource" id="Resource_43"]
 script = ExtResource("12_prop_placement")
@@ -311,11 +312,19 @@ top = 170.0
 bottom = 370.0
 style = ExtResource("5_rope")
 
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+sky_low = Color(1, 0.6039, 0.4157, 1)
+sky_horizon = Color(1, 0.8471, 0.5647, 1)
+light_color = Color(1, 0.8471, 0.6588, 1)
+grade_tint = Color(1, 0.95, 0.88, 1)
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"harbor_beach"
 display_name = "Harbor Beach"
 biome = ExtResource("2_harbor")
+variant = SubResource("Variant")
 width = 3200
 height = 700
 ground_y = 620

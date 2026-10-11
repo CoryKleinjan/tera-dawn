@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=49 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=51 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/coast.tres" id="2_coast"]
@@ -12,6 +12,7 @@
 [ext_resource type="Resource" path="res://data/monsters/coral_turret.tres" id="10_coral_turret"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="11_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/bush_large.png" id="13_bush_large"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 
 [sub_resource type="Resource" id="Resource_36"]
 script = ExtResource("11_prop_placement")
@@ -243,11 +244,20 @@ x = 1980.0
 y = 540.0
 width = 140.0
 
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+sky_mid = Color(0.1216, 0.5412, 0.6039, 1)
+fog_color = Color(0.3137, 0.7529, 0.7843, 1)
+ambient_color = Color(0.2275, 0.5647, 0.6588, 1)
+ambient_energy = 0.45
+mote_color = Color(1.2, 2.4, 2.6, 1)
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"coral_reef"
 display_name = "Coral Reef"
 biome = ExtResource("2_coast")
+variant = SubResource("Variant")
 width = 3000
 height = 700
 ground_y = 620

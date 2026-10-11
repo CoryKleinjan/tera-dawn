@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=49 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=51 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="12_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/flowers_yellow.png" id="14_flowers_yellow"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/rock_large.png" id="15_rock_large"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 [sub_resource type="Resource" id="Resource_33"]
 script = ExtResource("12_prop_placement")
 texture = ExtResource("14_flowers_yellow")
@@ -238,11 +239,21 @@ top = 170.0
 bottom = 540.0
 style = ExtResource("5_rope")
 
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+light_energy = 1.4
+grade_saturation = 0.92
+fog_color = Color(0.4157, 0.5412, 0.3529, 1)
+backdrop_tint = Color(0.7216, 0.7686, 0.6588, 1)
+grade_lift = Color(0.2275, 0.2275, 0.1569, 1)
+grade_lift_amount = 0.35
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"thornwood"
 display_name = "Thornwood"
 biome = ExtResource("2_greenwood")
+variant = SubResource("Variant")
 width = 3000
 height = 700
 ground_y = 620

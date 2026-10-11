@@ -2,8 +2,8 @@ class_name TDWorldMapWindow
 extends TDWindow
 ## The world map (W), in two views:
 ## - The **world view**: the painted map (assets/sprites/ui/world_map.png) with every region's
-##   name and main city, and the major routes between regions (WorldRoutes): on foot as a road,
-##   ships as gold dashes. Clicking a region opens its zone view.
+##   name and main city, and the major routes between regions (WorldRoutes): on foot as a row of dots,
+##   ships as thin dashes. Clicking a region opens its zone view.
 ## - A **zone view**: one region up close (for now a zoomed-in part of the same painting,
 ##   RegionDef.zone_rect) with every map in it as a dot, the paths between them, and where each
 ##   exit to another region leads. A back arrow returns to the world view.
@@ -26,10 +26,11 @@ const INFO_H := 58.0
 const INFO_X := PAD + 10
 ## The back arrow in the zone view's top left corner (the creator's painted arrow).
 const BACK_SIZE := Vector2(34, 30)
-## A route on foot: a light road with a dark edge. A trip: gold dashes.
-const ROAD := Color("f3e2b8")
+## Routes and paths: soft dots on foot, thin dashes by ship, on a dark edge.
 const ROAD_EDGE := Color(0.12, 0.08, 0.16, 0.85)
 const TRIP := Color("ffcf5a")
+const ROUTE := Color("fff1cc")
+const ROUTE_DOT_GAP := 9.0
 
 ## The region shown up close, or none for the world view.
 var zone: StringName = &""
@@ -133,14 +134,19 @@ func _draw_world() -> void:
 				DrawUtil.text(self, Game.ui_font, at + Vector2(0, 14), r.level_text, 11, Palette.MIST, 0, 4, Palette.NIGHT)
 	_draw_region_info(Content.regions.get(hovered_region))
 
-## A major route: on foot a road, a trip gold dashes; brighter when `lit`.
+## A route between regions or a path between a zone's maps, kept light so it doesn't cover
+## the painting: on foot a row of soft dots, a trip thin dashes; gold when `lit`.
 func _draw_route(from: Vector2, to: Vector2, by: String, lit: bool) -> void:
+	var col: Color = Palette.SUN if lit else Color(ROUTE, 0.8)
 	if by == "Walk":
-		draw_line(from, to, ROAD_EDGE, 7.0 if lit else 6.0, true)
-		draw_line(from, to, Palette.SUN if lit else ROAD, 3.5 if lit else 3.0, true)
+		var steps := maxi(1, int(from.distance_to(to) / ROUTE_DOT_GAP))
+		for i in steps + 1:
+			var c := from.lerp(to, float(i) / steps)
+			draw_circle(c, 2.6, ROAD_EDGE)
+			draw_circle(c, 1.7, col)
 	else:
-		draw_dashed_line(from, to, ROAD_EDGE, 5.0, 9.0)
-		draw_dashed_line(from, to, Palette.SUN if lit else TRIP, 2.5, 9.0)
+		draw_dashed_line(from, to, ROAD_EDGE, 3.5, 8.0)
+		draw_dashed_line(from, to, col, 1.6, 8.0)
 
 func _draw_dot(c: Vector2, town: bool, on: bool) -> void:
 	if town:
@@ -209,7 +215,7 @@ func _draw_zone() -> void:
 		if a.region == zone and b.region == zone:
 			var lit: bool = hovered in [a.id, b.id]
 			_draw_route(to_screen(a.world_pos), to_screen(b.world_pos), "Walk", lit)
-	# exits to other regions: a road to the edge of the view, labelled with where it leads
+	# exits to other regions: a route to the edge of the view, labelled with where it leads
 	for exit in zone_exits():
 		_draw_route(exit.from, exit.to, exit.by, exit.map == hovered)
 	for m in maps:

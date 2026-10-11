@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=57 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=59 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/bush_large.png" id="15_bush_large"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/flowers_yellow.png" id="16_flowers_yellow"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/rock_large.png" id="17_rock_large"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 
 [sub_resource type="Resource" id="Resource_39"]
 script = ExtResource("11_prop_placement")
@@ -290,11 +291,18 @@ top = 370.0
 bottom = 820.0
 style = ExtResource("6_rope")
 
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+light_energy = 2.1
+sky_low = Color(0.8471, 0.9412, 0.6275, 1)
+light_shafts = 1
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"mossy_glade"
 display_name = "Mossy Glade"
 biome = ExtResource("2_greenwood")
+variant = SubResource("Variant")
 width = 3200
 height = 900
 ground_y = 820

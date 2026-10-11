@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=50 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=52 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/coast.tres" id="2_coast"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_small.png" id="14_tree_small"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_large.png" id="15_tree_large"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/flowers_yellow.png" id="18_flowers_yellow"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 
 [sub_resource type="Resource" id="Resource_32"]
 script = ExtResource("12_prop_placement")
@@ -240,11 +241,21 @@ top = 170.0
 bottom = 370.0
 style = ExtResource("5_rope")
 
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+sky_top = Color(0.07843, 0.1098, 0.1725, 1)
+sky_mid = Color(0.2039, 0.2745, 0.3529, 1)
+light_energy = 1.4
+fog_color = Color(0.3765, 0.4392, 0.502, 1)
+grade_saturation = 0.9
+backdrop_tint = Color(0.7216, 0.7529, 0.8, 1)
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"wreck_cove"
 display_name = "Wreck Cove"
 biome = ExtResource("2_coast")
+variant = SubResource("Variant")
 width = 3000
 height = 700
 ground_y = 620
