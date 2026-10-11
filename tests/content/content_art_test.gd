@@ -72,7 +72,7 @@ func test_climb_styles_have_textures() -> void:
 		if c:
 			_texture(c.middle, path + ": middle")
 			check(c.climb_animation in [&"rope", &"ladder"], "%s: climb_animation %s is not rope or ladder" % [path, c.climb_animation])
-			check(TDPlayer.HERO_FRAMES.has_animation(c.climb_animation), "%s: hero has no %s animation" % [path, c.climb_animation])
+			check(HeroBody.FRAMES.has_animation(c.climb_animation), "%s: hero has no %s animation" % [path, c.climb_animation])
 
 func test_biomes_have_their_art() -> void:
 	for path in Scan.files(Scan.DATA.path_join("biomes")):
@@ -132,4 +132,4 @@ func test_map_props_have_textures() -> void:
 				check(p.scale > 0, "%s: props[%d].scale is %s" % [Scan.where(m), k, p.scale])
 
 func test_hero_has_every_animation_the_game_plays() -> void:
-	_frames(TDPlayer.HERO_FRAMES, "assets/animations/hero.tres", [&"idle", &"rope", &"ladder"])
+	_frames(HeroBody.FRAMES, "assets/animations/hero.tres", [&"idle", &"rope", &"ladder"])

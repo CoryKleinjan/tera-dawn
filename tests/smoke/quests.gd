@@ -5,7 +5,7 @@ extends SmokeArea
 ## Takes Elder Rowan's first quest, does it, hands it in; then a quest whose item only
 ## drops while you're on it.
 func check() -> void:
-	Net.server._enter_map(_me(), Character.START_MAP, 300)
+	Net.server.enter_map(_me(), Character.START_MAP, 300)
 	await _ticks(3)
 	var meadow: MapInstance = Net.server.map_instance(&"meadow")
 	var elder := world.npcs()[0]

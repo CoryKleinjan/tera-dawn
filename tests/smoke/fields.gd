@@ -15,7 +15,7 @@ func check() -> void:
 	_check(world.map.id == &"sunny_slope", "the village's west portal leads to Sunny Slope")
 	_me().inv = 0
 	# a Sporecap splits into Spore Puffs when it's defeated
-	Net.server._enter_map(_me(), &"mushroom_dell", 300)
+	Net.server.enter_map(_me(), &"mushroom_dell", 300)
 	await _ticks(3)
 	var dell: MapInstance = Net.server.maps[&"mushroom_dell"]
 	var cap: SimMob = dell.mobs.filter(func(m: SimMob) -> bool: return m.def.id == &"sporecap")[0]
@@ -30,7 +30,7 @@ func check() -> void:
 	await _ticks(60)
 	_check(cap.children.all(func(c: SimMob) -> bool: return c.dead and c.asleep), "defeated Spore Puffs go back to sleep instead of respawning")
 	# hoppers hop
-	Net.server._enter_map(_me(), &"sunny_slope", 300)
+	Net.server.enter_map(_me(), &"sunny_slope", 300)
 	await _ticks(3)
 	var slope: MapInstance = Net.server.maps[&"sunny_slope"]
 	var hopper: SimMob = slope.mobs.filter(func(m: SimMob) -> bool: return m.def.jumps and not m.dead)[0]
@@ -43,7 +43,7 @@ func check() -> void:
 			break
 	_check(hopped and hopper.body_position().y <= hopper.plat.y, "a Tide Dewling hops")
 	# an Acorn Sentry never moves and shoots anyone near it; the shot lands where they stood
-	Net.server._enter_map(_me(), &"thornwood", 300)
+	Net.server.enter_map(_me(), &"thornwood", 300)
 	await _ticks(3)
 	var wood: MapInstance = Net.server.maps[&"thornwood"]
 	var sentry: SimMob = wood.mobs.filter(func(m: SimMob) -> bool: return m.def.id == &"acorn_sentry" and not m.dead)[0]
@@ -79,11 +79,11 @@ func check() -> void:
 	var e := ch.inventory.find(sword)
 	var stack := ch.inventory.at(ItemDef.Tab.EQUIP, e)
 	var att := stack.stats.attack
-	_check(ch.scroll_problem(ch.inventory.find(Content.item(&"scroll_helmet_hp_60")), e) != "", "a helmet scroll doesn't work on a sword")
-	var r := ch.use_scroll(ch.inventory.find(good), e, 0.0)
+	_check(ch.gear.scroll_problem(ch.inventory.find(Content.item(&"scroll_helmet_hp_60")), e) != "", "a helmet scroll doesn't work on a sword")
+	var r := ch.gear.use_scroll(ch.inventory.find(good), e, 0.0)
 	_check(r["worked"] and stack.stats.attack == att + 2 and stack.slots_used == 1 and stack.upgrades == 1 and stack.display_name().ends_with("+1"),
 		"a scroll that works adds its stats and spends a slot")
-	r = ch.use_scroll(ch.inventory.find(good), e, 0.99)
+	r = ch.gear.use_scroll(ch.inventory.find(good), e, 0.99)
 	_check(not r["worked"] and stack.stats.attack == att + 2 and stack.slots_used == 2 and stack.slots_left() == sword.upgrade_slots - 2,
 		"a scroll that fails still spends a slot")
 	var saved := ItemStack.from_dict(stack.to_dict())
@@ -100,5 +100,5 @@ func check() -> void:
 	await _ticks(3)
 	_check(Game.me.inventory.count_of(good) == 0 and Game.me.inventory.at(ItemDef.Tab.EQUIP, Game.me.inventory.find(sword)).slots_used == 3,
 		"clicking the gear uses the scroll on it")
-	Net.server._enter_map(_me(), &"meadow", 300)
+	Net.server.enter_map(_me(), &"meadow", 300)
 	await _ticks(3)

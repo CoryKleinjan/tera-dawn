@@ -21,14 +21,18 @@ var guild := ""
 var shop_title := ""
 var speech := ""
 var speech_t := 0
-var rig: SpriteRig
-## Their chair and pet.
-var companion: TDCompanion
+## How they're drawn: the rig, their chair and pet (see HeroBody).
+var body: HeroBody
+var rig: SpriteRig:
+	get:
+		return body.rig if body else null
+var companion: TDCompanion:
+	get:
+		return body.companion if body else null
 var chair: StringName = &""
 var pet: StringName = &""
 ## Their appearance and the gear that shows (Character.look()).
 var look := {}
-var _swing := false
 ## How far they moved sideways on the last tick (their walk keeps step with it).
 var _moved_x := 0.0
 
@@ -47,7 +51,8 @@ func apply(state: Array) -> void:
 	var anim := WeaponStyle.animation_for(look, StringName(state[4]))
 	if WeaponStyle.is_spell(anim):
 		anim = &"idle" # spells make no motion (play_skill flashes them)
-	_swing = _swing or (anim != animation and WeaponStyle.is_action(anim))
+	if body and anim != animation and WeaponStyle.is_action(anim):
+		body.restart()
 	animation = anim
 	flags = state[5]
 	if not known or position.distance_to(target) > 300.0:
@@ -69,15 +74,11 @@ func apply_info(info: Array) -> void:
 ## They used a skill: restart its animation even if it's the same one as last time (a buff
 ## or spell makes no motion: they flash its colour instead).
 func play_skill(skill: SkillDef) -> void:
-	if skill == null:
+	if skill == null or body == null:
 		return
-	var anim := WeaponStyle.animation_for(look, skill.animation)
-	if WeaponStyle.is_spell(anim):
-		if rig:
-			rig.pulse(skill.flash_color())
-		return
-	animation = anim
-	_swing = true
+	var anim := body.use_skill(look, skill)
+	if anim != &"":
+		animation = anim
 
 func fainted() -> bool:
 	return flags & SnapshotFlags.PLAYER_FAINTED != 0
@@ -90,31 +91,17 @@ func step() -> void:
 		speech_t -= 1
 
 func _ready() -> void:
-	rig = SpriteRig.new()
-	rig.setup(TDPlayer.HERO_FRAMES, null, TDStage.TEXEL * TDPlayer.HERO_SCALE / Paperdoll.ART_SCALE)
-	rig.add_light(TDPlayer.LIGHT, TDPlayer.LIGHT_ENERGY, TDPlayer.LIGHT_HEIGHT)
-	add_child(rig)
-	companion = TDCompanion.new()
-	add_child(companion)
+	body = HeroBody.new(self, world, TDStage.Z_OTHER_PLAYER)
 
 func _process(_delta: float) -> void:
-	if rig == null or world == null or world.map == null:
+	if body == null or world == null or world.map == null:
 		return
 	rig.visible = known
-	var climbing := flags & SnapshotFlags.PLAYER_CLIMBING != 0
-	var at := world.drawn(self)
-	rig.place(at + Vector2(0, -companion.seat_lift()), TDStage.Z_OTHER_PLAYER)
-	rig.play(&"faint" if fainted() else animation, _swing)
-	rig.set_speed(TDPlayer.stride_speed(animation, _moved_x))
-	_swing = false
-	rig.face(1 if climbing else face)
-	rig.dress(look)
-	var blink := flags & SnapshotFlags.PLAYER_BLINK != 0 and not fainted() and Engine.get_physics_frames() % 8 < 4
-	rig.set_opacity(0.0 if blink else 1.0)
 	companion.visible = known
-	companion.set_chair(chair)
-	companion.set_pet(pet, position)
-	companion.follow(at, face, TDStage.Z_OTHER_PLAYER, world.layout.ground_below(position))
+	var climbing := flags & SnapshotFlags.PLAYER_CLIMBING != 0
+	var blinking := flags & SnapshotFlags.PLAYER_BLINK != 0 and not fainted()
+	body.draw(&"faint" if fainted() else animation, HeroBody.stride_speed(animation, _moved_x), face, climbing, blinking, Engine.get_physics_frames(), chair, pet)
+	rig.dress(look)
 
 ## Their name tag (and guild) under their feet, put in `tags` for the overlay to draw.
 func draw_tag(tags: TDNameTags, at: Vector2) -> void:

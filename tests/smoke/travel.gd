@@ -4,7 +4,7 @@ extends SmokeArea
 ## The world map, Hobb's wagon, return scrolls, and waking up in the right town.
 func check() -> void:
 	var ch := _me().character
-	Net.server._enter_map(_me(), Character.START_MAP, 300)
+	Net.server.enter_map(_me(), Character.START_MAP, 300)
 	await _ticks(3)
 	await _press("worldmap")
 	var wm: TDWorldMapWindow = world.hud.windows["worldmap"]
@@ -96,5 +96,5 @@ func check() -> void:
 	talk.choose(0)
 	await _ticks(3)
 	_check(world.map.id == &"greenbough", "the coach takes you to Greenbough")
-	Net.server._enter_map(_me(), Character.START_MAP, 300)
+	Net.server.enter_map(_me(), Character.START_MAP, 300)
 	await _ticks(3)

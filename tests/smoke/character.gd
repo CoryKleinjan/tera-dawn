@@ -21,22 +21,22 @@ func check() -> void:
 
 	# unequip and equip change stats
 	var attack := c.stats.attack
-	_check(c.unequip(&"weapon") == "" and c.stats.attack == attack - sword.stats.attack, "taking off the sword lowers Weapon Attack")
-	_check(c.equip(_first_filled(c, ItemDef.Tab.EQUIP)) == "" and c.stats.attack == attack, "putting it back on restores Weapon Attack")
+	_check(c.gear.unequip(&"weapon") == "" and c.stats.attack == attack - sword.stats.attack, "taking off the sword lowers Weapon Attack")
+	_check(c.gear.equip(_first_filled(c, ItemDef.Tab.EQUIP)) == "" and c.stats.attack == attack, "putting it back on restores Weapon Attack")
 	c.inventory.add(Content.item(&"leaf_cap"))
 	var defense := c.stats.defense
-	c.equip(_first_filled(c, ItemDef.Tab.EQUIP))
+	c.gear.equip(_first_filled(c, ItemDef.Tab.EQUIP))
 	_check(c.stats.defense > defense, "wearing a hat raises Weapon Defense")
 	c.inventory.add(Content.item(&"dawn_blade"))
-	_check(c.equip(_first_filled(c, ItemDef.Tab.EQUIP)) != "", "level 1 can't wear the level 8 Dawn Blade")
+	_check(c.gear.equip(_first_filled(c, ItemDef.Tab.EQUIP)) != "", "level 1 can't wear the level 8 Dawn Blade")
 
 	# levels give Ability Points, and STR raises damage
 	c.gain_xp(c.xp_need())
-	_check(c.level == 2 and c.ap == c.job.ap_per_level, "levelling up gives Ability Points")
+	_check(c.level == 2 and c.ap.points == c.job.ap_per_level, "levelling up gives Ability Points")
 	var top := c.damage_range().y
 	for n in 5:
-		c.add_ap(&"strength")
-	_check(c.ap == 0 and c.damage_range().y > top, "spending AP on STR raises damage")
+		c.ap.spend(&"strength")
+	_check(c.ap.points == 0 and c.damage_range().y > top, "spending AP on STR raises damage")
 
 	# saving and loading keeps the bag and the gear
 	c.inventory.add(tusk, 3)
@@ -53,26 +53,26 @@ func check() -> void:
 ## Skill Points, Beginner skills, buffs and save files, without the world.
 func _check_skill_rules() -> void:
 	var c := Character.create("Skiller")
-	_check(c.sp == 0 and c.skill_level(Content.skill(Character.BASIC_ATTACK)) == 1, "a new character knows only the basic attack")
+	_check(c.skills.points == 0 and c.skills.level(Content.skill(Character.BASIC_ATTACK)) == 1, "a new character knows only the basic attack")
 	c.gain_xp(c.xp_need())
-	_check(c.sp == 1, "a Beginner gets 1 Skill Point a level")
+	_check(c.skills.points == 1, "a Beginner gets 1 Skill Point a level")
 	var step: SkillDef = Content.skill(&"quick_step")
-	_check(c.learn(step) == "" and c.skill_level(step) == 1 and c.sp == 0, "a Beginner learns Quick Step")
-	_check(c.learn(step) != "", "no Skill Points, no more levels")
-	_check(c.learn(Content.skill(&"power_strike")) != "", "a Beginner can't learn Warrior skills")
+	_check(c.skills.learn(step) == "" and c.skills.level(step) == 1 and c.skills.points == 0, "a Beginner learns Quick Step")
+	_check(c.skills.learn(step) != "", "no Skill Points, no more levels")
+	_check(c.skills.learn(Content.skill(&"power_strike")) != "", "a Beginner can't learn Warrior skills")
 	var speed := c.stats.speed
 	c.mp = 100
-	c.add_buff(step)
+	c.skills.add_buff(step)
 	_check(c.stats.speed > speed, "Quick Step makes you faster")
-	c.tick_buffs(step.duration_ticks(1))
-	_check(c.buffs.is_empty() and c.stats.speed == speed, "and wears off after its time")
-	c.sp = 3
+	c.skills.tick_buffs(step.duration_ticks(1))
+	_check(c.skills.buffs.is_empty() and c.stats.speed == speed, "and wears off after its time")
+	c.skills.points = 3
 	var wind: SkillDef = Content.skill(&"second_wind")
-	c.learn(wind)
-	_check(c.regen_bonus().x == wind.regen_hp, "Second Wind adds HP recovery")
+	c.skills.learn(wind)
+	_check(c.skills.regen_bonus().x == wind.regen_hp, "Second Wind adds HP recovery")
 	var back := Character.new()
 	back.load_dict(c.to_dict())
-	_check(back.skills == c.skills and back.sp == c.sp and back.quickslots == c.quickslots, "skills, Skill Points and quickslots save")
+	_check(back.skills.learned == c.skills.learned and back.skills.points == c.skills.points and back.quickslots == c.quickslots, "skills, Skill Points and quickslots save")
 	var old := c.to_dict()
 	old.erase("sp")
 	old.erase("skills")
@@ -81,7 +81,7 @@ func _check_skill_rules() -> void:
 	old["job"] = "warrior"
 	var legacy := Character.new()
 	legacy.load_dict(old)
-	_check(legacy.sp == 11 * 3 and legacy.quickslots[Character.QUICKSLOTS - 2] == [&"item", &"red_potion"], "older saves get Skill Points for their levels")
+	_check(legacy.skills.points == 11 * 3 and legacy.quickslots[Character.QUICKSLOTS - 2] == [&"item", &"red_potion"], "older saves get Skill Points for their levels")
 
 ## Starting as a Beginner, advancing, and gear only some jobs can use.
 func _check_jobs() -> void:
@@ -97,7 +97,7 @@ func _check_jobs() -> void:
 	c.base.strength = 35
 	var hp := c.max_hp()
 	_check(c.advance(warrior) == "" and c.job == warrior, "a level 10 Beginner with 35 STR becomes a Warrior")
-	_check(c.weapon() == Content.item(&"bronze_sword") and c.max_hp() >= hp, "the Warrior gets a Bronze Sword and wears it")
+	_check(c.gear.weapon() == Content.item(&"bronze_sword") and c.max_hp() >= hp, "the Warrior gets a Bronze Sword and wears it")
 	_check(c.advance(mage) != "", "a Warrior can't then become a Magician")
 	var wand: EquipDef = Content.item(&"apprentice_wand")
 	c.inventory.add(wand)
@@ -106,4 +106,4 @@ func _check_jobs() -> void:
 		var st := c.inventory.at(ItemDef.Tab.EQUIP, i)
 		if st and st.item == wand:
 			slot = i
-	_check(c.equip(slot).begins_with("Only Mages"), "a Warrior can't wear a wand")
+	_check(c.gear.equip(slot).begins_with("Only Mages"), "a Warrior can't wear a wand")

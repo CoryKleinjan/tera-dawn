@@ -6,24 +6,14 @@ extends Node2D
 ## looting and potions are requests the server answers (see Net). The attack key uses the
 ## basic attack; the quickslot keys use whatever skill or item is on that slot.
 
-const HERO_FRAMES := preload("res://assets/animations/hero.tres")
-## The hero's size against everyone else's art (TDStage.TEXEL). MapleStory proportions: he
-## stands about a tenth of the screen tall, a little shorter than the townsfolk (TDNpc.SCALE),
-## so heroes read as young adventurers among grown-ups, and most monsters come up to him.
-const HERO_SCALE := 0.62
-## How tall he stands, feet to the top of his head, in game pixels at HERO_SCALE: speech
+## How tall he stands, feet to the top of his head, in game pixels at HeroBody.SCALE: speech
 ## bubbles and shop signs go just over it.
 const HEIGHT := 60.0
 ## About how wide he is drawn, in game pixels: what the HUD keeps out of the way of.
 const WIDTH := 37.0
-## Where his light sits above his feet (game pixels).
-const LIGHT_HEIGHT := 29.0
 ## His chest above his feet (game pixels): where skill effects and shots start, and where
 ## loot flies to.
 const CHEST := SimPlayer.CHEST
-## A soft warm light that travels with every player, so heroes stand out from the scenery.
-const LIGHT := Color(1.0, 0.86, 0.68)
-const LIGHT_ENERGY := 0.55
 const Z := TDStage.Z_PLAYER
 ## Ticks between telling the server where you are (60 / 3 = 20 a second).
 const REPORT_EVERY := 3
@@ -70,9 +60,6 @@ const RUN_AFTER := 24
 const RUN_SHARE := 0.9
 ## Vertical speed under which a jump shows its top-of-the-arc pose.
 const APEX_SPEED := 1.2
-## The walk and run cycles play at their drawn speed at this ground speed (game pixels a
-## tick), faster or slower in step with him, so his feet don't slide.
-const STRIDE_SPEED := 3.7
 ## Your own sounds (Sound.play ids) and the jingle when you faint (Sound.jingle).
 const JUMP_SOUND := &"jump"
 const HURT_SOUND := &"hurt"
@@ -104,24 +91,23 @@ var loot_cd := 0      # ticks before the loot key asks for the next item
 ## Coyote time and jump buffering (see JumpGrace).
 var jump_grace := JumpGrace.new()
 var _reported := &""  # the animation the server last heard about
-var _swing := false   # restart the attack animation on the next frame
 var speech := ""      # the last thing said in map chat, shown in a bubble
 var speech_t := 0
 var _stop_t := 0      # hit-stop ticks left (the swing holds still, see hit_stop)
 ## The chair you're sitting on (the server said so), or empty. Moving gets you up.
 var sitting: StringName = &""
 
-var rig: SpriteRig
-## Your chair and pet.
-var companion: TDCompanion
+## How you're drawn: the rig, your chair and pet (see HeroBody).
+var body: HeroBody
+var rig: SpriteRig:
+	get:
+		return body.rig if body else null
+var companion: TDCompanion:
+	get:
+		return body.companion if body else null
 
 func _ready() -> void:
-	rig = SpriteRig.new()
-	rig.setup(HERO_FRAMES, null, TDStage.TEXEL * HERO_SCALE / Paperdoll.ART_SCALE)
-	rig.add_light(LIGHT, LIGHT_ENERGY, LIGHT_HEIGHT)
-	add_child(rig)
-	companion = TDCompanion.new()
-	add_child(companion)
+	body = HeroBody.new(self, world, Z)
 	_dress()
 	Game.character_changed.connect(_dress)
 
@@ -216,8 +202,8 @@ func step() -> void:
 		cheer_t -= 1
 	if loot_cd > 0:
 		loot_cd -= 1
-	if not Game.me.buffs.is_empty():
-		Game.me.tick_buffs() # the server ends them too; this keeps timers and speed in step
+	if not Game.me.skills.buffs.is_empty():
+		Game.me.skills.tick_buffs() # the server ends them too; this keeps timers and speed in step
 	if sitting != &"":
 		# any move gets you up; the server sees you move and does the same
 		for a in ["move_left", "move_right", "move_up", "move_down", "jump", "attack"]:
@@ -260,7 +246,7 @@ func _attacks() -> void:
 			use_quickslot(i)
 			return
 	if _tapped("attack"):
-		_use(Game.me.basic_attack())
+		_use(Game.me.skills.basic_attack())
 
 ## Does what's on quickslot `i`: a skill, or the first stack of an item.
 func use_quickslot(i: int) -> void:
@@ -279,21 +265,18 @@ func use_quickslot(i: int) -> void:
 func _use(skill: SkillDef) -> void:
 	if skill == null or is_climbing() or cooldown > 0:
 		return
-	var problem := Game.me.use_problem(skill)
+	var problem := Game.me.skills.use_problem(skill)
 	if problem != "":
 		world.add_log(problem, Palette.INFO)
 		return
 	cooldown = skill.cooldown
-	var anim := WeaponStyle.animation_for(Game.me.look(), skill.animation)
-	if WeaponStyle.is_spell(anim):
-		# buffs and spells make no motion: he flashes the skill's colour and carries on
-		rig.pulse(skill.flash_color())
-	else:
+	# buffs and spells make no motion: he flashes the skill's colour and carries on
+	var anim := body.use_skill(Game.me.look(), skill)
+	if anim != &"":
 		action_t = skill.action_ticks
 		action_anim = anim
 		ready_t = READY_TICKS
 		cheer_t = 0
-		_swing = true
 	Net.ask(&"req_skill", [skill.id, position, face])
 	world.add_effect(skill.effect, position + Vector2(0, -CHEST), face)
 	Sound.play(skill.cast_sound())
@@ -433,19 +416,10 @@ func _move() -> void:
 # ---------- HD-2D visuals ----------
 
 func _process(_delta: float) -> void:
-	if rig == null or world == null or world.map == null:
+	if body == null or world == null or world.map == null:
 		return
-	var at := world.drawn(self)
-	rig.place(at + Vector2(0, -companion.seat_lift()), Z)
 	var anim := _animation()
-	rig.play(anim, _swing)
-	rig.set_speed(stride_speed(anim, vel.x))
-	_swing = false
-	rig.face(1 if is_climbing() else face)
-	rig.set_opacity(0.0 if inv > 0 and inv % 8 < 4 and not fainted() else 1.0)
-	companion.set_chair(sitting)
-	companion.set_pet(Game.me.pet, position)
-	companion.follow(at, face, Z, world.layout.ground_below(position))
+	body.draw(anim, HeroBody.stride_speed(anim, vel.x), face, is_climbing(), inv > 0 and not fainted(), inv, sitting, Game.me.pet)
 
 func _animation() -> StringName:
 	if fainted():
@@ -476,9 +450,3 @@ func _animation() -> StringName:
 	if ready_t > 0:
 		return &"ready"
 	return &"idle"
-
-## How fast an animation plays for a ground speed: walking and running keep step with him.
-static func stride_speed(anim: StringName, speed_x: float) -> float:
-	if anim in [&"walk", &"run"]:
-		return clampf(absf(speed_x) / STRIDE_SPEED, 0.55, 1.4)
-	return 1.0

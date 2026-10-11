@@ -158,7 +158,7 @@ func leave(peer: int) -> void:
 
 ## Moves a player to another map like a portal does.
 func move_to(p: SimPlayer, map: StringName, x := 300.0) -> void:
-	server._enter_map(p, map, x)
+	server.enter_map(p, map, x)
 
 ## Puts a player exactly at `x` on the floor (or `y`), as if they had walked there.
 func place(p: SimPlayer, x: float, y := GROUND) -> void:

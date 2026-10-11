@@ -1,6 +1,6 @@
 extends TestCase
 ## ItemStack: gear stat rolls, exact()/unrolled(), upgrade slots, names, stacking rules,
-## the save format, and scrolls used through Character.use_scroll with a fixed roll.
+## the save format, and scrolls used through Gear.use_scroll with a fixed roll.
 
 var fx: UnitHelpers
 
@@ -153,7 +153,7 @@ func test_scroll_success_adds_stats_and_spends_slot() -> void:
 	var setup := _scroll_setup(0.6)
 	var c: Character = setup[0]
 	var gear: ItemStack = setup[1]
-	var r := c.use_scroll(0, 0, 0.59)
+	var r := c.gear.use_scroll(0, 0, 0.59)
 	check_eq(r, {"problem": "", "worked": true}, "result")
 	check_eq(gear.stats.attack, 13, "attack added")
 	check_eq(gear.stats.strength, 1, "strength added")
@@ -165,7 +165,7 @@ func test_scroll_failure_spends_slot_without_stats() -> void:
 	var setup := _scroll_setup(0.6)
 	var c: Character = setup[0]
 	var gear: ItemStack = setup[1]
-	var r := c.use_scroll(0, 0, 0.6)
+	var r := c.gear.use_scroll(0, 0, 0.6)
 	check_eq(r, {"problem": "", "worked": false}, "roll equal to chance fails")
 	check_eq(gear.stats.attack, 10, "no stats")
 	check_eq(gear.slots_used, 1, "slot still spent")
@@ -176,9 +176,9 @@ func test_scroll_with_no_slots_left_is_refused() -> void:
 	var setup := _scroll_setup(1.0)
 	var c: Character = setup[0]
 	var gear: ItemStack = setup[1]
-	c.use_scroll(0, 0, 0.0)
-	c.use_scroll(0, 0, 0.0)
-	var r := c.use_scroll(0, 0, 0.0)
+	c.gear.use_scroll(0, 0, 0.0)
+	c.gear.use_scroll(0, 0, 0.0)
+	var r := c.gear.use_scroll(0, 0, 0.0)
 	check_ne(r["problem"], "", "refused")
 	check_eq(gear.slots_used, 2, "no more slots spent")
 	check_eq(gear.stats.attack, 16, "two scrolls worked")
@@ -189,7 +189,7 @@ func test_scroll_on_wrong_slot_kind_is_refused() -> void:
 	var hat := fx.equip(&"t_hat", EquipDef.Slot.HAT)
 	c.inventory.add_stack(ItemStack.exact(hat))
 	c.inventory.add(fx.scroll(), 1)
-	var r := c.use_scroll(0, 0, 0.0)
+	var r := c.gear.use_scroll(0, 0, 0.0)
 	check_ne(r["problem"], "", "weapon scroll on a hat")
 	check_eq(c.inventory.at(ItemDef.Tab.EQUIP, 0).slots_used, 0, "no slot spent")
 	check_eq(c.inventory.at(ItemDef.Tab.USE, 0).count, 1, "scroll kept")
@@ -198,34 +198,34 @@ func test_scroll_problem_for_missing_scroll_or_gear() -> void:
 	var c := fx.character()
 	c.inventory.add(fx.use(), 1)
 	c.inventory.add_stack(ItemStack.exact(fx.equip()))
-	check_ne(c.scroll_problem(0, 0), "", "a potion isn't a scroll")
-	check_ne(c.scroll_problem(5, 0), "", "empty use slot")
+	check_ne(c.gear.scroll_problem(0, 0), "", "a potion isn't a scroll")
+	check_ne(c.gear.scroll_problem(5, 0), "", "empty use slot")
 	c.inventory.add(fx.scroll(), 1)
-	check_ne(c.scroll_problem(1, 5), "", "empty equip slot")
-	check_eq(c.scroll_problem(1, 0), "", "scroll on a sword is fine")
+	check_ne(c.gear.scroll_problem(1, 5), "", "empty equip slot")
+	check_eq(c.gear.scroll_problem(1, 0), "", "scroll on a sword is fine")
 
 func test_scroll_with_no_stats_still_counts_upgrade() -> void:
 	var setup := _scroll_setup(1.0)
 	var c: Character = setup[0]
 	var gear: ItemStack = setup[1]
 	(c.inventory.at(ItemDef.Tab.USE, 0).item as ScrollDef).stats = null
-	check(c.use_scroll(0, 0, 0.5)["worked"], "worked")
+	check(c.gear.use_scroll(0, 0, 0.5)["worked"], "worked")
 	check_eq(gear.upgrades, 1, "upgrade counted")
 	check_eq(gear.stats.attack, 10, "stats unchanged")
 
 func test_scroll_default_roll_is_deterministic_with_seed() -> void:
 	var a := _scroll_setup(0.5)
 	seed(4242)
-	var ra: bool = (a[0] as Character).use_scroll(0, 0)["worked"]
+	var ra: bool = (a[0] as Character).gear.use_scroll(0, 0)["worked"]
 	var b := _scroll_setup(0.5)
 	seed(4242)
-	var rb: bool = (b[0] as Character).use_scroll(0, 0)["worked"]
+	var rb: bool = (b[0] as Character).gear.use_scroll(0, 0)["worked"]
 	check_eq(ra, rb, "same seed same outcome")
 
 func test_scrolled_gear_survives_save() -> void:
 	var setup := _scroll_setup(1.0)
 	var c: Character = setup[0]
-	c.use_scroll(0, 0, 0.0)
+	c.gear.use_scroll(0, 0, 0.0)
 	var back := ItemStack.from_dict((setup[1] as ItemStack).to_dict())
 	check_eq(back.stats.attack, 13, "scrolled stats")
 	check_eq(back.slots_left(), 1, "slots left")

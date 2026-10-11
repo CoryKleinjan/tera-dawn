@@ -5,10 +5,10 @@ extends SmokeArea
 ## window.
 func check() -> void:
 	var ch := _me().character
-	Net.server._enter_map(_me(), &"lumewood", 300)
+	Net.server.enter_map(_me(), &"lumewood", 300)
 	await _ticks(3)
 	_check(world.map.id == &"lumewood" and world.map.town, "Lumewood is a town")
-	Net.server._enter_map(_me(), &"lumewood_hall", 240)
+	Net.server.enter_map(_me(), &"lumewood_hall", 240)
 	await _ticks(3)
 	_check(world.map.outside() == &"lumewood", "the Magicians' Library is a room in Lumewood")
 	var guide: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"lumewood_instructor")[0]
@@ -30,9 +30,9 @@ func check() -> void:
 	_check(talk.options[0][0] == "Become a Magician", "a level 10 Beginner with 20 INT may become a Magician")
 	talk.choose(0)
 	await _ticks(2)
-	_check(Game.me.job.id == &"mage" and Game.me.weapon() == Content.item(&"apprentice_wand"), "the server makes them a Magician and hands them a wand to wear")
+	_check(Game.me.job.id == &"mage" and Game.me.gear.weapon() == Content.item(&"apprentice_wand"), "the server makes them a Magician and hands them a wand to wear")
 	Net.ask(&"req_equip", [Game.me.inventory.find(Content.item(&"apprentice_wand")), &"weapon"])
 	await _ticks(2)
 	_check(world.player.rig.paperdoll.look["gear"].get("weapon") == "apprentice_wand", "the hero is drawn holding the wand once it's worn")
-	Net.server._enter_map(_me(), &"meadow", 300)
+	Net.server.enter_map(_me(), &"meadow", 300)
 	await _ticks(3)

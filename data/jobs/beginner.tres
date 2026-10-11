@@ -16,6 +16,8 @@
 [ext_resource type="Resource" path="res://data/items/equips/canvas_shoes.tres" id="c_canvas_shoes"]
 [ext_resource type="Resource" path="res://data/items/equips/clay_clogs.tres" id="c_clay_clogs"]
 [ext_resource type="Resource" path="res://data/items/equips/reed_sandals.tres" id="c_reed_sandals"]
+[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="q_blue_potion"]
+[ext_resource type="Script" path="res://scripts/data/item_def.gd" id="q_item_def"]
 
 [sub_resource type="Resource" id="Resource_2"]
 script = ExtResource("7_drop_entry")
@@ -52,3 +54,4 @@ starting_stats = SubResource("Resource_1")
 starting_gear = Array[ExtResource("3_equip_def")]([ExtResource("4_training_sword"), ExtResource("5_linen_tunic"), ExtResource("6_trail_pants")])
 starting_items = Array[ExtResource("7_drop_entry")]([SubResource("Resource_2")])
 creator_gear = Array[ExtResource("3_equip_def")]([ExtResource("5_linen_tunic"), ExtResource("c_meadow_shirt"), ExtResource("c_berry_smock"), ExtResource("6_trail_pants"), ExtResource("c_rolled_shorts"), ExtResource("c_field_trousers"), ExtResource("c_canvas_shoes"), ExtResource("c_clay_clogs"), ExtResource("c_reed_sandals")])
+starting_quickslots = Array[ExtResource("q_item_def")]([ExtResource("8_red_potion"), ExtResource("q_blue_potion")])

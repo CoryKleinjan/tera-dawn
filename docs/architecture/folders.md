@@ -17,14 +17,16 @@ scripts/
   settings/           SettingsSection and its sections: Keybinds, AudioSettings, VideoSettings
   server/             TDServer, MapInstance, SimPlayer, SimMob, SimDrop, CharacterStore, TDSocial
   server/social/      TDSocial's parts: chat, parties, trade, guilds, player shops
+  server/services/    TDServer's parts (ServerPart): items, NPC shops, storage, travel, quests, jobs
   net/                SnapshotFlags (the bits both sides read in snapshots), SnapshotCodec (packs them)
   data/               Resource classes for everything in data/
-  systems/            Character (and CharacterCodec, its save format), Appearance, NewCharacter,
+  systems/            Character (and CharacterCodec, its save format) and its parts SkillBook,
+                      AbilityPoints and Gear (CharacterPart), Appearance, NewCharacter,
                       Inventory, Equipment,
                       ItemStack, CharacterStats, MonsterBook, Achievements, Balance
-  components/         Health, Hitbox, SpriteRig, Paperdoll (+ Sprite, View)
+  components/         Health, Hitbox, SpriteRig, HeroBody (a hero's rig and companion), Paperdoll (+ Sprite, View)
   actors/             Player (you), Avatar (other players), Companion (chairs, pets), Mob, Npc, Drop views
-  world/              World (what you see), WorldFx (hits, numbers, effects), Stage +
+  world/              World (what you see), WorldCamera, SnapshotSync (server views), WorldFx (hits, numbers, effects), Stage +
                       Terrain/Backdrop/Scenery builders, MapLayout, Platform, DropFlight, Combat
   fx/                 Flipbook effects and floating text
   ui/                 HUD, status bar, overlay, quickslots, character creator, game menu,

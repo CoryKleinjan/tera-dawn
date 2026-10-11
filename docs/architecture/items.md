@@ -52,6 +52,10 @@ and Shield (`EquipDef.Slot` and `Equipment.PLACES_FOR`). Adding a slot means add
 3. Make something drop it: a **DropEntry** on a monster's `drops` (item, chance from 0 to 1,
    amount range). Rare gear is usually 1 to 4%.
 
+A **new kind of consumable** (something no `UseDef` field does yet) is a new field on
+`UseDef` plus one small step in `ServerItems.on_use_item` (`scripts/server/services/items.gd`),
+next to the ones for pet food, teleporting and restoring HP/MP.
+
 Dawnshards go straight to the wallet when walked over; everything else waits on the ground
 for the loot key, and stays there if its tab is full.
 

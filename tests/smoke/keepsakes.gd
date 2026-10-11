@@ -24,7 +24,7 @@ func check() -> void:
 	var hp := ch.health.hp
 	map.tick = (map.tick / 120 + 1) * 120 - 1
 	await _ticks(1)
-	_check(ch.health.hp - hp == 2 + ch.level / 3 + ch.regen_bonus().x + stool.regen_hp, "a chair adds to HP recovery")
+	_check(ch.health.hp - hp == 2 + ch.level / 3 + ch.skills.regen_bonus().x + stool.regen_hp, "a chair adds to HP recovery")
 	await _hold("move_right", 6)
 	await _ticks(4)
 	_check(me.chair == &"" and world.player.sitting == &"", "moving gets you up")

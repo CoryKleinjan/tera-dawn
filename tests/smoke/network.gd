@@ -48,8 +48,8 @@ func check() -> void:
 	var bot_player: SimPlayer = Net.server.sessions[bot_peer]
 	bot_player.inv = 100000
 	# both players go out to the meadow, where the monsters are (the village has none)
-	Net.server._enter_map(_me(), &"meadow", 360)
-	Net.server._enter_map(bot_player, &"meadow", 300)
+	Net.server.enter_map(_me(), &"meadow", 360)
+	Net.server.enter_map(bot_player, &"meadow", 300)
 	# hold a Dewling in front of the bot until its attacks defeat one
 	var meadow: MapInstance = Net.server.maps[&"meadow"]
 	var level := bot_player.character.level

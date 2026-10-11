@@ -9,8 +9,8 @@ func check() -> void:
 	var ally := SimPlayer.new(4242, Character.create("Ally"))
 	Net.server.sessions[ally.peer] = ally
 	social.joined(ally)
-	Net.server._enter_map(_me(), &"meadow", 400)
-	Net.server._enter_map(ally, &"meadow", 470)
+	Net.server.enter_map(_me(), &"meadow", 400)
+	Net.server.enter_map(ally, &"meadow", 470)
 	await _ticks(5)
 	_check(world.avatars.has(ally.peer) and world.avatars[ally.peer].char_name == "Ally", "the other character shows up on the map")
 	# chat
@@ -93,14 +93,14 @@ func check() -> void:
 	Net.ask(&"req_fame", [ally.peer, true])
 	_check(ally.character.fame == 1, "fame goes up by one, once a day")
 	# a guild
-	Net.server._enter_map(_me(), &"dawnharbor", 300)
-	Net.server._enter_map(ally, &"dawnharbor", 400)
+	Net.server.enter_map(_me(), &"dawnharbor", 300)
+	Net.server.enter_map(ally, &"dawnharbor", 400)
 	await _ticks(3)
 	ch.shards = TDSocial.GUILD_COST + 100
 	ch.level = maxi(ch.level, TDSocial.GUILD_LEVEL)
 	# Hollis keeps the guild register in Dawnharbor's Guild Hall
-	Net.server._enter_map(_me(), &"dawnharbor_guild", 240)
-	Net.server._enter_map(ally, &"dawnharbor_guild", 400)
+	Net.server.enter_map(_me(), &"dawnharbor_guild", 240)
+	Net.server.enter_map(ally, &"dawnharbor_guild", 400)
 	await _ticks(3)
 	var clerk: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"guild_clerk")[0]
 	_teleport(Vector2(clerk.position.x - 30, clerk.position.y))
@@ -119,7 +119,7 @@ func check() -> void:
 	await _ticks(2)
 	_check(str(chat.lines[-1]["text"]) == "[Guild] %s: hi guild" % ch.name, "/g talks to the guild")
 	# a player shop in the free market
-	Net.server._enter_map(_me(), &"dawnharbor", 300)
+	Net.server.enter_map(_me(), &"dawnharbor", 300)
 	await _ticks(3)
 	var market: PortalDef = Content.map(&"dawnharbor").portals.filter(func(p: PortalDef) -> bool: return p.target_map == &"free_market")[0]
 	_teleport(Vector2(market.x, 620))
@@ -127,7 +127,7 @@ func check() -> void:
 	await _tap("move_up")
 	await _ticks(4)
 	_check(world.map.id == &"free_market", "Dawnharbor's portal leads to the Free Market")
-	Net.server._enter_map(ally, &"free_market", 900)
+	Net.server.enter_map(ally, &"free_market", 900)
 	ch.inventory.add(Content.item(&"petal_wing"), 4)
 	_me().dirty_character = true
 	await _ticks(3)
@@ -151,5 +151,5 @@ func check() -> void:
 	ally.map.remove_player(ally)
 	await _ticks(35)
 	_check(Game.social.get("party", {}).is_empty(), "a party of one breaks up")
-	Net.server._enter_map(_me(), &"meadow", 300)
+	Net.server.enter_map(_me(), &"meadow", 300)
 	await _ticks(3)
