@@ -69,6 +69,11 @@ const APEX_SPEED := 1.2
 ## The walk and run cycles play at their drawn speed at this ground speed (game pixels a
 ## tick), faster or slower in step with him, so his feet don't slide.
 const STRIDE_SPEED := 3.7
+## Your own sounds (Sound.play ids) and the jingle when you faint (Sound.jingle).
+const JUMP_SOUND := &"jump"
+const HURT_SOUND := &"hurt"
+const PORTAL_SOUND := &"portal"
+const FAINT_JINGLE := &"jingle_death"
 
 var world: TDWorld
 var vel := Vector2.ZERO
@@ -143,6 +148,7 @@ func faint() -> void:
 	down = true
 	climb = null
 	sitting = &""
+	Sound.jingle(FAINT_JINGLE)
 
 ## The server sat you down on a chair (or got you up, with an empty id).
 func sit(chair_id: StringName) -> void:
@@ -160,6 +166,7 @@ func hit_stop(ticks: int) -> void:
 ## The server says a monster hit you: blink, get knocked away from it, and the screen jolts.
 func knock_back(from_x: float) -> void:
 	world.shake(0.3)
+	Sound.play(HURT_SOUND)
 	inv = SimPlayer.HURT_INV
 	if not is_climbing():
 		vel = Vector2(-KNOCKBACK.x if position.x < from_x else KNOCKBACK.x, KNOCKBACK.y)
@@ -285,6 +292,7 @@ func _use(skill: SkillDef) -> void:
 		_swing = true
 	Net.ask(&"req_skill", [skill.id, position, face])
 	world.add_effect(skill.effect, position + Vector2(0, -40), face)
+	Sound.play(skill.cast_sound())
 
 ## Up on the ground: enter a portal, or talk to the NPC in front of you.
 func _interact() -> bool:
@@ -295,6 +303,7 @@ func _interact() -> bool:
 		# fade out before asking: a local server answers at once, and the next map's
 		# fade-in (TDWorld.enter_map) must come after this
 		world.stage.fade_to(1.0)
+		Sound.play(PORTAL_SOUND)
 		Net.ask(&"req_portal")
 		return true
 	var npc := world.npc_near(position)
@@ -388,6 +397,7 @@ func _move() -> void:
 			vel.y = 1
 		else:
 			vel.y = JUMP_SPEED * CharacterStats.jump_multiplier(Game.me.stats)
+			Sound.play(JUMP_SOUND)
 		on_ground = false
 
 	vel.y = minf(vel.y + GRAVITY, MAX_FALL)

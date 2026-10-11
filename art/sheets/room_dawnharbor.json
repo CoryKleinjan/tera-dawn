@@ -42,26 +42,35 @@
         869,
         1174
       ],
-      "scale": 0.2088
+      "scale": 0.2088,
+      "flat_bottom": true
     },
     "counter": {
-      "scale": 0.2971
+      "scale": 0.2971,
+      "flat_bottom": true
     },
     "bookcase": {
-      "scale": 0.4018
+      "scale": 0.4018,
+      "flat_bottom": true
     },
     "table": {
-      "scale": 0.2291
+      "scale": 0.2291,
+      "flat_bottom": true
     },
     "hearth": {
-      "scale": 0.4028
+      "scale": 0.4028,
+      "flat_bottom": true
     },
     "lamp": {
       "scale": 0.3643,
       "keep": "largest"
     },
     "barrel": {
-      "scale": 0.1557
+      "scale": 0.1557,
+      "flat_bottom": true
+    },
+    "shelf": {
+      "flat_bottom": true
     }
   },
   "grid": {

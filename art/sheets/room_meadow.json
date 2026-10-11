@@ -52,7 +52,8 @@
         185,
         776,
         862
-      ]
+      ],
+      "flat_bottom": true
     },
     "counter": {
       "crop": [
@@ -61,7 +62,8 @@
         977,
         876
       ],
-      "scale": 0.2623
+      "scale": 0.2623,
+      "flat_bottom": true
     },
     "shelf": {
       "crop": [
@@ -70,7 +72,8 @@
         984,
         876
       ],
-      "scale": 0.5143
+      "scale": 0.5143,
+      "flat_bottom": true
     },
     "bookcase": {
       "crop": [
@@ -78,7 +81,8 @@
         56,
         982,
         876
-      ]
+      ],
+      "flat_bottom": true
     },
     "table": {
       "crop": [
@@ -87,7 +91,8 @@
         980,
         876
       ],
-      "scale": 0.1956
+      "scale": 0.1956,
+      "flat_bottom": true
     },
     "hearth": {
       "crop": [
@@ -96,7 +101,8 @@
         977,
         871
       ],
-      "scale": 0.3366
+      "scale": 0.3366,
+      "flat_bottom": true
     },
     "rack": {
       "crop": [
@@ -123,7 +129,8 @@
         980,
         871
       ],
-      "scale": 0.13
+      "scale": 0.13,
+      "flat_bottom": true
     }
   },
   "grid": {

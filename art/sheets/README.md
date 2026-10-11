@@ -60,6 +60,7 @@ cross-faded again so they repeat sideways (their `grid` width is the repeat).
 | `grid_threshold` | `0.8` | How much of a row or column must be divider-coloured to count as a divider. |
 | `climb` | | Rope and ladder pieces to line up after cutting, one entry per climb style: `{"ladder": {"top": "ladder_top", "middle": "ladder_middle", "bottom": "ladder_bottom"}}` (`top` and `bottom` optional). See **Climb pieces** below. |
 | `grid` | | Give the cells by hand when detection fails: `{"rows": [y0, y1, y2, ...], "cols": [x0, x1, ...]}` (edges between cells; `cols` can be one list per row). |
+| `flat_bottom` | false | The piece stands on the ground: `true` squares off a rounded or tapering bottom (cuts the rows where the outline still curves in, up to 22% of its height), a number cuts exactly that many rows. Every piece a map stands on its land needs a flat bottom (content_flat_bottom_test). |
 | `overrides` | | Per-cell versions of any key above, plus `crop` `[x0, y0, x1, y1]`, `seamless` (tileable texture, with `size`), `seamless_middle` (end-cap width in sprite px: a bar whose middle is tiled between its caps, its middle cross-faded so it repeats without a seam), `extend_bottom` (pad a backdrop downward), `ground` (with `extend_bottom`: a picture of the padded strip with painted ground in the pad, used in its place so the backdrop meets the floor), `fix` (a named clean-up from `FIXES`), `recolor` (a palette change from `RECOLORS`), `patch` (`[[x0, y0, x1, y1, dx], ...]`: paint a rect with a copy from dx pixels across, to take out an ornament that would stretch in a 9-slice), `flip` (mirror it left to right), `patch_rows` (`[[y0, y1, dy], ...]`: replace rows y0 to y1 with the rows dy away, to take out a divider line drawn across the art) and `out_dir`. |
 
 ## Clean-ups and palette changes
@@ -188,6 +189,9 @@ after the item ids, replacing the placeholders from `tools/art/make_item_placeho
   in each frame are placed by hand in `paperdoll_rig.json` (in 128 px frames; the tool scales them to the strip), with how each
   weapon kind is held ("holds") and which frames hold it behind him (`weapon_behind`). Run it after re-cutting the body.
   `--preview` writes `art/build/paperdoll_preview.png`: every frame with each weapon kind in his hand.
+  The body's weapon hands grip a handle with the thumb by the blade: they were repainted by Gemini
+  from guide rods along the rig's sword angles (`tools/art/grip_guide.py`, which also copies redrawn
+  cells such as the run cycle onto the body sheet). After moving a weapon hand in the rig, redo them the same way.
 - **Held weapons** (`held_*`, art prompts part 8 W2-W6): one weapon per cell, named by item id, pointing right with a green
   grip dot. `paperdoll_layers.py` puts each in his hand on every frame (`weapon_item_<id>`), in its own colours.
   `hero_main` (the painted hero) now cuts into `art/build/` for reference.

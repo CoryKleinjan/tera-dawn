@@ -10,3 +10,4 @@ frames = Array[Texture2D]([ExtResource("2_shard_pickup")])
 lifetime = 24
 texel = 0.55
 energy = 1.8
+sound = &"pickup"

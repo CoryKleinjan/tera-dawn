@@ -92,6 +92,15 @@ func test_grass_stays_behind_the_land() -> void:
 	for s: Sprite3D in grass:
 		check(s.position.z < TDStage.LAND_FRONT, "grass peeks over the land from behind")
 
+func test_towns_have_no_grass() -> void:
+	root.free()
+	map.town = true
+	root = Node3D.new()
+	TerrainBuilder.new(null, root).build(map, MapLayout.new(map).platforms)
+	var grass := _sprites().filter(func(s: Sprite3D) -> bool: return not s.texture is ImageTexture)
+	check_eq(grass.size(), 0, "a town's floor and platforms grow no grass tufts")
+	check_eq(_sprites().size(), map.platforms.size(), "its platforms still get their skins")
+
 func test_land_depth_keeps_order_in_a_thin_layer() -> void:
 	var prev := INF
 	for z in [TDStage.LAND_FRONT, 0.0, -0.5, -2.0, -4.0, -8.8, -TDStage.SCENERY_DEEP]:

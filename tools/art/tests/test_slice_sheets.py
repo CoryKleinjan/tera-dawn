@@ -242,3 +242,27 @@ class PaintGround(unittest.TestCase):
         self.assertTrue((out[:40 - ss.GROUND_BLEND] == strip[:40 - ss.GROUND_BLEND]).all())
         self.assertTrue((out[40:] == (200, 100, 50, 255)).all())
         self.assertTrue((out[..., 3] == 255).all())
+
+
+class FlatBottom(unittest.TestCase):
+    @staticmethod
+    def _sprite(rows):
+        """A sprite whose rows (bottom last) are centred runs of these widths."""
+        a = np.zeros((len(rows), 40, 4), np.uint8)
+        for y, w in enumerate(rows):
+            a[y, 20 - w // 2:20 - w // 2 + w] = 255
+        return Image.fromarray(a, "RGBA")
+
+    def test_cuts_a_rounded_bottom_flat(self):
+        im = self._sprite([30] * 30 + [26, 20, 12])  # a rock curving in at the bottom
+        out = ss.flatten_bottom(im)
+        self.assertEqual(out.height, 30)
+        self.assertEqual((np.asarray(out)[-1, :, 3] > 0).sum(), 30)
+
+    def test_keeps_straight_legs(self):
+        im = self._sprite([30] * 20 + [30] * 0 + [6] * 12)  # a tabletop on a straight post
+        self.assertEqual(ss.flatten_bottom(im).height, im.height)
+
+    def test_a_number_cuts_that_many_rows(self):
+        im = self._sprite([30] * 20)
+        self.assertEqual(ss.flatten_bottom(im, 5).height, 15)

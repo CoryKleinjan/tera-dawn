@@ -12,3 +12,4 @@ speed = 18.0
 spin = 0.0
 energy = 1.1
 max_range = 380.0
+sound = &"bow"

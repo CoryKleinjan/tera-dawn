@@ -35,31 +35,39 @@
       "scale": 0.3896
     },
     "door": {
-      "scale": 0.2455
+      "scale": 0.2455,
+      "flat_bottom": true
     },
     "counter": {
-      "scale": 0.37
+      "scale": 0.37,
+      "flat_bottom": true
     },
     "shelf": {
-      "scale": 0.5498
+      "scale": 0.5498,
+      "flat_bottom": true
     },
     "bookcase": {
-      "scale": 0.3973
+      "scale": 0.3973,
+      "flat_bottom": true
     },
     "table": {
-      "scale": 0.2522
+      "scale": 0.2522,
+      "flat_bottom": true
     },
     "hearth": {
-      "scale": 0.4638
+      "scale": 0.4638,
+      "flat_bottom": true
     },
     "rack": {
-      "scale": 0.2987
+      "scale": 0.2987,
+      "flat_bottom": true
     },
     "lamp": {
       "scale": 0.4252
     },
     "barrel": {
-      "scale": 0.2163
+      "scale": 0.2163,
+      "flat_bottom": true
     }
   },
   "grid": {

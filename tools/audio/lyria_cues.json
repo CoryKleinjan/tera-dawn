@@ -1,0 +1,28 @@
+{
+  "style": "Instrumental only, no vocals. Soundtrack for a cozy 2D fantasy side-scrolling RPG, set in a world of endless dawn: warm, hopeful, golden morning light. Light orchestral and folk instruments, bright and catchy melody, upbeat but gentle, loop-friendly with a steady tempo, no long intro or fade-out.",
+  "jingle_style": "Instrumental only, no vocals. Short game jingle for a cozy 2D fantasy RPG of endless dawn, light orchestral and folk instruments. The jingle itself lasts only 3 to 6 seconds at the very start, then silence for the rest of the clip.",
+  "takes": ["a", "b", "c"],
+  "tracks": {
+    "town_dawnrise": "Town theme for Dawnrise Village, the sunny island village where every new adventurer wakes up. Innocent, warm and welcoming, music box, ocarina, acoustic guitar and soft strings, gentle bouncy tempo.",
+    "town_driftcove": "Town theme for Driftcove, a pirate hideout in sea caves and shipwrecks. Swashbuckling and jolly, fiddle, accordion, concertina, stomping hand drums, a rollicking sea-shanty feel without singing.",
+    "town_emberreach": "Town theme for Emberforge in Emberreach, a warriors' forge town in cinder hills. Proud and sturdy, warm brass, low strings, anvil-like metallic percussion and taiko drums, a strong marching tune that still feels friendly.",
+    "town_greenbough": "Town theme for Greenbough, an archers' village built in giant trees with rope bridges. Airy and lively, wooden flutes, harp, plucked strings, birdsong-like woodwinds, light skipping rhythm.",
+    "town_lanternfall": "Town theme for Lanternfall, a city of glowing lanterns and narrow alleys where thieves gather, at dusk. Sly and playful, pizzicato strings, muted clarinet, soft jazz brushes, celesta, a sneaky tiptoe melody that stays charming.",
+    "town_lumewood": "Town theme for Lumewood, a glowing dreaming forest town where magicians study. Mystical and serene, celesta, glass harmonica, harp arpeggios, soft choir-like pads without words, floating and magical.",
+    "field_dawnrise": "Field theme for the sunny meadows and gentle hills of Dawnrise Isle, where beginners fight their first soft monsters. Carefree and adventurous, strings, flute, light percussion, a bright skipping melody.",
+    "field_dawnharbor": "Field theme for the coast roads, beaches and cliffs around Dawnharbor. Breezy and adventurous, acoustic guitar, strings, flute, light snare, open sea-wind feeling, steady travelling tempo.",
+    "field_driftcove": "Field theme for Driftcove's tide pools, coral reefs, sandy shoals and wreck coves. Watery and buoyant, marimba, steel-string guitar, flowing strings, light island percussion.",
+    "field_emberreach": "Field theme for Emberreach's cinder passes, slag fields and magma falls. Driving and heroic, low brass, strings ostinato, war drums, heat and glowing embers, energetic but not dark.",
+    "field_greenbough": "Field theme for Greenbough's deep forest canopy, thorn woods and mossy glades. Adventurous and verdant, wooden flutes, strings, hand drums, a swinging hunting rhythm.",
+    "field_lanternfall": "Field theme for the misty marshes, moors and dusk bridges outside Lanternfall. Mysterious but adventurous, low strings, clarinet, harp, soft timpani, eerie yet playful, steady tempo.",
+    "field_lumewood": "Field theme for Lumewood's glowing mushroom dells, crystal caves and prism lakes. Wondrous and sparkling, celesta, harp, strings, gentle bells, dreamy yet moving forward.",
+    "dungeon": "Dungeon theme for ancient crypts, deep grottos and hidden caves. Tense and mysterious but still adventurous, low strings, deep bells, soft choir pads without words, steady pulse, not horror.",
+    "boss": "Boss battle theme against a giant monster. Epic and urgent, full orchestra, driving strings, heroic brass, pounding drums, fast tempo, exciting rather than dark."
+  },
+  "jingles": {
+    "jingle_levelup": "Level up jingle: a bright triumphant rising fanfare with brass and sparkling bells.",
+    "jingle_quest": "Quest complete jingle: a cheerful satisfied flourish with strings, flute and a light cymbal.",
+    "jingle_jobadvance": "Job advancement jingle: a grand proud fanfare, full brass and timpani, a hero's new beginning.",
+    "jingle_death": "Defeat jingle: a short gentle sad falling melody on harp and soft strings, not too gloomy."
+  }
+}

@@ -220,3 +220,4 @@ region = &"greenbough"
 world_pos = Vector2(300.0, 160.0)
 return_map = &"greenbough"
 level_text = "Lv. 22-30"
+music = &"boss"

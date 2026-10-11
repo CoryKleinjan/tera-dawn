@@ -2,6 +2,7 @@
   "source": "art/source/mon_crystal_golem.png",
   "label_band": 0.2,
   "strip_labels": true,
+  "fix": "magenta_rim",
   "save": false,
   "out_dir": "art/build/crystal_golem",
   "cells": [

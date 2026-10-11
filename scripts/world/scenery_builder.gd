@@ -221,7 +221,7 @@ func _door(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
 
 ## A rope or ladder: its style's pieces stacked edge to edge (ClimbStyleDef.pieces). Each piece
 ## is drawn one texture pixel taller than its slot, so the joints never show a hairline gap; the
-## next piece covers the extra row.
+## next piece covers the extra row. Like characters, climbables cast no shadows.
 func _climbable(c: ClimbableDef, platforms: Array[Platform]) -> void:
 	var st := c.style
 	if st == null:
@@ -236,6 +236,7 @@ func _climbable(c: ClimbableDef, platforms: Array[Platform]) -> void:
 		s.offset = Vector2(0, -tex.get_height() / 2.0)  # hang from the top edge
 		s.position = TDStage.to3d(Vector2(c.x, p.y), z)
 		s.flip_h = flip and tex == st.top
+		s.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		root.add_child(s)
 		z += 0.001  # each piece just in front of the one above, so the joints don't flicker
 

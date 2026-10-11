@@ -165,14 +165,17 @@ func test_climbables_fit_on_their_platforms() -> void:
 						"%s: climbables[%d] at x %s hangs over the end of the platform at y %s (its art reaches %s px left, %s px right)" % [w, i, c.x, end[0], snappedf(reach.x, 0.1), snappedf(reach.y, 0.1)])
 
 ## A climbable's top piece (a rope's post, a vine's tangle, a ladder's posts) stays small next
-## to the hero: no taller than half of them.
+## to the hero. A rope's top also carries the start of the rope hanging from its knot, so the
+## limit is 60% of the hero's height, not half.
+const CLIMB_TOP_MAX := 0.6
+
 func test_climb_tops_are_in_scale_with_the_hero() -> void:
 	for st: ClimbStyleDef in _climb_styles():
 		if st.top == null:
 			continue
 		var h := TDStage.art_size(st.top, st.texel).y
-		check(h <= TDPlayer.HEIGHT / 2.0,
-				"climb style %s: its top piece is %s px tall, more than half the hero's %s" % [st.id, snappedf(h, 0.1), TDPlayer.HEIGHT])
+		check(h <= TDPlayer.HEIGHT * CLIMB_TOP_MAX,
+				"climb style %s: its top piece is %s px tall, more than %d%% of the hero's %s" % [st.id, snappedf(h, 0.1), CLIMB_TOP_MAX * 100, TDPlayer.HEIGHT])
 
 func _climb_styles() -> Array[ClimbStyleDef]:
 	var out: Array[ClimbStyleDef] = []
