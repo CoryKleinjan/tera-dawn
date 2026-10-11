@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=59 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=57 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/ember.tres" id="2_ember"]
@@ -14,8 +14,6 @@
 [ext_resource type="Resource" path="res://data/monsters/cinder_imp.tres" id="12_cinder_imp"]
 [ext_resource type="Resource" path="res://data/monsters/ashshell.tres" id="13_ashshell"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="14_prop_placement"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/ledge_roots.png" id="15_ledge_roots"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/floating_rock.png" id="16_floating_rock"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/crystals.png" id="17_crystals"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/steam_vent.png" id="18_steam_vent"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/tall_ledge.png" id="19_tall_ledge"]
@@ -230,26 +228,24 @@ script = ExtResource("3_platform_def")
 x = 850.0
 y = 370.0
 width = 100.0
-look = ExtResource("15_ledge_roots")
 
 [sub_resource type="Resource" id="Land_2"]
 script = ExtResource("3_platform_def")
 x = 1550.0
 y = 370.0
 width = 100.0
-look = ExtResource("16_floating_rock")
 
 [sub_resource type="Resource" id="Land_3"]
 script = ExtResource("3_platform_def")
 x = 2570.0
-y = 656.3
+y = 693.3
 width = 100.0
 look = ExtResource("19_tall_ledge")
 
 [sub_resource type="Resource" id="Land_4"]
 script = ExtResource("3_platform_def")
 x = 150.0
-y = 656.3
+y = 693.3
 width = 100.0
 look = ExtResource("19_tall_ledge")
 

@@ -1,6 +1,6 @@
 class_name PropPlacement
 extends Resource
-## One hand-placed piece of scenery (an arch, a floating rock, a crystal).
+## One hand-placed piece of scenery (a crystal, a steam vent).
 
 @export var texture: Texture2D
 @export var x := 0.0
