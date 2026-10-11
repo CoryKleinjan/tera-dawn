@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=61 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=63 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/forge.tres" id="2_forge"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/fire_lilies.png" id="13_fire_lilies"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/tree_small.png" id="15_tree_small"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/steam_vent.png" id="16_steam_vent"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 
 [sub_resource type="Resource" id="Resource_45"]
 script = ExtResource("12_prop_placement")
@@ -312,11 +313,20 @@ x = 1340.0
 y = 740.0
 width = 140.0
 
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+fog_color = Color(0.4157, 0.3529, 0.3451, 1)
+sky_mid = Color(0.2275, 0.1647, 0.149, 1)
+grade_saturation = 0.85
+backdrop_tint = Color(0.6588, 0.6275, 0.6275, 1)
+mote_color = Color(1.4, 1.2, 1, 1)
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"smoke_pits"
 display_name = "Smoke Pits"
 biome = ExtResource("2_forge")
+variant = SubResource("Variant")
 width = 3200
 height = 900
 ground_y = 820

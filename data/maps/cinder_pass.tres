@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=40 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=42 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/forge.tres" id="2_forge"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="11_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/steam_vent.png" id="13_steam_vent"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/stump.png" id="14_stump"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 
 [sub_resource type="Resource" id="Resource_24"]
 script = ExtResource("11_prop_placement")
@@ -188,11 +189,18 @@ top = 170.0
 bottom = 620.0
 style = ExtResource("5_rope")
 
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+grade_saturation = 0.9
+fog_color = Color(0.5412, 0.4157, 0.3529, 1)
+backdrop_tint = Color(0.7843, 0.7216, 0.6902, 1)
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"cinder_pass"
 display_name = "Cinder Pass"
 biome = ExtResource("2_forge")
+variant = SubResource("Variant")
 width = 2600
 height = 700
 ground_y = 620

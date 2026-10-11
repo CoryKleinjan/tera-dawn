@@ -31,7 +31,7 @@ static func spacing(map: MapDef) -> float:
 
 ## The lantern post's size, in game pixels.
 static func post_size(map: MapDef) -> Vector2:
-	return TDStage.art_size(map.biome.lantern) if map.biome and map.biome.lantern else Vector2.ZERO
+	return TDStage.art_size(map.look().lantern) if map.look() and map.look().lantern else Vector2.ZERO
 
 ## The x of each lantern, left to right. One per `spacing` of the map's width, each as near
 ## its even share of the floor as open ground allows; a share with no open ground near it
@@ -97,7 +97,7 @@ static func blocked(map: MapDef) -> Array[Vector2]:
 		if hits.call(y - size.y, y):
 			out.append(Vector2(p.x - size.x * 0.5, p.x + size.x * 0.5))
 	for d in map.platforms:
-		var r := platform_rect(d, map.biome)
+		var r := platform_rect(d, map.look())
 		if hits.call(r.position.y, r.end.y):
 			out.append(Vector2(r.position.x, r.end.x))
 	return out

@@ -9,7 +9,7 @@ const Scan := preload("res://tests/content/content_scan.gd")
 func _outdoor() -> Array[MapDef]:
 	var out: Array[MapDef] = []
 	for m: MapDef in Content.maps.values():
-		if not m.interior and m.biome:
+		if not m.interior and m.look():
 			out.append(m)
 	return out
 
@@ -100,7 +100,7 @@ func test_scenery_is_sparse() -> void:
 		for p in DecorPlacement.floor_pieces(m, _rng(m)):
 			counts[p.rule] = counts.get(p.rule, 0) + 1
 		for rule: DecorDef in counts:
-			var dens := 1.0 if m.biome.town_decor.has(rule) else DecorPlacement.density(m)
+			var dens := 1.0 if m.look().town_decor.has(rule) else DecorPlacement.density(m)
 			var most := ceili(m.width * dens / rule.spacing.x) + 1
 			check(counts[rule] <= most, "%s: %d pieces from one rule (want at most %d)" % [Scan.where(m), counts[rule], most])
 

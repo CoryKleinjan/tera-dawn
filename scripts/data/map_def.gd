@@ -6,7 +6,9 @@ extends Resource
 
 @export var id: StringName
 @export var display_name := ""
+## Its region's look (one BiomeDef per major zone); `variant` is this sub zone's own take on it.
 @export var biome: BiomeDef
+@export var variant: BiomeVariantDef
 @export var width := 2600
 @export var height := 700
 ## The solid floor's top edge. It becomes platform 0.
@@ -56,6 +58,17 @@ extends Resource
 @export var props: Array[PropPlacement] = []
 ## The houses, shops and halls standing along a town's streets.
 @export var buildings: Array[BuildingPlacement] = []
+
+var _look: BiomeDef
+
+## How it looks: its biome with its variant applied (the biome itself when it has none).
+## Builders read this, never `biome` directly.
+func look() -> BiomeDef:
+	if variant == null or biome == null:
+		return biome
+	if _look == null:
+		_look = variant.apply(biome)
+	return _look
 
 ## The town this map sends you back to (see `return_map`).
 func return_town() -> StringName:

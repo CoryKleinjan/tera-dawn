@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=35 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=37 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
-[ext_resource type="Resource" path="res://data/biomes/coast.tres" id="2_coast"]
+[ext_resource type="Resource" path="res://data/biomes/meadow.tres" id="2_coast"]
 [ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="3_platform_def"]
 [ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="4_climbable_def"]
 [ext_resource type="Resource" path="res://data/climb_styles/rope.tres" id="5_rope"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="13_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/bush_large.png" id="17_bush_large"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tall_grass.png" id="18_tall_grass"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 
 [sub_resource type="Resource" id="Resource_15"]
 script = ExtResource("13_prop_placement")
@@ -142,11 +143,21 @@ platform = 6
 target_map = &"hollow"
 target_x = 910.0
 
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+sky_mid = Color(0.3098, 0.5255, 0.6588, 1)
+sky_low = Color(0.9412, 0.7216, 0.5647, 1)
+fog_color = Color(0.6118, 0.7843, 0.8157, 1)
+ambient_color = Color(0.3529, 0.5412, 0.6902, 1)
+backdrop_tint = Color(0.8784, 0.9333, 0.9608, 1)
+hide_layers = PackedInt32Array(3)
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"tidal_flats"
 display_name = "Tidal Flats"
 biome = ExtResource("2_coast")
+variant = SubResource("Variant")
 width = 2000
 height = 900
 ground_y = 820

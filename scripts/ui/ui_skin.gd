@@ -582,7 +582,7 @@ static func draw_speech(ci: CanvasItem, bottom_center: Vector2, text: String) ->
 static func hint_width(text: String) -> float:
 	return plaque_width(DrawUtil.text_width(Game.ui_font, text, 13), HINT_H)
 
-## A small floating hint ("↑ Talk", "↑ to Ember Hollow").
+## A small floating hint ("↑ Talk", "↑ to Fern Hollow").
 static func draw_hint(ci: CanvasItem, bottom_center: Vector2, text: String) -> void:
 	var w := hint_width(text)
 	draw_plaque(ci, Rect2(bottom_center.x - w / 2.0, bottom_center.y - HINT_H, w, HINT_H))

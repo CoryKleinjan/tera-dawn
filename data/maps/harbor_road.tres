@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=56 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=58 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/harbor.tres" id="2_harbor"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_small.png" id="15_tree_small"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tall_grass.png" id="16_tall_grass"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/flowers_yellow.png" id="17_flowers_yellow"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 
 [sub_resource type="Resource" id="Resource_38"]
 script = ExtResource("12_prop_placement")
@@ -278,11 +279,20 @@ x = 300.0
 y = 490.0
 width = 340.0
 
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+sky_mid = Color(0.4784, 0.5647, 0.6902, 1)
+light_energy = 1.6
+grade_saturation = 1.0
+fog_color = Color(0.7216, 0.7686, 0.8314, 1)
+backdrop_tint = Color(0.9098, 0.9255, 0.949, 1)
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"harbor_road"
 display_name = "Harbor Road"
 biome = ExtResource("2_harbor")
+variant = SubResource("Variant")
 width = 3000
 height = 700
 ground_y = 620

@@ -13,7 +13,7 @@ func _init(s: TDStage, r: Node3D) -> void:
 	root = r
 
 func build(map: MapDef, rng: RandomNumberGenerator) -> void:
-	for layer in map.biome.backdrop:
+	for layer in map.look().backdrop:
 		if layer.textures.is_empty():
 			continue
 		if layer.mode == BackdropLayerDef.Mode.STRIP:

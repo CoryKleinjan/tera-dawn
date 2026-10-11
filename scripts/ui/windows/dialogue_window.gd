@@ -171,7 +171,7 @@ func _travel_list() -> void:
 	opts.append(["Back", func() -> void: _main_page(greeting)])
 	_page("Where to?", opts)
 
-## "Wagon to Ember Hollow (Lv. 6-12, 150 Dawnshards)": the trip, who the destination is for
+## "Wagon to Fern Hollow (Lv. 6-12, 150 Dawnshards)": the trip, who the destination is for
 ## (its MapDef.level_text; towns, whose text just says "Town", leave it out) and what `c` pays.
 static func travel_label(r: TravelRoute, dest: MapDef, c: Character) -> String:
 	var fare := r.fare_for(c)

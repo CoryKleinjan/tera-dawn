@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=45 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=47 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/forge.tres" id="2_forge"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/tree_large.png" id="15_tree_large"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/crystals.png" id="16_crystals"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/rock_large.png" id="17_rock_large"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 
 [sub_resource type="Resource" id="Resource_28"]
 script = ExtResource("12_prop_placement")
@@ -207,11 +208,21 @@ x = 1140.0
 y = 540.0
 width = 140.0
 
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+sky_top = Color(0.102, 0.01569, 0.01569, 1)
+sky_mid = Color(0.2902, 0.03922, 0.02353, 1)
+light_energy = 1.5
+fog_color = Color(0.5412, 0.102, 0.03922, 1)
+grade_lift = Color(0.3137, 0.03922, 0.03922, 1)
+grade_lift_amount = 0.4
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"molten_throne"
 display_name = "Molten Throne"
 biome = ExtResource("2_forge")
+variant = SubResource("Variant")
 width = 2000
 height = 700
 ground_y = 620

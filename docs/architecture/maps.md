@@ -60,6 +60,13 @@ textures, parallax backdrop layers (`BackdropLayerDef`: a tiled strip or scatter
 depth), random decoration (`DecorDef`), lantern and portal art. A new region of the
 world is usually a new biome plus a few maps that use it.
 
+Each region has **one** biome (its style); its fields differ within it (Cory, 2026-10-11).
+A field keeps its region's `biome` and sets a **BiomeVariantDef** as `MapDef.variant`: only
+what this sub zone changes (sky, light, fog, colour grade, backdrop tint, hidden backdrop
+layers, extra ground scenery). `MapDef.look()` is the biome with the variant applied; the
+world builders read `look()`, never `biome`. Towns use the plain biome. `tests/screenshot.gd`
+with `subzones` renders every field for a side-by-side look.
+
 ## How to add a building
 
 Towns are a street of buildings in the MapleStory way: each stands at full size right behind

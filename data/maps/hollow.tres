@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=57 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=59 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
-[ext_resource type="Resource" path="res://data/biomes/ember.tres" id="2_ember"]
+[ext_resource type="Resource" path="res://data/biomes/meadow.tres" id="2_meadow"]
 [ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="3_platform_def"]
 [ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="4_climbable_def"]
 [ext_resource type="Resource" path="res://data/climb_styles/rope.tres" id="5_rope"]
@@ -9,14 +9,15 @@
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="7_portal_def"]
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
 [ext_resource type="Resource" path="res://data/monsters/sproutcap.tres" id="9_sproutcap"]
-[ext_resource type="Resource" path="res://data/monsters/ember_boar.tres" id="10_ember_boar"]
-[ext_resource type="Resource" path="res://data/monsters/flame_boar_chief.tres" id="11_flame_boar_chief"]
-[ext_resource type="Resource" path="res://data/monsters/cinder_imp.tres" id="12_cinder_imp"]
-[ext_resource type="Resource" path="res://data/monsters/ashshell.tres" id="13_ashshell"]
+[ext_resource type="Resource" path="res://data/monsters/fern_boar.tres" id="10_fern_boar"]
+[ext_resource type="Resource" path="res://data/monsters/fern_boar_chief.tres" id="11_fern_boar_chief"]
+[ext_resource type="Resource" path="res://data/monsters/shell_crab.tres" id="12_shell_crab"]
+[ext_resource type="Resource" path="res://data/monsters/boulderkin.tres" id="13_boulderkin"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="14_prop_placement"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/crystals.png" id="17_crystals"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/steam_vent.png" id="18_steam_vent"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/tall_ledge.png" id="19_tall_ledge"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/bush_large.png" id="17_bush_large"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/stump.png" id="18_stump"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tall_ledge.png" id="19_tall_ledge"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("3_platform_def")
 x = 300.0
@@ -129,67 +130,67 @@ count = 2
 
 [sub_resource type="Resource" id="Resource_18"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_ember_boar")
+monster = ExtResource("10_fern_boar")
 platform = 0
 count = 2
 
 [sub_resource type="Resource" id="Resource_19"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("11_flame_boar_chief")
+monster = ExtResource("11_fern_boar_chief")
 platform = 0
 count = 1
 
 [sub_resource type="Resource" id="Resource_20"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("12_cinder_imp")
+monster = ExtResource("12_shell_crab")
 platform = 1
 count = 3
 
 [sub_resource type="Resource" id="Resource_21"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_ember_boar")
+monster = ExtResource("10_fern_boar")
 platform = 2
 count = 2
 
 [sub_resource type="Resource" id="Resource_22"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("12_cinder_imp")
+monster = ExtResource("12_shell_crab")
 platform = 3
 count = 2
 
 [sub_resource type="Resource" id="Resource_23"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("13_ashshell")
+monster = ExtResource("13_boulderkin")
 platform = 4
 count = 2
 
 [sub_resource type="Resource" id="Resource_24"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_ember_boar")
+monster = ExtResource("10_fern_boar")
 platform = 5
 count = 2
 
 [sub_resource type="Resource" id="Resource_25"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("13_ashshell")
+monster = ExtResource("13_boulderkin")
 platform = 6
 count = 2
 
 [sub_resource type="Resource" id="Resource_26"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_ember_boar")
+monster = ExtResource("10_fern_boar")
 platform = 7
 count = 2
 
 [sub_resource type="Resource" id="Resource_27"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("12_cinder_imp")
+monster = ExtResource("12_shell_crab")
 platform = 8
 count = 2
 
 [sub_resource type="Resource" id="Resource_30"]
 script = ExtResource("14_prop_placement")
-texture = ExtResource("17_crystals")
+texture = ExtResource("17_bush_large")
 x = 1460.0
 y = -1.0
 depth = -2.6
@@ -201,7 +202,7 @@ light_height = 30.0
 
 [sub_resource type="Resource" id="Resource_31"]
 script = ExtResource("14_prop_placement")
-texture = ExtResource("18_steam_vent")
+texture = ExtResource("18_stump")
 x = 2020.0
 y = -1.0
 depth = -2.3
@@ -213,7 +214,7 @@ light_height = 10.0
 
 [sub_resource type="Resource" id="Resource_32"]
 script = ExtResource("14_prop_placement")
-texture = ExtResource("17_crystals")
+texture = ExtResource("17_bush_large")
 x = 2650.0
 y = -1.0
 depth = -3.4
@@ -238,14 +239,14 @@ width = 100.0
 [sub_resource type="Resource" id="Land_3"]
 script = ExtResource("3_platform_def")
 x = 2570.0
-y = 693.3
+y = 697.3
 width = 100.0
 look = ExtResource("19_tall_ledge")
 
 [sub_resource type="Resource" id="Land_4"]
 script = ExtResource("3_platform_def")
 x = 150.0
-y = 693.3
+y = 697.3
 width = 100.0
 look = ExtResource("19_tall_ledge")
 
@@ -283,11 +284,25 @@ platform = 13
 target_map = &"tidal_flats"
 target_x = 1160.0
 
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+sky_mid = Color(0.2471, 0.4157, 0.2902, 1)
+sky_low = Color(0.7843, 0.8471, 0.5647, 1)
+light_energy = 1.6
+ambient_color = Color(0.2902, 0.4784, 0.3529, 1)
+ambient_energy = 0.45
+fog_color = Color(0.6039, 0.7216, 0.5647, 1)
+mote_color = Color(1.4, 2.2, 1, 1)
+backdrop_tint = Color(0.7216, 0.8157, 0.6902, 1)
+light_shafts = 1
+hide_layers = PackedInt32Array(3)
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"hollow"
-display_name = "Ember Hollow"
-biome = ExtResource("2_ember")
+display_name = "Fern Hollow"
+biome = ExtResource("2_meadow")
+variant = SubResource("Variant")
 width = 2800
 height = 900
 ground_y = 820

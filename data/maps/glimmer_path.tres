@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=45 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=47 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/lumewood.tres" id="2_lumewood"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/rock_large.png" id="14_rock_large"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/stump.png" id="15_stump"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/bush_large.png" id="17_bush_large"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 
 [sub_resource type="Resource" id="Resource_27"]
 script = ExtResource("12_prop_placement")
@@ -214,11 +215,18 @@ top = 170.0
 bottom = 480.0
 style = ExtResource("5_rope")
 
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+light_energy = 1.7
+sky_horizon = Color(0.9412, 0.8471, 1, 1)
+grade_saturation = 1.1
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"glimmer_path"
 display_name = "Glimmer Path"
 biome = ExtResource("2_lumewood")
+variant = SubResource("Variant")
 width = 2600
 height = 700
 ground_y = 620

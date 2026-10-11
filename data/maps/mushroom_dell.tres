@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=54 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=56 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
-[ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
+[ext_resource type="Resource" path="res://data/biomes/meadow.tres" id="2_greenwood"]
 [ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="3_platform_def"]
 [ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="4_climbable_def"]
 [ext_resource type="Resource" path="res://data/climb_styles/rope_ladder.tres" id="5_rope_ladder"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/flowers_yellow.png" id="13_flowers_yellow"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/bush_large.png" id="16_bush_large"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/rock_large.png" id="17_rock_large"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 
 [sub_resource type="Resource" id="Resource_38"]
 script = ExtResource("12_prop_placement")
@@ -267,11 +268,24 @@ x = 2570.0
 y = 540.0
 width = 140.0
 
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+sky_mid = Color(0.3098, 0.3725, 0.4784, 1)
+sky_low = Color(0.6902, 0.6275, 0.7529, 1)
+light_energy = 1.5
+ambient_color = Color(0.3529, 0.4157, 0.6275, 1)
+ambient_energy = 0.45
+fog_color = Color(0.6588, 0.7216, 0.6275, 1)
+mote_color = Color(1.2, 2, 1.4, 1)
+backdrop_tint = Color(0.7843, 0.8471, 0.7843, 1)
+hide_layers = PackedInt32Array(3)
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"mushroom_dell"
 display_name = "Mushroom Dell"
 biome = ExtResource("2_greenwood")
+variant = SubResource("Variant")
 width = 3200
 height = 700
 ground_y = 620

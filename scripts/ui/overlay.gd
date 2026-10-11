@@ -107,7 +107,7 @@ func _draw_minimap(mm: Rect2) -> void:
 	var inner := Rect2(mm.position + MINIMAP_INNER.position, MINIMAP_INNER.size)
 	var sx := inner.size.x / float(world.map.width)
 	var sy := inner.size.y / float(world.map.height)
-	var biome := world.map.biome
+	var biome := world.map.look()
 	# the map's own sky behind it, and its floor
 	var sky_top := Color(biome.sky_mid.darkened(0.35), 0.85)
 	var sky_low := Color(biome.sky_low.darkened(0.2), 0.85)

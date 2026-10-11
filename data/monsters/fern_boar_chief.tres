@@ -1,0 +1,108 @@
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=22 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/bramble_boar.tres" id="2_flame_boar_chief"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
+[ext_resource type="Resource" path="res://data/items/etc/chief_mane.tres" id="loot_chief_mane"]
+[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="loot_white_potion"]
+[ext_resource type="Resource" path="res://data/items/equips/ember_cleaver.tres" id="loot_ember_cleaver"]
+[ext_resource type="Resource" path="res://data/items/equips/sun_pendant.tres" id="loot_sun_pendant"]
+[ext_resource type="Resource" path="res://data/items/equips/ember_helm.tres" id="loot_ember_helm"]
+[ext_resource type="Resource" path="res://data/items/equips/dawn_blade.tres" id="loot_dawn_blade"]
+[ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="loot_elixir"]
+[ext_resource type="Resource" path="res://data/items/setup/boar_hide_rug.tres" id="p11_boar_hide_rug"]
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("4_dawnshard")
+chance = 1.0
+min_amount = 72
+max_amount = 120
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("4_dawnshard")
+chance = 1.0
+min_amount = 12
+max_amount = 24
+
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("4_dawnshard")
+chance = 1.0
+min_amount = 12
+max_amount = 24
+
+[sub_resource type="Resource" id="Resource_loot0"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("loot_chief_mane")
+chance = 1.0
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_loot1"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("loot_white_potion")
+chance = 0.5
+min_amount = 1
+max_amount = 3
+
+[sub_resource type="Resource" id="Resource_loot2"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("loot_ember_cleaver")
+chance = 0.375
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_loot3"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("loot_sun_pendant")
+chance = 0.2
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_loot4"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("loot_ember_helm")
+chance = 0.2
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_loot5"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("loot_dawn_blade")
+chance = 0.3
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_loot6"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("loot_elixir")
+chance = 0.3
+min_amount = 1
+max_amount = 2
+
+[sub_resource type="Resource" id="P11_boar_hide_rug"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("p11_boar_hide_rug")
+chance = 0.08
+min_amount = 1
+max_amount = 1
+
+[resource]
+script = ExtResource("1_monster_def")
+id = &"fern_boar_chief"
+display_name = "Fern Boar Chief"
+level = 12
+max_hp = 2251
+attack = 43
+exp_reward = 399
+speed = 1.0
+size = Vector2(130.0, 110.0)
+sprite_frames = ExtResource("2_flame_boar_chief")
+sprite_scale = 1.39
+drops = Array[ExtResource("3_drop_entry")]([SubResource("P11_boar_hide_rug"), SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_loot0"), SubResource("Resource_loot1"), SubResource("Resource_loot2"), SubResource("Resource_loot3"), SubResource("Resource_loot4"), SubResource("Resource_loot5"), SubResource("Resource_loot6")])
+boss = true
+respawn_ticks = Vector2i(1800, 2400)
+tint = Color(0.8, 1.0, 0.72, 1)
