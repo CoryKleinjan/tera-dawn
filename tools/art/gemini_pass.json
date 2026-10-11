@@ -12480,6 +12480,69 @@
    }
   },
   {
+   "id": "wg_icon_viper_bandana",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_icon_viper_bandana.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": null,
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread: the viper_bandana icon as a head bandana (Cory: 'Update the icon to be a bandana'). Whole-sheet edits left it unchanged twice, so this edits the new dusk bandana icon on its own.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/icon-refs/dusk_bandana_head.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/icon-refs/viper_bandana.png"
+    ],
+    "text": "The first image is an item icon of a HEAD BANDANA (a cloth head scarf with a domed top and a knot with two hanging tails at one side). Repaint this same head bandana, the same shape, angle, size and position, but olive green with a dark green snakeskin (scale) pattern all over it, like the Viper Bandana icon (the second image shows that item as a face mask: take only its colours, pattern and details, NOT its shape). Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. The background stays bright pure magenta #FF00FF."
+   }
+  },
+  {
+   "id": "wg_icon_nightfang_bandana",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_icon_nightfang_bandana.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": null,
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread: the nightfang_bandana icon as a head bandana (Cory: 'Update the icon to be a bandana'). Whole-sheet edits left it unchanged twice, so this edits the new dusk bandana icon on its own.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/icon-refs/dusk_bandana_head.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/icon-refs/nightfang_bandana.png"
+    ],
+    "text": "The first image is an item icon of a HEAD BANDANA (a cloth head scarf with a domed top and a knot with two hanging tails at one side). Repaint this same head bandana, the same shape, angle, size and position, but purple with a ragged lower edge hung with small white fangs, like the Nightfang Bandana icon (the second image shows that item as a face mask: take only its colours, pattern and details, NOT its shape). Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. The background stays bright pure magenta #FF00FF."
+   }
+  },
+  {
+   "id": "wg_icon_eclipse_bandana",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_icon_eclipse_bandana.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": null,
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread: the eclipse_bandana icon as a head bandana (Cory: 'Update the icon to be a bandana'). Whole-sheet edits left it unchanged twice, so this edits the new dusk bandana icon on its own.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/icon-refs/dusk_bandana_head.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/icon-refs/eclipse_bandana.png"
+    ],
+    "text": "The first image is an item icon of a HEAD BANDANA (a cloth head scarf with a domed top and a knot with two hanging tails at one side). Repaint this same head bandana, the same shape, angle, size and position, but black with a gold ring emblem on its front, like the Eclipse Bandana icon (the second image shows that item as a face mask: take only its colours, pattern and details, NOT its shape). Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. The background stays bright pure magenta #FF00FF."
+   }
+  },
+  {
    "id": "wg_hats_5",
    "prompts": null,
    "batch": "worn gear from icon (edit)",
