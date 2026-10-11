@@ -459,21 +459,47 @@ func test_quest_give_up_button_forfeits_through_the_server() -> void:
 
 # ---------- world map ----------
 
-func test_world_map_hover_finds_every_placed_map() -> void:
+func test_world_map_shows_the_major_routes_between_cities() -> void:
 	var wm: TDWorldMapWindow = _open("worldmap")
-	var placed := TDWorldMapWindow.placed()
-	var outdoors := Content.maps.values().filter(func(m: MapDef) -> bool: return not m.interior)
-	check(placed.size() == outdoors.size(), "every map outdoors is on the world map (%d of %d)" % [placed.size(), outdoors.size()])
-	for m in placed:
-		var at := wm.to_screen(m.world_pos)
-		check(wm._area().has_point(at), "%s: its dot at %s lies inside the map area" % [m.id, at])
+	wm.open_zone(&"")
+	check(WorldRoutes.routes().size() > 0, "the world has major routes")
+	for r: RegionDef in Content.regions.values():
+		var at := wm.to_screen(TDWorldMapWindow.capital_pos(r))
+		check(wm._area().has_point(at), "%s: its city at %s lies inside the map area" % [r.id, at])
 		wm._hovered(at)
-		if wm.hovered != m.id:
-			var other: MapDef = Content.maps.get(wm.hovered)
-			fail("%s: hovering its dot finds %s (dots %s apart)" % [m.id, wm.hovered, at.distance_to(wm.to_screen(other.world_pos)) if other else -1.0])
-		await _redrawn(wm, "world map hovering %s" % m.id)
+		check_eq(wm.hovered_region, r.id, "hovering %s's city finds the region" % r.id)
+		await _redrawn(wm, "world map hovering %s" % r.id)
 	wm._hovered(Vector2(-50, -50))
-	check_eq(wm.hovered, &"", "hovering outside the map finds nothing")
+	check_eq(wm.hovered_region, &"", "hovering outside the map finds nothing")
+
+func test_world_map_click_opens_a_zone_and_the_arrow_goes_back() -> void:
+	var wm: TDWorldMapWindow = _open("worldmap")
+	for r: RegionDef in Content.regions.values():
+		wm.open_zone(&"")
+		await _redrawn(wm, "world view")
+		await ui.click(wm, wm.to_screen(TDWorldMapWindow.capital_pos(r)))
+		check_eq(wm.zone, r.id, "clicking %s's city opens its zone" % r.id)
+		await _redrawn(wm, "zone %s" % r.id)
+		for m in TDWorldMapWindow.placed_in(r.id):
+			var at := wm.to_screen(m.world_pos)
+			check(wm._area().grow(-6).has_point(at), "%s: %s's dot at %s lies inside the zone view" % [r.id, m.id, at])
+			wm._hovered(at)
+			check_eq(wm.hovered, m.id, "%s: hovering %s's dot finds it" % [r.id, m.id])
+		check(wm.zone_exits().size() > 0, "%s: the zone shows its ways out" % r.id)
+		for exit in wm.zone_exits():
+			check(wm._area().has_point(exit.label_at), "%s: the label %s lies inside the view" % [r.id, exit.label])
+		await ui.click(wm, wm.back_rect().get_center())
+		check_eq(wm.zone, &"", "%s: the back arrow returns to the world view" % r.id)
+
+func test_world_map_zone_exits_open_the_next_zone() -> void:
+	var wm: TDWorldMapWindow = _open("worldmap")
+	var r: RegionDef = Content.regions.values()[0]
+	wm.open_zone(r.id)
+	await _redrawn(wm, "zone %s" % r.id)
+	var exit: Dictionary = wm.zone_exits()[0]
+	await ui.click(wm, exit.label_at + Vector2(0, -4))
+	check_eq(wm.zone, exit.region, "clicking %s opens that zone" % exit.label)
+	wm.open_zone(&"")
 
 func test_world_map_painting_keeps_its_shape() -> void:
 	# world_pos values are pixels of this painting: a repaint must place every dot again
@@ -481,26 +507,34 @@ func test_world_map_painting_keeps_its_shape() -> void:
 	var wm: TDWorldMapWindow = _open("worldmap")
 	var a := wm._area()
 	check(absf(a.size.aspect() - TDWorldMapWindow.WORLD.aspect()) < 0.01, "the painting is drawn unstretched (%s)" % a.size)
+	for r: RegionDef in Content.regions.values():
+		var v := TDWorldMapWindow.zone_view(r)
+		check(absf(v.size.aspect() - TDWorldMapWindow.WORLD.aspect()) < 0.01, "%s: the zone view is unstretched (%s)" % [r.id, v])
+		check(TDWorldMapWindow.INNER.grow(0.5).encloses(v), "%s: the zone view %s stays inside the painting's scroll" % [r.id, v])
 
-func test_world_map_dots_dont_overlap() -> void:
+func test_world_map_zone_dots_dont_overlap() -> void:
 	var wm: TDWorldMapWindow = _open("worldmap")
-	var placed := TDWorldMapWindow.placed()
-	for i in placed.size():
-		for k in range(i + 1, placed.size()):
-			var d := wm.to_screen(placed[i].world_pos).distance_to(wm.to_screen(placed[k].world_pos))
-			check(d >= 10.0, "%s and %s sit %.1f px apart on the world map" % [placed[i].id, placed[k].id, d])
+	for r: RegionDef in Content.regions.values():
+		wm.open_zone(r.id)
+		var placed := TDWorldMapWindow.placed_in(r.id)
+		for i in placed.size():
+			for k in range(i + 1, placed.size()):
+				var d := wm.to_screen(placed[i].world_pos).distance_to(wm.to_screen(placed[k].world_pos))
+				check(d >= 24.0, "%s and %s sit %.1f px apart in the %s zone view" % [placed[i].id, placed[k].id, d, r.id])
+	wm.open_zone(&"")
 
-func test_world_map_dots_keep_off_region_names() -> void:
+func test_world_map_cities_keep_off_region_names() -> void:
 	var wm: TDWorldMapWindow = _open("worldmap")
+	wm.open_zone(&"")
 	for r: RegionDef in Content.regions.values():
 		if r.label_pos == Vector2.ZERO:
 			continue
 		var label := wm.label_rect(r)
 		check(wm._area().encloses(label), "%s: its name lies inside the map area" % r.id)
-		for m in TDWorldMapWindow.placed():
-			var dot := wm.to_screen(m.world_pos)
+		for other: RegionDef in Content.regions.values():
+			var dot := wm.to_screen(TDWorldMapWindow.capital_pos(other))
 			var hit := Rect2(dot - Vector2(9, 9), Vector2(18, 18)).intersects(label)
-			check(not hit, "%s's dot at %s covers the name %s at %s" % [m.id, dot, r.display_name, label])
+			check(not hit, "%s's city at %s covers the name %s at %s" % [other.id, dot, r.display_name, label])
 	await _redrawn(wm, "world map")
 
 # ---------- community ----------

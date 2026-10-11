@@ -23,8 +23,21 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
    covers them (`tests/content/content_world_test.gd`). The map's name shows only at the top
    of the screen (`display_name`); nothing labels a map out in the world.
 5. Place it in the world: its `region` (a **RegionDef** in `data/regions/`), `world_pos` on
-   the world map (pixels of the painting, `TDWorldMapWindow.WORLD`), `level_text`, and either `town = true` or the
+   the world map (pixels of the painting, `TDWorldMapWindow.WORLD`, inside its region's
+   `zone_rect`), `level_text`, and either `town = true` or the
    `return_map` where fainting and Return Scrolls send you.
+
+## The shape of the world
+
+Each **region** is a major zone with one main city (`RegionDef.capital`) in the middle: a
+border field on each side leads to a neighbouring region, and a training branch goes deeper in.
+Two neighbouring regions share exactly **one** crossing on foot; a region you can't walk to
+(the start island) is reached by ship. `WorldRoutes` works the routes out from the portals and
+travel NPCs (coaches between walkable regions are shortcuts, not routes), and
+`tests/content/content_routes_test.gd` keeps the shape: every map can be walked to from its
+city inside its region. The world map (W) draws the major routes city to city; clicking a
+region opens its zone view (its `zone_rect` of the painting, zoomed in) with every map and path,
+and where each exit leads. A new region needs a `capital`, `label_pos` and `zone_rect`.
 
 An NpcDef with `storage = true` keeps the player's storage (`Character.storage`, an
 Inventory saved with the character; `TDServer.on_store` / `on_retrieve`, `TDStorageWindow`).
