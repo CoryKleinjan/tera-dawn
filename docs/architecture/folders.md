@@ -41,7 +41,7 @@ art/
   sheets/             One manifest per sheet: how to cut it
   reference/          Style reference (the hero)
 store/                Steam capsules and key art
-tools/art/            Slicer, store-art cropper, fx texture and room stand-in generators, contact-sheet preview, Gemini batch runner (gemini_pass.py + gemini_pass.json), paperdoll layers
+tools/art/            Slicer, store-art cropper, fx texture and item placeholder generators, contact-sheet preview, Gemini batch runner (gemini_pass.py + gemini_pass.json), paperdoll layers
 tools/audio/          Lyria music runner (lyria_pass.py + lyria_cues.json), make_music.py (loops, jingles), make_sfx.py
 docs/architecture/    One page per system (linked from ARCHITECTURE.md)
 tests/                Test runner (unit/, server/, content/, ui/ suites on framework/), smoke test

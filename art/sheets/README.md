@@ -120,10 +120,11 @@ has its own list in `art/sheets/paperdoll_body.json`.
 ## Item icons and window art
 
 `items_gear` and `items_consumables` cut the item icons into `assets/sprites/items/`, named
-after the item ids. `elixir` and `mana_elixir` are art for future potions.
+after the item ids, replacing the placeholders from `tools/art/make_item_placeholders.py`
+(which never overwrites a real icon). `elixir` and `mana_elixir` are art for future potions.
 `ui_windows` cuts the window frame, tabs, slots, buttons and tooltip into
 `assets/sprites/ui/`, which the game windows and the status bar's window buttons draw with.
-The windows brighten `item_slot` on hover (the sheet's hover cell isn't cut).
+`item_slot_hover` isn't used: the windows brighten `item_slot` on hover instead.
 
 ## Monsters, NPCs, areas and the paperdoll (art prompts parts 1 to 3)
 
@@ -137,9 +138,7 @@ The windows brighten `item_slot` on hover (the sheet's hover cell isn't cut).
 - **NPC sheets** (`npcs_<town>`) use a fixed `grid`; each NPC's `scale` override sets its
   height next to the hero, and its set writes `assets/animations/npc_<id>.tres` (idle).
 - **Area sheets**: each area has `<area>_tileset.png`, cut by `<area>_tileset` into
-  `assets/sprites/tiles/<area>/` (scenery: trees, bushes, rocks, flowers, lanterns; the land itself
-  comes from `ground/` and `platforms/`), and `<area>_backgrounds_fine.png`, cut by
-  `<area>_backgrounds` into `backgrounds/<area>/`. Sheets that
+  `assets/sprites/tiles/<area>/` and `<area>_backgrounds_fine.png`, cut by `<area>_backgrounds` into `backgrounds/<area>/`. Sheets that
   came back on a darker magenta, with soft pink glows or with the sky painted behind a strip
   were evened out first by `tools/art/clean_sheet.py` (it edits the source in place, so run it
   on the original picture). The sun or moon uses `sky_body`; glowing icons use `glow_backdrop`.

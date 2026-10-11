@@ -6,22 +6,22 @@
   "out_dir": "assets/sprites/tiles/ember",
   "cells": [
     [
-      "",
-      "",
-      "",
-      "",
+      "ground_middle",
+      "ground_left",
+      "ground_right",
+      "corner_small",
       "corner_slope"
     ],
     [
-      "",
-      "",
-      "",
-      "",
-      ""
+      "platform_small",
+      "platform_medium",
+      "platform_large",
+      "slope_up",
+      "slope_down"
     ],
     [
       "arch",
-      "",
+      "tall_ledge",
       "ledge_overhang",
       "ledge_roots",
       "floating_rock"
@@ -82,6 +82,91 @@
         28,
         303,
         194
+      ],
+      "grow": 1.22
+    },
+    "ground_middle": {
+      "crop": [
+        0,
+        32,
+        383,
+        211
+      ]
+    },
+    "ground_left": {
+      "crop": [
+        0,
+        32,
+        286,
+        211
+      ]
+    },
+    "ground_right": {
+      "crop": [
+        0,
+        32,
+        289,
+        211
+      ]
+    },
+    "corner_small": {
+      "crop": [
+        0,
+        32,
+        267,
+        211
+      ],
+      "grow": 1.24
+    },
+    "platform_small": {
+      "crop": [
+        0,
+        28,
+        221,
+        189
+      ],
+      "grow": 1.22
+    },
+    "platform_medium": {
+      "crop": [
+        0,
+        28,
+        291,
+        189
+      ],
+      "grow": 1.15
+    },
+    "platform_large": {
+      "crop": [
+        0,
+        28,
+        422,
+        189
+      ],
+      "grow": 1.24
+    },
+    "slope_up": {
+      "crop": [
+        0,
+        28,
+        289,
+        189
+      ]
+    },
+    "slope_down": {
+      "crop": [
+        0,
+        28,
+        283,
+        189
+      ]
+    },
+    "tall_ledge": {
+      "crop": [
+        0,
+        27,
+        224,
+        230
       ],
       "grow": 1.22
     },

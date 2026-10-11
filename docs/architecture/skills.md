@@ -16,7 +16,7 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
      `hit_effect` on each target).
 2. Effects are **EffectDef**s in `data/effects/`: a flipbook of frames from
    `assets/sprites/effects/`, its speed and size, an optional light and particle burst.
-3. Give it an icon: a painted cell on a skill icon sheet (a Gemini edit in `tools/art/gemini_pass.json`).
+3. Give it an icon (until there's art, add it to `tools/art/make_skill_placeholders.py`).
 
 It then appears in its job's tab of the skill window (K). Players spend Skill Points on it
 (`Character.learn`, checked by `TDServer.on_learn_skill`), and a newly learned attack or

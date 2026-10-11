@@ -28,7 +28,7 @@
       "window_frame"
     ],
     [
-      ""
+      "item_slot_hover"
     ],
     [
       "equip_doll_bg"
@@ -45,6 +45,17 @@
         ]
       ],
       "scale": 0.375
+    },
+    "item_slot_hover": {
+      "blank": [
+        [
+          0,
+          0,
+          278,
+          33
+        ]
+      ],
+      "scale": 0.6017
     },
     "equip_doll_bg": {
       "blank": [

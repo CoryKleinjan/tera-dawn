@@ -22,10 +22,10 @@
       "portal_2",
       "portal_3",
       "portal_4",
-      ""
+      "portal_base"
     ],
     [
-      "",
+      "lantern_unlit",
       "lantern_lit",
       "dawnshard_1",
       "dawnshard_2",
@@ -73,6 +73,15 @@
       ],
       "scale": 0.3265
     },
+    "portal_base": {
+      "crop": [
+        0,
+        55,
+        620,
+        515
+      ],
+      "scale": 0.3314
+    },
     "lantern_lit": {
       "crop": [
         0,
@@ -83,6 +92,15 @@
       "fix": "glow_backdrop",
       "scale": 0.4698,
       "flat_bottom": true
+    },
+    "lantern_unlit": {
+      "crop": [
+        0,
+        60,
+        600,
+        522
+      ],
+      "scale": 0.4698
     },
     "dawnshard_1": {
       "crop": [

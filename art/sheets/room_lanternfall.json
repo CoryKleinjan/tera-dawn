@@ -18,7 +18,7 @@
     ],
     [
       "hearth",
-      "",
+      "rack",
       "lamp",
       "barrel"
     ]
@@ -58,6 +58,9 @@
     "hearth": {
       "scale": 0.488,
       "flat_bottom": true
+    },
+    "rack": {
+      "scale": 0.3575
     },
     "lamp": {
       "scale": 0.308

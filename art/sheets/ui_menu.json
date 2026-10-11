@@ -7,7 +7,7 @@
   "cells": [
     [
       "",
-      "",
+      "settings_panel",
       "tab_on",
       "tab_off",
       "wide_button"
@@ -46,6 +46,18 @@
     ]
   ],
   "overrides": {
+    "settings_panel": {
+      "recolor": "dark_parchment",
+      "blank": [
+        [
+          0,
+          0,
+          144,
+          17
+        ]
+      ],
+      "scale": 0.947
+    },
     "dropdown": {
       "recolor": "dark_parchment",
       "blank": [

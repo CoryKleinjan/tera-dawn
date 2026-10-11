@@ -6,15 +6,15 @@
   "out_dir": "assets/sprites/tiles/driftcove",
   "cells": [
     [
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
+      "ground_left",
+      "ground_middle",
+      "ground_right",
+      "platform_small",
+      "platform_medium",
+      "platform_large"
     ],
     [
-      "",
+      "edge_grass",
       "tall_grass",
       "tree_large",
       "tree_small",
@@ -31,7 +31,7 @@
     ],
     [
       "",
-      "",
+      "lantern_unlit",
       "lantern_lit",
       "building_large",
       "building_small",
@@ -90,6 +90,67 @@
       ],
       "grow": 0.88,
       "flat_bottom": true
+    },
+    "ground_left": {
+      "crop": [
+        0,
+        25,
+        246,
+        251
+      ],
+      "grow": 0.8
+    },
+    "ground_middle": {
+      "crop": [
+        0,
+        25,
+        251,
+        251
+      ],
+      "grow": 0.8
+    },
+    "ground_right": {
+      "crop": [
+        0,
+        25,
+        252,
+        251
+      ],
+      "grow": 0.8
+    },
+    "platform_small": {
+      "crop": [
+        0,
+        25,
+        252,
+        251
+      ],
+      "grow": 0.8
+    },
+    "platform_medium": {
+      "crop": [
+        0,
+        25,
+        252,
+        251
+      ]
+    },
+    "platform_large": {
+      "crop": [
+        0,
+        25,
+        247,
+        251
+      ]
+    },
+    "edge_grass": {
+      "crop": [
+        0,
+        26,
+        246,
+        251
+      ],
+      "grow": 0.8
     },
     "tall_grass": {
       "crop": [
@@ -175,6 +236,15 @@
         252
       ],
       "flat_bottom": true
+    },
+    "lantern_unlit": {
+      "crop": [
+        0,
+        26,
+        251,
+        252
+      ],
+      "grow": 1.02
     },
     "building_large": {
       "crop": [

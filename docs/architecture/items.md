@@ -40,9 +40,9 @@ and Shield (`EquipDef.Slot` and `Equipment.PLACES_FOR`). Adding a slot means add
 
 ## How to add an item or piece of gear
 
-1. Give it an icon in `assets/sprites/items/<id>.png`: a painted cell on an item sheet (a Gemini
-   edit in `tools/art/gemini_pass.json`, cut by its `art/sheets/items_*.json` manifest). Gear's icon
-   matches its worn layer.
+1. Give it an icon in `assets/sprites/items/<id>.png`. Until there's real art, add it to
+   `ICONS` in `tools/art/make_item_placeholders.py` (or `tools/art/item_icons.json`) and run
+   the script.
 2. Create the `.tres` in `data/items/equips/`, `use/` or `etc/` as an **EquipDef**, **UseDef**
    or **ItemDef**. Fill in `id`, name, description, icon and `sell_price`; for gear, the slot,
    requirements and a **StatBlock** in `stats`. A top, bottom or shoes also needs a

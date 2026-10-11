@@ -5,18 +5,18 @@
   "out_dir": "assets/sprites/tiles/meadow",
   "cells": [
     [
-      "",
-      "",
-      "",
-      "",
-      ""
+      "ground_middle",
+      "ground_left",
+      "ground_right",
+      "corner_small",
+      "corner_large"
     ],
     [
-      "",
-      "",
-      "",
-      "",
-      ""
+      "platform_small",
+      "platform_medium",
+      "platform_large",
+      "slope_up",
+      "slope_down"
     ],
     [
       "arch",

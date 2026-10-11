@@ -6,15 +6,15 @@
   "out_dir": "assets/sprites/tiles/greenbough",
   "cells": [
     [
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
+      "ground_left",
+      "ground_middle",
+      "ground_right",
+      "platform_small",
+      "platform_medium",
+      "platform_large"
     ],
     [
-      "",
+      "edge_grass",
       "tall_grass",
       "tree_large",
       "tree_small",
@@ -31,7 +31,7 @@
     ],
     [
       "",
-      "",
+      "lantern_unlit",
       "lantern_lit",
       "building_large",
       "building_small",
@@ -100,6 +100,68 @@
       ],
       "grow": 1.01,
       "flat_bottom": true
+    },
+    "ground_left": {
+      "crop": [
+        0,
+        27,
+        225,
+        218
+      ],
+      "grow": 1.25
+    },
+    "ground_middle": {
+      "crop": [
+        0,
+        27,
+        229,
+        218
+      ],
+      "grow": 1.25
+    },
+    "ground_right": {
+      "crop": [
+        0,
+        27,
+        229,
+        218
+      ],
+      "grow": 1.25
+    },
+    "platform_small": {
+      "crop": [
+        0,
+        27,
+        261,
+        218
+      ],
+      "grow": 0.8
+    },
+    "platform_medium": {
+      "crop": [
+        0,
+        27,
+        281,
+        218
+      ],
+      "grow": 0.89
+    },
+    "platform_large": {
+      "crop": [
+        0,
+        27,
+        275,
+        218
+      ]
+    },
+    "edge_grass": {
+      "crop": [
+        0,
+        29,
+        226,
+        233
+      ],
+      "grow": 0.86
     },
     "tall_grass": {
       "crop": [
@@ -208,6 +270,15 @@
       ],
       "grow": 1.01,
       "flat_bottom": true
+    },
+    "lantern_unlit": {
+      "crop": [
+        0,
+        35,
+        243,
+        286
+      ],
+      "grow": 1.01
     },
     "building_large": {
       "crop": [
