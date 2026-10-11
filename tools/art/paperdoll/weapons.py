@@ -112,8 +112,7 @@ def grip_point(arr, kind, axis, dots):
     - a blade (sword kind): in the middle of the handle, between the pommel and the crossguard
       (the first place, going up from the pommel, that gets much wider than the handle);
     - a wand or staff: halfway along the shaft;
-    - a gun: on the pistol grip (the dot nearest its back, or the part hanging below the
-      barrel at the back when it has no dot);
+    - a gun: in the middle of the pistol grip (the part hanging below the barrel at the back);
     - a claw: in the middle of its cuff (CLAW_CUFF along it), so the cuff covers his fist;
     - anything else (bows, knuckles): its dot, or a guess near its back end."""
     xs, ys, a, b = _along(arr, axis)
@@ -131,14 +130,19 @@ def grip_point(arr, kind, axis, dots):
     if kind == "claw":
         # the middle of the cuff, so the cuff covers his fist and the blades reach past it
         return _on_axis(arr, axis, lo + span * CLAW_CUFF)
+    if kind == "gun":
+        # the middle of the pistol grip: what hangs below the barrel's underside (the lowest
+        # row of its front part) at the back, so his whole fist wraps the grip
+        solid = arr[..., 3] > 0
+        cols = np.nonzero(solid.any(0))[0]
+        front = cols[cols > cols.min() + (cols.max() - cols.min()) * (1 - GUN_FRONT)]
+        under = np.median([np.nonzero(solid[:, x])[0].max() for x in front])
+        grip = (ys > under) & (xs < cols.min() + (cols.max() - cols.min()) * GUN_BACK)
+        if grip.any():
+            return (float(xs[grip].mean()), float(ys[grip].mean()))
     c, s = math.cos(math.radians(axis)), math.sin(math.radians(axis))
     if dots:
         return min(dots, key=lambda d: d[0] * c + d[1] * s)  # the back hand
-    if kind == "gun":
-        back = a < lo + span * 0.35
-        below = back & (ys > np.median(ys))
-        if below.any():
-            return (float(xs[below].mean()), float(np.percentile(ys[below], 30)))
     return (float(arr.shape[1] * 0.15), float(arr.shape[0] / 2))
 
 
