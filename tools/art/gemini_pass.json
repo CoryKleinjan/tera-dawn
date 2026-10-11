@@ -8935,6 +8935,27 @@
     "base": "/mnt/project-files/art-sheets/run-redo/cape_base.png",
     "text": "This sheet shows my character in 32 labelled poses (8 columns x 4 rows) on magenta. In 28 of the cells he wears a greyscale painted cape. In cells 9, 10, 11 and 12 (RUN 1 to RUN 4) he is bare. Dress those four running figures in EXACTLY the same cape as the other 28 cells: same shape, length, details, greyscale tones, outline and soft painted style, following his running pose and the same size as his body. Do not move, resize or re-pose any figure. Leave the other 28 cells, every label and every grid line exactly as they are. The background stays bright pure magenta #FF00FF everywhere. Draw only that: nothing else changes."
    }
+  },
+  {
+   "id": "flat_building_lanternfall_small",
+   "prompts": null,
+   "batch": "flat side-on building: lanternfall_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_lanternfall_small_flat.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 flat-buildings thread: the 3/4-view building redrawn as a flat side-on facade to fit the 2D side-scroller view (Cory).",
+   "edit": {
+    "base": "art/source/building_lanternfall_small.png",
+    "text": "This is one building from my 2D side-scrolling game, drawn in a 3/4 view where you can see one side wall and look down onto the roof. Redraw it as a flat side-on view, like a building in a classic 2D side-scroller: seen straight from the front at eye level, a flat front elevation. Show only the front face: no side wall, no corner, no perspective, no vanishing lines, and no roof top seen from above (the roof shows only as its straight-on front edge and gable). Every horizontal line (eaves, floor lines, window sills, the ground line) is perfectly horizontal and every wall edge is perfectly vertical. Keep the same building: the same height, overall width, roof shape and material, colours, windows, door, lantern, signs, trim and details, so it is clearly the same building in the same town style. Keep the door at the bottom centre area of the front, fully visible. The bottom edge of the building is one perfectly straight horizontal line along the ground, nothing below it, no steps or ground patch sticking out. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow on the ground. The building stays centred with the same margins, on a flat pure magenta #FF00FF background."
+   }
   }
  ]
 }
