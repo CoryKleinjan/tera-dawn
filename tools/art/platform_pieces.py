@@ -24,6 +24,9 @@ Options live in the sheet's manifest under "platform":
     "bottom": "self" (default) or "under": take the underside from the under_* pieces,
               for sheets whose top pieces stop at a cut line (driftcove)
     "top_share": how much of the kept depth is the top band (default 0.55)
+    "loop_middles": columns at the right end of middle_b faded into the start of middle_a, for
+                 sheets whose painted middles don't run on from b back into a (the game
+                 repeats a, b, a, b...)
 """
 import json
 import os
@@ -109,6 +112,21 @@ def join_bands(top, bottom, height, surface=0, top_share=TOP_SHARE):
     return out
 
 
+def fade_into(a, b, cols):
+    """`a` with its last `cols` columns faded (premultiplied) into `b`'s first `cols`, so
+    `a` ends the way `b` starts."""
+    h = min(a.shape[0], b.shape[0])
+    out = a.copy()
+    t = np.linspace(0.0, 1.0, cols)[None, :, None]
+    pa = premultiplied(a[:h, -cols:])
+    pb = premultiplied(b[:h, :cols])
+    mix = pa * (1 - t) + pb * t
+    alpha = mix[..., 3:]
+    rgb = np.where(alpha > 0, mix[..., :3] / np.maximum(alpha, 1e-6), 0)
+    out[:h, -cols:] = np.round(np.concatenate([rgb, alpha], -1) * 255).astype(a.dtype)
+    return out
+
+
 def prepare(name):
     with open(os.path.join(SHEETS, "platform_pieces_%s.json" % name)) as f:
         man = json.load(f)
@@ -134,6 +152,8 @@ def prepare(name):
     if height - surface > max_depth:
         share = opts.get("top_share", TOP_SHARE)
         pieces = [join_bands(p, p, surface + max_depth, surface, share) for p in pieces]
+    if opts.get("loop_middles"):
+        pieces[2] = fade_into(pieces[2], pieces[1], opts["loop_middles"])
     for n, p in zip(TOPS, pieces):
         Image.fromarray(p, "RGBA").save(os.path.join(out_dir, n + ".png"))
     print("%s: %d top pieces, %d texels tall (was %d), surface at row %d"
