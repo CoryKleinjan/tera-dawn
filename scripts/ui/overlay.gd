@@ -242,13 +242,10 @@ func _draw_pet(c: TDCompanion, z: float, shown: bool, tags: TDNameTags) -> void:
 	if c.speech_t > 0:
 		UiSkin.draw_speech(self, world.stage.screen(c.pet_head(), z) + Vector2(0, -6), c.speech)
 
-## Everything drawn at a spot in the world: the map's sign, name tags (gathered first and
+## Everything drawn at a spot in the world: name tags (gathered first and
 ## nudged apart, yours on top), HP bars, quest markers, speech, floating numbers and portal hints.
 func _draw_world_text() -> void:
 	var st := world.stage
-	var sign_at: Variant = SceneryBuilder.sign_label_at(world.map)
-	if sign_at != null and st.in_view(sign_at, SceneryBuilder.SIGN_DEPTH):
-		UiSkin.draw_hint(self, st.screen(sign_at, SceneryBuilder.SIGN_DEPTH), world.map.sign_text)
 	var tags := TDNameTags.new()
 	last_tags = tags
 	for m in world.mobs():

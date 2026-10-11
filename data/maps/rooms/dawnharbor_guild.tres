@@ -80,7 +80,6 @@ light_height = 20.0
 script = ExtResource("1_map_def")
 id = &"dawnharbor_guild"
 display_name = "Guild Hall"
-sign_text = ""
 biome = ExtResource("2_dawnharbor")
 width = 1200
 height = 700

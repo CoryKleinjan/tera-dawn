@@ -35,39 +35,6 @@ func test_platforms_lie_inside_the_map() -> void:
 			check(p.x >= 0 and p.x + p.width <= m.width, "%s: platforms[%d] runs from x %s to %s, outside 0..%d" % [w, i, p.x, p.x + p.width, m.width])
 			check(p.y > 0 and p.y < m.ground_y, "%s: platforms[%d].y %s is not between the top and the floor (%d)" % [w, i, p.y, m.ground_y])
 
-func test_map_signs_dont_sit_on_a_platform_skin() -> void:
-	for m: MapDef in Content.maps.values():
-		var at: Variant = SceneryBuilder.sign_label_at(m)
-		if at == null:
-			continue
-		var x: float = (at as Vector2).x
-		var y: float = (at as Vector2).y
-		for i in m.platforms.size():
-			var d := m.platforms[i]
-			if x < d.x or x > d.x + d.width:
-				continue
-			var skin := TerrainBuilder.skin_span(d, m.biome)
-			check(y <= skin.x or y - SceneryBuilder.SIGN_LABEL_H >= skin.y,
-				"%s: the sign's words at y %s run through platforms[%d]'s skin (%s)" % [Scan.where(m), y, i, skin])
-
-func test_map_signs_stand_inward_from_the_entrance_clear_of_portals() -> void:
-	for m: MapDef in Content.maps.values():
-		if SceneryBuilder.sign_label_at(m) == null:
-			continue
-		var x := SceneryBuilder.sign_post_x(m)
-		var half := UiSkin.hint_width(m.sign_text) / 2.0
-		var portal_half := TDStage.art_size(m.biome.portal_frames[0]).x / 2.0 if not m.biome.portal_frames.is_empty() else 34.0
-		check_between(x, 0, m.width, "%s: the sign at x %s is on the map" % [Scan.where(m), x])
-		var nearest := INF
-		for p in m.portals:
-			if p.platform != 0:
-				continue
-			check(absf(p.x - x) >= half + portal_half, "%s: the sign's words (x %d-%d) stand over the portal to %s (x %d)" % [Scan.where(m), x - half, x + half, p.target_map, p.x])
-			if not p.door:
-				nearest = minf(nearest, absf(p.x - x))
-		if nearest < INF:
-			check_near(nearest, SceneryBuilder.SIGN_FROM_PORTAL, "%s: the sign stands a set way in from the entrance" % Scan.where(m))
-
 func test_arrivals_and_npcs_keep_clear_of_the_quickslots() -> void:
 	var clear := right_edge_clear()
 	for m: MapDef in Content.maps.values():

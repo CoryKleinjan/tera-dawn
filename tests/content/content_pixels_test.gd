@@ -43,9 +43,9 @@ func test_ropes_and_ladders_show_at_the_shared_pixel_size() -> void:
 				_cut_for_the_shared_size(tex, path.get_file())
 		_near_texel(st.texel, path.get_file())
 
-func test_lanterns_signposts_and_portals_are_cut_for_the_shared_size() -> void:
+func test_lanterns_and_portals_are_cut_for_the_shared_size() -> void:
 	for b in _biomes(false):
-		for tex in [b.lantern, b.signpost] + b.portal_frames:
+		for tex in [b.lantern] + b.portal_frames:
 			if tex:
 				_cut_for_the_shared_size(tex, b.resource_path.get_file())
 

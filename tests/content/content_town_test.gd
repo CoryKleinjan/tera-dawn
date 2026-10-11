@@ -86,9 +86,6 @@ func test_streets_have_no_long_empty_stretches() -> void:
 		for n in m.npcs:
 			if n.platform == 0:
 				spans.append(Vector2(n.x - 30.0, n.x + 30.0))
-		if m.sign_text != "":
-			var sign_x := SceneryBuilder.sign_post_x(m)
-			spans.append(Vector2(sign_x - 30.0, sign_x + 30.0))
 		spans.sort_custom(func(a: Vector2, b: Vector2) -> bool: return a.x < b.x)
 		var reach := 0.0
 		for s in spans:
