@@ -10229,6 +10229,32 @@
     "new_view": true,
     "base_margin": 0.15
    }
+  },
+  {
+   "id": "npcstyle_building_dawnharbor_large",
+   "prompts": null,
+   "batch": "NPC-style building test: dawnharbor_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_dawnharbor_large_npcstyle.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 21:39Z): buildings must match the NPCs' style; also wing bases must reach the ground (21:36Z). Test before the other 11.",
+   "edit": {
+    "base": "art/source/building_dawnharbor_large.png",
+    "text": "The first image is a house from my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have. Repaint the house in the SAME art style as those characters: the same soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, the same rich warm saturated colours, the same bold dark brown outlines of the same thickness relative to the details, and the same amount of hand-painted detail (wood grain on the timbers and door, worn and chipped spots, mortar lines and slight colour variation between the stones and roof tiles, curtains or warm light in the windows). Keep the house itself: the same shape, the same front-on view, the cream walls with brown timber framing, the blue tiled roofs, the octagonal window, the wooden door, the side wings and the sun weathervane, with the same colours made richer. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole house is ONE straight horizontal line: the stone base of the middle AND of both side wings reaches down to the same ground line, edge to edge, with nothing hanging lower and no wing standing higher than the middle. Nothing below the base or in front of it: no steps, path, ground patch or shadow. 3) The whole house, weathervane included, fits inside the picture with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the house. Do not draw any characters.",
+    "new_view": true,
+    "base_margin": 0.08,
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ]
+   }
   }
  ]
 }
