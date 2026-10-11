@@ -24,9 +24,9 @@ scripts/
                       AbilityPoints and Gear (CharacterPart), Appearance, NewCharacter,
                       Inventory, Equipment,
                       ItemStack, CharacterStats, MonsterBook, Achievements, Balance
-  components/         Health, Hitbox, SpriteRig, Paperdoll (+ Sprite, View)
+  components/         Health, Hitbox, SpriteRig, HeroBody (a hero's rig and companion), Paperdoll (+ Sprite, View)
   actors/             Player (you), Avatar (other players), Companion (chairs, pets), Mob, Npc, Drop views
-  world/              World (what you see), WorldFx (hits, numbers, effects), Stage +
+  world/              World (what you see), WorldCamera, SnapshotSync (server views), WorldFx (hits, numbers, effects), Stage +
                       Terrain/Backdrop/Scenery builders, MapLayout, Platform, DropFlight, Combat
   fx/                 Flipbook effects and floating text
   ui/                 HUD, status bar, overlay, quickslots, character creator, game menu,

@@ -26,7 +26,8 @@ TDWorld  ───────────────────────�
   hero (`TDPlayer`) moves and climbs on your machine so it feels instant, like MapleStory, and
   reports where it is 20 times a second; the server checks the report is possible and puts you
   back if not. Monsters (`TDMob`), other players (`TDAvatar`) and drops (`TDDrop`) are views
-  that glide to where the server's snapshots say they are. Snapshots go out 20 times a
+  that glide to where the server's snapshots say they are (`SnapshotSync` keeps them in step;
+  `WorldCamera` follows your hero). Snapshots go out 20 times a
   second as packed bytes (`SnapshotCodec`) so even a busy map fits in one network packet:
   they hold only positions, facing, HP, animation and flags, and leave out monsters that
   haven't changed (every monster goes in once a second). A player's name, level, look, gear,
