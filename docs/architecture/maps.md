@@ -10,8 +10,9 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
    bottom and a climb style: rope, vine, ladder or rope ladder) and `portals`.
 3. Fill it: `spawns`, `npcs` (an **NpcPlacement** with an NpcDef and an x) and hand-placed
    `props` on top of the biome's random decoration. Anything that looks like ground (a
-   floating rock, a tall ledge, an arch) is a platform with that picture as its `look`,
-   never a prop, so everything that looks walkable is. Every platform, rope, portal, NPC
+   tall ledge) is a platform with that picture as its `look`, never a prop, so everything
+   that looks walkable is. Land art stands on the floor: no floating rock islands or
+   arches (Cory removed them); a floating platform uses the biome's plain platform front. Every platform, rope, portal, NPC
    and spawn must be reachable with the hero's own jump from where players arrive, and no
    two portals on a map may lead to the same map (`tests/content/content_reach_test.gd`).
    A platform more than about 90 px above the one below needs a rope or ladder. A map can
