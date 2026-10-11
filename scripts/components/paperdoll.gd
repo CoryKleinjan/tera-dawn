@@ -17,7 +17,9 @@ extends RefCounted
 ## goes in his fist, on his arm or on his head on every frame, where the rig says, with his
 ## fingers drawn over a weapon's grip (fist masks); a weapon kind is held its own way (a bow
 ## upright, a staff planted). The hair under a hat is the hairstyle's own _hat layer, cut where the hat
-## hides it (Piece.hair_cut) so none pokes out of its top or sides.
+## hides it (Piece.hair_cut) so none pokes out of its top or sides. A helm drawn smaller than his
+## head also cuts away his head and face where they would poke out of it (Piece.head_cut), only
+## while it is worn.
 
 ## The parts of the body, as hero_regions.png numbers them. Hair, eyes, cape, weapon, shield
 ## and gloves are layers now, so only skin, top, bottom and shoes are on the map.
@@ -79,7 +81,8 @@ class Layer:
 	var behind := false
 	var tint := Color.WHITE
 	var gear := false
-	## Hair under a hat: the hat's hair cut strip (Piece.hair_cut), or null.
+	## Hair under a hat: the hat's hair cut strip (Piece.hair_cut), or for his face under a helm
+	## its head cut strip (Piece.head_cut); null when nothing is cut.
 	var hair_cut: Texture2D
 
 	func _init(f: SpriteFrames, back: bool, t := Color.WHITE, g := false) -> void:
@@ -130,6 +133,9 @@ class Piece:
 	var fist: Texture2D
 	## A hat's strip of where his hair is hidden under it (haircut_<name>.png), or null.
 	var hair_cut: Texture2D
+	## A helm's strip of where his head and face are cut away around it (headcut_<name>.png,
+	## laid out like the body strip), or null.
+	var head_cut: Texture2D
 
 	static var _cache := {}
 
@@ -154,6 +160,8 @@ class Piece:
 				p.fist = load(PIECE_DIR + "fist_" + data["fist"] + ".png")
 			if data.get("hair_cut") is String and ResourceLoader.exists(data["hair_cut"]):
 				p.hair_cut = load(data["hair_cut"])
+			if data.get("head_cut") is String and ResourceLoader.exists(data["head_cut"]):
+				p.head_cut = load(data["head_cut"])
 		_cache[id] = p
 		return p
 
@@ -169,6 +177,8 @@ class Piece:
 var tints := PackedColorArray()
 ## Per region: 1 hides it.
 var hidden := PackedFloat32Array()
+## The body's cut around a helm (Piece.head_cut), or null.
+var head_cut: Texture2D
 ## Back to front: the ones `behind` go under the body, the rest over it.
 var layers: Array[Layer] = []
 ## The kind of weapon in his hand (&"" bare-handed) and its colour (its streak when swung).
@@ -267,13 +277,18 @@ static func dress(look: Dictionary) -> Paperdoll:
 		d._add(own[&"cape"]["front"], false)
 	elif cape and cape.worn_frames == null:
 		d._add(CAPE_FRONT, false, cape.worn_color(), true)
-	var face := a.part(LookDef.Kind.FACE)
-	if face:
-		d._add(face.frames, false)
-		d._add(face.detail_frames, false, _look_color(a.part(LookDef.Kind.EYES), Region.EYES))
 	var hat: EquipDef = gear.get(&"hat")
 	var own_hat := Piece.named("hat_item_" + String(hat.id)) if hat else null
 	var hat_on: Piece = own_hat if own_hat or hat == null or hat.worn_frames else hat_piece(hat)
+	if hat_on and hat_on.head_cut:  # nothing of his head pokes out of a small helm
+		d.head_cut = hat_on.head_cut
+	var face := a.part(LookDef.Kind.FACE)
+	if face:
+		var before := d.layers.size()
+		d._add(face.frames, false)
+		d._add(face.detail_frames, false, _look_color(a.part(LookDef.Kind.EYES), Region.EYES))
+		for l in d.layers.slice(before):
+			l.hair_cut = d.head_cut
 	if hair:
 		var before := d.layers.size()
 		d._add(hair.hat_frames if hat and hair.hat_frames else hair.frames, false, hair_tone)
@@ -375,6 +390,9 @@ func apply(mat: ShaderMaterial) -> void:
 		data.set_pixel(r, 2, Color(refs[r].x, refs[r].y, refs[r].z, 1))
 	mat.set_shader_parameter(&"regions", MASK)
 	mat.set_shader_parameter(&"look_data", ImageTexture.create_from_image(data))
+	mat.set_shader_parameter(&"has_head_cut", head_cut != null)
+	if head_cut:
+		mat.set_shader_parameter(&"head_cut", head_cut)
 
 # ---------- the hero's rig (hero_rig.json) ----------
 

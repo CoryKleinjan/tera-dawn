@@ -9,7 +9,7 @@ import re  # noqa: F401
 import sys
 
 import numpy as np
-from PIL import Image, ImageOps  # noqa: F401
+from PIL import Image, ImageDraw, ImageFilter, ImageOps  # noqa: F401
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import slice_sheets as ss  # noqa: E402
@@ -73,10 +73,16 @@ HAT_LINE = 0.1         # a bit of a hat cell's frame line: at most this thick ag
 # width that counts as the eye band, the widest opening that is an open face instead (head
 # radii), and how much smaller or bigger than the sheet's size the helm may be drawn
 HELM_EYES = (0.18, 0.27, 0.95)
+HELM_FIT = 0.8  # ...then drawn this much smaller, to suit his small body (Cory 2026-10-11)
 HELM_BAND, HELM_OPEN, HELM_SIZE = 0.75, 1.15, (0.8, 1.15)
 HAIR_CUT_SIDE = 0.6    # hats.save_hair_cut: hair is hidden this far past a hat's sides (head radii)
 HAIR_CUT_HEAD, HAIR_CUT_REACH = 0.85, 0.5  # ...each column's own edge over his head, nearby edges off it
+HAIR_CUT_CREST = 0.6  # ...on a helm, a stretch ending this far above the head's middle is a crest, not the edge
 HAIR_CUT_LOW = 0.75    # ...and never below this far under the head's middle (head radii)
+HEAD_CUT_DISC, HEAD_CUT_LOW = 1.3, 0.55  # hats.save_head_cut: his head this near its middle, above this low (head radii)
+HEAD_CUT_HAIR = 1.6    # ...and his hair this near (its tufts stick out further)
+HEAD_CUT_HAND, HEAD_CUT_KEEP = 0.6, 0.95  # ...his hands kept this near their point, outside this near the head's middle
+HEAD_CUT_DARK = 0.3    # ...painted lines darker than this bound his head (an arm drawn over it is not head)
 HAIR_CUT_ALPHA = 127   # ...against the hat's pixels at least this opaque
 HAT_SIZE = 1.0         # hats drawn this much bigger than his head against the sheet's head
 HAT_SPECK = 0.05  # hat_alone: pieces under this share of the hat are cell-frame bits
