@@ -127,7 +127,6 @@ width = 2477
 height = 700
 ground_y = 620
 start_x = 300.0
-lantern_spacing = 330.0
 platforms = Array[ExtResource("3_platform_def")]([])
 climbables = Array[ExtResource("4_climbable_def")]([])
 npcs = Array[ExtResource("6_npc_placement")]([SubResource("Npc_taxi"), SubResource("Npc_shop"), SubResource("Npc_storage")])

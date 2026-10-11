@@ -18,8 +18,9 @@ extends Resource
 @export var ground_y := 620
 ## Where the player appears when they respawn or load into this map.
 @export var start_x := 200.0
-## Lanterns stand along the floor, about this far apart (0 for none).
-@export var lantern_spacing := 640.0
+## Lanterns stand along the floor, about this far apart, in open ground (LanternPlacement).
+## -1 picks the usual spacing for a town or a field; 0 means none.
+@export var lantern_spacing := -1.0
 
 @export_group("World")
 ## The RegionDef it belongs to.
