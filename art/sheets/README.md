@@ -141,9 +141,9 @@ after the item ids. `elixir` and `mana_elixir` are art for future potions.
   came back on a darker magenta, with soft pink glows or with the sky painted behind a strip
   were evened out first by `tools/art/clean_sheet.py` (it edits the source in place, so run it
   on the original picture). The sun or moon uses `sky_body`; glowing icons use `glow_backdrop`.
-- **Rooms** (`room_<town>`, from `room_<town>_fine.png`) cut over the stand-ins from
-  `tools/art/make_room_placeholders.py` (drawn at 2 texels per pixel); a cell the sheet has no
-  painting for (crate, plant, floor_soil, some floors) keeps its stand-in. Like the land, rooms
+- **Rooms** (`room_<town>`, from `room_<town>_fine.png`) cut the furniture and most floors.
+  The crate, plant, `floor_soil` and the floors those sheets lack come from one shared sheet,
+  `room_props.png` (one town per row, cut by `room_props_<town>`). Like the land, rooms
   are cut at 2 texels per art pixel (`rooms/` is in TDStage.ART_DENSITY). The back wall has its
   own finer redraw and manifest (`room_<town>_wall`); it repeats sideways because the source's
   first columns were cross-faded from the columns past its right edge. Floor cells stacked in

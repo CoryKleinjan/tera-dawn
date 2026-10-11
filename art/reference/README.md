@@ -1,7 +1,8 @@
 # Art reference
 
 `hero.png` is Cory's hero and the style reference for all of the art in Tera's Dawn:
-every sprite, monster, prop and tile should match him.
+every sprite, monster, prop and tile should match him. It is the first idle pose of the
+painted hero sheet (`art/source/hero_main.png`); the game's art is painted only, never pixel art.
 
 What to match:
 
