@@ -190,6 +190,24 @@ func test_climbables_fit_on_their_platforms() -> void:
 				check(room.x >= reach.x and room.y >= reach.y,
 						"%s: climbables[%d] at x %s hangs over the end of the platform at y %s (its art reaches %s px left, %s px right)" % [w, i, c.x, end[0], snappedf(reach.x, 0.1), snappedf(reach.y, 0.1)])
 
+## A climbable's top piece (a rope's post, a vine's tangle, a ladder's posts) stays small next
+## to the hero: no taller than half of them.
+func test_climb_tops_are_in_scale_with_the_hero() -> void:
+	for st: ClimbStyleDef in _climb_styles():
+		if st.top == null:
+			continue
+		var h := TDStage.art_size(st.top, st.texel).y
+		check(h <= TDPlayer.HEIGHT / 2.0,
+				"climb style %s: its top piece is %s px tall, more than half the hero's %s" % [st.id, snappedf(h, 0.1), TDPlayer.HEIGHT])
+
+func _climb_styles() -> Array[ClimbStyleDef]:
+	var out: Array[ClimbStyleDef] = []
+	for m: MapDef in Content.maps.values():
+		for c in m.climbables:
+			if c and c.style and not out.has(c.style):
+				out.append(c.style)
+	return out
+
 func test_npcs_and_starts_are_inside_the_map() -> void:
 	for m: MapDef in Content.maps.values():
 		for i in m.npcs.size():
