@@ -54,7 +54,8 @@ func test_lanterns_stand_clear_of_other_scenery() -> void:
 					check(absf(x - p.x) >= half + LanternPlacement.PORTAL_HALF, "%s: the lantern at x %d stands on a portal" % [Scan.where(m), x])
 			for n in m.npcs:
 				if n.platform == 0:
-					check(absf(x - n.x) >= half + LanternPlacement.NPC_HALF, "%s: the lantern at x %d stands behind %s" % [Scan.where(m), x, n.npc.id])
+					var r := LanternPlacement.npc_rect(n)
+					check(x + half <= n.x + r.position.x or x - half >= n.x + r.end.x, "%s: the lantern at x %d stands behind %s" % [Scan.where(m), x, n.npc.id])
 			for c in m.climbables:
 				if c.bottom >= m.ground_y - 1.0:
 					check(absf(x - c.x) >= half + LanternPlacement.CLIMB_HALF, "%s: the lantern at x %d stands behind a rope or ladder" % [Scan.where(m), x])

@@ -14,13 +14,11 @@ const FIELD_SPACING := 1400.0
 ## Open ground kept on each side of a lantern, in game pixels.
 const CLEAR := 24.0
 ## How far in from the map's ends lanterns stand.
-const EDGE := 160.0
-## Half the width an NPC, a portal and a rope or ladder take up, in game pixels.
-const NPC_HALF := 30.0
+const EDGE := 120.0
+## Half the width a portal and a rope or ladder take up, in game pixels.
 const PORTAL_HALF := 34.0
 const CLIMB_HALF := 16.0
-## How tall an NPC and a portal stand, for ones on a platform just above the floor.
-const NPC_HEIGHT := 90.0
+## How tall a portal stands, for one on a platform just above the floor.
 const PORTAL_HEIGHT := 110.0
 
 ## How far apart the map's lanterns stand (0 for none).
@@ -85,8 +83,9 @@ static func blocked(map: MapDef) -> Array[Vector2]:
 			out.append(Vector2(p.x - PORTAL_HALF, p.x + PORTAL_HALF))
 	for n in map.npcs:
 		var y: float = surface.call(n.platform)
-		if hits.call(y - NPC_HEIGHT, y):
-			out.append(Vector2(n.x - NPC_HALF, n.x + NPC_HALF))
+		var r := npc_rect(n)
+		if hits.call(y + r.position.y, y + r.end.y):
+			out.append(Vector2(n.x + r.position.x, n.x + r.end.x))
 	for c in map.climbables:
 		if hits.call(c.top, c.bottom):
 			out.append(Vector2(c.x - CLIMB_HALF, c.x + CLIMB_HALF))
@@ -102,6 +101,22 @@ static func blocked(map: MapDef) -> Array[Vector2]:
 		if hits.call(r.position.y, r.end.y):
 			out.append(Vector2(r.position.x, r.end.x))
 	return out
+
+## The part of an NPC's picture that isn't see-through, in game pixels from its feet (its
+## idle pose, mirrored either way, so it covers the NPC facing left or right).
+static func npc_rect(n: NpcPlacement) -> Rect2:
+	var d := n.npc
+	var tex: Texture2D = d.texture if d else null
+	if d and d.sprite_frames:
+		var anim: StringName = &"idle" if d.sprite_frames.has_animation(&"idle") else d.sprite_frames.get_animation_names()[0]
+		tex = d.sprite_frames.get_frame_texture(anim, 0)
+	if tex == null:
+		return Rect2(-30.0, -90.0, 60.0, 90.0)
+	var img := tex.get_image()
+	var used := img.get_used_rect() if img else Rect2i(Vector2i.ZERO, tex.get_size())
+	var px := TDStage.TEXEL * d.sprite_scale
+	var half := maxf(absf(used.position.x - tex.get_width() * 0.5), absf(used.end.x - tex.get_width() * 0.5)) * px
+	return Rect2(-half, -(tex.get_height() - used.position.y) * px, half * 2.0, used.size.y * px)
 
 ## The area a platform's land art covers, in game pixels (a painted `look` runs a little
 ## wider than the part you can stand on).
