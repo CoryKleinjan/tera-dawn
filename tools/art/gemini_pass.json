@@ -10566,6 +10566,27 @@
     "base": "/mnt/project-files/art-sheets/room-props/room_props_base.png",
     "text": "Repaint this whole image as soft hand-painted art, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look; every curve and diagonal edge is smooth. Edges and outlines stay crisp and clean, not blurry. This is a grid of room furniture and floor textures for seven towns (one town per row): a wooden crate, a potted plant, a floor soil texture and, in some rows, a floor side or floor top texture. Keep the grid, the dark divider lines and every item's size, position, shape and colours exactly the same; each texture still fills its square and must tile seamlessly left to right and top to bottom. Every flat magenta #FF00FF area stays flat magenta #FF00FF, empty cells stay empty, and nothing new is added."
    }
+  },
+  {
+   "id": "paint_room_items",
+   "prompts": null,
+   "batch": "painted look: paint_room_items (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_items_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 library + repo cleanup thread: redo of the crates and plants from paint_room_props, which came back with walls painted behind them (Cory OK'd the redo 14:15Z). Floors come from room_props_painted.png.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/room-props/room_items_base.png",
+    "text": "Repaint each object in this image as soft hand-painted art, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering; every curve and diagonal edge is smooth, and edges stay crisp, not blurry. The image is a 4 by 4 grid of separate game sprites on a flat magenta background: wooden crates (each a different wood colour) and potted green plants in terracotta pots, and two empty cells at the bottom right. These are cut-out sprites, NOT a scene: the background of every cell must stay pure flat magenta #FF00FF, exactly as in the original. Do not paint any wall, floor, room, shadow, glow, gradient or texture behind or around the objects; the only things that are not magenta are the objects and the thin dark grid lines. Keep each object's size, position, shape and colour the same, keep the grid lines, keep the two empty cells empty, and add nothing new."
+   }
   }
  ]
 }
