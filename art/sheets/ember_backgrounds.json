@@ -1,5 +1,6 @@
 {
   "source": "art/source/ember_backgrounds_fine.png",
+  "detail": 1,
   "label_band": 0.3,
   "inset": 11,
   "key": [

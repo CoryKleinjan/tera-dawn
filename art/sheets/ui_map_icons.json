@@ -1,5 +1,6 @@
 {
   "source": "art/source/ui_map_icons.png",
+  "detail": 1,
   "out_dir": "art/build/ui_map_icons",
   "save": false,
   "note": "Part 7 U9 world map and minimap markers, for later: nothing in the game loads them yet. Labels sit under each icon.",

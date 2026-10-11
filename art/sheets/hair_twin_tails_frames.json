@@ -1,5 +1,7 @@
 {
   "source": "art/source/hair_twin_tails_frames.png",
+  "detail": 1,
+  "alpha": "hard",
   "grid": {
     "rows": [
       0,

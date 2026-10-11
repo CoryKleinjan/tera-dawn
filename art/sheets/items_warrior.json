@@ -2,7 +2,6 @@
   "source": "art/source/items_warrior.png",
   "out_dir": "assets/sprites/items",
   "scale": 0.335,
-  "alpha": "hard",
   "keep": "largest",
   "fix": "card_backdrop",
   "cells": [

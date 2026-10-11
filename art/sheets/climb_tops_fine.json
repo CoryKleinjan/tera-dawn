@@ -1,5 +1,6 @@
 {
   "source": "art/source/climb_tops_fine.png",
+  "detail": 1,
   "out_dir": "assets/sprites/props",
   "label_band": 0.2,
   "inset": 20,

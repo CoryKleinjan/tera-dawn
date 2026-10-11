@@ -1,5 +1,6 @@
 {
   "source": "art/source/ui_menu.png",
+  "detail": 1,
   "out_dir": "assets/sprites/ui/menu",
   "scale": 0.5,
   "alpha": "soft",

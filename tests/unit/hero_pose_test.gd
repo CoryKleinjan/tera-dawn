@@ -60,7 +60,7 @@ func test_the_hero_is_smaller_than_the_townsfolk() -> void:
 		var tex: Texture2D = npc.texture if npc.texture else (npc.sprite_frames.get_frame_texture(&"idle", 0) if npc.sprite_frames else null)
 		if tex == null:
 			continue
-		var tall := tex.get_image().get_used_rect().size.y * TDNpc.texel(npc)
+		var tall := tex.get_image().get_used_rect().size.y * TDNpc.texel(npc) / TDStage.art_density(tex)
 		check(drawn < tall, "%s (%.0f px) stands taller than the hero (%.0f px)" % [npc.id, tall, drawn])
 
 func test_he_blinks_now_and_then_while_standing() -> void:

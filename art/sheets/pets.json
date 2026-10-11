@@ -1,7 +1,6 @@
 {
   "source": "art/source/pets.png",
   "out_dir": "art/build/pets",
-  "alpha": "hard",
   "label_band": 0.3,
   "save": false,
   "cells": [

@@ -1,5 +1,6 @@
 {
   "source": "art/source/touchups_1.png",
+  "detail": 1,
   "out_dir": "art/build/touchups_1",
   "label_band": 0.12,
   "strip_labels": true,

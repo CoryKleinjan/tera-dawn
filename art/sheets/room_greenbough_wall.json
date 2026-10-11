@@ -1,5 +1,6 @@
 {
   "source": "art/source/room_greenbough_wall.png",
+  "detail": 1,
   "out_dir": "assets/sprites/rooms/greenbough",
   "background": [
     255,

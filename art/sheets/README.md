@@ -14,6 +14,14 @@ small white label in each cell's top-left corner. The slicer finds the cells, re
 background and label, shrinks each cell to game scale and trims it. Its output (`assets/`) is
 generated: fix art in the sheet or manifest, never in the output.
 
+## Clean edges
+
+Every sprite is cut at two texels per art pixel and keeps the smooth, anti-aliased edge of the
+painting, and the game blends that edge in (`TDStage.style_sprite`). Cut at one texel per art
+pixel with on/off alpha, the dark outline showed as a stair-stepped, pixelated line on a 1080p
+screen (Cory, 2026-10-11: "do this for all assets"). `detail` and `alpha` default to this;
+`tools/art/tests/test_smooth_edges.py` checks the cut sprites.
+
 ## Adding a sheet
 
 1. Save it as `art/source/<name>.png`.
@@ -37,9 +45,10 @@ generated: fix art in the sheet or manifest, never in the output.
 | `dark_key` | `true` | Magenta sheets: dark magenta is background (floor shadows); `false` keeps plum line art. |
 | `defringe` | `true` | Magenta sheets: take the magenta out of the dark outline pixels at the cut edge. `false` for a cell whose purple art it wrongly trims. |
 | `shadow` | `false` | Dark sheets: also remove the soft drop shadow under the sprite. |
-| `alpha` | `"hard"` | `"hard"` for solid sprites, `"soft"` for glows, effects and backgrounds. |
-| `min_area` | `6` | Specks smaller than this (output pixels) are dropped. |
-| `scale` | `0.25` | Shrink from sheet pixels to sprite texels. The hero is 0.25; match its pixel size. Land art uses `art_px`. |
+| `alpha` | `"smooth"` | `"smooth"` keeps each sprite's anti-aliased edge (and feathers the cut a `fix` makes); `"soft"` also keeps the faint glow round it (effects, UI); `"hard"` makes every pixel fully on or off (never for game art). |
+| `min_area` | `6` | Specks smaller than this (art pixels) are dropped. |
+| `scale` | `0.25` | Shrink from sheet pixels to art pixels, the unit the game sizes art in. The hero is 0.25; match its pixel size. Land art uses `art_px`. |
+| `detail` | `2` | With `scale`: texels cut per art pixel, so the art keeps its detail and a clean edge on screen. The output folder must be in `TDStage.ART_DENSITY` at the same number. Set `1` where `scale` already cuts two texels per art pixel (rooms, backdrops, props) or the art is drawn at its cut size (UI). |
 | `art_px` | | Land art (tiles, platform pieces, ground, buildings): sheet pixels per art pixel. Sets `scale` to `density / art_px x grow`, so all land shows at one pixel size (`TDStage.TEXEL`, `TDStage.art_density`). |
 | `density` | `2` | With `art_px`: texels per art pixel (the game reads 2 for the folders in `TDStage.ART_DENSITY`). |
 | `grow` | `1.0` | With `art_px`: draw a piece 0.8 to 1.25 times its sheet size. `tools/art/land_pixels.py --check` keeps grow x every decor and prop scale within 0.75 to 1.3. |
@@ -98,7 +107,7 @@ Godot `SpriteFrames` resource. Frames can come from any manifest, as `"<sheet>:<
 - `baseline`: `"bottom"` puts every frame's lowest pixel on the floor; `"cell"` keeps the
   height it had in its cell, so hops stay in the air.
 - `nudge`: `{"frame": [dx, dy]}` fine-tunes one frame. `pad_top`: empty rows above every frame
-  (room for hair and hats). Animations may give per-frame `durations`.
+  (room for hair and hats). Both are in art pixels. Animations may give per-frame `durations`.
 
 Actors look for `idle`, `move` (monsters), `attack`, `hurt` and `die`; the hero has its own
 list in `paperdoll_body.json`.

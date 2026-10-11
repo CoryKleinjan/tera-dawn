@@ -1,5 +1,6 @@
 {
   "source": "art/source/dawnharbor_backgrounds_fine.png",
+  "detail": 1,
   "label_band": 0.01,
   "inset": 6,
   "out_dir": "assets/sprites/backgrounds/dawnharbor",

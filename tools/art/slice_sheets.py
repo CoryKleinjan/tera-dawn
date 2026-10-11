@@ -16,8 +16,8 @@ Steps for each cell:
    unmixed from the edge colours, then a defringe pass for the dark outline pixels the key
    kept that are still part magenta; dark sheets are flood-filled from the cell border.
 3. Drop the white label in the cell's top-left corner and any specks.
-4. Shrink to the game's scale (premultiplied box filter), harden the alpha for
-   pixel-art sprites, and trim to the opaque pixels.
+4. Shrink to the game's scale (premultiplied box filter) at twice the detail the game sizes
+   it in, keep the smooth anti-aliased edge, and trim to the visible pixels.
 
 Animation sets (the "sets" block of a manifest) lay frames out on one strip with
 the feet on a shared baseline and write a Godot SpriteFrames resource next to it.
@@ -30,7 +30,7 @@ import sys
 from collections import deque
 
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageFilter
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import climb_pieces  # noqa: E402
@@ -41,8 +41,9 @@ SHEETS = os.path.join(ROOT, "art", "sheets")
 
 DEFAULTS = {
     "background": "magenta",  # "magenta", "dark" or [r, g, b]
-    "scale": 0.25,
-    "alpha": "hard",          # "hard" for pixel sprites, "soft" for glows and effects
+    "scale": 0.25,            # sheet pixels to art pixels (the unit the game sizes art in)
+    "detail": 2,              # texels cut per art pixel (TDStage.ART_DENSITY must match for the folder)
+    "alpha": "smooth",        # "smooth" keeps the anti-aliased edge; "soft" also keeps glow around it; "hard" is on/off
     "label_band": 0.16,       # top part of each cell (fraction of its height) that can hold the label
     "min_area": 6,            # specks smaller than this (in output pixels) are dropped
     "keep": "all",            # "all", "largest" or "split" (one sprite per piece, name_1, name_2...)
@@ -108,11 +109,16 @@ def flood(mask, seeds):
     return out
 
 
-def dilate(m, r):
+def dilate(m, r, outside=False):
+    """Grows a mask by r pixels (a square), without wrapping round the edges. `outside`: whether
+    the area past the edges counts as in the mask (True for "near the clear background", since a
+    cell's art can run to its edge)."""
+    h, w = m.shape
+    pad = np.pad(m, r, constant_values=outside)
     out = m.copy()
     for dy in range(-r, r + 1):
         for dx in range(-r, r + 1):
-            out |= np.roll(np.roll(m, dy, 0), dx, 1)
+            out |= pad[r + dy:r + dy + h, r + dx:r + dx + w]
     return out
 
 
@@ -531,6 +537,34 @@ def fix_medal_symbol(rgb, alpha, source=None, outline=(0.2, 0.125, 0.11), ring=3
     return rgb, (symbol | edge).astype(float)
 
 
+def fix_magenta_rim(rgb, alpha, source=None, band=6, radius=6):
+    """A painted outline Gemini blended into the magenta, kept by a high `key` (one that protects
+    purple art): the magenta-leaning pixels along the cut edge take the hue of the art just inside
+    them, keeping their own darkness, so the outline stays a dark line in the art's colours."""
+    solid = alpha > 0.5
+    edge = dilate(~solid, band, outside=True) & (alpha > 0.02)  # the see-through fade outside counts too (smooth edges keep it)
+    r, g, b = rgb[..., 0], rgb[..., 1], rgb[..., 2]
+    lean = (alpha > 0.02) & (np.minimum(r, b) - g > 0.12) & (np.abs(r - b) < 0.32)
+    rim = edge & lean
+    for _ in range(4 * band):  # the whole outline: magenta-leaning pixels joined to the edge
+        grown = dilate(rim, 1) & lean
+        if (grown == rim).all():
+            break
+        rim = grown
+    good = solid & ~rim
+    pad = lambda a: np.pad(a, ((radius, radius), (radius, radius)) + ((0, 0),) * (a.ndim - 2), mode="edge")
+    w = sum(_shifted(pad(good.astype(float)), dy, dx) for dy in range(-radius, radius + 1) for dx in range(-radius, radius + 1))
+    v = sum(_shifted(pad(rgb * good[..., None]), dy, dx) for dy in range(-radius, radius + 1) for dx in range(-radius, radius + 1))
+    w, v = w[radius:-radius, radius:-radius], v[radius:-radius, radius:-radius]
+    fill = rim & (w > 0)
+    inside = v[fill] / w[fill][:, None]
+    dark = np.clip(rgb[fill].mean(1) / np.maximum(inside.mean(1), 1e-3), 0, 1)[:, None]
+    rgb = rgb.copy()
+    rgb[fill] = inside * dark
+    return rgb, alpha
+
+
+FIXES["magenta_rim"] = fix_magenta_rim
 FIXES["round_top"] = fix_round_top
 FIXES["medal_symbol"] = fix_medal_symbol
 FIXES["card_backdrop"] = fix_card_backdrop
@@ -639,6 +673,13 @@ def art_scale(opts):
     return opts["density"] / opts["art_px"] * opts["grow"]
 
 
+def feather(alpha, radius):
+    """Softens a hard cut edge inward: pixels within `radius` of the clear background fade, so
+    the shrunk sprite gets an anti-aliased edge. Nothing outside gains alpha."""
+    img = Image.fromarray((alpha * 255).astype(np.uint8)).filter(ImageFilter.BoxBlur(radius))
+    return np.minimum(alpha, np.asarray(img) / 255.0)
+
+
 def shrink(rgb, alpha, scale):
     h, w = alpha.shape
     nw, nh = max(1, round(w * scale)), max(1, round(h * scale))
@@ -732,10 +773,12 @@ def cut_cell(rgb_full, bg, box, opts):
             rgb, alpha = defringe(rgb, alpha, bg)
     if opts.get("fix"):
         rgb, alpha = FIXES[opts["fix"]](rgb, alpha, source=cell / 255.0)
+        if opts["alpha"] == "smooth":  # a clean-up cuts its outline on/off: fade it over about a sprite pixel
+            alpha = feather(alpha, 0.5 / opts["scale"])
     rgb, alpha = shrink(rgb, alpha, opts["scale"])
     if opts.get("recolor"):
         rgb = RECOLORS[opts["recolor"]](rgb)
-    solid = alpha > (0.5 if opts["alpha"] == "hard" else 0.04)
+    solid = alpha > (0.04 if opts["alpha"] == "soft" else 0.5)
     lab, n = label(solid)
     band = label_px * opts["scale"]
     left = alpha.shape[1] * 0.6
@@ -746,7 +789,8 @@ def cut_cell(rgb_full, bg, box, opts):
         ys, xs = np.nonzero(m)
         if m.sum() < opts["min_area"]:
             continue
-        if min(np.ptp(ys), np.ptp(xs)) <= 2 and max(np.ptp(ys), np.ptp(xs)) >= 12:  # a stray bit of cell divider
+        z = opts.get("zoom", 1)
+        if min(np.ptp(ys), np.ptp(xs)) <= 2 * z and max(np.ptp(ys), np.ptp(xs)) >= 12 * z:  # a stray bit of cell divider
             continue
         if ys.max() < band and (xs.min() < left or ys.max() - ys.min() < band * 0.6):  # the label text
             continue
@@ -765,8 +809,8 @@ def cut_cell(rgb_full, bg, box, opts):
         groups.sort(key=lambda m: np.nonzero(m)[0 if opts.get("split_by") == "y" else 1].min())  # left to right, or top to bottom
     out = []
     for g in groups:
-        reach = dilate(g, 2)  # soft edges around the piece
-        a = alpha * (reach if opts["alpha"] == "soft" else g)
+        reach = dilate(g, 2 if opts["alpha"] == "soft" else 1)  # the edge's fade (and a glow's reach)
+        a = alpha * (g if opts["alpha"] == "hard" else reach)
         if opts["alpha"] == "hard":
             a = (a > 0.5).astype(float)
         ys, xs = np.nonzero(a > 0)
@@ -776,7 +820,7 @@ def cut_cell(rgb_full, bg, box, opts):
         px[..., 3] = (a[by0:by1, bx0:bx1] * 255).round().astype(np.uint8)
         px[px[..., 3] == 0, :3] = 0
         out.append({"image": Image.fromarray(px, "RGBA"), "x": int(bx0), "y": int(by0),
-                    "cell_w": alpha.shape[1], "cell_h": alpha.shape[0]})
+                    "cell_w": alpha.shape[1], "cell_h": alpha.shape[0], "detail": opts["detail"]})
     return out
 
 
@@ -873,6 +917,8 @@ def mass_x(im):
 def build_set(name, spec, sprites, out_root):
     """Lays the frames of one animation set on a strip, feet on a shared baseline."""
     frames = []
+    detail = sprites[next(iter(spec["frames"].values()))]["detail"]  # nudges and padding are in art pixels
+    nudge = {k: [v * detail for v in n] for k, n in spec.get("nudge", {}).items()}
     for key in spec["frames"]:
         sheet_frame = spec["frames"][key]
         s = sprites[sheet_frame]
@@ -883,19 +929,19 @@ def build_set(name, spec, sprites, out_root):
             ax = s["cell_w"] / 2 - s["x"]
         else:
             ax = mass_x(im)
-        ax += spec.get("nudge", {}).get(key, [0, 0])[0]
+        ax += nudge.get(key, [0, 0])[0]
         if spec.get("baseline", "bottom") == "cell":
             bottom = s["cell_h"] - (s["y"] + im.height)  # empty rows under the sprite inside its cell
         else:
             bottom = 0
-        bottom -= spec.get("nudge", {}).get(key, [0, 0])[1]
+        bottom -= nudge.get(key, [0, 0])[1]
         frames.append((key, im, ax, bottom))
     if spec.get("baseline") == "cell":
         lowest = min(b for _, _, _, b in frames)
         frames = [(k, im, ax, b - lowest) for k, im, ax, b in frames]
     half = max(max(ax, im.width - ax) for _, im, ax, _ in frames)
     fw = int(np.ceil(half)) * 2 + 2
-    fh = max(im.height + b for _, im, _, b in frames) + 1 + spec.get("pad_top", 0)
+    fh = max(im.height + b for _, im, _, b in frames) + 1 + spec.get("pad_top", 0) * detail
     strip = Image.new("RGBA", (fw * len(frames), fh), (0, 0, 0, 0))
     index = {}
     for i, (key, im, ax, b) in enumerate(frames):
@@ -966,6 +1012,11 @@ def process(manifest_path, grid_only=False, sprites=None):
             opts = {**base, **man.get("overrides", {}).get(name, {})}
             if opts["art_px"]:
                 opts["scale"] = art_scale(opts)
+                opts["detail"] = opts["density"]
+            else:  # sizes given in the cut sprite's pixels stay in art pixels
+                opts["scale"] *= opts["detail"]
+                opts["min_area"] *= opts["detail"] ** 2
+                opts["zoom"] = opts["detail"]
             pieces = cut_cell(rgb, bg, (x0, y0, x1, y1), opts)
             if not pieces:
                 print(f"  {name}: nothing found")

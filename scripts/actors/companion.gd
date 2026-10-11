@@ -45,7 +45,7 @@ func set_pet(id: StringName, at: Vector2) -> void:
 		pet_pos = at
 		var a := AnimatedSprite3D.new()
 		a.sprite_frames = pet.sprite_frames
-		TDStage.style_sprite(a, TDStage.TEXEL * pet.frames_scale)
+		TDStage.style_sprite(a, TDStage.TEXEL * pet.frames_scale / TDStage.frames_density(pet.sprite_frames))
 		_body = a
 		add_child(_body)
 		_play(&"idle")
@@ -95,15 +95,15 @@ func follow(owner_feet: Vector2, owner_face: int, z: float, ground: float) -> vo
 
 ## How far the sitter is raised to sit on the chair, in game pixels.
 func seat_lift() -> float:
-	return chair.icon.get_height() * TDStage.TEXEL * chair.seat_scale * 0.45 if chair and chair.icon else 0.0
+	return TDStage.art_size(chair.icon, TDStage.TEXEL * chair.seat_scale).y * 0.45 if chair and chair.icon else 0.0
 
 ## The top of the pet's head, for its name tag and speech bubble.
 func pet_head() -> Vector2:
 	if _body is AnimatedSprite3D:
 		var a := _body as AnimatedSprite3D
 		var tex := a.sprite_frames.get_frame_texture(a.animation, 0)
-		return pet_pos + Vector2(0, -(tex.get_height() * TDStage.TEXEL * pet.frames_scale if tex else 30.0))
-	return pet_pos + Vector2(0, -(pet.icon.get_height() * TDStage.TEXEL * pet.body_scale if pet and pet.icon else 30.0))
+		return pet_pos + Vector2(0, -(TDStage.art_size(tex, TDStage.TEXEL * pet.frames_scale).y if tex else 30.0))
+	return pet_pos + Vector2(0, -(TDStage.art_size(pet.icon, TDStage.TEXEL * pet.body_scale).y if pet and pet.icon else 30.0))
 
 ## Plays one of the pet's animations (or idle, if it hasn't got that one), keeping the
 ## feet at the bottom of the frame.

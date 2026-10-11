@@ -2,7 +2,6 @@
   "source": "art/source/chairs.png",
   "out_dir": "assets/sprites/items",
   "scale": 0.296,
-  "alpha": "hard",
   "keep": "largest",
   "fix": "glow_backdrop",
   "cells": [

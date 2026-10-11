@@ -1,5 +1,6 @@
 {
   "source": "art/source/room_meadow_fine.png",
+  "detail": 1,
   "out_dir": "assets/sprites/rooms/meadow",
   "scale": 0.316,
   "label_band": 0.2,

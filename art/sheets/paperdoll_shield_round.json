@@ -1,5 +1,7 @@
 {
   "source": "art/source/paperdoll_shield_round.png",
+  "detail": 1,
+  "alpha": "hard",
   "grid": {
     "rows": [
       0,

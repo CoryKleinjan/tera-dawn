@@ -1,5 +1,6 @@
 {
   "source": "art/source/logo.png",
+  "detail": 1,
   "out_dir": "assets/sprites/ui",
   "scale": 0.25,
   "alpha": "soft",

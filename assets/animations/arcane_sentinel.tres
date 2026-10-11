@@ -4,47 +4,47 @@
 
 [sub_resource type="AtlasTexture" id="f0"]
 atlas = ExtResource("1_strip")
-region = Rect2(0, 0, 86, 61)
+region = Rect2(0, 0, 168, 121)
 
 [sub_resource type="AtlasTexture" id="f1"]
 atlas = ExtResource("1_strip")
-region = Rect2(86, 0, 86, 61)
+region = Rect2(168, 0, 168, 121)
 
 [sub_resource type="AtlasTexture" id="f2"]
 atlas = ExtResource("1_strip")
-region = Rect2(172, 0, 86, 61)
+region = Rect2(336, 0, 168, 121)
 
 [sub_resource type="AtlasTexture" id="f3"]
 atlas = ExtResource("1_strip")
-region = Rect2(258, 0, 86, 61)
+region = Rect2(504, 0, 168, 121)
 
 [sub_resource type="AtlasTexture" id="f4"]
 atlas = ExtResource("1_strip")
-region = Rect2(344, 0, 86, 61)
+region = Rect2(672, 0, 168, 121)
 
 [sub_resource type="AtlasTexture" id="f5"]
 atlas = ExtResource("1_strip")
-region = Rect2(430, 0, 86, 61)
+region = Rect2(840, 0, 168, 121)
 
 [sub_resource type="AtlasTexture" id="f6"]
 atlas = ExtResource("1_strip")
-region = Rect2(516, 0, 86, 61)
+region = Rect2(1008, 0, 168, 121)
 
 [sub_resource type="AtlasTexture" id="f7"]
 atlas = ExtResource("1_strip")
-region = Rect2(602, 0, 86, 61)
+region = Rect2(1176, 0, 168, 121)
 
 [sub_resource type="AtlasTexture" id="f8"]
 atlas = ExtResource("1_strip")
-region = Rect2(688, 0, 86, 61)
+region = Rect2(1344, 0, 168, 121)
 
 [sub_resource type="AtlasTexture" id="f10"]
 atlas = ExtResource("1_strip")
-region = Rect2(860, 0, 86, 61)
+region = Rect2(1680, 0, 168, 121)
 
 [sub_resource type="AtlasTexture" id="f11"]
 atlas = ExtResource("1_strip")
-region = Rect2(946, 0, 86, 61)
+region = Rect2(1848, 0, 168, 121)
 
 [resource]
 animations = [{"frames": [{"duration": 1.0, "texture": SubResource("f0")}, {"duration": 1.0, "texture": SubResource("f1")}], "loop": true, "name": &"idle", "speed": 3.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f2")}, {"duration": 1.0, "texture": SubResource("f3")}, {"duration": 1.0, "texture": SubResource("f4")}, {"duration": 1.0, "texture": SubResource("f3")}], "loop": true, "name": &"move", "speed": 6.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f5")}, {"duration": 1.0, "texture": SubResource("f6")}, {"duration": 1.0, "texture": SubResource("f7")}], "loop": false, "name": &"attack", "speed": 3.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f8")}], "loop": true, "name": &"hurt", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f10")}, {"duration": 1.0, "texture": SubResource("f11")}], "loop": false, "name": &"die", "speed": 2.0}]

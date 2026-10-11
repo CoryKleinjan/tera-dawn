@@ -1,5 +1,7 @@
 {
   "source": "art/source/hats_items_3.png",
+  "detail": 1,
+  "alpha": "hard",
   "grid": {
     "rows": [
       0,

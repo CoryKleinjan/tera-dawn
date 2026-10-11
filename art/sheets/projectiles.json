@@ -26,7 +26,7 @@
   "overrides": {
     "arrow": {
       "scale": 0.133,
-      "alpha": "hard"
+      "alpha": "smooth"
     },
     "star": {
       "scale": 0.1201

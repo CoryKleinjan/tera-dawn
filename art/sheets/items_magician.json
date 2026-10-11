@@ -2,7 +2,6 @@
   "source": "art/source/items_magician.png",
   "out_dir": "assets/sprites/items",
   "scale": 0.352,
-  "alpha": "hard",
   "keep": "largest",
   "fix": "glow_backdrop",
   "cells": [
