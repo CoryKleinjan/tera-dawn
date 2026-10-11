@@ -9,4 +9,4 @@ id = &"emberreach_small"
 texture = ExtResource("2_small")
 height = 247.5
 door_x = 0.5
-chimney = Vector2(0.73, 0.879)
+chimney = Vector2(0.71, 0.86)
