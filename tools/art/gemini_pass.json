@@ -13125,6 +13125,31 @@
     "new_view": true,
     "text": "The first image shows the inventory icons of four pairs of gloves from my game, side by side on magenta: Brigand Gloves (dark brown leather with tan patches and rope ties), Canvas Gloves (cream canvas with a tan strap across the back), Dragonhide Gloves (red and orange dragon scales) and Work Gloves (tan leather with stitched cuffs and a button). The second image is my hero: his hands are round fingerless MITTENS, MapleStory style (a rounded fist with no separate fingers, a small thumb bump). Redraw each pair as ONE glove worn as such a mitten: a closed rounded fist seen from the side, the back of the hand toward the viewer, no separate fingers, a small thumb bump, with its cuff at the bottom and the fist at the top, standing upright in the middle of its quarter of the picture. Each mitten keeps EXACTLY its icon's colours, materials, patches, straps, stitching, ties, scales, buttons and cuff, so a player instantly sees it is that item. All four are the same size, each about a third as wide as its quarter. Keep the same soft hand-painted look as the icons: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything. Flat pure magenta #FF00FF background, nothing else in the picture."
    }
+  },
+  {
+   "id": "wg_glove_mittens_2",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_glove_mittens_2.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    4
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "Redo of wg_glove_mittens (Cory 20:00Z: yes): the first run cut every mitten off at the bottom, losing its cuff.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/worn-gear/glove_icons_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/worn-gear/hero_mitten_hands.png"
+    ],
+    "new_view": true,
+    "text": "The first image shows the inventory icons of four pairs of gloves from my game, side by side on magenta: Brigand Gloves (dark brown leather with tan patches and rope ties), Canvas Gloves (cream canvas with a tan strap across the back), Dragonhide Gloves (red and orange dragon scales) and Work Gloves (tan leather with stitched cuffs and a button). The second image is my hero: his hands are round fingerless MITTENS, MapleStory style (a rounded fist with no separate fingers, a small thumb bump). Redraw each pair as ONE glove worn as such a mitten: a closed rounded fist seen from the side, the back of the hand toward the viewer, no separate fingers, a small thumb bump, with its cuff at the bottom and the fist at the top, standing upright in the middle of its quarter of the picture. Each mitten keeps EXACTLY its icon's colours, materials, patches, straps, stitching, ties, scales, buttons and cuff, so a player instantly sees it is that item. Draw the WHOLE glove: the fist AND its full cuff at the wrist (with the icon's cuff details: rope ties, the button, stitched trim), with plenty of empty magenta all around it. Nothing touches or crosses the edges of the picture. All four are the same size: each about a third as wide as its quarter and about half as tall as the picture, centred in its quarter. Keep the same soft hand-painted look as the icons: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything. Flat pure magenta #FF00FF background, nothing else in the picture."
+   }
   }
  ]
 }
