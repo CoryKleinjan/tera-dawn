@@ -437,6 +437,27 @@ def fix_round_top(rgb, alpha, source=None, band=28):
     return rgb, alpha
 
 
+def fix_magenta_rim(rgb, alpha, source=None, band=3, radius=4):
+    """A painted outline Gemini blended into the magenta, kept solid by a high `key` (one that
+    protects purple art): the magenta-leaning pixels along the cut edge take the colour of the
+    art just inside them."""
+    solid = alpha > 0.5
+    edge = dilate(~solid, band) & solid
+    r, g, b = rgb[..., 0], rgb[..., 1], rgb[..., 2]
+    rim = edge & (np.minimum(r, b) - g > 0.12) & (np.abs(r - b) < 0.32)
+    good = solid & ~rim
+    k = 2 * radius + 1
+    pad = lambda a: np.pad(a, ((radius, radius), (radius, radius)) + ((0, 0),) * (a.ndim - 2), mode="edge")
+    w = sum(_shifted(pad(good.astype(float)), dy, dx) for dy in range(-radius, radius + 1) for dx in range(-radius, radius + 1))
+    v = sum(_shifted(pad(rgb * good[..., None]), dy, dx) for dy in range(-radius, radius + 1) for dx in range(-radius, radius + 1))
+    w, v = w[radius:-radius, radius:-radius], v[radius:-radius, radius:-radius]
+    fill = rim & (w > 0)
+    rgb = rgb.copy()
+    rgb[fill] = v[fill] / w[fill][:, None]
+    return rgb, alpha
+
+
+FIXES["magenta_rim"] = fix_magenta_rim
 FIXES["round_top"] = fix_round_top
 FIXES["card_backdrop"] = fix_card_backdrop
 FIXES["card_flat"] = fix_card_flat
@@ -570,6 +591,19 @@ def make_seamless(img, blend=0.2):
     out = a * t + shifted * (1 - t)
     # the seam of the shifted copy now sits in the middle; blend that with the original
     return Image.fromarray(out.clip(0, 255).astype(np.uint8))
+
+
+def seamless_middle(img, cap, blend=0.25):
+    """A bar whose middle is tiled between two end caps (`cap` px each): cross-fades the middle's
+    ends with a half-offset copy of itself, so painted texture doesn't seam where it repeats."""
+    a = np.asarray(img).astype(float)
+    mid = a[:, cap:a.shape[1] - cap]
+    m = mid.shape[1]
+    shifted = np.roll(mid, m // 2, 1)
+    xx = np.arange(m)
+    t = np.clip(np.minimum(xx, m - 1 - xx) / (m * blend), 0, 1)[None, :, None]
+    a[:, cap:a.shape[1] - cap] = mid * t + shifted * (1 - t)
+    return Image.fromarray(a.clip(0, 255).astype(np.uint8), img.mode)
 
 
 def strip_labels(cell, bg, band):
@@ -818,6 +852,8 @@ def process(manifest_path, grid_only=False, sprites=None):
                     side = opts.get("size", min(im.size))
                     im = make_seamless(im.convert("RGB").crop((0, 0, min(im.size), min(im.size)))
                                        .resize((side, side), Image.BOX)).convert("RGBA")
+                if opts.get("seamless_middle"):
+                    im = seamless_middle(im, opts["seamless_middle"])
                 if opts.get("extend_bottom"):
                     im = extend_bottom(im, opts["extend_bottom"])
                 p["image"] = im
