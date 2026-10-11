@@ -68,5 +68,44 @@ class PulledIn(unittest.TestCase):
         self.assertTrue((out == arr).all())
 
 
+class Joined(unittest.TestCase):
+    FI = {"head": (50.0, 50.0), "r": 20.0, "tilt": 0.0}
+
+    def pieces(self, arr):
+        return pl.ss.label(arr[..., 3] > 0)[1]
+
+    def test_a_pigtail_drawn_apart_is_moved_to_touch_the_hair(self):
+        arr = disc(100, (50, 50), 15)
+        arr[disc(100, (72, 50), 4)[..., 3] > 0] = (120, 120, 120, 255)  # 3 px off the hair
+        out = np.asarray(pl.joined(Image.fromarray(arr), self.FI))
+        self.assertEqual(self.pieces(out), 1)
+
+    def test_a_speck_or_a_far_bit_of_outline_goes(self):
+        arr = disc(100, (50, 50), 15)
+        arr[disc(100, (90, 90), 3)[..., 3] > 0] = (120, 120, 120, 255)  # far and small
+        arr[2:5, 2:5] = (120, 120, 120, 255)  # a speck
+        out = np.asarray(pl.joined(Image.fromarray(arr), self.FI))
+        self.assertEqual(self.pieces(out), 1)
+        self.assertEqual((out[..., 3] > 0).sum(), (disc(100, (50, 50), 15)[..., 3] > 0).sum())
+
+    def test_a_moved_piece_stays_behind_the_face(self):
+        arr = disc(100, (50, 50), 15)
+        arr[disc(100, (75, 50), 4)[..., 3] > 0] = (120, 120, 120, 255)
+        face = np.zeros((100, 100), bool)
+        face[:, 64:] = True
+        out = np.asarray(pl.joined(Image.fromarray(arr), self.FI, 0.8, face))
+        self.assertFalse((out[..., 3] > 0)[face & ~(disc(100, (50, 50), 15)[..., 3] > 0)].any())
+
+
+class AboveFringe(unittest.TestCase):
+    def test_no_scalp_below_the_fringe(self):
+        hair = np.zeros((10, 4), bool)
+        hair[2:5, 1] = True  # a fringe ending on row 4 in column 1; no hair in column 3
+        ok = pl.above_fringe(hair)
+        self.assertTrue(ok[:5, 1].all())
+        self.assertFalse(ok[5:, 1].any())
+        self.assertFalse(ok[:, 3].any())
+
+
 if __name__ == "__main__":
     unittest.main()
