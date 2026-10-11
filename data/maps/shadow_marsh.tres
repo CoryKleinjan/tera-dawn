@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=65 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=67 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/lantern.tres" id="2_lantern"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/stump.png" id="14_stump"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/crystals.png" id="15_crystals"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/fire_lilies.png" id="16_fire_lilies"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 
 [sub_resource type="Resource" id="Resource_48"]
 script = ExtResource("12_prop_placement")
@@ -335,11 +336,19 @@ x = 300.0
 y = 480.0
 width = 340.0
 
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+fog_color = Color(0.1804, 0.2902, 0.1882, 1)
+sky_low = Color(0.2275, 0.3529, 0.2275, 1)
+mote_color = Color(1.4, 2.4, 1, 1)
+grade_saturation = 0.9
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"shadow_marsh"
 display_name = "Shadow Marsh"
 biome = ExtResource("2_lantern")
+variant = SubResource("Variant")
 width = 3000
 height = 700
 ground_y = 620

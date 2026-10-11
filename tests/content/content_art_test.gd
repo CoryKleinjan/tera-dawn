@@ -107,12 +107,19 @@ func test_biomes_have_their_art() -> void:
 					for t in d.textures.size():
 						_texture(d.textures[t], "%s: %s[%d].textures[%d]" % [path, group, k, t])
 
+## Biomes kept for later that no map uses yet: Ember Hollow's volcanic look, kept with its
+## fire monsters (content_world_test KNOWN_UNSPAWNED) for wherever Cory places them.
+const KNOWN_UNUSED_BIOMES := ["res://data/biomes/ember.tres"]
+
 func test_every_biome_is_used() -> void:
 	var used := {}
 	for m: MapDef in Content.maps.values():
 		if m.biome:
 			used[m.biome.resource_path] = true
 	for path in Scan.files(Scan.DATA.path_join("biomes")):
+		if path in KNOWN_UNUSED_BIOMES:
+			check(not used.has(path), "%s is used now: take it off KNOWN_UNUSED_BIOMES" % path)
+			continue
 		check(used.has(path), "%s: no map uses this biome" % path)
 
 func test_map_props_have_textures() -> void:

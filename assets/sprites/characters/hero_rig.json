@@ -2252,100 +2252,100 @@
  "weapons": {
   "sword": {
    "grip": [
-    10.6,
-    51.1
+    11.2,
+    50.7
    ],
    "size": [
-    57,
+    56,
     62
    ],
-   "reach": 68.4,
+   "reach": 67.0,
    "kind": "sword",
-   "grip_share": 0.147,
+   "grip_share": 0.164,
    "dots_left": 0
   },
   "bow": {
    "grip": [
     25.5,
-    63.9
+    64.0
    ],
    "size": [
-    32,
+    31,
     127
    ],
-   "reach": 5.5,
+   "reach": 4.5,
    "kind": "bow",
-   "grip_share": 0.823,
+   "grip_share": 0.85,
    "dots_left": 0
   },
   "wand": {
    "grip": [
-    27.2,
-    28.0
+    27.4,
+    27.9
    ],
    "size": [
     52,
-    55
+    54
    ],
-   "reach": 36.0,
+   "reach": 36.5,
    "kind": "wand",
-   "grip_share": 0.501,
+   "grip_share": 0.499,
    "dots_left": 0
   },
   "staff": {
    "grip": [
-    34.0,
-    46.0
+    34.2,
+    46.4
    ],
    "size": [
     73,
     89
    ],
-   "reach": 53.6,
+   "reach": 54.0,
    "kind": "staff",
    "grip_share": 0.499,
    "dots_left": 0
   },
   "claw": {
    "grip": [
-    19.4,
-    9.3
+    19.7,
+    9.5
    ],
    "size": [
-    40,
+    41,
     21
    ],
-   "reach": 19.6,
+   "reach": 19.3,
    "kind": "claw",
-   "grip_share": 0.497,
+   "grip_share": 0.505,
    "dots_left": 0
   },
   "knuckle": {
    "grip": [
-    15.6,
-    15.1
+    15.7,
+    15.4
    ],
    "size": [
     37,
-    28
+    29
    ],
-   "reach": 20.4,
+   "reach": 20.3,
    "kind": "knuckle",
-   "grip_share": 0.433,
+   "grip_share": 0.436,
    "dots_left": 0
   },
   "gun": {
    "grip": [
-    14.8,
-    17.6
+    15.2,
+    17.9
    ],
    "size": [
-    70,
-    35
+    73,
+    36
    ],
-   "reach": 54.2,
+   "reach": 56.8,
    "kind": "gun",
-   "grip_share": 0.214,
+   "grip_share": 0.211,
    "dots_left": 0
   },
   "item_hunter_bow": {
@@ -2434,30 +2434,30 @@
   },
   "item_iron_claw": {
    "grip": [
-    20.2,
-    14.6
+    20.8,
+    14.7
    ],
    "size": [
-    40,
-    21
+    41,
+    22
    ],
-   "reach": 18.8,
+   "reach": 19.2,
    "kind": "claw",
-   "grip_share": 0.518,
+   "grip_share": 0.52,
    "dots_left": 0
   },
   "item_steel_claw": {
    "grip": [
-    20.2,
+    20.5,
     14.3
    ],
    "size": [
-    40,
+    41,
     21
    ],
-   "reach": 18.8,
+   "reach": 19.5,
    "kind": "claw",
-   "grip_share": 0.518,
+   "grip_share": 0.512,
    "dots_left": 0
   },
   "item_viper_claw": {
@@ -2476,126 +2476,126 @@
   },
   "item_shadow_claw": {
    "grip": [
-    20.7,
-    14.1
+    21.4,
+    14.3
    ],
    "size": [
-    41,
+    42,
     25
    ],
-   "reach": 19.3,
+   "reach": 18.6,
    "kind": "claw",
-   "grip_share": 0.517,
+   "grip_share": 0.535,
    "dots_left": 0
   },
   "item_nightfang_claw": {
    "grip": [
-    20.1,
-    9.4
+    20.5,
+    9.5
    ],
    "size": [
-    40,
+    41,
     20
    ],
-   "reach": 18.9,
+   "reach": 19.5,
    "kind": "claw",
-   "grip_share": 0.515,
+   "grip_share": 0.512,
    "dots_left": 0
   },
   "item_eclipse_claw": {
    "grip": [
     21.8,
-    9.4
+    9.9
    ],
    "size": [
-    40,
+    41,
     21
    ],
-   "reach": 17.2,
+   "reach": 18.2,
    "kind": "claw",
-   "grip_share": 0.559,
+   "grip_share": 0.545,
    "dots_left": 0
   },
   "item_apprentice_wand": {
    "grip": [
-    35.3,
-    10.1
+    35.9,
+    10.7
    ],
    "size": [
-    71,
+    72,
     21
    ],
-   "reach": 34.7,
+   "reach": 35.1,
    "kind": "wand",
-   "grip_share": 0.504,
+   "grip_share": 0.506,
    "dots_left": 0
   },
   "item_crystal_wand": {
    "grip": [
-    36.8,
-    14.6
+    37.1,
+    15.0
    ],
    "size": [
     74,
-    29
+    30
    ],
-   "reach": 36.2,
+   "reach": 35.9,
    "kind": "wand",
-   "grip_share": 0.504,
+   "grip_share": 0.508,
    "dots_left": 0
   },
   "item_moonstone_wand": {
    "grip": [
-    35.8,
-    13.0
+    36.4,
+    14.0
    ],
    "size": [
-    72,
-    26
+    73,
+    28
    ],
-   "reach": 35.2,
+   "reach": 35.6,
    "kind": "wand",
-   "grip_share": 0.504,
+   "grip_share": 0.505,
    "dots_left": 0
   },
   "item_aurora_wand": {
    "grip": [
-    36.3,
-    16.8
+    36.2,
+    17.0
    ],
    "size": [
-    73,
-    34
+    72,
+    35
    ],
-   "reach": 35.7,
+   "reach": 34.9,
    "kind": "wand",
-   "grip_share": 0.504,
+   "grip_share": 0.509,
    "dots_left": 0
   },
   "item_oak_staff": {
    "grip": [
-    70.1,
-    17.4
+    70.5,
+    17.6
    ],
    "size": [
-    140,
+    141,
     34
    ],
-   "reach": 69.0,
+   "reach": 69.6,
    "kind": "staff",
-   "grip_share": 0.504,
+   "grip_share": 0.503,
    "dots_left": 0
   },
   "item_starfall_staff": {
    "grip": [
-    72.4,
-    19.1
+    73.4,
+    20.5
    ],
    "size": [
-    145,
-    37
+    147,
+    40
    ],
-   "reach": 71.6,
+   "reach": 72.6,
    "kind": "staff",
    "grip_share": 0.503,
    "dots_left": 0

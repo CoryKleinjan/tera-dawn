@@ -45,7 +45,7 @@ static func curving_rows(tex: Texture2D) -> int:
 func _ground_pieces() -> Dictionary:
 	var out := {}
 	for m: MapDef in Content.maps.values():
-		var bi := m.biome
+		var bi := m.look()
 		for rule in bi.ground_decor + bi.town_decor + bi.platform_decor:
 			for t in rule.textures:
 				out[t.resource_path] = t

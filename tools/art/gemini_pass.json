@@ -8957,6 +8957,741 @@
    }
   },
   {
+   "id": "paint_effects",
+   "prompts": null,
+   "batch": "painted leftovers: effects (edit)",
+   "with": null,
+   "refs": [],
+   "save": "effects_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/effects.png",
+    "text": "Repaint this whole image as soft hand-painted glowing game effects, like the painted spell effects of a modern HD-2D game: smooth painted light, gentle colour gradients and soft glowing edges. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. These are light and magic effects, so they have NO outlines at all: no dark line or border around any swish, slash, spark, beam, sparkle, puff or glow; their edges are made of light that fades softly into the background. Keep everything else exactly the same: the same effects, shapes, silhouettes, sizes, positions, colours and layout, and the cell labels and grid lines unchanged. Keep every colour as it is and keep each effect bright and luminous. Effects made of many small sparkles or particles stay made of many small separate sparkles or particles (for example DAWN SLASH 3 stays a scattered trail of golden sparkles along the curve, not a solid crescent). Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_elder_treant",
+   "prompts": null,
+   "batch": "painted leftovers: mon_elder_treant (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_elder_treant_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/mon_elder_treant.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell; keep the eyes, eye shines, cheek blush and other small face details. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_reef_titan",
+   "prompts": null,
+   "batch": "painted leftovers: mon_reef_titan (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_reef_titan_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/mon_reef_titan.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell; keep the eyes, eye shines, cheek blush and other small face details. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_lantern_wraith",
+   "prompts": null,
+   "batch": "painted leftovers: mon_lantern_wraith (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_lantern_wraith_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/mon_lantern_wraith.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell; keep the eyes, eye shines, cheek blush and other small face details. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_marsh_horror",
+   "prompts": null,
+   "batch": "painted leftovers: mon_marsh_horror (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_marsh_horror_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/mon_marsh_horror.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell; keep the eyes, eye shines, cheek blush and other small face details. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_old_clawbeard",
+   "prompts": null,
+   "batch": "painted leftovers: mon_old_clawbeard (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_old_clawbeard_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/mon_old_clawbeard.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell; keep the eyes, eye shines, cheek blush and other small face details. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_pets",
+   "prompts": null,
+   "batch": "painted leftovers: pets (edit)",
+   "with": null,
+   "refs": [],
+   "save": "pets_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/pets.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell; keep the eyes, eye shines, cheek blush and other small face details. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_skill_effects",
+   "prompts": null,
+   "batch": "painted leftovers: skill_effects (edit)",
+   "with": null,
+   "refs": [],
+   "save": "skill_effects_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/skill_effects.png",
+    "text": "Repaint this whole image as soft hand-painted glowing game effects, like the painted spell effects of a modern HD-2D game: smooth painted light, gentle colour gradients and soft glowing edges. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. These are light and magic effects, so they have NO outlines at all: no dark line or border around any swish, slash, spark, beam, sparkle, puff or glow; their edges are made of light that fades softly into the background. Keep everything else exactly the same: the same effects, shapes, silhouettes, sizes, positions, colours and layout, and the cell labels and grid lines unchanged. Keep every colour as it is and keep each effect bright and luminous. Effects made of many small sparkles or particles stay made of many small separate sparkles or particles (for example DAWN SLASH 3 stays a scattered trail of golden sparkles along the curve, not a solid crescent). Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_projectiles",
+   "prompts": null,
+   "batch": "painted leftovers: projectiles (edit)",
+   "with": null,
+   "refs": [],
+   "save": "projectiles_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/projectiles.png",
+    "text": "Repaint this whole image as soft hand-painted glowing game effects, like the painted spell effects of a modern HD-2D game: smooth painted light, gentle colour gradients and soft glowing edges. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. These are light and magic effects, so they have NO outlines at all: no dark line or border around any swish, slash, spark, beam, sparkle, puff or glow; their edges are made of light that fades softly into the background. Keep everything else exactly the same: the same effects, shapes, silhouettes, sizes, positions, colours and layout, and the cell labels and grid lines unchanged. Keep every colour as it is and keep each effect bright and luminous. Effects made of many small sparkles or particles stay made of many small separate sparkles or particles (for example DAWN SLASH 3 stays a scattered trail of golden sparkles along the curve, not a solid crescent). Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_projectiles_old",
+   "prompts": null,
+   "batch": "painted leftovers: projectiles_old (edit)",
+   "with": null,
+   "refs": [],
+   "save": "projectiles_old_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/projectiles_old.png",
+    "text": "Repaint this whole image as soft hand-painted glowing game effects, like the painted spell effects of a modern HD-2D game: smooth painted light, gentle colour gradients and soft glowing edges. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. These are light and magic effects, so they have NO outlines at all: no dark line or border around any swish, slash, spark, beam, sparkle, puff or glow; their edges are made of light that fades softly into the background. Keep everything else exactly the same: the same effects, shapes, silhouettes, sizes, positions, colours and layout, and the cell labels and grid lines unchanged. Keep every colour as it is and keep each effect bright and luminous. Effects made of many small sparkles or particles stay made of many small separate sparkles or particles (for example DAWN SLASH 3 stays a scattered trail of golden sparkles along the curve, not a solid crescent). Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_paperdoll_shield_kite",
+   "prompts": null,
+   "batch": "painted leftovers: paperdoll_shield_kite (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_shield_kite_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/paperdoll_shield_kite.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). Each item keeps its exact outline, angle, handle and grip position, so it still fits the same hand and the same place in its cell. The shield stays exactly the same cool grey steel with dark grey stitching and white highlights as in the original: do NOT turn it beige, tan or brown. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_paperdoll_shield_round",
+   "prompts": null,
+   "batch": "painted leftovers: paperdoll_shield_round (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_shield_round_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/paperdoll_shield_round.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). Each item keeps its exact outline, angle, handle and grip position, so it still fits the same hand and the same place in its cell. Only the round shield appears in each cell, exactly as it is: do NOT add any sword, dagger, weapon or other object to any cell. The shield stays the same silver-grey steel with the same grey sun boss. The background is flat pure magenta #FF00FF, not purple. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_held_magic",
+   "prompts": null,
+   "batch": "painted leftovers: held_magic (edit)",
+   "with": null,
+   "refs": [],
+   "save": "held_magic_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/held_magic.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). Each item keeps its exact outline, angle, handle and grip position, so it still fits the same hand and the same place in its cell. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_held_claws",
+   "prompts": null,
+   "batch": "painted leftovers: held_claws (edit)",
+   "with": null,
+   "refs": [],
+   "save": "held_claws_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/held_claws.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). Each item keeps its exact outline, angle, handle and grip position, so it still fits the same hand and the same place in its cell. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_paperdoll_weapons",
+   "prompts": null,
+   "batch": "painted leftovers: paperdoll_weapons (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_weapons_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/paperdoll_weapons.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). Each item keeps its exact outline, angle, handle and grip position, so it still fits the same hand and the same place in its cell. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_chairs",
+   "prompts": null,
+   "batch": "painted leftovers: chairs (edit)",
+   "with": null,
+   "refs": [],
+   "save": "chairs_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/chairs.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). Each item keeps its exact outline, angle, handle and grip position, so it still fits the same hand and the same place in its cell. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_touchups_1",
+   "prompts": null,
+   "batch": "painted leftovers: touchups_1 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "touchups_1_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/touchups_1.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). This is game UI: edges and outlines stay crisp and clean, not blurry; keep the leather, parchment and brass materials. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_key_art",
+   "prompts": null,
+   "batch": "painted leftovers: key_art (edit)",
+   "with": null,
+   "refs": [],
+   "save": "key_art_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/key_art.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). This is store key art: keep the logo, lettering, characters and composition exactly as they are. Keep the exact original colours: the sky stays the same blue sky with a warm gold sunrise glow, not pink. The dark navy background around and between the three pictures stays dark navy, exactly as it is, not magenta. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_npcs_harbor_1",
+   "prompts": null,
+   "batch": "painted leftovers: npcs_harbor_1 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "npcs_harbor_1_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/npcs_harbor_1.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). Every person stays exactly the same character with the same pose and the same place in their cell. Keep each face identical: the same eyes, eye shines, mouth and cheek blush, and no new facial hair. There is NO ground shadow or shadow ellipse under anyone; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_npcs_harbor_2",
+   "prompts": null,
+   "batch": "painted leftovers: npcs_harbor_2 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "npcs_harbor_2_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/npcs_harbor_2.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). Every person stays exactly the same character with the same pose and the same place in their cell. Keep each face identical: the same eyes, eye shines, mouth and cheek blush, and no new facial hair. There is NO ground shadow or shadow ellipse under anyone; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_npcs_harbor_3",
+   "prompts": null,
+   "batch": "painted leftovers: npcs_harbor_3 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "npcs_harbor_3_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/npcs_harbor_3.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). Every person stays exactly the same character with the same pose and the same place in their cell. Keep each face identical: the same eyes, eye shines, mouth and cheek blush, and no new facial hair. There is NO ground shadow or shadow ellipse under anyone; remove any that are there. In PIP IDLE 2 Pip holds only his biscuit bag exactly as in the original; the small glowing orb icon stays a small separate icon floating to his right exactly where it is. Pip does NOT hold a staff or wand, and nobody gets a new object. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_npcs_greenbough",
+   "prompts": null,
+   "batch": "painted leftovers: npcs_greenbough (edit)",
+   "with": null,
+   "refs": [],
+   "save": "npcs_greenbough_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/npcs_greenbough.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). Every person stays exactly the same character with the same pose and the same place in their cell. Keep each face identical: the same eyes, eye shines, mouth and cheek blush, and no new facial hair. There is NO ground shadow or shadow ellipse under anyone; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_npcs_lumewood",
+   "prompts": null,
+   "batch": "painted leftovers: npcs_lumewood (edit)",
+   "with": null,
+   "refs": [],
+   "save": "npcs_lumewood_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/npcs_lumewood.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). Every person stays exactly the same character with the same pose and the same place in their cell. Keep each face identical: the same eyes, eye shines, mouth and cheek blush, and no new facial hair. There is NO ground shadow or shadow ellipse under anyone; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_npcs_emberforge",
+   "prompts": null,
+   "batch": "painted leftovers: npcs_emberforge (edit)",
+   "with": null,
+   "refs": [],
+   "save": "npcs_emberforge_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/npcs_emberforge.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). Every person stays exactly the same character with the same pose and the same place in their cell. Keep each face identical: the same eyes, eye shines, mouth and cheek blush, and no new facial hair. There is NO ground shadow or shadow ellipse under anyone; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_npcs_lanternfall",
+   "prompts": null,
+   "batch": "painted leftovers: npcs_lanternfall (edit)",
+   "with": null,
+   "refs": [],
+   "save": "npcs_lanternfall_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/npcs_lanternfall.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). Every person stays exactly the same character with the same pose and the same place in their cell. Keep each face identical: the same eyes, eye shines, mouth and cheek blush, and no new facial hair. There is NO ground shadow or shadow ellipse under anyone; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_npcs_driftcove",
+   "prompts": null,
+   "batch": "painted leftovers: npcs_driftcove (edit)",
+   "with": null,
+   "refs": [],
+   "save": "npcs_driftcove_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/npcs_driftcove.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). Every person stays exactly the same character with the same pose and the same place in their cell. Keep each face identical: the same eyes, eye shines, mouth and cheek blush, and no new facial hair. There is NO ground shadow or shadow ellipse under anyone; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_monsters_npcs",
+   "prompts": null,
+   "batch": "painted leftovers: monsters_npcs (edit)",
+   "with": null,
+   "refs": [],
+   "save": "monsters_npcs_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/monsters_npcs.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). Every person stays exactly the same character with the same pose and the same place in their cell. Keep each face identical: the same eyes, eye shines, mouth and cheek blush, and no new facial hair. There is NO ground shadow or shadow ellipse under anyone; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_platform_pieces_dawnharbor",
+   "prompts": null,
+   "batch": "painted leftovers: platform_pieces_dawnharbor (edit)",
+   "with": null,
+   "refs": [],
+   "save": "platform_pieces_dawnharbor_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/platform_pieces_dawnharbor.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). These are tiling ground and platform pieces: keep each piece's top surface line and its left and right edges exactly where they are, so the pieces still join seamlessly when placed side by side. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_platform_pieces_driftcove",
+   "prompts": null,
+   "batch": "painted leftovers: platform_pieces_driftcove (edit)",
+   "with": null,
+   "refs": [],
+   "save": "platform_pieces_driftcove_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/platform_pieces_driftcove.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). These are tiling ground and platform pieces: keep each piece's top surface line and its left and right edges exactly where they are, so the pieces still join seamlessly when placed side by side. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_platform_pieces_ember",
+   "prompts": null,
+   "batch": "painted leftovers: platform_pieces_ember (edit)",
+   "with": null,
+   "refs": [],
+   "save": "platform_pieces_ember_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/platform_pieces_ember.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). These are tiling ground and platform pieces: keep each piece's top surface line and its left and right edges exactly where they are, so the pieces still join seamlessly when placed side by side. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_platform_pieces_emberreach",
+   "prompts": null,
+   "batch": "painted leftovers: platform_pieces_emberreach (edit)",
+   "with": null,
+   "refs": [],
+   "save": "platform_pieces_emberreach_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/platform_pieces_emberreach.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). These are tiling ground and platform pieces: keep each piece's top surface line and its left and right edges exactly where they are, so the pieces still join seamlessly when placed side by side. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_platform_pieces_greenbough",
+   "prompts": null,
+   "batch": "painted leftovers: platform_pieces_greenbough (edit)",
+   "with": null,
+   "refs": [],
+   "save": "platform_pieces_greenbough_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/platform_pieces_greenbough.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). These are tiling ground and platform pieces: keep each piece's top surface line and its left and right edges exactly where they are, so the pieces still join seamlessly when placed side by side. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_platform_pieces_lanternfall",
+   "prompts": null,
+   "batch": "painted leftovers: platform_pieces_lanternfall (edit)",
+   "with": null,
+   "refs": [],
+   "save": "platform_pieces_lanternfall_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/platform_pieces_lanternfall.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). These are tiling ground and platform pieces: keep each piece's top surface line and its left and right edges exactly where they are, so the pieces still join seamlessly when placed side by side. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_platform_pieces_lumewood",
+   "prompts": null,
+   "batch": "painted leftovers: platform_pieces_lumewood (edit)",
+   "with": null,
+   "refs": [],
+   "save": "platform_pieces_lumewood_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/platform_pieces_lumewood.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). These are tiling ground and platform pieces: keep each piece's top surface line and its left and right edges exactly where they are, so the pieces still join seamlessly when placed side by side. Keep the exact original colours: the wood stays pale silver-white with grey shading, the moss on top stays blue-violet, and the crystals stay bright cyan. Do NOT turn the wood tan or brown or the moss brown. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_platform_pieces_meadow",
+   "prompts": null,
+   "batch": "painted leftovers: platform_pieces_meadow (edit)",
+   "with": null,
+   "refs": [],
+   "save": "platform_pieces_meadow_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/platform_pieces_meadow.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). These are tiling ground and platform pieces: keep each piece's top surface line and its left and right edges exactly where they are, so the pieces still join seamlessly when placed side by side. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
    "id": "paperdoll_mitten_1",
    "prompts": null,
    "batch": "mitten hands 1 (edit)",

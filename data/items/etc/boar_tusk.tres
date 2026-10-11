@@ -8,7 +8,7 @@
 script = ExtResource("script")
 id = &"boar_tusk"
 display_name = "Boar Tusk"
-description = "A curved tusk from an Ember Boar."
+description = "A curved tusk from a Fern Boar."
 icon = ExtResource("icon")
 sprite_scale = 0.36
 glow_color = Color(1.0, 0.85, 0.63, 1.0)

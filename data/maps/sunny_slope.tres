@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=54 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=56 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/meadow.tres" id="2_meadow"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="12_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tall_grass.png" id="13_tall_grass"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/rock_large.png" id="16_rock_large"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 
 [sub_resource type="Resource" id="Resource_39"]
 script = ExtResource("12_prop_placement")
@@ -271,11 +272,23 @@ top = 170.0
 bottom = 620.0
 style = ExtResource("6_rope")
 
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+sky_top = Color(0.2275, 0.3725, 0.6588, 1)
+sky_mid = Color(0.4353, 0.6275, 0.8471, 1)
+sky_low = Color(0.9608, 0.8431, 0.6275, 1)
+sky_horizon = Color(1, 0.9412, 0.7843, 1)
+light_energy = 2.1
+grade_saturation = 1.12
+fog_color = Color(0.9098, 0.8157, 0.6902, 1)
+hide_layers = PackedInt32Array(3)
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"sunny_slope"
 display_name = "Sunny Slope"
 biome = ExtResource("2_meadow")
+variant = SubResource("Variant")
 width = 3000
 height = 700
 ground_y = 620

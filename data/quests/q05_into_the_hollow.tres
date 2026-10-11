@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="1_quest_def"]
 [ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="2_quest_objective"]
-[ext_resource type="Resource" path="res://data/monsters/ember_boar.tres" id="3_ember_boar"]
+[ext_resource type="Resource" path="res://data/monsters/fern_boar.tres" id="3_fern_boar"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/equips/dawn_blade.tres" id="5_dawn_blade"]
 
@@ -16,7 +16,7 @@ max_amount = 1
 [sub_resource type="Resource" id="Resource_2"]
 script = ExtResource("2_quest_objective")
 kind = 0
-monster = ExtResource("3_ember_boar")
+monster = ExtResource("3_fern_boar")
 count = 5
 
 [sub_resource type="Resource" id="Resource_1"]
@@ -33,8 +33,8 @@ giver = &"village_elder"
 min_level = 7
 requires = Array[StringName]([&"q03_sprouting_menace"])
 repeatable = false
-offer_text = "You've grown strong, Dawnling. East through the portal lies Ember Hollow, where the Ember Boars run wild. Go there, defeat five of them, and come back to me."
-progress_text = "Go east to Ember Hollow and defeat five Ember Boars. Take potions."
+offer_text = "You've grown strong, Dawnling. East through the portal lies Fern Hollow, where the Fern Boars run wild. Go there, defeat five of them, and come back to me."
+progress_text = "Go east to Fern Hollow and defeat five Fern Boars. Take potions."
 complete_text = "You've returned, and singed but standing! You are ready for a real blade. Take the Dawn Blade."
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1"), SubResource("Resource_2")])
 reward_xp = 15800
