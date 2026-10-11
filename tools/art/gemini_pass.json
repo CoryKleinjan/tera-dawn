@@ -162,7 +162,7 @@
     8
    ],
    "anchor": null,
-   "note": "2026-10-11 sword-grip thread: Cory said the thumb shows on the wrong side of the sword handle. The base is the body sheet with a green guide rod through each weapon fist at the rig's sword angle (python3 tools/art/grip_guide.py guide), long on the blade side; Gemini redraws each hand gripping it with the thumb by the blade. grip_guide.py hands takes only the hands back onto the body sheet.",
+   "note": "2026-10-11 sword-grip thread: Cory said the thumb shows on the wrong side of the sword handle. The base is the body sheet with a green guide rod through each weapon fist at the rig's sword angle (python3 tools/art/grip_guide.py guide), long on the blade side; Gemini redraws each hand gripping it with the thumb by the blade. grip_guide.py hands takes only the hands back onto the body sheet. Round 1 (2026-10-11): blue-grey background and most hands left as they were (the rod just drawn over or under the old fist). Round 2 (paperdoll_grip_hands_2) attaches the run cycle sheet, whose hands grip their rods well, as the example.",
    "must_have": {
     "rgb": [
      0,
@@ -209,6 +209,72 @@
    "edit": {
     "base": "/mnt/project-files/art-sheets/gemini-pass-1/_bases/grip_guide.png",
     "text": "The first image is my hero's base body sheet: a bald chibi boy in 32 labelled poses. In 20 of the cells a flat pure green #00FF00 rod passes through one of his closed fists; it stands for a sword handle. Each rod has a SHORT end (the pommel side) and a LONG end (the blade side).\nIn every cell with a green rod, redraw ONLY that one hand so it really GRIPS the rod like a sword handle:\n- The fingers curl around the rod, over its front.\n- The THUMB wraps around the rod on the side of the fist nearer the LONG end of the rod, so the thumb sits next to where the blade would come out, never on the short end.\n- The hand stays at the same place on his arm, the same size, with the same peach skin colours and the same dark outline. The wrist joins the arm as before.\n- Keep every green rod exactly as it is: the same position, angle, length, thickness and pure green colour, with the fingers drawn over it where they wrap it.\nChange nothing else anywhere: every other part of every figure, the cells with no rod (9-12, 21-25, 29, 30, 32), the labels and the flat pure magenta background stay exactly the same."
+   }
+  },
+  {
+   "id": "paperdoll_grip_hands_2",
+   "prompts": null,
+   "batch": "grip hands 2 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_grip_hands_2.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread, second try at paperdoll_grip_hands: the same guide base, with paperdoll_body_run_2.png attached as the example of a hand gripping a rod.",
+   "must_have": {
+    "rgb": [
+     0,
+     255,
+     0
+    ],
+    "in": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     13,
+     14,
+     15,
+     16,
+     17,
+     18,
+     19,
+     20,
+     26,
+     27,
+     28,
+     31
+    ],
+    "not_in": [
+     9,
+     10,
+     11,
+     12,
+     21,
+     22,
+     23,
+     24,
+     25,
+     29,
+     30,
+     32
+    ]
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/_bases/grip_guide.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/gemini-pass-1/paperdoll_body_run_2.png"
+    ],
+    "text": "The first image is my hero's base body sheet: a bald chibi boy in 32 labelled poses. In 20 of the cells a flat pure green #00FF00 rod lies across one of his closed fists; it stands for a sword handle. Each rod has a SHORT end (the pommel side) and a LONG end (the blade side). Right now the fists are just drawn on top of or under the rods: they do not hold them.\nIn every cell with a green rod, REPAINT that one hand so it holds the rod exactly the way he holds the green rod in cells 9-12 (RUN 1-4) of the second image:\n- Open the fist and close it again AROUND the rod: the curled fingers wrap over the FRONT of the rod, so the middle of the rod is hidden behind his fingers and only the rod's two ends stick out, one on each side of the fist.\n- The THUMB wraps over the rod on the side of the fist nearer the LONG end, next to where the blade would come out. Never put the thumb on the short end.\n- The hand stays at the same place on his arm and the same size, with the same peach skin colours and dark outline; the wrist joins the arm as before.\n- Keep every rod's position, angle, length, thickness and pure green colour, apart from the part now hidden behind his fingers.\nChange nothing else anywhere: every other part of every figure, the cells with no rod (9-12, 21-25, 29, 30, 32), the labels and the background. The background stays one flat pure magenta #FF00FF everywhere, exactly like the first image: never grey, blue-grey or any other colour."
    }
   },
   {
