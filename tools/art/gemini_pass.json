@@ -66,6 +66,549 @@
    "note": "Bare base body, 32 poses; anchor for every paperdoll/hair/top/glove/weapon sheet."
   },
   {
+   "id": "paperdoll_body_run",
+   "prompts": null,
+   "batch": "body run cycle (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_body_run.png",
+   "replaces": "art/source/paperdoll_body.png",
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread: Cory said the run legs look the same in every frame, so he seems to hover. Edit of the game's body sheet that redraws only the 4 RUN cells as an alternating run cycle, the far leg a shade darker, and the sword arm kept at his side (Cory: hold the sword in his hand while running, not up behind him). Result (2026-10-11): good contact and passing poses, but the far leg came out tan-brown and RUN 3/4 repeat RUN 1/2's legs instead of swapping them; superseded by paperdoll_body_run_2.",
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "The first image is my hero's base body sheet: a bald chibi boy in 32 labelled poses, facing right. Keep every cell EXACTLY as it is except cells 9 RUN 1, 10 RUN 2, 11 RUN 3 and 12 RUN 4. Redraw those 4 cells as one clear 4-frame running loop, the same boy at the same size, facing right, in the same spot in each cell, with his feet on the same baseline as now:\n- 9 RUN 1 (contact): his NEAR leg (the one closer to us) reaches forward, its foot planted flat on the ground ahead of him; his FAR leg stretches behind him, toes pushing off the ground.\n- 10 RUN 2 (passing): his NEAR leg is straight under his body, foot planted on the ground; his FAR leg swings forward past it with the knee bent and lifted, foot off the ground.\n- 11 RUN 3 (contact): the mirror of RUN 1 with the legs swapped: his FAR leg reaches forward, its foot planted flat on the ground ahead of him; his NEAR leg stretches behind him, toes pushing off.\n- 12 RUN 4 (passing): the mirror of RUN 2: his FAR leg is straight under his body, foot planted; his NEAR leg swings forward with the knee bent and lifted.\n- In every one of these 4 cells one foot is clearly flat on the ground, so he never looks like he is floating.\n- Shade the FAR leg (and its foot and shorts leg) noticeably darker than the near leg, so the two legs are easy to tell apart.\n- Arms: his front arm (on the right side of the figure) pumps with a bent elbow and a closed fist, as now. His back arm (on the LEFT side of the figure) stays bent at his side with the closed fist at hip height, a little in FRONT of his hip like in the WALK cells, NOT swung up or back behind him. Both fists stay empty and closed.\n- He leans forward a little, like now. Same grey shorts, same bare feet and same colours as the other cells."
+   }
+  },
+  {
+   "id": "paperdoll_body_run_2",
+   "prompts": null,
+   "batch": "body run cycle 2 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_body_run_2.png",
+   "replaces": "art/source/paperdoll_body.png",
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread, second try at paperdoll_body_run: the run cells as two poses drawn twice, the darker leg swapped between them, and a green guide rod in the front fist (the sword is held forward in the front hand while running; tools/art/grip_guide.py reads the rod and keeps only the hand).",
+   "must_have": {
+    "rgb": [
+     0,
+     255,
+     0
+    ],
+    "in": [
+     9,
+     10,
+     11,
+     12
+    ],
+    "not_in": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     13,
+     14,
+     15,
+     16,
+     17,
+     18,
+     19,
+     20,
+     21,
+     22,
+     23,
+     24,
+     25,
+     26,
+     27,
+     28,
+     29,
+     30,
+     31,
+     32
+    ]
+   },
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "The first image is my hero's base body sheet: a bald chibi boy in 32 labelled poses, facing right. Keep every cell EXACTLY as it is except cells 9 RUN 1, 10 RUN 2, 11 RUN 3 and 12 RUN 4. Redraw those 4 cells as a running loop, the same boy at the same size, facing right, leaning forward a little, feet on the same baseline as now:\n- Cells 9 RUN 1 and 11 RUN 3 show the SAME stride pose: one leg reaches forward with its foot planted flat on the ground ahead of him, the other leg stretches behind him with its toes pushing off the ground.\n- Cells 10 RUN 2 and 12 RUN 4 show the SAME passing pose: one leg straight under his body with its foot planted flat on the ground, the other leg swinging forward past it with the knee bent and lifted.\n- The ONLY difference between 9 and 11 (and between 10 and 12) is which leg is the far leg, drawn in shadow: in 9 and 10 the leg BEHIND (in 9) / the PLANTED leg (in 10) is the shadowed one; in 11 and 12 the FRONT leg (in 11) / the LIFTED leg (in 12) is the shadowed one. Where the two legs overlap, the shadowed leg is behind the other one.\n- The shadowed leg is the SAME peach skin colour as the rest of him, only a little darker, like skin in soft shade (about 20% darker). Not brown, not tan, not orange. The shorts leg over it is a slightly darker grey too.\n- In every one of these 4 cells one foot is clearly flat on the ground, so he never looks like he is floating.\n- Arms, the same in all 4 cells: the arm on the RIGHT side of the figure (in front of him) is bent at the elbow with its closed fist forward at chest height; the arm on the LEFT side of the figure swings back a little with a bent elbow and a closed fist, in the same peach skin colour (not shadowed, not brown).\n- In the closed fist of the FRONT arm (right side of the figure), draw a straight flat pure green #00FF00 rod, no outline, like a sword handle: it passes through the fist with a short end (about the fist's width) sticking out below and behind the fist, and a long end (about as long as his head is wide) pointing forward and up at about 45 degrees. The fingers wrap over the rod and the THUMB wraps around it on the side nearer the long end. Exactly one rod per cell, in these 4 cells only.\n- Same grey shorts, bare feet, outline and colours as the other cells."
+   }
+  },
+  {
+   "id": "paperdoll_body_run_3",
+   "prompts": null,
+   "batch": "body run cycle 3 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_body_run_3.png",
+   "replaces": "art/source/paperdoll_body.png",
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread: paperdoll_body_run_2 with its green guide rods taken out by Gemini (painting them out in code smeared his head where a rod crossed it). The run cells are copied from this one; the rods in run_2 still give the rig's grip and angle.",
+   "must_have": {
+    "rgb": [
+     0,
+     255,
+     0
+    ],
+    "in": [],
+    "not_in": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15,
+     16,
+     17,
+     18,
+     19,
+     20,
+     21,
+     22,
+     23,
+     24,
+     25,
+     26,
+     27,
+     28,
+     29,
+     30,
+     31,
+     32
+    ]
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/paperdoll_body_run_2.png",
+    "text": "The first image is my hero's base body sheet. A few cells (9 RUN 1, 10 RUN 2, 11 RUN 3, 12 RUN 4, 13 ATTACK 1, 14 ATTACK 2) have a green rod in his hand. Remove every green rod completely, with its outline. Where a rod crossed his head, arm, body or the background, paint what is behind it: the round outline of his head, his skin, or the flat magenta background. Keep his hands EXACTLY as they are: still closed, curled round where the rod was, as if holding a thin handle. Change nothing else at all: every figure, every pose, every colour, the labels, and the flat pure magenta #FF00FF background stay exactly the same."
+   }
+  },
+  {
+   "id": "paperdoll_grip_hands",
+   "prompts": null,
+   "batch": "grip hands (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_grip_hands.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread: Cory said the thumb shows on the wrong side of the sword handle. The base is the body sheet with a green guide rod through each weapon fist at the rig's sword angle (python3 tools/art/grip_guide.py guide), long on the blade side; Gemini redraws each hand gripping it with the thumb by the blade. grip_guide.py hands takes only the hands back onto the body sheet. Round 1 (2026-10-11): blue-grey background and most hands left as they were (the rod just drawn over or under the old fist). Round 2 (paperdoll_grip_hands_2) attaches the run cycle sheet, whose hands grip their rods well, as the example.",
+   "must_have": {
+    "rgb": [
+     0,
+     255,
+     0
+    ],
+    "in": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     13,
+     14,
+     15,
+     16,
+     17,
+     18,
+     19,
+     20,
+     26,
+     27,
+     28,
+     31
+    ],
+    "not_in": [
+     9,
+     10,
+     11,
+     12,
+     21,
+     22,
+     23,
+     24,
+     25,
+     29,
+     30,
+     32
+    ]
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/_bases/grip_guide.png",
+    "text": "The first image is my hero's base body sheet: a bald chibi boy in 32 labelled poses. In 20 of the cells a flat pure green #00FF00 rod passes through one of his closed fists; it stands for a sword handle. Each rod has a SHORT end (the pommel side) and a LONG end (the blade side).\nIn every cell with a green rod, redraw ONLY that one hand so it really GRIPS the rod like a sword handle:\n- The fingers curl around the rod, over its front.\n- The THUMB wraps around the rod on the side of the fist nearer the LONG end of the rod, so the thumb sits next to where the blade would come out, never on the short end.\n- The hand stays at the same place on his arm, the same size, with the same peach skin colours and the same dark outline. The wrist joins the arm as before.\n- Keep every green rod exactly as it is: the same position, angle, length, thickness and pure green colour, with the fingers drawn over it where they wrap it.\nChange nothing else anywhere: every other part of every figure, the cells with no rod (9-12, 21-25, 29, 30, 32), the labels and the flat pure magenta background stay exactly the same."
+   }
+  },
+  {
+   "id": "paperdoll_grip_hands_2",
+   "prompts": null,
+   "batch": "grip hands 2 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_grip_hands_2.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread, second try at paperdoll_grip_hands: the same guide base, with paperdoll_body_run_2.png attached as the example of a hand gripping a rod. Result: muted purple background and the hands again unchanged; superseded by the close-ups (paperdoll_grip_closeup_1-4).",
+   "must_have": {
+    "rgb": [
+     0,
+     255,
+     0
+    ],
+    "in": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     13,
+     14,
+     15,
+     16,
+     17,
+     18,
+     19,
+     20,
+     26,
+     27,
+     28,
+     31
+    ],
+    "not_in": [
+     9,
+     10,
+     11,
+     12,
+     21,
+     22,
+     23,
+     24,
+     25,
+     29,
+     30,
+     32
+    ]
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/_bases/grip_guide.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/gemini-pass-1/paperdoll_body_run_2.png"
+    ],
+    "text": "The first image is my hero's base body sheet: a bald chibi boy in 32 labelled poses. In 20 of the cells a flat pure green #00FF00 rod lies across one of his closed fists; it stands for a sword handle. Each rod has a SHORT end (the pommel side) and a LONG end (the blade side). Right now the fists are just drawn on top of or under the rods: they do not hold them.\nIn every cell with a green rod, REPAINT that one hand so it holds the rod exactly the way he holds the green rod in cells 9-12 (RUN 1-4) of the second image:\n- Open the fist and close it again AROUND the rod: the curled fingers wrap over the FRONT of the rod, so the middle of the rod is hidden behind his fingers and only the rod's two ends stick out, one on each side of the fist.\n- The THUMB wraps over the rod on the side of the fist nearer the LONG end, next to where the blade would come out. Never put the thumb on the short end.\n- The hand stays at the same place on his arm and the same size, with the same peach skin colours and dark outline; the wrist joins the arm as before.\n- Keep every rod's position, angle, length, thickness and pure green colour, apart from the part now hidden behind his fingers.\nChange nothing else anywhere: every other part of every figure, the cells with no rod (9-12, 21-25, 29, 30, 32), the labels and the background. The background stays one flat pure magenta #FF00FF everywhere, exactly like the first image: never grey, blue-grey or any other colour."
+   }
+  },
+  {
+   "id": "paperdoll_grip_closeup_1",
+   "prompts": null,
+   "batch": "grip close-up 1 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_grip_closeup_1.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    5
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread (Cory chose to retry the hands): close-ups of the weapon hands of idle 1-4, walk 1 from grip_guide.png, 3x (python3 tools/art/grip_guide.py closeups). Gemini left the hands unchanged when editing the whole sheet. Put back with grip_guide.py closeup-hands. Result: hands unchanged.",
+   "must_have": {
+    "rgb": [
+     0,
+     255,
+     0
+    ],
+    "in": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "not_in": []
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/_bases/grip_closeup_1.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/gemini-pass-1/_bases/grip_example.png"
+    ],
+    "text": "The first image is a strip of 5 close-up panels, each showing a chibi boy's closed fist with a flat pure green #00FF00 rod lying across it. The rod stands for a sword handle; each rod has a SHORT end (pommel side) and a LONG end (blade side; in some panels the long end runs off the panel edge). Right now the fists are only drawn under the rods: they do not hold them.\nIn EVERY panel, repaint the fist so it GRIPS the rod exactly the way the boy grips the green rod in the second image:\n- The curled fingers wrap around the FRONT of the rod, so the middle of the rod is hidden behind his fingers and only the rod's two ends stick out, one on each side of the fist.\n- The THUMB wraps over the rod on the side of the fist nearer the LONG end. Never on the short end.\n- The fist stays at the same place and the same size, joined to the same wrist and arm, with the same peach skin colours and the same dark plum-brown outline.\n- Keep each rod's position, angle, thickness and pure green colour, apart from the part now hidden behind his fingers.\nChange nothing else: the arm, body, shorts and everything else in each panel stay exactly as they are, the panels keep their size and places, and the background stays flat pure magenta #FF00FF everywhere."
+   }
+  },
+  {
+   "id": "paperdoll_grip_closeup_2",
+   "prompts": null,
+   "batch": "grip close-up 2 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_grip_closeup_2.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    5
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread (Cory chose to retry the hands): close-ups of the weapon hands of walk 2-4, hit, hurt from grip_guide.png, 3x (python3 tools/art/grip_guide.py closeups). Gemini left the hands unchanged when editing the whole sheet. Put back with grip_guide.py closeup-hands. Result: hands unchanged.",
+   "must_have": {
+    "rgb": [
+     0,
+     255,
+     0
+    ],
+    "in": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "not_in": []
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/_bases/grip_closeup_2.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/gemini-pass-1/_bases/grip_example.png"
+    ],
+    "text": "The first image is a strip of 5 close-up panels, each showing a chibi boy's closed fist with a flat pure green #00FF00 rod lying across it. The rod stands for a sword handle; each rod has a SHORT end (pommel side) and a LONG end (blade side; in some panels the long end runs off the panel edge). Right now the fists are only drawn under the rods: they do not hold them.\nIn EVERY panel, repaint the fist so it GRIPS the rod exactly the way the boy grips the green rod in the second image:\n- The curled fingers wrap around the FRONT of the rod, so the middle of the rod is hidden behind his fingers and only the rod's two ends stick out, one on each side of the fist.\n- The THUMB wraps over the rod on the side of the fist nearer the LONG end. Never on the short end.\n- The fist stays at the same place and the same size, joined to the same wrist and arm, with the same peach skin colours and the same dark plum-brown outline.\n- Keep each rod's position, angle, thickness and pure green colour, apart from the part now hidden behind his fingers.\nChange nothing else: the arm, body, shorts and everything else in each panel stay exactly as they are, the panels keep their size and places, and the background stays flat pure magenta #FF00FF everywhere."
+   }
+  },
+  {
+   "id": "paperdoll_grip_closeup_3",
+   "prompts": null,
+   "batch": "grip close-up 3 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_grip_closeup_3.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    5
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread (Cory chose to retry the hands): close-ups of the weapon hands of attack 1-2, dawn slash 1-3 from grip_guide.png, 3x (python3 tools/art/grip_guide.py closeups). Gemini left the hands unchanged when editing the whole sheet. Put back with grip_guide.py closeup-hands. Result: hands unchanged (guards and green blobs added).",
+   "must_have": {
+    "rgb": [
+     0,
+     255,
+     0
+    ],
+    "in": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "not_in": []
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/_bases/grip_closeup_3.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/gemini-pass-1/_bases/grip_example.png"
+    ],
+    "text": "The first image is a strip of 5 close-up panels, each showing a chibi boy's closed fist with a flat pure green #00FF00 rod lying across it. The rod stands for a sword handle; each rod has a SHORT end (pommel side) and a LONG end (blade side; in some panels the long end runs off the panel edge). Right now the fists are only drawn under the rods: they do not hold them.\nIn EVERY panel, repaint the fist so it GRIPS the rod exactly the way the boy grips the green rod in the second image:\n- The curled fingers wrap around the FRONT of the rod, so the middle of the rod is hidden behind his fingers and only the rod's two ends stick out, one on each side of the fist.\n- The THUMB wraps over the rod on the side of the fist nearer the LONG end. Never on the short end.\n- The fist stays at the same place and the same size, joined to the same wrist and arm, with the same peach skin colours and the same dark plum-brown outline.\n- Keep each rod's position, angle, thickness and pure green colour, apart from the part now hidden behind his fingers.\nChange nothing else: the arm, body, shorts and everything else in each panel stay exactly as they are, the panels keep their size and places, and the background stays flat pure magenta #FF00FF everywhere."
+   }
+  },
+  {
+   "id": "paperdoll_grip_closeup_4",
+   "prompts": null,
+   "batch": "grip close-up 4 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_grip_closeup_4.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    5
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread (Cory chose to retry the hands): close-ups of the weapon hands of jump, fall, land, crouch, level up from grip_guide.png, 3x (python3 tools/art/grip_guide.py closeups). Gemini left the hands unchanged when editing the whole sheet. Put back with grip_guide.py closeup-hands. Result: jump, fall, land, crouch and level up grip their rods; used.",
+   "must_have": {
+    "rgb": [
+     0,
+     255,
+     0
+    ],
+    "in": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "not_in": []
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/_bases/grip_closeup_4.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/gemini-pass-1/_bases/grip_example.png"
+    ],
+    "text": "The first image is a strip of 5 close-up panels, each showing a chibi boy's closed fist with a flat pure green #00FF00 rod lying across it. The rod stands for a sword handle; each rod has a SHORT end (pommel side) and a LONG end (blade side; in some panels the long end runs off the panel edge). Right now the fists are only drawn under the rods: they do not hold them.\nIn EVERY panel, repaint the fist so it GRIPS the rod exactly the way the boy grips the green rod in the second image:\n- The curled fingers wrap around the FRONT of the rod, so the middle of the rod is hidden behind his fingers and only the rod's two ends stick out, one on each side of the fist.\n- The THUMB wraps over the rod on the side of the fist nearer the LONG end. Never on the short end.\n- The fist stays at the same place and the same size, joined to the same wrist and arm, with the same peach skin colours and the same dark plum-brown outline.\n- Keep each rod's position, angle, thickness and pure green colour, apart from the part now hidden behind his fingers.\nChange nothing else: the arm, body, shorts and everything else in each panel stay exactly as they are, the panels keep their size and places, and the background stays flat pure magenta #FF00FF everywhere."
+   }
+  },
+  {
+   "id": "paperdoll_grip_closeup_1b",
+   "prompts": null,
+   "batch": "grip close-up 1b (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_grip_closeup_1b.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    5
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread: second try at the close-up of idle 1-4, walk 1, with the jump/fall close-up before and after (grip_closeup_4.png, paperdoll_grip_closeup_4.png) attached as the example.",
+   "must_have": {
+    "rgb": [
+     0,
+     255,
+     0
+    ],
+    "in": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "not_in": []
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/_bases/grip_closeup_1.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/gemini-pass-1/_bases/grip_closeup_4.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/paperdoll_grip_closeup_4.png"
+    ],
+    "text": "The first image is a strip of 5 close-up panels, each showing a chibi boy's closed fist with a flat pure green #00FF00 rod lying across it. The rod stands for a sword handle; each rod has a SHORT end (pommel side) and a LONG end (blade side; in some panels the long end runs off the panel edge).\nThe second and third images are an EXAMPLE of the change I want: the second image is a strip of panels BEFORE, the third image the same panels AFTER. Look at how each fist changed: before, the fist was just drawn under the rod; after, the hand was repainted so the fingers curl round the rod and the thumb wraps over it, so the rod passes THROUGH the fist and only its two ends show.\nMake exactly that change to EVERY panel of the first image:\n- Repaint the fist so the curled fingers wrap around the FRONT of the rod: the middle of the rod is hidden behind his fingers, and only its two ends stick out, one on each side of the fist.\n- The THUMB wraps over the rod on the side of the fist nearer the LONG end. Never on the short end.\n- The fist stays at the same place and size, joined to the same wrist and arm, with the same peach skin colours and dark plum-brown outline.\n- Keep each rod's position, angle, thickness and pure green colour, apart from the part now hidden behind his fingers. Add nothing to the rods (no guard, no knobs).\nChange nothing else: the arm, body, shorts and everything else in each panel stay exactly as they are, the panels keep their size and places, and the background stays flat pure magenta #FF00FF everywhere."
+   }
+  },
+  {
+   "id": "paperdoll_grip_closeup_2b",
+   "prompts": null,
+   "batch": "grip close-up 2b (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_grip_closeup_2b.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    5
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread: second try at the close-up of walk 2-4, hit, hurt, with the jump/fall close-up before and after (grip_closeup_4.png, paperdoll_grip_closeup_4.png) attached as the example.",
+   "must_have": {
+    "rgb": [
+     0,
+     255,
+     0
+    ],
+    "in": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "not_in": []
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/_bases/grip_closeup_2.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/gemini-pass-1/_bases/grip_closeup_4.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/paperdoll_grip_closeup_4.png"
+    ],
+    "text": "The first image is a strip of 5 close-up panels, each showing a chibi boy's closed fist with a flat pure green #00FF00 rod lying across it. The rod stands for a sword handle; each rod has a SHORT end (pommel side) and a LONG end (blade side; in some panels the long end runs off the panel edge).\nThe second and third images are an EXAMPLE of the change I want: the second image is a strip of panels BEFORE, the third image the same panels AFTER. Look at how each fist changed: before, the fist was just drawn under the rod; after, the hand was repainted so the fingers curl round the rod and the thumb wraps over it, so the rod passes THROUGH the fist and only its two ends show.\nMake exactly that change to EVERY panel of the first image:\n- Repaint the fist so the curled fingers wrap around the FRONT of the rod: the middle of the rod is hidden behind his fingers, and only its two ends stick out, one on each side of the fist.\n- The THUMB wraps over the rod on the side of the fist nearer the LONG end. Never on the short end.\n- The fist stays at the same place and size, joined to the same wrist and arm, with the same peach skin colours and dark plum-brown outline.\n- Keep each rod's position, angle, thickness and pure green colour, apart from the part now hidden behind his fingers. Add nothing to the rods (no guard, no knobs).\nChange nothing else: the arm, body, shorts and everything else in each panel stay exactly as they are, the panels keep their size and places, and the background stays flat pure magenta #FF00FF everywhere."
+   }
+  },
+  {
+   "id": "paperdoll_grip_closeup_3b",
+   "prompts": null,
+   "batch": "grip close-up 3b (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_grip_closeup_3b.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    5
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread: second try at the close-up of attack 1-2, dawn slash 1-3, with the jump/fall close-up before and after (grip_closeup_4.png, paperdoll_grip_closeup_4.png) attached as the example.",
+   "must_have": {
+    "rgb": [
+     0,
+     255,
+     0
+    ],
+    "in": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "not_in": []
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/_bases/grip_closeup_3.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/gemini-pass-1/_bases/grip_closeup_4.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/paperdoll_grip_closeup_4.png"
+    ],
+    "text": "The first image is a strip of 5 close-up panels, each showing a chibi boy's closed fist with a flat pure green #00FF00 rod lying across it. The rod stands for a sword handle; each rod has a SHORT end (pommel side) and a LONG end (blade side; in some panels the long end runs off the panel edge).\nThe second and third images are an EXAMPLE of the change I want: the second image is a strip of panels BEFORE, the third image the same panels AFTER. Look at how each fist changed: before, the fist was just drawn under the rod; after, the hand was repainted so the fingers curl round the rod and the thumb wraps over it, so the rod passes THROUGH the fist and only its two ends show.\nMake exactly that change to EVERY panel of the first image:\n- Repaint the fist so the curled fingers wrap around the FRONT of the rod: the middle of the rod is hidden behind his fingers, and only its two ends stick out, one on each side of the fist.\n- The THUMB wraps over the rod on the side of the fist nearer the LONG end. Never on the short end.\n- The fist stays at the same place and size, joined to the same wrist and arm, with the same peach skin colours and dark plum-brown outline.\n- Keep each rod's position, angle, thickness and pure green colour, apart from the part now hidden behind his fingers. Add nothing to the rods (no guard, no knobs).\nChange nothing else: the arm, body, shorts and everything else in each panel stay exactly as they are, the panels keep their size and places, and the background stays flat pure magenta #FF00FF everywhere."
+   }
+  },
+  {
    "id": "ui_leather",
    "prompts": "tera-dawn-chatgpt-art-prompts-7.md",
    "batch": "U1",
