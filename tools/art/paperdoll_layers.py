@@ -5,9 +5,9 @@ The hero is drawn in layers: a bald, faceless body (assets/sprites/characters/he
 by the paperdoll_body manifest), with hair, a face and worn gear on top. The hair, face and
 shield sheets draw each piece once (or once per pose) in its own cell, not where it sits on
 every frame, so this tool finds the head, neck and hands in each body frame and places the
-pieces there; the cape sheet is drawn on the body sheet's grid where the cape hangs in each
-pose, so each pose's cape is put where it sits on the body (body_offsets), writing one strip per layer that lines up frame for frame with
-the body. The game plays a layer in step with the body (Paperdoll, PaperdollSprite).
+pieces there; clothes, gloves and the cape come from sheets of the body wearing them in every
+pose and are lifted off it onto his frame, writing one strip per layer that lines up frame for
+frame with the body. The game plays a layer in step with the body (Paperdoll, PaperdollSprite).
 
     python3 tools/art/slice_sheets.py paperdoll_body   # the body strip first
     python3 tools/art/paperdoll_layers.py              # then the layers, mask and rig
@@ -21,8 +21,8 @@ Writes:
   shield are (frame pixels), and whether the frame is seen from behind; plus each weapon's
   grip point.
 - assets/sprites/characters/layers/*.png and assets/animations/paperdoll/*.tres: hair (front,
-  back, under a hat) per hairstyle, face and eyes per face, cape (behind, and in front for
-  back views), round and kite shields, gloves.
+  back, under a hat) per hairstyle, face and eyes per face, cape (behind, and in front: its
+  collar and clasp, or all of it in back views), round and kite shields, gloves.
 - layers/weapon_<kind>.png (+ _behind): each weapon kind in his fist in every frame, greyscale,
   with a hole where his fingers wrap the grip so the hand shows over it; on his back while he
   climbs or sits. layers/weapon_item_<id>.png: the same for a weapon with its own held picture
@@ -103,6 +103,11 @@ FACE_AT = (0.2, 0.3)  # and centred this far forward and down from the head's ce
 # up (to the hairline) and down (past the chin) from there. A hat's hair leaves it clear.
 FACE_ZONE = (FACE_AT[0] + SCALP_BACK, 1.0, FACE_AT[1] + SCALP, 0.7)
 BLANK_FACE = 222      # the hair sheet's blank faces are greys at least this pale (of 255)
+NECK_SLIVER = 120     # loose bits under the jaw smaller than this (pixels) are left-over neck outline
+HAT_SHOULDER_ROWS = 6  # hat sheet cells are lined up by their bottom rows (the shoulders)
+HAT_SIZE = 1.0         # hats drawn this much bigger than his head against the sheet's head
+HAT_SPECK = 0.05  # hat_alone: pieces under this share of the hat are cell-frame bits
+HAT_SHAPES = ("cap", "hood", "bandana", "helm", "wizard", "tricorn")
 # Chibi faces: each eye (with its brow) is drawn this much bigger about its own centre. The eyes
 # are everything above EYE_LINE (a fraction of the normal face's height), left or right of its middle.
 EYE_SCALE = 1.3
@@ -112,7 +117,7 @@ SHIELD_HEIGHT = 1.25
 # Clothes sheets (art/sheets/<place>_<style>_frames.json) for these places; styles whose sheet
 # came back unusable are skipped (their items wear the nearest cut, see EquipDef.worn_style).
 WORN_PLACES = ("top", "bottom", "shoes")
-WORN_BROKEN = ("shorts", "smock")
+WORN_BROKEN = ("smock",)
 WORN_SHORTS_GREY = 150  # the body's shorts are greys darker than this
 WORN_OUTLINE = 90       # and outlines darker than this
 WORN_FRINGE = 110       # pale edge pixels at the figure's edge are background fringe
@@ -123,7 +128,7 @@ FIST = 0.4            # the fist around a grip reaches this far from the grip po
 
 # Weapons worn on the fist are drawn smaller than the template sheet has them, so they fit
 # his hand rather than swallowing it (the rest keep the sheet's size against the sword).
-WORN_SIZE = {"claw": 0.6, "knuckle": 0.75}
+WORN_SIZE = {"claw": 0.6, "knuckle": 0.75, "bow": 1.35}
 # Long weapons whose sheets may draw them at a slant (a sword up and to the right): their own
 # axis is measured and turned out, so a rig angle means the same however the art was drawn.
 # The others are drawn the way the rig expects (a gun and claws pointing right, a bow upright).
@@ -357,7 +362,38 @@ def bare_face(img, px, fi):
         # is a little smaller than his face), so no line is left on his skin
         arr[ss.dilate(clear, 3) & (above < 0) & ((rgb.max(2) < BLANK_FACE - 60) | (rgb.min(2) >= BLANK_FACE - 80)), 3] = 0
         arr[clear, 3] = 0
-    return Image.fromarray(arr, "RGBA")
+    return Image.fromarray(no_neck(arr, fi), "RGBA")
+
+
+def no_neck(arr, fi):
+    """A hair-under-a-hat layer without the rest of the sheet's blank head below the face: the
+    pale neck and ear left under the hair, with their outline. Tinted with the hair colour they
+    showed as a brown wedge on his neck and chest."""
+    rgb = arr[..., :3].astype(int)
+    solid = arr[..., 3] > 0
+    pale = solid & (rgb.min(2) >= BLANK_FACE - 30) & (rgb.max(2) - rgb.min(2) < 12)
+    ahead, above = head_axes(arr.shape, fi, fi["head"])
+    lab, n = ss.label(pale)
+    if not n:
+        return arr
+    low = np.zeros(n + 1, bool)
+    for i in range(1, n + 1):  # a pale piece mostly below the middle of his head: skin, not a shine
+        part = lab == i
+        low[i] = part.sum() >= 6 and np.median(above[part]) < -0.25
+    skin = low[lab]
+    out = arr.copy()
+    if skin.any():
+        # its outline: the dark pixels just around it that aren't hair (no mid grey beside them)
+        mid = solid & ~pale & (rgb.min(2) >= 90)
+        edge = ss.dilate(skin, 3) & solid & ~mid & ~ss.dilate(mid & ~ss.dilate(skin, 1), 1)
+        out[skin | edge, 3] = 0
+        # and the slivers of that outline left loose under his jaw
+        lab, n = ss.label(out[..., 3] > 0)
+        for i in range(1, n + 1):
+            part = lab == i
+            if part.sum() < NECK_SLIVER and np.median(above[part]) < -0.25:
+                out[part, 3] = 0
+    return out
 
 
 def scalp(px, fi, back_view, grey):
@@ -604,6 +640,45 @@ def pulled_in(img, fi):
         out[ty[ok], tx[ok]] = arr[ys[ok], xs[ok]]
     return Image.fromarray(out, "RGBA")
 
+# ---------- hats ----------
+
+def hat_head(piece):
+    """Where the bald head of a paperdoll_hats cell is: the cells draw the same head and
+    shoulders, cut off at the cell's bottom, so a cell is lined up with another by the middle of
+    its shoulders on its bottom row. Returns that point (cell pixels)."""
+    arr = np.asarray(piece.img)
+    solid = arr[..., 3] > 0
+    rows = np.nonzero(solid.any(1))[0]
+    low = solid[rows.max() - HAT_SHOULDER_ROWS:rows.max() + 1]
+    xs = np.nonzero(low)[1]
+    return np.array([piece.x + xs.mean(), piece.y + rows.max() + 1.0])
+
+
+def hat_alone(img):
+    """A hats_only piece without the bits of the sheet's cell frame caught at its edges: every
+    piece much smaller than the hat goes."""
+    arr = np.asarray(img).copy()
+    lab, n = ss.label(arr[..., 3] > 0)
+    sizes = np.bincount(lab.ravel())[1:]
+    if n:
+        arr[(lab > 0) & (sizes[lab - 1] < sizes.max() * HAT_SPECK), 3] = 0
+    return Image.fromarray(arr)
+
+
+def bald_head(piece):
+    """The bald head of the hat sheet's hatless cell: (centre, radius) in cell pixels. Its top
+    is the topmost pixel; its chin the narrowest row of the neck below the widest row."""
+    arr = np.asarray(piece.img)
+    solid = arr[..., 3] > 0
+    widths = solid.sum(1)
+    top = int(np.nonzero(widths)[0].min())
+    widest = int(widths.argmax())
+    neck = widths[widest:widest + max(int((len(widths) - widest) * 0.7), 1)]
+    chin = widest + int(neck.argmin())
+    r = (chin - top) / 2.0
+    return np.array([piece.x + solid[widest].nonzero()[0].mean(), piece.y + top + r]), r
+
+
 # ---------- gloves drawn on the body ----------
 
 def worn_mask(arr):
@@ -621,8 +696,8 @@ def worn_mask(arr):
 
 
 def posed_gloves(arr, px, hands, reach):
-    """The two gloves of one drawn pose, sized to the hero, each centred on the hand of his
-    nearest to where it sits on the drawn body (no further than `reach`). Returns
+    """The two gloves of one drawn pose, sized to the hero, each centred on a hand of his: the
+    glove drawn nearest to it on the fitted body (first within `reach`, then any). Returns
     [(image, top-left)]."""
     ys = np.nonzero(arr[..., 3] > 0)[0]
     ours = np.nonzero(px[..., 3] > 127)[0]
@@ -640,13 +715,26 @@ def posed_gloves(arr, px, hands, reach):
         gy, gx = np.nonzero(lab == i + 1)
         if max(np.ptp(gy), np.ptp(gx)) * s <= reach:  # glove-sized
             centres[i] = np.array([x + gx.mean() * s, y + gy.mean() * s])
+    # each hand takes the nearest glove that sits near it; a hand left without one (the sheet's
+    # body is posed a little unlike his, so its hands sit elsewhere) then takes the nearest one
+    # left anywhere, and failing that a copy of the other hand's
+    pick = {}
+    for limit in (reach, np.inf):
+        for h, hand in enumerate(hands):
+            if h in pick:
+                continue
+            near = sorted((np.hypot(*(c - hand)), i) for i, c in centres.items())
+            if near and near[0][0] <= limit:
+                pick[h] = near[0][1]
+                del centres[near[0][1]]
+    for h in range(len(hands)):
+        if h not in pick and pick:
+            pick[h] = next(iter(pick.values()))
     out = []
-    for hand in hands:
-        near = sorted((np.hypot(*(c - hand)), i) for i, c in centres.items())
-        if not near or near[0][0] > reach:
+    for h, hand in enumerate(hands):
+        if h not in pick:
             continue
-        i = near[0][1]
-        del centres[i]
+        i = pick[h]
         gy, gx = np.nonzero(lab == i + 1)
         y0, y1, x0, x1 = gy.min(), gy.max() + 1, gx.min(), gx.max() + 1
         part = lab[y0:y1, x0:x1] == i + 1
@@ -995,7 +1083,8 @@ def _turned_on(size, img, anchor, at, angle):
 
 
 def held_pictures():
-    """(item id, weapon kind, piece, sheet) for every weapon drawn on a held_*.json sheet that's there."""
+    """(item id, weapon kind, piece, sheet, size) for every weapon drawn on a held_*.json sheet
+    that's there; size is the item's EquipDef.held_size."""
     kinds = {}
     for folder, _, files in os.walk(ITEMS):
         for f in files:
@@ -1004,8 +1093,9 @@ def held_pictures():
             with open(os.path.join(folder, f)) as fh:
                 text = fh.read()
             item, kind = re.search(r'^id = &"(\w+)"', text, re.M), re.search(r'^weapon_kind = &"(\w+)"', text, re.M)
+            size = re.search(r'^held_size = ([\d.]+)', text, re.M)
             if item and kind:
-                kinds[item.group(1)] = kind.group(1)
+                kinds[item.group(1)] = (kind.group(1), float(size.group(1)) if size else 1.0)
     out = []
     for f in sorted(os.listdir(ss.SHEETS)):
         if not (f.startswith(HELD_SHEETS) and f.endswith(".json")):
@@ -1017,7 +1107,7 @@ def held_pictures():
         for item, piece in cut(f[:-5]).items():
             if item not in kinds:
                 sys.exit(f"{f}: no weapon item called {item}")
-            out.append((item, kinds[item], piece, f[:-5]))
+            out.append((item, kinds[item][0], piece, f[:-5], kinds[item][1]))
     return out
 
 
@@ -1228,20 +1318,36 @@ def main():
             entry["face"] = entry["head"]
         rig_frames.append(entry)
 
-    # cape: behind the body, except in back views where it hangs over the back
-    # (paperdoll_cape is drawn on the body sheet's grid: each pose's cape sits where it hangs)
-    cape = cut("paperdoll_cape")
+    # cape: lifted off the body wearing it (cape_frames), like the clothes. What the drawn body
+    # hides is behind him, so the part outside his outline goes behind the body and the part
+    # over it (collar and clasp, a fold over the shoulder) in front; seen from behind (climbing)
+    # all of it hangs over his back
+    capes = cut("cape_frames")
     behind, front = [], []
-    for n in names:
-        canvas = blank()
-        p = cape.get(body_cells[n])
-        if p:
-            img, at = aligned(p, offsets[n])
-            _paste(canvas, img, *at)
-        (front if n in BACK_VIEW else behind).append(canvas)
-        (behind if n in BACK_VIEW else front).append(blank())
+    for n, px in zip(names, frames):
+        back, over = blank(), blank()
+        cell = body_cells[n]
+        worn = posed_worn(capes[cell], cell, px, "cape") if cell in capes else None
+        if worn:
+            whole = blank()
+            _paste(whole, worn[0], *worn[1])
+            if n in BACK_VIEW:
+                over = whole
+            else:
+                arr = np.asarray(whole)
+                inside = px[..., 3] > 127
+                out_part, in_part = arr.copy(), arr.copy()
+                out_part[inside, 3] = 0
+                in_part[~inside, 3] = 0
+                back, over = Image.fromarray(out_part, "RGBA"), Image.fromarray(in_part, "RGBA")
+        behind.append(back)
+        front.append(over)
     save_layer("cape", behind, fw, fh, index, anims)
-    save_layer("cape_back_view", front, fw, fh, index, anims)
+    save_layer("cape_front", front, fw, fh, index, anims)
+    for gone in ("cape_back_view",):  # the earlier name of cape_front
+        for path in (os.path.join(LAYERS, f"{gone}.png"), os.path.join(ANIMS, f"{gone}.tres")):
+            if os.path.exists(path):
+                os.remove(path)
 
     # shields, on the arm (or on the back in back views): one picture per pose, put on the rig's
     # shield point. The round sheet is on the body sheet's grid (cells named by pose); the kite
@@ -1260,6 +1366,28 @@ def main():
                 place(canvas, img, (img.width / 2, img.height / 2), entry["shield"])
             out.append(canvas)
         save_layer(f"shield_{style}", out, fw, fh, index, anims)
+
+    # hats: each shape's picture (from the side, or from behind in back views) put on his head,
+    # as big as his head against the sheet's head and turned with it (EquipDef.look_shape picks
+    # the shape). paperdoll_hats draws each hat on a bald head; paperdoll_hats_only is the same
+    # sheet with the heads painted out, so its hats lift off clean and the heads place them
+    hat_sheet, hats_only = cut("paperdoll_hats"), cut("paperdoll_hats_only")
+    ref_at, ref_r = bald_head(hat_sheet["bald_side"])
+    ref_from = ref_at - hat_head(hat_sheet["bald_side"])  # head centre from the shoulders
+    for shape in HAT_SHAPES:
+        views = {}
+        for view in ("side", "behind"):
+            p, hat = hat_sheet[f"{shape}_{view}"], hats_only[f"{shape}_{view}"]
+            centre = hat_head(p) + ref_from  # this cell's head centre (cell pixels)
+            views[view] = (hat_alone(hat.img), centre - (hat.x, hat.y))
+        out = []
+        for n, fi in zip(names, info):
+            canvas = blank()
+            img, at = views["behind" if n in BACK_VIEW else "side"]
+            k = fi["r"] / ref_r * HAT_SIZE
+            place(canvas, scaled(img, k), at * k, fi["head"], fi["tilt"])
+            out.append(canvas)
+        save_layer(f"hat_{shape}", out, fw, fh, index, anims)
 
     # gloves, on both hands
     if os.path.exists(os.path.join(ss.SHEETS, "gloves_frames.json")):
@@ -1297,9 +1425,11 @@ def main():
     # a held_* sheet is drawn at its own size: it is shrunk so its weapons are, on the median,
     # as long as the template of their kind (keeping their sizes against each other)
     by_sheet = {}
-    for item, kind, piece, sheet in drawn_weapons:
+    # (and then grown or shrunk by the item's own held_size: a claymore longer than a sword)
+    for item, kind, piece, sheet, _ in drawn_weapons:
         by_sheet.setdefault(sheet, []).append(length(weapons[kind], kind) / length(piece, kind))
-    pictures += [("item_" + item, kind, piece, False, float(np.median(by_sheet[sheet]))) for item, kind, piece, sheet in drawn_weapons]
+    pictures += [("item_" + item, kind, piece, False, float(np.median(by_sheet[sheet])) * size)
+                 for item, kind, piece, sheet, size in drawn_weapons]
     for name, kind, piece, tinted, k in pictures:
         img, grip, axis = weapon(piece, s_w * WORN_SIZE.get(kind, 1.0) * k, kind)
         entry = {"grip": grip, "size": list(img.size), "reach": reach(img, grip, axis),
@@ -1357,7 +1487,7 @@ def preview(names, fw, fh, rig_frames):
             stack.append(tint(load(hair + "_back"), DEFAULT_HAIR))
         if have(f"weapon_{kind}_behind"):
             stack.append(tint(load(f"weapon_{kind}_behind"), colours[kind]))
-        stack += [body, tint(load("cape_back_view"), (0.8, 0.25, 0.25)), load("face_bright"),
+        stack += [body, tint(load("cape_front"), (0.8, 0.25, 0.25)), load("face_bright"),
                   tint(load("face_bright_eyes"), (0.3, 0.6, 1.0)), tint(load(hair), DEFAULT_HAIR),
                   tint(load(f"weapon_{kind}"), colours[kind])]
         if kind == "sword":

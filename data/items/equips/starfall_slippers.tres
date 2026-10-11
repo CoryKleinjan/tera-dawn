@@ -30,3 +30,4 @@ stats = SubResource("Resource_1")
 variance = 3
 upgrade_slots = 5
 required_intelligence = 60
+look_color = Color(0.353, 0.243, 0.596, 1)

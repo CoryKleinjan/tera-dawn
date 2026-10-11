@@ -79,7 +79,8 @@
         414
       ],
       "extend_bottom": 461,
-      "scale": 0.4495
+      "scale": 0.4495,
+      "ground": "art/source/backdrop_ground/meadow_near.png"
     },
     "clouds": {
       "keep": "split",

@@ -45,7 +45,7 @@ cross-faded again so they repeat sideways (their `grid` width is the repeat).
 | `art_px` | | Land art (tiles, platform pieces, ground textures): sheet pixels per art pixel, measured on the sheet. Sets `scale` to `density / art_px x grow`, so every piece of land shows at one on-screen pixel size (`TDStage.TEXEL` game px per art pixel; `TDStage.art_density`). |
 | `density` | `2` | With `art_px`: texels cut per art pixel. The game reads 2 for everything under `tiles/`, `platforms/` and `ground/`. |
 | `grow` | `1.0` | With `art_px`: how much bigger or smaller a piece is drawn than its sheet's pixel size, 0.8 to 1.25 (a piece Gemini drew too small or too big next to its neighbours). `tools/art/land_pixels.py --check` checks grow x every decor and prop scale stays within 0.75 to 1.3. |
-| `alpha` | `"hard"` | `"hard"` for pixel sprites, `"soft"` for glows, effects and backgrounds. |
+| `alpha` | `"hard"` | `"hard"` for solid sprites, `"soft"` for glows, effects and backgrounds. |
 | `key` | `[0.35, 0.8]` | Magenta sheets: how magenta a pixel must be to start and finish fading out. Raise it if purple art is being eaten. |
 | `defringe` | `true` | Magenta sheets: after the key, take the magenta out of the dark outline pixels at the cut edge (Gemini blends its outline into the background, which would show as a thin magenta line). Set `false` for a cell whose purple art it wrongly trims. |
 | `label_band` | `0.16` | Top part of each cell (fraction of its height) where the label may be. |
@@ -60,14 +60,15 @@ cross-faded again so they repeat sideways (their `grid` width is the repeat).
 | `grid_threshold` | `0.8` | How much of a row or column must be divider-coloured to count as a divider. |
 | `climb` | | Rope and ladder pieces to line up after cutting, one entry per climb style: `{"ladder": {"top": "ladder_top", "middle": "ladder_middle", "bottom": "ladder_bottom"}}` (`top` and `bottom` optional). See **Climb pieces** below. |
 | `grid` | | Give the cells by hand when detection fails: `{"rows": [y0, y1, y2, ...], "cols": [x0, x1, ...]}` (edges between cells; `cols` can be one list per row). |
-| `overrides` | | Per-cell versions of any key above, plus `crop` `[x0, y0, x1, y1]`, `seamless` (tileable texture, with `size`), `seamless_middle` (end-cap width in sprite px: a bar whose middle is tiled between its caps, its middle cross-faded so it repeats without a seam), `extend_bottom` (pad a backdrop downward), `fix` (a named clean-up from `FIXES`), `recolor` (a palette change from `RECOLORS`), `patch` (`[[x0, y0, x1, y1, dx], ...]`: paint a rect with a copy from dx pixels across, to take out an ornament that would stretch in a 9-slice), `flip` (mirror it left to right), `patch_rows` (`[[y0, y1, dy], ...]`: replace rows y0 to y1 with the rows dy away, to take out a divider line drawn across the art) and `out_dir`. |
+| `overrides` | | Per-cell versions of any key above, plus `crop` `[x0, y0, x1, y1]`, `seamless` (tileable texture, with `size`), `seamless_middle` (end-cap width in sprite px: a bar whose middle is tiled between its caps, its middle cross-faded so it repeats without a seam), `extend_bottom` (pad a backdrop downward), `ground` (with `extend_bottom`: a picture of the padded strip with painted ground in the pad, used in its place so the backdrop meets the floor), `fix` (a named clean-up from `FIXES`), `recolor` (a palette change from `RECOLORS`), `patch` (`[[x0, y0, x1, y1, dx], ...]`: paint a rect with a copy from dx pixels across, to take out an ornament that would stretch in a 9-slice), `flip` (mirror it left to right), `patch_rows` (`[[y0, y1, dy], ...]`: replace rows y0 to y1 with the rows dy away, to take out a divider line drawn across the art) and `out_dir`. |
 
 ## Clean-ups and palette changes
 
 `fix` names one of `FIXES` in `tools/art/slice_sheets.py`: `glow_backdrop` (and `_holes`) for the warm glow
 painted behind icons, `card_backdrop` for an item drawn on a framed pastel card or pale disc, `card_glow` (the same,
 also taking a pink glow round the item), `card_flat` (a card fill for an item that runs out of its cell, with
-`crop`), `round_top` (rebuilds the top of a round button whose rim ran under the label box, from its bottom),
+`crop`), `round_top` (rebuilds the part of a round button's rim that ran under the label box, from the uncovered rim on
+either side of it),
 `painted_sky`, `sky_body` and `hero_attack_arc`. `recolor` names one of `RECOLORS`: `dark_parchment` turns the big
 pale parchment areas of the leather UI sheets (part 7) into dark leather, since the game writes light text in its
 panels; `leather` was the stand-in that recoloured the old purple UI.
@@ -180,7 +181,7 @@ after the item ids, replacing the placeholders from `tools/art/make_item_placeho
 - **Items, pets, projectiles** cut into `assets/sprites/items/`, `pets/` (and
   `assets/animations/pet_*.tres`) and `projectiles/`.
 - **The paperdoll**: `paperdoll_body` cuts the bare hero into the hero strip (`pad_top` leaves
-  room for hair). `paperdoll_hair`, `_faces`, `_cape`, `_shield_round`, `_shield_kite` (one piece per pose; the kite
+  room for hair). `paperdoll_hair`, `_faces`, `_shield_round`, `_shield_kite` (one piece per pose; the kite
   sheet has its own layout, so its `poses` names the cell each pose uses) and
   `_weapons` cut into `art/build/` only; `tools/art/paperdoll_layers.py` places those pieces
   on every body frame and writes the layers, the region map and the rig. The weapon hand, the weapon's angle, the shield and the head's tilt
@@ -190,10 +191,16 @@ after the item ids, replacing the placeholders from `tools/art/make_item_placeho
 - **Held weapons** (`held_*`, art prompts part 8 W2-W6): one weapon per cell, named by item id, pointing right with a green
   grip dot. `paperdoll_layers.py` puts each in his hand on every frame (`weapon_item_<id>`), in its own colours.
   `hero_main` (the painted hero) now cuts into `art/build/` for reference.
-- **Drawn on the body sheet** (`hair_<style>_frames`, `gloves_frames`, `paperdoll_cape`,
+- **Drawn on the body sheet** (`hair_<style>_frames`, `gloves_frames`, `cape_frames`,
   `paperdoll_shield_round`, `paperdoll_grip`, `top_*_frames`, `bottom_*_frames`, `shoes_*_frames`):
   made by editing `art/source/paperdoll_body.png`, so they keep its size and `grid` and line up with
-  it pixel for pixel. The cape and round shield sheets hold the item alone; the others show the body
-  wearing it in greys. Tops, bottoms, shoes, `paperdoll_grip` and `paperdoll_hats` have no code yet
-  (cut into `art/build/` only), nor do `paperdoll_body_2`, `hair_tousled_frames_2` and
-  `paperdoll_gloves_2` (new poses drawn on Gemini's own body, for later).
+  it pixel for pixel. The round shield sheet holds the item alone; the others show the body
+  wearing it in greys, and `paperdoll_layers.py` lifts the greys off the body into a gear layer the
+  game tints (a cut that came back unusable is listed in `WORN_BROKEN` and its items wear the nearest
+  cut). The cape is split where it crosses the hero: the part over him is `cape_front`.
+  Sheets with a grey or gradient background are cleaned with `clean_sheet.py --plain` first.
+- **Hats**: `paperdoll_hats` shows each hat shape on a head (side and behind views) beside a bare
+  head (`bald_side`), and `paperdoll_hats_only` is the same sheet with the heads erased. The tool
+  lines each hat up by the head's shoulders and places it on every frame's head (`hat_<shape>`).
+  `paperdoll_grip` has no code yet (cut into `art/build/` only), nor do `paperdoll_body_2`,
+  `hair_tousled_frames_2` and `paperdoll_gloves_2` (new poses drawn on Gemini's own body, for later).

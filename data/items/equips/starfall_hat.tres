@@ -30,3 +30,4 @@ variance = 3
 upgrade_slots = 7
 required_intelligence = 60
 look_shape = &"wizard"
+look_color = Color(0.416, 0.29, 0.69, 1)

@@ -5,6 +5,7 @@ extends Control
 ## the bottom middle.
 
 const SHADER := preload("res://shaders/paperdoll_ui.gdshader")
+const LAYER_SHADER := preload("res://shaders/paperdoll_ui_layer.gdshader")
 
 var doll: Paperdoll
 var look := {}
@@ -24,6 +25,8 @@ var max_zoom := 4.0
 var _back := Control.new()
 var _body := Control.new()
 var _front := Control.new()
+## One per layer of the doll (each with its own colour), under _back or _front.
+var _layer_views: Array[Control] = []
 
 func _init() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -34,9 +37,7 @@ func _init() -> void:
 	var mat := ShaderMaterial.new()
 	mat.shader = SHADER
 	_body.material = mat
-	_back.draw.connect(_draw_around.bind(_back, true))
 	_body.draw.connect(_draw_body)
-	_front.draw.connect(_draw_around.bind(_front, false))
 	set_look({})
 
 func set_look(new_look: Dictionary) -> void:
@@ -45,6 +46,20 @@ func set_look(new_look: Dictionary) -> void:
 	look = new_look.duplicate(true)
 	doll = Paperdoll.dress(look)
 	doll.apply(_body.material as ShaderMaterial)
+	for v in _layer_views:
+		v.queue_free()
+	_layer_views.clear()
+	for l in doll.layers:
+		var v := Control.new()
+		v.set_anchors_preset(Control.PRESET_FULL_RECT)
+		v.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		var mat := ShaderMaterial.new()
+		mat.shader = LAYER_SHADER
+		l.apply(mat)
+		v.material = mat
+		v.draw.connect(_draw_layer.bind(v, l))
+		(_back if l.behind else _front).add_child(v)
+		_layer_views.append(v)
 	_redraw()
 
 func play(anim: StringName) -> void:
@@ -68,7 +83,7 @@ func frame() -> int:
 	return i % n if f.get_animation_loop(animation) else mini(i, n - 1)
 
 func _redraw() -> void:
-	for c in [_back, _body, _front]:
+	for c in [_back, _body, _front] + _layer_views:
 		c.queue_redraw()
 
 ## Hero pixels -> this control's pixels: [scale, top-left of the frame].
@@ -92,25 +107,10 @@ func _draw_body() -> void:
 	_body.draw_texture_rect_region(tex.atlas, _frame_rect(_body), tex.region)
 	_body.draw_set_transform(Vector2.ZERO)
 
-## The layers behind the body or in front of it, then (in front) the hat and weapon.
-func _draw_around(on: Control, behind: bool) -> void:
+## One layer of the doll, in its own colour (its material).
+func _draw_layer(on: Control, l: Paperdoll.Layer) -> void:
+	if not l.frames.has_animation(animation):
+		return
 	var rect := _frame_rect(on)
-	for l in doll.layers:
-		if l.behind == behind and l.frames.has_animation(animation):
-			var lt := l.frames.get_frame_texture(animation, mini(frame(), l.frames.get_frame_count(animation) - 1))
-			on.draw_texture_rect(lt, rect, false, l.tint)
-	on.draw_set_transform(Vector2.ZERO)
-	var index := Paperdoll.frame_index(_texture())
-	var box := _frame_box()
-	var s: float = box[0]
-	for o in doll.overlays:
-		if LookShapes.behind(o.shape) != behind:
-			continue
-		var at: Variant = Paperdoll.place_overlay(o.shape, index, facing < 0)
-		if at == null:
-			continue
-		var tex := LookShapes.texture(o.shape, o.color)
-		var scale: float = at["scale"] * s
-		on.draw_set_transform(box[1] + at["centre"] * s, at["angle"], Vector2(-scale if facing < 0 else scale, scale))
-		on.draw_texture(tex, -tex.get_size() / 2.0)
+	on.draw_texture_rect(l.frames.get_frame_texture(animation, mini(frame(), l.frames.get_frame_count(animation) - 1)), rect, false)
 	on.draw_set_transform(Vector2.ZERO)
