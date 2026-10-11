@@ -1,0 +1,411 @@
+[gd_resource type="Resource" script_class="MapDef" load_steps=67 format=3]
+
+[ext_resource type="Resource" path="res://data/biomes/harbor.tres" id="1_njh0v"]
+[ext_resource type="Script" path="res://scripts/data/building_placement.gd" id="2_x273b"]
+[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="3_h2qlq"]
+[ext_resource type="Resource" path="res://data/climb_styles/rope.tres" id="4_2ndue"]
+[ext_resource type="Resource" path="res://data/climb_styles/rope_ladder.tres" id="5_u4a6e"]
+[ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="6_l2s11"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="7_5a77d"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="8_v0hwf"]
+[ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="9_4fhit"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_small.png" id="10_iiwv3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/stump.png" id="11_owqkk"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/rock_large.png" id="12_ok0yy"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tall_grass.png" id="13_j2f0n"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_large.png" id="14_fu2pp"]
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="15_q6phd"]
+[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="16_vhlnm"]
+[ext_resource type="Resource" path="res://data/monsters/kelp_lurker.tres" id="17_71gso"]
+[ext_resource type="Resource" path="res://data/monsters/barnacle_boar.tres" id="18_v8ctv"]
+[ext_resource type="Resource" path="res://data/monsters/grotto_tusker.tres" id="19_na61u"]
+[ext_resource type="Script" path="res://scripts/data/decor_def.gd" id="20_2qgkd"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="21_muwax"]
+
+[sub_resource type="Resource" id="Resource_jr4j6"]
+script = ExtResource("3_h2qlq")
+x = 2840.0
+top = 500.0
+bottom = 620.0
+style = ExtResource("4_2ndue")
+
+[sub_resource type="Resource" id="Resource_5appu"]
+script = ExtResource("3_h2qlq")
+x = 2600.0
+top = 390.0
+bottom = 500.0
+style = ExtResource("4_2ndue")
+
+[sub_resource type="Resource" id="Resource_afxr1"]
+script = ExtResource("3_h2qlq")
+x = 2520.0
+top = 270.0
+bottom = 390.0
+style = ExtResource("4_2ndue")
+
+[sub_resource type="Resource" id="Resource_0jqkm"]
+script = ExtResource("3_h2qlq")
+x = 2230.0
+top = 490.0
+bottom = 620.0
+style = ExtResource("5_u4a6e")
+
+[sub_resource type="Resource" id="Resource_6adkm"]
+script = ExtResource("3_h2qlq")
+x = 2080.0
+top = 370.0
+bottom = 490.0
+style = ExtResource("4_2ndue")
+
+[sub_resource type="Resource" id="Resource_ttioq"]
+script = ExtResource("3_h2qlq")
+x = 1730.0
+top = 500.0
+bottom = 620.0
+style = ExtResource("5_u4a6e")
+
+[sub_resource type="Resource" id="Resource_6sgq8"]
+script = ExtResource("3_h2qlq")
+x = 1250.0
+top = 500.0
+bottom = 620.0
+style = ExtResource("5_u4a6e")
+
+[sub_resource type="Resource" id="Resource_p8cqh"]
+script = ExtResource("3_h2qlq")
+x = 1120.0
+top = 370.0
+bottom = 500.0
+style = ExtResource("4_2ndue")
+
+[sub_resource type="Resource" id="Resource_uidym"]
+script = ExtResource("3_h2qlq")
+x = 1060.0
+top = 260.0
+bottom = 370.0
+style = ExtResource("4_2ndue")
+
+[sub_resource type="Resource" id="Resource_qrvo4"]
+script = ExtResource("3_h2qlq")
+x = 640.0
+top = 480.0
+bottom = 620.0
+style = ExtResource("4_2ndue")
+
+[sub_resource type="Resource" id="Resource_1l7ox"]
+script = ExtResource("3_h2qlq")
+x = 480.0
+top = 350.0
+bottom = 480.0
+style = ExtResource("4_2ndue")
+
+[sub_resource type="Resource" id="Resource_vtos5"]
+script = ExtResource("3_h2qlq")
+x = 1840.0
+top = 170.0
+bottom = 370.0
+style = ExtResource("4_2ndue")
+
+[sub_resource type="Resource" id="Resource_uit6t"]
+script = ExtResource("7_5a77d")
+x = 2500.0
+y = 500.0
+width = 400.0
+
+[sub_resource type="Resource" id="Resource_87m7u"]
+script = ExtResource("7_5a77d")
+x = 2340.0
+y = 390.0
+width = 300.0
+
+[sub_resource type="Resource" id="Resource_sm1p6"]
+script = ExtResource("7_5a77d")
+x = 2300.0
+y = 270.0
+width = 260.0
+
+[sub_resource type="Resource" id="Resource_qupgw"]
+script = ExtResource("7_5a77d")
+x = 1920.0
+y = 490.0
+width = 340.0
+
+[sub_resource type="Resource" id="Resource_1xdqn"]
+script = ExtResource("7_5a77d")
+x = 1800.0
+y = 370.0
+width = 320.0
+
+[sub_resource type="Resource" id="Resource_gd0cp"]
+script = ExtResource("7_5a77d")
+x = 1460.0
+y = 500.0
+width = 300.0
+
+[sub_resource type="Resource" id="Resource_8jkyd"]
+script = ExtResource("7_5a77d")
+x = 940.0
+y = 500.0
+width = 340.0
+
+[sub_resource type="Resource" id="Resource_xj5fg"]
+script = ExtResource("7_5a77d")
+x = 860.0
+y = 370.0
+width = 300.0
+
+[sub_resource type="Resource" id="Resource_nv6yq"]
+script = ExtResource("7_5a77d")
+x = 880.0
+y = 260.0
+width = 220.0
+
+[sub_resource type="Resource" id="Resource_e35bm"]
+script = ExtResource("7_5a77d")
+x = 380.0
+y = 480.0
+width = 300.0
+
+[sub_resource type="Resource" id="Resource_8mtvj"]
+script = ExtResource("7_5a77d")
+x = 260.0
+y = 350.0
+width = 260.0
+
+[sub_resource type="Resource" id="Resource_r4dkn"]
+script = ExtResource("7_5a77d")
+x = 1770.0
+y = 170.0
+width = 140.0
+
+[sub_resource type="Resource" id="Resource_6c3ii"]
+script = ExtResource("8_v0hwf")
+x = 60.0
+platform = 0
+target_map = &"gull_bluffs"
+target_x = 2880.0
+door = false
+
+[sub_resource type="Resource" id="Resource_6f5w5"]
+script = ExtResource("9_4fhit")
+texture = ExtResource("10_iiwv3")
+x = 718.0
+y = -1.0
+depth = -6.7
+scale = 0.92
+flip = true
+light_color = Color(0, 0, 0, 0)
+light_energy = 1.5
+light_height = 30.0
+
+[sub_resource type="Resource" id="Resource_4nmy4"]
+script = ExtResource("9_4fhit")
+texture = ExtResource("11_owqkk")
+x = 825.0
+y = -1.0
+depth = -2.4
+scale = 1.3
+flip = false
+light_color = Color(0, 0, 0, 0)
+light_energy = 1.5
+light_height = 30.0
+
+[sub_resource type="Resource" id="Resource_g7nll"]
+script = ExtResource("9_4fhit")
+texture = ExtResource("12_ok0yy")
+x = 437.0
+y = -1.0
+depth = -2.7
+scale = 1.03
+flip = false
+light_color = Color(0, 0, 0, 0)
+light_energy = 1.5
+light_height = 30.0
+
+[sub_resource type="Resource" id="Resource_g7rl4"]
+script = ExtResource("9_4fhit")
+texture = ExtResource("13_j2f0n")
+x = 1735.0
+y = -1.0
+depth = -7.7
+scale = 1.13
+flip = false
+light_color = Color(0, 0, 0, 0)
+light_energy = 1.5
+light_height = 30.0
+
+[sub_resource type="Resource" id="Resource_ow4ht"]
+script = ExtResource("9_4fhit")
+texture = ExtResource("14_fu2pp")
+x = 789.0
+y = -1.0
+depth = -7.2
+scale = 1.3
+flip = false
+light_color = Color(0, 0, 0, 0)
+light_energy = 1.5
+light_height = 30.0
+
+[sub_resource type="Resource" id="Resource_loyx4"]
+script = ExtResource("16_vhlnm")
+monster = ExtResource("17_71gso")
+platform = 0
+count = 3
+patrol_from = -1.0
+patrol_to = -1.0
+
+[sub_resource type="Resource" id="Resource_uqekj"]
+script = ExtResource("16_vhlnm")
+monster = ExtResource("18_v8ctv")
+platform = 0
+count = 3
+patrol_from = -1.0
+patrol_to = -1.0
+
+[sub_resource type="Resource" id="Resource_g4coa"]
+script = ExtResource("16_vhlnm")
+monster = ExtResource("17_71gso")
+platform = 1
+count = 3
+patrol_from = -1.0
+patrol_to = -1.0
+
+[sub_resource type="Resource" id="Resource_o0myh"]
+script = ExtResource("16_vhlnm")
+monster = ExtResource("17_71gso")
+platform = 2
+count = 2
+patrol_from = -1.0
+patrol_to = -1.0
+
+[sub_resource type="Resource" id="Resource_j5jm3"]
+script = ExtResource("16_vhlnm")
+monster = ExtResource("18_v8ctv")
+platform = 3
+count = 2
+patrol_from = -1.0
+patrol_to = -1.0
+
+[sub_resource type="Resource" id="Resource_yh6yx"]
+script = ExtResource("16_vhlnm")
+monster = ExtResource("17_71gso")
+platform = 4
+count = 3
+patrol_from = -1.0
+patrol_to = -1.0
+
+[sub_resource type="Resource" id="Resource_lxbmf"]
+script = ExtResource("16_vhlnm")
+monster = ExtResource("17_71gso")
+platform = 5
+count = 2
+patrol_from = -1.0
+patrol_to = -1.0
+
+[sub_resource type="Resource" id="Resource_66eil"]
+script = ExtResource("16_vhlnm")
+monster = ExtResource("18_v8ctv")
+platform = 6
+count = 2
+patrol_from = -1.0
+patrol_to = -1.0
+
+[sub_resource type="Resource" id="Resource_gadrn"]
+script = ExtResource("16_vhlnm")
+monster = ExtResource("17_71gso")
+platform = 7
+count = 3
+patrol_from = -1.0
+patrol_to = -1.0
+
+[sub_resource type="Resource" id="Resource_b78er"]
+script = ExtResource("16_vhlnm")
+monster = ExtResource("17_71gso")
+platform = 8
+count = 2
+patrol_from = -1.0
+patrol_to = -1.0
+
+[sub_resource type="Resource" id="Resource_wuuv8"]
+script = ExtResource("16_vhlnm")
+monster = ExtResource("18_v8ctv")
+platform = 9
+count = 2
+patrol_from = -1.0
+patrol_to = -1.0
+
+[sub_resource type="Resource" id="Resource_pobws"]
+script = ExtResource("16_vhlnm")
+monster = ExtResource("17_71gso")
+platform = 10
+count = 2
+patrol_from = -1.0
+patrol_to = -1.0
+
+[sub_resource type="Resource" id="Resource_ixevy"]
+script = ExtResource("16_vhlnm")
+monster = ExtResource("17_71gso")
+platform = 11
+count = 2
+patrol_from = -1.0
+patrol_to = -1.0
+
+[sub_resource type="Resource" id="Resource_4v128"]
+script = ExtResource("16_vhlnm")
+monster = ExtResource("19_na61u")
+platform = 0
+count = 1
+patrol_from = -1.0
+patrol_to = -1.0
+
+[sub_resource type="Resource" id="Resource_ljweq"]
+script = ExtResource("21_muwax")
+sky_top = Color(0.0627451, 0.0941176, 0.156863, 1)
+sky_mid = Color(0.164706, 0.227451, 0.345098, 1)
+sky_low = Color(0, 0, 0, 0)
+sky_horizon = Color(0, 0, 0, 0)
+sun_color = Color(0, 0, 0, 0)
+light_color = Color(0, 0, 0, 0)
+light_energy = 1.2
+ambient_color = Color(0.227451, 0.313726, 0.439216, 1)
+ambient_energy = 0.55
+fog_color = Color(0.164706, 0.227451, 0.313726, 1)
+mote_color = Color(0, 0, 0, 0)
+motes_rise = 0
+grade_tint = Color(0, 0, 0, 0)
+grade_lift = Color(0, 0, 0, 0)
+grade_lift_amount = -1.0
+grade_saturation = -1.0
+light_shafts = 0
+light_shaft_color = Color(0, 0, 0, 0)
+backdrop_tint = Color(0.501961, 0.564706, 0.658824, 1)
+hide_layers = PackedInt32Array(3)
+more_ground_decor = Array[ExtResource("20_2qgkd")]([])
+
+[resource]
+script = ExtResource("15_q6phd")
+id = &"smugglers_grotto"
+display_name = "Smugglers' Grotto"
+biome = ExtResource("1_njh0v")
+variant = SubResource("Resource_ljweq")
+width = 3200
+height = 700
+ground_y = 620
+start_x = 120.0
+lantern_spacing = -1.0
+decor_density = -1.0
+region = &"dawnharbor"
+world_pos = Vector2(530, 395)
+town = false
+market = false
+return_map = &"dawnharbor"
+level_text = "Lv. 20-22"
+interior = false
+music = &""
+platforms = Array[ExtResource("7_5a77d")]([SubResource("Resource_uit6t"), SubResource("Resource_87m7u"), SubResource("Resource_sm1p6"), SubResource("Resource_qupgw"), SubResource("Resource_1xdqn"), SubResource("Resource_gd0cp"), SubResource("Resource_8jkyd"), SubResource("Resource_xj5fg"), SubResource("Resource_nv6yq"), SubResource("Resource_e35bm"), SubResource("Resource_8mtvj"), SubResource("Resource_r4dkn")])
+climbables = Array[ExtResource("3_h2qlq")]([SubResource("Resource_jr4j6"), SubResource("Resource_5appu"), SubResource("Resource_afxr1"), SubResource("Resource_0jqkm"), SubResource("Resource_6adkm"), SubResource("Resource_ttioq"), SubResource("Resource_6sgq8"), SubResource("Resource_p8cqh"), SubResource("Resource_uidym"), SubResource("Resource_qrvo4"), SubResource("Resource_1l7ox"), SubResource("Resource_vtos5")])
+portals = Array[ExtResource("8_v0hwf")]([SubResource("Resource_6c3ii")])
+spawns = Array[ExtResource("16_vhlnm")]([SubResource("Resource_loyx4"), SubResource("Resource_uqekj"), SubResource("Resource_g4coa"), SubResource("Resource_o0myh"), SubResource("Resource_j5jm3"), SubResource("Resource_yh6yx"), SubResource("Resource_lxbmf"), SubResource("Resource_66eil"), SubResource("Resource_gadrn"), SubResource("Resource_b78er"), SubResource("Resource_wuuv8"), SubResource("Resource_pobws"), SubResource("Resource_ixevy"), SubResource("Resource_4v128")])
+npcs = Array[ExtResource("6_l2s11")]([])
+props = Array[ExtResource("9_4fhit")]([SubResource("Resource_6f5w5"), SubResource("Resource_4nmy4"), SubResource("Resource_g7nll"), SubResource("Resource_g7rl4"), SubResource("Resource_ow4ht")])
+buildings = Array[ExtResource("2_x273b")]([])
