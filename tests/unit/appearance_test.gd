@@ -315,6 +315,19 @@ func test_hair_under_a_hat_is_cut_where_the_hat_hides_it() -> void:
 	var bare := Paperdoll.dress(_look(Appearance.new()))
 	check(_layer(bare, hair.frames).hair_cut == null, "without a hat the hair is whole")
 
+func test_a_helm_cuts_his_head_only_while_worn() -> void:
+	# a helm is drawn smaller than his head, so his head and face are cut where they would poke
+	# out of it, and only while it's worn (Cory 2026-10-11)
+	var a := Appearance.new()
+	var face := a.part(LookDef.Kind.FACE)
+	var d := Paperdoll.dress(_look(a, {"hat": "iron_helm"}))
+	check(d.head_cut != null, "the helm cuts his body's head")
+	check(_layer(d, face.frames) != null and _layer(d, face.frames).hair_cut == d.head_cut, "and his face")
+	for gear in [{}, {"hat": "viper_bandana"}]:
+		var other := Paperdoll.dress(_look(a, gear))
+		check(other.head_cut == null, "%s: his head is whole" % [gear])
+		check(_layer(other, face.frames).hair_cut == null, "%s: and his face" % [gear])
+
 func test_a_hat_sits_on_his_head() -> void:
 	var cap := Paperdoll.hat_piece(Content.item(&"leaf_cap") as EquipDef)
 	for anim in [&"idle", &"rope"]:

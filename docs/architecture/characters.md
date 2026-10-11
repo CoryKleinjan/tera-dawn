@@ -29,7 +29,10 @@ only what the creator offers and makes a level 1 character in the starting job
   `EquipDef.worn_style`. Hair, irises, capes, shields, gloves and those cuts are greyscale art
   tinted with the hair, eye or item colour (`EquipDef.look_color` or the icon). Under a hat
   the hair's `_hat` layer leaves the face clear, and is cut where the hat's `haircut_<hat>.png`
-  strip says, so no hair pokes out of the hat's top or sides (hair below its edge still shows). In the 3D stage the hero and his layers have
+  strip says, so no hair pokes out of the hat's top or sides (hair below its edge still shows). A
+  helm is drawn smaller than his head, with its eye holes on his eyes, so while one is worn its
+  `headcut_<helm>.png` strip (laid out like the body strip) also cuts his body and face where
+  his head would poke out of it. In the 3D stage the hero and his layers have
   a small light floor (`shaders/character_light.gdshaderinc`), so shade never makes him a
   silhouette. Gear that keeps its shape (a **weapon**, a **shield**, a **hat**) is a
   `Paperdoll.Piece` instead of a strip: one picture per view (held, on his back; a shield's
