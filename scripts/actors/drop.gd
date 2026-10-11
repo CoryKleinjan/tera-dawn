@@ -40,7 +40,7 @@ func step() -> void:
 	spin += 0.1
 	if _collector:
 		_collect_t += 1
-		position = position.lerp(_collector.position + Vector2(0, -34), 0.35)
+		position = position.lerp(_collector.position + Vector2(0, -TDPlayer.CHEST), 0.35)
 		if _collect_t >= COLLECT_TICKS:
 			world.fx.burst(position, Color(item.glow_color, 1.0) * 2.0, 6, 0.6)
 			world.add_effect(item.pickup_effect, position + Vector2(0, 18), 1)

@@ -127,7 +127,7 @@ func test_an_aggressive_shooter_fires_at_a_player_in_range() -> void:
 	var p := h.join(2, "Ann", ServerHarness.FIELD, 300.0)
 	var full := p.character.health.hp
 	h.step(1)
-	check_eq(h.last(2, &"ev_mob_shot"), [0, 300.0, 570.0], "fires at where Ann stands")
+	check_eq(h.last(2, &"ev_mob_shot"), [0, 300.0, 600.0 - SimPlayer.CHEST], "fires at where Ann stands")
 	check_eq(m.dir, -1, "turned to face her")
 	var flight: int = m.shots[0][1]
 	h.step(flight - 1)

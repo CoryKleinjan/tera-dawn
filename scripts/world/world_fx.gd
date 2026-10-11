@@ -17,11 +17,11 @@ func show_skill(peer: int, skill: SkillDef, at: Vector2, face: int, lines: Array
 	var who := world.actor(peer)
 	if who is TDAvatar:
 		(who as TDAvatar).play_skill(skill)
-		add_effect(skill.effect, at + Vector2(0, -40), face)
+		add_effect(skill.effect, at + Vector2(0, -TDPlayer.CHEST), face)
 		world.sound_at(skill.cast_sound(), at)
 	var views := world.mobs()
 	var mine := who == world.player
-	var from := at + Vector2(face * 20, -42)
+	var from := at + Vector2(face * 20, -TDPlayer.CHEST - 2)
 	if skill.projectile and lines.is_empty():
 		# nothing in range: it flies off and fades
 		for i in skill.hits:
@@ -172,7 +172,7 @@ func show_gain(kind: StringName, amount: int) -> void:
 			young += 1
 	var n := TDFloatText.new()
 	n.world = world
-	n.position = world.player.position + Vector2(0, -108 - young * 14)
+	n.position = world.player.position + Vector2(0, -TDPlayer.HEIGHT - 30 - young * 14)
 	n.value = amount
 	n.kind = String(kind)
 	world.fx_layer.add_child(n)

@@ -1,0 +1,380 @@
+[gd_resource type="Resource" script_class="MapDef" load_steps=61 format=3]
+
+[ext_resource type="Resource" path="res://data/biomes/harbor.tres" id="1_6830e"]
+[ext_resource type="Script" path="res://scripts/data/building_placement.gd" id="2_0lbnt"]
+[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="3_5q74b"]
+[ext_resource type="Resource" path="res://data/climb_styles/rope_ladder.tres" id="4_ig3rb"]
+[ext_resource type="Resource" path="res://data/climb_styles/rope.tres" id="5_2w0y1"]
+[ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="6_7nb0h"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="7_mqnj7"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="8_wt3q8"]
+[ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="9_b8q35"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/bush_large.png" id="10_ao31x"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_large.png" id="11_bh225"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_small.png" id="12_igqov"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tall_grass.png" id="13_g2u6b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/flowers_yellow.png" id="14_7yuxq"]
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="15_h2v8h"]
+[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="16_xg0xc"]
+[ext_resource type="Resource" path="res://data/monsters/bramble_boar.tres" id="17_5bpfp"]
+[ext_resource type="Resource" path="res://data/monsters/reef_gull.tres" id="18_60o2p"]
+[ext_resource type="Resource" path="res://data/monsters/tide_slime.tres" id="19_mtvdu"]
+[ext_resource type="Script" path="res://scripts/data/decor_def.gd" id="20_62b5h"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="21_77wob"]
+
+[sub_resource type="Resource" id="Resource_i8h5s"]
+script = ExtResource("3_5q74b")
+x = 2650.0
+top = 490.0
+bottom = 620.0
+style = ExtResource("4_ig3rb")
+
+[sub_resource type="Resource" id="Resource_2dk5j"]
+script = ExtResource("3_5q74b")
+x = 2090.0
+top = 500.0
+bottom = 620.0
+style = ExtResource("4_ig3rb")
+
+[sub_resource type="Resource" id="Resource_t3t34"]
+script = ExtResource("3_5q74b")
+x = 1820.0
+top = 370.0
+bottom = 500.0
+style = ExtResource("5_2w0y1")
+
+[sub_resource type="Resource" id="Resource_obsna"]
+script = ExtResource("3_5q74b")
+x = 1740.0
+top = 260.0
+bottom = 370.0
+style = ExtResource("5_2w0y1")
+
+[sub_resource type="Resource" id="Resource_m1o0h"]
+script = ExtResource("3_5q74b")
+x = 1410.0
+top = 500.0
+bottom = 620.0
+style = ExtResource("5_2w0y1")
+
+[sub_resource type="Resource" id="Resource_ybur0"]
+script = ExtResource("3_5q74b")
+x = 1220.0
+top = 380.0
+bottom = 500.0
+style = ExtResource("5_2w0y1")
+
+[sub_resource type="Resource" id="Resource_kh45i"]
+script = ExtResource("3_5q74b")
+x = 1140.0
+top = 260.0
+bottom = 380.0
+style = ExtResource("5_2w0y1")
+
+[sub_resource type="Resource" id="Resource_5t6nw"]
+script = ExtResource("3_5q74b")
+x = 690.0
+top = 490.0
+bottom = 620.0
+style = ExtResource("5_2w0y1")
+
+[sub_resource type="Resource" id="Resource_den33"]
+script = ExtResource("3_5q74b")
+x = 370.0
+top = 380.0
+bottom = 490.0
+style = ExtResource("5_2w0y1")
+
+[sub_resource type="Resource" id="Resource_f270g"]
+script = ExtResource("7_mqnj7")
+x = 2360.0
+y = 490.0
+width = 340.0
+
+[sub_resource type="Resource" id="Resource_d6kew"]
+script = ExtResource("7_mqnj7")
+x = 1700.0
+y = 500.0
+width = 420.0
+
+[sub_resource type="Resource" id="Resource_yl8wq"]
+script = ExtResource("7_mqnj7")
+x = 1580.0
+y = 370.0
+width = 280.0
+
+[sub_resource type="Resource" id="Resource_d4xmr"]
+script = ExtResource("7_mqnj7")
+x = 1520.0
+y = 260.0
+width = 260.0
+
+[sub_resource type="Resource" id="Resource_yqwcl"]
+script = ExtResource("7_mqnj7")
+x = 1020.0
+y = 500.0
+width = 420.0
+
+[sub_resource type="Resource" id="Resource_qghot"]
+script = ExtResource("7_mqnj7")
+x = 980.0
+y = 380.0
+width = 280.0
+
+[sub_resource type="Resource" id="Resource_43505"]
+script = ExtResource("7_mqnj7")
+x = 920.0
+y = 260.0
+width = 260.0
+
+[sub_resource type="Resource" id="Resource_ropnd"]
+script = ExtResource("7_mqnj7")
+x = 340.0
+y = 490.0
+width = 400.0
+
+[sub_resource type="Resource" id="Resource_68842"]
+script = ExtResource("7_mqnj7")
+x = 320.0
+y = 380.0
+width = 300.0
+
+[sub_resource type="Resource" id="Resource_v76ma"]
+script = ExtResource("8_wt3q8")
+x = 2940.0
+platform = 0
+target_map = &"harbor_road"
+target_x = 2010.0
+door = false
+
+[sub_resource type="Resource" id="Resource_gi1qq"]
+script = ExtResource("8_wt3q8")
+x = 60.0
+platform = 0
+target_map = &"gull_bluffs"
+target_x = 120.0
+door = false
+
+[sub_resource type="Resource" id="Resource_sy0km"]
+script = ExtResource("9_b8q35")
+texture = ExtResource("10_ao31x")
+x = 1761.0
+y = -1.0
+depth = -7.3
+scale = 1.3
+flip = false
+light_color = Color(0, 0, 0, 0)
+light_energy = 1.5
+light_height = 30.0
+
+[sub_resource type="Resource" id="Resource_8we74"]
+script = ExtResource("9_b8q35")
+texture = ExtResource("11_bh225")
+x = 443.0
+y = -1.0
+depth = -6.9
+scale = 0.98
+flip = true
+light_color = Color(0, 0, 0, 0)
+light_energy = 1.5
+light_height = 30.0
+
+[sub_resource type="Resource" id="Resource_nl07o"]
+script = ExtResource("9_b8q35")
+texture = ExtResource("12_igqov")
+x = 1978.0
+y = -1.0
+depth = -3.4
+scale = 0.98
+flip = true
+light_color = Color(0, 0, 0, 0)
+light_energy = 1.5
+light_height = 30.0
+
+[sub_resource type="Resource" id="Resource_s4rov"]
+script = ExtResource("9_b8q35")
+texture = ExtResource("10_ao31x")
+x = 781.0
+y = -1.0
+depth = -7.2
+scale = 0.98
+flip = true
+light_color = Color(0, 0, 0, 0)
+light_energy = 1.5
+light_height = 30.0
+
+[sub_resource type="Resource" id="Resource_xvccv"]
+script = ExtResource("9_b8q35")
+texture = ExtResource("13_g2u6b")
+x = 1463.0
+y = -1.0
+depth = -3.3
+scale = 1.28
+flip = true
+light_color = Color(0, 0, 0, 0)
+light_energy = 1.5
+light_height = 30.0
+
+[sub_resource type="Resource" id="Resource_uigpo"]
+script = ExtResource("9_b8q35")
+texture = ExtResource("14_7yuxq")
+x = 367.0
+y = -1.0
+depth = -2.4
+scale = 1.3
+flip = false
+light_color = Color(0, 0, 0, 0)
+light_energy = 1.5
+light_height = 30.0
+
+[sub_resource type="Resource" id="Resource_43m5u"]
+script = ExtResource("9_b8q35")
+texture = ExtResource("13_g2u6b")
+x = 937.0
+y = -1.0
+depth = -2.6
+scale = 0.93
+flip = false
+light_color = Color(0, 0, 0, 0)
+light_energy = 1.5
+light_height = 30.0
+
+[sub_resource type="Resource" id="Resource_8o4re"]
+script = ExtResource("16_xg0xc")
+monster = ExtResource("17_5bpfp")
+platform = 0
+count = 3
+patrol_from = -1.0
+patrol_to = -1.0
+
+[sub_resource type="Resource" id="Resource_mb0od"]
+script = ExtResource("16_xg0xc")
+monster = ExtResource("18_60o2p")
+platform = 0
+count = 3
+patrol_from = -1.0
+patrol_to = -1.0
+
+[sub_resource type="Resource" id="Resource_lcga2"]
+script = ExtResource("16_xg0xc")
+monster = ExtResource("19_mtvdu")
+platform = 1
+count = 3
+patrol_from = -1.0
+patrol_to = -1.0
+
+[sub_resource type="Resource" id="Resource_oc0af"]
+script = ExtResource("16_xg0xc")
+monster = ExtResource("17_5bpfp")
+platform = 2
+count = 3
+patrol_from = -1.0
+patrol_to = -1.0
+
+[sub_resource type="Resource" id="Resource_75i7d"]
+script = ExtResource("16_xg0xc")
+monster = ExtResource("18_60o2p")
+platform = 3
+count = 2
+patrol_from = -1.0
+patrol_to = -1.0
+
+[sub_resource type="Resource" id="Resource_y2ra3"]
+script = ExtResource("16_xg0xc")
+monster = ExtResource("19_mtvdu")
+platform = 4
+count = 2
+patrol_from = -1.0
+patrol_to = -1.0
+
+[sub_resource type="Resource" id="Resource_p6k7u"]
+script = ExtResource("16_xg0xc")
+monster = ExtResource("17_5bpfp")
+platform = 5
+count = 3
+patrol_from = -1.0
+patrol_to = -1.0
+
+[sub_resource type="Resource" id="Resource_hd0qo"]
+script = ExtResource("16_xg0xc")
+monster = ExtResource("18_60o2p")
+platform = 6
+count = 2
+patrol_from = -1.0
+patrol_to = -1.0
+
+[sub_resource type="Resource" id="Resource_flylh"]
+script = ExtResource("16_xg0xc")
+monster = ExtResource("19_mtvdu")
+platform = 7
+count = 2
+patrol_from = -1.0
+patrol_to = -1.0
+
+[sub_resource type="Resource" id="Resource_odv1b"]
+script = ExtResource("16_xg0xc")
+monster = ExtResource("17_5bpfp")
+platform = 8
+count = 3
+patrol_from = -1.0
+patrol_to = -1.0
+
+[sub_resource type="Resource" id="Resource_4nqde"]
+script = ExtResource("16_xg0xc")
+monster = ExtResource("18_60o2p")
+platform = 9
+count = 2
+patrol_from = -1.0
+patrol_to = -1.0
+
+[sub_resource type="Resource" id="Resource_xeenx"]
+script = ExtResource("21_77wob")
+sky_top = Color(0, 0, 0, 0)
+sky_mid = Color(0, 0, 0, 0)
+sky_low = Color(0.972549, 0.847059, 0.564706, 1)
+sky_horizon = Color(1, 0.94902, 0.752941, 1)
+sun_color = Color(0, 0, 0, 0)
+light_color = Color(0, 0, 0, 0)
+light_energy = 2.1
+ambient_color = Color(0, 0, 0, 0)
+ambient_energy = -1.0
+fog_color = Color(0, 0, 0, 0)
+mote_color = Color(0, 0, 0, 0)
+motes_rise = 0
+grade_tint = Color(1, 0.98, 0.9, 1)
+grade_lift = Color(0, 0, 0, 0)
+grade_lift_amount = -1.0
+grade_saturation = 1.12
+light_shafts = 0
+light_shaft_color = Color(0, 0, 0, 0)
+backdrop_tint = Color(1, 1, 1, 1)
+hide_layers = PackedInt32Array()
+more_ground_decor = Array[ExtResource("20_62b5h")]([])
+
+[resource]
+script = ExtResource("15_h2v8h")
+id = &"windmill_downs"
+display_name = "Windmill Downs"
+biome = ExtResource("1_6830e")
+variant = SubResource("Resource_xeenx")
+width = 3000
+height = 700
+ground_y = 620
+start_x = 2760.0
+lantern_spacing = -1.0
+decor_density = -1.0
+region = &"dawnharbor"
+world_pos = Vector2(560, 285)
+town = false
+market = false
+return_map = &"dawnharbor"
+level_text = "Lv. 14-17"
+interior = false
+music = &""
+platforms = Array[ExtResource("7_mqnj7")]([SubResource("Resource_f270g"), SubResource("Resource_d6kew"), SubResource("Resource_yl8wq"), SubResource("Resource_d4xmr"), SubResource("Resource_yqwcl"), SubResource("Resource_qghot"), SubResource("Resource_43505"), SubResource("Resource_ropnd"), SubResource("Resource_68842")])
+climbables = Array[ExtResource("3_5q74b")]([SubResource("Resource_i8h5s"), SubResource("Resource_2dk5j"), SubResource("Resource_t3t34"), SubResource("Resource_obsna"), SubResource("Resource_m1o0h"), SubResource("Resource_ybur0"), SubResource("Resource_kh45i"), SubResource("Resource_5t6nw"), SubResource("Resource_den33")])
+portals = Array[ExtResource("8_wt3q8")]([SubResource("Resource_v76ma"), SubResource("Resource_gi1qq")])
+spawns = Array[ExtResource("16_xg0xc")]([SubResource("Resource_8o4re"), SubResource("Resource_mb0od"), SubResource("Resource_lcga2"), SubResource("Resource_oc0af"), SubResource("Resource_75i7d"), SubResource("Resource_y2ra3"), SubResource("Resource_p6k7u"), SubResource("Resource_hd0qo"), SubResource("Resource_flylh"), SubResource("Resource_odv1b"), SubResource("Resource_4nqde")])
+npcs = Array[ExtResource("6_7nb0h")]([])
+props = Array[ExtResource("9_b8q35")]([SubResource("Resource_sy0km"), SubResource("Resource_8we74"), SubResource("Resource_nl07o"), SubResource("Resource_s4rov"), SubResource("Resource_xvccv"), SubResource("Resource_uigpo"), SubResource("Resource_43m5u")])
+buildings = Array[ExtResource("2_0lbnt")]([])

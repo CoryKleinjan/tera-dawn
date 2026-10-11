@@ -7,16 +7,20 @@ extends Node2D
 ## basic attack; the quickslot keys use whatever skill or item is on that slot.
 
 const HERO_FRAMES := preload("res://assets/animations/hero.tres")
-## The hero's size against everyone else's art (TDStage.TEXEL): a little smaller than the
-## townsfolk (NPC art), so heroes read as young adventurers among grown-ups.
-const HERO_SCALE := 0.8
+## The hero's size against everyone else's art (TDStage.TEXEL). MapleStory proportions: he
+## stands about a tenth of the screen tall, a little shorter than the townsfolk (TDNpc.SCALE),
+## so heroes read as young adventurers among grown-ups, and most monsters come up to him.
+const HERO_SCALE := 0.62
 ## How tall he stands, feet to the top of his head, in game pixels at HERO_SCALE: speech
 ## bubbles and shop signs go just over it.
-const HEIGHT := 78.0
+const HEIGHT := 60.0
 ## About how wide he is drawn, in game pixels: what the HUD keeps out of the way of.
-const WIDTH := 48.0
+const WIDTH := 37.0
 ## Where his light sits above his feet (game pixels).
-const LIGHT_HEIGHT := 38.0
+const LIGHT_HEIGHT := 29.0
+## His chest above his feet (game pixels): where skill effects and shots start, and where
+## loot flies to.
+const CHEST := SimPlayer.CHEST
 ## A soft warm light that travels with every player, so heroes stand out from the scenery.
 const LIGHT := Color(1.0, 0.86, 0.68)
 const LIGHT_ENERGY := 0.55
@@ -291,7 +295,7 @@ func _use(skill: SkillDef) -> void:
 		cheer_t = 0
 		_swing = true
 	Net.ask(&"req_skill", [skill.id, position, face])
-	world.add_effect(skill.effect, position + Vector2(0, -40), face)
+	world.add_effect(skill.effect, position + Vector2(0, -CHEST), face)
 	Sound.play(skill.cast_sound())
 
 ## Up on the ground: enter a portal, or talk to the NPC in front of you.

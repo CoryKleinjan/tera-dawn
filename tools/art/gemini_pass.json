@@ -9692,6 +9692,27 @@
    }
   },
   {
+   "id": "hud_bar_dawn",
+   "prompts": null,
+   "batch": "HUD bar dawn (edit)",
+   "with": null,
+   "refs": [],
+   "save": "hud_bar_dawn.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 HUD bar thread: the bottom status bar repainted with a dawn theme, same shape. Base is the current hud_bar sprite scaled up on magenta (/mnt/project-files/art-sheets/hud-bar/hud_bar_base.png). Lands in art/source/ui_hud_bar.png.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/hud-bar/hud_bar_base.png",
+    "text": "This image shows one long horizontal game UI bar on magenta: the strip that runs along the bottom of the screen behind the HP, MP and EXP bars. Repaint it as a dawn-themed bar for a cozy fantasy game called Tera's Dawn, in soft hand-painted style (smooth painted shading, gentle gradients, soft brush texture, clean thin dark plum-brown outline, warm light from the upper left; no visible pixels, no pixel-art look). The long middle band becomes deep plum leather that shades to a dusky twilight blue toward the bottom, with a soft warm peach-gold glow along its top edge like the first light of sunrise. Replace the dashed stitching with one thin polished gold trim line just inside the top edge and one just inside the bottom edge. Each rounded end cap becomes a small polished brass cap holding a little round brass sunburst medallion with short rays. The middle band must look the same all along its length (no picture, text, emblem or anything in the middle) so it can repeat sideways. Keep the bar's exact outline, position, length, height, rounded ends and end-cap widths. The background stays flat pure magenta #FF00FF everywhere, with no shadow under the bar. Nothing else is added."
+   }
+  },
+  {
    "id": "paperdoll_mitten_1",
    "prompts": null,
    "batch": "mitten hands 1 (edit)",

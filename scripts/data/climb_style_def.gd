@@ -12,7 +12,9 @@ const BOTTOM_SINK := 2.0
 @export var top: Texture2D
 @export var middle: Texture2D
 @export var bottom: Texture2D
-@export var texel := 1.25
+## Game pixels per art pixel: a bit finer than TDStage.TEXEL, so ropes and ladders stay slim
+## next to the hero.
+@export var texel := 1.0
 ## Share of the top piece's height that rises above the ledge the climbable hangs from
 ## (a ladder's posts, a peg or knot sitting on the ledge). 0 hangs the top piece from the ledge.
 @export_range(0.0, 1.0) var top_rise := 0.0

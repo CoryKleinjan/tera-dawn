@@ -104,15 +104,55 @@ func on_login(peer: int, username: String, password: String) -> void:
 			_take_over(old)
 		log_in(peer, a))
 
-## The player at this game's own keyboard (single player or host) logs in to LOCAL.
-func on_local_login(peer: int) -> void:
+## The player at this game's own keyboard (single player or host) logs in to LOCAL, or, in a
+## debug build with the Developer setting on (`test` is a TestCharacters.Mode), to the test
+## characters' account.
+func on_local_login(peer: int, test := TestCharacters.Mode.OFF) -> void:
 	if peer != MultiplayerPeer.TARGET_PEER_SERVER or not server.local_player or not _can_log_in(peer):
+		return
+	if test != TestCharacters.Mode.OFF and TestCharacters.allowed():
+		log_in(peer, _test_account(test == TestCharacters.Mode.REBUILD))
 		return
 	var a := accounts.load_account(AccountStore.LOCAL)
 	if a.is_empty():
 		a = AccountStore.make(AccountStore.LOCAL, {})
 		accounts.save(a)
 	log_in(peer, a)
+
+## The test characters' account with one character of every job on it (see TestCharacters),
+## making the ones missing, or every one again when `rebuild`.
+func _test_account(rebuild: bool) -> Dictionary:
+	var a := accounts.load_account(TestCharacters.ACCOUNT)
+	if a.is_empty():
+		a = AccountStore.make(TestCharacters.ACCOUNT, {})
+	var names: Array[String] = []
+	for job in TestCharacters.jobs():
+		var have := ""
+		for n: String in a["characters"]:
+			var c := server.store.load_character(n)
+			if c and c.job == job:
+				have = n
+				break
+		if have == "":
+			have = _free_test_name(job)
+		elif not rebuild:
+			names.append(have)
+			continue
+		server.store.save(TestCharacters.build(have, job))
+		names.append(have)
+	a["characters"] = names
+	accounts.save(a)
+	return a
+
+## A name for a new `job` test character no other character on this server has.
+func _free_test_name(job: JobDef) -> String:
+	var base := TestCharacters.name_for(job)
+	var out := base
+	var n := 2
+	while server.store.exists(out):
+		out = base.substr(0, CharacterStore.MAX_NAME - str(n).length()) + str(n)
+		n += 1
+	return out
 
 func on_create(peer: int, raw_name: String, made: Dictionary) -> void:
 	var a := _choosing(peer)
