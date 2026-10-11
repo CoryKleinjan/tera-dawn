@@ -117,16 +117,10 @@ Godot `SpriteFrames` resource. Frames can come from any manifest, as `"<sheet>:<
 Actors look for the animations `idle`, `move` (monsters), `attack`, `hurt` and `die`; the hero
 has its own list in `art/sheets/paperdoll_body.json`.
 
-## Picks between versions
-
-`meadow_backgrounds` and `ropes_props` each came in two versions once; the repainted sheets
-replaced both, so only `meadow_backgrounds_a` and `ropes_props_b` are left.
-
 ## Item icons and window art
 
 `items_gear` and `items_consumables` cut the item icons into `assets/sprites/items/`, named
-after the item ids, replacing the placeholders from `tools/art/make_item_placeholders.py`
-(which never overwrites a real icon). `elixir` and `mana_elixir` are art for future potions.
+after the item ids. `elixir` and `mana_elixir` are art for future potions.
 `ui_windows` cuts the window frame, tabs, slots, buttons and tooltip into
 `assets/sprites/ui/`, which the game windows and the status bar's window buttons draw with.
 `item_slot_hover` isn't used: the windows brighten `item_slot` on hover instead.
@@ -139,12 +133,11 @@ after the item ids, replacing the placeholders from `tools/art/make_item_placeho
   `assets/sprites/monsters/<id>.png` and `assets/animations/<id>.tres`. Labels and divider
   lines that touch the art are painted out with per-cell `blank` rects; `scale` keeps each
   monster's idle height what it was before the swap. `anim_mossling` is still the older
-  sheet; `sproutcap_extra` is cut into `art/build/` only (unused).
+  sheet.
 - **NPC sheets** (`npcs_<town>`) use a fixed `grid`; each NPC's `scale` override sets its
   height next to the hero, and its set writes `assets/animations/npc_<id>.tres` (idle).
 - **Area sheets**: each area has `<area>_tileset.png`, cut by `<area>_tileset` into
-  `assets/sprites/tiles/<area>/` and by `<area>_buildings` into `buildings/<area>/`, and
-  `<area>_backgrounds.png`, cut by `<area>_backgrounds` into `backgrounds/<area>/`. Sheets that
+  `assets/sprites/tiles/<area>/` and `<area>_backgrounds_fine.png`, cut by `<area>_backgrounds` into `backgrounds/<area>/`. Sheets that
   came back on a darker magenta, with soft pink glows or with the sky painted behind a strip
   were evened out first by `tools/art/clean_sheet.py` (it edits the source in place, so run it
   on the original picture). The sun or moon uses `sky_body`; glowing icons use `glow_backdrop`.
@@ -177,8 +170,6 @@ after the item ids, replacing the placeholders from `tools/art/make_item_placeho
   cell's `scale` matches its rope's width to the middle piece's, its `crop` keeps the anchor and a
   short tail). A climb style's pieces may come from several sheets: cutting any of them lines up
   that style again. `top_rise` on the style sets how far its top piece rises above the ledge.
-- **Not in the game yet**: `climb_tops`, `dawnharbor_midground` and `buildings_<town>` cut into
-  `art/build/` only.
 - **Items, pets, projectiles** cut into `assets/sprites/items/`, `pets/` (and
   `assets/animations/pet_*.tres`) and `projectiles/`.
 - **The paperdoll**: `paperdoll_body` cuts the bare hero into the hero strip (`pad_top` leaves
@@ -209,5 +200,5 @@ after the item ids, replacing the placeholders from `tools/art/make_item_placeho
 - **Hats**: `paperdoll_hats` shows each hat shape on a head (side and behind views) beside a bare
   head (`bald_side`), and `paperdoll_hats_only` is the same sheet with the heads erased. The tool
   lines each hat up by the head's shoulders and places it on every frame's head (`hat_<shape>`).
-  `paperdoll_grip` has no code yet (cut into `art/build/` only), nor do `paperdoll_body_2`,
+  `paperdoll_grip` has no code yet (cut into `art/build/` only), nor do
   `hair_tousled_frames_2` and `paperdoll_gloves_2` (new poses drawn on Gemini's own body, for later).

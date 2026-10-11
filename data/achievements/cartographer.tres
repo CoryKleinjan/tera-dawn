@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AchievementDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/achievement_def.gd" id="1_achievement_def"]
+
+[resource]
+script = ExtResource("1_achievement_def")
+id = &"cartographer"
+steam = "ACH_CARTOGRAPHER"
+title = "Cartographer"
+text = "Visit 40 maps."
+kind = "maps"
+goal = 40
+order = 140

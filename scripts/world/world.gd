@@ -172,10 +172,10 @@ func show_banner(text: String) -> void:
 ## You reached an achievement: pop up its toast, and unlock it on Steam.
 func show_achievement(id: String) -> void:
 	var a := Achievements.find(id)
-	if a.is_empty():
+	if a == null:
 		return
 	hud.banners.achievement(a)
-	SteamService.unlock_achievement(a["steam"])
+	SteamService.unlock_achievement(a.steam)
 
 ## Adds a line to the message log (the last six show, each for five seconds). The same
 ## text twice in a row just keeps the line up longer.

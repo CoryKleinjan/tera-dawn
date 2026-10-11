@@ -6,3 +6,5 @@ build/
 # Steam
 steam_appid.txt
 __pycache__/
+# Store art crops (make_store_art.py rebuilds them)
+store/source/

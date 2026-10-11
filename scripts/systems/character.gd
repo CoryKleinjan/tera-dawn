@@ -69,7 +69,7 @@ var pet_full := PetDef.FULL
 var visited: Array[String] = []
 ## Achievement ids reached (see Achievements).
 var achievements: Array[String] = []
-## Tallies achievements count that aren't kept anywhere else: "bosses", "scrolls", "sat", "pets", "deals".
+## Tallies achievements count that aren't kept anywhere else, by Counters name.
 var counters := {}
 
 func _init() -> void:
@@ -191,7 +191,7 @@ func restore_mp(n: int) -> void:
 
 # ---------- what they've done ----------
 
-## Adds to one of the achievement tallies.
+## Adds to one of the achievement tallies (a Counters name).
 func count(kind: String, n := 1) -> void:
 	counters[kind] = int(counters.get(kind, 0)) + n
 

@@ -231,4 +231,4 @@ func test_boss_kills_are_counted() -> void:
 	_setup(1)
 	mob_def.boss = true
 	_attack()
-	check_eq(int(p.character.counters.get("bosses", 0)), 1, "boss tally")
+	check_eq(int(p.character.counters.get(Counters.BOSSES, 0)), 1, "boss tally")
