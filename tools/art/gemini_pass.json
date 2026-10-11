@@ -13100,6 +13100,31 @@
     "refs": [],
     "text": "This is my sheet of a bald boy wearing the Clay Clogs in 32 labelled poses (8 columns x 4 rows) on magenta. ERASE the boy from every cell: his head, ears, face, neck, arms, hands, legs, feet and his plain dark shorts, and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the Clay Clogs. The Clay Clogs stays EXACTLY where it is in every cell: the same position, size, shape, colours, outline, shading and detail, pixel for pixel; do not move, redraw, complete or tidy it. Where his body showed through it (an open strap, between the shoe and his leg) is now magenta. Keep every label and grid line exactly where it is."
    }
+  },
+  {
+   "id": "wg_glove_mittens",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_glove_mittens.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    4
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread: one mitten per glove, drawn from its icon, layered on each of the hero's hands every frame like the weapons (Cory 19:14Z: all equipment layered; gloves are mittens in the glove's colours).",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/worn-gear/glove_icons_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/worn-gear/hero_mitten_hands.png"
+    ],
+    "new_view": true,
+    "text": "The first image shows the inventory icons of four pairs of gloves from my game, side by side on magenta: Brigand Gloves (dark brown leather with tan patches and rope ties), Canvas Gloves (cream canvas with a tan strap across the back), Dragonhide Gloves (red and orange dragon scales) and Work Gloves (tan leather with stitched cuffs and a button). The second image is my hero: his hands are round fingerless MITTENS, MapleStory style (a rounded fist with no separate fingers, a small thumb bump). Redraw each pair as ONE glove worn as such a mitten: a closed rounded fist seen from the side, the back of the hand toward the viewer, no separate fingers, a small thumb bump, with its cuff at the bottom and the fist at the top, standing upright in the middle of its quarter of the picture. Each mitten keeps EXACTLY its icon's colours, materials, patches, straps, stitching, ties, scales, buttons and cuff, so a player instantly sees it is that item. All four are the same size, each about a third as wide as its quarter. Keep the same soft hand-painted look as the icons: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything. Flat pure magenta #FF00FF background, nothing else in the picture."
+   }
   }
  ]
 }
