@@ -331,7 +331,8 @@ class Pass:
 
     def file_part(self, path):
         files = self.state.setdefault("_files", {})
-        data = open(path, "rb").read()
+        with open(path, "rb") as f:
+            data = f.read()
         # keyed by content too: a redo's edit base is written to the same _bases path, and the
         # old upload of that path must not be sent again (wg_hats_1_only's redo once was)
         key = "%s#%s" % (path, hashlib.sha1(data).hexdigest()[:12])
