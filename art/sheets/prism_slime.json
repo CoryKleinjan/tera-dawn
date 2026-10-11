@@ -2,6 +2,7 @@
   "source": "art/source/mon_prism_slime.png",
   "label_band": 0.2,
   "strip_labels": true,
+  "fix": "magenta_rim",
   "save": false,
   "out_dir": "art/build/prism_slime",
   "cells": [
