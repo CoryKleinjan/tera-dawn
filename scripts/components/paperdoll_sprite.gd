@@ -62,7 +62,7 @@ func set_look(new_look: Dictionary) -> void:
 		var a := AnimatedSprite3D.new()
 		a.sprite_frames = l.frames
 		TDStage.style_sprite(a, _texel)
-		a.material_override = _layer_material(l.frames)
+		a.material_override = _layer_material(l)
 		# back to front: behind ones under the body (z < 0), the rest between it and the pictures
 		a.position.z = DEPTH * (0.8 * (i + 1) / (count + 1) - (1.0 if l.behind else 0.0))
 		add_child(a)
@@ -106,14 +106,16 @@ func sync() -> void:
 			a.frame = mini(body.frame, a.sprite_frames.get_frame_count(body.animation) - 1)
 		a.offset = body.offset
 		a.flip_h = mirror
-		a.modulate = body.modulate * doll.layers[i].tint
+		a.modulate = body.modulate
 
-## A layer's material: its frames are regions of one strip, which the shader samples.
-static func _layer_material(frames: SpriteFrames) -> ShaderMaterial:
+## A layer's material: its frames are regions of one strip, which the shader samples, in
+## the layer's colour.
+static func _layer_material(l: Paperdoll.Layer) -> ShaderMaterial:
 	var mat := ShaderMaterial.new()
 	mat.shader = LAYER_SHADER
-	var tex := frames.get_frame_texture(&"idle", 0) if frames.has_animation(&"idle") else null
+	var tex := l.frames.get_frame_texture(&"idle", 0) if l.frames.has_animation(&"idle") else null
 	mat.set_shader_parameter(&"strip", tex.atlas if tex is AtlasTexture else tex)
+	l.apply(mat)
 	return mat
 
 ## A point of the frame (pixels from its top-left) in the body's own space, whose origin

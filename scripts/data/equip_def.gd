@@ -50,6 +50,10 @@ const WORN_STYLE_PLACES := {Slot.TOP: "top", Slot.BOTTOM: "bottom", Slot.SHOES: 
 @export var look_shape: StringName
 ## The colour it's shown in. Fully transparent takes the main colour of its icon.
 @export var look_color := Color(0, 0, 0, 0)
+## For a weapon with its own held picture (Paperdoll.weapon_layers): how big it's drawn in his
+## hand against others of its kind (a claymore 1.3). Read by tools/art/paperdoll_layers.py, so
+## run it after changing this.
+@export var held_size := 1.0
 
 ## Icon colours worked out so far: item id -> Color.
 static var _icon_colors := {}

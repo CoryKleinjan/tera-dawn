@@ -26,3 +26,4 @@ required_strength = 50
 stats = SubResource("stats")
 variance = 3
 weapon_kind = &"sword"
+held_size = 1.2

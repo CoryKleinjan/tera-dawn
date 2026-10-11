@@ -48,6 +48,11 @@ const GLOVES := preload("res://assets/animations/paperdoll/gloves.tres")
 const WEAPON_DIR := "res://assets/animations/paperdoll/weapon_"
 ## The kind a weapon without one is drawn as.
 const DEFAULT_WEAPON := &"sword"
+## Tops worn open at the front (EquipDef.worn_style), with UNDERSHIRT under them so his
+## chest isn't bare, in UNDERSHIRT_COLOR (a plain linen).
+const OPEN_TOPS: Array[StringName] = [&"coat"]
+const UNDERSHIRT := preload("res://assets/animations/paperdoll/top_undershirt.tres")
+const UNDERSHIRT_COLOR := Color(0.86, 0.82, 0.72)
 ## Shields by EquipDef.look_shape (any other: SHIELD).
 const SHIELDS := {&"kite": preload("res://assets/animations/paperdoll/shield_kite.tres")}
 ## The hero's frame size in pixels; every frame of the strip is this big.
@@ -68,16 +73,25 @@ class Overlay:
 		shape = s
 		color = c
 
-## A layer of art, played in step with the hero and multiplied by `tint`.
+## A layer of art, played in step with the hero and multiplied by `tint`, or with `gear`
+## (greyscale gear art) shaded in it, its light and dark greys turning light and deep shades
+## of the colour (gear_tint.gdshaderinc).
 class Layer:
 	var frames: SpriteFrames
 	var behind := false
 	var tint := Color.WHITE
+	var gear := false
 
-	func _init(f: SpriteFrames, back: bool, t := Color.WHITE) -> void:
+	func _init(f: SpriteFrames, back: bool, t := Color.WHITE, g := false) -> void:
 		frames = f
 		behind = back
 		tint = t
+		gear = g
+
+	## Sets a layer material's uniforms (paperdoll_layer or paperdoll_ui_layer shader).
+	func apply(mat: ShaderMaterial) -> void:
+		mat.set_shader_parameter(&"tint", tint)
+		mat.set_shader_parameter(&"gear", gear)
 
 ## Per region: colour to recolour it with (alpha: how much, 0 keeps the art's own).
 var tints := PackedColorArray()
@@ -139,7 +153,10 @@ static func dress(look: Dictionary) -> Paperdoll:
 	var hair_tone := _look_color(a.part(LookDef.Kind.HAIR_COLOR), Region.HAIR)
 	var cape: EquipDef = gear.get(&"cape")
 	if cape:
-		d._add(cape.worn_frames if cape.worn_frames else CAPE, true, Color.WHITE if cape.worn_frames else cape.worn_color())
+		if cape.worn_frames:
+			d._add(cape.worn_frames, true)
+		else:
+			d._add(CAPE, true, cape.worn_color(), true)
 	if hair and not gear.has(&"hat"):
 		d._add(hair.back_frames, true, hair_tone)
 	var weapon: EquipDef = gear.get(&"weapon")
@@ -148,7 +165,7 @@ static func dress(look: Dictionary) -> Paperdoll:
 		d.weapon_kind = kind_of(weapon)
 		d.weapon_tint = weapon.worn_color()
 	if held.has("behind"):
-		d._add(held["behind"], true, held["tint"])
+		d._add(held["behind"], true, held["tint"], held["tint"] != Color.WHITE)
 
 	# over him
 	for place in [&"bottom", &"shoes", &"top", &"gloves"]:
@@ -158,11 +175,13 @@ static func dress(look: Dictionary) -> Paperdoll:
 			if PLACE_REGIONS.has(place):
 				d.hidden[PLACE_REGIONS[place]] = 1.0
 		elif cuts.has(place):
-			d._add(cuts[place], false, e.worn_color())
+			if place == &"top" and e.worn_style in OPEN_TOPS:
+				d._add(UNDERSHIRT, false, UNDERSHIRT_COLOR, true)
+			d._add(cuts[place], false, e.worn_color(), true)
 		elif e and place == &"gloves":
-			d._add(GLOVES, false, e.worn_color())
+			d._add(GLOVES, false, e.worn_color(), true)
 	if cape and cape.worn_frames == null:
-		d._add(CAPE_BACK_VIEW, false, cape.worn_color())
+		d._add(CAPE_BACK_VIEW, false, cape.worn_color(), true)
 	var face := a.part(LookDef.Kind.FACE)
 	if face:
 		d._add(face.frames, false)
@@ -174,11 +193,11 @@ static func dress(look: Dictionary) -> Paperdoll:
 		if shield.worn_frames:
 			d._add(shield.worn_frames, false)
 		else:
-			d._add(SHIELDS.get(shield.look_shape, SHIELD), false, shield.worn_color())
+			d._add(SHIELDS.get(shield.look_shape, SHIELD), false, shield.worn_color(), true)
 	if weapon and weapon.worn_frames:
 		d._add(weapon.worn_frames, false)
 	elif held.has("front"):
-		d._add(held["front"], false, held["tint"])
+		d._add(held["front"], false, held["tint"], held["tint"] != Color.WHITE)
 	var hat: EquipDef = gear.get(&"hat")
 	if hat:
 		if hat.worn_frames:
@@ -214,9 +233,9 @@ static func _weapon_frames(base: String, tint: Color) -> Dictionary:
 		out["behind"] = load(base + "_behind.tres")
 	return out
 
-func _add(frames: SpriteFrames, behind: bool, tint := Color.WHITE) -> void:
+func _add(frames: SpriteFrames, behind: bool, tint := Color.WHITE, gear := false) -> void:
 	if frames:
-		layers.append(Layer.new(frames, behind, tint))
+		layers.append(Layer.new(frames, behind, tint, gear))
 
 ## A look's colour, or the art's own colour for the region when it keeps it.
 static func _look_color(l: LookDef, region: Region) -> Color:

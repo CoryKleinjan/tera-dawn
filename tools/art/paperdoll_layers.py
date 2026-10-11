@@ -103,6 +103,7 @@ FACE_AT = (0.2, 0.3)  # and centred this far forward and down from the head's ce
 # up (to the hairline) and down (past the chin) from there. A hat's hair leaves it clear.
 FACE_ZONE = (FACE_AT[0] + SCALP_BACK, 1.0, FACE_AT[1] + SCALP, 0.7)
 BLANK_FACE = 222      # the hair sheet's blank faces are greys at least this pale (of 255)
+NECK_SLIVER = 120     # loose bits under the jaw smaller than this (pixels) are left-over neck outline
 # Chibi faces: each eye (with its brow) is drawn this much bigger about its own centre. The eyes
 # are everything above EYE_LINE (a fraction of the normal face's height), left or right of its middle.
 EYE_SCALE = 1.3
@@ -123,7 +124,7 @@ FIST = 0.4            # the fist around a grip reaches this far from the grip po
 
 # Weapons worn on the fist are drawn smaller than the template sheet has them, so they fit
 # his hand rather than swallowing it (the rest keep the sheet's size against the sword).
-WORN_SIZE = {"claw": 0.6, "knuckle": 0.75}
+WORN_SIZE = {"claw": 0.6, "knuckle": 0.75, "bow": 1.35}
 # Long weapons whose sheets may draw them at a slant (a sword up and to the right): their own
 # axis is measured and turned out, so a rig angle means the same however the art was drawn.
 # The others are drawn the way the rig expects (a gun and claws pointing right, a bow upright).
@@ -357,7 +358,38 @@ def bare_face(img, px, fi):
         # is a little smaller than his face), so no line is left on his skin
         arr[ss.dilate(clear, 3) & (above < 0) & ((rgb.max(2) < BLANK_FACE - 60) | (rgb.min(2) >= BLANK_FACE - 80)), 3] = 0
         arr[clear, 3] = 0
-    return Image.fromarray(arr, "RGBA")
+    return Image.fromarray(no_neck(arr, fi), "RGBA")
+
+
+def no_neck(arr, fi):
+    """A hair-under-a-hat layer without the rest of the sheet's blank head below the face: the
+    pale neck and ear left under the hair, with their outline. Tinted with the hair colour they
+    showed as a brown wedge on his neck and chest."""
+    rgb = arr[..., :3].astype(int)
+    solid = arr[..., 3] > 0
+    pale = solid & (rgb.min(2) >= BLANK_FACE - 30) & (rgb.max(2) - rgb.min(2) < 12)
+    ahead, above = head_axes(arr.shape, fi, fi["head"])
+    lab, n = ss.label(pale)
+    if not n:
+        return arr
+    low = np.zeros(n + 1, bool)
+    for i in range(1, n + 1):  # a pale piece mostly below the middle of his head: skin, not a shine
+        part = lab == i
+        low[i] = part.sum() >= 6 and np.median(above[part]) < -0.25
+    skin = low[lab]
+    out = arr.copy()
+    if skin.any():
+        # its outline: the dark pixels just around it that aren't hair (no mid grey beside them)
+        mid = solid & ~pale & (rgb.min(2) >= 90)
+        edge = ss.dilate(skin, 3) & solid & ~mid & ~ss.dilate(mid & ~ss.dilate(skin, 1), 1)
+        out[skin | edge, 3] = 0
+        # and the slivers of that outline left loose under his jaw
+        lab, n = ss.label(out[..., 3] > 0)
+        for i in range(1, n + 1):
+            part = lab == i
+            if part.sum() < NECK_SLIVER and np.median(above[part]) < -0.25:
+                out[part, 3] = 0
+    return out
 
 
 def scalp(px, fi, back_view, grey):
@@ -621,8 +653,8 @@ def worn_mask(arr):
 
 
 def posed_gloves(arr, px, hands, reach):
-    """The two gloves of one drawn pose, sized to the hero, each centred on the hand of his
-    nearest to where it sits on the drawn body (no further than `reach`). Returns
+    """The two gloves of one drawn pose, sized to the hero, each centred on a hand of his: the
+    glove drawn nearest to it on the fitted body (first within `reach`, then any). Returns
     [(image, top-left)]."""
     ys = np.nonzero(arr[..., 3] > 0)[0]
     ours = np.nonzero(px[..., 3] > 127)[0]
@@ -640,13 +672,26 @@ def posed_gloves(arr, px, hands, reach):
         gy, gx = np.nonzero(lab == i + 1)
         if max(np.ptp(gy), np.ptp(gx)) * s <= reach:  # glove-sized
             centres[i] = np.array([x + gx.mean() * s, y + gy.mean() * s])
+    # each hand takes the nearest glove that sits near it; a hand left without one (the sheet's
+    # body is posed a little unlike his, so its hands sit elsewhere) then takes the nearest one
+    # left anywhere, and failing that a copy of the other hand's
+    pick = {}
+    for limit in (reach, np.inf):
+        for h, hand in enumerate(hands):
+            if h in pick:
+                continue
+            near = sorted((np.hypot(*(c - hand)), i) for i, c in centres.items())
+            if near and near[0][0] <= limit:
+                pick[h] = near[0][1]
+                del centres[near[0][1]]
+    for h in range(len(hands)):
+        if h not in pick and pick:
+            pick[h] = next(iter(pick.values()))
     out = []
-    for hand in hands:
-        near = sorted((np.hypot(*(c - hand)), i) for i, c in centres.items())
-        if not near or near[0][0] > reach:
+    for h, hand in enumerate(hands):
+        if h not in pick:
             continue
-        i = near[0][1]
-        del centres[i]
+        i = pick[h]
         gy, gx = np.nonzero(lab == i + 1)
         y0, y1, x0, x1 = gy.min(), gy.max() + 1, gx.min(), gx.max() + 1
         part = lab[y0:y1, x0:x1] == i + 1
@@ -995,7 +1040,8 @@ def _turned_on(size, img, anchor, at, angle):
 
 
 def held_pictures():
-    """(item id, weapon kind, piece, sheet) for every weapon drawn on a held_*.json sheet that's there."""
+    """(item id, weapon kind, piece, sheet, size) for every weapon drawn on a held_*.json sheet
+    that's there; size is the item's EquipDef.held_size."""
     kinds = {}
     for folder, _, files in os.walk(ITEMS):
         for f in files:
@@ -1004,8 +1050,9 @@ def held_pictures():
             with open(os.path.join(folder, f)) as fh:
                 text = fh.read()
             item, kind = re.search(r'^id = &"(\w+)"', text, re.M), re.search(r'^weapon_kind = &"(\w+)"', text, re.M)
+            size = re.search(r'^held_size = ([\d.]+)', text, re.M)
             if item and kind:
-                kinds[item.group(1)] = kind.group(1)
+                kinds[item.group(1)] = (kind.group(1), float(size.group(1)) if size else 1.0)
     out = []
     for f in sorted(os.listdir(ss.SHEETS)):
         if not (f.startswith(HELD_SHEETS) and f.endswith(".json")):
@@ -1017,7 +1064,7 @@ def held_pictures():
         for item, piece in cut(f[:-5]).items():
             if item not in kinds:
                 sys.exit(f"{f}: no weapon item called {item}")
-            out.append((item, kinds[item], piece, f[:-5]))
+            out.append((item, kinds[item][0], piece, f[:-5], kinds[item][1]))
     return out
 
 
@@ -1297,9 +1344,11 @@ def main():
     # a held_* sheet is drawn at its own size: it is shrunk so its weapons are, on the median,
     # as long as the template of their kind (keeping their sizes against each other)
     by_sheet = {}
-    for item, kind, piece, sheet in drawn_weapons:
+    # (and then grown or shrunk by the item's own held_size: a claymore longer than a sword)
+    for item, kind, piece, sheet, _ in drawn_weapons:
         by_sheet.setdefault(sheet, []).append(length(weapons[kind], kind) / length(piece, kind))
-    pictures += [("item_" + item, kind, piece, False, float(np.median(by_sheet[sheet]))) for item, kind, piece, sheet in drawn_weapons]
+    pictures += [("item_" + item, kind, piece, False, float(np.median(by_sheet[sheet])) * size)
+                 for item, kind, piece, sheet, size in drawn_weapons]
     for name, kind, piece, tinted, k in pictures:
         img, grip, axis = weapon(piece, s_w * WORN_SIZE.get(kind, 1.0) * k, kind)
         entry = {"grip": grip, "size": list(img.size), "reach": reach(img, grip, axis),

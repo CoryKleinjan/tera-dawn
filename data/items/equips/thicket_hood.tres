@@ -28,3 +28,4 @@ variance = 2
 upgrade_slots = 7
 required_dexterity = 50
 look_shape = &"hood"
+look_color = Color(0.431, 0.541, 0.18, 1)

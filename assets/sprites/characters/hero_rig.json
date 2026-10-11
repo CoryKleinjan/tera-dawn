@@ -2266,16 +2266,16 @@
   },
   "bow": {
    "grip": [
-    18.9,
-    47.4
+    25.5,
+    63.9
    ],
    "size": [
-    24,
-    94
+    32,
+    127
    ],
-   "reach": 4.1,
+   "reach": 5.5,
    "kind": "bow",
-   "grip_share": 0.822,
+   "grip_share": 0.823,
    "dots_left": 0
   },
   "wand": {
@@ -2350,86 +2350,86 @@
   },
   "item_hunter_bow": {
    "grip": [
-    6.4,
-    18.0
+    8.7,
+    24.3
    ],
    "size": [
-    22,
-    40
+    29,
+    55
    ],
-   "reach": 14.6,
+   "reach": 19.3,
    "kind": "bow",
-   "grip_share": 0.305,
+   "grip_share": 0.311,
    "dots_left": 0
   },
   "item_willow_bow": {
    "grip": [
-    8.9,
-    18.8
+    12.0,
+    25.3
    ],
    "size": [
-    25,
-    42
+    34,
+    56
    ],
-   "reach": 15.1,
+   "reach": 21.0,
    "kind": "bow",
-   "grip_share": 0.371,
+   "grip_share": 0.364,
    "dots_left": 0
   },
   "item_elmwood_longbow": {
    "grip": [
-    7.8,
-    19.7
+    10.6,
+    26.6
    ],
    "size": [
-    23,
-    42
+    31,
+    57
    ],
-   "reach": 14.2,
+   "reach": 19.4,
    "kind": "bow",
-   "grip_share": 0.355,
+   "grip_share": 0.353,
    "dots_left": 0
   },
   "item_composite_bow": {
    "grip": [
-    7.3,
-    18.3
+    9.9,
+    24.8
    ],
    "size": [
-    23,
-    42
+    31,
+    56
    ],
-   "reach": 14.7,
+   "reach": 20.1,
    "kind": "bow",
-   "grip_share": 0.332,
+   "grip_share": 0.33,
    "dots_left": 0
   },
   "item_gale_bow": {
    "grip": [
-    9.5,
-    18.3
+    12.8,
+    24.7
    ],
    "size": [
-    27,
-    41
+    36,
+    56
    ],
-   "reach": 16.5,
+   "reach": 22.2,
    "kind": "bow",
-   "grip_share": 0.365,
+   "grip_share": 0.366,
    "dots_left": 0
   },
   "item_skyreach_bow": {
    "grip": [
-    9.9,
-    18.4
+    13.4,
+    24.9
    ],
    "size": [
-    26,
-    42
+    35,
+    57
    ],
-   "reach": 15.1,
+   "reach": 20.6,
    "kind": "bow",
-   "grip_share": 0.396,
+   "grip_share": 0.394,
    "dots_left": 0
   },
   "item_iron_claw": {
@@ -2770,44 +2770,44 @@
   },
   "item_iron_broadsword": {
    "grip": [
-    12.8,
-    11.0
+    14.1,
+    12.1
    ],
    "size": [
-    82,
-    22
+    90,
+    24
    ],
-   "reach": 68.2,
+   "reach": 74.9,
    "kind": "sword",
    "grip_share": 0.158,
    "dots_left": 0
   },
   "item_steel_bastard_sword": {
    "grip": [
-    13.4,
-    12.1
+    16.0,
+    14.5
    ],
    "size": [
-    85,
-    24
+    102,
+    29
    ],
-   "reach": 70.6,
+   "reach": 85.0,
    "kind": "sword",
-   "grip_share": 0.16,
+   "grip_share": 0.158,
    "dots_left": 0
   },
   "item_ember_cleaver": {
    "grip": [
-    12.3,
-    10.4
+    14.8,
+    12.4
    ],
    "size": [
-    73,
-    24
+    87,
+    29
    ],
-   "reach": 59.9,
+   "reach": 71.5,
    "kind": "sword",
-   "grip_share": 0.171,
+   "grip_share": 0.172,
    "dots_left": 0
   },
   "item_dawn_blade": {
@@ -2826,16 +2826,16 @@
   },
   "item_cinder_greatsword": {
    "grip": [
-    12.4,
-    11.8
+    16.1,
+    15.3
    ],
    "size": [
-    86,
-    24
+    112,
+    31
    ],
-   "reach": 72.6,
+   "reach": 94.9,
    "kind": "sword",
-   "grip_share": 0.146,
+   "grip_share": 0.145,
    "dots_left": 0
   },
   "item_ravager_blade": {
@@ -2854,16 +2854,16 @@
   },
   "item_dawnbreaker_claymore": {
    "grip": [
-    12.5,
-    12.6
+    16.2,
+    16.4
    ],
    "size": [
-    86,
-    25
+    112,
+    33
    ],
-   "reach": 72.5,
+   "reach": 94.8,
    "kind": "sword",
-   "grip_share": 0.147,
+   "grip_share": 0.146,
    "dots_left": 0
   }
  },
