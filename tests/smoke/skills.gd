@@ -1,0 +1,58 @@
+extends SmokeArea
+## The skill book, quickslots, buffs and passives in the game.
+
+## A Warrior with Skill Points learns skills in the skill window: they land on quickslots,
+## a buff raises stats until it runs out, and a passive is always on.
+func check() -> void:
+	var ch := _me().character
+	ch.job = Content.job(&"warrior")
+	ch.sp = 5
+	ch.skills.clear()
+	ch.quickslots.fill([])
+	_me().dirty_character = true
+	await _ticks(2)
+	var book: TDSkillWindow = world.hud.windows["skills"]
+	await _press("skills")
+	_check(book.visible and book.jobs() == [&"beginner", &"warrior"], "K opens the skill book with Beginner and Warrior tabs")
+	book.tab = 1
+	var slash: SkillDef = Content.skill(&"dawn_slash")
+	book.learn(slash)
+	await _ticks(1)
+	_check(Game.me.skill_level(slash) == 0 and Game.me.sp == 5, "Dawn Slash needs Power Strike first")
+	book.learn(Content.skill(&"power_strike"))
+	book.learn(slash)
+	book.learn(Content.skill(&"iron_body"))
+	book.learn(Content.skill(&"toughness"))
+	await _ticks(1)
+	_check(Game.me.skill_level(slash) == 1 and Game.me.sp == 1, "spending Skill Points learns skills")
+	_check(Game.me.quickslots[0] == [&"skill", &"power_strike"] and Game.me.quickslots[1] == [&"skill", &"dawn_slash"]
+		and Game.me.quickslots[2] == [&"skill", &"iron_body"], "learned skills go on the free quickslots")
+	_check(Game.me.max_hp() == Game.me.job.base_hp + Game.me.level * Game.me.job.hp_per_level + Game.me.equipment.bonus().max_hp + 15, "Toughness raises Max HP")
+	await _press("skills")
+	# Iron Body raises defense until it wears off.
+	var defense := Game.me.stats.defense
+	ch.mp = ch.max_mp()
+	world.player.cooldown = 0
+	_me().cooldown = 0
+	await _tap("quick_3")
+	await _ticks(1)
+	_check(Game.me.buffs.has(&"iron_body") and Game.me.stats.defense == defense + 5, "Iron Body raises Weapon Defense")
+	ch.buffs[&"iron_body"][1] = 2
+	await _ticks(4)
+	_check(not Game.me.buffs.has(&"iron_body") and Game.me.stats.defense == defense, "it wears off")
+	# Quickslots can be rearranged from the client, and the server keeps them.
+	world.hud.quickslots.assign(5, &"skill", &"dawn_slash")
+	await _ticks(1)
+	_check(ch.quickslots[5] == [&"skill", &"dawn_slash"] and ch.quickslots[1] == [], "moving a skill to another quickslot")
+	world.hud.quickslots.assign(1, &"skill", &"dawn_slash")
+	# A Red Potion on a quickslot is drunk with its key.
+	world.hud.quickslots.assign(7, &"item", &"red_potion")
+	ch.health.set_hp(10)
+	await _ticks(2)
+	_me().item_cd = 0
+	await _tap("quick_8")
+	await _ticks(1)
+	_check(Game.me.health.hp > 10, "a potion's quickslot key drinks it")
+	world.player.cooldown = 0
+	_me().cooldown = 0
+	await _ticks(30)
