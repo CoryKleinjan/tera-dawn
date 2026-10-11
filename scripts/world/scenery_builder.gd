@@ -242,7 +242,7 @@ func _climbable(c: ClimbableDef, platforms: Array[Platform]) -> void:
 
 func _portal(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
 	var base := Vector2(p.x, pl.y + 4.0)
-	var at := TDStage.to3d(base, TDStage.land_depth(-0.3))
+	var at := TDStage.to3d(base, TDStage.Z_PORTAL)
 	if not biome.portal_frames.is_empty():
 		var frames := SpriteFrames.new()
 		frames.set_animation_speed(&"default", 6.0)
