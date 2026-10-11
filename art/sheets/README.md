@@ -69,7 +69,8 @@ cross-faded again so they repeat sideways (their `grid` width is the repeat).
 painted behind icons, `card_backdrop` for an item drawn on a framed pastel card or pale disc, `card_glow` (the same,
 also taking a pink glow round the item), `card_flat` (a card fill for an item that runs out of its cell, with
 `crop`), `round_top` (rebuilds the part of a round button's rim that ran under the label box, from the uncovered rim on
-either side of it),
+either side of it), `medal_symbol` (keeps only the symbol painted on a cream medal, with a dark outline round it; the
+quest markers),
 `painted_sky`, `sky_body` and `hero_attack_arc`. `recolor` names one of `RECOLORS`: `dark_parchment` turns the big
 pale parchment areas of the leather UI sheets (part 7) into dark leather, since the game writes light text in its
 panels; `leather` was the stand-in that recoloured the old purple UI.
