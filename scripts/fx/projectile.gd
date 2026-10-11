@@ -26,7 +26,7 @@ static func create(w: TDWorld, d: ProjectileDef, from: Vector2, dest: Vector2, w
 	return p
 
 func _ready() -> void:
-	sprite = TDStage.glow_sprite(def.texture, Color(def.energy, def.energy, def.energy), def.texel)
+	sprite = TDStage.effect_sprite(def.texture, Color(def.energy, def.energy, def.energy), def.texel)
 	sprite.visible = false
 	add_child(sprite)
 	if def.light_color.a > 0.0:
