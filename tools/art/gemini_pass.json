@@ -8957,6 +8957,248 @@
     "text": "Draw a NEW picture of this building from my 2D side-scrolling game, seen from a different angle. Right now it is drawn in a 3/4 view: you see its right side wall, the corner post, and you look down onto the sloped roof tiles. I need it as a flat front elevation, like a building in a classic 2D side-scroller or a theatre backdrop flat: the camera looks straight at the front wall at eye level, so the front wall is a flat rectangle facing us. Do NOT show the side wall, the corner, or the top of the roof. The roof is seen edge-on from the front: a symmetrical triangular gable (or a straight eave line) with the tiles only along its front edge. No perspective at all: every horizontal line (eaves, beams, window sills, the ground line) is perfectly level and every wall edge is perfectly vertical, and the left and right halves are roughly symmetrical. It is still the same building: the same terracotta tile roof with moss, the same timber frame, pale plaster, stone base, the window with its shutter, the purple curtain doorway and the hanging lantern on the left, in the same colours, at about the same height and width. The doorway sits at the bottom of the front wall and is fully visible. The bottom edge of the building is one perfectly straight horizontal line along the ground, with nothing below it: no steps, no ground patch, no shadow. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background.",
     "new_view": true
    }
+  },
+  {
+   "id": "flat_building_dawnharbor_large",
+   "prompts": null,
+   "batch": "flat side-on building: dawnharbor_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_dawnharbor_large_flat.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 flat-buildings thread: the 3/4-view building redrawn as a flat side-on facade to fit the 2D side-scroller view (Cory).",
+   "edit": {
+    "base": "art/source/building_dawnharbor_large.png",
+    "text": "Draw a NEW picture of this building from my 2D side-scrolling game, seen from a different angle. Right now it is drawn in a slightly angled 3/4 view, where you can see a side or look down onto the roof. I need it as a flat front elevation, like a building in a classic 2D side-scroller or a theatre backdrop flat: the camera looks straight at the front at eye level, so the front faces us flat. Do NOT show any side wall, corner or the top of the roof; the roof is seen edge-on from the front. No perspective at all: every horizontal line (eaves, beams, sills, the ground line) is perfectly level and every wall edge is perfectly vertical. It is still the same building, a harbour town hall: white plaster walls with timber trim and a stone base, a blue slate roof, the golden sun weathervane on the peak, the round window in the gable, the wooden front door with windows either side, and the lower side wing (show the wing as a lower section beside the main front, also seen straight on), in the same colours and at about the same height and width. The door or entrance sits at the bottom and is fully visible. The bottom edge of the building is one perfectly straight horizontal line along the ground, with nothing below it: no steps, no ground patch, no shadow. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background.",
+    "new_view": true
+   }
+  },
+  {
+   "id": "flat_building_dawnharbor_small",
+   "prompts": null,
+   "batch": "flat side-on building: dawnharbor_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_dawnharbor_small_flat.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 flat-buildings thread: the 3/4-view building redrawn as a flat side-on facade to fit the 2D side-scroller view (Cory).",
+   "edit": {
+    "base": "art/source/building_dawnharbor_small.png",
+    "text": "Draw a NEW picture of this building from my 2D side-scrolling game, seen from a different angle. Right now it is drawn in a slightly angled 3/4 view, where you can see a side or look down onto the roof. I need it as a flat front elevation, like a building in a classic 2D side-scroller or a theatre backdrop flat: the camera looks straight at the front at eye level, so the front faces us flat. Do NOT show any side wall, corner or the top of the roof; the roof is seen edge-on from the front. No perspective at all: every horizontal line (eaves, beams, sills, the ground line) is perfectly level and every wall edge is perfectly vertical. It is still the same building, a fish market stall: the blue and white striped awning, the wooden posts and counter front, the fish hanging under the awning and the fish and pot on the counter (seen from the front at eye level, so the counter top is a thin edge, with the fish peeking over it), in the same colours and at about the same height and width. The door or entrance sits at the bottom and is fully visible. The bottom edge of the building is one perfectly straight horizontal line along the ground, with nothing below it: no steps, no ground patch, no shadow. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background.",
+    "new_view": true
+   }
+  },
+  {
+   "id": "flat_building_driftcove_large",
+   "prompts": null,
+   "batch": "flat side-on building: driftcove_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_driftcove_large_flat.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 flat-buildings thread: the 3/4-view building redrawn as a flat side-on facade to fit the 2D side-scroller view (Cory).",
+   "edit": {
+    "base": "art/source/building_driftcove_large.png",
+    "text": "Draw a NEW picture of this building from my 2D side-scrolling game, seen from a different angle. Right now it is drawn in a slightly angled 3/4 view, where you can see a side or look down onto the roof. I need it as a flat front elevation, like a building in a classic 2D side-scroller or a theatre backdrop flat: the camera looks straight at the front at eye level, so the front faces us flat. Do NOT show any side wall, corner or the top of the roof; the roof is seen edge-on from the front. No perspective at all: every horizontal line (eaves, beams, sills, the ground line) is perfectly level and every wall edge is perfectly vertical. It is still the same building, a moored wooden sailing ship: show it as a pure side profile of the hull, like a ship in a classic 2D side-scroller, with the bow pointing right, the curved hull planks, a row of portholes, the deck rail along the top, the mast with its rigging and the barrels on deck peeking over the rail; no deck seen from above. The bottom of the hull is cut by a straight level line where it meets the ground, in the same colours and at about the same height and width. The door or entrance sits at the bottom and is fully visible. The bottom edge of the building is one perfectly straight horizontal line along the ground, with nothing below it: no steps, no ground patch, no shadow. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background.",
+    "new_view": true
+   }
+  },
+  {
+   "id": "flat_building_driftcove_small",
+   "prompts": null,
+   "batch": "flat side-on building: driftcove_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_driftcove_small_flat.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 flat-buildings thread: the 3/4-view building redrawn as a flat side-on facade to fit the 2D side-scroller view (Cory).",
+   "edit": {
+    "base": "art/source/building_driftcove_small.png",
+    "text": "Draw a NEW picture of this building from my 2D side-scrolling game, seen from a different angle. Right now it is drawn in a slightly angled 3/4 view, where you can see a side or look down onto the roof. I need it as a flat front elevation, like a building in a classic 2D side-scroller or a theatre backdrop flat: the camera looks straight at the front at eye level, so the front faces us flat. Do NOT show any side wall, corner or the top of the roof; the roof is seen edge-on from the front. No perspective at all: every horizontal line (eaves, beams, sills, the ground line) is perfectly level and every wall edge is perfectly vertical. It is still the same building, a wooden fisherman's hut on short stilts: plank walls, the patched cream sail-cloth canopy over the roof, the barrel, the small ladder up to the door, the little window and the flag on the right, in the same colours and at about the same height and width. The door or entrance sits at the bottom and is fully visible. The bottom edge of the building is one perfectly straight horizontal line along the ground, with nothing below it: no steps, no ground patch, no shadow. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background.",
+    "new_view": true
+   }
+  },
+  {
+   "id": "flat_building_emberreach_large",
+   "prompts": null,
+   "batch": "flat side-on building: emberreach_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_emberreach_large_flat.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 flat-buildings thread: the 3/4-view building redrawn as a flat side-on facade to fit the 2D side-scroller view (Cory).",
+   "edit": {
+    "base": "art/source/building_emberreach_large.png",
+    "text": "Draw a NEW picture of this building from my 2D side-scrolling game, seen from a different angle. Right now it is drawn in a slightly angled 3/4 view, where you can see a side or look down onto the roof. I need it as a flat front elevation, like a building in a classic 2D side-scroller or a theatre backdrop flat: the camera looks straight at the front at eye level, so the front faces us flat. Do NOT show any side wall, corner or the top of the roof; the roof is seen edge-on from the front. No perspective at all: every horizontal line (eaves, beams, sills, the ground line) is perfectly level and every wall edge is perfectly vertical. It is still the same building, a stone forge hall: grey-brown stone walls, orange clay tile roofs on both wings, the tall stone chimney in the middle, the big arched double wooden door glowing with forge light and the warm glowing windows, in the same colours and at about the same height and width. The door or entrance sits at the bottom and is fully visible. The bottom edge of the building is one perfectly straight horizontal line along the ground, with nothing below it: no steps, no ground patch, no shadow. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background.",
+    "new_view": true
+   }
+  },
+  {
+   "id": "flat_building_emberreach_small",
+   "prompts": null,
+   "batch": "flat side-on building: emberreach_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_emberreach_small_flat.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 flat-buildings thread: the 3/4-view building redrawn as a flat side-on facade to fit the 2D side-scroller view (Cory).",
+   "edit": {
+    "base": "art/source/building_emberreach_small.png",
+    "text": "Draw a NEW picture of this building from my 2D side-scrolling game, seen from a different angle. Right now it is drawn in a slightly angled 3/4 view, where you can see a side or look down onto the roof. I need it as a flat front elevation, like a building in a classic 2D side-scroller or a theatre backdrop flat: the camera looks straight at the front at eye level, so the front faces us flat. Do NOT show any side wall, corner or the top of the roof; the roof is seen edge-on from the front. No perspective at all: every horizontal line (eaves, beams, sills, the ground line) is perfectly level and every wall edge is perfectly vertical. It is still the same building, an open-fronted stone smithy: stone walls, orange clay tile roof, the stone chimney with a little grey smoke, the glowing forge fire in its arched hearth, the anvil and tools in front, and the small window, in the same colours and at about the same height and width. The door or entrance sits at the bottom and is fully visible. The bottom edge of the building is one perfectly straight horizontal line along the ground, with nothing below it: no steps, no ground patch, no shadow. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background.",
+    "new_view": true
+   }
+  },
+  {
+   "id": "flat_building_greenbough_large",
+   "prompts": null,
+   "batch": "flat side-on building: greenbough_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_greenbough_large_flat.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 flat-buildings thread: the 3/4-view building redrawn as a flat side-on facade to fit the 2D side-scroller view (Cory).",
+   "edit": {
+    "base": "art/source/building_greenbough_large.png",
+    "text": "Draw a NEW picture of this building from my 2D side-scrolling game, seen from a different angle. Right now it is drawn in a slightly angled 3/4 view, where you can see a side or look down onto the roof. I need it as a flat front elevation, like a building in a classic 2D side-scroller or a theatre backdrop flat: the camera looks straight at the front at eye level, so the front faces us flat. Do NOT show any side wall, corner or the top of the roof; the roof is seen edge-on from the front. No perspective at all: every horizontal line (eaves, beams, sills, the ground line) is perfectly level and every wall edge is perfectly vertical. It is still the same building, a treehouse in a giant oak: the thick trunk with roots spreading along the ground, the leafy branches, the wooden hut up in the branches, the ladder up the trunk and the small arched window in the trunk, in the same colours and at about the same height and width. The door or entrance sits at the bottom and is fully visible. The bottom edge of the building is one perfectly straight horizontal line along the ground, with nothing below it: no steps, no ground patch, no shadow. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background.",
+    "new_view": true
+   }
+  },
+  {
+   "id": "flat_building_greenbough_small",
+   "prompts": null,
+   "batch": "flat side-on building: greenbough_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_greenbough_small_flat.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 flat-buildings thread: the 3/4-view building redrawn as a flat side-on facade to fit the 2D side-scroller view (Cory).",
+   "edit": {
+    "base": "art/source/building_greenbough_small.png",
+    "text": "Draw a NEW picture of this building from my 2D side-scrolling game, seen from a different angle. Right now it is drawn in a slightly angled 3/4 view, where you can see a side or look down onto the roof. I need it as a flat front elevation, like a building in a classic 2D side-scroller or a theatre backdrop flat: the camera looks straight at the front at eye level, so the front faces us flat. Do NOT show any side wall, corner or the top of the roof; the roof is seen edge-on from the front. No perspective at all: every horizontal line (eaves, beams, sills, the ground line) is perfectly level and every wall edge is perfectly vertical. It is still the same building, a round thatched hut on a big tree branch: the golden thatch roof with its tied top knot, the round plank walls, the door and round window, the platform it stands on, the branch and the little ladder, in the same colours and at about the same height and width. The door or entrance sits at the bottom and is fully visible. The bottom edge of the building is one perfectly straight horizontal line along the ground, with nothing below it: no steps, no ground patch, no shadow. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background.",
+    "new_view": true
+   }
+  },
+  {
+   "id": "flat_building_lanternfall_large",
+   "prompts": null,
+   "batch": "flat side-on building: lanternfall_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_lanternfall_large_flat.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 flat-buildings thread: the 3/4-view building redrawn as a flat side-on facade to fit the 2D side-scroller view (Cory).",
+   "edit": {
+    "base": "art/source/building_lanternfall_large.png",
+    "text": "Draw a NEW picture of this building from my 2D side-scrolling game, seen from a different angle. Right now it is drawn in a slightly angled 3/4 view, where you can see a side or look down onto the roof. I need it as a flat front elevation, like a building in a classic 2D side-scroller or a theatre backdrop flat: the camera looks straight at the front at eye level, so the front faces us flat. Do NOT show any side wall, corner or the top of the roof; the roof is seen edge-on from the front. No perspective at all: every horizontal line (eaves, beams, sills, the ground line) is perfectly level and every wall edge is perfectly vertical. It is still the same building, a tall two-storey half-timbered townhouse: dark timber frame over pale plaster, a stone ground floor, the steep brown shingle roof, the warm glowing windows on both floors, the front door and the hanging lantern, in the same colours and at about the same height and width. The door or entrance sits at the bottom and is fully visible. The bottom edge of the building is one perfectly straight horizontal line along the ground, with nothing below it: no steps, no ground patch, no shadow. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background.",
+    "new_view": true
+   }
+  },
+  {
+   "id": "flat_building_lumewood_large",
+   "prompts": null,
+   "batch": "flat side-on building: lumewood_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_lumewood_large_flat.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 flat-buildings thread: the 3/4-view building redrawn as a flat side-on facade to fit the 2D side-scroller view (Cory).",
+   "edit": {
+    "base": "art/source/building_lumewood_large.png",
+    "text": "Draw a NEW picture of this building from my 2D side-scrolling game, seen from a different angle. Right now it is drawn in a slightly angled 3/4 view, where you can see a side or look down onto the roof. I need it as a flat front elevation, like a building in a classic 2D side-scroller or a theatre backdrop flat: the camera looks straight at the front at eye level, so the front faces us flat. Do NOT show any side wall, corner or the top of the roof; the roof is seen edge-on from the front. No perspective at all: every horizontal line (eaves, beams, sills, the ground line) is perfectly level and every wall edge is perfectly vertical. It is still the same building, a round stone wizard tower: pale stone walls, the crystal glass dome roof with its brass ribs and the blue crystal spire on top, the round windows with glowing blue panes and the arched wooden door, in the same colours and at about the same height and width. The door or entrance sits at the bottom and is fully visible. The bottom edge of the building is one perfectly straight horizontal line along the ground, with nothing below it: no steps, no ground patch, no shadow. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background.",
+    "new_view": true
+   }
+  },
+  {
+   "id": "flat_building_lumewood_small",
+   "prompts": null,
+   "batch": "flat side-on building: lumewood_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_lumewood_small_flat.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 flat-buildings thread: the 3/4-view building redrawn as a flat side-on facade to fit the 2D side-scroller view (Cory).",
+   "edit": {
+    "base": "art/source/building_lumewood_small.png",
+    "text": "Draw a NEW picture of this building from my 2D side-scrolling game, seen from a different angle. Right now it is drawn in a slightly angled 3/4 view, where you can see a side or look down onto the roof. I need it as a flat front elevation, like a building in a classic 2D side-scroller or a theatre backdrop flat: the camera looks straight at the front at eye level, so the front faces us flat. Do NOT show any side wall, corner or the top of the roof; the roof is seen edge-on from the front. No perspective at all: every horizontal line (eaves, beams, sills, the ground line) is perfectly level and every wall edge is perfectly vertical. It is still the same building, a giant blue mushroom house: the blue scalloped cap, the cream stalk walls, the round window and the arched wooden door, in the same colours and at about the same height and width. The door or entrance sits at the bottom and is fully visible. The bottom edge of the building is one perfectly straight horizontal line along the ground, with nothing below it: no steps, no ground patch, no shadow. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background.",
+    "new_view": true
+   }
   }
  ]
 }
