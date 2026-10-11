@@ -12,12 +12,12 @@ var talk: TDDialogueWindow
 func start_game() -> void:
 	await _ticks(5)
 	_check(not world.started and world.hud.title.visible, "the game opens on the title screen")
-	world.hud._on_play()
+	world.hud.title._on_play()
 	await _ticks(2)
-	var select := world.hud.character_select
-	_check(select.visible and not world.hud.title_card.visible and Net.characters.is_empty(), "Play solo opens an empty character select")
+	var select := world.hud.title.character_select
+	_check(select.visible and not world.hud.title.title_card.visible and Net.characters.is_empty(), "Play solo opens an empty character select")
 	select.create_button.pressed.emit()
-	var creator := world.hud.creator
+	var creator := world.hud.title.creator
 	_check(creator.visible and not select.visible and not world.started, "Create opens the character creator")
 	creator.name_field.text = "Tester"
 	creator.step("look:%d" % LookDef.Kind.HAIR, 1)
@@ -337,7 +337,7 @@ func leave() -> void:
 	world.hud.show_title(true)
 	world.hud.game_menu.characters_button.pressed.emit()
 	await _ticks(2)
-	_check(world.hud.character_select.visible and not world.started and Net.mode == Net.Mode.SINGLE, "Character select in the menu leaves the world but stays logged in")
-	world.hud.character_select.logout_button.pressed.emit()
-	_check(Net.mode == Net.Mode.NONE and world.hud.title_card.visible, "Log out goes back to the title screen")
+	_check(world.hud.title.character_select.visible and not world.started and Net.mode == Net.Mode.SINGLE, "Character select in the menu leaves the world but stays logged in")
+	world.hud.title.character_select.logout_button.pressed.emit()
+	_check(Net.mode == Net.Mode.NONE and world.hud.title.title_card.visible, "Log out goes back to the title screen")
 	_check(CharacterStore.new(save_dir).load_character("Tester") != null, "leaving saves the character")

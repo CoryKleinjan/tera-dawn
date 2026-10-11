@@ -30,6 +30,23 @@ Shared pieces for what's inside a window (`scripts/ui/windows/`):
   `ended_unplaced` on `NOTIFICATION_DRAG_END`). `TDWindow.drag_preview(icon)` is the icon
   under the mouse.
 
+## The HUD and the title screen
+
+`TDHud` (`scripts/ui/hud.gd`) is the screen UI while playing: the status bar, overlay,
+quickslots, chat, the windows (the window manager above), the first-time hints, the game
+menu (Esc) and the settings screen, and Esc and pausing (`escape`, `show_title`, `resume`).
+
+`TDTitleScreen` (`scripts/ui/title_screen.gd`, `hud.title`) is the dimmed layer over the game
+before you play and while paused: the key art, the title card (the logo over Play, Settings
+and Quit, and the Play page with Play solo, Host and the server login and register boxes),
+character select, the creator and their questions. It runs the login flow from the first
+button to `Net.joined` (see [multiplayer](multiplayer.md)) and tells the HUD through signals:
+`settings_requested`, `quit_requested` and `left_game` (logged out or dropped: show the title
+card again). The HUD puts the game menu and settings screen on it. Esc goes to
+`TDTitleScreen.escape` first, which handles the title screens' own steps back and returns false
+when Esc belongs to the game. A new screen before the game goes on the title screen; a new
+in-game piece goes on the HUD.
+
 ## UI art and building blocks
 
 - **`UiSkin`**: the UI textures (`tex`, `sized`), nine-patch styles (`box`, `draw_box`), the

@@ -1,7 +1,7 @@
 class_name TDConfirm
 extends TDModal
 ## A yes-or-no question over the menus ("Log out and end it for them?"): Cancel, or a
-## button that does it. Cancel (or Esc, see TDHud.escape) puts the focus back where it was.
+## button that does it. Cancel (or Esc, see TDTitleScreen.escape) puts the focus back where it was.
 
 var cancel_button: Button
 var ok_button: Button

@@ -78,9 +78,11 @@ it was made on. Nothing is shared between servers, so characters never move to a
   always encrypt; they check the server's identity only when the game ships its certificate
   as `res://certs/<address>.crt`, so other servers are encrypted but not verified.
 - On the client, `Net.log_in` connects and sends the username and password once the
-  connection is up (the password isn't kept), the title card (`TDHud`) has the login and
-  register boxes, `TDCharacterSelect` shows the list and `TDDeleteConfirm` asks before
-  deleting. `settings.cfg` remembers the last username and server, never the password.
+  connection is up (the password isn't kept). The title screen (`TDTitleScreen`,
+  `scripts/ui/title_screen.gd`) runs the login flow: its Play page has Play solo, Host and the
+  login and register boxes, it answers `Net.logged_in`, `characters_changed`, `refused`,
+  `joined` and `disconnected`, `TDCharacterSelect` (on it) shows the list and
+  `TDDeleteConfirm` asks before deleting. `TDHud` only shows and hides it and handles Esc. `settings.cfg` remembers the last username and server, never the password.
 - A host that logs out with friends connected is asked first (`TDConfirm`). Whenever a host
   stops, its friends get `ev_host_ended` ("The host ended the game."), and the connection
   stays open a moment (`Net.GOODBYE_TICKS`) so it gets there.
