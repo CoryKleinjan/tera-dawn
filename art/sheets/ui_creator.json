@@ -8,7 +8,7 @@
     [
       "",
       "pedestal",
-      "name_field"
+      ""
     ],
     [
       "",
@@ -17,9 +17,9 @@
     ],
     [
       "arrow_right",
-      "arrow_right_hover",
-      "swatch",
-      "swatch_on"
+      "",
+      "",
+      ""
     ],
     [
       "random",
@@ -66,17 +66,6 @@
       ],
       "scale": 0.5
     },
-    "name_field": {
-      "blank": [
-        [
-          2,
-          0,
-          169,
-          28
-        ]
-      ],
-      "scale": 0.375
-    },
     "arrow_left": {
       "blank": [
         [
@@ -87,39 +76,6 @@
         ]
       ],
       "scale": 0.414
-    },
-    "arrow_right_hover": {
-      "blank": [
-        [
-          3,
-          0,
-          275,
-          31
-        ]
-      ],
-      "scale": 0.5776
-    },
-    "swatch": {
-      "blank": [
-        [
-          3,
-          0,
-          131,
-          30
-        ]
-      ],
-      "scale": 0.5891
-    },
-    "swatch_on": {
-      "blank": [
-        [
-          2,
-          0,
-          143,
-          31
-        ]
-      ],
-      "scale": 0.6087
     },
     "random": {
       "blank": [

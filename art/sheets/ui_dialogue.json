@@ -8,7 +8,7 @@
   "cells": [
     [
       "dialogue_frame",
-      "portrait_niche",
+      "",
       ""
     ],
     [
@@ -27,7 +27,7 @@
       "",
       "",
       "shard_counter",
-      "close_small"
+      ""
     ]
   ],
   "grid": {
@@ -81,18 +81,6 @@
         ]
       ],
       "scale": 0.4832
-    },
-    "portrait_niche": {
-      "fix": "glow_backdrop",
-      "blank": [
-        [
-          2,
-          0,
-          247,
-          30
-        ]
-      ],
-      "scale": 0.6298
     },
     "dialogue_frame": {
       "blank": [
@@ -174,17 +162,6 @@
         ]
       ],
       "scale": 0.5127
-    },
-    "close_small": {
-      "blank": [
-        [
-          1,
-          0,
-          243,
-          31
-        ]
-      ],
-      "scale": 0.7811
     }
   },
   "background": [

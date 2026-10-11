@@ -6,15 +6,15 @@
   "out_dir": "assets/sprites/tiles/lanternfall",
   "cells": [
     [
-      "ground_left",
-      "ground_middle",
-      "ground_right",
-      "platform_small",
-      "platform_medium",
-      "platform_large"
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
     ],
     [
-      "edge_grass",
+      "",
       "tall_grass",
       "tree_large",
       "tree_small",
@@ -31,7 +31,7 @@
     ],
     [
       "",
-      "lantern_unlit",
+      "",
       "lantern_lit",
       "building_large",
       "building_small",
@@ -67,67 +67,6 @@
       ],
       "grow": 0.96,
       "flat_bottom": true
-    },
-    "ground_left": {
-      "crop": [
-        0,
-        0,
-        246,
-        226
-      ],
-      "grow": 0.8
-    },
-    "ground_middle": {
-      "crop": [
-        0,
-        0,
-        251,
-        226
-      ],
-      "grow": 0.8
-    },
-    "ground_right": {
-      "crop": [
-        0,
-        0,
-        252,
-        226
-      ],
-      "grow": 0.8
-    },
-    "platform_small": {
-      "crop": [
-        0,
-        0,
-        252,
-        227
-      ]
-    },
-    "platform_medium": {
-      "crop": [
-        0,
-        0,
-        252,
-        227
-      ],
-      "grow": 0.8
-    },
-    "platform_large": {
-      "crop": [
-        0,
-        0,
-        247,
-        227
-      ]
-    },
-    "edge_grass": {
-      "crop": [
-        0,
-        0,
-        246,
-        226
-      ],
-      "grow": 0.8
     },
     "tall_grass": {
       "crop": [
@@ -237,15 +176,6 @@
       ],
       "grow": 0.86,
       "flat_bottom": true
-    },
-    "lantern_unlit": {
-      "crop": [
-        0,
-        0,
-        251,
-        226
-      ],
-      "grow": 0.96
     },
     "building_large": {
       "crop": [

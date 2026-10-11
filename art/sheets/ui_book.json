@@ -20,7 +20,7 @@
     [
       "",
       "achievement_toast",
-      "bookmark"
+      ""
     ]
   ],
   "grid": {
@@ -157,17 +157,6 @@
         ]
       ],
       "scale": 0.4605
-    },
-    "bookmark": {
-      "blank": [
-        [
-          3,
-          0,
-          160,
-          29
-        ]
-      ],
-      "scale": 0.4869
     }
   },
   "inset": 6

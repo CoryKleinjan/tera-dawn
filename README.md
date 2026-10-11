@@ -147,7 +147,7 @@ tools/art/         Sheet slicer, store-art cropper, fx textures, contact-sheet p
 
 ## Store art
 
-`python3 tools/art/make_store_art.py` cuts the key art sheet into `store/source/` and writes the Steam capsules into `store/` at Steam's sizes. Before uploading: the capsules still need the Tera's Dawn logo laid over them; `main_capsule`, `vertical_capsule` and `library_capsule` are slightly upscaled from the key art; and `library_hero.png` is 1920x620, half of Steam's 3840x1240, so it needs larger key art.
+`python3 tools/art/make_store_art.py` cuts the key art sheet into `store/source/` (not kept in git) and writes the Steam capsules into `store/` at Steam's sizes. Before uploading: the capsules still need the Tera's Dawn logo laid over them; `main_capsule`, `vertical_capsule` and `library_capsule` are slightly upscaled from the key art; and `library_hero.png` is 1920x620, half of Steam's 3840x1240, so it needs larger key art.
 
 ## Shipping on Steam
 

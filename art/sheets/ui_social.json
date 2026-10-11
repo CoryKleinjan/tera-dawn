@@ -25,7 +25,7 @@
     ],
     [
       "shop_sign",
-      "market_stall",
+      "",
       "whisper_icon",
       "buddy_add_icon"
     ]
@@ -174,17 +174,6 @@
           0,
           0,
           164,
-          27
-        ]
-      ]
-    },
-    "market_stall": {
-      "scale": 0.5365,
-      "blank": [
-        [
-          0,
-          0,
-          226,
           27
         ]
       ]
