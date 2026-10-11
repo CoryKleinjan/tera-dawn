@@ -10,8 +10,8 @@ func before_each() -> void:
 func after_each() -> void:
 	fx.cleanup()
 
-func _ids(list: Array[Dictionary]) -> Array:
-	return list.map(func(a: Dictionary) -> String: return a["id"])
+func _ids(list: Array[AchievementDef]) -> Array:
+	return list.map(func(a: AchievementDef) -> String: return String(a.id))
 
 ## Raises what `kind` measures on `c` to `n`.
 func _raise(c: Character, kind: String, n: int) -> void:
@@ -47,14 +47,14 @@ func _raise(c: Character, kind: String, n: int) -> void:
 		_: c.counters[kind] = n
 
 func test_every_achievement_reached_exactly_at_goal() -> void:
-	for a in Achievements.LIST:
+	for a in Achievements.all():
 		var c := fx.character()
-		var goal: int = a["goal"]
-		_raise(c, a["kind"], goal - 1)
-		check(not _ids(Achievements.check(c)).has(a["id"]), "%s not reached one short" % a["id"])
-		_raise(c, a["kind"], goal)
-		check_eq(Achievements.measure(c, a["kind"]), goal, "%s measured" % a["id"])
-		check(_ids(Achievements.check(c)).has(a["id"]), "%s reached at goal" % a["id"])
+		var goal := a.goal
+		_raise(c, a.kind, goal - 1)
+		check(not _ids(Achievements.check(c)).has(String(a.id)), "%s not reached one short" % a.id)
+		_raise(c, a.kind, goal)
+		check_eq(Achievements.measure(c, a.kind), goal, "%s measured" % a.id)
+		check(_ids(Achievements.check(c)).has(String(a.id)), "%s reached at goal" % a.id)
 
 func test_check_awards_only_once() -> void:
 	var c := fx.character()
@@ -73,9 +73,9 @@ func test_fresh_character_reaches_nothing() -> void:
 
 func test_measure_reads_counters_and_unknown_kinds() -> void:
 	var c := fx.character()
-	c.count("bosses")
-	c.count("bosses", 4)
-	check_eq(Achievements.measure(c, "bosses"), 5, "counter")
+	c.count(Counters.BOSSES)
+	c.count(Counters.BOSSES, 4)
+	check_eq(Achievements.measure(c, Counters.BOSSES), 5, "counter")
 	check_eq(Achievements.measure(c, "never_counted"), 0, "unknown kind is 0")
 
 func test_job_counts_only_after_advancing() -> void:
@@ -90,13 +90,13 @@ func test_overshooting_goal_still_counts() -> void:
 	check_has(_ids(Achievements.check(c)), "nest_egg", "well past the goal")
 
 func test_find() -> void:
-	check_eq(Achievements.find("hunter")["goal"], 500, "known")
-	check_eq(Achievements.find("nope"), {}, "unknown")
+	check_eq(Achievements.find("hunter").goal, 500, "known")
+	check(Achievements.find("nope") == null, "unknown")
 
 func test_list_ids_and_kinds_are_sane() -> void:
 	var ids := {}
-	for a in Achievements.LIST:
-		check(not ids.has(a["id"]), "%s unique" % a["id"])
-		ids[a["id"]] = true
-		check(int(a["goal"]) > 0, "%s has a goal" % a["id"])
-		check(String(a["steam"]) != "", "%s has a steam id" % a["id"])
+	for a in Achievements.all():
+		check(not ids.has(a.id), "%s unique" % a.id)
+		ids[a.id] = true
+		check(a.goal > 0, "%s has a goal" % a.id)
+		check(a.steam != "", "%s has a steam id" % a.id)

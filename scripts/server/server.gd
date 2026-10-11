@@ -183,8 +183,8 @@ func give_xp(p: SimPlayer, amount: int) -> void:
 func check_achievements(p: SimPlayer) -> void:
 	for a in Achievements.check(p.character):
 		p.dirty_character = true
-		Net.send(p.peer, &"ev_achievement", [a["id"]])
-		p.map.broadcast(&"ev_effect", [&"celebrate", p.position.x, p.position.y, 1, p.peer])
+		Net.send(p.peer, &"ev_achievement", [String(a.id)])
+		p.map.broadcast(&"ev_effect", [EffectDef.CELEBRATE, p.position.x, p.position.y, 1, p.peer])
 
 # ---------- requests from clients (see Net) ----------
 ## The rest are in the parts under scripts/server/services/ (see `items` and the others).

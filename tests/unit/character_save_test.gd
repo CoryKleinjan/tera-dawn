@@ -58,7 +58,7 @@ func _rich() -> Character:
 	c.pet_full = 64
 	c.visit(&"meadow")
 	c.achievements.append("first_hunt")
-	c.count("deals", 3)
+	c.count(Counters.DEALS, 3)
 	var q := fx.objective(QuestObjective.Kind.KILL, 5)
 	q.monster = mob
 	c.quests.accept(fx.quest(&"t_quest", [q]))

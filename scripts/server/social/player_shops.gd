@@ -86,8 +86,8 @@ func on_buy(peer: int, owner: int, index: int, item_id: StringName) -> void:
 	shop.items.remove_at(index)
 	p.dirty_character = true
 	o.dirty_character = true
-	p.character.count("deals")
-	o.character.count("deals")
+	p.character.count(Counters.DEALS)
+	o.character.count(Counters.DEALS)
 	tell(p, "You bought %s." % MapInstance.amount_name(stack.item, stack.count), Palette.GOOD)
 	tell(o, "%s bought %s for %d Dawnshards." % [p.character.name, MapInstance.amount_name(stack.item, stack.count), price], Palette.GOOD)
 	if shop.items.is_empty():

@@ -28,6 +28,7 @@ const EXPECTED := {
 	"climb_styles": ["ClimbStyleDef"],
 	"projectiles": ["ProjectileDef"],
 	"looks": ["LookDef"],
+	"achievements": ["AchievementDef"],
 }
 
 ## Every .tres file under `dir`, sorted.

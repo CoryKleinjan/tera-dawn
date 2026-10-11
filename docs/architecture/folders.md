@@ -7,6 +7,7 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
 ```
 data/                 Content, one .tres per thing
   monsters/ npcs/ items/ skills/ effects/ jobs/ looks/   Looked up by id through Content
+  achievements/       Milestones, unlocked on Steam too (AchievementDef)
   items/equips/ items/use/ items/etc/ items/setup/   Subfolders are scanned too
   maps/ biomes/ climb_styles/ buildings/    Maps and how they look (maps/rooms/ and
                                             biomes/rooms/: the insides of buildings)
@@ -23,7 +24,7 @@ scripts/
   systems/            Character (and CharacterCodec, its save format) and its parts SkillBook,
                       AbilityPoints and Gear (CharacterPart), Appearance, NewCharacter,
                       Inventory, Equipment,
-                      ItemStack, CharacterStats, MonsterBook, Achievements, Balance
+                      ItemStack, CharacterStats, MonsterBook, Achievements, Counters, Balance
   components/         Health, Hitbox, SpriteRig, HeroBody (a hero's rig and companion), Paperdoll (+ Sprite, View)
   actors/             Player (you), Avatar (other players), Companion (chairs, pets), Mob, Npc, Drop views
   world/              World (what you see), WorldCamera, SnapshotSync (server views), WorldFx (hits, numbers, effects), Stage +

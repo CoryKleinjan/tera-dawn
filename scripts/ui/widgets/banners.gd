@@ -24,8 +24,8 @@ const TOAST_SCALE := 0.8
 var world: TDWorld
 ## Ribbons waiting their turn, the first one showing: [art, line under it].
 var ribbons: Array = []
-## Achievements waiting, the first one showing: their Achievements.LIST entry.
-var toasts: Array = []
+## Achievements waiting, the first one showing.
+var toasts: Array[AchievementDef] = []
 var _ribbon_t := 0
 var _toast_t := 0
 ## What your character had last time it changed (quests done, job), to notice news.
@@ -57,8 +57,8 @@ func ribbon(art: String, line := "") -> void:
 			return
 	ribbons.append([art, line])
 
-## Shows an achievement's toast (an entry of Achievements.LIST).
-func achievement(a: Dictionary) -> void:
+## Shows an achievement's toast.
+func achievement(a: AchievementDef) -> void:
 	toasts.append(a)
 
 ## Whether the map-name banner is up: everything here waits for it.
@@ -121,7 +121,7 @@ func _draw_ribbon(art: String, line: String, t: int) -> void:
 	if line != "":
 		DrawUtil.text(self, Game.num_font, c + Vector2(0, size.y / 2.0 + 22), line, 22, Color(Palette.SUN, a), 0, 6, Color(Palette.NIGHT, a))
 
-func _draw_toast(ach: Dictionary, t: int, total: int) -> void:
+func _draw_toast(ach: AchievementDef, t: int, total: int) -> void:
 	var a := _fade(t, total, 12, 30)
 	var r := toast_rect()
 	r.position.y += (1.0 - a) * 20.0  # rising into place
@@ -131,4 +131,4 @@ func _draw_toast(ach: Dictionary, t: int, total: int) -> void:
 	UiSkin.draw_box(self, sb, r, TOAST_SCALE)
 	var x := r.position.x + TOAST_MARGINS.x * TOAST_SCALE + 4
 	DrawUtil.text(self, Game.ui_font, Vector2(x, r.position.y + 22), "Achievement unlocked", 11, Color(Palette.MUTED, a), 1, 3, Color(Palette.NIGHT, a))
-	DrawUtil.text(self, Game.num_font, Vector2(x, r.position.y + 40), ach.get("title", ""), 17, Color(Palette.SUN, a), 1, 4, Color(Palette.NIGHT, a))
+	DrawUtil.text(self, Game.num_font, Vector2(x, r.position.y + 40), ach.title, 17, Color(Palette.SUN, a), 1, 4, Color(Palette.NIGHT, a))

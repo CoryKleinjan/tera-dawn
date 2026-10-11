@@ -74,7 +74,7 @@ func test_advancing_is_celebrated_and_sent_to_the_player() -> void:
 	_ready_for_mage()
 	_advance()
 	var fx := h.last(2, &"ev_effect")
-	check(not fx.is_empty() and fx[0] == &"celebrate", "everyone on the map sees the celebration")
+	check(not fx.is_empty() and fx[0] == EffectDef.CELEBRATE, "everyone on the map sees the celebration")
 	h.step()
 	var sent := h.last(2, &"ev_character")
 	check(not sent.is_empty() and sent[0]["job"] == "mage", "the client is sent the new job")

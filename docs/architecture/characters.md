@@ -71,11 +71,16 @@ only what the creator offers and makes a level 1 character in the starting job
   `Content` makes a `CardDef` for every monster at startup (`card_<id>`, no files); monsters
   drop it at `CardDef.CHANCE` until your page is full, and picking it up files it in the book
   instead of the bag. The book's level adds to every main stat in `Character.recalc`.
-- **Achievements** (`Achievements.LIST`) each measure something about the Character and a
-  goal. The server checks them whenever a player's state changes (`TDServer.check_achievements`)
+- **Achievements** are **AchievementDef**s in `data/achievements/`, loaded by `Content`; each
+  measures something about the Character (its `kind`, see `Achievements.measure`) against a
+  `goal`. `Achievements.all()` lists them in `order` for the collection window and the server.
+  The server checks them whenever a player's state changes (`TDServer.check_achievements`)
   and sends `ev_achievement`; the client shows it and calls `SteamService.unlock_achievement`
-  with its `steam` id. Add one by adding a line; a new kind of tally goes through
-  `Character.count`.
+  with its `steam` id. Add one by adding a `.tres` (a new `id`, a `steam` name defined in
+  Steamworks, the next `order`). Never change a shipped `id` or `steam` name: saves keep the
+  id and Steamworks the name (that's why `level_50` keeps its name from when the cap was 50,
+  though its goal is 35). A new kind of tally gets a name in `Counters` and is added with
+  `Character.count(Counters.<NAME>)`.
 
 ### Balance
 

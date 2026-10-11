@@ -19,7 +19,7 @@ func on_advance(peer: int, npc_id: StringName, job_id: StringName) -> void:
 		return
 	p.dirty_character = true
 	p.dirty_vitals = true
-	p.map.broadcast(&"ev_effect", [&"celebrate", p.position.x, p.position.y, 1, p.peer])
+	p.map.broadcast(&"ev_effect", [EffectDef.CELEBRATE, p.position.x, p.position.y, 1, p.peer])
 	tell(p, "You are now a %s!" % next.display_name, Palette.SUN)
 	Net.send(p.peer, &"ev_jingle", [ADVANCE_JINGLE])
 	if not next.advance_gifts.is_empty():

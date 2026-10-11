@@ -83,7 +83,7 @@ func on_ready(peer: int) -> void:
 			p.character.inventory.add_stack(s)
 		p.character.shards += t.shards[other]
 		p.dirty_character = true
-		p.character.count("deals")
+		p.character.count(Counters.DEALS)
 		social.trades.erase(p.peer)
 		Net.send(p.peer, &"ev_trade", [{}])
 		tell(p, "The trade is done.", Palette.GOOD)
