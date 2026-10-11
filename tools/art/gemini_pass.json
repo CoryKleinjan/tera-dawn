@@ -11050,13 +11050,13 @@
    ],
    "anchor": "paperdoll_body",
    "size": "2K",
-   "note": "2026-10-11 worn-gear-matches-icons thread (plans/worn-gear-matches-icons.md; Cory: gear on the hero must look like its icon and keep its detail). The hero wearing thicket_jerkin in all 32 poses, in the icon's own colours.",
+   "note": "2026-10-11 worn-gear-matches-icons thread (plans/worn-gear-matches-icons.md; Cory: gear on the hero must look like its icon and keep its detail). The hero wearing thicket_jerkin in all 32 poses, in the icon's own colours. Redo (2026-10-11): the first take drew giant copies of the piece over some cells.",
    "edit": {
     "base": "art/source/paperdoll_body.png",
     "refs": [
      "/mnt/project-files/art-sheets/icon-refs/thicket_jerkin.png"
     ],
-    "text": "The first image is my bald base body in 32 labelled poses (8 columns x 4 rows). The second image is the inventory icon of a piece of gear: the Thicket Jerkin: a moss-green sleeveless jerkin to the hips with leaves sprouting at the shoulders, crossed brown lacing down the chest and a brown rope belt. On EACH of the 32 figures, dress him in EXACTLY this piece, as it looks in the icon: the same shape, the same colours, the same trim, straps, buckles, emblems, patches and patterns, in the same places, so a player instantly sees it is the item from the icon. Keep the icon's detail; do not simplify it or change its colours. It covers his UPPER BODY (to the hips at most, as the icon shows); below its hem his plain dark shorts and bare legs stay exactly as they are. A hood, if it has one, lies down on his back, never over his head. It follows his body in every pose (front, side, back-view climbing poses, crouch, lying down) and is the same size as his body, fitted like clothes on a paper doll: never bigger, never a separate figure, never drawn behind the cell. The body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. The background stays bright pure magenta #FF00FF everywhere. Keep the same soft hand-painted look as the icon: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything. Draw ONLY the piece: nothing else changes."
+    "text": "The first image is my bald base body in 32 labelled poses (8 columns x 4 rows). The second image is the inventory icon of a piece of gear: the Thicket Jerkin: a moss-green sleeveless jerkin to the hips with leaves sprouting at the shoulders, crossed brown lacing down the chest and a brown rope belt. On EACH of the 32 figures, dress him in EXACTLY this piece, as it looks in the icon: the same shape, the same colours, the same trim, straps, buckles, emblems, patches and patterns, in the same places, so a player instantly sees it is the item from the icon. Keep the icon's detail; do not simplify it or change its colours. It covers his UPPER BODY (to the hips at most, as the icon shows); below its hem his plain dark shorts and bare legs stay exactly as they are. A hood, if it has one, lies down on his back, never over his head. It follows his body in every pose (front, side, back-view climbing poses, crouch, lying down) and is the same size as his body, fitted like clothes on a paper doll: never bigger, never a separate figure, never drawn behind the cell. The body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. The background stays bright pure magenta #FF00FF everywhere. Keep the same soft hand-painted look as the icon: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything. Draw ONLY the piece: nothing else changes. Every cell holds exactly ONE small figure the same size as in the base image; never draw a big close-up or a separate copy of the piece filling a cell, and never paint over a cell's background."
    }
   },
   {
@@ -11218,13 +11218,13 @@
    ],
    "anchor": "paperdoll_body",
    "size": "2K",
-   "note": "2026-10-11 worn-gear-matches-icons thread (plans/worn-gear-matches-icons.md; Cory: gear on the hero must look like its icon and keep its detail). The hero wearing field_trousers in all 32 poses, in the icon's own colours.",
+   "note": "2026-10-11 worn-gear-matches-icons thread (plans/worn-gear-matches-icons.md; Cory: gear on the hero must look like its icon and keep its detail). The hero wearing field_trousers in all 32 poses, in the icon's own colours. Redo (2026-10-11): the first take drew giant copies of the piece over some cells.",
    "edit": {
     "base": "art/source/paperdoll_body.png",
     "refs": [
      "/mnt/project-files/art-sheets/icon-refs/field_trousers.png"
     ],
-    "text": "The first image is my bald base body in 32 labelled poses (8 columns x 4 rows). The second image is the inventory icon of a piece of gear: the Field Trousers: khaki work trousers to the ankles with a belt loop waistband, a button, and big side cargo pockets. On EACH of the 32 figures, dress him in EXACTLY this piece, as it looks in the icon: the same shape, the same colours, the same trim, straps, buckles, emblems, patches and patterns, in the same places, so a player instantly sees it is the item from the icon. Keep the icon's detail; do not simplify it or change its colours. It is worn on his legs in place of his plain shorts, as long as the icon shows; his bare feet and his bare upper body stay exactly as they are. It follows his body in every pose (front, side, back-view climbing poses, crouch, lying down) and is the same size as his body, fitted like clothes on a paper doll: never bigger, never a separate figure, never drawn behind the cell. The body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. The background stays bright pure magenta #FF00FF everywhere. Keep the same soft hand-painted look as the icon: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything. Draw ONLY the piece: nothing else changes."
+    "text": "The first image is my bald base body in 32 labelled poses (8 columns x 4 rows). The second image is the inventory icon of a piece of gear: the Field Trousers: khaki work trousers to the ankles with a belt loop waistband, a button, and big side cargo pockets. On EACH of the 32 figures, dress him in EXACTLY this piece, as it looks in the icon: the same shape, the same colours, the same trim, straps, buckles, emblems, patches and patterns, in the same places, so a player instantly sees it is the item from the icon. Keep the icon's detail; do not simplify it or change its colours. It is worn on his legs in place of his plain shorts, as long as the icon shows; his bare feet and his bare upper body stay exactly as they are. It follows his body in every pose (front, side, back-view climbing poses, crouch, lying down) and is the same size as his body, fitted like clothes on a paper doll: never bigger, never a separate figure, never drawn behind the cell. The body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. The background stays bright pure magenta #FF00FF everywhere. Keep the same soft hand-painted look as the icon: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything. Draw ONLY the piece: nothing else changes. Every cell holds exactly ONE small figure the same size as in the base image; never draw a big close-up or a separate copy of the piece filling a cell, and never paint over a cell's background."
    }
   },
   {
@@ -11506,13 +11506,13 @@
    ],
    "anchor": "paperdoll_body",
    "size": "2K",
-   "note": "2026-10-11 worn-gear-matches-icons thread (plans/worn-gear-matches-icons.md; Cory: gear on the hero must look like its icon and keep its detail). The hero wearing thicket_leggings in all 32 poses, in the icon's own colours.",
+   "note": "2026-10-11 worn-gear-matches-icons thread (plans/worn-gear-matches-icons.md; Cory: gear on the hero must look like its icon and keep its detail). The hero wearing thicket_leggings in all 32 poses, in the icon's own colours. Redo (2026-10-11): the first take drew giant copies of the piece over some cells.",
    "edit": {
     "base": "art/source/paperdoll_body.png",
     "refs": [
      "/mnt/project-files/art-sheets/icon-refs/thicket_leggings.png"
     ],
-    "text": "The first image is my bald base body in 32 labelled poses (8 columns x 4 rows). The second image is the inventory icon of a piece of gear: the Thicket Leggings: moss-green trousers to the ankles with a rope belt, green leaves around the waist and at the knees, and a band of leaves at each ankle. On EACH of the 32 figures, dress him in EXACTLY this piece, as it looks in the icon: the same shape, the same colours, the same trim, straps, buckles, emblems, patches and patterns, in the same places, so a player instantly sees it is the item from the icon. Keep the icon's detail; do not simplify it or change its colours. It is worn on his legs in place of his plain shorts, as long as the icon shows; his bare feet and his bare upper body stay exactly as they are. It follows his body in every pose (front, side, back-view climbing poses, crouch, lying down) and is the same size as his body, fitted like clothes on a paper doll: never bigger, never a separate figure, never drawn behind the cell. The body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. The background stays bright pure magenta #FF00FF everywhere. Keep the same soft hand-painted look as the icon: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything. Draw ONLY the piece: nothing else changes."
+    "text": "The first image is my bald base body in 32 labelled poses (8 columns x 4 rows). The second image is the inventory icon of a piece of gear: the Thicket Leggings: moss-green trousers to the ankles with a rope belt, green leaves around the waist and at the knees, and a band of leaves at each ankle. On EACH of the 32 figures, dress him in EXACTLY this piece, as it looks in the icon: the same shape, the same colours, the same trim, straps, buckles, emblems, patches and patterns, in the same places, so a player instantly sees it is the item from the icon. Keep the icon's detail; do not simplify it or change its colours. It is worn on his legs in place of his plain shorts, as long as the icon shows; his bare feet and his bare upper body stay exactly as they are. It follows his body in every pose (front, side, back-view climbing poses, crouch, lying down) and is the same size as his body, fitted like clothes on a paper doll: never bigger, never a separate figure, never drawn behind the cell. The body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. The background stays bright pure magenta #FF00FF everywhere. Keep the same soft hand-painted look as the icon: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything. Draw ONLY the piece: nothing else changes. Every cell holds exactly ONE small figure the same size as in the base image; never draw a big close-up or a separate copy of the piece filling a cell, and never paint over a cell's background."
    }
   },
   {
@@ -12322,9 +12322,9 @@
    ],
    "anchor": "wg_hats_1",
    "size": "2K",
-   "note": "2026-10-11 worn-gear-matches-icons thread (plans/worn-gear-matches-icons.md; Cory: gear on the hero must look like its icon and keep its detail). wg_hats_1 with the heads erased, so each hat lifts off cleanly (like eq_paperdoll_hats_only).",
+   "note": "2026-10-11 worn-gear-matches-icons thread (plans/worn-gear-matches-icons.md; Cory: gear on the hero must look like its icon and keep its detail). wg_hats_1 (its redo, wg_hats_1_2) with the heads erased, so each hat lifts off cleanly (like eq_paperdoll_hats_only).",
    "edit": {
-    "base": "/mnt/project-files/art-sheets/gemini-pass-1/wg_hats_1.png",
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/wg_hats_1_2.png",
     "refs": [],
     "text": "This is my hat sheet: 15 labelled cells on magenta, each a bald head with shoulders, most wearing a painted hat. ERASE the bald heads, faces, ears, necks and shoulders from every cell and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the hats. Every hat stays EXACTLY where it is, the same size, shape and colours, with its own outline and shading; where the head showed through the hat (a hood's face opening, under a brim, a helm's eye slit) is now magenta. Cells with no hat become empty magenta. Keep every label and grid line exactly where it is."
    }
@@ -12453,6 +12453,79 @@
     "refs": [
      "/mnt/project-files/art-sheets/icon-refs/deckhand_bandana.png"
     ]
+   }
+  },
+  {
+   "id": "wg_icons_thief_bandanas_2",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_icons_thief_bandanas_2.png",
+   "replaces": "art/source/items_thief.png",
+   "kind": "still",
+   "cells": [
+    4,
+    6
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread: redo of wg_icons_thief_bandanas, which redrew only the Dusk Bandana as a head bandana; the other three follow it.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/wg_icons_thief_bandanas.png",
+    "text": "This is my thief item icon sheet: 24 cells (6 columns x 4 rows) on magenta. Row 2 cell 1 (the Dusk Bandana) is a HEAD BANDANA: a cloth head scarf with a domed top and a knot with two hanging tails at one side (also the second image). Three other icons are still face-mask bandanas (a cloth tied over the nose and mouth): row 2 cell 3 (the Viper Bandana, olive green with a dark snakeskin pattern), row 3 cell 1 (the Nightfang Bandana, purple with a ragged edge hung with small white fangs) and row 3 cell 5 (the Eclipse Bandana, black with a gold ring emblem). Redraw ONLY those three icons as HEAD BANDANAS of exactly the same kind, shape, angle and size as the Dusk Bandana, each keeping its own colours, pattern and detail (the snakeskin all over it, the white fangs hanging along its lower edge, the gold ring on its front). Every other icon, label and grid line stays exactly as it is, including the Dusk Bandana. Keep the same soft hand-painted look as the other icons: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. The background stays bright pure magenta #FF00FF.",
+    "refs": [
+     "/mnt/project-files/art-sheets/icon-refs/dusk_bandana_head.png"
+    ]
+   }
+  },
+  {
+   "id": "wg_hats_5",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_hats_5.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    3,
+    5
+   ],
+   "anchor": "paperdoll_body",
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread (plans/worn-gear-matches-icons.md; Cory: gear on the hero must look like its icon and keep its detail). Redo of three hats that came back wrong (steel_helm and ember_helm in wg_hats_2, starfall_hat in wg_hats_3), plus the dusk_bandana from its new head-bandana icon. Pair slots (side, behind): row 1 cells 1-2 ember_helm, row 2 cells 1-2 dusk_bandana, row 2 cells 4-5 steel_helm, row 3 cells 1-2 starfall_hat; every other cell is a bald head.",
+   "edit": {
+    "base": "art/source/paperdoll_hats.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/icon-refs/ember_helm.png",
+     "/mnt/project-files/art-sheets/icon-refs/dusk_bandana_head.png",
+     "/mnt/project-files/art-sheets/icon-refs/steel_helm.png",
+     "/mnt/project-files/art-sheets/icon-refs/starfall_hat.png"
+    ],
+    "text": "The first image is my hat sheet: 15 labelled cells (5 columns x 3 rows) on magenta, each a bald head with shoulders, most wearing an old grey hat. The next 4 images are the inventory icons of 4 hats from my game. ERASE every old grey hat completely, then put these hats on the heads, IN THEIR OWN COLOURS from the icons: row 1, cells 1 (side) and 2 (behind) get the EMBER HELM: a dark iron closed helm with an orange-red crest on top and a glowing orange T-shaped face opening (image 2); row 2, cells 1 (side) and 2 (behind) get the DUSK BANDANA: a plain dusky purple head scarf tied at the back of the head with two hanging tails (image 3); row 2, cells 4 (side) and 5 (behind) get the STEEL HELM: a blue-grey steel great helm with a visor and a narrow eye slit, rivets, and brown mail at the neck, NO crest and NO plume (image 4); row 3, cells 1 (side) and 2 (behind) get the STARFALL HAT: a tall violet WIZARD HAT with a pointed bent tip, a wide brim, white stars and a shooting star, NOT a bandana (image 5). A new hat may have a different shape from the old grey hat in its cell: draw the new hat only, nothing of the old one stays, and never mix two hats into one. Every other cell (row 1 cells 3, 4 and 5, row 2 cell 3, row 3 cells 3, 4 and 5) becomes a plain bald head with NO hat. In each side cell draw the hat on the head from the same side angle as the head; in each behind cell draw the same hat from behind (its back, no face showing). Each hat keeps all the icon's detail and colours, sits on the head the way a real hat sits, is sized to the head, and there is only one hat per cell. The heads, shoulders, labels and grid lines stay exactly where they are. The background stays bright pure magenta #FF00FF. Keep the same soft hand-painted look as the icon: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything."
+   }
+  },
+  {
+   "id": "wg_hats_5_only",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_hats_5_only.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    3,
+    5
+   ],
+   "anchor": "wg_hats_5",
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread (plans/worn-gear-matches-icons.md; Cory: gear on the hero must look like its icon and keep its detail). wg_hats_5 with the heads erased, so each hat lifts off cleanly (like eq_paperdoll_hats_only).",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/wg_hats_5.png",
+    "refs": [],
+    "text": "This is my hat sheet: 15 labelled cells on magenta, each a bald head with shoulders, most wearing a painted hat. ERASE the bald heads, faces, ears, necks and shoulders from every cell and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the hats. Every hat stays EXACTLY where it is, the same size, shape and colours, with its own outline and shading; where the head showed through the hat (a hood's face opening, under a brim, a helm's eye slit) is now magenta. Cells with no hat become empty magenta. Keep every label and grid line exactly where it is."
    }
   }
  ]
