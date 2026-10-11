@@ -11,7 +11,7 @@ const LOOK_GRASS := 7.0
 ## The top edge you stand on.
 @export var y := 0.0
 @export var width := 200.0
-## A painted piece of land (a floating rock, a tall ledge, an arch) drawn as this platform
+## A painted piece of land standing on the floor (a tall ledge) drawn as this platform
 ## instead of the biome's platform front. It is scaled to the platform's width. Land-shaped
 ## art always goes here rather than in a map's props, so everything that looks like
 ## ground can be stood on.

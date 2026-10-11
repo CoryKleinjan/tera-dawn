@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://x0iaw1luvi0f"
-path="res://.godot/imported/arch.png-5d4317c5275b2090dda15fc54f66f458.ctex"
+uid="uid://disemgmmqi15g"
+path="res://.godot/imported/cape_front.png-adc74c41a0b3438e954755a037dda3ad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/tiles/meadow/arch.png"
-dest_files=["res://.godot/imported/arch.png-5d4317c5275b2090dda15fc54f66f458.ctex"]
+source_file="res://assets/sprites/characters/layers/cape_front.png"
+dest_files=["res://.godot/imported/cape_front.png-adc74c41a0b3438e954755a037dda3ad.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7cx7c21iyai5"
-path="res://.godot/imported/floating_rock.png-36bbc52d1c5775863de9b9687efceb29.ctex"
+uid="uid://e61cqe4d0uf6"
+path="res://.godot/imported/hat_bandana.png-60cfdce943321f6be1956b55c2875555.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/tiles/meadow/floating_rock.png"
-dest_files=["res://.godot/imported/floating_rock.png-36bbc52d1c5775863de9b9687efceb29.ctex"]
+source_file="res://assets/sprites/characters/layers/hat_bandana.png"
+dest_files=["res://.godot/imported/hat_bandana.png-60cfdce943321f6be1956b55c2875555.ctex"]
 
 [params]
 

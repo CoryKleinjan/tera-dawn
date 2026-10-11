@@ -177,7 +177,8 @@
         303,
         230
       ],
-      "grow": 1.14
+      "grow": 1.14,
+      "save": false
     },
     "floating_rock": {
       "crop": [
@@ -185,7 +186,8 @@
         27,
         261,
         230
-      ]
+      ],
+      "save": false
     },
     "bush_small": {
       "crop": [

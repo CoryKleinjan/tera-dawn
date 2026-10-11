@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtt28spvio6q3"
-path="res://.godot/imported/ledge_vines.png-3826b137e80ed3f1177cd34c46c37d1a.ctex"
+uid="uid://g0lmi4fedhq2"
+path="res://.godot/imported/hat_wizard.png-6f0f81138e421c6fa9612e261caef4ce.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/tiles/meadow/ledge_vines.png"
-dest_files=["res://.godot/imported/ledge_vines.png-3826b137e80ed3f1177cd34c46c37d1a.ctex"]
+source_file="res://assets/sprites/characters/layers/hat_wizard.png"
+dest_files=["res://.godot/imported/hat_wizard.png-6f0f81138e421c6fa9612e261caef4ce.ctex"]
 
 [params]
 

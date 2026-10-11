@@ -22,7 +22,7 @@ scripts/
   systems/            Character (and CharacterCodec, its save format), Appearance, NewCharacter,
                       Inventory, Equipment,
                       ItemStack, CharacterStats, MonsterBook, Achievements, Balance
-  components/         Health, Hitbox, SpriteRig, Paperdoll (+ Sprite, View), LookShapes
+  components/         Health, Hitbox, SpriteRig, Paperdoll (+ Sprite, View)
   actors/             Player (you), Avatar (other players), Companion (chairs, pets), Mob, Npc, Drop views
   world/              World (what you see), WorldFx (hits, numbers, effects), Stage +
                       Terrain/Backdrop/Scenery builders, MapLayout, Platform, DropFlight, Combat
