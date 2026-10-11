@@ -49,8 +49,8 @@ func test_skill_level_raises_multiplier() -> void:
 	s.innate = false
 	s.damage_per_level = 0.5
 	var c := _fighter()
-	c.skills[s.id] = 3  # 1 + 0.5 × 2 = 2.0
-	check_near(s.damage_at(c.skill_level(s)), 2.0, "multiplier at level 3")
+	c.skills.learned[s.id] = 3  # 1 + 0.5 × 2 = 2.0
+	check_near(s.damage_at(c.skills.level(s)), 2.0, "multiplier at level 3")
 	var m := fx.monster(&"t_mob", 1)
 	for i in 100:
 		check_between(Combat.player_hit(s, m, c)["damage"], 18, 36, "level 3 range")

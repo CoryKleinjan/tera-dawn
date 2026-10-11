@@ -32,13 +32,13 @@ func on_reset_ap(peer: int, npc_id: StringName, job_id: StringName) -> void:
 	var next := _instructed(p, npc_id, job_id)
 	if next == null:
 		return
-	var problem := p.character.reset_ap(next)
+	var problem := p.character.ap.reset(next)
 	if problem != "":
 		tell(p, problem)
 		return
 	p.dirty_character = true
 	p.dirty_vitals = true
-	tell(p, "Your Ability Points are back: %d to spend." % p.character.ap, Palette.SUN)
+	tell(p, "Your Ability Points are back: %d to spend." % p.character.ap.points, Palette.SUN)
 	server.store.save(p.character)
 
 ## The job `job_id` if the player stands by the instructor `npc_id` and it teaches that
@@ -51,10 +51,10 @@ func _instructed(p: SimPlayer, npc_id: StringName, job_id: StringName) -> JobDef
 	return next
 
 ## Spends `amount` Ability Points on one base stat (the "+" buttons spend one, Auto more).
-## Character.add_ap refuses other stats and never spends more points than there are.
+## AbilityPoints.spend refuses other stats and never spends more points than there are.
 func on_add_ap(peer: int, stat: StringName, amount := 1) -> void:
 	change(peer, func(c: Character) -> String:
-		c.add_ap(stat, amount)
+		c.ap.spend(stat, amount)
 		return "")
 
 ## Spends a Skill Point on `skill_id`.
@@ -63,7 +63,7 @@ func on_learn_skill(peer: int, skill_id: StringName) -> void:
 	var skill: SkillDef = Content.skills.get(skill_id)
 	if p == null or skill == null:
 		return
-	var problem := p.character.learn(skill)
+	var problem := p.character.skills.learn(skill)
 	if problem != "":
 		tell(p, problem)
 		return

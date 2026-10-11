@@ -111,8 +111,8 @@ func test_enough_exp_levels_you_up() -> void:
 	_attack()
 	check_eq(c.level, 2, "level")
 	check_eq(c.xp, 3, "EXP left over")
-	check_eq(c.ap, c.job.ap_per_level, "Ability Points")
-	check_eq(c.sp, c.job.sp_per_level, "Skill Points")
+	check_eq(c.ap.points, c.job.ap_per_level, "Ability Points")
+	check_eq(c.skills.points, c.job.sp_per_level, "Skill Points")
 	check_eq(c.health.hp, c.max_hp(), "refilled")
 	check_eq(h.last(2, &"ev_level_up"), [2, 2], "level up shown to the player")
 	check_eq(h.last(3, &"ev_level_up"), [2, 2], "and to the map")
@@ -124,7 +124,7 @@ func test_a_big_kill_can_give_several_levels() -> void:
 	_setup(1, probe.xp_need(1) + probe.xp_need(2))
 	_attack()
 	check_eq(p.character.level, 3, "two levels at once")
-	check_eq(p.character.ap, 2 * p.character.job.ap_per_level, "points for both")
+	check_eq(p.character.ap.points, 2 * p.character.job.ap_per_level, "points for both")
 
 func test_attacks_wait_for_the_cooldown() -> void:
 	_setup(100000)
@@ -176,10 +176,10 @@ func test_unknown_skill_ids_are_ignored() -> void:
 func test_learned_skill_spends_its_mp_and_reaches_further() -> void:
 	_setup(1000, 10, 1, 480.0)
 	var c := p.character
-	c.sp = 1
+	c.skills.points = 1
 	h.ask(2, &"req_learn_skill", [&"pebble_toss"])
-	check_eq(c.skills.get(&"pebble_toss"), 1, "learned")
-	check_eq(c.sp, 0, "Skill Point spent")
+	check_eq(c.skills.learned.get(&"pebble_toss"), 1, "learned")
+	check_eq(c.skills.points, 0, "Skill Point spent")
 	var mp := c.mp
 	_attack(2, &"pebble_toss")
 	check_eq(c.mp, mp - Content.skill(&"pebble_toss").mp_at(1), "MP paid")
@@ -188,12 +188,12 @@ func test_learned_skill_spends_its_mp_and_reaches_further() -> void:
 func test_learning_without_skill_points_is_refused() -> void:
 	_setup()
 	h.ask(2, &"req_learn_skill", [&"pebble_toss"])
-	check(not p.character.skills.has(&"pebble_toss"), "not learned")
+	check(not p.character.skills.learned.has(&"pebble_toss"), "not learned")
 	check(h.told(2, "You have no Skill Points left."), "told why")
 
 func test_not_enough_mp_refuses_the_skill() -> void:
 	_setup(1000)
-	p.character.skills[&"pebble_toss"] = 1
+	p.character.skills.learned[&"pebble_toss"] = 1
 	p.character.mp = 2
 	_attack(2, &"pebble_toss")
 	check_eq(h.count(2, &"ev_skill"), 0, "not used")
@@ -204,15 +204,15 @@ func test_a_buff_raises_stats_until_it_wears_off() -> void:
 	_setup()
 	var c := p.character
 	var skill := Content.skill(&"quick_step")
-	c.skills[skill.id] = 1
+	c.skills.learned[skill.id] = 1
 	var speed := c.stats.speed
 	_attack(2, skill.id)
 	check_eq(c.stats.speed, speed + skill.stats_at(1).speed, "faster")
 	check_eq(h.last(2, &"ev_skill").slice(0, 2), [2, skill.id], "shown")
 	h.step(skill.duration_ticks(1) - 1)
-	check(c.buffs.has(skill.id), "still running one tick before the end")
+	check(c.skills.buffs.has(skill.id), "still running one tick before the end")
 	h.step(1)
-	check(not c.buffs.has(skill.id), "ended")
+	check(not c.skills.buffs.has(skill.id), "ended")
 	check_eq(c.stats.speed, speed, "speed back")
 	check(h.told(2, "Quick Step wore off."), "told")
 

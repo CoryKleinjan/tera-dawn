@@ -202,8 +202,8 @@ func step() -> void:
 		cheer_t -= 1
 	if loot_cd > 0:
 		loot_cd -= 1
-	if not Game.me.buffs.is_empty():
-		Game.me.tick_buffs() # the server ends them too; this keeps timers and speed in step
+	if not Game.me.skills.buffs.is_empty():
+		Game.me.skills.tick_buffs() # the server ends them too; this keeps timers and speed in step
 	if sitting != &"":
 		# any move gets you up; the server sees you move and does the same
 		for a in ["move_left", "move_right", "move_up", "move_down", "jump", "attack"]:
@@ -246,7 +246,7 @@ func _attacks() -> void:
 			use_quickslot(i)
 			return
 	if _tapped("attack"):
-		_use(Game.me.basic_attack())
+		_use(Game.me.skills.basic_attack())
 
 ## Does what's on quickslot `i`: a skill, or the first stack of an item.
 func use_quickslot(i: int) -> void:
@@ -265,7 +265,7 @@ func use_quickslot(i: int) -> void:
 func _use(skill: SkillDef) -> void:
 	if skill == null or is_climbing() or cooldown > 0:
 		return
-	var problem := Game.me.use_problem(skill)
+	var problem := Game.me.skills.use_problem(skill)
 	if problem != "":
 		world.add_log(problem, Palette.INFO)
 		return

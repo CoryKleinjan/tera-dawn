@@ -128,8 +128,8 @@ func test_overlay_draws_everything_it_can_show() -> void:
 			c.quests.accept(q)
 		for s: SkillDef in Content.skills.values():
 			if s.kind == SkillDef.Kind.BUFF:
-				c.skills[s.id] = 1
-				c.buffs[s.id] = [1, 600]
+				c.skills.learned[s.id] = 1
+				c.skills.buffs[s.id] = [1, 600]
 		c.guild = "Dawnbreakers")
 	Game.social = {"party": {"leader": "Mossy", "members": [["Mossy", 7, 22, "warrior", 0.5, "meadow"], [Game.me.name, 1, 20, "warrior", 1.0, "meadow"], ["Kestrel", 8, 18, "archer", 0.1, "hollow"]]}}
 	for i in 8:

@@ -1,8 +1,10 @@
 class_name Character
 extends RefCounted
-## One character: name, level, EXP, job, stats, Ability Points, skills and Skill Points,
-## quickslots, buffs, inventory, equipment, quests, Dawnshards, HP, MP and the map they're on. Formulas live in CharacterStats; this only
-## holds and changes state.
+## One character: name, level, EXP, job, stats, quickslots, inventory, storage, quests,
+## Dawnshards, HP, MP, the map they're on and what they've done. Formulas live in
+## CharacterStats; this only holds and changes state. Three parts keep their own state and
+## rules: `skills` (SkillBook: skills, Skill Points, buffs), `ap` (AbilityPoints) and `gear`
+## (Gear: wearing gear, scrolls, ammo; what's worn is `equipment`).
 ##
 ## The server owns the real Character of every player. Each client keeps a copy of its own
 ## (Game.me) that the server refreshes, so the UI can read it but never changes it directly.
@@ -33,23 +35,20 @@ var health := Health.new()
 var job: JobDef
 ## Stats from the job and Ability Points, before gear.
 var base := StatBlock.new()
-## Unspent Ability Points.
-var ap := 0
-## Whether the one free Ability Point reset a job instructor gives a Beginner is used up.
-var ap_reset_used := false
+## Unspent Ability Points and the free reset.
+var ap := AbilityPoints.new(self)
 var inventory := Inventory.new()
 ## Kept by storage keepers in town.
 var storage := Inventory.new()
+## What's worn.
 var equipment := Equipment.new()
+## Putting gear on and off, upgrade scrolls and ammo.
+var gear := Gear.new(self)
 var quests := QuestLog.new()
-## Skill id -> level learned.
-var skills := {}
-## Unspent Skill Points.
-var sp := 0
+## Skills learned, Skill Points and buffs running.
+var skills := SkillBook.new(self)
 ## One per quickslot: [] (empty), ["skill", id] or ["item", id].
 var quickslots: Array = []
-## Buffs running: skill id -> [level, ticks left].
-var buffs := {}
 ## Base stats plus everything worn. Kept up to date by recalc().
 var stats := StatBlock.new()
 ## Names of this character's buddies (the server keeps them both ways).
@@ -94,8 +93,7 @@ static func create(char_name: String, job_id := START_JOB, made: NewCharacter = 
 		var n := entry.roll()
 		if n > 0:
 			c.inventory.add(entry.item, n)
-	c.set_quickslot(QUICKSLOTS - 2, &"item", &"red_potion")
-	c.set_quickslot(QUICKSLOTS - 1, &"item", &"blue_potion")
+	c.put_starting_quickslots()
 	c.recalc()
 	c.refill()
 	return c
@@ -115,7 +113,7 @@ func recalc() -> void:
 	if job == null:
 		return
 	stats = base.plus(equipment.bonus())
-	stats.add(skill_bonus())
+	stats.add(skills.bonus())
 	stats.add(book.bonus())
 	health.set_max(max_hp())
 	mp = mini(mp, max_mp())
@@ -137,54 +135,6 @@ func damage_range(extra_attack := 0) -> Vector2i:
 
 func magic_range() -> Vector2i:
 	return CharacterStats.magic_range(job, stats)
-
-## The weapon worn, or null.
-func weapon() -> EquipDef:
-	var w := equipment.at(&"weapon")
-	return w.equip_def() if w else null
-
-## What the attack key does: the weapon's own attack (a bow shoots) or the plain swing.
-func basic_attack() -> SkillDef:
-	var w := weapon()
-	if w and w.basic_attack:
-		return w.basic_attack
-	return Content.skill(BASIC_ATTACK)
-
-## The Use-tab slot of the ammo the weapon fires (first in the bag), or -1.
-func ammo_slot() -> int:
-	var w := weapon()
-	if w == null or w.ammo == &"":
-		return -1
-	for i in Inventory.SLOTS:
-		var s := inventory.at(ItemDef.Tab.USE, i)
-		if s and s.item is AmmoDef and (s.item as AmmoDef).kind == w.ammo:
-			return i
-	return -1
-
-## The extra Weapon Attack of the ammo that would be fired next.
-func ammo_attack() -> int:
-	var i := ammo_slot()
-	return (inventory.at(ItemDef.Tab.USE, i).item as AmmoDef).attack if i >= 0 else 0
-
-## How much of the weapon's ammo is in the bag.
-func ammo_count() -> int:
-	var w := weapon()
-	if w == null or w.ammo == &"":
-		return 0
-	var n := 0
-	for s in inventory.tabs[ItemDef.Tab.USE]:
-		if s and s.item is AmmoDef and (s.item as AmmoDef).kind == w.ammo:
-			n += s.count
-	return n
-
-## Spends `n` of the weapon's ammo, first stacks first.
-func spend_ammo(n: int) -> void:
-	while n > 0:
-		var i := ammo_slot()
-		if i < 0:
-			return
-		var taken := inventory.take(ItemDef.Tab.USE, i, mini(n, inventory.at(ItemDef.Tab.USE, i).count))
-		n -= taken.count if taken else n
 
 func xp_need(lvl := -1) -> int:
 	if lvl < 0:
@@ -224,8 +174,8 @@ func gain_xp(n: int) -> int:
 	if at_max_level():
 		xp = 0
 	if gained > 0:
-		ap += gained * job.ap_per_level
-		sp += gained * job.sp_per_level
+		ap.points += gained * job.ap_per_level
+		skills.points += gained * job.sp_per_level
 		recalc()
 		refill()
 	return gained
@@ -239,198 +189,7 @@ func spend_mp(n: int) -> bool:
 func restore_mp(n: int) -> void:
 	mp = clampi(mp + n, 0, max_mp())
 
-## Spends `amount` Ability Points (at most what's left) on STR, DEX, INT or LUK.
-func add_ap(stat: StringName, amount := 1) -> bool:
-	if ap <= 0 or amount <= 0 or not stat in StatBlock.BASE:
-		return false
-	amount = mini(amount, ap)
-	ap -= amount
-	base.set(stat, base.value(stat) + amount)
-	recalc()
-	return true
-
-## How the Auto button spends the unspent Ability Points, as {stat: amount}: enough of the
-## job's secondary stat to wear its gear (what's worn, and what's in the bag at this level),
-## and the rest in its primary stat.
-func auto_ap_plan() -> Dictionary:
-	var out := {}
-	if ap <= 0:
-		return out
-	var main := StringName(job.primary_stat)
-	var second := StringName(job.secondary_stat)
-	var short := mini(ap, maxi(0, _gear_needs(second) - stats.value(second)))
-	if short > 0 and second != main:
-		out[second] = short
-	if ap - short > 0:
-		out[main] = out.get(main, 0) + ap - short
-	return out
-
-## The most of `stat` any gear this character wears, or could wear at this level, asks for.
-func _gear_needs(stat: StringName) -> int:
-	var gear: Array[EquipDef] = []
-	for s: ItemStack in equipment.worn.values():
-		gear.append(s.equip_def())
-	for i in Inventory.SLOTS:
-		var s := inventory.at(ItemDef.Tab.EQUIP, i)
-		if s and can_use(s.equip_def().jobs) and s.equip_def().required_level <= level:
-			gear.append(s.equip_def())
-	var most := 0
-	for e in gear:
-		most = maxi(most, e.requirements().get(stat, 0))
-	return most
-
-## The base stats still short of what advancing to `next` asks for, as {stat: amount needed}
-## (empty when the stats are there; the level isn't counted).
-func stats_short_of(next: JobDef) -> Dictionary:
-	var out := {}
-	if next.advance_requirements:
-		for stat in StatBlock.BASE:
-			var need := next.advance_requirements.value(stat)
-			if base.value(stat) < need:
-				out[stat] = need
-	return out
-
-## Ability Points spent so far: how far the base stats are above the job's starting stats.
-func spent_ap() -> int:
-	var out := 0
-	for stat in StatBlock.BASE:
-		out += maxi(0, base.value(stat) - _starting_stat(stat))
-	return out
-
-func _starting_stat(stat: StringName) -> int:
-	return job.starting_stats.value(stat) if job.starting_stats else 0
-
-## Why a `next` instructor can't hand out the free Ability Point reset, or "" if they can:
-## once per character, for a Beginner who has spent points but lacks the stats `next` asks for.
-func ap_reset_problem(next: JobDef) -> String:
-	if not job.is_starting_job():
-		return "Only a %s can have their Ability Points reset." % job.display_name
-	if ap_reset_used:
-		return "You've already had your free reset."
-	if stats_short_of(next).is_empty():
-		return "You already have the stats a %s needs." % next.display_name
-	if spent_ap() == 0:
-		return "You haven't spent any Ability Points yet."
-	return ""
-
-## The free reset (see ap_reset_problem): base stats go back to the job's starting stats and
-## every point spent comes back to spend again. Returns why not, or "".
-func reset_ap(next: JobDef) -> String:
-	var problem := ap_reset_problem(next)
-	if problem != "":
-		return problem
-	for stat in StatBlock.BASE:
-		var extra := base.value(stat) - _starting_stat(stat)
-		if extra > 0:
-			ap += extra
-			base.set(stat, _starting_stat(stat))
-	ap_reset_used = true
-	recalc()
-	return ""
-
-# ---------- skills ----------
-
-## The jobs whose skills this character may learn: their own and every job before it.
-func job_line() -> Array[StringName]:
-	var out: Array[StringName] = []
-	var j := job
-	while j and not j.id in out:
-		out.append(j.id)
-		j = Content.jobs.get(j.advances_from)
-	return out
-
-## The level the character has in a skill (innate skills are always at least 1).
-func skill_level(skill: SkillDef) -> int:
-	if skill == null:
-		return 0
-	var n: int = skills.get(skill.id, 0)
-	return maxi(n, 1) if skill.innate else n
-
-## Why one more level of `skill` can't be learned now, or "".
-func learn_problem(skill: SkillDef) -> String:
-	if skill.innate or not skill.job in job_line():
-		return "You can't learn %s." % skill.display_name
-	if skill_level(skill) >= skill.max_level:
-		return "%s is already at its highest level." % skill.display_name
-	if sp <= 0:
-		return "You have no Skill Points left."
-	if skill.requires != &"":
-		var need: SkillDef = Content.skills.get(skill.requires)
-		if need and skill_level(need) < skill.requires_level:
-			return "Learn %s to level %d first." % [need.display_name, skill.requires_level]
-	return ""
-
-## Spends a Skill Point on `skill`. A newly learned skill goes on the first free quickslot.
-## Returns why not, or "".
-func learn(skill: SkillDef) -> String:
-	var problem := learn_problem(skill)
-	if problem != "":
-		return problem
-	sp -= 1
-	skills[skill.id] = skill_level(skill) + 1
-	if skills[skill.id] == 1 and skill.is_active() and _quickslot_of(&"skill", skill.id) < 0:
-		var free := quickslots.find([])
-		if free >= 0:
-			set_quickslot(free, &"skill", skill.id)
-	recalc()
-	return ""
-
-## Why `skill` can't be used right now, or "".
-func use_problem(skill: SkillDef) -> String:
-	if skill == null or not skill.is_active() or skill_level(skill) <= 0:
-		return "You don't know that skill."
-	if skill.innate and skill != basic_attack():
-		return "You can't attack like that with this weapon."
-	var w := weapon()
-	if not skill.weapons.is_empty() and (w == null or not w.weapon_kind in skill.weapons):
-		return "%s needs a %s." % [skill.display_name, " or ".join(skill.weapons)]
-	if skill.uses_ammo and ammo_count() < skill.hits:
-		return "You're out of %ss." % (w.ammo if w and w.ammo != &"" else &"arrow")
-	if mp < skill.mp_at(skill_level(skill)):
-		return "Not enough MP for %s." % skill.display_name
-	return ""
-
-## Starts (or refreshes) a buff from `skill`.
-func add_buff(skill: SkillDef) -> void:
-	var lvl := skill_level(skill)
-	buffs[skill.id] = [lvl, skill.duration_ticks(lvl)]
-	recalc()
-
-## Counts buffs down by `ticks`. Returns the skills whose buffs just ran out.
-func tick_buffs(ticks := 1) -> Array[SkillDef]:
-	var ended: Array[SkillDef] = []
-	for id in buffs.keys():
-		buffs[id][1] -= ticks
-		if buffs[id][1] <= 0:
-			buffs.erase(id)
-			var s: SkillDef = Content.skills.get(id)
-			if s:
-				ended.append(s)
-	if not ended.is_empty():
-		recalc()
-	return ended
-
-## What passives and running buffs add to the stats.
-func skill_bonus() -> StatBlock:
-	var out := StatBlock.new()
-	for id in skills:
-		var s: SkillDef = Content.skills.get(id)
-		if s and s.kind == SkillDef.Kind.PASSIVE:
-			out.add(s.stats_at(skills[id]))
-	for id in buffs:
-		var s: SkillDef = Content.skills.get(id)
-		if s:
-			out.add(s.stats_at(buffs[id][0]))
-	return out
-
-## Extra HP and MP restored each time HP and MP regenerate, from passives.
-func regen_bonus() -> Vector2i:
-	var out := Vector2i.ZERO
-	for id in skills:
-		var s: SkillDef = Content.skills.get(id)
-		if s and s.kind == SkillDef.Kind.PASSIVE:
-			out += Vector2i(s.regen_hp_at(skills[id]), s.regen_mp_at(skills[id]))
-	return out
+# ---------- what they've done ----------
 
 ## Adds to one of the achievement tallies.
 func count(kind: String, n := 1) -> void:
@@ -447,6 +206,8 @@ func visit(id: StringName) -> bool:
 func pet_def() -> PetDef:
 	return Content.items.get(pet) as PetDef
 
+# ---------- quickslots ----------
+
 ## Puts a skill or an item (`kind` "skill" or "item") on quickslot `i`, or clears it with
 ## an empty kind. A skill or item already on another slot swaps with what's here.
 func set_quickslot(i: int, kind: StringName, id: StringName) -> void:
@@ -455,17 +216,24 @@ func set_quickslot(i: int, kind: StringName, id: StringName) -> void:
 	if kind == &"":
 		quickslots[i] = []
 		return
-	var before := _quickslot_of(kind, id)
+	var before := quickslot_of(kind, id)
 	if before >= 0:
 		quickslots[before] = quickslots[i]
 	quickslots[i] = [kind, id]
 
-func _quickslot_of(kind: StringName, id: StringName) -> int:
+## The quickslot holding this skill or item, or -1.
+func quickslot_of(kind: StringName, id: StringName) -> int:
 	for i in QUICKSLOTS:
 		var q: Array = quickslots[i]
 		if q.size() == 2 and StringName(q[0]) == kind and StringName(q[1]) == id:
 			return i
 	return -1
+
+## Puts the job's starting items (JobDef.starting_quickslots) on the last quickslots.
+func put_starting_quickslots() -> void:
+	var items := job.starting_quickslots
+	for i in items.size():
+		set_quickslot(QUICKSLOTS - items.size() + i, &"item", items[i].id)
 
 # ---------- storage ----------
 
@@ -496,6 +264,28 @@ func retrieve(tab: int, i: int) -> String:
 	inventory.add_stack(stack)
 	return ""
 
+# ---------- jobs ----------
+
+## The base stats still short of what advancing to `next` asks for, as {stat: amount needed}
+## (empty when the stats are there; the level isn't counted).
+func stats_short_of(next: JobDef) -> Dictionary:
+	var out := {}
+	if next.advance_requirements:
+		for stat in StatBlock.BASE:
+			var need := next.advance_requirements.value(stat)
+			if base.value(stat) < need:
+				out[stat] = need
+	return out
+
+## The jobs whose skills this character may learn: their own and every job before it.
+func job_line() -> Array[StringName]:
+	var out: Array[StringName] = []
+	var j := job
+	while j and not j.id in out:
+		out.append(j.id)
+		j = Content.jobs.get(j.advances_from)
+	return out
+
 ## Why the character can't advance to `next`, or "" if they can.
 func advance_problem(next: JobDef) -> String:
 	if next.advances_from != job.id:
@@ -517,7 +307,7 @@ func advance(next: JobDef) -> String:
 	if problem != "":
 		return problem
 	job = next
-	sp += next.advance_sp
+	skills.points += next.advance_sp
 	for g in next.advance_gifts:
 		if g.item is EquipDef:
 			inventory.add_stack(ItemStack.unrolled(g.item, 1))
@@ -532,7 +322,7 @@ func advance(next: JobDef) -> String:
 ## (the Beginner's Training Sword), so a new Magician casts with the wand just handed over.
 ## A weapon of the job's own line that the player found stays on.
 func _wear_advance_weapon(next: JobDef) -> void:
-	var worn := weapon()
+	var worn := gear.weapon()
 	if worn and next.family in worn.jobs:
 		return
 	for g in next.advance_gifts:
@@ -542,87 +332,8 @@ func _wear_advance_weapon(next: JobDef) -> void:
 		for i in Inventory.SLOTS:
 			var s := inventory.at(ItemDef.Tab.EQUIP, i)
 			if s and s.item == e:
-				equip(i)
+				gear.equip(i)
 				return
-
-## Whether this job can use gear meant for `families` (empty means anyone).
-func can_use(families: Array[StringName]) -> bool:
-	return families.is_empty() or job.family in families
-
-## Why the character can't wear this, or "" if they can.
-func equip_problem(e: EquipDef) -> String:
-	if not can_use(e.jobs):
-		return "Only %s can use the %s." % [EquipDef.families_text(e.jobs), e.display_name]
-	if level < e.required_level:
-		return "You need to be level %d to wear the %s." % [e.required_level, e.display_name]
-	var reqs := e.requirements()
-	for stat in StatBlock.BASE:
-		if reqs.has(stat) and stats.value(stat) < reqs[stat]:
-			return "You need %d %s to wear the %s." % [reqs[stat], StatBlock.LABELS[stat], e.display_name]
-	return ""
-
-## Wears the gear in Equip slot `i`, putting whatever it replaces back in that slot.
-## Returns why it couldn't, or "".
-func equip(i: int, place: StringName = &"") -> String:
-	var stack := inventory.at(ItemDef.Tab.EQUIP, i)
-	if stack == null:
-		return ""
-	var e := stack.equip_def()
-	var problem := equip_problem(e)
-	if problem != "":
-		return problem
-	if place == &"" or not Equipment.fits(e, place):
-		place = equipment.place_for(e)
-	inventory.take(ItemDef.Tab.EQUIP, i)
-	var old := equipment.put(place, stack)
-	if old:
-		inventory.put(ItemDef.Tab.EQUIP, i, old)
-	return ""
-
-## Why the scroll in Use slot `use_slot` can't go on the gear in Equip slot `equip_slot`, or "".
-func scroll_problem(use_slot: int, equip_slot: int) -> String:
-	var held := inventory.at(ItemDef.Tab.USE, use_slot)
-	var gear := inventory.at(ItemDef.Tab.EQUIP, equip_slot)
-	if held == null or not held.item is ScrollDef or gear == null:
-		return "Pick a piece of gear in your bag to use the scroll on."
-	var scroll := held.item as ScrollDef
-	if not scroll.fits(gear.equip_def()):
-		return "The %s only works on %s gear." % [scroll.display_name, scroll.slot_text()]
-	if gear.slots_left() <= 0:
-		return "The %s has no upgrades left." % gear.display_name()
-	return ""
-
-## Uses the scroll in Use slot `use_slot` on the gear in Equip slot `equip_slot`: it spends
-## an upgrade slot and works if `roll` is under the scroll's chance. Returns
-## {"problem": why it couldn't, or "", "worked": whether the gear got the stats}.
-func use_scroll(use_slot: int, equip_slot: int, roll := randf()) -> Dictionary:
-	var problem := scroll_problem(use_slot, equip_slot)
-	if problem != "":
-		return {"problem": problem, "worked": false}
-	var scroll := inventory.at(ItemDef.Tab.USE, use_slot).item as ScrollDef
-	var gear := inventory.at(ItemDef.Tab.EQUIP, equip_slot)
-	inventory.take(ItemDef.Tab.USE, use_slot, 1)
-	gear.slots_used += 1
-	var worked := roll < scroll.chance
-	if worked:
-		gear.upgrades += 1
-		if scroll.stats:
-			gear.stats.add(scroll.stats)
-	return {"problem": "", "worked": worked}
-
-## Takes off what's worn in `place` and puts it in the bag (at slot `i` if given and free).
-func unequip(place: StringName, i := -1) -> String:
-	var stack := equipment.at(place)
-	if stack == null:
-		return ""
-	var row: Array = inventory.tabs[ItemDef.Tab.EQUIP]
-	if i < 0 or i >= Inventory.SLOTS or row[i] != null:
-		i = inventory.first_free(ItemDef.Tab.EQUIP)
-	if i < 0:
-		return "Your Equip inventory is full."
-	equipment.take(place)
-	inventory.put(ItemDef.Tab.EQUIP, i, stack)
-	return ""
 
 ## Everything about the character, for the save file and for sending to its client (see
 ## CharacterCodec).

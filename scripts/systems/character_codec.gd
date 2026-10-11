@@ -7,11 +7,11 @@ extends RefCounted
 static func to_dict(c: Character) -> Dictionary:
 	return {
 		"name": c.name, "appearance": c.appearance.to_dict(), "level": c.level, "xp": c.xp, "shards": c.shards, "map_id": c.map_id,
-		"job": c.job.id, "base": c.base.to_dict(), "ap": c.ap, "ap_reset_used": c.ap_reset_used,
+		"job": c.job.id, "base": c.base.to_dict(), "ap": c.ap.points, "ap_reset_used": c.ap.reset_used,
 		"hp": c.health.hp, "mp": c.mp,
 		"inventory": c.inventory.to_dict(), "equipment": c.equipment.to_dict(), "storage": c.storage.to_dict(),
 		"quests": c.quests.to_dict(),
-		"skills": _string_keys(c.skills), "sp": c.sp, "buffs": _string_keys(c.buffs),
+		"skills": _string_keys(c.skills.learned), "sp": c.skills.points, "buffs": _string_keys(c.skills.buffs),
 		"quickslots": c.quickslots.map(func(q: Array) -> Array: return q.map(func(v) -> String: return String(v))),
 		"buddies": c.buddies.duplicate(), "fame": c.fame, "fame_day": c.fame_day, "fame_given": c.fame_given.duplicate(), "guild": c.guild,
 		"book": c.book.to_dict(), "pet": String(c.pet), "pet_full": c.pet_full, "visited": c.visited.duplicate(),
@@ -40,11 +40,11 @@ static func load_dict(c: Character, data: Dictionary) -> void:
 		c.job = Content.jobs[j]
 	if data.get("base") is Dictionary:
 		c.base = StatBlock.from_dict(data["base"])
-		c.ap = maxi(0, int(data.get("ap", 0)))
+		c.ap.points = maxi(0, int(data.get("ap", 0)))
 	else:
 		# a save from before stats existed: hand out the points for the levels it has
-		c.ap = (c.level - 1) * c.job.ap_per_level
-	c.ap_reset_used = bool(data.get("ap_reset_used", c.ap_reset_used))
+		c.ap.points = (c.level - 1) * c.job.ap_per_level
+	c.ap.reset_used = bool(data.get("ap_reset_used", c.ap.reset_used))
 	if data.get("inventory") is Dictionary:
 		c.inventory.load_dict(data["inventory"])
 	if data.get("equipment") is Dictionary:
@@ -53,31 +53,32 @@ static func load_dict(c: Character, data: Dictionary) -> void:
 		c.storage.load_dict(data["storage"])
 	if data.get("quests") is Dictionary:
 		c.quests.load_dict(data["quests"])
-	c.skills.clear()
+	var skills := c.skills
+	skills.learned.clear()
 	if data.get("skills") is Dictionary:
 		for k in data["skills"]:
 			var s: SkillDef = Content.skills.get(StringName(k))
 			if s:
-				c.skills[s.id] = clampi(int(data["skills"][k]), 0, s.max_level)
+				skills.learned[s.id] = clampi(int(data["skills"][k]), 0, s.max_level)
 	if data.has("sp"):
-		c.sp = maxi(0, int(data["sp"]))
+		skills.points = maxi(0, int(data["sp"]))
 	else:
 		# a save from before skills existed: hand out the points for the levels it has
-		c.sp = (c.level - 1) * c.job.sp_per_level
-	c.buffs.clear()
+		skills.points = (c.level - 1) * c.job.sp_per_level
+	skills.buffs.clear()
 	if data.get("buffs") is Dictionary:
 		for k in data["buffs"]:
 			var b: Variant = data["buffs"][k]
 			if Content.skills.has(StringName(k)) and b is Array and b.size() == 2:
-				c.buffs[StringName(k)] = [int(b[0]), int(b[1])]
+				skills.buffs[StringName(k)] = [int(b[0]), int(b[1])]
 	if data.get("quickslots") is Array:
 		var saved: Array = data["quickslots"]
 		for i in Character.QUICKSLOTS:
 			var q: Variant = saved[i] if i < saved.size() else []
 			c.quickslots[i] = [StringName(q[0]), StringName(q[1])] if q is Array and q.size() == 2 else []
 	elif not data.has("sp"):
-		c.set_quickslot(Character.QUICKSLOTS - 2, &"item", &"red_potion")
-		c.set_quickslot(Character.QUICKSLOTS - 1, &"item", &"blue_potion")
+		# a save from before skills and quickslots existed: the job's starting potions
+		c.put_starting_quickslots()
 	if data.get("buddies") is Array:
 		c.buddies.clear()
 		for b in data["buddies"]:

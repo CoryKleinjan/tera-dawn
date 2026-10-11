@@ -125,7 +125,7 @@ func on_scroll(peer: int, use_slot: int, equip_slot: int) -> void:
 		return
 	var gear := p.character.inventory.at(ItemDef.Tab.EQUIP, equip_slot)
 	var name := gear.item.display_name if gear else ""
-	var result := p.character.use_scroll(use_slot, equip_slot)
+	var result := p.character.gear.use_scroll(use_slot, equip_slot)
 	if result["problem"] != "":
 		tell(p, result["problem"])
 		return
@@ -139,10 +139,10 @@ func on_scroll(peer: int, use_slot: int, equip_slot: int) -> void:
 		p.map.broadcast(&"ev_effect", [&"monster_poof", p.position.x, p.position.y - 40, 1, 0])
 
 func on_equip(peer: int, slot: int, place: StringName) -> void:
-	change(peer, func(c: Character) -> String: return c.equip(slot, place))
+	change(peer, func(c: Character) -> String: return c.gear.equip(slot, place))
 
 func on_unequip(peer: int, place: StringName, slot: int) -> void:
-	change(peer, func(c: Character) -> String: return c.unequip(place, slot))
+	change(peer, func(c: Character) -> String: return c.gear.unequip(place, slot))
 
 # ---------- the bag ----------
 

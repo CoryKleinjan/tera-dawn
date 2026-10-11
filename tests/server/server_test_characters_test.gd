@@ -30,11 +30,11 @@ func test_every_job_gets_a_max_level_character_in_gear_it_can_wear() -> void:
 		check_eq(c.job, job, "%s: the job" % job.id)
 		check_eq(c.level, Character.MAX_LEVEL, "%s: the level cap" % job.id)
 		check_eq(c.shards, TestCharacters.SHARDS, "%s: Dawnshards" % job.id)
-		check_eq(c.ap, 0, "%s: every Ability Point spent" % job.id)
-		check(c.weapon() != null, "%s: holds a weapon" % job.id)
+		check_eq(c.ap.points, 0, "%s: every Ability Point spent" % job.id)
+		check(c.gear.weapon() != null, "%s: holds a weapon" % job.id)
 		for place: StringName in c.equipment.worn:
 			var e := c.equipment.at(place).equip_def()
-			check_eq(c.equip_problem(e), "", "%s can wear the %s" % [job.id, e.id])
+			check_eq(c.gear.equip_problem(e), "", "%s can wear the %s" % [job.id, e.id])
 		check_eq(c.health.hp, c.max_hp(), "%s: full HP" % job.id)
 		for w in TestCharacters.best_weapons(job, c.level):
 			if w.ammo != &"":
@@ -48,7 +48,7 @@ func test_the_gear_is_the_best_the_job_can_wear() -> void:
 		var c := TestCharacters.build("Gear", job)
 		for it: ItemDef in Content.items.values():
 			var e := it as EquipDef
-			if e == null or not c.can_use(e.jobs) or e.required_level > c.level:
+			if e == null or not c.gear.can_use(e.jobs) or e.required_level > c.level:
 				continue
 			var worn := c.equipment.at(c.equipment.place_for(e))
 			if e.slot == EquipDef.Slot.WEAPON:
@@ -64,7 +64,7 @@ func test_a_job_with_two_weapon_kinds_wields_its_first_and_carries_the_other() -
 		if weapons.size() < 2:
 			continue
 		var c := TestCharacters.build("Arms", job)
-		check_eq(c.weapon(), weapons[0], "%s wields its main kind" % job.id)
+		check_eq(c.gear.weapon(), weapons[0], "%s wields its main kind" % job.id)
 		for e in weapons.slice(1):
 			check(c.inventory.find(e) >= 0, "%s carries the %s" % [job.id, e.id])
 
@@ -73,7 +73,7 @@ func test_every_skill_is_at_its_highest_level() -> void:
 		var c := TestCharacters.build("Skills", job)
 		for s: SkillDef in Content.skills.values():
 			if not s.innate and s.job in c.job_line():
-				check_eq(c.skill_level(s), s.max_level, "%s: %s" % [job.id, s.id])
+				check_eq(c.skills.level(s), s.max_level, "%s: %s" % [job.id, s.id])
 
 func test_every_job_is_listed_starting_job_first() -> void:
 	var jobs := TestCharacters.jobs()
