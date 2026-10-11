@@ -20,3 +20,4 @@ light_energy = 3.0
 light_range = 6.0
 burst_color = Color(1.4, 2.0, 2.6, 1.0)
 burst_amount = 18
+sound = &"sparkle"

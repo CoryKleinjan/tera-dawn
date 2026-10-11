@@ -13,3 +13,4 @@ spin = 0.0
 energy = 1.4
 light_color = Color(1.0, 0.823529, 0.478431, 1.0)
 max_range = 380.0
+sound = &"gun"

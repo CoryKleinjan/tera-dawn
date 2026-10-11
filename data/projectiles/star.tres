@@ -12,3 +12,4 @@ speed = 15.0
 spin = 0.09
 energy = 1.2
 max_range = 360.0
+sound = &"throw"

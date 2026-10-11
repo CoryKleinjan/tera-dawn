@@ -15,3 +15,4 @@ follow_player = true
 light_color = Color(0.5490196078431373, 0.9411764705882353, 0.6274509803921569, 1.0)
 light_energy = 2.0
 light_range = 4.0
+sound = &"heal"

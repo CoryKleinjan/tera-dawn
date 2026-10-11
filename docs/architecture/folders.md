@@ -13,7 +13,7 @@ data/                 Content, one .tres per thing
 scripts/
   autoload/           Settings (controls, audio, video, saved to settings.cfg), Content (data
                       index), Game (your character copy, name and server address), Net
-                      (connections and the protocol), SteamService
+                      (connections and the protocol), SteamService, Sound (music and effects)
   settings/           SettingsSection and its sections: Keybinds, AudioSettings, VideoSettings
   server/             TDServer, MapInstance, SimPlayer, SimMob, SimDrop, CharacterStore, TDSocial
   server/social/      TDSocial's parts: chat, parties, trade, guilds, player shops
@@ -34,12 +34,15 @@ scripts/
 assets/
   sprites/            Cut sprites, one folder per kind (generated, don't hand-edit)
   animations/         SpriteFrames for animated actors (generated)
+  audio/music/        Looping tracks and jingles (.ogg, named by id; tools/audio/make_music.py)
+  audio/sfx/          Sound effects (.ogg, named by id, _1 _2 for variants; tools/audio/make_sfx.py)
 art/
   source/             The art sheets (Gemini batch output, painted)
   sheets/             One manifest per sheet: how to cut it
   reference/          Style reference (the hero)
 store/                Steam capsules and key art
 tools/art/            Slicer, store-art cropper, fx texture and item placeholder generators, contact-sheet preview, Gemini batch runner (gemini_pass.py + gemini_pass.json), paperdoll layers
+tools/audio/          Lyria music runner (lyria_pass.py + lyria_cues.json), make_music.py (loops, jingles), make_sfx.py
 docs/architecture/    One page per system (linked from ARCHITECTURE.md)
 tests/                Test runner (unit/, server/, content/, ui/ suites on framework/), smoke test
                       (with a second game joining), bot client, screenshot scene, run_all.sh

@@ -18,6 +18,7 @@ func show_skill(peer: int, skill: SkillDef, at: Vector2, face: int, lines: Array
 	if who is TDAvatar:
 		(who as TDAvatar).play_skill(skill)
 		add_effect(skill.effect, at + Vector2(0, -40), face)
+		world.sound_at(skill.cast_sound(), at)
 	var views := world.mobs()
 	var mine := who == world.player
 	var from := at + Vector2(face * 20, -42)
@@ -126,6 +127,7 @@ func show_mob_shot(index: int, aim: Vector2) -> void:
 	m.dir = -1 if aim.x < m.position.x else 1
 	var from := m.body_position() + Vector2(m.dir * m.def.size.x * 0.4, -m.def.size.y * 0.55)
 	world.fx_layer.add_child(TDProjectile.create(world, m.def.shot, from, aim, 0, null, Callable()))
+	world.sound_at(m.def.shot.sound, from)
 
 func show_mob_death(index: int) -> void:
 	var views := world.mobs()
@@ -149,6 +151,9 @@ func flash(at: Vector2, col: Color, energy: float) -> void:
 	tw.tween_property(l, "light_energy", 0.0, 0.35)
 	tw.tween_callback(l.queue_free)
 
+## Plays over the music when you level up (Sound.jingle id).
+const LEVEL_UP_JINGLE := &"jingle_levelup"
+
 func show_level_up(peer: int, _level: int) -> void:
 	var who := world.actor(peer)
 	if who == null:
@@ -156,6 +161,7 @@ func show_level_up(peer: int, _level: int) -> void:
 	add_effect(Content.effect(&"level_up"), who.position, 1, who)
 	if who == world.player:
 		world.player.level_up()
+		Sound.jingle(LEVEL_UP_JINGLE)
 
 ## A small "+9 EXP" or "+8 Dawnshards" rising over your hero; gains that arrive together
 ## stack upwards instead of covering each other.
@@ -186,3 +192,4 @@ func add_effect(def: EffectDef, pos: Vector2, face: int, follow: Node2D = null) 
 	if def.follow_player and follow == null:
 		follow = world.player
 	world.fx_layer.add_child(TDEffect.create(world, def, pos, face, follow))
+	world.sound_at(def.sound, follow.position if follow else pos)

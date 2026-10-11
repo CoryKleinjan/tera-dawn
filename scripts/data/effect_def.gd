@@ -28,6 +28,11 @@ extends Resource
 @export var burst_color := Color(0, 0, 0, 0)
 @export var burst_amount := 16
 
+@export_group("Sound")
+## Played where the effect appears (Sound.play id, a file in assets/audio/sfx/), quieter
+## the further it is from you.
+@export var sound: StringName
+
 @export_group("Caption")
 ## Big text above the effect, drawn by the overlay (e.g. "LEVEL UP!").
 @export var caption := ""

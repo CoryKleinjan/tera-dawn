@@ -25,6 +25,7 @@ Content="*res://scripts/autoload/content.gd"
 Game="*res://scripts/autoload/game_state.gd"
 Net="*res://scripts/autoload/net.gd"
 SteamService="*res://scripts/autoload/steam_service.gd"
+Sound="*res://scripts/autoload/sound.gd"
 
 [display]
 

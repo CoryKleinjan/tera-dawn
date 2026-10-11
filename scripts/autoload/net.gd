@@ -575,6 +575,13 @@ func ev_mob_shot(index: int, x: float, y: float) -> void:
 	if world:
 		world.show_mob_shot(index, Vector2(x, y))
 
+## A short piece of music for you alone (a quest done, a new job), played over the map's
+## track (Sound.jingle).
+@rpc("authority", "call_local", "reliable")
+func ev_jingle(id: StringName) -> void:
+	if world:
+		Sound.jingle(id)
+
 @rpc("authority", "call_local", "reliable")
 func ev_level_up(peer: int, level: int) -> void:
 	if world:

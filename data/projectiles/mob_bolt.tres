@@ -13,3 +13,4 @@ spin = 0.0
 energy = 2.0
 light_color = Color(0.690196, 0.501961, 1.0, 1.0)
 max_range = 420.0
+sound = &"mob_shot"

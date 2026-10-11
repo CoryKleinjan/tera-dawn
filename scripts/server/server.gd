@@ -15,6 +15,9 @@ const SAVE_EVERY := 600
 ## Attack requests may arrive this many ticks early, to allow for network jitter.
 const COOLDOWN_SLACK := 4
 const NOT_ENOUGH_SHARDS := "You don't have enough Dawnshards."
+## The jingles (Sound.jingle ids, sent as ev_jingle) for finishing a quest and for a job advance.
+const QUEST_JINGLE := &"jingle_quest"
+const ADVANCE_JINGLE := &"jingle_jobadvance"
 
 var store: CharacterStore
 ## Accounts, logging in and character select.
@@ -473,6 +476,7 @@ func on_quest_complete(peer: int, npc_id: StringName, quest_id: StringName) -> v
 		p.map.tell(p, problem, MapInstance.BAD)
 		return
 	p.map.tell(p, "Quest complete: %s" % q.title, Palette.SUN)
+	Net.send(p.peer, &"ev_jingle", [QUEST_JINGLE])
 	if q.reward_xp > 0:
 		give_xp(p, q.reward_xp)
 
@@ -499,6 +503,7 @@ func on_advance(peer: int, npc_id: StringName, job_id: StringName) -> void:
 	p.dirty_vitals = true
 	p.map.broadcast(&"ev_effect", [&"celebrate", p.position.x, p.position.y, 1, p.peer])
 	p.map.tell(p, "You are now a %s!" % next.display_name, Palette.SUN)
+	Net.send(p.peer, &"ev_jingle", [ADVANCE_JINGLE])
 	if not next.advance_gifts.is_empty():
 		p.map.tell(p, "Your instructor hands you: %s." % next.gifts_text(), Palette.SUN)
 	store.save(p.character)
