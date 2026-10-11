@@ -1,0 +1,221 @@
+"""What every part of the paperdoll build shares: where things are, the sizes and names
+everything is measured in (the tuning table), and the helpers that cut sheets, shrink pieces,
+place them on a frame and write a layer strip."""
+import copy  # noqa: F401  (re-exported for the other parts)
+import json  # noqa: F401
+import math
+import os
+import re  # noqa: F401
+import sys
+
+import numpy as np
+from PIL import Image, ImageOps  # noqa: F401
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import slice_sheets as ss  # noqa: E402
+
+
+ROOT = ss.ROOT
+CHAR = os.path.join(ROOT, "assets", "sprites", "characters")
+STRIP = os.path.join(CHAR, "hero.png")
+MASK = os.path.join(CHAR, "hero_regions.png")
+RIG = os.path.join(CHAR, "hero_rig.json")
+LAYERS = os.path.join(CHAR, "layers")
+ANIMS = os.path.join(ROOT, "assets", "animations", "paperdoll")
+BODY_MANIFEST = os.path.join(ss.SHEETS, "paperdoll_body.json")
+PREVIEW = os.path.join(ROOT, "art", "build", "paperdoll_preview.png")
+
+# Must match Paperdoll.Region in scripts/components/paperdoll.gd.
+REGIONS = ["none", "hair", "skin", "eyes", "top", "bottom", "shoes", "cape", "weapon", "shield", "gloves"]
+R = {name: i for i, name in enumerate(REGIONS)}
+# The colour the hair art is shown in when no hair colour is picked (the hero's chestnut).
+DEFAULT_HAIR = (0.55, 0.33, 0.2)
+# And the irises (the painted hero's blue).
+DEFAULT_EYES = (0.25, 0.42, 0.75)
+# Greyscale art's middle grey is brightened to this (of 255); see lift().
+LIFT_TO = 200
+# Tinted art darker than this is outline: lift() keeps it grey, without the sheets' plum cast.
+OUTLINE_DARK = 110
+
+# Frames seen from behind: no face, the hair's "from behind" piece, the cape in front.
+BACK_VIEW = ("rope1", "rope2", "ladder1", "ladder2", "climb_idle")
+# The face's expression per frame (anything not listed: normal).
+EXPRESSIONS = {"blink": "blink", "hit": "ouch", "hurt": "ouch", "faint1": "dizzy", "faint2": "dizzy"}
+HAIRSTYLES = ["tousled", "long", "ponytail", "twin_tails", "bun", "crest"]
+FACES = ["bright", "determined", "rosy", "freckled", "cheeky"]
+WEAPON_KINDS = ["sword", "bow", "wand", "staff", "claw", "knuckle", "gun"]
+
+# Sizes against the head's radius r (measured on the body).
+HAIR_WIDTH = 2.5      # a hairstyle's front piece is this wide
+HAIR_LIFT = 0.12      # and starts this far above the scalp
+SCALP = 0.1           # the scalp under the hair: the head down to a hairline this far over its centre,
+SCALP_BACK = 0.45     # and behind this far back of it (any height down to SCALP_NAPE), rounded off
+SCALP_NAPE = 0.55     # around the face (FACE_ZONE)
+SCALP_COVERED = 0.6   # drawn hair over this much of the scalp: the scalp is only repainted near it
+FACE_WIDTH = 1.3      # the face (eyes to mouth) is this wide
+FACE_AT = (0.2, 0.3)  # and centred this far forward and down from the head's centre
+# The face's bare skin, as an egg around FACE_AT: how far it reaches back (to the ear), forward,
+# up (to the hairline) and down (past the chin) from there. A hat's hair leaves it clear.
+FACE_ZONE = (FACE_AT[0] + SCALP_BACK, 1.0, FACE_AT[1] + SCALP, 0.7)
+BLANK_FACE = 222      # the hair sheet's blank faces are greys at least this pale (of 255)
+NECK_SLIVER = 120     # loose bits under the jaw smaller than this (pixels) are left-over neck outline
+HAT_SHOULDER_ROWS = 6  # hat sheet cells are lined up by their bottom rows (the shoulders)
+HAT_SIZE = 1.0         # hats drawn this much bigger than his head against the sheet's head
+HAT_SPECK = 0.05  # hat_alone: pieces under this share of the hat are cell-frame bits
+HAT_SHAPES = ("cap", "hood", "bandana", "helm", "wizard", "tricorn")
+# Chibi faces: each eye (with its brow) is drawn this much bigger about its own centre. The eyes
+# are everything above EYE_LINE (a fraction of the normal face's height), left or right of its middle.
+# 1.0 since the painted faces (2026-10-11), drawn at the size Cory wants: smaller, older eyes.
+EYE_SCALE = 1.0
+EYE_LINE = 0.6
+NECK = 0.95           # the neck is this far below the head's centre
+SHIELD_HEIGHT = 1.25
+# Clothes sheets (art/sheets/<place>_<style>_frames.json) for these places; styles whose sheet
+# came back unusable are skipped (their items wear the nearest cut, see EquipDef.worn_style).
+WORN_PLACES = ("top", "bottom", "shoes")
+WORN_BROKEN = ("smock",)
+WORN_SHORTS_GREY = 150  # the body's shorts are greys darker than this
+WORN_OUTLINE = 90       # and outlines darker than this
+WORN_FRINGE = 110       # pale edge pixels at the figure's edge are background fringe
+GLOVE_REACH = 0.9     # a glove is put on a hand only if the drawn one is this near it (head radii)
+SWORD_LENGTH = 1.9    # every weapon is drawn at the scale that makes the sword this long
+WEAPON_LENGTH = 20    # rig "tip" is this far from "grip" along the weapon (only its direction matters)
+FIST = 0.4            # the fist around a grip reaches this far from the grip point (head radii)
+
+# Weapons worn on the fist are drawn smaller than the template sheet has them, so they fit
+# his hand rather than swallowing it (the rest keep the sheet's size against the sword).
+WORN_SIZE = {"claw": 0.6, "knuckle": 0.75, "bow": 1.35}
+# Long weapons whose sheets may draw them at a slant (a sword up and to the right): their own
+# axis is measured and turned out, so a rig angle means the same however the art was drawn.
+# The others are drawn the way the rig expects (a gun and claws pointing right, a bow upright).
+AXIAL = ("sword", "wand", "staff")
+# Weapons the rig holds upright (see stood_up), and how far off upright (degrees) one may be
+# drawn before it is stood up.
+UPRIGHT = ("bow",)
+UPRIGHT_SLACK = 8
+# Weapons held in the fist: his fingers draw over the grip. The others are worn on the fist.
+GRIPPED = ("sword", "wand", "staff", "bow", "gun")
+# Weapons carried on his back while he climbs or sits, and at what angle; the rest are put away.
+ON_BACK = {"sword": 125, "staff": -70, "bow": 60, "wand": 125, "gun": 110}
+SHEATHED = BACK_VIEW + ("sit",)
+# Sheets of weapons with their own held picture: one cell per weapon, named by item id.
+HELD_SHEETS = "held_"
+ITEMS = os.path.join(ROOT, "data", "items")
+
+# Where the weapon hand and shield are, and how the head is tilted, per frame: placed by hand,
+# since the hands are hard to tell apart from the rest of the body.
+HAND_RIG = os.path.join(ss.SHEETS, "paperdoll_rig.json")
+
+
+# ---------- shapes ----------
+
+def distance_inside(mask):
+    """Chessboard distance from each pixel of `mask` to the nearest pixel outside it."""
+    d = np.zeros(mask.shape, int)
+    cur = mask.copy()
+    while cur.any():
+        d += cur
+        shrunk = cur.copy()
+        shrunk[1:] &= cur[:-1]
+        shrunk[:-1] &= cur[1:]
+        shrunk[:, 1:] &= cur[:, :-1]
+        shrunk[:, :-1] &= cur[:, 1:]
+        cur = shrunk
+    return d
+
+
+# ---------- placing pieces ----------
+
+def scaled(piece_img, s):
+    """A piece (PIL RGBA, sheet pixels) shrunk to game pixels."""
+    arr = np.asarray(piece_img).astype(float) / 255
+    rgb, alpha = ss.shrink(arr[..., :3], arr[..., 3], s)
+    out = np.zeros(alpha.shape + (4,), np.uint8)
+    out[..., :3] = (rgb * 255).round()
+    out[..., 3] = ((alpha > 0.5) * 255).astype(np.uint8)
+    return Image.fromarray(out, "RGBA")
+
+
+def place(canvas, img, anchor, at, angle=0.0):
+    """Draws `img` on `canvas` with its point `anchor` on `at`, turned by `angle` degrees
+    (clockwise on screen)."""
+    if abs(angle) >= 0.5:
+        pad = int(max(img.size) * 1.5)
+        big = Image.new("RGBA", (pad * 2, pad * 2))
+        big.paste(img, (int(round(pad - anchor[0])), int(round(pad - anchor[1]))))
+        img = big.rotate(-angle, resample=Image.NEAREST, center=(pad, pad))
+        anchor = (pad, pad)
+    _paste(canvas, img, int(round(at[0] - anchor[0])), int(round(at[1] - anchor[1])))
+
+
+def _paste(canvas, img, x, y):
+    """alpha_composite that clips at the canvas edges."""
+    x0, y0 = max(0, x), max(0, y)
+    x1, y1 = min(canvas.width, x + img.width), min(canvas.height, y + img.height)
+    if x1 <= x0 or y1 <= y0:
+        return
+    canvas.alpha_composite(img.crop((x0 - x, y0 - y, x1 - x, y1 - y)), (x0, y0))
+
+
+class Piece:
+    """A cut piece and where its cell's origin is, in sheet pixels."""
+    def __init__(self, sprite):
+        self.img = sprite["image"]
+        self.x, self.y = sprite["x"], sprite["y"]
+
+
+def cut(manifest):
+    sprites = {}
+    ss.process(os.path.join(ss.SHEETS, manifest + ".json"), sprites=sprites)
+    return {k.split(":", 1)[1]: Piece(v) for k, v in sprites.items()}
+
+
+class Drawn:
+    """A piece made here rather than cut from a sheet (same fields as Piece)."""
+    def __init__(self, img, x, y):
+        self.img, self.x, self.y = img, x, y
+
+
+# ---------- writing ----------
+
+def lift(img):
+    """Brightens greyscale art so its middle grey is near white: the game tints it by
+    multiplying with a colour (Sprite3D/CanvasItem modulate), which then comes out close to
+    that colour, with the art's shading."""
+    arr = np.asarray(img).astype(float)
+    solid = arr[..., 3] > 0
+    # the sheets' dark plum outline would come out of the brightening (and the tint) as a
+    # magenta line, so dark pixels leaning magenta go to their own grey first
+    rgb = arr[..., :3]
+    plum = solid & (rgb.max(2) < OUTLINE_DARK) & (np.minimum(rgb[..., 0], rgb[..., 2]) > rgb[..., 1])
+    rgb[plum] = rgb[plum].mean(1, keepdims=True)
+    if solid.any():
+        mid = max(np.median(arr[solid][:, :3].mean(1)), 1)
+        arr[..., :3] = (arr[..., :3] * LIFT_TO / mid).clip(0, 255)
+    return Image.fromarray(arr.round().astype(np.uint8), "RGBA")
+
+
+def save_layer(name, frames, fw, fh, index, anims, tinted=True, grey=False):
+    """Writes a layer strip and its SpriteFrames. `grey` drops all colour first, for art
+    that is only ever shown tinted (hair: the sheets leave pink in the highlights)."""
+    os.makedirs(LAYERS, exist_ok=True)
+    os.makedirs(ANIMS, exist_ok=True)
+    strip = Image.new("RGBA", (fw * len(frames), fh))
+    for i, im in enumerate(frames):
+        strip.alpha_composite(im, (i * fw, 0))
+    if grey:
+        arr = np.asarray(strip).copy()
+        arr[..., :3] = arr[..., :3].mean(2, keepdims=True).round().astype(np.uint8)
+        strip = Image.fromarray(arr, "RGBA")
+    if tinted:
+        strip = lift(strip)
+    png = os.path.join(LAYERS, name + ".png")
+    strip.save(png)
+    ss.write_sprite_frames(os.path.join(ANIMS, name + ".tres"), "res://" + os.path.relpath(png, ROOT),
+                           fw, fh, index, anims)
+
+
+def turned(v, angle):
+    """A vector turned clockwise on screen by `angle` degrees."""
+    a = math.radians(angle)
+    return np.array([v[0] * math.cos(a) - v[1] * math.sin(a), v[0] * math.sin(a) + v[1] * math.cos(a)])
