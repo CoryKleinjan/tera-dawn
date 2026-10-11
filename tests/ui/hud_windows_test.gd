@@ -762,7 +762,7 @@ func test_shop_double_click_buys_through_the_server() -> void:
 	var keeper: NpcDef = Content.npcs[&"shopkeeper"]
 	await ui.edit(func(c: Character) -> void: c.shards = 100000)
 	# Mira keeps her shop inside her house in the village
-	Net.server._enter_map(ui.player(), &"meadow_store", 240)
+	Net.server.enter_map(ui.player(), &"meadow_store", 240)
 	await ui.ticks(3)
 	var npc: TDNpc = ui.world.npcs().filter(func(n: TDNpc) -> bool: return n.def == keeper)[0]
 	ui.teleport(npc.position + Vector2(-20, 0))

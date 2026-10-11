@@ -93,7 +93,7 @@ static func load_dict(c: Character, data: Dictionary) -> void:
 		c.book.load_dict(data["book"])
 	var pet_id := StringName(str(data.get("pet", "")))
 	c.pet = pet_id if Content.items.get(pet_id) is PetDef else &""
-	c.pet_full = clampi(int(data.get("pet_full", c.pet_full)), 0, 100)
+	c.pet_full = clampi(int(data.get("pet_full", c.pet_full)), 0, PetDef.FULL)
 	for key in ["visited", "achievements"]:
 		if data.get(key) is Array:
 			var list: Array[String] = c.get(key)

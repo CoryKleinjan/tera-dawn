@@ -14,7 +14,7 @@ items). A job that others reach sets `advances_from`, `advance_level`, `advance_
 listed is worn at once in place of a Beginner's weapon; one of the job's own line stays on),
 its ammo and potions. Better weapons only drop. To let an NPC hand it out, add its id to that
 NPC's `instructs`: their dialogue then offers "Choose a job", and the server
-(`TDServer.on_advance` → `Character.advance`) checks the requirements again before changing it.
+(`ServerJobs.on_advance` → `Character.advance`) checks the requirements again before changing it.
 A Beginner short of a job's stats may also ask its instructor for one free Ability Point reset
 per character (`req_reset_ap` → `Character.reset_ap`): base stats go back to the job's
 `starting_stats` and the points come back. `Character.ap_reset_used` is saved with the rest.

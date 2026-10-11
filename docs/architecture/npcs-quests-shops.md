@@ -31,4 +31,4 @@ server's `on_quest_accept` / `on_quest_complete` apply them.
 Create `data/shops/<id>.tres` as a **ShopDef**: a name and a list of **ShopEntry**s (an item
 and its price; 0 means four times what a shop pays for it). Set it as an NpcDef's `shop` and
 they offer "Open shop". Every shop also buys anything for the item's `sell_price`. The server
-checks the player is standing by that NPC before buying or selling (`TDServer.on_buy`).
+checks the player is standing by that NPC before buying or selling (`ServerNpcShop.on_buy`).

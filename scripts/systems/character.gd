@@ -65,7 +65,7 @@ var guild := ""
 var book := MonsterBook.new()
 ## The pet that's out (a PetDef id, or empty) and how full it is (0 to 100).
 var pet: StringName = &""
-var pet_full := 100
+var pet_full := PetDef.FULL
 ## Every map visited, for the world map and achievements.
 var visited: Array[String] = []
 ## Achievement ids reached (see Achievements).

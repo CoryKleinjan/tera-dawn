@@ -11,7 +11,7 @@ func _music_ids() -> Array[StringName]:
 	return out
 
 func _jingle_ids() -> Array[StringName]:
-	return [TDWorldFx.LEVEL_UP_JINGLE, TDPlayer.FAINT_JINGLE, TDServer.QUEST_JINGLE, TDServer.ADVANCE_JINGLE]
+	return [TDWorldFx.LEVEL_UP_JINGLE, TDPlayer.FAINT_JINGLE, ServerQuests.QUEST_JINGLE, ServerJobs.ADVANCE_JINGLE]
 
 func _sound_ids() -> Dictionary:
 	var out := {}  # id -> where it's named

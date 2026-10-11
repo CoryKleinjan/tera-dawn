@@ -80,9 +80,14 @@ monster of its level; `tests/balance_report.tscn` prints the full table when tun
 
 ### How to add something the player does
 
-1. Add a `req_<thing>` to `Net` that calls `server.on_<thing>(_sender(), …)`.
-2. Write `TDServer.on_<thing>`: check it's allowed, change the `Character` or map, and mark
-   `dirty_character` / `dirty_vitals` so the player gets their new state.
+1. Add a `req_<thing>` to `Net`, in the group of the server part it belongs to, that calls
+   `server.<part>.on_<thing>(_sender(), …)` (`server.items`, `npc_shop`, `storage`, `travel`,
+   `quests`, `jobs`; moving and fighting stay on `TDServer` itself, `server.social` for
+   players together). A new area gets its own `ServerPart` in `scripts/server/services/`,
+   made in `TDServer._init`.
+2. Write `on_<thing>` in that part: check it's allowed, change the `Character` or map, and mark
+   `dirty_character` / `dirty_vitals` so the player gets their new state. `tell` sends the
+   player a line in their chat log and `change` runs a Character change that returns a problem.
 3. If other players should see it, broadcast an `ev_<thing>` from the `MapInstance` and show
    it in `TDWorld`.
 4. Call `Net.ask(&"req_<thing>", […])` from the UI or `TDPlayer`.
