@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AchievementDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/achievement_def.gd" id="1_achievement_def"]
+
+[resource]
+script = ExtResource("1_achievement_def")
+id = &"slayer"
+steam = "ACH_SLAYER"
+title = "Slayer"
+text = "Defeat 5,000 monsters."
+kind = "kills"
+goal = 5000
+order = 30

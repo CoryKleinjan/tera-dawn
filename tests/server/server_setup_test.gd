@@ -34,7 +34,7 @@ func test_sitting_on_a_chair() -> void:
 	h.ask(2, &"req_setup", [0])
 	check_eq(p.chair, stool.id, "sitting")
 	check_eq(h.last(2, &"ev_sit"), [stool.id], "client told")
-	check_eq(int(c.counters.get("sat", 0)), 1, "counted")
+	check_eq(int(c.counters.get(Counters.SAT, 0)), 1, "counted")
 
 func test_a_chair_adds_to_regeneration() -> void:
 	c.health.set_hp(10)
@@ -93,7 +93,7 @@ func _drop_at(x: float, owner := 2) -> SimDrop:
 func test_bringing_out_a_pet() -> void:
 	h.ask(2, &"req_setup", [1])
 	check_eq(c.pet, sprout.id, "out")
-	check_eq(int(c.counters.get("pets", 0)), 1, "counted")
+	check_eq(int(c.counters.get(Counters.PETS, 0)), 1, "counted")
 	check(h.told(2, "came out to play"), "told")
 
 func test_a_pet_says_hello_when_it_comes_out() -> void:
@@ -201,7 +201,7 @@ func test_others_see_the_achievement_sparkle() -> void:
 	h.ask(2, &"req_setup", [1])
 	h.step(1)
 	check_eq(h.last(2, &"ev_achievement"), ["best_friend"], "pet achievement")
-	check_eq(h.last(3, &"ev_effect")[0], &"celebrate", "Bob sees the sparkle, not a level up")
+	check_eq(h.last(3, &"ev_effect")[0], EffectDef.CELEBRATE, "Bob sees the sparkle, not a level up")
 	check_eq(h.count(3, &"ev_achievement"), 0, "but isn't sent the achievement")
 
 func test_a_first_kill_earns_first_hunt() -> void:

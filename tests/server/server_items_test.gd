@@ -145,7 +145,7 @@ func test_a_sure_scroll_upgrades_gear() -> void:
 	check_eq(sword.slots_used, 1, "one slot used")
 	check(c.inventory.at(ItemDef.Tab.USE, 5) == null, "scroll used up")
 	check(h.told(2, "The scroll worked!"), "told")
-	check_eq(int(c.counters.get("scrolls", 0)), 1, "counted for achievements")
+	check_eq(int(c.counters.get(Counters.SCROLLS, 0)), 1, "counted for achievements")
 
 func test_moving_items_in_the_bag() -> void:
 	var slot := _red_slot()

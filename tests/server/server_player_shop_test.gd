@@ -68,8 +68,8 @@ func test_buying_pays_the_owner_and_moves_the_item() -> void:
 	check_eq(ann.character.shards, 300, "Ann got 300")
 	check_eq(bob.character.inventory.count_of(leaf), 6, "Bob has the leaves")
 	check_eq((h.last(3, &"ev_player_shop")[3] as Array).size(), 1, "one thing left on sale")
-	check_eq(int(ann.character.counters.get("deals", 0)), 1, "deal counted for Ann")
-	check_eq(int(bob.character.counters.get("deals", 0)), 1, "and for Bob")
+	check_eq(int(ann.character.counters.get(Counters.DEALS, 0)), 1, "deal counted for Ann")
+	check_eq(int(bob.character.counters.get(Counters.DEALS, 0)), 1, "and for Bob")
 
 func test_not_enough_dawnshards_buys_nothing() -> void:
 	_open()

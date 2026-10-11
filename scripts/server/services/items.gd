@@ -98,7 +98,7 @@ func _sit(p: SimPlayer, chair: ChairDef) -> void:
 		return
 	else:
 		p.chair = chair.id
-		p.character.count("sat")
+		p.character.count(Counters.SAT)
 		p.dirty_character = true
 	Net.send(p.peer, &"ev_sit", [p.chair])
 
@@ -110,7 +110,7 @@ func _call_pet(p: SimPlayer, pet: PetDef) -> void:
 	else:
 		c.pet = pet.id
 		c.pet_full = maxi(c.pet_full, PetDef.OUT_MIN)
-		c.count("pets")
+		c.count(Counters.PETS)
 		tell(p, "%s came out to play! It picks up things near you." % pet.display_name, Palette.GOOD)
 		if not pet.chatter.is_empty():
 			p.map.broadcast(&"ev_chat", ["pet", pet.display_name, pet.chatter.pick_random(), p.peer])
@@ -131,12 +131,12 @@ func on_scroll(peer: int, use_slot: int, equip_slot: int) -> void:
 		return
 	p.dirty_character = true
 	if result["worked"]:
-		p.character.count("scrolls")
+		p.character.count(Counters.SCROLLS)
 		tell(p, "The scroll worked! %s is now %s." % [name, gear.display_name()], Palette.GOOD)
-		p.map.broadcast(&"ev_effect", [&"celebrate", p.position.x, p.position.y, 1, peer])
+		p.map.broadcast(&"ev_effect", [EffectDef.CELEBRATE, p.position.x, p.position.y, 1, peer])
 	else:
 		tell(p, "The scroll failed. %s has %d upgrades left." % [name, gear.slots_left()])
-		p.map.broadcast(&"ev_effect", [&"monster_poof", p.position.x, p.position.y - 40, 1, 0])
+		p.map.broadcast(&"ev_effect", [EffectDef.MONSTER_POOF, p.position.x, p.position.y - 40, 1, 0])
 
 func on_equip(peer: int, slot: int, place: StringName) -> void:
 	change(peer, func(c: Character) -> String: return c.gear.equip(slot, place))

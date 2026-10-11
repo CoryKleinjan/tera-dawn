@@ -58,7 +58,7 @@ func _show_hits(skill: SkillDef, m: TDMob, hits: Array, face: int, mine: bool, f
 		crit = crit or kind == "crit"
 		landed = landed or kind != "miss"
 		if kind == "crit":
-			add_effect(Content.effect(&"critical"), mid, face)
+			add_effect(Content.effect(EffectDef.CRITICAL), mid, face)
 	if not landed:
 		return
 	var stop := (CRIT_STOP if crit else HIT_STOP) if mine else 0
@@ -135,7 +135,7 @@ func show_mob_death(index: int) -> void:
 		var m := views[index]
 		m.kill()
 		var mid := m.body_position() + Vector2(0, -m.def.size.y / 2.0)
-		add_effect(Content.effect(&"monster_poof"), mid, 1)
+		add_effect(Content.effect(EffectDef.MONSTER_POOF), mid, 1)
 		# a pop of dawn-motes (the monster's spark going free) and a brief flash of light
 		burst(mid, Color(2.2, 1.8, 1.0), 16 if m.def.boss else 10, 1.3 if m.def.boss else 1.0)
 		flash(mid, Color(1.0, 0.85, 0.6), 4.0 if m.def.boss else 2.0)
@@ -158,7 +158,7 @@ func show_level_up(peer: int, _level: int) -> void:
 	var who := world.actor(peer)
 	if who == null:
 		return
-	add_effect(Content.effect(&"level_up"), who.position, 1, who)
+	add_effect(Content.effect(EffectDef.LEVEL_UP), who.position, 1, who)
 	if who == world.player:
 		world.player.level_up()
 		Sound.jingle(LEVEL_UP_JINGLE)

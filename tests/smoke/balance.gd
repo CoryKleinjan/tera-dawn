@@ -23,9 +23,10 @@ func check() -> void:
 	var c := Character.new()
 	_check(c.xp_need(1) < 100 and c.xp_need(30) > c.xp_need(20) * 2, "early levels are quick and later ones take longer")
 	var steam_ids := {}
-	for a in Achievements.LIST:
-		steam_ids[a["steam"]] = true
-	_check(steam_ids.size() == Achievements.LIST.size() and not steam_ids.has(""), "every achievement has its own Steam id")
+	var achievements := Achievements.all()
+	for a in achievements:
+		steam_ids[a.steam] = true
+	_check(steam_ids.size() == achievements.size() and not steam_ids.has(""), "every achievement has its own Steam id")
 
 ## Whether `m` only appears when another monster splits into it (a slime's bits).
 func _only_split_from(m: MonsterDef) -> bool:

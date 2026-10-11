@@ -3,6 +3,19 @@ extends Resource
 ## A short visual effect: a flipbook of glowing frames, optionally with a flash of light,
 ## a burst of particles and a caption. Used for slashes, hits, level ups and pickups.
 
+# Effects the game fires by id rather than through a skill or item (data/effects/<id>.tres).
+## A sparkle around a player who did something worth cheering: an achievement, a job
+## advance, a new guild, a lucky scroll, a Monster Book level.
+const CELEBRATE := &"celebrate"
+## A monster vanishing as it's defeated, and a scroll that failed.
+const MONSTER_POOF := &"monster_poof"
+## The burst around a player who levels up.
+const LEVEL_UP := &"level_up"
+## The flash on a critical hit.
+const CRITICAL := &"critical"
+## Every effect named above.
+const NAMED: Array[StringName] = [CELEBRATE, MONSTER_POOF, LEVEL_UP, CRITICAL]
+
 @export var id: StringName
 @export var frames: Array[Texture2D] = []
 @export var fps := 18.0

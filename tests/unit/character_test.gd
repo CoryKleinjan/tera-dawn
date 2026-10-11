@@ -733,11 +733,11 @@ func test_ap_reset_only_for_a_beginner_short_of_the_stats() -> void:
 
 func test_count_tallies() -> void:
 	var c := fx.character()
-	c.count("deals")
-	c.count("deals", 3)
-	c.count("sat", 0)
-	check_eq(c.counters["deals"], 4, "added up")
-	check_eq(c.counters["sat"], 0, "zero recorded")
+	c.count(Counters.DEALS)
+	c.count(Counters.DEALS, 3)
+	c.count(Counters.SAT, 0)
+	check_eq(c.counters[Counters.DEALS], 4, "added up")
+	check_eq(c.counters[Counters.SAT], 0, "zero recorded")
 
 func test_visit_only_new_maps() -> void:
 	var c := fx.character()

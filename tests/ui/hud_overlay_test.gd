@@ -139,7 +139,7 @@ func test_overlay_draws_everything_it_can_show() -> void:
 	check(await ui.redraw(ui.hud.overlay), "the overlay draws")
 	ui.world.log_lines.clear()
 	ui.world.show_achievement("first_hunt")
-	check(ui.hud.banners.toasts.any(func(t: Dictionary) -> bool: return t["title"] == "First Hunt"), "an achievement shows a toast")
+	check(ui.hud.banners.toasts.any(func(t: AchievementDef) -> bool: return t.title == "First Hunt"), "an achievement shows a toast")
 	check(ui.world.log_lines.is_empty(), "and no log line as well")
 	check(await ui.redraw(ui.hud.overlay), "the overlay draws the achievement")
 	check(await ui.redraw(ui.hud.banners), "the toast draws")

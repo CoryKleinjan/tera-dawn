@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AchievementDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/achievement_def.gd" id="1_achievement_def"]
+
+[resource]
+script = ExtResource("1_achievement_def")
+id = &"well_liked"
+steam = "ACH_WELL_LIKED"
+title = "Well Liked"
+text = "Reach 10 fame."
+kind = "fame"
+goal = 10
+order = 220
