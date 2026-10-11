@@ -183,16 +183,26 @@ func _building(b: BuildingPlacement, pl: Platform, biome: BiomeDef) -> void:
 	var d := b.building
 	if d == null or d.texture == null:
 		return
-	var z := TDStage.land_depth(b.depth)
-	var s := TDStage.sprite(d.texture, d.texel() * b.scale * (stage.dist - z) / stage.dist)
-	TDStage.stand_on_land(s, Vector2(b.center_x(), pl.y + 3.0), b.depth, false)
-	s.flip_h = b.flip
-	s.modulate = b.tint
+	var s := building_sprite(b, pl.y)
 	root.add_child(s)
 	if biome.chimney_smoke and d.chimney.x >= 0.0:
 		var across := (d.chimney.x - 0.5) * (-1.0 if b.flip else 1.0)
 		var size := s.texture.get_size() * s.pixel_size
 		_smoke(s.position + Vector3(across * size.x, d.chimney.y * size.y, 0.0), biome)
+
+## A building's picture standing on land whose walking line is at game-y `surface`. Its base
+## stands right on the walking line (sunk only by land_sink, so it never shows above the
+## land's grass edge), so the land's front hides no more of it than the grass lip:
+## content_backdrop_test checks no building loses its doorstep at any camera height.
+static func building_sprite(b: BuildingPlacement, surface: float) -> Sprite3D:
+	var d := b.building
+	var z := TDStage.land_depth(b.depth)
+	var dist := TDStage.view_distance()
+	var s := TDStage.sprite(d.texture, d.texel() * b.scale * (dist - z) / dist)
+	TDStage.stand_on_land(s, Vector2(b.center_x(), surface), b.depth, false)
+	s.flip_h = b.flip
+	s.modulate = b.tint
+	return s
 
 ## A door: a warm light in the doorway (a building's picture has the door itself; in a room
 ## the biome's door picture stands on the back wall). Up enters it like any portal.

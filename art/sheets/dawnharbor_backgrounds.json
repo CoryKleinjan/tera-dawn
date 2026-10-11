@@ -77,7 +77,8 @@
     },
     "near": {
       "extend_bottom": 461,
-      "scale": 0.3135
+      "scale": 0.3135,
+      "ground": "art/source/backdrop_ground/dawnharbor_near.png"
     },
     "landmark": {
       "scale": 0.7571
