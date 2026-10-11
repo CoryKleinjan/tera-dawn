@@ -84,12 +84,12 @@ func step() -> bool:
 	if faint_t > 0:
 		faint_t -= 1
 		return faint_t == 0
-	if not character.buffs.is_empty():
-		for s in character.tick_buffs():
+	if not character.skills.buffs.is_empty():
+		for s in character.skills.tick_buffs():
 			map.tell(self, "%s wore off." % s.display_name, Palette.MIST)
 			dirty_character = true
 	if map.tick % REGEN_EVERY == 0:
-		var bonus := character.regen_bonus()
+		var bonus := character.skills.regen_bonus()
 		var seat := Content.items.get(chair) as ChairDef
 		if seat:
 			bonus += Vector2i(seat.regen_hp, seat.regen_mp)

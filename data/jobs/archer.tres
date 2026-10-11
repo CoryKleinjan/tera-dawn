@@ -6,6 +6,8 @@
 [ext_resource type="Resource" path="res://data/items/equips/willow_bow.tres" id="4_willow_bow"]
 [ext_resource type="Resource" path="res://data/items/use/red_potion.tres" id="5_red_potion"]
 [ext_resource type="Resource" path="res://data/items/ammo/feather_arrow.tres" id="gift_arrows"]
+[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="q_blue_potion"]
+[ext_resource type="Script" path="res://scripts/data/item_def.gd" id="q_item_def"]
 
 [sub_resource type="Resource" id="Resource_3"]
 script = ExtResource("3_drop_entry")
@@ -52,3 +54,4 @@ advance_level = 10
 advance_requirements = SubResource("Resource_1")
 advance_gifts = Array[ExtResource("3_drop_entry")]([SubResource("Resource_2"), SubResource("Resource_3"), SubResource("gift_sub_arrows")])
 advance_sp = 1
+starting_quickslots = Array[ExtResource("q_item_def")]([ExtResource("5_red_potion"), ExtResource("q_blue_potion")])

@@ -53,6 +53,8 @@ extends Resource
 @export var starting_gear: Array[EquipDef] = []
 ## Put in the inventory at the start; each entry is rolled once (use chance 1).
 @export var starting_items: Array[DropEntry] = []
+## Items put on the last quickslots, in order, so a new player has potions on a key.
+@export var starting_quickslots: Array[ItemDef] = []
 ## The outfit pieces the character creator offers a new character of this job, any kinds of
 ## gear; the creator lets them pick one of each kind (see NewCharacter).
 @export var creator_gear: Array[EquipDef] = []

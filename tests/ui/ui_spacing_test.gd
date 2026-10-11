@@ -43,8 +43,8 @@ func _spender(job: StringName, level: int) -> void:
 	await ui.edit(func(c: Character) -> void:
 		c.job = Content.job(job)
 		c.level = level
-		c.ap = 12
-		c.sp = 5
+		c.ap.points = 12
+		c.skills.points = 5
 		c.guild = "Dawnbreakers"
 		c.fame = 12)
 

@@ -216,7 +216,7 @@ func test_starting_gear_can_be_worn_by_a_new_character() -> void:
 	var c := Character.create("Rookie")
 	for e in c.job.starting_gear:
 		if e:
-			check_eq(c.equip_problem(e), "", "%s: starting_gear %s" % [Scan.where(c.job), e.id])
+			check_eq(c.gear.equip_problem(e), "", "%s: starting_gear %s" % [Scan.where(c.job), e.id])
 
 func test_every_advanced_job_is_taught_somewhere() -> void:
 	var taught := {}

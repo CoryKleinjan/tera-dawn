@@ -209,11 +209,11 @@ func on_skill(peer: int, skill_id: StringName, at: Vector2, face: int) -> void:
 	if p == null or skill == null or p.fainted() or p.cooldown > COOLDOWN_SLACK:
 		return
 	var c := p.character
-	var problem := c.use_problem(skill)
+	var problem := c.skills.use_problem(skill)
 	if problem != "":
 		p.map.tell(p, problem, Palette.INFO)
 		return
-	c.spend_mp(skill.mp_at(c.skill_level(skill)))
+	c.spend_mp(skill.mp_at(c.skills.level(skill)))
 	if skill.uses_ammo:
 		# the damage counts the ammo being fired, so spend it after the hit is worked out
 		p.dirty_character = true
@@ -221,13 +221,13 @@ func on_skill(peer: int, skill_id: StringName, at: Vector2, face: int) -> void:
 	p.cooldown = skill.cooldown
 	p.dirty_vitals = true
 	if skill.kind == SkillDef.Kind.BUFF:
-		c.add_buff(skill)
+		c.skills.add_buff(skill)
 		p.dirty_character = true
 		p.map.broadcast(&"ev_skill", [p.peer, skill.id, p.position.x, p.position.y, p.face, []])
 	else:
 		p.map.use_skill(p, skill)
 	if skill.uses_ammo:
-		c.spend_ammo(skill.hits)
+		c.gear.spend_ammo(skill.hits)
 
 ## Puts a skill or item on a quickslot (an empty `kind` clears it).
 func on_set_quickslot(peer: int, i: int, kind: StringName, id: StringName) -> void:

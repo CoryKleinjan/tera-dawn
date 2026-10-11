@@ -18,9 +18,9 @@ func _rich() -> Character:
 	c.level = 12
 	c.xp = 345
 	c.shards = 9876
-	c.ap = 4
-	c.ap_reset_used = true
-	c.sp = 2
+	c.ap.points = 4
+	c.ap.reset_used = true
+	c.skills.points = 2
 	c.map_id = Content.maps.keys()[0]
 	var sword := fx.equip(&"t_sword", EquipDef.Slot.WEAPON, {"attack": 20}, 3)
 	var worn := ItemStack.exact(sword)
@@ -38,9 +38,9 @@ func _rich() -> Character:
 	var buff := fx.skill(&"t_buff", SkillDef.Kind.BUFF)
 	buff.stats = UnitHelpers.stats({"attack": 4})
 	buff.duration = 30.0
-	c.skills[passive.id] = 3
-	c.skills[buff.id] = 2
-	c.buffs[buff.id] = [2, 500]
+	c.skills.learned[passive.id] = 3
+	c.skills.learned[buff.id] = 2
+	c.skills.buffs[buff.id] = [2, 500]
 	c.set_quickslot(0, &"skill", buff.id)
 	c.set_quickslot(Character.QUICKSLOTS - 2, &"item", &"red_potion")
 	c.buddies.assign(["Ana", "Bo"])
@@ -80,9 +80,9 @@ func test_round_trip_basics() -> void:
 	check_eq(b.level, 12, "level")
 	check_eq(b.xp, 345, "xp")
 	check_eq(b.shards, 9876, "shards")
-	check_eq(b.ap, 4, "AP")
-	check(b.ap_reset_used, "free AP reset used")
-	check_eq(b.sp, 2, "SP")
+	check_eq(b.ap.points, 4, "AP")
+	check(b.ap.reset_used, "free AP reset used")
+	check_eq(b.skills.points, 2, "SP")
 	check_eq(b.map_id, c.map_id, "map")
 	check(b.job == c.job, "job")
 	check_eq(b.base.to_dict(), c.base.to_dict(), "base stats")
@@ -106,8 +106,8 @@ func test_round_trip_items_and_storage() -> void:
 
 func test_round_trip_skills_buffs_and_quickslots() -> void:
 	var b := _round_trip(_rich())
-	check_eq(b.skills, {&"t_passive": 3, &"t_buff": 2}, "skills")
-	check_eq(b.buffs, {&"t_buff": [2, 500]}, "buffs")
+	check_eq(b.skills.learned, {&"t_passive": 3, &"t_buff": 2}, "skills")
+	check_eq(b.skills.buffs, {&"t_buff": [2, 500]}, "buffs")
 	check_eq(b.quickslots[0], [&"skill", &"t_buff"], "skill quickslot")
 	check_eq(b.quickslots[Character.QUICKSLOTS - 2], [&"item", &"red_potion"], "potion quickslot")
 	check_eq(b.stats.defense, 7, "passive applied")
@@ -161,10 +161,10 @@ func test_bad_values_are_clamped_or_ignored() -> void:
 	check_eq(c.xp, 0, "xp floor")
 	check_eq(c.shards, 0, "shards floor")
 	check_eq(c.map_id, Character.START_MAP, "unknown map: start map")
-	check_eq(c.ap, 0, "AP floor")
-	check_eq(c.sp, 0, "SP floor")
-	check(c.skills.is_empty(), "unknown skill dropped")
-	check(c.buffs.is_empty(), "bad buffs dropped")
+	check_eq(c.ap.points, 0, "AP floor")
+	check_eq(c.skills.points, 0, "SP floor")
+	check(c.skills.learned.is_empty(), "unknown skill dropped")
+	check(c.skills.buffs.is_empty(), "bad buffs dropped")
 	check_eq(c.pet, &"", "not a pet")
 	check_eq(c.pet_full, 100, "fullness capped")
 	check_eq(c.health.hp, 1, "loads with at least 1 HP")
@@ -175,7 +175,7 @@ func test_skill_levels_clamped_to_max() -> void:
 	s.max_level = 5
 	var c := fx.character()
 	c.load_dict({"job": "t_job", "skills": {"t_skill": 99}, "sp": 0})
-	check_eq(c.skills[&"t_skill"], 5, "capped")
+	check_eq(c.skills.learned[&"t_skill"], 5, "capped")
 
 func test_unknown_job_keeps_current_job() -> void:
 	var c := fx.character()
@@ -192,21 +192,22 @@ func test_missing_hp_and_mp_load_full() -> void:
 func test_save_from_before_stats_hands_out_ap() -> void:
 	var c := fx.character()
 	c.load_dict({"name": "Old", "job": "t_job", "level": 7, "sp": 0})
-	check_eq(c.ap, 30, "6 levels × 5 AP")
+	check_eq(c.ap.points, 30, "6 levels × 5 AP")
 
 func test_save_from_before_skills_hands_out_sp_and_potion_keys() -> void:
 	var c := fx.character()
+	c.job.starting_quickslots = [fx.use(&"t_red"), fx.use(&"t_blue")]
 	c.load_dict({"name": "Old", "job": "t_job", "level": 4, "base": {"strength": 10}, "ap": 0})
-	check_eq(c.sp, 9, "3 levels × 3 SP")
-	check_eq(c.quickslots[Character.QUICKSLOTS - 2], [&"item", &"red_potion"], "red potion key")
-	check_eq(c.quickslots[Character.QUICKSLOTS - 1], [&"item", &"blue_potion"], "blue potion key")
+	check_eq(c.skills.points, 9, "3 levels × 3 SP")
+	check_eq(c.quickslots[Character.QUICKSLOTS - 2], [&"item", &"t_red"], "first potion key")
+	check_eq(c.quickslots[Character.QUICKSLOTS - 1], [&"item", &"t_blue"], "second potion key")
 
 func test_oldest_save_with_only_name_and_level() -> void:
 	var c := Character.new()
 	c.load_dict({"name": "Ancient", "level": 3, "xp": 5})
 	check_eq(c.job.id, Character.START_JOB, "beginner")
-	check_eq(c.ap, 2 * c.job.ap_per_level, "AP for the levels")
-	check_eq(c.sp, 2 * c.job.sp_per_level, "SP for the levels")
+	check_eq(c.ap.points, 2 * c.job.ap_per_level, "AP for the levels")
+	check_eq(c.skills.points, 2 * c.job.sp_per_level, "SP for the levels")
 	check_eq(c.map_id, Character.START_MAP, "start map")
 	check_eq(c.health.hp, c.max_hp(), "full HP")
 	check_eq(c.quickslots.size(), Character.QUICKSLOTS, "quickslots")

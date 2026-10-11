@@ -8,13 +8,14 @@ Create `data/jobs/<id>.tres` as a **JobDef**: primary and secondary stat, master
 growth, Ability Points per level, its `family` (the job line gear names in `EquipDef.jobs`),
 and a `tint` the hero is drawn in until the job has its own art.
 
-Everyone starts as `Character.START_JOB` (the Beginner, which lists starting stats, gear and
-items). A job that others reach sets `advances_from`, `advance_level`, `advance_requirements`
+Everyone starts as `Character.START_JOB` (the Beginner, which lists starting stats, gear,
+items and the potions put on the last quickslots, `starting_quickslots`). A job that others
+reach sets `advances_from`, `advance_level`, `advance_requirements`
 (base STR/DEX/INT/LUK) and `advance_gifts`: the job's basic shop weapon (the first weapon
 listed is worn at once in place of a Beginner's weapon; one of the job's own line stays on),
 its ammo and potions. Better weapons only drop. To let an NPC hand it out, add its id to that
 NPC's `instructs`: their dialogue then offers "Choose a job", and the server
 (`ServerJobs.on_advance` → `Character.advance`) checks the requirements again before changing it.
 A Beginner short of a job's stats may also ask its instructor for one free Ability Point reset
-per character (`req_reset_ap` → `Character.reset_ap`): base stats go back to the job's
-`starting_stats` and the points come back. `Character.ap_reset_used` is saved with the rest.
+per character (`req_reset_ap` → `AbilityPoints.reset`): base stats go back to the job's
+`starting_stats` and the points come back. `AbilityPoints.reset_used` is saved with the rest.

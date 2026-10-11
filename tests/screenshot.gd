@@ -152,7 +152,7 @@ func _run() -> void:
 			if m.plat == world.platforms[1]:
 				_place_mob(m, randf_range(300, 380))
 		_me().character.job = Content.job(&"warrior")
-		_me().character.skills[&"dawn_slash"] = 1
+		_me().character.skills.learned[&"dawn_slash"] = 1
 		_me().character.set_quickslot(0, &"skill", &"dawn_slash")
 		_me().dirty_character = true
 		await _physics(40)
@@ -285,15 +285,15 @@ func _run() -> void:
 		# A Warrior's skill book, quickslots and a running buff.
 		ch.job = Content.job(&"warrior")
 		ch.level = maxi(ch.level, 14)
-		ch.sp = 4
+		ch.skills.points = 4
 		for pair in [[&"power_strike", 6], [&"dawn_slash", 3], [&"iron_body", 2], [&"toughness", 1], [&"quick_step", 2], [&"second_wind", 1]]:
-			ch.skills[pair[0]] = pair[1]
+			ch.skills.learned[pair[0]] = pair[1]
 		ch.set_quickslot(0, &"skill", &"power_strike")
 		ch.set_quickslot(1, &"skill", &"dawn_slash")
 		ch.set_quickslot(2, &"skill", &"iron_body")
 		ch.set_quickslot(3, &"skill", &"quick_step")
-		ch.add_buff(Content.skill(&"iron_body"))
-		ch.add_buff(Content.skill(&"quick_step"))
+		ch.skills.add_buff(Content.skill(&"iron_body"))
+		ch.skills.add_buff(Content.skill(&"quick_step"))
 		ch.recalc()
 		_me().dirty_character = true
 		await _physics(5)
@@ -310,7 +310,7 @@ func _run() -> void:
 		ch.equipment.take(&"weapon")
 		ch.equipment.put(&"weapon", ItemStack.exact(Content.item(&"willow_bow")))
 		ch.inventory.add(Content.item(&"feather_arrow"), 300)
-		ch.skills[&"double_shot"] = 5
+		ch.skills.learned[&"double_shot"] = 5
 		ch.set_quickslot(0, &"skill", &"double_shot")
 		ch.mp = 200
 		ch.recalc()
@@ -492,12 +492,12 @@ func _run() -> void:
 		for id in [&"boar_tusk", &"petal_wing", &"dewling_droplet"]:
 			ch.inventory.add(Content.item(id), randi_range(3, 40))
 		ch.inventory.add(Content.item(&"blue_potion"), 12)
-		ch.equip(0)
-		ch.ap = 40
+		ch.gear.equip(0)
+		ch.ap.points = 40
 		for n in 30:
-			ch.add_ap(&"strength")
+			ch.ap.spend(&"strength")
 		ch.inventory.add(Content.item(&"leaf_cap"))
-		ch.equip(_slot_of(&"leaf_cap"))
+		ch.gear.equip(_slot_of(&"leaf_cap"))
 		ch.inventory.add(Content.item(&"ember_helm"))
 		_me().dirty_character = true
 		_teleport(world, Vector2(1120, 620))

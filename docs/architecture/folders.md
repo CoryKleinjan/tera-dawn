@@ -20,7 +20,8 @@ scripts/
   server/services/    TDServer's parts (ServerPart): items, NPC shops, storage, travel, quests, jobs
   net/                SnapshotFlags (the bits both sides read in snapshots), SnapshotCodec (packs them)
   data/               Resource classes for everything in data/
-  systems/            Character (and CharacterCodec, its save format), Appearance, NewCharacter,
+  systems/            Character (and CharacterCodec, its save format) and its parts SkillBook,
+                      AbilityPoints and Gear (CharacterPart), Appearance, NewCharacter,
                       Inventory, Equipment,
                       ItemStack, CharacterStats, MonsterBook, Achievements, Balance
   components/         Health, Hitbox, SpriteRig, Paperdoll (+ Sprite, View)

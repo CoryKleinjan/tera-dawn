@@ -92,7 +92,7 @@ func test_equip_moves_gear_from_bag_and_adds_stats() -> void:
 	var c := fx.character(null, {"strength": 10})
 	c.inventory.add_stack(ItemStack.exact(fx.equip(&"t_a", EquipDef.Slot.WEAPON, {"attack": 15, "strength": 4, "max_hp": 30})))
 	var hp_before := c.max_hp()
-	check_eq(c.equip(0), "", "equipped")
+	check_eq(c.gear.equip(0), "", "equipped")
 	check(c.inventory.at(ItemDef.Tab.EQUIP, 0) == null, "left the bag")
 	check_eq(c.stats.attack, 15, "attack")
 	check_eq(c.stats.strength, 14, "strength")
@@ -105,15 +105,15 @@ func test_equip_swaps_old_gear_into_same_bag_slot() -> void:
 	var b := ItemStack.exact(fx.equip(&"t_b", EquipDef.Slot.WEAPON, {"attack": 9}))
 	c.inventory.put(ItemDef.Tab.EQUIP, 0, a)
 	c.inventory.put(ItemDef.Tab.EQUIP, 7, b)
-	c.equip(0)
-	c.equip(7)
+	c.gear.equip(0)
+	c.gear.equip(7)
 	check(c.equipment.at(&"weapon") == b, "new one worn")
 	check(c.inventory.at(ItemDef.Tab.EQUIP, 7) == a, "old one where the new one was")
 	check_eq(c.stats.attack, 9, "stats follow")
 
 func test_equip_empty_slot_does_nothing() -> void:
 	var c := fx.character()
-	check_eq(c.equip(3), "", "no problem")
+	check_eq(c.gear.equip(3), "", "no problem")
 	check_eq(c.equipment.worn.size(), 0, "nothing worn")
 
 func test_equip_refused_for_other_job_line() -> void:
@@ -121,7 +121,7 @@ func test_equip_refused_for_other_job_line() -> void:
 	var e := fx.equip(&"t_bow", EquipDef.Slot.WEAPON)
 	e.jobs = [&"archer"]
 	c.inventory.add_stack(ItemStack.exact(e))
-	check_ne(c.equip(0), "", "wrong job")
+	check_ne(c.gear.equip(0), "", "wrong job")
 	check(c.equipment.at(&"weapon") == null, "not worn")
 	check(c.inventory.at(ItemDef.Tab.EQUIP, 0) != null, "still in bag")
 
@@ -129,25 +129,25 @@ func test_equip_allowed_for_listed_family() -> void:
 	var c := fx.character(fx.job(&"t_job", &"archer"))
 	var e := fx.equip(&"t_bow", EquipDef.Slot.WEAPON)
 	e.jobs = [&"warrior", &"archer"]
-	check_eq(c.equip_problem(e), "", "archer family listed")
-	check(c.can_use([]), "empty list is anyone")
+	check_eq(c.gear.equip_problem(e), "", "archer family listed")
+	check(c.gear.can_use([]), "empty list is anyone")
 
 func test_equip_level_requirement_boundary() -> void:
 	var c := fx.character()
 	var e := fx.equip()
 	e.required_level = 5
 	c.level = 4
-	check_ne(c.equip_problem(e), "", "level 4 too low")
+	check_ne(c.gear.equip_problem(e), "", "level 4 too low")
 	c.level = 5
-	check_eq(c.equip_problem(e), "", "level 5 enough")
+	check_eq(c.gear.equip_problem(e), "", "level 5 enough")
 
 func test_equip_stat_requirement_uses_total_stats() -> void:
 	var c := fx.character(null, {"dexterity": 20})
 	var e := fx.equip(&"t_bow")
 	e.required_dexterity = 25
-	check_ne(c.equip_problem(e), "", "20 DEX too low")
+	check_ne(c.gear.equip_problem(e), "", "20 DEX too low")
 	c.equipment.put(&"hat", ItemStack.exact(fx.equip(&"t_hat", EquipDef.Slot.HAT, {"dexterity": 5})))
-	check_eq(c.equip_problem(e), "", "gear DEX counts")
+	check_eq(c.gear.equip_problem(e), "", "gear DEX counts")
 
 func test_requirements_lists_only_nonzero() -> void:
 	var e := fx.equip()
@@ -160,9 +160,9 @@ func test_equip_to_named_place_and_invalid_place_falls_back() -> void:
 	var c := fx.character()
 	var ring := fx.equip(&"t_ring", EquipDef.Slot.RING)
 	c.inventory.add(ring, 2)
-	c.equip(0, &"ring_2")
+	c.gear.equip(0, &"ring_2")
 	check(c.equipment.at(&"ring_2") != null, "went to ring_2")
-	c.equip(1, &"hat")
+	c.gear.equip(1, &"hat")
 	check(c.equipment.at(&"ring_1") != null, "a hat place isn't for rings: first free ring place")
 
 func test_unequip_to_chosen_free_slot() -> void:
@@ -170,7 +170,7 @@ func test_unequip_to_chosen_free_slot() -> void:
 	var s := ItemStack.exact(fx.equip(&"t_a", EquipDef.Slot.WEAPON, {"attack": 7}))
 	c.equipment.put(&"weapon", s)
 	check_eq(c.stats.attack, 7, "worn")
-	check_eq(c.unequip(&"weapon", 5), "", "taken off")
+	check_eq(c.gear.unequip(&"weapon", 5), "", "taken off")
 	check(c.inventory.at(ItemDef.Tab.EQUIP, 5) == s, "in slot 5")
 	check_eq(c.stats.attack, 0, "stats gone")
 
@@ -178,21 +178,21 @@ func test_unequip_to_taken_or_invalid_slot_uses_first_free() -> void:
 	var c := fx.character()
 	c.inventory.add(fx.equip(&"t_b"), 1)
 	c.equipment.put(&"weapon", ItemStack.exact(fx.equip(&"t_a")))
-	c.unequip(&"weapon", 0)
+	c.gear.unequip(&"weapon", 0)
 	check_eq(c.inventory.at(ItemDef.Tab.EQUIP, 1).item.id, &"t_a", "slot 0 taken: went to 1")
 	c.equipment.put(&"hat", ItemStack.exact(fx.equip(&"t_h", EquipDef.Slot.HAT)))
-	c.unequip(&"hat", 99)
+	c.gear.unequip(&"hat", 99)
 	check_eq(c.inventory.at(ItemDef.Tab.EQUIP, 2).item.id, &"t_h", "bad index: first free")
 
 func test_unequip_with_full_bag_is_refused() -> void:
 	var c := fx.character()
 	c.inventory.add(fx.equip(&"t_b"), Inventory.SLOTS)
 	c.equipment.put(&"weapon", ItemStack.exact(fx.equip(&"t_a")))
-	check_ne(c.unequip(&"weapon"), "", "no room")
+	check_ne(c.gear.unequip(&"weapon"), "", "no room")
 	check(c.equipment.at(&"weapon") != null, "still worn")
 
 func test_unequip_nothing_is_fine() -> void:
-	check_eq(fx.character().unequip(&"cape"), "", "no problem")
+	check_eq(fx.character().gear.unequip(&"cape"), "", "no problem")
 
 func test_families_text() -> void:
 	check_eq(EquipDef.families_text([]), "", "none")

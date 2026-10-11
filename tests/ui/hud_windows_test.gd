@@ -218,7 +218,7 @@ func _plus_rects(win: TDWindow) -> Array[Rect2]:
 # ---------- character stats ----------
 
 func test_stats_plus_buttons_spend_ability_points() -> void:
-	await ui.edit(func(c: Character) -> void: c.ap = 3)
+	await ui.edit(func(c: Character) -> void: c.ap.points = 3)
 	var stats: TDStatsWindow = _open("stats")
 	await _redrawn(stats, "stats with AP to spend")
 	var plus := _plus_rects(stats) # drawn in StatBlock.BASE order
@@ -229,7 +229,7 @@ func test_stats_plus_buttons_spend_ability_points() -> void:
 	await ui.click(stats, plus[StatBlock.BASE.find(&"strength")].get_center())
 	await ui.ticks(3)
 	check_eq(Game.me.base.strength, str_before + 1, "STR after clicking its +")
-	check_eq(Game.me.ap, 2, "AP left")
+	check_eq(Game.me.ap.points, 2, "AP left")
 
 func test_stats_window_leaves_the_status_bar_visible() -> void:
 	var stats: TDStatsWindow = _open("stats")
@@ -244,7 +244,7 @@ func test_stats_window_shows_a_beginner_the_job_paths() -> void:
 	await ui.edit(func(c: Character) -> void:
 		c.job = Content.job(Character.START_JOB)
 		c.level = 9
-		c.ap = 5
+		c.ap.points = 5
 		c.base.strength = 35
 		c.base.dexterity = 4
 		c.base.intelligence = 4
@@ -278,27 +278,27 @@ func test_stats_auto_spends_every_point_through_the_server() -> void:
 	await ui.edit(func(c: Character) -> void:
 		c.job = Content.job(&"thief")
 		c.level = 12
-		c.ap = 10)
+		c.ap.points = 10)
 	var stats: TDStatsWindow = _open("stats")
 	await _redrawn(stats, "stats with an Auto button")
 	check(stats.auto_rect.size.x > 0 and Rect2(Vector2.ZERO, stats.size).encloses(stats.auto_rect), "Auto lies inside the window")
-	var plan := Game.me.auto_ap_plan()
+	var plan := Game.me.ap.auto_plan()
 	var before := Game.me.base.copy()
 	await ui.click(stats, stats.auto_rect.get_center())
 	await ui.ticks(3)
-	check_eq(Game.me.ap, 0, "every point spent")
+	check_eq(Game.me.ap.points, 0, "every point spent")
 	check_eq(Game.me.base.luck - before.luck, plan.get(&"luck", 0), "LUK as planned")
 	check_eq(Game.me.base.dexterity - before.dexterity, plan.get(&"dexterity", 0), "DEX as planned")
 	check(plan.get(&"luck", 0) > 0, "most points go in the thief's LUK")
 
 func test_status_bar_glows_while_points_wait() -> void:
 	await ui.edit(func(c: Character) -> void:
-		c.ap = 0
-		c.sp = 0)
+		c.ap.points = 0
+		c.skills.points = 0)
 	check(not TDStatusBar.has_points_waiting("stats") and not TDStatusBar.has_points_waiting("skills"), "nothing to spend, no glow")
 	await ui.edit(func(c: Character) -> void:
-		c.ap = 5
-		c.sp = 2)
+		c.ap.points = 5
+		c.skills.points = 2)
 	check(TDStatusBar.has_points_waiting("stats"), "the Character button glows with AP")
 	check(TDStatusBar.has_points_waiting("skills"), "the Skills button glows with SP")
 	check(not TDStatusBar.has_points_waiting("inventory"), "other buttons don't")
@@ -314,7 +314,7 @@ func test_skill_window_lists_every_skill_of_every_job() -> void:
 		await ui.edit(func(c: Character) -> void:
 			c.job = j
 			c.level = 30
-			c.sp = 5)
+			c.skills.points = 5)
 		var book: TDSkillWindow = _open("skills")
 		var line := book.jobs()
 		check_eq(line.size(), 2, "%s: tabs (Beginner and the job)" % j.id)
@@ -337,7 +337,7 @@ func test_skill_plus_learns_through_the_server() -> void:
 	await ui.edit(func(c: Character) -> void:
 		c.job = Content.job(&"warrior")
 		c.level = 30
-		c.sp = 3)
+		c.skills.points = 3)
 	var book: TDSkillWindow = _open("skills")
 	book.tab = 1
 	await _redrawn(book, "warrior skills")
@@ -351,8 +351,8 @@ func test_skill_plus_learns_through_the_server() -> void:
 	var id: StringName = book.listed()[maxi(row, 0)].id
 	await ui.click(book, plus[0].get_center())
 	await ui.ticks(3)
-	check_eq(Game.me.skill_level(Content.skill(id)), 1, "%s after clicking its +" % id)
-	check_eq(Game.me.sp, 2, "SP left")
+	check_eq(Game.me.skills.level(Content.skill(id)), 1, "%s after clicking its +" % id)
+	check_eq(Game.me.skills.points, 2, "SP left")
 
 # ---------- quests ----------
 
