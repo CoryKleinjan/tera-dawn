@@ -143,7 +143,7 @@ tests/             Test runner and suites, smoke test, screenshot scene
 tools/art/         Sheet slicer, store-art cropper, fx textures, contact-sheet preview
 ```
 
-[ARCHITECTURE.md](ARCHITECTURE.md) goes through each folder.
+[docs/architecture/folders.md](docs/architecture/folders.md) goes through each folder.
 
 ## Store art
 

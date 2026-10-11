@@ -1,7 +1,7 @@
 class_name MapDef
 extends Resource
 ## One map: its size, layout, monsters, NPCs and look. Add a map by saving a MapDef in
-## data/maps/ and pointing a portal at its id (see ARCHITECTURE.md).
+## data/maps/ and pointing a portal at its id (see docs/architecture/maps.md).
 ## Coordinates are game pixels with y pointing down; platform y is the walkable top edge.
 
 @export var id: StringName
