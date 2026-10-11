@@ -220,7 +220,7 @@ func _run() -> void:
 		p.face = 1
 		world.show_pickup(Content.item(&"moss_tuft"), 3)
 		world.add_log("Quest accepted: Moss for the Stall", Palette.SUN)
-		world.hud.chat.add("all", "Mossy", "Anyone heading to Ember Hollow?")
+		world.hud.chat.add("all", "Mossy", "Anyone heading to Fern Hollow?")
 		world.hud.chat.add("party", "Kestrel", "On my way!")
 		await _physics(15)
 		await _shot("village")
@@ -377,6 +377,18 @@ func _run() -> void:
 		world.hud.toggle_window("worldmap")
 		Net.server._enter_map(_me(), &"meadow", 300)
 		await _physics(10)
+	if only == "subzones":
+		# Every field of every region (not in the full run): their variants of the region's look.
+		_me().inv = 100000
+		for m: MapDef in Content.maps.values():
+			if not m.town and not m.interior:
+				Net.server._enter_map(_me(), m.id, 900)
+				await _physics(40)
+				await _frames(3)
+				await _shot("subzone_%s_%s" % [m.region, m.id])
+		_me().inv = 0
+		Net.server._enter_map(_me(), &"meadow", 300)
+		await _physics(10)
 	if only == "" or only == "social":
 		# The Free Market: a friend's shop, a party, chat and the community window.
 		var social := Net.server.social
@@ -437,7 +449,7 @@ func _run() -> void:
 		for id in [&"ember_throne", &"pet_emberkit"]:
 			Net.ask(&"req_setup", [Game.me.inventory.find(Content.item(id))])
 		var dew: MonsterDef = Content.monster(&"dewling")
-		for id in [&"dewling", &"mossling", &"petal_bat", &"sproutcap", &"spore_puff", &"sporecap", &"tide_dewling", &"ember_boar", &"cinder_imp"]:
+		for id in [&"dewling", &"mossling", &"petal_bat", &"sproutcap", &"spore_puff", &"sporecap", &"tide_dewling", &"fern_boar", &"shell_crab"]:
 			ch.book.pages[id] = [40 + id.length() * 7, mini(5, id.length() % 6)]
 		ch.book.pages[dew.id] = [212, 5]
 		ch.achievements.append_array(["first_hunt", "level_10", "first_job", "take_a_seat", "best_friend", "collector"])
@@ -536,7 +548,7 @@ func _run() -> void:
 		await _physics(60)
 		var hollow: MapInstance = Net.server.maps[&"hollow"]
 		for m in hollow.mobs:
-			if m.def.id == &"ember_boar" and m.plat == hollow.layout.platforms[0]:
+			if m.def.id == &"fern_boar" and m.plat == hollow.layout.platforms[0]:
 				_place_mob(m, p.position.x + 150)
 				break
 		ch.xp = ch.xp_need() - 1

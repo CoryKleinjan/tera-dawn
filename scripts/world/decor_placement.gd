@@ -46,7 +46,7 @@ static func density(map: MapDef) -> float:
 ## the order they are drawn.
 static func floor_pieces(map: MapDef, rng: RandomNumberGenerator) -> Array[Piece]:
 	var out: Array[Piece] = []
-	if map.biome == null:
+	if map.look() == null:
 		return out
 	var land := Vector2(0.0, map.width)
 	var lanterns := LanternPlacement.keep_clear(map)
@@ -54,22 +54,22 @@ static func floor_pieces(map: MapDef, rng: RandomNumberGenerator) -> Array[Piece
 	near.append_array(lanterns)
 	var back := building_spans(map, 0)
 	back.append_array(lanterns)
-	for rule in map.biome.ground_decor:
+	for rule in map.look().ground_decor:
 		out.append_array(scatter(rule, land, map.ground_y, rng, back if is_back(rule) else near, density(map)))
 	if map.town and map.buildings.is_empty():
-		for rule in map.biome.town_decor:
+		for rule in map.look().town_decor:
 			out.append_array(scatter(rule, land, map.ground_y, rng, back, 1.0))
 	return out
 
 ## The scenery along each floating platform (platform_decor), platform by platform.
 static func platform_pieces(map: MapDef, rng: RandomNumberGenerator) -> Array[Piece]:
 	var out: Array[Piece] = []
-	if map.biome == null:
+	if map.look() == null:
 		return out
 	for i in map.platforms.size():
 		var d := map.platforms[i]
 		var avoid := standing_on(map, i + 1)
-		for rule in map.biome.platform_decor:
+		for rule in map.look().platform_decor:
 			out.append_array(scatter(rule, Vector2(d.x, d.x + d.width), d.y, rng, avoid, density(map)))
 	return out
 

@@ -688,18 +688,18 @@ func _run() -> void:
 	await _hold("move_up", 100)
 	_check(is_equal_approx(p.position.y, 420.0) and not p.is_climbing(), "climbing a rope reaches the platform above")
 
-	# Walk through the portal to Ember Hollow.
+	# Walk through the portal to Fern Hollow.
 	_teleport(Vector2(2530, 620))
 	await _ticks(3)
 	await _tap("move_up")
 	await _until(func() -> bool: return world.map.id == &"hollow", 30)
-	_check(world.map.id == &"hollow" and _me().map.def.id == &"hollow", "the portal leads to Ember Hollow")
+	_check(world.map.id == &"hollow" and _me().map.def.id == &"hollow", "the portal leads to Fern Hollow")
 	await _ticks(60)
 	_check(world.stage.fade < 0.05, "the new map fades back in after a portal (fade %.2f)" % world.stage.fade)
 	var boss := false
 	for m in world.mobs():
 		boss = boss or m.def.boss
-	_check(boss, "Ember Hollow has its boss")
+	_check(boss, "Fern Hollow has its boss")
 
 	# Fainting sends the player back to town.
 	_me().inv = 0
@@ -979,7 +979,7 @@ func _check_travel() -> void:
 	_check(wm.hovered == &"hollow", "hovering a dot picks that map")
 	wm.open_zone(&"")
 	await _press("worldmap")
-	# Hobb's wagon to Ember Hollow costs 150 Dawnshards.
+	# Hobb's wagon to Fern Hollow costs 150 Dawnshards.
 	var hobb: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"wagon_driver")[0]
 	# Dawnshards left on the ground from earlier kills would change the purse
 	for id in [&"meadow", &"hollow"]:
@@ -995,7 +995,7 @@ func _check_travel() -> void:
 	var labels: Array = talk.options.map(func(o: Array) -> String: return o[0])
 	_check(labels.has("Travel"), "the wagon driver offers to travel")
 	talk.choose(labels.find("Travel"))
-	_check(str(talk.options[0][0]) == "Wagon to Ember Hollow (%s, 150 Dawnshards)" % Content.map(&"hollow").level_text, "the trip lists where it goes, who it's for and the fare: %s" % talk.options[0][0])
+	_check(str(talk.options[0][0]) == "Wagon to Fern Hollow (%s, 150 Dawnshards)" % Content.map(&"hollow").level_text, "the trip lists where it goes, who it's for and the fare: %s" % talk.options[0][0])
 	talk.choose(0)
 	await _until(func() -> bool: return world.map.id == &"hollow" and Game.me.shards == 850, 30)
 	_check(world.map.id == &"hollow" and Game.me.shards == 850, "the wagon takes you there for 150 Dawnshards")

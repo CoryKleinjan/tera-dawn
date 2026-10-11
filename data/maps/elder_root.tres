@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=43 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=45 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="12_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tall_grass.png" id="15_tall_grass"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/bush_large.png" id="16_bush_large"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 
 [sub_resource type="Resource" id="Resource_27"]
 script = ExtResource("12_prop_placement")
@@ -202,11 +203,20 @@ top = 170.0
 bottom = 540.0
 style = ExtResource("6_rope")
 
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+sky_low = Color(0.9412, 0.6902, 0.3765, 1)
+sky_horizon = Color(1, 0.8471, 0.5647, 1)
+light_color = Color(1, 0.8157, 0.5647, 1)
+grade_tint = Color(1, 0.94, 0.84, 1)
+mote_color = Color(2.4, 1.8, 0.8, 1)
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"elder_root"
 display_name = "Elder's Root"
 biome = ExtResource("2_greenwood")
+variant = SubResource("Variant")
 width = 2000
 height = 700
 ground_y = 620

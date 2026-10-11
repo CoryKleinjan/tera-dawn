@@ -95,7 +95,7 @@ func test_streets_have_no_long_empty_stretches() -> void:
 func test_background_houses_are_spaced_out() -> void:
 	var seen := 0
 	for m in _streets():
-		for rule in m.biome.town_decor:
+		for rule in m.look().town_decor:
 			var w := SceneryBuilder.back_house_width(rule)
 			var slots := SceneryBuilder.back_house_slots(rule, m)
 			seen += slots.size()

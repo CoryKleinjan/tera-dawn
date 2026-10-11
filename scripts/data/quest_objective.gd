@@ -17,7 +17,7 @@ enum Kind { KILL, COLLECT, VISIT }
 @export var drop_from: MonsterDef
 @export_range(0.0, 1.0) var drop_chance := 0.5
 
-## "Defeat 8 Dewlings", "Bring 10 Moss Tufts", "Reach Ember Hollow".
+## "Defeat 8 Dewlings", "Bring 10 Moss Tufts", "Reach Fern Hollow".
 func describe() -> String:
 	match kind:
 		Kind.KILL:

@@ -48,7 +48,7 @@ func test_land_art_stands_on_the_floor() -> void:
 		for i in m.platforms.size():
 			var p := m.platforms[i]
 			if p.look:
-				var span := TerrainBuilder.skin_span(p, m.biome)
+				var span := TerrainBuilder.skin_span(p, m.look())
 				var gap := m.ground_y - span.y
 				check(gap <= 4.0, "%s: platforms[%d] (%s) floats %d px above the floor; land art must stand on the ground" % [Scan.where(m), i, p.look.resource_path.get_file(), gap])
 

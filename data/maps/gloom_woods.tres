@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=57 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=59 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/lantern.tres" id="2_lantern"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/rock_large.png" id="15_rock_large"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/stump.png" id="16_stump"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/tree_small.png" id="17_tree_small"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 
 [sub_resource type="Resource" id="Resource_40"]
 script = ExtResource("12_prop_placement")
@@ -284,11 +285,19 @@ x = 1270.0
 y = 540.0
 width = 140.0
 
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+fog_color = Color(0.1647, 0.2275, 0.2275, 1)
+sky_mid = Color(0.07843, 0.1569, 0.1647, 1)
+backdrop_tint = Color(0.5412, 0.6275, 0.6275, 1)
+grade_saturation = 0.85
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"gloom_woods"
 display_name = "Gloom Woods"
 biome = ExtResource("2_lantern")
+variant = SubResource("Variant")
 width = 2800
 height = 700
 ground_y = 620

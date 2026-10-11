@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=62 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=64 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/stump.png" id="16_stump"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/rock_large.png" id="17_rock_large"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/flowers_yellow.png" id="18_flowers_yellow"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 
 [sub_resource type="Resource" id="Resource_41"]
 script = ExtResource("12_prop_placement")
@@ -314,11 +315,20 @@ top = 170.0
 bottom = 620.0
 style = ExtResource("5_rope")
 
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+fog_color = Color(0.549, 0.7843, 0.7216, 1)
+sky_low = Color(0.6588, 0.8784, 0.7843, 1)
+motes_rise = 1
+mote_color = Color(1.2, 2.2, 2, 1)
+backdrop_tint = Color(0.8157, 0.9333, 0.8941, 1)
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"whispering_grove"
 display_name = "Whispering Grove"
 biome = ExtResource("2_greenwood")
+variant = SubResource("Variant")
 width = 2800
 height = 700
 ground_y = 620

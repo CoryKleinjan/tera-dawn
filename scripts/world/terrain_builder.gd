@@ -13,7 +13,7 @@ func _init(s: TDStage, r: Node3D) -> void:
 	root = r
 
 func build(map: MapDef, platforms: Array[Platform]) -> void:
-	var biome := map.biome
+	var biome := map.look()
 	_build_floor(map, platforms[0], biome)
 	for i in range(1, platforms.size()):
 		if map.platforms[i - 1].look:

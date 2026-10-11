@@ -22,7 +22,7 @@ func _init(s: TDStage, r: Node3D) -> void:
 	root = r
 
 func build(map: MapDef, platforms: Array[Platform], rng: RandomNumberGenerator) -> void:
-	var biome := map.biome
+	var biome := map.look()
 	_lantern_xs = LanternPlacement.slots(map)
 	_lantern_clear = LanternPlacement.keep_clear(map)
 	var houses: Array[Sprite3D] = []

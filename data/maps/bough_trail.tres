@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=53 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=55 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="12_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tall_grass.png" id="13_tall_grass"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_large.png" id="15_tree_large"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 
 [sub_resource type="Resource" id="Resource_35"]
 script = ExtResource("12_prop_placement")
@@ -265,11 +266,17 @@ top = 170.0
 bottom = 500.0
 style = ExtResource("5_rope")
 
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+light_color = Color(1, 0.9412, 0.7529, 1)
+grade_tint = Color(1, 0.98, 0.9, 1)
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"bough_trail"
 display_name = "Bough Trail"
 biome = ExtResource("2_greenwood")
+variant = SubResource("Variant")
 width = 2800
 height = 700
 ground_y = 620

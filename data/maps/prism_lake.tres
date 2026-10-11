@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=51 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=53 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/lumewood.tres" id="2_lumewood"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/stump.png" id="12_stump"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_small.png" id="13_tree_small"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/bush_large.png" id="15_bush_large"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 [sub_resource type="Resource" id="Resource_33"]
 script = ExtResource("11_prop_placement")
 texture = ExtResource("15_bush_large")
@@ -253,11 +254,19 @@ top = 170.0
 bottom = 490.0
 style = ExtResource("5_rope")
 
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+sky_low = Color(0.7529, 0.4392, 0.8157, 1)
+sky_horizon = Color(1, 0.7529, 0.8784, 1)
+grade_tint = Color(1, 0.95, 1, 1)
+grade_saturation = 1.15
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"prism_lake"
 display_name = "Prism Lake"
 biome = ExtResource("2_lumewood")
+variant = SubResource("Variant")
 width = 3000
 height = 700
 ground_y = 620

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=59 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=61 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/lumewood.tres" id="2_lumewood"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_large.png" id="14_tree_large"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/flowers_yellow.png" id="16_flowers_yellow"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/rock_large.png" id="18_rock_large"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 
 [sub_resource type="Resource" id="Resource_41"]
 script = ExtResource("12_prop_placement")
@@ -297,11 +298,20 @@ top = 370.0
 bottom = 700.0
 style = ExtResource("5_rope")
 
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+light_energy = 1.1
+ambient_color = Color(0.3529, 0.2275, 0.6275, 1)
+ambient_energy = 0.6
+fog_color = Color(0.1647, 0.1176, 0.3529, 1)
+backdrop_tint = Color(0.6039, 0.5647, 0.7529, 1)
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"crystal_caves"
 display_name = "Crystal Caves"
 biome = ExtResource("2_lumewood")
+variant = SubResource("Variant")
 width = 2600
 height = 900
 ground_y = 820

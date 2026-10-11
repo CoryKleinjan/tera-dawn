@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=46 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=48 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/forge.tres" id="2_forge"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/crystals.png" id="15_crystals"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/steam_vent.png" id="16_steam_vent"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/tree_small.png" id="17_tree_small"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 [sub_resource type="Resource" id="Resource_26"]
 script = ExtResource("12_prop_placement")
 texture = ExtResource("17_tree_small")
@@ -214,11 +215,21 @@ top = 170.0
 bottom = 500.0
 style = ExtResource("5_rope")
 
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+grade_saturation = 0.75
+fog_color = Color(0.5412, 0.5176, 0.502, 1)
+sky_mid = Color(0.2902, 0.251, 0.251, 1)
+sky_low = Color(0.6275, 0.502, 0.4392, 1)
+mote_color = Color(1.6, 1.6, 1.6, 1)
+backdrop_tint = Color(0.7529, 0.7373, 0.7216, 1)
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"ashen_wastes"
 display_name = "Ashen Wastes"
 biome = ExtResource("2_forge")
+variant = SubResource("Variant")
 width = 2800
 height = 700
 ground_y = 620

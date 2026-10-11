@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=41 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=43 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/coast.tres" id="2_coast"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_large.png" id="14_tree_large"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/bush_large.png" id="15_bush_large"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_small.png" id="16_tree_small"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 [sub_resource type="Resource" id="Resource_23"]
 script = ExtResource("12_prop_placement")
 texture = ExtResource("16_tree_small")
@@ -184,11 +185,21 @@ top = 170.0
 bottom = 380.0
 style = ExtResource("6_rope")
 
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+light_energy = 1.2
+ambient_color = Color(0.1647, 0.2902, 0.4157, 1)
+ambient_energy = 0.55
+fog_color = Color(0.1647, 0.2824, 0.3451, 1)
+backdrop_tint = Color(0.5333, 0.5961, 0.6588, 1)
+hide_layers = PackedInt32Array(3)
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"titan_grotto"
 display_name = "Titan Grotto"
 biome = ExtResource("2_coast")
+variant = SubResource("Variant")
 width = 2000
 height = 700
 ground_y = 620

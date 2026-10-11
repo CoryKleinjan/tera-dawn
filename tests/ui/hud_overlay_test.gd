@@ -282,7 +282,7 @@ func test_name_tags_fit_their_names_between_the_end_caps() -> void:
 		var text_w := DrawUtil.text_width(Game.ui_font, label, 11)
 		check(r.size.x >= text_w + 2.0 * cap, "%s: tag %s wide holds text %s plus two caps of %s" % [label, r.size.x, text_w, cap])
 		check_near(r.get_center().x, 100.0, "%s: centred" % label)
-	var hint := "↑ to Ember Hollow"
+	var hint := "↑ to Fern Hollow"
 	check(UiSkin.hint_width(hint) >= DrawUtil.text_width(Game.ui_font, hint, 13) + 2.0 * UiSkin.PLAQUE_MARGINS.x * UiSkin.HINT_H / tex_h, "hints fit too")
 
 func test_no_text_floats_in_the_3d_stage() -> void:
