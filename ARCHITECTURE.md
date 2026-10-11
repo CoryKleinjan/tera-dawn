@@ -31,10 +31,10 @@ data/*.tres  ──►  Content (autoload)  ──►  World loads a MapDef  ─
 - **World** (`scripts/world/`) shows the map you're on: `world.gd` builds it and shows the
   server's events (camera in `WorldCamera`, snapshots through `SnapshotSync`), `stage.gd` and its builders turn a map into the HD-2D diorama.
 - **UI** (`scripts/ui/`) draws the HUD (`TDHud`) and the title screen (`TDTitleScreen`, the
-  login flow) from the sliced UI sheet through `UiSkin` (art), `UiStyle` (styled controls) and
+  login flow) from the sliced UI sheets through `UiSkin` (art), `UiStyle` (styled controls) and
   `WorldSkin` (bars, tags and bubbles over the world).
-- **Art** comes from Cory's sheets in `art/source/`, cut by `tools/art/slice_sheets.py`
-  (see `art/sheets/README.md`).
+- **Art** is painted sheets in `art/source/`, cut by `tools/art/slice_sheets.py`
+  (see [art](docs/architecture/art.md) and `art/sheets/README.md`).
 
 Game logic is 2D: positions are game pixels with y pointing down, and physics ticks 60 times a
 second. Only the stage turns that into 3D (32 game pixels per 3D unit).

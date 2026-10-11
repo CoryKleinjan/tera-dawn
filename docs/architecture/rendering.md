@@ -32,9 +32,7 @@ just its painted front skin at `LAND_FRONT`, and the floor is the same kind of p
 biome's platform middles repeated along its walking line (`TerrainBuilder.floor_edge`), with
 its rock and soil textures filling below. Things standing on land go through
 `TDStage.stand_on_land()`: at their `land_depth`, scaled to show as big as at their data depth,
-and sunk (`land_sink`) so their base tucks behind the grass edge at any camera height. The
-backdrop strip whose bottom shows lowest gets a skirt fading on down behind the floor
-(`BackdropBuilder._skirt`), since no ground top covers that edge any more. The skin is one picture per platform width
+and sunk (`land_sink`) so their base tucks behind the grass edge at any camera height. The skin is one picture per platform width
 (`PlatformSkin`): the biome's left cap, middles and right cap, overlapped and joined where they
 match best, so a long platform never reads as small ones pasted together.
 
