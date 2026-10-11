@@ -331,9 +331,16 @@ func _run() -> void:
 	if only == "" or only == "worldmap":
 		world.hud.toggle_window("worldmap")
 		var wm: TDWorldMapWindow = world.hud.windows["worldmap"]
-		wm._hovered(wm.to_screen(Content.map(&"hollow").world_pos))
+		wm.open_zone(&"")
+		wm._hovered(wm.to_screen(TDWorldMapWindow.capital_pos(Content.regions[&"greenbough"])))
 		await _frames(3)
 		await _shot("worldmap")
+		# every zone up close
+		for r: RegionDef in Content.regions.values():
+			wm.open_zone(r.id)
+			await _frames(3)
+			await _shot("worldmap_zone_" + r.id)
+		wm.open_zone(&"")
 		world.hud.toggle_window("worldmap")
 	if only == "" or only == "towns":
 		# Every hub town, standing between its store and its hall, and on its raised street.
