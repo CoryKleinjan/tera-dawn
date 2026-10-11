@@ -4803,13 +4803,13 @@
     8
    ],
    "anchor": "paperdoll_body",
-   "note": "2026-10-11 equipment-look thread (plans/equipment-look.md, Cory: \"fix it\"): edit of the game's body sheet. Lands in art/source/top_plate_frames.png.",
+   "note": "2026-10-11 equipment-look thread (plans/equipment-look.md, Cory: \"fix it\"): edit of the game's body sheet. Lands in art/source/top_plate_frames.png. Round 2: round 1 also armoured the legs and came back on a grey background.",
    "fill": {
     "top": "2. TUNIC"
    },
    "edit": {
     "base": "art/source/paperdoll_body.png",
-    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in PLATE ARMOUR: a rounded metal breastplate over a short padded undershirt, with small rounded shoulder plates (pauldrons) and a leather belt; short padded sleeves, bare forearms. It follows his body in every pose and is the same size as his body (never bigger, never a separate figure). Draw it in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline, in a soft PAINTED style with smooth shading like a hand-painted storybook illustration, not pixel art. The body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. The background stays bright pure magenta #FF00FF everywhere. Draw ONLY that: nothing else changes."
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in PLATE ARMOUR ON HIS UPPER BODY ONLY: a rounded metal breastplate over a short padded undershirt, with small rounded shoulder plates (pauldrons) and a leather belt at the waist; short padded sleeves, bare forearms. Below the belt NOTHING changes: his plain shorts and bare legs stay exactly as they are (no leg armour, no knee plates, no boots). It follows his body in every pose and is the same size as his body (never bigger, never a separate figure). Draw it in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline, in a soft PAINTED style with smooth shading like a hand-painted storybook illustration, not pixel art. The body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. The background stays bright pure magenta #FF00FF everywhere. Draw ONLY that: nothing else changes."
    }
   },
   {
@@ -4927,13 +4927,13 @@
     8
    ],
    "anchor": "paperdoll_body",
-   "note": "2026-10-11 equipment-look thread (plans/equipment-look.md, Cory: \"fix it\"): edit of the game's body sheet. Lands in art/source/top_smock_frames.png.",
+   "note": "2026-10-11 equipment-look thread (plans/equipment-look.md, Cory: \"fix it\"): edit of the game's body sheet. Lands in art/source/top_smock_frames.png. Round 2: round 1 painted a giant shirt behind every cell (cell 1 was fine).",
    "fill": {
     "top": "3. SMOCK"
    },
    "edit": {
     "base": "art/source/paperdoll_body.png",
-    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in a SMOCK: a loose smock to the hips with three-quarter sleeves, gathered at the neck with a drawstring. Fitted to HIS torso and arms: never a giant shirt behind him. It follows his body in every pose and is the same size as his body (never bigger, never a separate figure). Draw it in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline, in a soft PAINTED style with smooth shading like a hand-painted storybook illustration, not pixel art. The body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. The background stays bright pure magenta #FF00FF everywhere. Draw ONLY that: nothing else changes."
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 small figures, put a LOOSE SHIRT on his torso: a loose shirt to the hips with three-quarter sleeves and a drawstring at the neck, drawn ON his body at his body's size, like the clothes on a paper doll. Do NOT paint a big shirt behind the figures or across the cells: every cell's background stays plain bright magenta #FF00FF. Draw the shirt in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline, in a soft PAINTED style with smooth shading, not pixel art. The body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. Draw ONLY the shirt: nothing else changes."
    }
   },
   {
