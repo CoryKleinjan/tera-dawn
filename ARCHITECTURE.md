@@ -302,7 +302,7 @@ manifest's `grow`, a decor or prop `scale`); `tools/art/land_pixels.py --check` 
 keep it there. Edge grass on the floor and platforms stands just behind the skin and peeks
 over its top edge.
 
-Text that belongs to a spot in the world (name tags, the map's sign, hints, damage numbers)
+Text that belongs to a spot in the world (name tags, hints, damage numbers)
 is never put in the 3D stage: `TDOverlay` projects the spot to the screen and draws it there,
 so depth of field never blurs it and nothing in the world covers it.
 
@@ -406,7 +406,7 @@ in a building and every room has one door back to the town that leads into it.
 
 ### Town layout
 
-A town is one street on the floor, laid out left to right: the west exit, the sign and the
+A town is one street on the floor, laid out left to right: the west exit and the
 taxi, then the buildings with about 160 px of open ground between them (an NPC can stand in
 a gap, an exit gets a wider gap of its own), then the east exit. The map is only as wide as
 that row needs. Towns have **no monsters**: hunting happens in the fields next door (the
@@ -627,13 +627,14 @@ is top, bottom or shoes). The tool lifts the piece off each pose into
 came back unusable goes in `WORN_BROKEN` in the tool (now: shorts, smock), and its items wear
 the nearest cut (Berry Smock a tunic, Rolled Shorts breeches).
 
-Sheets can also be generated straight from a prompt file with Google's Gemini image model:
-`python3 tools/art/gemini_sheet.py tera-dawn-chatgpt-art-prompts-8.md W1` sends Message 0, the
-batch and the references its "Attach" lines name, and saves one PNG to the project's
-`art-sheets/` folder as `<save name>_gemini.png`. Add `--with U` (or P, W, M, N) for a layout
-message, `--ref` for extra references and `--dry-run` to see what would be sent. Each run is one
-paid request (about $0.10) and never retries. It needs `GEMINI_API_KEY` in the environment and
-`generativelanguage.googleapis.com` allowed by the network policy. Check the result like any
+Art is generated with Google's Gemini image model through its batch API (half price):
+add the sheet to `tools/art/gemini_pass.json` (usually an `edit` entry: one existing sheet plus a
+short instruction that keeps its layout, on a pure #FF00FF background) and run
+`python3 tools/art/gemini_pass.py --dry-run` to see the cost, then `--wait` to make it. Results
+land in the project's `art-sheets/gemini-pass-1/`. Every run is paid: ask Cory before redoing a
+sheet, unless it came back broken. It needs `GEMINI_API_KEY` in the environment and
+`generativelanguage.googleapis.com` allowed by the network policy. `tools/art/gemini_sheet.py`
+(one direct, full-price request) is only for quick one-off tests. Check every result like any
 upload before it goes in `art/source/`.
 
 ## Conventions

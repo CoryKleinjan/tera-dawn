@@ -45,7 +45,7 @@ cross-faded again so they repeat sideways (their `grid` width is the repeat).
 | `art_px` | | Land art (tiles, platform pieces, ground textures): sheet pixels per art pixel, measured on the sheet. Sets `scale` to `density / art_px x grow`, so every piece of land shows at one on-screen pixel size (`TDStage.TEXEL` game px per art pixel; `TDStage.art_density`). |
 | `density` | `2` | With `art_px`: texels cut per art pixel. The game reads 2 for everything under `tiles/`, `platforms/` and `ground/`. |
 | `grow` | `1.0` | With `art_px`: how much bigger or smaller a piece is drawn than its sheet's pixel size, 0.8 to 1.25 (a piece Gemini drew too small or too big next to its neighbours). `tools/art/land_pixels.py --check` checks grow x every decor and prop scale stays within 0.75 to 1.3. |
-| `alpha` | `"hard"` | `"hard"` for pixel sprites, `"soft"` for glows, effects and backgrounds. |
+| `alpha` | `"hard"` | `"hard"` for solid sprites, `"soft"` for glows, effects and backgrounds. |
 | `key` | `[0.35, 0.8]` | Magenta sheets: how magenta a pixel must be to start and finish fading out. Raise it if purple art is being eaten. |
 | `defringe` | `true` | Magenta sheets: after the key, take the magenta out of the dark outline pixels at the cut edge (Gemini blends its outline into the background, which would show as a thin magenta line). Set `false` for a cell whose purple art it wrongly trims. |
 | `label_band` | `0.16` | Top part of each cell (fraction of its height) where the label may be. |
