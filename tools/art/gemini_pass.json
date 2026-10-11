@@ -10778,6 +10778,52 @@
     "new_view": true,
     "base_margin": 0.08
    }
+  },
+  {
+   "id": "front2_building_dawnharbor_small",
+   "prompts": null,
+   "batch": "front-view building redo: dawnharbor_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_dawnharbor_small_front2.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 15:43Z 'the fish stand still looks wrong'): counter was seen from above, fish too big, awning sat on a plank.",
+   "edit": {
+    "base": "art/source/building_dawnharbor_small.png",
+    "text": "Redraw this fish market stall from my 2D side-scrolling game as a pure front elevation, like a flat theatre backdrop: the camera looks straight at the front at eye level. Strict rules: 1) Nothing is seen from above. No counter top, no table surface, no looking down into pots, crates or trays. Every object shows only its front side. 2) No perspective: every horizontal line level, every post vertical, left-right balanced. 3) The stall: two straight wooden corner posts holding a blue and white striped awning across the top, the awning seen straight-on as a flat striped band with a scalloped lower edge; a small wooden sign board on top of the awning. Under the awning, a wooden rail with five or six small fish hanging by their tails, each fish small, about one twelfth of the stall's width. Behind the counter, a plain dark wooden back wall. 4) The counter: a solid wooden front panel about one third of the stall's height, running from post to post and reaching all the way down to the ground. On the counter's front edge stand three small wooden crates seen only from the front, with just the heads and tails of a few small fish peeking over the top rim. 5) The bottom of the stall is one straight, solid horizontal line from post to post. Nothing below it or in front of it: no legs, steps, barrels, ground patch or shadow. 6) The whole stall fits inside the picture with a clear band of magenta on every side. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true,
+    "base_margin": 0.08
+   }
+  },
+  {
+   "id": "front2_building_greenbough_large",
+   "prompts": null,
+   "batch": "front-view building redo: greenbough_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_greenbough_large_front2.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 15:44Z yes): crown came back cut off at the top and right edges.",
+   "edit": {
+    "base": "art/source/building_greenbough_large.png",
+    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a treehouse in a giant oak: the thick trunk standing straight up from the ground, its base cut flat where it meets the ground (no roots spreading out), the leafy crown, the wooden hut up in the branches, the ladder up the trunk and the small arched window in the trunk. The leafy crown is a complete rounded shape with its own painted outline on every side, finished and not cut off at the top or right; the whole crown fits well inside the picture, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true,
+    "base_margin": 0.15
+   }
   }
  ]
 }
