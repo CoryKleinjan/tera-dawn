@@ -638,6 +638,8 @@ def cut_cell(rgb_full, bg, box, opts):
         ys, xs = np.nonzero(m)
         if m.sum() < opts["min_area"]:
             continue
+        if min(np.ptp(ys), np.ptp(xs)) <= 2 and max(np.ptp(ys), np.ptp(xs)) >= 12:  # a stray bit of cell divider
+            continue
         if ys.max() < band and (xs.min() < left or ys.max() - ys.min() < band * 0.6):  # the label text
             continue
         if opts.get("strip_labels") and ys.max() < band * 1.5 and m.sum() < m.size * 0.01 \
