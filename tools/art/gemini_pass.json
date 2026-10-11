@@ -9994,6 +9994,211 @@
     ],
     "text": "The first image is 4 labelled close-up panels of my chibi boy hero (bald, peach skin, grey shorts) in different poses.\nThe second and third images are an EXAMPLE of the change I want: the second is 4 panels BEFORE, the third the same panels AFTER. Look at how his hands changed: the fists with drawn fingers and knuckles became small, simple, rounded hands with NO fingers drawn, like a chibi MapleStory character: one smooth rounded shape per hand, the SAME size as the old fist, bare peach skin.\nMake exactly that change to BOTH hands in EVERY panel of the first image:\n- Each hand is one small smooth rounded shape with no finger lines, no knuckle lines and no separate thumb.\n- It is bare skin: the same peach skin colours as his arm, with the same dark plum-brown outline. NOT a boxing glove, NOT a mitten glove: no cuff, no wrist band, no seam, no pink or white colour, and never bigger than the old fist.\n- Each hand stays at the same place and joined to the same wrist and arm.\nChange NOTHING else: the head, ears, arms, body, shorts, legs, feet, labels, panel borders and positions stay exactly as they are, and the background stays flat pure magenta #FF00FF (RGB 255, 0, 255) everywhere, never white or grey."
    }
+  },
+  {
+   "id": "run2_top_coat_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "run2_top_coat_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 sword-grip thread: the four RUN cells redrawn again on the swinging-arm run poses and mitten hands. Base is art/source/top_coat_frames.png with cells 9-12 swapped for the new bare body (tools/art/body_panels.py worn-base). Put back with body_panels.py worn-cells.",
+   "fill": {
+    "item": "TROUSERS"
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/run-redo-2/top_coat_base.png",
+    "text": "This sheet shows my character in 32 labelled poses (8 columns x 4 rows) on magenta. In 28 of the cells he wears a greyscale painted top. In cells 9, 10, 11 and 12 (RUN 1 to RUN 4) he is bare. Dress those four running figures in EXACTLY the same top as the other 28 cells: same shape, length, details, greyscale tones, outline and soft painted style, following his running pose and the same size as his body. Do not move, resize or re-pose any figure. Leave the other 28 cells, every label and every grid line exactly as they are. The background stays bright pure magenta #FF00FF everywhere. Draw only that: nothing else changes."
+   }
+  },
+  {
+   "id": "run2_top_plate_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "run2_top_plate_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 sword-grip thread: the four RUN cells redrawn again on the swinging-arm run poses and mitten hands. Base is art/source/top_plate_frames.png with cells 9-12 swapped for the new bare body (tools/art/body_panels.py worn-base). Put back with body_panels.py worn-cells.",
+   "fill": {
+    "item": "TROUSERS"
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/run-redo-2/top_plate_base.png",
+    "text": "This sheet shows my character in 32 labelled poses (8 columns x 4 rows) on magenta. In 28 of the cells he wears a greyscale painted top. In cells 9, 10, 11 and 12 (RUN 1 to RUN 4) he is bare. Dress those four running figures in EXACTLY the same top as the other 28 cells: same shape, length, details, greyscale tones, outline and soft painted style, following his running pose and the same size as his body. Do not move, resize or re-pose any figure. Leave the other 28 cells, every label and every grid line exactly as they are. The background stays bright pure magenta #FF00FF everywhere. Draw only that: nothing else changes."
+   }
+  },
+  {
+   "id": "run2_top_robe_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "run2_top_robe_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 sword-grip thread: the four RUN cells redrawn again on the swinging-arm run poses and mitten hands. Base is art/source/top_robe_frames.png with cells 9-12 swapped for the new bare body (tools/art/body_panels.py worn-base). Put back with body_panels.py worn-cells.",
+   "fill": {
+    "item": "TROUSERS"
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/run-redo-2/top_robe_base.png",
+    "text": "This sheet shows my character in 32 labelled poses (8 columns x 4 rows) on magenta. In 28 of the cells he wears a greyscale painted top. In cells 9, 10, 11 and 12 (RUN 1 to RUN 4) he is bare. Dress those four running figures in EXACTLY the same LONG ROBE as the other 28 cells: a wrapped robe with a sash that reaches down past his knees to his ankles (see cell 13 ATTACK 1), never a short jacket. It must be: same shape, length, details, greyscale tones, outline and soft painted style, following his running pose and the same size as his body. Do not move, resize or re-pose any figure. Leave the other 28 cells, every label and every grid line exactly as they are. The background stays bright pure magenta #FF00FF everywhere. Draw only that: nothing else changes."
+   }
+  },
+  {
+   "id": "run2_top_tunic_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "run2_top_tunic_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 sword-grip thread: the four RUN cells redrawn again on the swinging-arm run poses and mitten hands. Base is art/source/top_tunic_frames.png with cells 9-12 swapped for the new bare body (tools/art/body_panels.py worn-base). Put back with body_panels.py worn-cells.",
+   "fill": {
+    "item": "TROUSERS"
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/run-redo-2/top_tunic_base.png",
+    "text": "This sheet shows my character in 32 labelled poses (8 columns x 4 rows) on magenta. In 28 of the cells he wears a greyscale painted top. In cells 9, 10, 11 and 12 (RUN 1 to RUN 4) he is bare. Dress those four running figures in EXACTLY the same top as the other 28 cells: same shape, length, details, greyscale tones, outline and soft painted style, following his running pose and the same size as his body. Do not move, resize or re-pose any figure. Leave the other 28 cells, every label and every grid line exactly as they are. The background stays bright pure magenta #FF00FF everywhere. Draw only that: nothing else changes."
+   }
+  },
+  {
+   "id": "run2_top_undershirt_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "run2_top_undershirt_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 sword-grip thread: the four RUN cells redrawn again on the swinging-arm run poses and mitten hands. Base is art/source/top_undershirt_frames.png with cells 9-12 swapped for the new bare body (tools/art/body_panels.py worn-base). Put back with body_panels.py worn-cells.",
+   "fill": {
+    "item": "TROUSERS"
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/run-redo-2/top_undershirt_base.png",
+    "text": "This sheet shows my character in 32 labelled poses (8 columns x 4 rows) on magenta. In 28 of the cells he wears a greyscale painted top. In cells 9, 10, 11 and 12 (RUN 1 to RUN 4) he is bare. Dress those four running figures in EXACTLY the same top as the other 28 cells: same shape, length, details, greyscale tones, outline and soft painted style, following his running pose and the same size as his body. Do not move, resize or re-pose any figure. Leave the other 28 cells, every label and every grid line exactly as they are. The background stays bright pure magenta #FF00FF everywhere. Draw only that: nothing else changes."
+   }
+  },
+  {
+   "id": "run2_top_vest_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "run2_top_vest_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 sword-grip thread: the four RUN cells redrawn again on the swinging-arm run poses and mitten hands. Base is art/source/top_vest_frames.png with cells 9-12 swapped for the new bare body (tools/art/body_panels.py worn-base). Put back with body_panels.py worn-cells.",
+   "fill": {
+    "item": "TROUSERS"
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/run-redo-2/top_vest_base.png",
+    "text": "This sheet shows my character in 32 labelled poses (8 columns x 4 rows) on magenta. In 28 of the cells he wears a greyscale painted top. In cells 9, 10, 11 and 12 (RUN 1 to RUN 4) he is bare. Dress those four running figures in EXACTLY the same top as the other 28 cells: same shape, length, details, greyscale tones, outline and soft painted style, following his running pose and the same size as his body. Do not move, resize or re-pose any figure. Leave the other 28 cells, every label and every grid line exactly as they are. The background stays bright pure magenta #FF00FF everywhere. Draw only that: nothing else changes."
+   }
+  },
+  {
+   "id": "run2_cape_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "run2_cape_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 sword-grip thread: the four RUN cells redrawn again on the swinging-arm run poses and mitten hands. Base is art/source/cape_frames.png with cells 9-12 swapped for the new bare body (tools/art/body_panels.py worn-base). Put back with body_panels.py worn-cells.",
+   "fill": {
+    "item": "TROUSERS"
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/run-redo-2/cape_base.png",
+    "text": "This sheet shows my character in 32 labelled poses (8 columns x 4 rows) on magenta. In 28 of the cells he wears a greyscale painted cape. In cells 9, 10, 11 and 12 (RUN 1 to RUN 4) he is bare. Dress those four running figures in EXACTLY the same cape as the other 28 cells: same shape, length, details, greyscale tones, outline and soft painted style, following his running pose and the same size as his body. Do not move, resize or re-pose any figure. Leave the other 28 cells, every label and every grid line exactly as they are. The background stays bright pure magenta #FF00FF everywhere. Draw only that: nothing else changes."
+   }
+  },
+  {
+   "id": "paperdoll_gloves_mitten",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L6 redo",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "paperdoll_gloves_mitten.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 sword-grip thread: gloves redone on the body with mitten hands (no fingers, MapleStory style) and the swinging run arms. Base is a frozen copy of that body sheet.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/_bases/body_mitten.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in GLOVES on both hands: wrapped cloth gloves with a stitched cuff. His hands are simple rounded mitten shapes with no fingers drawn, and the gloves keep that: each glove is one rounded wrapped shape over the hand, with no fingers. It follows his body in every pose. Draw the gloves in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline; the body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. Draw ONLY the gloves: nothing else changes. Every hand in every pose gets a glove, including the hands swung back in RUN 1 and RUN 2."
+   }
   }
  ]
 }
