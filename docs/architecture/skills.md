@@ -19,7 +19,7 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
    Effects the game fires on its own rather than through a skill or item (celebrate, monster
    poof, level up, critical) are named as constants on `EffectDef`; code uses those, never
    the id as a string.
-3. Give it an icon (until there's art, add it to `tools/art/make_skill_placeholders.py`).
+3. Give it an icon: a painted cell on a skill icon sheet (a Gemini edit in `tools/art/gemini_pass.json`).
 
 It then appears in its job's tab of the skill window (K). Players spend Skill Points on it
 (`SkillBook.learn`, checked by `ServerJobs.on_learn_skill`), and a newly learned attack or

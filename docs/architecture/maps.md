@@ -93,8 +93,8 @@ door you walk through by pressing Up, into a small room that is its own map.
 
 A room's biome (`data/biomes/rooms/<town>_room.tres`) has a `wall` strip as its only backdrop
 layer, a plank floor, warm low light and a `door`. Its painted pieces are cut from the
-`room_<town>` sheets over stand-in art from `tools/art/make_room_placeholders.py`, on the same
-file names, at the shared pixel size. `tests/content/content_world_test.gd` checks every door is
+`room_<town>` sheets and the shared `room_props` sheet (crate, plant and soil), at the shared
+pixel size. `tests/content/content_world_test.gd` checks every door is
 in a building and every room has one door back to the town that leads into it.
 
 ### Town layout
