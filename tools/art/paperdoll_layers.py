@@ -110,7 +110,8 @@ HAT_SPECK = 0.05  # hat_alone: pieces under this share of the hat are cell-frame
 HAT_SHAPES = ("cap", "hood", "bandana", "helm", "wizard", "tricorn")
 # Chibi faces: each eye (with its brow) is drawn this much bigger about its own centre. The eyes
 # are everything above EYE_LINE (a fraction of the normal face's height), left or right of its middle.
-EYE_SCALE = 1.3
+# 1.0 since the painted faces (2026-10-11), drawn at the size Cory wants: smaller, older eyes.
+EYE_SCALE = 1.0
 EYE_LINE = 0.6
 NECK = 0.95           # the neck is this far below the head's centre
 SHIELD_HEIGHT = 1.25
