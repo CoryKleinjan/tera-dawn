@@ -1,7 +1,8 @@
 class_name TerrainBuilder
 extends RefCounted
 ## Builds the land of a map, all flat like a 2D game: the painted front of the floor, the
-## painted front skin of every floating platform, and grass peeking over their top edges.
+## painted front skin of every floating platform, and grass peeking over their top edges
+## (outside towns: town streets have no grass).
 
 
 var stage: TDStage
@@ -138,8 +139,9 @@ func _platform_look(pl: Platform, d: PlatformDef) -> void:
 
 # ---------- grass along the edges ----------
 
+## Towns have no grass: their streets keep only the land's own painted edge.
 func _edge_grass(map: MapDef, platforms: Array[Platform], biome: BiomeDef) -> void:
-	if biome.edge_grass.is_empty():
+	if map.town or biome.edge_grass.is_empty():
 		return
 	var rng := RandomNumberGenerator.new()
 	rng.seed = hash(map.id) + 7
