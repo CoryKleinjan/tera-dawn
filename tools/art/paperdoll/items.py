@@ -6,8 +6,7 @@ colours, lifted off the body and fitted onto the hero's frames as worn_item_<id>
                                     the hero wearing that one top, bottom, pair of shoes or
                                     cape (Gemini edits, tools/art/gemini_pass.json)
 
-Gloves are painted on his own mitten hands from their icon instead (gloves.painted_hands),
-so they always fit his hands.
+Gloves are pieces instead: one painted mitten per glove on each hand (gloves.glove_pieces).
     art/source/worn/<id>_only.png   for a piece in colours close to his skin: the same sheet
                                     with the body erased, which says where the piece is
     art/sheets/shield_backs.json    the back of each shield (cells named by item id); its
@@ -18,7 +17,6 @@ cuts (worn.py) these keep their colours: the game draws them untinted (Paperdoll
 from .common import *  # noqa: F401,F403
 from .common import _paste
 from .body import BODY_PIECES, body_fit, drawn_head, shorts_mask
-from .gloves import glove_patch, painted_hands
 from .weapons import icon_cut
 from .pieces import pose, save_piece
 
@@ -52,7 +50,8 @@ def item_sheet(item):
     man.pop("sets", None)
     man.update(source=os.path.relpath(os.path.join(WORN_DIR, item + ".png"), ROOT), save=False,
                out_dir=os.path.join("art", "build", "worn", item))
-    # (a sheet's _only twin, the same sheet with the body erased, is cut the same way)
+    if item.endswith("_only"):  # its _only twin (the body erased): every piece, both shoes
+        man["keep"] = "all"
     tmp = os.path.join(ROOT, "art", "build", "worn", item + ".json")
     os.makedirs(os.path.dirname(tmp), exist_ok=True)
     with open(tmp, "w") as fh:
@@ -146,25 +145,6 @@ def posed_item(piece, cell, px, place, twin=None):
     return scaled(Image.fromarray(cut, "RGBA"), s), (int(round(x)), int(round(y)))
 
 
-def glove_patches(items):
-    """item id -> the patch of its icon (gloves.glove_patch) its gloves are painted with."""
-    icons = {}
-    for f in sorted(os.listdir(ss.SHEETS)):
-        if f.startswith(ICON_SHEETS) and f.endswith(".json"):
-            icons.update(icon_cut(f[:-5], set(items)))
-    return {item: glove_patch(icon.img) for item, icon in icons.items()}
-
-
-def hand_points(hero, n, entry):
-    """Where his hands are in frame `n`: the rig's weapon fist and shield point, or the hand
-    rig's own hand points where those aren't his hands (paperdoll_rig.json "hands")."""
-    if "hands" in hero.hands.get(n, {}):
-        return hero.hands[n]["hands"]
-    if n in BACK_VIEW:
-        return []
-    return [entry[k] for k in ("grip", "shield") if k in entry]
-
-
 def item_layers(hero, rig_frames):
     """Writes worn_item_<id> for every item sheet in art/source/worn/ (a cape also gets
     worn_item_<id>_behind: the part hanging behind him)."""
@@ -173,13 +153,14 @@ def item_layers(hero, rig_frames):
     names, frames, index, anims = hero.names, hero.frames, hero.index, hero.anims
     fw, fh, r, blank, body_cells, spec = hero.fw, hero.fh, hero.r, hero.blank, hero.body_cells, hero.spec
     places = item_places()
-    patches = glove_patches([i for i, p in places.items() if p == "gloves"])
     for f in sorted(os.listdir(WORN_DIR)):
         item = f[:-4]
         if not f.endswith(".png") or item not in places:
             continue
         place = places[item]
-        drawn = {} if place == "gloves" else item_sheet(item)
+        if place == "gloves":
+            continue  # (pieces: gloves.glove_pieces)
+        drawn = item_sheet(item)
         # light pieces (cream, gold, tan) pass for his skin, so they come with a twin sheet
         # of the piece alone (art/source/worn/<id>_only.png) that says where they are
         twins = item_sheet(item + "_only") if os.path.exists(os.path.join(WORN_DIR, item + "_only.png")) else {}
@@ -187,10 +168,7 @@ def item_layers(hero, rig_frames):
         for n, px, entry in zip(names, frames, rig_frames):
             over, back = blank(), blank()
             cell = body_cells[n]
-            if place == "gloves":
-                if item in patches:
-                    over = Image.fromarray(painted_hands(px, hand_points(hero, n, entry), patches[item], r))
-            elif cell in drawn:
+            if cell in drawn:
                 worn = posed_item(drawn[cell], cell, px, place, twins.get(cell) if twins else None)
                 if worn:
                     _paste(over, worn[0], *worn[1])

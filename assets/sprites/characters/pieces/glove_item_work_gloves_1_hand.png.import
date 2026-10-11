@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ch0b5pgn8arkh"
-path="res://.godot/imported/worn_item_canvas_gloves.png-bae2423817b8012123982c3bc62edf51.ctex"
+uid="uid://cnc3ybaqsca2o"
+path="res://.godot/imported/glove_item_work_gloves_1_hand.png-db40433d634be73e9ae0b8cfe7e34f1b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/layers/worn_item_canvas_gloves.png"
-dest_files=["res://.godot/imported/worn_item_canvas_gloves.png-bae2423817b8012123982c3bc62edf51.ctex"]
+source_file="res://assets/sprites/characters/pieces/glove_item_work_gloves_1_hand.png"
+dest_files=["res://.godot/imported/glove_item_work_gloves_1_hand.png-db40433d634be73e9ae0b8cfe7e34f1b.ctex"]
 
 [params]
 

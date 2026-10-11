@@ -3,7 +3,7 @@ rig (and, with --preview, a preview sheet)."""
 from .common import *  # noqa: F401,F403
 from .body import body_offsets, read_hero
 from .faces import face_layers
-from .gloves import glove_layers
+from .gloves import glove_layers, glove_pieces
 from .hair import one_piece_layers, posed_layers
 from .hats import hat_layers
 from .items import item_layers, shield_layers as item_shield_layers
@@ -38,6 +38,7 @@ def main():
         clothes_layers(hero)
         item_layers(hero, rig_frames)  # each piece with its own art (art/source/worn/<item>.png)
     item_shield_layers(hero, rig_frames)
+    glove_pieces(hero, rig_frames)
     grips = weapon_layers(hero, weapons, held)
 
     # the region mask and the rig

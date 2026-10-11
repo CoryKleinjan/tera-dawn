@@ -92,13 +92,13 @@ WORN_OUTLINE = 90       # and outlines darker than this
 TWIN_SLACK = 1          # an item's _only twin is trusted this many pixels past its art (items.py)
 WORN_FRINGE = 110       # pale edge pixels at the figure's edge are background fringe
 GLOVE_REACH = 0.9     # a glove is put on a hand only if the drawn one is this near it (head radii)
-# an item's own gloves (items.py) are his own mitten hands painted with the icon's glove: each
-# hand is the skin within GLOVE_HAND (head radii) of its point, found within GLOVE_FIND of it,
-# painted with the middle GLOVE_PATCH share of the icon's glove, its edge shaded GLOVE_EDGE dark
+# an item's own gloves are mitten pieces (gloves.glove_pieces): each hand is the skin within
+# GLOVE_HAND (head radii) of its point, found within GLOVE_FIND of it; the mitten is GLOVE_SIZE
+# wide and covers GLOVE_OVER pixels of his body around that hand
 GLOVE_HAND = 0.38
 GLOVE_FIND = 0.7
-GLOVE_PATCH = 0.7
-GLOVE_EDGE = 0.35
+GLOVE_SIZE = 0.6
+GLOVE_OVER = 4
 SWORD_LENGTH = 1.9    # every weapon is drawn at the scale that makes the sword this long
 WEAPON_LENGTH = 20    # rig "tip" is this far from "grip" along the weapon (only its direction matters)
 FIST = 0.4            # the fist around a grip reaches this far from the grip point (head radii)

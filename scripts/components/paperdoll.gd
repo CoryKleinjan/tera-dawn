@@ -235,7 +235,11 @@ static func dress(look: Dictionary) -> Paperdoll:
 	# over him
 	for place in [&"bottom", &"shoes", &"top", &"gloves"]:
 		var e: EquipDef = gear.get(place)
-		if own.has(place):
+		var mittens: Array[Piece] = glove_pieces(e) if place == &"gloves" else ([] as Array[Piece])
+		if not mittens.is_empty():  # a mitten on each hand (Piece)
+			for p: Piece in mittens:
+				d._add_piece(p)
+		elif own.has(place):
 			d._add(own[place]["front"], false)
 			if PLACE_REGIONS.has(place):
 				d.hidden[PLACE_REGIONS[place]] = 1.0
@@ -302,6 +306,16 @@ static func own_art(e: EquipDef) -> Dictionary:
 static func hat_piece(e: EquipDef) -> Piece:
 	var shape := Piece.named("hat_" + String(e.look_shape)) if e.look_shape != &"" else null
 	return shape if shape else Piece.named("hat_" + String(DEFAULT_HAT))
+
+## Gloves' own mittens, one piece per hand (glove_item_<id>_1 and _2), or [] if they have none.
+static func glove_pieces(e: EquipDef) -> Array[Piece]:
+	var out: Array[Piece] = []
+	if e:
+		for h in [1, 2]:
+			var p := Piece.named("glove_item_%s_%d" % [e.id, h])
+			if p:
+				out.append(p)
+	return out
 
 ## The piece a weapon is held as: its own picture (weapon_item_<id>, from its icon, in its
 ## own colours) if it has one, else its kind's greyscale picture, tinted with its colour.

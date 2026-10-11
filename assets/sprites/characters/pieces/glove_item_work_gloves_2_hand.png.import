@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnqfjcyaj7h6h"
-path="res://.godot/imported/worn_item_brigand_gloves.png-6892c04251947e16393136b2e088c9f8.ctex"
+uid="uid://un458deivlk0"
+path="res://.godot/imported/glove_item_work_gloves_2_hand.png-7e1fbd893d6853b58c7b77fd10edfc0c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/layers/worn_item_brigand_gloves.png"
-dest_files=["res://.godot/imported/worn_item_brigand_gloves.png-6892c04251947e16393136b2e088c9f8.ctex"]
+source_file="res://assets/sprites/characters/pieces/glove_item_work_gloves_2_hand.png"
+dest_files=["res://.godot/imported/glove_item_work_gloves_2_hand.png-7e1fbd893d6853b58c7b77fd10edfc0c.ctex"]
 
 [params]
 

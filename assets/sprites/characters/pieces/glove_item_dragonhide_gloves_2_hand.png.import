@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cefurdcqqq83i"
-path="res://.godot/imported/worn_item_dragonhide_gloves.png-6562e9fa383a553111ee9f1dfb5aa423.ctex"
+uid="uid://cb3e7es28dabx"
+path="res://.godot/imported/glove_item_dragonhide_gloves_2_hand.png-aead9b045d3d5d137cfb81a0eca618c5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/layers/worn_item_dragonhide_gloves.png"
-dest_files=["res://.godot/imported/worn_item_dragonhide_gloves.png-6562e9fa383a553111ee9f1dfb5aa423.ctex"]
+source_file="res://assets/sprites/characters/pieces/glove_item_dragonhide_gloves_2_hand.png"
+dest_files=["res://.godot/imported/glove_item_dragonhide_gloves_2_hand.png-aead9b045d3d5d137cfb81a0eca618c5.ctex"]
 
 [params]
 

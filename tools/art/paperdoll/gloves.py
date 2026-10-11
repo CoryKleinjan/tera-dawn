@@ -1,55 +1,86 @@
 """Gloves: lifted off a sheet of the body wearing them in every pose and set on the hero's
-hands (the rig's grip and shield points), at the size the drawn body is to his; or, for an
-item's own gloves, his mitten hands painted with its icon (painted_hands)."""
+hands (the rig's grip and shield points), at the size the drawn body is to his (the tinted
+gloves of an item without art of its own); an item's own gloves are pieces (glove_pieces)."""
 from .common import *  # noqa: F401,F403
 from .common import _paste
 from .body import body_fit
 from .worn import worn_mask
+from .pieces import pose, save_fist, save_piece
 
 
-# ---------- gloves painted from an icon ----------
+# ---------- an item's own gloves: pieces ----------
 
-def glove_patch(icon):
-    """The middle of an icon's glove (the back of the hand, its colours and detail) as a square
-    picture, to paint his hands with."""
-    arr = np.asarray(icon)
-    ys, xs = np.nonzero(arr[..., 3] > 0)
-    cx, cy = (xs.min() + xs.max()) / 2, (ys.min() + ys.max()) / 2
-    h = min(np.ptp(xs), np.ptp(ys)) * GLOVE_PATCH / 2
-    return icon.crop((int(cx - h), int(cy - h), int(cx + h), int(cy + h)))
+GLOVE_SHEET = "glove_mittens"
 
 
-def painted_hands(px, hands, patch, r):
-    """His hands in one frame (`px`) painted with a glove's `patch` (glove_patch): each hand
-    point's mitten (the skin around it, as much as shows) covered, a pixel over its outline,
-    with the patch fitted to it and its edge shaded dark. Returns an RGBA array the frame's
-    size. Being his own hands, they fit every pose and hide where his body hides them
-    (Cory 2026-10-11: gloves are mittens in the glove's colours)."""
-    out = np.zeros(px.shape, np.uint8)
+def hand_points(hero, n, entry):
+    """Where his hands are in frame `n`: the rig's weapon fist and shield point, or the hand
+    rig's own hand points where those aren't his hands (paperdoll_rig.json "hands")."""
+    if "hands" in hero.hands.get(n, {}):
+        return hero.hands[n]["hands"]
+    if n in BACK_VIEW:
+        return []
+    return [entry[k] for k in ("grip", "shield") if k in entry]
+
+
+def hand_at(px, point, r):
+    """His mitten hand nearest `point` in a frame: (its pixels, its middle, the way his forearm
+    points into it in degrees clockwise from pointing right, or None). The hand is the skin
+    found within GLOVE_FIND of the point and within GLOVE_HAND of it; the forearm is the skin
+    joined to it further out."""
     a = px.astype(int)
     solid = a[..., 3] > 127
     skin = solid & (a[..., 0] > 170) & (a[..., 0] > a[..., 2] + 30)
     yy, xx = np.mgrid[0:px.shape[0], 0:px.shape[1]]
-    for hx, hy in hands:
-        near = (xx - hx) ** 2 + (yy - hy) ** 2
-        lab, n = ss.label(skin & (near <= (GLOVE_FIND * r) ** 2))
-        if not n:
-            continue
-        # the piece of skin nearest the point is his hand (not his arm or leg beside it)
-        hand = lab == 1 + int(np.argmin([near[lab == i].min() for i in range(1, n + 1)]))
-        hand &= near <= (GLOVE_HAND * r) ** 2
-        shape = ss.dilate(hand, 2) & solid
-        if not shape.any():
-            continue
-        ys, xs = np.nonzero(shape)
-        x0, x1, y0, y1 = xs.min(), xs.max() + 1, ys.min(), ys.max() + 1
-        paint = np.asarray(patch.convert("RGBA").resize((x1 - x0, y1 - y0), Image.LANCZOS)).copy()
-        m = shape[y0:y1, x0:x1]
-        edge = (shape & ss.dilate(~shape, 1))[y0:y1, x0:x1]
-        paint[edge, :3] = (paint[edge, :3] * GLOVE_EDGE).astype(np.uint8)
-        paint[..., 3] = 255
-        out[y0:y1, x0:x1][m] = paint[m]
-    return out
+    near = (xx - point[0]) ** 2 + (yy - point[1]) ** 2
+    lab, n = ss.label(skin & (near <= (GLOVE_FIND * r) ** 2))
+    if not n:
+        return None
+    limb = lab == 1 + int(np.argmin([near[lab == i].min() for i in range(1, n + 1)]))
+    hand = limb & (near <= (GLOVE_HAND * r) ** 2)
+    if not hand.any():
+        return None
+    ys, xs = np.nonzero(hand)
+    mid = np.array([xs.mean(), ys.mean()])
+    arm = limb & (near > (GLOVE_HAND * r) ** 2)
+    angle = None
+    if arm.sum() >= 5:
+        ay, ax = np.nonzero(arm)
+        angle = math.degrees(math.atan2(mid[1] - ay.mean(), mid[0] - ax.mean()))
+    return hand, mid, angle
+
+
+def glove_pieces(hero, rig_frames):
+    """Writes glove_item_<id>_1 and _2 for every glove on glove_mittens.json (one painted
+    mitten per glove, drawn from its icon: cuff down, fist up): the mitten on each of his
+    hands (hand_points), turned so its cuff points back along his forearm, over his body;
+    and fist_glove_1/_2.png, which cut each mitten where the rest of his body is in front of
+    that hand, so a hand behind him stays behind him (Cory 2026-10-11: all equipment is
+    layered; gloves are mittens in the glove's colours)."""
+    if not os.path.exists(os.path.join(ss.SHEETS, GLOVE_SHEET + ".json")):
+        return
+    r = hero.r
+    mittens = {item: p.img for item, p in cut(GLOVE_SHEET).items()}
+    hands = [[None] * len(hero.names) for _ in range(2)]
+    masks = [[None] * len(hero.names) for _ in range(2)]
+    for i, (n, px, entry) in enumerate(zip(hero.names, hero.frames, rig_frames)):
+        solid = px[..., 3] > 127
+        for h, point in enumerate(hand_points(hero, n, entry)[:2]):
+            found = hand_at(px, point, r)
+            if found is None:
+                continue
+            hand, mid, angle = found
+            # facing right with no forearm in sight, his fist points the way he faces
+            hands[h][i] = (mid, 90.0 + (0.0 if angle is None else angle))
+            masks[h][i] = solid & ~ss.dilate(hand, GLOVE_OVER)
+    for h in range(2):
+        save_fist(f"glove_{h + 1}", masks[h], hero.fw, hero.fh)
+    for item, img in mittens.items():
+        pic = scaled(img, GLOVE_SIZE * r / img.width)
+        for h in range(2):
+            frames = [None if e is None else pose("hand", e[0], e[1], fist=True) for e in hands[h]]
+            save_piece(f"glove_item_{item}_{h + 1}", {"hand": (pic, (pic.width / 2, pic.height / 2))},
+                       frames, fist=f"glove_{h + 1}")
 
 
 # ---------- gloves drawn on the body ----------
