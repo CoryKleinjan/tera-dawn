@@ -35,39 +35,6 @@ func test_platforms_lie_inside_the_map() -> void:
 			check(p.x >= 0 and p.x + p.width <= m.width, "%s: platforms[%d] runs from x %s to %s, outside 0..%d" % [w, i, p.x, p.x + p.width, m.width])
 			check(p.y > 0 and p.y < m.ground_y, "%s: platforms[%d].y %s is not between the top and the floor (%d)" % [w, i, p.y, m.ground_y])
 
-func test_map_signs_dont_sit_on_a_platform_skin() -> void:
-	for m: MapDef in Content.maps.values():
-		var at: Variant = SceneryBuilder.sign_label_at(m)
-		if at == null:
-			continue
-		var x: float = (at as Vector2).x
-		var y: float = (at as Vector2).y
-		for i in m.platforms.size():
-			var d := m.platforms[i]
-			if x < d.x or x > d.x + d.width:
-				continue
-			var skin := TerrainBuilder.skin_span(d, m.biome)
-			check(y <= skin.x or y - SceneryBuilder.SIGN_LABEL_H >= skin.y,
-				"%s: the sign's words at y %s run through platforms[%d]'s skin (%s)" % [Scan.where(m), y, i, skin])
-
-func test_map_signs_stand_inward_from_the_entrance_clear_of_portals() -> void:
-	for m: MapDef in Content.maps.values():
-		if SceneryBuilder.sign_label_at(m) == null:
-			continue
-		var x := SceneryBuilder.sign_post_x(m)
-		var half := UiSkin.hint_width(m.sign_text) / 2.0
-		var portal_half := TDStage.art_size(m.biome.portal_frames[0]).x / 2.0 if not m.biome.portal_frames.is_empty() else 34.0
-		check_between(x, 0, m.width, "%s: the sign at x %s is on the map" % [Scan.where(m), x])
-		var nearest := INF
-		for p in m.portals:
-			if p.platform != 0:
-				continue
-			check(absf(p.x - x) >= half + portal_half, "%s: the sign's words (x %d-%d) stand over the portal to %s (x %d)" % [Scan.where(m), x - half, x + half, p.target_map, p.x])
-			if not p.door:
-				nearest = minf(nearest, absf(p.x - x))
-		if nearest < INF:
-			check_near(nearest, SceneryBuilder.SIGN_FROM_PORTAL, "%s: the sign stands a set way in from the entrance" % Scan.where(m))
-
 func test_arrivals_and_npcs_keep_clear_of_the_quickslots() -> void:
 	var clear := right_edge_clear()
 	for m: MapDef in Content.maps.values():
@@ -140,14 +107,21 @@ func test_portals_dont_overlap() -> void:
 				if a and b and a.platform == b.platform:
 					check(absf(a.x - b.x) >= 68, "%s: portals[%d] and portals[%d] overlap (x %s and %s)" % [Scan.where(m), i, k, a.x, b.x])
 
+## No NPC is drawn over a portal: the gap between them is at least half the portal's picture
+## plus half a body (the hero's width), so the swirl and the NPC never overlap.
 func test_npcs_dont_stand_in_portals() -> void:
 	for m: MapDef in Content.maps.values():
-		var layout := MapLayout.new(m)
+		var portal_half := 34.0
+		if m.biome and not m.biome.portal_frames.is_empty():
+			portal_half = maxf(portal_half, TDStage.art_size(m.biome.portal_frames[0]).x / 2.0)
 		for i in m.npcs.size():
-			var p := m.npcs[i]
-			if p and p.platform < layout.platforms.size():
-				var at := Vector2(p.x, layout.platforms[p.platform].y)
-				check(layout.portal_at(at) == null, "%s: npcs[%d] (%s) stands in a portal" % [Scan.where(m), i, p.npc.id if p.npc else "?"])
+			var n := m.npcs[i]
+			if n == null:
+				continue
+			for p in m.portals:
+				if p and p.platform == n.platform:
+					var gap := portal_half + TDPlayer.WIDTH / 2.0 if not p.door else 34.0
+					check(absf(n.x - p.x) >= gap, "%s: npcs[%d] (%s) at x %s overlaps the portal at x %s (want %d+ apart)" % [Scan.where(m), i, n.npc.id if n.npc else "?", n.x, p.x, gap])
 
 func test_climbables_lie_inside_the_map_and_reach_a_platform() -> void:
 	for m: MapDef in Content.maps.values():
@@ -189,6 +163,27 @@ func test_climbables_fit_on_their_platforms() -> void:
 					reach = Vector2(reach.y, reach.x)
 				check(room.x >= reach.x and room.y >= reach.y,
 						"%s: climbables[%d] at x %s hangs over the end of the platform at y %s (its art reaches %s px left, %s px right)" % [w, i, c.x, end[0], snappedf(reach.x, 0.1), snappedf(reach.y, 0.1)])
+
+## A climbable's top piece (a rope's post, a vine's tangle, a ladder's posts) stays small next
+## to the hero. A rope's top also carries the start of the rope hanging from its knot, so the
+## limit is 60% of the hero's height, not half.
+const CLIMB_TOP_MAX := 0.6
+
+func test_climb_tops_are_in_scale_with_the_hero() -> void:
+	for st: ClimbStyleDef in _climb_styles():
+		if st.top == null:
+			continue
+		var h := TDStage.art_size(st.top, st.texel).y
+		check(h <= TDPlayer.HEIGHT * CLIMB_TOP_MAX,
+				"climb style %s: its top piece is %s px tall, more than %d%% of the hero's %s" % [st.id, snappedf(h, 0.1), CLIMB_TOP_MAX * 100, TDPlayer.HEIGHT])
+
+func _climb_styles() -> Array[ClimbStyleDef]:
+	var out: Array[ClimbStyleDef] = []
+	for m: MapDef in Content.maps.values():
+		for c in m.climbables:
+			if c and c.style and not out.has(c.style):
+				out.append(c.style)
+	return out
 
 func test_npcs_and_starts_are_inside_the_map() -> void:
 	for m: MapDef in Content.maps.values():

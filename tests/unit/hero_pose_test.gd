@@ -62,7 +62,7 @@ func test_the_hero_is_smaller_than_the_townsfolk() -> void:
 
 func test_he_blinks_now_and_then_while_standing() -> void:
 	var rig := SpriteRig.new()
-	rig.setup(TDPlayer.HERO_FRAMES, null, 0.01, 30.0)
+	rig.setup(TDPlayer.HERO_FRAMES, null, 0.01)
 	add_child(rig)
 	var body := rig.body as AnimatedSprite3D
 	rig.play(&"idle")
@@ -80,7 +80,7 @@ func test_he_blinks_now_and_then_while_standing() -> void:
 
 func test_speeding_up_into_a_run_keeps_his_step() -> void:
 	var rig := SpriteRig.new()
-	rig.setup(TDPlayer.HERO_FRAMES, null, 0.01, 30.0)
+	rig.setup(TDPlayer.HERO_FRAMES, null, 0.01)
 	add_child(rig)
 	var body := rig.body as AnimatedSprite3D
 	rig.play(&"walk")

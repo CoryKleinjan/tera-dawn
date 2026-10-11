@@ -33,7 +33,7 @@ func platform_under(feet: Vector2) -> Platform:
 			return pl
 	return null
 
-## The top of whatever is under the feet (for shadows).
+## The top of whatever is under the feet (for a pet to walk on).
 func ground_below(feet: Vector2) -> float:
 	var best := float(map.ground_y)
 	for pl in platforms:

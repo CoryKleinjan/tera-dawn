@@ -192,5 +192,53 @@ class Resizing(unittest.TestCase):
         self.assertLessEqual(np.abs(out[:, 0] - out[:, -1]).max(), 8, "and its sides")
 
 
+class RoundTop(unittest.TestCase):
+    def _button(self):
+        """A disc a little taller than wide (as painted buttons come) on a 120-pixel cell: gold
+        rim, dark middle, lit from the top."""
+        yy, xx = np.mgrid[0:120, 0:120]
+        d = np.hypot((yy - 60) * 50 / 52.0, xx - 60)
+        alpha = np.clip(50.5 - d, 0, 1)
+        rgb = np.zeros((120, 120, 3))
+        rgb[d > 42] = [0.9, 0.7, 0.3]
+        rgb[d <= 42] = [0.3, 0.2, 0.1]
+        rgb[..., 0] += (120 - yy) / 600.0  # brighter towards the top
+        return rgb, alpha
+
+    def test_rebuilds_the_rim_a_label_hid(self):
+        rgb, alpha = self._button()
+        hid_rgb, hid_alpha = rgb.copy(), alpha.copy()
+        hid_alpha[:20, :75] = 0  # the label box, past the middle
+        hid_rgb[:20, :75] = 0
+        out_rgb, out_alpha = ss.fix_round_top(hid_rgb, hid_alpha)
+        self.assertLess(np.abs(out_alpha - alpha).max(), 0.3, "the round outline is back")
+        hidden = alpha > 0.5
+        hidden[20:] = False
+        off = np.abs(out_rgb - rgb).max(2)[hidden]
+        self.assertLess(off.mean(), 0.03, "rim and middle colours carry on, lit as the top is")
+        self.assertTrue(out_alpha[9, 60] > 0.9 and out_alpha[12, 35] < 0.1, "the top is round, not flat")
+
+    def test_clears_label_leftovers_beside_the_button(self):
+        rgb, alpha = self._button()
+        alpha[:20, :75] = 0
+        alpha[2:5, 2:12] = 1  # a scrap of the label's box
+        _, out = ss.fix_round_top(rgb, alpha)
+        self.assertFalse((out[2:5, 2:12] > 0).any())
+
+
 if __name__ == "__main__":
     unittest.main()
+
+
+class PaintGround(unittest.TestCase):
+    def test_keeps_the_strip_and_takes_the_ground_below_it(self):
+        strip = np.zeros((60, 8, 4), np.uint8)
+        strip[:40] = (10, 20, 30, 255)
+        strip[40:] = (90, 90, 90, 255)  # extend_bottom's blur
+        ground = np.zeros((60, 8, 4), np.uint8)
+        ground[...] = (200, 100, 50, 255)
+        ground[:10, :, 3] = 0  # magenta sky keyed away in the ground picture
+        out = np.asarray(ss.paint_ground(Image.fromarray(strip, "RGBA"), Image.fromarray(ground, "RGBA"), 40))
+        self.assertTrue((out[:40 - ss.GROUND_BLEND] == strip[:40 - ss.GROUND_BLEND]).all())
+        self.assertTrue((out[40:] == (200, 100, 50, 255)).all())
+        self.assertTrue((out[..., 3] == 255).all())

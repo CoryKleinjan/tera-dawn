@@ -1,6 +1,6 @@
 class_name TDStage
 extends Node3D
-## The HD-2D view of the map: pixel-art sprites standing in a lit 3D diorama.
+## The HD-2D view of the map: painted sprites standing in a lit 3D diorama.
 ## Gameplay stays 2D (game pixels, y down); this node owns the camera, sky, light and
 ## post effects, and asks the builders to turn the map into 3D:
 ##   TerrainBuilder  the painted front skins of the floor and the platforms
@@ -13,10 +13,11 @@ const FOV := 30.0
 const PITCH := 9.0 # degrees the camera looks down
 ## Size of one art pixel in game pixels, for characters, props and land. Every piece of
 ## land art (tiles, platform pieces, ground textures) is drawn so one of its art pixels
-## shows this big, so the whole scene shares one pixel size.
+## shows this big, so all the land shows its painted detail at one shared scale.
 const TEXEL := 1.25
 ## Texels per art pixel of the art in these folders (tools/art/slice_sheets.py cuts land
-## sheets with "art_px" at 2 texels per art pixel, so they stay sharp on a 1080p screen).
+## sheets with "art_px" at 2 texels per art pixel, so they stay sharp on a 1080p screen). The art
+## is painted, not pixel art: "art pixel" is just the unit the sheet's detail was drawn at.
 ## Art anywhere else has one texel per art pixel.
 const ART_DENSITY := {
 	"res://assets/sprites/tiles/": 2.0,
@@ -47,6 +48,9 @@ const SCENERY_LAYER := 0.9
 ## Land: platform front skins sit at LAND_FRONT; decoration and props are clamped behind it.
 ## (The grass on the floor's front edge is nearer, but it shows below everyone's feet.)
 const LAND_FRONT := 0.14
+## Portals stand in front of all the land and scenery (so nothing hides the way out) but behind
+## everything you can touch: ropes, NPCs, monsters, drops and the player.
+const Z_PORTAL := 0.17
 const Z_CLIMBABLE := 0.2
 const Z_NPC := 0.3
 ## Monsters spread over [Z_MONSTER, Z_MONSTER + Z_MONSTER_SPREAD) so overlapping ones don't flicker.
@@ -76,7 +80,6 @@ var fade := 0.0
 var _fade_target := 0.0
 
 static var _soft_dot: Texture2D
-static var _shadow: Texture2D
 
 # ---------- helpers for everyone ----------
 
@@ -161,17 +164,6 @@ static func glow_sprite(texture: Texture2D, col: Color, texel := TEXEL) -> Sprit
 	s.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	s.offset = Vector2.ZERO
 	s.modulate = col
-	return s
-
-## The soft round shadow under a character, `width` game pixels across.
-static func shadow_sprite(width: float) -> Sprite3D:
-	if _shadow == null:
-		_shadow = load("res://assets/sprites/fx/blob_shadow.png")
-	var s := sprite(_shadow, width / _shadow.get_width(), false)
-	s.offset = Vector2.ZERO
-	s.axis = Vector3.AXIS_Y
-	s.alpha_cut = SpriteBase3D.ALPHA_CUT_DISABLED
-	s.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	return s
 
 static func light(col: Color, energy: float, range_: float, shadows := false) -> OmniLight3D:
@@ -459,24 +451,40 @@ func in_view(p: Vector2, z := 0.0) -> bool:
 ## World height (3D y) at depth z that appears `frac` of the way down the screen
 ## when the camera is in the middle of its vertical range.
 func screen_height(frac: float, z: float) -> float:
-	var view := TDWorld.world_view()
-	var cam_mid := (float(world.map.height) - view.y) / 2.0
-	var target_y := -(cam_mid + view.y / 2.0) / PX
-	var pitch := deg_to_rad(PITCH)
-	var cam_y := target_y + sin(pitch) * dist
-	var cam_z := cos(pitch) * dist
-	var rel := atan((0.5 - frac) * 2.0 * tan(deg_to_rad(FOV / 2.0)))
-	return cam_y + tan(rel - pitch) * (cam_z - z)
+	return screen_height_at(frac, z, _mid_center())
 
 ## The inverse of screen_height: how far down the screen (0 top, 1 bottom) world height `h`
 ## at depth z appears when the camera is in the middle of its vertical range.
 func screen_frac(h: float, z: float) -> float:
-	var view := TDWorld.world_view()
-	var cam_mid := (float(world.map.height) - view.y) / 2.0
-	var target_y := -(cam_mid + view.y / 2.0) / PX
+	return screen_frac_at(h, z, _mid_center())
+
+func _mid_center() -> float:
+	var r := view_center_range(world.map.height)
+	return (r.x + r.y) / 2.0
+
+## The game-y of the middle of the view, highest (x) and lowest (y), as the camera moves
+## over a map `map_height` tall.
+static func view_center_range(map_height: float) -> Vector2:
+	var half := TDWorld.world_view().y / 2.0
+	return Vector2(half, maxf(half, map_height - half))
+
+## World height (3D y) at depth z that appears `frac` of the way down the screen while the
+## middle of the view is at game-y `center`.
+static func screen_height_at(frac: float, z: float, center: float) -> float:
 	var pitch := deg_to_rad(PITCH)
-	var cam_y := target_y + sin(pitch) * dist
-	var cam_z := cos(pitch) * dist
+	var dist_ := view_distance()
+	var cam_y := -center / PX + sin(pitch) * dist_
+	var cam_z := cos(pitch) * dist_
+	var rel := atan((0.5 - frac) * 2.0 * tan(deg_to_rad(FOV / 2.0)))
+	return cam_y + tan(rel - pitch) * (cam_z - z)
+
+## How far down the screen (0 top, 1 bottom) world height `h` at depth z appears while the
+## middle of the view is at game-y `center`.
+static func screen_frac_at(h: float, z: float, center: float) -> float:
+	var pitch := deg_to_rad(PITCH)
+	var dist_ := view_distance()
+	var cam_y := -center / PX + sin(pitch) * dist_
+	var cam_z := cos(pitch) * dist_
 	var rel := atan((h - cam_y) / (cam_z - z)) + pitch
 	return 0.5 - tan(rel) / (2.0 * tan(deg_to_rad(FOV / 2.0)))
 

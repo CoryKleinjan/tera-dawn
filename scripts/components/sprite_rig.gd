@@ -1,7 +1,7 @@
 class_name SpriteRig
 extends Node3D
 ## The 3D body of a 2D actor: an animated pixel-art sprite standing in the HD-2D stage,
-## a soft shadow under it, and optionally a light and glowing particles. Heroes are also
+## and optionally a light and glowing particles. Characters cast no shadows. Heroes are also
 ## dressed (`dress`): their look and gear are drawn on them by a PaperdollSprite.
 ##
 ## Actors keep their logic in 2D game pixels and call `place()` every frame. Animations
@@ -29,7 +29,6 @@ const BLINK_TIME := 0.15
 const PULSE_TIME := 0.45
 
 var body: SpriteBase3D
-var shadow: Sprite3D
 var light: OmniLight3D
 var aura: CPUParticles3D
 ## Draws the character's look on the body (heroes only, see `dress`).
@@ -55,10 +54,12 @@ var _blink_t := 0.0
 ## A flash of colour fading off the body (see pulse), and how much of it is left (1 to 0).
 var _pulse_color := Color.WHITE
 var _pulse := 0.0
+## Stands perfectly still (see hold_still): no animation or procedural breathing.
+var _still := false
 
 ## Builds the sprite. Pass `frames` for an animated actor or `texture` for a single image.
 ## `texel` is the size of one texture pixel in game pixels.
-func setup(frames: SpriteFrames, texture: Texture2D, texel: float, shadow_width: float) -> void:
+func setup(frames: SpriteFrames, texture: Texture2D, texel: float) -> void:
 	_frames = frames
 	if frames:
 		var a := AnimatedSprite3D.new()
@@ -69,11 +70,22 @@ func setup(frames: SpriteFrames, texture: Texture2D, texel: float, shadow_width:
 		s.texture = texture
 		body = s
 	TDStage.style_sprite(body, texel)
+	body.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	add_child(body)
 	_fit_offset()
-	shadow = TDStage.shadow_sprite(shadow_width)
-	add_child(shadow)
 	play(&"idle")
+
+## Keeps the actor standing perfectly still on its first idle frame, with no breathing
+## (NPCs, whose idle frames are separate drawings that shift them around). Hits still squash.
+func hold_still() -> void:
+	_still = true
+	if body is AnimatedSprite3D:
+		var a := body as AnimatedSprite3D
+		a.stop()
+		a.frame = 0
+	body.scale = Vector3.ONE
+	body.rotation.z = 0.0
+	_lift = 0.0
 
 ## Draws a look (Character.look()) on the body, which must be the hero's animated sprite.
 ## Call again whenever the look changes; an unchanged look costs nothing.
@@ -107,6 +119,8 @@ func has_animation(anim: StringName) -> bool:
 ## Plays an animation (or the closest one this sprite has). Calling it again with the
 ## same name keeps it going; `from_start` restarts it (a second swing of the same attack).
 func play(anim: StringName, from_start := false) -> void:
+	if _still:
+		return
 	var a := anim
 	if _frames:
 		while not _frames.has_animation(a) and FALLBACK.has(a):
@@ -147,15 +161,8 @@ func face(dir: int) -> void:
 	body.flip_h = dir < 0
 
 ## Puts the feet at a 2D game position, `z` units in front of (+) or behind (-) the play line.
-## `shadow_y` is the ground under the actor, or NAN for no shadow (climbing, fainted).
-func place(feet: Vector2, z: float, shadow_y := NAN) -> void:
+func place(feet: Vector2, z: float) -> void:
 	body.position = TDStage.to3d(feet + Vector2(0, -_lift), z)
-	shadow.visible = not is_nan(shadow_y)
-	if shadow.visible:
-		# on the platform top, just behind its front edge
-		shadow.position = TDStage.to3d(Vector2(feet.x, shadow_y), -0.25) + Vector3(0, 0.02, 0)
-		var lift := clampf((shadow_y - feet.y) / 120.0, 0.0, 0.7)
-		shadow.modulate.a = 1.0 - lift
 
 ## Tints the sprite bright red-white while it is hit.
 func set_flash(on: bool) -> void:
@@ -257,9 +264,10 @@ func _process(delta: float) -> void:
 		_pulse = maxf(0.0, _pulse - delta / PULSE_TIME)
 		_apply_modulate()
 	var squash_xy := Vector2(1.0 + 0.18 * _squash, 1.0 - 0.15 * _squash)
-	if _frames:
+	if _frames or _still:
 		body.scale = Vector3(squash_xy.x, squash_xy.y, 1.0)
-		_blink(delta)
+		if _frames and not _still:
+			_blink(delta)
 		return
 	# single-image actors: move the sprite procedurally
 	_t += delta

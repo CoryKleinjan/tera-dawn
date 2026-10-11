@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BiomeDef" load_steps=50 format=3]
+[gd_resource type="Resource" script_class="BiomeDef" load_steps=49 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/biome_def.gd" id="1_biome_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/meadow_top.png" id="2_meadow_top"]
@@ -33,7 +33,6 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/flowers_white.png" id="30_flowers_white"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/flowers_yellow.png" id="31_flowers_yellow"]
 [ext_resource type="Texture2D" path="res://assets/sprites/props/lantern_lit.png" id="32_lantern_lit"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/signpost.png" id="33_signpost"]
 [ext_resource type="Texture2D" path="res://assets/sprites/props/portal_1.png" id="34_portal_1"]
 [ext_resource type="Texture2D" path="res://assets/sprites/props/portal_2.png" id="35_portal_2"]
 [ext_resource type="Texture2D" path="res://assets/sprites/props/portal_3.png" id="36_portal_3"]
@@ -185,5 +184,4 @@ backdrop = Array[ExtResource("9_backdrop_layer_def")]([SubResource("Resource_1")
 ground_decor = Array[ExtResource("19_decor_def")]([SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10")])
 platform_decor = Array[ExtResource("19_decor_def")]([SubResource("Resource_11")])
 lantern = ExtResource("32_lantern_lit")
-signpost = ExtResource("33_signpost")
 portal_frames = Array[Texture2D]([ExtResource("34_portal_1"), ExtResource("35_portal_2"), ExtResource("36_portal_3"), ExtResource("37_portal_4")])

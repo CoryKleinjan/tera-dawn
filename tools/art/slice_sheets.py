@@ -417,23 +417,88 @@ FIXES = {"hero_attack_arc": fix_hero_attack_arc, "glow_backdrop": fix_glow_backd
          "painted_sky": fix_painted_sky, "sky_body": fix_sky_body}
 def fix_round_top(rgb, alpha, source=None, band=28):
     """A round button whose rim runs under the cell's label box (blanked with `blank`): the
-    top rows of the rim are rebuilt as a mirror of its bottom rows."""
+    pixels the label hid are rebuilt. The circle is measured from the rim below the label, and
+    each hidden pixel is filled from the nearest uncovered spots on its own ring, one each way
+    round, blended by how far away they are, so the rim carries on without a seam."""
     h, w = alpha.shape
     solid = alpha > 0.5
-    rows = np.nonzero(solid.any(1))[0]
-    cols = np.nonzero(solid.any(0))[0]
-    if not len(rows):
+    low = solid.copy()
+    low[:band] = False  # the label never reaches this far down
+    if not low.any():
         return rgb, alpha
-    d = cols.max() - cols.min() + 1
+    rows = np.nonzero(low.any(1))[0]
+    cols = np.nonzero(low.any(0))[0]
     bottom = rows.max()
-    top = max(0, bottom - d + 1)
-    cy = (top + bottom) / 2.0
+    left, right = cols.min(), cols.max()
+    cx, rx = (left + right) / 2.0, (right - left) / 2.0 + 0.5
+    # the middle, from columns whose rim the label didn't touch (top and bottom both there)
+    mids = []
+    for x in range(left, right + 1):
+        ys = np.nonzero(solid[:, x])[0]
+        if len(ys) and ys.min() >= band:
+            mids.append((ys.min() + ys.max()) / 2.0)
+    cy = float(np.median(mids)) if mids else bottom + 0.5 - rx
+    ry = bottom - cy + 0.5
+    yy, xx = np.mgrid[0:h, 0:w]
+    d = np.hypot((xx - cx) / rx, (yy - cy) / ry)
+    top = yy < min(band, int(cy))
+    rim = 1 + 2.0 / rx  # the soft edge just outside the circle
+    hole = top & (d <= 1) & (alpha < 0.02)
     rgb, alpha = rgb.copy(), alpha.copy()
-    alpha[:top] = 0
-    for y in range(top, min(band, int(cy))):
-        src = int(round(2 * cy - y))
-        if 0 <= src < h:
-            rgb[y], alpha[y] = rgb[src], alpha[src]
+    alpha[top & (d > rim)] = 0  # label leftovers beside the button
+    if not hole.any():
+        return rgb, alpha
+    ys, xs = np.nonzero(hole)
+    hx0, hx1, hy1 = 0, xs.max(), ys.max()  # the label's box, in the cell's top-left corner
+
+    def hidden(y, x):
+        return y <= hy1 and hx0 <= x <= hx1
+
+    def nearest_shown(rho, theta, step):
+        """The first uncovered spot on this ring going round from theta: (angle moved, y, x)."""
+        moved = 0.0
+        while moved < np.pi:
+            moved += abs(step)
+            t = theta + step * moved / abs(step)
+            y, x = cy + rho * ry * np.sin(t), cx + rho * rx * np.cos(t)
+            y0, x0 = int(np.floor(y)), int(np.floor(x))
+            if 0 <= y0 and y0 + 1 < h and 0 <= x0 and x0 + 1 < w \
+                    and not any(hidden(y0 + i, x0 + j) for i in (0, 1) for j in (0, 1)):
+                return moved, y, x
+        return None
+
+    premul = rgb * alpha[..., None]
+
+    def sample(y, x):
+        """Colour (premultiplied) and alpha between pixels, so soft edges stay soft."""
+        y0, x0 = int(np.floor(y)), int(np.floor(x))
+        fy, fx = y - y0, x - x0
+        c, a = np.zeros(3), 0.0
+        for i, j, k in ((0, 0, (1 - fy) * (1 - fx)), (0, 1, (1 - fy) * fx), (1, 0, fy * (1 - fx)), (1, 1, fy * fx)):
+            c += premul[y0 + i, x0 + j] * k
+            a += alpha[y0 + i, x0 + j] * k
+        return c, a
+
+    filled = []
+    step = 0.5 / max(rx, ry)  # about half a pixel along the rim
+    for y in range(0, hy1 + 1):
+        for x in range(hx0, hx1 + 1):
+            if not top[y, x] or d[y, x] > rim:
+                continue
+            rho = d[y, x]
+            theta = np.arctan2((y - cy) / ry, (x - cx) / rx)
+            found = [f for f in (nearest_shown(rho, theta, step), nearest_shown(rho, theta, -step)) if f]
+            if not found:
+                continue
+            total = sum(f[0] for f in found)
+            c, a = np.zeros(3), 0.0
+            for moved, sy, sx in found:
+                k = 1.0 if len(found) == 1 else 1 - moved / total  # the nearer side counts for more
+                sc, sa = sample(sy, sx)
+                c, a = c + sc * k, a + sa * k
+            filled.append((y, x, c / a if a > 1e-6 else rgb[y, x], a))
+    for y, x, c, a in filled:
+        rgb[y, x], alpha[y, x] = c, a
     return rgb, alpha
 
 
@@ -572,6 +637,19 @@ def make_seamless(img, blend=0.2):
     return Image.fromarray(out.clip(0, 255).astype(np.uint8))
 
 
+def seamless_middle(img, cap, blend=0.25):
+    """A bar whose middle is tiled between two end caps (`cap` px each): cross-fades the middle's
+    ends with a half-offset copy of itself, so painted texture doesn't seam where it repeats."""
+    a = np.asarray(img).astype(float)
+    mid = a[:, cap:a.shape[1] - cap]
+    m = mid.shape[1]
+    shifted = np.roll(mid, m // 2, 1)
+    xx = np.arange(m)
+    t = np.clip(np.minimum(xx, m - 1 - xx) / (m * blend), 0, 1)[None, :, None]
+    a[:, cap:a.shape[1] - cap] = mid * t + shifted * (1 - t)
+    return Image.fromarray(a.clip(0, 255).astype(np.uint8), img.mode)
+
+
 def strip_labels(cell, bg, band):
     """Paints the white letters of a cell label over with background. A letter is a small
     patch of near-white pixels in the label band with background all around it, so white
@@ -638,6 +716,8 @@ def cut_cell(rgb_full, bg, box, opts):
         ys, xs = np.nonzero(m)
         if m.sum() < opts["min_area"]:
             continue
+        if min(np.ptp(ys), np.ptp(xs)) <= 2 and max(np.ptp(ys), np.ptp(xs)) >= 12:  # a stray bit of cell divider
+            continue
         if ys.max() < band and (xs.min() < left or ys.max() - ys.min() < band * 0.6):  # the label text
             continue
         if opts.get("strip_labels") and ys.max() < band * 1.5 and m.sum() < m.size * 0.01 \
@@ -689,6 +769,22 @@ def extend_bottom(img, n):
     out[h - 2:h + 4] = (out[h - 2:h + 4] + soft) / 2  # soften the join
     out[..., 3] = np.where(np.arange(h + n)[:, None] >= h - 2, 255, out[..., 3])
     return Image.fromarray(out.clip(0, 255).astype(np.uint8), "RGBA")
+
+
+GROUND_BLEND = 12  # rows over which a strip's own bottom fades into its painted ground
+
+
+def paint_ground(img, ground, strip_h):
+    """Swaps an extend_bottom pad for painted ground: `ground` is a picture of the whole padded
+    strip whose lower part was painted on as ground (a Gemini edit of it), so the backdrop runs
+    on down to the floor instead of ending in a blur. The strip's own rows above strip_h stay
+    exactly as cut; below, the ground picture takes over, fading in over GROUND_BLEND rows."""
+    a = np.asarray(img.convert("RGBA")).astype(float)
+    g = np.asarray(ground.convert("RGBA").resize(img.size, Image.LANCZOS)).astype(float)
+    g[..., 3] = 255.0  # the ground is solid wherever it is used (below the strip's skyline)
+    t = np.clip((np.arange(a.shape[0]) - (strip_h - GROUND_BLEND)) / GROUND_BLEND, 0.0, 1.0)[:, None, None]
+    out = a * (1.0 - t) + g * t
+    return Image.fromarray(out.round().clip(0, 255).astype(np.uint8), "RGBA")
 
 
 # ---------- animation sets ----------
@@ -816,8 +912,13 @@ def process(manifest_path, grid_only=False, sprites=None):
                     side = opts.get("size", min(im.size))
                     im = make_seamless(im.convert("RGB").crop((0, 0, min(im.size), min(im.size)))
                                        .resize((side, side), Image.BOX)).convert("RGBA")
+                if opts.get("seamless_middle"):
+                    im = seamless_middle(im, opts["seamless_middle"])
                 if opts.get("extend_bottom"):
+                    strip_h = im.height
                     im = extend_bottom(im, opts["extend_bottom"])
+                    if opts.get("ground"):
+                        im = paint_ground(im, Image.open(os.path.join(ROOT, opts["ground"])), strip_h)
                 p["image"] = im
                 if sprites is not None:
                     sprites[f"{sheet_id}:{pname}"] = p

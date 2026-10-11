@@ -1,7 +1,7 @@
 class_name MonsterDef
 extends Resource
 ## Everything that makes one kind of monster: stats, looks and loot.
-## Add a monster by saving a new MonsterDef in data/monsters/ (see ARCHITECTURE.md).
+## Add a monster by saving a new MonsterDef in data/monsters/ (see docs/architecture/monsters.md).
 ## Distances are in game pixels, speeds in pixels per physics tick (60 Hz).
 
 @export var id: StringName

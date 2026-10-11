@@ -38,6 +38,7 @@ SOLID = 127
 WINDOW = 16       # rows compared where a middle piece joins itself (fewer when it is short)
 CROP_COST = 0.004  # mismatch an extra dropped row must save to be worth dropping
 MAX_CROP = 0.6    # share of an end piece's height that may be dropped
+COLOUR_COST = 4.0  # weight of a colour difference against a shape difference in a join
 
 
 def solid(a):
@@ -50,18 +51,31 @@ def trim_rows(a):
     return a[rows[0]:rows[-1] + 1] if len(rows) else a
 
 
+def looks(a):
+    """What the join compares of RGBA array `a`: its solid mask (channel 0) and, where solid,
+    its colour (channels 1-3, 0-1)."""
+    m = solid(a)
+    return np.dstack([m, a[..., :3] / 255.0 * m[..., None]])
+
+
 def mismatch(ref, piece, d):
-    """How differently two equal-height masks are solid (0 same, 1 nothing shared) when
-    `piece` is moved so its column x lies on `ref` column x + d."""
-    h, wr = ref.shape
+    """How differently two equal-height windows look (0 same, 1 nothing shared) when `piece`
+    is moved so its column x lies on `ref` column x + d. Windows are masks, or looks() arrays:
+    then pixels solid in both also count how far apart their colours are, so a rope joins the
+    rope in an end piece rather than a post or knot of about the same width beside it."""
+    h, wr = ref.shape[:2]
     wp = piece.shape[1]
     left = min(0, d)
     right = max(wr, d + wp)
-    a = np.zeros((h, right - left))
+    a = np.zeros((h, right - left) + ref.shape[2:])
     b = np.zeros_like(a)
     a[:, -left:-left + wr] = ref
     b[:, d - left:d - left + wp] = piece
-    return np.abs(a - b).sum() / max(1.0, a.sum() + b.sum())
+    if a.ndim == 2:
+        return np.abs(a - b).sum() / max(1.0, a.sum() + b.sum())
+    ma, mb = a[..., 0], b[..., 0]
+    colour = (np.abs(a[..., 1:] - b[..., 1:]).mean(2) * ma * mb).sum() * COLOUR_COST
+    return (np.abs(ma - mb).sum() + colour) / max(1.0, ma.sum() + mb.sum())
 
 
 def best_join(ref, piece, crops, piece_rows):
@@ -118,7 +132,7 @@ def fit_end(piece, m, mid_c, at_top):
     piece = trim_rows(piece)
     budget = int(len(piece) * MAX_CROP)
     for _ in range(4):
-        p = solid(piece)
+        p = looks(piece)
         n = min(len(m), len(p) // 2)
         crops = range(0, max(1, min(len(m), budget, len(p) - n) + 1))
         if at_top:
@@ -151,7 +165,7 @@ def line_up(top, middle, bottom):
         total += d
     middle = lean(middle, total)
     middle = centre_on(middle, centroid(middle))
-    m = solid(middle)
+    m = looks(middle)
     mid_c = middle.shape[1] / 2
     if bottom is not None:
         bottom = fit_end(bottom, m, mid_c, at_top=True)

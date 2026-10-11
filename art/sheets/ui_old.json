@@ -4,7 +4,6 @@
   "scale": 0.5,
   "alpha": "soft",
   "label_band": 0.2,
-  "grid_threshold": 0.7,
   "out_dir": "assets/sprites/ui",
   "cells": [
     [
@@ -48,5 +47,22 @@
     "icon_dawnshard": {
       "recolor": null
     }
+  },
+  "grid": {
+    "rows": [
+      0,
+      178,
+      360,
+      589,
+      823,
+      1024
+    ],
+    "cols": [
+      0,
+      397,
+      770,
+      1151,
+      1536
+    ]
   }
 }

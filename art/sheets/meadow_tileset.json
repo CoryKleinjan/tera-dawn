@@ -38,7 +38,7 @@
       "rock_medium",
       "rock_large",
       "fence",
-      "signpost",
+      "",
       "flowers_white",
       "flowers_yellow",
       "tall_grass"
@@ -99,5 +99,19 @@
         1536
       ]
     ]
+  },
+  "overrides": {
+    "arch": {
+      "save": false
+    },
+    "floating_rock": {
+      "save": false
+    },
+    "ledge_vines": {
+      "save": false
+    },
+    "ledge_overhang": {
+      "save": false
+    }
   }
 }

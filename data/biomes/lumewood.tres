@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BiomeDef" load_steps=55 format=3]
+[gd_resource type="Resource" script_class="BiomeDef" load_steps=54 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/biome_def.gd" id="1_biome_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/lumewood_top.png" id="2_ground_top"]
@@ -35,7 +35,6 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood/building_small.png" id="32_building_small"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood/signature_prop.png" id="33_signature_prop"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood/lantern_unlit.png" id="34_lantern_unlit"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood/signpost.png" id="35_signpost"]
 [ext_resource type="Texture2D" path="res://assets/sprites/props/portal_1.png" id="36_portal_1"]
 [ext_resource type="Texture2D" path="res://assets/sprites/props/portal_2.png" id="37_portal_2"]
 [ext_resource type="Texture2D" path="res://assets/sprites/props/portal_3.png" id="38_portal_3"]
@@ -222,5 +221,4 @@ ground_decor = Array[ExtResource("20_decor_def")]([SubResource("Resource_8"), Su
 platform_decor = Array[ExtResource("20_decor_def")]([SubResource("Resource_13")])
 town_decor = Array[ExtResource("20_decor_def")]([SubResource("Resource_town")])
 lantern = ExtResource("34_lantern_unlit")
-signpost = ExtResource("35_signpost")
 portal_frames = Array[Texture2D]([ExtResource("36_portal_1"), ExtResource("37_portal_2"), ExtResource("38_portal_3"), ExtResource("39_portal_4")])
