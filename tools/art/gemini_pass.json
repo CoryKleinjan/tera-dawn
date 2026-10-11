@@ -6426,6 +6426,27 @@
     "base": "art/source/items_warrior.png",
     "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
    }
+  },
+  {
+   "id": "paint_title_backdrop",
+   "prompts": null,
+   "batch": "painted UI: title_backdrop (edit)",
+   "with": null,
+   "refs": [],
+   "save": "title_backdrop_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "assets/sprites/ui/title_backdrop.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same scene, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
   }
  ]
 }

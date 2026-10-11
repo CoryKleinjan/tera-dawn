@@ -262,7 +262,8 @@
           17
         ]
       ],
-      "scale": 0.6606
+      "scale": 0.6606,
+      "fix": "magenta_rim"
     }
   },
   "background": [

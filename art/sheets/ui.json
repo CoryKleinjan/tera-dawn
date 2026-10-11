@@ -60,7 +60,8 @@
           29
         ]
       ],
-      "scale": 1.0
+      "scale": 1.0,
+      "seamless_middle": 36
     },
     "hp_frame": {
       "blank": [
