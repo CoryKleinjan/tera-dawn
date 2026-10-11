@@ -12,6 +12,11 @@ hands or arms at a time. Pasting puts the edited cells back at their own size:
         take only what the edit changed on his hands and arms (see changed_limbs)
     python3 tools/art/body_panels.py upper CELL,CELL,... EDIT_1.png ...
         take everything above his shorts from the edit; his legs stay as they are
+    python3 tools/art/body_panels.py worn-base SHEET OUT CELL,CELL,...
+        a worn sheet (art/source/<x>_frames.png) with those cells swapped for the bare body,
+        for an edit that dresses only them after the body changed
+    python3 tools/art/body_panels.py worn-cells SHEET EDIT CELL,CELL,...
+        copy those cells from the dressed edit back into the worn sheet
 
 Then re-cut the body and rebuild the layers (slice_sheets.py paperdoll_body, then
 paperdoll_layers.py).
@@ -137,11 +142,34 @@ def paste(cells, paths, mode):
     print(f"{mode}: {len(cells)} cells -> {os.path.relpath(gg.BODY, pl.ROOT)}")
 
 
+def _swap_cells(dst_path, src, cells, out_path):
+    boxes = gg.layout()
+    dst = np.asarray(Image.open(dst_path).convert("RGB")).copy()
+    for c in cells:
+        x0, y0, x1, y1 = boxes[c]
+        dst[y0:y1, x0:x1] = src[y0:y1, x0:x1]
+    Image.fromarray(dst).save(out_path)
+    print(f"{', '.join(cells)} -> {out_path}")
+
+
+def worn_base(sheet, out, cells):
+    _swap_cells(sheet, np.asarray(Image.open(gg.BODY).convert("RGB")), cells, out)
+
+
+def worn_cells(sheet, edit, cells):
+    size = Image.open(sheet).size
+    _swap_cells(sheet, gg._sheet(edit, size), cells, sheet)
+
+
 if __name__ == "__main__":
     args = sys.argv[1:]
     if len(args) == 4 and args[0] == "panels":
         panels(args[1], args[2], args[3].split(","))
     elif len(args) >= 3 and args[0] in ("hands", "upper"):
         paste(args[1].split(","), args[2:], args[0])
+    elif len(args) == 4 and args[0] == "worn-base":
+        worn_base(args[1], args[2], args[3].split(","))
+    elif len(args) == 4 and args[0] == "worn-cells":
+        worn_cells(args[1], args[2], args[3].split(","))
     else:
         sys.exit(__doc__)
