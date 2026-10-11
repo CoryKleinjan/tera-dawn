@@ -5037,6 +5037,29 @@
     ],
     "text": "The first image is my hat sheet: 15 labelled cells (5 columns x 3 rows) on magenta, each a greyscale hat on a bald head. Repaint EVERY hat in a soft PAINTED style with smooth shading like a hand-painted storybook illustration, not pixel art: same hat, same shape, same size, same position on the head, still GREYSCALE only (white to dark grey tones, no colour) with a dark outline. Keep every cell, label, head and grid line exactly where it is; the heads stay as they are. The background stays bright pure magenta #FF00FF. The second image is the character the hats are for, for reference only."
    }
+  },
+  {
+   "id": "eq_paperdoll_hats_only",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L7",
+   "with": null,
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "eq_paperdoll_hats_only.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 equipment-look thread: eq_paperdoll_hats with the bald heads erased, so each hat lifts off cleanly; the hats stay where they were, so the heads of eq_paperdoll_hats (art/source/paperdoll_hats.png) place them. Lands in art/source/paperdoll_hats_only.png.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/eq_paperdoll_hats.png",
+    "text": "This is my hat sheet: 15 labelled cells on magenta, each a greyscale painted hat on a bald head with shoulders. ERASE the bald heads, faces, ears, necks and shoulders from every cell and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the hats. Every hat stays EXACTLY where it is, the same size and shape, with its own outline and shading; where the head showed through the hat (the hood's face opening, under a brim) is now magenta. The cell with no hat becomes empty magenta. Keep every label and grid line exactly where it is."
+   }
   }
  ]
 }
