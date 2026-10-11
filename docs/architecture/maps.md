@@ -12,8 +12,8 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
    `props` on top of the biome's random decoration. Anything that looks like ground (a
    tall ledge) is a platform with that picture as its `look`, never a prop, so everything
    that looks walkable is. Land art stands on the floor: no floating rock islands or
-   arches (Cory removed them); a floating platform uses the biome's plain platform front. Every platform, rope, portal, NPC
-   and spawn must be reachable with the hero's own jump from where players arrive, and no
+   arches; a floating platform uses the biome's plain platform front. Every platform, rope,
+   portal, NPC and spawn must be reachable with the hero's own jump from where players arrive, and no
    two portals on a map may lead to the same map (`tests/content/content_reach_test.gd`).
    A platform more than about 90 px above the one below needs a rope or ladder. A map can
    be taller than 700 (more floors, more exits); keep `ground_y` 80 above `height`.
@@ -52,16 +52,15 @@ decides the fare, for the server and for the dialogue. Each trip's label also sh
 destination's `MapDef.level_text` unless it's a town ("Wagon to Ember Hollow (Lv. 6-12,
 150 Dawnshards)", `TDDialogueWindow.travel_label`). A **UseDef** with `teleport` set to a map id, or to `town`, is a return scroll.
 
-The smoke test checks that every portal points at a real map and every spawn at a real
-platform, so a typo fails the test instead of the game.
+The content tests (`tests/content/`) check that every portal points at a real map and every
+spawn at a real platform, so a typo fails a test instead of the game.
 
 A **BiomeDef** is the look shared by many maps: sky and light colours, ground and platform
 textures, parallax backdrop layers (`BackdropLayerDef`: a tiled strip or scattered pieces at a
 depth), random decoration (`DecorDef`), lantern and portal art. A new region of the
 world is usually a new biome plus a few maps that use it.
 
-Each region has **one** biome (its style); its fields differ within it (Cory, 2026-10-11).
-A field keeps its region's `biome` and sets a **BiomeVariantDef** as `MapDef.variant`: only
+Each region has **one** biome (its style); its fields differ within it. A field keeps its region's `biome` and sets a **BiomeVariantDef** as `MapDef.variant`: only
 what this sub zone changes (sky, light, fog, colour grade, backdrop tint, hidden backdrop
 layers, extra ground scenery). `MapDef.look()` is the biome with the variant applied; the
 world builders read `look()`, never `biome`. Towns use the plain biome. `tests/screenshot.gd`

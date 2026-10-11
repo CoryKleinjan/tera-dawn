@@ -226,6 +226,24 @@ class RoundTop(unittest.TestCase):
         self.assertFalse((out[2:5, 2:12] > 0).any())
 
 
+class MedalSymbol(unittest.TestCase):
+    def test_keeps_the_symbol_and_drops_disc_and_strap(self):
+        rgb = np.zeros((80, 60, 3))
+        alpha = np.zeros((80, 60))
+        yy, xx = np.mgrid[0:80, 0:60]
+        disc = np.hypot(yy - 50, xx - 30) < 25
+        rgb[disc], alpha[disc] = [0.95, 0.85, 0.7], 1  # the cream face
+        alpha[0:26, 28:32], rgb[0:26, 28:32] = 1, [0.3, 0.2, 0.15]  # the strap
+        bar = (yy >= 38) & (yy < 58) & (xx >= 27) & (xx < 33)
+        rgb[bar] = [0.95, 0.7, 0.2]  # a gold "!" bar
+        out_rgb, out_alpha = ss.fix_medal_symbol(rgb, alpha, ring=2)
+        self.assertTrue((out_alpha[bar] == 1).all(), "the symbol stays")
+        self.assertTrue(np.allclose(out_rgb[bar], [0.95, 0.7, 0.2]), "in its own colours")
+        self.assertEqual(out_alpha[37, 30], 1, "with an outline round it")
+        self.assertEqual(out_alpha[50, 45], 0, "the cream face goes")
+        self.assertEqual(out_alpha[10, 30], 0, "the strap goes")
+
+
 if __name__ == "__main__":
     unittest.main()
 

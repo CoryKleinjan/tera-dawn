@@ -118,13 +118,15 @@ static func draw_shop_sign(ci: CanvasItem, bottom_center: Vector2, label: String
 	DrawUtil.text(ci, Game.ui_font, bottom_center + Vector2(0, -size.y * 0.3), label, 12, Palette.SUN, 0, 4, Palette.NIGHT)
 
 ## The marker over an NPC: "!" a quest for you, "?" one to hand in, "..." one in progress.
+## `height` is the "!"'s height; the others keep their size beside it, centred on the same spot.
 static func draw_quest_marker(ci: CanvasItem, bottom_center: Vector2, kind: String, height := 34.0) -> void:
 	var art: String = QUEST_MARKERS.get(kind, "")
 	if art == "":
 		return
 	var t := UiSkin.tex(art)
-	var s := t.get_size() * height / t.get_height()
-	ci.draw_texture_rect(t, Rect2(bottom_center - Vector2(s.x / 2.0, s.y), s), false)
+	var s := t.get_size() * height / UiSkin.tex(QUEST_MARKERS["!"]).get_height()
+	var center := bottom_center - Vector2(0, height / 2.0)
+	ci.draw_texture_rect(t, Rect2(center - s / 2.0, s), false)
 
 ## A party member's slim HP bar, `width` pixels wide with its top left at `pos`. The art has
 ## a fill painted in, so the groove is emptied before the real fill goes on.
