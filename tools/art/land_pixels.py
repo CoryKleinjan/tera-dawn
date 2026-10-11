@@ -47,7 +47,8 @@ def uses():
     found = []
     for path in sorted(glob.glob(os.path.join(ROOT, "data", "biomes", "*.tres")) +
                        glob.glob(os.path.join(ROOT, "data", "maps", "*.tres"))):
-        text = open(path).read()
+        with open(path, encoding="utf-8") as f:
+            text = f.read()
         ext = {i: p for p, i in re.findall(r'\[ext_resource type="[^"]+" path="([^"]+)" id="([^"]+)"\]', text)}
         for block in re.split(r"\n(?=\[sub_resource)", text):
             script = re.search(r'script = ExtResource\("([^"]+)"\)', block)

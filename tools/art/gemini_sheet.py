@@ -82,7 +82,8 @@ class PromptFile:
 
     def __init__(self, path):
         self.path = path
-        self.text = open(path, encoding="utf-8").read()
+        with open(path, encoding="utf-8") as f:
+            self.text = f.read()
         self.fences = list(FENCE.finditer(self.text))
         m = re.search(r"part-?(\d+)|prompts-(\d+)", os.path.basename(path))
         self.part = (m.group(1) or m.group(2)) if m else "1"
@@ -192,7 +193,8 @@ def collect_refs(prompts, context, save_name, extra, outputs=(), later=()):
 
 
 def closest_aspect(path):
-    return closest_aspect_of(*Image.open(path).size)
+    with Image.open(path) as im:
+        return closest_aspect_of(*im.size)
 
 
 def closest_aspect_of(w, h):
@@ -261,7 +263,8 @@ def download_file(name, attempts=3):
 
 
 def image_part(path):
-    data = open(path, "rb").read()
+    with open(path, "rb") as f:
+        data = f.read()
     return {"inline_data": {"mime_type": "image/png", "data": base64.b64encode(data).decode()}}
 
 

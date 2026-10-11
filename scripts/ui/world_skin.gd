@@ -7,6 +7,8 @@ extends RefCounted
 
 ## The smallest text draw_bar writes on a bar.
 const BAR_TEXT_MIN := 9
+## How many texels of plain groove draw_bar_frame stretches when a bar is drawn wider.
+const BAR_STRETCH := 8.0
 ## Where each bar frame's empty groove is, in texels: Rect2(x, y, w, h).
 const GROOVES := {
 	"hp_frame": Rect2(40, 10, 92, 21),
@@ -48,11 +50,10 @@ const SHOP_SIGN := ["social/shop_sign", Vector4(40, 50, 40, 20), Vector2(50, 0)]
 ## A bar: the frame texture with its fill drawn into the groove. `pos` is the frame's top left.
 ## `trail` (above `fraction`) shows a pale chunk of what was just lost, and `flash` (0-1)
 ## lights the fill up, for bars that animate (TDStatusBar).
-static func draw_bar(ci: CanvasItem, frame: String, fill: String, pos: Vector2, fraction: float, scale := 1.0, text := "", trail := 0.0, flash := 0.0) -> void:
-	var ft := UiSkin.tex(frame)
-	ci.draw_texture_rect(ft, Rect2(pos, ft.get_size() * scale), false)
+static func draw_bar(ci: CanvasItem, frame: String, fill: String, pos: Vector2, fraction: float, scale := 1.0, text := "", trail := 0.0, flash := 0.0, extra := 0.0) -> void:
 	var g: Rect2 = GROOVES[frame]
-	var groove := Rect2(pos + g.position * scale, g.size * scale)
+	draw_bar_frame(ci, frame, pos, scale, extra)
+	var groove := Rect2(pos + g.position * scale, g.size * scale + Vector2(extra, 0))
 	if trail > fraction:
 		var from := groove.size.x * clampf(fraction, 0.0, 1.0)
 		var to := groove.size.x * clampf(trail, 0.0, 1.0)
@@ -67,6 +68,25 @@ static func draw_bar(ci: CanvasItem, frame: String, fill: String, pos: Vector2, 
 		var ts := maxi(int(12 * scale), BAR_TEXT_MIN)
 		DrawUtil.text(ci, Game.ui_font, Vector2(groove.get_center().x, groove.get_center().y + ts * 0.36),
 			text, ts, Palette.MIST, 0, 4, Color(0.1, 0.05, 0.15, 0.9))
+
+## A bar frame drawn `extra` pixels wider than its art: a plain strip from the middle of its
+## groove stretches, so the painted end caps keep their shape.
+static func draw_bar_frame(ci: CanvasItem, frame: String, pos: Vector2, scale: float, extra := 0.0) -> void:
+	var ft := UiSkin.tex(frame)
+	if extra <= 0.0:
+		ci.draw_texture_rect(ft, Rect2(pos, ft.get_size() * scale), false)
+		return
+	var g: Rect2 = GROOVES[frame]
+	var h := ft.get_height()
+	var strip := Rect2(g.get_center().x - BAR_STRETCH / 2.0, 0, BAR_STRETCH, h)
+	var left := Rect2(0, 0, strip.position.x, h)
+	var right := Rect2(strip.end.x, 0, ft.get_width() - strip.end.x, h)
+	var x := pos.x
+	ci.draw_texture_rect_region(ft, Rect2(x, pos.y, left.size.x * scale, h * scale), left)
+	x += left.size.x * scale
+	ci.draw_texture_rect_region(ft, Rect2(x, pos.y, strip.size.x * scale + extra, h * scale), strip)
+	x += strip.size.x * scale + extra
+	ci.draw_texture_rect_region(ft, Rect2(x, pos.y, right.size.x * scale, h * scale), right)
 
 ## A bar's fill pill across the left `fraction` of `groove`.
 static func draw_bar_fill(ci: CanvasItem, fill: String, groove: Rect2, fraction: float, scale := 1.0) -> void:
