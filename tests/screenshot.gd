@@ -345,28 +345,28 @@ func _run() -> void:
 	if only == "" or only == "towns":
 		# Every hub town, standing between its store and its hall, and on its raised street.
 		for town in [&"dawnharbor", &"greenbough", &"lumewood", &"emberforge", &"lanternfall", &"driftcove"]:
-			Net.server._enter_map(_me(), town, 1180)
+			Net.server.enter_map(_me(), town, 1180)
 			await _physics(40)
 			await _frames(3)
 			await _shot("town_" + town)
-		Net.server._enter_map(_me(), &"meadow", 300)
+		Net.server.enter_map(_me(), &"meadow", 300)
 		await _physics(10)
 	if only == "" or only == "rooms":
 		# Inside every building you can walk into.
 		for m: MapDef in Content.maps.values():
 			if m.interior:
-				Net.server._enter_map(_me(), m.id, 520)
+				Net.server.enter_map(_me(), m.id, 520)
 				await _physics(40)
 				await _frames(3)
 				await _shot("room_" + m.id)
-		Net.server._enter_map(_me(), &"meadow", 300)
+		Net.server.enter_map(_me(), &"meadow", 300)
 		await _physics(10)
 	if only == "" or only == "fields":
 		# A field from each region, next to its monsters, a boss, and the world map.
 		_me().inv = 100000
 		for pair in [[&"mushroom_dell", 900], [&"thornwood", 1100], [&"crystal_caves", 1100], [&"smoke_pits", 1100],
 				[&"gloom_woods", 1100], [&"coral_reef", 1100], [&"dusk_bridge", 1300], [&"molten_throne", 1000]]:
-			Net.server._enter_map(_me(), pair[0], pair[1])
+			Net.server.enter_map(_me(), pair[0], pair[1])
 			await _physics(90)
 			await _frames(3)
 			await _shot("field_" + pair[0])
@@ -375,19 +375,19 @@ func _run() -> void:
 		await _frames(3)
 		await _shot("worldmap_fields")
 		world.hud.toggle_window("worldmap")
-		Net.server._enter_map(_me(), &"meadow", 300)
+		Net.server.enter_map(_me(), &"meadow", 300)
 		await _physics(10)
 	if only == "subzones":
 		# Every field of every region (not in the full run): their variants of the region's look.
 		_me().inv = 100000
 		for m: MapDef in Content.maps.values():
 			if not m.town and not m.interior:
-				Net.server._enter_map(_me(), m.id, 900)
+				Net.server.enter_map(_me(), m.id, 900)
 				await _physics(40)
 				await _frames(3)
 				await _shot("subzone_%s_%s" % [m.region, m.id])
 		_me().inv = 0
-		Net.server._enter_map(_me(), &"meadow", 300)
+		Net.server.enter_map(_me(), &"meadow", 300)
 		await _physics(10)
 	if only == "" or only == "social":
 		# The Free Market: a friend's shop, a party, chat and the community window.
@@ -398,10 +398,10 @@ func _run() -> void:
 			f.character.level = 18 + i * 3
 			Net.server.sessions[f.peer] = f
 			social.joined(f)
-			Net.server._enter_map(f, &"free_market", 1000.0 + i * 220.0)
+			Net.server.enter_map(f, &"free_market", 1000.0 + i * 220.0)
 			f.face = -1
 			friends.append(f)
-		Net.server._enter_map(_me(), &"free_market", 820)
+		Net.server.enter_map(_me(), &"free_market", 820)
 		friends[1].character.inventory.add(Content.item(&"gale_bow"))
 		friends[1].character.inventory.add(Content.item(&"scroll_weapon_att_60"), 3)
 		social.on_shop_open(friends[1].peer, "Kestrel's Bows", [[ItemDef.Tab.EQUIP, 0, 1, 18000], [ItemDef.Tab.USE, 0, 3, 2500]])
@@ -429,7 +429,7 @@ func _run() -> void:
 			social.left(f)
 			Net.server.sessions.erase(f.peer)
 			f.map.remove_player(f)
-		Net.server._enter_map(_me(), &"meadow", 300)
+		Net.server.enter_map(_me(), &"meadow", 300)
 		await _physics(10)
 	if only == "" or only == "keepsakes":
 		# Sitting on a chair with a pet out, a friend doing the same, and the Monster Book.

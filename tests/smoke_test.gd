@@ -731,7 +731,7 @@ func _run() -> void:
 ## Takes Elder Rowan's first quest, does it, hands it in; then a quest whose item only
 ## drops while you're on it.
 func _check_quests() -> void:
-	Net.server._enter_map(_me(), Character.START_MAP, 300)
+	Net.server.enter_map(_me(), Character.START_MAP, 300)
 	await _ticks(3)
 	var meadow: MapInstance = Net.server.map_instance(&"meadow")
 	var elder := world.npcs()[0]
@@ -796,10 +796,10 @@ func _check_quests() -> void:
 ## window.
 func _check_job_advance() -> void:
 	var ch := _me().character
-	Net.server._enter_map(_me(), &"lumewood", 300)
+	Net.server.enter_map(_me(), &"lumewood", 300)
 	await _ticks(3)
 	_check(world.map.id == &"lumewood" and world.map.town, "Lumewood is a town")
-	Net.server._enter_map(_me(), &"lumewood_hall", 240)
+	Net.server.enter_map(_me(), &"lumewood_hall", 240)
 	await _ticks(3)
 	_check(world.map.outside() == &"lumewood", "the Magicians' Library is a room in Lumewood")
 	var guide: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"lumewood_instructor")[0]
@@ -825,7 +825,7 @@ func _check_job_advance() -> void:
 	Net.ask(&"req_equip", [Game.me.inventory.find(Content.item(&"apprentice_wand")), &"weapon"])
 	await _ticks(2)
 	_check(world.player.rig.paperdoll.look["gear"].get("weapon") == "apprentice_wand", "the hero is drawn holding the wand once it's worn")
-	Net.server._enter_map(_me(), &"meadow", 300)
+	Net.server.enter_map(_me(), &"meadow", 300)
 	await _ticks(3)
 
 ## A Warrior with Skill Points learns skills in the skill window: they land on quickslots,
@@ -966,7 +966,7 @@ func _check_ranged() -> void:
 ## The world map, Hobb's wagon, return scrolls, and waking up in the right town.
 func _check_travel() -> void:
 	var ch := _me().character
-	Net.server._enter_map(_me(), Character.START_MAP, 300)
+	Net.server.enter_map(_me(), Character.START_MAP, 300)
 	await _ticks(3)
 	await _press("worldmap")
 	var wm: TDWorldMapWindow = world.hud.windows["worldmap"]
@@ -1058,7 +1058,7 @@ func _check_travel() -> void:
 	talk.choose(0)
 	await _ticks(3)
 	_check(world.map.id == &"greenbough", "the coach takes you to Greenbough")
-	Net.server._enter_map(_me(), Character.START_MAP, 300)
+	Net.server.enter_map(_me(), Character.START_MAP, 300)
 	await _ticks(3)
 
 ## The new field maps: walking west out of the village, monsters that split, hop and shoot,
@@ -1075,7 +1075,7 @@ func _check_fields() -> void:
 	_check(world.map.id == &"sunny_slope", "the village's west portal leads to Sunny Slope")
 	_me().inv = 0
 	# a Sporecap splits into Spore Puffs when it's defeated
-	Net.server._enter_map(_me(), &"mushroom_dell", 300)
+	Net.server.enter_map(_me(), &"mushroom_dell", 300)
 	await _ticks(3)
 	var dell: MapInstance = Net.server.maps[&"mushroom_dell"]
 	var cap: SimMob = dell.mobs.filter(func(m: SimMob) -> bool: return m.def.id == &"sporecap")[0]
@@ -1090,7 +1090,7 @@ func _check_fields() -> void:
 	await _ticks(60)
 	_check(cap.children.all(func(c: SimMob) -> bool: return c.dead and c.asleep), "defeated Spore Puffs go back to sleep instead of respawning")
 	# hoppers hop
-	Net.server._enter_map(_me(), &"sunny_slope", 300)
+	Net.server.enter_map(_me(), &"sunny_slope", 300)
 	await _ticks(3)
 	var slope: MapInstance = Net.server.maps[&"sunny_slope"]
 	var hopper: SimMob = slope.mobs.filter(func(m: SimMob) -> bool: return m.def.jumps and not m.dead)[0]
@@ -1103,7 +1103,7 @@ func _check_fields() -> void:
 			break
 	_check(hopped and hopper.body_position().y <= hopper.plat.y, "a Tide Dewling hops")
 	# an Acorn Sentry never moves and shoots anyone near it; the shot lands where they stood
-	Net.server._enter_map(_me(), &"thornwood", 300)
+	Net.server.enter_map(_me(), &"thornwood", 300)
 	await _ticks(3)
 	var wood: MapInstance = Net.server.maps[&"thornwood"]
 	var sentry: SimMob = wood.mobs.filter(func(m: SimMob) -> bool: return m.def.id == &"acorn_sentry" and not m.dead)[0]
@@ -1160,7 +1160,7 @@ func _check_fields() -> void:
 	await _ticks(3)
 	_check(Game.me.inventory.count_of(good) == 0 and Game.me.inventory.at(ItemDef.Tab.EQUIP, Game.me.inventory.find(sword)).slots_used == 3,
 		"clicking the gear uses the scroll on it")
-	Net.server._enter_map(_me(), &"meadow", 300)
+	Net.server.enter_map(_me(), &"meadow", 300)
 	await _ticks(3)
 
 ## Chat, parties, buddies, trading, guilds, fame and player shops, with a second
@@ -1171,8 +1171,8 @@ func _check_social() -> void:
 	var ally := SimPlayer.new(4242, Character.create("Ally"))
 	Net.server.sessions[ally.peer] = ally
 	social.joined(ally)
-	Net.server._enter_map(_me(), &"meadow", 400)
-	Net.server._enter_map(ally, &"meadow", 470)
+	Net.server.enter_map(_me(), &"meadow", 400)
+	Net.server.enter_map(ally, &"meadow", 470)
 	await _ticks(5)
 	_check(world.avatars.has(ally.peer) and world.avatars[ally.peer].char_name == "Ally", "the other character shows up on the map")
 	# chat
@@ -1255,14 +1255,14 @@ func _check_social() -> void:
 	Net.ask(&"req_fame", [ally.peer, true])
 	_check(ally.character.fame == 1, "fame goes up by one, once a day")
 	# a guild
-	Net.server._enter_map(_me(), &"dawnharbor", 300)
-	Net.server._enter_map(ally, &"dawnharbor", 400)
+	Net.server.enter_map(_me(), &"dawnharbor", 300)
+	Net.server.enter_map(ally, &"dawnharbor", 400)
 	await _ticks(3)
 	ch.shards = TDSocial.GUILD_COST + 100
 	ch.level = maxi(ch.level, TDSocial.GUILD_LEVEL)
 	# Hollis keeps the guild register in Dawnharbor's Guild Hall
-	Net.server._enter_map(_me(), &"dawnharbor_guild", 240)
-	Net.server._enter_map(ally, &"dawnharbor_guild", 400)
+	Net.server.enter_map(_me(), &"dawnharbor_guild", 240)
+	Net.server.enter_map(ally, &"dawnharbor_guild", 400)
 	await _ticks(3)
 	var clerk: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"guild_clerk")[0]
 	_teleport(Vector2(clerk.position.x - 30, clerk.position.y))
@@ -1281,7 +1281,7 @@ func _check_social() -> void:
 	await _ticks(2)
 	_check(str(chat.lines[-1]["text"]) == "[Guild] %s: hi guild" % ch.name, "/g talks to the guild")
 	# a player shop in the free market
-	Net.server._enter_map(_me(), &"dawnharbor", 300)
+	Net.server.enter_map(_me(), &"dawnharbor", 300)
 	await _ticks(3)
 	var market: PortalDef = Content.map(&"dawnharbor").portals.filter(func(p: PortalDef) -> bool: return p.target_map == &"free_market")[0]
 	_teleport(Vector2(market.x, 620))
@@ -1289,7 +1289,7 @@ func _check_social() -> void:
 	await _tap("move_up")
 	await _ticks(4)
 	_check(world.map.id == &"free_market", "Dawnharbor's portal leads to the Free Market")
-	Net.server._enter_map(ally, &"free_market", 900)
+	Net.server.enter_map(ally, &"free_market", 900)
 	ch.inventory.add(Content.item(&"petal_wing"), 4)
 	_me().dirty_character = true
 	await _ticks(3)
@@ -1313,7 +1313,7 @@ func _check_social() -> void:
 	ally.map.remove_player(ally)
 	await _ticks(35)
 	_check(Game.social.get("party", {}).is_empty(), "a party of one breaks up")
-	Net.server._enter_map(_me(), &"meadow", 300)
+	Net.server.enter_map(_me(), &"meadow", 300)
 	await _ticks(3)
 
 ## Chairs, pets, the Monster Book and achievements.
@@ -1439,8 +1439,8 @@ func _check_multiplayer() -> void:
 	var bot_player: SimPlayer = Net.server.sessions[bot_peer]
 	bot_player.inv = 100000
 	# both players go out to the meadow, where the monsters are (the village has none)
-	Net.server._enter_map(_me(), &"meadow", 360)
-	Net.server._enter_map(bot_player, &"meadow", 300)
+	Net.server.enter_map(_me(), &"meadow", 360)
+	Net.server.enter_map(bot_player, &"meadow", 300)
 	# hold a Dewling in front of the bot until its attacks defeat one
 	var meadow: MapInstance = Net.server.maps[&"meadow"]
 	var level := bot_player.character.level

@@ -40,11 +40,11 @@ region opens its zone view (its `zone_rect` of the painting, zoomed in) with eve
 and where each exit leads. A new region needs a `capital`, `label_pos` and `zone_rect`.
 
 An NpcDef with `storage = true` keeps the player's storage (`Character.storage`, an
-Inventory saved with the character; `TDServer.on_store` / `on_retrieve`, `TDStorageWindow`).
+Inventory saved with the character; `ServerStorage.on_store` / `on_retrieve`, `TDStorageWindow`).
 The same NpcDef can stand in several maps (Brin is in every town).
 
 Travel NPCs (ships, wagons) list **TravelRoute**s in `NpcDef.travel` (destination, arrival x,
-fare, "Ship"/"Wagon"); their dialogue offers "Travel" and `TDServer.on_travel` moves the
+fare, "Ship"/"Wagon"); their dialogue offers "Travel" and `ServerTravel.on_travel` moves the
 player. A route with `free_for_beginners` costs nothing for a Beginner who has reached
 the first job level (`JobDef.first_advance_level`); Rook's coaches from Dawnharbor to the
 job towns are free this way. `TravelRoute.fare_for(character)` is the one place that

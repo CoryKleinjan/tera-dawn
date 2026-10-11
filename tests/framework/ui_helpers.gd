@@ -80,7 +80,7 @@ func edit(change: Callable) -> void:
 
 ## Sends the player to map `id` at `x` and waits until the game has built it.
 func enter_map(id: StringName, x: float) -> void:
-	Net.server._enter_map(player(), id, x)
+	Net.server.enter_map(player(), id, x)
 	await ticks(3)
 
 ## Moves the player instantly on both sides.
