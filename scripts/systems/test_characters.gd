@@ -1,0 +1,222 @@
+class_name TestCharacters
+extends RefCounted
+## Developer-only test characters: one per job at Character.MAX_LEVEL, wearing the best gear
+## that job can wear, with every skill learned to its highest level and plenty of Dawnshards.
+## Everything is read from the data, so a new job, skill or piece of gear shows up here with
+## no code change.
+##
+## They live on their own local account (ACCOUNT), never on the player's own. With the
+## Developer setting on (DevSettings), Play solo and Host log the player at the keyboard in
+## to it instead of AccountStore.LOCAL (see TDLobby.on_local_login). Only debug builds (the
+## editor, or a debug export) honour it, so a shipped game never can.
+
+## What the client asks for when it logs in to the local account.
+enum Mode { OFF, ON, REBUILD }
+
+## The test characters' account. Like AccountStore.LOCAL, the "~" can't be typed into a
+## username, so nobody can register it or log in to it from outside.
+const ACCOUNT := "~test"
+## A test character is called this plus its job's name (cut to CharacterStore.MAX_NAME).
+const NAME_PREFIX := "Dev "
+const SHARDS := 50000
+## How many stacks of its weapon's best ammo a test character carries.
+const AMMO_STACKS := 3
+
+## Whether this build may make and use test characters: never in a release export.
+static func allowed() -> bool:
+	return OS.is_debug_build()
+
+## Every job, the starting job first, then by how many advancements it takes and its name.
+static func jobs() -> Array[JobDef]:
+	var out: Array[JobDef] = []
+	for j: JobDef in Content.jobs.values():
+		out.append(j)
+	out.sort_custom(func(a: JobDef, b: JobDef) -> bool:
+		var da := path_to(a).size()
+		var db := path_to(b).size()
+		return da < db if da != db else a.display_name < b.display_name)
+	return out
+
+## The jobs a Beginner advances through to become `job`, in order (empty for the starting job).
+static func path_to(job: JobDef) -> Array[JobDef]:
+	var out: Array[JobDef] = []
+	var j := job
+	while j and j.id != Character.START_JOB and not j in out:
+		out.push_front(j)
+		j = Content.jobs.get(j.advances_from)
+	return out
+
+## The name a test character of `job` is first offered.
+static func name_for(job: JobDef) -> String:
+	return CharacterStore.clean_name(NAME_PREFIX + job.display_name)
+
+## A test character of `job` called `char_name`.
+static func build(char_name: String, job: JobDef) -> Character:
+	var c := Character.create(char_name, Character.START_JOB)
+	# levelled and advanced the way a player would, so AP, SP and job gifts add up as usual
+	for next in path_to(job):
+		_level_to(c, next.advance_level)
+		var short := c.stats_short_of(next)
+		for stat: StringName in short:
+			c.add_ap(stat, short[stat] - c.base.value(stat))
+		var problem := c.advance(next)
+		if problem != "":
+			push_warning("Test character %s couldn't become a %s: %s" % [char_name, next.display_name, problem])
+			break
+	_level_to(c, Character.MAX_LEVEL)
+	_wear_best_gear(c)
+	_spend_ap(c)
+	_learn_every_skill(c)
+	_add_ammo(c)
+	c.shards = SHARDS
+	c.recalc()
+	c.refill()
+	return c
+
+static func _level_to(c: Character, lvl: int) -> void:
+	while c.level < mini(lvl, Character.MAX_LEVEL):
+		c.gain_xp(c.xp_need() - c.xp)
+
+# ---------- gear ----------
+
+## The best piece of each kind of gear `c`'s job can wear at its level, as place -> EquipDef
+## (see best_gear_for).
+static func best_gear(c: Character) -> Dictionary:
+	return best_gear_for(c.job, c.level)
+
+## The best gear a `job` character of level `lvl` can wear, as Equipment place -> EquipDef:
+## per kind, the highest required level, then the most stats (weapon attack counts most).
+## A kind with more than one place (rings) fills each with the next best piece. The weapon
+## is the best of the kind the job is handed first when it advances, when it has one.
+static func best_gear_for(job: JobDef, lvl: int) -> Dictionary:
+	var by_slot := {}
+	for e in _wearable(job, lvl):
+		if not by_slot.has(e.slot):
+			by_slot[e.slot] = []
+		by_slot[e.slot].append(e)
+	var out := {}
+	for slot: EquipDef.Slot in by_slot:
+		var pieces: Array = by_slot[slot]
+		pieces.sort_custom(_better)
+		if slot == EquipDef.Slot.WEAPON:
+			out[&"weapon"] = best_weapons(job, lvl)[0]
+			continue
+		var places: Array = Equipment.PLACES_FOR[slot]
+		for i in mini(places.size(), pieces.size()):
+			out[places[i]] = pieces[i]
+	return out
+
+## The best weapon of each kind `job` can use at `lvl`, the one to wield first.
+static func best_weapons(job: JobDef, lvl: int) -> Array[EquipDef]:
+	var best := {}
+	for e in _wearable(job, lvl):
+		if e.slot == EquipDef.Slot.WEAPON and (not best.has(e.weapon_kind) or _better(e, best[e.weapon_kind])):
+			best[e.weapon_kind] = e
+	var out: Array[EquipDef] = []
+	for e: EquipDef in best.values():
+		out.append(e)
+	var main := _main_weapon_kind(job)
+	out.sort_custom(func(a: EquipDef, b: EquipDef) -> bool:
+		if (a.weapon_kind == main) != (b.weapon_kind == main):
+			return a.weapon_kind == main
+		return _better(a, b))
+	return out
+
+## The weapon kind `job` is handed first when it advances (a Pirate's knuckle), or empty.
+static func _main_weapon_kind(job: JobDef) -> StringName:
+	for g in job.advance_gifts:
+		var e := g.item as EquipDef
+		if e and e.slot == EquipDef.Slot.WEAPON:
+			return e.weapon_kind
+	return &""
+
+## Every piece of gear meant for `job`'s line (or anyone) that a level `lvl` character can wear.
+static func _wearable(job: JobDef, lvl: int) -> Array[EquipDef]:
+	var out: Array[EquipDef] = []
+	for it: ItemDef in Content.items.values():
+		var e := it as EquipDef
+		if e and (e.jobs.is_empty() or job.family in e.jobs) and e.required_level <= lvl:
+			out.append(e)
+	return out
+
+## Whether `a` is better gear than `b`: a higher required level, then more stats, then its id
+## (so the pick never changes from run to run).
+static func _better(a: EquipDef, b: EquipDef) -> bool:
+	if a.required_level != b.required_level:
+		return a.required_level > b.required_level
+	var sa := _stat_score(a)
+	var sb := _stat_score(b)
+	if sa != sb:
+		return sa > sb
+	return String(a.id) < String(b.id)
+
+static func _stat_score(e: EquipDef) -> int:
+	if e.stats == null:
+		return 0
+	var out := 0
+	for stat in StatBlock.FIELDS:
+		out += e.stats.value(stat)
+	return out + 10 * (e.stats.attack + e.stats.magic_attack)
+
+## Swaps everything worn for the best gear, keeping the job's other best weapons in the bag.
+static func _wear_best_gear(c: Character) -> void:
+	for place in c.equipment.worn.keys():
+		var old := c.equipment.take(place)
+		if old:
+			c.inventory.add_stack(old)
+	var gear := best_gear(c)
+	for place: StringName in gear:
+		c.equipment.put(place, ItemStack.exact(gear[place]))
+	for e in best_weapons(c.job, c.level).slice(1):
+		c.inventory.add_stack(ItemStack.exact(e))
+
+# ---------- stats, skills, ammo ----------
+
+## Spends the Ability Points: first whatever the worn gear still asks for, then the rest the
+## Auto button's way.
+static func _spend_ap(c: Character) -> void:
+	for s: ItemStack in c.equipment.worn.values():
+		var reqs := s.equip_def().requirements()
+		for stat in StatBlock.BASE:
+			var short := int(reqs.get(stat, 0)) - c.stats.value(stat)
+			if short > 0:
+				c.add_ap(stat, short)
+	var plan := c.auto_ap_plan()
+	for stat: StringName in plan:
+		c.add_ap(stat, plan[stat])
+
+## Every skill of the job line at its highest level, learned in an order its requirements
+## allow, so new skills go on the quickslots as they would for a player.
+static func _learn_every_skill(c: Character) -> void:
+	var line := c.job_line()
+	var todo: Array[SkillDef] = []
+	for s: SkillDef in Content.skills.values():
+		if not s.innate and s.job in line:
+			todo.append(s)
+	todo.sort_custom(func(a: SkillDef, b: SkillDef) -> bool: return String(a.id) < String(b.id))
+	var learned := true
+	while learned:
+		learned = false
+		for s in todo:
+			c.sp = maxi(c.sp, 1)
+			while c.learn_problem(s) == "":
+				c.learn(s)
+				c.sp = maxi(c.sp, 1)
+				learned = true
+	c.sp = 0
+
+## A few full stacks of the best ammo for each of the job's best weapons that fires any
+## (a Pirate's gun too, while wielding a knuckle).
+static func _add_ammo(c: Character) -> void:
+	var kinds: Array[StringName] = []
+	for w in best_weapons(c.job, c.level):
+		if w.ammo != &"" and not w.ammo in kinds:
+			kinds.append(w.ammo)
+	for kind in kinds:
+		var best: AmmoDef = null
+		for it: ItemDef in Content.items.values():
+			var a := it as AmmoDef
+			if a and a.kind == kind and (best == null or a.attack > best.attack or (a.attack == best.attack and String(a.id) < String(best.id))):
+				best = a
+		if best:
+			c.inventory.add(best, best.stack_size() * AMMO_STACKS)
