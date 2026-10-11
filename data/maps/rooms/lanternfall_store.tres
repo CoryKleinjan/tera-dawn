@@ -96,7 +96,6 @@ light_height = 20.0
 script = ExtResource("1_map_def")
 id = &"lanternfall_store"
 display_name = "Wick's General Store"
-sign_text = ""
 biome = ExtResource("2_lanternfall")
 width = 1200
 height = 700

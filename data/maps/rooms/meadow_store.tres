@@ -96,7 +96,6 @@ light_height = 20.0
 script = ExtResource("1_map_def")
 id = &"meadow_store"
 display_name = "Mira's Shop"
-sign_text = ""
 biome = ExtResource("2_meadow")
 width = 1200
 height = 700
