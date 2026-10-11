@@ -16,6 +16,9 @@ extends Resource
 ## Lanterns stand along the floor, about this far apart, in open ground (LanternPlacement).
 ## -1 picks the usual spacing for a town or a field; 0 means none.
 @export var lantern_spacing := -1.0
+## How often the biome's trees, bushes, rocks and flowers stand, as a share of what its
+## DecorDefs ask for (DecorPlacement). -1 uses the shared DecorPlacement.DENSITY; 0 means none.
+@export var decor_density := -1.0
 
 @export_group("World")
 ## The RegionDef it belongs to.
