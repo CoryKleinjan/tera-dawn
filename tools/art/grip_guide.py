@@ -266,6 +266,14 @@ def _panel(r):
     return 2 * round(r * PANEL)
 
 
+def _handlike(arr):
+    """Skin and dark outline: what a hand is made of (not his grey shorts or undershirt, which
+    a flood from the fist can reach where no outline parts them)."""
+    rgb = arr[..., :3].astype(int)
+    skin = (rgb[..., 0] > rgb[..., 2] + 30) & (rgb[..., 0] > 120)
+    return skin | (rgb.max(2) < 110)
+
+
 def _pinkish(arr):
     """Edge pixels blended with the magenta background (kept out of a pasted hand)."""
     rgb = arr[..., :3].astype(int)
@@ -304,16 +312,25 @@ def closeup_hands(paths, only=None):
                 continue
             x0 = GAP + i * (p * ZOOM + GAP)
             panel = Image.fromarray(edit[GAP:GAP + p * ZOOM, x0:x0 + p * ZOOM]).resize((p, p), Image.LANCZOS)
-            arr = np.dstack([np.asarray(panel), np.full((p, p), 255, np.uint8)])
-            pl.inpaint(arr, ss.dilate(rod_mask(arr), 1))  # in place
-            new = solid(arr[..., :3], (0, 0, p, p))
-            hand = pl.fist_mask(new, (p / 2, p / 2), r * HAND) & ~_pinkish(new)
+            arr = np.asarray(panel).copy()
+            rod = ss.dilate(rod_mask(arr), 2)
+            arr[rod] = 0  # the rod is outline-dark to the flood; the body keeps what is under it
+            new = solid(arr, (0, 0, p, p))
+            hand = pl.fist_mask(new, (p / 2, p / 2), r * HAND) & _handlike(new) & ~_pinkish(new) & ~rod
             (x, y), _ = found[c]
             bx, by = round(x) - p // 2, round(y) - p // 2
             region = body[by:by + p, bx:bx + p]
-            old = pl.fist_mask(solid(region, (0, 0, p, p)), (p / 2, p / 2), r * HAND)
+            olds = solid(region, (0, 0, p, p))
+            old = pl.fist_mask(olds, (p / 2, p / 2), r * HAND) & _handlike(olds)
+            # outline pixels the zoom blended with the background: given the old fist's outline colour
+            fringe = hand & (new[..., :3].max(2) < 150) & (new[..., 2].astype(int) > new[..., 1].astype(int) + 15)
+            ink = old & (olds[..., :3].max(2) < 90)
+            if ink.any():
+                new[fringe, :3] = np.median(olds[ink][:, :3], 0)
             region[hand] = new[hand][:, :3]
-            region[old & ~hand] = MAGENTA
+            # the old fist where the edit has background now (the new fist is smaller there)
+            outside = old & ~hand & ~rod & (new[..., 3] == 0)
+            region[outside] = MAGENTA
             taken.append(c)
     Image.fromarray(body).save(BODY)
     print(f"close-up hands: {len(taken)} cells -> {os.path.relpath(BODY, pl.ROOT)}")
