@@ -1,6 +1,6 @@
 extends TestCase
 ## Your own character's animation in a running game: an attack plays your weapon's motion,
-## then a ready stance; holding a direction long enough breaks into a run; a hop lands
+## then a ready stance; holding a direction long enough picks up pace but keeps the walk; a hop lands
 ## without the landing crouch; buffs make no motion.
 ## Runs on Dawnrise Meadow's open floor.
 
@@ -30,15 +30,21 @@ func test_an_attack_plays_the_weapons_motion_then_a_ready_stance() -> void:
 	await ui.ticks(TDPlayer.READY_TICKS)
 	check_eq(me._animation(), &"idle", "then he relaxes")
 
-func test_holding_a_direction_breaks_into_a_run() -> void:
+func test_holding_a_direction_picks_up_pace_but_keeps_walking() -> void:
 	ui.teleport(FLOOR)
 	me.on_ground = true
 	await ui.ticks(2)
 	Input.action_press("move_right")
 	await ui.ticks(12)
+	var base := TDPlayer.RUN_SPEED * CharacterStats.speed_multiplier(Game.me.stats)
 	check_eq(me._animation(), &"walk", "walking while he speeds up")
-	await ui.ticks(TDPlayer.RUN_AFTER + 10)
-	check_eq(me._animation(), &"run", "running at full speed")
+	check(me.vel.x <= base + 0.01, "no extra pace yet")
+	await ui.ticks(TDPlayer.RUN_AFTER + TDPlayer.PACE_RAMP + 4)
+	check_eq(me._animation(), &"walk", "still the walk at full pace")
+	check(me.vel.x > base * (1.0 + TDPlayer.PACE_BONUS * 0.9), "faster after moving a while")
+	Input.action_release("move_right")
+	await ui.ticks(6)
+	check_eq(me.run_t, 0, "stopping loses the pace")
 
 func test_a_hop_lands_without_the_landing_crouch_but_a_drop_does() -> void:
 	ui.teleport(FLOOR)
