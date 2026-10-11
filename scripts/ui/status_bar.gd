@@ -18,6 +18,8 @@ const WINDOW_BUTTON_GAP := 2.0
 const BAR_CAP := 38.0
 ## The level badge's left edge, just inside the brass end cap.
 const BADGE_X := 40.0
+## How much wider than their art the HP and MP bars are drawn, in pixels.
+const HP_MP_EXTRA := 24.0
 ## The space between the badge and the bars, and between bars.
 const BAR_GAP := 6.0
 ## UI sheet art for each window's button. A window without art yet gets a round button
@@ -81,8 +83,8 @@ func _draw() -> void:
 	DrawUtil.text(self, Game.num_font, c + Vector2(0, 9), str(Game.me.level), 11, Palette.SUN, 0, 3, Palette.NIGHT)
 	# HP, MP, EXP
 	var hp := Game.me.health
-	WorldSkin.draw_bar(self, "hp_frame", "fill_red", bar_rect("hp_frame").position, hp.fraction(), fit("hp_frame"), "%d / %d" % [hp.hp, hp.max_hp], trail("hp"))
-	WorldSkin.draw_bar(self, "mp_frame", "fill_blue", bar_rect("mp_frame").position, float(Game.me.mp) / Game.me.max_mp(), fit("mp_frame"), "%d / %d" % [Game.me.mp, Game.me.max_mp()], trail("mp"))
+	WorldSkin.draw_bar(self, "hp_frame", "fill_red", bar_rect("hp_frame").position, hp.fraction(), fit("hp_frame"), "%d / %d" % [hp.hp, hp.max_hp], trail("hp"), 0.0, HP_MP_EXTRA)
+	WorldSkin.draw_bar(self, "mp_frame", "fill_blue", bar_rect("mp_frame").position, float(Game.me.mp) / Game.me.max_mp(), fit("mp_frame"), "%d / %d" % [Game.me.mp, Game.me.max_mp()], trail("mp"), 0.0, HP_MP_EXTRA)
 	var exp_fill := 1.0 if Game.me.at_max_level() else float(Game.me.xp) / Game.me.xp_need()
 	WorldSkin.draw_bar(self, "exp_frame", "fill_gold", exp_bar_rect().position, exp_fill, fit("exp_frame"), exp_text(), 0.0, _flash / EXP_FLASH)
 	# window buttons
@@ -115,11 +117,14 @@ func badge_rect() -> Rect2:
 	var t := UiSkin.tex("level_badge")
 	return Rect2(Vector2(BADGE_X, item_top()), t.get_size() * fit("level_badge"))
 
-## Where a bar frame is drawn: HP after the badge, then MP, then EXP, BAR_GAP apart.
+## Where a bar frame is drawn: HP after the badge, then MP, then EXP, BAR_GAP apart. HP and
+## MP are HP_MP_EXTRA wider than their art.
 func bar_rect(frame: String) -> Rect2:
 	var x := badge_rect().end.x + BAR_GAP
 	for f in ["hp_frame", "mp_frame", "exp_frame"]:
 		var s := UiSkin.tex(f).get_size() * fit(f)
+		if f != "exp_frame":
+			s.x += HP_MP_EXTRA
 		if f == frame:
 			return Rect2(Vector2(x, item_top()), s)
 		x += s.x + BAR_GAP
