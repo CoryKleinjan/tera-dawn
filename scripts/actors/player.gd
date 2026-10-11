@@ -54,10 +54,14 @@ const READY_TICKS := 120
 const TURN_TICKS := 5
 ## Ground speed above which turning round skids (kicks up dust and shows the turn pose).
 const TURN_SPEED := 1.6
-## Ticks at (nearly) top speed before the walk becomes a run.
+## Ticks at (nearly) top speed before he picks up pace (he keeps walking, just faster).
 const RUN_AFTER := 24
-## Share of top speed that counts as running flat out.
+## Share of top speed that counts as moving flat out.
 const RUN_SHARE := 0.9
+## Extra top speed once he has picked up pace, as a share of RUN_SPEED.
+const PACE_BONUS := 0.15
+## Ticks the extra speed takes to build up fully, so it isn't a jolt.
+const PACE_RAMP := 12
 ## Vertical speed under which a jump shows its top-of-the-arc pose.
 const APEX_SPEED := 1.2
 ## Your own sounds (Sound.play ids) and the jingle when you faint (Sound.jingle).
@@ -86,7 +90,7 @@ var land_t := 0       # ticks of the landing pose
 var cheer_t := 0      # ticks of the level-up pose
 var ready_t := 0      # ticks of the combat-ready stance left after an attack
 var turn_t := 0       # ticks of the turn pose
-var run_t := 0        # ticks spent at top speed (a run after RUN_AFTER)
+var run_t := 0        # ticks spent at top speed (faster after RUN_AFTER, see _top_speed)
 var loot_cd := 0      # ticks before the loot key asks for the next item
 ## Coyote time and jump buffering (see JumpGrace).
 var jump_grace := JumpGrace.new()
@@ -161,6 +165,7 @@ func knock_back(from_x: float) -> void:
 	if not is_climbing():
 		vel = Vector2(-KNOCKBACK.x if position.x < from_x else KNOCKBACK.x, KNOCKBACK.y)
 		on_ground = false
+		run_t = 0
 		jump_grace.cancel()
 
 ## The server didn't accept where you said you were, and puts you back.
@@ -350,12 +355,19 @@ func _grab_climbable() -> bool:
 	jump_grace.cancel()
 	return true
 
+## Top ground speed: `base` at first, rising by PACE_BONUS over PACE_RAMP ticks once he
+## has kept moving flat out for RUN_AFTER ticks.
+func _top_speed(base: float) -> float:
+	var built := clampf(float(run_t - RUN_AFTER) / PACE_RAMP, 0.0, 1.0)
+	return base * (1.0 + PACE_BONUS * built)
+
 func _move() -> void:
 	var left := _held("move_left")
 	var right := _held("move_right")
 	var rooted := action_t > 0 and on_ground
 	var acc := ACCEL_GROUND if on_ground else ACCEL_AIR
-	var max_speed := RUN_SPEED * CharacterStats.speed_multiplier(Game.me.stats)
+	var base_speed := RUN_SPEED * CharacterStats.speed_multiplier(Game.me.stats)
+	var max_speed := _top_speed(base_speed)
 	var was_face := face
 	if left and not right and not rooted:
 		vel.x = maxf(-max_speed, vel.x - acc)
@@ -370,7 +382,11 @@ func _move() -> void:
 	if face != was_face and on_ground and absf(vel.x) > TURN_SPEED:
 		turn_t = TURN_TICKS
 		world.fx.dust(position, -face, 5)
-	run_t = run_t + 1 if on_ground and absf(vel.x) >= max_speed * RUN_SHARE else 0
+	# the pace builds on the ground and carries through a jump; stopping or turning loses it
+	if absf(vel.x) < base_speed * RUN_SHARE or (left == right) or rooted:
+		run_t = 0
+	elif on_ground:
+		run_t += 1
 
 	# a jump works a few ticks after walking off a ledge, and a press just before
 	# landing goes off on landing (see JumpGrace); dropping through needs footing
@@ -444,7 +460,7 @@ func _animation() -> StringName:
 	if turn_t > 0:
 		return &"turn"
 	if absf(vel.x) > 0.3:
-		return &"run" if run_t >= RUN_AFTER else &"walk"
+		return &"walk" # a faster pace just speeds up the walk (see HeroBody.stride_speed)
 	if _held("move_down"):
 		return &"crouch"
 	if ready_t > 0:
