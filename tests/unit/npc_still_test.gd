@@ -4,7 +4,7 @@ extends TestCase
 
 func _held_rig(def: NpcDef) -> SpriteRig:
 	var rig := SpriteRig.new()
-	rig.setup(def.sprite_frames, def.texture, TDStage.TEXEL * def.sprite_scale, 40.0)
+	rig.setup(def.sprite_frames, def.texture, TDStage.TEXEL * def.sprite_scale)
 	rig.hold_still()
 	rig.play(&"idle")
 	for i in 20:
