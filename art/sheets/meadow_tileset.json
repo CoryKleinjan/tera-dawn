@@ -99,5 +99,46 @@
         1536
       ]
     ]
+  },
+  "overrides": {
+    "bush_small": {
+      "flat_bottom": true
+    },
+    "bush_medium": {
+      "flat_bottom": true
+    },
+    "bush_large": {
+      "flat_bottom": true
+    },
+    "tree_small": {
+      "flat_bottom": true
+    },
+    "tree_large": {
+      "flat_bottom": true
+    },
+    "stump": {
+      "flat_bottom": true
+    },
+    "rock_small": {
+      "flat_bottom": true
+    },
+    "rock_medium": {
+      "flat_bottom": true
+    },
+    "rock_large": {
+      "flat_bottom": true
+    },
+    "fence": {
+      "flat_bottom": true
+    },
+    "flowers_white": {
+      "flat_bottom": true
+    },
+    "flowers_yellow": {
+      "flat_bottom": true
+    },
+    "tall_grass": {
+      "flat_bottom": true
+    }
   }
 }
