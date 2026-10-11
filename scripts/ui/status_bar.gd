@@ -163,9 +163,9 @@ func _gui_input(event: InputEvent) -> void:
 static func has_points_waiting(action: String) -> bool:
 	match action:
 		"stats":
-			return Game.me.ap > 0
+			return Game.me.ap.points > 0
 		"skills":
-			return Game.me.sp > 0
+			return Game.me.skills.points > 0
 	return false
 
 static func _key_name(action: String) -> String:

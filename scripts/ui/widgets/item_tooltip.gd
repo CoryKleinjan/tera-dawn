@@ -48,7 +48,7 @@ func _lines() -> Array:
 		if e.ammo != &"":
 			out.append(["Fires %ss" % e.ammo, Palette.MIST, 12])
 		if not e.jobs.is_empty():
-			out.append(["%s only" % EquipDef.families_text(e.jobs), Palette.MIST if Game.me.can_use(e.jobs) else Palette.BAD, 12])
+			out.append(["%s only" % EquipDef.families_text(e.jobs), Palette.MIST if Game.me.gear.can_use(e.jobs) else Palette.BAD, 12])
 		var reqs := e.requirements()
 		for key in reqs:
 			var have := Game.me.level if key == &"level" else Game.me.stats.value(key)

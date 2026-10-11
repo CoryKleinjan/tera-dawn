@@ -216,7 +216,7 @@ func test_starting_gear_can_be_worn_by_a_new_character() -> void:
 	var c := Character.create("Rookie")
 	for e in c.job.starting_gear:
 		if e:
-			check_eq(c.equip_problem(e), "", "%s: starting_gear %s" % [Scan.where(c.job), e.id])
+			check_eq(c.gear.equip_problem(e), "", "%s: starting_gear %s" % [Scan.where(c.job), e.id])
 
 func test_every_advanced_job_is_taught_somewhere() -> void:
 	var taught := {}
@@ -282,7 +282,7 @@ func test_skill_weapon_kinds_exist_on_some_weapon() -> void:
 			check(kinds.has(k), "%s: weapons lists %s, which no weapon is" % [Scan.where(s), k])
 
 func test_attack_skills_animate_with_a_hero_animation() -> void:
-	var frames := TDPlayer.HERO_FRAMES
+	var frames := HeroBody.FRAMES
 	for s: SkillDef in Content.skills.values():
 		if s.kind != SkillDef.Kind.PASSIVE and not WeaponStyle.is_spell(s.animation):
 			check(frames.has_animation(s.animation), "%s: animation %s is not a hero animation" % [Scan.where(s), s.animation])

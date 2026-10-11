@@ -65,16 +65,16 @@ func _draw_body() -> void:
 	y = _row(y, "MP", "%d / %d" % [Game.me.mp, Game.me.max_mp()])
 	y = _divider(y)
 	auto_rect = Rect2()
-	if Game.me.ap > 0 and not Game.me.job.is_starting_job():
+	if Game.me.ap.points > 0 and not Game.me.job.is_starting_job():
 		# left of the "+" column, so it never touches the STR "+" under it
 		auto_rect = Rect2(Vector2(_plus_x() - 6 - AUTO_SIZE.x, y - TEXT_MID - AUTO_SIZE.y / 2.0), AUTO_SIZE)
 		add_button(auto_rect, "Auto", auto_assign, true, true)
-	y = _row(y, "Ability Points", str(Game.me.ap), Palette.SUN if Game.me.ap > 0 else Palette.MIST, 0.0, COL_VALUE, STAT_ROW_H)
+	y = _row(y, "Ability Points", str(Game.me.ap.points), Palette.SUN if Game.me.ap.points > 0 else Palette.MIST, 0.0, COL_VALUE, STAT_ROW_H)
 	var main_stat := Game.me.job.damage_stats(s)[0]
 	for stat in StatBlock.BASE:
 		var extra := s.value(stat) - Game.me.base.value(stat)
 		var text := str(s.value(stat)) + (" (+%d)" % extra if extra > 0 else "")
-		if Game.me.ap > 0:
+		if Game.me.ap.points > 0:
 			plus_button(Vector2(_plus_x(), y - TEXT_MID - STAT_PLUS / 2.0), Net.ask.bind(&"req_add_ap", [stat]), STAT_PLUS)
 		y = _row(y, StatBlock.LABELS[stat], text, Palette.SUN if stat == main_stat else Palette.MIST, 0.0, COL_VALUE, STAT_ROW_H)
 	y = _divider(y - STAT_ROW_H + ROW_H)
@@ -117,10 +117,10 @@ static func path_text(c: Character, j: JobDef) -> String:
 			bits.append("%d %s (you have %d)" % [short[stat], StatBlock.LABELS[stat], c.base.value(stat)])
 	return "%s: %s" % [j.display_name, ", ".join(bits) if not bits.is_empty() else "ready"]
 
-## Spends every Ability Point the way Character.auto_ap_plan says: the secondary stat the
+## Spends every Ability Point the way AbilityPoints.auto_plan says: the secondary stat the
 ## gear needs first, then the primary stat. The server does the spending.
 func auto_assign() -> void:
-	var plan := Game.me.auto_ap_plan()
+	var plan := Game.me.ap.auto_plan()
 	for stat in [StringName(Game.me.job.secondary_stat), StringName(Game.me.job.primary_stat)]:
 		if plan.has(stat):
 			Net.ask(&"req_add_ap_many", [stat, plan[stat]])

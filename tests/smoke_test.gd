@@ -291,22 +291,22 @@ func _check_character() -> void:
 
 	# unequip and equip change stats
 	var attack := c.stats.attack
-	_check(c.unequip(&"weapon") == "" and c.stats.attack == attack - sword.stats.attack, "taking off the sword lowers Weapon Attack")
-	_check(c.equip(_first_filled(c, ItemDef.Tab.EQUIP)) == "" and c.stats.attack == attack, "putting it back on restores Weapon Attack")
+	_check(c.gear.unequip(&"weapon") == "" and c.stats.attack == attack - sword.stats.attack, "taking off the sword lowers Weapon Attack")
+	_check(c.gear.equip(_first_filled(c, ItemDef.Tab.EQUIP)) == "" and c.stats.attack == attack, "putting it back on restores Weapon Attack")
 	c.inventory.add(Content.item(&"leaf_cap"))
 	var defense := c.stats.defense
-	c.equip(_first_filled(c, ItemDef.Tab.EQUIP))
+	c.gear.equip(_first_filled(c, ItemDef.Tab.EQUIP))
 	_check(c.stats.defense > defense, "wearing a hat raises Weapon Defense")
 	c.inventory.add(Content.item(&"dawn_blade"))
-	_check(c.equip(_first_filled(c, ItemDef.Tab.EQUIP)) != "", "level 1 can't wear the level 8 Dawn Blade")
+	_check(c.gear.equip(_first_filled(c, ItemDef.Tab.EQUIP)) != "", "level 1 can't wear the level 8 Dawn Blade")
 
 	# levels give Ability Points, and STR raises damage
 	c.gain_xp(c.xp_need())
-	_check(c.level == 2 and c.ap == c.job.ap_per_level, "levelling up gives Ability Points")
+	_check(c.level == 2 and c.ap.points == c.job.ap_per_level, "levelling up gives Ability Points")
 	var top := c.damage_range().y
 	for n in 5:
-		c.add_ap(&"strength")
-	_check(c.ap == 0 and c.damage_range().y > top, "spending AP on STR raises damage")
+		c.ap.spend(&"strength")
+	_check(c.ap.points == 0 and c.damage_range().y > top, "spending AP on STR raises damage")
 
 	# saving and loading keeps the bag and the gear
 	c.inventory.add(tusk, 3)
@@ -323,26 +323,26 @@ func _check_character() -> void:
 ## Skill Points, Beginner skills, buffs and save files, without the world.
 func _check_skill_rules() -> void:
 	var c := Character.create("Skiller")
-	_check(c.sp == 0 and c.skill_level(Content.skill(Character.BASIC_ATTACK)) == 1, "a new character knows only the basic attack")
+	_check(c.skills.points == 0 and c.skills.level(Content.skill(Character.BASIC_ATTACK)) == 1, "a new character knows only the basic attack")
 	c.gain_xp(c.xp_need())
-	_check(c.sp == 1, "a Beginner gets 1 Skill Point a level")
+	_check(c.skills.points == 1, "a Beginner gets 1 Skill Point a level")
 	var step: SkillDef = Content.skill(&"quick_step")
-	_check(c.learn(step) == "" and c.skill_level(step) == 1 and c.sp == 0, "a Beginner learns Quick Step")
-	_check(c.learn(step) != "", "no Skill Points, no more levels")
-	_check(c.learn(Content.skill(&"power_strike")) != "", "a Beginner can't learn Warrior skills")
+	_check(c.skills.learn(step) == "" and c.skills.level(step) == 1 and c.skills.points == 0, "a Beginner learns Quick Step")
+	_check(c.skills.learn(step) != "", "no Skill Points, no more levels")
+	_check(c.skills.learn(Content.skill(&"power_strike")) != "", "a Beginner can't learn Warrior skills")
 	var speed := c.stats.speed
 	c.mp = 100
-	c.add_buff(step)
+	c.skills.add_buff(step)
 	_check(c.stats.speed > speed, "Quick Step makes you faster")
-	c.tick_buffs(step.duration_ticks(1))
-	_check(c.buffs.is_empty() and c.stats.speed == speed, "and wears off after its time")
-	c.sp = 3
+	c.skills.tick_buffs(step.duration_ticks(1))
+	_check(c.skills.buffs.is_empty() and c.stats.speed == speed, "and wears off after its time")
+	c.skills.points = 3
 	var wind: SkillDef = Content.skill(&"second_wind")
-	c.learn(wind)
-	_check(c.regen_bonus().x == wind.regen_hp, "Second Wind adds HP recovery")
+	c.skills.learn(wind)
+	_check(c.skills.regen_bonus().x == wind.regen_hp, "Second Wind adds HP recovery")
 	var back := Character.new()
 	back.load_dict(c.to_dict())
-	_check(back.skills == c.skills and back.sp == c.sp and back.quickslots == c.quickslots, "skills, Skill Points and quickslots save")
+	_check(back.skills.learned == c.skills.learned and back.skills.points == c.skills.points and back.quickslots == c.quickslots, "skills, Skill Points and quickslots save")
 	var old := c.to_dict()
 	old.erase("sp")
 	old.erase("skills")
@@ -351,7 +351,7 @@ func _check_skill_rules() -> void:
 	old["job"] = "warrior"
 	var legacy := Character.new()
 	legacy.load_dict(old)
-	_check(legacy.sp == 11 * 3 and legacy.quickslots[Character.QUICKSLOTS - 2] == [&"item", &"red_potion"], "older saves get Skill Points for their levels")
+	_check(legacy.skills.points == 11 * 3 and legacy.quickslots[Character.QUICKSLOTS - 2] == [&"item", &"red_potion"], "older saves get Skill Points for their levels")
 
 ## Starting as a Beginner, advancing, and gear only some jobs can use.
 func _check_jobs() -> void:
@@ -367,7 +367,7 @@ func _check_jobs() -> void:
 	c.base.strength = 35
 	var hp := c.max_hp()
 	_check(c.advance(warrior) == "" and c.job == warrior, "a level 10 Beginner with 35 STR becomes a Warrior")
-	_check(c.weapon() == Content.item(&"bronze_sword") and c.max_hp() >= hp, "the Warrior gets a Bronze Sword and wears it")
+	_check(c.gear.weapon() == Content.item(&"bronze_sword") and c.max_hp() >= hp, "the Warrior gets a Bronze Sword and wears it")
 	_check(c.advance(mage) != "", "a Warrior can't then become a Magician")
 	var wand: EquipDef = Content.item(&"apprentice_wand")
 	c.inventory.add(wand)
@@ -376,7 +376,7 @@ func _check_jobs() -> void:
 		var st := c.inventory.at(ItemDef.Tab.EQUIP, i)
 		if st and st.item == wand:
 			slot = i
-	_check(c.equip(slot).begins_with("Only Mages"), "a Warrior can't wear a wand")
+	_check(c.gear.equip(slot).begins_with("Only Mages"), "a Warrior can't wear a wand")
 
 ## Empties the test's character folder, so every run starts from new characters.
 func _clear_saves() -> void:
@@ -731,7 +731,7 @@ func _run() -> void:
 ## Takes Elder Rowan's first quest, does it, hands it in; then a quest whose item only
 ## drops while you're on it.
 func _check_quests() -> void:
-	Net.server._enter_map(_me(), Character.START_MAP, 300)
+	Net.server.enter_map(_me(), Character.START_MAP, 300)
 	await _ticks(3)
 	var meadow: MapInstance = Net.server.map_instance(&"meadow")
 	var elder := world.npcs()[0]
@@ -796,10 +796,10 @@ func _check_quests() -> void:
 ## window.
 func _check_job_advance() -> void:
 	var ch := _me().character
-	Net.server._enter_map(_me(), &"lumewood", 300)
+	Net.server.enter_map(_me(), &"lumewood", 300)
 	await _ticks(3)
 	_check(world.map.id == &"lumewood" and world.map.town, "Lumewood is a town")
-	Net.server._enter_map(_me(), &"lumewood_hall", 240)
+	Net.server.enter_map(_me(), &"lumewood_hall", 240)
 	await _ticks(3)
 	_check(world.map.outside() == &"lumewood", "the Magicians' Library is a room in Lumewood")
 	var guide: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"lumewood_instructor")[0]
@@ -821,11 +821,11 @@ func _check_job_advance() -> void:
 	_check(talk.options[0][0] == "Become a Magician", "a level 10 Beginner with 20 INT may become a Magician")
 	talk.choose(0)
 	await _ticks(2)
-	_check(Game.me.job.id == &"mage" and Game.me.weapon() == Content.item(&"apprentice_wand"), "the server makes them a Magician and hands them a wand to wear")
+	_check(Game.me.job.id == &"mage" and Game.me.gear.weapon() == Content.item(&"apprentice_wand"), "the server makes them a Magician and hands them a wand to wear")
 	Net.ask(&"req_equip", [Game.me.inventory.find(Content.item(&"apprentice_wand")), &"weapon"])
 	await _ticks(2)
 	_check(world.player.rig.paperdoll.look["gear"].get("weapon") == "apprentice_wand", "the hero is drawn holding the wand once it's worn")
-	Net.server._enter_map(_me(), &"meadow", 300)
+	Net.server.enter_map(_me(), &"meadow", 300)
 	await _ticks(3)
 
 ## A Warrior with Skill Points learns skills in the skill window: they land on quickslots,
@@ -833,8 +833,8 @@ func _check_job_advance() -> void:
 func _check_skills() -> void:
 	var ch := _me().character
 	ch.job = Content.job(&"warrior")
-	ch.sp = 5
-	ch.skills.clear()
+	ch.skills.points = 5
+	ch.skills.learned.clear()
 	ch.quickslots.fill([])
 	_me().dirty_character = true
 	await _ticks(2)
@@ -845,13 +845,13 @@ func _check_skills() -> void:
 	var slash: SkillDef = Content.skill(&"dawn_slash")
 	book.learn(slash)
 	await _ticks(1)
-	_check(Game.me.skill_level(slash) == 0 and Game.me.sp == 5, "Dawn Slash needs Power Strike first")
+	_check(Game.me.skills.level(slash) == 0 and Game.me.skills.points == 5, "Dawn Slash needs Power Strike first")
 	book.learn(Content.skill(&"power_strike"))
 	book.learn(slash)
 	book.learn(Content.skill(&"iron_body"))
 	book.learn(Content.skill(&"toughness"))
 	await _ticks(1)
-	_check(Game.me.skill_level(slash) == 1 and Game.me.sp == 1, "spending Skill Points learns skills")
+	_check(Game.me.skills.level(slash) == 1 and Game.me.skills.points == 1, "spending Skill Points learns skills")
 	_check(Game.me.quickslots[0] == [&"skill", &"power_strike"] and Game.me.quickslots[1] == [&"skill", &"dawn_slash"]
 		and Game.me.quickslots[2] == [&"skill", &"iron_body"], "learned skills go on the free quickslots")
 	_check(Game.me.max_hp() == Game.me.job.base_hp + Game.me.level * Game.me.job.hp_per_level + Game.me.equipment.bonus().max_hp + 15, "Toughness raises Max HP")
@@ -863,10 +863,10 @@ func _check_skills() -> void:
 	_me().cooldown = 0
 	await _tap("quick_3")
 	await _ticks(1)
-	_check(Game.me.buffs.has(&"iron_body") and Game.me.stats.defense == defense + 5, "Iron Body raises Weapon Defense")
-	ch.buffs[&"iron_body"][1] = 2
+	_check(Game.me.skills.buffs.has(&"iron_body") and Game.me.stats.defense == defense + 5, "Iron Body raises Weapon Defense")
+	ch.skills.buffs[&"iron_body"][1] = 2
 	await _ticks(4)
-	_check(not Game.me.buffs.has(&"iron_body") and Game.me.stats.defense == defense, "it wears off")
+	_check(not Game.me.skills.buffs.has(&"iron_body") and Game.me.stats.defense == defense, "it wears off")
 	# Quickslots can be rearranged from the client, and the server keeps them.
 	world.hud.quickslots.assign(5, &"skill", &"dawn_slash")
 	await _ticks(1)
@@ -906,7 +906,7 @@ func _check_ranged() -> void:
 	world.player.cooldown = 0
 	_me().cooldown = 0
 	await _ticks(3)
-	_check(Game.me.basic_attack().id == &"bow_shot", "a bow turns the attack key into a shot")
+	_check(Game.me.skills.basic_attack().id == &"bow_shot", "a bow turns the attack key into a shot")
 	var hp := m.health.hp
 	m.position.x = 1380 + 200
 	m.walk_t = 1000
@@ -932,13 +932,13 @@ func _check_ranged() -> void:
 	world.player.cooldown = 0
 	_me().dirty_character = true
 	await _ticks(2)
-	_check(Game.me.use_problem(Game.me.basic_attack()).contains("out of arrows"), "without arrows the bow can't shoot")
+	_check(Game.me.skills.use_problem(Game.me.skills.basic_attack()).contains("out of arrows"), "without arrows the bow can't shoot")
 	# a Magician's spell uses Magic Attack
 	ch.job = Content.job(&"mage")
 	ch.equipment.take(&"weapon")
 	ch.equipment.put(&"weapon", ItemStack.exact(Content.item(&"apprentice_wand")))
 	ch.base.intelligence = 60
-	ch.skills[&"energy_bolt"] = 1
+	ch.skills.learned[&"energy_bolt"] = 1
 	ch.recalc()
 	var bolt: SkillDef = Content.skill(&"energy_bolt")
 	var magic := ch.magic_range()
@@ -949,12 +949,12 @@ func _check_ranged() -> void:
 	ch.job = Content.job(&"thief")
 	ch.equipment.take(&"weapon")
 	ch.equipment.put(&"weapon", ItemStack.exact(Content.item(&"iron_claw")))
-	ch.skills[&"lucky_seven"] = 1
-	_check(ch.use_problem(Content.skill(&"lucky_seven")).contains("out of stars"), "Lucky Seven needs throwing stars")
+	ch.skills.learned[&"lucky_seven"] = 1
+	_check(ch.skills.use_problem(Content.skill(&"lucky_seven")).contains("out of stars"), "Lucky Seven needs throwing stars")
 	ch.inventory.add(Content.item(&"iron_star"), 10)
-	_check(ch.use_problem(Content.skill(&"lucky_seven")) == "" and ch.ammo_attack() == 15, "with stars it's ready, and stars add attack")
-	ch.skills[&"flash_fist"] = 1
-	_check(ch.use_problem(Content.skill(&"flash_fist")).contains("needs a knuckle"), "Flash Fist needs a knuckle")
+	_check(ch.skills.use_problem(Content.skill(&"lucky_seven")) == "" and ch.gear.ammo_attack() == 15, "with stars it's ready, and stars add attack")
+	ch.skills.learned[&"flash_fist"] = 1
+	_check(ch.skills.use_problem(Content.skill(&"flash_fist")).contains("needs a knuckle"), "Flash Fist needs a knuckle")
 	# back to a Warrior with a sword for the rest of the test
 	ch.job = Content.job(&"warrior")
 	ch.equipment.take(&"weapon")
@@ -966,7 +966,7 @@ func _check_ranged() -> void:
 ## The world map, Hobb's wagon, return scrolls, and waking up in the right town.
 func _check_travel() -> void:
 	var ch := _me().character
-	Net.server._enter_map(_me(), Character.START_MAP, 300)
+	Net.server.enter_map(_me(), Character.START_MAP, 300)
 	await _ticks(3)
 	await _press("worldmap")
 	var wm: TDWorldMapWindow = world.hud.windows["worldmap"]
@@ -1058,7 +1058,7 @@ func _check_travel() -> void:
 	talk.choose(0)
 	await _ticks(3)
 	_check(world.map.id == &"greenbough", "the coach takes you to Greenbough")
-	Net.server._enter_map(_me(), Character.START_MAP, 300)
+	Net.server.enter_map(_me(), Character.START_MAP, 300)
 	await _ticks(3)
 
 ## The new field maps: walking west out of the village, monsters that split, hop and shoot,
@@ -1075,7 +1075,7 @@ func _check_fields() -> void:
 	_check(world.map.id == &"sunny_slope", "the village's west portal leads to Sunny Slope")
 	_me().inv = 0
 	# a Sporecap splits into Spore Puffs when it's defeated
-	Net.server._enter_map(_me(), &"mushroom_dell", 300)
+	Net.server.enter_map(_me(), &"mushroom_dell", 300)
 	await _ticks(3)
 	var dell: MapInstance = Net.server.maps[&"mushroom_dell"]
 	var cap: SimMob = dell.mobs.filter(func(m: SimMob) -> bool: return m.def.id == &"sporecap")[0]
@@ -1090,7 +1090,7 @@ func _check_fields() -> void:
 	await _ticks(60)
 	_check(cap.children.all(func(c: SimMob) -> bool: return c.dead and c.asleep), "defeated Spore Puffs go back to sleep instead of respawning")
 	# hoppers hop
-	Net.server._enter_map(_me(), &"sunny_slope", 300)
+	Net.server.enter_map(_me(), &"sunny_slope", 300)
 	await _ticks(3)
 	var slope: MapInstance = Net.server.maps[&"sunny_slope"]
 	var hopper: SimMob = slope.mobs.filter(func(m: SimMob) -> bool: return m.def.jumps and not m.dead)[0]
@@ -1103,7 +1103,7 @@ func _check_fields() -> void:
 			break
 	_check(hopped and hopper.body_position().y <= hopper.plat.y, "a Tide Dewling hops")
 	# an Acorn Sentry never moves and shoots anyone near it; the shot lands where they stood
-	Net.server._enter_map(_me(), &"thornwood", 300)
+	Net.server.enter_map(_me(), &"thornwood", 300)
 	await _ticks(3)
 	var wood: MapInstance = Net.server.maps[&"thornwood"]
 	var sentry: SimMob = wood.mobs.filter(func(m: SimMob) -> bool: return m.def.id == &"acorn_sentry" and not m.dead)[0]
@@ -1139,11 +1139,11 @@ func _check_fields() -> void:
 	var e := ch.inventory.find(sword)
 	var stack := ch.inventory.at(ItemDef.Tab.EQUIP, e)
 	var att := stack.stats.attack
-	_check(ch.scroll_problem(ch.inventory.find(Content.item(&"scroll_helmet_hp_60")), e) != "", "a helmet scroll doesn't work on a sword")
-	var r := ch.use_scroll(ch.inventory.find(good), e, 0.0)
+	_check(ch.gear.scroll_problem(ch.inventory.find(Content.item(&"scroll_helmet_hp_60")), e) != "", "a helmet scroll doesn't work on a sword")
+	var r := ch.gear.use_scroll(ch.inventory.find(good), e, 0.0)
 	_check(r["worked"] and stack.stats.attack == att + 2 and stack.slots_used == 1 and stack.upgrades == 1 and stack.display_name().ends_with("+1"),
 		"a scroll that works adds its stats and spends a slot")
-	r = ch.use_scroll(ch.inventory.find(good), e, 0.99)
+	r = ch.gear.use_scroll(ch.inventory.find(good), e, 0.99)
 	_check(not r["worked"] and stack.stats.attack == att + 2 and stack.slots_used == 2 and stack.slots_left() == sword.upgrade_slots - 2,
 		"a scroll that fails still spends a slot")
 	var saved := ItemStack.from_dict(stack.to_dict())
@@ -1160,7 +1160,7 @@ func _check_fields() -> void:
 	await _ticks(3)
 	_check(Game.me.inventory.count_of(good) == 0 and Game.me.inventory.at(ItemDef.Tab.EQUIP, Game.me.inventory.find(sword)).slots_used == 3,
 		"clicking the gear uses the scroll on it")
-	Net.server._enter_map(_me(), &"meadow", 300)
+	Net.server.enter_map(_me(), &"meadow", 300)
 	await _ticks(3)
 
 ## Chat, parties, buddies, trading, guilds, fame and player shops, with a second
@@ -1171,8 +1171,8 @@ func _check_social() -> void:
 	var ally := SimPlayer.new(4242, Character.create("Ally"))
 	Net.server.sessions[ally.peer] = ally
 	social.joined(ally)
-	Net.server._enter_map(_me(), &"meadow", 400)
-	Net.server._enter_map(ally, &"meadow", 470)
+	Net.server.enter_map(_me(), &"meadow", 400)
+	Net.server.enter_map(ally, &"meadow", 470)
 	await _ticks(5)
 	_check(world.avatars.has(ally.peer) and world.avatars[ally.peer].char_name == "Ally", "the other character shows up on the map")
 	# chat
@@ -1255,14 +1255,14 @@ func _check_social() -> void:
 	Net.ask(&"req_fame", [ally.peer, true])
 	_check(ally.character.fame == 1, "fame goes up by one, once a day")
 	# a guild
-	Net.server._enter_map(_me(), &"dawnharbor", 300)
-	Net.server._enter_map(ally, &"dawnharbor", 400)
+	Net.server.enter_map(_me(), &"dawnharbor", 300)
+	Net.server.enter_map(ally, &"dawnharbor", 400)
 	await _ticks(3)
 	ch.shards = TDSocial.GUILD_COST + 100
 	ch.level = maxi(ch.level, TDSocial.GUILD_LEVEL)
 	# Hollis keeps the guild register in Dawnharbor's Guild Hall
-	Net.server._enter_map(_me(), &"dawnharbor_guild", 240)
-	Net.server._enter_map(ally, &"dawnharbor_guild", 400)
+	Net.server.enter_map(_me(), &"dawnharbor_guild", 240)
+	Net.server.enter_map(ally, &"dawnharbor_guild", 400)
 	await _ticks(3)
 	var clerk: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"guild_clerk")[0]
 	_teleport(Vector2(clerk.position.x - 30, clerk.position.y))
@@ -1281,7 +1281,7 @@ func _check_social() -> void:
 	await _ticks(2)
 	_check(str(chat.lines[-1]["text"]) == "[Guild] %s: hi guild" % ch.name, "/g talks to the guild")
 	# a player shop in the free market
-	Net.server._enter_map(_me(), &"dawnharbor", 300)
+	Net.server.enter_map(_me(), &"dawnharbor", 300)
 	await _ticks(3)
 	var market: PortalDef = Content.map(&"dawnharbor").portals.filter(func(p: PortalDef) -> bool: return p.target_map == &"free_market")[0]
 	_teleport(Vector2(market.x, 620))
@@ -1289,7 +1289,7 @@ func _check_social() -> void:
 	await _tap("move_up")
 	await _ticks(4)
 	_check(world.map.id == &"free_market", "Dawnharbor's portal leads to the Free Market")
-	Net.server._enter_map(ally, &"free_market", 900)
+	Net.server.enter_map(ally, &"free_market", 900)
 	ch.inventory.add(Content.item(&"petal_wing"), 4)
 	_me().dirty_character = true
 	await _ticks(3)
@@ -1313,7 +1313,7 @@ func _check_social() -> void:
 	ally.map.remove_player(ally)
 	await _ticks(35)
 	_check(Game.social.get("party", {}).is_empty(), "a party of one breaks up")
-	Net.server._enter_map(_me(), &"meadow", 300)
+	Net.server.enter_map(_me(), &"meadow", 300)
 	await _ticks(3)
 
 ## Chairs, pets, the Monster Book and achievements.
@@ -1339,7 +1339,7 @@ func _check_keepsakes() -> void:
 	var hp := ch.health.hp
 	map.tick = (map.tick / 120 + 1) * 120 - 1
 	await _ticks(1)
-	_check(ch.health.hp - hp == 2 + ch.level / 3 + ch.regen_bonus().x + stool.regen_hp, "a chair adds to HP recovery")
+	_check(ch.health.hp - hp == 2 + ch.level / 3 + ch.skills.regen_bonus().x + stool.regen_hp, "a chair adds to HP recovery")
 	await _hold("move_right", 6)
 	await _ticks(4)
 	_check(me.chair == &"" and world.player.sitting == &"", "moving gets you up")
@@ -1439,8 +1439,8 @@ func _check_multiplayer() -> void:
 	var bot_player: SimPlayer = Net.server.sessions[bot_peer]
 	bot_player.inv = 100000
 	# both players go out to the meadow, where the monsters are (the village has none)
-	Net.server._enter_map(_me(), &"meadow", 360)
-	Net.server._enter_map(bot_player, &"meadow", 300)
+	Net.server.enter_map(_me(), &"meadow", 360)
+	Net.server.enter_map(bot_player, &"meadow", 300)
 	# hold a Dewling in front of the bot until its attacks defeat one
 	var meadow: MapInstance = Net.server.maps[&"meadow"]
 	var level := bot_player.character.level

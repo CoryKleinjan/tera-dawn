@@ -19,11 +19,11 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
 3. Give it an icon (until there's art, add it to `tools/art/make_skill_placeholders.py`).
 
 It then appears in its job's tab of the skill window (K). Players spend Skill Points on it
-(`Character.learn`, checked by `TDServer.on_learn_skill`), and a newly learned attack or
+(`SkillBook.learn`, checked by `ServerJobs.on_learn_skill`), and a newly learned attack or
 buff goes on the first free quickslot. Quickslots (`Character.quickslots`, eight keys in
 `Game.QUICKSLOT_ACTIONS`) hold skills or items and are saved with the character. The
 server checks the skill is known and pays its MP (`TDServer.on_skill`), then works out what
-it hits (`MapInstance.use_skill`) or starts the buff (`Character.add_buff`, counted down
+it hits (`MapInstance.use_skill`) or starts the buff (`SkillBook.add_buff`, counted down
 in `SimPlayer.step`). Passives and buffs feed into the character's stats in `recalc`.
 
 Ranged and magic skills:

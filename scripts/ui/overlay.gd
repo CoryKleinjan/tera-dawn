@@ -205,7 +205,7 @@ func _draw_boss_bar(top_center: Vector2) -> bool:
 ## Running buffs left of the minimap, newest on the left, with the seconds they have left.
 func _draw_buffs(right_top: Vector2) -> void:
 	var x := right_top.x
-	for id in Game.me.buffs:
+	for id in Game.me.skills.buffs:
 		var s: SkillDef = Content.skills.get(id)
 		if s == null:
 			continue
@@ -214,7 +214,7 @@ func _draw_buffs(right_top: Vector2) -> void:
 		UiSkin.draw_icon(self, "hud/buff_frame", r)
 		if s.icon:
 			draw_texture_rect(s.icon, TDWindow.fit(s.icon, r.grow(-7)), false)
-		var left := ceili(Game.me.buffs[id][1] / 60.0)
+		var left := ceili(Game.me.skills.buffs[id][1] / 60.0)
 		DrawUtil.text(self, Game.num_font, Vector2(r.get_center().x, r.end.y + 9), str(left), 11,
 			Palette.MIST if left > 10 else Palette.WARN, 0, 4, Palette.NIGHT)
 

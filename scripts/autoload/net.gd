@@ -222,6 +222,9 @@ func _sender() -> int:
 	return multiplayer.get_remote_sender_id()
 
 # ---------- requests: client -> server ----------
+## Each group hands off to the server part in its title.
+
+# --- accounts and character select (TDLobby) ---
 
 @rpc("any_peer", "call_local", "reliable")
 func req_register(username_: String, password: String) -> void:
@@ -261,6 +264,8 @@ func req_leave_character() -> void:
 	if server:
 		server.lobby.on_leave_character(_sender())
 
+# --- moving and fighting (TDServer) ---
+
 @rpc("any_peer", "call_local", "unreliable_ordered")
 func req_move(at: Vector2, face: int, anim: StringName, climbing: bool) -> void:
 	if server:
@@ -272,25 +277,140 @@ func req_skill(skill_id: StringName, at: Vector2, face: int) -> void:
 		server.on_skill(_sender(), skill_id, at, face)
 
 @rpc("any_peer", "call_local", "reliable")
-func req_portal() -> void:
-	if server:
-		server.on_portal(_sender())
-
-@rpc("any_peer", "call_local", "reliable")
 func req_loot() -> void:
 	if server:
 		server.on_loot(_sender())
 
 @rpc("any_peer", "call_local", "reliable")
+func req_set_quickslot(i: int, kind: StringName, id: StringName) -> void:
+	if server:
+		server.on_set_quickslot(_sender(), i, kind, id)
+
+# --- getting around (ServerTravel) ---
+
+@rpc("any_peer", "call_local", "reliable")
+func req_portal() -> void:
+	if server:
+		server.travel.on_portal(_sender())
+
+@rpc("any_peer", "call_local", "reliable")
+func req_travel(npc_id: StringName, index: int) -> void:
+	if server:
+		server.travel.on_travel(_sender(), npc_id, index)
+
+# --- your things (ServerItems) ---
+
+@rpc("any_peer", "call_local", "reliable")
 func req_use_item(slot: int) -> void:
 	if server:
-		server.on_use_item(_sender(), slot)
+		server.items.on_use_item(_sender(), slot)
 
 ## Sit on the chair, or bring out the pet, in Setup slot `slot` (again to stop).
 @rpc("any_peer", "call_local", "reliable")
 func req_setup(slot: int) -> void:
 	if server:
-		server.on_setup(_sender(), slot)
+		server.items.on_setup(_sender(), slot)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_scroll(use_slot: int, equip_slot: int) -> void:
+	if server:
+		server.items.on_scroll(_sender(), use_slot, equip_slot)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_equip(slot: int, place: StringName) -> void:
+	if server:
+		server.items.on_equip(_sender(), slot, place)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_unequip(place: StringName, slot: int) -> void:
+	if server:
+		server.items.on_unequip(_sender(), place, slot)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_move_item(tab: int, from: int, to: int) -> void:
+	if server:
+		server.items.on_move_item(_sender(), tab, from, to)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_drop_item(tab: int, slot: int) -> void:
+	if server:
+		server.items.on_drop_item(_sender(), tab, slot)
+
+# --- NPC shops (ServerNpcShop) ---
+
+@rpc("any_peer", "call_local", "reliable")
+func req_buy(npc_id: StringName, index: int, count: int) -> void:
+	if server:
+		server.npc_shop.on_buy(_sender(), npc_id, index, count)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_sell(npc_id: StringName, tab: int, slot: int, count: int) -> void:
+	if server:
+		server.npc_shop.on_sell(_sender(), npc_id, tab, slot, count)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_sell_all_etc(npc_id: StringName) -> void:
+	if server:
+		server.npc_shop.on_sell_all_etc(_sender(), npc_id)
+
+# --- storage (ServerStorage) ---
+
+@rpc("any_peer", "call_local", "reliable")
+func req_store(npc_id: StringName, tab: int, slot: int) -> void:
+	if server:
+		server.storage.on_store(_sender(), npc_id, tab, slot)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_retrieve(npc_id: StringName, tab: int, slot: int) -> void:
+	if server:
+		server.storage.on_retrieve(_sender(), npc_id, tab, slot)
+
+# --- quests (ServerQuests) ---
+
+@rpc("any_peer", "call_local", "reliable")
+func req_quest_accept(npc_id: StringName, quest_id: StringName) -> void:
+	if server:
+		server.quests.on_quest_accept(_sender(), npc_id, quest_id)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_quest_complete(npc_id: StringName, quest_id: StringName) -> void:
+	if server:
+		server.quests.on_quest_complete(_sender(), npc_id, quest_id)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_quest_forfeit(quest_id: StringName) -> void:
+	if server:
+		server.quests.on_quest_forfeit(_sender(), quest_id)
+
+# --- jobs, Ability and Skill Points (ServerJobs) ---
+
+@rpc("any_peer", "call_local", "reliable")
+func req_advance(npc_id: StringName, job_id: StringName) -> void:
+	if server:
+		server.jobs.on_advance(_sender(), npc_id, job_id)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_reset_ap(npc_id: StringName, job_id: StringName) -> void:
+	if server:
+		server.jobs.on_reset_ap(_sender(), npc_id, job_id)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_add_ap(stat: StringName) -> void:
+	if server:
+		server.jobs.on_add_ap(_sender(), stat)
+
+## Spends several Ability Points on one stat at once (the Character window's Auto button).
+@rpc("any_peer", "call_local", "reliable")
+func req_add_ap_many(stat: StringName, amount: int) -> void:
+	if server:
+		server.jobs.on_add_ap(_sender(), stat, amount)
+
+@rpc("any_peer", "call_local", "reliable")
+func req_learn_skill(skill_id: StringName) -> void:
+	if server:
+		server.jobs.on_learn_skill(_sender(), skill_id)
+
+# --- players together (TDSocial) ---
 
 @rpc("any_peer", "call_local", "reliable")
 func req_chat(text: String) -> void:
@@ -356,107 +476,6 @@ func req_shop_buy(owner: int, index: int, item_id: StringName) -> void:
 func req_shop_leave(owner: int) -> void:
 	if server:
 		server.social.on_shop_leave(_sender(), owner)
-
-@rpc("any_peer", "call_local", "reliable")
-func req_scroll(use_slot: int, equip_slot: int) -> void:
-	if server:
-		server.on_scroll(_sender(), use_slot, equip_slot)
-
-@rpc("any_peer", "call_local", "reliable")
-func req_equip(slot: int, place: StringName) -> void:
-	if server:
-		server.on_equip(_sender(), slot, place)
-
-@rpc("any_peer", "call_local", "reliable")
-func req_unequip(place: StringName, slot: int) -> void:
-	if server:
-		server.on_unequip(_sender(), place, slot)
-
-@rpc("any_peer", "call_local", "reliable")
-func req_move_item(tab: int, from: int, to: int) -> void:
-	if server:
-		server.on_move_item(_sender(), tab, from, to)
-
-@rpc("any_peer", "call_local", "reliable")
-func req_drop_item(tab: int, slot: int) -> void:
-	if server:
-		server.on_drop_item(_sender(), tab, slot)
-
-@rpc("any_peer", "call_local", "reliable")
-func req_add_ap(stat: StringName) -> void:
-	if server:
-		server.on_add_ap(_sender(), stat)
-
-## Spends several Ability Points on one stat at once (the Character window's Auto button).
-@rpc("any_peer", "call_local", "reliable")
-func req_add_ap_many(stat: StringName, amount: int) -> void:
-	if server:
-		server.on_add_ap(_sender(), stat, amount)
-
-@rpc("any_peer", "call_local", "reliable")
-func req_buy(npc_id: StringName, index: int, count: int) -> void:
-	if server:
-		server.on_buy(_sender(), npc_id, index, count)
-
-@rpc("any_peer", "call_local", "reliable")
-func req_sell(npc_id: StringName, tab: int, slot: int, count: int) -> void:
-	if server:
-		server.on_sell(_sender(), npc_id, tab, slot, count)
-
-@rpc("any_peer", "call_local", "reliable")
-func req_sell_all_etc(npc_id: StringName) -> void:
-	if server:
-		server.on_sell_all_etc(_sender(), npc_id)
-
-@rpc("any_peer", "call_local", "reliable")
-func req_quest_accept(npc_id: StringName, quest_id: StringName) -> void:
-	if server:
-		server.on_quest_accept(_sender(), npc_id, quest_id)
-
-@rpc("any_peer", "call_local", "reliable")
-func req_quest_complete(npc_id: StringName, quest_id: StringName) -> void:
-	if server:
-		server.on_quest_complete(_sender(), npc_id, quest_id)
-
-@rpc("any_peer", "call_local", "reliable")
-func req_quest_forfeit(quest_id: StringName) -> void:
-	if server:
-		server.on_quest_forfeit(_sender(), quest_id)
-
-@rpc("any_peer", "call_local", "reliable")
-func req_learn_skill(skill_id: StringName) -> void:
-	if server:
-		server.on_learn_skill(_sender(), skill_id)
-
-@rpc("any_peer", "call_local", "reliable")
-func req_set_quickslot(i: int, kind: StringName, id: StringName) -> void:
-	if server:
-		server.on_set_quickslot(_sender(), i, kind, id)
-
-@rpc("any_peer", "call_local", "reliable")
-func req_store(npc_id: StringName, tab: int, slot: int) -> void:
-	if server:
-		server.on_store(_sender(), npc_id, tab, slot)
-
-@rpc("any_peer", "call_local", "reliable")
-func req_retrieve(npc_id: StringName, tab: int, slot: int) -> void:
-	if server:
-		server.on_retrieve(_sender(), npc_id, tab, slot)
-
-@rpc("any_peer", "call_local", "reliable")
-func req_travel(npc_id: StringName, index: int) -> void:
-	if server:
-		server.on_travel(_sender(), npc_id, index)
-
-@rpc("any_peer", "call_local", "reliable")
-func req_advance(npc_id: StringName, job_id: StringName) -> void:
-	if server:
-		server.on_advance(_sender(), npc_id, job_id)
-
-@rpc("any_peer", "call_local", "reliable")
-func req_reset_ap(npc_id: StringName, job_id: StringName) -> void:
-	if server:
-		server.on_reset_ap(_sender(), npc_id, job_id)
 
 # ---------- events: server -> client ----------
 

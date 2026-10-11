@@ -22,7 +22,7 @@ func test_an_attack_plays_the_weapons_motion_then_a_ready_stance() -> void:
 	ui.teleport(FLOOR)
 	me.on_ground = true
 	await ui.ticks(2)
-	var skill := Game.me.basic_attack()
+	var skill := Game.me.skills.basic_attack()
 	me._use(skill)
 	check_eq(me._animation(), WeaponStyle.animation_for(Game.me.look(), skill.animation), "the weapon's own blow")
 	await ui.ticks(skill.action_ticks + 2)
@@ -69,7 +69,7 @@ func test_a_buff_makes_no_motion() -> void:
 	await ui.ticks(2)
 	var buff: SkillDef = Content.skills[&"iron_body"]
 	await ui.edit(func(c: Character) -> void:
-		c.skills[buff.id] = 1
+		c.skills.learned[buff.id] = 1
 		c.mp = 999)
 	me.cooldown = 0
 	me._use(buff)

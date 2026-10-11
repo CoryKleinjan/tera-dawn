@@ -152,7 +152,7 @@ func _run() -> void:
 			if m.plat == world.platforms[1]:
 				_place_mob(m, randf_range(300, 380))
 		_me().character.job = Content.job(&"warrior")
-		_me().character.skills[&"dawn_slash"] = 1
+		_me().character.skills.learned[&"dawn_slash"] = 1
 		_me().character.set_quickslot(0, &"skill", &"dawn_slash")
 		_me().dirty_character = true
 		await _physics(40)
@@ -285,15 +285,15 @@ func _run() -> void:
 		# A Warrior's skill book, quickslots and a running buff.
 		ch.job = Content.job(&"warrior")
 		ch.level = maxi(ch.level, 14)
-		ch.sp = 4
+		ch.skills.points = 4
 		for pair in [[&"power_strike", 6], [&"dawn_slash", 3], [&"iron_body", 2], [&"toughness", 1], [&"quick_step", 2], [&"second_wind", 1]]:
-			ch.skills[pair[0]] = pair[1]
+			ch.skills.learned[pair[0]] = pair[1]
 		ch.set_quickslot(0, &"skill", &"power_strike")
 		ch.set_quickslot(1, &"skill", &"dawn_slash")
 		ch.set_quickslot(2, &"skill", &"iron_body")
 		ch.set_quickslot(3, &"skill", &"quick_step")
-		ch.add_buff(Content.skill(&"iron_body"))
-		ch.add_buff(Content.skill(&"quick_step"))
+		ch.skills.add_buff(Content.skill(&"iron_body"))
+		ch.skills.add_buff(Content.skill(&"quick_step"))
 		ch.recalc()
 		_me().dirty_character = true
 		await _physics(5)
@@ -310,7 +310,7 @@ func _run() -> void:
 		ch.equipment.take(&"weapon")
 		ch.equipment.put(&"weapon", ItemStack.exact(Content.item(&"willow_bow")))
 		ch.inventory.add(Content.item(&"feather_arrow"), 300)
-		ch.skills[&"double_shot"] = 5
+		ch.skills.learned[&"double_shot"] = 5
 		ch.set_quickslot(0, &"skill", &"double_shot")
 		ch.mp = 200
 		ch.recalc()
@@ -345,28 +345,28 @@ func _run() -> void:
 	if only == "" or only == "towns":
 		# Every hub town, standing between its store and its hall, and on its raised street.
 		for town in [&"dawnharbor", &"greenbough", &"lumewood", &"emberforge", &"lanternfall", &"driftcove"]:
-			Net.server._enter_map(_me(), town, 1180)
+			Net.server.enter_map(_me(), town, 1180)
 			await _physics(40)
 			await _frames(3)
 			await _shot("town_" + town)
-		Net.server._enter_map(_me(), &"meadow", 300)
+		Net.server.enter_map(_me(), &"meadow", 300)
 		await _physics(10)
 	if only == "" or only == "rooms":
 		# Inside every building you can walk into.
 		for m: MapDef in Content.maps.values():
 			if m.interior:
-				Net.server._enter_map(_me(), m.id, 520)
+				Net.server.enter_map(_me(), m.id, 520)
 				await _physics(40)
 				await _frames(3)
 				await _shot("room_" + m.id)
-		Net.server._enter_map(_me(), &"meadow", 300)
+		Net.server.enter_map(_me(), &"meadow", 300)
 		await _physics(10)
 	if only == "" or only == "fields":
 		# A field from each region, next to its monsters, a boss, and the world map.
 		_me().inv = 100000
 		for pair in [[&"mushroom_dell", 900], [&"thornwood", 1100], [&"crystal_caves", 1100], [&"smoke_pits", 1100],
 				[&"gloom_woods", 1100], [&"coral_reef", 1100], [&"dusk_bridge", 1300], [&"molten_throne", 1000]]:
-			Net.server._enter_map(_me(), pair[0], pair[1])
+			Net.server.enter_map(_me(), pair[0], pair[1])
 			await _physics(90)
 			await _frames(3)
 			await _shot("field_" + pair[0])
@@ -375,19 +375,19 @@ func _run() -> void:
 		await _frames(3)
 		await _shot("worldmap_fields")
 		world.hud.toggle_window("worldmap")
-		Net.server._enter_map(_me(), &"meadow", 300)
+		Net.server.enter_map(_me(), &"meadow", 300)
 		await _physics(10)
 	if only == "subzones":
 		# Every field of every region (not in the full run): their variants of the region's look.
 		_me().inv = 100000
 		for m: MapDef in Content.maps.values():
 			if not m.town and not m.interior:
-				Net.server._enter_map(_me(), m.id, 900)
+				Net.server.enter_map(_me(), m.id, 900)
 				await _physics(40)
 				await _frames(3)
 				await _shot("subzone_%s_%s" % [m.region, m.id])
 		_me().inv = 0
-		Net.server._enter_map(_me(), &"meadow", 300)
+		Net.server.enter_map(_me(), &"meadow", 300)
 		await _physics(10)
 	if only == "" or only == "social":
 		# The Free Market: a friend's shop, a party, chat and the community window.
@@ -398,10 +398,10 @@ func _run() -> void:
 			f.character.level = 18 + i * 3
 			Net.server.sessions[f.peer] = f
 			social.joined(f)
-			Net.server._enter_map(f, &"free_market", 1000.0 + i * 220.0)
+			Net.server.enter_map(f, &"free_market", 1000.0 + i * 220.0)
 			f.face = -1
 			friends.append(f)
-		Net.server._enter_map(_me(), &"free_market", 820)
+		Net.server.enter_map(_me(), &"free_market", 820)
 		friends[1].character.inventory.add(Content.item(&"gale_bow"))
 		friends[1].character.inventory.add(Content.item(&"scroll_weapon_att_60"), 3)
 		social.on_shop_open(friends[1].peer, "Kestrel's Bows", [[ItemDef.Tab.EQUIP, 0, 1, 18000], [ItemDef.Tab.USE, 0, 3, 2500]])
@@ -429,7 +429,7 @@ func _run() -> void:
 			social.left(f)
 			Net.server.sessions.erase(f.peer)
 			f.map.remove_player(f)
-		Net.server._enter_map(_me(), &"meadow", 300)
+		Net.server.enter_map(_me(), &"meadow", 300)
 		await _physics(10)
 	if only == "" or only == "keepsakes":
 		# Sitting on a chair with a pet out, a friend doing the same, and the Monster Book.
@@ -492,12 +492,12 @@ func _run() -> void:
 		for id in [&"boar_tusk", &"petal_wing", &"dewling_droplet"]:
 			ch.inventory.add(Content.item(id), randi_range(3, 40))
 		ch.inventory.add(Content.item(&"blue_potion"), 12)
-		ch.equip(0)
-		ch.ap = 40
+		ch.gear.equip(0)
+		ch.ap.points = 40
 		for n in 30:
-			ch.add_ap(&"strength")
+			ch.ap.spend(&"strength")
 		ch.inventory.add(Content.item(&"leaf_cap"))
-		ch.equip(_slot_of(&"leaf_cap"))
+		ch.gear.equip(_slot_of(&"leaf_cap"))
 		ch.inventory.add(Content.item(&"ember_helm"))
 		_me().dirty_character = true
 		_teleport(world, Vector2(1120, 620))

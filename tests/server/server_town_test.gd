@@ -258,7 +258,7 @@ func test_travel_needs_you_by_the_driver() -> void:
 func _misbuilt() -> int:
 	var start := c.job.starting_stats.strength
 	c.base.strength = start + 20
-	c.ap = 0
+	c.ap.points = 0
 	c.recalc()
 	return start
 
@@ -267,12 +267,12 @@ func test_an_instructor_resets_a_misbuilt_beginners_ap_once() -> void:
 	h.place(p, INSTRUCTOR_X)
 	h.ask(2, &"req_reset_ap", [&"test_instructor", &"mage"])
 	check_eq(c.base.strength, start, "STR back where it started")
-	check_eq(c.ap, 20, "every point back")
-	check(c.ap_reset_used, "used up")
+	check_eq(c.ap.points, 20, "every point back")
+	check(c.ap.reset_used, "used up")
 	check(h.told(2, "Your Ability Points are back: 20 to spend."), "told")
-	c.add_ap(&"strength", 20)
+	c.ap.spend(&"strength", 20)
 	h.ask(2, &"req_reset_ap", [&"test_instructor", &"mage"])
-	check_eq(c.ap, 0, "no second reset")
+	check_eq(c.ap.points, 0, "no second reset")
 	check(h.told(2, "You've already had your free reset."), "told why")
 
 func test_no_ap_reset_once_the_stats_are_there() -> void:
@@ -280,14 +280,14 @@ func test_no_ap_reset_once_the_stats_are_there() -> void:
 	c.base.intelligence = 20
 	h.place(p, INSTRUCTOR_X)
 	h.ask(2, &"req_reset_ap", [&"test_instructor", &"mage"])
-	check_eq(c.ap, 0, "nothing back")
-	check(not c.ap_reset_used, "still unused")
+	check_eq(c.ap.points, 0, "nothing back")
+	check(not c.ap.reset_used, "still unused")
 
 func test_ap_reset_needs_you_by_an_instructor_of_that_job() -> void:
 	_misbuilt()
 	h.ask(2, &"req_reset_ap", [&"test_instructor", &"mage"])
-	check_eq(c.ap, 0, "too far away")
+	check_eq(c.ap.points, 0, "too far away")
 	h.place(p, INSTRUCTOR_X)
 	h.ask(2, &"req_reset_ap", [&"test_instructor", &"warrior"])
-	check_eq(c.ap, 0, "they don't teach Warriors")
-	check(not c.ap_reset_used, "still unused")
+	check_eq(c.ap.points, 0, "they don't teach Warriors")
+	check(not c.ap.reset_used, "still unused")
