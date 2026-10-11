@@ -1,6 +1,6 @@
 {
   "source": "art/source/building_emberreach_large.png",
-  "art_px": 3.996,
+  "art_px": 3.475,
   "out_dir": "assets/sprites/buildings/emberreach",
   "label_band": 0,
   "inset": 0,
@@ -19,5 +19,5 @@
       "large"
     ]
   ],
-  "flat_bottom": 48
+  "flat_bottom": 55
 }

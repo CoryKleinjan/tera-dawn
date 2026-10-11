@@ -80,7 +80,7 @@ door = true
 [sub_resource type="Resource" id="Building_4"]
 script = ExtResource("7_building_placement")
 building = ExtResource("11_driftcove_small")
-x = 2082.0
+x = 2094.0
 platform = 0
 flip = false
 scale = 0.98

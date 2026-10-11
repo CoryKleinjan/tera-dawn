@@ -7,5 +7,5 @@
 script = ExtResource("1_building_def")
 id = &"lanternfall_small"
 texture = ExtResource("2_small")
-height = 238.1
+height = 273.8
 door_x = 0.5
