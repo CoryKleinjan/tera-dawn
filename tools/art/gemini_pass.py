@@ -56,14 +56,14 @@ FILE_LIFETIME = 40 * 3600  # re-upload references older than this (Gemini keeps 
 CONSISTENCY = """Consistency rules for this sheet (follow them strictly):
 - Every cell shows the SAME character or object as the other cells and as any attached sheet of it: the same height, head size, proportions, outline thickness and exact colours. Only the pose or the item changes from cell to cell.
 - If a sheet with the same grid is attached, trace its poses, cell positions and sprite sizes exactly.
-- Same pixel size, the same crisp dark plum-brown outline, the same light from the upper left and the same warm-gold rim light in every cell.
+- The same soft painted style (smooth painted shading, no visible pixels), the same thin dark plum-brown outline, the same light from the upper left and the same warm-gold rim light in every cell.
 - Characters and creatures stand on one shared baseline: the feet sit the same distance above the bottom edge of every cell.
 - The background of the WHOLE image, inside every cell too, is one flat pure magenta #FF00FF (RGB 255, 0, 255): not grey, white, pink, lilac or a darker purple, with no shadows, gradients or coloured panels. No magenta or pink-purple inside any sprite."""
 GRID_RULE = "- Draw exactly {rows} rows x {cols} columns = {n} equal cells, every cell filled in the order given."
 # Sheets with an "edit" entry send ONE image (its "base") and a short instruction instead of the
 # prompt-file chat (plus any "refs" after it). Gemini keeps an edited image's layout far better
 # than it traces an attached one, and a result can be edited again to fix only its bad cells.
-EDIT_RULES = """This is an edit of the attached image, not a new drawing. Keep the image's size, grid, cell borders and labels, and every figure's position, size and pose, exactly as they are; change only what is asked above. Any added art is clean pixel art with the same crisp dark plum-brown outline. The background stays one flat pure magenta #FF00FF (RGB 255, 0, 255) everywhere: never grey, pink or lilac. Answer with the edited image."""
+EDIT_RULES = """This is an edit of the attached image, not a new drawing. Keep the image's size, grid, cell borders and labels, and every figure's position, size and pose, exactly as they are; change only what is asked above. Any added art matches the style asked for above, with the same dark plum-brown outline. The background stays one flat pure magenta #FF00FF (RGB 255, 0, 255) everywhere: never grey, pink or lilac. Answer with the edited image."""
 
 
 def find_key(obj, key):

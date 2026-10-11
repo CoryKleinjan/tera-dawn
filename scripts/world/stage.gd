@@ -1,6 +1,6 @@
 class_name TDStage
 extends Node3D
-## The HD-2D view of the map: pixel-art sprites standing in a lit 3D diorama.
+## The HD-2D view of the map: painted sprites standing in a lit 3D diorama.
 ## Gameplay stays 2D (game pixels, y down); this node owns the camera, sky, light and
 ## post effects, and asks the builders to turn the map into 3D:
 ##   TerrainBuilder  the painted front skins of the floor and the platforms
@@ -13,10 +13,11 @@ const FOV := 30.0
 const PITCH := 9.0 # degrees the camera looks down
 ## Size of one art pixel in game pixels, for characters, props and land. Every piece of
 ## land art (tiles, platform pieces, ground textures) is drawn so one of its art pixels
-## shows this big, so the whole scene shares one pixel size.
+## shows this big, so all the land shows its painted detail at one shared scale.
 const TEXEL := 1.25
 ## Texels per art pixel of the art in these folders (tools/art/slice_sheets.py cuts land
-## sheets with "art_px" at 2 texels per art pixel, so they stay sharp on a 1080p screen).
+## sheets with "art_px" at 2 texels per art pixel, so they stay sharp on a 1080p screen). The art
+## is painted, not pixel art: "art pixel" is just the unit the sheet's detail was drawn at.
 ## Art anywhere else has one texel per art pixel.
 const ART_DENSITY := {
 	"res://assets/sprites/tiles/": 2.0,
