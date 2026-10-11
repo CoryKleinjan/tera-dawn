@@ -10255,6 +10255,292 @@
      "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
     ]
    }
+  },
+  {
+   "id": "npcstyle_building_dawnharbor_small",
+   "prompts": null,
+   "batch": "NPC-style building: dawnharbor_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_dawnharbor_small_npcstyle.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 21:56Z 'yes this is better'): restyle to match the NPCs, like the Dawnharbor house test.",
+   "edit": {
+    "base": "art/source/building_dawnharbor_small.png",
+    "text": "The first image is a building from my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have. Repaint the building in the SAME art style as those characters: the same soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, the same rich warm saturated colours, the same bold dark brown outlines of the same thickness relative to the details, and the same amount of hand-painted detail (wood grain, worn and chipped spots, slight colour variation between stones, planks, tiles or thatch, warm light in any windows). Keep the building itself: a fish market stall: two wooden corner posts, the blue and white striped awning with its scalloped edge and the small sign board on top, small fish hanging by their tails from a rail under the awning, and three wooden crates of fish on the solid wooden counter front that reaches the ground. Keep its shape, its front-on view and its colours, with the colours made richer. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof or top surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: every part of it, middle and any side wings, reaches down to the same ground line, edge to edge, with nothing hanging lower and no part standing higher. Nothing below the base or in front of it: no steps, path, ground patch, ground line or shadow. 3) The whole building fits inside the picture with a clear band of magenta on every side; nothing is cut off. 4) Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building. Do not draw any characters.",
+    "new_view": true,
+    "base_margin": 0.08,
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ]
+   }
+  },
+  {
+   "id": "npcstyle_building_driftcove_large",
+   "prompts": null,
+   "batch": "NPC-style building: driftcove_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_driftcove_large_npcstyle.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 21:56Z 'yes this is better'): restyle to match the NPCs, like the Dawnharbor house test.",
+   "edit": {
+    "base": "art/source/building_driftcove_large.png",
+    "text": "The first image is a building from my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have. Repaint the building in the SAME art style as those characters: the same soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, the same rich warm saturated colours, the same bold dark brown outlines of the same thickness relative to the details, and the same amount of hand-painted detail (wood grain, worn and chipped spots, slight colour variation between stones, planks, tiles or thatch, warm light in any windows). Keep the building itself: a wooden sailing ship pulled up on the beach, drawn as a pure side profile with the bow to the right: curved hull planks, a row of portholes, the deck rail, the mast with its rigging and barrels peeking over the rail, no deck seen from above. Its hull is half-buried in sand so the bottom of the hull is cut by one straight level line along the ground, the whole width of the ship. Keep its shape, its front-on view and its colours, with the colours made richer. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof or top surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: every part of it, middle and any side wings, reaches down to the same ground line, edge to edge, with nothing hanging lower and no part standing higher. Nothing below the base or in front of it: no steps, path, ground patch, ground line or shadow. 3) The whole building fits inside the picture with a clear band of magenta on every side; nothing is cut off. 4) Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building. Do not draw any characters.",
+    "new_view": true,
+    "base_margin": 0.08,
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ]
+   }
+  },
+  {
+   "id": "npcstyle_building_driftcove_small",
+   "prompts": null,
+   "batch": "NPC-style building: driftcove_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_driftcove_small_npcstyle.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 21:56Z 'yes this is better'): restyle to match the NPCs, like the Dawnharbor house test.",
+   "edit": {
+    "base": "art/source/building_driftcove_small.png",
+    "text": "The first image is a building from my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have. Repaint the building in the SAME art style as those characters: the same soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, the same rich warm saturated colours, the same bold dark brown outlines of the same thickness relative to the details, and the same amount of hand-painted detail (wood grain, worn and chipped spots, slight colour variation between stones, planks, tiles or thatch, warm light in any windows). Keep the building itself: a wooden fisherman's hut standing directly on the ground (no stilts, no deck, no ladder): weathered plank walls, a plank door in the middle, a small window, the patched cream sail-cloth canopy draped straight across the top, and the little red flag on a pole at the side. Keep its shape, its front-on view and its colours, with the colours made richer. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof or top surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: every part of it, middle and any side wings, reaches down to the same ground line, edge to edge, with nothing hanging lower and no part standing higher. Nothing below the base or in front of it: no steps, path, ground patch, ground line or shadow. 3) The whole building fits inside the picture with a clear band of magenta on every side; nothing is cut off. 4) Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building. Do not draw any characters.",
+    "new_view": true,
+    "base_margin": 0.08,
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ]
+   }
+  },
+  {
+   "id": "npcstyle_building_emberreach_large",
+   "prompts": null,
+   "batch": "NPC-style building: emberreach_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_emberreach_large_npcstyle.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 21:56Z 'yes this is better'): restyle to match the NPCs, like the Dawnharbor house test.",
+   "edit": {
+    "base": "art/source/building_emberreach_large.png",
+    "text": "The first image is a building from my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have. Repaint the building in the SAME art style as those characters: the same soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, the same rich warm saturated colours, the same bold dark brown outlines of the same thickness relative to the details, and the same amount of hand-painted detail (wood grain, worn and chipped spots, slight colour variation between stones, planks, tiles or thatch, warm light in any windows). Keep the building itself: a stone forge hall: grey-brown stone walls, orange clay tile roofs on the main hall and both side wings, the tall square stone chimney in the middle, the big arched double wooden door glowing with forge light, and the warm glowing windows either side. Keep its shape, its front-on view and its colours, with the colours made richer. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof or top surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: every part of it, middle and any side wings, reaches down to the same ground line, edge to edge, with nothing hanging lower and no part standing higher. Nothing below the base or in front of it: no steps, path, ground patch, ground line or shadow. 3) The whole building fits inside the picture with a clear band of magenta on every side; nothing is cut off. 4) Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building. Do not draw any characters.",
+    "new_view": true,
+    "base_margin": 0.08,
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ]
+   }
+  },
+  {
+   "id": "npcstyle_building_emberreach_small",
+   "prompts": null,
+   "batch": "NPC-style building: emberreach_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_emberreach_small_npcstyle.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 21:56Z 'yes this is better'): restyle to match the NPCs, like the Dawnharbor house test.",
+   "edit": {
+    "base": "art/source/building_emberreach_small.png",
+    "text": "The first image is a building from my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have. Repaint the building in the SAME art style as those characters: the same soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, the same rich warm saturated colours, the same bold dark brown outlines of the same thickness relative to the details, and the same amount of hand-painted detail (wood grain, worn and chipped spots, slight colour variation between stones, planks, tiles or thatch, warm light in any windows). Keep the building itself: a stone smithy: stone walls, an orange clay tile roof seen straight-on, the square stone chimney with a little grey smoke, the glowing forge fire in its arched hearth set into the front wall and a small window. No anvil, stumps or tools standing in front of it. Keep its shape, its front-on view and its colours, with the colours made richer. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof or top surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: every part of it, middle and any side wings, reaches down to the same ground line, edge to edge, with nothing hanging lower and no part standing higher. Nothing below the base or in front of it: no steps, path, ground patch, ground line or shadow. 3) The whole building fits inside the picture with a clear band of magenta on every side; nothing is cut off. 4) Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building. Do not draw any characters.",
+    "new_view": true,
+    "base_margin": 0.08,
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ]
+   }
+  },
+  {
+   "id": "npcstyle_building_greenbough_large",
+   "prompts": null,
+   "batch": "NPC-style building: greenbough_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_greenbough_large_npcstyle.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 21:56Z 'yes this is better'): restyle to match the NPCs, like the Dawnharbor house test.",
+   "edit": {
+    "base": "art/source/building_greenbough_large.png",
+    "text": "The first image is a building from my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have. Repaint the building in the SAME art style as those characters: the same soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, the same rich warm saturated colours, the same bold dark brown outlines of the same thickness relative to the details, and the same amount of hand-painted detail (wood grain, worn and chipped spots, slight colour variation between stones, planks, tiles or thatch, warm light in any windows). Keep the building itself: a treehouse in a giant oak: the thick trunk standing straight up from the ground, its base cut flat where it meets the ground (no roots spreading out), the leafy crown, the wooden hut up in the branches, the ladder up the trunk and the small arched window in the trunk. Keep its shape, its front-on view and its colours, with the colours made richer. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof or top surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: every part of it, middle and any side wings, reaches down to the same ground line, edge to edge, with nothing hanging lower and no part standing higher. Nothing below the base or in front of it: no steps, path, ground patch, ground line or shadow. 3) The whole building fits inside the picture with a clear band of magenta on every side; nothing is cut off. 4) Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building. Do not draw any characters.",
+    "new_view": true,
+    "base_margin": 0.08,
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ]
+   }
+  },
+  {
+   "id": "npcstyle_building_greenbough_small",
+   "prompts": null,
+   "batch": "NPC-style building: greenbough_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_greenbough_small_npcstyle.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 21:56Z 'yes this is better'): restyle to match the NPCs, like the Dawnharbor house test.",
+   "edit": {
+    "base": "art/source/building_greenbough_small.png",
+    "text": "The first image is a building from my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have. Repaint the building in the SAME art style as those characters: the same soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, the same rich warm saturated colours, the same bold dark brown outlines of the same thickness relative to the details, and the same amount of hand-painted detail (wood grain, worn and chipped spots, slight colour variation between stones, planks, tiles or thatch, warm light in any windows). Keep the building itself: a round thatched hut standing directly on the ground (no branch, no platform, no ladder): golden thatch roof with its tied top knot, plank walls, the door and the round window. Keep its shape, its front-on view and its colours, with the colours made richer. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof or top surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: every part of it, middle and any side wings, reaches down to the same ground line, edge to edge, with nothing hanging lower and no part standing higher. Nothing below the base or in front of it: no steps, path, ground patch, ground line or shadow. 3) The whole building fits inside the picture with a clear band of magenta on every side; nothing is cut off. 4) Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building. Do not draw any characters.",
+    "new_view": true,
+    "base_margin": 0.08,
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ]
+   }
+  },
+  {
+   "id": "npcstyle_building_lanternfall_large",
+   "prompts": null,
+   "batch": "NPC-style building: lanternfall_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_lanternfall_large_npcstyle.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 21:56Z 'yes this is better'): restyle to match the NPCs, like the Dawnharbor house test.",
+   "edit": {
+    "base": "art/source/building_lanternfall_large.png",
+    "text": "The first image is a building from my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have. Repaint the building in the SAME art style as those characters: the same soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, the same rich warm saturated colours, the same bold dark brown outlines of the same thickness relative to the details, and the same amount of hand-painted detail (wood grain, worn and chipped spots, slight colour variation between stones, planks, tiles or thatch, warm light in any windows). Keep the building itself: a tall two-storey half-timbered townhouse: dark timber frame over pale plaster, a stone ground floor, a steep brown shingle gable roof seen straight-on, warm glowing windows on both floors, the front door and the hanging lantern. Keep its shape, its front-on view and its colours, with the colours made richer. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof or top surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: every part of it, middle and any side wings, reaches down to the same ground line, edge to edge, with nothing hanging lower and no part standing higher. Nothing below the base or in front of it: no steps, path, ground patch, ground line or shadow. 3) The whole building fits inside the picture with a clear band of magenta on every side; nothing is cut off. 4) Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building. Do not draw any characters.",
+    "new_view": true,
+    "base_margin": 0.08,
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ]
+   }
+  },
+  {
+   "id": "npcstyle_building_lanternfall_small",
+   "prompts": null,
+   "batch": "NPC-style building: lanternfall_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_lanternfall_small_npcstyle.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 21:56Z 'yes this is better'): restyle to match the NPCs, like the Dawnharbor house test.",
+   "edit": {
+    "base": "art/source/building_lanternfall_small.png",
+    "text": "The first image is a building from my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have. Repaint the building in the SAME art style as those characters: the same soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, the same rich warm saturated colours, the same bold dark brown outlines of the same thickness relative to the details, and the same amount of hand-painted detail (wood grain, worn and chipped spots, slight colour variation between stones, planks, tiles or thatch, warm light in any windows). Keep the building itself: a small half-timbered house: terracotta tile gable roof with moss seen straight-on, timber frame, pale plaster, stone base, the shuttered window, the purple curtain doorway and the hanging lantern. Keep its shape, its front-on view and its colours, with the colours made richer. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof or top surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: every part of it, middle and any side wings, reaches down to the same ground line, edge to edge, with nothing hanging lower and no part standing higher. Nothing below the base or in front of it: no steps, path, ground patch, ground line or shadow. 3) The whole building fits inside the picture with a clear band of magenta on every side; nothing is cut off. 4) Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building. Do not draw any characters.",
+    "new_view": true,
+    "base_margin": 0.08,
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ]
+   }
+  },
+  {
+   "id": "npcstyle_building_lumewood_large",
+   "prompts": null,
+   "batch": "NPC-style building: lumewood_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_lumewood_large_npcstyle.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 21:56Z 'yes this is better'): restyle to match the NPCs, like the Dawnharbor house test.",
+   "edit": {
+    "base": "art/source/building_lumewood_large.png",
+    "text": "The first image is a building from my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have. Repaint the building in the SAME art style as those characters: the same soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, the same rich warm saturated colours, the same bold dark brown outlines of the same thickness relative to the details, and the same amount of hand-painted detail (wood grain, worn and chipped spots, slight colour variation between stones, planks, tiles or thatch, warm light in any windows). Keep the building itself: a round stone wizard tower drawn as a flat front silhouette: pale stone walls with straight vertical sides, the crystal glass dome roof shown only as its front half-circle outline with brass ribs and the blue crystal spire on top, round windows with glowing blue panes and the arched wooden door. Its base is straight and flat along the ground, not curved. Keep its shape, its front-on view and its colours, with the colours made richer. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof or top surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: every part of it, middle and any side wings, reaches down to the same ground line, edge to edge, with nothing hanging lower and no part standing higher. Nothing below the base or in front of it: no steps, path, ground patch, ground line or shadow. 3) The whole building fits inside the picture with a clear band of magenta on every side; nothing is cut off. 4) Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building. Do not draw any characters.",
+    "new_view": true,
+    "base_margin": 0.08,
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ]
+   }
+  },
+  {
+   "id": "npcstyle_building_lumewood_small",
+   "prompts": null,
+   "batch": "NPC-style building: lumewood_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_lumewood_small_npcstyle.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 21:56Z 'yes this is better'): restyle to match the NPCs, like the Dawnharbor house test.",
+   "edit": {
+    "base": "art/source/building_lumewood_small.png",
+    "text": "The first image is a building from my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have. Repaint the building in the SAME art style as those characters: the same soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, the same rich warm saturated colours, the same bold dark brown outlines of the same thickness relative to the details, and the same amount of hand-painted detail (wood grain, worn and chipped spots, slight colour variation between stones, planks, tiles or thatch, warm light in any windows). Keep the building itself: a giant blue mushroom house: the blue scalloped cap seen straight from the side (its underside edge level, no top surface seen from above), the cream stalk walls with a straight flat base on the ground, the round window and the arched wooden door. The whole cap fits inside the picture. Keep its shape, its front-on view and its colours, with the colours made richer. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof or top surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: every part of it, middle and any side wings, reaches down to the same ground line, edge to edge, with nothing hanging lower and no part standing higher. Nothing below the base or in front of it: no steps, path, ground patch, ground line or shadow. 3) The whole building fits inside the picture with a clear band of magenta on every side; nothing is cut off. 4) Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building. Do not draw any characters.",
+    "new_view": true,
+    "base_margin": 0.08,
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ]
+   }
   }
  ]
 }
