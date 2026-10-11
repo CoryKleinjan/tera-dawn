@@ -1,5 +1,5 @@
 {
-  "_doc": "Hand-placed points on the paperdoll body frames (assets/sprites/characters/hero.png, in pixels of a frame_size frame from the top-left, facing right) that tools/art/paperdoll_layers.py can't find by itself. weapon: [x, y, angle] = the fist holding the weapon and the way a sword in it points (degrees clockwise from pointing right; 90 is straight down); omit it and the weapon goes on his back (back views, sit) or is put away. weapon_behind: true when that fist is on the far side of his body, so the weapon draws behind him. shield: [x, y] = the middle of the shield (on the front arm, or on his back while climbing); omit it to hide the shield. head_tilt: how far the head is turned (degrees clockwise), 0 when upright. holds: how each other weapon kind is held: 'like' copies another kind's angles, 'angle' is the angle on any frame not listed, 'frames' gives an angle (or [x, y, angle] to move the fist) per frame, 'behind' lists frames where that kind draws behind him. Angles are the way the weapon points whatever slant its sheet drew it at (sword, wand and staff art is measured and straightened). On idle, move, jump, fall, land, crouch, hit and hurt frames every weapon points forward or straight up/down, never back (tests/content/content_art_test.gd checks it). Preview with python3 tools/art/paperdoll_layers.py --preview.",
+  "_doc": "Hand-placed points on the paperdoll body frames (assets/sprites/characters/hero.png, in pixels of a frame_size frame from the top-left, facing right) that tools/art/paperdoll_layers.py can't find by itself. weapon: [x, y, angle] = the fist holding the weapon and the way a sword in it points (degrees clockwise from pointing right; 90 is straight down); omit it and the weapon goes on his back (back views, sit) or is put away. weapon_behind: true when that fist is on the far side of his body, so the weapon draws behind him. shield: [x, y] = the middle of the shield (on the front arm, or on his back while climbing); omit it to hide the shield. head_tilt: how far the head is turned (degrees clockwise), 0 when upright. holds: how each other weapon kind is held: 'like' copies another kind's angles, 'angle' is the angle on any frame not listed, 'frames' gives an angle (or [x, y, angle] to move the fist) per frame, 'behind' lists frames where that kind draws behind him. Angles are the way the weapon points whatever slant its sheet drew it at (sword, wand and staff art is measured and straightened). On idle, move, jump, fall, land, crouch, hit and hurt frames every weapon points forward or straight up/down, never back (except run1-2, where his weapon arm swings back as he runs) (tests/content/content_art_test.gd checks it). Preview with python3 tools/art/paperdoll_layers.py --preview.",
   "frame_size": [128, 104],
   "frames": {
     "idle1": {"weapon": [56, 82, 20], "shield": [89, 80]},
@@ -11,10 +11,10 @@
     "walk2": {"weapon": [57, 79, 10], "shield": [80, 77]},
     "walk3": {"weapon": [54, 79, 25], "shield": [85, 74]},
     "walk4": {"weapon": [56, 76, 10], "shield": [86, 78]},
-    "run1": {"weapon": [74, 80, -50], "shield": [39, 66]},
-    "run2": {"weapon": [77, 72, -50], "shield": [40, 66]},
-    "run3": {"weapon": [75, 74, -50], "shield": [41, 67]},
-    "run4": {"weapon": [70, 78, -50], "shield": [40, 67]},
+    "run1": {"weapon": [34, 68, -130], "shield": [75, 75]},
+    "run2": {"weapon": [34, 70, -130], "shield": [75, 72]},
+    "run3": {"weapon": [73, 73, -50], "shield": [34, 70]},
+    "run4": {"weapon": [70, 75, -50], "shield": [38, 69]},
     "attack1": {"weapon": [37, 67, -135], "shield": [89, 82]},
     "attack2": {"weapon": [94, 69, 5], "shield": [70, 78]},
     "hit": {"weapon": [62, 75, 25], "shield": [97, 68], "head_tilt": -8},
@@ -41,7 +41,7 @@
     "claw": {"like": "sword"},
     "knuckle": {"like": "sword"},
     "bow": {"angle": 5, "frames": {"run1": -15, "run2": -15, "run3": -15, "run4": -15, "jump": -20, "fall": 15, "attack1": -25, "attack2": 0, "slash1": -30, "slash2": 0, "slash3": 15, "crouch": 40, "land": 15, "hit": -10, "faint1": 70, "levelup": 0}},
-    "staff": {"angle": -75, "frames": {"run1": -55, "run2": -55, "run3": -55, "run4": -55, "jump": -55, "fall": -65, "attack1": -135, "attack2": 5, "slash1": -150, "slash2": 0, "slash3": 35, "crouch": 10, "land": -70, "hit": -80, "faint1": 120, "levelup": -90}, "behind": ["idle1", "idle2", "idle3", "idle4", "blink", "walk1", "walk2", "walk3", "walk4", "jump", "fall", "land", "crouch", "hit", "hurt"]},
-    "gun": {"angle": 50, "frames": {"run1": 30, "run2": 30, "run3": 30, "run4": 35, "jump": 30, "fall": -60, "attack1": -45, "attack2": 0, "slash1": -150, "slash2": -25, "slash3": 30, "crouch": 5, "land": 30, "hit": 70, "hurt": 70, "faint1": 120, "levelup": -90}}
+    "staff": {"angle": -75, "frames": {"run1": -120, "run2": -120, "run3": -55, "run4": -55, "jump": -55, "fall": -65, "attack1": -135, "attack2": 5, "slash1": -150, "slash2": 0, "slash3": 35, "crouch": 10, "land": -70, "hit": -80, "faint1": 120, "levelup": -90}, "behind": ["idle1", "idle2", "idle3", "idle4", "blink", "walk1", "walk2", "walk3", "walk4", "jump", "fall", "land", "crouch", "hit", "hurt"]},
+    "gun": {"angle": 50, "frames": {"run1": 120, "run2": 120, "run3": 30, "run4": 35, "jump": 30, "fall": -60, "attack1": -45, "attack2": 0, "slash1": -150, "slash2": -25, "slash3": 30, "crouch": 5, "land": 30, "hit": 70, "hurt": 70, "faint1": 120, "levelup": -90}}
   }
 }

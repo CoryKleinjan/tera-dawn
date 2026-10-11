@@ -4,10 +4,11 @@ extends TestCase
 ## at where he came from. Weapon angles come from art/sheets/paperdoll_rig.json through
 ## tools/art/paperdoll_layers.py into the hero's rig.
 
-## Frames where he isn't swinging: standing, walking, running, in the air, landing, crouched
-## and flinching. Wind-ups and follow-throughs are free to point back.
+## Frames where he isn't swinging: standing, walking, running with his arm forward, in the air,
+## landing, crouched and flinching. Wind-ups, follow-throughs and run1-2 (his weapon arm swings
+## back as he runs) are free to point back.
 const REST_FRAMES: Array[String] = ["idle1", "blink", "walk1", "walk2", "walk3", "walk4",
-	"run1", "run2", "run3", "run4", "jump", "fall", "land", "crouch", "hit", "hurt"]
+	"run3", "run4", "jump", "fall", "land", "crouch", "hit", "hurt"]
 
 func _frame(name: String) -> int:
 	var frames: Array = Paperdoll.rig().get("frames", [])
