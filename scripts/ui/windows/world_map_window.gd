@@ -26,8 +26,7 @@ const INFO_H := 58.0
 const INFO_X := PAD + 10
 ## The back arrow in the zone view's top left corner (the creator's painted arrow).
 const BACK_SIZE := Vector2(34, 30)
-## A path inside a zone: a light road with a dark edge. Routes between zones: soft dots or dashes.
-const ROAD := Color("f3e2b8")
+## Routes and paths: soft dots on foot, thin dashes by ship, on a dark edge.
 const ROAD_EDGE := Color(0.12, 0.08, 0.16, 0.85)
 const TRIP := Color("ffcf5a")
 const ROUTE := Color("fff1cc")
@@ -135,8 +134,8 @@ func _draw_world() -> void:
 				DrawUtil.text(self, Game.ui_font, at + Vector2(0, 14), r.level_text, 11, Palette.MIST, 0, 4, Palette.NIGHT)
 	_draw_region_info(Content.regions.get(hovered_region))
 
-## A route between regions, kept light so it doesn't cover the painting: on foot a row of
-## soft dots, a trip thin dashes; gold when `lit`.
+## A route between regions or a path between a zone's maps, kept light so it doesn't cover
+## the painting: on foot a row of soft dots, a trip thin dashes; gold when `lit`.
 func _draw_route(from: Vector2, to: Vector2, by: String, lit: bool) -> void:
 	var col: Color = Palette.SUN if lit else Color(ROUTE, 0.8)
 	if by == "Walk":
@@ -148,11 +147,6 @@ func _draw_route(from: Vector2, to: Vector2, by: String, lit: bool) -> void:
 	else:
 		draw_dashed_line(from, to, ROAD_EDGE, 3.5, 8.0)
 		draw_dashed_line(from, to, col, 1.6, 8.0)
-
-## A path between two maps of the same zone: a solid road, brighter when `lit`.
-func _draw_road(from: Vector2, to: Vector2, lit: bool) -> void:
-	draw_line(from, to, ROAD_EDGE, 7.0 if lit else 6.0, true)
-	draw_line(from, to, Palette.SUN if lit else ROAD, 3.5 if lit else 3.0, true)
 
 func _draw_dot(c: Vector2, town: bool, on: bool) -> void:
 	if town:
@@ -220,8 +214,8 @@ func _draw_zone() -> void:
 		var b: MapDef = Content.maps.get(pair[1])
 		if a.region == zone and b.region == zone:
 			var lit: bool = hovered in [a.id, b.id]
-			_draw_road(to_screen(a.world_pos), to_screen(b.world_pos), lit)
-	# exits to other regions: a road to the edge of the view, labelled with where it leads
+			_draw_route(to_screen(a.world_pos), to_screen(b.world_pos), "Walk", lit)
+	# exits to other regions: a route to the edge of the view, labelled with where it leads
 	for exit in zone_exits():
 		_draw_route(exit.from, exit.to, exit.by, exit.map == hovered)
 	for m in maps:
