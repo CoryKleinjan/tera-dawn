@@ -32,17 +32,17 @@ func test_the_camera_looks_ahead_and_ignores_small_hops() -> void:
 	p.face = 1
 	p.vel.x = 3.0
 	for i in 60:
-		w._aim_camera()
-	check_eq(w._look, float(TDWorld.LOOK_AHEAD), "walking right, it looks ahead to the right")
-	var floor_y := w._cam_floor
+		w.camera.aim()
+	check_eq(w.camera.look, float(WorldCamera.LOOK_AHEAD), "walking right, it looks ahead to the right")
+	var floor_y := w.camera.floor_y
 	p.vel.x = 0.0
 	p.on_ground = false
-	p.position.y -= TDWorld.CAM_DEAD_ZONE - 20.0
-	w._aim_camera()
-	check_eq(w._cam_floor, floor_y, "a hop doesn't move it up or down")
+	p.position.y -= WorldCamera.DEAD_ZONE - 20.0
+	w.camera.aim()
+	check_eq(w.camera.floor_y, floor_y, "a hop doesn't move it up or down")
 	p.position.y -= 60.0
-	w._aim_camera()
-	check(w._cam_floor < floor_y, "rising well past where they stood does")
+	w.camera.aim()
+	check(w.camera.floor_y < floor_y, "rising well past where they stood does")
 
 func test_the_hud_fits_a_16_by_10_screen() -> void:
 	var w := ui.world
