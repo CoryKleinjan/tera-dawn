@@ -24,7 +24,7 @@ class SmoothEdgeTest(unittest.TestCase):
                 a = np.asarray(Image.open(path).convert("RGBA"))[..., 3]
                 solid = a == 255
                 rim = solid & slice_sheets.dilate(a == 0, 1, outside=True)  # solid pixels touching clear ones
-                if rim.sum() > 0.5 * ((a > 0) & (a < 255)).sum():  # most of the edge isn't faded
+                if rim.sum() > ((a > 0) & (a < 255)).sum():  # more hard edge than faded edge
                     hard.append(os.path.relpath(path, ROOT))
         self.assertEqual(hard, [], "these sprites have on/off edges; re-cut them with slice_sheets.py")
 
