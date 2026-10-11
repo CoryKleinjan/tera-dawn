@@ -281,6 +281,6 @@ portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_17"), SubRes
 spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_19"), SubResource("Resource_20"), SubResource("Resource_21"), SubResource("Resource_22"), SubResource("Resource_23"), SubResource("Resource_24"), SubResource("Resource_25"), SubResource("Resource_26"), SubResource("Resource_27"), SubResource("Resource_28")])
 props = Array[ExtResource("11_prop_placement")]([SubResource("Resource_31"), SubResource("Resource_32"), SubResource("Resource_33"), SubResource("Resource_34")])
 region = &"emberreach"
-world_pos = Vector2(878.0, 250.0)
+world_pos = Vector2(835.0, 225.0)
 return_map = &"emberforge"
 level_text = "Lv. 10-13"

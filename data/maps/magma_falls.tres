@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=66 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=63 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/forge.tres" id="2_forge"]
@@ -324,26 +324,6 @@ top = 370.0
 bottom = 580.0
 style = ExtResource("5_rope")
 
-[sub_resource type="Resource" id="Upper_1"]
-script = ExtResource("3_platform_def")
-x = 2090.0
-y = 260.0
-width = 360.0
-
-[sub_resource type="Resource" id="Upper_rope"]
-script = ExtResource("4_climbable_def")
-x = 2130.0
-top = 260.0
-bottom = 690.0
-style = ExtResource("5_rope")
-
-[sub_resource type="Resource" id="Portal_upper"]
-script = ExtResource("7_portal_def")
-x = 2370.0
-platform = 14
-target_map = &"wraith_moor"
-target_x = 1120.0
-
 [resource]
 script = ExtResource("1_map_def")
 id = &"magma_falls"
@@ -353,12 +333,12 @@ width = 3200
 height = 900
 ground_y = 820
 start_x = 120.0
-platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Land_1"), SubResource("Land_2"), SubResource("Upper_1")])
-climbables = Array[ExtResource("4_climbable_def")]([SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18"), SubResource("Resource_19"), SubResource("Resource_20"), SubResource("Resource_21"), SubResource("Resource_22"), SubResource("Rope_12_0"), SubResource("Upper_rope")])
-portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_23"), SubResource("Resource_24"), SubResource("Portal_upper")])
+platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Land_1"), SubResource("Land_2")])
+climbables = Array[ExtResource("4_climbable_def")]([SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18"), SubResource("Resource_19"), SubResource("Resource_20"), SubResource("Resource_21"), SubResource("Resource_22"), SubResource("Rope_12_0")])
+portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_23"), SubResource("Resource_24")])
 spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_25"), SubResource("Resource_26"), SubResource("Resource_27"), SubResource("Resource_28"), SubResource("Resource_29"), SubResource("Resource_30"), SubResource("Resource_31"), SubResource("Resource_32"), SubResource("Resource_33"), SubResource("Resource_34"), SubResource("Resource_35"), SubResource("Resource_36"), SubResource("Resource_37")])
 props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_38"), SubResource("Resource_39"), SubResource("Resource_40"), SubResource("Resource_42"), SubResource("Resource_43"), SubResource("Resource_45")])
 region = &"emberreach"
-world_pos = Vector2(842.0, 322.0)
+world_pos = Vector2(860.0, 325.0)
 return_map = &"emberforge"
 level_text = "Lv. 17-22"

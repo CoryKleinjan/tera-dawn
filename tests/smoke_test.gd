@@ -971,8 +971,13 @@ func _check_travel() -> void:
 	await _press("worldmap")
 	var wm: TDWorldMapWindow = world.hud.windows["worldmap"]
 	_check(wm.visible and TDWorldMapWindow.placed().size() >= 2, "W opens the world map with the maps on it")
+	wm.open_zone(&"")
+	var isle: StringName = Content.map(Character.START_MAP).region
+	wm._click(wm.to_screen(TDWorldMapWindow.capital_pos(Content.regions[isle])), MOUSE_BUTTON_LEFT, false)
+	_check(wm.zone == isle, "clicking a region on the world map opens its zone")
 	wm._hovered(wm.to_screen(Content.map(&"hollow").world_pos))
 	_check(wm.hovered == &"hollow", "hovering a dot picks that map")
+	wm.open_zone(&"")
 	await _press("worldmap")
 	# Hobb's wagon to Ember Hollow costs 150 Dawnshards.
 	var hobb: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"wagon_driver")[0]
