@@ -106,6 +106,7 @@ BLANK_FACE = 222      # the hair sheet's blank faces are greys at least this pal
 NECK_SLIVER = 120     # loose bits under the jaw smaller than this (pixels) are left-over neck outline
 HAT_SHOULDER_ROWS = 6  # hat sheet cells are lined up by their bottom rows (the shoulders)
 HAT_SIZE = 1.0         # hats drawn this much bigger than his head against the sheet's head
+HAT_SPECK = 0.05  # hat_alone: pieces under this share of the hat are cell-frame bits
 HAT_SHAPES = ("cap", "hood", "bandana", "helm", "wizard", "tricorn")
 # Chibi faces: each eye (with its brow) is drawn this much bigger about its own centre. The eyes
 # are everything above EYE_LINE (a fraction of the normal face's height), left or right of its middle.
@@ -651,6 +652,17 @@ def hat_head(piece):
     low = solid[rows.max() - HAT_SHOULDER_ROWS:rows.max() + 1]
     xs = np.nonzero(low)[1]
     return np.array([piece.x + xs.mean(), piece.y + rows.max() + 1.0])
+
+
+def hat_alone(img):
+    """A hats_only piece without the bits of the sheet's cell frame caught at its edges: every
+    piece much smaller than the hat goes."""
+    arr = np.asarray(img).copy()
+    lab, n = ss.label(arr[..., 3] > 0)
+    sizes = np.bincount(lab.ravel())[1:]
+    if n:
+        arr[(lab > 0) & (sizes[lab - 1] < sizes.max() * HAT_SPECK), 3] = 0
+    return Image.fromarray(arr)
 
 
 def bald_head(piece):
@@ -1367,7 +1379,7 @@ def main():
         for view in ("side", "behind"):
             p, hat = hat_sheet[f"{shape}_{view}"], hats_only[f"{shape}_{view}"]
             centre = hat_head(p) + ref_from  # this cell's head centre (cell pixels)
-            views[view] = (hat.img, centre - (hat.x, hat.y))
+            views[view] = (hat_alone(hat.img), centre - (hat.x, hat.y))
         out = []
         for n, fi in zip(names, info):
             canvas = blank()
