@@ -184,10 +184,6 @@ func _draw_achievements() -> void:
 func _click(at: Vector2, button: int, _double: bool) -> void:
 	if button != MOUSE_BUTTON_LEFT:
 		return
-	var t := tab_at(at)
-	if t >= 0:
-		tab = t
-		return
 	if tab != 0:
 		return
 	for i in COLS * ROWS:
@@ -195,6 +191,9 @@ func _click(at: Vector2, button: int, _double: bool) -> void:
 		if k < _monsters.size() and cell_rect(i).has_point(at):
 			selected = _monsters[k]
 			return
+
+func _tab_clicked(i: int) -> void:
+	tab = i
 
 ## Shows a monster's page (for the screenshot tour and tests).
 func show_monster(m: MonsterDef) -> void:

@@ -392,7 +392,7 @@ func test_quest_pages_list_what_the_log_holds() -> void:
 				TDQuestWindow.Page.DONE:
 					check(me.quests.done.has(q.id), "%s done" % q.id)
 		for i in listed.size():
-			var row := log._row_rect(i)
+			var row := log.row_rect(i)
 			if row.end.y > log.size.y:
 				fail("%s: row %d (%s) runs off the bottom of the window" % [TDQuestWindow.PAGE_NAMES[page], i, listed[i].id])
 				continue
@@ -428,22 +428,22 @@ func test_quest_done_page_lists_every_finished_quest() -> void:
 	log.page = TDQuestWindow.Page.DONE
 	var listed := log.listed()
 	check_eq(listed.size(), Content.quests.size(), "the Done page lists every quest")
-	log.scroll = 0
+	log.list.scroll = 0
 	await _redrawn(log, "the Done page")
 	check(listed.size() > TDQuestWindow.ROWS, "more quests than fit, so the list scrolls")
-	for i in range(log.scroll, mini(log.scroll + TDQuestWindow.ROWS, listed.size())):
-		check(log._row_rect(i).end.y <= log.size.y - TDWindow.PAD, "row %d ends at y %s, inside the window (%s)" % [i, log._row_rect(i).end.y, log.size.y])
+	for i in range(log.list.scroll, mini(log.list.scroll + TDQuestWindow.ROWS, listed.size())):
+		check(log.row_rect(i).end.y <= log.size.y - TDWindow.PAD, "row %d ends at y %s, inside the window (%s)" % [i, log.row_rect(i).end.y, log.size.y])
 	for n in listed.size():
-		await ui.click(log, log._row_rect(log.scroll).get_center(), MOUSE_BUTTON_WHEEL_DOWN)
-	check_eq(log.scroll, listed.size() - TDQuestWindow.ROWS, "the wheel scrolls to the last quest and stops")
+		await ui.click(log, log.row_rect(log.list.scroll).get_center(), MOUSE_BUTTON_WHEEL_DOWN)
+	check_eq(log.list.scroll, listed.size() - TDQuestWindow.ROWS, "the wheel scrolls to the last quest and stops")
 	var last := listed.size() - 1
-	check(log._row_rect(last).end.y <= log.size.y - TDWindow.PAD, "the last row is inside the window once scrolled")
-	await ui.click(log, log._row_rect(last).get_center())
+	check(log.row_rect(last).end.y <= log.size.y - TDWindow.PAD, "the last row is inside the window once scrolled")
+	await ui.click(log, log.row_rect(last).get_center())
 	check(log.selected == listed[last], "clicking the last row selects the last quest")
-	await ui.click(log, log._row_rect(last - 1).get_center(), MOUSE_BUTTON_WHEEL_UP)
-	check_eq(log.scroll, listed.size() - TDQuestWindow.ROWS - 1, "the wheel scrolls back up")
-	await ui.click(log, log._row_rect(log.scroll).get_center())
-	check(log.selected == listed[log.scroll], "clicking the top row selects the quest shown there")
+	await ui.click(log, log.row_rect(last - 1).get_center(), MOUSE_BUTTON_WHEEL_UP)
+	check_eq(log.list.scroll, listed.size() - TDQuestWindow.ROWS - 1, "the wheel scrolls back up")
+	await ui.click(log, log.row_rect(log.list.scroll).get_center())
+	check(log.selected == listed[log.list.scroll], "clicking the top row selects the quest shown there")
 	await _redrawn(log, "the scrolled Done page")
 
 func test_quest_give_up_button_forfeits_through_the_server() -> void:
@@ -747,14 +747,14 @@ func test_every_shop_draws_and_scrolls() -> void:
 			check_eq(shop.amount, TDShopWindow.AMOUNTS[i], "%s: clicking ×%d" % [s.id, TDShopWindow.AMOUNTS[i]])
 		var most := maxi(0, s.items.size() - TDShopWindow.ROWS)
 		for n in most + 2:
-			await ui.click(shop, shop.row_rect(shop.scroll).get_center(), MOUSE_BUTTON_WHEEL_DOWN)
-		check_eq(shop.scroll, most, "%s: scrolling down stops at the last row" % s.id)
+			await ui.click(shop, shop.row_rect(shop.list.scroll).get_center(), MOUSE_BUTTON_WHEEL_DOWN)
+		check_eq(shop.list.scroll, most, "%s: scrolling down stops at the last row" % s.id)
 		await _redrawn(shop, "%s scrolled" % s.id)
-		await ui.hover(shop, shop.row_rect(shop.scroll).get_center())
-		check(ui.hud.tooltip.stack != null and ui.hud.tooltip.stack.item == s.items[shop.scroll].item, "%s: hovering a line shows its item" % s.id)
+		await ui.hover(shop, shop.row_rect(shop.list.scroll).get_center())
+		check(ui.hud.tooltip.stack != null and ui.hud.tooltip.stack.item == s.items[shop.list.scroll].item, "%s: hovering a line shows its item" % s.id)
 		for n in most + 2:
-			await ui.click(shop, shop.row_rect(shop.scroll).get_center(), MOUSE_BUTTON_WHEEL_UP)
-		check_eq(shop.scroll, 0, "%s: scrolling up stops at the first row" % s.id)
+			await ui.click(shop, shop.row_rect(shop.list.scroll).get_center(), MOUSE_BUTTON_WHEEL_UP)
+		check_eq(shop.list.scroll, 0, "%s: scrolling up stops at the first row" % s.id)
 		shop.visible = false
 		npc.free()
 
@@ -841,8 +841,8 @@ func test_player_shop_setup_owner_and_visitor() -> void:
 	check(not ui.hud.selling(), "visiting isn't selling")
 	await _redrawn(stall, "visiting a stall")
 	for n in 4:
-		await ui.click(stall, stall._row(0).get_center(), MOUSE_BUTTON_WHEEL_DOWN)
-	check_eq(stall.scroll, visitor_items.size() - TDPlayerShopWindow.ROWS, "scrolling stops at the last line")
+		await ui.click(stall, stall.row_rect(stall.list.scroll).get_center(), MOUSE_BUTTON_WHEEL_DOWN)
+	check_eq(stall.list.scroll, visitor_items.size() - TDPlayerShopWindow.ROWS, "scrolling stops at the last line")
 	await _redrawn(stall, "visiting, scrolled")
 	ui.hud.show_player_shop(multiplayer.get_unique_id(), Game.me.name, "My Shop", visitor_items.slice(0, 2))
 	check(ui.hud.selling() and ui.world.input_blocked(), "minding your own shop holds you in place")
@@ -863,7 +863,7 @@ func test_player_menu_lists_what_you_can_do() -> void:
 	check_eq(labels, ["Whisper", "Invite to party", "Add buddy", "Trade", "Fame +1", "Fame -1"], "actions for a stranger")
 	await _redrawn(menu, "player menu")
 	for i in labels.size():
-		check(menu._row_rect(i).end.y <= menu.size.y, "action %d lies inside the window" % i)
+		check(menu.row_rect(i).end.y <= menu.size.y, "action %d lies inside the window" % i)
 	Game.social = _social() # a guild we're master of, with Mossy as a buddy
 	labels = menu.actions().map(func(x: Array) -> String: return x[0])
 	check_eq(labels, ["Whisper", "Invite to party", "Trade", "Invite to guild", "Fame +1", "Fame -1"], "actions for a guildless buddy")
@@ -871,7 +871,7 @@ func test_player_menu_lists_what_you_can_do() -> void:
 	menu.open(a)
 	labels = menu.actions().map(func(x: Array) -> String: return x[0])
 	check(not labels.has("Invite to guild"), "someone in another guild can't be invited")
-	await ui.click(menu, menu._row_rect(0).get_center())
+	await ui.click(menu, menu.row_rect(0).get_center())
 	check(not menu.visible and ui.hud.chat.field.visible and ui.hud.chat.field.text == "/w Mossy ", "Whisper closes the menu and starts a whisper")
 	ui.hud.chat.close()
 	a.free()

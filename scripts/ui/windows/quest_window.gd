@@ -12,10 +12,10 @@ const LIST_W := 200.0
 const ROWS := 11
 ## Pixels per texel of the row art.
 const ROW_SCALE := (ROW_H - 2) / 39.0
-## The marker shown on each quest's row, as over the NPC (UiSkin.QUEST_MARKERS).
+## The marker shown on each quest's row, as over the NPC (WorldSkin.QUEST_MARKERS).
 const ROW_MARKERS := {QuestLog.Status.AVAILABLE: "!", QuestLog.Status.ACTIVE: "...", QuestLog.Status.READY: "?"}
 
-var scroll := 0
+var list := ScrollList.new(Vector2(PAD, LIST_Y), LIST_W, ROW_H, 2, ROWS)
 
 var page := Page.ACTIVE
 var selected: QuestDef
@@ -36,13 +36,13 @@ func listed() -> Array[QuestDef]:
 			out.append(q)
 	return out
 
-func _row_rect(i: int) -> Rect2:
-	return Rect2(PAD, LIST_Y + (i - scroll) * ROW_H, LIST_W, ROW_H - 2)
+func row_rect(i: int) -> Rect2:
+	return list.row_rect(i)
 
 ## The indices of the rows that fit in the list right now.
 func _shown(count: int) -> Array:
-	scroll = clampi(scroll, 0, maxi(0, count - ROWS))
-	return range(scroll, mini(scroll + ROWS, count))
+	list.clamp_to(count)
+	return list.shown(count)
 
 func _forfeit_rect() -> Rect2:
 	return Rect2(size.x - PAD - 110, size.y - PAD - 32, 110, 32)
@@ -57,7 +57,7 @@ func _draw_body() -> void:
 	var me := Game.me
 	for i in _shown(quests.size()):
 		var q := quests[i]
-		var r := _row_rect(i)
+		var r := row_rect(i)
 		var lit := q == selected or r.has_point(_hover)
 		UiSkin.draw_box(self, UiSkin.option_row(lit), r, ROW_SCALE)
 		var status := me.quests.status(q, me)
@@ -65,9 +65,8 @@ func _draw_body() -> void:
 		var col := Palette.INK if lit else (Palette.SUN if ready else Palette.MIST)
 		DrawUtil.text(self, Game.ui_font, Vector2(r.position.x + 12, r.end.y - 6), q.title, 12, col, 1, 0 if lit else 3, Palette.NIGHT)
 		if ROW_MARKERS.has(status):
-			UiSkin.draw_quest_marker(self, Vector2(r.end.x - 14, r.end.y - 1), ROW_MARKERS[status], 20)
-	if quests.size() > ROWS:
-		DrawUtil.text(self, Game.ui_font, Vector2(PAD + LIST_W, LIST_Y + ROWS * ROW_H + 8), "scroll for more (%d/%d)" % [scroll + 1, quests.size() - ROWS + 1], 10, Color(Palette.MIST, 0.6), -1)
+			WorldSkin.draw_quest_marker(self, Vector2(r.end.x - 14, r.end.y - 1), ROW_MARKERS[status], 20)
+	list.draw_more(self, quests.size())
 	if selected:
 		_draw_details(selected, Rect2(PAD + LIST_W + 14, LIST_Y - 4, size.x - LIST_W - PAD * 2 - 14, size.y - LIST_Y - PAD))
 
@@ -96,7 +95,7 @@ func detail_lines(q: QuestDef, w: float, room: float) -> Array:
 	var head := [[20.0, who, 11, Palette.MUTED, 0]]
 	var story := []
 	var text := q.offer_text if page == Page.AVAILABLE else q.progress_text
-	for l in UiSkin.wrap_text(Game.ui_font, text, 11, w):
+	for l in DrawUtil.wrap_text(Game.ui_font, text, 11, w):
 		story.append([15.0 if story.size() > 0 else 23.0, l, 11, Color(Palette.MIST, 0.85), 0])
 	var tail := []
 	for i in q.objectives.size():
@@ -108,7 +107,7 @@ func detail_lines(q: QuestDef, w: float, room: float) -> Array:
 	if q.min_level > 1:
 		tail.append([gap, "Level %d+" % q.min_level, 11, Palette.MUTED, 0])
 		gap = 16.0
-	for l in UiSkin.wrap_text(Game.ui_font, "Reward: %s" % q.describe_rewards(), 11, w):
+	for l in DrawUtil.wrap_text(Game.ui_font, "Reward: %s" % q.describe_rewards(), 11, w):
 		tail.append([gap, l, 11, Palette.SUN, 0])
 		gap = 15.0
 	var used := 0.0
@@ -127,21 +126,18 @@ static func _height(lines: Array) -> float:
 	return h
 
 func _click(at: Vector2, button: int, _double: bool) -> void:
-	if button == MOUSE_BUTTON_WHEEL_UP or button == MOUSE_BUTTON_WHEEL_DOWN:
-		scroll = clampi(scroll + (1 if button == MOUSE_BUTTON_WHEEL_DOWN else -1), 0, maxi(0, listed().size() - ROWS))
-		return
-	if button != MOUSE_BUTTON_LEFT:
-		return
-	var t := tab_at(at)
-	if t >= 0:
-		page = t as Page
-		selected = null
-		scroll = 0
+	if list.wheel(button, listed().size()) or button != MOUSE_BUTTON_LEFT:
 		return
 	var quests := listed()
-	for i in _shown(quests.size()):
-		if _row_rect(i).has_point(at):
-			selected = quests[i]
-			return
+	list.clamp_to(quests.size())
+	var row := list.row_at(at, quests.size())
+	if row >= 0:
+		selected = quests[row]
+		return
 	if page == Page.ACTIVE and selected and _forfeit_rect().has_point(at):
 		Net.ask(&"req_quest_forfeit", [selected.id])
+
+func _tab_clicked(i: int) -> void:
+	page = i as Page
+	selected = null
+	list.scroll = 0

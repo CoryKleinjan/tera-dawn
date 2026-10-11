@@ -22,18 +22,9 @@ func _init() -> void:
 	var card := PanelContainer.new()
 	UiSkin.use_panel(card, UiSkin.ARCH_PANEL, Vector4(34, 58, 34, 52))
 	add_child(card)
-	var col := VBoxContainer.new()
-	col.add_theme_constant_override("separation", 10)
+	var col := UiBuild.column(10)
 	card.add_child(col)
-	var heading := Label.new()
-	heading.text = "Menu"
-	heading.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	heading.add_theme_font_override("font", Game.num_font)
-	heading.add_theme_font_size_override("font_size", 30)
-	heading.add_theme_color_override("font_color", Palette.SUN)
-	heading.add_theme_color_override("font_outline_color", Palette.PLUM)
-	heading.add_theme_constant_override("outline_size", 8)
-	col.add_child(heading)
+	col.add_child(UiBuild.heading("Menu", 30))
 	col.add_child(UiSkin.divider())
 	resume_button = _button(col, "Resume", resumed)
 	settings_button = _button(col, "Settings", settings_requested)
@@ -42,8 +33,7 @@ func _init() -> void:
 	quit_button = _button(col, "Quit to desktop", quit)
 
 func _button(col: VBoxContainer, text: String, sig: Signal) -> Button:
-	var b := UiSkin.menu_button(text, Vector2(240, 46))
-	b.pressed.connect(func() -> void: sig.emit())
+	var b := UiBuild.button(text, func() -> void: sig.emit(), Vector2(240, 46))
 	col.add_child(b)
 	return b
 
