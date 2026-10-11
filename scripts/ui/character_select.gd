@@ -2,8 +2,8 @@ class_name TDCharacterSelect
 extends CenterContainer
 ## Character select, shown after logging in to a server: a slot for each of the account's
 ## characters on that server (their hero, name, level and job) and empty slots up to the
-## limit, with Play, Create, Delete and Log out. TDHud decides what the buttons do; the
-## list comes from the server (Net.characters).
+## limit, with Play, Create, Delete and Log out. TDTitleScreen decides what the buttons do;
+## the list comes from the server (Net.characters).
 
 signal play_requested(char_name: String)
 signal create_requested

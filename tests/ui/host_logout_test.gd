@@ -59,9 +59,9 @@ func test_logging_out_with_friends_playing_asks_and_tells_them() -> void:
 	await ui.ticks(2)
 	if not check(await _friend_joins(port), "a friend logs in"):
 		return
-	var sel := ui.hud.character_select
+	var sel := ui.hud.title.character_select
 	sel.logout_button.pressed.emit()
-	var ask := ui.hud.confirm
+	var ask := ui.hud.title.confirm
 	check(ask.visible, "asks first")
 	check_eq(ask.question.text, "Friends are playing on your game. Log out and end it for them?", "says why")
 	check(ask.cancel_button.has_focus(), "Cancel has the focus")
@@ -72,7 +72,7 @@ func test_logging_out_with_friends_playing_asks_and_tells_them() -> void:
 	sel.logout_button.pressed.emit()
 	ask.ok_button.pressed.emit()
 	check_eq(Net.mode, Net.Mode.NONE, "logged out")
-	check(ui.hud.title_card.visible, "title card")
+	check(ui.hud.title.title_card.visible, "title card")
 	for i in 300:
 		await ui.ticks(1)
 		if friend_why != "":
@@ -83,6 +83,6 @@ func test_logging_out_alone_while_hosting_doesnt_ask() -> void:
 	if not check(_host() != 0, "hosting opens a port"):
 		return
 	await ui.ticks(2)
-	ui.hud.character_select.logout_button.pressed.emit()
-	check(not ui.hud.confirm.visible, "no question")
+	ui.hud.title.character_select.logout_button.pressed.emit()
+	check(not ui.hud.title.confirm.visible, "no question")
 	check_eq(Net.mode, Net.Mode.NONE, "logged out")
