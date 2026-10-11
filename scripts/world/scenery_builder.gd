@@ -1,8 +1,8 @@
 class_name SceneryBuilder
 extends RefCounted
 ## Builds everything that stands on the ground: the biome's scattered trees, bushes and
-## rocks, the map's buildings and hand-placed props, ropes and ladders, portals and doors,
-## and lanterns.
+## rocks (where DecorPlacement puts them), the map's buildings and hand-placed props, ropes
+## and ladders, portals and doors, and lanterns.
 
 ## Warm light standing in a doorway.
 const DOOR_LIGHT := Color("ffc47a")
@@ -25,21 +25,22 @@ func build(map: MapDef, platforms: Array[Platform], rng: RandomNumberGenerator) 
 	var biome := map.biome
 	_lantern_xs = LanternPlacement.slots(map)
 	_lantern_clear = LanternPlacement.keep_clear(map)
-	for rule in biome.ground_decor:
-		_scatter(rule, -300.0, map.width + 300.0, map.ground_y, rng, _lantern_clear)
+	var houses: Array[Sprite3D] = []
+	for piece in DecorPlacement.floor_pieces(map, rng):
+		var s := _stand(piece)
+		if biome.town_decor.has(piece.rule):
+			houses.append(s)
 	if map.town:
 		for rule in biome.town_decor:
-			var houses := _scatter(rule, -300.0, map.width + 300.0, map.ground_y, rng, _lantern_clear) if map.buildings.is_empty() \
-					else _back_houses(rule, map, rng)
-			for s in houses:
-				if biome.chimney_smoke and s.texture.get_height() * s.pixel_size * TDStage.PX > 90.0:
-					var h := s.texture.get_height() * s.pixel_size
-					var w := s.texture.get_width() * s.pixel_size
-					_smoke(s.position + Vector3((0.2 if s.flip_h else -0.2) * w, h * 0.92, 0.0), biome)
-	for i in range(1, platforms.size()):
-		var pl := platforms[i]
-		for rule in biome.platform_decor:
-			_scatter(rule, pl.x + 30.0, pl.x + pl.w - 30.0, pl.y, rng)
+			if not map.buildings.is_empty():
+				houses.append_array(_back_houses(rule, map, rng))
+		for s in houses:
+			if biome.chimney_smoke and s.texture.get_height() * s.pixel_size * TDStage.PX > 90.0:
+				var h := s.texture.get_height() * s.pixel_size
+				var w := s.texture.get_width() * s.pixel_size
+				_smoke(s.position + Vector3((0.2 if s.flip_h else -0.2) * w, h * 0.92, 0.0), biome)
+	for piece in DecorPlacement.platform_pieces(map, rng):
+		_stand(piece)
 	for p in map.props:
 		_prop(p, map)
 	for b in map.buildings:
@@ -103,28 +104,13 @@ static func back_house_width(rule: DecorDef) -> float:
 		widest = maxf(widest, TDStage.art_size(t, rule.texel * rule.scale.y).x)
 	return widest
 
-## Drops pieces from a DecorDef along [x0, x1] on the surface at y, leaving out any that would
-## overlap a stretch in `avoid` (left and right edges as x and y). Returns the sprites.
-func _scatter(rule: DecorDef, x0: float, x1: float, y: float, rng: RandomNumberGenerator, avoid: Array[Vector2] = []) -> Array[Sprite3D]:
-	var placed: Array[Sprite3D] = []
-	if rule.textures.is_empty():
-		return placed
-	var x := x0 + rng.randf_range(0.0, rule.spacing.x)
-	while x < x1:
-		if rng.randf() < rule.chance:
-			var tex: Texture2D = rule.textures[rng.randi() % rule.textures.size()]
-			var texel := rule.texel * rng.randf_range(rule.scale.x, rule.scale.y)
-			var z := rng.randf_range(rule.depth.x, rule.depth.y)
-			var flip := rng.randf() < 0.5
-			var half := TDStage.art_size(tex, texel).x * 0.5
-			if not avoid.any(func(a: Vector2) -> bool: return x + half > a.x and x - half < a.y):
-				var s := TDStage.sprite(tex, texel, rule.shaded)
-				TDStage.stand_on_land(s, Vector2(x, y + 3.0), z)
-				s.flip_h = flip
-				root.add_child(s)
-				placed.append(s)
-		x += rng.randf_range(rule.spacing.x, rule.spacing.y)
-	return placed
+## Stands a piece of scattered scenery where DecorPlacement put it.
+func _stand(p: DecorPlacement.Piece) -> Sprite3D:
+	var s := TDStage.sprite(p.texture, p.texel, p.rule.shaded)
+	TDStage.stand_on_land(s, Vector2(p.x, p.y + 3.0), p.depth)
+	s.flip_h = p.flip
+	root.add_child(s)
+	return s
 
 ## A thin column of smoke rising from a chimney at `at`.
 func _smoke(at: Vector3, biome: BiomeDef) -> void:
