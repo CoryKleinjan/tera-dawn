@@ -90,7 +90,8 @@
         522
       ],
       "fix": "glow_backdrop",
-      "scale": 0.4698
+      "scale": 0.4698,
+      "flat_bottom": true
     },
     "lantern_unlit": {
       "crop": [

@@ -57,6 +57,7 @@ DEFAULTS = {
     "art_px": None,           # sheet pixels per art pixel (Gemini draws each sheet at its own pixel size); sets scale
     "density": 2,             # with art_px: sprite texels per art pixel
     "grow": 1.0,              # with art_px: draw this piece a little bigger or smaller (0.8 to 1.25)
+    "flat_bottom": False,     # stands on the ground: True squares off a rounded bottom (flat_bottom_rows), a number cuts that many rows
 }
 
 
@@ -771,6 +772,44 @@ def extend_bottom(img, n):
     return Image.fromarray(out.clip(0, 255).astype(np.uint8), "RGBA")
 
 
+FLAT_MAX = 0.22     # flat_bottom cuts at most this share of a sprite's height
+FLAT_WIDEN = 0.04   # a bottom row still curving: the row above is this much (of the body's width) wider
+FLAT_SOLID = 128    # alpha that counts as part of the sprite's silhouette
+
+
+def flat_bottom_rows(alpha):
+    """How many rows to cut off the bottom of a sprite so it stands on a flat edge: the rows where
+    its outline still curves in (each row up is clearly wider than the one below, as under a
+    rock, barrel or bush). Straight sides (legs, posts, walls) widen nothing, so they keep every row."""
+    solid = alpha >= FLAT_SOLID
+    rows = np.nonzero(solid.any(1))[0]
+    if len(rows) < 8:
+        return 0
+    bottom, height = rows[-1], rows[-1] - rows[0] + 1
+    width = solid.sum(1).astype(float)
+    body = width[max(rows[0], bottom - int(height * 0.35)):bottom + 1].max()
+    widens = lambda y: width[y - 1] - width[y] > FLAT_WIDEN * body
+    cut = 0
+    for c in range(int(height * FLAT_MAX)):
+        y = bottom - c
+        if not widens(y) and not any(widens(y - k) for k in range(1, 4)):
+            break
+        cut = c + 1
+    return cut
+
+
+def flatten_bottom(img, rows=True):
+    """Squares off the bottom of a sprite that stands on the ground, so it sits flush on the land:
+    cuts flat_bottom_rows (rows=True) or `rows` rows off its bottom, below its lowest opaque row."""
+    a = np.asarray(img.convert("RGBA"))
+    solid = np.nonzero((a[..., 3] >= FLAT_SOLID).any(1))[0]
+    if not len(solid):
+        return img
+    bottom = solid[-1]
+    cut = flat_bottom_rows(a[..., 3]) if rows is True else int(rows)
+    return img.crop((0, 0, img.width, bottom + 1 - cut))
+
+
 GROUND_BLEND = 12  # rows over which a strip's own bottom fades into its painted ground
 
 
@@ -914,6 +953,8 @@ def process(manifest_path, grid_only=False, sprites=None):
                                        .resize((side, side), Image.BOX)).convert("RGBA")
                 if opts.get("seamless_middle"):
                     im = seamless_middle(im, opts["seamless_middle"])
+                if opts.get("flat_bottom"):
+                    im = flatten_bottom(im, opts["flat_bottom"])
                 if opts.get("extend_bottom"):
                     strip_h = im.height
                     im = extend_bottom(im, opts["extend_bottom"])

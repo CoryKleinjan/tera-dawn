@@ -65,7 +65,8 @@
         252,
         226
       ],
-      "grow": 0.96
+      "grow": 0.96,
+      "flat_bottom": true
     },
     "ground_left": {
       "crop": [
@@ -145,7 +146,8 @@
         226
       ],
       "fix": "glow_backdrop_holes",
-      "grow": 0.92
+      "grow": 0.92,
+      "flat_bottom": true
     },
     "tree_small": {
       "crop": [
@@ -154,7 +156,8 @@
         252,
         226
       ],
-      "grow": 0.8
+      "grow": 0.8,
+      "flat_bottom": true
     },
     "bush_large": {
       "crop": [
@@ -163,7 +166,8 @@
         252,
         226
       ],
-      "grow": 0.8
+      "grow": 0.8,
+      "flat_bottom": true
     },
     "bush_small": {
       "crop": [
@@ -172,7 +176,8 @@
         247,
         226
       ],
-      "grow": 0.92
+      "grow": 0.92,
+      "flat_bottom": true
     },
     "rock_large": {
       "crop": [
@@ -181,7 +186,8 @@
         246,
         227
       ],
-      "grow": 0.9
+      "grow": 0.9,
+      "flat_bottom": true
     },
     "rock_small": {
       "crop": [
@@ -190,7 +196,8 @@
         251,
         227
       ],
-      "grow": 0.8
+      "grow": 0.8,
+      "flat_bottom": true
     },
     "stump": {
       "crop": [
@@ -198,7 +205,8 @@
         0,
         252,
         227
-      ]
+      ],
+      "flat_bottom": true
     },
     "flowers": {
       "crop": [
@@ -206,7 +214,8 @@
         0,
         252,
         227
-      ]
+      ],
+      "flat_bottom": true
     },
     "signature_plant": {
       "crop": [
@@ -216,7 +225,8 @@
         227
       ],
       "fix": "glow_backdrop",
-      "grow": 0.8
+      "grow": 0.8,
+      "flat_bottom": true
     },
     "fence": {
       "crop": [
@@ -225,7 +235,8 @@
         247,
         227
       ],
-      "grow": 0.86
+      "grow": 0.86,
+      "flat_bottom": true
     },
     "lantern_unlit": {
       "crop": [
@@ -243,7 +254,8 @@
         252,
         226
       ],
-      "grow": 1.25
+      "grow": 1.25,
+      "flat_bottom": true
     },
     "building_small": {
       "crop": [
@@ -252,7 +264,8 @@
         252,
         226
       ],
-      "grow": 1.24
+      "grow": 1.24,
+      "flat_bottom": true
     },
     "signature_prop": {
       "crop": [
@@ -261,7 +274,8 @@
         247,
         226
       ],
-      "grow": 1.25
+      "grow": 1.25,
+      "flat_bottom": true
     }
   }
 }

@@ -195,7 +195,8 @@
         49,
         188,
         194
-      ]
+      ],
+      "flat_bottom": true
     },
     "bush_large": {
       "crop": [
@@ -203,7 +204,8 @@
         49,
         238,
         194
-      ]
+      ],
+      "flat_bottom": true
     },
     "tree_small": {
       "crop": [
@@ -211,7 +213,8 @@
         49,
         214,
         194
-      ]
+      ],
+      "flat_bottom": true
     },
     "tree_large": {
       "blank": [
@@ -233,7 +236,8 @@
           80,
           76
         ]
-      ]
+      ],
+      "flat_bottom": true
     },
     "stump": {
       "crop": [
@@ -241,7 +245,8 @@
         28,
         234,
         194
-      ]
+      ],
+      "flat_bottom": true
     },
     "rock_small": {
       "crop": [
@@ -249,7 +254,8 @@
         48,
         155,
         176
-      ]
+      ],
+      "flat_bottom": true
     },
     "rock_large": {
       "crop": [
@@ -257,7 +263,8 @@
         48,
         186,
         176
-      ]
+      ],
+      "flat_bottom": true
     },
     "crystals": {
       "fix": "glow_backdrop",
@@ -274,7 +281,8 @@
           90,
           50
         ]
-      ]
+      ],
+      "flat_bottom": true
     },
     "steam_vent": {
       "crop": [
@@ -282,7 +290,8 @@
         27,
         272,
         176
-      ]
+      ],
+      "flat_bottom": true
     },
     "fence": {
       "crop": [
@@ -290,7 +299,8 @@
         27,
         338,
         176
-      ]
+      ],
+      "flat_bottom": true
     },
     "fire_lilies": {
       "crop": [
@@ -298,7 +308,8 @@
         27,
         181,
         176
-      ]
+      ],
+      "flat_bottom": true
     },
     "tall_grass": {
       "crop": [

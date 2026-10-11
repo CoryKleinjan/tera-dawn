@@ -24,31 +24,39 @@
   ],
   "overrides": {
     "door": {
-      "scale": 0.2251
+      "scale": 0.2251,
+      "flat_bottom": true
     },
     "counter": {
-      "scale": 0.2793
+      "scale": 0.2793,
+      "flat_bottom": true
     },
     "shelf": {
-      "scale": 0.3943
+      "scale": 0.3943,
+      "flat_bottom": true
     },
     "bookcase": {
-      "scale": 0.4081
+      "scale": 0.4081,
+      "flat_bottom": true
     },
     "table": {
-      "scale": 0.2032
+      "scale": 0.2032,
+      "flat_bottom": true
     },
     "hearth": {
-      "scale": 0.4341
+      "scale": 0.4341,
+      "flat_bottom": true
     },
     "rack": {
-      "scale": 0.3454
+      "scale": 0.3454,
+      "flat_bottom": true
     },
     "lamp": {
       "scale": 0.3941
     },
     "barrel": {
-      "scale": 0.1801
+      "scale": 0.1801,
+      "flat_bottom": true
     }
   },
   "grid": {
