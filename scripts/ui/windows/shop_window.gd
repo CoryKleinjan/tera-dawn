@@ -26,7 +26,9 @@ var npc: TDNpc
 var shop: ShopDef
 var tab := ItemDef.Tab.USE
 var amount := 1
-var scroll := 0
+## The shopkeeper's lines, and your bag beside them.
+var list := ScrollList.new(Vector2(PAD, LIST_Y), LIST_W, ROW_H, 4, ROWS)
+var grid := SlotGrid.new(Vector2(GRID_X, GRID_Y), COLS, Inventory.SLOTS, SLOT, GAP)
 
 func _init() -> void:
 	super("Shop", Vector2(GRID_X + COLS * (SLOT + GAP) - GAP + PAD, LIST_Y + ROWS * ROW_H + 70))
@@ -35,7 +37,7 @@ func open(who: TDNpc) -> void:
 	npc = who
 	shop = who.def.shop
 	title = shop.display_name if shop.display_name != "" else "%s's Shop" % who.def.display_name
-	scroll = 0
+	list.scroll = 0
 	position = (TDWorld.VIEW - size) / 2.0 + Vector2(0, -30)
 	visible = true
 	raise()
@@ -49,22 +51,7 @@ func _process(delta: float) -> void:
 # ---------- layout ----------
 
 func row_rect(i: int) -> Rect2:
-	return Rect2(PAD, LIST_Y + (i - scroll) * ROW_H, LIST_W, ROW_H - 4)
-
-func _row_at(at: Vector2) -> int:
-	for i in range(scroll, mini(scroll + ROWS, shop.items.size())):
-		if row_rect(i).has_point(at):
-			return i
-	return -1
-
-func slot_rect(i: int) -> Rect2:
-	return Rect2(GRID_X + (i % COLS) * (SLOT + GAP), GRID_Y + (i / COLS) * (SLOT + GAP), SLOT, SLOT)
-
-func _slot_at(at: Vector2) -> int:
-	for i in Inventory.SLOTS:
-		if slot_rect(i).has_point(at):
-			return i
-	return -1
+	return list.row_rect(i)
 
 func _amount_rect(i: int) -> Rect2:
 	return Rect2(PAD + 78 + i * (CHIP_W + 6), size.y - 42, CHIP_W, 28)
@@ -78,7 +65,7 @@ func _draw_body() -> void:
 	if shop == null:
 		return
 	var shards := Game.me.shards
-	for i in range(scroll, mini(scroll + ROWS, shop.items.size())):
+	for i in list.shown(shop.items.size()):
 		var e := shop.items[i]
 		var r := row_rect(i)
 		UiSkin.draw_box(self, UiSkin.shop_row(r.has_point(_hover)), r, ROW_SCALE)
@@ -88,11 +75,10 @@ func _draw_body() -> void:
 		var afford := shards >= e.cost()
 		DrawUtil.text(self, Game.num_font, Vector2(r.position.x + SLOT + 8, r.position.y + 35), "%d" % e.cost(), 13,
 			Palette.SUN if afford else Palette.BAD, 1, 3, Palette.NIGHT)
-	if shop.items.size() > ROWS:
-		DrawUtil.text(self, Game.ui_font, Vector2(PAD + LIST_W, LIST_Y + ROWS * ROW_H + 8), "scroll for more (%d/%d)" % [scroll + 1, shop.items.size() - ROWS + 1], 10, Color(Palette.MIST, 0.6), -1)
+	list.draw_more(self, shop.items.size())
 	draw_tabs(ItemDef.TAB_NAMES, tab, TAB_Y, GRID_X)
 	for i in Inventory.SLOTS:
-		draw_slot(slot_rect(i), Game.me.inventory.at(tab, i))
+		draw_slot(grid.rect(i), Game.me.inventory.at(tab, i))
 	# amount, Dawnshards and Sell all Etc
 	DrawUtil.text(self, Game.ui_font, Vector2(PAD, size.y - 22), "Amount", 12, Palette.MUTED, 1)
 	for i in AMOUNTS.size():
@@ -101,22 +87,14 @@ func _draw_body() -> void:
 		UiSkin.draw_box(self, UiSkin.amount_chip(on), r, CHIP_SCALE)
 		var label := "×%d" % AMOUNTS[i]
 		DrawUtil.text(self, Game.num_font, r.get_center() + Vector2(0, 5), label, DrawUtil.fit_size(Game.num_font, label, 13, CHIP_W - CHIP_CAPS), Palette.INK if on else Palette.MIST, 0, 0 if on else 3, Palette.NIGHT)
-	var purse_y := GRID_Y + ceili(Inventory.SLOTS / float(COLS)) * (SLOT + GAP) + 8
+	var purse_y := GRID_Y + grid.rows() * (SLOT + GAP) + 8
 	draw_shards(Vector2(GRID_X, purse_y + 16), shards)
 	draw_button(_sell_etc_rect(), "Sell all Etc", Game.me.inventory.free_slots(ItemDef.Tab.ETC) < Inventory.SLOTS)
 
 # ---------- input ----------
 
 func _click(at: Vector2, button: int, double: bool) -> void:
-	if button == MOUSE_BUTTON_WHEEL_UP or button == MOUSE_BUTTON_WHEEL_DOWN:
-		var most := maxi(0, shop.items.size() - ROWS)
-		scroll = clampi(scroll + (1 if button == MOUSE_BUTTON_WHEEL_DOWN else -1), 0, most)
-		return
-	if button != MOUSE_BUTTON_LEFT:
-		return
-	var t := tab_at(at)
-	if t >= 0:
-		tab = t as ItemDef.Tab
+	if list.wheel(button, shop.items.size()) or button != MOUSE_BUTTON_LEFT:
 		return
 	for i in AMOUNTS.size():
 		if _amount_rect(i).has_point(at):
@@ -127,13 +105,16 @@ func _click(at: Vector2, button: int, double: bool) -> void:
 		return
 	if not double:
 		return
-	var row := _row_at(at)
+	var row := list.row_at(at, shop.items.size())
 	if row >= 0:
 		buy(row)
 		return
-	var slot := _slot_at(at)
+	var slot := grid.at(at)
 	if slot >= 0:
 		sell(slot)
+
+func _tab_clicked(i: int) -> void:
+	tab = i as ItemDef.Tab
 
 ## Asks to buy the current amount of line `i`.
 func buy(i: int) -> void:
@@ -145,13 +126,11 @@ func sell(i: int) -> void:
 		Net.ask(&"req_sell", [npc.def.id, tab, i, amount])
 		hud.tooltip.clear(self)
 
-func _hovered(at: Vector2) -> void:
-	var row := _row_at(at)
+func _tooltip_at(at: Vector2) -> Tip:
+	var row := list.row_at(at, shop.items.size())
 	if row >= 0:
 		var e := shop.items[row]
-		hud.tooltip.show_item(self, ItemStack.unrolled(e.item), get_global_mouse_position(), "Double-click to buy (%d Dawnshards each)" % e.cost(), true)
-		return
-	var slot := _slot_at(at)
+		return Tip.new(ItemStack.unrolled(e.item), "Double-click to buy (%d Dawnshards each)" % e.cost(), true)
+	var slot := grid.at(at)
 	var stack := Game.me.inventory.at(tab, slot) if slot >= 0 else null
-	var hint := "Double-click to sell (%d each)" % stack.item.sell_price if stack else ""
-	hud.tooltip.show_item(self, stack, get_global_mouse_position(), hint)
+	return Tip.new(stack, "Double-click to sell (%d each)" % stack.item.sell_price if stack else "")

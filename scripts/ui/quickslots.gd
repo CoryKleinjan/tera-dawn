@@ -17,8 +17,9 @@ const MARGIN := Vector2(6, 4)
 var world: TDWorld
 var hud: TDHud
 var _hover := -1
-## The drag this panel started, kept for NOTIFICATION_DRAG_END.
-var _pending: Variant = null
+var grid := SlotGrid.new(Vector2(PAD, PAD), COLS, Character.QUICKSLOTS, SLOT, GAP)
+## The drag this panel started, for when it ends (see `_notification`).
+var _drag := DragPayload.Tracker.new()
 
 ## The panel's size: COLS slots across, as many rows as it takes.
 static func panel_size() -> Vector2:
@@ -44,13 +45,10 @@ func _process(delta: float) -> void:
 	queue_redraw()
 
 func slot_rect(i: int) -> Rect2:
-	return Rect2(PAD + (i % COLS) * (SLOT + GAP), PAD + (i / COLS) * (SLOT + GAP), SLOT, SLOT)
+	return grid.rect(i)
 
 func slot_at(at: Vector2) -> int:
-	for i in Character.QUICKSLOTS:
-		if slot_rect(i).has_point(at):
-			return i
-	return -1
+	return grid.at(at)
 
 ## What's on slot `i`: a SkillDef, an ItemDef or null.
 static func content(i: int) -> Resource:
@@ -76,7 +74,7 @@ func _draw() -> void:
 				var cover := UiSkin.tex("hud/cooldown_cover")
 				var part := Rect2(Vector2.ZERO, cover.get_size() * Vector2(1, k))
 				draw_texture_rect_region(cover, Rect2(r.position + Vector2(3, 3), Vector2(SLOT - 6, (SLOT - 6) * k)), part, Color(1, 1, 1, 0.75))
-			if Game.me.use_problem(skill) != "":
+			if Game.me.skills.use_problem(skill) != "":
 				draw_rect(r.grow(-3), Color(0.05, 0.02, 0.15, 0.55))
 		elif thing is ItemDef:
 			var n := Game.me.inventory.count_of(thing)
@@ -119,47 +117,39 @@ func _get_drag_data(at: Vector2) -> Variant:
 	var thing := content(i) if i >= 0 else null
 	if thing == null:
 		return null
-	var preview := TextureRect.new()
-	preview.texture = thing.get("icon")
-	preview.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	preview.size = Vector2(SLOT, SLOT) - Vector2(8, 8)
-	preview.position = -preview.size / 2.0
-	var holder := Control.new()
-	holder.add_child(preview)
-	set_drag_preview(holder)
 	hud.tooltip.clear(self)
-	_pending = {"from": "quickslot", "index": i}
-	return _pending
+	return _drag.start(self, DragPayload.quickslot(i), TDWindow.drag_preview(thing.get("icon"), SLOT - 8, 1.0, false))
 
 func _can_drop_data(at: Vector2, data: Variant) -> bool:
-	if not data is Dictionary or slot_at(at) < 0:
+	var d := DragPayload.of(data)
+	if d == null or slot_at(at) < 0:
 		return false
-	match data.get("from"):
-		"skills", "quickslot":
+	match d.from:
+		DragPayload.From.SKILLS, DragPayload.From.QUICKSLOT:
 			return true
-		"inventory":
-			return data["tab"] in [ItemDef.Tab.USE, ItemDef.Tab.SETUP]
+		DragPayload.From.INVENTORY:
+			return d.tab in [ItemDef.Tab.USE, ItemDef.Tab.SETUP]
 	return false
 
 func _drop_data(at: Vector2, data: Variant) -> void:
+	var d := DragPayload.of(data)
 	var i := slot_at(at)
-	match data["from"]:
-		"skills":
-			assign(i, &"skill", data["id"])
-		"inventory":
-			var stack := Game.me.inventory.at(data["tab"], data["index"])
+	match d.from:
+		DragPayload.From.SKILLS:
+			assign(i, &"skill", d.id)
+		DragPayload.From.INVENTORY:
+			var stack := Game.me.inventory.at(d.tab, d.index)
 			if stack:
 				assign(i, &"item", stack.item.id)
-		"quickslot":
-			var q: Array = Game.me.quickslots[data["index"]]
-			if not q.is_empty() and data["index"] != i:
+		DragPayload.From.QUICKSLOT:
+			var q: Array = Game.me.quickslots[d.index]
+			if not q.is_empty() and d.index != i:
 				assign(i, q[0], q[1])
 
 func _notification(what: int) -> void:
 	# a slot dragged off the panel and dropped anywhere else is cleared
 	if what != NOTIFICATION_DRAG_END:
 		return
-	var d: Variant = _pending
-	_pending = null
-	if d != null and not get_viewport().gui_is_drag_successful():
-		clear_slot(d["index"])
+	var d := _drag.ended_unplaced(self)
+	if d != null:
+		clear_slot(d.index)

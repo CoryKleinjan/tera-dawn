@@ -14,6 +14,9 @@ const REACH := 170.0
 
 var npc: TDNpc
 var tab := ItemDef.Tab.ETC
+## What's stored on the left, your bag on the right.
+var stored := SlotGrid.new(Vector2(PAD, GRID_Y), COLS, Inventory.SLOTS, SLOT, GAP)
+var bag := SlotGrid.new(Vector2(BAG_X, GRID_Y), COLS, Inventory.SLOTS, SLOT, GAP)
 
 func _init() -> void:
 	var rows := ceili(Inventory.SLOTS / float(COLS))
@@ -32,15 +35,15 @@ func _process(delta: float) -> void:
 		visible = false
 		hud.tooltip.clear(self)
 
-func slot_rect(i: int, bag: bool) -> Rect2:
-	return Rect2((BAG_X if bag else PAD) + (i % COLS) * (SLOT + GAP), GRID_Y + (i / COLS) * (SLOT + GAP), SLOT, SLOT)
+func slot_rect(i: int, in_bag: bool) -> Rect2:
+	return (bag if in_bag else stored).rect(i)
 
 ## [slot, is the bag] under a point, or [-1, false].
 func _slot_at(at: Vector2) -> Array:
-	for bag in [false, true]:
-		for i in Inventory.SLOTS:
-			if slot_rect(i, bag).has_point(at):
-				return [i, bag]
+	for in_bag in [false, true]:
+		var i := (bag if in_bag else stored).at(at)
+		if i >= 0:
+			return [i, in_bag]
 	return [-1, false]
 
 func _draw_body() -> void:
@@ -56,16 +59,15 @@ func _draw_body() -> void:
 func _click(at: Vector2, button: int, double: bool) -> void:
 	if button != MOUSE_BUTTON_LEFT:
 		return
-	var t := tab_at(at)
-	if t >= 0:
-		tab = t as ItemDef.Tab
-		return
 	var hit := _slot_at(at)
 	if double and hit[0] >= 0:
 		if hit[1]:
 			store(hit[0])
 		else:
 			take(hit[0])
+
+func _tab_clicked(i: int) -> void:
+	tab = i as ItemDef.Tab
 
 ## Stores bag slot `i` of the open tab.
 func store(i: int) -> void:
@@ -79,11 +81,9 @@ func take(i: int) -> void:
 		Net.ask(&"req_retrieve", [npc.def.id, tab, i])
 		hud.tooltip.clear(self)
 
-func _hovered(at: Vector2) -> void:
+func _tooltip_at(at: Vector2) -> Tip:
 	var hit := _slot_at(at)
 	if hit[0] < 0:
-		hud.tooltip.show_item(self, null, Vector2.ZERO)
-		return
+		return null
 	var stack := (Game.me.inventory if hit[1] else Game.me.storage).at(tab, hit[0])
-	var hint := "Double-click to store (%d Dawnshards)" % Character.STORE_FEE if hit[1] else "Double-click to take out"
-	hud.tooltip.show_item(self, stack, get_global_mouse_position(), hint if stack else "")
+	return Tip.new(stack, "Double-click to store (%d Dawnshards)" % Character.STORE_FEE if hit[1] else "Double-click to take out")

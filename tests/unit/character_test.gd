@@ -46,8 +46,8 @@ func test_gain_xp_many_levels_at_once() -> void:
 	check_eq(c.gain_xp(55 + 440 + 1485 + 10), 3, "three levels")
 	check_eq(c.level, 4, "level 4")
 	check_eq(c.xp, 10, "leftover")
-	check_eq(c.ap, 15, "5 AP a level")
-	check_eq(c.sp, 9, "3 SP a level")
+	check_eq(c.ap.points, 15, "5 AP a level")
+	check_eq(c.skills.points, 9, "3 SP a level")
 
 func test_exp_stops_at_the_level_cap() -> void:
 	var c := fx.character()
@@ -66,7 +66,7 @@ func test_many_levels_at_once_stop_at_the_cap() -> void:
 	c.level = Character.MAX_LEVEL - 3
 	check_eq(c.gain_xp(1 << 40), 3, "three levels and no further")
 	check_eq(c.level, Character.MAX_LEVEL, "capped")
-	check_eq(c.ap, 15, "AP for the three levels only")
+	check_eq(c.ap.points, 15, "AP for the three levels only")
 
 func test_level_up_raises_max_and_refills() -> void:
 	var c := fx.character()
@@ -129,46 +129,46 @@ func test_damage_range_uses_total_stats() -> void:
 
 func test_add_ap_raises_base_stat() -> void:
 	var c := fx.character(null, {"strength": 4})
-	c.ap = 2
-	check(c.add_ap(&"strength"), "spent")
+	c.ap.points = 2
+	check(c.ap.spend(&"strength"), "spent")
 	check_eq(c.base.strength, 5, "base")
 	check_eq(c.stats.strength, 5, "total recalculated")
-	check_eq(c.ap, 1, "one left")
+	check_eq(c.ap.points, 1, "one left")
 	for s in StatBlock.BASE:
-		c.ap = 1
-		check(c.add_ap(s), "%s allowed" % s)
+		c.ap.points = 1
+		check(c.ap.spend(s), "%s allowed" % s)
 
 func test_add_ap_refuses_without_points_or_bad_stat() -> void:
 	var c := fx.character()
-	c.ap = 0
-	check(not c.add_ap(&"strength"), "no points")
-	c.ap = 3
-	check(not c.add_ap(&"attack"), "attack isn't a base stat")
-	check(not c.add_ap(&"max_hp"), "max HP isn't either")
-	check(not c.add_ap(&"nonsense"), "unknown stat")
-	check_eq(c.ap, 3, "points kept")
+	c.ap.points = 0
+	check(not c.ap.spend(&"strength"), "no points")
+	c.ap.points = 3
+	check(not c.ap.spend(&"attack"), "attack isn't a base stat")
+	check(not c.ap.spend(&"max_hp"), "max HP isn't either")
+	check(not c.ap.spend(&"nonsense"), "unknown stat")
+	check_eq(c.ap.points, 3, "points kept")
 	check_eq(c.base.attack, 0, "nothing raised")
 
 func test_add_ap_spends_several_but_never_more_than_left() -> void:
 	var c := fx.character(null, {"luck": 4})
-	c.ap = 5
-	check(c.add_ap(&"luck", 3), "spent three")
+	c.ap.points = 5
+	check(c.ap.spend(&"luck", 3), "spent three")
 	check_eq(c.base.luck, 7, "LUK")
-	check_eq(c.ap, 2, "two left")
-	check(c.add_ap(&"luck", 10), "spent the rest")
+	check_eq(c.ap.points, 2, "two left")
+	check(c.ap.spend(&"luck", 10), "spent the rest")
 	check_eq(c.base.luck, 9, "only the two that were left")
-	check_eq(c.ap, 0, "none left")
-	c.ap = 3
-	check(not c.add_ap(&"luck", 0), "zero points")
-	check(not c.add_ap(&"luck", -2), "negative points")
-	check_eq(c.ap, 3, "points kept")
+	check_eq(c.ap.points, 0, "none left")
+	c.ap.points = 3
+	check(not c.ap.spend(&"luck", 0), "zero points")
+	check(not c.ap.spend(&"luck", -2), "negative points")
+	check_eq(c.ap.points, 3, "points kept")
 
 func test_auto_ap_fills_the_primary_stat() -> void:
 	var c := fx.character(null, {"strength": 10, "dexterity": 5})
-	c.ap = 7
-	check_eq(c.auto_ap_plan(), {&"strength": 7}, "all in STR with no gear asking for DEX")
-	c.ap = 0
-	check_eq(c.auto_ap_plan(), {}, "nothing to spend")
+	c.ap.points = 7
+	check_eq(c.ap.auto_plan(), {&"strength": 7}, "all in STR with no gear asking for DEX")
+	c.ap.points = 0
+	check_eq(c.ap.auto_plan(), {}, "nothing to spend")
 
 func test_auto_ap_keeps_enough_secondary_for_gear() -> void:
 	var c := fx.character(null, {"strength": 10, "dexterity": 5})
@@ -184,10 +184,10 @@ func test_auto_ap_keeps_enough_secondary_for_gear() -> void:
 	later.required_level = 20
 	c.inventory.add_stack(ItemStack.exact(later))
 	c.recalc()
-	c.ap = 10
-	check_eq(c.auto_ap_plan(), {&"dexterity": 4, &"strength": 6}, "DEX up to the bag's top (not gear for later levels), the rest in STR")
-	c.ap = 3
-	check_eq(c.auto_ap_plan(), {&"dexterity": 3}, "gear first when points are short")
+	c.ap.points = 10
+	check_eq(c.ap.auto_plan(), {&"dexterity": 4, &"strength": 6}, "DEX up to the bag's top (not gear for later levels), the rest in STR")
+	c.ap.points = 3
+	check_eq(c.ap.auto_plan(), {&"dexterity": 3}, "gear first when points are short")
 
 func test_stats_short_of_a_job() -> void:
 	var beginner := fx.job(&"t_beginner")
@@ -213,78 +213,78 @@ func test_job_line_walks_back_through_advances() -> void:
 func test_skill_level_innate_and_null() -> void:
 	var c := fx.character()
 	var s := fx.skill()
-	check_eq(c.skill_level(null), 0, "null")
-	check_eq(c.skill_level(s), 0, "unlearned")
+	check_eq(c.skills.level(null), 0, "null")
+	check_eq(c.skills.level(s), 0, "unlearned")
 	s.innate = true
-	check_eq(c.skill_level(s), 1, "innate is at least 1")
+	check_eq(c.skills.level(s), 1, "innate is at least 1")
 
 func test_learn_spends_sp_and_raises_level() -> void:
 	var c := fx.character()
 	var s := fx.skill()
-	c.sp = 2
-	check_eq(c.learn(s), "", "learned")
-	check_eq(c.learn(s), "", "again")
-	check_eq(c.skill_level(s), 2, "level 2")
-	check_eq(c.sp, 0, "SP spent")
-	check_ne(c.learn(s), "", "out of SP")
-	check_eq(c.skill_level(s), 2, "unchanged")
+	c.skills.points = 2
+	check_eq(c.skills.learn(s), "", "learned")
+	check_eq(c.skills.learn(s), "", "again")
+	check_eq(c.skills.level(s), 2, "level 2")
+	check_eq(c.skills.points, 0, "SP spent")
+	check_ne(c.skills.learn(s), "", "out of SP")
+	check_eq(c.skills.level(s), 2, "unchanged")
 
 func test_learn_refused_cases() -> void:
 	var c := fx.character()
-	c.sp = 10
+	c.skills.points = 10
 	var innate := fx.skill(&"t_innate")
 	innate.innate = true
-	check_ne(c.learn_problem(innate), "", "innate")
+	check_ne(c.skills.learn_problem(innate), "", "innate")
 	var other := fx.skill(&"t_other", SkillDef.Kind.ATTACK, &"t_someone_else")
-	check_ne(c.learn_problem(other), "", "another job's skill")
+	check_ne(c.skills.learn_problem(other), "", "another job's skill")
 	var maxed := fx.skill(&"t_maxed")
 	maxed.max_level = 2
-	c.skills[maxed.id] = 2
-	check_ne(c.learn_problem(maxed), "", "at max level")
-	check_eq(c.sp, 10, "nothing spent")
+	c.skills.learned[maxed.id] = 2
+	check_ne(c.skills.learn_problem(maxed), "", "at max level")
+	check_eq(c.skills.points, 10, "nothing spent")
 
 func test_learn_from_earlier_job_in_line() -> void:
 	fx.job(&"t_job")
 	var c := fx.character(fx.job(&"t_second", &"t_family", &"t_job"))
-	c.sp = 1
-	check_eq(c.learn(fx.skill(&"t_old", SkillDef.Kind.ATTACK, &"t_job")), "", "earlier job's skill")
+	c.skills.points = 1
+	check_eq(c.skills.learn(fx.skill(&"t_old", SkillDef.Kind.ATTACK, &"t_job")), "", "earlier job's skill")
 
 func test_learn_needs_required_skill_level() -> void:
 	var c := fx.character()
-	c.sp = 10
+	c.skills.points = 10
 	var base_skill := fx.skill(&"t_base")
 	var next := fx.skill(&"t_next")
 	next.requires = &"t_base"
 	next.requires_level = 3
-	check_ne(c.learn_problem(next), "", "base not learned")
-	c.skills[base_skill.id] = 2
-	check_ne(c.learn_problem(next), "", "base too low")
-	c.skills[base_skill.id] = 3
-	check_eq(c.learn_problem(next), "", "base high enough")
+	check_ne(c.skills.learn_problem(next), "", "base not learned")
+	c.skills.learned[base_skill.id] = 2
+	check_ne(c.skills.learn_problem(next), "", "base too low")
+	c.skills.learned[base_skill.id] = 3
+	check_eq(c.skills.learn_problem(next), "", "base high enough")
 
 func test_new_active_skill_goes_on_first_free_quickslot() -> void:
 	var c := fx.character()
-	c.sp = 5
+	c.skills.points = 5
 	c.set_quickslot(0, &"item", &"t_potion")
 	var s := fx.skill()
-	c.learn(s)
+	c.skills.learn(s)
 	check_eq(c.quickslots[1], [&"skill", &"t_skill"], "first free slot")
-	c.learn(s)
+	c.skills.learn(s)
 	check_eq(c.quickslots.count([&"skill", &"t_skill"]), 1, "not added twice")
 
 func test_passive_skill_not_put_on_quickslot() -> void:
 	var c := fx.character()
-	c.sp = 1
-	c.learn(fx.skill(&"t_passive", SkillDef.Kind.PASSIVE))
+	c.skills.points = 1
+	c.skills.learn(fx.skill(&"t_passive", SkillDef.Kind.PASSIVE))
 	check_eq(c.quickslots.count([]), Character.QUICKSLOTS, "all still empty")
 
 func test_learn_with_full_quickslots_still_learns() -> void:
 	var c := fx.character()
-	c.sp = 1
+	c.skills.points = 1
 	for i in Character.QUICKSLOTS:
 		c.set_quickslot(i, &"item", StringName("t_i%d" % i))
-	check_eq(c.learn(fx.skill()), "", "learned")
-	check_eq(c.skills[&"t_skill"], 1, "known")
+	check_eq(c.skills.learn(fx.skill()), "", "learned")
+	check_eq(c.skills.learned[&"t_skill"], 1, "known")
 
 func test_passive_adds_stats_and_regen() -> void:
 	var c := fx.character(null, {"strength": 10})
@@ -294,35 +294,35 @@ func test_passive_adds_stats_and_regen() -> void:
 	p.regen_hp = 5
 	p.regen_hp_per_level = 2
 	p.regen_mp = 1
-	c.sp = 3
-	c.learn(p)
-	c.learn(p)
-	c.learn(p)
+	c.skills.points = 3
+	c.skills.learn(p)
+	c.skills.learn(p)
+	c.skills.learn(p)
 	check_eq(c.stats.strength, 10 + 2 + 2, "passive level 3: +4 STR")
-	check_eq(c.regen_bonus(), Vector2i(9, 1), "regen at level 3")
+	check_eq(c.skills.regen_bonus(), Vector2i(9, 1), "regen at level 3")
 
 func test_use_problem_rules() -> void:
 	var c := fx.character()
 	var s := fx.skill()
 	s.mp_cost = 10
-	check_ne(c.use_problem(null), "", "null")
-	check_ne(c.use_problem(s), "", "unlearned")
-	c.skills[s.id] = 1
-	check_eq(c.use_problem(s), "", "usable")
+	check_ne(c.skills.use_problem(null), "", "null")
+	check_ne(c.skills.use_problem(s), "", "unlearned")
+	c.skills.learned[s.id] = 1
+	check_eq(c.skills.use_problem(s), "", "usable")
 	c.mp = 9
-	check_ne(c.use_problem(s), "", "not enough MP")
+	check_ne(c.skills.use_problem(s), "", "not enough MP")
 	c.mp = 10
 	s.weapons = [&"bow"]
-	check_ne(c.use_problem(s), "", "no weapon")
+	check_ne(c.skills.use_problem(s), "", "no weapon")
 	var sword := fx.equip(&"t_sword")
 	sword.weapon_kind = &"sword"
 	c.equipment.put(&"weapon", ItemStack.exact(sword))
-	check_ne(c.use_problem(s), "", "wrong weapon")
+	check_ne(c.skills.use_problem(s), "", "wrong weapon")
 	sword.weapon_kind = &"bow"
-	check_eq(c.use_problem(s), "", "right weapon")
+	check_eq(c.skills.use_problem(s), "", "right weapon")
 	var p := fx.skill(&"t_passive", SkillDef.Kind.PASSIVE)
-	c.skills[p.id] = 1
-	check_ne(c.use_problem(p), "", "passives can't be used")
+	c.skills.learned[p.id] = 1
+	check_ne(c.skills.use_problem(p), "", "passives can't be used")
 
 func test_use_problem_ammo_needs_one_per_hit() -> void:
 	var c := fx.character()
@@ -332,23 +332,23 @@ func test_use_problem_ammo_needs_one_per_hit() -> void:
 	var s := fx.skill()
 	s.uses_ammo = true
 	s.hits = 2
-	c.skills[s.id] = 1
+	c.skills.learned[s.id] = 1
 	c.inventory.add(fx.ammo(), 1)
-	check_ne(c.use_problem(s), "", "one arrow, two hits")
+	check_ne(c.skills.use_problem(s), "", "one arrow, two hits")
 	c.inventory.add(fx.ammo(), 1)
-	check_eq(c.use_problem(s), "", "two arrows")
+	check_eq(c.skills.use_problem(s), "", "two arrows")
 
 func test_basic_attack_follows_weapon() -> void:
 	var c := fx.character()
-	check_eq(c.basic_attack().id, Character.BASIC_ATTACK, "plain swing")
+	check_eq(c.skills.basic_attack().id, Character.BASIC_ATTACK, "plain swing")
 	var shot := fx.skill(&"t_shot")
 	shot.innate = true
 	var bow := fx.equip(&"t_bow")
 	bow.basic_attack = shot
 	c.equipment.put(&"weapon", ItemStack.exact(bow))
-	check(c.basic_attack() == shot, "bow's own shot")
-	check_eq(c.use_problem(shot), "", "can shoot")
-	check_ne(c.use_problem(Content.skill(Character.BASIC_ATTACK)), "", "plain swing not with a bow")
+	check(c.skills.basic_attack() == shot, "bow's own shot")
+	check_eq(c.skills.use_problem(shot), "", "can shoot")
+	check_ne(c.skills.use_problem(Content.skill(Character.BASIC_ATTACK)), "", "plain swing not with a bow")
 
 # ---------- buffs ----------
 
@@ -363,42 +363,42 @@ func _buff(seconds := 2.0) -> SkillDef:
 func test_buff_adds_stats_and_duration() -> void:
 	var c := fx.character()
 	var b := _buff(2.0)
-	c.skills[b.id] = 3
-	c.add_buff(b)
-	check_eq(c.buffs[b.id], [3, 240], "level 3 lasts 4 s = 240 ticks")
+	c.skills.learned[b.id] = 3
+	c.skills.add_buff(b)
+	check_eq(c.skills.buffs[b.id], [3, 240], "level 3 lasts 4 s = 240 ticks")
 	check_eq(c.stats.attack, 7, "5 + 2 attack")
 	check_eq(c.stats.speed, 10, "speed")
 
 func test_tick_buffs_counts_down_then_expires() -> void:
 	var c := fx.character()
 	var b := _buff(1.0)
-	c.skills[b.id] = 1
-	c.add_buff(b)
-	check_eq(c.tick_buffs(59).size(), 0, "not yet")
-	check_eq(c.buffs[b.id][1], 1, "one tick left")
+	c.skills.learned[b.id] = 1
+	c.skills.add_buff(b)
+	check_eq(c.skills.tick_buffs(59).size(), 0, "not yet")
+	check_eq(c.skills.buffs[b.id][1], 1, "one tick left")
 	check_eq(c.stats.attack, 5, "still on")
-	var ended := c.tick_buffs()
+	var ended := c.skills.tick_buffs()
 	check_eq(ended.size(), 1, "ended")
 	check(ended[0] == b, "the buff skill returned")
-	check(not c.buffs.has(b.id), "removed")
+	check(not c.skills.buffs.has(b.id), "removed")
 	check_eq(c.stats.attack, 0, "stats gone")
-	check_eq(c.tick_buffs(100).size(), 0, "nothing more ends")
+	check_eq(c.skills.tick_buffs(100).size(), 0, "nothing more ends")
 
 func test_big_tick_ends_buff_at_once() -> void:
 	var c := fx.character()
 	var b := _buff(1.0)
-	c.skills[b.id] = 1
-	c.add_buff(b)
-	check_eq(c.tick_buffs(10000).size(), 1, "overshoot ends it")
+	c.skills.learned[b.id] = 1
+	c.skills.add_buff(b)
+	check_eq(c.skills.tick_buffs(10000).size(), 1, "overshoot ends it")
 
 func test_recasting_refreshes_duration() -> void:
 	var c := fx.character()
 	var b := _buff(1.0)
-	c.skills[b.id] = 1
-	c.add_buff(b)
-	c.tick_buffs(50)
-	c.add_buff(b)
-	check_eq(c.buffs[b.id][1], 60, "back to full")
+	c.skills.learned[b.id] = 1
+	c.skills.add_buff(b)
+	c.skills.tick_buffs(50)
+	c.skills.add_buff(b)
+	check_eq(c.skills.buffs[b.id][1], 60, "back to full")
 	check_eq(c.stats.attack, 5, "not stacked")
 
 func test_buffs_expire_separately() -> void:
@@ -407,20 +407,20 @@ func test_buffs_expire_separately() -> void:
 	var b := fx.skill(&"t_buff2", SkillDef.Kind.BUFF)
 	b.stats = UnitHelpers.stats({"defense": 3})
 	b.duration = 2.0
-	c.skills[a.id] = 1
-	c.skills[b.id] = 1
-	c.add_buff(a)
-	c.add_buff(b)
-	check_eq(c.tick_buffs(60).size(), 1, "short one ends")
+	c.skills.learned[a.id] = 1
+	c.skills.learned[b.id] = 1
+	c.skills.add_buff(a)
+	c.skills.add_buff(b)
+	check_eq(c.skills.tick_buffs(60).size(), 1, "short one ends")
 	check_eq(c.stats.defense, 3, "long one still on")
-	check_eq(c.tick_buffs(60).size(), 1, "long one ends")
+	check_eq(c.skills.tick_buffs(60).size(), 1, "long one ends")
 	check_eq(c.stats.defense, 0, "both gone")
 
 func test_buff_of_unknown_skill_expires_silently() -> void:
 	var c := fx.character()
-	c.buffs[&"t_gone"] = [1, 5]
-	check_eq(c.tick_buffs(5).size(), 0, "nothing to report")
-	check(c.buffs.is_empty(), "but it's removed")
+	c.skills.buffs[&"t_gone"] = [1, 5]
+	check_eq(c.skills.tick_buffs(5).size(), 0, "nothing to report")
+	check(c.skills.buffs.is_empty(), "but it's removed")
 
 func test_skill_def_level_math() -> void:
 	var s := fx.skill()
@@ -511,32 +511,32 @@ func _archer() -> Character:
 func test_ammo_without_ranged_weapon() -> void:
 	var c := fx.character()
 	c.inventory.add(fx.ammo(), 50)
-	check_eq(c.ammo_slot(), -1, "no weapon")
-	check_eq(c.ammo_count(), 0, "none counted")
+	check_eq(c.gear.ammo_slot(), -1, "no weapon")
+	check_eq(c.gear.ammo_count(), 0, "none counted")
 	c.equipment.put(&"weapon", ItemStack.exact(fx.equip()))
-	check_eq(c.ammo_slot(), -1, "melee weapon")
-	check_eq(c.ammo_attack(), 0, "no ammo attack")
+	check_eq(c.gear.ammo_slot(), -1, "melee weapon")
+	check_eq(c.gear.ammo_attack(), 0, "no ammo attack")
 
 func test_ammo_slot_finds_matching_kind_first() -> void:
 	var c := _archer()
 	c.inventory.add(fx.use(), 3)
 	c.inventory.add(fx.ammo(&"t_star", &"star", 9), 10)
 	c.inventory.add(fx.ammo(&"t_arrow", &"arrow", 2), 30)
-	check_eq(c.ammo_slot(), 2, "skips potions and stars")
-	check_eq(c.ammo_count(), 30, "only arrows counted")
-	check_eq(c.ammo_attack(), 2, "arrow's attack")
+	check_eq(c.gear.ammo_slot(), 2, "skips potions and stars")
+	check_eq(c.gear.ammo_count(), 30, "only arrows counted")
+	check_eq(c.gear.ammo_attack(), 2, "arrow's attack")
 
 func test_spend_ammo_across_stacks() -> void:
 	var c := _archer()
 	var arrow := fx.ammo(&"t_arrow", &"arrow", 0, 10)
 	c.inventory.add(arrow, 25)
-	c.spend_ammo(12)
-	check_eq(c.ammo_count(), 13, "twelve spent")
+	c.gear.spend_ammo(12)
+	check_eq(c.gear.ammo_count(), 13, "twelve spent")
 	check(c.inventory.at(ItemDef.Tab.USE, 0) == null, "first stack used up first")
-	c.spend_ammo(100)
-	check_eq(c.ammo_count(), 0, "spending more than held empties it")
-	c.spend_ammo(5)
-	check_eq(c.ammo_count(), 0, "spending none left is harmless")
+	c.gear.spend_ammo(100)
+	check_eq(c.gear.ammo_count(), 0, "spending more than held empties it")
+	c.gear.spend_ammo(5)
+	check_eq(c.gear.ammo_count(), 0, "spending none left is harmless")
 
 # ---------- storage ----------
 
@@ -625,7 +625,7 @@ func test_advance_changes_job_gives_gifts_and_refills() -> void:
 	check_eq(c.job.id, &"t_next", "new job")
 	check_eq(c.max_hp(), 50 + 10 * 20, "new job's HP growth")
 	check_eq(c.health.hp, c.max_hp(), "refilled")
-	check_eq(c.weapon(), sword, "the gift weapon is worn")
+	check_eq(c.gear.weapon(), sword, "the gift weapon is worn")
 	check_eq(c.equipment.at(&"weapon").stats.attack, 17, "gift gear unrolled")
 	check_eq(c.inventory.count_of(potion), 20, "potions")
 	check_eq(Array(c.job_line()), [&"t_next", &"t_job"], "line")
@@ -635,9 +635,9 @@ func test_advance_gives_sp() -> void:
 	var c: Character = setup[0]
 	var next: JobDef = setup[1]
 	next.advance_sp = 2
-	c.sp = 0
+	c.skills.points = 0
 	check_eq(c.advance(next), "", "advanced")
-	check_eq(c.sp, 2, "SP to learn a first skill")
+	check_eq(c.skills.points, 2, "SP to learn a first skill")
 
 func test_advance_needs_room_for_gifts() -> void:
 	var setup := _advance_setup()
@@ -658,7 +658,7 @@ func test_advance_swaps_a_beginner_weapon_for_the_gift() -> void:
 	c.equipment.put(&"weapon", ItemStack.exact(stick))
 	next.advance_gifts = [UnitHelpers.drop(fx.use(&"t_potion"), 5), UnitHelpers.drop(gift)]
 	check_eq(c.advance(next), "", "advanced")
-	check_eq(c.weapon(), gift, "the first weapon gift is worn, even after other gifts")
+	check_eq(c.gear.weapon(), gift, "the first weapon gift is worn, even after other gifts")
 	check_eq(c.inventory.count_of(stick), 1, "the old weapon is in the bag")
 
 func test_advance_keeps_a_weapon_of_the_new_line_on() -> void:
@@ -671,7 +671,7 @@ func test_advance_keeps_a_weapon_of_the_new_line_on() -> void:
 	c.equipment.put(&"weapon", ItemStack.exact(found))
 	next.advance_gifts = [UnitHelpers.drop(gift)]
 	check_eq(c.advance(next), "", "advanced")
-	check_eq(c.weapon(), found, "a weapon made for the job stays on")
+	check_eq(c.gear.weapon(), found, "a weapon made for the job stays on")
 	check_eq(c.inventory.count_of(gift), 1, "the gift goes to the bag")
 
 func test_advance_leaves_a_gift_weapon_it_cant_wear_in_the_bag() -> void:
@@ -682,7 +682,7 @@ func test_advance_leaves_a_gift_weapon_it_cant_wear_in_the_bag() -> void:
 	heavy.required_level = 50
 	next.advance_gifts = [UnitHelpers.drop(heavy)]
 	check_eq(c.advance(next), "", "advanced")
-	check_eq(c.weapon(), null, "too heavy to wear")
+	check_eq(c.gear.weapon(), null, "too heavy to wear")
 	check_eq(c.inventory.count_of(heavy), 1, "in the bag")
 
 func test_requirement_lines() -> void:
@@ -697,22 +697,22 @@ func _reset_setup() -> Array:
 	var next := fx.job(&"t_mind", &"t_mage", &"t_job")
 	next.advance_requirements = UnitHelpers.stats({"intelligence": 30})
 	var c := fx.character(first, {"strength": 30, "dexterity": 5})
-	c.ap = 2
+	c.ap.points = 2
 	return [c, next]
 
 func test_ap_reset_gives_back_every_spent_point_once() -> void:
 	var setup := _reset_setup()
 	var c: Character = setup[0]
 	var next: JobDef = setup[1]
-	check_eq(c.spent_ap(), 18, "18 points in STR")
-	check_eq(c.reset_ap(next), "", "reset")
+	check_eq(c.ap.spent(), 18, "18 points in STR")
+	check_eq(c.ap.reset(next), "", "reset")
 	check_eq(c.base.strength, 12, "back to the starting STR")
 	check_eq(c.base.dexterity, 5, "DEX untouched")
-	check_eq(c.ap, 20, "18 back plus the 2 unspent")
+	check_eq(c.ap.points, 20, "18 back plus the 2 unspent")
 	check_eq(c.stats.strength, 12, "totals worked out again")
-	check(c.ap_reset_used, "used up")
-	c.add_ap(&"strength", 5)
-	check_ne(c.reset_ap(next), "", "only once")
+	check(c.ap.reset_used, "used up")
+	c.ap.spend(&"strength", 5)
+	check_ne(c.ap.reset(next), "", "only once")
 	check_eq(c.base.strength, 17, "the second one changes nothing")
 
 func test_ap_reset_only_for_a_beginner_short_of_the_stats() -> void:
@@ -720,24 +720,24 @@ func test_ap_reset_only_for_a_beginner_short_of_the_stats() -> void:
 	var c: Character = setup[0]
 	var next: JobDef = setup[1]
 	c.base.intelligence = 30
-	check_ne(c.ap_reset_problem(next), "", "already has the INT")
+	check_ne(c.ap.reset_problem(next), "", "already has the INT")
 	c.base.intelligence = 0
 	c.base.strength = 12
-	check_ne(c.ap_reset_problem(next), "", "nothing spent")
+	check_ne(c.ap.reset_problem(next), "", "nothing spent")
 	c.base.strength = 30
-	check_eq(c.ap_reset_problem(next), "", "spent and short")
+	check_eq(c.ap.reset_problem(next), "", "spent and short")
 	c.job = next
-	check_ne(c.ap_reset_problem(next), "", "not a Beginner any more")
+	check_ne(c.ap.reset_problem(next), "", "not a Beginner any more")
 
 # ---------- tallies, maps, pets ----------
 
 func test_count_tallies() -> void:
 	var c := fx.character()
-	c.count("deals")
-	c.count("deals", 3)
-	c.count("sat", 0)
-	check_eq(c.counters["deals"], 4, "added up")
-	check_eq(c.counters["sat"], 0, "zero recorded")
+	c.count(Counters.DEALS)
+	c.count(Counters.DEALS, 3)
+	c.count(Counters.SAT, 0)
+	check_eq(c.counters[Counters.DEALS], 4, "added up")
+	check_eq(c.counters[Counters.SAT], 0, "zero recorded")
 
 func test_visit_only_new_maps() -> void:
 	var c := fx.character()

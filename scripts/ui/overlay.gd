@@ -54,7 +54,7 @@ func _draw() -> void:
 	_draw_world_text()
 	# map name
 	var name_x := MENU_BUTTON.end.x + 6 if world.started else 16.0
-	UiSkin.draw_hint(self, Vector2(name_x + UiSkin.hint_width(world.map.display_name) / 2.0, 34), world.map.display_name)
+	WorldSkin.draw_hint(self, Vector2(name_x + WorldSkin.hint_width(world.map.display_name) / 2.0, 34), world.map.display_name)
 	var mm := minimap_rect()
 	if world.started:
 		_draw_minimap(mm)
@@ -69,7 +69,7 @@ func _draw() -> void:
 		var shown := float(TDWorld.BANNER_TICKS - world.banner_t)  # negative while it waits
 		var a := clampf(minf(world.banner_t / 30.0, shown / 20.0), 0.0, 1.0)
 		if a > 0.0:
-			UiSkin.draw_banner(self, Vector2(v.x / 2, banner_y - (1.0 - a) * 10.0), world.banner_text, a)
+			WorldSkin.draw_banner(self, Vector2(v.x / 2, banner_y - (1.0 - a) * 10.0), world.banner_text, a)
 	if world.player.fainted():
 		draw_rect(Rect2(Vector2.ZERO, v), Color(Palette.NIGHT, 0.45))
 		DrawUtil.text(self, Game.num_font, Vector2(v.x / 2, v.y / 2 - 10), "You fainted", 40, Palette.MIST)
@@ -198,14 +198,14 @@ func _minimap_door(at: Vector2) -> void:
 func _draw_boss_bar(top_center: Vector2) -> bool:
 	for m in world.mobs():
 		if m.draws_boss_bar():
-			UiSkin.draw_boss_bar(self, top_center, "Lv.%d %s" % [m.def.level, m.def.display_name], m.hp)
+			WorldSkin.draw_boss_bar(self, top_center, "Lv.%d %s" % [m.def.level, m.def.display_name], m.hp)
 			return true
 	return false
 
 ## Running buffs left of the minimap, newest on the left, with the seconds they have left.
 func _draw_buffs(right_top: Vector2) -> void:
 	var x := right_top.x
-	for id in Game.me.buffs:
+	for id in Game.me.skills.buffs:
 		var s: SkillDef = Content.skills.get(id)
 		if s == null:
 			continue
@@ -214,7 +214,7 @@ func _draw_buffs(right_top: Vector2) -> void:
 		UiSkin.draw_icon(self, "hud/buff_frame", r)
 		if s.icon:
 			draw_texture_rect(s.icon, TDWindow.fit(s.icon, r.grow(-7)), false)
-		var left := ceili(Game.me.buffs[id][1] / 60.0)
+		var left := ceili(Game.me.skills.buffs[id][1] / 60.0)
 		DrawUtil.text(self, Game.num_font, Vector2(r.get_center().x, r.end.y + 9), str(left), 11,
 			Palette.MIST if left > 10 else Palette.WARN, 0, 4, Palette.NIGHT)
 
@@ -231,7 +231,7 @@ func _draw_party(at: Vector2) -> void:
 			UiSkin.draw_icon(self, "social/leader_star", Rect2(x, y, 12, 12))
 			x += 14
 		DrawUtil.text(self, Game.ui_font, Vector2(x, y + 10), "%s  Lv.%d" % [m[0], m[2]], 11, Palette.MIST if here else Color(Palette.MIST, 0.55), 1, 3, Palette.NIGHT)
-		UiSkin.draw_party_hp(self, Vector2(at.x - 2, y + 12), 100, float(m[4]))
+		WorldSkin.draw_party_hp(self, Vector2(at.x - 2, y + 12), 100, float(m[4]))
 		y += 30
 
 ## A pet's name under it (into `tags`) and what it's saying over it.
@@ -240,7 +240,7 @@ func _draw_pet(c: TDCompanion, z: float, shown: bool, tags: TDNameTags) -> void:
 		return
 	tags.add_name(world.stage.screen(c.pet_pos, z) + Vector2(0, 4), c.pet.display_name, Palette.PET)
 	if c.speech_t > 0:
-		UiSkin.draw_speech(self, world.stage.screen(c.pet_head(), z) + Vector2(0, -6), c.speech)
+		WorldSkin.draw_speech(self, world.stage.screen(c.pet_head(), z) + Vector2(0, -6), c.speech)
 
 ## Everything drawn at a spot in the world: name tags (gathered first and
 ## nudged apart, yours on top), HP bars, quest markers, speech, floating numbers and portal hints.
@@ -261,17 +261,17 @@ func _draw_world_text() -> void:
 			var feet := st.screen(world.drawn(a), TDStage.Z_OTHER_PLAYER)
 			a.draw_tag(tags, feet)
 			if a.shop_title != "":
-				UiSkin.draw_shop_sign(self, feet + Vector2(0, -TDPlayer.HEIGHT + 3), a.shop_title)
+				WorldSkin.draw_shop_sign(self, feet + Vector2(0, -TDPlayer.HEIGHT + 3), a.shop_title)
 			elif a.speech_t > 0:
-				UiSkin.draw_speech(self, feet + Vector2(0, -TDPlayer.HEIGHT - 1), a.speech)
+				WorldSkin.draw_speech(self, feet + Vector2(0, -TDPlayer.HEIGHT - 1), a.speech)
 	var p := world.player
 	if world.started and not p.fainted():
 		var feet := st.screen(world.drawn(p), TDPlayer.Z)
 		tags.add_name(feet + Vector2(0, 4), Game.me.name, Palette.SUN, Game.me.guild, true)
 		if world.hud.selling():
-			UiSkin.draw_shop_sign(self, feet + Vector2(0, -TDPlayer.HEIGHT + 3), world.hud.windows["player_shop"].shop_title)
+			WorldSkin.draw_shop_sign(self, feet + Vector2(0, -TDPlayer.HEIGHT + 3), world.hud.windows["player_shop"].shop_title)
 		elif p.speech_t > 0:
-			UiSkin.draw_speech(self, feet + Vector2(0, -TDPlayer.HEIGHT - 1), p.speech)
+			WorldSkin.draw_speech(self, feet + Vector2(0, -TDPlayer.HEIGHT - 1), p.speech)
 	_draw_pet(world.player.companion, TDPlayer.Z, world.started and not p.fainted(), tags)
 	for a in world.avatars.values():
 		_draw_pet(a.companion, TDStage.Z_OTHER_PLAYER, a.known, tags)
@@ -285,4 +285,4 @@ func _draw_world_text() -> void:
 		var base := Vector2(portal.x, world.platforms[portal.platform].y)
 		if world.started and absf(p.position.x - base.x) < 60 and absf(p.position.y - base.y) < 8:
 			var target := Content.map(portal.target_map)
-			UiSkin.draw_hint(self, st.screen(base + Vector2(0, -128), -0.3), _portal_hint(portal, target))
+			WorldSkin.draw_hint(self, st.screen(base + Vector2(0, -128), -0.3), _portal_hint(portal, target))

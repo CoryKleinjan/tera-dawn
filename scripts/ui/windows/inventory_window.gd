@@ -10,9 +10,10 @@ const GAP := 4.0
 const GRID_Y := 66.0
 
 var tab := ItemDef.Tab.EQUIP
-## The drag this window started, kept for NOTIFICATION_DRAG_END (the viewport has
-## already forgotten it by then).
-var _pending: Variant = null
+## The bag's slots.
+var grid := SlotGrid.new(Vector2(PAD, GRID_Y), COLS, Inventory.SLOTS, SLOT, GAP)
+## The drag this window started, for when it ends (see `_notification`).
+var _drag := DragPayload.Tracker.new()
 ## The Use slot of the scroll waiting for a piece of gear, or -1.
 var scrolling := -1
 
@@ -21,13 +22,10 @@ func _init() -> void:
 	super("Inventory", Vector2(PAD * 2 + COLS * (SLOT + GAP) - GAP, GRID_Y + rows * (SLOT + GAP) + 40))
 
 func slot_rect(i: int) -> Rect2:
-	return Rect2(PAD + (i % COLS) * (SLOT + GAP), GRID_Y + (i / COLS) * (SLOT + GAP), SLOT, SLOT)
+	return grid.rect(i)
 
 func slot_at(at: Vector2) -> int:
-	for i in Inventory.SLOTS:
-		if slot_rect(i).has_point(at):
-			return i
-	return -1
+	return grid.at(at)
 
 func _draw_body() -> void:
 	draw_tabs(ItemDef.TAB_NAMES, tab)
@@ -47,12 +45,8 @@ func _draw_body() -> void:
 	DrawUtil.text(self, Game.ui_font, Vector2(size.x - PAD, y), "%d free" % Game.me.inventory.free_slots(tab), 11, Color(Palette.MIST, 0.7), -1)
 
 func _dragged_index() -> int:
-	if not get_viewport().gui_is_dragging():
-		return -1
-	var d: Variant = get_viewport().gui_get_drag_data()
-	if d is Dictionary and d.get("from") == "inventory" and d.get("tab") == tab:
-		return d["index"]
-	return -1
+	var d := DragPayload.dragging(self)
+	return d.index if d and DragPayload.is_bag_item(d, tab) else -1
 
 ## The scroll picked up for upgrading, if it's still there.
 func _scroll() -> ScrollDef:
@@ -69,10 +63,6 @@ func _click(at: Vector2, button: int, double: bool) -> void:
 		scrolling = -1
 	if button != MOUSE_BUTTON_LEFT:
 		return
-	var t := tab_at(at)
-	if t >= 0:
-		tab = t as ItemDef.Tab
-		return
 	var i := slot_at(at)
 	if i >= 0 and _scroll() and tab == ItemDef.Tab.EQUIP:
 		if Game.me.inventory.at(tab, i):
@@ -80,6 +70,9 @@ func _click(at: Vector2, button: int, double: bool) -> void:
 		return
 	if i >= 0 and double:
 		use_slot(i)
+
+func _tab_clicked(i: int) -> void:
+	tab = i as ItemDef.Tab
 
 ## Uses the picked-up scroll on the gear in Equip slot `i`.
 func use_scroll_on(i: int) -> void:
@@ -104,7 +97,7 @@ func use_slot(i: int) -> void:
 			Net.ask(&"req_setup", [i])
 	hud.tooltip.clear(self)
 
-func _hovered(at: Vector2) -> void:
+func _tooltip_at(at: Vector2) -> Tip:
 	var i := slot_at(at)
 	var stack := Game.me.inventory.at(tab, i) if i >= 0 else null
 	var hint := ""
@@ -120,40 +113,39 @@ func _hovered(at: Vector2) -> void:
 				hint = "Double-click to sit (move to get up)"
 			elif stack and stack.item is PetDef:
 				hint = "Double-click to bring out or send home"
-	hud.tooltip.show_item(self, stack, get_global_mouse_position(), hint, true)
+	return Tip.new(stack, hint, true)
 
 func _get_drag_data(at: Vector2) -> Variant:
 	var i := slot_at(at)
 	if i < 0 or Game.me.inventory.at(tab, i) == null:
 		return null
-	set_drag_preview(drag_preview(Game.me.inventory.at(tab, i)))
 	hud.tooltip.clear(self)
-	_pending = {"from": "inventory", "tab": tab, "index": i}
-	return _pending
+	return _drag.start(self, DragPayload.bag_item(tab, i), drag_preview(Game.me.inventory.at(tab, i).item.icon))
 
 func _can_drop_data(at: Vector2, data: Variant) -> bool:
-	if not data is Dictionary or slot_at(at) < 0:
+	var d := DragPayload.of(data)
+	if d == null or slot_at(at) < 0:
 		return false
-	if data["from"] == "inventory":
-		return data["tab"] == tab
-	return data["from"] == "equipment" and tab == ItemDef.Tab.EQUIP
+	if d.from == DragPayload.From.INVENTORY:
+		return d.tab == tab
+	return d.from == DragPayload.From.EQUIPMENT and tab == ItemDef.Tab.EQUIP
 
 func _drop_data(at: Vector2, data: Variant) -> void:
+	var d := DragPayload.of(data)
 	var i := slot_at(at)
-	if data["from"] == "inventory":
+	if d.from == DragPayload.From.INVENTORY:
 		# move it here right away so it doesn't jump back while the server answers
-		Game.me.inventory.move(tab, data["index"], i)
-		Net.ask(&"req_move_item", [tab, data["index"], i])
+		Game.me.inventory.move(tab, d.index, i)
+		Net.ask(&"req_move_item", [tab, d.index, i])
 	else:
-		Net.ask(&"req_unequip", [data["place"], i])
+		Net.ask(&"req_unequip", [d.place, i])
 
 func _notification(what: int) -> void:
 	# dragged out of every window: drop it on the ground
 	if what != NOTIFICATION_DRAG_END:
 		return
-	var d: Variant = _pending
-	_pending = null
-	if d != null and not get_viewport().gui_is_drag_successful() and not mouse_over_window():
+	var d := _drag.ended_unplaced(self)
+	if d != null and not mouse_over_window():
 		var world := hud.world
 		if world.started and not world.player.fainted():
-			Net.ask(&"req_drop_item", [d["tab"], d["index"]])
+			Net.ask(&"req_drop_item", [d.tab, d.index])

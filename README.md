@@ -152,7 +152,7 @@ tools/art/         Sheet slicer, store-art cropper, fx textures, contact-sheet p
 ## Shipping on Steam
 
 1. **Steamworks.** Sign up at partner.steamgames.com, pay the Steam Direct fee for an app, and note the app ID.
-2. **GodotSteam.** Install the GodotSteam GDExtension from the Godot Asset Library into `addons/godotsteam`. Then set `APP_ID` in `scripts/autoload/steam_service.gd`. Define the achievements in the Steamworks dashboard with the `steam` ids listed in `scripts/systems/achievements.gd` (`REACH_LEVEL_5`, `ACH_FIRST_HUNT`, ...); the game unlocks each one when the server says it was reached.
+2. **GodotSteam.** Install the GodotSteam GDExtension from the Godot Asset Library into `addons/godotsteam`. Then set `APP_ID` in `scripts/autoload/steam_service.gd`. Define the achievements in the Steamworks dashboard with the `steam` ids of the achievements in `data/achievements/` (`REACH_LEVEL_5`, `ACH_FIRST_HUNT`, ...); the game unlocks each one when the server says it was reached.
 3. **Export.** In Godot, install the export templates (Editor → Manage Export Templates). Then use **Project → Export**: presets for Windows, Linux and macOS are already in `export_presets.cfg`. macOS builds need signing and notarization with an Apple Developer account.
 4. **Upload.** Upload the builds with SteamPipe (`steamcmd` + an app build VDF), set up the store page, and submit for review.
 

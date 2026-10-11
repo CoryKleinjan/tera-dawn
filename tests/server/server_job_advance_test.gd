@@ -42,11 +42,11 @@ func _advance(npc := &"test_instructor", job := &"mage") -> void:
 
 func test_advancing_changes_the_job_and_hands_out_the_gifts_and_sp() -> void:
 	_ready_for_mage()
-	var sp := c.sp
+	var sp := c.skills.points
 	_advance()
 	check_eq(c.job, mage, "a Magician now")
-	check_eq(c.sp, sp + mage.advance_sp, "the job's Skill Points")
-	check_eq(c.weapon(), wand, "the wand, worn at once")
+	check_eq(c.skills.points, sp + mage.advance_sp, "the job's Skill Points")
+	check_eq(c.gear.weapon(), wand, "the wand, worn at once")
 	check_eq(c.inventory.count_of(blue), 30, "the mana potions")
 	check(h.told(2, "You are now a Magician!"), "told")
 	check(h.told(2, "Your instructor hands you: Apprentice Wand, 30 Blue Potion."), "told what was handed over")
@@ -59,22 +59,22 @@ func test_every_job_gets_its_basic_weapon_worn_and_its_ammo() -> void:
 			for stat in StatBlock.BASE:
 				who.base.set(stat, maxi(who.base.value(stat), job.advance_requirements.value(stat)))
 		who.recalc()
-		var old := who.weapon()
+		var old := who.gear.weapon()
 		check_eq(who.advance(job), "", "%s: advanced" % job.id)
-		var w := who.weapon()
+		var w := who.gear.weapon()
 		if not check(w != null and job.family in w.jobs, "%s: wears a %s weapon, not %s" % [job.id, job.family, w.id if w else "nothing"]):
 			continue
 		check_eq(w, job.advance_gifts[0].item, "%s: the first gift is the weapon worn" % job.id)
 		if old:
 			check(who.inventory.count_of(old) == 1, "%s: the old weapon goes to the bag" % job.id)
 		if w.ammo != &"":
-			check(who.ammo_count() >= 300, "%s: ammo to start with (%d)" % [job.id, who.ammo_count()])
+			check(who.gear.ammo_count() >= 300, "%s: ammo to start with (%d)" % [job.id, who.gear.ammo_count()])
 
 func test_advancing_is_celebrated_and_sent_to_the_player() -> void:
 	_ready_for_mage()
 	_advance()
 	var fx := h.last(2, &"ev_effect")
-	check(not fx.is_empty() and fx[0] == &"celebrate", "everyone on the map sees the celebration")
+	check(not fx.is_empty() and fx[0] == EffectDef.CELEBRATE, "everyone on the map sees the celebration")
 	h.step()
 	var sent := h.last(2, &"ev_character")
 	check(not sent.is_empty() and sent[0]["job"] == "mage", "the client is sent the new job")
@@ -141,10 +141,10 @@ func test_a_full_use_tab_holds_the_advance_back() -> void:
 func test_a_job_can_only_be_chosen_once() -> void:
 	_ready_for_mage()
 	_advance()
-	var sp := c.sp
+	var sp := c.skills.points
 	_advance()
-	check_eq(c.sp, sp, "no second round of Skill Points")
-	check_eq(c.weapon(), wand, "the first wand is worn")
+	check_eq(c.skills.points, sp, "no second round of Skill Points")
+	check_eq(c.gear.weapon(), wand, "the first wand is worn")
 	check_eq(c.inventory.count_of(wand), 0, "no second wand")
 	check(h.told(2, "A Magician can't become a Magician."), "told")
 

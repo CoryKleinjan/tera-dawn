@@ -96,7 +96,7 @@ func test_gear_tooltips_show_requirements_stats_and_upgrades() -> void:
 			var line := "%s only" % EquipDef.families_text(e.jobs)
 			var i := texts.find(line)
 			if check(i >= 0, "%s: says %s" % [e.id, line]):
-				check_eq(lines[i][1] == RED, not Game.me.can_use(e.jobs), "%s: the job line is red exactly when a Beginner can't use it" % e.id)
+				check_eq(lines[i][1] == RED, not Game.me.gear.can_use(e.jobs), "%s: the job line is red exactly when a Beginner can't use it" % e.id)
 
 func test_rolled_gear_colours_stats_against_the_base() -> void:
 	var e: EquipDef = Content.item(&"dawn_blade")

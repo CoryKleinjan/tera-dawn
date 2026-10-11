@@ -145,7 +145,7 @@ func test_a_sure_scroll_upgrades_gear() -> void:
 	check_eq(sword.slots_used, 1, "one slot used")
 	check(c.inventory.at(ItemDef.Tab.USE, 5) == null, "scroll used up")
 	check(h.told(2, "The scroll worked!"), "told")
-	check_eq(int(c.counters.get("scrolls", 0)), 1, "counted for achievements")
+	check_eq(int(c.counters.get(Counters.SCROLLS, 0)), 1, "counted for achievements")
 
 func test_moving_items_in_the_bag() -> void:
 	var slot := _red_slot()
@@ -159,25 +159,25 @@ func test_moving_items_to_a_bad_slot_is_ignored() -> void:
 	check(c.inventory.at(ItemDef.Tab.USE, slot) != null, "stayed")
 
 func test_spending_ability_points() -> void:
-	c.ap = 2
+	c.ap.points = 2
 	var strength := c.base.strength
 	h.ask(2, &"req_add_ap", [&"strength"])
 	check_eq(c.base.strength, strength + 1, "STR raised")
-	check_eq(c.ap, 1, "point spent")
+	check_eq(c.ap.points, 1, "point spent")
 	h.ask(2, &"req_add_ap", [&"attack"])
-	check_eq(c.ap, 1, "only main stats take points")
+	check_eq(c.ap.points, 1, "only main stats take points")
 
 func test_spending_many_ability_points_at_once() -> void:
-	c.ap = 5
+	c.ap.points = 5
 	var luck := c.base.luck
 	h.ask(2, &"req_add_ap_many", [&"luck", 3])
 	check_eq(c.base.luck, luck + 3, "LUK raised by 3")
-	check_eq(c.ap, 2, "three points spent")
+	check_eq(c.ap.points, 2, "three points spent")
 	h.ask(2, &"req_add_ap_many", [&"luck", 50])
 	check_eq(c.base.luck, luck + 5, "never more than the points left")
-	check_eq(c.ap, 0, "all spent")
-	c.ap = 4
+	check_eq(c.ap.points, 0, "all spent")
+	c.ap.points = 4
 	h.ask(2, &"req_add_ap_many", [&"luck", -3])
 	h.ask(2, &"req_add_ap_many", [&"attack", 2])
-	check_eq(c.ap, 4, "a negative amount or a non-base stat spends nothing")
+	check_eq(c.ap.points, 4, "a negative amount or a non-base stat spends nothing")
 	check_eq(c.base.luck, luck + 5, "LUK unchanged")

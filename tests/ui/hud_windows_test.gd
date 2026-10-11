@@ -218,7 +218,7 @@ func _plus_rects(win: TDWindow) -> Array[Rect2]:
 # ---------- character stats ----------
 
 func test_stats_plus_buttons_spend_ability_points() -> void:
-	await ui.edit(func(c: Character) -> void: c.ap = 3)
+	await ui.edit(func(c: Character) -> void: c.ap.points = 3)
 	var stats: TDStatsWindow = _open("stats")
 	await _redrawn(stats, "stats with AP to spend")
 	var plus := _plus_rects(stats) # drawn in StatBlock.BASE order
@@ -229,7 +229,7 @@ func test_stats_plus_buttons_spend_ability_points() -> void:
 	await ui.click(stats, plus[StatBlock.BASE.find(&"strength")].get_center())
 	await ui.ticks(3)
 	check_eq(Game.me.base.strength, str_before + 1, "STR after clicking its +")
-	check_eq(Game.me.ap, 2, "AP left")
+	check_eq(Game.me.ap.points, 2, "AP left")
 
 func test_stats_window_leaves_the_status_bar_visible() -> void:
 	var stats: TDStatsWindow = _open("stats")
@@ -244,7 +244,7 @@ func test_stats_window_shows_a_beginner_the_job_paths() -> void:
 	await ui.edit(func(c: Character) -> void:
 		c.job = Content.job(Character.START_JOB)
 		c.level = 9
-		c.ap = 5
+		c.ap.points = 5
 		c.base.strength = 35
 		c.base.dexterity = 4
 		c.base.intelligence = 4
@@ -278,27 +278,27 @@ func test_stats_auto_spends_every_point_through_the_server() -> void:
 	await ui.edit(func(c: Character) -> void:
 		c.job = Content.job(&"thief")
 		c.level = 12
-		c.ap = 10)
+		c.ap.points = 10)
 	var stats: TDStatsWindow = _open("stats")
 	await _redrawn(stats, "stats with an Auto button")
 	check(stats.auto_rect.size.x > 0 and Rect2(Vector2.ZERO, stats.size).encloses(stats.auto_rect), "Auto lies inside the window")
-	var plan := Game.me.auto_ap_plan()
+	var plan := Game.me.ap.auto_plan()
 	var before := Game.me.base.copy()
 	await ui.click(stats, stats.auto_rect.get_center())
 	await ui.ticks(3)
-	check_eq(Game.me.ap, 0, "every point spent")
+	check_eq(Game.me.ap.points, 0, "every point spent")
 	check_eq(Game.me.base.luck - before.luck, plan.get(&"luck", 0), "LUK as planned")
 	check_eq(Game.me.base.dexterity - before.dexterity, plan.get(&"dexterity", 0), "DEX as planned")
 	check(plan.get(&"luck", 0) > 0, "most points go in the thief's LUK")
 
 func test_status_bar_glows_while_points_wait() -> void:
 	await ui.edit(func(c: Character) -> void:
-		c.ap = 0
-		c.sp = 0)
+		c.ap.points = 0
+		c.skills.points = 0)
 	check(not TDStatusBar.has_points_waiting("stats") and not TDStatusBar.has_points_waiting("skills"), "nothing to spend, no glow")
 	await ui.edit(func(c: Character) -> void:
-		c.ap = 5
-		c.sp = 2)
+		c.ap.points = 5
+		c.skills.points = 2)
 	check(TDStatusBar.has_points_waiting("stats"), "the Character button glows with AP")
 	check(TDStatusBar.has_points_waiting("skills"), "the Skills button glows with SP")
 	check(not TDStatusBar.has_points_waiting("inventory"), "other buttons don't")
@@ -314,7 +314,7 @@ func test_skill_window_lists_every_skill_of_every_job() -> void:
 		await ui.edit(func(c: Character) -> void:
 			c.job = j
 			c.level = 30
-			c.sp = 5)
+			c.skills.points = 5)
 		var book: TDSkillWindow = _open("skills")
 		var line := book.jobs()
 		check_eq(line.size(), 2, "%s: tabs (Beginner and the job)" % j.id)
@@ -337,7 +337,7 @@ func test_skill_plus_learns_through_the_server() -> void:
 	await ui.edit(func(c: Character) -> void:
 		c.job = Content.job(&"warrior")
 		c.level = 30
-		c.sp = 3)
+		c.skills.points = 3)
 	var book: TDSkillWindow = _open("skills")
 	book.tab = 1
 	await _redrawn(book, "warrior skills")
@@ -351,8 +351,8 @@ func test_skill_plus_learns_through_the_server() -> void:
 	var id: StringName = book.listed()[maxi(row, 0)].id
 	await ui.click(book, plus[0].get_center())
 	await ui.ticks(3)
-	check_eq(Game.me.skill_level(Content.skill(id)), 1, "%s after clicking its +" % id)
-	check_eq(Game.me.sp, 2, "SP left")
+	check_eq(Game.me.skills.level(Content.skill(id)), 1, "%s after clicking its +" % id)
+	check_eq(Game.me.skills.points, 2, "SP left")
 
 # ---------- quests ----------
 
@@ -392,7 +392,7 @@ func test_quest_pages_list_what_the_log_holds() -> void:
 				TDQuestWindow.Page.DONE:
 					check(me.quests.done.has(q.id), "%s done" % q.id)
 		for i in listed.size():
-			var row := log._row_rect(i)
+			var row := log.row_rect(i)
 			if row.end.y > log.size.y:
 				fail("%s: row %d (%s) runs off the bottom of the window" % [TDQuestWindow.PAGE_NAMES[page], i, listed[i].id])
 				continue
@@ -428,22 +428,22 @@ func test_quest_done_page_lists_every_finished_quest() -> void:
 	log.page = TDQuestWindow.Page.DONE
 	var listed := log.listed()
 	check_eq(listed.size(), Content.quests.size(), "the Done page lists every quest")
-	log.scroll = 0
+	log.list.scroll = 0
 	await _redrawn(log, "the Done page")
 	check(listed.size() > TDQuestWindow.ROWS, "more quests than fit, so the list scrolls")
-	for i in range(log.scroll, mini(log.scroll + TDQuestWindow.ROWS, listed.size())):
-		check(log._row_rect(i).end.y <= log.size.y - TDWindow.PAD, "row %d ends at y %s, inside the window (%s)" % [i, log._row_rect(i).end.y, log.size.y])
+	for i in range(log.list.scroll, mini(log.list.scroll + TDQuestWindow.ROWS, listed.size())):
+		check(log.row_rect(i).end.y <= log.size.y - TDWindow.PAD, "row %d ends at y %s, inside the window (%s)" % [i, log.row_rect(i).end.y, log.size.y])
 	for n in listed.size():
-		await ui.click(log, log._row_rect(log.scroll).get_center(), MOUSE_BUTTON_WHEEL_DOWN)
-	check_eq(log.scroll, listed.size() - TDQuestWindow.ROWS, "the wheel scrolls to the last quest and stops")
+		await ui.click(log, log.row_rect(log.list.scroll).get_center(), MOUSE_BUTTON_WHEEL_DOWN)
+	check_eq(log.list.scroll, listed.size() - TDQuestWindow.ROWS, "the wheel scrolls to the last quest and stops")
 	var last := listed.size() - 1
-	check(log._row_rect(last).end.y <= log.size.y - TDWindow.PAD, "the last row is inside the window once scrolled")
-	await ui.click(log, log._row_rect(last).get_center())
+	check(log.row_rect(last).end.y <= log.size.y - TDWindow.PAD, "the last row is inside the window once scrolled")
+	await ui.click(log, log.row_rect(last).get_center())
 	check(log.selected == listed[last], "clicking the last row selects the last quest")
-	await ui.click(log, log._row_rect(last - 1).get_center(), MOUSE_BUTTON_WHEEL_UP)
-	check_eq(log.scroll, listed.size() - TDQuestWindow.ROWS - 1, "the wheel scrolls back up")
-	await ui.click(log, log._row_rect(log.scroll).get_center())
-	check(log.selected == listed[log.scroll], "clicking the top row selects the quest shown there")
+	await ui.click(log, log.row_rect(last - 1).get_center(), MOUSE_BUTTON_WHEEL_UP)
+	check_eq(log.list.scroll, listed.size() - TDQuestWindow.ROWS - 1, "the wheel scrolls back up")
+	await ui.click(log, log.row_rect(log.list.scroll).get_center())
+	check(log.selected == listed[log.list.scroll], "clicking the top row selects the quest shown there")
 	await _redrawn(log, "the scrolled Done page")
 
 func test_quest_give_up_button_forfeits_through_the_server() -> void:
@@ -747,14 +747,14 @@ func test_every_shop_draws_and_scrolls() -> void:
 			check_eq(shop.amount, TDShopWindow.AMOUNTS[i], "%s: clicking ×%d" % [s.id, TDShopWindow.AMOUNTS[i]])
 		var most := maxi(0, s.items.size() - TDShopWindow.ROWS)
 		for n in most + 2:
-			await ui.click(shop, shop.row_rect(shop.scroll).get_center(), MOUSE_BUTTON_WHEEL_DOWN)
-		check_eq(shop.scroll, most, "%s: scrolling down stops at the last row" % s.id)
+			await ui.click(shop, shop.row_rect(shop.list.scroll).get_center(), MOUSE_BUTTON_WHEEL_DOWN)
+		check_eq(shop.list.scroll, most, "%s: scrolling down stops at the last row" % s.id)
 		await _redrawn(shop, "%s scrolled" % s.id)
-		await ui.hover(shop, shop.row_rect(shop.scroll).get_center())
-		check(ui.hud.tooltip.stack != null and ui.hud.tooltip.stack.item == s.items[shop.scroll].item, "%s: hovering a line shows its item" % s.id)
+		await ui.hover(shop, shop.row_rect(shop.list.scroll).get_center())
+		check(ui.hud.tooltip.stack != null and ui.hud.tooltip.stack.item == s.items[shop.list.scroll].item, "%s: hovering a line shows its item" % s.id)
 		for n in most + 2:
-			await ui.click(shop, shop.row_rect(shop.scroll).get_center(), MOUSE_BUTTON_WHEEL_UP)
-		check_eq(shop.scroll, 0, "%s: scrolling up stops at the first row" % s.id)
+			await ui.click(shop, shop.row_rect(shop.list.scroll).get_center(), MOUSE_BUTTON_WHEEL_UP)
+		check_eq(shop.list.scroll, 0, "%s: scrolling up stops at the first row" % s.id)
 		shop.visible = false
 		npc.free()
 
@@ -762,7 +762,7 @@ func test_shop_double_click_buys_through_the_server() -> void:
 	var keeper: NpcDef = Content.npcs[&"shopkeeper"]
 	await ui.edit(func(c: Character) -> void: c.shards = 100000)
 	# Mira keeps her shop inside her house in the village
-	Net.server._enter_map(ui.player(), &"meadow_store", 240)
+	Net.server.enter_map(ui.player(), &"meadow_store", 240)
 	await ui.ticks(3)
 	var npc: TDNpc = ui.world.npcs().filter(func(n: TDNpc) -> bool: return n.def == keeper)[0]
 	ui.teleport(npc.position + Vector2(-20, 0))
@@ -841,8 +841,8 @@ func test_player_shop_setup_owner_and_visitor() -> void:
 	check(not ui.hud.selling(), "visiting isn't selling")
 	await _redrawn(stall, "visiting a stall")
 	for n in 4:
-		await ui.click(stall, stall._row(0).get_center(), MOUSE_BUTTON_WHEEL_DOWN)
-	check_eq(stall.scroll, visitor_items.size() - TDPlayerShopWindow.ROWS, "scrolling stops at the last line")
+		await ui.click(stall, stall.row_rect(stall.list.scroll).get_center(), MOUSE_BUTTON_WHEEL_DOWN)
+	check_eq(stall.list.scroll, visitor_items.size() - TDPlayerShopWindow.ROWS, "scrolling stops at the last line")
 	await _redrawn(stall, "visiting, scrolled")
 	ui.hud.show_player_shop(multiplayer.get_unique_id(), Game.me.name, "My Shop", visitor_items.slice(0, 2))
 	check(ui.hud.selling() and ui.world.input_blocked(), "minding your own shop holds you in place")
@@ -863,7 +863,7 @@ func test_player_menu_lists_what_you_can_do() -> void:
 	check_eq(labels, ["Whisper", "Invite to party", "Add buddy", "Trade", "Fame +1", "Fame -1"], "actions for a stranger")
 	await _redrawn(menu, "player menu")
 	for i in labels.size():
-		check(menu._row_rect(i).end.y <= menu.size.y, "action %d lies inside the window" % i)
+		check(menu.row_rect(i).end.y <= menu.size.y, "action %d lies inside the window" % i)
 	Game.social = _social() # a guild we're master of, with Mossy as a buddy
 	labels = menu.actions().map(func(x: Array) -> String: return x[0])
 	check_eq(labels, ["Whisper", "Invite to party", "Trade", "Invite to guild", "Fame +1", "Fame -1"], "actions for a guildless buddy")
@@ -871,7 +871,7 @@ func test_player_menu_lists_what_you_can_do() -> void:
 	menu.open(a)
 	labels = menu.actions().map(func(x: Array) -> String: return x[0])
 	check(not labels.has("Invite to guild"), "someone in another guild can't be invited")
-	await ui.click(menu, menu._row_rect(0).get_center())
+	await ui.click(menu, menu.row_rect(0).get_center())
 	check(not menu.visible and ui.hud.chat.field.visible and ui.hud.chat.field.text == "/w Mossy ", "Whisper closes the menu and starts a whisper")
 	ui.hud.chat.close()
 	a.free()

@@ -26,12 +26,12 @@ func _ready() -> void:
 	fit_view()
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	field = LineEdit.new()
-	UiSkin.set_hint(field, "Say something (Enter)  ·  /w Name, /p, /g, /b, /help")
+	UiStyle.set_hint(field, "Say something (Enter)  ·  /w Name, /p, /g, /b, /help")
 	field.max_length = TDSocial.CHAT_MAX
 	field.position = Vector2(0, size.y - 32)
 	field.size = Vector2(W, 30)
 	field.add_theme_font_size_override("font_size", 13)
-	UiSkin.style_field(field, "social/chat_input", Vector4(34, 8, 14, 8), 0.85)
+	UiStyle.style_field(field, "social/chat_input", Vector4(34, 8, 14, 8), 0.85)
 	field.visible = false
 	field.text_submitted.connect(_send)
 	field.gui_input.connect(func(e: InputEvent) -> void:
@@ -90,7 +90,7 @@ func add(kind: String, from: String, text: String) -> void:
 			shown = text
 		_:
 			shown = "%s: %s" % [from, text]
-	for l in UiSkin.wrap_text(Game.ui_font, shown, 13, W - 12):
+	for l in DrawUtil.wrap_text(Game.ui_font, shown, 13, W - 12):
 		lines.append({"text": l, "color": COLORS.get(kind, Palette.MIST), "t": FADE_TICKS})
 	while lines.size() > 60:
 		lines.pop_front()

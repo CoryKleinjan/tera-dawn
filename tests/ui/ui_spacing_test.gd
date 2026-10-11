@@ -43,8 +43,8 @@ func _spender(job: StringName, level: int) -> void:
 	await ui.edit(func(c: Character) -> void:
 		c.job = Content.job(job)
 		c.level = level
-		c.ap = 12
-		c.sp = 5
+		c.ap.points = 12
+		c.skills.points = 5
 		c.guild = "Dawnbreakers"
 		c.fame = 12)
 
@@ -122,7 +122,7 @@ func test_equipment_slot_labels_fit() -> void:
 
 func test_party_hp_bar_stops_before_kick() -> void:
 	var com: TDCommunityWindow = ui.hud.windows["community"]
-	var row := com._row(1)
+	var row := com.row_rect(1)
 	check(com.party_hp_rect(row).end.x + GAP <= com.kick_rect(row).position.x, "the HP bar ends before Kick")
 	check(com.party_hp_rect(row).position.x >= row.position.x + 150, "and leaves the name room on its left")
 

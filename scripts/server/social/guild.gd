@@ -48,7 +48,7 @@ func on_create(peer: int, npc_id: StringName, guild_name: String) -> void:
 	p.dirty_character = true
 	save_guilds()
 	tell(p, "You founded the guild %s!" % n, Palette.GOOD)
-	p.map.broadcast(&"ev_effect", [&"celebrate", p.position.x, p.position.y, 1, peer])
+	p.map.broadcast(&"ev_effect", [EffectDef.CELEBRATE, p.position.x, p.position.y, 1, peer])
 
 func join_guild(g: Dictionary, p: SimPlayer) -> void:
 	if g.is_empty():

@@ -18,17 +18,22 @@ TDWorld  ───────────────────────�
   `SimMob`s, the `SimDrop`s on the ground and the players on it. It decides everything that
   matters: hits, damage, kills, EXP, levels, drops, who picks what up, HP and MP, potions,
   gear, portals, fainting. `CharacterStore` saves characters, one JSON file per name.
+  `TDServer` itself keeps the players, maps, saving and the requests about moving and
+  fighting; the other requests are handled by its parts in `scripts/server/services/`
+  (`ServerItems`, `ServerNpcShop`, `ServerStorage`, `ServerTravel`, `ServerQuests`,
+  `ServerJobs`, each a `ServerPart`), the way `TDSocial` splits into `scripts/server/social/`.
 - **Client** (`scripts/world/`, `scripts/actors/`): `TDWorld` shows the map you're on. Your own
   hero (`TDPlayer`) moves and climbs on your machine so it feels instant, like MapleStory, and
   reports where it is 20 times a second; the server checks the report is possible and puts you
   back if not. Monsters (`TDMob`), other players (`TDAvatar`) and drops (`TDDrop`) are views
-  that glide to where the server's snapshots say they are. Snapshots go out 20 times a
+  that glide to where the server's snapshots say they are (`SnapshotSync` keeps them in step;
+  `WorldCamera` follows your hero). Snapshots go out 20 times a
   second as packed bytes (`SnapshotCodec`) so even a busy map fits in one network packet:
   they hold only positions, facing, HP, animation and flags, and leave out monsters that
   haven't changed (every monster goes in once a second). A player's name, level, look, gear,
   chair, pet and shop sign go separately (`ev_player_info`), reliably and only when they change.
 - **Net** (`scripts/autoload/net.gd`) is the whole protocol in one file. `req_*` methods go from
-  a client to the server, `ev_*` methods from the server to clients. UI and actors call
+  a client to the server (grouped by the server part that answers them), `ev_*` methods from the server to clients. UI and actors call
   `Net.ask(&"req_…", [args])`; the server answers with events, and `Game.me` (your copy of
   your Character) is refreshed from them. Never change `Game.me` to make something happen.
 
@@ -73,9 +78,11 @@ it was made on. Nothing is shared between servers, so characters never move to a
   always encrypt; they check the server's identity only when the game ships its certificate
   as `res://certs/<address>.crt`, so other servers are encrypted but not verified.
 - On the client, `Net.log_in` connects and sends the username and password once the
-  connection is up (the password isn't kept), the title card (`TDHud`) has the login and
-  register boxes, `TDCharacterSelect` shows the list and `TDDeleteConfirm` asks before
-  deleting. `settings.cfg` remembers the last username and server, never the password.
+  connection is up (the password isn't kept). The title screen (`TDTitleScreen`,
+  `scripts/ui/title_screen.gd`) runs the login flow: its Play page has Play solo, Host and the
+  login and register boxes, it answers `Net.logged_in`, `characters_changed`, `refused`,
+  `joined` and `disconnected`, `TDCharacterSelect` (on it) shows the list and
+  `TDDeleteConfirm` asks before deleting. `TDHud` only shows and hides it and handles Esc. `settings.cfg` remembers the last username and server, never the password.
 - A host that logs out with friends connected is asked first (`TDConfirm`). Whenever a host
   stops, its friends get `ev_host_ended` ("The host ended the game."), and the connection
   stays open a moment (`Net.GOODBYE_TICKS`) so it gets there.

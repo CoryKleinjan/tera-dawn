@@ -48,7 +48,7 @@ func _lines() -> Array:
 		if e.ammo != &"":
 			out.append(["Fires %ss" % e.ammo, Palette.MIST, 12])
 		if not e.jobs.is_empty():
-			out.append(["%s only" % EquipDef.families_text(e.jobs), Palette.MIST if Game.me.can_use(e.jobs) else Palette.BAD, 12])
+			out.append(["%s only" % EquipDef.families_text(e.jobs), Palette.MIST if Game.me.gear.can_use(e.jobs) else Palette.BAD, 12])
 		var reqs := e.requirements()
 		for key in reqs:
 			var have := Game.me.level if key == &"level" else Game.me.stats.value(key)
@@ -105,7 +105,7 @@ func _lines() -> Array:
 	else:
 		out.append(["Etc", Palette.MUTED, 11])
 	if item.description != "":
-		for l in UiSkin.wrap_text(Game.ui_font, item.description, 11, W - 28):
+		for l in DrawUtil.wrap_text(Game.ui_font, item.description, 11, W - 28):
 			out.append([l, Color(Palette.MIST, 0.8), 11])
 	if hint != "":
 		out.append([hint, Color(Palette.SUN, 0.75), 11])

@@ -53,6 +53,12 @@ only what the creator offers and makes a level 1 character in the starting job
   moving frame (`tests/unit/hero_pose_test.gd`). Poses not drawn yet fall back to the nearest
   one (`SpriteRig.FALLBACK`). `WeaponTrail` draws the streak a
   swung blade leaves and the flash of a shot.
+- **One body for every hero**: your hero (`TDPlayer`) and other players' (`TDAvatar`) each
+  work out their pose (from your keys, or from the snapshot), and `HeroBody`
+  (`scripts/components/hero_body.gd`) draws it the same way for both: the rig with its light
+  (`HeroBody.FRAMES`, `SCALE`, `LIGHT`), the chair lift, the walk keeping step
+  (`stride_speed`), the blink after a hit, a skill's weapon motion or spell flash
+  (`use_skill`), and the companion. A change to how heroes are drawn goes there.
 
 ### Chairs, pets, the Monster Book and achievements
 
@@ -60,16 +66,21 @@ only what the creator offers and makes a level 1 character in the starting job
   `req_setup`. The server keeps the chair you sit on in `SimPlayer.chair` (moving clears it)
   and adds its regen; the pet that's out is `Character.pet`, with `pet_full` dropping every
   `hunger_ticks` and `MapInstance._pet_step` picking up drops within `loot_reach`. Both go out
-  in the player's info, and `TDCompanion` draws them next to you and other players.
+  in the player's info, and `TDCompanion` (owned by each `HeroBody`) draws them next to you and other players.
 - **The Monster Book** (`MonsterBook`, on the Character) counts kills and cards per monster.
   `Content` makes a `CardDef` for every monster at startup (`card_<id>`, no files); monsters
   drop it at `CardDef.CHANCE` until your page is full, and picking it up files it in the book
   instead of the bag. The book's level adds to every main stat in `Character.recalc`.
-- **Achievements** (`Achievements.LIST`) each measure something about the Character and a
-  goal. The server checks them whenever a player's state changes (`TDServer.check_achievements`)
+- **Achievements** are **AchievementDef**s in `data/achievements/`, loaded by `Content`; each
+  measures something about the Character (its `kind`, see `Achievements.measure`) against a
+  `goal`. `Achievements.all()` lists them in `order` for the collection window and the server.
+  The server checks them whenever a player's state changes (`TDServer.check_achievements`)
   and sends `ev_achievement`; the client shows it and calls `SteamService.unlock_achievement`
-  with its `steam` id. Add one by adding a line; a new kind of tally goes through
-  `Character.count`.
+  with its `steam` id. Add one by adding a `.tres` (a new `id`, a `steam` name defined in
+  Steamworks, the next `order`). Never change a shipped `id` or `steam` name: saves keep the
+  id and Steamworks the name (that's why `level_50` keeps its name from when the cap was 50,
+  though its goal is 35). A new kind of tally gets a name in `Counters` and is added with
+  `Character.count(Counters.<NAME>)`.
 
 ### Balance
 
@@ -80,9 +91,14 @@ monster of its level; `tests/balance_report.tscn` prints the full table when tun
 
 ### How to add something the player does
 
-1. Add a `req_<thing>` to `Net` that calls `server.on_<thing>(_sender(), …)`.
-2. Write `TDServer.on_<thing>`: check it's allowed, change the `Character` or map, and mark
-   `dirty_character` / `dirty_vitals` so the player gets their new state.
+1. Add a `req_<thing>` to `Net`, in the group of the server part it belongs to, that calls
+   `server.<part>.on_<thing>(_sender(), …)` (`server.items`, `npc_shop`, `storage`, `travel`,
+   `quests`, `jobs`; moving and fighting stay on `TDServer` itself, `server.social` for
+   players together). A new area gets its own `ServerPart` in `scripts/server/services/`,
+   made in `TDServer._init`.
+2. Write `on_<thing>` in that part: check it's allowed, change the `Character` or map, and mark
+   `dirty_character` / `dirty_vitals` so the player gets their new state. `tell` sends the
+   player a line in their chat log and `change` runs a Character change that returns a problem.
 3. If other players should see it, broadcast an `ev_<thing>` from the `MapInstance` and show
    it in `TDWorld`.
 4. Call `Net.ask(&"req_<thing>", […])` from the UI or `TDPlayer`.

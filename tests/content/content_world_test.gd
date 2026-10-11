@@ -21,7 +21,7 @@ func _platform_count(m: MapDef) -> int:
 func test_platforms_lie_inside_the_map() -> void:
 	# What the zoomed-out camera shows on the tallest screen shape the game expects (16:10,
 	# like the Steam Deck), so it never shows past a map's edges.
-	var view := Vector2(960, 600) / TDWorld.CAMERA_ZOOM
+	var view := Vector2(960, 600) / WorldCamera.ZOOM
 	for m: MapDef in Content.maps.values():
 		var w := Scan.where(m)
 		check(m.width >= view.x and m.height >= view.y, "%s: size %dx%d is smaller than the camera's view %s" % [w, m.width, m.height, view])

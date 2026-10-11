@@ -33,7 +33,7 @@ func test_the_look_decides_the_motion() -> void:
 	check_eq(WeaponStyle.animation_for(_look("dawn_blade"), &"slash"), &"slash", "and a sword slashes")
 
 func test_every_motion_is_a_hero_animation_holding_the_weapon() -> void:
-	var frames := TDPlayer.HERO_FRAMES
+	var frames := HeroBody.FRAMES
 	for kind in KINDS:
 		for motion in [&"attack", &"slash"]:
 			var anim := WeaponStyle.animation(kind, motion)
@@ -49,7 +49,7 @@ func test_every_motion_is_a_hero_animation_holding_the_weapon() -> void:
 				check(Paperdoll.hold(f, kind) != null, "%s frame %d has the %s in his hand" % [anim, i, kind])
 
 func test_every_action_restarts_and_has_timing() -> void:
-	var frames := TDPlayer.HERO_FRAMES
+	var frames := HeroBody.FRAMES
 	for anim in WeaponStyle.ACTIONS:
 		check(frames.has_animation(anim), "the hero has %s" % anim)
 		var total := 0.0
@@ -61,14 +61,14 @@ func test_every_action_restarts_and_has_timing() -> void:
 func test_poses_still_to_draw_fall_back_to_ones_he_has() -> void:
 	for anim in [&"ready", &"turn", &"skid", &"jump_apex"]:
 		var a: StringName = anim
-		while not TDPlayer.HERO_FRAMES.has_animation(a) and SpriteRig.FALLBACK.has(a):
+		while not HeroBody.FRAMES.has_animation(a) and SpriteRig.FALLBACK.has(a):
 			a = SpriteRig.FALLBACK[a]
-		check(TDPlayer.HERO_FRAMES.has_animation(a), "%s plays as %s" % [anim, a])
+		check(HeroBody.FRAMES.has_animation(a), "%s plays as %s" % [anim, a])
 
 func test_the_walk_keeps_step_with_him() -> void:
-	check_near(TDPlayer.stride_speed(&"walk", TDPlayer.STRIDE_SPEED), 1.0, "as drawn at stride speed")
-	check(TDPlayer.stride_speed(&"walk", 1.0) < TDPlayer.stride_speed(&"walk", 3.0), "slower when he's slower")
-	check_eq(TDPlayer.stride_speed(&"attack", 3.0), 1.0, "a swing isn't sped up")
+	check_near(HeroBody.stride_speed(&"walk", HeroBody.STRIDE_SPEED), 1.0, "as drawn at stride speed")
+	check(HeroBody.stride_speed(&"walk", 1.0) < HeroBody.stride_speed(&"walk", 3.0), "slower when he's slower")
+	check_eq(HeroBody.stride_speed(&"attack", 3.0), 1.0, "a swing isn't sped up")
 
 func test_buffs_and_spells_flash_their_own_colour() -> void:
 	var seen := {}

@@ -52,6 +52,10 @@ and Shield (`EquipDef.Slot` and `Equipment.PLACES_FOR`). Adding a slot means add
 3. Make something drop it: a **DropEntry** on a monster's `drops` (item, chance from 0 to 1,
    amount range). Rare gear is usually 1 to 4%.
 
+A **new kind of consumable** (something no `UseDef` field does yet) is a new field on
+`UseDef` plus one small step in `ServerItems.on_use_item` (`scripts/server/services/items.gd`),
+next to the ones for pet food, teleporting and restoring HP/MP.
+
 Dawnshards go straight to the wallet when walked over; everything else waits on the ground
 for the loot key, and stays there if its tab is full.
 
@@ -63,7 +67,7 @@ for the loot key, and stays there if its tab is full.
   grip dot), name its cell by the item id in `art/sheets/held_<group>.json`, and run
   `python3 tools/art/paperdoll_layers.py`.
 - **A new weapon kind**: draw its greyscale template on the paperdoll weapons sheet (add its
-  cell to `paperdoll_weapons.json` and `WEAPON_KINDS` in `paperdoll_layers.py`), say how it's
+  cell to `paperdoll_weapons.json` and `WEAPON_KINDS` in `tools/art/paperdoll/common.py`), say how it's
   held in `art/sheets/paperdoll_rig.json` "holds" ("like" another kind, or an angle per frame,
   "behind" for frames it goes behind him; a long weapon drawn slanted is straightened, see
   `AXIAL`;

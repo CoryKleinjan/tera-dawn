@@ -17,18 +17,22 @@ data/*.tres  ──►  Content (autoload)  ──►  World loads a MapDef  ─
   stats and sprite, a map's platforms and spawns, a skill's reach and damage. Every class is a
   Godot `Resource`, so it can be edited in the Godot inspector.
 - **Systems** (`scripts/systems/`) are the character's rules that aren't tied to the world:
-  `Character` (level, EXP, stats, bag, gear, HP, MP), `Inventory`, `Equipment`, `ItemStack`
+  `Character` (level, EXP, stats, bag, HP, MP) with its parts `SkillBook` (`c.skills`: skills,
+  Skill Points, buffs), `AbilityPoints` (`c.ap`) and `Gear` (`c.gear`: wearing gear, scrolls,
+  ammo), `Inventory`, `Equipment`, `ItemStack`
   (one slot's worth of an item, with its own rolled stats for gear) and `CharacterStats` (the
   MapleStory formulas). The server owns each player's `Character`; `Game.me` is your copy.
 - **Components** (`scripts/components/`) are small reusable parts any actor can use: `Health`,
-  `Hitbox`, `SpriteRig` (sprite, animation, light and aura) and the paperdoll that
-  dresses heroes (see [characters](docs/architecture/characters.md)).
+  `Hitbox`, `SpriteRig` (sprite, animation, light and aura), `HeroBody` (how every hero is
+  drawn) and the paperdoll that dresses heroes (see [characters](docs/architecture/characters.md)).
 - **Server** (`scripts/server/`) runs the game for everyone (see [multiplayer](docs/architecture/multiplayer.md)).
 - **Actors** (`scripts/actors/`) are what you see in the world: your hero, other players,
   monsters, NPCs and drops.
 - **World** (`scripts/world/`) shows the map you're on: `world.gd` builds it and shows the
-  server's events, `stage.gd` and its builders turn a map into the HD-2D diorama.
-- **UI** (`scripts/ui/`) draws the HUD from the sliced UI sheet through `UiSkin`.
+  server's events (camera in `WorldCamera`, snapshots through `SnapshotSync`), `stage.gd` and its builders turn a map into the HD-2D diorama.
+- **UI** (`scripts/ui/`) draws the HUD (`TDHud`) and the title screen (`TDTitleScreen`, the
+  login flow) from the sliced UI sheet through `UiSkin` (art), `UiStyle` (styled controls) and
+  `WorldSkin` (bars, tags and bubbles over the world).
 - **Art** comes from Cory's sheets in `art/source/`, cut by `tools/art/slice_sheets.py`
   (see `art/sheets/README.md`).
 
@@ -46,7 +50,8 @@ second. Only the stage turns that into 3D (32 game pixels per 3D unit).
 - [Skills](docs/architecture/skills.md): how to add a skill.
 - [Items, gear and weapons](docs/architecture/items.md): stats, equipment, how to add an item or a weapon.
 - [Jobs](docs/architecture/jobs.md): how to add a job.
-- [Windows and settings](docs/architecture/ui.md): how to add a window, the settings menu.
+- [Windows and settings](docs/architecture/ui.md): how to add a window, the HUD and the title
+  screen, the settings menu.
 - [NPCs, quests and shops](docs/architecture/npcs-quests-shops.md): how to add an NPC, a quest or a shop.
 - [Art](docs/architecture/art.md): how to add art, the slicer, hero layers, Gemini batch generation.
 - [Music and sound](docs/architecture/audio.md): how to add music or a sound effect, where they play, making music with Lyria.

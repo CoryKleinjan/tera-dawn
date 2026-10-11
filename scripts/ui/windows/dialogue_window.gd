@@ -210,14 +210,14 @@ func _job_page(j: JobDef) -> void:
 		opts.append(["Become a %s" % j.display_name, func() -> void:
 			Net.ask(&"req_advance", [npc.def.id, j.id])
 			visible = false])
-	if Game.me.ap_reset_problem(j) == "":
+	if Game.me.ap.reset_problem(j) == "":
 		opts.append(["Reset my Ability Points", _reset_ap_page.bind(j)])
 	opts.append(["Back", _job_list])
 	_page(say, opts)
 
 ## The free AP reset: what it does, once, and the choice.
 func _reset_ap_page(j: JobDef) -> void:
-	_page("Built the wrong way? Once, and only once, I can give back all %d Ability Points you've spent. Your stats go back to where you started, so you can put them where a %s needs them." % [Game.me.spent_ap(), j.display_name], [
+	_page("Built the wrong way? Once, and only once, I can give back all %d Ability Points you've spent. Your stats go back to where you started, so you can put them where a %s needs them." % [Game.me.ap.spent(), j.display_name], [
 		["Reset them", func() -> void:
 			Net.ask(&"req_reset_ap", [npc.def.id, j.id])
 			visible = false],
@@ -268,7 +268,7 @@ func _lines() -> PackedStringArray:
 	var out := PackedStringArray()
 	var w := size.x - FRAME_X * 2 - (TEXT_LEFT + TEXT_RIGHT) * FRAME_SCALE
 	for paragraph in text.split("\n"):
-		out.append_array(UiSkin.wrap_text(Game.ui_font, paragraph, 13, w))
+		out.append_array(DrawUtil.wrap_text(Game.ui_font, paragraph, 13, w))
 		if paragraph == "":
 			out.append("")
 	return out

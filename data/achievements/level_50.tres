@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AchievementDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/achievement_def.gd" id="1_achievement_def"]
+
+[resource]
+script = ExtResource("1_achievement_def")
+id = &"level_50"
+steam = "ACH_LEVEL_50"
+title = "Hero of Tera"
+text = "Reach level 35, the highest level."
+kind = "level"
+goal = 35
+order = 90

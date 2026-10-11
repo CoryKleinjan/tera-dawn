@@ -171,7 +171,7 @@ func kill_mob(m: SimMob, killer: SimPlayer) -> void:
 	server.give_xp(killer, m.def.exp_reward)
 	for share in server.social.party_shares(killer, m.def.exp_reward):
 		server.give_xp(share[0], share[1])
-	server.record_kill(killer, m.def)
+	server.quests.record_kill(killer, m.def)
 	var loot := []
 	for entry in m.def.drops:
 		var amount := entry.roll()
@@ -262,7 +262,7 @@ func pick_up(p: SimPlayer, d: SimDrop) -> bool:
 	else:
 		# the client merges pickups of the same item into one log line
 		Net.send(p.peer, &"ev_pickup", [d.item.id, d.amount])
-	server.picked_up(p, d.item)
+	server.quests.picked_up(p, d.item)
 	return true
 
 ## Whether the player has room for a drop (a pet only picks up what fits).
@@ -286,7 +286,7 @@ func _add_card(p: SimPlayer, m: MonsterDef) -> void:
 	if book.level() > level:
 		p.character.recalc()
 		tell(p, "Your Monster Book reached level %d: +%d to every stat." % [book.level(), book.level() - 1], Palette.SUN)
-		broadcast(&"ev_effect", [&"celebrate", p.position.x, p.position.y, 1, p.peer])
+		broadcast(&"ev_effect", [EffectDef.CELEBRATE, p.position.x, p.position.y, 1, p.peer])
 
 ## The pet that's out gets hungrier, and picks up what it can reach.
 func _pet_step(p: SimPlayer) -> void:
@@ -296,13 +296,13 @@ func _pet_step(p: SimPlayer) -> void:
 		c.pet = &""
 		return
 	if tick % pet.hunger_ticks == 0:
-		c.pet_full = maxi(0, c.pet_full - 5)
+		c.pet_full = maxi(0, c.pet_full - PetDef.HUNGER_STEP)
 		p.dirty_character = true
 		if c.pet_full == 0:
 			c.pet = &""
 			tell(p, "%s got hungry and went home." % pet.display_name, BAD)
 			return
-		if c.pet_full == 20:
+		if c.pet_full == PetDef.HUNGRY:
 			tell(p, "%s is getting hungry. Feed it some pet food." % pet.display_name, BAD)
 	if tick % 2400 == 0 and not pet.chatter.is_empty() and randf() < 0.5:
 		broadcast(&"ev_chat", ["pet", pet.display_name, pet.chatter.pick_random(), p.peer])

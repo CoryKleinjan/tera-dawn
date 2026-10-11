@@ -58,7 +58,7 @@ static func build(char_name: String, job: JobDef) -> Character:
 		_level_to(c, next.advance_level)
 		var short := c.stats_short_of(next)
 		for stat: StringName in short:
-			c.add_ap(stat, short[stat] - c.base.value(stat))
+			c.ap.spend(stat, short[stat] - c.base.value(stat))
 		var problem := c.advance(next)
 		if problem != "":
 			push_warning("Test character %s couldn't become a %s: %s" % [char_name, next.display_name, problem])
@@ -180,10 +180,10 @@ static func _spend_ap(c: Character) -> void:
 		for stat in StatBlock.BASE:
 			var short := int(reqs.get(stat, 0)) - c.stats.value(stat)
 			if short > 0:
-				c.add_ap(stat, short)
-	var plan := c.auto_ap_plan()
+				c.ap.spend(stat, short)
+	var plan := c.ap.auto_plan()
 	for stat: StringName in plan:
-		c.add_ap(stat, plan[stat])
+		c.ap.spend(stat, plan[stat])
 
 ## Every skill of the job line at its highest level, learned in an order its requirements
 ## allow, so new skills go on the quickslots as they would for a player.
@@ -198,12 +198,12 @@ static func _learn_every_skill(c: Character) -> void:
 	while learned:
 		learned = false
 		for s in todo:
-			c.sp = maxi(c.sp, 1)
-			while c.learn_problem(s) == "":
-				c.learn(s)
-				c.sp = maxi(c.sp, 1)
+			c.skills.points = maxi(c.skills.points, 1)
+			while c.skills.learn_problem(s) == "":
+				c.skills.learn(s)
+				c.skills.points = maxi(c.skills.points, 1)
 				learned = true
-	c.sp = 0
+	c.skills.points = 0
 
 ## A few full stacks of the best ammo for each of the job's best weapons that fires any
 ## (a Pirate's gun too, while wielding a knuckle).

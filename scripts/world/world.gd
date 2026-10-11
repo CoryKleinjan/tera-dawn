@@ -4,20 +4,13 @@ extends Node2D
 ## their own hero, the monsters, other players, NPCs, drops and effects, plus the camera
 ## and the HUD. The server decides what happens (see TDServer); this shows its events
 ## (through Net) and runs your own movement so it feels instant.
-## Logic steps once per physics tick (60 Hz) in 2D game pixels (y down).
+## Logic steps once per physics tick (60 Hz) in 2D game pixels (y down). The camera is a
+## WorldCamera, and the server's snapshots, player info and drops go through SnapshotSync.
 
 ## The size of the game's canvas in game pixels. The height is always at least 540 and the
 ## width at least 960; a wider or taller window (16:10 like the Steam Deck, ultrawide) shows
 ## more of the world instead of black bars (see _on_resized).
 static var VIEW := Vector2(960, 540)
-## How close the camera is: below 1 shows more of the world around the hero (the HUD keeps
-## its size). Every map must be at least world_view() big on a 16:10 screen, or the camera
-## would show past its edges; content_world_test checks it.
-const CAMERA_ZOOM := 0.88
-## How far ahead of the hero the camera looks in the direction they walk, in game pixels.
-const LOOK_AHEAD := 70.0
-## The camera only follows a jump once the hero is this far above or below where they last stood.
-const CAM_DEAD_ZONE := 90.0
 ## Picking up more of an item within this many ticks of the last time adds to its log line
 ## ("Picked up 3 Moss Tuft") instead of writing another.
 const PICKUP_MERGE_TICKS := 120
@@ -38,12 +31,12 @@ var layout: MapLayout
 var platforms: Array[Platform] = []
 var started := false
 var tick := 0
-var cam := Vector2.ZERO
-var _cam_prev := Vector2.ZERO
-var _look := 0.0
-var _cam_floor := 0.0
-## Screen shake strength (0..1); it fades by itself (see shake()).
-var _shake := 0.0
+## Follows your hero (see WorldCamera).
+var camera: WorldCamera
+## The top left of what the camera shows, in game pixels.
+var cam: Vector2:
+	get:
+		return camera.pos
 ## node -> where it was at the last tick, for drawing between ticks (see drawn()).
 var _prev := {}
 var banner_text := ""
@@ -60,16 +53,25 @@ var fx_layer: Node2D
 ## Shows the server's events: swings, damage numbers, shots and effects.
 var fx: TDWorldFx
 var hud: TDHud
+## Keeps the monsters, other players and drops in step with the server (see SnapshotSync).
+var sync: SnapshotSync
 ## drop id -> TDDrop
-var drops := {}
+var drops: Dictionary:
+	get:
+		return sync.drops
 ## peer id -> TDAvatar
-var avatars := {}
-## peer id -> another player's info (name, level, look...; see MapInstance.send_player_info),
-## kept so an avatar made after it arrived still gets it.
-var player_infos := {}
+var avatars: Dictionary:
+	get:
+		return sync.avatars
+## peer id -> another player's info (see SnapshotSync.player_infos).
+var player_infos: Dictionary:
+	get:
+		return sync.player_infos
 
 func _ready() -> void:
 	Net.world = self
+	camera = WorldCamera.new(self)
+	sync = SnapshotSync.new(self)
 	get_viewport().size_changed.connect(_on_resized)
 	_on_resized()
 	stage = TDStage.new()
@@ -114,10 +116,7 @@ func stop(stay_connected := false) -> void:
 	started = false
 	if not stay_connected:
 		Net.stop()
-	for a in avatars.values():
-		a.queue_free()
-	avatars.clear()
-	player_infos.clear()
+	sync.clear_avatars()
 	player.rig.visible = false
 	Game.social = {}
 	hud.invites.clear()
@@ -157,15 +156,13 @@ func load_map(id: StringName) -> void:
 		for c in layer.get_children():
 			layer.remove_child(c)
 			c.queue_free()
-	drops.clear()
-	avatars.clear()
-	player_infos.clear()
+	sync.clear()
 	# same order as the server's MapInstance, so index i is the same monster on both sides
 	for r in map.roster():
 		mob_layer.add_child(TDMob.create(self, mob_layer.get_child_count(), r[0], platforms[r[1]]))
 	for p in map.npcs:
 		npc_layer.add_child(TDNpc.create(self, p, platforms[p.platform]))
-	cam = _camera_target()
+	camera.jump_to_target()
 	stage.build()
 
 func show_banner(text: String) -> void:
@@ -175,10 +172,10 @@ func show_banner(text: String) -> void:
 ## You reached an achievement: pop up its toast, and unlock it on Steam.
 func show_achievement(id: String) -> void:
 	var a := Achievements.find(id)
-	if a.is_empty():
+	if a == null:
 		return
 	hud.banners.achievement(a)
-	SteamService.unlock_achievement(a["steam"])
+	SteamService.unlock_achievement(a.steam)
 
 ## Adds a line to the message log (the last six show, each for five seconds). The same
 ## text twice in a row just keeps the line up longer.
@@ -267,39 +264,18 @@ func show_chat(kind: String, from: String, text: String, from_peer: int) -> void
 			who.set(&"speech", text)
 			who.set(&"speech_t", 300)
 
-## How much of the world the camera shows, in game pixels: the canvas, zoomed by CAMERA_ZOOM.
+## How much of the world the camera shows, in game pixels: the canvas, zoomed by WorldCamera.ZOOM.
 static func world_view() -> Vector2:
-	return VIEW / CAMERA_ZOOM
-
-func _camera_target() -> Vector2:
-	var view := world_view()
-	return Vector2(
-		clampf(player.position.x + _look - view.x / 2.0, 0, maxf(0.0, float(map.width) - view.x)),
-		clampf(_cam_floor - view.y * 0.62, 0, maxf(0.0, float(map.height) - view.y)))
+	return VIEW / WorldCamera.ZOOM
 
 ## Puts the camera on the hero at once (a new map, a respawn), with nothing to glide from.
 func snap_camera() -> void:
-	_cam_floor = player.position.y
-	_look = 0.0
-	cam = _camera_target()
-	_cam_prev = cam
 	_prev.clear()
-	stage.follow(cam)
+	camera.snap()
 
-## Moves the camera's aim one tick: a little ahead of the way the hero walks, and up or
-## down only once they land somewhere new (or jump or fall well past where they stood).
-func _aim_camera() -> void:
-	if absf(player.vel.x) > 0.3:
-		_look = move_toward(_look, player.face * LOOK_AHEAD, 1.6)
-	var y := player.position.y
-	if player.on_ground or player.is_climbing() or absf(y - _cam_floor) > CAM_DEAD_ZONE:
-		_cam_floor += (y - _cam_floor) * (1.0 if absf(y - _cam_floor) > 400.0 else 0.25)
-
-## Shakes the screen (a crit, a boss slam, getting hit): 0.3 is a nudge, 1 is a big hit.
-## Off when the player turned screen shake off in the video settings.
+## Shakes the screen (see WorldCamera.shake).
 func shake(amount: float) -> void:
-	if Settings.video.screen_shake:
-		_shake = minf(1.0, maxf(_shake, amount))
+	camera.shake(amount)
 
 ## Where a node that moves once per tick should be drawn this frame: between where it was at
 ## the last two ticks, so movement is smooth on any screen (120 Hz, 144 Hz, the Deck's 40 Hz).
@@ -359,79 +335,30 @@ func _physics_process(_delta: float) -> void:
 			log_lines.remove_at(i)
 	if banner_t > 0:
 		banner_t -= 1
-	_cam_prev = cam
-	_aim_camera()
-	cam += (_camera_target() - cam) * Vector2(0.12, 0.1)
-	_shake = maxf(0.0, _shake - 0.04)
+	camera.step()
 
 func _process(_delta: float) -> void:
-	var at := _cam_prev.lerp(cam, Engine.get_physics_interpolation_fraction())
-	if _shake > 0.0:
-		var t := Time.get_ticks_msec() / 1000.0
-		var k := _shake * _shake * 9.0
-		at += Vector2(sin(t * 71.0), cos(t * 53.0)) * k
-	stage.follow(at)
+	camera.draw()
 
 # ---------- events from the server ----------
 
-## Where the monsters and other players are now (SnapshotCodec.decode). Monsters left out
-## of it haven't changed.
+## Where the monsters and other players are now (see SnapshotSync).
 func apply_snapshot(snap: Dictionary) -> void:
-	var views := mobs()
-	for row: Array in snap.get("mobs", []):
-		if row[0] < views.size():
-			views[row[0]].apply(row[1])
-	var me := multiplayer.get_unique_id()
-	var seen := {}
-	for state in snap.get("players", []):
-		var peer: int = state[0]
-		if peer == me:
-			continue
-		seen[peer] = true
-		if not avatars.has(peer):
-			avatars[peer] = TDAvatar.create(self, peer)
-			avatar_layer.add_child(avatars[peer])
-			if player_infos.has(peer):
-				avatars[peer].apply_info(player_infos[peer])
-		avatars[peer].apply(state)
-	for peer in avatars.keys():
-		if not seen.has(peer):
-			remove_avatar(peer)
+	sync.apply_snapshot(snap)
 
 ## Another player's name, level, look and the like changed.
 func set_player_info(peer: int, info: Array) -> void:
-	player_infos[peer] = info
-	if avatars.has(peer):
-		avatars[peer].apply_info(info)
+	sync.set_player_info(peer, info)
 
 func remove_avatar(peer: int) -> void:
-	var a: TDAvatar = avatars.get(peer)
-	player_infos.erase(peer)
-	if a:
-		avatars.erase(peer)
-		a.queue_free()
+	sync.remove_avatar(peer)
 
 func add_drop(snap: Array) -> void:
-	var d := TDDrop.create(self, snap)
-	if d.item == null or drops.has(d.id):
-		return
-	drops[d.id] = d
-	drop_layer.add_child(d)
+	sync.add_drop(snap)
 
 ## A drop was picked up (by peer `by`) or vanished (by 0).
 func remove_drop(id: int, by: int) -> void:
-	var d: TDDrop = drops.get(id)
-	if d == null:
-		return
-	drops.erase(id)
-	var taker := actor(by) if by != 0 else null
-	if taker:
-		d.collect(taker)  # it flies to them, then sparkles
-	elif by != 0:
-		add_effect(d.item.pickup_effect, d.position + Vector2(0, -16), 1)
-		d.queue_free()
-	else:
-		d.queue_free()
+	sync.remove_drop(id, by)
 
 # ---------- presentation (see TDWorldFx) ----------
 

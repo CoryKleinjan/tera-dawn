@@ -30,5 +30,5 @@ func _ready() -> void:
 		for lvl in [10, 20, 30]:
 			var c := Balance.typical(j, lvl)
 			var a: Array = Balance.main_attack(c)
-			print("%s %d: %s Lv.%d, weapon %s, damage %s, magic %s" % [j, lvl, a[0].id, a[1], c.weapon().id if c.weapon() else "-", c.damage_range(), c.magic_range()])
+			print("%s %d: %s Lv.%d, weapon %s, damage %s, magic %s" % [j, lvl, a[0].id, a[1], c.gear.weapon().id if c.gear.weapon() else "-", c.damage_range(), c.magic_range()])
 	get_tree().quit()

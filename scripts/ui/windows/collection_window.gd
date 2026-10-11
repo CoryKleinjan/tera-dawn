@@ -157,36 +157,33 @@ func _draw_detail() -> void:
 		shown += 1
 
 func _draw_achievements() -> void:
+	var list := Achievements.all()
 	var got := Game.me.achievements.size()
 	UiSkin.draw_icon(self, "book/badge", Rect2(PAD, 68, 20, 20))
-	draw_label(Vector2(PAD + 24, 84), "%d of %d reached" % [got, Achievements.LIST.size()], Palette.SUN, 12)
-	var per := ceili(Achievements.LIST.size() / 2.0)
+	draw_label(Vector2(PAD + 24, 84), "%d of %d reached" % [got, list.size()], Palette.SUN, 12)
+	var per := ceili(list.size() / 2.0)
 	var w := (size.x - PAD * 2 - 8) / 2.0
 	var top := BOOK_AT.y + 4
 	var row_h := (size.y - top - 16) / per
-	for i in Achievements.LIST.size():
-		var a: Dictionary = Achievements.LIST[i]
+	for i in list.size():
+		var a := list[i]
 		var r := Rect2(PAD + (i / per) * (w + 8), top + (i % per) * row_h, w, row_h - 2)
-		var done := Game.me.achievements.has(a["id"])
+		var done := Game.me.achievements.has(String(a.id))
 		var k := r.size.y / UiSkin.tex("book/achievement_row").get_height()
 		UiSkin.draw_box(self, UiSkin.achievement_row(done), r, k)
 		if not done:
 			var niche := Rect2(r.position + Vector2(10, 12) * k, Vector2(62, 56) * k)
 			UiSkin.draw_icon(self, "book/badge_locked", niche, Color(1, 1, 1, 0.7))
 		var x := r.position.x + 86 * k
-		draw_label(Vector2(x, r.end.y - r.size.y / 2.0 + 4), a["title"], Palette.SUN if done else Palette.MIST, 11)
-		var have := mini(Achievements.measure(Game.me, a["kind"]), a["goal"])
-		var tail := "Done" if done else "%d/%d" % [have, a["goal"]]
+		draw_label(Vector2(x, r.end.y - r.size.y / 2.0 + 4), a.title, Palette.SUN if done else Palette.MIST, 11)
+		var have := mini(Achievements.measure(Game.me, a.kind), a.goal)
+		var tail := "Done" if done else "%d/%d" % [have, a.goal]
 		draw_label(Vector2(r.end.x - 8, r.end.y - r.size.y / 2.0 + 4), tail, Palette.GOOD if done else Palette.MUTED, 10, -1)
 		if r.has_point(_hover):
-			draw_label(Vector2(size.x - PAD, 84), a["text"], Palette.MIST, 11, -1)
+			draw_label(Vector2(size.x - PAD, 84), a.text, Palette.MIST, 11, -1)
 
 func _click(at: Vector2, button: int, _double: bool) -> void:
 	if button != MOUSE_BUTTON_LEFT:
-		return
-	var t := tab_at(at)
-	if t >= 0:
-		tab = t
 		return
 	if tab != 0:
 		return
@@ -195,6 +192,9 @@ func _click(at: Vector2, button: int, _double: bool) -> void:
 		if k < _monsters.size() and cell_rect(i).has_point(at):
 			selected = _monsters[k]
 			return
+
+func _tab_clicked(i: int) -> void:
+	tab = i
 
 ## Shows a monster's page (for the screenshot tour and tests).
 func show_monster(m: MonsterDef) -> void:
