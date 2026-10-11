@@ -95,7 +95,7 @@ func step() -> void:
 func _ready() -> void:
 	z = TDStage.Z_MONSTER + randf() * TDStage.Z_MONSTER_SPREAD
 	rig = SpriteRig.new()
-	rig.setup(def.sprite_frames, def.texture, TDStage.TEXEL * def.sprite_scale, def.size.x * 1.1)
+	rig.setup(def.sprite_frames, def.texture, TDStage.TEXEL * def.sprite_scale)
 	add_child(rig)
 	if def.tint != Color.WHITE:
 		rig.set_tint(def.tint)
@@ -136,7 +136,7 @@ func _process(_delta: float) -> void:
 		rig.play(&"move")
 	else:
 		rig.play(&"idle")
-	rig.place(drawn_body_position(), z, NAN if dead else plat.y)
+	rig.place(drawn_body_position(), z)
 
 ## HP bar and name tag, drawn by the overlay at this monster's projected screen position
 ## (the tag goes in `tags`, which keeps tags apart). A boss's HP is on the boss bar at the

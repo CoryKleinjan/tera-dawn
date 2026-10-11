@@ -15,8 +15,7 @@ const HERO_SCALE := 0.8
 const HEIGHT := 78.0
 ## About how wide he is drawn, in game pixels: what the HUD keeps out of the way of.
 const WIDTH := 48.0
-## The soft shadow under his feet, and where his light sits above them (game pixels).
-const SHADOW_WIDTH := 32.0
+## Where his light sits above his feet (game pixels).
 const LIGHT_HEIGHT := 38.0
 ## A soft warm light that travels with every player, so heroes stand out from the scenery.
 const LIGHT := Color(1.0, 0.86, 0.68)
@@ -109,7 +108,7 @@ var companion: TDCompanion
 
 func _ready() -> void:
 	rig = SpriteRig.new()
-	rig.setup(HERO_FRAMES, null, TDStage.TEXEL * HERO_SCALE / Paperdoll.ART_SCALE, SHADOW_WIDTH)
+	rig.setup(HERO_FRAMES, null, TDStage.TEXEL * HERO_SCALE / Paperdoll.ART_SCALE)
 	rig.add_light(LIGHT, LIGHT_ENERGY, LIGHT_HEIGHT)
 	add_child(rig)
 	companion = TDCompanion.new()
@@ -423,7 +422,7 @@ func _process(_delta: float) -> void:
 	if rig == null or world == null or world.map == null:
 		return
 	var at := world.drawn(self)
-	rig.place(at + Vector2(0, -companion.seat_lift()), Z, NAN if is_climbing() or fainted() or not _over_ground() else _ground_y())
+	rig.place(at + Vector2(0, -companion.seat_lift()), Z)
 	var anim := _animation()
 	rig.play(anim, _swing)
 	rig.set_speed(stride_speed(anim, vel.x))
@@ -432,7 +431,7 @@ func _process(_delta: float) -> void:
 	rig.set_opacity(0.0 if inv > 0 and inv % 8 < 4 and not fainted() else 1.0)
 	companion.set_chair(sitting)
 	companion.set_pet(Game.me.pet, position)
-	companion.follow(at, face, Z, _ground_y())
+	companion.follow(at, face, Z, world.layout.ground_below(position))
 
 func _animation() -> StringName:
 	if fainted():
@@ -469,10 +468,3 @@ static func stride_speed(anim: StringName, speed_x: float) -> float:
 	if anim in [&"walk", &"run"]:
 		return clampf(absf(speed_x) / STRIDE_SPEED, 0.55, 1.4)
 	return 1.0
-
-func _over_ground() -> bool:
-	return on_ground or _ground_y() - position.y < 200.0
-
-## The top of whatever is under the feet (for the shadow).
-func _ground_y() -> float:
-	return world.layout.ground_below(position)
