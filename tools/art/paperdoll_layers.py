@@ -97,7 +97,7 @@ SCALP = 0.1           # the scalp under the hair: the head down to a hairline th
 SCALP_BACK = 0.45     # and behind this far back of it (any height down to SCALP_NAPE), rounded off
 SCALP_NAPE = 0.55     # around the face (FACE_ZONE)
 SCALP_COVERED = 0.6   # drawn hair over this much of the scalp: the scalp is only repainted near it
-FACE_WIDTH = 1.1      # the face (eyes to mouth) is this wide
+FACE_WIDTH = 1.3      # the face (eyes to mouth) is this wide
 FACE_AT = (0.2, 0.3)  # and centred this far forward and down from the head's centre
 # The face's bare skin, as an egg around FACE_AT: how far it reaches back (to the ear), forward,
 # up (to the hairline) and down (past the chin) from there. A hat's hair leaves it clear.

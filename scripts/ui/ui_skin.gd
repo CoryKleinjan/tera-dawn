@@ -17,9 +17,15 @@ const GROOVES := {
 	"hp_frame": Rect2(40, 10, 92, 21),
 	"mp_frame": Rect2(42, 12, 92, 21),
 	"exp_frame": Rect2(28, 9, 124, 12),
-	"monster_hp_1": Rect2(36, 9, 92, 18),
 	"social/party_hp_frame": Rect2(10, 8, 164, 11),
 }
+## The monster HP bar's frame without the emblem painted at its left end, in texels of
+## monster_hp_1: its right end cap and a plain strip of its middle. The left end is the right
+## cap mirrored, and the groove sits MONSTER_GROOVE_INSET into each cap.
+const MONSTER_CAP := Rect2(123, 4, 12, 29)
+const MONSTER_MID := Rect2(90, 4, 8, 29)
+const MONSTER_GROOVE_INSET := Vector2(7, 5)
+const MONSTER_GROOVE_H := 18.0
 ## The quest marker over an NPC for each QuestLog-like state TDNpc.quest_marker() returns.
 const QUEST_MARKERS := {"!": "hud/quest_available", "?": "hud/quest_ready", "...": "hud/quest_in_progress"}
 ## The speech bubble's body and tail inside hud/speech_bubble, in texels.
@@ -513,20 +519,42 @@ static func draw_party_hp(ci: CanvasItem, pos: Vector2, width: float, fraction: 
 	DrawUtil.round_rect(ci, groove.grow(0.5), groove.size.y / 2.0, Palette.NIGHT)
 	draw_bar_fill(ci, "fill_red", groove, fraction)
 
-## A monster HP bar centred above it.
+## A monster HP bar `width` pixels wide centred above it.
 static func draw_monster_hp(ci: CanvasItem, bottom_center: Vector2, width: float, fraction: float) -> void:
 	var scale := width / 135.0
-	var h := 38.0 * scale
-	draw_bar(ci, "monster_hp_1", "monster_hp_2", bottom_center - Vector2(width / 2.0, h), fraction, scale)
+	draw_monster_bar(ci, bottom_center - Vector2(width / 2.0, (MONSTER_CAP.size.y + 5.0) * scale), width, fraction, scale)
+
+## Where the monster bar's frame sits when drawn `width` pixels wide from `pos`, `scale`
+## screen pixels per texel.
+static func monster_bar_rect(pos: Vector2, width: float, scale: float) -> Rect2:
+	return Rect2(pos, Vector2(maxf(width, 2.0 * MONSTER_CAP.size.x * scale), MONSTER_CAP.size.y * scale))
+
+## Where the monster bar's fill runs inside its frame `frame`.
+static func monster_bar_groove(frame: Rect2, scale: float) -> Rect2:
+	var inset := MONSTER_GROOVE_INSET * scale
+	return Rect2(frame.position + inset, Vector2(frame.size.x - 2.0 * inset.x, MONSTER_GROOVE_H * scale))
+
+## The monster bar with its top left at `pos`: two end caps and a stretched middle, so it
+## can be any width and leaves out the emblem on the art's left end.
+static func draw_monster_bar(ci: CanvasItem, pos: Vector2, width: float, fraction: float, scale: float) -> void:
+	var art := tex("monster_hp_1")
+	var r := monster_bar_rect(pos, width, scale)
+	var cap := MONSTER_CAP.size * scale
+	ci.draw_texture_rect_region(art, Rect2(r.position.x + cap.x, r.position.y, r.size.x - 2.0 * cap.x, cap.y), MONSTER_MID)
+	ci.draw_texture_rect_region(art, Rect2(r.end.x - cap.x, r.position.y, cap.x, cap.y), MONSTER_CAP)
+	ci.draw_set_transform(Vector2(r.position.x + cap.x, r.position.y), 0.0, Vector2(-1, 1))
+	ci.draw_texture_rect_region(art, Rect2(Vector2.ZERO, cap), MONSTER_CAP)
+	ci.draw_set_transform(Vector2.ZERO)
+	draw_bar_fill(ci, "monster_hp_2", monster_bar_groove(r, scale), fraction, scale)
 
 ## The bar fixed at the top of the screen while a boss is on the map: its name with a
 ## BOSS badge, and its HP.
 static func draw_boss_bar(ci: CanvasItem, top_center: Vector2, label: String, fraction: float) -> void:
 	var scale := 1.8
-	var size := tex("monster_hp_1").get_size() * scale
+	var width := tex("monster_hp_1").get_width() * scale
 	DrawUtil.text(ci, Game.num_font, top_center + Vector2(0, 14), "BOSS", 12, Palette.EMBER, 0, 4, Palette.NIGHT)
 	DrawUtil.text(ci, Game.ui_font, top_center + Vector2(0, 30), label, 14, Palette.MIST, 0, 4, Palette.NIGHT)
-	draw_bar(ci, "monster_hp_1", "monster_hp_2", top_center + Vector2(-size.x / 2.0, 30), fraction, scale)
+	draw_monster_bar(ci, top_center + Vector2(-width / 2.0, 30.0 + MONSTER_CAP.position.y * scale), width, fraction, scale)
 
 ## A cream speech bubble whose tail points down at `bottom_center`, in dark ink.
 static func draw_speech(ci: CanvasItem, bottom_center: Vector2, text: String) -> void:
