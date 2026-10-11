@@ -1,0 +1,10 @@
+{
+  "_doc": "The back (inner face) of each shield, as it shows on his far arm behind his body (tools/art/paperdoll/items.py shield_layers). Its front is the shield's icon. Gemini edit wg_shield_backs (2026-10-11).",
+  "source": "art/source/shield_backs.png",
+  "grid": {"rows": [0, 640], "cols": [0, 512, 1024, 1536]},
+  "scale": 1.0,
+  "keep": "largest",
+  "save": false,
+  "out_dir": "art/build/paperdoll/shield_backs",
+  "cells": [["oak_shield", "kite_shield", "emberforge_aegis"]]
+}

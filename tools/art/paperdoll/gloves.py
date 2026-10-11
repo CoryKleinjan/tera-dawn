@@ -8,15 +8,16 @@ from .worn import worn_mask
 
 # ---------- gloves drawn on the body ----------
 
-def posed_gloves(arr, px, hands, reach):
+def posed_gloves(arr, px, hands, reach, keep_colour=False):
     """The two gloves of one drawn pose, sized to the hero, each centred on a hand of his: the
     glove drawn nearest to it on the fitted body (first within `reach`, then any). Returns
-    [(image, top-left)]."""
+    [(image, top-left)]. With `keep_colour`, `arr` is already only the gloves (an item's own
+    coloured sheet, see items.py) and they keep their colours."""
     ys = np.nonzero(arr[..., 3] > 0)[0]
     ours = np.nonzero(px[..., 3] > 127)[0]
     base = (ours.max() - ours.min() + 1) / (ys.max() - ys.min() + 1)
     s, x, y = body_fit(arr, np.zeros(arr.shape[:2], bool), px, [base * k for k in (0.92, 0.96, 1.0, 1.04, 1.08)])
-    mask = worn_mask(arr)
+    mask = (arr[..., 3] > 0) if keep_colour else worn_mask(arr)
     lab, n = ss.label(mask)
     if not n:
         return []
@@ -53,8 +54,9 @@ def posed_gloves(arr, px, hands, reach):
         part = lab[y0:y1, x0:x1] == i + 1
         cut = arr[y0:y1, x0:x1].copy()
         cut[~part] = 0
-        grey = cut[..., :3].mean(2, keepdims=True)
-        cut[..., :3] = np.repeat(grey, 3, 2).round().astype(np.uint8)
+        if not keep_colour:
+            grey = cut[..., :3].mean(2, keepdims=True)
+            cut[..., :3] = np.repeat(grey, 3, 2).round().astype(np.uint8)
         img = scaled(Image.fromarray(cut, "RGBA"), s)
         out.append((img, (int(round(hand[0] - img.width / 2)), int(round(hand[1] - img.height / 2)))))
     return out

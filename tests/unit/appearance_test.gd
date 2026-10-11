@@ -8,6 +8,20 @@ func _beginner() -> JobDef:
 func _look(a: Appearance, gear := {}) -> Dictionary:
 	return {"appearance": a.to_dict(), "gear": gear}
 
+## Dresses `a` in `gear` as items without art of their own (Paperdoll.own_art, Piece), so they are
+## drawn with their kind's tinted greyscale art, as a new item is until its art is painted.
+func _dress_bare(a: Appearance, gear: Dictionary) -> Paperdoll:
+	var bare := {}
+	for place in gear:
+		var e := (Content.item(StringName(gear[place])) as EquipDef).duplicate() as EquipDef
+		e.id = StringName("test_bare_" + String(gear[place]))
+		Content.items[e.id] = e
+		bare[place] = String(e.id)
+	var d := Paperdoll.dress(_look(a, bare))
+	for place in bare:
+		Content.items.erase(StringName(bare[place]))
+	return d
+
 # ---------- Appearance ----------
 
 func test_every_kind_has_creator_options() -> void:
@@ -167,7 +181,7 @@ func test_long_hair_hangs_behind_and_a_hat_swaps_the_hair() -> void:
 	# hair drawn in every pose holds what hangs behind his head; a one-piece style has a back layer
 	check(hair.back_frames == null or _layer(bare, hair.back_frames).behind, "the back of long hair is behind him")
 	check(not _layer(bare, hair.frames).behind, "the front over him")
-	var hatted := Paperdoll.dress(_look(a, {"hat": "iron_helm"}))
+	var hatted := _dress_bare(a, {"hat": "iron_helm"})
 	check(_layer(hatted, hair.hat_frames) != null, "the under-hat hair")
 	check(_layer(hatted, hair.frames) == null and _layer(hatted, hair.back_frames) == null, "instead of the rest")
 
@@ -176,15 +190,15 @@ func test_bare_places_and_worn_clothes() -> void:
 	check(d.layers.all(func(l: Paperdoll.Layer) -> bool: return l.frames != Paperdoll.CAPE and l.frames != Paperdoll.SHIELD), "no cape or shield")
 	check_eq(d.tints[Paperdoll.Region.BOTTOM].a, 0.0, "his own shorts")
 	var top := Content.item(&"berry_smock") as EquipDef
-	var dressed := Paperdoll.dress(_look(Appearance.new(), {"top": "berry_smock"}))
+	var dressed := _dress_bare(Appearance.new(), {"top": "berry_smock"})
 	var cut := _layer(dressed, Paperdoll.worn_cut(top))
 	check(cut != null and not cut.behind, "a top is its cut, over him")
 	check(Color(cut.tint, 1.0).is_equal_approx(top.worn_color()), "in its colour")
 	check_eq(dressed.tints[Paperdoll.Region.TOP], dressed.tints[Paperdoll.Region.SKIN], "skin shows around it")
-	var tunic := Paperdoll.dress(_look(Appearance.new(), {"top": "linen_tunic"}))
+	var tunic := _dress_bare(Appearance.new(), {"top": "linen_tunic"})
 	check_ne(cut.tint, _layer(tunic, Paperdoll.worn_cut(Content.item(&"linen_tunic"))).tint, "two tops look different")
 	var pants := Content.item(&"trail_pants") as EquipDef
-	var legs := Paperdoll.dress(_look(Appearance.new(), {"bottom": "trail_pants"}))
+	var legs := _dress_bare(Appearance.new(), {"bottom": "trail_pants"})
 	check(_layer(legs, Paperdoll.worn_cut(pants)) != null, "a bottom is its cut")
 	check(Color(legs.tints[Paperdoll.Region.BOTTOM], 1.0).is_equal_approx(pants.worn_color()), "over his shorts in its colour, so no grey shows at its edges")
 
@@ -240,7 +254,7 @@ func test_hair_under_a_hat_leaves_the_face_clear() -> void:
 
 func test_a_cape_and_shield_are_tinted_layers() -> void:
 	var cape := Content.item(&"petal_cape") as EquipDef
-	var d := Paperdoll.dress(_look(Appearance.new(), {"cape": "petal_cape", "shield": "oak_shield"}))
+	var d := _dress_bare(Appearance.new(), {"cape": "petal_cape", "shield": "oak_shield"})
 	var behind := _layer(d, Paperdoll.CAPE)
 	check(behind != null and behind.behind, "a cape behind him")
 	check(Color(behind.tint, 1.0).is_equal_approx(cape.worn_color()), "in the cape's colour")
@@ -248,63 +262,90 @@ func test_a_cape_and_shield_are_tinted_layers() -> void:
 	check(behind.gear, "shaded in its colour like gear")
 	check(_layer(d, Paperdoll.SHIELD) != null, "a shield")
 
+func _piece_layer(d: Paperdoll, p: Paperdoll.Piece) -> Paperdoll.Layer:
+	for l in d.layers:
+		if l.piece == p:
+			return l
+	return null
+
+func test_a_shield_is_a_piece_with_its_back_behind_him() -> void:
+	var piece := Paperdoll.Piece.named("shield_item_oak_shield")
+	if not check(piece != null, "the oak shield is a piece"):
+		return
+	check(piece.views.has("back") and piece.views.has("front"), "with its back and its face")
+	var d := Paperdoll.dress(_look(Appearance.new(), {"shield": "oak_shield"}))
+	var l := _piece_layer(d, piece)
+	check(l != null and not l.gear, "drawn in its own colours")
+	check(_layer(d, Paperdoll.SHIELD) == null, "instead of the tinted shield")
+	var idle := Paperdoll.frame_index(Paperdoll.FRAMES.get_frame_texture(&"idle", 0))
+	var rope := Paperdoll.frame_index(Paperdoll.FRAMES.get_frame_texture(&"rope", 0))
+	var p: Variant = piece.pose(idle)
+	check(p != null and p["view"] == "back" and p["behind"], "its back on his far arm, behind him")
+	var q: Variant = piece.pose(rope)
+	check(q != null and q["view"] == "front" and not q["behind"], "its face over his back as he climbs")
+
 func test_gloves_are_a_tinted_layer_over_him() -> void:
 	var gloves := Content.item(&"work_gloves") as EquipDef
-	var d := Paperdoll.dress(_look(Appearance.new(), {"gloves": "work_gloves"}))
+	var d := _dress_bare(Appearance.new(), {"gloves": "work_gloves"})
 	var layer := _layer(d, Paperdoll.GLOVES)
 	check(layer != null and not layer.behind, "gloves over him")
 	check(Color(layer.tint, 1.0).is_equal_approx(gloves.worn_color()), "in the gloves' colour")
 
-func test_hats_are_a_layer_over_his_hair() -> void:
+func test_hats_are_a_piece_over_his_hair() -> void:
 	var helm := Content.item(&"iron_helm") as EquipDef
-	var d := Paperdoll.dress(_look(Appearance.new(), {"hat": "iron_helm"}))
-	var hat := _layer(d, Paperdoll.hat_frames(helm))
-	check(hat != null and not hat.behind and hat.gear, "a helm over him, shaded in its colour")
-	check(Paperdoll.hat_frames(helm).resource_path.ends_with("hat_helm.tres"), "drawn as a helm")
+	var d := _dress_bare(Appearance.new(), {"hat": "iron_helm"})
+	var hat := _piece_layer(d, Paperdoll.hat_piece(helm))
+	check(hat != null and hat.gear, "a helm, shaded in its colour")
+	check(Paperdoll.hat_piece(helm).name == "hat_helm", "drawn as a helm")
 	check(Color(hat.tint, 1.0).is_equal_approx(helm.worn_color()), "in the helm's colour")
 	var hair := Content.looks_of(LookDef.Kind.HAIR)[0]
 	check(d.layers.find(_layer(d, hair.hat_frames)) < d.layers.find(hat), "over the hair left under it")
 
 func test_a_hat_sits_on_his_head() -> void:
-	var cap := Paperdoll.hat_frames(Content.item(&"leaf_cap") as EquipDef)
+	var cap := Paperdoll.hat_piece(Content.item(&"leaf_cap") as EquipDef)
 	for anim in [&"idle", &"rope"]:
-		var tex := cap.get_frame_texture(anim, 0) as AtlasTexture
-		var img := tex.atlas.get_image()
-		img.decompress()
-		var box := img.get_region(Rect2i(tex.region)).get_used_rect()
 		var f := Paperdoll.frame_index(Paperdoll.FRAMES.get_frame_texture(anim, 0))
+		var p: Variant = cap.pose(f)
 		var head: Vector2 = Paperdoll.anchor(f, &"head")
-		check(box.size.x > 0, "%s: the cap draws" % anim)
-		check(absf(box.get_center().x - head.x) < 20 * Paperdoll.ART_SCALE and box.position.y < head.y, "%s: on top of his head" % anim)
+		check(p != null and not p["behind"], "%s: the cap draws over him" % anim)
+		if p:
+			check(p["at"].distance_to(head) < 1.0, "%s: on his head" % anim)
+			check(p["view"] == ("behind" if anim == &"rope" else "side"), "%s: seen from the side, or from behind as he climbs" % anim)
 
-func test_a_weapon_is_a_layer_in_his_fist() -> void:
+func test_a_weapon_is_a_piece_in_his_fist() -> void:
 	var bow := Content.item(&"willow_bow") as EquipDef
 	var d := Paperdoll.dress(_look(Appearance.new(), {"weapon": "willow_bow"}))
-	var held := Paperdoll.weapon_layers(bow)
-	var front := _layer(d, held["front"])
-	check(front != null and not front.behind, "the bow is drawn over him")
-	check(Color(front.tint, 1.0).is_equal_approx(held["tint"]), "in the bow's colour, or its own picture's")
-	check(held["tint"] == Color.WHITE or Color(held["tint"], 1.0).is_equal_approx(bow.worn_color()), "the bow's colour tints the template")
-	check(held.has("behind") == false or _layer(d, held["behind"]).behind, "a behind twin goes under him")
+	var held := Paperdoll.weapon_piece(bow)
+	var l := _piece_layer(d, held)
+	check(l != null, "the bow is drawn")
+	check(held.name == "weapon_item_willow_bow" and not l.gear, "as its own picture, from its icon, in its own colours")
+	check(d.layers.find(l) == d.layers.size() - 1, "over everything else (raised over his head)")
+	var attack := Paperdoll.frame_index(Paperdoll.FRAMES.get_frame_texture(&"attack", 1))
+	var p: Variant = held.pose(attack)
+	var h: Variant = Paperdoll.hold(attack, &"bow")
+	check(p != null and h != null and p["at"].distance_to(h["grip"]) < 1.0, "in his fist mid-attack")
 
-func test_every_weapon_has_layers_and_a_hold() -> void:
+func test_every_weapon_has_a_piece_and_a_hold() -> void:
 	for item in Content.items.values():
 		var e := item as EquipDef
 		if e and e.slot == EquipDef.Slot.WEAPON and e.worn_frames == null:
-			var held := Paperdoll.weapon_layers(e)
-			check(held["front"] is SpriteFrames, "%s has a layer" % e.id)
+			var held := Paperdoll.weapon_piece(e)
+			check(held != null and held.name == "weapon_item_" + String(e.id), "%s has its own picture" % e.id)
 			check(Paperdoll.weapon_reach(Paperdoll.kind_of(e)) > 0.0, "%s reaches past the fist" % e.id)
 	var attack := Paperdoll.frame_index(Paperdoll.FRAMES.get_frame_texture(&"attack", 1))
 	for kind in ["sword", "bow", "wand", "staff", "claw", "knuckle", "gun"]:
 		check(Paperdoll.hold(attack, kind) != null, "%s is in his hand mid-attack" % kind)
+		check(Paperdoll.Piece.named("weapon_" + kind) != null, "a %s template for weapons without a picture" % kind)
 	var climbing := Paperdoll.frame_index(Paperdoll.FRAMES.get_frame_texture(&"rope", 0))
 	check(Paperdoll.hold(climbing, &"sword") == null, "his hands are on the rope")
+	var sword := Paperdoll.Piece.named("weapon_sword")
+	check(sword.fist != null, "a sword has his fingers drawn over its grip")
 
 func test_every_hat_has_its_shape_drawn() -> void:
 	for item in Content.items.values():
 		var e := item as EquipDef
 		if e and e.slot == EquipDef.Slot.HAT and e.worn_frames == null and e.look_shape != &"":
-			check(ResourceLoader.exists(Paperdoll.HAT_DIR + String(e.look_shape) + ".tres"), "%s: a %s layer" % [e.id, e.look_shape])
+			check(Paperdoll.Piece.named("hat_" + String(e.look_shape)) != null, "%s: a %s piece" % [e.id, e.look_shape])
 
 func test_icon_colours_are_taken_from_the_icon() -> void:
 	var leaf := Content.item(&"leaf_cap") as EquipDef

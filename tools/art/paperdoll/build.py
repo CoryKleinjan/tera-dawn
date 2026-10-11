@@ -6,6 +6,8 @@ from .faces import face_layers
 from .gloves import glove_layers
 from .hair import one_piece_layers, posed_layers
 from .hats import hat_layers
+from .items import item_layers, shield_layers as item_shield_layers
+from .pieces import draw_piece, load_piece
 from .weapons import forearm_angles, holds, weapon_layers
 from .worn import cape_layers, clothes_layers, shield_layers
 
@@ -19,16 +21,23 @@ def main():
     hair, faces, weapons = cut("paperdoll_hair"), cut("paperdoll_faces"), cut("paperdoll_weapons")
     body_offsets(names, hero.body_cells, fw, fh)  # also fills BODY_PIECES, for shorts_mask
 
-    old, old_hat = one_piece_layers(hero, hair)
-    posed_layers(hero, old, old_hat)
-    face_layers(hero, faces)
+    # --pieces: only the pieces (weapons, shields, hats: quick, for new gear), not the strips
+    strips = "--pieces" not in sys.argv
+    if strips:
+        old, old_hat = one_piece_layers(hero, hair)
+        posed_layers(hero, old, old_hat)
+        face_layers(hero, faces)
     held = holds(hero.hands, hero.hold_spec, names, forearm_angles(hero))
     rig_frames = rig_entries(hero, held)
-    cape_layers(hero)
-    shield_layers(hero, rig_frames)
+    if strips:
+        cape_layers(hero)
+        shield_layers(hero, rig_frames)
     hat_layers(hero)
-    glove_layers(hero, rig_frames)
-    clothes_layers(hero)
+    if strips:
+        glove_layers(hero, rig_frames)
+        clothes_layers(hero)
+        item_layers(hero, rig_frames)  # each piece with its own art (art/source/worn/<item>.png)
+    item_shield_layers(hero, rig_frames)
     grips = weapon_layers(hero, weapons, held)
 
     # the region mask and the rig
@@ -92,29 +101,39 @@ def rig_entries(hero, held):
 
 def preview(names, fw, fh, rig_frames):
     """Every frame with each weapon kind in his hand (one row of frames per kind, split in two),
-    wearing tousled hair, a face, the cape and, with the sword, a shield."""
+    wearing tousled hair, a face, the cape and, with the sword, a shield, drawn as the game
+    draws them (pieces placed on each frame)."""
     load = lambda n: Image.open(os.path.join(LAYERS, n + ".png"))  # noqa: E731
     have = lambda n: os.path.exists(os.path.join(LAYERS, n + ".png"))  # noqa: E731
     body = Image.open(STRIP)
     tint = lambda im, c: Image.fromarray((np.asarray(im).astype(float) * (list(c) + [1])).astype(np.uint8), "RGBA")  # noqa: E731
     steel, wood = (0.85, 0.87, 0.92), (0.75, 0.55, 0.35)
     colours = {"sword": steel, "wand": wood, "staff": wood, "bow": wood, "gun": wood, "claw": steel, "knuckle": (0.85, 0.7, 0.4)}
+    shield = load_piece("shield_item_kite_shield")
     rows = []
     for kind in WEAPON_KINDS:
+        held = load_piece(f"weapon_{kind}")
         hair = "hair_tousled" if have("hair_tousled") else "hair_long"
-        stack = [tint(load("cape"), (0.8, 0.25, 0.25))]
+        under = [tint(load("cape"), (0.8, 0.25, 0.25))]
         if have(hair + "_back"):
-            stack.append(tint(load(hair + "_back"), DEFAULT_HAIR))
-        if have(f"weapon_{kind}_behind"):
-            stack.append(tint(load(f"weapon_{kind}_behind"), colours[kind]))
-        stack += [body, tint(load("cape_front"), (0.8, 0.25, 0.25)), load("face_bright"),
-                  tint(load("face_bright_eyes"), (0.3, 0.6, 1.0)), tint(load(hair), DEFAULT_HAIR),
-                  tint(load(f"weapon_{kind}"), colours[kind])]
-        if kind == "sword":
-            stack.append(tint(load("shield_round"), (0.8, 0.7, 0.4)))
+            under.append(tint(load(hair + "_back"), DEFAULT_HAIR))
+        over = [tint(load("cape_front"), (0.8, 0.25, 0.25)), load("face_bright"),
+                tint(load("face_bright_eyes"), (0.3, 0.6, 1.0)), tint(load(hair), DEFAULT_HAIR)]
         out = Image.new("RGBA", body.size, (70, 100, 70, 255))
-        for im in stack:
-            out.alpha_composite(im)
+        for i in range(len(names)):
+            frame = Image.new("RGBA", (fw, fh))
+            box = (i * fw, 0, (i + 1) * fw, fh)
+            for im in under:
+                frame.alpha_composite(im.crop(box))
+            pieces = [(held, colours[kind])] + ([(shield, None)] if kind == "sword" and shield else [])
+            for p, c in pieces:
+                draw_piece(frame, p, i, True, c)
+            frame.alpha_composite(body.crop(box))
+            for im in over:
+                frame.alpha_composite(im.crop(box))
+            for p, c in pieces[::-1]:
+                draw_piece(frame, p, i, False, c)
+            out.alpha_composite(frame, (i * fw, 0))
         rows.append(out)
     half = (len(names) + 1) // 2
     sheet = Image.new("RGBA", (fw * half, fh * 2 * len(rows)))

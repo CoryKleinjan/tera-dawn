@@ -45,12 +45,12 @@ const WORN_STYLE_PLACES := {Slot.TOP: "top", Slot.BOTTOM: "bottom", Slot.SHOES: 
 ## "clogs". Empty: it only recolours the part of the body it covers.
 @export var worn_style: StringName
 ## The shape of a hat or shield's art. Hats: "cap", "helm", "hood", "bandana", "wizard",
-## "tricorn" (Paperdoll.hat_frames; empty: a cap). Shields: "kite", or empty for a round one
+## "tricorn" (Paperdoll.hat_piece; empty: a cap). Shields: "kite", or empty for a round one
 ## (Paperdoll.SHIELDS).
 @export var look_shape: StringName
 ## The colour it's shown in. Fully transparent takes the main colour of its icon.
 @export var look_color := Color(0, 0, 0, 0)
-## For a weapon with its own held picture (Paperdoll.weapon_layers): how big it's drawn in his
+## For a weapon with its own held picture (Paperdoll.weapon_piece): how big it's drawn in his
 ## hand against others of its kind (a claymore 1.3). Read by tools/art/paperdoll_layers.py, so
 ## run it after changing this.
 @export var held_size := 1.0

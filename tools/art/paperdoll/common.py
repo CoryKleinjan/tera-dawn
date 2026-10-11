@@ -60,6 +60,14 @@ FACE_ZONE = (FACE_AT[0] + SCALP_BACK, 1.0, FACE_AT[1] + SCALP, 0.7)
 BLANK_FACE = 222      # the hair sheet's blank faces are greys at least this pale (of 255)
 NECK_SLIVER = 120     # loose bits under the jaw smaller than this (pixels) are left-over neck outline
 HAT_SHOULDER_ROWS = 6  # hat sheet cells are lined up by their bottom rows (the shoulders)
+# Hats of these shapes sit this much lower on his head than on the sheet's head (head radii;
+# Cory 2026-10-11: a bandana sits a little lower).
+HAT_LOWER = {"bandana": 0.2}
+HAT_GROW = {"bandana": 1.1}
+# ...and from behind are grown to at least this wide (head radii), so they cover the back of
+# his head and ears (Gemini paints some bandanas' backs narrower than others)
+HAT_BACK_WIDTH = {"bandana": 2.65}
+HAT_LINE = 0.1         # a bit of a hat cell's frame line: at most this thick against its length
 HAT_SIZE = 1.0         # hats drawn this much bigger than his head against the sheet's head
 HAT_SPECK = 0.05  # hat_alone: pieces under this share of the hat are cell-frame bits
 HAT_SHAPES = ("cap", "hood", "bandana", "helm", "wizard", "tricorn")
@@ -70,6 +78,11 @@ EYE_SCALE = 1.0
 EYE_LINE = 0.6
 NECK = 0.95           # the neck is this far below the head's centre
 SHIELD_HEIGHT = 1.25
+# A closed helm's dark inside (hats.open_visor): thicker than this many sheet pixels, and at
+# least VISOR_MIN pixels after its outline lines are worn away.
+VISOR_LINE = 3
+VISOR_MIN = 40
+SHIELD_SHOWS = 0.33   # share of a shield (its back, behind him) that shows past his body
 # Clothes sheets (art/sheets/<place>_<style>_frames.json) for these places; styles whose sheet
 # came back unusable are skipped (their items wear the nearest cut, see EquipDef.worn_style).
 WORN_PLACES = ("top", "bottom", "shoes")

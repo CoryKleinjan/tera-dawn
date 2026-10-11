@@ -57,9 +57,17 @@ func set_look(new_look: Dictionary) -> void:
 		mat.shader = LAYER_SHADER
 		l.apply(mat)
 		v.material = mat
-		v.draw.connect(_draw_layer.bind(v, l))
+		v.draw.connect(_draw_layer.bind(v, l, l.behind))
 		(_back if l.behind else _front).add_child(v)
 		_layer_views.append(v)
+		if l.piece:  # a piece goes behind him on some frames: a twin under the body for those
+			var b := Control.new()
+			b.set_anchors_preset(Control.PRESET_FULL_RECT)
+			b.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			b.material = mat.duplicate()
+			b.draw.connect(_draw_layer.bind(b, l, true))
+			_back.add_child(b)
+			_layer_views.append(b)
 	_redraw()
 
 func play(anim: StringName) -> void:
@@ -108,9 +116,29 @@ func _draw_body() -> void:
 	_body.draw_set_transform(Vector2.ZERO)
 
 ## One layer of the doll, in its own colour (its material).
-func _draw_layer(on: Control, l: Paperdoll.Layer) -> void:
+func _draw_layer(on: Control, l: Paperdoll.Layer, behind: bool) -> void:
+	if l.piece:
+		_draw_piece(on, l, behind)
+		return
 	if not l.frames.has_animation(animation):
 		return
 	var rect := _frame_rect(on)
 	on.draw_texture_rect(l.frames.get_frame_texture(animation, mini(frame(), l.frames.get_frame_count(animation) - 1)), rect, false)
+	on.draw_set_transform(Vector2.ZERO)
+
+## A piece where its pose for this frame says (Paperdoll.Piece), on the side of the body
+## (`behind` or not) the pose puts it.
+func _draw_piece(on: Control, l: Paperdoll.Layer, behind: bool) -> void:
+	var f := Paperdoll.frame_index(_texture())
+	var p: Variant = l.piece.pose(f)
+	if p == null or p["behind"] != behind:
+		return
+	var box := _frame_box()
+	var s: float = box[0]
+	var place := Transform2D(float(p["angle"]), Vector2.ONE * s * float(p["scale"]), 0.0, box[1] + p["at"] * s)
+	if facing < 0: # mirrored about the middle (the frame is centred)
+		place = Transform2D(Vector2(-1, 0), Vector2(0, 1), Vector2(size.x, 0)) * place
+	on.draw_set_transform_matrix(place)
+	l.apply_pose(on.material as ShaderMaterial, f, p)
+	on.draw_texture(l.piece.picture(p), -l.piece.views[p["view"]]["anchor"])
 	on.draw_set_transform(Vector2.ZERO)

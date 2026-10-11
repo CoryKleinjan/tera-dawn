@@ -195,8 +195,14 @@ after the item ids, replacing the placeholders from `tools/art/make_item_placeho
   pastes back only what changed (`hands`), or everything above his shorts (`upper`); `worn-base` and
   `worn-cells` redress changed cells on the worn sheets. While running, his weapon arm swings back in
   run1-2 (the weapon trails behind him) and forward in run3-4.
-- **Held weapons** (`held_*`, art prompts part 8 W2-W6): one weapon per cell, named by item id, pointing right with a green
-  grip dot. `paperdoll_layers.py` puts each in his hand on every frame (`weapon_item_<id>`), in its own colours.
+- **Weapons** are cut from their item icons (`items_*`, at full size): `paperdoll_layers.py`
+  straightens each and makes it the picture he holds (`weapon_item_<id>`, a piece the game
+  places in his fist on every frame). The old `held_*` sheets stay in `art/source/` unused.
+- **Worn gear in its own colours** (`art/source/worn/<item id>.png`, `shield_backs`,
+  `hats_items_*` and their `_only` twins): Gemini edits of the body sheet or the hat sheet with
+  the item's icon as reference. `tools/art/paperdoll/items.py` lifts each piece off the body by
+  comparing it with the bare body sheet; a sheet that came back on an off-colour background is
+  flooded to magenta from each cell's border first (like `clean_sheet.py --plain`).
   `hero_main` (the painted hero) now cuts into `art/build/` for reference.
 - **Drawn on the body sheet** (`hair_<style>_frames`, `gloves_frames`, `cape_frames`,
   `paperdoll_shield_round`, `paperdoll_grip`, `top_*_frames`, `bottom_*_frames`, `shoes_*_frames`):
