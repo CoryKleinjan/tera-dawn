@@ -47,6 +47,7 @@ sheet is measured and straightened first (AXIAL), so the angles hold whatever th
 Hair, cape, shields, gloves and weapons are greyscale; the game tints them (hair colour, the worn
 item's colour). The irises are split off the faces into their own layer for the eye colour.
 """
+import copy
 import json
 import math
 import os
@@ -55,7 +56,7 @@ import sys
 from collections import deque
 
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageOps
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import slice_sheets as ss  # noqa: E402
@@ -134,10 +135,14 @@ WORN_SIZE = {"claw": 0.6, "knuckle": 0.75, "bow": 1.35}
 # axis is measured and turned out, so a rig angle means the same however the art was drawn.
 # The others are drawn the way the rig expects (a gun and claws pointing right, a bow upright).
 AXIAL = ("sword", "wand", "staff")
+# Weapons the rig holds upright (see stood_up), and how far off upright (degrees) one may be
+# drawn before it is stood up.
+UPRIGHT = ("bow",)
+UPRIGHT_SLACK = 8
 # Weapons held in the fist: his fingers draw over the grip. The others are worn on the fist.
 GRIPPED = ("sword", "wand", "staff", "bow", "gun")
 # Weapons carried on his back while he climbs or sits, and at what angle; the rest are put away.
-ON_BACK = {"sword": 125, "staff": -70, "bow": 60}
+ON_BACK = {"sword": 125, "staff": -70, "bow": 60, "wand": 125, "gun": 110}
 SHEATHED = BACK_VIEW + ("sit",)
 # Sheets of weapons with their own held picture: one cell per weapon, named by item id.
 HELD_SHEETS = "held_"
@@ -1020,12 +1025,33 @@ def reach(img, grip, axis):
 
 
 def length(piece, kind):
-    """A weapon picture's length along the way it points (its width when drawn pointing right)."""
+    """A weapon picture's length along the way it points (its width when drawn pointing right,
+    its height for a bow, which stands upright)."""
     arr = np.asarray(piece.img)
     ys, xs = np.nonzero(arr[..., 3] > 0)
-    a = math.radians(drawn_axis(arr) if kind in AXIAL else 0.0)
+    a = math.radians(drawn_axis(arr) if kind in AXIAL else 90.0 if kind in UPRIGHT else 0.0)
     t = xs * math.cos(a) + ys * math.sin(a)
     return float(t.max() - t.min() + 1)
+
+
+def stood_up(piece):
+    """A bow as the rig holds it: upright, its belly (the bow itself) on the right and its
+    string on the left, like the bow template. The held_bows sheet draws its bows at a slant
+    with the string on the right, so they are turned upright and mirrored; one already
+    standing up is kept as it is."""
+    img = piece.img
+    axis = drawn_axis(np.asarray(img))
+    if abs(axis + 90) > UPRIGHT_SLACK:
+        img = img.rotate(axis + 90, resample=Image.BICUBIC, expand=True)
+        img = img.crop(img.getbbox())
+    xs = np.nonzero(np.asarray(img)[..., 3] > 0)[1]
+    if xs.mean() < (xs.min() + xs.max()) / 2:
+        img = ImageOps.mirror(img)
+    if img is piece.img:
+        return piece
+    out = copy.copy(piece)
+    out.img = img
+    return out
 
 
 def drawn_axis(arr):
@@ -1511,7 +1537,9 @@ def main():
     s_w = r * SWORD_LENGTH / length(weapons["sword"], "sword")
     grips = {}
     pictures = [(kind, kind, weapons[kind], True, 1.0) for kind in WEAPON_KINDS]
-    drawn_weapons = held_pictures()
+    # (a bow drawn at a slant is stood up first, so it is measured and held as the rig expects)
+    drawn_weapons = [(item, kind, stood_up(piece) if kind in UPRIGHT else piece, sheet, size)
+                     for item, kind, piece, sheet, size in held_pictures()]
     # a held_* sheet is drawn at its own size: it is shrunk so its weapons are, on the median,
     # as long as the template of their kind (keeping their sizes against each other)
     by_sheet = {}
