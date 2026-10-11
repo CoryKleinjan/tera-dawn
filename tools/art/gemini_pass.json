@@ -12682,6 +12682,424 @@
     "refs": [],
     "text": "This is my sheet of a bald boy wearing the Sunforged Cuirass in 32 labelled poses (8 columns x 4 rows) on magenta. ERASE the boy from every cell: his head, ears, face, neck, arms, hands, legs, feet and his plain dark shorts, and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the Sunforged Cuirass. The Sunforged Cuirass stays EXACTLY where it is in every cell: the same position, size, shape, colours, outline, shading and detail, pixel for pixel; do not move, redraw, complete or tidy it. Where his body showed through it (an open neckline, between sleeve and arm) is now magenta. Keep every label and grid line exactly where it is."
    }
+  },
+  {
+   "id": "wg_worn_sunforged_greaves_only",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_worn_sunforged_greaves_only.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "wg_worn_sunforged_greaves",
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread: art/source/worn/sunforged_greaves.png with the body erased, so the Sunforged Greaves lifts off cleanly where its colours are close to his skin (like the linen tunic test).",
+   "edit": {
+    "base": "art/source/worn/sunforged_greaves.png",
+    "refs": [],
+    "text": "This is my sheet of a bald boy wearing the Sunforged Greaves in 32 labelled poses (8 columns x 4 rows) on magenta. ERASE the boy from every cell: his head, ears, face, neck, arms, hands, legs, feet, and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the Sunforged Greaves. The Sunforged Greaves stays EXACTLY where it is in every cell: the same position, size, shape, colours, outline, shading and detail, pixel for pixel; do not move, redraw, complete or tidy it. Where his body showed through it (between the legs, at the waist) is now magenta. Keep every label and grid line exactly where it is."
+   }
+  },
+  {
+   "id": "wg_worn_sunforged_sabatons_only",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_worn_sunforged_sabatons_only.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "wg_worn_sunforged_sabatons",
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread: art/source/worn/sunforged_sabatons.png with the body erased, so the Sunforged Sabatons lifts off cleanly where its colours are close to his skin (like the linen tunic test).",
+   "edit": {
+    "base": "art/source/worn/sunforged_sabatons.png",
+    "refs": [],
+    "text": "This is my sheet of a bald boy wearing the Sunforged Sabatons in 32 labelled poses (8 columns x 4 rows) on magenta. ERASE the boy from every cell: his head, ears, face, neck, arms, hands, legs, feet and his plain dark shorts, and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the Sunforged Sabatons. The Sunforged Sabatons stays EXACTLY where it is in every cell: the same position, size, shape, colours, outline, shading and detail, pixel for pixel; do not move, redraw, complete or tidy it. Where his body showed through it (an open strap, between the shoe and his leg) is now magenta. Keep every label and grid line exactly where it is."
+   }
+  },
+  {
+   "id": "wg_worn_canvas_shoes_only",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_worn_canvas_shoes_only.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "wg_worn_canvas_shoes",
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread: art/source/worn/canvas_shoes.png with the body erased, so the Canvas Shoes lifts off cleanly where its colours are close to his skin (like the linen tunic test).",
+   "edit": {
+    "base": "art/source/worn/canvas_shoes.png",
+    "refs": [],
+    "text": "This is my sheet of a bald boy wearing the Canvas Shoes in 32 labelled poses (8 columns x 4 rows) on magenta. ERASE the boy from every cell: his head, ears, face, neck, arms, hands, legs, feet and his plain dark shorts, and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the Canvas Shoes. The Canvas Shoes stays EXACTLY where it is in every cell: the same position, size, shape, colours, outline, shading and detail, pixel for pixel; do not move, redraw, complete or tidy it. Where his body showed through it (an open strap, between the shoe and his leg) is now magenta. Keep every label and grid line exactly where it is."
+   }
+  },
+  {
+   "id": "wg_worn_hiking_boots_only",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_worn_hiking_boots_only.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "wg_worn_hiking_boots",
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread: art/source/worn/hiking_boots.png with the body erased, so the Hiking Boots lifts off cleanly where its colours are close to his skin (like the linen tunic test).",
+   "edit": {
+    "base": "art/source/worn/hiking_boots.png",
+    "refs": [],
+    "text": "This is my sheet of a bald boy wearing the Hiking Boots in 32 labelled poses (8 columns x 4 rows) on magenta. ERASE the boy from every cell: his head, ears, face, neck, arms, hands, legs, feet and his plain dark shorts, and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the Hiking Boots. The Hiking Boots stays EXACTLY where it is in every cell: the same position, size, shape, colours, outline, shading and detail, pixel for pixel; do not move, redraw, complete or tidy it. Where his body showed through it (an open strap, between the shoe and his leg) is now magenta. Keep every label and grid line exactly where it is."
+   }
+  },
+  {
+   "id": "wg_worn_leather_boots_only",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_worn_leather_boots_only.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "wg_worn_leather_boots",
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread: art/source/worn/leather_boots.png with the body erased, so the Leather Boots lifts off cleanly where its colours are close to his skin (like the linen tunic test).",
+   "edit": {
+    "base": "art/source/worn/leather_boots.png",
+    "refs": [],
+    "text": "This is my sheet of a bald boy wearing the Leather Boots in 32 labelled poses (8 columns x 4 rows) on magenta. ERASE the boy from every cell: his head, ears, face, neck, arms, hands, legs, feet and his plain dark shorts, and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the Leather Boots. The Leather Boots stays EXACTLY where it is in every cell: the same position, size, shape, colours, outline, shading and detail, pixel for pixel; do not move, redraw, complete or tidy it. Where his body showed through it (an open strap, between the shoe and his leg) is now magenta. Keep every label and grid line exactly where it is."
+   }
+  },
+  {
+   "id": "wg_worn_reed_sandals_only",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_worn_reed_sandals_only.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "wg_worn_reed_sandals",
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread: art/source/worn/reed_sandals.png with the body erased, so the Reed Sandals lifts off cleanly where its colours are close to his skin (like the linen tunic test).",
+   "edit": {
+    "base": "art/source/worn/reed_sandals.png",
+    "refs": [],
+    "text": "This is my sheet of a bald boy wearing the Reed Sandals in 32 labelled poses (8 columns x 4 rows) on magenta. ERASE the boy from every cell: his head, ears, face, neck, arms, hands, legs, feet and his plain dark shorts, and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the Reed Sandals. The Reed Sandals stays EXACTLY where it is in every cell: the same position, size, shape, colours, outline, shading and detail, pixel for pixel; do not move, redraw, complete or tidy it. Where his body showed through it (an open strap, between the shoe and his leg) is now magenta. Keep every label and grid line exactly where it is."
+   }
+  },
+  {
+   "id": "wg_worn_sandals_only",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_worn_sandals_only.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "wg_worn_sandals",
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread: art/source/worn/sandals.png with the body erased, so the Sandals lifts off cleanly where its colours are close to his skin (like the linen tunic test).",
+   "edit": {
+    "base": "art/source/worn/sandals.png",
+    "refs": [],
+    "text": "This is my sheet of a bald boy wearing the Sandals in 32 labelled poses (8 columns x 4 rows) on magenta. ERASE the boy from every cell: his head, ears, face, neck, arms, hands, legs, feet and his plain dark shorts, and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the Sandals. The Sandals stays EXACTLY where it is in every cell: the same position, size, shape, colours, outline, shading and detail, pixel for pixel; do not move, redraw, complete or tidy it. Where his body showed through it (an open strap, between the shoe and his leg) is now magenta. Keep every label and grid line exactly where it is."
+   }
+  },
+  {
+   "id": "wg_worn_thicket_boots_only",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_worn_thicket_boots_only.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "wg_worn_thicket_boots",
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread: art/source/worn/thicket_boots.png with the body erased, so the Thicket Boots lifts off cleanly where its colours are close to his skin (like the linen tunic test).",
+   "edit": {
+    "base": "art/source/worn/thicket_boots.png",
+    "refs": [],
+    "text": "This is my sheet of a bald boy wearing the Thicket Boots in 32 labelled poses (8 columns x 4 rows) on magenta. ERASE the boy from every cell: his head, ears, face, neck, arms, hands, legs, feet and his plain dark shorts, and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the Thicket Boots. The Thicket Boots stays EXACTLY where it is in every cell: the same position, size, shape, colours, outline, shading and detail, pixel for pixel; do not move, redraw, complete or tidy it. Where his body showed through it (an open strap, between the shoe and his leg) is now magenta. Keep every label and grid line exactly where it is."
+   }
+  },
+  {
+   "id": "wg_worn_viper_shoes_only",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_worn_viper_shoes_only.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "wg_worn_viper_shoes",
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread: art/source/worn/viper_shoes.png with the body erased, so the Viper Shoes lifts off cleanly where its colours are close to his skin (like the linen tunic test).",
+   "edit": {
+    "base": "art/source/worn/viper_shoes.png",
+    "refs": [],
+    "text": "This is my sheet of a bald boy wearing the Viper Shoes in 32 labelled poses (8 columns x 4 rows) on magenta. ERASE the boy from every cell: his head, ears, face, neck, arms, hands, legs, feet and his plain dark shorts, and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the Viper Shoes. The Viper Shoes stays EXACTLY where it is in every cell: the same position, size, shape, colours, outline, shading and detail, pixel for pixel; do not move, redraw, complete or tidy it. Where his body showed through it (an open strap, between the shoe and his leg) is now magenta. Keep every label and grid line exactly where it is."
+   }
+  },
+  {
+   "id": "wg_worn_windstep_boots_only",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_worn_windstep_boots_only.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "wg_worn_windstep_boots",
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread: art/source/worn/windstep_boots.png with the body erased, so the Windstep Boots lifts off cleanly where its colours are close to his skin (like the linen tunic test).",
+   "edit": {
+    "base": "art/source/worn/windstep_boots.png",
+    "refs": [],
+    "text": "This is my sheet of a bald boy wearing the Windstep Boots in 32 labelled poses (8 columns x 4 rows) on magenta. ERASE the boy from every cell: his head, ears, face, neck, arms, hands, legs, feet and his plain dark shorts, and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the Windstep Boots. The Windstep Boots stays EXACTLY where it is in every cell: the same position, size, shape, colours, outline, shading and detail, pixel for pixel; do not move, redraw, complete or tidy it. Where his body showed through it (an open strap, between the shoe and his leg) is now magenta. Keep every label and grid line exactly where it is."
+   }
+  },
+  {
+   "id": "wg_worn_skyreach_boots_only",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_worn_skyreach_boots_only.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "wg_worn_skyreach_boots",
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread: art/source/worn/skyreach_boots.png with the body erased, so the Skyreach Boots lifts off cleanly where its colours are close to his skin (like the linen tunic test).",
+   "edit": {
+    "base": "art/source/worn/skyreach_boots.png",
+    "refs": [],
+    "text": "This is my sheet of a bald boy wearing the Skyreach Boots in 32 labelled poses (8 columns x 4 rows) on magenta. ERASE the boy from every cell: his head, ears, face, neck, arms, hands, legs, feet and his plain dark shorts, and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the Skyreach Boots. The Skyreach Boots stays EXACTLY where it is in every cell: the same position, size, shape, colours, outline, shading and detail, pixel for pixel; do not move, redraw, complete or tidy it. Where his body showed through it (an open strap, between the shoe and his leg) is now magenta. Keep every label and grid line exactly where it is."
+   }
+  },
+  {
+   "id": "wg_worn_skyreach_leggings_only",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_worn_skyreach_leggings_only.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "wg_worn_skyreach_leggings",
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread: art/source/worn/skyreach_leggings.png with the body erased, so the Skyreach Leggings lifts off cleanly where its colours are close to his skin (like the linen tunic test).",
+   "edit": {
+    "base": "art/source/worn/skyreach_leggings.png",
+    "refs": [],
+    "text": "This is my sheet of a bald boy wearing the Skyreach Leggings in 32 labelled poses (8 columns x 4 rows) on magenta. ERASE the boy from every cell: his head, ears, face, neck, arms, hands, legs, feet, and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the Skyreach Leggings. The Skyreach Leggings stays EXACTLY where it is in every cell: the same position, size, shape, colours, outline, shading and detail, pixel for pixel; do not move, redraw, complete or tidy it. Where his body showed through it (between the legs, at the waist) is now magenta. Keep every label and grid line exactly where it is."
+   }
+  },
+  {
+   "id": "wg_worn_emberplate_sabatons_only",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_worn_emberplate_sabatons_only.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "wg_worn_emberplate_sabatons",
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread: art/source/worn/emberplate_sabatons.png with the body erased, so the Emberplate Sabatons lifts off cleanly where its colours are close to his skin (like the linen tunic test).",
+   "edit": {
+    "base": "art/source/worn/emberplate_sabatons.png",
+    "refs": [],
+    "text": "This is my sheet of a bald boy wearing the Emberplate Sabatons in 32 labelled poses (8 columns x 4 rows) on magenta. ERASE the boy from every cell: his head, ears, face, neck, arms, hands, legs, feet and his plain dark shorts, and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the Emberplate Sabatons. The Emberplate Sabatons stays EXACTLY where it is in every cell: the same position, size, shape, colours, outline, shading and detail, pixel for pixel; do not move, redraw, complete or tidy it. Where his body showed through it (an open strap, between the shoe and his leg) is now magenta. Keep every label and grid line exactly where it is."
+   }
+  },
+  {
+   "id": "wg_worn_deckhand_boots_only",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_worn_deckhand_boots_only.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "wg_worn_deckhand_boots",
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread: art/source/worn/deckhand_boots.png with the body erased, so the Deckhand Boots lifts off cleanly where its colours are close to his skin (like the linen tunic test).",
+   "edit": {
+    "base": "art/source/worn/deckhand_boots.png",
+    "refs": [],
+    "text": "This is my sheet of a bald boy wearing the Deckhand Boots in 32 labelled poses (8 columns x 4 rows) on magenta. ERASE the boy from every cell: his head, ears, face, neck, arms, hands, legs, feet and his plain dark shorts, and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the Deckhand Boots. The Deckhand Boots stays EXACTLY where it is in every cell: the same position, size, shape, colours, outline, shading and detail, pixel for pixel; do not move, redraw, complete or tidy it. Where his body showed through it (an open strap, between the shoe and his leg) is now magenta. Keep every label and grid line exactly where it is."
+   }
+  },
+  {
+   "id": "wg_worn_stormsail_trousers_only",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_worn_stormsail_trousers_only.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "wg_worn_stormsail_trousers",
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread: art/source/worn/stormsail_trousers.png with the body erased, so the Stormsail Trousers lifts off cleanly where its colours are close to his skin (like the linen tunic test).",
+   "edit": {
+    "base": "art/source/worn/stormsail_trousers.png",
+    "refs": [],
+    "text": "This is my sheet of a bald boy wearing the Stormsail Trousers in 32 labelled poses (8 columns x 4 rows) on magenta. ERASE the boy from every cell: his head, ears, face, neck, arms, hands, legs, feet, and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the Stormsail Trousers. The Stormsail Trousers stays EXACTLY where it is in every cell: the same position, size, shape, colours, outline, shading and detail, pixel for pixel; do not move, redraw, complete or tidy it. Where his body showed through it (between the legs, at the waist) is now magenta. Keep every label and grid line exactly where it is."
+   }
+  },
+  {
+   "id": "wg_worn_petal_cape_only",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_worn_petal_cape_only.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "wg_worn_petal_cape",
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread: art/source/worn/petal_cape.png with the body erased, so the Petal Cape lifts off cleanly where its colours are close to his skin (like the linen tunic test).",
+   "edit": {
+    "base": "art/source/worn/petal_cape.png",
+    "refs": [],
+    "text": "This is my sheet of a bald boy wearing the Petal Cape in 32 labelled poses (8 columns x 4 rows) on magenta. ERASE the boy from every cell: his head, ears, face, neck, arms, hands, legs, feet and his plain dark shorts, and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the Petal Cape. The Petal Cape stays EXACTLY where it is in every cell: the same position, size, shape, colours, outline, shading and detail, pixel for pixel; do not move, redraw, complete or tidy it. Where his body showed through it (between the cape and his back, arms or legs) is now magenta. Keep every label and grid line exactly where it is."
+   }
+  },
+  {
+   "id": "wg_worn_dawnwing_cape_only",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_worn_dawnwing_cape_only.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "wg_worn_dawnwing_cape",
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread: art/source/worn/dawnwing_cape.png with the body erased, so the Dawnwing Cape lifts off cleanly where its colours are close to his skin (like the linen tunic test).",
+   "edit": {
+    "base": "art/source/worn/dawnwing_cape.png",
+    "refs": [],
+    "text": "This is my sheet of a bald boy wearing the Dawnwing Cape in 32 labelled poses (8 columns x 4 rows) on magenta. ERASE the boy from every cell: his head, ears, face, neck, arms, hands, legs, feet and his plain dark shorts, and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the Dawnwing Cape. The Dawnwing Cape stays EXACTLY where it is in every cell: the same position, size, shape, colours, outline, shading and detail, pixel for pixel; do not move, redraw, complete or tidy it. Where his body showed through it (between the cape and his back, arms or legs) is now magenta. Keep every label and grid line exactly where it is."
+   }
+  },
+  {
+   "id": "wg_worn_starlit_cape_only",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_worn_starlit_cape_only.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "wg_worn_starlit_cape",
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread: art/source/worn/starlit_cape.png with the body erased, so the Starlit Cape lifts off cleanly where its colours are close to his skin (like the linen tunic test).",
+   "edit": {
+    "base": "art/source/worn/starlit_cape.png",
+    "refs": [],
+    "text": "This is my sheet of a bald boy wearing the Starlit Cape in 32 labelled poses (8 columns x 4 rows) on magenta. ERASE the boy from every cell: his head, ears, face, neck, arms, hands, legs, feet and his plain dark shorts, and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the Starlit Cape. The Starlit Cape stays EXACTLY where it is in every cell: the same position, size, shape, colours, outline, shading and detail, pixel for pixel; do not move, redraw, complete or tidy it. Where his body showed through it (between the cape and his back, arms or legs) is now magenta. Keep every label and grid line exactly where it is."
+   }
+  },
+  {
+   "id": "wg_worn_clay_clogs_only",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_worn_clay_clogs_only.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "wg_worn_clay_clogs",
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread: art/source/worn/clay_clogs.png with the body erased, so the Clay Clogs lifts off cleanly where its colours are close to his skin (like the linen tunic test).",
+   "edit": {
+    "base": "art/source/worn/clay_clogs.png",
+    "refs": [],
+    "text": "This is my sheet of a bald boy wearing the Clay Clogs in 32 labelled poses (8 columns x 4 rows) on magenta. ERASE the boy from every cell: his head, ears, face, neck, arms, hands, legs, feet and his plain dark shorts, and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the Clay Clogs. The Clay Clogs stays EXACTLY where it is in every cell: the same position, size, shape, colours, outline, shading and detail, pixel for pixel; do not move, redraw, complete or tidy it. Where his body showed through it (an open strap, between the shoe and his leg) is now magenta. Keep every label and grid line exactly where it is."
+   }
   }
  ]
 }

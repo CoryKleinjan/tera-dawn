@@ -8,6 +8,8 @@ colours, lifted off the body and fitted onto the hero's frames as worn_item_<id>
 
 Gloves are painted on his own mitten hands from their icon instead (gloves.painted_hands),
 so they always fit his hands.
+    art/source/worn/<id>_only.png   for a piece in colours close to his skin: the same sheet
+                                    with the body erased, which says where the piece is
     art/sheets/shield_backs.json    the back of each shield (cells named by item id); its
                                     front is its icon
 
@@ -50,6 +52,7 @@ def item_sheet(item):
     man.pop("sets", None)
     man.update(source=os.path.relpath(os.path.join(WORN_DIR, item + ".png"), ROOT), save=False,
                out_dir=os.path.join("art", "build", "worn", item))
+    # (a sheet's _only twin, the same sheet with the body erased, is cut the same way)
     tmp = os.path.join(ROOT, "art", "build", "worn", item + ".json")
     os.makedirs(os.path.dirname(tmp), exist_ok=True)
     with open(tmp, "w") as fh:
@@ -84,10 +87,27 @@ def body_alike(piece, cell):
     return out
 
 
-def piece_mask(piece, cell, place):
-    """The worn piece in a cell of its sheet: what isn't the bare body, without the (bald)
-    head, specks and lone bits of outline. A bottom also takes the body's shorts it is
-    drawn over, so none of the grey shorts shows at its edges."""
+def twin_mask(piece, twin):
+    """Where a cell's piece is, from its _only twin (the item sheet with the body erased): the
+    twin's art, a pixel wider, on the cell's piece (a bool mask its size)."""
+    h, w = piece.img.height, piece.img.width
+    out = np.zeros((h, w), bool)
+    src = ss.dilate(np.asarray(twin.img)[..., 3] > 0, TWIN_SLACK)
+    bx, by = twin.x - piece.x, twin.y - piece.y
+    y0, x0 = max(by, 0), max(bx, 0)
+    y1, x1 = min(by + src.shape[0], h), min(bx + src.shape[1], w)
+    if y1 > y0 and x1 > x0:
+        out[y0:y1, x0:x1] = src[y0 - by:y1 - by, x0 - bx:x1 - bx]
+    return out & (np.asarray(piece.img)[..., 3] > 0)
+
+
+def piece_mask(piece, cell, place, twin=None):
+    """The worn piece in a cell of its sheet: where its _only twin has it (twin_mask), or else
+    what isn't the bare body, without the (bald) head, specks and lone bits of outline. A
+    bottom also takes the body's shorts it is drawn over, so none of the grey shorts shows at
+    its edges."""
+    if twin is not None:
+        return twin_mask(piece, twin)
     arr = np.asarray(piece.img)
     mask = (arr[..., 3] > 0) & ~body_alike(piece, cell)
     if place == "bottom":
@@ -108,7 +128,7 @@ def piece_mask(piece, cell, place):
     return ~ss.dilate(~ss.dilate(mask, 1), 1) | mask
 
 
-def posed_item(piece, cell, px, place):
+def posed_item(piece, cell, px, place, twin=None):
     """One pose of an item sheet, lifted off the body in its own colours and fitted onto the
     hero's frame. Returns (image, top-left), or None if nothing was found."""
     arr = np.asarray(piece.img)
@@ -118,7 +138,7 @@ def posed_item(piece, cell, px, place):
     ours = np.nonzero(px[..., 3] > 127)[0]
     base = (ours.max() - ours.min() + 1) / (ys.max() - ys.min() + 1)
     s, x, y = body_fit(arr, np.zeros(arr.shape[:2], bool), px, [base * k for k in (0.92, 0.96, 1.0, 1.04, 1.08)])
-    mask = piece_mask(piece, cell, place) & (arr[..., 3] > 0)
+    mask = piece_mask(piece, cell, place, twin) & (arr[..., 3] > 0)
     if not mask.any():
         return None
     cut = arr.copy()
@@ -160,6 +180,9 @@ def item_layers(hero, rig_frames):
             continue
         place = places[item]
         drawn = {} if place == "gloves" else item_sheet(item)
+        # light pieces (cream, gold, tan) pass for his skin, so they come with a twin sheet
+        # of the piece alone (art/source/worn/<id>_only.png) that says where they are
+        twins = item_sheet(item + "_only") if os.path.exists(os.path.join(WORN_DIR, item + "_only.png")) else {}
         front, behind = [], []
         for n, px, entry in zip(names, frames, rig_frames):
             over, back = blank(), blank()
@@ -168,7 +191,7 @@ def item_layers(hero, rig_frames):
                 if item in patches:
                     over = Image.fromarray(painted_hands(px, hand_points(hero, n, entry), patches[item], r))
             elif cell in drawn:
-                worn = posed_item(drawn[cell], cell, px, place)
+                worn = posed_item(drawn[cell], cell, px, place, twins.get(cell) if twins else None)
                 if worn:
                     _paste(over, worn[0], *worn[1])
                     if place == "cape" and n not in BACK_VIEW:
