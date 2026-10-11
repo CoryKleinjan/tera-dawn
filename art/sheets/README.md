@@ -14,6 +14,17 @@ divider lines between cells and a small white label in each cell's top-left corn
 slicer finds the cells, removes the background and label, shrinks each cell to game scale and
 trims it.
 
+## The painted look (2026-10-11)
+
+The game's art is soft painted art, like the NPCs and floating platforms; no pixel art. The
+buildings, rooms, backdrops, area tilesets, ropes/props, climb tops and ground textures were
+pixel art until then and were repainted as Gemini edits of the same sheets (`paint_*` entries in
+`tools/art/gemini_pass.json`), so every cell, `art_px` and manifest stayed as it was. `art_px`
+now only sets the cut size. Gemini tinted some backgrounds (grey, pink) and redrew the cell
+dividers a few pixels off; those sheets were set back to flat magenta and their original
+dividers before cutting, and the slicer drops thin stray divider bits. The room walls were
+cross-faded again so they repeat sideways (their `grid` width is the repeat).
+
 ## Adding a sheet
 
 1. Save it as `art/source/<name>.png`.
