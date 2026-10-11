@@ -1,17 +1,17 @@
 {
   "source": "art/source/building_lumewood_large.png",
-  "art_px": 3.468,
+  "art_px": 3.505,
   "out_dir": "assets/sprites/buildings/lumewood",
   "label_band": 0,
   "inset": 0,
   "grid": {
     "rows": [
       0,
-      1188
+      1378
     ],
     "cols": [
       0,
-      639
+      741
     ]
   },
   "cells": [
