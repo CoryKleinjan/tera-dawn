@@ -451,24 +451,40 @@ func in_view(p: Vector2, z := 0.0) -> bool:
 ## World height (3D y) at depth z that appears `frac` of the way down the screen
 ## when the camera is in the middle of its vertical range.
 func screen_height(frac: float, z: float) -> float:
-	var view := TDWorld.world_view()
-	var cam_mid := (float(world.map.height) - view.y) / 2.0
-	var target_y := -(cam_mid + view.y / 2.0) / PX
-	var pitch := deg_to_rad(PITCH)
-	var cam_y := target_y + sin(pitch) * dist
-	var cam_z := cos(pitch) * dist
-	var rel := atan((0.5 - frac) * 2.0 * tan(deg_to_rad(FOV / 2.0)))
-	return cam_y + tan(rel - pitch) * (cam_z - z)
+	return screen_height_at(frac, z, _mid_center())
 
 ## The inverse of screen_height: how far down the screen (0 top, 1 bottom) world height `h`
 ## at depth z appears when the camera is in the middle of its vertical range.
 func screen_frac(h: float, z: float) -> float:
-	var view := TDWorld.world_view()
-	var cam_mid := (float(world.map.height) - view.y) / 2.0
-	var target_y := -(cam_mid + view.y / 2.0) / PX
+	return screen_frac_at(h, z, _mid_center())
+
+func _mid_center() -> float:
+	var r := view_center_range(world.map.height)
+	return (r.x + r.y) / 2.0
+
+## The game-y of the middle of the view, highest (x) and lowest (y), as the camera moves
+## over a map `map_height` tall.
+static func view_center_range(map_height: float) -> Vector2:
+	var half := TDWorld.world_view().y / 2.0
+	return Vector2(half, maxf(half, map_height - half))
+
+## World height (3D y) at depth z that appears `frac` of the way down the screen while the
+## middle of the view is at game-y `center`.
+static func screen_height_at(frac: float, z: float, center: float) -> float:
 	var pitch := deg_to_rad(PITCH)
-	var cam_y := target_y + sin(pitch) * dist
-	var cam_z := cos(pitch) * dist
+	var dist_ := view_distance()
+	var cam_y := -center / PX + sin(pitch) * dist_
+	var cam_z := cos(pitch) * dist_
+	var rel := atan((0.5 - frac) * 2.0 * tan(deg_to_rad(FOV / 2.0)))
+	return cam_y + tan(rel - pitch) * (cam_z - z)
+
+## How far down the screen (0 top, 1 bottom) world height `h` at depth z appears while the
+## middle of the view is at game-y `center`.
+static func screen_frac_at(h: float, z: float, center: float) -> float:
+	var pitch := deg_to_rad(PITCH)
+	var dist_ := view_distance()
+	var cam_y := -center / PX + sin(pitch) * dist_
+	var cam_z := cos(pitch) * dist_
 	var rel := atan((h - cam_y) / (cam_z - z)) + pitch
 	return 0.5 - tan(rel) / (2.0 * tan(deg_to_rad(FOV / 2.0)))
 
