@@ -7950,6 +7950,27 @@
     "base": "art/source/mon_tide_slime.png",
     "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
    }
+  },
+  {
+   "id": "paint_effects",
+   "prompts": null,
+   "batch": "painted leftovers: effects (edit)",
+   "with": null,
+   "refs": [],
+   "save": "effects_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
+   "edit": {
+    "base": "art/source/effects.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). These are glowing game effects: keep them bright, soft and luminous, with the same glow, sparkles and transparency feel, painted with smooth light instead of pixels. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
   }
  ]
 }
