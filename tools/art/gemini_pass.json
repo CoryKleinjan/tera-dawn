@@ -9115,6 +9115,150 @@
     "base": "/mnt/project-files/art-sheets/gemini-pass-1/_bases/runarms_1.png",
     "text": "The image is 4 labelled close-up panels of my chibi boy hero running to the right: 9 RUN 1, 10 RUN 2 (top row), 11 RUN 3, 12 RUN 4 (bottom row). Redraw ONLY his two arms and hands so they swing as he runs, opposite to his legs:\n- In 9 RUN 1 and 10 RUN 2: the FRONT arm (the arm nearer to us, drawn over his body) swings BACK: elbow a little bent, its hand down and behind him near his hip on the LEFT side of his body (behind his back). The FAR arm swings FORWARD: its hand ahead of his chest on the right, partly hidden behind his body.\n- In 11 RUN 3 and 12 RUN 4: the FRONT arm swings FORWARD: elbow bent, its hand forward at chest height on the right side, like it is now. The FAR arm swings BACK: its hand behind him on the left, partly hidden behind his body.\n- The far arm is the SAME peach skin colour as the rest of him, only a little darker, like skin in soft shade. Not brown, not tan, not orange.\n- Draw all hands as MapleStory-style mitten hands: each hand is ONE simple rounded shape, like a mitten or a little round fist, with NO separate fingers, NO finger lines, NO knuckle lines and NO separate thumb. Just a smooth soft rounded hand in the same peach skin colours with a little soft shading and the same dark plum-brown outline.\nChange NOTHING else: his head, face, ears, body, shorts, legs and feet stay EXACTLY as they are, at the same place and size, the labels and panel borders stay, and the background stays flat pure magenta #FF00FF everywhere."
    }
+  },
+  {
+   "id": "paperdoll_mitten_b1",
+   "prompts": null,
+   "batch": "mitten hands retry 1 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_mitten_b1.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread: retry of the mitten close-up for run 1-4 (the first try drew big boxing gloves), with idle 1-4 before/after (mitten_1) as the example; tools/art/body_panels.py hands pastes back only what changed.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/_bases/mittenb_1.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/gemini-pass-1/_bases/mitten_1.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/paperdoll_mitten_1.png"
+    ],
+    "text": "The first image is 4 labelled close-up panels of my chibi boy hero (bald, peach skin, grey shorts) in different poses.\nThe second and third images are an EXAMPLE of the change I want: the second is 4 panels BEFORE, the third the same panels AFTER. Look at how his hands changed: the fists with drawn fingers and knuckles became small, simple, rounded hands with NO fingers drawn, like a chibi MapleStory character: one smooth rounded shape per hand, the SAME size as the old fist, bare peach skin.\nMake exactly that change to BOTH hands in EVERY panel of the first image:\n- Each hand is one small smooth rounded shape with no finger lines, no knuckle lines and no separate thumb.\n- It is bare skin: the same peach skin colours as his arm, with the same dark plum-brown outline. NOT a boxing glove, NOT a mitten glove: no cuff, no wrist band, no seam, no pink or white colour, and never bigger than the old fist.\n- Each hand stays at the same place and joined to the same wrist and arm.\nChange NOTHING else: the head, ears, arms, body, shorts, legs, feet, labels, panel borders and positions stay exactly as they are, and the background stays flat pure magenta #FF00FF (RGB 255, 0, 255) everywhere, never white or grey."
+   }
+  },
+  {
+   "id": "paperdoll_mitten_b2",
+   "prompts": null,
+   "batch": "mitten hands retry 2 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_mitten_b2.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread: retry of the mitten close-up for walk 1-4 (the first try drew big boxing gloves), with idle 1-4 before/after (mitten_1) as the example; tools/art/body_panels.py hands pastes back only what changed.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/_bases/mittenb_2.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/gemini-pass-1/_bases/mitten_1.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/paperdoll_mitten_1.png"
+    ],
+    "text": "The first image is 4 labelled close-up panels of my chibi boy hero (bald, peach skin, grey shorts) in different poses.\nThe second and third images are an EXAMPLE of the change I want: the second is 4 panels BEFORE, the third the same panels AFTER. Look at how his hands changed: the fists with drawn fingers and knuckles became small, simple, rounded hands with NO fingers drawn, like a chibi MapleStory character: one smooth rounded shape per hand, the SAME size as the old fist, bare peach skin.\nMake exactly that change to BOTH hands in EVERY panel of the first image:\n- Each hand is one small smooth rounded shape with no finger lines, no knuckle lines and no separate thumb.\n- It is bare skin: the same peach skin colours as his arm, with the same dark plum-brown outline. NOT a boxing glove, NOT a mitten glove: no cuff, no wrist band, no seam, no pink or white colour, and never bigger than the old fist.\n- Each hand stays at the same place and joined to the same wrist and arm.\nChange NOTHING else: the head, ears, arms, body, shorts, legs, feet, labels, panel borders and positions stay exactly as they are, and the background stays flat pure magenta #FF00FF (RGB 255, 0, 255) everywhere, never white or grey."
+   }
+  },
+  {
+   "id": "paperdoll_mitten_b3",
+   "prompts": null,
+   "batch": "mitten hands retry 3 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_mitten_b3.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread: retry of the mitten close-up for attack 1-2, hit, hurt (the first try drew big boxing gloves), with idle 1-4 before/after (mitten_1) as the example; tools/art/body_panels.py hands pastes back only what changed.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/_bases/mittenb_3.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/gemini-pass-1/_bases/mitten_1.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/paperdoll_mitten_1.png"
+    ],
+    "text": "The first image is 4 labelled close-up panels of my chibi boy hero (bald, peach skin, grey shorts) in different poses.\nThe second and third images are an EXAMPLE of the change I want: the second is 4 panels BEFORE, the third the same panels AFTER. Look at how his hands changed: the fists with drawn fingers and knuckles became small, simple, rounded hands with NO fingers drawn, like a chibi MapleStory character: one smooth rounded shape per hand, the SAME size as the old fist, bare peach skin.\nMake exactly that change to BOTH hands in EVERY panel of the first image:\n- Each hand is one small smooth rounded shape with no finger lines, no knuckle lines and no separate thumb.\n- It is bare skin: the same peach skin colours as his arm, with the same dark plum-brown outline. NOT a boxing glove, NOT a mitten glove: no cuff, no wrist band, no seam, no pink or white colour, and never bigger than the old fist.\n- Each hand stays at the same place and joined to the same wrist and arm.\nChange NOTHING else: the head, ears, arms, body, shorts, legs, feet, labels, panel borders and positions stay exactly as they are, and the background stays flat pure magenta #FF00FF (RGB 255, 0, 255) everywhere, never white or grey."
+   }
+  },
+  {
+   "id": "paperdoll_mitten_b4",
+   "prompts": null,
+   "batch": "mitten hands retry 4 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_mitten_b4.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread: retry of the mitten close-up for jump, fall, land, crouch (the first try drew big boxing gloves), with idle 1-4 before/after (mitten_1) as the example; tools/art/body_panels.py hands pastes back only what changed.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/_bases/mittenb_4.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/gemini-pass-1/_bases/mitten_1.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/paperdoll_mitten_1.png"
+    ],
+    "text": "The first image is 4 labelled close-up panels of my chibi boy hero (bald, peach skin, grey shorts) in different poses.\nThe second and third images are an EXAMPLE of the change I want: the second is 4 panels BEFORE, the third the same panels AFTER. Look at how his hands changed: the fists with drawn fingers and knuckles became small, simple, rounded hands with NO fingers drawn, like a chibi MapleStory character: one smooth rounded shape per hand, the SAME size as the old fist, bare peach skin.\nMake exactly that change to BOTH hands in EVERY panel of the first image:\n- Each hand is one small smooth rounded shape with no finger lines, no knuckle lines and no separate thumb.\n- It is bare skin: the same peach skin colours as his arm, with the same dark plum-brown outline. NOT a boxing glove, NOT a mitten glove: no cuff, no wrist band, no seam, no pink or white colour, and never bigger than the old fist.\n- Each hand stays at the same place and joined to the same wrist and arm.\nChange NOTHING else: the head, ears, arms, body, shorts, legs, feet, labels, panel borders and positions stay exactly as they are, and the background stays flat pure magenta #FF00FF (RGB 255, 0, 255) everywhere, never white or grey."
+   }
+  },
+  {
+   "id": "paperdoll_mitten_b5",
+   "prompts": null,
+   "batch": "mitten hands retry 5 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_mitten_b5.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread: retry of the mitten close-up for climb idle, dawn slash 1-3 (the first try drew big boxing gloves), with idle 1-4 before/after (mitten_1) as the example; tools/art/body_panels.py hands pastes back only what changed.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/_bases/mittenb_5.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/gemini-pass-1/_bases/mitten_1.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/paperdoll_mitten_1.png"
+    ],
+    "text": "The first image is 4 labelled close-up panels of my chibi boy hero (bald, peach skin, grey shorts) in different poses.\nThe second and third images are an EXAMPLE of the change I want: the second is 4 panels BEFORE, the third the same panels AFTER. Look at how his hands changed: the fists with drawn fingers and knuckles became small, simple, rounded hands with NO fingers drawn, like a chibi MapleStory character: one smooth rounded shape per hand, the SAME size as the old fist, bare peach skin.\nMake exactly that change to BOTH hands in EVERY panel of the first image:\n- Each hand is one small smooth rounded shape with no finger lines, no knuckle lines and no separate thumb.\n- It is bare skin: the same peach skin colours as his arm, with the same dark plum-brown outline. NOT a boxing glove, NOT a mitten glove: no cuff, no wrist band, no seam, no pink or white colour, and never bigger than the old fist.\n- Each hand stays at the same place and joined to the same wrist and arm.\nChange NOTHING else: the head, ears, arms, body, shorts, legs, feet, labels, panel borders and positions stay exactly as they are, and the background stays flat pure magenta #FF00FF (RGB 255, 0, 255) everywhere, never white or grey."
+   }
+  },
+  {
+   "id": "paperdoll_mitten_b6",
+   "prompts": null,
+   "batch": "mitten hands retry 6 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_mitten_b6.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread: retry of the mitten close-up for faint 1-2, level up, sit (the first try drew big boxing gloves), with idle 1-4 before/after (mitten_1) as the example; tools/art/body_panels.py hands pastes back only what changed.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/_bases/mittenb_6.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/gemini-pass-1/_bases/mitten_1.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/paperdoll_mitten_1.png"
+    ],
+    "text": "The first image is 4 labelled close-up panels of my chibi boy hero (bald, peach skin, grey shorts) in different poses.\nThe second and third images are an EXAMPLE of the change I want: the second is 4 panels BEFORE, the third the same panels AFTER. Look at how his hands changed: the fists with drawn fingers and knuckles became small, simple, rounded hands with NO fingers drawn, like a chibi MapleStory character: one smooth rounded shape per hand, the SAME size as the old fist, bare peach skin.\nMake exactly that change to BOTH hands in EVERY panel of the first image:\n- Each hand is one small smooth rounded shape with no finger lines, no knuckle lines and no separate thumb.\n- It is bare skin: the same peach skin colours as his arm, with the same dark plum-brown outline. NOT a boxing glove, NOT a mitten glove: no cuff, no wrist band, no seam, no pink or white colour, and never bigger than the old fist.\n- Each hand stays at the same place and joined to the same wrist and arm.\nChange NOTHING else: the head, ears, arms, body, shorts, legs, feet, labels, panel borders and positions stay exactly as they are, and the background stays flat pure magenta #FF00FF (RGB 255, 0, 255) everywhere, never white or grey."
+   }
   }
  ]
 }

@@ -88,8 +88,7 @@ def _edited_cells(cells, paths):
 
 def _components(mask):
     """Labels of the 8-connected patches of `mask`, and their sizes."""
-    from scipy import ndimage
-    labels, n = ndimage.label(mask, np.ones((3, 3)))
+    labels, n = ss.label(mask)
     return labels, np.bincount(labels.ravel(), minlength=n + 1)
 
 
