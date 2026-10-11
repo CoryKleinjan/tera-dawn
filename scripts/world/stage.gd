@@ -48,6 +48,9 @@ const SCENERY_LAYER := 0.9
 ## Land: platform front skins sit at LAND_FRONT; decoration and props are clamped behind it.
 ## (The grass on the floor's front edge is nearer, but it shows below everyone's feet.)
 const LAND_FRONT := 0.14
+## Portals stand in front of all the land and scenery (so nothing hides the way out) but behind
+## everything you can touch: ropes, NPCs, monsters, drops and the player.
+const Z_PORTAL := 0.17
 const Z_CLIMBABLE := 0.2
 const Z_NPC := 0.3
 ## Monsters spread over [Z_MONSTER, Z_MONSTER + Z_MONSTER_SPREAD) so overlapping ones don't flicker.
