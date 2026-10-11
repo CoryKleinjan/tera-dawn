@@ -189,6 +189,9 @@ after the item ids, replacing the placeholders from `tools/art/make_item_placeho
   in each frame are placed by hand in `paperdoll_rig.json` (in 128 px frames; the tool scales them to the strip), with how each
   weapon kind is held ("holds") and which frames hold it behind him (`weapon_behind`). Run it after re-cutting the body.
   `--preview` writes `art/build/paperdoll_preview.png`: every frame with each weapon kind in his hand.
+  The body's weapon hands grip a handle with the thumb by the blade: they were repainted by Gemini
+  from guide rods along the rig's sword angles (`tools/art/grip_guide.py`, which also copies redrawn
+  cells such as the run cycle onto the body sheet). After moving a weapon hand in the rig, redo them the same way.
 - **Held weapons** (`held_*`, art prompts part 8 W2-W6): one weapon per cell, named by item id, pointing right with a green
   grip dot. `paperdoll_layers.py` puts each in his hand on every frame (`weapon_item_<id>`), in its own colours.
   `hero_main` (the painted hero) now cuts into `art/build/` for reference.
