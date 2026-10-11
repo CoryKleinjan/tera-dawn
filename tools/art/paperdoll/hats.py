@@ -3,7 +3,7 @@ the hat sheet's bald head."""
 import glob
 
 from .common import *  # noqa: F401,F403
-from .pieces import pose, save_piece
+from .pieces import PIECES, draw_piece, load_piece, pose, save_piece
 
 
 # ---------- hats ----------
@@ -76,6 +76,57 @@ def open_visor(img):
     return Image.fromarray(arr)
 
 
+def eye_band(img, at, ref_r):
+    """A closed helm's eye opening from the side: (middle x, middle y, width) in picture pixels
+    of the rows around its widest opening below the crown, or None for a helm open at the face
+    (an opening wider than HELM_OPEN head radii) or with none (under 0.3 head radii)."""
+    solid = np.asarray(img)[..., 3] > 0
+    best = {}
+    for y in range(max(int(at[1] - 0.5 * ref_r), 0), min(int(at[1] + 0.7 * ref_r), solid.shape[0])):  # (brow to cheeks)
+        xs = np.nonzero(solid[y])[0]
+        if len(xs) < 2:
+            continue
+        gap = ~solid[y, xs.min():xs.max() + 1]
+        run, start, top = 0, 0, (0, 0)
+        for i, v in enumerate(gap):
+            run = run + 1 if v else 0
+            if run > top[0]:
+                top = (run, xs.min() + i - run + 1)
+        if top[0]:
+            best[y] = top
+    if not best:
+        return None
+    widest = max(w for w, _ in best.values())
+    if widest > HELM_OPEN * ref_r or widest < 0.3 * ref_r:
+        return None
+    rows = [y for y, (w, _) in best.items() if w >= widest * HELM_BAND]
+    mid = float(np.mean([best[y][1] + best[y][0] / 2.0 for y in rows]))
+    return mid, float(np.mean(rows)), float(widest)
+
+
+def eyes_in_holes(views):
+    """A closed helm placed and sized so his eyes sit in its eye holes (Cory 2026-10-11: the
+    eyes must line up with the eye holes): its opening as wide as his eyes (HELM_EYES, head
+    radii, within HELM_SIZE of the sheet's size) and centred on them; the holes are the ones
+    painted, before open_visor cuts the inside away. The view from behind is sized and lifted
+    the same."""
+    img, at, ref_r = views["side"]
+    band = eye_band(img, at, ref_r)
+    if band is None:
+        return views
+    x, y, w = band
+    lo, hi = HELM_SIZE
+    r = min(max(w / HELM_EYES[2], ref_r / hi), ref_r / lo)  # the head radius the hole fits
+    new_at = np.array([x, y]) - np.array(HELM_EYES[:2]) * r
+    out = {"side": (img, new_at, r)}
+    if "behind" in views:
+        bimg, bat, bref = views["behind"]
+        k = r / ref_r
+        lift = (new_at[1] - at[1]) / r  # head radii the side view moved
+        out["behind"] = (bimg, np.asarray(bat, float) + (0.0, lift * bref * k), bref * k)
+    return out
+
+
 def bald_head(piece):
     """The bald head of the hat sheet's hatless cell: (centre, radius) in cell pixels. Its top
     is the topmost pixel; its chin the narrowest row of the neck below the widest row."""
@@ -118,6 +169,7 @@ def item_hat_layers(hero):
                 item = key[:-5]
                 views = fitted(hat_views(sheet, only, item), shapes.get(item))
                 if shapes.get(item) == "helm":
+                    views = eyes_in_holes(views)
                     views = {v: (open_visor(img), at, ref_r) for v, (img, at, ref_r) in views.items()}
                 put_hat(hero, f"hat_item_{item}", views, tinted=False, shape=shapes.get(item))
 
@@ -177,3 +229,50 @@ def put_hat(hero, name, views, tinted, shape=None):
         view = "behind" if n in BACK_VIEW else "side"
         frames.append(pose(view, fi["head"], fi["tilt"], fi["r"] / r_mid))
     save_piece(name, pictures, frames, tinted)
+    save_hair_cut(hero, name)
+
+
+def save_hair_cut(hero, name):
+    """haircut_<name>.png: per body frame, white where his hair is hidden under the hat (the
+    game cuts those pixels out of the hair layer): above the hat's lower edge, across the hat
+    and HAIR_CUT_SIDE head radii past its sides, so no hair pokes out of its top or sides; hair
+    below its lower edge still shows (Cory 2026-10-11). The lower edge of a column is the bottom
+    of the hat's first stretch of pixels going down, so an opening (a helm's face) or a drape
+    hanging below a gap doesn't count; off his head (HAIR_CUT_HEAD head radii from its middle)
+    it is the deepest edge of the hat within HAIR_CUT_REACH, so a crest sticking out over his
+    hair still hides it. Hair hanging below HAIR_CUT_LOW head radii under the head's middle
+    always shows (long hair down his back past a bandana's tails). The piece's JSON names the strip ("hair_cut")."""
+    p = load_piece(name)
+    fw, fh = hero.fw, hero.fh
+    strip = np.zeros((fh, fw * len(p["frames"]), 4), np.uint8)
+    for i, fi in enumerate(hero.info):
+        canvas = Image.new("RGBA", (fw, fh))
+        draw_piece(canvas, p, i, False)
+        draw_piece(canvas, p, i, True)
+        solid = np.asarray(canvas)[..., 3] > HAIR_CUT_ALPHA
+        cols = np.nonzero(solid.any(0))[0]
+        if not len(cols):
+            continue
+        edge = np.full(fw, -1)
+        for x in cols:
+            ys = np.nonzero(solid[:, x])[0]
+            gaps = np.nonzero(np.diff(ys) > 1)[0]
+            edge[x] = ys[gaps[0]] if len(gaps) else ys[-1]
+        side, reach = int(round(HAIR_CUT_SIDE * fi["r"])), int(round(HAIR_CUT_REACH * fi["r"]))
+        hx = fi["head"][0]
+        for x in range(max(cols.min() - side, 0), min(cols.max() + side + 1, fw)):
+            if abs(x - hx) <= fi["r"] * HAIR_CUT_HEAD and edge[x] >= 0:
+                e = edge[x]
+            else:  # off his head (or a gap): the deepest edge of the hat columns nearby, so a crest
+                # or brim sticking out past his head doesn't let the hair under it show
+                near = cols[np.abs(cols - x) <= reach]
+                e = edge[near].max() if len(near) else edge[cols[np.argmin(np.abs(cols - x))]]
+            e = min(e, int(fi["head"][1] + HAIR_CUT_LOW * fi["r"]))  # (hair hanging lower always shows)
+            strip[:e + 1, i * fw + x] = 255
+    Image.fromarray(strip, "RGBA").save(os.path.join(PIECES, f"haircut_{name}.png"))
+    path = os.path.join(PIECES, name + ".json")
+    with open(path) as f:
+        data = json.load(f)
+    data["hair_cut"] = "res://" + os.path.relpath(os.path.join(PIECES, f"haircut_{name}.png"), ROOT)
+    with open(path, "w") as f:
+        json.dump(data, f, separators=(",", ":"))

@@ -305,6 +305,16 @@ func test_hats_are_a_piece_over_his_hair() -> void:
 	var hair := Content.looks_of(LookDef.Kind.HAIR)[0]
 	check(d.layers.find(_layer(d, hair.hat_frames)) < d.layers.find(hat), "over the hair left under it")
 
+func test_hair_under_a_hat_is_cut_where_the_hat_hides_it() -> void:
+	# so none pokes out of the hat's top or sides (Cory 2026-10-11)
+	var hair := Content.looks_of(LookDef.Kind.HAIR)[0]
+	for id in ["iron_helm", "viper_bandana"]:
+		var d := _dress_bare(Appearance.new(), {"hat": id})
+		var under := _layer(d, hair.hat_frames)
+		check(under != null and under.hair_cut != null, "%s: the hair under it is cut" % id)
+	var bare := Paperdoll.dress(_look(Appearance.new()))
+	check(_layer(bare, hair.frames).hair_cut == null, "without a hat the hair is whole")
+
 func test_a_hat_sits_on_his_head() -> void:
 	var cap := Paperdoll.hat_piece(Content.item(&"leaf_cap") as EquipDef)
 	for anim in [&"idle", &"rope"]:

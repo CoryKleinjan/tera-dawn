@@ -11,5 +11,5 @@ uniform bool gear = false;
 void fragment() {
 	vec4 c = texture(TEXTURE, UV);
 	c.rgb = gear ? gear_tint(c.rgb, tint.rgb) : c.rgb * tint.rgb;
-	COLOR = c * COLOR * vec4(1.0, 1.0, 1.0, tint.a * fist_cut(UV));
+	COLOR = c * COLOR * vec4(1.0, 1.0, 1.0, tint.a * fist_cut(UV) * hair_cut_at(UV));
 }

@@ -16,7 +16,8 @@ extends RefCounted
 ## a weapon, a shield and a hat keep their shape, so each is a Piece: one picture per view that
 ## goes in his fist, on his arm or on his head on every frame, where the rig says, with his
 ## fingers drawn over a weapon's grip (fist masks); a weapon kind is held its own way (a bow
-## upright, a staff planted). The hair under a hat is the hairstyle's own _hat layer.
+## upright, a staff planted). The hair under a hat is the hairstyle's own _hat layer, cut where the hat
+## hides it (Piece.hair_cut) so none pokes out of its top or sides.
 
 ## The parts of the body, as hero_regions.png numbers them. Hair, eyes, cape, weapon, shield
 ## and gloves are layers now, so only skin, top, bottom and shoes are on the map.
@@ -78,6 +79,8 @@ class Layer:
 	var behind := false
 	var tint := Color.WHITE
 	var gear := false
+	## Hair under a hat: the hat's hair cut strip (Piece.hair_cut), or null.
+	var hair_cut: Texture2D
 
 	func _init(f: SpriteFrames, back: bool, t := Color.WHITE, g := false) -> void:
 		frames = f
@@ -89,6 +92,9 @@ class Layer:
 	func apply(mat: ShaderMaterial) -> void:
 		mat.set_shader_parameter(&"tint", tint)
 		mat.set_shader_parameter(&"gear", gear)
+		mat.set_shader_parameter(&"has_hair_cut", hair_cut != null)
+		if hair_cut:
+			mat.set_shader_parameter(&"hair_cut", hair_cut)
 		mat.set_shader_parameter(&"has_fist", piece != null and piece.fist != null)
 		if piece and piece.fist:
 			mat.set_shader_parameter(&"fist", piece.fist)
@@ -122,6 +128,8 @@ class Piece:
 	var tinted := false
 	## The fist mask strip cutting his fingers out over its grip (fist_<kind>.png), or null.
 	var fist: Texture2D
+	## A hat's strip of where his hair is hidden under it (haircut_<name>.png), or null.
+	var hair_cut: Texture2D
 
 	static var _cache := {}
 
@@ -144,6 +152,8 @@ class Piece:
 					"angle": deg_to_rad(e["angle"]), "scale": float(e["scale"]), "behind": e["behind"], "fist": e["fist"]})
 			if data.get("fist") is String and ResourceLoader.exists(PIECE_DIR + "fist_" + data["fist"] + ".png"):
 				p.fist = load(PIECE_DIR + "fist_" + data["fist"] + ".png")
+			if data.get("hair_cut") is String and ResourceLoader.exists(data["hair_cut"]):
+				p.hair_cut = load(data["hair_cut"])
 		_cache[id] = p
 		return p
 
@@ -261,8 +271,14 @@ static func dress(look: Dictionary) -> Paperdoll:
 	if face:
 		d._add(face.frames, false)
 		d._add(face.detail_frames, false, _look_color(a.part(LookDef.Kind.EYES), Region.EYES))
+	var hat: EquipDef = gear.get(&"hat")
+	var own_hat := Piece.named("hat_item_" + String(hat.id)) if hat else null
+	var hat_on: Piece = own_hat if own_hat or hat == null or hat.worn_frames else hat_piece(hat)
 	if hair:
-		d._add(hair.hat_frames if gear.has(&"hat") and hair.hat_frames else hair.frames, false, hair_tone)
+		var before := d.layers.size()
+		d._add(hair.hat_frames if hat and hair.hat_frames else hair.frames, false, hair_tone)
+		if hat_on and d.layers.size() > before:  # none of it pokes out of the hat's top or sides
+			d.layers[-1].hair_cut = hat_on.hair_cut
 	var shield: EquipDef = gear.get(&"shield")
 	if shield:
 		var own_shield := Piece.named("shield_item_" + String(shield.id))
@@ -272,15 +288,13 @@ static func dress(look: Dictionary) -> Paperdoll:
 			d._add(shield.worn_frames, false)
 		else:
 			d._add(SHIELDS.get(shield.look_shape, SHIELD), false, shield.worn_color(), true)
-	var hat: EquipDef = gear.get(&"hat")
 	if hat:
-		var own_hat := Piece.named("hat_item_" + String(hat.id))
 		if own_hat:
 			d._add_piece(own_hat)
 		elif hat.worn_frames:
 			d._add(hat.worn_frames, false)
 		else:
-			d._add_piece(hat_piece(hat), hat.worn_color())
+			d._add_piece(hat_on, hat.worn_color())
 	if weapon and weapon.worn_frames: # over the hat: a sword raised over his head
 		d._add(weapon.worn_frames, false)
 	elif weapon:

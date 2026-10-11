@@ -22,7 +22,7 @@ void fragment() {
 		c.rgb *= tint.rgb; // as a modulate: straight onto the linear colour
 	}
 	c *= COLOR;
-	ALPHA = c.a * tint.a * fist_cut(UV);
+	ALPHA = c.a * tint.a * fist_cut(UV) * hair_cut_at(UV);
 	ALPHA_SCISSOR_THRESHOLD = 0.5;
 	ALPHA_ANTIALIASING_EDGE = 0.3;
 	ALBEDO = c.rgb;

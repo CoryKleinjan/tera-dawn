@@ -13,8 +13,13 @@ def weapon(piece, s, kind):
     axis): axis is the way its business end points in the picture (degrees clockwise from
     pointing right), 0 for kinds not in AXIAL. Where his fist goes (see grip_point) is
     worked out from the weapon's shape for blades, wands, staffs and guns, since the sheets'
-    dots are often off (on a crossguard, several for two hands, or none)."""
-    arr = np.asarray(piece.img).astype(int)
+    dots are often off (on a crossguard, several for two hands, or none). A gun painted with
+    its barrel slanting is turned level first, like the gun template."""
+    img = piece.img
+    if kind == "gun":
+        img = img.rotate(barrel_tilt(np.asarray(img)), resample=Image.BICUBIC, expand=True)
+        img = img.crop(img.getbbox())
+    arr = np.asarray(img).astype(int)
     green = (arr[..., 1] > 170) & (arr[..., 0] < 120) & (arr[..., 2] < 120) & (arr[..., 3] > 0)
     opaque = arr[..., 3] > 0
     # dots drawn off the weapon (beside it on the background, as some held_* sheets have
@@ -90,6 +95,16 @@ def _on_axis(arr, axis, t):
     m = float(b[near].mean()) if near.any() else float(b.mean())
     c, s = math.cos(math.radians(axis)), math.sin(math.radians(axis))
     return (t * c - m * s, t * s + m * c)
+
+
+def barrel_tilt(arr):
+    """The slant of a gun's barrel (degrees clockwise from pointing right): the line along the
+    top of its front part (BARREL_FRONT of its width, toward the muzzle on the right)."""
+    solid = arr[..., 3] > 0
+    cols = np.nonzero(solid.any(0))[0]
+    xs = np.arange(int(cols.min() + (cols.max() - cols.min()) * (1 - BARREL_FRONT)), cols.max())
+    tops = np.array([np.nonzero(solid[:, x])[0].min() for x in xs])
+    return round(math.degrees(math.atan(np.polyfit(xs, tops, 1)[0])), 1)
 
 
 def grip_point(arr, kind, axis, dots):
@@ -383,13 +398,14 @@ def weapon_layers(hero, weapons, held):
     # (a bow drawn at a slant is stood up first, so it is measured and held as the rig expects)
     drawn_weapons = [(item, kind, stood_up(piece) if kind in UPRIGHT else piece, sheet, size)
                      for item, kind, piece, sheet, size in held_pictures()]
-    # an icon sheet is drawn at its own size: it is shrunk so its weapons are, on the median,
-    # as long as the template of their kind (keeping their sizes against each other)
+    # an icon sheet is drawn at its own size: it is shrunk so each kind of weapon on it is, on
+    # the median, as long as the template of its kind (keeping their sizes against each other;
+    # a sheet draws its wands and staffs at the same icon size, but a staff is far longer)
     by_sheet = {}
     # (and then grown or shrunk by the item's own held_size: a claymore longer than a sword)
     for item, kind, piece, sheet, _ in drawn_weapons:
-        by_sheet.setdefault(sheet, []).append(length(weapons[kind], kind) / length(piece, kind))
-    pictures += [("item_" + item, kind, piece, False, float(np.median(by_sheet[sheet])) * size)
+        by_sheet.setdefault((sheet, kind), []).append(length(weapons[kind], kind) / length(piece, kind))
+    pictures += [("item_" + item, kind, piece, False, float(np.median(by_sheet[sheet, kind])) * size)
                  for item, kind, piece, sheet, size in drawn_weapons]
     for name, kind, piece, tinted, k in pictures:
         img, grip, axis = weapon(piece, s_w * WORN_SIZE.get(kind, 1.0) * k, kind)

@@ -28,7 +28,8 @@ only what the creator offers and makes a level 1 character in the starting job
   `shoes_boots`...) lifted off sheets of the body wearing them; each item names its cut in
   `EquipDef.worn_style`. Hair, irises, capes, shields, gloves and those cuts are greyscale art
   tinted with the hair, eye or item colour (`EquipDef.look_color` or the icon). Under a hat
-  the hair's `_hat` layer leaves the face clear. In the 3D stage the hero and his layers have
+  the hair's `_hat` layer leaves the face clear, and is cut where the hat's `haircut_<hat>.png`
+  strip says, so no hair pokes out of the hat's top or sides (hair below its edge still shows). In the 3D stage the hero and his layers have
   a small light floor (`shaders/character_light.gdshaderinc`), so shade never makes him a
   silhouette. Gear that keeps its shape (a **weapon**, a **shield**, a **hat**) is a
   `Paperdoll.Piece` instead of a strip: one picture per view (held, on his back; a shield's
@@ -39,11 +40,13 @@ only what the creator offers and makes a level 1 character in the starting job
   has his fingers, `shaders/paperdoll_piece.gdshaderinc`), behind him on far-hand frames and
   on his back while he climbs or sits. Each kind is held its own way (a bow upright, a staff
   planted; "holds" in `art/sheets/paperdoll_rig.json`; the sword sways a little through each
-  animation and a claw points along his forearm). Every weapon is its own icon art
+  animation, a claw points along his forearm, and a gun is turned level with its grip in his
+  fist). Every weapon is its own icon art
   (`weapon_item_<id>`); the tinted `weapon_<kind>` pictures are for a weapon with no icon cell.
   A shield's back sits on his far arm behind him with about a third showing, and its face is on
   his back while he climbs (`shield_item_<id>`). Hats are `hat_item_<id>` in their own colours
-  (a closed helm's face opening is cut out so his face shows), or the tinted shape
+  (a closed helm is placed so its eye holes sit over his eyes, and its dark inside is cut out
+  so his face shows), or the tinted shape
   `hat_<shape>` (`EquipDef.look_shape`). Tops, bottoms, shoes, gloves and capes bend with his
   body, so they stay strips: an item with its own art is `worn_item_<id>` (and a cape's
   `_behind`), in its own colours from its icon (`tools/art/paperdoll/items.py`, Gemini sheets

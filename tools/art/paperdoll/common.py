@@ -68,6 +68,16 @@ HAT_GROW = {"bandana": 1.1}
 # (Gemini paints some bandanas' backs wider than others; Cory 2026-10-11: a bit smaller from behind)
 HAT_BACK_WIDTH = {"bandana": 2.45}
 HAT_LINE = 0.1         # a bit of a hat cell's frame line: at most this thick against its length
+# a closed helm's eye holes go over his eyes (hats.eyes_in_holes): his eyes' middle (x, y) and
+# width in head radii from the head centre in a side view, the share of the widest opening's
+# width that counts as the eye band, the widest opening that is an open face instead (head
+# radii), and how much smaller or bigger than the sheet's size the helm may be drawn
+HELM_EYES = (0.18, 0.27, 0.95)
+HELM_BAND, HELM_OPEN, HELM_SIZE = 0.75, 1.15, (0.8, 1.15)
+HAIR_CUT_SIDE = 0.6    # hats.save_hair_cut: hair is hidden this far past a hat's sides (head radii)
+HAIR_CUT_HEAD, HAIR_CUT_REACH = 0.85, 0.5  # ...each column's own edge over his head, nearby edges off it
+HAIR_CUT_LOW = 0.75    # ...and never below this far under the head's middle (head radii)
+HAIR_CUT_ALPHA = 127   # ...against the hat's pixels at least this opaque
 HAT_SIZE = 1.0         # hats drawn this much bigger than his head against the sheet's head
 HAT_SPECK = 0.05  # hat_alone: pieces under this share of the hat are cell-frame bits
 HAT_SHAPES = ("cap", "hood", "bandana", "helm", "wizard", "tricorn")
@@ -107,11 +117,12 @@ SWORD_LENGTH = 1.9    # every weapon is drawn at the scale that makes the sword 
 WEAPON_LENGTH = 20    # rig "tip" is this far from "grip" along the weapon (only its direction matters)
 FIST = 0.4            # the fist around a grip reaches this far from the grip point (head radii)
 FOREARM = 1.1         # forearm_angles: skin this close to the fist (head radii) counts as his forearm
+BARREL_FRONT = 0.55   # weapons.barrel_tilt: the front share of a gun that is its barrel
 CLAW_CUFF = 0.25      # how far along a claw (0 its back end, 1 its tips) the middle of its cuff is
 
 # Weapons worn on the fist are drawn smaller than the template sheet has them, so they fit
 # his hand rather than swallowing it (the rest keep the sheet's size against the sword).
-WORN_SIZE = {"claw": 0.9, "knuckle": 0.75, "bow": 1.35}
+WORN_SIZE = {"claw": 0.9, "knuckle": 0.75, "bow": 1.35, "staff": 1.3}
 # Long weapons whose sheets may draw them at a slant (a sword up and to the right): their own
 # axis is measured and turned out, so a rig angle means the same however the art was drawn.
 # The others are drawn the way the rig expects (a gun pointing right, a bow upright).

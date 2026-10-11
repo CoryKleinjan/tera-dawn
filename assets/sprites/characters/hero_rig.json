@@ -2294,14 +2294,14 @@
   },
   "staff": {
    "grip": [
-    34.2,
-    46.4
+    44.5,
+    60.3
    ],
    "size": [
-    73,
-    89
+    96,
+    116
    ],
-   "reach": 54.0,
+   "reach": 70.8,
    "kind": "staff",
    "grip_share": 0.499,
    "dots_left": 0
@@ -2336,16 +2336,16 @@
   },
   "gun": {
    "grip": [
-    15.2,
-    17.9
+    15.8,
+    17.4
    ],
    "size": [
     73,
-    36
+    35
    ],
-   "reach": 56.8,
+   "reach": 56.2,
    "kind": "gun",
-   "grip_share": 0.211,
+   "grip_share": 0.219,
    "dots_left": 0
   },
   "item_willow_bow": {
@@ -2476,226 +2476,226 @@
   },
   "item_apprentice_wand": {
    "grip": [
-    26.2,
-    26.8
+    25.4,
+    26.0
    ],
    "size": [
-    51,
-    55
+    50,
+    53
    ],
-   "reach": 35.2,
+   "reach": 34.4,
    "kind": "wand",
-   "grip_share": 0.504,
+   "grip_share": 0.499,
    "dots_left": 0
   },
   "item_oak_staff": {
    "grip": [
-    28.9,
-    33.9
+    49.5,
+    57.9
    ],
    "size": [
-    61,
-    64
+    104,
+    110
    ],
-   "reach": 40.5,
+   "reach": 69.7,
    "kind": "staff",
-   "grip_share": 0.498,
+   "grip_share": 0.5,
    "dots_left": 0
   },
   "item_crystal_wand": {
    "grip": [
-    26.8,
-    28.1
+    26.0,
+    27.2
    ],
    "size": [
-    53,
-    56
+    51,
+    54
    ],
-   "reach": 37.0,
+   "reach": 35.6,
    "kind": "wand",
    "grip_share": 0.502,
    "dots_left": 0
   },
   "item_moonstone_wand": {
    "grip": [
-    27.9,
-    30.6
+    27.0,
+    29.6
    ],
    "size": [
-    57,
-    59
+    55,
+    58
    ],
-   "reach": 38.1,
+   "reach": 36.7,
    "kind": "wand",
-   "grip_share": 0.498,
+   "grip_share": 0.503,
    "dots_left": 0
   },
   "item_starfall_staff": {
    "grip": [
-    31.0,
-    31.0
+    53.0,
+    53.0
    ],
    "size": [
-    60,
-    62
+    103,
+    107
    ],
-   "reach": 41.1,
+   "reach": 72.2,
    "kind": "staff",
-   "grip_share": 0.504,
+   "grip_share": 0.502,
    "dots_left": 0
   },
   "item_aurora_wand": {
    "grip": [
-    26.6,
-    27.9
+    25.8,
+    27.1
    ],
    "size": [
-    53,
-    56
+    52,
+    54
    ],
-   "reach": 37.7,
+   "reach": 37.0,
    "kind": "wand",
-   "grip_share": 0.502,
+   "grip_share": 0.497,
    "dots_left": 0
   },
   "item_brass_knuckle": {
    "grip": [
-    6.3,
-    20.7
+    5.5,
+    18.2
    ],
    "size": [
-    42,
-    41
+    37,
+    36
    ],
-   "reach": 34.7,
+   "reach": 30.5,
    "kind": "knuckle",
-   "grip_share": 0.154,
+   "grip_share": 0.153,
    "dots_left": 0
   },
   "item_iron_knuckle": {
    "grip": [
-    6.3,
-    20.7
+    5.6,
+    18.2
    ],
    "size": [
-    42,
-    41
+    37,
+    36
    ],
-   "reach": 34.7,
+   "reach": 30.4,
    "kind": "knuckle",
-   "grip_share": 0.154,
+   "grip_share": 0.156,
    "dots_left": 0
   },
   "item_barnacle_knuckle": {
    "grip": [
-    6.4,
-    22.3
+    5.6,
+    19.6
    ],
    "size": [
-    43,
-    45
+    37,
+    39
    ],
-   "reach": 35.6,
+   "reach": 30.4,
    "kind": "knuckle",
-   "grip_share": 0.152,
+   "grip_share": 0.156,
    "dots_left": 0
   },
   "item_stormbreaker_knuckle": {
    "grip": [
-    6.3,
-    20.7
+    5.6,
+    18.2
    ],
    "size": [
-    42,
-    41
+    37,
+    36
    ],
-   "reach": 34.7,
+   "reach": 30.4,
    "kind": "knuckle",
-   "grip_share": 0.154,
+   "grip_share": 0.156,
    "dots_left": 0
   },
   "item_leviathan_fist": {
    "grip": [
-    6.8,
-    22.3
+    6.0,
+    19.6
    ],
    "size": [
-    46,
-    45
+    40,
+    39
    ],
-   "reach": 38.2,
+   "reach": 33.0,
    "kind": "knuckle",
-   "grip_share": 0.151,
+   "grip_share": 0.154,
    "dots_left": 0
   },
   "item_driftwood_pistol": {
    "grip": [
-    11.1,
-    36.2
+    16.0,
+    29.3
    ],
    "size": [
-    63,
-    60
+    91,
+    49
    ],
-   "reach": 50.9,
+   "reach": 73.0,
    "kind": "gun",
-   "grip_share": 0.179,
+   "grip_share": 0.17,
    "dots_left": 0
   },
   "item_flintlock": {
    "grip": [
-    10.9,
-    35.9
+    14.9,
+    27.5
    ],
    "size": [
-    64,
-    61
+    90,
+    49
    ],
-   "reach": 52.1,
+   "reach": 73.1,
    "kind": "gun",
-   "grip_share": 0.173,
+   "grip_share": 0.16,
    "dots_left": 0
   },
   "item_saltwood_pistol": {
    "grip": [
-    10.9,
-    35.9
+    14.9,
+    28.2
    ],
    "size": [
-    64,
-    60
+    88,
+    49
    ],
-   "reach": 52.1,
+   "reach": 71.1,
    "kind": "gun",
-   "grip_share": 0.173,
+   "grip_share": 0.164,
    "dots_left": 0
   },
   "item_stormcaller": {
    "grip": [
-    9.9,
-    34.0
+    15.6,
+    25.8
    ],
    "size": [
-    64,
-    64
+    93,
+    48
    ],
-   "reach": 53.1,
+   "reach": 75.4,
    "kind": "gun",
-   "grip_share": 0.157,
+   "grip_share": 0.171,
    "dots_left": 0
   },
   "item_leviathan_hand_cannon": {
    "grip": [
-    11.7,
-    35.0
+    14.5,
+    35.9
    ],
    "size": [
-    65,
-    57
+    80,
+    59
    ],
-   "reach": 52.3,
+   "reach": 63.5,
    "kind": "gun",
-   "grip_share": 0.183,
+   "grip_share": 0.186,
    "dots_left": 0
   },
   "item_iron_claw": {

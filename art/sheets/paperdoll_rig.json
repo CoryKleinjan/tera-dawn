@@ -48,6 +48,6 @@
     "knuckle": {"like": "sword"},
     "bow": {"angle": 5, "frames": {"run1": -15, "run2": -15, "run3": -15, "run4": -15, "jump": -20, "fall": 15, "attack1": -25, "attack2": 0, "slash1": -30, "slash2": 0, "slash3": 15, "crouch": 40, "land": 15, "hit": -10, "faint1": 70, "levelup": 0}},
     "staff": {"angle": -75, "frames": {"run1": -120, "run2": -120, "run3": -55, "run4": -55, "jump": -55, "fall": -65, "attack1": -135, "attack2": 5, "slash1": -150, "slash2": 0, "slash3": 35, "crouch": 10, "land": -70, "hit": -80, "faint1": 120, "levelup": -90}, "behind": ["idle1", "idle2", "idle3", "idle4", "blink", "walk1", "walk2", "walk3", "walk4", "jump", "fall", "land", "crouch", "hit", "hurt"]},
-    "gun": {"angle": 50, "frames": {"run1": 120, "run2": 120, "run3": 30, "run4": 35, "jump": 30, "fall": -60, "attack1": -45, "attack2": 0, "slash1": -150, "slash2": -25, "slash3": 30, "crouch": 5, "land": 30, "hit": 70, "hurt": 70, "faint1": 120, "levelup": -90}}
+    "gun": {"_doc": "A gun is held like a pistol: its grip in his fist and its barrel pointing out forward from there (Cory 2026-10-11); a gun painted slanting is turned level first (paperdoll/weapons.py barrel_tilt).", "angle": 50, "frames": {"run1": 120, "run2": 120, "run3": 30, "run4": 35, "jump": 30, "fall": -60, "attack1": -45, "attack2": 0, "slash1": -150, "slash2": -25, "slash3": 30, "crouch": 5, "land": 30, "hit": 70, "hurt": 70, "faint1": 120, "levelup": -90}}
   }
 }
