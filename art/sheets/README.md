@@ -43,6 +43,8 @@ screen (Cory, 2026-10-11: "do this for all assets"). `detail` and `alpha` defaul
 | `background` | `"magenta"` | `"magenta"` (soft chroma key), `"dark"` (flood fill from the cell border) or `[r, g, b]`. |
 | `key` | `[0.35, 0.8]` | Magenta sheets: how magenta a pixel must be to start and finish fading out. Raise it if purple art is eaten. |
 | `dark_key` | `true` | Magenta sheets: dark magenta is background (floor shadows); `false` keeps plum line art. |
+| `light` | `false` | Magenta sheets: the art is light with no outline (a glow, a beam of light). Each pixel is read as light laid over the magenta and the magenta is taken out exactly, so soft halos fade out with no pink fringe. Light seen over magenta reads bluer than it is, so `[r, g, b]` instead of `true` also gives the light that colour (keeping its whiteness). |
+| `trim` | `true` | `false` keeps the whole cell (or `crop`) instead of trimming to the visible pixels, so animation frames cut as separate pictures line up. |
 | `defringe` | `true` | Magenta sheets: take the magenta out of the dark outline pixels at the cut edge. `false` for a cell whose purple art it wrongly trims. |
 | `shadow` | `false` | Dark sheets: also remove the soft drop shadow under the sprite. |
 | `alpha` | `"smooth"` | `"smooth"` keeps each sprite's anti-aliased edge (and feathers the cut a `fix` makes); `"soft"` also keeps the faint glow round it (effects, UI); `"hard"` makes every pixel fully on or off (never for game art). |

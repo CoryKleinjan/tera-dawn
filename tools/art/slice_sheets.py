@@ -51,6 +51,8 @@ DEFAULTS = {
     "inset": 3,               # pixels trimmed off each cell edge (divider anti-aliasing)
     "save": True,             # False: only used by animation sets, not written on its own
     "key": [0.35, 0.8],       # magenta sheets: magenta-ness at which pixels start / stop being background
+    "light": False,           # magenta sheets: the art is light with no outline, keyed out exactly (key_light); [r, g, b] also sets its colour
+    "trim": True,             # False keeps the whole cell (or crop), so separate animation frames line up
     "defringe": True,         # magenta sheets: take the magenta out of the outline pixels at the cut edge
     "dark_key": True,         # magenta sheets: dark magenta is background (floor shadows); False keeps plum line art
     "strip_labels": False,    # paint over white label letters in the label band before cutting
@@ -208,6 +210,29 @@ def key_magenta(cell, bg, lo=0.35, hi=0.8, dark_key=True):
     rgb[..., 0] -= spill * 0.85
     rgb[..., 2] -= spill * 0.85
     return np.clip(rgb, 0, 1), alpha
+
+
+def key_light(cell, bg, floor=0.04, hue=None):
+    """Light painted on magenta (a glow, a beam): every pixel is read as the light laid over
+    pure magenta at some opacity, and the magenta is taken out exactly (colour to alpha), so
+    soft halos fade out with no pink fringe. Only for art with no outline. `floor`: opacity
+    below this is the background's own noise. `hue` [r, g, b]: the light's own colour."""
+    c = cell / 255.0
+    # magenta can only be lightened by green and darkened in red and blue: how far each pixel
+    # moved from it is its light's opacity
+    alpha = np.max(np.stack([1.0 - c[..., 0], c[..., 1], 1.0 - c[..., 2]]), axis=0)
+    alpha = np.clip((alpha - floor) / (1.0 - floor), 0.0, 1.0)
+    m = np.array([1.0, 0.0, 1.0])
+    a = np.maximum(alpha, 1e-3)[..., None]
+    rgb = np.clip((c - (1.0 - a) * m) / a, 0, 1)
+    if hue is not None:
+        # light seen over magenta reads bluer than it is: what is left is greener (teal for a
+        # blue glow). Give every tinted pixel the hue meant, keeping its whiteness and strength.
+        h = np.asarray(hue, float) / 255.0
+        lo = rgb.min(2, keepdims=True)
+        chroma = (rgb - lo).max(2, keepdims=True)
+        rgb = np.clip(lo + chroma * (h - h.min()) / max(np.ptp(h), 1e-3), 0, 1)
+    return rgb, alpha
 
 
 def _shifted(x, dy, dx):
@@ -767,6 +792,8 @@ def cut_cell(rgb_full, bg, box, opts):
         label_px = opts["label_band"] * cell.shape[0] if opts["label_band"] < 1 else opts["label_band"]
     if opts["background"] == "dark":
         rgb, alpha = key_dark(cell, bg, opts["shadow"])
+    elif opts.get("light"):
+        rgb, alpha = key_light(cell, bg, hue=opts["light"] if isinstance(opts["light"], list) else None)
     else:
         rgb, alpha = key_magenta(cell, bg, *opts["key"], dark_key=opts["dark_key"])
         if opts["defringe"]:
@@ -815,6 +842,8 @@ def cut_cell(rgb_full, bg, box, opts):
             a = (a > 0.5).astype(float)
         ys, xs = np.nonzero(a > 0)
         by0, by1, bx0, bx1 = ys.min(), ys.max() + 1, xs.min(), xs.max() + 1
+        if not opts.get("trim", True):  # animation frames: keep the whole cell, so they line up
+            by0, by1, bx0, bx1 = 0, a.shape[0], 0, a.shape[1]
         px = np.zeros((by1 - by0, bx1 - bx0, 4), np.uint8)
         px[..., :3] = (rgb[by0:by1, bx0:bx1] * 255).round().astype(np.uint8)
         px[..., 3] = (a[by0:by1, bx0:bx1] * 255).round().astype(np.uint8)

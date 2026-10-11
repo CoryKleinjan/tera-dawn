@@ -6,6 +6,8 @@ extends RefCounted
 
 ## Warm light standing in a doorway.
 const DOOR_LIGHT := Color("ffc47a")
+## How much nearer a portal's light sorts than where it stands (see _portal).
+const PORTAL_SORT := 50.0
 ## Open ground between two of a town's background houses (`town_decor`), and the least
 ## between one and a building's edge, in game pixels.
 const BACK_HOUSE_GAP := 100.0
@@ -204,10 +206,12 @@ static func building_sprite(b: BuildingPlacement, surface: float) -> Sprite3D:
 	s.modulate = b.tint
 	return s
 
-## A door: a warm light in the doorway (a building's picture has the door itself; in a room
-## the biome's door picture stands on the back wall). Up enters it like any portal.
+## A door: the portal standing in the doorway, so players see they can go in, and a warm
+## light behind it (a building's picture has the door itself; in a room the biome's door
+## picture stands on the back wall). Up enters it like any portal.
 func _door(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
 	var base := Vector2(p.x, pl.y + 3.0)
+	_portal(p, pl, biome)
 	var height := 60.0
 	if biome.door:
 		var s := TDStage.sprite(biome.door)
@@ -240,6 +244,8 @@ func _climbable(c: ClimbableDef, platforms: Array[Platform]) -> void:
 		root.add_child(s)
 		z += 0.001  # each piece just in front of the one above, so the joints don't flicker
 
+## A portal: the biome's animated portal frames standing on the platform, with a light and
+## sparkles rising through it. Doors get one too (see _door).
 func _portal(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
 	var base := Vector2(p.x, pl.y + 4.0)
 	var at := TDStage.to3d(base, TDStage.Z_PORTAL)
@@ -254,14 +260,17 @@ func _portal(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
 		s.alpha_cut = SpriteBase3D.ALPHA_CUT_DISABLED
 		s.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		s.offset = Vector2(0, biome.portal_frames[0].get_height() / 2.0)
-		s.modulate = Color(1.25, 1.2, 1.3)
+		s.modulate = Color(1.2, 1.25, 1.3)
 		s.position = at
+		# light is see-through and writes no depth, so it is drawn in sorted order: sort it as
+		# nearer than any building or scenery (a tall building's middle sorts nearer than its door)
+		s.sorting_offset = PORTAL_SORT
 		s.play(&"default")
 		root.add_child(s)
-	var l := TDStage.light(Color("b49aff"), 3.0, 7.0)
+	var l := TDStage.light(Color("a8ccff"), 3.0, 7.0)
 	l.position = at + Vector3(0, 1.6, 0.8)
 	root.add_child(l)
-	var sparks := TDStage.particles(Color(2.0, 1.6, 3.0), 30, 0.12)
+	var sparks := TDStage.particles(Color(1.8, 2.3, 3.0), 30, 0.12)
 	sparks.lifetime = 2.0
 	sparks.emission_shape = CPUParticles3D.EMISSION_SHAPE_BOX
 	sparks.emission_box_extents = Vector3(0.8, 0.2, 0.3)
@@ -270,6 +279,7 @@ func _portal(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
 	sparks.initial_velocity_max = 0.6
 	sparks.direction = Vector3.UP
 	sparks.position = at + Vector3(0, 0.3, 0.2)
+	sparks.sorting_offset = PORTAL_SORT
 	root.add_child(sparks)
 
 ## The lantern posts, where LanternPlacement put them (worked out in `build`).
