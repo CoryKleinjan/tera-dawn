@@ -30,8 +30,10 @@ scripts/
                       Terrain/Backdrop/Scenery builders, MapLayout, Platform, DropFlight, Combat
   fx/                 Flipbook effects and floating text
   ui/                 HUD, status bar, overlay, quickslots, character creator, game menu,
-                      settings screen, UiSkin, Palette
-  ui/windows/         Every draggable window (all extend TDWindow)
+                      settings screen, modals (TDModal), UiSkin, UiStyle, WorldSkin,
+                      UiBuild, Palette
+  ui/windows/         Every draggable window (all extend TDWindow), SlotGrid, ScrollList,
+                      DragPayload
   ui/widgets/         UI pieces that aren't windows: item tooltip, chat, invites, prompt
 assets/
   sprites/            Cut sprites, one folder per kind (generated, don't hand-edit)

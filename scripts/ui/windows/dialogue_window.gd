@@ -268,7 +268,7 @@ func _lines() -> PackedStringArray:
 	var out := PackedStringArray()
 	var w := size.x - FRAME_X * 2 - (TEXT_LEFT + TEXT_RIGHT) * FRAME_SCALE
 	for paragraph in text.split("\n"):
-		out.append_array(UiSkin.wrap_text(Game.ui_font, paragraph, 13, w))
+		out.append_array(DrawUtil.wrap_text(Game.ui_font, paragraph, 13, w))
 		if paragraph == "":
 			out.append("")
 	return out

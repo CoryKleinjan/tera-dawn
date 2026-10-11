@@ -35,7 +35,7 @@ func test_create_on_character_select_opens_the_creator() -> void:
 func test_name_box_keeps_its_hint_clear_of_the_caret() -> void:
 	await _play("")
 	var f := ui.hud.creator.name_field
-	check(f.placeholder_text.begins_with(UiSkin.HINT_ROOM), "room between the caret and the hint")
+	check(f.placeholder_text.begins_with(UiStyle.HINT_ROOM), "room between the caret and the hint")
 	check_eq(f.alignment, HORIZONTAL_ALIGNMENT_LEFT, "left-aligned: an empty centred box puts its caret on the hint")
 
 func test_every_row_steps_through_its_options_and_the_preview_follows() -> void:

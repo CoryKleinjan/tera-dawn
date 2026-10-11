@@ -105,7 +105,7 @@ func _lines() -> Array:
 	else:
 		out.append(["Etc", Palette.MUTED, 11])
 	if item.description != "":
-		for l in UiSkin.wrap_text(Game.ui_font, item.description, 11, W - 28):
+		for l in DrawUtil.wrap_text(Game.ui_font, item.description, 11, W - 28):
 			out.append([l, Color(Palette.MIST, 0.8), 11])
 	if hint != "":
 		out.append([hint, Color(Palette.SUN, 0.75), 11])

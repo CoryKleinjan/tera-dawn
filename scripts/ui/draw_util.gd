@@ -97,3 +97,18 @@ static func fit_size(font: Font, s: String, size: int, max_w: float, min_size :=
 	while size > min_size and text_width(font, s, size) > max_w:
 		size -= 1
 	return size
+
+## `text` broken into lines at most `max_w` pixels wide, between words.
+static func wrap_text(font: Font, text: String, size: int, max_w: float) -> PackedStringArray:
+	var out := PackedStringArray()
+	var line := ""
+	for word in text.split(" "):
+		var next := word if line == "" else line + " " + word
+		if line != "" and text_width(font, next, size) > max_w:
+			out.append(line)
+			line = word
+		else:
+			line = next
+	if line != "":
+		out.append(line)
+	return out

@@ -54,20 +54,12 @@ func _init() -> void:
 	var card := PanelContainer.new()
 	UiSkin.use_panel(card, UiSkin.ARCH_PANEL, Vector4(30, 40, 30, 40), 0.7)
 	add_child(card)
-	var col := VBoxContainer.new()
-	col.add_theme_constant_override("separation", 8)
+	var col := UiBuild.column(8)
 	card.add_child(col)
 
-	var heading := _label("Settings", 30, Palette.SUN)
-	heading.add_theme_font_override("font", Game.num_font)
-	heading.add_theme_color_override("font_outline_color", Palette.PLUM)
-	heading.add_theme_constant_override("outline_size", 8)
-	heading.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	col.add_child(heading)
+	col.add_child(UiBuild.heading("Settings", 30))
 
-	var tabs_row := HBoxContainer.new()
-	tabs_row.alignment = BoxContainer.ALIGNMENT_CENTER
-	tabs_row.add_theme_constant_override("separation", 8)
+	var tabs_row := UiBuild.centered_row([], 8)
 	col.add_child(tabs_row)
 	var group := ButtonGroup.new()
 	var page_list := [["Controls", _build_controls(), Settings.keybinds, "menu/icon_controls"], ["Audio", _build_audio(), Settings.audio, "menu/icon_audio"],
@@ -79,7 +71,7 @@ func _init() -> void:
 		b.text = page[0]
 		b.custom_minimum_size = Vector2(140, 38)
 		b.add_theme_font_size_override("font_size", 16)
-		UiSkin.style_tab(b, page[3])
+		UiStyle.style_tab(b, page[3])
 		b.toggle_mode = true
 		b.button_group = group
 		var i := tab_buttons.size()
@@ -92,24 +84,20 @@ func _init() -> void:
 		pages.append(p)
 		page_sections.append(page[2])
 
-	note = _label("", 12, Palette.MUTED)
+	note = UiBuild.label("", 12, Palette.MUTED)
 	note.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	col.add_child(note)
-	var bottom := HBoxContainer.new()
-	bottom.alignment = BoxContainer.ALIGNMENT_CENTER
-	bottom.add_theme_constant_override("separation", 12)
-	col.add_child(bottom)
-	reset_button = UiSkin.menu_button("Reset to defaults", Vector2(220, 42), 18)
+	reset_button = UiBuild.button("Reset to defaults", _reset_tab, Vector2(220, 42), 18)
 	reset_button.icon = UiSkin.sized("menu/icon_reset", 20)
-	reset_button.pressed.connect(func() -> void:
-		_stop_listening()
-		Settings.reset(page_sections[tab])
-		refresh())
-	bottom.add_child(reset_button)
-	back_button = UiSkin.menu_button("Back", Vector2(150, 42), 18)
-	back_button.pressed.connect(close)
-	bottom.add_child(back_button)
+	back_button = UiBuild.button("Back", close, Vector2(150, 42), 18)
+	col.add_child(UiBuild.centered_row([reset_button, back_button]))
 	show_tab(0)
+
+## Puts the open tab's settings back to their defaults.
+func _reset_tab() -> void:
+	_stop_listening()
+	Settings.reset(page_sections[tab])
+	refresh()
 
 func _ready() -> void:
 	Settings.changed.connect(_on_settings_changed)
@@ -145,7 +133,7 @@ func refresh() -> void:
 		var parts: PackedStringArray = id.split(":")
 		var text := Keybinds.key_text(Settings.keybinds.key(parts[0], int(parts[1])))
 		(key_buttons[id] as Button).text = text if text != "" else "-"
-		UiSkin.set_keycap(key_buttons[id], "keycap" if text != "" else "keycap_empty")
+		UiStyle.set_keycap(key_buttons[id], "keycap" if text != "" else "keycap_empty")
 	for bus in sliders:
 		var v: float = Settings.audio.volume[bus]
 		(sliders[bus][0] as HSlider).set_value_no_signal(roundf(v * 100.0))
@@ -170,22 +158,22 @@ func refresh() -> void:
 func _build_controls() -> Control:
 	var scroll := ScrollContainer.new()
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	UiSkin.style_scroll(scroll)
+	UiStyle.style_scroll(scroll)
 	var list := VBoxContainer.new()
 	list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	list.add_theme_constant_override("separation", 4)
 	scroll.add_child(list)
 	for group in Keybinds.GROUPS:
-		list.add_child(_label(group, 16, Palette.SUN))
+		list.add_child(UiBuild.label(group, 16, Palette.SUN))
 		for action in Keybinds.in_group(group):
 			var row := HBoxContainer.new()
 			row.add_theme_constant_override("separation", 8)
 			list.add_child(row)
-			var name_label := _label(Keybinds.info(action)["label"], 14, Palette.MIST)
+			var name_label := UiBuild.label(Keybinds.info(action)["label"], 14, Palette.MIST)
 			name_label.custom_minimum_size.x = 260
 			row.add_child(name_label)
 			if action in Keybinds.FIXED:
-				var fixed := _label("%s (always)" % Keybinds.key_text(Settings.keybinds.key(action, 0)), 14, Palette.MUTED)
+				var fixed := UiBuild.label("%s (always)" % Keybinds.key_text(Settings.keybinds.key(action, 0)), 14, Palette.MUTED)
 				row.add_child(fixed)
 				continue
 			for slot in Keybinds.SLOTS:
@@ -196,7 +184,7 @@ func _key_button(action: String, slot: int) -> Button:
 	var b := Button.new()
 	b.custom_minimum_size = Vector2(150, 32)
 	b.add_theme_font_size_override("font_size", 14)
-	UiSkin.style_key_button(b)
+	UiStyle.style_key_button(b)
 	b.pressed.connect(func() -> void: _listen(action, slot))
 	b.gui_input.connect(func(e: InputEvent) -> void:
 		var mb := e as InputEventMouseButton
@@ -215,7 +203,7 @@ func _listen(action: String, slot: int) -> void:
 	listening = action
 	listening_slot = slot
 	key_buttons["%s:%d" % [action, slot]].text = "Press a key..."
-	UiSkin.set_keycap(key_buttons["%s:%d" % [action, slot]], "keycap_listening")
+	UiStyle.set_keycap(key_buttons["%s:%d" % [action, slot]], "keycap_listening")
 	note.text = "Press the new key for %s, or Esc to cancel." % Keybinds.info(action)["label"]
 
 func _stop_listening() -> void:
@@ -258,7 +246,7 @@ func _build_audio() -> Control:
 	grid.add_theme_constant_override("v_separation", 14)
 	page.add_child(grid)
 	for bus in AudioSettings.BUSES:
-		var name_label := _label(bus, 16, Palette.MIST)
+		var name_label := UiBuild.label(bus, 16, Palette.MIST)
 		name_label.custom_minimum_size.x = 140
 		grid.add_child(name_label)
 		var slider := HSlider.new()
@@ -267,9 +255,9 @@ func _build_audio() -> Control:
 		slider.step = 1
 		slider.custom_minimum_size = Vector2(340, 28)
 		slider.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		UiSkin.style_slider(slider)
+		UiStyle.style_slider(slider)
 		grid.add_child(slider)
-		var percent := _label("", 16, Palette.MIST)
+		var percent := UiBuild.label("", 16, Palette.MIST)
 		percent.custom_minimum_size.x = 56
 		grid.add_child(percent)
 		sliders[bus] = [slider, percent]
@@ -333,7 +321,7 @@ func _build_video() -> Control:
 	page.add_child(switches)
 	for box in [vsync_box, bloom_box, fog_box, ao_box, shake_box]:
 		switches.add_child(box)
-	var hint := _label("Turning off bloom, ambient occlusion or fog helps slower computers.", 12, Palette.MUTED)
+	var hint := UiBuild.label("Turning off bloom, ambient occlusion or fog helps slower computers.", 12, Palette.MUTED)
 	page.add_child(hint)
 	return page
 
@@ -343,7 +331,7 @@ func _video_toggle(text: String, property: String) -> CheckBox:
 		Settings.apply(Settings.video))
 
 func _grid_row(grid: GridContainer, text: String, control: Control) -> void:
-	var l := _label(text, 16, Palette.MIST)
+	var l := UiBuild.label(text, 16, Palette.MIST)
 	l.custom_minimum_size.x = 180
 	grid.add_child(l)
 	grid.add_child(control)
@@ -357,16 +345,16 @@ func _build_developer() -> Control:
 		Settings.dev.test_characters = on
 		Settings.apply(Settings.dev))
 	page.add_child(test_box)
-	page.add_child(_label("Play solo and Host use a test account with a Lv %d character of every job in its best gear.\nYour own characters stay as they are; turn this off to get back to them." % Character.MAX_LEVEL, 12, Palette.MUTED))
-	var rebuild := UiSkin.menu_button("Rebuild test characters", Vector2(280, 40), 16)
+	page.add_child(UiBuild.label("Play solo and Host use a test account with a Lv %d character of every job in its best gear.\nYour own characters stay as they are; turn this off to get back to them." % Character.MAX_LEVEL, 12, Palette.MUTED))
+	var rebuild := UiStyle.menu_button("Rebuild test characters", Vector2(280, 40), 16)
 	rebuild.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 	rebuild.pressed.connect(func() -> void:
 		Settings.dev.rebuild_next = true
 		refresh())
 	page.add_child(rebuild)
-	rebuild_note = _label("", 12, Palette.MUTED)
+	rebuild_note = UiBuild.label("", 12, Palette.MUTED)
 	page.add_child(rebuild_note)
-	page.add_child(_label("Only in debug builds; a release build never shows or uses this.", 12, Palette.MUTED))
+	page.add_child(UiBuild.label("Only in debug builds; a release build never shows or uses this.", 12, Palette.MUTED))
 	return page
 
 # ---------- little builders ----------
@@ -374,7 +362,7 @@ func _build_developer() -> Control:
 func _option_button(items: Array[String], on_pick: Callable) -> OptionButton:
 	var o := OptionButton.new()
 	o.custom_minimum_size = Vector2(260, 34)
-	UiSkin.style_option_button(o)
+	UiStyle.style_option_button(o)
 	for it in items:
 		o.add_item(it)
 	o.item_selected.connect(on_pick)
@@ -383,7 +371,7 @@ func _option_button(items: Array[String], on_pick: Callable) -> OptionButton:
 func _check_box(text: String, on_toggle: Callable, icon := "") -> CheckBox:
 	var c := CheckBox.new()
 	c.text = text
-	UiSkin.style_check_box(c, icon)
+	UiStyle.style_check_box(c, icon)
 	c.add_theme_font_size_override("font_size", 15)
 	c.add_theme_color_override("font_color", Palette.MIST)
 	c.add_theme_color_override("font_hover_color", Palette.SUN)
@@ -392,10 +380,3 @@ func _check_box(text: String, on_toggle: Callable, icon := "") -> CheckBox:
 	c.add_theme_color_override("font_focus_color", Palette.MIST)
 	c.toggled.connect(on_toggle)
 	return c
-
-func _label(text: String, font_size: int, col: Color) -> Label:
-	var l := Label.new()
-	l.text = text
-	l.add_theme_font_size_override("font_size", font_size)
-	l.add_theme_color_override("font_color", col)
-	return l

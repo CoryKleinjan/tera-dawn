@@ -43,7 +43,7 @@ func actions() -> Array:
 	out.append(["Fame -1", func() -> void: Net.ask(&"req_fame", [peer, false]), "social/fame_down"])
 	return out
 
-func _row_rect(i: int) -> Rect2:
+func row_rect(i: int) -> Rect2:
 	return Rect2(PAD, TOP + i * ROW_H, size.x - PAD * 2, ROW_H - 6)
 
 func _draw_body() -> void:
@@ -51,7 +51,7 @@ func _draw_body() -> void:
 	draw_label(Vector2(PAD, 46), "Lv. %d %s%s" % [level, j.display_name if j else "", "  ·  " + guild if guild != "" else ""], Palette.MUTED)
 	var list := actions()
 	for i in list.size():
-		var r := _row_rect(i)
+		var r := row_rect(i)
 		add_button(r, list[i][0], _pick.bind(list[i][1]))
 		if list[i].size() > 2:
 			UiSkin.draw_icon(self, list[i][2], Rect2(r.position + Vector2(8, 4), Vector2(22, r.size.y - 8)))

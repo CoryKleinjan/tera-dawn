@@ -24,6 +24,8 @@ var doll := PaperdollView.new()
 var caption := Control.new()
 ## The worn item whose stats the panel shows, or &"" for the whole set.
 var selected: StringName = &""
+## The 4×4 grid LAYOUT places the slots in.
+var grid := SlotGrid.new(Vector2(PAD, GRID_Y), 4, 16, SLOT, GAP)
 
 func _init() -> void:
 	super("Equipment", Vector2(PAD * 2 + 4 * (SLOT + GAP) - GAP + 10 + PANEL_W, GRID_Y + 4 * (SLOT + GAP) + 14))
@@ -41,8 +43,7 @@ func _portrait_box() -> Rect2:
 	return Rect2(PAD + SLOT + GAP, GRID_Y + SLOT + GAP, SLOT * 2 + GAP, SLOT * 2 + GAP)
 
 func slot_rect(place: StringName) -> Rect2:
-	var cell: Vector2i = LAYOUT[place]
-	return Rect2(PAD + cell.x * (SLOT + GAP), GRID_Y + cell.y * (SLOT + GAP), SLOT, SLOT)
+	return grid.cell_rect(LAYOUT[place])
 
 func place_at(at: Vector2) -> StringName:
 	for p in LAYOUT:
@@ -97,19 +98,15 @@ func _draw_bonuses() -> void:
 
 ## The gear being dragged from the inventory, if it would fit `place`.
 func _drag_fits(place: StringName) -> bool:
-	if not get_viewport().gui_is_dragging():
+	var d := DragPayload.dragging(self)
+	if not DragPayload.is_bag_item(d, ItemDef.Tab.EQUIP):
 		return false
-	var d: Variant = get_viewport().gui_get_drag_data()
-	if not (d is Dictionary and d.get("from") == "inventory" and d.get("tab") == ItemDef.Tab.EQUIP):
-		return false
-	var stack := Game.me.inventory.at(ItemDef.Tab.EQUIP, d["index"])
+	var stack := Game.me.inventory.at(ItemDef.Tab.EQUIP, d.index)
 	return stack != null and Equipment.fits(stack.equip_def(), place)
 
 func _dragged_equip() -> StringName:
-	if not get_viewport().gui_is_dragging():
-		return &""
-	var d: Variant = get_viewport().gui_get_drag_data()
-	return d["place"] if d is Dictionary and d.get("from") == "equipment" else &""
+	var d := DragPayload.dragging(self)
+	return d.place if d and d.from == DragPayload.From.EQUIPMENT else &""
 
 func _click(at: Vector2, button: int, double: bool) -> void:
 	var p := place_at(at)
@@ -120,21 +117,20 @@ func _click(at: Vector2, button: int, double: bool) -> void:
 		Net.ask(&"req_unequip", [p, -1])
 		hud.tooltip.clear(self)
 
-func _hovered(at: Vector2) -> void:
+func _tooltip_at(at: Vector2) -> Tip:
 	var p := place_at(at)
-	hud.tooltip.show_item(self, Game.me.equipment.at(p) if p != &"" else null, get_global_mouse_position(), "Double-click to take off")
+	return Tip.new(Game.me.equipment.at(p) if p != &"" else null, "Double-click to take off")
 
 func _get_drag_data(at: Vector2) -> Variant:
 	var p := place_at(at)
 	if p == &"" or Game.me.equipment.at(p) == null:
 		return null
-	set_drag_preview(drag_preview(Game.me.equipment.at(p)))
+	set_drag_preview(drag_preview(Game.me.equipment.at(p).item.icon))
 	hud.tooltip.clear(self)
-	return {"from": "equipment", "place": p}
+	return DragPayload.worn(p)
 
 func _can_drop_data(at: Vector2, data: Variant) -> bool:
-	return data is Dictionary and data.get("from") == "inventory" and data.get("tab") == ItemDef.Tab.EQUIP \
-		and place_at(at) != &""
+	return DragPayload.is_bag_item(data, ItemDef.Tab.EQUIP) and place_at(at) != &""
 
 func _drop_data(at: Vector2, data: Variant) -> void:
-	Net.ask(&"req_equip", [data["index"], place_at(at)])
+	Net.ask(&"req_equip", [DragPayload.of(data).index, place_at(at)])
