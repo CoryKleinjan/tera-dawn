@@ -89,6 +89,7 @@ WORN_PLACES = ("top", "bottom", "shoes")
 WORN_BROKEN = ("smock",)
 WORN_SHORTS_GREY = 150  # the body's shorts are greys darker than this
 WORN_OUTLINE = 90       # and outlines darker than this
+EDGE_PEEL = 2           # pixels of a pink or mauve background rim peeled off an item's cut (items.py)
 TWIN_SLACK = 1          # an item's _only twin is trusted this many pixels past its art (items.py)
 WORN_FRINGE = 110       # pale edge pixels at the figure's edge are background fringe
 GLOVE_REACH = 0.9     # a glove is put on a hand only if the drawn one is this near it (head radii)

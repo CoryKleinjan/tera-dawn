@@ -142,6 +142,18 @@ def posed_item(piece, cell, px, place, twin=None):
         return None
     cut = arr.copy()
     cut[~mask] = 0
+    # the new cut edge can run through the magenta Gemini blended into the outline
+    rgb, alpha = ss.defringe(cut[..., :3] / 255.0, cut[..., 3] / 255.0, (255, 0, 255))
+    cut = np.dstack([rgb * 255, alpha * 255]).round().clip(0, 255).astype(np.uint8)
+    # and a sheet whose background came back mauve or pink leaves a rim of that blend, which the
+    # magenta defringe doesn't see: edge pixels leaning that way with no pink art inside them
+    # go, a pixel at a time
+    for _ in range(EDGE_PEEL):
+        c = cut.astype(int)
+        solid = c[..., 3] > 0
+        edge = solid & ss.dilate(~solid, 1)
+        lean = (np.minimum(c[..., 0], c[..., 2]) - c[..., 1] > 40) & (np.abs(c[..., 0] - c[..., 2]) < 80)
+        cut[edge & lean & ~ss.dilate(solid & ~edge & lean, 2)] = 0  # (pink art beside it stays)
     return scaled(Image.fromarray(cut, "RGBA"), s), (int(round(x)), int(round(y)))
 
 
