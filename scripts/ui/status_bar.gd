@@ -5,20 +5,20 @@ extends Control
 ## the UI sheet's art.
 
 const HEIGHT := 50.0
-const WINDOW_BUTTON := 30.0
+## Every piece on the bar (level badge, HP, MP and EXP bars, window buttons, Dawnshards) is
+## ITEM_H tall and centred on the band between the art's two gold trim lines.
+const ITEM_H := 26.0
+## The band between the gold trim lines, in texels of the bar art (top and bottom row).
+const BAND_TOP := 10.0
+const BAND_BOTTOM := 43.0
 const WINDOW_BUTTON_GAP := 2.0
-## The EXP bar is drawn a little smaller than its art so the window buttons fit beside it.
-const EXP_SCALE := 0.85
 ## The bar art (art/source/ui_hud_bar.png): each end's brass sun cap and its dark rim, in
 ## texels. The art is drawn at one scale to fit HEIGHT, and the dawn-lit band between the caps
 ## repeats along the bar instead of stretching, so its gold trim stays sharp at any width.
 const BAR_CAP := 38.0
-## The level badge: its left edge (just inside the gold end cap) and its scale.
-const BADGE_X := 28.0
-const BADGE_SCALE := 0.68
-## The HP and MP bars: where HP starts, their scale, and the space between bars.
-const HP_X := 76.0
-const BAR_SCALE := 0.95
+## The level badge's left edge, just inside the brass end cap.
+const BADGE_X := 40.0
+## The space between the badge and the bars, and between bars.
 const BAR_GAP := 6.0
 ## UI sheet art for each window's button. A window without art yet gets a round button
 ## with the first letter of its action.
@@ -74,27 +74,24 @@ func _draw() -> void:
 	var art := UiSkin.tex("hud_bar")
 	UiSkin.draw_box(self, _bar_box(), Rect2(0, 0, w, HEIGHT), HEIGHT / art.get_height())
 	# level badge
-	var badge := UiSkin.tex("level_badge")
-	var bs := BADGE_SCALE
-	var bpos := Vector2(BADGE_X, (HEIGHT - badge.get_height() * bs) / 2.0)
-	draw_texture_rect(badge, Rect2(bpos, badge.get_size() * bs), false)
-	var c := bpos + badge.get_size() * bs / 2.0
-	DrawUtil.text(self, Game.ui_font, c + Vector2(0, -5), "Lv", 9, Palette.MIST)
-	DrawUtil.text(self, Game.num_font, c + Vector2(0, 11), str(Game.me.level), 17, Palette.SUN, 0, 4, Palette.NIGHT)
+	var badge := badge_rect()
+	draw_texture_rect(UiSkin.tex("level_badge"), badge, false)
+	var c := badge.get_center()
+	DrawUtil.text(self, Game.ui_font, c + Vector2(0, -3), "Lv", 7, Palette.MIST)
+	DrawUtil.text(self, Game.num_font, c + Vector2(0, 9), str(Game.me.level), 11, Palette.SUN, 0, 3, Palette.NIGHT)
 	# HP, MP, EXP
 	var hp := Game.me.health
-	UiSkin.draw_bar(self, "hp_frame", "fill_red", Vector2(HP_X, 6), hp.fraction(), BAR_SCALE, "%d / %d" % [hp.hp, hp.max_hp], trail("hp"))
-	UiSkin.draw_bar(self, "mp_frame", "fill_blue", Vector2(_mp_x(), 4), float(Game.me.mp) / Game.me.max_mp(), BAR_SCALE, "%d / %d" % [Game.me.mp, Game.me.max_mp()], trail("mp"))
-	var exp_r := exp_bar_rect()
+	UiSkin.draw_bar(self, "hp_frame", "fill_red", bar_rect("hp_frame").position, hp.fraction(), fit("hp_frame"), "%d / %d" % [hp.hp, hp.max_hp], trail("hp"))
+	UiSkin.draw_bar(self, "mp_frame", "fill_blue", bar_rect("mp_frame").position, float(Game.me.mp) / Game.me.max_mp(), fit("mp_frame"), "%d / %d" % [Game.me.mp, Game.me.max_mp()], trail("mp"))
 	var exp_fill := 1.0 if Game.me.at_max_level() else float(Game.me.xp) / Game.me.xp_need()
-	UiSkin.draw_bar(self, "exp_frame", "fill_gold", exp_r.position, exp_fill, EXP_SCALE, exp_text(), 0.0, _flash / EXP_FLASH)
+	UiSkin.draw_bar(self, "exp_frame", "fill_gold", exp_bar_rect().position, exp_fill, fit("exp_frame"), exp_text(), 0.0, _flash / EXP_FLASH)
 	# window buttons
 	for i in TDHud.WINDOW_ACTIONS.size():
 		_window_button(TDHud.WINDOW_ACTIONS[i], _window_button_rect(i))
 	# Dawnshards
-	var icon := UiSkin.tex("icon_dawnshard")
-	draw_texture_rect(icon, Rect2(w - 140, 8, 36, 33), false)
-	DrawUtil.text(self, Game.num_font, Vector2(w - 100, 32), str(Game.me.shards), 18, Palette.SUN, 1, 4, Palette.NIGHT)
+	var icon := Rect2(w - 140, item_top(), 28, ITEM_H)
+	UiSkin.draw_icon(self, "icon_dawnshard", icon)
+	DrawUtil.text(self, Game.num_font, Vector2(icon.end.x + 4, band_center() + 5), str(Game.me.shards), 14, Palette.SUN, 1, 3, Palette.NIGHT)
 
 ## What the EXP bar says: "42.5%" of the way to the next level, or "Max level" at the cap.
 func exp_text() -> String:
@@ -102,18 +99,39 @@ func exp_text() -> String:
 		return MAX_LEVEL_TEXT
 	return "%.1f%%" % (100.0 * Game.me.xp / Game.me.xp_need())
 
-func _mp_x() -> float:
-	return HP_X + UiSkin.tex("hp_frame").get_width() * BAR_SCALE + BAR_GAP
+## The middle of the band between the bar art's gold trim lines, in pixels from the top.
+static func band_center() -> float:
+	return (BAND_TOP + BAND_BOTTOM) / 2.0 * HEIGHT / UiSkin.tex("hud_bar").get_height()
 
-## Where the EXP bar's frame is drawn, vertically centred in the bar.
+## The top of every ITEM_H-tall piece on the bar.
+static func item_top() -> float:
+	return band_center() - ITEM_H / 2.0
+
+## The scale that draws a piece of UI art ITEM_H tall.
+static func fit(art: String) -> float:
+	return ITEM_H / UiSkin.tex(art).get_height()
+
+func badge_rect() -> Rect2:
+	var t := UiSkin.tex("level_badge")
+	return Rect2(Vector2(BADGE_X, item_top()), t.get_size() * fit("level_badge"))
+
+## Where a bar frame is drawn: HP after the badge, then MP, then EXP, BAR_GAP apart.
+func bar_rect(frame: String) -> Rect2:
+	var x := badge_rect().end.x + BAR_GAP
+	for f in ["hp_frame", "mp_frame", "exp_frame"]:
+		var s := UiSkin.tex(f).get_size() * fit(f)
+		if f == frame:
+			return Rect2(Vector2(x, item_top()), s)
+		x += s.x + BAR_GAP
+	return Rect2()
+
+## Where the EXP bar's frame is drawn.
 func exp_bar_rect() -> Rect2:
-	var s := UiSkin.tex("exp_frame").get_size() * EXP_SCALE
-	var x := _mp_x() + UiSkin.tex("mp_frame").get_width() * BAR_SCALE + BAR_GAP
-	return Rect2(Vector2(x, (HEIGHT - s.y) / 2.0), s)
+	return bar_rect("exp_frame")
 
 func _window_button_rect(i: int) -> Rect2:
-	var left := size.x - 150 - TDHud.WINDOW_ACTIONS.size() * (WINDOW_BUTTON + WINDOW_BUTTON_GAP)
-	return Rect2(left + i * (WINDOW_BUTTON + WINDOW_BUTTON_GAP), (HEIGHT - WINDOW_BUTTON) / 2.0, WINDOW_BUTTON, WINDOW_BUTTON)
+	var left := size.x - 150 - TDHud.WINDOW_ACTIONS.size() * (ITEM_H + WINDOW_BUTTON_GAP)
+	return Rect2(left + i * (ITEM_H + WINDOW_BUTTON_GAP), item_top(), ITEM_H, ITEM_H)
 
 func _window_button(action: String, r: Rect2) -> void:
 	var open: bool = world != null and world.hud.windows[action].visible
@@ -128,8 +146,8 @@ func _window_button(action: String, r: Rect2) -> void:
 	else:
 		DrawUtil.ellipse(self, r.get_center(), r.size.x / 2.0 - 2, r.size.y / 2.0 - 2, Palette.GOLD_TRIM)
 		DrawUtil.ellipse(self, r.get_center(), r.size.x / 2.0 - 5, r.size.y / 2.0 - 5, Palette.PLUM)
-		DrawUtil.text(self, Game.num_font, r.get_center() + Vector2(0, 7), action.left(1).to_upper(), 19, Palette.SUN, 0, 4, Palette.NIGHT)
-	DrawUtil.text(self, Game.num_font, r.end + Vector2(0, -1), _key_name(action), 11, Palette.MIST, -1, 4, Palette.NIGHT)
+		DrawUtil.text(self, Game.num_font, r.get_center() + Vector2(0, 6), action.left(1).to_upper(), 16, Palette.SUN, 0, 4, Palette.NIGHT)
+	DrawUtil.text(self, Game.num_font, r.end + Vector2(1, 0), _key_name(action), 9, Palette.MIST, -1, 3, Palette.NIGHT)
 
 func _gui_input(event: InputEvent) -> void:
 	var mb := event as InputEventMouseButton
