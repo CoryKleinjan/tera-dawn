@@ -2,8 +2,8 @@ class_name TDCharacterSelect
 extends CenterContainer
 ## Character select, shown after logging in to a server: a slot for each of the account's
 ## characters on that server (their hero, name, level and job) and empty slots up to the
-## limit, with Play, Create, Delete and Log out. TDHud decides what the buttons do; the
-## list comes from the server (Net.characters).
+## limit, with Play, Create, Delete and Log out. TDTitleScreen decides what the buttons do;
+## the list comes from the server (Net.characters).
 
 signal play_requested(char_name: String)
 signal create_requested
@@ -35,15 +35,11 @@ func _init() -> void:
 	var card := PanelContainer.new()
 	UiSkin.use_panel(card, UiSkin.ARCH_PANEL, Vector4(40, 62, 40, 52))
 	add_child(card)
-	var col := VBoxContainer.new()
-	col.add_theme_constant_override("separation", 10)
+	var col := UiBuild.column(10)
 	card.add_child(col)
-	heading = _label("Choose your character", 26, Palette.SUN)
-	heading.add_theme_font_override("font", Game.num_font)
-	heading.add_theme_color_override("font_outline_color", Palette.PLUM)
-	heading.add_theme_constant_override("outline_size", 8)
+	heading = UiBuild.heading("Choose your character", 26)
 	col.add_child(heading)
-	subheading = _label("", 14, Palette.MUTED)
+	subheading = UiBuild.label("", 14, Palette.MUTED, HORIZONTAL_ALIGNMENT_CENTER)
 	col.add_child(subheading)
 	col.add_child(UiSkin.divider())
 	grid = GridContainer.new()
@@ -55,17 +51,14 @@ func _init() -> void:
 		var slot := _slot_button(i)
 		slots.append(slot)
 		grid.add_child(slot)
-	message = _label("", 14, Palette.BAD)
+	message = UiBuild.label("", 14, Palette.BAD, HORIZONTAL_ALIGNMENT_CENTER)
 	message.hide()
 	col.add_child(message)
-	var buttons := HBoxContainer.new()
-	buttons.alignment = BoxContainer.ALIGNMENT_CENTER
-	buttons.add_theme_constant_override("separation", 12)
-	col.add_child(buttons)
-	play_button = _button(buttons, "Play", func() -> void: play_requested.emit(selected))
-	create_button = _button(buttons, "Create", func() -> void: create_requested.emit())
-	delete_button = _button(buttons, "Delete", func() -> void: delete_requested.emit(selected))
-	logout_button = _button(buttons, "Log out", func() -> void: logged_out.emit())
+	play_button = _button("Play", func() -> void: play_requested.emit(selected))
+	create_button = _button("Create", func() -> void: create_requested.emit())
+	delete_button = _button("Delete", func() -> void: delete_requested.emit(selected))
+	logout_button = _button("Log out", func() -> void: logged_out.emit())
+	col.add_child(UiBuild.centered_row([play_button, create_button, delete_button, logout_button]))
 
 ## Shows the account's characters, picking `pick` (or keeping the one picked, or the first).
 ## `where` names the server and account under the heading.
@@ -139,11 +132,11 @@ func _slot_button(i: int) -> Button:
 	preview.offset_bottom = -6
 	preview.max_zoom = 2.0
 	stage.add_child(preview)
-	var title := _label("", 15, Palette.SUN)
+	var title := UiBuild.label("", 15, Palette.SUN, HORIZONTAL_ALIGNMENT_CENTER)
 	title.name = "Title"
 	title.add_theme_font_override("font", Game.num_font)
 	col.add_child(title)
-	var line := _label("", 11, Palette.MIST)
+	var line := UiBuild.label("", 11, Palette.MIST, HORIZONTAL_ALIGNMENT_CENTER)
 	line.name = "Line"
 	col.add_child(line)
 	b.pressed.connect(func() -> void:
@@ -173,16 +166,6 @@ func _fill_slot(b: Button, c: Dictionary) -> void:
 	line.text = "Lv %d %s" % [int(c["level"]), c["job"]]
 	b.tooltip_text = ""
 
-func _button(row: HBoxContainer, text: String, pressed: Callable) -> Button:
-	var b := UiSkin.menu_button(text, Vector2(120, 42), 20)
-	b.pressed.connect(pressed)
-	row.add_child(b)
-	return b
-
-func _label(text: String, font_size: int, col: Color) -> Label:
-	var l := Label.new()
-	l.text = text
-	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	l.add_theme_font_size_override("font_size", font_size)
-	l.add_theme_color_override("font_color", col)
-	return l
+## One of the buttons along the bottom.
+func _button(text: String, pressed: Callable) -> Button:
+	return UiBuild.button(text, pressed, Vector2(120, 42), 20)

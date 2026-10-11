@@ -25,7 +25,7 @@ func _menu() -> TDSettingsMenu:
 func test_escape_opens_and_closes_the_game_menu() -> void:
 	await ui.press("pause")
 	var gm := ui.hud.game_menu
-	check(ui.hud.title.visible and gm.visible and not ui.hud.title_card.visible, "Esc opens the game menu without the title card")
+	check(ui.hud.title.visible and gm.visible and not ui.hud.title.title_card.visible, "Esc opens the game menu without the title card")
 	check(await ui.redraw(gm), "the game menu draws")
 	await ui.press("pause")
 	check(not ui.hud.title.visible, "Esc again resumes")
@@ -48,9 +48,9 @@ func test_settings_from_the_title_screen() -> void:
 	ui.world.stop()
 	ui.hud.show_title(false)
 	ui.hud.open_settings()
-	check(_menu().visible and not ui.hud.title_card.visible, "Settings replaces the title card")
+	check(_menu().visible and not ui.hud.title.title_card.visible, "Settings replaces the title card")
 	_menu().back_button.pressed.emit()
-	check(not _menu().visible and ui.hud.title_card.visible and not ui.hud.game_menu.visible, "Back shows the title card again")
+	check(not _menu().visible and ui.hud.title.title_card.visible and not ui.hud.game_menu.visible, "Back shows the title card again")
 
 func test_rebinding_a_key_works_in_game() -> void:
 	await ui.press("pause")

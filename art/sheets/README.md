@@ -203,7 +203,7 @@ after the item ids, replacing the placeholders from `tools/art/make_item_placeho
   made by editing `art/source/paperdoll_body.png`, so they keep its size and `grid` and line up with
   it pixel for pixel. The round shield sheet holds the item alone; the others show the body
   wearing it in greys, and `paperdoll_layers.py` lifts the greys off the body into a gear layer the
-  game tints (a cut that came back unusable is listed in `WORN_BROKEN` and its items wear the nearest
+  game tints (a cut that came back unusable is listed in `WORN_BROKEN`, in `tools/art/paperdoll/common.py`, and its items wear the nearest
   cut). The cape is split where it crosses the hero: the part over him is `cape_front`.
   Sheets with a grey or gradient background are cleaned with `clean_sheet.py --plain` first.
 - **Hats**: `paperdoll_hats` shows each hat shape on a head (side and behind views) beside a bare

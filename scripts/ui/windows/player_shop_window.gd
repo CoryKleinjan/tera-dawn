@@ -16,10 +16,11 @@ var owner_peer := 0
 var shop_title := ""
 ## SETUP: [tab, slot, count, price] entries. OWNER / VISITOR: [stack dict, price].
 var entries: Array = []
-var scroll := 0
+var list: ScrollList
 
 func _init() -> void:
 	super("Shop", Vector2(330, LIST_Y + ROWS * ROW_H + 60))
+	list = ScrollList.new(Vector2(PAD, LIST_Y), size.x - PAD * 2, ROW_H, 4, ROWS)
 
 ## Starts setting up a shop of your own.
 func setup() -> void:
@@ -56,8 +57,8 @@ func toggle() -> void:
 		Net.ask(&"req_shop_leave", [owner_peer])
 	super()
 
-func _row(i: int) -> Rect2:
-	return Rect2(PAD, LIST_Y + i * ROW_H, size.x - PAD * 2, ROW_H - 4)
+func row_rect(i: int) -> Rect2:
+	return list.row_rect(i)
 
 func _stack(i: int) -> ItemStack:
 	if mode == Mode.SETUP:
@@ -71,11 +72,8 @@ func _draw_body() -> void:
 	draw_label(Vector2(PAD, 48), shop_title if mode == Mode.SETUP else "", Palette.SUN, 13)
 	if entries.is_empty():
 		draw_hint(Vector2(size.x / 2.0, LIST_Y + 40), "Drag things from your bag here" if mode == Mode.SETUP else "Sold out", 0)
-	for k in mini(ROWS, entries.size()):
-		var i := k + scroll
-		if i >= entries.size():
-			break
-		var r := _row(k)
+	for i in list.shown(entries.size()):
+		var r := row_rect(i)
 		var stack := _stack(i)
 		var k_art := r.size.y / UiSkin.tex("dialogue/shop_row").get_height()
 		UiSkin.draw_box(self, UiSkin.shop_row(r.has_point(_hover)), r, k_art)
@@ -83,17 +81,16 @@ func _draw_body() -> void:
 			var niche := Rect2(r.position + TDShopWindow.NICHE.position * k_art, TDShopWindow.NICHE.size * k_art)
 			draw_texture_rect(stack.item.icon, fit(stack.item.icon, niche.grow(-1)), false)
 		if mode == Mode.VISITOR:
-			add_button(_buy_rect(k), "Buy", buy.bind(i), Game.me.shards >= _price(i))
+			add_button(_buy_rect(i), "Buy", buy.bind(i), Game.me.shards >= _price(i))
 		elif mode == Mode.SETUP:
-			add_button(_buy_rect(k), "Remove", func() -> void: entries.remove_at(i))
+			add_button(_buy_rect(i), "Remove", func() -> void: entries.remove_at(i))
 		if stack == null:
 			continue
 		var n: int = entries[i][2] if mode == Mode.SETUP else stack.count
 		draw_label(r.position + Vector2(46, 16), stack.display_name() + (" ×%d" % n if n > 1 else ""), Palette.MIST, 13)
 		DrawUtil.text(self, Game.num_font, r.position + Vector2(46, 32), "%d Dawnshards" % _price(i), 12, Palette.SUN, 1, 3, Palette.NIGHT)
-	var w := (size.x - PAD * 2 - 8) / 2.0
-	var left := bottom_button_rect(PAD, w)
-	var right := Rect2(left.end.x + 8, left.position.y, w, BOTTOM_BUTTON_H)
+	var left := bottom_half_rect(0)
+	var right := bottom_half_rect(1)
 	match mode:
 		Mode.SETUP:
 			add_button(left, "Name", _rename)
@@ -101,15 +98,12 @@ func _draw_body() -> void:
 		Mode.OWNER:
 			add_button(right, "Close shop", toggle)
 
-func _buy_rect(k: int) -> Rect2:
-	var r := _row(k)
+func _buy_rect(i: int) -> Rect2:
+	var r := row_rect(i)
 	return Rect2(r.end.x - 74, r.position.y + 4, 70, 28)
 
 func _click(_at: Vector2, button: int, _double: bool) -> void:
-	if button == MOUSE_BUTTON_WHEEL_DOWN:
-		scroll = clampi(scroll + 1, 0, maxi(0, entries.size() - ROWS))
-	elif button == MOUSE_BUTTON_WHEEL_UP:
-		scroll = maxi(0, scroll - 1)
+	list.wheel(button, entries.size())
 
 func buy(i: int) -> void:
 	Net.ask(&"req_shop_buy", [owner_peer, i, StringName(entries[i][0]["id"])])
@@ -128,19 +122,16 @@ func add_entry(tab: int, index: int, price: int) -> void:
 		return
 	entries.append([tab, index, held.count, maxi(1, price)])
 
-func _hovered(at: Vector2) -> void:
-	for k in mini(ROWS, entries.size() - scroll):
-		if _row(k).has_point(at):
-			hud.tooltip.show_item(self, _stack(k + scroll), get_global_mouse_position())
-			return
-	hud.tooltip.clear(self)
+func _tooltip_at(at: Vector2) -> Tip:
+	var i := list.row_at(at, entries.size())
+	return Tip.new(_stack(i)) if i >= 0 else null
 
 func _can_drop_data(_at: Vector2, data: Variant) -> bool:
-	return mode == Mode.SETUP and data is Dictionary and data.get("from") == "inventory"
+	return mode == Mode.SETUP and DragPayload.is_bag_item(data)
 
 func _drop_data(_at: Vector2, data: Variant) -> void:
-	var tab: int = data["tab"]
-	var index: int = data["index"]
+	var tab := DragPayload.of(data).tab
+	var index := DragPayload.of(data).index
 	var held := Game.me.inventory.at(tab, index)
 	if held == null:
 		return

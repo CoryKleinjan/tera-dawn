@@ -18,6 +18,10 @@ const SHARDS_H := 28.0
 
 ## The server's last word: {"partner", "mine": {...}, "theirs": {...}} (see TDSocial).
 var state := {}
+## Your side's slots (where items from your bag can be dropped) and the partner's, on the
+## panel art's painted slots.
+var my_grid := SlotGrid.new(PANEL_AT + GRID_LEFT, COLS, COLS * 3, SLOT, PITCH.x - SLOT)
+var their_grid := SlotGrid.new(PANEL_AT + GRID_RIGHT, COLS, COLS * 3, SLOT, PITCH.x - SLOT)
 
 func _init() -> void:
 	var panel := UiSkin.tex(PANEL).get_size()
@@ -48,12 +52,7 @@ func cancel() -> void:
 	visible = false
 
 func slot_rect(i: int, theirs: bool) -> Rect2:
-	var first := PANEL_AT + (GRID_RIGHT if theirs else GRID_LEFT)
-	return Rect2(first + Vector2(i % COLS, i / COLS) * PITCH, Vector2(SLOT, SLOT))
-
-## Your side's grid, where items from your bag can be dropped.
-func _my_grid() -> Rect2:
-	return slot_rect(0, false).merge(slot_rect(COLS * 3 - 1, false))
+	return (their_grid if theirs else my_grid).rect(i)
 
 func _stack(side: String, i: int) -> ItemStack:
 	var items: Array = state.get(side, {}).get("items", [])
@@ -61,16 +60,15 @@ func _stack(side: String, i: int) -> ItemStack:
 
 ## A side's Dawnshard counter, under its grid.
 func _shards_rect(theirs := false) -> Rect2:
-	var grid := slot_rect(0, theirs).merge(slot_rect(COLS * 3 - 1, theirs))
+	var grid := (their_grid if theirs else my_grid).bounds()
 	var top := PANEL_AT.y + UiSkin.tex(PANEL).get_height() + 6
 	return Rect2(grid.position.x - 6, top, grid.size.x + 12, SHARDS_H)
 
 func _trade_rect() -> Rect2:
-	return bottom_button_rect(PAD, (size.x - PAD * 2 - 8) / 2.0)
+	return bottom_half_rect(0)
 
 func _cancel_rect() -> Rect2:
-	var r := _trade_rect()
-	return Rect2(r.end.x + 8, r.position.y, r.size.x, r.size.y)
+	return bottom_half_rect(1)
 
 func _draw_body() -> void:
 	if state.is_empty():
@@ -107,19 +105,19 @@ func _click(at: Vector2, button: int, _double: bool) -> void:
 		hud.prompt.ask("How many Dawnshards?", str(state["mine"]["shards"]), func(t: String) -> void:
 			Net.ask(&"req_trade_shards", [maxi(0, int(t))]), true)
 
-func _hovered(at: Vector2) -> void:
+func _tooltip_at(at: Vector2) -> Tip:
 	for side in ["mine", "theirs"]:
-		for i in COLS * 3:
-			if slot_rect(i, side == "theirs").has_point(at):
-				hud.tooltip.show_item(self, _stack(side, i), get_global_mouse_position())
-				return
-	hud.tooltip.clear(self)
+		var i := (their_grid if side == "theirs" else my_grid).at(at)
+		if i >= 0:
+			return Tip.new(_stack(side, i))
+	return null
 
 func _can_drop_data(at: Vector2, data: Variant) -> bool:
-	return data is Dictionary and data.get("from") == "inventory" and _my_grid().has_point(at)
+	return DragPayload.is_bag_item(data) and my_grid.bounds().has_point(at)
 
 func _drop_data(_at: Vector2, data: Variant) -> void:
-	offer(data["tab"], data["index"])
+	var d := DragPayload.of(data)
+	offer(d.tab, d.index)
 
 ## Puts the whole stack in bag slot `index` of `tab` on the table.
 func offer(tab: int, index: int) -> void:

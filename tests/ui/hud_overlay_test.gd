@@ -225,10 +225,10 @@ func test_overlay_draws_the_faint_screen() -> void:
 func test_title_screen_draws_and_hides() -> void:
 	check(not ui.hud.title.visible, "playing hides the title screen")
 	ui.hud.show_title(false)
-	check(ui.hud.title.visible and ui.hud.start_panel.visible and not ui.hud.game_menu.visible, "the title shows the start panel")
+	check(ui.hud.title.visible and ui.hud.title.start_panel.visible and not ui.hud.game_menu.visible, "the title shows the start panel")
 	check(await ui.redraw(ui.hud.title), "the title screen draws")
 	ui.hud.show_title(true)
-	check(ui.hud.game_menu.visible and not ui.hud.title_card.visible, "the game menu shows Resume, Settings, Leave and Quit")
+	check(ui.hud.game_menu.visible and not ui.hud.title.title_card.visible, "the game menu shows Resume, Settings, Leave and Quit")
 	ui.hud.game_menu.resume_button.pressed.emit()
 	check(not ui.hud.title.visible, "Resume hides it")
 
@@ -276,14 +276,14 @@ func test_monster_tags_show_only_when_hurt_or_a_boss() -> void:
 
 func test_name_tags_fit_their_names_between_the_end_caps() -> void:
 	var tex_h := UiSkin.tex("name_tag").get_height()
-	var cap := UiSkin.PLAQUE_MARGINS.x * UiSkin.NAME_TAG_H / tex_h
+	var cap := WorldSkin.PLAQUE_MARGINS.x * WorldSkin.NAME_TAG_H / tex_h
 	for label in ["Elder Rowan", "Guide Sorrel", "Fletcher Wynn", "Al"]:
-		var r := UiSkin.name_tag_rect(Vector2(100, 50), label)
+		var r := WorldSkin.name_tag_rect(Vector2(100, 50), label)
 		var text_w := DrawUtil.text_width(Game.ui_font, label, 11)
 		check(r.size.x >= text_w + 2.0 * cap, "%s: tag %s wide holds text %s plus two caps of %s" % [label, r.size.x, text_w, cap])
 		check_near(r.get_center().x, 100.0, "%s: centred" % label)
 	var hint := "↑ to Fern Hollow"
-	check(UiSkin.hint_width(hint) >= DrawUtil.text_width(Game.ui_font, hint, 13) + 2.0 * UiSkin.PLAQUE_MARGINS.x * UiSkin.HINT_H / tex_h, "hints fit too")
+	check(WorldSkin.hint_width(hint) >= DrawUtil.text_width(Game.ui_font, hint, 13) + 2.0 * WorldSkin.PLAQUE_MARGINS.x * WorldSkin.HINT_H / tex_h, "hints fit too")
 
 func test_no_text_floats_in_the_3d_stage() -> void:
 	var labels := ui.world.stage.find_children("*", "Label3D", true, false)
@@ -296,7 +296,7 @@ func test_log_sits_above_the_name_tags_on_the_floor() -> void:
 	await ui.ticks(30)
 	var st := ui.world.stage
 	var feet := st.screen(Vector2(400, ui.world.map.ground_y), TDStage.Z_NPC)
-	var tag_top := UiSkin.name_tag_rect(feet + Vector2(0, 4), "Elder Rowan").position.y
+	var tag_top := WorldSkin.name_tag_rect(feet + Vector2(0, 4), "Elder Rowan").position.y
 	check(ui.hud.overlay.log_bottom() < tag_top, "the log's newest line (%s) is above the floor's name tags (%s)" % [ui.hud.overlay.log_bottom(), tag_top])
 	check(ui.hud.overlay.log_bottom() <= TDWorld.VIEW.y - TDStatusBar.HEIGHT, "and above the status bar")
 	for i in 3:
@@ -349,12 +349,12 @@ func test_title_screen_hides_the_status_bar_and_minimap() -> void:
 
 func test_play_solo_and_host_have_their_own_row() -> void:
 	var hud := ui.hud
-	var account_row := hud.login_button.get_parent()
-	check(hud.register_button.get_parent() == account_row, "Log in and Register share a row")
-	check(hud.play_button.get_parent() == hud.host_button.get_parent(), "Play solo and Host share a row")
-	var offline_row := hud.play_button.get_parent()
+	var account_row := hud.title.login_button.get_parent()
+	check(hud.title.register_button.get_parent() == account_row, "Log in and Register share a row")
+	check(hud.title.play_button.get_parent() == hud.title.host_button.get_parent(), "Play solo and Host share a row")
+	var offline_row := hud.title.play_button.get_parent()
 	check(offline_row != account_row, "a row of their own")
-	var rows := hud.start_panel.get_children()
+	var rows := hud.title.start_panel.get_children()
 	var at := rows.find(offline_row)
 	check(at == 0 and at < rows.find(account_row), "first, over the account boxes")
 	var label := rows[at + 1] as Label
@@ -362,17 +362,17 @@ func test_play_solo_and_host_have_their_own_row() -> void:
 
 func test_the_title_opens_on_a_small_menu_and_play_shows_the_choices() -> void:
 	ui.hud.show_title(false)
-	check(ui.hud.main_menu.visible and not ui.hud.play_page.visible, "Play, Settings and Quit first")
-	ui.hud.menu_play_button.pressed.emit()
-	check(ui.hud.play_page.visible and not ui.hud.main_menu.visible, "Play shows solo, host and online")
+	check(ui.hud.title.main_menu.visible and not ui.hud.title.play_page.visible, "Play, Settings and Quit first")
+	ui.hud.title.menu_play_button.pressed.emit()
+	check(ui.hud.title.play_page.visible and not ui.hud.title.main_menu.visible, "Play shows solo, host and online")
 	await ui.press("pause")
-	check(ui.hud.main_menu.visible and not ui.hud.play_page.visible, "Esc goes back to the menu")
+	check(ui.hud.title.main_menu.visible and not ui.hud.title.play_page.visible, "Esc goes back to the menu")
 	Net.refused.emit(TDLobby.WRONG_LOGIN)
-	check(ui.hud.play_page.visible and ui.hud.message.visible, "a refusal shows on the Play page, by the boxes")
+	check(ui.hud.title.play_page.visible and ui.hud.title.message.visible, "a refusal shows on the Play page, by the boxes")
 
 func test_title_boxes_keep_their_hints_clear_of_the_caret() -> void:
-	for f: LineEdit in [ui.hud.address_field, ui.hud.username_field, ui.hud.password_field, ui.hud.confirm_field]:
-		check(f.placeholder_text.begins_with(UiSkin.HINT_ROOM), "%s: room between the caret and the hint" % f.placeholder_text.strip_edges())
+	for f: LineEdit in [ui.hud.title.address_field, ui.hud.title.username_field, ui.hud.title.password_field, ui.hud.title.confirm_field]:
+		check(f.placeholder_text.begins_with(UiStyle.HINT_ROOM), "%s: room between the caret and the hint" % f.placeholder_text.strip_edges())
 		check_eq(f.alignment, HORIZONTAL_ALIGNMENT_LEFT, "%s: left-aligned, so an empty box's caret starts before the hint" % f.placeholder_text.strip_edges())
 
 func test_first_hints_name_the_real_keys() -> void:

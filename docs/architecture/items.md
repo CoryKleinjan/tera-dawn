@@ -67,7 +67,7 @@ for the loot key, and stays there if its tab is full.
   grip dot), name its cell by the item id in `art/sheets/held_<group>.json`, and run
   `python3 tools/art/paperdoll_layers.py`.
 - **A new weapon kind**: draw its greyscale template on the paperdoll weapons sheet (add its
-  cell to `paperdoll_weapons.json` and `WEAPON_KINDS` in `paperdoll_layers.py`), say how it's
+  cell to `paperdoll_weapons.json` and `WEAPON_KINDS` in `tools/art/paperdoll/common.py`), say how it's
   held in `art/sheets/paperdoll_rig.json` "holds" ("like" another kind, or an angle per frame,
   "behind" for frames it goes behind him; a long weapon drawn slanted is straightened, see
   `AXIAL`;

@@ -21,7 +21,7 @@ var tab := 0
 func _init() -> void:
 	super("Community", Vector2(340, LIST_Y + ROWS * ROW_H + 56))
 
-func _row(i: int) -> Rect2:
+func row_rect(i: int) -> Rect2:
 	return Rect2(PAD, LIST_Y + i * ROW_H, size.x - PAD * 2, ROW_H - 4)
 
 ## A buddy or guild member's row with their online dot in its niche.
@@ -41,9 +41,7 @@ func _draw_body() -> void:
 			_draw_guild()
 
 func _bottom_button(label: String, action: Callable, slot := 0) -> void:
-	var w := (size.x - PAD * 2 - 8) / 2.0
-	var r := bottom_button_rect(PAD + slot * (w + 8), w)
-	add_button(r, label, action)
+	add_button(bottom_half_rect(slot), label, action)
 
 func _draw_buddies() -> void:
 	var list: Array = Game.social.get("buddies", [])
@@ -51,7 +49,7 @@ func _draw_buddies() -> void:
 		draw_hint(Vector2(PAD, LIST_Y + 18), "No buddies yet. Click a player, or Add.")
 	for i in mini(list.size(), ROWS):
 		var b: Array = list[i]
-		var r := _row(i)
+		var r := row_rect(i)
 		_friend_row(r, b[1])
 		draw_label(r.position + Vector2(36, 18), b[0], Palette.SUN if b[1] else Palette.MIST, 13)
 		draw_label(r.position + Vector2(124, 18), b[2] if b[1] else "Offline", Palette.MUTED, 11)
@@ -70,7 +68,7 @@ func _draw_party() -> void:
 	var lead: bool = party.get("leader", "") == Game.me.name or party.is_empty()
 	for i in mini(members.size(), ROWS):
 		var m: Array = members[i]
-		var r := _row(i)
+		var r := row_rect(i)
 		draw_row(r)
 		var j: JobDef = Content.jobs.get(StringName(m[3]))
 		var x := 6.0
@@ -79,7 +77,7 @@ func _draw_party() -> void:
 			x = 20.0
 		draw_label(r.position + Vector2(x, 12), m[0], Palette.SUN, 12)
 		draw_label(r.position + Vector2(6, 24), "Lv. %d %s  ·  %s" % [m[2], j.display_name if j else "", Content.map(StringName(m[5])).display_name if Content.maps.has(StringName(m[5])) else ""], Palette.MUTED, 10)
-		UiSkin.draw_party_hp(self, party_hp_rect(r).position, PARTY_HP_W, float(m[4]))
+		WorldSkin.draw_party_hp(self, party_hp_rect(r).position, PARTY_HP_W, float(m[4]))
 		var who: String = m[0]
 		if lead and who != Game.me.name:
 			add_button(kick_rect(r), "Kick", func() -> void: Net.ask(&"req_social", [&"kick", who]), true, true)
@@ -105,12 +103,12 @@ func _draw_guild() -> void:
 			draw_hint(Vector2(PAD, LIST_Y + 18 + k * 18), ["You're not in a guild.", "Found one with the Guild Clerk in Dawnharbor", "(%d Dawnshards, level %d), or get invited." % [TDSocial.GUILD_COST, TDSocial.GUILD_LEVEL]][k])
 		return
 	UiSkin.draw_icon(self, "social/guild_emblem", Rect2(PAD, LIST_Y - 12, 20, 20))
-	UiSkin.draw_guild_tag(self, Vector2(PAD + 26 + (DrawUtil.text_width(Game.ui_font, g["name"], 11) + 34) / 2.0, LIST_Y - 10), g["name"])
+	WorldSkin.draw_guild_tag(self, Vector2(PAD + 26 + (DrawUtil.text_width(Game.ui_font, g["name"], 11) + 34) / 2.0, LIST_Y - 10), g["name"])
 	draw_label(Vector2(size.x - PAD, LIST_Y + 4), "master %s" % g["master"], Palette.MUTED, 11, -1)
 	var members: Array = g["members"]
 	for i in mini(members.size(), ROWS - 1):
 		var m: Array = members[i]
-		var r := _row(i)
+		var r := row_rect(i)
 		r.position.y += 10
 		_friend_row(r, m[1])
 		draw_label(r.position + Vector2(36, 18), m[0], Palette.SUN if m[1] else Palette.MIST, 13)
@@ -119,9 +117,5 @@ func _draw_guild() -> void:
 			hud.prompt.ask("Who do you want in the guild?", "", func(n: String) -> void: Net.ask(&"req_social", [&"guild", n])))
 	_bottom_button("Leave guild", func() -> void: Net.ask(&"req_social", [&"leave_guild", ""]), 1)
 
-func _click(at: Vector2, button: int, _double: bool) -> void:
-	if button != MOUSE_BUTTON_LEFT:
-		return
-	var t := tab_at(at)
-	if t >= 0:
-		tab = t
+func _tab_clicked(i: int) -> void:
+	tab = i

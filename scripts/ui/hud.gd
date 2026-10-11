@@ -1,8 +1,8 @@
 class_name TDHud
 extends CanvasLayer
 ## The screen UI: the status bar (level, HP, MP, EXP, skills, Dawnshards), the in-game
-## overlay, the game windows (inventory, equipment, character), the title screen, the
-## game menu (Esc) and the settings screen.
+## overlay, the game windows (inventory, equipment, character), the game menu (Esc) and the
+## settings screen. It shows and hides the title screen (TDTitleScreen) and handles Esc.
 ## Art comes from UiSkin.
 
 ## Input actions that open and close a window, in the order the status bar shows them.
@@ -13,43 +13,14 @@ var overlay: TDOverlay
 var status: TDStatusBar
 var quickslots: TDQuickslots
 var tracker: TDQuestTracker
-## The dimmed layer over the game that holds the title card, character select, the
-## character creator, the game menu and the settings screen. While it's showing, the game
-## ignores play keys.
-var title: Control
-## The title card: the logo over a small menu (Play, Settings, Quit), and the Play page
-## (Play solo, Host, or log in or register on a server). Hidden while any of the other
-## screens on `title` is showing.
-var title_card: Control
-## The title card's two pages.
-var main_menu: Control
-var play_page: Control
-var menu_play_button: Button
-## The key art behind the title screen and character select.
-var title_backdrop: TextureRect
-var character_select: TDCharacterSelect
-var delete_confirm: TDDeleteConfirm
-## Asks a host before logging out ends the game for the friends playing on it.
-var confirm: TDConfirm
-var creator: TDCreator
+## The title screen: the dimmed layer over the game that holds the title card, character
+## select, the character creator, the game menu and the settings screen. While it's showing,
+## the game ignores play keys.
+var title: TDTitleScreen
 var game_menu: TDGameMenu
 var settings_menu: TDSettingsMenu
 ## What the settings screen goes back to: the title card or the game menu.
 var _settings_from: Control
-var start_panel: Control
-var address_field: LineEdit
-var username_field: LineEdit
-var password_field: LineEdit
-## The second password box, shown while registering.
-var confirm_field: LineEdit
-var confirm_row: Control
-var login_button: Button
-var register_button: Button
-## Play solo and Host, on their own row over the account boxes.
-var play_button: Button
-var host_button: Button
-## Shows why logging in didn't work.
-var message: Label
 ## The HUD pieces over the scene's right side (the quickslots, the quest tracker) fade to
 ## SEE_THROUGH while the hero or an NPC within SEE_THROUGH_RANGE of them is behind one, at
 ## SEE_THROUGH_SPEED (alpha a second).
@@ -63,9 +34,8 @@ const SEE_THROUGH_RANGE := 400.0
 var keys_help: Label
 ## The two first-time hints: in a town, and on a hunting field.
 enum Hint { TOWN, FIELD }
-## How long each first-time hint stays up, and how big the title's main buttons are.
+## How long each first-time hint stays up, and where it sits.
 const FIRST_HINT_TIME := 40.0
-const MAIN_BUTTON := Vector2(240, 54)
 const FIRST_HINT_Y := 138.0
 ## Hint -> its text, built from the player's keybinds (_update_keys_help).
 var hint_texts := {}
@@ -95,7 +65,7 @@ func _ready() -> void:
 	ui_theme = Theme.new()
 	ui_theme.default_font = Game.ui_font
 	ui_theme.default_font_size = 14
-	UiSkin.use_cursor()
+	UiStyle.use_cursor()
 
 	overlay = TDOverlay.new()
 	overlay.world = world
@@ -326,101 +296,16 @@ func window_at(pos: Vector2) -> TDWindow:
 			return w
 	return null
 
+## The title screen (TDTitleScreen), the first-time hints under it, and the game menu and
+## settings screen on it.
 func _build_title() -> void:
-	title = ColorRect.new()
-	(title as ColorRect).color = Color(Palette.NIGHT, 0.45)
+	title = TDTitleScreen.new()
+	title.world = world
 	title.theme = ui_theme
-	title.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(title)
-	# the key art behind the title screen and the creator (not behind the Esc menu)
-	title_backdrop = TextureRect.new()
-	title_backdrop.texture = UiSkin.tex("title_backdrop")
-	title_backdrop.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	title_backdrop.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
-	title_backdrop.set_anchors_preset(Control.PRESET_FULL_RECT)
-	title_backdrop.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	title.add_child(title_backdrop)
-	title_card = CenterContainer.new()
-	title_card.set_anchors_preset(Control.PRESET_FULL_RECT)
-	title.add_child(title_card)
-	var col := VBoxContainer.new()
-	col.alignment = BoxContainer.ALIGNMENT_CENTER
-	col.add_theme_constant_override("separation", 10)
-	title_card.add_child(col)
-
-	var logo := TextureRect.new()
-	logo.texture = UiSkin.tex("logo")
-	logo.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	logo.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	logo.custom_minimum_size = Vector2(520, 190)  # the logo is two lines (TERA'S over DAWN)
-	col.add_child(logo)
-
-	# first the small menu over the key art: Play, Settings, Quit
-	main_menu = VBoxContainer.new()
-	main_menu.alignment = BoxContainer.ALIGNMENT_CENTER
-	main_menu.add_theme_constant_override("separation", 8)
-	col.add_child(main_menu)
-	menu_play_button = UiSkin.menu_button("Play", MAIN_BUTTON)
-	menu_play_button.pressed.connect(_open_play_page)
-	var settings := UiSkin.menu_button("Settings", MAIN_BUTTON)
-	settings.pressed.connect(func() -> void: open_settings())
-	var quit := UiSkin.menu_button("Quit", MAIN_BUTTON)
-	quit.pressed.connect(_quit)
-	for b: Button in [menu_play_button, settings, quit]:
-		b.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-		main_menu.add_child(b)
-
-	# Play: on your own, hosting friends, or logging in to (or registering on) a server
-	play_page = PanelContainer.new()
-	play_page.add_theme_stylebox_override("panel", UiSkin.panel())
-	play_page.hide()
-	col.add_child(play_page)
-	start_panel = VBoxContainer.new()
-	start_panel.add_theme_constant_override("separation", 6)
-	play_page.add_child(start_panel)
-	play_button = _small_menu_button("Play solo")
-	play_button.tooltip_text = "Play on your own, on this computer"
-	play_button.pressed.connect(_on_play)
-	host_button = _small_menu_button("Host")
-	host_button.tooltip_text = "Play and let friends register and join you (port %d)" % Net.DEFAULT_PORT
-	host_button.pressed.connect(_on_host)
-	start_panel.add_child(_row([play_button, host_button]))
-	var online := _small_title("Or play online")
-	online.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	start_panel.add_child(online)
-	address_field = _field(Game.last_address, "Server address", 64)
-	username_field = _field(Game.last_username, "Username", AccountStore.MAX_USERNAME)
-	password_field = _field("", "Password", AccountStore.MAX_PASSWORD)
-	password_field.secret = true
-	confirm_field = _field("", "Password again", AccountStore.MAX_PASSWORD)
-	confirm_field.secret = true
-	start_panel.add_child(_row([_titled("Server", address_field), _titled("Username", username_field), _titled("Password", password_field)]))
-	confirm_row = _row([_titled("Confirm password", confirm_field)])
-	confirm_row.hide()
-	start_panel.add_child(confirm_row)
-	# Enter logs in, or registers while the second password box is showing
-	for f: LineEdit in [address_field, username_field, password_field]:
-		f.text_submitted.connect(func(_t: String) -> void:
-			if confirm_row.visible:
-				_on_register()
-			else:
-				_on_log_in())
-	confirm_field.text_submitted.connect(func(_t: String) -> void: _on_register())
-	login_button = _small_menu_button("Log in")
-	login_button.pressed.connect(_on_log_in)
-	register_button = _small_menu_button("Register")
-	register_button.tooltip_text = "Make an account on this server"
-	register_button.pressed.connect(_on_register)
-	start_panel.add_child(_row([login_button, register_button]))
-	message = _label("")
-	message.add_theme_color_override("font_color", Palette.BAD)
-	message.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	message.hide()
-	start_panel.add_child(message)
-	start_panel.add_child(UiSkin.divider())
-	var back := _small_menu_button("Back")
-	back.pressed.connect(_show_main_menu)
-	start_panel.add_child(_row([back]))
+	title.settings_requested.connect(func() -> void: open_settings())
+	title.quit_requested.connect(_quit)
+	title.left_game.connect(func() -> void: show_title(false))
 
 	# a new character's first steps: the controls (TDHud._show_first_hints)
 	keys_help = Label.new()
@@ -440,247 +325,36 @@ func _build_title() -> void:
 	move_child(keys_help, title.get_index())
 	_update_keys_help()
 	Settings.changed.connect(_on_settings_changed)
-	_focus_login.call_deferred()
 
-	# while playing: the game menu (Esc)
+	# while playing: the game menu (Esc), on the title screen right over the title card, so
+	# character select and its questions stay above it
 	game_menu = TDGameMenu.new()
 	game_menu.hide()
 	title.add_child(game_menu)
+	title.move_child(game_menu, title.title_card.get_index() + 1)
 	game_menu.resumed.connect(resume)
 	game_menu.settings_requested.connect(func() -> void: open_settings())
 	game_menu.to_characters.connect(_on_to_characters)
-	game_menu.logged_out.connect(_on_log_out)
+	game_menu.logged_out.connect(title.log_out)
 	game_menu.quit.connect(_quit)
 
 	settings_menu = TDSettingsMenu.new()
 	settings_menu.hide()
 	title.add_child(settings_menu)
+	title.move_child(settings_menu, game_menu.get_index() + 1)
 	settings_menu.closed.connect(func() -> void:
 		_settings_from.show()
 		if _settings_from == game_menu:
 			game_menu.open()
 		else:
-			_focus_login())
-
-	# after logging in: character select, the creator and the delete question
-	character_select = TDCharacterSelect.new()
-	character_select.hide()
-	title.add_child(character_select)
-	character_select.play_requested.connect(func(char_name: String) -> void: Net.play(char_name))
-	character_select.create_requested.connect(func() -> void:
-		character_select.hide()
-		creator.open())
-	character_select.delete_requested.connect(func(char_name: String) -> void: delete_confirm.open(char_name))
-	character_select.logged_out.connect(_on_log_out)
-	creator = TDCreator.new()
-	creator.hide()
-	title.add_child(creator)
-	creator.created.connect(func(char_name: String, made: NewCharacter) -> void: Net.create_character(char_name, made))
-	creator.cancelled.connect(func() -> void:
-		creator.hide()
-		character_select.show()
-		character_select.focus_button())
-	delete_confirm = TDDeleteConfirm.new()
-	delete_confirm.hide()
-	title.add_child(delete_confirm)
-	delete_confirm.confirmed.connect(func(char_name: String, typed: String) -> void: Net.delete_character(char_name, typed))
-	delete_confirm.cancelled.connect(character_select.focus_button)
-	confirm = TDConfirm.new()
-	confirm.hide()
-	title.add_child(confirm)
-
-	Net.logged_in.connect(_on_logged_in)
-	Net.characters_changed.connect(_on_characters_changed)
-	Net.refused.connect(_on_refused)
-	Net.joined.connect(_on_joined)
-	Net.disconnected.connect(func(why: String) -> void:
-		world.stop()
-		show_title(false)
-		_show_message(why))
-
-func _small_menu_button(text: String) -> Button:
-	return UiSkin.menu_button(text, Vector2(122, 42), 18)
-
-func _field(text: String, hint: String, max_length: int) -> LineEdit:
-	var f := LineEdit.new()
-	f.text = text
-	UiSkin.set_hint(f, hint)
-	f.max_length = max_length
-	f.custom_minimum_size = Vector2(164, 36)
-	return f
-
-## A field with a small title over it.
-func _titled(title_text: String, field: Control) -> VBoxContainer:
-	var col := VBoxContainer.new()
-	col.add_theme_constant_override("separation", 2)
-	col.add_child(_small_title(title_text))
-	col.add_child(field)
-	return col
-
-## A small muted label, like the titles over the title card's boxes.
-func _small_title(text: String) -> Label:
-	var l := Label.new()
-	l.text = text
-	l.add_theme_font_size_override("font_size", 12)
-	l.add_theme_color_override("font_color", Palette.MUTED)
-	return l
-
-func _label(text: String) -> Label:
-	var l := Label.new()
-	l.text = text
-	l.custom_minimum_size.x = 60
-	l.add_theme_color_override("font_color", Palette.MIST)
-	return l
-
-func _row(children: Array) -> HBoxContainer:
-	var row := HBoxContainer.new()
-	row.alignment = BoxContainer.ALIGNMENT_CENTER
-	row.add_theme_constant_override("separation", 12)
-	for c in children:
-		row.add_child(c)
-	return row
-
-func _on_play() -> void:
-	_show_message("")
-	Net.play_single()
-
-func _on_host() -> void:
-	_show_message(Net.host())
-
-## Log in: hides the register box, then connects with the username and password.
-func _on_log_in() -> void:
-	if confirm_row.visible:
-		confirm_row.hide()
-		confirm_field.text = ""
-	_connect(false)
-
-## Register: the first press asks for the password again, the second makes the account.
-func _on_register() -> void:
-	if not confirm_row.visible:
-		confirm_row.show()
-		confirm_field.grab_focus()
-		_show_message("")
-		return
-	var why := AccountStore.username_problem(username_field.text.strip_edges())
-	if why == "":
-		why = AccountStore.password_problem(password_field.text)
-	if why == "" and confirm_field.text != password_field.text:
-		why = "The passwords don't match."
-	if why != "":
-		_show_message(why)
-		return
-	_connect(true)
-
-func _connect(register: bool) -> void:
-	var address := address_field.text.strip_edges()
-	var user := username_field.text.strip_edges()
-	if address == "" or user == "" or password_field.text == "":
-		_show_message("Type the server, your username and your password.")
-		return
-	Game.last_address = address
-	Game.last_username = user
-	Game.save_settings()
-	var problem := Net.log_in(address, user, password_field.text, register)
-	password_field.text = ""
-	confirm_field.text = ""
-	_show_message(problem if problem != "" else "Connecting to %s…" % address)
-
-## The title card's main menu (Play, Settings, Quit).
-func _show_main_menu() -> void:
-	play_page.hide()
-	main_menu.show()
-	_show_message("")
-	menu_play_button.grab_focus.call_deferred()
-
-## The Play page: solo, host, or online.
-func _open_play_page() -> void:
-	main_menu.hide()
-	play_page.show()
-	_focus_login()
-
-func _focus_login() -> void:
-	if not play_page.visible:
-		if menu_play_button.is_visible_in_tree():
-			menu_play_button.grab_focus()
-		return
-	if username_field.text == "":
-		username_field.grab_focus()
-	else:
-		password_field.grab_focus()
-
-## Which server and account character select is for.
-func _where() -> String:
-	match Net.mode:
-		Net.Mode.SINGLE:
-			return "Playing solo on this computer"
-		Net.Mode.HOST:
-			return "Hosting on port %d" % Net.DEFAULT_PORT
-	return "%s on %s" % [Net.username, Game.last_address]
-
-func _on_logged_in() -> void:
-	_show_message("")
-	confirm_row.hide()
-	title_card.hide()
-	creator.hide()
-	character_select.show_characters(Net.characters, "", _where())
-
-func _on_characters_changed(selected: String) -> void:
-	creator.hide()
-	delete_confirm.hide()
-	title_card.hide()
-	title.show()
-	character_select.show_characters(Net.characters, selected)
-
-## The server said no: shown on whichever screen asked. If it also dropped us (the
-## account was logged in from somewhere else), back to the title.
-func _on_refused(reason: String) -> void:
-	if Net.mode == Net.Mode.NONE:
-		world.stop()
-		show_title(false)
-		_show_message(reason)
-	elif title_card.visible:
-		_back_to_title()
-		_show_message(reason)
-	elif creator.visible:
-		creator.refused(reason)
-	else:
-		character_select.show_message(reason)
-
-func _on_joined() -> void:
-	_show_message("")
-	creator.hide()
-	character_select.hide()
-	title.hide()
-	world.start()
+			title.focus_login())
 
 ## Esc menu: back to character select, still logged in.
 func _on_to_characters() -> void:
 	world.stop(true)
 	game_menu.hide()
-	title_card.hide()
-	title_backdrop.show()
-	title.show()
+	title.show_characters()
 	Net.leave_character()
-
-## Log out (game menu or character select). A host with friends playing is asked first,
-## since it ends the game for them.
-func _on_log_out() -> void:
-	if Net.has_guests():
-		confirm.open("Friends are playing on your game. Log out and end it for them?", "Log out", _log_out)
-	else:
-		_log_out()
-
-func _log_out() -> void:
-	world.stop()
-	show_title(false)
-
-## Shows the title card alone.
-func _back_to_title() -> void:
-	character_select.hide()
-	creator.hide()
-	delete_confirm.hide()
-	confirm.hide()
-	title_card.show()
 
 func _quit() -> void:
 	Net.stop()
@@ -706,27 +380,18 @@ func _update_keys_help() -> void:
 	hint_texts[Hint.FIELD] = "%s attack · %s loot · %s… quickslots" % [k.call("attack"), k.call("loot"), ", ".join(slots)]
 	keys_help.text = hint_texts[hint_kind() if world != null and world.map != null else Hint.TOWN]
 
-func _show_message(text: String) -> void:
-	message.text = text
-	message.visible = text != ""
-	if text != "" and not play_page.visible:
-		# the message sits on the Play page, with the boxes it's about
-		main_menu.hide()
-		play_page.show()
-
 ## The title screen (not playing yet) or the game menu (playing).
 func show_title(paused: bool) -> void:
 	if settings_menu.visible:
 		settings_menu.close()
-	title_backdrop.visible = not paused
+	title.title_backdrop.visible = not paused
 	title.show()
 	if paused:
-		title_card.hide()
+		title.title_card.hide()
 		game_menu.open()
 	else:
 		game_menu.hide()
-		_back_to_title()
-		_show_main_menu()
+		title.show_title_card()
 
 ## Back to the game from the game menu.
 func resume() -> void:
@@ -734,21 +399,12 @@ func resume() -> void:
 	title.hide()
 
 ## Esc. While playing: closes the top window, or opens the game menu, or closes it again.
-## Before that: a question is cancelled, the creator goes back, and character select logs out.
+## Before that, the title screen has it first (TDTitleScreen.escape): a question is cancelled,
+## the creator goes back, and character select logs out.
 func escape() -> void:
-	if confirm.visible:
-		confirm.cancel()
-	elif delete_confirm.visible:
-		delete_confirm.cancel()
-	elif creator.visible:
-		creator.cancelled.emit()
-	elif character_select.visible:
-		_on_log_out()
-	elif title_card.is_visible_in_tree() and play_page.visible:
-		_show_main_menu()
-	elif not world.started:
+	if title.escape() or not world.started:
 		return
-	elif title.visible:
+	if title.visible:
 		if game_menu.visible:
 			resume()
 	elif not close_top_window():
@@ -756,6 +412,6 @@ func escape() -> void:
 
 ## Opens the settings screen in place of the title card or the game menu.
 func open_settings() -> void:
-	_settings_from = game_menu if game_menu.visible else title_card
+	_settings_from = game_menu if game_menu.visible else title.title_card
 	_settings_from.hide()
 	settings_menu.open()
