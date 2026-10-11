@@ -1,5 +1,5 @@
 {
-  "_doc": "Hand-placed points on the paperdoll body frames (assets/sprites/characters/hero.png, in pixels of a frame_size frame from the top-left, facing right) that tools/art/paperdoll_layers.py can't find by itself. weapon: [x, y, angle] = the fist holding the weapon and the way a sword in it points (degrees clockwise from pointing right; 90 is straight down); omit it and the weapon goes on his back (back views, sit) or is put away. weapon_behind: true when that fist is on the far side of his body, so the weapon draws behind him. shield: [x, y] = the middle of the shield (on the front arm, or on his back while climbing); omit it to hide the shield. head_tilt: how far the head is turned (degrees clockwise), 0 when upright. holds: how each other weapon kind is held: 'like' copies another kind's angles, 'angle' is the angle on any frame not listed, 'frames' gives an angle (or [x, y, angle] to move the fist) per frame, 'behind' lists frames where that kind draws behind him. Angles are the way the weapon points whatever slant its sheet drew it at (sword, wand and staff art is measured and straightened). On idle, move, jump, fall, land, crouch, hit and hurt frames every weapon points forward or straight up/down, never back (except run1-2, where his weapon arm swings back as he runs, and claws, which point along his forearm) (tests/unit/hero_pose_test.gd checks it). Preview with python3 tools/art/paperdoll_layers.py --preview.",
+  "_doc": "Hand-placed points on the paperdoll body frames (assets/sprites/characters/hero.png, in pixels of a frame_size frame from the top-left, facing right) that tools/art/paperdoll_layers.py can't find by itself. weapon: [x, y, angle] = the fist holding the weapon and the way a sword in it points (degrees clockwise from pointing right; 90 is straight down); omit it and the weapon goes on his back (back views, sit) or is put away. weapon_behind: true when that fist is on the far side of his body, so the weapon draws behind him. shield: [x, y] = the middle of the shield (on the front arm, or on his back while climbing); omit it to hide the shield. head_tilt: how far the head is turned (degrees clockwise), 0 when upright. holds: how each other weapon kind is held: 'like' copies another kind's angles, 'angle' is the angle on any frame not listed, 'frames' gives an angle (or [x, y, angle] to move the fist) per frame, 'behind' lists frames where that kind draws behind him. Angles are the way the weapon points whatever slant its sheet drew it at (sword, wand and staff art is measured and straightened). On idle, move, jump, fall, land, crouch, hit and hurt frames every weapon points forward or straight up/down, never back (except run1-2, where his weapon arm swings back as he runs, and claws, which point along his forearm) (tests/unit/hero_pose_test.gd checks it). hands: [[x, y], ...] = the middle of each hand his gloves go on, on frames where the hands aren't the weapon fist and the shield point (back views, sit, lying down). Preview with python3 tools/art/paperdoll_layers.py --preview.",
   "frame_size": [128, 104],
   "frames": {
     "idle1": {"weapon": [56, 82, 20], "shield": [89, 80]},
@@ -23,18 +23,18 @@
     "fall": {"weapon": [47, 55, -70], "shield": [99, 63]},
     "land": {"weapon": [56, 91, 5], "shield": [76, 90]},
     "crouch": {"weapon": [43, 85, 10], "shield": [76, 92]},
-    "rope1": {"shield": [62, 70]},
-    "rope2": {"shield": [66, 70]},
-    "ladder1": {"shield": [62, 72]},
-    "ladder2": {"shield": [66, 72]},
-    "climb_idle": {"shield": [62, 74]},
+    "rope1": {"shield": [62, 70], "hands": [[79.5, 23], [50, 67]]},
+    "rope2": {"shield": [66, 70], "hands": [[46, 29.5], [78, 66.5]]},
+    "ladder1": {"shield": [62, 72], "hands": [[84.5, 32], [50, 68]]},
+    "ladder2": {"shield": [66, 72], "hands": [[45, 29.5], [79.5, 68]]},
+    "climb_idle": {"shield": [62, 74], "hands": [[54, 22.5], [73, 22.5]]},
     "slash1": {"weapon": [40, 58, -150], "shield": [88, 96]},
     "slash2": {"weapon": [92, 70, 0], "shield": [35, 67]},
     "slash3": {"weapon": [90, 86, 35], "shield": [34, 66]},
     "faint1": {"weapon": [49, 86, 120], "shield": [95, 57], "head_tilt": -30},
-    "faint2": {"head_tilt": -95},
+    "faint2": {"head_tilt": -95, "hands": [[82, 75]]},
     "levelup": {"weapon": [51, 33, -90], "shield": [80, 76]},
-    "sit": {}
+    "sit": {"hands": [[88.5, 86.5], [55, 84]]}
   },
   "holds": {
     "sword": {

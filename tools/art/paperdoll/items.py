@@ -3,8 +3,11 @@ as in the bag): each piece's sheet of the body wearing it in every pose, in the 
 colours, lifted off the body and fitted onto the hero's frames as worn_item_<id>.
 
     art/source/worn/<item id>.png   the body sheet (paperdoll_body.png's grid and poses) with
-                                    the hero wearing that one top, bottom, pair of shoes,
-                                    gloves or cape (Gemini edits, tools/art/gemini_pass.json)
+                                    the hero wearing that one top, bottom, pair of shoes or
+                                    cape (Gemini edits, tools/art/gemini_pass.json)
+
+Gloves are painted on his own mitten hands from their icon instead (gloves.painted_hands),
+so they always fit his hands.
     art/sheets/shield_backs.json    the back of each shield (cells named by item id); its
                                     front is its icon
 
@@ -13,7 +16,7 @@ cuts (worn.py) these keep their colours: the game draws them untinted (Paperdoll
 from .common import *  # noqa: F401,F403
 from .common import _paste
 from .body import BODY_PIECES, body_fit, drawn_head, shorts_mask
-from .gloves import posed_gloves
+from .gloves import glove_patch, painted_hands
 from .weapons import icon_cut
 from .pieces import pose, save_piece
 
@@ -123,6 +126,25 @@ def posed_item(piece, cell, px, place):
     return scaled(Image.fromarray(cut, "RGBA"), s), (int(round(x)), int(round(y)))
 
 
+def glove_patches(items):
+    """item id -> the patch of its icon (gloves.glove_patch) its gloves are painted with."""
+    icons = {}
+    for f in sorted(os.listdir(ss.SHEETS)):
+        if f.startswith(ICON_SHEETS) and f.endswith(".json"):
+            icons.update(icon_cut(f[:-5], set(items)))
+    return {item: glove_patch(icon.img) for item, icon in icons.items()}
+
+
+def hand_points(hero, n, entry):
+    """Where his hands are in frame `n`: the rig's weapon fist and shield point, or the hand
+    rig's own hand points where those aren't his hands (paperdoll_rig.json "hands")."""
+    if "hands" in hero.hands.get(n, {}):
+        return hero.hands[n]["hands"]
+    if n in BACK_VIEW:
+        return []
+    return [entry[k] for k in ("grip", "shield") if k in entry]
+
+
 def item_layers(hero, rig_frames):
     """Writes worn_item_<id> for every item sheet in art/source/worn/ (a cape also gets
     worn_item_<id>_behind: the part hanging behind him)."""
@@ -131,23 +153,20 @@ def item_layers(hero, rig_frames):
     names, frames, index, anims = hero.names, hero.frames, hero.index, hero.anims
     fw, fh, r, blank, body_cells, spec = hero.fw, hero.fh, hero.r, hero.blank, hero.body_cells, hero.spec
     places = item_places()
+    patches = glove_patches([i for i, p in places.items() if p == "gloves"])
     for f in sorted(os.listdir(WORN_DIR)):
         item = f[:-4]
         if not f.endswith(".png") or item not in places:
             continue
-        place, drawn = places[item], item_sheet(item)
+        place = places[item]
+        drawn = {} if place == "gloves" else item_sheet(item)
         front, behind = [], []
         for n, px, entry in zip(names, frames, rig_frames):
             over, back = blank(), blank()
             cell = body_cells[n]
             if place == "gloves":
-                points = [entry[k] for k in ("grip", "shield") if k in entry]
-                if cell in drawn and points and n not in BACK_VIEW:
-                    p = drawn[cell]
-                    arr = np.asarray(p.img).copy()
-                    arr[~piece_mask(p, cell, place), 3] = 0
-                    for img, at in posed_gloves(arr, px, points, r * GLOVE_REACH, keep_colour=True):
-                        _paste(over, img, *at)
+                if item in patches:
+                    over = Image.fromarray(painted_hands(px, hand_points(hero, n, entry), patches[item], r))
             elif cell in drawn:
                 worn = posed_item(drawn[cell], cell, px, place)
                 if worn:

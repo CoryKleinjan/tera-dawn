@@ -1,9 +1,55 @@
 """Gloves: lifted off a sheet of the body wearing them in every pose and set on the hero's
-hands (the rig's grip and shield points), at the size the drawn body is to his."""
+hands (the rig's grip and shield points), at the size the drawn body is to his; or, for an
+item's own gloves, his mitten hands painted with its icon (painted_hands)."""
 from .common import *  # noqa: F401,F403
 from .common import _paste
 from .body import body_fit
 from .worn import worn_mask
+
+
+# ---------- gloves painted from an icon ----------
+
+def glove_patch(icon):
+    """The middle of an icon's glove (the back of the hand, its colours and detail) as a square
+    picture, to paint his hands with."""
+    arr = np.asarray(icon)
+    ys, xs = np.nonzero(arr[..., 3] > 0)
+    cx, cy = (xs.min() + xs.max()) / 2, (ys.min() + ys.max()) / 2
+    h = min(np.ptp(xs), np.ptp(ys)) * GLOVE_PATCH / 2
+    return icon.crop((int(cx - h), int(cy - h), int(cx + h), int(cy + h)))
+
+
+def painted_hands(px, hands, patch, r):
+    """His hands in one frame (`px`) painted with a glove's `patch` (glove_patch): each hand
+    point's mitten (the skin around it, as much as shows) covered, a pixel over its outline,
+    with the patch fitted to it and its edge shaded dark. Returns an RGBA array the frame's
+    size. Being his own hands, they fit every pose and hide where his body hides them
+    (Cory 2026-10-11: gloves are mittens in the glove's colours)."""
+    out = np.zeros(px.shape, np.uint8)
+    a = px.astype(int)
+    solid = a[..., 3] > 127
+    skin = solid & (a[..., 0] > 170) & (a[..., 0] > a[..., 2] + 30)
+    yy, xx = np.mgrid[0:px.shape[0], 0:px.shape[1]]
+    for hx, hy in hands:
+        near = (xx - hx) ** 2 + (yy - hy) ** 2
+        lab, n = ss.label(skin & (near <= (GLOVE_FIND * r) ** 2))
+        if not n:
+            continue
+        # the piece of skin nearest the point is his hand (not his arm or leg beside it)
+        hand = lab == 1 + int(np.argmin([near[lab == i].min() for i in range(1, n + 1)]))
+        hand &= near <= (GLOVE_HAND * r) ** 2
+        shape = ss.dilate(hand, 2) & solid
+        if not shape.any():
+            continue
+        ys, xs = np.nonzero(shape)
+        x0, x1, y0, y1 = xs.min(), xs.max() + 1, ys.min(), ys.max() + 1
+        paint = np.asarray(patch.convert("RGBA").resize((x1 - x0, y1 - y0), Image.LANCZOS)).copy()
+        m = shape[y0:y1, x0:x1]
+        edge = (shape & ss.dilate(~shape, 1))[y0:y1, x0:x1]
+        paint[edge, :3] = (paint[edge, :3] * GLOVE_EDGE).astype(np.uint8)
+        paint[..., 3] = 255
+        out[y0:y1, x0:x1][m] = paint[m]
+    return out
 
 
 # ---------- gloves drawn on the body ----------

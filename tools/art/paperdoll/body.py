@@ -205,6 +205,8 @@ def hand_rig(fw):
             h["weapon"] = [h["weapon"][0] * k, h["weapon"][1] * k, h["weapon"][2]]
         if "shield" in h:
             h["shield"] = [h["shield"][0] * k, h["shield"][1] * k]
+        if "hands" in h:
+            h["hands"] = [[x * k, y * k] for x, y in h["hands"]]
         frames[n] = h
     holds = {}
     for kind, h in spec.get("holds", {}).items():
