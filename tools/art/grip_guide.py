@@ -16,6 +16,12 @@ wrapped next to the long end.
         weapon for them, along the edit's rod; --rods reads the rods from another sheet
         (the edit before its rods were taken out)
 
+    python3 tools/art/grip_guide.py closeups DIR GUIDE.png
+        close-ups of the guide's weapon hands, a few per image (Gemini redraws a hand
+        when it is big in the picture; see GROUPS)
+    python3 tools/art/grip_guide.py closeup-hands EDIT_1.png EDIT_2.png ...
+        put the hands from the edited close-ups on the body sheet
+
 `hands` takes only the hand around each rod from the edit (the rod taken out and painted
 over) and pastes it into art/source/paperdoll_body.png, so nothing else on the sheet moves.
 Then re-cut the body and rebuild the layers (slice_sheets.py paperdoll_body, then
@@ -239,6 +245,65 @@ def hands(path, whole=(), rods_path=None):
                 print(f"{n}: \"weapon\": [{round((gx + dx) / k)}, {round((gy + dy) / k)}, {round(angle / 5) * 5}]"
                       f" (set it in {os.path.relpath(pl.HAND_RIG, pl.ROOT)})")
 
+# Close-ups: Gemini leaves the hands alone when asked to edit the whole 32-pose sheet, but
+# redraws a hand round a rod when it is big in the picture. Each close-up shows a few weapon
+# hands from the guide, each in its own square panel, ZOOM times bigger.
+GROUPS = (("idle1", "idle2", "idle3", "idle4", "walk1"), ("walk2", "walk3", "walk4", "hit", "hurt"),
+          ("attack1", "attack2", "slash1", "slash2", "slash3"), ("jump", "fall", "land", "crouch", "levelup"))
+PANEL = 1.0      # a panel reaches this far from the grip each way (head radii)
+ZOOM = 3
+GAP = 24         # magenta between panels (close-up pixels)
+
+
+def _panel(r):
+    return 2 * round(r * PANEL)
+
+
+def closeups(out_dir, guide_path):
+    """Writes closeup_<n>.png from the guide image, one per GROUPS entry."""
+    found, r = grips()
+    sheet = Image.open(guide_path).convert("RGB")
+    p = _panel(r)
+    os.makedirs(out_dir, exist_ok=True)
+    for n, group in enumerate(GROUPS, 1):
+        img = Image.new("RGB", (len(group) * (p * ZOOM + GAP) + GAP, p * ZOOM + 2 * GAP), MAGENTA)
+        for i, c in enumerate(group):
+            (x, y), _ = found[c]
+            crop = sheet.crop((round(x) - p // 2, round(y) - p // 2, round(x) + p // 2, round(y) + p // 2))
+            img.paste(crop.resize((p * ZOOM, p * ZOOM), Image.LANCZOS), (GAP + i * (p * ZOOM + GAP), GAP))
+        path = os.path.join(out_dir, f"closeup_{n}.png")
+        img.save(path)
+        print(f"close-up: {path} ({', '.join(group)})")
+
+
+def closeup_hands(paths):
+    """Puts the hands from edited close-ups (closeup_<n>.png results, in GROUPS order) on the
+    body sheet."""
+    found, r = grips()
+    p = _panel(r)
+    body = np.asarray(Image.open(BODY).convert("RGB")).copy()
+    taken = []
+    for group, path in zip(GROUPS, paths):
+        size = (len(group) * (p * ZOOM + GAP) + GAP, p * ZOOM + 2 * GAP)
+        edit = _sheet(path, size)
+        for i, c in enumerate(group):
+            x0 = GAP + i * (p * ZOOM + GAP)
+            panel = Image.fromarray(edit[GAP:GAP + p * ZOOM, x0:x0 + p * ZOOM]).resize((p, p), Image.LANCZOS)
+            arr = np.dstack([np.asarray(panel), np.full((p, p), 255, np.uint8)])
+            pl.inpaint(arr, ss.dilate(rod_mask(arr), 1))  # in place
+            new = solid(arr[..., :3], (0, 0, p, p))
+            hand = pl.fist_mask(new, (p / 2, p / 2), r * HAND)
+            (x, y), _ = found[c]
+            bx, by = round(x) - p // 2, round(y) - p // 2
+            region = body[by:by + p, bx:bx + p]
+            old = pl.fist_mask(solid(region, (0, 0, p, p)), (p / 2, p / 2), r * HAND)
+            region[hand] = new[hand][:, :3]
+            region[old & ~hand] = MAGENTA
+            taken.append(c)
+    Image.fromarray(body).save(BODY)
+    print(f"close-up hands: {len(taken)} cells -> {os.path.relpath(BODY, pl.ROOT)}")
+
+
 if __name__ == "__main__":
     args = sys.argv[1:]
     if len(args) >= 2 and args[0] == "guide":
@@ -246,5 +311,9 @@ if __name__ == "__main__":
     elif len(args) >= 2 and args[0] == "hands":
         cells = args[args.index("--cells") + 1].split(",") if "--cells" in args else ()
         hands(args[1], cells, args[args.index("--rods") + 1] if "--rods" in args else None)
+    elif len(args) >= 3 and args[0] == "closeups":
+        closeups(args[1], args[2])
+    elif len(args) >= 2 and args[0] == "closeup-hands":
+        closeup_hands(args[1:])
     else:
         sys.exit(__doc__)
