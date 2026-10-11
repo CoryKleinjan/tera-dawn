@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=57 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=54 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/meadow.tres" id="2_meadow"]
@@ -13,8 +13,6 @@
 [ext_resource type="Resource" path="res://data/monsters/petal_bat.tres" id="11_petal_bat"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="12_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tall_grass.png" id="13_tall_grass"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/floating_rock.png" id="14_floating_rock"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/arch.png" id="15_arch"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/rock_large.png" id="16_rock_large"]
 
 [sub_resource type="Resource" id="Resource_39"]
@@ -265,14 +263,6 @@ script = ExtResource("3_platform_def")
 x = 2070.0
 y = 170.0
 width = 100.0
-look = ExtResource("14_floating_rock")
-
-[sub_resource type="Resource" id="Land_2"]
-script = ExtResource("3_platform_def")
-x = 1860.0
-y = 557.2
-width = 120.0
-look = ExtResource("15_arch")
 
 [sub_resource type="Resource" id="Rope_10_0"]
 script = ExtResource("4_climbable_def")
@@ -290,7 +280,7 @@ width = 3000
 height = 700
 ground_y = 620
 start_x = 120.0
-platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Land_1"), SubResource("Land_2")])
+platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Land_1")])
 climbables = Array[ExtResource("4_climbable_def")]([SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18"), SubResource("Resource_19"), SubResource("Resource_20"), SubResource("Rope_10_0")])
 portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_21"), SubResource("Resource_22")])
 spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_23"), SubResource("Resource_24"), SubResource("Resource_25"), SubResource("Resource_26"), SubResource("Resource_27"), SubResource("Resource_28"), SubResource("Resource_29"), SubResource("Resource_30"), SubResource("Resource_31"), SubResource("Resource_32"), SubResource("Resource_33"), SubResource("Resource_34")])

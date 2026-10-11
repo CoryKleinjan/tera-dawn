@@ -101,6 +101,18 @@
     ]
   },
   "overrides": {
+    "arch": {
+      "save": false
+    },
+    "floating_rock": {
+      "save": false
+    },
+    "ledge_vines": {
+      "save": false
+    },
+    "ledge_overhang": {
+      "save": false
+    },
     "bush_small": {
       "flat_bottom": true
     },
