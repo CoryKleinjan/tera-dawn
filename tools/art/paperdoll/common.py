@@ -81,14 +81,16 @@ GLOVE_REACH = 0.9     # a glove is put on a hand only if the drawn one is this n
 SWORD_LENGTH = 1.9    # every weapon is drawn at the scale that makes the sword this long
 WEAPON_LENGTH = 20    # rig "tip" is this far from "grip" along the weapon (only its direction matters)
 FIST = 0.4            # the fist around a grip reaches this far from the grip point (head radii)
+FOREARM = 1.1         # forearm_angles: skin this close to the fist (head radii) counts as his forearm
+CLAW_CUFF = 0.25      # how far along a claw (0 its back end, 1 its tips) the middle of its cuff is
 
 # Weapons worn on the fist are drawn smaller than the template sheet has them, so they fit
 # his hand rather than swallowing it (the rest keep the sheet's size against the sword).
-WORN_SIZE = {"claw": 0.6, "knuckle": 0.75, "bow": 1.35}
+WORN_SIZE = {"claw": 0.9, "knuckle": 0.75, "bow": 1.35}
 # Long weapons whose sheets may draw them at a slant (a sword up and to the right): their own
 # axis is measured and turned out, so a rig angle means the same however the art was drawn.
-# The others are drawn the way the rig expects (a gun and claws pointing right, a bow upright).
-AXIAL = ("sword", "wand", "staff")
+# The others are drawn the way the rig expects (a gun pointing right, a bow upright).
+AXIAL = ("sword", "wand", "staff", "claw")
 # Weapons the rig holds upright (see stood_up), and how far off upright (degrees) one may be
 # drawn before it is stood up.
 UPRIGHT = ("bow",)
@@ -98,8 +100,9 @@ GRIPPED = ("sword", "wand", "staff", "bow", "gun")
 # Weapons carried on his back while he climbs or sits, and at what angle; the rest are put away.
 ON_BACK = {"sword": 125, "staff": -70, "bow": 60, "wand": 125, "gun": 110}
 SHEATHED = BACK_VIEW + ("sit",)
-# Sheets of weapons with their own held picture: one cell per weapon, named by item id.
-HELD_SHEETS = "held_"
+# Weapons are held as their own icon (Cory 2026-10-11: gear looks the same worn as in the
+# bag): the weapon cells of these item icon sheets, cut at the sheet's full size.
+ICON_SHEETS = "items_"
 ITEMS = os.path.join(ROOT, "data", "items")
 
 # Where the weapon hand and shield are, and how the head is tilted, per frame: placed by hand,

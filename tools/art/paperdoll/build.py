@@ -6,7 +6,7 @@ from .faces import face_layers
 from .gloves import glove_layers
 from .hair import one_piece_layers, posed_layers
 from .hats import hat_layers
-from .weapons import holds, weapon_layers
+from .weapons import forearm_angles, holds, weapon_layers
 from .worn import cape_layers, clothes_layers, shield_layers
 
 
@@ -22,7 +22,7 @@ def main():
     old, old_hat = one_piece_layers(hero, hair)
     posed_layers(hero, old, old_hat)
     face_layers(hero, faces)
-    held = holds(hero.hands, hero.hold_spec, names)
+    held = holds(hero.hands, hero.hold_spec, names, forearm_angles(hero))
     rig_frames = rig_entries(hero, held)
     cape_layers(hero)
     shield_layers(hero, rig_frames)
