@@ -1,5 +1,5 @@
 {
-  "source": "art/source/paperdoll_cape.png",
+  "source": "art/source/top_plate_frames.png",
   "grid": {
     "rows": [
       0,
@@ -23,9 +23,9 @@
   "scale": 1.0,
   "label_band": 0.18,
   "strip_labels": true,
-  "keep": "all",
+  "keep": "largest",
   "save": false,
-  "out_dir": "art/build/paperdoll/cape",
+  "out_dir": "art/build/top_plate_frames",
   "cells": [
     [
       "idle1",
@@ -76,7 +76,7 @@
       "blank_top": 29
     },
     "idle3": {
-      "blank_top": 29
+      "blank_top": 30
     },
     "idle4": {
       "blank_top": 29
@@ -85,7 +85,7 @@
       "blank_top": 29
     },
     "walk2": {
-      "blank_top": 29
+      "blank_top": 30
     },
     "walk3": {
       "blank_top": 29
@@ -94,76 +94,76 @@
       "blank_top": 29
     },
     "run1": {
-      "blank_top": 28
+      "blank_top": 29
     },
     "run2": {
-      "blank_top": 28
+      "blank_top": 29
     },
     "run3": {
-      "blank_top": 28
+      "blank_top": 29
     },
     "run4": {
-      "blank_top": 28
+      "blank_top": 29
     },
     "attack1": {
-      "blank_top": 28
+      "blank_top": 29
     },
     "attack2": {
-      "blank_top": 28
+      "blank_top": 29
     },
     "hit": {
-      "blank_top": 28
+      "blank_top": 29
     },
     "hurt": {
-      "blank_top": 28
+      "blank_top": 29
     },
     "jump": {
-      "blank_top": 30
+      "blank_top": 31
     },
     "fall": {
-      "blank_top": 30
+      "blank_top": 31
     },
     "land": {
-      "blank_top": 30
+      "blank_top": 31
     },
     "crouch": {
-      "blank_top": 30
+      "blank_top": 31
     },
     "rope1": {
-      "blank_top": 30
+      "blank_top": 31
     },
     "rope2": {
-      "blank_top": 30
+      "blank_top": 31
     },
     "ladder1": {
-      "blank_top": 30
+      "blank_top": 31
     },
     "ladder2": {
-      "blank_top": 30
+      "blank_top": 31
     },
     "climb_idle": {
-      "blank_top": 32
+      "blank_top": 33
     },
     "slash1": {
       "blank_top": 31
     },
     "slash2": {
-      "blank_top": 30
-    },
-    "slash3": {
       "blank_top": 31
     },
-    "faint1": {
+    "slash3": {
       "blank_top": 32
     },
+    "faint1": {
+      "blank_top": 33
+    },
     "faint2": {
-      "blank_top": 32
+      "blank_top": 33
     },
     "levelup": {
       "blank_top": 32
     },
     "sit": {
-      "blank_top": 32
+      "blank_top": 33
     }
   }
 }

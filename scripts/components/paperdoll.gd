@@ -15,8 +15,8 @@ extends RefCounted
 ## shields and gloves are greyscale art tinted with the hair, eye or item colour. The weapon
 ## is a layer too, already placed in his fist on every frame by paperdoll_layers.py, with a
 ## hole where his fingers wrap the grip (see weapon_layers); a weapon kind is held its own way
-## (a bow upright, a staff planted). Hats are drawn on top at a rig point (LookShapes):
-## code-drawn stand-ins for now.
+## (a bow upright, a staff planted). A hat is a layer too, one per shape (EquipDef.look_shape),
+## tinted with the hat's colour; the hair under it is the hairstyle's own _hat layer.
 
 ## The parts of the body, as hero_regions.png numbers them. Hair, eyes, cape, weapon, shield
 ## and gloves are layers now, so only skin, top, bottom and shoes are on the map.
@@ -37,8 +37,8 @@ const MASK := preload("res://assets/sprites/characters/hero_regions.png")
 const RIG_PATH := "res://assets/sprites/characters/hero_rig.json"
 ## The art for worn places with no art of their own: tinted with the piece's colour.
 const CAPE := preload("res://assets/animations/paperdoll/cape.tres")
-## The cape seen from behind (climbing), over his back.
-const CAPE_BACK_VIEW := preload("res://assets/animations/paperdoll/cape_back_view.tres")
+## The cape's part in front of him: its collar and clasp, or all of it seen from behind (climbing).
+const CAPE_FRONT := preload("res://assets/animations/paperdoll/cape_front.tres")
 const SHIELD := preload("res://assets/animations/paperdoll/shield_round.tres")
 ## Gloves on both hands (climbing: bare hands).
 const GLOVES := preload("res://assets/animations/paperdoll/gloves.tres")
@@ -48,42 +48,46 @@ const GLOVES := preload("res://assets/animations/paperdoll/gloves.tres")
 const WEAPON_DIR := "res://assets/animations/paperdoll/weapon_"
 ## The kind a weapon without one is drawn as.
 const DEFAULT_WEAPON := &"sword"
+## Tops worn open at the front (EquipDef.worn_style), with UNDERSHIRT under them so his
+## chest isn't bare, in UNDERSHIRT_COLOR (a plain linen).
+const OPEN_TOPS: Array[StringName] = [&"coat"]
+const UNDERSHIRT := preload("res://assets/animations/paperdoll/top_undershirt.tres")
+const UNDERSHIRT_COLOR := Color(0.86, 0.82, 0.72)
+## Hat layers: hat_<shape>.tres (EquipDef.look_shape; a hat without one is a DEFAULT_HAT).
+const HAT_DIR := "res://assets/animations/paperdoll/hat_"
+const DEFAULT_HAT := &"cap"
 ## Shields by EquipDef.look_shape (any other: SHIELD).
 const SHIELDS := {&"kite": preload("res://assets/animations/paperdoll/shield_kite.tres")}
 ## The hero's frame size in pixels; every frame of the strip is this big.
 const FRAME_SIZE := Vector2(256, 207)
-## How many strip pixels make one "hero pixel", the unit the game sizes him in (TDStage.TEXEL)
-## and hat stand-ins are drawn in: the strip is cut at the full resolution of the painted
-## sheet, twice as fine as the hero is sized.
+## How many strip pixels make one "hero pixel", the unit the game sizes him in (TDStage.TEXEL):
+## the strip is cut at the full resolution of the painted sheet, twice as fine as the hero is sized.
 const ART_SCALE := 2.0
-## Heads bigger or smaller than this (strip pixels) scale hat stand-ins with them.
-const HEAD_WIDTH := 40.0 * ART_SCALE
 
-## A stand-in drawn on the hero.
-class Overlay:
-	var shape: StringName
-	var color: Color
-
-	func _init(s: StringName, c: Color) -> void:
-		shape = s
-		color = c
-
-## A layer of art, played in step with the hero and multiplied by `tint`.
+## A layer of art, played in step with the hero and multiplied by `tint`, or with `gear`
+## (greyscale gear art) shaded in it, its light and dark greys turning light and deep shades
+## of the colour (gear_tint.gdshaderinc).
 class Layer:
 	var frames: SpriteFrames
 	var behind := false
 	var tint := Color.WHITE
+	var gear := false
 
-	func _init(f: SpriteFrames, back: bool, t := Color.WHITE) -> void:
+	func _init(f: SpriteFrames, back: bool, t := Color.WHITE, g := false) -> void:
 		frames = f
 		behind = back
 		tint = t
+		gear = g
+
+	## Sets a layer material's uniforms (paperdoll_layer or paperdoll_ui_layer shader).
+	func apply(mat: ShaderMaterial) -> void:
+		mat.set_shader_parameter(&"tint", tint)
+		mat.set_shader_parameter(&"gear", gear)
 
 ## Per region: colour to recolour it with (alpha: how much, 0 keeps the art's own).
 var tints := PackedColorArray()
 ## Per region: 1 hides it.
 var hidden := PackedFloat32Array()
-var overlays: Array[Overlay] = []
 ## Back to front: the ones `behind` go under the body, the rest over it.
 var layers: Array[Layer] = []
 ## The kind of weapon in his hand (&"" bare-handed) and its colour (its streak when swung).
@@ -139,7 +143,10 @@ static func dress(look: Dictionary) -> Paperdoll:
 	var hair_tone := _look_color(a.part(LookDef.Kind.HAIR_COLOR), Region.HAIR)
 	var cape: EquipDef = gear.get(&"cape")
 	if cape:
-		d._add(cape.worn_frames if cape.worn_frames else CAPE, true, Color.WHITE if cape.worn_frames else cape.worn_color())
+		if cape.worn_frames:
+			d._add(cape.worn_frames, true)
+		else:
+			d._add(CAPE, true, cape.worn_color(), true)
 	if hair and not gear.has(&"hat"):
 		d._add(hair.back_frames, true, hair_tone)
 	var weapon: EquipDef = gear.get(&"weapon")
@@ -148,7 +155,7 @@ static func dress(look: Dictionary) -> Paperdoll:
 		d.weapon_kind = kind_of(weapon)
 		d.weapon_tint = weapon.worn_color()
 	if held.has("behind"):
-		d._add(held["behind"], true, held["tint"])
+		d._add(held["behind"], true, held["tint"], held["tint"] != Color.WHITE)
 
 	# over him
 	for place in [&"bottom", &"shoes", &"top", &"gloves"]:
@@ -158,11 +165,13 @@ static func dress(look: Dictionary) -> Paperdoll:
 			if PLACE_REGIONS.has(place):
 				d.hidden[PLACE_REGIONS[place]] = 1.0
 		elif cuts.has(place):
-			d._add(cuts[place], false, e.worn_color())
+			if place == &"top" and e.worn_style in OPEN_TOPS:
+				d._add(UNDERSHIRT, false, UNDERSHIRT_COLOR, true)
+			d._add(cuts[place], false, e.worn_color(), true)
 		elif e and place == &"gloves":
-			d._add(GLOVES, false, e.worn_color())
+			d._add(GLOVES, false, e.worn_color(), true)
 	if cape and cape.worn_frames == null:
-		d._add(CAPE_BACK_VIEW, false, cape.worn_color())
+		d._add(CAPE_FRONT, false, cape.worn_color(), true)
 	var face := a.part(LookDef.Kind.FACE)
 	if face:
 		d._add(face.frames, false)
@@ -174,18 +183,23 @@ static func dress(look: Dictionary) -> Paperdoll:
 		if shield.worn_frames:
 			d._add(shield.worn_frames, false)
 		else:
-			d._add(SHIELDS.get(shield.look_shape, SHIELD), false, shield.worn_color())
-	if weapon and weapon.worn_frames:
-		d._add(weapon.worn_frames, false)
-	elif held.has("front"):
-		d._add(held["front"], false, held["tint"])
+			d._add(SHIELDS.get(shield.look_shape, SHIELD), false, shield.worn_color(), true)
 	var hat: EquipDef = gear.get(&"hat")
 	if hat:
 		if hat.worn_frames:
 			d._add(hat.worn_frames, false)
-		elif LookShapes.has(hat.worn_shape()):
-			d.overlays.append(Overlay.new(hat.worn_shape(), hat.worn_color()))
+		else:
+			d._add(hat_frames(hat), false, hat.worn_color(), true)
+	if weapon and weapon.worn_frames: # over the hat: a sword raised over his head
+		d._add(weapon.worn_frames, false)
+	elif held.has("front"):
+		d._add(held["front"], false, held["tint"], held["tint"] != Color.WHITE)
 	return d
+
+## The layer a hat without art of its own is drawn with: its shape's (EquipDef.look_shape).
+static func hat_frames(e: EquipDef) -> SpriteFrames:
+	var path := HAT_DIR + String(e.look_shape) + ".tres"
+	return load(path if e.look_shape != &"" and ResourceLoader.exists(path) else HAT_DIR + String(DEFAULT_HAT) + ".tres")
 
 ## How a weapon is drawn in his hand: {"front": SpriteFrames, "behind": SpriteFrames (if any),
 ## "tint": Color}. Its own held picture (weapon_item_<id>) if one was drawn, in its own colours;
@@ -214,9 +228,9 @@ static func _weapon_frames(base: String, tint: Color) -> Dictionary:
 		out["behind"] = load(base + "_behind.tres")
 	return out
 
-func _add(frames: SpriteFrames, behind: bool, tint := Color.WHITE) -> void:
+func _add(frames: SpriteFrames, behind: bool, tint := Color.WHITE, gear := false) -> void:
 	if frames:
-		layers.append(Layer.new(frames, behind, tint))
+		layers.append(Layer.new(frames, behind, tint, gear))
 
 ## A look's colour, or the art's own colour for the region when it keeps it.
 static func _look_color(l: LookDef, region: Region) -> Color:
@@ -287,35 +301,3 @@ static func weapon_reach(kind: StringName) -> float:
 	if not w is Dictionary:
 		return 0.0
 	return float(w.get("reach", float(w["size"][0]) - float(w["grip"][0])))
-
-## How far the head is turned on a frame (degrees clockwise, 0 upright); hats turn with it.
-static func head_angle(frame: int) -> float:
-	var frames: Array = rig().get("frames", [])
-	return float(frames[frame].get("head_angle", 0.0)) if frame >= 0 and frame < frames.size() else 0.0
-
-## Where a stand-in goes on a frame: its centre in frame pixels, its angle (radians, y
-## down) and its scale, for a hero facing right; null if the frame has nowhere to put it.
-## `mirror` turns it into the hero facing left (flip the picture and use these values).
-static func place_overlay(shape: StringName, frame: int, mirror := false) -> Variant:
-	var at: Variant = anchor(frame, LookShapes.anchor(shape))
-	if at == null:
-		return null
-	var angle := 0.0
-	var scale := 1.0
-	if LookShapes.turns(shape):
-		var tip: Variant = anchor(frame, &"tip")
-		if tip == null:
-			return null
-		angle = (tip - at).angle()
-	elif LookShapes.anchor(shape) != &"grip":
-		var head: Variant = anchor(frame, &"head_size")
-		if head != null:
-			scale = clampf(head.x / HEAD_WIDTH, 0.85, 1.2)
-		scale *= ART_SCALE
-		angle = deg_to_rad(head_angle(frame))
-	var size := LookShapes.texture(shape, Color.WHITE).get_size()
-	var centre: Vector2 = at + ((size / 2.0 - LookShapes.pivot(shape)) * scale).rotated(angle)
-	if mirror:
-		centre.x = FRAME_SIZE.x - centre.x
-		angle = -angle
-	return {"centre": centre, "angle": angle, "scale": scale}

@@ -13,6 +13,9 @@ purple art inside an outline stays.
                                      # drawn across a painting at these x (sheet pixels), nothing else
     python3 tools/art/clean_sheet.py NAME --sky far,mid --only-sky  # backdrop strips painted over their
                                      # own sky: the sky (one colour per row, a gradient) becomes magenta
+    python3 tools/art/clean_sheet.py NAME --plain   # a sheet that came back on another flat or graded
+                                     # background (grey, a purple-to-teal fade): each cell row's own
+                                     # border colour, wherever it reaches from the border, becomes magenta
 
 Uses the manifest's `grid` (or the detected one) and `region`, and runs once per sheet: run it
 again on the original picture, not on its own output, if the thresholds change.
@@ -29,6 +32,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import slice_sheets as ss  # noqa: E402
 
 MAGENTA = np.array([255, 0, 255])
+PLAIN_TOLERANCE = 40  # --plain: how far (summed RGB) a pixel may be from its row's border colour
 
 
 def passable(cell, bg, halo=False):
@@ -44,12 +48,21 @@ def passable(cell, bg, halo=False):
     return ok
 
 
-def clean_cell(cell, halo=False):
+def border_colours(cell, edge=3):
+    """Per row of a cell, the colour of its left and right borders (the background where it is
+    flat or graded top to bottom), as an (h, 1, 3) array."""
+    sides = np.concatenate([cell[:, :edge], cell[:, -edge:]], 1).astype(int)
+    return np.median(sides, 1)[:, None, :]
+
+
+def clean_cell(cell, halo=False, plain=False):
     h, w, _ = cell.shape
     ring = np.concatenate([cell[0], cell[-1], cell[:, 0], cell[:, -1]]).astype(int)
     mag = ring[(np.minimum(ring[:, 0], ring[:, 2]) - ring[:, 1]) > 100]
     bg = np.median(mag, 0) if len(mag) else MAGENTA
     ok = passable(cell, bg, halo)
+    if plain:
+        ok |= np.abs(cell.astype(int) - border_colours(cell)).sum(2) < PLAIN_TOLERANCE
     seen = np.zeros((h, w), bool)
     q = deque()
     for y, x in [(0, x) for x in range(w)] + [(h - 1, x) for x in range(w)] + \
@@ -146,6 +159,8 @@ def main():
         i = args.index("--cells")
         only_cells = set(args[i + 1].split(","))
         del args[i:i + 2]
+    plain = "--plain" in args
+    args = [a for a in args if a != "--plain"]
     halo = set()
     if "--halo" in args:
         i = args.index("--halo")
@@ -175,7 +190,7 @@ def main():
                 if cell_name in sky:
                     box = remove_sky(box)
                 if not only_sky:
-                    box = clean_cell(box, cell_name in halo)
+                    box = clean_cell(box, cell_name in halo, plain)
                 part[by0 + ins:by1 - ins, cx0 + ins:cx1 - ins] = box
         img[y0:y1, x0:x1] = part
         Image.fromarray(img).save(path, optimize=True)
