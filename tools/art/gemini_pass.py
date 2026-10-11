@@ -64,6 +64,9 @@ GRID_RULE = "- Draw exactly {rows} rows x {cols} columns = {n} equal cells, ever
 # prompt-file chat (plus any "refs" after it). Gemini keeps an edited image's layout far better
 # than it traces an attached one, and a result can be edited again to fix only its bad cells.
 EDIT_RULES = """This is an edit of the attached image, not a new drawing. Keep the image's size, grid, cell borders and labels, and every figure's position, size and pose, exactly as they are; change only what is asked above. Any added art matches the style asked for above, with the same dark plum-brown outline. The background stays one flat pure magenta #FF00FF (RGB 255, 0, 255) everywhere: never grey, pink or lilac. Answer with the edited image."""
+# Edits with "new_view": true redraw the base from another viewpoint (a 3/4 building as a flat
+# side-on front), so they get these rules instead: EDIT_RULES would keep the old angle.
+VIEW_RULES = """This is a redraw of the attached image from a new viewpoint, not a copy: the new view asked above is the whole point, and an answer that keeps the old angle is wrong. Keep the image's size, keep the subject centred at about the same height, and keep its design, colours and style. Any art matches the style asked for above, with the same dark plum-brown outline. The background stays one flat pure magenta #FF00FF (RGB 255, 0, 255) everywhere: never grey, pink or lilac. Answer with the redrawn image."""
 
 
 def find_key(obj, key):
@@ -303,9 +306,10 @@ class Pass:
 
     def edit_request(self, sheet, prepare):
         base, aspect, unpad = self.edit_base(sheet)
+        rules = VIEW_RULES if sheet["edit"].get("new_view") else EDIT_RULES
         body = {"contents": [{"role": "user", "parts": [
                     prepare(base)] + [prepare(os.path.join(gemini_sheet.ROOT, r)) for r in sheet["edit"].get("refs", [])] + [
-                    {"text": sheet["edit"]["text"] + "\n\n" + EDIT_RULES}]}],
+                    {"text": sheet["edit"]["text"] + "\n\n" + rules}]}],
                 "generationConfig": {"responseModalities": ["TEXT", "IMAGE"],
                                      "imageConfig": {"aspectRatio": aspect, "imageSize": sheet.get("size", self.size)}}}
         return body, aspect, unpad
