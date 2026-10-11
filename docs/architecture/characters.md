@@ -53,6 +53,12 @@ only what the creator offers and makes a level 1 character in the starting job
   moving frame (`tests/unit/hero_pose_test.gd`). Poses not drawn yet fall back to the nearest
   one (`SpriteRig.FALLBACK`). `WeaponTrail` draws the streak a
   swung blade leaves and the flash of a shot.
+- **One body for every hero**: your hero (`TDPlayer`) and other players' (`TDAvatar`) each
+  work out their pose (from your keys, or from the snapshot), and `HeroBody`
+  (`scripts/components/hero_body.gd`) draws it the same way for both: the rig with its light
+  (`HeroBody.FRAMES`, `SCALE`, `LIGHT`), the chair lift, the walk keeping step
+  (`stride_speed`), the blink after a hit, a skill's weapon motion or spell flash
+  (`use_skill`), and the companion. A change to how heroes are drawn goes there.
 
 ### Chairs, pets, the Monster Book and achievements
 
@@ -60,7 +66,7 @@ only what the creator offers and makes a level 1 character in the starting job
   `req_setup`. The server keeps the chair you sit on in `SimPlayer.chair` (moving clears it)
   and adds its regen; the pet that's out is `Character.pet`, with `pet_full` dropping every
   `hunger_ticks` and `MapInstance._pet_step` picking up drops within `loot_reach`. Both go out
-  in the player's info, and `TDCompanion` draws them next to you and other players.
+  in the player's info, and `TDCompanion` (owned by each `HeroBody`) draws them next to you and other players.
 - **The Monster Book** (`MonsterBook`, on the Character) counts kills and cards per monster.
   `Content` makes a `CardDef` for every monster at startup (`card_<id>`, no files); monsters
   drop it at `CardDef.CHANCE` until your page is full, and picking it up files it in the book

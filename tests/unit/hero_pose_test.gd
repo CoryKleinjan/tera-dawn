@@ -18,7 +18,7 @@ func _frame(name: String) -> int:
 	return -1
 
 func test_idle_is_one_still_frame_with_a_blink() -> void:
-	var frames := TDPlayer.HERO_FRAMES
+	var frames := HeroBody.FRAMES
 	check_eq(frames.get_frame_count(&"idle"), 1, "idle holds still")
 	check(frames.has_animation(&"blink"), "the hero has a blink")
 	if not frames.has_animation(&"blink"):
@@ -51,8 +51,8 @@ func test_weapon_reach_follows_the_art_however_it_was_drawn() -> void:
 		check(Paperdoll.weapon_reach(kind) > 30.0, "a %s reaches well past the fist (%.0f)" % [kind, Paperdoll.weapon_reach(kind)])
 
 func test_the_hero_is_smaller_than_the_townsfolk() -> void:
-	var hero := TDPlayer.HERO_FRAMES.get_frame_texture(&"idle", 0).get_image()
-	var drawn := hero.get_used_rect().size.y * TDStage.TEXEL * TDPlayer.HERO_SCALE / Paperdoll.ART_SCALE
+	var hero := HeroBody.FRAMES.get_frame_texture(&"idle", 0).get_image()
+	var drawn := hero.get_used_rect().size.y * TDStage.TEXEL * HeroBody.SCALE / Paperdoll.ART_SCALE
 	check_near(drawn, TDPlayer.HEIGHT, "HEIGHT is how tall he's drawn", 3.0)
 	for npc: NpcDef in Content.npcs.values():
 		var tex: Texture2D = npc.texture if npc.texture else (npc.sprite_frames.get_frame_texture(&"idle", 0) if npc.sprite_frames else null)
@@ -63,7 +63,7 @@ func test_the_hero_is_smaller_than_the_townsfolk() -> void:
 
 func test_he_blinks_now_and_then_while_standing() -> void:
 	var rig := SpriteRig.new()
-	rig.setup(TDPlayer.HERO_FRAMES, null, 0.01)
+	rig.setup(HeroBody.FRAMES, null, 0.01)
 	add_child(rig)
 	var body := rig.body as AnimatedSprite3D
 	rig.play(&"idle")
@@ -81,7 +81,7 @@ func test_he_blinks_now_and_then_while_standing() -> void:
 
 func test_speeding_up_into_a_run_keeps_his_step() -> void:
 	var rig := SpriteRig.new()
-	rig.setup(TDPlayer.HERO_FRAMES, null, 0.01)
+	rig.setup(HeroBody.FRAMES, null, 0.01)
 	add_child(rig)
 	var body := rig.body as AnimatedSprite3D
 	rig.play(&"walk")
