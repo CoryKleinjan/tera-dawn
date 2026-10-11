@@ -54,5 +54,6 @@
       "cheeky_dizzy"
     ]
   ],
-  "inset": 7
+  "inset": 7,
+  "dark_key": false
 }

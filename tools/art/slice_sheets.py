@@ -51,6 +51,7 @@ DEFAULTS = {
     "save": True,             # False: only used by animation sets, not written on its own
     "key": [0.35, 0.8],       # magenta sheets: magenta-ness at which pixels start / stop being background
     "defringe": True,         # magenta sheets: take the magenta out of the outline pixels at the cut edge
+    "dark_key": True,         # magenta sheets: dark magenta is background (floor shadows); False keeps plum line art
     "strip_labels": False,    # paint over white label letters in the label band before cutting
     "fix": None,              # a clean-up from FIXES for every cell (e.g. "glow_backdrop" for icon sheets)
     "recolor": None,          # a palette change from RECOLORS for every cell (e.g. "leather")
@@ -180,16 +181,17 @@ def grid_from_manifest(spec, shape):
 
 # ---------- cutting one cell ----------
 
-def key_magenta(cell, bg, lo=0.35, hi=0.8):
+def key_magenta(cell, bg, lo=0.35, hi=0.8, dark_key=True):
     """Soft alpha from how magenta each pixel is, with the magenta unmixed from edge colours.
-    Pixels at or below `lo` magenta-ness are opaque, at or above `hi` fully background."""
+    Pixels at or below `lo` magenta-ness are opaque, at or above `hi` fully background.
+    `dark_key` False: dark magenta (plum line art, on a sheet with no floor shadows) is art."""
     c = cell / 255.0
     peak = np.maximum(c.max(2), 1e-3)
     spread = np.minimum(c[..., 0], c[..., 2]) - c[..., 1]
     k = spread.copy()
     # the floor shadows are darker magenta with no green at all: judge those relative to their
     # brightness. Near-black outlines pick up a magenta tint too, so fade that back out.
-    pure = c[..., 1] / peak < 0.12
+    pure = (c[..., 1] / peak < 0.12) & dark_key
     k[pure] = np.maximum(k[pure], (spread / peak * np.clip(peak / 0.3, 0.0, 1.0))[pure])
     alpha = np.clip((hi - k) / (hi - lo), 0.0, 1.0)
     alpha[np.abs(c[..., 0] - c[..., 2]) > 0.35] = 1.0  # strongly red or blue: never background
@@ -698,7 +700,7 @@ def cut_cell(rgb_full, bg, box, opts):
     if opts["background"] == "dark":
         rgb, alpha = key_dark(cell, bg, opts["shadow"])
     else:
-        rgb, alpha = key_magenta(cell, bg, *opts["key"])
+        rgb, alpha = key_magenta(cell, bg, *opts["key"], dark_key=opts["dark_key"])
         if opts["defringe"]:
             rgb, alpha = defringe(rgb, alpha, bg)
     if opts.get("fix"):

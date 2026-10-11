@@ -110,7 +110,8 @@ HAT_SPECK = 0.05  # hat_alone: pieces under this share of the hat are cell-frame
 HAT_SHAPES = ("cap", "hood", "bandana", "helm", "wizard", "tricorn")
 # Chibi faces: each eye (with its brow) is drawn this much bigger about its own centre. The eyes
 # are everything above EYE_LINE (a fraction of the normal face's height), left or right of its middle.
-EYE_SCALE = 1.3
+# 1.0 since the painted faces (2026-10-11), drawn at the size Cory wants: smaller, older eyes.
+EYE_SCALE = 1.0
 EYE_LINE = 0.6
 NECK = 0.95           # the neck is this far below the head's centre
 SHIELD_HEIGHT = 1.25
@@ -443,6 +444,16 @@ HELD_HAIR_STYLE = {}
 # A drawn tail or bun no further than this from the head (head radii) is pulled in to touch
 # it; the sheets sometimes leave a gap between a ponytail and the head it hangs from.
 HAIR_REACH = 0.4
+# A drawn piece of hair this far or nearer from the rest of the hair (head radii) is moved in to
+# touch it (a pigtail or tail drawn a little apart from the hair it hangs from); a loose piece
+# smaller than HAIR_SPECK pixels is a speck of the sheet (a stray outline) and goes.
+HAIR_JOIN = 0.35
+HAIR_SPECK = 60
+HAIR_STRAY = 0.05     # a far piece smaller than this share of the hair is not hair
+# Hair under a hat: a loose piece centred this far below his head's centre (head radii) is a
+# strand the sheet drew down his chest, not hair on his head.
+HAT_HAIR_LOW = 1.2
+HAT_HAIR_JOIN = 0.8   # and a loose piece this near the rest is moved in (joined)
 # Styles drawn as a tail alone (no hair on top of the head): their crown comes from the style's
 # one-piece hair under a hat, combed back with its strands, instead of a plain grey cap.
 CROWN_FROM_HAT = ("ponytail",)
@@ -603,6 +614,16 @@ def posed_hair(arr, fi, link):
 
 
 
+def above_fringe(hair):
+    """Where the scalp may show on a head seen from the front: in each column, from the top
+    of the drawn hair down to its lowest pixel there (the fringe). Below that is his forehead,
+    which the scalp painted as a flat band of hair colour between the fringe and the eyes."""
+    rows = np.arange(hair.shape[0])[:, None]
+    any_ = hair.any(0)
+    low = np.where(any_, hair.shape[0] - 1 - np.argmax(hair[::-1], 0), -1)
+    return rows <= low[None, :]
+
+
 def toned(img, grey):
     """A greyscale piece brightened or darkened so its middle grey is `grey` (0..255)."""
     arr = np.asarray(img).astype(float)
@@ -639,6 +660,61 @@ def pulled_in(img, fi):
         ok = (ty >= 0) & (ty < solid.shape[0]) & (tx >= 0) & (tx < solid.shape[1])
         out[ty[ok], tx[ok]] = arr[ys[ok], xs[ok]]
     return Image.fromarray(out, "RGBA")
+
+def joined(img, fi, reach=HAIR_JOIN, behind=None):
+    """Drawn hair in one piece: every loose piece near the main hair (`reach` head radii) moved
+    straight in until it touches it, so no tail floats apart; specks (HAIR_SPECK) dropped. A
+    moved piece goes behind `behind` (a mask: his face), hidden where it would cover it."""
+    arr = np.asarray(img).copy()
+    lab, n = ss.label(arr[..., 3] > 0)
+    if n < 2:
+        return img
+    sizes = np.bincount(lab.ravel())[1:]
+    biggest = int(sizes.argmax()) + 1
+    main = lab == biggest
+    out = arr.copy()
+    out[(lab > 0) & ~main, 3] = 0
+    ys0, xs0 = np.nonzero(main)
+    reach = reach * fi["r"]
+    for i in range(1, n + 1):
+        part = lab == i
+        if i == biggest or sizes[i - 1] < HAIR_SPECK:
+            continue
+        ys, xs = np.nonzero(part)
+        # the closest pair of points between the piece and the main hair (sampled for speed)
+        step = max(len(ys) // 400, 1)
+        py, px_ = ys[::step], xs[::step]
+        d = np.hypot(px_[:, None] - xs0[None, ::4], py[:, None] - ys0[None, ::4])
+        k = np.unravel_index(d.argmin(), d.shape)
+        gap = d[k]
+        if gap > reach:
+            if sizes[i - 1] >= sizes.max() * HAIR_STRAY:  # big and far: drawn apart on purpose
+                out[part] = arr[part]
+            continue  # else a bit of the body's outline caught with the hair (an ear, a hand)
+        v = np.array([xs0[::4][k[1]] - px_[k[0]], ys0[::4][k[1]] - py[k[0]]], float)
+        move = v / max(np.linalg.norm(v), 1e-6) * max(gap - 1.0, 0.0)
+        ty, tx = ys + int(round(move[1])), xs + int(round(move[0]))
+        ok = (ty >= 0) & (ty < arr.shape[0]) & (tx >= 0) & (tx < arr.shape[1])
+        keep = out[ty[ok], tx[ok], 3] == 0  # under the main hair where they overlap
+        if behind is not None:
+            keep &= ~behind[ty[ok], tx[ok]]
+        out[ty[ok][keep], tx[ok][keep]] = arr[ys[ok][keep], xs[ok][keep]]
+    return Image.fromarray(out, "RGBA")
+
+def no_low_strands(img, fi):
+    """A hair-under-a-hat layer without loose pieces hanging down on his body (HAT_HAIR_LOW);
+    the pieces at his head (a pigtail beside his cheek) stay."""
+    arr = np.asarray(img).copy()
+    lab, n = ss.label(arr[..., 3] > 0)
+    if n < 2:
+        return img
+    sizes = np.bincount(lab.ravel())[1:]
+    _, above = head_axes(arr.shape, fi, fi["head"])
+    for i in range(1, n + 1):
+        part = lab == i
+        if i != int(sizes.argmax()) + 1 and np.median(above[part]) < -HAT_HAIR_LOW:
+            arr[part, 3] = 0
+    return Image.fromarray(arr, "RGBA")
 
 # ---------- hats ----------
 
@@ -1201,7 +1277,10 @@ def main():
                     anchor = ((head_cell[0] - p.x) * fs, (head_cell[1] - p.y) * fs)
                     place(canvas, img, anchor, fi["head"], fi["tilt"])
                     if layer == "_hat" and not back_view:  # the sheet draws a blank face in it
-                        canvas = bare_face(canvas, px, fi)
+                        # a pigtail beside his cheek, cut off from the hair by his face: tucked
+                        # in behind the cheek
+                        canvas = joined(no_low_strands(bare_face(canvas, px, fi), fi), fi,
+                                        HAT_HAIR_JOIN, face_zone(px, fi))
                 out[layer].append(canvas)
         old[style] = out[""]
         old_hat[style] = out["_hat"]
@@ -1235,7 +1314,7 @@ def main():
                     # from the held pose's)
                     turn = fi["tilt"] - info[index[drawn_as]]["tilt"]
                     place(drawn_hair, hair_img, (fi["head"][0] - at[0], fi["head"][1] - at[1]), fi["head"], turn)
-                    drawn_hair = pulled_in(drawn_hair, fi)
+                    drawn_hair = joined(pulled_in(drawn_hair, fi), fi)
                 # where the drawn hair covers the scalp, the scalp only just around it (it fills
                 # slivers where the heads don't quite line up, and doesn't show as a band under a
                 # high hairline); where it leaves the crown bald (a ponytail drawn as the tail
@@ -1249,13 +1328,24 @@ def main():
                 covered = top.any() and (near & top).sum() > top.sum() * SCALP_COVERED
                 if covered:
                     bald[~near, 3] = 0
-                canvas.alpha_composite(Image.fromarray(bald, "RGBA"))
+                crown = None
                 if style in CROWN_FROM_HAT and not covered and n not in BACK_VIEW:
                     crown = np.asarray(toned(old_hat[style][index[n]], tone)).copy()
                     crown[~top, 3] = 0
+                if n not in BACK_VIEW:  # facing us, no scalp shows on his forehead under the fringe
+                    hair_now = np.asarray(drawn_hair)[..., 3] > 0
+                    if crown is not None:
+                        hair_now |= crown[..., 3] > 0
+                    under = above_fringe(hair_now)
+                    bald[~under, 3] = 0
+                    if crown is not None:
+                        crown[~under, 3] = 0
+                canvas.alpha_composite(Image.fromarray(bald, "RGBA"))
+                if crown is not None:
                     canvas.alpha_composite(Image.fromarray(crown, "RGBA"))
                 if n in BACK_VIEW or not hides_face(drawn_hair, fi):
                     canvas.alpha_composite(drawn_hair)
+                    canvas = joined(canvas, fi)  # and no specks of the crown or scalp left loose
                 else:  # drawn in a pose too unlike his (lying face down): the one-piece hair
                     canvas = old[style][index[n]]
                 out.append(canvas)
