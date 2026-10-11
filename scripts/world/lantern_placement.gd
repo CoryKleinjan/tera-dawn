@@ -103,16 +103,12 @@ static func blocked(map: MapDef) -> Array[Vector2]:
 			out.append(Vector2(r.position.x, r.end.x))
 	return out
 
-## The area a platform's land art covers, in game pixels.
+## The area a platform's land art covers, in game pixels (a painted `look` runs a little
+## wider than the part you can stand on).
 static func platform_rect(d: PlatformDef, biome: BiomeDef) -> Rect2:
-	if d.look:
-		var w := d.width / PlatformDef.LOOK_SPAN
-		var top := d.y - d.look_grass()
-		return Rect2(d.x + d.width * 0.5 - w * 0.5, top, w, d.look.get_height() * d.look_texel())
-	if biome and biome.platform_middle:
-		var span := PlatformSkin.span(biome, d.y)
-		return Rect2(d.x, span.x, d.width, span.y - span.x)
-	return Rect2(d.x, d.y, d.width, 40.0)
+	var span := TerrainBuilder.skin_span(d, biome)
+	var w := d.width / PlatformDef.LOOK_SPAN if d.look else d.width
+	return Rect2(d.x + (d.width - w) * 0.5, span.x, w, span.y - span.x)
 
 ## Where a lantern's middle may stand (left and right ends as x and y): inside the map's
 ## edges and at least `half` from anything in `taken`.

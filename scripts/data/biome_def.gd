@@ -62,7 +62,6 @@ extends Resource
 ## and stalls that make a town feel lived in.
 @export var town_decor: Array[DecorDef] = []
 @export var lantern: Texture2D
-@export var signpost: Texture2D
 @export var portal_frames: Array[Texture2D] = []
 ## Rooms inside buildings: the doorway out, drawn on the back wall at every door portal.
 @export var door: Texture2D

@@ -2,20 +2,10 @@ class_name SceneryBuilder
 extends RefCounted
 ## Builds everything that stands on the ground: the biome's scattered trees, bushes and
 ## rocks, the map's buildings and hand-placed props, ropes and ladders, portals and doors,
-## lanterns and the sign.
+## and lanterns.
 
-## How much bigger than the biome's art the signpost is drawn, and its depth.
-const SIGN_SCALE := 1.2
-const SIGN_DEPTH := -0.9
-## How far inward from the entrance portal the signpost stands, so its words read as this
-## map's name rather than as where that portal goes.
-const SIGN_FROM_PORTAL := 200.0
 ## Warm light standing in a doorway.
 const DOOR_LIGHT := Color("ffc47a")
-## Space between the top of the signpost (or portal) and the sign's words.
-const SIGN_LABEL_GAP := 6.0
-## Room the sign's words need above their bottom edge, so no platform skin runs through them.
-const SIGN_LABEL_H := 22.0
 ## Open ground between two of a town's background houses (`town_decor`), and the least
 ## between one and a building's edge, in game pixels.
 const BACK_HOUSE_GAP := 100.0
@@ -62,7 +52,6 @@ func build(map: MapDef, platforms: Array[Platform], rng: RandomNumberGenerator) 
 		else:
 			_portal(p, platforms[p.platform], biome)
 	_lanterns(map, biome, rng)
-	_sign(map, biome)
 	_flyers(map, biome, rng)
 
 ## A town's background houses: one per `back_house_slots`, all at the same size and depth
@@ -304,46 +293,3 @@ func _lanterns(map: MapDef, biome: BiomeDef, _rng: RandomNumberGenerator) -> voi
 		l.set_meta(&"energy", l.light_energy)
 		l.add_to_group(&"flicker")
 		root.add_child(l)
-
-func _sign(map: MapDef, biome: BiomeDef) -> void:
-	if map.sign_text == "" or biome.signpost == null:
-		return
-	var post := TDStage.sprite(biome.signpost, TDStage.TEXEL * SIGN_SCALE)
-	TDStage.stand_on_land(post, Vector2(sign_post_x(map), map.ground_y + 3.0), SIGN_DEPTH)
-	root.add_child(post)
-
-## Where the signpost stands: SIGN_FROM_PORTAL inward from the entrance, the floor portal
-## nearest the map's `sign_x` (or at `sign_x` on a map with no portal on the floor).
-static func sign_post_x(map: MapDef) -> float:
-	var entrance: PortalDef = null
-	for p in map.portals:
-		if p.platform == 0 and not p.door and (entrance == null or absf(p.x - map.sign_x) < absf(entrance.x - map.sign_x)):
-			entrance = p
-	if entrance == null:
-		return map.sign_x
-	var inward := 1.0 if entrance.x < map.width / 2.0 else -1.0
-	return entrance.x + inward * SIGN_FROM_PORTAL
-
-## Where the sign's words go (game pixels, their bottom centre), or null for no sign. The
-## overlay draws them, so they stay sharp and in front: over the post, at least as high as
-## the biome's portal, and above any platform skin they would otherwise sit on.
-static func sign_label_at(map: MapDef) -> Variant:
-	var biome := map.biome
-	if map.sign_text == "" or biome == null or biome.signpost == null:
-		return null
-	var h := TDStage.art_size(biome.signpost, TDStage.TEXEL * SIGN_SCALE).y
-	if not biome.portal_frames.is_empty():
-		h = maxf(h, TDStage.art_size(biome.portal_frames[0]).y)
-	var x := sign_post_x(map)
-	var y := map.ground_y + 3.0 - h - SIGN_LABEL_GAP
-	var moved := true
-	while moved: # lifting the words over one platform can put them in the one above
-		moved = false
-		for d in map.platforms:
-			if x < d.x or x > d.x + d.width:
-				continue
-			var skin := TerrainBuilder.skin_span(d, biome)
-			if y > skin.x and y - SIGN_LABEL_H < skin.y:
-				y = skin.x - SIGN_LABEL_GAP
-				moved = true
-	return Vector2(x, y)

@@ -55,6 +55,8 @@ var _blink_t := 0.0
 ## A flash of colour fading off the body (see pulse), and how much of it is left (1 to 0).
 var _pulse_color := Color.WHITE
 var _pulse := 0.0
+## Stands perfectly still (see hold_still): no animation or procedural breathing.
+var _still := false
 
 ## Builds the sprite. Pass `frames` for an animated actor or `texture` for a single image.
 ## `texel` is the size of one texture pixel in game pixels.
@@ -74,6 +76,18 @@ func setup(frames: SpriteFrames, texture: Texture2D, texel: float, shadow_width:
 	shadow = TDStage.shadow_sprite(shadow_width)
 	add_child(shadow)
 	play(&"idle")
+
+## Keeps the actor standing perfectly still on its first idle frame, with no breathing
+## (NPCs, whose idle frames are separate drawings that shift them around). Hits still squash.
+func hold_still() -> void:
+	_still = true
+	if body is AnimatedSprite3D:
+		var a := body as AnimatedSprite3D
+		a.stop()
+		a.frame = 0
+	body.scale = Vector3.ONE
+	body.rotation.z = 0.0
+	_lift = 0.0
 
 ## Draws a look (Character.look()) on the body, which must be the hero's animated sprite.
 ## Call again whenever the look changes; an unchanged look costs nothing.
@@ -107,6 +121,8 @@ func has_animation(anim: StringName) -> bool:
 ## Plays an animation (or the closest one this sprite has). Calling it again with the
 ## same name keeps it going; `from_start` restarts it (a second swing of the same attack).
 func play(anim: StringName, from_start := false) -> void:
+	if _still:
+		return
 	var a := anim
 	if _frames:
 		while not _frames.has_animation(a) and FALLBACK.has(a):
@@ -257,9 +273,10 @@ func _process(delta: float) -> void:
 		_pulse = maxf(0.0, _pulse - delta / PULSE_TIME)
 		_apply_modulate()
 	var squash_xy := Vector2(1.0 + 0.18 * _squash, 1.0 - 0.15 * _squash)
-	if _frames:
+	if _frames or _still:
 		body.scale = Vector3(squash_xy.x, squash_xy.y, 1.0)
-		_blink(delta)
+		if _frames and not _still:
+			_blink(delta)
 		return
 	# single-image actors: move the sprite procedurally
 	_t += delta

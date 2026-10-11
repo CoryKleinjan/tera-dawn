@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BiomeDef" load_steps=56 format=3]
+[gd_resource type="Resource" script_class="BiomeDef" load_steps=55 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/biome_def.gd" id="1_biome_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/sea_gull.tres" id="90_gulls"]
@@ -36,7 +36,6 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/building_small.png" id="32_building_small"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/signature_prop.png" id="33_signature_prop"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/lantern_lit.png" id="34_lantern_lit"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/signpost.png" id="35_signpost"]
 [ext_resource type="Texture2D" path="res://assets/sprites/props/portal_1.png" id="36_portal_1"]
 [ext_resource type="Texture2D" path="res://assets/sprites/props/portal_2.png" id="37_portal_2"]
 [ext_resource type="Texture2D" path="res://assets/sprites/props/portal_3.png" id="38_portal_3"]
@@ -223,5 +222,4 @@ flyers = ExtResource("90_gulls")
 flyer_count = 5
 chimney_smoke = true
 lantern = ExtResource("34_lantern_lit")
-signpost = ExtResource("35_signpost")
 portal_frames = Array[Texture2D]([ExtResource("36_portal_1"), ExtResource("37_portal_2"), ExtResource("38_portal_3"), ExtResource("39_portal_4")])

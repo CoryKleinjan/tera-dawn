@@ -346,8 +346,8 @@ so depth of field never blurs it and nothing in the world covers it.
 4. Connect it: add a **PortalDef** on an existing map whose `target_map` is the new id, and a
    portal back. Players arriving (a portal's or travel route's `target_x`) and NPCs stay at
    least the quickslot panel's width plus a hero from the map's right edge, so the panel never
-   covers them (`tests/content/content_world_test.gd`). The welcome signpost (`sign_text`)
-   stands `SceneryBuilder.SIGN_FROM_PORTAL` inward from the floor portal nearest `sign_x`.
+   covers them (`tests/content/content_world_test.gd`). The map's name shows only at the top
+   of the screen (`display_name`); nothing labels a map out in the world.
 5. Place it in the world: its `region` (a **RegionDef** in `data/regions/`), `world_pos` on
    the world map (pixels of the painting, `TDWorldMapWindow.WORLD`), `level_text`, and either `town = true` or the
    `return_map` where fainting and Return Scrolls send you.
@@ -370,7 +370,7 @@ platform, so a typo fails the test instead of the game.
 
 A **BiomeDef** is the look shared by many maps: sky and light colours, ground and platform
 textures, parallax backdrop layers (`BackdropLayerDef`: a tiled strip or scattered pieces at a
-depth), random decoration (`DecorDef`), lantern, signpost and portal art. A new region of the
+depth), random decoration (`DecorDef`), lantern and portal art. A new region of the
 world is usually a new biome plus a few maps that use it.
 
 ## How to add a building
