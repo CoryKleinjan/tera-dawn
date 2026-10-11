@@ -71,6 +71,17 @@ class LineUp(unittest.TestCase):
         # a middle ends 9 rows below its rung (rows 8-10 are the rung, 11-19 rails)
         self.assertEqual(len(t) - 1 - rung_rows[-1], 9)
 
+    def test_rope_joins_the_rope_not_a_post_of_the_same_width_beside_it(self):
+        middle = piece(30, 10, [(3, 7)])
+        middle[..., :3] = (210, 170, 110)                   # tan rope
+        top = np.zeros((30, 30, 4), np.uint8)
+        top[:, 2:6] = (110, 60, 30, 255)                    # brown post, as wide as the rope
+        top[18:, 20:24] = (210, 170, 110, 255)              # tan rope tail off the knot
+        t, _, _ = cp.line_up(top, middle, None)
+        tail = t.copy()
+        tail[tail[..., 0] < 150, 3] = 0                     # just the tan rope
+        self.assertEqual(strand_centre(tail, slice(-4, None)), t.shape[1] / 2)
+
     def test_lined_up_pieces_stay_put_when_lined_up_again(self):
         middle = piece(30, 10, [(3, 7)])
         bottom = piece(30, 24, [(4, 8)], knot=(2, 20, 22, 28))
