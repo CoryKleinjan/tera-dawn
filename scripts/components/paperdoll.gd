@@ -59,7 +59,7 @@ const DEFAULT_HAT := &"cap"
 ## Shields by EquipDef.look_shape (any other: SHIELD).
 const SHIELDS := {&"kite": preload("res://assets/animations/paperdoll/shield_kite.tres")}
 ## The hero's frame size in pixels; every frame of the strip is this big.
-const FRAME_SIZE := Vector2(256, 207)
+const FRAME_SIZE := Vector2(256, 208)
 ## How many strip pixels make one "hero pixel", the unit the game sizes him in (TDStage.TEXEL):
 ## the strip is cut at the full resolution of the painted sheet, twice as fine as the hero is sized.
 const ART_SCALE := 2.0

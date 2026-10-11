@@ -154,18 +154,19 @@ def _rgb(hsv):
     return (rgb * 255).round().clip(0, 255).astype(np.uint8)
 
 
-def solid(arr, box):
+def solid(arr, box, exact=True):
     """The cell `box` of an RGB sheet as RGBA, its background clear. Gemini doesn't always keep
     the magenta (some edits come back pink-grey, near his skin), so the background is whatever
     colour the cell's border has, reaching in from the border; gaps it can't reach (between an
-    arm and his body) only where they match it closely."""
+    arm and his body) only where they match it closely, unless `exact` is off (for greyscale
+    clothes on a grey background, whose own greys would match)."""
     x0, y0, x1, y1 = box
     cell = arr[y0:y1, x0:x1, :3].astype(int)
     border = np.concatenate([cell[2], cell[-3], cell[:, 2], cell[:, -3]])
     dist = np.abs(cell - np.median(border, 0)).sum(2)
     lab, _ = ss.label(dist < BG_NEAR)
     edge = np.unique(np.concatenate([lab[:3].ravel(), lab[-3:].ravel(), lab[:, :3].ravel(), lab[:, -3:].ravel()]))
-    bg = np.isin(lab, edge[edge > 0]) | (dist < BG_EXACT)
+    bg = np.isin(lab, edge[edge > 0]) | (exact & (dist < BG_EXACT))
     out = np.zeros(cell.shape[:2] + (4,), np.uint8)
     out[..., :3] = cell
     out[..., 3] = np.where(bg, 0, 255)
