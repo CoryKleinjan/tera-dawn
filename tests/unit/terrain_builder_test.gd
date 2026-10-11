@@ -111,3 +111,8 @@ func test_scenery_keeps_its_size_and_tucks_in() -> void:
 	check_near(shown, authored / (cam_z + 8.0), "shows as big as it would 8 units back", 0.000001)
 	check(s.position.y < -map.ground_y / TDStage.PX, "its base sinks behind the grass edge")
 	s.free()
+
+func test_portals_stand_in_front_of_the_land_behind_everyone() -> void:
+	check(TDStage.Z_PORTAL > TDStage.LAND_FRONT, "portals stand in front of the land and scenery")
+	for z in [TDStage.Z_CLIMBABLE, TDStage.Z_NPC, TDStage.Z_MONSTER, TDStage.Z_DROP, TDStage.Z_OTHER_PLAYER, TDStage.Z_PLAYER]:
+		check(TDStage.Z_PORTAL < z, "portals stand behind what you can touch (%.2f)" % z)

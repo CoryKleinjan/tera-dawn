@@ -285,19 +285,9 @@ func test_name_tags_fit_their_names_between_the_end_caps() -> void:
 	var hint := "↑ to Ember Hollow"
 	check(UiSkin.hint_width(hint) >= DrawUtil.text_width(Game.ui_font, hint, 13) + 2.0 * UiSkin.PLAQUE_MARGINS.x * UiSkin.HINT_H / tex_h, "hints fit too")
 
-func test_the_map_sign_is_drawn_sharp_and_high() -> void:
-	var m := ui.world.map
-	var at: Variant = SceneryBuilder.sign_label_at(m)
-	if not check(at != null, "%s has a sign" % m.id):
-		return
-	check_eq((at as Vector2).x, SceneryBuilder.sign_post_x(m), "the words stand over the post")
-	var portal_h := TDStage.art_size(m.biome.portal_frames[0]).y if not m.biome.portal_frames.is_empty() else 0.0
-	check((at as Vector2).y < m.ground_y - portal_h, "and higher than the portal art (%s)" % at)
+func test_no_text_floats_in_the_3d_stage() -> void:
 	var labels := ui.world.stage.find_children("*", "Label3D", true, false)
 	check(labels.is_empty(), "no text in the 3D stage, where depth of field would blur it")
-	ui.teleport(Vector2(SceneryBuilder.sign_post_x(m) + 60, m.ground_y))
-	await ui.ticks(5)
-	check(await ui.redraw(ui.hud.overlay), "the overlay draws the sign")
 
 # ---------- message log and gains ----------
 

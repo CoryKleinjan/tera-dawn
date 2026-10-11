@@ -437,6 +437,27 @@ def fix_round_top(rgb, alpha, source=None, band=28):
     return rgb, alpha
 
 
+def fix_magenta_rim(rgb, alpha, source=None, band=3, radius=4):
+    """A painted outline Gemini blended into the magenta, kept solid by a high `key` (one that
+    protects purple art): the magenta-leaning pixels along the cut edge take the colour of the
+    art just inside them."""
+    solid = alpha > 0.5
+    edge = dilate(~solid, band) & solid
+    r, g, b = rgb[..., 0], rgb[..., 1], rgb[..., 2]
+    rim = edge & (np.minimum(r, b) - g > 0.12) & (np.abs(r - b) < 0.32)
+    good = solid & ~rim
+    k = 2 * radius + 1
+    pad = lambda a: np.pad(a, ((radius, radius), (radius, radius)) + ((0, 0),) * (a.ndim - 2), mode="edge")
+    w = sum(_shifted(pad(good.astype(float)), dy, dx) for dy in range(-radius, radius + 1) for dx in range(-radius, radius + 1))
+    v = sum(_shifted(pad(rgb * good[..., None]), dy, dx) for dy in range(-radius, radius + 1) for dx in range(-radius, radius + 1))
+    w, v = w[radius:-radius, radius:-radius], v[radius:-radius, radius:-radius]
+    fill = rim & (w > 0)
+    rgb = rgb.copy()
+    rgb[fill] = v[fill] / w[fill][:, None]
+    return rgb, alpha
+
+
+FIXES["magenta_rim"] = fix_magenta_rim
 FIXES["round_top"] = fix_round_top
 FIXES["card_backdrop"] = fix_card_backdrop
 FIXES["card_flat"] = fix_card_flat
@@ -572,6 +593,19 @@ def make_seamless(img, blend=0.2):
     return Image.fromarray(out.clip(0, 255).astype(np.uint8))
 
 
+def seamless_middle(img, cap, blend=0.25):
+    """A bar whose middle is tiled between two end caps (`cap` px each): cross-fades the middle's
+    ends with a half-offset copy of itself, so painted texture doesn't seam where it repeats."""
+    a = np.asarray(img).astype(float)
+    mid = a[:, cap:a.shape[1] - cap]
+    m = mid.shape[1]
+    shifted = np.roll(mid, m // 2, 1)
+    xx = np.arange(m)
+    t = np.clip(np.minimum(xx, m - 1 - xx) / (m * blend), 0, 1)[None, :, None]
+    a[:, cap:a.shape[1] - cap] = mid * t + shifted * (1 - t)
+    return Image.fromarray(a.clip(0, 255).astype(np.uint8), img.mode)
+
+
 def strip_labels(cell, bg, band):
     """Paints the white letters of a cell label over with background. A letter is a small
     patch of near-white pixels in the label band with background all around it, so white
@@ -638,6 +672,8 @@ def cut_cell(rgb_full, bg, box, opts):
         ys, xs = np.nonzero(m)
         if m.sum() < opts["min_area"]:
             continue
+        if min(np.ptp(ys), np.ptp(xs)) <= 2 and max(np.ptp(ys), np.ptp(xs)) >= 12:  # a stray bit of cell divider
+            continue
         if ys.max() < band and (xs.min() < left or ys.max() - ys.min() < band * 0.6):  # the label text
             continue
         if opts.get("strip_labels") and ys.max() < band * 1.5 and m.sum() < m.size * 0.01 \
@@ -689,6 +725,22 @@ def extend_bottom(img, n):
     out[h - 2:h + 4] = (out[h - 2:h + 4] + soft) / 2  # soften the join
     out[..., 3] = np.where(np.arange(h + n)[:, None] >= h - 2, 255, out[..., 3])
     return Image.fromarray(out.clip(0, 255).astype(np.uint8), "RGBA")
+
+
+GROUND_BLEND = 12  # rows over which a strip's own bottom fades into its painted ground
+
+
+def paint_ground(img, ground, strip_h):
+    """Swaps an extend_bottom pad for painted ground: `ground` is a picture of the whole padded
+    strip whose lower part was painted on as ground (a Gemini edit of it), so the backdrop runs
+    on down to the floor instead of ending in a blur. The strip's own rows above strip_h stay
+    exactly as cut; below, the ground picture takes over, fading in over GROUND_BLEND rows."""
+    a = np.asarray(img.convert("RGBA")).astype(float)
+    g = np.asarray(ground.convert("RGBA").resize(img.size, Image.LANCZOS)).astype(float)
+    g[..., 3] = 255.0  # the ground is solid wherever it is used (below the strip's skyline)
+    t = np.clip((np.arange(a.shape[0]) - (strip_h - GROUND_BLEND)) / GROUND_BLEND, 0.0, 1.0)[:, None, None]
+    out = a * (1.0 - t) + g * t
+    return Image.fromarray(out.round().clip(0, 255).astype(np.uint8), "RGBA")
 
 
 # ---------- animation sets ----------
@@ -816,8 +868,13 @@ def process(manifest_path, grid_only=False, sprites=None):
                     side = opts.get("size", min(im.size))
                     im = make_seamless(im.convert("RGB").crop((0, 0, min(im.size), min(im.size)))
                                        .resize((side, side), Image.BOX)).convert("RGBA")
+                if opts.get("seamless_middle"):
+                    im = seamless_middle(im, opts["seamless_middle"])
                 if opts.get("extend_bottom"):
+                    strip_h = im.height
                     im = extend_bottom(im, opts["extend_bottom"])
+                    if opts.get("ground"):
+                        im = paint_ground(im, Image.open(os.path.join(ROOT, opts["ground"])), strip_h)
                 p["image"] = im
                 if sprites is not None:
                     sprites[f"{sheet_id}:{pname}"] = p

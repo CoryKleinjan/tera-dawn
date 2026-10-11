@@ -25,8 +25,6 @@ var title_card: Control
 var main_menu: Control
 var play_page: Control
 var menu_play_button: Button
-## Clouds drifting over the key art.
-var title_clouds: TDTitleClouds
 ## The key art behind the title screen and character select.
 var title_backdrop: TextureRect
 var character_select: TDCharacterSelect
@@ -345,8 +343,6 @@ func _build_title() -> void:
 	title_card = CenterContainer.new()
 	title_card.set_anchors_preset(Control.PRESET_FULL_RECT)
 	title.add_child(title_card)
-	title_clouds = TDTitleClouds.new()
-	title_backdrop.add_child(title_clouds)
 	var col := VBoxContainer.new()
 	col.alignment = BoxContainer.ALIGNMENT_CENTER
 	col.add_theme_constant_override("separation", 10)

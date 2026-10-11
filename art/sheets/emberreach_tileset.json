@@ -30,7 +30,7 @@
       "fence"
     ],
     [
-      "signpost",
+      "",
       "lantern_unlit",
       "lantern_lit",
       "building_large",
@@ -227,15 +227,6 @@
         252
       ],
       "grow": 0.9
-    },
-    "signpost": {
-      "crop": [
-        0,
-        30,
-        246,
-        252
-      ],
-      "grow": 1.11
     },
     "lantern_unlit": {
       "crop": [

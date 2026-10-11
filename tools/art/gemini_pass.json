@@ -5060,6 +5060,1762 @@
     "base": "/mnt/project-files/art-sheets/gemini-pass-1/eq_paperdoll_hats.png",
     "text": "This is my hat sheet: 15 labelled cells on magenta, each a greyscale painted hat on a bald head with shoulders. ERASE the bald heads, faces, ears, necks and shoulders from every cell and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the hats. Every hat stays EXACTLY where it is, the same size and shape, with its own outline and shading; where the head showed through the hat (the hood's face opening, under a brim) is now magenta. The cell with no hat becomes empty magenta. Keep every label and grid line exactly where it is."
    }
+  },
+  {
+   "id": "paint_building_dawnharbor_large",
+   "prompts": null,
+   "batch": "painted look: building_dawnharbor_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_dawnharbor_large_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/building_dawnharbor_large.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_building_dawnharbor_small",
+   "prompts": null,
+   "batch": "painted look: building_dawnharbor_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_dawnharbor_small_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/building_dawnharbor_small.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_building_driftcove_large",
+   "prompts": null,
+   "batch": "painted look: building_driftcove_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_driftcove_large_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/building_driftcove_large.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_building_driftcove_small",
+   "prompts": null,
+   "batch": "painted look: building_driftcove_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_driftcove_small_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/building_driftcove_small.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_building_emberreach_large",
+   "prompts": null,
+   "batch": "painted look: building_emberreach_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_emberreach_large_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/building_emberreach_large.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_building_emberreach_small",
+   "prompts": null,
+   "batch": "painted look: building_emberreach_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_emberreach_small_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/building_emberreach_small.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_building_greenbough_large",
+   "prompts": null,
+   "batch": "painted look: building_greenbough_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_greenbough_large_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/building_greenbough_large.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_building_greenbough_small",
+   "prompts": null,
+   "batch": "painted look: building_greenbough_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_greenbough_small_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/building_greenbough_small.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_building_lanternfall_large",
+   "prompts": null,
+   "batch": "painted look: building_lanternfall_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_lanternfall_large_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/building_lanternfall_large.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_building_lanternfall_small",
+   "prompts": null,
+   "batch": "painted look: building_lanternfall_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_lanternfall_small_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/building_lanternfall_small.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_building_lumewood_large",
+   "prompts": null,
+   "batch": "painted look: building_lumewood_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_lumewood_large_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/building_lumewood_large.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_building_lumewood_small",
+   "prompts": null,
+   "batch": "painted look: building_lumewood_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_lumewood_small_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/building_lumewood_small.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_room_dawnharbor_fine",
+   "prompts": null,
+   "batch": "painted look: room_dawnharbor_fine (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_dawnharbor_fine_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/room_dawnharbor_fine.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_room_dawnharbor_wall",
+   "prompts": null,
+   "batch": "painted look: room_dawnharbor_wall (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_dawnharbor_wall_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look). Redo 1: the first try painted the cream wall magenta-pink.",
+   "edit": {
+    "base": "art/source/room_dawnharbor_wall.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added. This image has no magenta and no background at all: it is a room's back wall that fills the whole picture. The plaster wall stays the warm cream-white colour it is now, with no pink, magenta or sky painted on it; only the round window shows the sea at sunrise."
+   }
+  },
+  {
+   "id": "paint_room_driftcove_fine",
+   "prompts": null,
+   "batch": "painted look: room_driftcove_fine (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_driftcove_fine_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/room_driftcove_fine.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_room_driftcove_wall",
+   "prompts": null,
+   "batch": "painted look: room_driftcove_wall (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_driftcove_wall_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/room_driftcove_wall.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_room_emberforge_fine",
+   "prompts": null,
+   "batch": "painted look: room_emberforge_fine (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_emberforge_fine_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/room_emberforge_fine.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_room_emberforge_wall",
+   "prompts": null,
+   "batch": "painted look: room_emberforge_wall (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_emberforge_wall_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/room_emberforge_wall.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_room_greenbough_fine",
+   "prompts": null,
+   "batch": "painted look: room_greenbough_fine (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_greenbough_fine_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/room_greenbough_fine.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_room_greenbough_wall",
+   "prompts": null,
+   "batch": "painted look: room_greenbough_wall (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_greenbough_wall_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/room_greenbough_wall.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_room_lanternfall_fine",
+   "prompts": null,
+   "batch": "painted look: room_lanternfall_fine (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_lanternfall_fine_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/room_lanternfall_fine.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_room_lanternfall_wall",
+   "prompts": null,
+   "batch": "painted look: room_lanternfall_wall (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_lanternfall_wall_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/room_lanternfall_wall.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_room_lumewood_fine",
+   "prompts": null,
+   "batch": "painted look: room_lumewood_fine (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_lumewood_fine_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/room_lumewood_fine.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_room_lumewood_wall",
+   "prompts": null,
+   "batch": "painted look: room_lumewood_wall (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_lumewood_wall_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/room_lumewood_wall.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_room_meadow_fine",
+   "prompts": null,
+   "batch": "painted look: room_meadow_fine (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_meadow_fine_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/room_meadow_fine.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_room_meadow_wall",
+   "prompts": null,
+   "batch": "painted look: room_meadow_wall (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_meadow_wall_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/room_meadow_wall.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_meadow_backgrounds_a_fine",
+   "prompts": null,
+   "batch": "painted look: meadow_backgrounds_a_fine (edit)",
+   "with": null,
+   "refs": [],
+   "save": "meadow_backgrounds_a_fine_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/meadow_backgrounds_a_fine.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_ember_backgrounds_fine",
+   "prompts": null,
+   "batch": "painted look: ember_backgrounds_fine (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ember_backgrounds_fine_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/ember_backgrounds_fine.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_dawnharbor_backgrounds_fine",
+   "prompts": null,
+   "batch": "painted look: dawnharbor_backgrounds_fine (edit)",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_backgrounds_fine_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/dawnharbor_backgrounds_fine.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_driftcove_backgrounds_fine",
+   "prompts": null,
+   "batch": "painted look: driftcove_backgrounds_fine (edit)",
+   "with": null,
+   "refs": [],
+   "save": "driftcove_backgrounds_fine_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/driftcove_backgrounds_fine.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_greenbough_backgrounds_fine",
+   "prompts": null,
+   "batch": "painted look: greenbough_backgrounds_fine (edit)",
+   "with": null,
+   "refs": [],
+   "save": "greenbough_backgrounds_fine_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/greenbough_backgrounds_fine.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_lumewood_backgrounds_fine",
+   "prompts": null,
+   "batch": "painted look: lumewood_backgrounds_fine (edit)",
+   "with": null,
+   "refs": [],
+   "save": "lumewood_backgrounds_fine_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/lumewood_backgrounds_fine.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_emberreach_backgrounds_fine",
+   "prompts": null,
+   "batch": "painted look: emberreach_backgrounds_fine (edit)",
+   "with": null,
+   "refs": [],
+   "save": "emberreach_backgrounds_fine_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/emberreach_backgrounds_fine.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_lanternfall_backgrounds_fine",
+   "prompts": null,
+   "batch": "painted look: lanternfall_backgrounds_fine (edit)",
+   "with": null,
+   "refs": [],
+   "save": "lanternfall_backgrounds_fine_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/lanternfall_backgrounds_fine.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_meadow_tileset",
+   "prompts": null,
+   "batch": "painted look: meadow_tileset (edit)",
+   "with": null,
+   "refs": [],
+   "save": "meadow_tileset_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/meadow_tileset.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added. Keep the white label text, cell borders and divider lines as they are."
+   }
+  },
+  {
+   "id": "paint_dawnharbor_tileset",
+   "prompts": null,
+   "batch": "painted look: dawnharbor_tileset (edit)",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_tileset_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/dawnharbor_tileset.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added. Keep the white label text, cell borders and divider lines as they are."
+   }
+  },
+  {
+   "id": "paint_driftcove_tileset",
+   "prompts": null,
+   "batch": "painted look: driftcove_tileset (edit)",
+   "with": null,
+   "refs": [],
+   "save": "driftcove_tileset_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/driftcove_tileset.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added. Keep the white label text, cell borders and divider lines as they are."
+   }
+  },
+  {
+   "id": "paint_ember_tileset",
+   "prompts": null,
+   "batch": "painted look: ember_tileset (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ember_tileset_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/ember_tileset.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added. Keep the white label text, cell borders and divider lines as they are."
+   }
+  },
+  {
+   "id": "paint_emberreach_tileset",
+   "prompts": null,
+   "batch": "painted look: emberreach_tileset (edit)",
+   "with": null,
+   "refs": [],
+   "save": "emberreach_tileset_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/emberreach_tileset.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added. Keep the white label text, cell borders and divider lines as they are."
+   }
+  },
+  {
+   "id": "paint_greenbough_tileset",
+   "prompts": null,
+   "batch": "painted look: greenbough_tileset (edit)",
+   "with": null,
+   "refs": [],
+   "save": "greenbough_tileset_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/greenbough_tileset.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added. Keep the white label text, cell borders and divider lines as they are."
+   }
+  },
+  {
+   "id": "paint_lanternfall_tileset",
+   "prompts": null,
+   "batch": "painted look: lanternfall_tileset (edit)",
+   "with": null,
+   "refs": [],
+   "save": "lanternfall_tileset_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/lanternfall_tileset.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added. Keep the white label text, cell borders and divider lines as they are."
+   }
+  },
+  {
+   "id": "paint_lumewood_tileset",
+   "prompts": null,
+   "batch": "painted look: lumewood_tileset (edit)",
+   "with": null,
+   "refs": [],
+   "save": "lumewood_tileset_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/lumewood_tileset.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added. Keep the white label text, cell borders and divider lines as they are."
+   }
+  },
+  {
+   "id": "paint_ropes_props_fine",
+   "prompts": null,
+   "batch": "painted look: ropes_props_fine (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ropes_props_fine_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/ropes_props_fine.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added. Keep the white label text, cell borders and divider lines as they are."
+   }
+  },
+  {
+   "id": "paint_climb_tops_fine",
+   "prompts": null,
+   "batch": "painted look: climb_tops_fine (edit)",
+   "with": null,
+   "refs": [],
+   "save": "climb_tops_fine_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/climb_tops_fine.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added. Keep the white label text, cell borders and divider lines as they are."
+   }
+  },
+  {
+   "id": "paint_ground_textures",
+   "prompts": null,
+   "batch": "painted look: ground_textures (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ground_textures_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/ground_textures.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added. Keep the white label text, cell borders and divider lines as they are."
+   }
+  },
+  {
+   "id": "paint_ground_textures_2",
+   "prompts": null,
+   "batch": "painted look: ground_textures_2 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ground_textures_2_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/ground_textures_2.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added. Keep the white label text, cell borders and divider lines as they are."
+   }
+  },
+  {
+   "id": "paint_ground_textures_3",
+   "prompts": null,
+   "batch": "painted look: ground_textures_3 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ground_textures_3_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
+   "edit": {
+    "base": "art/source/ground_textures_3.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added. Keep the white label text, cell borders and divider lines as they are."
+   }
+  },
+  {
+   "id": "paint_lanternfall_backgrounds_fix",
+   "prompts": null,
+   "batch": "painted look: lanternfall backgrounds fix (edit)",
+   "with": null,
+   "refs": [],
+   "save": "lanternfall_backgrounds_fine_painted_fix.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-11 painted-look thread (Cory: fix Lanternfall in PR #72): the painted sheet's far sky faded into magenta at the ends, the near layer had a hole, and the clouds/landmark/moon cells had extra scenery behind them.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/lanternfall_backgrounds_fine_painted.png",
+    "text": "This is my sheet of 7 painted parallax backdrop layers for Lanternfall, a lantern-lit town at dusk. Keep the soft painted style, the colours, every strip's position and height, the labels and the divider lines exactly. Fix only these things:\n1. FAR LAYER: the orange dusk sky behind the tower silhouettes must fill its whole strip as a solid rectangle, edge to edge: no fading into magenta at the left end, the right end or the top corners. Its left and right edges must match so the strip tiles sideways.\n2. MID LAYER: keep as it is; make its left and right edges match so it tiles.\n3. NEAR LAYER: fill the magenta gap in the middle of the alley with more timber houses, walls and doors like the rest of the strip, so the strip is solid edge to edge. Its left and right edges must match so it tiles.\n4. CLOUDS: exactly 4 separate soft dusk clouds, one centred in each quarter of the strip, on flat magenta. Remove the castle, the village, the hill and the bridge from this strip.\n5. LANDMARK: only the clock tower with its trees, on flat magenta. Remove the pink clouds behind it.\n6. SKY BODY: only the round orange moon, on flat magenta, with no clouds and no pink glow around it.\n7. MOTES: keep the lanterns and fireflies, on flat magenta, with no pink glow patches.\nEverything that is not part of a layer is flat pure magenta #FF00FF."
+   }
+  },
+  {
+   "id": "paint_ui",
+   "prompts": null,
+   "batch": "painted UI: ui (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ui_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/ui.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_ui_hud",
+   "prompts": null,
+   "batch": "painted UI: ui_hud (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ui_hud_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/ui_hud.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_ui_windows",
+   "prompts": null,
+   "batch": "painted UI: ui_windows (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ui_windows_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/ui_windows.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_ui_menu",
+   "prompts": null,
+   "batch": "painted UI: ui_menu (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ui_menu_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/ui_menu.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_ui_dialogue",
+   "prompts": null,
+   "batch": "painted UI: ui_dialogue (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ui_dialogue_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/ui_dialogue.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_ui_book",
+   "prompts": null,
+   "batch": "painted UI: ui_book (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ui_book_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/ui_book.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_ui_creator",
+   "prompts": null,
+   "batch": "painted UI: ui_creator (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ui_creator_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/ui_creator.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_ui_social",
+   "prompts": null,
+   "batch": "painted UI: ui_social (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ui_social_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/ui_social.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_world_map",
+   "prompts": null,
+   "batch": "painted UI: world_map (edit)",
+   "with": null,
+   "refs": [],
+   "save": "world_map_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/world_map.png",
+    "text": "Repaint this whole image as soft hand-painted map art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the land, sea and parchment, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, towns, roads, coastlines and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_ui_old",
+   "prompts": null,
+   "batch": "painted UI: ui_old (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ui_old_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/ui_old.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_ui_hud_old",
+   "prompts": null,
+   "batch": "painted UI: ui_hud_old (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ui_hud_old_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/ui_hud_old.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_ui_menu_old",
+   "prompts": null,
+   "batch": "painted UI: ui_menu_old (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ui_menu_old_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/ui_menu_old.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_ui_dialogue_old",
+   "prompts": null,
+   "batch": "painted UI: ui_dialogue_old (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ui_dialogue_old_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/ui_dialogue_old.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_skill_icons",
+   "prompts": null,
+   "batch": "painted UI: skill_icons (edit)",
+   "with": null,
+   "refs": [],
+   "save": "skill_icons_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/skill_icons.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_items_accessories",
+   "prompts": null,
+   "batch": "painted UI: items_accessories (edit)",
+   "with": null,
+   "refs": [],
+   "save": "items_accessories_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/items_accessories.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_items_archer",
+   "prompts": null,
+   "batch": "painted UI: items_archer (edit)",
+   "with": null,
+   "refs": [],
+   "save": "items_archer_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/items_archer.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_items_charms_food",
+   "prompts": null,
+   "batch": "painted UI: items_charms_food (edit)",
+   "with": null,
+   "refs": [],
+   "save": "items_charms_food_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/items_charms_food.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_items_consumables",
+   "prompts": null,
+   "batch": "painted UI: items_consumables (edit)",
+   "with": null,
+   "refs": [],
+   "save": "items_consumables_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/items_consumables.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_items_gear",
+   "prompts": null,
+   "batch": "painted UI: items_gear (edit)",
+   "with": null,
+   "refs": [],
+   "save": "items_gear_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/items_gear.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_items_magician",
+   "prompts": null,
+   "batch": "painted UI: items_magician (edit)",
+   "with": null,
+   "refs": [],
+   "save": "items_magician_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/items_magician.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_items_parts_1",
+   "prompts": null,
+   "batch": "painted UI: items_parts_1 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "items_parts_1_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/items_parts_1.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_items_parts_2",
+   "prompts": null,
+   "batch": "painted UI: items_parts_2 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "items_parts_2_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/items_parts_2.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_items_pirate",
+   "prompts": null,
+   "batch": "painted UI: items_pirate (edit)",
+   "with": null,
+   "refs": [],
+   "save": "items_pirate_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/items_pirate.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_items_scrolls",
+   "prompts": null,
+   "batch": "painted UI: items_scrolls (edit)",
+   "with": null,
+   "refs": [],
+   "save": "items_scrolls_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/items_scrolls.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_items_starter",
+   "prompts": null,
+   "batch": "painted UI: items_starter (edit)",
+   "with": null,
+   "refs": [],
+   "save": "items_starter_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/items_starter.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_items_thief",
+   "prompts": null,
+   "batch": "painted UI: items_thief (edit)",
+   "with": null,
+   "refs": [],
+   "save": "items_thief_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/items_thief.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_items_warrior",
+   "prompts": null,
+   "batch": "painted UI: items_warrior (edit)",
+   "with": null,
+   "refs": [],
+   "save": "items_warrior_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/items_warrior.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_title_backdrop",
+   "prompts": null,
+   "batch": "painted UI: title_backdrop (edit)",
+   "with": null,
+   "refs": [],
+   "save": "title_backdrop_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "assets/sprites/ui/title_backdrop.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same scene, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "ground_meadow_near",
+   "prompts": null,
+   "batch": "backdrop meets the ground: meadow near strip (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ground_meadow_near.png",
+   "replaces": "assets/sprites/backgrounds/meadow/near_treeline.png",
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "note": "2026-10-11 seamless-ground thread: the nearest backdrop strip's blurred lower part repainted as ground, so the backdrop meets the floor with no streaks (Cory approved).",
+   "edit": {
+    "base": "assets/sprites/backgrounds/meadow/near_treeline.png",
+    "text": "This is the nearest background layer of my 2D side-scrolling game, on a flat magenta #FF00FF background. Its top part is painted scenery: a row of round green trees. Below that, the whole lower part of the image is only a blurry, streaky smear. Repaint ONLY that blurry lower part as real painted scenery that carries on downward from the top part, in exactly the same soft painted style, colours, outline and light: a soft green meadow under the trees: long grass, small wildflowers, a few low bushes and gentle grassy rises, ending in thick grass at the bottom. The new scenery fills the whole lower part from the left edge to the right edge and right down to the bottom edge of the image: no magenta, no blur, no streaks, no hard horizontal line and no gap anywhere in it. It reads as the ground continuing toward the viewer, a little darker and simpler toward the bottom edge, with no single horizon line across it. The left and right edges must join cleanly when the image is repeated side by side (or mirrored). Keep the top part above the blur exactly as it is, including its silhouette against the magenta sky. No people, animals, text or new buildings in the lower part."
+   }
+  },
+  {
+   "id": "ground_dawnharbor_near",
+   "prompts": null,
+   "batch": "backdrop meets the ground: dawnharbor near strip (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ground_dawnharbor_near.png",
+   "replaces": "assets/sprites/backgrounds/dawnharbor/near.png",
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "note": "2026-10-11 seamless-ground thread: the nearest backdrop strip's blurred lower part repainted as ground, so the backdrop meets the floor with no streaks (Cory approved).",
+   "edit": {
+    "base": "assets/sprites/backgrounds/dawnharbor/near.png",
+    "text": "This is the nearest background layer of my 2D side-scrolling game, on a flat magenta #FF00FF background. Its top part is painted scenery: sailing ships moored at a wooden dock. Below that, the whole lower part of the image is only a blurry, streaky smear. Repaint ONLY that blurry lower part as real painted scenery that carries on downward from the top part, in exactly the same soft painted style, colours, outline and light: calm harbor water just below the ships with soft painted reflections, then the top of a light stone quay wall with wooden pilings, mooring posts, coiled ropes and a few crates, the pale stone wall running down to the bottom. The new scenery fills the whole lower part from the left edge to the right edge and right down to the bottom edge of the image: no magenta, no blur, no streaks, no hard horizontal line and no gap anywhere in it. It reads as the ground continuing toward the viewer, a little darker and simpler toward the bottom edge, with no single horizon line across it. The left and right edges must join cleanly when the image is repeated side by side (or mirrored). Keep the top part above the blur exactly as it is, including its silhouette against the magenta sky. No people, animals, text or new buildings in the lower part."
+   }
+  },
+  {
+   "id": "ground_greenbough_near",
+   "prompts": null,
+   "batch": "backdrop meets the ground: greenbough near strip (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ground_greenbough_near.png",
+   "replaces": "assets/sprites/backgrounds/greenbough/near.png",
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "note": "2026-10-11 seamless-ground thread: the nearest backdrop strip's blurred lower part repainted as ground, so the backdrop meets the floor with no streaks (Cory approved).",
+   "edit": {
+    "base": "assets/sprites/backgrounds/greenbough/near.png",
+    "text": "This is the nearest background layer of my 2D side-scrolling game, on a flat magenta #FF00FF background. Its top part is painted scenery: a deep green forest with mossy trunks, vines and sunbeams. Below that, the whole lower part of the image is only a blurry, streaky smear. Repaint ONLY that blurry lower part as real painted scenery that carries on downward from the top part, in exactly the same soft painted style, colours, outline and light: the forest floor under the trees: mossy ground, ferns, big roots, fallen leaves and small mushrooms in shaded green light, thick green undergrowth toward the bottom. The new scenery fills the whole lower part from the left edge to the right edge and right down to the bottom edge of the image: no magenta, no blur, no streaks, no hard horizontal line and no gap anywhere in it. It reads as the ground continuing toward the viewer, a little darker and simpler toward the bottom edge, with no single horizon line across it. The left and right edges must join cleanly when the image is repeated side by side (or mirrored). Keep the top part above the blur exactly as it is, including its silhouette against the magenta sky. No people, animals, text or new buildings in the lower part."
+   }
+  },
+  {
+   "id": "ground_lumewood_near",
+   "prompts": null,
+   "batch": "backdrop meets the ground: lumewood near strip (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ground_lumewood_near.png",
+   "replaces": "assets/sprites/backgrounds/lumewood/near.png",
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "note": "2026-10-11 seamless-ground thread: the nearest backdrop strip's blurred lower part repainted as ground, so the backdrop meets the floor with no streaks (Cory approved).",
+   "edit": {
+    "base": "assets/sprites/backgrounds/lumewood/near.png",
+    "text": "This is the nearest background layer of my 2D side-scrolling game, on a flat magenta #FF00FF background. Its top part is painted scenery: dark violet undergrowth with glowing blue crystals, roots and ferns. Below that, the whole lower part of the image is only a blurry, streaky smear. Repaint ONLY that blurry lower part as real painted scenery that carries on downward from the top part, in exactly the same soft painted style, colours, outline and light: more of the same night undergrowth: dark violet ferns, twisted roots, mossy rocks and small glowing blue crystals and mushrooms on dim mossy ground, dense dark-blue foliage toward the bottom. The new scenery fills the whole lower part from the left edge to the right edge and right down to the bottom edge of the image: no magenta, no blur, no streaks, no hard horizontal line and no gap anywhere in it. It reads as the ground continuing toward the viewer, a little darker and simpler toward the bottom edge, with no single horizon line across it. The left and right edges must join cleanly when the image is repeated side by side (or mirrored). Keep the top part above the blur exactly as it is, including its silhouette against the magenta sky. No people, animals, text or new buildings in the lower part."
+   }
+  },
+  {
+   "id": "ground_driftcove_near",
+   "prompts": null,
+   "batch": "backdrop meets the ground: driftcove near strip (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ground_driftcove_near.png",
+   "replaces": "assets/sprites/backgrounds/driftcove/near.png",
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "note": "2026-10-11 seamless-ground thread: the nearest backdrop strip's blurred lower part repainted as ground, so the backdrop meets the floor with no streaks (Cory approved).",
+   "edit": {
+    "base": "assets/sprites/backgrounds/driftcove/near.png",
+    "text": "This is the nearest background layer of my 2D side-scrolling game, on a flat magenta #FF00FF background. Its top part is painted scenery: a sandy shore with shipwrecks, barrels, rocks and palm trees. Below that, the whole lower part of the image is only a blurry, streaky smear. Repaint ONLY that blurry lower part as real painted scenery that carries on downward from the top part, in exactly the same soft painted style, colours, outline and light: the beach below: warm sand with rocks, driftwood, shells, small tide pools and beach grass, slightly darker damp sand toward the bottom. The new scenery fills the whole lower part from the left edge to the right edge and right down to the bottom edge of the image: no magenta, no blur, no streaks, no hard horizontal line and no gap anywhere in it. It reads as the ground continuing toward the viewer, a little darker and simpler toward the bottom edge, with no single horizon line across it. The left and right edges must join cleanly when the image is repeated side by side (or mirrored). Keep the top part above the blur exactly as it is, including its silhouette against the magenta sky. No people, animals, text or new buildings in the lower part."
+   }
+  },
+  {
+   "id": "ground_emberreach_near",
+   "prompts": null,
+   "batch": "backdrop meets the ground: emberreach near strip (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ground_emberreach_near.png",
+   "replaces": "assets/sprites/backgrounds/emberreach/near.png",
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "note": "2026-10-11 seamless-ground thread: the nearest backdrop strip's blurred lower part repainted as ground, so the backdrop meets the floor with no streaks (Cory approved).",
+   "edit": {
+    "base": "assets/sprites/backgrounds/emberreach/near.png",
+    "text": "This is the nearest background layer of my 2D side-scrolling game, on a flat magenta #FF00FF background. Its top part is painted scenery: dark volcanic mountains with glowing lava cracks. Below that, the whole lower part of the image is only a blurry, streaky smear. Repaint ONLY that blurry lower part as real painted scenery that carries on downward from the top part, in exactly the same soft painted style, colours, outline and light: the rocky foothills below: dark basalt slopes and boulders with a few thin glowing lava cracks, scattered dry grass tufts and ash, dark rock toward the bottom. The new scenery fills the whole lower part from the left edge to the right edge and right down to the bottom edge of the image: no magenta, no blur, no streaks, no hard horizontal line and no gap anywhere in it. It reads as the ground continuing toward the viewer, a little darker and simpler toward the bottom edge, with no single horizon line across it. The left and right edges must join cleanly when the image is repeated side by side (or mirrored). Keep the top part above the blur exactly as it is, including its silhouette against the magenta sky, but remove the three thin vertical lines that stick up into the magenta sky. No people, animals, text or new buildings in the lower part."
+   }
+  },
+  {
+   "id": "ground_ember_near",
+   "prompts": null,
+   "batch": "backdrop meets the ground: ember near strip (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ground_ember_near.png",
+   "replaces": "assets/sprites/backgrounds/ember/near_ridge.png",
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "note": "2026-10-11 seamless-ground thread: the nearest backdrop strip's blurred lower part repainted as ground, so the backdrop meets the floor with no streaks (Cory approved).",
+   "edit": {
+    "base": "assets/sprites/backgrounds/ember/near_ridge.png",
+    "text": "This is the nearest background layer of my 2D side-scrolling game, on a flat magenta #FF00FF background. Its top part is painted scenery: a dark ash ridge with dead trees and small fires. Below that, the whole lower part of the image is only a blurry, streaky smear. Repaint ONLY that blurry lower part as real painted scenery that carries on downward from the top part, in exactly the same soft painted style, colours, outline and light: the slope below the ridge: dark ash and cooled lava rock with thin glowing cracks, dead shrubs and a few small embers, dark rock toward the bottom. The new scenery fills the whole lower part from the left edge to the right edge and right down to the bottom edge of the image: no magenta, no blur, no streaks, no hard horizontal line and no gap anywhere in it. It reads as the ground continuing toward the viewer, a little darker and simpler toward the bottom edge, with no single horizon line across it. The left and right edges must join cleanly when the image is repeated side by side (or mirrored). Keep the top part above the blur exactly as it is, including its silhouette against the magenta sky. No people, animals, text or new buildings in the lower part."
+   }
+  },
+  {
+   "id": "ground_lanternfall_near",
+   "prompts": null,
+   "batch": "backdrop meets the ground: lanternfall near strip (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ground_lanternfall_near.png",
+   "replaces": "assets/sprites/backgrounds/lanternfall/near.png",
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "note": "2026-10-11 seamless-ground thread: the nearest backdrop strip's blurred lower part repainted as ground, so the backdrop meets the floor with no streaks (Cory approved).",
+   "edit": {
+    "base": "assets/sprites/backgrounds/lanternfall/near.png",
+    "text": "This is the nearest background layer of my 2D side-scrolling game, on a flat magenta #FF00FF background. Its top part is painted scenery: a dim street of timber-framed shops with hanging signs and washing lines. Below that, the whole lower part of the image is only a blurry, streaky smear. Repaint ONLY that blurry lower part as real painted scenery that carries on downward from the top part, in exactly the same soft painted style, colours, outline and light: the street level below the shop fronts: cobbled street, low stone walls, wooden steps, barrels, crates and flower boxes in the same dim violet evening light, cobblestones running down to the bottom. The new scenery fills the whole lower part from the left edge to the right edge and right down to the bottom edge of the image: no magenta, no blur, no streaks, no hard horizontal line and no gap anywhere in it. It reads as the ground continuing toward the viewer, a little darker and simpler toward the bottom edge, with no single horizon line across it. The left and right edges must join cleanly when the image is repeated side by side (or mirrored). Keep the top part above the blur exactly as it is, including its silhouette against the magenta sky. No people, animals, text or new buildings in the lower part."
+   }
   }
  ]
 }

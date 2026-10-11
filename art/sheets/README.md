@@ -14,6 +14,17 @@ divider lines between cells and a small white label in each cell's top-left corn
 slicer finds the cells, removes the background and label, shrinks each cell to game scale and
 trims it.
 
+## The painted look (2026-10-11)
+
+The game's art is soft painted art, like the NPCs and floating platforms; no pixel art. The
+buildings, rooms, backdrops, area tilesets, ropes/props, climb tops and ground textures were
+pixel art until then and were repainted as Gemini edits of the same sheets (`paint_*` entries in
+`tools/art/gemini_pass.json`), so every cell, `art_px` and manifest stayed as it was. `art_px`
+now only sets the cut size. Gemini tinted some backgrounds (grey, pink) and redrew the cell
+dividers a few pixels off; those sheets were set back to flat magenta and their original
+dividers before cutting, and the slicer drops thin stray divider bits. The room walls were
+cross-faded again so they repeat sideways (their `grid` width is the repeat).
+
 ## Adding a sheet
 
 1. Save it as `art/source/<name>.png`.
@@ -34,7 +45,7 @@ trims it.
 | `art_px` | | Land art (tiles, platform pieces, ground textures): sheet pixels per art pixel, measured on the sheet. Sets `scale` to `density / art_px x grow`, so every piece of land shows at one on-screen pixel size (`TDStage.TEXEL` game px per art pixel; `TDStage.art_density`). |
 | `density` | `2` | With `art_px`: texels cut per art pixel. The game reads 2 for everything under `tiles/`, `platforms/` and `ground/`. |
 | `grow` | `1.0` | With `art_px`: how much bigger or smaller a piece is drawn than its sheet's pixel size, 0.8 to 1.25 (a piece Gemini drew too small or too big next to its neighbours). `tools/art/land_pixels.py --check` checks grow x every decor and prop scale stays within 0.75 to 1.3. |
-| `alpha` | `"hard"` | `"hard"` for pixel sprites, `"soft"` for glows, effects and backgrounds. |
+| `alpha` | `"hard"` | `"hard"` for solid sprites, `"soft"` for glows, effects and backgrounds. |
 | `key` | `[0.35, 0.8]` | Magenta sheets: how magenta a pixel must be to start and finish fading out. Raise it if purple art is being eaten. |
 | `defringe` | `true` | Magenta sheets: after the key, take the magenta out of the dark outline pixels at the cut edge (Gemini blends its outline into the background, which would show as a thin magenta line). Set `false` for a cell whose purple art it wrongly trims. |
 | `label_band` | `0.16` | Top part of each cell (fraction of its height) where the label may be. |
@@ -49,7 +60,7 @@ trims it.
 | `grid_threshold` | `0.8` | How much of a row or column must be divider-coloured to count as a divider. |
 | `climb` | | Rope and ladder pieces to line up after cutting, one entry per climb style: `{"ladder": {"top": "ladder_top", "middle": "ladder_middle", "bottom": "ladder_bottom"}}` (`top` and `bottom` optional). See **Climb pieces** below. |
 | `grid` | | Give the cells by hand when detection fails: `{"rows": [y0, y1, y2, ...], "cols": [x0, x1, ...]}` (edges between cells; `cols` can be one list per row). |
-| `overrides` | | Per-cell versions of any key above, plus `crop` `[x0, y0, x1, y1]`, `seamless` (tileable texture, with `size`), `extend_bottom` (pad a backdrop downward), `fix` (a named clean-up from `FIXES`), `recolor` (a palette change from `RECOLORS`), `patch` (`[[x0, y0, x1, y1, dx], ...]`: paint a rect with a copy from dx pixels across, to take out an ornament that would stretch in a 9-slice), `flip` (mirror it left to right), `patch_rows` (`[[y0, y1, dy], ...]`: replace rows y0 to y1 with the rows dy away, to take out a divider line drawn across the art) and `out_dir`. |
+| `overrides` | | Per-cell versions of any key above, plus `crop` `[x0, y0, x1, y1]`, `seamless` (tileable texture, with `size`), `seamless_middle` (end-cap width in sprite px: a bar whose middle is tiled between its caps, its middle cross-faded so it repeats without a seam), `extend_bottom` (pad a backdrop downward), `ground` (with `extend_bottom`: a picture of the padded strip with painted ground in the pad, used in its place so the backdrop meets the floor), `fix` (a named clean-up from `FIXES`), `recolor` (a palette change from `RECOLORS`), `patch` (`[[x0, y0, x1, y1, dx], ...]`: paint a rect with a copy from dx pixels across, to take out an ornament that would stretch in a 9-slice), `flip` (mirror it left to right), `patch_rows` (`[[y0, y1, dy], ...]`: replace rows y0 to y1 with the rows dy away, to take out a divider line drawn across the art) and `out_dir`. |
 
 ## Clean-ups and palette changes
 

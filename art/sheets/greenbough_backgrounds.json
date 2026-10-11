@@ -99,7 +99,8 @@
           117
         ]
       ],
-      "scale": 0.3536
+      "scale": 0.3536,
+      "ground": "art/source/backdrop_ground/greenbough_near.png"
     },
     "landmark": {
       "extend_bottom": 538,

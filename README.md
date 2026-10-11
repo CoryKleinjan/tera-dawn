@@ -2,7 +2,7 @@
 
 A 2D side-scrolling action RPG in the spirit of MapleStory, built with **Godot 4.3** for desktop release on Steam (Windows, macOS, Linux and Steam Deck).
 
-This is the first playable build. It uses an **HD-2D** look in the style of Octopath Traveler: pixel-art sprites standing in a lit 3D diorama, with depth of field, tilt-shift blur, bloom, dynamic lights, real-time shadows and drifting particles. Gameplay is still a flat 2D side-scroller.
+This is the first playable build. It uses an **HD-2D** look in the style of Octopath Traveler: painted sprites standing in a lit 3D diorama, with depth of field, tilt-shift blur, bloom, dynamic lights, real-time shadows and drifting particles. Gameplay is still a flat 2D side-scroller.
 
 All the art comes from Cory's sheets in `art/source/`. `python3 tools/art/slice_sheets.py` cuts them into the sprites in `assets/sprites/` and the animations in `assets/animations/`, following one manifest per sheet in `art/sheets/` (see `art/sheets/README.md`). A new sheet needs a PNG and a manifest, no code.
 
@@ -11,7 +11,7 @@ The game is built to grow: monsters, NPCs, items, skills, effects, maps and biom
 ## How the HD-2D view works
 
 - Game logic runs in 2D pixel coordinates exactly as before. `scripts/world/stage.gd` turns the map into 3D: one 3D unit is 32 game pixels, and one sprite texel is 1.25 game pixels.
-- The floor is a textured 3D block with depth; floating platforms are flat painted front skins. Characters, monsters and props are lit `Sprite3D`s with nearest-neighbour filtering that cast shadows.
+- The floor and floating platforms are flat painted front skins. Props are lit `Sprite3D`s with smooth (mipmapped) filtering that cast shadows; characters, monsters and pets are lit the same way but cast none.
 - A perspective camera tilted 9° down gives real parallax to trees, ridges and clouds placed at different depths.
 - `WorldEnvironment` adds glow, SSAO, depth fog and filmic tonemapping; camera attributes add near and far depth of field. `shaders/post.gdshader` adds tilt-shift blur at the screen edges and a vignette.
 - Portals, lanterns, Dawnshards, Ember Boar manes and skills carry their own lights and particles.
@@ -143,7 +143,7 @@ tests/             Test runner and suites, smoke test, screenshot scene
 tools/art/         Sheet slicer, store-art cropper, fx textures, contact-sheet preview
 ```
 
-[ARCHITECTURE.md](ARCHITECTURE.md) goes through each folder.
+[docs/architecture/folders.md](docs/architecture/folders.md) goes through each folder.
 
 ## Store art
 

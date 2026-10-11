@@ -2,7 +2,7 @@ class_name BuildingDef
 extends Resource
 ## A building's painted front: its picture, how tall it stands next to the hero and where
 ## its door is. Maps stand buildings in a row with BuildingPlacement; a building you can
-## walk into also gets a door portal at its placement (see ARCHITECTURE.md, "How to add a
+## walk into also gets a door portal at its placement (see docs/architecture/maps.md, "How to add a
 ## building").
 
 @export var id: StringName

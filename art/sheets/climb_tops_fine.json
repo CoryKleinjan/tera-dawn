@@ -34,7 +34,7 @@
   ],
   "overrides": {
     "rope_top": {
-      "scale": 0.213,
+      "scale": 0.1363,
       "crop": [
         0,
         0,
@@ -43,7 +43,7 @@
       ]
     },
     "vine_top": {
-      "scale": 0.147,
+      "scale": 0.0706,
       "crop": [
         0,
         0,

@@ -53,6 +53,7 @@ func set_look(new_look: Dictionary) -> void:
 		var a := AnimatedSprite3D.new()
 		a.sprite_frames = l.frames
 		TDStage.style_sprite(a, _texel)
+		a.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		a.material_override = _layer_material(l)
 		# back to front: behind ones under the body (z < 0), the rest between it and the pictures
 		a.position.z = DEPTH * (0.8 * (i + 1) / (count + 1) - (1.0 if l.behind else 0.0))

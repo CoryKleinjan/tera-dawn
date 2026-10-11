@@ -1,21 +1,11 @@
 class_name SceneryBuilder
 extends RefCounted
 ## Builds everything that stands on the ground: the biome's scattered trees, bushes and
-## rocks, the map's buildings and hand-placed props, ropes and ladders, portals and doors,
-## lanterns and the sign.
+## rocks (where DecorPlacement puts them), the map's buildings and hand-placed props, ropes
+## and ladders, portals and doors, and lanterns.
 
-## How much bigger than the biome's art the signpost is drawn, and its depth.
-const SIGN_SCALE := 1.2
-const SIGN_DEPTH := -0.9
-## How far inward from the entrance portal the signpost stands, so its words read as this
-## map's name rather than as where that portal goes.
-const SIGN_FROM_PORTAL := 200.0
 ## Warm light standing in a doorway.
 const DOOR_LIGHT := Color("ffc47a")
-## Space between the top of the signpost (or portal) and the sign's words.
-const SIGN_LABEL_GAP := 6.0
-## Room the sign's words need above their bottom edge, so no platform skin runs through them.
-const SIGN_LABEL_H := 22.0
 ## Open ground between two of a town's background houses (`town_decor`), and the least
 ## between one and a building's edge, in game pixels.
 const BACK_HOUSE_GAP := 100.0
@@ -23,6 +13,9 @@ const BACK_HOUSE_CLEAR := 20.0
 
 var stage: TDStage
 var root: Node3D
+## Where this map's lanterns stand, and the ground they keep clear (LanternPlacement).
+var _lantern_xs: Array[float] = []
+var _lantern_clear: Array[Vector2] = []
 
 func _init(s: TDStage, r: Node3D) -> void:
 	stage = s
@@ -30,21 +23,24 @@ func _init(s: TDStage, r: Node3D) -> void:
 
 func build(map: MapDef, platforms: Array[Platform], rng: RandomNumberGenerator) -> void:
 	var biome := map.biome
-	for rule in biome.ground_decor:
-		_scatter(rule, -300.0, map.width + 300.0, map.ground_y, rng)
+	_lantern_xs = LanternPlacement.slots(map)
+	_lantern_clear = LanternPlacement.keep_clear(map)
+	var houses: Array[Sprite3D] = []
+	for piece in DecorPlacement.floor_pieces(map, rng):
+		var s := _stand(piece)
+		if biome.town_decor.has(piece.rule):
+			houses.append(s)
 	if map.town:
 		for rule in biome.town_decor:
-			var houses := _scatter(rule, -300.0, map.width + 300.0, map.ground_y, rng) if map.buildings.is_empty() \
-					else _back_houses(rule, map, rng)
-			for s in houses:
-				if biome.chimney_smoke and s.texture.get_height() * s.pixel_size * TDStage.PX > 90.0:
-					var h := s.texture.get_height() * s.pixel_size
-					var w := s.texture.get_width() * s.pixel_size
-					_smoke(s.position + Vector3((0.2 if s.flip_h else -0.2) * w, h * 0.92, 0.0), biome)
-	for i in range(1, platforms.size()):
-		var pl := platforms[i]
-		for rule in biome.platform_decor:
-			_scatter(rule, pl.x + 30.0, pl.x + pl.w - 30.0, pl.y, rng)
+			if not map.buildings.is_empty():
+				houses.append_array(_back_houses(rule, map, rng))
+		for s in houses:
+			if biome.chimney_smoke and s.texture.get_height() * s.pixel_size * TDStage.PX > 90.0:
+				var h := s.texture.get_height() * s.pixel_size
+				var w := s.texture.get_width() * s.pixel_size
+				_smoke(s.position + Vector3((0.2 if s.flip_h else -0.2) * w, h * 0.92, 0.0), biome)
+	for piece in DecorPlacement.platform_pieces(map, rng):
+		_stand(piece)
 	for p in map.props:
 		_prop(p, map)
 	for b in map.buildings:
@@ -57,16 +53,18 @@ func build(map: MapDef, platforms: Array[Platform], rng: RandomNumberGenerator) 
 		else:
 			_portal(p, platforms[p.platform], biome)
 	_lanterns(map, biome, rng)
-	_sign(map, biome)
 	_flyers(map, biome, rng)
 
 ## A town's background houses: one per `back_house_slots`, all at the same size and depth
-## (some slots stay empty, by the rule's `chance`).
+## (some slots stay empty, by the rule's `chance`, and any a lantern stands in front of).
 func _back_houses(rule: DecorDef, map: MapDef, rng: RandomNumberGenerator) -> Array[Sprite3D]:
 	var placed: Array[Sprite3D] = []
 	var z := (rule.depth.x + rule.depth.y) * 0.5
+	var half := back_house_width(rule) * 0.5
 	for x in back_house_slots(rule, map):
 		if rng.randf() >= rule.chance:
+			continue
+		if _lantern_clear.any(func(a: Vector2) -> bool: return x + half > a.x and x - half < a.y):
 			continue
 		var tex: Texture2D = rule.textures[rng.randi() % rule.textures.size()]
 		var s := TDStage.sprite(tex, rule.texel * rule.scale.y, rule.shaded)
@@ -106,22 +104,13 @@ static func back_house_width(rule: DecorDef) -> float:
 		widest = maxf(widest, TDStage.art_size(t, rule.texel * rule.scale.y).x)
 	return widest
 
-## Drops pieces from a DecorDef along [x0, x1] on the surface at y. Returns the sprites.
-func _scatter(rule: DecorDef, x0: float, x1: float, y: float, rng: RandomNumberGenerator) -> Array[Sprite3D]:
-	var placed: Array[Sprite3D] = []
-	if rule.textures.is_empty():
-		return placed
-	var x := x0 + rng.randf_range(0.0, rule.spacing.x)
-	while x < x1:
-		if rng.randf() < rule.chance:
-			var tex: Texture2D = rule.textures[rng.randi() % rule.textures.size()]
-			var s := TDStage.sprite(tex, rule.texel * rng.randf_range(rule.scale.x, rule.scale.y), rule.shaded)
-			TDStage.stand_on_land(s, Vector2(x, y + 3.0), rng.randf_range(rule.depth.x, rule.depth.y))
-			s.flip_h = rng.randf() < 0.5
-			root.add_child(s)
-			placed.append(s)
-		x += rng.randf_range(rule.spacing.x, rule.spacing.y)
-	return placed
+## Stands a piece of scattered scenery where DecorPlacement put it.
+func _stand(p: DecorPlacement.Piece) -> Sprite3D:
+	var s := TDStage.sprite(p.texture, p.texel, p.rule.shaded)
+	TDStage.stand_on_land(s, Vector2(p.x, p.y + 3.0), p.depth)
+	s.flip_h = p.flip
+	root.add_child(s)
+	return s
 
 ## A thin column of smoke rising from a chimney at `at`.
 func _smoke(at: Vector3, biome: BiomeDef) -> void:
@@ -194,16 +183,26 @@ func _building(b: BuildingPlacement, pl: Platform, biome: BiomeDef) -> void:
 	var d := b.building
 	if d == null or d.texture == null:
 		return
-	var z := TDStage.land_depth(b.depth)
-	var s := TDStage.sprite(d.texture, d.texel() * b.scale * (stage.dist - z) / stage.dist)
-	TDStage.stand_on_land(s, Vector2(b.center_x(), pl.y + 3.0), b.depth, false)
-	s.flip_h = b.flip
-	s.modulate = b.tint
+	var s := building_sprite(b, pl.y)
 	root.add_child(s)
 	if biome.chimney_smoke and d.chimney.x >= 0.0:
 		var across := (d.chimney.x - 0.5) * (-1.0 if b.flip else 1.0)
 		var size := s.texture.get_size() * s.pixel_size
 		_smoke(s.position + Vector3(across * size.x, d.chimney.y * size.y, 0.0), biome)
+
+## A building's picture standing on land whose walking line is at game-y `surface`. Its base
+## stands right on the walking line (sunk only by land_sink, so it never shows above the
+## land's grass edge), so the land's front hides no more of it than the grass lip:
+## content_backdrop_test checks no building loses its doorstep at any camera height.
+static func building_sprite(b: BuildingPlacement, surface: float) -> Sprite3D:
+	var d := b.building
+	var z := TDStage.land_depth(b.depth)
+	var dist := TDStage.view_distance()
+	var s := TDStage.sprite(d.texture, d.texel() * b.scale * (dist - z) / dist)
+	TDStage.stand_on_land(s, Vector2(b.center_x(), surface), b.depth, false)
+	s.flip_h = b.flip
+	s.modulate = b.tint
+	return s
 
 ## A door: a warm light in the doorway (a building's picture has the door itself; in a room
 ## the biome's door picture stands on the back wall). Up enters it like any portal.
@@ -242,7 +241,7 @@ func _climbable(c: ClimbableDef, platforms: Array[Platform]) -> void:
 
 func _portal(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
 	var base := Vector2(p.x, pl.y + 4.0)
-	var at := TDStage.to3d(base, TDStage.land_depth(-0.3))
+	var at := TDStage.to3d(base, TDStage.Z_PORTAL)
 	if not biome.portal_frames.is_empty():
 		var frames := SpriteFrames.new()
 		frames.set_animation_speed(&"default", 6.0)
@@ -272,11 +271,9 @@ func _portal(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
 	sparks.position = at + Vector3(0, 0.3, 0.2)
 	root.add_child(sparks)
 
-func _lanterns(map: MapDef, biome: BiomeDef, rng: RandomNumberGenerator) -> void:
-	if biome.lantern == null or map.lantern_spacing <= 0.0:
-		return
-	var x := 320.0
-	while x < map.width - 120.0:
+## The lantern posts, where LanternPlacement put them (worked out in `build`).
+func _lanterns(map: MapDef, biome: BiomeDef, _rng: RandomNumberGenerator) -> void:
+	for x in _lantern_xs:
 		var post := TDStage.sprite(biome.lantern)
 		TDStage.stand_on_land(post, Vector2(x, map.ground_y + 3.0), -1.3)
 		var pos := post.position
@@ -292,47 +289,3 @@ func _lanterns(map: MapDef, biome: BiomeDef, rng: RandomNumberGenerator) -> void
 		l.set_meta(&"energy", l.light_energy)
 		l.add_to_group(&"flicker")
 		root.add_child(l)
-		x += rng.randf_range(map.lantern_spacing * 0.85, map.lantern_spacing * 1.15)
-
-func _sign(map: MapDef, biome: BiomeDef) -> void:
-	if map.sign_text == "" or biome.signpost == null:
-		return
-	var post := TDStage.sprite(biome.signpost, TDStage.TEXEL * SIGN_SCALE)
-	TDStage.stand_on_land(post, Vector2(sign_post_x(map), map.ground_y + 3.0), SIGN_DEPTH)
-	root.add_child(post)
-
-## Where the signpost stands: SIGN_FROM_PORTAL inward from the entrance, the floor portal
-## nearest the map's `sign_x` (or at `sign_x` on a map with no portal on the floor).
-static func sign_post_x(map: MapDef) -> float:
-	var entrance: PortalDef = null
-	for p in map.portals:
-		if p.platform == 0 and not p.door and (entrance == null or absf(p.x - map.sign_x) < absf(entrance.x - map.sign_x)):
-			entrance = p
-	if entrance == null:
-		return map.sign_x
-	var inward := 1.0 if entrance.x < map.width / 2.0 else -1.0
-	return entrance.x + inward * SIGN_FROM_PORTAL
-
-## Where the sign's words go (game pixels, their bottom centre), or null for no sign. The
-## overlay draws them, so they stay sharp and in front: over the post, at least as high as
-## the biome's portal, and above any platform skin they would otherwise sit on.
-static func sign_label_at(map: MapDef) -> Variant:
-	var biome := map.biome
-	if map.sign_text == "" or biome == null or biome.signpost == null:
-		return null
-	var h := TDStage.art_size(biome.signpost, TDStage.TEXEL * SIGN_SCALE).y
-	if not biome.portal_frames.is_empty():
-		h = maxf(h, TDStage.art_size(biome.portal_frames[0]).y)
-	var x := sign_post_x(map)
-	var y := map.ground_y + 3.0 - h - SIGN_LABEL_GAP
-	var moved := true
-	while moved: # lifting the words over one platform can put them in the one above
-		moved = false
-		for d in map.platforms:
-			if x < d.x or x > d.x + d.width:
-				continue
-			var skin := TerrainBuilder.skin_span(d, biome)
-			if y > skin.x and y - SIGN_LABEL_H < skin.y:
-				y = skin.x - SIGN_LABEL_GAP
-				moved = true
-	return Vector2(x, y)
