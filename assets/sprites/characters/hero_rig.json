@@ -2435,7 +2435,7 @@
   "item_iron_claw": {
    "grip": [
     20.2,
-    14.5
+    14.6
    ],
    "size": [
     40,
@@ -2449,7 +2449,7 @@
   "item_steel_claw": {
    "grip": [
     20.2,
-    14.2
+    14.3
    ],
    "size": [
     40,
@@ -2462,16 +2462,16 @@
   },
   "item_viper_claw": {
    "grip": [
-    20.1,
-    14.8
+    20.2,
+    14.9
    ],
    "size": [
     41,
     22
    ],
-   "reach": 19.9,
+   "reach": 19.8,
    "kind": "claw",
-   "grip_share": 0.503,
+   "grip_share": 0.505,
    "dots_left": 0
   },
   "item_shadow_claw": {
@@ -2490,30 +2490,30 @@
   },
   "item_nightfang_claw": {
    "grip": [
-    20.0,
-    9.3
-   ],
-   "size": [
-    40,
-    20
-   ],
-   "reach": 19.0,
-   "kind": "claw",
-   "grip_share": 0.513,
-   "dots_left": 0
-  },
-  "item_eclipse_claw": {
-   "grip": [
-    21.7,
+    20.1,
     9.4
    ],
    "size": [
     40,
     20
    ],
-   "reach": 17.3,
+   "reach": 18.9,
    "kind": "claw",
-   "grip_share": 0.556,
+   "grip_share": 0.515,
+   "dots_left": 0
+  },
+  "item_eclipse_claw": {
+   "grip": [
+    21.8,
+    9.4
+   ],
+   "size": [
+    40,
+    21
+   ],
+   "reach": 17.2,
+   "kind": "claw",
+   "grip_share": 0.559,
    "dots_left": 0
   },
   "item_apprentice_wand": {
@@ -2561,7 +2561,7 @@
   "item_aurora_wand": {
    "grip": [
     36.3,
-    17.0
+    16.8
    ],
    "size": [
     73,
@@ -2855,7 +2855,7 @@
   "item_dawnbreaker_claymore": {
    "grip": [
     16.2,
-    16.4
+    16.3
    ],
    "size": [
     112,
