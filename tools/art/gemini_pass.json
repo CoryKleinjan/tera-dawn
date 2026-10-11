@@ -149,6 +149,68 @@
    }
   },
   {
+   "id": "paperdoll_body_run_3",
+   "prompts": null,
+   "batch": "body run cycle 3 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_body_run_3.png",
+   "replaces": "art/source/paperdoll_body.png",
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread: paperdoll_body_run_2 with its green guide rods taken out by Gemini (painting them out in code smeared his head where a rod crossed it). The run cells are copied from this one; the rods in run_2 still give the rig's grip and angle.",
+   "must_have": {
+    "rgb": [
+     0,
+     255,
+     0
+    ],
+    "in": [],
+    "not_in": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15,
+     16,
+     17,
+     18,
+     19,
+     20,
+     21,
+     22,
+     23,
+     24,
+     25,
+     26,
+     27,
+     28,
+     29,
+     30,
+     31,
+     32
+    ]
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/paperdoll_body_run_2.png",
+    "text": "The first image is my hero's base body sheet. A few cells (9 RUN 1, 10 RUN 2, 11 RUN 3, 12 RUN 4, 13 ATTACK 1, 14 ATTACK 2) have a green rod in his hand. Remove every green rod completely, with its outline. Where a rod crossed his head, arm, body or the background, paint what is behind it: the round outline of his head, his skin, or the flat magenta background. Keep his hands EXACTLY as they are: still closed, curled round where the rod was, as if holding a thin handle. Change nothing else at all: every figure, every pose, every colour, the labels, and the flat pure magenta #FF00FF background stay exactly the same."
+   }
+  },
+  {
    "id": "paperdoll_grip_hands",
    "prompts": null,
    "batch": "grip hands (edit)",

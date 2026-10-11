@@ -38,7 +38,11 @@ GREEN = (0, 255, 0)
 BLADE = 1.4      # the rod reaches this far past the grip on the blade side (head radii)
 POMMEL = 0.45    # and this far on the pommel side
 THICK = 0.13     # rod thickness (head radii)
+ROD_EDGE = 3     # pixels around the rod that are its outline, painted over with it
 HAND = 0.55      # the hand taken from the edit reaches this far from the grip (head radii)
+# Gemini's tan shadowed leg is turned this far toward his skin's hue (0-1), keeps this much of
+# its saturation and is lightened by this much: a soft shade of his skin.
+SHADE_HUE, SHADE_SAT, SHADE_VALUE = 0.07, 0.75, 1.08
 # Cells the guide leaves alone: the run cells get their rods in their own edit (they were
 # redrawn, see gemini_pass.json paperdoll_body_run_2), and FAINT 1's sword falls out of
 # his cell.
@@ -99,8 +103,46 @@ def guide(path):
 
 
 def rod_mask(arr):
+    """The guide rod's pixels: anything clearly green, dark shading included (nothing else on
+    the hero is green)."""
     rgb = arr[..., :3].astype(int)
-    return (rgb[..., 1] > 170) & (rgb[..., 0] < 140) & (rgb[..., 2] < 140)
+    return (rgb[..., 1] > rgb[..., 0] + 30) & (rgb[..., 1] > rgb[..., 2] + 30)
+
+
+def softened(rgb):
+    """Gemini paints the leg and arm he has in shadow tan-brown rather than shaded skin: those
+    pixels (skin more saturated and darker than his lit skin) are brought back toward peach."""
+    hsv = _hsv(rgb)
+    skin = (hsv[..., 0] < 0.12) & (hsv[..., 1] > 0.15) & (hsv[..., 2] > 0.6)
+    lit = skin & (hsv[..., 2] > 0.93)
+    if not lit.any():
+        return rgb
+    tan = skin & (hsv[..., 1] > np.median(hsv[lit][:, 1]) + 0.15) & (hsv[..., 2] < 0.93)
+    hsv[tan, 0] = (hsv[tan, 0] + SHADE_HUE) / 2
+    hsv[tan, 1] *= SHADE_SAT
+    hsv[tan, 2] = np.minimum(1.0, hsv[tan, 2] * SHADE_VALUE)
+    out = rgb.copy()
+    out[tan] = _rgb(hsv[tan])
+    return out
+
+
+def _hsv(rgb):
+    a = rgb.astype(float) / 255
+    mx, mn = a.max(-1), a.min(-1)
+    d = mx - mn
+    safe = np.where(d > 1e-6, d, 1)
+    r, g, b = a[..., 0], a[..., 1], a[..., 2]
+    h = np.where(mx == r, ((g - b) / safe) % 6, np.where(mx == g, (b - r) / safe + 2, (r - g) / safe + 4)) / 6
+    return np.stack([np.where(d > 1e-6, h, 0), np.where(mx > 0, d / np.maximum(mx, 1e-6), 0), mx], -1)
+
+
+def _rgb(hsv):
+    h, s, v = hsv[..., 0] * 6, hsv[..., 1], hsv[..., 2]
+    i = np.floor(h).astype(int) % 6
+    f = h - np.floor(h)
+    p, q, t = v * (1 - s), v * (1 - s * f), v * (1 - s * (1 - f))
+    rgb = np.stack([np.choose(i, [v, q, p, p, t, v]), np.choose(i, [t, v, v, q, p, p]), np.choose(i, [p, p, t, v, v, q])], -1)
+    return (rgb * 255).round().clip(0, 255).astype(np.uint8)
 
 
 def solid(arr, box):
@@ -146,12 +188,15 @@ def hands(path, whole=()):
         edit_img = edit_img.resize((body.shape[1], body.shape[0]), Image.LANCZOS)
     edit = np.asarray(edit_img).copy()
     rods = rod_mask(edit)
-    painted = pl.inpaint(np.dstack([edit, np.full(edit.shape[:2], 255, np.uint8)]), ss.dilate(rods, 1))[..., :3]
+    painted = np.dstack([edit, np.full(edit.shape[:2], 255, np.uint8)])
+    pl.inpaint(painted, ss.dilate(rods, ROD_EDGE))  # in place
+    painted = painted[..., :3]
 
     # cells the edit redrew whole: copied over, rod painted out, background made pure magenta
     for c in whole:
         x0, y0, x1, y1 = boxes[c]
         cell = solid(painted, boxes[c])
+        cell[..., :3] = softened(cell[..., :3])
         body[y0:y1, x0:x1] = np.where(cell[..., 3:] > 0, cell[..., :3], MAGENTA)
     Image.fromarray(body).save(BODY)
 
@@ -159,6 +204,8 @@ def hands(path, whole=()):
     taken = []
     measured = {}
     for c, box in boxes.items():
+        if whole and c not in whole:  # an edit of whole cells may have stray rods elsewhere
+            continue
         x0, y0, x1, y1 = box
         found = measure(rods[y0:y1, x0:x1])
         if found is None:
