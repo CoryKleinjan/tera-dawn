@@ -37,7 +37,7 @@ target_x = 120.0
 [sub_resource type="Resource" id="Building_0"]
 script = ExtResource("7_building_placement")
 building = ExtResource("10_emberreach_large")
-x = 620.0
+x = 565.0
 platform = 0
 flip = true
 scale = 1.0
@@ -80,7 +80,7 @@ door = true
 [sub_resource type="Resource" id="Building_4"]
 script = ExtResource("7_building_placement")
 building = ExtResource("11_emberreach_small")
-x = 2097.0
+x = 2142.0
 platform = 0
 flip = false
 scale = 0.98

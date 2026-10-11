@@ -9908,6 +9908,327 @@
     "base": "/mnt/project-files/art-sheets/room-props/room_items_base.png",
     "text": "Repaint each object in this image as soft hand-painted art, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering; every curve and diagonal edge is smooth, and edges stay crisp, not blurry. The image is a 4 by 4 grid of separate game sprites on a flat magenta background: wooden crates (each a different wood colour) and potted green plants in terracotta pots, and two empty cells at the bottom right. These are cut-out sprites, NOT a scene: the background of every cell must stay pure flat magenta #FF00FF, exactly as in the original. Do not paint any wall, floor, room, shadow, glow, gradient or texture behind or around the objects; the only things that are not magenta are the objects and the thin dark grid lines. Keep each object's size, position, shape and colour the same, keep the grid lines, keep the two empty cells empty, and add nothing new."
    }
+  },
+  {
+   "id": "front_building_emberreach_large",
+   "prompts": null,
+   "batch": "front-view building: emberreach_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_emberreach_large_front.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 buildings round 2 (Cory): pure front view, no roof tops, wall base flat along the whole bottom, nothing below it, sits on the ground.",
+   "edit": {
+    "base": "art/source/building_emberreach_large.png",
+    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a stone forge hall: grey-brown stone walls, orange clay tile roofs on the main hall and both side wings, the tall square stone chimney in the middle, the big arched double wooden door glowing with forge light, and the warm glowing windows either side, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true
+   }
+  },
+  {
+   "id": "front_building_dawnharbor_large",
+   "prompts": null,
+   "batch": "front-view building: dawnharbor_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_dawnharbor_large_front.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 buildings round 2 (Cory): pure front view, no roof tops, wall base flat along the whole bottom, nothing below it, sits on the ground.",
+   "edit": {
+    "base": "art/source/building_dawnharbor_large.png",
+    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a harbour town hall: white plaster walls with timber trim and a stone base, blue slate roofs (main gable and the lower side wing, both seen straight-on), the golden sun weathervane on the peak, the round window in the gable, the wooden front door with windows either side, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true,
+    "base_margin": 0.08
+   }
+  },
+  {
+   "id": "front_building_dawnharbor_small",
+   "prompts": null,
+   "batch": "front-view building: dawnharbor_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_dawnharbor_small_front.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 buildings round 2 (Cory): pure front view, no roof tops, wall base flat along the whole bottom, nothing below it, sits on the ground.",
+   "edit": {
+    "base": "art/source/building_dawnharbor_small.png",
+    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a fish market stall: the blue and white striped awning across the top, wooden posts, the hanging fish under the awning and fish and a pot on the counter. The counter front is a solid wooden panel that reaches all the way down to the ground, with no legs or gaps under it, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true,
+    "base_margin": 0.08
+   }
+  },
+  {
+   "id": "front_building_driftcove_large",
+   "prompts": null,
+   "batch": "front-view building: driftcove_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_driftcove_large_front.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 buildings round 2 (Cory): pure front view, no roof tops, wall base flat along the whole bottom, nothing below it, sits on the ground.",
+   "edit": {
+    "base": "art/source/building_driftcove_large.png",
+    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a wooden sailing ship pulled up on the beach, drawn as a pure side profile with the bow to the right: curved hull planks, a row of portholes, the deck rail, the mast with its rigging and barrels peeking over the rail, no deck seen from above. Its hull is half-buried in sand so the bottom of the hull is cut by one straight level line along the ground, the whole width of the ship, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true,
+    "base_margin": 0.08
+   }
+  },
+  {
+   "id": "front_building_driftcove_small",
+   "prompts": null,
+   "batch": "front-view building: driftcove_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_driftcove_small_front.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 buildings round 2 (Cory): pure front view, no roof tops, wall base flat along the whole bottom, nothing below it, sits on the ground.",
+   "edit": {
+    "base": "art/source/building_driftcove_small.png",
+    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a wooden fisherman's hut standing directly on the ground (no stilts, no deck, no ladder): weathered plank walls, a plank door in the middle, a small window, the patched cream sail-cloth canopy draped straight across the top, and the little red flag on a pole at the side, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true,
+    "base_margin": 0.08
+   }
+  },
+  {
+   "id": "front_building_emberreach_small",
+   "prompts": null,
+   "batch": "front-view building: emberreach_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_emberreach_small_front.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 buildings round 2 (Cory): pure front view, no roof tops, wall base flat along the whole bottom, nothing below it, sits on the ground.",
+   "edit": {
+    "base": "art/source/building_emberreach_small.png",
+    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a stone smithy: stone walls, an orange clay tile roof seen straight-on, the square stone chimney with a little grey smoke, the glowing forge fire in its arched hearth set into the front wall and a small window. No anvil, stumps or tools standing in front of it, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true,
+    "base_margin": 0.08
+   }
+  },
+  {
+   "id": "front_building_greenbough_large",
+   "prompts": null,
+   "batch": "front-view building: greenbough_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_greenbough_large_front.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 buildings round 2 (Cory): pure front view, no roof tops, wall base flat along the whole bottom, nothing below it, sits on the ground.",
+   "edit": {
+    "base": "art/source/building_greenbough_large.png",
+    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a treehouse in a giant oak: the thick trunk standing straight up from the ground, its base cut flat where it meets the ground (no roots spreading out), the leafy crown, the wooden hut up in the branches, the ladder up the trunk and the small arched window in the trunk. The whole crown fits inside the picture, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true,
+    "base_margin": 0.08
+   }
+  },
+  {
+   "id": "front_building_greenbough_small",
+   "prompts": null,
+   "batch": "front-view building: greenbough_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_greenbough_small_front.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 buildings round 2 (Cory): pure front view, no roof tops, wall base flat along the whole bottom, nothing below it, sits on the ground.",
+   "edit": {
+    "base": "art/source/building_greenbough_small.png",
+    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a round thatched hut standing directly on the ground (no branch, no platform, no ladder): golden thatch roof with its tied top knot, plank walls, the door and the round window, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true,
+    "base_margin": 0.08
+   }
+  },
+  {
+   "id": "front_building_lanternfall_large",
+   "prompts": null,
+   "batch": "front-view building: lanternfall_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_lanternfall_large_front.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 buildings round 2 (Cory): pure front view, no roof tops, wall base flat along the whole bottom, nothing below it, sits on the ground.",
+   "edit": {
+    "base": "art/source/building_lanternfall_large.png",
+    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a tall two-storey half-timbered townhouse: dark timber frame over pale plaster, a stone ground floor, a steep brown shingle gable roof seen straight-on, warm glowing windows on both floors, the front door and the hanging lantern, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true,
+    "base_margin": 0.08
+   }
+  },
+  {
+   "id": "front_building_lanternfall_small",
+   "prompts": null,
+   "batch": "front-view building: lanternfall_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_lanternfall_small_front.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 buildings round 2 (Cory): pure front view, no roof tops, wall base flat along the whole bottom, nothing below it, sits on the ground.",
+   "edit": {
+    "base": "art/source/building_lanternfall_small.png",
+    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a small half-timbered house: terracotta tile gable roof with moss seen straight-on, timber frame, pale plaster, stone base, the shuttered window, the purple curtain doorway and the hanging lantern, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true,
+    "base_margin": 0.08
+   }
+  },
+  {
+   "id": "front_building_lumewood_large",
+   "prompts": null,
+   "batch": "front-view building: lumewood_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_lumewood_large_front.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 buildings round 2 (Cory): pure front view, no roof tops, wall base flat along the whole bottom, nothing below it, sits on the ground.",
+   "edit": {
+    "base": "art/source/building_lumewood_large.png",
+    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a round stone wizard tower drawn as a flat front silhouette: pale stone walls with straight vertical sides, the crystal glass dome roof shown only as its front half-circle outline with brass ribs and the blue crystal spire on top, round windows with glowing blue panes and the arched wooden door. Its base is straight and flat along the ground, not curved, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true,
+    "base_margin": 0.08
+   }
+  },
+  {
+   "id": "front_building_lumewood_small",
+   "prompts": null,
+   "batch": "front-view building: lumewood_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_lumewood_small_front.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 buildings round 2 (Cory): pure front view, no roof tops, wall base flat along the whole bottom, nothing below it, sits on the ground.",
+   "edit": {
+    "base": "art/source/building_lumewood_small.png",
+    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a giant blue mushroom house: the blue scalloped cap seen straight from the side (its underside edge level, no top surface seen from above), the cream stalk walls with a straight flat base on the ground, the round window and the arched wooden door. The whole cap fits inside the picture, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true,
+    "base_margin": 0.08
+   }
+  },
+  {
+   "id": "front2_building_dawnharbor_small",
+   "prompts": null,
+   "batch": "front-view building redo: dawnharbor_small (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_dawnharbor_small_front2.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 15:43Z 'the fish stand still looks wrong'): counter was seen from above, fish too big, awning sat on a plank.",
+   "edit": {
+    "base": "art/source/building_dawnharbor_small.png",
+    "text": "Redraw this fish market stall from my 2D side-scrolling game as a pure front elevation, like a flat theatre backdrop: the camera looks straight at the front at eye level. Strict rules: 1) Nothing is seen from above. No counter top, no table surface, no looking down into pots, crates or trays. Every object shows only its front side. 2) No perspective: every horizontal line level, every post vertical, left-right balanced. 3) The stall: two straight wooden corner posts holding a blue and white striped awning across the top, the awning seen straight-on as a flat striped band with a scalloped lower edge; a small wooden sign board on top of the awning. Under the awning, a wooden rail with five or six small fish hanging by their tails, each fish small, about one twelfth of the stall's width. Behind the counter, a plain dark wooden back wall. 4) The counter: a solid wooden front panel about one third of the stall's height, running from post to post and reaching all the way down to the ground. On the counter's front edge stand three small wooden crates seen only from the front, with just the heads and tails of a few small fish peeking over the top rim. 5) The bottom of the stall is one straight, solid horizontal line from post to post. Nothing below it or in front of it: no legs, steps, barrels, ground patch or shadow. 6) The whole stall fits inside the picture with a clear band of magenta on every side. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true,
+    "base_margin": 0.08
+   }
+  },
+  {
+   "id": "front2_building_greenbough_large",
+   "prompts": null,
+   "batch": "front-view building redo: greenbough_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_greenbough_large_front2.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 (Cory 15:44Z yes): crown came back cut off at the top and right edges.",
+   "edit": {
+    "base": "art/source/building_greenbough_large.png",
+    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a treehouse in a giant oak: the thick trunk standing straight up from the ground, its base cut flat where it meets the ground (no roots spreading out), the leafy crown, the wooden hut up in the branches, the ladder up the trunk and the small arched window in the trunk. The leafy crown is a complete rounded shape with its own painted outline on every side, finished and not cut off at the top or right; the whole crown fits well inside the picture, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true,
+    "base_margin": 0.15
+   }
   }
  ]
 }

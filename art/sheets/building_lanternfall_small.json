@@ -1,17 +1,17 @@
 {
   "source": "art/source/building_lanternfall_small.png",
-  "art_px": 5.115,
+  "art_px": 4.612,
   "out_dir": "assets/sprites/buildings/lanternfall",
   "label_band": 0,
   "inset": 0,
   "grid": {
     "rows": [
       0,
-      1024
+      1187
     ],
     "cols": [
       0,
-      901
+      1044
     ]
   },
   "cells": [
