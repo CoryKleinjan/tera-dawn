@@ -66,6 +66,26 @@
    "note": "Bare base body, 32 poses; anchor for every paperdoll/hair/top/glove/weapon sheet."
   },
   {
+   "id": "paperdoll_body_run",
+   "prompts": null,
+   "batch": "body run cycle (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_body_run.png",
+   "replaces": "art/source/paperdoll_body.png",
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread: Cory said the run legs look the same in every frame, so he seems to hover. Edit of the game's body sheet that redraws only the 4 RUN cells as an alternating run cycle, the far leg a shade darker, and the sword arm kept at his side (Cory: hold the sword in his hand while running, not up behind him).",
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "The first image is my hero's base body sheet: a bald chibi boy in 32 labelled poses, facing right. Keep every cell EXACTLY as it is except cells 9 RUN 1, 10 RUN 2, 11 RUN 3 and 12 RUN 4. Redraw those 4 cells as one clear 4-frame running loop, the same boy at the same size, facing right, in the same spot in each cell, with his feet on the same baseline as now:\n- 9 RUN 1 (contact): his NEAR leg (the one closer to us) reaches forward, its foot planted flat on the ground ahead of him; his FAR leg stretches behind him, toes pushing off the ground.\n- 10 RUN 2 (passing): his NEAR leg is straight under his body, foot planted on the ground; his FAR leg swings forward past it with the knee bent and lifted, foot off the ground.\n- 11 RUN 3 (contact): the mirror of RUN 1 with the legs swapped: his FAR leg reaches forward, its foot planted flat on the ground ahead of him; his NEAR leg stretches behind him, toes pushing off.\n- 12 RUN 4 (passing): the mirror of RUN 2: his FAR leg is straight under his body, foot planted; his NEAR leg swings forward with the knee bent and lifted.\n- In every one of these 4 cells one foot is clearly flat on the ground, so he never looks like he is floating.\n- Shade the FAR leg (and its foot and shorts leg) noticeably darker than the near leg, so the two legs are easy to tell apart.\n- Arms: his front arm (on the right side of the figure) pumps with a bent elbow and a closed fist, as now. His back arm (on the LEFT side of the figure) stays bent at his side with the closed fist at hip height, a little in FRONT of his hip like in the WALK cells, NOT swung up or back behind him. Both fists stay empty and closed.\n- He leans forward a little, like now. Same grey shorts, same bare feet and same colours as the other cells."
+   }
+  },
+  {
    "id": "ui_leather",
    "prompts": "tera-dawn-chatgpt-art-prompts-7.md",
    "batch": "U1",
