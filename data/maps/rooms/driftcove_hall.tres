@@ -86,7 +86,6 @@ width = 1200
 height = 700
 ground_y = 620
 start_x = 240.0
-lantern_spacing = 0.0
 region = &"driftcove"
 return_map = &"driftcove"
 interior = true

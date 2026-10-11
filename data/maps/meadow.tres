@@ -278,7 +278,6 @@ width = 2600
 height = 700
 ground_y = 620
 start_x = 200.0
-lantern_spacing = 640.0
 platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Land_1"), SubResource("Land_2"), SubResource("Land_3"), SubResource("Land_4"), SubResource("Land_5"), SubResource("Land_6")])
 climbables = Array[ExtResource("4_climbable_def")]([SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Rope_11_0"), SubResource("Rope_13_1")])
 spawns = Array[ExtResource("9_spawn_def")]([SubResource("Resource_19"), SubResource("Resource_20"), SubResource("Resource_21"), SubResource("Resource_22"), SubResource("Resource_23"), SubResource("Resource_24"), SubResource("Resource_25"), SubResource("Resource_26"), SubResource("Resource_27"), SubResource("Resource_28"), SubResource("Resource_37")])

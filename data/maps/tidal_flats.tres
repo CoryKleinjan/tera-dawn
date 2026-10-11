@@ -151,7 +151,6 @@ width = 2000
 height = 900
 ground_y = 820
 start_x = 120.0
-lantern_spacing = 700.0
 platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Land_1"), SubResource("Land_2"), SubResource("Land_3"), SubResource("Upper_1")])
 climbables = Array[ExtResource("4_climbable_def")]([SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Rope_4_0"), SubResource("Upper_rope")])
 portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_5"), SubResource("Portal_upper")])

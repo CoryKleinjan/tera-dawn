@@ -13,6 +13,9 @@ const BACK_HOUSE_CLEAR := 20.0
 
 var stage: TDStage
 var root: Node3D
+## Where this map's lanterns stand, and the ground they keep clear (LanternPlacement).
+var _lantern_xs: Array[float] = []
+var _lantern_clear: Array[Vector2] = []
 
 func _init(s: TDStage, r: Node3D) -> void:
 	stage = s
@@ -20,11 +23,13 @@ func _init(s: TDStage, r: Node3D) -> void:
 
 func build(map: MapDef, platforms: Array[Platform], rng: RandomNumberGenerator) -> void:
 	var biome := map.biome
+	_lantern_xs = LanternPlacement.slots(map)
+	_lantern_clear = LanternPlacement.keep_clear(map)
 	for rule in biome.ground_decor:
-		_scatter(rule, -300.0, map.width + 300.0, map.ground_y, rng)
+		_scatter(rule, -300.0, map.width + 300.0, map.ground_y, rng, _lantern_clear)
 	if map.town:
 		for rule in biome.town_decor:
-			var houses := _scatter(rule, -300.0, map.width + 300.0, map.ground_y, rng) if map.buildings.is_empty() \
+			var houses := _scatter(rule, -300.0, map.width + 300.0, map.ground_y, rng, _lantern_clear) if map.buildings.is_empty() \
 					else _back_houses(rule, map, rng)
 			for s in houses:
 				if biome.chimney_smoke and s.texture.get_height() * s.pixel_size * TDStage.PX > 90.0:
@@ -50,12 +55,15 @@ func build(map: MapDef, platforms: Array[Platform], rng: RandomNumberGenerator) 
 	_flyers(map, biome, rng)
 
 ## A town's background houses: one per `back_house_slots`, all at the same size and depth
-## (some slots stay empty, by the rule's `chance`).
+## (some slots stay empty, by the rule's `chance`, and any a lantern stands in front of).
 func _back_houses(rule: DecorDef, map: MapDef, rng: RandomNumberGenerator) -> Array[Sprite3D]:
 	var placed: Array[Sprite3D] = []
 	var z := (rule.depth.x + rule.depth.y) * 0.5
+	var half := back_house_width(rule) * 0.5
 	for x in back_house_slots(rule, map):
 		if rng.randf() >= rule.chance:
+			continue
+		if _lantern_clear.any(func(a: Vector2) -> bool: return x + half > a.x and x - half < a.y):
 			continue
 		var tex: Texture2D = rule.textures[rng.randi() % rule.textures.size()]
 		var s := TDStage.sprite(tex, rule.texel * rule.scale.y, rule.shaded)
@@ -95,8 +103,9 @@ static func back_house_width(rule: DecorDef) -> float:
 		widest = maxf(widest, TDStage.art_size(t, rule.texel * rule.scale.y).x)
 	return widest
 
-## Drops pieces from a DecorDef along [x0, x1] on the surface at y. Returns the sprites.
-func _scatter(rule: DecorDef, x0: float, x1: float, y: float, rng: RandomNumberGenerator) -> Array[Sprite3D]:
+## Drops pieces from a DecorDef along [x0, x1] on the surface at y, leaving out any that would
+## overlap a stretch in `avoid` (left and right edges as x and y). Returns the sprites.
+func _scatter(rule: DecorDef, x0: float, x1: float, y: float, rng: RandomNumberGenerator, avoid: Array[Vector2] = []) -> Array[Sprite3D]:
 	var placed: Array[Sprite3D] = []
 	if rule.textures.is_empty():
 		return placed
@@ -104,11 +113,16 @@ func _scatter(rule: DecorDef, x0: float, x1: float, y: float, rng: RandomNumberG
 	while x < x1:
 		if rng.randf() < rule.chance:
 			var tex: Texture2D = rule.textures[rng.randi() % rule.textures.size()]
-			var s := TDStage.sprite(tex, rule.texel * rng.randf_range(rule.scale.x, rule.scale.y), rule.shaded)
-			TDStage.stand_on_land(s, Vector2(x, y + 3.0), rng.randf_range(rule.depth.x, rule.depth.y))
-			s.flip_h = rng.randf() < 0.5
-			root.add_child(s)
-			placed.append(s)
+			var texel := rule.texel * rng.randf_range(rule.scale.x, rule.scale.y)
+			var z := rng.randf_range(rule.depth.x, rule.depth.y)
+			var flip := rng.randf() < 0.5
+			var half := TDStage.art_size(tex, texel).x * 0.5
+			if not avoid.any(func(a: Vector2) -> bool: return x + half > a.x and x - half < a.y):
+				var s := TDStage.sprite(tex, texel, rule.shaded)
+				TDStage.stand_on_land(s, Vector2(x, y + 3.0), z)
+				s.flip_h = flip
+				root.add_child(s)
+				placed.append(s)
 		x += rng.randf_range(rule.spacing.x, rule.spacing.y)
 	return placed
 
@@ -261,11 +275,9 @@ func _portal(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
 	sparks.position = at + Vector3(0, 0.3, 0.2)
 	root.add_child(sparks)
 
-func _lanterns(map: MapDef, biome: BiomeDef, rng: RandomNumberGenerator) -> void:
-	if biome.lantern == null or map.lantern_spacing <= 0.0:
-		return
-	var x := 320.0
-	while x < map.width - 120.0:
+## The lantern posts, where LanternPlacement put them (worked out in `build`).
+func _lanterns(map: MapDef, biome: BiomeDef, _rng: RandomNumberGenerator) -> void:
+	for x in _lantern_xs:
 		var post := TDStage.sprite(biome.lantern)
 		TDStage.stand_on_land(post, Vector2(x, map.ground_y + 3.0), -1.3)
 		var pos := post.position
@@ -281,4 +293,3 @@ func _lanterns(map: MapDef, biome: BiomeDef, rng: RandomNumberGenerator) -> void
 		l.set_meta(&"energy", l.light_energy)
 		l.add_to_group(&"flicker")
 		root.add_child(l)
-		x += rng.randf_range(map.lantern_spacing * 0.85, map.lantern_spacing * 1.15)

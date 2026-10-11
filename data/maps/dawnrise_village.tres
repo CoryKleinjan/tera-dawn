@@ -113,7 +113,6 @@ width = 2266
 height = 700
 ground_y = 620
 start_x = 260.0
-lantern_spacing = 330.0
 region = &"dawnrise_isle"
 world_pos = Vector2(155.0, 275.0)
 town = true
