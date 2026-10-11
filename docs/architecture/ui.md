@@ -24,7 +24,8 @@ keep the default, so an old or hand-edited file never breaks the game.
   the `InputMap`. To add an action the player can press, add a line there and nothing else.
   Two actions never share a key: setting a used key swaps it. `pause` (Esc) can't be changed,
   so the menu is always reachable.
-- **AudioSettings** sets the Master, Music and Effects buses (`default_bus_layout.tres`).
+- **AudioSettings** sets the Master, Music and Effects buses (`default_bus_layout.tres`); the
+  Sound autoload plays everything on them (see [music and sound](audio.md)).
   Play music on the `Music` bus and sounds on `Effects` so the sliders reach them.
 - **VideoSettings** sets the window, vsync and frame cap, and the stage's costly effects
   (bloom, ambient occlusion, fog). `TDStage` turns those on and off when `Settings.changed`

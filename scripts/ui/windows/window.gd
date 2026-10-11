@@ -34,6 +34,9 @@ const BOTTOM_BUTTON_INSET := 16.0
 ## Opening: the window grows from OPEN_SCALE to full size and fades in over OPEN_TIME seconds.
 const OPEN_TIME := 0.12
 const OPEN_SCALE := 0.94
+## Sounds (Sound.play ids) for opening and closing a window; its buttons click (Sound.CLICK).
+const OPEN_SOUND := &"open"
+const CLOSE_SOUND := &"close"
 
 var hud: TDHud
 var title := ""
@@ -57,7 +60,8 @@ func _init(window_title: String, window_size: Vector2) -> void:
 	visibility_changed.connect(func() -> void:
 		if visible:
 			_open_t = 0.0
-			_apply_open())
+			_apply_open()
+			Sound.play(OPEN_SOUND))
 
 func _ready() -> void:
 	mouse_exited.connect(func() -> void:
@@ -90,6 +94,7 @@ func toggle() -> void:
 		raise()
 	else:
 		hud.tooltip.clear(self)
+		Sound.play(CLOSE_SOUND)
 
 ## The part of the screen windows stay inside: all of it above the status bar.
 static func room() -> Rect2:
@@ -213,6 +218,7 @@ func plus_button(at: Vector2, action: Callable, side := PLUS_SIZE) -> void:
 func _press_button(at: Vector2) -> bool:
 	for b in _buttons:
 		if (b[0] as Rect2).has_point(at):
+			Sound.play(Sound.CLICK)
 			(b[1] as Callable).call()
 			return true
 	return false

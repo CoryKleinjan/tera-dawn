@@ -213,3 +213,4 @@ region = &"lumewood"
 world_pos = Vector2(690.0, 68.0)
 return_map = &"lumewood"
 level_text = "Lv. 22-30"
+music = &"boss"

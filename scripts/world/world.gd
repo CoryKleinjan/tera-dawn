@@ -25,6 +25,13 @@ const PICKUP_MERGE_TICKS := 120
 ## fade into a new map).
 const BANNER_TICKS := 150
 const BANNER_DELAY := 16
+## The title screen's track (Sound.music id).
+const TITLE_MUSIC := &"title"
+## Sounds in the world are full volume within SOUND_NEAR game pixels of your hero, fade out
+## to nothing at SOUND_FAR, and come SOUND_FADE_DB quieter just before that.
+const SOUND_NEAR := 200.0
+const SOUND_FAR := 900.0
+const SOUND_FADE_DB := -18.0
 
 var map: MapDef
 var layout: MapLayout
@@ -85,6 +92,7 @@ func _ready() -> void:
 	player.place(map.start_x, platforms[0].y)
 	snap_camera()
 	player.rig.visible = false
+	Sound.music(TITLE_MUSIC)
 
 func _exit_tree() -> void:
 	if Net.world == self:
@@ -98,6 +106,7 @@ func _layer() -> Node2D:
 func start() -> void:
 	started = true
 	player.rig.visible = true
+	Sound.music(map.music_id())
 
 ## Stops showing the game. Also leaves the server and logs out, unless `stay_connected`
 ## (going back to character select).
@@ -116,6 +125,7 @@ func stop(stay_connected := false) -> void:
 	hud.prompt.answer(false)
 	for w: TDWindow in hud.windows.values():
 		w.visible = false
+	Sound.music(TITLE_MUSIC)
 
 ## The server put the player on a map: build it and show what's on it.
 func enter_map(id: StringName, x: float, state: Dictionary) -> void:
@@ -135,6 +145,7 @@ func enter_map(id: StringName, x: float, state: Dictionary) -> void:
 	stage.fade_to(0.0)
 	if started:
 		show_banner(map.display_name)
+		Sound.music(map.music_id())
 
 ## Builds a map: its layout, the NPCs, a view for each of its monsters (shown once the
 ## server says where they are) and the stage.
@@ -438,6 +449,15 @@ func show_level_up(peer: int, level: int) -> void:
 
 func add_number(pos: Vector2, value: int, kind: String) -> void:
 	fx.add_number(pos, value, kind)
+
+## Plays sound effect `id` coming from `pos` in the world: quieter the further it is from
+## your hero, and not at all beyond SOUND_FAR.
+func sound_at(id: StringName, pos: Vector2) -> void:
+	var d := pos.distance_to(player.position)
+	if id == &"" or d >= SOUND_FAR:
+		return
+	var k := clampf((d - SOUND_NEAR) / (SOUND_FAR - SOUND_NEAR), 0.0, 1.0)
+	Sound.play(id, SOUND_FADE_DB * k)
 
 ## Plays an effect. Effects that follow someone (heal, level up) follow `follow`, or you.
 func add_effect(def: EffectDef, pos: Vector2, face: int, follow: Node2D = null) -> void:

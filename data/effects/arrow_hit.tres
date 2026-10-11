@@ -13,3 +13,4 @@ energy = 2.0
 light_color = Color(1.0, 0.85, 0.6, 1.0)
 light_energy = 2.0
 light_range = 3.5
+sound = &"hit"

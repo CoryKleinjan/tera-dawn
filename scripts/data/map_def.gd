@@ -38,6 +38,8 @@ extends Resource
 ## Inside a building: a small room with a wall instead of sky, entered by a door from
 ## `return_map` (the town it stands in). The world map shows you in that town.
 @export var interior := false
+## Its own track (a boss lair, a dungeon). Empty: its region's town or field music (music_id).
+@export var music: StringName
 
 @export_group("Layout")
 ## One-way platforms, numbered from 1 in this order (0 is the floor).
@@ -64,6 +66,16 @@ func return_town() -> StringName:
 ## The map you're "in" on the world map: the town outside, for a room inside a building.
 func outside() -> StringName:
 	return return_town() if interior else id
+
+## The track that plays here: its own, else its region's town music for towns, markets and
+## rooms, and its region's field music for everywhere else.
+func music_id() -> StringName:
+	if music != &"":
+		return music
+	var r: RegionDef = Content.regions.get(region)
+	if r == null:
+		return &""
+	return r.town_music if town or market or interior else r.field_music
 
 ## The maps its portals lead to.
 func neighbours() -> Array[StringName]:

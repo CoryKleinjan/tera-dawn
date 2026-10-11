@@ -18,3 +18,5 @@ extends Resource
 @export var light_color := Color(0, 0, 0, 0)
 ## How far it flies when it hits nothing.
 @export var max_range := 360.0
+## Played when it's fired (Sound.play id): a bowstring, a throw, a shot.
+@export var sound: StringName

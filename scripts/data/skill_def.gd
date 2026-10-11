@@ -84,6 +84,9 @@ const DEFAULT_FLASH := Color(1.0, 0.9, 0.65)
 @export var effect: EffectDef
 ## Played on each monster hit.
 @export var hit_effect: EffectDef
+## Played as it goes off (Sound.play id). Empty: its projectile's sound, or a swing for an
+## attack and a cast for a spell (see cast_sound).
+@export var sound: StringName
 
 func mp_at(level: int) -> int:
 	return mp_cost + roundi(mp_cost_per_level * maxi(0, level - 1))
@@ -140,3 +143,18 @@ func describe_level(level: int) -> PackedStringArray:
 ## The colour the player flashes when this goes off as a buff or spell.
 func flash_color() -> Color:
 	return flash if flash.a > 0.0 else DEFAULT_FLASH
+
+## The sounds an attack makes when it has none of its own.
+const SWING_SOUND := &"swing"
+const CAST_SOUND := &"cast"
+
+## The sound it makes as it goes off: its own, its projectile's, or a swing (a cast for
+## magic); buffs and passives sound only through their effect.
+func cast_sound() -> StringName:
+	if sound != &"":
+		return sound
+	if projectile and projectile.sound != &"":
+		return projectile.sound
+	if kind != Kind.ATTACK:
+		return &""
+	return CAST_SOUND if magic else SWING_SOUND

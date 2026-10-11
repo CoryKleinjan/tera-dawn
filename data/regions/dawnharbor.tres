@@ -10,3 +10,5 @@ description = "The busy port at the heart of the mainland. Ships come and go fro
 color = Color(0.560784, 0.847059, 1.0, 1.0)
 label_pos = Vector2(290.0, 215.0)
 level_text = "Lv. 10-14"
+town_music = &"town_dawnharbor"
+field_music = &"field_dawnharbor"

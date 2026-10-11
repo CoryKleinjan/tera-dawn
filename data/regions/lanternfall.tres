@@ -10,3 +10,5 @@ description = "A city of lanterns and alleys, where the Thieves gather."
 color = Color(0.878431, 0.713725, 0.290196, 1.0)
 label_pos = Vector2(680.0, 578.0)
 level_text = "Lv. 10-35"
+town_music = &"town_lanternfall"
+field_music = &"field_lanternfall"

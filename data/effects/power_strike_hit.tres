@@ -16,3 +16,4 @@ light_energy = 2.0
 light_range = 3.5
 burst_color = Color(3.0, 2.0, 0.8, 1.0)
 burst_amount = 14
+sound = &"hit"

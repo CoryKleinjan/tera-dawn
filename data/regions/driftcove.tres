@@ -10,3 +10,5 @@ description = "Sea caves, wrecks and beaches, ruled by the Pirates."
 color = Color(0.309804, 0.717647, 0.85098, 1.0)
 label_pos = Vector2(195.0, 548.0)
 level_text = "Lv. 10-30"
+town_music = &"town_driftcove"
+field_music = &"field_driftcove"
