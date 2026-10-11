@@ -21,6 +21,7 @@ func _ready() -> void:
 	rig.setup(def.sprite_frames, def.texture, TDStage.TEXEL * def.sprite_scale, 40.0)
 	rig.set_tint(def.tint)
 	add_child(rig)
+	rig.hold_still()
 
 ## How big they're drawn, in game pixels (feet to the top of their art).
 func body_size() -> Vector2:
