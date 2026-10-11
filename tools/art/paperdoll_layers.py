@@ -12,6 +12,7 @@ frame with the body. The game plays a layer in step with the body (Paperdoll, Pa
     python3 tools/art/slice_sheets.py paperdoll_body   # the body strip first
     python3 tools/art/paperdoll_layers.py              # then the layers, mask and rig
     python3 tools/art/paperdoll_layers.py --preview    # also art/build/paperdoll_preview.png
+    python3 tools/art/paperdoll_layers.py --pieces     # only weapons, shields and hats (quick: new gear)
 
 Writes:
 - assets/sprites/characters/hero_regions.png: the body strip's twin. Red channel = region

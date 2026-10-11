@@ -3,6 +3,7 @@ of its grip dots and put in his fist on every frame, or on his back while he cli
 from collections import deque
 
 from .common import *  # noqa: F401,F403
+from .pieces import pose, save_fist, save_piece
 
 
 # ---------- weapons ----------
@@ -12,8 +13,13 @@ def weapon(piece, s, kind):
     axis): axis is the way its business end points in the picture (degrees clockwise from
     pointing right), 0 for kinds not in AXIAL. Where his fist goes (see grip_point) is
     worked out from the weapon's shape for blades, wands, staffs and guns, since the sheets'
-    dots are often off (on a crossguard, several for two hands, or none)."""
-    arr = np.asarray(piece.img).astype(int)
+    dots are often off (on a crossguard, several for two hands, or none). A gun painted with
+    its barrel slanting is turned level first, like the gun template."""
+    img = piece.img
+    if kind == "gun":
+        img = img.rotate(barrel_tilt(np.asarray(img)), resample=Image.BICUBIC, expand=True)
+        img = img.crop(img.getbbox())
+    arr = np.asarray(img).astype(int)
     green = (arr[..., 1] > 170) & (arr[..., 0] < 120) & (arr[..., 2] < 120) & (arr[..., 3] > 0)
     opaque = arr[..., 3] > 0
     # dots drawn off the weapon (beside it on the background, as some held_* sheets have
@@ -91,14 +97,24 @@ def _on_axis(arr, axis, t):
     return (t * c - m * s, t * s + m * c)
 
 
+def barrel_tilt(arr):
+    """The slant of a gun's barrel (degrees clockwise from pointing right): the line along the
+    top of its front part (BARREL_FRONT of its width, toward the muzzle on the right)."""
+    solid = arr[..., 3] > 0
+    cols = np.nonzero(solid.any(0))[0]
+    xs = np.arange(int(cols.min() + (cols.max() - cols.min()) * (1 - BARREL_FRONT)), cols.max())
+    tops = np.array([np.nonzero(solid[:, x])[0].min() for x in xs])
+    return round(math.degrees(math.atan(np.polyfit(xs, tops, 1)[0])), 1)
+
+
 def grip_point(arr, kind, axis, dots):
     """Where his fist closes on a weapon picture (its pixels):
     - a blade (sword kind): in the middle of the handle, between the pommel and the crossguard
       (the first place, going up from the pommel, that gets much wider than the handle);
     - a wand or staff: halfway along the shaft;
-    - a gun: on the pistol grip (the dot nearest its back, or the part hanging below the
-      barrel at the back when it has no dot);
-    - anything else (bows, claws, knuckles): its dot, or a guess near its back end."""
+    - a gun: in the middle of the pistol grip (the part hanging below the barrel at the back);
+    - a claw: in the middle of its cuff (CLAW_CUFF along it), so the cuff covers his fist;
+    - anything else (bows, knuckles): its dot, or a guess near its back end."""
     xs, ys, a, b = _along(arr, axis)
     lo, hi = float(a.min()), float(a.max())
     span = hi - lo
@@ -111,14 +127,22 @@ def grip_point(arr, kind, axis, dots):
         return _on_axis(arr, axis, lo + span * (0.04 + guard / 40) / 2)
     if kind in ("wand", "staff"):
         return _on_axis(arr, axis, lo + span / 2)
+    if kind == "claw":
+        # the middle of the cuff, so the cuff covers his fist and the blades reach past it
+        return _on_axis(arr, axis, lo + span * CLAW_CUFF)
+    if kind == "gun":
+        # the middle of the pistol grip: what hangs below the barrel's underside (the lowest
+        # row of its front part) at the back, so his whole fist wraps the grip
+        solid = arr[..., 3] > 0
+        cols = np.nonzero(solid.any(0))[0]
+        front = cols[cols > cols.min() + (cols.max() - cols.min()) * (1 - GUN_FRONT)]
+        under = np.median([np.nonzero(solid[:, x])[0].max() for x in front])
+        grip = (ys > under) & (xs < cols.min() + (cols.max() - cols.min()) * GUN_BACK)
+        if grip.any():
+            return (float(xs[grip].mean()), float(ys[grip].mean()))
     c, s = math.cos(math.radians(axis)), math.sin(math.radians(axis))
     if dots:
         return min(dots, key=lambda d: d[0] * c + d[1] * s)  # the back hand
-    if kind == "gun":
-        back = a < lo + span * 0.35
-        below = back & (ys > np.median(ys))
-        if below.any():
-            return (float(xs[below].mean()), float(np.percentile(ys[below], 30)))
     return (float(arr.shape[1] * 0.15), float(arr.shape[0] / 2))
 
 
@@ -185,10 +209,16 @@ def drawn_axis(arr):
     return round(math.degrees(math.atan2(dy, dx)), 1)
 
 
-def holds(hands, spec, names):
+def holds(hands, spec, names, forearms=None):
     """Per weapon kind, per frame: [x, y, angle] of the fist and the weapon in it (the sword's
-    are the hand-placed "weapon" points), or None when the weapon isn't in his hand."""
+    are the hand-placed "weapon" points), or None when the weapon isn't in his hand. A kind
+    with "along": "forearm" points the way his forearm does (`forearms`, from forearm_angles)."""
     out = {"sword": {n: hands[n].get("weapon") for n in names}}
+    # a "sword" entry only turns the hand-placed blade (held at one tilt while he stands, walks
+    # and runs, swaying a little), keeping where the fist is
+    for n, angle in spec.get("sword", {}).get("frames", {}).items():
+        if out["sword"].get(n) is not None:
+            out["sword"][n] = [out["sword"][n][0], out["sword"][n][1], angle]
 
     def resolve(kind):
         if kind not in out:
@@ -197,6 +227,8 @@ def holds(hands, spec, names):
             frames = {}
             for n in names:
                 v = h.get("frames", {}).get(n, h.get("angle"))
+                if h.get("along") == "forearm" and forearms and forearms.get(n) is not None:
+                    v = forearms[n]
                 if base[n] is None:
                     frames[n] = None
                 elif isinstance(v, list):
@@ -208,6 +240,39 @@ def holds(hands, spec, names):
 
     for kind in WEAPON_KINDS:
         resolve(kind)
+    return out
+
+
+def forearm_angles(hero):
+    """The way his forearm points on each frame with a weapon fist (degrees clockwise from
+    pointing right, from the elbow out through the fist): the skin joined to the fist, within
+    about a head radius of it, and the fist itself left out; None where too little shows."""
+    out = {}
+    for n, px, fi in zip(hero.names, hero.frames, hero.info):
+        hold = hero.hands[n].get("weapon")
+        if hold is None:
+            out[n] = None
+            continue
+        gx, gy = hold[0], hold[1]
+        h, w = px.shape[:2]
+        yy, xx = np.mgrid[0:h, 0:w]
+        dist = np.hypot(xx - gx, yy - gy)
+        ok = (fi["region"] == R["skin"]) & (px[..., 3] > 127) & (dist <= hero.r * FOREARM)
+        if not ok.any():
+            out[n] = None
+            continue
+        sy, sx = np.unravel_index(np.argmin(np.where(ok, dist, np.inf)), ok.shape)
+        seen = np.zeros(ok.shape, bool)
+        seen[sy, sx] = True
+        todo = deque([(sy, sx)])
+        while todo:
+            y, x = todo.popleft()
+            for ny, nx in ((y + 1, x), (y - 1, x), (y, x + 1), (y, x - 1)):
+                if 0 <= ny < h and 0 <= nx < w and ok[ny, nx] and not seen[ny, nx]:
+                    seen[ny, nx] = True
+                    todo.append((ny, nx))
+        ys, xs = np.nonzero(seen & (dist > hero.r * FIST))
+        out[n] = round(math.degrees(math.atan2(gy - ys.mean(), gx - xs.mean())), 1) if len(xs) >= 5 else None
     return out
 
 
@@ -246,43 +311,42 @@ def draw_turned(canvas, img, anchor, at, angle):
     canvas.alpha_composite(layer)
 
 
-def weapon_strips(img, grip, axis, kind, names, frames, info, hold, hands, r, far_frames=()):
-    """A weapon picture in his hand on every frame: (in front of him, behind him). A held weapon
-    has a hole where his fist wraps it, so his fingers show over the grip. `far_frames` are
-    frames where this kind goes behind him even if the rig's fist is in front (a long staff
-    planted beside him would otherwise cover his face)."""
-    front, behind = [], []
-    for n, px, fi in zip(names, frames, info):
-        f, b = Image.new("RGBA", (px.shape[1], px.shape[0])), Image.new("RGBA", (px.shape[1], px.shape[0]))
+def weapon_poses(img, axis, kind, names, info, hold, hands, far_frames=()):
+    """Where a weapon picture goes on every frame (pieces.pose(), or None): in his fist turned
+    the way the rig holds it, behind him in his far hand (or in `far_frames`: a long staff
+    planted beside him would otherwise cover his face), or on his back while he climbs or sits.
+    His fingers show over the grip of a GRIPPED kind held in front (fist_<kind>.png)."""
+    out = []
+    for n, fi in zip(names, info):
         if hold[n] is not None:
             x, y, angle = hold[n]
-            layer = Image.new("RGBA", f.size)
-            draw_turned(layer, img, grip, (x, y), angle - axis)
             far = hands[n].get("weapon_behind", False) or n in far_frames
-            if kind in GRIPPED and not far:
-                arr = np.asarray(layer).copy()
-                arr[fist_mask(px, (x, y), r * FIST), 3] = 0
-                layer = Image.fromarray(arr, "RGBA")
-            (b if far else f).alpha_composite(layer)
+            out.append(pose("held", (x, y), angle - axis, behind=far, fist=kind in GRIPPED and not far))
         elif kind in ON_BACK and n in SHEATHED:
-            down = -fi["up"]
-            at = fi["neck"] + down * fi["r"] * 0.3
-            centre = (img.width / 2, img.height / 2)
-            (f if n in BACK_VIEW else b).alpha_composite(_turned_on(f.size, img, centre, at, ON_BACK[kind] - axis))
-        front.append(f)
-        behind.append(b)
-    return front, behind
+            at = fi["neck"] - fi["up"] * fi["r"] * 0.3
+            out.append(pose("back", at, ON_BACK[kind] - axis, behind=n not in BACK_VIEW))
+        else:
+            out.append(None)
+    return out
 
 
-def _turned_on(size, img, anchor, at, angle):
-    layer = Image.new("RGBA", size)
-    draw_turned(layer, img, anchor, at, angle)
-    return layer
+def fist_masks(hero, held):
+    """Writes fist_<kind>.png for every GRIPPED kind: his fingers around its grip, on the
+    frames where it is in his near hand."""
+    names, frames, hands, r = hero.names, hero.frames, hero.hands, hero.r
+    for kind in GRIPPED:
+        far_frames = hero.hold_spec.get(kind, {}).get("behind", ())
+        masks = []
+        for n, px in zip(names, frames):
+            h = held[kind][n]
+            far = hands[n].get("weapon_behind", False) or n in far_frames
+            masks.append(None if h is None or far else fist_mask(px, h[:2], r * FIST))
+        save_fist(kind, masks, hero.fw, hero.fh)
 
 
 def held_pictures():
-    """(item id, weapon kind, piece, sheet, size) for every weapon drawn on a held_*.json sheet
-    that's there; size is the item's EquipDef.held_size."""
+    """(item id, weapon kind, piece, sheet, size) for every weapon item: its icon, cut at full
+    size from its items_*.json sheet; size is the item's EquipDef.held_size."""
     kinds = {}
     for folder, _, files in os.walk(ITEMS):
         for f in files:
@@ -296,27 +360,41 @@ def held_pictures():
                 kinds[item.group(1)] = (kind.group(1), float(size.group(1)) if size else 1.0)
     out = []
     for f in sorted(os.listdir(ss.SHEETS)):
-        if not (f.startswith(HELD_SHEETS) and f.endswith(".json")):
+        if not (f.startswith(ICON_SHEETS) and f.endswith(".json")):
             continue
-        with open(os.path.join(ss.SHEETS, f)) as fh:
-            source = json.load(fh)["source"]
-        if not os.path.exists(os.path.join(ROOT, source)):
-            continue
-        for item, piece in cut(f[:-5]).items():
-            if item not in kinds:
-                sys.exit(f"{f}: no weapon item called {item}")
+        for item, piece in icon_cut(f[:-5], set(kinds)).items():
             out.append((item, kinds[item][0], piece, f[:-5], kinds[item][1]))
+    missing = set(kinds) - {o[0] for o in out}
+    if missing:
+        sys.exit(f"no icon cell for weapon(s) {sorted(missing)}")
     return out
+
+
+def icon_cut(sheet, wanted):
+    """The `wanted` cells of an item icon sheet, cut at the sheet's full size (the manifest's
+    scale is for the bag icons) and not saved; {} when the sheet has none of them."""
+    with open(os.path.join(ss.SHEETS, sheet + ".json")) as fh:
+        man = json.load(fh)
+    cells = [[c if c in wanted else "" for c in row] for row in man["cells"]]
+    if not any(any(row) for row in cells) or not os.path.exists(os.path.join(ROOT, man["source"])):
+        return {}
+    man.update(cells=cells, scale=1.0, save=False, out_dir=os.path.join("art", "build", "paperdoll", sheet))
+    tmp = os.path.join(ROOT, "art", "build", "paperdoll", f"held_{sheet}.json")
+    os.makedirs(os.path.dirname(tmp), exist_ok=True)
+    with open(tmp, "w") as fh:
+        json.dump(man, fh)
+    sprites = {}
+    ss.process(tmp, sprites=sprites)
+    return {k.split(":", 1)[1]: Piece(v) for k, v in sprites.items()}
 
 
 # ---------- building the weapon layers ----------
 
 def weapon_layers(hero, weapons, held):
-    """Writes weapon_<kind> (+ _behind) for every kind, and weapon_item_<id> for every weapon
-    with its own held picture. Returns each one's grip entry for the rig (by kind, or by
+    """Writes the piece weapon_<kind> (greyscale, tinted) for every kind and weapon_item_<id> for
+    every weapon, from its icon (pieces.py), and the fist masks. Returns each one's grip entry for the rig (by kind, or by
     item_<id>)."""
-    names, info, frames, index, anims = hero.names, hero.info, hero.frames, hero.index, hero.anims
-    fw, fh, r, hands, hold_spec = hero.fw, hero.fh, hero.r, hero.hands, hero.hold_spec
+    names, info, r, hands, hold_spec = hero.names, hero.info, hero.r, hero.hands, hero.hold_spec
     # weapons: every kind (greyscale, tinted per item) and every weapon with its own picture
     s_w = r * SWORD_LENGTH / length(weapons["sword"], "sword")
     grips = {}
@@ -324,13 +402,14 @@ def weapon_layers(hero, weapons, held):
     # (a bow drawn at a slant is stood up first, so it is measured and held as the rig expects)
     drawn_weapons = [(item, kind, stood_up(piece) if kind in UPRIGHT else piece, sheet, size)
                      for item, kind, piece, sheet, size in held_pictures()]
-    # a held_* sheet is drawn at its own size: it is shrunk so its weapons are, on the median,
-    # as long as the template of their kind (keeping their sizes against each other)
+    # an icon sheet is drawn at its own size: it is shrunk so each kind of weapon on it is, on
+    # the median, as long as the template of its kind (keeping their sizes against each other;
+    # a sheet draws its wands and staffs at the same icon size, but a staff is far longer)
     by_sheet = {}
     # (and then grown or shrunk by the item's own held_size: a claymore longer than a sword)
     for item, kind, piece, sheet, _ in drawn_weapons:
-        by_sheet.setdefault(sheet, []).append(length(weapons[kind], kind) / length(piece, kind))
-    pictures += [("item_" + item, kind, piece, False, float(np.median(by_sheet[sheet])) * size)
+        by_sheet.setdefault((sheet, kind), []).append(length(weapons[kind], kind) / length(piece, kind))
+    pictures += [("item_" + item, kind, piece, False, float(np.median(by_sheet[sheet, kind])) * size)
                  for item, kind, piece, sheet, size in drawn_weapons]
     for name, kind, piece, tinted, k in pictures:
         img, grip, axis = weapon(piece, s_w * WORN_SIZE.get(kind, 1.0) * k, kind)
@@ -338,8 +417,9 @@ def weapon_layers(hero, weapons, held):
                  "kind": kind, "grip_share": grip_share(img, grip, axis), "dots_left": dots_left(img)}
         grips[kind if tinted else name] = entry
         far_frames = hold_spec.get(kind, {}).get("behind", ())
-        front, behind = weapon_strips(img, grip, axis, kind, names, frames, info, held[kind], hands, r, far_frames)
-        save_layer(f"weapon_{name}", front, fw, fh, index, anims, tinted)
-        if any(im.getbbox() for im in behind):
-            save_layer(f"weapon_{name}_behind", behind, fw, fh, index, anims, tinted)
+        poses = weapon_poses(img, axis, kind, names, info, held[kind], hands, far_frames)
+        middle = (img.width / 2, img.height / 2)
+        save_piece(f"weapon_{name}", {"held": (img, grip), "back": (img, middle)}, poses, tinted,
+                   kind if kind in GRIPPED else None)
+    fist_masks(hero, held)
     return grips

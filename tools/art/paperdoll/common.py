@@ -60,6 +60,24 @@ FACE_ZONE = (FACE_AT[0] + SCALP_BACK, 1.0, FACE_AT[1] + SCALP, 0.7)
 BLANK_FACE = 222      # the hair sheet's blank faces are greys at least this pale (of 255)
 NECK_SLIVER = 120     # loose bits under the jaw smaller than this (pixels) are left-over neck outline
 HAT_SHOULDER_ROWS = 6  # hat sheet cells are lined up by their bottom rows (the shoulders)
+# Hats of these shapes sit this much lower on his head than on the sheet's head (head radii;
+# Cory 2026-10-11: a bandana sits a little lower).
+HAT_LOWER = {"bandana": 0.2}
+HAT_GROW = {"bandana": 1.1}
+# ...and from behind are this wide (head radii), all alike, so they cover the back of his head
+# (Gemini paints some bandanas' backs wider than others; Cory 2026-10-11: a bit smaller from behind)
+HAT_BACK_WIDTH = {"bandana": 2.45}
+HAT_LINE = 0.1         # a bit of a hat cell's frame line: at most this thick against its length
+# a closed helm's eye holes go over his eyes (hats.eyes_in_holes): his eyes' middle (x, y) and
+# width in head radii from the head centre in a side view, the share of the widest opening's
+# width that counts as the eye band, the widest opening that is an open face instead (head
+# radii), and how much smaller or bigger than the sheet's size the helm may be drawn
+HELM_EYES = (0.18, 0.27, 0.95)
+HELM_BAND, HELM_OPEN, HELM_SIZE = 0.75, 1.15, (0.8, 1.15)
+HAIR_CUT_SIDE = 0.6    # hats.save_hair_cut: hair is hidden this far past a hat's sides (head radii)
+HAIR_CUT_HEAD, HAIR_CUT_REACH = 0.85, 0.5  # ...each column's own edge over his head, nearby edges off it
+HAIR_CUT_LOW = 0.75    # ...and never below this far under the head's middle (head radii)
+HAIR_CUT_ALPHA = 127   # ...against the hat's pixels at least this opaque
 HAT_SIZE = 1.0         # hats drawn this much bigger than his head against the sheet's head
 HAT_SPECK = 0.05  # hat_alone: pieces under this share of the hat are cell-frame bits
 HAT_SHAPES = ("cap", "hood", "bandana", "helm", "wizard", "tricorn")
@@ -70,25 +88,46 @@ EYE_SCALE = 1.0
 EYE_LINE = 0.6
 NECK = 0.95           # the neck is this far below the head's centre
 SHIELD_HEIGHT = 1.25
+# A closed helm's dark inside (hats.open_visor): thicker than this many sheet pixels, and at
+# least VISOR_MIN pixels after its outline lines are worn away.
+VISOR_LINE = 3
+VISOR_MIN = 40
+SHIELD_SHOWS = 0.33   # share of a shield (its back, behind him) that shows past his body
 # Clothes sheets (art/sheets/<place>_<style>_frames.json) for these places; styles whose sheet
 # came back unusable are skipped (their items wear the nearest cut, see EquipDef.worn_style).
 WORN_PLACES = ("top", "bottom", "shoes")
 WORN_BROKEN = ("smock",)
 WORN_SHORTS_GREY = 150  # the body's shorts are greys darker than this
 WORN_OUTLINE = 90       # and outlines darker than this
+EDGE_PEEL = 2           # pixels of a pink or mauve background rim peeled off an item's cut (items.py)
+FLOOR_ZONE = 0.12       # a top or bottom has nothing off his body this low (share of his height)
+FLOOR_SLACK = 0         # ... past this many pixels of his outline (items.off_floor)
+TWIN_BROKEN = ("starlit_cape",)  # _only twins that came back with the body painted over, not erased
+TWIN_SLACK = 1          # an item's _only twin is trusted this many pixels past its art (items.py)
 WORN_FRINGE = 110       # pale edge pixels at the figure's edge are background fringe
 GLOVE_REACH = 0.9     # a glove is put on a hand only if the drawn one is this near it (head radii)
+# an item's own gloves are mitten pieces (gloves.glove_pieces): each hand is the skin within
+# GLOVE_HAND (head radii) of its point, found within GLOVE_FIND of it; the mitten is GLOVE_SIZE
+# wide and covers GLOVE_OVER pixels of his body around that hand
+GLOVE_HAND = 0.38
+GLOVE_FIND = 0.7
+GLOVE_SIZE = 0.6
+GLOVE_OVER = 4
 SWORD_LENGTH = 1.9    # every weapon is drawn at the scale that makes the sword this long
 WEAPON_LENGTH = 20    # rig "tip" is this far from "grip" along the weapon (only its direction matters)
 FIST = 0.4            # the fist around a grip reaches this far from the grip point (head radii)
+FOREARM = 1.1         # forearm_angles: skin this close to the fist (head radii) counts as his forearm
+GUN_FRONT, GUN_BACK = 0.4, 0.4  # weapons.grip_point: a gun's barrel is its front share, its grip in its back share
+BARREL_FRONT = 0.55   # weapons.barrel_tilt: the front share of a gun that is its barrel
+CLAW_CUFF = 0.25      # how far along a claw (0 its back end, 1 its tips) the middle of its cuff is
 
 # Weapons worn on the fist are drawn smaller than the template sheet has them, so they fit
 # his hand rather than swallowing it (the rest keep the sheet's size against the sword).
-WORN_SIZE = {"claw": 0.6, "knuckle": 0.75, "bow": 1.35}
+WORN_SIZE = {"claw": 0.9, "knuckle": 0.75, "bow": 1.35, "staff": 1.3}
 # Long weapons whose sheets may draw them at a slant (a sword up and to the right): their own
 # axis is measured and turned out, so a rig angle means the same however the art was drawn.
-# The others are drawn the way the rig expects (a gun and claws pointing right, a bow upright).
-AXIAL = ("sword", "wand", "staff")
+# The others are drawn the way the rig expects (a gun pointing right, a bow upright).
+AXIAL = ("sword", "wand", "staff", "claw")
 # Weapons the rig holds upright (see stood_up), and how far off upright (degrees) one may be
 # drawn before it is stood up.
 UPRIGHT = ("bow",)
@@ -98,8 +137,9 @@ GRIPPED = ("sword", "wand", "staff", "bow", "gun")
 # Weapons carried on his back while he climbs or sits, and at what angle; the rest are put away.
 ON_BACK = {"sword": 125, "staff": -70, "bow": 60, "wand": 125, "gun": 110}
 SHEATHED = BACK_VIEW + ("sit",)
-# Sheets of weapons with their own held picture: one cell per weapon, named by item id.
-HELD_SHEETS = "held_"
+# Weapons are held as their own icon (Cory 2026-10-11: gear looks the same worn as in the
+# bag): the weapon cells of these item icon sheets, cut at the sheet's full size.
+ICON_SHEETS = "items_"
 ITEMS = os.path.join(ROOT, "data", "items")
 
 # Where the weapon hand and shield are, and how the head is tilted, per frame: placed by hand,

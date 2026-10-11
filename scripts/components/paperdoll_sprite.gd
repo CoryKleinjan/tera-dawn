@@ -17,7 +17,9 @@ var doll: Paperdoll
 var look := {}
 var _material: ShaderMaterial
 var _texel := 1.0
-var _layers: Array[AnimatedSprite3D] = []
+## One per layer of the doll: an AnimatedSprite3D playing with the body, or for a piece a
+## Sprite3D placed on each frame.
+var _layers: Array[SpriteBase3D] = []
 ## The streak his weapon leaves and the flash of a shot.
 var trail: WeaponTrail
 ## The animation and frame showing last time (the trail sweeps between frames).
@@ -50,16 +52,24 @@ func set_look(new_look: Dictionary) -> void:
 	var count := doll.layers.size()
 	for i in count:
 		var l := doll.layers[i]
-		var a := AnimatedSprite3D.new()
-		a.sprite_frames = l.frames
+		var a: SpriteBase3D
+		if l.piece:
+			a = Sprite3D.new()
+		else:
+			a = AnimatedSprite3D.new()
+			(a as AnimatedSprite3D).sprite_frames = l.frames
 		TDStage.style_sprite(a, _texel)
 		a.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		a.material_override = _layer_material(l)
-		# back to front: behind ones under the body (z < 0), the rest between it and the pictures
-		a.position.z = DEPTH * (0.8 * (i + 1) / (count + 1) - (1.0 if l.behind else 0.0))
+		a.position.z = _depth(i, l.behind)
 		add_child(a)
 		_layers.append(a)
 	sync()
+
+## Back to front: behind ones under the body (z < 0), the rest between it and the pictures.
+func _depth(i: int, behind: bool) -> float:
+	var count := doll.layers.size()
+	return DEPTH * (0.8 * (i + 1) / (count + 1) - (1.0 if behind else 0.0))
 
 func _process(_delta: float) -> void:
 	sync()
@@ -80,7 +90,11 @@ func sync() -> void:
 		_frame = frame
 	trail.paused = body.speed_scale == 0.0
 	for i in _layers.size():
-		var a := _layers[i]
+		var l := doll.layers[i]
+		if l.piece:
+			_place(_layers[i] as Sprite3D, l, i, frame, mirror)
+			continue
+		var a := _layers[i] as AnimatedSprite3D
 		if a.sprite_frames.has_animation(body.animation):
 			a.animation = body.animation
 			a.frame = mini(body.frame, a.sprite_frames.get_frame_count(body.animation) - 1)
@@ -88,12 +102,38 @@ func sync() -> void:
 		a.flip_h = mirror
 		a.modulate = body.modulate
 
+## Puts a piece where its pose for `frame` says (Paperdoll.Piece), or hides it.
+func _place(s: Sprite3D, l: Paperdoll.Layer, i: int, frame: int, mirror: bool) -> void:
+	var p: Variant = l.piece.pose(frame)
+	s.visible = p != null
+	if p == null:
+		return
+	var pic := l.piece.picture(p)
+	var anchor: Vector2 = l.piece.views[p["view"]]["anchor"]
+	var side := -1.0 if mirror else 1.0
+	s.texture = pic
+	(s.material_override as ShaderMaterial).set_shader_parameter(&"strip", pic)
+	s.flip_h = mirror
+	# the anchor on the node's origin (Sprite3D offsets are in pixels, y up)
+	s.offset = Vector2((pic.get_width() / 2.0 - anchor.x) * side, anchor.y - pic.get_height() / 2.0)
+	var at: Vector2 = p["at"]
+	# frame pixels -> the body's space: its origin is the frame's bottom middle
+	s.position = Vector3((at.x - Paperdoll.FRAME_SIZE.x / 2.0) * side, Paperdoll.FRAME_SIZE.y - at.y, 0.0) * body.pixel_size
+	s.position.z = _depth(i, p["behind"])
+	s.rotation.z = -float(p["angle"]) * side
+	s.scale = Vector3.ONE * float(p["scale"])
+	s.modulate = body.modulate
+	l.apply_pose(s.material_override as ShaderMaterial, frame, p)
+
 ## A layer's material: its frames are regions of one strip, which the shader samples, in
 ## the layer's colour.
 static func _layer_material(l: Paperdoll.Layer) -> ShaderMaterial:
 	var mat := ShaderMaterial.new()
 	mat.shader = LAYER_SHADER
-	var tex := l.frames.get_frame_texture(&"idle", 0) if l.frames.has_animation(&"idle") else null
-	mat.set_shader_parameter(&"strip", tex.atlas if tex is AtlasTexture else tex)
+	if l.piece:
+		mat.set_shader_parameter(&"strip", null)  # set per frame (_place): the pose's picture
+	else:
+		var tex := l.frames.get_frame_texture(&"idle", 0) if l.frames.has_animation(&"idle") else null
+		mat.set_shader_parameter(&"strip", tex.atlas if tex is AtlasTexture else tex)
 	l.apply(mat)
 	return mat

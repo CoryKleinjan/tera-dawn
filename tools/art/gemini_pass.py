@@ -27,6 +27,7 @@ finished wave, then submit the next) and exits; --wait keeps stepping until ever
 References are uploaded once with the Files API, which keeps them for 48 hours.
 """
 import argparse
+import hashlib
 import json
 import os
 import sys
@@ -330,10 +331,14 @@ class Pass:
 
     def file_part(self, path):
         files = self.state.setdefault("_files", {})
-        f = files.get(path)
+        data = open(path, "rb").read()
+        # keyed by content too: a redo's edit base is written to the same _bases path, and the
+        # old upload of that path must not be sent again (wg_hats_1_only's redo once was)
+        key = "%s#%s" % (path, hashlib.sha1(data).hexdigest()[:12])
+        f = files.get(key)
         if not f or time.time() - f["at"] > FILE_LIFETIME:
-            res = gemini_sheet.upload_file(open(path, "rb").read(), "image/png", os.path.basename(path))
-            f = files[path] = {"uri": res["uri"], "at": time.time()}
+            res = gemini_sheet.upload_file(data, "image/png", os.path.basename(path))
+            f = files[key] = {"uri": res["uri"], "at": time.time()}
         return {"file_data": {"mime_type": "image/png", "file_uri": f["uri"]}}
 
     def submit(self, wave):

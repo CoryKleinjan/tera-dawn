@@ -5,6 +5,7 @@ render_mode cull_disabled, specular_disabled, alpha_to_coverage;
 
 #include "res://shaders/character_light.gdshaderinc"
 #include "res://shaders/gear_tint.gdshaderinc"
+#include "res://shaders/paperdoll_piece.gdshaderinc"
 
 // The layer's strip (its frames are regions of it).
 uniform sampler2D strip : source_color, filter_linear;
@@ -21,7 +22,7 @@ void fragment() {
 		c.rgb *= tint.rgb; // as a modulate: straight onto the linear colour
 	}
 	c *= COLOR;
-	ALPHA = c.a * tint.a;
+	ALPHA = c.a * tint.a * fist_cut(UV) * hair_cut_at(UV);
 	ALPHA_SCISSOR_THRESHOLD = 0.5;
 	ALPHA_ANTIALIASING_EDGE = 0.3;
 	ALBEDO = c.rgb;
