@@ -1,17 +1,17 @@
 {
   "source": "art/source/building_dawnharbor_small.png",
-  "art_px": 5.1,
+  "art_px": 5.105,
   "out_dir": "assets/sprites/buildings/dawnharbor",
   "label_band": 0,
   "inset": 0,
   "grid": {
     "rows": [
       0,
-      1025
+      1188
     ],
     "cols": [
       0,
-      929
+      1076
     ]
   },
   "cells": [
@@ -19,5 +19,5 @@
       "small"
     ]
   ],
-  "flat_bottom": true
+  "flat_bottom": 15
 }

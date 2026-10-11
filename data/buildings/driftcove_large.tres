@@ -7,5 +7,5 @@
 script = ExtResource("1_building_def")
 id = &"driftcove_large"
 texture = ExtResource("2_large")
-height = 272.1
-door_x = 0.49
+height = 250.0
+door_x = 0.48
