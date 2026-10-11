@@ -8935,6 +8935,166 @@
     "base": "/mnt/project-files/art-sheets/run-redo/cape_base.png",
     "text": "This sheet shows my character in 32 labelled poses (8 columns x 4 rows) on magenta. In 28 of the cells he wears a greyscale painted cape. In cells 9, 10, 11 and 12 (RUN 1 to RUN 4) he is bare. Dress those four running figures in EXACTLY the same cape as the other 28 cells: same shape, length, details, greyscale tones, outline and soft painted style, following his running pose and the same size as his body. Do not move, resize or re-pose any figure. Leave the other 28 cells, every label and every grid line exactly as they are. The background stays bright pure magenta #FF00FF everywhere. Draw only that: nothing else changes."
    }
+  },
+  {
+   "id": "paperdoll_mitten_1",
+   "prompts": null,
+   "batch": "mitten hands 1 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_mitten_1.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread (Cory: hands show no fingers, like MapleStory): close-up of body cells idle 1-4 at 3x; tools/art/body_panels.py hands pastes back only what changed.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/_bases/mitten_1.png",
+    "text": "The image is 4 labelled close-up panels of my chibi boy hero (bald, peach skin, grey shorts) in different poses. Repaint BOTH of his hands in EVERY panel as MapleStory-style mitten hands: each hand is ONE simple rounded shape, like a mitten or a little round fist, with NO separate fingers, NO finger lines, NO knuckle lines and NO separate thumb. Just a smooth soft rounded hand in the same peach skin colours with a little soft shading and the same dark plum-brown outline.\n- Each hand stays at the same place, the same size (or a little smaller) and joined to the same wrist and arm.\n- A clenched hand becomes a rounded mitten fist; an open hand becomes a rounded mitten with no fingers spread.\n- Hands seen from behind (climbing) are rounded mittens too.\nChange NOTHING else: the head, face, ears, arms, body, shorts, legs, feet, labels, panel borders and positions stay exactly as they are, and the background stays flat pure magenta #FF00FF everywhere."
+   }
+  },
+  {
+   "id": "paperdoll_mitten_2",
+   "prompts": null,
+   "batch": "mitten hands 2 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_mitten_2.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread (Cory: hands show no fingers, like MapleStory): close-up of body cells walk 1-4 at 3x; tools/art/body_panels.py hands pastes back only what changed.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/_bases/mitten_2.png",
+    "text": "The image is 4 labelled close-up panels of my chibi boy hero (bald, peach skin, grey shorts) in different poses. Repaint BOTH of his hands in EVERY panel as MapleStory-style mitten hands: each hand is ONE simple rounded shape, like a mitten or a little round fist, with NO separate fingers, NO finger lines, NO knuckle lines and NO separate thumb. Just a smooth soft rounded hand in the same peach skin colours with a little soft shading and the same dark plum-brown outline.\n- Each hand stays at the same place, the same size (or a little smaller) and joined to the same wrist and arm.\n- A clenched hand becomes a rounded mitten fist; an open hand becomes a rounded mitten with no fingers spread.\n- Hands seen from behind (climbing) are rounded mittens too.\nChange NOTHING else: the head, face, ears, arms, body, shorts, legs, feet, labels, panel borders and positions stay exactly as they are, and the background stays flat pure magenta #FF00FF everywhere."
+   }
+  },
+  {
+   "id": "paperdoll_mitten_3",
+   "prompts": null,
+   "batch": "mitten hands 3 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_mitten_3.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread (Cory: hands show no fingers, like MapleStory): close-up of body cells attack 1-2, hit, hurt at 3x; tools/art/body_panels.py hands pastes back only what changed.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/_bases/mitten_3.png",
+    "text": "The image is 4 labelled close-up panels of my chibi boy hero (bald, peach skin, grey shorts) in different poses. Repaint BOTH of his hands in EVERY panel as MapleStory-style mitten hands: each hand is ONE simple rounded shape, like a mitten or a little round fist, with NO separate fingers, NO finger lines, NO knuckle lines and NO separate thumb. Just a smooth soft rounded hand in the same peach skin colours with a little soft shading and the same dark plum-brown outline.\n- Each hand stays at the same place, the same size (or a little smaller) and joined to the same wrist and arm.\n- A clenched hand becomes a rounded mitten fist; an open hand becomes a rounded mitten with no fingers spread.\n- Hands seen from behind (climbing) are rounded mittens too.\nChange NOTHING else: the head, face, ears, arms, body, shorts, legs, feet, labels, panel borders and positions stay exactly as they are, and the background stays flat pure magenta #FF00FF everywhere."
+   }
+  },
+  {
+   "id": "paperdoll_mitten_4",
+   "prompts": null,
+   "batch": "mitten hands 4 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_mitten_4.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread (Cory: hands show no fingers, like MapleStory): close-up of body cells jump, fall, land, crouch at 3x; tools/art/body_panels.py hands pastes back only what changed.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/_bases/mitten_4.png",
+    "text": "The image is 4 labelled close-up panels of my chibi boy hero (bald, peach skin, grey shorts) in different poses. Repaint BOTH of his hands in EVERY panel as MapleStory-style mitten hands: each hand is ONE simple rounded shape, like a mitten or a little round fist, with NO separate fingers, NO finger lines, NO knuckle lines and NO separate thumb. Just a smooth soft rounded hand in the same peach skin colours with a little soft shading and the same dark plum-brown outline.\n- Each hand stays at the same place, the same size (or a little smaller) and joined to the same wrist and arm.\n- A clenched hand becomes a rounded mitten fist; an open hand becomes a rounded mitten with no fingers spread.\n- Hands seen from behind (climbing) are rounded mittens too.\nChange NOTHING else: the head, face, ears, arms, body, shorts, legs, feet, labels, panel borders and positions stay exactly as they are, and the background stays flat pure magenta #FF00FF everywhere."
+   }
+  },
+  {
+   "id": "paperdoll_mitten_5",
+   "prompts": null,
+   "batch": "mitten hands 5 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_mitten_5.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread (Cory: hands show no fingers, like MapleStory): close-up of body cells rope 1-2, ladder 1-2 at 3x; tools/art/body_panels.py hands pastes back only what changed.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/_bases/mitten_5.png",
+    "text": "The image is 4 labelled close-up panels of my chibi boy hero (bald, peach skin, grey shorts) in different poses. Repaint BOTH of his hands in EVERY panel as MapleStory-style mitten hands: each hand is ONE simple rounded shape, like a mitten or a little round fist, with NO separate fingers, NO finger lines, NO knuckle lines and NO separate thumb. Just a smooth soft rounded hand in the same peach skin colours with a little soft shading and the same dark plum-brown outline.\n- Each hand stays at the same place, the same size (or a little smaller) and joined to the same wrist and arm.\n- A clenched hand becomes a rounded mitten fist; an open hand becomes a rounded mitten with no fingers spread.\n- Hands seen from behind (climbing) are rounded mittens too.\nChange NOTHING else: the head, face, ears, arms, body, shorts, legs, feet, labels, panel borders and positions stay exactly as they are, and the background stays flat pure magenta #FF00FF everywhere."
+   }
+  },
+  {
+   "id": "paperdoll_mitten_6",
+   "prompts": null,
+   "batch": "mitten hands 6 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_mitten_6.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread (Cory: hands show no fingers, like MapleStory): close-up of body cells climb idle, dawn slash 1-3 at 3x; tools/art/body_panels.py hands pastes back only what changed.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/_bases/mitten_6.png",
+    "text": "The image is 4 labelled close-up panels of my chibi boy hero (bald, peach skin, grey shorts) in different poses. Repaint BOTH of his hands in EVERY panel as MapleStory-style mitten hands: each hand is ONE simple rounded shape, like a mitten or a little round fist, with NO separate fingers, NO finger lines, NO knuckle lines and NO separate thumb. Just a smooth soft rounded hand in the same peach skin colours with a little soft shading and the same dark plum-brown outline.\n- Each hand stays at the same place, the same size (or a little smaller) and joined to the same wrist and arm.\n- A clenched hand becomes a rounded mitten fist; an open hand becomes a rounded mitten with no fingers spread.\n- Hands seen from behind (climbing) are rounded mittens too.\nChange NOTHING else: the head, face, ears, arms, body, shorts, legs, feet, labels, panel borders and positions stay exactly as they are, and the background stays flat pure magenta #FF00FF everywhere."
+   }
+  },
+  {
+   "id": "paperdoll_mitten_7",
+   "prompts": null,
+   "batch": "mitten hands 7 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_mitten_7.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread (Cory: hands show no fingers, like MapleStory): close-up of body cells faint 1-2, level up, sit at 3x; tools/art/body_panels.py hands pastes back only what changed.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/_bases/mitten_7.png",
+    "text": "The image is 4 labelled close-up panels of my chibi boy hero (bald, peach skin, grey shorts) in different poses. Repaint BOTH of his hands in EVERY panel as MapleStory-style mitten hands: each hand is ONE simple rounded shape, like a mitten or a little round fist, with NO separate fingers, NO finger lines, NO knuckle lines and NO separate thumb. Just a smooth soft rounded hand in the same peach skin colours with a little soft shading and the same dark plum-brown outline.\n- Each hand stays at the same place, the same size (or a little smaller) and joined to the same wrist and arm.\n- A clenched hand becomes a rounded mitten fist; an open hand becomes a rounded mitten with no fingers spread.\n- Hands seen from behind (climbing) are rounded mittens too.\nChange NOTHING else: the head, face, ears, arms, body, shorts, legs, feet, labels, panel borders and positions stay exactly as they are, and the background stays flat pure magenta #FF00FF everywhere."
+   }
+  },
+  {
+   "id": "paperdoll_runarms",
+   "prompts": null,
+   "batch": "run arms swing (edit)",
+   "with": null,
+   "refs": [],
+   "save": "paperdoll_runarms.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "note": "2026-10-11 sword-grip thread (Cory: the sword stays in the same hand while running, behind him in one frame and in front in the other): the 4 run cells at 3x with the front arm swung back in run 1-2 and forward in run 3-4, mitten hands; tools/art/body_panels.py upper pastes back everything above the shorts.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/_bases/runarms_1.png",
+    "text": "The image is 4 labelled close-up panels of my chibi boy hero running to the right: 9 RUN 1, 10 RUN 2 (top row), 11 RUN 3, 12 RUN 4 (bottom row). Redraw ONLY his two arms and hands so they swing as he runs, opposite to his legs:\n- In 9 RUN 1 and 10 RUN 2: the FRONT arm (the arm nearer to us, drawn over his body) swings BACK: elbow a little bent, its hand down and behind him near his hip on the LEFT side of his body (behind his back). The FAR arm swings FORWARD: its hand ahead of his chest on the right, partly hidden behind his body.\n- In 11 RUN 3 and 12 RUN 4: the FRONT arm swings FORWARD: elbow bent, its hand forward at chest height on the right side, like it is now. The FAR arm swings BACK: its hand behind him on the left, partly hidden behind his body.\n- The far arm is the SAME peach skin colour as the rest of him, only a little darker, like skin in soft shade. Not brown, not tan, not orange.\n- Draw all hands as MapleStory-style mitten hands: each hand is ONE simple rounded shape, like a mitten or a little round fist, with NO separate fingers, NO finger lines, NO knuckle lines and NO separate thumb. Just a smooth soft rounded hand in the same peach skin colours with a little soft shading and the same dark plum-brown outline.\nChange NOTHING else: his head, face, ears, body, shorts, legs and feet stay EXACTLY as they are, at the same place and size, the labels and panel borders stay, and the background stays flat pure magenta #FF00FF everywhere."
+   }
   }
  ]
 }
