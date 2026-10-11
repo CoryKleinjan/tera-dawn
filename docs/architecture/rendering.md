@@ -20,6 +20,12 @@ camera). The layers are constants at the top of `scripts/world/stage.gd`, back t
 | `Z_PLAYER` | 0.64 | Your hero |
 | `Z_EFFECT` | 0.8 | Skill and hit effects |
 
+Skill, hit and projectile effects are soft glowing sprites, but `TDStage.effect_sprite` makes their
+solid parts record depth like the characters do. Without that, the depth of field would take the
+depth of whatever is behind an effect and blur it into the scenery, so it read as behind things.
+Use `effect_sprite` for anything that plays on the characters' plane, and keep `glow_sprite`
+for glows that belong to the scenery (lanterns, drops).
+
 Everything you can touch stands in front of all the land, so a platform, bush or prop never
 hides a character, NPC, rope or ladder. Decoration and prop depths in data (0 down to
 `-SCENERY_DEEP`) go through `TDStage.land_depth()`, which squeezes them into the thin
