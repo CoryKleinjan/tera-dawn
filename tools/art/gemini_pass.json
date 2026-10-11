@@ -10503,6 +10503,69 @@
      "art/source/building_emberreach_large.png"
     ]
    }
+  },
+  {
+   "id": "paint_logo",
+   "prompts": null,
+   "batch": "painted look: paint_logo (edit)",
+   "with": null,
+   "refs": [],
+   "save": "logo_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 library + repo cleanup thread: one of the last pixel-art pieces the game used, repainted (Cory chose 'Repaint all' 13:42Z).",
+   "edit": {
+    "base": "art/source/logo.png",
+    "text": "Repaint this whole image as soft hand-painted art, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look; every curve and diagonal edge is smooth. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same title lettering spelling TERA'S DAWN letter for letter, the same sun, leaf, icons, shapes, sizes, positions, colours and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_world_map_2",
+   "prompts": null,
+   "batch": "painted look: paint_world_map_2 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "world_map_painted_v2.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 library + repo cleanup thread: one of the last pixel-art pieces the game used, repainted (Cory chose 'Repaint all' 13:42Z).",
+   "edit": {
+    "base": "art/source/world_map.png",
+    "text": "Repaint this whole image as soft hand-painted art, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look; every curve and diagonal edge is smooth. Edges and outlines stay crisp and clean, not blurry. Paint the land, sea, forests, towns, roads and the parchment frame with real brush strokes; the little towns and trees are painted shapes, not pixel sprites. Keep everything else exactly the same: every island, coastline, town, road, forest and landmark stays in exactly the same place with the same shape, size and colours, so markers placed on the old map still line up. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_room_props",
+   "prompts": null,
+   "batch": "painted look: paint_room_props (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_props_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 library + repo cleanup thread: one of the last pixel-art pieces the game used, repainted (Cory chose 'Repaint all' 13:42Z).",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/room-props/room_props_base.png",
+    "text": "Repaint this whole image as soft hand-painted art, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look; every curve and diagonal edge is smooth. Edges and outlines stay crisp and clean, not blurry. This is a grid of room furniture and floor textures for seven towns (one town per row): a wooden crate, a potted plant, a floor soil texture and, in some rows, a floor side or floor top texture. Keep the grid, the dark divider lines and every item's size, position, shape and colours exactly the same; each texture still fills its square and must tile seamlessly left to right and top to bottom. Every flat magenta #FF00FF area stays flat magenta #FF00FF, empty cells stay empty, and nothing new is added."
+   }
   }
  ]
 }
