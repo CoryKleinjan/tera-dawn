@@ -10,10 +10,11 @@ wrapped next to the long end.
 
     python3 tools/art/grip_guide.py guide OUT.png
         the body sheet with a rod drawn through each weapon fist (the edit's base)
-    python3 tools/art/grip_guide.py hands EDIT.png [--cells run1,run2,...]
+    python3 tools/art/grip_guide.py hands EDIT.png [--cells run1,run2,...] [--rods RODS.png]
         put the edit's hands on the body sheet; --cells first copies those whole cells
         from the edit (cells the edit redrew, like the run cycle) and prints the rig's
-        weapon for them, along the edit's rod
+        weapon for them, along the edit's rod; --rods reads the rods from another sheet
+        (the edit before its rods were taken out)
 
 `hands` takes only the hand around each rod from the edit (the rod taken out and painted
 over) and pastes it into art/source/paperdoll_body.png, so nothing else on the sheet moves.
@@ -180,14 +181,19 @@ def measure(rod):
     return (float(grip[0]), float(grip[1])), math.degrees(math.atan2(axis[1], axis[0]))
 
 
-def hands(path, whole=()):
+def _sheet(path, size):
+    img = Image.open(path).convert("RGB")
+    if img.size != size:
+        img = img.resize(size, Image.LANCZOS)
+    return np.asarray(img).copy()
+
+
+def hands(path, whole=(), rods_path=None):
     boxes = layout()
     body = np.asarray(Image.open(BODY).convert("RGB")).copy()
-    edit_img = Image.open(path).convert("RGB")
-    if edit_img.size != (body.shape[1], body.shape[0]):
-        edit_img = edit_img.resize((body.shape[1], body.shape[0]), Image.LANCZOS)
-    edit = np.asarray(edit_img).copy()
-    rods = rod_mask(edit)
+    size = (body.shape[1], body.shape[0])
+    edit = _sheet(path, size)
+    rods = rod_mask(_sheet(rods_path, size) if rods_path else edit)
     painted = np.dstack([edit, np.full(edit.shape[:2], 255, np.uint8)])
     pl.inpaint(painted, ss.dilate(rods, ROD_EDGE))  # in place
     painted = painted[..., :3]
@@ -239,6 +245,6 @@ if __name__ == "__main__":
         guide(args[1])
     elif len(args) >= 2 and args[0] == "hands":
         cells = args[args.index("--cells") + 1].split(",") if "--cells" in args else ()
-        hands(args[1], cells)
+        hands(args[1], cells, args[args.index("--rods") + 1] if "--rods" in args else None)
     else:
         sys.exit(__doc__)
