@@ -69,7 +69,7 @@ it was made on. Nothing is shared between servers, so characters never move to a
   player at the keyboard (peer 1) logs in with `req_local_login` and no password.
   In a debug build with the Developer setting on, it asks for the test characters' account
   instead (`TestCharacters`, see [windows and settings](ui.md#settings)).
-- **`CharacterStore`** still keeps one file per character name (names are unique on a
+- **`CharacterStore`** keeps one file per character name (names are unique on a
   server, in any case; a name whose file another name already uses, like `Al pha` and
   `Al_pha`, is refused as too close). A deleted character's file moves to `deleted/` for the
   server's owner, and its name comes off every character's buddy list and fame records.
