@@ -46,5 +46,8 @@
     "under_right": {
       "out_dir": "art/build/platform_pieces_greenbough"
     }
+  },
+  "platform": {
+    "loop_middles": 40
   }
 }
