@@ -12543,6 +12543,54 @@
    }
   },
   {
+   "id": "wg_hats_4",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_hats_4.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    3,
+    5
+   ],
+   "anchor": "paperdoll_body",
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread (plans/worn-gear-matches-icons.md; Cory: gear on the hero must look like its icon and keep its detail). The viper, nightfang and eclipse bandanas worn as head bandanas, from their new head-bandana icons (wg_icon_*_bandana). Pair slots (side, behind): row 1 cells 1-2 viper_bandana, row 2 cells 1-2 nightfang_bandana, row 3 cells 1-2 eclipse_bandana; every other cell is a bald head.",
+   "edit": {
+    "base": "art/source/paperdoll_hats.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/icon-refs/viper_bandana_head.png",
+     "/mnt/project-files/art-sheets/icon-refs/nightfang_bandana_head.png",
+     "/mnt/project-files/art-sheets/icon-refs/eclipse_bandana_head.png"
+    ],
+    "text": "The first image is my hat sheet: 15 labelled cells (5 columns x 3 rows) on magenta, each a bald head with shoulders, most wearing an old grey hat. The next 3 images are the inventory icons of 3 head bandanas from my game (cloth head scarves tied at the back with two hanging tails). ERASE every old grey hat completely, then put these bandanas on the heads, IN THEIR OWN COLOURS from the icons: row 1, cells 1 (side) and 2 (behind) get the VIPER BANDANA: olive green with a dark green snakeskin pattern all over it (image 2); row 2, cells 1 (side) and 2 (behind) get the NIGHTFANG BANDANA: purple, its lower edge hung with small white fangs across the forehead (image 3); row 3, cells 1 (side) and 2 (behind) get the ECLIPSE BANDANA: black with a gold ring emblem on its front (image 4). Each is worn like a pirate's head bandana: snug over the top of the head down to the brow, knotted at the back of the head with the two tails hanging. Every other cell (row 1 cells 3, 4 and 5, row 2 cells 3, 4 and 5, row 3 cells 3, 4 and 5) becomes a plain bald head with NO hat. In each side cell draw the bandana on the head from the same side angle as the head; in each behind cell draw the same bandana from behind (its back and the knot, no face showing). Each keeps all the icon's detail and colours, is sized to the head, and there is only one bandana per cell. The heads, shoulders, labels and grid lines stay exactly where they are. The background stays bright pure magenta #FF00FF. Keep the same soft hand-painted look as the icon: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything."
+   }
+  },
+  {
+   "id": "wg_hats_4_only",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_hats_4_only.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    3,
+    5
+   ],
+   "anchor": "wg_hats_4",
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread (plans/worn-gear-matches-icons.md; Cory: gear on the hero must look like its icon and keep its detail). wg_hats_4 with the heads erased, so each hat lifts off cleanly (like eq_paperdoll_hats_only).",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/wg_hats_4.png",
+    "refs": [],
+    "text": "This is my hat sheet: 15 labelled cells on magenta, each a bald head with shoulders, most wearing a painted hat. ERASE the bald heads, faces, ears, necks and shoulders from every cell and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the hats. Every hat stays EXACTLY where it is, the same size, shape and colours, with its own outline and shading; where the head showed through the hat (a hood's face opening, under a brim, a helm's eye slit) is now magenta. Cells with no hat become empty magenta. Keep every label and grid line exactly where it is."
+   }
+  },
+  {
    "id": "wg_hats_5",
    "prompts": null,
    "batch": "worn gear from icon (edit)",
