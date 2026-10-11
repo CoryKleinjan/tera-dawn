@@ -78,11 +78,9 @@ keep the default, so an old or hand-edited file never breaks the game.
   so the menu is always reachable.
 - **AudioSettings** sets the Master, Music and Effects buses (`default_bus_layout.tres`); the
   Sound autoload plays everything on them (see [music and sound](audio.md)).
-  Play music on the `Music` bus and sounds on `Effects` so the sliders reach them.
 - **VideoSettings** sets the window, vsync and frame cap, and the stage's costly effects
   (bloom, ambient occlusion, fog). `TDStage` turns those on and off when `Settings.changed`
   fires.
-
 - **DevSettings** holds developer-only switches, on a Developer tab that only debug builds
   (the editor, a debug export) show; a release build ignores them. `test_characters` makes
   Play solo and Host log in to a test account (`TestCharacters.ACCOUNT`) with a

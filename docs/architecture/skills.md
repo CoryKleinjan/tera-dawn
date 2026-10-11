@@ -35,7 +35,7 @@ Ranged and magic skills:
   hit (`TDProjectile`) and pop the damage number when it lands, holding the monster's death
   until then.
 - `uses_ammo` spends one of the weapon's ammo per hit. A weapon (`EquipDef`) names its
-  `weapon_kind` (bow, claw, gun, wand, sword, knuckle), the `ammo` kind it fires, and an
+  `weapon_kind` (sword, bow, wand, staff, claw, knuckle, gun), the `ammo` kind it fires, and an
   optional `basic_attack` skill that replaces the plain swing (a bow's Shoot). Ammo is an
   **AmmoDef** (Use tab) whose `attack` adds to Weapon Attack while fired.
 - `weapons` limits a skill to weapon kinds; `magic` uses Magic Attack (INT included) through

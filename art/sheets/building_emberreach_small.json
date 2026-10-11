@@ -1,17 +1,17 @@
 {
   "source": "art/source/building_emberreach_small.png",
-  "art_px": 4.242,
+  "art_px": 5.634,
   "out_dir": "assets/sprites/buildings/emberreach",
   "label_band": 0,
   "inset": 0,
   "grid": {
     "rows": [
       0,
-      1188
+      1378
     ],
     "cols": [
       0,
-      1193
+      1385
     ]
   },
   "cells": [

@@ -511,6 +511,32 @@ def fix_round_top(rgb, alpha, source=None, band=28):
     return rgb, alpha
 
 
+def fix_medal_symbol(rgb, alpha, source=None, outline=(0.2, 0.125, 0.11), ring=3):
+    """A symbol painted on a cream medal (the quest "!", "?" and "..."): only the symbol is kept,
+    with its own painted outline, and the disc and its strap go. The symbol is whatever the
+    cream face encloses; a dark `ring`-pixel outline goes round it so it reads on any backdrop."""
+    h, w = alpha.shape
+    solid = alpha > 0.5
+    mx, mn = rgb.max(2), rgb.min(2)
+    cream = solid & (mx > 0.7) & ((mx - mn) / np.maximum(mx, 1e-6) < 0.4)
+    border = [(0, x) for x in range(w)] + [(h - 1, x) for x in range(w)] + \
+             [(y, 0) for y in range(h)] + [(y, w - 1) for y in range(h)]
+    outside = flood(~cream, border)
+    enclosed = ~cream & ~outside & solid
+    lab, n = label(enclosed)
+    sizes = [(lab == i).sum() for i in range(1, n + 1)]
+    if not sizes:
+        return rgb, np.zeros_like(alpha)
+    symbol = np.zeros_like(solid)
+    for i, s in enumerate(sizes):
+        if s >= max(sizes) * 0.15:  # the symbol's pieces, not specks in the cream
+            symbol |= lab == i + 1
+    edge = dilate(symbol, ring) & ~symbol
+    rgb = rgb.copy()
+    rgb[edge] = outline
+    return rgb, (symbol | edge).astype(float)
+
+
 def fix_magenta_rim(rgb, alpha, source=None, band=6, radius=6):
     """A painted outline Gemini blended into the magenta, kept by a high `key` (one that protects
     purple art): the magenta-leaning pixels along the cut edge take the hue of the art just inside
@@ -540,6 +566,7 @@ def fix_magenta_rim(rgb, alpha, source=None, band=6, radius=6):
 
 FIXES["magenta_rim"] = fix_magenta_rim
 FIXES["round_top"] = fix_round_top
+FIXES["medal_symbol"] = fix_medal_symbol
 FIXES["card_backdrop"] = fix_card_backdrop
 FIXES["card_flat"] = fix_card_flat
 # card_backdrop that also clears a pink glow painted round the item (deeper pinks pass too)

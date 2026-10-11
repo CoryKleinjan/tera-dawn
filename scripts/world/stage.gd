@@ -68,6 +68,7 @@ const Z_DROP := 0.56
 ## Other players stand just behind you, so your own hero is never hidden in a crowd.
 const Z_OTHER_PLAYER := 0.6
 const Z_PLAYER := 0.64
+## Skill and hit effects play just in front of the player, on the characters' plane (effect_sprite).
 const Z_EFFECT := 0.8
 ## Seconds a map change takes to fade out (and again to fade in).
 const FADE_TIME := 0.25
@@ -180,6 +181,14 @@ static func glow_sprite(texture: Texture2D, col: Color, texel := TEXEL) -> Sprit
 	s.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	s.offset = Vector2.ZERO
 	s.modulate = col
+	return s
+
+## A skill, hit or projectile effect: a glow_sprite whose solid parts also record their depth,
+## so the depth of field keeps it as sharp as the characters it plays over instead of blurring
+## it with the scenery behind (see Z_EFFECT). Its soft edges still blend over what's behind.
+static func effect_sprite(texture: Texture2D, col: Color, texel := TEXEL) -> Sprite3D:
+	var s := glow_sprite(texture, col, texel)
+	s.alpha_cut = SpriteBase3D.ALPHA_CUT_OPAQUE_PREPASS
 	return s
 
 static func light(col: Color, energy: float, range_: float, shadows := false) -> OmniLight3D:

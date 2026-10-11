@@ -23,7 +23,7 @@ static func create(w: TDWorld, d: EffectDef, at: Vector2, facing: int, follows: 
 
 func _ready() -> void:
 	if not def.frames.is_empty():
-		sprite = TDStage.glow_sprite(def.frames[0], Color(def.energy, def.energy, def.energy), def.texel)
+		sprite = TDStage.effect_sprite(def.frames[0], Color(def.energy, def.energy, def.energy), def.texel)
 		sprite.flip_h = face < 0
 		add_child(sprite)
 	if def.light_color.a > 0.0:

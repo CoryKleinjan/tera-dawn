@@ -7,5 +7,5 @@
 script = ExtResource("1_building_def")
 id = &"lumewood_large"
 texture = ExtResource("2_large")
-height = 365.0
+height = 361.2
 door_x = 0.51

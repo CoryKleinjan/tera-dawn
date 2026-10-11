@@ -13,10 +13,11 @@ extends RefCounted
 ## (EquipDef.worn_frames); with neither it recolours the chest, shorts or feet. A bottom's cut
 ## also recolours the shorts, so no grey shows at its edges. Hair, irises, capes,
 ## shields and gloves are greyscale art tinted with the hair, eye or item colour. The weapon
-## is a layer too, already placed in his fist on every frame by paperdoll_layers.py, with a
-## hole where his fingers wrap the grip (see weapon_layers); a weapon kind is held its own way
-## (a bow upright, a staff planted). A hat is a layer too, one per shape (EquipDef.look_shape),
-## tinted with the hat's colour; the hair under it is the hairstyle's own _hat layer.
+## a weapon, a shield and a hat keep their shape, so each is a Piece: one picture per view that
+## goes in his fist, on his arm or on his head on every frame, where the rig says, with his
+## fingers drawn over a weapon's grip (fist masks); a weapon kind is held its own way (a bow
+## upright, a staff planted). The hair under a hat is the hairstyle's own _hat layer, cut where the hat
+## hides it (Piece.hair_cut) so none pokes out of its top or sides.
 
 ## The parts of the body, as hero_regions.png numbers them. Hair, eyes, cape, weapon, shield
 ## and gloves are layers now, so only skin, top, bottom and shoes are on the map.
@@ -42,10 +43,11 @@ const CAPE_FRONT := preload("res://assets/animations/paperdoll/cape_front.tres")
 const SHIELD := preload("res://assets/animations/paperdoll/shield_round.tres")
 ## Gloves on both hands (climbing: bare hands).
 const GLOVES := preload("res://assets/animations/paperdoll/gloves.tres")
-## Weapon layers: weapon_<kind>.tres (greyscale, tinted) or weapon_item_<id>.tres (a weapon's
-## own held picture, in colour), each with an optional _behind twin for frames where the
-## weapon is behind his body (far hand, or carried on his back while sitting).
-const WEAPON_DIR := "res://assets/animations/paperdoll/weapon_"
+## Pieces (Piece): gear that keeps its shape, one picture per view placed on him each frame.
+## weapon_<kind> (greyscale, tinted) or weapon_item_<id> (from its icon), shield_item_<id>,
+## hat_<shape> (greyscale, tinted) or hat_item_<id>; fist_<kind>.png cuts his fingers out of a
+## weapon over its grip.
+const PIECE_DIR := "res://assets/sprites/characters/pieces/"
 ## The kind a weapon without one is drawn as.
 const DEFAULT_WEAPON := &"sword"
 ## Tops worn open at the front (EquipDef.worn_style), with UNDERSHIRT under them so his
@@ -53,8 +55,11 @@ const DEFAULT_WEAPON := &"sword"
 const OPEN_TOPS: Array[StringName] = [&"coat"]
 const UNDERSHIRT := preload("res://assets/animations/paperdoll/top_undershirt.tres")
 const UNDERSHIRT_COLOR := Color(0.86, 0.82, 0.72)
-## Hat layers: hat_<shape>.tres (EquipDef.look_shape; a hat without one is a DEFAULT_HAT).
-const HAT_DIR := "res://assets/animations/paperdoll/hat_"
+## A piece's own art, drawn from its icon in its own colours (tools/art/paperdoll/items.py):
+## worn_item_<id>.tres over him, and for a cape worn_item_<id>_behind.tres under his body
+## (the part hanging behind him).
+const OWN_DIR := "res://assets/animations/paperdoll/worn_item_"
+## The hat shape (EquipDef.look_shape, piece hat_<shape>) of a hat with none.
 const DEFAULT_HAT := &"cap"
 ## Shields by EquipDef.look_shape (any other: SHIELD).
 const SHIELDS := {&"kite": preload("res://assets/animations/paperdoll/shield_kite.tres")}
@@ -69,9 +74,13 @@ const ART_SCALE := 2.0
 ## of the colour (gear_tint.gdshaderinc).
 class Layer:
 	var frames: SpriteFrames
+	## Or a piece, placed on each frame (then `behind` is per frame: Piece.pose).
+	var piece: Piece
 	var behind := false
 	var tint := Color.WHITE
 	var gear := false
+	## Hair under a hat: the hat's hair cut strip (Piece.hair_cut), or null.
+	var hair_cut: Texture2D
 
 	func _init(f: SpriteFrames, back: bool, t := Color.WHITE, g := false) -> void:
 		frames = f
@@ -83,6 +92,78 @@ class Layer:
 	func apply(mat: ShaderMaterial) -> void:
 		mat.set_shader_parameter(&"tint", tint)
 		mat.set_shader_parameter(&"gear", gear)
+		mat.set_shader_parameter(&"has_hair_cut", hair_cut != null)
+		if hair_cut:
+			mat.set_shader_parameter(&"hair_cut", hair_cut)
+		mat.set_shader_parameter(&"has_fist", piece != null and piece.fist != null)
+		if piece and piece.fist:
+			mat.set_shader_parameter(&"fist", piece.fist)
+			mat.set_shader_parameter(&"frame_size", FRAME_SIZE)
+
+	## Sets the uniforms that place a piece's fist cut (paperdoll_piece.gdshaderinc) for
+	## frame `frame` in pose `p` (Piece.pose).
+	func apply_pose(mat: ShaderMaterial, frame: int, p: Dictionary) -> void:
+		if piece.fist == null:
+			return
+		var v: Dictionary = piece.views[p["view"]]
+		mat.set_shader_parameter(&"fist_on", p["fist"])
+		mat.set_shader_parameter(&"frame", float(frame))
+		mat.set_shader_parameter(&"at", p["at"])
+		mat.set_shader_parameter(&"anchor", v["anchor"])
+		mat.set_shader_parameter(&"turn", p["angle"])
+		mat.set_shader_parameter(&"grow", p["scale"])
+		mat.set_shader_parameter(&"picture_size", (v["picture"] as Texture2D).get_size())
+
+## Gear that keeps its shape (a weapon, shield or hat): a picture per view (held, on his back,
+## from the side, from behind...), which goes on him at the place, angle and size its pose for
+## each frame says, over him or under his body (tools/art/paperdoll/pieces.py writes them).
+class Piece:
+	var name := ""
+	## view -> {"picture": Texture2D, "anchor": Vector2 (the picture point "at" names)}
+	var views := {}
+	## Per body frame: null (not shown) or {"view": String, "at": Vector2 (frame pixels),
+	## "angle": radians clockwise, "scale": float, "behind": bool, "fist": bool}.
+	var frames: Array = []
+	## Greyscale art, shaded in the item's colour.
+	var tinted := false
+	## The fist mask strip cutting his fingers out over its grip (fist_<kind>.png), or null.
+	var fist: Texture2D
+	## A hat's strip of where his hair is hidden under it (haircut_<name>.png), or null.
+	var hair_cut: Texture2D
+
+	static var _cache := {}
+
+	## The piece called `id` (PIECE_DIR<id>.json), or null if there's none.
+	static func named(id: String) -> Piece:
+		if _cache.has(id):
+			return _cache[id]
+		var p: Piece = null
+		var f := FileAccess.open(PIECE_DIR + id + ".json", FileAccess.READ)
+		var data: Variant = JSON.parse_string(f.get_as_text()) if f else null
+		if data is Dictionary:
+			p = Piece.new()
+			p.name = id
+			p.tinted = data.get("tinted", false)
+			for view in data["views"]:
+				var v: Dictionary = data["views"][view]
+				p.views[view] = {"picture": load(v["picture"]), "anchor": Vector2(v["anchor"][0], v["anchor"][1])}
+			for e: Variant in data["frames"]:
+				p.frames.append(null if e == null else {"view": e["view"], "at": Vector2(e["at"][0], e["at"][1]),
+					"angle": deg_to_rad(e["angle"]), "scale": float(e["scale"]), "behind": e["behind"], "fist": e["fist"]})
+			if data.get("fist") is String and ResourceLoader.exists(PIECE_DIR + "fist_" + data["fist"] + ".png"):
+				p.fist = load(PIECE_DIR + "fist_" + data["fist"] + ".png")
+			if data.get("hair_cut") is String and ResourceLoader.exists(data["hair_cut"]):
+				p.hair_cut = load(data["hair_cut"])
+		_cache[id] = p
+		return p
+
+	## How it sits on body frame `frame` (see `frames`), or null when it doesn't show.
+	func pose(frame: int) -> Variant:
+		return frames[frame] if frame >= 0 and frame < frames.size() else null
+
+	## A pose's picture.
+	func picture(p: Dictionary) -> Texture2D:
+		return views[p["view"]]["picture"]
 
 ## Per region: colour to recolour it with (alpha: how much, 0 keeps the art's own).
 var tints := PackedColorArray()
@@ -124,9 +205,14 @@ static func dress(look: Dictionary) -> Paperdoll:
 		if not gear.has(place):
 			d.tints[PLACE_REGIONS[place]] = d.tints[Region.SKIN]
 	var cuts := {}  # place -> the worn_style layer it's drawn with
+	var own := {}  # place -> own_art() of the piece worn there
+	for place in gear:
+		var art := own_art(gear[place])
+		if not art.is_empty():
+			own[place] = art
 	for place in PLACE_REGIONS:
 		var e: EquipDef = gear.get(place)
-		if e == null or e.worn_frames:
+		if e == null or e.worn_frames or own.has(place):
 			continue
 		var cut := worn_cut(e)
 		if cut:
@@ -143,24 +229,31 @@ static func dress(look: Dictionary) -> Paperdoll:
 	var hair_tone := _look_color(a.part(LookDef.Kind.HAIR_COLOR), Region.HAIR)
 	var cape: EquipDef = gear.get(&"cape")
 	if cape:
-		if cape.worn_frames:
+		if own.has(&"cape"):
+			d._add(own[&"cape"].get("behind"), true)
+		elif cape.worn_frames:
 			d._add(cape.worn_frames, true)
 		else:
 			d._add(CAPE, true, cape.worn_color(), true)
 	if hair and not gear.has(&"hat"):
 		d._add(hair.back_frames, true, hair_tone)
 	var weapon: EquipDef = gear.get(&"weapon")
-	var held := weapon_layers(weapon) if weapon and weapon.worn_frames == null else {}
 	if weapon:
 		d.weapon_kind = kind_of(weapon)
 		d.weapon_tint = weapon.worn_color()
-	if held.has("behind"):
-		d._add(held["behind"], true, held["tint"], held["tint"] != Color.WHITE)
 
 	# over him
 	for place in [&"bottom", &"shoes", &"top", &"gloves"]:
 		var e: EquipDef = gear.get(place)
-		if e and e.worn_frames:
+		var mittens: Array[Piece] = glove_pieces(e) if place == &"gloves" else ([] as Array[Piece])
+		if not mittens.is_empty():  # a mitten on each hand (Piece)
+			for p: Piece in mittens:
+				d._add_piece(p)
+		elif own.has(place):
+			d._add(own[place]["front"], false)
+			if PLACE_REGIONS.has(place):
+				d.hidden[PLACE_REGIONS[place]] = 1.0
+		elif e and e.worn_frames:
 			d._add(e.worn_frames, false)
 			if PLACE_REGIONS.has(place):
 				d.hidden[PLACE_REGIONS[place]] = 1.0
@@ -170,48 +263,82 @@ static func dress(look: Dictionary) -> Paperdoll:
 			d._add(cuts[place], false, e.worn_color(), true)
 		elif e and place == &"gloves":
 			d._add(GLOVES, false, e.worn_color(), true)
-	if cape and cape.worn_frames == null:
+	if own.has(&"cape"):
+		d._add(own[&"cape"]["front"], false)
+	elif cape and cape.worn_frames == null:
 		d._add(CAPE_FRONT, false, cape.worn_color(), true)
 	var face := a.part(LookDef.Kind.FACE)
 	if face:
 		d._add(face.frames, false)
 		d._add(face.detail_frames, false, _look_color(a.part(LookDef.Kind.EYES), Region.EYES))
+	var hat: EquipDef = gear.get(&"hat")
+	var own_hat := Piece.named("hat_item_" + String(hat.id)) if hat else null
+	var hat_on: Piece = own_hat if own_hat or hat == null or hat.worn_frames else hat_piece(hat)
 	if hair:
-		d._add(hair.hat_frames if gear.has(&"hat") and hair.hat_frames else hair.frames, false, hair_tone)
+		var before := d.layers.size()
+		d._add(hair.hat_frames if hat and hair.hat_frames else hair.frames, false, hair_tone)
+		if hat_on and d.layers.size() > before:  # none of it pokes out of the hat's top or sides
+			d.layers[-1].hair_cut = hat_on.hair_cut
 	var shield: EquipDef = gear.get(&"shield")
 	if shield:
-		if shield.worn_frames:
+		var own_shield := Piece.named("shield_item_" + String(shield.id))
+		if own_shield:  # its back on his far arm, behind him; its face on his back as he climbs
+			d._add_piece(own_shield)
+		elif shield.worn_frames:
 			d._add(shield.worn_frames, false)
 		else:
 			d._add(SHIELDS.get(shield.look_shape, SHIELD), false, shield.worn_color(), true)
-	var hat: EquipDef = gear.get(&"hat")
 	if hat:
-		if hat.worn_frames:
+		if own_hat:
+			d._add_piece(own_hat)
+		elif hat.worn_frames:
 			d._add(hat.worn_frames, false)
 		else:
-			d._add(hat_frames(hat), false, hat.worn_color(), true)
+			d._add_piece(hat_on, hat.worn_color())
 	if weapon and weapon.worn_frames: # over the hat: a sword raised over his head
 		d._add(weapon.worn_frames, false)
-	elif held.has("front"):
-		d._add(held["front"], false, held["tint"], held["tint"] != Color.WHITE)
+	elif weapon:
+		var held := weapon_piece(weapon)
+		d._add_piece(held, Color.WHITE if held.name.begins_with("weapon_item_") else weapon.worn_color())
 	return d
 
-## The layer a hat without art of its own is drawn with: its shape's (EquipDef.look_shape).
-static func hat_frames(e: EquipDef) -> SpriteFrames:
-	var path := HAT_DIR + String(e.look_shape) + ".tres"
-	return load(path if e.look_shape != &"" and ResourceLoader.exists(path) else HAT_DIR + String(DEFAULT_HAT) + ".tres")
+## A piece's own art (OWN_DIR): {"front": SpriteFrames, "behind": SpriteFrames (if any)},
+## or {} when it has none and is drawn with its kind's tinted greyscale art.
+static func own_art(e: EquipDef) -> Dictionary:
+	if e == null or e.slot in [EquipDef.Slot.WEAPON, EquipDef.Slot.SHIELD, EquipDef.Slot.HAT]:
+		return {}  # (those keep their shape: pieces, see Piece)
+	var base := OWN_DIR + String(e.id)
+	if not ResourceLoader.exists(base + ".tres"):
+		return {}
+	var out := {"front": load(base + ".tres")}
+	if ResourceLoader.exists(base + "_behind.tres"):
+		out["behind"] = load(base + "_behind.tres")
+	return out
 
-## How a weapon is drawn in his hand: {"front": SpriteFrames, "behind": SpriteFrames (if any),
-## "tint": Color}. Its own held picture (weapon_item_<id>) if one was drawn, in its own colours;
-## else its kind's greyscale picture in the item's colour.
-static func weapon_layers(e: EquipDef) -> Dictionary:
-	var own := WEAPON_DIR + "item_" + String(e.id)
-	if ResourceLoader.exists(own + ".tres"):
-		return _weapon_frames(own, Color.WHITE)
-	var kind := kind_of(e)
-	if not ResourceLoader.exists(WEAPON_DIR + String(kind) + ".tres"):
-		kind = DEFAULT_WEAPON
-	return _weapon_frames(WEAPON_DIR + String(kind), e.worn_color())
+## The piece a hat without art of its own is drawn as: its shape's (EquipDef.look_shape),
+## greyscale, tinted with the hat's colour.
+static func hat_piece(e: EquipDef) -> Piece:
+	var shape := Piece.named("hat_" + String(e.look_shape)) if e.look_shape != &"" else null
+	return shape if shape else Piece.named("hat_" + String(DEFAULT_HAT))
+
+## Gloves' own mittens, one piece per hand (glove_item_<id>_1 and _2), or [] if they have none.
+static func glove_pieces(e: EquipDef) -> Array[Piece]:
+	var out: Array[Piece] = []
+	if e:
+		for h in [1, 2]:
+			var p := Piece.named("glove_item_%s_%d" % [e.id, h])
+			if p:
+				out.append(p)
+	return out
+
+## The piece a weapon is held as: its own picture (weapon_item_<id>, from its icon, in its
+## own colours) if it has one, else its kind's greyscale picture, tinted with its colour.
+static func weapon_piece(e: EquipDef) -> Piece:
+	var own := Piece.named("weapon_item_" + String(e.id))
+	if own:
+		return own
+	var kind := Piece.named("weapon_" + String(kind_of(e)))
+	return kind if kind else Piece.named("weapon_" + String(DEFAULT_WEAPON))
 
 ## The greyscale layer a top, bottom or shoes is worn as (EquipDef.worn_style), or null.
 static func worn_cut(e: EquipDef) -> SpriteFrames:
@@ -222,15 +349,16 @@ static func worn_cut(e: EquipDef) -> SpriteFrames:
 static func kind_of(e: EquipDef) -> StringName:
 	return e.weapon_kind if e and e.weapon_kind != &"" else DEFAULT_WEAPON
 
-static func _weapon_frames(base: String, tint: Color) -> Dictionary:
-	var out := {"front": load(base + ".tres"), "tint": tint}
-	if ResourceLoader.exists(base + "_behind.tres"):
-		out["behind"] = load(base + "_behind.tres")
-	return out
-
 func _add(frames: SpriteFrames, behind: bool, tint := Color.WHITE, gear := false) -> void:
 	if frames:
 		layers.append(Layer.new(frames, behind, tint, gear))
+
+## A piece as a layer: untinted, or greyscale art (Piece.tinted) shaded in `tint`.
+func _add_piece(p: Piece, tint := Color.WHITE) -> void:
+	if p:
+		var l := Layer.new(null, false, tint if p.tinted else Color.WHITE, p.tinted)
+		l.piece = p
+		layers.append(l)
 
 ## A look's colour, or the art's own colour for the region when it keeps it.
 static func _look_color(l: LookDef, region: Region) -> Color:

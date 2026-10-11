@@ -163,7 +163,8 @@
           194,
           20
         ]
-      ]
+      ],
+      "fix": "medal_symbol"
     },
     "quest_ready": {
       "scale": 0.58,
@@ -174,7 +175,8 @@
           164,
           20
         ]
-      ]
+      ],
+      "fix": "medal_symbol"
     },
     "quest_in_progress": {
       "scale": 0.58,
@@ -185,7 +187,8 @@
           201,
           20
         ]
-      ]
+      ],
+      "fix": "medal_symbol"
     },
     "minimap_frame": {
       "scale": 0.5112,

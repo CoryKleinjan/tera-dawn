@@ -1,6 +1,7 @@
 # Tera's Dawn: notes for Claude
 
-A MapleStory-like 2D side-scroller in Godot 4.3 (Forward+), shipping on Steam with an HD-2D look.
+A MapleStory-inspired 2D side-scroller in Godot 4.3 (Forward+), shipping on Steam with HD-2D
+rendering (Octopath Traveler style depth, lighting and bloom). Its own look, not a close copy.
 The game will grow much larger, so keep code extendable and readable.
 
 ## Where things are
@@ -11,8 +12,8 @@ The game will grow much larger, so keep code extendable and readable.
 - `scripts/`: data classes (`scripts/data/`), rules (`scripts/systems/`), server, actors, world, UI.
 - `art/source/` sheets + `art/sheets/*.json` manifests -> `tools/art/slice_sheets.py` ->
   `assets/` (generated: fix art in the sheet or manifest, not the output). See `art/sheets/README.md`.
-- Project memory (shared across threads) lives outside the repo: `/mnt/project-files/MEMORY.md`
-  (index) and `/mnt/project-files/memory/*.md`.
+- Project memory lives outside the repo: `/mnt/project-files/MEMORY.md` (index) and
+  `/mnt/project-files/memory/*.md`.
 
 ## Commands
 ```sh
@@ -25,16 +26,32 @@ python3 tools/art/gemini_pass.py --dry-run                           # Gemini ba
 ```
 
 ## House rules (Cory)
+
+### Workflow
 - Plan first: post a short plan (what changes, which files, choices) and wait for Cory's OK
-  before changing code or art.
-- Branch off `main` for every change; never stack branches or PRs on other feature branches.
-- Art is painted only (like the NPCs and floating platforms), never pixel art. The chibi boy hero
-  is the character reference. Only repaint art the game uses.
-- Every asset is cut at double detail with smooth, clean edges (the slicer's `detail` 2 and
-  `"alpha": "smooth"` defaults); never on/off alpha, which makes outlines look pixelated.
-- Art is made with the Gemini batch API: add an entry (usually an `edit` of an existing sheet,
-  pure #FF00FF background) to `tools/art/gemini_pass.json` and run `gemini_pass.py`. Every run is
-  paid: ask Cory before redoing a sheet unless it came back broken. No ChatGPT sheets.
-- Characters, NPCs, ropes and ladders draw in front of land; no character shadows; NPCs stand still
-  at idle; map names only at the top of the screen; towns have no monsters.
+  before changing code or assets.
+- Branch fresh off `main` for every change; never stack branches or PRs on other feature branches.
 - No screenshots in replies or PRs for fixes unless Cory asks.
+
+### Art style
+- Painted only, never pixel art. The game's NPCs are the style reference: rich warm colours,
+  strong light and shadow with bright highlights, visible painted texture (cloth folds, wood
+  grain, worn patches) at a fairly chunky brush scale, dark outline. The chibi boy hero sets
+  hero proportions.
+- Clean edges: cut sprites at about twice on-screen resolution with soft anti-aliased edges,
+  never on/off edge pixels (the slicer's `detail` 2 and `"alpha": "smooth"` defaults; the game
+  blends the edge in). Never make outlines thicker.
+- An item's inventory/equipment icon shows the same object the character wears (same shape,
+  colours, details); keep them matching.
+
+### Making art
+- Gemini batch API only: add an entry to `tools/art/gemini_pass.json` (usually an `edit` of an
+  existing sheet that keeps its layout, pure #FF00FF background) and run `gemini_pass.py`.
+- Ask Cory about the look first, run a small test, and show results before the full batch and
+  before anything goes in game. Every run is paid: ask before redoing a sheet unless it came
+  back broken.
+- Only make or repaint art the game uses. Never use old ChatGPT sheets from git history.
+
+### Game rules
+- Characters, NPCs, ropes and ladders draw in front of land; no character shadows.
+- NPCs stand still at idle. Map names only at the top of the screen. Towns have no monsters.
