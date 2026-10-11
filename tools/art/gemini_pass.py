@@ -3,7 +3,7 @@
 
     python3 tools/art/gemini_pass.py --dry-run          # the waves batch mode would send and their cost, free
     python3 tools/art/gemini_pass.py --wait             # make everything still missing, batch mode (paid)
-    python3 tools/art/gemini_pass.py --redo ID --wait   # make one sheet again (only when Cory asks)
+    python3 tools/art/gemini_pass.py --redo ID --wait   # make one sheet again (ask Cory first unless it came back broken)
     python3 tools/art/gemini_pass.py --report           # rebuild report.md and the contact sheet
     python3 tools/art/gemini_pass.py --now --dry-run    # check every entry's batch and refs, free
     python3 tools/art/gemini_pass.py --now --limit 3    # one by one at full price, no waiting

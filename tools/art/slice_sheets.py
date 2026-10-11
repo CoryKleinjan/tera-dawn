@@ -771,6 +771,22 @@ def extend_bottom(img, n):
     return Image.fromarray(out.clip(0, 255).astype(np.uint8), "RGBA")
 
 
+GROUND_BLEND = 12  # rows over which a strip's own bottom fades into its painted ground
+
+
+def paint_ground(img, ground, strip_h):
+    """Swaps an extend_bottom pad for painted ground: `ground` is a picture of the whole padded
+    strip whose lower part was painted on as ground (a Gemini edit of it), so the backdrop runs
+    on down to the floor instead of ending in a blur. The strip's own rows above strip_h stay
+    exactly as cut; below, the ground picture takes over, fading in over GROUND_BLEND rows."""
+    a = np.asarray(img.convert("RGBA")).astype(float)
+    g = np.asarray(ground.convert("RGBA").resize(img.size, Image.LANCZOS)).astype(float)
+    g[..., 3] = 255.0  # the ground is solid wherever it is used (below the strip's skyline)
+    t = np.clip((np.arange(a.shape[0]) - (strip_h - GROUND_BLEND)) / GROUND_BLEND, 0.0, 1.0)[:, None, None]
+    out = a * (1.0 - t) + g * t
+    return Image.fromarray(out.round().clip(0, 255).astype(np.uint8), "RGBA")
+
+
 # ---------- animation sets ----------
 
 def head_x(im):
@@ -899,7 +915,10 @@ def process(manifest_path, grid_only=False, sprites=None):
                 if opts.get("seamless_middle"):
                     im = seamless_middle(im, opts["seamless_middle"])
                 if opts.get("extend_bottom"):
+                    strip_h = im.height
                     im = extend_bottom(im, opts["extend_bottom"])
+                    if opts.get("ground"):
+                        im = paint_ground(im, Image.open(os.path.join(ROOT, opts["ground"])), strip_h)
                 p["image"] = im
                 if sprites is not None:
                     sprites[f"{sheet_id}:{pname}"] = p

@@ -8,7 +8,7 @@ extends RefCounted
 ## the same motion.
 ##
 ## Add a weapon kind with a row here, its holds in art/sheets/paperdoll_rig.json and its
-## picture on the paperdoll weapons sheet (see ARCHITECTURE.md "How to add a weapon").
+## picture on the paperdoll weapons sheet (see docs/architecture/items.md "How to add a weapon").
 
 ## weapon kind -> {motion: animation}
 const MOTIONS := {

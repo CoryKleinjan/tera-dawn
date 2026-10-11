@@ -6384,6 +6384,166 @@
     "base": "assets/sprites/ui/title_backdrop.png",
     "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same scene, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
    }
+  },
+  {
+   "id": "ground_meadow_near",
+   "prompts": null,
+   "batch": "backdrop meets the ground: meadow near strip (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ground_meadow_near.png",
+   "replaces": "assets/sprites/backgrounds/meadow/near_treeline.png",
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "note": "2026-10-11 seamless-ground thread: the nearest backdrop strip's blurred lower part repainted as ground, so the backdrop meets the floor with no streaks (Cory approved).",
+   "edit": {
+    "base": "assets/sprites/backgrounds/meadow/near_treeline.png",
+    "text": "This is the nearest background layer of my 2D side-scrolling game, on a flat magenta #FF00FF background. Its top part is painted scenery: a row of round green trees. Below that, the whole lower part of the image is only a blurry, streaky smear. Repaint ONLY that blurry lower part as real painted scenery that carries on downward from the top part, in exactly the same soft painted style, colours, outline and light: a soft green meadow under the trees: long grass, small wildflowers, a few low bushes and gentle grassy rises, ending in thick grass at the bottom. The new scenery fills the whole lower part from the left edge to the right edge and right down to the bottom edge of the image: no magenta, no blur, no streaks, no hard horizontal line and no gap anywhere in it. It reads as the ground continuing toward the viewer, a little darker and simpler toward the bottom edge, with no single horizon line across it. The left and right edges must join cleanly when the image is repeated side by side (or mirrored). Keep the top part above the blur exactly as it is, including its silhouette against the magenta sky. No people, animals, text or new buildings in the lower part."
+   }
+  },
+  {
+   "id": "ground_dawnharbor_near",
+   "prompts": null,
+   "batch": "backdrop meets the ground: dawnharbor near strip (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ground_dawnharbor_near.png",
+   "replaces": "assets/sprites/backgrounds/dawnharbor/near.png",
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "note": "2026-10-11 seamless-ground thread: the nearest backdrop strip's blurred lower part repainted as ground, so the backdrop meets the floor with no streaks (Cory approved).",
+   "edit": {
+    "base": "assets/sprites/backgrounds/dawnharbor/near.png",
+    "text": "This is the nearest background layer of my 2D side-scrolling game, on a flat magenta #FF00FF background. Its top part is painted scenery: sailing ships moored at a wooden dock. Below that, the whole lower part of the image is only a blurry, streaky smear. Repaint ONLY that blurry lower part as real painted scenery that carries on downward from the top part, in exactly the same soft painted style, colours, outline and light: calm harbor water just below the ships with soft painted reflections, then the top of a light stone quay wall with wooden pilings, mooring posts, coiled ropes and a few crates, the pale stone wall running down to the bottom. The new scenery fills the whole lower part from the left edge to the right edge and right down to the bottom edge of the image: no magenta, no blur, no streaks, no hard horizontal line and no gap anywhere in it. It reads as the ground continuing toward the viewer, a little darker and simpler toward the bottom edge, with no single horizon line across it. The left and right edges must join cleanly when the image is repeated side by side (or mirrored). Keep the top part above the blur exactly as it is, including its silhouette against the magenta sky. No people, animals, text or new buildings in the lower part."
+   }
+  },
+  {
+   "id": "ground_greenbough_near",
+   "prompts": null,
+   "batch": "backdrop meets the ground: greenbough near strip (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ground_greenbough_near.png",
+   "replaces": "assets/sprites/backgrounds/greenbough/near.png",
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "note": "2026-10-11 seamless-ground thread: the nearest backdrop strip's blurred lower part repainted as ground, so the backdrop meets the floor with no streaks (Cory approved).",
+   "edit": {
+    "base": "assets/sprites/backgrounds/greenbough/near.png",
+    "text": "This is the nearest background layer of my 2D side-scrolling game, on a flat magenta #FF00FF background. Its top part is painted scenery: a deep green forest with mossy trunks, vines and sunbeams. Below that, the whole lower part of the image is only a blurry, streaky smear. Repaint ONLY that blurry lower part as real painted scenery that carries on downward from the top part, in exactly the same soft painted style, colours, outline and light: the forest floor under the trees: mossy ground, ferns, big roots, fallen leaves and small mushrooms in shaded green light, thick green undergrowth toward the bottom. The new scenery fills the whole lower part from the left edge to the right edge and right down to the bottom edge of the image: no magenta, no blur, no streaks, no hard horizontal line and no gap anywhere in it. It reads as the ground continuing toward the viewer, a little darker and simpler toward the bottom edge, with no single horizon line across it. The left and right edges must join cleanly when the image is repeated side by side (or mirrored). Keep the top part above the blur exactly as it is, including its silhouette against the magenta sky. No people, animals, text or new buildings in the lower part."
+   }
+  },
+  {
+   "id": "ground_lumewood_near",
+   "prompts": null,
+   "batch": "backdrop meets the ground: lumewood near strip (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ground_lumewood_near.png",
+   "replaces": "assets/sprites/backgrounds/lumewood/near.png",
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "note": "2026-10-11 seamless-ground thread: the nearest backdrop strip's blurred lower part repainted as ground, so the backdrop meets the floor with no streaks (Cory approved).",
+   "edit": {
+    "base": "assets/sprites/backgrounds/lumewood/near.png",
+    "text": "This is the nearest background layer of my 2D side-scrolling game, on a flat magenta #FF00FF background. Its top part is painted scenery: dark violet undergrowth with glowing blue crystals, roots and ferns. Below that, the whole lower part of the image is only a blurry, streaky smear. Repaint ONLY that blurry lower part as real painted scenery that carries on downward from the top part, in exactly the same soft painted style, colours, outline and light: more of the same night undergrowth: dark violet ferns, twisted roots, mossy rocks and small glowing blue crystals and mushrooms on dim mossy ground, dense dark-blue foliage toward the bottom. The new scenery fills the whole lower part from the left edge to the right edge and right down to the bottom edge of the image: no magenta, no blur, no streaks, no hard horizontal line and no gap anywhere in it. It reads as the ground continuing toward the viewer, a little darker and simpler toward the bottom edge, with no single horizon line across it. The left and right edges must join cleanly when the image is repeated side by side (or mirrored). Keep the top part above the blur exactly as it is, including its silhouette against the magenta sky. No people, animals, text or new buildings in the lower part."
+   }
+  },
+  {
+   "id": "ground_driftcove_near",
+   "prompts": null,
+   "batch": "backdrop meets the ground: driftcove near strip (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ground_driftcove_near.png",
+   "replaces": "assets/sprites/backgrounds/driftcove/near.png",
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "note": "2026-10-11 seamless-ground thread: the nearest backdrop strip's blurred lower part repainted as ground, so the backdrop meets the floor with no streaks (Cory approved).",
+   "edit": {
+    "base": "assets/sprites/backgrounds/driftcove/near.png",
+    "text": "This is the nearest background layer of my 2D side-scrolling game, on a flat magenta #FF00FF background. Its top part is painted scenery: a sandy shore with shipwrecks, barrels, rocks and palm trees. Below that, the whole lower part of the image is only a blurry, streaky smear. Repaint ONLY that blurry lower part as real painted scenery that carries on downward from the top part, in exactly the same soft painted style, colours, outline and light: the beach below: warm sand with rocks, driftwood, shells, small tide pools and beach grass, slightly darker damp sand toward the bottom. The new scenery fills the whole lower part from the left edge to the right edge and right down to the bottom edge of the image: no magenta, no blur, no streaks, no hard horizontal line and no gap anywhere in it. It reads as the ground continuing toward the viewer, a little darker and simpler toward the bottom edge, with no single horizon line across it. The left and right edges must join cleanly when the image is repeated side by side (or mirrored). Keep the top part above the blur exactly as it is, including its silhouette against the magenta sky. No people, animals, text or new buildings in the lower part."
+   }
+  },
+  {
+   "id": "ground_emberreach_near",
+   "prompts": null,
+   "batch": "backdrop meets the ground: emberreach near strip (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ground_emberreach_near.png",
+   "replaces": "assets/sprites/backgrounds/emberreach/near.png",
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "note": "2026-10-11 seamless-ground thread: the nearest backdrop strip's blurred lower part repainted as ground, so the backdrop meets the floor with no streaks (Cory approved).",
+   "edit": {
+    "base": "assets/sprites/backgrounds/emberreach/near.png",
+    "text": "This is the nearest background layer of my 2D side-scrolling game, on a flat magenta #FF00FF background. Its top part is painted scenery: dark volcanic mountains with glowing lava cracks. Below that, the whole lower part of the image is only a blurry, streaky smear. Repaint ONLY that blurry lower part as real painted scenery that carries on downward from the top part, in exactly the same soft painted style, colours, outline and light: the rocky foothills below: dark basalt slopes and boulders with a few thin glowing lava cracks, scattered dry grass tufts and ash, dark rock toward the bottom. The new scenery fills the whole lower part from the left edge to the right edge and right down to the bottom edge of the image: no magenta, no blur, no streaks, no hard horizontal line and no gap anywhere in it. It reads as the ground continuing toward the viewer, a little darker and simpler toward the bottom edge, with no single horizon line across it. The left and right edges must join cleanly when the image is repeated side by side (or mirrored). Keep the top part above the blur exactly as it is, including its silhouette against the magenta sky, but remove the three thin vertical lines that stick up into the magenta sky. No people, animals, text or new buildings in the lower part."
+   }
+  },
+  {
+   "id": "ground_ember_near",
+   "prompts": null,
+   "batch": "backdrop meets the ground: ember near strip (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ground_ember_near.png",
+   "replaces": "assets/sprites/backgrounds/ember/near_ridge.png",
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "note": "2026-10-11 seamless-ground thread: the nearest backdrop strip's blurred lower part repainted as ground, so the backdrop meets the floor with no streaks (Cory approved).",
+   "edit": {
+    "base": "assets/sprites/backgrounds/ember/near_ridge.png",
+    "text": "This is the nearest background layer of my 2D side-scrolling game, on a flat magenta #FF00FF background. Its top part is painted scenery: a dark ash ridge with dead trees and small fires. Below that, the whole lower part of the image is only a blurry, streaky smear. Repaint ONLY that blurry lower part as real painted scenery that carries on downward from the top part, in exactly the same soft painted style, colours, outline and light: the slope below the ridge: dark ash and cooled lava rock with thin glowing cracks, dead shrubs and a few small embers, dark rock toward the bottom. The new scenery fills the whole lower part from the left edge to the right edge and right down to the bottom edge of the image: no magenta, no blur, no streaks, no hard horizontal line and no gap anywhere in it. It reads as the ground continuing toward the viewer, a little darker and simpler toward the bottom edge, with no single horizon line across it. The left and right edges must join cleanly when the image is repeated side by side (or mirrored). Keep the top part above the blur exactly as it is, including its silhouette against the magenta sky. No people, animals, text or new buildings in the lower part."
+   }
+  },
+  {
+   "id": "ground_lanternfall_near",
+   "prompts": null,
+   "batch": "backdrop meets the ground: lanternfall near strip (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ground_lanternfall_near.png",
+   "replaces": "assets/sprites/backgrounds/lanternfall/near.png",
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "note": "2026-10-11 seamless-ground thread: the nearest backdrop strip's blurred lower part repainted as ground, so the backdrop meets the floor with no streaks (Cory approved).",
+   "edit": {
+    "base": "assets/sprites/backgrounds/lanternfall/near.png",
+    "text": "This is the nearest background layer of my 2D side-scrolling game, on a flat magenta #FF00FF background. Its top part is painted scenery: a dim street of timber-framed shops with hanging signs and washing lines. Below that, the whole lower part of the image is only a blurry, streaky smear. Repaint ONLY that blurry lower part as real painted scenery that carries on downward from the top part, in exactly the same soft painted style, colours, outline and light: the street level below the shop fronts: cobbled street, low stone walls, wooden steps, barrels, crates and flower boxes in the same dim violet evening light, cobblestones running down to the bottom. The new scenery fills the whole lower part from the left edge to the right edge and right down to the bottom edge of the image: no magenta, no blur, no streaks, no hard horizontal line and no gap anywhere in it. It reads as the ground continuing toward the viewer, a little darker and simpler toward the bottom edge, with no single horizon line across it. The left and right edges must join cleanly when the image is repeated side by side (or mirrored). Keep the top part above the blur exactly as it is, including its silhouette against the magenta sky. No people, animals, text or new buildings in the lower part."
+   }
   }
  ]
 }

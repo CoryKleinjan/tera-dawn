@@ -89,7 +89,8 @@
           112
         ]
       ],
-      "scale": 0.3747
+      "scale": 0.3747,
+      "ground": "art/source/backdrop_ground/lanternfall_near.png"
     },
     "landmark": {
       "blank": [

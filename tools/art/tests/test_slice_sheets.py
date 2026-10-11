@@ -228,3 +228,17 @@ class RoundTop(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class PaintGround(unittest.TestCase):
+    def test_keeps_the_strip_and_takes_the_ground_below_it(self):
+        strip = np.zeros((60, 8, 4), np.uint8)
+        strip[:40] = (10, 20, 30, 255)
+        strip[40:] = (90, 90, 90, 255)  # extend_bottom's blur
+        ground = np.zeros((60, 8, 4), np.uint8)
+        ground[...] = (200, 100, 50, 255)
+        ground[:10, :, 3] = 0  # magenta sky keyed away in the ground picture
+        out = np.asarray(ss.paint_ground(Image.fromarray(strip, "RGBA"), Image.fromarray(ground, "RGBA"), 40))
+        self.assertTrue((out[:40 - ss.GROUND_BLEND] == strip[:40 - ss.GROUND_BLEND]).all())
+        self.assertTrue((out[40:] == (200, 100, 50, 255)).all())
+        self.assertTrue((out[..., 3] == 255).all())
