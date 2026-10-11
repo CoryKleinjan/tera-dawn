@@ -34,6 +34,10 @@ BLADE = 1.4      # the rod reaches this far past the grip on the blade side (hea
 POMMEL = 0.45    # and this far on the pommel side
 THICK = 0.13     # rod thickness (head radii)
 HAND = 0.55      # the hand taken from the edit reaches this far from the grip (head radii)
+# Cells the guide leaves alone: the run cells get their rods in their own edit (they were
+# redrawn, see gemini_pass.json paperdoll_body_run_2), and FAINT 1's sword falls out of
+# his cell.
+SKIP = ("run1", "run2", "run3", "run4", "faint1")
 
 
 def grips():
@@ -52,7 +56,7 @@ def grips():
     where = {c: (row, col) for row, line in enumerate(man["cells"]) for col, c in enumerate(line)}
     out = {}
     for n in names:
-        if "weapon" not in hands[n] or cells[n] in out:
+        if "weapon" not in hands[n] or cells[n] in out or cells[n] in SKIP:
             continue
         x, y, angle = hands[n]["weapon"]
         row, col = where[cells[n]]
