@@ -86,8 +86,9 @@ door you walk through by pressing Up, into a small room that is its own map.
    `data/biomes/rooms/`, NPCs and furniture `props`, and one **PortalDef** with `door = true`
    leading back out beside the building. Then add a door portal (`door = true`) to the town
    at the building's `x` and platform, leading into the room.
-   Doors draw no swirl: the building's picture is the door and a warm light stands in it (in a
-   room, the biome's `door` picture on the back wall). The overlay says "↑ Enter …" or
+   A door draws the biome's portal (the blue-white light pillar) standing in the doorway, so
+   players can see the building can be entered, with a warm light behind it (in a room, the
+   biome's `door` picture stands on the back wall). NPCs keep a portal's width clear of doors. The overlay says "↑ Enter …" or
    "↑ Out to …", and the minimap shows a little lit doorway.
 
 A room's biome (`data/biomes/rooms/<town>_room.tres`) has a `wall` strip as its only backdrop
