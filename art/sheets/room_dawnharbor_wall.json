@@ -1,5 +1,6 @@
 {
   "source": "art/source/room_dawnharbor_wall.png",
+  "detail": 1,
   "out_dir": "assets/sprites/rooms/dawnharbor",
   "background": [
     255,

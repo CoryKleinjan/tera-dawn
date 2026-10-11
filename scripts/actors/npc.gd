@@ -27,7 +27,7 @@ func _ready() -> void:
 	add_child(rig)
 	rig.hold_still()
 
-## Game pixels per art pixel for `npc`'s art.
+## Game pixels per art pixel for `npc`'s art (see TDStage.art_density).
 static func texel(npc: NpcDef) -> float:
 	return TDStage.TEXEL * SCALE * npc.sprite_scale
 

@@ -1,5 +1,6 @@
 {
   "source": "art/source/room_driftcove_fine.png",
+  "detail": 1,
   "out_dir": "assets/sprites/rooms/driftcove",
   "scale": 0.3697,
   "label_band": 0.2,

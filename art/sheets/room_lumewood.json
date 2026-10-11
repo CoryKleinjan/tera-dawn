@@ -1,5 +1,6 @@
 {
   "source": "art/source/room_lumewood_fine.png",
+  "detail": 1,
   "out_dir": "assets/sprites/rooms/lumewood",
   "scale": 0.3766,
   "label_band": 0.2,

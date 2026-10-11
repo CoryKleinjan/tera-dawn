@@ -2,7 +2,6 @@
   "source": "art/source/items_parts_1.png",
   "out_dir": "assets/sprites/items",
   "scale": 0.478,
-  "alpha": "hard",
   "keep": "largest",
   "fix": "glow_backdrop",
   "cells": [

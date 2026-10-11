@@ -30,6 +30,8 @@ python3 tools/art/gemini_pass.py --dry-run                           # Gemini ba
 - Branch off `main` for every change; never stack branches or PRs on other feature branches.
 - Art is painted only (like the NPCs and floating platforms), never pixel art. The chibi boy hero
   is the character reference. Only repaint art the game uses.
+- Every asset is cut at double detail with smooth, clean edges (the slicer's `detail` 2 and
+  `"alpha": "smooth"` defaults); never on/off alpha, which makes outlines look pixelated.
 - Art is made with the Gemini batch API: add an entry (usually an `edit` of an existing sheet,
   pure #FF00FF background) to `tools/art/gemini_pass.json` and run `gemini_pass.py`. Every run is
   paid: ask Cory before redoing a sheet unless it came back broken. No ChatGPT sheets.

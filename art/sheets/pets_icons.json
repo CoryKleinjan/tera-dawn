@@ -2,7 +2,6 @@
   "source": "art/source/pets.png",
   "out_dir": "assets/sprites/items",
   "scale": 0.2919,
-  "alpha": "hard",
   "label_band": 0.3,
   "keep": "largest",
   "cells": [

@@ -1,5 +1,6 @@
 {
   "source": "art/source/ui_extras_leather.png",
+  "detail": 1,
   "out_dir": "art/build/ui_extras_leather",
   "save": false,
   "note": "Part 7 U11 extras, for later. The bust frame spans the first two rows of column 2 (x 290-887, y 0-594) and needs its own region.",

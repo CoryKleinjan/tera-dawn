@@ -58,7 +58,7 @@ var _pulse := 0.0
 var _still := false
 
 ## Builds the sprite. Pass `frames` for an animated actor or `texture` for a single image.
-## `texel` is the size of one texture pixel in game pixels.
+## `texel` is the size of one art pixel in game pixels (TDStage.art_density texels each).
 func setup(frames: SpriteFrames, texture: Texture2D, texel: float) -> void:
 	_frames = frames
 	if frames:
@@ -69,7 +69,7 @@ func setup(frames: SpriteFrames, texture: Texture2D, texel: float) -> void:
 		var s := Sprite3D.new()
 		s.texture = texture
 		body = s
-	TDStage.style_sprite(body, texel)
+	TDStage.style_sprite(body, texel / (TDStage.frames_density(frames) if frames else TDStage.art_density(texture)))
 	body.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	add_child(body)
 	_fit_offset()

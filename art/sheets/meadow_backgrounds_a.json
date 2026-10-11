@@ -1,5 +1,6 @@
 {
   "source": "art/source/meadow_backgrounds_a_fine.png",
+  "detail": 1,
   "label_band": 0.01,
   "inset": 11,
   "out_dir": "assets/sprites/backgrounds/meadow",

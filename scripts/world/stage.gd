@@ -15,11 +15,19 @@ const PITCH := 9.0 # degrees the camera looks down
 ## land art (tiles, platform pieces, ground textures) is drawn so one of its art pixels
 ## shows this big, so all the land shows its painted detail at one shared scale.
 const TEXEL := 1.25
-## Texels per art pixel of the art in these folders (tools/art/slice_sheets.py cuts land
-## sheets with "art_px" at 2 texels per art pixel, so they stay sharp on a 1080p screen). The art
-## is painted, not pixel art: "art pixel" is just the unit the sheet's detail was drawn at.
-## Art anywhere else has one texel per art pixel.
+## Texels per art pixel of the art in these folders. tools/art/slice_sheets.py cuts every
+## sheet at 2 texels per art pixel ("art_px" land at "density" 2, everything else at "detail" 2)
+## with smooth edges, so outlines stay clean on a 1080p screen. The art is painted, not pixel art:
+## "art pixel" is just the unit the game sizes it in. Art anywhere else (the hero's layers, the
+## UI) has one texel per art pixel.
 const ART_DENSITY := {
+	"res://assets/sprites/npcs/": 2.0,
+	"res://assets/sprites/monsters/": 2.0,
+	"res://assets/sprites/pets/": 2.0,
+	"res://assets/sprites/items/": 2.0,
+	"res://assets/sprites/effects/": 2.0,
+	"res://assets/sprites/projectiles/": 2.0,
+	"res://assets/sprites/skills/": 2.0,
 	"res://assets/sprites/tiles/": 2.0,
 	"res://assets/sprites/platforms/": 2.0,
 	"res://assets/sprites/ground/": 2.0,
@@ -118,8 +126,10 @@ static func view_distance() -> float:
 	return (TDWorld.world_view().y / PX) / 2.0 / tan(deg_to_rad(FOV / 2.0))
 
 ## Texels per art pixel of `texture` (ART_DENSITY; a built texture can carry its own as
-## the "art_density" meta).
+## the "art_density" meta). An animation frame counts as the strip it's cut from.
 static func art_density(texture: Texture2D) -> float:
+	if texture is AtlasTexture:
+		texture = (texture as AtlasTexture).atlas
 	if texture == null:
 		return 1.0
 	if texture.has_meta(&"art_density"):
@@ -127,6 +137,13 @@ static func art_density(texture: Texture2D) -> float:
 	for dir: String in ART_DENSITY:
 		if texture.resource_path.begins_with(dir):
 			return ART_DENSITY[dir]
+	return 1.0
+
+## Texels per art pixel of an animation's frames (all cut from one strip).
+static func frames_density(frames: SpriteFrames) -> float:
+	for anim in frames.get_animation_names():
+		if frames.get_frame_count(anim) > 0:
+			return art_density(frames.get_frame_texture(anim, 0))
 	return 1.0
 
 ## How big `texture` shows, in game pixels, drawn `texel` game pixels per art pixel.
@@ -137,14 +154,13 @@ static func to3d(p: Vector2, z := 0.0) -> Vector3:
 	return Vector3(p.x / PX, -p.y / PX, z)
 
 ## Sprite defaults: smooth (the art is painted, and nearest-neighbour at a non-whole scale
-## makes jagged, shimmering edges), cut-out alpha with soft edges (alpha to coverage, needs
-## the stage's MSAA), lit, origin at the bottom centre.
+## makes jagged, shimmering edges), the art's own soft edge blended in, lit, origin at the
+## bottom centre.
 static func style_sprite(s: SpriteBase3D, texel := TEXEL, shaded := true) -> void:
 	s.pixel_size = texel / PX
 	s.centered = true
 	s.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
-	s.alpha_cut = SpriteBase3D.ALPHA_CUT_DISCARD
-	s.alpha_antialiasing_mode = BaseMaterial3D.ALPHA_ANTIALIASING_ALPHA_TO_COVERAGE
+	s.alpha_cut = SpriteBase3D.ALPHA_CUT_OPAQUE_PREPASS
 	s.shaded = shaded
 	s.double_sided = true
 

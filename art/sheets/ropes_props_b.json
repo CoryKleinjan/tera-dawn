@@ -1,5 +1,6 @@
 {
   "source": "art/source/ropes_props_fine.png",
+  "detail": 1,
   "label_band": 0.2,
   "out_dir": "assets/sprites/props",
   "cells": [

@@ -1,5 +1,6 @@
 {
   "source": "art/source/room_emberforge_fine.png",
+  "detail": 1,
   "out_dir": "assets/sprites/rooms/emberforge",
   "scale": 0.3835,
   "label_band": 0.2,

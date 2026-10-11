@@ -114,7 +114,7 @@ static func npc_rect(n: NpcPlacement) -> Rect2:
 		return Rect2(-30.0, -90.0, 60.0, 90.0)
 	var img := tex.get_image()
 	var used := img.get_used_rect() if img else Rect2i(Vector2i.ZERO, tex.get_size())
-	var px := TDNpc.texel(d)
+	var px := TDNpc.texel(d) / TDStage.art_density(tex)  # game pixels per texel
 	var half := maxf(absf(used.position.x - tex.get_width() * 0.5), absf(used.end.x - tex.get_width() * 0.5)) * px
 	return Rect2(-half, -(tex.get_height() - used.position.y) * px, half * 2.0, used.size.y * px)
 

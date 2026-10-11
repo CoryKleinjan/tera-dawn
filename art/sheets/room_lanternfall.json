@@ -1,5 +1,6 @@
 {
   "source": "art/source/room_lanternfall_fine.png",
+  "detail": 1,
   "out_dir": "assets/sprites/rooms/lanternfall",
   "scale": 0.3325,
   "label_band": 0.2,

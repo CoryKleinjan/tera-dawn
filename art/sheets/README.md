@@ -25,6 +25,18 @@ dividers a few pixels off; those sheets were set back to flat magenta and their 
 dividers before cutting, and the slicer drops thin stray divider bits. The room walls were
 cross-faded again so they repeat sideways (their `grid` width is the repeat).
 
+## Smooth edges at double detail (2026-10-11)
+
+Every sprite is cut at 2 texels per art pixel and keeps the smooth, anti-aliased edge of the
+painting; the game blends that edge in (`TDStage.style_sprite`) instead of cutting it at half
+alpha. Cut at one texel per art pixel with on/off alpha, the dark outline of the art showed as a
+stair-stepped, pixelated line on a 1080p screen. Cory wants this for all art from now on.
+`detail` (default 2) does it for sheets sized with `scale`; land sized with `art_px` already
+cuts at `density` 2. The game reads a folder's texels per art pixel from `TDStage.ART_DENSITY`,
+so a new folder of double-detail art is added there. Still at `"detail": 1`: rooms, backdrops,
+climb tops and props (their `scale` already cuts 2 texels per art pixel), the UI (drawn at its
+cut size), and the hero's layers (also `"alpha": "hard"`, until the paperdoll is re-cut).
+
 ## Adding a sheet
 
 1. Save it as `art/source/<name>.png`.
@@ -41,11 +53,12 @@ cross-faded again so they repeat sideways (their `grid` width is the repeat).
 | `cells` | | Cell names, one list per row, left to right. |
 | `region` | | `[x0, y0, x1, y1]`: cut only this part of the sheet, for sheets that hold several things (a group of monsters, a tileset beside its backdrops). Grid rows and columns are then inside the region. |
 | `background` | `"magenta"` | `"magenta"` (soft chroma key), `"dark"` (flood fill from the cell border) or `[r, g, b]`. |
-| `scale` | `0.25` | Shrink factor from sheet pixels to sprite texels. The hero is 0.25; match its pixel size. Land art uses `art_px` instead. |
+| `scale` | `0.25` | Shrink factor from sheet pixels to art pixels, the unit the game sizes art in. The hero is 0.25; match its pixel size. Land art uses `art_px` instead. |
+| `detail` | `2` | With `scale`: texels cut per art pixel, so the art keeps its detail and a clean edge on screen. Must match the output folder's `TDStage.ART_DENSITY`. Sizes in a manifest given in the cut sprite's pixels (`min_area`, set `nudge` and `pad_top`) are in art pixels. |
 | `art_px` | | Land art (tiles, platform pieces, ground textures): sheet pixels per art pixel, measured on the sheet. Sets `scale` to `density / art_px x grow`, so every piece of land shows at one on-screen pixel size (`TDStage.TEXEL` game px per art pixel; `TDStage.art_density`). |
 | `density` | `2` | With `art_px`: texels cut per art pixel. The game reads 2 for everything under `tiles/`, `platforms/` and `ground/`. |
 | `grow` | `1.0` | With `art_px`: how much bigger or smaller a piece is drawn than its sheet's pixel size, 0.8 to 1.25 (a piece Gemini drew too small or too big next to its neighbours). `tools/art/land_pixels.py --check` checks grow x every decor and prop scale stays within 0.75 to 1.3. |
-| `alpha` | `"hard"` | `"hard"` for solid sprites, `"soft"` for glows, effects and backgrounds. |
+| `alpha` | `"smooth"` | `"smooth"` keeps each sprite's anti-aliased edge, `"soft"` also keeps the faint glow around it (effects, UI), `"hard"` makes every pixel fully on or off (only the hero's layers, until they're re-cut). |
 | `key` | `[0.35, 0.8]` | Magenta sheets: how magenta a pixel must be to start and finish fading out. Raise it if purple art is being eaten. |
 | `defringe` | `true` | Magenta sheets: after the key, take the magenta out of the dark outline pixels at the cut edge (Gemini blends its outline into the background, which would show as a thin magenta line). Set `false` for a cell whose purple art it wrongly trims. |
 | `label_band` | `0.16` | Top part of each cell (fraction of its height) where the label may be. |

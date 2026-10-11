@@ -1,5 +1,6 @@
 {
   "source": "art/source/room_lumewood_wall.png",
+  "detail": 1,
   "out_dir": "assets/sprites/rooms/lumewood",
   "background": [
     255,

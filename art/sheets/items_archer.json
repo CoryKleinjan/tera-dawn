@@ -2,7 +2,6 @@
   "source": "art/source/items_archer.png",
   "out_dir": "assets/sprites/items",
   "scale": 0.322,
-  "alpha": "hard",
   "keep": "largest",
   "fix": "glow_backdrop",
   "cells": [

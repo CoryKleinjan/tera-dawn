@@ -2,7 +2,6 @@
   "source": "art/source/skill_icons_old.png",
   "out_dir": "assets/sprites/skills",
   "scale": 0.29,
-  "alpha": "hard",
   "keep": "largest",
   "cells": [
     [

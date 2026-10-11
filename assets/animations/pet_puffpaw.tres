@@ -4,39 +4,39 @@
 
 [sub_resource type="AtlasTexture" id="f0"]
 atlas = ExtResource("1_strip")
-region = Rect2(0, 0, 50, 57)
+region = Rect2(0, 0, 98, 114)
 
 [sub_resource type="AtlasTexture" id="f1"]
 atlas = ExtResource("1_strip")
-region = Rect2(50, 0, 50, 57)
+region = Rect2(98, 0, 98, 114)
 
 [sub_resource type="AtlasTexture" id="f2"]
 atlas = ExtResource("1_strip")
-region = Rect2(100, 0, 50, 57)
+region = Rect2(196, 0, 98, 114)
 
 [sub_resource type="AtlasTexture" id="f3"]
 atlas = ExtResource("1_strip")
-region = Rect2(150, 0, 50, 57)
+region = Rect2(294, 0, 98, 114)
 
 [sub_resource type="AtlasTexture" id="f4"]
 atlas = ExtResource("1_strip")
-region = Rect2(200, 0, 50, 57)
+region = Rect2(392, 0, 98, 114)
 
 [sub_resource type="AtlasTexture" id="f5"]
 atlas = ExtResource("1_strip")
-region = Rect2(250, 0, 50, 57)
+region = Rect2(490, 0, 98, 114)
 
 [sub_resource type="AtlasTexture" id="f6"]
 atlas = ExtResource("1_strip")
-region = Rect2(300, 0, 50, 57)
+region = Rect2(588, 0, 98, 114)
 
 [sub_resource type="AtlasTexture" id="f7"]
 atlas = ExtResource("1_strip")
-region = Rect2(350, 0, 50, 57)
+region = Rect2(686, 0, 98, 114)
 
 [sub_resource type="AtlasTexture" id="f8"]
 atlas = ExtResource("1_strip")
-region = Rect2(400, 0, 50, 57)
+region = Rect2(784, 0, 98, 114)
 
 [resource]
 animations = [{"frames": [{"duration": 1.0, "texture": SubResource("f0")}, {"duration": 1.0, "texture": SubResource("f1")}], "loop": true, "name": &"idle", "speed": 2.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f2")}, {"duration": 1.0, "texture": SubResource("f3")}, {"duration": 1.0, "texture": SubResource("f4")}, {"duration": 1.0, "texture": SubResource("f5")}], "loop": true, "name": &"walk", "speed": 8.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f6")}], "loop": false, "name": &"jump", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f7")}, {"duration": 1.0, "texture": SubResource("f8")}], "loop": true, "name": &"happy", "speed": 4.0}]

@@ -1,5 +1,6 @@
 {
   "source": "art/source/ui_dialogue_old.png",
+  "detail": 1,
   "recolor": "leather",
   "out_dir": "assets/sprites/ui/dialogue",
   "scale": 0.5,
