@@ -82,7 +82,7 @@ func play_single() -> void:
 	mode = Mode.SINGLE
 	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
 	_start_server(true)
-	ask(&"req_local_login")
+	ask(&"req_local_login", [Settings.dev.login_mode()])
 
 ## Host: play on the local account, and let other players register and log in to this game
 ## on `port`. Returns "" or what went wrong.
@@ -98,7 +98,7 @@ func host(port := DEFAULT_PORT) -> String:
 	mode = Mode.HOST
 	multiplayer.multiplayer_peer = peer
 	_start_server(true)
-	ask(&"req_local_login")
+	ask(&"req_local_login", [Settings.dev.login_mode()])
 	return ""
 
 ## Connects to a server and logs in (or registers a new account first, if `register`).
@@ -234,10 +234,12 @@ func req_login(username_: String, password: String) -> void:
 		server.lobby.on_login(_sender(), username_, password)
 
 ## Single player or host: the player at this game's keyboard logs in to the local account.
+## `test` (a TestCharacters.Mode) asks for the test characters' account instead; the server
+## only honours it in a debug build.
 @rpc("any_peer", "call_local", "reliable")
-func req_local_login() -> void:
+func req_local_login(test := 0) -> void:
 	if server:
-		server.lobby.on_local_login(_sender())
+		server.lobby.on_local_login(_sender(), test as TestCharacters.Mode)
 
 @rpc("any_peer", "call_local", "reliable")
 func req_create_character(char_name: String, made: Dictionary) -> void:

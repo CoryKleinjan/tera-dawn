@@ -1,9 +1,9 @@
 extends Node
 ## Autoload "Settings": the player's settings, kept in user://settings.cfg and applied when
 ## the game starts. Each group is a SettingsSection (scripts/settings/): the keyboard
-## controls, audio and video. The settings screen changes a section, calls `apply` so the
-## change shows at once, and `save` when it closes. Game keeps its own [player] section in
-## the same file through `file`.
+## controls, audio, video and the developer-only switches. The settings screen changes a
+## section, calls `apply` so the change shows at once, and `save` when it closes. Game keeps
+## its own [player] section in the same file through `file`.
 
 ## A section was applied; listeners (the stage, the key hints) read what they need from it.
 signal changed(section: SettingsSection)
@@ -13,7 +13,8 @@ const PATH := "user://settings.cfg"
 var keybinds := Keybinds.new()
 var audio := AudioSettings.new()
 var video := VideoSettings.new()
-var sections: Array[SettingsSection] = [keybinds, audio, video]
+var dev := DevSettings.new()
+var sections: Array[SettingsSection] = [keybinds, audio, video, dev]
 ## The whole file, so sections this doesn't own (Game's [player]) survive a save.
 var file := ConfigFile.new()
 ## Where the file is saved (tests point this somewhere else).
