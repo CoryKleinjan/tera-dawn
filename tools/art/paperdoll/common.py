@@ -64,9 +64,9 @@ HAT_SHOULDER_ROWS = 6  # hat sheet cells are lined up by their bottom rows (the 
 # Cory 2026-10-11: a bandana sits a little lower).
 HAT_LOWER = {"bandana": 0.2}
 HAT_GROW = {"bandana": 1.1}
-# ...and from behind are grown to at least this wide (head radii), so they cover the back of
-# his head and ears (Gemini paints some bandanas' backs narrower than others)
-HAT_BACK_WIDTH = {"bandana": 2.65}
+# ...and from behind are this wide (head radii), all alike, so they cover the back of his head
+# (Gemini paints some bandanas' backs wider than others; Cory 2026-10-11: a bit smaller from behind)
+HAT_BACK_WIDTH = {"bandana": 2.45}
 HAT_LINE = 0.1         # a bit of a hat cell's frame line: at most this thick against its length
 HAT_SIZE = 1.0         # hats drawn this much bigger than his head against the sheet's head
 HAT_SPECK = 0.05  # hat_alone: pieces under this share of the hat are cell-frame bits

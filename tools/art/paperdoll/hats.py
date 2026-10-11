@@ -163,7 +163,7 @@ def crown_width(img):
 
 def put_hat(hero, name, views, tinted, shape=None):
     """Saves a hat as a piece (pieces.py): its two views, put on his head in every frame, as
-    big as his head against the sheet's head (from behind at least HAT_BACK_WIDTH wide) and
+    big as his head against the sheet's head (from behind HAT_BACK_WIDTH wide) and
     turned with it. The pictures are cut at his typical head size; each frame scales them by
     its own head."""
     r_mid = float(np.median([fi["r"] for fi in hero.info]))
@@ -171,7 +171,7 @@ def put_hat(hero, name, views, tinted, shape=None):
     for view, (img, at, ref_r) in views.items():
         k = r_mid / ref_r * HAT_SIZE
         if view == "behind" and shape in HAT_BACK_WIDTH:
-            k = max(k, HAT_BACK_WIDTH[shape] * r_mid / crown_width(img))
+            k = HAT_BACK_WIDTH[shape] * r_mid / crown_width(img)
         pictures[view] = (scaled(img, k), np.asarray(at) * k)
     for n, fi in zip(hero.names, hero.info):
         view = "behind" if n in BACK_VIEW else "side"

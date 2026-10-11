@@ -148,6 +148,8 @@ func test_a_save_from_before_appearances_gets_the_default_look() -> void:
 # ---------- Paperdoll ----------
 
 func _layer(d: Paperdoll, frames: SpriteFrames) -> Paperdoll.Layer:
+	if frames == null:
+		return null  # (a piece's layer has no strip)
 	for l in d.layers:
 		if l.frames == frames:
 			return l
@@ -220,7 +222,9 @@ func test_the_creator_preview_shows_the_starting_outfit() -> void:
 		gear[EquipDef.WORN_STYLE_PLACES[kind]] = String(n.outfit[kind].id)
 	var d := Paperdoll.dress(_look(n.appearance, gear))
 	for kind in [EquipDef.Slot.TOP, EquipDef.Slot.BOTTOM, EquipDef.Slot.SHOES]:
-		check(_layer(d, Paperdoll.worn_cut(n.outfit[kind])) != null, "%s shows" % n.outfit[kind].id)
+		var own := Paperdoll.own_art(n.outfit[kind])
+		var drawn: SpriteFrames = own["front"] if own else Paperdoll.worn_cut(n.outfit[kind])
+		check(_layer(d, drawn) != null, "%s shows" % n.outfit[kind].id)
 
 ## Where the face's middle is on a rig frame (paperdoll_layers.py FACE_AT: forward and down
 ## from the head's centre, in head radii, turned with the head).
