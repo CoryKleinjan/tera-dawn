@@ -9,10 +9,10 @@ const WINDOW_BUTTON := 30.0
 const WINDOW_BUTTON_GAP := 2.0
 ## The EXP bar is drawn a little smaller than its art so the window buttons fit beside it.
 const EXP_SCALE := 0.85
-## The bar art: each end's gold cap and its dark rim, in texels. The art is drawn at one
-## scale to fit HEIGHT, and the leather between the caps repeats along the bar instead of
-## stretching, so its stitching stays sharp at any width.
-const BAR_CAP := 36.0
+## The bar art (art/source/ui_hud_bar.png): each end's brass sun cap and its dark rim, in
+## texels. The art is drawn at one scale to fit HEIGHT, and the dawn-lit band between the caps
+## repeats along the bar instead of stretching, so its gold trim stays sharp at any width.
+const BAR_CAP := 38.0
 ## The level badge: its left edge (just inside the gold end cap) and its scale.
 const BADGE_X := 28.0
 const BADGE_SCALE := 0.68
