@@ -1,17 +1,16 @@
 # Art reference
 
-`hero.png` is Cory's hero and the style reference for all of the art in Tera's Dawn:
-every sprite, monster, prop and tile should match him. It is the first idle pose of the
-painted hero sheet (`art/source/hero_main.png`); the game's art is painted only, never pixel art.
-
-What to match:
+`hero.png` is the chibi boy hero, the first idle pose of the painted hero sheet
+(`art/source/hero_main.png`). He sets the proportions for the hero and every character:
 
 - Chibi proportions: a big head (about half his height) on a small body.
-- Dark navy-black outlines (around `#14121e`) on every shape.
-- Cel shading with three to four tones per colour, lit from the upper left.
 - Big glossy eyes with a dark top lash, a deep-blue iris and white highlights.
 - His palette: brown hair, red cape, blue tunic with gold trim, brown leather, silver steel.
 
+The painting style comes from the game's NPC sprites (see `CLAUDE.md`, "Art style"): painted only,
+never pixel art, with rich warm colours, strong light and shadow, visible brush texture and a dark
+outline.
+
 The game's sprites are cut from the sheets in `art/source/` by `tools/art/slice_sheets.py`
-(see `art/sheets/README.md`). New sheets should use the same layout: a grid of cells on a
-flat magenta background with thin divider lines, one pose or object per cell.
+(see `art/sheets/README.md`). New sheets use the same layout: a grid of cells on a flat magenta
+background with thin divider lines, one pose or object per cell.
