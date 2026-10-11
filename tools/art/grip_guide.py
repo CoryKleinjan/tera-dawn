@@ -8,11 +8,15 @@ weapon fist: the rod lies the way paperdoll_rig.json points the sword, long on t
 side and short on the pommel side, and Gemini redraws the hand gripping it with the thumb
 wrapped next to the long end.
 
-    python3 tools/art/grip_guide.py guide OUT.png      # the body sheet with the rods drawn on
-    python3 tools/art/grip_guide.py hands EDIT.png     # put the edit's hands on the body sheet
+    python3 tools/art/grip_guide.py guide OUT.png
+        the body sheet with a rod drawn through each weapon fist (the edit's base)
+    python3 tools/art/grip_guide.py hands EDIT.png [--cells run1,run2,...]
+        put the edit's hands on the body sheet; --cells first copies those whole cells
+        from the edit (cells the edit redrew, like the run cycle) and prints the rig's
+        weapon for them, along the edit's rod
 
-`hands` takes only the hand around each grip from the edit (the rod taken out and painted
-over), and pastes it into art/source/paperdoll_body.png, so nothing else on the sheet moves.
+`hands` takes only the hand around each rod from the edit (the rod taken out and painted
+over) and pastes it into art/source/paperdoll_body.png, so nothing else on the sheet moves.
 Then re-cut the body and rebuild the layers (slice_sheets.py paperdoll_body, then
 paperdoll_layers.py).
 """
@@ -29,6 +33,7 @@ import paperdoll_layers as pl  # noqa: E402
 import slice_sheets as ss  # noqa: E402
 
 BODY = os.path.join(pl.ROOT, "art", "source", "paperdoll_body.png")
+MAGENTA = (255, 0, 255)
 GREEN = (0, 255, 0)
 BLADE = 1.4      # the rod reaches this far past the grip on the blade side (head radii)
 POMMEL = 0.45    # and this far on the pommel side
@@ -40,41 +45,57 @@ HAND = 0.55      # the hand taken from the edit reaches this far from the grip (
 SKIP = ("run1", "run2", "run3", "run4", "faint1")
 
 
-def grips():
-    """Per frame that holds a weapon: (cell name, the grip on the body sheet, the sword's
-    angle, the head radius), in body sheet pixels."""
+def layout():
+    """The body sheet's grid: {cell name: (x0, y0, x1, y1)}."""
+    with open(os.path.join(ss.SHEETS, "paperdoll_body.json")) as f:
+        man = json.load(f)
+    rows, cols = man["grid"]["rows"], man["grid"]["cols"]
+    return {c: (cols[j], rows[i], cols[j + 1], rows[i + 1])
+            for i, line in enumerate(man["cells"]) for j, c in enumerate(line)}
+
+
+def rig():
+    """(frame names, frame -> body cell, frame -> (dx, dy) from cell to strip, the rig's hands,
+    strip pixels per rig pixel, head radius in strip pixels)."""
     names, spec = pl.frame_names()
     strip = Image.open(pl.STRIP)
     fw, fh = strip.width // len(names), strip.height
     hands, _ = pl.hand_rig(fw)
     cells = {n: spec["frames"][n].split(":", 1)[1] for n in names}
     offsets = pl.body_offsets(names, cells, fw, fh)
+    with open(pl.HAND_RIG) as f:
+        k = fw / json.load(f).get("frame_size", [fw])[0]
     r = pl.analyse(np.asarray(strip.crop((0, 0, fw, fh))))["r"]
-    with open(os.path.join(ss.SHEETS, "paperdoll_body.json")) as f:
-        man = json.load(f)
-    grid = man["grid"]
-    where = {c: (row, col) for row, line in enumerate(man["cells"]) for col, c in enumerate(line)}
+    return names, cells, offsets, hands, k, r
+
+
+def grips():
+    """Per body cell that holds a weapon (except SKIP): (the grip in body sheet pixels, the
+    sword's angle), and the head radius."""
+    names, cells, offsets, hands, _, r = rig()
+    boxes = layout()
     out = {}
     for n in names:
-        if "weapon" not in hands[n] or cells[n] in out or cells[n] in SKIP:
+        c = cells[n]
+        if "weapon" not in hands[n] or c in out or c in SKIP:
             continue
         x, y, angle = hands[n]["weapon"]
-        row, col = where[cells[n]]
         dx, dy = offsets[n]
-        out[cells[n]] = ((grid["cols"][col] + x - dx, grid["rows"][row] + y - dy), angle, r)
-    return out
+        out[c] = ((boxes[c][0] + x - dx, boxes[c][1] + y - dy), angle)
+    return out, r
 
 
 def guide(path):
     sheet = Image.open(BODY).convert("RGB")
     draw = ImageDraw.Draw(sheet)
-    for (x, y), angle, r in grips().values():
+    found, r = grips()
+    for (x, y), angle in found.values():
         c, s = math.cos(math.radians(angle)), math.sin(math.radians(angle))
         a = (x - c * r * POMMEL, y - s * r * POMMEL)
         b = (x + c * r * BLADE, y + s * r * BLADE)
         draw.line([a, b], fill=GREEN, width=max(3, round(r * THICK)))
     sheet.save(path)
-    print(f"guide: {path}")
+    print(f"guide: {path} ({len(found)} rods)")
 
 
 def rod_mask(arr):
@@ -82,30 +103,95 @@ def rod_mask(arr):
     return (rgb[..., 1] > 170) & (rgb[..., 0] < 140) & (rgb[..., 2] < 140)
 
 
-def hands(path):
-    edit = Image.open(path).convert("RGBA")
-    body = Image.open(BODY).convert("RGBA")
-    if edit.size != body.size:
-        edit = edit.resize(body.size, Image.LANCZOS)
-    out = np.asarray(body).copy()
-    arr = np.asarray(edit).copy()
-    rod = ss.dilate(rod_mask(arr), 1)
-    arr = pl.inpaint(arr, rod)
-    for (x, y), _, r in grips().values():
-        # the edit's hand: its skin and outline flooded from the grip, as paperdoll_layers
-        # finds a fist, plus the body's old fist, so none of the old hand is left uncovered
-        solid = arr.copy()
-        solid[..., 3] = np.where((arr[..., :3].astype(int) - (255, 0, 255)).__abs__().sum(2) < 90, 0, 255)
-        new = pl.fist_mask(solid, (x, y), r * HAND)
-        old = pl.fist_mask(out, (x, y), r * HAND)
-        take = new | (old & (solid[..., 3] > 0))
-        out[take] = solid[take]
-        out[old & ~take] = (255, 0, 255, 255)
-    Image.fromarray(out, "RGBA").convert("RGB").save(BODY)
-    print(f"hands: {os.path.relpath(BODY, pl.ROOT)}")
+def solid(arr, box):
+    """The cell `box` of an RGB sheet as RGBA, its background (whatever magenta the cell's
+    border has) clear."""
+    x0, y0, x1, y1 = box
+    cell = arr[y0:y1, x0:x1, :3].astype(int)
+    border = np.concatenate([cell[2], cell[-3], cell[:, 2], cell[:, -3]])
+    bg = np.median(border, 0)
+    out = np.zeros(cell.shape[:2] + (4,), np.uint8)
+    out[..., :3] = cell
+    out[..., 3] = np.where(np.abs(cell - bg).sum(2) < 90, 0, 255)
+    return out
 
+
+def measure(rod):
+    """A rod's grip (the middle of the gap the fist makes in it) and the way its long end
+    points (degrees clockwise from pointing right), from its pixels; None if it has no gap."""
+    ys, xs = np.nonzero(rod)
+    if len(xs) < 20:
+        return None
+    pts = np.stack([xs, ys], 1).astype(float)
+    centre = pts.mean(0)
+    _, _, vt = np.linalg.svd(pts - centre, full_matrices=False)
+    axis = vt[0]
+    t = np.sort((pts - centre) @ axis)
+    gaps = np.diff(t)
+    i = int(np.argmax(gaps))
+    if gaps[i] < 3:
+        return None
+    mid = (t[i] + t[i + 1]) / 2
+    grip = centre + axis * mid
+    if t[-1] - mid < mid - t[0]:  # the long end is the blade's
+        axis = -axis
+    return (float(grip[0]), float(grip[1])), math.degrees(math.atan2(axis[1], axis[0]))
+
+
+def hands(path, whole=()):
+    boxes = layout()
+    body = np.asarray(Image.open(BODY).convert("RGB")).copy()
+    edit_img = Image.open(path).convert("RGB")
+    if edit_img.size != (body.shape[1], body.shape[0]):
+        edit_img = edit_img.resize((body.shape[1], body.shape[0]), Image.LANCZOS)
+    edit = np.asarray(edit_img).copy()
+    rods = rod_mask(edit)
+    painted = pl.inpaint(np.dstack([edit, np.full(edit.shape[:2], 255, np.uint8)]), ss.dilate(rods, 1))[..., :3]
+
+    # cells the edit redrew whole: copied over, rod painted out, background made pure magenta
+    for c in whole:
+        x0, y0, x1, y1 = boxes[c]
+        cell = solid(painted, boxes[c])
+        body[y0:y1, x0:x1] = np.where(cell[..., 3:] > 0, cell[..., :3], MAGENTA)
+    Image.fromarray(body).save(BODY)
+
+    names, cells, offsets, hands_rig, k, r = rig()
+    taken = []
+    measured = {}
+    for c, box in boxes.items():
+        x0, y0, x1, y1 = box
+        found = measure(rods[y0:y1, x0:x1])
+        if found is None:
+            continue
+        (gx, gy), angle = found
+        measured[c] = ((gx, gy), angle)
+        new = solid(painted, box)
+        old = solid(body, box)
+        hand = pl.fist_mask(new, (gx, gy), r * HAND)
+        gone = pl.fist_mask(old, (gx, gy), r * HAND) & ~hand
+        cell = body[y0:y1, x0:x1]
+        cell[hand] = new[hand][:, :3]
+        cell[gone] = MAGENTA
+        taken.append(c)
+    Image.fromarray(body).save(BODY)
+    print(f"hands: {len(taken)} cells ({', '.join(taken)}) -> {os.path.relpath(BODY, pl.ROOT)}")
+
+    if whole:
+        # the redrawn cells hold the weapon where the edit's rod goes: what to put in the rig
+        names, cells, offsets, _, k, _ = rig()
+        for n in names:
+            if cells[n] in whole and cells[n] in measured:
+                (gx, gy), angle = measured[cells[n]]
+                dx, dy = offsets[n]
+                print(f"{n}: \"weapon\": [{round((gx + dx) / k)}, {round((gy + dy) / k)}, {round(angle / 5) * 5}]"
+                      f" (set it in {os.path.relpath(pl.HAND_RIG, pl.ROOT)})")
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3 or sys.argv[1] not in ("guide", "hands"):
+    args = sys.argv[1:]
+    if len(args) >= 2 and args[0] == "guide":
+        guide(args[1])
+    elif len(args) >= 2 and args[0] == "hands":
+        cells = args[args.index("--cells") + 1].split(",") if "--cells" in args else ()
+        hands(args[1], cells)
+    else:
         sys.exit(__doc__)
-    {"guide": guide, "hands": hands}[sys.argv[1]](sys.argv[2])
