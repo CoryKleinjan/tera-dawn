@@ -5775,6 +5775,27 @@
     "base": "art/source/ground_textures_3.png",
     "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added. Keep the white label text, cell borders and divider lines as they are."
    }
+  },
+  {
+   "id": "paint_lanternfall_backgrounds_fix",
+   "prompts": null,
+   "batch": "painted look: lanternfall backgrounds fix (edit)",
+   "with": null,
+   "refs": [],
+   "save": "lanternfall_backgrounds_fine_painted_fix.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-11 painted-look thread (Cory: fix Lanternfall in PR #72): the painted sheet's far sky faded into magenta at the ends, the near layer had a hole, and the clouds/landmark/moon cells had extra scenery behind them.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/lanternfall_backgrounds_fine_painted.png",
+    "text": "This is my sheet of 7 painted parallax backdrop layers for Lanternfall, a lantern-lit town at dusk. Keep the soft painted style, the colours, every strip's position and height, the labels and the divider lines exactly. Fix only these things:\n1. FAR LAYER: the orange dusk sky behind the tower silhouettes must fill its whole strip as a solid rectangle, edge to edge: no fading into magenta at the left end, the right end or the top corners. Its left and right edges must match so the strip tiles sideways.\n2. MID LAYER: keep as it is; make its left and right edges match so it tiles.\n3. NEAR LAYER: fill the magenta gap in the middle of the alley with more timber houses, walls and doors like the rest of the strip, so the strip is solid edge to edge. Its left and right edges must match so it tiles.\n4. CLOUDS: exactly 4 separate soft dusk clouds, one centred in each quarter of the strip, on flat magenta. Remove the castle, the village, the hill and the bridge from this strip.\n5. LANDMARK: only the clock tower with its trees, on flat magenta. Remove the pink clouds behind it.\n6. SKY BODY: only the round orange moon, on flat magenta, with no clouds and no pink glow around it.\n7. MOTES: keep the lanterns and fireflies, on flat magenta, with no pink glow patches.\nEverything that is not part of a layer is flat pure magenta #FF00FF."
+   }
   }
  ]
 }
