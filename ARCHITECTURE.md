@@ -28,7 +28,8 @@ data/*.tres  ──►  Content (autoload)  ──►  World loads a MapDef  ─
   monsters, NPCs and drops.
 - **World** (`scripts/world/`) shows the map you're on: `world.gd` builds it and shows the
   server's events, `stage.gd` and its builders turn a map into the HD-2D diorama.
-- **UI** (`scripts/ui/`) draws the HUD from the sliced UI sheet through `UiSkin`.
+- **UI** (`scripts/ui/`) draws the HUD from the sliced UI sheet through `UiSkin` (art),
+  `UiStyle` (styled controls) and `WorldSkin` (bars, tags and bubbles over the world).
 - **Art** comes from Cory's sheets in `art/source/`, cut by `tools/art/slice_sheets.py`
   (see `art/sheets/README.md`).
 

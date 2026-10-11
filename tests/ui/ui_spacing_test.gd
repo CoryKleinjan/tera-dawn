@@ -122,7 +122,7 @@ func test_equipment_slot_labels_fit() -> void:
 
 func test_party_hp_bar_stops_before_kick() -> void:
 	var com: TDCommunityWindow = ui.hud.windows["community"]
-	var row := com._row(1)
+	var row := com.row_rect(1)
 	check(com.party_hp_rect(row).end.x + GAP <= com.kick_rect(row).position.x, "the HP bar ends before Kick")
 	check(com.party_hp_rect(row).position.x >= row.position.x + 150, "and leaves the name room on its left")
 

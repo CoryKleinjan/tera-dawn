@@ -2,7 +2,8 @@ class_name TDWindow
 extends Control
 ## A draggable game window (inventory, equipment, stats) drawn in the UI sheet's style.
 ## Windows open over gameplay without pausing it, like MapleStory. Subclasses draw their
-## body in `_draw_body` and react to clicks in `_click`; tabs, list rows, buttons and item
+## body in `_draw_body`, react to clicks in `_click` and to their tabs in `_tab_clicked`,
+## and say which item the mouse is over in `_tooltip_at`; tabs, list rows, buttons and item
 ## slots share the helpers here so every window looks alike.
 
 const TITLE_H := 30.0
@@ -31,6 +32,11 @@ const BUTTON_FACE_MID := 23.0
 ## (clear of the frame's bottom trim).
 const BOTTOM_BUTTON_H := 32.0
 const BOTTOM_BUTTON_INSET := 16.0
+## The space between two buttons side by side along the bottom (see `bottom_half_rect`).
+const BOTTOM_BUTTON_GAP := 8.0
+## A dragged item's icon: how much smaller than a slot, and how see-through.
+const DRAG_ICON_INSET := 10.0
+const DRAG_ICON_ALPHA := 0.85
 ## Opening: the window grows from OPEN_SCALE to full size and fades in over OPEN_TIME seconds.
 const OPEN_TIME := 0.12
 const OPEN_SCALE := 0.94
@@ -136,7 +142,7 @@ func _gui_input(event: InputEvent) -> void:
 			_dragging = true
 			# in the parent's space, so a window still growing in drags without a jump
 			_drag_from = mb.global_position - position
-		elif not (mb.button_index == MOUSE_BUTTON_LEFT and _press_button(mb.position)):
+		elif not (mb.button_index == MOUSE_BUTTON_LEFT and (_press_button(mb.position) or _press_tab(mb.position))):
 			_click(mb.position, mb.button_index, mb.double_click)
 		accept_event()
 	elif mb and not mb.pressed and mb.button_index == MOUSE_BUTTON_LEFT:
@@ -152,13 +158,41 @@ func _gui_input(event: InputEvent) -> void:
 func _draw_body() -> void:
 	pass
 
-## A click inside the window body. Override.
+## A click inside the window body (not on a button or a tab). Override.
 func _click(_at: Vector2, _button: int, _double: bool) -> void:
 	pass
 
-## The mouse moved over the window. Override to show tooltips.
-func _hovered(_at: Vector2) -> void:
+## Tab `i` (drawn by `draw_tabs`) was clicked. Override to switch to it.
+func _tab_clicked(_i: int) -> void:
 	pass
+
+## What the item tooltip shows with the mouse at `at`: a `Tip`, or null for nothing.
+## Override in windows with items in them.
+func _tooltip_at(_at: Vector2) -> Tip:
+	return null
+
+## The mouse moved over the window: shows the tooltip `_tooltip_at` asks for, or hides
+## this window's. Windows that override it show no item tooltips.
+func _hovered(at: Vector2) -> void:
+	if hud == null:
+		return
+	var tip := _tooltip_at(at)
+	if tip == null or tip.stack == null:
+		hud.tooltip.clear(self)
+	else:
+		hud.tooltip.show_item(self, tip.stack, get_global_mouse_position(), tip.hint, tip.compare)
+
+## An item tooltip: the stack, the hint line under it ("Double-click to equip"), and for gear
+## in the bag whether to compare it with what's worn.
+class Tip:
+	var stack: ItemStack
+	var hint: String
+	var compare: bool
+
+	func _init(stack_: ItemStack, hint_ := "", compare_ := false) -> void:
+		stack = stack_
+		hint = hint_
+		compare = compare_
 
 ## An item slot: frame, icon and stack count. `dim` greys it out (being dragged, unusable).
 func draw_slot(r: Rect2, stack: ItemStack, dim := false, label := "") -> void:
@@ -194,6 +228,12 @@ func draw_button(r: Rect2, label: String, enabled := true, small := false) -> vo
 ## the frame's bottom trim.
 func bottom_button_rect(x: float, w: float) -> Rect2:
 	return Rect2(x, size.y - BOTTOM_BUTTON_INSET - BOTTOM_BUTTON_H, w, BOTTOM_BUTTON_H)
+
+## One of two buttons sharing the bottom edge between the window's padding: `i` 0 the left
+## one, 1 the right.
+func bottom_half_rect(i: int) -> Rect2:
+	var w := (size.x - PAD * 2 - BOTTOM_BUTTON_GAP) / 2.0
+	return bottom_button_rect(PAD + i * (w + BOTTOM_BUTTON_GAP), w)
 
 ## A button that calls `action` when clicked (only while `enabled`). Call it while drawing:
 ## the buttons drawn last are the ones a click can press.
@@ -261,6 +301,14 @@ func tab_at(at: Vector2) -> int:
 			return i
 	return -1
 
+## Clicks the tab under `at`, if there is one.
+func _press_tab(at: Vector2) -> bool:
+	var t := tab_at(at)
+	if t < 0:
+		return false
+	_tab_clicked(t)
+	return true
+
 ## The background of a list row or panel; `lit` (hovered, selected) shows the highlight.
 func draw_row(r: Rect2, lit := false) -> void:
 	if lit:
@@ -300,17 +348,20 @@ static func fit(tex: Texture2D, box: Rect2) -> Rect2:
 	var s := tex.get_size() * k
 	return Rect2(box.get_center() - s / 2.0, s)
 
-## A drag preview showing an item's icon under the cursor.
-func drag_preview(stack: ItemStack) -> Control:
+## A drag preview: `icon` `side` pixels square, centred under the cursor, `alpha`
+## see-through. `keep_aspect` keeps an icon that isn't square its shape.
+static func drag_preview(icon: Texture2D, side := SLOT - DRAG_ICON_INSET, alpha := DRAG_ICON_ALPHA, keep_aspect := true) -> Control:
 	var holder := Control.new()
-	var icon := TextureRect.new()
-	icon.texture = stack.item.icon
-	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	icon.size = Vector2(SLOT, SLOT) - Vector2(10, 10)
-	icon.position = -icon.size / 2.0
-	icon.modulate = Color(1, 1, 1, 0.85)
-	holder.add_child(icon)
+	var rect := TextureRect.new()
+	rect.texture = icon
+	rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	if keep_aspect:
+		rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	rect.size = Vector2(side, side)
+	rect.position = -rect.size / 2.0
+	if alpha < 1.0:
+		rect.modulate = Color(1, 1, 1, alpha)
+	holder.add_child(rect)
 	return holder
 
 ## Whether the mouse is over any open window (so a drag that ends here isn't a drop on the floor).

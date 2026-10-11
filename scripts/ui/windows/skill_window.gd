@@ -74,7 +74,7 @@ func _draw_details(s: SkillDef, at: Vector2) -> void:
 	var box := Rect2(at, Vector2(size.x - PAD * 2, size.y - at.y - PAD))
 	draw_row(box)
 	var y := at.y + 18
-	for l in UiSkin.wrap_text(Game.ui_font, s.description, 12, box.size.x - 16):
+	for l in DrawUtil.wrap_text(Game.ui_font, s.description, 12, box.size.x - 16):
 		DrawUtil.text(self, Game.ui_font, Vector2(at.x + 8, y), l, 12, Palette.MIST, 1, 3, Palette.NIGHT)
 		y += 16
 	var lvl := Game.me.skill_level(s)
@@ -82,11 +82,11 @@ func _draw_details(s: SkillDef, at: Vector2) -> void:
 	var next := s.describe_level(lvl + 1) if lvl < s.max_level else PackedStringArray()
 	y += 4
 	if not now.is_empty():
-		for l in UiSkin.wrap_text(Game.ui_font, "Now: " + ", ".join(now), 11, box.size.x - 16):
+		for l in DrawUtil.wrap_text(Game.ui_font, "Now: " + ", ".join(now), 11, box.size.x - 16):
 			DrawUtil.text(self, Game.ui_font, Vector2(at.x + 8, y), l, 11, Palette.SUN, 1, 3, Palette.NIGHT)
 			y += 15
 	if not next.is_empty():
-		for l in UiSkin.wrap_text(Game.ui_font, "Next: " + ", ".join(next), 11, box.size.x - 16):
+		for l in DrawUtil.wrap_text(Game.ui_font, "Next: " + ", ".join(next), 11, box.size.x - 16):
 			DrawUtil.text(self, Game.ui_font, Vector2(at.x + 8, y), l, 11, Palette.GOOD, 1, 3, Palette.NIGHT)
 			y += 15
 	var problem := Game.me.learn_problem(s)
@@ -96,14 +96,13 @@ func _draw_details(s: SkillDef, at: Vector2) -> void:
 func _click(at: Vector2, button: int, _double: bool) -> void:
 	if button != MOUSE_BUTTON_LEFT:
 		return
-	var t := tab_at(at)
-	if t >= 0:
-		tab = t
-		return
 	var skills := listed()
 	for i in mini(skills.size(), ROWS):
 		if row_rect(i).has_point(at):
 			selected = skills[i].id
+
+func _tab_clicked(i: int) -> void:
+	tab = i
 
 ## Spends a Skill Point on `skill`.
 func learn(skill: SkillDef) -> void:
@@ -115,13 +114,6 @@ func _get_drag_data(at: Vector2) -> Variant:
 	for i in mini(skills.size(), ROWS):
 		var s := skills[i]
 		if _icon_rect(i).has_point(at) and s.is_active() and Game.me.skill_level(s) > 0:
-			var preview := TextureRect.new()
-			preview.texture = s.icon
-			preview.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-			preview.size = Vector2(ICON, ICON) - Vector2(6, 6)
-			preview.position = -preview.size / 2.0
-			var holder := Control.new()
-			holder.add_child(preview)
-			set_drag_preview(holder)
-			return {"from": "skills", "id": s.id}
+			set_drag_preview(drag_preview(s.icon, ICON - 6, 1.0, false))
+			return DragPayload.skill(s.id)
 	return null

@@ -147,7 +147,7 @@ func draw_tag(ci: CanvasItem, at: Vector2, top: Vector2, tags: TDNameTags) -> vo
 	if shows_tag():
 		tags.add_name(at + Vector2(0, 4), "Lv.%d %s" % [def.level, def.display_name], Palette.MIST)
 	if flags & SnapshotFlags.MOB_SHOW_HP != 0 and not def.boss:
-		UiSkin.draw_monster_hp(ci, top + Vector2(0, -16), maxf(54.0, def.size.x * 1.1), hp)
+		WorldSkin.draw_monster_hp(ci, top + Vector2(0, -16), maxf(54.0, def.size.x * 1.1), hp)
 
 ## Whether its name tag shows: only while it's hurt (its HP bar is up) or for a boss, so a
 ## field of monsters isn't a field of labels.

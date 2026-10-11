@@ -95,7 +95,7 @@ func _ready() -> void:
 	ui_theme = Theme.new()
 	ui_theme.default_font = Game.ui_font
 	ui_theme.default_font_size = 14
-	UiSkin.use_cursor()
+	UiStyle.use_cursor()
 
 	overlay = TDOverlay.new()
 	overlay.world = world
@@ -360,11 +360,11 @@ func _build_title() -> void:
 	main_menu.alignment = BoxContainer.ALIGNMENT_CENTER
 	main_menu.add_theme_constant_override("separation", 8)
 	col.add_child(main_menu)
-	menu_play_button = UiSkin.menu_button("Play", MAIN_BUTTON)
+	menu_play_button = UiStyle.menu_button("Play", MAIN_BUTTON)
 	menu_play_button.pressed.connect(_open_play_page)
-	var settings := UiSkin.menu_button("Settings", MAIN_BUTTON)
+	var settings := UiStyle.menu_button("Settings", MAIN_BUTTON)
 	settings.pressed.connect(func() -> void: open_settings())
-	var quit := UiSkin.menu_button("Quit", MAIN_BUTTON)
+	var quit := UiStyle.menu_button("Quit", MAIN_BUTTON)
 	quit.pressed.connect(_quit)
 	for b: Button in [menu_play_button, settings, quit]:
 		b.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
@@ -384,18 +384,18 @@ func _build_title() -> void:
 	host_button = _small_menu_button("Host")
 	host_button.tooltip_text = "Play and let friends register and join you (port %d)" % Net.DEFAULT_PORT
 	host_button.pressed.connect(_on_host)
-	start_panel.add_child(_row([play_button, host_button]))
-	var online := _small_title("Or play online")
+	start_panel.add_child(UiBuild.centered_row([play_button, host_button]))
+	var online := UiBuild.small_title("Or play online")
 	online.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	start_panel.add_child(online)
-	address_field = _field(Game.last_address, "Server address", 64)
-	username_field = _field(Game.last_username, "Username", AccountStore.MAX_USERNAME)
-	password_field = _field("", "Password", AccountStore.MAX_PASSWORD)
+	address_field = UiBuild.field(Game.last_address, "Server address", 64)
+	username_field = UiBuild.field(Game.last_username, "Username", AccountStore.MAX_USERNAME)
+	password_field = UiBuild.field("", "Password", AccountStore.MAX_PASSWORD)
 	password_field.secret = true
-	confirm_field = _field("", "Password again", AccountStore.MAX_PASSWORD)
+	confirm_field = UiBuild.field("", "Password again", AccountStore.MAX_PASSWORD)
 	confirm_field.secret = true
-	start_panel.add_child(_row([_titled("Server", address_field), _titled("Username", username_field), _titled("Password", password_field)]))
-	confirm_row = _row([_titled("Confirm password", confirm_field)])
+	start_panel.add_child(UiBuild.centered_row([UiBuild.titled("Server", address_field), UiBuild.titled("Username", username_field), UiBuild.titled("Password", password_field)]))
+	confirm_row = UiBuild.centered_row([UiBuild.titled("Confirm password", confirm_field)])
 	confirm_row.hide()
 	start_panel.add_child(confirm_row)
 	# Enter logs in, or registers while the second password box is showing
@@ -411,16 +411,15 @@ func _build_title() -> void:
 	register_button = _small_menu_button("Register")
 	register_button.tooltip_text = "Make an account on this server"
 	register_button.pressed.connect(_on_register)
-	start_panel.add_child(_row([login_button, register_button]))
-	message = _label("")
-	message.add_theme_color_override("font_color", Palette.BAD)
-	message.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	start_panel.add_child(UiBuild.centered_row([login_button, register_button]))
+	message = UiBuild.label("", 0, Palette.BAD, HORIZONTAL_ALIGNMENT_CENTER)
+	message.custom_minimum_size.x = 60
 	message.hide()
 	start_panel.add_child(message)
 	start_panel.add_child(UiSkin.divider())
 	var back := _small_menu_button("Back")
 	back.pressed.connect(_show_main_menu)
-	start_panel.add_child(_row([back]))
+	start_panel.add_child(UiBuild.centered_row([back]))
 
 	# a new character's first steps: the controls (TDHud._show_first_hints)
 	keys_help = Label.new()
@@ -498,47 +497,9 @@ func _build_title() -> void:
 		show_title(false)
 		_show_message(why))
 
+## A button on the title card's Play page.
 func _small_menu_button(text: String) -> Button:
-	return UiSkin.menu_button(text, Vector2(122, 42), 18)
-
-func _field(text: String, hint: String, max_length: int) -> LineEdit:
-	var f := LineEdit.new()
-	f.text = text
-	UiSkin.set_hint(f, hint)
-	f.max_length = max_length
-	f.custom_minimum_size = Vector2(164, 36)
-	return f
-
-## A field with a small title over it.
-func _titled(title_text: String, field: Control) -> VBoxContainer:
-	var col := VBoxContainer.new()
-	col.add_theme_constant_override("separation", 2)
-	col.add_child(_small_title(title_text))
-	col.add_child(field)
-	return col
-
-## A small muted label, like the titles over the title card's boxes.
-func _small_title(text: String) -> Label:
-	var l := Label.new()
-	l.text = text
-	l.add_theme_font_size_override("font_size", 12)
-	l.add_theme_color_override("font_color", Palette.MUTED)
-	return l
-
-func _label(text: String) -> Label:
-	var l := Label.new()
-	l.text = text
-	l.custom_minimum_size.x = 60
-	l.add_theme_color_override("font_color", Palette.MIST)
-	return l
-
-func _row(children: Array) -> HBoxContainer:
-	var row := HBoxContainer.new()
-	row.alignment = BoxContainer.ALIGNMENT_CENTER
-	row.add_theme_constant_override("separation", 12)
-	for c in children:
-		row.add_child(c)
-	return row
+	return UiStyle.menu_button(text, Vector2(122, 42), 18)
 
 func _on_play() -> void:
 	_show_message("")

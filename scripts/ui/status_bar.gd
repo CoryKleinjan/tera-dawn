@@ -81,10 +81,10 @@ func _draw() -> void:
 	DrawUtil.text(self, Game.num_font, c + Vector2(0, 9), str(Game.me.level), 11, Palette.SUN, 0, 3, Palette.NIGHT)
 	# HP, MP, EXP
 	var hp := Game.me.health
-	UiSkin.draw_bar(self, "hp_frame", "fill_red", bar_rect("hp_frame").position, hp.fraction(), fit("hp_frame"), "%d / %d" % [hp.hp, hp.max_hp], trail("hp"))
-	UiSkin.draw_bar(self, "mp_frame", "fill_blue", bar_rect("mp_frame").position, float(Game.me.mp) / Game.me.max_mp(), fit("mp_frame"), "%d / %d" % [Game.me.mp, Game.me.max_mp()], trail("mp"))
+	WorldSkin.draw_bar(self, "hp_frame", "fill_red", bar_rect("hp_frame").position, hp.fraction(), fit("hp_frame"), "%d / %d" % [hp.hp, hp.max_hp], trail("hp"))
+	WorldSkin.draw_bar(self, "mp_frame", "fill_blue", bar_rect("mp_frame").position, float(Game.me.mp) / Game.me.max_mp(), fit("mp_frame"), "%d / %d" % [Game.me.mp, Game.me.max_mp()], trail("mp"))
 	var exp_fill := 1.0 if Game.me.at_max_level() else float(Game.me.xp) / Game.me.xp_need()
-	UiSkin.draw_bar(self, "exp_frame", "fill_gold", exp_bar_rect().position, exp_fill, fit("exp_frame"), exp_text(), 0.0, _flash / EXP_FLASH)
+	WorldSkin.draw_bar(self, "exp_frame", "fill_gold", exp_bar_rect().position, exp_fill, fit("exp_frame"), exp_text(), 0.0, _flash / EXP_FLASH)
 	# window buttons
 	for i in TDHud.WINDOW_ACTIONS.size():
 		_window_button(TDHud.WINDOW_ACTIONS[i], _window_button_rect(i))

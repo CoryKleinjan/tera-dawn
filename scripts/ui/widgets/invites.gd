@@ -16,29 +16,11 @@ func _ready() -> void:
 	card.content_margin_top = 34
 	card.content_margin_bottom = 16
 	add_theme_stylebox_override("panel", card)
-	var col := VBoxContainer.new()
-	col.add_theme_constant_override("separation", 8)
+	var col := UiBuild.column(8)
 	add_child(col)
-	label = Label.new()
-	label.add_theme_color_override("font_color", Palette.INK)
-	label.add_theme_font_override("font", Game.ui_font)
-	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	label.custom_minimum_size.x = 300
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label = TDModal.question_label(Palette.INK, 300, 0, Game.ui_font)
 	col.add_child(label)
-	var row := HBoxContainer.new()
-	row.alignment = BoxContainer.ALIGNMENT_CENTER
-	row.add_theme_constant_override("separation", 10)
-	col.add_child(row)
-	for pair in [["Accept", true], ["Decline", false]]:
-		var b := Button.new()
-		b.text = pair[0]
-		b.focus_mode = Control.FOCUS_NONE
-		b.custom_minimum_size = Vector2(100, 32)
-		UiSkin.style_button(b)
-		var ok: bool = pair[1]
-		b.pressed.connect(func() -> void: answer(ok))
-		row.add_child(b)
+	col.add_child(TDModal.answer_row("Accept", "Decline", answer, Vector2(100, 32), 10))
 	visible = false
 
 func add(id: int, kind: String, from: String, text: String) -> void:
