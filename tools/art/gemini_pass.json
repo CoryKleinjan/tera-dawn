@@ -4788,6 +4788,255 @@
     "base_scale": 2.31,
     "text": "This is my sheet of room interior pieces for one area of the game (back wall, doorway, floor tiles and furniture), enlarged so its pixels are big blocks. Redraw EVERY piece as detailed pixel art with pixels about two and a half times smaller, keeping each piece's shape, size, position, colours, light and label exactly, and keeping the floor tiles seamless so they still repeat in both directions. Use the smaller pixels for real detail: wood grain, planks and nails, stone, fabric, glass, books, flames. The background around every piece stays flat pure magenta #FF00FF exactly as in the attached image: never grey, brown, purple or a gradient. Add nothing that is not in the attached image."
    }
+  },
+  {
+   "id": "eq_top_plate_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-6.md",
+   "batch": "T1",
+   "with": "T",
+   "refs": [],
+   "save": "eq_top_plate_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 equipment-look thread (plans/equipment-look.md, Cory: \"fix it\"): edit of the game's body sheet. Lands in art/source/top_plate_frames.png.",
+   "fill": {
+    "top": "2. TUNIC"
+   },
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in PLATE ARMOUR: a rounded metal breastplate over a short padded undershirt, with small rounded shoulder plates (pauldrons) and a leather belt; short padded sleeves, bare forearms. It follows his body in every pose and is the same size as his body (never bigger, never a separate figure). Draw it in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline, in a soft PAINTED style with smooth shading like a hand-painted storybook illustration, not pixel art. The body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. The background stays bright pure magenta #FF00FF everywhere. Draw ONLY that: nothing else changes."
+   }
+  },
+  {
+   "id": "eq_bottom_greaves_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "eq_bottom_greaves_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 equipment-look thread (plans/equipment-look.md, Cory: \"fix it\"): edit of the game's body sheet. Lands in art/source/bottom_greaves_frames.png.",
+   "fill": {
+    "item": "TROUSERS"
+   },
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in ARMOURED LEG GUARDS in place of his plain shorts: fitted padded trousers to the ankle with a metal plate on each knee and a metal shin guard on each shin. It follows his body in every pose and is the same size as his body (never bigger, never a separate figure). Draw it in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline, in a soft PAINTED style with smooth shading like a hand-painted storybook illustration, not pixel art. The body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. The background stays bright pure magenta #FF00FF everywhere. Draw ONLY that: nothing else changes."
+   }
+  },
+  {
+   "id": "eq_shoes_sabatons_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "eq_shoes_sabatons_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 equipment-look thread (plans/equipment-look.md, Cory: \"fix it\"): edit of the game's body sheet. Lands in art/source/shoes_sabatons_frames.png.",
+   "fill": {
+    "item": "CLOGS"
+   },
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in ARMOURED BOOTS on his bare feet: short metal-plated boots (sabatons) with a rounded toe cap and a strap at the ankle. It follows his body in every pose and is the same size as his body (never bigger, never a separate figure). Draw it in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline, in a soft PAINTED style with smooth shading like a hand-painted storybook illustration, not pixel art. The body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. The background stays bright pure magenta #FF00FF everywhere. Draw ONLY that: nothing else changes."
+   }
+  },
+  {
+   "id": "eq_bottom_pants_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "eq_bottom_pants_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 equipment-look thread (plans/equipment-look.md, Cory: \"fix it\"): edit of the game's body sheet. Lands in art/source/bottom_pants_frames.png.",
+   "fill": {
+    "item": "TROUSERS"
+   },
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in TROUSERS in place of his plain shorts: neat fitted trousers to the ankle with a stitched side seam, a folded cuff at the hem and a belt with a small buckle. NO patches, no rips: clean, well-made trousers. It follows his body in every pose and is the same size as his body (never bigger, never a separate figure). Draw it in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline, in a soft PAINTED style with smooth shading like a hand-painted storybook illustration, not pixel art. The body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. The background stays bright pure magenta #FF00FF everywhere. Draw ONLY that: nothing else changes."
+   }
+  },
+  {
+   "id": "eq_top_robe_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-6.md",
+   "batch": "T1",
+   "with": "T",
+   "refs": [],
+   "save": "eq_top_robe_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 equipment-look thread (plans/equipment-look.md, Cory: \"fix it\"): edit of the game's body sheet. Lands in art/source/top_robe_frames.png.",
+   "fill": {
+    "top": "5. ROBE"
+   },
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in a ROBE: a long wrap robe to the ankles with wide sleeves and a cloth sash tied at the waist. The robe is ONE solid piece of cloth with no holes, no gaps and no torn edges; the sash is the same cloth. In the run and jump poses the hem flares a little, still attached at the waist. It follows his body in every pose and is the same size as his body (never bigger, never a separate figure). Draw it in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline, in a soft PAINTED style with smooth shading like a hand-painted storybook illustration, not pixel art. The body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. The background stays bright pure magenta #FF00FF everywhere. Draw ONLY that: nothing else changes."
+   }
+  },
+  {
+   "id": "eq_top_smock_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-6.md",
+   "batch": "T1",
+   "with": "T",
+   "refs": [],
+   "save": "eq_top_smock_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 equipment-look thread (plans/equipment-look.md, Cory: \"fix it\"): edit of the game's body sheet. Lands in art/source/top_smock_frames.png.",
+   "fill": {
+    "top": "3. SMOCK"
+   },
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in a SMOCK: a loose smock to the hips with three-quarter sleeves, gathered at the neck with a drawstring. Fitted to HIS torso and arms: never a giant shirt behind him. It follows his body in every pose and is the same size as his body (never bigger, never a separate figure). Draw it in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline, in a soft PAINTED style with smooth shading like a hand-painted storybook illustration, not pixel art. The body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. The background stays bright pure magenta #FF00FF everywhere. Draw ONLY that: nothing else changes."
+   }
+  },
+  {
+   "id": "eq_bottom_shorts_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/bottom_trousers_frames.png"
+   ],
+   "save": "eq_bottom_shorts_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 equipment-look thread (plans/equipment-look.md, Cory: \"fix it\"): edit of the game's body sheet. Lands in art/source/bottom_shorts_frames.png.",
+   "fill": {
+    "item": "SHORTS"
+   },
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in SHORTS in place of his plain shorts, exactly where his plain shorts are and the same size: knee shorts with the legs rolled up into a cuff just above the knee and a small button tab at the front. It follows his body in every pose and is the same size as his body (never bigger, never a separate figure). Draw it in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline, in a soft PAINTED style with smooth shading like a hand-painted storybook illustration, not pixel art. The body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. The background stays bright pure magenta #FF00FF everywhere. Keep all 32 poses in 8 columns x 4 rows. Draw ONLY that: nothing else changes."
+   }
+  },
+  {
+   "id": "eq_shoes_clogs_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "eq_shoes_clogs_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 equipment-look thread (plans/equipment-look.md, Cory: \"fix it\"): edit of the game's body sheet. Lands in art/source/shoes_clogs_frames.png.",
+   "fill": {
+    "item": "CLOGS"
+   },
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in CLOGS on his bare feet: round wooden clogs with a cloth strap over the top of the foot. Both feet wear a clog in EVERY pose, including the walking, crouching, attacking, climbing and lying-down poses. It follows his body in every pose and is the same size as his body (never bigger, never a separate figure). Draw it in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline, in a soft PAINTED style with smooth shading like a hand-painted storybook illustration, not pixel art. The body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. The background stays bright pure magenta #FF00FF everywhere. Draw ONLY that: nothing else changes."
+   }
+  },
+  {
+   "id": "eq_cape_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-2.md",
+   "batch": "L6 (one prompt each)",
+   "with": null,
+   "refs": [],
+   "save": "eq_cape_frames.png",
+   "replaces": "art/source/paperdoll_layers.png",
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 equipment-look thread (plans/equipment-look.md, Cory: \"fix it\"): edit of the game's body sheet. Lands in art/source/cape_frames.png.",
+   "fill": {
+    "item": "CAPE"
+   },
+   "edit": {
+    "base": "art/source/paperdoll_body.png",
+    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in a CAPE: a cloth cape fastened at the front of his neck with a round clasp and a short folded collar, hanging down his back to the knees and flowing behind him when he moves. In the back-view (climbing) poses it covers his back. It follows his body in every pose and is the same size as his body (never bigger, never a separate figure). Draw it in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline, in a soft PAINTED style with smooth shading like a hand-painted storybook illustration, not pixel art. The body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. The background stays bright pure magenta #FF00FF everywhere. Draw ONLY that: nothing else changes."
+   }
+  },
+  {
+   "id": "eq_paperdoll_hats",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L7",
+   "with": null,
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "eq_paperdoll_hats.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    3,
+    4
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 equipment-look thread: painted repaint of the hat sheet (art/source/paperdoll_hats.png). Lands in art/source/paperdoll_hats.png.",
+   "edit": {
+    "base": "art/source/paperdoll_hats.png",
+    "refs": [
+     "art/source/paperdoll_body.png"
+    ],
+    "text": "The first image is my hat sheet: 15 labelled cells (5 columns x 3 rows) on magenta, each a greyscale hat on a bald head. Repaint EVERY hat in a soft PAINTED style with smooth shading like a hand-painted storybook illustration, not pixel art: same hat, same shape, same size, same position on the head, still GREYSCALE only (white to dark grey tones, no colour) with a dark outline. Keep every cell, label, head and grid line exactly where it is; the heads stay as they are. The background stays bright pure magenta #FF00FF. The second image is the character the hats are for, for reference only."
+   }
   }
  ]
 }
