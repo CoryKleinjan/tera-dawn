@@ -97,7 +97,8 @@ class GamePieces(unittest.TestCase):
     same centre line (within a pixel), and each middle piece joins itself."""
 
     def test_cut_climb_pieces_join(self):
-        man = json.load(open(os.path.join(ROOT, "art", "sheets", "ropes_props_b.json")))
+        with open(os.path.join(ROOT, "art", "sheets", "ropes_props_b.json")) as f:
+            man = json.load(f)
         out_dir = os.path.join(ROOT, man["out_dir"])
         load = lambda n: np.array(Image.open(os.path.join(out_dir, n + ".png")).convert("RGBA"))
         for style, parts in man["climb"].items():
