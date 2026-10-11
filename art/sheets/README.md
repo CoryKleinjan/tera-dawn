@@ -120,8 +120,7 @@ has its own list in `art/sheets/paperdoll_body.json`.
 ## Item icons and window art
 
 `items_gear` and `items_consumables` cut the item icons into `assets/sprites/items/`, named
-after the item ids, replacing the placeholders from `tools/art/make_item_placeholders.py`
-(which never overwrites a real icon). `elixir` and `mana_elixir` are art for future potions.
+after the item ids. `elixir` and `mana_elixir` are art for future potions.
 `ui_windows` cuts the window frame, tabs, slots, buttons and tooltip into
 `assets/sprites/ui/`, which the game windows and the status bar's window buttons draw with.
 `item_slot_hover` isn't used: the windows brighten `item_slot` on hover instead.
@@ -201,5 +200,5 @@ after the item ids, replacing the placeholders from `tools/art/make_item_placeho
 - **Hats**: `paperdoll_hats` shows each hat shape on a head (side and behind views) beside a bare
   head (`bald_side`), and `paperdoll_hats_only` is the same sheet with the heads erased. The tool
   lines each hat up by the head's shoulders and places it on every frame's head (`hat_<shape>`).
-  `paperdoll_grip` has no code yet (cut into `art/build/` only), nor do `paperdoll_body_2`,
+  `paperdoll_grip` has no code yet (cut into `art/build/` only), nor do
   `hair_tousled_frames_2` and `paperdoll_gloves_2` (new poses drawn on Gemini's own body, for later).
