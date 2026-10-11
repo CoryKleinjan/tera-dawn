@@ -58,7 +58,7 @@ func test_music_loops_and_jingles_do_not() -> void:
 func test_sound_files_are_ogg() -> void:
 	for dir in [Sound.MUSIC_DIR, Sound.SFX_DIR]:
 		for file in DirAccess.get_files_at(dir):
-			if file.ends_with(".import"):
+			if file.get_extension() in ["import", "md"]:
 				continue
 			check(file.get_extension() == "ogg", "%s/%s: sounds are .ogg files" % [dir, file])
 
