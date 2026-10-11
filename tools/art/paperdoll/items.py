@@ -154,7 +154,26 @@ def posed_item(piece, cell, px, place, twin=None):
         edge = solid & ss.dilate(~solid, 1)
         lean = (np.minimum(c[..., 0], c[..., 2]) - c[..., 1] > 40) & (np.abs(c[..., 0] - c[..., 2]) < 80)
         cut[edge & lean & ~ss.dilate(solid & ~edge & lean, 2)] = 0  # (pink art beside it stays)
-    return scaled(Image.fromarray(cut, "RGBA"), s), (int(round(x)), int(round(y)))
+    img, at = scaled(Image.fromarray(cut, "RGBA"), s), (int(round(x)), int(round(y)))
+    if place in ("top", "bottom"):
+        img = off_floor(img, at, px)
+    return img, at
+
+
+def off_floor(img, at, px):
+    """A top or bottom without the strip of floor Gemini sometimes paints under his feet: what
+    is off his body in the lowest FLOOR_ZONE of his height goes."""
+    body = px[..., 3] > 127
+    rows = np.nonzero(body.any(1))[0]
+    floor = rows.max() - (rows.max() - rows.min()) * FLOOR_ZONE
+    arr = np.asarray(img).copy()
+    h, w = arr.shape[:2]
+    ys, xs = np.mgrid[at[1]:at[1] + h, at[0]:at[0] + w]
+    inside = (ys >= 0) & (ys < body.shape[0]) & (xs >= 0) & (xs < body.shape[1])
+    near = np.zeros((h, w), bool)
+    near[inside] = (ss.dilate(body, FLOOR_SLACK) if FLOOR_SLACK else body)[ys[inside], xs[inside]]
+    arr[(ys >= floor) & ~near, 3] = 0
+    return Image.fromarray(arr)
 
 
 def item_layers(hero, rig_frames):
@@ -175,7 +194,7 @@ def item_layers(hero, rig_frames):
         drawn = item_sheet(item)
         # light pieces (cream, gold, tan) pass for his skin, so they come with a twin sheet
         # of the piece alone (art/source/worn/<id>_only.png) that says where they are
-        twins = item_sheet(item + "_only") if os.path.exists(os.path.join(WORN_DIR, item + "_only.png")) else {}
+        twins = item_sheet(item + "_only") if os.path.exists(os.path.join(WORN_DIR, item + "_only.png")) and item not in TWIN_BROKEN else {}
         front, behind = [], []
         for n, px, entry in zip(names, frames, rig_frames):
             over, back = blank(), blank()
