@@ -8493,6 +8493,448 @@
     "base": "art/source/mon_tide_slime.png",
     "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
    }
+  },
+  {
+   "id": "run_top_coat_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "run_top_coat_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 equipment-look thread: the four RUN cells redrawn on the new run poses from PR #95. Base is art/source/top_coat_frames.png with cells 9-12 swapped for the new bare body. Lands in art/source/top_coat_frames.png.",
+   "fill": {
+    "item": "TROUSERS"
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/run-redo/top_coat_base.png",
+    "text": "This sheet shows my character in 32 labelled poses (8 columns x 4 rows) on magenta. In 28 of the cells he wears a greyscale painted top. In cells 9, 10, 11 and 12 (RUN 1 to RUN 4) he is bare. Dress those four running figures in EXACTLY the same top as the other 28 cells: same shape, length, details, greyscale tones, outline and soft painted style, following his running pose and the same size as his body. Do not move, resize or re-pose any figure. Leave the other 28 cells, every label and every grid line exactly as they are. The background stays bright pure magenta #FF00FF everywhere. Draw only that: nothing else changes."
+   }
+  },
+  {
+   "id": "run_top_plate_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "run_top_plate_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 equipment-look thread: the four RUN cells redrawn on the new run poses from PR #95. Base is art/source/top_plate_frames.png with cells 9-12 swapped for the new bare body. Lands in art/source/top_plate_frames.png.",
+   "fill": {
+    "item": "TROUSERS"
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/run-redo/top_plate_base.png",
+    "text": "This sheet shows my character in 32 labelled poses (8 columns x 4 rows) on magenta. In 28 of the cells he wears a greyscale painted top. In cells 9, 10, 11 and 12 (RUN 1 to RUN 4) he is bare. Dress those four running figures in EXACTLY the same top as the other 28 cells: same shape, length, details, greyscale tones, outline and soft painted style, following his running pose and the same size as his body. Do not move, resize or re-pose any figure. Leave the other 28 cells, every label and every grid line exactly as they are. The background stays bright pure magenta #FF00FF everywhere. Draw only that: nothing else changes."
+   }
+  },
+  {
+   "id": "run_top_robe_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "run_top_robe_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 equipment-look thread: the four RUN cells redrawn on the new run poses from PR #95. Base is art/source/top_robe_frames.png with cells 9-12 swapped for the new bare body. Lands in art/source/top_robe_frames.png. Round 2: round 1 drew a short jacket.",
+   "fill": {
+    "item": "TROUSERS"
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/run-redo/top_robe_base.png",
+    "text": "This sheet shows my character in 32 labelled poses (8 columns x 4 rows) on magenta. In 28 of the cells he wears a greyscale painted top. In cells 9, 10, 11 and 12 (RUN 1 to RUN 4) he is bare. Dress those four running figures in EXACTLY the same LONG ROBE as the other 28 cells: a wrapped robe with a sash that reaches down past his knees to his ankles (see cell 13 ATTACK 1), never a short jacket. It must be: same shape, length, details, greyscale tones, outline and soft painted style, following his running pose and the same size as his body. Do not move, resize or re-pose any figure. Leave the other 28 cells, every label and every grid line exactly as they are. The background stays bright pure magenta #FF00FF everywhere. Draw only that: nothing else changes."
+   }
+  },
+  {
+   "id": "run_top_tunic_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "run_top_tunic_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 equipment-look thread: the four RUN cells redrawn on the new run poses from PR #95. Base is art/source/top_tunic_frames.png with cells 9-12 swapped for the new bare body. Lands in art/source/top_tunic_frames.png.",
+   "fill": {
+    "item": "TROUSERS"
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/run-redo/top_tunic_base.png",
+    "text": "This sheet shows my character in 32 labelled poses (8 columns x 4 rows) on magenta. In 28 of the cells he wears a greyscale painted top. In cells 9, 10, 11 and 12 (RUN 1 to RUN 4) he is bare. Dress those four running figures in EXACTLY the same top as the other 28 cells: same shape, length, details, greyscale tones, outline and soft painted style, following his running pose and the same size as his body. Do not move, resize or re-pose any figure. Leave the other 28 cells, every label and every grid line exactly as they are. The background stays bright pure magenta #FF00FF everywhere. Draw only that: nothing else changes."
+   }
+  },
+  {
+   "id": "run_top_undershirt_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "run_top_undershirt_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 equipment-look thread: the four RUN cells redrawn on the new run poses from PR #95. Base is art/source/top_undershirt_frames.png with cells 9-12 swapped for the new bare body. Lands in art/source/top_undershirt_frames.png.",
+   "fill": {
+    "item": "TROUSERS"
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/run-redo/top_undershirt_base.png",
+    "text": "This sheet shows my character in 32 labelled poses (8 columns x 4 rows) on magenta. In 28 of the cells he wears a greyscale painted top. In cells 9, 10, 11 and 12 (RUN 1 to RUN 4) he is bare. Dress those four running figures in EXACTLY the same top as the other 28 cells: same shape, length, details, greyscale tones, outline and soft painted style, following his running pose and the same size as his body. Do not move, resize or re-pose any figure. Leave the other 28 cells, every label and every grid line exactly as they are. The background stays bright pure magenta #FF00FF everywhere. Draw only that: nothing else changes."
+   }
+  },
+  {
+   "id": "run_top_vest_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "run_top_vest_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 equipment-look thread: the four RUN cells redrawn on the new run poses from PR #95. Base is art/source/top_vest_frames.png with cells 9-12 swapped for the new bare body. Lands in art/source/top_vest_frames.png.",
+   "fill": {
+    "item": "TROUSERS"
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/run-redo/top_vest_base.png",
+    "text": "This sheet shows my character in 32 labelled poses (8 columns x 4 rows) on magenta. In 28 of the cells he wears a greyscale painted top. In cells 9, 10, 11 and 12 (RUN 1 to RUN 4) he is bare. Dress those four running figures in EXACTLY the same top as the other 28 cells: same shape, length, details, greyscale tones, outline and soft painted style, following his running pose and the same size as his body. Do not move, resize or re-pose any figure. Leave the other 28 cells, every label and every grid line exactly as they are. The background stays bright pure magenta #FF00FF everywhere. Draw only that: nothing else changes."
+   }
+  },
+  {
+   "id": "run_bottom_breeches_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "run_bottom_breeches_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 equipment-look thread: the four RUN cells redrawn on the new run poses from PR #95. Base is art/source/bottom_breeches_frames.png with cells 9-12 swapped for the new bare body. Lands in art/source/bottom_breeches_frames.png.",
+   "fill": {
+    "item": "TROUSERS"
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/run-redo/bottom_breeches_base.png",
+    "text": "This sheet shows my character in 32 labelled poses (8 columns x 4 rows) on magenta. In 28 of the cells he wears a greyscale painted legwear. In cells 9, 10, 11 and 12 (RUN 1 to RUN 4) he is bare. Dress those four running figures in EXACTLY the same legwear as the other 28 cells: same shape, length, details, greyscale tones, outline and soft painted style, following his running pose and the same size as his body. Do not move, resize or re-pose any figure. Leave the other 28 cells, every label and every grid line exactly as they are. The background stays bright pure magenta #FF00FF everywhere. Draw only that: nothing else changes."
+   }
+  },
+  {
+   "id": "run_bottom_greaves_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "run_bottom_greaves_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 equipment-look thread: the four RUN cells redrawn on the new run poses from PR #95. Base is art/source/bottom_greaves_frames.png with cells 9-12 swapped for the new bare body. Lands in art/source/bottom_greaves_frames.png.",
+   "fill": {
+    "item": "TROUSERS"
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/run-redo/bottom_greaves_base.png",
+    "text": "This sheet shows my character in 32 labelled poses (8 columns x 4 rows) on magenta. In 28 of the cells he wears a greyscale painted legwear. In cells 9, 10, 11 and 12 (RUN 1 to RUN 4) he is bare. Dress those four running figures in EXACTLY the same legwear as the other 28 cells: same shape, length, details, greyscale tones, outline and soft painted style, following his running pose and the same size as his body. Do not move, resize or re-pose any figure. Leave the other 28 cells, every label and every grid line exactly as they are. The background stays bright pure magenta #FF00FF everywhere. Draw only that: nothing else changes."
+   }
+  },
+  {
+   "id": "run_bottom_pants_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "run_bottom_pants_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 equipment-look thread: the four RUN cells redrawn on the new run poses from PR #95. Base is art/source/bottom_pants_frames.png with cells 9-12 swapped for the new bare body. Lands in art/source/bottom_pants_frames.png.",
+   "fill": {
+    "item": "TROUSERS"
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/run-redo/bottom_pants_base.png",
+    "text": "This sheet shows my character in 32 labelled poses (8 columns x 4 rows) on magenta. In 28 of the cells he wears a greyscale painted legwear. In cells 9, 10, 11 and 12 (RUN 1 to RUN 4) he is bare. Dress those four running figures in EXACTLY the same legwear as the other 28 cells: same shape, length, details, greyscale tones, outline and soft painted style, following his running pose and the same size as his body. Do not move, resize or re-pose any figure. Leave the other 28 cells, every label and every grid line exactly as they are. The background stays bright pure magenta #FF00FF everywhere. Draw only that: nothing else changes."
+   }
+  },
+  {
+   "id": "run_bottom_shorts_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "run_bottom_shorts_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 equipment-look thread: the four RUN cells redrawn on the new run poses from PR #95. Base is art/source/bottom_shorts_frames.png with cells 9-12 swapped for the new bare body. Lands in art/source/bottom_shorts_frames.png.",
+   "fill": {
+    "item": "TROUSERS"
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/run-redo/bottom_shorts_base.png",
+    "text": "This sheet shows my character in 32 labelled poses (8 columns x 4 rows) on magenta. In 28 of the cells he wears a greyscale painted legwear. In cells 9, 10, 11 and 12 (RUN 1 to RUN 4) he is bare. Dress those four running figures in EXACTLY the same legwear as the other 28 cells: same shape, length, details, greyscale tones, outline and soft painted style, following his running pose and the same size as his body. Do not move, resize or re-pose any figure. Leave the other 28 cells, every label and every grid line exactly as they are. The background stays bright pure magenta #FF00FF everywhere. Draw only that: nothing else changes."
+   }
+  },
+  {
+   "id": "run_bottom_trousers_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "run_bottom_trousers_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 equipment-look thread: the four RUN cells redrawn on the new run poses from PR #95. Base is art/source/bottom_trousers_frames.png with cells 9-12 swapped for the new bare body. Lands in art/source/bottom_trousers_frames.png.",
+   "fill": {
+    "item": "TROUSERS"
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/run-redo/bottom_trousers_base.png",
+    "text": "This sheet shows my character in 32 labelled poses (8 columns x 4 rows) on magenta. In 28 of the cells he wears a greyscale painted legwear. In cells 9, 10, 11 and 12 (RUN 1 to RUN 4) he is bare. Dress those four running figures in EXACTLY the same legwear as the other 28 cells: same shape, length, details, greyscale tones, outline and soft painted style, following his running pose and the same size as his body. Do not move, resize or re-pose any figure. Leave the other 28 cells, every label and every grid line exactly as they are. The background stays bright pure magenta #FF00FF everywhere. Draw only that: nothing else changes."
+   }
+  },
+  {
+   "id": "run_shoes_boots_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "run_shoes_boots_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 equipment-look thread: the four RUN cells redrawn on the new run poses from PR #95. Base is art/source/shoes_boots_frames.png with cells 9-12 swapped for the new bare body. Lands in art/source/shoes_boots_frames.png.",
+   "fill": {
+    "item": "TROUSERS"
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/run-redo/shoes_boots_base.png",
+    "text": "This sheet shows my character in 32 labelled poses (8 columns x 4 rows) on magenta. In 28 of the cells he wears a greyscale painted footwear. In cells 9, 10, 11 and 12 (RUN 1 to RUN 4) he is bare. Dress those four running figures in EXACTLY the same footwear as the other 28 cells: same shape, length, details, greyscale tones, outline and soft painted style, following his running pose and the same size as his body. Do not move, resize or re-pose any figure. Leave the other 28 cells, every label and every grid line exactly as they are. The background stays bright pure magenta #FF00FF everywhere. Draw only that: nothing else changes."
+   }
+  },
+  {
+   "id": "run_shoes_clogs_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "run_shoes_clogs_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 equipment-look thread: the four RUN cells redrawn on the new run poses from PR #95. Base is art/source/shoes_clogs_frames.png with cells 9-12 swapped for the new bare body. Lands in art/source/shoes_clogs_frames.png.",
+   "fill": {
+    "item": "TROUSERS"
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/run-redo/shoes_clogs_base.png",
+    "text": "This sheet shows my character in 32 labelled poses (8 columns x 4 rows) on magenta. In 28 of the cells he wears a greyscale painted footwear. In cells 9, 10, 11 and 12 (RUN 1 to RUN 4) he is bare. Dress those four running figures in EXACTLY the same footwear as the other 28 cells: same shape, length, details, greyscale tones, outline and soft painted style, following his running pose and the same size as his body. Do not move, resize or re-pose any figure. Leave the other 28 cells, every label and every grid line exactly as they are. The background stays bright pure magenta #FF00FF everywhere. Draw only that: nothing else changes."
+   }
+  },
+  {
+   "id": "run_shoes_sabatons_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "run_shoes_sabatons_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 equipment-look thread: the four RUN cells redrawn on the new run poses from PR #95. Base is art/source/shoes_sabatons_frames.png with cells 9-12 swapped for the new bare body. Lands in art/source/shoes_sabatons_frames.png.",
+   "fill": {
+    "item": "TROUSERS"
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/run-redo/shoes_sabatons_base.png",
+    "text": "This sheet shows my character in 32 labelled poses (8 columns x 4 rows) on magenta. In 28 of the cells he wears a greyscale painted footwear. In cells 9, 10, 11 and 12 (RUN 1 to RUN 4) he is bare. Dress those four running figures in EXACTLY the same footwear as the other 28 cells: same shape, length, details, greyscale tones, outline and soft painted style, following his running pose and the same size as his body. Do not move, resize or re-pose any figure. Leave the other 28 cells, every label and every grid line exactly as they are. The background stays bright pure magenta #FF00FF everywhere. Draw only that: nothing else changes."
+   }
+  },
+  {
+   "id": "run_shoes_sandals_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "run_shoes_sandals_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 equipment-look thread: the four RUN cells redrawn on the new run poses from PR #95. Base is art/source/shoes_sandals_frames.png with cells 9-12 swapped for the new bare body. Lands in art/source/shoes_sandals_frames.png.",
+   "fill": {
+    "item": "TROUSERS"
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/run-redo/shoes_sandals_base.png",
+    "text": "This sheet shows my character in 32 labelled poses (8 columns x 4 rows) on magenta. In 28 of the cells he wears a greyscale painted footwear. In cells 9, 10, 11 and 12 (RUN 1 to RUN 4) he is bare. Dress those four running figures in EXACTLY the same footwear as the other 28 cells: same shape, length, details, greyscale tones, outline and soft painted style, following his running pose and the same size as his body. Do not move, resize or re-pose any figure. Leave the other 28 cells, every label and every grid line exactly as they are. The background stays bright pure magenta #FF00FF everywhere. Draw only that: nothing else changes."
+   }
+  },
+  {
+   "id": "run_shoes_shoes_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "run_shoes_shoes_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 equipment-look thread: the four RUN cells redrawn on the new run poses from PR #95. Base is art/source/shoes_shoes_frames.png with cells 9-12 swapped for the new bare body. Lands in art/source/shoes_shoes_frames.png.",
+   "fill": {
+    "item": "TROUSERS"
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/run-redo/shoes_shoes_base.png",
+    "text": "This sheet shows my character in 32 labelled poses (8 columns x 4 rows) on magenta. In 28 of the cells he wears a greyscale painted footwear. In cells 9, 10, 11 and 12 (RUN 1 to RUN 4) he is bare. Dress those four running figures in EXACTLY the same footwear as the other 28 cells: same shape, length, details, greyscale tones, outline and soft painted style, following his running pose and the same size as his body. Do not move, resize or re-pose any figure. Leave the other 28 cells, every label and every grid line exactly as they are. The background stays bright pure magenta #FF00FF everywhere. Draw only that: nothing else changes."
+   }
+  },
+  {
+   "id": "run_cape_frames",
+   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
+   "batch": "L5",
+   "with": "L",
+   "refs": [
+    "hero_main.png",
+    "paperdoll_body.png"
+   ],
+   "save": "run_cape_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "paperdoll_body",
+   "note": "2026-10-11 equipment-look thread: the four RUN cells redrawn on the new run poses from PR #95. Base is art/source/cape_frames.png with cells 9-12 swapped for the new bare body. Lands in art/source/cape_frames.png.",
+   "fill": {
+    "item": "TROUSERS"
+   },
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/run-redo/cape_base.png",
+    "text": "This sheet shows my character in 32 labelled poses (8 columns x 4 rows) on magenta. In 28 of the cells he wears a greyscale painted cape. In cells 9, 10, 11 and 12 (RUN 1 to RUN 4) he is bare. Dress those four running figures in EXACTLY the same cape as the other 28 cells: same shape, length, details, greyscale tones, outline and soft painted style, following his running pose and the same size as his body. Do not move, resize or re-pose any figure. Leave the other 28 cells, every label and every grid line exactly as they are. The background stays bright pure magenta #FF00FF everywhere. Draw only that: nothing else changes."
+   }
   }
  ]
 }
