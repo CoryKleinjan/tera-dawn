@@ -44,9 +44,9 @@ const WORN_STYLE_PLACES := {Slot.TOP: "top", Slot.BOTTOM: "bottom", Slot.SHOES: 
 ## e.g. "tunic", "coat", "robe", "vest"; "trousers", "breeches"; "shoes", "boots", "sandals",
 ## "clogs". Empty: it only recolours the part of the body it covers.
 @export var worn_style: StringName
-## The stand-in drawn for hats (LookShapes): "cap", "helm", "hood", "bandana", "wizard",
-## "tricorn". Empty: hats use "cap" (weapons are drawn by `weapon_kind`, see Paperdoll). For
-## shields, the shape of the shield art: "kite", or empty for a round one (Paperdoll.SHIELDS).
+## The shape of a hat or shield's art. Hats: "cap", "helm", "hood", "bandana", "wizard",
+## "tricorn" (Paperdoll.hat_frames; empty: a cap). Shields: "kite", or empty for a round one
+## (Paperdoll.SHIELDS).
 @export var look_shape: StringName
 ## The colour it's shown in. Fully transparent takes the main colour of its icon.
 @export var look_color := Color(0, 0, 0, 0)
@@ -72,14 +72,6 @@ static func families_text(families: Array[StringName]) -> String:
 	if names.size() <= 1:
 		return "".join(names)
 	return ", ".join(names.slice(0, -1)) + " and " + names[-1]
-
-## The stand-in shape shown while it's worn.
-func worn_shape() -> StringName:
-	if look_shape != &"":
-		return look_shape
-	if slot == Slot.WEAPON:
-		return weapon_kind if weapon_kind != &"" else &"sword"
-	return &"cap" if slot == Slot.HAT else &""
 
 ## The colour it's shown in while worn: `look_color`, else its icon's main colour.
 func worn_color() -> Color:

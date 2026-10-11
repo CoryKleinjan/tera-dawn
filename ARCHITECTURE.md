@@ -165,8 +165,10 @@ only what the creator offers and makes a level 1 character in the starting job
   hole where his fingers wrap the grip, behind him on far-hand frames and on his back while
   he climbs or sits. Each kind is held its own way (a bow upright, a staff planted; "holds"
   in `art/sheets/paperdoll_rig.json`), and a weapon with its own held picture uses it in its
-  own colours instead of its kind's tinted one. Hats are code-drawn stand-ins drawn at a rig
-  point (`LookShapes`, picked by `EquipDef.look_shape`). `LookDef.frames` and
+  own colours instead of its kind's tinted one. Gear layers (worn cuts, gloves, capes,
+  shields, hats, tinted weapons) are tinted by `shaders/gear_tint.gdshaderinc`, which keeps
+  the painted shading. Hats are painted layers too, one per shape (`hat_<shape>`, picked by
+  `EquipDef.look_shape`); an open coat gets an undershirt. `LookDef.frames` and
   `EquipDef.worn_frames` take any new layered art without code changes. The strip is cut at
   the painted sheet's full resolution: `Paperdoll.ART_SCALE` strip pixels make one hero pixel.
 - **Animation**: each weapon fights its own way (`WeaponStyle`): a skill's motion ("attack",
@@ -235,7 +237,7 @@ scripts/
   systems/            Character (and CharacterCodec, its save format), Appearance, NewCharacter,
                       Inventory, Equipment,
                       ItemStack, CharacterStats, MonsterBook, Achievements, Balance
-  components/         Health, Hitbox, SpriteRig, Paperdoll (+ Sprite, View), LookShapes
+  components/         Health, Hitbox, SpriteRig, Paperdoll (+ Sprite, View)
   actors/             Player (you), Avatar (other players), Companion (chairs, pets), Mob, Npc, Drop views
   world/              World (what you see), WorldFx (hits, numbers, effects), Stage +
                       Terrain/Backdrop/Scenery builders, MapLayout, Platform, DropFlight, Combat

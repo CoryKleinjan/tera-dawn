@@ -37,9 +37,7 @@ func _init() -> void:
 	var mat := ShaderMaterial.new()
 	mat.shader = SHADER
 	_body.material = mat
-	_back.draw.connect(_draw_overlays.bind(_back, true))
 	_body.draw.connect(_draw_body)
-	_front.draw.connect(_draw_overlays.bind(_front, false))
 	set_look({})
 
 func set_look(new_look: Dictionary) -> void:
@@ -55,7 +53,6 @@ func set_look(new_look: Dictionary) -> void:
 		var v := Control.new()
 		v.set_anchors_preset(Control.PRESET_FULL_RECT)
 		v.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		v.show_behind_parent = true # under the parent's own drawing (the stand-ins)
 		var mat := ShaderMaterial.new()
 		mat.shader = LAYER_SHADER
 		l.apply(mat)
@@ -116,21 +113,4 @@ func _draw_layer(on: Control, l: Paperdoll.Layer) -> void:
 		return
 	var rect := _frame_rect(on)
 	on.draw_texture_rect(l.frames.get_frame_texture(animation, mini(frame(), l.frames.get_frame_count(animation) - 1)), rect, false)
-	on.draw_set_transform(Vector2.ZERO)
-
-## The stand-ins behind the body or in front of it (over the layers).
-func _draw_overlays(on: Control, behind: bool) -> void:
-	var index := Paperdoll.frame_index(_texture())
-	var box := _frame_box()
-	var s: float = box[0]
-	for o in doll.overlays:
-		if LookShapes.behind(o.shape) != behind:
-			continue
-		var at: Variant = Paperdoll.place_overlay(o.shape, index, facing < 0)
-		if at == null:
-			continue
-		var tex := LookShapes.texture(o.shape, o.color)
-		var scale: float = at["scale"] * s
-		on.draw_set_transform(box[1] + at["centre"] * s, at["angle"], Vector2(-scale if facing < 0 else scale, scale))
-		on.draw_texture(tex, -tex.get_size() / 2.0)
 	on.draw_set_transform(Vector2.ZERO)

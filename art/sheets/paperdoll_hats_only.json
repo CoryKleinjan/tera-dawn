@@ -1,0 +1,176 @@
+{
+  "source": "art/source/paperdoll_hats_only.png",
+  "grid": {
+    "rows": [
+      0,
+      374,
+      786,
+      1190
+    ],
+    "cols": [
+      0,
+      351,
+      708,
+      1066,
+      1423,
+      1774
+    ]
+  },
+  "scale": 1.0,
+  "label_band": 0.14,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/paperdoll/hats_only",
+  "cells": [
+    [
+      "cap_side",
+      "cap_behind",
+      "bald_side",
+      "hood_side",
+      "hood_behind"
+    ],
+    [
+      "bandana_side",
+      "bandana_behind",
+      "bandana_side_2",
+      "helm_side",
+      "helm_behind"
+    ],
+    [
+      "wizard_side",
+      "wizard_behind",
+      "wizard_behind_2",
+      "tricorn_side",
+      "tricorn_behind"
+    ]
+  ],
+  "inset": 10,
+  "overrides": {
+    "cap_side": {
+      "blank": [
+        [
+          0,
+          0,
+          169,
+          33
+        ]
+      ]
+    },
+    "cap_behind": {
+      "blank": [
+        [
+          7,
+          0,
+          216,
+          33
+        ]
+      ]
+    },
+    "bald_side": {
+      "blank_top": 33
+    },
+    "hood_side": {
+      "blank": [
+        [
+          7,
+          0,
+          199,
+          33
+        ]
+      ]
+    },
+    "hood_behind": {
+      "blank": [
+        [
+          7,
+          0,
+          235,
+          33
+        ]
+      ]
+    },
+    "bandana_side": {
+      "blank": [
+        [
+          0,
+          0,
+          245,
+          33
+        ]
+      ]
+    },
+    "bandana_behind": {
+      "blank": [
+        [
+          7,
+          0,
+          289,
+          33
+        ]
+      ]
+    },
+    "bandana_side_2": {
+      "blank_top": 34
+    },
+    "helm_side": {
+      "blank": [
+        [
+          8,
+          0,
+          201,
+          33
+        ]
+      ]
+    },
+    "helm_behind": {
+      "blank": [
+        [
+          7,
+          0,
+          236,
+          33
+        ]
+      ]
+    },
+    "wizard_side": {
+      "blank": [
+        [
+          0,
+          0,
+          223,
+          35
+        ]
+      ]
+    },
+    "wizard_behind": {
+      "blank": [
+        [
+          6,
+          0,
+          283,
+          35
+        ]
+      ]
+    },
+    "tricorn_side": {
+      "blank": [
+        [
+          8,
+          0,
+          258,
+          35
+        ]
+      ]
+    },
+    "tricorn_behind": {
+      "blank": [
+        [
+          8,
+          0,
+          298,
+          35
+        ]
+      ]
+    }
+  }
+}

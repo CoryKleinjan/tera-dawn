@@ -2,14 +2,13 @@ class_name PaperdollSprite
 extends Node3D
 ## The dressed hero in the 3D stage. It goes on the hero's AnimatedSprite3D (SpriteRig's
 ## body): it recolours his skin and clothes with the paperdoll shader, and keeps the layers
-## (hair, face, gear) and the hat and weapon pictures (LookShapes) in step with whatever
-## frame he is showing.
+## (hair, face, gear) in step with whatever frame he is showing.
 ## SpriteRig.dress() makes one; give it a look with `set_look`.
 
 const SHADER := preload("res://shaders/paperdoll_sprite.gdshader")
 ## The layers' own: lit like the body, with the same light floor (character_light.gdshaderinc).
 const LAYER_SHADER := preload("res://shaders/paperdoll_layer.gdshader")
-## How far pictures sit in front of (or behind) the body, in 3D units. Layers are spread
+## How far layers sit in front of (or behind) the body, in 3D units. Layers are spread
 ## within that, in drawing order.
 const DEPTH := 0.01
 
@@ -18,7 +17,6 @@ var doll: Paperdoll
 var look := {}
 var _material: ShaderMaterial
 var _texel := 1.0
-var _overlays: Array[Sprite3D] = []
 var _layers: Array[AnimatedSprite3D] = []
 ## The streak his weapon leaves and the flash of a shot.
 var trail: WeaponTrail
@@ -46,16 +44,9 @@ func set_look(new_look: Dictionary) -> void:
 	look = new_look.duplicate(true)
 	doll = Paperdoll.dress(look)
 	doll.apply(_material)
-	for n in _overlays + _layers:
+	for n in _layers:
 		n.queue_free()
-	_overlays.clear()
 	_layers.clear()
-	for o in doll.overlays:
-		var s := Sprite3D.new()
-		s.texture = LookShapes.texture(o.shape, o.color)
-		TDStage.style_sprite(s, _texel)
-		add_child(s)
-		_overlays.append(s)
 	var count := doll.layers.size()
 	for i in count:
 		var l := doll.layers[i]
@@ -87,18 +78,6 @@ func sync() -> void:
 		_index = body.frame
 		_frame = frame
 	trail.paused = body.speed_scale == 0.0
-	for i in _overlays.size():
-		var s := _overlays[i]
-		var shape := doll.overlays[i].shape
-		var at: Variant = Paperdoll.place_overlay(shape, frame, mirror)
-		s.visible = at != null
-		if at == null:
-			continue
-		s.position = _to_local(at["centre"]) + Vector3(0, 0, -DEPTH if LookShapes.behind(shape) else DEPTH)
-		s.rotation.z = -at["angle"]
-		s.scale = Vector3(at["scale"], at["scale"], 1.0)
-		s.flip_h = mirror
-		s.modulate = body.modulate
 	for i in _layers.size():
 		var a := _layers[i]
 		if a.sprite_frames.has_animation(body.animation):
@@ -117,8 +96,3 @@ static func _layer_material(l: Paperdoll.Layer) -> ShaderMaterial:
 	mat.set_shader_parameter(&"strip", tex.atlas if tex is AtlasTexture else tex)
 	l.apply(mat)
 	return mat
-
-## A point of the frame (pixels from its top-left) in the body's own space, whose origin
-## is the bottom middle of the frame.
-func _to_local(px: Vector2) -> Vector3:
-	return Vector3(px.x - Paperdoll.FRAME_SIZE.x / 2.0, Paperdoll.FRAME_SIZE.y - px.y, 0.0) * body.pixel_size
