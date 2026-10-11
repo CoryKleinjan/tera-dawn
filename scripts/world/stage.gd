@@ -48,6 +48,9 @@ const SCENERY_LAYER := 0.9
 ## Land: platform front skins sit at LAND_FRONT; decoration and props are clamped behind it.
 ## (The grass on the floor's front edge is nearer, but it shows below everyone's feet.)
 const LAND_FRONT := 0.14
+## Portals stand in front of all the land and scenery (so nothing hides the way out) but behind
+## everything you can touch: ropes, NPCs, monsters, drops and the player.
+const Z_PORTAL := 0.17
 const Z_CLIMBABLE := 0.2
 const Z_NPC := 0.3
 ## Monsters spread over [Z_MONSTER, Z_MONSTER + Z_MONSTER_SPREAD) so overlapping ones don't flicker.
@@ -77,7 +80,6 @@ var fade := 0.0
 var _fade_target := 0.0
 
 static var _soft_dot: Texture2D
-static var _shadow: Texture2D
 
 # ---------- helpers for everyone ----------
 
@@ -162,17 +164,6 @@ static func glow_sprite(texture: Texture2D, col: Color, texel := TEXEL) -> Sprit
 	s.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	s.offset = Vector2.ZERO
 	s.modulate = col
-	return s
-
-## The soft round shadow under a character, `width` game pixels across.
-static func shadow_sprite(width: float) -> Sprite3D:
-	if _shadow == null:
-		_shadow = load("res://assets/sprites/fx/blob_shadow.png")
-	var s := sprite(_shadow, width / _shadow.get_width(), false)
-	s.offset = Vector2.ZERO
-	s.axis = Vector3.AXIS_Y
-	s.alpha_cut = SpriteBase3D.ALPHA_CUT_DISABLED
-	s.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	return s
 
 static func light(col: Color, energy: float, range_: float, shadows := false) -> OmniLight3D:

@@ -18,7 +18,6 @@ var speech_t := 0
 var _walk := 0.0
 var _seat: Sprite3D
 var _body: SpriteBase3D
-var _shadow: Sprite3D
 
 func set_chair(id: StringName) -> void:
 	var c := Content.items.get(id) as ChairDef
@@ -38,11 +37,9 @@ func set_pet(id: StringName, at: Vector2) -> void:
 	if p == pet:
 		return
 	pet = p
-	for s in [_body, _shadow]:
-		if s:
-			s.queue_free()
+	if _body:
+		_body.queue_free()
 	_body = null
-	_shadow = null
 	speech_t = 0
 	if pet and pet.sprite_frames:
 		pet_pos = at
@@ -52,14 +49,12 @@ func set_pet(id: StringName, at: Vector2) -> void:
 		_body = a
 		add_child(_body)
 		_play(&"idle")
-		_shadow = TDStage.shadow_sprite(34)
-		add_child(_shadow)
 	elif pet and pet.icon:
 		pet_pos = at
 		_body = TDStage.sprite(pet.icon, TDStage.TEXEL * pet.body_scale)
 		add_child(_body)
-		_shadow = TDStage.shadow_sprite(34)
-		add_child(_shadow)
+	if _body:
+		_body.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 
 func say(text: String) -> void:
 	speech = text
@@ -97,7 +92,6 @@ func follow(owner_feet: Vector2, owner_face: int, z: float, ground: float) -> vo
 		hop = absf(sin(_walk)) * 6.0
 	_body.position = TDStage.to3d(pet_pos + Vector2(0, -hop), z + 0.01)
 	_body.flip_h = pet_face < 0
-	_shadow.position = TDStage.to3d(Vector2(pet_pos.x, ground), z - 0.02) + Vector3(0, 0.02, 0)
 
 ## How far the sitter is raised to sit on the chair, in game pixels.
 func seat_lift() -> float:

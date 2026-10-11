@@ -91,7 +91,7 @@ func step() -> void:
 
 func _ready() -> void:
 	rig = SpriteRig.new()
-	rig.setup(TDPlayer.HERO_FRAMES, null, TDStage.TEXEL * TDPlayer.HERO_SCALE / Paperdoll.ART_SCALE, TDPlayer.SHADOW_WIDTH)
+	rig.setup(TDPlayer.HERO_FRAMES, null, TDStage.TEXEL * TDPlayer.HERO_SCALE / Paperdoll.ART_SCALE)
 	rig.add_light(TDPlayer.LIGHT, TDPlayer.LIGHT_ENERGY, TDPlayer.LIGHT_HEIGHT)
 	add_child(rig)
 	companion = TDCompanion.new()
@@ -102,9 +102,8 @@ func _process(_delta: float) -> void:
 		return
 	rig.visible = known
 	var climbing := flags & SnapshotFlags.PLAYER_CLIMBING != 0
-	var airborne := climbing or fainted() or world.layout.ground_below(position) - position.y > 200.0
 	var at := world.drawn(self)
-	rig.place(at + Vector2(0, -companion.seat_lift()), TDStage.Z_OTHER_PLAYER, NAN if airborne else world.layout.ground_below(position))
+	rig.place(at + Vector2(0, -companion.seat_lift()), TDStage.Z_OTHER_PLAYER)
 	rig.play(&"faint" if fainted() else animation, _swing)
 	rig.set_speed(TDPlayer.stride_speed(animation, _moved_x))
 	_swing = false
