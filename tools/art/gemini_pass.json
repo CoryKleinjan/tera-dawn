@@ -5798,6 +5798,594 @@
    }
   },
   {
+   "id": "paint_ui",
+   "prompts": null,
+   "batch": "painted UI: ui (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ui_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/ui.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_ui_hud",
+   "prompts": null,
+   "batch": "painted UI: ui_hud (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ui_hud_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/ui_hud.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_ui_windows",
+   "prompts": null,
+   "batch": "painted UI: ui_windows (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ui_windows_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/ui_windows.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_ui_menu",
+   "prompts": null,
+   "batch": "painted UI: ui_menu (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ui_menu_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/ui_menu.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_ui_dialogue",
+   "prompts": null,
+   "batch": "painted UI: ui_dialogue (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ui_dialogue_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/ui_dialogue.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_ui_book",
+   "prompts": null,
+   "batch": "painted UI: ui_book (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ui_book_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/ui_book.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_ui_creator",
+   "prompts": null,
+   "batch": "painted UI: ui_creator (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ui_creator_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/ui_creator.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_ui_social",
+   "prompts": null,
+   "batch": "painted UI: ui_social (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ui_social_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/ui_social.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_world_map",
+   "prompts": null,
+   "batch": "painted UI: world_map (edit)",
+   "with": null,
+   "refs": [],
+   "save": "world_map_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/world_map.png",
+    "text": "Repaint this whole image as soft hand-painted map art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the land, sea and parchment, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, towns, roads, coastlines and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_ui_old",
+   "prompts": null,
+   "batch": "painted UI: ui_old (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ui_old_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/ui_old.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_ui_hud_old",
+   "prompts": null,
+   "batch": "painted UI: ui_hud_old (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ui_hud_old_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/ui_hud_old.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_ui_menu_old",
+   "prompts": null,
+   "batch": "painted UI: ui_menu_old (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ui_menu_old_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/ui_menu_old.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_ui_dialogue_old",
+   "prompts": null,
+   "batch": "painted UI: ui_dialogue_old (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ui_dialogue_old_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/ui_dialogue_old.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_skill_icons",
+   "prompts": null,
+   "batch": "painted UI: skill_icons (edit)",
+   "with": null,
+   "refs": [],
+   "save": "skill_icons_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/skill_icons.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_items_accessories",
+   "prompts": null,
+   "batch": "painted UI: items_accessories (edit)",
+   "with": null,
+   "refs": [],
+   "save": "items_accessories_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/items_accessories.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_items_archer",
+   "prompts": null,
+   "batch": "painted UI: items_archer (edit)",
+   "with": null,
+   "refs": [],
+   "save": "items_archer_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/items_archer.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_items_charms_food",
+   "prompts": null,
+   "batch": "painted UI: items_charms_food (edit)",
+   "with": null,
+   "refs": [],
+   "save": "items_charms_food_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/items_charms_food.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_items_consumables",
+   "prompts": null,
+   "batch": "painted UI: items_consumables (edit)",
+   "with": null,
+   "refs": [],
+   "save": "items_consumables_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/items_consumables.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_items_gear",
+   "prompts": null,
+   "batch": "painted UI: items_gear (edit)",
+   "with": null,
+   "refs": [],
+   "save": "items_gear_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/items_gear.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_items_magician",
+   "prompts": null,
+   "batch": "painted UI: items_magician (edit)",
+   "with": null,
+   "refs": [],
+   "save": "items_magician_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/items_magician.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_items_parts_1",
+   "prompts": null,
+   "batch": "painted UI: items_parts_1 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "items_parts_1_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/items_parts_1.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_items_parts_2",
+   "prompts": null,
+   "batch": "painted UI: items_parts_2 (edit)",
+   "with": null,
+   "refs": [],
+   "save": "items_parts_2_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/items_parts_2.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_items_pirate",
+   "prompts": null,
+   "batch": "painted UI: items_pirate (edit)",
+   "with": null,
+   "refs": [],
+   "save": "items_pirate_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/items_pirate.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_items_scrolls",
+   "prompts": null,
+   "batch": "painted UI: items_scrolls (edit)",
+   "with": null,
+   "refs": [],
+   "save": "items_scrolls_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/items_scrolls.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_items_starter",
+   "prompts": null,
+   "batch": "painted UI: items_starter (edit)",
+   "with": null,
+   "refs": [],
+   "save": "items_starter_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/items_starter.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_items_thief",
+   "prompts": null,
+   "batch": "painted UI: items_thief (edit)",
+   "with": null,
+   "refs": [],
+   "save": "items_thief_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/items_thief.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_items_warrior",
+   "prompts": null,
+   "batch": "painted UI: items_warrior (edit)",
+   "with": null,
+   "refs": [],
+   "save": "items_warrior_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "art/source/items_warrior.png",
+    "text": "Repaint this whole image as soft hand-painted game UI art, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture on the leather, parchment and brass, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same pieces, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout, and the cell labels unchanged. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_title_backdrop",
+   "prompts": null,
+   "batch": "painted UI: title_backdrop (edit)",
+   "with": null,
+   "refs": [],
+   "save": "title_backdrop_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted UI thread: the pixel-art UI sheet repainted as soft painted art, same layout (plans/painted-ui.md).",
+   "edit": {
+    "base": "assets/sprites/ui/title_backdrop.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted interface of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Edges and outlines stay crisp and clean, not blurry. Keep everything else exactly the same: the same scene, shapes, silhouettes, sizes, positions, colours, stitching, rivets, icons and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
    "id": "paint_mon_dewling",
    "prompts": null,
    "batch": "painted look: dewling (edit)",
@@ -5816,6 +6404,1119 @@
    "edit": {
     "base": "art/source/dewling.png",
     "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_acorn_sentry",
+   "prompts": null,
+   "batch": "painted look: acorn_sentry (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_acorn_sentry_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_acorn_sentry.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_arcane_sentinel",
+   "prompts": null,
+   "batch": "painted look: arcane_sentinel (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_arcane_sentinel_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_arcane_sentinel.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_ash_bat",
+   "prompts": null,
+   "batch": "painted look: ash_bat (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_ash_bat_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_ash_bat.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_ash_wraith",
+   "prompts": null,
+   "batch": "painted look: ash_wraith (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_ash_wraith_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_ash_wraith.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_ashshell",
+   "prompts": null,
+   "batch": "painted look: ashshell (edit)",
+   "with": null,
+   "refs": [],
+   "save": "anim_ashshell_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/anim_ashshell.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_barkcap",
+   "prompts": null,
+   "batch": "painted look: barkcap (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_barkcap_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_barkcap.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_barnacle_boar",
+   "prompts": null,
+   "batch": "painted look: barnacle_boar (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_barnacle_boar_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_barnacle_boar.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_boulderkin",
+   "prompts": null,
+   "batch": "painted look: boulderkin (edit)",
+   "with": null,
+   "refs": [],
+   "save": "anim_boulderkin_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/anim_boulderkin.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_bramble_boar",
+   "prompts": null,
+   "batch": "painted look: bramble_boar (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_bramble_boar_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_bramble_boar.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_cinder_hog",
+   "prompts": null,
+   "batch": "painted look: cinder_hog (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_cinder_hog_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_cinder_hog.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_cinder_imp",
+   "prompts": null,
+   "batch": "painted look: cinder_imp (edit)",
+   "with": null,
+   "refs": [],
+   "save": "anim_cinder_imp_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/anim_cinder_imp.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_cinder_pup",
+   "prompts": null,
+   "batch": "painted look: cinder_pup (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_cinder_pup_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_cinder_pup.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_cliff_harpy",
+   "prompts": null,
+   "batch": "painted look: cliff_harpy (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_cliff_harpy_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_cliff_harpy.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_coral_turret",
+   "prompts": null,
+   "batch": "painted look: coral_turret (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_coral_turret_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_coral_turret.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_crypt_shell",
+   "prompts": null,
+   "batch": "painted look: crypt_shell (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_crypt_shell_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_crypt_shell.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_crystal_golem",
+   "prompts": null,
+   "batch": "painted look: crystal_golem (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_crystal_golem_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_crystal_golem.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_dusk_moth",
+   "prompts": null,
+   "batch": "painted look: dusk_moth (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_dusk_moth_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_dusk_moth.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_dusk_stalker",
+   "prompts": null,
+   "batch": "painted look: dusk_stalker (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_dusk_stalker_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_dusk_stalker.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_ember_boar",
+   "prompts": null,
+   "batch": "painted look: ember_boar (edit)",
+   "with": null,
+   "refs": [],
+   "save": "ember_boar_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/ember_boar.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_fire_imp_archer",
+   "prompts": null,
+   "batch": "painted look: fire_imp_archer (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_fire_imp_archer_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_fire_imp_archer.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_flame_boar_chief",
+   "prompts": null,
+   "batch": "painted look: flame_boar_chief (edit)",
+   "with": null,
+   "refs": [],
+   "save": "anim_flame_boar_chief_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/anim_flame_boar_chief.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_forge_golem",
+   "prompts": null,
+   "batch": "painted look: forge_golem (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_forge_golem_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_forge_golem.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_gloomcap",
+   "prompts": null,
+   "batch": "painted look: gloomcap (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_gloomcap_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_gloomcap.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_glowcap",
+   "prompts": null,
+   "batch": "painted look: glowcap (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_glowcap_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_glowcap.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_grove_wisp",
+   "prompts": null,
+   "batch": "painted look: grove_wisp (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_grove_wisp_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_grove_wisp.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_kelp_lurker",
+   "prompts": null,
+   "batch": "painted look: kelp_lurker (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_kelp_lurker_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_kelp_lurker.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_lantern_wisp",
+   "prompts": null,
+   "batch": "painted look: lantern_wisp (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_lantern_wisp_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_lantern_wisp.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_leafwing",
+   "prompts": null,
+   "batch": "painted look: leafwing (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_leafwing_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_leafwing.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_lume_wisp",
+   "prompts": null,
+   "batch": "painted look: lume_wisp (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_lume_wisp_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_lume_wisp.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_magma_shell",
+   "prompts": null,
+   "batch": "painted look: magma_shell (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_magma_shell_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_magma_shell.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_molten_king",
+   "prompts": null,
+   "batch": "painted look: molten_king (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_molten_king_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_molten_king.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_mossling",
+   "prompts": null,
+   "batch": "painted look: mossling (edit)",
+   "with": null,
+   "refs": [],
+   "save": "anim_mossling_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/anim_mossling.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_night_boar",
+   "prompts": null,
+   "batch": "painted look: night_boar (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_night_boar_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_night_boar.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_petal_bat",
+   "prompts": null,
+   "batch": "painted look: petal_bat (edit)",
+   "with": null,
+   "refs": [],
+   "save": "anim_petal_bat_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/anim_petal_bat.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_prism_bit",
+   "prompts": null,
+   "batch": "painted look: prism_bit (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_prism_bit_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_prism_bit.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_prism_slime",
+   "prompts": null,
+   "batch": "painted look: prism_slime (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_prism_slime_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_prism_slime.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_reef_gull",
+   "prompts": null,
+   "batch": "painted look: reef_gull (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_reef_gull_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_reef_gull.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_sand_crab",
+   "prompts": null,
+   "batch": "painted look: sand_crab (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_sand_crab_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_sand_crab.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_sea_gull",
+   "prompts": null,
+   "batch": "painted look: sea_gull (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_sea_gull_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_sea_gull.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_shade_imp",
+   "prompts": null,
+   "batch": "painted look: shade_imp (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_shade_imp_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_shade_imp.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_shell_crab",
+   "prompts": null,
+   "batch": "painted look: shell_crab (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_shell_crab_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_shell_crab.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_slag_bit",
+   "prompts": null,
+   "batch": "painted look: slag_bit (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_slag_bit_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_slag_bit.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_slag_slime",
+   "prompts": null,
+   "batch": "painted look: slag_slime (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_slag_slime_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_slag_slime.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_spell_imp",
+   "prompts": null,
+   "batch": "painted look: spell_imp (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_spell_imp_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_spell_imp.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_spore_puff",
+   "prompts": null,
+   "batch": "painted look: spore_puff (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_spore_puff_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_spore_puff.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_sporecap",
+   "prompts": null,
+   "batch": "painted look: sporecap (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_sporecap_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_sporecap.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_sproutcap",
+   "prompts": null,
+   "batch": "painted look: sproutcap (edit)",
+   "with": null,
+   "refs": [],
+   "save": "anim_sproutcap_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/anim_sproutcap.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_star_bat",
+   "prompts": null,
+   "batch": "painted look: star_bat (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_star_bat_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_star_bat.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_starfall_golem",
+   "prompts": null,
+   "batch": "painted look: starfall_golem (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_starfall_golem_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_starfall_golem.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_thornling",
+   "prompts": null,
+   "batch": "painted look: thornling (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_thornling_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_thornling.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_tide_bit",
+   "prompts": null,
+   "batch": "painted look: tide_bit (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_tide_bit_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_tide_bit.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_tide_dewling",
+   "prompts": null,
+   "batch": "painted look: tide_dewling (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_tide_dewling_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_tide_dewling.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
+   }
+  },
+  {
+   "id": "paint_mon_tide_slime",
+   "prompts": null,
+   "batch": "painted look: tide_slime (edit)",
+   "with": null,
+   "refs": [],
+   "save": "mon_tide_slime_painted.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 painted-monsters thread: the pixel-art monster sheet repainted as soft painted art, same grid, frames and poses (plans/painted-monsters.md).",
+   "edit": {
+    "base": "art/source/mon_tide_slime.png",
+    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Keep every colour as it is (do not mute or darken it), and keep the pink cheek blush, eye shines and other small face details. Every creature stays exactly the same character in every frame, with the same pose and the same place in its cell. There is NO ground shadow or shadow ellipse under any creature; remove any that are there. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
    }
   }
  ]
