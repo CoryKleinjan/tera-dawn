@@ -142,12 +142,18 @@ def paste(cells, paths, mode):
     print(f"{mode}: {len(cells)} cells -> {os.path.relpath(gg.BODY, pl.ROOT)}")
 
 
-def _swap_cells(dst_path, src, cells, out_path):
+def _swap_cells(dst_path, src, cells, out_path, key=False):
+    """Copies `cells` from `src` into the sheet at dst_path; with `key`, the cell's background
+    (whatever flat colour Gemini painted, reached from the cell border) becomes pure magenta."""
     boxes = gg.layout()
     dst = np.asarray(Image.open(dst_path).convert("RGB")).copy()
     for c in cells:
         x0, y0, x1, y1 = boxes[c]
-        dst[y0:y1, x0:x1] = src[y0:y1, x0:x1]
+        cell = src[y0:y1, x0:x1]
+        if key:
+            solid = gg.solid(src, boxes[c], exact=False)
+            cell = np.where(solid[..., 3:] > 0, solid[..., :3], gg.MAGENTA)
+        dst[y0:y1, x0:x1] = cell
     Image.fromarray(dst).save(out_path)
     print(f"{', '.join(cells)} -> {out_path}")
 
@@ -158,7 +164,7 @@ def worn_base(sheet, out, cells):
 
 def worn_cells(sheet, edit, cells):
     size = Image.open(sheet).size
-    _swap_cells(sheet, gg._sheet(edit, size), cells, sheet)
+    _swap_cells(sheet, gg._sheet(edit, size), cells, sheet, key=True)
 
 
 if __name__ == "__main__":
