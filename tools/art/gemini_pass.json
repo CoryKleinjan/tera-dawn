@@ -10503,6 +10503,28 @@
      "art/source/building_emberreach_large.png"
     ]
    }
+  },
+  {
+   "id": "front_building_emberreach_large",
+   "prompts": null,
+   "batch": "front-view building: emberreach_large (edit)",
+   "with": null,
+   "refs": [],
+   "save": "building_emberreach_large_front.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 buildings round 2 (Cory): pure front view, no roof tops, wall base flat along the whole bottom, nothing below it, sits on the ground.",
+   "edit": {
+    "base": "art/source/building_emberreach_large.png",
+    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a stone forge hall: grey-brown stone walls, orange clay tile roofs on the main hall and both side wings, the tall square stone chimney in the middle, the big arched double wooden door glowing with forge light, and the warm glowing windows either side, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
+    "new_view": true
+   }
   }
  ]
 }
