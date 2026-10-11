@@ -12638,6 +12638,50 @@
     "refs": [],
     "text": "This is my hat sheet: 15 labelled cells on magenta, each a bald head with shoulders, most wearing a painted hat. ERASE the bald heads, faces, ears, necks and shoulders from every cell and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the hats. Every hat stays EXACTLY where it is, the same size, shape and colours, with its own outline and shading; where the head showed through the hat (a hood's face opening, under a brim, a helm's eye slit) is now magenta. Cells with no hat become empty magenta. Keep every label and grid line exactly where it is."
    }
+  },
+  {
+   "id": "wg_worn_linen_tunic_only",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_worn_linen_tunic_only.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "wg_worn_linen_tunic",
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread: art/source/worn/linen_tunic.png with the body erased, so the Linen Tunic lifts off cleanly even where its colours are close to his skin (test for the light-coloured gear; Cory OK'd the 2-sheet test 18:59Z).",
+   "edit": {
+    "base": "art/source/worn/linen_tunic.png",
+    "refs": [],
+    "text": "This is my sheet of a bald boy wearing the Linen Tunic in 32 labelled poses (8 columns x 4 rows) on magenta. ERASE the boy from every cell: his head, ears, face, neck, arms, hands, legs, feet and his plain dark shorts, and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the Linen Tunic. The Linen Tunic stays EXACTLY where it is in every cell: the same position, size, shape, colours, outline, shading and detail, pixel for pixel; do not move, redraw, complete or tidy it. Where his body showed through it (an open neckline, between sleeve and arm) is now magenta. Keep every label and grid line exactly where it is."
+   }
+  },
+  {
+   "id": "wg_worn_sunforged_cuirass_only",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_worn_sunforged_cuirass_only.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": "wg_worn_sunforged_cuirass",
+   "size": "2K",
+   "note": "2026-10-11 worn-gear-matches-icons thread: art/source/worn/sunforged_cuirass.png with the body erased, so the Sunforged Cuirass lifts off cleanly even where its colours are close to his skin (test for the light-coloured gear; Cory OK'd the 2-sheet test 18:59Z).",
+   "edit": {
+    "base": "art/source/worn/sunforged_cuirass.png",
+    "refs": [],
+    "text": "This is my sheet of a bald boy wearing the Sunforged Cuirass in 32 labelled poses (8 columns x 4 rows) on magenta. ERASE the boy from every cell: his head, ears, face, neck, arms, hands, legs, feet and his plain dark shorts, and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the Sunforged Cuirass. The Sunforged Cuirass stays EXACTLY where it is in every cell: the same position, size, shape, colours, outline, shading and detail, pixel for pixel; do not move, redraw, complete or tidy it. Where his body showed through it (an open neckline, between sleeve and arm) is now magenta. Keep every label and grid line exactly where it is."
+   }
   }
  ]
 }
