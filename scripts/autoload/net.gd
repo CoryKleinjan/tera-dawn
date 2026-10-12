@@ -31,6 +31,8 @@ signal joined
 signal disconnected(why: String)
 
 var mode := Mode.NONE
+## The port this game hosts on (host and dedicated server).
+var port := DEFAULT_PORT
 ## The server, when this game runs one (single player, host or dedicated).
 var server: TDServer
 ## Where events for the player are shown, when this game has a client.
@@ -86,16 +88,17 @@ func play_single() -> void:
 
 ## Host: play on the local account, and let other players register and log in to this game
 ## on `port`. Returns "" or what went wrong.
-func host(port := DEFAULT_PORT) -> String:
+func host(on_port := DEFAULT_PORT) -> String:
 	stop()
 	_close_leaving()
 	var peer := ENetMultiplayerPeer.new()
-	if peer.create_server(port, MAX_PLAYERS) != OK:
-		return "Couldn't open port %d. Is another game using it?" % port
+	if peer.create_server(on_port, MAX_PLAYERS) != OK:
+		return "Couldn't open port %d. Is another game using it?" % on_port
 	if peer.host.dtls_server_setup(TDTls.server_options(save_dir)) != OK:
 		peer.close()
 		return "Couldn't set up encryption."
 	mode = Mode.HOST
+	port = on_port
 	multiplayer.multiplayer_peer = peer
 	_start_server(true)
 	ask(&"req_local_login", [Settings.dev.login_mode()])
@@ -103,10 +106,10 @@ func host(port := DEFAULT_PORT) -> String:
 
 ## Connects to a server and logs in (or registers a new account first, if `register`).
 ## `logged_in` or `refused` follows. Returns "" or what went wrong right away.
-func log_in(address: String, username_: String, password: String, register := false, port := DEFAULT_PORT) -> String:
+func log_in(address: String, username_: String, password: String, register := false, server_port := DEFAULT_PORT) -> String:
 	stop()
 	var peer := ENetMultiplayerPeer.new()
-	if peer.create_client(address, port) != OK:
+	if peer.create_client(address, server_port) != OK:
 		return "Couldn't connect to %s." % address
 	if peer.host.dtls_client_setup(address, TDTls.client_options(address)) != OK:
 		peer.close()
@@ -117,16 +120,17 @@ func log_in(address: String, username_: String, password: String, register := fa
 	return ""
 
 ## A server with no player of its own (run with `-- --server`). Returns "" or what went wrong.
-func run_dedicated(port := DEFAULT_PORT) -> String:
+func run_dedicated(on_port := DEFAULT_PORT) -> String:
 	stop()
 	_close_leaving()
 	var peer := ENetMultiplayerPeer.new()
-	if peer.create_server(port, MAX_PLAYERS) != OK:
-		return "Couldn't open port %d." % port
+	if peer.create_server(on_port, MAX_PLAYERS) != OK:
+		return "Couldn't open port %d." % on_port
 	if peer.host.dtls_server_setup(TDTls.server_options(save_dir)) != OK:
 		peer.close()
 		return "Couldn't set up encryption (see %s/tls)." % save_dir
 	mode = Mode.DEDICATED
+	port = on_port
 	multiplayer.multiplayer_peer = peer
 	_start_server(false)
 	print("Tera's Dawn server listening on port %d" % port)

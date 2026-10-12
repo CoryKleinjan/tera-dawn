@@ -1,7 +1,8 @@
 extends TestCase
-## Logging out while hosting: with a friend connected the host is asked first, Cancel keeps
-## the game going, and ending it tells the friend "The host ended the game." The friend is a
-## second copy of Net in this process, on its own MultiplayerAPI, logged in over the network.
+## Hosting: character select shows what friends type to join. Logging out while hosting:
+## with a friend connected the host is asked first, Cancel keeps the game going, and ending
+## it tells the friend "The host ended the game." The friend is a second copy
+## of Net in this process, on its own MultiplayerAPI, logged in over the network.
 
 const PORT := 7800
 const PORTS := 200
@@ -86,3 +87,20 @@ func test_logging_out_alone_while_hosting_doesnt_ask() -> void:
 	ui.hud.title.character_select.logout_button.pressed.emit()
 	check(not ui.hud.title.confirm.visible, "no question")
 	check_eq(Net.mode, Net.Mode.NONE, "logged out")
+
+func test_hosting_shows_what_friends_type_to_join() -> void:
+	var port := _host()
+	if not check(port != 0, "hosting opens a port"):
+		return
+	await ui.ticks(2)
+	var sel := ui.hud.title.character_select
+	check(sel.host_panel.visible, "the host panel shows on character select")
+	check_eq(sel.subheading.text, "Hosting on port %d" % port, "names the port hosted on")
+	if sel.host_panel.address != "":
+		check(sel.host_panel.address.ends_with(":%d" % port), "the address carries the test port")
+		check(sel.host_panel.address_label.text.contains(sel.host_panel.address), "and is shown")
+	check(not sel.host_panel.firewall_button.visible, "no firewall to open off Windows")
+	sel.logout_button.pressed.emit()
+	Net.play_single()
+	await ui.ticks(2)
+	check(not sel.host_panel.visible, "playing solo hides it")
