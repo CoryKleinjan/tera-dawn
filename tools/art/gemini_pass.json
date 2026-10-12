@@ -14304,6 +14304,109 @@
     ],
     "text": "The first image is an empty magenta canvas. On it, paint ONE market signpost for the harbour town in my 2D side-scrolling game. It stands beside the entrance to the town's Free Market. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture. The third image is a building from the same town: match its style, palette, outline thickness and level of detail exactly. The signpost: a sturdy weathered wooden post, about one and a half times as tall as a person, set in a low flat wooden foot that is a plain rectangle in this front view. Near the top a wooden arm sticks out to the right, braced by a short diagonal strut. From the arm hangs a wide rectangular wooden signboard on two short iron chains; each chain is fixed to the arm at the top and to the board at the bottom, nothing loose or dangling. The board has a carved frame and is painted with a simple bold emblem: a plump tied coin purse with a few gold coins beside a small brass balance scale, on a warm red-and-cream striped background like a market awning. Strict rules: 1) A strictly flat 2D front elevation, like a technical drawing seen dead-on at eye level, perfectly upright. Every wooden part is a flat rectangle: the post shows only its front face, the arm shows only its front face with a square-cut end and no visible end grain or depth, the foot shows only its front face and no top. No 3/4, isometric or perspective angle anywhere. The board hangs flat facing the viewer. 2) The bottom of the foot is ONE flat straight horizontal edge. No ground, shadow or grass under it. 3) The signpost fills most of the canvas height with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, words or numbers anywhere. Flat pure magenta #FF00FF background everywhere outside the signpost."
    }
+  },
+  {
+   "id": "dawnharbor_pier",
+   "prompts": null,
+   "batch": "Dawnharbor city: wooden pier (test)",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_pier.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 harbor-city thread (Cory 18:03Z 'Do your picks'): Dawnharbor improvements, small test first. Painted pier standing behind the west end of the street by Marlo's ship.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnharbor-city/pier_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "art/source/building_dawnharbor_tavern.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE short wooden harbour pier for the harbour town in my 2D side-scrolling game. It stands behind the town's stone quay street, where ships moor. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture (wood grain, rope fibres, rust, worn and chipped spots). The third image is a building from the same town: match its style, palette, outline thickness and level of detail exactly. The pier: seen straight from the side, a long weathered plank deck about three times as wide as it is tall, resting on a row of thick round wooden pilings. A simple wooden handrail of posts and one rail runs along the back of the deck. On the deck: two short iron mooring bollards, each with a rope coiled neatly around it (no loose rope ends), one wooden barrel and a small stack of two crates. Honey-brown sun-bleached wood with darker grain, iron bands and rivets. Strict rules: 1) A strictly flat 2D side elevation seen dead-on at eye level: the deck shows only its front edge (a thin plank band), never its top surface; pilings, posts, barrel and crates show only their front faces. No 3/4, isometric or perspective angle anywhere. 2) The bottoms of all the pilings end on ONE flat straight horizontal line, which is the bottom of the whole picture. No water, ground, shadow or reflection. 3) The pier fills most of the canvas width with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, words or numbers anywhere. Flat pure magenta #FF00FF background everywhere outside the pier."
+   }
+  },
+  {
+   "id": "dawnharbor_pier_flat",
+   "prompts": null,
+   "batch": "Dawnharbor city: wooden pier redrawn flat 2D side view",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_pier_flat.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 harbor-city thread (Cory 18:03Z 'Do your picks'): Dawnharbor improvements, small test first. Painted pier standing behind the west end of the street by Marlo's ship. First try (18:35Z) came back at an angle (deck top and bollard tops showing, a loose rope); redone strictly flat (Cory 18:37Z).",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/dawnharbor_pier.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "art/source/building_dawnharbor_tavern.png"
+    ],
+    "text": "The first image is a painted wooden harbour pier for my 2D side-scrolling game, but it is drawn at an angle. Redraw it as a strictly flat 2D side elevation, keeping the same pier, wood colours, painted style, size and position on the canvas. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture. The third image is a building from the same town, drawn straight from the front: draw the pier in the same flat way. Strict rules: 1) Seen dead-on from the side at exactly deck height, like a theatre flat: the deck is ONLY a thin horizontal band of plank ends along its front edge; NO top surface of the deck shows at all, no planks receding into the distance. 2) Every piling is a straight upright rectangle showing only its front face, all in one row along the front, no second row of pilings behind. 3) The two iron bollards, the barrel and the crates stand on the deck's top edge and show only their front faces: no top of any bollard, barrel or crate. Each bollard has its rope wound tightly around it, with no rope end hanging or loose anywhere. 4) The bottoms of all the pilings end on ONE flat straight horizontal line, the bottom of the picture. No ground line, water, shadow or reflection. 5) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, words or numbers. Flat pure magenta #FF00FF background everywhere outside the pier."
+   }
+  },
+  {
+   "id": "dawnharbor_wall_decor",
+   "prompts": null,
+   "batch": "Dawnharbor city: terrace wall ivy and flower boxes (test)",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_wall_decor.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 harbor-city thread (Cory 18:03Z 'Do your picks'): Dawnharbor improvements, small test first. Ivy and hanging flower boxes to break up the long terrace walls.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnharbor-city/wall_decor_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "art/source/building_dawnharbor_tavern.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint a sheet of FOUR separate decorations that hang on the pale sandstone retaining walls of the harbour town in my 2D side-scrolling game, laid out in 2 rows of 2, each centred in its own quarter of the canvas with a wide band of plain magenta around it, and none touching another. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture (wood grain, rope fibres, rust, worn and chipped spots). The third image is a building from the same town: match its style, palette, outline thickness and level of detail exactly. Top left: a WIDE curtain of green ivy hanging down from a straight horizontal top edge, about twice as wide as it is long, with leafy strands of different lengths and a few small pink blossoms. Top right: a NARROW trailing ivy, hanging down from a straight horizontal top edge, about three times as long as it is wide. Bottom left: a short wooden flower box held to the wall by two dark iron brackets under it, full of pink and cream flowers with green leaves spilling a little over the front. Bottom right: a long wooden flower box, about twice as long as the first, on three iron brackets, with pink, yellow and white flowers. Strict rules: 1) Flat 2D front view, dead-on at eye level, as seen on a wall facing the viewer: the flower boxes show only their front plank, never their top or sides; no 3/4, isometric or perspective angle. 2) Each ivy's top is ONE straight horizontal edge where it hangs from; its strands lie flat against the wall, nothing curls out toward the viewer. 3) No wall, stones or background behind anything: only the ivy and the boxes with their brackets. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, words or numbers anywhere. Flat pure magenta #FF00FF background everywhere outside the four decorations."
+   }
+  },
+  {
+   "id": "dawnharbor_townsfolk",
+   "prompts": null,
+   "batch": "Dawnharbor city: three townsfolk NPCs (test)",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_townsfolk.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    4,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 harbor-city thread (Cory 18:03Z 'Do your picks'): Dawnharbor improvements, small test first. Three idle townsfolk for the empty east half: sailmaker, dock worker, kid. Edit of npcs_harbor_3 keeping its layout.",
+   "edit": {
+    "base": "art/source/npcs_harbor_3.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ],
+    "text": "The first image is a sheet of NPC characters for my 2D side-scrolling game: two rows, each row the same characters standing in the same spots, with a label above each. Keep the sheet's size, layout, magenta background, label bands, and each character's position, size, chibi proportions and art style exactly. The second image shows more of my game's NPC characters; the new ones must look like they belong with them: soft cel-painted shading, rich warm colours, dark brown outlines, painted cloth folds and worn patches. Replace the four characters with new townsfolk of the harbour town, the same character in both rows of each column, standing still in the same calm pose in both rows: Column 1 (label it SAILMAKER): a sturdy middle-aged woman sailmaker with a canvas apron, rolled sleeves and a bundle of folded white sailcloth under one arm, a big needle tucked in her apron. Column 2 (label it DOCKHAND): a broad-shouldered young dock worker in a striped sailor shirt, brown trousers and a knitted cap, holding a small wooden crate in both hands. Column 3 (label it KID): a small cheerful child in a yellow raincoat and short boots, holding a paper boat. Column 4 (label it EMPTY): leave empty, plain magenta. Rules: every character stands upright, facing slightly toward the viewer, both feet flat on one level ground line, full body in its cell. Hands are simple rounded fingerless mittens in the game's style. No new facial hair. Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background everywhere outside the characters and labels."
+   }
   }
  ]
 }

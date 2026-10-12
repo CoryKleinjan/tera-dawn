@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/npc_dockhand.tres" id="2_sprite"]
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"dockhand"
+display_name = "Bram"
+title = "Dockhand"
+sprite_frames = ExtResource("2_sprite")
+greeting = "Heavy crates, light pay. Still, the sea air's free."
+lines = PackedStringArray("Every box off a ship comes past these hands.", "Watch your step on the quay, it's slick in the mornings.")
+storage = false

@@ -112,7 +112,7 @@ ledge; you still walk in front of it along the street below. Ladders and ropes j
 levels (more than about 90 px needs one). Buildings, NPCs and portals stand on a level by
 their `platform`; each level is its own row for the spacing checks, and nothing should
 stand on the floor straight behind a terrace's wall (lanterns, scattered decor and
-background houses keep clear of it by themselves). Doors stay on the floor for now, since
+background houses keep clear of it by themselves). Lanterns stand only on open street by themselves; a level gets its own with `MapDef.level_lanterns` (x and platform), drawn in front of the land so the wall of the level above doesn't hide them; ivy and flower boxes hung on a level's wall are props with `on_wall` set. Doors stay on the floor for now, since
 players arrive on a map's floor. In a town the backdrop is laid out for the camera on the
 street (`TDStage.backdrop_center`), so climbing up just shows more sky. Dawnharbor is the
 example: a quay street, a terrace 150 px up and a cliff top 320 px up.

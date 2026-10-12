@@ -2,7 +2,8 @@ extends TestCase
 ## Lanterns are few and stand in open ground: never more than one per spacing of a map's
 ## width, spread apart, and never in front of or behind a building, portal, rope or ladder,
 ## prop, NPC or low platform (see LanternPlacement). Background houses and the floor's
-## trees, bushes and rocks give way to them.
+## trees, bushes and rocks give way to them. Hand-placed lanterns on raised levels
+## (MapDef.level_lanterns) stand on their level, in open ground too.
 
 const Scan := preload("res://tests/content/content_scan.gd")
 
@@ -66,3 +67,31 @@ func test_floor_decor_keeps_off_lanterns() -> void:
 		check_eq(clear.size(), LanternPlacement.slots(m).size(), "%s: every lantern keeps its ground clear" % Scan.where(m))
 		for c in clear:
 			check(c.y - c.x > LanternPlacement.post_size(m).x, "%s: a lantern's clear ground is wider than the post" % Scan.where(m))
+
+func test_level_lanterns_stand_on_their_level_in_open_ground() -> void:
+	for m: MapDef in Content.maps.values():
+		if m.level_lanterns.is_empty():
+			continue
+		check(m.look() != null and m.look().lantern != null, "%s: hand-placed lanterns but no lantern post" % Scan.where(m))
+		var half := LanternPlacement.post_size(m).x * 0.5 + LanternPlacement.CLEAR
+		for at in m.level_lanterns:
+			check(at.y >= 1 and at.y <= m.platforms.size(), "%s: a lantern on missing platform %d" % [Scan.where(m), at.y])
+			if at.y < 1 or at.y > m.platforms.size():
+				continue
+			var d := m.platforms[at.y - 1]
+			check(at.x - half >= d.x and at.x + half <= d.x + d.width, "%s: the lantern at x %d hangs off its level" % [Scan.where(m), at.x])
+			for b in m.buildings:
+				if b.platform == at.y:
+					var s := b.span()
+					check(at.x + half <= s.x or at.x - half >= s.y, "%s: the lantern at x %d stands in front of %s" % [Scan.where(m), at.x, b.building.id])
+			for n in m.npcs:
+				if n.platform == at.y:
+					var r := LanternPlacement.npc_rect(n)
+					check(at.x + half <= n.x + r.position.x or at.x - half >= n.x + r.end.x, "%s: the lantern at x %d stands behind %s" % [Scan.where(m), at.x, n.npc.id])
+			for c in m.climbables:
+				if absf(c.top - d.y) < 1.0 or absf(c.bottom - d.y) < 1.0:  # a rope or ladder to or from this level
+					check(absf(at.x - c.x) >= half + LanternPlacement.CLIMB_HALF, "%s: the lantern at x %d stands by a rope or ladder" % [Scan.where(m), at.x])
+			for p in m.props:
+				if p.texture and absf(p.y - d.y) < 10.0:
+					var w := TDStage.art_size(p.texture, TDStage.TEXEL * p.scale).x * 0.5
+					check(at.x + half <= p.x - w or at.x - half >= p.x + w, "%s: the lantern at x %d stands in front of a prop" % [Scan.where(m), at.x])
