@@ -206,10 +206,19 @@ def item_hat_layers(hero):
                             tinted=False, shape="helm", head_cut=True)
 
 
+def enclosed(solid):
+    """The holes in a picture's solid part: the gaps it closes in all round (none of them
+    reaching the picture's edge)."""
+    lab, n = ss.label(~solid)
+    edge = np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))
+    return (lab > 0) & ~np.isin(lab, edge)
+
+
 def eyes_out(hero, name, views):
     """A closed helm's views moved so his eyes show through its eye holes: the shift (at most
     HELM_NUDGE head radii) that leaves the most of his eye pixels (the face layer's irises)
-    in its holes (not under it, nor out past its outline, which would leave his face poking out),
+    in its holes (the eye slits a visor closes in all round, or for an open helm anywhere inside
+    its outline: not under it, nor out past it, which would leave his face poking out),
     the median over the frames that show his face, applied to both views. The sheets' eye holes aren't all where
     HELM_EYES expects, so it is measured on the saved piece."""
     eyes = np.asarray(Image.open(os.path.join(LAYERS, f"face_{FACES[0]}_eyes.png")))[..., 3] > SOLID_EYES
@@ -224,7 +233,9 @@ def eyes_out(hero, name, views):
         draw_piece(canvas, p, i, False)
         draw_piece(canvas, p, i, True)
         helm = np.asarray(canvas)[..., 3] > HAIR_CUT_ALPHA
-        hole = spanned(helm) & ~helm  # (its eye holes: inside its outline, not under it)
+        hole = enclosed(helm)  # (its eye holes: closed in all round, not the open face below a visor)
+        if not hole.any():
+            hole = spanned(helm) & ~helm  # (an open helm: inside its outline, not under it)
         ey, ex = np.nonzero(e)
         best = min(((dx, dy) for dx in range(-reach, reach + 1) for dy in range(-reach, reach + 1)),
                    key=lambda d: (int((~hole[np.clip(ey - d[1], 0, hero.fh - 1), np.clip(ex - d[0], 0, hero.fw - 1)]).sum()),
@@ -392,9 +403,9 @@ def no_loose_hair(strip, solids, heads, hair, fw, radii, tails=False, centres=No
     disconnected and floating is trimmed); and any wisp smaller than HAIR_CUT_SPECK head radii squared
     off on its own (or HAIR_CUT_CRUMB anywhere). A patch the cut doesn't reach stays. A style
     with `tails` (HAIR_HEAD_ONLY: long hair, ponytail, twin tails) shows none of its hair off his
-    head (past HAIR_HEAD_ONLY_R head radii from its middle) under a hat, only the locks framing
-    his face (Cory 2026-10-12: ponytails and pigtails shouldn't show under hats; long hair
-    sticking out of a hat is just the locks by his face)."""
+    head (outside the HAIR_HEAD_ONLY_OVAL round his brow) under a hat, only the locks framing
+    his eyes (Cory 2026-10-12: ponytails and pigtails shouldn't show under hats; long hair
+    sticking out of a hat is just the locks by his face, none near his mouth)."""
     out = strip.copy()
     for i, solid in enumerate(solids):
         cut = out[:, i * fw:(i + 1) * fw]
@@ -406,7 +417,8 @@ def no_loose_hair(strip, solids, heads, hair, fw, radii, tails=False, centres=No
         if tails:  # (its tails go under the hat with the rest)
             hx, hy = centres[i]
             yy, xx = np.mgrid[0:hidden.shape[0], 0:fw]
-            on = (xx - hx) ** 2 + (yy - hy) ** 2 <= (HAIR_HEAD_ONLY_R * radii[i]) ** 2  # (a round line, no steps)
+            rx, ry, up = (k * radii[i] for k in HAIR_HEAD_ONLY_OVAL)
+            on = ((xx - hx) / rx) ** 2 + ((yy - hy + up) / ry) ** 2 <= 1.0  # (a round line, no steps)
             cut[ss.dilate(shows & ~on, 3) & ~(shows & on)] = 255  # (wide enough that its soft edge still hides it all)
             shows &= ~(cut[..., 3] > 0)
         lab, n = ss.label(shows)
