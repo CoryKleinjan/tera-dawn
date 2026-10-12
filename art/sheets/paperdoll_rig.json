@@ -51,7 +51,7 @@
     "wand": {"_doc": "Gripped like a sword, 80 degrees above his forearm; behind him on hit and hurt so it doesn't cross his face.", "offset": -80, "behind": ["hit", "hurt"]},
     "claw": {"_doc": "Worn like a big glove over his fist, pointing the way his forearm does (Cory 2026-10-11, 2026-10-12).", "offset": 0},
     "knuckle": {"_doc": "Worn over his fist, pointing the way his forearm does.", "offset": 0},
-    "bow": {"_doc": "Held by the middle of its riser, lying across his forearm 5 degrees above it (Cory 2026-10-12). On hit and hurt his fists come up before his chest, so it draws behind him there instead of across his face.", "offset": -5, "behind": ["hit", "hurt"]},
+    "bow": {"_doc": "Held by the middle of its riser, lying across his forearm 5 degrees above it (Cory 2026-10-12). Sitting, his fist is on his knee near the floor, so the bow is turned up to 65 degrees, clear of it (approved by Cory 2026-10-12); crouching it keeps its true angle, in front, his fingers over the grip. On hit and hurt his fists come up before his chest, so it draws behind him there instead of across his face.", "offset": -5, "behind": ["hit", "hurt"], "approved": {"sit": 65}},
     "staff": {"_doc": "Gripped in the middle of the shaft, 85 degrees above his forearm (Cory 2026-10-12). Behind him on hit and hurt so it doesn't cross his face.", "offset": -85, "behind": ["hit", "hurt"]},
     "gun": {"_doc": "Held like a pistol: the grip in his fist and the barrel along his forearm (Cory 2026-10-11), in front of him on every frame (behind him it would no longer be in his hand).", "offset": 0}
   }

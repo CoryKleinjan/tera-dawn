@@ -235,7 +235,12 @@ def drawn_axis(arr):
 EMPTY_HANDED = ("levelup",)
 # What a weapon kind's line in paperdoll_rig.json holds may say: one grip for every frame, no
 # per-frame angles (Cory 2026-10-12: weapons keep their place in his hand in every picture).
-HOLD_KEYS = {"_doc", "offset", "behind"}
+HOLD_KEYS = {"_doc", "offset", "behind", "approved"}
+# The only frames where a kind may leave its grip, each one Cory approved; "approved" in its holds
+# line gives the weapon's angle there. tests/unit/hero_pose_test.gd lists the same ones.
+APPROVED = {
+    "bow": {"sit"},  # turned up off his knee, clear of the floor (Cory 2026-10-12, #172)
+}
 # The way the thumb side of his fist faces (x, y with y down): forward, and a little up.
 THUMB = (2.0, -1.0)
 
@@ -246,7 +251,7 @@ def holds(arm, spec, names):
     the fist `arm` gives for the frame (paperdoll_rig.json "arm": his front hand and the way his
     forearm points), its own one "offset" from that forearm on every frame, on the thumb side of
     his fist (thumb_side), so a weapon never moves, turns or flips in his hand from one picture
-    to the next."""
+    to the next. Only the frames in APPROVED may give their own angle ("approved")."""
     out = {}
     for kind in WEAPON_KINDS:
         h = spec.get(kind, {})
@@ -254,8 +259,13 @@ def holds(arm, spec, names):
         if extra:
             raise ValueError(f"paperdoll_rig.json holds.{kind}: only one grip per kind ({sorted(HOLD_KEYS)}), not {sorted(extra)}")
         off = float(h.get("offset", 0))
+        approved = {n: float(a) for n, a in h.get("approved", {}).items()}
+        if set(approved) - APPROVED.get(kind, set()):
+            raise ValueError(f"paperdoll_rig.json holds.{kind}.approved: {sorted(set(approved) - APPROVED.get(kind, set()))} "
+                             "not approved by Cory (weapons.py APPROVED)")
         out[kind] = {n: None if n not in arm or n in EMPTY_HANDED
-                     else [round(float(arm[n][0]), 1), round(float(arm[n][1]), 1), thumb_side(float(arm[n][2]), off)]
+                     else [round(float(arm[n][0]), 1), round(float(arm[n][1]), 1),
+                           round(approved[n], 1) if n in approved else thumb_side(float(arm[n][2]), off)]
                      for n in names}
     return out
 

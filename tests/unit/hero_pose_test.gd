@@ -28,6 +28,11 @@ func test_idle_is_one_still_frame_with_a_blink() -> void:
 		"and the same body as idle, so only the eyes move")
 	check_eq(Paperdoll.hold(blink, &"sword"), Paperdoll.hold(idle, &"sword"), "holding the weapon the same way")
 
+# The only frames where a weapon kind leaves its angle to the forearm, each one Cory approved
+# (tools/art/paperdoll/weapons.py APPROVED lists the same): the bow sitting, turned up off his
+# knee clear of the floor (2026-10-12).
+const APPROVED := {"bow": ["sit"]}
+
 func test_every_weapon_keeps_its_grip_and_angle_to_the_forearm() -> void:
 	# the rig's "arm" is his front fist and the way his forearm points; each kind sits in that
 	# fist at one angle to the forearm, mirrored to his thumb side when his arm swings up or back
@@ -42,6 +47,8 @@ func test_every_weapon_keeps_its_grip_and_angle_to_the_forearm() -> void:
 			if not check(arm is Array and h != null, "%s: the %s is held only where the rig gives his front fist" % [fname, kind]):
 				continue
 			check_near(h["grip"].distance_to(Vector2(arm[0], arm[1])), 0.0, "%s: the %s is in his front fist" % [fname, kind], 0.6)
+			if fname in APPROVED.get(kind, []):
+				continue
 			var off := absf(wrapf(rad_to_deg(h["angle"]) - float(arm[2]), -180.0, 180.0))
 			if not offsets.has(kind):
 				offsets[kind] = off

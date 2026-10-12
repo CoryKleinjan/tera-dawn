@@ -4,7 +4,7 @@ in every picture)."""
 import unittest
 
 import helpers  # noqa: F401  (puts the tools folder on the path)
-from paperdoll.weapons import EMPTY_HANDED, WEAPON_KINDS, holds, thumb_side
+from paperdoll.weapons import APPROVED, EMPTY_HANDED, WEAPON_KINDS, holds, thumb_side
 
 ARM = {"idle1": [56, 82, 105], "walk2": [80, 77, 30], "hit": [62, 75, -5], "fall": [47, 55, -160],
        "run2": [34, 70, 170], "levelup": [51, 33, -100]}
@@ -36,6 +36,15 @@ class HoldsTest(unittest.TestCase):
         for bad in ({"frames": {"idle1": 20}}, {"angle": 5}, {"like": "sword"}, {"along": "forearm"}):
             with self.assertRaises(ValueError):
                 holds(ARM, {"wand": bad}, NAMES)
+
+    def test_only_the_frames_cory_approved_leave_the_grip(self):
+        arm = dict(ARM, sit=[88.5, 86.5, 20])
+        out = holds(arm, {"bow": {"offset": -5, "approved": {"sit": 65}}}, NAMES + ["sit"])
+        self.assertEqual(out["bow"]["sit"], [88.5, 86.5, 65])
+        self.assertEqual(APPROVED, {"bow": {"sit"}})
+        for bad in ({"bow": {"approved": {"idle1": 40}}}, {"sword": {"approved": {"sit": 65}}}):
+            with self.assertRaises(ValueError):
+                holds(arm, bad, NAMES + ["sit"])
 
 
 if __name__ == "__main__":
