@@ -19,7 +19,7 @@
     "attack2": {"weapon": [94, 69, 5], "shield": [70, 78]},
     "hit": {"weapon": [62, 75, 25], "shield": [97, 68], "head_tilt": -8},
     "hurt": {"weapon": [60, 74, 20], "shield": [72, 78], "front": "shield"},
-    "jump": {"weapon": [37, 65, -80], "shield": [84, 79], "front": "shield"},
+    "jump": {"weapon": [37, 65, -80], "shield": [84, 79]},
     "fall": {"weapon": [47, 55, -70], "shield": [99, 63]},
     "land": {"weapon": [56, 91, 5], "shield": [76, 90]},
     "crouch": {"weapon": [43, 85, 10], "shield": [76, 92], "front": "shield"},
@@ -37,13 +37,14 @@
     "sit": {"hands": [[88.5, 86.5], [55, 84]]}
   },
   "arm": {
-    "_doc": "His front hand on every frame he holds a weapon (the one nearest us, Cory 2026-10-12: the weapon point on idle, walk1 and walk3, the shield hand on walk2, walk4, hurt, jump and crouch, the hand on his knee when he sits, his hand when he lies fainted) and the way his forearm points there, elbow to fist, set by eye on the body frame: [x, y, angle]. On idle3 and hit his fist is raised before his chest, a little further out than the weapon point (which is on his wrist there). Every weapon kind is held in this fist at its own one angle to this forearm (holds), so no weapon moves or turns in his hand from one picture to the next. Climbing and levelup have none: no weapon in hand.",
-    "frames": {"idle1": [56, 82, 105], "idle2": [56, 82, 105], "idle3": [63, 77, 0], "idle4": [54, 82, 105], "blink": [56, 82, 105],
+    "_doc": "His front hand on every frame he holds a weapon, and the way his forearm points there, elbow to fist: [x, y, angle]. These are the staff thread's fists and forearms (Cory 2026-10-12: that thread holds weapons the closest): the hand nearest us, the weapon point on idle, walk1, walk3 and jump, the shield hand on walk2, walk4, hurt and crouch, the hand on his knee when he sits, his hand when he lies fainted. Every weapon kind is held in this fist at its own one angle to this forearm (holds), so no weapon moves or turns in his hand from one picture to the next; on the frames in mirror (his arm flung up behind his head as he falls) that angle is taken on the other side of the forearm so the weapon's head stays up. Climbing and levelup have none: no weapon in hand.",
+    "mirror": ["fall"],
+    "frames": {"idle1": [56, 82, 105], "idle2": [56, 82, 105], "idle3": [59, 75, -5], "idle4": [54, 82, 105], "blink": [56, 82, 105],
                "walk1": [53, 78, 120], "walk2": [80, 77, 30], "walk3": [54, 79, 125], "walk4": [86, 78, 35], "run1": [34, 68, -150],
                "run2": [34, 70, 170], "run3": [73, 73, 45], "run4": [70, 75, 50], "attack1": [37, 67, -170], "attack2": [94, 69, 10],
-               "hit": [70, 76, 5], "hurt": [72, 78, 0], "jump": [84, 79, 60], "fall": [47, 55, -160], "land": [56, 91, 45],
-               "crouch": [74, 97, 32], "slash1": [40, 58, -170], "slash2": [92, 70, 15], "slash3": [90, 86, 30], "faint1": [49, 86, 105],
-               "faint2": [82, 75, 10], "sit": [88.5, 86.5, 20]}
+               "hit": [62, 75, -5], "hurt": [72, 78, 0], "jump": [37, 65, -170], "fall": [47, 55, -160], "land": [56, 91, 45],
+               "crouch": [76, 92, 32], "slash1": [40, 58, -170], "slash2": [92, 70, 15], "slash3": [90, 86, 30], "faint1": [49, 86, 105],
+               "faint2": [82, 75, 0], "sit": [88.5, 86.5, 20]}
   },
   "holds": {
     "_doc": "How each weapon kind sits in the fist the arm gives: one offset, degrees clockwise from his forearm's direction to the way the weapon points (its art is measured and straightened first), the same on every frame; behind lists frames where it draws behind him (so it never crosses his face). Nothing else per frame (tools/art/paperdoll/weapons.py holds() refuses it; tests/unit/hero_pose_test.gd checks it).",
@@ -52,7 +53,7 @@
     "claw": {"_doc": "Worn like a big glove over his fist, pointing the way his forearm does (Cory 2026-10-11, 2026-10-12).", "offset": 0},
     "knuckle": {"_doc": "Worn over his fist, pointing the way his forearm does.", "offset": 0},
     "bow": {"_doc": "Held by the middle of its riser, lying across his forearm 5 degrees above it (Cory 2026-10-12). Sitting, his fist is on his knee near the floor, so the bow is turned up to 65 degrees, clear of it (approved by Cory 2026-10-12); crouching it keeps its true angle, in front, his fingers over the grip. On hit and hurt his fists come up before his chest, so it draws behind him there instead of across his face.", "offset": -5, "behind": ["hit", "hurt"], "approved": {"sit": 65}},
-    "staff": {"_doc": "Gripped in the middle of the shaft, 85 degrees above his forearm (Cory 2026-10-12). Behind him on hit and hurt so it doesn't cross his face.", "offset": -85, "behind": ["hit", "hurt"]},
+    "staff": {"_doc": "Held like a MapleStory mage's staff (Cory's reference 2026-10-12): gripped low on the handle (STAFF_GRIP in paperdoll/common.py), drawn in front of him with his fingers over the shaft, 85 degrees above his forearm on every frame, so on idle its head points forward and a little down.", "offset": -85},
     "gun": {"_doc": "Held like a pistol: the grip in his fist and the barrel along his forearm (Cory 2026-10-11), in front of him on every frame (behind him it would no longer be in his hand).", "offset": 0}
   }
 }

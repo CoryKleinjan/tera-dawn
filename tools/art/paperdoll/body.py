@@ -211,5 +211,6 @@ def hand_rig(fw):
             h["hands"] = [[x * k, y * k] for x, y in h["hands"]]
         frames[n] = h
     holds = {kind: dict(h) for kind, h in spec.get("holds", {}).items() if isinstance(h, dict)}
-    arm = {n: [v[0] * k, v[1] * k, v[2]] for n, v in spec.get("arm", {}).get("frames", {}).items()}
+    mirror = set(spec.get("arm", {}).get("mirror", []))
+    arm = {n: [v[0] * k, v[1] * k, v[2], n in mirror] for n, v in spec.get("arm", {}).get("frames", {}).items()}
     return frames, holds, arm

@@ -95,7 +95,7 @@ def rig_entries(hero, held):
         elif any(held[k][n] is not None for k in WEAPON_KINDS):  # held where he has no "weapon" point (sit)
             entry["holds"] = {k: held[k][n] for k in WEAPON_KINDS if held[k][n] is not None}
         if n in hero.arm:  # his front fist and forearm, which every weapon kind is held from
-            entry["arm"] = [round(float(c), 1) for c in hero.arm[n]]
+            entry["arm"] = [round(float(c), 1) for c in hero.arm[n][:3]]
         if "shield" in h:
             entry["shield"] = list(h["shield"])
             if h.get("front") == "shield" and "weapon" in h:  # the shield hand is nearest us: the weapon goes there

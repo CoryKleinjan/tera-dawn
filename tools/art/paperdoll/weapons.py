@@ -114,7 +114,7 @@ def grip_point(arr, kind, axis, dots):
     """Where his fist closes on a weapon picture (its pixels):
     - a blade (sword kind): in the middle of the handle, between the pommel and the crossguard
       (the first place, going up from the pommel, that gets much wider than the handle);
-    - a wand or staff: halfway along the shaft;
+    - a wand: halfway along the shaft; a staff: low on its handle (STAFF_GRIP along it);
     - a gun: in the middle of the pistol grip (the part hanging below the barrel at the back);
     - a claw: in the middle of its cuff (CLAW_CUFF along it), so the cuff covers his fist;
     - a bow: on its riser, halfway up (bow_parts), so it is held by the middle;
@@ -131,8 +131,10 @@ def grip_point(arr, kind, axis, dots):
         handle = float(np.median(width[2:8]))
         guard = next((i for i in range(4, 30) if width[i] > handle * 1.7), 8)
         return _on_axis(arr, axis, lo + span * (0.04 + guard / 40) / 2)
-    if kind in ("wand", "staff"):
+    if kind == "wand":
         return _on_axis(arr, axis, lo + span / 2)
+    if kind == "staff":
+        return _on_axis(arr, axis, lo + span * STAFF_GRIP)
     if kind == "claw":
         # the middle of the cuff, so the cuff covers his fist and the blades reach past it
         return _on_axis(arr, axis, lo + span * CLAW_CUFF)
@@ -241,17 +243,14 @@ HOLD_KEYS = {"_doc", "offset", "behind", "approved"}
 APPROVED = {
     "bow": {"sit"},  # turned up off his knee, clear of the floor (Cory 2026-10-12, #172)
 }
-# The way the thumb side of his fist faces (x, y with y down): forward, and a little up.
-THUMB = (2.0, -1.0)
 
 
 def holds(arm, spec, names):
     """Per weapon kind, per frame: [x, y, angle] of the fist and the weapon in it, or None when
     it isn't in his hand (climbing: on his back, ON_BACK; levelup: put away). Every kind is in
     the fist `arm` gives for the frame (paperdoll_rig.json "arm": his front hand and the way his
-    forearm points), its own one "offset" from that forearm on every frame, on the thumb side of
-    his fist (thumb_side), so a weapon never moves, turns or flips in his hand from one picture
-    to the next. Only the frames in APPROVED may give their own angle ("approved")."""
+    forearm points), its own one "offset" from that forearm on every frame (grip_angle), so a
+    weapon never moves, turns or flips in his hand from one picture to the next. Only the frames in APPROVED may give their own angle ("approved")."""
     out = {}
     for kind in WEAPON_KINDS:
         h = spec.get(kind, {})
@@ -265,20 +264,19 @@ def holds(arm, spec, names):
                              "not approved by Cory (weapons.py APPROVED)")
         out[kind] = {n: None if n not in arm or n in EMPTY_HANDED
                      else [round(float(arm[n][0]), 1), round(float(arm[n][1]), 1),
-                           round(approved[n], 1) if n in approved else thumb_side(float(arm[n][2]), off)]
+                           round(approved[n], 1) if n in approved else grip_angle(float(arm[n][2]), off, len(arm[n]) > 3 and arm[n][3])]
                      for n in names}
     return out
 
 
-def thumb_side(forearm, offset):
-    """The way a weapon `offset` degrees off his forearm points: out of the thumb side of his
-    fist. His thumb faces forward and up (THUMB), whichever way his arm hangs, swings or rises,
-    so a weapon stays the same way up in his hand instead of turning tip-down when his arm goes
-    up or back behind him: forearm - offset when that side of the forearm faces THUMB, else
-    forearm + offset."""
-    up = math.radians(forearm - 90)  # the side of his forearm that faces up when it points forward
-    side = 1 if math.cos(up) * THUMB[0] + math.sin(up) * THUMB[1] >= 0 else -1
-    return round((forearm + side * offset + 180) % 360 - 180, 1)
+def grip_angle(forearm, offset, mirrored=False):
+    """The way a weapon `offset` degrees off his forearm points: forearm + offset, the same way
+    up in his hand on every frame (the staff thread's holds, Cory 2026-10-12). On the frames the
+    rig's arm "mirror" lists (his arm flung up behind his head as he falls) it is the same angle
+    on the other side of the forearm, forearm - offset, so the weapon's head stays up."""
+    return round((forearm + (-offset if mirrored else offset) + 180) % 360 - 180, 1)
+
+
 def fist_mask(px, grip, reach):
     """The fist around `grip` on a body frame: the pixels inside its outline that a flood from the
     grip reaches without crossing the outline or going further than `reach`, plus the outline

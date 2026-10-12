@@ -187,8 +187,8 @@ body) places their pieces on every body frame and writes the layers, region map 
   Gloves are cuffless mittens painted from their icons (`glove_mittens`), one piece per hand.
 - **The rig** (`paperdoll_rig.json`, in 128 px frames): the weapon hand, weapon angle, shield
   and head tilt per frame, his front fist and forearm angle per frame (`arm`), and each weapon
-  kind's one grip (`holds`: its `offset` from the forearm on every frame, on the thumb side of
-  the fist, and the frames it goes `behind` him; `holds()` refuses anything per frame). His hands are fingerless mittens, so a weapon only needs to sit
+  kind's one grip (`holds`: its `offset` from the forearm on every frame, mirrored across it on
+  the arm's `mirror` frames, and the frames it goes `behind` him; `holds()` refuses anything per frame). His hands are fingerless mittens, so a weapon only needs to sit
   under the fist. `--preview` writes `art/build/paperdoll_preview.png`.
 - To redraw part of the body, `tools/art/body_panels.py` cuts close-up panels of a few cells
   for a Gemini edit and pastes back only what changed (`hands`) or everything above the shorts

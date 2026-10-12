@@ -48,9 +48,9 @@ only what the creator offers and makes a level 1 character in the starting job
   has his fingers, `shaders/paperdoll_piece.gdshaderinc`), behind him on far-hand frames and
   on his back while he climbs. Every kind is held in his front fist (the rig's "arm": the fist
   and forearm angle per frame) at one grip of its own, an angle to his forearm that never
-  changes from frame to frame ("holds" in `art/sheets/paperdoll_rig.json`: an "offset", taken
-  on the thumb side of his fist so a weapon never turns tip-down, and the frames it goes
-  "behind" him). Every weapon is its own icon art
+  changes from frame to frame ("holds" in `art/sheets/paperdoll_rig.json`: an "offset", turned
+  to the other side of the forearm only as he falls so a weapon's head stays up, and the
+  frames it goes "behind" him). Every weapon is its own icon art
   (`weapon_item_<id>`); the tinted `weapon_<kind>` pictures are for a weapon with no icon cell.
   A shield's back sits on his far arm behind him with about a third showing, and its face is on
   his back while he climbs (`shield_item_<id>`). Hats are `hat_item_<id>` in their own colours

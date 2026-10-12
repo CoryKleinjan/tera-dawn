@@ -127,6 +127,7 @@ FIST = 0.4            # the fist around a grip reaches this far from the grip po
 GUN_FRONT, GUN_BACK = 0.4, 0.4  # weapons.grip_point: a gun's barrel is its front share, its grip in its back share
 BARREL_FRONT = 0.55   # weapons.barrel_tilt: the front share of a gun that is its barrel
 CLAW_CUFF = 0.25      # how far along a claw (0 its back end, 1 its tips) the middle of its cuff is
+STAFF_GRIP = 0.35     # how far up a staff (0 its foot, 1 its head) his fist holds it: low on the handle
 
 # Weapons worn on the fist are drawn smaller than the template sheet has them, so they fit
 # his hand rather than swallowing it (the rest keep the sheet's size against the sword).

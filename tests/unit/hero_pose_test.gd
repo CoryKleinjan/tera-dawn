@@ -35,8 +35,8 @@ const APPROVED := {"bow": ["sit"]}
 
 func test_every_weapon_keeps_its_grip_and_angle_to_the_forearm() -> void:
 	# the rig's "arm" is his front fist and the way his forearm points; each kind sits in that
-	# fist at one angle to the forearm, mirrored to his thumb side when his arm swings up or back
-	# behind him, but never bigger or smaller, so nothing turns or flips in his hand
+	# fist at one angle to the forearm, on the other side of it where the rig's arm "mirror" says (falling, his arm
+	# flung up behind his head), but never bigger or smaller, so nothing turns or flips in his hand
 	var frames: Array = Paperdoll.rig().get("frames", [])
 	var offsets := {}
 	for f in frames.size():
