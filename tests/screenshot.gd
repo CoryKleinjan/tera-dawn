@@ -226,6 +226,23 @@ func _run() -> void:
 		await _shot("village")
 		world.log_lines.clear()
 		world.hud.chat.lines.clear()
+	if only == "chat":
+		# Speech bubbles (short, two lines, a pet) and the open chat box with a few lines.
+		var elder := world.npcs()[0]
+		_teleport(world, Vector2(elder.position.x - 40, 620))
+		p.face = 1
+		await _physics(5)
+		world.show_chat("all", ch.name, "Hi!", 1)
+		world.hud.chat.add("all", "Mossy", "Anyone heading to Fern Hollow?")
+		world.hud.chat.add("party", "Kestrel", "On my way! Wait for me by the big tree near the docks, I'll bring potions.")
+		world.hud.chat.add("system", "", "Mossy joined the party.")
+		world.hud.chat.open("hello there")
+		await _frames(3)
+		await _shot("chat_short")
+		world.show_chat("all", ch.name, "Anyone want to hunt in the Crystal Caves? I can tank, bring potions!", 1)
+		await _frames(3)
+		await _shot("chat_long")
+		world.hud.chat.close()
 	if only == "" or only == "dialogue":
 		# Talking to the elder.
 		var elder := world.npcs()[0]

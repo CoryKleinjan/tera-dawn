@@ -156,7 +156,7 @@ const ARCH_PANEL := ["menu/menu_panel", Vector4(30, 56, 30, 44), Vector2(70, 34)
 const TRACKER_PANEL := ["dialogue/tracker_panel", Vector4(16, 32, 16, 12), Vector2(44, 0)]
 const DIVIDER := ["menu/divider", Vector4(12, 0, 12, 0), Vector2(40, 0)]
 const CREATOR_FRAME := ["creator/frame", Vector4(22, 34, 22, 24), Vector2(70, 0)]
-const DIALOGUE_FRAME := ["dialogue/dialogue_frame", Vector4(160, 52, 30, 34), Vector2(100, 50)]
+const DIALOGUE_FRAME := ["dialogue/dialogue_frame", Vector4(174, 52, 30, 34), Vector2(100, 50)]
 
 ## Draws one of the panels above.
 static func draw_panel(ci: CanvasItem, panel_art: Array, r: Rect2, scale := 1.0) -> void:
