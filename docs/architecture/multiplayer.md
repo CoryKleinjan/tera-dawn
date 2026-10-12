@@ -41,6 +41,13 @@ The three ways to play all use the same rules: **Play solo** runs a server insid
 an offline peer (messages never touch the network), **Host** does the same on an ENet port so
 others can join, and `-- --server` (see `scripts/boot.gd`) runs a server with no player.
 
+Hosting on a home network: character select shows the host what friends type in Server
+(`TDHostPanel`, `scripts/ui/host_panel.gd`): this computer's home network address from
+`LanHost` (`scripts/net/lan_host.gd`), with a Copy button. On Windows, `LanHost` checks for
+the game's firewall rule (UDP on `Net.port`, private and work networks) and, when it's
+missing, the panel offers to add it through Windows' admin prompt, on a thread. The Server
+box takes `address:port` (`ServerAddress`); a plain address uses `Net.DEFAULT_PORT`.
+
 ### Accounts and character select
 
 Every server has its own accounts, and every character belongs to one account on the server
