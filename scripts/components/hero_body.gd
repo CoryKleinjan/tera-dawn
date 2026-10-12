@@ -13,12 +13,14 @@ const FRAMES := preload("res://assets/animations/hero.tres")
 ## The hero's size against everyone else's art (TDStage.TEXEL). MapleStory proportions: he
 ## stands about a tenth of the screen tall, a little shorter than the townsfolk (TDNpc.SCALE),
 ## so heroes read as young adventurers among grown-ups, and most monsters come up to him.
-const SCALE := 0.62
+## Raised from 0.62 (Cory 2026-10-12: drawn slightly larger); his art is cut at twice this
+## size, so he still shrinks on screen up to 1440p rather than stretching.
+const SCALE := 0.70
 ## A soft warm light that travels with every player, so heroes stand out from the scenery.
 const LIGHT := Color(1.0, 0.86, 0.68)
 const LIGHT_ENERGY := 0.55
 ## Where his light sits above his feet (game pixels).
-const LIGHT_HEIGHT := 29.0
+const LIGHT_HEIGHT := 33.0
 ## The walk and run cycles play at their drawn speed at this ground speed (game pixels a
 ## tick), faster or slower in step with him, so his feet don't slide.
 const STRIDE_SPEED := 3.7

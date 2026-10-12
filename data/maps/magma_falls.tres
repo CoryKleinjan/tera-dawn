@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=65 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=64 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/forge.tres" id="2_forge"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
 [ext_resource type="Resource" path="res://data/monsters/fire_imp_archer.tres" id="9_fire_imp_archer"]
 [ext_resource type="Resource" path="res://data/monsters/magma_shell.tres" id="10_magma_shell"]
-[ext_resource type="Resource" path="res://data/monsters/forge_golem.tres" id="11_forge_golem"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="12_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/stump.png" id="13_stump"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/steam_vent.png" id="14_steam_vent"]
@@ -91,25 +90,25 @@ count = 2
 
 [sub_resource type="Resource" id="Resource_34"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("11_forge_golem")
+monster = ExtResource("10_magma_shell")
 platform = 8
 count = 2
 
 [sub_resource type="Resource" id="Resource_33"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("11_forge_golem")
+monster = ExtResource("10_magma_shell")
 platform = 7
 count = 2
 
 [sub_resource type="Resource" id="Resource_32"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("11_forge_golem")
+monster = ExtResource("10_magma_shell")
 platform = 6
 count = 2
 
 [sub_resource type="Resource" id="Resource_31"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("11_forge_golem")
+monster = ExtResource("10_magma_shell")
 platform = 5
 count = 2
 
@@ -121,7 +120,7 @@ count = 2
 
 [sub_resource type="Resource" id="Resource_29"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("11_forge_golem")
+monster = ExtResource("10_magma_shell")
 platform = 3
 count = 2
 
@@ -133,7 +132,7 @@ count = 3
 
 [sub_resource type="Resource" id="Resource_27"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("11_forge_golem")
+monster = ExtResource("10_magma_shell")
 platform = 1
 count = 3
 
@@ -153,7 +152,7 @@ count = 3
 script = ExtResource("7_portal_def")
 x = 3140.0
 platform = 0
-target_map = &"molten_throne"
+target_map = &"ironworks_depths"
 target_x = 120.0
 
 [sub_resource type="Resource" id="Resource_23"]
@@ -350,4 +349,4 @@ props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_38"), Sub
 region = &"emberreach"
 world_pos = Vector2(860.0, 325.0)
 return_map = &"emberforge"
-level_text = "Lv. 17-22"
+level_text = "Lv. 17-20"
