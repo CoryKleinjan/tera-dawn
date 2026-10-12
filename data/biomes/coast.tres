@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BiomeDef" load_steps=55 format=3]
+[gd_resource type="Resource" script_class="BiomeDef" load_steps=53 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/biome_def.gd" id="1_biome_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/sea_gull.tres" id="90_gulls"]
@@ -32,8 +32,6 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/fence.png" id="28_fence"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/flowers.png" id="29_flowers"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/signature_plant.png" id="30_signature_plant"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/building_large.png" id="31_building_large"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/building_small.png" id="32_building_small"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/signature_prop.png" id="33_signature_prop"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/lantern_lit.png" id="34_lantern_lit"]
 [ext_resource type="Texture2D" path="res://assets/sprites/props/portal_1.png" id="36_portal_1"]
@@ -120,11 +118,11 @@ drift = 0.0
 
 [sub_resource type="Resource" id="Resource_8"]
 script = ExtResource("20_decor_def")
-textures = Array[Texture2D]([ExtResource("31_building_large"), ExtResource("32_building_small"), ExtResource("33_signature_prop")])
+textures = Array[Texture2D]([ExtResource("33_signature_prop")])
 spacing = Vector2(480.0, 900.0)
 depth = Vector2(-8.8, -7.6)
 scale = Vector2(1.08, 1.08)
-chance = 0.6
+chance = 0.2
 texel = 1.25
 shaded = true
 
