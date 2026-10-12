@@ -10,9 +10,11 @@ func check() -> void:
 	for m: MonsterDef in Content.monsters.values():
 		if m.boss:
 			continue
+		# a slime's bits are meant to pop in one hit, so only the high end applies to them
+		var low := 0.0 if _only_split_from(m) else Balance.BAND.x - 0.2
 		for j in Balance.LINES:
 			var hits := Balance.hits_to_kill(Balance.typical(j, m.level), m)
-			if hits < Balance.BAND.x - 0.2 or hits > Balance.BAND.y:
+			if hits < low or hits > Balance.BAND.y:
 				worst += " %s/%s %.1f" % [j, m.id, hits]
 		var kills := Balance.kills_per_level(m.level, m)
 		# a slime's bits only come with the slime (it pays for both), so nobody levels on bits
