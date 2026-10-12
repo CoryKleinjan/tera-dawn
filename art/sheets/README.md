@@ -80,7 +80,8 @@ screen (Cory, 2026-10-11: "do this for all assets"). `detail` and `alpha` defaul
 
 `recolor` names one of `RECOLORS`: `dark_parchment` turns the leather UI sheets' pale parchment
 into dark leather (the game writes light text on its panels), `leather` recolours older purple
-UI to leather, and `despill` whitens pale art the background tinted pink.
+UI to leather, `despill` whitens pale art the background tinted pink, and `sandstone` turns
+cool grey-blue stone into the warm sandstone of Dawnharbor's floor (its walls and terrace ends).
 
 ## Animation sets
 
