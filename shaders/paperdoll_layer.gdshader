@@ -23,7 +23,7 @@ void fragment() {
 		// shade it in sRGB, then back
 		c.rgb = pow(gear_tint(pow(c.rgb, vec3(1.0 / 2.2)), tint.rgb), vec3(2.2));
 	} else {
-		// the same as multiplying in sRGB (paperdoll_ui_layer.gdshader)
+		// the same as multiplying in sRGB
 		c.rgb *= pow(tint.rgb, vec3(2.2));
 	}
 	c *= COLOR;

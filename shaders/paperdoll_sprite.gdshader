@@ -3,7 +3,6 @@ shader_type spatial;
 // Sprite3D (TDStage.style_sprite), drawn as paperdoll_stage.gdshaderinc says.
 render_mode cull_disabled, specular_disabled, depth_prepass_alpha;
 
-#define LINEAR_COLOR
 #include "res://shaders/paperdoll.gdshaderinc"
 #include "res://shaders/paperdoll_stage.gdshaderinc"
 #include "res://shaders/paperdoll_stride.gdshaderinc"

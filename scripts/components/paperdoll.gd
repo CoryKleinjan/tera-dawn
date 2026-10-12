@@ -101,7 +101,7 @@ class Layer:
 		tint = t
 		gear = g
 
-	## Sets a layer material's uniforms (paperdoll_layer or paperdoll_ui_layer shader).
+	## Sets a layer material's uniforms (the paperdoll_layer shader).
 	func apply(mat: ShaderMaterial) -> void:
 		mat.set_shader_parameter(&"tint", tint)
 		mat.set_shader_parameter(&"gear", gear)
@@ -392,7 +392,7 @@ func _add_piece(p: Piece, tint := Color.WHITE) -> void:
 static func _look_color(l: LookDef, region: Region) -> Color:
 	return l.color if l and l.recolors() else ref_color(region)
 
-## Sets a dressing material's uniforms (paperdoll_sprite or paperdoll_ui shader). The
+## Sets a dressing material's uniforms (the paperdoll_sprite shader). The
 ## per-region values go in a tiny texture, one column per region (see paperdoll.gdshaderinc).
 func apply(mat: ShaderMaterial) -> void:
 	var data := Image.create(REGIONS, 3, false, Image.FORMAT_RGBAF)
