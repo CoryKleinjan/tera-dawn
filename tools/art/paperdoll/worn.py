@@ -133,7 +133,7 @@ def shield_layers(hero, rig_frames):
             p = drawn.get(poses.get(n, poses.get(body_cells[n], "")))  # a frame reusing a cell (blink) uses its pose
             if p and "shield" in entry:
                 img = scaled(p.img, s_sh)
-                place(canvas, img, (img.width / 2, img.height / 2), entry["shield"])
+                place(canvas, img, (img.width / 2, img.height / 2), entry.get("shield_at", entry["shield"]))
             out.append(canvas)
         save_layer(f"shield_{style}", out, fw, fh, index, anims)
 

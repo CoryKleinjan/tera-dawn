@@ -231,16 +231,24 @@ def drawn_axis(arr):
     return round(math.degrees(math.atan2(dy, dx)), 1)
 
 
+# Frames where he holds no weapon, in his hand or on his back.
+EMPTY_HANDED = ("levelup",)
+
+
 def holds(hands, spec, names, forearms=None):
     """Per weapon kind, per frame: [x, y, angle] of the fist and the weapon in it (the sword's
-    are the hand-placed "weapon" points), or None when the weapon isn't in his hand. A kind
+    are the hand-placed "weapon" points; a kind's own [x, y, angle] puts it in his hand on any
+    frame), or None when the weapon isn't in his hand (on his back: ON_BACK). A kind
     with "along": "forearm" points the way his forearm does (`forearms`, from forearm_angles)."""
     out = {"sword": {n: hands[n].get("weapon") for n in names}}
-    # a "sword" entry only turns the hand-placed blade (held at one tilt while he stands, walks
-    # and runs, swaying a little), keeping where the fist is
-    for n, angle in spec.get("sword", {}).get("frames", {}).items():
-        if out["sword"].get(n) is not None:
-            out["sword"][n] = [out["sword"][n][0], out["sword"][n][1], angle]
+    # a "sword" entry turns the hand-placed blade (held at one tilt while he stands, walks and
+    # runs, swaying a little), keeping where the fist is; [x, y, angle] moves the fist too
+    # (placing it even on a frame with no "weapon" point, such as sit)
+    for n, v in spec.get("sword", {}).get("frames", {}).items():
+        if isinstance(v, list):
+            out["sword"][n] = [round(float(c), 1) for c in v]
+        elif out["sword"].get(n) is not None:
+            out["sword"][n] = [out["sword"][n][0], out["sword"][n][1], v]
 
     def resolve(kind):
         if kind not in out:
@@ -249,12 +257,13 @@ def holds(hands, spec, names, forearms=None):
             frames = {}
             for n in names:
                 v = h.get("frames", {}).get(n, h.get("angle"))
+                if isinstance(v, list):  # [x, y, angle]: in his fist there, even where the sword has none
+                    frames[n] = [round(float(c), 1) for c in v]
+                    continue
                 if h.get("along") == "forearm" and forearms and forearms.get(n) is not None:
                     v = forearms[n]
                 if base[n] is None:
                     frames[n] = None
-                elif isinstance(v, list):
-                    frames[n] = [round(float(c), 1) for c in v]
                 else:
                     frames[n] = [base[n][0], base[n][1], base[n][2] if v is None else v]
             out[kind] = frames
@@ -262,6 +271,10 @@ def holds(hands, spec, names, forearms=None):
 
     for kind in WEAPON_KINDS:
         resolve(kind)
+    for kind in out:  # no weapon at all while he levels up (Cory 2026-10-12), whatever a kind's line says
+        for n in EMPTY_HANDED:
+            if n in out[kind]:
+                out[kind][n] = None
     return out
 
 

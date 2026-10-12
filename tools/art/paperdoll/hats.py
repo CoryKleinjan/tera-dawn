@@ -330,7 +330,7 @@ def save_head_cut(hero, name):
         paint = (body[..., 3] > 127) & (body[..., :3].max(2) >= HEAD_CUT_DARK * 255)
         hx, hy = fi["head"]
         head = grown(flood(paint, (int(hx), int(hy))), 4)
-        spots = [h for k, h in hero.hands[n].items() if k != "head_tilt" and k != "hands"]
+        spots = [h for k, h in hero.hands[n].items() if isinstance(h, list) and k != "hands"]
         for ax, ay, *_ in spots + hero.hands[n].get("hands", []):
             head &= ~(((xx - ax) ** 2 + (yy - ay) ** 2 < (HEAD_CUT_HAND * fi["r"]) ** 2)
                       & ((xx - hx) ** 2 + (yy - hy) ** 2 > (HEAD_CUT_KEEP * fi["r"]) ** 2))
