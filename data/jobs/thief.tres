@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/data/job_def.gd" id="1_job_def"]
 [ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="2_stat_block"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
-[ext_resource type="Resource" path="res://data/items/equips/iron_claw.tres" id="4_iron_claw"]
+[ext_resource type="Resource" path="res://data/items/equips/iron_star.tres" id="4_iron_claw"]
 [ext_resource type="Resource" path="res://data/items/use/red_potion.tres" id="5_red_potion"]
 [ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="q_blue_potion"]
 [ext_resource type="Script" path="res://scripts/data/item_def.gd" id="q_item_def"]
@@ -35,7 +35,7 @@ tint = Color(0.815686, 0.713725, 0.909804, 1.0)
 primary_stat = "luck"
 secondary_stat = "dexterity"
 mastery = 0.6
-description = "Quick and quiet, throwing stars from claws or striking with daggers. Luck drives their damage."
+description = "Quick and quiet, throwing stars or striking with daggers. Luck drives their damage."
 base_hp = 50
 hp_per_level = 12
 base_mp = 20

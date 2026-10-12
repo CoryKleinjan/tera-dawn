@@ -118,7 +118,8 @@ def grip_point(arr, kind, axis, dots):
       (the first place, going up from the pommel, that gets much wider than the handle);
     - a wand: halfway along the shaft; a staff: low on its handle (STAFF_GRIP along it);
     - a gun: in the middle of the pistol grip (the part hanging below the barrel at the back);
-    - a claw: in the middle of its cuff (CLAW_CUFF along it), so the cuff covers his fist;
+    - a throwing star: a little behind its middle (STAR_GRIP across it), so his fist hides its
+      middle and its front points stick out past his fingers;
     - a bow: on its riser, halfway up (bow_parts), so it is held by the middle;
     - anything else (knuckles): its dot, or a guess near its back end."""
     if kind == "bow":
@@ -137,9 +138,8 @@ def grip_point(arr, kind, axis, dots):
         return _on_axis(arr, axis, lo + span / 2)
     if kind == "staff":
         return _on_axis(arr, axis, lo + span * STAFF_GRIP)
-    if kind == "claw":
-        # the middle of the cuff, so the cuff covers his fist and the blades reach past it
-        return _on_axis(arr, axis, lo + span * CLAW_CUFF)
+    if kind == "star":
+        return _on_axis(arr, axis, lo + span * STAR_GRIP)
     if kind == "gun":
         # the middle of the pistol grip: what hangs below the barrel's underside (the lowest
         # row of its front part) at the back, so his whole fist wraps the grip
@@ -387,11 +387,35 @@ def forearm_mask(px, grip, angle, r):
     return fist_mask(px, grip, r * ARM_REACH) & band
 
 
+def skin_near(px, region, grip, reach):
+    """His hand and arm around `grip`: the skin joined to it within `reach`, found on the body's
+    region map (so the dark lines inside his hand and between hand and forearm don't stop it),
+    plus the outline around it."""
+    ok = (region == R["skin"]) & (px[..., 3] > 127)
+    h, w = ok.shape
+    yy, xx = np.mgrid[0:h, 0:w]
+    ok &= (xx - grip[0]) ** 2 + (yy - grip[1]) ** 2 <= reach ** 2
+    if not ok.any():
+        return ok
+    d = np.where(ok, (xx - grip[0]) ** 2 + (yy - grip[1]) ** 2, np.inf)
+    sy, sx = np.unravel_index(np.argmin(d), d.shape)
+    seen = np.zeros(ok.shape, bool)
+    seen[sy, sx] = True
+    todo = deque([(sy, sx)])
+    while todo:
+        y, x = todo.popleft()
+        for ny, nx in ((y + 1, x), (y - 1, x), (y, x + 1), (y, x - 1)):
+            if 0 <= ny < h and 0 <= nx < w and ok[ny, nx] and not seen[ny, nx]:
+                seen[ny, nx] = True
+                todo.append((ny, nx))
+    return ss.dilate(seen, 2) & (px[..., 3] > 127)
+
+
 def fist_masks(hero, held):
     """Writes fist_<kind>.png for every GRIPPED kind: his fingers around its grip, on the
     frames where it is in his near hand, and his forearm too on frames its "forearm" angle
     names (a bow, whose string crosses it)."""
-    names, frames, hands, r = hero.names, hero.frames, hero.hands, hero.r
+    names, frames, hands, r, info = hero.names, hero.frames, hero.hands, hero.r, hero.info
     for kind in GRIPPED:
         far_frames = hero.hold_spec.get(kind, {}).get("behind", ())
         palm_frames = hero.hold_spec.get(kind, {}).get("palm", ())
@@ -399,7 +423,7 @@ def fist_masks(hero, held):
         # head radii), so it doesn't spill onto his chest and cut the weapon out where his shirt is
         reach = r * hero.hold_spec.get(kind, {}).get("fist", FIST)
         masks = []
-        for n, px in zip(names, frames):
+        for i, (n, px) in enumerate(zip(names, frames)):
             h = held[kind][n]
             far = hands[n].get("weapon_behind", False) or n in far_frames or n in palm_frames
             if h is None or far:
@@ -409,8 +433,28 @@ def fist_masks(hero, held):
             arm = hero.hold_spec.get(kind, {}).get("forearm", {}).get(n)
             if arm is not None:  # a bow's string crosses his forearm: the forearm draws over it too
                 m |= forearm_mask(px, h[:2], arm, r)
+            if hero.hold_spec.get(kind, {}).get("arm"):  # held behind his whole hand: his arm draws over it too
+                m |= skin_near(px, info[i]["region"], h[:2], r * ARM_REACH)
+            if hero.hold_spec.get(kind, {}).get("solid"):  # no weapon showing through the lines inside his fist
+                m = filled(m)
             masks.append(m)
         save_fist(kind, masks, hero.fw, hero.fh)
+
+
+def greyed(piece):
+    """A copy of a weapon picture in grey (its alpha kept), to stand as its kind's tinted template."""
+    out = copy.copy(piece)
+    grey = piece.img.convert("LA").convert("RGBA")
+    grey.putalpha(piece.img.getchannel("A"))
+    out.img = grey
+    return out
+
+
+def filled(mask):
+    """`mask` with every hole in it (a part not joined to the edge of the frame) filled in."""
+    parts, n = ss.label(~mask)
+    edge = set(np.unique(np.concatenate([parts[0], parts[-1], parts[:, 0], parts[:, -1]]))) - {0}
+    return mask | ((parts > 0) & ~np.isin(parts, list(edge)))
 
 
 def held_pictures():
@@ -469,10 +513,14 @@ def weapon_layers(hero, weapons, held):
     # weapons: every kind (greyscale, tinted per item) and every weapon with its own picture
     s_w = r * SWORD_LENGTH / length(weapons["sword"], "sword")
     grips = {}
-    pictures = [(kind, kind, weapons[kind], True, 1.0) for kind in WEAPON_KINDS]
     # (a bow drawn at a slant is stood up first, so it is measured and held as the rig expects)
     drawn_weapons = [(item, kind, stood_up(piece) if kind in UPRIGHT else piece, sheet, size)
                      for item, kind, piece, sheet, size in held_pictures()]
+    if "star" not in weapons:  # the weapons sheet has no star: the first star's own picture, in grey
+        weapons = dict(weapons, star=greyed(next(p for _, kind, p, _, _ in drawn_weapons if kind == "star")))
+    # a throwing star is sized against his head, not the sword (STAR_ACROSS)
+    star = lambda piece: r * STAR_ACROSS / (s_w * length(piece, "star"))  # noqa: E731
+    pictures = [(kind, kind, weapons[kind], True, star(weapons[kind]) if kind == "star" else 1.0) for kind in WEAPON_KINDS]
     # an icon sheet is drawn at its own size: it is shrunk so each kind of weapon on it is, on
     # the median, as long as the template of its kind (keeping their sizes against each other;
     # a sheet draws its wands and staffs at the same icon size, but a staff is far longer)
@@ -480,7 +528,8 @@ def weapon_layers(hero, weapons, held):
     # (and then grown or shrunk by the item's own held_size: a claymore longer than a sword)
     for item, kind, piece, sheet, _ in drawn_weapons:
         by_sheet.setdefault((sheet, kind), []).append(length(weapons[kind], kind) / length(piece, kind))
-    pictures += [("item_" + item, kind, piece, False, float(np.median(by_sheet[sheet, kind])) * size)
+    pictures += [("item_" + item, kind, piece, False,
+                  (star(piece) if kind == "star" else float(np.median(by_sheet[sheet, kind]))) * size)
                  for item, kind, piece, sheet, size in drawn_weapons]
     for name, kind, piece, tinted, k in pictures:
         img, grip, axis = weapon(piece, s_w * WORN_SIZE.get(kind, 1.0) * k, kind)

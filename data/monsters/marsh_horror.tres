@@ -14,7 +14,7 @@
 [ext_resource type="Resource" path="res://data/items/equips/deckhand_trousers.tres" id="12_deckhand_trousers"]
 [ext_resource type="Resource" path="res://data/items/equips/deckhand_coat.tres" id="13_deckhand_coat"]
 [ext_resource type="Resource" path="res://data/items/equips/lume_earrings.tres" id="14_lume_earrings"]
-[ext_resource type="Resource" path="res://data/items/equips/viper_claw.tres" id="15_viper_claw"]
+[ext_resource type="Resource" path="res://data/items/equips/viper_star.tres" id="15_viper_claw"]
 
 [sub_resource type="Resource" id="Resource_12"]
 script = ExtResource("3_drop_entry")
