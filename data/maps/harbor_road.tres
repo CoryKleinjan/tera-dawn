@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=59 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=58 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/harbor.tres" id="2_harbor"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="7_portal_def"]
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
 [ext_resource type="Resource" path="res://data/monsters/thornling.tres" id="9_thornling"]
-[ext_resource type="Resource" path="res://data/monsters/bramble_boar.tres" id="10_bramble_boar"]
 [ext_resource type="Resource" path="res://data/monsters/sea_gull.tres" id="11_sea_gull"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="12_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/bush_large.png" id="13_bush_large"]
@@ -84,25 +83,25 @@ flip = true
 
 [sub_resource type="Resource" id="Resource_31"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_bramble_boar")
+monster = ExtResource("9_thornling")
 platform = 9
 count = 2
 
 [sub_resource type="Resource" id="Resource_30"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_bramble_boar")
+monster = ExtResource("11_sea_gull")
 platform = 8
 count = 3
 
 [sub_resource type="Resource" id="Resource_29"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_bramble_boar")
+monster = ExtResource("9_thornling")
 platform = 7
 count = 2
 
 [sub_resource type="Resource" id="Resource_28"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_bramble_boar")
+monster = ExtResource("11_sea_gull")
 platform = 6
 count = 2
 
@@ -120,13 +119,13 @@ count = 2
 
 [sub_resource type="Resource" id="Resource_25"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_bramble_boar")
+monster = ExtResource("9_thornling")
 platform = 3
 count = 2
 
 [sub_resource type="Resource" id="Resource_24"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_bramble_boar")
+monster = ExtResource("11_sea_gull")
 platform = 2
 count = 3
 
@@ -138,7 +137,7 @@ count = 3
 
 [sub_resource type="Resource" id="Resource_22"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_bramble_boar")
+monster = ExtResource("9_thornling")
 platform = 0
 count = 3
 
@@ -312,4 +311,4 @@ props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_32"), Sub
 region = &"dawnharbor"
 world_pos = Vector2(505.0, 232.0)
 return_map = &"dawnharbor"
-level_text = "Lv. 10-14"
+level_text = "Lv. 6-9"

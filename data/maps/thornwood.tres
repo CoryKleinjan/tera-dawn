@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=51 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=50 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="7_portal_def"]
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
 [ext_resource type="Resource" path="res://data/monsters/bramble_boar.tres" id="9_bramble_boar"]
-[ext_resource type="Resource" path="res://data/monsters/leafwing.tres" id="10_leafwing"]
 [ext_resource type="Resource" path="res://data/monsters/acorn_sentry.tres" id="11_acorn_sentry"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="12_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/flowers_yellow.png" id="14_flowers_yellow"]
@@ -56,7 +55,7 @@ count = 1
 
 [sub_resource type="Resource" id="Resource_26"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_leafwing")
+monster = ExtResource("11_acorn_sentry")
 platform = 6
 count = 2
 
@@ -74,25 +73,25 @@ count = 2
 
 [sub_resource type="Resource" id="Resource_23"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_leafwing")
+monster = ExtResource("9_bramble_boar")
 platform = 3
 count = 2
 
 [sub_resource type="Resource" id="Resource_22"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_leafwing")
+monster = ExtResource("11_acorn_sentry")
 platform = 2
 count = 2
 
 [sub_resource type="Resource" id="Resource_21"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_leafwing")
+monster = ExtResource("9_bramble_boar")
 platform = 1
 count = 3
 
 [sub_resource type="Resource" id="Resource_20"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_leafwing")
+monster = ExtResource("11_acorn_sentry")
 platform = 0
 count = 3
 
@@ -266,4 +265,4 @@ props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_30"), Sub
 region = &"greenbough"
 world_pos = Vector2(355.0, 55.0)
 return_map = &"greenbough"
-level_text = "Lv. 13-17"
+level_text = "Lv. 14-16"

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=48 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=47 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/lantern.tres" id="2_lantern"]
@@ -8,15 +8,14 @@
 [ext_resource type="Resource" path="res://data/climb_styles/rope_ladder.tres" id="6_rope_ladder"]
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="7_portal_def"]
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
-[ext_resource type="Resource" path="res://data/monsters/dusk_stalker.tres" id="9_dusk_stalker"]
-[ext_resource type="Resource" path="res://data/monsters/ash_wraith.tres" id="10_ash_wraith"]
-[ext_resource type="Resource" path="res://data/monsters/crypt_shell.tres" id="11_crypt_shell"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="12_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/tree_small.png" id="13_tree_small"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/stump.png" id="15_stump"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/fire_lilies.png" id="16_fire_lilies"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/rock_large.png" id="17_rock_large"]
 [ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
+[ext_resource type="Resource" path="res://data/monsters/shade_imp.tres" id="m_shade_imp"]
+[ext_resource type="Resource" path="res://data/monsters/lantern_wisp.tres" id="m_lantern_wisp"]
 
 [sub_resource type="Resource" id="Resource_28"]
 script = ExtResource("12_prop_placement")
@@ -65,49 +64,49 @@ flip = false
 
 [sub_resource type="Resource" id="Resource_22"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("9_dusk_stalker")
+monster = ExtResource("m_shade_imp")
 platform = 6
 count = 2
 
 [sub_resource type="Resource" id="Resource_21"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_ash_wraith")
+monster = ExtResource("m_lantern_wisp")
 platform = 5
 count = 2
 
 [sub_resource type="Resource" id="Resource_20"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("11_crypt_shell")
+monster = ExtResource("m_shade_imp")
 platform = 4
 count = 3
 
 [sub_resource type="Resource" id="Resource_19"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("11_crypt_shell")
+monster = ExtResource("m_shade_imp")
 platform = 3
 count = 2
 
 [sub_resource type="Resource" id="Resource_18"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_ash_wraith")
+monster = ExtResource("m_lantern_wisp")
 platform = 2
 count = 2
 
 [sub_resource type="Resource" id="Resource_17"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("11_crypt_shell")
+monster = ExtResource("m_shade_imp")
 platform = 1
 count = 2
 
 [sub_resource type="Resource" id="Resource_16"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_ash_wraith")
+monster = ExtResource("m_lantern_wisp")
 platform = 0
 count = 3
 
 [sub_resource type="Resource" id="Resource_15"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("9_dusk_stalker")
+monster = ExtResource("m_shade_imp")
 platform = 0
 count = 3
 
@@ -241,4 +240,4 @@ props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_23"), Sub
 region = &"lanternfall"
 world_pos = Vector2(700.0, 375.0)
 return_map = &"lanternfall"
-level_text = "Lv. 30-35"
+level_text = "Lv. 9-10"

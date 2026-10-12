@@ -29,6 +29,11 @@ a map look (`MapDef.variant`) for it, and update the entry when the zone changes
   instruments, bright catchy melody, gentle but upbeat, loop-friendly steady tempo, no long intro.
 - Towns have no monsters. Each sub-zone should be recognisable at a glance from its light and
   palette alone.
+- **Monsters**: each kind of monster belongs to one zone; zones don't share kinds unless Cory
+  says so. A map has at most three kinds (a boss counts as one).
+- **Levels**: border fields are the walk between towns and stay at Lv 10 or below; a zone's
+  training branch climbs from about Lv 10 to its boss map. `tests/content/content_zones_test.gd`
+  checks these monster and level rules.
 - Roles below: **border** fields cross to a neighbouring zone, **training** fields lead deeper,
   the **boss** map ends the branch.
 
@@ -51,11 +56,11 @@ welcome *(inferred)*.
 
 | Sub-zone | Role | Lv | What changes | Monsters |
 | --- | --- | --- | --- | --- |
-| Dawnrise Meadow | First field | 1-6 | Nothing: the zone look as painted, open sunrise meadow | Dewling, Mossling, Petal Bat, Sproutcap, Boulderkin |
+| Dawnrise Meadow | First field | 1-3 | Nothing: the zone look as painted, open sunrise meadow | Dewling, Mossling, Petal Bat |
 | Sunny Slope | Easy field | 2-3 | Brighter: clear blue sky, golden horizon, more saturated | Tide Dewling, Mossling, Petal Bat |
 | Mushroom Dell | Training | 4-6 | Cooler shade under giant mushrooms, lilac sky, misty, green spores | Sporecap, Sproutcap, Sea Gull |
-| Tidal Flats | Training, boss | 3-12 | Island shore: sea-blue sky, peach low sky, pale washed backdrop | Shell Crab, Sea Gull, Tide Dewling; boss Old Clawbeard |
-| Fern Hollow | Training, boss | 4-12 | Shaded mossy hollow, deep green light, light shafts, green motes | Sproutcap, Fern Boar, Shell Crab, Boulderkin; boss Fern Boar Chief |
+| Tidal Flats | Training, boss | 3-12 | Island shore: sea-blue sky, peach low sky, pale washed backdrop | Shell Crab, Sea Gull; boss Old Clawbeard |
+| Fern Hollow | Training, boss | 4-12 | Shaded mossy hollow, deep green light, light shafts, green motes | Fern Boar, Boulderkin; boss Fern Boar Chief |
 
 ## Dawnharbor Coast
 
@@ -81,11 +86,11 @@ Layout: `/mnt/project-files/plans/dawnharbor-city-layout.md`.
 
 | Sub-zone | Role | Lv | What changes | Monsters |
 | --- | --- | --- | --- | --- |
-| Harbor Beach | Border to Driftcove | 3-11 | Sunrise beach: peach low sky, warmer golden light | Sand Crab, Sea Gull, Tide Dewling |
-| Harbor Road | Border to Greenbough | 6-14 | Bright, airy coast road, pale blue sky, light haze; first green from Greenbough | Thornling, Bramble Boar, Sea Gull |
-| Windmill Downs | Training | 13-15 | Grassy downs with windmills, sunny and breezy *(inferred; plain harbour look today)* | Bramble Boar, Reef Gull, Tide Slime |
-| Gull Bluffs | Training | 15-20 | Windy sea cliffs crowded with gulls *(inferred; plain harbour look today)* | Reef Gull, Coral Turret, Kelp Lurker |
-| Smugglers' Grotto | Boss | 20-22 | Dim sea cave lit by smugglers' lanterns *(inferred; plain harbour look today)* | Kelp Lurker, Barnacle Boar; boss Grotto Tusker |
+| Harbor Beach | Border to Driftcove | 3-9 | Sunrise beach: peach low sky, warmer golden light | Sand Crab, Sea Gull, Tide Dewling (borrowed until Dawnharbor has its own) |
+| Harbor Road | Border to Greenbough | 6-9 | Bright, airy coast road, pale blue sky, light haze; first green from Greenbough | Thornling, Sea Gull (borrowed until Dawnharbor has its own) |
+| Windmill Downs | Training | 13-15 | Grassy downs with windmills, sunny and breezy *(inferred; plain harbour look today)* | Bramble Boar, Reef Gull, Tide Slime (borrowed until Dawnharbor has its own) |
+| Gull Bluffs | Training | 15-20 | Windy sea cliffs crowded with gulls *(inferred; plain harbour look today)* | Reef Gull, Coral Turret, Kelp Lurker (borrowed until Dawnharbor has its own) |
+| Smugglers' Grotto | Boss | 20-22 | Dim sea cave lit by smugglers' lanterns *(inferred; plain harbour look today)* | Kelp Lurker, Barnacle Boar (borrowed until Dawnharbor has its own); boss Grotto Tusker |
 
 ## Greenbough Wilds
 
@@ -106,12 +111,13 @@ rope bridges; life happens up in the branches *(inferred)*.
 
 | Sub-zone | Role | Lv | What changes | Monsters |
 | --- | --- | --- | --- | --- |
-| Bough Trail | Border to Dawnharbor | 11-14 | Forest edge, warm golden daylight | Thornling, Leafwing, Bramble Boar |
-| Whispering Grove | Border to Lumewood | 13-18 | Cool mint-teal mist, rising motes; quiet, a little magical, hinting at Lumewood | Barkcap, Leafwing, Acorn Sentry |
-| Mossy Glade | Training | 11-13 | Brightest Greenbough map, sunlit glade, strong light shafts | Thornling, Leafwing |
-| Thornwood | Training | 13-16 | Dim and tangled: olive fog, muted colour, darker shadows, thorns | Bramble Boar, Leafwing, Acorn Sentry |
-| Deep Canopy | Training | 16-20 | Dark green under a closed canopy, warm shafts piercing through | Barkcap, Grove Wisp, Acorn Sentry |
-| Elder's Root | Boss | 18-28 | Golden late-afternoon glow around an ancient tree, gold motes; reverent | Grove Wisp, Barkcap; boss Elder Treant |
+| Bough Trail | Border to Dawnharbor | 9-10 | Forest edge, warm golden daylight | Thornling, Leafwing |
+| Whispering Grove | Border to Lumewood | 9-10 | Cool mint-teal mist, rising motes; quiet, a little magical, hinting at Lumewood | Thornling, Leafwing |
+| Mossy Glade | Training | 10-14 | Brightest Greenbough map, sunlit glade, strong light shafts | Leafwing, Bramble Boar |
+| Thornwood | Training | 14-16 | Dim and tangled: olive fog, muted colour, darker shadows, thorns | Bramble Boar, Acorn Sentry |
+| Deep Canopy | Training | 16-18 | Dark green under a closed canopy, warm shafts piercing through | Acorn Sentry, Barkcap |
+| Old Oak Heights | Training | 18-23 | High in the old oaks: warm afternoon light through the leaves, golden shafts, soft green haze | Barkcap, Grove Wisp |
+| Elder's Root | Boss | 23-28 | Golden late-afternoon glow around an ancient tree, gold motes; reverent | Grove Wisp; boss Elder Treant |
 
 ## Lumewood
 
@@ -131,12 +137,13 @@ windows; calm and scholarly, lit by crystals and glowing plants *(inferred beyon
 
 | Sub-zone | Role | Lv | What changes | Monsters |
 | --- | --- | --- | --- | --- |
-| Glimmer Path | Border to Greenbough | 15-20 | Brightest Lumewood map: strong light, pale lilac horizon, rich colour | Crystal Golem, Star Bat, Grove Wisp |
-| Starfall Ridge | Border to Emberreach | 22-27 | Night ridge under a starry navy sky, starlight motes | Starfall Golem, Spell Imp |
-| Glowcap Hollow | Training | 11-13 | Blue-teal mushroom glow, cyan motes | Glowcap, Lume Wisp |
-| Crystal Caves | Training (dungeon music) | 13-17 | Deep indigo cave lit by violet crystals | Lume Wisp, Star Bat, Prism Slime |
-| Prism Lake | Training | 17-22 | Pink-violet sky over a lake, most saturated map in the zone | Prism Slime, Crystal Golem, Spell Imp |
-| Arcane Spire | Boss | 20-30 | Purple magic fog, magenta motes, heavy violet grade | Spell Imp, Crystal Golem; boss Arcane Sentinel |
+| Glimmer Path | Border to Greenbough | 9-10 | Brightest Lumewood map: strong light, pale lilac horizon, rich colour | Glowcap, Lume Wisp |
+| Starfall Ridge | Border to Emberreach | 9-10 | Night ridge under a starry navy sky, starlight motes | Glowcap, Lume Wisp |
+| Glowcap Hollow | Training | 10-15 | Blue-teal mushroom glow, cyan motes | Lume Wisp, Star Bat |
+| Crystal Caves | Training (dungeon music) | 15-17 | Deep indigo cave lit by violet crystals | Star Bat, Prism Slime |
+| Prism Lake | Training | 17-20 | Pink-violet sky over a lake, most saturated map in the zone | Prism Slime, Crystal Golem |
+| Glass Dome Ruins | Training | 20-27 | Ruined glass domes under a cool blue-violet sky, pale blue motes | Crystal Golem, Spell Imp, Starfall Golem |
+| Arcane Spire | Boss | 22-30 | Purple magic fog, magenta motes, heavy violet grade | Spell Imp, Starfall Golem; boss Arcane Sentinel |
 
 ## Emberreach
 
@@ -157,12 +164,13 @@ and iron-bound doors; smoke and forge glow *(inferred beyond the buildings)*.
 
 | Sub-zone | Role | Lv | What changes | Monsters |
 | --- | --- | --- | --- | --- |
-| Cinder Pass | Border to Lumewood | 23-29 | Dusty mountain pass, brown-orange haze, muted colour | Cinder Hog, Starfall Golem, Forge Golem |
-| Ashen Wastes | Border to Lanternfall | 20-31 | Grey ash plain, washed-out colour, white ash drifting | Ash Wraith, Cinder Hog, Magma Shell |
+| Cinder Pass | Border to Lumewood | 7-8 | Dusty mountain pass, brown-orange haze, muted colour | Cinder Imp, Ember Boar |
+| Ashen Wastes | Border to Lanternfall | 8-9 | Grey ash plain, washed-out colour, white ash drifting | Ember Boar, Ashshell |
 | Slag Fields | Training | 11-13 | Brightest Emberreach map, open slag heaps, warm orange horizon | Slag Slime, Cinder Pup |
 | Smoke Pits | Training (dungeon music) | 13-17 | Smoky grey-brown pits, dim and choking | Cinder Pup, Ash Bat, Fire Imp Archer |
-| Magma Falls | Training | 17-23 | Red-orange glow of falling lava, bright ember motes | Fire Imp Archer, Magma Shell, Forge Golem |
-| Molten Throne | Boss | 20-30 | Near-black red sky, deep red lift; hottest, darkest map | Forge Golem, Magma Shell; boss Molten King |
+| Magma Falls | Training | 17-20 | Red-orange glow of falling lava, bright ember motes | Fire Imp Archer, Magma Shell |
+| Ironworks Depths | Training | 20-29 | Dark old ironworks, near-black sky with a low forge-red glow, muted colour | Magma Shell, Forge Golem, Cinder Hog |
+| Molten Throne | Boss | 23-31 | Near-black red sky, deep red lift; hottest, darkest map | Forge Golem, Ash Wraith; boss Molten King |
 
 ## Lanternfall
 
@@ -182,12 +190,13 @@ celesta, sneaky tiptoe melody. Field: low strings, clarinet, harp, soft timpani,
 
 | Sub-zone | Role | Lv | What changes | Monsters |
 | --- | --- | --- | --- | --- |
-| Dusk Bridge | Border to Emberreach | 22-33 | Long bridge in an orange sunset, warm strong light | Dusk Stalker, Ash Wraith, Crypt Shell |
-| Shadow Marsh | Border to Driftcove | 19-24 | Murky green marsh fog, green will-o'-wisp motes | Marsh Horror, Crypt Shell, Gloomcap |
-| Lantern Alley | Training | 11-13 | Back alleys in warm lantern light, closest to the town look | Shade Imp, Lantern Wisp |
-| Gloom Woods | Training (dungeon music) | 13-17 | Dark teal woods, dim and muted | Lantern Wisp, Dusk Moth, Night Boar |
-| Wraith Moor | Training | 17-22 | Cold blue-grey moor fog, pale blue motes, low colour | Night Boar, Gloomcap, Crypt Shell |
-| Forgotten Crypt | Boss | 19-30 | Near-black purple crypt, darkest map in the game | Crypt Shell, Gloomcap; boss Lantern Wraith |
+| Dusk Bridge | Border to Emberreach | 9-10 | Long bridge in an orange sunset, warm strong light | Shade Imp, Lantern Wisp |
+| Shadow Marsh | Border to Driftcove | 9-10 | Murky green marsh fog, green will-o'-wisp motes | Shade Imp, Lantern Wisp |
+| Lantern Alley | Training | 10-15 | Back alleys in warm lantern light, closest to the town look | Lantern Wisp, Dusk Moth |
+| Gloom Woods | Training (dungeon music) | 15-17 | Dark teal woods, dim and muted | Dusk Moth, Night Boar |
+| Wraith Moor | Training | 17-19 | Cold blue-grey moor fog, pale blue motes, low colour | Night Boar, Gloomcap |
+| Sunken Graveyard | Training | 19-24 | Sunken graves under a dark slate sky, grey-blue fog, pale green motes | Gloomcap, Crypt Shell, Marsh Horror |
+| Forgotten Crypt | Boss | 24-30 | Near-black purple crypt, darkest map in the game | Marsh Horror, Dusk Stalker; boss Lantern Wraith |
 
 ## Driftcove
 
@@ -208,12 +217,13 @@ sails and rope everywhere *(inferred beyond the buildings)*.
 
 | Sub-zone | Role | Lv | What changes | Monsters |
 | --- | --- | --- | --- | --- |
-| Sandy Shoals | Border to Dawnharbor | 11-15 | Bright tropical shallows, strong sun, saturated colour | Sand Crab, Tide Slime, Reef Gull |
-| Saltwind Cliffs | Border to Lanternfall | 20-22 | Windy grey-blue overcast cliffs, pale and muted | Cliff Harpy, Barnacle Boar, Kelp Lurker |
-| Tidepools | Training | 11-13 | Rock pools under a pink-coral dusk sky | Sand Crab, Tide Slime |
-| Coral Reef | Training | 13-17 | Teal underwater-style light, cyan motes | Tide Slime, Reef Gull, Coral Turret |
-| Wreck Cove | Training | 17-22 | Stormy dark blue cove full of wrecks, muted | Kelp Lurker, Barnacle Boar, Coral Turret |
-| Titan Grotto | Boss | 20-30 | Deep blue sea cave, dim and cold | Kelp Lurker, Barnacle Boar; boss Reef Titan |
+| Sandy Shoals | Border to Dawnharbor | 9-10 | Bright tropical shallows, strong sun, saturated colour | Sand Crab, Tide Slime |
+| Saltwind Cliffs | Border to Lanternfall | 9-10 | Windy grey-blue overcast cliffs, pale and muted | Sand Crab, Tide Slime |
+| Tidepools | Training | 10-15 | Rock pools under a pink-coral dusk sky | Tide Slime, Reef Gull |
+| Coral Reef | Training | 15-17 | Teal underwater-style light, cyan motes | Reef Gull, Coral Turret |
+| Wreck Cove | Training | 17-20 | Stormy dark blue cove full of wrecks, muted | Coral Turret, Kelp Lurker |
+| Drowned Docks | Training | 20-22 | Half-sunk old docks, grey-teal sky and sea mist | Kelp Lurker, Barnacle Boar |
+| Titan Grotto | Boss | 22-30 | Deep blue sea cave, dim and cold | Barnacle Boar, Cliff Harpy; boss Reef Titan |
 
 ---
 
