@@ -1,6 +1,7 @@
 """Hats: each shape's picture (from the side, or from behind) put on his head, sized against
 the hat sheet's bald head."""
 import glob
+import math
 import json
 
 from .common import *  # noqa: F401,F403
@@ -189,7 +190,8 @@ def item_hat_layers(hero):
             continue  # (a sheet waits for its heads-erased twin)
         sheet, only = cut(name), cut(name + "_only")
         with open(path) as f:
-            shoulders = json.load(f).get("shoulders", {})
+            spec = json.load(f)
+        shoulders, lower = spec.get("shoulders", {}), spec.get("lower", {})
         for key in sheet:
             if key.endswith("_side") and key[:-5] + "_behind" in sheet and key != "bald_side":
                 item = key[:-5]
@@ -202,8 +204,11 @@ def item_hat_layers(hero):
                 put_hat(hero, f"hat_item_{item}", views, tinted=False, shape=shapes.get(item),
                         head_cut=shapes.get(item) == "helm")
                 if closed:  # then moved so his eyes look out of its eye holes, and saved again
-                    put_hat(hero, f"hat_item_{item}", eyes_out(hero, f"hat_item_{item}", views),
-                            tinted=False, shape="helm", head_cut=True)
+                    views = eyes_out(hero, f"hat_item_{item}", views)
+                    if item in lower:  # (and a little lower where Cory asked: "lower", head radii)
+                        views = {v: (img, np.asarray(at, float) - (0.0, lower[item] * ref_r), ref_r)
+                                 for v, (img, at, ref_r) in views.items()}
+                    put_hat(hero, f"hat_item_{item}", views, tinted=False, shape="helm", head_cut=True)
 
 
 def enclosed(solid):
@@ -378,10 +383,38 @@ def save_hair_cut(hero, name, head=False):
             hair = np.asarray(Image.open(path))[..., 3] > 0
             cut = no_loose_hair(strip, solids, heads, hair, fw, [fi["r"] for fi in hero.info], style in HAIR_HEAD_ONLY,
                                 [fi["head"] for fi in hero.info])
+            if style in HAIR_HEAD_ONLY:
+                cut = as_in(cut, hair, hero, HAIR_HAT_POSE)
             # (softened only where some of this hair shows beside it: none peeks out along a soft
             # edge with nothing beside it)
             hard = (cut[..., 3] > 0) & ~ss.dilate(hair & (cut[..., 3] == 0), HAIR_CUT_TUCK + 1)
             save_strip(softened(cut, hard), name, "haircut", "hair_cuts", style)
+
+
+def as_in(cut, hair, hero, pose_name):
+    """A style's cut strip with every side-view frame showing only what `pose_name`'s frame
+    shows of it, set on that frame's head (moved, turned and sized with it): Cory 2026-10-12,
+    the hair under a hat in the sitting pose looks the best and every pose wears it. Frames
+    from behind keep their own."""
+    fw, fh = hero.fw, hero.fh
+    s = hero.names.index(pose_name)
+    src = hair[:, s * fw:(s + 1) * fw] & (cut[:, s * fw:(s + 1) * fw, 3] == 0)  # (what shows there)
+    fs = hero.info[s]
+    out = cut.copy()
+    yy, xx = np.mgrid[0:fh, 0:fw]
+    for i, (n, fi) in enumerate(zip(hero.names, hero.info)):
+        if i == s or n in BACK_VIEW:
+            continue
+        rel = np.stack([xx - fi["head"][0], yy - fi["head"][1]]) / fi["r"]
+        a = math.radians(fs["tilt"] - fi["tilt"])  # (back into the held pose's turn)
+        sx = fs["head"][0] + (rel[0] * math.cos(a) - rel[1] * math.sin(a)) * fs["r"]
+        sy = fs["head"][1] + (rel[0] * math.sin(a) + rel[1] * math.cos(a)) * fs["r"]
+        ok = (sx >= 0) & (sx < fw) & (sy >= 0) & (sy < fh)
+        shows = np.zeros((fh, fw), bool)
+        shows[ok] = src[sy[ok].astype(int), sx[ok].astype(int)]
+        out[:, i * fw:(i + 1) * fw][~shows] = 255
+        out[:, i * fw:(i + 1) * fw][shows] = 0
+    return out
 
 
 def his_head(px, fi):

@@ -86,6 +86,7 @@ HAIR_CUT_TOUCH, HAIR_CUT_HELD = 4, 0.7  # ...a patch the cut chopped less than t
 HAIR_CUT_BODY = 2     # ...or one the cut reached not touching his head within this (frame pixels)
 HAIR_HEAD_ONLY = ("long", "ponytail", "twin_tails")  # ...hairstyles showing only the hair on his head under a hat (no tails or hanging locks)
 HAIR_HEAD_ONLY_OVAL = (1.1, 0.9, 0.55)  # ...inside this oval (half width, half height, raised: head radii), above his mouth
+HAIR_HAT_POSE = "sit"  # ...and every pose wears this pose's hair under a hat (for those styles)
 HAIR_CUT_SOFT = 1.5   # ...its edge blurred this much (frame pixels), so the hair fades out under the hat
 HAIR_CUT_TUCK = 2      # ...and stops this many pixels inside the hat, so hair and head run on under its soft edge
 HAIR_CUT_LOW = 0.75    # ...and never below this far under the head's middle (head radii)
