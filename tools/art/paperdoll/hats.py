@@ -292,6 +292,8 @@ def save_hair_cut(hero, name, head=False):
                 e = edge[near].max() if len(near) else edge[cols[np.argmin(np.abs(cols - x))]]
             e = min(e, int(fi["head"][1] + HAIR_CUT_LOW * fi["r"]))  # (hair hanging lower always shows)
             strip[:e + 1, i * fw + x] = 255
+            if abs(x - hx) > HAIR_CUT_OUT * fi["r"]:  # (and no stubs of spiky hair stick out beside his face)
+                strip[:int(fi["head"][1] + HAIR_CUT_OUT_LOW * fi["r"]) + 1, i * fw + x] = 255
         if head:
             strip[:, i * fw:(i + 1) * fw][head_area(fi, fw, fh, HEAD_CUT_HAIR)] = 255
     save_strip(strip, name, "haircut", "hair_cut")

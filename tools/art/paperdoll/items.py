@@ -140,8 +140,7 @@ def posed_item(piece, cell, px, place, twin=None):
     mask = piece_mask(piece, cell, place, twin) & (arr[..., 3] > 0)
     if not mask.any():
         return None
-    cut = arr.copy()
-    cut[~mask] = 0
+    cut = feathered(arr, mask)
     # the new cut edge can run through the magenta Gemini blended into the outline
     rgb, alpha = ss.defringe(cut[..., :3] / 255.0, cut[..., 3] / 255.0, (255, 0, 255))
     cut = np.dstack([rgb * 255, alpha * 255]).round().clip(0, 255).astype(np.uint8)
