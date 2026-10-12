@@ -13969,6 +13969,29 @@
    }
   },
   {
+   "id": "wg_hair_tousled_underhat",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_hair_tousled_underhat.png",
+   "replaces": null,
+   "kind": "anim",
+   "stands": false,
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 worn-gear thread (Cory: the hair looks bad under hats and helmets; approved a one-hairstyle test). The tousled hair as it lies under a hat, like MapleStory's under-hat hair: pressed flat to his head with no spikes sticking up or out, the fringe and sides hanging naturally. The game would draw it instead of the normal hair while a hat is worn (the hat's hair cut still hides what's under the hat).",
+   "edit": {
+    "base": "art/source/hair_tousled_frames.png",
+    "refs": [],
+    "text": "This is my sheet of a boy's TOUSLED hair (in greyscale) in 32 labelled poses (8 columns x 4 rows) on magenta. REPAINT the hair on every figure as the SAME hairstyle the way it lies when he wears a snug hat or bandana: the hair is pressed down flat against the top and sides of his head, following the round shape of the skull closely, with NO spikes or tufts sticking up or out past his head's outline. Below where a hat's band would sit (just above the eyebrows, and above the ears at the sides), the fringe falls softly over the forehead in a few tidy painted locks, and the sides come down neatly in front of and behind the ears, ending in soft rounded painted tips. The back of the head in the back views is the same: smooth, close to the head, with a short tidy fringe at the nape. Keep the hair in the same GREYSCALE tones (white to dark grey), with the same thin dark outline, painted shading and brush texture. Keep every figure, its face area, body, label and grid line exactly where it is: do not move, resize, redraw or re-pose anything; only the hair changes. The background stays bright pure magenta #FF00FF. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything."
+   }
+  },
+  {
    "id": "dawnharbor_city_tavern",
    "prompts": null,
    "batch": "Dawnharbor city test: tavern (new building)",
