@@ -5,6 +5,8 @@ extends RefCounted
 ## Everything is read from the data, so a new job, skill or piece of gear shows up here with
 ## no code change.
 ##
+## Each starts in its job's town (home_town), every time the account is logged in to.
+##
 ## They live on their own local account (ACCOUNT), never on the player's own. With the
 ## Developer setting on (DevSettings), Play solo and Host log the player at the keyboard in
 ## to it instead of AccountStore.LOCAL (see TDLobby.on_local_login). Only debug builds (the
@@ -50,6 +52,21 @@ static func path_to(job: JobDef) -> Array[JobDef]:
 static func name_for(job: JobDef) -> String:
 	return CharacterStore.clean_name(NAME_PREFIX + job.display_name)
 
+## The town a `job` test character starts in: the town of the instructor who teaches that
+## job, or the nearest job before it that has one. The starting job (no instructor) starts
+## where every new character does, Character.START_MAP.
+static func home_town(job: JobDef) -> StringName:
+	var line := path_to(job)
+	line.reverse()
+	for j in line:
+		for m: MapDef in Content.maps.values():
+			for n in m.npcs:
+				if n.npc and j.id in n.npc.instructs:
+					var town := m.return_town()
+					if Content.maps.has(town):
+						return town
+	return Character.START_MAP
+
 ## A test character of `job` called `char_name`.
 static func build(char_name: String, job: JobDef) -> Character:
 	var c := Character.create(char_name, Character.START_JOB)
@@ -69,6 +86,7 @@ static func build(char_name: String, job: JobDef) -> Character:
 	_learn_every_skill(c)
 	_add_ammo(c)
 	c.shards = SHARDS
+	c.map_id = home_town(job)
 	c.recalc()
 	c.refill()
 	return c

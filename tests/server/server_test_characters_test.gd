@@ -75,6 +75,22 @@ func test_every_skill_is_at_its_highest_level() -> void:
 			if not s.innate and s.job in c.job_line():
 				check_eq(c.skills.level(s), s.max_level, "%s: %s" % [job.id, s.id])
 
+func test_each_starts_in_its_job_town() -> void:
+	for job in TestCharacters.jobs():
+		var c := TestCharacters.build("Home", job)
+		var town := TestCharacters.home_town(job)
+		check_eq(c.map_id, town, "%s starts at home" % job.id)
+		check(Content.map(town).town, "%s: %s is a town" % [job.id, town])
+		if job.id == Character.START_JOB:
+			check_eq(town, Character.START_MAP, "the starting job starts where everyone does")
+			continue
+		check(town != Character.START_MAP, "%s has its own town" % job.id)
+		var teaches := false
+		for m: MapDef in Content.maps.values():
+			for n in m.npcs:
+				teaches = teaches or (m.return_town() == town and n.npc and TestCharacters.path_to(job)[0].id in n.npc.instructs)
+		check(teaches, "%s: its instructor is in %s" % [job.id, town])
+
 func test_every_job_is_listed_starting_job_first() -> void:
 	var jobs := TestCharacters.jobs()
 	check_eq(jobs.size(), Content.jobs.size(), "every job")
@@ -104,6 +120,15 @@ func test_they_are_kept_until_rebuilt() -> void:
 	lobby.dropped(1)
 	_test_login()
 	check_eq(h.server.store.load_character(first).shards, 7, "kept as played")
+	for n: String in lobby.account_of(1)["characters"]:
+		var kept := h.server.store.load_character(n)
+		kept.map_id = &"meadow"
+		h.server.store.save(kept)
+	lobby.dropped(1)
+	_test_login()
+	for n: String in lobby.account_of(1)["characters"]:
+		var kept := h.server.store.load_character(n)
+		check_eq(kept.map_id, TestCharacters.home_town(kept.job), "%s back in its town" % n)
 	lobby.dropped(1)
 	_test_login(TestCharacters.Mode.REBUILD)
 	check_eq(h.server.store.load_character(first).shards, TestCharacters.SHARDS, "made fresh")
