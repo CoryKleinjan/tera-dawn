@@ -70,6 +70,15 @@ const Z_OTHER_PLAYER := 0.6
 const Z_PLAYER := 0.64
 ## Skill and hit effects play just in front of the player, on the characters' plane (effect_sprite).
 const Z_EFFECT := 0.8
+## Render priorities. See-through things (every sprite's soft edge) are drawn back to front, by
+## how far away the middle of each one is, which goes wrong for a tall building behind a short
+## character. Priority comes first: the scenery, NPCs, monsters and drops are drawn at 0, then
+## other players' heroes, then yours, then effects. A hero takes HERO_PRIORITIES priorities, one
+## per layer (PaperdollSprite).
+const HERO_PRIORITIES := 60
+const PRIORITY_OTHER_PLAYER := 1
+const PRIORITY_PLAYER := PRIORITY_OTHER_PLAYER + HERO_PRIORITIES
+const PRIORITY_EFFECT := PRIORITY_PLAYER + HERO_PRIORITIES
 ## Seconds a map change takes to fade out (and again to fade in).
 const FADE_TIME := 0.25
 
@@ -189,6 +198,7 @@ static func glow_sprite(texture: Texture2D, col: Color, texel := TEXEL) -> Sprit
 static func effect_sprite(texture: Texture2D, col: Color, texel := TEXEL) -> Sprite3D:
 	var s := glow_sprite(texture, col, texel)
 	s.alpha_cut = SpriteBase3D.ALPHA_CUT_OPAQUE_PREPASS
+	s.render_priority = PRIORITY_EFFECT
 	return s
 
 static func light(col: Color, energy: float, range_: float, shadows := false) -> OmniLight3D:
