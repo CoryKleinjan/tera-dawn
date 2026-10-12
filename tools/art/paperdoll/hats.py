@@ -104,25 +104,39 @@ def eye_band(img, at, ref_r):
     return mid, float(np.mean(rows)), float(widest)
 
 
-def eyes_in_holes(views):
-    """A closed helm placed and sized so his eyes sit in its eye holes (Cory 2026-10-11: the
-    eyes must line up with the eye holes): its opening as wide as his eyes (HELM_EYES, head
-    radii, within HELM_SIZE of the sheet's size) and centred on them; the holes are the ones
-    painted, before open_visor cuts the inside away. The view from behind is sized and lifted
-    the same."""
+def head_width(hero):
+    """His head's width in idle1 (ears included), in head radii: the painted area joined to
+    the head's middle without crossing a dark line, above his chin."""
+    fi, px = hero.info[0], hero.frames[0]
+    paint = (px[..., 3] > 127) & (px[..., :3].max(2) >= HEAD_CUT_DARK * 255)
+    head = flood(paint, (int(fi["head"][0]), int(fi["head"][1])))
+    head[int(fi["head"][1] + fi["r"]):] = False
+    xs = np.nonzero(head.any(0))[0]
+    return (xs.max() + 1 - xs.min()) / fi["r"]
+
+
+def hugging(views, head_w):
+    """A helm sized to hug his head the way MapleStory's hats do (Cory 2026-10-12): its shell
+    HELM_HUG times as wide as his head (`head_w` head radii) across the head's middle, so his
+    head stays inside it and nothing pokes out, with no cutting. A closed helm is then moved
+    (at most HELM_NUDGE head radii) so its eye holes sit on his eyes (HELM_EYES); the view
+    from behind is sized and moved the same."""
     img, at, ref_r = views["side"]
+    shell = spanned(np.asarray(img)[..., 3] > 0)
+    rows = range(max(int(at[1] - 0.3 * ref_r), 0), min(int(at[1] + 0.3 * ref_r), shell.shape[0]))
+    w = max(shell[y].sum() for y in rows)
+    r = w / (head_w * HELM_HUG)  # the head radius, in picture pixels, the shell hugs
+    new_at = np.asarray(at, float)
     band = eye_band(img, at, ref_r)
-    if band is None:  # an open helm: only drawn smaller, about his head's middle
-        return {v: (im, a, r / HELM_FIT) for v, (im, a, r) in views.items()}
-    x, y, w = band
-    lo, hi = HELM_SIZE
-    r = min(max(w / HELM_EYES[2], ref_r / hi), ref_r / lo) / HELM_FIT  # the head radius the hole fits
-    new_at = np.array([x, y]) - np.array(HELM_EYES[:2]) * r
+    if band is not None:
+        x, y, _ = band
+        want = np.array([x, y]) - np.array(HELM_EYES[:2]) * r
+        new_at = new_at + np.clip(want - new_at, -HELM_NUDGE * r, HELM_NUDGE * r)
     out = {"side": (img, new_at, r)}
     if "behind" in views:
         bimg, bat, bref = views["behind"]
         k = r / ref_r
-        lift = (new_at[1] - at[1]) / r  # head radii the side view moved
+        lift = (new_at[1] - at[1]) / r
         out["behind"] = (bimg, np.asarray(bat, float) + (0.0, lift * bref * k), bref * k)
     return out
 
@@ -159,6 +173,7 @@ def item_hat_layers(hero):
     each with its _only twin): the same layout as paperdoll_hats, with each cell pair named
     <item>_side and <item>_behind, painted in the hat's own colours from its icon."""
     shapes = hat_shapes()
+    head_w = head_width(hero)
     for path in sorted(glob.glob(os.path.join(ss.SHEETS, "hats_items_*.json"))):
         name = os.path.splitext(os.path.basename(path))[0]
         if name.endswith("_only") or not os.path.exists(os.path.join(ss.SHEETS, name + "_only.json")):
@@ -169,7 +184,7 @@ def item_hat_layers(hero):
                 item = key[:-5]
                 views = fitted(hat_views(sheet, only, item), shapes.get(item))
                 if shapes.get(item) == "helm":
-                    views = eyes_in_holes(views)
+                    views = hugging(views, head_w)
                     views = {v: (open_visor(img), at, ref_r) for v, (img, at, ref_r) in views.items()}
                 put_hat(hero, f"hat_item_{item}", views, tinted=False, shape=shapes.get(item),
                         head_cut=shapes.get(item) == "helm")

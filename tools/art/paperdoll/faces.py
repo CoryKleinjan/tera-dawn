@@ -62,6 +62,12 @@ def face_layers(hero, faces):
                 ip = np.zeros_like(px)
                 ip[grey] = px[grey]
                 px[grey] = 0
+                # the sheet's dark plum line work, brought toward the plum-brown outline of the
+                # rest of him: cut thin and smooth, it read as a magenta line round the eyes
+                lines = px[..., :3].astype(int)
+                low = np.minimum(lines[..., 0], lines[..., 2])
+                plum = (px[..., 3] > 0) & (lines.max(2) < FACE_LINE_DARK) & (low - lines[..., 1] > FACE_LINE_LEAN)
+                px[plum, 1] = (low[plum] - FACE_LINE_LEAN).astype(np.uint8)
                 canvas, iris = Image.fromarray(px, "RGBA"), Image.fromarray(ip, "RGBA")
             out.append(canvas)
             eyes.append(iris)

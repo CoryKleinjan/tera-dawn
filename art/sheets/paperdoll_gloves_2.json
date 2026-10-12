@@ -1,7 +1,6 @@
 {
   "source": "art/source/paperdoll_gloves_2.png",
   "detail": 1,
-  "alpha": "hard",
   "scale": 1.0,
   "label_band": 0.18,
   "strip_labels": true,

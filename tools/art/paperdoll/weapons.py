@@ -23,14 +23,15 @@ def weapon(piece, s, kind):
     green = (arr[..., 1] > 170) & (arr[..., 0] < 120) & (arr[..., 2] < 120) & (arr[..., 3] > 0)
     opaque = arr[..., 3] > 0
     # dots drawn off the weapon (beside it on the background, as some held_* sheets have
-    # them) are islands of their own: dropped with their outline, and don't count
-    parts, n = ss.label(opaque)
+    # them) are islands of their own: dropped with their outline and soft edge, and don't
+    # count (the islands are found on the solid art, as the soft edge can join them up)
+    parts, n = ss.label(arr[..., 3] > 127)
     if n > 1:
         sizes = np.bincount(parts.ravel())[1:]
         main = int(sizes.argmax()) + 1
         for i in range(1, n + 1):
             if i != main and green[parts == i].any():
-                arr[parts == i, 3] = 0
+                arr[ss.dilate(parts == i, 2) & (parts != main), 3] = 0
         opaque = arr[..., 3] > 0
         green &= opaque
     dots = dot_centres(green)
@@ -378,8 +379,8 @@ def icon_cut(sheet, wanted):
     cells = [[c if c in wanted else "" for c in row] for row in man["cells"]]
     if not any(any(row) for row in cells) or not os.path.exists(os.path.join(ROOT, man["source"])):
         return {}
-    # full size, on/off edges like the other hero layers (until the paperdoll is cut smooth)
-    man.update(cells=cells, scale=1.0, detail=1, alpha="hard", save=False,
+    # full size, with the soft edge like the other hero layers
+    man.update(cells=cells, scale=1.0, detail=1, save=False,
                out_dir=os.path.join("art", "build", "paperdoll", sheet))
     tmp = os.path.join(ROOT, "art", "build", "paperdoll", f"held_{sheet}.json")
     os.makedirs(os.path.dirname(tmp), exist_ok=True)

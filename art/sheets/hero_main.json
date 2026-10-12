@@ -1,7 +1,6 @@
 {
   "source": "art/source/hero_main.png",
   "detail": 1,
-  "alpha": "hard",
   "background": "dark",
   "shadow": true,
   "keep": "largest",

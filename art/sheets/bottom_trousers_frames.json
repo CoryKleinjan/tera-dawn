@@ -1,7 +1,6 @@
 {
   "source": "art/source/bottom_trousers_frames.png",
   "detail": 1,
-  "alpha": "hard",
   "grid": {
     "rows": [
       0,

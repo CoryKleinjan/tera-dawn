@@ -73,7 +73,9 @@ HAT_LINE = 0.1         # a bit of a hat cell's frame line: at most this thick ag
 # width that counts as the eye band, the widest opening that is an open face instead (head
 # radii), and how much smaller or bigger than the sheet's size the helm may be drawn
 HELM_EYES = (0.18, 0.27, 0.95)
-HELM_FIT = 0.8  # ...then drawn this much smaller, to suit his small body (Cory 2026-10-11)
+FACE_LINE_DARK, FACE_LINE_LEAN = 140, 30  # faces: line work darker than this leans at most this far to magenta
+SHORTS_BELOW = 0.45  # body.shorts_mask: the shorts are only looked for this far down the body (its height)
+HELM_HUG, HELM_NUDGE = 1.06, 0.5  # hats.hugging: a helm's shell this times his head's width; moved this far to its eyes
 HELM_BAND, HELM_OPEN, HELM_SIZE = 0.75, 1.15, (0.8, 1.15)
 HAIR_CUT_SIDE = 0.6    # hats.save_hair_cut: hair is hidden this far past a hat's sides (head radii)
 HAIR_CUT_HEAD, HAIR_CUT_REACH = 0.85, 0.5  # ...each column's own edge over his head, nearby edges off it
@@ -178,7 +180,8 @@ def scaled(piece_img, s):
     rgb, alpha = ss.shrink(arr[..., :3], arr[..., 3], s)
     out = np.zeros(alpha.shape + (4,), np.uint8)
     out[..., :3] = (rgb * 255).round()
-    out[..., 3] = ((alpha > 0.5) * 255).astype(np.uint8)
+    out[..., 3] = (alpha * 255).round()  # (the soft, anti-aliased edge stays: never on/off pixels)
+    out[out[..., 3] < 4] = 0  # (but not the dust of nearly clear pixels round it)
     return Image.fromarray(out, "RGBA")
 
 

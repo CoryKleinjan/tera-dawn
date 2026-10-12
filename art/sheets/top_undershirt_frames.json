@@ -1,7 +1,6 @@
 {
   "source": "art/source/top_undershirt_frames.png",
   "detail": 1,
-  "alpha": "hard",
   "grid": {
     "rows": [
       0,
