@@ -53,6 +53,7 @@ static func make_rig(priority: int) -> SpriteRig:
 	var r := SpriteRig.new()
 	r.setup(FRAMES, null, TDStage.TEXEL * SCALE / Paperdoll.ART_SCALE)
 	r.upright = UPRIGHT
+	r.breathes = true
 	r.hero_priority = priority
 	r.add_light(LIGHT, LIGHT_ENERGY, LIGHT_HEIGHT)
 	return r

@@ -72,8 +72,10 @@ only what the creator offers and makes a level 1 character in the starting job
   only after a real drop and a walk that keeps step with his speed (walk and run share the
   step, `SpriteRig.STEP_CYCLES`). Every walk frame is drawn mid-stride, so on the passing
   steps (`Paperdoll.PASSING_STEPS`) the shaders slide his lower legs in toward each other,
-  his body and every strip layer alike (`shaders/paperdoll_stride.gdshaderinc`). Standing, he holds still and blinks now and then (the
-  "blink" animation, `SpriteRig.BLINK_EVERY`). Held weapons point forward on every resting and
+  his body and every strip layer alike (`shaders/paperdoll_stride.gdshaderinc`). Standing, he breathes (the rig's body rises and settles
+  slightly from his feet, so every layer moves with it: `SpriteRig.breathes`, `BREATH_*`) and blinks
+  now and then, sometimes twice (the "blink" animation, `SpriteRig.BLINK_EVERY`), in menus too.
+  NPCs hold still (`SpriteRig.hold_still`). Held weapons point forward on every resting and
   moving frame (`tests/unit/hero_pose_test.gd`). Poses not drawn yet fall back to the nearest
   one (`SpriteRig.FALLBACK`). `WeaponTrail` draws the streak a
   swung blade leaves and the flash of a shot.
