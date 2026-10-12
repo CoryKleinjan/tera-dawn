@@ -5,6 +5,8 @@ extends Control
 ## the description and what double-clicking does. Drawn above every window.
 
 const W := 220.0
+## Room between the frame's edge and the text, inside its painted border.
+const INSET := 20.0
 ## A new item's card fades in over this many seconds.
 const FADE_IN := 0.1
 
@@ -105,8 +107,7 @@ func _lines() -> Array:
 	else:
 		out.append(["Etc", Palette.MUTED, 11])
 	if item.description != "":
-		for l in DrawUtil.wrap_text(Game.ui_font, item.description, 11, W - 28):
-			out.append([l, Color(Palette.MIST, 0.8), 11])
+		out.append([item.description, Color(Palette.MIST, 0.8), 11])
 	if hint != "":
 		out.append([hint, Color(Palette.SUN, 0.75), 11])
 	return out
@@ -130,8 +131,12 @@ func _comparison(e: EquipDef) -> Array:
 func _draw() -> void:
 	if stack == null or stack.item == null or _owner == null or not _owner.visible:
 		return
-	var lines := _lines()
-	var h := 22.0
+	# every line wraps to fit inside the frame's border
+	var lines := []
+	for l in _lines():
+		for part in DrawUtil.wrap_text(Game.ui_font, l[0], l[2], W - INSET * 2):
+			lines.append([part, l[1], l[2]])
+	var h := 30.0
 	for l in lines:
 		h += l[2] + 5
 	var view := get_viewport_rect().size
@@ -141,7 +146,7 @@ func _draw() -> void:
 	pos.y = clampf(pos.y, 4, view.y - h - 4)
 	var r := Rect2(pos, Vector2(W, h))
 	UiSkin.tooltip_frame().draw(get_canvas_item(), r)
-	var y := pos.y + 10
+	var y := pos.y + 13
 	for l in lines:
 		y += l[2] + 5
-		DrawUtil.text(self, Game.ui_font, Vector2(pos.x + 14, y), l[0], l[2], l[1], 1)
+		DrawUtil.text(self, Game.ui_font, Vector2(pos.x + INSET, y), l[0], l[2], l[1], 1)
