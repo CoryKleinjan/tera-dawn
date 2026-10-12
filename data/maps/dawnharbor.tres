@@ -129,7 +129,7 @@ tint = Color(1.0, 1.0, 1.0, 1.0)
 
 [sub_resource type="Resource" id="Door_store"]
 script = ExtResource("5_portal_def")
-x = 5142.0
+x = 5130.0
 platform = 0
 target_map = &"dawnharbor_store"
 target_x = 240.0
@@ -145,15 +145,15 @@ face = -1
 [sub_resource type="Resource" id="Building_3"]
 script = ExtResource("7_building_placement")
 building = ExtResource("10_dawnharbor_large")
-x = 1700.0
+x = 1695.0
 platform = 0
 flip = false
-scale = 1.12
+scale = 1.25
 tint = Color(1.0, 1.0, 1.0, 1.0)
 
 [sub_resource type="Resource" id="Door_hall"]
 script = ExtResource("5_portal_def")
-x = 1700.0
+x = 1695.0
 platform = 0
 target_map = &"dawnharbor_guild"
 target_x = 240.0
@@ -169,19 +169,19 @@ target_x = 120.0
 [sub_resource type="Resource" id="Building_7"]
 script = ExtResource("7_building_placement")
 building = ExtResource("19_dawnharbor_sail_loft")
-x = 4668.0
+x = 4655.0
 platform = 0
 flip = false
-scale = 1.0
+scale = 0.92
 tint = Color(1.0, 1.0, 1.0, 1.0)
 
 [sub_resource type="Resource" id="Building_4"]
 script = ExtResource("7_building_placement")
 building = ExtResource("20_dawnharbor_row_house")
-x = 5142.0
+x = 5130.0
 platform = 0
 flip = false
-scale = 1.0
+scale = 1.1
 tint = Color(1.0, 1.0, 1.0, 1.0)
 
 [sub_resource type="Resource" id="Portal_east"]
@@ -222,7 +222,7 @@ building = ExtResource("18_dawnharbor_lighthouse")
 x = 3000.0
 platform = 2
 flip = false
-scale = 1.0
+scale = 1.3
 tint = Color(1.0, 1.0, 1.0, 1.0)
 
 [sub_resource type="Resource" id="Building_9"]
@@ -231,7 +231,7 @@ building = ExtResource("23_dawnharbor_chapel")
 x = 3430.0
 platform = 2
 flip = false
-scale = 1.0
+scale = 1.15
 tint = Color(1.0, 1.0, 1.0, 1.0)
 
 [sub_resource type="Resource" id="Backdrop_picture"]
@@ -304,16 +304,16 @@ flip = false
 [sub_resource type="Resource" id="Prop_6"]
 script = ExtResource("prop_placement")
 texture = ExtResource("prop_cart")
-x = 4958.0
+x = 4935.0
 y = -1.0
 depth = -3.0
-scale = 1.0
+scale = 1.3
 flip = true
 
 [sub_resource type="Resource" id="Prop_7"]
 script = ExtResource("prop_placement")
 texture = ExtResource("prop_net_rack")
-x = 2824.0
+x = 2810.0
 y = 703.0
 depth = -3.0
 scale = 1.0

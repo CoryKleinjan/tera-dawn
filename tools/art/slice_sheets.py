@@ -681,7 +681,31 @@ def recolor_despill(rgb):
     return out
 
 
-RECOLORS = {"leather": recolor_leather, "dark_parchment": recolor_dark_parchment, "despill": recolor_despill}
+# Dawnharbor's floor sandstone (its platform middle pieces), darkest to lightest, at even steps
+# of brightness rank.
+SANDSTONE = np.array([[126, 63, 78], [163, 115, 109], [188, 138, 122], [217, 167, 141], [226, 180, 137],
+                      [246, 201, 158], [253, 220, 180], [254, 224, 182], [254, 230, 185]]) / 255.0
+
+
+def recolor_sandstone(rgb):
+    """Cool grey-blue stone becomes the warm sandstone of Dawnharbor's floor (Cory: the walls
+    match the floor). Each cool pixel takes the floor colour at the same brightness rank, so the
+    painted stones, mortar lines and highlights keep their shapes; warm pixels stay as they are."""
+    cool = rgb[..., 2] > rgb[..., 0]
+    if not cool.any():
+        return rgb
+    lum = rgb @ np.array([0.299, 0.587, 0.114])
+    ranked = np.sort(lum[cool])
+    rank = np.searchsorted(ranked, lum[cool]) / len(ranked) * (len(SANDSTONE) - 1)
+    lo = np.floor(rank).astype(int).clip(0, len(SANDSTONE) - 2)
+    t = (rank - lo)[:, None]
+    out = rgb.copy()
+    out[cool] = SANDSTONE[lo] * (1 - t) + SANDSTONE[lo + 1] * t
+    return out
+
+
+RECOLORS = {"leather": recolor_leather, "dark_parchment": recolor_dark_parchment, "despill": recolor_despill,
+            "sandstone": recolor_sandstone}
 
 
 # How far "grow" may move a piece's art pixels from the shared size, either way.

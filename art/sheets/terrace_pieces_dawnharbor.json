@@ -5,6 +5,7 @@
   "label_band": 0.2,
   "inset": 6,
   "keep": "largest",
+  "recolor": "sandstone",
   "grid": {
     "rows": [
       0,

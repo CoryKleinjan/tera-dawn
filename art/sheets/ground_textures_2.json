@@ -38,7 +38,8 @@
         42,
         403,
         337
-      ]
+      ],
+      "recolor": "sandstone"
     },
     "dawnharbor_soil": {
       "seamless": true,
