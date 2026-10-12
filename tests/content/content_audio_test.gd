@@ -28,14 +28,10 @@ func _sound_ids() -> Dictionary:
 		out[id] = "code"
 	return out
 
-## The zone tracks are being remade (docs/zone-vibes.md) and land a few at a time, so a map's
-## track may have no file yet and the map is silent. Set this back to true once every map's track is in.
-const MAP_MUSIC_COMPLETE := false
-
 func test_every_map_has_music() -> void:
 	for m: MapDef in Content.maps.values():
 		var id := m.music_id()
-		if check(id != &"", "%s plays no music: give its region town_music and field_music, or the map its own" % m.id) and MAP_MUSIC_COMPLETE:
+		if check(id != &"", "%s plays no music: give its region town_music and field_music, or the map its own" % m.id):
 			check(Sound.has_music(id), "%s plays %s, but assets/audio/music/%s.ogg is missing" % [m.id, id, id])
 	check(Sound.has_music(TDWorld.TITLE_MUSIC), "the title music is missing")
 

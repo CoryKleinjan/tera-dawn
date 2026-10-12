@@ -187,8 +187,10 @@ light `#c7bfff` against warm lantern glow, deep blue fog `#3a3a6f`; golden motes
 Tall, narrow half-timbered houses, cream plaster, dark beams, wall lanterns, narrow alleys,
 cobbles. Monsters are shades, wisps, moths and crypt creatures.
 
-**Keep (music):** sly and mysterious. Town: pizzicato strings, muted clarinet, soft jazz brushes,
-celesta, sneaky tiptoe melody. Field: low strings, clarinet, harp, soft timpani, eerie yet playful.
+**Keep (music):** a den of thieves: sly, roguish heist-caper mischief, cozy and charming, never
+dark. Walking upright bass, muted clarinet (and muted trumpet), pizzicato strings, brushed snare and
+finger snaps, accordion and celesta touches. Town: relaxed swagger. Field: sneaky tiptoe caper.
+Boss: a fast heist-gone-wrong chase.
 
 **Town: Lanternfall.** Narrow half-timbered houses packed along lantern-lit alleys, always at dusk
 *(inferred beyond the buildings)*.

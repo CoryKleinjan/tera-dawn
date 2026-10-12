@@ -26,7 +26,7 @@ instead of racing it. Tests drive `Sound.advance` by hand (`tests/unit/sound_mus
   `boss_<zone>`; the Free Market), else its region's `town_music` (towns, markets and rooms) or
   `field_music` (everywhere else; `RegionDef`). The title screen and character select play
   `TDWorld.TITLE_MUSIC`.
-  Tracks follow `docs/zone-vibes.md`; a track with no file yet leaves its maps silent (`MAP_MUSIC_COMPLETE` in `tests/content/content_audio_test.gd`).
+  Every track follows `docs/zone-vibes.md`.
 - **Effects**: `EffectDef.sound` plays wherever the effect appears (hits, crits, heals, buffs,
   pickups, portals, a monster's death, the level-up sparkle).
 - **Skills**: `SkillDef.cast_sound()`: the skill's own `sound`, else its projectile's
