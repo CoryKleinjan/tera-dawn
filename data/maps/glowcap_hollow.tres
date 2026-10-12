@@ -8,7 +8,6 @@
 [ext_resource type="Resource" path="res://data/climb_styles/rope.tres" id="6_rope"]
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="7_portal_def"]
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
-[ext_resource type="Resource" path="res://data/monsters/glowcap.tres" id="9_glowcap"]
 [ext_resource type="Resource" path="res://data/monsters/lume_wisp.tres" id="10_lume_wisp"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="11_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_small.png" id="12_tree_small"]
@@ -16,6 +15,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/flowers_yellow.png" id="14_flowers_yellow"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/stump.png" id="17_stump"]
 [ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
+[ext_resource type="Resource" path="res://data/monsters/star_bat.tres" id="m_star_bat"]
 
 [sub_resource type="Resource" id="Resource_39"]
 script = ExtResource("11_prop_placement")
@@ -73,13 +73,13 @@ flip = true
 
 [sub_resource type="Resource" id="Resource_31"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("9_glowcap")
+monster = ExtResource("m_star_bat")
 platform = 9
 count = 2
 
 [sub_resource type="Resource" id="Resource_30"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("9_glowcap")
+monster = ExtResource("m_star_bat")
 platform = 8
 count = 2
 
@@ -91,7 +91,7 @@ count = 3
 
 [sub_resource type="Resource" id="Resource_28"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("9_glowcap")
+monster = ExtResource("m_star_bat")
 platform = 6
 count = 3
 
@@ -103,7 +103,7 @@ count = 2
 
 [sub_resource type="Resource" id="Resource_26"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("9_glowcap")
+monster = ExtResource("m_star_bat")
 platform = 4
 count = 2
 
@@ -121,7 +121,7 @@ count = 2
 
 [sub_resource type="Resource" id="Resource_23"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("9_glowcap")
+monster = ExtResource("m_star_bat")
 platform = 1
 count = 2
 
@@ -133,7 +133,7 @@ count = 3
 
 [sub_resource type="Resource" id="Resource_21"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("9_glowcap")
+monster = ExtResource("m_star_bat")
 platform = 0
 count = 3
 
@@ -311,4 +311,4 @@ props = Array[ExtResource("11_prop_placement")]([SubResource("Resource_32"), Sub
 region = &"lumewood"
 world_pos = Vector2(600.0, 75.0)
 return_map = &"lumewood"
-level_text = "Lv. 10-13"
+level_text = "Lv. 10-15"

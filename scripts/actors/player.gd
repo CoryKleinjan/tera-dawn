@@ -8,9 +8,9 @@ extends Node2D
 
 ## How tall he stands, feet to the top of his head, in game pixels at HeroBody.SCALE: speech
 ## bubbles and shop signs go just over it.
-const HEIGHT := 60.0
+const HEIGHT := 68.0
 ## About how wide he is drawn, in game pixels: what the HUD keeps out of the way of.
-const WIDTH := 37.0
+const WIDTH := 42.0
 ## His chest above his feet (game pixels): where skill effects and shots start, and where
 ## loot flies to.
 const CHEST := SimPlayer.CHEST

@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="7_portal_def"]
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
 [ext_resource type="Resource" path="res://data/monsters/forge_golem.tres" id="9_forge_golem"]
-[ext_resource type="Resource" path="res://data/monsters/magma_shell.tres" id="10_magma_shell"]
 [ext_resource type="Resource" path="res://data/monsters/molten_king.tres" id="11_molten_king"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="12_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/steam_vent.png" id="14_steam_vent"]
@@ -17,6 +16,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/crystals.png" id="16_crystals"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/rock_large.png" id="17_rock_large"]
 [ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
+[ext_resource type="Resource" path="res://data/monsters/ash_wraith.tres" id="m_ash_wraith"]
 
 [sub_resource type="Resource" id="Resource_28"]
 script = ExtResource("12_prop_placement")
@@ -77,7 +77,7 @@ count = 2
 
 [sub_resource type="Resource" id="Resource_20"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_magma_shell")
+monster = ExtResource("m_ash_wraith")
 platform = 5
 count = 3
 
@@ -89,13 +89,13 @@ count = 2
 
 [sub_resource type="Resource" id="Resource_18"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_magma_shell")
+monster = ExtResource("m_ash_wraith")
 platform = 3
 count = 2
 
 [sub_resource type="Resource" id="Resource_17"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_magma_shell")
+monster = ExtResource("m_ash_wraith")
 platform = 2
 count = 2
 
@@ -107,7 +107,7 @@ count = 2
 
 [sub_resource type="Resource" id="Resource_15"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_magma_shell")
+monster = ExtResource("m_ash_wraith")
 platform = 0
 count = 3
 
@@ -121,7 +121,7 @@ count = 3
 script = ExtResource("7_portal_def")
 x = 60.0
 platform = 0
-target_map = &"magma_falls"
+target_map = &"ironworks_depths"
 target_x = 2960.0
 
 [sub_resource type="Resource" id="Resource_12"]
@@ -235,5 +235,5 @@ props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_24"), Sub
 region = &"emberreach"
 world_pos = Vector2(800.0, 335.0)
 return_map = &"emberforge"
-level_text = "Lv. 22-30"
+level_text = "Lv. 23-31"
 music = &"boss"

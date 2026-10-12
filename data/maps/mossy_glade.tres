@@ -8,7 +8,6 @@
 [ext_resource type="Resource" path="res://data/climb_styles/rope.tres" id="6_rope"]
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="7_portal_def"]
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
-[ext_resource type="Resource" path="res://data/monsters/thornling.tres" id="9_thornling"]
 [ext_resource type="Resource" path="res://data/monsters/leafwing.tres" id="10_leafwing"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="11_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_large.png" id="14_tree_large"]
@@ -16,6 +15,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/flowers_yellow.png" id="16_flowers_yellow"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/rock_large.png" id="17_rock_large"]
 [ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
+[ext_resource type="Resource" path="res://data/monsters/bramble_boar.tres" id="m_bramble_boar"]
 
 [sub_resource type="Resource" id="Resource_39"]
 script = ExtResource("11_prop_placement")
@@ -70,25 +70,25 @@ count = 2
 
 [sub_resource type="Resource" id="Resource_30"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("9_thornling")
+monster = ExtResource("m_bramble_boar")
 platform = 8
 count = 3
 
 [sub_resource type="Resource" id="Resource_29"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("9_thornling")
+monster = ExtResource("m_bramble_boar")
 platform = 7
 count = 2
 
 [sub_resource type="Resource" id="Resource_28"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("9_thornling")
+monster = ExtResource("m_bramble_boar")
 platform = 6
 count = 2
 
 [sub_resource type="Resource" id="Resource_27"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("9_thornling")
+monster = ExtResource("m_bramble_boar")
 platform = 5
 count = 2
 
@@ -112,7 +112,7 @@ count = 3
 
 [sub_resource type="Resource" id="Resource_23"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("9_thornling")
+monster = ExtResource("m_bramble_boar")
 platform = 1
 count = 3
 
@@ -124,7 +124,7 @@ count = 3
 
 [sub_resource type="Resource" id="Resource_21"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("9_thornling")
+monster = ExtResource("m_bramble_boar")
 platform = 0
 count = 3
 
@@ -315,4 +315,4 @@ props = Array[ExtResource("11_prop_placement")]([SubResource("Resource_34"), Sub
 region = &"greenbough"
 world_pos = Vector2(420.0, 85.0)
 return_map = &"greenbough"
-level_text = "Lv. 10-13"
+level_text = "Lv. 10-14"

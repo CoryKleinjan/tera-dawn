@@ -8,7 +8,6 @@
 [ext_resource type="Resource" path="res://data/climb_styles/rope.tres" id="6_rope"]
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="7_portal_def"]
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
-[ext_resource type="Resource" path="res://data/monsters/kelp_lurker.tres" id="9_kelp_lurker"]
 [ext_resource type="Resource" path="res://data/monsters/barnacle_boar.tres" id="10_barnacle_boar"]
 [ext_resource type="Resource" path="res://data/monsters/reef_titan.tres" id="11_reef_titan"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="12_prop_placement"]
@@ -17,6 +16,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/bush_large.png" id="15_bush_large"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_small.png" id="16_tree_small"]
 [ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
+[ext_resource type="Resource" path="res://data/monsters/cliff_harpy.tres" id="m_cliff_harpy"]
 [sub_resource type="Resource" id="Resource_23"]
 script = ExtResource("12_prop_placement")
 texture = ExtResource("16_tree_small")
@@ -97,7 +97,7 @@ count = 2
 
 [sub_resource type="Resource" id="Resource_12"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("9_kelp_lurker")
+monster = ExtResource("m_cliff_harpy")
 platform = 1
 count = 3
 
@@ -109,7 +109,7 @@ count = 3
 
 [sub_resource type="Resource" id="Resource_10"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("9_kelp_lurker")
+monster = ExtResource("m_cliff_harpy")
 platform = 0
 count = 3
 
@@ -117,7 +117,7 @@ count = 3
 script = ExtResource("7_portal_def")
 x = 60.0
 platform = 0
-target_map = &"wreck_cove"
+target_map = &"drowned_docks"
 target_x = 2760.0
 
 [sub_resource type="Resource" id="Resource_8"]
