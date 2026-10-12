@@ -57,6 +57,29 @@ class Request(unittest.TestCase):
                 self.assertEqual(gemini_sheet.closest_aspect(path), want, size)
 
 
+class Stands(unittest.TestCase):
+    SHEET = {"id": "x", "cells": [1, 1], "edit": {"base": "b.png", "text": "Paint a crate."}}
+
+    def request_text(self, sheet):
+        p = gemini_pass.Pass.__new__(gemini_pass.Pass)
+        p.size = "2K"
+        with mock.patch.object(gemini_pass.Pass, "edit_base", return_value=("b.png", "1:1", [1, 1, 1, 1])):
+            body, _, _ = p.edit_request(sheet, prepare=lambda path: {"image": path})
+        return body["contents"][0]["parts"][-1]["text"]
+
+    def test_standing_things_get_the_flat_2d_rules(self):
+        text = self.request_text(dict(self.SHEET, stands=True))
+        self.assertIn(gemini_pass.STANDS_RULES, text)
+        self.assertIn("Paint a crate.", text)
+
+    def test_other_sheets_do_not(self):
+        self.assertNotIn(gemini_pass.STANDS_RULES, self.request_text(dict(self.SHEET, stands=False)))
+
+    def test_prompt_sheets_get_them_too(self):
+        p = gemini_pass.Pass.__new__(gemini_pass.Pass)
+        self.assertIn(gemini_pass.STANDS_RULES, p.request_text({"cells": [1, 2], "stands": True}))
+
+
 class EditBase(unittest.TestCase):
     def test_crops_then_enlarges_the_base(self):
         with tempfile.TemporaryDirectory() as d:
@@ -121,6 +144,13 @@ class RunList(unittest.TestCase):
                 if s["cells"] is not None:
                     self.assertEqual(len(s["cells"]), 2)
                     self.assertTrue(all(isinstance(n, int) and n > 0 for n in s["cells"]))
+
+    def test_every_sheet_says_whether_it_stands_on_a_map(self):
+        # Cory: buildings and decorations shown on a map are flat 2D with a flat bottom, every
+        # time. Saying "stands": true adds those rules to the request (gemini_pass.STANDS_RULES).
+        for s in self.sheets:
+            with self.subTest(s["id"]):
+                self.assertIn(s.get("stands"), (True, False))
 
     def test_edits_have_a_base_image_and_an_instruction(self):
         for s in self.sheets:

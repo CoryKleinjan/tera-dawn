@@ -37,6 +37,26 @@ class Cells(unittest.TestCase):
         self.assertEqual(sc.summarise("x", [])["status"], "pass")
 
 
+class FlatBottom(unittest.TestCase):
+    def test_a_box_standing_flat_passes(self):
+        mask = np.zeros((100, 100), bool)
+        mask[20:90, 30:70] = True
+        self.assertTrue(sc.flat_bottom(mask))
+
+    def test_a_table_on_two_legs_passes(self):
+        mask = np.zeros((100, 100), bool)
+        mask[20:40, 20:80] = True
+        mask[40:90, 22:28] = mask[40:90, 72:78] = True
+        self.assertTrue(sc.flat_bottom(mask))
+
+    def test_a_3_4_base_with_a_slanted_bottom_warns(self):
+        mask = np.zeros((100, 100), bool)
+        mask[20:80, 30:70] = True
+        for y in range(80, 90):  # the base's bottom edge runs off at an angle
+            mask[y, 30 + (y - 80) * 4:70] = True
+        self.assertFalse(sc.flat_bottom(mask))
+
+
 class Check(unittest.TestCase):
     def setUp(self):
         self.dir = tempfile.TemporaryDirectory()
@@ -63,6 +83,14 @@ class Check(unittest.TestCase):
         result = sc.check(self._save(rgb))
         self.assertEqual(result["status"], "warn")
         self.assertEqual(list(statuses(result)), ["background"])
+
+    def test_stands_flags_a_slanted_bottom(self):
+        rgb = np.full((100, 100, 3), helpers.MAGENTA)
+        for y in range(20, 90):
+            rgb[y, 30 + max(0, y - 80) * 4:70] = (120, 80, 40)
+        result = statuses(sc.check(self._save(rgb), stands=True))
+        self.assertEqual(result["flat bottom"], "warn")
+        self.assertNotIn("flat bottom", statuses(sc.check(self._save(rgb))))
 
     def test_the_wrong_grid_warns(self):
         result = statuses(sc.check(self._save(helpers.sheet(2, 3)), cells=[2, 4]))
