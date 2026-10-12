@@ -14332,6 +14332,32 @@
    }
   },
   {
+   "id": "dawnharbor_pier_flat",
+   "prompts": null,
+   "batch": "Dawnharbor city: wooden pier redrawn flat 2D side view",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_pier_flat.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 harbor-city thread (Cory 18:03Z 'Do your picks'): Dawnharbor improvements, small test first. Painted pier standing behind the west end of the street by Marlo's ship. First try (18:35Z) came back at an angle (deck top and bollard tops showing, a loose rope); redone strictly flat (Cory 18:37Z).",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/dawnharbor_pier.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "art/source/building_dawnharbor_tavern.png"
+    ],
+    "text": "The first image is a painted wooden harbour pier for my 2D side-scrolling game, but it is drawn at an angle. Redraw it as a strictly flat 2D side elevation, keeping the same pier, wood colours, painted style, size and position on the canvas. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture. The third image is a building from the same town, drawn straight from the front: draw the pier in the same flat way. Strict rules: 1) Seen dead-on from the side at exactly deck height, like a theatre flat: the deck is ONLY a thin horizontal band of plank ends along its front edge; NO top surface of the deck shows at all, no planks receding into the distance. 2) Every piling is a straight upright rectangle showing only its front face, all in one row along the front, no second row of pilings behind. 3) The two iron bollards, the barrel and the crates stand on the deck's top edge and show only their front faces: no top of any bollard, barrel or crate. Each bollard has its rope wound tightly around it, with no rope end hanging or loose anywhere. 4) The bottoms of all the pilings end on ONE flat straight horizontal line, the bottom of the picture. No ground line, water, shadow or reflection. 5) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, words or numbers. Flat pure magenta #FF00FF background everywhere outside the pier."
+   }
+  },
+  {
    "id": "dawnharbor_wall_decor",
    "prompts": null,
    "batch": "Dawnharbor city: terrace wall ivy and flower boxes (test)",
