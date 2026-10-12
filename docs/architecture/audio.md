@@ -16,6 +16,10 @@ it exists; `tests/content/content_audio_test.gd` fails until every id has its fi
 Music plays on the **Music** bus and effects on the **Effects** bus, so the settings sliders
 (AudioSettings) reach them. Effects play a little higher or lower each time.
 
+Music volume is one fade level per player plus a jingle dip, both moved each frame by
+`Sound.advance` (not tweens), so a track change during a fade or a jingle retargets the fade
+instead of racing it. Tests drive `Sound.advance` by hand (`tests/unit/sound_music_test.gd`).
+
 ## Where sounds come from
 
 - **Map music**: `MapDef.music_id()`. A map's own `music` (boss lairs: `boss`; dark caves and
