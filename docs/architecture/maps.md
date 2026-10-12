@@ -45,10 +45,7 @@ The same NpcDef can stand in several maps (Brin is in every town).
 
 Travel NPCs (ships, wagons) list **TravelRoute**s in `NpcDef.travel` (destination, arrival x,
 fare, "Ship"/"Wagon"); their dialogue offers "Travel" and `ServerTravel.on_travel` moves the
-player. A route with `free_for_beginners` costs nothing for a Beginner who has reached
-the first job level (`JobDef.first_advance_level`); Rook's coaches from Dawnharbor to the
-job towns are free this way. `TravelRoute.fare_for(character)` is the one place that
-decides the fare, for the server and for the dialogue. Each trip's label also shows the
+player, charging `TravelRoute.price` (everyone pays the same fare). Each trip's label also shows the
 destination's `MapDef.level_text` unless it's a town ("Wagon to Ember Hollow (Lv. 6-12,
 150 Dawnshards)", `TDDialogueWindow.travel_label`). A **UseDef** with `teleport` set to a map id, or to `town`, is a return scroll.
 

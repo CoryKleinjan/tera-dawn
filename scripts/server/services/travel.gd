@@ -12,7 +12,7 @@ func on_portal(peer: int) -> void:
 		server.enter_map(p, portal.target_map, portal.target_x)
 
 ## Takes the player on trip `index` of the NPC `npc_id` they stand by, if they can pay its
-## fare (TravelRoute.fare_for: free coaches for Beginners ready for a job).
+## fare (TravelRoute.price).
 func on_travel(peer: int, npc_id: StringName, index: int) -> void:
 	var p := player_of(peer)
 	var npc := p.map.npc_near(p, npc_id) if p and not p.fainted() else null
@@ -21,11 +21,10 @@ func on_travel(peer: int, npc_id: StringName, index: int) -> void:
 	var route := npc.travel[index]
 	if not Content.maps.has(route.target_map):
 		return
-	var fare := route.fare_for(p.character)
-	if p.character.shards < fare:
+	if p.character.shards < route.price:
 		tell(p, ServerNpcShop.NOT_ENOUGH_SHARDS)
 		return
-	p.character.shards -= fare
+	p.character.shards -= route.price
 	p.dirty_vitals = true
 	server.enter_map(p, route.target_map, route.target_x)
 	tell(p, "%s to %s." % [route.by, Content.map(route.target_map).display_name], Palette.SUN)
