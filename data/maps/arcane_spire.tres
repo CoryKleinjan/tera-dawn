@@ -9,12 +9,12 @@
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="7_portal_def"]
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
 [ext_resource type="Resource" path="res://data/monsters/spell_imp.tres" id="9_spell_imp"]
-[ext_resource type="Resource" path="res://data/monsters/crystal_golem.tres" id="10_crystal_golem"]
 [ext_resource type="Resource" path="res://data/monsters/arcane_sentinel.tres" id="11_arcane_sentinel"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="12_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_large.png" id="13_tree_large"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_small.png" id="14_tree_small"]
 [ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
+[ext_resource type="Resource" path="res://data/monsters/starfall_golem.tres" id="m_starfall_golem"]
 [sub_resource type="Resource" id="Resource_28"]
 script = ExtResource("12_prop_placement")
 texture = ExtResource("13_tree_large")
@@ -77,25 +77,25 @@ count = 2
 
 [sub_resource type="Resource" id="Resource_18"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_crystal_golem")
+monster = ExtResource("m_starfall_golem")
 platform = 3
 count = 3
 
 [sub_resource type="Resource" id="Resource_17"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_crystal_golem")
+monster = ExtResource("m_starfall_golem")
 platform = 2
 count = 2
 
 [sub_resource type="Resource" id="Resource_16"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_crystal_golem")
+monster = ExtResource("m_starfall_golem")
 platform = 1
 count = 3
 
 [sub_resource type="Resource" id="Resource_15"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_crystal_golem")
+monster = ExtResource("m_starfall_golem")
 platform = 0
 count = 3
 
@@ -109,7 +109,7 @@ count = 3
 script = ExtResource("7_portal_def")
 x = 60.0
 platform = 0
-target_map = &"prism_lake"
+target_map = &"glass_dome_ruins"
 target_x = 2760.0
 
 [sub_resource type="Resource" id="Resource_12"]

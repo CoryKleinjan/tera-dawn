@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=61 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=60 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/coast.tres" id="2_coast"]
@@ -8,15 +8,14 @@
 [ext_resource type="Resource" path="res://data/climb_styles/rope.tres" id="6_rope"]
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="7_portal_def"]
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
-[ext_resource type="Resource" path="res://data/monsters/cliff_harpy.tres" id="9_cliff_harpy"]
-[ext_resource type="Resource" path="res://data/monsters/barnacle_boar.tres" id="10_barnacle_boar"]
-[ext_resource type="Resource" path="res://data/monsters/kelp_lurker.tres" id="11_kelp_lurker"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="12_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/bush_large.png" id="13_bush_large"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/stump.png" id="14_stump"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/flowers_yellow.png" id="15_flowers_yellow"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_large.png" id="16_tree_large"]
 [ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
+[ext_resource type="Resource" path="res://data/monsters/sand_crab.tres" id="m_sand_crab"]
+[ext_resource type="Resource" path="res://data/monsters/tide_slime.tres" id="m_tide_slime"]
 [sub_resource type="Resource" id="Resource_42"]
 script = ExtResource("12_prop_placement")
 texture = ExtResource("15_flowers_yellow")
@@ -82,73 +81,73 @@ flip = true
 
 [sub_resource type="Resource" id="Resource_34"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_barnacle_boar")
+monster = ExtResource("m_sand_crab")
 platform = 10
 count = 2
 
 [sub_resource type="Resource" id="Resource_33"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("11_kelp_lurker")
+monster = ExtResource("m_tide_slime")
 platform = 9
 count = 2
 
 [sub_resource type="Resource" id="Resource_32"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_barnacle_boar")
+monster = ExtResource("m_sand_crab")
 platform = 8
 count = 3
 
 [sub_resource type="Resource" id="Resource_31"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("9_cliff_harpy")
+monster = ExtResource("m_sand_crab")
 platform = 7
 count = 2
 
 [sub_resource type="Resource" id="Resource_30"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("11_kelp_lurker")
+monster = ExtResource("m_tide_slime")
 platform = 6
 count = 2
 
 [sub_resource type="Resource" id="Resource_29"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("11_kelp_lurker")
+monster = ExtResource("m_tide_slime")
 platform = 5
 count = 2
 
 [sub_resource type="Resource" id="Resource_28"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("11_kelp_lurker")
+monster = ExtResource("m_tide_slime")
 platform = 4
 count = 2
 
 [sub_resource type="Resource" id="Resource_27"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_barnacle_boar")
+monster = ExtResource("m_sand_crab")
 platform = 3
 count = 2
 
 [sub_resource type="Resource" id="Resource_26"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("9_cliff_harpy")
+monster = ExtResource("m_tide_slime")
 platform = 2
 count = 3
 
 [sub_resource type="Resource" id="Resource_25"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("9_cliff_harpy")
+monster = ExtResource("m_sand_crab")
 platform = 1
 count = 3
 
 [sub_resource type="Resource" id="Resource_24"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_barnacle_boar")
+monster = ExtResource("m_sand_crab")
 platform = 0
 count = 3
 
 [sub_resource type="Resource" id="Resource_23"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("9_cliff_harpy")
+monster = ExtResource("m_tide_slime")
 platform = 0
 count = 3
 
@@ -327,4 +326,4 @@ props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_35"), Sub
 region = &"driftcove"
 world_pos = Vector2(450.0, 480.0)
 return_map = &"driftcove"
-level_text = "Lv. 20-24"
+level_text = "Lv. 9-10"
