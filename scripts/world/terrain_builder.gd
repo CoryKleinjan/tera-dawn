@@ -140,9 +140,9 @@ func _solid_wall(map: MapDef, platform: int, biome: BiomeDef) -> void:
 	var bottom := map.surface_y(map.land_under(platform)) + FLOOR_FILL_TOP
 	var rect := Rect2(d.x, top, d.width, bottom - top)
 	_add(_strip("SolidWall", biome.ground_side, rect, TDStage.art_size(biome.ground_side), TDStage.LAND_FRONT - 0.01))
-	# corner stones down each end, flush with the square ends of the top edge
-	var x0 := d.x - PlatformSkin.OVERHANG
-	var x1 := d.x + d.width + PlatformSkin.OVERHANG
+	# corner stones down each end, flush with the square ends of the top edge (which have no overhang)
+	var x0 := d.x
+	var x1 := d.x + d.width
 	for corner: Texture2D in [biome.terrace_corner_left, biome.terrace_corner_right]:
 		if corner == null:
 			continue

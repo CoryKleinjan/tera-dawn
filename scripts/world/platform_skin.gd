@@ -11,7 +11,8 @@ extends RefCounted
 const OVERLAP := 10
 ## The most texels two pieces may overlap, when they match better further in.
 const MAX_OVERLAP := 24
-## A platform's skin reaches this far past each end of its walkable top, in game pixels.
+## A floating platform's skin reaches this far past each end of its walkable top, in game
+## pixels (a raised terrace's square ends stop flush with its wall instead).
 const OVERHANG := 8.0
 
 static var _cache := {}
@@ -23,10 +24,10 @@ static func texel(biome: BiomeDef) -> float:
 
 ## The skin of a platform `width` game pixels wide (its overhang included), cached per
 ## biome and width. A raised terrace (`square`) gets the biome's square terrace ends when it
-## has them.
+## has them, and no overhang: they line up with the ends of the wall below.
 static func texture(biome: BiomeDef, width: float, square := false) -> ImageTexture:
-	var cols := maxi(1, roundi((width + 2.0 * OVERHANG) / texel(biome)))
 	square = square and biome.terrace_left != null and biome.terrace_right != null
+	var cols := maxi(1, roundi((width + 2.0 * overhang(square)) / texel(biome)))
 	var key := "%s:%d:%s" % [biome.resource_path if biome.resource_path else str(biome.get_instance_id()), cols, square]
 	if not _cache.has(key):
 		var img := compose(pieces(biome, square), cols)
@@ -35,6 +36,10 @@ static func texture(biome: BiomeDef, width: float, square := false) -> ImageText
 		tex.set_meta(&"art_density", TDStage.art_density(biome.platform_middle))
 		_cache[key] = tex
 	return _cache[key]
+
+## How far a skin reaches past each end of its platform: none for square terrace ends.
+static func overhang(square: bool) -> float:
+	return 0.0 if square else OVERHANG
 
 ## [left cap, middles..., right cap] as images (the square terrace ends as caps when `square`).
 static func pieces(biome: BiomeDef, square := false) -> Array[Image]:
