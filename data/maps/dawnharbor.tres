@@ -118,7 +118,7 @@ tint = Color(1.0, 1.0, 1.0, 1.0)
 
 [sub_resource type="Resource" id="Door_store"]
 script = ExtResource("5_portal_def")
-x = 1250.0
+x = 5142.0
 platform = 0
 target_map = &"dawnharbor_store"
 target_x = 240.0
@@ -158,7 +158,7 @@ target_x = 120.0
 [sub_resource type="Resource" id="Building_7"]
 script = ExtResource("7_building_placement")
 building = ExtResource("19_dawnharbor_sail_loft")
-x = 4705.0
+x = 4668.0
 platform = 0
 flip = false
 scale = 1.0
@@ -167,7 +167,7 @@ tint = Color(1.0, 1.0, 1.0, 1.0)
 [sub_resource type="Resource" id="Building_4"]
 script = ExtResource("7_building_placement")
 building = ExtResource("20_dawnharbor_row_house")
-x = 5160.0
+x = 5142.0
 platform = 0
 flip = false
 scale = 1.0
