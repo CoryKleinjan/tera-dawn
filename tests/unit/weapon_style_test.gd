@@ -48,25 +48,6 @@ func test_every_motion_is_a_hero_animation_holding_the_weapon() -> void:
 				var f := Paperdoll.frame_index(frames.get_frame_texture(anim, i))
 				check(Paperdoll.hold(f, kind) != null, "%s frame %d has the %s in his hand" % [anim, i, kind])
 
-func test_shots_leave_from_his_hand() -> void:
-	# a star from his fist, an arrow from the bow in his fist, a bullet from the gun's muzzle,
-	# on the frame each motion lets go
-	var frames := HeroBody.FRAMES
-	for kind: StringName in [&"bow", &"gun", &"star"]:
-		var anim := WeaponStyle.animation(kind, &"attack")
-		var index: int = WeaponStyle.RELEASES.get(anim, -1)
-		if not check(index >= 0 and index < frames.get_frame_count(anim), "%s: %s lets go on one of its frames" % [kind, anim]):
-			continue
-		var frame := Paperdoll.frame_index(frames.get_frame_texture(anim, index))
-		var h: Variant = Paperdoll.hold(frame, kind)
-		var at: Variant = Paperdoll.release_point(frame, kind)
-		if check(h != null and at != null, "%s: in his hand as it lets go" % kind):
-			var past: float = (at - h["grip"]).length()
-			if kind == &"gun":
-				check(is_equal_approx(past, Paperdoll.weapon_reach(kind)), "a bullet leaves the muzzle")
-			else:
-				check_eq(past, 0.0, "%s: the shot leaves his fist" % kind)
-
 func test_every_action_restarts_and_has_timing() -> void:
 	var frames := HeroBody.FRAMES
 	for anim in WeaponStyle.ACTIONS:

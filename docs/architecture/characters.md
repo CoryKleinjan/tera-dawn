@@ -78,11 +78,7 @@ only what the creator offers and makes a level 1 character in the starting job
   NPCs hold still (`SpriteRig.hold_still`). Held weapons point forward on every resting and
   moving frame (`tests/unit/hero_pose_test.gd`). Poses not drawn yet fall back to the nearest
   one (`SpriteRig.FALLBACK`). `WeaponTrail` draws the streak a
-  swung blade leaves, the flash of a shot, the glint of a thrown star and the burst of a
-  knuckle punch. Shots leave from his hand on the frame the motion lets go
-  (`WeaponStyle.RELEASES`, `HeroBody.release_offset`): a star from his fist, which is empty
-  until the throw ends (`THROWN`), an arrow from the bow, which shows on the string while he
-  draws (`NOCKED`, `PaperdollSprite.nock`), and a bullet from the gun's muzzle.
+  swung blade leaves and the flash of a shot.
 - **One body for every hero**: your hero (`TDPlayer`) and other players' (`TDAvatar`) each
   work out their pose (from your keys, or from the snapshot), and `HeroBody`
   (`scripts/components/hero_body.gd`) draws it the same way for both: the rig with its light
