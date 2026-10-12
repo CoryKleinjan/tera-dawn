@@ -13412,6 +13412,31 @@
     ],
     "text": "The first image is an empty magenta canvas. On it, paint ONE new building for the harbour city in my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn and chipped spots, mortar lines, slight colour variation between stones and roof tiles). The third image is another building from the same town: match its style, palette, outline thickness and level of detail exactly, so the two clearly belong to the same street. The new building is a small stone CHAPEL with a bell tower, taller than it is wide: pale cream stone walls, a steep blue slate roof, a square bell tower rising from the front with a bronze bell under a little pointed blue roof topped by a small golden sun, a round stained-glass window in warm gold and blue above the door, and an arched wooden double door in the middle at ground level. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: its stone base reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, barrels, people or shadow. 3) The door is a real doorway at ground level, centred left to right in the building. 4) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 5) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
    }
+  },
+  {
+   "id": "dawnharbor_backdrop_panorama",
+   "prompts": null,
+   "batch": "Dawnharbor city: one 4K harbour backdrop (test)",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_backdrop_panorama.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-12 harbor-city thread (Cory 01:26Z): one higher-quality backdrop image instead of strips; warm morning harbour bay, no lighthouse, clouds stay a separate layer.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnharbor-city/backdrop_panorama_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/dawnharbor-city/backdrop_current_ref.png"
+    ],
+    "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for the harbour city in my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights, rich warm saturated colours, dark brown outlines, and plenty of hand-painted texture. Paint the background in that same style, a little softer and lighter in contrast so it sits behind the characters. The third image is the town's current background pieces: keep their palette and their kind of content (cream-walled houses with blue slate roofs, wooden sailing ships with cream sails, piers and pilings), but paint something new, far richer and more detailed, as one single picture with no repeated sections. The scene: a wide harbour bay in warm early morning light. The top 45 percent is open sky going from soft blue at the top to warm peach and gold near the horizon, with a low morning sun glowing just above the horizon in the middle, and NO clouds at all. Below it, calm sea stretches to the horizon with small green islands topped with pine trees in the far distance. On the left and right sides, a far-off town of cream houses with blue slate roofs climbs gentle green hills down to the water. In the middle distance, several wooden sailing ships of different sizes are moored at long wooden piers, their sails furled or half open. The lower part of the picture is calm harbour water with soft golden reflections of the sun, ships and houses. Strict rules: 1) Side-on view as if standing on the quay, horizon level and straight across the whole picture. 2) No lighthouse anywhere. No clouds. No people, no characters, no birds. 3) Nothing in the near foreground: no quay, crates, barrels or posts in front; the closest things are the moored ships in the middle distance. 4) The left and right edges continue naturally (sea, hills and houses), nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere."
+   }
   }
  ]
 }
