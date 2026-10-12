@@ -2,9 +2,10 @@ extends TestCase
 ## Music keeps playing through quick track changes and jingles (Sound.music, Sound.jingle,
 ## with time moved on by hand through Sound.advance).
 
-const A := &"town_dawnrise"
-const B := &"field_dawnrise"
-const C := &"town_dawnharbor"
+# any three music files will do; these stay put while the zone tracks are remade
+const A := &"title"
+const B := &"jingle_quest"
+const C := &"jingle_death"
 const JINGLE := &"jingle_levelup"
 
 func before_each() -> void:
