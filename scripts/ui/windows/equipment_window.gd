@@ -85,7 +85,7 @@ func place_at(at: Vector2) -> StringName:
 func _draw_body() -> void:
 	# portrait
 	var box := _portrait_box()
-	draw_texture_rect(UiSkin.tex("equip_doll_bg"), box, false)
+	draw_row(box)
 	doll.set_look(Game.me.look())
 	caption.queue_redraw()
 	var dragging := _dragged_equip()
