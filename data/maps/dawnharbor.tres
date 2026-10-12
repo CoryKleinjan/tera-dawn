@@ -332,11 +332,11 @@ flip = false
 [sub_resource type="Resource" id="Prop_9"]
 script = ExtResource("prop_placement")
 texture = ExtResource("market_sign")
-x = 4298.0
-y = 873.0
+x = 4445.0
+y = -1.0
 depth = -1.0
-scale = 1.25
-flip = false
+scale = 1.1
+flip = true
 
 [resource]
 script = ExtResource("1_map_def")
