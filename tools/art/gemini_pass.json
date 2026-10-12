@@ -14443,6 +14443,168 @@
     "refs": [],
     "text": "This is the inventory icon of the GREEN HOOD from my game, labelled, on magenta. REPAINT it as a close-fitting hood with NO cape: remove the cloth that flares out below the hood, the pointed front flap and the gold button completely. The hood ends just below the bottom of its dark face opening with a short, finished, rounded hem with the same thin dark outline as the rest of the hood. Below that hem there is NOTHING but magenta: no cape, no flared cloth, no drape spreading out at the bottom. The hood's outline at the bottom is narrow, about as wide as the face opening plus the hood's own thickness. Everything else stays EXACTLY as it is: the same green hood, its pointed tip, folds, colours and dark face opening, the same angle, place and size, and the same label. The background stays bright pure magenta #FF00FF. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything."
    }
+  },
+  {
+   "id": "wg_windrunner_hood_nocape",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_windrunner_hood_nocape.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 worn-gear thread (Cory: helmets never have anything that covers the shoulders; he OKd redrawing the thicket and windrunner hoods too). The windrunner hood's two cells of art/source/hats_items_3.png without the feather collar; pasted back over those cells.",
+   "edit": {
+    "base": "art/source/hats_items_3.png",
+    "base_crop": [
+     0,
+     0,
+     708,
+     374
+    ],
+    "refs": [],
+    "text": "These are two labelled cells on magenta from my hat sheet: the WINDRUNNER HOOD from the side (left cell) and from behind (right cell). REMOVE the white feathered collar that spreads over the shoulders and the orange gem clasp under the chin (side view), and the white feather collar around the neck at the bottom (behind view) completely. The hood now ends neatly at the jaw and the back of the neck with a finished, rounded hem that has the same thin dark outline as the rest of the hood, like a simple close-fitting hood; nothing of it rests on the shoulders, and below that hem there is only magenta. Its bottom is narrow, about as wide as the face opening plus the hood's own thickness. Everything else stays EXACTLY as it is: the same blue hood, its white stripe over the crown, the small pointed ears, the white fur trim around the face opening and the dark face opening, in the same place and size, and the same labels and grid lines. The background stays bright pure magenta #FF00FF. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything."
+   }
+  },
+  {
+   "id": "wg_windrunner_hood_nocape_only",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_windrunner_hood_nocape_only.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    2
+   ],
+   "anchor": "wg_windrunner_hood_nocape",
+   "size": "2K",
+   "note": "2026-10-12 worn-gear thread (Cory: helmets never have anything that covers the shoulders; he OKd redrawing the thicket and windrunner hoods too). wg_windrunner_hood_nocape with the face opening cleared, pasted over the same cells of art/source/hats_items_3_only.png.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/wg_windrunner_hood_nocape.png",
+    "refs": [],
+    "text": "These are two labelled cells on magenta, each a painted hood. In the side view (left cell), fill the hood's dark face opening, the shadowed inside where a face would be, with the same flat bright magenta #FF00FF, so the hood is an open ring around it with its trim intact. Nothing else changes: each hood stays EXACTLY where it is, the same size, shape, colours, outline and shading, and every label and grid line stays exactly where it is."
+   }
+  },
+  {
+   "id": "wg_thicket_hood_nocape",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_thicket_hood_nocape.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 worn-gear thread (Cory: helmets never have anything that covers the shoulders; he OKd redrawing the thicket and windrunner hoods too). The thicket hood's two cells of art/source/hats_items_3.png without the leaf mantle; pasted back over those cells.",
+   "edit": {
+    "base": "art/source/hats_items_3.png",
+    "base_crop": [
+     1066,
+     0,
+     1774,
+     374
+    ],
+    "refs": [],
+    "text": "These are two labelled cells on magenta from my hat sheet: the THICKET HOOD from the side (left cell) and from behind (right cell). REMOVE the ring of large green leaves that spreads over the shoulders at the bottom and the brown cord tie under the chin (side view), and the ring of leaves around the neck at the bottom (behind view) completely. The hood now ends neatly at the jaw and the back of the neck with a finished, rounded hem that has the same thin dark outline as the rest of the hood, like a simple close-fitting hood; nothing of it rests on the shoulders, and below that hem there is only magenta. Its bottom is narrow, about as wide as the face opening plus the hood's own thickness. Everything else stays EXACTLY as it is: the same olive cloth hood, its stitched seams, its pointed tip, the green leaves around the face opening and the small leaves at its sides, and the dark face opening, in the same place and size, and the same labels and grid lines. The background stays bright pure magenta #FF00FF. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything."
+   }
+  },
+  {
+   "id": "wg_thicket_hood_nocape_only",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_thicket_hood_nocape_only.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    2
+   ],
+   "anchor": "wg_thicket_hood_nocape",
+   "size": "2K",
+   "note": "2026-10-12 worn-gear thread (Cory: helmets never have anything that covers the shoulders; he OKd redrawing the thicket and windrunner hoods too). wg_thicket_hood_nocape with the face opening cleared, pasted over the same cells of art/source/hats_items_3_only.png.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/wg_thicket_hood_nocape.png",
+    "refs": [],
+    "text": "These are two labelled cells on magenta, each a painted hood. In the side view (left cell), fill the hood's dark face opening, the shadowed inside where a face would be, with the same flat bright magenta #FF00FF, so the hood is an open ring around it with its trim intact. Nothing else changes: each hood stays EXACTLY where it is, the same size, shape, colours, outline and shading, and every label and grid line stays exactly where it is."
+   }
+  },
+  {
+   "id": "wg_windrunner_hood_icon_nocape",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_windrunner_hood_icon_nocape.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "1K",
+   "note": "2026-10-12 worn-gear thread (Cory: helmets never have anything that covers the shoulders; he OKd redrawing the thicket and windrunner hoods too). The windrunner hood's icon (art/source/items_archer.png) without the feather collar, matching the worn hood.",
+   "edit": {
+    "base": "art/source/items_archer.png",
+    "base_crop": [
+     0,
+     515,
+     256,
+     772
+    ],
+    "refs": [],
+    "text": "This is the inventory icon of the WINDRUNNER HOOD from my game, labelled, on magenta. REPAINT it as a close-fitting hood with NO shoulder piece: remove the white feathered collar that spreads over the shoulders and the orange gem clasp under the chin, and the white feather collar around the neck at the bottom completely. The hood ends just below the bottom of its dark face opening with a short, finished, rounded hem with the same thin dark outline as the rest of the hood. Below that hem there is NOTHING but magenta. The hood's outline at the bottom is narrow, about as wide as the face opening plus the hood's own thickness. Everything else stays EXACTLY as it is: the same blue hood, its white stripe over the crown, the small pointed ears, the white fur trim around the face opening and the dark face opening, the same angle, place and size, and the same label. The background stays bright pure magenta #FF00FF. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything."
+   }
+  },
+  {
+   "id": "wg_thicket_hood_icon_nocape",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_thicket_hood_icon_nocape.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "1K",
+   "note": "2026-10-12 worn-gear thread (Cory: helmets never have anything that covers the shoulders; he OKd redrawing the thicket and windrunner hoods too). The thicket hood's icon (art/source/items_archer.png) without the leaf mantle, matching the worn hood.",
+   "edit": {
+    "base": "art/source/items_archer.png",
+    "base_crop": [
+     512,
+     258,
+     768,
+     515
+    ],
+    "refs": [],
+    "text": "This is the inventory icon of the THICKET HOOD from my game, labelled, on magenta. REPAINT it as a close-fitting hood with NO shoulder piece: remove the ring of large green leaves that spreads over the shoulders at the bottom and the brown cord tie under the chin, and the ring of leaves around the neck at the bottom completely. The hood ends just below the bottom of its dark face opening with a short, finished, rounded hem with the same thin dark outline as the rest of the hood. Below that hem there is NOTHING but magenta. The hood's outline at the bottom is narrow, about as wide as the face opening plus the hood's own thickness. Everything else stays EXACTLY as it is: the same olive cloth hood, its stitched seams, its pointed tip, the green leaves around the face opening and the small leaves at its sides, and the dark face opening, the same angle, place and size, and the same label. The background stays bright pure magenta #FF00FF. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything."
+   }
   }
  ]
 }
