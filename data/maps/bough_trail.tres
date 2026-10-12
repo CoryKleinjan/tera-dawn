@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=55 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=54 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
 [ext_resource type="Resource" path="res://data/monsters/thornling.tres" id="9_thornling"]
 [ext_resource type="Resource" path="res://data/monsters/leafwing.tres" id="10_leafwing"]
-[ext_resource type="Resource" path="res://data/monsters/bramble_boar.tres" id="11_bramble_boar"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="12_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tall_grass.png" id="13_tall_grass"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_large.png" id="15_tree_large"]
@@ -63,7 +62,7 @@ count = 2
 
 [sub_resource type="Resource" id="Resource_28"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("11_bramble_boar")
+monster = ExtResource("9_thornling")
 platform = 6
 count = 2
 
@@ -81,19 +80,19 @@ count = 3
 
 [sub_resource type="Resource" id="Resource_25"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("11_bramble_boar")
+monster = ExtResource("9_thornling")
 platform = 3
 count = 2
 
 [sub_resource type="Resource" id="Resource_24"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("11_bramble_boar")
+monster = ExtResource("9_thornling")
 platform = 2
 count = 3
 
 [sub_resource type="Resource" id="Resource_23"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("11_bramble_boar")
+monster = ExtResource("9_thornling")
 platform = 1
 count = 3
 
@@ -289,4 +288,4 @@ props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_32"), Sub
 region = &"greenbough"
 world_pos = Vector2(470.0, 210.0)
 return_map = &"greenbough"
-level_text = "Lv. 12-16"
+level_text = "Lv. 9-10"

@@ -284,9 +284,10 @@ func test_market_maps_have_a_market_clerk() -> void:
 			if p and p.npc and p.npc.market:
 				check(m.market, "%s: %s helps set up shops on a map that isn't a market" % [Scan.where(m), p.npc.id])
 
-## Monsters kept in the game's files that no map spawns yet: Ember Hollow's fire monsters,
-## which left Dawnrise Isle when it became Fern Hollow (Cory, 2026-10-11: he'll place them elsewhere).
-const KNOWN_UNSPAWNED: Array[StringName] = [&"ember_boar", &"cinder_imp", &"ashshell", &"flame_boar_chief"]
+## Monsters kept in the game's files that no map spawns yet: Ember Hollow's boss, left over
+## when Dawnrise Isle's Ember Hollow became Fern Hollow (its fire monsters now hold
+## Emberreach's border fields).
+const KNOWN_UNSPAWNED: Array[StringName] = [&"flame_boar_chief"]
 
 func test_every_monster_lives_somewhere() -> void:
 	var spawned := Scan.spawned_monsters()
@@ -338,9 +339,8 @@ func _sources() -> Dictionary:
 
 ## Items nothing drops, sells or gives yet, if a gap is ever let in on purpose. Remove an id
 ## once something does (the test below fails when a listed item becomes obtainable).
-## The fire monsters' own loot, while they wait for a new home (see KNOWN_UNSPAWNED).
-const KNOWN_UNOBTAINABLE: Array[StringName] = [&"cinder_horn", &"ashshell_fragment",
-	&"card_ember_boar", &"card_cinder_imp", &"card_ashshell", &"card_flame_boar_chief"]
+## Flame Boar Chief's own loot, while it waits for a new home (see KNOWN_UNSPAWNED).
+const KNOWN_UNOBTAINABLE: Array[StringName] = [&"card_flame_boar_chief"]
 
 func test_every_item_can_be_obtained() -> void:
 	var sources := _sources()
