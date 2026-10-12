@@ -18,6 +18,9 @@ Checks:
   catches frames where the character was redrawn bigger, smaller or as someone else
 - magenta in sprites: no pink-purple inside the art (it would be cut out with the background)
 - palette (with --anchor): the sprite colours sit close to the anchor sheet's colours (a warning only)
+- flat bottom (with --stands, for things that stand on a map): each sprite ends in a flat bottom
+  edge as wide as the object just above it. A 3/4 view's slanted base fails this (a warning, as
+  the eye still decides: it can't see a top face drawn above a flat bottom)
 - must have (with --must-have): a colour (e.g. W1's green grip rod) is in the cells that need it
   and absent from the cells that must not have it
 """
@@ -36,6 +39,9 @@ from slice_sheets import background_color, detect_grid, dilate, key_magenta, lab
 MAGENTA = np.array([255, 0, 255])
 LABEL_BAND = 0.16  # top of each cell where the white label sits
 FRAME_AREA_RANGE = (0.55, 1.8)  # allowed frame area relative to the sheet's median frame
+FLAT_BOTTOM_BAND = 0.06  # how far up (share of the sprite's height) "just above the bottom" reaches
+FLAT_BOTTOM_EDGE = 0.01  # rows (share of the sprite's height) that count as its bottom edge
+FLAT_BOTTOM_MIN = 0.6  # the bottom edge's width relative to the widest row in that band
 BACKGROUND_NEAR = 60  # colour distance (summed over R, G, B) that still counts as the background
 
 
@@ -141,7 +147,7 @@ def opaque_pixels(rgb, bg, boxes):
     return np.concatenate(out) if out else np.zeros((0, 3))
 
 
-def check(path, cells=None, kind="still", anchor=None, must_have=None):
+def check(path, cells=None, kind="still", anchor=None, must_have=None, stands=False):
     rgb = load_rgb(path)
     bg = background_color(rgb)
     results = []
@@ -228,7 +234,32 @@ def check(path, cells=None, kind="still", anchor=None, must_have=None):
             detail.append("should not be in cells %s" % ", ".join(map(str, extra)))
         add("must have", "fail" if detail else "pass", "; ".join(detail) or "where it should be")
 
+    if stands:
+        slanted = [i + 1 for i, box in enumerate(boxes) if not flat_bottom(sprite_mask(rgb, bg, box)[0])]
+        add("flat bottom", "pass" if not slanted else "warn",
+            "every sprite" if not slanted else "cells %s end in a slanted or pointed bottom" % ", ".join(map(str, slanted)))
+
     return summarise(path, results)
+
+
+def flat_bottom(mask):
+    """Whether the sprite in `mask` ends in a flat bottom edge: its lowest rows span nearly as
+    wide as the widest row just above them. Empty cells count as flat."""
+    rows = np.flatnonzero(mask.sum(1) >= 3)
+    if len(rows) < 10:
+        return True
+    top, bottom = rows[0], rows[-1]
+    band = max(3, round((bottom - top) * FLAT_BOTTOM_BAND))
+
+    def span(y):
+        xs = np.flatnonzero(mask[y])
+        return xs[-1] - xs[0] + 1 if len(xs) else 0
+
+    # the last ~1% of rows: a flat bottom drawn a hair off level, or with rounded outline
+    # corners, still counts; a 3/4 base slants over far more rows than that
+    edge = max(span(y) for y in range(bottom - max(2, round((bottom - top) * FLAT_BOTTOM_EDGE)), bottom + 1))
+    widest = max(span(y) for y in range(bottom - band, bottom + 1))
+    return edge >= FLAT_BOTTOM_MIN * widest
 
 
 def summarise(path, results):
@@ -244,10 +275,11 @@ def main():
     ap.add_argument("--kind", default="still", choices=["still", "anim"])
     ap.add_argument("--anchor", help="sheet whose colours this one should match")
     ap.add_argument("--must-have", help='JSON, e.g. {"rgb": [0,255,0], "in": [1,2], "not_in": [21]}')
+    ap.add_argument("--stands", action="store_true", help="things that stand on a map: check for flat bottoms")
     ap.add_argument("--json", action="store_true", help="print the result as JSON")
     args = ap.parse_args()
     res = check(args.sheet, args.cells, args.kind, args.anchor,
-                json.loads(args.must_have) if args.must_have else None)
+                json.loads(args.must_have) if args.must_have else None, args.stands)
     if args.json:
         print(json.dumps(res, indent=1))
         return

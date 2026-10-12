@@ -67,6 +67,11 @@ GRID_RULE = "- Draw exactly {rows} rows x {cols} columns = {n} equal cells, ever
 EDIT_RULES = """This is an edit of the attached image, not a new drawing. Keep the image's size, grid, cell borders and labels, and every figure's position, size and pose, exactly as they are; change only what is asked above. Any added art matches the style asked for above, with the same dark plum-brown outline. The background stays one flat pure magenta #FF00FF (RGB 255, 0, 255) everywhere: never grey, pink or lilac. Answer with the edited image."""
 # Edits with "new_view": true redraw the base from another viewpoint (a 3/4 building as a flat
 # side-on front), so they get these rules instead: EDIT_RULES would keep the old angle.
+# Entries with "stands": true are things that stand on a map's ground (buildings, props, signs,
+# lamps, decorations). Every entry says true or false (tools/art/tests), so no thread can forget
+# Cory's rule: these are flat 2D elevations with one flat bottom edge, never a 3/4 view that the
+# slicer would have to cut flat.
+STANDS_RULES = """Everything drawn here stands on the ground in a flat 2D side-scrolling game, so each object is a flat 2D elevation: straight from the front (or side) at eye level, like an architect's front elevation. No 3/4, isometric or perspective angle: no top face, no side face, no visible depth on any box, beam end, step or base. Each object's bottom is ONE flat straight horizontal edge that rests on the ground line, with no ground, grass, shadow or rubble under it. Nothing (rope, chain, cloth) ends loose in mid-air."""
 VIEW_RULES = """This is a redraw of the attached image from a new viewpoint, not a copy: the new view asked above is the whole point, and an answer that keeps the old angle is wrong. Keep the image's size, keep the subject centred at about the same height, and keep its design, colours and style. Any art matches the style asked for above, with the same dark plum-brown outline. The background stays one flat pure magenta #FF00FF (RGB 255, 0, 255) everywhere: never grey, pink or lilac. Answer with the redrawn image."""
 
 
@@ -150,6 +155,8 @@ class Pass:
             text += "\n" + GRID_RULE.format(rows=rows, cols=cols, n=rows * cols)
         if sheet.get("extra"):
             text += "\n" + sheet["extra"]
+        if sheet.get("stands"):
+            text += "\n- " + STANDS_RULES
         return text
 
     @staticmethod
@@ -195,7 +202,7 @@ class Pass:
         if res["path"]:
             entry["check"] = sheet_check.check(
                 res["path"], sheet.get("cells"), sheet.get("kind", "still"),
-                self.replaced(sheet) or anchor, sheet.get("must_have"))
+                self.replaced(sheet) or anchor, sheet.get("must_have"), sheet.get("stands"))
         return entry
 
     def recheck(self):
@@ -204,7 +211,7 @@ class Pass:
             e = self.state.get(s["id"])
             if e and e.get("path") and os.path.exists(e["path"]):
                 e["check"] = sheet_check.check(e["path"], s.get("cells"), s.get("kind", "still"),
-                                               self.replaced(s) or self.anchor_result(s), s.get("must_have"))
+                                               self.replaced(s) or self.anchor_result(s), s.get("must_have"), s.get("stands"))
         self.save()
         self.report()
 
@@ -316,6 +323,8 @@ class Pass:
     def edit_request(self, sheet, prepare):
         base, aspect, unpad = self.edit_base(sheet)
         rules = VIEW_RULES if sheet["edit"].get("new_view") else EDIT_RULES
+        if sheet.get("stands"):
+            rules = STANDS_RULES + "\n\n" + rules
         body = {"contents": [{"role": "user", "parts": [
                     prepare(base)] + [prepare(os.path.join(gemini_sheet.ROOT, r)) for r in sheet["edit"].get("refs", [])] + [
                     {"text": sheet["edit"]["text"] + "\n\n" + rules}]}],
@@ -422,7 +431,7 @@ class Pass:
                     entry["cost"] = each
                     s = self.by_id[sid]
                     entry["check"] = sheet_check.check(meta_s["path"], s.get("cells"), s.get("kind", "still"),
-                                                       self.replaced(s) or self.anchor_result(s), s.get("must_have"))
+                                                       self.replaced(s) or self.anchor_result(s), s.get("must_have"), s.get("stands"))
                 except gemini_sheet.GeminiError as e:
                     entry = {"error": str(e).splitlines()[0][:300],
                              "cost": each if row and "response" in row else 0}

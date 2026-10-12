@@ -50,6 +50,8 @@ python3 tools/art/gemini_pass.py --dry-run                           # Gemini ba
 ### Making art
 - Gemini batch API only: add an entry to `tools/art/gemini_pass.json` (usually an `edit` of an
   existing sheet that keeps its layout, pure #FF00FF background) and run `gemini_pass.py`.
+- Anything that stands on a map (buildings, props, decorations) is a flat 2D front elevation
+  with a flat bottom, never a 3/4 view cut flat: its entry sets `"stands": true`.
 - Ask Cory about the look first, run a small test, and show results before the full batch and
   before anything goes in game. Every run is paid: ask before redoing a sheet unless it came
   back broken.
