@@ -16,6 +16,10 @@ const DIR := "res://assets/sprites/ui/"
 ## Brighter and darker tints for hover and pressed states of art that has only one state.
 const LIT := Color(1.25, 1.18, 1.05)
 const PRESSED := Color(0.85, 0.8, 0.75)
+## The item tooltip's frame art is cut at twice the detail it's drawn at.
+const TOOLTIP_SCALE := 0.5
+## The same for the game windows' frame.
+const WINDOW_SCALE := 0.5
 
 static var _cache := {}
 
@@ -173,9 +177,10 @@ static func draw_book(ci: CanvasItem, r: Rect2, left_w: float, scale := 1.0) -> 
 	draw_box(ci, _quarter_box(name, true, true, BOOK[1], spine), Rect2(right.position + Vector2(0, right.size.y), right.size), scale)
 
 ## The game windows' frame (inventory, equipment, character): gold trim and a title strip.
+## Cut at twice the detail it's drawn at: draw it with `draw_box(..., WINDOW_SCALE)`.
 static func window_frame() -> StyleBoxTexture:
-	var sb := box("window_frame", 16, 30)
-	sb.texture_margin_bottom = 14
+	var sb := box("window_frame", 32, 60)
+	sb.texture_margin_bottom = 28
 	return sb
 
 ## A plain dark rounded panel, the same as a window's list row (TDWindow.draw_row).
@@ -185,8 +190,9 @@ static func plain_panel() -> StyleBoxFlat:
 	sb.set_corner_radius_all(int(TDWindow.ROW_RADIUS))
 	return sb
 
+## The item tooltip's frame; draw it with `draw_box(..., TOOLTIP_SCALE)`.
 static func tooltip_frame() -> StyleBoxTexture:
-	return box("tooltip_frame", 12, 12)
+	return box("tooltip_frame", 24, 24)
 
 ## A hovered row in a list (a dropdown's choices): cream and gold with the sun on its left,
 ## which keeps its size while the row stretches.

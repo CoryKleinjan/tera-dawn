@@ -145,7 +145,7 @@ func _draw() -> void:
 		pos.x = at.x - W - 12
 	pos.y = clampf(pos.y, 4, view.y - h - 4)
 	var r := Rect2(pos, Vector2(W, h))
-	UiSkin.tooltip_frame().draw(get_canvas_item(), r)
+	UiSkin.draw_box(self, UiSkin.tooltip_frame(), r, UiSkin.TOOLTIP_SCALE)
 	var y := pos.y + 13
 	for l in lines:
 		y += l[2] + 5

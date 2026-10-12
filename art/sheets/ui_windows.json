@@ -75,7 +75,7 @@
           33
         ]
       ],
-      "scale": 0.5085
+      "scale": 1.017
     },
     "window_close": {
       "blank": [
@@ -86,7 +86,7 @@
           31
         ]
       ],
-      "scale": 0.437
+      "scale": 0.874
     },
     "stat_plus": {
       "blank": [
@@ -97,7 +97,7 @@
           31
         ]
       ],
-      "scale": 0.3725
+      "scale": 0.745
     },
     "tooltip_frame": {
       "blank": [
@@ -108,7 +108,7 @@
           31
         ]
       ],
-      "scale": 0.4718
+      "scale": 0.9436
     },
     "bag_button": {
       "blank": [

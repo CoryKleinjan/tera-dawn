@@ -11,6 +11,8 @@ const PAD := 16.0
 const SLOT := 40.0
 const CLOSE_SIZE := 20.0
 const CLOSE_INSET := 3.5
+## How far the close X sits in from the window's padding, clear of the brass corner cap.
+const CLOSE_FROM_CAP := 6.0
 ## Where a window's row of tabs sits, and how big a tab can be.
 const TAB_Y := 36.0
 const TAB_H := 26.0
@@ -121,7 +123,7 @@ func raise() -> void:
 	get_parent().move_child(self, -1)
 
 func _draw() -> void:
-	UiSkin.window_frame().draw(get_canvas_item(), Rect2(Vector2.ZERO, size))
+	UiSkin.draw_box(self, UiSkin.window_frame(), Rect2(Vector2.ZERO, size), UiSkin.WINDOW_SCALE)
 	DrawUtil.text(self, Game.num_font, Vector2(PAD + 2, 20), title, 15, Palette.SUN, 1, 4, Palette.NIGHT)
 	var c := _close_rect()
 	var hot := c.has_point(_hover)
@@ -131,7 +133,7 @@ func _draw() -> void:
 	_draw_body()
 
 func _close_rect() -> Rect2:
-	return Rect2(size.x - PAD - CLOSE_SIZE + 6, 4, CLOSE_SIZE, CLOSE_SIZE)
+	return Rect2(size.x - PAD - CLOSE_SIZE - CLOSE_FROM_CAP, 4, CLOSE_SIZE, CLOSE_SIZE)
 
 func _gui_input(event: InputEvent) -> void:
 	var mb := event as InputEventMouseButton
