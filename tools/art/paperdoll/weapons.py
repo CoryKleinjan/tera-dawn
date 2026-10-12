@@ -348,17 +348,18 @@ def draw_turned(canvas, img, anchor, at, angle):
     canvas.alpha_composite(layer)
 
 
-def weapon_poses(img, axis, kind, names, info, hold, hands, far_frames=()):
+def weapon_poses(img, axis, kind, names, info, hold, hands, far_frames=(), palm_frames=()):
     """Where a weapon picture goes on every frame (pieces.pose(), or None): in his fist turned
     the way the rig holds it, behind him in his far hand (or in `far_frames`: a long staff
     planted beside him would otherwise cover his face), or on his back while he climbs or sits.
-    His fingers show over the grip of a GRIPPED kind held in front (fist_<kind>.png)."""
+    His fingers show over the grip of a GRIPPED kind held in front (fist_<kind>.png), except on
+    `palm_frames`, where we see the inside of his hand and the weapon lies over it."""
     out = []
     for n, fi in zip(names, info):
         if hold[n] is not None:
             x, y, angle = hold[n]
             far = hands[n].get("weapon_behind", False) or n in far_frames
-            out.append(pose("held", (x, y), angle - axis, behind=far, fist=kind in GRIPPED and not far))
+            out.append(pose("held", (x, y), angle - axis, behind=far, fist=kind in GRIPPED and not far and n not in palm_frames))
         elif kind in ON_BACK and n in SHEATHED:
             at = fi["neck"] - fi["up"] * fi["r"] * 0.3
             out.append(pose("back", at, ON_BACK[kind] - axis, behind=n not in BACK_VIEW))
@@ -373,11 +374,15 @@ def fist_masks(hero, held):
     names, frames, hands, r = hero.names, hero.frames, hero.hands, hero.r
     for kind in GRIPPED:
         far_frames = hero.hold_spec.get(kind, {}).get("behind", ())
+        palm_frames = hero.hold_spec.get(kind, {}).get("palm", ())
+        # a kind gripped at the middle of his fist can keep its mask to the fist alone ("fist", in
+        # head radii), so it doesn't spill onto his chest and cut the weapon out where his shirt is
+        reach = r * hero.hold_spec.get(kind, {}).get("fist", FIST)
         masks = []
         for n, px in zip(names, frames):
             h = held[kind][n]
-            far = hands[n].get("weapon_behind", False) or n in far_frames
-            masks.append(None if h is None or far else fist_mask(px, h[:2], r * FIST))
+            far = hands[n].get("weapon_behind", False) or n in far_frames or n in palm_frames
+            masks.append(None if h is None or far else fist_mask(px, h[:2], reach))
         save_fist(kind, masks, hero.fw, hero.fh)
 
 
@@ -456,7 +461,8 @@ def weapon_layers(hero, weapons, held):
                  "kind": kind, "grip_share": grip_share(img, grip, axis), "dots_left": dots_left(img)}
         grips[kind if tinted else name] = entry
         far_frames = hold_spec.get(kind, {}).get("behind", ())
-        poses = weapon_poses(img, axis, kind, names, info, held[kind], hands, far_frames)
+        palm_frames = hold_spec.get(kind, {}).get("palm", ())
+        poses = weapon_poses(img, axis, kind, names, info, held[kind], hands, far_frames, palm_frames)
         middle = (img.width / 2, img.height / 2)
         save_piece(f"weapon_{name}", {"held": (img, grip), "back": (img, middle)}, poses, tinted,
                    kind if kind in GRIPPED else None)
