@@ -13346,6 +13346,36 @@
     "refs": [],
     "text": "These are two labelled cells on magenta, each a bald head with shoulders wearing a painted steel helmet with a leather neck guard. ERASE the bald heads, faces, ears, necks and shoulders from both cells and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the helmets and their neck guards. Each helmet stays EXACTLY where it is, the same size, shape and colours, with its own outline and shading; where the face showed through the helmet's openings is now magenta. Keep every label and grid line exactly where it is."
    }
+  },
+  {
+   "id": "wg_skyreach_icon_nocape2",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_skyreach_icon_nocape2.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "1K",
+   "note": "2026-10-12 worn-gear thread (Cory: redo the Skyreach icon). Second try at wg_skyreach_icon_nocape, which kept a cream drape below the face; a firmer prompt with the worn no-cape hood's side view as reference. Pasted back over the icon cell of art/source/items_archer.png.",
+   "edit": {
+    "base": "art/source/items_archer.png",
+    "base_crop": [
+     1024,
+     515,
+     1280,
+     772
+    ],
+    "refs": [
+     "/mnt/project-files/art-sheets/icon-refs/skyreach_hood_worn_nocape_side.png"
+    ],
+    "text": "The first image is the inventory icon of the SKYREACH HOOD from my game, labelled, on magenta. The second image shows the same hood as it is now worn: a close-fitting hood that ends at the jaw, with NO cape, NO collar and NO drape. REPAINT the icon so it is that hood: the hood ends just below the bottom of its dark face opening with a short, finished, rounded hem with the same thin dark outline as the rest of the hood. Below that hem there is NOTHING but magenta: no cape, no flared collar, no cream cloth or drape spreading out at the bottom, no gold braided trim along a lower edge and no gold rope or tie. The hood's outline at the bottom is narrow, about as wide as the face opening plus its gold trim. Everything else stays EXACTLY as it is: the same cream hood, gold trim around the face opening, gold braided crest, small white wings and dark face opening, the same angle, place and size, and the same label. The background stays bright pure magenta #FF00FF. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything."
+   }
   }
  ]
 }
