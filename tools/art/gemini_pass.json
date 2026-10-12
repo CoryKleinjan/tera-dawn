@@ -13480,7 +13480,7 @@
    "size": "4K",
    "note": "2026-10-12 harbor-city thread (Cory 02:39-02:41Z): props drawn flat 2D side-on, each on a flat bottom; the mooring post's rope has no loose ends.",
    "edit": {
-    "base": "art/source/props_dawnharbor.png",
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/dawnharbor_props.png",
     "refs": [
      "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
      "art/source/building_dawnharbor_tavern.png"
