@@ -33,6 +33,8 @@ var light: OmniLight3D
 var aura: CPUParticles3D
 ## Draws the character's look on the body (heroes only, see `dress`).
 var paperdoll: PaperdollSprite
+## The render priority a dressed hero's layers start from (PaperdollSprite.priority).
+var hero_priority := TDStage.PRIORITY_PLAYER
 var current := &"idle"
 ## Procedural animation clock (seconds), for single-image actors.
 var _t := randf() * 10.0
@@ -91,7 +93,7 @@ func hold_still() -> void:
 ## Call again whenever the look changes; an unchanged look costs nothing.
 func dress(look: Dictionary) -> void:
 	if paperdoll == null:
-		paperdoll = PaperdollSprite.new(body as AnimatedSprite3D, (body as AnimatedSprite3D).pixel_size * TDStage.PX)
+		paperdoll = PaperdollSprite.new(body as AnimatedSprite3D, (body as AnimatedSprite3D).pixel_size * TDStage.PX, hero_priority)
 		body.add_child(paperdoll)
 	paperdoll.set_look(look)
 

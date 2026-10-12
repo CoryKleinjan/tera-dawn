@@ -133,3 +133,19 @@ func test_map_props_have_textures() -> void:
 
 func test_hero_has_every_animation_the_game_plays() -> void:
 	_frames(HeroBody.FRAMES, "assets/animations/hero.tres", [&"idle", &"rope", &"ladder"])
+
+## Every strip and piece picture of the hero imports with mipmaps: he shows smaller than his
+## art is cut, and the stage samples his art from them (paperdoll_stage.gdshaderinc). Godot
+## imports a new picture without, so a new hero layer needs `mipmaps/generate=true` in its
+## .import file. (The fist, hair and head cut masks are read pixel by pixel, without.)
+func test_hero_art_imports_with_mipmaps() -> void:
+	var files: Array[String] = ["res://assets/sprites/characters/hero.png"]
+	for dir in ["res://assets/sprites/characters/layers/", Paperdoll.PIECE_DIR]:
+		for f in DirAccess.get_files_at(dir):
+			if f.ends_with(".png") and not (f.begins_with("fist_") or f.begins_with("haircut_") or f.begins_with("headcut_")):
+				files.append(dir + f)
+	check(files.size() > 100, "found the hero's art")
+	for f in files:
+		var cfg := ConfigFile.new()
+		if check(cfg.load(f + ".import") == OK, "%s has an .import file" % f):
+			check(cfg.get_value("params", "mipmaps/generate", false), "%s.import: mipmaps/generate=true" % f)

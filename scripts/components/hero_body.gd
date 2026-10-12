@@ -40,6 +40,7 @@ func _init(owner: Node2D, world: TDWorld, z: float) -> void:
 	_z = z
 	rig = SpriteRig.new()
 	rig.setup(FRAMES, null, TDStage.TEXEL * SCALE / Paperdoll.ART_SCALE)
+	rig.hero_priority = TDStage.PRIORITY_PLAYER if z >= TDStage.Z_PLAYER else TDStage.PRIORITY_OTHER_PLAYER
 	rig.add_light(LIGHT, LIGHT_ENERGY, LIGHT_HEIGHT)
 	owner.add_child(rig)
 	companion = TDCompanion.new()
