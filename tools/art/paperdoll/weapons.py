@@ -210,6 +210,10 @@ def drawn_axis(arr):
     return round(math.degrees(math.atan2(dy, dx)), 1)
 
 
+# Frames where he holds no weapon, in his hand or on his back.
+EMPTY_HANDED = ("levelup",)
+
+
 def holds(hands, spec, names, forearms=None):
     """Per weapon kind, per frame: [x, y, angle] of the fist and the weapon in it (the sword's
     are the hand-placed "weapon" points; a kind's own [x, y, angle] puts it in his hand on any
@@ -246,6 +250,10 @@ def holds(hands, spec, names, forearms=None):
 
     for kind in WEAPON_KINDS:
         resolve(kind)
+    for kind in out:  # no weapon at all while he levels up (Cory 2026-10-12), whatever a kind's line says
+        for n in EMPTY_HANDED:
+            if n in out[kind]:
+                out[kind][n] = None
     return out
 
 
