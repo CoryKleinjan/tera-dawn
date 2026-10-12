@@ -80,8 +80,8 @@ func _back_houses(rule: DecorDef, map: MapDef, rng: RandomNumberGenerator) -> Ar
 	return placed
 
 ## Where a town with buildings stands its background houses: the x of each one's middle.
-## They keep `BACK_HOUSE_GAP` apart and never stand straight behind a building, so the
-## street reads clearly (a town without buildings scatters them like any decor).
+## They keep `BACK_HOUSE_GAP` apart and never stand straight behind a building or a raised
+## terrace (`PlatformDef.solid`), so the street reads clearly (a town without buildings scatters them like any decor).
 static func back_house_slots(rule: DecorDef, map: MapDef) -> Array[float]:
 	var out: Array[float] = []
 	var w := back_house_width(rule)
@@ -89,10 +89,12 @@ static func back_house_slots(rule: DecorDef, map: MapDef) -> Array[float]:
 		return out
 	var half := w * 0.5
 	var x := half
+	var taken := map.solid_spans_on(0)  # raised land's wall would hide them
+	for b in map.buildings:
+		taken.append(b.span())
 	while x <= map.width - half:
 		var past := -INF
-		for b in map.buildings:
-			var span := b.span()
+		for span in taken:
 			if x + half + BACK_HOUSE_CLEAR > span.x and x - half - BACK_HOUSE_CLEAR < span.y:
 				past = maxf(past, span.y)
 		if past > -INF:
@@ -295,9 +297,8 @@ func _lanterns(map: MapDef, biome: BiomeDef, _rng: RandomNumberGenerator) -> voi
 		TDStage.stand_on_land(post, Vector2(x, map.ground_y + 3.0), -1.3)
 		var pos := post.position
 		root.add_child(post)
-		# the lamp hangs off the right of the post, near the top
 		var size := post.texture.get_size() * post.pixel_size
-		var lamp := pos + Vector3(size.x * 0.22, size.y * 0.62, 0.05)
+		var lamp := pos + Vector3(size.x * biome.lantern_lamp.x, size.y * biome.lantern_lamp.y, 0.05)
 		var g := TDStage.glow_sprite(load("res://assets/sprites/fx/glow.png"), Color(biome.lantern_light, 0.5) * 1.5)
 		g.position = lamp
 		root.add_child(g)

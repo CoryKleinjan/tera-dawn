@@ -96,8 +96,11 @@ static func blocked(map: MapDef) -> Array[Vector2]:
 		var y := p.y if p.y >= 0.0 else floor_y
 		if hits.call(y - size.y, y):
 			out.append(Vector2(p.x - size.x * 0.5, p.x + size.x * 0.5))
-	for d in map.platforms:
+	for i in map.platforms.size():
+		var d := map.platforms[i]
 		var r := platform_rect(d, map.look())
+		if d.solid:  # raised land's wall runs down to the land under it
+			r.end.y = map.surface_y(map.land_under(i + 1))
 		if hits.call(r.position.y, r.end.y):
 			out.append(Vector2(r.position.x, r.end.x))
 	return out

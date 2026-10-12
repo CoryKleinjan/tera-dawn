@@ -19,6 +19,7 @@
    "save": "hero_main.png",
    "replaces": "art/source/hero_main.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     4
@@ -35,6 +36,7 @@
    "save": "meadow_tileset.png",
    "replaces": "art/source/meadow_tileset.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     5,
     8
@@ -58,6 +60,7 @@
    "save": "paperdoll_body.png",
    "replaces": "art/source/paperdoll_body.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -74,6 +77,7 @@
    "save": "paperdoll_body_run.png",
    "replaces": "art/source/paperdoll_body.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -94,6 +98,7 @@
    "save": "paperdoll_body_run_2.png",
    "replaces": "art/source/paperdoll_body.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -157,6 +162,7 @@
    "save": "paperdoll_body_run_3.png",
    "replaces": "art/source/paperdoll_body.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -219,6 +225,7 @@
    "save": "paperdoll_grip_hands.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -282,6 +289,7 @@
    "save": "paperdoll_grip_hands_2.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -348,6 +356,7 @@
    "save": "paperdoll_grip_closeup_1.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     5
@@ -386,6 +395,7 @@
    "save": "paperdoll_grip_closeup_2.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     5
@@ -424,6 +434,7 @@
    "save": "paperdoll_grip_closeup_3.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     5
@@ -462,6 +473,7 @@
    "save": "paperdoll_grip_closeup_4.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     5
@@ -500,6 +512,7 @@
    "save": "paperdoll_grip_closeup_1b.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     5
@@ -539,6 +552,7 @@
    "save": "paperdoll_grip_closeup_2b.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     5
@@ -578,6 +592,7 @@
    "save": "paperdoll_grip_closeup_3b.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     5
@@ -617,6 +632,7 @@
    "save": "ui_leather.png",
    "replaces": "art/source/ui.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     5,
     4
@@ -633,6 +649,7 @@
    "save": "dewling.png",
    "replaces": "art/source/dewling.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -649,6 +666,7 @@
    "save": "monsters_npcs.png",
    "replaces": "art/source/monsters_npcs.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     4
@@ -669,6 +687,7 @@
    "save": "items_gear.png",
    "replaces": "art/source/items_gear.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     5
@@ -688,6 +707,7 @@
    "save": "npcs_harbor_1.png",
    "replaces": "art/source/npcs_harbor_1.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     4
@@ -708,6 +728,7 @@
    "save": "anim_sproutcap.png",
    "replaces": "art/source/anim_sproutcap.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -724,6 +745,7 @@
    "save": "ember_boar.png",
    "replaces": "art/source/ember_boar.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     3,
     4
@@ -740,6 +762,7 @@
    "save": "ember_tileset.png",
    "replaces": "art/source/ember_tileset.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     4,
     6
@@ -756,6 +779,7 @@
    "save": "ground_textures.png",
    "replaces": "art/source/ground_textures.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     3
@@ -772,6 +796,7 @@
    "save": "effects.png",
    "replaces": "art/source/effects.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     4,
     5
@@ -788,6 +813,7 @@
    "save": "key_art.png",
    "replaces": "art/source/key_art.png",
    "kind": "still",
+   "stands": false,
    "cells": null,
    "anchor": "hero_main",
    "note": "Three framings (16:9, 2:3, 2.1:1) in one image, cut by tools/art/make_store_art.py; no manifest."
@@ -801,6 +827,7 @@
    "save": "items_consumables.png",
    "replaces": "art/source/items_consumables.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     5
@@ -817,6 +844,7 @@
    "save": "paperdoll_faces.png",
    "replaces": "art/source/paperdoll_faces.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     5,
     4
@@ -837,6 +865,7 @@
    "save": "paperdoll_faces_older.png",
    "replaces": "art/source/paperdoll_faces.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     5,
     4
@@ -857,6 +886,7 @@
    "save": "paperdoll_hair.png",
    "replaces": "art/source/paperdoll_hair.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     6,
     4
@@ -873,6 +903,7 @@
    "save": "paperdoll_cape.png",
    "replaces": "art/source/paperdoll_layers.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -898,6 +929,7 @@
    "save": "paperdoll_shield_round.png",
    "replaces": "art/source/paperdoll_layers.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -925,6 +957,7 @@
    "save": "paperdoll_shield_kite.png",
    "replaces": "art/source/paperdoll_layers.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -944,6 +977,7 @@
    "save": "paperdoll_weapons.png",
    "replaces": "art/source/paperdoll_weapons.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     4
@@ -960,6 +994,7 @@
    "save": "items_starter.png",
    "replaces": "art/source/items_starter.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     4
@@ -979,6 +1014,7 @@
    "save": "paperdoll_gloves.png",
    "replaces": "art/source/paperdoll_gloves.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -1001,6 +1037,7 @@
    "save": "hair_tousled_frames.png",
    "replaces": "art/source/hair_tousled_frames.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -1026,6 +1063,7 @@
    "save": "hair_long_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -1051,6 +1089,7 @@
    "save": "hair_ponytail_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -1076,6 +1115,7 @@
    "save": "hair_twin_tails_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -1101,6 +1141,7 @@
    "save": "hair_bun_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -1126,6 +1167,7 @@
    "save": "hair_crest_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -1149,6 +1191,7 @@
    "save": "top_undershirt_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -1172,6 +1215,7 @@
    "save": "top_tunic_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -1195,6 +1239,7 @@
    "save": "top_smock_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -1218,6 +1263,7 @@
    "save": "top_vest_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -1242,6 +1288,7 @@
    "save": "top_robe_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -1266,6 +1313,7 @@
    "save": "top_coat_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -1292,6 +1340,7 @@
    "save": "bottom_trousers_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -1319,6 +1368,7 @@
    "save": "bottom_shorts_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -1346,6 +1396,7 @@
    "save": "bottom_breeches_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -1372,6 +1423,7 @@
    "save": "shoes_boots_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -1398,6 +1450,7 @@
    "save": "shoes_shoes_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -1425,6 +1478,7 @@
    "save": "shoes_clogs_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -1451,6 +1505,7 @@
    "save": "shoes_sandals_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -1477,6 +1532,7 @@
    "save": "paperdoll_hats.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     4
@@ -1493,6 +1549,7 @@
    "save": "paperdoll_grip.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -1557,6 +1614,7 @@
    "save": "paperdoll_body_2.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -1575,6 +1633,7 @@
    "save": "hair_tousled_frames_2.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -1593,6 +1652,7 @@
    "save": "paperdoll_gloves_2.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -1610,6 +1670,7 @@
    "save": "held_swords.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     3
@@ -1626,6 +1687,7 @@
    "save": "held_bows.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     3
@@ -1642,6 +1704,7 @@
    "save": "held_magic.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     3
@@ -1658,6 +1721,7 @@
    "save": "held_claws.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     3
@@ -1674,6 +1738,7 @@
    "save": "held_pirate.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     5
@@ -1694,6 +1759,7 @@
    "save": "anim_mossling.png",
    "replaces": "art/source/anim_mossling.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -1718,6 +1784,7 @@
    "save": "anim_petal_bat.png",
    "replaces": "art/source/monsters_m1.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -1742,6 +1809,7 @@
    "save": "anim_cinder_imp.png",
    "replaces": "art/source/monsters_m1.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -1766,6 +1834,7 @@
    "save": "anim_ashshell.png",
    "replaces": "art/source/monsters_m1.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -1790,6 +1859,7 @@
    "save": "anim_boulderkin.png",
    "replaces": "art/source/monsters_m1.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -1814,6 +1884,7 @@
    "save": "anim_flame_boar_chief.png",
    "replaces": "art/source/monsters_m1.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     3,
     4
@@ -1838,6 +1909,7 @@
    "save": "mon_tide_dewling.png",
    "replaces": "art/source/mon_dawnrise.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -1862,6 +1934,7 @@
    "save": "mon_sporecap.png",
    "replaces": "art/source/mon_dawnrise.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -1886,6 +1959,7 @@
    "save": "mon_spore_puff.png",
    "replaces": "art/source/mon_dawnrise.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -1910,6 +1984,7 @@
    "save": "mon_sea_gull.png",
    "replaces": "art/source/mon_dawnrise.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -1934,6 +2009,7 @@
    "save": "mon_shell_crab.png",
    "replaces": "art/source/mon_dawnrise.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -1958,6 +2034,7 @@
    "save": "mon_old_clawbeard.png",
    "replaces": "art/source/mon_dawnrise.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     3,
     4
@@ -1983,6 +2060,7 @@
    "save": "mon_thornling.png",
    "replaces": "art/source/mon_greenbough.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2007,6 +2085,7 @@
    "save": "mon_leafwing.png",
    "replaces": "art/source/mon_greenbough.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2031,6 +2110,7 @@
    "save": "mon_bramble_boar.png",
    "replaces": "art/source/mon_greenbough.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2055,6 +2135,7 @@
    "save": "mon_acorn_sentry.png",
    "replaces": "art/source/mon_greenbough.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2079,6 +2160,7 @@
    "save": "mon_barkcap.png",
    "replaces": "art/source/mon_greenbough.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2104,6 +2186,7 @@
    "save": "mon_grove_wisp.png",
    "replaces": "art/source/mon_greenbough.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2128,6 +2211,7 @@
    "save": "mon_elder_treant.png",
    "replaces": "art/source/mon_greenbough.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     3,
     4
@@ -2152,6 +2236,7 @@
    "save": "mon_glowcap.png",
    "replaces": "art/source/mon_lumewood.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2177,6 +2262,7 @@
    "save": "mon_lume_wisp.png",
    "replaces": "art/source/mon_lumewood.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2201,6 +2287,7 @@
    "save": "mon_star_bat.png",
    "replaces": "art/source/mon_lumewood.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2225,6 +2312,7 @@
    "save": "mon_prism_slime.png",
    "replaces": "art/source/mon_lumewood.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2249,6 +2337,7 @@
    "save": "mon_prism_bit.png",
    "replaces": "art/source/mon_lumewood.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2273,6 +2362,7 @@
    "save": "mon_crystal_golem.png",
    "replaces": "art/source/mon_lumewood.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2297,6 +2387,7 @@
    "save": "mon_spell_imp.png",
    "replaces": "art/source/mon_lumewood.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2321,6 +2412,7 @@
    "save": "mon_arcane_sentinel.png",
    "replaces": "art/source/mon_lumewood.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     3,
     4
@@ -2345,6 +2437,7 @@
    "save": "mon_slag_slime.png",
    "replaces": "art/source/mon_emberreach.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2370,6 +2463,7 @@
    "save": "mon_slag_bit.png",
    "replaces": "art/source/mon_emberreach.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2394,6 +2488,7 @@
    "save": "mon_cinder_pup.png",
    "replaces": "art/source/mon_emberreach.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2419,6 +2514,7 @@
    "save": "mon_ash_bat.png",
    "replaces": "art/source/mon_emberreach.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2443,6 +2539,7 @@
    "save": "mon_fire_imp_archer.png",
    "replaces": "art/source/mon_emberreach.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2467,6 +2564,7 @@
    "save": "mon_magma_shell.png",
    "replaces": "art/source/mon_emberreach.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2491,6 +2589,7 @@
    "save": "mon_forge_golem.png",
    "replaces": "art/source/mon_emberreach.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2515,6 +2614,7 @@
    "save": "mon_molten_king.png",
    "replaces": "art/source/mon_emberreach.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     3,
     4
@@ -2539,6 +2639,7 @@
    "save": "mon_shade_imp.png",
    "replaces": "art/source/mon_lanternfall.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2564,6 +2665,7 @@
    "save": "mon_lantern_wisp.png",
    "replaces": "art/source/mon_lanternfall.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2588,6 +2690,7 @@
    "save": "mon_dusk_moth.png",
    "replaces": "art/source/mon_lanternfall.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2612,6 +2715,7 @@
    "save": "mon_night_boar.png",
    "replaces": "art/source/mon_lanternfall.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2636,6 +2740,7 @@
    "save": "mon_gloomcap.png",
    "replaces": "art/source/mon_lanternfall.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2660,6 +2765,7 @@
    "save": "mon_crypt_shell.png",
    "replaces": "art/source/mon_lanternfall.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2684,6 +2790,7 @@
    "save": "mon_lantern_wraith.png",
    "replaces": "art/source/mon_lanternfall.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     3,
     4
@@ -2708,6 +2815,7 @@
    "save": "mon_sand_crab.png",
    "replaces": "art/source/mon_driftcove.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2732,6 +2840,7 @@
    "save": "mon_tide_slime.png",
    "replaces": "art/source/mon_driftcove.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2756,6 +2865,7 @@
    "save": "mon_tide_bit.png",
    "replaces": "art/source/mon_driftcove.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2780,6 +2890,7 @@
    "save": "mon_reef_gull.png",
    "replaces": "art/source/mon_driftcove.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2804,6 +2915,7 @@
    "save": "mon_coral_turret.png",
    "replaces": "art/source/mon_driftcove.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2828,6 +2940,7 @@
    "save": "mon_kelp_lurker.png",
    "replaces": "art/source/mon_driftcove.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2852,6 +2965,7 @@
    "save": "mon_barnacle_boar.png",
    "replaces": "art/source/mon_driftcove.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2876,6 +2990,7 @@
    "save": "mon_reef_titan.png",
    "replaces": "art/source/mon_driftcove.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     3,
     4
@@ -2900,6 +3015,7 @@
    "save": "mon_cliff_harpy.png",
    "replaces": "art/source/mon_ring_road.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2924,6 +3040,7 @@
    "save": "mon_marsh_horror.png",
    "replaces": "art/source/mon_ring_road.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2948,6 +3065,7 @@
    "save": "mon_starfall_golem.png",
    "replaces": "art/source/mon_ring_road.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2972,6 +3090,7 @@
    "save": "mon_cinder_hog.png",
    "replaces": "art/source/mon_ring_road.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -2996,6 +3115,7 @@
    "save": "mon_ash_wraith.png",
    "replaces": "art/source/mon_ring_road.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -3020,6 +3140,7 @@
    "save": "mon_dusk_stalker.png",
    "replaces": "art/source/mon_ring_road.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     2,
     4
@@ -3041,6 +3162,7 @@
    "save": "dawnharbor_tileset.png",
    "replaces": "art/source/dawnharbor_area.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     4,
     6
@@ -3063,6 +3185,7 @@
    "save": "dawnharbor_backgrounds.png",
    "replaces": "art/source/dawnharbor_area.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     13,
     1
@@ -3089,6 +3212,7 @@
    "save": "driftcove_tileset.png",
    "replaces": "art/source/driftcove_area.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     4,
     6
@@ -3110,6 +3234,7 @@
    "save": "driftcove_backgrounds.png",
    "replaces": "art/source/driftcove_area.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     7,
     1
@@ -3131,6 +3256,7 @@
    "save": "greenbough_tileset.png",
    "replaces": "art/source/greenbough_area.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     4,
     6
@@ -3152,6 +3278,7 @@
    "save": "greenbough_backgrounds.png",
    "replaces": "art/source/greenbough_area.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     7,
     1
@@ -3173,6 +3300,7 @@
    "save": "lumewood_tileset.png",
    "replaces": "art/source/lumewood_area.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     4,
     6
@@ -3194,6 +3322,7 @@
    "save": "lumewood_backgrounds.png",
    "replaces": "art/source/lumewood_area.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     7,
     1
@@ -3216,6 +3345,7 @@
    "save": "emberreach_tileset.png",
    "replaces": "art/source/emberreach_area.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     4,
     6
@@ -3237,6 +3367,7 @@
    "save": "emberreach_backgrounds.png",
    "replaces": "art/source/emberreach_area.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     7,
     1
@@ -3258,6 +3389,7 @@
    "save": "lanternfall_tileset.png",
    "replaces": "art/source/lanternfall_area.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     4,
     6
@@ -3279,6 +3411,7 @@
    "save": "lanternfall_backgrounds.png",
    "replaces": "art/source/lanternfall_area.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     7,
     1
@@ -3298,6 +3431,7 @@
    "save": "ground_textures_2.png",
    "replaces": "art/source/ground_textures_2.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     3
@@ -3316,6 +3450,7 @@
    "save": "ground_textures_3.png",
    "replaces": "art/source/ground_textures_2.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     3
@@ -3335,6 +3470,7 @@
    "save": "npcs_harbor_2.png",
    "replaces": "art/source/npcs_harbor_2.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     4
@@ -3358,6 +3494,7 @@
    "save": "npcs_harbor_3.png",
    "replaces": "art/source/npcs_harbor_3.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     4
@@ -3382,6 +3519,7 @@
    "save": "npcs_greenbough.png",
    "replaces": "art/source/npcs_greenbough.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     4
@@ -3405,6 +3543,7 @@
    "save": "npcs_lumewood.png",
    "replaces": "art/source/npcs_lumewood.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     4
@@ -3428,6 +3567,7 @@
    "save": "npcs_emberforge.png",
    "replaces": "art/source/npcs_emberforge.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     4
@@ -3452,6 +3592,7 @@
    "save": "npcs_lanternfall.png",
    "replaces": "art/source/npcs_lanternfall.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     4
@@ -3475,6 +3616,7 @@
    "save": "npcs_driftcove.png",
    "replaces": "art/source/npcs_driftcove.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     4
@@ -3497,6 +3639,7 @@
    "save": "pets.png",
    "replaces": "art/source/pets.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     9
@@ -3515,6 +3658,7 @@
    "save": "chairs.png",
    "replaces": "art/source/chairs.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     3
@@ -3534,6 +3678,7 @@
    "save": "items_warrior.png",
    "replaces": "art/source/items_warrior.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     4,
     6
@@ -3554,6 +3699,7 @@
    "save": "items_archer.png",
    "replaces": "art/source/items_archer.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     4,
     6
@@ -3574,6 +3720,7 @@
    "save": "items_magician.png",
    "replaces": "art/source/items_magician.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     4,
     5
@@ -3595,6 +3742,7 @@
    "save": "items_thief.png",
    "replaces": "art/source/items_thief.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     4,
     6
@@ -3615,6 +3763,7 @@
    "save": "items_pirate.png",
    "replaces": "art/source/items_pirate.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     4,
     6
@@ -3635,6 +3784,7 @@
    "save": "items_accessories.png",
    "replaces": "art/source/items_accessories.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     4,
     5
@@ -3656,6 +3806,7 @@
    "save": "items_parts_1.png",
    "replaces": "art/source/items_parts_1.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     5,
     5
@@ -3677,6 +3828,7 @@
    "save": "items_parts_2.png",
    "replaces": "art/source/items_parts_2.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     5,
     5
@@ -3697,6 +3849,7 @@
    "save": "items_charms_food.png",
    "replaces": "art/source/items_charms_food.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     4,
     6
@@ -3717,6 +3870,7 @@
    "save": "items_scrolls.png",
    "replaces": "art/source/items_scrolls.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     4
@@ -3733,6 +3887,7 @@
    "save": "skill_icons.png",
    "replaces": "art/source/skill_icons.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     5,
     5
@@ -3750,6 +3905,7 @@
    "save": "projectiles.png",
    "replaces": "art/source/projectiles.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     4
@@ -3766,6 +3922,7 @@
    "save": "skill_effects.png",
    "replaces": "art/source/skill_effects.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     4,
     5
@@ -3782,6 +3939,7 @@
    "save": "ui_windows_leather.png",
    "replaces": "art/source/ui_windows.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     4
@@ -3798,6 +3956,7 @@
    "save": "ui_hud_leather.png",
    "replaces": "art/source/ui_hud.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     4,
     4
@@ -3814,6 +3973,7 @@
    "save": "ui_menu_leather.png",
    "replaces": "art/source/ui_menu.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     5,
     5
@@ -3830,6 +3990,7 @@
    "save": "ui_dialogue_leather.png",
    "replaces": "art/source/ui_dialogue.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     4,
     4
@@ -3846,6 +4007,7 @@
    "save": "ui_social_leather.png",
    "replaces": "art/source/ui_social.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     4,
     4
@@ -3862,6 +4024,7 @@
    "save": "ui_book_leather.png",
    "replaces": "art/source/ui_book.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     4
@@ -3878,6 +4041,7 @@
    "save": "ui_creator_leather.png",
    "replaces": "art/source/ui_creator.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     4
@@ -3894,6 +4058,7 @@
    "save": "ui_map_icons.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     4,
     4
@@ -3911,6 +4076,7 @@
    "save": "ui_controls_leather.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     4,
     4
@@ -3927,6 +4093,7 @@
    "save": "ui_extras_leather.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     4,
     4
@@ -3943,6 +4110,7 @@
    "save": "world_map.png",
    "replaces": "art/source/world_map.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -3961,6 +4129,7 @@
    "save": "logo.png",
    "replaces": "art/source/logo.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -3981,6 +4150,7 @@
    "save": "title_backdrop.png",
    "replaces": "assets/sprites/ui/title_backdrop.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -3997,6 +4167,7 @@
    "save": "touchups_1.png",
    "replaces": "art/source/touchups_1.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     4
@@ -4016,6 +4187,7 @@
    "save": "platform_pieces_meadow.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     4
@@ -4032,6 +4204,7 @@
    "save": "platform_pieces_greenbough.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     4
@@ -4049,6 +4222,7 @@
    "save": "platform_pieces_lumewood.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     4
@@ -4065,6 +4239,7 @@
    "save": "platform_pieces_ember.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     4
@@ -4081,6 +4256,7 @@
    "save": "platform_pieces_emberreach.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     4
@@ -4097,6 +4273,7 @@
    "save": "platform_pieces_lanternfall.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     4
@@ -4113,6 +4290,7 @@
    "save": "platform_pieces_driftcove.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     4
@@ -4129,6 +4307,7 @@
    "save": "platform_pieces_dawnharbor.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     4
@@ -4145,6 +4324,7 @@
    "save": "dawnharbor_midground.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     1
@@ -4164,6 +4344,7 @@
    "save": "buildings_dawnharbor.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     2,
     3
@@ -4183,6 +4364,7 @@
    "save": "buildings_meadow.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     2,
     3
@@ -4202,6 +4384,7 @@
    "save": "buildings_greenbough.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     2,
     3
@@ -4221,6 +4404,7 @@
    "save": "buildings_lumewood.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     2,
     3
@@ -4240,6 +4424,7 @@
    "save": "buildings_emberforge.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     2,
     3
@@ -4260,6 +4445,7 @@
    "save": "buildings_lanternfall.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     2,
     3
@@ -4279,6 +4465,7 @@
    "save": "buildings_driftcove.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     2,
     3
@@ -4298,6 +4485,7 @@
    "save": "room_meadow.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     4
@@ -4318,6 +4506,7 @@
    "save": "room_dawnharbor.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     4
@@ -4337,6 +4526,7 @@
    "save": "room_greenbough.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     4
@@ -4356,6 +4546,7 @@
    "save": "room_lumewood.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     4
@@ -4375,6 +4566,7 @@
    "save": "room_emberforge.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     4
@@ -4394,6 +4586,7 @@
    "save": "room_lanternfall.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     4
@@ -4413,6 +4606,7 @@
    "save": "room_driftcove.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     4
@@ -4430,6 +4624,7 @@
    "save": "building_dawnharbor_large.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -4451,6 +4646,7 @@
    "save": "building_dawnharbor_small.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -4472,6 +4668,7 @@
    "save": "building_driftcove_large.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -4493,6 +4690,7 @@
    "save": "building_driftcove_small.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -4514,6 +4712,7 @@
    "save": "building_emberreach_large.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -4535,6 +4734,7 @@
    "save": "building_emberreach_small.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -4556,6 +4756,7 @@
    "save": "building_greenbough_large.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -4577,6 +4778,7 @@
    "save": "building_greenbough_small.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -4598,6 +4800,7 @@
    "save": "building_lanternfall_large.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -4619,6 +4822,7 @@
    "save": "building_lanternfall_small.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -4640,6 +4844,7 @@
    "save": "building_lumewood_large.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -4661,6 +4866,7 @@
    "save": "building_lumewood_small.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -4682,6 +4888,7 @@
    "save": "eq_top_plate_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -4708,6 +4915,7 @@
    "save": "eq_bottom_greaves_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -4734,6 +4942,7 @@
    "save": "eq_shoes_sabatons_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -4760,6 +4969,7 @@
    "save": "eq_bottom_pants_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -4783,6 +4993,7 @@
    "save": "eq_top_robe_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -4806,6 +5017,7 @@
    "save": "eq_top_smock_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -4833,6 +5045,7 @@
    "save": "eq_bottom_shorts_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -4859,6 +5072,7 @@
    "save": "eq_shoes_clogs_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -4882,6 +5096,7 @@
    "save": "eq_cape_frames.png",
    "replaces": "art/source/paperdoll_layers.png",
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -4908,6 +5123,7 @@
    "save": "eq_paperdoll_hats.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     4
@@ -4934,6 +5150,7 @@
    "save": "eq_paperdoll_hats_only.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     4
@@ -4954,6 +5171,7 @@
    "save": "building_dawnharbor_large_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -4975,6 +5193,7 @@
    "save": "building_dawnharbor_small_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -4996,6 +5215,7 @@
    "save": "building_driftcove_large_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -5017,6 +5237,7 @@
    "save": "building_driftcove_small_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -5038,6 +5259,7 @@
    "save": "building_emberreach_large_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -5059,6 +5281,7 @@
    "save": "building_emberreach_small_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -5080,6 +5303,7 @@
    "save": "building_greenbough_large_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -5101,6 +5325,7 @@
    "save": "building_greenbough_small_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -5122,6 +5347,7 @@
    "save": "building_lanternfall_large_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -5143,6 +5369,7 @@
    "save": "building_lanternfall_small_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -5164,6 +5391,7 @@
    "save": "building_lumewood_large_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -5185,6 +5413,7 @@
    "save": "building_lumewood_small_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -5206,6 +5435,7 @@
    "save": "room_dawnharbor_fine_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5227,6 +5457,7 @@
    "save": "room_dawnharbor_wall_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5248,6 +5479,7 @@
    "save": "room_driftcove_fine_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5269,6 +5501,7 @@
    "save": "room_driftcove_wall_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5290,6 +5523,7 @@
    "save": "room_emberforge_fine_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5311,6 +5545,7 @@
    "save": "room_emberforge_wall_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5332,6 +5567,7 @@
    "save": "room_greenbough_fine_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5353,6 +5589,7 @@
    "save": "room_greenbough_wall_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5374,6 +5611,7 @@
    "save": "room_lanternfall_fine_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5395,6 +5633,7 @@
    "save": "room_lanternfall_wall_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5416,6 +5655,7 @@
    "save": "room_lumewood_fine_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5437,6 +5677,7 @@
    "save": "room_lumewood_wall_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5458,6 +5699,7 @@
    "save": "room_meadow_fine_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5479,6 +5721,7 @@
    "save": "room_meadow_wall_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5500,6 +5743,7 @@
    "save": "meadow_backgrounds_a_fine_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5521,6 +5765,7 @@
    "save": "ember_backgrounds_fine_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5542,6 +5787,7 @@
    "save": "dawnharbor_backgrounds_fine_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5563,6 +5809,7 @@
    "save": "driftcove_backgrounds_fine_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5584,6 +5831,7 @@
    "save": "greenbough_backgrounds_fine_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5605,6 +5853,7 @@
    "save": "lumewood_backgrounds_fine_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5626,6 +5875,7 @@
    "save": "emberreach_backgrounds_fine_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5647,6 +5897,7 @@
    "save": "lanternfall_backgrounds_fine_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5668,6 +5919,7 @@
    "save": "meadow_tileset_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5689,6 +5941,7 @@
    "save": "dawnharbor_tileset_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5710,6 +5963,7 @@
    "save": "driftcove_tileset_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5731,6 +5985,7 @@
    "save": "ember_tileset_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5752,6 +6007,7 @@
    "save": "emberreach_tileset_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5773,6 +6029,7 @@
    "save": "greenbough_tileset_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5794,6 +6051,7 @@
    "save": "lanternfall_tileset_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5815,6 +6073,7 @@
    "save": "lumewood_tileset_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5836,6 +6095,7 @@
    "save": "ropes_props_fine_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5857,6 +6117,7 @@
    "save": "climb_tops_fine_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5878,6 +6139,7 @@
    "save": "ground_textures_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5899,6 +6161,7 @@
    "save": "ground_textures_2_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5920,6 +6183,7 @@
    "save": "ground_textures_3_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5941,6 +6205,7 @@
    "save": "lanternfall_backgrounds_fine_painted_fix.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5962,6 +6227,7 @@
    "save": "ui_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -5983,6 +6249,7 @@
    "save": "ui_hud_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6004,6 +6271,7 @@
    "save": "ui_windows_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6025,6 +6293,7 @@
    "save": "ui_menu_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6046,6 +6315,7 @@
    "save": "ui_dialogue_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6067,6 +6337,7 @@
    "save": "ui_book_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6088,6 +6359,7 @@
    "save": "ui_creator_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6109,6 +6381,7 @@
    "save": "ui_social_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6130,6 +6403,7 @@
    "save": "world_map_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6151,6 +6425,7 @@
    "save": "ui_old_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6172,6 +6447,7 @@
    "save": "ui_hud_old_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6193,6 +6469,7 @@
    "save": "ui_menu_old_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6214,6 +6491,7 @@
    "save": "ui_dialogue_old_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6235,6 +6513,7 @@
    "save": "skill_icons_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6256,6 +6535,7 @@
    "save": "items_accessories_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6277,6 +6557,7 @@
    "save": "items_archer_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6298,6 +6579,7 @@
    "save": "items_charms_food_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6319,6 +6601,7 @@
    "save": "items_consumables_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6340,6 +6623,7 @@
    "save": "items_gear_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6361,6 +6645,7 @@
    "save": "items_magician_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6382,6 +6667,7 @@
    "save": "items_parts_1_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6403,6 +6689,7 @@
    "save": "items_parts_2_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6424,6 +6711,7 @@
    "save": "items_pirate_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6445,6 +6733,7 @@
    "save": "items_scrolls_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6466,6 +6755,7 @@
    "save": "items_starter_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6487,6 +6777,7 @@
    "save": "items_thief_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6508,6 +6799,7 @@
    "save": "items_warrior_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6529,6 +6821,7 @@
    "save": "title_backdrop_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6550,6 +6843,7 @@
    "save": "ground_meadow_near.png",
    "replaces": "assets/sprites/backgrounds/meadow/near_treeline.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6570,6 +6864,7 @@
    "save": "ground_dawnharbor_near.png",
    "replaces": "assets/sprites/backgrounds/dawnharbor/near.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6590,6 +6885,7 @@
    "save": "ground_greenbough_near.png",
    "replaces": "assets/sprites/backgrounds/greenbough/near.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6610,6 +6906,7 @@
    "save": "ground_lumewood_near.png",
    "replaces": "assets/sprites/backgrounds/lumewood/near.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6630,6 +6927,7 @@
    "save": "ground_driftcove_near.png",
    "replaces": "assets/sprites/backgrounds/driftcove/near.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6650,6 +6948,7 @@
    "save": "ground_emberreach_near.png",
    "replaces": "assets/sprites/backgrounds/emberreach/near.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6670,6 +6969,7 @@
    "save": "ground_ember_near.png",
    "replaces": "assets/sprites/backgrounds/ember/near_ridge.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6690,6 +6990,7 @@
    "save": "ground_lanternfall_near.png",
    "replaces": "assets/sprites/backgrounds/lanternfall/near.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6710,6 +7011,7 @@
    "save": "dewling_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6731,6 +7033,7 @@
    "save": "mon_acorn_sentry_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6752,6 +7055,7 @@
    "save": "mon_arcane_sentinel_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6773,6 +7077,7 @@
    "save": "mon_ash_bat_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6794,6 +7099,7 @@
    "save": "mon_ash_wraith_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6815,6 +7121,7 @@
    "save": "anim_ashshell_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6836,6 +7143,7 @@
    "save": "mon_barkcap_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6857,6 +7165,7 @@
    "save": "mon_barnacle_boar_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6878,6 +7187,7 @@
    "save": "anim_boulderkin_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6899,6 +7209,7 @@
    "save": "mon_bramble_boar_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6920,6 +7231,7 @@
    "save": "mon_cinder_hog_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6941,6 +7253,7 @@
    "save": "anim_cinder_imp_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6962,6 +7275,7 @@
    "save": "mon_cinder_pup_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -6983,6 +7297,7 @@
    "save": "mon_cliff_harpy_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7004,6 +7319,7 @@
    "save": "mon_coral_turret_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7025,6 +7341,7 @@
    "save": "mon_crypt_shell_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7046,6 +7363,7 @@
    "save": "mon_crystal_golem_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7067,6 +7385,7 @@
    "save": "mon_dusk_moth_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7088,6 +7407,7 @@
    "save": "mon_dusk_stalker_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7109,6 +7429,7 @@
    "save": "ember_boar_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7130,6 +7451,7 @@
    "save": "mon_fire_imp_archer_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7151,6 +7473,7 @@
    "save": "anim_flame_boar_chief_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7172,6 +7495,7 @@
    "save": "mon_forge_golem_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7193,6 +7517,7 @@
    "save": "mon_gloomcap_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7214,6 +7539,7 @@
    "save": "mon_glowcap_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7235,6 +7561,7 @@
    "save": "mon_grove_wisp_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7256,6 +7583,7 @@
    "save": "mon_kelp_lurker_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7277,6 +7605,7 @@
    "save": "mon_lantern_wisp_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7298,6 +7627,7 @@
    "save": "mon_leafwing_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7319,6 +7649,7 @@
    "save": "mon_lume_wisp_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7340,6 +7671,7 @@
    "save": "mon_magma_shell_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7361,6 +7693,7 @@
    "save": "mon_molten_king_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7382,6 +7715,7 @@
    "save": "anim_mossling_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7403,6 +7737,7 @@
    "save": "mon_night_boar_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7424,6 +7759,7 @@
    "save": "anim_petal_bat_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7445,6 +7781,7 @@
    "save": "mon_prism_bit_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7466,6 +7803,7 @@
    "save": "mon_prism_slime_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7487,6 +7825,7 @@
    "save": "mon_reef_gull_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7508,6 +7847,7 @@
    "save": "mon_sand_crab_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7529,6 +7869,7 @@
    "save": "mon_sea_gull_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7550,6 +7891,7 @@
    "save": "mon_shade_imp_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7571,6 +7913,7 @@
    "save": "mon_shell_crab_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7592,6 +7935,7 @@
    "save": "mon_slag_bit_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7613,6 +7957,7 @@
    "save": "mon_slag_slime_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7634,6 +7979,7 @@
    "save": "mon_spell_imp_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7655,6 +8001,7 @@
    "save": "mon_spore_puff_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7676,6 +8023,7 @@
    "save": "mon_sporecap_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7697,6 +8045,7 @@
    "save": "anim_sproutcap_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7718,6 +8067,7 @@
    "save": "mon_star_bat_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7739,6 +8089,7 @@
    "save": "mon_starfall_golem_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7760,6 +8111,7 @@
    "save": "mon_thornling_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7781,6 +8133,7 @@
    "save": "mon_tide_bit_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7802,6 +8155,7 @@
    "save": "mon_tide_dewling_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7823,6 +8177,7 @@
    "save": "mon_tide_slime_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -7847,6 +8202,7 @@
    "save": "run_top_coat_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -7873,6 +8229,7 @@
    "save": "run_top_plate_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -7899,6 +8256,7 @@
    "save": "run_top_robe_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -7925,6 +8283,7 @@
    "save": "run_top_tunic_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -7951,6 +8310,7 @@
    "save": "run_top_undershirt_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -7977,6 +8337,7 @@
    "save": "run_top_vest_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -8003,6 +8364,7 @@
    "save": "run_bottom_breeches_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -8029,6 +8391,7 @@
    "save": "run_bottom_greaves_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -8055,6 +8418,7 @@
    "save": "run_bottom_pants_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -8081,6 +8445,7 @@
    "save": "run_bottom_shorts_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -8107,6 +8472,7 @@
    "save": "run_bottom_trousers_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -8133,6 +8499,7 @@
    "save": "run_shoes_boots_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -8159,6 +8526,7 @@
    "save": "run_shoes_clogs_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -8185,6 +8553,7 @@
    "save": "run_shoes_sabatons_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -8211,6 +8580,7 @@
    "save": "run_shoes_sandals_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -8237,6 +8607,7 @@
    "save": "run_shoes_shoes_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -8263,6 +8634,7 @@
    "save": "run_cape_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -8286,6 +8658,7 @@
    "save": "effects_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8307,6 +8680,7 @@
    "save": "mon_elder_treant_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8328,6 +8702,7 @@
    "save": "mon_reef_titan_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8349,6 +8724,7 @@
    "save": "mon_lantern_wraith_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8370,6 +8746,7 @@
    "save": "mon_marsh_horror_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8391,6 +8768,7 @@
    "save": "mon_old_clawbeard_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8412,6 +8790,7 @@
    "save": "pets_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8433,6 +8812,7 @@
    "save": "skill_effects_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8454,6 +8834,7 @@
    "save": "projectiles_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8475,6 +8856,7 @@
    "save": "projectiles_old_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8496,6 +8878,7 @@
    "save": "paperdoll_shield_kite_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8517,6 +8900,7 @@
    "save": "paperdoll_shield_round_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8538,6 +8922,7 @@
    "save": "held_magic_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8559,6 +8944,7 @@
    "save": "held_claws_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8580,6 +8966,7 @@
    "save": "paperdoll_weapons_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8601,6 +8988,7 @@
    "save": "chairs_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8622,6 +9010,7 @@
    "save": "touchups_1_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8643,6 +9032,7 @@
    "save": "key_art_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8664,6 +9054,7 @@
    "save": "npcs_harbor_1_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8685,6 +9076,7 @@
    "save": "npcs_harbor_2_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8706,6 +9098,7 @@
    "save": "npcs_harbor_3_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8727,6 +9120,7 @@
    "save": "npcs_greenbough_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8748,6 +9142,7 @@
    "save": "npcs_lumewood_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8769,6 +9164,7 @@
    "save": "npcs_emberforge_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8790,6 +9186,7 @@
    "save": "npcs_lanternfall_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8811,6 +9208,7 @@
    "save": "npcs_driftcove_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8832,6 +9230,7 @@
    "save": "monsters_npcs_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8853,6 +9252,7 @@
    "save": "platform_pieces_dawnharbor_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8874,6 +9274,7 @@
    "save": "platform_pieces_driftcove_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8895,6 +9296,7 @@
    "save": "platform_pieces_ember_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8916,6 +9318,7 @@
    "save": "platform_pieces_emberreach_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8937,6 +9340,7 @@
    "save": "platform_pieces_greenbough_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8958,6 +9362,7 @@
    "save": "platform_pieces_lanternfall_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -8979,6 +9384,7 @@
    "save": "platform_pieces_lumewood_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -9000,6 +9406,7 @@
    "save": "platform_pieces_meadow_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -9021,6 +9428,7 @@
    "save": "hud_bar_dawn.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -9042,6 +9450,7 @@
    "save": "paperdoll_mitten_1.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     2
@@ -9062,6 +9471,7 @@
    "save": "paperdoll_mitten_2.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     2
@@ -9082,6 +9492,7 @@
    "save": "paperdoll_mitten_3.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     2
@@ -9102,6 +9513,7 @@
    "save": "paperdoll_mitten_4.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     2
@@ -9122,6 +9534,7 @@
    "save": "paperdoll_mitten_5.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     2
@@ -9142,6 +9555,7 @@
    "save": "paperdoll_mitten_6.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     2
@@ -9162,6 +9576,7 @@
    "save": "paperdoll_mitten_7.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     2
@@ -9182,6 +9597,7 @@
    "save": "paperdoll_runarms.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     2
@@ -9202,6 +9618,7 @@
    "save": "paperdoll_mitten_b1.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     2
@@ -9226,6 +9643,7 @@
    "save": "paperdoll_mitten_b2.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     2
@@ -9250,6 +9668,7 @@
    "save": "paperdoll_mitten_b3.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     2
@@ -9274,6 +9693,7 @@
    "save": "paperdoll_mitten_b4.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     2
@@ -9298,6 +9718,7 @@
    "save": "paperdoll_mitten_b5.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     2
@@ -9322,6 +9743,7 @@
    "save": "paperdoll_mitten_b6.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     2,
     2
@@ -9349,6 +9771,7 @@
    "save": "run2_top_coat_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -9375,6 +9798,7 @@
    "save": "run2_top_plate_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -9401,6 +9825,7 @@
    "save": "run2_top_robe_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -9427,6 +9852,7 @@
    "save": "run2_top_tunic_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -9453,6 +9879,7 @@
    "save": "run2_top_undershirt_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -9479,6 +9906,7 @@
    "save": "run2_top_vest_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -9505,6 +9933,7 @@
    "save": "run2_cape_frames.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -9531,6 +9960,7 @@
    "save": "paperdoll_gloves_mitten.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -9551,6 +9981,7 @@
    "save": "building_lanternfall_small_flat.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -9573,6 +10004,7 @@
    "save": "building_dawnharbor_large_flat.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -9595,6 +10027,7 @@
    "save": "building_dawnharbor_small_flat.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -9617,6 +10050,7 @@
    "save": "building_driftcove_large_flat.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -9643,6 +10077,7 @@
    "save": "building_driftcove_small_flat.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -9668,6 +10103,7 @@
    "save": "building_emberreach_large_flat.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -9690,6 +10126,7 @@
    "save": "building_emberreach_small_flat.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -9712,6 +10149,7 @@
    "save": "building_greenbough_large_flat.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -9738,6 +10176,7 @@
    "save": "building_greenbough_small_flat.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -9760,6 +10199,7 @@
    "save": "building_lanternfall_large_flat.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -9786,6 +10226,7 @@
    "save": "building_lumewood_large_flat.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -9808,6 +10249,7 @@
    "save": "building_lumewood_small_flat.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -9834,6 +10276,7 @@
    "save": "logo_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -9855,6 +10298,7 @@
    "save": "world_map_painted_v2.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -9876,6 +10320,7 @@
    "save": "room_props_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -9897,6 +10342,7 @@
    "save": "room_items_painted.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -9918,6 +10364,7 @@
    "save": "building_emberreach_large_front.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -9940,6 +10387,7 @@
    "save": "building_dawnharbor_large_front.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -9963,6 +10411,7 @@
    "save": "building_dawnharbor_small_front.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -9986,6 +10435,7 @@
    "save": "building_driftcove_large_front.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -10009,6 +10459,7 @@
    "save": "building_driftcove_small_front.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -10032,6 +10483,7 @@
    "save": "building_emberreach_small_front.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -10055,6 +10507,7 @@
    "save": "building_greenbough_large_front.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -10078,6 +10531,7 @@
    "save": "building_greenbough_small_front.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -10101,6 +10555,7 @@
    "save": "building_lanternfall_large_front.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -10124,6 +10579,7 @@
    "save": "building_lanternfall_small_front.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -10147,6 +10603,7 @@
    "save": "building_lumewood_large_front.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -10170,6 +10627,7 @@
    "save": "building_lumewood_small_front.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -10193,6 +10651,7 @@
    "save": "building_dawnharbor_small_front2.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -10216,6 +10675,7 @@
    "save": "building_greenbough_large_front2.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -10239,6 +10699,7 @@
    "save": "building_dawnharbor_large_npcstyle.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -10265,6 +10726,7 @@
    "save": "building_dawnharbor_small_npcstyle.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -10291,6 +10753,7 @@
    "save": "building_driftcove_large_npcstyle.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -10317,6 +10780,7 @@
    "save": "building_driftcove_small_npcstyle.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -10343,6 +10807,7 @@
    "save": "building_emberreach_large_npcstyle.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -10369,6 +10834,7 @@
    "save": "building_emberreach_small_npcstyle.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -10395,6 +10861,7 @@
    "save": "building_greenbough_large_npcstyle.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -10421,6 +10888,7 @@
    "save": "building_greenbough_small_npcstyle.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -10447,6 +10915,7 @@
    "save": "building_lanternfall_large_npcstyle.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -10473,6 +10942,7 @@
    "save": "building_lanternfall_small_npcstyle.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -10499,6 +10969,7 @@
    "save": "building_lumewood_large_npcstyle.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -10525,6 +10996,7 @@
    "save": "building_lumewood_small_npcstyle.png",
    "replaces": null,
    "kind": "still",
+   "stands": true,
    "cells": [
     1,
     1
@@ -10551,6 +11023,7 @@
    "save": "wg_worn_steel_cuirass.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -10575,6 +11048,7 @@
    "save": "wg_worn_moonweave_robe.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -10599,6 +11073,7 @@
    "save": "wg_shield_backs.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     3
@@ -10621,6 +11096,7 @@
    "save": "wg_hats_1.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     5
@@ -10650,6 +11126,7 @@
    "save": "wg_worn_aurora_robe.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -10674,6 +11151,7 @@
    "save": "wg_worn_berry_smock.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -10698,6 +11176,7 @@
    "save": "wg_worn_bronze_mail.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -10722,6 +11201,7 @@
    "save": "wg_worn_deckhand_coat.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -10746,6 +11226,7 @@
    "save": "wg_worn_eclipse_garb.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -10770,6 +11251,7 @@
    "save": "wg_worn_emberplate_cuirass.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -10794,6 +11276,7 @@
    "save": "wg_worn_leviathan_coat.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -10818,6 +11301,7 @@
    "save": "wg_worn_linen_tunic.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -10842,6 +11326,7 @@
    "save": "wg_worn_meadow_shirt.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -10866,6 +11351,7 @@
    "save": "wg_worn_night_garb.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -10890,6 +11376,7 @@
    "save": "wg_worn_nightfang_garb.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -10914,6 +11401,7 @@
    "save": "wg_worn_ranger_vest.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -10938,6 +11426,7 @@
    "save": "wg_worn_sailor_coat.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -10962,6 +11451,7 @@
    "save": "wg_worn_skyreach_jerkin.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -10986,6 +11476,7 @@
    "save": "wg_worn_starfall_robe.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11010,6 +11501,7 @@
    "save": "wg_worn_starweave_robe.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11034,6 +11526,7 @@
    "save": "wg_worn_stormsail_coat.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11058,6 +11551,7 @@
    "save": "wg_worn_sunforged_cuirass.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11082,6 +11576,7 @@
    "save": "wg_worn_thicket_jerkin.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11106,6 +11601,7 @@
    "save": "wg_worn_viper_garb.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11130,6 +11626,7 @@
    "save": "wg_worn_windrunner_jerkin.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11154,6 +11651,7 @@
    "save": "wg_worn_aurora_trousers.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11178,6 +11676,7 @@
    "save": "wg_worn_deckhand_trousers.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11202,6 +11701,7 @@
    "save": "wg_worn_eclipse_pants.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11226,6 +11726,7 @@
    "save": "wg_worn_emberplate_greaves.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11250,6 +11751,7 @@
    "save": "wg_worn_field_trousers.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11274,6 +11776,7 @@
    "save": "wg_worn_leviathan_trousers.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11298,6 +11801,7 @@
    "save": "wg_worn_moonweave_trousers.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11322,6 +11826,7 @@
    "save": "wg_worn_nightfang_pants.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11346,6 +11851,7 @@
    "save": "wg_worn_patched_trousers.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11370,6 +11876,7 @@
    "save": "wg_worn_ranger_breeches.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11394,6 +11901,7 @@
    "save": "wg_worn_rolled_shorts.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11418,6 +11926,7 @@
    "save": "wg_worn_skyreach_leggings.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11442,6 +11951,7 @@
    "save": "wg_worn_starfall_trousers.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11466,6 +11976,7 @@
    "save": "wg_worn_steel_greaves.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11490,6 +12001,7 @@
    "save": "wg_worn_stormsail_trousers.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11514,6 +12026,7 @@
    "save": "wg_worn_sunforged_greaves.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11538,6 +12051,7 @@
    "save": "wg_worn_thicket_leggings.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11562,6 +12076,7 @@
    "save": "wg_worn_trail_pants.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11586,6 +12101,7 @@
    "save": "wg_worn_viper_pants.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11610,6 +12126,7 @@
    "save": "wg_worn_windrunner_leggings.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11634,6 +12151,7 @@
    "save": "wg_worn_aurora_slippers.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11658,6 +12176,7 @@
    "save": "wg_worn_canvas_shoes.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11682,6 +12201,7 @@
    "save": "wg_worn_clay_clogs.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11706,6 +12226,7 @@
    "save": "wg_worn_deckhand_boots.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11730,6 +12251,7 @@
    "save": "wg_worn_eclipse_shoes.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11754,6 +12276,7 @@
    "save": "wg_worn_emberplate_sabatons.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11778,6 +12301,7 @@
    "save": "wg_worn_hiking_boots.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11802,6 +12326,7 @@
    "save": "wg_worn_leather_boots.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11826,6 +12351,7 @@
    "save": "wg_worn_leviathan_boots.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11850,6 +12376,7 @@
    "save": "wg_worn_moonweave_slippers.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11874,6 +12401,7 @@
    "save": "wg_worn_nightfang_shoes.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11898,6 +12426,7 @@
    "save": "wg_worn_reed_sandals.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11922,6 +12451,7 @@
    "save": "wg_worn_sandals.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11946,6 +12476,7 @@
    "save": "wg_worn_skyreach_boots.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11970,6 +12501,7 @@
    "save": "wg_worn_starfall_slippers.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -11994,6 +12526,7 @@
    "save": "wg_worn_steel_sabatons.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12018,6 +12551,7 @@
    "save": "wg_worn_stormsail_boots.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12042,6 +12576,7 @@
    "save": "wg_worn_sunforged_sabatons.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12066,6 +12601,7 @@
    "save": "wg_worn_thicket_boots.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12090,6 +12626,7 @@
    "save": "wg_worn_viper_shoes.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12114,6 +12651,7 @@
    "save": "wg_worn_windrunner_boots.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12138,6 +12676,7 @@
    "save": "wg_worn_windstep_boots.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12162,6 +12701,7 @@
    "save": "wg_worn_dawnwing_cape.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12186,6 +12726,7 @@
    "save": "wg_worn_petal_cape.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12210,6 +12751,7 @@
    "save": "wg_worn_starlit_cape.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12234,6 +12776,7 @@
    "save": "wg_worn_traveler_cape.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12258,6 +12801,7 @@
    "save": "wg_worn_brigand_gloves.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12282,6 +12826,7 @@
    "save": "wg_worn_canvas_gloves.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12306,6 +12851,7 @@
    "save": "wg_worn_dragonhide_gloves.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12330,6 +12876,7 @@
    "save": "wg_worn_work_gloves.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12354,6 +12901,7 @@
    "save": "wg_hats_1_only.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     5
@@ -12376,6 +12924,7 @@
    "save": "wg_hats_2.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     5
@@ -12405,6 +12954,7 @@
    "save": "wg_hats_2_only.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     5
@@ -12427,6 +12977,7 @@
    "save": "wg_hats_3.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     5
@@ -12456,6 +13007,7 @@
    "save": "wg_hats_3_only.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     5
@@ -12478,6 +13030,7 @@
    "save": "wg_icons_thief_bandanas.png",
    "replaces": "art/source/items_thief.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     4,
     6
@@ -12502,6 +13055,7 @@
    "save": "wg_icons_thief_bandanas_2.png",
    "replaces": "art/source/items_thief.png",
    "kind": "still",
+   "stands": false,
    "cells": [
     4,
     6
@@ -12526,6 +13080,7 @@
    "save": "wg_icon_viper_bandana.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": null,
    "anchor": null,
    "size": "2K",
@@ -12547,6 +13102,7 @@
    "save": "wg_icon_nightfang_bandana.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": null,
    "anchor": null,
    "size": "2K",
@@ -12568,6 +13124,7 @@
    "save": "wg_icon_eclipse_bandana.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": null,
    "anchor": null,
    "size": "2K",
@@ -12589,6 +13146,7 @@
    "save": "wg_hats_4.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     5
@@ -12615,6 +13173,7 @@
    "save": "wg_hats_4_only.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     5
@@ -12637,6 +13196,7 @@
    "save": "wg_hats_5.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     5
@@ -12664,6 +13224,7 @@
    "save": "wg_hats_5_only.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     3,
     5
@@ -12686,6 +13247,7 @@
    "save": "wg_worn_linen_tunic_only.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12708,6 +13270,7 @@
    "save": "wg_worn_sunforged_cuirass_only.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12730,6 +13293,7 @@
    "save": "wg_worn_sunforged_greaves_only.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12752,6 +13316,7 @@
    "save": "wg_worn_sunforged_sabatons_only.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12774,6 +13339,7 @@
    "save": "wg_worn_canvas_shoes_only.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12796,6 +13362,7 @@
    "save": "wg_worn_hiking_boots_only.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12818,6 +13385,7 @@
    "save": "wg_worn_leather_boots_only.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12840,6 +13408,7 @@
    "save": "wg_worn_reed_sandals_only.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12862,6 +13431,7 @@
    "save": "wg_worn_sandals_only.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12884,6 +13454,7 @@
    "save": "wg_worn_thicket_boots_only.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12906,6 +13477,7 @@
    "save": "wg_worn_viper_shoes_only.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12928,6 +13500,7 @@
    "save": "wg_worn_windstep_boots_only.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12950,6 +13523,7 @@
    "save": "wg_worn_skyreach_boots_only.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12972,6 +13546,7 @@
    "save": "wg_worn_skyreach_leggings_only.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -12994,6 +13569,7 @@
    "save": "wg_worn_emberplate_sabatons_only.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -13016,6 +13592,7 @@
    "save": "wg_worn_deckhand_boots_only.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -13038,6 +13615,7 @@
    "save": "wg_worn_stormsail_trousers_only.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -13060,6 +13638,7 @@
    "save": "wg_worn_petal_cape_only.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -13082,6 +13661,7 @@
    "save": "wg_worn_dawnwing_cape_only.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -13104,6 +13684,7 @@
    "save": "wg_worn_starlit_cape_only.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -13126,6 +13707,7 @@
    "save": "wg_worn_clay_clogs_only.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     4,
     8
@@ -13148,6 +13730,7 @@
    "save": "wg_glove_mittens.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     4
@@ -13173,6 +13756,7 @@
    "save": "wg_glove_mittens_2.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     4
@@ -13198,6 +13782,7 @@
    "save": "portal_pillar.png",
    "replaces": null,
    "kind": "anim",
+   "stands": false,
    "cells": [
     1,
     4
@@ -13223,6 +13808,7 @@
    "save": "wg_skyreach_nocape.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     2
@@ -13251,6 +13837,7 @@
    "save": "wg_skyreach_nocape_only.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     2
@@ -13273,6 +13860,7 @@
    "save": "wg_skyreach_icon_nocape.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -13303,6 +13891,7 @@
    "save": "wg_steel_helm_fit.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     2
@@ -13334,6 +13923,7 @@
    "save": "wg_steel_helm_fit_only.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     2
@@ -13356,6 +13946,7 @@
    "save": "wg_skyreach_icon_nocape2.png",
    "replaces": null,
    "kind": "still",
+   "stands": false,
    "cells": [
     1,
     1
@@ -13375,6 +13966,343 @@
      "/mnt/project-files/art-sheets/icon-refs/skyreach_hood_worn_nocape_side.png"
     ],
     "text": "The first image is the inventory icon of the SKYREACH HOOD from my game, labelled, on magenta. The second image shows the same hood as it is now worn: a close-fitting hood that ends at the jaw, with NO cape, NO collar and NO drape. REPAINT the icon so it is that hood: the hood ends just below the bottom of its dark face opening with a short, finished, rounded hem with the same thin dark outline as the rest of the hood. Below that hem there is NOTHING but magenta: no cape, no flared collar, no cream cloth or drape spreading out at the bottom, no gold braided trim along a lower edge and no gold rope or tie. The hood's outline at the bottom is narrow, about as wide as the face opening plus its gold trim. Everything else stays EXACTLY as it is: the same cream hood, gold trim around the face opening, gold braided crest, small white wings and dark face opening, the same angle, place and size, and the same label. The background stays bright pure magenta #FF00FF. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything."
+   }
+  },
+  {
+   "id": "dawnharbor_city_tavern",
+   "prompts": null,
+   "batch": "Dawnharbor city test: tavern (new building)",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_city_tavern.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 harbor-city thread (Cory 00:38Z): every Dawnharbor building gets its own art. Test with the lighthouse before the other 5.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnharbor-city/building_tavern_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "art/source/building_dawnharbor_large.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for the harbour city in my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn and chipped spots, mortar lines, slight colour variation between stones and roof tiles). The third image is another building from the same town: match its style, palette, outline thickness and level of detail exactly, so the two clearly belong to the same street. The new building is a cosy two-storey harbour TAVERN, a little wider than it is tall: cream plaster walls with dark brown timber framing, a blue slate-tiled roof like the third image with a brick chimney, a grey stone base, a wide arched wooden double door in the middle of the ground floor, warm glowing windows with small panes on both floors, window boxes with pink flowers on the upper floor, and a wooden sign hanging from an iron bracket beside the upper windows, painted with a frothy golden tankard (a picture only, no writing). Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: its stone base reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, barrels, people or shadow. 3) The door is a real doorway at ground level, centred left to right in the building. 4) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 5) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "dawnharbor_city_lighthouse",
+   "prompts": null,
+   "batch": "Dawnharbor city test: lighthouse (new building)",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_city_lighthouse.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 harbor-city thread (Cory 00:38Z): the cliff-top landmark. Test with the tavern before the other 5.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnharbor-city/building_lighthouse_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "art/source/building_dawnharbor_large.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for the harbour city in my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn and chipped spots, mortar lines, slight colour variation between stones and roof tiles). The third image is another building from the same town: match its style, palette, outline thickness and level of detail exactly, so the two clearly belong to the same street. The new building is the town's LIGHTHOUSE, a tall stone tower about three and a half times as tall as it is wide at the base, tapering gently towards the top: whitewashed stone blocks with two broad brick-red bands, a sturdy grey stone base with a small arched wooden door at ground level in the middle, two or three small arched windows up the tower, a stone gallery with a dark iron railing near the top, a glass lamp room with a big warm golden lamp glowing inside it, and a red domed cap topped with a small golden sun weathervane like the one on the third image. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: its stone base reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, barrels, people or shadow. 3) The door is a real doorway at ground level, centred left to right in the building. 4) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 5) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "dawnharbor_terrace_ends",
+   "prompts": null,
+   "batch": "Dawnharbor city test: terrace end caps and corner stones (edit)",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_terrace_ends.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 harbor-city thread (Cory 00:37-00:38Z): squared-off ends for raised terraces, corner stones down the wall, keep the flowers.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnharbor-city/terrace_ends_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ],
+    "text": "The first image is a sheet of painted ground pieces for my 2D side-scrolling game: the top row is the cobbled stone top edge of a raised harbour terrace, cut into four pieces that join side by side. The second image shows my game's NPC characters, drawn in exactly the art style the pieces must keep. Change ONLY these parts: A) Cells 1 (END LEFT) and 4 (END RIGHT): redraw each end of the stone ledge as a SQUARED-OFF end instead of a rounded one. The coping slab stops in a straight vertical edge with a crisp square corner at the top and the bottom, finished with one larger dressed corner stone, and the stone wall below the slab stops in the same straight vertical line. Keep the slab's top surface line, its thickness, its colours, the grass tufts and the pink flowers on top, and keep the side that joins cell 2 or cell 3 exactly as it is now, so the pieces still join seamlessly. B) Cells 5 (CORNER LEFT) and 6 (CORNER RIGHT) are empty: in each, paint the corner of a stone retaining wall seen straight from the front, filling the whole height of the cell: a vertical column of large dressed corner stones (quoins) in alternating long and short blocks, the same pale grey-white stone with soft blue-grey mortar as the wall in cell 7. The column's outer edge is one straight vertical line with a dark outline (the LEFT edge in cell 5, the RIGHT edge in cell 6); its inner edge has no outline and its stones run on like the wall in cell 7, so it can sit over that wall. The column repeats seamlessly from top to bottom. Leave cells 2, 3 and 7 exactly as they are."
+   }
+  },
+  {
+   "id": "dawnharbor_city_sail_loft",
+   "prompts": null,
+   "batch": "Dawnharbor city: sail loft (new building)",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_city_sail_loft.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 harbor-city thread (Cory 00:38Z): every Dawnharbor building gets its own art; follows the tavern and lighthouse test.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnharbor-city/building_sail_loft_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "art/source/building_dawnharbor_large.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for the harbour city in my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn and chipped spots, mortar lines, slight colour variation between stones and roof tiles). The third image is another building from the same town: match its style, palette, outline thickness and level of detail exactly, so the two clearly belong to the same street. The new building is a SAIL LOFT AND WAREHOUSE by the docks, wider than it is tall: a tall timber-framed barn with weathered brown plank walls on a grey stone base, a steep blue slate roof, a pair of big wooden loading doors in the middle of the ground floor with iron strap hinges, a small hayloft-style door high up under the gable with a wooden hoist beam and a hanging rope and pulley above it, and neatly rolled cream canvas sails resting on a beam under the eaves. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: its stone base reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, barrels, people or shadow. 3) The door is a real doorway at ground level, centred left to right in the building. 4) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 5) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "dawnharbor_city_row_house",
+   "prompts": null,
+   "batch": "Dawnharbor city: row house (new building)",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_city_row_house.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 harbor-city thread (Cory 00:38Z): every Dawnharbor building gets its own art; follows the tavern and lighthouse test.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnharbor-city/building_row_house_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "art/source/building_dawnharbor_large.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for the harbour city in my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn and chipped spots, mortar lines, slight colour variation between stones and roof tiles). The third image is another building from the same town: match its style, palette, outline thickness and level of detail exactly, so the two clearly belong to the same street. The new building is a narrow two-storey ROW HOUSE, about twice as tall as it is wide: pale blue-grey plaster walls with dark brown timber framing, a blue slate roof with a small chimney, a grey stone base, a small wooden front door in the middle of the ground floor with a little lantern beside it, one warm glowing window on each side of the door, two windows upstairs with pink flower boxes, and blue painted shutters. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: its stone base reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, barrels, people or shadow. 3) The door is a real doorway at ground level, centred left to right in the building. 4) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 5) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "dawnharbor_city_harbormaster",
+   "prompts": null,
+   "batch": "Dawnharbor city: harbormaster (new building)",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_city_harbormaster.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 harbor-city thread (Cory 00:38Z): every Dawnharbor building gets its own art; follows the tavern and lighthouse test.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnharbor-city/building_harbormaster_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "art/source/building_dawnharbor_large.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for the harbour city in my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn and chipped spots, mortar lines, slight colour variation between stones and roof tiles). The third image is another building from the same town: match its style, palette, outline thickness and level of detail exactly, so the two clearly belong to the same street. The new building is the HARBORMASTER'S OFFICE, a sturdy two-storey building a little wider than it is tall: a ground floor of dressed grey stone with a heavy wooden door in the middle under a stone arch, cream plaster with dark timber framing upstairs, a blue slate roof, a round clock face in the gable, and a small wooden bell cote with a brass bell on the roof ridge, a short flagpole with a blue and gold pennant (no writing), and a coil of rope and a ship's wheel hung on the wall beside the door. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: its stone base reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, barrels, people or shadow. 3) The door is a real doorway at ground level, centred left to right in the building. 4) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 5) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "dawnharbor_city_shipwright",
+   "prompts": null,
+   "batch": "Dawnharbor city: shipwright (new building)",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_city_shipwright.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 harbor-city thread (Cory 00:38Z): every Dawnharbor building gets its own art; follows the tavern and lighthouse test.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnharbor-city/building_shipwright_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "art/source/building_dawnharbor_large.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for the harbour city in my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn and chipped spots, mortar lines, slight colour variation between stones and roof tiles). The third image is another building from the same town: match its style, palette, outline thickness and level of detail exactly, so the two clearly belong to the same street. The new building is a SHIPWRIGHT'S WORKSHOP, wider than it is tall: a big open-fronted timber shed with a blue slate roof on thick wooden posts, a grey stone base, and inside the open front a small unfinished wooden rowing boat hull standing on wooden stocks, with planks, a saw and a mallet hung on the back wall and a warm lantern glow inside. A small wooden side door stands in the middle of the back wall, behind the boat's bow. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: its stone base reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, barrels, people or shadow. 3) The door is a real doorway at ground level, centred left to right in the building. 4) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 5) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "dawnharbor_city_chapel",
+   "prompts": null,
+   "batch": "Dawnharbor city: chapel (new building)",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_city_chapel.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 harbor-city thread (Cory 00:38Z): every Dawnharbor building gets its own art; follows the tavern and lighthouse test.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnharbor-city/building_chapel_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "art/source/building_dawnharbor_large.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for the harbour city in my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn and chipped spots, mortar lines, slight colour variation between stones and roof tiles). The third image is another building from the same town: match its style, palette, outline thickness and level of detail exactly, so the two clearly belong to the same street. The new building is a small stone CHAPEL with a bell tower, taller than it is wide: pale cream stone walls, a steep blue slate roof, a square bell tower rising from the front with a bronze bell under a little pointed blue roof topped by a small golden sun, a round stained-glass window in warm gold and blue above the door, and an arched wooden double door in the middle at ground level. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: its stone base reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, barrels, people or shadow. 3) The door is a real doorway at ground level, centred left to right in the building. 4) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 5) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "dawnharbor_backdrop_panorama",
+   "prompts": null,
+   "batch": "Dawnharbor city: one 4K harbour backdrop (test)",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_backdrop_panorama.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-12 harbor-city thread (Cory 01:26Z): one higher-quality backdrop image instead of strips; warm morning harbour bay, no lighthouse, clouds stay a separate layer.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnharbor-city/backdrop_panorama_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/dawnharbor-city/backdrop_current_ref.png"
+    ],
+    "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for the harbour city in my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights, rich warm saturated colours, dark brown outlines, and plenty of hand-painted texture. Paint the background in that same style, a little softer and lighter in contrast so it sits behind the characters. The third image is the town's current background pieces: keep their palette and their kind of content (cream-walled houses with blue slate roofs, wooden sailing ships with cream sails, piers and pilings), but paint something new, far richer and more detailed, as one single picture with no repeated sections. The scene: a wide harbour bay in warm early morning light. The top 45 percent is open sky going from soft blue at the top to warm peach and gold near the horizon, with a low morning sun glowing just above the horizon in the middle, and NO clouds at all. Below it, calm sea stretches to the horizon with small green islands topped with pine trees in the far distance. On the left and right sides, a far-off town of cream houses with blue slate roofs climbs gentle green hills down to the water. In the middle distance, several wooden sailing ships of different sizes are moored at long wooden piers, their sails furled or half open. The lower part of the picture is calm harbour water with soft golden reflections of the sun, ships and houses. Strict rules: 1) Side-on view as if standing on the quay, horizon level and straight across the whole picture. 2) No lighthouse anywhere. No clouds. No people, no characters, no birds. 3) Nothing in the near foreground: no quay, crates, barrels or posts in front; the closest things are the moored ships in the middle distance. 4) The left and right edges continue naturally (sea, hills and houses), nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere."
+   }
+  },
+  {
+   "id": "dawnharbor_props",
+   "prompts": null,
+   "batch": "Dawnharbor city: harbour props sheet (test)",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_props.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    4,
+    3
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-12 harbor-city thread (Cory 02:13Z): twelve painted harbour props to hand-place along Dawnharbor's street and terraces.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnharbor-city/props_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "art/source/building_dawnharbor_tavern.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint a sheet of TWELVE separate harbour props for the harbour city in my 2D side-scrolling game, laid out in 3 rows of 4, evenly spaced, each prop centred in its own quarter-by-third area of the canvas with a wide band of plain magenta around it, and no prop touching another. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture (wood grain, rope fibres, rust, worn and chipped spots). The third image is a building from the same town: match its style, palette, outline thickness and level of detail exactly, so the props clearly belong on its street. The twelve props, in reading order: Row 1: 1) a stack of three wooden cargo crates, 2) two wooden barrels side by side, 3) three plump burlap grain sacks leaning together, 4) a big coil of thick ship's rope. Row 2: 5) a heavy iron anchor standing upright, 6) two stacked wooden lobster pots, 7) a fishing net hung to dry on a simple wooden rack, 8) a short thick wooden mooring post with rope wrapped around it. Row 3: 9) a wooden park bench, 10) a long wooden flower planter box full of pink and yellow flowers, 11) a wooden hand cart with two wheels, 12) a wooden signpost with two blank arrow boards. Strict rules: 1) Every prop in pure side view at eye level, standing upright on its own flat bottom edge, sized as it would be next to a person (crates and barrels about waist high). 2) No ground, shadow, grass, water or base under any prop. 3) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. 4) No letters, numbers, words or labels anywhere, no grid lines, no borders and no frames. 5) Flat pure magenta #FF00FF background everywhere outside the props, with no magenta or pink anywhere inside them except the planter's pink flowers. Do not draw any characters."
+   }
+  },
+  {
+   "id": "dawnharbor_props_fix",
+   "prompts": null,
+   "batch": "Dawnharbor city: props sheet redrawn flat 2D side view",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_props_fix.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    4,
+    3
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-12 harbor-city thread (Cory 02:39-02:41Z): props drawn flat 2D side-on, each on a flat bottom; the mooring post's rope has no loose ends.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/dawnharbor_props.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "art/source/building_dawnharbor_tavern.png"
+    ],
+    "text": "The first image is a sheet of twelve painted harbour props for my 2D side-scrolling game, in 3 rows of 4. Redraw ALL twelve props as flat 2D side-scroller art, keeping the same objects, colours, materials, painted style, layout and positions. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture. The third image is a building from the same town, drawn straight from the front: draw the props in the same flat way. Strict rules for every prop: 1) Flat 2D view straight from the side at eye level, like a theatre flat: only the front face shows, no top surfaces seen from above, no three-quarter or isometric angle, no perspective; every horizontal edge level and every vertical edge upright. 2) Each prop stands on ONE flat straight horizontal bottom edge, as if resting on flat ground: crates and lobster pots sit on their flat bottoms, the barrels stand upright, the sacks sit flat, the rope coil is a low flat coil lying on the ground, the anchor lies on its side flat on the ground, the cart stands level with its wheel and front leg on one ground line, the bench, planter, net rack and signpost stand on their flat feet. 3) The mooring post's rope is wrapped neatly around it and tied off in a knot on the post, with NO loose rope ends hanging out. No ground, shadow or grass under anything. No grid lines, borders, letters or words. Painted, not pixel art. Flat pure magenta #FF00FF background everywhere outside the props."
+   }
+  },
+  {
+   "id": "dawnharbor_lamp_post",
+   "prompts": null,
+   "batch": "Dawnharbor city: street lamp post",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_lamp_post.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 harbor-city thread (Cory 02:16Z): the old low-res lamp post looks wrong; a tall painted street lamp replaces it.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnharbor-city/lamp_post_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "art/source/building_dawnharbor_tavern.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE street lamp post for the harbour town in my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture. The third image is a building from the same town: match its style, palette, outline thickness and level of detail exactly. The lamp: a tall slender dark iron post, about two and a half times as tall as a person, with a small decorative base, gentle ironwork scrolls near the top, and a glass lantern head with a little pointed cap. The lantern is lit, with a warm golden glowing flame inside its glass panes. Strict rules: 1) Pure side view at eye level, perfectly upright and centred. 2) The bottom of the base is ONE flat straight horizontal edge. No ground, shadow or grass under it. 3) The lamp fills most of the canvas height with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words. No glow halo spilling onto the background. Flat pure magenta #FF00FF background everywhere outside the lamp."
+   }
+  },
+  {
+   "id": "dawnharbor_market_sign",
+   "prompts": null,
+   "batch": "Dawnharbor city: Free Market signboard",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_market_sign.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 harbor-city thread (Cory 03:13-03:16Z): a painted signboard beside the Free Market portal shows where it leads. First try (03:25Z) came back in 3/4 (foot top and beam end showing); redone as a strict front elevation (Cory 03:27Z).",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnharbor-city/market_sign_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "art/source/building_dawnharbor_tavern.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE market signpost for the harbour town in my 2D side-scrolling game. It stands beside the entrance to the town's Free Market. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture. The third image is a building from the same town: match its style, palette, outline thickness and level of detail exactly. The signpost: a sturdy weathered wooden post, about one and a half times as tall as a person, set in a low flat wooden foot that is a plain rectangle in this front view. Near the top a wooden arm sticks out to the right, braced by a short diagonal strut. From the arm hangs a wide rectangular wooden signboard on two short iron chains; each chain is fixed to the arm at the top and to the board at the bottom, nothing loose or dangling. The board has a carved frame and is painted with a simple bold emblem: a plump tied coin purse with a few gold coins beside a small brass balance scale, on a warm red-and-cream striped background like a market awning. Strict rules: 1) A strictly flat 2D front elevation, like a technical drawing seen dead-on at eye level, perfectly upright. Every wooden part is a flat rectangle: the post shows only its front face, the arm shows only its front face with a square-cut end and no visible end grain or depth, the foot shows only its front face and no top. No 3/4, isometric or perspective angle anywhere. The board hangs flat facing the viewer. 2) The bottom of the foot is ONE flat straight horizontal edge. No ground, shadow or grass under it. 3) The signpost fills most of the canvas height with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, words or numbers anywhere. Flat pure magenta #FF00FF background everywhere outside the signpost."
    }
   }
  ]

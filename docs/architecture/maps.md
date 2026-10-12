@@ -56,14 +56,16 @@ The content tests (`tests/content/`) check that every portal points at a real ma
 spawn at a real platform, so a typo fails a test instead of the game.
 
 A **BiomeDef** is the look shared by many maps: sky and light colours, ground and platform
-textures, parallax backdrop layers (`BackdropLayerDef`: a tiled strip or scattered pieces at a
-depth), random decoration (`DecorDef`), lantern and portal art. A new region of the
+textures, parallax backdrop layers (`BackdropLayerDef`: a tiled strip, scattered pieces, or one
+painted `PICTURE` stretched just wide enough to cover the view from either end of the map and
+left out of the fog, all at a depth nearer than `TDStage.FAR`), random decoration (`DecorDef`), lantern and portal art. A new region of the
 world is usually a new biome plus a few maps that use it.
 
 Each region has **one** biome (its style); its fields differ within it. A field keeps its region's `biome` and sets a **BiomeVariantDef** as `MapDef.variant`: only
 what this sub zone changes (sky, light, fog, colour grade, backdrop tint, hidden backdrop
-layers, extra ground scenery). `MapDef.look()` is the biome with the variant applied; the
-world builders read `look()`, never `biome`. Towns use the plain biome. `tests/screenshot.gd`
+layers, extra backdrop layers, hidden or extra ground scenery). `MapDef.look()` is the biome with the variant applied; the
+world builders read `look()`, never `biome`. Towns usually use the plain biome; Dawnharbor's
+variant swaps the harbour strips for one painted picture (the clouds stay). `tests/screenshot.gd`
 with `subzones` renders every field for a side-by-side look.
 
 ## How to add a building
@@ -105,9 +107,26 @@ a gap, an exit gets a wider gap of its own), then the east exit. The map is only
 that row needs. Towns have **no monsters**: hunting happens in the fields next door (the
 start town, Dawnrise Village, leads east into Dawnrise Meadow).
 
-The biome's `town_decor` (small houses far behind the street) don't scatter randomly in a
+A bigger town can have **levels**, like a classic MapleStory city: raised stone terraces
+and a cliff top above the street, each a platform with `solid = true`. A solid platform's
+front runs all the way down to the land it stands on (`MapDef.land_under`: the highest
+platform under its middle, or the floor), so it reads as raised ground rather than a thin
+ledge; you still walk in front of it along the street below. Ladders and ropes join the
+levels (more than about 90 px needs one). Buildings, NPCs and portals stand on a level by
+their `platform`; each level is its own row for the spacing checks, and nothing should
+stand on the floor straight behind a terrace's wall (lanterns, scattered decor and
+background houses keep clear of it by themselves). Doors stay on the floor for now, since
+players arrive on a map's floor. In a town the backdrop is laid out for the camera on the
+street (`TDStage.backdrop_center`), so climbing up just shows more sky. Dawnharbor is the
+example: a quay street, a terrace 150 px up and a cliff top 320 px up.
+
+The biome's `town_decor` (its signature prop far behind the street) doesn't scatter randomly in a
 town with buildings: `SceneryBuilder.back_house_slots` stands them in one row,
 `BACK_HOUSE_GAP` apart and never straight behind a building.
-`tests/content/content_town_test.gd` checks all of this against the real picture sizes, so
+Houses stand only as placed buildings at full size, and only in towns: scattered scenery
+never uses a building picture (far back at a random size it looks like a tiny house), and a
+map that isn't a town has no buildings unless it sets `houses_allowed` (a quest needs the
+house, or Cory asked for one). `tests/content/content_houses_test.gd` checks this.
+`tests/content/content_town_test.gd` checks all of this (every level of a town) against the real picture sizes, so
 when new building art comes in wider or narrower, the test names the buildings that now sit
 too close and you nudge their `x` (and the doors, NPCs and the portals that lead in).

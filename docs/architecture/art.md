@@ -30,10 +30,16 @@ writes the region mask, rig and `--preview`. A new kind of layer is a module wit
 
 Art comes from Google's Gemini image model through its batch API (half price). Follow the art
 rules in `CLAUDE.md` (painted style, clean anti-aliased edges, icons matching worn gear).
+Art for a zone, its town or a sub-zone keeps that zone's palette, light and materials from
+[zone vibes](../zone-vibes.md).
 
 1. Agree the look with Cory, then add the sheet to `tools/art/gemini_pass.json`, usually an
    `edit` entry: one existing sheet plus a short instruction that keeps its layout, on a pure
-   #FF00FF background.
+   #FF00FF background. Every entry sets `"stands"`: `true` for anything that stands on a map
+   (buildings, props, signs, lamps, decorations). Those must be flat 2D front elevations with
+   one flat bottom edge, never a 3/4 view cut flat; `true` adds `STANDS_RULES` to the request
+   and a flat-bottom check to `sheet_check.py`. Look at every result for a top face or side
+   depth before showing it to Cory, since the check can't see those.
 2. `python3 tools/art/gemini_pass.py --dry-run` shows the cost (free); `--wait` makes what is
    missing. Run a small test first and show the results before the full batch and before
    anything goes in game. Every run is paid: ask Cory before redoing a sheet (`--redo ID`)

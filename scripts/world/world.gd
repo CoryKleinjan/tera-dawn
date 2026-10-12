@@ -108,7 +108,8 @@ func _layer() -> Node2D:
 func start() -> void:
 	started = true
 	player.rig.visible = true
-	Sound.music(map.music_id())
+	# no music change here: the map still loaded is the title screen's, and the server
+	# sends the real one (enter_map) right after, which starts its track
 
 ## Stops showing the game. Also leaves the server and logs out, unless `stay_connected`
 ## (going back to character select).

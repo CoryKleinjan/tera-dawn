@@ -18,7 +18,7 @@ script = ExtResource("3_portal_def")
 x = 150.0
 platform = 0
 target_map = &"dawnharbor"
-target_x = 1134.0
+target_x = 5060.0
 door = true
 
 [sub_resource type="Resource" id="Keeper"]

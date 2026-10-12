@@ -16,8 +16,10 @@ const MUSIC_DIR := "res://assets/audio/music"
 const SFX_DIR := "res://assets/audio/sfx"
 ## How long one track takes to fade into the next, in seconds.
 const CROSSFADE := 1.5
-## How far the music dips while a jingle plays over it, and how long it takes to come back.
-const DUCK_DB := -20.0
+## How far the music dips while a jingle plays over it, how long it takes to dip, and how
+## long it takes to come back once the jingle ends.
+const DUCK_DB := -8.0
+const DUCK_DOWN := 0.25
 const DUCK_RETURN := 1.0
 ## Sound effects that can play at once; the oldest is cut off when they're all busy.
 const VOICES := 16
@@ -34,8 +36,14 @@ var current_music: StringName = &""
 ## Two players so one track can fade out while the next fades in.
 var _music: Array[AudioStreamPlayer] = []
 var _active := 0
+## Each music player's fade level in dB and the level it's heading to. A player fading to
+## SILENT_DB stops once it gets there. Only `advance` moves these, so a new track change
+## simply retargets a fade already under way instead of racing it.
+var _fade_db: Array[float] = [SILENT_DB, SILENT_DB]
+var _fade_to: Array[float] = [SILENT_DB, SILENT_DB]
 var _jingle: AudioStreamPlayer
-var _duck: Tween
+## How far the music is dipped for a jingle, in dB, added on top of each player's fade.
+var _duck_db := 0.0
 var _voices: Array[AudioStreamPlayer] = []
 var _next_voice := 0
 ## sfx id -> Array[AudioStream], its variants.
@@ -46,7 +54,6 @@ func _ready() -> void:
 	for i in 2:
 		_music.append(_player(&"Music"))
 	_jingle = _player(&"Music")
-	_jingle.finished.connect(_unduck)
 	for i in VOICES:
 		_voices.append(_player(&"Effects"))
 	_sfx = load_sfx(SFX_DIR)
@@ -60,24 +67,30 @@ func _player(bus: StringName) -> AudioStreamPlayer:
 
 # ---------- music ----------
 
+func _process(delta: float) -> void:
+	advance(delta)
+
 ## Fades into track `id` (looping). Asking for the track already playing does nothing, so
 ## walking between maps of one region keeps the music going. &"" fades the music out.
 func music(id: StringName) -> void:
 	if id == current_music:
 		return
 	current_music = id
-	var old := _music[_active]
-	if old.playing:
-		_fade(old, SILENT_DB, CROSSFADE).finished.connect(old.stop)
+	_fade_to[_active] = SILENT_DB
 	var stream := music_stream(id)
 	if stream == null:
 		return
 	_active = 1 - _active
 	var p := _music[_active]
+	_fade_to[_active] = 0.0
+	# the other player may still be fading this very track out (a quick there-and-back):
+	# it just fades back in, otherwise the track starts from the top
+	if p.playing and p.stream == stream:
+		return
 	p.stream = stream
-	p.volume_db = SILENT_DB
+	_fade_db[_active] = SILENT_DB
+	p.volume_db = SILENT_DB + _duck_db
 	p.play()
-	_fade(p, 0.0, CROSSFADE)
 
 ## Plays the short piece `id` (level up, quest complete) once over the music, which dips
 ## while it plays.
@@ -87,24 +100,21 @@ func jingle(id: StringName) -> void:
 		return
 	_jingle.stream = stream
 	_jingle.play()
-	if _duck:
-		_duck.kill()
-	for p in _music:
-		if p.playing:
-			p.volume_db = DUCK_DB
 
-func _unduck() -> void:
-	var playing := _music.filter(func(p: AudioStreamPlayer) -> bool: return p.playing)
-	if playing.is_empty():
-		return
-	_duck = create_tween().set_parallel()
-	for p in playing:
-		_duck.tween_property(p, "volume_db", 0.0, DUCK_RETURN)
-
-func _fade(p: AudioStreamPlayer, to_db: float, time: float) -> Tween:
-	var t := create_tween()
-	t.tween_property(p, "volume_db", to_db, time)
-	return t
+## Moves the fades and the jingle dip on by `delta` seconds (every frame; tests call it by hand).
+func advance(delta: float) -> void:
+	var duck_to := DUCK_DB if _jingle.playing else 0.0
+	var duck_time := DUCK_DOWN if duck_to < _duck_db else DUCK_RETURN
+	_duck_db = move_toward(_duck_db, duck_to, -DUCK_DB / duck_time * delta)
+	for i in _music.size():
+		var p := _music[i]
+		if not p.playing:
+			continue
+		_fade_db[i] = move_toward(_fade_db[i], _fade_to[i], -SILENT_DB / CROSSFADE * delta)
+		if _fade_db[i] <= SILENT_DB and _fade_to[i] <= SILENT_DB:
+			p.stop()
+		else:
+			p.volume_db = _fade_db[i] + _duck_db
 
 ## The track `id`, set to loop (or not), or null if there's no file for it.
 func music_stream(id: StringName, loop := true) -> AudioStream:

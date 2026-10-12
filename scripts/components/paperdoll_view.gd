@@ -1,87 +1,76 @@
 class_name PaperdollView
 extends Control
-## The dressed hero in a menu (the character creator, the equipment window): the same
-## Paperdoll as in the world, playing an animation, drawn as big as fits with his feet at
-## the bottom middle.
+## The dressed hero in a menu (the character creator, character select, the equipment
+## window), drawn by the game itself so he looks exactly as he does in the world: the same rig
+## (HeroBody.make_rig: his layers, shaders and light) standing in a little 3D stage of its own,
+## lit like the map showing now (TDStage.light_portrait), seen from the world camera's angle,
+## and colour graded like the map. He plays an animation, drawn as big as fits with his feet
+## at the bottom middle.
 
-const SHADER := preload("res://shaders/paperdoll_ui.gdshader")
-const LAYER_SHADER := preload("res://shaders/paperdoll_ui_layer.gdshader")
+const GRADE_SHADER := preload("res://shaders/portrait.gdshader")
+## Seconds between catching up with the map's light (it changes with the map).
+const RELIGHT_EVERY := 1.0
 
-var doll: Paperdoll
 var look := {}
 var animation := &"idle"
 ## 1 faces right, -1 faces left.
 var facing := 1:
 	set(v):
 		facing = v
-		_redraw()
+		_rig.face(facing)
 ## Animation clock in seconds; `playing` false holds the current frame.
 var time := 0.0
 var playing := true
-## The largest the hero is drawn, in screen pixels per hero pixel (Paperdoll.ART_SCALE strip
-## pixels).
+## The largest the hero is drawn, in this control's pixels per hero pixel (Paperdoll.ART_SCALE
+## strip pixels).
 var max_zoom := 4.0
 
-var _back := Control.new()
-var _body := Control.new()
-var _front := Control.new()
-## One per layer of the doll (each with its own colour), under _back or _front.
-var _layer_views: Array[Control] = []
+var _viewport := SubViewport.new()
+var _picture := TextureRect.new()
+var _camera := Camera3D.new()
+var _environment := WorldEnvironment.new()
+var _sun := DirectionalLight3D.new()
+var _rig := HeroBody.make_rig(TDStage.PRIORITY_PLAYER)
+var _grade := ShaderMaterial.new()
+var _relight_in := 0.0
 
 func _init() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
-	for c in [_back, _body, _front]:
-		c.set_anchors_preset(Control.PRESET_FULL_RECT)
-		c.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		add_child(c)
-	var mat := ShaderMaterial.new()
-	mat.shader = SHADER
-	_body.material = mat
-	_body.draw.connect(_draw_body)
+	_viewport.own_world_3d = true
+	_viewport.transparent_bg = true
+	_viewport.msaa_3d = Viewport.MSAA_4X # as the world's (TDStage)
+	_viewport.render_target_update_mode = SubViewport.UPDATE_DISABLED
+	add_child(_viewport)
+	_camera.fov = TDStage.FOV
+	_camera.near = 0.1
+	_camera.rotation_degrees = Vector3(-TDStage.PITCH, 0, 0)
+	_camera.current = true
+	_viewport.add_child(_camera)
+	_viewport.add_child(_environment)
+	_viewport.add_child(_sun)
+	_rig.freeze(true) # the clock here (`time`) picks his frame
+	_viewport.add_child(_rig)
+	_grade.shader = GRADE_SHADER
+	_picture.texture = _viewport.get_texture()
+	_picture.material = _grade
+	_picture.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_picture.stretch_mode = TextureRect.STRETCH_SCALE
+	_picture.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_picture.set_anchors_preset(Control.PRESET_FULL_RECT)
+	add_child(_picture)
 	set_look({})
 
 func set_look(new_look: Dictionary) -> void:
-	if doll and new_look == look:
+	if _rig.paperdoll and new_look == look:
 		return
 	look = new_look.duplicate(true)
-	doll = Paperdoll.dress(look)
-	doll.apply(_body.material as ShaderMaterial)
-	for v in _layer_views:
-		v.queue_free()
-	_layer_views.clear()
-	for l in doll.layers:
-		var v := Control.new()
-		v.set_anchors_preset(Control.PRESET_FULL_RECT)
-		v.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		var mat := ShaderMaterial.new()
-		mat.shader = LAYER_SHADER
-		l.apply(mat)
-		v.material = mat
-		v.draw.connect(_draw_layer.bind(v, l, l.behind))
-		(_back if l.behind else _front).add_child(v)
-		_layer_views.append(v)
-		if l.piece:  # a piece goes behind him on some frames: a twin under the body for those
-			var b := Control.new()
-			b.set_anchors_preset(Control.PRESET_FULL_RECT)
-			b.mouse_filter = Control.MOUSE_FILTER_IGNORE
-			b.material = mat.duplicate()
-			b.draw.connect(_draw_layer.bind(b, l, true))
-			_back.add_child(b)
-			_layer_views.append(b)
-	_redraw()
+	_rig.dress(look)
+	_relight_in = 0.0
 
 func play(anim: StringName) -> void:
 	if Paperdoll.FRAMES.has_animation(anim) and anim != animation:
 		animation = anim
 		time = 0.0
-		_redraw()
-
-func _process(delta: float) -> void:
-	if playing and is_visible_in_tree():
-		var before := frame()
-		time += delta
-		if frame() != before:
-			_redraw()
 
 ## The frame of the animation showing now.
 func frame() -> int:
@@ -90,55 +79,43 @@ func frame() -> int:
 	var i := int(time * f.get_animation_speed(animation))
 	return i % n if f.get_animation_loop(animation) else mini(i, n - 1)
 
-func _redraw() -> void:
-	for c in [_back, _body, _front] + _layer_views:
-		c.queue_redraw()
-
-## Hero pixels -> this control's pixels: [scale, top-left of the frame].
-func _frame_box() -> Array:
-	var s := minf(minf(size.x / Paperdoll.FRAME_SIZE.x, size.y / Paperdoll.FRAME_SIZE.y), max_zoom / Paperdoll.ART_SCALE)
-	var origin := Vector2((size.x - Paperdoll.FRAME_SIZE.x * s) / 2.0, size.y - Paperdoll.FRAME_SIZE.y * s)
-	return [s, origin]
-
-func _texture() -> AtlasTexture:
-	return Paperdoll.FRAMES.get_frame_texture(animation, frame()) as AtlasTexture
-
-## Where the frame is drawn, and mirrors `on` for facing left.
-func _frame_rect(on: Control) -> Rect2:
-	var box := _frame_box()
-	if facing < 0: # mirrored about the middle (the frame is centred)
-		on.draw_set_transform(Vector2(size.x, 0), 0.0, Vector2(-1, 1))
-	return Rect2(box[1], Paperdoll.FRAME_SIZE * box[0])
-
-func _draw_body() -> void:
-	var tex := _texture()
-	_body.draw_texture_rect_region(tex.atlas, _frame_rect(_body), tex.region)
-	_body.draw_set_transform(Vector2.ZERO)
-
-## One layer of the doll, in its own colour (its material).
-func _draw_layer(on: Control, l: Paperdoll.Layer, behind: bool) -> void:
-	if l.piece:
-		_draw_piece(on, l, behind)
+func _process(delta: float) -> void:
+	var shown := is_visible_in_tree()
+	_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS if shown else SubViewport.UPDATE_DISABLED
+	if not shown:
+		_relight_in = 0.0
 		return
-	if not l.frames.has_animation(animation):
-		return
-	var rect := _frame_rect(on)
-	on.draw_texture_rect(l.frames.get_frame_texture(animation, mini(frame(), l.frames.get_frame_count(animation) - 1)), rect, false)
-	on.draw_set_transform(Vector2.ZERO)
+	if playing:
+		time += delta
+	var body := _rig.body as AnimatedSprite3D
+	if body.animation != animation:
+		_rig.play(animation, true)
+	body.frame = frame()
+	_relight_in -= delta
+	if _relight_in <= 0.0:
+		TDStage.light_portrait(_environment, _sun, _grade)
+		_relight_in = RELIGHT_EVERY
+	_fit()
 
-## A piece where its pose for this frame says (Paperdoll.Piece), on the side of the body
-## (`behind` or not) the pose puts it.
-func _draw_piece(on: Control, l: Paperdoll.Layer, behind: bool) -> void:
-	var f := Paperdoll.frame_index(_texture())
-	var p: Variant = l.piece.pose(f)
-	if p == null or p["behind"] != behind:
+## Sizes the picture to this control in screen pixels (so it's drawn 1:1, as the world is)
+## and aims the camera so the frame fits with his feet at the bottom middle.
+func _fit() -> void:
+	# the window stretches the canvas to the screen (canvas_items): undo that and any scaling
+	var to_screen := get_global_transform_with_canvas().get_scale() * get_viewport().get_final_transform().get_scale()
+	var px := (size * to_screen).ceil()
+	var pixels := Vector2i(maxi(1, int(px.x)), maxi(1, int(px.y)))
+	if _viewport.size != pixels:
+		_viewport.size = pixels
+	if size.y <= 0.0:
 		return
-	var box := _frame_box()
-	var s: float = box[0]
-	var place := Transform2D(float(p["angle"]), Vector2.ONE * s * float(p["scale"]), 0.0, box[1] + p["at"] * s)
-	if facing < 0: # mirrored about the middle (the frame is centred)
-		place = Transform2D(Vector2(-1, 0), Vector2(0, 1), Vector2(size.x, 0)) * place
-	on.draw_set_transform_matrix(place)
-	l.apply_pose(on.material as ShaderMaterial, f, p)
-	on.draw_texture(l.piece.picture(p), -l.piece.views[p["view"]]["anchor"])
-	on.draw_set_transform(Vector2.ZERO)
+	# control pixels per strip pixel, and the world height the control shows at his feet
+	var frame_size := Paperdoll.FRAME_SIZE
+	var k := minf(minf(size.x / frame_size.x, size.y / frame_size.y), max_zoom / Paperdoll.ART_SCALE)
+	var shown := size.y * _rig.body.pixel_size / k
+	# camera pitched down like the world's, far enough to show `shown` at his distance ahead
+	# of it, and high enough that his feet (the rig's origin) sit on the bottom edge
+	var t := tan(deg_to_rad(TDStage.FOV) / 2.0)
+	var p := deg_to_rad(TDStage.PITCH)
+	var rise := (sin(p) + t * cos(p)) / (cos(p) - t * sin(p))
+	var back := shown / (2.0 * t) / (rise * sin(p) + cos(p))
+	_camera.position = Vector3(0.0, rise * back, back)

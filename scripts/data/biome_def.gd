@@ -49,6 +49,13 @@ extends Resource
 ## Optional: middles alternate between this and platform_middle so long platforms don't repeat.
 @export var platform_middle_alt: Texture2D
 @export var platform_right: Texture2D
+## Optional, for raised terraces (`PlatformDef.solid`; art/sheets/terrace_pieces_<area>.json):
+## square ends that replace the rounded platform ends on a terrace's top edge, and columns of
+## corner stones that run down the two ends of its wall, repeating top to bottom.
+@export var terrace_left: Texture2D
+@export var terrace_right: Texture2D
+@export var terrace_corner_left: Texture2D
+@export var terrace_corner_right: Texture2D
 ## Grass blades: tufts peeking over the top edge of the floor and platforms, from behind.
 @export var edge_grass: Array[Texture2D] = []
 
@@ -58,10 +65,13 @@ extends Resource
 @export var ground_decor: Array[DecorDef] = []
 ## Scattered along every floating platform, just behind its skin (keep `depth` near 0, like -0.6 to -0.2).
 @export var platform_decor: Array[DecorDef] = []
-## Scattered along the floor of town maps only, on top of ground_decor: the rows of houses
-## and stalls that make a town feel lived in.
+## Scattered along the floor of town maps only, on top of ground_decor: the props
+## that make a town feel lived in (never a building picture: houses are BuildingPlacements).
 @export var town_decor: Array[DecorDef] = []
 @export var lantern: Texture2D
+## Where the lit lamp sits on the lantern post, as shares of the post picture's width
+## (from its middle, right is positive) and height (up from its base): the glow and light go there.
+@export var lantern_lamp := Vector2(0.22, 0.62)
 @export var portal_frames: Array[Texture2D] = []
 ## Rooms inside buildings: the doorway out, drawn on the back wall at every door portal.
 @export var door: Texture2D

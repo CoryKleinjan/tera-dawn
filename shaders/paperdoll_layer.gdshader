@@ -6,6 +6,7 @@ render_mode cull_disabled, specular_disabled, depth_prepass_alpha;
 #include "res://shaders/gear_tint.gdshaderinc"
 #include "res://shaders/paperdoll_piece.gdshaderinc"
 #include "res://shaders/paperdoll_stage.gdshaderinc"
+#include "res://shaders/paperdoll_stride.gdshaderinc"
 
 // The layer's strip (its frames are regions of it).
 uniform sampler2D strip : source_color, filter_linear_mipmap;
@@ -15,12 +16,14 @@ uniform bool gear = false;
 
 void fragment() {
 	// the strip is sampled in linear colour; `tint` is sRGB, as in the menus
-	vec4 c = strip_texel(strip, UV);
+	vec3 back, front;
+	stride_from(UV, vec2(textureSize(strip, 0)), back, front);
+	vec4 c = stride_over(strip_texel(strip, front.xy) * front.z, strip_texel(strip, back.xy) * back.z);
 	if (gear) {
 		// shade it in sRGB, then back
 		c.rgb = pow(gear_tint(pow(c.rgb, vec3(1.0 / 2.2)), tint.rgb), vec3(2.2));
 	} else {
-		// the same as multiplying in sRGB (paperdoll_ui_layer.gdshader)
+		// the same as multiplying in sRGB
 		c.rgb *= pow(tint.rgb, vec3(2.2));
 	}
 	c *= COLOR;

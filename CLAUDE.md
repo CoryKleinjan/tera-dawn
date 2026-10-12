@@ -7,6 +7,9 @@ The game will grow much larger, so keep code extendable and readable.
 ## Where things are
 - `ARCHITECTURE.md`: the big picture, an index of `docs/architecture/*.md` (one page per system
   and "how to add" guide), and the code conventions. Read the page for the system you touch.
+- `docs/zone-vibes.md`: each zone's style and music guide (palette, light, materials,
+  instruments) and how its town and sub-zones vary it. Read it before making art, music or a
+  map look for a zone; keep it current.
 - `data/`: all content as `.tres` (monsters, maps, items, skills, jobs, NPCs, quests, biomes).
   Code never names a specific monster, map or item.
 - `scripts/`: data classes (`scripts/data/`), rules (`scripts/systems/`), server, actors, world, UI.
@@ -47,6 +50,8 @@ python3 tools/art/gemini_pass.py --dry-run                           # Gemini ba
 ### Making art
 - Gemini batch API only: add an entry to `tools/art/gemini_pass.json` (usually an `edit` of an
   existing sheet that keeps its layout, pure #FF00FF background) and run `gemini_pass.py`.
+- Anything that stands on a map (buildings, props, decorations) is a flat 2D front elevation
+  with a flat bottom, never a 3/4 view cut flat: its entry sets `"stands": true`.
 - Ask Cory about the look first, run a small test, and show results before the full batch and
   before anything goes in game. Every run is paid: ask before redoing a sheet unless it came
   back broken.

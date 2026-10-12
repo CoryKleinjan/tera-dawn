@@ -11,6 +11,8 @@ extends Node3D
 const PX := 32.0
 const FOV := 30.0
 const PITCH := 9.0 # degrees the camera looks down
+## How far the camera sees (3D units): backdrop layers must stand nearer than this.
+const FAR := 400.0
 ## Size of one art pixel in game pixels, for characters, props and land. Every piece of
 ## land art (tiles, platform pieces, ground textures) is drawn so one of its art pixels
 ## shows this big, so all the land shows its painted detail at one shared scale.
@@ -96,6 +98,9 @@ var post_material: ShaderMaterial
 ## 0 shows the scene, 1 is faded out (see fade_to).
 var fade := 0.0
 var _fade_target := 0.0
+
+## The stage showing now, whose light a menu's hero is lit by (light_portrait).
+static var current: TDStage
 
 static var _soft_dot: Texture2D
 
@@ -238,11 +243,12 @@ static func particles(col: Color, amount: int, size: float) -> CPUParticles3D:
 # ---------- camera, sky and post effects ----------
 
 func _ready() -> void:
+	current = self
 	_fit_distance()
 	camera = Camera3D.new()
 	camera.fov = FOV
 	camera.near = 1.0
-	camera.far = 400.0
+	camera.far = FAR
 	camera.rotation_degrees = Vector3(-PITCH, 0, 0)
 	add_child(camera)
 	camera.make_current()
@@ -252,6 +258,37 @@ func _ready() -> void:
 	_build_sun()
 	_build_motes()
 	_build_post()
+
+func _exit_tree() -> void:
+	if current == self:
+		current = null
+
+## Lights a menu's hero (PaperdollView, standing in a little 3D stage of its own) the way the
+## map showing now lights him: a copy of its environment (sky light, tone mapping, glow) with
+## a clear background and no haze, its sun (without shadows: characters cast none), and its
+## colour grade on `grade` (grade.gdshaderinc). With no stage, plain white light.
+static func light_portrait(world_env: WorldEnvironment, sun_: DirectionalLight3D, grade: ShaderMaterial) -> void:
+	var s := current
+	if s == null or s.env == null:
+		var plain := Environment.new()
+		plain.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+		plain.ambient_light_color = Color.WHITE
+		world_env.environment = plain
+		sun_.visible = false
+		return
+	var e := s.env.duplicate() as Environment
+	e.background_mode = Environment.BG_CLEAR_COLOR
+	e.sky = null
+	e.fog_enabled = false
+	e.ssao_enabled = false # needs the depth of what's around him, and there's nothing
+	world_env.environment = e
+	sun_.visible = true
+	sun_.basis = s.sun.basis
+	sun_.light_color = s.sun.light_color
+	sun_.light_energy = s.sun.light_energy
+	sun_.shadow_enabled = false
+	for p in [&"tint", &"lift", &"lift_amount", &"saturation"]:
+		grade.set_shader_parameter(p, s.post_material.get_shader_parameter(p))
 
 func _build_environment() -> void:
 	env = Environment.new()
@@ -408,13 +445,14 @@ func fit_view() -> void:
 	if world.map and map_root:
 		build()
 
-## Towns are for looking around: their backdrop is kept clearer (less fog and blur) than a
-## hunting field's, where the eye should stay on the play line. A room's back wall is close,
-## so it stays sharp with no haze.
+## Towns are for looking around: their backdrop is kept clearer (less fog) than a hunting
+## field's, where the eye should stay on the play line. A room's back wall is close, so it
+## stays sharp with no haze. The far blur is only a light touch of depth everywhere: the
+## painted backdrops should read sharp, never smeared.
 func _apply_place(map: MapDef) -> void:
 	env.fog_density = 0.0 if map.interior else 0.35 if map.town else 0.6
 	camera_attrs.dof_blur_far_distance = dist + (14.0 if map.interior else 10.0 if map.town else 3.0)
-	camera_attrs.dof_blur_amount = 0.04 if map.interior else 0.07 if map.town else 0.12
+	camera_attrs.dof_blur_amount = 0.01 if map.interior else 0.015 if map.town else 0.02
 
 ## Soft slanting beams of sunlight between the backdrop and the play line, gently pulsing.
 func _build_light_shafts(map: MapDef, biome: BiomeDef, rng: RandomNumberGenerator) -> void:
@@ -494,7 +532,17 @@ func screen_frac(h: float, z: float) -> float:
 	return screen_frac_at(h, z, _mid_center())
 
 func _mid_center() -> float:
-	var r := view_center_range(world.map.height)
+	return backdrop_center(world.map)
+
+## The camera height (game-y of the view's middle) a map's backdrop is laid out for. In a
+## town it is where the view sits while the hero walks the street (the floor), so the
+## backdrop meets the street as painted and a tall town's upper levels just show more sky;
+## elsewhere it is the middle of the camera's range.
+static func backdrop_center(map: MapDef) -> float:
+	var r := view_center_range(map.height)
+	if map.town:
+		var view := TDWorld.world_view().y
+		return clampf(map.ground_y - view * WorldCamera.STAND_AT + view / 2.0, r.x, r.y)
 	return (r.x + r.y) / 2.0
 
 ## The game-y of the middle of the view, highest (x) and lowest (y), as the camera moves

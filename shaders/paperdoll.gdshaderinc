@@ -22,11 +22,9 @@ vec4 dress_region(vec4 src, vec2 uv) {
 	}
 	vec3 luma = vec3(0.299, 0.587, 0.114);
 	vec3 ref = texelFetch(look_data, ivec2(r, 2), 0).rgb;
-#ifdef LINEAR_COLOR
-	// the 3D stage samples the hero in linear colour; the look's colours are sRGB
+	// the hero is sampled in linear colour; the look's colours are sRGB
 	t.rgb = pow(t.rgb, vec3(2.2));
 	ref = pow(ref, vec3(2.2));
-#endif
 	// (capped, so shine on dark art doesn't turn white on light colours)
 	float shade = min(dot(src.rgb, luma) / max(dot(ref, luma), 0.05), 1.4);
 	vec3 recoloured = clamp(t.rgb * shade, 0.0, 1.0);

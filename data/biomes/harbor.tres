@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BiomeDef" load_steps=55 format=3]
+[gd_resource type="Resource" script_class="BiomeDef" load_steps=57 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/biome_def.gd" id="1_biome_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/sea_gull.tres" id="90_gulls"]
@@ -8,6 +8,10 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor/cap_left.png" id="5_platform_left"]
 [ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor/middle_a.png" id="6_platform_middle"]
 [ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor/cap_right.png" id="7_platform_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor/terrace_left.png" id="7c_terrace_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor/terrace_right.png" id="7d_terrace_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor/terrace_corner_left.png" id="7e_terrace_corner_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor/terrace_corner_right.png" id="7f_terrace_corner_right"]
 [ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor/middle_b.png" id="7b_platform_middle_alt"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/tall_grass.png" id="8_tall_grass"]
 [ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="9_backdrop_layer_def"]
@@ -32,10 +36,8 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/fence.png" id="28_fence"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/flowers.png" id="29_flowers"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/signature_plant.png" id="30_signature_plant"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/building_large.png" id="31_building_large"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/building_small.png" id="32_building_small"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/signature_prop.png" id="33_signature_prop"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/lantern_lit.png" id="34_lantern_lit"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/lamp_post.png" id="34_lantern_lit"]
 [ext_resource type="Texture2D" path="res://assets/sprites/props/portal_1.png" id="36_portal_1"]
 [ext_resource type="Texture2D" path="res://assets/sprites/props/portal_2.png" id="37_portal_2"]
 [ext_resource type="Texture2D" path="res://assets/sprites/props/portal_3.png" id="38_portal_3"]
@@ -120,11 +122,11 @@ drift = 0.0
 
 [sub_resource type="Resource" id="Resource_8"]
 script = ExtResource("20_decor_def")
-textures = Array[Texture2D]([ExtResource("31_building_large"), ExtResource("32_building_small"), ExtResource("33_signature_prop")])
+textures = Array[Texture2D]([ExtResource("33_signature_prop")])
 spacing = Vector2(480.0, 900.0)
 depth = Vector2(-8.8, -7.6)
 scale = Vector2(1.09, 1.09)
-chance = 0.6
+chance = 0.2
 texel = 1.25
 shaded = true
 
@@ -213,6 +215,10 @@ platform_left = ExtResource("5_platform_left")
 platform_middle = ExtResource("6_platform_middle")
 platform_middle_alt = ExtResource("7b_platform_middle_alt")
 platform_right = ExtResource("7_platform_right")
+terrace_left = ExtResource("7c_terrace_left")
+terrace_right = ExtResource("7d_terrace_right")
+terrace_corner_left = ExtResource("7e_terrace_corner_left")
+terrace_corner_right = ExtResource("7f_terrace_corner_right")
 edge_grass = Array[Texture2D]([ExtResource("8_tall_grass")])
 backdrop = Array[ExtResource("9_backdrop_layer_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7")])
 ground_decor = Array[ExtResource("20_decor_def")]([SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12")])
@@ -222,4 +228,5 @@ flyers = ExtResource("90_gulls")
 flyer_count = 5
 chimney_smoke = true
 lantern = ExtResource("34_lantern_lit")
+lantern_lamp = Vector2(0.0, 0.82)
 portal_frames = Array[Texture2D]([ExtResource("36_portal_1"), ExtResource("37_portal_2"), ExtResource("38_portal_3"), ExtResource("39_portal_4")])

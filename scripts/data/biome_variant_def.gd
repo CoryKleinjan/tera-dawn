@@ -38,6 +38,12 @@ const KEEP_COLOR := Color(0, 0, 0, 0)
 @export var backdrop_tint := Color.WHITE
 ## Backdrop layers (indexes into BiomeDef.backdrop) this sub zone leaves out.
 @export var hide_layers: PackedInt32Array = []
+## Backdrop layers of its own, added after the biome's (e.g. one painted picture for a town
+## that hides the biome's strips).
+@export var more_backdrop: Array[BackdropLayerDef] = []
+## Floor scenery rules (indexes into BiomeDef.ground_decor) this sub zone leaves out, e.g. the
+## little scattered houses in a town that has real buildings.
+@export var hide_ground_decor: PackedInt32Array = []
 ## Extra scenery scattered along its floor, on top of the biome's ground_decor.
 @export var more_ground_decor: Array[DecorDef] = []
 
@@ -58,7 +64,7 @@ func apply(base: BiomeDef) -> BiomeDef:
 	for key in TOGGLES:
 		if get(key) != Toggle.KEEP:
 			b.set(key, get(key) == Toggle.ON)
-	if backdrop_tint != Color.WHITE or not hide_layers.is_empty():
+	if backdrop_tint != Color.WHITE or not hide_layers.is_empty() or not more_backdrop.is_empty():
 		var layers: Array[BackdropLayerDef] = []
 		for i in base.backdrop.size():
 			if i in hide_layers:
@@ -66,9 +72,16 @@ func apply(base: BiomeDef) -> BiomeDef:
 			var layer: BackdropLayerDef = base.backdrop[i].duplicate()
 			layer.tint *= backdrop_tint
 			layers.append(layer)
+		for extra in more_backdrop:
+			var layer: BackdropLayerDef = extra.duplicate()
+			layer.tint *= backdrop_tint
+			layers.append(layer)
 		b.backdrop = layers
-	if not more_ground_decor.is_empty():
-		var decor: Array[DecorDef] = base.ground_decor.duplicate()
+	if not more_ground_decor.is_empty() or not hide_ground_decor.is_empty():
+		var decor: Array[DecorDef] = []
+		for i in base.ground_decor.size():
+			if i not in hide_ground_decor:
+				decor.append(base.ground_decor[i])
 		decor.append_array(more_ground_decor)
 		b.ground_decor = decor
 	return b
