@@ -7,7 +7,7 @@ render_mode cull_disabled, specular_disabled, depth_prepass_alpha;
 #include "res://shaders/paperdoll_stage.gdshaderinc"
 #include "res://shaders/paperdoll_stride.gdshaderinc"
 
-uniform sampler2D strip : source_color, filter_linear_mipmap;
+uniform sampler2D strip : source_color, filter_linear_mipmap, repeat_disable;
 
 void fragment() {
 	vec3 back, front;

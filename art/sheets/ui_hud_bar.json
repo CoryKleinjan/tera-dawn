@@ -23,7 +23,7 @@
   ],
   "overrides": {
     "hud_bar": {
-      "seamless_middle": 38
+      "seamless_middle": 76
     }
   }
 }

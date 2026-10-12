@@ -8,8 +8,9 @@ render_mode cull_disabled, specular_disabled, depth_prepass_alpha;
 #include "res://shaders/paperdoll_stage.gdshaderinc"
 #include "res://shaders/paperdoll_stride.gdshaderinc"
 
-// The layer's strip (its frames are regions of it).
-uniform sampler2D strip : source_color, filter_linear_mipmap;
+// The layer's strip (its frames are regions of it). Not repeated: art touching a frame's
+// bottom edge would otherwise wrap to its top as a thin line over his head.
+uniform sampler2D strip : source_color, filter_linear_mipmap, repeat_disable;
 // Its colour (sRGB): multiplied in, or with `gear` the item colour gear_tint() shades it in.
 uniform vec4 tint = vec4(1.0);
 uniform bool gear = false;

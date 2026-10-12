@@ -8,8 +8,6 @@
 [ext_resource type="Resource" path="res://data/climb_styles/rope.tres" id="6_rope"]
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="7_portal_def"]
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
-[ext_resource type="Resource" path="res://data/monsters/crypt_shell.tres" id="9_crypt_shell"]
-[ext_resource type="Resource" path="res://data/monsters/gloomcap.tres" id="10_gloomcap"]
 [ext_resource type="Resource" path="res://data/monsters/lantern_wraith.tres" id="11_lantern_wraith"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="12_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/crystals.png" id="13_crystals"]
@@ -18,6 +16,8 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/stump.png" id="18_stump"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/tree_small.png" id="19_tree_small"]
 [ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
+[ext_resource type="Resource" path="res://data/monsters/dusk_stalker.tres" id="m_dusk_stalker"]
+[ext_resource type="Resource" path="res://data/monsters/marsh_horror.tres" id="m_marsh_horror"]
 
 [sub_resource type="Resource" id="Resource_30"]
 script = ExtResource("12_prop_placement")
@@ -81,49 +81,49 @@ count = 1
 
 [sub_resource type="Resource" id="Resource_21"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("9_crypt_shell")
+monster = ExtResource("m_dusk_stalker")
 platform = 6
 count = 2
 
 [sub_resource type="Resource" id="Resource_20"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_gloomcap")
+monster = ExtResource("m_marsh_horror")
 platform = 5
 count = 3
 
 [sub_resource type="Resource" id="Resource_19"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_gloomcap")
+monster = ExtResource("m_marsh_horror")
 platform = 4
 count = 2
 
 [sub_resource type="Resource" id="Resource_18"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_gloomcap")
+monster = ExtResource("m_marsh_horror")
 platform = 3
 count = 3
 
 [sub_resource type="Resource" id="Resource_17"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_gloomcap")
+monster = ExtResource("m_marsh_horror")
 platform = 2
 count = 2
 
 [sub_resource type="Resource" id="Resource_16"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_gloomcap")
+monster = ExtResource("m_marsh_horror")
 platform = 1
 count = 3
 
 [sub_resource type="Resource" id="Resource_15"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_gloomcap")
+monster = ExtResource("m_marsh_horror")
 platform = 0
 count = 3
 
 [sub_resource type="Resource" id="Resource_14"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("9_crypt_shell")
+monster = ExtResource("m_dusk_stalker")
 platform = 0
 count = 3
 
@@ -131,7 +131,7 @@ count = 3
 script = ExtResource("7_portal_def")
 x = 60.0
 platform = 0
-target_map = &"wraith_moor"
+target_map = &"sunken_graveyard"
 target_x = 2360.0
 
 [sub_resource type="Resource" id="Resource_12"]
@@ -257,5 +257,5 @@ props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_23"), Sub
 region = &"lanternfall"
 world_pos = Vector2(760.0, 520.0)
 return_map = &"lanternfall"
-level_text = "Lv. 22-30"
+level_text = "Lv. 24-30"
 music = &"boss"

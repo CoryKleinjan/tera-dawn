@@ -682,21 +682,25 @@ def recolor_despill(rgb):
 
 
 # Dawnharbor's floor sandstone (its platform middle pieces), darkest to lightest, at even steps
-# of brightness rank.
-SANDSTONE = np.array([[126, 63, 78], [163, 115, 109], [188, 138, 122], [217, 167, 141], [226, 180, 137],
+# of brightness rank; the darkest is a warm brown so mortar lines and outer edges don't turn red.
+SANDSTONE = np.array([[95, 62, 50], [163, 115, 100], [188, 138, 122], [217, 167, 141], [226, 180, 137],
                       [246, 201, 158], [253, 220, 180], [254, 224, 182], [254, 230, 185]]) / 255.0
+# The harbour wall stone's brightness at those same ranks, so every piece (the wall, the terrace
+# ends) maps the same grey to the same sandstone.
+WALL_STONE = np.array([98.1, 147.1, 186.9, 208.9, 222.0, 232.3, 237.2, 239.3, 253.2]) / 255.0
 
 
 def recolor_sandstone(rgb):
     """Cool grey-blue stone becomes the warm sandstone of Dawnharbor's floor (Cory: the walls
-    match the floor). Each cool pixel takes the floor colour at the same brightness rank, so the
-    painted stones, mortar lines and highlights keep their shapes; warm pixels stay as they are."""
-    cool = rgb[..., 2] > rgb[..., 0]
+    match the floor). Each cool or grey pixel takes the floor colour at the brightness rank its
+    grey has in the harbour wall, so the painted stones, mortar lines and highlights keep their
+    shapes; warm pixels (grass, flowers, wood) stay as they are."""
+    grey = rgb.max(-1) - rgb.min(-1) < 30 / 255.0
+    cool = (rgb[..., 2] > rgb[..., 0]) | grey
     if not cool.any():
         return rgb
-    lum = rgb @ np.array([0.299, 0.587, 0.114])
-    ranked = np.sort(lum[cool])
-    rank = np.searchsorted(ranked, lum[cool]) / len(ranked) * (len(SANDSTONE) - 1)
+    lum = rgb[cool] @ np.array([0.299, 0.587, 0.114])
+    rank = np.interp(lum, WALL_STONE, np.arange(len(SANDSTONE)))
     lo = np.floor(rank).astype(int).clip(0, len(SANDSTONE) - 2)
     t = (rank - lo)[:, None]
     out = rgb.copy()

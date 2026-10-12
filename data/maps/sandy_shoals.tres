@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=66 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=65 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/coast.tres" id="2_coast"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
 [ext_resource type="Resource" path="res://data/monsters/sand_crab.tres" id="9_sand_crab"]
 [ext_resource type="Resource" path="res://data/monsters/tide_slime.tres" id="10_tide_slime"]
-[ext_resource type="Resource" path="res://data/monsters/reef_gull.tres" id="11_reef_gull"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="12_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_small.png" id="13_tree_small"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/flowers_yellow.png" id="15_flowers_yellow"]
@@ -64,7 +63,7 @@ flip = true
 
 [sub_resource type="Resource" id="Resource_40"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("11_reef_gull")
+monster = ExtResource("10_tide_slime")
 platform = 12
 count = 2
 
@@ -100,7 +99,7 @@ count = 3
 
 [sub_resource type="Resource" id="Resource_34"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("11_reef_gull")
+monster = ExtResource("10_tide_slime")
 platform = 6
 count = 2
 
@@ -112,7 +111,7 @@ count = 2
 
 [sub_resource type="Resource" id="Resource_32"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("11_reef_gull")
+monster = ExtResource("10_tide_slime")
 platform = 4
 count = 2
 
@@ -351,4 +350,4 @@ props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_41"), Sub
 region = &"driftcove"
 world_pos = Vector2(395.0, 430.0)
 return_map = &"driftcove"
-level_text = "Lv. 12-16"
+level_text = "Lv. 9-10"

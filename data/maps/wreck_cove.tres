@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=52 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=51 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/coast.tres" id="2_coast"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="7_portal_def"]
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
 [ext_resource type="Resource" path="res://data/monsters/kelp_lurker.tres" id="9_kelp_lurker"]
-[ext_resource type="Resource" path="res://data/monsters/barnacle_boar.tres" id="10_barnacle_boar"]
 [ext_resource type="Resource" path="res://data/monsters/coral_turret.tres" id="11_coral_turret"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="12_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/stump.png" id="13_stump"]
@@ -89,13 +88,13 @@ count = 1
 
 [sub_resource type="Resource" id="Resource_21"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_barnacle_boar")
+monster = ExtResource("9_kelp_lurker")
 platform = 3
 count = 3
 
 [sub_resource type="Resource" id="Resource_20"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_barnacle_boar")
+monster = ExtResource("9_kelp_lurker")
 platform = 2
 count = 2
 
@@ -107,7 +106,7 @@ count = 1
 
 [sub_resource type="Resource" id="Resource_18"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_barnacle_boar")
+monster = ExtResource("9_kelp_lurker")
 platform = 0
 count = 3
 
@@ -121,7 +120,7 @@ count = 3
 script = ExtResource("7_portal_def")
 x = 2940.0
 platform = 0
-target_map = &"titan_grotto"
+target_map = &"drowned_docks"
 target_x = 120.0
 
 [sub_resource type="Resource" id="Resource_15"]
@@ -268,4 +267,4 @@ props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_26"), Sub
 region = &"driftcove"
 world_pos = Vector2(270.0, 515.0)
 return_map = &"driftcove"
-level_text = "Lv. 17-22"
+level_text = "Lv. 17-20"

@@ -245,7 +245,8 @@ def shield_layers(hero, rig_frames):
             elif n in BACK_VIEW:
                 frames.append(pose("front", entry["shield"]))
             else:
-                frames.append(pose("back", tucked(views["back"], entry["shield"], px, entry["neck"]), behind=True))
+                at = entry.get("shield_at", entry["shield"])  # the hand away from us (build.rig_entries)
+                frames.append(pose("back", tucked(views["back"], at, px, entry["neck"]), behind=True))
         save_piece(f"shield_item_{item}", {v: (img, (img.width / 2, img.height / 2)) for v, img in views.items()}, frames)
 
 
