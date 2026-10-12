@@ -124,7 +124,7 @@ func _run() -> void:
 		await _shot("meadow")
 	if only == "" or only == "hero":
 		# The hero just after the blow with each kind of weapon: the weapon in his fist, its
-		# own motion, and a swung blade's streak (shown without the server, so no ammo needed).
+		# own motion, and a swung blade's streak.
 		_teleport(world, Vector2(1120, 620))
 		p.face = 1
 		var kept: ItemStack = ch.equipment.take(&"weapon")
@@ -326,7 +326,6 @@ func _run() -> void:
 		ch.job = Content.job(&"archer")
 		ch.equipment.take(&"weapon")
 		ch.equipment.put(&"weapon", ItemStack.exact(Content.item(&"willow_bow")))
-		ch.inventory.add(Content.item(&"feather_arrow"), 300)
 		ch.skills.learned[&"double_shot"] = 5
 		ch.set_quickslot(0, &"skill", &"double_shot")
 		ch.mp = 200

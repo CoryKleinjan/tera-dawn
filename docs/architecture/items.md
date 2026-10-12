@@ -29,7 +29,6 @@ There are four inventory tabs, and the class of the item decides which one it go
 | --- | --- | --- |
 | **EquipDef** | Equip | Gear: slot, required level and stats, a `StatBlock` of bonuses, and `variance` (each dropped copy rolls every stat up or down by up to this much) |
 | **UseDef** | Use | Potions: HP / MP restored (flat and percent), effect, cooldown |
-| **AmmoDef** | Use | Arrows, stars and bullets fired by ranged weapons |
 | **ScrollDef** | Use | Upgrade scrolls: the gear `slots` they work on, a success `chance` and the `stats` they add. Each use spends one of the gear's `upgrade_slots` (`ItemStack.slots_used`; `upgrades` counts the ones that worked) |
 | **ItemDef** | Etc | Monster parts and anything else; stacks up to `max_stack` |
 | **ChairDef** | Setup | Chairs: extra `regen_hp` / `regen_mp` while sitting |

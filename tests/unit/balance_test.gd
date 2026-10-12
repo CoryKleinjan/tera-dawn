@@ -52,8 +52,6 @@ func test_typical_wears_a_weapon_it_can_use() -> void:
 		var e := c.gear.weapon()
 		if e:
 			check_eq(c.gear.equip_problem(e), "", "%s can wear its weapon" % j)
-		if e and e.ammo != &"":
-			check(c.gear.ammo_count() > 0, "%s has ammo" % j)
 
 func test_typical_gets_stronger_with_level() -> void:
 	var m := _monster_near(20)

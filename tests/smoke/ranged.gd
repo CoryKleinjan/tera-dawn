@@ -1,16 +1,14 @@
 extends SmokeArea
 ## Ranged and magic attacks: arrows, spells and throwing stars.
 
-## An Archer's bow shoots arrows that fly to the monster, a Magician's Energy Bolt uses
-## magic, and a claw with no stars can't throw.
+## An Archer's bow shoots arrows that fly to the monster (no ammo needed), a Magician's
+## Energy Bolt uses magic, and a thief's stars throw with nothing in the bag.
 func check() -> void:
 	var ch := _me().character
 	var meadow: MapInstance = Net.server.maps[&"meadow"]
 	var sword := ch.equipment.take(&"weapon")
 	ch.job = Content.job(&"archer")
 	ch.equipment.put(&"weapon", ItemStack.exact(Content.item(&"willow_bow")))
-	var arrows: ItemDef = Content.item(&"feather_arrow")
-	ch.inventory.add(arrows, 50)
 	ch.recalc()
 	_me().dirty_character = true
 	_teleport(Vector2(1380, 620))
@@ -42,14 +40,7 @@ func check() -> void:
 	await _until(func() -> bool: return m.health.hp < hp or m.dead, 20)
 	_check(m.health.hp < hp or m.dead, "it hits a monster 200 pixels away")
 	_release_mobs(others)
-	_check(Game.me.inventory.count_of(arrows) == 49, "and uses one arrow")
-	# no arrows, no shot
-	ch.inventory.remove(arrows, 49)
-	_me().cooldown = 0
-	world.player.cooldown = 0
-	_me().dirty_character = true
-	await _ticks(2)
-	_check(Game.me.skills.use_problem(Game.me.skills.basic_attack()).contains("out of arrows"), "without arrows the bow can't shoot")
+	_check(Game.me.skills.use_problem(Game.me.skills.basic_attack()) == "", "and can shoot again with no arrows in the bag")
 	# a Magician's spell uses Magic Attack
 	ch.job = Content.job(&"mage")
 	ch.equipment.take(&"weapon")
@@ -62,14 +53,12 @@ func check() -> void:
 	_check(magic.y > ch.damage_range().y, "a Magician's spells hit harder than their wand")
 	var hit := Combat.player_hit(bolt, m.def, ch)
 	_check(hit["miss"] or (hit["damage"] >= 1 and hit["damage"] <= roundi(magic.y * 1.6) + 1), "Energy Bolt's damage comes from Magic Attack")
-	# a claw needs stars
+	# a thief throws with nothing in the bag
 	ch.job = Content.job(&"thief")
 	ch.equipment.take(&"weapon")
 	ch.equipment.put(&"weapon", ItemStack.exact(Content.item(&"iron_claw")))
 	ch.skills.learned[&"lucky_seven"] = 1
-	_check(ch.skills.use_problem(Content.skill(&"lucky_seven")).contains("out of stars"), "Lucky Seven needs throwing stars")
-	ch.inventory.add(Content.item(&"iron_star"), 10)
-	_check(ch.skills.use_problem(Content.skill(&"lucky_seven")) == "" and ch.gear.ammo_attack() == 15, "with stars it's ready, and stars add attack")
+	_check(ch.skills.use_problem(Content.skill(&"lucky_seven")) == "", "Lucky Seven needs no ammo")
 	ch.skills.learned[&"flash_fist"] = 1
 	_check(ch.skills.use_problem(Content.skill(&"flash_fist")).contains("needs a knuckle"), "Flash Fist needs a knuckle")
 	# back to a Warrior with a sword for the rest of the test

@@ -31,7 +31,7 @@
       "sandals",
       "hiking_boots",
       "windstep_boots",
-      "lead_bullet"
+      ""
     ]
   ],
   "overrides": {
@@ -63,9 +63,6 @@
       "keep": "all"
     },
     "ranger_breeches": {
-      "keep": "all"
-    },
-    "lead_bullet": {
       "keep": "all"
     }
   },

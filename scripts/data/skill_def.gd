@@ -53,8 +53,6 @@ const DEFAULT_FLASH := Color(1.0, 0.9, 0.65)
 @export var magic := false
 ## Shown flying to each target. Null for melee.
 @export var projectile: ProjectileDef
-## Spends one of the weapon's ammo per hit.
-@export var uses_ammo := false
 ## Weapon kinds it needs (EquipDef.weapon_kind); empty for any.
 @export var weapons: Array[StringName] = []
 

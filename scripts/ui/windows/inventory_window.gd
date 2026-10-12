@@ -105,7 +105,7 @@ func _tooltip_at(at: Vector2) -> Tip:
 		ItemDef.Tab.EQUIP:
 			hint = "Click to use the scroll here" if _scroll() else "Double-click to equip"
 		ItemDef.Tab.USE:
-			hint = "" if stack and stack.item is AmmoDef else "Double-click to use"
+			hint = "Double-click to use"
 			if stack and stack.item is ScrollDef:
 				hint = "Double-click, then click the gear"
 		ItemDef.Tab.SETUP:

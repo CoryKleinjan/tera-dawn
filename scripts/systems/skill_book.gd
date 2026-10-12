@@ -64,8 +64,6 @@ func use_problem(skill: SkillDef) -> String:
 	var w := c.gear.weapon()
 	if not skill.weapons.is_empty() and (w == null or not w.weapon_kind in skill.weapons):
 		return "%s needs a %s." % [skill.display_name, " or ".join(skill.weapons)]
-	if skill.uses_ammo and c.gear.ammo_count() < skill.hits:
-		return "You're out of %ss." % (w.ammo if w and w.ammo != &"" else &"arrow")
 	if c.mp < skill.mp_at(level(skill)):
 		return "Not enough MP for %s." % skill.display_name
 	return ""

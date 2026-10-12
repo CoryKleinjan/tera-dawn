@@ -8,7 +8,7 @@
 
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("4_stat_block")
-attack = 14
+attack = 29
 luck = 1
 
 [resource]
@@ -28,5 +28,4 @@ stats = SubResource("Resource_1")
 variance = 1
 required_luck = 25
 weapon_kind = &"claw"
-ammo = &"star"
 basic_attack = ExtResource("star_throw")
