@@ -5,7 +5,7 @@
 
 uniform bool has_fist = false;
 uniform bool fist_on = false;
-uniform sampler2D fist : filter_nearest;
+uniform sampler2D fist : filter_linear;
 uniform vec2 frame_size = vec2(256.0, 208.0);
 uniform float frame = 0.0;
 uniform vec2 at = vec2(0.0);
@@ -16,7 +16,7 @@ uniform vec2 picture_size = vec2(1.0);
 // A hair layer under a hat: the hat's hair cut strip (haircut_<hat>.png, laid out like the
 // hair strip), white where his hair is hidden so none pokes out of the hat's top or sides.
 uniform bool has_hair_cut = false;
-uniform sampler2D hair_cut : filter_nearest;
+uniform sampler2D hair_cut : filter_linear;
 
 // 1.0 where the piece shows at texture coordinate `uv`, 0.0 where his fingers cover it.
 float fist_cut(vec2 uv) {

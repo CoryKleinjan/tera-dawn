@@ -81,5 +81,23 @@
       "blank_top": 36
     }
   },
-  "_doc": "Gemini edit wg_hats_3 (tools/art/gemini_pass.json): item hats on the bald head (paperdoll_hats layout), side and behind; hats.py item_hat_layers."
+  "_doc": "Gemini edit wg_hats_3 (tools/art/gemini_pass.json): item hats on the bald head (paperdoll_hats layout), side and behind; hats.py item_hat_layers.",
+  "shoulders": {
+    "windrunner_hood_side": [
+      147.5,
+      354.0
+    ],
+    "windrunner_hood_behind": [
+      170.9,
+      354.0
+    ],
+    "thicket_hood_side": [
+      164.5,
+      354.0
+    ],
+    "thicket_hood_behind": [
+      177.8,
+      354.0
+    ]
+  }
 }

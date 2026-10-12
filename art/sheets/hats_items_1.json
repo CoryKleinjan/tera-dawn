@@ -87,5 +87,15 @@
       "blank_top": 36
     }
   },
-  "_doc": "Gemini edit wg_hats_1 (its redo, wg_hats_1_2) (tools/art/gemini_pass.json): item hats on the bald head (paperdoll_hats layout), side and behind; hats.py item_hat_layers."
+  "_doc": "Gemini edit wg_hats_1 (its redo, wg_hats_1_2) (tools/art/gemini_pass.json): item hats on the bald head (paperdoll_hats layout), side and behind; hats.py item_hat_layers.",
+  "shoulders": {
+    "green_hood_side": [
+      155.4,
+      349.0
+    ],
+    "green_hood_behind": [
+      159.7,
+      354.0
+    ]
+  }
 }

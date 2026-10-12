@@ -184,8 +184,9 @@ func test_long_hair_hangs_behind_and_a_hat_swaps_the_hair() -> void:
 	check(hair.back_frames == null or _layer(bare, hair.back_frames).behind, "the back of long hair is behind him")
 	check(not _layer(bare, hair.frames).behind, "the front over him")
 	var hatted := _dress_bare(a, {"hat": "iron_helm"})
-	check(_layer(hatted, hair.hat_frames) != null, "the under-hat hair")
-	check(_layer(hatted, hair.frames) == null and _layer(hatted, hair.back_frames) == null, "instead of the rest")
+	# the same hair under a hat, only cut where it would poke out (Cory 2026-10-12)
+	check(_layer(hatted, hair.frames) != null, "his own hair under the hat")
+	check(hair.back_frames == null or _layer(hatted, hair.back_frames) == null, "without its back layer")
 
 func test_bare_places_and_worn_clothes() -> void:
 	var d := Paperdoll.dress(_look(Appearance.new()))
@@ -228,33 +229,17 @@ func test_the_creator_preview_shows_the_starting_outfit() -> void:
 
 ## Where the face's middle is on a rig frame (paperdoll_layers.py FACE_AT: forward and down
 ## from the head's centre, in head radii, turned with the head).
-func _face_centre(f: Dictionary) -> Vector2:
-	var r := float(f["head_size"][0]) / 2.0
-	var head := Vector2(f["head"][0], f["head"][1])
-	return head + (Vector2(0.2, 0.3) * r).rotated(deg_to_rad(float(f["head_angle"])))
-
-func test_hair_under_a_hat_leaves_the_face_clear() -> void:
-	var frames: Array = Paperdoll.rig()["frames"]
-	for hair in Content.looks_of(LookDef.Kind.HAIR):
-		if hair.hat_frames == null:
-			continue
-		var img := (hair.hat_frames.get_frame_texture(&"idle", 0) as AtlasTexture).atlas.get_image()
-		if img.is_compressed():
-			img.decompress()
-		for i in frames.size():
-			var f: Dictionary = frames[i]
-			if f["back"]:
-				continue
-			var r := float(f["head_size"][0]) / 2.0
-			var at := _face_centre(f) + Vector2(i * Paperdoll.FRAME_SIZE.x, 0)
-			var covered := 0
-			var total := 0
-			for y in range(int(at.y - r * 0.4), int(at.y + r * 0.4) + 1):
-				for x in range(int(at.x - r * 0.4), int(at.x + r * 0.4) + 1):
-					if Vector2(x, y).distance_to(at) <= r * 0.4:
-						total += 1
-						covered += 1 if img.get_pixel(x, y).a > 0.5 else 0
-			check(covered <= total * 0.02, "%s frame %s: the face shows under a hat (%d of %d covered)" % [hair.id, f["name"], covered, total])
+func test_each_hairstyle_has_its_own_cut_under_a_hat() -> void:
+	# so the bits of a style the cut would leave hanging loose (a ponytail's end) go too
+	for id in ["iron_helm", "viper_bandana"]:
+		var hat := Paperdoll.Piece.named("hat_item_" + id)
+		for hair in Content.looks_of(LookDef.Kind.HAIR):
+			var style := String(hair.id).trim_prefix("hair_")
+			check(hat.hair_cuts.get(style) is Texture2D, "%s: %s has its own cut" % [id, style])
+			var a := Appearance.new()
+			a.hair = hair.id
+			var d := Paperdoll.dress(_look(a, {"hat": id}))
+			check(_layer(d, hair.frames).hair_cut == hat.hair_cuts.get(style), "%s: and it is used for %s" % [id, style])
 
 func test_a_cape_and_shield_are_tinted_layers() -> void:
 	var cape := Content.item(&"petal_cape") as EquipDef
@@ -303,14 +288,14 @@ func test_hats_are_a_piece_over_his_hair() -> void:
 	check(Paperdoll.hat_piece(helm).name == "hat_helm", "drawn as a helm")
 	check(Color(hat.tint, 1.0).is_equal_approx(helm.worn_color()), "in the helm's colour")
 	var hair := Content.looks_of(LookDef.Kind.HAIR)[0]
-	check(d.layers.find(_layer(d, hair.hat_frames)) < d.layers.find(hat), "over the hair left under it")
+	check(d.layers.find(_layer(d, hair.frames)) < d.layers.find(hat), "over the hair left under it")
 
 func test_hair_under_a_hat_is_cut_where_the_hat_hides_it() -> void:
 	# so none pokes out of the hat's top or sides (Cory 2026-10-11)
 	var hair := Content.looks_of(LookDef.Kind.HAIR)[0]
 	for id in ["iron_helm", "viper_bandana"]:
 		var d := _dress_bare(Appearance.new(), {"hat": id})
-		var under := _layer(d, hair.hat_frames)
+		var under := _layer(d, hair.frames)
 		check(under != null and under.hair_cut != null, "%s: the hair under it is cut" % id)
 	var bare := Paperdoll.dress(_look(Appearance.new()))
 	check(_layer(bare, hair.frames).hair_cut == null, "without a hat the hair is whole")
