@@ -6,7 +6,7 @@ Made with `tools/audio/make_sfx.py` (trimmed, mono, levelled) from:
   Interface Sounds (click, open, close, bow), Impact Sounds (hit, crit, hurt, gun,
   monster_die) and RPG Audio (swing, throw, pickup).
 - **Synthesized** with `tools/audio/synth_sfx.py`: sparkle, heal, buff, portal, cast,
-  magic_hit, mob_shot, jump.
+  magic_hit, mob_shot.
 
 | id | source |
 |---|---|
