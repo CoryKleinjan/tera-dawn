@@ -3,7 +3,7 @@
   "detail": 1,
   "recolor": "dark_parchment",
   "out_dir": "assets/sprites/ui/dialogue",
-  "scale": 0.5,
+  "scale": 1.0,
   "alpha": "soft",
   "label_band": 0.15,
   "cells": [
@@ -81,7 +81,7 @@
           32
         ]
       ],
-      "scale": 0.4832
+      "scale": 0.9664
     },
     "portrait_niche": {
       "fix": "glow_backdrop",
@@ -93,7 +93,7 @@
           30
         ]
       ],
-      "scale": 0.6298
+      "scale": 1.2596
     },
     "dialogue_frame": {
       "blank": [
@@ -104,7 +104,7 @@
           30
         ]
       ],
-      "scale": 0.8149
+      "scale": 1.6298
     },
     "shop_row": {
       "blank": [
@@ -115,7 +115,7 @@
           33
         ]
       ],
-      "scale": 0.4552
+      "scale": 0.9104
     },
     "shop_row_hover": {
       "blank": [
@@ -126,7 +126,7 @@
           33
         ]
       ],
-      "scale": 0.4406
+      "scale": 0.8812
     },
     "amount_chip": {
       "blank": [
@@ -137,7 +137,7 @@
           33
         ]
       ],
-      "scale": 0.4593
+      "scale": 0.9186
     },
     "amount_chip_on": {
       "blank": [
@@ -148,7 +148,7 @@
           33
         ]
       ],
-      "scale": 0.4104
+      "scale": 0.8208
     },
     "trade_panel": {
       "blank": [
@@ -159,10 +159,10 @@
           32
         ]
       ],
-      "scale": 0.786
+      "scale": 1.572
     },
     "tracker_panel": {
-      "scale": 0.4712,
+      "scale": 0.9424,
       "blank_top": 60
     },
     "shard_counter": {
@@ -174,7 +174,7 @@
           31
         ]
       ],
-      "scale": 0.5127
+      "scale": 1.0254
     },
     "close_small": {
       "blank": [
@@ -185,7 +185,7 @@
           31
         ]
       ],
-      "scale": 0.7811
+      "scale": 1.5622
     }
   },
   "background": [

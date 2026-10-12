@@ -9,7 +9,7 @@ const COLS := 3
 ## The trade panel art (two 3 x 3 grids under a handshake), drawn at its own size here.
 const PANEL := "dialogue/trade_panel"
 const PANEL_AT := Vector2(PAD - 6, TITLE_H + 4)
-## Where the painted slots are on the panel art, in texels: each grid's first slot, and the
+## Where the painted slots are on the panel art, in art pixels: each grid's first slot, and the
 ## step to the next column and row.
 const GRID_LEFT := Vector2(26, 73)
 const GRID_RIGHT := Vector2(218, 73)
@@ -24,7 +24,7 @@ var my_grid := SlotGrid.new(PANEL_AT + GRID_LEFT, COLS, COLS * 3, SLOT, PITCH.x 
 var their_grid := SlotGrid.new(PANEL_AT + GRID_RIGHT, COLS, COLS * 3, SLOT, PITCH.x - SLOT)
 
 func _init() -> void:
-	var panel := UiSkin.tex(PANEL).get_size()
+	var panel := UiSkin.size_of(PANEL)
 	super("Trade", Vector2(panel.x + PANEL_AT.x * 2, PANEL_AT.y + panel.y + SHARDS_H + 64))
 
 func show_state(s: Dictionary) -> void:
@@ -61,7 +61,7 @@ func _stack(side: String, i: int) -> ItemStack:
 ## A side's Dawnshard counter, under its grid.
 func _shards_rect(theirs := false) -> Rect2:
 	var grid := (their_grid if theirs else my_grid).bounds()
-	var top := PANEL_AT.y + UiSkin.tex(PANEL).get_height() + 6
+	var top := PANEL_AT.y + UiSkin.size_of(PANEL).y + 6
 	return Rect2(grid.position.x - 6, top, grid.size.x + 12, SHARDS_H)
 
 func _trade_rect() -> Rect2:
@@ -73,7 +73,7 @@ func _cancel_rect() -> Rect2:
 func _draw_body() -> void:
 	if state.is_empty():
 		return
-	draw_texture_rect(UiSkin.tex(PANEL), Rect2(PANEL_AT, UiSkin.tex(PANEL).get_size()), false)
+	draw_texture_rect(UiSkin.tex(PANEL), Rect2(PANEL_AT, UiSkin.size_of(PANEL)), false)
 	for side in ["mine", "theirs"]:
 		var theirs: bool = side == "theirs"
 		var d: Dictionary = state[side]

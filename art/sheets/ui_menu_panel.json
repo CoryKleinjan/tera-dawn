@@ -2,7 +2,7 @@
   "source": "art/source/ui_menu.png",
   "detail": 1,
   "out_dir": "assets/sprites/ui/menu",
-  "scale": 0.5,
+  "scale": 1.0,
   "alpha": "soft",
   "label_band": 0.1,
   "inset": 5,
@@ -43,7 +43,7 @@
           18
         ]
       ],
-      "scale": 0.9529
+      "scale": 1.9058
     }
   }
 }

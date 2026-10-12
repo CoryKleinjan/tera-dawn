@@ -8,11 +8,11 @@ extends TDWindow
 ## To give NPCs something new to offer (storage, travel, ...), add it in `_options()`.
 
 const WIDTH := 540.0
-## The dialogue frame (UiSkin.DIALOGUE_FRAME) is drawn at this many pixels per texel, and
+## The dialogue frame (UiSkin.DIALOGUE_FRAME) is drawn at this many pixels per art pixel, and
 ## grows taller for long speeches.
 const FRAME_SCALE := 0.8
 const FRAME_X := PAD - 6
-## Inside the frame's art, in texels: where the portrait niche's opening is (left, top,
+## Inside the frame's art, in art pixels: where the portrait niche's opening is (left, top,
 ## right, and how far up from the bottom), and where the text starts and ends.
 const NICHE := Vector4(28, 72, 125, 39)
 const TEXT_LEFT := 182.0
@@ -21,7 +21,7 @@ const TEXT_TOP := 70.0
 const TEXT_BOTTOM := 36.0
 const LINE_H := 17.0
 const ROW_H := 26.0
-## Option rows: pixels per texel of the option row art.
+## Option rows: pixels per art pixel of the option row art.
 const ROW_SCALE := 0.6
 ## The speaker's name over their speech: its size, and the room it takes above the text.
 const NAME_SIZE := 18
@@ -259,7 +259,7 @@ func _option_rect(i: int) -> Rect2:
 ## The frame with the portrait and what they say: tall enough for the text.
 func _frame_rect() -> Rect2:
 	var w := size.x - FRAME_X * 2
-	var natural := UiSkin.tex(UiSkin.DIALOGUE_FRAME[0]).get_height() * FRAME_SCALE
+	var natural := UiSkin.size_of(UiSkin.DIALOGUE_FRAME[0]).y * FRAME_SCALE
 	var text_h := NAME_H + _lines().size() * LINE_H + (TEXT_TOP + TEXT_BOTTOM) * FRAME_SCALE
 	return Rect2(FRAME_X, TITLE_H + 2, w, maxf(natural, text_h))
 

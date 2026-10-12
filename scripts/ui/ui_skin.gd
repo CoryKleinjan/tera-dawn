@@ -11,15 +11,20 @@ extends RefCounted
 ## and settings controls), dialogue/ (dialogue, shop, trade, quests, banners), social/
 ## (buddies, party, guild, chat, invitations), book/ (Monster Book and achievements).
 ## world_map.png is the painted world map.
+##
+## The art is cut at DENSITY texels per art pixel, so it stays sharp on big screens, and is
+## drawn one art pixel per canvas pixel at scale 1. Every size of the art in the code (nine-patch
+## margins, regions, `size_of`) is in art pixels; only `tex()` gives the finer texture itself.
 
 const DIR := "res://assets/sprites/ui/"
 ## Brighter and darker tints for hover and pressed states of art that has only one state.
 const LIT := Color(1.25, 1.18, 1.05)
 const PRESSED := Color(0.85, 0.8, 0.75)
-## The item tooltip's frame art is cut at twice the detail it's drawn at.
-const TOOLTIP_SCALE := 0.5
-## The same for the game windows' frame.
-const WINDOW_SCALE := 0.5
+## Texels per art pixel the UI sheets are cut at (art/sheets/ui*.json).
+const DENSITY := 2.0
+## Art not cut from those sheets, one texel per art pixel: the mouse cursor (the system
+## draws it in screen pixels) and pieces whose source sheet is gone.
+const COARSE: Array[String] = ["cursor", "title_backdrop", "hud/cooldown_cover", "menu/list_row_hover", "menu/slider_knob_hover"]
 
 static var _cache := {}
 
@@ -28,12 +33,25 @@ static func tex(name: String) -> Texture2D:
 		_cache[name] = load(DIR + name + ".png")
 	return _cache[name]
 
+## Texels per art pixel in `name`.
+static func density(name: String) -> float:
+	return 1.0 if name in COARSE else DENSITY
+
+## How big `name` is drawn at scale 1, in canvas pixels (art pixels).
+static func size_of(name: String) -> Vector2:
+	return tex(name).get_size() / density(name)
+
+## `r` in art pixels of `name` -> the same part of its texture, in texels.
+static func region(name: String, r: Rect2) -> Rect2:
+	var d := density(name)
+	return Rect2(r.position * d, r.size * d)
+
 ## A nine-patch style from a UI texture: the corners keep their size, the rest stretches.
-static func box(name: String, margin_x: float, margin_y: float, pad_x := 0.0, pad_y := 0.0) -> StyleBoxTexture:
+## Margins are in art pixels.
+static func box(name: String, margin_x: float, margin_y: float, pad_x := 0.0, pad_y := 0.0) -> TDUiBox:
 	var key := "box:%s:%s:%s:%s:%s" % [name, margin_x, margin_y, pad_x, pad_y]
 	if not _cache.has(key):
-		var sb := StyleBoxTexture.new()
-		sb.texture = tex(name)
+		var sb := TDUiBox.new(tex(name), density(name))
 		sb.texture_margin_left = margin_x
 		sb.texture_margin_right = margin_x
 		sb.texture_margin_top = margin_y
@@ -45,9 +63,12 @@ static func box(name: String, margin_x: float, margin_y: float, pad_x := 0.0, pa
 		_cache[key] = sb
 	return _cache[key]
 
-## A nine-patch drawn `scale` screen pixels per texel, so chunky art fits a thin row
-## (a row 26 pixels tall from art 60 texels tall) without squeezing its corners.
+## A nine-patch drawn `scale` canvas pixels per art pixel, so chunky art fits a thin row
+## (a row 26 pixels tall from art 60 pixels tall) without squeezing its corners.
 static func draw_box(ci: CanvasItem, sb: StyleBox, r: Rect2, scale := 1.0) -> void:
+	if sb is TDUiBox:
+		(sb as TDUiBox).draw_scaled(ci.get_canvas_item(), r, scale)
+		return
 	if is_equal_approx(scale, 1.0):
 		sb.draw(ci.get_canvas_item(), r)
 		return
@@ -55,10 +76,10 @@ static func draw_box(ci: CanvasItem, sb: StyleBox, r: Rect2, scale := 1.0) -> vo
 	sb.draw(ci.get_canvas_item(), Rect2(Vector2.ZERO, r.size / scale))
 	ci.draw_set_transform(Vector2.ZERO)
 
-## A nine-patch whose middle `keep` texels (a sun on the top trim, diamonds halfway down the
+## A nine-patch whose middle `keep` art pixels (a sun on the top trim, diamonds halfway down the
 ## sides) keep their size: the art is cut into quarters and each quarter stretches only
 ## between its own corner and the middle. `margins` are the left, top, right and bottom
-## borders in texels; `keep` is how much of the middle stays put across and down.
+## borders in art pixels; `keep` is how much of the middle stays put across and down.
 static func draw_ornate(ci: CanvasItem, name: String, r: Rect2, margins: Vector4, keep: Vector2, scale := 1.0) -> void:
 	var half := r.size / 2.0
 	for q in 4:
@@ -67,13 +88,11 @@ static func draw_ornate(ci: CanvasItem, name: String, r: Rect2, margins: Vector4
 		var at := r.position + Vector2(half.x if right else 0.0, half.y if bottom else 0.0)
 		draw_box(ci, _quarter_box(name, right, bottom, margins, keep), Rect2(at, half), scale)
 
-static func _quarter_box(name: String, right: bool, bottom: bool, margins: Vector4, keep: Vector2) -> StyleBoxTexture:
+static func _quarter_box(name: String, right: bool, bottom: bool, margins: Vector4, keep: Vector2) -> TDUiBox:
 	var key := "quarter:%s:%s:%s:%s:%s" % [name, right, bottom, margins, keep]
 	if not _cache.has(key):
-		var t := tex(name)
-		var half := t.get_size() / 2.0
-		var sb := StyleBoxTexture.new()
-		sb.texture = t
+		var half := size_of(name) / 2.0
+		var sb := TDUiBox.new(tex(name), density(name))
 		sb.region_rect = Rect2(half.x if right else 0.0, half.y if bottom else 0.0, half.x, half.y)
 		sb.texture_margin_left = keep.x / 2.0 if right else margins.x
 		sb.texture_margin_right = margins.z if right else keep.x / 2.0
@@ -93,14 +112,14 @@ static func draw_icon(ci: CanvasItem, name: String, r: Rect2, modulate := Color.
 	var s := t.get_size() * k
 	ci.draw_texture_rect(t, Rect2(r.get_center() - s / 2.0, s), false, modulate)
 
-static func panel() -> StyleBoxTexture:
+static func panel() -> TDUiBox:
 	return box("menu_panel", 16, 16, 28, 24)
 
 ## The thin gold line with a sun in the middle, as wide as its container (under a heading).
 static func divider() -> Control:
 	var line := Control.new()
 	var scale := 0.6
-	line.custom_minimum_size = Vector2(0, tex(DIVIDER[0]).get_height() * scale)
+	line.custom_minimum_size = Vector2(0, size_of(DIVIDER[0]).y * scale)
 	line.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	line.draw.connect(func() -> void: draw_panel(line, DIVIDER, Rect2(Vector2.ZERO, line.size), scale))
 	return line
@@ -116,33 +135,33 @@ static func use_panel(card: PanelContainer, panel_art: Array, pad: Vector4, scal
 	card.draw.connect(func() -> void: draw_panel(card, panel_art, Rect2(Vector2.ZERO, card.size), scale))
 
 ## A list row (dialogue options, quests); `lit` when hovered or chosen.
-static func option_row(lit: bool) -> StyleBoxTexture:
+static func option_row(lit: bool) -> TDUiBox:
 	return box("dialogue/option_row_hover" if lit else "dialogue/option_row", 22, 14)
 
 ## A shop line: a square item niche on the left, then the name and price.
-static func shop_row(lit: bool) -> StyleBoxTexture:
+static func shop_row(lit: bool) -> TDUiBox:
 	var sb := box("dialogue/shop_row_hover" if lit else "dialogue/shop_row", 18, 16)
 	sb.texture_margin_left = 64
 	return sb
 
 ## A pill with a Dawnshard on its left and room for the amount after it.
-static func shard_counter() -> StyleBoxTexture:
+static func shard_counter() -> TDUiBox:
 	var sb := box("dialogue/shard_counter", 20, 14)
 	sb.texture_margin_left = 60
 	return sb
 
 ## A small pill for picking an amount (×1, ×10, ×100); `on` is the one picked.
-static func amount_chip(on: bool) -> StyleBoxTexture:
+static func amount_chip(on: bool) -> TDUiBox:
 	return box("dialogue/amount_chip_on" if on else "dialogue/amount_chip", 20, 14)
 
 ## A buddy or guild member: a round niche on the left (for their online dot), then text.
-static func friend_row() -> StyleBoxTexture:
+static func friend_row() -> TDUiBox:
 	var sb := box("social/friend_row", 18, 16)
 	sb.texture_margin_left = 70
 	return sb
 
 ## An achievement: a round badge niche on the left; the done one glows with a star in it.
-static func achievement_row(done: bool) -> StyleBoxTexture:
+static func achievement_row(done: bool) -> TDUiBox:
 	var sb := box("book/achievement_row_done" if done else "book/achievement_row", 20, 18)
 	sb.texture_margin_left = 84
 	return sb
@@ -153,7 +172,7 @@ const BOOK := ["book/book_pages", Vector4(40, 44, 40, 48), Vector2(30, 0)]
 
 ## Panels with an ornament in the middle of an edge (draw them with draw_panel; WorldSkin
 ## has the guild tag and shop sign):
-## [texture, margins (left, top, right, bottom), middle kept (across, down)], in texels.
+## [texture, margins (left, top, right, bottom), middle kept (across, down)], in art pixels.
 ## The arch panel's bottom border takes in the light trim under its dark middle, so content
 ## padded past it never sits on the trim.
 const ARCH_PANEL := ["menu/menu_panel", Vector4(30, 56, 30, 44), Vector2(70, 34)]
@@ -177,10 +196,9 @@ static func draw_book(ci: CanvasItem, r: Rect2, left_w: float, scale := 1.0) -> 
 	draw_box(ci, _quarter_box(name, true, true, BOOK[1], spine), Rect2(right.position + Vector2(0, right.size.y), right.size), scale)
 
 ## The game windows' frame (inventory, equipment, character): gold trim and a title strip.
-## Cut at twice the detail it's drawn at: draw it with `draw_box(..., WINDOW_SCALE)`.
-static func window_frame() -> StyleBoxTexture:
-	var sb := box("window_frame", 32, 60)
-	sb.texture_margin_bottom = 28
+static func window_frame() -> TDUiBox:
+	var sb := box("window_frame", 16, 30)
+	sb.texture_margin_bottom = 14
 	return sb
 
 ## A plain dark rounded panel, the same as a window's list row (TDWindow.draw_row).
@@ -190,15 +208,15 @@ static func plain_panel() -> StyleBoxFlat:
 	sb.set_corner_radius_all(int(TDWindow.ROW_RADIUS))
 	return sb
 
-## The item tooltip's frame; draw it with `draw_box(..., TOOLTIP_SCALE)`.
-static func tooltip_frame() -> StyleBoxTexture:
-	return box("tooltip_frame", 24, 24)
+## The item tooltip's frame.
+static func tooltip_frame() -> TDUiBox:
+	return box("tooltip_frame", 12, 12)
 
 ## A hovered row in a list (a dropdown's choices): cream and gold with the sun on its left,
 ## which keeps its size while the row stretches.
-static func list_row_hover() -> StyleBoxTexture:
+static func list_row_hover() -> TDUiBox:
 	if not _cache.has("list_row_hover"):
-		var sb := box("menu/list_row_hover", 8, 8).duplicate() as StyleBoxTexture
+		var sb := box("menu/list_row_hover", 8, 8).copy()
 		sb.texture_margin_left = 26
 		sb.content_margin_left = 28
 		_cache["list_row_hover"] = sb
@@ -214,15 +232,15 @@ static func sized(name: String, height: int) -> Texture2D:
 	return _cache[key]
 
 ## A style brightened, for hover and focus.
-static func lit(sb: StyleBoxTexture) -> StyleBoxTexture:
+static func lit(sb: TDUiBox) -> TDUiBox:
 	return tinted(sb, LIT)
 
 ## A style darkened, for a pressed button.
-static func pressed(sb: StyleBoxTexture) -> StyleBoxTexture:
+static func pressed(sb: TDUiBox) -> TDUiBox:
 	return tinted(sb, PRESSED)
 
 ## A copy of a style drawn in another tint.
-static func tinted(sb: StyleBoxTexture, tint: Color) -> StyleBoxTexture:
-	var out := sb.duplicate() as StyleBoxTexture
+static func tinted(sb: TDUiBox, tint: Color) -> TDUiBox:
+	var out := sb.copy()
 	out.modulate_color = tint
 	return out

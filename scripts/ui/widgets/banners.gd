@@ -17,7 +17,7 @@ const RIBBON_Y := 190.0
 const RIBBON_W := {"dialogue/quest_complete_banner": 300.0, "dialogue/job_advance_banner": 380.0}
 const TOAST_SIZE := Vector2(300, 54)
 const TOAST_GAP := 6.0
-## The toast art's borders in texels (its star sits in the left one), and how it's scaled.
+## The toast art's borders in art pixels (its star sits in the left one), and how it's scaled.
 const TOAST_MARGINS := Vector4(64, 16, 18, 16)
 const TOAST_SCALE := 0.8
 
@@ -125,7 +125,7 @@ func _draw_toast(ach: AchievementDef, t: int, total: int) -> void:
 	var a := _fade(t, total, 12, 30)
 	var r := toast_rect()
 	r.position.y += (1.0 - a) * 20.0  # rising into place
-	var sb := UiSkin.box("book/achievement_toast", TOAST_MARGINS.z, TOAST_MARGINS.y).duplicate() as StyleBoxTexture
+	var sb := UiSkin.box("book/achievement_toast", TOAST_MARGINS.z, TOAST_MARGINS.y).copy()
 	sb.texture_margin_left = TOAST_MARGINS.x
 	sb.modulate_color = Color(1, 1, 1, a)
 	UiSkin.draw_box(self, sb, r, TOAST_SCALE)

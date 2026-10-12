@@ -10,7 +10,7 @@ const LIST_Y := 68.0
 const ROW_H := 24.0
 const LIST_W := 200.0
 const ROWS := 11
-## Pixels per texel of the row art.
+## Pixels per art pixel of the row art.
 const ROW_SCALE := (ROW_H - 2) / 39.0
 ## The marker shown on each quest's row, as over the NPC (WorldSkin.QUEST_MARKERS).
 const ROW_MARKERS := {QuestLog.Status.AVAILABLE: "!", QuestLog.Status.ACTIVE: "...", QuestLog.Status.READY: "?"}

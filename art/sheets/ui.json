@@ -1,7 +1,7 @@
 {
   "source": "art/source/ui.png",
   "detail": 1,
-  "scale": 0.5,
+  "scale": 1.0,
   "alpha": "soft",
   "label_band": 0.2,
   "grid_threshold": 0.7,
@@ -49,7 +49,7 @@
           29
         ]
       ],
-      "scale": 0.4252,
+      "scale": 0.8504,
       "split_by": "y"
     },
     "hp_frame": {
@@ -61,7 +61,7 @@
           29
         ]
       ],
-      "scale": 0.39
+      "scale": 0.78
     },
     "mp_frame": {
       "blank": [
@@ -72,7 +72,7 @@
           29
         ]
       ],
-      "scale": 0.4
+      "scale": 0.8
     },
     "exp_frame": {
       "blank": [
@@ -83,7 +83,7 @@
           29
         ]
       ],
-      "scale": 0.4545
+      "scale": 0.909
     },
     "fill_red": {
       "blank": [
@@ -94,7 +94,7 @@
           28
         ]
       ],
-      "scale": 0.3673
+      "scale": 0.7346
     },
     "fill_blue": {
       "blank": [
@@ -105,7 +105,7 @@
           29
         ]
       ],
-      "scale": 0.3673
+      "scale": 0.7346
     },
     "fill_gold": {
       "blank": [
@@ -116,7 +116,7 @@
           29
         ]
       ],
-      "scale": 0.384
+      "scale": 0.768
     },
     "level_badge": {
       "blank": [
@@ -127,7 +127,7 @@
           29
         ]
       ],
-      "scale": 0.459
+      "scale": 0.918
     },
     "menu_panel": {
       "blank": [
@@ -138,7 +138,7 @@
           28
         ]
       ],
-      "scale": 0.5855,
+      "scale": 1.171,
       "recolor": "dark_parchment"
     },
     "button_normal": {
@@ -150,7 +150,7 @@
           28
         ]
       ],
-      "scale": 0.5703
+      "scale": 1.1406
     },
     "button_hover": {
       "blank": [
@@ -161,7 +161,7 @@
           28
         ]
       ],
-      "scale": 0.5703
+      "scale": 1.1406
     },
     "button_pressed": {
       "blank": [
@@ -172,7 +172,7 @@
           28
         ]
       ],
-      "scale": 0.5703
+      "scale": 1.1406
     },
     "button_disabled": {
       "blank": [
@@ -183,7 +183,7 @@
           28
         ]
       ],
-      "scale": 0.5703,
+      "scale": 1.1406,
       "out_dir": "art/build/ui"
     },
     "fill_lag": {
@@ -195,7 +195,7 @@
           28
         ]
       ],
-      "scale": 0.3673,
+      "scale": 0.7346,
       "out_dir": "art/build/ui"
     },
     "skill_slot": {
@@ -219,7 +219,7 @@
           29
         ]
       ],
-      "scale": 0.5,
+      "scale": 1.0,
       "out_dir": "art/build/ui"
     },
     "name_tag": {
@@ -231,7 +231,7 @@
           28
         ]
       ],
-      "scale": 0.425
+      "scale": 0.85
     },
     "cursor": {
       "blank": [
@@ -253,7 +253,7 @@
           28
         ]
       ],
-      "scale": 0.3661
+      "scale": 0.7322
     }
   },
   "grid": {

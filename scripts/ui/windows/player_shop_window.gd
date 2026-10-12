@@ -75,7 +75,7 @@ func _draw_body() -> void:
 	for i in list.shown(entries.size()):
 		var r := row_rect(i)
 		var stack := _stack(i)
-		var k_art := r.size.y / UiSkin.tex("dialogue/shop_row").get_height()
+		var k_art := r.size.y / UiSkin.size_of("dialogue/shop_row").y
 		UiSkin.draw_box(self, UiSkin.shop_row(r.has_point(_hover)), r, k_art)
 		if stack and stack.item.icon:
 			var niche := Rect2(r.position + TDShopWindow.NICHE.position * k_art, TDShopWindow.NICHE.size * k_art)

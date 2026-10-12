@@ -14,7 +14,7 @@ const GAP := 4.0
 const GRID_Y := 74.0
 const AMOUNTS: Array[int] = [1, 10, 100]
 const REACH := 170.0
-## Pixels per texel of the shop row and amount chip art, and where the row art's item niche is.
+## Pixels per art pixel of the shop row and amount chip art, and where the row art's item niche is.
 const ROW_SCALE := (ROW_H - 4) / 63.0
 const NICHE := Rect2(11, 10, 42, 42)
 const CHIP_SCALE := 0.68

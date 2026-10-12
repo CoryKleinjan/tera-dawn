@@ -2,7 +2,7 @@
   "source": "art/source/logo.png",
   "detail": 1,
   "out_dir": "assets/sprites/ui",
-  "scale": 0.25,
+  "scale": 0.5,
   "alpha": "soft",
   "keep": "all",
   "label_band": 0,

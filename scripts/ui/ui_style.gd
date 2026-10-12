@@ -27,7 +27,7 @@ static func style_button(b: Button) -> void:
 
 ## A tab button (toggle_mode, in a ButtonGroup) from the settings sheet: muted purple, raised
 ## gold when chosen. `icon` (a texture name) shows left of the text.
-## The lit tab's ends hold a brass stud (TAB_STUD texels in from each side), so both states
+## The lit tab's ends hold a brass stud (TAB_STUD art pixels in from each side), so both states
 ## keep their label TAB_PAD in, past it.
 static func style_tab(b: Button, icon := "") -> void:
 	var off := UiSkin.box("menu/tab_off", 22, 12, TAB_PAD, 4)
@@ -64,11 +64,12 @@ static func set_keycap(b: Button, art: String) -> void:
 	b.add_theme_stylebox_override("pressed", UiSkin.pressed(sb))
 	b.add_theme_color_override("font_color", Palette.MIST if art == "keycap_empty" else Palette.INK)
 
-## A text field drawn with a field art (the chat line); `margins` are its borders in texels
-## (left, top, right, bottom), drawn `scale` pixels per texel.
+## A text field drawn with a field art (the chat line); `margins` are its borders in art
+## pixels (left, top, right, bottom), drawn `scale` canvas pixels per art pixel.
 static func style_field(f: LineEdit, art: String, margins: Vector4, scale := 1.0) -> void:
 	var img := UiSkin.tex(art).get_image()
-	img.resize(roundi(img.get_width() * scale), roundi(img.get_height() * scale), Image.INTERPOLATE_LANCZOS)
+	var size := UiSkin.size_of(art) * scale
+	img.resize(roundi(size.x), roundi(size.y), Image.INTERPOLATE_LANCZOS)
 	var sb := StyleBoxTexture.new()
 	sb.texture = ImageTexture.create_from_image(img)
 	sb.texture_margin_left = margins.x * scale

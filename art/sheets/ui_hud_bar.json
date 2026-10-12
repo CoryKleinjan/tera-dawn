@@ -1,7 +1,7 @@
 {
   "source": "art/source/ui_hud_bar.png",
   "detail": 1,
-  "scale": 0.2,
+  "scale": 0.4,
   "alpha": "soft",
   "out_dir": "assets/sprites/ui",
   "label_band": 0,

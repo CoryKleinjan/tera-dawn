@@ -2,7 +2,7 @@
   "source": "art/source/ui_dialogue.png",
   "detail": 1,
   "out_dir": "assets/sprites/ui/dialogue",
-  "scale": 0.5,
+  "scale": 1.0,
   "alpha": "soft",
   "label_band": 0.3,
   "inset": 6,
@@ -47,7 +47,7 @@
           30
         ]
       ],
-      "scale": 0.4569
+      "scale": 0.9138
     },
     "option_row_hover": {
       "blank": [
@@ -58,7 +58,7 @@
           31
         ]
       ],
-      "scale": 0.4485
+      "scale": 0.897
     }
   }
 }

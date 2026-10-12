@@ -2,7 +2,7 @@
   "source": "art/source/ui_windows.png",
   "detail": 1,
   "out_dir": "assets/sprites/ui",
-  "scale": 0.5,
+  "scale": 1.0,
   "alpha": "soft",
   "label_band": 0.2,
   "inset": 5,
@@ -67,7 +67,7 @@
           32
         ]
       ],
-      "scale": 0.572
+      "scale": 1.144
     }
   },
   "recolor": "dark_parchment"
