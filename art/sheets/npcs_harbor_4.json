@@ -1,0 +1,120 @@
+{
+  "source": "art/source/npcs_harbor_4.png",
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/npcs_harbor_4",
+  "cells": [
+    [
+      "sailmaker_1",
+      "",
+      "dockhand_1",
+      "",
+      "harbor_kid_1",
+      "",
+      ""
+    ],
+    [
+      ""
+    ],
+    [
+      ""
+    ]
+  ],
+  "overrides": {
+    "sailmaker_1": {
+      "scale": 0.2253
+    },
+    "dockhand_1": {
+      "scale": 0.2253
+    },
+    "harbor_kid_1": {
+      "scale": 0.2253
+    }
+  },
+  "sets": {
+    "sailmaker": {
+      "frames": {
+        "idle1": "npcs_harbor_4:sailmaker_1"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/sailmaker.png",
+      "sprite_frames": "assets/animations/npc_sailmaker.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle1"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "dockhand": {
+      "frames": {
+        "idle1": "npcs_harbor_4:dockhand_1"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/dockhand.png",
+      "sprite_frames": "assets/animations/npc_dockhand.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle1"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "harbor_kid": {
+      "frames": {
+        "idle1": "npcs_harbor_4:harbor_kid_1"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/harbor_kid.png",
+      "sprite_frames": "assets/animations/npc_harbor_kid.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle1"
+          ],
+          "fps": 1.5
+        }
+      }
+    }
+  },
+  "grid": {
+    "rows": [
+      0,
+      512,
+      518,
+      1030
+    ],
+    "cols": [
+      [
+        0,
+        372,
+        377,
+        811,
+        817,
+        1162,
+        1166,
+        1536
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        1536
+      ]
+    ]
+  },
+  "inset": 2
+}

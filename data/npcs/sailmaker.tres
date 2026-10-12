@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/npc_sailmaker.tres" id="2_sprite"]
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"sailmaker"
+display_name = "Sailmaker Odile"
+title = "Sailmaker"
+sprite_frames = ExtResource("2_sprite")
+greeting = "Mind the sailcloth, love. Every ship in the bay flies a sail I stitched."
+lines = PackedStringArray("A torn sail can't catch the dawn wind.", "Captain Marlo still owes me for his last mainsail.")
+storage = false

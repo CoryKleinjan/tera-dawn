@@ -18,6 +18,9 @@ extends Resource
 ## Lanterns stand along the floor, about this far apart, in open ground (LanternPlacement).
 ## -1 picks the usual spacing for a town or a field; 0 means none.
 @export var lantern_spacing := -1.0
+## Hand-placed lantern posts on raised levels, besides the floor's own: each is an x and the
+## index (1-based) of the platform it stands on.
+@export var level_lanterns: Array[Vector2i] = []
 ## How often the biome's trees, bushes, rocks and flowers stand, as a share of what its
 ## DecorDefs ask for (DecorPlacement). -1 uses the shared DecorPlacement.DENSITY; 0 means none.
 @export var decor_density := -1.0
