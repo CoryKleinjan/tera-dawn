@@ -17,10 +17,6 @@ const KEY_FILE := "server.key"
 const CERT_FILE := "server.crt"
 const CERTS := "res://certs"
 
-## A stand-in trusted certificate for unchecked connections: Godot needs one to set up an
-## encrypted client even when it won't check the server against it.
-static var _stand_in: X509Certificate
-
 ## The server's encryption settings, making a key and certificate if there are none yet.
 static func server_options(save_folder: String) -> TLSOptions:
 	var dir := save_folder.path_join("tls")
@@ -43,7 +39,4 @@ static func client_options(address: String) -> TLSOptions:
 		var cert := X509Certificate.new()
 		if cert.load(known) == OK:
 			return TLSOptions.client(cert)
-	if _stand_in == null:
-		var crypto := Crypto.new()
-		_stand_in = crypto.generate_self_signed_certificate(crypto.generate_rsa(1024), "CN=unchecked", "20250101000000", "20450101000000")
-	return TLSOptions.client_unsafe(_stand_in)
+	return TLSOptions.client_unsafe()
