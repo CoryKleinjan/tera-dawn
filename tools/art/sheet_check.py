@@ -40,6 +40,7 @@ MAGENTA = np.array([255, 0, 255])
 LABEL_BAND = 0.16  # top of each cell where the white label sits
 FRAME_AREA_RANGE = (0.55, 1.8)  # allowed frame area relative to the sheet's median frame
 FLAT_BOTTOM_BAND = 0.06  # how far up (share of the sprite's height) "just above the bottom" reaches
+FLAT_BOTTOM_EDGE = 0.01  # rows (share of the sprite's height) that count as its bottom edge
 FLAT_BOTTOM_MIN = 0.6  # the bottom edge's width relative to the widest row in that band
 BACKGROUND_NEAR = 60  # colour distance (summed over R, G, B) that still counts as the background
 
@@ -254,7 +255,9 @@ def flat_bottom(mask):
         xs = np.flatnonzero(mask[y])
         return xs[-1] - xs[0] + 1 if len(xs) else 0
 
-    edge = max(span(y) for y in range(bottom - 1, bottom + 1))
+    # the last ~1% of rows: a flat bottom drawn a hair off level, or with rounded outline
+    # corners, still counts; a 3/4 base slants over far more rows than that
+    edge = max(span(y) for y in range(bottom - max(2, round((bottom - top) * FLAT_BOTTOM_EDGE)), bottom + 1))
     widest = max(span(y) for y in range(bottom - band, bottom + 1))
     return edge >= FLAT_BOTTOM_MIN * widest
 
