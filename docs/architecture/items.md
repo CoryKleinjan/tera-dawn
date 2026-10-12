@@ -19,7 +19,8 @@ a **StatBlock** on top. `Character.stats` is the total. From it, `CharacterStats
 `Combat` uses those numbers, so all balance lives in `character_stats.gd` and `combat.gd`.
 
 Levels: `Character.xp_need` is the EXP curve (one formula, steeper from Lv 10, tuned with the
-pace bot for about 2 hours to Lv 10 and 40 to the cap, quests included). `Character.MAX_LEVEL`
+pace bot, then halved for twice the speed: roughly half an hour to Lv 10 and 15-25 to the cap,
+quests included). `Character.MAX_LEVEL`
 (35) is the cap: EXP stops there and the status bar and stats window say "Max level".
 
 There are four inventory tabs, and the class of the item decides which one it goes in:

@@ -15,12 +15,12 @@ func after_each() -> void:
 
 func test_xp_need_formula() -> void:
 	var c := fx.character()
-	# 55 * lvl^3 up to Lv 10, then 55,000 * (lvl / 10)^1.8
-	var want := {1: 55, 2: 440, 3: 1485, 5: 6875, 10: 55000, 11: 65293, 20: 191521, 30: 397357, 35: 524427}
+	# 27.5 * lvl^3 up to Lv 10, then 27,500 * (lvl / 10)^1.8
+	var want := {1: 27, 2: 220, 3: 742, 5: 3437, 10: 27500, 11: 32646, 20: 95760, 30: 198678, 35: 262213}
 	for lvl in want:
 		check_eq(c.xp_need(lvl), want[lvl], "level %d" % lvl)
 	c.level = 5
-	check_eq(c.xp_need(), 6875, "defaults to own level")
+	check_eq(c.xp_need(), 3437, "defaults to own level")
 
 func test_xp_need_always_grows() -> void:
 	var c := fx.character()
@@ -37,13 +37,13 @@ func test_gain_xp_below_need_keeps_level() -> void:
 
 func test_gain_xp_exactly_need_levels_up_with_zero_left() -> void:
 	var c := fx.character()
-	check_eq(c.gain_xp(55), 1, "one level")
+	check_eq(c.gain_xp(27), 1, "one level")
 	check_eq(c.level, 2, "level 2")
 	check_eq(c.xp, 0, "nothing left over")
 
 func test_gain_xp_many_levels_at_once() -> void:
 	var c := fx.character()
-	check_eq(c.gain_xp(55 + 440 + 1485 + 10), 3, "three levels")
+	check_eq(c.gain_xp(27 + 220 + 742 + 10), 3, "three levels")
 	check_eq(c.level, 4, "level 4")
 	check_eq(c.xp, 10, "leftover")
 	check_eq(c.ap.points, 15, "5 AP a level")
@@ -72,7 +72,7 @@ func test_level_up_raises_max_and_refills() -> void:
 	var c := fx.character()
 	c.health.damage(30)
 	c.spend_mp(10)
-	c.gain_xp(55)
+	c.gain_xp(27)
 	check_eq(c.max_hp(), 70, "50 + 2 × 10")
 	check_eq(c.health.max_hp, 70, "health max follows")
 	check_eq(c.health.hp, 70, "refilled")
