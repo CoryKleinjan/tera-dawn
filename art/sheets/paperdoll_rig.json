@@ -37,11 +37,11 @@
     "sit": {"hands": [[88.5, 86.5], [55, 84]]}
   },
   "arm": {
-    "_doc": "His front hand on every frame he holds a weapon (the one nearest us, Cory 2026-10-12: the weapon point on idle, walk1 and walk3, the shield hand on walk2, walk4, hurt, jump and crouch, the hand on his knee when he sits, his hand when he lies fainted) and the way his forearm points there, elbow to fist, set by eye on the body frame: [x, y, angle]. Every weapon kind is held in this fist at its own one angle to this forearm (holds), so no weapon moves or turns in his hand from one picture to the next. Climbing and levelup have none: no weapon in hand.",
-    "frames": {"idle1": [56, 82, 105], "idle2": [56, 82, 105], "idle3": [59, 75, -5], "idle4": [54, 82, 105], "blink": [56, 82, 105],
+    "_doc": "His front hand on every frame he holds a weapon (the one nearest us, Cory 2026-10-12: the weapon point on idle, walk1 and walk3, the shield hand on walk2, walk4, hurt, jump and crouch, the hand on his knee when he sits, his hand when he lies fainted) and the way his forearm points there, elbow to fist, set by eye on the body frame: [x, y, angle]. On idle3 and hit his fist is raised before his chest, a little further out than the weapon point (which is on his wrist there). Every weapon kind is held in this fist at its own one angle to this forearm (holds), so no weapon moves or turns in his hand from one picture to the next. Climbing and levelup have none: no weapon in hand.",
+    "frames": {"idle1": [56, 82, 105], "idle2": [56, 82, 105], "idle3": [63, 77, 0], "idle4": [54, 82, 105], "blink": [56, 82, 105],
                "walk1": [53, 78, 120], "walk2": [80, 77, 30], "walk3": [54, 79, 125], "walk4": [86, 78, 35], "run1": [34, 68, -150],
                "run2": [34, 70, 170], "run3": [73, 73, 45], "run4": [70, 75, 50], "attack1": [37, 67, -170], "attack2": [94, 69, 10],
-               "hit": [62, 75, -5], "hurt": [72, 78, 0], "jump": [84, 79, 60], "fall": [47, 55, -160], "land": [56, 91, 45],
+               "hit": [70, 76, 5], "hurt": [72, 78, 0], "jump": [84, 79, 60], "fall": [47, 55, -160], "land": [56, 91, 45],
                "crouch": [74, 97, 32], "slash1": [40, 58, -170], "slash2": [92, 70, 15], "slash3": [90, 86, 30], "faint1": [49, 86, 105],
                "faint2": [82, 75, 10], "sit": [88.5, 86.5, 20]}
   },
@@ -53,6 +53,6 @@
     "knuckle": {"_doc": "Worn over his fist, pointing the way his forearm does.", "offset": 0},
     "bow": {"_doc": "Held by the middle of its riser, lying across his forearm 5 degrees above it (Cory 2026-10-12). On hit and hurt his fists come up before his chest, so it draws behind him there instead of across his face.", "offset": -5, "behind": ["hit", "hurt"]},
     "staff": {"_doc": "Gripped in the middle of the shaft, 85 degrees above his forearm (Cory 2026-10-12). Behind him on hit and hurt so it doesn't cross his face.", "offset": -85, "behind": ["hit", "hurt"]},
-    "gun": {"_doc": "Held like a pistol: the grip in his fist and the barrel along his forearm (Cory 2026-10-11). Behind him on hit and hurt so it doesn't cross his face.", "offset": 0, "behind": ["hit", "hurt"]}
+    "gun": {"_doc": "Held like a pistol: the grip in his fist and the barrel along his forearm (Cory 2026-10-11), in front of him on every frame (behind him it would no longer be in his hand).", "offset": 0}
   }
 }
