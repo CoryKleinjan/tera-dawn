@@ -14632,7 +14632,7 @@
   {
    "id": "wg_steel_helm_from_icon",
    "prompts": null,
-   "batch": null,
+   "batch": "worn gear from icon (edit)",
    "with": null,
    "refs": [],
    "save": "wg_steel_helm_from_icon.png",
@@ -14658,13 +14658,12 @@
      "/mnt/project-files/art-sheets/icon-refs/steel_helm_noguard.png"
     ],
     "text": "The first image is two labelled cells on magenta from my hat sheet: a bald head with shoulders wearing the STEEL HELM, from the side (left cell) and from behind (right cell). The second image is the steel helm's inventory icon. REPAINT the helm in both cells so it is EXACTLY the helm in the icon, worn on this head: the same rounded blue-grey steel dome with the raised ridge running over the crown, the same squared visor with its two narrow eye slits, the same long cheek guards, the same brass rivet by the ear, the same shading, highlights and thin dark outline. Keep it the same size and in the same place on the head as now, hugging the skull; in the side view the eye slits sit level with his eyes and his face below the visor, his chin and jaw show. Nothing covers his neck or shoulders: the helm ends at its own steel rim. The bald heads, ears, necks, shoulders and white shirts stay EXACTLY as they are, and the labels and grid lines stay where they are. The background stays bright pure magenta #FF00FF. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything."
-   },
-   "held_batch": "worn gear from icon (edit)"
+   }
   },
   {
    "id": "wg_steel_helm_from_icon_only",
    "prompts": null,
-   "batch": null,
+   "batch": "worn gear from icon (edit)",
    "with": null,
    "refs": [],
    "save": "wg_steel_helm_from_icon_only.png",
@@ -14682,8 +14681,7 @@
     "base": "/mnt/project-files/art-sheets/gemini-pass-1/wg_steel_helm_from_icon.png",
     "refs": [],
     "text": "These are two labelled cells on magenta, each a bald head with shoulders wearing a steel helm. ERASE the bald heads, faces, ears, necks and shoulders from both cells and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the steel helm. It stays EXACTLY where it is, the same size, shape and colours, with its own outline and shading; where the head showed through its openings is now magenta. Keep every label and grid line exactly where it is."
-   },
-   "held_batch": "worn gear from icon (edit)"
+   }
   }
  ]
 }
