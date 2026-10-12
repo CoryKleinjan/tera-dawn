@@ -1,0 +1,56 @@
+{
+  "source": "art/source/dawnharbor_wall_decor.png",
+  "out_dir": "assets/sprites/tiles/dawnharbor",
+  "label_band": 0,
+  "inset": 0,
+  "keep": "largest",
+  "grid": {
+    "rows": [
+      0,
+      1340,
+      2048
+    ],
+    "cols": [
+      [
+        0,
+        1300,
+        2048
+      ],
+      [
+        0,
+        900,
+        2048
+      ]
+    ]
+  },
+  "cells": [
+    [
+      "wall_ivy_wide",
+      "wall_ivy_narrow"
+    ],
+    [
+      "flower_box_short",
+      "flower_box_long"
+    ]
+  ],
+  "overrides": {
+    "wall_ivy_wide": {
+      "scale": 0.1
+    },
+    "wall_ivy_narrow": {
+      "scale": 0.1
+    },
+    "flower_box_short": {
+      "scale": 0.1
+    },
+    "flower_box_long": {
+      "scale": 0.1,
+      "crop": [
+        45,
+        0,
+        1148,
+        708
+      ]
+    }
+  }
+}

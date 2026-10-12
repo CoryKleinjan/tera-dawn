@@ -176,7 +176,10 @@ func _prop(p: PropPlacement, map: MapDef) -> void:
 		return
 	var y := p.y if p.y >= 0.0 else float(map.ground_y) + 3.0
 	var s := TDStage.sprite(p.texture, TDStage.TEXEL * p.scale)
-	TDStage.stand_on_land(s, Vector2(p.x, y), p.depth)
+	if p.on_wall:
+		s.position = TDStage.to3d(Vector2(p.x, y), TDStage.LAND_FRONT + 0.005)
+	else:
+		TDStage.stand_on_land(s, Vector2(p.x, y), p.depth)
 	s.flip_h = p.flip
 	root.add_child(s)
 	if p.light_color.a > 0.0:

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=75 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=92 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/harbor.tres" id="2_harbor"]
@@ -39,6 +39,13 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/prop_sacks.png" id="prop_sacks"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/prop_signpost.png" id="prop_signpost"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/market_sign.png" id="market_sign"]
+[ext_resource type="Resource" path="res://data/npcs/sailmaker.tres" id="npc_sailmaker"]
+[ext_resource type="Resource" path="res://data/npcs/dockhand.tres" id="npc_dockhand"]
+[ext_resource type="Resource" path="res://data/npcs/harbor_kid.tres" id="npc_harbor_kid"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/wall_ivy_wide.png" id="ivy_wide"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/wall_ivy_narrow.png" id="ivy_narrow"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/flower_box_short.png" id="box_short"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/flower_box_long.png" id="box_long"]
 
 [sub_resource type="Resource" id="Plat_terrace"]
 script = ExtResource("3_platform_def")
@@ -338,6 +345,90 @@ depth = -1.0
 scale = 1.1
 flip = true
 
+[sub_resource type="Resource" id="Npc_sailmaker"]
+script = ExtResource("6_npc_placement")
+npc = ExtResource("npc_sailmaker")
+x = 4600.0
+platform = 0
+face = 1
+
+[sub_resource type="Resource" id="Npc_dockhand"]
+script = ExtResource("6_npc_placement")
+npc = ExtResource("npc_dockhand")
+x = 4870.0
+platform = 0
+face = -1
+
+[sub_resource type="Resource" id="Npc_harbor_kid"]
+script = ExtResource("6_npc_placement")
+npc = ExtResource("npc_harbor_kid")
+x = 5130.0
+platform = 0
+face = -1
+
+[sub_resource type="Resource" id="Wall_0"]
+script = ExtResource("prop_placement")
+texture = ExtResource("ivy_wide")
+x = 2420.0
+y = 996.0
+scale = 0.8
+on_wall = true
+flip = false
+
+[sub_resource type="Resource" id="Wall_1"]
+script = ExtResource("prop_placement")
+texture = ExtResource("box_long")
+x = 2860.0
+y = 1000.0
+scale = 1.0
+on_wall = true
+flip = false
+
+[sub_resource type="Resource" id="Wall_2"]
+script = ExtResource("prop_placement")
+texture = ExtResource("ivy_narrow")
+x = 3300.0
+y = 1010.0
+scale = 0.7
+on_wall = true
+flip = false
+
+[sub_resource type="Resource" id="Wall_3"]
+script = ExtResource("prop_placement")
+texture = ExtResource("ivy_wide")
+x = 3990.0
+y = 996.0
+scale = 0.8
+on_wall = true
+flip = true
+
+[sub_resource type="Resource" id="Wall_4"]
+script = ExtResource("prop_placement")
+texture = ExtResource("ivy_narrow")
+x = 2810.0
+y = 842.0
+scale = 0.7
+on_wall = true
+flip = false
+
+[sub_resource type="Resource" id="Wall_5"]
+script = ExtResource("prop_placement")
+texture = ExtResource("box_short")
+x = 3200.0
+y = 830.0
+scale = 1.0
+on_wall = true
+flip = false
+
+[sub_resource type="Resource" id="Wall_6"]
+script = ExtResource("prop_placement")
+texture = ExtResource("ivy_wide")
+x = 3560.0
+y = 828.0
+scale = 0.8
+on_wall = true
+flip = true
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"dawnharbor"
@@ -351,8 +442,8 @@ level_lanterns = Array[Vector2i]([Vector2i(2960, 1), Vector2i(3440, 1)])
 start_x = 300.0
 platforms = Array[ExtResource("3_platform_def")]([SubResource("Plat_terrace"), SubResource("Plat_cliff")])
 climbables = Array[ExtResource("4_climbable_def")]([SubResource("Climb_0"), SubResource("Climb_1"), SubResource("Climb_2"), SubResource("Climb_3")])
-npcs = Array[ExtResource("6_npc_placement")]([SubResource("Npc_taxi"), SubResource("Npc_extra_1"), SubResource("Npc_shop"), SubResource("Npc_storage"), SubResource("Npc_extra_0")])
-props = Array[ExtResource("prop_placement")]([SubResource("Prop_0"), SubResource("Prop_1"), SubResource("Prop_2"), SubResource("Prop_3"), SubResource("Prop_4"), SubResource("Prop_5"), SubResource("Prop_6"), SubResource("Prop_7"), SubResource("Prop_8"), SubResource("Prop_9")])
+npcs = Array[ExtResource("6_npc_placement")]([SubResource("Npc_taxi"), SubResource("Npc_extra_1"), SubResource("Npc_shop"), SubResource("Npc_storage"), SubResource("Npc_extra_0"), SubResource("Npc_sailmaker"), SubResource("Npc_dockhand"), SubResource("Npc_harbor_kid")])
+props = Array[ExtResource("prop_placement")]([SubResource("Prop_0"), SubResource("Prop_1"), SubResource("Prop_2"), SubResource("Prop_3"), SubResource("Prop_4"), SubResource("Prop_5"), SubResource("Prop_6"), SubResource("Prop_7"), SubResource("Prop_8"), SubResource("Prop_9"), SubResource("Wall_0"), SubResource("Wall_1"), SubResource("Wall_2"), SubResource("Wall_3"), SubResource("Wall_4"), SubResource("Wall_5"), SubResource("Wall_6")])
 buildings = Array[ExtResource("7_building_placement")]([SubResource("Building_0"), SubResource("Building_1"), SubResource("Building_3"), SubResource("Building_7"), SubResource("Building_4"), SubResource("Building_5"), SubResource("Building_6"), SubResource("Building_8"), SubResource("Building_9")])
 region = &"dawnharbor"
 world_pos = Vector2(420.0, 300.0)

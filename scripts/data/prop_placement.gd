@@ -9,6 +9,9 @@ extends Resource
 ## Depth: 0 is where the characters walk, negative is further back.
 @export var depth := -3.0
 @export var scale := 1.0
+## Hangs on the front of a raised level's wall (ivy, a flower box) instead of standing back
+## in the scene: drawn just in front of the land, at `y` (its bottom edge), ignoring `depth`.
+@export var on_wall := false
 @export var flip := false
 ## A light in the prop (crystals, steam vents). Alpha 0 means none.
 @export var light_color := Color(0, 0, 0, 0)
