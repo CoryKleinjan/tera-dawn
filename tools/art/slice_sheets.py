@@ -47,6 +47,7 @@ DEFAULTS = {
     "label_band": 0.16,       # top part of each cell (fraction of its height) that can hold the label
     "min_area": 6,            # specks smaller than this (in output pixels) are dropped
     "keep": "all",            # "all", "largest" or "split" (one sprite per piece, name_1, name_2...)
+    "drop_edge": False,       # drop pieces that touch the cell's edge (art from a neighbouring cell poking in)
     "shadow": False,          # dark sheets: remove the soft drop shadow under the sprite
     "inset": 3,               # pixels trimmed off each cell edge (divider anti-aliasing)
     "save": True,             # False: only used by animation sets, not written on its own
@@ -56,6 +57,7 @@ DEFAULTS = {
     "defringe": True,         # magenta sheets: take the magenta out of the outline pixels at the cut edge
     "dark_key": True,         # magenta sheets: dark magenta is background (floor shadows); False keeps plum line art
     "strip_labels": False,    # paint over white label letters in the label band before cutting
+    "smooth_edge": 0,         # stair-stepped edges in the sheet: round them off over this many sheet pixels
     "fix": None,              # a clean-up from FIXES for every cell (e.g. "glow_backdrop" for icon sheets)
     "recolor": None,          # a palette change from RECOLORS for every cell (e.g. "leather")
     "art_px": None,           # sheet pixels per art pixel (Gemini draws each sheet at its own pixel size); sets scale
@@ -733,6 +735,15 @@ def feather(alpha, radius):
     return np.minimum(alpha, np.asarray(img) / 255.0)
 
 
+def smooth_edge(alpha, radius):
+    """Rounds off a stair-stepped edge (art painted on/off and enlarged): blurs the cut-out and
+    takes its middle as the new edge, so the steps become a smooth curve. Only shaves the outer
+    corners of the steps; nothing outside gains alpha, so no background colour comes back."""
+    img = Image.fromarray((alpha * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(radius))
+    ramp = np.clip((np.asarray(img) / 255.0 - 0.5) * 2 + 0.5, 0, 1)
+    return np.minimum(alpha, ramp)
+
+
 def shrink(rgb, alpha, scale):
     h, w = alpha.shape
     nw, nh = max(1, round(w * scale)), max(1, round(h * scale))
@@ -826,6 +837,8 @@ def cut_cell(rgb_full, bg, box, opts):
         rgb, alpha = key_magenta(cell, bg, *opts["key"], dark_key=opts["dark_key"])
         if opts["defringe"]:
             rgb, alpha = defringe(rgb, alpha, bg)
+    if opts.get("smooth_edge"):
+        alpha = smooth_edge(alpha, opts["smooth_edge"])
     if opts.get("fix"):
         rgb, alpha = FIXES[opts["fix"]](rgb, alpha, source=cell / 255.0)
         if opts["alpha"] == "smooth":  # a clean-up cuts its outline on/off: fade it over about a sprite pixel
@@ -846,6 +859,9 @@ def cut_cell(rgb_full, bg, box, opts):
             continue
         z = opts.get("zoom", 1)
         if min(np.ptp(ys), np.ptp(xs)) <= 2 * z and max(np.ptp(ys), np.ptp(xs)) >= 12 * z:  # a stray bit of cell divider
+            continue
+        if opts.get("drop_edge") and (ys.min() == 0 or xs.min() == 0 or ys.max() == m.shape[0] - 1
+                                      or xs.max() == m.shape[1] - 1):  # art from the next cell poking in
             continue
         if ys.max() < band and (xs.min() < left or ys.max() - ys.min() < band * 0.6):  # the label text
             continue

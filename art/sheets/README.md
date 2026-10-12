@@ -60,6 +60,7 @@ screen (Cory, 2026-10-11: "do this for all assets"). `detail` and `alpha` defaul
 | `blank_label` | | Rows at the top holding a label drawn over the art: paints the box around its white letters. |
 | `blank` | | Rects `[[x0, y0, x1, y1], ...]` in the cell to paint with background. |
 | `keep` | `"all"` | `"largest"` keeps the biggest piece; `"split"` saves each piece as `name_1`, `name_2`... (left to right, or top to bottom with `"split_by": "y"`). |
+| `drop_edge` | `false` | Drop pieces that touch the cell's edge: art from a neighbouring cell poking in. Use it instead of a `blank` rect that would cut into the art. |
 | `flat_bottom` | `false` | The piece stands on the ground: `true` squares off a rounded bottom (up to 22% of its height), a number cuts that many rows. Every piece a map stands on its land needs one (`content_flat_bottom_test`). |
 | `fix` | | A named clean-up from `FIXES` (below). |
 | `recolor` | | A palette change from `RECOLORS` (below). |
