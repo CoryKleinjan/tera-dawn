@@ -22,7 +22,7 @@
     "jump": {"weapon": [37, 65, -80], "shield": [84, 79], "front": "shield"},
     "fall": {"weapon": [47, 55, -70], "shield": [99, 63]},
     "land": {"weapon": [56, 91, 5], "shield": [76, 90]},
-    "crouch": {"weapon": [43, 85, 10], "shield": [76, 92]},
+    "crouch": {"weapon": [43, 85, 10], "shield": [76, 92], "front": "shield"},
     "rope1": {"shield": [62, 70], "hands": [[79.5, 23], [50, 67]]},
     "rope2": {"shield": [66, 70], "hands": [[46, 29.5], [78, 66.5]]},
     "ladder1": {"shield": [62, 72], "hands": [[84.5, 32], [50, 68]]},
@@ -38,13 +38,14 @@
   },
   "holds": {
     "sword": {
-      "_doc": "In his front hand (the one nearest us, Cory 2026-10-12): the weapon point, or [x, y, angle] at the shield point on frames marked front: shield, and on sit at his front hand. The blade keeps mostly the same angle to his forearm (about 65 degrees above it, Cory 2026-10-12), turned only where that would cover his face or point it back on a resting frame; the attack and slash wind-ups hold it up instead of dropping behind him.",
-      "frames": {"idle1": 30, "idle2": 30, "idle3": 20, "idle4": 30, "blink": 30,
-                 "walk1": 45, "walk2": [80, 77, -25], "walk3": 45, "walk4": [86, 78, -45],
-                 "run1": 100, "run2": 100, "run3": -15, "run4": -20,
-                 "hit": 15, "hurt": [72, 78, 0], "jump": [84, 79, -15], "land": 15, "crouch": 20,
-                 "attack1": -80, "attack2": -60, "slash1": -85, "slash2": -50, "slash3": -30,
-                 "sit": [88.5, 86.5, -45]}
+      "_doc": "In his front hand, the one nearest us (Cory 2026-10-12), and at the same angle to his forearm on every frame: 80 degrees above it (Cory 2026-10-12: one-handed weapons keep their angle to the forearm in every animation). Each frame is [x, y, angle]: the claws' front-hand fist and its forearm direction (set by eye, elbow to fist) minus 80. Crouch holds it in the hand on the floor in front of him; sit in his front hand. On hit and hurt his fists come up in front of his chest, so the blade at that angle would cross his face: there it draws behind him, still at the same angle.",
+      "frames": {"idle1": [56, 82, 25], "idle2": [56, 82, 25], "idle3": [59, 75, -85], "idle4": [54, 82, 25], "blink": [56, 82, 25],
+                 "walk1": [53, 78, 40], "walk2": [80, 77, -50], "walk3": [54, 79, 45], "walk4": [86, 78, -45], "run1": [34, 68, 130],
+                 "run2": [34, 70, 90], "run3": [73, 73, -35], "run4": [70, 75, -30], "hit": [62, 75, -85], "hurt": [72, 78, -80],
+                 "jump": [84, 79, -20], "fall": [47, 55, 120], "land": [56, 91, -35], "crouch": [74, 97, -48], "attack1": [37, 67, 110],
+                 "attack2": [94, 69, -70], "slash1": [40, 58, 110], "slash2": [92, 70, -65], "slash3": [90, 86, -50], "faint1": [49, 86, 25],
+                 "sit": [88.5, 86.5, -60]},
+      "behind": ["hit", "hurt"]
     },
     "wand": {"like": "sword"},
     "claw": {"_doc": "A claw is worn like a big glove: it covers his fist and keeps the same angle to his hand and forearm on every frame, pointing the way his forearm does (Cory 2026-10-11, 2026-10-12). It is on whichever hand is nearest the viewer, always drawn in front (Cory 2026-10-12: idle and walk1/walk3 the weapon fist; walk2/walk4, hurt and jump the other hand, at its shield point). Every frame gives [x, y, angle] (the fist and the claw's angle), so changes to the sword's hold never move the claw. Each angle is that forearm's direction, from elbow to fist, set by eye on the body frame. On idle3 and hit his fist is raised in front of his chest, so the claw points forward, level with that forearm, and never covers his face.", "frames": {"idle1": [56, 82, 105], "idle2": [56, 82, 105], "idle3": [59, 75, -5], "idle4": [54, 82, 105], "blink": [56, 82, 105], "walk1": [53, 78, 120], "walk2": [80, 77, 30], "walk3": [54, 79, 125], "walk4": [86, 78, 35], "run1": [34, 68, -150], "run2": [34, 70, 170], "run3": [73, 73, 45], "run4": [70, 75, 50], "attack1": [37, 67, -170], "attack2": [94, 69, 10], "hit": [62, 75, -5], "hurt": [72, 78, 0], "jump": [84, 79, 60], "fall": [47, 55, -160], "land": [56, 91, 45], "crouch": [43, 85, 100], "slash1": [40, 58, -170], "slash2": [92, 70, 15], "slash3": [90, 86, 30], "faint1": [49, 86, 105], "levelup": [51, 33, -100]}},
