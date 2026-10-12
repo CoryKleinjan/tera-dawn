@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=73 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=75 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/harbor.tres" id="2_harbor"]
@@ -38,6 +38,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/prop_planter.png" id="prop_planter"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/prop_sacks.png" id="prop_sacks"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/prop_signpost.png" id="prop_signpost"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/market_sign.png" id="market_sign"]
 
 [sub_resource type="Resource" id="Plat_terrace"]
 script = ExtResource("3_platform_def")
@@ -129,7 +130,7 @@ tint = Color(1.0, 1.0, 1.0, 1.0)
 
 [sub_resource type="Resource" id="Door_store"]
 script = ExtResource("5_portal_def")
-x = 5130.0
+x = 5210.0
 platform = 0
 target_map = &"dawnharbor_store"
 target_x = 240.0
@@ -169,7 +170,7 @@ target_x = 120.0
 [sub_resource type="Resource" id="Building_7"]
 script = ExtResource("7_building_placement")
 building = ExtResource("19_dawnharbor_sail_loft")
-x = 4655.0
+x = 4735.0
 platform = 0
 flip = false
 scale = 0.92
@@ -178,7 +179,7 @@ tint = Color(1.0, 1.0, 1.0, 1.0)
 [sub_resource type="Resource" id="Building_4"]
 script = ExtResource("7_building_placement")
 building = ExtResource("20_dawnharbor_row_house")
-x = 5130.0
+x = 5210.0
 platform = 0
 flip = false
 scale = 1.1
@@ -186,7 +187,7 @@ tint = Color(1.0, 1.0, 1.0, 1.0)
 
 [sub_resource type="Resource" id="Portal_east"]
 script = ExtResource("5_portal_def")
-x = 5340.0
+x = 5420.0
 platform = 0
 target_map = &"harbor_road"
 target_x = 120.0
@@ -304,7 +305,7 @@ flip = false
 [sub_resource type="Resource" id="Prop_6"]
 script = ExtResource("prop_placement")
 texture = ExtResource("prop_cart")
-x = 4935.0
+x = 5015.0
 y = -1.0
 depth = -3.0
 scale = 1.3
@@ -328,20 +329,29 @@ depth = -3.0
 scale = 1.0
 flip = false
 
+[sub_resource type="Resource" id="Prop_9"]
+script = ExtResource("prop_placement")
+texture = ExtResource("market_sign")
+x = 4445.0
+y = -1.0
+depth = -1.0
+scale = 1.1
+flip = true
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"dawnharbor"
 display_name = "Dawnharbor"
 biome = ExtResource("2_harbor")
 variant = SubResource("Variant")
-width = 5400
+width = 5480
 height = 1100
 ground_y = 1020
 start_x = 300.0
 platforms = Array[ExtResource("3_platform_def")]([SubResource("Plat_terrace"), SubResource("Plat_cliff")])
 climbables = Array[ExtResource("4_climbable_def")]([SubResource("Climb_0"), SubResource("Climb_1"), SubResource("Climb_2"), SubResource("Climb_3")])
 npcs = Array[ExtResource("6_npc_placement")]([SubResource("Npc_taxi"), SubResource("Npc_extra_1"), SubResource("Npc_shop"), SubResource("Npc_storage"), SubResource("Npc_extra_0")])
-props = Array[ExtResource("prop_placement")]([SubResource("Prop_0"), SubResource("Prop_1"), SubResource("Prop_2"), SubResource("Prop_3"), SubResource("Prop_4"), SubResource("Prop_5"), SubResource("Prop_6"), SubResource("Prop_7"), SubResource("Prop_8")])
+props = Array[ExtResource("prop_placement")]([SubResource("Prop_0"), SubResource("Prop_1"), SubResource("Prop_2"), SubResource("Prop_3"), SubResource("Prop_4"), SubResource("Prop_5"), SubResource("Prop_6"), SubResource("Prop_7"), SubResource("Prop_8"), SubResource("Prop_9")])
 buildings = Array[ExtResource("7_building_placement")]([SubResource("Building_0"), SubResource("Building_1"), SubResource("Building_3"), SubResource("Building_7"), SubResource("Building_4"), SubResource("Building_5"), SubResource("Building_6"), SubResource("Building_8"), SubResource("Building_9")])
 region = &"dawnharbor"
 world_pos = Vector2(420.0, 300.0)

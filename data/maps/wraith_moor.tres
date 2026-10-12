@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=54 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=53 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/lantern.tres" id="2_lantern"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
 [ext_resource type="Resource" path="res://data/monsters/night_boar.tres" id="9_night_boar"]
 [ext_resource type="Resource" path="res://data/monsters/gloomcap.tres" id="10_gloomcap"]
-[ext_resource type="Resource" path="res://data/monsters/crypt_shell.tres" id="11_crypt_shell"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="12_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/steam_vent.png" id="13_steam_vent"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/crystals.png" id="14_crystals"]
@@ -89,19 +88,19 @@ count = 2
 
 [sub_resource type="Resource" id="Resource_27"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("11_crypt_shell")
+monster = ExtResource("10_gloomcap")
 platform = 7
 count = 3
 
 [sub_resource type="Resource" id="Resource_26"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("11_crypt_shell")
+monster = ExtResource("10_gloomcap")
 platform = 6
 count = 3
 
 [sub_resource type="Resource" id="Resource_25"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("11_crypt_shell")
+monster = ExtResource("10_gloomcap")
 platform = 5
 count = 2
 
@@ -145,7 +144,7 @@ count = 3
 script = ExtResource("7_portal_def")
 x = 2540.0
 platform = 0
-target_map = &"forgotten_crypt"
+target_map = &"sunken_graveyard"
 target_x = 120.0
 
 [sub_resource type="Resource" id="Resource_17"]
@@ -284,4 +283,4 @@ props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_29"), Sub
 region = &"lanternfall"
 world_pos = Vector2(745.0, 460.0)
 return_map = &"lanternfall"
-level_text = "Lv. 17-22"
+level_text = "Lv. 17-19"

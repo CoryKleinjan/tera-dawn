@@ -48,7 +48,8 @@ func _init() -> void:
 	_viewport.add_child(_camera)
 	_viewport.add_child(_environment)
 	_viewport.add_child(_sun)
-	_rig.freeze(true) # the clock here (`time`) picks his frame
+	# the clock here (`time`) picks his frame; the rig still blinks and breathes at idle
+	_rig.set_speed(0.0)
 	_viewport.add_child(_rig)
 	_grade.shader = GRADE_SHADER
 	_picture.texture = _viewport.get_texture()
@@ -88,7 +89,7 @@ func _process(delta: float) -> void:
 	if playing:
 		time += delta
 	var body := _rig.body as AnimatedSprite3D
-	if body.animation != animation:
+	if body.animation != animation and not (animation == &"idle" and body.animation == &"blink"):
 		_rig.play(animation, true)
 	body.frame = frame()
 	_relight_in -= delta
