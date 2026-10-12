@@ -25,8 +25,10 @@ a map look (`MapDef.variant`) for it, and update the entry when the zone changes
   bottom. MapleStory sets scale, layout and spacing; the look is the game's own.
 - **Light**: a world of endless dawn: warm, hopeful, golden light, even in the darkest zones.
   Shadows lean plum-violet, never pure black.
-- **Music** (shared style line): instrumental, cozy fantasy RPG, light orchestral and folk
-  instruments, bright catchy melody, gentle but upbeat, loop-friendly steady tempo, no long intro.
+- **Music**: each prompt leads with its zone's own mood, lead instruments and tempo (the
+  "Keep (music)" line), then ends with a short neutral line only: instrumental, no vocals,
+  video game background music, loop-friendly, steady tempo, no long intro or fade-out. A long
+  shared mood line on every prompt made all zones sound alike, so mood lives in each zone's line.
 - Towns have no monsters. Each sub-zone should be recognisable at a glance from its light and
   palette alone.
 - Roles below: **border** fields cross to a neighbouring zone, **training** fields lead deeper,
@@ -68,8 +70,9 @@ undersides, sun sparkles on water, gulls. White and cream plaster, blue roof til
 wood, rope, sails, stone harbour walls.
 
 **Keep (music):** breezy, travelling, sea wind. Field: acoustic guitar, strings, flute, light
-snare, steady travelling tempo. Town track should share that instrumentation, busier and warmer
-*(inferred)*.
+snare, steady travelling tempo. Town: the same instruments plus accordion touches, busier and
+warmer, a cheerful harbour-market tune. Free Market: plucked guitar, light strings, flute, hand
+claps and light snare, a friendly bargaining shuffle (its own track).
 
 **Town: Dawnharbor (the template city).** Three levels: a long quay with a walkable wooden pier
 and Marlo's ship, a stone-walled terrace above, and a cliff top with the lighthouse and chapel.
