@@ -109,3 +109,22 @@ func test_weapons_are_held_in_the_right_spot() -> void:
 			"wand", "staff":
 				check(share > 0.35 and share < 0.65, "%s is held near the middle (%.2f along)" % [name, share])
 		check_eq(int(w.get("dots_left", -1)), 0, "%s has no grip-marker dots left in the art" % name)
+
+## His walk alternates a stride and a passing step (Paperdoll.PASSING_STEPS), so his legs
+## move, and each passing step splits his legs where the art has a gap between his feet.
+func test_the_walk_has_passing_steps_between_strides() -> void:
+	var steps := Paperdoll.stride_steps()
+	var passing: Array[int] = []
+	for s in steps:
+		passing.append(int(s.x))
+	var walk: Array[bool] = []
+	for i in HeroBody.FRAMES.get_frame_count(&"walk"):
+		walk.append(Paperdoll.frame_index(HeroBody.FRAMES.get_frame_texture(&"walk", i)) in passing)
+	check_eq(steps.size(), Paperdoll.PASSING_STEPS.size(), "every passing step is a frame of the rig")
+	for i in walk.size():
+		check(walk[i] != walk[(i + 1) % walk.size()], "walk frame %d and the next are a stride and a passing step" % (i + 1))
+	var strip := Paperdoll.STRIP.get_image()
+	var ground := int(Paperdoll.FRAME_SIZE.y) - 8
+	for s in steps:
+		var x := int(s.x * Paperdoll.FRAME_SIZE.x + s.y)
+		check(strip.get_pixel(x, ground).a < 0.5, "frame %d splits between his feet" % int(s.x))

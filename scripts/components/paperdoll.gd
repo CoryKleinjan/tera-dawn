@@ -70,6 +70,16 @@ const FRAME_SIZE := Vector2(256, 208)
 ## How many strip pixels make one "hero pixel", the unit the game sizes him in (TDStage.TEXEL):
 ## the strip is cut at the full resolution of the painted sheet, twice as fine as the hero is sized.
 const ART_SCALE := 2.0
+## The walk's passing steps (paperdoll_stride.gdshaderinc): every walk frame is drawn mid-stride,
+## so on these, where his arms swing past his body, his lower legs slide in toward each other
+## and his steps show. Per frame: the x between his legs (frame pixels; the back leg is left of
+## it), the y they start to lean in from, and how far each foot moves in at the ground.
+const PASSING_STEPS := {
+	&"walk2": {"split": 133.0, "top": 172.0, "shift": 16.0},
+	&"walk4": {"split": 131.0, "top": 172.0, "shift": 16.0},
+}
+## How many passing steps the shader holds (stride_steps in paperdoll_stride.gdshaderinc).
+const STRIDE_SLOTS := 4
 
 ## A layer of art, played in step with the hero and multiplied by `tint`, or with `gear`
 ## (greyscale gear art) shaded in it, its light and dark greys turning light and deep shades
@@ -98,6 +108,8 @@ class Layer:
 		mat.set_shader_parameter(&"has_hair_cut", hair_cut != null)
 		if hair_cut:
 			mat.set_shader_parameter(&"hair_cut", hair_cut)
+		if piece == null:
+			Paperdoll.apply_stride(mat)
 		mat.set_shader_parameter(&"has_fist", piece != null and piece.fist != null)
 		if piece and piece.fist:
 			mat.set_shader_parameter(&"fist", piece.fist)
@@ -187,6 +199,7 @@ var weapon_tint := Color.WHITE
 
 static var _rig: Dictionary
 static var _refs: PackedVector3Array
+static var _strides: PackedVector4Array
 
 func _init() -> void:
 	tints.resize(REGIONS)
@@ -393,6 +406,28 @@ func apply(mat: ShaderMaterial) -> void:
 	mat.set_shader_parameter(&"has_head_cut", head_cut != null)
 	if head_cut:
 		mat.set_shader_parameter(&"head_cut", head_cut)
+	apply_stride(mat)
+
+## Sets a strip material's passing steps (PASSING_STEPS, paperdoll_stride.gdshaderinc).
+static func apply_stride(mat: ShaderMaterial) -> void:
+	var steps := stride_steps()
+	assert(steps.size() <= STRIDE_SLOTS, "more passing steps than the shader holds")
+	var slots := steps.duplicate()
+	slots.resize(STRIDE_SLOTS)
+	mat.set_shader_parameter(&"stride_steps", slots)
+	mat.set_shader_parameter(&"stride_count", steps.size())
+	mat.set_shader_parameter(&"stride_frame", FRAME_SIZE)
+
+## PASSING_STEPS as the shader takes them: (strip frame, split, top, shift) for each step the
+## rig has a frame for.
+static func stride_steps() -> PackedVector4Array:
+	if _strides.is_empty():
+		var frames: Array = rig().get("frames", [])
+		for i in frames.size():
+			var step: Variant = PASSING_STEPS.get(StringName(frames[i].get("name", "")))
+			if step:
+				_strides.append(Vector4(i, step["split"], step["top"], step["shift"]))
+	return _strides
 
 # ---------- the hero's rig (hero_rig.json) ----------
 

@@ -67,7 +67,9 @@ only what the creator offers and makes a level 1 character in the starting job
   `SpriteRig.pulse`). Frames have their own durations (a held wind-up), and `TDPlayer` adds a
   ready stance after fighting, a run at top speed, a turn, the top of a jump, a landing crouch
   only after a real drop and a walk that keeps step with his speed (walk and run share the
-  step, `SpriteRig.STEP_CYCLES`). Standing, he holds still and blinks now and then (the
+  step, `SpriteRig.STEP_CYCLES`). Every walk frame is drawn mid-stride, so on the passing
+  steps (`Paperdoll.PASSING_STEPS`) the shaders slide his lower legs in toward each other,
+  his body and every strip layer alike (`shaders/paperdoll_stride.gdshaderinc`). Standing, he holds still and blinks now and then (the
   "blink" animation, `SpriteRig.BLINK_EVERY`). Held weapons point forward on every resting and
   moving frame (`tests/unit/hero_pose_test.gd`). Poses not drawn yet fall back to the nearest
   one (`SpriteRig.FALLBACK`). `WeaponTrail` draws the streak a
