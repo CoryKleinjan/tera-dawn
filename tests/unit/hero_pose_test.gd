@@ -106,8 +106,10 @@ func test_weapons_are_held_in_the_right_spot() -> void:
 		match w.get("kind"):
 			"sword":
 				check(share >= 0.0 and share < 0.3, "%s is held by the handle (%.2f along)" % [name, share])
-			"wand", "staff":
+			"wand":
 				check(share > 0.35 and share < 0.65, "%s is held near the middle (%.2f along)" % [name, share])
+			"staff":
+				check(share > 0.25 and share < 0.45, "%s is held low on the handle (%.2f along)" % [name, share])
 		check_eq(int(w.get("dots_left", -1)), 0, "%s has no grip-marker dots left in the art" % name)
 
 ## His walk alternates a stride and a passing step (Paperdoll.PASSING_STEPS), so his legs

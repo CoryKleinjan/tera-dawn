@@ -112,7 +112,7 @@ def grip_point(arr, kind, axis, dots):
     """Where his fist closes on a weapon picture (its pixels):
     - a blade (sword kind): in the middle of the handle, between the pommel and the crossguard
       (the first place, going up from the pommel, that gets much wider than the handle);
-    - a wand or staff: halfway along the shaft;
+    - a wand: halfway along the shaft; a staff: low on its handle (STAFF_GRIP along it);
     - a gun: in the middle of the pistol grip (the part hanging below the barrel at the back);
     - a claw: in the middle of its cuff (CLAW_CUFF along it), so the cuff covers his fist;
     - anything else (bows, knuckles): its dot, or a guess near its back end."""
@@ -126,8 +126,10 @@ def grip_point(arr, kind, axis, dots):
         handle = float(np.median(width[2:8]))
         guard = next((i for i in range(4, 30) if width[i] > handle * 1.7), 8)
         return _on_axis(arr, axis, lo + span * (0.04 + guard / 40) / 2)
-    if kind in ("wand", "staff"):
+    if kind == "wand":
         return _on_axis(arr, axis, lo + span / 2)
+    if kind == "staff":
+        return _on_axis(arr, axis, lo + span * STAFF_GRIP)
     if kind == "claw":
         # the middle of the cuff, so the cuff covers his fist and the blades reach past it
         return _on_axis(arr, axis, lo + span * CLAW_CUFF)
