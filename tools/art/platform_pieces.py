@@ -17,7 +17,10 @@ assets/sprites/platforms/<biome>/; this script then, for the four top pieces:
    drops the rows between, joining the two along the row-by-row path where they differ
    least, so the art keeps its pixel size and outline.
 
-The under_* pieces go to art/build/ (not the game). The game joins pieces the same way across their left and right edges (PlatformSkin).
+The under_* pieces go to art/build/ (not the game). A terrace_pieces_<biome> sheet holds the
+square ends of a raised terrace's top edge (terrace_left, terrace_right) and the corner-stone
+columns down its wall; prepare_terrace() gives the two ends the same height and walking
+surface row as that biome's prepared platform pieces, so they join its middles. The game joins pieces the same way across their left and right edges (PlatformSkin).
 Options live in the sheet's manifest under "platform":
     "max_depth": texels the pieces may reach below the walking surface (default 80: 50 game
                  pixels; grass and crystals rising above the surface don't count)
@@ -159,3 +162,26 @@ def prepare(name):
     print("%s: %d top pieces, %d texels tall (was %d), surface at row %d"
           % (name, len(pieces), pieces[0].shape[0], height, surface))
 
+
+
+TERRACE_ENDS = ["terrace_left", "terrace_right"]
+
+
+def prepare_terrace(name):
+    """The square terrace ends of biome `name`, lined up and thinned to match its prepared
+    platform middles (run the platform_pieces sheet first)."""
+    with open(os.path.join(SHEETS, "terrace_pieces_%s.json" % name)) as f:
+        out_dir = os.path.join(ROOT, json.load(f)["out_dir"])
+    load = lambda n: np.asarray(Image.open(os.path.join(out_dir, n + ".png")).convert("RGBA"))
+    middle = load("middle_a")
+    surface, height = surface_row(middle), middle.shape[0]
+    for n in TERRACE_ENDS:
+        a = load(n)
+        top = surface - surface_row(a)
+        if top < 0:  # grass rising higher than the middles': let it go, keep the surface row
+            a, top = a[-top:], 0
+        p = pad(a, top, max(height, top + a.shape[0]))
+        if p.shape[0] > height:
+            p = join_bands(p, p, height, surface)
+        Image.fromarray(p, "RGBA").save(os.path.join(out_dir, n + ".png"))
+    print("%s: terrace ends %d texels tall, surface at row %d" % (name, height, surface))

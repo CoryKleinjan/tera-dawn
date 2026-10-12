@@ -22,22 +22,26 @@ static func texel(biome: BiomeDef) -> float:
 	return TDStage.TEXEL / TDStage.art_density(biome.platform_middle)
 
 ## The skin of a platform `width` game pixels wide (its overhang included), cached per
-## biome and width.
-static func texture(biome: BiomeDef, width: float) -> ImageTexture:
+## biome and width. A raised terrace (`square`) gets the biome's square terrace ends when it
+## has them.
+static func texture(biome: BiomeDef, width: float, square := false) -> ImageTexture:
 	var cols := maxi(1, roundi((width + 2.0 * OVERHANG) / texel(biome)))
-	var key := "%s:%d" % [biome.resource_path if biome.resource_path else str(biome.get_instance_id()), cols]
+	square = square and biome.terrace_left != null and biome.terrace_right != null
+	var key := "%s:%d:%s" % [biome.resource_path if biome.resource_path else str(biome.get_instance_id()), cols, square]
 	if not _cache.has(key):
-		var img := compose(pieces(biome), cols)
+		var img := compose(pieces(biome, square), cols)
 		img.generate_mipmaps()
 		var tex := ImageTexture.create_from_image(img)
 		tex.set_meta(&"art_density", TDStage.art_density(biome.platform_middle))
 		_cache[key] = tex
 	return _cache[key]
 
-## [left cap, middles..., right cap] as images.
-static func pieces(biome: BiomeDef) -> Array[Image]:
+## [left cap, middles..., right cap] as images (the square terrace ends as caps when `square`).
+static func pieces(biome: BiomeDef, square := false) -> Array[Image]:
 	var out: Array[Image] = []
-	for t: Texture2D in [biome.platform_left, biome.platform_middle, biome.platform_middle_alt, biome.platform_right]:
+	var left := biome.terrace_left if square else biome.platform_left
+	var right := biome.terrace_right if square else biome.platform_right
+	for t: Texture2D in [left, biome.platform_middle, biome.platform_middle_alt, right]:
 		if t:
 			var img := t.get_image()
 			if img.is_compressed():

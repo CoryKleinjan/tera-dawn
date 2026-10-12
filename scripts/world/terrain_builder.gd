@@ -19,7 +19,7 @@ func build(map: MapDef, platforms: Array[Platform]) -> void:
 		if map.platforms[i - 1].look:
 			_platform_look(platforms[i], map.platforms[i - 1])
 		else:
-			_platform_front(platforms[i], biome)
+			_platform_front(platforms[i], biome, map.platforms[i - 1].solid)
 		if map.platforms[i - 1].solid:
 			_solid_wall(map, i, biome)
 	_edge_grass(map, platforms, biome)
@@ -87,8 +87,9 @@ static func floor_edge(biome: BiomeDef) -> ImageTexture:
 	return _edges[key]
 
 ## A flat strip facing the camera at depth z covering `rect` (game pixels), with `texture`
-## repeating every `tile` game pixels across and down.
-func _strip(name_: String, texture: Texture2D, rect: Rect2, tile: Vector2, z: float) -> MeshInstance3D:
+## repeating every `tile` game pixels across and down: lined up with the world's x (so
+## neighbouring strips run on), or starting at the strip's own left edge when not `world_x`.
+func _strip(name_: String, texture: Texture2D, rect: Rect2, tile: Vector2, z: float, world_x := true) -> MeshInstance3D:
 	var q := QuadMesh.new()
 	q.size = rect.size / TDStage.PX
 	var m := StandardMaterial3D.new()
@@ -96,7 +97,7 @@ func _strip(name_: String, texture: Texture2D, rect: Rect2, tile: Vector2, z: fl
 	m.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
 	m.texture_repeat = true
 	m.uv1_scale = Vector3(rect.size.x / tile.x, rect.size.y / tile.y, 1.0)
-	m.uv1_offset = Vector3(rect.position.x / tile.x, 0.0, 0.0)
+	m.uv1_offset = Vector3(rect.position.x / tile.x if world_x else 0.0, 0.0, 0.0)
 	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_SCISSOR
 	m.alpha_scissor_threshold = 0.5
 	m.alpha_antialiasing_mode = BaseMaterial3D.ALPHA_ANTIALIASING_ALPHA_TO_COVERAGE
@@ -112,10 +113,10 @@ func _strip(name_: String, texture: Texture2D, rect: Rect2, tile: Vector2, z: fl
 
 ## A floating platform's painted front: one picture built from the biome's platform pieces
 ## for this platform's width (PlatformSkin), hung so its walking surface is the top edge.
-func _platform_front(pl: Platform, biome: BiomeDef) -> void:
+func _platform_front(pl: Platform, biome: BiomeDef, square := false) -> void:
 	if biome.platform_middle == null:
 		return
-	var tex := PlatformSkin.texture(biome, pl.w)
+	var tex := PlatformSkin.texture(biome, pl.w, square)
 	var s := TDStage.sprite(tex)
 	s.offset = Vector2(0, -tex.get_height() / 2.0)  # origin at the top centre
 	var top := PlatformSkin.span(biome, pl.y).x
@@ -123,7 +124,8 @@ func _platform_front(pl: Platform, biome: BiomeDef) -> void:
 	root.add_child(s)
 
 ## A solid platform's wall: the floor's rock texture from just under its painted top edge
-## down behind the top edge of the land it stands on, across its walkable width.
+## down behind the top edge of the land it stands on, across its walkable width, with the
+## biome's corner-stone columns (if it has them) down both ends.
 func _solid_wall(map: MapDef, platform: int, biome: BiomeDef) -> void:
 	if biome.ground_side == null:
 		return
@@ -132,6 +134,16 @@ func _solid_wall(map: MapDef, platform: int, biome: BiomeDef) -> void:
 	var bottom := map.surface_y(map.land_under(platform)) + FLOOR_FILL_TOP
 	var rect := Rect2(d.x, top, d.width, bottom - top)
 	root.add_child(_strip("SolidWall", biome.ground_side, rect, TDStage.art_size(biome.ground_side), TDStage.LAND_FRONT - 0.01))
+	# corner stones down each end, flush with the square ends of the top edge
+	var x0 := d.x - PlatformSkin.OVERHANG
+	var x1 := d.x + d.width + PlatformSkin.OVERHANG
+	for corner: Texture2D in [biome.terrace_corner_left, biome.terrace_corner_right]:
+		if corner == null:
+			continue
+		var tile := TDStage.art_size(corner)
+		var x := x0 if corner == biome.terrace_corner_left else x1 - tile.x
+		var r := Rect2(x, top, tile.x, rect.size.y)
+		root.add_child(_strip("TerraceCorner", corner, r, tile, TDStage.LAND_FRONT - 0.005, false))
 
 ## The game-y span a platform's painted skin covers: x is the top of its grass, y the bottom.
 static func skin_span(d: PlatformDef, biome: BiomeDef) -> Vector2:

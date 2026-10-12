@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=42 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=49 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/harbor.tres" id="2_harbor"]
@@ -11,6 +11,13 @@
 [ext_resource type="Resource" path="res://data/climb_styles/rope.tres" id="9_rope"]
 [ext_resource type="Resource" path="res://data/buildings/dawnharbor_large.tres" id="10_dawnharbor_large"]
 [ext_resource type="Resource" path="res://data/buildings/dawnharbor_small.tres" id="11_dawnharbor_small"]
+[ext_resource type="Resource" path="res://data/buildings/dawnharbor_tavern.tres" id="17_dawnharbor_tavern"]
+[ext_resource type="Resource" path="res://data/buildings/dawnharbor_lighthouse.tres" id="18_dawnharbor_lighthouse"]
+[ext_resource type="Resource" path="res://data/buildings/dawnharbor_sail_loft.tres" id="19_dawnharbor_sail_loft"]
+[ext_resource type="Resource" path="res://data/buildings/dawnharbor_row_house.tres" id="20_dawnharbor_row_house"]
+[ext_resource type="Resource" path="res://data/buildings/dawnharbor_harbormaster.tres" id="21_dawnharbor_harbormaster"]
+[ext_resource type="Resource" path="res://data/buildings/dawnharbor_shipwright.tres" id="22_dawnharbor_shipwright"]
+[ext_resource type="Resource" path="res://data/buildings/dawnharbor_chapel.tres" id="23_dawnharbor_chapel"]
 [ext_resource type="Resource" path="res://data/npcs/dock_marlo.tres" id="12_dock_marlo"]
 [ext_resource type="Resource" path="res://data/npcs/harbor_outfitter.tres" id="13_harbor_outfitter"]
 [ext_resource type="Resource" path="res://data/npcs/storage_keeper.tres" id="14_storage_keeper"]
@@ -82,12 +89,12 @@ face = -1
 
 [sub_resource type="Resource" id="Building_0"]
 script = ExtResource("7_building_placement")
-building = ExtResource("10_dawnharbor_large")
+building = ExtResource("17_dawnharbor_tavern")
 x = 720.0
 platform = 0
-flip = true
+flip = false
 scale = 1.0
-tint = Color(0.92, 0.9, 0.94, 1.0)
+tint = Color(1.0, 1.0, 1.0, 1.0)
 
 [sub_resource type="Resource" id="Npc_shop"]
 script = ExtResource("6_npc_placement")
@@ -139,28 +146,28 @@ door = true
 
 [sub_resource type="Resource" id="Portal_mid"]
 script = ExtResource("5_portal_def")
-x = 4420.0
+x = 4375.0
 platform = 0
 target_map = &"free_market"
 target_x = 120.0
 
 [sub_resource type="Resource" id="Building_7"]
 script = ExtResource("7_building_placement")
-building = ExtResource("10_dawnharbor_large")
-x = 4750.0
+building = ExtResource("19_dawnharbor_sail_loft")
+x = 4705.0
 platform = 0
-flip = true
+flip = false
 scale = 1.0
-tint = Color(1.0, 0.95, 0.9, 1.0)
+tint = Color(1.0, 1.0, 1.0, 1.0)
 
 [sub_resource type="Resource" id="Building_4"]
 script = ExtResource("7_building_placement")
-building = ExtResource("11_dawnharbor_small")
-x = 5150.0
+building = ExtResource("20_dawnharbor_row_house")
+x = 5160.0
 platform = 0
 flip = false
-scale = 0.98
-tint = Color(1.0, 0.92, 0.88, 1.0)
+scale = 1.0
+tint = Color(1.0, 1.0, 1.0, 1.0)
 
 [sub_resource type="Resource" id="Portal_east"]
 script = ExtResource("5_portal_def")
@@ -171,12 +178,12 @@ target_x = 120.0
 
 [sub_resource type="Resource" id="Building_5"]
 script = ExtResource("7_building_placement")
-building = ExtResource("11_dawnharbor_small")
+building = ExtResource("21_dawnharbor_harbormaster")
 x = 2330.0
 platform = 1
 flip = false
-scale = 1.05
-tint = Color(0.95, 0.97, 1.0, 1.0)
+scale = 1.0
+tint = Color(1.0, 1.0, 1.0, 1.0)
 
 [sub_resource type="Resource" id="Npc_extra_0"]
 script = ExtResource("6_npc_placement")
@@ -187,30 +194,30 @@ face = -1
 
 [sub_resource type="Resource" id="Building_6"]
 script = ExtResource("7_building_placement")
-building = ExtResource("10_dawnharbor_large")
+building = ExtResource("22_dawnharbor_shipwright")
 x = 3990.0
 platform = 1
-flip = true
-scale = 1.05
-tint = Color(0.96, 0.92, 0.86, 1.0)
+flip = false
+scale = 1.0
+tint = Color(1.0, 1.0, 1.0, 1.0)
 
 [sub_resource type="Resource" id="Building_8"]
 script = ExtResource("7_building_placement")
-building = ExtResource("10_dawnharbor_large")
+building = ExtResource("18_dawnharbor_lighthouse")
 x = 3000.0
 platform = 2
 flip = false
 scale = 1.0
-tint = Color(1.0, 0.98, 0.94, 1.0)
+tint = Color(1.0, 1.0, 1.0, 1.0)
 
 [sub_resource type="Resource" id="Building_9"]
 script = ExtResource("7_building_placement")
-building = ExtResource("11_dawnharbor_small")
+building = ExtResource("23_dawnharbor_chapel")
 x = 3430.0
 platform = 2
-flip = true
-scale = 1.1
-tint = Color(0.94, 0.94, 1.0, 1.0)
+flip = false
+scale = 1.0
+tint = Color(1.0, 1.0, 1.0, 1.0)
 
 [resource]
 script = ExtResource("1_map_def")
