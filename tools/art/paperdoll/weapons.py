@@ -5,6 +5,8 @@ from collections import deque
 from .common import *  # noqa: F401,F403
 from .pieces import pose, save_fist, save_piece
 
+BOW_TIP = 0.08  # bow_parts: the share of a bow's height at each end that counts as its tip
+
 
 # ---------- weapons ----------
 
@@ -115,7 +117,10 @@ def grip_point(arr, kind, axis, dots):
     - a wand or staff: halfway along the shaft;
     - a gun: in the middle of the pistol grip (the part hanging below the barrel at the back);
     - a claw: in the middle of its cuff (CLAW_CUFF along it), so the cuff covers his fist;
-    - anything else (bows, knuckles): its dot, or a guess near its back end."""
+    - a bow: on its riser, halfway up (bow_parts), so it is held by the middle;
+    - anything else (knuckles): its dot, or a guess near its back end."""
+    if kind == "bow":
+        return bow_parts(arr)[0]
     xs, ys, a, b = _along(arr, axis)
     lo, hi = float(a.min()), float(a.max())
     span = hi - lo
@@ -179,22 +184,38 @@ def length(piece, kind):
 
 def stood_up(piece):
     """A bow as the rig holds it: upright, its belly (the bow itself) on the right and its
-    string on the left, like the bow template. The held_bows sheet draws its bows at a slant
-    with the string on the right, so they are turned upright and mirrored; one already
-    standing up is kept as it is."""
+    string on the left, like the bow template, so its belly faces where he shoots. A bow drawn
+    at a slant is turned upright, and one with its string on the right (its tips curving that
+    way, see bow_parts) is mirrored; one already standing up that way is kept as it is."""
     img = piece.img
     axis = drawn_axis(np.asarray(img))
     if abs(axis + 90) > UPRIGHT_SLACK:
         img = img.rotate(axis + 90, resample=Image.BICUBIC, expand=True)
         img = img.crop(img.getbbox())
-    xs = np.nonzero(np.asarray(img)[..., 3] > 0)[1]
-    if xs.mean() < (xs.min() + xs.max()) / 2:
+    riser, tips_x = bow_parts(np.asarray(img))
+    if tips_x > riser[0]:
         img = ImageOps.mirror(img)
     if img is piece.img:
         return piece
     out = copy.copy(piece)
     out.img = img
     return out
+
+
+def bow_parts(arr):
+    """An upright bow picture's riser, where his fist closes on it: (x, y) in the middle of its
+    height, on the widest run of pixels across that row (the bow itself, not its string); and
+    the mean x of its two tips, which curve toward the string's side."""
+    solid = arr[..., 3] > 127
+    rows = np.nonzero(solid.any(1))[0]
+    top, bottom = int(rows.min()), int(rows.max())
+    mid, end = (top + bottom) // 2, max(1, round((bottom - top) * BOW_TIP))
+    band = np.concatenate([[False], solid[max(0, mid - 3):mid + 4].any(0), [False]])
+    edges = np.flatnonzero(np.diff(band.astype(int)))
+    runs = list(zip(edges[::2], edges[1::2]))
+    start, stop = max(runs, key=lambda r: r[1] - r[0])
+    tips = [np.nonzero(solid[top:top + end])[1].mean(), np.nonzero(solid[bottom - end + 1:bottom + 1])[1].mean()]
+    return ((start + stop - 1) / 2, float(mid)), float(np.mean(tips))
 
 
 def drawn_axis(arr):
