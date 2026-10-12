@@ -236,4 +236,4 @@ region = &"emberreach"
 world_pos = Vector2(800.0, 335.0)
 return_map = &"emberforge"
 level_text = "Lv. 23-31"
-music = &"boss"
+music = &"boss_emberreach"

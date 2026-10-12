@@ -11,8 +11,10 @@ a map look (`MapDef.variant`) for it, and update the entry when the zone changes
   instruments listed under "Keep".
 - **Sub-zones vary, they don't break.** A sub-zone changes only what its row says (time of day,
   light, fog, colour grade, setting). It keeps the zone's palette family, brushwork and materials.
-- **Music**: each zone has one town track and one field track; the field track must suit every
-  field in the zone. Boss maps play `boss`, dungeon maps play `dungeon` (shared world-wide).
+- **Music**: each zone has one town track and one field track in the town's tone; the field
+  track plays in every field of the zone, dark caves and woods included. Each zone's boss map
+  has its own `boss_<zone>` track: the town's tone, but more upbeat and dangerous. Bosses that
+  live in a training map (Dawnrise) play the field track.
 - **New content**: a new sub-zone, building or track starts from its zone's "Keep" lines plus its
   own row. A new zone gets an entry here before any art or music is made for it.
 - Text marked *(inferred)* is not settled yet; confirm it with Cory before building on it.
@@ -143,7 +145,7 @@ windows; calm and scholarly, lit by crystals and glowing plants *(inferred beyon
 | Glimmer Path | Border to Greenbough | 9-10 | Brightest Lumewood map: strong light, pale lilac horizon, rich colour | Glowcap, Lume Wisp |
 | Starfall Ridge | Border to Emberreach | 9-10 | Night ridge under a starry navy sky, starlight motes | Glowcap, Lume Wisp |
 | Glowcap Hollow | Training | 10-15 | Blue-teal mushroom glow, cyan motes | Lume Wisp, Star Bat |
-| Crystal Caves | Training (dungeon music) | 15-17 | Deep indigo cave lit by violet crystals | Star Bat, Prism Slime |
+| Crystal Caves | Training | 15-17 | Deep indigo cave lit by violet crystals | Star Bat, Prism Slime |
 | Prism Lake | Training | 17-20 | Pink-violet sky over a lake, most saturated map in the zone | Prism Slime, Crystal Golem |
 | Glass Dome Ruins | Training | 20-27 | Ruined glass domes under a cool blue-violet sky, pale blue motes | Crystal Golem, Spell Imp, Starfall Golem |
 | Arcane Spire | Boss | 22-30 | Purple magic fog, magenta motes, heavy violet grade | Spell Imp, Starfall Golem; boss Arcane Sentinel |
@@ -170,7 +172,7 @@ and iron-bound doors; smoke and forge glow *(inferred beyond the buildings)*.
 | Cinder Pass | Border to Lumewood | 7-8 | Dusty mountain pass, brown-orange haze, muted colour | Cinder Imp, Ember Boar |
 | Ashen Wastes | Border to Lanternfall | 8-9 | Grey ash plain, washed-out colour, white ash drifting | Ember Boar, Ashshell |
 | Slag Fields | Training | 11-13 | Brightest Emberreach map, open slag heaps, warm orange horizon | Slag Slime, Cinder Pup |
-| Smoke Pits | Training (dungeon music) | 13-17 | Smoky grey-brown pits, dim and choking | Cinder Pup, Ash Bat, Fire Imp Archer |
+| Smoke Pits | Training | 13-17 | Smoky grey-brown pits, dim and choking | Cinder Pup, Ash Bat, Fire Imp Archer |
 | Magma Falls | Training | 17-20 | Red-orange glow of falling lava, bright ember motes | Fire Imp Archer, Magma Shell |
 | Ironworks Depths | Training | 20-29 | Dark old ironworks, near-black sky with a low forge-red glow, muted colour | Magma Shell, Forge Golem, Cinder Hog |
 | Molten Throne | Boss | 23-31 | Near-black red sky, deep red lift; hottest, darkest map | Forge Golem, Ash Wraith; boss Molten King |
@@ -196,7 +198,7 @@ celesta, sneaky tiptoe melody. Field: low strings, clarinet, harp, soft timpani,
 | Dusk Bridge | Border to Emberreach | 9-10 | Long bridge in an orange sunset, warm strong light | Shade Imp, Lantern Wisp |
 | Shadow Marsh | Border to Driftcove | 9-10 | Murky green marsh fog, green will-o'-wisp motes | Shade Imp, Lantern Wisp |
 | Lantern Alley | Training | 10-15 | Back alleys in warm lantern light, closest to the town look | Lantern Wisp, Dusk Moth |
-| Gloom Woods | Training (dungeon music) | 15-17 | Dark teal woods, dim and muted | Dusk Moth, Night Boar |
+| Gloom Woods | Training | 15-17 | Dark teal woods, dim and muted | Dusk Moth, Night Boar |
 | Wraith Moor | Training | 17-19 | Cold blue-grey moor fog, pale blue motes, low colour | Night Boar, Gloomcap |
 | Sunken Graveyard | Training | 19-24 | Sunken graves under a dark slate sky, grey-blue fog, pale green motes | Gloomcap, Crypt Shell, Marsh Horror |
 | Forgotten Crypt | Boss | 24-30 | Near-black purple crypt, darkest map in the game | Marsh Horror, Dusk Stalker; boss Lantern Wraith |
