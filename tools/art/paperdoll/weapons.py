@@ -258,6 +258,9 @@ def holds(hands, spec, names, forearms=None):
             base = resolve(h["like"]) if "like" in h else out["sword"]
             frames = {}
             for n in names:
+                if n in h.get("hidden", ()):  # out of his hands there, whatever it copies
+                    frames[n] = None
+                    continue
                 v = h.get("frames", {}).get(n, h.get("angle"))
                 if isinstance(v, list):  # [x, y, angle]: in his fist there, even where the sword has none
                     frames[n] = [round(float(c), 1) for c in v]
