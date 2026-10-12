@@ -6,6 +6,8 @@ from .common import *  # noqa: F401,F403
 from .pieces import pose, save_fist, save_piece
 
 BOW_TIP = 0.08  # bow_parts: the share of a bow's height at each end that counts as its tip
+ARM_BAND = 0.25  # forearm_mask: half the width of his forearm (head radii)
+ARM_REACH = 0.75  # forearm_mask: how far back from the grip his forearm is drawn over a bow (head radii; a bow's string sits closer)
 
 
 # ---------- weapons ----------
@@ -371,9 +373,24 @@ def weapon_poses(img, axis, kind, names, info, hold, hands, far_frames=(), palm_
     return out
 
 
+def forearm_mask(px, grip, angle, r):
+    """His forearm on a body frame: the part of the fist's flood (fist_mask, out to ARM_REACH head
+    radii) in a band ARM_BAND head radii wide running back from `grip` against `angle` (the way
+    the forearm points, degrees clockwise from pointing right, elbow to fist), so the flood
+    stops at his arm and doesn't spread into his body."""
+    h, w = px.shape[:2]
+    yy, xx = np.mgrid[0:h, 0:w]
+    c, s = math.cos(math.radians(angle)), math.sin(math.radians(angle))
+    back = (grip[0] - xx) * c + (grip[1] - yy) * s
+    across = np.abs(-(grip[0] - xx) * s + (grip[1] - yy) * c)
+    band = (back >= -r * FIST) & (back <= r * ARM_REACH) & (across <= r * ARM_BAND)
+    return fist_mask(px, grip, r * ARM_REACH) & band
+
+
 def fist_masks(hero, held):
     """Writes fist_<kind>.png for every GRIPPED kind: his fingers around its grip, on the
-    frames where it is in his near hand."""
+    frames where it is in his near hand, and his forearm too on frames its "forearm" angle
+    names (a bow, whose string crosses it)."""
     names, frames, hands, r = hero.names, hero.frames, hero.hands, hero.r
     for kind in GRIPPED:
         far_frames = hero.hold_spec.get(kind, {}).get("behind", ())
@@ -385,7 +402,14 @@ def fist_masks(hero, held):
         for n, px in zip(names, frames):
             h = held[kind][n]
             far = hands[n].get("weapon_behind", False) or n in far_frames or n in palm_frames
-            masks.append(None if h is None or far else fist_mask(px, h[:2], reach))
+            if h is None or far:
+                masks.append(None)
+                continue
+            m = fist_mask(px, h[:2], reach)
+            arm = hero.hold_spec.get(kind, {}).get("forearm", {}).get(n)
+            if arm is not None:  # a bow's string crosses his forearm: the forearm draws over it too
+                m |= forearm_mask(px, h[:2], arm, r)
+            masks.append(m)
         save_fist(kind, masks, hero.fw, hero.fh)
 
 
