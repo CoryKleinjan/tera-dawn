@@ -132,7 +132,7 @@ STAFF_GRIP = 0.35     # how far up a staff (0 its foot, 1 its head) his fist hol
 
 # Weapons worn on the fist are drawn smaller than the template sheet has them, so they fit
 # his hand rather than swallowing it (the rest keep the sheet's size against the sword).
-WORN_SIZE = {"claw": 0.9, "knuckle": 0.75, "bow": 1.35, "staff": 1.3}
+WORN_SIZE = {"claw": 1.35, "knuckle": 0.75, "bow": 1.35, "staff": 1.3}
 # Long weapons whose sheets may draw them at a slant (a sword up and to the right): their own
 # axis is measured and turned out, so a rig angle means the same however the art was drawn.
 # The others are drawn the way the rig expects (a gun pointing right, a bow upright).
