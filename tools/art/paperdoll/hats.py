@@ -353,22 +353,25 @@ def save_hair_cut(hero, name, head=False):
         if head:  # (nor any through its eye holes: inside a helm's outline his hair never shows)
             strip[:, i * fw:(i + 1) * fw][~ss.dilate(~spanned(solid), HAIR_CUT_TUCK)] = 255
     save_strip(softened(strip), name, "haircut", "hair_cut")
+    bodies = [f[..., 3] > 127 for f in hero.frames]  # (his head and body, bald)
     for style in HAIRSTYLES:  # each hairstyle's own cut: none of it left hanging loose
         path = os.path.join(LAYERS, f"hair_{style}.png")
         if os.path.exists(path):
             hair = np.asarray(Image.open(path))[..., 3] > 0
-            cut = no_loose_hair(strip, solids, hair, fw, [fi["r"] for fi in hero.info])
+            cut = no_loose_hair(strip, solids, bodies, hair, fw, [fi["r"] for fi in hero.info])
             # (softened only where some of this hair shows beside it: none peeks out along a soft
             # edge with nothing beside it)
             hard = (cut[..., 3] > 0) & ~ss.dilate(hair & (cut[..., 3] == 0), HAIR_CUT_TUCK + 1)
             save_strip(softened(cut, hard), name, "haircut", "hair_cuts", style)
 
 
-def no_loose_hair(strip, solids, hair, fw, radii):
+def no_loose_hair(strip, solids, bodies, hair, fw, radii):
     """A hair cut strip that also hides the bits of one hairstyle's hair the cut leaves loose:
     every patch still showing whose cut edge is mostly out in the air rather than at the hat
     (within HAIR_CUT_TOUCH of it), such as a ponytail's end whose middle went under the hat or a
-    twin tail chopped off beside it, and any wisp smaller than HAIR_CUT_SPECK head radii squared
+    twin tail chopped off beside it; every patch the cut reached that touches only the hat, not
+    his head or body (within HAIR_CUT_BODY pixels), such as a twin tail hanging from a brim
+    (Cory 2026-10-12: hair that is disconnected and floating is trimmed); and any wisp smaller than HAIR_CUT_SPECK head radii squared
     off on its own (or HAIR_CUT_CRUMB anywhere). A patch the cut doesn't reach stays."""
     out = strip.copy()
     for i, solid in enumerate(solids):
@@ -384,9 +387,10 @@ def no_loose_hair(strip, solids, hair, fw, radii):
         held = np.bincount(lab[at_hat], minlength=n + 1)
         size = np.bincount(lab.ravel(), minlength=n + 1)
         near = np.bincount(lab[ss.dilate(solid, HAIR_CUT_TOUCH) & shows], minlength=n + 1)
+        on_him = np.bincount(lab[ss.dilate(bodies[i], HAIR_CUT_BODY) & shows], minlength=n + 1)
         # (and wisps off on their own, or crumbs anywhere)
         speck = ((size < HAIR_CUT_SPECK * radii[i] ** 2) & (near == 0)) | (size < HAIR_CUT_CRUMB * radii[i] ** 2)
-        loose_ids = np.nonzero(((chopped > 0) & (held < chopped * HAIR_CUT_HELD)) | speck)[0]
+        loose_ids = np.nonzero(((chopped > 0) & ((held < chopped * HAIR_CUT_HELD) | (on_him == 0))) | speck)[0]
         loose = np.isin(lab, loose_ids[loose_ids > 0])
         cut[ss.dilate(loose, 3) & ~(shows & ~loose)] = 255  # (wide enough that its soft edge still hides it all)
     return out

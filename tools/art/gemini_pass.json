@@ -14304,6 +14304,145 @@
     ],
     "text": "The first image is an empty magenta canvas. On it, paint ONE market signpost for the harbour town in my 2D side-scrolling game. It stands beside the entrance to the town's Free Market. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture. The third image is a building from the same town: match its style, palette, outline thickness and level of detail exactly. The signpost: a sturdy weathered wooden post, about one and a half times as tall as a person, set in a low flat wooden foot that is a plain rectangle in this front view. Near the top a wooden arm sticks out to the right, braced by a short diagonal strut. From the arm hangs a wide rectangular wooden signboard on two short iron chains; each chain is fixed to the arm at the top and to the board at the bottom, nothing loose or dangling. The board has a carved frame and is painted with a simple bold emblem: a plump tied coin purse with a few gold coins beside a small brass balance scale, on a warm red-and-cream striped background like a market awning. Strict rules: 1) A strictly flat 2D front elevation, like a technical drawing seen dead-on at eye level, perfectly upright. Every wooden part is a flat rectangle: the post shows only its front face, the arm shows only its front face with a square-cut end and no visible end grain or depth, the foot shows only its front face and no top. No 3/4, isometric or perspective angle anywhere. The board hangs flat facing the viewer. 2) The bottom of the foot is ONE flat straight horizontal edge. No ground, shadow or grass under it. 3) The signpost fills most of the canvas height with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, words or numbers anywhere. Flat pure magenta #FF00FF background everywhere outside the signpost."
    }
+  },
+  {
+   "id": "wg_steel_helm_noguard",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_steel_helm_noguard.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 worn-gear thread (Cory: the steel helm and the hood need redrawing with no shoulder pads; helmets never have anything that covers the shoulders). The steel helm's two cells (side, behind) of art/source/hats_items_5.png, repainted without the leather neck guard; the result is pasted back over those cells.",
+   "edit": {
+    "base": "art/source/hats_items_5.png",
+    "base_crop": [
+     1066,
+     374,
+     1774,
+     786
+    ],
+    "refs": [],
+    "text": "These are two labelled cells on magenta from my hat sheet: a bald head with shoulders wearing the STEEL HELM, from the side (left cell) and from behind (right cell). REMOVE the brown leather neck guard completely: the wide brown leather collar around the neck and over the shoulders, its crossed lacing at the front, and its stitched panels at the back. The steel helm now ends at its own bottom edge, at the jaw and the base of the skull, with a finished steel rim that has the same thin dark outline as the rest of the helm; nothing of it rests on the neck or the shoulders. Where the removed collar was, paint his neck, shoulders and the top of his white shirt exactly matching the rest of the head and body. Everything else stays EXACTLY as it is: the same blue-grey steel dome, raised ridge over the crown, visor with its narrow eye slit, cheek guards, brass rivet by the ear, the same face, chin and ears, in the same place and size, and the same labels and grid lines. The background stays bright pure magenta #FF00FF. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything."
+   }
+  },
+  {
+   "id": "wg_steel_helm_noguard_only",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_steel_helm_noguard_only.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    2
+   ],
+   "anchor": "wg_steel_helm_noguard",
+   "size": "2K",
+   "note": "2026-10-12 worn-gear thread (Cory: the steel helm and the hood need redrawing with no shoulder pads; helmets never have anything that covers the shoulders). wg_steel_helm_noguard with the heads erased, pasted back over the same cells of art/source/hats_items_5_only.png.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/wg_steel_helm_noguard.png",
+    "refs": [],
+    "text": "These are two labelled cells on magenta, each a bald head with shoulders wearing a steel helm. ERASE the bald heads, faces, ears, necks and shoulders from both cells and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the steel helm. It stays EXACTLY where it is, the same size, shape and colours, with its own outline and shading; where the head showed through its openings is now magenta. Keep every label and grid line exactly where it is."
+   }
+  },
+  {
+   "id": "wg_green_hood_nocape",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_green_hood_nocape.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 worn-gear thread (Cory: the steel helm and the hood need redrawing with no shoulder pads; helmets never have anything that covers the shoulders). The green hood's two cells (side, behind) of art/source/hats_items_1.png, repainted without the shoulder cape; the result is pasted back over those cells here and in art/source/hats_items_1_only.png (the hood has no head under it).",
+   "edit": {
+    "base": "art/source/hats_items_1.png",
+    "base_crop": [
+     1066,
+     0,
+     1774,
+     374
+    ],
+    "refs": [],
+    "text": "These are two labelled cells on magenta from my hat sheet: the GREEN HOOD from the side (left cell) and from behind (right cell). REMOVE the hood's shoulder cape completely: the cloth that flares out below the hood over the shoulders, the gold button and the pointed flap at the front (side view), and the wide cloth spreading over the shoulders at the bottom (behind view). The hood now ends neatly at the jaw and the back of the neck with a finished, rounded hem that has the same thin dark outline as the rest of the hood, like a simple close-fitting hood; nothing of it rests on the shoulders, and below that hem there is only magenta. Its bottom is narrow, about as wide as the face opening plus the hood's own thickness. Everything else stays EXACTLY as it is: the same green hood shape, the pointed tip at the back, its folds, colours and dark face opening, in the same place and size, and the same labels and grid lines. The background stays bright pure magenta #FF00FF. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything."
+   }
+  },
+  {
+   "id": "wg_steel_helm_icon_noguard",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_steel_helm_icon_noguard.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "1K",
+   "note": "2026-10-12 worn-gear thread (Cory: the steel helm and the hood need redrawing with no shoulder pads; helmets never have anything that covers the shoulders). The steel helm's inventory icon (art/source/items_warrior.png) without the leather neck guard, so it matches the worn helm; pasted back over that icon cell.",
+   "edit": {
+    "base": "art/source/items_warrior.png",
+    "base_crop": [
+     1024,
+     258,
+     1280,
+     515
+    ],
+    "refs": [],
+    "text": "This is the inventory icon of the STEEL HELM from my game, labelled, on magenta. REPAINT it with NO brown leather neck guard: remove the brown leather collar at the bottom and its crossed lacing completely. The helm now ends at its own bottom edge with a finished steel rim that has the same thin dark outline as the rest of the helm, and inside the helm below the visor there is only the helm's dark shadowed inside, no leather. Below the rim there is NOTHING but magenta. Everything else stays EXACTLY as it is: the same blue-grey steel dome, raised ridge, visor with its eye slit, cheek guards and brass rivet, the same angle, place and size, and the same label. The background stays bright pure magenta #FF00FF. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything."
+   }
+  },
+  {
+   "id": "wg_green_hood_icon_nocape",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_green_hood_icon_nocape.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "1K",
+   "note": "2026-10-12 worn-gear thread (Cory: the steel helm and the hood need redrawing with no shoulder pads; helmets never have anything that covers the shoulders). The green hood's inventory icon (art/source/items_archer.png) without the shoulder cape, so it matches the worn hood; pasted back over that icon cell.",
+   "edit": {
+    "base": "art/source/items_archer.png",
+    "base_crop": [
+     0,
+     258,
+     256,
+     515
+    ],
+    "refs": [],
+    "text": "This is the inventory icon of the GREEN HOOD from my game, labelled, on magenta. REPAINT it as a close-fitting hood with NO cape: remove the cloth that flares out below the hood, the pointed front flap and the gold button completely. The hood ends just below the bottom of its dark face opening with a short, finished, rounded hem with the same thin dark outline as the rest of the hood. Below that hem there is NOTHING but magenta: no cape, no flared cloth, no drape spreading out at the bottom. The hood's outline at the bottom is narrow, about as wide as the face opening plus the hood's own thickness. Everything else stays EXACTLY as it is: the same green hood, its pointed tip, folds, colours and dark face opening, the same angle, place and size, and the same label. The background stays bright pure magenta #FF00FF. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything."
+   }
   }
  ]
 }
