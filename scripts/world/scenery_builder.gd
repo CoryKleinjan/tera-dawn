@@ -290,11 +290,24 @@ func _portal(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
 	sparks.sorting_offset = PORTAL_SORT
 	root.add_child(sparks)
 
-## The lantern posts, where LanternPlacement put them (worked out in `build`).
+## The lantern posts, where LanternPlacement put them (worked out in `build`), and the
+## map's hand-placed ones on its raised levels.
 func _lanterns(map: MapDef, biome: BiomeDef, _rng: RandomNumberGenerator) -> void:
+	var spots: Array[Vector2] = []
 	for x in _lantern_xs:
+		spots.append(Vector2(x, map.ground_y))
+	var on_floor := spots.size()
+	if biome.lantern:
+		for at in map.level_lanterns:
+			spots.append(Vector2(at.x, map.platforms[at.y - 1].y))
+	for i in spots.size():
 		var post := TDStage.sprite(biome.lantern)
-		TDStage.stand_on_land(post, Vector2(x, map.ground_y + 3.0), -1.3)
+		if i < on_floor:
+			TDStage.stand_on_land(post, spots[i] + Vector2(0, 3.0), -1.3)
+		else:
+			# a raised level's lantern stands in front of the land, like the people on it, so
+			# the wall of the level above (straight behind it) doesn't hide it
+			post.position = TDStage.to3d(spots[i] + Vector2(0, 3.0), TDStage.LAND_FRONT + 0.01)
 		var pos := post.position
 		root.add_child(post)
 		var size := post.texture.get_size() * post.pixel_size
