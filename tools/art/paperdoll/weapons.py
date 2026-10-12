@@ -375,11 +375,14 @@ def fist_masks(hero, held):
     for kind in GRIPPED:
         far_frames = hero.hold_spec.get(kind, {}).get("behind", ())
         palm_frames = hero.hold_spec.get(kind, {}).get("palm", ())
+        # a kind gripped at the middle of his fist can keep its mask to the fist alone ("fist", in
+        # head radii), so it doesn't spill onto his chest and cut the weapon out where his shirt is
+        reach = r * hero.hold_spec.get(kind, {}).get("fist", FIST)
         masks = []
         for n, px in zip(names, frames):
             h = held[kind][n]
             far = hands[n].get("weapon_behind", False) or n in far_frames or n in palm_frames
-            masks.append(None if h is None or far else fist_mask(px, h[:2], r * FIST))
+            masks.append(None if h is None or far else fist_mask(px, h[:2], reach))
         save_fist(kind, masks, hero.fw, hero.fh)
 
 
