@@ -24,6 +24,12 @@ func build(map: MapDef, platforms: Array[Platform]) -> void:
 			_solid_wall(map, i, biome)
 	_edge_grass(map, platforms, biome)
 
+## Adds a piece of land to the map. Land casts no shadows: platforms and the floor would
+## otherwise throw the sun's shadow onto the scenery standing behind them.
+func _add(node: GeometryInstance3D) -> void:
+	node.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	root.add_child(node)
+
 # ---------- the floor ----------
 
 ## How far past each side of the map the floor runs, in game pixels, so no edge shows when
@@ -49,13 +55,13 @@ func _build_floor(map: MapDef, ground: Platform, biome: BiomeDef) -> void:
 		var t := PlatformSkin.texel(biome)
 		var top := PlatformSkin.span(biome, ground.y).x
 		var tile := Vector2(tex.get_width(), tex.get_height()) * t
-		root.add_child(_strip("FloorEdge", tex, Rect2(x0, top, x1 - x0, tile.y), tile, TDStage.LAND_FRONT))
+		_add(_strip("FloorEdge", tex, Rect2(x0, top, x1 - x0, tile.y), tile, TDStage.LAND_FRONT))
 		fill_top = ground.y + FLOOR_FILL_TOP
 	var bottom := float(map.height) + FLOOR_MARGIN
 	var rock_bottom := minf(fill_top + FLOOR_ROCK, bottom)
 	var z := TDStage.LAND_FRONT - 0.01
-	root.add_child(_strip("FloorRock", biome.ground_side, Rect2(x0, fill_top, x1 - x0, rock_bottom - fill_top), TDStage.art_size(biome.ground_side), z))
-	root.add_child(_strip("FloorSoil", biome.ground_soil, Rect2(x0, rock_bottom, x1 - x0, bottom - rock_bottom), TDStage.art_size(biome.ground_soil), z))
+	_add(_strip("FloorRock", biome.ground_side, Rect2(x0, fill_top, x1 - x0, rock_bottom - fill_top), TDStage.art_size(biome.ground_side), z))
+	_add(_strip("FloorSoil", biome.ground_soil, Rect2(x0, rock_bottom, x1 - x0, bottom - rock_bottom), TDStage.art_size(biome.ground_soil), z))
 
 ## The floor's top edge: FLOOR_EDGE_PIECES of the biome's platform middles joined like a
 ## platform's skin, cut so it repeats seamlessly. The first middle stands in for both caps,
@@ -121,7 +127,7 @@ func _platform_front(pl: Platform, biome: BiomeDef, square := false) -> void:
 	s.offset = Vector2(0, -tex.get_height() / 2.0)  # origin at the top centre
 	var top := PlatformSkin.span(biome, pl.y).x
 	s.position = TDStage.to3d(Vector2(pl.x + pl.w / 2.0, top), TDStage.LAND_FRONT)
-	root.add_child(s)
+	_add(s)
 
 ## A solid platform's wall: the floor's rock texture from just under its painted top edge
 ## down behind the top edge of the land it stands on, across its walkable width, with the
@@ -133,7 +139,7 @@ func _solid_wall(map: MapDef, platform: int, biome: BiomeDef) -> void:
 	var top := d.y + FLOOR_FILL_TOP
 	var bottom := map.surface_y(map.land_under(platform)) + FLOOR_FILL_TOP
 	var rect := Rect2(d.x, top, d.width, bottom - top)
-	root.add_child(_strip("SolidWall", biome.ground_side, rect, TDStage.art_size(biome.ground_side), TDStage.LAND_FRONT - 0.01))
+	_add(_strip("SolidWall", biome.ground_side, rect, TDStage.art_size(biome.ground_side), TDStage.LAND_FRONT - 0.01))
 	# corner stones down each end, flush with the square ends of the top edge
 	var x0 := d.x - PlatformSkin.OVERHANG
 	var x1 := d.x + d.width + PlatformSkin.OVERHANG
@@ -143,7 +149,7 @@ func _solid_wall(map: MapDef, platform: int, biome: BiomeDef) -> void:
 		var tile := TDStage.art_size(corner)
 		var x := x0 if corner == biome.terrace_corner_left else x1 - tile.x
 		var r := Rect2(x, top, tile.x, rect.size.y)
-		root.add_child(_strip("TerraceCorner", corner, r, tile, TDStage.LAND_FRONT - 0.005, false))
+		_add(_strip("TerraceCorner", corner, r, tile, TDStage.LAND_FRONT - 0.005, false))
 
 ## The game-y span a platform's painted skin covers: x is the top of its grass, y the bottom.
 static func skin_span(d: PlatformDef, biome: BiomeDef) -> Vector2:
@@ -160,7 +166,7 @@ func _platform_look(pl: Platform, d: PlatformDef) -> void:
 	var s := TDStage.sprite(d.look, texel * TDStage.art_density(d.look))
 	s.offset = Vector2(0, -d.look.get_height() / 2.0)  # origin at the top centre
 	s.position = TDStage.to3d(Vector2(pl.x + pl.w / 2.0, pl.y - d.look_grass()), TDStage.LAND_FRONT)
-	root.add_child(s)
+	_add(s)
 
 # ---------- grass along the edges ----------
 
@@ -191,6 +197,5 @@ func _grass(biome: BiomeDef, rng: RandomNumberGenerator, at: Vector2, z: float) 
 	var s := TDStage.sprite(tex, TDStage.TEXEL * rng.randf_range(0.8, 1.0))
 	s.position = TDStage.to3d(at + Vector2(0, 4), z)
 	s.flip_h = rng.randf() < 0.5
-	s.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-	root.add_child(s)
+	_add(s)
 	return s
