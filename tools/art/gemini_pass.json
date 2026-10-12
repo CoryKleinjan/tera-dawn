@@ -13293,6 +13293,59 @@
     ],
     "text": "The first image is the inventory icon of the SKYREACH HOOD from my game, labelled, on magenta. The second image shows the same hood as worn, repainted without its shoulder cape. REMOVE the icon's shoulder cape the same way: the wide flared collar at the bottom, its gold braided trim and the gold rope tie. The hood now ends neatly at the bottom of its face opening with a finished, rounded hem that has the same thin dark outline as the rest of the hood. Everything else stays EXACTLY as it is: the same hood shape, colours, gold trim, gold braided crest, small white wings and dark face opening, in the same place and size, and the same label. The background stays bright pure magenta #FF00FF. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything."
    }
+  },
+  {
+   "id": "wg_steel_helm_fit",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_steel_helm_fit.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 worn-gear thread (Cory: the steel helm looks bad in the new head-hugging fit; remake it). The steel helm's two cells (side, behind) of art/source/hats_items_5.png, repainted to sit snugly on the sheet's bald head with a short neck guard; the result is pasted back over those cells.",
+   "edit": {
+    "base": "art/source/hats_items_5.png",
+    "base_crop": [
+     1066,
+     374,
+     1774,
+     786
+    ],
+    "refs": [
+     "/mnt/project-files/art-sheets/icon-refs/hats5_bald_side.png",
+     "/mnt/project-files/art-sheets/icon-refs/steel_helm.png"
+    ],
+    "text": "The first image is two labelled cells on magenta from my hat sheet: the STEEL HELM from the side (left cell) and from behind (right cell). The second image is the bald head with shoulders that every hat on this sheet is worn on. The third image is the steel helm's inventory icon. REPAINT both cells so the steel helm is WORN ON THAT BALD HEAD, drawn the same size and in the same place as the bald head in the second image: the head, its ears and its shoulders are painted in both cells exactly like the second image (the back of the head and shoulders in the behind cell). The helm fits the head snugly like a real helmet, its dome hugging the top of the skull with only a thin rim of metal around it, never bigger than the head needs. In the side view the visor's narrow eye slit sits level with where his eyes are, the cheek guards come down to his jaw, and his face below the slit and his chin show. Its brown leather neck guard is SHORT and close around the neck, ending at the base of the neck: it does NOT spread out over the shoulders. Keep the helm's look from the icon: the same blue-grey steel, the raised ridge over the crown, the visor shape, the small brass rivet by the ear, the brown leather with its crossed lacing at the front. Keep both labels and the grid line exactly where they are. The background stays bright pure magenta #FF00FF. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything."
+   }
+  },
+  {
+   "id": "wg_steel_helm_fit_only",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_steel_helm_fit_only.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    2
+   ],
+   "anchor": "wg_steel_helm_fit",
+   "size": "2K",
+   "note": "2026-10-12 worn-gear thread (Cory: the steel helm looks bad in the new head-hugging fit; remake it). wg_steel_helm_fit with the heads erased, pasted back over the same cells of art/source/hats_items_5_only.png.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/wg_steel_helm_fit.png",
+    "refs": [],
+    "text": "These are two labelled cells on magenta, each a bald head with shoulders wearing a painted steel helmet with a leather neck guard. ERASE the bald heads, faces, ears, necks and shoulders from both cells and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the helmets and their neck guards. Each helmet stays EXACTLY where it is, the same size, shape and colours, with its own outline and shading; where the face showed through the helmet's openings is now magenta. Keep every label and grid line exactly where it is."
+   }
   }
  ]
 }
