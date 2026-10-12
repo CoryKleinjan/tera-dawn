@@ -197,9 +197,10 @@ def item_hat_layers(hero):
 
 def eyes_out(hero, name, views):
     """A closed helm's views moved so his eyes show through its eye holes: the shift (at most
-    HELM_NUDGE head radii) that leaves the fewest of his eye pixels (the face layer's irises)
-    under the helm, the median over the frames that show his face, applied to both views. The
-    sheets' eye holes aren't all where HELM_EYES expects, so it is measured on the saved piece."""
+    HELM_NUDGE head radii) that leaves the most of his eye pixels (the face layer's irises)
+    in its holes (not under it, nor out past its outline, which would leave his face poking out),
+    the median over the frames that show his face, applied to both views. The sheets' eye holes aren't all where
+    HELM_EYES expects, so it is measured on the saved piece."""
     eyes = np.asarray(Image.open(os.path.join(LAYERS, f"face_{FACES[0]}_eyes.png")))[..., 3] > SOLID_EYES
     p = load_piece(name)
     reach = int(HELM_NUDGE * float(np.median([fi["r"] for fi in hero.info])))
@@ -212,9 +213,10 @@ def eyes_out(hero, name, views):
         draw_piece(canvas, p, i, False)
         draw_piece(canvas, p, i, True)
         helm = np.asarray(canvas)[..., 3] > HAIR_CUT_ALPHA
+        hole = spanned(helm) & ~helm  # (its eye holes: inside its outline, not under it)
         ey, ex = np.nonzero(e)
         best = min(((dx, dy) for dx in range(-reach, reach + 1) for dy in range(-reach, reach + 1)),
-                   key=lambda d: (int(helm[np.clip(ey - d[1], 0, hero.fh - 1), np.clip(ex - d[0], 0, hero.fw - 1)].sum()),
+                   key=lambda d: (int((~hole[np.clip(ey - d[1], 0, hero.fh - 1), np.clip(ex - d[0], 0, hero.fw - 1)]).sum()),
                                   abs(d[0]) + abs(d[1])))
         shifts.append(best)
     if not shifts:
@@ -300,7 +302,8 @@ def save_hair_cut(hero, name, head=False):
     it is the deepest edge of the hat within HAIR_CUT_REACH, so a crest sticking out over his
     hair still hides it. Hair hanging below HAIR_CUT_LOW head radii under the head's middle
     always shows (long hair down his back past a bandana's tails). Under a helm (`head`) the
-    hair below its edge shows in full too (Cory 2026-10-12: trimming it looked goofy). The
+    hair below its edge shows in full too (Cory 2026-10-12: trimming it looked goofy), and the
+    cut runs across the whole frame, so no hair sticks out of its top or sides (Cory 2026-10-12). The
     piece's JSON names the strip ("hair_cut")."""
     p = load_piece(name)
     fw, fh = hero.fw, hero.fh
@@ -313,26 +316,33 @@ def save_hair_cut(hero, name, head=False):
         cols = np.nonzero(solid.any(0))[0]
         if not len(cols):
             continue
-        edge = np.full(fw, -1)
+        edge, bottom = np.full(fw, -1), np.full(fw, -1)
         for x in cols:
             ys = np.nonzero(solid[:, x])[0]
             ends = np.append(ys[np.nonzero(np.diff(ys) > 1)[0]], ys[-1])
             high = (ends < fi["head"][1] - HAIR_CUT_CREST * fi["r"]) & head  # (a helm's crest over a gap)
             edge[x] = ends[np.argmin(high)] if not high.all() else ends[-1]
+            bottom[x] = ends[-1]
         side, reach = int(round(HAIR_CUT_SIDE * fi["r"])), int(round(HAIR_CUT_REACH * fi["r"]))
         hx = fi["head"][0]
-        for x in range(max(cols.min() - side, 0), min(cols.max() + side + 1, fw)):
+        span = range(fw) if head else range(max(cols.min() - side, 0), min(cols.max() + side + 1, fw))
+        for x in span:  # (beside a helm, any hair above its lower edge too: none sticks out its sides)
             if abs(x - hx) <= fi["r"] * HAIR_CUT_HEAD and edge[x] >= 0:
                 e = edge[x]
             else:  # off his head (or a gap): the deepest edge of the hat columns nearby, so a crest
                 # or brim sticking out past his head doesn't let the hair under it show
+                # (beside a helm, the bottom of its cheek and neck guards: none sticks out its sides)
+                low = bottom if head else edge
                 near = cols[np.abs(cols - x) <= reach]
-                e = edge[near].max() if len(near) else edge[cols[np.argmin(np.abs(cols - x))]]
-            e = min(e, int(fi["head"][1] + HAIR_CUT_LOW * fi["r"]))  # (hair hanging lower always shows)
+                e = low[near].max() if len(near) else low[cols[np.argmin(np.abs(cols - x))]]
+            if not (head and (x < cols.min() or x > cols.max())):  # (beside a helm: down to its edge)
+                e = min(e, int(fi["head"][1] + HAIR_CUT_LOW * fi["r"]))  # (hair hanging lower always shows)
             e -= HAIR_CUT_TUCK  # (the hair runs on under the hat's soft lower edge: no seam between them)
             strip[:e + 1, i * fw + x] = 255
             if abs(x - hx) > HAIR_CUT_OUT * fi["r"]:  # (and no stubs of spiky hair stick out beside his face)
                 strip[:int(fi["head"][1] + HAIR_CUT_OUT_LOW * fi["r"]) + 1, i * fw + x] = 255
+        if head:  # (nor any through its eye holes: inside a helm's outline his hair never shows)
+            strip[:, i * fw:(i + 1) * fw][~ss.dilate(~spanned(solid), HAIR_CUT_TUCK)] = 255
     save_strip(strip, name, "haircut", "hair_cut")
 
 
