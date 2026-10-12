@@ -65,8 +65,8 @@ extends Resource
 @export var ground_decor: Array[DecorDef] = []
 ## Scattered along every floating platform, just behind its skin (keep `depth` near 0, like -0.6 to -0.2).
 @export var platform_decor: Array[DecorDef] = []
-## Scattered along the floor of town maps only, on top of ground_decor: the rows of houses
-## and stalls that make a town feel lived in.
+## Scattered along the floor of town maps only, on top of ground_decor: the props
+## that make a town feel lived in (never a building picture: houses are BuildingPlacements).
 @export var town_decor: Array[DecorDef] = []
 @export var lantern: Texture2D
 @export var portal_frames: Array[Texture2D] = []
