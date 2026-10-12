@@ -13287,6 +13287,131 @@
     ],
     "text": "The first image is a sheet of painted ground pieces for my 2D side-scrolling game: the top row is the cobbled stone top edge of a raised harbour terrace, cut into four pieces that join side by side. The second image shows my game's NPC characters, drawn in exactly the art style the pieces must keep. Change ONLY these parts: A) Cells 1 (END LEFT) and 4 (END RIGHT): redraw each end of the stone ledge as a SQUARED-OFF end instead of a rounded one. The coping slab stops in a straight vertical edge with a crisp square corner at the top and the bottom, finished with one larger dressed corner stone, and the stone wall below the slab stops in the same straight vertical line. Keep the slab's top surface line, its thickness, its colours, the grass tufts and the pink flowers on top, and keep the side that joins cell 2 or cell 3 exactly as it is now, so the pieces still join seamlessly. B) Cells 5 (CORNER LEFT) and 6 (CORNER RIGHT) are empty: in each, paint the corner of a stone retaining wall seen straight from the front, filling the whole height of the cell: a vertical column of large dressed corner stones (quoins) in alternating long and short blocks, the same pale grey-white stone with soft blue-grey mortar as the wall in cell 7. The column's outer edge is one straight vertical line with a dark outline (the LEFT edge in cell 5, the RIGHT edge in cell 6); its inner edge has no outline and its stones run on like the wall in cell 7, so it can sit over that wall. The column repeats seamlessly from top to bottom. Leave cells 2, 3 and 7 exactly as they are."
    }
+  },
+  {
+   "id": "dawnharbor_city_sail_loft",
+   "prompts": null,
+   "batch": "Dawnharbor city: sail loft (new building)",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_city_sail_loft.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 harbor-city thread (Cory 00:38Z): every Dawnharbor building gets its own art; follows the tavern and lighthouse test.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnharbor-city/building_sail_loft_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "art/source/building_dawnharbor_large.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for the harbour city in my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn and chipped spots, mortar lines, slight colour variation between stones and roof tiles). The third image is another building from the same town: match its style, palette, outline thickness and level of detail exactly, so the two clearly belong to the same street. The new building is a SAIL LOFT AND WAREHOUSE by the docks, wider than it is tall: a tall timber-framed barn with weathered brown plank walls on a grey stone base, a steep blue slate roof, a pair of big wooden loading doors in the middle of the ground floor with iron strap hinges, a small hayloft-style door high up under the gable with a wooden hoist beam and a hanging rope and pulley above it, and neatly rolled cream canvas sails resting on a beam under the eaves. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: its stone base reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, barrels, people or shadow. 3) The door is a real doorway at ground level, centred left to right in the building. 4) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 5) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "dawnharbor_city_row_house",
+   "prompts": null,
+   "batch": "Dawnharbor city: row house (new building)",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_city_row_house.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 harbor-city thread (Cory 00:38Z): every Dawnharbor building gets its own art; follows the tavern and lighthouse test.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnharbor-city/building_row_house_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "art/source/building_dawnharbor_large.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for the harbour city in my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn and chipped spots, mortar lines, slight colour variation between stones and roof tiles). The third image is another building from the same town: match its style, palette, outline thickness and level of detail exactly, so the two clearly belong to the same street. The new building is a narrow two-storey ROW HOUSE, about twice as tall as it is wide: pale blue-grey plaster walls with dark brown timber framing, a blue slate roof with a small chimney, a grey stone base, a small wooden front door in the middle of the ground floor with a little lantern beside it, one warm glowing window on each side of the door, two windows upstairs with pink flower boxes, and blue painted shutters. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: its stone base reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, barrels, people or shadow. 3) The door is a real doorway at ground level, centred left to right in the building. 4) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 5) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "dawnharbor_city_harbormaster",
+   "prompts": null,
+   "batch": "Dawnharbor city: harbormaster (new building)",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_city_harbormaster.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 harbor-city thread (Cory 00:38Z): every Dawnharbor building gets its own art; follows the tavern and lighthouse test.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnharbor-city/building_harbormaster_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "art/source/building_dawnharbor_large.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for the harbour city in my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn and chipped spots, mortar lines, slight colour variation between stones and roof tiles). The third image is another building from the same town: match its style, palette, outline thickness and level of detail exactly, so the two clearly belong to the same street. The new building is the HARBORMASTER'S OFFICE, a sturdy two-storey building a little wider than it is tall: a ground floor of dressed grey stone with a heavy wooden door in the middle under a stone arch, cream plaster with dark timber framing upstairs, a blue slate roof, a round clock face in the gable, and a small wooden bell cote with a brass bell on the roof ridge, a short flagpole with a blue and gold pennant (no writing), and a coil of rope and a ship's wheel hung on the wall beside the door. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: its stone base reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, barrels, people or shadow. 3) The door is a real doorway at ground level, centred left to right in the building. 4) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 5) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "dawnharbor_city_shipwright",
+   "prompts": null,
+   "batch": "Dawnharbor city: shipwright (new building)",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_city_shipwright.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 harbor-city thread (Cory 00:38Z): every Dawnharbor building gets its own art; follows the tavern and lighthouse test.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnharbor-city/building_shipwright_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "art/source/building_dawnharbor_large.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for the harbour city in my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn and chipped spots, mortar lines, slight colour variation between stones and roof tiles). The third image is another building from the same town: match its style, palette, outline thickness and level of detail exactly, so the two clearly belong to the same street. The new building is a SHIPWRIGHT'S WORKSHOP, wider than it is tall: a big open-fronted timber shed with a blue slate roof on thick wooden posts, a grey stone base, and inside the open front a small unfinished wooden rowing boat hull standing on wooden stocks, with planks, a saw and a mallet hung on the back wall and a warm lantern glow inside. A small wooden side door stands in the middle of the back wall, behind the boat's bow. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: its stone base reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, barrels, people or shadow. 3) The door is a real doorway at ground level, centred left to right in the building. 4) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 5) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "dawnharbor_city_chapel",
+   "prompts": null,
+   "batch": "Dawnharbor city: chapel (new building)",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_city_chapel.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 harbor-city thread (Cory 00:38Z): every Dawnharbor building gets its own art; follows the tavern and lighthouse test.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnharbor-city/building_chapel_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "art/source/building_dawnharbor_large.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for the harbour city in my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn and chipped spots, mortar lines, slight colour variation between stones and roof tiles). The third image is another building from the same town: match its style, palette, outline thickness and level of detail exactly, so the two clearly belong to the same street. The new building is a small stone CHAPEL with a bell tower, taller than it is wide: pale cream stone walls, a steep blue slate roof, a square bell tower rising from the front with a bronze bell under a little pointed blue roof topped by a small golden sun, a round stained-glass window in warm gold and blue above the door, and an arched wooden double door in the middle at ground level. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: its stone base reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, barrels, people or shadow. 3) The door is a real doorway at ground level, centred left to right in the building. 4) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 5) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
   }
  ]
 }
