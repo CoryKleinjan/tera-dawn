@@ -4,7 +4,7 @@ extends RefCounted
 ## Dawnshards, HP, MP, the map they're on and what they've done. Formulas live in
 ## CharacterStats; this only holds and changes state. Three parts keep their own state and
 ## rules: `skills` (SkillBook: skills, Skill Points, buffs), `ap` (AbilityPoints) and `gear`
-## (Gear: wearing gear, scrolls, ammo; what's worn is `equipment`).
+## (Gear: wearing gear and scrolls; what's worn is `equipment`).
 ##
 ## The server owns the real Character of every player. Each client keeps a copy of its own
 ## (Game.me) that the server refreshes, so the UI can read it but never changes it directly.
@@ -42,7 +42,7 @@ var inventory := Inventory.new()
 var storage := Inventory.new()
 ## What's worn.
 var equipment := Equipment.new()
-## Putting gear on and off, upgrade scrolls and ammo.
+## Putting gear on and off and upgrade scrolls.
 var gear := Gear.new(self)
 var quests := QuestLog.new()
 ## Skills learned, Skill Points and buffs running.
@@ -130,8 +130,8 @@ func max_hp() -> int:
 func max_mp() -> int:
 	return CharacterStats.max_mp(job, level, stats)
 
-func damage_range(extra_attack := 0) -> Vector2i:
-	return CharacterStats.damage_range(job, stats, extra_attack)
+func damage_range() -> Vector2i:
+	return CharacterStats.damage_range(job, stats)
 
 func magic_range() -> Vector2i:
 	return CharacterStats.magic_range(job, stats)

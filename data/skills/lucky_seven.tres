@@ -24,7 +24,6 @@ damage_per_level = 0.03
 projectile = ExtResource("2_star")
 weapons = Array[StringName]([&"claw"])
 kind = 0
-uses_ammo = true
 height = 90.0
 hit_effect = ExtResource("3_hit")
 icon = ExtResource("4_lucky_seven")

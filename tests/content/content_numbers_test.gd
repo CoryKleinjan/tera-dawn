@@ -240,9 +240,6 @@ func test_use_items_have_sane_numbers() -> void:
 			check(u.heal_hp >= 0 and u.heal_mp >= 0 and u.pet_food >= 0 and u.cooldown >= 0, "%s: a heal, pet_food or cooldown is negative" % w)
 			check_between(u.heal_hp_percent, 0, 100, "%s: heal_hp_percent" % w)
 			check_between(u.heal_mp_percent, 0, 100, "%s: heal_mp_percent" % w)
-		var a := i as AmmoDef
-		if a:
-			check(a.kind != &"" and a.attack >= 0, "%s: kind is empty or attack is negative" % Scan.where(a))
 		var s := i as ScrollDef
 		if s:
 			check(s.chance > 0.0 and s.chance <= 1.0, "%s: chance is %s" % [Scan.where(s), s.chance])

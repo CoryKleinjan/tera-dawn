@@ -36,13 +36,6 @@ static func typical(job_id: StringName, level: int) -> Character:
 			best[place] = [score, e]
 	for place in best:
 		c.equipment.put(place, ItemStack.exact(best[place][1]))
-	if c.gear.ammo_slot() < 0:
-		var w := c.gear.weapon()
-		if w and w.ammo != &"":
-			for item in Content.items.values():
-				if item is AmmoDef and (item as AmmoDef).kind == w.ammo:
-					c.inventory.add(item, 100)
-					break
 	c.recalc()
 	return c
 
@@ -61,8 +54,6 @@ static func main_attack(c: Character) -> Array:
 			continue
 		# about one point a level since the job was taken goes into the main attack
 		var lvl := clampi(c.level - (9 if s.job != &"beginner" else 0), 1, s.max_level)
-		if s.uses_ammo and c.gear.ammo_count() == 0:
-			continue
 		if s.weapons.size() > 0 and (c.gear.weapon() == null or not s.weapons.has(c.gear.weapon().weapon_kind)):
 			continue
 		if _average(c, s, lvl) * s.hits > _average(c, best, best_level) * best.hits:
@@ -71,7 +62,7 @@ static func main_attack(c: Character) -> Array:
 	return [best, best_level]
 
 static func _average(c: Character, s: SkillDef, lvl: int) -> float:
-	var spread := c.magic_range() if s.magic else c.damage_range(c.gear.ammo_attack() if s.uses_ammo else 0)
+	var spread := c.magic_range() if s.magic else c.damage_range()
 	var crit := CharacterStats.crit_rate(c.stats)
 	return (spread.x + spread.y) / 2.0 * s.damage_at(lvl) * (1.0 + crit * (Combat.CRIT_MULTIPLIER - 1.0))
 

@@ -2,7 +2,7 @@ class_name Gear
 extends CharacterPart
 ## The rules for a character's gear (Character.gear): who can wear what, putting gear on
 ## and taking it off between the bag's Equip tab and what's worn (Character.equipment),
-## upgrade scrolls, and the ammo the weapon fires.
+## and upgrade scrolls.
 
 ## The weapon worn, or null.
 func weapon() -> EquipDef:
@@ -109,43 +109,3 @@ func use_scroll(use_slot: int, equip_slot: int, roll := randf()) -> Dictionary:
 		if scroll.stats:
 			gear.stats.add(scroll.stats)
 	return {"problem": "", "worked": worked}
-
-# ---------- ammo ----------
-
-## The Use-tab slot of the ammo the weapon fires (first in the bag), or -1.
-func ammo_slot() -> int:
-	var w := weapon()
-	if w == null or w.ammo == &"":
-		return -1
-	var bag := character.inventory
-	for i in Inventory.SLOTS:
-		var s := bag.at(ItemDef.Tab.USE, i)
-		if s and s.item is AmmoDef and (s.item as AmmoDef).kind == w.ammo:
-			return i
-	return -1
-
-## The extra Weapon Attack of the ammo that would be fired next.
-func ammo_attack() -> int:
-	var i := ammo_slot()
-	return (character.inventory.at(ItemDef.Tab.USE, i).item as AmmoDef).attack if i >= 0 else 0
-
-## How much of the weapon's ammo is in the bag.
-func ammo_count() -> int:
-	var w := weapon()
-	if w == null or w.ammo == &"":
-		return 0
-	var n := 0
-	for s in character.inventory.tabs[ItemDef.Tab.USE]:
-		if s and s.item is AmmoDef and (s.item as AmmoDef).kind == w.ammo:
-			n += s.count
-	return n
-
-## Spends `n` of the weapon's ammo, first stacks first.
-func spend_ammo(n: int) -> void:
-	var bag := character.inventory
-	while n > 0:
-		var i := ammo_slot()
-		if i < 0:
-			return
-		var taken := bag.take(ItemDef.Tab.USE, i, mini(n, bag.at(ItemDef.Tab.USE, i).count))
-		n -= taken.count if taken else n

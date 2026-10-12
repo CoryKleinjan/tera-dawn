@@ -41,7 +41,6 @@ func _fill_bag(c: Character) -> void:
 			func(i: ItemDef) -> bool: return i is EquipDef,
 			func(i: ItemDef) -> bool: return i is UseDef,
 			func(i: ItemDef) -> bool: return i is ScrollDef,
-			func(i: ItemDef) -> bool: return i is AmmoDef,
 			func(i: ItemDef) -> bool: return i.tab() == ItemDef.Tab.ETC and not i is CardDef,
 			func(i: ItemDef) -> bool: return i is ChairDef,
 			func(i: ItemDef) -> bool: return i is PetDef]:

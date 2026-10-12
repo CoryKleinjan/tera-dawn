@@ -26,7 +26,6 @@ requires_level = 1
 projectile = ExtResource("2_star")
 weapons = Array[StringName]([&"claw"])
 kind = 0
-uses_ammo = true
 height = 90.0
 hit_effect = ExtResource("3_hit")
 icon = ExtResource("4_star_scatter")

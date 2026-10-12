@@ -27,6 +27,5 @@ stats = SubResource("Resource_1")
 variance = 2
 upgrade_slots = 7
 weapon_kind = &"bow"
-ammo = &"arrow"
 basic_attack = ExtResource("5_bow_shot")
 required_dexterity = 75

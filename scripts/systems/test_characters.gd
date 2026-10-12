@@ -21,8 +21,6 @@ const ACCOUNT := "~test"
 ## A test character is called this plus its job's name (cut to CharacterStore.MAX_NAME).
 const NAME_PREFIX := "Dev "
 const SHARDS := 50000
-## How many stacks of its weapon's best ammo a test character carries.
-const AMMO_STACKS := 3
 
 ## Whether this build may make and use test characters: never in a release export.
 static func allowed() -> bool:
@@ -84,7 +82,6 @@ static func build(char_name: String, job: JobDef) -> Character:
 	_wear_best_gear(c)
 	_spend_ap(c)
 	_learn_every_skill(c)
-	_add_ammo(c)
 	c.shards = SHARDS
 	c.map_id = home_town(job)
 	c.recalc()
@@ -188,7 +185,7 @@ static func _wear_best_gear(c: Character) -> void:
 	for e in best_weapons(c.job, c.level).slice(1):
 		c.inventory.add_stack(ItemStack.exact(e))
 
-# ---------- stats, skills, ammo ----------
+# ---------- stats and skills ----------
 
 ## Spends the Ability Points: first whatever the worn gear still asks for, then the rest the
 ## Auto button's way.
@@ -222,19 +219,3 @@ static func _learn_every_skill(c: Character) -> void:
 				c.skills.points = maxi(c.skills.points, 1)
 				learned = true
 	c.skills.points = 0
-
-## A few full stacks of the best ammo for each of the job's best weapons that fires any
-## (a Pirate's gun too, while wielding a knuckle).
-static func _add_ammo(c: Character) -> void:
-	var kinds: Array[StringName] = []
-	for w in best_weapons(c.job, c.level):
-		if w.ammo != &"" and not w.ammo in kinds:
-			kinds.append(w.ammo)
-	for kind in kinds:
-		var best: AmmoDef = null
-		for it: ItemDef in Content.items.values():
-			var a := it as AmmoDef
-			if a and a.kind == kind and (best == null or a.attack > best.attack or (a.attack == best.attack and String(a.id) < String(best.id))):
-				best = a
-		if best:
-			c.inventory.add(best, best.stack_size() * AMMO_STACKS)

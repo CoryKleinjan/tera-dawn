@@ -36,12 +36,6 @@ func test_every_job_gets_a_max_level_character_in_gear_it_can_wear() -> void:
 			var e := c.equipment.at(place).equip_def()
 			check_eq(c.gear.equip_problem(e), "", "%s can wear the %s" % [job.id, e.id])
 		check_eq(c.health.hp, c.max_hp(), "%s: full HP" % job.id)
-		for w in TestCharacters.best_weapons(job, c.level):
-			if w.ammo != &"":
-				var has_ammo := false
-				for s in c.inventory.tabs[ItemDef.Tab.USE]:
-					has_ammo = has_ammo or (s and s.item is AmmoDef and (s.item as AmmoDef).kind == w.ammo)
-				check(has_ammo, "%s: carries ammo for the %s" % [job.id, w.id])
 
 func test_the_gear_is_the_best_the_job_can_wear() -> void:
 	for job in TestCharacters.jobs():

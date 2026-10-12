@@ -1,7 +1,7 @@
 extends TestCase
 ## Every reference between content resolves: drops, shops, quests, NPCs and where they
 ## stand, spawns, portals, travel routes, jobs and their gifts, skills, monsters that split
-## or shoot, gear and its ammo, pets and chairs, maps and their regions. Each failure names
+## or shoot, gear, pets and chairs, maps and their regions. Each failure names
 ## the file and the field.
 
 const Scan := preload("res://tests/content/content_scan.gd")
@@ -251,8 +251,6 @@ func test_skills_link_up() -> void:
 				check(s.requires_level <= r.max_level, "%s: requires_level %d but %s stops at %d" % [w, s.requires_level, r.id, r.max_level])
 				var line := _job_line(s.job)
 				check(r.innate or r.job in line, "%s: requires %s from job %s, outside its job line %s" % [w, r.id, r.job, line])
-		if s.uses_ammo:
-			check(s.projectile != null, "%s: uses_ammo without a projectile" % w)
 	check(Content.skills.has(Character.BASIC_ATTACK) and Content.skills[Character.BASIC_ATTACK].innate, "Character.BASIC_ATTACK %s is not an innate skill" % Character.BASIC_ATTACK)
 
 func _job_line(id: StringName) -> Array[StringName]:
@@ -299,12 +297,8 @@ func test_monsters_that_split_or_shoot_point_at_real_things() -> void:
 			check(m.shot.resource_path.begins_with("res://data/projectiles/"), "%s: shot is %s, not a file in data/projectiles" % [w, m.shot.resource_path])
 			check(m.shot.texture != null, "%s: shot %s has no texture" % [w, m.shot.resource_path])
 
-func test_gear_points_at_real_skills_ammo_and_jobs() -> void:
-	var ammo := {}
+func test_gear_points_at_real_skills_and_jobs() -> void:
 	var families := {}
-	for i: ItemDef in Content.items.values():
-		if i is AmmoDef:
-			ammo[(i as AmmoDef).kind] = true
 	for j: JobDef in Content.jobs.values():
 		families[j.family] = true
 	for i: ItemDef in Content.items.values():
@@ -316,9 +310,6 @@ func test_gear_points_at_real_skills_ammo_and_jobs() -> void:
 		check(Equipment.PLACES_FOR.has(e.slot), "%s: slot %d has no place on the body" % [w, e.slot])
 		if e.basic_attack:
 			_indexed(e.basic_attack, Content.skills, w + ": basic_attack")
-		if e.ammo != &"":
-			check(ammo.has(e.ammo), "%s: ammo %s is not the kind of any AmmoDef" % [w, e.ammo])
-			check(e.slot == EquipDef.Slot.WEAPON, "%s: has ammo but isn't a weapon" % w)
 		if e.slot == EquipDef.Slot.WEAPON:
 			check(e.weapon_kind != &"", "%s: weapon has no weapon_kind" % w)
 		for f in e.jobs:
