@@ -22,8 +22,16 @@ def hat_head(piece):
 
 def hat_alone(img):
     """A hats_only piece without the bits of the sheet's cell frame caught at its edges: every
-    piece much smaller than the hat goes, and every thin straight one (a frame line)."""
+    piece much smaller than the hat goes, every thin straight one (a frame line), and any line
+    filling an edge row or column (HAT_FRAME_FILL), even joined to the hat."""
     arr = np.asarray(img).copy()
+    a = arr[..., 3]
+    for side in range(4):  # (a frame line along an edge, even where it touches the hat)
+        lines = np.rot90(a, side)
+        fill = (lines > 40).mean(1)
+        k = int(np.argmin(fill >= HAT_FRAME_FILL))  # full rows from the edge
+        if 0 < k <= HAT_FRAME_THICK and fill[k] < HAT_FRAME_FILL / 2:  # (thin, then clear: not a flat brim)
+            lines[:k] = 0
     lab, n = ss.label(arr[..., 3] > 0)
     sizes = np.bincount(lab.ravel())[1:]
     if n:
@@ -293,26 +301,30 @@ def put_hat(hero, name, views, tinted, shape=None, head_cut=False):
 
 def save_hair_cut(hero, name, head=False):
     """haircut_<name>.png: per body frame, white where his hair is hidden under the hat (the
-    game cuts those pixels out of the hair layer): above the hat's lower edge, across the hat
-    and HAIR_CUT_SIDE head radii past its sides, so no hair pokes out of its top or sides; hair
-    below its lower edge still shows (Cory 2026-10-11). The lower edge of a column is the bottom
-    of the hat's first stretch of pixels going down, so an opening (a helm's face) or a drape
-    hanging below a gap doesn't count (on a helm, a stretch ending HAIR_CUT_CREST head radii
-    above the head's middle is a crest standing over a gap, and the next one is the edge); off his head (HAIR_CUT_HEAD head radii from its middle)
-    it is the deepest edge of the hat within HAIR_CUT_REACH, so a crest sticking out over his
-    hair still hides it. Hair hanging below HAIR_CUT_LOW head radii under the head's middle
-    always shows (long hair down his back past a bandana's tails). Under a helm (`head`) the
-    hair below its edge shows in full too (Cory 2026-10-12: trimming it looked goofy), and the
-    cut runs across the whole frame, so no hair sticks out of its top or sides (Cory 2026-10-12). The
-    piece's JSON names the strip ("hair_cut")."""
+    game cuts those pixels out of his own hair layer, so his hair looks the same under a hat, only
+    trimmed: Cory 2026-10-12): above the hat's lower edge, across the whole frame, so no hair
+    pokes out of its top or sides; hair below its lower edge still shows. The lower edge of a
+    column is the bottom of the hat's first stretch of pixels going down, so an opening (a helm's
+    face) or a drape hanging below a gap doesn't count (on a helm, a stretch ending
+    HAIR_CUT_CREST head radii above the head's middle is a crest standing over a gap, and the next
+    one is the edge); off his head (HAIR_CUT_HEAD head radii from its middle) it is the deepest
+    edge of the hat within HAIR_CUT_REACH, so a crest or brim sticking out over his hair still
+    hides it, and past the hat's sides that of its nearest column. Hair hanging below HAIR_CUT_LOW
+    head radii under the head's middle always shows (long hair down his back past a bandana's
+    tails). Beside a helm (`head`) the cut runs down to the bottom of its cheek and neck guards,
+    and inside its outline (its eye holes) no hair shows. Each hairstyle also gets its own strip
+    (haircut_<name>_<style>.png, no_loose_hair). The piece's JSON names them ("hair_cut",
+    "hair_cuts")."""
     p = load_piece(name)
     fw, fh = hero.fw, hero.fh
     strip = np.zeros((fh, fw * len(p["frames"]), 4), np.uint8)
+    solids = []
     for i, fi in enumerate(hero.info):
         canvas = Image.new("RGBA", (fw, fh))
         draw_piece(canvas, p, i, False)
         draw_piece(canvas, p, i, True)
         solid = np.asarray(canvas)[..., 3] > HAIR_CUT_ALPHA
+        solids.append(solid)
         cols = np.nonzero(solid.any(0))[0]
         if not len(cols):
             continue
@@ -323,10 +335,9 @@ def save_hair_cut(hero, name, head=False):
             high = (ends < fi["head"][1] - HAIR_CUT_CREST * fi["r"]) & head  # (a helm's crest over a gap)
             edge[x] = ends[np.argmin(high)] if not high.all() else ends[-1]
             bottom[x] = ends[-1]
-        side, reach = int(round(HAIR_CUT_SIDE * fi["r"])), int(round(HAIR_CUT_REACH * fi["r"]))
+        reach = int(round(HAIR_CUT_REACH * fi["r"]))
         hx = fi["head"][0]
-        span = range(fw) if head else range(max(cols.min() - side, 0), min(cols.max() + side + 1, fw))
-        for x in span:  # (beside a helm, any hair above its lower edge too: none sticks out its sides)
+        for x in range(fw):  # (beside the hat too, any hair above its lower edge: none sticks out its sides)
             if abs(x - hx) <= fi["r"] * HAIR_CUT_HEAD and edge[x] >= 0:
                 e = edge[x]
             else:  # off his head (or a gap): the deepest edge of the hat columns nearby, so a crest
@@ -339,11 +350,56 @@ def save_hair_cut(hero, name, head=False):
                 e = min(e, int(fi["head"][1] + HAIR_CUT_LOW * fi["r"]))  # (hair hanging lower always shows)
             e -= HAIR_CUT_TUCK  # (the hair runs on under the hat's soft lower edge: no seam between them)
             strip[:e + 1, i * fw + x] = 255
-            if abs(x - hx) > HAIR_CUT_OUT * fi["r"]:  # (and no stubs of spiky hair stick out beside his face)
-                strip[:int(fi["head"][1] + HAIR_CUT_OUT_LOW * fi["r"]) + 1, i * fw + x] = 255
         if head:  # (nor any through its eye holes: inside a helm's outline his hair never shows)
             strip[:, i * fw:(i + 1) * fw][~ss.dilate(~spanned(solid), HAIR_CUT_TUCK)] = 255
-    save_strip(strip, name, "haircut", "hair_cut")
+    save_strip(softened(strip), name, "haircut", "hair_cut")
+    for style in HAIRSTYLES:  # each hairstyle's own cut: none of it left hanging loose
+        path = os.path.join(LAYERS, f"hair_{style}.png")
+        if os.path.exists(path):
+            hair = np.asarray(Image.open(path))[..., 3] > 0
+            cut = no_loose_hair(strip, solids, hair, fw, [fi["r"] for fi in hero.info])
+            # (softened only where some of this hair shows beside it: none peeks out along a soft
+            # edge with nothing beside it)
+            hard = (cut[..., 3] > 0) & ~ss.dilate(hair & (cut[..., 3] == 0), HAIR_CUT_TUCK + 1)
+            save_strip(softened(cut, hard), name, "haircut", "hair_cuts", style)
+
+
+def no_loose_hair(strip, solids, hair, fw, radii):
+    """A hair cut strip that also hides the bits of one hairstyle's hair the cut leaves loose:
+    every patch still showing whose cut edge is mostly out in the air rather than at the hat
+    (within HAIR_CUT_TOUCH of it), such as a ponytail's end whose middle went under the hat or a
+    twin tail chopped off beside it, and any wisp smaller than HAIR_CUT_SPECK head radii squared
+    off on its own (or HAIR_CUT_CRUMB anywhere). A patch the cut doesn't reach stays."""
+    out = strip.copy()
+    for i, solid in enumerate(solids):
+        cut = out[:, i * fw:(i + 1) * fw]
+        hidden = cut[..., 3] > 0
+        shows = hair[:, i * fw:(i + 1) * fw] & ~hidden
+        if not solid.any() or not shows.any():
+            continue
+        lab, n = ss.label(shows)
+        edge = shows & ss.dilate(hidden & hair[:, i * fw:(i + 1) * fw], 1)  # (where the cut chopped it)
+        at_hat = edge & ss.dilate(solid, HAIR_CUT_TOUCH)
+        chopped = np.bincount(lab[edge], minlength=n + 1)
+        held = np.bincount(lab[at_hat], minlength=n + 1)
+        size = np.bincount(lab.ravel(), minlength=n + 1)
+        near = np.bincount(lab[ss.dilate(solid, HAIR_CUT_TOUCH) & shows], minlength=n + 1)
+        # (and wisps off on their own, or crumbs anywhere)
+        speck = ((size < HAIR_CUT_SPECK * radii[i] ** 2) & (near == 0)) | (size < HAIR_CUT_CRUMB * radii[i] ** 2)
+        loose_ids = np.nonzero(((chopped > 0) & (held < chopped * HAIR_CUT_HELD)) | speck)[0]
+        loose = np.isin(lab, loose_ids[loose_ids > 0])
+        cut[ss.dilate(loose, 3) & ~(shows & ~loose)] = 255  # (wide enough that its soft edge still hides it all)
+    return out
+
+
+def softened(strip, hard=None):
+    """A cut strip with its edge blurred (HAIR_CUT_SOFT), so the hair fades out under the hat
+    rather than stopping at a step; left as it is where `hard`."""
+    out = np.asarray(Image.fromarray(strip, "RGBA").filter(ImageFilter.GaussianBlur(HAIR_CUT_SOFT))).copy()
+    if hard is not None:
+        out[hard] = strip[hard]
+    out[..., :3] = 255  # (only its alpha counts; plain white keeps the file small)
+    return out
 
 
 def head_area(fi, fw, fh, reach=HEAD_CUT_DISC):
@@ -411,12 +467,18 @@ def grown(mask, px):
     return np.asarray(Image.fromarray(mask.astype(np.uint8) * 255).filter(ImageFilter.MaxFilter(2 * px + 1))) > 0
 
 
-def save_strip(strip, name, prefix, key):
-    """Saves a cut strip as <prefix>_<name>.png and names it in the piece's JSON under `key`."""
-    Image.fromarray(strip, "RGBA").save(os.path.join(PIECES, f"{prefix}_{name}.png"))
+def save_strip(strip, name, prefix, key, style=None):
+    """Saves a cut strip as <prefix>_<name>.png and names it in the piece's JSON under `key`;
+    one hairstyle's (`style`) as <prefix>_<name>_<style>.png, under key[style]."""
+    file = f"{prefix}_{name}_{style}.png" if style else f"{prefix}_{name}.png"
+    Image.fromarray(strip, "RGBA").save(os.path.join(PIECES, file))
     path = os.path.join(PIECES, name + ".json")
     with open(path) as f:
         data = json.load(f)
-    data[key] = "res://" + os.path.relpath(os.path.join(PIECES, f"{prefix}_{name}.png"), ROOT)
+    res = "res://" + os.path.relpath(os.path.join(PIECES, file), ROOT)
+    if style:
+        data.setdefault(key, {})[style] = res
+    else:
+        data[key] = res
     with open(path, "w") as f:
         json.dump(data, f, separators=(",", ":"))

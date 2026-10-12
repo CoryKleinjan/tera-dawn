@@ -16,8 +16,8 @@ extends RefCounted
 ## a weapon, a shield and a hat keep their shape, so each is a Piece: one picture per view that
 ## goes in his fist, on his arm or on his head on every frame, where the rig says, with his
 ## fingers drawn over a weapon's grip (fist masks); a weapon kind is held its own way (a bow
-## upright, a staff planted). The hair under a hat is the hairstyle's own _hat layer, cut where the hat
-## hides it (Piece.hair_cut) so none pokes out of its top or sides. A helm drawn smaller than his
+## upright, a staff planted). The hair under a hat is his own hair, cut where the hat hides it
+## (Piece.hair_cuts) so none pokes out of its top or sides. A helm drawn smaller than his
 ## head also cuts away his head and face where they would poke out of it (Piece.head_cut), only
 ## while it is worn.
 
@@ -145,6 +145,9 @@ class Piece:
 	var fist: Texture2D
 	## A hat's strip of where his hair is hidden under it (haircut_<name>.png), or null.
 	var hair_cut: Texture2D
+	## Each hairstyle's own strip (haircut_<name>_<style>.png, which also hides the bits of that
+	## hair the cut would leave hanging loose), by style ("tousled" for hair_tousled).
+	var hair_cuts := {}
 	## A helm's strip of where his head and face are cut away around it (headcut_<name>.png,
 	## laid out like the body strip), or null.
 	var head_cut: Texture2D
@@ -172,6 +175,11 @@ class Piece:
 				p.fist = load(PIECE_DIR + "fist_" + data["fist"] + ".png")
 			if data.get("hair_cut") is String and ResourceLoader.exists(data["hair_cut"]):
 				p.hair_cut = load(data["hair_cut"])
+			var cuts: Variant = data.get("hair_cuts")
+			if cuts is Dictionary:
+				for style: String in cuts:
+					if ResourceLoader.exists(cuts[style]):
+						p.hair_cuts[style] = load(cuts[style])
 			if data.get("head_cut") is String and ResourceLoader.exists(data["head_cut"]):
 				p.head_cut = load(data["head_cut"])
 		_cache[id] = p
@@ -304,9 +312,9 @@ static func dress(look: Dictionary) -> Paperdoll:
 			l.hair_cut = d.head_cut
 	if hair:
 		var before := d.layers.size()
-		d._add(hair.hat_frames if hat and hair.hat_frames else hair.frames, false, hair_tone)
+		d._add(hair.frames, false, hair_tone)
 		if hat_on and d.layers.size() > before:  # none of it pokes out of the hat's top or sides
-			d.layers[-1].hair_cut = hat_on.hair_cut
+			d.layers[-1].hair_cut = hat_on.hair_cuts.get(String(hair.id).trim_prefix("hair_"), hat_on.hair_cut)
 	var shield: EquipDef = gear.get(&"shield")
 	if shield:
 		var own_shield := Piece.named("shield_item_" + String(shield.id))

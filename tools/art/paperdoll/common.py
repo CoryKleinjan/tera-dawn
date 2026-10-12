@@ -68,6 +68,7 @@ HAT_GROW = {"bandana": 1.02}  # (Cory 2026-10-12: bandanas a bit smaller, to fit
 # (Gemini paints some bandanas' backs wider than others; Cory 2026-10-11: a bit smaller from behind)
 HAT_BACK_WIDTH = {"bandana": 2.3}
 HAT_LINE = 0.1         # a bit of a hat cell's frame line: at most this thick against its length
+HAT_FRAME_FILL, HAT_FRAME_THICK = 0.85, 6  # hats.hat_alone: edge rows this full, at most this many, are a cell frame line
 # a closed helm's eye holes go over his eyes (hats.eyes_in_holes): his eyes' middle (x, y) and
 # width in head radii from the head centre in a side view, the share of the widest opening's
 # width that counts as the eye band, the widest opening that is an open face instead (head
@@ -78,10 +79,11 @@ SHORTS_BELOW = 0.45  # body.shorts_mask: the shorts are only looked for this far
 SOLID_EYES = 60  # hats.eyes_out: the face layer's irises, where at least this opaque
 HELM_HUG, HELM_NUDGE = 1.06, 0.5  # hats.hugging: a helm's shell this times his head's width; moved this far to its eyes
 HELM_BAND, HELM_OPEN, HELM_SIZE = 0.75, 1.15, (0.8, 1.15)
-HAIR_CUT_SIDE = 0.6    # hats.save_hair_cut: hair is hidden this far past a hat's sides (head radii)
-HAIR_CUT_HEAD, HAIR_CUT_REACH = 0.85, 0.5  # ...each column's own edge over his head, nearby edges off it
+HAIR_CUT_HEAD, HAIR_CUT_REACH = 0.85, 0.5  # hats.save_hair_cut: each column's own edge over his head, nearby edges off it
 HAIR_CUT_CREST = 0.6  # ...on a helm, a stretch ending this far above the head's middle is a crest, not the edge
-HAIR_CUT_OUT, HAIR_CUT_OUT_LOW = 0.88, 0.35  # ...and past this far beside the head's middle, down to this far under it
+HAIR_CUT_SPECK, HAIR_CUT_CRUMB = 0.15, 0.03  # ...and a patch smaller than this (head radii squared) off by itself, or this anywhere
+HAIR_CUT_TOUCH, HAIR_CUT_HELD = 4, 0.5  # ...a patch the cut chopped less than this share of it at the hat (within that) is loose
+HAIR_CUT_SOFT = 1.5   # ...its edge blurred this much (frame pixels), so the hair fades out under the hat
 HAIR_CUT_TUCK = 2      # ...and stops this many pixels inside the hat, so hair and head run on under its soft edge
 HAIR_CUT_LOW = 0.75    # ...and never below this far under the head's middle (head radii)
 HEAD_CUT_DISC, HEAD_CUT_LOW = 1.3, 0.55  # hats.save_head_cut: his head this near its middle, above this low (head radii)
