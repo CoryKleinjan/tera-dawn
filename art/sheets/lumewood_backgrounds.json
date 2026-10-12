@@ -132,15 +132,11 @@
           69,
           3289,
           427
-        ],
-        [
-          1404,
-          310,
-          1981,
-          454
         ]
       ],
-      "scale": 0.4836
+      "scale": 0.4836,
+      "drop_edge": true,
+      "smooth_edge": 2
     },
     "sky_body": {
       "fix": "sky_body",

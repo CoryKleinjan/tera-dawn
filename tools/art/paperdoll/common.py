@@ -43,7 +43,7 @@ BACK_VIEW = ("rope1", "rope2", "ladder1", "ladder2", "climb_idle")
 EXPRESSIONS = {"blink": "blink", "hit": "ouch", "hurt": "ouch", "faint1": "dizzy", "faint2": "dizzy"}
 HAIRSTYLES = ["tousled", "long", "ponytail", "twin_tails", "bun", "crest"]
 FACES = ["bright", "determined", "rosy", "freckled", "cheeky"]
-WEAPON_KINDS = ["sword", "bow", "wand", "staff", "claw", "knuckle", "gun"]
+WEAPON_KINDS = ["sword", "bow", "wand", "staff", "star", "knuckle", "gun"]
 
 # Sizes against the head's radius r (measured on the body).
 HAIR_WIDTH = 2.5      # a hairstyle's front piece is this wide
@@ -136,21 +136,23 @@ FIST = 0.4            # the fist around a grip reaches this far from the grip po
 FOREARM = 1.1         # forearm_angles: skin this close to the fist (head radii) counts as his forearm
 GUN_FRONT, GUN_BACK = 0.4, 0.4  # weapons.grip_point: a gun's barrel is its front share, its grip in its back share
 BARREL_FRONT = 0.55   # weapons.barrel_tilt: the front share of a gun that is its barrel
-CLAW_CUFF = 0.25      # how far along a claw (0 its back end, 1 its tips) the middle of its cuff is
+STAR_GRIP = 0.4       # how far across a throwing star (0 its back, 1 its front) his fist holds it, so its front sticks out
+STAR_ACROSS = 0.85    # a throwing star is this wide in his hand (head radii), so his fist hides its middle and back
+STAFF_GRIP = 0.35     # how far up a staff (0 its foot, 1 its head) his fist holds it: low on the handle
 
 # Weapons worn on the fist are drawn smaller than the template sheet has them, so they fit
 # his hand rather than swallowing it (the rest keep the sheet's size against the sword).
-WORN_SIZE = {"claw": 0.9, "knuckle": 0.75, "bow": 1.35, "staff": 1.3}
+WORN_SIZE = {"knuckle": 0.75, "bow": 1.35, "staff": 1.3}
 # Long weapons whose sheets may draw them at a slant (a sword up and to the right): their own
 # axis is measured and turned out, so a rig angle means the same however the art was drawn.
 # The others are drawn the way the rig expects (a gun pointing right, a bow upright).
-AXIAL = ("sword", "wand", "staff", "claw")
+AXIAL = ("sword", "wand", "staff")
 # Weapons the rig holds upright (see stood_up), and how far off upright (degrees) one may be
 # drawn before it is stood up.
 UPRIGHT = ("bow",)
 UPRIGHT_SLACK = 8
 # Weapons held in the fist: his fingers draw over the grip. The others are worn on the fist.
-GRIPPED = ("sword", "wand", "staff", "bow", "gun")
+GRIPPED = ("sword", "wand", "staff", "bow", "gun", "star")
 # Weapons carried on his back while he climbs or sits, and at what angle; the rest are put away.
 ON_BACK = {"sword": 125, "staff": -70, "bow": 60, "wand": 125, "gun": 110}
 SHEATHED = BACK_VIEW + ("sit",)

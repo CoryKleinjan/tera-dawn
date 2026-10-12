@@ -46,5 +46,11 @@
     "under_right": {
       "out_dir": "art/build/platform_pieces_lanternfall"
     }
+  },
+  "platform": {
+    "shift": {
+      "cap_left": -6,
+      "cap_right": -6
+    }
   }
 }

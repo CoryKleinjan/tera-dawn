@@ -1,6 +1,6 @@
 extends TestCase
 ## Combat: player hits (misses against higher monsters, crits, damage range and skill
-## multiplier, level penalty, ammo and magic), monster touches (dodge, defense, floor of 1)
+## multiplier, level penalty and magic), monster touches (dodge, defense, floor of 1)
 ## and the faint penalty. Randomness is pinned with seed() or stats that force the outcome.
 
 var fx: UnitHelpers
@@ -111,19 +111,6 @@ func test_magic_skill_uses_magic_range() -> void:
 	var m := fx.monster(&"t_mob", 10)
 	for i in 100:
 		check_between(Combat.player_hit(s, m, c)["damage"], 45, 90, "magic range 45..90")
-
-func test_ammo_skill_adds_ammo_attack() -> void:
-	var c := _fighter()
-	var bow := fx.equip(&"t_bow", EquipDef.Slot.WEAPON)
-	bow.ammo = &"star"
-	c.equipment.put(&"weapon", ItemStack.exact(bow))
-	c.inventory.add(fx.ammo(&"t_star", &"star", 10), 50)
-	var s := _attack()
-	s.uses_ammo = true
-	var m := fx.monster(&"t_mob", 10)
-	# attack 20: (90) × 20 / 100 × 2 = 36, low 18
-	for i in 100:
-		check_between(Combat.player_hit(s, m, c)["damage"], 18, 36, "star attack added")
 
 func test_player_hit_is_repeatable_with_same_seed() -> void:
 	var c := _fighter({"crit": 20})

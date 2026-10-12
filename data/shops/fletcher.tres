@@ -9,13 +9,7 @@
 [ext_resource type="Resource" path="res://data/items/equips/thicket_jerkin.tres" id="10_thicket_jerkin"]
 [ext_resource type="Resource" path="res://data/items/equips/thicket_leggings.tres" id="11_thicket_leggings"]
 [ext_resource type="Resource" path="res://data/items/equips/thicket_boots.tres" id="12_thicket_boots"]
-[ext_resource type="Resource" path="res://data/items/ammo/feather_arrow.tres" id="13_feather_arrow"]
 [ext_resource type="Resource" path="res://data/items/setup/stump_seat.tres" id="s_stump_seat"]
-
-[sub_resource type="Resource" id="Resource_11"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("13_feather_arrow")
-price = 0
 
 [sub_resource type="Resource" id="Resource_10"]
 script = ExtResource("2_shop_entry")
@@ -61,4 +55,4 @@ price = 6000
 script = ExtResource("1_shop_def")
 id = &"fletcher"
 display_name = "Greenbough Fletcher"
-items = Array[ExtResource("2_shop_entry")]([SubResource("Resource_1"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Entry_stump_seat")])
+items = Array[ExtResource("2_shop_entry")]([SubResource("Resource_1"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Entry_stump_seat")])

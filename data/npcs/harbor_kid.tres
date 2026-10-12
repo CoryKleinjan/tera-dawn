@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/npc_harbor_kid.tres" id="2_sprite"]
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"harbor_kid"
+display_name = "Nell"
+title = "Harbor Kid"
+sprite_frames = ExtResource("2_sprite")
+greeting = "Look, I made a boat! It's going to sail all the way to the islands."
+lines = PackedStringArray("One day I'll be a captain like Marlo.", "The gulls steal my bread if I'm not quick.")
+storage = false

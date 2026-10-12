@@ -14,7 +14,7 @@ static func player_hit(skill: SkillDef, target: MonsterDef, ch: Character) -> Di
 	if randf() < miss_chance:
 		return {"damage": 0, "crit": false, "miss": true}
 	var crit := randf() < CharacterStats.crit_rate(ch.stats)
-	var spread := ch.magic_range() if skill.magic else ch.damage_range(ch.gear.ammo_attack() if skill.uses_ammo else 0)
+	var spread := ch.magic_range() if skill.magic else ch.damage_range()
 	var dmg := roundi(randi_range(spread.x, spread.y) * multiplier
 		* (CRIT_MULTIPLIER if crit else 1.0))
 	# higher-level monsters shrug off some damage

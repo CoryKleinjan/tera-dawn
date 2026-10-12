@@ -18,6 +18,9 @@ extends Resource
 ## Lanterns stand along the floor, about this far apart, in open ground (LanternPlacement).
 ## -1 picks the usual spacing for a town or a field; 0 means none.
 @export var lantern_spacing := -1.0
+## Hand-placed lantern posts on raised levels, besides the floor's own: each is an x and the
+## index (1-based) of the platform it stands on.
+@export var level_lanterns: Array[Vector2i] = []
 ## How often the biome's trees, bushes, rocks and flowers stand, as a share of what its
 ## DecorDefs ask for (DecorPlacement). -1 uses the shared DecorPlacement.DENSITY; 0 means none.
 @export var decor_density := -1.0
@@ -40,7 +43,7 @@ extends Resource
 ## Inside a building: a small room with a wall instead of sky, entered by a door from
 ## `return_map` (the town it stands in). The world map shows you in that town.
 @export var interior := false
-## Its own track (a boss lair, a dungeon, the Free Market). Empty: its region's town or field music (music_id).
+## Its own track (a boss lair, the Free Market). Empty: its region's town or field music (music_id).
 @export var music: StringName
 
 @export_group("Layout")

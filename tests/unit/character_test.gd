@@ -1,6 +1,6 @@
 extends TestCase
 ## Character rules: EXP and levelling up, HP and MP, recalc, Ability Points, skills and
-## Skill Points, buffs and their expiry, quickslots, ammo, storage, job advancement,
+## Skill Points, buffs and their expiry, quickslots, storage, job advancement,
 ## tallies, visited maps, pets, and a fresh character from real content.
 
 var fx: UnitHelpers
@@ -15,12 +15,12 @@ func after_each() -> void:
 
 func test_xp_need_formula() -> void:
 	var c := fx.character()
-	# 55 * lvl^3 up to Lv 10, then 55,000 * (lvl / 10)^1.8
-	var want := {1: 55, 2: 440, 3: 1485, 5: 6875, 10: 55000, 11: 65293, 20: 191521, 30: 397357, 35: 524427}
+	# 27.5 * lvl^3 up to Lv 10, then 27,500 * (lvl / 10)^1.8
+	var want := {1: 27, 2: 220, 3: 742, 5: 3437, 10: 27500, 11: 32646, 20: 95760, 30: 198678, 35: 262213}
 	for lvl in want:
 		check_eq(c.xp_need(lvl), want[lvl], "level %d" % lvl)
 	c.level = 5
-	check_eq(c.xp_need(), 6875, "defaults to own level")
+	check_eq(c.xp_need(), 3437, "defaults to own level")
 
 func test_xp_need_always_grows() -> void:
 	var c := fx.character()
@@ -37,13 +37,13 @@ func test_gain_xp_below_need_keeps_level() -> void:
 
 func test_gain_xp_exactly_need_levels_up_with_zero_left() -> void:
 	var c := fx.character()
-	check_eq(c.gain_xp(55), 1, "one level")
+	check_eq(c.gain_xp(27), 1, "one level")
 	check_eq(c.level, 2, "level 2")
 	check_eq(c.xp, 0, "nothing left over")
 
 func test_gain_xp_many_levels_at_once() -> void:
 	var c := fx.character()
-	check_eq(c.gain_xp(55 + 440 + 1485 + 10), 3, "three levels")
+	check_eq(c.gain_xp(27 + 220 + 742 + 10), 3, "three levels")
 	check_eq(c.level, 4, "level 4")
 	check_eq(c.xp, 10, "leftover")
 	check_eq(c.ap.points, 15, "5 AP a level")
@@ -72,7 +72,7 @@ func test_level_up_raises_max_and_refills() -> void:
 	var c := fx.character()
 	c.health.damage(30)
 	c.spend_mp(10)
-	c.gain_xp(55)
+	c.gain_xp(27)
 	check_eq(c.max_hp(), 70, "50 + 2 × 10")
 	check_eq(c.health.max_hp, 70, "health max follows")
 	check_eq(c.health.hp, 70, "refilled")
@@ -324,20 +324,6 @@ func test_use_problem_rules() -> void:
 	c.skills.learned[p.id] = 1
 	check_ne(c.skills.use_problem(p), "", "passives can't be used")
 
-func test_use_problem_ammo_needs_one_per_hit() -> void:
-	var c := fx.character()
-	var bow := fx.equip(&"t_bow")
-	bow.ammo = &"arrow"
-	c.equipment.put(&"weapon", ItemStack.exact(bow))
-	var s := fx.skill()
-	s.uses_ammo = true
-	s.hits = 2
-	c.skills.learned[s.id] = 1
-	c.inventory.add(fx.ammo(), 1)
-	check_ne(c.skills.use_problem(s), "", "one arrow, two hits")
-	c.inventory.add(fx.ammo(), 1)
-	check_eq(c.skills.use_problem(s), "", "two arrows")
-
 func test_basic_attack_follows_weapon() -> void:
 	var c := fx.character()
 	check_eq(c.skills.basic_attack().id, Character.BASIC_ATTACK, "plain swing")
@@ -498,45 +484,6 @@ func test_setting_same_slot_again_is_stable() -> void:
 	c.set_quickslot(3, &"skill", &"t_a")
 	check_eq(c.quickslots[3], [&"skill", &"t_a"], "still there")
 	check_eq(c.quickslots.count([]), Character.QUICKSLOTS - 1, "only one slot used")
-
-# ---------- ammo ----------
-
-func _archer() -> Character:
-	var c := fx.character()
-	var bow := fx.equip(&"t_bow")
-	bow.ammo = &"arrow"
-	c.equipment.put(&"weapon", ItemStack.exact(bow))
-	return c
-
-func test_ammo_without_ranged_weapon() -> void:
-	var c := fx.character()
-	c.inventory.add(fx.ammo(), 50)
-	check_eq(c.gear.ammo_slot(), -1, "no weapon")
-	check_eq(c.gear.ammo_count(), 0, "none counted")
-	c.equipment.put(&"weapon", ItemStack.exact(fx.equip()))
-	check_eq(c.gear.ammo_slot(), -1, "melee weapon")
-	check_eq(c.gear.ammo_attack(), 0, "no ammo attack")
-
-func test_ammo_slot_finds_matching_kind_first() -> void:
-	var c := _archer()
-	c.inventory.add(fx.use(), 3)
-	c.inventory.add(fx.ammo(&"t_star", &"star", 9), 10)
-	c.inventory.add(fx.ammo(&"t_arrow", &"arrow", 2), 30)
-	check_eq(c.gear.ammo_slot(), 2, "skips potions and stars")
-	check_eq(c.gear.ammo_count(), 30, "only arrows counted")
-	check_eq(c.gear.ammo_attack(), 2, "arrow's attack")
-
-func test_spend_ammo_across_stacks() -> void:
-	var c := _archer()
-	var arrow := fx.ammo(&"t_arrow", &"arrow", 0, 10)
-	c.inventory.add(arrow, 25)
-	c.gear.spend_ammo(12)
-	check_eq(c.gear.ammo_count(), 13, "twelve spent")
-	check(c.inventory.at(ItemDef.Tab.USE, 0) == null, "first stack used up first")
-	c.gear.spend_ammo(100)
-	check_eq(c.gear.ammo_count(), 0, "spending more than held empties it")
-	c.gear.spend_ammo(5)
-	check_eq(c.gear.ammo_count(), 0, "spending none left is harmless")
 
 # ---------- storage ----------
 

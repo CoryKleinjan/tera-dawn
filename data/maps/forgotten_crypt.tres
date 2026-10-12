@@ -258,4 +258,4 @@ region = &"lanternfall"
 world_pos = Vector2(760.0, 520.0)
 return_map = &"lanternfall"
 level_text = "Lv. 24-30"
-music = &"boss"
+music = &"boss_lanternfall"

@@ -40,11 +40,11 @@ func test_held_weapons_point_forward_at_rest_and_on_the_move() -> void:
 			continue
 		for kind in Paperdoll.rig()["frames"][f].get("holds", {}):
 			var h: Variant = Paperdoll.hold(f, StringName(kind))
-			# a claw, and a gun's barrel, point along his forearm, wherever it hangs (Cory 2026-10-11:
+			# a star, and a gun's barrel, point along his forearm, wherever it hangs (Cory 2026-10-11:
 			# a gun needn't point forward, it must sit in his hand); a bow lies across his forearm,
 			# level when his arm hangs, and one-handed blades and wands keep one angle to it too
-			# (Cory 2026-10-12: one angle to the forearm in every pose)
-			if h == null or kind in ["claw", "gun", "bow", "sword", "wand", "knuckle"]:
+			# (Cory 2026-10-12: one angle to the forearm in every pose), as does a staff
+			if h == null or kind in ["star", "gun", "bow", "sword", "wand", "knuckle", "staff"]:
 				continue
 			# angle: clockwise from pointing right (the way he faces); up or down is fine
 			check(cos(h["angle"]) > -0.02, "%s: the %s points forward or up/down, not back (%d degrees)" % [name, kind, roundi(rad_to_deg(h["angle"]))])
@@ -114,8 +114,10 @@ func test_weapons_are_held_in_the_right_spot() -> void:
 		match w.get("kind"):
 			"sword":
 				check(share >= 0.0 and share < 0.3, "%s is held by the handle (%.2f along)" % [name, share])
-			"wand", "staff":
+			"wand":
 				check(share > 0.35 and share < 0.65, "%s is held near the middle (%.2f along)" % [name, share])
+			"staff":
+				check(share > 0.25 and share < 0.45, "%s is held low on the handle (%.2f along)" % [name, share])
 		check_eq(int(w.get("dots_left", -1)), 0, "%s has no grip-marker dots left in the art" % name)
 
 ## His walk alternates a stride and a passing step (Paperdoll.PASSING_STEPS), so his legs

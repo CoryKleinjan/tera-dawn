@@ -54,12 +54,6 @@ func test_more_main_stat_means_more_damage_than_more_secondary() -> void:
 	check(more_main > more_second, "main stat counts four times")
 	check(more_second > base, "secondary still helps")
 
-func test_extra_attack_adds_to_weapon_attack() -> void:
-	var j := _job("strength", "dexterity")
-	var s := UnitHelpers.stats({"strength": 20, "dexterity": 10, "attack": 10})
-	# (90) × 15 / 100 × 2 = 27
-	check_eq(CharacterStats.damage_range(j, s, 5).y, 27, "ammo attack")
-
 func test_damage_range_never_below_one() -> void:
 	var j := _job("strength", "dexterity", 0.1)
 	check_eq(CharacterStats.damage_range(j, StatBlock.new()), Vector2i(1, 1), "no stats, no attack")

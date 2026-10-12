@@ -45,10 +45,7 @@ The same NpcDef can stand in several maps (Brin is in every town).
 
 Travel NPCs (ships, wagons) list **TravelRoute**s in `NpcDef.travel` (destination, arrival x,
 fare, "Ship"/"Wagon"); their dialogue offers "Travel" and `ServerTravel.on_travel` moves the
-player. A route with `free_for_beginners` costs nothing for a Beginner who has reached
-the first job level (`JobDef.first_advance_level`); Rook's coaches from Dawnharbor to the
-job towns are free this way. `TravelRoute.fare_for(character)` is the one place that
-decides the fare, for the server and for the dialogue. Each trip's label also shows the
+player, charging `TravelRoute.price` (everyone pays the same fare). Each trip's label also shows the
 destination's `MapDef.level_text` unless it's a town ("Wagon to Ember Hollow (Lv. 6-12,
 150 Dawnshards)", `TDDialogueWindow.travel_label`). A **UseDef** with `teleport` set to a map id, or to `town`, is a return scroll.
 
@@ -115,7 +112,7 @@ ledge; you still walk in front of it along the street below. Ladders and ropes j
 levels (more than about 90 px needs one). Buildings, NPCs and portals stand on a level by
 their `platform`; each level is its own row for the spacing checks, and nothing should
 stand on the floor straight behind a terrace's wall (lanterns, scattered decor and
-background houses keep clear of it by themselves). Doors stay on the floor for now, since
+background houses keep clear of it by themselves). Lanterns stand only on open street by themselves; a level gets its own with `MapDef.level_lanterns` (x and platform), drawn in front of the land so the wall of the level above doesn't hide them; ivy and flower boxes hung on a level's wall are props with `on_wall` set. Doors stay on the floor for now, since
 players arrive on a map's floor. In a town the backdrop is laid out for the camera on the
 street (`TDStage.backdrop_center`), so climbing up just shows more sky. Dawnharbor is the
 example: a quay street, a terrace 150 px up and a cliff top 320 px up.

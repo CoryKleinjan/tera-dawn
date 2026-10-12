@@ -4,7 +4,7 @@ extends RefCounted
 ## Dawnshards, HP, MP, the map they're on and what they've done. Formulas live in
 ## CharacterStats; this only holds and changes state. Three parts keep their own state and
 ## rules: `skills` (SkillBook: skills, Skill Points, buffs), `ap` (AbilityPoints) and `gear`
-## (Gear: wearing gear, scrolls, ammo; what's worn is `equipment`).
+## (Gear: wearing gear and scrolls; what's worn is `equipment`).
 ##
 ## The server owns the real Character of every player. Each client keeps a copy of its own
 ## (Game.me) that the server refreshes, so the UI can read it but never changes it directly.
@@ -42,7 +42,7 @@ var inventory := Inventory.new()
 var storage := Inventory.new()
 ## What's worn.
 var equipment := Equipment.new()
-## Putting gear on and off, upgrade scrolls and ammo.
+## Putting gear on and off and upgrade scrolls.
 var gear := Gear.new(self)
 var quests := QuestLog.new()
 ## Skills learned, Skill Points and buffs running.
@@ -130,8 +130,8 @@ func max_hp() -> int:
 func max_mp() -> int:
 	return CharacterStats.max_mp(job, level, stats)
 
-func damage_range(extra_attack := 0) -> Vector2i:
-	return CharacterStats.damage_range(job, stats, extra_attack)
+func damage_range() -> Vector2i:
+	return CharacterStats.damage_range(job, stats)
 
 func magic_range() -> Vector2i:
 	return CharacterStats.magic_range(job, stats)
@@ -139,16 +139,14 @@ func magic_range() -> Vector2i:
 func xp_need(lvl := -1) -> int:
 	if lvl < 0:
 		lvl = level
-	# Intended pace, quests included, for a player hunting monsters near their level: about
-	# 2 hours to Lv 10 (the first job) and 40 to the Lv 35 cap. Up to JOB_LEVEL a level takes
-	# SCALE * lvl^GROWTH EXP; after it, the Lv 10 amount times (lvl / JOB_LEVEL)^JOB_GROWTH.
-	# The island quests pay most of the EXP to Lv 10 (about 85,000 of 110,000), so the early
-	# levels are steep enough that hunting still fills the 2 hours. Tuned with the pace bot
-	# (playtest/pace-run-3.md in the project files): Lv 10 in 82-119 minutes without any EXP
-	# boost, Lv 35 in 250-300 bot minutes at 10x kill EXP (about 31-49 hours; Magicians are
-	# slower). Quest EXP rewards are left as they were, so quests stay worth doing; change
-	# them together.
-	const SCALE := 55.0
+	# Up to JOB_LEVEL a level takes SCALE * lvl^GROWTH EXP; after it, the Lv 10 amount times
+	# (lvl / JOB_LEVEL)^JOB_GROWTH, so each level takes longer than the one before.
+	# Tuned with the pace bot (playtest/pace-run-3.md in the project files) at SCALE 55: about
+	# 1.5-2 hours to Lv 10 and 31-49 hours to the Lv 35 cap. SCALE was then halved to 27.5 so
+	# every level needs half the EXP (twice as fast). The island quests pay about 85,000 EXP
+	# before Lv 10, more than the 55,000 now needed, so the early levels speed up the most.
+	# Quest EXP rewards are left as they were, so quests stay worth doing; change them together.
+	const SCALE := 27.5
 	const GROWTH := 3.0
 	const JOB_LEVEL := 10
 	const JOB_GROWTH := 1.8

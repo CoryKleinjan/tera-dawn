@@ -10,14 +10,8 @@
 [ext_resource type="Resource" path="res://data/items/equips/deckhand_coat.tres" id="12_deckhand_coat"]
 [ext_resource type="Resource" path="res://data/items/equips/deckhand_trousers.tres" id="13_deckhand_trousers"]
 [ext_resource type="Resource" path="res://data/items/equips/deckhand_boots.tres" id="14_deckhand_boots"]
-[ext_resource type="Resource" path="res://data/items/ammo/lead_bullet.tres" id="15_lead_bullet"]
 [ext_resource type="Resource" path="res://data/items/setup/coral_seat.tres" id="s_coral_seat"]
 [ext_resource type="Resource" path="res://data/items/setup/barrel_seat.tres" id="s_barrel_seat"]
-
-[sub_resource type="Resource" id="Resource_13"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("15_lead_bullet")
-price = 0
 
 [sub_resource type="Resource" id="Resource_12"]
 script = ExtResource("2_shop_entry")
@@ -73,4 +67,4 @@ price = 6000
 script = ExtResource("1_shop_def")
 id = &"shipwright"
 display_name = "Driftcove Outfitter"
-items = Array[ExtResource("2_shop_entry")]([SubResource("Resource_1"), SubResource("Resource_4"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Entry_coral_seat"), SubResource("Entry_barrel_seat")])
+items = Array[ExtResource("2_shop_entry")]([SubResource("Resource_1"), SubResource("Resource_4"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Entry_coral_seat"), SubResource("Entry_barrel_seat")])

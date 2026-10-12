@@ -17,6 +17,8 @@ const COLUMNS := TDLobby.MAX_CHARACTERS
 var heading: Label
 ## Which server and account this is.
 var subheading: Label
+## While hosting: the address friends type to join, and the firewall button.
+var host_panel: TDHostPanel
 var grid: GridContainer
 ## One button per slot, in order (empty slots too).
 var slots: Array[Button] = []
@@ -41,6 +43,9 @@ func _init() -> void:
 	col.add_child(heading)
 	subheading = UiBuild.label("", 14, Palette.MUTED, HORIZONTAL_ALIGNMENT_CENTER)
 	col.add_child(subheading)
+	host_panel = TDHostPanel.new()
+	host_panel.hide()
+	col.add_child(host_panel)
 	col.add_child(UiSkin.divider())
 	grid = GridContainer.new()
 	grid.columns = COLUMNS
@@ -66,6 +71,9 @@ func show_characters(list: Array, pick := "", where := "") -> void:
 	characters = list
 	if where != "":
 		subheading.text = where
+	host_panel.visible = Net.mode == Net.Mode.HOST
+	if host_panel.visible:
+		host_panel.refresh(Net.port)
 	var names := list.map(func(c: Dictionary) -> String: return c["name"])
 	if pick != "" and names.has(pick):
 		selected = pick

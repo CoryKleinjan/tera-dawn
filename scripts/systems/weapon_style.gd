@@ -17,7 +17,7 @@ const MOTIONS := {
 	&"staff": {&"attack": &"heavy", &"slash": &"cast"},
 	&"bow": {&"attack": &"shoot", &"slash": &"shoot"},
 	&"gun": {&"attack": &"gun", &"slash": &"gun"},
-	&"claw": {&"attack": &"throw", &"slash": &"throw"},
+	&"star": {&"attack": &"throw", &"slash": &"throw"},
 	&"knuckle": {&"attack": &"punch", &"slash": &"slash"},
 }
 ## With nothing in hand.

@@ -21,7 +21,6 @@ damage_multiplier = 0.9
 projectile = ExtResource("2_arrow")
 weapons = Array[StringName]([&"bow"])
 kind = 0
-uses_ammo = true
 height = 90.0
 hit_effect = ExtResource("3_hit")
 icon = ExtResource("4_bow_shot")

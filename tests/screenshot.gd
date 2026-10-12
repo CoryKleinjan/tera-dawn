@@ -124,11 +124,11 @@ func _run() -> void:
 		await _shot("meadow")
 	if only == "" or only == "hero":
 		# The hero just after the blow with each kind of weapon: the weapon in his fist, its
-		# own motion, and a swung blade's streak (shown without the server, so no ammo needed).
+		# own motion, and a swung blade's streak.
 		_teleport(world, Vector2(1120, 620))
 		p.face = 1
 		var kept: ItemStack = ch.equipment.take(&"weapon")
-		for id in [&"dawn_blade", &"willow_bow", &"oak_staff", &"iron_claw", &"flintlock"]:
+		for id in [&"dawn_blade", &"willow_bow", &"oak_staff", &"iron_star", &"flintlock"]:
 			ch.equipment.take(&"weapon")
 			ch.equipment.put(&"weapon", ItemStack.exact(Content.item(id)))
 			ch.recalc()
@@ -172,7 +172,7 @@ func _run() -> void:
 			["Bramble", "hair_long", "hair_color_copper", "skin_honey", "face_freckled", ["green_hood", "willow_bow", "ranger_vest", "leather_boots"]],
 			["Ondine", "hair_twin_tails", "hair_color_blossom", "skin_porcelain", "face_rosy", ["apprentice_hat", "oak_staff", "aurora_robe", "petal_cape"]],
 			["Garrick", "hair_crest", "hair_color_ink", "skin_umber", "face_determined", ["iron_helm", "bronze_sword", "bronze_mail", "oak_shield", "dawnwing_cape"]],
-			["Wren", "hair_ponytail", "hair_color_frost", "skin_bronze", "face_cheeky", ["dusk_bandana", "iron_claw", "night_garb", "work_gloves"]],
+			["Wren", "hair_ponytail", "hair_color_frost", "skin_bronze", "face_cheeky", ["dusk_bandana", "iron_star", "night_garb", "work_gloves"]],
 			["Marlo", "hair_bun", "hair_color_moss", "skin_cocoa", "face_bright", ["tricorn_hat", "flintlock", "sailor_coat", "patched_trousers"]],
 		]
 		var models := []
@@ -326,7 +326,6 @@ func _run() -> void:
 		ch.job = Content.job(&"archer")
 		ch.equipment.take(&"weapon")
 		ch.equipment.put(&"weapon", ItemStack.exact(Content.item(&"willow_bow")))
-		ch.inventory.add(Content.item(&"feather_arrow"), 300)
 		ch.skills.learned[&"double_shot"] = 5
 		ch.set_quickslot(0, &"skill", &"double_shot")
 		ch.mp = 200

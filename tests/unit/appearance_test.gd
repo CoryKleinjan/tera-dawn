@@ -345,7 +345,7 @@ func test_every_weapon_has_a_piece_and_a_hold() -> void:
 			check(held != null and held.name == "weapon_item_" + String(e.id), "%s has its own picture" % e.id)
 			check(Paperdoll.weapon_reach(Paperdoll.kind_of(e)) > 0.0, "%s reaches past the fist" % e.id)
 	var attack := Paperdoll.frame_index(Paperdoll.FRAMES.get_frame_texture(&"attack", 1))
-	for kind in ["sword", "bow", "wand", "staff", "claw", "knuckle", "gun"]:
+	for kind in ["sword", "bow", "wand", "staff", "star", "knuckle", "gun"]:
 		check(Paperdoll.hold(attack, kind) != null, "%s is in his hand mid-attack" % kind)
 		check(Paperdoll.Piece.named("weapon_" + kind) != null, "a %s template for weapons without a picture" % kind)
 	var climbing := Paperdoll.frame_index(Paperdoll.FRAMES.get_frame_texture(&"rope", 0))

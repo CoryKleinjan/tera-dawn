@@ -18,8 +18,8 @@ data/*.tres  ──►  Content (autoload)  ──►  World loads a MapDef  ─
   Godot `Resource`, so it can be edited in the Godot inspector.
 - **Systems** (`scripts/systems/`) are the character's rules that aren't tied to the world:
   `Character` (level, EXP, stats, bag, HP, MP) with its parts `SkillBook` (`c.skills`: skills,
-  Skill Points, buffs), `AbilityPoints` (`c.ap`) and `Gear` (`c.gear`: wearing gear, scrolls,
-  ammo), `Inventory`, `Equipment`, `ItemStack`
+  Skill Points, buffs), `AbilityPoints` (`c.ap`) and `Gear` (`c.gear`: wearing gear and
+  scrolls), `Inventory`, `Equipment`, `ItemStack`
   (one slot's worth of an item, with its own rolled stats for gear) and `CharacterStats` (the
   MapleStory formulas). The server owns each player's `Character`; `Game.me` is your copy.
 - **Components** (`scripts/components/`) are small reusable parts any actor can use: `Health`,

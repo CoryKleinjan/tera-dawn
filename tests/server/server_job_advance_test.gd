@@ -51,7 +51,7 @@ func test_advancing_changes_the_job_and_hands_out_the_gifts_and_sp() -> void:
 	check(h.told(2, "You are now a Magician!"), "told")
 	check(h.told(2, "Your instructor hands you: Apprentice Wand, 30 Blue Potion."), "told what was handed over")
 
-func test_every_job_gets_its_basic_weapon_worn_and_its_ammo() -> void:
+func test_every_job_gets_its_basic_weapon_worn() -> void:
 	for job in JobDef.paths_from(Character.START_JOB):
 		var who := Character.create("Gift" + String(job.id), Character.START_JOB)
 		who.level = job.advance_level
@@ -67,8 +67,6 @@ func test_every_job_gets_its_basic_weapon_worn_and_its_ammo() -> void:
 		check_eq(w, job.advance_gifts[0].item, "%s: the first gift is the weapon worn" % job.id)
 		if old:
 			check(who.inventory.count_of(old) == 1, "%s: the old weapon goes to the bag" % job.id)
-		if w.ammo != &"":
-			check(who.gear.ammo_count() >= 300, "%s: ammo to start with (%d)" % [job.id, who.gear.ammo_count()])
 
 func test_advancing_is_celebrated_and_sent_to_the_player() -> void:
 	_ready_for_mage()

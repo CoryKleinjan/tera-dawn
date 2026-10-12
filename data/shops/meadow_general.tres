@@ -14,9 +14,6 @@
 [ext_resource type="Resource" path="res://data/items/equips/work_gloves.tres" id="item_work_gloves"]
 [ext_resource type="Resource" path="res://data/items/equips/leather_boots.tres" id="item_leather_boots"]
 [ext_resource type="Resource" path="res://data/items/equips/oak_shield.tres" id="item_oak_shield"]
-[ext_resource type="Resource" path="res://data/items/ammo/feather_arrow.tres" id="item_feather_arrow"]
-[ext_resource type="Resource" path="res://data/items/ammo/iron_star.tres" id="item_iron_star"]
-[ext_resource type="Resource" path="res://data/items/ammo/lead_bullet.tres" id="item_lead_bullet"]
 [ext_resource type="Resource" path="res://data/items/use/return_scroll.tres" id="item_return_scroll"]
 [ext_resource type="Resource" path="res://data/items/use/dawnrise_scroll.tres" id="item_dawnrise_scroll"]
 
@@ -80,21 +77,6 @@ script = ExtResource("2_entry")
 item = ExtResource("item_oak_shield")
 price = 0
 
-[sub_resource type="Resource" id="entry_feather_arrow"]
-script = ExtResource("2_entry")
-item = ExtResource("item_feather_arrow")
-price = 0
-
-[sub_resource type="Resource" id="entry_iron_star"]
-script = ExtResource("2_entry")
-item = ExtResource("item_iron_star")
-price = 0
-
-[sub_resource type="Resource" id="entry_lead_bullet"]
-script = ExtResource("2_entry")
-item = ExtResource("item_lead_bullet")
-price = 0
-
 [sub_resource type="Resource" id="entry_return_scroll"]
 script = ExtResource("2_entry")
 item = ExtResource("item_return_scroll")
@@ -109,4 +91,4 @@ price = 0
 script = ExtResource("1_shop")
 id = &"meadow_general"
 display_name = "Mira's General Store"
-items = Array[ExtResource("2_entry")]([SubResource("entry_0"), SubResource("entry_1"), SubResource("entry_2"), SubResource("entry_3"), SubResource("entry_4"), SubResource("entry_5"), SubResource("entry_6"), SubResource("entry_7"), SubResource("entry_8"), SubResource("entry_9"), SubResource("entry_10"), SubResource("entry_11"), SubResource("entry_feather_arrow"), SubResource("entry_iron_star"), SubResource("entry_lead_bullet"), SubResource("entry_return_scroll"), SubResource("entry_dawnrise_scroll")])
+items = Array[ExtResource("2_entry")]([SubResource("entry_0"), SubResource("entry_1"), SubResource("entry_2"), SubResource("entry_3"), SubResource("entry_4"), SubResource("entry_5"), SubResource("entry_6"), SubResource("entry_7"), SubResource("entry_8"), SubResource("entry_9"), SubResource("entry_10"), SubResource("entry_11"), SubResource("entry_return_scroll"), SubResource("entry_dawnrise_scroll")])

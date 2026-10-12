@@ -129,6 +129,7 @@ func _build_play_page() -> void:
 	online.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	start_panel.add_child(online)
 	address_field = UiBuild.field(Game.last_address, "Server address", 64)
+	address_field.tooltip_text = "The server's address, with :port after it if it isn't %d" % Net.DEFAULT_PORT
 	username_field = UiBuild.field(Game.last_username, "Username", AccountStore.MAX_USERNAME)
 	password_field = UiBuild.field("", "Password", AccountStore.MAX_PASSWORD)
 	password_field.secret = true
@@ -230,10 +231,14 @@ func _connect(register: bool) -> void:
 	if address == "" or user == "" or password_field.text == "":
 		show_message("Type the server, your username and your password.")
 		return
+	var server := ServerAddress.parse(address)
+	if server["error"] != "":
+		show_message(server["error"])
+		return
 	Game.last_address = address
 	Game.last_username = user
 	Game.save_settings()
-	var problem := Net.log_in(address, user, password_field.text, register)
+	var problem := Net.log_in(server["host"], user, password_field.text, register, server["port"])
 	password_field.text = ""
 	confirm_field.text = ""
 	show_message(problem if problem != "" else "Connecting to %s…" % address)
@@ -269,7 +274,7 @@ func _where() -> String:
 		Net.Mode.SINGLE:
 			return "Playing solo on this computer"
 		Net.Mode.HOST:
-			return "Hosting on port %d" % Net.DEFAULT_PORT
+			return "Hosting on port %d" % Net.port
 	return "%s on %s" % [Net.username, Game.last_address]
 
 func _on_logged_in() -> void:

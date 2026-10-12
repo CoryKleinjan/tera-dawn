@@ -10,11 +10,11 @@ const BASE_CRIT := 0.12
 ## Lowest and highest hit before skills, crits and monster level: the stats window's
 ## "Damage" line. max = (primary × 4 + secondary) × weapon attack / 100, with the stats
 ## `JobDef.damage_stats` picks.
-static func damage_range(job: JobDef, total: StatBlock, extra_attack := 0) -> Vector2i:
+static func damage_range(job: JobDef, total: StatBlock) -> Vector2i:
 	var used := job.damage_stats(total)
 	var primary := total.value(used[0])
 	var secondary := total.value(used[1])
-	var top := maxi(1, roundi((primary * 4 + secondary) * (total.attack + extra_attack) / 100.0 * DAMAGE_SCALE))
+	var top := maxi(1, roundi((primary * 4 + secondary) * total.attack / 100.0 * DAMAGE_SCALE))
 	return Vector2i(maxi(1, roundi(top * job.mastery)), top)
 
 ## Lowest and highest spell hit before the spell's own multiplier, from Magic Attack (which

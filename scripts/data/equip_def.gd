@@ -12,10 +12,8 @@ const WORN_STYLE_PLACES := {Slot.TOP: "top", Slot.BOTTOM: "bottom", Slot.SHOES: 
 @export var slot: Slot = Slot.WEAPON
 
 @export_group("Weapon")
-## "sword", "bow", "wand", "claw", "knuckle", "gun"... Skills can require one.
+## "sword", "bow", "wand", "star", "knuckle", "gun"... Skills can require one.
 @export var weapon_kind: StringName
-## The ammo kind it fires (AmmoDef.kind), empty for melee weapons.
-@export var ammo: StringName
 ## Replaces the plain attack while wielded (a bow's shot). Null keeps the basic attack.
 @export var basic_attack: SkillDef
 

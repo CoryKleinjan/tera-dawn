@@ -79,15 +79,6 @@ func use(id := &"t_use", max_stack := 100) -> UseDef:
 	register("items", it)
 	return it
 
-func ammo(id := &"t_arrow", kind := &"arrow", attack := 0, max_stack := 1000) -> AmmoDef:
-	var it := AmmoDef.new()
-	it.id = id
-	it.display_name = String(id).capitalize()
-	it.kind = kind
-	it.attack = attack
-	it.max_stack = max_stack
-	register("items", it)
-	return it
 
 func equip(id := &"t_sword", slot := EquipDef.Slot.WEAPON, values := {}, variance := 0) -> EquipDef:
 	var e := EquipDef.new()

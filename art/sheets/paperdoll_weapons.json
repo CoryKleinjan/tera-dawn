@@ -28,7 +28,7 @@
       "staff"
     ],
     [
-      "claw",
+      "",
       "knuckle",
       "gun",
       ""
@@ -47,9 +47,6 @@
     },
     "staff": {
       "blank_top": 31
-    },
-    "claw": {
-      "blank_top": 32
     },
     "knuckle": {
       "blank_top": 32
