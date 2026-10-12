@@ -2359,7 +2359,7 @@
    ],
    "reach": 31.3,
    "kind": "bow",
-   "grip_share": 0.154,
+   "grip_share": 0.131,
    "dots_left": 0
   },
   "item_hunter_bow": {
@@ -2371,9 +2371,9 @@
     31,
     126
    ],
-   "reach": 4.8,
+   "reach": 3.8,
    "kind": "bow",
-   "grip_share": 0.84,
+   "grip_share": 0.864,
    "dots_left": 0
   },
   "item_composite_bow": {
@@ -2388,7 +2388,7 @@
    "reach": 19.4,
    "kind": "bow",
    "grip_share": 0.429,
-   "dots_left": 2
+   "dots_left": 0
   },
   "item_elmwood_longbow": {
    "grip": [
@@ -2402,7 +2402,7 @@
    "reach": 4.4,
    "kind": "bow",
    "grip_share": 0.871,
-   "dots_left": 1
+   "dots_left": 0
   },
   "item_gale_bow": {
    "grip": [
@@ -2413,9 +2413,9 @@
     45,
     123
    ],
-   "reach": 13.5,
+   "reach": 12.5,
    "kind": "bow",
-   "grip_share": 0.693,
+   "grip_share": 0.702,
    "dots_left": 0
   },
   "item_skyreach_bow": {
