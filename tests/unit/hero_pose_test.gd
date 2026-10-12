@@ -128,3 +128,29 @@ func test_the_walk_has_passing_steps_between_strides() -> void:
 	for s in steps:
 		var x := int(s.x * Paperdoll.FRAME_SIZE.x + s.y)
 		check(strip.get_pixel(x, ground).a < 0.5, "frame %d splits between his feet" % int(s.x))
+
+## The fall pose is painted leaning well over, so the rig turns him partway upright about his
+## hips (HeroBody.UPRIGHT), mirrored with the way he faces, and straight again once he lands.
+func test_the_fall_is_turned_partway_upright_about_his_hips() -> void:
+	var rig := SpriteRig.new()
+	rig.setup(HeroBody.FRAMES, null, 0.01)
+	rig.upright = HeroBody.UPRIGHT
+	add_child(rig)
+	var body := rig.body
+	var feet := Vector2(300, 200)
+	var u: Dictionary = HeroBody.UPRIGHT[&"fall"]
+	check(float(u["angle"]) > 0.0 and float(u["angle"]) < 15.0, "turned back some of the painted lean, not past upright")
+	for dir in [1, -1]:
+		rig.place(feet, 0.0)
+		rig.play(&"fall")
+		rig.face(dir)
+		var side := 1.0 if dir > 0 else -1.0
+		check_near(body.rotation.z, -deg_to_rad(float(u["angle"])) * side, "facing %d: turned clockwise on the art as drawn, mirrored" % dir, 0.0001)
+		var px: Vector2 = u["pivot"]
+		var pivot := Vector3((px.x - Paperdoll.FRAME_SIZE.x / 2.0) * side, Paperdoll.FRAME_SIZE.y - px.y, 0.0) * body.pixel_size
+		var at := body.position + pivot.rotated(Vector3.BACK, body.rotation.z)
+		check((at - (TDStage.to3d(feet) + pivot)).length() < 0.0001, "facing %d: his hips stay where they were drawn" % dir)
+	rig.play(&"land")
+	check_eq(body.rotation.z, 0.0, "landing stands him straight")
+	check((body.position - TDStage.to3d(feet)).length() < 0.0001, "on his feet")
+	rig.queue_free()
