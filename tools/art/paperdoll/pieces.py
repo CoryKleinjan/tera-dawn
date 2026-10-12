@@ -32,7 +32,7 @@ def save_piece(name, views, frames, tinted=False, fist=None):
     for view, (img, anchor) in views.items():
         png = saved.get(id(img)) or os.path.join(PIECES, f"{name}_{view}.png")
         if id(img) not in saved:
-            (lift(img) if tinted else img).save(png)
+            (lift(img) if tinted else match_outline(img)).save(png)
             saved[id(img)] = png
         out["views"][view] = {"picture": "res://" + os.path.relpath(png, ROOT),
                               "anchor": [round(float(anchor[0]), 2), round(float(anchor[1]), 2)]}

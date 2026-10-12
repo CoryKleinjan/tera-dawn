@@ -36,6 +36,12 @@ DEFAULT_EYES = (0.25, 0.42, 0.75)
 LIFT_TO = 200
 # Tinted art darker than this is outline: lift() keeps it grey, without the sheets' plum cast.
 OUTLINE_DARK = 110
+# The hero body's outline colour (its edge pixels, measured on hero.png). Gear sheets come back
+# with a lighter plum outline and a pink cast on their soft edge pixels; match_outline() turns
+# both to this, so gear and body read as one drawing.
+HERO_OUTLINE = (29, 2, 10)
+OUTLINE_BAND = 2      # match_outline(): pixels this close to the clear background are outline
+OUTLINE_LIGHT = 120   # of these, ones darker than this (mean of r, g, b)
 
 # Frames seen from behind: no face, the hair's "from behind" piece, the cape in front.
 BACK_VIEW = ("rope1", "rope2", "ladder1", "ladder2", "climb_idle")
@@ -267,6 +273,31 @@ def lift(img):
         mid = max(np.median(arr[solid][:, :3].mean(1)), 1)
         arr[..., :3] = (arr[..., :3] * LIFT_TO / mid).clip(0, 255)
     return Image.fromarray(arr.round().astype(np.uint8), "RGBA")
+
+
+def match_outline(img, outside=None):
+    """Gives full-colour gear the hero's outline: the dark pixels along its edge take
+    HERO_OUTLINE's colour, keeping their own shading, and pink-tinted soft edge pixels the
+    sheet's magenta left are coloured as outline too. Only recolours, so the outline stays as
+    thick as drawn. `outside`: where the picture's clear background is (default: wherever it
+    is see-through), e.g. leaving out where a worn piece only stops at his body."""
+    arr = np.asarray(img).astype(float)
+    alpha, rgb = arr[..., 3], arr[..., :3]
+    clear = alpha < 40 if outside is None else outside
+    band = (alpha >= 15) & ss.dilate(clear, OUTLINE_BAND, outside=True)
+    light = rgb.mean(2)
+    dark = band & (light < OUTLINE_LIGHT)
+    if dark.sum() < 10:
+        return img
+    solid = dark & (alpha > 230)
+    ref = max(float(np.median(light[solid if solid.any() else dark])), 1.0)
+    # fully outline at the outline's own darkness, fading out by 1.7x as light
+    weight = np.clip((1.7 * ref - light) / (0.7 * ref), 0, 1) * band
+    pink = (rgb[..., 0] - rgb[..., 1] > 30) & (rgb[..., 2] - rgb[..., 1] > 20)
+    weight[band & (alpha < 230) & pink] = 1
+    shade = np.clip(light / ref, 0.5, 1.6)[..., None]
+    arr[..., :3] = rgb * (1 - weight[..., None]) + np.array(HERO_OUTLINE, float) * shade * weight[..., None]
+    return Image.fromarray(arr.round().clip(0, 255).astype(np.uint8), "RGBA")
 
 
 def save_layer(name, frames, fw, fh, index, anims, tinted=True, grey=False):

@@ -202,6 +202,9 @@ def item_layers(hero, rig_frames):
                 worn = posed_item(drawn[cell], cell, px, place, twins.get(cell) if twins else None)
                 if worn:
                     _paste(over, worn[0], *worn[1])
+                    # his outline where the piece meets the background, not where it meets him
+                    clear = (np.asarray(over)[..., 3] < 40) & (px[..., 3] < 40)
+                    over = match_outline(over, clear)
                     if place == "cape" and n not in BACK_VIEW:
                         # what the drawn body hides is behind him: the part off his outline
                         # hangs behind the body, the part over it (collar, clasp) in front
