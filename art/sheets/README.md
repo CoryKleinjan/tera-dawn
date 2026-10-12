@@ -129,8 +129,10 @@ list in `paperdoll_body.json`.
   place; `--plain` for a grey or graded background).
 - **Platform pieces** (`platform_pieces_<area>`): left cap, two middles and right cap into
   `assets/sprites/platforms/<area>/` (undersides to `art/build/`). The slicer then runs
-  `tools/art/platform_pieces.py`, which lines up the walking surfaces and thins them to the
-  manifest's `"platform"` options (`max_depth`, `top_share`, `"bottom": "under"`). The game
+  `tools/art/platform_pieces.py`, which keeps the pieces at the rows they had in the sheet (so
+  the caps meet the middles) and thins them to the manifest's `"platform"` options
+  (`max_depth`, `top_share`, `"bottom": "under"`, and `shift` to nudge a cap painted as its own
+  picture). The game
   joins them into one picture per platform (`PlatformSkin`), so `crop` off a clipped ornament on
   a piece's inner edge.
 - **Buildings** (`building_<area>_<large|small>`): one building per sheet; `art_px` is the

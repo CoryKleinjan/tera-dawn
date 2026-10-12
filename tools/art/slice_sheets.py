@@ -892,7 +892,10 @@ def cut_cell(rgb_full, bg, box, opts):
         px[..., :3] = (rgb[by0:by1, bx0:bx1] * 255).round().astype(np.uint8)
         px[..., 3] = (a[by0:by1, bx0:bx1] * 255).round().astype(np.uint8)
         px[px[..., 3] == 0, :3] = 0
+        # where its top row sat in the whole sheet, in cut pixels (pieces of one picture line up by it)
+        sheet_y = (y0 + ins + opts.get("crop", [0, 0])[1]) * opts["scale"] + by0
         out.append({"image": Image.fromarray(px, "RGBA"), "x": int(bx0), "y": int(by0),
+                    "sheet_y": float(sheet_y),
                     "cell_w": alpha.shape[1], "cell_h": alpha.shape[0], "detail": opts["detail"]})
     return out
 
@@ -1160,7 +1163,8 @@ def main():
     for p in ready:
         name = os.path.splitext(os.path.basename(p))[0]
         if name.startswith("platform_pieces_"):
-            platform_pieces.prepare(name[len("platform_pieces_"):])
+            sheet_y = {key.split(":", 1)[1]: piece["sheet_y"] for key, piece in sprites.items() if key.startswith(name + ":")}
+            platform_pieces.prepare(name[len("platform_pieces_"):], sheet_y)
         if name.startswith("terrace_pieces_"):
             platform_pieces.prepare_terrace(name[len("terrace_pieces_"):])
     # rope and ladder pieces get lined up on their rope or rails (their pieces may come from
