@@ -5,6 +5,8 @@ from collections import deque
 from .common import *  # noqa: F401,F403
 from .pieces import pose, save_fist, save_piece
 
+BOW_TIP = 0.08  # bow_parts: the share of a bow's height at each end that counts as its tip
+
 
 # ---------- weapons ----------
 
@@ -115,7 +117,10 @@ def grip_point(arr, kind, axis, dots):
     - a wand or staff: halfway along the shaft;
     - a gun: in the middle of the pistol grip (the part hanging below the barrel at the back);
     - a claw: in the middle of its cuff (CLAW_CUFF along it), so the cuff covers his fist;
-    - anything else (bows, knuckles): its dot, or a guess near its back end."""
+    - a bow: on its riser, halfway up (bow_parts), so it is held by the middle;
+    - anything else (knuckles): its dot, or a guess near its back end."""
+    if kind == "bow":
+        return bow_parts(arr)[0]
     xs, ys, a, b = _along(arr, axis)
     lo, hi = float(a.min()), float(a.max())
     span = hi - lo
@@ -179,22 +184,38 @@ def length(piece, kind):
 
 def stood_up(piece):
     """A bow as the rig holds it: upright, its belly (the bow itself) on the right and its
-    string on the left, like the bow template. The held_bows sheet draws its bows at a slant
-    with the string on the right, so they are turned upright and mirrored; one already
-    standing up is kept as it is."""
+    string on the left, like the bow template, so its belly faces where he shoots. A bow drawn
+    at a slant is turned upright, and one with its string on the right (its tips curving that
+    way, see bow_parts) is mirrored; one already standing up that way is kept as it is."""
     img = piece.img
     axis = drawn_axis(np.asarray(img))
     if abs(axis + 90) > UPRIGHT_SLACK:
         img = img.rotate(axis + 90, resample=Image.BICUBIC, expand=True)
         img = img.crop(img.getbbox())
-    xs = np.nonzero(np.asarray(img)[..., 3] > 0)[1]
-    if xs.mean() < (xs.min() + xs.max()) / 2:
+    riser, tips_x = bow_parts(np.asarray(img))
+    if tips_x > riser[0]:
         img = ImageOps.mirror(img)
     if img is piece.img:
         return piece
     out = copy.copy(piece)
     out.img = img
     return out
+
+
+def bow_parts(arr):
+    """An upright bow picture's riser, where his fist closes on it: (x, y) in the middle of its
+    height, on the widest run of pixels across that row (the bow itself, not its string); and
+    the mean x of its two tips, which curve toward the string's side."""
+    solid = arr[..., 3] > 127
+    rows = np.nonzero(solid.any(1))[0]
+    top, bottom = int(rows.min()), int(rows.max())
+    mid, end = (top + bottom) // 2, max(1, round((bottom - top) * BOW_TIP))
+    band = np.concatenate([[False], solid[max(0, mid - 3):mid + 4].any(0), [False]])
+    edges = np.flatnonzero(np.diff(band.astype(int)))
+    runs = list(zip(edges[::2], edges[1::2]))
+    start, stop = max(runs, key=lambda r: r[1] - r[0])
+    tips = [np.nonzero(solid[top:top + end])[1].mean(), np.nonzero(solid[bottom - end + 1:bottom + 1])[1].mean()]
+    return ((start + stop - 1) / 2, float(mid)), float(np.mean(tips))
 
 
 def drawn_axis(arr):
@@ -210,16 +231,24 @@ def drawn_axis(arr):
     return round(math.degrees(math.atan2(dy, dx)), 1)
 
 
+# Frames where he holds no weapon, in his hand or on his back.
+EMPTY_HANDED = ("levelup",)
+
+
 def holds(hands, spec, names, forearms=None):
     """Per weapon kind, per frame: [x, y, angle] of the fist and the weapon in it (the sword's
-    are the hand-placed "weapon" points), or None when the weapon isn't in his hand. A kind
+    are the hand-placed "weapon" points; a kind's own [x, y, angle] puts it in his hand on any
+    frame), or None when the weapon isn't in his hand (on his back: ON_BACK). A kind
     with "along": "forearm" points the way his forearm does (`forearms`, from forearm_angles)."""
     out = {"sword": {n: hands[n].get("weapon") for n in names}}
-    # a "sword" entry only turns the hand-placed blade (held at one tilt while he stands, walks
-    # and runs, swaying a little), keeping where the fist is
-    for n, angle in spec.get("sword", {}).get("frames", {}).items():
-        if out["sword"].get(n) is not None:
-            out["sword"][n] = [out["sword"][n][0], out["sword"][n][1], angle]
+    # a "sword" entry turns the hand-placed blade (held at one tilt while he stands, walks and
+    # runs, swaying a little), keeping where the fist is; [x, y, angle] moves the fist too
+    # (placing it even on a frame with no "weapon" point, such as sit)
+    for n, v in spec.get("sword", {}).get("frames", {}).items():
+        if isinstance(v, list):
+            out["sword"][n] = [round(float(c), 1) for c in v]
+        elif out["sword"].get(n) is not None:
+            out["sword"][n] = [out["sword"][n][0], out["sword"][n][1], v]
 
     def resolve(kind):
         if kind not in out:
@@ -228,12 +257,13 @@ def holds(hands, spec, names, forearms=None):
             frames = {}
             for n in names:
                 v = h.get("frames", {}).get(n, h.get("angle"))
+                if isinstance(v, list):  # [x, y, angle]: in his fist there, even where the sword has none
+                    frames[n] = [round(float(c), 1) for c in v]
+                    continue
                 if h.get("along") == "forearm" and forearms and forearms.get(n) is not None:
                     v = forearms[n]
                 if base[n] is None:
                     frames[n] = None
-                elif isinstance(v, list):
-                    frames[n] = [round(float(c), 1) for c in v]
                 else:
                     frames[n] = [base[n][0], base[n][1], base[n][2] if v is None else v]
             out[kind] = frames
@@ -241,6 +271,10 @@ def holds(hands, spec, names, forearms=None):
 
     for kind in WEAPON_KINDS:
         resolve(kind)
+    for kind in out:  # no weapon at all while he levels up (Cory 2026-10-12), whatever a kind's line says
+        for n in EMPTY_HANDED:
+            if n in out[kind]:
+                out[kind][n] = None
     return out
 
 

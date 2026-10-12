@@ -1,5 +1,5 @@
 extends TestCase
-## The hero's resting and moving poses: he stands still apart from a blink now and then, and
+## The hero's resting and moving poses: one standing frame and a blink (hero_idle_test), and
 ## whatever he holds points the way he faces (forward, or straight up or down), never back
 ## at where he came from. Weapon angles come from art/sheets/paperdoll_rig.json through
 ## tools/art/paperdoll_layers.py into the hero's rig.
@@ -40,10 +40,11 @@ func test_held_weapons_point_forward_at_rest_and_on_the_move() -> void:
 			continue
 		for kind in Paperdoll.rig()["frames"][f].get("holds", {}):
 			var h: Variant = Paperdoll.hold(f, StringName(kind))
-			# a claw, a knuckle and a gun's barrel point along his forearm, wherever it hangs (Cory
-			# 2026-10-11: a gun needn't point forward, it must sit in his hand; 2026-10-12: knuckles
-			# are worn like the claws)
-			if h == null or kind in ["claw", "knuckle", "gun"]:
+			# a claw, and a gun's barrel, point along his forearm, wherever it hangs (Cory 2026-10-11:
+			# a gun needn't point forward, it must sit in his hand); a bow lies across his forearm,
+			# level when his arm hangs, and one-handed blades and wands keep one angle to it too
+			# (Cory 2026-10-12: one angle to the forearm in every pose)
+			if h == null or kind in ["claw", "gun", "bow", "sword", "wand", "knuckle"]:
 				continue
 			# angle: clockwise from pointing right (the way he faces); up or down is fine
 			check(cos(h["angle"]) > -0.02, "%s: the %s points forward or up/down, not back (%d degrees)" % [name, kind, roundi(rad_to_deg(h["angle"]))])
@@ -76,6 +77,12 @@ func test_he_blinks_now_and_then_while_standing() -> void:
 	check_eq(body.animation, &"blink", "standing on doesn't cut the blink short")
 	rig._blink(SpriteRig.BLINK_TIME + 0.01)
 	check_eq(body.animation, &"idle", "and open again")
+	if rig._twice: # now and then he blinks twice in a row, but never three times
+		rig._blink(SpriteRig.DOUBLE_BLINK_GAP + 0.01)
+		check_eq(body.animation, &"blink", "a second blink straight after")
+		rig._blink(SpriteRig.BLINK_TIME + 0.01)
+		check_eq(body.animation, &"idle", "open again after the second")
+		check(not rig._twice, "never a third")
 	rig._blink(SpriteRig.BLINK_EVERY.x * 0.5)
 	check_eq(body.animation, &"idle", "not straight away again")
 	rig.play(&"walk")

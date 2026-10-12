@@ -92,8 +92,12 @@ def rig_entries(hero, held):
             entry["holds"] = {k: held[k][n] for k in WEAPON_KINDS if held[k][n] is not None}
             if h.get("weapon_behind"):
                 entry["weapon_behind"] = True
+        elif any(held[k][n] is not None for k in WEAPON_KINDS):  # held where he has no "weapon" point (sit)
+            entry["holds"] = {k: held[k][n] for k in WEAPON_KINDS if held[k][n] is not None}
         if "shield" in h:
             entry["shield"] = list(h["shield"])
+            if h.get("front") == "shield" and "weapon" in h:  # the shield hand is nearest us: the weapon goes there
+                entry["shield_at"] = list(h["weapon"][:2])
         if n not in BACK_VIEW:
             entry["face"] = entry["head"]
         rig_frames.append(entry)
