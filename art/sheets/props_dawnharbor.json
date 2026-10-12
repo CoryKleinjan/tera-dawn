@@ -1,0 +1,91 @@
+{
+  "source": "art/source/props_dawnharbor.png",
+  "out_dir": "assets/sprites/tiles/dawnharbor",
+  "label_band": 0,
+  "inset": 10,
+  "grid": {
+    "rows": [
+      0,
+      572,
+      1156,
+      1728
+    ],
+    "cols": [
+      0,
+      766,
+      1537,
+      2306,
+      3072
+    ]
+  },
+  "cells": [
+    [
+      "prop_crates",
+      "prop_barrels",
+      "prop_sacks",
+      "prop_rope_coil"
+    ],
+    [
+      "prop_anchor",
+      "prop_lobster_pots",
+      "prop_net_rack",
+      "prop_mooring_post"
+    ],
+    [
+      "prop_bench",
+      "prop_planter",
+      "prop_cart",
+      "prop_signpost"
+    ]
+  ],
+  "overrides": {
+    "prop_crates": {
+      "scale": 0.0926,
+      "flat_bottom": true
+    },
+    "prop_barrels": {
+      "scale": 0.0811,
+      "flat_bottom": true
+    },
+    "prop_sacks": {
+      "scale": 0.0702,
+      "flat_bottom": true
+    },
+    "prop_rope_coil": {
+      "scale": 0.0451,
+      "flat_bottom": true
+    },
+    "prop_anchor": {
+      "scale": 0.0894,
+      "flat_bottom": true
+    },
+    "prop_lobster_pots": {
+      "scale": 0.0675,
+      "flat_bottom": true
+    },
+    "prop_net_rack": {
+      "scale": 0.1049,
+      "flat_bottom": true
+    },
+    "prop_mooring_post": {
+      "scale": 0.0635,
+      "flat_bottom": true
+    },
+    "prop_bench": {
+      "scale": 0.0633,
+      "flat_bottom": true
+    },
+    "prop_planter": {
+      "scale": 0.0559,
+      "flat_bottom": true
+    },
+    "prop_cart": {
+      "scale": 0.0641,
+      "flat_bottom": true
+    },
+    "prop_signpost": {
+      "scale": 0.1224,
+      "flat_bottom": true
+    }
+  }
+}

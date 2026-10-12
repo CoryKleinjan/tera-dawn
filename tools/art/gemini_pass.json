@@ -13462,6 +13462,55 @@
     ],
     "text": "The first image is an empty magenta canvas. On it, paint a sheet of TWELVE separate harbour props for the harbour city in my 2D side-scrolling game, laid out in 3 rows of 4, evenly spaced, each prop centred in its own quarter-by-third area of the canvas with a wide band of plain magenta around it, and no prop touching another. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture (wood grain, rope fibres, rust, worn and chipped spots). The third image is a building from the same town: match its style, palette, outline thickness and level of detail exactly, so the props clearly belong on its street. The twelve props, in reading order: Row 1: 1) a stack of three wooden cargo crates, 2) two wooden barrels side by side, 3) three plump burlap grain sacks leaning together, 4) a big coil of thick ship's rope. Row 2: 5) a heavy iron anchor standing upright, 6) two stacked wooden lobster pots, 7) a fishing net hung to dry on a simple wooden rack, 8) a short thick wooden mooring post with rope wrapped around it. Row 3: 9) a wooden park bench, 10) a long wooden flower planter box full of pink and yellow flowers, 11) a wooden hand cart with two wheels, 12) a wooden signpost with two blank arrow boards. Strict rules: 1) Every prop in pure side view at eye level, standing upright on its own flat bottom edge, sized as it would be next to a person (crates and barrels about waist high). 2) No ground, shadow, grass, water or base under any prop. 3) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. 4) No letters, numbers, words or labels anywhere, no grid lines, no borders and no frames. 5) Flat pure magenta #FF00FF background everywhere outside the props, with no magenta or pink anywhere inside them except the planter's pink flowers. Do not draw any characters."
    }
+  },
+  {
+   "id": "dawnharbor_props_fix",
+   "prompts": null,
+   "batch": "Dawnharbor city: props sheet, flat bottoms fix",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_props_fix.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    4,
+    3
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-12 harbor-city thread (Cory 02:39Z): every prop stands on a flat bottom; the mooring post's rope has no loose ends.",
+   "edit": {
+    "base": "art/source/props_dawnharbor.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ],
+    "text": "The first image is a sheet of twelve painted harbour props for my 2D side-scrolling game, in 3 rows of 4. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture. Keep this sheet exactly as it is: the same layout, the same positions and sizes, and the crates, barrels, sacks, lobster pots, fishing net rack, bench, flower planter and signpost unchanged in every detail. Redraw ONLY these four props, in the same style and in their same places: 1) Row 2, first: the iron anchor, now lying on its side on the ground, resting on a flat bottom edge. 2) Row 1, last: the coil of rope, now a low flat coil lying on the ground with a flat bottom edge, its loose end tucked in. 3) Row 2, last: the wooden mooring post, its rope wrapped neatly around it and tied off in a knot on the post, with NO loose rope ends hanging out to the sides; the post's bottom is a flat straight edge. 4) Row 3, third: the wooden hand cart, standing level with the bottom of its wheel and its front leg on one flat straight ground line. Every prop's bottom must be a flat horizontal edge it can stand on. No ground, shadow or grass under anything. No grid lines, borders, letters or words. Painted, not pixel art. Flat pure magenta #FF00FF background everywhere outside the props."
+   }
+  },
+  {
+   "id": "dawnharbor_lamp_post",
+   "prompts": null,
+   "batch": "Dawnharbor city: street lamp post",
+   "with": null,
+   "refs": [],
+   "save": "dawnharbor_lamp_post.png",
+   "replaces": null,
+   "kind": "still",
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 harbor-city thread (Cory 02:16Z): the old low-res lamp post looks wrong; a tall painted street lamp replaces it.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnharbor-city/lamp_post_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "art/source/building_dawnharbor_tavern.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE street lamp post for the harbour town in my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture. The third image is a building from the same town: match its style, palette, outline thickness and level of detail exactly. The lamp: a tall slender dark iron post, about two and a half times as tall as a person, with a small decorative base, gentle ironwork scrolls near the top, and a glass lantern head with a little pointed cap. The lantern is lit, with a warm golden glowing flame inside its glass panes. Strict rules: 1) Pure side view at eye level, perfectly upright and centred. 2) The bottom of the base is ONE flat straight horizontal edge. No ground, shadow or grass under it. 3) The lamp fills most of the canvas height with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words. No glow halo spilling onto the background. Flat pure magenta #FF00FF background everywhere outside the lamp."
+   }
   }
  ]
 }
