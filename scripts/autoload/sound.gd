@@ -94,10 +94,12 @@ func jingle(id: StringName) -> void:
 			p.volume_db = DUCK_DB
 
 func _unduck() -> void:
+	var playing := _music.filter(func(p: AudioStreamPlayer) -> bool: return p.playing)
+	if playing.is_empty():
+		return
 	_duck = create_tween().set_parallel()
-	for p in _music:
-		if p.playing:
-			_duck.tween_property(p, "volume_db", 0.0, DUCK_RETURN)
+	for p in playing:
+		_duck.tween_property(p, "volume_db", 0.0, DUCK_RETURN)
 
 func _fade(p: AudioStreamPlayer, to_db: float, time: float) -> Tween:
 	var t := create_tween()
