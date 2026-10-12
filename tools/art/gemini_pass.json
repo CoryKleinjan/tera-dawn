@@ -13466,7 +13466,7 @@
   {
    "id": "dawnharbor_props_fix",
    "prompts": null,
-   "batch": "Dawnharbor city: props sheet, flat bottoms fix",
+   "batch": "Dawnharbor city: props sheet redrawn flat 2D side view",
    "with": null,
    "refs": [],
    "save": "dawnharbor_props_fix.png",
@@ -13478,13 +13478,14 @@
    ],
    "anchor": null,
    "size": "4K",
-   "note": "2026-10-12 harbor-city thread (Cory 02:39Z): every prop stands on a flat bottom; the mooring post's rope has no loose ends.",
+   "note": "2026-10-12 harbor-city thread (Cory 02:39-02:41Z): props drawn flat 2D side-on, each on a flat bottom; the mooring post's rope has no loose ends.",
    "edit": {
     "base": "art/source/props_dawnharbor.png",
     "refs": [
-     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "art/source/building_dawnharbor_tavern.png"
     ],
-    "text": "The first image is a sheet of twelve painted harbour props for my 2D side-scrolling game, in 3 rows of 4. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture. Keep this sheet exactly as it is: the same layout, the same positions and sizes, and the crates, barrels, sacks, lobster pots, fishing net rack, bench, flower planter and signpost unchanged in every detail. Redraw ONLY these four props, in the same style and in their same places: 1) Row 2, first: the iron anchor, now lying on its side on the ground, resting on a flat bottom edge. 2) Row 1, last: the coil of rope, now a low flat coil lying on the ground with a flat bottom edge, its loose end tucked in. 3) Row 2, last: the wooden mooring post, its rope wrapped neatly around it and tied off in a knot on the post, with NO loose rope ends hanging out to the sides; the post's bottom is a flat straight edge. 4) Row 3, third: the wooden hand cart, standing level with the bottom of its wheel and its front leg on one flat straight ground line. Every prop's bottom must be a flat horizontal edge it can stand on. No ground, shadow or grass under anything. No grid lines, borders, letters or words. Painted, not pixel art. Flat pure magenta #FF00FF background everywhere outside the props."
+    "text": "The first image is a sheet of twelve painted harbour props for my 2D side-scrolling game, in 3 rows of 4. Redraw ALL twelve props as flat 2D side-scroller art, keeping the same objects, colours, materials, painted style, layout and positions. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture. The third image is a building from the same town, drawn straight from the front: draw the props in the same flat way. Strict rules for every prop: 1) Flat 2D view straight from the side at eye level, like a theatre flat: only the front face shows, no top surfaces seen from above, no three-quarter or isometric angle, no perspective; every horizontal edge level and every vertical edge upright. 2) Each prop stands on ONE flat straight horizontal bottom edge, as if resting on flat ground: crates and lobster pots sit on their flat bottoms, the barrels stand upright, the sacks sit flat, the rope coil is a low flat coil lying on the ground, the anchor lies on its side flat on the ground, the cart stands level with its wheel and front leg on one ground line, the bench, planter, net rack and signpost stand on their flat feet. 3) The mooring post's rope is wrapped neatly around it and tied off in a knot on the post, with NO loose rope ends hanging out. No ground, shadow or grass under anything. No grid lines, borders, letters or words. Painted, not pixel art. Flat pure magenta #FF00FF background everywhere outside the props."
    }
   },
   {
