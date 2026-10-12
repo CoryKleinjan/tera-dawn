@@ -365,7 +365,8 @@ def save_hair_cut(hero, name, head=False):
         path = os.path.join(LAYERS, f"hair_{style}.png")
         if os.path.exists(path):
             hair = np.asarray(Image.open(path))[..., 3] > 0
-            cut = no_loose_hair(strip, solids, heads, hair, fw, [fi["r"] for fi in hero.info], style in HAIR_TAILS)
+            cut = no_loose_hair(strip, solids, heads, hair, fw, [fi["r"] for fi in hero.info], style in HAIR_HEAD_ONLY,
+                                [fi["head"] for fi in hero.info])
             # (softened only where some of this hair shows beside it: none peeks out along a soft
             # edge with nothing beside it)
             hard = (cut[..., 3] > 0) & ~ss.dilate(hair & (cut[..., 3] == 0), HAIR_CUT_TUCK + 1)
@@ -381,7 +382,7 @@ def his_head(px, fi):
     return head
 
 
-def no_loose_hair(strip, solids, heads, hair, fw, radii, tails=False):
+def no_loose_hair(strip, solids, heads, hair, fw, radii, tails=False, centres=None):
     """A hair cut strip that also hides the bits of one hairstyle's hair the cut leaves loose:
     every patch still showing whose cut edge is mostly out in the air rather than at the hat
     (within HAIR_CUT_TOUCH of it), such as a ponytail's end whose middle went under the hat or a
@@ -390,8 +391,10 @@ def no_loose_hair(strip, solids, heads, hair, fw, radii, tails=False):
     of long hair hanging down his back from under a helm (Cory 2026-10-12: hair that is
     disconnected and floating is trimmed); and any wisp smaller than HAIR_CUT_SPECK head radii squared
     off on its own (or HAIR_CUT_CRUMB anywhere). A patch the cut doesn't reach stays. A style
-    with `tails` (HAIR_TAILS: ponytail, twin tails) shows none of its hair off his head under a
-    hat (Cory 2026-10-12: ponytails and pigtails shouldn't show under hats)."""
+    with `tails` (HAIR_HEAD_ONLY: long hair, ponytail, twin tails) shows none of its hair off his
+    head (past HAIR_HEAD_ONLY_R head radii from its middle) under a hat, only the locks framing
+    his face (Cory 2026-10-12: ponytails and pigtails shouldn't show under hats; long hair
+    sticking out of a hat is just the locks by his face)."""
     out = strip.copy()
     for i, solid in enumerate(solids):
         cut = out[:, i * fw:(i + 1) * fw]
@@ -399,13 +402,15 @@ def no_loose_hair(strip, solids, heads, hair, fw, radii, tails=False):
         shows = hair[:, i * fw:(i + 1) * fw] & ~hidden
         if not solid.any() or not shows.any():
             continue
+        hat_cut = hidden  # (where the hat's own cut chopped it, not the tails' below)
         if tails:  # (its tails go under the hat with the rest)
-            on = ss.dilate(heads[i], HAIR_CUT_BODY)
+            hx, hy = centres[i]
+            yy, xx = np.mgrid[0:hidden.shape[0], 0:fw]
+            on = (xx - hx) ** 2 + (yy - hy) ** 2 <= (HAIR_HEAD_ONLY_R * radii[i]) ** 2  # (a round line, no steps)
             cut[ss.dilate(shows & ~on, 3) & ~(shows & on)] = 255  # (wide enough that its soft edge still hides it all)
-            hidden = cut[..., 3] > 0
-            shows &= ~hidden
+            shows &= ~(cut[..., 3] > 0)
         lab, n = ss.label(shows)
-        edge = shows & ss.dilate(hidden & hair[:, i * fw:(i + 1) * fw], 1)  # (where the cut chopped it)
+        edge = shows & ss.dilate(hat_cut & hair[:, i * fw:(i + 1) * fw], 1)  # (where the cut chopped it)
         at_hat = edge & ss.dilate(solid, HAIR_CUT_TOUCH)
         chopped = np.bincount(lab[edge], minlength=n + 1)
         held = np.bincount(lab[at_hat], minlength=n + 1)
