@@ -27,6 +27,13 @@ const UNARMED := {&"attack": &"punch", &"slash": &"slash"}
 const SPELL := &"cast"
 ## Every animation a skill can play (each restarts when the skill is used again).
 const ACTIONS: Array[StringName] = [&"attack", &"slash", &"punch", &"throw", &"shoot", &"gun", &"heavy"]
+## The frame each throwing or shooting animation lets go on: the shot leaves his hand there.
+const RELEASES := {&"throw": 1, &"shoot": 1, &"gun": 1}
+## Weapon kinds that leave his hand when thrown: gone from his fist from the release frame
+## until the throw ends.
+const THROWN: Array[StringName] = [&"star"]
+## Weapon kinds that show their shot on the weapon while he draws (the arrow on the string).
+const NOCKED: Array[StringName] = [&"bow"]
 
 ## The animation a motion plays with a weapon kind (&"" for bare hands).
 static func animation(kind: StringName, motion: StringName) -> StringName:

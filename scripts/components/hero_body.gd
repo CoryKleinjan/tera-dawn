@@ -74,7 +74,27 @@ func use_skill(look: Dictionary, skill: SkillDef) -> StringName:
 		rig.pulse(skill.flash_color())
 		return &""
 	_swing = true
+	if rig.paperdoll:
+		rig.paperdoll.ready_shot(skill.projectile)
 	return anim
+
+## Where a shot from `skill` leaves his hand facing `face` (1 right, -1 left): the fist,
+## bow string or gun muzzle on the frame his motion lets go (WeaponStyle.RELEASES), in game
+## pixels from his feet; null when the motion has no such frame or the weapon isn't in hand.
+func release_offset(skill: SkillDef, face: int) -> Variant:
+	var doll := rig.paperdoll.doll if rig.paperdoll else null
+	if doll == null:
+		return null
+	var anim := WeaponStyle.animation(doll.weapon_kind, skill.animation)
+	var index: int = WeaponStyle.RELEASES.get(anim, -1)
+	if index < 0 or not FRAMES.has_animation(anim) or index >= FRAMES.get_frame_count(anim):
+		return null
+	var p: Variant = Paperdoll.release_point(Paperdoll.frame_index(FRAMES.get_frame_texture(anim, index)), doll.weapon_kind)
+	if p == null:
+		return null
+	# frame pixels -> game pixels: the frame's bottom middle is at his feet
+	var texel := TDStage.TEXEL * SCALE / Paperdoll.ART_SCALE
+	return Vector2((p.x - Paperdoll.FRAME_SIZE.x / 2.0) * face, p.y - Paperdoll.FRAME_SIZE.y) * texel
 
 ## Draws the hero this frame: between his last two ticks (TDWorld.drawn), raised onto his
 ## chair, playing `anim` at `speed` (see stride_speed) and facing `face` (always the same way

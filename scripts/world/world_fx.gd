@@ -22,6 +22,14 @@ func show_skill(peer: int, skill: SkillDef, at: Vector2, face: int, lines: Array
 	var views := world.mobs()
 	var mine := who == world.player
 	var from := at + Vector2(face * 20, -TDPlayer.CHEST - 2)
+	var hero: HeroBody = (who as TDAvatar).body if who is TDAvatar else (who as TDPlayer).body if who is TDPlayer else null
+	var hand: Variant = hero.release_offset(skill, face) if hero else null
+	if hand != null and skill.projectile:
+		# from his fist, bow string or gun muzzle: a star spins there; an arrow or bullet
+		# starts ahead of it, so on its first step its tail is at the string or muzzle
+		var p := skill.projectile
+		var tail := 0.0 if p.spin != 0.0 else maxf(0.0, TDStage.art_size(p.texture, p.texel).x / 2.0 - p.speed)
+		from = at + hand + Vector2(face * tail, 0)
 	if skill.projectile and lines.is_empty():
 		# nothing in range: it flies off and fades
 		for i in skill.hits:

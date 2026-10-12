@@ -11,6 +11,9 @@ const LAYER_SHADER := preload("res://shaders/paperdoll_layer.gdshader")
 ## How far layers sit in front of (or behind) the body, in 3D units. Layers are spread
 ## within that, in drawing order.
 const DEPTH := 0.01
+## The shot on his weapon (nock) lies level, the way it will fly, with its tip this many frame
+## pixels past his fist.
+const NOCK_PAST := 10.0
 
 var body: AnimatedSprite3D
 ## His layers have soft edges, so they're drawn like any see-through thing, after what's behind
@@ -28,6 +31,9 @@ var _texel := 1.0
 var _layers: Array[SpriteBase3D] = []
 ## The streak his weapon leaves and the flash of a shot.
 var trail: WeaponTrail
+## The shot on his weapon while he draws (an arrow on the bow string): the picture of what
+## his skill shoots (ready_shot), shown on the frames before it lets go.
+var nock: Sprite3D
 ## The animation and frame showing last time (the trail sweeps between frames).
 var _anim := &""
 var _index := -1
@@ -45,7 +51,18 @@ func _init(sprite: AnimatedSprite3D, texel: float, priority_: int) -> void:
 	(trail.material_override as Material).render_priority = priority + TDStage.HERO_PRIORITIES - 1
 	trail.position.z = DEPTH * 1.2
 	add_child(trail)
+	nock = Sprite3D.new()
+	TDStage.style_sprite(nock, texel)
+	nock.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	nock.render_priority = priority + TDStage.HERO_PRIORITIES - 2
+	nock.visible = false
+	add_child(nock)
 	set_look({})
+
+## The skill he's about to use shoots this (null for none): it shows on his weapon while he
+## draws, if his weapon shows its shot (WeaponStyle.NOCKED).
+func ready_shot(shot: ProjectileDef) -> void:
+	nock.texture = shot.texture if shot else null
 
 ## Dresses the hero in a look (Character.look()). Does nothing if it hasn't changed.
 func set_look(new_look: Dictionary) -> void:
@@ -117,6 +134,28 @@ func sync() -> void:
 		a.offset = body.offset
 		a.flip_h = mirror
 		a.modulate = body.modulate
+	var release: int = WeaponStyle.RELEASES.get(body.animation, -1)
+	# a thrown weapon has left his hand
+	if release >= 0 and body.frame >= release and doll.weapon_kind in WeaponStyle.THROWN and doll.weapon_layer >= 0:
+		_layers[doll.weapon_layer].visible = false
+	_place_nock(frame, mirror, release >= 0 and body.frame < release)
+
+## Puts the shot on his weapon while he draws (`drawing`), as long as the weapon is, from his
+## fist back toward the string, or hides it.
+func _place_nock(frame: int, mirror: bool, drawing: bool) -> void:
+	var h: Variant = Paperdoll.hold(frame, doll.weapon_kind) if drawing and nock.texture and doll.weapon_kind in WeaponStyle.NOCKED else null
+	nock.visible = h != null
+	if h == null:
+		return
+	var w: Dictionary = Paperdoll.rig().get("weapons", {}).get(String(doll.weapon_kind), {})
+	var length: float = maxf(w["size"][0], w["size"][1]) if w.has("size") else 100.0
+	var side := -1.0 if mirror else 1.0
+	# its tip just past his fist, the rest of it back to the string
+	var mid: Vector2 = h["grip"] + Vector2(NOCK_PAST - length / 2.0, 0.0)
+	nock.pixel_size = body.pixel_size * length / nock.texture.get_width()
+	nock.flip_h = mirror
+	nock.position = Vector3((mid.x - Paperdoll.FRAME_SIZE.x / 2.0) * side, Paperdoll.FRAME_SIZE.y - mid.y, DEPTH * 1.1) * body.pixel_size
+	nock.modulate = body.modulate
 
 ## Puts a piece where its pose for `frame` says (Paperdoll.Piece), or hides it.
 func _place(s: Sprite3D, l: Paperdoll.Layer, i: int, frame: int, mirror: bool) -> void:

@@ -204,6 +204,8 @@ var layers: Array[Layer] = []
 ## The kind of weapon in his hand (&"" bare-handed) and its colour (its streak when swung).
 var weapon_kind := &""
 var weapon_tint := Color.WHITE
+## Which of `layers` is the weapon in his hand (a piece), or -1.
+var weapon_layer := -1
 
 static var _rig: Dictionary
 static var _refs: PackedVector3Array
@@ -335,6 +337,7 @@ static func dress(look: Dictionary) -> Paperdoll:
 		d._add(weapon.worn_frames, false)
 	elif weapon:
 		var held := weapon_piece(weapon)
+		d.weapon_layer = d.layers.size()
 		d._add_piece(held, Color.WHITE if held.name.begins_with("weapon_item_") else weapon.worn_color())
 	return d
 
@@ -483,6 +486,15 @@ static func hold(frame: int, kind: StringName) -> Variant:
 	if not h is Array:
 		return null
 	return {"grip": Vector2(h[0], h[1]), "angle": deg_to_rad(h[2]), "behind": frames[frame].get("weapon_behind", false)}
+
+## Where a shot leaves a weapon kind on a frame (frame pixels): a gun's muzzle, else his fist
+## (a star in it, an arrow on the bow string), or null when it isn't in his hand.
+static func release_point(frame: int, kind: StringName) -> Variant:
+	var h: Variant = hold(frame, kind)
+	if h == null:
+		return null
+	var out := weapon_reach(kind) if kind == &"gun" else 0.0
+	return h["grip"] + Vector2.from_angle(h["angle"]) * out
 
 ## How far a weapon kind reaches past the fist, in frame pixels.
 static func weapon_reach(kind: StringName) -> float:
