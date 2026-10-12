@@ -58,6 +58,12 @@ var _pulse_color := Color.WHITE
 var _pulse := 0.0
 ## Stands perfectly still (see hold_still): no animation or procedural breathing.
 var _still := false
+## Poses drawn leaning further than they should, turned partway upright in game (whole, so
+## every layer drawn on the body turns with it): animation -> {"angle": degrees, clockwise on
+## the art as drawn (facing right), "pivot": the frame pixel it turns about}.
+var upright := {}
+## Where place() put the feet, before any upright turn moves the body about its pivot.
+var _feet := Vector3.ZERO
 
 ## Builds the sprite. Pass `frames` for an animated actor or `texture` for a single image.
 ## `texel` is the size of one art pixel in game pixels (TDStage.art_density texels each).
@@ -136,6 +142,7 @@ func play(anim: StringName, from_start := false) -> void:
 			_switch(s, a, from_start)
 		elif not s.is_playing() and _frames.get_animation_loop(a):
 			s.play(a)
+		_apply_upright()
 	elif a != current or from_start:
 		_t = 0.0
 	current = anim
@@ -161,10 +168,33 @@ func _switch(s: AnimatedSprite3D, a: StringName, from_start: bool) -> void:
 ## 1 faces right, -1 faces left (the art faces right).
 func face(dir: int) -> void:
 	body.flip_h = dir < 0
+	if _frames:
+		_apply_upright()
 
 ## Puts the feet at a 2D game position, `z` units in front of (+) or behind (-) the play line.
 func place(feet: Vector2, z: float) -> void:
-	body.position = TDStage.to3d(feet + Vector2(0, -_lift), z)
+	_feet = TDStage.to3d(feet + Vector2(0, -_lift), z)
+	body.position = _feet
+	if _frames:
+		_apply_upright()
+
+## Turns the body by the showing animation's `upright` angle about its pivot, mirrored when
+## facing left, or stands it straight.
+func _apply_upright() -> void:
+	var s := body as AnimatedSprite3D
+	var u: Variant = upright.get(s.animation)
+	if u == null:
+		body.rotation.z = 0.0
+		body.position = _feet
+		return
+	var side := -1.0 if s.flip_h else 1.0
+	var size := _frames.get_frame_texture(s.animation, 0).get_size()
+	var px: Vector2 = u["pivot"]
+	# frame pixels -> the body's space: its origin is the frame's bottom middle, y up
+	var pivot := Vector3((px.x - size.x / 2.0) * side, size.y - px.y, 0.0) * body.pixel_size
+	var rot := -deg_to_rad(float(u["angle"])) * side
+	body.rotation.z = rot
+	body.position = _feet + pivot - pivot.rotated(Vector3.BACK, rot)
 
 ## Tints the sprite bright red-white while it is hit.
 func set_flash(on: bool) -> void:
