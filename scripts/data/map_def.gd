@@ -58,6 +58,10 @@ extends Resource
 @export var props: Array[PropPlacement] = []
 ## The houses, shops and halls standing along a town's streets.
 @export var buildings: Array[BuildingPlacement] = []
+## A map that isn't a town may only have buildings (or building pictures among its props)
+## when this is on: a quest needs the house there, or Cory asked for one. Monster maps have
+## no houses otherwise (tests/content/content_houses_test.gd).
+@export var houses_allowed := false
 
 var _look: BiomeDef
 
