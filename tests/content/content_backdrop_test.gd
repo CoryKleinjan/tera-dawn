@@ -21,11 +21,11 @@ func _floor_top(m: MapDef) -> float:
 		return float(m.ground_y)
 	return PlatformSkin.span(m.look(), m.ground_y).x
 
-## The strip layer nearest the camera (its bottom shows lowest), or null.
+## The strip or picture layer nearest the camera (its bottom shows lowest), or null.
 func _nearest_strip(b: BiomeDef) -> BackdropLayerDef:
 	var near: BackdropLayerDef = null
 	for layer in b.backdrop:
-		if layer.mode == BackdropLayerDef.Mode.STRIP and not layer.textures.is_empty():
+		if layer.mode != BackdropLayerDef.Mode.SCATTER and not layer.textures.is_empty():
 			if near == null or layer.depth < near.depth:
 				near = layer
 	return near
@@ -42,6 +42,22 @@ func test_nearest_backdrop_reaches_the_floor() -> void:
 			var floor_frac := TDStage.screen_frac_at(floor_top, TDStage.LAND_FRONT, c)
 			check(strip_frac >= minf(floor_frac, 1.0),
 					"%s: with the view centred at y %d the nearest backdrop strip ends %.0f%% down the screen, above the floor (%.0f%%)" % [Scan.where(m), c, strip_frac * 100.0, floor_frac * 100.0])
+
+## A picture backdrop fills the whole view: its top edge never shows below the top of the
+## screen, it is wide enough for both ends of the map, and the camera sees that far.
+func test_backdrop_pictures_cover_the_view() -> void:
+	for m: MapDef in Content.maps.values():
+		for layer in m.look().backdrop:
+			if layer.mode != BackdropLayerDef.Mode.PICTURE or layer.textures.is_empty():
+				continue
+			check(layer.depth + TDStage.view_distance() < TDStage.FAR - 10.0, "%s: the backdrop picture stands past the camera's far end" % Scan.where(m))
+			var top := BackdropBuilder.strip_edges(m, layer).x
+			for c in _centers(m):
+				var frac := TDStage.screen_frac_at(top, -layer.depth, c)
+				check(frac <= 0.0, "%s: with the view centred at y %d the backdrop picture's top shows %.0f%% down the screen" % [Scan.where(m), c, frac * 100.0])
+			var span := BackdropBuilder.span_at(m, -layer.depth)
+			var w := layer.textures[0].get_width() * BackdropBuilder.layer_pixel_size(m, layer)
+			check(w >= span.y - span.x - 0.01, "%s: the backdrop picture is narrower than the view sweeps" % Scan.where(m))
 
 func test_buildings_stand_on_the_walking_line() -> void:
 	for m: MapDef in Content.maps.values():

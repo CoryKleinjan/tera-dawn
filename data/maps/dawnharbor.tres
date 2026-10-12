@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=49 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=54 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/harbor.tres" id="2_harbor"]
@@ -23,6 +23,10 @@
 [ext_resource type="Resource" path="res://data/npcs/storage_keeper.tres" id="14_storage_keeper"]
 [ext_resource type="Resource" path="res://data/npcs/harbormaster.tres" id="15_harbormaster"]
 [ext_resource type="Resource" path="res://data/npcs/harbor_taxi.tres" id="16_harbor_taxi"]
+
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
+[ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="backdrop_layer_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/dawnharbor/panorama.png" id="panorama"]
 
 [sub_resource type="Resource" id="Plat_terrace"]
 script = ExtResource("3_platform_def")
@@ -219,11 +223,24 @@ flip = false
 scale = 1.0
 tint = Color(1.0, 1.0, 1.0, 1.0)
 
+[sub_resource type="Resource" id="Backdrop_picture"]
+script = ExtResource("backdrop_layer_def")
+textures = Array[Texture2D]([ExtResource("panorama")])
+mode = 2
+depth = 300.0
+screen_top = Vector2(-0.2, -0.2)
+
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+hide_layers = PackedInt32Array(0, 2, 3, 4, 5, 6)
+more_backdrop = Array[ExtResource("backdrop_layer_def")]([SubResource("Backdrop_picture")])
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"dawnharbor"
 display_name = "Dawnharbor"
 biome = ExtResource("2_harbor")
+variant = SubResource("Variant")
 width = 5400
 height = 1100
 ground_y = 1020

@@ -56,14 +56,16 @@ The content tests (`tests/content/`) check that every portal points at a real ma
 spawn at a real platform, so a typo fails a test instead of the game.
 
 A **BiomeDef** is the look shared by many maps: sky and light colours, ground and platform
-textures, parallax backdrop layers (`BackdropLayerDef`: a tiled strip or scattered pieces at a
-depth), random decoration (`DecorDef`), lantern and portal art. A new region of the
+textures, parallax backdrop layers (`BackdropLayerDef`: a tiled strip, scattered pieces, or one
+painted `PICTURE` stretched just wide enough to cover the view from either end of the map and
+left out of the fog, all at a depth nearer than `TDStage.FAR`), random decoration (`DecorDef`), lantern and portal art. A new region of the
 world is usually a new biome plus a few maps that use it.
 
 Each region has **one** biome (its style); its fields differ within it. A field keeps its region's `biome` and sets a **BiomeVariantDef** as `MapDef.variant`: only
 what this sub zone changes (sky, light, fog, colour grade, backdrop tint, hidden backdrop
-layers, extra ground scenery). `MapDef.look()` is the biome with the variant applied; the
-world builders read `look()`, never `biome`. Towns use the plain biome. `tests/screenshot.gd`
+layers, extra backdrop layers, extra ground scenery). `MapDef.look()` is the biome with the variant applied; the
+world builders read `look()`, never `biome`. Towns usually use the plain biome; Dawnharbor's
+variant swaps the harbour strips for one painted picture (the clouds stay). `tests/screenshot.gd`
 with `subzones` renders every field for a side-by-side look.
 
 ## How to add a building

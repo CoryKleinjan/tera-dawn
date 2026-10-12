@@ -38,6 +38,9 @@ const KEEP_COLOR := Color(0, 0, 0, 0)
 @export var backdrop_tint := Color.WHITE
 ## Backdrop layers (indexes into BiomeDef.backdrop) this sub zone leaves out.
 @export var hide_layers: PackedInt32Array = []
+## Backdrop layers of its own, added after the biome's (e.g. one painted picture for a town
+## that hides the biome's strips).
+@export var more_backdrop: Array[BackdropLayerDef] = []
 ## Extra scenery scattered along its floor, on top of the biome's ground_decor.
 @export var more_ground_decor: Array[DecorDef] = []
 
@@ -58,12 +61,16 @@ func apply(base: BiomeDef) -> BiomeDef:
 	for key in TOGGLES:
 		if get(key) != Toggle.KEEP:
 			b.set(key, get(key) == Toggle.ON)
-	if backdrop_tint != Color.WHITE or not hide_layers.is_empty():
+	if backdrop_tint != Color.WHITE or not hide_layers.is_empty() or not more_backdrop.is_empty():
 		var layers: Array[BackdropLayerDef] = []
 		for i in base.backdrop.size():
 			if i in hide_layers:
 				continue
 			var layer: BackdropLayerDef = base.backdrop[i].duplicate()
+			layer.tint *= backdrop_tint
+			layers.append(layer)
+		for extra in more_backdrop:
+			var layer: BackdropLayerDef = extra.duplicate()
 			layer.tint *= backdrop_tint
 			layers.append(layer)
 		b.backdrop = layers

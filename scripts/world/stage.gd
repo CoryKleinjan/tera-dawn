@@ -11,6 +11,8 @@ extends Node3D
 const PX := 32.0
 const FOV := 30.0
 const PITCH := 9.0 # degrees the camera looks down
+## How far the camera sees (3D units): backdrop layers must stand nearer than this.
+const FAR := 400.0
 ## Size of one art pixel in game pixels, for characters, props and land. Every piece of
 ## land art (tiles, platform pieces, ground textures) is drawn so one of its art pixels
 ## shows this big, so all the land shows its painted detail at one shared scale.
@@ -242,7 +244,7 @@ func _ready() -> void:
 	camera = Camera3D.new()
 	camera.fov = FOV
 	camera.near = 1.0
-	camera.far = 400.0
+	camera.far = FAR
 	camera.rotation_degrees = Vector3(-PITCH, 0, 0)
 	add_child(camera)
 	camera.make_current()
