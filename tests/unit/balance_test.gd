@@ -9,7 +9,8 @@ const SAMPLE_LEVELS := [3, 10, 15, 22, 30]
 func _monster_near(level: int) -> MonsterDef:
 	var best: MonsterDef = null
 	var ids := Content.monsters.keys()
-	ids.sort()
+	# by name: StringNames sort in an engine-internal order that changes between versions
+	ids.sort_custom(func(a: StringName, b: StringName) -> bool: return String(a) < String(b))
 	for id in ids:
 		var m: MonsterDef = Content.monsters[id]
 		if m.boss:
