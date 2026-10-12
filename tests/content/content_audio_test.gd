@@ -28,9 +28,8 @@ func _sound_ids() -> Dictionary:
 		out[id] = "code"
 	return out
 
-## The zone, boss and dungeon tracks are being remade (docs/zone-vibes.md): the old ones are
-## gone and the new ones land a few at a time, so a map's track may have no file yet and the
-## map is silent. Set this back to true once every map's track is in.
+## The zone tracks are being remade (docs/zone-vibes.md) and land a few at a time, so a map's
+## track may have no file yet and the map is silent. Set this back to true once every map's track is in.
 const MAP_MUSIC_COMPLETE := false
 
 func test_every_map_has_music() -> void:

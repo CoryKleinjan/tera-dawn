@@ -16,8 +16,6 @@ var p: SimPlayer
 var c: Character
 var red: UseDef
 var leaf: ItemDef
-## The test driver's one trip: 100 Dawnshards to the field.
-var wagon: TravelRoute
 
 func before_each() -> void:
 	h = ServerHarness.new()
@@ -33,7 +31,6 @@ func before_each() -> void:
 	route.price = 100
 	route.by = "Wagon"
 	ServerHarness.npc(town, &"test_driver", DRIVER_X).travel = [route]
-	wagon = route
 	ServerHarness.npc(town, &"test_instructor", INSTRUCTOR_X).instructs = [&"mage"]
 	var portal := PortalDef.new()
 	portal.x = PORTAL_X
@@ -214,37 +211,6 @@ func test_travel_without_the_fare_is_refused() -> void:
 	check_eq(c.shards, 99, "nothing paid")
 	check_eq(p.map.def.id, ServerHarness.TOWN, "still in town")
 	check(h.told(2, "You don't have enough Dawnshards."), "told why")
-
-## The test driver's wagon made free for Beginners ready for a job (like Rook's coaches).
-func _free_for_beginners() -> void:
-	wagon.free_for_beginners = true
-
-func test_a_free_coach_costs_a_beginner_ready_for_a_job_nothing() -> void:
-	_free_for_beginners()
-	h.place(p, DRIVER_X)
-	c.level = JobDef.first_advance_level(Character.START_JOB)
-	c.shards = 0
-	h.ask(2, &"req_travel", [&"test_driver", 0])
-	check_eq(p.map.def.id, ServerHarness.FIELD, "arrived for free")
-	check_eq(c.shards, 0, "nothing paid")
-
-func test_a_free_coach_still_charges_a_beginner_below_the_job_level() -> void:
-	_free_for_beginners()
-	h.place(p, DRIVER_X)
-	c.level = JobDef.first_advance_level(Character.START_JOB) - 1
-	c.shards = 150
-	h.ask(2, &"req_travel", [&"test_driver", 0])
-	check_eq(c.shards, 50, "the full fare")
-
-func test_a_free_coach_charges_someone_with_a_job() -> void:
-	_free_for_beginners()
-	h.place(p, DRIVER_X)
-	c.job = Content.job(&"warrior")
-	c.level = 20
-	c.shards = 150
-	h.ask(2, &"req_travel", [&"test_driver", 0])
-	check_eq(c.shards, 50, "the full fare")
-	check_eq(p.map.def.id, ServerHarness.FIELD, "arrived")
 
 func test_travel_needs_you_by_the_driver() -> void:
 	c.shards = 150

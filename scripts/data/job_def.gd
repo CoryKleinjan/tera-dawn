@@ -107,12 +107,6 @@ static func paths_from(from: StringName) -> Array[JobDef]:
 		return a.display_name < b.display_name if a.advance_level == b.advance_level else a.advance_level < b.advance_level)
 	return out
 
-## The lowest level at which a character of job `from` can advance into another job, or
-## a level nobody reaches when no job advances from it.
-static func first_advance_level(from: StringName) -> int:
-	var paths := paths_from(from)
-	return paths[0].advance_level if not paths.is_empty() else 1 << 30
-
 ## "Warrior: Level 10, 35 STR", for lists of the paths open to a Beginner.
 func path_line() -> String:
 	return "%s: %s" % [display_name, ", ".join(requirement_lines())]

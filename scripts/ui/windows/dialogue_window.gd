@@ -165,16 +165,16 @@ func _travel_list() -> void:
 		var dest: MapDef = Content.maps.get(r.target_map)
 		if dest == null:
 			continue
-		opts.append([travel_label(r, dest, Game.me), func() -> void:
+		opts.append([travel_label(r, dest), func() -> void:
 			Net.ask(&"req_travel", [npc.def.id, i])
 			visible = false])
 	opts.append(["Back", func() -> void: _main_page(greeting)])
 	_page("Where to?", opts)
 
 ## "Wagon to Fern Hollow (Lv. 6-12, 150 Dawnshards)": the trip, who the destination is for
-## (its MapDef.level_text; towns, whose text just says "Town", leave it out) and what `c` pays.
-static func travel_label(r: TravelRoute, dest: MapDef, c: Character) -> String:
-	var fare := r.fare_for(c)
+## (its MapDef.level_text; towns, whose text just says "Town", leave it out) and the fare.
+static func travel_label(r: TravelRoute, dest: MapDef) -> String:
+	var fare := r.price
 	var bits := PackedStringArray()
 	if dest.level_text != "" and not dest.town:
 		bits.append(dest.level_text)

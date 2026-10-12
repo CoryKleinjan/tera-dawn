@@ -40,6 +40,11 @@ func test_the_floor_is_flat() -> void:
 		check(mi.position.z <= TDStage.LAND_FRONT + 0.001, "%s stays behind the actors" % mi.name)
 		check_eq(mi.rotation, Vector3.ZERO, "%s is not tipped back into the scene" % mi.name)
 
+func test_land_casts_no_shadows() -> void:
+	for n: Node in root.get_children():
+		if n is GeometryInstance3D:
+			check_eq((n as GeometryInstance3D).cast_shadow, GeometryInstance3D.SHADOW_CASTING_SETTING_OFF, "%s casts no shadow" % n.name)
+
 func test_floor_edge_walking_row_is_the_ground() -> void:
 	var edge: MeshInstance3D = root.get_node("FloorEdge")
 	var q := edge.mesh as QuadMesh
