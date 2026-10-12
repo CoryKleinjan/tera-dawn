@@ -120,7 +120,8 @@ func on_local_login(peer: int, test := TestCharacters.Mode.OFF) -> void:
 	log_in(peer, a)
 
 ## The test characters' account with one character of every job on it (see TestCharacters),
-## making the ones missing, or every one again when `rebuild`.
+## making the ones missing, or every one again when `rebuild`. Each one kept is put back in
+## its job's town (TestCharacters.home_town).
 func _test_account(rebuild: bool) -> Dictionary:
 	var a := accounts.load_account(TestCharacters.ACCOUNT)
 	if a.is_empty():
@@ -136,6 +137,9 @@ func _test_account(rebuild: bool) -> Dictionary:
 		if have == "":
 			have = _free_test_name(job)
 		elif not rebuild:
+			var kept := server.store.load_character(have)
+			kept.map_id = TestCharacters.home_town(job)
+			server.store.save(kept)
 			names.append(have)
 			continue
 		server.store.save(TestCharacters.build(have, job))
