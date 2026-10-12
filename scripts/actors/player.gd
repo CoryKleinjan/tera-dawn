@@ -65,7 +65,6 @@ const PACE_RAMP := 12
 ## Vertical speed under which a jump shows its top-of-the-arc pose.
 const APEX_SPEED := 1.2
 ## Your own sounds (Sound.play ids) and the jingle when you faint (Sound.jingle).
-const JUMP_SOUND := &"jump"
 const HURT_SOUND := &"hurt"
 const PORTAL_SOUND := &"portal"
 const FAINT_JINGLE := &"jingle_death"
@@ -400,7 +399,6 @@ func _move() -> void:
 			vel.y = 1
 		else:
 			vel.y = JUMP_SPEED * CharacterStats.jump_multiplier(Game.me.stats)
-			Sound.play(JUMP_SOUND)
 		on_ground = false
 
 	vel.y = minf(vel.y + GRAVITY, MAX_FALL)

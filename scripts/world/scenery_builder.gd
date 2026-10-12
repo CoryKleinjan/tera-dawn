@@ -8,6 +8,9 @@ extends RefCounted
 const DOOR_LIGHT := Color("ffc47a")
 ## How much nearer a portal's light sorts than where it stands (see _portal).
 const PORTAL_SORT := 50.0
+## How far the middle of the portal's glowing ground patch is above the bottom of its frames
+## (texels; the halo fades out below it). The patch is what stands on the land.
+const PORTAL_GROUND := 19.0
 ## Open ground between two of a town's background houses (`town_decor`), and the least
 ## between one and a building's edge, in game pixels.
 const BACK_HOUSE_GAP := 100.0
@@ -249,7 +252,10 @@ func _climbable(c: ClimbableDef, platforms: Array[Platform]) -> void:
 ## A portal: the biome's animated portal frames standing on the platform, with a light and
 ## sparkles rising through it. Doors get one too (see _door).
 func _portal(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
-	var base := Vector2(p.x, pl.y + 4.0)
+	var base := Vector2(p.x, pl.y + 3.0)
+	if not biome.portal_frames.is_empty():
+		# the glowing patch, not the soft halo under it, stands on the land
+		base.y += PORTAL_GROUND * TDStage.TEXEL / TDStage.art_density(biome.portal_frames[0])
 	var at := TDStage.to3d(base, TDStage.Z_PORTAL)
 	if not biome.portal_frames.is_empty():
 		var frames := SpriteFrames.new()

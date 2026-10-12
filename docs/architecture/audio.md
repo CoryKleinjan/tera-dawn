@@ -30,7 +30,7 @@ Music plays on the **Music** bus and effects on the **Effects** bus, so the sett
 - **Jingles**: level up (`TDWorldFx.LEVEL_UP_JINGLE`), fainting (`TDPlayer.FAINT_JINGLE`), and
   the server's `ev_jingle` for a quest done or a job advance (`ServerQuests.QUEST_JINGLE`,
   `ServerJobs.ADVANCE_JINGLE`).
-- **Your hero**: jump, getting hurt, entering a portal (`TDPlayer.*_SOUND`).
+- **Your hero**: getting hurt, entering a portal (`TDPlayer.*_SOUND`).
 - **UI**: every `BaseButton` clicks by itself (`Sound.CLICK`, connected as buttons are added
   to the tree); `TDWindow` buttons click, and windows play `open` and `close`.
 

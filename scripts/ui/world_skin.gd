@@ -30,6 +30,13 @@ const SPEECH_BODY := Rect2(0, 0, 144, 103)
 const SPEECH_TAIL := Rect2(24, 98, 34, 28)
 ## Where the tail's tip is inside SPEECH_TAIL.
 const SPEECH_TIP := Vector2(3, 27)
+## The bubble's text size, line height and widest line, the room between the text and the
+## inside of the outline, and the outline's thickness on screen (left, top, right, bottom).
+const SPEECH_TEXT := 12
+const SPEECH_LINE_H := 16.0
+const SPEECH_MAX_W := 220.0
+const SPEECH_PAD := Vector2(12, 7)
+const SPEECH_EDGE := Vector4(2, 2, 2, 3)
 ## The plaque (name_tag) behind name tags and hints: its end caps and trim in texels (the
 ## caps' gold diamonds sit inside them), and the room left between the text and a cap.
 const PLAQUE_MARGINS := Vector2(20, 9)
@@ -196,27 +203,42 @@ static func draw_boss_bar(ci: CanvasItem, top_center: Vector2, label: String, fr
 	DrawUtil.text(ci, Game.ui_font, top_center + Vector2(0, 30), label, 14, Palette.MIST, 0, 4, Palette.NIGHT)
 	draw_monster_bar(ci, top_center + Vector2(-width / 2.0, 30.0 + MONSTER_CAP.position.y * scale), width, fraction, scale)
 
-## A cream speech bubble whose tail points down at `bottom_center`, in dark ink.
+## A cream speech bubble whose tail points down at `bottom_center`, in dark ink. Its lines are
+## balanced (as narrow as they can be without adding a line) and sit centred in the cream.
 static func draw_speech(ci: CanvasItem, bottom_center: Vector2, text: String) -> void:
 	var font := Game.ui_font
-	var size := 12
-	var max_w := 240.0
 	var k := 0.5  # screen pixels per texel of the bubble art
-	var lines := DrawUtil.wrap_text(font, text, size, max_w)
+	var lines := _balanced_lines(font, text, SPEECH_TEXT, SPEECH_MAX_W)
 	var w := 0.0
 	for l in lines:
-		w = maxf(w, DrawUtil.text_width(font, l, size))
+		w = maxf(w, DrawUtil.text_width(font, l, SPEECH_TEXT))
 	var tail := Rect2(bottom_center - SPEECH_TIP * k, SPEECH_TAIL.size * k)
 	var bottom := tail.position.y + (SPEECH_BODY.end.y - SPEECH_TAIL.position.y) * k
-	var h := lines.size() * 16 + 14
-	# the tail sits a little left of centre in the art; keep the bubble centred on the speaker
-	var r := Rect2(bottom_center.x - w / 2.0 - 12, bottom - h, w + 24, h)
+	var text_h := (lines.size() - 1) * SPEECH_LINE_H + SPEECH_TEXT * DrawUtil.CAP_HEIGHT
+	var h := text_h + SPEECH_PAD.y * 2.0 + SPEECH_EDGE.y + SPEECH_EDGE.w
+	var r := Rect2(bottom_center.x - w / 2.0 - SPEECH_PAD.x, bottom - h, w + SPEECH_PAD.x * 2.0, h)
 	var body := UiSkin.box("hud/speech_bubble", 20, 20)
 	body.region_rect = SPEECH_BODY
 	UiSkin.draw_box(ci, body, r, k)
 	ci.draw_texture_rect_region(UiSkin.tex("hud/speech_bubble"), tail, SPEECH_TAIL)
+	var y := r.position.y + SPEECH_EDGE.y + SPEECH_PAD.y + SPEECH_TEXT * DrawUtil.CAP_HEIGHT
 	for i in lines.size():
-		DrawUtil.text(ci, font, Vector2(bottom_center.x, r.position.y + 19 + i * 16), lines[i], size, Palette.INK)
+		DrawUtil.text(ci, font, Vector2(bottom_center.x, y + i * SPEECH_LINE_H), lines[i], SPEECH_TEXT, Palette.INK)
+
+## `text` wrapped to at most `max_w`, then as narrow as it goes without taking another line, so a
+## last word doesn't hang alone.
+static func _balanced_lines(font: Font, text: String, size: int, max_w: float) -> PackedStringArray:
+	var lines := DrawUtil.wrap_text(font, text, size, max_w)
+	if lines.size() < 2:
+		return lines
+	var w := max_w
+	while w > 40.0:
+		var tighter := DrawUtil.wrap_text(font, text, size, w - 4.0)
+		if tighter.size() > lines.size():
+			break
+		lines = tighter
+		w -= 4.0
+	return lines
 
 ## How wide `draw_hint` draws a hint with this text.
 static func hint_width(text: String) -> float:

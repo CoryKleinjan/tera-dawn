@@ -32,9 +32,11 @@ only what the creator offers and makes a level 1 character in the starting job
   strip says, so no hair pokes out of the hat's top or sides (hair below its edge still shows). A
   helm is drawn smaller than his head, with its eye holes on his eyes, so while one is worn its
   `headcut_<helm>.png` strip (laid out like the body strip) also cuts his body and face where
-  his head would poke out of it. In the 3D stage the hero and his layers have
-  a small light floor (`shaders/character_light.gdshaderinc`), so shade never makes him a
-  silhouette. Gear that keeps its shape (a **weapon**, a **shield**, a **hat**) is a
+  his head would poke out of it. In the 3D stage the hero and his layers are lit like
+  everyone else, sampled from mipmaps and blended at their edges so he looks like his menu
+  picture (`shaders/paperdoll_stage.gdshaderinc`; every hero strip's `.import` has mipmaps on,
+  and `PaperdollSprite` draws his layers in order with their own render priorities,
+  `TDStage.PRIORITY_*`). Gear that keeps its shape (a **weapon**, a **shield**, a **hat**) is a
   `Paperdoll.Piece` instead of a strip: one picture per view (held, on his back; a shield's
   back and face; a hat from the side and from behind) that the game places, turns and sizes on
   every frame from its pose (`assets/sprites/characters/pieces/<name>.json`, written by

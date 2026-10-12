@@ -1,6 +1,6 @@
 # Tera's Dawn: notes for Claude
 
-A MapleStory-inspired 2D side-scroller in Godot 4.3 (Forward+), shipping on Steam with HD-2D
+A MapleStory-inspired 2D side-scroller in Godot 4.7 (Forward+), shipping on Steam with HD-2D
 rendering (Octopath Traveler style depth, lighting and bloom). Its own look, not a close copy.
 The game will grow much larger, so keep code extendable and readable.
 

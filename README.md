@@ -1,6 +1,6 @@
 # Tera's Dawn
 
-A 2D side-scrolling online action RPG inspired by MapleStory, built with **Godot 4.3** for
+A 2D side-scrolling online action RPG inspired by MapleStory, built with **Godot 4.7** for
 Steam (Windows, macOS, Linux and Steam Deck).
 
 It has an **HD-2D** look in the style of Octopath Traveler: painted sprites in a lit 3D diorama
@@ -22,7 +22,7 @@ code is laid out and links a page per system, with how to add a monster, map, it
 
 ## Running it
 
-1. Install [Godot 4.3](https://godotengine.org/download) (the standard build; C# isn't needed).
+1. Install [Godot 4.7](https://godotengine.org/download) (the standard build; C# isn't needed).
 2. In the Project Manager, choose **Import** and pick this folder's `project.godot`.
 3. Press **F5**. On the title screen pick **Play solo**, **Host** (friends join on UDP port
    7350, which must be forwarded to host over the internet), or enter a server address,
