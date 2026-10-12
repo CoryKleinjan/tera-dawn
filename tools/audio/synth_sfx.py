@@ -130,14 +130,8 @@ def magic_hit(rng):
     return reverb(out, rng, 0.3, 0.2)
 
 
-def jump(rng):
-    """A soft, short upward swish."""
-    sw = sweep_filter(noise(0.18, rng), 500, 2200, 3) * env(int(RATE * 0.18), 0.03, 0.05)
-    return sw
-
-
 SOUNDS = {"sparkle": sparkle, "heal": heal, "buff": buff, "portal": portal, "cast": cast,
-          "magic_hit": magic_hit, "jump": jump}
+          "magic_hit": magic_hit}
 
 
 def save(path, x):
