@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BiomeDef" load_steps=55 format=3]
+[gd_resource type="Resource" script_class="BiomeDef" load_steps=59 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/biome_def.gd" id="1_biome_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/sea_gull.tres" id="90_gulls"]
@@ -8,6 +8,10 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor/cap_left.png" id="5_platform_left"]
 [ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor/middle_a.png" id="6_platform_middle"]
 [ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor/cap_right.png" id="7_platform_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor/terrace_left.png" id="7c_terrace_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor/terrace_right.png" id="7d_terrace_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor/terrace_corner_left.png" id="7e_terrace_corner_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor/terrace_corner_right.png" id="7f_terrace_corner_right"]
 [ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor/middle_b.png" id="7b_platform_middle_alt"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/tall_grass.png" id="8_tall_grass"]
 [ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="9_backdrop_layer_def"]
@@ -213,6 +217,10 @@ platform_left = ExtResource("5_platform_left")
 platform_middle = ExtResource("6_platform_middle")
 platform_middle_alt = ExtResource("7b_platform_middle_alt")
 platform_right = ExtResource("7_platform_right")
+terrace_left = ExtResource("7c_terrace_left")
+terrace_right = ExtResource("7d_terrace_right")
+terrace_corner_left = ExtResource("7e_terrace_corner_left")
+terrace_corner_right = ExtResource("7f_terrace_corner_right")
 edge_grass = Array[Texture2D]([ExtResource("8_tall_grass")])
 backdrop = Array[ExtResource("9_backdrop_layer_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7")])
 ground_decor = Array[ExtResource("20_decor_def")]([SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12")])

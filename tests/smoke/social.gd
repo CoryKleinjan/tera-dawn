@@ -122,7 +122,7 @@ func check() -> void:
 	Net.server.enter_map(_me(), &"dawnharbor", 300)
 	await _ticks(3)
 	var market: PortalDef = Content.map(&"dawnharbor").portals.filter(func(p: PortalDef) -> bool: return p.target_map == &"free_market")[0]
-	_teleport(Vector2(market.x, 620))
+	_teleport(Vector2(market.x, world.map.ground_y))
 	await _ticks(2)
 	await _tap("move_up")
 	await _ticks(4)

@@ -1,9 +1,12 @@
 class_name BackdropLayerDef
 extends Resource
 ## One layer of the parallax backdrop: a strip of mountains or trees that repeats across
-## the map, or a few loose pieces (clouds, the sun) scattered in the sky.
+## the map, a few loose pieces (clouds, the sun) scattered in the sky, or one painted picture
+## that fills the whole background.
 
-enum Mode { STRIP, SCATTER }
+## PICTURE: one opaque painting, never repeated, scaled up just enough to cover the view from
+## either end of the map (its `texel` is ignored).
+enum Mode { STRIP, SCATTER, PICTURE }
 
 @export var textures: Array[Texture2D] = []
 @export var mode := Mode.STRIP

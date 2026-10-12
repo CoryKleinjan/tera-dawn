@@ -11,6 +11,8 @@ extends Node3D
 const PX := 32.0
 const FOV := 30.0
 const PITCH := 9.0 # degrees the camera looks down
+## How far the camera sees (3D units): backdrop layers must stand nearer than this.
+const FAR := 400.0
 ## Size of one art pixel in game pixels, for characters, props and land. Every piece of
 ## land art (tiles, platform pieces, ground textures) is drawn so one of its art pixels
 ## shows this big, so all the land shows its painted detail at one shared scale.
@@ -242,7 +244,7 @@ func _ready() -> void:
 	camera = Camera3D.new()
 	camera.fov = FOV
 	camera.near = 1.0
-	camera.far = 400.0
+	camera.far = FAR
 	camera.rotation_degrees = Vector3(-PITCH, 0, 0)
 	add_child(camera)
 	camera.make_current()
@@ -494,7 +496,17 @@ func screen_frac(h: float, z: float) -> float:
 	return screen_frac_at(h, z, _mid_center())
 
 func _mid_center() -> float:
-	var r := view_center_range(world.map.height)
+	return backdrop_center(world.map)
+
+## The camera height (game-y of the view's middle) a map's backdrop is laid out for. In a
+## town it is where the view sits while the hero walks the street (the floor), so the
+## backdrop meets the street as painted and a tall town's upper levels just show more sky;
+## elsewhere it is the middle of the camera's range.
+static func backdrop_center(map: MapDef) -> float:
+	var r := view_center_range(map.height)
+	if map.town:
+		var view := TDWorld.world_view().y
+		return clampf(map.ground_y - view * WorldCamera.STAND_AT + view / 2.0, r.x, r.y)
 	return (r.x + r.y) / 2.0
 
 ## The game-y of the middle of the view, highest (x) and lowest (y), as the camera moves

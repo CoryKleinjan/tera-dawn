@@ -13,6 +13,8 @@ const ZOOM := 0.88
 const LOOK_AHEAD := 70.0
 ## The camera only follows a jump once the hero is this far above or below where they last stood.
 const DEAD_ZONE := 90.0
+## Where the ground the hero stands on sits in the view: this share of the way down.
+const STAND_AT := 0.62
 
 var world: TDWorld
 var pos := Vector2.ZERO
@@ -31,7 +33,7 @@ func target() -> Vector2:
 	var view := TDWorld.world_view()
 	return Vector2(
 		clampf(world.player.position.x + look - view.x / 2.0, 0, maxf(0.0, float(world.map.width) - view.x)),
-		clampf(floor_y - view.y * 0.62, 0, maxf(0.0, float(world.map.height) - view.y)))
+		clampf(floor_y - view.y * STAND_AT, 0, maxf(0.0, float(world.map.height) - view.y)))
 
 ## Jumps straight to the target (a new map), keeping its aim.
 func jump_to_target() -> void:

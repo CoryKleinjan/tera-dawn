@@ -63,7 +63,7 @@ func check() -> void:
 	await _ticks(3)
 	_check(world.map.id == &"dawnharbor", "Captain Marlo sails to Dawnharbor")
 	var brin: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"storage_keeper")[0]
-	_teleport(Vector2(brin.position.x - 30, 620))
+	_teleport(Vector2(brin.position.x - 30, brin.position.y))
 	await _ticks(2)
 	await _tap("move_up")
 	labels = talk.options.map(func(o: Array) -> String: return o[0])
@@ -86,7 +86,7 @@ func check() -> void:
 	_check(Game.me.inventory.count_of(tusk) == 7 and Game.me.storage.count_of(tusk) == 0, "and it can be taken back")
 	vault.visible = false
 	var rook: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"harbor_taxi")[0]
-	_teleport(Vector2(rook.position.x - 30, 620))
+	_teleport(Vector2(rook.position.x - 30, rook.position.y))
 	await _ticks(2)
 	await _tap("move_up")
 	labels = talk.options.map(func(o: Array) -> String: return o[0])

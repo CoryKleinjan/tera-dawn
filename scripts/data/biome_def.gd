@@ -49,6 +49,13 @@ extends Resource
 ## Optional: middles alternate between this and platform_middle so long platforms don't repeat.
 @export var platform_middle_alt: Texture2D
 @export var platform_right: Texture2D
+## Optional, for raised terraces (`PlatformDef.solid`; art/sheets/terrace_pieces_<area>.json):
+## square ends that replace the rounded platform ends on a terrace's top edge, and columns of
+## corner stones that run down the two ends of its wall, repeating top to bottom.
+@export var terrace_left: Texture2D
+@export var terrace_right: Texture2D
+@export var terrace_corner_left: Texture2D
+@export var terrace_corner_right: Texture2D
 ## Grass blades: tufts peeking over the top edge of the floor and platforms, from behind.
 @export var edge_grass: Array[Texture2D] = []
 

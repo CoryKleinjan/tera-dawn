@@ -1117,6 +1117,8 @@ def main():
         name = os.path.splitext(os.path.basename(p))[0]
         if name.startswith("platform_pieces_"):
             platform_pieces.prepare(name[len("platform_pieces_"):])
+        if name.startswith("terrace_pieces_"):
+            platform_pieces.prepare_terrace(name[len("terrace_pieces_"):])
     # rope and ladder pieces get lined up on their rope or rails (their pieces may come from
     # several sheets, so any climb style with a piece cut in this run)
     climb_pieces.prepare_for({key.split(":", 1)[1] for key in sprites})
