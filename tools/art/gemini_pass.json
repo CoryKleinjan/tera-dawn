@@ -14605,6 +14605,29 @@
     "refs": [],
     "text": "This is the inventory icon of the THICKET HOOD from my game, labelled, on magenta. REPAINT it as a close-fitting hood with NO shoulder piece: remove the ring of large green leaves that spreads over the shoulders at the bottom and the brown cord tie under the chin, and the ring of leaves around the neck at the bottom completely. The hood ends just below the bottom of its dark face opening with a short, finished, rounded hem with the same thin dark outline as the rest of the hood. Below that hem there is NOTHING but magenta. The hood's outline at the bottom is narrow, about as wide as the face opening plus the hood's own thickness. Everything else stays EXACTLY as it is: the same olive cloth hood, its stitched seams, its pointed tip, the green leaves around the face opening and the small leaves at its sides, and the dark face opening, the same angle, place and size, and the same label. The background stays bright pure magenta #FF00FF. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything."
    }
+  },
+  {
+   "id": "wg_green_hood_open",
+   "prompts": null,
+   "batch": "worn gear from icon (edit)",
+   "with": null,
+   "refs": [],
+   "save": "wg_green_hood_open.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 worn-gear thread (Cory: the green hood has no face cutout, and cutting its dark opening out by hand looked terrible). wg_green_hood_nocape repainted with an open face: pasted over the same cells of art/source/hats_items_1_only.png (hats_items_1.png keeps the no-cape cells for placement).",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/wg_green_hood_nocape.png",
+    "refs": [],
+    "text": "These are two labelled cells on magenta from my hat sheet: a GREEN HOOD from the side (left cell) and from behind (right cell). In the side view, the hood's dark face opening becomes an OPEN HOLE: fill the whole dark shadowed inside with flat bright magenta #FF00FF, so a face could be seen through it. Around the hole, paint the hood's front edge as a neat, even, rounded rim of the same green cloth, about as thick as a finger, with a slightly lighter green inner lining fold and the same thin dark outline as the rest of the hood, all the way round. The hole is big and rounded like the opening of a real hood, and its bottom edge is a smooth curve at the very bottom of the hood: no thin strip or strap of cloth crosses the hole. The behind view stays EXACTLY as it is. Everything else stays EXACTLY as it is: the same green hood shape, its pointed tip at the back, folds and colours, in the same place and size, and the same labels and grid lines. The background stays bright pure magenta #FF00FF. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything."
+   }
   }
  ]
 }

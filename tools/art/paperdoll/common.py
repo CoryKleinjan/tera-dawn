@@ -84,6 +84,7 @@ HAIR_CUT_CREST = 0.6  # ...on a helm, a stretch ending this far above the head's
 HAIR_CUT_SPECK, HAIR_CUT_CRUMB = 0.15, 0.03  # ...and a patch smaller than this (head radii squared) off by itself, or this anywhere
 HAIR_CUT_TOUCH, HAIR_CUT_HELD = 4, 0.7  # ...a patch the cut chopped less than this share of it at the hat (within that) is loose
 HAIR_CUT_BODY = 2     # ...or one the cut reached not touching his head within this (frame pixels)
+HAIR_TAILS = ("ponytail", "twin_tails")  # ...hairstyles whose tails don't show under a hat at all
 HAIR_CUT_SOFT = 1.5   # ...its edge blurred this much (frame pixels), so the hair fades out under the hat
 HAIR_CUT_TUCK = 2      # ...and stops this many pixels inside the hat, so hair and head run on under its soft edge
 HAIR_CUT_LOW = 0.75    # ...and never below this far under the head's middle (head radii)
