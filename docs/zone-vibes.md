@@ -93,7 +93,7 @@ Layout: `/mnt/project-files/plans/dawnharbor-city-layout.md`.
 | --- | --- | --- | --- | --- |
 | Harbor Beach | Border to Driftcove | 3-9 | Sunrise beach: peach low sky, warmer golden light | Sand Crab, Sea Gull, Tide Dewling (borrowed until Dawnharbor has its own) |
 | Harbor Road | Border to Greenbough | 6-9 | Bright, airy coast road, pale blue sky, light haze; first green from Greenbough | Thornling, Sea Gull (borrowed until Dawnharbor has its own) |
-| Windmill Downs | Training | 13-15 | Grassy downs with windmills, sunny and breezy *(inferred; plain harbour look today)* | Bramble Boar, Reef Gull, Tide Slime (borrowed until Dawnharbor has its own) |
+| Windmill Downs | Training | 10-17 | Grassy downs with windmills, sunny and breezy *(inferred; plain harbour look today)* | Bramble Boar, Reef Gull, Tide Slime (borrowed until Dawnharbor has its own) |
 | Gull Bluffs | Training | 15-20 | Windy sea cliffs crowded with gulls *(inferred; plain harbour look today)* | Reef Gull, Coral Turret, Kelp Lurker (borrowed until Dawnharbor has its own) |
 | Smugglers' Grotto | Boss | 20-22 | Dim sea cave lit by smugglers' lanterns *(inferred; plain harbour look today)* | Kelp Lurker, Barnacle Boar (borrowed until Dawnharbor has its own); boss Grotto Tusker |
 
