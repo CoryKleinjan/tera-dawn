@@ -41,14 +41,21 @@ func _init(owner: Node2D, world: TDWorld, z: float) -> void:
 	_owner = owner
 	_world = world
 	_z = z
-	rig = SpriteRig.new()
-	rig.setup(FRAMES, null, TDStage.TEXEL * SCALE / Paperdoll.ART_SCALE)
-	rig.upright = UPRIGHT
-	rig.hero_priority = TDStage.PRIORITY_PLAYER if z >= TDStage.Z_PLAYER else TDStage.PRIORITY_OTHER_PLAYER
-	rig.add_light(LIGHT, LIGHT_ENERGY, LIGHT_HEIGHT)
+	rig = make_rig(TDStage.PRIORITY_PLAYER if z >= TDStage.Z_PLAYER else TDStage.PRIORITY_OTHER_PLAYER)
 	owner.add_child(rig)
 	companion = TDCompanion.new()
 	owner.add_child(companion)
+
+## A hero's rig, sized and lit as in the world: in game, and in the menus (PaperdollView),
+## so he looks the same in both. Dress it with SpriteRig.dress. `priority`: see
+## PaperdollSprite.priority.
+static func make_rig(priority: int) -> SpriteRig:
+	var r := SpriteRig.new()
+	r.setup(FRAMES, null, TDStage.TEXEL * SCALE / Paperdoll.ART_SCALE)
+	r.upright = UPRIGHT
+	r.hero_priority = priority
+	r.add_light(LIGHT, LIGHT_ENERGY, LIGHT_HEIGHT)
+	return r
 
 ## Plays the next animation from its first frame, even if it's the one already playing (a
 ## new swing).

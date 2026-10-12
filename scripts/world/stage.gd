@@ -99,6 +99,9 @@ var post_material: ShaderMaterial
 var fade := 0.0
 var _fade_target := 0.0
 
+## The stage showing now, whose light a menu's hero is lit by (light_portrait).
+static var current: TDStage
+
 static var _soft_dot: Texture2D
 
 # ---------- helpers for everyone ----------
@@ -240,6 +243,7 @@ static func particles(col: Color, amount: int, size: float) -> CPUParticles3D:
 # ---------- camera, sky and post effects ----------
 
 func _ready() -> void:
+	current = self
 	_fit_distance()
 	camera = Camera3D.new()
 	camera.fov = FOV
@@ -254,6 +258,37 @@ func _ready() -> void:
 	_build_sun()
 	_build_motes()
 	_build_post()
+
+func _exit_tree() -> void:
+	if current == self:
+		current = null
+
+## Lights a menu's hero (PaperdollView, standing in a little 3D stage of its own) the way the
+## map showing now lights him: a copy of its environment (sky light, tone mapping, glow) with
+## a clear background and no haze, its sun (without shadows: characters cast none), and its
+## colour grade on `grade` (grade.gdshaderinc). With no stage, plain white light.
+static func light_portrait(world_env: WorldEnvironment, sun_: DirectionalLight3D, grade: ShaderMaterial) -> void:
+	var s := current
+	if s == null or s.env == null:
+		var plain := Environment.new()
+		plain.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+		plain.ambient_light_color = Color.WHITE
+		world_env.environment = plain
+		sun_.visible = false
+		return
+	var e := s.env.duplicate() as Environment
+	e.background_mode = Environment.BG_CLEAR_COLOR
+	e.sky = null
+	e.fog_enabled = false
+	e.ssao_enabled = false # needs the depth of what's around him, and there's nothing
+	world_env.environment = e
+	sun_.visible = true
+	sun_.basis = s.sun.basis
+	sun_.light_color = s.sun.light_color
+	sun_.light_energy = s.sun.light_energy
+	sun_.shadow_enabled = false
+	for p in [&"tint", &"lift", &"lift_amount", &"saturation"]:
+		grade.set_shader_parameter(p, s.post_material.get_shader_parameter(p))
 
 func _build_environment() -> void:
 	env = Environment.new()
