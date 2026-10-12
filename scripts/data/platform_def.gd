@@ -16,6 +16,10 @@ const LOOK_GRASS := 7.0
 ## art always goes here rather than in a map's props, so everything that looks like
 ## ground can be stood on.
 @export var look: Texture2D
+## Raised land (a terrace or cliff top): its front runs all the way down to the land it
+## stands on (`MapDef.land_under`) instead of hanging as a thin floating ledge. You still
+## walk in front of it along the land below, the classic side-scroller way.
+@export var solid := false
 
 ## Game pixels per texel of `look`.
 func look_texel() -> float:

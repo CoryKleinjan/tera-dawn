@@ -77,8 +77,8 @@ func _back_houses(rule: DecorDef, map: MapDef, rng: RandomNumberGenerator) -> Ar
 	return placed
 
 ## Where a town with buildings stands its background houses: the x of each one's middle.
-## They keep `BACK_HOUSE_GAP` apart and never stand straight behind a building, so the
-## street reads clearly (a town without buildings scatters them like any decor).
+## They keep `BACK_HOUSE_GAP` apart and never stand straight behind a building or a raised
+## terrace (`PlatformDef.solid`), so the street reads clearly (a town without buildings scatters them like any decor).
 static func back_house_slots(rule: DecorDef, map: MapDef) -> Array[float]:
 	var out: Array[float] = []
 	var w := back_house_width(rule)
@@ -86,10 +86,12 @@ static func back_house_slots(rule: DecorDef, map: MapDef) -> Array[float]:
 		return out
 	var half := w * 0.5
 	var x := half
+	var taken := map.solid_spans_on(0)  # raised land's wall would hide them
+	for b in map.buildings:
+		taken.append(b.span())
 	while x <= map.width - half:
 		var past := -INF
-		for b in map.buildings:
-			var span := b.span()
+		for span in taken:
 			if x + half + BACK_HOUSE_CLEAR > span.x and x - half - BACK_HOUSE_CLEAR < span.y:
 				past = maxf(past, span.y)
 		if past > -INF:

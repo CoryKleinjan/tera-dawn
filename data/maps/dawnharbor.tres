@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=30 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=42 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/harbor.tres" id="2_harbor"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="5_portal_def"]
 [ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="6_npc_placement"]
 [ext_resource type="Script" path="res://scripts/data/building_placement.gd" id="7_building_placement"]
+[ext_resource type="Resource" path="res://data/climb_styles/ladder.tres" id="8_ladder"]
+[ext_resource type="Resource" path="res://data/climb_styles/rope.tres" id="9_rope"]
 [ext_resource type="Resource" path="res://data/buildings/dawnharbor_large.tres" id="10_dawnharbor_large"]
 [ext_resource type="Resource" path="res://data/buildings/dawnharbor_small.tres" id="11_dawnharbor_small"]
 [ext_resource type="Resource" path="res://data/npcs/dock_marlo.tres" id="12_dock_marlo"]
@@ -15,87 +17,54 @@
 [ext_resource type="Resource" path="res://data/npcs/harbormaster.tres" id="15_harbormaster"]
 [ext_resource type="Resource" path="res://data/npcs/harbor_taxi.tres" id="16_harbor_taxi"]
 
+[sub_resource type="Resource" id="Plat_terrace"]
+script = ExtResource("3_platform_def")
+x = 2050.0
+y = 870.0
+width = 2250.0
+solid = true
+
+[sub_resource type="Resource" id="Plat_cliff"]
+script = ExtResource("3_platform_def")
+x = 2700.0
+y = 700.0
+width = 1000.0
+solid = true
+
+[sub_resource type="Resource" id="Climb_0"]
+script = ExtResource("4_climbable_def")
+x = 2110.0
+top = 870.0
+bottom = 1020.0
+style = ExtResource("8_ladder")
+
+[sub_resource type="Resource" id="Climb_1"]
+script = ExtResource("4_climbable_def")
+x = 4240.0
+top = 870.0
+bottom = 1020.0
+style = ExtResource("8_ladder")
+
+[sub_resource type="Resource" id="Climb_2"]
+script = ExtResource("4_climbable_def")
+x = 2740.0
+top = 700.0
+bottom = 870.0
+style = ExtResource("9_rope")
+
+[sub_resource type="Resource" id="Climb_3"]
+script = ExtResource("4_climbable_def")
+x = 3660.0
+top = 700.0
+bottom = 870.0
+style = ExtResource("9_rope")
+
 [sub_resource type="Resource" id="Portal_west"]
 script = ExtResource("5_portal_def")
 x = 60.0
 platform = 0
 target_map = &"harbor_beach"
 target_x = 2960.0
-
-[sub_resource type="Resource" id="Portal_mid"]
-script = ExtResource("5_portal_def")
-x = 2250.0
-platform = 0
-target_map = &"free_market"
-target_x = 120.0
-
-[sub_resource type="Resource" id="Portal_east"]
-script = ExtResource("5_portal_def")
-x = 2883.0
-platform = 0
-target_map = &"harbor_road"
-target_x = 120.0
-
-[sub_resource type="Resource" id="Building_0"]
-script = ExtResource("7_building_placement")
-building = ExtResource("10_dawnharbor_large")
-x = 617.0
-platform = 0
-flip = true
-scale = 1.0
-tint = Color(0.92, 0.9, 0.94, 1.0)
-
-[sub_resource type="Resource" id="Building_1"]
-script = ExtResource("7_building_placement")
-building = ExtResource("11_dawnharbor_small")
-x = 1064.0
-platform = 0
-flip = false
-scale = 1.15
-tint = Color(1.0, 1.0, 1.0, 1.0)
-
-[sub_resource type="Resource" id="Door_store"]
-script = ExtResource("5_portal_def")
-x = 1064.0
-platform = 0
-target_map = &"dawnharbor_store"
-target_x = 240.0
-door = true
-
-[sub_resource type="Resource" id="Building_3"]
-script = ExtResource("7_building_placement")
-building = ExtResource("10_dawnharbor_large")
-x = 1530.0
-platform = 0
-flip = false
-scale = 1.12
-tint = Color(1.0, 1.0, 1.0, 1.0)
-
-[sub_resource type="Resource" id="Door_hall"]
-script = ExtResource("5_portal_def")
-x = 1530.0
-platform = 0
-target_map = &"dawnharbor_guild"
-target_x = 240.0
-door = true
-
-[sub_resource type="Resource" id="Building_4"]
-script = ExtResource("7_building_placement")
-building = ExtResource("11_dawnharbor_small")
-x = 1999.0
-platform = 0
-flip = false
-scale = 0.98
-tint = Color(1.0, 0.92, 0.88, 1.0)
-
-[sub_resource type="Resource" id="Building_7"]
-script = ExtResource("7_building_placement")
-building = ExtResource("10_dawnharbor_large")
-x = 2566.0
-platform = 0
-flip = true
-scale = 1.0
-tint = Color(1.0, 0.95, 0.9, 1.0)
 
 [sub_resource type="Resource" id="Npc_taxi"]
 script = ExtResource("6_npc_placement")
@@ -104,49 +73,160 @@ x = 280.0
 platform = 0
 face = 1
 
+[sub_resource type="Resource" id="Npc_extra_1"]
+script = ExtResource("6_npc_placement")
+npc = ExtResource("16_harbor_taxi")
+x = 400.0
+platform = 0
+face = -1
+
+[sub_resource type="Resource" id="Building_0"]
+script = ExtResource("7_building_placement")
+building = ExtResource("10_dawnharbor_large")
+x = 720.0
+platform = 0
+flip = true
+scale = 1.0
+tint = Color(0.92, 0.9, 0.94, 1.0)
+
 [sub_resource type="Resource" id="Npc_shop"]
 script = ExtResource("6_npc_placement")
 npc = ExtResource("13_harbor_outfitter")
-x = 1274.0
+x = 1030.0
 platform = 0
 face = -1
+
+[sub_resource type="Resource" id="Building_1"]
+script = ExtResource("7_building_placement")
+building = ExtResource("11_dawnharbor_small")
+x = 1250.0
+platform = 0
+flip = false
+scale = 1.15
+tint = Color(1.0, 1.0, 1.0, 1.0)
+
+[sub_resource type="Resource" id="Door_store"]
+script = ExtResource("5_portal_def")
+x = 1250.0
+platform = 0
+target_map = &"dawnharbor_store"
+target_x = 240.0
+door = true
 
 [sub_resource type="Resource" id="Npc_storage"]
 script = ExtResource("6_npc_placement")
 npc = ExtResource("14_storage_keeper")
-x = 1807.0
+x = 1440.0
 platform = 0
 face = -1
+
+[sub_resource type="Resource" id="Building_3"]
+script = ExtResource("7_building_placement")
+building = ExtResource("10_dawnharbor_large")
+x = 1700.0
+platform = 0
+flip = false
+scale = 1.12
+tint = Color(1.0, 1.0, 1.0, 1.0)
+
+[sub_resource type="Resource" id="Door_hall"]
+script = ExtResource("5_portal_def")
+x = 1700.0
+platform = 0
+target_map = &"dawnharbor_guild"
+target_x = 240.0
+door = true
+
+[sub_resource type="Resource" id="Portal_mid"]
+script = ExtResource("5_portal_def")
+x = 4420.0
+platform = 0
+target_map = &"free_market"
+target_x = 120.0
+
+[sub_resource type="Resource" id="Building_7"]
+script = ExtResource("7_building_placement")
+building = ExtResource("10_dawnharbor_large")
+x = 4750.0
+platform = 0
+flip = true
+scale = 1.0
+tint = Color(1.0, 0.95, 0.9, 1.0)
+
+[sub_resource type="Resource" id="Building_4"]
+script = ExtResource("7_building_placement")
+building = ExtResource("11_dawnharbor_small")
+x = 5150.0
+platform = 0
+flip = false
+scale = 0.98
+tint = Color(1.0, 0.92, 0.88, 1.0)
+
+[sub_resource type="Resource" id="Portal_east"]
+script = ExtResource("5_portal_def")
+x = 5340.0
+platform = 0
+target_map = &"harbor_road"
+target_x = 120.0
+
+[sub_resource type="Resource" id="Building_5"]
+script = ExtResource("7_building_placement")
+building = ExtResource("11_dawnharbor_small")
+x = 2330.0
+platform = 1
+flip = false
+scale = 1.05
+tint = Color(0.95, 0.97, 1.0, 1.0)
 
 [sub_resource type="Resource" id="Npc_extra_0"]
 script = ExtResource("6_npc_placement")
 npc = ExtResource("15_harbormaster")
-x = 853.0
-platform = 0
+x = 2530.0
+platform = 1
 face = -1
 
-[sub_resource type="Resource" id="Npc_extra_1"]
-script = ExtResource("6_npc_placement")
-npc = ExtResource("16_harbor_taxi")
-x = 380.0
-platform = 0
-face = -1
+[sub_resource type="Resource" id="Building_6"]
+script = ExtResource("7_building_placement")
+building = ExtResource("10_dawnharbor_large")
+x = 3990.0
+platform = 1
+flip = true
+scale = 1.05
+tint = Color(0.96, 0.92, 0.86, 1.0)
+
+[sub_resource type="Resource" id="Building_8"]
+script = ExtResource("7_building_placement")
+building = ExtResource("10_dawnharbor_large")
+x = 3000.0
+platform = 2
+flip = false
+scale = 1.0
+tint = Color(1.0, 0.98, 0.94, 1.0)
+
+[sub_resource type="Resource" id="Building_9"]
+script = ExtResource("7_building_placement")
+building = ExtResource("11_dawnharbor_small")
+x = 3430.0
+platform = 2
+flip = true
+scale = 1.1
+tint = Color(0.94, 0.94, 1.0, 1.0)
 
 [resource]
 script = ExtResource("1_map_def")
 id = &"dawnharbor"
 display_name = "Dawnharbor"
 biome = ExtResource("2_harbor")
-width = 2943
-height = 700
-ground_y = 620
+width = 5400
+height = 1100
+ground_y = 1020
 start_x = 300.0
-platforms = Array[ExtResource("3_platform_def")]([])
-climbables = Array[ExtResource("4_climbable_def")]([])
-npcs = Array[ExtResource("6_npc_placement")]([SubResource("Npc_taxi"), SubResource("Npc_shop"), SubResource("Npc_storage"), SubResource("Npc_extra_0"), SubResource("Npc_extra_1")])
-buildings = Array[ExtResource("7_building_placement")]([SubResource("Building_0"), SubResource("Building_1"), SubResource("Building_3"), SubResource("Building_4"), SubResource("Building_7")])
+platforms = Array[ExtResource("3_platform_def")]([SubResource("Plat_terrace"), SubResource("Plat_cliff")])
+climbables = Array[ExtResource("4_climbable_def")]([SubResource("Climb_0"), SubResource("Climb_1"), SubResource("Climb_2"), SubResource("Climb_3")])
+npcs = Array[ExtResource("6_npc_placement")]([SubResource("Npc_taxi"), SubResource("Npc_extra_1"), SubResource("Npc_shop"), SubResource("Npc_storage"), SubResource("Npc_extra_0")])
+buildings = Array[ExtResource("7_building_placement")]([SubResource("Building_0"), SubResource("Building_1"), SubResource("Building_3"), SubResource("Building_7"), SubResource("Building_4"), SubResource("Building_5"), SubResource("Building_6"), SubResource("Building_8"), SubResource("Building_9")])
 region = &"dawnharbor"
 world_pos = Vector2(420.0, 300.0)
 town = true
 level_text = "Town"
-portals = Array[ExtResource("5_portal_def")]([SubResource("Portal_west"), SubResource("Portal_mid"), SubResource("Portal_east"), SubResource("Door_store"), SubResource("Door_hall")])
+portals = Array[ExtResource("5_portal_def")]([SubResource("Portal_west"), SubResource("Door_store"), SubResource("Door_hall"), SubResource("Portal_mid"), SubResource("Portal_east")])

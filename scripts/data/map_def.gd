@@ -70,6 +70,32 @@ func look() -> BiomeDef:
 		_look = variant.apply(biome)
 	return _look
 
+## The platform a solid platform (`PlatformDef.solid`) stands on: the highest platform below
+## its middle that runs under it, or 0 (the floor).
+func land_under(platform: int) -> int:
+	var d := platforms[platform - 1]
+	var mid := d.x + d.width * 0.5
+	var best := 0
+	for i in platforms.size():
+		var o := platforms[i]
+		if o.y > d.y and mid >= o.x and mid <= o.x + o.width and (best == 0 or o.y < platforms[best - 1].y):
+			best = i + 1
+	return best
+
+## The top edge of platform `platform` (0 is the floor), in game pixels.
+func surface_y(platform: int) -> float:
+	return float(ground_y) if platform == 0 else platforms[platform - 1].y
+
+## The solid platforms standing on platform `platform` (0 is the floor), as their left and
+## right ends (x and y): raised land whose front covers that stretch of the land below.
+func solid_spans_on(platform: int) -> Array[Vector2]:
+	var out: Array[Vector2] = []
+	for i in platforms.size():
+		var d := platforms[i]
+		if d.solid and land_under(i + 1) == platform:
+			out.append(Vector2(d.x, d.x + d.width))
+	return out
+
 ## The town this map sends you back to (see `return_map`).
 func return_town() -> StringName:
 	if return_map != &"":

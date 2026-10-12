@@ -28,8 +28,7 @@ func build(map: MapDef, rng: RandomNumberGenerator) -> void:
 static func strip_edges(map: MapDef, layer: BackdropLayerDef) -> Vector2:
 	var z := -layer.depth
 	var tex: Texture2D = layer.textures[0]
-	var r := TDStage.view_center_range(map.height)
-	var top := TDStage.screen_height_at(layer.screen_top.x, z, (r.x + r.y) / 2.0)
+	var top := TDStage.screen_height_at(layer.screen_top.x, z, TDStage.backdrop_center(map))
 	return Vector2(top, top - tex.get_height() * pixel_size(layer, tex, z))
 
 ## Moves drifting pieces (clouds) and wraps them around.

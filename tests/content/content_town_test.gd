@@ -74,23 +74,35 @@ func test_doors_are_in_their_building() -> void:
 				check(m.buildings.any(func(b: BuildingPlacement) -> bool: return b.x == p.x and b.platform == p.platform),
 					"%s: the door to %s (x %d) has no building there" % [Scan.where(m), p.target_map, p.x])
 
+## Every level of a town (the floor and each raised terrace) reads as a lived-in street.
 func test_streets_have_no_long_empty_stretches() -> void:
 	for m in _streets():
-		var spans: Array[Vector2] = [Vector2(0, 0), Vector2(m.width, m.width)]
-		for b in m.buildings:
-			if b.platform == 0:
-				spans.append(b.span())
-		for p in m.portals:
-			if p.platform == 0:
-				spans.append(Vector2(p.x - 34.0, p.x + 34.0))
-		for n in m.npcs:
-			if n.platform == 0:
-				spans.append(Vector2(n.x - 30.0, n.x + 30.0))
-		spans.sort_custom(func(a: Vector2, b: Vector2) -> bool: return a.x < b.x)
-		var reach := 0.0
-		for s in spans:
-			check(s.x - reach <= MAX_EMPTY, "%s: x %d-%d is empty street (%d px, want at most %d)" % [Scan.where(m), reach, s.x, s.x - reach, MAX_EMPTY])
-			reach = maxf(reach, s.y)
+		var levels := [0]
+		for i in m.platforms.size():
+			if m.platforms[i].solid:
+				levels.append(i + 1)
+		for plat: int in levels:
+			var land := Vector2(0, m.width) if plat == 0 else Vector2(m.platforms[plat - 1].x, m.platforms[plat - 1].x + m.platforms[plat - 1].width)
+			var y := m.surface_y(plat)
+			var spans: Array[Vector2] = [Vector2(land.x, land.x), Vector2(land.y, land.y)]
+			spans.append_array(m.solid_spans_on(plat))
+			for b in m.buildings:
+				if b.platform == plat:
+					spans.append(b.span())
+			for p in m.portals:
+				if p.platform == plat:
+					spans.append(Vector2(p.x - 34.0, p.x + 34.0))
+			for n in m.npcs:
+				if n.platform == plat:
+					spans.append(Vector2(n.x - 30.0, n.x + 30.0))
+			for c in m.climbables:
+				if c.top < y + 4.0 and c.bottom > y - 4.0 and c.x >= land.x and c.x <= land.y:
+					spans.append(Vector2(c.x - 16.0, c.x + 16.0))
+			spans.sort_custom(func(a: Vector2, b: Vector2) -> bool: return a.x < b.x)
+			var reach := land.x
+			for s in spans:
+				check(s.x - reach <= MAX_EMPTY, "%s: x %d-%d on platform %d is empty street (%d px, want at most %d)" % [Scan.where(m), reach, s.x, plat, s.x - reach, MAX_EMPTY])
+				reach = maxf(reach, s.y)
 
 func test_background_houses_are_spaced_out() -> void:
 	var seen := 0

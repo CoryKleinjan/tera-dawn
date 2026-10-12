@@ -105,9 +105,22 @@ a gap, an exit gets a wider gap of its own), then the east exit. The map is only
 that row needs. Towns have **no monsters**: hunting happens in the fields next door (the
 start town, Dawnrise Village, leads east into Dawnrise Meadow).
 
+A bigger town can have **levels**, like a classic MapleStory city: raised stone terraces
+and a cliff top above the street, each a platform with `solid = true`. A solid platform's
+front runs all the way down to the land it stands on (`MapDef.land_under`: the highest
+platform under its middle, or the floor), so it reads as raised ground rather than a thin
+ledge; you still walk in front of it along the street below. Ladders and ropes join the
+levels (more than about 90 px needs one). Buildings, NPCs and portals stand on a level by
+their `platform`; each level is its own row for the spacing checks, and nothing should
+stand on the floor straight behind a terrace's wall (lanterns, scattered decor and
+background houses keep clear of it by themselves). Doors stay on the floor for now, since
+players arrive on a map's floor. In a town the backdrop is laid out for the camera on the
+street (`TDStage.backdrop_center`), so climbing up just shows more sky. Dawnharbor is the
+example: a quay street, a terrace 150 px up and a cliff top 320 px up.
+
 The biome's `town_decor` (small houses far behind the street) don't scatter randomly in a
 town with buildings: `SceneryBuilder.back_house_slots` stands them in one row,
 `BACK_HOUSE_GAP` apart and never straight behind a building.
-`tests/content/content_town_test.gd` checks all of this against the real picture sizes, so
+`tests/content/content_town_test.gd` checks all of this (every level of a town) against the real picture sizes, so
 when new building art comes in wider or narrower, the test names the buildings that now sit
 too close and you nudge their `x` (and the doors, NPCs and the portals that lead in).

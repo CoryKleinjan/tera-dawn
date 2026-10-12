@@ -106,9 +106,10 @@ static func scatter(rule: DecorDef, land: Vector2, y: float, rng: RandomNumberGe
 
 ## The stretches (left and right edges as x and y) taken by what stands on platform
 ## `platform` (0 is the floor): buildings, portals, NPCs, ropes and ladders that reach it
-## from above or below, and props.
+## from above or below, props, and raised land whose wall stands on it.
 static func standing_on(map: MapDef, platform: int) -> Array[Vector2]:
 	var out := building_spans(map, platform)
+	out.append_array(map.solid_spans_on(platform))
 	var y := surface(map, platform)
 	for p in map.portals:
 		if p.platform == platform:

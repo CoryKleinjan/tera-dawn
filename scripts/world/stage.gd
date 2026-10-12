@@ -484,7 +484,17 @@ func screen_frac(h: float, z: float) -> float:
 	return screen_frac_at(h, z, _mid_center())
 
 func _mid_center() -> float:
-	var r := view_center_range(world.map.height)
+	return backdrop_center(world.map)
+
+## The camera height (game-y of the view's middle) a map's backdrop is laid out for. In a
+## town it is where the view sits while the hero walks the street (the floor), so the
+## backdrop meets the street as painted and a tall town's upper levels just show more sky;
+## elsewhere it is the middle of the camera's range.
+static func backdrop_center(map: MapDef) -> float:
+	var r := view_center_range(map.height)
+	if map.town:
+		var view := TDWorld.world_view().y
+		return clampf(map.ground_y - view * WorldCamera.STAND_AT + view / 2.0, r.x, r.y)
 	return (r.x + r.y) / 2.0
 
 ## The game-y of the middle of the view, highest (x) and lowest (y), as the camera moves

@@ -20,6 +20,8 @@ func build(map: MapDef, platforms: Array[Platform]) -> void:
 			_platform_look(platforms[i], map.platforms[i - 1])
 		else:
 			_platform_front(platforms[i], biome)
+		if map.platforms[i - 1].solid:
+			_solid_wall(map, i, biome)
 	_edge_grass(map, platforms, biome)
 
 # ---------- the floor ----------
@@ -119,6 +121,17 @@ func _platform_front(pl: Platform, biome: BiomeDef) -> void:
 	var top := PlatformSkin.span(biome, pl.y).x
 	s.position = TDStage.to3d(Vector2(pl.x + pl.w / 2.0, top), TDStage.LAND_FRONT)
 	root.add_child(s)
+
+## A solid platform's wall: the floor's rock texture from just under its painted top edge
+## down behind the top edge of the land it stands on, across its walkable width.
+func _solid_wall(map: MapDef, platform: int, biome: BiomeDef) -> void:
+	if biome.ground_side == null:
+		return
+	var d := map.platforms[platform - 1]
+	var top := d.y + FLOOR_FILL_TOP
+	var bottom := map.surface_y(map.land_under(platform)) + FLOOR_FILL_TOP
+	var rect := Rect2(d.x, top, d.width, bottom - top)
+	root.add_child(_strip("SolidWall", biome.ground_side, rect, TDStage.art_size(biome.ground_side), TDStage.LAND_FRONT - 0.01))
 
 ## The game-y span a platform's painted skin covers: x is the top of its grass, y the bottom.
 static func skin_span(d: PlatformDef, biome: BiomeDef) -> Vector2:
