@@ -63,11 +63,12 @@ HAT_SHOULDER_ROWS = 6  # hat sheet cells are lined up by their bottom rows (the 
 # Hats of these shapes sit this much lower on his head than on the sheet's head (head radii;
 # Cory 2026-10-11: a bandana sits a little lower).
 HAT_LOWER = {"bandana": 0.2}
-HAT_GROW = {"bandana": 1.1}
+HAT_GROW = {"bandana": 1.02}  # (Cory 2026-10-12: bandanas a bit smaller, to fit better)
 # ...and from behind are this wide (head radii), all alike, so they cover the back of his head
 # (Gemini paints some bandanas' backs wider than others; Cory 2026-10-11: a bit smaller from behind)
-HAT_BACK_WIDTH = {"bandana": 2.45}
+HAT_BACK_WIDTH = {"bandana": 2.3}
 HAT_LINE = 0.1         # a bit of a hat cell's frame line: at most this thick against its length
+HAT_FRAME_FILL, HAT_FRAME_THICK = 0.85, 6  # hats.hat_alone: edge rows this full, at most this many, are a cell frame line
 # a closed helm's eye holes go over his eyes (hats.eyes_in_holes): his eyes' middle (x, y) and
 # width in head radii from the head centre in a side view, the share of the widest opening's
 # width that counts as the eye band, the widest opening that is an open face instead (head
@@ -75,14 +76,22 @@ HAT_LINE = 0.1         # a bit of a hat cell's frame line: at most this thick ag
 HELM_EYES = (0.18, 0.27, 0.95)
 FACE_LINE_DARK, FACE_LINE_LEAN = 140, 30  # faces: line work darker than this leans at most this far to magenta
 SHORTS_BELOW = 0.45  # body.shorts_mask: the shorts are only looked for this far down the body (its height)
+SOLID_EYES = 60  # hats.eyes_out: the face layer's irises, where at least this opaque
 HELM_HUG, HELM_NUDGE = 1.06, 0.5  # hats.hugging: a helm's shell this times his head's width; moved this far to its eyes
 HELM_BAND, HELM_OPEN, HELM_SIZE = 0.75, 1.15, (0.8, 1.15)
-HAIR_CUT_SIDE = 0.6    # hats.save_hair_cut: hair is hidden this far past a hat's sides (head radii)
-HAIR_CUT_HEAD, HAIR_CUT_REACH = 0.85, 0.5  # ...each column's own edge over his head, nearby edges off it
+HAIR_CUT_HEAD, HAIR_CUT_REACH = 0.85, 0.5  # hats.save_hair_cut: each column's own edge over his head, nearby edges off it
 HAIR_CUT_CREST = 0.6  # ...on a helm, a stretch ending this far above the head's middle is a crest, not the edge
+HAIR_CUT_SPECK, HAIR_CUT_CRUMB = 0.15, 0.03  # ...and a patch smaller than this (head radii squared) off by itself, or this anywhere
+HAIR_CUT_TOUCH, HAIR_CUT_HELD = 4, 0.7  # ...a patch the cut chopped less than this share of it at the hat (within that) is loose
+HAIR_CUT_BODY = 2     # ...or one the cut reached not touching his head within this (frame pixels)
+HAIR_HEAD_ONLY = ("long", "ponytail", "twin_tails")  # ...hairstyles showing only the hair on his head under a hat (no tails or hanging locks)
+HAIR_HEAD_ONLY_OVAL = (1.1, 0.9, 0.55)  # ...inside this oval (half width, half height, raised: head radii), above his mouth
+HAIR_HEAD_ONLY_BACK = (1.15, 1.05, 0.0)  # ...or from behind, this one (his whole head, down to his neck)
+HAIR_HAT_POSE = "sit"  # ...and every pose wears this pose's hair under a hat (for those styles)
+HAIR_CUT_SOFT = 1.5   # ...its edge blurred this much (frame pixels), so the hair fades out under the hat
+HAIR_CUT_TUCK = 2      # ...and stops this many pixels inside the hat, so hair and head run on under its soft edge
 HAIR_CUT_LOW = 0.75    # ...and never below this far under the head's middle (head radii)
 HEAD_CUT_DISC, HEAD_CUT_LOW = 1.3, 0.55  # hats.save_head_cut: his head this near its middle, above this low (head radii)
-HEAD_CUT_HAIR = 1.6    # ...and his hair this near (its tufts stick out further)
 HEAD_CUT_HAND, HEAD_CUT_KEEP = 0.6, 0.95  # ...his hands kept this near their point, outside this near the head's middle
 HEAD_CUT_DARK = 0.3    # ...painted lines darker than this bound his head (an arm drawn over it is not head)
 HAIR_CUT_ALPHA = 127   # ...against the hat's pixels at least this opaque
@@ -175,6 +184,20 @@ def distance_inside(mask):
 
 
 # ---------- placing pieces ----------
+
+def feathered(arr, mask):
+    """The pixels of an RGBA array inside `mask`, with the edge the mask cuts through the art
+    faded over a pixel (each pixel's alpha times the share of its 3x3 neighbours that are kept
+    or clear), so a piece lifted off a sheet has a soft edge there too, never on/off pixels.
+    Its own edge against the background stays as it is."""
+    keep = (mask | (arr[..., 3] == 0)).astype(float)
+    pad = np.pad(keep, 1, mode="edge")
+    share = sum(pad[dy:dy + keep.shape[0], dx:dx + keep.shape[1]] for dy in range(3) for dx in range(3)) / 9.0
+    out = arr.copy()
+    out[~mask] = 0
+    out[..., 3] = (out[..., 3] * share).round().astype(np.uint8)
+    return out
+
 
 def scaled(piece_img, s):
     """A piece (PIL RGBA, sheet pixels) shrunk to game pixels."""

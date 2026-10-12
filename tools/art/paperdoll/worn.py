@@ -57,8 +57,7 @@ def posed_worn(piece, cell, px, place):
     mask = np.isin(lab, 1 + np.nonzero(keep)[0])
     if not mask.any():
         return None
-    cut = arr.copy()
-    cut[~mask] = 0
+    cut = feathered(arr, mask)
     # the sheets draw a piece paler in some poses than others: each pose's greys are brought
     # to the same middle grey, so the tinted piece doesn't flicker as he moves
     grey = cut[..., :3].astype(float).mean(2, keepdims=True)

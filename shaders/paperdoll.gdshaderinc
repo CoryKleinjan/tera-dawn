@@ -9,7 +9,7 @@ uniform sampler2D regions : filter_nearest;
 // the art, so recolouring keeps light and shade.
 uniform sampler2D look_data : filter_nearest;
 uniform bool has_head_cut = false;
-uniform sampler2D head_cut : filter_nearest;
+uniform sampler2D head_cut : filter_linear;
 
 vec4 dress_region(vec4 src, vec2 uv) {
 	int r = clamp(int(round(texture(regions, uv).r * 255.0 / 16.0)), 0, 10);
