@@ -14407,6 +14407,37 @@
     ],
     "text": "The first image is a sheet of NPC characters for my 2D side-scrolling game: two rows, each row the same characters standing in the same spots, with a label above each. Keep the sheet's size, layout, magenta background, label bands, and each character's position, size, chibi proportions and art style exactly. The second image shows more of my game's NPC characters; the new ones must look like they belong with them: soft cel-painted shading, rich warm colours, dark brown outlines, painted cloth folds and worn patches. Replace the four characters with new townsfolk of the harbour town, the same character in both rows of each column, standing still in the same calm pose in both rows: Column 1 (label it SAILMAKER): a sturdy middle-aged woman sailmaker with a canvas apron, rolled sleeves and a bundle of folded white sailcloth under one arm, a big needle tucked in her apron. Column 2 (label it DOCKHAND): a broad-shouldered young dock worker in a striped sailor shirt, brown trousers and a knitted cap, holding a small wooden crate in both hands. Column 3 (label it KID): a small cheerful child in a yellow raincoat and short boots, holding a paper boat. Column 4 (label it EMPTY): leave empty, plain magenta. Rules: every character stands upright, facing slightly toward the viewer, both feet flat on one level ground line, full body in its cell. Hands are simple rounded fingerless mittens in the game's style. No new facial hair. Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background everywhere outside the characters and labels."
    }
+  },
+  {
+   "id": "star_icons_test",
+   "prompts": null,
+   "batch": "throwing star weapon icons (edit)",
+   "with": null,
+   "refs": [],
+   "save": "star_icons_test.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    6
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-12 weapon plan thread (Cory 18:36Z: drop claws for ninja stars; 19:28Z OK on the look). The six claw icons repainted as six throwing-star weapons, one star each, same order. Pasted over the claw row of art/source/items_thief.png.",
+   "edit": {
+    "base": "art/source/items_thief.png",
+    "base_crop": [
+     0,
+     0,
+     1536,
+     258
+    ],
+    "refs": [
+     "/mnt/project-files/art-sheets/icon-refs/iron_stars_old_icon.png"
+    ],
+    "text": "The first image is a row of six labelled inventory icons from my game, on magenta, each in its own box. REPAINT each icon as ONE single throwing star (shuriken) weapon, keeping the same six boxes, order, layout, size and place, and change each label to the new name. The second image shows my game's old iron throwing stars: paint the stars in that same soft hand-painted style. Each star is one flat star seen straight on, tilted slightly, filling about two thirds of its box, with a small round hole in the middle. 1) IRON STAR: plain dull grey iron, four straight points. 2) STEEL STAR: polished blue-tinted steel with bright edge highlights, four straight points. 3) SHADOW STAR: matte black with a faint purple sheen, six points. 4) VIPER STAR: olive green with a snake-scale pattern, four curved hooked blades that sweep the same way like a pinwheel. 5) NIGHTFANG STAR: deep purple with pale bone-white fang-shaped points, four points. 6) ECLIPSE STAR: dark bronze-black with gold trim, four points, and a gold crescent moon cut-out ring in the middle. No hands, no claws, no wrist guards, no piles of stars: one star per box. The background stays bright pure magenta #FF00FF. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything."
+   }
   }
  ]
 }

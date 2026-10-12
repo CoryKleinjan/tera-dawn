@@ -128,7 +128,7 @@ func _run() -> void:
 		_teleport(world, Vector2(1120, 620))
 		p.face = 1
 		var kept: ItemStack = ch.equipment.take(&"weapon")
-		for id in [&"dawn_blade", &"willow_bow", &"oak_staff", &"iron_claw", &"flintlock"]:
+		for id in [&"dawn_blade", &"willow_bow", &"oak_staff", &"iron_star", &"flintlock"]:
 			ch.equipment.take(&"weapon")
 			ch.equipment.put(&"weapon", ItemStack.exact(Content.item(id)))
 			ch.recalc()
@@ -172,7 +172,7 @@ func _run() -> void:
 			["Bramble", "hair_long", "hair_color_copper", "skin_honey", "face_freckled", ["green_hood", "willow_bow", "ranger_vest", "leather_boots"]],
 			["Ondine", "hair_twin_tails", "hair_color_blossom", "skin_porcelain", "face_rosy", ["apprentice_hat", "oak_staff", "aurora_robe", "petal_cape"]],
 			["Garrick", "hair_crest", "hair_color_ink", "skin_umber", "face_determined", ["iron_helm", "bronze_sword", "bronze_mail", "oak_shield", "dawnwing_cape"]],
-			["Wren", "hair_ponytail", "hair_color_frost", "skin_bronze", "face_cheeky", ["dusk_bandana", "iron_claw", "night_garb", "work_gloves"]],
+			["Wren", "hair_ponytail", "hair_color_frost", "skin_bronze", "face_cheeky", ["dusk_bandana", "iron_star", "night_garb", "work_gloves"]],
 			["Marlo", "hair_bun", "hair_color_moss", "skin_cocoa", "face_bright", ["tricorn_hat", "flintlock", "sailor_coat", "patched_trousers"]],
 		]
 		var models := []

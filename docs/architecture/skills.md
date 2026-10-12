@@ -34,7 +34,7 @@ Ranged and magic skills:
   the skill a shot. The server still decides the hit at once; clients fly one projectile per
   hit (`TDProjectile`) and pop the damage number when it lands, holding the monster's death
   until then.
-- A weapon (`EquipDef`) names its `weapon_kind` (sword, bow, wand, staff, claw, knuckle, gun)
+- A weapon (`EquipDef`) names its `weapon_kind` (sword, bow, wand, staff, star, knuckle, gun)
   and an optional `basic_attack` skill that replaces the plain swing (a bow's Shoot). Ranged
   weapons need no ammo.
 - `weapons` limits a skill to weapon kinds; `magic` uses Magic Attack (INT included) through

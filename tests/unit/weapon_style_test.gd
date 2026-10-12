@@ -3,7 +3,7 @@ extends TestCase
 ## plays an animation the hero has, with the weapon in his hand on every frame of it, except
 ## buffs and spells, which play none (a flash of the skill's colour instead).
 
-const KINDS: Array[StringName] = [&"sword", &"bow", &"wand", &"staff", &"claw", &"knuckle", &"gun"]
+const KINDS: Array[StringName] = [&"sword", &"bow", &"wand", &"staff", &"star", &"knuckle", &"gun"]
 
 func _look(weapon: String) -> Dictionary:
 	return {"appearance": {}, "gear": {"weapon": weapon} if weapon != "" else {}}
@@ -12,7 +12,7 @@ func test_each_weapon_kind_has_its_own_motions() -> void:
 	check_eq(WeaponStyle.animation(&"sword", &"attack"), &"attack", "a sword swings")
 	check_eq(WeaponStyle.animation(&"bow", &"attack"), &"shoot", "a bow shoots")
 	check_eq(WeaponStyle.animation(&"gun", &"attack"), &"gun", "a gun fires")
-	check_eq(WeaponStyle.animation(&"claw", &"attack"), &"throw", "a claw throws")
+	check_eq(WeaponStyle.animation(&"star", &"attack"), &"throw", "a star is thrown")
 	check_eq(WeaponStyle.animation(&"knuckle", &"attack"), &"punch", "knuckles punch")
 	check_eq(WeaponStyle.animation(&"staff", &"attack"), &"heavy", "a staff smashes two-handed")
 	check_eq(WeaponStyle.animation(&"", &"attack"), &"punch", "bare hands punch")

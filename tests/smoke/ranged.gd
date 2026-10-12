@@ -56,7 +56,7 @@ func check() -> void:
 	# a thief throws with nothing in the bag
 	ch.job = Content.job(&"thief")
 	ch.equipment.take(&"weapon")
-	ch.equipment.put(&"weapon", ItemStack.exact(Content.item(&"iron_claw")))
+	ch.equipment.put(&"weapon", ItemStack.exact(Content.item(&"iron_star")))
 	ch.skills.learned[&"lucky_seven"] = 1
 	_check(ch.skills.use_problem(Content.skill(&"lucky_seven")) == "", "Lucky Seven needs no ammo")
 	ch.skills.learned[&"flash_fist"] = 1

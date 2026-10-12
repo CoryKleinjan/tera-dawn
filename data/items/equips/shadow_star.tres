@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="EquipDef" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/equip_def.gd" id="1_equip_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/shadow_star.png" id="2_shadow_star"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="3_shard_pickup"]
+[ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="4_stat_block"]
+[ext_resource type="Resource" path="res://data/skills/star_throw.tres" id="5_star_throw"]
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("4_stat_block")
+attack = 38
+avoid = 3
+
+[resource]
+script = ExtResource("1_equip_def")
+id = &"shadow_star"
+display_name = "Shadow Star"
+description = "Dark steel that swallows lantern light."
+icon = ExtResource("2_shadow_star")
+sprite_scale = 0.4
+glow_color = Color(0.603922, 0.482353, 0.815686, 1.0)
+pickup_effect = ExtResource("3_shard_pickup")
+sell_price = 650
+slot = 0
+jobs = Array[StringName]([&"thief"])
+required_level = 20
+stats = SubResource("Resource_1")
+variance = 2
+weapon_kind = &"star"
+basic_attack = ExtResource("5_star_throw")
+required_luck = 60

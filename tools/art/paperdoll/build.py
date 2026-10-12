@@ -113,7 +113,7 @@ def preview(names, fw, fh, rig_frames):
     body = Image.open(STRIP)
     tint = lambda im, c: Image.fromarray((np.asarray(im).astype(float) * (list(c) + [1])).astype(np.uint8), "RGBA")  # noqa: E731
     steel, wood = (0.85, 0.87, 0.92), (0.75, 0.55, 0.35)
-    colours = {"sword": steel, "wand": wood, "staff": wood, "bow": wood, "gun": wood, "claw": steel, "knuckle": (0.85, 0.7, 0.4)}
+    colours = {"sword": steel, "wand": wood, "staff": wood, "bow": wood, "gun": wood, "star": steel, "knuckle": (0.85, 0.7, 0.4)}
     shield = load_piece("shield_item_kite_shield")
     rows = []
     for kind in WEAPON_KINDS:

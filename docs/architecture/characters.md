@@ -48,8 +48,8 @@ only what the creator offers and makes a level 1 character in the starting job
   has his fingers, `shaders/paperdoll_piece.gdshaderinc`), behind him on far-hand frames and
   on his back while he climbs or sits. Each kind is held its own way (a bow upright, a staff
   planted; "holds" in `art/sheets/paperdoll_rig.json`; the sword sways a little through each
-  animation, a claw points along his forearm, and a gun is turned level with its grip in his
-  fist). Every weapon is its own icon art
+  animation, a throwing star sits behind his fist with its points sticking out, and a gun is
+  turned level with its grip in his fist). Every weapon is its own icon art
   (`weapon_item_<id>`); the tinted `weapon_<kind>` pictures are for a weapon with no icon cell.
   A shield's back sits on his far arm behind him with about a third showing, and its face is on
   his back while he climbs (`shield_item_<id>`). Hats are `hat_item_<id>` in their own colours
@@ -64,7 +64,7 @@ only what the creator offers and makes a level 1 character in the starting job
   `EquipDef.worn_frames` take any new layered art without code changes. The strip is cut at
   the painted sheet's full resolution: `Paperdoll.ART_SCALE` strip pixels make one hero pixel.
 - **Animation**: each weapon fights its own way (`WeaponStyle`): a skill's motion ("attack",
-  "slash") becomes the weapon's own animation (a bow shoots, a claw throws, knuckles punch, a
+  "slash") becomes the weapon's own animation (a bow shoots, a star is thrown, knuckles punch, a
   staff smashes), and other names play as they are, except "cast" (`WeaponStyle.SPELL`):
   buffs and spells make no motion, the hero flashes the skill's colour (`SkillDef.flash`,
   `SpriteRig.pulse`). Frames have their own durations (a held wind-up), and `TDPlayer` adds a

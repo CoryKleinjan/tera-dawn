@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/data/shop_def.gd" id="1_shop_def"]
 [ext_resource type="Script" path="res://scripts/data/shop_entry.gd" id="2_shop_entry"]
-[ext_resource type="Resource" path="res://data/items/equips/iron_claw.tres" id="3_iron_claw"]
+[ext_resource type="Resource" path="res://data/items/equips/iron_star.tres" id="3_iron_claw"]
 [ext_resource type="Resource" path="res://data/items/equips/dusk_bandana.tres" id="7_dusk_bandana"]
 [ext_resource type="Resource" path="res://data/items/equips/night_garb.tres" id="8_night_garb"]
 [ext_resource type="Resource" path="res://data/items/equips/viper_bandana.tres" id="9_viper_bandana"]
