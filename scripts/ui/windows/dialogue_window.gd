@@ -15,7 +15,7 @@ const FRAME_X := PAD - 6
 ## Inside the frame's art, in texels: where the portrait niche's opening is (left, top,
 ## right, and how far up from the bottom), and where the text starts and ends.
 const NICHE := Vector4(28, 72, 125, 39)
-const TEXT_LEFT := 168.0
+const TEXT_LEFT := 182.0
 const TEXT_RIGHT := 46.0
 const TEXT_TOP := 70.0
 const TEXT_BOTTOM := 36.0
