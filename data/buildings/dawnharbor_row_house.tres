@@ -7,5 +7,5 @@
 script = ExtResource("1_building_def")
 id = &"dawnharbor_row_house"
 texture = ExtResource("2_row_house")
-height = 330.0
+height = 420.0
 door_x = 0.48
