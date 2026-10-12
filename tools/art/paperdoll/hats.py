@@ -400,7 +400,8 @@ def no_loose_hair(strip, solids, heads, hair, fw, radii, tails=False):
         if not solid.any() or not shows.any():
             continue
         if tails:  # (its tails go under the hat with the rest)
-            cut[shows & ~ss.dilate(heads[i], HAIR_CUT_BODY)] = 255
+            on = ss.dilate(heads[i], HAIR_CUT_BODY)
+            cut[ss.dilate(shows & ~on, 3) & ~(shows & on)] = 255  # (wide enough that its soft edge still hides it all)
             hidden = cut[..., 3] > 0
             shows &= ~hidden
         lab, n = ss.label(shows)
