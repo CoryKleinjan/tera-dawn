@@ -46,10 +46,11 @@ only what the creator offers and makes a level 1 character in the starting job
   `tools/art/paperdoll/pieces.py`), over him or under his body as the pose says. A weapon is
   in his fist with his fingers drawn over its grip (the piece is cut where `fist_<kind>.png`
   has his fingers, `shaders/paperdoll_piece.gdshaderinc`), behind him on far-hand frames and
-  on his back while he climbs or sits. Each kind is held its own way (a bow upright, a staff
-  planted; "holds" in `art/sheets/paperdoll_rig.json`; the sword sways a little through each
-  animation, a claw points along his forearm, and a gun is turned level with its grip in his
-  fist). Every weapon is its own icon art
+  on his back while he climbs. Every kind is held in his front fist (the rig's "arm": the fist
+  and forearm angle per frame) at one grip of its own, an angle to his forearm that never
+  changes from frame to frame ("holds" in `art/sheets/paperdoll_rig.json`: an "offset", taken
+  on the thumb side of his fist so a weapon never turns tip-down, and the frames it goes
+  "behind" him). Every weapon is its own icon art
   (`weapon_item_<id>`); the tinted `weapon_<kind>` pictures are for a weapon with no icon cell.
   A shield's back sits on his far arm behind him with about a third showing, and its face is on
   his back while he climbs (`shield_item_<id>`). Hats are `hat_item_<id>` in their own colours
@@ -75,8 +76,8 @@ only what the creator offers and makes a level 1 character in the starting job
   his body and every strip layer alike (`shaders/paperdoll_stride.gdshaderinc`). Standing, he breathes (the rig's body rises and settles
   slightly from his feet, so every layer moves with it: `SpriteRig.breathes`, `BREATH_*`) and blinks
   now and then, sometimes twice (the "blink" animation, `SpriteRig.BLINK_EVERY`), in menus too.
-  NPCs hold still (`SpriteRig.hold_still`). Held weapons point forward on every resting and
-  moving frame (`tests/unit/hero_pose_test.gd`). Poses not drawn yet fall back to the nearest
+  NPCs hold still (`SpriteRig.hold_still`). A held weapon stays in his front fist at its own
+  angle to his forearm on every frame but climbing and level-up (`tests/unit/hero_pose_test.gd`). Poses not drawn yet fall back to the nearest
   one (`SpriteRig.FALLBACK`). `WeaponTrail` draws the streak a
   swung blade leaves and the flash of a shot.
 - **One body for every hero**: your hero (`TDPlayer`) and other players' (`TDAvatar`) each

@@ -124,7 +124,6 @@ GLOVE_OVER = 4
 SWORD_LENGTH = 1.9    # every weapon is drawn at the scale that makes the sword this long
 WEAPON_LENGTH = 20    # rig "tip" is this far from "grip" along the weapon (only its direction matters)
 FIST = 0.4            # the fist around a grip reaches this far from the grip point (head radii)
-FOREARM = 1.1         # forearm_angles: skin this close to the fist (head radii) counts as his forearm
 GUN_FRONT, GUN_BACK = 0.4, 0.4  # weapons.grip_point: a gun's barrel is its front share, its grip in its back share
 BARREL_FRONT = 0.55   # weapons.barrel_tilt: the front share of a gun that is its barrel
 CLAW_CUFF = 0.25      # how far along a claw (0 its back end, 1 its tips) the middle of its cuff is

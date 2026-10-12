@@ -233,84 +233,42 @@ def drawn_axis(arr):
 
 # Frames where he holds no weapon, in his hand or on his back.
 EMPTY_HANDED = ("levelup",)
+# What a weapon kind's line in paperdoll_rig.json holds may say: one grip for every frame, no
+# per-frame angles (Cory 2026-10-12: weapons keep their place in his hand in every picture).
+HOLD_KEYS = {"_doc", "offset", "behind"}
+# The way the thumb side of his fist faces (x, y with y down): forward, and a little up.
+THUMB = (2.0, -1.0)
 
 
-def holds(hands, spec, names, forearms=None):
-    """Per weapon kind, per frame: [x, y, angle] of the fist and the weapon in it (the sword's
-    are the hand-placed "weapon" points; a kind's own [x, y, angle] puts it in his hand on any
-    frame), or None when the weapon isn't in his hand (on his back: ON_BACK). A kind
-    with "along": "forearm" points the way his forearm does (`forearms`, from forearm_angles)."""
-    out = {"sword": {n: hands[n].get("weapon") for n in names}}
-    # a "sword" entry turns the hand-placed blade (held at one tilt while he stands, walks and
-    # runs, swaying a little), keeping where the fist is; [x, y, angle] moves the fist too
-    # (placing it even on a frame with no "weapon" point, such as sit)
-    for n, v in spec.get("sword", {}).get("frames", {}).items():
-        if isinstance(v, list):
-            out["sword"][n] = [round(float(c), 1) for c in v]
-        elif out["sword"].get(n) is not None:
-            out["sword"][n] = [out["sword"][n][0], out["sword"][n][1], v]
-
-    def resolve(kind):
-        if kind not in out:
-            h = spec.get(kind, {"like": "sword"})
-            base = resolve(h["like"]) if "like" in h else out["sword"]
-            frames = {}
-            for n in names:
-                v = h.get("frames", {}).get(n, h.get("angle"))
-                if isinstance(v, list):  # [x, y, angle]: in his fist there, even where the sword has none
-                    frames[n] = [round(float(c), 1) for c in v]
-                    continue
-                if h.get("along") == "forearm" and forearms and forearms.get(n) is not None:
-                    v = forearms[n]
-                if base[n] is None:
-                    frames[n] = None
-                else:
-                    frames[n] = [base[n][0], base[n][1], base[n][2] if v is None else v]
-            out[kind] = frames
-        return out[kind]
-
-    for kind in WEAPON_KINDS:
-        resolve(kind)
-    for kind in out:  # no weapon at all while he levels up (Cory 2026-10-12), whatever a kind's line says
-        for n in EMPTY_HANDED:
-            if n in out[kind]:
-                out[kind][n] = None
-    return out
-
-
-def forearm_angles(hero):
-    """The way his forearm points on each frame with a weapon fist (degrees clockwise from
-    pointing right, from the elbow out through the fist): the skin joined to the fist, within
-    about a head radius of it, and the fist itself left out; None where too little shows."""
+def holds(arm, spec, names):
+    """Per weapon kind, per frame: [x, y, angle] of the fist and the weapon in it, or None when
+    it isn't in his hand (climbing: on his back, ON_BACK; levelup: put away). Every kind is in
+    the fist `arm` gives for the frame (paperdoll_rig.json "arm": his front hand and the way his
+    forearm points), its own one "offset" from that forearm on every frame, on the thumb side of
+    his fist (thumb_side), so a weapon never moves, turns or flips in his hand from one picture
+    to the next."""
     out = {}
-    for n, px, fi in zip(hero.names, hero.frames, hero.info):
-        hold = hero.hands[n].get("weapon")
-        if hold is None:
-            out[n] = None
-            continue
-        gx, gy = hold[0], hold[1]
-        h, w = px.shape[:2]
-        yy, xx = np.mgrid[0:h, 0:w]
-        dist = np.hypot(xx - gx, yy - gy)
-        ok = (fi["region"] == R["skin"]) & (px[..., 3] > 127) & (dist <= hero.r * FOREARM)
-        if not ok.any():
-            out[n] = None
-            continue
-        sy, sx = np.unravel_index(np.argmin(np.where(ok, dist, np.inf)), ok.shape)
-        seen = np.zeros(ok.shape, bool)
-        seen[sy, sx] = True
-        todo = deque([(sy, sx)])
-        while todo:
-            y, x = todo.popleft()
-            for ny, nx in ((y + 1, x), (y - 1, x), (y, x + 1), (y, x - 1)):
-                if 0 <= ny < h and 0 <= nx < w and ok[ny, nx] and not seen[ny, nx]:
-                    seen[ny, nx] = True
-                    todo.append((ny, nx))
-        ys, xs = np.nonzero(seen & (dist > hero.r * FIST))
-        out[n] = round(math.degrees(math.atan2(gy - ys.mean(), gx - xs.mean())), 1) if len(xs) >= 5 else None
+    for kind in WEAPON_KINDS:
+        h = spec.get(kind, {})
+        extra = set(h) - HOLD_KEYS
+        if extra:
+            raise ValueError(f"paperdoll_rig.json holds.{kind}: only one grip per kind ({sorted(HOLD_KEYS)}), not {sorted(extra)}")
+        off = float(h.get("offset", 0))
+        out[kind] = {n: None if n not in arm or n in EMPTY_HANDED
+                     else [round(float(arm[n][0]), 1), round(float(arm[n][1]), 1), thumb_side(float(arm[n][2]), off)]
+                     for n in names}
     return out
 
 
+def thumb_side(forearm, offset):
+    """The way a weapon `offset` degrees off his forearm points: out of the thumb side of his
+    fist. His thumb faces forward and up (THUMB), whichever way his arm hangs, swings or rises,
+    so a weapon stays the same way up in his hand instead of turning tip-down when his arm goes
+    up or back behind him: forearm - offset when that side of the forearm faces THUMB, else
+    forearm + offset."""
+    up = math.radians(forearm - 90)  # the side of his forearm that faces up when it points forward
+    side = 1 if math.cos(up) * THUMB[0] + math.sin(up) * THUMB[1] >= 0 else -1
+    return round((forearm + side * offset + 180) % 360 - 180, 1)
 def fist_mask(px, grip, reach):
     """The fist around `grip` on a body frame: the pixels inside its outline that a flood from the
     grip reaches without crossing the outline or going further than `reach`, plus the outline

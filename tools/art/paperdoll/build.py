@@ -8,7 +8,7 @@ from .hair import one_piece_layers, posed_layers
 from .hats import hat_layers
 from .items import item_layers, shield_layers as item_shield_layers
 from .pieces import draw_piece, load_piece
-from .weapons import forearm_angles, holds, weapon_layers
+from .weapons import holds, weapon_layers
 from .worn import cape_layers, clothes_layers, shield_layers
 
 
@@ -27,7 +27,7 @@ def main():
         old, old_hat = one_piece_layers(hero, hair)
         posed_layers(hero, old, old_hat)
         face_layers(hero, faces)
-    held = holds(hero.hands, hero.hold_spec, names, forearm_angles(hero))
+    held = holds(hero.arm, hero.hold_spec, names)
     rig_frames = rig_entries(hero, held)
     if strips:
         cape_layers(hero)
@@ -94,6 +94,8 @@ def rig_entries(hero, held):
                 entry["weapon_behind"] = True
         elif any(held[k][n] is not None for k in WEAPON_KINDS):  # held where he has no "weapon" point (sit)
             entry["holds"] = {k: held[k][n] for k in WEAPON_KINDS if held[k][n] is not None}
+        if n in hero.arm:  # his front fist and forearm, which every weapon kind is held from
+            entry["arm"] = [round(float(c), 1) for c in hero.arm[n]]
         if "shield" in h:
             entry["shield"] = list(h["shield"])
             if h.get("front") == "shield" and "weapon" in h:  # the shield hand is nearest us: the weapon goes there

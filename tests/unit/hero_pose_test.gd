@@ -1,14 +1,9 @@
 extends TestCase
 ## The hero's resting and moving poses: one standing frame and a blink (hero_idle_test), and
-## whatever he holds points the way he faces (forward, or straight up or down), never back
-## at where he came from. Weapon angles come from art/sheets/paperdoll_rig.json through
-## tools/art/paperdoll_layers.py into the hero's rig.
-
-## Frames where he isn't swinging: standing, walking, running with his arm forward, in the air,
-## landing, crouched and flinching. Wind-ups, follow-throughs and run1-2 (his weapon arm swings
-## back as he runs) are free to point back.
-const REST_FRAMES: Array[String] = ["idle1", "blink", "walk1", "walk2", "walk3", "walk4",
-	"run3", "run4", "jump", "fall", "land", "crouch", "hit", "hurt"]
+## every weapon kind held the same way in his front fist on every frame (Cory 2026-10-12:
+## weapons keep their place in his hand in every picture). Weapon holds come from
+## art/sheets/paperdoll_rig.json ("arm" and "holds") through tools/art/paperdoll_layers.py into
+## the hero's rig.
 
 func _frame(name: String) -> int:
 	var frames: Array = Paperdoll.rig().get("frames", [])
@@ -33,21 +28,37 @@ func test_idle_is_one_still_frame_with_a_blink() -> void:
 		"and the same body as idle, so only the eyes move")
 	check_eq(Paperdoll.hold(blink, &"sword"), Paperdoll.hold(idle, &"sword"), "holding the weapon the same way")
 
-func test_held_weapons_point_forward_at_rest_and_on_the_move() -> void:
-	for name in REST_FRAMES:
-		var f := _frame(name)
-		if not check(f >= 0, "the rig has a %s frame" % name):
-			continue
-		for kind in Paperdoll.rig()["frames"][f].get("holds", {}):
+func test_every_weapon_keeps_its_grip_and_angle_to_the_forearm() -> void:
+	# the rig's "arm" is his front fist and the way his forearm points; each kind sits in that
+	# fist at one angle to the forearm, mirrored to his thumb side when his arm swings up or back
+	# behind him, but never bigger or smaller, so nothing turns or flips in his hand
+	var frames: Array = Paperdoll.rig().get("frames", [])
+	var offsets := {}
+	for f in frames.size():
+		var fname: String = frames[f]["name"]
+		var arm: Variant = frames[f].get("arm")
+		for kind in frames[f].get("holds", {}):
 			var h: Variant = Paperdoll.hold(f, StringName(kind))
-			# a claw, and a gun's barrel, point along his forearm, wherever it hangs (Cory 2026-10-11:
-			# a gun needn't point forward, it must sit in his hand); a bow lies across his forearm,
-			# level when his arm hangs, and one-handed blades and wands keep one angle to it too
-			# (Cory 2026-10-12: one angle to the forearm in every pose)
-			if h == null or kind in ["claw", "gun", "bow", "sword", "wand", "knuckle"]:
+			if not check(arm is Array and h != null, "%s: the %s is held only where the rig gives his front fist" % [fname, kind]):
 				continue
-			# angle: clockwise from pointing right (the way he faces); up or down is fine
-			check(cos(h["angle"]) > -0.02, "%s: the %s points forward or up/down, not back (%d degrees)" % [name, kind, roundi(rad_to_deg(h["angle"]))])
+			check_near(h["grip"].distance_to(Vector2(arm[0], arm[1])), 0.0, "%s: the %s is in his front fist" % [fname, kind], 0.6)
+			var off := absf(wrapf(rad_to_deg(h["angle"]) - float(arm[2]), -180.0, 180.0))
+			if not offsets.has(kind):
+				offsets[kind] = off
+			check_near(off, offsets[kind], "%s: the %s keeps its angle to his forearm (%.0f, not %.0f degrees)" % [fname, kind, off, offsets[kind]], 0.6)
+
+func test_every_weapon_is_in_his_hand_on_every_frame_but_climbing_and_levelup() -> void:
+	var frames: Array = Paperdoll.rig().get("frames", [])
+	var kinds: Array = frames[_frame("idle1")].get("holds", {}).keys()
+	check(kinds.size() >= 7, "idle1 holds every weapon kind (%d)" % kinds.size())
+	for f in frames.size():
+		var fname: String = frames[f]["name"]
+		var held: Dictionary = frames[f].get("holds", {})
+		if frames[f].get("back", false) or fname == "levelup":
+			check(held.is_empty(), "%s: no weapon in his hand" % fname)
+			continue
+		for kind in kinds:
+			check(held.has(kind), "%s: the %s is in his hand" % [fname, kind])
 
 func test_weapon_reach_follows_the_art_however_it_was_drawn() -> void:
 	# sword, wand and staff art is drawn slanted on the sheet: its reach is along the blade

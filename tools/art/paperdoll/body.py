@@ -29,7 +29,7 @@ def read_hero():
     fw, fh = strip.width // len(names), strip.height
     frames = [np.asarray(strip.crop((i * fw, 0, (i + 1) * fw, fh))) for i in range(len(names))]
     info = [analyse(f) for f in frames]
-    hands, hold_spec = hand_rig(fw)
+    hands, hold_spec, arm = hand_rig(fw)
     missing = [n for n in names if n not in hands]
     if missing:
         sys.exit(f"{os.path.relpath(HAND_RIG, ROOT)} has no entry for {missing}")
@@ -38,7 +38,7 @@ def read_hero():
     ref = info[0]  # idle1: pieces are sized against this frame
     hero.names, hero.spec, hero.index, hero.anims = names, spec, index, anims
     hero.strip, hero.fw, hero.fh, hero.frames, hero.info = strip, fw, fh, frames, info
-    hero.hands, hero.hold_spec, hero.r = hands, hold_spec, ref["r"]
+    hero.hands, hero.hold_spec, hero.arm, hero.r = hands, hold_spec, arm, ref["r"]
     hero.body_cells = {n: spec["frames"][n].split(":", 1)[1] for n in names}  # frame -> its cell on the body sheet
     return hero
 
@@ -195,8 +195,8 @@ def overlap(m, ours, x, y):
 
 
 def hand_rig(fw):
-    """paperdoll_rig.json's frames and holds, its points scaled from the frame size they were
-    placed on to the strip's."""
+    """paperdoll_rig.json's frames, holds and arm (his front fist and forearm per frame), its
+    points scaled from the frame size they were placed on to the strip's."""
     with open(HAND_RIG) as f:
         spec = json.load(f)
     k = fw / spec.get("frame_size", [fw])[0]
@@ -210,9 +210,6 @@ def hand_rig(fw):
         if "hands" in h:
             h["hands"] = [[x * k, y * k] for x, y in h["hands"]]
         frames[n] = h
-    holds = {}
-    for kind, h in spec.get("holds", {}).items():
-        h = dict(h)
-        h["frames"] = {n: [v[0] * k, v[1] * k, v[2]] if isinstance(v, list) else v for n, v in h.get("frames", {}).items()}
-        holds[kind] = h
-    return frames, holds
+    holds = {kind: dict(h) for kind, h in spec.get("holds", {}).items() if isinstance(h, dict)}
+    arm = {n: [v[0] * k, v[1] * k, v[2]] for n, v in spec.get("arm", {}).get("frames", {}).items()}
+    return frames, holds, arm

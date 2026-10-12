@@ -77,8 +77,8 @@ for the loot key, and stays there if its tab is full.
   their icon on `art/sheets/glove_mittens.json` (one piece per hand, `glove_item_<id>_1/_2`).
 - **A new weapon kind**: draw its greyscale template on the paperdoll weapons sheet (add its
   cell to `paperdoll_weapons.json` and `WEAPON_KINDS` in `tools/art/paperdoll/common.py`), say how it's
-  held in `art/sheets/paperdoll_rig.json` "holds" ("like" another kind, or an angle per frame,
-  "behind" for frames it goes behind him; add it to `AXIAL` if a long weapon drawn slanted
+  held in `art/sheets/paperdoll_rig.json` "holds" (one "offset", its angle to his forearm on
+  every frame, and "behind" for frames it goes behind him; nothing per frame); add it to `AXIAL` if a long weapon drawn slanted
   should be straightened, `GRIPPED` if the fingers wrap it, `ON_BACK` if it's carried on the back), give it
   a row in `WeaponStyle.MOTIONS`, then run the tool and check `art/build/paperdoll_preview.png`
   (one row of frames per kind).
