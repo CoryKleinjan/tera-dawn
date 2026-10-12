@@ -1,7 +1,6 @@
 {
   "source": "art/source/top_coat_frames.png",
   "detail": 1,
-  "alpha": "hard",
   "grid": {
     "rows": [
       0,

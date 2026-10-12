@@ -129,7 +129,9 @@ def shorts_mask(piece, cell, grow):
         return out
     px = np.asarray(b.img).astype(float)
     mx, mn = px[..., :3].max(2), px[..., :3].min(2)
-    shorts = ss.dilate((px[..., 3] > 0) & (mx - mn < 0.15 * np.maximum(mx, 1)) & (mx > 40) & (mx < 150), grow)
+    grey = (px[..., 3] > 0) & (mx - mn < 0.15 * np.maximum(mx, 1)) & (mx > 40) & (mx < 150)
+    grey[:int(grey.shape[0] * SHORTS_BELOW)] = False  # (grey shading on his head is not shorts)
+    shorts = ss.dilate(grey, grow)
     ys, xs = np.nonzero(shorts)
     ys, xs = ys + b.y - piece.y, xs + b.x - piece.x
     ok = (ys >= 0) & (ys < h) & (xs >= 0) & (xs < w)

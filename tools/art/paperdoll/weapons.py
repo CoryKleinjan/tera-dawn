@@ -378,8 +378,8 @@ def icon_cut(sheet, wanted):
     cells = [[c if c in wanted else "" for c in row] for row in man["cells"]]
     if not any(any(row) for row in cells) or not os.path.exists(os.path.join(ROOT, man["source"])):
         return {}
-    # full size, on/off edges like the other hero layers (until the paperdoll is cut smooth)
-    man.update(cells=cells, scale=1.0, detail=1, alpha="hard", save=False,
+    # full size, with the soft edge like the other hero layers
+    man.update(cells=cells, scale=1.0, detail=1, save=False,
                out_dir=os.path.join("art", "build", "paperdoll", sheet))
     tmp = os.path.join(ROOT, "art", "build", "paperdoll", f"held_{sheet}.json")
     os.makedirs(os.path.dirname(tmp), exist_ok=True)
