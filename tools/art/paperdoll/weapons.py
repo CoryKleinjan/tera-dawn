@@ -118,7 +118,7 @@ def grip_point(arr, kind, axis, dots):
     - a gun: in the middle of the pistol grip (the part hanging below the barrel at the back);
     - a claw: in the middle of its cuff (CLAW_CUFF along it), so the cuff covers his fist;
     - a bow: on its riser, halfway up (bow_parts), so it is held by the middle;
-    - anything else (knuckles): its dot, or a guess near its back end."""
+    - a knuckle: the middle of the picture, since it is worn over his whole fist."""
     if kind == "bow":
         return bow_parts(arr)[0]
     xs, ys, a, b = _along(arr, axis)
@@ -133,6 +133,8 @@ def grip_point(arr, kind, axis, dots):
         return _on_axis(arr, axis, lo + span * (0.04 + guard / 40) / 2)
     if kind in ("wand", "staff"):
         return _on_axis(arr, axis, lo + span / 2)
+    if kind == "knuckle":
+        return (float(xs.mean()), float(ys.mean()))
     if kind == "claw":
         # the middle of the cuff, so the cuff covers his fist and the blades reach past it
         return _on_axis(arr, axis, lo + span * CLAW_CUFF)

@@ -2355,16 +2355,16 @@
   },
   "knuckle": {
    "grip": [
-    15.8,
-    15.5
+    19.3,
+    15.4
    ],
    "size": [
     37,
     29
    ],
-   "reach": 20.2,
+   "reach": 16.7,
    "kind": "knuckle",
-   "grip_share": 0.439,
+   "grip_share": 0.536,
    "dots_left": 0
   },
   "gun": {
@@ -2593,72 +2593,72 @@
   },
   "item_brass_knuckle": {
    "grip": [
-    22.5,
-    28.8
+    18.3,
+    19.9
    ],
    "size": [
     37,
     36
    ],
-   "reach": 13.5,
+   "reach": 17.7,
    "kind": "knuckle",
-   "grip_share": 0.625,
+   "grip_share": 0.508,
    "dots_left": 0
   },
   "item_iron_knuckle": {
    "grip": [
-    5.6,
-    18.2
+    18.6,
+    18.4
    ],
    "size": [
     37,
     36
    ],
-   "reach": 30.4,
+   "reach": 17.4,
    "kind": "knuckle",
-   "grip_share": 0.156,
+   "grip_share": 0.517,
    "dots_left": 0
   },
   "item_barnacle_knuckle": {
    "grip": [
-    5.6,
-    19.7
+    18.6,
+    19.2
    ],
    "size": [
     37,
     39
    ],
-   "reach": 30.4,
+   "reach": 17.4,
    "kind": "knuckle",
-   "grip_share": 0.156,
+   "grip_share": 0.517,
    "dots_left": 0
   },
   "item_stormbreaker_knuckle": {
    "grip": [
-    20.5,
-    30.3
+    18.4,
+    18.3
    ],
    "size": [
     37,
     36
    ],
-   "reach": 15.5,
+   "reach": 17.6,
    "kind": "knuckle",
-   "grip_share": 0.569,
+   "grip_share": 0.511,
    "dots_left": 0
   },
   "item_leviathan_fist": {
    "grip": [
-    6.0,
-    19.7
+    20.2,
+    18.9
    ],
    "size": [
     40,
     39
    ],
-   "reach": 33.0,
+   "reach": 18.8,
    "kind": "knuckle",
-   "grip_share": 0.154,
+   "grip_share": 0.518,
    "dots_left": 0
   },
   "item_driftwood_pistol": {
