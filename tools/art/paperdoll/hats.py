@@ -1,6 +1,7 @@
 """Hats: each shape's picture (from the side, or from behind) put on his head, sized against
 the hat sheet's bald head."""
 import glob
+import json
 
 from .common import *  # noqa: F401,F403
 from .pieces import PIECES, draw_piece, load_piece, pose, save_piece
@@ -187,10 +188,12 @@ def item_hat_layers(hero):
         if name.endswith("_only") or not os.path.exists(os.path.join(ss.SHEETS, name + "_only.json")):
             continue  # (a sheet waits for its heads-erased twin)
         sheet, only = cut(name), cut(name + "_only")
+        with open(path) as f:
+            shoulders = json.load(f).get("shoulders", {})
         for key in sheet:
             if key.endswith("_side") and key[:-5] + "_behind" in sheet and key != "bald_side":
                 item = key[:-5]
-                views = fitted(hat_views(sheet, only, item), shapes.get(item))
+                views = fitted(hat_views(sheet, only, item, shoulders), shapes.get(item))
                 closed = False
                 if shapes.get(item) == "helm":
                     closed = eye_band(*views["side"]) is not None
@@ -238,17 +241,21 @@ def eyes_out(hero, name, views):
     return out
 
 
-def hat_views(sheet, only, prefix):
+def hat_views(sheet, only, prefix, shoulders=None):
     """A hat's two views, {"side"|"behind": (picture, head centre in the picture)}, lifted off
     the heads-erased sheet (`only`) and placed by the heads in `sheet`, sized by the sheet's
-    bald_side head (each sheet carries one, as Gemini draws every sheet a little differently)."""
+    bald_side head (each sheet carries one, as Gemini draws every sheet a little differently).
+    A cell with nothing down to its bottom (a hood repainted without its cape, Cory 2026-10-12:
+    nothing on a hat covers the shoulders) names where its shoulders were in the manifest's
+    "shoulders" (cell pixels), as hat_head would have found them."""
     ref_at, ref_r = bald_head(sheet["bald_side"])
     ref_from = ref_at - hat_head(sheet["bald_side"])  # head centre from the shoulders
     views = {}
     for view in ("side", "behind"):
         p, hat = sheet[f"{prefix}_{view}"], only[f"{prefix}_{view}"]
         img = hat_alone(hat.img)
-        at = hat_head(p) + ref_from - (hat.x, hat.y)  # this cell's head centre (picture pixels)
+        low = (shoulders or {}).get(f"{prefix}_{view}")
+        at = (np.asarray(low, float) if low else hat_head(p)) + ref_from - (hat.x, hat.y)  # this cell's head centre (picture pixels)
         if view == "behind":
             # from behind his head is straight above his shoulders' middle on the sheet only
             # roughly (the back-view shoulders are turned); a hat seen from behind is drawn
