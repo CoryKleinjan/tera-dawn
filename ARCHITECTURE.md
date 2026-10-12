@@ -54,6 +54,7 @@ second. Only the stage turns that into 3D (32 game pixels per 3D unit).
   screen, the settings menu.
 - [NPCs, quests and shops](docs/architecture/npcs-quests-shops.md): how to add an NPC, a quest or a shop.
 - [Art](docs/architecture/art.md): how to add art, the slicer, hero layers, Gemini batch generation.
+- [Zone vibes](docs/zone-vibes.md): each zone's style and music guide, and how its town and sub-zones vary it.
 - [Music and sound](docs/architecture/audio.md): how to add music or a sound effect, where they play, making music with Lyria.
 
 ## Conventions
