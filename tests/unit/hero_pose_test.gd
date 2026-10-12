@@ -42,8 +42,9 @@ func test_held_weapons_point_forward_at_rest_and_on_the_move() -> void:
 			var h: Variant = Paperdoll.hold(f, StringName(kind))
 			# a claw, and a gun's barrel, point along his forearm, wherever it hangs (Cory 2026-10-11:
 			# a gun needn't point forward, it must sit in his hand); a bow lies across his forearm,
-			# level when his arm hangs (Cory 2026-10-12: one angle to the forearm in every pose)
-			if h == null or kind in ["claw", "gun", "bow"]:
+			# level when his arm hangs, and one-handed blades and wands keep one angle to it too
+			# (Cory 2026-10-12: one angle to the forearm in every pose)
+			if h == null or kind in ["claw", "gun", "bow", "sword", "wand", "knuckle"]:
 				continue
 			# angle: clockwise from pointing right (the way he faces); up or down is fine
 			check(cos(h["angle"]) > -0.02, "%s: the %s points forward or up/down, not back (%d degrees)" % [name, kind, roundi(rad_to_deg(h["angle"]))])
