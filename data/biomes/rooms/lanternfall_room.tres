@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BiomeDef" load_steps=9 format=3]
+[gd_resource type="Resource" script_class="BiomeDef" load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/biome_def.gd" id="1_biome_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/rooms/lanternfall/floor_top.png" id="2_floor_top"]
@@ -7,6 +7,10 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/rooms/lanternfall/wall.png" id="5_wall"]
 [ext_resource type="Texture2D" path="res://assets/sprites/rooms/lanternfall/door.png" id="6_door"]
 [ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="7_backdrop_layer_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/portal_1.png" id="portal_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/portal_2.png" id="portal_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/portal_3.png" id="portal_3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/props/portal_4.png" id="portal_4"]
 
 [sub_resource type="Resource" id="Wall"]
 script = ExtResource("7_backdrop_layer_def")
@@ -45,3 +49,4 @@ ground_side = ExtResource("3_floor_side")
 ground_soil = ExtResource("4_floor_soil")
 backdrop = Array[ExtResource("7_backdrop_layer_def")]([SubResource("Wall")])
 door = ExtResource("6_door")
+portal_frames = Array[Texture2D]([ExtResource("portal_1"), ExtResource("portal_2"), ExtResource("portal_3"), ExtResource("portal_4")])

@@ -13188,6 +13188,31 @@
     "new_view": true,
     "text": "The first image shows the inventory icons of four pairs of gloves from my game, side by side on magenta: Brigand Gloves (dark brown leather with tan patches and rope ties), Canvas Gloves (cream canvas with a tan strap across the back), Dragonhide Gloves (red and orange dragon scales) and Work Gloves (tan leather with stitched cuffs and a button). The second image is my hero: his hands are round fingerless MITTENS, MapleStory style (a rounded fist with no separate fingers, a small thumb bump). Redraw each pair as ONE glove worn as such a mitten: a closed rounded fist seen from the side, the back of the hand toward the viewer, no separate fingers, a small thumb bump, with its cuff at the bottom and the fist at the top, standing upright in the middle of its quarter of the picture. Each mitten keeps EXACTLY its icon's colours, materials, patches, straps, stitching, ties, scales, buttons and cuff, so a player instantly sees it is that item. Draw the WHOLE glove: the fist AND its full cuff at the wrist (with the icon's cuff details: rope ties, the button, stitched trim), with plenty of empty magenta all around it. Nothing touches or crosses the edges of the picture. All four are the same size: each about a third as wide as its quarter and about half as tall as the picture, centred in its quarter. Keep the same soft hand-painted look as the icons: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. No shadow under or behind anything. Flat pure magenta #FF00FF background, nothing else in the picture."
    }
+  },
+  {
+   "id": "portal_pillar",
+   "prompts": null,
+   "batch": "portal pillar (edit)",
+   "with": null,
+   "refs": [],
+   "save": "portal_pillar.png",
+   "replaces": null,
+   "kind": "anim",
+   "cells": [
+    1,
+    4
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-11 portals-at-doorways thread: the new portal look (Cory 23:29Z: blue and white, no swirl, a light pillar). Test sheet; four frames of one looping pillar, used for every portal and every enterable doorway.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/portals/portal_pillar_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ],
+    "new_view": true,
+    "text": "The first image is an empty sheet of 4 tall labelled cells (PORTAL 1 to PORTAL 4) on magenta. In EACH cell, paint one frame of a looping animation of a magic portal for my 2D side-scrolling RPG: a soft upright PILLAR OF LIGHT in blue and white, rising from a small glowing oval patch of light on the ground. It is NOT a swirl, NOT a ring, NOT an oval doorway and has no frame, stone base, leaves or decoration: just light. The pillar is about as wide as a third of the cell, white-hot and brightest in its middle and at the ground patch, shading out through pale sky blue to deeper cornflower blue at its soft edges, and it fades gently away towards the top of the cell. A few small white and pale blue sparkles and motes drift upward inside and around it. The four frames are the same pillar, same size, standing in the same spot (bottom centre of the cell, its ground patch just above the cell's bottom border, its top fading out near the top of the cell); only the drifting sparkles move upward a little from frame to frame and the brightness pulses gently, so the frames loop smoothly. Paint it in the hand-painted style of the second image (my game's NPCs): rich painted light with visible soft brush texture, bright highlights; NOT pixel art, NOT a flat vector shape. Light has no dark outline. Keep the labels, cell borders and image size exactly as they are. Everything outside the light stays one flat pure magenta #FF00FF; no magenta, pink or purple anywhere in the light."
+   }
   }
  ]
 }

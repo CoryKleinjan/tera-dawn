@@ -108,7 +108,7 @@ func test_portals_dont_overlap() -> void:
 					check(absf(a.x - b.x) >= 68, "%s: portals[%d] and portals[%d] overlap (x %s and %s)" % [Scan.where(m), i, k, a.x, b.x])
 
 ## No NPC is drawn over a portal: the gap between them is at least half the portal's picture
-## plus half a body (the hero's width), so the swirl and the NPC never overlap.
+## plus half a body (the hero's width), so the portal and the NPC never overlap (doors have one too).
 func test_npcs_dont_stand_in_portals() -> void:
 	for m: MapDef in Content.maps.values():
 		var portal_half := 34.0
@@ -120,7 +120,7 @@ func test_npcs_dont_stand_in_portals() -> void:
 				continue
 			for p in m.portals:
 				if p and p.platform == n.platform:
-					var gap := portal_half + TDPlayer.WIDTH / 2.0 if not p.door else 34.0
+					var gap := portal_half + TDPlayer.WIDTH / 2.0
 					check(absf(n.x - p.x) >= gap, "%s: npcs[%d] (%s) at x %s overlaps the portal at x %s (want %d+ apart)" % [Scan.where(m), i, n.npc.id if n.npc else "?", n.x, p.x, gap])
 
 func test_climbables_lie_inside_the_map_and_reach_a_platform() -> void:

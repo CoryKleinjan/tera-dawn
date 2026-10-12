@@ -19,10 +19,10 @@
       "rope_ladder_bottom"
     ],
     [
-      "portal_1",
-      "portal_2",
-      "portal_3",
-      "portal_4",
+      "",
+      "",
+      "",
+      "",
       "portal_base"
     ],
     [
@@ -34,46 +34,6 @@
     ]
   ],
   "overrides": {
-    "portal_1": {
-      "alpha": "soft",
-      "crop": [
-        0,
-        65,
-        620,
-        515
-      ],
-      "scale": 0.3534
-    },
-    "portal_2": {
-      "alpha": "soft",
-      "crop": [
-        0,
-        65,
-        638,
-        515
-      ],
-      "scale": 0.33
-    },
-    "portal_3": {
-      "alpha": "soft",
-      "crop": [
-        0,
-        65,
-        638,
-        515
-      ],
-      "scale": 0.328
-    },
-    "portal_4": {
-      "alpha": "soft",
-      "crop": [
-        0,
-        65,
-        640,
-        515
-      ],
-      "scale": 0.3265
-    },
     "portal_base": {
       "crop": [
         0,
