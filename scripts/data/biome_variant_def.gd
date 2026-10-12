@@ -41,6 +41,9 @@ const KEEP_COLOR := Color(0, 0, 0, 0)
 ## Backdrop layers of its own, added after the biome's (e.g. one painted picture for a town
 ## that hides the biome's strips).
 @export var more_backdrop: Array[BackdropLayerDef] = []
+## Floor scenery rules (indexes into BiomeDef.ground_decor) this sub zone leaves out, e.g. the
+## little scattered houses in a town that has real buildings.
+@export var hide_ground_decor: PackedInt32Array = []
 ## Extra scenery scattered along its floor, on top of the biome's ground_decor.
 @export var more_ground_decor: Array[DecorDef] = []
 
@@ -74,8 +77,11 @@ func apply(base: BiomeDef) -> BiomeDef:
 			layer.tint *= backdrop_tint
 			layers.append(layer)
 		b.backdrop = layers
-	if not more_ground_decor.is_empty():
-		var decor: Array[DecorDef] = base.ground_decor.duplicate()
+	if not more_ground_decor.is_empty() or not hide_ground_decor.is_empty():
+		var decor: Array[DecorDef] = []
+		for i in base.ground_decor.size():
+			if i not in hide_ground_decor:
+				decor.append(base.ground_decor[i])
 		decor.append_array(more_ground_decor)
 		b.ground_decor = decor
 	return b
