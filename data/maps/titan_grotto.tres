@@ -213,4 +213,4 @@ region = &"driftcove"
 world_pos = Vector2(300.0, 455.0)
 return_map = &"driftcove"
 level_text = "Lv. 22-30"
-music = &"boss"
+music = &"boss_driftcove"

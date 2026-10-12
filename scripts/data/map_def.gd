@@ -40,7 +40,7 @@ extends Resource
 ## Inside a building: a small room with a wall instead of sky, entered by a door from
 ## `return_map` (the town it stands in). The world map shows you in that town.
 @export var interior := false
-## Its own track (a boss lair, a dungeon, the Free Market). Empty: its region's town or field music (music_id).
+## Its own track (a boss lair, the Free Market). Empty: its region's town or field music (music_id).
 @export var music: StringName
 
 @export_group("Layout")

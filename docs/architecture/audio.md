@@ -22,12 +22,11 @@ instead of racing it. Tests drive `Sound.advance` by hand (`tests/unit/sound_mus
 
 ## Where sounds come from
 
-- **Map music**: `MapDef.music_id()`. A map's own `music` (boss lairs: `boss`; dark caves and
-  woods: `dungeon`), else its region's `town_music` (towns, markets and rooms) or
+- **Map music**: `MapDef.music_id()`. A map's own `music` (boss lairs: their zone's
+  `boss_<zone>`; the Free Market), else its region's `town_music` (towns, markets and rooms) or
   `field_music` (everywhere else; `RegionDef`). The title screen and character select play
   `TDWorld.TITLE_MUSIC`.
-  The zone, boss and dungeon tracks are being remade from `docs/zone-vibes.md`; until a
-  track's file lands its maps are silent (`MAP_MUSIC_COMPLETE` in `tests/content/content_audio_test.gd`).
+  Tracks follow `docs/zone-vibes.md`; a track with no file yet leaves its maps silent (`MAP_MUSIC_COMPLETE` in `tests/content/content_audio_test.gd`).
 - **Effects**: `EffectDef.sound` plays wherever the effect appears (hits, crits, heals, buffs,
   pickups, portals, a monster's death, the level-up sparkle).
 - **Skills**: `SkillDef.cast_sound()`: the skill's own `sound`, else its projectile's
