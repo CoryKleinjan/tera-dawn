@@ -16,8 +16,11 @@ only what the creator offers and makes a level 1 character in the starting job
 - **Looks** travel in each player's info (`ev_player_info`, sent when it changes; `Character.look()`: appearance and the worn
   gear that shows), so everyone sees everyone's hair and gear.
 - **Drawing** is done by `Paperdoll`, which works out the layers from a look;
-  `PaperdollSprite` shows it in the world (on `SpriteRig`) and `PaperdollView` in menus (the
-  creator, the equipment window). The hero is a bare body strip (`hero.png`) with layers
+  `PaperdollSprite` shows it in the world (on `SpriteRig`). Menus (the creator, character
+  select, the equipment window) draw him the same way: `PaperdollView` stands the world's own
+  rig (`HeroBody.make_rig`) in a little 3D stage of its own, lit and colour graded like the map
+  showing now (`TDStage.light_portrait`, `shaders/grade.gdshaderinc`), so he looks exactly as he
+  does in game. There is no separate menu drawing to keep in step. The hero is a bare body strip (`hero.png`) with layers
   that play frame for frame with it: hair (front, a back part drawn behind him, and a
   version for under a hat), faces and their irises, clothes, a cape and round or kite shields
   (`assets/animations/paperdoll/`). `tools/art/paperdoll_layers.py` builds them from the

@@ -37,7 +37,7 @@ func test_characters_show_with_their_level_and_job_and_can_be_picked() -> void:
 	var sel := ui.hud.title.character_select
 	check_eq(sel.slots[0].find_child("Title", true, false).text, "Ann", "first")
 	check_eq(sel.slots[1].find_child("Line", true, false).text, "Lv 1 Beginner", "level and job")
-	check(await ui.redraw(sel.slots[1].find_child("Preview", true, false)._body), "the hero draws")
+	check(await ui.redraw(sel.slots[1].find_child("Preview", true, false)._picture), "the hero draws")
 	sel.slots[0].pressed.emit()
 	check_eq(sel.selected, "Ann", "picked by clicking")
 	check(sel.slots[0].button_pressed and not sel.slots[1].button_pressed, "shown picked")

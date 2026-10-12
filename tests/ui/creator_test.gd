@@ -62,7 +62,7 @@ func test_the_arrow_buttons_work() -> void:
 func test_the_preview_draws_and_animates() -> void:
 	await _play("Fresh")
 	var view := ui.hud.title.creator.preview
-	check(await ui.redraw(view._body), "the body draws")
+	check(await ui.redraw(view._picture), "his picture draws")
 	view.play(&"walk")
 	view.time = 0.3
 	check_eq(view.frame(), 2, "walking at 9 frames a second, frame 2 at 0.3s")
