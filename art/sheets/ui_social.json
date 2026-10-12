@@ -2,7 +2,7 @@
   "source": "art/source/ui_social.png",
   "detail": 1,
   "out_dir": "assets/sprites/ui/social",
-  "scale": 0.5,
+  "scale": 1.0,
   "alpha": "soft",
   "label_band": 0.2,
   "cells": [
@@ -34,7 +34,7 @@
   "overrides": {
     "leader_star": {
       "keep": "largest",
-      "scale": 0.8027,
+      "scale": 1.6054,
       "blank": [
         [
           0,
@@ -46,7 +46,7 @@
     },
     "fame_down": {
       "keep": "largest",
-      "scale": 0.708,
+      "scale": 1.416,
       "blank": [
         [
           0,
@@ -57,7 +57,7 @@
       ]
     },
     "chat_frame": {
-      "scale": 0.5883,
+      "scale": 1.1766,
       "blank": [
         [
           0,
@@ -68,7 +68,7 @@
       ]
     },
     "chat_input": {
-      "scale": 0.5,
+      "scale": 1.0,
       "blank": [
         [
           0,
@@ -80,7 +80,7 @@
       "recolor": "dark_parchment"
     },
     "invite_card": {
-      "scale": 0.5584,
+      "scale": 1.1168,
       "blank": [
         [
           0,
@@ -91,7 +91,7 @@
       ]
     },
     "friend_row": {
-      "scale": 0.5543,
+      "scale": 1.1086,
       "blank": [
         [
           0,
@@ -103,7 +103,7 @@
       "recolor": "dark_parchment"
     },
     "online_dot": {
-      "scale": 0.9402,
+      "scale": 1.8804,
       "blank": [
         [
           0,
@@ -114,7 +114,7 @@
       ]
     },
     "offline_dot": {
-      "scale": 0.6333,
+      "scale": 1.2666,
       "blank": [
         [
           0,
@@ -125,7 +125,7 @@
       ]
     },
     "party_hp_frame": {
-      "scale": 0.5493,
+      "scale": 1.0986,
       "blank": [
         [
           0,
@@ -136,7 +136,7 @@
       ]
     },
     "guild_tag": {
-      "scale": 0.702,
+      "scale": 1.404,
       "blank": [
         [
           0,
@@ -147,7 +147,7 @@
       ]
     },
     "guild_emblem": {
-      "scale": 0.8887,
+      "scale": 1.7774,
       "blank": [
         [
           0,
@@ -158,7 +158,7 @@
       ]
     },
     "fame_up": {
-      "scale": 0.6694,
+      "scale": 1.3388,
       "blank": [
         [
           0,
@@ -169,7 +169,7 @@
       ]
     },
     "shop_sign": {
-      "scale": 0.5616,
+      "scale": 1.1232,
       "blank": [
         [
           0,
@@ -180,7 +180,7 @@
       ]
     },
     "market_stall": {
-      "scale": 0.5365,
+      "scale": 1.073,
       "blank": [
         [
           0,
@@ -191,7 +191,7 @@
       ]
     },
     "whisper_icon": {
-      "scale": 0.6463,
+      "scale": 1.2926,
       "blank": [
         [
           0,
@@ -202,7 +202,7 @@
       ]
     },
     "buddy_add_icon": {
-      "scale": 0.7241,
+      "scale": 1.4482,
       "blank": [
         [
           0,

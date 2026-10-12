@@ -2,7 +2,7 @@
   "source": "art/source/world_map.png",
   "detail": 1,
   "out_dir": "assets/sprites/ui",
-  "scale": 0.6,
+  "scale": 1.2,
   "alpha": "soft",
   "inset": 0,
   "cells": [

@@ -2,7 +2,7 @@
   "source": "art/source/ui_old.png",
   "detail": 1,
   "recolor": "leather",
-  "scale": 0.5,
+  "scale": 1.0,
   "alpha": "soft",
   "label_band": 0.2,
   "out_dir": "assets/sprites/ui",

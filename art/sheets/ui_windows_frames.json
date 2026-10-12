@@ -2,7 +2,7 @@
   "source": "art/source/ui_windows.png",
   "detail": 1,
   "out_dir": "assets/sprites/ui",
-  "scale": 0.5,
+  "scale": 1.0,
   "alpha": "soft",
   "label_band": 0.2,
   "inset": 5,
@@ -45,7 +45,7 @@
           33
         ]
       ],
-      "scale": 0.375
+      "scale": 0.75
     },
     "item_slot_hover": {
       "blank": [
@@ -56,7 +56,7 @@
           33
         ]
       ],
-      "scale": 0.6017
+      "scale": 1.2034
     },
     "equip_doll_bg": {
       "blank": [
@@ -67,7 +67,7 @@
           32
         ]
       ],
-      "scale": 0.572
+      "scale": 1.144
     }
   },
   "recolor": "dark_parchment"

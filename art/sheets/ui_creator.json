@@ -2,7 +2,7 @@
   "source": "art/source/ui_creator.png",
   "detail": 1,
   "out_dir": "assets/sprites/ui/creator",
-  "scale": 0.5,
+  "scale": 1.0,
   "alpha": "soft",
   "label_band": 0.15,
   "cells": [
@@ -41,7 +41,7 @@
           31
         ]
       ],
-      "scale": 0.5843
+      "scale": 1.1686
     },
     "pedestal": {
       "keep": "largest",
@@ -53,7 +53,7 @@
           28
         ]
       ],
-      "scale": 0.5705
+      "scale": 1.141
     },
     "arrow_right": {
       "flip": true,
@@ -65,7 +65,7 @@
           31
         ]
       ],
-      "scale": 0.5
+      "scale": 1.0
     },
     "name_field": {
       "blank": [
@@ -76,7 +76,7 @@
           28
         ]
       ],
-      "scale": 0.375
+      "scale": 0.75
     },
     "arrow_left": {
       "blank": [
@@ -87,7 +87,7 @@
           31
         ]
       ],
-      "scale": 0.414
+      "scale": 0.828
     },
     "arrow_right_hover": {
       "blank": [
@@ -98,7 +98,7 @@
           31
         ]
       ],
-      "scale": 0.5776
+      "scale": 1.1552
     },
     "swatch": {
       "blank": [
@@ -109,7 +109,7 @@
           30
         ]
       ],
-      "scale": 0.5891
+      "scale": 1.1782
     },
     "swatch_on": {
       "blank": [
@@ -120,7 +120,7 @@
           31
         ]
       ],
-      "scale": 0.6087
+      "scale": 1.2174
     },
     "random": {
       "blank": [
@@ -131,7 +131,7 @@
           30
         ]
       ],
-      "scale": 0.5345
+      "scale": 1.069
     },
     "reset": {
       "blank": [
@@ -142,7 +142,7 @@
           30
         ]
       ],
-      "scale": 0.5085
+      "scale": 1.017
     },
     "banner": {
       "blank": [
@@ -153,7 +153,7 @@
           30
         ]
       ],
-      "scale": 0.3691
+      "scale": 0.7382
     }
   },
   "grid": {

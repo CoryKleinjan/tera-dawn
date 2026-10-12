@@ -10,6 +10,9 @@ const TITLE_H := 30.0
 const PAD := 16.0
 const SLOT := 40.0
 const CLOSE_SIZE := 20.0
+const CLOSE_INSET := 3.5
+## How far the close X sits in from the window's padding, clear of the brass corner cap.
+const CLOSE_FROM_CAP := 6.0
 ## Where a window's row of tabs sits, and how big a tab can be.
 const TAB_Y := 36.0
 const TAB_H := 26.0
@@ -17,14 +20,14 @@ const TAB_MAX_W := 150.0
 ## Tabs fill their row unless that makes them wider than TAB_MAX_W by more than this share:
 ## then they're TAB_MAX_W, from the left.
 const TAB_STRETCH := 1.25
-## The share of a tab's width between the brass studs at its art's ends (texels 30 to 140
+## The share of a tab's width between the brass studs at its art's ends (art pixels 30 to 140
 ## of 179), where the label goes, less a little room on each side.
 const TAB_TEXT_SHARE := 0.58
 ## List rows and panels: one darkness and one corner radius everywhere.
 const ROW_ALPHA := 0.4
 const ROW_RADIUS := 6.0
 const PLUS_SIZE := 20.0
-## The button art's ends in texels (curl and stud, kept unstretched), and the middle of the
+## The button art's ends in art pixels (curl and stud, kept unstretched), and the middle of the
 ## face between its stitched lines.
 const BUTTON_END := 16.0
 const BUTTON_FACE_MID := 23.0
@@ -124,12 +127,13 @@ func _draw() -> void:
 	DrawUtil.text(self, Game.num_font, Vector2(PAD + 2, 20), title, 15, Palette.SUN, 1, 4, Palette.NIGHT)
 	var c := _close_rect()
 	var hot := c.has_point(_hover)
-	draw_texture_rect(UiSkin.tex("window_close"), c, false, Color(1.25, 1.15, 1.0) if hot else Color.WHITE)
+	# the X is drawn a little inside the spot that takes the click
+	draw_texture_rect(UiSkin.tex("window_close"), c.grow(-CLOSE_INSET), false, Color(1.25, 1.15, 1.0) if hot else Color.WHITE)
 	_buttons.clear()
 	_draw_body()
 
 func _close_rect() -> Rect2:
-	return Rect2(size.x - PAD - CLOSE_SIZE + 6, 4, CLOSE_SIZE, CLOSE_SIZE)
+	return Rect2(size.x - PAD - CLOSE_SIZE - CLOSE_FROM_CAP, 4, CLOSE_SIZE, CLOSE_SIZE)
 
 func _gui_input(event: InputEvent) -> void:
 	var mb := event as InputEventMouseButton
@@ -217,7 +221,7 @@ func draw_slot(r: Rect2, stack: ItemStack, dim := false, label := "") -> void:
 func draw_button(r: Rect2, label: String, enabled := true, small := false) -> void:
 	var hot := enabled and r.has_point(_hover)
 	var art := "button_hover" if hot else "button_normal"
-	var k := r.size.y / UiSkin.tex(art).get_height()
+	var k := r.size.y / UiSkin.size_of(art).y
 	UiSkin.draw_box(self, UiSkin.box(art, BUTTON_END, 0), r, k)
 	var font_size := 11 if small else 15
 	var mid := r.position.y + BUTTON_FACE_MID * k

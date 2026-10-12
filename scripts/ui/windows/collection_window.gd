@@ -11,7 +11,7 @@ const COLS := 6
 const ROWS := 5
 const CELL := 46.0
 ## The open book (UiSkin.draw_book) the Monster Book is drawn in: its top left, how many
-## pixels per texel, and its page margins in pixels at that scale. Its covers sit inside the
+## pixels per art pixel, and its page margins in pixels at that scale. Its covers sit inside the
 ## window frame, PAD in from each side.
 const BOOK_AT := Vector2(PAD, 92)
 const BOOK_SCALE := 0.5
@@ -169,7 +169,7 @@ func _draw_achievements() -> void:
 		var a := list[i]
 		var r := Rect2(PAD + (i / per) * (w + 8), top + (i % per) * row_h, w, row_h - 2)
 		var done := Game.me.achievements.has(String(a.id))
-		var k := r.size.y / UiSkin.tex("book/achievement_row").get_height()
+		var k := r.size.y / UiSkin.size_of("book/achievement_row").y
 		UiSkin.draw_box(self, UiSkin.achievement_row(done), r, k)
 		if not done:
 			var niche := Rect2(r.position + Vector2(10, 12) * k, Vector2(62, 56) * k)

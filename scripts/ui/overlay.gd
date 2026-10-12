@@ -8,7 +8,7 @@ extends Control
 ## The game menu's cog in the top left corner (a button TDHud puts there); the map name sits right of it.
 const MENU_BUTTON := Rect2(8, 6, 34, 34)
 ## The minimap's top left; it's drawn at its frame art's own size (see minimap_rect).
-## Inside hud/minimap_frame, in texels: where the map is drawn, filling the frame's whole dark
+## Inside hud/minimap_frame, in art pixels: where the map is drawn, filling the frame's whole dark
 ## window (x 13 to 170, y 25 to 88).
 const MINIMAP_INNER := Rect2(13, 25, 157, 63)
 ## The frame's sun medallion, which hangs down into the window: drawn again over the map.
@@ -41,7 +41,7 @@ var last_tags: TDNameTags
 
 ## Where the minimap and its frame are on screen.
 static func minimap_rect() -> Rect2:
-	return Rect2(Vector2(TDWorld.VIEW.x - 189, 4), UiSkin.tex("hud/minimap_frame").get_size())
+	return Rect2(Vector2(TDWorld.VIEW.x - 189, 4), UiSkin.size_of("hud/minimap_frame"))
 
 func _process(_delta: float) -> void:
 	queue_redraw()
@@ -155,7 +155,7 @@ func _draw_minimap(mm: Rect2) -> void:
 	var pulse := fmod(Time.get_ticks_msec() / 1000.0, 1.4) / 1.4
 	draw_arc(you, 4.0 + pulse * 6.0, 0, TAU, 16, Color(Palette.SUN, 0.8 * (1.0 - pulse)), 1.5)
 	_minimap_mark(MINIMAP_PLAYER, you)
-	draw_texture(_medallion(), mm.position + MINIMAP_MEDALLION.position)
+	draw_texture_rect(_medallion(), Rect2(mm.position + MINIMAP_MEDALLION.position, MINIMAP_MEDALLION.size), false)
 
 ## The frame's sun medallion with the window's dark leather around it cut away, so it hangs
 ## over the map without a dark box behind it.
@@ -164,10 +164,11 @@ static func _medallion() -> Texture2D:
 	if _medallion_tex == null:
 		var frame := UiSkin.tex("hud/minimap_frame").get_image()
 		frame.decompress()
-		var img := frame.get_region(MINIMAP_MEDALLION)
-		var window := frame.get_pixelv(MINIMAP_INNER.get_center())
+		var d := UiSkin.density("hud/minimap_frame")
+		var img := frame.get_region(UiSkin.region("hud/minimap_frame", MINIMAP_MEDALLION))
+		var window := frame.get_pixelv(MINIMAP_INNER.get_center() * d)
 		img.convert(Image.FORMAT_RGBA8)
-		for y in range(int(MINIMAP_INNER.position.y - MINIMAP_MEDALLION.position.y), img.get_height()):
+		for y in range(int((MINIMAP_INNER.position.y - MINIMAP_MEDALLION.position.y) * d), img.get_height()):
 			for x in img.get_width():
 				var c := img.get_pixel(x, y)
 				if maxf(maxf(absf(c.r - window.r), absf(c.g - window.g)), absf(c.b - window.b)) <= 6.0 / 255.0:

@@ -1,20 +1,25 @@
 class_name TDEquipmentWindow
 extends TDWindow
-## What the hero is wearing (E): a paper doll of gear slots around a portrait, and a panel
-## listing what the gear adds to each stat (all of it, or the worn item you clicked).
+## What the hero is wearing (E): gear slots laid out on a stencil person where each piece is
+## worn, the dressed hero beside it, and a panel listing what the gear adds to each stat (all
+## of it, or the worn item you clicked).
 ## Double-click a worn item to take it off, drag gear here from the inventory to wear it, or
 ## drag a worn item onto the inventory.
 
 const GAP := 6.0
 const GRID_Y := 40.0
-## Where each place sits in a 4×4 grid; the portrait fills the middle 2×2.
+const COLS := 5
+const ROWS := 6
+## Where each place sits on the stencil person, in a COLS×ROWS grid (he faces right).
 const LAYOUT := {
-	&"ring_1": Vector2i(0, 0), &"hat": Vector2i(1, 0), &"earrings": Vector2i(2, 0), &"ring_2": Vector2i(3, 0),
-	&"pendant": Vector2i(0, 1), &"weapon": Vector2i(3, 1),
-	&"cape": Vector2i(0, 2), &"shield": Vector2i(3, 2),
-	&"gloves": Vector2i(0, 3), &"top": Vector2i(1, 3), &"bottom": Vector2i(2, 3), &"shoes": Vector2i(3, 3),
+	&"hat": Vector2i(2, 0),
+	&"earrings": Vector2i(1, 1),
+	&"cape": Vector2i(1, 2), &"pendant": Vector2i(2, 2),
+	&"shield": Vector2i(0, 3), &"top": Vector2i(2, 3), &"weapon": Vector2i(4, 3),
+	&"ring_1": Vector2i(0, 4), &"bottom": Vector2i(2, 4), &"gloves": Vector2i(3, 4), &"ring_2": Vector2i(4, 4),
+	&"shoes": Vector2i(2, 5),
 }
-
+const PORTRAIT_W := 150.0
 const PANEL_W := 176.0
 const ROW_H := 16.0
 
@@ -24,13 +29,13 @@ var doll := PaperdollView.new()
 var caption := Control.new()
 ## The worn item whose stats the panel shows, or &"" for the whole set.
 var selected: StringName = &""
-## The 4×4 grid LAYOUT places the slots in.
-var grid := SlotGrid.new(Vector2(PAD, GRID_Y), 4, 16, SLOT, GAP)
+## The grid LAYOUT places the slots in.
+var grid := SlotGrid.new(Vector2(PAD, GRID_Y), COLS, COLS * ROWS, SLOT, GAP)
 
 func _init() -> void:
-	super("Equipment", Vector2(PAD * 2 + 4 * (SLOT + GAP) - GAP + 10 + PANEL_W, GRID_Y + 4 * (SLOT + GAP) + 14))
+	super("Equipment", Vector2(PAD * 2 + COLS * (SLOT + GAP) - GAP + 10 + PORTRAIT_W + 10 + PANEL_W, GRID_Y + ROWS * (SLOT + GAP) + 14))
 	var box := _portrait_box()
-	var s := minf(box.size.x / Paperdoll.FRAME_SIZE.x, box.size.y / Paperdoll.FRAME_SIZE.y) * 1.3
+	var s := minf(box.size.x / Paperdoll.FRAME_SIZE.x, box.size.y / Paperdoll.FRAME_SIZE.y) * 1.6
 	doll.size = Paperdoll.FRAME_SIZE * s
 	doll.position = box.get_center() - Vector2(doll.size.x / 2.0, doll.size.y * 0.55)
 	doll.max_zoom = s * Paperdoll.ART_SCALE
@@ -39,8 +44,12 @@ func _init() -> void:
 	caption.draw.connect(_draw_caption)
 	add_child(caption)
 
+func _stencil_box() -> Rect2:
+	return Rect2(PAD, GRID_Y, COLS * (SLOT + GAP) - GAP, ROWS * (SLOT + GAP) - GAP)
+
 func _portrait_box() -> Rect2:
-	return Rect2(PAD + SLOT + GAP, GRID_Y + SLOT + GAP, SLOT * 2 + GAP, SLOT * 2 + GAP)
+	var s := _stencil_box()
+	return Rect2(s.end.x + 10, GRID_Y, PORTRAIT_W, s.size.y)
 
 func slot_rect(place: StringName) -> Rect2:
 	return grid.cell_rect(LAYOUT[place])
@@ -52,9 +61,8 @@ func place_at(at: Vector2) -> StringName:
 	return &""
 
 func _draw_body() -> void:
-	# portrait
-	var box := _portrait_box()
-	draw_texture_rect(UiSkin.tex("equip_doll_bg"), box, false)
+	TDStencil.draw(self, _stencil_box())
+	draw_row(_portrait_box())
 	doll.set_look(Game.me.look())
 	caption.queue_redraw()
 	var dragging := _dragged_equip()
@@ -77,7 +85,7 @@ func _draw_caption() -> void:
 func _draw_bonuses() -> void:
 	if selected != &"" and Game.me.equipment.at(selected) == null:
 		selected = &""
-	var panel := Rect2(size.x - PAD - PANEL_W, GRID_Y, PANEL_W, 4 * (SLOT + GAP) - GAP)
+	var panel := Rect2(size.x - PAD - PANEL_W, GRID_Y, PANEL_W, _stencil_box().size.y)
 	draw_row(panel)
 	var stack := Game.me.equipment.at(selected) if selected != &"" else null
 	var heading := stack.item.display_name if stack else "Gear bonuses"

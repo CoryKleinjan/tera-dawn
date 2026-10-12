@@ -12,7 +12,7 @@ const ROWS := 8
 const PARTY_HP_W := 80.0
 const KICK_W := 38.0
 const BUTTON_GAP := 8.0
-## Pixels per texel of the friend row art, and the middle of its round niche in texels.
+## Pixels per art pixel of the friend row art, and the middle of its round niche in art pixels.
 const ROW_SCALE := (ROW_H - 4) / 61.0
 const NICHE_CENTER := Vector2(42, 30)
 

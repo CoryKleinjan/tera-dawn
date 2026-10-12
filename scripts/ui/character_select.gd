@@ -124,7 +124,7 @@ func _slot_button(i: int) -> Button:
 	stage.name = "Stage"
 	stage.custom_minimum_size = Vector2(0, 108)
 	stage.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	stage.add_theme_stylebox_override("panel", UiSkin.box("equip_doll_bg", 12, 12))
+	stage.add_theme_stylebox_override("panel", UiSkin.plain_panel())
 	col.add_child(stage)
 	var preview := PaperdollView.new()
 	preview.name = "Preview"

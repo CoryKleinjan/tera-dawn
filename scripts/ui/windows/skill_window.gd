@@ -46,7 +46,7 @@ func _draw_body() -> void:
 	draw_tabs(line.map(func(id: StringName) -> String:
 		var j: JobDef = Content.jobs.get(id)
 		return j.display_name if j else String(id)), tab)
-	DrawUtil.text(self, Game.ui_font, Vector2(size.x - PAD - CLOSE_SIZE - 8, 20), "Skill Points: %d" % Game.me.skills.points, 13,
+	DrawUtil.text(self, Game.ui_font, Vector2(_close_rect().position.x - 8, 20), "Skill Points: %d" % Game.me.skills.points, 13,
 		Palette.SUN if Game.me.skills.points > 0 else Palette.MIST, -1, 3, Palette.NIGHT)
 	var skills := listed()
 	if selected == &"" or not skills.any(func(s: SkillDef) -> bool: return s.id == selected):

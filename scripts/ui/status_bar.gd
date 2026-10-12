@@ -8,12 +8,12 @@ const HEIGHT := 50.0
 ## Every piece on the bar (level badge, HP, MP and EXP bars, window buttons, Dawnshards) is
 ## ITEM_H tall and centred on the band between the art's two gold trim lines.
 const ITEM_H := 26.0
-## The band between the gold trim lines, in texels of the bar art (top and bottom row).
+## The band between the gold trim lines, in art pixels of the bar art (top and bottom row).
 const BAND_TOP := 10.0
 const BAND_BOTTOM := 43.0
 const WINDOW_BUTTON_GAP := 2.0
 ## The bar art (art/source/ui_hud_bar.png): each end's brass sun cap and its dark rim, in
-## texels. The art is drawn at one scale to fit HEIGHT, and the dawn-lit band between the caps
+## art pixels. The art is drawn at one scale to fit HEIGHT, and the dawn-lit band between the caps
 ## repeats along the bar instead of stretching, so its gold trim stays sharp at any width.
 const BAR_CAP := 38.0
 ## The level badge's left edge, just inside the brass end cap.
@@ -73,8 +73,7 @@ func trail(bar: String) -> float:
 
 func _draw() -> void:
 	var w := size.x
-	var art := UiSkin.tex("hud_bar")
-	UiSkin.draw_box(self, _bar_box(), Rect2(0, 0, w, HEIGHT), HEIGHT / art.get_height())
+	UiSkin.draw_box(self, _bar_box(), Rect2(0, 0, w, HEIGHT), HEIGHT / UiSkin.size_of("hud_bar").y)
 	# level badge
 	var badge := badge_rect()
 	draw_texture_rect(UiSkin.tex("level_badge"), badge, false)
@@ -103,7 +102,7 @@ func exp_text() -> String:
 
 ## The middle of the band between the bar art's gold trim lines, in pixels from the top.
 static func band_center() -> float:
-	return (BAND_TOP + BAND_BOTTOM) / 2.0 * HEIGHT / UiSkin.tex("hud_bar").get_height()
+	return (BAND_TOP + BAND_BOTTOM) / 2.0 * HEIGHT / UiSkin.size_of("hud_bar").y
 
 ## The top of every ITEM_H-tall piece on the bar.
 static func item_top() -> float:
@@ -111,18 +110,17 @@ static func item_top() -> float:
 
 ## The scale that draws a piece of UI art ITEM_H tall.
 static func fit(art: String) -> float:
-	return ITEM_H / UiSkin.tex(art).get_height()
+	return ITEM_H / UiSkin.size_of(art).y
 
 func badge_rect() -> Rect2:
-	var t := UiSkin.tex("level_badge")
-	return Rect2(Vector2(BADGE_X, item_top()), t.get_size() * fit("level_badge"))
+	return Rect2(Vector2(BADGE_X, item_top()), UiSkin.size_of("level_badge") * fit("level_badge"))
 
 ## Where a bar frame is drawn: HP after the badge, then MP, then EXP, BAR_GAP apart. HP and
 ## MP are HP_MP_EXTRA wider than their art.
 func bar_rect(frame: String) -> Rect2:
 	var x := badge_rect().end.x + BAR_GAP
 	for f in ["hp_frame", "mp_frame", "exp_frame"]:
-		var s := UiSkin.tex(f).get_size() * fit(f)
+		var s := UiSkin.size_of(f) * fit(f)
 		if f != "exp_frame":
 			s.x += HP_MP_EXTRA
 		if f == frame:
@@ -180,9 +178,9 @@ static func _key_name(action: String) -> String:
 	return ""
 
 ## The bar art as a nine-patch whose middle repeats across rather than stretching.
-static var _bar_sb: StyleBoxTexture
-static func _bar_box() -> StyleBoxTexture:
+static var _bar_sb: TDUiBox
+static func _bar_box() -> TDUiBox:
 	if _bar_sb == null:
-		_bar_sb = UiSkin.box("hud_bar", BAR_CAP, 0).duplicate()
+		_bar_sb = UiSkin.box("hud_bar", BAR_CAP, 0).copy()
 		_bar_sb.axis_stretch_horizontal = StyleBoxTexture.AXIS_STRETCH_MODE_TILE_FIT
 	return _bar_sb

@@ -503,7 +503,8 @@ func test_world_map_zone_exits_open_the_next_zone() -> void:
 
 func test_world_map_painting_keeps_its_shape() -> void:
 	# world_pos values are pixels of this painting: a repaint must place every dot again
-	check_eq(UiSkin.tex("world_map").get_size(), TDWorldMapWindow.WORLD, "the world-map units are the painting's pixels")
+	var art := UiSkin.size_of("world_map")
+	check(art.distance_to(TDWorldMapWindow.WORLD) < 1.0, "the world-map units are the painting's art pixels (%s)" % art)
 	var wm: TDWorldMapWindow = _open("worldmap")
 	var a := wm._area()
 	check(absf(a.size.aspect() - TDWorldMapWindow.WORLD.aspect()) < 0.01, "the painting is drawn unstretched (%s)" % a.size)

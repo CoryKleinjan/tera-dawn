@@ -2,7 +2,7 @@
   "source": "art/source/ui_book.png",
   "detail": 1,
   "out_dir": "assets/sprites/ui/book",
-  "scale": 0.5,
+  "scale": 1.0,
   "alpha": "soft",
   "label_band": 0.2,
   "inset": 6,
@@ -34,11 +34,11 @@
   ],
   "overrides": {
     "achievement_row": {
-      "scale": 0.4741,
+      "scale": 0.9482,
       "blank_top": 38
     },
     "achievement_row_done": {
-      "scale": 0.46,
+      "scale": 0.92,
       "patch": [
         [
           212,

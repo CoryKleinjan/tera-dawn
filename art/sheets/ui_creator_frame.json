@@ -2,7 +2,7 @@
   "source": "art/source/ui_creator.png",
   "detail": 1,
   "out_dir": "assets/sprites/ui/creator",
-  "scale": 0.5,
+  "scale": 1.0,
   "alpha": "soft",
   "label_band": 0.1,
   "inset": 6,
@@ -37,7 +37,7 @@
           39
         ]
       ],
-      "scale": 0.28
+      "scale": 0.56
     }
   }
 }

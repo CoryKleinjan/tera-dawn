@@ -3,7 +3,7 @@
   "detail": 1,
   "recolor": "leather",
   "out_dir": "assets/sprites/ui/hud",
-  "scale": 0.5,
+  "scale": 1.0,
   "alpha": "soft",
   "label_band": 0.2,
   "grid_threshold": 0.7,
