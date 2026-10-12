@@ -40,7 +40,8 @@ instead of racing it. Tests drive `Sound.advance` by hand (`tests/unit/sound_mus
 
 ## How to add music
 
-1. Make it: add the cue to `tools/audio/lyria_cues.json` and run
+1. Make it: add the cue to `tools/audio/lyria_cues.json` (a zone's track follows its mood and
+   instruments in [zone vibes](../zone-vibes.md)) and run
    `python3 tools/audio/lyria_pass.py OUT_DIR --only <cue>` (paid, Lyria has no batch mode:
    ask Cory first; `--dry-run` shows the cost). Each cue gets several takes.
 2. Put the chosen take in: `python3 tools/audio/make_music.py OUT_DIR/<cue>_a.mp3 <id>`

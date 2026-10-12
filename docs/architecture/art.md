@@ -30,6 +30,8 @@ writes the region mask, rig and `--preview`. A new kind of layer is a module wit
 
 Art comes from Google's Gemini image model through its batch API (half price). Follow the art
 rules in `CLAUDE.md` (painted style, clean anti-aliased edges, icons matching worn gear).
+Art for a zone, its town or a sub-zone keeps that zone's palette, light and materials from
+[zone vibes](../zone-vibes.md).
 
 1. Agree the look with Cory, then add the sheet to `tools/art/gemini_pass.json`, usually an
    `edit` entry: one existing sheet plus a short instruction that keeps its layout, on a pure
