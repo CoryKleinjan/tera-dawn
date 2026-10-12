@@ -121,7 +121,8 @@ def grip_point(arr, kind, axis, dots):
     - a throwing star: a little behind its middle (STAR_GRIP across it), so his fist hides its
       middle and its front points stick out past his fingers;
     - a bow: on its riser, halfway up (bow_parts), so it is held by the middle;
-    - anything else (knuckles): its dot, or a guess near its back end."""
+    - a knuckle: the middle of its picture, since it is worn over his whole fist;
+    - anything else: its dot, or a guess near its back end."""
     if kind == "bow":
         return bow_parts(arr)[0]
     xs, ys, a, b = _along(arr, axis)
@@ -140,6 +141,8 @@ def grip_point(arr, kind, axis, dots):
         return _on_axis(arr, axis, lo + span * STAFF_GRIP)
     if kind == "star":
         return _on_axis(arr, axis, lo + span * STAR_GRIP)
+    if kind == "knuckle":
+        return (float(xs.mean()), float(ys.mean()))
     if kind == "gun":
         # the middle of the pistol grip: what hangs below the barrel's underside (the lowest
         # row of its front part) at the back, so his whole fist wraps the grip
