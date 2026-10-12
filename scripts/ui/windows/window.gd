@@ -10,6 +10,7 @@ const TITLE_H := 30.0
 const PAD := 16.0
 const SLOT := 40.0
 const CLOSE_SIZE := 20.0
+const CLOSE_INSET := 3.5
 ## Where a window's row of tabs sits, and how big a tab can be.
 const TAB_Y := 36.0
 const TAB_H := 26.0
@@ -124,7 +125,8 @@ func _draw() -> void:
 	DrawUtil.text(self, Game.num_font, Vector2(PAD + 2, 20), title, 15, Palette.SUN, 1, 4, Palette.NIGHT)
 	var c := _close_rect()
 	var hot := c.has_point(_hover)
-	draw_texture_rect(UiSkin.tex("window_close"), c, false, Color(1.25, 1.15, 1.0) if hot else Color.WHITE)
+	# the X is drawn a little inside the spot that takes the click
+	draw_texture_rect(UiSkin.tex("window_close"), c.grow(-CLOSE_INSET), false, Color(1.25, 1.15, 1.0) if hot else Color.WHITE)
 	_buttons.clear()
 	_draw_body()
 

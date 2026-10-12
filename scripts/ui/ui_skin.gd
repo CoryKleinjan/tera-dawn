@@ -178,6 +178,13 @@ static func window_frame() -> StyleBoxTexture:
 	sb.texture_margin_bottom = 14
 	return sb
 
+## A plain dark rounded panel, the same as a window's list row (TDWindow.draw_row).
+static func plain_panel() -> StyleBoxFlat:
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = Color(Palette.NIGHT, TDWindow.ROW_ALPHA)
+	sb.set_corner_radius_all(int(TDWindow.ROW_RADIUS))
+	return sb
+
 static func tooltip_frame() -> StyleBoxTexture:
 	return box("tooltip_frame", 12, 12)
 

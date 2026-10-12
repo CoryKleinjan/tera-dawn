@@ -1,7 +1,8 @@
 class_name TDEquipmentWindow
 extends TDWindow
-## What the hero is wearing (E): a paper doll of gear slots around a portrait, and a panel
-## listing what the gear adds to each stat (all of it, or the worn item you clicked).
+## What the hero is wearing (E): gear slots laid out on a stencil person where each piece is
+## worn, the dressed hero beside it, and a panel listing what the gear adds to each stat (all
+## of it, or the worn item you clicked).
 ## Double-click a worn item to take it off, drag gear here from the inventory to wear it, or
 ## drag a worn item onto the inventory.
 
@@ -19,8 +20,6 @@ const LAYOUT := {
 	&"shoes": Vector2i(2, 5),
 }
 const PORTRAIT_W := 150.0
-const SILHOUETTE := preload("res://shaders/silhouette_ui.gdshader")
-
 const PANEL_W := 176.0
 const ROW_H := 16.0
 
@@ -30,24 +29,11 @@ var doll := PaperdollView.new()
 var caption := Control.new()
 ## The worn item whose stats the panel shows, or &"" for the whole set.
 var selected: StringName = &""
-## The 4×4 grid LAYOUT places the slots in.
+## The grid LAYOUT places the slots in.
 var grid := SlotGrid.new(Vector2(PAD, GRID_Y), COLS, COLS * ROWS, SLOT, GAP)
-var stencil := Control.new()
 
 func _init() -> void:
 	super("Equipment", Vector2(PAD * 2 + COLS * (SLOT + GAP) - GAP + 10 + PORTRAIT_W + 10 + PANEL_W, GRID_Y + ROWS * (SLOT + GAP) + 14))
-	var area := _stencil_box()
-	stencil.position = area.position
-	stencil.size = area.size
-	stencil.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	stencil.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
-	var m := ShaderMaterial.new()
-	m.shader = SILHOUETTE
-	m.set_shader_parameter("tint", Color(Palette.MIST, 0.16))
-	stencil.material = m
-	stencil.draw.connect(_draw_stencil)
-	add_child(stencil)
-	move_child(stencil, 0)
 	var box := _portrait_box()
 	var s := minf(box.size.x / Paperdoll.FRAME_SIZE.x, box.size.y / Paperdoll.FRAME_SIZE.y) * 1.6
 	doll.size = Paperdoll.FRAME_SIZE * s
@@ -65,14 +51,6 @@ func _portrait_box() -> Rect2:
 	var s := _stencil_box()
 	return Rect2(s.end.x + 10, GRID_Y, PORTRAIT_W, s.size.y)
 
-func _draw_stencil() -> void:
-	var tex := Paperdoll.FRAMES.get_frame_texture(&"idle", 0) as AtlasTexture
-	var img := tex.get_image()
-	var used := img.get_used_rect()
-	var k := stencil.size.y * 1.02 / used.size.y
-	var r := Rect2(Vector2(stencil.size.x / 2.0 - (used.position.x + used.size.x / 2.0) * k, stencil.size.y - used.end.y * k), tex.region.size * k)
-	stencil.draw_texture_rect_region(tex.atlas, r, tex.region)
-
 func slot_rect(place: StringName) -> Rect2:
 	return grid.cell_rect(LAYOUT[place])
 
@@ -83,9 +61,8 @@ func place_at(at: Vector2) -> StringName:
 	return &""
 
 func _draw_body() -> void:
-	# portrait
-	var box := _portrait_box()
-	draw_row(box)
+	TDStencil.draw(self, _stencil_box())
+	draw_row(_portrait_box())
 	doll.set_look(Game.me.look())
 	caption.queue_redraw()
 	var dragging := _dragged_equip()
