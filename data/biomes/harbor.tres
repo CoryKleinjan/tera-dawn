@@ -39,7 +39,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/building_large.png" id="31_building_large"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/building_small.png" id="32_building_small"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/signature_prop.png" id="33_signature_prop"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/lantern_lit.png" id="34_lantern_lit"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/lamp_post.png" id="34_lantern_lit"]
 [ext_resource type="Texture2D" path="res://assets/sprites/props/portal_1.png" id="36_portal_1"]
 [ext_resource type="Texture2D" path="res://assets/sprites/props/portal_2.png" id="37_portal_2"]
 [ext_resource type="Texture2D" path="res://assets/sprites/props/portal_3.png" id="38_portal_3"]
@@ -230,4 +230,5 @@ flyers = ExtResource("90_gulls")
 flyer_count = 5
 chimney_smoke = true
 lantern = ExtResource("34_lantern_lit")
+lantern_lamp = Vector2(0.0, 0.82)
 portal_frames = Array[Texture2D]([ExtResource("36_portal_1"), ExtResource("37_portal_2"), ExtResource("38_portal_3"), ExtResource("39_portal_4")])

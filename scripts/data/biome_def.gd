@@ -69,6 +69,9 @@ extends Resource
 ## and stalls that make a town feel lived in.
 @export var town_decor: Array[DecorDef] = []
 @export var lantern: Texture2D
+## Where the lit lamp sits on the lantern post, as shares of the post picture's width
+## (from its middle, right is positive) and height (up from its base): the glow and light go there.
+@export var lantern_lamp := Vector2(0.22, 0.62)
 @export var portal_frames: Array[Texture2D] = []
 ## Rooms inside buildings: the doorway out, drawn on the back wall at every door portal.
 @export var door: Texture2D
