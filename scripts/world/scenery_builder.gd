@@ -297,9 +297,8 @@ func _lanterns(map: MapDef, biome: BiomeDef, _rng: RandomNumberGenerator) -> voi
 		TDStage.stand_on_land(post, Vector2(x, map.ground_y + 3.0), -1.3)
 		var pos := post.position
 		root.add_child(post)
-		# the lamp hangs off the right of the post, near the top
 		var size := post.texture.get_size() * post.pixel_size
-		var lamp := pos + Vector3(size.x * 0.22, size.y * 0.62, 0.05)
+		var lamp := pos + Vector3(size.x * biome.lantern_lamp.x, size.y * biome.lantern_lamp.y, 0.05)
 		var g := TDStage.glow_sprite(load("res://assets/sprites/fx/glow.png"), Color(biome.lantern_light, 0.5) * 1.5)
 		g.position = lamp
 		root.add_child(g)
