@@ -382,7 +382,7 @@ def save_hair_cut(hero, name, head=False):
         if os.path.exists(path):
             hair = np.asarray(Image.open(path))[..., 3] > 0
             cut = no_loose_hair(strip, solids, heads, hair, fw, [fi["r"] for fi in hero.info], style in HAIR_HEAD_ONLY,
-                                [fi["head"] for fi in hero.info])
+                                [fi["head"] for fi in hero.info], [n in BACK_VIEW for n in hero.names])
             if style in HAIR_HEAD_ONLY:
                 cut = as_in(cut, hair, hero, HAIR_HAT_POSE)
             # (softened only where some of this hair shows beside it: none peeks out along a soft
@@ -426,7 +426,7 @@ def his_head(px, fi):
     return head
 
 
-def no_loose_hair(strip, solids, heads, hair, fw, radii, tails=False, centres=None):
+def no_loose_hair(strip, solids, heads, hair, fw, radii, tails=False, centres=None, backs=None):
     """A hair cut strip that also hides the bits of one hairstyle's hair the cut leaves loose:
     every patch still showing whose cut edge is mostly out in the air rather than at the hat
     (within HAIR_CUT_TOUCH of it), such as a ponytail's end whose middle went under the hat or a
@@ -450,7 +450,9 @@ def no_loose_hair(strip, solids, heads, hair, fw, radii, tails=False, centres=No
         if tails:  # (its tails go under the hat with the rest)
             hx, hy = centres[i]
             yy, xx = np.mgrid[0:hidden.shape[0], 0:fw]
-            rx, ry, up = (k * radii[i] for k in HAIR_HEAD_ONLY_OVAL)
+            # (from behind, the back of his head down to his neck: no bald patch under the hat)
+            oval = HAIR_HEAD_ONLY_BACK if backs and backs[i] else HAIR_HEAD_ONLY_OVAL
+            rx, ry, up = (k * radii[i] for k in oval)
             on = ((xx - hx) / rx) ** 2 + ((yy - hy + up) / ry) ** 2 <= 1.0  # (a round line, no steps)
             cut[ss.dilate(shows & ~on, 3) & ~(shows & on)] = 255  # (wide enough that its soft edge still hides it all)
             shows &= ~(cut[..., 3] > 0)
