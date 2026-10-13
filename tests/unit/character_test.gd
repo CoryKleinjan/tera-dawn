@@ -796,7 +796,9 @@ func test_real_beginner_can_reach_warrior() -> void:
 	check_ne(c.advance_problem(w), "", "level 1 can't")
 	c.level = w.advance_level
 	c.base.strength = w.advance_requirements.strength
-	check_eq(c.advance_problem(w), "", "level and STR enough")
+	check_eq(c.advance_problem(w), "Pass the Job Test first.", "the Job Test first")
+	c.quests.done[w.advance_quest.id] = true
+	check_eq(c.advance_problem(w), "", "level, STR and the test enough")
 	check_eq(c.advance(w), "", "advanced")
 	check_eq(c.job.id, &"warrior", "warrior")
 

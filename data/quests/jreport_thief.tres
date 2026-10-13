@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="QuestDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="1_quest_def"]
+[ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="2_quest_objective"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
+
+[sub_resource type="Resource" id="Visit"]
+script = ExtResource("2_quest_objective")
+kind = 2
+map = &"lumewood_hall"
+count = 1
+
+[resource]
+script = ExtResource("1_quest_def")
+id = &"jreport_thief"
+title = "Report to Celest"
+giver = &"lanternfall_instructor"
+turn_in = &"lumewood_instructor"
+min_level = 10
+requires = Array[StringName]([&"jtest_thief"])
+offer_text = "Archmage Celest is in Lumewood."
+progress_text = "Archmage Celest is in Lumewood."
+complete_text = "A tear in the air, and something stepping out of it? My scholars have noted strange lights near the strongest beasts, but never this. Thank you. Keep your eyes open out there, and come to me if you see another."
+auto_start = true
+objectives = Array[ExtResource("2_quest_objective")]([SubResource("Visit")])
+reward_xp = 2000
+reward_items = Array[ExtResource("4_drop_entry")]([])

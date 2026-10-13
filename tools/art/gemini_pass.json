@@ -11138,7 +11138,7 @@
    ],
    "anchor": null,
    "size": "2K",
-   "note": "2026-10-13 main story thread (Cory 16:46Z 'that works.' to the plan and the starlit stone beast look): small test of the Lv 10 job test boss that steps out of a tear. Edit of mon_reef_titan keeping its 12-frame boss layout. Shown to Cory before anything goes in game.",
+   "note": "2026-10-13 main story thread (Cory 16:46Z 'that works.' to the plan and the starlit stone beast look): small test of the Lv 10 job test boss that steps out of a tear. Edit of mon_reef_titan keeping its 12-frame boss layout. Shown to Cory before anything goes in game. Cory approved the result for the game (17:14Z 'yes. i like that look.'); cut by art/sheets/tear_boss.json.",
    "edit": {
     "base": "art/source/mon_reef_titan.png",
     "refs": [

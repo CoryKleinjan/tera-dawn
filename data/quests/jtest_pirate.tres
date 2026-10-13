@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="QuestDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="1_quest_def"]
+[ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="2_quest_objective"]
+[ext_resource type="Resource" path="res://data/monsters/tear_boss.tres" id="3_boss"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
+
+[sub_resource type="Resource" id="Boss"]
+script = ExtResource("2_quest_objective")
+monster = ExtResource("3_boss")
+count = 1
+
+[resource]
+script = ExtResource("1_quest_def")
+id = &"jtest_pirate"
+title = "Job Test"
+giver = &"driftcove_instructor"
+min_level = 10
+jobs = Array[StringName]([&"beginner"])
+offer_text = "Level ten, eh? Every hand on my crew ran the trial ground first. Off you go, end to end."
+progress_text = "The trial ground is through the light by the wall."
+complete_text = "Now that's a tale for the tavern! Welcome aboard, Pirate. But I've sailed every sea and never seen the sky tear open. Sail for Lumewood. Archmage Celest will want to hear it."
+hint = "Step into the light by the wall and press {move_up}"
+reward_xp = 1000
+objectives = Array[ExtResource("2_quest_objective")]([SubResource("Boss")])
+reward_items = Array[ExtResource("4_drop_entry")]([])

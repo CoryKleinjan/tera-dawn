@@ -27,11 +27,14 @@ func on_scene_done(peer: int, id: StringName) -> void:
 	p.character.saw(id)
 	p.dirty_character = true
 	server.save(p)
+	p.map.wake_tear(p)
 
 ## Stops a scene without noting it as seen (they left the map, or attacked, so it isn't playing).
 func stop(p: SimPlayer) -> void:
 	p.scene = &""
 	p.scene_t = 0
+	if p.map:
+		p.map.wake_tear(p)
 
 ## One server tick for one player: a scene that ran far too long stops.
 func step(p: SimPlayer) -> void:

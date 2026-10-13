@@ -311,6 +311,8 @@ func advance_problem(next: JobDef) -> String:
 		for stat in StatBlock.BASE:
 			if base.value(stat) < next.advance_requirements.value(stat):
 				return "You need %d %s to become a %s." % [next.advance_requirements.value(stat), StatBlock.LABELS[stat], next.display_name]
+	if next.advance_quest and not quests.done.has(next.advance_quest.id):
+		return "Pass the %s first." % next.advance_quest.title
 	var full := inventory.tab_without_room(next.advance_gifts.map(func(g: DropEntry) -> Array: return [g.item, 1 if g.item is EquipDef else g.min_amount]))
 	if full >= 0:
 		return "Make room in your %s inventory first." % ItemDef.TAB_NAMES[full]

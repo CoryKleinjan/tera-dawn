@@ -150,6 +150,7 @@ func enter_map(id: StringName, x: float, state: Dictionary) -> void:
 		views[i].apply(mob_states[i])
 	for d in state.get("drops", []):
 		add_drop(d)
+	stage.show_tears(state.get("tear", false))
 	snap_camera()
 	# the new map fades in from dark (the portal faded the old one out)
 	stage.set_faded(1.0)
@@ -274,6 +275,10 @@ func input_blocked() -> bool:
 
 ## The server started cutscene `id` for you. One this game doesn't have is answered as
 ## finished, so the server doesn't wait on it.
+## The map's tear just opened (MapDef.tear_platform).
+func open_tear() -> void:
+	stage.show_tears(true)
+
 func play_scene(id: StringName) -> void:
 	var def: CutsceneDef = Content.cutscenes.get(id)
 	if def == null:

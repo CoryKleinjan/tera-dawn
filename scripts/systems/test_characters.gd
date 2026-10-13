@@ -100,6 +100,8 @@ static func build(char_name: String, job: JobDef) -> Character:
 		var short := c.stats_short_of(next)
 		for stat: StringName in short:
 			c.ap.spend(stat, short[stat] - c.base.value(stat))
+		if next.advance_quest:
+			c.quests.done[next.advance_quest.id] = true
 		var problem := c.advance(next)
 		if problem != "":
 			push_warning("Test character %s couldn't become a %s: %s" % [char_name, next.display_name, problem])
