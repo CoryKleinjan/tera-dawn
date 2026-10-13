@@ -11563,6 +11563,56 @@
     ],
     "text": "The first image is an empty magenta canvas. On it, paint FOUR separate skill icons for my 2D side-scrolling game, laid out in 2 rows of 2, each a square badge with softly rounded corners centred in its own quarter of the canvas and fully inside it (no badge touches or runs off any canvas edge), all the same size, with a wide band of plain magenta (at least a tenth of the canvas) around and between them, not touching. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished icons from this exact set (the new icons must look like they belong on the same sheet): match their polished silver frame with thin white-silver trim, dark slate-grey inner background, soft glow behind the subject, badge size, painting style and level of detail exactly. Each icon shows ONE bold, simple object or effect (no people, no faces) filling most of the badge, painted with the same soft brushwork and chunky painted texture as the third image (NOT flat vector shapes, NOT crisp graphic-design outlines), lit brightly enough to read clearly even when the icon is shown very small. Top left and bottom left are two takes of Ricochet: one old round grey lead musket ball (a plain ball, NOT a modern pointed bullet or cartridge) zig-zagging between three small bright impact sparks, a thin glowing yellow trail tracing its bouncing path; the bottom-left take bounces the other way. Top right and bottom right are two takes of Hunter's Mark: a bold glowing red-orange hunter's target mark, a ring with four inward points, with a green-fletched arrow flying straight into its centre; the bottom-right take shows the mark larger with the arrow coming in from the other side. Strict rules: 0) Exactly FOUR square badges, each wholly inside its quarter, no labels. 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) All four frames identical polished silver with SOFTLY ROUNDED CORNERS, exactly like the third image; never square or sharp-cornered frames. 3) No letters, words, numbers or letter-like runes anywhere. 4) Flat pure magenta #FF00FF background everywhere outside the badges."
    }
+  },
+  {
+   "id": "dawnrise_city_elder_house",
+   "prompts": null,
+   "batch": "Dawnrise city test: Elder Rowan's house (new building)",
+   "with": null,
+   "refs": [],
+   "save": "dawnrise_city_elder_house.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 thread 'Dawnrise Village up to Dawnharbor's standard' (Cory 23:42Z 'Yea' to the Dawnrise look questions): test before the full Dawnrise batch; Dawnrise Isle's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnrise-city/building_elder_house_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Dawnrise Village, the small, cosy starting village of my 2D side-scrolling game: the softest, most innocent, welcoming place in the game, on a sunny island lit by warm golden sunrise light (warm gold #ffe2b0 light, peach and rose-pink glow, shadows leaning plum-violet, never black). Shapes are round, soft and friendly. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (stone texture, wood grain, thatch straw, worn and chipped spots, slight colour variation between stones and planks). The new building is ELDER ROWAN'S HOUSE, the biggest house in the humble village, a little wider than it is tall: a cosy, rounded one-and-a-half-storey cottage of warm honey-coloured fieldstone with timber framing, on a low base of rounded stones; a big, fat, soft golden straw thatch roof with rounded edges that curves down over the eaves, with one round dormer window in the thatch; a short stone chimney; rose-pink and peach painted wooden shutters; warm glowing windows with small panes; flower boxes full of wildflowers under the windows; a climbing rose with pink flowers growing up beside the door; a round-topped wooden front door with iron hinges in the middle of the ground floor, under a small thatched porch hood; a small brass bell hung on a bracket beside the door. It feels humble, lived-in and loved, simpler than a city house. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: its stone base reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, ground line, grass, roots, fence, people or shadow. 3) The door is a real doorway at ground level, centred left to right in the building. 4) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 5) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. No blue roof tiles, no cream or white plaster (that is a different town). Nothing (rope, cloth, chain) ends loose in mid-air. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink-magenta anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "dawnrise_backdrop_panorama",
+   "prompts": null,
+   "batch": "Dawnrise city: one 4K sunrise meadow backdrop (test)",
+   "with": null,
+   "refs": [],
+   "save": "dawnrise_backdrop_panorama.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-13 thread 'Dawnrise Village up to Dawnharbor's standard' (Cory 23:42Z 'Yea' to the Dawnrise look questions): test before the full Dawnrise batch; Dawnrise Isle's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnrise-city/backdrop_panorama_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ],
+    "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Dawnrise Village, the small, cosy starting village of my 2D side-scrolling game, on a gentle sunny island: the softest, most innocent and hopeful place in the game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (grass, leaves, flowers, soft clouds). Paint the background in that same style, a little softer and lighter in contrast so it sits behind the characters. The scene: a sunrise meadow. Soft rolling green hills fade back layer by layer into rose-pink haze, dotted with wildflowers (white, yellow, pink), a few round friendly trees, small rocks and a winding dirt path. Far back on one hill stand two or three tiny thatched cottages and a small windmill. On the far right the hills open onto a calm sea with a little wooden jetty far away, the water sparkling gold under the sun. The sun is just rising over the far horizon, low and warm, with long soft golden light shafts and small golden motes floating in the air. Round soft clouds with peach undersides. Colours: deep plum sky at the very top (#2b2152), fading through rose-pink (#e8a49a) to a glowing peach horizon (#ffd3a0), warm gold light (#ffe2b0) on every lit edge, shadows leaning plum-violet, never black. Strict rules: 1) Side-on view at eye level, as if standing in the meadow, the horizon level. 2) No people, no characters, no animals, no birds. 3) Nothing in the near foreground: no near ground, grass, flowers, fences or rocks in front; the closest hills are in the middle distance. 4) The left and right edges continue naturally (hills, sky and haze), nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere."
+   }
   }
  ]
 }
