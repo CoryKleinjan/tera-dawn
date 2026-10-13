@@ -213,10 +213,10 @@ func test_skills_have_usable_numbers() -> void:
 					continue
 				check(s.duration > 0, "%s: buff duration is %s" % [w, s.duration])
 				check(s.duration_ticks(s.max_level) > 0, "%s: buff ends before it starts at max level" % w)
-				check(s.stats != null or s.stats_per_level != null or s.regen_mp > 0 or s.mp_guard > 0.0 or s.hide or s.steady,
+				check(s.stats != null or s.stats_per_level != null or s.regen_mp > 0 or s.mp_guard > 0.0 or s.hide or s.steady or s.elements,
 					"%s: buff does nothing while it lasts" % w)
 			SkillDef.Kind.PASSIVE:
-				check(s.stats != null or s.stats_per_level != null or s.regen_hp > 0 or s.regen_mp > 0 or s.regen_hp_per_level > 0 or s.regen_mp_per_level > 0,
+				check(s.stats != null or s.stats_per_level != null or s.regen_hp > 0 or s.regen_mp > 0 or s.regen_hp_per_level > 0 or s.regen_mp_per_level > 0 or s.streak_crit > 0.0 or s.bounce > 0.0,
 					"%s: passive adds nothing" % w)
 		if s.is_active():
 			check(s.describe_level(1).size() > 0, "%s: describe_level(1) says nothing" % w)

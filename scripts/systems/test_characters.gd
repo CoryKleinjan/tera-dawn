@@ -80,12 +80,14 @@ static func name_for(job: JobDef) -> String:
 	return CharacterStore.clean_name(NAME_PREFIX + job.display_name)
 
 ## The town a `job` test character starts in: the town of the instructor who teaches that
-## job, or the nearest job before it that has one. The starting job (no instructor) starts
+## job, or the nearest job before it that has one (a blend: its first parent's town). The starting job (no instructor) starts
 ## where every new character does, Character.START_MAP.
 static func home_town(job: JobDef) -> StringName:
 	var line := path_to(job)
 	line.reverse()
 	for j in line:
+		if j.partner != &"":
+			continue # a blend is taught in both its parents' towns: start in the first one's
 		for m: MapDef in Content.maps.values():
 			for n in m.npcs:
 				if n.npc and j.id in n.npc.instructs:
