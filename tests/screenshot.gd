@@ -128,7 +128,7 @@ func _run() -> void:
 		_teleport(world, Vector2(1120, 620))
 		p.face = 1
 		var kept: ItemStack = ch.equipment.take(&"weapon")
-		for id in [&"dawn_blade", &"willow_bow", &"oak_staff", &"iron_star", &"flintlock"]:
+		for id in [&"dawn_blade", &"willow_bow", &"oak_staff", &"rusty_dagger", &"iron_knuckle"]:
 			ch.equipment.take(&"weapon")
 			ch.equipment.put(&"weapon", ItemStack.exact(Content.item(id)))
 			ch.recalc()
@@ -172,8 +172,8 @@ func _run() -> void:
 			["Bramble", "hair_ponytail", "hair_color_copper", "skin_honey", "face_freckled", ["green_hood", "willow_bow", "ranger_vest", "leather_boots"]],
 			["Ondine", "hair_ponytail", "hair_color_blossom", "skin_porcelain", "face_rosy", ["apprentice_hat", "oak_staff", "aurora_robe", "petal_cape"]],
 			["Garrick", "hair_tousled", "hair_color_ink", "skin_umber", "face_determined", ["iron_helm", "bronze_sword", "bronze_mail", "oak_shield", "dawnwing_cape"]],
-			["Wren", "hair_ponytail", "hair_color_frost", "skin_bronze", "face_cheeky", ["dusk_bandana", "iron_star", "night_garb", "work_gloves"]],
-			["Marlo", "hair_tousled", "hair_color_moss", "skin_cocoa", "face_bright", ["tricorn_hat", "flintlock", "sailor_coat", "patched_trousers"]],
+			["Wren", "hair_ponytail", "hair_color_frost", "skin_bronze", "face_cheeky", ["dusk_bandana", "rusty_dagger", "iron_star", "night_garb", "work_gloves"]],
+			["Marlo", "hair_tousled", "hair_color_moss", "skin_cocoa", "face_bright", ["tricorn_hat", "iron_knuckle", "flintlock", "sailor_coat", "patched_trousers"]],
 		]
 		var models := []
 		for i in outfits.size():
@@ -303,7 +303,7 @@ func _run() -> void:
 		ch.job = Content.job(&"warrior")
 		ch.level = maxi(ch.level, 14)
 		ch.skills.points = 4
-		for pair in [[&"power_strike", 6], [&"dawn_slash", 3], [&"iron_body", 2], [&"toughness", 1], [&"quick_step", 2], [&"second_wind", 1]]:
+		for pair in [[&"power_strike", 6], [&"dawn_slash", 3], [&"iron_body", 2], [&"blade_mastery", 1], [&"quick_step", 2], [&"first_aid", 1]]:
 			ch.skills.learned[pair[0]] = pair[1]
 		ch.set_quickslot(0, &"skill", &"power_strike")
 		ch.set_quickslot(1, &"skill", &"dawn_slash")
@@ -322,12 +322,12 @@ func _run() -> void:
 		await _shot("skills")
 		world.hud.toggle_window("skills")
 	if only == "" or only == "ranged":
-		# An Archer's Double Shot in flight, and a Magician's Energy Bolt from a second player.
+		# An Archer's Heartseeker in flight, and a Magician's spell from a second player.
 		ch.job = Content.job(&"archer")
 		ch.equipment.take(&"weapon")
 		ch.equipment.put(&"weapon", ItemStack.exact(Content.item(&"willow_bow")))
-		ch.skills.learned[&"double_shot"] = 5
-		ch.set_quickslot(0, &"skill", &"double_shot")
+		ch.skills.learned[&"heartseeker"] = 5
+		ch.set_quickslot(0, &"skill", &"heartseeker")
 		ch.mp = 200
 		ch.recalc()
 		_me().dirty_character = true

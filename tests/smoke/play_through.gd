@@ -290,6 +290,7 @@ func windows() -> void:
 	# Hovering gear in the bag shows its tooltip, compared with what's worn.
 	var inv: TDInventoryWindow = world.hud.windows["inventory"]
 	inv.tab = ItemDef.Tab.EQUIP
+	inv.raise() # the Collection window opens over it
 	var slot := _first_filled(Game.me, ItemDef.Tab.EQUIP)
 	var move := InputEventMouseMotion.new()
 	move.position = get_viewport().get_final_transform() * (inv.global_position + inv.slot_rect(slot).get_center())

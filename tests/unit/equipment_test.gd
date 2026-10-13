@@ -97,7 +97,7 @@ func test_equip_moves_gear_from_bag_and_adds_stats() -> void:
 	check_eq(c.stats.attack, 15, "attack")
 	check_eq(c.stats.strength, 14, "strength")
 	check_eq(c.base.strength, 10, "base unchanged")
-	check_eq(c.max_hp(), hp_before + 30, "max HP")
+	check_eq(c.max_hp(), hp_before + 30 + 4, "max HP, plus the 4 STR")
 
 func test_equip_swaps_old_gear_into_same_bag_slot() -> void:
 	var c := fx.character()

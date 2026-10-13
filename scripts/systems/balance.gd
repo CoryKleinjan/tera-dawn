@@ -19,8 +19,7 @@ static func typical(job_id: StringName, level: int) -> Character:
 	c.level = level
 	var j := c.job
 	var points := (level - 1) * j.ap_per_level
-	c.base.set(StringName(j.primary_stat), c.base.value(StringName(j.primary_stat)) + points * 3 / 4)
-	c.base.set(StringName(j.secondary_stat), c.base.value(StringName(j.secondary_stat)) + points - points * 3 / 4)
+	c.base.set(StringName(j.primary_stat), c.base.value(StringName(j.primary_stat)) + points)
 	c.recalc()
 	# the best of each kind of gear they could wear (by the stat their attack uses)
 	var best := {}
@@ -55,6 +54,8 @@ static func main_attack(c: Character) -> Array:
 		# about one point a level since the job was taken goes into the main attack
 		var lvl := clampi(c.level - (9 if s.job != &"beginner" else 0), 1, s.max_level)
 		if s.weapons.size() > 0 and (c.gear.weapon() == null or not s.weapons.has(c.gear.weapon().weapon_kind)):
+			continue
+		if s.offhand.size() > 0 and (c.gear.offhand() == null or not s.offhand.has(c.gear.offhand().offhand_kind)):
 			continue
 		if _average(c, s, lvl) * s.hits > _average(c, best, best_level) * best.hits:
 			best = s

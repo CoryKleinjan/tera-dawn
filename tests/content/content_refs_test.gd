@@ -199,7 +199,7 @@ func test_jobs_link_up() -> void:
 			check(Content.jobs.has(j.advances_from), "%s: advances_from %s is not a job" % [Scan.where(j), j.advances_from])
 			check(j.advances_from != j.id, "%s: advances from itself" % Scan.where(j))
 		check(String(j.family) != "", "%s: family is empty" % Scan.where(j))
-		check(j.primary_stat in StatBlock.BASE and j.secondary_stat in StatBlock.BASE, "%s: primary_stat or secondary_stat is not STR/DEX/INT/LUK" % Scan.where(j))
+		check(j.primary_stat in StatBlock.BASE, "%s: primary_stat is not a base stat" % Scan.where(j))
 		for i in j.advance_gifts.size():
 			var g := j.advance_gifts[i]
 			if check(g != null, "%s: advance_gifts[%d] is empty" % [Scan.where(j), i]):

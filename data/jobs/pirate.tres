@@ -17,8 +17,7 @@ max_amount = 20
 
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("2_stat_block")
-strength = 20
-dexterity = 15
+charisma = 25
 
 [resource]
 script = ExtResource("1_job_def")
@@ -26,10 +25,9 @@ id = &"pirate"
 display_name = "Pirate"
 family = &"pirate"
 tint = Color(0.721569, 0.886275, 1.0, 1.0)
-primary_stat = "strength"
-secondary_stat = "dexterity"
+primary_stat = "charisma"
 mastery = 0.6
-description = "Sea-born brawlers who fight with knuckles and guns. Strength drives their fists."
+description = "Sea-born brawlers with knuckles and a pistol. Charisma drives their damage, finds them more Dawnshards and talks shop prices down."
 base_hp = 50
 hp_per_level = 14
 base_mp = 20

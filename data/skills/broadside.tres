@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="SkillDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
+[ext_resource type="Resource" path="res://data/projectiles/bullet.tres" id="p_bullet"]
+[ext_resource type="Resource" path="res://data/effects/bullet_hit.tres" id="h_bullet_hit"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/quick_draw.png" id="i_quick_draw"]
+
+[resource]
+script = ExtResource("1_skill_def")
+id = &"broadside"
+display_name = "Broadside"
+job = &"pirate"
+max_level = 15
+kind = 0
+description = "Empty your pistol across up to five monsters ahead. Needs a pistol in the off-hand slot."
+mp_cost = 10
+mp_cost_per_level = 0.5
+damage_multiplier = 1.0
+damage_per_level = 0.07143
+hits = 1
+max_targets = 5
+offhand = Array[StringName]([&"pistol"])
+requires = &"riptide_combo"
+requires_level = 1
+cooldown = 32
+action_ticks = 20
+reach = 360.0
+height = 90.0
+animation = &"gun"
+projectile = ExtResource("p_bullet")
+hit_effect = ExtResource("h_bullet_hit")
+icon = ExtResource("i_quick_draw")

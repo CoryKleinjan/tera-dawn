@@ -26,7 +26,7 @@ func check() -> void:
 			problems.append("skill %s belongs to unknown job %s" % [id, sk.job])
 		if sk.requires != &"" and not Content.skills.has(sk.requires):
 			problems.append("skill %s requires unknown skill %s" % [id, sk.requires])
-		if sk.kind == SkillDef.Kind.BUFF and sk.duration <= 0:
+		if sk.kind == SkillDef.Kind.BUFF and sk.duration <= 0 and sk.heal <= 0.0:
 			problems.append("buff %s has no duration" % id)
 	for id in Content.maps:
 		var map: MapDef = Content.maps[id]

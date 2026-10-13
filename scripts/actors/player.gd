@@ -103,6 +103,8 @@ var drop_t := 0       # ticks to fall through drop_from
 var action_t := 0     # ticks left in the current attack pose
 var action_anim := &"attack"
 var cooldown := 0     # ticks before the next attack
+## Skill id -> ticks before that skill can be used again (SkillDef.recharge), as the server keeps.
+var recharge := {}
 var inv := 0          # invincibility (blinking) ticks after being hit
 var down := false     # fainted, until the server sends you back to town
 var land_t := 0       # ticks of the landing pose
@@ -190,7 +192,8 @@ func knock_back(from_x: float) -> void:
 	Sound.play(HURT_SOUND)
 	inv = SimPlayer.HURT_INV
 	world.stage.flash_screen(HURT_FLASH_COLOR, HURT_FLASH)
-	if not is_climbing():
+	# a steadying buff (Iron Body) keeps you on your feet
+	if not is_climbing() and not Game.me.skills.steady():
 		vel = Vector2(-KNOCKBACK.x if position.x < from_x else KNOCKBACK.x, KNOCKBACK.y)
 		on_ground = false
 		run_t = 0
@@ -241,6 +244,8 @@ func step() -> void:
 		turn_t -= 1
 	if cooldown > 0:
 		cooldown -= 1
+	if not recharge.is_empty():
+		SimPlayer.tick_recharge(recharge)
 	if grab_cd > 0:
 		grab_cd -= 1
 	if drop_t > 0:
@@ -322,18 +327,21 @@ func _held_aim() -> Hitbox.Aim:
 ## Swings right away and asks the server to work out what it hits (or casts a buff).
 ## A downward melee blow that meets a monster bounces you straight off it.
 func _use(skill: SkillDef) -> void:
-	if skill == null or is_climbing() or cooldown > 0:
+	if skill == null or is_climbing() or cooldown > 0 or recharge.has(skill.id):
 		return
 	var problem := Game.me.skills.use_problem(skill)
 	if problem != "":
 		world.add_log(problem, Palette.INFO)
 		return
-	cooldown = skill.cooldown
+	cooldown = CharacterStats.attack_ticks(skill.cooldown, Game.me.stats)
+	var lvl := Game.me.skills.level(skill)
+	if skill.recharge_ticks(lvl) > 0:
+		recharge[skill.id] = skill.recharge_ticks(lvl)
 	var aim := skill.aim_for(_held_aim())
 	# buffs and spells make no motion: he flashes the skill's colour and carries on
 	var anim := body.use_skill(Game.me.look(), skill)
 	if anim != &"":
-		action_t = skill.action_ticks
+		action_t = CharacterStats.attack_ticks(skill.action_ticks, Game.me.stats)
 		action_anim = anim
 		ready_t = READY_TICKS
 		cheer_t = 0
@@ -521,6 +529,7 @@ func _process(_delta: float) -> void:
 	if body == null or world == null or world.map == null:
 		return
 	var anim := _animation()
+	body.veil = HeroBody.HIDDEN_VEIL if Game.me.skills.hidden() else 1.0
 	body.draw(anim, HeroBody.stride_speed(anim, vel.x), face, is_climbing(), inv > 0 and not fainted(), inv, sitting, Game.me.pet)
 
 func _animation() -> StringName:

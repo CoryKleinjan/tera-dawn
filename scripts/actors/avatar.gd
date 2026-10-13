@@ -97,6 +97,7 @@ func _process(_delta: float) -> void:
 	companion.visible = known
 	var climbing := flags & SnapshotFlags.PLAYER_CLIMBING != 0
 	var blinking := flags & SnapshotFlags.PLAYER_BLINK != 0 and not fainted()
+	body.veil = HeroBody.HIDDEN_VEIL_OTHERS if flags & SnapshotFlags.PLAYER_HIDDEN != 0 else 1.0
 	body.draw(&"faint" if fainted() else animation, HeroBody.stride_speed(animation, _moved_x), face, climbing, blinking, Engine.get_physics_frames(), chair, pet)
 	rig.dress(look)
 

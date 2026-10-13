@@ -10,8 +10,17 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
    `damage_per_level`, `stats_per_level`, `duration_per_level`, `regen_hp_per_level`).
    - Attacks: cooldown, how long the player is busy (`action_ticks`), the hit area (`reach`,
      `height`), `max_targets`, `hits` and the damage multiplier.
-   - Buffs: `stats` added while it lasts, and `duration` in seconds.
-   - Passives: `stats` always added, and/or extra HP/MP recovery.
+   - Buffs: `stats` added while it lasts, and `duration` in seconds. Also: `party` (it reaches
+     party members within `SkillDef.PARTY_REACH`, at the caster's level), `heal` (a share of
+     Max HP; a heal with no duration adds no buff), `mp_guard` (a share of damage taken comes
+     out of MP), `steady` (no knockback), `hide` (monsters can't see or touch you; attacking
+     ends it), and HP/MP recovery.
+   - Passives: `stats` always added, and/or extra HP/MP recovery. Attack Speed, Melee Damage
+     and Ranged Damage are stats too.
+   - Any skill can have its own `recharge` in seconds on top of the shared cooldown (tracked
+     per skill in `SimPlayer.recharge` and `TDPlayer`).
+   - Attacks can also `slow` what they hit, `splash` (hit the nearest monster in the area and
+     everything within `splash` of it), push harder (`knockback`), or not aim (`aims`).
    - The hero animation to play and the effects to show (`effect` on the player,
      `hit_effect` on each target).
 2. Effects are **EffectDef**s in `data/effects/`: a flipbook of frames from
@@ -38,10 +47,11 @@ Ranged and magic skills:
   the skill a shot. The server still decides the hit at once; clients fly one projectile per
   hit (`TDProjectile`) and pop the damage number when it lands, holding the monster's death
   until then.
-- A weapon (`EquipDef`) names its `weapon_kind` (sword, bow, wand, staff, star, knuckle, gun)
+- A weapon (`EquipDef`) names its `weapon_kind` (sword, dagger, bow, wand, staff, knuckle)
   and an optional `basic_attack` skill that replaces the plain swing (a bow's Shoot). Ranged
   weapons need no ammo.
-- `weapons` limits a skill to weapon kinds; `magic` uses Magic Attack (INT included) through
+- `weapons` limits a skill to weapon kinds and `offhand` to what's worn in the off-hand slot
+  (a Thief's stars, a Pirate's pistol); `magic` uses Magic Attack (INT included) through
   `CharacterStats.magic_range` instead of the weapon.
 
 Aiming and melee weight:

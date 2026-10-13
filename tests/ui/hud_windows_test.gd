@@ -247,7 +247,8 @@ func test_stats_window_shows_a_beginner_the_job_paths() -> void:
 		c.base.strength = 35
 		c.base.dexterity = 4
 		c.base.intelligence = 4
-		c.base.luck = 4)
+		c.base.luck = 4
+		c.base.charisma = 4)
 	var stats: TDStatsWindow = _open("stats")
 	await _redrawn(stats, "stats for a Beginner")
 	var paths := JobDef.paths_from(Character.START_JOB)
@@ -257,7 +258,7 @@ func test_stats_window_shows_a_beginner_the_job_paths() -> void:
 	check(stats.content_end <= stats.size.y - 16, "the last path line (%s) lies inside the window (%s)" % [stats.content_end, stats.size.y])
 	check_eq(TDStatsWindow.path_text(Game.me, Content.job(&"warrior")), "Warrior: 35 STR", "a path whose stats are there")
 	check_eq(TDStatsWindow.path_text(Game.me, Content.job(&"thief")), "Thief: 25 LUK (you have 4)", "what's missing")
-	check_eq(TDStatsWindow.path_text(Game.me, Content.job(&"pirate")), "Pirate: 15 DEX (you have 4)", "only what's missing")
+	check_eq(TDStatsWindow.path_text(Game.me, Content.job(&"pirate")), "Pirate: 25 CHA (you have 4)", "only what's missing")
 	for j in paths:
 		var w := DrawUtil.text_width(Game.ui_font, TDStatsWindow.path_text(Game.me, j), 11)
 		check(w < stats.size.x - TDWindow.PAD * 2, "%s's line fits across the window (%d px)" % [j.id, w])

@@ -25,6 +25,8 @@ const KNOCKBACK := 3.2
 const KNOCKBACK_DECAY := 0.82
 ## Speed while chasing, as a multiple of its walking speed.
 const CHASE_SPEED := 1.3
+## Speed while slowed by a skill (SkillDef.slow), as a multiple of its usual speed.
+const SLOW := 0.45
 ## Ticks between changes of direction while patrolling (first walk, then later ones).
 const FIRST_WALK_TICKS := Vector2i(60, 200)
 const WALK_TICKS := Vector2i(60, 220)
@@ -58,6 +60,7 @@ var position := Vector2.ZERO
 var dir := 1
 var walk_t := 0     # ticks until the next change of direction
 var kx := 0.0       # knockback speed
+var slow_t := 0     # ticks left slowed by a skill
 var hurt_t := 0
 var aggro := 0      # ticks left targeting `target`
 var target := 0     # peer id of the player it's after
@@ -118,6 +121,7 @@ func _reset() -> void:
 	walk_t = randi_range(FIRST_WALK_TICKS.x, FIRST_WALK_TICKS.y)
 	kx = 0.0
 	hurt_t = 0
+	slow_t = 0
 	aggro = 0
 	target = 0
 	dead = false
@@ -223,6 +227,8 @@ func step() -> void:
 	moves.tick()
 	if hurt_t > 0:
 		hurt_t -= 1
+	if slow_t > 0:
+		slow_t -= 1
 	if moves.busy():
 		moves.step(chased)
 	elif hurt_t > 0:
@@ -261,7 +267,7 @@ func _walk(chased: SimPlayer) -> void:
 		if chased:
 			dir = -1 if chased.position.x < position.x else 1
 		return
-	var speed := def.speed * (RAGE_SPEED if enraged else 1.0)
+	var speed := def.speed * (RAGE_SPEED if enraged else 1.0) * (SLOW if slow_t > 0 else 1.0)
 	if chased and _level_with(chased):
 		stuck_t = 0
 		var dx := chased.position.x - position.x
@@ -319,7 +325,11 @@ func _platform_of(p: SimPlayer) -> Platform:
 
 ## Whether `p` can be targeted at all: on the map, awake and not watching a cutscene.
 func can_target(p: SimPlayer) -> bool:
-	return p != null and p.map == map and not p.fainted() and not p.in_scene()
+	return p != null and p.map == map and not p.fainted() and not p.in_scene() and not p.hidden()
+
+## Slows it for `ticks` (a skill's chill), or keeps the longer slow it already has.
+func slow(ticks: int) -> void:
+	slow_t = maxi(slow_t, ticks)
 
 ## Whether it notices `p`: within its sight across and not too far above or below.
 func sees(p: SimPlayer) -> bool:

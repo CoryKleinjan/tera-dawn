@@ -8,11 +8,11 @@
       "arrow",
       "star",
       "bullet",
-      "pebble"
+      ""
     ],
     [
       "energy_bolt",
-      "arcane_claw",
+      "",
       "mob_seed",
       "mob_bolt"
     ],
@@ -34,14 +34,8 @@
     "bullet": {
       "scale": 0.2248
     },
-    "pebble": {
-      "scale": 0.1911
-    },
     "energy_bolt": {
       "scale": 0.1623
-    },
-    "arcane_claw": {
-      "scale": 0.1319
     },
     "mob_seed": {
       "scale": 0.1172
