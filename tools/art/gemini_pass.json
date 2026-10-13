@@ -11563,6 +11563,58 @@
     ],
     "text": "The first image is an empty magenta canvas. On it, paint FOUR separate skill icons for my 2D side-scrolling game, laid out in 2 rows of 2, each a square badge with softly rounded corners centred in its own quarter of the canvas and fully inside it (no badge touches or runs off any canvas edge), all the same size, with a wide band of plain magenta (at least a tenth of the canvas) around and between them, not touching. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished icons from this exact set (the new icons must look like they belong on the same sheet): match their polished silver frame with thin white-silver trim, dark slate-grey inner background, soft glow behind the subject, badge size, painting style and level of detail exactly. Each icon shows ONE bold, simple object or effect (no people, no faces) filling most of the badge, painted with the same soft brushwork and chunky painted texture as the third image (NOT flat vector shapes, NOT crisp graphic-design outlines), lit brightly enough to read clearly even when the icon is shown very small. Top left and bottom left are two takes of Ricochet: one old round grey lead musket ball (a plain ball, NOT a modern pointed bullet or cartridge) zig-zagging between three small bright impact sparks, a thin glowing yellow trail tracing its bouncing path; the bottom-left take bounces the other way. Top right and bottom right are two takes of Hunter's Mark: a bold glowing red-orange hunter's target mark, a ring with four inward points, with a green-fletched arrow flying straight into its centre; the bottom-right take shows the mark larger with the arrow coming in from the other side. Strict rules: 0) Exactly FOUR square badges, each wholly inside its quarter, no labels. 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) All four frames identical polished silver with SOFTLY ROUNDED CORNERS, exactly like the third image; never square or sharp-cornered frames. 3) No letters, words, numbers or letter-like runes anywhere. 4) Flat pure magenta #FF00FF background everywhere outside the badges."
    }
+  },
+  {
+   "id": "lumewood_city_library",
+   "prompts": null,
+   "batch": "Lumewood city test: Magicians' Library (new building)",
+   "with": null,
+   "refs": [],
+   "save": "lumewood_city_library.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 thread 'Lumewood up to Dawnharbor's standard' (Cory 23:42Z 'Yea' to the Lumewood look questions): test before the full Lumewood batch; Lumewood's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/lumewood-city/building_wide_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/lumewood-city/tower_ref.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Lumewood Sanctum, the magicians' town in my 2D side-scrolling game: a calm, scholarly town of round pale-stone towers in a glowing, dreaming forest, lit by soft violet twilight and glowing blue crystals. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and plenty of hand-painted detail (stone texture, chipped and worn edges, glass reflections, slight colour variation between stones). The third image is a crystal-dome tower from the same town: match its style, outline thickness and level of detail, and its materials (pale stone blocks, blue glass dome with crystal ribs, round windows, warm wooden door), so both clearly belong to the same town. The new building is the MAGICIANS' LIBRARY, the grandest building in the town, a little wider than it is tall: a two-storey hall of pale lilac-grey stone blocks on a low plinth of larger stone blocks, with a round tower at each end; a large blue glass dome with silver-blue ribs in the middle of the roof, a glowing blue crystal on its tip, and smaller glass domes capping the two end towers; tall arched windows full of glowing bookshelves and blue light on the ground floor, round windows on the upper floor; a wide arched wooden double door with silver-blue iron fittings in the middle of the ground floor, under a carved stone arch set with a glowing crystal; two long violet cloth banners painted with an open book and a star (pictures only, no writing) hanging flat against the wall on either side of the door, fixed at top and bottom; a few small blue crystal clusters growing from the stone at the corners of the plinth. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical; the domes and round towers are drawn as flat front silhouettes. 2) The bottom of the whole building is ONE straight horizontal line: its stone plinth reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, grass, roots, people or shadow. 3) The door is a real doorway at ground level, centred left to right in the building. 4) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 5) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, runes or words anywhere. No blue roof tiles, cream plaster or wooden thatch (those are other towns). Nothing (rope, cloth, chain) ends loose in mid-air. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "lumewood_backdrop_panorama",
+   "prompts": null,
+   "batch": "Lumewood city: one 4K twilight forest backdrop (test)",
+   "with": null,
+   "refs": [],
+   "save": "lumewood_backdrop_panorama.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-13 thread 'Lumewood up to Dawnharbor's standard' (Cory 23:42Z 'Yea' to the Lumewood look questions): test before the full Lumewood batch; Lumewood's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/lumewood-city/backdrop_panorama_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/lumewood-city/tower_ref.png"
+    ],
+    "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Lumewood Sanctum, the magicians' town in my 2D side-scrolling game: a glowing, dreaming forest; mystical, serene and wondrous. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and plenty of hand-painted detail (stone texture, chipped and worn edges, glass reflections, slight colour variation between stones). Paint the background in that same style, a little softer and lighter in contrast so it sits behind the characters. The third image is a crystal-dome tower from the same town: match its pale stone and blue glass. The scene: a twilight forest of tall slender trees with soft violet-blue leaves, layer after layer fading back into violet fog. Between the trees in the middle distance and far away, several round pale-stone towers and large glass domes glow softly from inside with blue and lavender light, some on low hills, one tall slim observatory tower far off. Glowing blue and teal mushrooms and small glowing plants dot the misty forest floor in the distance, and blue crystals catch the light. The sky is deep indigo at the very top, fading to a glowing lavender horizon low in the middle, with a few faint stars at the top and soft pale violet light shafts slanting down through the trees. Many small blue-white motes drift upward through the whole scene. Colours: indigo #120e33 at the very top, lavender #c8a7ff at the horizon, soft violet light #d8c7ff, violet fog #7961c7 low down. Strict rules: 1) Side-on view at eye level, as if standing on the forest floor, every trunk and tower straight up and down. 2) No people, no characters, no animals, no birds. No moon. 3) Nothing in the near foreground: no ground, roots, grass, rocks or leaves in front; the closest trees are in the middle distance. 4) The left and right edges continue naturally (trees, fog and glow), nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, runes or words anywhere."
+   }
   }
  ]
 }
