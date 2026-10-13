@@ -406,7 +406,7 @@ func _run() -> void:
 		Net.server.enter_map(_me(), &"meadow", 300)
 		await _physics(10)
 	if only == "" or only == "social":
-		# The Free Market: a friend's shop, a party, chat and the community window.
+		# Dawnharbor with friends: a party, chat and the community window.
 		var social := Net.server.social
 		var friends := []
 		for i in 2:
@@ -414,13 +414,10 @@ func _run() -> void:
 			f.character.level = 18 + i * 3
 			Net.server.sessions[f.peer] = f
 			social.joined(f)
-			Net.server.enter_map(f, &"free_market", 1000.0 + i * 220.0)
+			Net.server.enter_map(f, &"dawnharbor", 1000.0 + i * 220.0)
 			f.face = -1
 			friends.append(f)
-		Net.server.enter_map(_me(), &"free_market", 820)
-		friends[1].character.inventory.add(Content.item(&"gale_bow"))
-		friends[1].character.inventory.add(Content.item(&"scroll_weapon_att_60"), 3)
-		social.on_shop_open(friends[1].peer, "Kestrel's Bows", [[ItemDef.Tab.EQUIP, 0, 1, 18000], [ItemDef.Tab.USE, 0, 3, 2500]])
+		Net.server.enter_map(_me(), &"dawnharbor", 820)
 		social.invite(_me(), "party", "Mossy")
 		social.on_answer(friends[0].peer, social.invites.keys()[-1], true)
 		social.guilds["dawnbreakers"] = {"name": "Dawnbreakers", "master": ch.name, "members": [ch.name, "Mossy"]}
@@ -429,18 +426,13 @@ func _run() -> void:
 		_me().dirty_character = true
 		social.on_chat(friends[0].peer, "Anyone want to hunt in the Crystal Caves?")
 		social.on_chat(_me().peer, "/p I'm in! Meet at Lumewood.")
-		social.whisper(friends[1], ch.name, "Bows for sale, cheap!")
+		social.whisper(friends[1], ch.name, "Want to hunt later?")
 		await _physics(40)
 		world.hud.toggle_window("community")
 		world.hud.windows["community"].tab = 1
 		await _frames(3)
 		await _shot("social")
 		world.hud.toggle_window("community")
-		social.on_shop_view(_me().peer, friends[1].peer)
-		await _physics(3)
-		await _frames(3)
-		await _shot("player_shop")
-		world.hud.windows["player_shop"].visible = false
 		for f in friends:
 			social.left(f)
 			Net.server.sessions.erase(f.peer)

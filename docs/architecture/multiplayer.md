@@ -105,13 +105,12 @@ monsters it splits into (those sleep, dead, until their parent is defeated).
 each other: chat and its slash commands, invitations (`ev_invite` / `req_invite_answer`),
 buddies (kept on the Character), parties (server memory only; `party_shares` hands out kill
 EXP), trades (offers are held by the server until both press Trade, then swapped, or handed
-back on cancel), guilds (saved in `guilds.data` next to the character saves), fame, and player
-shops on maps with `MapDef.market`. Each player gets a summary of their buddies, party and
+back on cancel), guilds (saved in `guilds.data` next to the character saves) and fame. Each player gets a summary of their buddies, party and
 guild through `ev_social` whenever it changes (`Game.social`); the community window, the
-player menu, the party HP list and the trade and shop windows (`scripts/ui/windows/`) read it.
+player menu, the party HP list and the trade window (`scripts/ui/windows/`) read it.
 
 `TDSocial` holds the shared state and is what the server and `Net` call; the work is done by
 its parts in `scripts/server/social/`, one per section: `SocialChat` (chat and slash commands),
-`SocialParties` (invitations, buddies, parties), `SocialTrade`, `SocialGuilds` (guilds and fame)
-and `SocialShops` (player shops). A new social feature gets its own part (extend `SocialPart`)
+`SocialParties` (invitations, buddies, parties), `SocialTrade` and `SocialGuilds` (guilds and
+fame). A new social feature gets its own part (extend `SocialPart`)
 and a forwarding method on `TDSocial`.

@@ -271,20 +271,8 @@ func test_the_start_is_reachable_from_every_map() -> void:
 
 func test_every_town_has_a_storage_keeper() -> void:
 	for m: MapDef in Content.maps.values():
-		if m.town and m.id != &"free_market" and m.id != Character.START_MAP:
+		if m.town and m.id != Character.START_MAP:
 			check(m.npcs.any(func(p: NpcPlacement) -> bool: return p.npc and p.npc.storage), "%s: town has no storage keeper" % Scan.where(m))
-
-func test_market_maps_have_a_market_clerk() -> void:
-	var markets := 0
-	for m: MapDef in Content.maps.values():
-		if m.market:
-			markets += 1
-			check(m.npcs.any(func(p: NpcPlacement) -> bool: return p.npc and p.npc.market), "%s: market map without a market NPC" % Scan.where(m))
-	check(markets >= 1, "there is a Free Market map")
-	for m: MapDef in Content.maps.values():
-		for p in m.npcs:
-			if p and p.npc and p.npc.market:
-				check(m.market, "%s: %s helps set up shops on a map that isn't a market" % [Scan.where(m), p.npc.id])
 
 ## Monsters kept in the game's files that no map spawns yet: Ember Hollow's boss, left over
 ## when Dawnrise Isle's Ember Hollow became Fern Hollow (its fire monsters now hold

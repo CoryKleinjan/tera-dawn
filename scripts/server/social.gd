@@ -2,14 +2,13 @@ class_name TDSocial
 extends RefCounted
 ## Everything players do with each other, run by the server: chat (map, whisper, party,
 ## guild, buddies), invitations, buddy lists, parties (with shared EXP), trading,
-## guilds, fame, and player shops in the free market.
+## guilds and fame.
 ##
 ## Each player's client gets a summary of their buddies, party and guild (`ev_social`)
-## whenever it changes, and the state of their trade (`ev_trade`) and of any player shop
-## they're looking at (`ev_player_shop`).
+## whenever it changes, and the state of their trade (`ev_trade`).
 ##
 ## This holds the shared state and the lookups; the work is split into parts under
-## scripts/server/social/ (chat, parties, trades, guilds, player shops). The methods the
+## scripts/server/social/ (chat, parties, trades, guilds). The methods the
 ## server and Net call are all here and hand off to the right part.
 
 const PARTY_MAX := 6
@@ -21,7 +20,6 @@ const GUILD_LEVEL := 10
 const FAME_LEVEL := 15
 const FAME_REPEAT_DAYS := 30
 const TRADE_SLOTS := 9
-const SHOP_SLOTS := 12
 const CHAT_MAX := 120
 ## Share of a kill's EXP every other party member on the map gets.
 const PARTY_SHARE := 0.4
@@ -46,14 +44,6 @@ class Trade:
 	func other(peer: int) -> int:
 		return peers[1] if peers[0] == peer else peers[0]
 
-class Shop:
-	var owner := 0
-	var title := ""
-	## [ItemStack, price] for each thing still for sale
-	var items: Array = []
-	## peers with the shop open
-	var viewers := {}
-
 var server: TDServer
 var parties := {}
 var party_ids := 0
@@ -65,8 +55,6 @@ var invites := {}
 var invite_ids := 0
 ## peer -> Trade (both peers of a trade share one)
 var trades := {}
-## owner peer -> Shop
-var shops := {}
 ## peer -> the last social summary sent
 var _sent := {}
 
@@ -74,7 +62,6 @@ var chat: SocialChat
 var party: SocialParties
 var trade: SocialTrade
 var guild: SocialGuilds
-var market: SocialShops
 
 func _init(s: TDServer, save_folder: String) -> void:
 	server = s
@@ -82,7 +69,6 @@ func _init(s: TDServer, save_folder: String) -> void:
 	party = SocialParties.new(self)
 	trade = SocialTrade.new(self)
 	guild = SocialGuilds.new(self)
-	market = SocialShops.new(self)
 	guild_path = save_folder.path_join("guilds.data")
 	guild.load_guilds()
 
@@ -126,10 +112,6 @@ func left(p: SimPlayer) -> void:
 	var peer := p.peer
 	if trades.has(peer):
 		cancel_trade(peer, "%s left." % p.character.name)
-	if shops.has(peer):
-		close_shop(peer)
-	for s: Shop in shops.values():
-		s.viewers.erase(peer)
 	var pt := party_of(p.character.name)
 	if pt:
 		party.leave(pt, p.character.name, "%s left the game." % p.character.name)
@@ -138,14 +120,10 @@ func left(p: SimPlayer) -> void:
 			invites.erase(id)
 	_sent.erase(peer)
 
-## A player moved to another map: trades, their shop and shop visits end.
+## A player moved to another map: trades end.
 func changed_map(p: SimPlayer) -> void:
 	if trades.has(p.peer):
 		cancel_trade(p.peer, "%s left the map." % p.character.name)
-	if shops.has(p.peer):
-		close_shop(p.peer)
-	for s: Shop in shops.values():
-		s.viewers.erase(p.peer)
 
 func step(tick: int) -> void:
 	if tick % 30 != 0:
@@ -228,23 +206,3 @@ func save_guilds() -> void:
 
 func on_fame(peer: int, target_peer: int, up: bool) -> void:
 	guild.on_fame(peer, target_peer, up)
-
-func on_shop_open(peer: int, title: String, entries: Array) -> void:
-	market.on_open(peer, title, entries)
-
-func on_shop_view(peer: int, owner: int) -> void:
-	market.on_view(peer, owner)
-
-func on_shop_buy(peer: int, owner: int, index: int, item_id: StringName) -> void:
-	market.on_buy(peer, owner, index, item_id)
-
-func on_shop_leave(peer: int, owner: int) -> void:
-	market.on_leave(peer, owner)
-
-func close_shop(owner: int) -> void:
-	market.close(owner)
-
-## The shop sign over a player, or "".
-func shop_title(peer: int) -> String:
-	var s: Shop = shops.get(peer)
-	return s.title if s else ""

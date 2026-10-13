@@ -25,8 +25,8 @@
       "fame_down"
     ],
     [
-      "shop_sign",
-      "market_stall",
+      "",
+      "",
       "whisper_icon",
       "buddy_add_icon"
     ]
@@ -167,29 +167,6 @@
           27
         ]
       ]
-    },
-    "shop_sign": {
-      "scale": 1.1232,
-      "blank": [
-        [
-          0,
-          0,
-          164,
-          27
-        ]
-      ]
-    },
-    "market_stall": {
-      "scale": 1.073,
-      "blank": [
-        [
-          0,
-          0,
-          226,
-          27
-        ]
-      ],
-      "save": false
     },
     "whisper_icon": {
       "scale": 1.2926,

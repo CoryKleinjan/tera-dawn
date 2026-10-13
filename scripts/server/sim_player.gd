@@ -137,6 +137,6 @@ func motion() -> Array:
 	return [peer, position.x, position.y, face, animation, flags]
 
 ## What else other clients need to draw this player, which changes rarely:
-## [name, level, job, guild, chair, pet, look] (the map adds their shop sign).
+## [name, level, job, guild, chair, pet, look].
 func info() -> Array:
 	return [character.name, character.level, character.job.id, character.guild, chair, character.pet, character.look()]

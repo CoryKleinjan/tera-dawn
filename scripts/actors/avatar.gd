@@ -17,8 +17,6 @@ var flags := 0
 var known := false
 var job := &""
 var guild := ""
-## The sign over their shop, or "" when they aren't minding one.
-var shop_title := ""
 var speech := ""
 var speech_t := 0
 ## How they're drawn: the rig, their chair and pet (see HeroBody).
@@ -59,7 +57,7 @@ func apply(state: Array) -> void:
 		position = target # first sight or a portal hop: no gliding across the map
 	known = true
 
-## Takes their [name, level, job, guild, chair, pet, look, shop sign], sent when it changes.
+## Takes their [name, level, job, guild, chair, pet, look], sent when it changes.
 func apply_info(info: Array) -> void:
 	char_name = info[0]
 	level = info[1]
@@ -69,7 +67,6 @@ func apply_info(info: Array) -> void:
 	pet = StringName(str(info[5]))
 	if info[6] is Dictionary:
 		look = info[6]
-	shop_title = str(info[7])
 
 ## They used a skill: restart its animation even if it's the same one as last time (a buff
 ## or spell makes no motion: they flash its colour instead).

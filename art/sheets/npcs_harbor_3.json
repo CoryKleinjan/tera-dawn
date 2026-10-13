@@ -8,7 +8,7 @@
     [
       "guild_clerk_1",
       "",
-      "market_clerk_1",
+      "",
       "",
       "pet_keeper_1",
       "",
@@ -20,7 +20,7 @@
     [
       "guild_clerk_2",
       "",
-      "market_clerk_2",
+      "",
       "",
       "pet_keeper_2",
       ""
@@ -45,34 +45,6 @@
           86,
           0,
           240,
-          20
-        ]
-      ]
-    },
-    "market_clerk_1": {
-      "scale": 0.2224,
-      "blank": [
-        [
-          0,
-          0,
-          201,
-          26
-        ]
-      ]
-    },
-    "market_clerk_2": {
-      "scale": 0.2224,
-      "blank": [
-        [
-          0,
-          0,
-          68,
-          20
-        ],
-        [
-          108,
-          0,
-          203,
           20
         ]
       ]
@@ -110,25 +82,6 @@
       "baseline": "bottom",
       "out": "assets/sprites/npcs/guild_clerk.png",
       "sprite_frames": "assets/animations/npc_guild_clerk.tres",
-      "animations": {
-        "idle": {
-          "frames": [
-            "idle1",
-            "idle2"
-          ],
-          "fps": 1.5
-        }
-      }
-    },
-    "market_clerk": {
-      "frames": {
-        "idle1": "npcs_harbor_3:market_clerk_1",
-        "idle2": "npcs_harbor_3:market_clerk_2"
-      },
-      "anchor": "head",
-      "baseline": "bottom",
-      "out": "assets/sprites/npcs/market_clerk.png",
-      "sprite_frames": "assets/animations/npc_market_clerk.tres",
       "animations": {
         "idle": {
           "frames": [
