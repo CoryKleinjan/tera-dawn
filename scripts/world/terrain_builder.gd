@@ -42,6 +42,8 @@ const FLOOR_EDGE_PIECES := 4
 const FLOOR_FILL_TOP := 10.0
 ## How tall the band of rock under the floor's edge is before plain soil, in game pixels.
 const FLOOR_ROCK := 128.0
+## Draws a tall wall with its sides kept straight up and down on screen.
+const UPRIGHT_SHADER := preload("res://shaders/upright_wall.gdshader")
 
 ## The floor is flat, like the floating platforms: its top edge is the biome's platform middle
 ## pieces repeated along the whole map (the walking surface row on the floor's top), and the
@@ -95,20 +97,32 @@ static func floor_edge(biome: BiomeDef) -> ImageTexture:
 ## A flat strip facing the camera at depth z covering `rect` (game pixels), with `texture`
 ## repeating every `tile` game pixels across and down: lined up with the world's x (so
 ## neighbouring strips run on), or starting at the strip's own left edge when not `world_x`.
-func _strip(name_: String, texture: Texture2D, rect: Rect2, tile: Vector2, z: float, world_x := true) -> MeshInstance3D:
+## An `upright` strip keeps its sides straight up and down on screen (UPRIGHT_SHADER).
+func _strip(name_: String, texture: Texture2D, rect: Rect2, tile: Vector2, z: float, world_x := true, upright := false) -> MeshInstance3D:
 	var q := QuadMesh.new()
 	q.size = rect.size / TDStage.PX
-	var m := StandardMaterial3D.new()
-	m.albedo_texture = texture
-	m.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
-	m.texture_repeat = true
-	m.uv1_scale = Vector3(rect.size.x / tile.x, rect.size.y / tile.y, 1.0)
-	m.uv1_offset = Vector3(rect.position.x / tile.x if world_x else 0.0, 0.0, 0.0)
-	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_SCISSOR
-	m.alpha_scissor_threshold = 0.5
-	m.alpha_antialiasing_mode = BaseMaterial3D.ALPHA_ANTIALIASING_ALPHA_TO_COVERAGE
-	m.roughness = 1.0
-	q.material = m
+	var uv_scale := Vector2(rect.size.x / tile.x, rect.size.y / tile.y)
+	var uv_offset := Vector2(rect.position.x / tile.x if world_x else 0.0, 0.0)
+	if upright:
+		var u := ShaderMaterial.new()
+		u.shader = UPRIGHT_SHADER
+		u.set_shader_parameter(&"albedo_tex", texture)
+		u.set_shader_parameter(&"uv_scale", uv_scale)
+		u.set_shader_parameter(&"uv_offset", uv_offset)
+		u.set_shader_parameter(&"top", q.size.y / 2.0)
+		q.material = u
+	else:
+		var m := StandardMaterial3D.new()
+		m.albedo_texture = texture
+		m.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
+		m.texture_repeat = true
+		m.uv1_scale = Vector3(uv_scale.x, uv_scale.y, 1.0)
+		m.uv1_offset = Vector3(uv_offset.x, uv_offset.y, 0.0)
+		m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_SCISSOR
+		m.alpha_scissor_threshold = 0.5
+		m.alpha_antialiasing_mode = BaseMaterial3D.ALPHA_ANTIALIASING_ALPHA_TO_COVERAGE
+		m.roughness = 1.0
+		q.material = m
 	var mi := MeshInstance3D.new()
 	mi.name = name_
 	mi.mesh = q
@@ -143,7 +157,7 @@ func _solid_wall(map: MapDef, platform: int, biome: BiomeDef) -> void:
 	var x0 := d.x + inset.x
 	var x1 := d.x + d.width - inset.y
 	var rect := Rect2(x0, top, x1 - x0, bottom - top)
-	_add(_strip("SolidWall", biome.ground_side, rect, TDStage.art_size(biome.ground_side), TDStage.LAND_FRONT - 0.01))
+	_add(_strip("SolidWall", biome.ground_side, rect, TDStage.art_size(biome.ground_side), TDStage.LAND_FRONT - 0.01, true, true))
 	# each end gets the biome's corner stones, or else the square end stones' own outline
 	for right in [false, true]:
 		var corner: Texture2D = biome.terrace_corner_right if right else biome.terrace_corner_left
@@ -156,7 +170,7 @@ func _solid_wall(map: MapDef, platform: int, biome: BiomeDef) -> void:
 		var tile := TDStage.art_size(corner)
 		var x := x1 - tile.x + out if right else x0 - out
 		var r := Rect2(x, top, tile.x, rect.size.y)
-		_add(_strip("TerraceCorner", corner, r, tile, TDStage.LAND_FRONT - 0.005, false))
+		_add(_strip("TerraceCorner", corner, r, tile, TDStage.LAND_FRONT - 0.005, false, true))
 
 ## The game-y span a platform's painted skin covers: x is the top of its grass, y the bottom.
 static func skin_span(d: PlatformDef, biome: BiomeDef) -> Vector2:
