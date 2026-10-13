@@ -8,7 +8,7 @@ extends TDWindow
 const LIST_Y := 74.0
 const ROW_H := 46.0
 const ICON := 36.0
-const ROWS := 5
+const ROWS := 6
 
 var tab := 0
 var selected: StringName = &""
