@@ -11563,6 +11563,59 @@
     ],
     "text": "The first image is an empty magenta canvas. On it, paint FOUR separate skill icons for my 2D side-scrolling game, laid out in 2 rows of 2, each a square badge with softly rounded corners centred in its own quarter of the canvas and fully inside it (no badge touches or runs off any canvas edge), all the same size, with a wide band of plain magenta (at least a tenth of the canvas) around and between them, not touching. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished icons from this exact set (the new icons must look like they belong on the same sheet): match their polished silver frame with thin white-silver trim, dark slate-grey inner background, soft glow behind the subject, badge size, painting style and level of detail exactly. Each icon shows ONE bold, simple object or effect (no people, no faces) filling most of the badge, painted with the same soft brushwork and chunky painted texture as the third image (NOT flat vector shapes, NOT crisp graphic-design outlines), lit brightly enough to read clearly even when the icon is shown very small. Top left and bottom left are two takes of Ricochet: one old round grey lead musket ball (a plain ball, NOT a modern pointed bullet or cartridge) zig-zagging between three small bright impact sparks, a thin glowing yellow trail tracing its bouncing path; the bottom-left take bounces the other way. Top right and bottom right are two takes of Hunter's Mark: a bold glowing red-orange hunter's target mark, a ring with four inward points, with a green-fletched arrow flying straight into its centre; the bottom-right take shows the mark larger with the arrow coming in from the other side. Strict rules: 0) Exactly FOUR square badges, each wholly inside its quarter, no labels. 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) All four frames identical polished silver with SOFTLY ROUNDED CORNERS, exactly like the third image; never square or sharp-cornered frames. 3) No letters, words, numbers or letter-like runes anywhere. 4) Flat pure magenta #FF00FF background everywhere outside the badges."
    }
+  },
+  {
+   "id": "emberforge_city_warriors_hall",
+   "prompts": null,
+   "batch": "Emberforge city test: Warriors' Hall (new building)",
+   "with": null,
+   "refs": [],
+   "save": "emberforge_city_warriors_hall.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 thread 'Emberforge up to Dawnharbor's standard' (Cory 23:41Z 'Do it' to the Emberforge look questions): test before the full Emberforge batch; Emberforge's own tone (docs/zone-vibes.md Emberreach), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/emberforge-city/building_warriors_hall_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/emberforge-city/forge_hall_ref.png",
+     "/mnt/project-files/art-sheets/emberforge-city/forge_cottage_ref.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Emberforge, the warriors' forge town in my 2D side-scrolling game: proud, hot, hardworking and heroic, built among cinder hills and volcanic ridges, lit by warm amber forge light under an ember-brown sky. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (stone blocks, wood grain, iron rivets, soot, worn and chipped spots, slight colour variation between stones and roof tiles). The third and fourth images are two other buildings from the same town: match their style, palette (grey stone blocks, terracotta roof tiles, dark oak beams, black iron straps and rivets, orange forge-lit windows), outline thickness and level of detail exactly, so all three clearly belong to the same town. The new building is the WARRIORS' HALL, the grandest building in the town, a little wider than it is tall: a solid two-storey hall of big grey stone blocks on a heavy dark stone plinth, with stout square stone buttresses at both corners; a steep terracotta tile roof with a raised central gable; two tall stone chimneys with iron caps, one at each end of the roof; a big arched oak double door in the middle of the ground floor, bound with black iron straps and studded with rivets; tall narrow windows on both floors glowing warm orange from the forge-light inside, with iron bars; a large round shield with crossed swords mounted on the gable above the door; two long crimson cloth banners with a gold crossed-swords emblem (pictures only, no writing) hanging flat against the wall on either side of the door, fixed at top and bottom; a pair of iron braziers fixed flat to the wall beside the door, each with a small steady flame. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: its stone plinth reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, ground line, rubble, people or shadow. 3) The door is a real doorway at ground level, centred left to right in the building. 4) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 5) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. No blue roof tiles or cream plaster (that is a different town). Nothing (rope, cloth, chain) ends loose in mid-air. No smoke or glow spilling onto the background. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "emberforge_backdrop_panorama",
+   "prompts": null,
+   "batch": "Emberforge city: one 4K volcanic backdrop (test)",
+   "with": null,
+   "refs": [],
+   "save": "emberforge_backdrop_panorama.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-13 thread 'Emberforge up to Dawnharbor's standard' (Cory 23:41Z 'Do it' to the Emberforge look questions): test before the full Emberforge batch; Emberforge's own tone (docs/zone-vibes.md Emberreach), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/emberforge-city/backdrop_panorama_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/emberforge-city/forge_hall_ref.png"
+    ],
+    "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Emberforge, the warriors' forge town in my 2D side-scrolling game: proud, hot, hardworking and heroic, built among cinder hills and volcanic ridges, lit by warm amber forge light under an ember-brown sky. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (stone blocks, wood grain, iron rivets, soot, worn and chipped spots, slight colour variation between stones and roof tiles). Paint the background in that same style, a little softer and lighter in contrast so it sits behind the characters. The third image is a building from the same town: match its palette of grey stone, terracotta roofs and warm orange forge-light. The scene: a range of dark volcanic ridges and jagged cinder peaks seen across a wide valley at dusk. The ridges stand in layers, the nearest in the middle distance in deep brown-grey rock, the farther ones fading back into warm orange-red haze. One big dormant volcano in the far distance has a faint orange glow at its crater and a soft column of grey smoke drifting up. Thin glowing lava streams trickle down a few far slopes. In the middle distance, the silhouettes of a few stone forge buildings with terracotta roofs and tall chimneys sit on terraces cut into a ridge, their windows glowing orange, the chimneys letting out soft grey smoke; a stone viaduct with arches crosses between two ridges. Small glowing embers drift upward through the whole scene. Colours: dark ember-brown at the very top of the sky (#24120c), warming to a bright orange horizon (#ffb060) with amber light (#ffd0a0), and an orange-red haze (#bf592f) low in the valley. Warm and heroic, not dark or scary. Strict rules: 1) Side-on view at eye level, as if standing in the town looking out, the horizon level. 2) No people, no characters, no animals, no birds, no dragons. 3) Nothing in the near foreground: no ground, rocks, rubble or plants in front; the closest things are in the middle distance. 4) The left and right edges continue naturally (ridges and haze), nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere."
+   }
   }
  ]
 }
