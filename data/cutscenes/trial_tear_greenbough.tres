@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="CutsceneDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/cutscene_def.gd" id="1_def"]
+[ext_resource type="Script" path="res://scripts/data/cutscene_step.gd" id="2_step"]
+
+[sub_resource type="Resource" id="Bars"]
+script = ExtResource("2_step")
+kind = 2
+ticks = 30
+wait = false
+
+[sub_resource type="Resource" id="Look"]
+script = ExtResource("2_step")
+kind = 3
+ticks = 70
+at = Vector2(2150.0, 290.0)
+
+[sub_resource type="Resource" id="Sound"]
+script = ExtResource("2_step")
+kind = 11
+sound = &"portal"
+
+[sub_resource type="Resource" id="Wait"]
+script = ExtResource("2_step")
+ticks = 60
+
+[sub_resource type="Resource" id="Shout"]
+script = ExtResource("2_step")
+kind = 6
+speaker = &"greenbough_instructor"
+text = "What is that? Get back from it!"
+
+[sub_resource type="Resource" id="Back"]
+script = ExtResource("2_step")
+kind = 5
+ticks = 40
+
+[sub_resource type="Resource" id="BarsOut"]
+script = ExtResource("2_step")
+kind = 2
+ticks = 30
+amount = 0.0
+
+[resource]
+script = ExtResource("1_def")
+id = &"trial_tear_greenbough"
+steps = Array[ExtResource("2_step")]([SubResource("Bars"), SubResource("Look"), SubResource("Sound"), SubResource("Wait"), SubResource("Shout"), SubResource("Back"), SubResource("BarsOut")])

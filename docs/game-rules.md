@@ -171,8 +171,9 @@ update this page when one changes. Each zone's own look and music are in
 ## Story
 
 - The world is Morrowmere. The main story (Tera and the Dawn curse) stays hidden until well past
-  today's Lv 35 content: no in-game text names Tera's Dawn, the curse, the tears or the other
-  dawns before the story reveals them, and nobody knows what Dawnshards really are at first.
+  today's Lv 35 content: no in-game text names Tera's Dawn, the curse or the other dawns before
+  the story reveals them, and nobody knows what Dawnshards really are at first. The tears are
+  only called that (a tear or rip in the air) from the Lv 10 job test on.
 - Most quests and NPCs have nothing to do with the story. Cory reviews every story character,
   quest, cutscene and line before it goes in the game.
 - New characters wake on Daybreak Shore, the tutorial beach before Dawnrise Village. A girl
@@ -180,3 +181,8 @@ update this page when one changes. Each zone's own look and music are in
   hint shows at the bottom of the screen for each step. Her last quest opens a one-way portal
   to the village, where she stands by Elder Rowan as "Rowan's Granddaughter". Her name is never
   shown. A faint white glow sits out on the water; nobody mentions it.
+- At Lv 10 each job tutor gives a Job Test before advancing: a short course on the town's Trial
+  Ground, fought alone (every player gets their own copy, even in co-op). At the far end a tear
+  opens and one boss, the same for all five jobs (a hulking beast of pale starlit stone), steps
+  out. Beating it and handing the test in makes you that job; the tutor sends you to Archmage
+  Celest in Lumewood (Magicians are already with her).
