@@ -42,6 +42,7 @@ update this page when one changes. Each zone's own look and music are in
 - Hats fit the MapleStory way: sized to the whole head and hair, face open, lined up with the eyes.
   The steel helm sits low so its visor slits are on his eyes, with no brown part under it. No part
   of the head pokes out the side.
+- Hair below a hat's lower edge shows in full; it is never trimmed short.
 - Nothing on a hat, hood or helm covers the shoulders (no capes, mantles, collars or pads). Hoods
   have an open face. Bandanas sit low on the brow and stay small.
 - Two hairstyles for now: tousled (boy) and ponytail (girl). The other painted hair sheets are kept
@@ -100,7 +101,9 @@ update this page when one changes. Each zone's own look and music are in
 - Dawnharbor is the template city: a quay, a terrace and a cliff top, every building its own
   picture. The Free Market portal has a painted signboard beside it; the Free Market itself uses
   Dawnharbor's panorama and is empty for now.
+- Dawnharbor's store door, stone paths and cliff top stay as they are. The pier was dropped.
 - One city (Dawnharbor) and one monster zone are set exactly right before any world-wide art pass.
+  Reference maps from other games are for layout and spacing only.
 
 ## Monsters and levels
 
