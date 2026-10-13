@@ -245,3 +245,24 @@ func test_playing_saves_on_this_computer() -> void:
 	ui.hud.game_menu.characters_button.pressed.emit()
 	await ui.ticks(3)
 	check_eq(CharacterStore.new(UiHelpers.SAVE_DIR).load_character("Ann").shards, 99, "saved")
+
+func test_the_test_characters_setting_switches_when_going_back_to_character_select() -> void:
+	var was: bool = Settings.dev.test_characters
+	await _solo()
+	await _make(["Ann"])
+	Settings.dev.test_characters = true
+	ui.hud.title.leave_game()
+	await ui.ticks(2)
+	await _solo()
+	var dev_name := TestCharacters.name_for(TestCharacters.jobs()[0])
+	check(Net.saves.exists(dev_name), "test characters listed with the setting on")
+	Net.play(dev_name)
+	await ui.ticks(3)
+	Settings.dev.test_characters = false
+	ui.hud.show_title(true)
+	ui.hud.game_menu.characters_button.pressed.emit()
+	await ui.ticks(3)
+	Settings.dev.test_characters = was
+	check(ui.hud.title.character_select.visible, "character select shown")
+	check(Net.saves.exists("Ann") and not Net.saves.exists(dev_name), "back to this computer's own characters")
+	check(ui.hud.title.character_select.selected != dev_name, "the test character isn't picked")
