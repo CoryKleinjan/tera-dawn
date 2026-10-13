@@ -74,6 +74,8 @@ update this page when one changes. Each zone's own look and music are in
   No Ability Point reset on advancing. A later tutor offers the blends; the first-job tutors
   never do.
 - Every job is built to attack and be fun solo: no tank or healer jobs.
+- No job is shown or named to the player until they can choose it: no menu, list, tooltip,
+  quest or NPC line hints at a later job before then.
 - Third tier (Lv 50, planned): five jobs, each joining two blends that share no first job, so
   all four of their stats add together for damage. It uses every weapon of its four first
   jobs plus its own two-handed weapon, opens every skill of those four jobs and both blends,
