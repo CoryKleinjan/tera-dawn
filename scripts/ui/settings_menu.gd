@@ -345,7 +345,7 @@ func _build_developer() -> Control:
 		Settings.dev.test_characters = on
 		Settings.apply(Settings.dev))
 	page.add_child(test_box)
-	page.add_child(UiBuild.label("Play solo and Host use a test account with a Lv %d character of every job in its best gear.\nYour own characters stay as they are; turn this off to get back to them." % Character.MAX_LEVEL, 12, Palette.MUTED))
+	page.add_child(UiBuild.label("Character select lists a Lv %d test character of every job in its best gear.\nYour own characters stay as they are; turn this off to get back to them." % Character.MAX_LEVEL, 12, Palette.MUTED))
 	var rebuild := UiStyle.menu_button("Rebuild test characters", Vector2(280, 40), 16)
 	rebuild.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 	rebuild.pressed.connect(func() -> void:

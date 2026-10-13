@@ -25,6 +25,9 @@ const GROUND := 600.0
 class Capture extends MultiplayerAPIExtension:
 	## [peer, method, args] in the order they were sent.
 	var sent: Array = []
+	## The last character data each player's game was sent to save (ev_save), by name in
+	## lower case: what's saved on their computer. Kept through `clear` and `restart`.
+	var saves := {}
 	var peers := PackedInt32Array()
 	var sender := 0
 	var _peer: MultiplayerPeer = OfflineMultiplayerPeer.new()
@@ -34,6 +37,8 @@ class Capture extends MultiplayerAPIExtension:
 
 	func _rpc(peer: int, _object: Object, method: StringName, args: Array) -> Error:
 		sent.append([peer, method, args])
+		if method == &"ev_save":
+			saves[str(args[0].get("name", "")).to_lower()] = args[0]
 		return OK
 
 	func _get_unique_id() -> int:
@@ -75,11 +80,9 @@ func _init() -> void:
 	add_map(town_def())
 	_new_server()
 
-## A server on `dir` that checks passwords at once (on this thread, with few rounds).
+## A server on `dir`.
 func _new_server() -> void:
-	PasswordHash.rounds = 64
 	server = TDServer.new(dir)
-	server.lobby.background = false
 	Net.server = server
 
 ## Frees the server, deletes its saves and takes out everything put in Content.
@@ -88,7 +91,6 @@ func close() -> void:
 		server.free()
 		server = null
 	Net.server = _old_server
-	PasswordHash.rounds = PasswordHash.ROUNDS
 	Engine.get_main_loop().set_multiplayer(null, ^"/root/Net")
 	for table: String in _added:
 		var t: Dictionary = Content.get(table)
@@ -119,8 +121,7 @@ static func made() -> Dictionary:
 	return NewCharacter.new().to_dict()
 
 ## Plays `char_name` on `peer` (making them with the creator's defaults if they're new) and
-## puts them on `map` at `x` (on the floor). Each character gets its own account (see
-## `log_in`). Clears the events sent so far.
+## puts them on `map` at `x` (on the floor). Clears the events sent so far.
 func join(peer: int, char_name: String, map := FIELD, x := 300.0) -> SimPlayer:
 	play(peer, char_name)
 	var p: SimPlayer = server.sessions.get(peer)
@@ -131,23 +132,21 @@ func join(peer: int, char_name: String, map := FIELD, x := 300.0) -> SimPlayer:
 	clear()
 	return p
 
-## Logs `peer` in to `username`'s account without a password (made if it's new).
-func log_in(peer: int, username: String) -> Dictionary:
+## Brings `char_name` into the game on `peer` the way a player's game does (req_play): as
+## last saved (`saved`), or new with the creator's choices (`look`, or the defaults).
+func play(peer: int, char_name: String, look := {}) -> void:
 	if not api.peers.has(peer):
 		api.peers.append(peer)
-	var a := server.lobby.accounts.load_account(username)
-	if a.is_empty():
-		a = AccountStore.make(username, {})
-		server.lobby.accounts.save(a)
-	server.lobby.log_in(peer, a)
-	return a
+	var data: Dictionary = api.saves.get(char_name.to_lower(), {})
+	if data.is_empty():
+		var made := NewCharacter.from_dict(look if not look.is_empty() else made())
+		data = Character.create(char_name, Character.START_JOB, made).to_dict()
+	server.lobby.on_play(peer, data)
 
-## Logs in to the account "acct_<name>", makes `char_name` there if it's new, and plays it.
-func play(peer: int, char_name: String, look := {}) -> void:
-	var a := log_in(peer, "acct_" + char_name.to_lower().replace(" ", "_"))
-	if not AccountStore.owns(a, char_name):
-		server.lobby.on_create(peer, char_name, look if not look.is_empty() else made())
-	server.lobby.on_play(peer, char_name)
+## The character `char_name` as their game last saved it (ev_save), or null.
+func saved(char_name: String) -> Character:
+	var data: Dictionary = api.saves.get(char_name.to_lower(), {})
+	return CharacterStore.from_dict(data) if not data.is_empty() else null
 
 ## Takes `peer` off the server the way a disconnect does.
 func leave(peer: int) -> void:

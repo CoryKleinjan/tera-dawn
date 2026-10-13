@@ -148,7 +148,7 @@ func test_storing_costs_a_fee() -> void:
 	check_eq(c.shards, 25 - Character.STORE_FEE, "fee paid")
 	check_eq(c.storage.count_of(leaf), 6, "in storage")
 	check(c.inventory.at(ItemDef.Tab.ETC, 0) == null, "out of the bag")
-	check(h.server.store.load_character("Ann").storage.count_of(leaf) == 6, "saved at once")
+	check(h.saved("Ann").storage.count_of(leaf) == 6, "saved at once")
 
 func test_storing_without_the_fee_is_refused() -> void:
 	h.place(p, KEEPER_X)

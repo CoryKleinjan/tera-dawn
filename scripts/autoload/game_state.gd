@@ -1,8 +1,7 @@
 extends Node
 ## Autoload "Game": this player's side of the game. It keeps a copy of the player's own
-## Character (`me`) that the server refreshes, fonts, and the username and server address
-## typed on the title screen (saved with the other settings, see the Settings autoload;
-## the password is never saved).
+## Character (`me`) that the server refreshes, fonts, and the host address last typed on
+## the title screen (saved with the other settings, see the Settings autoload).
 ## The real Character lives on the server (see TDServer); to change it, ask through Net.
 
 ## The input action of each quickslot (Character.quickslots), in order.
@@ -15,9 +14,8 @@ signal character_changed
 var me: Character
 ## Buddies, party and guild as the server last described them (TDSocial.summary).
 var social := {}
-## The username and server last logged in to.
-var last_username := ""
-var last_address := "127.0.0.1"
+## The friend's game last joined (address, with :port when it isn't the usual one).
+var last_address := ""
 
 var ui_font: Font
 var num_font: Font
@@ -43,14 +41,13 @@ func apply_vitals(hp: int, mp: int, xp: int, level: int, shards: int) -> void:
 	me.xp = xp
 	me.shards = shards
 
-## Remembers the username and server address in settings.cfg (never the password).
+## Remembers the host address in settings.cfg.
 func save_settings() -> void:
-	if Settings.file.has_section_key("player", "name"):
-		Settings.file.erase_section_key("player", "name") # from before accounts
-	Settings.file.set_value("player", "username", last_username)
+	for old in ["name", "username"]: # from before characters were saved on each computer
+		if Settings.file.has_section_key("player", old):
+			Settings.file.erase_section_key("player", old)
 	Settings.file.set_value("player", "address", last_address)
 	Settings.save()
 
 func _load_settings() -> void:
-	last_username = str(Settings.file.get_value("player", "username", last_username))
 	last_address = str(Settings.file.get_value("player", "address", last_address))

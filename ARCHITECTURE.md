@@ -30,8 +30,8 @@ data/*.tres  ──►  Content (autoload)  ──►  World loads a MapDef  ─
   monsters, NPCs and drops.
 - **World** (`scripts/world/`) shows the map you're on: `world.gd` builds it and shows the
   server's events (camera in `WorldCamera`, snapshots through `SnapshotSync`), `stage.gd` and its builders turn a map into the HD-2D diorama.
-- **UI** (`scripts/ui/`) draws the HUD (`TDHud`) and the title screen (`TDTitleScreen`, the
-  login flow) from the sliced UI sheets through `UiSkin` (art), `UiStyle` (styled controls) and
+- **UI** (`scripts/ui/`) draws the HUD (`TDHud`) and the title screen (`TDTitleScreen`,
+  solo, host or join) from the sliced UI sheets through `UiSkin` (art), `UiStyle` (styled controls) and
   `WorldSkin` (bars, tags and bubbles over the world).
 - **Art** is painted sheets in `art/source/`, cut by `tools/art/slice_sheets.py`
   (see [art](docs/architecture/art.md) and `art/sheets/README.md`).
@@ -42,7 +42,7 @@ second. Only the stage turns that into 3D (32 game pixels per 3D unit).
 ## Pages
 
 - [Game rules](docs/game-rules.md): how the game should look and play; read it before any change.
-- [Multiplayer, accounts and players together](docs/architecture/multiplayer.md): the server, client, snapshots, accounts and character select, parties and trades.
+- [Multiplayer and players together](docs/architecture/multiplayer.md): the server, client, snapshots, co-op and characters saved on each computer, parties and trades.
 - [Characters: looks, extras, balance and player actions](docs/architecture/characters.md): character creation, the paperdoll hero, chairs, pets, Monster Book, achievements, balance, how to add a player action.
 - [Folders](docs/architecture/folders.md): what lives in each folder.
 - [Draw order and the HD-2D stage](docs/architecture/rendering.md): the 3D layers, depths and pixel size of the diorama, world-anchored text.

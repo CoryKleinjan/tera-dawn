@@ -188,4 +188,4 @@ func test_fame_is_saved() -> void:
 	_famous()
 	h.ask(2, &"req_fame", [3, true])
 	h.leave(3)
-	check_eq(h.server.store.load_character("Bob").fame, 1, "Bob's fame saved")
+	check_eq(h.saved("Bob").fame, 1, "Bob's fame saved")

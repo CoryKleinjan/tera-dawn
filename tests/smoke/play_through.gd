@@ -12,7 +12,7 @@ var talk: TDDialogueWindow
 func start_game() -> void:
 	await _ticks(5)
 	_check(not world.started and world.hud.title.visible, "the game opens on the title screen")
-	world.hud.title._on_play()
+	world.hud.title._on_solo()
 	await _ticks(2)
 	var select := world.hud.title.character_select
 	_check(select.visible and not world.hud.title.title_card.visible and Net.characters.is_empty(), "Play solo opens an empty character select")
@@ -370,12 +370,12 @@ func faint() -> void:
 	await _ticks(SimPlayer.FAINT_TICKS + 5)
 	_check(not p.fainted() and world.map.id == Character.START_MAP and Game.me.health.hp > 0, "after fainting the player wakes up in town")
 
-## Leaving the game for character select and logging out.
+## Leaving the world for character select, then the game.
 func leave() -> void:
 	world.hud.show_title(true)
 	world.hud.game_menu.characters_button.pressed.emit()
 	await _ticks(2)
-	_check(world.hud.title.character_select.visible and not world.started and Net.mode == Net.Mode.SINGLE, "Character select in the menu leaves the world but stays logged in")
-	world.hud.title.character_select.logout_button.pressed.emit()
-	_check(Net.mode == Net.Mode.NONE and world.hud.title.title_card.visible, "Log out goes back to the title screen")
+	_check(world.hud.title.character_select.visible and not world.started and Net.mode == Net.Mode.SINGLE, "Character select in the menu leaves the world but stays in the game")
+	world.hud.title.character_select.leave_button.pressed.emit()
+	_check(Net.mode == Net.Mode.NONE and world.hud.title.title_card.visible, "Back goes to the title screen")
 	_check(CharacterStore.new(save_dir).load_character("Tester") != null, "leaving saves the character")

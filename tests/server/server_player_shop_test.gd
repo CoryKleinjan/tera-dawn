@@ -113,7 +113,7 @@ func test_leaving_the_game_closes_the_shop_and_keeps_the_things() -> void:
 	_open()
 	h.leave(2)
 	check(not h.server.social.shops.has(2), "closed")
-	check_eq(h.server.store.load_character("Ann").inventory.count_of(leaf), 10, "saved with the leaves")
+	check_eq(h.saved("Ann").inventory.count_of(leaf), 10, "saved with the leaves")
 
 func test_shop_keepers_stay_put() -> void:
 	_open()

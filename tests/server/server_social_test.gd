@@ -251,7 +251,7 @@ func test_buddies_are_told_when_you_come_online() -> void:
 func test_buddies_are_saved_with_the_character() -> void:
 	_accept(2, "buddy", 3)
 	h.leave(2)
-	check_has(h.server.store.load_character("Ann").buddies, "Bob", "saved")
+	check_has(h.saved("Ann").buddies, "Bob", "saved")
 
 func test_the_social_summary_shows_buddies_online() -> void:
 	_accept(2, "buddy", 4)

@@ -378,7 +378,7 @@ func _build_title() -> void:
 	game_menu.resumed.connect(resume)
 	game_menu.settings_requested.connect(func() -> void: open_settings())
 	game_menu.to_characters.connect(_on_to_characters)
-	game_menu.logged_out.connect(title.log_out)
+	game_menu.left.connect(title.leave_game)
 	game_menu.quit.connect(_quit)
 
 	settings_menu = TDSettingsMenu.new()
