@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="SkillDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
+[ext_resource type="Resource" path="res://data/projectiles/mob_shadow.tres" id="p_mob_shadow"]
+[ext_resource type="Resource" path="res://data/effects/arcane_claw_hit.tres" id="e_arcane_claw_hit"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/ice_spike.png" id="i_icon"]
+
+[resource]
+script = ExtResource("1_skill_def")
+id = &"starfall"
+display_name = "Starfall"
+job = &"hexcaster"
+max_level = 10
+kind = 0
+description = "The finisher. Dark stars rain across the screen ahead on up to 10 monsters, three hits each, and one more on any monster you have hexed."
+icon = ExtResource("i_icon")
+magic = true
+damage_multiplier = 1.2
+damage_per_level = 0.11111
+hits = 3
+hexed_extra_hits = 1
+max_targets = 10
+aims = false
+reach = 420.0
+height = 220.0
+cooldown = 40
+action_ticks = 30
+mp_cost = 30
+mp_cost_per_level = 1.11111
+recharge = 20.0
+recharge_per_level = -0.88889
+animation = &"slash"
+flash = Color(0.7, 0.55, 1.0, 1)
+projectile = ExtResource("p_mob_shadow")
+hit_effect = ExtResource("e_arcane_claw_hit")

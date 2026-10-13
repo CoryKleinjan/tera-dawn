@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="SkillDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
+[ext_resource type="Resource" path="res://data/effects/swish.tres" id="e_swish"]
+[ext_resource type="Resource" path="res://data/effects/hit.tres" id="e_hit"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/shadow_fang.png" id="i_icon"]
+
+[resource]
+script = ExtResource("1_skill_def")
+id = &"blade_storm"
+display_name = "Blade Storm"
+job = &"swashbuckler"
+max_level = 10
+kind = 0
+description = "The finisher. Spin through the air slashing and shooting all around you: six hits on up to 8 monsters."
+icon = ExtResource("i_icon")
+damage_multiplier = 0.6
+damage_per_level = 0.05556
+hits = 6
+max_targets = 8
+around = true
+aims = false
+reach = 150.0
+height = 140.0
+mp_cost = 25
+mp_cost_per_level = 1.11111
+recharge = 18.0
+recharge_per_level = -0.88889
+cooldown = 44
+action_ticks = 34
+animation = &"slash"
+effect = ExtResource("e_swish")
+hit_effect = ExtResource("e_hit")

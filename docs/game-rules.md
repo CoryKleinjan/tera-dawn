@@ -64,6 +64,18 @@ update this page when one changes. Each zone's own look and music are in
   buff, a party buff (reaches party members nearby) and a passive. Their max levels add up to the
   SP earned from Lv 10 to 30, so all are maxed by the second tier at Lv 30. No finishers in the
   first job; later tiers get them.
+- Second tier (Lv 30): every first job picks one of two blends of itself and another first job:
+  Spellblade (Warrior + Magician), Hexcaster (Magician + Thief), Swashbuckler (Thief + Pirate),
+  Sharpshooter (Pirate + Archer), Wildhunter (Archer + Warrior). A blend is the same job from
+  either side. It keeps its own first-job skills, opens all of the other job's first-job skills,
+  and adds its own finisher and signature skill (max 10 each); 4 Skill Points a level, so
+  everything is maxed by the third tier at Lv 50. Both stats add together for damage (no
+  averaging); Auto splits points evenly. It wields every weapon and off-hand of both jobs.
+  No Ability Point reset on advancing.
+- Every job is built to attack and be fun solo: no tank or healer jobs.
+- Third tier (Lv 50, planned): five jobs, each joining two blends that share no first job, so
+  each cares about four stats; each also gets its own two-handed weapon.
+- Max level is 100.
 - Off-hand slot (once the Shield slot): Warriors and Beginners wear a shield, a Thief throwing
   stars (with a dagger in hand), a Magician a book, an Archer a quiver worn on the back, a Pirate a pistol (with knuckles). Stars
   and pistols never run out. A Thief's dagger hits one monster and the stars hit a crowd; a

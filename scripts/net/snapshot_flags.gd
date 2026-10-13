@@ -15,6 +15,12 @@ const MOB_WINDUP := 32
 const MOB_HIDDEN := 64
 ## A boss past its second wind (half HP): clients give it an angry glow.
 const MOB_ENRAGED := 128
+## Hexed (SkillDef.hex): clients tint it violet.
+const MOB_HEXED := 256
+## Rooted (SkillDef.root): clients tint it green.
+const MOB_ROOTED := 512
+## Burning (SkillDef.burn): clients tint it ember red.
+const MOB_BURNING := 1024
 
 # ---------- players (SimPlayer.snapshot, read by TDAvatar) ----------
 const PLAYER_FAINTED := 1

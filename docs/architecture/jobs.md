@@ -23,3 +23,16 @@ at once (`ServerQuests.on_quest_complete`), and the other four jobs then report 
 A Beginner short of a job's stats may also ask its instructor for one free Ability Point reset
 per character (`req_reset_ap` → `AbilityPoints.reset`): base stats go back to the job's
 `starting_stats` and the points come back. `AbilityPoints.reset_used` is saved with the rest.
+
+## How to add a blend (second tier)
+
+A blend is a JobDef with `advances_from` and `partner` set to its two first jobs and
+`secondary_stat` set to the partner's stat. Either parent can advance into it
+(`JobDef.opens_from`); the character remembers which (`Character.came_from`, saved), and
+`Character.job_path` runs back through that one. `Character.job_line` adds the other parent,
+so its skill book opens too (the skill window shows its tab just before the blend's).
+Damage adds both stats together (`JobDef.damage_stat_value`, and Magic Attack for a blend with
+INT); Auto splits points evenly (`AbilityPoints.auto_plan`); it wears either parent's gear
+(`JobDef.wear_families`). Add its id to both parents' instructors' `instructs`. Until the
+tear tutors exist, the first-job instructors hand out the blends at Lv 30.
+

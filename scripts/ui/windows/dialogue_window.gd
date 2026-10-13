@@ -182,7 +182,7 @@ func _jobs_offered() -> Array[JobDef]:
 	var out: Array[JobDef] = []
 	for id in npc.def.instructs:
 		var j: JobDef = Content.jobs.get(id)
-		if j and j.advances_from == Game.me.job.id:
+		if j and j.opens_from(Game.me.job.id):
 			out.append(j)
 	return out
 

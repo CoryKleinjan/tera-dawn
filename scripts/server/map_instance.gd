@@ -170,47 +170,149 @@ func toss_to(p: SimPlayer, item: ItemDef) -> void:
 
 ## How much harder a melee blow knocks a monster back than a shot does.
 const MELEE_KNOCKBACK := 1.6
+## How far a shot bounces (SkillDef.bounce) or a spark jumps (SkillDef.spark) to the next
+## monster, and how far a mark jumps when its monster falls (SkillDef.mark_bonus).
+const BOUNCE_REACH := 220.0
+const MARK_JUMP := 420.0
 
 ## Resolves a player's skill against the monsters in front of them (or above or below them,
-## for an aimed attack). Returns how many were hit.
+## for an aimed attack, or all round for one that hits `around`). Returns how many were hit.
 func use_skill(p: SimPlayer, skill: SkillDef, aim := Hitbox.Aim.AHEAD) -> int:
 	var targets := _targets(p, skill, aim)
 	var lvl := p.character.skills.level(skill)
 	var push := skill.knockback * (1.0 if skill.is_ranged() else MELEE_KNOCKBACK)
 	# [mob index, [[damage, kind], ...]] for every monster hit, shown by every client
 	var lines := []
-	var killed: Array[SimMob] = []
+	var hit_mobs: Array[SimMob] = []
+	var landed := false
 	for m in targets:
-		var hits := []
-		for i in skill.hits:
-			if m.health.is_dead():
-				break
-			var hit := Combat.player_hit(skill, m.def, p.character)
-			if hit["miss"]:
-				hits.append([0, "miss"])
-				continue
-			m.health.damage(hit["damage"])
-			hits.append([hit["damage"], "crit" if hit["crit"] else "hit"])
+		var hits := _strike(p, skill, lvl, m)
 		lines.append([m.index, hits])
+		hit_mobs.append(m)
+		landed = landed or _any_landed(hits)
+	if not targets.is_empty():
+		var extra := _bounce_target(targets, hit_mobs)
+		var element := p.character.skills.element_buff()
+		# Ricochet: a shot bounces on to one more monster
+		var bounce := p.character.skills.bounce() if skill.is_ranged() else 0.0
+		if bounce > 0.0 and extra:
+			lines.append([extra.index, _strike(p, skill, lvl, extra, bounce)])
+			hit_mobs.append(extra)
+			extra = _bounce_target(targets, hit_mobs)
+		# Elemental Edge set to lightning: a spark jumps to one more monster
+		if not element.is_empty() and p.character.skills.element == SkillBook.Element.LIGHTNING and extra:
+			var spark: float = element[0].spark_at(element[1])
+			lines.append([extra.index, _strike(p, skill, lvl, extra, spark, 1)])
+			hit_mobs.append(extra)
+		if skill.marks():
+			p.mark = targets[0].index
+			p.mark_skill = skill
+			p.mark_level = lvl
+			p.mark_t = roundi(skill.mark_time * 60.0)
+	p.streak = mini(p.streak + 1, SkillDef.STREAK_MAX) if landed else p.streak
+	var killed: Array[SimMob] = []
+	for i in hit_mobs.size():
+		var m := hit_mobs[i]
 		if m.health.is_dead():
 			killed.append(m)
-		else:
-			# up and down blows push it away from the player, whichever way they face
-			var away := p.face
-			if aim != Hitbox.Aim.AHEAD and m.position.x != p.position.x:
-				away = 1 if m.position.x > p.position.x else -1
-			m.hurt(away, p.peer, push)
-			if skill.slow_ticks(lvl) > 0:
-				m.slow(skill.slow_ticks(lvl))
+			continue
+		# up and down blows push it away from the player, whichever way they face
+		var away := p.face
+		if (aim != Hitbox.Aim.AHEAD or skill.around) and m.position.x != p.position.x:
+			away = 1 if m.position.x > p.position.x else -1
+		m.hurt(away, p.peer, push)
+		_after_hit(p, skill, lvl, m, lines[i][1])
 	broadcast(&"ev_skill", [p.peer, skill.id, p.position.x, p.position.y, p.face, lines, aim])
 	for m in killed:
 		kill_mob(m, p)
 	return targets.size()
 
+## Hits `m` with `skill` (at `lvl`) for `share` of the usual damage, `count` lines (the
+## skill's own, plus extras on a hexed monster), and takes the damage off. Returns the lines
+## as [[damage, kind], ...].
+func _strike(p: SimPlayer, skill: SkillDef, lvl: int, m: SimMob, share := 1.0, count := -1) -> Array:
+	if count < 0:
+		count = skill.hits + (skill.hexed_extra_hits if m.hexed() else 0)
+	var extra_crit := p.character.skills.streak_crit() * p.streak / 100.0
+	var boost := share * m.damage_taken() * p.mark_boost(m)
+	var hits := []
+	for i in count:
+		if m.health.is_dead():
+			break
+		var hit := Combat.player_hit(skill, m.def, p.character, extra_crit)
+		if hit["miss"]:
+			hits.append([0, "miss"])
+			continue
+		var dmg := maxi(1, roundi(hit["damage"] * boost))
+		m.health.damage(dmg)
+		hits.append([dmg, "crit" if hit["crit"] else "hit"])
+	return hits
+
+static func _any_landed(hits: Array) -> bool:
+	for h in hits:
+		if h[1] != "miss":
+			return true
+	return false
+
+## What else a hit does to a monster that's still standing: the skill's slow, root and hex,
+## and the player's running element (Elemental Edge: fire burns, ice chills).
+func _after_hit(p: SimPlayer, skill: SkillDef, lvl: int, m: SimMob, hits: Array) -> void:
+	if skill.slow_ticks(lvl) > 0:
+		m.slow(skill.slow_ticks(lvl))
+	if skill.root_ticks(lvl) > 0:
+		m.root(skill.root_ticks(lvl))
+	if skill.hex_at(lvl) > 0.0:
+		m.hex(skill.hex_at(lvl), skill.hex_ticks(lvl))
+	var element := p.character.skills.element_buff()
+	if element.is_empty() or not _any_landed(hits):
+		return
+	var buff: SkillDef = element[0]
+	var blvl: int = element[1]
+	match p.character.skills.element:
+		SkillBook.Element.FIRE:
+			var dealt := 0
+			for h in hits:
+				dealt += int(h[0])
+			m.set_burning(roundi(dealt * buff.burn_at(blvl) / SkillDef.BURN_SECONDS), SkillDef.BURN_SECONDS * SimMob.BURN_EVERY, p.peer)
+		SkillBook.Element.ICE:
+			m.slow(buff.slow_ticks(blvl))
+
+## The nearest standing monster within BOUNCE_REACH of the last of `targets` that `hit`
+## doesn't already hold, or null.
+func _bounce_target(targets: Array[SimMob], hit: Array[SimMob]) -> SimMob:
+	var from := targets[-1].body_position()
+	var best: SimMob = null
+	for m in mobs:
+		if m.dead or m.health.is_dead() or m in hit:
+			continue
+		var d := m.body_position().distance_to(from)
+		if d <= BOUNCE_REACH and (best == null or d < best.body_position().distance_to(from)):
+			best = m
+	return best
+
+## A burning monster's burn goes off (SimMob.step, once a second).
+func burn(m: SimMob) -> void:
+	var dmg := mini(m.burn_damage, m.health.hp)
+	if dmg <= 0:
+		return
+	m.health.damage(dmg)
+	m.show_hp = SimMob.SHOW_HP_TICKS
+	var at := m.body_position()
+	broadcast(&"ev_number", [at.x, at.y - m.def.size.y, dmg, "hit"])
+	if m.health.is_dead():
+		var by := players.get(m.burn_by) as SimPlayer
+		if by:
+			kill_mob(m, by)
+		else:
+			m.die()
+			broadcast(&"ev_mob_died", [m.index])
+
 ## The monsters a skill hits, nearest first: those in its area, or for a splash, the nearest
 ## one in its area and every monster within `splash` of it.
 func _targets(p: SimPlayer, skill: SkillDef, aim: Hitbox.Aim) -> Array[SimMob]:
 	var area := Hitbox.aimed_area(p.position, p.face, aim, skill.reach, skill.height)
+	if skill.around:
+		area = area.merge(Hitbox.aimed_area(p.position, -p.face, aim, skill.reach, skill.height))
 	var targets: Array[SimMob] = []
 	for m in mobs:
 		if not m.dead and area.intersects(m.hurtbox.rect_at(m.body_position())):
@@ -236,6 +338,7 @@ func _targets(p: SimPlayer, skill: SkillDef, aim: Hitbox.Aim) -> Array[SimMob]:
 func kill_mob(m: SimMob, killer: SimPlayer) -> void:
 	m.die()
 	broadcast(&"ev_mob_died", [m.index])
+	_move_marks(m)
 	for i in m.children.size():
 		m.children[i].wake(m.position.x + (i - (m.children.size() - 1) / 2.0) * 30.0, killer.peer)
 	server.give_xp(killer, m.def.exp_reward)
@@ -259,6 +362,19 @@ func kill_mob(m: SimMob, killer: SimPlayer) -> void:
 		var x := clampf(m.position.x + (i - (loot.size() - 1) / 2.0) * DROP_SPACING, m.plat.x + 8, m.plat.x + m.plat.w - 8)
 		spawn_drop(loot[i][0], loot[i][1], null, DropFlight.create(m.position + Vector2(0, -20), m.plat.y, x), killer.peer)
 
+## Marks on `fallen` jump to the nearest standing monster within MARK_JUMP of it.
+func _move_marks(fallen: SimMob) -> void:
+	for p: SimPlayer in players.values():
+		if p.mark != fallen.index or p.mark_t <= 0:
+			continue
+		p.mark = -1
+		var best := INF
+		for m in mobs:
+			var d := m.body_position().distance_to(fallen.body_position())
+			if not m.dead and not m.health.is_dead() and d <= MARK_JUMP and d < best:
+				best = d
+				p.mark = m.index
+
 ## A monster touched a player.
 func touch_player(p: SimPlayer, m: SimMob) -> void:
 	hurt_player(p, m.def, m.position.x)
@@ -280,6 +396,7 @@ func hurt_player(p: SimPlayer, def: MonsterDef, from_x: float, power := 1.0) -> 
 		dmg -= guarded
 	p.character.health.damage(dmg)
 	p.dirty_vitals = true
+	p.streak = 0
 	Net.send(p.peer, &"ev_hurt", [from_x])
 	if p.character.health.is_dead():
 		p.faint_t = SimPlayer.FAINT_TICKS

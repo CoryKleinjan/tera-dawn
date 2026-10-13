@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="SkillDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/keen_eyes.png" id="i_icon"]
+
+[resource]
+script = ExtResource("1_skill_def")
+id = &"lucky_streak"
+display_name = "Lucky Streak"
+job = &"swashbuckler"
+max_level = 10
+kind = 2
+description = "Always on. Every attack in a row that lands raises your Critical Rate, up to 10 in a row. Getting hit starts the streak over."
+icon = ExtResource("i_icon")
+streak_crit = 1.0
+streak_crit_per_level = 0.22222

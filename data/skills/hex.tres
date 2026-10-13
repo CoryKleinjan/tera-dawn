@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="SkillDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
+[ext_resource type="Resource" path="res://data/projectiles/mob_shadow.tres" id="p_mob_shadow"]
+[ext_resource type="Resource" path="res://data/effects/arcane_claw_hit.tres" id="e_arcane_claw_hit"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/magic_guard.png" id="i_icon"]
+
+[resource]
+script = ExtResource("1_skill_def")
+id = &"hex"
+display_name = "Hex"
+job = &"hexcaster"
+max_level = 10
+kind = 0
+description = "A curse flies at up to 4 monsters ahead. Hexed monsters take more damage from you and anyone in your party."
+icon = ExtResource("i_icon")
+magic = true
+damage_multiplier = 0.8
+damage_per_level = 0.02222
+max_targets = 4
+reach = 300.0
+height = 140.0
+hex = 0.1
+hex_per_level = 0.02222
+hex_time = 8.0
+hex_time_per_level = 0.77778
+mp_cost = 8
+recharge = 4.0
+cooldown = 30
+action_ticks = 20
+animation = &"slash"
+flash = Color(0.75, 0.45, 1.0, 1)
+projectile = ExtResource("p_mob_shadow")
+hit_effect = ExtResource("e_arcane_claw_hit")
