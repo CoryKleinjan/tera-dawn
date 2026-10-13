@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="QuestDef" load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="1_quest_def"]
+[ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="2_quest_objective"]
+[ext_resource type="Resource" path="res://data/monsters/grotto_tusker.tres" id="3_grotto_tusker"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/equips/shell_earrings.tres" id="5_shell_earrings"]
+[ext_resource type="Resource" path="res://data/items/use/power_elixir.tres" id="6_power_elixir"]
+
+[sub_resource type="Resource" id="Resource_3"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("6_power_elixir")
+chance = 1.0
+min_amount = 5
+max_amount = 5
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("5_shell_earrings")
+chance = 1.0
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("2_quest_objective")
+kind = 0
+monster = ExtResource("3_grotto_tusker")
+count = 1
+
+[resource]
+script = ExtResource("1_quest_def")
+id = &"q34_dawnharbor_boss"
+title = "The Grotto Tusker"
+giver = &"harbormaster"
+min_level = 22
+requires = Array[StringName]([&"q33_dawnharbor_supplies"])
+offer_text = "Smugglers' Grotto, past Gull Bluffs, has a new master: a great tusked boar the smugglers call the Grotto Tusker. No boat will put in there while it lives. Deal with it and the harbour owes you."
+progress_text = "Defeat the Grotto Tusker deep in Smugglers' Grotto, past Gull Bluffs."
+complete_text = "The boats are already heading out. The whole harbour will hear of this. Take these, and my thanks."
+objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1")])
+reward_xp = 188400
+reward_shards = 6000
+reward_items = Array[ExtResource("4_drop_entry")]([SubResource("Resource_2"), SubResource("Resource_3")])
