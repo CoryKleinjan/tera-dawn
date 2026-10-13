@@ -37,6 +37,15 @@ static func avoid(total: StatBlock) -> int:
 static func crit_rate(total: StatBlock) -> float:
 	return BASE_CRIT + total.crit / 100.0
 
+## How many ticks an attack's cooldown or pose of `ticks` lasts with Attack Speed: 25% faster
+## means it comes round in 1 / 1.25 of the time. Server and client both work it out here.
+static func attack_ticks(ticks: int, total: StatBlock) -> int:
+	return maxi(1, roundi(ticks / (1.0 + maxi(0, total.attack_speed) / 100.0)))
+
+## Extra damage on a hit from Melee or Ranged Damage, as a multiplier.
+static func damage_bonus(total: StatBlock, ranged: bool) -> float:
+	return 1.0 + (total.ranged_damage if ranged else total.melee_damage) / 100.0
+
 ## Movement multipliers from Speed and Jump, capped like MapleStory (140% and 123%).
 static func speed_multiplier(total: StatBlock) -> float:
 	return clampf(1.0 + total.speed / 100.0, 0.5, 1.4)

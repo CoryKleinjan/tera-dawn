@@ -13,6 +13,7 @@ extends RefCounted
 ## weapon kind -> {motion: animation}
 const MOTIONS := {
 	&"sword": {&"attack": &"attack", &"slash": &"slash"},
+	&"dagger": {&"attack": &"attack", &"slash": &"slash"},
 	&"wand": {&"attack": &"attack", &"slash": &"cast"},
 	&"staff": {&"attack": &"heavy", &"slash": &"cast"},
 	&"bow": {&"attack": &"shoot", &"slash": &"shoot"},

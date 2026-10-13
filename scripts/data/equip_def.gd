@@ -10,12 +10,21 @@ const SLOT_NAMES := ["Weapon", "Hat", "Top", "Bottom", "Shoes", "Gloves", "Cape"
 const WORN_STYLE_PLACES := {Slot.TOP: "top", Slot.BOTTOM: "bottom", Slot.SHOES: "shoes"}
 
 @export var slot: Slot = Slot.WEAPON
+## What each off-hand kind is called in messages ("Learn Star Scatter: needs throwing stars").
+const OFFHAND_NAMES := {&"shield": "a shield", &"star": "throwing stars", &"book": "a book",
+	&"quiver": "a quiver", &"pistol": "a pistol"}
 
 @export_group("Weapon")
-## "sword", "bow", "wand", "star", "knuckle", "gun"... Skills can require one.
+## "sword", "dagger", "bow", "wand", "staff", "knuckle"... Skills can require one.
 @export var weapon_kind: StringName
 ## Replaces the plain attack while wielded (a bow's shot). Null keeps the basic attack.
 @export var basic_attack: SkillDef
+
+@export_group("Shield slot")
+## What a piece worn in the shield slot is: "shield", or a job's off-hand ("star" for a
+## Thief's throwing stars, "book" for a Magician, "quiver" for an Archer, "pistol" for a
+## Pirate). Skills can need one (SkillDef.offhand). Off-hands are gear, never used up.
+@export var offhand_kind: StringName = &"shield"
 
 @export_group("Requirements")
 ## Job lines that can wear it (JobDef.family); empty for anyone.
@@ -61,6 +70,10 @@ func tab() -> Tab:
 
 func stack_size() -> int:
 	return 1
+
+## How an off-hand kind reads in a sentence: "throwing stars", "a pistol".
+static func offhand_name(kind: StringName) -> String:
+	return OFFHAND_NAMES.get(kind, "a " + String(kind))
 
 ## "Warriors and Pirates" for a list of job lines.
 static func families_text(families: Array[StringName]) -> String:

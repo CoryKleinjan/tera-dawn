@@ -108,15 +108,59 @@ func use_problem(skill: SkillDef) -> String:
 	var w := c.gear.weapon()
 	if not skill.weapons.is_empty() and (w == null or not w.weapon_kind in skill.weapons):
 		return "%s needs a %s." % [skill.display_name, " or ".join(skill.weapons)]
+	var o := c.gear.offhand()
+	if not skill.offhand.is_empty() and (o == null or not o.offhand_kind in skill.offhand):
+		return "%s needs %s in your shield slot." % [skill.display_name, " or ".join(skill.offhand.map(EquipDef.offhand_name))]
 	if c.mp < skill.mp_at(level(skill)):
 		return "Not enough MP for %s." % skill.display_name
 	return ""
 
-## Starts (or refreshes) a buff from `skill`.
-func add_buff(skill: SkillDef) -> void:
-	var lvl := level(skill)
+## Starts (or refreshes) a buff from `skill`, at the character's own level of it or, for a
+## party member's buff, at `lvl` (the caster's). A buff with no duration (just a heal) adds
+## nothing.
+func add_buff(skill: SkillDef, lvl := -1) -> void:
+	if lvl < 0:
+		lvl = level(skill)
+	if skill.duration_ticks(lvl) <= 0:
+		return
 	buffs[skill.id] = [lvl, skill.duration_ticks(lvl)]
 	character.recalc()
+
+## Running buffs that keep monster hits from knocking the player back.
+func steady() -> bool:
+	return _any_buff(func(s: SkillDef) -> bool: return s.steady)
+
+## Running buffs that hide the player from monsters.
+func hidden() -> bool:
+	return _any_buff(func(s: SkillDef) -> bool: return s.hide)
+
+## Ends every hiding buff (attacking gives the player away). True if one was running.
+func end_hiding() -> bool:
+	var ended := false
+	for id in buffs.keys():
+		var s: SkillDef = Content.skills.get(id)
+		if s and s.hide:
+			buffs.erase(id)
+			ended = true
+	if ended:
+		character.recalc()
+	return ended
+
+## The share of damage taken that comes out of MP (the strongest running guard).
+func mp_guard() -> float:
+	var out := 0.0
+	for id in buffs:
+		var s: SkillDef = Content.skills.get(id)
+		if s:
+			out = maxf(out, s.mp_guard_at(buffs[id][0]))
+	return out
+
+func _any_buff(test: Callable) -> bool:
+	for id in buffs:
+		var s: SkillDef = Content.skills.get(id)
+		if s and test.call(s):
+			return true
+	return false
 
 ## Counts buffs down by `ticks`. Returns the skills whose buffs just ran out.
 func tick_buffs(ticks := 1) -> Array[SkillDef]:
@@ -145,11 +189,15 @@ func bonus() -> StatBlock:
 			out.add(s.stats_at(buffs[id][0]))
 	return out
 
-## Extra HP and MP restored each time HP and MP regenerate, from passives.
+## Extra HP and MP restored each time HP and MP regenerate, from passives and running buffs.
 func regen_bonus() -> Vector2i:
 	var out := Vector2i.ZERO
 	for id in learned:
 		var s: SkillDef = Content.skills.get(id)
 		if s and s.kind == SkillDef.Kind.PASSIVE:
 			out += Vector2i(s.regen_hp_at(learned[id]), s.regen_mp_at(learned[id]))
+	for id in buffs:
+		var s: SkillDef = Content.skills.get(id)
+		if s:
+			out += Vector2i(s.regen_hp_at(buffs[id][0]), s.regen_mp_at(buffs[id][0]))
 	return out

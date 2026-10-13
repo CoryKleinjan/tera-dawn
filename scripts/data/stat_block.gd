@@ -7,7 +7,7 @@ extends Resource
 const FIELDS: Array[StringName] = [
 	&"strength", &"dexterity", &"intelligence", &"luck", &"max_hp", &"max_mp",
 	&"attack", &"magic_attack", &"defense", &"magic_defense", &"accuracy", &"avoid",
-	&"speed", &"jump", &"crit",
+	&"speed", &"jump", &"crit", &"attack_speed", &"melee_damage", &"ranged_damage",
 ]
 ## Short names for tooltips and the stats window.
 const LABELS := {
@@ -16,7 +16,10 @@ const LABELS := {
 	&"magic_attack": "Magic Attack", &"defense": "Weapon Defense",
 	&"magic_defense": "Magic Defense", &"accuracy": "Accuracy", &"avoid": "Avoidability",
 	&"speed": "Speed", &"jump": "Jump", &"crit": "Critical Rate",
+	&"attack_speed": "Attack Speed", &"melee_damage": "Melee Damage", &"ranged_damage": "Ranged Damage",
 }
+## Stats shown as a percent.
+const PERCENT: Array[StringName] = [&"speed", &"jump", &"crit", &"attack_speed", &"melee_damage", &"ranged_damage"]
 ## The four stats Ability Points go into.
 const BASE: Array[StringName] = [&"strength", &"dexterity", &"intelligence", &"luck"]
 
@@ -40,10 +43,15 @@ const BASE: Array[StringName] = [&"strength", &"dexterity", &"intelligence", &"l
 @export var jump := 0
 ## Critical rate bonus in percent.
 @export var crit := 0
+## Attacks come round this much faster, in percent (shorter cooldown and pose).
+@export var attack_speed := 0
+## Extra damage in percent from melee blows, and from shots and spells.
+@export var melee_damage := 0
+@export var ranged_damage := 0
 
 ## A bonus as players read it: "+3", "-2", "+5%" for Speed and Jump.
 static func format(stat: StringName, amount: int) -> String:
-	return "%+d%s" % [amount, "%" if stat in [&"speed", &"jump", &"crit"] else ""]
+	return "%+d%s" % [amount, "%" if stat in PERCENT else ""]
 
 func value(stat: StringName) -> int:
 	return int(get(stat))

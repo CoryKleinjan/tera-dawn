@@ -36,6 +36,8 @@ var chair: StringName = &""
 var hurtbox := Hitbox.new(HURTBOX_SIZE)
 
 var cooldown := 0     # ticks before the next attack
+## Skill id -> ticks before that skill can be used again (SkillDef.recharge).
+var recharge := {}
 var inv := 0          # invincibility ticks after being hit
 var faint_t := 0      # ticks left lying fainted
 var item_cd := 0      # ticks before another potion can be used
@@ -56,6 +58,18 @@ func _init(p: int, c: Character) -> void:
 
 func fainted() -> bool:
 	return faint_t > 0
+
+## Hidden by a buff (Dark Sight): monsters can't see, touch or hit them.
+func hidden() -> bool:
+	return character.skills.hidden()
+
+## Counts down a skill id -> ticks table of recharges, dropping the ones that are done.
+## The client (TDPlayer) keeps its own table the same way.
+static func tick_recharge(table: Dictionary) -> void:
+	for id in table.keys():
+		table[id] -= 1
+		if table[id] <= 0:
+			table.erase(id)
 
 ## Watching a cutscene: monsters don't touch or shoot them.
 func in_scene() -> bool:
@@ -85,6 +99,8 @@ func step() -> bool:
 	since_move += 1
 	if cooldown > 0:
 		cooldown -= 1
+	if not recharge.is_empty():
+		tick_recharge(recharge)
 	if inv > 0:
 		inv -= 1
 	if item_cd > 0:
@@ -116,6 +132,8 @@ func motion() -> Array:
 		flags |= SnapshotFlags.PLAYER_BLINK
 	if climbing:
 		flags |= SnapshotFlags.PLAYER_CLIMBING
+	if hidden():
+		flags |= SnapshotFlags.PLAYER_HIDDEN
 	return [peer, position.x, position.y, face, animation, flags]
 
 ## What else other clients need to draw this player, which changes rarely:

@@ -204,6 +204,10 @@ func on_answer(peer: int, id: int, accept: bool) -> void:
 func party_shares(killer: SimPlayer, xp: int) -> Array:
 	return party.shares(killer, xp)
 
+## Party members on the same map within `reach` of `p` (for party buffs).
+func party_near(p: SimPlayer, reach: float) -> Array[SimPlayer]:
+	return party.near(p, reach)
+
 func on_trade_offer(peer: int, tab: int, slot: int, count: int) -> void:
 	trade.on_offer(peer, tab, slot, count)
 
