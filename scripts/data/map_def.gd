@@ -33,8 +33,6 @@ extends Resource
 @export var world_pos := Vector2.ZERO
 ## Towns are safe places to respawn and where return scrolls take you.
 @export var town := false
-## A free market: players may open their own shops here.
-@export var market := false
 ## The town you wake up in after fainting here, and where a return scroll goes. Empty means
 ## this map if it's a town, else the starting map.
 @export var return_map: StringName
@@ -43,7 +41,7 @@ extends Resource
 ## Inside a building: a small room with a wall instead of sky, entered by a door from
 ## `return_map` (the town it stands in). The world map shows you in that town.
 @export var interior := false
-## Its own track (a boss lair, the Free Market). Empty: its region's town or field music (music_id).
+## Its own track (a boss lair). Empty: its region's town or field music (music_id).
 @export var music: StringName
 ## A cutscene each character sees the first time they arrive (see CutsceneDef).
 @export var intro_scene: CutsceneDef
@@ -118,7 +116,7 @@ func return_town() -> StringName:
 func outside() -> StringName:
 	return return_town() if interior else id
 
-## The track that plays here: its own, else its region's town music for towns, markets and
+## The track that plays here: its own, else its region's town music for towns and
 ## rooms, and its region's field music for everywhere else.
 func music_id() -> StringName:
 	if music != &"":
@@ -126,7 +124,7 @@ func music_id() -> StringName:
 	var r: RegionDef = Content.regions.get(region)
 	if r == null:
 		return &""
-	return r.town_music if town or market or interior else r.field_music
+	return r.town_music if town or interior else r.field_music
 
 ## The maps its portals lead to.
 func neighbours() -> Array[StringName]:

@@ -17,7 +17,7 @@ scripts/
   settings/           SettingsSection and its sections: Keybinds, AudioSettings, VideoSettings
   server/             TDServer, TDLobby, MapInstance, SimPlayer, SimMob (+ MobMoves), SimDrop,
                       TDSocial
-  server/social/      TDSocial's parts: chat, parties, trade, guilds, player shops
+  server/social/      TDSocial's parts: chat, parties, trade, guilds
   server/services/    TDServer's parts (ServerPart): items, NPC shops, storage, travel, quests, jobs
   net/                SnapshotFlags (the bits both sides read in snapshots), SnapshotCodec (packs them)
   data/               Resource classes for everything in data/

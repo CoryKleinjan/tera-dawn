@@ -140,8 +140,7 @@ func stop(stay_connected := false) -> void:
 func enter_map(id: StringName, x: float, state: Dictionary) -> void:
 	# a cutscene belongs to the map it started on (the server stops it too)
 	scenes.stop()
-	for w in ["player", "player_shop"]:
-		hud.windows[w].visible = false
+	hud.windows["player"].visible = false
 	load_map(id)
 	player.place(x, platforms[0].y)
 	var mob_states: Array = state.get("mobs", [])
@@ -261,16 +260,13 @@ func avatar_at(screen_pos: Vector2) -> TDAvatar:
 			return a
 	return null
 
-## Clicking another player: their shop if they're minding one, otherwise what you can do with them.
+## Clicking another player: what you can do with them.
 func click_avatar(a: TDAvatar) -> void:
-	if a.shop_title != "":
-		Net.ask(&"req_shop_view", [a.peer])
-	else:
-		hud.windows["player"].open(a)
+	hud.windows["player"].open(a)
 
-## Keys don't move the player while they type or mind a shop.
+## Keys don't move the player while they type or watch a cutscene.
 func input_blocked() -> bool:
-	return hud.typing() or hud.selling() or scenes.playing()
+	return hud.typing() or scenes.playing()
 
 ## The server started cutscene `id` for you. One this game doesn't have is answered as
 ## finished, so the server doesn't wait on it.

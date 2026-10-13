@@ -18,7 +18,6 @@ extends RefCounted
 
 const FIELD := &"test_field"
 const TOWN := &"test_town"
-const MARKET := &"test_market"
 const GROUND := 600.0
 
 ## A MultiplayerAPI that records every rpc instead of sending it.

@@ -20,7 +20,7 @@ var mobs: Array[SimMob] = []
 var drops := {}
 ## Each monster's record as last sent in a snapshot, so unchanged ones can be left out.
 var _sent_mobs: Array[PackedByteArray] = []
-## peer -> the player info (info() + shop sign) last sent to this map's players.
+## peer -> the player info (info()) last sent to this map's players.
 var _sent_info := {}
 
 func _init(s: TDServer, map_def: MapDef) -> void:
@@ -94,11 +94,11 @@ func snapshot(full := false) -> PackedByteArray:
 			_sent_mobs[i] = r
 	return SnapshotCodec.encode(tick, records, players.values().map(func(p: SimPlayer) -> Array: return p.motion()))
 
-## Sends this map's players the info (name, level, look, gear, chair, pet, shop sign) of
+## Sends this map's players the info (name, level, look, gear, chair, pet) of
 ## every player whose info changed since it was last sent. Reliable, unlike snapshots.
 func send_player_info() -> void:
 	for p: SimPlayer in players.values():
-		var info := p.info() + [server.social.shop_title(p.peer)]
+		var info := p.info()
 		if _sent_info.get(p.peer) != info:
 			_sent_info[p.peer] = info
 			broadcast(&"ev_player_info", [p.peer, info])

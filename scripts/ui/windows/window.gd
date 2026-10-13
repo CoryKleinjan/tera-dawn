@@ -338,7 +338,7 @@ func draw_shards(at: Vector2, amount: int) -> void:
 	DrawUtil.text(self, Game.num_font, at + Vector2(28, 0), str(amount), 15, Palette.SUN, 1, 4, Palette.NIGHT)
 
 ## Puts this window just left of the screen's centre at height `y` and opens the inventory
-## just right of it (for windows you drag items into: trade, a player shop).
+## just right of it (for windows you drag items into, like trade).
 func place_beside_inventory(y: float) -> void:
 	position = Vector2(TDWorld.VIEW.x / 2.0 - size.x - 10, y)
 	var inv: TDWindow = hud.windows["inventory"]

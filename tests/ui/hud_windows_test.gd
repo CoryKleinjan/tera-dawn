@@ -2,11 +2,11 @@ extends TestCase
 ## Every window the HUD registers, opened in a running single-player game with a character
 ## that has something in every tab: it draws, its tabs switch on click, its hit tests find
 ## what's drawn where, and what it lists matches the character. Windows NPCs open are
-## tried with every NPC, shop and storage; trade, player shops and the player menu with
+## tried with every NPC, shop and storage; trade and the player menu with
 ## the server's kind of state. (tests/run_all.sh fails on any script error they print.)
 
 const KNOWN := ["inventory", "equipment", "stats", "quests", "skills", "worldmap", "community", "collection",
-	"dialogue", "shop", "storage", "player", "trade", "player_shop"]
+	"dialogue", "shop", "storage", "player", "trade"]
 
 var ui: UiHelpers
 
@@ -660,7 +660,7 @@ func test_every_npc_dialogue_and_its_pages() -> void:
 			ui.hud.open_dialogue(npc)
 			talk.choose(i)
 			await ui.frames(1)
-			for key in ["dialogue", "shop", "storage", "player_shop", "inventory"]:
+			for key in ["dialogue", "shop", "storage", "inventory"]:
 				if _win(key).visible:
 					await _redrawn(_win(key), "%s: after %s, the %s window" % [id, labels[i], key])
 			if talk.visible and not talk._on_main_page:
@@ -672,7 +672,7 @@ func test_every_npc_dialogue_and_its_pages() -> void:
 						if talk.visible:
 							await _redrawn(talk, "%s: %s > %s" % [id, labels[i], sub[k]])
 						break
-			for key in ["dialogue", "shop", "storage", "player_shop", "inventory"]:
+			for key in ["dialogue", "shop", "storage", "inventory"]:
 				_win(key).visible = false
 		npc.free()
 
@@ -794,7 +794,7 @@ func test_storage_draws_every_tab() -> void:
 		check(ui.hud.tooltip.stack == Game.me.storage.at(t, 0), "hovering stored slot 0 shows it")
 	check_eq(vault._slot_at(Vector2(1, 1)), [-1, false], "hit test outside the slots")
 
-# ---------- trade, player shops, the player menu ----------
+# ---------- trade, the player menu ----------
 
 func _stack_dicts(n: int) -> Array:
 	var out := []
@@ -819,36 +819,6 @@ func test_trade_window_shows_both_offers() -> void:
 	check(ui.hud.tooltip.stack == null, "hovering an empty slot shows nothing")
 	ui.hud.show_trade({})
 	check(not trade.visible, "an empty state closes it")
-
-func test_player_shop_setup_owner_and_visitor() -> void:
-	await ui.edit(_fill_bag)
-	var stall: TDPlayerShopWindow = _win("player_shop")
-	stall.setup()
-	check(stall.visible and stall.mode == TDPlayerShopWindow.Mode.SETUP and _win("inventory").visible, "setting up opens the stall and the bag")
-	await _redrawn(stall, "empty stall")
-	for i in 3:
-		stall.add_entry(ItemDef.Tab.ETC, i, 100 + i)
-	stall.add_entry(ItemDef.Tab.ETC, 0, 5)
-	check_eq(stall.entries.size(), 3, "a slot can only go on the list once")
-	await _redrawn(stall, "stall being set up")
-	await ui.click(stall, stall._buy_rect(1).get_center())
-	check_eq(stall.entries.size(), 2, "Remove takes a line off")
-	var visitor_items := []
-	for d in _stack_dicts(8):
-		visitor_items.append([d, 250])
-	ui.hud.show_player_shop(4242, "Kestrel", "Kestrel's Bows", visitor_items)
-	check_eq(stall.mode, TDPlayerShopWindow.Mode.VISITOR, "someone else's shop opens as a visitor")
-	check(not ui.hud.selling(), "visiting isn't selling")
-	await _redrawn(stall, "visiting a stall")
-	for n in 4:
-		await ui.click(stall, stall.row_rect(stall.list.scroll).get_center(), MOUSE_BUTTON_WHEEL_DOWN)
-	check_eq(stall.list.scroll, visitor_items.size() - TDPlayerShopWindow.ROWS, "scrolling stops at the last line")
-	await _redrawn(stall, "visiting, scrolled")
-	ui.hud.show_player_shop(multiplayer.get_unique_id(), Game.me.name, "My Shop", visitor_items.slice(0, 2))
-	check(ui.hud.selling() and ui.world.input_blocked(), "minding your own shop holds you in place")
-	await _redrawn(stall, "own stall")
-	ui.hud.show_player_shop(multiplayer.get_unique_id(), Game.me.name, "", [])
-	check(not stall.visible, "a closed shop hides the window")
 
 func test_player_menu_lists_what_you_can_do() -> void:
 	var a := TDAvatar.create(ui.world, 4242)
