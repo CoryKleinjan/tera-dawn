@@ -11822,6 +11822,31 @@
     ],
     "text": "The first image is one repeating tile of the back wall inside the Archers' Lodge, the archers' guild hall of Greenbough, the forest village. Keep the leafy canopy and the thick horizontal oak beam at the top, the two curving tree trunks framing the left and right sides, and the mossy floor edge at the bottom EXACTLY as they are, in the same places. Repaint ONLY the plank wall between the two trunks. Remove the round window and the little sun banner. Paint the wall as warm honey-oak planks with a soft yellow-green daylight feel. In the centre, a large pair of antlers mounted on a carved wooden shield, with two longbows crossed beneath it, fixed flat to the wall. On each side, a long green-and-gold cloth banner painted with a crossed bow and arrow (a picture only, no writing), hanging flat against the planks and fixed at top and bottom. Everything is seen straight from the front, flat against the wall, with no perspective, no top faces and no side depth; nothing ends loose in mid-air. The left and right edges of the image must join seamlessly when the tile is repeated side by side. Also smooth the moss tufts along the bottom so they are painted with soft edges, not stair-stepped. Paint in the same style as the second image and the rest of the wall: rich warm colours, strong light and shadow with bright highlights, visible painted texture at a fairly chunky brush scale, a thin dark outline. Painted, never pixel art. Same image size and layout."
    }
+  },
+  {
+   "id": "greenbough_townsfolk_keeper",
+   "prompts": null,
+   "batch": "Greenbough city: storage keeper in the empty townsfolk cell",
+   "with": null,
+   "refs": [],
+   "save": "greenbough_townsfolk_keeper.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    4,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 thread 'Cities up to Dawnharbor's standard': Cory's rule 'no duplicate npcs across the entire game' (22:58Z); he OK'd this $0.07 edit ('Yes' 22:59Z). Only column 4 gets pasted into greenbough_townsfolk.png; the other cells stay as painted.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/greenbough_townsfolk.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ],
+    "text": "The first image is a sheet of NPC villagers for Greenbough, the archers' forest village in my 2D side-scrolling game: two rows, each row the same characters standing in the same spots, with a label above each. Change ONLY column 4, the empty cell on the right of both rows: remove the faded ghost figure in the bottom one and paint a new villager in column 4 of both rows, the same character in the same calm standing pose in both rows, at the same size, chibi proportions and ground line as the other three. Label both cells KEEPER. The new villager is the village STORAGE KEEPER: a stout, friendly middle-aged woman with rosy cheeks and auburn hair in a thick braid, a moss-green dress with a brown leather apron full of pockets, a big iron ring of keys on her belt, holding a small iron-bound wooden chest in both hands. She matches the second image's art style and the other villagers on the sheet: soft cel-painted shading, rich warm colours in forest greens, browns and gold, dark brown outlines, painted cloth folds and worn patches. Hands are simple rounded fingerless mittens in the game's style. Keep columns 1 to 3 exactly as they are. Painted, not pixel art. Flat pure magenta #FF00FF background everywhere outside the characters and labels."
+   }
   }
  ]
 }
