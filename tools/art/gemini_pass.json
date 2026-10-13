@@ -14696,6 +14696,54 @@
     "refs": [],
     "text": "This is my game hero's hair sheet: a bald chibi boy wearing the same messy grey hair in 32 labelled poses, on a pure magenta background. Keep EVERYTHING exactly as it is (every cell, label, grid line, pose, body, size, position, the blank face, the grey colour and the soft painted style) and change ONLY the hair: repaint it as the same hairstyle the way it sits when he wears a snug hat. The hair on top of his head is pressed flat against the scalp, following the round shape of his head, with no tufts or spikes rising above it. Keep the same short forehead bangs, and the same side and back tufts around his ears and neck, so it is clearly the same hairstyle, but every strand stays close to his head: nothing sticks out past the front of his face, and the hair is only a little wider than his head all round so it covers it. In the poses seen from behind (21 ROPE 1, 22 ROPE 2, 23 LADDER 1, 24 LADDER 2, 25 CLIMB IDLE) the back of his head is covered by the same flattened hair. Same grey, same soft hand-painted shading and dark outline as now, no pixel-art look. The background stays flat pure magenta #FF00FF."
    }
+  },
+  {
+   "id": "room_dawnharbor_store_wall",
+   "prompts": null,
+   "batch": "room back wall (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_dawnharbor_store_wall.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-13 Dawnharbor thread (Cory: 'do your picks for the interior'). Test: Pell's General Store gets its own back wall, painted over the shared Dawnharbor room wall tile. Shown to Cory before anything goes in game; the guild wall and tavern follow only if he likes it.",
+   "edit": {
+    "base": "art/source/room_dawnharbor_wall.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ],
+    "text": "The first image is one repeating tile of the back wall inside a harbour town's general store: a carved wooden cornice at the top, cream plaster in the middle with one round ship porthole, and a blue chair rail with a sun medallion above rope-trimmed wooden panelling at the bottom. Repaint ONLY the cream plaster band between the cornice and the blue chair rail, as the wall of a cosy, well-stocked shop. Remove the round porthole. In the centre, paint one tall rectangular wooden window with small square panes and a deep sill, showing a soft warm morning harbour view (pale sky, sea, a distant sail). On both sides of the window, paint tall wooden shelves fixed flat against the wall, reaching from just above the chair rail up to just under the cornice, packed with shop goods: glass potion bottles in red, blue and green, rolled scrolls, small wooden boxes, jars, coils of rope, folded cloth, a lantern. From the cornice hang a few small bundles of dried herbs and a fishing net on pegs. Everything is seen straight from the front, flat against the wall, with no perspective, no top faces and no side depth. The left and right edges of the image must join seamlessly when the tile is repeated side by side: nothing is cut off at the edges, and the plaster at the far left and far right edges matches. Keep the carved cornice, the blue chair rail with its sun medallion, and the rope and wood panelling EXACTLY as they are, in the same places. Paint in the same style as the second image and the rest of the wall: rich warm colours, strong light and shadow with bright highlights, visible painted texture at a fairly chunky brush scale, a thin dark outline. Painted, never pixel art. Same image size and layout."
+   }
+  },
+  {
+   "id": "room_dawnharbor_store_wall_plain",
+   "prompts": null,
+   "batch": "room back wall (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_dawnharbor_store_wall_plain.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-13 Dawnharbor thread (Cory: 'I don't want the shelves at all. Just have empty walls between the windows'; OK'd this repaint 02:57Z). room_dawnharbor_store_wall with the shelves, herbs and net taken out; window, cornice and rail kept.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/room_dawnharbor_store_wall.png",
+    "refs": [],
+    "text": "This is one repeating tile of the back wall inside a harbour town shop. REMOVE the two tall wooden shelves and everything on them, the hanging bundles of herbs, the pegs they hang from and the hanging fishing net. Where they were, paint plain, empty cream plaster wall that matches the plaster already around the window: the same warm cream colour, the same soft painted brush texture and the same gentle light. The plaster is completely empty: nothing on it, nothing hanging from the cornice. Keep the tall wooden window with its square panes, its lintel, its sill and the harbour view through it EXACTLY as they are, in the same place and size, fully intact (where the net covered its top right corner, finish the wood frame the same as its top left). Keep the carved wooden cornice at the top and the blue chair rail with its sun medallion and the rope-trimmed wood panelling at the bottom EXACTLY as they are. The left and right edges of the image must still join seamlessly when the tile repeats. Same image size, layout and painted style, never pixel art."
+   }
   }
  ]
 }
