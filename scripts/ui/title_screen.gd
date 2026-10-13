@@ -1,8 +1,8 @@
 class_name TDTitleScreen
 extends ColorRect
 ## The title screen: the dimmed layer over the game with the key art, the title card (the logo
-## over a small menu of Play solo, Host co-op, Join a friend, Settings and Quit, and the Join
-## page asking for the host's address), character select, the character creator and their
+## over a small menu of Play, Settings and Quit; Play opens Solo and Co-op, Co-op opens Host
+## and Join, and Join asks for the host's address), character select, the character creator and their
 ## questions. It runs everything from the first button to playing. While it's showing, the
 ## game ignores play keys.
 ## TDHud owns it, puts the game menu and settings screen on it, and handles Esc and pausing.
@@ -15,19 +15,24 @@ signal quit_requested
 ## puts the title card back up (TDHud.show_title).
 signal left_game
 
-## How big the main menu's buttons are, and the Join page's smaller ones.
+## How big the menus' buttons are, and the Join page's smaller ones.
 const MAIN_BUTTON := Vector2(240, 46)
 const SMALL_BUTTON := Vector2(122, 42)
 const SMALL_BUTTON_FONT := 18
 
 var world: TDWorld
-## The title card: the logo over the main menu and the Join page. Hidden while any of the
-## other screens on the title screen is showing.
+## The title card: the logo over one of its pages. Hidden while any of the other screens on
+## the title screen is showing.
 var title_card: Control
-## The title card's two pages.
+## The title card's pages, one showing at a time: the main menu (Play, Settings, Quit), the
+## Play menu (Solo, Co-op), the Co-op menu (Host, Join) and the Join page.
 var main_menu: Control
+var play_menu: Control
+var coop_menu: Control
 var join_page: Control
+var menu_play_button: Button
 var solo_button: Button
+var coop_button: Button
 var host_button: Button
 var join_button: Button
 ## The key art behind the title screen and character select.
@@ -85,27 +90,36 @@ func _build_title_card() -> void:
 	logo.custom_minimum_size = Vector2(520, 190)  # the logo is two lines (TERA'S over DAWN)
 	col.add_child(logo)
 
-	# first the small menu over the key art: the three ways to play, Settings, Quit
-	var menu := UiBuild.column(8)
-	menu.alignment = BoxContainer.ALIGNMENT_CENTER
-	main_menu = menu
-	col.add_child(main_menu)
-	solo_button = UiStyle.menu_button("Play solo", MAIN_BUTTON)
-	solo_button.tooltip_text = "Play on your own"
-	solo_button.pressed.connect(_on_solo)
-	host_button = UiStyle.menu_button("Host co-op", MAIN_BUTTON)
-	host_button.tooltip_text = "Play and let up to %d friends join you, each with their own character" % (Net.MAX_PLAYERS - 1)
-	host_button.pressed.connect(_on_host)
-	join_button = UiStyle.menu_button("Join a friend", MAIN_BUTTON)
-	join_button.tooltip_text = "Bring one of your characters into a friend's game"
-	join_button.pressed.connect(_open_join_page)
+	# first the small menu over the key art: Play, Settings, Quit
+	menu_play_button = UiStyle.menu_button("Play", MAIN_BUTTON)
+	menu_play_button.pressed.connect(func() -> void: _show_page(play_menu))
 	var settings := UiStyle.menu_button("Settings", MAIN_BUTTON)
 	settings.pressed.connect(func() -> void: settings_requested.emit())
 	var quit := UiStyle.menu_button("Quit", MAIN_BUTTON)
 	quit.pressed.connect(func() -> void: quit_requested.emit())
-	for b: Button in [solo_button, host_button, join_button, settings, quit]:
-		b.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-		main_menu.add_child(b)
+	main_menu = _menu([menu_play_button, settings, quit])
+	main_menu.show()
+	col.add_child(main_menu)
+
+	# Play: on your own, or with friends
+	solo_button = UiStyle.menu_button("Solo", MAIN_BUTTON)
+	solo_button.tooltip_text = "Play on your own"
+	solo_button.pressed.connect(_on_solo)
+	coop_button = UiStyle.menu_button("Co-op", MAIN_BUTTON)
+	coop_button.tooltip_text = "Play with up to %d friends, each with their own character" % (Net.MAX_PLAYERS - 1)
+	coop_button.pressed.connect(func() -> void: _show_page(coop_menu))
+	play_menu = _menu([solo_button, coop_button, _back_button(main_menu)])
+	col.add_child(play_menu)
+
+	# Co-op: host a game here, or join a friend's
+	host_button = UiStyle.menu_button("Host", MAIN_BUTTON)
+	host_button.tooltip_text = "Play and let up to %d friends join you" % (Net.MAX_PLAYERS - 1)
+	host_button.pressed.connect(_on_host)
+	join_button = UiStyle.menu_button("Join", MAIN_BUTTON)
+	join_button.tooltip_text = "Bring one of your characters into a friend's game"
+	join_button.pressed.connect(func() -> void: _show_page(join_page))
+	coop_menu = _menu([host_button, join_button, _back_button(play_menu)])
+	col.add_child(coop_menu)
 
 	# Join a friend: the host's address
 	join_page = PanelContainer.new()
@@ -124,7 +138,7 @@ func _build_title_card() -> void:
 	connect_button = _small_menu_button("Join")
 	connect_button.pressed.connect(_on_join)
 	var back := _small_menu_button("Back")
-	back.pressed.connect(show_main_menu)
+	back.pressed.connect(func() -> void: _show_page(coop_menu))
 	page.add_child(UiBuild.centered_row([connect_button, back]))
 
 	message = UiBuild.label("", 0, Palette.BAD, HORIZONTAL_ALIGNMENT_CENTER)
@@ -164,6 +178,22 @@ func _build_character_screens() -> void:
 func _small_menu_button(text: String) -> Button:
 	return UiStyle.menu_button(text, SMALL_BUTTON, SMALL_BUTTON_FONT)
 
+## One of the title card's menus: `buttons` in a column, hidden until it's shown.
+func _menu(buttons: Array) -> Control:
+	var menu := UiBuild.column(8)
+	menu.alignment = BoxContainer.ALIGNMENT_CENTER
+	for b: Button in buttons:
+		b.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+		menu.add_child(b)
+	menu.hide()
+	return menu
+
+## Back to the menu `to`.
+func _back_button(to: Control) -> Button:
+	var b := UiStyle.menu_button("Back", MAIN_BUTTON)
+	b.pressed.connect(func() -> void: _show_page(to))
+	return b
+
 func _on_solo() -> void:
 	show_message("")
 	Net.play_single()
@@ -190,29 +220,46 @@ func _on_join() -> void:
 
 ## The title card's main menu.
 func show_main_menu() -> void:
-	join_page.hide()
-	main_menu.show()
-	show_message("")
-	solo_button.grab_focus.call_deferred()
+	_show_page(main_menu)
 
-## The Join page: the host's address.
-func _open_join_page() -> void:
-	main_menu.hide()
-	join_page.show()
+## Shows one of the title card's pages, with no message and the keyboard on its first button.
+func _show_page(page: Control) -> void:
+	for p: Control in _pages():
+		p.visible = p == page
 	show_message("")
-	focus_login()
+	focus_login.call_deferred()
 
-## Puts the keyboard focus on the title card: Play solo on the main menu, or the address
-## (or Join, when it's typed) on the Join page.
+func _pages() -> Array[Control]:
+	return [main_menu, play_menu, coop_menu, join_page]
+
+## The page Back (or Esc) on `page` goes to, or null on the main menu.
+func _page_before(page: Control) -> Control:
+	match page:
+		play_menu:
+			return main_menu
+		coop_menu:
+			return play_menu
+		join_page:
+			return coop_menu
+	return null
+
+## The title card's page showing now.
+func _page() -> Control:
+	for p: Control in _pages():
+		if p.visible:
+			return p
+	return main_menu
+
+## Puts the keyboard focus on the title card's page: its first button, or on the Join page
+## the address (or Join, when it's typed).
 func focus_login() -> void:
-	if not join_page.visible:
-		if solo_button.is_visible_in_tree():
-			solo_button.grab_focus()
+	if not title_card.is_visible_in_tree():
 		return
-	if address_field.text == "":
-		address_field.grab_focus()
+	var page := _page()
+	if page == join_page:
+		(address_field if address_field.text == "" else connect_button).grab_focus()
 	else:
-		connect_button.grab_focus()
+		(page.get_child(0) as Button).grab_focus()
 
 ## Which game character select is for.
 func _where() -> String:
@@ -244,7 +291,7 @@ func _on_refused(reason: String) -> void:
 		world.stop()
 		left_game.emit()
 		if joining:
-			_open_join_page()
+			_show_page(join_page)
 		show_message(reason)
 	elif title_card.visible:
 		_back_to_title()
@@ -294,8 +341,8 @@ func show_title_card() -> void:
 	show_main_menu()
 
 ## The title screen's part of Esc: a question is cancelled, the creator goes back, character
-## select leaves the game and the Join page goes back to the main menu. False if none of
-## those was showing, so Esc is the game's.
+## select leaves the game and the title card's pages go back one. False if none of those was
+## showing, so Esc is the game's.
 func escape() -> bool:
 	if confirm.visible:
 		confirm.cancel()
@@ -305,8 +352,8 @@ func escape() -> bool:
 		creator.cancelled.emit()
 	elif character_select.visible:
 		leave_game()
-	elif title_card.is_visible_in_tree() and join_page.visible:
-		show_main_menu()
+	elif title_card.is_visible_in_tree() and _page_before(_page()) != null:
+		_show_page(_page_before(_page()))
 	else:
 		return false
 	return true

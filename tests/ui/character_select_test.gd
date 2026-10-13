@@ -111,7 +111,7 @@ func test_a_refusal_is_shown_on_the_title_card() -> void:
 func test_joining_remembers_the_address() -> void:
 	var path := Settings.path
 	Settings.path = "user://test_settings_join.cfg"
-	ui.hud.title.join_button.pressed.emit()
+	ui.hud.title._show_page(ui.hud.title.join_page)
 	ui.hud.title.address_field.text = "127.0.0.1:7399"
 	ui.hud.title.connect_button.pressed.emit()
 	check_eq(Net.mode, Net.Mode.CLIENT, "joining")
@@ -124,7 +124,7 @@ func test_joining_remembers_the_address() -> void:
 	Settings.path = path
 
 func test_join_needs_an_address() -> void:
-	ui.hud.title.join_button.pressed.emit()
+	ui.hud.title._show_page(ui.hud.title.join_page)
 	ui.hud.title.address_field.text = "  "
 	ui.hud.title.address_field.text_submitted.emit("  ")
 	check_eq(Net.mode, Net.Mode.NONE, "not joining")

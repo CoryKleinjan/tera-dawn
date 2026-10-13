@@ -347,16 +347,26 @@ func test_title_screen_hides_the_status_bar_and_minimap() -> void:
 	check(not ui.hud.minimap_button.visible, "no minimap button either")
 	check(await ui.redraw(ui.hud.overlay), "the overlay draws without the minimap")
 
-func test_the_title_menu_offers_solo_host_and_join() -> void:
+func test_play_leads_to_solo_and_co_op_and_co_op_to_host_and_join() -> void:
 	ui.hud.show_title(false)
 	var title := ui.hud.title
-	var order := title.main_menu.get_children().map(func(b: Button) -> String: return b.text)
-	check_eq(order, ["Play solo", "Host co-op", "Join a friend", "Settings", "Quit"], "the menu")
-	check(not title.join_page.visible, "the Join page waits")
+	var texts := func(menu: Control) -> Array: return menu.get_children().map(func(b: Button) -> String: return b.text)
+	check_eq(texts.call(title.main_menu), ["Play", "Settings", "Quit"], "the main menu")
+	check_eq(texts.call(title.play_menu), ["Solo", "Co-op", "Back"], "Play's menu")
+	check_eq(texts.call(title.coop_menu), ["Host", "Join", "Back"], "Co-op's menu")
+	check(not title.play_menu.visible and not title.coop_menu.visible and not title.join_page.visible, "only the main menu at first")
+	title.menu_play_button.pressed.emit()
+	check(title.play_menu.visible and not title.main_menu.visible, "Play shows Solo and Co-op")
+	title.coop_button.pressed.emit()
+	check(title.coop_menu.visible and not title.play_menu.visible, "Co-op shows Host and Join")
 	title.join_button.pressed.emit()
-	check(title.join_page.visible and not title.main_menu.visible, "Join a friend asks for the address")
+	check(title.join_page.visible and not title.coop_menu.visible, "Join asks for the address")
 	await ui.press("pause")
-	check(title.main_menu.visible and not title.join_page.visible, "Esc goes back to the menu")
+	check(title.coop_menu.visible, "Esc goes back to Co-op")
+	(title.coop_menu.get_child(2) as Button).pressed.emit()
+	check(title.play_menu.visible, "Back goes to Play")
+	await ui.press("pause")
+	check(title.main_menu.visible and not title.play_menu.visible, "Esc goes back to the main menu")
 	Net.refused.emit("Couldn't reach the host.")
 	check(title.main_menu.visible and title.message.visible, "a refusal shows under the menu")
 

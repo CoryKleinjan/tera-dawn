@@ -24,9 +24,9 @@ code is laid out and links a page per system, with how to add a monster, map, it
 
 1. Install [Godot 4.7](https://godotengine.org/download) (the standard build; C# isn't needed).
 2. In the Project Manager, choose **Import** and pick this folder's `project.godot`.
-3. Press **F5**. On the title screen pick **Play solo**, **Host co-op** (friends join on UDP
-   port 7350, which must be forwarded to host over the internet), or **Join a friend** and
-   type the host's address. Then pick or make a character.
+3. Press **F5**. On the title screen pick **Play**, then **Solo**, or **Co-op** and
+   **Host** (friends join on UDP port 7350, which must be forwarded to host over the
+   internet) or **Join** and type the host's address. Then pick or make a character.
 
 Characters are saved on each player's own computer under `user://characters/`. A player
 joining a friend brings one along; the host sends it back to be saved every 10 seconds, on

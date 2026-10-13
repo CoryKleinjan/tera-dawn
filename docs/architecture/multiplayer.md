@@ -38,9 +38,9 @@ TDWorld  ───────────────────────�
   `Net.ask(&"req_…", [args])`; the server answers with events, and `Game.me` (your copy of
   your Character) is refreshed from them. Never change `Game.me` to make something happen.
 
-The three ways to play all use the same rules: **Play solo** runs a server inside the game
-with an offline peer (messages never touch the network), **Host co-op** does the same on an
-ENet port so friends can join, and **Join a friend** connects to a host's port.
+The three ways to play all use the same rules: **Solo** runs a server inside the game with
+an offline peer (messages never touch the network), **Co-op > Host** does the same on an
+ENet port so friends can join, and **Co-op > Join** connects to a host's port.
 
 Hosting on a home network: character select shows the host what friends type to join
 (`TDHostPanel`, `scripts/ui/host_panel.gd`): this computer's home network address from
@@ -84,7 +84,7 @@ computer, and they bring one along to whatever game they play.
   encrypts, but checks the host's identity only when the game ships its certificate as
   `res://certs/<address>.crt`, so hosts are encrypted but not verified.
 - On the client, the title screen (`TDTitleScreen`, `scripts/ui/title_screen.gd`) has Play
-  solo, Host co-op and Join a friend (the host's address), answers `Net.welcomed`,
+  (Solo, or Co-op with Host and Join, which asks for the host's address), answers `Net.welcomed`,
   `characters_changed`, `refused`, `joined` and `disconnected`; `TDCharacterSelect` (on it)
   shows the list and `TDDeleteConfirm` asks before deleting. `TDHud` only shows and hides it
   and handles Esc. `settings.cfg` remembers the last host address.

@@ -37,8 +37,9 @@ quickslots, chat, the windows (the window manager above), the first-time hints, 
 menu (Esc) and the settings screen, and Esc and pausing (`escape`, `show_title`, `resume`).
 
 `TDTitleScreen` (`scripts/ui/title_screen.gd`, `hud.title`) is the dimmed layer over the game
-before you play and while paused: the key art, the title card (the logo over Play solo, Host
-co-op, Join a friend, Settings and Quit, and the Join page with the host's address),
+before you play and while paused: the key art, the title card (the logo over Play, Settings and
+Quit; Play opens Solo and Co-op, Co-op opens Host and Join, and Join asks for the host's
+address; Back and Esc step back one page),
 character select, the creator and their questions. It runs everything from the first button
 to `Net.joined` (see [multiplayer](multiplayer.md)) and tells the HUD through signals:
 `settings_requested`, `quit_requested` and `left_game` (left, dropped or turned away: show

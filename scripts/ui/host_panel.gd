@@ -1,7 +1,7 @@
 class_name TDHostPanel
 extends VBoxContainer
-## On character select while hosting: what friends on the same network type under Join a
-## friend (with a Copy button), and on Windows a button that lets them through the firewall
+## On character select while hosting: what friends on the same network type under Co-op >
+## Join (with a Copy button), and on Windows a button that lets them through the firewall
 ## when it would block them (LanHost).
 
 var address_label: Label
