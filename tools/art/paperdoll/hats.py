@@ -377,20 +377,9 @@ def save_hair_cut(hero, name, head=False):
         if head:  # (nor any through its eye holes: inside a helm's outline his hair never shows)
             strip[:, i * fw:(i + 1) * fw][~ss.dilate(~spanned(solid), HAIR_CUT_TUCK)] = 255
     save_strip(softened(strip), name, "haircut", "hair_cut")
-    heads = [his_head(f, fi) for f, fi in zip(hero.frames, hero.info)]
-    for style in HAIRSTYLES:  # each hairstyle's own cut: none of it left hanging loose
-        path = os.path.join(LAYERS, f"hair_{style}.png")
-        if os.path.exists(path):
-            hair = np.asarray(Image.open(path))[..., 3] > 0
-            cut = no_loose_hair(strip, solids, heads, hair, fw, [fi["r"] for fi in hero.info], style in HAIR_HEAD_ONLY,
-                                [fi["head"] for fi in hero.info], [n in BACK_VIEW for n in hero.names])
-            if style in HAIR_HEAD_ONLY:
-                cut = as_in(cut, hair, hero, HAIR_HAT_POSE)
-            cut = nothing_ahead(cut, hero, heads)
-            # (softened only where some of this hair shows beside it: none peeks out along a soft
-            # edge with nothing beside it)
-            hard = (cut[..., 3] > 0) & ~ss.dilate(hair & (cut[..., 3] == 0), HAIR_CUT_TUCK + 1)
-            save_strip(softened(cut, hard), name, "haircut", "hair_cuts", style)
+    for style in HAIRSTYLES:  # (every style: just his own hair, cut to the hat's shape)
+        if os.path.exists(os.path.join(LAYERS, f"hair_{style}.png")):
+            save_strip(softened(strip), name, "haircut", "hair_cuts", style)
 
 
 def nothing_ahead(cut, hero, heads):
