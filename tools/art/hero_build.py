@@ -129,7 +129,7 @@ def key(c, bg):
         rgb, alpha = defringe(rgb, alpha, bg)
     # nothing enclosed by the figure is background: the magenta key reads dark violet (his
     # eyes) as dark magenta, and the white key his pale shirt as white, so put those back
-    clear = alpha < 0.5
+    clear = ~close(alpha >= 0.5, 4)  # (gaps in his outline closed, so an eye at its edge counts)
     h, w = clear.shape
     border = [(y, x) for y in (0, h - 1) for x in range(0, w, 4)] + [(y, x) for x in (0, w - 1) for y in range(0, h, 4)]
     inside = ~dilate(flood(clear, border), 2, outside=True)
@@ -268,19 +268,7 @@ class Body:
         self.name = name
         self.base = keyed("body_" + name)
         self.bald = aligned(keyed("body_%s_bald" % name), self.base)
-        for rc in self.bald:
-            self.bald[rc] = self.cleaned(rc)
         self.fit = Fit(self.base[POSES["idle"]][1])
-
-    def cleaned(self, rc):
-        """A bald cell without the faint lines the edit left where his hair was (thin
-        traces of its outline, which would poke out from under a hat)."""
-        rgb, a = self.bald[rc]
-        was_hair = self.hair_region(rc)
-        solid = a > 0.5
-        opened = dilate(~dilate(~solid, 4, outside=True), 4)  # what survives shrinking by 4 and growing back
-        ghost = was_hair & (a > 0.02) & ~opened
-        return rgb, a * ~dilate(ghost, EDGE)
 
     def hair_region(self, rc):
         """Where his hair is on a cell (what the bald sheet took away), a little grown."""
