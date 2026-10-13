@@ -15,6 +15,7 @@ func check() -> void:
 	ch.job = Content.job(&"beginner")
 	ch.level = maxi(ch.level, 10)
 	ch.base.intelligence = 20
+	ch.quests.done[&"jtest_mage"] = true
 	_me().dirty_character = true
 	await _ticks(2)
 	_teleport(Vector2(guide.position.x - 30, guide.position.y))

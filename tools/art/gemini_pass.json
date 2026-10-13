@@ -11095,6 +11095,31 @@
     ],
     "text": "The first image is a sheet of NPC characters for my 2D side-scrolling game: two rows, each row the same characters standing in the same spots, with a label above each. Keep the sheet's size, layout, magenta background, label bands, and each character's position, size, chibi proportions and art style exactly. The second image shows more of my game's NPC characters; the new ones must look like they belong with them: soft cel-painted shading, rich warm colours, dark brown outlines, painted cloth folds and worn patches. Replace the characters as follows, the same thing in both rows of each column: Column 1 (label it GIRL): a small cheerful girl of about eight who lives by the sea, the same height as the kid in the first image: copper-red hair in two short braids tied with string, freckles across her nose and cheeks, big bright eyes, a simple sun-yellow knee-length dress with a faded blue sash tied at the waist that has one small sewn patch, barefoot with a little sand on her feet. She stands still in a calm, happy pose, hands at her sides. Column 2 (label it SHELL): one large seashell drawn alone, filling most of the cell, the kind a child would pick as the best shell on the beach: a fan-shaped scallop shell with soft ridges, creamy white fading to warm coral pink at the edges, with a pearly sheen, seen from the front. Column 3 (label it EMPTY) and column 4 (label it EMPTY): leave empty, plain magenta. Rules: the girl stands upright, facing slightly toward the viewer, both feet flat on one level ground line, full body in its cell. Hands are simple rounded fingerless mittens in the game's style. Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background everywhere outside the characters, the shell and the labels."
    }
+  },
+  {
+   "id": "tear_boss",
+   "prompts": null,
+   "batch": "Lv 10 job test: tear boss (test)",
+   "with": null,
+   "refs": [],
+   "save": "mon_tear_boss.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    4,
+    3
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 main story thread (Cory 16:46Z 'that works.' to the plan and the starlit stone beast look): small test of the Lv 10 job test boss that steps out of a tear. Edit of mon_reef_titan keeping its 12-frame boss layout. Shown to Cory before anything goes in game. Cory approved the result for the game (17:14Z 'yes. i like that look.'); cut by art/sheets/tear_boss.json.",
+   "edit": {
+    "base": "art/source/mon_reef_titan.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ],
+    "text": "The first image is a 12-frame animation sheet of a boss monster for my 2D side-scrolling game: three rows of four frames on a magenta background, each frame with its numbered label in the dark band above it (IDLE 1, IDLE 2, MOVE 1, MOVE 2, MOVE 3, ATTACK WIND-UP, ATTACK STRIKE, SPECIAL, HURT, ENRAGED, DEFEATED 1, DEFEATED 2). Keep the sheet's size, grid, label bands and labels, and keep each frame's pose, size, facing and place in its cell exactly. Replace the coral-reef titan with a new boss, the same creature in every frame: a hulking stone beast that came out of a rift of white light, as if from a world that is already gone. Its body is heavy pale grey-blue stone with a faint violet tint, broad shoulders, huge stone fists and thick legs, the same build as the titan. Deep cracks run all over it and soft white starlight glows from inside the cracks; tiny star specks glint on its stone like a night sky. Its face is a blunt stone brow with two calm glowing white eyes and no mouth detail except a dark crack. Where the titan has a ship's wheel on its chest, the beast has a round glowing white core set in the stone. Remove all coral, seaweed, fish and bubbles. Frame details: ATTACK WIND-UP raises one fist with its cracks glowing brighter; ATTACK STRIKE slams the fist down with a small burst of white light at the ground; SPECIAL opens its chest core in a bright white flare with a few drifting star specks; HURT recoils with a few stone chips flying; ENRAGED glows strongly white-violet from every crack and the eyes blaze; DEFEATED 1 cracks apart with chips falling and the glow fading; DEFEATED 2 lies collapsed in a heap of dark stone with the light gone out. The second image shows my game's NPC characters; the beast must look like it belongs with them: rich colours, strong light and shadow with bright highlights, visible painted texture on the stone at a fairly chunky brush scale, and a dark outline. Painted, not pixel art: smooth painted shading, no visible pixels, no dithering. No ground shadow under it. Flat pure magenta #FF00FF background everywhere outside the creature and its light effects and the label bands."
+   }
   }
  ]
 }

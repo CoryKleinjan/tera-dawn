@@ -631,6 +631,12 @@ func ev_drop(snap: Array) -> void:
 	if world:
 		world.add_drop(snap)
 
+## The map's tear opened (MapInstance.check_tear).
+@rpc("authority", "call_local", "reliable")
+func ev_tear() -> void:
+	if world:
+		world.open_tear()
+
 @rpc("authority", "call_local", "reliable")
 func ev_drop_gone(id: int, by: int) -> void:
 	if world:

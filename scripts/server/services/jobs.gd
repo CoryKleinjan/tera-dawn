@@ -11,8 +11,11 @@ const ADVANCE_JINGLE := &"jingle_jobadvance"
 func on_advance(peer: int, npc_id: StringName, job_id: StringName) -> void:
 	var p := player_of(peer)
 	var next := _instructed(p, npc_id, job_id)
-	if next == null:
-		return
+	if next != null:
+		advance(p, next)
+
+## Makes the player a `next` (telling them why not, if they can't be one yet).
+func advance(p: SimPlayer, next: JobDef) -> void:
 	var problem := p.character.advance(next)
 	if problem != "":
 		tell(p, problem)

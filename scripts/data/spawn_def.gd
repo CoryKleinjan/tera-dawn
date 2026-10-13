@@ -11,6 +11,9 @@ extends Resource
 ## stretch of floor, such as a town's NPCs.
 @export var patrol_from := -1.0
 @export var patrol_to := -1.0
+## Waits out of sight until the map's tear opens (MapDef.tear_platform), steps out of it,
+## and doesn't come back once defeated.
+@export var from_tear := false
 
 ## The part of `p` these monsters walk on (all of it unless a patrol range is set).
 func patrol_area(p: Platform) -> Platform:

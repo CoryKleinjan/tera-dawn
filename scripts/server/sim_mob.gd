@@ -77,6 +77,8 @@ var children: Array[SimMob] = []
 var parent: SimMob
 ## A split-off monster waiting for its parent to be defeated.
 var asleep := false
+## Waits for the map's tear and stays down once defeated (SpawnDef.from_tear).
+var from_tear := false
 ## Bosses: damage each player (peer) has done lately, whether the second wind has come,
 ## and ticks spent unable to reach the target.
 var threat := {}
@@ -205,7 +207,7 @@ func step() -> void:
 	if dead:
 		if death_t > 0:
 			death_t -= 1
-		elif parent:
+		elif parent or from_tear:
 			asleep = true
 		elif not asleep:
 			respawn -= 1

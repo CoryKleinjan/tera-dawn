@@ -95,6 +95,8 @@ func _check_jobs() -> void:
 	c.level = 10
 	_check(c.advance(warrior).contains("STR"), "advancing to Warrior needs 35 STR")
 	c.base.strength = 35
+	_check(c.advance(warrior) == "Pass the Job Test first.", "advancing to Warrior needs the Job Test")
+	c.quests.done[warrior.advance_quest.id] = true
 	var hp := c.max_hp()
 	_check(c.advance(warrior) == "" and c.job == warrior, "a level 10 Beginner with 35 STR becomes a Warrior")
 	_check(c.gear.weapon() == Content.item(&"bronze_sword") and c.max_hp() >= hp, "the Warrior gets a Bronze Sword and wears it")

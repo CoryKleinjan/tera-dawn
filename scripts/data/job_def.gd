@@ -40,6 +40,9 @@ extends Resource
 @export var advance_level := 10
 ## Base stats (STR, DEX, INT, LUK, before gear) needed to advance.
 @export var advance_requirements: StatBlock
+## A quest to hand in first (the job tutor's test). Handing it in advances you right away
+## when nothing else stands in the way (ServerQuests.on_quest_complete).
+@export var advance_quest: QuestDef
 ## Items handed over when advancing (each gives `min_amount`): the job's basic weapon (the
 ## first weapon here is worn right away, see Character.advance), and potions.
 ## Better weapons only drop.
