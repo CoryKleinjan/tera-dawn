@@ -57,8 +57,8 @@ update this page when one changes. Each zone's own look and music are in
   buff, a party buff (reaches party members nearby) and a passive. Their max levels add up to the
   SP earned from Lv 10 to 30, so all are maxed by the second tier at Lv 30. No finishers in the
   first job; later tiers get them.
-- Shield slot: Warriors and Beginners wear a shield, a Thief throwing stars (with a dagger in hand),
-  a Magician a book, an Archer a quiver worn on the back, a Pirate a pistol (with knuckles). Stars
+- Off-hand slot (once the Shield slot): Warriors and Beginners wear a shield, a Thief throwing
+  stars (with a dagger in hand), a Magician a book, an Archer a quiver worn on the back, a Pirate a pistol (with knuckles). Stars
   and pistols never run out. A Thief's dagger hits one monster and the stars hit a crowd; a
   Pirate's fists hit one and the pistol a crowd.
 

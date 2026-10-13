@@ -44,7 +44,7 @@ There are four inventory tabs, and the class of the item decides which one it go
 
 Equipment slots: Weapon, Hat, Top, Bottom, Shoes, Gloves, Cape, Earrings, Pendant, two Rings
 and Shield (`EquipDef.Slot` and `Equipment.PLACES_FOR`). Adding a slot means adding it to both.
-The Shield slot holds a job's off-hand too: `EquipDef.offhand_kind` says what a piece is
+The Shield slot is called Off-hand in the game (its place key stays `shield`): it holds a shield or a job's off-hand: `EquipDef.offhand_kind` says what a piece is
 (shield, star, book, quiver, pistol; `Gear.offhand`), and skills can ask for one
 (`SkillDef.offhand`).
 

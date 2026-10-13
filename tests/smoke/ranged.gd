@@ -2,7 +2,7 @@ extends SmokeArea
 ## Ranged and magic attacks: arrows, spells and throwing stars.
 
 ## An Archer's bow shoots arrows that fly to the monster (no ammo needed), a Magician's
-## Ice Spike uses magic, and a Thief's stars in the shield slot throw with nothing in the bag.
+## Ice Spike uses magic, and a Thief's stars in the off-hand slot throw with nothing in the bag.
 func check() -> void:
 	var ch := _me().character
 	var meadow: MapInstance = Net.server.maps[&"meadow"]
@@ -58,7 +58,7 @@ func check() -> void:
 	ch.equipment.take(&"weapon")
 	ch.equipment.put(&"weapon", ItemStack.exact(Content.item(&"rusty_dagger")))
 	ch.skills.learned[&"star_scatter"] = 1
-	_check(ch.skills.use_problem(Content.skill(&"star_scatter")).contains("throwing stars"), "Star Scatter needs stars in the shield slot")
+	_check(ch.skills.use_problem(Content.skill(&"star_scatter")).contains("throwing stars"), "Star Scatter needs stars in the off-hand slot")
 	var shield := ch.equipment.take(&"shield")
 	ch.equipment.put(&"shield", ItemStack.exact(Content.item(&"iron_star")))
 	_check(ch.skills.use_problem(Content.skill(&"star_scatter")) == "", "and needs no ammo")
