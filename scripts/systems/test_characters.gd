@@ -1,6 +1,6 @@
 class_name TestCharacters
 extends RefCounted
-## Developer-only test characters: one per job at Character.MAX_LEVEL, wearing the best gear
+## Developer-only test characters: one per job at LEVEL, wearing the best gear
 ## that job can wear, with every skill learned to its highest level and plenty of Dawnshards.
 ## Everything is read from the data, so a new job, skill or piece of gear shows up here with
 ## no code change.
@@ -21,6 +21,9 @@ const FOLDER := "dev"
 ## A test character is called this plus its job's name (cut to CharacterStore.MAX_NAME).
 const NAME_PREFIX := "Dev "
 const SHARDS := 50000
+## The level test characters are made at: the top of the game's content so far, under the
+## Character.MAX_LEVEL cap.
+const LEVEL := 35
 
 ## Whether this build may make and use test characters: never in a release export.
 static func allowed() -> bool:
@@ -77,12 +80,14 @@ static func name_for(job: JobDef) -> String:
 	return CharacterStore.clean_name(NAME_PREFIX + job.display_name)
 
 ## The town a `job` test character starts in: the town of the instructor who teaches that
-## job, or the nearest job before it that has one. The starting job (no instructor) starts
+## job, or the nearest job before it that has one (a blend: its first parent's town). The starting job (no instructor) starts
 ## where every new character does, Character.START_MAP.
 static func home_town(job: JobDef) -> StringName:
 	var line := path_to(job)
 	line.reverse()
 	for j in line:
+		if j.partner != &"":
+			continue # a blend is taught in both its parents' towns: start in the first one's
 		for m: MapDef in Content.maps.values():
 			for n in m.npcs:
 				if n.npc and j.id in n.npc.instructs:
@@ -106,7 +111,7 @@ static func build(char_name: String, job: JobDef) -> Character:
 		if problem != "":
 			push_warning("Test character %s couldn't become a %s: %s" % [char_name, next.display_name, problem])
 			break
-	_level_to(c, Character.MAX_LEVEL)
+	_level_to(c, LEVEL)
 	_wear_best_gear(c)
 	_spend_ap(c)
 	_learn_every_skill(c)
@@ -190,7 +195,7 @@ static func _wearable(job: JobDef, lvl: int) -> Array[EquipDef]:
 	var out: Array[EquipDef] = []
 	for it: ItemDef in Content.items.values():
 		var e := it as EquipDef
-		if e and (e.jobs.is_empty() or job.family in e.jobs) and e.required_level <= lvl:
+		if e and (e.jobs.is_empty() or job.wear_families().any(func(f: StringName) -> bool: return f in e.jobs)) and e.required_level <= lvl:
 			out.append(e)
 	return out
 

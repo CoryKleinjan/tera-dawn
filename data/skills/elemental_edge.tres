@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="SkillDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
+[ext_resource type="Resource" path="res://data/effects/buff_rise.tres" id="e_buff_rise"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/elemental_edge.png" id="i_icon"]
+
+[resource]
+script = ExtResource("1_skill_def")
+id = &"elemental_edge"
+display_name = "Elemental Edge"
+job = &"spellblade"
+max_level = 10
+kind = 1
+description = "Charge your weapon with an element. Cast it to pick fire, again for ice, again for lightning. While it lasts every attack burns, chills, or sparks to one more monster."
+icon = ExtResource("i_icon")
+mp_cost = 10
+duration = 120.0
+duration_per_level = 20.0
+elements = true
+burn = 0.1
+burn_per_level = 0.03333
+slow = 1.0
+slow_per_level = 0.11111
+spark = 0.2
+spark_per_level = 0.03333
+animation = &"cast"
+flash = Color(0.95, 0.6, 1.0, 1)
+effect = ExtResource("e_buff_rise")

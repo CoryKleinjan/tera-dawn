@@ -21,11 +21,19 @@ func spend(stat: StringName, amount := 1) -> bool:
 	return true
 
 ## How the Auto button spends the unspent points, as {stat: amount}: all of them in the
-## job's one stat (gear only ever asks for that one).
+## job's one stat (gear only ever asks for that one), or for a blend half in each of its two
+## (the odd one in the first job's stat).
 func auto_plan() -> Dictionary:
 	if points <= 0:
 		return {}
-	return {StringName(character.job.primary_stat): points}
+	var stats := character.job.damage_stats()
+	if stats.size() < 2:
+		return {stats[0]: points}
+	var half := points / 2
+	var out := {stats[0]: points - half}
+	if half > 0:
+		out[stats[1]] = half
+	return out
 
 ## Points spent so far: how far the base stats are above the job's starting stats.
 func spent() -> int:
@@ -36,7 +44,7 @@ func spent() -> int:
 
 ## What a stat started at: the starting stats of the job the character's line began with.
 func _starting_stat(stat: StringName) -> int:
-	var line := character.job_line()
+	var line := character.job_path()
 	var first := Content.job(line[-1]) if not line.is_empty() else character.job
 	return first.starting_stats.value(stat) if first and first.starting_stats else 0
 

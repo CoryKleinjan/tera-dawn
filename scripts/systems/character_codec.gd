@@ -11,12 +11,12 @@ const STAT_RULES := 1
 static func to_dict(c: Character) -> Dictionary:
 	return {
 		"name": c.name, "appearance": c.appearance.to_dict(), "level": c.level, "xp": c.xp, "shards": c.shards, "map_id": c.map_id,
-		"job": c.job.id, "base": c.base.to_dict(), "ap": c.ap.points, "ap_reset_used": c.ap.reset_used,
+		"job": c.job.id, "came_from": String(c.came_from), "base": c.base.to_dict(), "ap": c.ap.points, "ap_reset_used": c.ap.reset_used,
 		"stat_rules": STAT_RULES,
 		"hp": c.health.hp, "mp": c.mp,
 		"inventory": c.inventory.to_dict(), "equipment": c.equipment.to_dict(), "storage": c.storage.to_dict(),
 		"quests": c.quests.to_dict(),
-		"skills": _string_keys(c.skills.learned), "sp": c.skills.points, "buffs": _string_keys(c.skills.buffs),
+		"skills": _string_keys(c.skills.learned), "sp": c.skills.points, "buffs": _string_keys(c.skills.buffs), "element": c.skills.element,
 		"quickslots": c.quickslots.map(func(q: Array) -> Array: return q.map(func(v) -> String: return String(v))),
 		"buddies": c.buddies.duplicate(), "fame": c.fame, "fame_day": c.fame_day, "fame_given": c.fame_given.duplicate(), "guild": c.guild,
 		"book": c.book.to_dict(), "pet": String(c.pet), "pet_full": c.pet_full, "visited": c.visited.duplicate(),
@@ -44,6 +44,8 @@ static func load_dict(c: Character, data: Dictionary) -> void:
 	var j := StringName(str(data.get("job", Character.START_JOB)))
 	if Content.jobs.has(j):
 		c.job = Content.jobs[j]
+	var from := StringName(str(data.get("came_from", "")))
+	c.came_from = from if c.job and c.job.opens_from(from) else &""
 	if data.get("base") is Dictionary:
 		c.base = StatBlock.from_dict(data["base"])
 		c.ap.points = maxi(0, int(data.get("ap", 0)))
@@ -78,6 +80,7 @@ static func load_dict(c: Character, data: Dictionary) -> void:
 			var b: Variant = data["buffs"][k]
 			if Content.skills.has(StringName(k)) and b is Array and b.size() == 2:
 				skills.buffs[StringName(k)] = [int(b[0]), int(b[1])]
+	skills.element = clampi(int(data.get("element", 0)), 0, SkillBook.ELEMENTS.size() - 1)
 	if data.get("quickslots") is Array:
 		var saved: Array = data["quickslots"]
 		for i in Character.QUICKSLOTS:

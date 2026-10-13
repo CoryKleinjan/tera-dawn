@@ -23,7 +23,7 @@ const QUICKSLOTS := 8
 ## The innate attack bound to the attack key.
 const BASIC_ATTACK := &"basic_attack"
 ## The level cap: EXP stops here, as there are no fields for higher levels yet.
-const MAX_LEVEL := 35
+const MAX_LEVEL := 100
 ## What a storage keeper charges to store one stack.
 const STORE_FEE := 10
 
@@ -37,6 +37,9 @@ var mp := 0
 var map_id: StringName = START_MAP
 var health := Health.new()
 var job: JobDef
+## The job this character advanced into `job` from (for a blend, which of its two parents),
+## or empty for a job reached the usual way.
+var came_from: StringName = &""
 ## Stats from the job and Ability Points, before gear.
 var base := StatBlock.new()
 ## Unspent Ability Points and the free reset.
@@ -292,18 +295,33 @@ func stats_short_of(next: JobDef) -> Dictionary:
 				out[stat] = need
 	return out
 
-## The jobs whose skills this character may learn: their own and every job before it.
-func job_line() -> Array[StringName]:
+## The jobs this character has been, newest first: their job, the one they advanced from
+## (`came_from` for a blend), and so on back to the Beginner.
+func job_path() -> Array[StringName]:
 	var out: Array[StringName] = []
 	var j := job
 	while j and not j.id in out:
 		out.append(j.id)
-		j = Content.jobs.get(j.advances_from)
+		var back := came_from if j == job and j.opens_from(came_from) else j.advances_from
+		j = Content.jobs.get(back)
+	return out
+
+## The jobs whose skills this character may learn: every job on their path, plus for a blend
+## the other parent job (a Warrior who becomes a Spellblade learns Magician skills too).
+func job_line() -> Array[StringName]:
+	var out := job_path()
+	for id in out.duplicate():
+		var j: JobDef = Content.jobs.get(id)
+		if j == null:
+			continue
+		for parent in j.parents():
+			if not parent in out:
+				out.append(parent)
 	return out
 
 ## Why the character can't advance to `next`, or "" if they can.
 func advance_problem(next: JobDef) -> String:
-	if next.advances_from != job.id:
+	if not next.opens_from(job.id):
 		return "A %s can't become a %s." % [job.display_name, next.display_name]
 	if level < next.advance_level:
 		return "You need to be level %d to become a %s." % [next.advance_level, next.display_name]
@@ -324,6 +342,7 @@ func advance(next: JobDef) -> String:
 	var problem := advance_problem(next)
 	if problem != "":
 		return problem
+	came_from = job.id if next.partner != &"" else &""
 	job = next
 	# a job taken late still pays its Skill Points for every level since it opened
 	skills.points += next.advance_sp + (level - next.advance_level) * next.sp_per_level
@@ -345,7 +364,7 @@ func advance(next: JobDef) -> String:
 func _wear_advance_weapon(next: JobDef) -> void:
 	for slot in [EquipDef.Slot.WEAPON, EquipDef.Slot.SHIELD]:
 		var worn := gear.weapon() if slot == EquipDef.Slot.WEAPON else gear.offhand()
-		if worn and next.family in worn.jobs:
+		if worn and next.wear_families().any(func(f: StringName) -> bool: return f in worn.jobs):
 			continue
 		for g in next.advance_gifts:
 			var e := g.item as EquipDef

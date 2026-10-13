@@ -6,6 +6,10 @@ extends Resource
 ##
 ## Everyone starts as a Beginner (`advances_from` empty). A job instructor (an NpcDef that
 ## `instructs` this job) advances a character from `advances_from` at `advance_level`.
+##
+## A second-tier job is a blend of two first jobs: `advances_from` and `partner`. Either one can
+## advance into it, both their skill books open to it, both their stats drive its damage and
+## it wears both their gear.
 
 @export var id: StringName
 @export var display_name := ""
@@ -17,6 +21,9 @@ extends Resource
 @export var tint := Color.WHITE
 ## The one stat that drives the job's damage (STR for warriors). No other stat adds to it.
 @export_enum("strength", "dexterity", "intelligence", "luck", "charisma") var primary_stat := "strength"
+## A second stat that drives damage as much as `primary_stat` (a blend's partner stat): the
+## two are added together. Empty: only `primary_stat`.
+@export var secondary_stat: StringName
 ## Hit with whichever base stat is highest instead of `primary_stat`, so any build works
 ## (the Beginner, who hasn't picked a path yet).
 @export var uses_best_stat := false
@@ -36,6 +43,9 @@ extends Resource
 @export_group("Advancement")
 ## The job you advance from (empty: you start as this job).
 @export var advances_from: StringName
+## For a blend, the other first job that can advance into it too. Its skills open to this job
+## and its gear fits.
+@export var partner: StringName
 @export var advance_level := 10
 ## Base stats (STR, DEX, INT, LUK, before gear) needed to advance.
 @export var advance_requirements: StatBlock
@@ -98,10 +108,50 @@ func is_starting_job() -> bool:
 static func paths_from(from: StringName) -> Array[JobDef]:
 	var out: Array[JobDef] = []
 	for j: JobDef in Content.jobs.values():
-		if j.advances_from == from and from != &"":
+		if j.opens_from(from):
 			out.append(j)
 	out.sort_custom(func(a: JobDef, b: JobDef) -> bool:
 		return a.display_name < b.display_name if a.advance_level == b.advance_level else a.advance_level < b.advance_level)
+	return out
+
+## The stats that drive damage: `primary_stat`, and `secondary_stat` when it has one.
+func damage_stats() -> Array[StringName]:
+	var out: Array[StringName] = [StringName(primary_stat)]
+	if secondary_stat != &"" and secondary_stat != StringName(primary_stat):
+		out.append(secondary_stat)
+	return out
+
+## What damage is worked out from: `damage_stat` for one-stat jobs, or both stats added
+## together for a blend, so a point in either is worth the same.
+func damage_stat_value(total: StatBlock) -> int:
+	if uses_best_stat:
+		return total.value(damage_stat(total))
+	var out := 0
+	for stat in damage_stats():
+		out += total.value(stat)
+	return out
+
+## The jobs that can advance into this one: `advances_from`, and `partner` for a blend.
+func parents() -> Array[StringName]:
+	var out: Array[StringName] = []
+	if advances_from != &"":
+		out.append(advances_from)
+	if partner != &"" and partner != advances_from:
+		out.append(partner)
+	return out
+
+## Whether a `from` character can advance into this job.
+func opens_from(from: StringName) -> bool:
+	return from != &"" and from in parents()
+
+## The job lines whose gear this job can wear: its own, and for a blend its parents' too.
+func wear_families() -> Array[StringName]:
+	var out: Array[StringName] = [family]
+	if partner != &"":
+		for id in parents():
+			var j: JobDef = Content.jobs.get(id)
+			if j and not j.family in out:
+				out.append(j.family)
 	return out
 
 ## "Warrior: Level 10, 35 STR", for lists of the paths open to a Beginner.

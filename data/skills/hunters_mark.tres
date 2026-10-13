@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="SkillDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
+[ext_resource type="Resource" path="res://data/projectiles/arrow.tres" id="p_arrow"]
+[ext_resource type="Resource" path="res://data/effects/arrow_hit.tres" id="e_arrow_hit"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/hunters_mark.png" id="i_icon"]
+
+[resource]
+script = ExtResource("1_skill_def")
+id = &"hunters_mark"
+display_name = "Hunter's Mark"
+job = &"wildhunter"
+max_level = 10
+kind = 0
+description = "Shoot the nearest monster and mark it: you hit it harder, and harder still up close. When it falls the mark jumps to the next one nearby."
+icon = ExtResource("i_icon")
+damage_multiplier = 1.0
+damage_per_level = 0.05556
+max_targets = 1
+reach = 380.0
+height = 120.0
+mark_bonus = 0.1
+mark_bonus_per_level = 0.02222
+mark_close_bonus = 0.1
+mark_close_per_level = 0.01111
+mark_time = 20.0
+mp_cost = 6
+recharge = 3.0
+cooldown = 30
+action_ticks = 20
+animation = &"attack"
+projectile = ExtResource("p_arrow")
+hit_effect = ExtResource("e_arrow_hit")
