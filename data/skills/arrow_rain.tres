@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="SkillDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
+[ext_resource type="Resource" path="res://data/projectiles/arrow.tres" id="p_arrow"]
+[ext_resource type="Resource" path="res://data/effects/arrow_hit.tres" id="h_arrow_hit"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/arrow_rain.png" id="i_double_shot"]
+
+[resource]
+script = ExtResource("1_skill_def")
+id = &"arrow_rain"
+display_name = "Arrow Rain"
+job = &"archer"
+max_level = 15
+kind = 0
+description = "Arrows rain down on up to five monsters ahead. Needs a bow."
+mp_cost = 10
+mp_cost_per_level = 0.5
+damage_multiplier = 1.0
+damage_per_level = 0.07143
+hits = 1
+max_targets = 5
+weapons = Array[StringName]([&"bow"])
+aims = false
+requires = &"heartseeker"
+requires_level = 1
+cooldown = 34
+action_ticks = 22
+reach = 380.0
+height = 140.0
+animation = &"attack"
+projectile = ExtResource("p_arrow")
+hit_effect = ExtResource("h_arrow_hit")
+icon = ExtResource("i_double_shot")

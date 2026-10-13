@@ -5,17 +5,26 @@ extends ItemDef
 
 ## Kinds of gear. A slot kind can have several places on the body (two rings).
 enum Slot { WEAPON, HAT, TOP, BOTTOM, SHOES, GLOVES, CAPE, EARRINGS, PENDANT, RING, SHIELD }
-const SLOT_NAMES := ["Weapon", "Hat", "Top", "Bottom", "Shoes", "Gloves", "Cape", "Earrings", "Pendant", "Ring", "Shield"]
+const SLOT_NAMES := ["Weapon", "Hat", "Top", "Bottom", "Shoes", "Gloves", "Cape", "Earrings", "Pendant", "Ring", "Off-hand"]
 ## Slots whose pieces can have a worn_style cut, and the name its layers start with.
 const WORN_STYLE_PLACES := {Slot.TOP: "top", Slot.BOTTOM: "bottom", Slot.SHOES: "shoes"}
 
 @export var slot: Slot = Slot.WEAPON
+## What each off-hand kind is called in messages ("Learn Star Scatter: needs throwing stars").
+const OFFHAND_NAMES := {&"shield": "a shield", &"star": "throwing stars", &"book": "a book",
+	&"quiver": "a quiver", &"pistol": "a pistol"}
 
 @export_group("Weapon")
-## "sword", "bow", "wand", "star", "knuckle", "gun"... Skills can require one.
+## "sword", "dagger", "bow", "wand", "staff", "knuckle"... Skills can require one.
 @export var weapon_kind: StringName
 ## Replaces the plain attack while wielded (a bow's shot). Null keeps the basic attack.
 @export var basic_attack: SkillDef
+
+@export_group("Off-hand slot")
+## What a piece worn in the off-hand slot is: "shield", or a job's off-hand ("star" for a
+## Thief's throwing stars, "book" for a Magician, "quiver" for an Archer, "pistol" for a
+## Pirate). Skills can need one (SkillDef.offhand). Off-hands are gear, never used up.
+@export var offhand_kind: StringName = &"shield"
 
 @export_group("Requirements")
 ## Job lines that can wear it (JobDef.family); empty for anyone.
@@ -25,6 +34,7 @@ const WORN_STYLE_PLACES := {Slot.TOP: "top", Slot.BOTTOM: "bottom", Slot.SHOES: 
 @export var required_dexterity := 0
 @export var required_intelligence := 0
 @export var required_luck := 0
+@export var required_charisma := 0
 
 @export_group("Stats")
 @export var stats: StatBlock
@@ -61,6 +71,10 @@ func tab() -> Tab:
 
 func stack_size() -> int:
 	return 1
+
+## How an off-hand kind reads in a sentence: "throwing stars", "a pistol".
+static func offhand_name(kind: StringName) -> String:
+	return OFFHAND_NAMES.get(kind, "a " + String(kind))
 
 ## "Warriors and Pirates" for a list of job lines.
 static func families_text(families: Array[StringName]) -> String:
@@ -117,7 +131,7 @@ func requirements() -> Dictionary:
 	if required_level > 0:
 		out[&"level"] = required_level
 	for pair in [[&"strength", required_strength], [&"dexterity", required_dexterity],
-			[&"intelligence", required_intelligence], [&"luck", required_luck]]:
+			[&"intelligence", required_intelligence], [&"luck", required_luck], [&"charisma", required_charisma]]:
 		if pair[1] > 0:
 			out[pair[0]] = pair[1]
 	return out

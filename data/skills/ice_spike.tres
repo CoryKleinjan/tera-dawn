@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="SkillDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
+[ext_resource type="Resource" path="res://data/projectiles/energy_bolt.tres" id="p_energy_bolt"]
+[ext_resource type="Resource" path="res://data/effects/energy_bolt_hit.tres" id="h_energy_bolt_hit"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/ice_spike.png" id="i_energy_bolt"]
+
+[resource]
+script = ExtResource("1_skill_def")
+id = &"ice_spike"
+display_name = "Ice Spike"
+job = &"mage"
+max_level = 15
+kind = 0
+description = "A spike of ice flies at the nearest monster, shatters and slows it. Uses Magic Attack."
+mp_cost = 6
+mp_cost_per_level = 0.35714
+damage_multiplier = 1.6
+damage_per_level = 0.12857
+hits = 1
+max_targets = 1
+magic = true
+slow = 1.0
+slow_per_level = 0.07143
+cooldown = 26
+action_ticks = 18
+reach = 340.0
+height = 100.0
+animation = &"slash"
+flash = Color(0.62, 0.86, 1.0, 1)
+projectile = ExtResource("p_energy_bolt")
+hit_effect = ExtResource("h_energy_bolt_hit")
+icon = ExtResource("i_energy_bolt")

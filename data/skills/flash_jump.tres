@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="SkillDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
+[ext_resource type="Script" path="res://scripts/data/move_def.gd" id="2_move_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/flash_jump.png" id="3_icon"]
+
+[sub_resource type="Resource" id="Resource_move"]
+script = ExtResource("2_move_def")
+style = 1
+distance = 150.0
+distance_per_level = 10.0
+ticks = 18
+on_ground = false
+in_air = true
+untouchable = false
+shoves = 0
+color = Color(1.5, 0.8, 2.1, 1)
+
+[resource]
+script = ExtResource("1_skill_def")
+id = &"flash_jump"
+display_name = "Flash Jump"
+job = &"thief"
+max_level = 5
+kind = 3
+description = "Jump again in mid-air, bursting forward in a second, longer leap."
+mp_cost = 4
+cooldown = 10
+action_ticks = 18
+move = SubResource("Resource_move")
+icon = ExtResource("3_icon")

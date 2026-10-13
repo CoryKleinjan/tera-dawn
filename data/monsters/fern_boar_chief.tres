@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=16 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=20 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/bramble_boar.tres" id="2_flame_boar_chief"]
@@ -8,6 +8,10 @@
 [ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="loot_white_potion"]
 [ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="loot_elixir"]
 [ext_resource type="Resource" path="res://data/items/setup/boar_hide_rug.tres" id="p11_boar_hide_rug"]
+[ext_resource type="Resource" path="res://data/monster_moves/boss_charge.tres" id="mv_boss_charge"]
+[ext_resource type="Resource" path="res://data/monster_moves/boss_slam.tres" id="mv_boss_slam"]
+[ext_resource type="Resource" path="res://data/monster_moves/boss_pounce.tres" id="mv_boss_pounce"]
+[ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="mv_script"]
 
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("3_drop_entry")
@@ -67,9 +71,11 @@ max_hp = 1351
 attack = 43
 exp_reward = 399
 speed = 1.0
-size = Vector2(130.0, 110.0)
+size = Vector2(103.0, 87.0)
+sight = 700.0
+moves = Array[ExtResource("mv_script")]([ExtResource("mv_boss_charge"), ExtResource("mv_boss_slam"), ExtResource("mv_boss_pounce")])
 sprite_frames = ExtResource("2_flame_boar_chief")
-sprite_scale = 1.39
+sprite_scale = 1.1
 drops = Array[ExtResource("3_drop_entry")]([SubResource("P11_boar_hide_rug"), SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_loot0"), SubResource("Resource_loot1"), SubResource("Resource_loot6")])
 boss = true
 respawn_ticks = Vector2i(1800, 2400)

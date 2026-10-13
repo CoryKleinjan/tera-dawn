@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="MonsterMove" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="1_monster_move"]
+
+[resource]
+script = ExtResource("1_monster_move")
+id = &"charge"
+kind = 1
+min_reach = 60.0
+reach = 260.0
+windup = 36
+cooldown = 240
+power = 1.2
+distance = 260.0
+speed = 6.0
+recover = 30

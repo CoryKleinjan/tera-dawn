@@ -6,6 +6,10 @@ extends Node2D
 
 ## How far it moves toward the server's position each tick (0..1).
 const FOLLOW := 0.35
+## How far it leans back while winding up a move (game pixels), and a boss's tint after
+## its second wind.
+const LEAN := 4.0
+const RAGE_TINT := Color(1.15, 0.8, 0.75)
 
 var world: TDWorld
 var index := 0
@@ -28,6 +32,9 @@ var _last_x := 0.0
 ## Hit reaction: how far it is pushed back (game pixels, fading) and hit-stop ticks left.
 var _recoil := 0.0
 var _stop_t := 0
+## How visible it is (fades out and in for a blink), and whether it shows its second wind.
+var _fade := 1.0
+var _enraged := false
 
 static func create(w: TDWorld, i: int, d: MonsterDef, p: Platform) -> TDMob:
 	var m := TDMob.new()
@@ -43,12 +50,13 @@ var dead: bool:
 ## Takes the server's latest [x, y, dir, hp, flags].
 func apply(state: Array) -> void:
 	var was_dead := dead
+	var was_hidden := flags & SnapshotFlags.MOB_HIDDEN != 0
 	target = Vector2(state[0], state[1])
 	dir = state[2]
 	hp = state[3] / 1000.0
 	flags = state[4]
-	if not known or (was_dead and not dead):
-		position = target # first sight, or back from the dead: no gliding in
+	if not known or (was_dead and not dead) or (was_hidden and flags & SnapshotFlags.MOB_HIDDEN == 0):
+		position = target # first sight, back from the dead or from a blink: no gliding in
 		death_t = 0
 	if dead and not was_dead and known:
 		death_t = SimMob.DEATH_FADE_TICKS
@@ -112,31 +120,39 @@ func _process(_delta: float) -> void:
 	if not rig.visible:
 		return
 	var fallen := dead and incoming <= 0
-	rig.set_opacity(clampf(death_t / 30.0, 0.0, 1.0) if fallen else 1.0)
+	var hidden := flags & SnapshotFlags.MOB_HIDDEN != 0
+	_fade = move_toward(_fade, 0.0 if hidden else 1.0, 0.25)
+	rig.set_opacity(clampf(death_t / 30.0, 0.0, 1.0) if fallen else _fade)
 	var hurt := flags & SnapshotFlags.MOB_HURT != 0
 	rig.set_flash(hurt and Engine.get_physics_frames() % 4 < 2)
-	# winding up a shot: a warm pulse, so the attack never comes out of nowhere
+	# winding up a move: a warm pulse and a lean back, so it never comes out of nowhere
 	var winding := flags & SnapshotFlags.MOB_WINDUP != 0 and not dead
 	rig.set_glow(0.5 + 0.5 * sin(Time.get_ticks_msec() / 45.0) if winding else 0.0)
+	var enraged := flags & SnapshotFlags.MOB_ENRAGED != 0
+	if enraged != _enraged:
+		_enraged = enraged
+		rig.set_tint(def.tint * RAGE_TINT if enraged else def.tint)
 	var facing := dir
 	if facing == 0:
 		facing = -1 if world.player.position.x < position.x else 1
 	rig.face(facing)
 	var moving := absf(position.x - _last_x) > 0.01
 	_last_x = position.x
+	var lean := Vector2.ZERO
 	if fallen:
 		rig.play(&"die")
-	elif hurt:
-		rig.play(&"hurt")
 	elif flags & SnapshotFlags.MOB_CASTING != 0:
 		rig.play(&"attack")
-	elif flags & SnapshotFlags.MOB_AGGRO != 0 and moving:
-		rig.play(&"attack")
+	elif hurt:
+		rig.play(&"hurt")
+	elif winding:
+		rig.play(&"idle")
+		lean = Vector2(-facing * LEAN, 0)
 	elif moving:
 		rig.play(&"move")
 	else:
 		rig.play(&"idle")
-	rig.place(drawn_body_position(), z)
+	rig.place(drawn_body_position() + lean, z)
 
 ## HP bar and name tag, drawn by the overlay at this monster's projected screen position
 ## (the tag goes in `tags`, which keeps tags apart). A boss's HP is on the boss bar at the

@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="SkillDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
+[ext_resource type="Resource" path="res://data/projectiles/arrow.tres" id="p_arrow"]
+[ext_resource type="Resource" path="res://data/effects/arrow_hit.tres" id="h_arrow_hit"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/heartseeker.png" id="i_arrow_blow"]
+
+[resource]
+script = ExtResource("1_skill_def")
+id = &"heartseeker"
+display_name = "Heartseeker"
+job = &"archer"
+max_level = 15
+kind = 0
+description = "One fully drawn arrow that hits hard and knocks the monster back. Needs a bow."
+mp_cost = 6
+mp_cost_per_level = 0.28571
+damage_multiplier = 1.8
+damage_per_level = 0.14286
+hits = 1
+max_targets = 1
+weapons = Array[StringName]([&"bow"])
+knockback = 2.0
+cooldown = 32
+action_ticks = 22
+reach = 400.0
+height = 90.0
+animation = &"attack"
+projectile = ExtResource("p_arrow")
+hit_effect = ExtResource("h_arrow_hit")
+icon = ExtResource("i_arrow_blow")

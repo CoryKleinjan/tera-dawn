@@ -31,10 +31,11 @@ func before_each() -> void:
 func after_each() -> void:
 	h.close()
 
-## A Beginner who meets every Magician requirement.
+## A Beginner who meets every Magician requirement, the Job Test included.
 func _ready_for_mage() -> void:
 	c.level = mage.advance_level
 	c.base.intelligence = mage.advance_requirements.intelligence
+	c.quests.done[mage.advance_quest.id] = true
 	c.recalc()
 
 func _advance(npc := &"test_instructor", job := &"mage") -> void:
@@ -59,6 +60,7 @@ func test_every_job_gets_its_basic_weapon_worn() -> void:
 			for stat in StatBlock.BASE:
 				who.base.set(stat, maxi(who.base.value(stat), job.advance_requirements.value(stat)))
 		who.recalc()
+		who.quests.done[job.advance_quest.id] = true
 		var old := who.gear.weapon()
 		check_eq(who.advance(job), "", "%s: advanced" % job.id)
 		var w := who.gear.weapon()

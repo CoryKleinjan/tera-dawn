@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="SkillDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
+[ext_resource type="Resource" path="res://data/effects/swish.tres" id="e_swish"]
+[ext_resource type="Resource" path="res://data/effects/power_strike_hit.tres" id="h_power_strike_hit"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/shoulder_bash.png" id="i_flash_fist"]
+
+[resource]
+script = ExtResource("1_skill_def")
+id = &"shoulder_bash"
+display_name = "Shoulder Bash"
+job = &"beginner"
+max_level = 3
+kind = 0
+description = "Throw your shoulder into one monster and knock it well back."
+mp_cost = 3
+mp_cost_per_level = 0.0
+damage_multiplier = 1.0
+damage_per_level = 0.25
+hits = 1
+max_targets = 1
+cooldown = 30
+action_ticks = 16
+reach = 110.0
+height = 100.0
+knockback = 2.5
+animation = &"attack"
+effect = ExtResource("e_swish")
+hit_effect = ExtResource("h_power_strike_hit")
+icon = ExtResource("i_flash_fist")

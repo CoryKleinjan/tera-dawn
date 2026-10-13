@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="SkillDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
+[ext_resource type="Resource" path="res://data/effects/swish.tres" id="e_swish"]
+[ext_resource type="Resource" path="res://data/effects/arcane_claw_hit.tres" id="h_arcane_claw_hit"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/shadow_fang.png" id="i_arcane_claw"]
+
+[resource]
+script = ExtResource("1_skill_def")
+id = &"shadow_fang"
+display_name = "Shadow Fang"
+job = &"thief"
+max_level = 15
+kind = 0
+description = "Two quick dagger strikes at one monster. Needs a dagger."
+mp_cost = 6
+mp_cost_per_level = 0.28571
+damage_multiplier = 0.9
+damage_per_level = 0.07143
+hits = 2
+max_targets = 1
+weapons = Array[StringName]([&"dagger"])
+cooldown = 24
+action_ticks = 16
+reach = 96.0
+height = 100.0
+animation = &"slash"
+effect = ExtResource("e_swish")
+hit_effect = ExtResource("h_arcane_claw_hit")
+icon = ExtResource("i_arcane_claw")

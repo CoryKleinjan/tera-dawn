@@ -2,36 +2,36 @@
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="2_stat_block"]
-[ext_resource type="Resource" path="res://data/effects/focus_aura.tres" id="3_heal"]
-[ext_resource type="Texture2D" path="res://assets/sprites/skills/focus.png" id="4_focus"]
-
-[sub_resource type="Resource" id="Resource_2"]
-script = ExtResource("2_stat_block")
-accuracy = 2
-avoid = 2
+[ext_resource type="Resource" path="res://data/effects/focus_aura.tres" id="e_focus_aura"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/focus.png" id="i_bow_shot"]
 
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("2_stat_block")
+attack = 1
 accuracy = 4
-avoid = 4
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("2_stat_block")
+attack = 2
+accuracy = 3
 
 [resource]
 script = ExtResource("1_skill_def")
 id = &"focus"
 display_name = "Focus"
 job = &"archer"
-max_level = 20
+max_level = 8
 kind = 1
-description = "Steady your breathing: Accuracy and Avoidability rise for a while."
+description = "Steady your breathing: Weapon Attack and Accuracy rise for a while."
 mp_cost = 10
-mp_cost_per_level = 0.4
+mp_cost_per_level = 0.57143
 cooldown = 30
 action_ticks = 12
-stats = SubResource("Resource_1")
-stats_per_level = SubResource("Resource_2")
 duration = 60.0
 duration_per_level = 9.0
-effect = ExtResource("3_heal")
-icon = ExtResource("4_focus")
 animation = &"cast"
 flash = Color(0.72, 1.0, 0.45, 1)
+effect = ExtResource("e_focus_aura")
+icon = ExtResource("i_bow_shot")
+stats = SubResource("Resource_1")
+stats_per_level = SubResource("Resource_2")

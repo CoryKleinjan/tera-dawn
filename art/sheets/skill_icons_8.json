@@ -1,0 +1,24 @@
+{
+  "source": "art/source/skill_icons_8.png",
+  "out_dir": "assets/sprites/skills",
+  "scale": 0.065,
+  "keep": "largest",
+  "inset": 16,
+  "cells": [
+    [
+      "all_hands",
+      "deadeye"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      1024
+    ],
+    "cols": [
+      0,
+      1024,
+      2048
+    ]
+  }
+}

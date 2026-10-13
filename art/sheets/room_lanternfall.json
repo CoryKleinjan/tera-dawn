@@ -61,7 +61,8 @@
       "flat_bottom": true
     },
     "rack": {
-      "scale": 0.3575
+      "scale": 0.3575,
+      "save": false
     },
     "lamp": {
       "scale": 0.308

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="SkillDef" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
+[ext_resource type="Resource" path="res://data/effects/magic_armor_aura.tres" id="e_magic_armor_aura"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/magic_guard.png" id="i_magic_armor"]
+
+[resource]
+script = ExtResource("1_skill_def")
+id = &"magic_guard"
+display_name = "Magic Guard"
+job = &"mage"
+max_level = 8
+kind = 1
+description = "A shimmer of magic soaks up blows: part of the damage you take comes out of your MP instead."
+mp_cost = 10
+mp_cost_per_level = 0.71429
+cooldown = 30
+action_ticks = 12
+duration = 60.0
+duration_per_level = 17.14286
+animation = &"cast"
+mp_guard = 0.25
+mp_guard_per_level = 0.05
+flash = Color(0.78, 0.55, 1.0, 1)
+effect = ExtResource("e_magic_armor_aura")
+icon = ExtResource("i_magic_armor")

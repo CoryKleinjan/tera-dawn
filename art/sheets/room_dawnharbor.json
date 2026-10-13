@@ -72,6 +72,9 @@
     },
     "shelf": {
       "flat_bottom": true
+    },
+    "rack": {
+      "save": false
     }
   },
   "grid": {

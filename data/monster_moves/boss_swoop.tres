@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MonsterMove" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="1_monster_move"]
+
+[resource]
+script = ExtResource("1_monster_move")
+id = &"boss_swoop"
+kind = 4
+reach = 320.0
+windup = 30
+cooldown = 200
+power = 1.1
+distance = 360.0
+speed = 6.0
+recover = 28

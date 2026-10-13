@@ -381,9 +381,12 @@ static func worn_cut(e: EquipDef) -> SpriteFrames:
 	var path := e.worn_style_path()
 	return load(path) if path != "" and ResourceLoader.exists(path) else null
 
-## The kind of weapon an item is held as (a weapon without a kind is a sword).
+## The kind of weapon an item is held as. A weapon without a kind, or of a kind the rig has
+## no hold for yet (a dagger, until the new hero is drawn), is held as a sword.
 static func kind_of(e: EquipDef) -> StringName:
-	return e.weapon_kind if e and e.weapon_kind != &"" else DEFAULT_WEAPON
+	if e == null or e.weapon_kind == &"" or not rig().get("weapons", {}).has(String(e.weapon_kind)):
+		return DEFAULT_WEAPON
+	return e.weapon_kind
 
 func _add(frames: SpriteFrames, behind: bool, tint := Color.WHITE, gear := false) -> void:
 	if frames:

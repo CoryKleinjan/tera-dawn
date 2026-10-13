@@ -76,8 +76,8 @@ func _draw_body() -> void:
 		if e.item.icon:
 			draw_texture_rect(e.item.icon, fit(e.item.icon, Rect2(r.position + NICHE.position * ROW_SCALE, NICHE.size * ROW_SCALE).grow(-1)), false)
 		DrawUtil.text(self, Game.ui_font, Vector2(r.position.x + SLOT + 8, r.position.y + 17), e.item.display_name, 13, Palette.MIST, 1, 3, Palette.NIGHT)
-		var afford := shards >= e.cost()
-		DrawUtil.text(self, Game.num_font, Vector2(r.position.x + SLOT + 8, r.position.y + 35), "%d" % e.cost(), 13,
+		var afford := shards >= e.cost_for(Game.me)
+		DrawUtil.text(self, Game.num_font, Vector2(r.position.x + SLOT + 8, r.position.y + 35), "%d" % e.cost_for(Game.me), 13,
 			Palette.SUN if afford else Palette.BAD, 1, 3, Palette.NIGHT)
 	list.draw_more(self, shop.items.size())
 	draw_tabs(ItemDef.TAB_NAMES, tab, TAB_Y, GRID_X)
@@ -159,7 +159,7 @@ func _tooltip_at(at: Vector2) -> Tip:
 	var row := list.row_at(at, shop.items.size())
 	if row >= 0:
 		var e := shop.items[row]
-		return Tip.new(ItemStack.unrolled(e.item), "Double-click to buy (%d Dawnshards each)" % e.cost(), true)
+		return Tip.new(ItemStack.unrolled(e.item), "Double-click to buy (%d Dawnshards each)" % e.cost_for(Game.me), true)
 	var slot := grid.at(at)
 	var stack := Game.me.inventory.at(tab, slot) if slot >= 0 else null
 	return Tip.new(stack, "Double-click to sell (%d each)" % stack.item.sell_price if stack else "")

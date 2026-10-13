@@ -194,6 +194,16 @@ func test_save_from_before_stats_hands_out_ap() -> void:
 	c.load_dict({"name": "Old", "job": "t_job", "level": 7, "sp": 0})
 	check_eq(c.ap.points, 30, "6 levels × 5 AP")
 
+func test_save_from_before_one_stat_per_job_gets_its_points_back_once() -> void:
+	var c := fx.character()
+	c.load_dict({"name": "Old", "job": "t_job", "level": 7, "base": {"strength": 12, "dexterity": 8}, "ap": 2, "sp": 0})
+	check_eq(c.ap.points, 22, "every spent point back")
+	check_eq(c.base.strength, 0, "STR back to the start")
+	c.ap.spend(&"strength", 5)
+	var again := fx.character()
+	again.load_dict(c.to_dict())
+	check_eq([again.base.strength, again.ap.points], [5, 17], "a newer save keeps its stats")
+
 func test_save_from_before_skills_hands_out_sp_and_potion_keys() -> void:
 	var c := fx.character()
 	c.job.starting_quickslots = [fx.use(&"t_red"), fx.use(&"t_blue")]

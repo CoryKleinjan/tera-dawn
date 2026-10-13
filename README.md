@@ -1,6 +1,6 @@
 # Tera's Dawn
 
-A 2D side-scrolling online action RPG inspired by MapleStory, built with **Godot 4.7** for
+A 2D side-scrolling solo or co-op (up to four players) action RPG inspired by MapleStory, built with **Godot 4.7** for
 Steam (Windows, macOS, Linux and Steam Deck).
 
 It has an **HD-2D** look in the style of Octopath Traveler: painted sprites in a lit 3D diorama
@@ -12,9 +12,9 @@ on Windows).
 **What's in it:** play solo, or co-op with up to four players (one hosts, friends join
 bringing their own characters), with up to six characters saved on each player's computer; a world of regions, towns, fields and boss hunting grounds joined by portals, ships and
 coaches; a Beginner and five jobs (Warrior, Archer, Magician, Thief, Pirate) with skill books,
-quickslots, melee, ranged and magic combat; MapleStory-style stats, gear, upgrade scrolls and
-drops; NPCs, shops, storage and quests; chat, parties, buddies, guilds, trades, fame and player
-shops in the Free Market; chairs, pets, the Monster Book and Steam achievements.
+quickslots, melee, ranged and magic combat; MapleStory-style stats, gear slots (the gear itself is being redrawn), upgrade scrolls
+and drops; NPCs, shops, storage and quests; chat, parties, buddies, guilds, trades and fame;
+chairs, pets, the Monster Book and Steam achievements.
 
 All content is data in `data/`, and all art is painted sheets in `art/source/` cut into
 `assets/` by `tools/art/slice_sheets.py`. [ARCHITECTURE.md](ARCHITECTURE.md) explains how the
@@ -43,8 +43,8 @@ Defaults; every key can be changed under **Settings > Controls**, with two keys 
 | Move / climb | Arrow keys | Left stick or d-pad |
 | Jump | Space or Alt | A |
 | Drop through a platform | Down + Jump | Down + A |
-| Attack | X or Ctrl | X |
-| Quickslots (skills, potions) | A, D, F, G, V, B, N, M | Y, RB, LB |
+| Attack (hold Up to hit overhead, Down in the air to hit below and bounce) | X or Ctrl | X |
+| Quickslots (skills incl. the job's movement skill, potions) | A (or Shift), D, F, G, V, B, N, M | Y, RB, LB |
 | Pick up items (hold to keep looting) | Z | B |
 | Inventory / Equipment / Character | I / E / S | Back (inventory) |
 | Quests / Skills / World map | Q / K / W | |

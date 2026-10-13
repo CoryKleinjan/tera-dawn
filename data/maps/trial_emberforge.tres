@@ -1,0 +1,90 @@
+[gd_resource type="Resource" script_class="MapDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
+[ext_resource type="Resource" path="res://data/biomes/forge.tres" id="2_biome"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="3_platform"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="4_portal"]
+[ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="5_npc_placement"]
+[ext_resource type="Resource" path="res://data/npcs/emberforge_instructor.tres" id="6_npc"]
+[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="7_spawn"]
+[ext_resource type="Resource" path="res://data/monsters/tear_boss.tres" id="8_boss"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="9_variant"]
+[ext_resource type="Resource" path="res://data/cutscenes/trial_tear_emberforge.tres" id="10_scene"]
+
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("9_variant")
+light_energy = 1.9
+sky_horizon = Color(1, 0.7529, 0.502, 1)
+
+[sub_resource type="Resource" id="P1"]
+script = ExtResource("3_platform")
+x = 520.0
+y = 550.0
+width = 140.0
+
+[sub_resource type="Resource" id="P2"]
+script = ExtResource("3_platform")
+x = 740.0
+y = 480.0
+width = 140.0
+
+[sub_resource type="Resource" id="P3"]
+script = ExtResource("3_platform")
+x = 960.0
+y = 410.0
+width = 160.0
+
+[sub_resource type="Resource" id="P4"]
+script = ExtResource("3_platform")
+x = 1180.0
+y = 340.0
+width = 170.0
+
+[sub_resource type="Resource" id="P5"]
+script = ExtResource("3_platform")
+x = 1420.0
+y = 400.0
+width = 160.0
+
+[sub_resource type="Resource" id="P6"]
+script = ExtResource("3_platform")
+x = 1640.0
+y = 400.0
+width = 900.0
+
+[sub_resource type="Resource" id="Back"]
+script = ExtResource("4_portal")
+x = 80.0
+target_map = &"emberforge_hall"
+target_x = 900.0
+
+[sub_resource type="Resource" id="Tutor"]
+script = ExtResource("5_npc_placement")
+npc = ExtResource("6_npc")
+x = 330.0
+
+[sub_resource type="Resource" id="Boss"]
+script = ExtResource("7_spawn")
+monster = ExtResource("8_boss")
+platform = 6
+from_tear = true
+
+[resource]
+script = ExtResource("1_map_def")
+id = &"trial_emberforge"
+display_name = "Trial Ground"
+biome = ExtResource("2_biome")
+variant = SubResource("Variant")
+width = 2600
+start_x = 180.0
+solo = true
+region = &"emberreach"
+return_map = &"emberforge"
+level_text = "Lv. 10-11"
+platforms = Array[ExtResource("3_platform")]([SubResource("P1"), SubResource("P2"), SubResource("P3"), SubResource("P4"), SubResource("P5"), SubResource("P6")])
+portals = Array[ExtResource("4_portal")]([SubResource("Back")])
+spawns = Array[ExtResource("7_spawn")]([SubResource("Boss")])
+npcs = Array[ExtResource("5_npc_placement")]([SubResource("Tutor")])
+tears = Array[Vector2]([Vector2(2150.0, 390.0)])
+tear_platform = 6
+tear_scene = ExtResource("10_scene")

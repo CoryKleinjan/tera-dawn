@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="SkillDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
+[ext_resource type="Resource" path="res://data/effects/flash_fist.tres" id="e_flash_fist"]
+[ext_resource type="Resource" path="res://data/effects/critical.tres" id="h_critical"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/riptide_combo.png" id="i_somersault_kick"]
+
+[resource]
+script = ExtResource("1_skill_def")
+id = &"riptide_combo"
+display_name = "Riptide Combo"
+job = &"pirate"
+max_level = 15
+kind = 0
+description = "Three rapid punches at one monster, the last the heaviest. Needs a knuckle."
+mp_cost = 6
+mp_cost_per_level = 0.28571
+damage_multiplier = 0.9
+damage_per_level = 0.02643
+hits = 3
+max_targets = 1
+weapons = Array[StringName]([&"knuckle"])
+cooldown = 26
+action_ticks = 18
+reach = 90.0
+height = 100.0
+animation = &"attack"
+effect = ExtResource("e_flash_fist")
+hit_effect = ExtResource("h_critical")
+icon = ExtResource("i_somersault_kick")

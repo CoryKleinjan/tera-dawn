@@ -7,7 +7,7 @@
 - Big glossy eyes with a dark top lash, a deep-blue iris and white highlights.
 - His palette: brown hair, red cape, blue tunic with gold trim, brown leather, silver steel.
 
-The painting style comes from the game's NPC sprites (see `CLAUDE.md`, "Art style"): painted only,
+The painting style comes from the game's NPC sprites (see [game rules](../../docs/game-rules.md), "Art"): painted only,
 never pixel art, with rich warm colours, strong light and shadow, visible brush texture and a dark
 outline.
 

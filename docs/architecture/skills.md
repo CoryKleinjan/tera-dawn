@@ -10,8 +10,17 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
    `damage_per_level`, `stats_per_level`, `duration_per_level`, `regen_hp_per_level`).
    - Attacks: cooldown, how long the player is busy (`action_ticks`), the hit area (`reach`,
      `height`), `max_targets`, `hits` and the damage multiplier.
-   - Buffs: `stats` added while it lasts, and `duration` in seconds.
-   - Passives: `stats` always added, and/or extra HP/MP recovery.
+   - Buffs: `stats` added while it lasts, and `duration` in seconds. Also: `party` (it reaches
+     party members within `SkillDef.PARTY_REACH`, at the caster's level), `heal` (a share of
+     Max HP; a heal with no duration adds no buff), `mp_guard` (a share of damage taken comes
+     out of MP), `steady` (no knockback), `hide` (monsters can't see or touch you; attacking
+     ends it), and HP/MP recovery.
+   - Passives: `stats` always added, and/or extra HP/MP recovery. Attack Speed, Melee Damage
+     and Ranged Damage are stats too.
+   - Any skill can have its own `recharge` in seconds on top of the shared cooldown (tracked
+     per skill in `SimPlayer.recharge` and `TDPlayer`).
+   - Attacks can also `slow` what they hit, `splash` (hit the nearest monster in the area and
+     everything within `splash` of it), push harder (`knockback`), or not aim (`aims`).
    - The hero animation to play and the effects to show (`effect` on the player,
      `hit_effect` on each target).
 2. Effects are **EffectDef**s in `data/effects/`: a flipbook of frames from
@@ -19,7 +28,9 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
    Effects the game fires on its own rather than through a skill or item (celebrate, monster
    poof, level up, critical) are named as constants on `EffectDef`; code uses those, never
    the id as a string.
-3. Give it an icon: a painted cell on a skill icon sheet (a Gemini edit in `tools/art/gemini_pass.json`).
+3. Give it an icon: a painted badge on a skill icon sheet (a Gemini edit in `tools/art/gemini_pass.json`,
+   matching `skill_icons_test`), cut by an `art/sheets/skill_icons_<sheet>.json` manifest into
+   `assets/sprites/skills/<skill id>.png`.
 
 It then appears in its job's tab of the skill window (K). Players spend Skill Points on it
 (`SkillBook.learn`, checked by `ServerJobs.on_learn_skill`), and a newly learned attack or
@@ -38,11 +49,20 @@ Ranged and magic skills:
   the skill a shot. The server still decides the hit at once; clients fly one projectile per
   hit (`TDProjectile`) and pop the damage number when it lands, holding the monster's death
   until then.
-- A weapon (`EquipDef`) names its `weapon_kind` (sword, bow, wand, staff, star, knuckle, gun)
+- A weapon (`EquipDef`) names its `weapon_kind` (sword, dagger, bow, wand, staff, knuckle, star, gun)
   and an optional `basic_attack` skill that replaces the plain swing (a bow's Shoot). Ranged
   weapons need no ammo.
-- `weapons` limits a skill to weapon kinds; `magic` uses Magic Attack (INT included) through
+- `weapons` limits a skill to weapon kinds and `offhand` to what's worn in the off-hand slot
+  (a Thief's stars, a Pirate's pistol); `magic` uses Magic Attack (INT included) through
   `CharacterStats.magic_range` instead of the weapon.
+
+Movement skills (`kind` Movement) carry a **MoveDef** (`move`): its style (Charge, air jump,
+Blink, backstep, roll), distance, ticks, whether it works on the ground and once per jump in
+the air, whether nothing can hit you meanwhile, how many monsters it shoves aside and its trail
+colour. The hero moves on his own machine (`TDPlayer._start_move`); the server pays the MP,
+puts a Blink where it lands (`MoveDef.blink_to`, the same sum on both sides), shoves monsters
+and keeps a roller from being hit (`ServerMoves`, `SimPlayer.dodge_t`). Everyone sees the
+code-drawn trail or Blink bolt (`TDMoveFx`) until painted effects replace it.
 
 Aiming and melee weight:
 - Attacks with `aims` on (the default) turn with the held direction: Up aims up, Down in the

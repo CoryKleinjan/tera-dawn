@@ -2,38 +2,37 @@
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="2_stat_block"]
-[ext_resource type="Resource" path="res://data/effects/haste_aura.tres" id="3_heal"]
-[ext_resource type="Texture2D" path="res://assets/sprites/skills/haste.png" id="4_haste"]
-
-[sub_resource type="Resource" id="Resource_2"]
-script = ExtResource("2_stat_block")
-speed = 1
-jump = 1
-avoid = 1
+[ext_resource type="Resource" path="res://data/effects/haste_aura.tres" id="e_haste_aura"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/haste.png" id="i_haste"]
 
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("2_stat_block")
 speed = 4
 jump = 2
-avoid = 3
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("2_stat_block")
+speed = 1
+jump = 1
 
 [resource]
 script = ExtResource("1_skill_def")
 id = &"haste"
 display_name = "Haste"
 job = &"thief"
-max_level = 20
+max_level = 8
 kind = 1
-description = "Move like a shadow: Speed, Jump and Avoidability rise for a while."
+description = "Move like a shadow: Speed and Jump rise for you and your party nearby."
 mp_cost = 10
-mp_cost_per_level = 0.4
+mp_cost_per_level = 0.57143
 cooldown = 30
 action_ticks = 12
-stats = SubResource("Resource_1")
-stats_per_level = SubResource("Resource_2")
 duration = 60.0
 duration_per_level = 9.0
-effect = ExtResource("3_heal")
-icon = ExtResource("4_haste")
 animation = &"cast"
+party = true
 flash = Color(0.45, 0.95, 1.0, 1)
+effect = ExtResource("e_haste_aura")
+icon = ExtResource("i_haste")
+stats = SubResource("Resource_1")
+stats_per_level = SubResource("Resource_2")

@@ -2,7 +2,7 @@ class_name WorldSkin
 extends RefCounted
 ## Drawing helpers for what the overlay and the HUD draw every frame over the world, from
 ## the UI art (UiSkin): HP, MP and EXP bars, party, monster and boss HP bars, the plaques
-## under name tags and hints, guild tags, shop signs, quest markers, speech bubbles and the
+## under name tags and hints, guild tags, quest markers, speech bubbles and the
 ## map-name banner. All sizes are in the 960x540 canvas.
 
 ## The smallest text draw_bar writes on a bar.
@@ -52,7 +52,6 @@ const BANNER_TEXT := 26
 ## Panels with an ornament in the middle of an edge, drawn with UiSkin.draw_panel:
 ## [texture, margins (left, top, right, bottom), middle kept (across, down)], in art pixels.
 const GUILD_TAG := ["social/guild_tag", Vector4(46, 28, 46, 18), Vector2(56, 0)]
-const SHOP_SIGN := ["social/shop_sign", Vector4(40, 50, 40, 20), Vector2(50, 0)]
 
 ## A bar: the frame texture with its fill drawn into the groove. `pos` is the frame's top left.
 ## `trail` (above `fraction`) shows a pale chunk of what was just lost, and `flash` (0-1)
@@ -136,14 +135,6 @@ static func guild_tag_rect(top_center: Vector2, label: String) -> Rect2:
 static func draw_guild_tag(ci: CanvasItem, top_center: Vector2, label: String) -> void:
 	UiSkin.draw_panel(ci, GUILD_TAG, guild_tag_rect(top_center, label), 0.4)
 	DrawUtil.text(ci, Game.ui_font, top_center + Vector2(0, 13), label, 11, Palette.INK)
-
-## A wooden sign hanging over a player who keeps a shop, with the shop's name on it.
-static func draw_shop_sign(ci: CanvasItem, bottom_center: Vector2, label: String) -> void:
-	var scale := 0.4
-	var size := Vector2(DrawUtil.text_width(Game.ui_font, label, 12) + 44, UiSkin.size_of(SHOP_SIGN[0]).y * scale)
-	size.x = maxf(size.x, UiSkin.ornate_min_size(SHOP_SIGN[1], SHOP_SIGN[2], scale).x)
-	UiSkin.draw_panel(ci, SHOP_SIGN, Rect2(bottom_center - Vector2(size.x / 2.0, size.y), size), scale)
-	DrawUtil.text(ci, Game.ui_font, bottom_center + Vector2(0, -size.y * 0.3), label, 12, Palette.SUN, 0, 4, Palette.NIGHT)
 
 ## The marker over an NPC: "!" a quest for you, "?" one to hand in, "..." one in progress.
 ## `height` is the "!"'s height; the others keep their size beside it, centred on the same spot.

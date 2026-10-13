@@ -5,18 +5,24 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
 ```
 data/                 Content, one .tres per thing
   monsters/ npcs/ items/ skills/ effects/ jobs/ looks/   Looked up by id through Content
+  monster_moves/      Monster attacks, shared by monster families (MonsterMove)
   achievements/       Milestones, unlocked on Steam too (AchievementDef)
-  items/equips/ items/use/ items/etc/ items/setup/   Subfolders are scanned too
+  quests/ shops/ regions/ cutscenes/ projectiles/    Also looked up by id
+  items/use/ items/etc/ items/scrolls/ items/setup/  Subfolders are scanned too (gear goes in
+                                            items/equips/ once it is redrawn)
   maps/ biomes/ climb_styles/ buildings/    Maps and how they look (maps/rooms/ and
                                             biomes/rooms/: the insides of buildings)
 scripts/
   autoload/           Settings (controls, audio, video, saved to settings.cfg), Content (data
                       index), Game (your character copy, name and server address), Net
                       (connections and the protocol), SteamService, Sound (music and effects)
-  settings/           SettingsSection and its sections: Keybinds, AudioSettings, VideoSettings
-  server/             TDServer, TDLobby, MapInstance, SimPlayer, SimMob, SimDrop, TDSocial
-  server/social/      TDSocial's parts: chat, parties, trade, guilds, player shops
-  server/services/    TDServer's parts (ServerPart): items, NPC shops, storage, travel, quests, jobs
+  settings/           SettingsSection and its sections: Keybinds, AudioSettings, VideoSettings,
+                      DevSettings
+  server/             TDServer, TDLobby, MapInstance, SimPlayer, SimMob (+ MobMoves), SimDrop,
+                      ServerMoves (job movement skills), TDSocial
+  server/social/      TDSocial's parts: chat, parties, trade, guilds
+  server/services/    TDServer's parts (ServerPart): items, NPC shops, storage, travel, quests, jobs,
+                      cutscenes
   net/                SnapshotFlags (the bits both sides read in snapshots), SnapshotCodec (packs them)
   data/               Resource classes for everything in data/
   systems/            Character (and CharacterCodec, its save format; CharacterStore keeps them
@@ -24,7 +30,8 @@ scripts/
                       AbilityPoints and Gear (CharacterPart), Appearance, NewCharacter,
                       Inventory, Equipment,
                       ItemStack, CharacterStats, MonsterBook, Achievements, Counters, Balance
-  components/         Health, Hitbox, SpriteRig, HeroBody (a hero's rig and companion), Paperdoll (+ Sprite, View)
+  components/         Health, Hitbox, JumpGrace, WeaponTrail, SpriteRig, HeroBody (a hero's rig and
+                      companion), Paperdoll (+ Sprite, View)
   actors/             Player (you), Avatar (other players), Companion (chairs, pets), Mob, Npc, Drop views
   world/              World (what you see), WorldCamera, SnapshotSync (server views), WorldFx (hits, numbers, effects), Stage +
                       Terrain/Backdrop/Scenery builders, MapLayout, Platform, DropFlight, Combat
@@ -48,7 +55,9 @@ store/                Steam capsules and key art
 tools/art/            Slicer and its helpers (platform_pieces, climb_pieces, clean_sheet, land_pixels),
                       Gemini batch runner (gemini_pass.py + gemini_pass.json), paperdoll layers
                       (paperdoll_layers.py, entry point for the paperdoll/ package), store-art
-                      cropper, fx textures, contact-sheet preview
+                      cropper, fx textures, contact-sheet preview; sheet_check.py (checks Gemini
+                      results), rekey_sheet.py, strip_template.py, body_panels.py, grip_guide.py,
+                      gemini_sheet.py (Gemini API helpers)
 tools/audio/          Lyria music runner (lyria_pass.py + lyria_cues.json), make_music.py (loops, jingles), make_sfx.py
 docs/architecture/    One page per system (linked from ARCHITECTURE.md)
 tests/                Test runner (unit/, server/, content/, ui/ suites on framework/), smoke test

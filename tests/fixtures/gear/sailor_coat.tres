@@ -26,5 +26,5 @@ jobs = Array[StringName]([&"pirate"])
 required_level = 15
 stats = SubResource("Resource_1")
 variance = 2
-required_strength = 35
+required_charisma = 35
 look_color = Color(0.243, 0.416, 0.659, 1)

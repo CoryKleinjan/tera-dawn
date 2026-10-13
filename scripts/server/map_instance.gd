@@ -20,8 +20,11 @@ var mobs: Array[SimMob] = []
 var drops := {}
 ## Each monster's record as last sent in a snapshot, so unchanged ones can be left out.
 var _sent_mobs: Array[PackedByteArray] = []
-## peer -> the player info (info() + shop sign) last sent to this map's players.
+## peer -> the player info (info()) last sent to this map's players.
 var _sent_info := {}
+## Its tear (MapDef.tear_platform) has opened, and what came out of it has stepped out.
+var tear_open := false
+var _tear_woken := false
 
 func _init(s: TDServer, map_def: MapDef) -> void:
 	server = s
@@ -34,6 +37,9 @@ func _init(s: TDServer, map_def: MapDef) -> void:
 			m.sleep()
 			m.parent = mobs[r[2]]
 			mobs[r[2]].children.append(m)
+		elif r[3].from_tear:
+			m.sleep()
+			m.from_tear = true
 		mobs.append(m)
 
 func step() -> void:
@@ -72,13 +78,40 @@ func remove_player(p: SimPlayer) -> void:
 	players.erase(p.peer)
 	_sent_info.erase(p.peer)
 	for m in mobs:
-		if m.target == p.peer:
-			m.aggro = 0
+		m.forget(p.peer)
 
-## Everything a client needs on arriving: monsters and items as they are right now.
+## Everything a client needs on arriving: monsters and items as they are right now, and
+## whether the tear is open.
 func full_state() -> Dictionary:
 	return {"mobs": mobs.map(func(m: SimMob) -> Array: return m.snapshot()),
-		"drops": drops.values().map(func(d: SimDrop) -> Array: return d.snapshot())}
+		"drops": drops.values().map(func(d: SimDrop) -> Array: return d.snapshot()),
+		"tear": tear_open}
+
+# ---------- the tear ----------
+
+## Opens the map's tear when the player first stands on its platform: everyone here sees
+## it, `tear_scene` plays for them, and what's waiting steps out once it ends.
+func check_tear(p: SimPlayer) -> void:
+	if tear_open or def.tear_platform < 0 or def.tear_platform >= layout.platforms.size():
+		return
+	if not p.stands_on(layout.platforms[def.tear_platform]):
+		return
+	tear_open = true
+	broadcast(&"ev_tear", [])
+	server.scenes.play(p, def.tear_scene)
+	if p.scene == &"":
+		wake_tear(p)
+
+## The monsters waiting for the tear step out of it, angry at `p` (once; when the tear
+## scene ends, or right away if it didn't play).
+func wake_tear(p: SimPlayer) -> void:
+	if not tear_open or _tear_woken:
+		return
+	_tear_woken = true
+	var x := def.tears[0].x if not def.tears.is_empty() else p.position.x
+	for m in mobs:
+		if m.from_tear:
+			m.wake(x, p.peer)
 
 ## Where everyone and everything is, sent to this map's players many times a second as
 ## bytes (SnapshotCodec). Monsters that haven't changed since the last one are left out
@@ -95,11 +128,11 @@ func snapshot(full := false) -> PackedByteArray:
 			_sent_mobs[i] = r
 	return SnapshotCodec.encode(tick, records, players.values().map(func(p: SimPlayer) -> Array: return p.motion()))
 
-## Sends this map's players the info (name, level, look, gear, chair, pet, shop sign) of
+## Sends this map's players the info (name, level, look, gear, chair, pet) of
 ## every player whose info changed since it was last sent. Reliable, unlike snapshots.
 func send_player_info() -> void:
 	for p: SimPlayer in players.values():
-		var info := p.info() + [server.social.shop_title(p.peer)]
+		var info := p.info()
 		if _sent_info.get(p.peer) != info:
 			_sent_info[p.peer] = info
 			broadcast(&"ev_player_info", [p.peer, info])
@@ -141,15 +174,9 @@ const MELEE_KNOCKBACK := 1.6
 ## Resolves a player's skill against the monsters in front of them (or above or below them,
 ## for an aimed attack). Returns how many were hit.
 func use_skill(p: SimPlayer, skill: SkillDef, aim := Hitbox.Aim.AHEAD) -> int:
-	var area := Hitbox.aimed_area(p.position, p.face, aim, skill.reach, skill.height)
-	var targets: Array[SimMob] = []
-	for m in mobs:
-		if not m.dead and area.intersects(m.hurtbox.rect_at(m.body_position())):
-			targets.append(m)
-	targets.sort_custom(func(a: SimMob, b: SimMob) -> bool:
-		return absf(a.position.x - p.position.x) < absf(b.position.x - p.position.x))
-	if targets.size() > skill.max_targets:
-		targets.resize(skill.max_targets)
+	var targets := _targets(p, skill, aim)
+	var lvl := p.character.skills.level(skill)
+	var push := skill.knockback * (1.0 if skill.is_ranged() else MELEE_KNOCKBACK)
 	# [mob index, [[damage, kind], ...]] for every monster hit, shown by every client
 	var lines := []
 	var killed: Array[SimMob] = []
@@ -172,11 +199,39 @@ func use_skill(p: SimPlayer, skill: SkillDef, aim := Hitbox.Aim.AHEAD) -> int:
 			var away := p.face
 			if aim != Hitbox.Aim.AHEAD and m.position.x != p.position.x:
 				away = 1 if m.position.x > p.position.x else -1
-			m.hurt(away, p.peer, 1.0 if skill.is_ranged() else MELEE_KNOCKBACK)
+			m.hurt(away, p.peer, push)
+			if skill.slow_ticks(lvl) > 0:
+				m.slow(skill.slow_ticks(lvl))
 	broadcast(&"ev_skill", [p.peer, skill.id, p.position.x, p.position.y, p.face, lines, aim])
 	for m in killed:
 		kill_mob(m, p)
 	return targets.size()
+
+## The monsters a skill hits, nearest first: those in its area, or for a splash, the nearest
+## one in its area and every monster within `splash` of it.
+func _targets(p: SimPlayer, skill: SkillDef, aim: Hitbox.Aim) -> Array[SimMob]:
+	var area := Hitbox.aimed_area(p.position, p.face, aim, skill.reach, skill.height)
+	var targets: Array[SimMob] = []
+	for m in mobs:
+		if not m.dead and area.intersects(m.hurtbox.rect_at(m.body_position())):
+			targets.append(m)
+	var from := p.position
+	if skill.splash > 0.0 and not targets.is_empty():
+		var first: SimMob = targets[0]
+		for m in targets:
+			if m.position.distance_to(p.position) < first.position.distance_to(p.position):
+				first = m
+		from = first.position
+		targets.clear()
+		targets.append(first)
+		for m in mobs:
+			if m != first and not m.dead and m.body_position().distance_to(first.body_position()) <= skill.splash:
+				targets.append(m)
+	targets.sort_custom(func(a: SimMob, b: SimMob) -> bool:
+		return a.position.distance_to(from) < b.position.distance_to(from))
+	if targets.size() > skill.max_targets:
+		targets.resize(skill.max_targets)
+	return targets
 
 func kill_mob(m: SimMob, killer: SimPlayer) -> void:
 	m.die()
@@ -208,15 +263,21 @@ func kill_mob(m: SimMob, killer: SimPlayer) -> void:
 func touch_player(p: SimPlayer, m: SimMob) -> void:
 	hurt_player(p, m.def, m.position.x)
 
-## A monster (`def`, standing at `from_x`) hit a player, by touch or with a shot.
-func hurt_player(p: SimPlayer, def: MonsterDef, from_x: float) -> void:
-	if p.inv > 0 or p.fainted() or p.in_scene():
+## A monster (`def`, standing at `from_x`) hit a player, by touch or with one of its
+## moves (`power` times its attack, see MonsterMove).
+func hurt_player(p: SimPlayer, def: MonsterDef, from_x: float, power := 1.0) -> void:
+	if p.inv > 0 or p.dodge_t > 0 or p.fainted() or p.in_scene() or p.hidden():
 		return
-	var dmg := Combat.monster_hit(def, p.character)
+	var dmg := Combat.monster_hit(def, p.character, power)
 	p.inv = 40 if dmg == 0 else SimPlayer.HURT_INV
 	broadcast(&"ev_number", [p.position.x, p.position.y - 70, dmg, "miss" if dmg == 0 else "taken"])
 	if dmg == 0:
 		return
+	# a guard (Magic Guard) takes its share out of MP while there's MP to take
+	var guarded := mini(p.character.mp, roundi(dmg * p.character.skills.mp_guard()))
+	if guarded > 0:
+		p.character.spend_mp(guarded)
+		dmg -= guarded
 	p.character.health.damage(dmg)
 	p.dirty_vitals = true
 	Net.send(p.peer, &"ev_hurt", [from_x])
@@ -257,8 +318,11 @@ func pick_up(p: SimPlayer, d: SimDrop) -> bool:
 		_remove_drop(d, p.peer)
 		_add_card(p, (d.item as CardDef).monster)
 		return true
+	var found := d.amount
 	if d.item.is_currency:
-		ch.shards += d.amount
+		# Charisma finds a few more
+		found = roundi(d.amount * CharacterStats.shard_bonus(ch.stats))
+		ch.shards += found
 		p.dirty_vitals = true
 	elif d.stack:
 		if not ch.inventory.add_stack(d.stack):
@@ -273,7 +337,7 @@ func pick_up(p: SimPlayer, d: SimDrop) -> bool:
 		p.dirty_character = true
 	_remove_drop(d, p.peer)
 	if d.item.is_currency:
-		show_gain(p, &"shards", d.amount)
+		show_gain(p, &"shards", found)
 	else:
 		# the client merges pickups of the same item into one log line
 		Net.send(p.peer, &"ev_pickup", [d.item.id, d.amount])

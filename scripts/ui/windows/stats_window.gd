@@ -19,7 +19,7 @@ const COL_RIGHT_VALUE := 98.0
 ## The room kept between a left-hand value and the right-hand column's label.
 const COL_GAP := 8.0
 ## The window's height without the job paths, and the paths' rows.
-const BASE_H := 354.0
+const BASE_H := 374.0
 const PATH_ROW_H := 13.0
 const PATHS_TOP := 18.0
 const AUTO_SIZE := Vector2(46, 20)
@@ -70,7 +70,7 @@ func _draw_body() -> void:
 		auto_rect = Rect2(Vector2(_plus_x() - 6 - AUTO_SIZE.x, y - TEXT_MID - AUTO_SIZE.y / 2.0), AUTO_SIZE)
 		add_button(auto_rect, "Auto", auto_assign, true, true)
 	y = _row(y, "Ability Points", str(Game.me.ap.points), Palette.SUN if Game.me.ap.points > 0 else Palette.MIST, 0.0, COL_VALUE, STAT_ROW_H)
-	var main_stat := Game.me.job.damage_stats(s)[0]
+	var main_stat := Game.me.job.damage_stat(s)
 	for stat in StatBlock.BASE:
 		var extra := s.value(stat) - Game.me.base.value(stat)
 		var text := str(s.value(stat)) + (" (+%d)" % extra if extra > 0 else "")
@@ -117,14 +117,12 @@ static func path_text(c: Character, j: JobDef) -> String:
 			bits.append("%d %s (you have %d)" % [short[stat], StatBlock.LABELS[stat], c.base.value(stat)])
 	return "%s: %s" % [j.display_name, ", ".join(bits) if not bits.is_empty() else "ready"]
 
-## Spends every Ability Point the way AbilityPoints.auto_plan says: the secondary stat the
-## gear needs first, then the primary stat. The server does the spending.
+## Spends every Ability Point the way AbilityPoints.auto_plan says (all in the job's one
+## stat). The server does the spending.
 func auto_assign() -> void:
 	var plan := Game.me.ap.auto_plan()
-	for stat in [StringName(Game.me.job.secondary_stat), StringName(Game.me.job.primary_stat)]:
-		if plan.has(stat):
-			Net.ask(&"req_add_ap_many", [stat, plan[stat]])
-			plan.erase(stat)
+	for stat in plan:
+		Net.ask(&"req_add_ap_many", [stat, plan[stat]])
 
 ## Where the column of "+" buttons starts.
 func _plus_x() -> float:

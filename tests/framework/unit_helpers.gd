@@ -40,7 +40,6 @@ func job(id := &"t_job", family := &"t_family", advances_from := &"") -> JobDef:
 	j.display_name = String(id).capitalize()
 	j.family = family
 	j.primary_stat = "strength"
-	j.secondary_stat = "dexterity"
 	j.mastery = 0.5
 	j.base_hp = 50
 	j.hp_per_level = 10

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="SkillDef" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
+[ext_resource type="Resource" path="res://data/effects/heal.tres" id="e_heal"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/first_aid.png" id="i_toughness"]
+
+[resource]
+script = ExtResource("1_skill_def")
+id = &"first_aid"
+display_name = "First Aid"
+job = &"beginner"
+max_level = 3
+kind = 1
+description = "Bind your scrapes and get back up: heals some of your HP. Takes a while to use again."
+mp_cost = 5
+mp_cost_per_level = 0.0
+cooldown = 30
+action_ticks = 12
+duration = 0.0
+duration_per_level = 0.0
+animation = &"cast"
+heal = 0.15
+heal_per_level = 0.1
+recharge = 60.0
+flash = Color(1.0, 0.62, 0.66, 1)
+effect = ExtResource("e_heal")
+icon = ExtResource("i_toughness")

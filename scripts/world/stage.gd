@@ -91,7 +91,7 @@ var camera: Camera3D
 var env: Environment
 var sun: DirectionalLight3D
 var map_root: Node3D
-## The scenery of portals that open after a quest (PortalDef.opens_after) -> their PortalDef.
+## The scenery of portals that open and shut with a quest (PortalDef.locked) -> their PortalDef.
 var locked_portals := {}
 var motes: CPUParticles3D
 var backdrop: BackdropBuilder
@@ -503,8 +503,14 @@ const TEAR_Z := -6.0
 const TEAR_SIZE := 2.6
 const TEAR_COLOR := Color(1.0, 0.98, 0.94, 0.55)
 
+## A tear that opens (MapDef.tear_platform) hangs close over the floor, bigger and brighter.
+const OPENING_TEAR_Z := -1.5
+const OPENING_TEAR_SIZE := 4.2
+
 ## The map's faint white glows over the water: soft, bright in the middle, slowly breathing.
+## A tear that opens stays hidden until it does (show_tears).
 func _build_tears(map: MapDef) -> void:
+	var opens := map.tear_platform >= 0
 	for at in map.tears:
 		var mat := StandardMaterial3D.new()
 		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
@@ -515,14 +521,23 @@ func _build_tears(map: MapDef) -> void:
 		mat.disable_receive_shadows = true
 		mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 		var q := QuadMesh.new()
-		q.size = Vector2(TEAR_SIZE, TEAR_SIZE)
+		var size := OPENING_TEAR_SIZE if opens else TEAR_SIZE
+		q.size = Vector2(size, size)
 		var glow := MeshInstance3D.new()
 		glow.mesh = q
 		glow.material_override = mat
 		glow.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-		glow.position = to3d(Vector2(at.x, map.ground_y - at.y), TEAR_Z)
+		glow.position = to3d(Vector2(at.x, map.ground_y - at.y), OPENING_TEAR_Z if opens else TEAR_Z)
+		glow.visible = not opens
 		glow.add_to_group(&"tear")
 		map_root.add_child(glow)
+
+## Shows a map's tear once it has opened (a map whose tears are always there ignores it).
+func show_tears(open: bool) -> void:
+	if world.map.tear_platform < 0:
+		return
+	for glow: Node3D in get_tree().get_nodes_in_group(&"tear"):
+		glow.visible = open
 
 static var _glow: ImageTexture
 
@@ -589,11 +604,6 @@ func in_view(p: Vector2, z := 0.0) -> bool:
 ## when the camera is in the middle of its vertical range.
 func screen_height(frac: float, z: float) -> float:
 	return screen_height_at(frac, z, _mid_center())
-
-## The inverse of screen_height: how far down the screen (0 top, 1 bottom) world height `h`
-## at depth z appears when the camera is in the middle of its vertical range.
-func screen_frac(h: float, z: float) -> float:
-	return screen_frac_at(h, z, _mid_center())
 
 func _mid_center() -> float:
 	return backdrop_center(world.map)

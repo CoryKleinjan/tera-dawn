@@ -311,6 +311,8 @@ func advance_problem(next: JobDef) -> String:
 		for stat in StatBlock.BASE:
 			if base.value(stat) < next.advance_requirements.value(stat):
 				return "You need %d %s to become a %s." % [next.advance_requirements.value(stat), StatBlock.LABELS[stat], next.display_name]
+	if next.advance_quest and not quests.done.has(next.advance_quest.id):
+		return "Pass the %s first." % next.advance_quest.title
 	var full := inventory.tab_without_room(next.advance_gifts.map(func(g: DropEntry) -> Array: return [g.item, 1 if g.item is EquipDef else g.min_amount]))
 	if full >= 0:
 		return "Make room in your %s inventory first." % ItemDef.TAB_NAMES[full]
@@ -338,20 +340,26 @@ func advance(next: JobDef) -> String:
 
 ## Wears the first weapon among `next`'s gifts when the one worn isn't made for the new job
 ## (the Beginner's Training Sword), so a new Magician casts with the wand just handed over.
-## A weapon of the job's own line that the player found stays on.
+## A weapon of the job's own line that the player found stays on. The same goes for an
+## off-hand among the gifts (a Thief's stars, a Pirate's pistol) in the off-hand slot.
 func _wear_advance_weapon(next: JobDef) -> void:
-	var worn := gear.weapon()
-	if worn and next.family in worn.jobs:
-		return
-	for g in next.advance_gifts:
-		var e := g.item as EquipDef
-		if e == null or e.slot != EquipDef.Slot.WEAPON:
+	for slot in [EquipDef.Slot.WEAPON, EquipDef.Slot.SHIELD]:
+		var worn := gear.weapon() if slot == EquipDef.Slot.WEAPON else gear.offhand()
+		if worn and next.family in worn.jobs:
 			continue
-		for i in Inventory.SLOTS:
-			var s := inventory.at(ItemDef.Tab.EQUIP, i)
-			if s and s.item == e:
-				gear.equip(i)
-				return
+		for g in next.advance_gifts:
+			var e := g.item as EquipDef
+			if e and e.slot == slot and _wear_from_bag(e):
+				break
+
+## Wears `e` from the bag. False when it isn't there.
+func _wear_from_bag(e: EquipDef) -> bool:
+	for i in Inventory.SLOTS:
+		var s := inventory.at(ItemDef.Tab.EQUIP, i)
+		if s and s.item == e:
+			gear.equip(i)
+			return true
+	return false
 
 ## Everything about the character, for the save file and for sending to its client (see
 ## CharacterCodec).

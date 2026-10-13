@@ -4,7 +4,7 @@ extends RefCounted
 ## into bytes, so even a busy map fits in one network packet (about 1,400 bytes; a lost
 ## piece of a bigger one loses the whole update). Only what changes every tick goes in it:
 ## where monsters and players are, which way they face, HP, animation and flags. Names,
-## looks, gear, chairs and shop signs go separately, reliably and only when they change
+## looks, gear, chairs and pets go separately, reliably and only when they change
 ## (MapInstance.send_player_info, ev_player_info).
 ##
 ## Layout (little-endian):

@@ -154,7 +154,9 @@ list in `paperdoll_body.json`.
   their own `region` manifest (`ui_windows_frames`, `ui_menu_panel`, `ui_dialogue_rows`,
   `ui_book_rows`, `ui_creator_frame`). Pieces cut from older sheets use `<sheet>_old`
   manifests (`ui_old`, `ui_hud_old`, `ui_menu_old`, `ui_dialogue_old`, `items_parts_2_old`,
-  `skill_icons_old`, `projectiles_old`, `skill_effects_old`).
+  `projectiles_old`, `skill_effects_old`).
+- **Skill icons**: `skill_icons_<sheet>` cut the painted Gemini badges (2x2 sheets, one skill
+  per cell, named by skill id) into `assets/sprites/skills/`; `skill_icons` keeps only `bow_shot`.
 - **Items, pets, projectiles**: into `assets/sprites/items/` (named by item id), `pets/` (and
   `assets/animations/pet_*.tres`) and `projectiles/`.
 - **Reference only** (`save` false, into `art/build/`): `hero_main` (the painted hero reference).
@@ -162,6 +164,9 @@ list in `paperdoll_body.json`.
   art the game never uses is removed rather than kept in the repo.
 
 ## The paperdoll (hero layers)
+
+This is the old hero, in game until the new paperdoll hero (being rebuilt in the NPC style, with
+fingers) is approved and replaces it.
 
 `paperdoll_body` cuts the bare hero strip (`pad_top` leaves room for hair). The other paperdoll
 sheets cut into `art/build/` only, and `tools/art/paperdoll_layers.py` (run after re-cutting the
@@ -180,18 +185,11 @@ body) places their pieces on every body frame and writes the layers, region map 
 - **Weapons** are cut from their item icons (`items_*`, at full size): the tool straightens
   each (a gun's barrel turned level) and makes it the picture he holds (`weapon_item_<id>`, a
   piece placed in his fist every frame). `held_magic` stays in `art/source/` only as a Gemini edit base.
-- **Worn gear in its own colours** (`art/source/worn/<item id>.png`, `shield_backs`,
-  `hats_items_*` and their `_only` twins): Gemini edits of the body sheet or the hat sheet with
-  the item's icon as reference. `tools/art/paperdoll/items.py` lifts each piece off the body by
-  comparing it with the bare body sheet (a light piece that passes for skin also has a
-  body-erased `art/source/worn/<item id>_only.png` twin saying where it is); a sheet that came
-  back on an off-colour background is flooded to magenta from each cell's border first.
-  Gloves are cuffless mittens painted from their icons (`glove_mittens`), one piece per hand.
 - **The rig** (`paperdoll_rig.json`, in 128 px frames): the weapon hand, weapon angle, shield
   and head tilt per frame, how each weapon kind is held (`holds`, every kind copying the staff's)
   and the frames where the shield point's hand is the front one (`front`), so the weapon always
-  stays in the front hand. His hands are fingerless mittens, so a weapon only needs to sit
-  under the fist. `--preview` writes `art/build/paperdoll_preview.png`.
+  stays in the front hand. The old hero's hands are closed fists, so a weapon only needs to
+  sit under the fist. `--preview` writes `art/build/paperdoll_preview.png`.
 - To redraw part of the body, `tools/art/body_panels.py` cuts close-up panels of a few cells
   for a Gemini edit and pastes back only what changed (`hands`) or everything above the shorts
   (`upper`); `worn-base` and `worn-cells` redress changed cells on the worn sheets.

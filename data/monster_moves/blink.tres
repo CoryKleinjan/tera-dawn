@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="MonsterMove" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="1_monster_move"]
+
+[resource]
+script = ExtResource("1_monster_move")
+id = &"blink"
+kind = 6
+min_reach = 100.0
+reach = 420.0
+windup = 30
+cooldown = 300
+power = 1.2
+distance = 80.0
+speed = 6.0
+recover = 26

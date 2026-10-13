@@ -167,7 +167,8 @@
         226,
         233
       ],
-      "grow": 0.86
+      "grow": 0.86,
+      "save": false
     },
     "tall_grass": {
       "crop": [
@@ -284,7 +285,8 @@
         243,
         286
       ],
-      "grow": 1.01
+      "grow": 1.01,
+      "save": false
     },
     "building_large": {
       "crop": [

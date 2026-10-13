@@ -9,10 +9,16 @@ const MOB_HURT := 2
 const MOB_AGGRO := 4
 const MOB_SHOW_HP := 8
 const MOB_CASTING := 16
-## About to shoot (SimMob.WINDUP_TICKS before it fires): clients show a wind-up glow.
+## Winding up a move (see MonsterMove.windup): clients show a wind-up glow.
 const MOB_WINDUP := 32
+## Vanished mid-move (a blink): clients hide it.
+const MOB_HIDDEN := 64
+## A boss past its second wind (half HP): clients give it an angry glow.
+const MOB_ENRAGED := 128
 
 # ---------- players (SimPlayer.snapshot, read by TDAvatar) ----------
 const PLAYER_FAINTED := 1
 const PLAYER_BLINK := 2
 const PLAYER_CLIMBING := 4
+## Hidden by a buff (Dark Sight): others see a faint outline.
+const PLAYER_HIDDEN := 8

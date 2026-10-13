@@ -4,17 +4,24 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
 
 ## Items, equipment and stats
 
-Stats work like MapleStory. A character has base **STR / DEX / INT / LUK** (their job's
+Stats work like MapleStory. A character has base **STR / DEX / INT / LUK / CHA** (their job's
 starting stats plus the Ability Points they spend, 5 per level), and everything they wear adds
 a **StatBlock** on top. `Character.stats` is the total. From it, `CharacterStats` works out:
 
-- **Damage range**: max = (primary × 4 + secondary) × Weapon Attack / 100 × `DAMAGE_SCALE`,
-  min = max × the job's mastery. The job says which stat is primary (STR for warriors); a job
-  with `uses_best_stat` (the Beginner) hits with whichever base stat is highest
-  (`JobDef.damage_stats`).
-- Accuracy (DEX, LUK) lets you hit monsters above your level, Avoidability (DEX, LUK) dodges
-  their touches, Weapon Defense lowers the damage, Speed and Jump scale movement.
-- Max HP and MP: the job's base plus growth per level plus gear.
+- **Damage range**: max = main stat × `MAIN_STAT_WEIGHT` × Weapon Attack / 100 × `DAMAGE_SCALE`,
+  min = max × the job's mastery. The job's `primary_stat` is its one main stat (STR for
+  warriors, CHA for pirates); no other stat adds to damage. A job with `uses_best_stat` (the
+  Beginner) hits with whichever base stat is highest (`JobDef.damage_stat`).
+- What each stat also gives: STR Max HP, INT Max MP (and Magic Attack), DEX Accuracy (hitting
+  monsters above your level), LUK Avoidability (dodging their touches), CHA a shop discount
+  (`shop_discount`, capped at `MAX_DISCOUNT`, used by `ShopEntry.cost_for`) and more
+  Dawnshards picked up (`shard_bonus`). Weapon Defense lowers the damage, Speed and Jump scale
+  movement.
+- Max HP and MP: the job's base plus growth per level plus gear, plus STR and INT.
+- Attack Speed (%) shortens cooldowns and swings (`attack_ticks`); Melee and Ranged Damage (%)
+  raise hits with and without a projectile (`damage_bonus`).
+- When these rules change, `CharacterCodec.STAT_RULES` goes up and older saves get every
+  Ability Point back once (`AbilityPoints.refund_all`).
 
 `Combat` uses those numbers, so all balance lives in `character_stats.gd` and `combat.gd`.
 
@@ -37,13 +44,17 @@ There are four inventory tabs, and the class of the item decides which one it go
 
 Equipment slots: Weapon, Hat, Top, Bottom, Shoes, Gloves, Cape, Earrings, Pendant, two Rings
 and Shield (`EquipDef.Slot` and `Equipment.PLACES_FOR`). Adding a slot means adding it to both.
+The Shield slot is called Off-hand in the game (its place key stays `shield`): it holds a shield or a job's off-hand: `EquipDef.offhand_kind` says what a piece is
+(shield, star, book, quiver, pistol; `Gear.offhand`), and skills can ask for one
+(`SkillDef.offhand`).
 
 ## How to add an item or piece of gear
 
 1. Give it an icon in `assets/sprites/items/<id>.png`: a painted cell on an item sheet (a Gemini
    edit in `tools/art/gemini_pass.json`, cut by its `art/sheets/items_*.json` manifest). Gear's
    icon shows the same object the hero wears (shape, colours, details).
-2. Create the `.tres` in `data/items/equips/`, `use/` or `etc/` as an **EquipDef**, **UseDef**
+2. Create the `.tres` in `data/items/equips/` (make the folder; the game has no gear while it is
+   redrawn for the new hero), `use/`, `etc/`, `scrolls/` or `setup/` as an **EquipDef**, **UseDef**
    or **ItemDef**. Fill in `id`, name, description, icon and `sell_price`; for gear, the slot,
    requirements and a **StatBlock** in `stats`. A top, bottom or shoes also needs a
    `worn_style`, the cut it's drawn in on the hero (tops: tunic, coat, robe, vest, plate,
@@ -66,15 +77,9 @@ for the loot key, and stays there if its tab is full.
   its icon on an `items_*` sheet: `python3 tools/art/paperdoll_layers.py` turns the icon into
   the picture he holds (`weapon_item_<id>`, a piece placed in his fist each frame), so it looks
   the same in his hand as in the bag. `held_size` grows or shrinks it against its kind.
-- **A new shield or hat** works the same way: a shield needs its back drawn on
-  `art/sheets/shield_backs.json` (its face is its icon), a hat its side and behind views on a
-  `hats_items_*` sheet with its heads-erased `_only` twin (Gemini edits of `paperdoll_hats`).
-  Without them it is drawn with its shape's tinted art.
-- **A new top, bottom, pair of shoes or cape**: add a Gemini edit of the body sheet with
-  the icon as reference (see the `wg_worn_*` entries in `tools/art/gemini_pass.json`), save the
-  result as `art/source/worn/<item id>.png` and run the tool (`worn_item_<id>`). Until then it
-  wears its `worn_style` cut in its colour. **New gloves** get a cuffless mitten painted from
-  their icon on `art/sheets/glove_mittens.json` (one piece per hand, `glove_item_<id>_1/_2`).
+- **New shields, hats, clothes and gloves** wait for the new paperdoll hero, which paints gear
+  per part from its icon. Until then a new piece is drawn with its shape's tinted art or its
+  `worn_style` cut in its colour.
 - **A new weapon kind**: draw its greyscale template on the paperdoll weapons sheet (add its
   cell to `paperdoll_weapons.json` and `WEAPON_KINDS` in `tools/art/paperdoll/common.py`), say how it's
   held in `art/sheets/paperdoll_rig.json` "holds" ("like" another kind, or an angle per frame,

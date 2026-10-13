@@ -5,7 +5,7 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
 ## How to add a map
 
 1. Create `data/maps/<id>.tres` as a **MapDef**. Give it an `id`, a display name, a size and
-   a `biome` (`data/biomes/meadow.tres` or `ember.tres`, or a new BiomeDef).
+   a `biome` (`data/biomes/meadow.tres` or `harbor.tres`, or a new BiomeDef).
 2. Lay it out: `platforms` (one-way, numbered from 1; the floor is 0), `climbables` (x, top,
    bottom and a climb style: rope, vine, ladder or rope ladder) and `portals`.
 3. Fill it: `spawns`, `npcs` (an **NpcPlacement** with an NpcDef and an x) and hand-placed
@@ -30,9 +30,21 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
    (see [cutscenes](cutscenes.md)).
 
 A portal with `opens_after` set to a quest is hidden, and goes nowhere, until the player has
-handed that quest in (`PortalDef.open_to`; `TDStage.locked_portals`); `one_way` means no portal
+handed that quest in, and one with `while_on` only while that quest is under way
+(`PortalDef.open_to`; `TDStage.locked_portals`); `one_way` means no portal
 leads back (the content tests let it). `tears` hangs faint white glows out over the water,
 drawn in code (`TDStage._build_tears`); nothing in the game mentions them.
+
+A `solo` map gives each player a copy of their own, started fresh every time they come in
+(`TDServer.map_instance` keys it by peer; `_off_map` drops it). It isn't on the world map: you
+show in its `return_map` town (`MapDef.outside`). With `tear_platform` set, its tear stays
+hidden until a player first stands on that platform (`MapInstance.check_tear`, `ev_tear`): then
+it shows, closer and bigger, `tear_scene` plays, and the spawns marked `from_tear` (asleep until
+then) step out of the first tear when the scene ends (`wake_tear`) and stay down once beaten.
+
+The job tests use both: each job town's hall has a trial gate (`while_on` its Job Test) to its
+`trial_<town>` Trial Ground, a short course with the tutor at the start and an arena at the far
+end where the tear boss steps out.
 
 New characters start on `Character.NEW_MAP`, the tutorial beach Daybreak Shore. It's off the
 world map (`world_pos` zero), wakes you on the beach if you faint there, and its one-way
@@ -58,7 +70,7 @@ The same NpcDef can stand in several maps (Brin is in every town).
 Travel NPCs (ships, wagons) list **TravelRoute**s in `NpcDef.travel` (destination, arrival x,
 fare, "Ship"/"Wagon"); their dialogue offers "Travel" and `ServerTravel.on_travel` moves the
 player, charging `TravelRoute.price` (everyone pays the same fare). Each trip's label also shows the
-destination's `MapDef.level_text` unless it's a town ("Wagon to Ember Hollow (Lv. 6-12,
+destination's `MapDef.level_text` unless it's a town ("Wagon to Fern Hollow (Lv. 6-12,
 150 Dawnshards)", `TDDialogueWindow.travel_label`). A **UseDef** with `teleport` set to a map id, or to `town`, is a return scroll.
 
 The content tests (`tests/content/`) check that every portal points at a real map and every
