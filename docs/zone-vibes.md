@@ -16,7 +16,8 @@ a map look (`MapDef.variant`) for it, and update the entry when the zone changes
   has its own `boss_<zone>` track: the town's tone, but more upbeat and dangerous. Bosses that
   live in a training map (Dawnrise) play the field track.
 - **Cities**: Dawnharbor is the gold standard. Every other city matches its attention to detail
-  and polish in its own zone's tone, never copying Dawnharbor's look.
+  and polish in its own zone's tone, never copying Dawnharbor's look. Change Dawnharbor only with
+  great care.
 - **New content**: a new sub-zone, building or track starts from its zone's "Keep" lines plus its
   own row. A new zone gets an entry here before any art or music is made for it.
 - Text marked *(inferred)* is not settled yet; confirm it with Cory before building on it.
