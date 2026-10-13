@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=65 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=31 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="Resource" path="res://data/projectiles/mob_bolt.tres" id="2_mob_bolt"]
@@ -15,26 +15,8 @@
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_shoes_speed_60.tres" id="13_scroll_shoes_speed_60"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_luk_60.tres" id="14_scroll_top_luk_60"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_int_60.tres" id="15_scroll_top_int_60"]
-[ext_resource type="Resource" path="res://data/items/equips/gale_bow.tres" id="16_gale_bow"]
-[ext_resource type="Resource" path="res://data/items/equips/elmwood_longbow.tres" id="17_elmwood_longbow"]
-[ext_resource type="Resource" path="res://data/items/equips/starlit_cape.tres" id="18_starlit_cape"]
-[ext_resource type="Resource" path="res://data/items/equips/thicket_hood.tres" id="19_thicket_hood"]
-[ext_resource type="Resource" path="res://data/items/equips/viper_pants.tres" id="20_viper_pants"]
-[ext_resource type="Resource" path="res://data/items/equips/windrunner_hood.tres" id="21_windrunner_hood"]
 [ext_resource type="Resource" path="res://data/items/use/power_elixir.tres" id="22_power_elixir"]
 [ext_resource type="Resource" path="res://data/items/setup/crystal_chair.tres" id="p11_crystal_chair"]
-[ext_resource type="Resource" path="res://data/items/equips/aurora_wand.tres" id="d35_aurora_wand"]
-[ext_resource type="Resource" path="res://data/items/equips/aurora_hat.tres" id="d35_aurora_hat"]
-[ext_resource type="Resource" path="res://data/items/equips/aurora_robe.tres" id="d35_aurora_robe"]
-[ext_resource type="Resource" path="res://data/items/equips/aurora_trousers.tres" id="d35_aurora_trousers"]
-[ext_resource type="Resource" path="res://data/items/equips/aurora_slippers.tres" id="d35_aurora_slippers"]
-[ext_resource type="Resource" path="res://data/items/equips/starfall_staff.tres" id="d35_starfall_staff"]
-[ext_resource type="Resource" path="res://data/items/equips/starfall_hat.tres" id="d35_starfall_hat"]
-[ext_resource type="Resource" path="res://data/items/equips/starfall_robe.tres" id="d35_starfall_robe"]
-[ext_resource type="Resource" path="res://data/items/equips/starfall_trousers.tres" id="d35_starfall_trousers"]
-[ext_resource type="Resource" path="res://data/items/equips/starfall_slippers.tres" id="d35_starfall_slippers"]
-[ext_resource type="Resource" path="res://data/items/equips/dawnwing_cape.tres" id="d35_dawnwing_cape"]
-[ext_resource type="Resource" path="res://data/items/equips/ember_earrings.tres" id="d35_ember_earrings"]
 
 [sub_resource type="Resource" id="Resource_18"]
 script = ExtResource("4_drop_entry")
@@ -42,48 +24,6 @@ item = ExtResource("22_power_elixir")
 chance = 0.5
 min_amount = 1
 max_amount = 3
-
-[sub_resource type="Resource" id="Resource_17"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("21_windrunner_hood")
-chance = 0.3
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_16"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("20_viper_pants")
-chance = 0.3
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_15"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("19_thicket_hood")
-chance = 0.3
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_14"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("18_starlit_cape")
-chance = 0.3
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_13"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("17_elmwood_longbow")
-chance = 0.45
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_12"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("16_gale_bow")
-chance = 0.45
-min_amount = 1
-max_amount = 1
 
 [sub_resource type="Resource" id="Resource_11"]
 script = ExtResource("4_drop_entry")
@@ -169,90 +109,6 @@ chance = 0.08
 min_amount = 1
 max_amount = 1
 
-[sub_resource type="Resource" id="Drop35_aurora_wand"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_aurora_wand")
-chance = 0.15
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop35_aurora_hat"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_aurora_hat")
-chance = 0.1
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop35_aurora_robe"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_aurora_robe")
-chance = 0.1
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop35_aurora_trousers"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_aurora_trousers")
-chance = 0.1
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop35_aurora_slippers"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_aurora_slippers")
-chance = 0.1
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop35_starfall_staff"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_starfall_staff")
-chance = 0.15
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop35_starfall_hat"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_starfall_hat")
-chance = 0.1
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop35_starfall_robe"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_starfall_robe")
-chance = 0.1
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop35_starfall_trousers"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_starfall_trousers")
-chance = 0.1
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop35_starfall_slippers"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_starfall_slippers")
-chance = 0.1
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop35_dawnwing_cape"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_dawnwing_cape")
-chance = 0.1
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop35_ember_earrings"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_ember_earrings")
-chance = 0.1
-min_amount = 1
-max_amount = 1
-
 [resource]
 script = ExtResource("1_monster_def")
 id = &"arcane_sentinel"
@@ -272,5 +128,5 @@ aggressive = true
 sprite_frames = ExtResource("anim")
 sprite_scale = 2.35
 light_color = Color(0.690196, 0.564706, 1.0, 1.0)
-drops = Array[ExtResource("4_drop_entry")]([SubResource("P11_crystal_chair"), SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18"), SubResource("Drop35_aurora_wand"), SubResource("Drop35_aurora_hat"), SubResource("Drop35_aurora_robe"), SubResource("Drop35_aurora_trousers"), SubResource("Drop35_aurora_slippers"), SubResource("Drop35_starfall_staff"), SubResource("Drop35_starfall_hat"), SubResource("Drop35_starfall_robe"), SubResource("Drop35_starfall_trousers"), SubResource("Drop35_starfall_slippers"), SubResource("Drop35_dawnwing_cape"), SubResource("Drop35_ember_earrings")])
+drops = Array[ExtResource("4_drop_entry")]([SubResource("P11_crystal_chair"), SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_18")])
 respawn_ticks = Vector2i(1800, 2400)

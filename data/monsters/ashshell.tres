@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=21 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=17 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/ashshell.tres" id="2_ashshell"]
@@ -7,8 +7,6 @@
 [ext_resource type="Resource" path="res://data/items/etc/ashshell_fragment.tres" id="loot_ashshell_fragment"]
 [ext_resource type="Resource" path="res://data/items/use/orange_potion.tres" id="loot_orange_potion"]
 [ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="loot_white_potion"]
-[ext_resource type="Resource" path="res://data/items/equips/ember_helm.tres" id="loot_ember_helm"]
-[ext_resource type="Resource" path="res://data/items/equips/oak_shield.tres" id="loot_oak_shield"]
 [ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="loot_elixir"]
 [ext_resource type="Resource" path="res://data/items/use/mana_elixir.tres" id="loot_mana_elixir"]
 
@@ -47,20 +45,6 @@ chance = 0.02
 min_amount = 1
 max_amount = 1
 
-[sub_resource type="Resource" id="Resource_loot3"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("loot_ember_helm")
-chance = 0.02
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_loot4"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("loot_oak_shield")
-chance = 0.02
-min_amount = 1
-max_amount = 1
-
 [sub_resource type="Resource" id="Resource_loot5"]
 script = ExtResource("3_drop_entry")
 item = ExtResource("loot_elixir")
@@ -86,6 +70,6 @@ exp_reward = 55
 speed = 0.35
 size = Vector2(64.0, 48.0)
 sprite_frames = ExtResource("2_ashshell")
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_loot0"), SubResource("Resource_loot1"), SubResource("Resource_loot2"), SubResource("Resource_loot3"), SubResource("Resource_loot4"), SubResource("Resource_loot5"), SubResource("Resource_loot6")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_loot0"), SubResource("Resource_loot1"), SubResource("Resource_loot2"), SubResource("Resource_loot5"), SubResource("Resource_loot6")])
 light_color = Color(1.0, 0.47843137254901963, 0.22745098039215686, 1.0)
 light_energy = 0.9

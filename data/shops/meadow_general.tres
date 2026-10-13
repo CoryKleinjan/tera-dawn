@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShopDef" load_steps=15 format=3]
+[gd_resource type="Resource" script_class="ShopDef" load_steps=17 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/shop_def.gd" id="1_shop"]
 [ext_resource type="Script" path="res://scripts/data/shop_entry.gd" id="2_entry"]
@@ -7,13 +7,6 @@
 [ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="item_white_potion"]
 [ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="item_blue_potion"]
 [ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="item_elixir"]
-[ext_resource type="Resource" path="res://data/items/equips/training_sword.tres" id="item_training_sword"]
-[ext_resource type="Resource" path="res://data/items/equips/leaf_cap.tres" id="item_leaf_cap"]
-[ext_resource type="Resource" path="res://data/items/equips/linen_tunic.tres" id="item_linen_tunic"]
-[ext_resource type="Resource" path="res://data/items/equips/trail_pants.tres" id="item_trail_pants"]
-[ext_resource type="Resource" path="res://data/items/equips/work_gloves.tres" id="item_work_gloves"]
-[ext_resource type="Resource" path="res://data/items/equips/leather_boots.tres" id="item_leather_boots"]
-[ext_resource type="Resource" path="res://data/items/equips/oak_shield.tres" id="item_oak_shield"]
 [ext_resource type="Resource" path="res://data/items/use/return_scroll.tres" id="item_return_scroll"]
 [ext_resource type="Resource" path="res://data/items/use/dawnrise_scroll.tres" id="item_dawnrise_scroll"]
 
@@ -42,41 +35,6 @@ script = ExtResource("2_entry")
 item = ExtResource("item_elixir")
 price = 0
 
-[sub_resource type="Resource" id="entry_5"]
-script = ExtResource("2_entry")
-item = ExtResource("item_training_sword")
-price = 0
-
-[sub_resource type="Resource" id="entry_6"]
-script = ExtResource("2_entry")
-item = ExtResource("item_leaf_cap")
-price = 0
-
-[sub_resource type="Resource" id="entry_7"]
-script = ExtResource("2_entry")
-item = ExtResource("item_linen_tunic")
-price = 0
-
-[sub_resource type="Resource" id="entry_8"]
-script = ExtResource("2_entry")
-item = ExtResource("item_trail_pants")
-price = 0
-
-[sub_resource type="Resource" id="entry_9"]
-script = ExtResource("2_entry")
-item = ExtResource("item_work_gloves")
-price = 0
-
-[sub_resource type="Resource" id="entry_10"]
-script = ExtResource("2_entry")
-item = ExtResource("item_leather_boots")
-price = 0
-
-[sub_resource type="Resource" id="entry_11"]
-script = ExtResource("2_entry")
-item = ExtResource("item_oak_shield")
-price = 0
-
 [sub_resource type="Resource" id="entry_return_scroll"]
 script = ExtResource("2_entry")
 item = ExtResource("item_return_scroll")
@@ -91,4 +49,4 @@ price = 0
 script = ExtResource("1_shop")
 id = &"meadow_general"
 display_name = "Mira's General Store"
-items = Array[ExtResource("2_entry")]([SubResource("entry_0"), SubResource("entry_1"), SubResource("entry_2"), SubResource("entry_3"), SubResource("entry_4"), SubResource("entry_5"), SubResource("entry_6"), SubResource("entry_7"), SubResource("entry_8"), SubResource("entry_9"), SubResource("entry_10"), SubResource("entry_11"), SubResource("entry_return_scroll"), SubResource("entry_dawnrise_scroll")])
+items = Array[ExtResource("2_entry")]([SubResource("entry_0"), SubResource("entry_1"), SubResource("entry_2"), SubResource("entry_3"), SubResource("entry_4"), SubResource("entry_return_scroll"), SubResource("entry_dawnrise_scroll")])

@@ -63,8 +63,7 @@ python3 tools/art/gemini_pass.py --dry-run                           # Gemini ba
 ### Game rules
 The full list is `docs/game-rules.md`. The ones most often broken:
 - Weapons are always in the front hand, at the same angle to the forearm every frame. No ammo.
-- Under a hat each pose shows only its own hair, trimmed; never draw new hair. Hats never cover
-  the shoulders.
+- Under a hat each pose shows only its own hair, trimmed; never draw new hair.
 - Characters, NPCs, ropes and ladders draw in front of land; no character or land shadows.
 - NPCs stand still at idle. Map names only at the top of the screen. Towns have no monsters.
 - 2-3 monster kinds per map, each kind in one zone; paths between towns stay Lv 10 or below.

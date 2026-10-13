@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=34 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=20 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/cinder_hog.tres" id="2_cinder_hog"]
@@ -11,34 +11,6 @@
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_earring_int_60.tres" id="9_scroll_earring_int_60"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_int_60.tres" id="10_scroll_top_int_60"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_cape_mdef_60.tres" id="11_scroll_cape_mdef_60"]
-[ext_resource type="Resource" path="res://data/items/equips/stormcaller.tres" id="12_stormcaller"]
-[ext_resource type="Resource" path="res://data/items/equips/ravager_blade.tres" id="13_ravager_blade"]
-[ext_resource type="Resource" path="res://data/items/equips/thicket_leggings.tres" id="14_thicket_leggings"]
-[ext_resource type="Resource" path="res://data/items/equips/elmwood_longbow.tres" id="w2_elmwood_longbow"]
-[ext_resource type="Resource" path="res://data/items/equips/skyreach_bow.tres" id="w2_skyreach_bow"]
-[ext_resource type="Resource" path="res://data/items/equips/leviathan_fist.tres" id="w2_leviathan_fist"]
-[ext_resource type="Resource" path="res://data/items/equips/leviathan_hand_cannon.tres" id="w2_leviathan_hand_cannon"]
-
-[sub_resource type="Resource" id="Resource_11"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("14_thicket_leggings")
-chance = 0.015
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_10"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("13_ravager_blade")
-chance = 0.0225
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_9"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("12_stormcaller")
-chance = 0.0225
-min_amount = 1
-max_amount = 1
 
 [sub_resource type="Resource" id="Resource_8"]
 script = ExtResource("3_drop_entry")
@@ -96,34 +68,6 @@ chance = 1.0
 min_amount = 26
 max_amount = 52
 
-[sub_resource type="Resource" id="Drop2_elmwood_longbow"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("w2_elmwood_longbow")
-chance = 0.0225
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop2_skyreach_bow"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("w2_skyreach_bow")
-chance = 0.0225
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop2_leviathan_fist"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("w2_leviathan_fist")
-chance = 0.0225
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop2_leviathan_hand_cannon"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("w2_leviathan_hand_cannon")
-chance = 0.0225
-min_amount = 1
-max_amount = 1
-
 [resource]
 script = ExtResource("1_monster_def")
 id = &"cinder_hog"
@@ -139,4 +83,4 @@ flying = false
 sprite_frames = ExtResource("2_cinder_hog")
 sprite_scale = 1.0
 aura_color = Color(1.0, 0.541176, 0.25098, 1.0)
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Drop2_elmwood_longbow"), SubResource("Drop2_skyreach_bow"), SubResource("Drop2_leviathan_fist"), SubResource("Drop2_leviathan_hand_cannon")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8")])

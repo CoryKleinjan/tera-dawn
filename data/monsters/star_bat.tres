@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=27 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=19 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="Resource" path="res://data/projectiles/mob_bolt.tres" id="2_mob_bolt"]
@@ -11,38 +11,6 @@
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_weapon_att_60.tres" id="9_scroll_weapon_att_60"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_dex_60.tres" id="10_scroll_top_dex_60"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_weapon_matt_10.tres" id="11_scroll_weapon_matt_10"]
-[ext_resource type="Resource" path="res://data/items/equips/patched_trousers.tres" id="12_patched_trousers"]
-[ext_resource type="Resource" path="res://data/items/equips/canvas_gloves.tres" id="13_canvas_gloves"]
-[ext_resource type="Resource" path="res://data/items/equips/copper_ring.tres" id="14_copper_ring"]
-[ext_resource type="Resource" path="res://data/items/equips/oak_staff.tres" id="15_oak_staff"]
-
-[sub_resource type="Resource" id="Resource_11"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("15_oak_staff")
-chance = 0.0225
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_10"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("14_copper_ring")
-chance = 0.015
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_9"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("13_canvas_gloves")
-chance = 0.015
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_8"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("12_patched_trousers")
-chance = 0.015
-min_amount = 1
-max_amount = 1
 
 [sub_resource type="Resource" id="Resource_7"]
 script = ExtResource("4_drop_entry")
@@ -109,4 +77,4 @@ hover_height = 56.0
 shot = ExtResource("2_mob_bolt")
 sprite_frames = ExtResource("anim")
 sprite_scale = 1.0
-drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11")])
+drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7")])

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=28 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=20 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/barkcap.tres" id="2_barkcap"]
@@ -11,31 +11,6 @@
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_helmet_hp_60.tres" id="9_scroll_helmet_hp_60"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_cape_mdef_60.tres" id="10_scroll_cape_mdef_60"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_dex_60.tres" id="11_scroll_top_dex_60"]
-[ext_resource type="Resource" path="res://data/items/equips/hiking_boots.tres" id="12_hiking_boots"]
-[ext_resource type="Resource" path="res://data/items/equips/shell_earrings.tres" id="13_shell_earrings"]
-[ext_resource type="Resource" path="res://data/items/equips/acorn_pendant.tres" id="14_acorn_pendant"]
-[ext_resource type="Resource" path="res://data/items/equips/composite_bow.tres" id="w2_composite_bow"]
-
-[sub_resource type="Resource" id="Resource_11"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("14_acorn_pendant")
-chance = 0.015
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_10"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("13_shell_earrings")
-chance = 0.015
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_9"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("12_hiking_boots")
-chance = 0.015
-min_amount = 1
-max_amount = 1
 
 [sub_resource type="Resource" id="Resource_8"]
 script = ExtResource("3_drop_entry")
@@ -93,13 +68,6 @@ chance = 1.0
 min_amount = 16
 max_amount = 32
 
-[sub_resource type="Resource" id="Drop2_composite_bow"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("w2_composite_bow")
-chance = 0.0225
-min_amount = 1
-max_amount = 1
-
 [resource]
 script = ExtResource("1_monster_def")
 id = &"barkcap"
@@ -115,4 +83,4 @@ flying = false
 jumps = true
 sprite_frames = ExtResource("2_barkcap")
 sprite_scale = 1.0
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Drop2_composite_bow")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8")])

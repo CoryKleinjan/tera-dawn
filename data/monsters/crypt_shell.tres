@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=28 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=20 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/crypt_shell.tres" id="2_crypt_shell"]
@@ -11,31 +11,6 @@
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_armor_def_60.tres" id="9_scroll_armor_def_60"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_dex_60.tres" id="10_scroll_top_dex_60"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_gloves_att_60.tres" id="11_scroll_gloves_att_60"]
-[ext_resource type="Resource" path="res://data/items/equips/hiking_boots.tres" id="12_hiking_boots"]
-[ext_resource type="Resource" path="res://data/items/equips/acorn_pendant.tres" id="13_acorn_pendant"]
-[ext_resource type="Resource" path="res://data/items/equips/kite_shield.tres" id="14_kite_shield"]
-[ext_resource type="Resource" path="res://data/items/equips/barnacle_knuckle.tres" id="w2_barnacle_knuckle"]
-
-[sub_resource type="Resource" id="Resource_11"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("14_kite_shield")
-chance = 0.015
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_10"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("13_acorn_pendant")
-chance = 0.015
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_9"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("12_hiking_boots")
-chance = 0.015
-min_amount = 1
-max_amount = 1
 
 [sub_resource type="Resource" id="Resource_8"]
 script = ExtResource("3_drop_entry")
@@ -93,13 +68,6 @@ chance = 1.0
 min_amount = 20
 max_amount = 40
 
-[sub_resource type="Resource" id="Drop2_barnacle_knuckle"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("w2_barnacle_knuckle")
-chance = 0.0225
-min_amount = 1
-max_amount = 1
-
 [resource]
 script = ExtResource("1_monster_def")
 id = &"crypt_shell"
@@ -114,4 +82,4 @@ boss = false
 flying = false
 sprite_frames = ExtResource("2_crypt_shell")
 sprite_scale = 1.0
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Drop2_barnacle_knuckle")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8")])
