@@ -26,7 +26,9 @@ func _dress_bare(a: Appearance, gear: Dictionary) -> Paperdoll:
 
 func test_every_kind_has_creator_options() -> void:
 	for kind in LookDef.Kind.values():
-		check(Content.looks_of(kind).size() >= 4, "%s has at least four options" % LookDef.KIND_NAMES[kind])
+		# one boy's and one girl's hairstyle for now (Cory 2026-10-13); four or more of the rest
+		var least := 2 if kind == LookDef.Kind.HAIR else 4
+		check(Content.looks_of(kind).size() >= least, "%s has at least %d options" % [LookDef.KIND_NAMES[kind], least])
 
 func test_a_new_appearance_takes_the_first_option_of_each_kind() -> void:
 	var a := Appearance.new()
@@ -98,9 +100,9 @@ func test_choices_survive_the_trip_to_the_server() -> void:
 	check_eq(back.to_dict()["outfit"], n.to_dict()["outfit"], "outfit")
 
 func test_the_server_only_accepts_what_the_creator_offers() -> void:
-	var made := {"look": {"hair": "hair_long", "skin": "nope"}, "outfit": ["dawnbreaker_claymore", "reed_sandals", "no_item"]}
+	var made := {"look": {"hair": "hair_ponytail", "skin": "nope"}, "outfit": ["dawnbreaker_claymore", "reed_sandals", "no_item"]}
 	var n := NewCharacter.from_dict(made)
-	check_eq(n.appearance.hair, &"hair_long", "a real hairstyle")
+	check_eq(n.appearance.hair, &"hair_ponytail", "a real hairstyle")
 	check_eq(n.appearance.skin, Appearance.new().skin, "an unknown skin is the default")
 	var ids := n.starting_gear(_beginner()).map(func(e: EquipDef) -> StringName: return e.id)
 	check(not &"dawnbreaker_claymore" in ids, "gear the creator doesn't offer is ignored")
@@ -177,8 +179,8 @@ func test_every_face_and_hairstyle_has_art() -> void:
 
 func test_long_hair_hangs_behind_and_a_hat_swaps_the_hair() -> void:
 	var a := Appearance.new()
-	a.hair = &"hair_long"
-	var hair := Content.look(&"hair_long")
+	a.hair = &"hair_ponytail"
+	var hair := Content.look(&"hair_ponytail")
 	var bare := Paperdoll.dress(_look(a))
 	# hair drawn in every pose holds what hangs behind his head; a one-piece style has a back layer
 	check(hair.back_frames == null or _layer(bare, hair.back_frames).behind, "the back of long hair is behind him")

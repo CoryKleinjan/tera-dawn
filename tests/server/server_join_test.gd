@@ -123,15 +123,15 @@ func test_events_to_a_peer_that_left_are_not_sent() -> void:
 
 func test_the_creators_choices_make_a_beginner_with_that_look() -> void:
 	var made := NewCharacter.new()
-	made.appearance.hair = &"hair_bun"
+	made.appearance.hair = &"hair_ponytail"
 	made.outfit[EquipDef.Slot.TOP] = Content.item(&"meadow_shirt")
 	h.play(2, "Ann", made.to_dict())
 	var c: Character = h.server.sessions[2].character
 	check_eq(c.job.id, Character.START_JOB, "a Beginner")
 	check_eq(c.level, 1, "level 1")
-	check_eq(c.appearance.hair, &"hair_bun", "the hair picked")
+	check_eq(c.appearance.hair, &"hair_ponytail", "the hair picked")
 	check_eq(c.equipment.at(&"top").item.id, &"meadow_shirt", "the top picked")
-	check_eq(h.last(2, &"ev_joined")[0]["appearance"]["hair"], "hair_bun", "the client hears it")
+	check_eq(h.last(2, &"ev_joined")[0]["appearance"]["hair"], "hair_ponytail", "the client hears it")
 
 func test_others_see_your_look_and_gear() -> void:
 	var a := h.join(2, "Ann")

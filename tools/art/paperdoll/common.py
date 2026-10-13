@@ -36,12 +36,18 @@ DEFAULT_EYES = (0.25, 0.42, 0.75)
 LIFT_TO = 200
 # Tinted art darker than this is outline: lift() keeps it grey, without the sheets' plum cast.
 OUTLINE_DARK = 110
+# The hero body's outline colour (its edge pixels, measured on hero.png). Gear sheets come back
+# with a lighter plum outline and a pink cast on their soft edge pixels; match_outline() turns
+# both to this, so gear and body read as one drawing.
+HERO_OUTLINE = (29, 2, 10)
+OUTLINE_BAND = 2      # match_outline(): pixels this close to the clear background are outline
+OUTLINE_LIGHT = 120   # of these, ones darker than this (mean of r, g, b)
 
 # Frames seen from behind: no face, the hair's "from behind" piece, the cape in front.
 BACK_VIEW = ("rope1", "rope2", "ladder1", "ladder2", "climb_idle")
 # The face's expression per frame (anything not listed: normal).
 EXPRESSIONS = {"blink": "blink", "hit": "ouch", "hurt": "ouch", "faint1": "dizzy", "faint2": "dizzy"}
-HAIRSTYLES = ["tousled", "long", "ponytail", "twin_tails", "bun", "crest"]
+HAIRSTYLES = ["tousled", "ponytail"]  # one boy's and one girl's style for now (Cory 2026-10-13)
 FACES = ["bright", "determined", "rosy", "freckled", "cheeky"]
 WEAPON_KINDS = ["sword", "bow", "wand", "staff", "star", "knuckle", "gun"]
 
@@ -81,14 +87,9 @@ HELM_HUG, HELM_NUDGE = 1.06, 0.5  # hats.hugging: a helm's shell this times his 
 HELM_BAND, HELM_OPEN, HELM_SIZE = 0.75, 1.15, (0.8, 1.15)
 HAIR_CUT_HEAD, HAIR_CUT_REACH = 0.85, 0.5  # hats.save_hair_cut: each column's own edge over his head, nearby edges off it
 HAIR_CUT_CREST = 0.6  # ...on a helm, a stretch ending this far above the head's middle is a crest, not the edge
-HAIR_CUT_SPECK, HAIR_CUT_CRUMB = 0.15, 0.03  # ...and a patch smaller than this (head radii squared) off by itself, or this anywhere
-HAIR_CUT_TOUCH, HAIR_CUT_HELD = 4, 0.7  # ...a patch the cut chopped less than this share of it at the hat (within that) is loose
-HAIR_CUT_BODY = 2     # ...or one the cut reached not touching his head within this (frame pixels)
-HAIR_HEAD_ONLY = ("long", "ponytail", "twin_tails")  # ...hairstyles showing only the hair on his head under a hat (no tails or hanging locks)
-HAIR_HEAD_ONLY_OVAL = (1.1, 0.9, 0.55)  # ...inside this oval (half width, half height, raised: head radii), above his mouth
-HAIR_HEAD_ONLY_BACK = (1.15, 1.05, 0.0)  # ...or from behind, this one (his whole head, down to his neck)
-HAIR_HAT_POSE = "sit"  # ...and every pose wears this pose's hair under a hat (for those styles)
 HAIR_CUT_SOFT = 1.5   # ...its edge blurred this much (frame pixels), so the hair fades out under the hat
+HAIR_TAILS = ("ponytail",)  # ...and under a hat these styles' tails don't show: none of the hair
+HAIR_TAIL_OVER = 0.15  # ...more than this off his head (head radii)
 HAIR_CUT_TUCK = 2      # ...and stops this many pixels inside the hat, so hair and head run on under its soft edge
 HAIR_CUT_LOW = 0.75    # ...and never below this far under the head's middle (head radii)
 HEAD_CUT_DISC, HEAD_CUT_LOW = 1.3, 0.55  # hats.save_head_cut: his head this near its middle, above this low (head radii)
@@ -267,6 +268,31 @@ def lift(img):
         mid = max(np.median(arr[solid][:, :3].mean(1)), 1)
         arr[..., :3] = (arr[..., :3] * LIFT_TO / mid).clip(0, 255)
     return Image.fromarray(arr.round().astype(np.uint8), "RGBA")
+
+
+def match_outline(img, outside=None):
+    """Gives full-colour gear the hero's outline: the dark pixels along its edge take
+    HERO_OUTLINE's colour, keeping their own shading, and pink-tinted soft edge pixels the
+    sheet's magenta left are coloured as outline too. Only recolours, so the outline stays as
+    thick as drawn. `outside`: where the picture's clear background is (default: wherever it
+    is see-through), e.g. leaving out where a worn piece only stops at his body."""
+    arr = np.asarray(img).astype(float)
+    alpha, rgb = arr[..., 3], arr[..., :3]
+    clear = alpha < 40 if outside is None else outside
+    band = (alpha >= 15) & ss.dilate(clear, OUTLINE_BAND, outside=True)
+    light = rgb.mean(2)
+    dark = band & (light < OUTLINE_LIGHT)
+    if dark.sum() < 10:
+        return img
+    solid = dark & (alpha > 230)
+    ref = max(float(np.median(light[solid if solid.any() else dark])), 1.0)
+    # fully outline at the outline's own darkness, fading out by 1.7x as light
+    weight = np.clip((1.7 * ref - light) / (0.7 * ref), 0, 1) * band
+    pink = (rgb[..., 0] - rgb[..., 1] > 30) & (rgb[..., 2] - rgb[..., 1] > 20)
+    weight[band & (alpha < 230) & pink] = 1
+    shade = np.clip(light / ref, 0.5, 1.6)[..., None]
+    arr[..., :3] = rgb * (1 - weight[..., None]) + np.array(HERO_OUTLINE, float) * shade * weight[..., None]
+    return Image.fromarray(arr.round().clip(0, 255).astype(np.uint8), "RGBA")
 
 
 def save_layer(name, frames, fw, fh, index, anims, tinted=True, grey=False):

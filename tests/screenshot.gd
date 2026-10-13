@@ -169,11 +169,11 @@ func _run() -> void:
 		p.face = -1
 		await _physics(240) # let the level-up banner pass
 		var outfits := [
-			["Bramble", "hair_long", "hair_color_copper", "skin_honey", "face_freckled", ["green_hood", "willow_bow", "ranger_vest", "leather_boots"]],
-			["Ondine", "hair_twin_tails", "hair_color_blossom", "skin_porcelain", "face_rosy", ["apprentice_hat", "oak_staff", "aurora_robe", "petal_cape"]],
-			["Garrick", "hair_crest", "hair_color_ink", "skin_umber", "face_determined", ["iron_helm", "bronze_sword", "bronze_mail", "oak_shield", "dawnwing_cape"]],
+			["Bramble", "hair_ponytail", "hair_color_copper", "skin_honey", "face_freckled", ["green_hood", "willow_bow", "ranger_vest", "leather_boots"]],
+			["Ondine", "hair_ponytail", "hair_color_blossom", "skin_porcelain", "face_rosy", ["apprentice_hat", "oak_staff", "aurora_robe", "petal_cape"]],
+			["Garrick", "hair_tousled", "hair_color_ink", "skin_umber", "face_determined", ["iron_helm", "bronze_sword", "bronze_mail", "oak_shield", "dawnwing_cape"]],
 			["Wren", "hair_ponytail", "hair_color_frost", "skin_bronze", "face_cheeky", ["dusk_bandana", "iron_star", "night_garb", "work_gloves"]],
-			["Marlo", "hair_bun", "hair_color_moss", "skin_cocoa", "face_bright", ["tricorn_hat", "flintlock", "sailor_coat", "patched_trousers"]],
+			["Marlo", "hair_tousled", "hair_color_moss", "skin_cocoa", "face_bright", ["tricorn_hat", "flintlock", "sailor_coat", "patched_trousers"]],
 		]
 		var models := []
 		for i in outfits.size():

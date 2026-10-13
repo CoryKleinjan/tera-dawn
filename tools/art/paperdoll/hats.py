@@ -335,8 +335,9 @@ def save_hair_cut(hero, name, head=False):
     hides it, and past the hat's sides that of its nearest column. Hair hanging below HAIR_CUT_LOW
     head radii under the head's middle always shows (long hair down his back past a bandana's
     tails). Beside a helm (`head`) the cut runs down to the bottom of its cheek and neck guards,
-    and inside its outline (its eye holes) no hair shows. Each hairstyle also gets its own strip
-    (haircut_<name>_<style>.png, no_loose_hair). The piece's JSON names them ("hair_cut",
+    and inside its outline (its eye holes) no hair shows. Every hairstyle shows its own hair cut by this
+    strip and nothing else (Cory 2026-10-13: just cut the existing hairstyle to the hat); each
+    gets a copy (haircut_<name>_<style>.png). The piece's JSON names them ("hair_cut",
     "hair_cuts")."""
     p = load_piece(name)
     fw, fh = hero.fw, hero.fh
@@ -376,99 +377,27 @@ def save_hair_cut(hero, name, head=False):
         if head:  # (nor any through its eye holes: inside a helm's outline his hair never shows)
             strip[:, i * fw:(i + 1) * fw][~ss.dilate(~spanned(solid), HAIR_CUT_TUCK)] = 255
     save_strip(softened(strip), name, "haircut", "hair_cut")
-    heads = [his_head(f, fi) for f, fi in zip(hero.frames, hero.info)]
-    for style in HAIRSTYLES:  # each hairstyle's own cut: none of it left hanging loose
-        path = os.path.join(LAYERS, f"hair_{style}.png")
-        if os.path.exists(path):
-            hair = np.asarray(Image.open(path))[..., 3] > 0
-            cut = no_loose_hair(strip, solids, heads, hair, fw, [fi["r"] for fi in hero.info], style in HAIR_HEAD_ONLY,
-                                [fi["head"] for fi in hero.info], [n in BACK_VIEW for n in hero.names])
-            if style in HAIR_HEAD_ONLY:
-                cut = as_in(cut, hair, hero, HAIR_HAT_POSE)
-            # (softened only where some of this hair shows beside it: none peeks out along a soft
-            # edge with nothing beside it)
-            hard = (cut[..., 3] > 0) & ~ss.dilate(hair & (cut[..., 3] == 0), HAIR_CUT_TUCK + 1)
-            save_strip(softened(cut, hard), name, "haircut", "hair_cuts", style)
+    for style in HAIRSTYLES:  # (every style: just his own hair, cut to the hat's shape)
+        if os.path.exists(os.path.join(LAYERS, f"hair_{style}.png")):
+            cut = without_tail(strip, hero) if style in HAIR_TAILS else strip
+            save_strip(softened(cut), name, "haircut", "hair_cuts", style)
 
 
-def as_in(cut, hair, hero, pose_name):
-    """A style's cut strip with every side-view frame showing only what `pose_name`'s frame
-    shows of it, set on that frame's head (moved, turned and sized with it): Cory 2026-10-12,
-    the hair under a hat in the sitting pose looks the best and every pose wears it. Frames
-    from behind keep their own."""
-    fw, fh = hero.fw, hero.fh
-    s = hero.names.index(pose_name)
-    src = hair[:, s * fw:(s + 1) * fw] & (cut[:, s * fw:(s + 1) * fw, 3] == 0)  # (what shows there)
-    fs = hero.info[s]
-    out = cut.copy()
-    yy, xx = np.mgrid[0:fh, 0:fw]
-    for i, (n, fi) in enumerate(zip(hero.names, hero.info)):
-        if i == s or n in BACK_VIEW:
-            continue
-        rel = np.stack([xx - fi["head"][0], yy - fi["head"][1]]) / fi["r"]
-        a = math.radians(fs["tilt"] - fi["tilt"])  # (back into the held pose's turn)
-        sx = fs["head"][0] + (rel[0] * math.cos(a) - rel[1] * math.sin(a)) * fs["r"]
-        sy = fs["head"][1] + (rel[0] * math.sin(a) + rel[1] * math.cos(a)) * fs["r"]
-        ok = (sx >= 0) & (sx < fw) & (sy >= 0) & (sy < fh)
-        shows = np.zeros((fh, fw), bool)
-        shows[ok] = src[sy[ok].astype(int), sx[ok].astype(int)]
-        out[:, i * fw:(i + 1) * fw][~shows] = 255
-        out[:, i * fw:(i + 1) * fw][shows] = 0
-    return out
-
-
-def his_head(px, fi):
-    """His bald head in one body frame (ears included): the painted area joined to its middle
-    without crossing a dark line, above his chin (as head_width)."""
-    paint = (px[..., 3] > 127) & (px[..., :3].max(2) >= HEAD_CUT_DARK * 255)
-    head = flood(paint, (int(fi["head"][0]), int(fi["head"][1])))
-    head[int(fi["head"][1] + fi["r"]):] = False
-    return head
-
-
-def no_loose_hair(strip, solids, heads, hair, fw, radii, tails=False, centres=None, backs=None):
-    """A hair cut strip that also hides the bits of one hairstyle's hair the cut leaves loose:
-    every patch still showing whose cut edge is mostly out in the air rather than at the hat
-    (within HAIR_CUT_TOUCH of it), such as a ponytail's end whose middle went under the hat or a
-    twin tail chopped off beside it; every patch the cut reached that doesn't touch his head
-    (his_head, within HAIR_CUT_BODY pixels), such as a twin tail hanging from a brim or a lock
-    of long hair hanging down his back from under a helm (Cory 2026-10-12: hair that is
-    disconnected and floating is trimmed); and any wisp smaller than HAIR_CUT_SPECK head radii squared
-    off on its own (or HAIR_CUT_CRUMB anywhere). A patch the cut doesn't reach stays. A style
-    with `tails` (HAIR_HEAD_ONLY: long hair, ponytail, twin tails) shows none of its hair off his
-    head (outside the HAIR_HEAD_ONLY_OVAL round his brow) under a hat, only the locks framing
-    his eyes (Cory 2026-10-12: ponytails and pigtails shouldn't show under hats; long hair
-    sticking out of a hat is just the locks by his face, none near his mouth)."""
+def without_tail(strip, hero):
+    """A cut strip that also hides a tail hanging off his head (Cory 2026-10-13: the ponytail
+    itself doesn't show under a helmet): his hair more than HAIR_TAIL_OVER head radii off his
+    bald head, or below HAIR_CUT_LOW under its middle, in every frame."""
     out = strip.copy()
-    for i, solid in enumerate(solids):
-        cut = out[:, i * fw:(i + 1) * fw]
-        hidden = cut[..., 3] > 0
-        shows = hair[:, i * fw:(i + 1) * fw] & ~hidden
-        if not solid.any() or not shows.any():
-            continue
-        hat_cut = hidden  # (where the hat's own cut chopped it, not the tails' below)
-        if tails:  # (its tails go under the hat with the rest)
-            hx, hy = centres[i]
-            yy, xx = np.mgrid[0:hidden.shape[0], 0:fw]
-            # (from behind, the back of his head down to his neck: no bald patch under the hat)
-            oval = HAIR_HEAD_ONLY_BACK if backs and backs[i] else HAIR_HEAD_ONLY_OVAL
-            rx, ry, up = (k * radii[i] for k in oval)
-            on = ((xx - hx) / rx) ** 2 + ((yy - hy + up) / ry) ** 2 <= 1.0  # (a round line, no steps)
-            cut[ss.dilate(shows & ~on, 3) & ~(shows & on)] = 255  # (wide enough that its soft edge still hides it all)
-            shows &= ~(cut[..., 3] > 0)
-        lab, n = ss.label(shows)
-        edge = shows & ss.dilate(hat_cut & hair[:, i * fw:(i + 1) * fw], 1)  # (where the cut chopped it)
-        at_hat = edge & ss.dilate(solid, HAIR_CUT_TOUCH)
-        chopped = np.bincount(lab[edge], minlength=n + 1)
-        held = np.bincount(lab[at_hat], minlength=n + 1)
-        size = np.bincount(lab.ravel(), minlength=n + 1)
-        near = np.bincount(lab[ss.dilate(solid, HAIR_CUT_TOUCH) & shows], minlength=n + 1)
-        on_him = np.bincount(lab[ss.dilate(heads[i], HAIR_CUT_BODY) & shows], minlength=n + 1)
-        # (and wisps off on their own, or crumbs anywhere)
-        speck = ((size < HAIR_CUT_SPECK * radii[i] ** 2) & (near == 0)) | (size < HAIR_CUT_CRUMB * radii[i] ** 2)
-        loose_ids = np.nonzero(((chopped > 0) & ((held < chopped * HAIR_CUT_HELD) | (on_him == 0))) | speck)[0]
-        loose = np.isin(lab, loose_ids[loose_ids > 0])
-        cut[ss.dilate(loose, 3) & ~(shows & ~loose)] = 255  # (wide enough that its soft edge still hides it all)
+    fw, fh = hero.fw, hero.fh
+    yy, xx = np.mgrid[0:fh, 0:fw]
+    for i, (px, fi) in enumerate(zip(hero.frames, hero.info)):
+        paint = (px[..., 3] > 127) & (px[..., :3].max(2) >= HEAD_CUT_DARK * 255)
+        hx, hy = fi["head"]
+        head = flood(paint, (int(hx), int(hy)))
+        head[int(hy + fi["r"]):] = False  # (not his body below the chin)
+        near = (yy - hy) ** 2 + (xx - hx) ** 2 <= ((1 + HAIR_TAIL_OVER) * fi["r"]) ** 2  # (not an arm raised beside it)
+        keep = grown(head, max(1, round(HAIR_TAIL_OVER * fi["r"]))) & near & (yy <= hy + HAIR_CUT_LOW * fi["r"])
+        out[:, i * fw:(i + 1) * fw][~keep] = 255
     return out
 
 
@@ -517,7 +446,7 @@ def save_head_cut(hero, name):
         for ax, ay, *_ in spots + hero.hands[n].get("hands", []):
             head &= ~(((xx - ax) ** 2 + (yy - ay) ** 2 < (HEAD_CUT_HAND * fi["r"]) ** 2)
                       & ((xx - hx) ** 2 + (yy - hy) ** 2 > (HEAD_CUT_KEEP * fi["r"]) ** 2))
-        cut = head & head_area(fi, fw, fh) & hair[:, i * fw:(i + 1) * fw] & ~ss.dilate(helm, HAIR_CUT_TUCK)  # (none under its soft edge)
+        cut = head & head_area(fi, fw, fh) & hair[:, i * fw:(i + 1) * fw] & ~helm  # (none under its soft edge either: Cory 2026-10-13)
         soft = Image.fromarray(cut.astype(np.uint8) * 255).filter(ImageFilter.BoxBlur(1))
         strip[:, i * fw:(i + 1) * fw, 3] = np.asarray(soft)
     strip[..., :3] = 255

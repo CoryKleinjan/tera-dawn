@@ -34,7 +34,7 @@ class HeldHair(unittest.TestCase):
 
     def test_lying_poses_keep_their_own_hair(self):
         for n in ("faint1", "faint2"):
-            self.assertEqual(pl.held_hair_pose("long", n), n)
+            self.assertEqual(pl.held_hair_pose("ponytail", n), n)
 
 
 def disc(size, centre, radius, grey=120):

@@ -118,7 +118,7 @@ def preview(names, fw, fh, rig_frames):
     rows = []
     for kind in WEAPON_KINDS:
         held = load_piece(f"weapon_{kind}")
-        hair = "hair_tousled" if have("hair_tousled") else "hair_long"
+        hair = "hair_tousled" if have("hair_tousled") else "hair_ponytail"
         under = [tint(load("cape"), (0.8, 0.25, 0.25))]
         if have(hair + "_back"):
             under.append(tint(load(hair + "_back"), DEFAULT_HAIR))
