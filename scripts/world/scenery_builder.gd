@@ -4,6 +4,8 @@ extends RefCounted
 ## rocks (where DecorPlacement puts them), the map's buildings and hand-placed props, ropes
 ## and ladders, portals and doors, and lanterns.
 
+## Climbable pieces stand straight up and down on screen.
+const UPRIGHT_SPRITE := preload("res://shaders/upright_sprite.gdshader")
 ## Warm light standing in a doorway.
 const DOOR_LIGHT := Color("ffc47a")
 ## How much nearer a portal's light sorts than where it stands (see _portal).
@@ -233,23 +235,40 @@ func _door(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
 
 ## A rope or ladder: its style's pieces stacked edge to edge (ClimbStyleDef.pieces). Each piece
 ## is drawn one texture pixel taller than its slot, so the joints never show a hairline gap; the
-## next piece covers the extra row. Like characters, climbables cast no shadows.
+## next piece covers the extra row. All the pieces stand straight up and down on screen under
+## the climbable's top (upright_sprite.gdshader), so the stack reads as one straight ladder.
+## Like characters, climbables cast no shadows.
 func _climbable(c: ClimbableDef, platforms: Array[Platform]) -> void:
 	var st := c.style
 	if st == null:
 		return
 	var z := TDStage.Z_CLIMBABLE
 	var flip := st.top_flipped(ClimbStyleDef.ledge_room(c.x, c.top, platforms))
-	for p in st.pieces(c.top, c.bottom):
+	var pieces := st.pieces(c.top, c.bottom)
+	if pieces.is_empty():
+		return
+	var top_y: float = pieces[0].y
+	for p in pieces:
 		var tex: Texture2D = p.texture
-		var s := TDStage.sprite(tex, st.texel)
-		var art_h := TDStage.art_size(tex, st.texel).y
-		s.scale.y = (p.height + st.texel / TDStage.art_density(tex)) / art_h
-		s.offset = Vector2(0, -tex.get_height() / 2.0)  # hang from the top edge
-		s.position = TDStage.to3d(Vector2(c.x, p.y), z)
-		s.flip_h = flip and tex == st.top
-		s.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-		root.add_child(s)
+		var flipped: bool = flip and tex == st.top
+		var size := Vector2(TDStage.art_size(tex, st.texel).x, p.height + st.texel / TDStage.art_density(tex))
+		# the end pieces are fitted to the middles where they join (ClimbStyleDef.piece_fit)
+		var fit := st.piece_fit(tex, flipped)
+		size.x *= fit.x
+		var q := QuadMesh.new()
+		q.size = size / TDStage.PX
+		var m := ShaderMaterial.new()
+		m.shader = UPRIGHT_SPRITE
+		m.set_shader_parameter(&"albedo_tex", tex)
+		m.set_shader_parameter(&"flip_h", flipped)
+		m.set_shader_parameter(&"slant", st.slant() / TDStage.PX if tex == st.middle else 0.0)
+		m.set_shader_parameter(&"top", (q.size.y / 2.0) + (p.y - top_y) / TDStage.PX)
+		q.material = m
+		var mi := MeshInstance3D.new()
+		mi.mesh = q
+		mi.position = TDStage.to3d(Vector2(c.x + fit.y, p.y + size.y / 2.0), z)  # hangs from the top edge
+		mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		root.add_child(mi)
 		z += 0.001  # each piece just in front of the one above, so the joints don't flicker
 
 ## A portal: the biome's animated portal frames standing on the platform, with a light and

@@ -18,8 +18,8 @@ func test_climbable_pieces_cast_no_shadow() -> void:
 	var root := Node3D.new()
 	var platforms: Array[Platform] = []
 	SceneryBuilder.new(null, root)._climbable(c, platforms)
-	var pieces := root.get_children().filter(func(n: Node) -> bool: return n is Sprite3D)
+	var pieces := root.get_children().filter(func(n: Node) -> bool: return n is GeometryInstance3D)
 	check(pieces.size() >= 3, "the climbable is built from its pieces")
-	for s: Sprite3D in pieces:
+	for s: GeometryInstance3D in pieces:
 		check_eq(s.cast_shadow, GeometryInstance3D.SHADOW_CASTING_SETTING_OFF, "%s casts no shadow" % s.name)
 	root.free()
