@@ -1,29 +1,13 @@
 #!/usr/bin/env python3
-"""Generate one art sheet with Google's Gemini image model, straight from a prompt file.
+"""Gemini image API helpers for tools/art/gemini_pass.py: upload files, build and send
+requests, save the returned image.
 
-This does what Cory does by hand in ChatGPT: attach the references, paste Message 0,
-(optionally) paste a layout message like Message U, then paste one batch. The result is
-saved next to his uploads in the project's art-sheets folder, ready to be checked and
-wired in like any other sheet (art/source/ + a manifest, see art/sheets/README.md).
-
-    python3 tools/art/gemini_sheet.py PROMPTS.md W1 --dry-run   # show prompt and refs, no call
-    python3 tools/art/gemini_sheet.py PROMPTS.md W1             # one paid call, saves one PNG
-    python3 tools/art/gemini_sheet.py PROMPTS.md U3 --with U --ref art-sheets/ui_u1.png
-    python3 tools/art/gemini_sheet.py --list-models             # image models this key can use
-
-PROMPTS.md is a file in art-prompts/ (a bare name like tera-dawn-chatgpt-art-prompts-8.md
-is looked up there). The batch is found by its fenced block starting "Batch <ID>:".
-References come from the file's own "Attach" lines (the intro's and the batch's), plus any
---ref, looked up by name in art-prompts/part-*-references/, art-sheets/ and the repo.
-
-For anything more than a one-off test, add the sheet to tools/art/gemini_pass.json and make it
-with tools/art/gemini_pass.py, which uses Gemini's batch mode at half the price. Every run of
-this script is ONE request and never retries, because each image costs money
-(about $0.10 at 2K with gemini-3.1-flash-image). Needs GEMINI_API_KEY in the environment
-and generativelanguage.googleapis.com allowed by the network policy. Standard library only
+Art is made only with gemini_pass.py (an entry in tools/art/gemini_pass.json, batch mode at
+half price); this module has no command line of its own. generate() still reads the old
+pass-1 prompt files for the entries that name one ("prompts"); those files are gone, so such
+entries are history only. Needs GEMINI_API_KEY in the environment. Standard library only
 (plus Pillow, which the other art tools already use).
 """
-import argparse
 import base64
 import glob
 import http.client as http_client
@@ -31,7 +15,6 @@ import io
 import json
 import os
 import re
-import sys
 import urllib.error
 import urllib.request
 
@@ -284,20 +267,6 @@ def build_request(message0, layout, batch, refs, aspect, size, image=image_part)
     }
 
 
-def list_models():
-    page, token = 0, ""
-    while page < 10:
-        resp = call("GET", "/models?pageSize=100" + ("&pageToken=" + token if token else ""))
-        for m in resp.get("models", []):
-            name = m["name"].split("/", 1)[-1]
-            if "image" in name or "imagen" in name:
-                print(name, "-", m.get("displayName", ""))
-        token = resp.get("nextPageToken", "")
-        page += 1
-        if not token:
-            break
-
-
 def out_path(save_name, batch_id, part):
     stem = os.path.splitext(os.path.basename(save_name))[0] if save_name else "part%s_%s" % (part, batch_id.lower())
     path = os.path.join(OUT_DIR, stem + "_gemini.png")
@@ -378,34 +347,3 @@ def save_image(resp, dest, log=print):
     log("Saved %s (%dx%d), tokens %s" % (dest, *Image.open(dest).size,
                                           resp.get("usageMetadata", {}).get("totalTokenCount", "?")))
     return dest
-
-
-def main():
-    ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    ap.add_argument("prompts", nargs="?", help="prompt file (path, or a name in art-prompts/)")
-    ap.add_argument("batch", nargs="?", help="batch id, e.g. W1 or U3")
-    ap.add_argument("--with", dest="layout", metavar="LETTER",
-                    help="also send '## Message LETTER' after Message 0 (e.g. U, P, W, M, N)")
-    ap.add_argument("--ref", action="append", default=[], help="extra reference image (repeatable)")
-    ap.add_argument("--model", default=DEFAULT_MODEL)
-    ap.add_argument("--aspect", choices=ASPECTS, help="default: closest to the batch's own reference")
-    ap.add_argument("--size", default="2K", choices=["1K", "2K", "4K"])
-    ap.add_argument("--out", help="output path (default: art-sheets/<save name>_gemini.png)")
-    ap.add_argument("--dry-run", action="store_true", help="print what would be sent; no API call")
-    ap.add_argument("--list-models", action="store_true", help="list image models this key can use")
-    args = ap.parse_args()
-
-    if not (args.list_models or (args.prompts and args.batch)):
-        ap.error("give a prompt file and a batch id")
-    try:
-        if args.list_models:
-            list_models()
-            return
-        generate(args.prompts, args.batch, args.layout, args.ref, args.model, args.size,
-                 args.aspect, args.out, dry_run=args.dry_run)
-    except GeminiError as e:
-        sys.exit(str(e))
-
-
-if __name__ == "__main__":
-    main()

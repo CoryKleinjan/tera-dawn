@@ -103,7 +103,8 @@
         984,
         691
       ],
-      "scale": 0.4711
+      "scale": 0.4711,
+      "save": false
     },
     "lamp": {
       "crop": [

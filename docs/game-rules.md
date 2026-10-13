@@ -20,8 +20,10 @@ update this page when one changes. Each zone's own look and music are in
 
 ## Hero
 
-- Chibi proportions, drawn about 13% larger than the first cut. Hands are mittens (NPC hands still
-  have fingers).
+- The hero is being rebuilt as a new paperdoll from the reference (`art/reference/hero.png`) in
+  the NPC style: white tee and grey shorts as the base, the reference face, hands with fingers.
+  The old hero stays in game until the new one is approved.
+- Chibi proportions, drawn about 13% larger than the first cut.
 - Looks exactly the same in menus (equipment, creator, character select) as in game: one renderer.
 - Animation: walk only, 15% faster after about 0.4 s of moving; run frames never play. No walk bob;
   the walk has a stride shift. Standing, he breathes and blinks. Only a slight tilt when falling.
@@ -76,23 +78,25 @@ update this page when one changes. Each zone's own look and music are in
   gear is cut the same way the icons are, keeps their detail, uses the hero's near-black outline,
   and is never cut off.
 - Every piece of gear is its own layer on the paperdoll.
-- Shields: the back side on the off hand, about a third visible.
-- Gloves: cuffless mittens in the glove's colours.
 
 ## Hats and hair
 
 - Hats fit the MapleStory way: sized to the whole head and hair, face open, lined up with the eyes.
-  The steel helm sits low so its visor slits are on his eyes, with no brown part under it. No part
-  of the head pokes out the side.
-- Hair below a hat's lower edge shows as is, never trimmed short, except the ponytail's tail, which
-  is cut away.
+  Helmets have a low dome and the nose guard reaches down between the eyes. No part of the head
+  pokes out the side.
+- Hats and hoods end at the neck: no cape or cloth over the back (cloaks are their own item).
 - Hoods have an open face. Bandanas sit low on the brow and stay small.
 - Two hairstyles for now: tousled (boy) and ponytail (girl).
 - Hair is slightly wider than the head. Keep the forehead bangs; trim floating bits and tufts that
   hang past the front of the face; no hair near the mouth.
-- Under a hat each pose shows only its own hair, cut along the hat's lower edge: nothing new is
-  drawn, nothing reshaped, no hair copied between poses. The ponytail's tail never shows under a hat
-  (the back of the head stays covered). No seam between hat and hair.
+- Hair under hats follows Cory's template sheets, one per hairstyle with a cell for every hat type
+  (`boy_tousled.png`, `girl_ponytail.png` in the project's `references/hat-hair-templates/`):
+  the painted hair in each cell is how that hairstyle looks under that hat. The girl's short tail hangs below each hat behind her neck (none
+  under the hood); under a helmet her hair hangs down behind her shoulders and never sticks up or
+  out. A new hairstyle needs a template with every hat type; a new hat type needs a cell for every
+  hairstyle. No seam between hat and hair.
+- The old hero (until it is replaced) shows only its own hair under a hat, cut along the hat's
+  lower edge, with the ponytail's tail cut away.
 
 ## Weapons
 
@@ -120,7 +124,7 @@ update this page when one changes. Each zone's own look and music are in
   ground but isn't. No two exits of a map lead to the same map. Maps can be wide and multi-level.
 - Characters, NPCs, ropes and ladders draw in front of land. Portals draw in front of land and
   scenery, behind ropes, NPCs, monsters and players; no NPC stands on a portal.
-- Portals are a blue-white light pillar on the ground, at exits and doorways.
+- Portals are a blue-white light pillar on the ground, at exits and doorways, 70% opaque.
 - Platforms and land cast no shadows. Platform end caps line up with the platform. Terrace walls stop
   straight down from the bottom of the path's end stone, with the path's thin outline, standing
   straight up and down. Wall ivy hangs flush with the platform's bottom edge.

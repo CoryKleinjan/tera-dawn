@@ -605,11 +605,6 @@ func in_view(p: Vector2, z := 0.0) -> bool:
 func screen_height(frac: float, z: float) -> float:
 	return screen_height_at(frac, z, _mid_center())
 
-## The inverse of screen_height: how far down the screen (0 top, 1 bottom) world height `h`
-## at depth z appears when the camera is in the middle of its vertical range.
-func screen_frac(h: float, z: float) -> float:
-	return screen_frac_at(h, z, _mid_center())
-
 func _mid_center() -> float:
 	return backdrop_center(world.map)
 

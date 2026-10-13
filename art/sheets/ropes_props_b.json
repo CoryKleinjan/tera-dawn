@@ -62,7 +62,8 @@
         600,
         522
       ],
-      "scale": 0.4698
+      "scale": 0.4698,
+      "save": false
     },
     "dawnshard_1": {
       "crop": [

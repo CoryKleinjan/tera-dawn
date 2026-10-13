@@ -12,7 +12,7 @@ const SCROLLS := "scrolls"
 const SAT := "sat"
 ## Times a pet was brought out.
 const PETS := "pets"
-## Trades and player-shop sales finished.
+## Trades finished.
 const DEALS := "deals"
 ## Every tally above.
 const ALL: Array[String] = [BOSSES, SCROLLS, SAT, PETS, DEALS]

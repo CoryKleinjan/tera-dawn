@@ -53,7 +53,8 @@ The Shield slot is called Off-hand in the game (its place key stays `shield`): i
 1. Give it an icon in `assets/sprites/items/<id>.png`: a painted cell on an item sheet (a Gemini
    edit in `tools/art/gemini_pass.json`, cut by its `art/sheets/items_*.json` manifest). Gear's
    icon shows the same object the hero wears (shape, colours, details).
-2. Create the `.tres` in `data/items/equips/`, `use/` or `etc/` as an **EquipDef**, **UseDef**
+2. Create the `.tres` in `data/items/equips/` (make the folder; the game has no gear while it is
+   redrawn for the new hero), `use/`, `etc/`, `scrolls/` or `setup/` as an **EquipDef**, **UseDef**
    or **ItemDef**. Fill in `id`, name, description, icon and `sell_price`; for gear, the slot,
    requirements and a **StatBlock** in `stats`. A top, bottom or shoes also needs a
    `worn_style`, the cut it's drawn in on the hero (tops: tunic, coat, robe, vest, plate,
@@ -76,15 +77,9 @@ for the loot key, and stays there if its tab is full.
   its icon on an `items_*` sheet: `python3 tools/art/paperdoll_layers.py` turns the icon into
   the picture he holds (`weapon_item_<id>`, a piece placed in his fist each frame), so it looks
   the same in his hand as in the bag. `held_size` grows or shrinks it against its kind.
-- **A new shield or hat** works the same way: a shield needs its back drawn on
-  `art/sheets/shield_backs.json` (its face is its icon), a hat its side and behind views on a
-  `hats_items_*` sheet with its heads-erased `_only` twin (Gemini edits of `paperdoll_hats`).
-  Without them it is drawn with its shape's tinted art.
-- **A new top, bottom, pair of shoes or cape**: add a Gemini edit of the body sheet with
-  the icon as reference (see the `wg_worn_*` entries in `tools/art/gemini_pass.json`), save the
-  result as `art/source/worn/<item id>.png` and run the tool (`worn_item_<id>`). Until then it
-  wears its `worn_style` cut in its colour. **New gloves** get a cuffless mitten painted from
-  their icon on `art/sheets/glove_mittens.json` (one piece per hand, `glove_item_<id>_1/_2`).
+- **New shields, hats, clothes and gloves** wait for the new paperdoll hero, which paints gear
+  per part from its icon. Until then a new piece is drawn with its shape's tinted art or its
+  `worn_style` cut in its colour.
 - **A new weapon kind**: draw its greyscale template on the paperdoll weapons sheet (add its
   cell to `paperdoll_weapons.json` and `WEAPON_KINDS` in `tools/art/paperdoll/common.py`), say how it's
   held in `art/sheets/paperdoll_rig.json` "holds" ("like" another kind, or an angle per frame,

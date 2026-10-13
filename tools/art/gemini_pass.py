@@ -15,8 +15,8 @@ pass --redo ID (Cory decides which sheets get redone).
 
 The run stops before it would go over the budget (the list's "budget", or --budget). Sheets
 whose "anchor" is another entry wait for that entry and attach its result, so a family of
-sheets matches one model. Every request gets CONSISTENCY added to its batch text, which keeps
-the prompt files themselves usable in ChatGPT. Each result is checked by sheet_check.py.
+sheets matches one model. Every request gets CONSISTENCY added to its batch text. Each result
+is checked by sheet_check.py.
 
 Batch mode is the default (Cory: all art goes through it to keep costs down). It costs half
 as much and takes longer (Google promises results within a day; usually

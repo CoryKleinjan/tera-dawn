@@ -2,7 +2,7 @@ class_name WorldSkin
 extends RefCounted
 ## Drawing helpers for what the overlay and the HUD draw every frame over the world, from
 ## the UI art (UiSkin): HP, MP and EXP bars, party, monster and boss HP bars, the plaques
-## under name tags and hints, guild tags, shop signs, quest markers, speech bubbles and the
+## under name tags and hints, guild tags, quest markers, speech bubbles and the
 ## map-name banner. All sizes are in the 960x540 canvas.
 
 ## The smallest text draw_bar writes on a bar.
