@@ -1,15 +1,7 @@
-[gd_resource type="Resource" script_class="ShopDef" load_steps=53 format=3]
+[gd_resource type="Resource" script_class="ShopDef" load_steps=37 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/shop_def.gd" id="1_shop_def"]
 [ext_resource type="Script" path="res://scripts/data/shop_entry.gd" id="2_shop_entry"]
-[ext_resource type="Resource" path="res://data/items/equips/canvas_gloves.tres" id="3_canvas_gloves"]
-[ext_resource type="Resource" path="res://data/items/equips/patched_trousers.tres" id="4_patched_trousers"]
-[ext_resource type="Resource" path="res://data/items/equips/sandals.tres" id="5_sandals"]
-[ext_resource type="Resource" path="res://data/items/equips/traveler_cape.tres" id="6_traveler_cape"]
-[ext_resource type="Resource" path="res://data/items/equips/copper_ring.tres" id="7_copper_ring"]
-[ext_resource type="Resource" path="res://data/items/equips/shell_earrings.tres" id="8_shell_earrings"]
-[ext_resource type="Resource" path="res://data/items/equips/hiking_boots.tres" id="9_hiking_boots"]
-[ext_resource type="Resource" path="res://data/items/equips/ranger_breeches.tres" id="10_ranger_breeches"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_armor_def_10.tres" id="s_scroll_armor_def_10"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_armor_def_60.tres" id="s_scroll_armor_def_60"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_cape_mdef_60.tres" id="s_scroll_cape_mdef_60"]
@@ -27,46 +19,6 @@
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_weapon_att_60.tres" id="s_scroll_weapon_att_60"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_weapon_matt_10.tres" id="s_scroll_weapon_matt_10"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_weapon_matt_60.tres" id="s_scroll_weapon_matt_60"]
-
-[sub_resource type="Resource" id="Resource_8"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("10_ranger_breeches")
-price = 0
-
-[sub_resource type="Resource" id="Resource_7"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("9_hiking_boots")
-price = 0
-
-[sub_resource type="Resource" id="Resource_6"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("8_shell_earrings")
-price = 0
-
-[sub_resource type="Resource" id="Resource_5"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("7_copper_ring")
-price = 0
-
-[sub_resource type="Resource" id="Resource_4"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("6_traveler_cape")
-price = 0
-
-[sub_resource type="Resource" id="Resource_3"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("5_sandals")
-price = 0
-
-[sub_resource type="Resource" id="Resource_2"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("4_patched_trousers")
-price = 0
-
-[sub_resource type="Resource" id="Resource_1"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("3_canvas_gloves")
-price = 0
 
 [sub_resource type="Resource" id="Entry_scroll_armor_def_10"]
 script = ExtResource("2_shop_entry")
@@ -157,4 +109,4 @@ price = 1000
 script = ExtResource("1_shop_def")
 id = &"harbor_outfitter"
 display_name = "Dawnharbor Outfitter"
-items = Array[ExtResource("2_shop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Entry_scroll_armor_def_10"), SubResource("Entry_scroll_armor_def_60"), SubResource("Entry_scroll_cape_mdef_60"), SubResource("Entry_scroll_earring_int_60"), SubResource("Entry_scroll_gloves_att_10"), SubResource("Entry_scroll_gloves_att_60"), SubResource("Entry_scroll_helmet_hp_60"), SubResource("Entry_scroll_shield_def_60"), SubResource("Entry_scroll_shoes_speed_60"), SubResource("Entry_scroll_top_dex_60"), SubResource("Entry_scroll_top_int_60"), SubResource("Entry_scroll_top_luk_60"), SubResource("Entry_scroll_top_str_60"), SubResource("Entry_scroll_weapon_att_10"), SubResource("Entry_scroll_weapon_att_60"), SubResource("Entry_scroll_weapon_matt_10"), SubResource("Entry_scroll_weapon_matt_60")])
+items = Array[ExtResource("2_shop_entry")]([SubResource("Entry_scroll_armor_def_10"), SubResource("Entry_scroll_armor_def_60"), SubResource("Entry_scroll_cape_mdef_60"), SubResource("Entry_scroll_earring_int_60"), SubResource("Entry_scroll_gloves_att_10"), SubResource("Entry_scroll_gloves_att_60"), SubResource("Entry_scroll_helmet_hp_60"), SubResource("Entry_scroll_shield_def_60"), SubResource("Entry_scroll_shoes_speed_60"), SubResource("Entry_scroll_top_dex_60"), SubResource("Entry_scroll_top_int_60"), SubResource("Entry_scroll_top_luk_60"), SubResource("Entry_scroll_top_str_60"), SubResource("Entry_scroll_weapon_att_10"), SubResource("Entry_scroll_weapon_att_60"), SubResource("Entry_scroll_weapon_matt_10"), SubResource("Entry_scroll_weapon_matt_60")])

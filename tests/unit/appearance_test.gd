@@ -234,7 +234,7 @@ func test_the_creator_preview_shows_the_starting_outfit() -> void:
 func test_each_hairstyle_has_its_own_cut_under_a_hat() -> void:
 	# so the bits of a style the cut would leave hanging loose (a ponytail's end) go too
 	for id in ["iron_helm", "viper_bandana"]:
-		var hat := Paperdoll.Piece.named("hat_item_" + id)
+		var hat := Paperdoll.hat_piece(Content.item(StringName(id)) as EquipDef)
 		for hair in Content.looks_of(LookDef.Kind.HAIR):
 			var style := String(hair.id).trim_prefix("hair_")
 			check(hat.hair_cuts.get(style) is Texture2D, "%s: %s has its own cut" % [id, style])
@@ -258,22 +258,6 @@ func _piece_layer(d: Paperdoll, p: Paperdoll.Piece) -> Paperdoll.Layer:
 		if l.piece == p:
 			return l
 	return null
-
-func test_a_shield_is_a_piece_with_its_back_behind_him() -> void:
-	var piece := Paperdoll.Piece.named("shield_item_oak_shield")
-	if not check(piece != null, "the oak shield is a piece"):
-		return
-	check(piece.views.has("back") and piece.views.has("front"), "with its back and its face")
-	var d := Paperdoll.dress(_look(Appearance.new(), {"shield": "oak_shield"}))
-	var l := _piece_layer(d, piece)
-	check(l != null and not l.gear, "drawn in its own colours")
-	check(_layer(d, Paperdoll.SHIELD) == null, "instead of the tinted shield")
-	var idle := Paperdoll.frame_index(Paperdoll.FRAMES.get_frame_texture(&"idle", 0))
-	var rope := Paperdoll.frame_index(Paperdoll.FRAMES.get_frame_texture(&"rope", 0))
-	var p: Variant = piece.pose(idle)
-	check(p != null and p["view"] == "back" and p["behind"], "its back on his far arm, behind him")
-	var q: Variant = piece.pose(rope)
-	check(q != null and q["view"] == "front" and not q["behind"], "its face over his back as he climbs")
 
 func test_gloves_are_a_tinted_layer_over_him() -> void:
 	var gloves := Content.item(&"work_gloves") as EquipDef
@@ -302,19 +286,6 @@ func test_hair_under_a_hat_is_cut_where_the_hat_hides_it() -> void:
 	var bare := Paperdoll.dress(_look(Appearance.new()))
 	check(_layer(bare, hair.frames).hair_cut == null, "without a hat the hair is whole")
 
-func test_a_helm_cuts_his_head_only_while_worn() -> void:
-	# a helm is drawn smaller than his head, so his head and face are cut where they would poke
-	# out of it, and only while it's worn (Cory 2026-10-11)
-	var a := Appearance.new()
-	var face := a.part(LookDef.Kind.FACE)
-	var d := Paperdoll.dress(_look(a, {"hat": "iron_helm"}))
-	check(d.head_cut != null, "the helm cuts his body's head")
-	check(_layer(d, face.frames) != null and _layer(d, face.frames).hair_cut == d.head_cut, "and his face")
-	for gear in [{}, {"hat": "viper_bandana"}]:
-		var other := Paperdoll.dress(_look(a, gear))
-		check(other.head_cut == null, "%s: his head is whole" % [gear])
-		check(_layer(other, face.frames).hair_cut == null, "%s: and his face" % [gear])
-
 func test_a_hat_sits_on_his_head() -> void:
 	var cap := Paperdoll.hat_piece(Content.item(&"leaf_cap") as EquipDef)
 	for anim in [&"idle", &"rope"]:
@@ -332,7 +303,6 @@ func test_a_weapon_is_a_piece_in_his_fist() -> void:
 	var held := Paperdoll.weapon_piece(bow)
 	var l := _piece_layer(d, held)
 	check(l != null, "the bow is drawn")
-	check(held.name == "weapon_item_willow_bow" and not l.gear, "as its own picture, from its icon, in its own colours")
 	check(d.layers.find(l) == d.layers.size() - 1, "over everything else (raised over his head)")
 	var attack := Paperdoll.frame_index(Paperdoll.FRAMES.get_frame_texture(&"attack", 1))
 	var p: Variant = held.pose(attack)
@@ -343,8 +313,7 @@ func test_every_weapon_has_a_piece_and_a_hold() -> void:
 	for item in Content.items.values():
 		var e := item as EquipDef
 		if e and e.slot == EquipDef.Slot.WEAPON and e.worn_frames == null:
-			var held := Paperdoll.weapon_piece(e)
-			check(held != null and held.name == "weapon_item_" + String(e.id), "%s has its own picture" % e.id)
+			check(Paperdoll.weapon_piece(e) != null, "%s has a picture" % e.id)
 			check(Paperdoll.weapon_reach(Paperdoll.kind_of(e)) > 0.0, "%s reaches past the fist" % e.id)
 	var attack := Paperdoll.frame_index(Paperdoll.FRAMES.get_frame_texture(&"attack", 1))
 	for kind in ["sword", "bow", "wand", "staff", "star", "knuckle", "gun"]:

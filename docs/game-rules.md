@@ -31,6 +31,9 @@ update this page when one changes. Each zone's own look and music are in
 
 ## Gear
 
+- The game has no equipment for now: every item, icon and worn picture was removed to be redrawn
+  for the new hero (2026-10-13). The equipment system (slots, the equip window, stats) stays, and
+  the tests bring their own plain gear (`tests/fixtures/gear`).
 - An item's icon and its worn or held look are the same object: shape, colours and details. Worn
   gear is cut the same way the icons are, keeps their detail, uses the hero's near-black outline,
   and is never cut off.
@@ -45,8 +48,7 @@ update this page when one changes. Each zone's own look and music are in
   of the head pokes out the side.
 - Hair below a hat's lower edge shows as is, never trimmed short, except the ponytail's tail, which
   is cut away.
-- Nothing on a hat, hood or helm covers the shoulders (no capes, mantles, collars or pads). Hoods
-  have an open face. Bandanas sit low on the brow and stay small.
+- Hoods have an open face. Bandanas sit low on the brow and stay small.
 - Two hairstyles for now: tousled (boy) and ponytail (girl).
 - Hair is slightly wider than the head. Keep the forehead bangs; trim floating bits and tufts that
   hang past the front of the face; no hair near the mouth.

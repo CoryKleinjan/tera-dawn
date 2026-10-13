@@ -53,5 +53,6 @@ tools/audio/          Lyria music runner (lyria_pass.py + lyria_cues.json), make
 docs/architecture/    One page per system (linked from ARCHITECTURE.md)
 tests/                Test runner (unit/, server/, content/, ui/ suites on framework/), smoke test
                       (`smoke_test.gd` runs the checks in `smoke/`, with a second game joining),
-                      bot client, screenshot scene, balance report, run_all.sh
+                      bot client, screenshot scene, balance report, run_all.sh; fixtures/ holds the
+                      tests' own plain gear (TestGear), loaded while the game has no equipment
 ```

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=53 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=31 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="Resource" path="res://data/projectiles/mob_seed.tres" id="2_mob_seed"]
@@ -15,20 +15,8 @@
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_gloves_att_60.tres" id="13_scroll_gloves_att_60"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_gloves_att_10.tres" id="14_scroll_gloves_att_10"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_shield_def_60.tres" id="15_scroll_shield_def_60"]
-[ext_resource type="Resource" path="res://data/items/equips/stormbreaker_knuckle.tres" id="16_stormbreaker_knuckle"]
-[ext_resource type="Resource" path="res://data/items/equips/deckhand_coat.tres" id="17_deckhand_coat"]
-[ext_resource type="Resource" path="res://data/items/equips/elmwood_longbow.tres" id="18_elmwood_longbow"]
-[ext_resource type="Resource" path="res://data/items/equips/thicket_hood.tres" id="19_thicket_hood"]
-[ext_resource type="Resource" path="res://data/items/equips/nightfang_garb.tres" id="20_nightfang_garb"]
-[ext_resource type="Resource" path="res://data/items/equips/windstep_boots.tres" id="21_windstep_boots"]
 [ext_resource type="Resource" path="res://data/items/use/power_elixir.tres" id="22_power_elixir"]
 [ext_resource type="Resource" path="res://data/items/setup/stump_seat.tres" id="p11_stump_seat"]
-[ext_resource type="Resource" path="res://data/items/equips/skyreach_bow.tres" id="d35_skyreach_bow"]
-[ext_resource type="Resource" path="res://data/items/equips/skyreach_jerkin.tres" id="d35_skyreach_jerkin"]
-[ext_resource type="Resource" path="res://data/items/equips/skyreach_leggings.tres" id="d35_skyreach_leggings"]
-[ext_resource type="Resource" path="res://data/items/equips/skyreach_boots.tres" id="d35_skyreach_boots"]
-[ext_resource type="Resource" path="res://data/items/equips/windrunner_jerkin.tres" id="d35_windrunner_jerkin"]
-[ext_resource type="Resource" path="res://data/items/equips/windrunner_leggings.tres" id="d35_windrunner_leggings"]
 
 [sub_resource type="Resource" id="Resource_18"]
 script = ExtResource("4_drop_entry")
@@ -36,48 +24,6 @@ item = ExtResource("22_power_elixir")
 chance = 0.5
 min_amount = 1
 max_amount = 3
-
-[sub_resource type="Resource" id="Resource_17"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("21_windstep_boots")
-chance = 0.3
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_16"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("20_nightfang_garb")
-chance = 0.3
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_15"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("19_thicket_hood")
-chance = 0.3
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_14"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("18_elmwood_longbow")
-chance = 0.45
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_13"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("17_deckhand_coat")
-chance = 0.3
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_12"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("16_stormbreaker_knuckle")
-chance = 0.45
-min_amount = 1
-max_amount = 1
 
 [sub_resource type="Resource" id="Resource_11"]
 script = ExtResource("4_drop_entry")
@@ -163,48 +109,6 @@ chance = 0.08
 min_amount = 1
 max_amount = 1
 
-[sub_resource type="Resource" id="Drop35_skyreach_bow"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_skyreach_bow")
-chance = 0.15
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop35_skyreach_jerkin"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_skyreach_jerkin")
-chance = 0.1
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop35_skyreach_leggings"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_skyreach_leggings")
-chance = 0.1
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop35_skyreach_boots"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_skyreach_boots")
-chance = 0.1
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop35_windrunner_jerkin"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_windrunner_jerkin")
-chance = 0.1
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop35_windrunner_leggings"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_windrunner_leggings")
-chance = 0.1
-min_amount = 1
-max_amount = 1
-
 [resource]
 script = ExtResource("1_monster_def")
 id = &"elder_treant"
@@ -222,5 +126,5 @@ shot_range = 380.0
 shot_cooldown = 110
 sprite_frames = ExtResource("3_elder_treant")
 sprite_scale = 1.77
-drops = Array[ExtResource("4_drop_entry")]([SubResource("P11_stump_seat"), SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18"), SubResource("Drop35_skyreach_bow"), SubResource("Drop35_skyreach_jerkin"), SubResource("Drop35_skyreach_leggings"), SubResource("Drop35_skyreach_boots"), SubResource("Drop35_windrunner_jerkin"), SubResource("Drop35_windrunner_leggings")])
+drops = Array[ExtResource("4_drop_entry")]([SubResource("P11_stump_seat"), SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_18")])
 respawn_ticks = Vector2i(1800, 2400)

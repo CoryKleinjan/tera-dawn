@@ -1,50 +1,8 @@
-[gd_resource type="Resource" script_class="ShopDef" load_steps=21 format=3]
+[gd_resource type="Resource" script_class="ShopDef" load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/shop_def.gd" id="1_shop_def"]
 [ext_resource type="Script" path="res://scripts/data/shop_entry.gd" id="2_shop_entry"]
-[ext_resource type="Resource" path="res://data/items/equips/willow_bow.tres" id="3_willow_bow"]
-[ext_resource type="Resource" path="res://data/items/equips/green_hood.tres" id="7_green_hood"]
-[ext_resource type="Resource" path="res://data/items/equips/ranger_vest.tres" id="8_ranger_vest"]
-[ext_resource type="Resource" path="res://data/items/equips/thicket_hood.tres" id="9_thicket_hood"]
-[ext_resource type="Resource" path="res://data/items/equips/thicket_jerkin.tres" id="10_thicket_jerkin"]
-[ext_resource type="Resource" path="res://data/items/equips/thicket_leggings.tres" id="11_thicket_leggings"]
-[ext_resource type="Resource" path="res://data/items/equips/thicket_boots.tres" id="12_thicket_boots"]
 [ext_resource type="Resource" path="res://data/items/setup/stump_seat.tres" id="s_stump_seat"]
-
-[sub_resource type="Resource" id="Resource_10"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("12_thicket_boots")
-price = 0
-
-[sub_resource type="Resource" id="Resource_9"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("11_thicket_leggings")
-price = 0
-
-[sub_resource type="Resource" id="Resource_8"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("10_thicket_jerkin")
-price = 0
-
-[sub_resource type="Resource" id="Resource_7"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("9_thicket_hood")
-price = 0
-
-[sub_resource type="Resource" id="Resource_6"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("8_ranger_vest")
-price = 0
-
-[sub_resource type="Resource" id="Resource_5"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("7_green_hood")
-price = 0
-
-[sub_resource type="Resource" id="Resource_1"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("3_willow_bow")
-price = 0
 
 [sub_resource type="Resource" id="Entry_stump_seat"]
 script = ExtResource("2_shop_entry")
@@ -55,4 +13,4 @@ price = 6000
 script = ExtResource("1_shop_def")
 id = &"fletcher"
 display_name = "Greenbough Fletcher"
-items = Array[ExtResource("2_shop_entry")]([SubResource("Resource_1"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Entry_stump_seat")])
+items = Array[ExtResource("2_shop_entry")]([SubResource("Entry_stump_seat")])
