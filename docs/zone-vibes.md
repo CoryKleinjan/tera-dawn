@@ -15,6 +15,8 @@ a map look (`MapDef.variant`) for it, and update the entry when the zone changes
   track plays in every field of the zone, dark caves and woods included. Each zone's boss map
   has its own `boss_<zone>` track: the town's tone, but more upbeat and dangerous. Bosses that
   live in a training map (Dawnrise) play the field track.
+- **Cities**: Dawnharbor is the gold standard. Every other city matches its attention to detail
+  and polish in its own zone's tone, never copying Dawnharbor's look.
 - **New content**: a new sub-zone, building or track starts from its zone's "Keep" lines plus its
   own row. A new zone gets an entry here before any art or music is made for it.
 - Text marked *(inferred)* is not settled yet; confirm it with Cory before building on it.
@@ -81,7 +83,7 @@ snare, steady travelling tempo. Town: the same instruments plus accordion touche
 warmer, a cheerful harbour-market tune. Free Market: plucked guitar, light strings, flute, hand
 claps and light snare, a friendly bargaining shuffle (its own track).
 
-**Town: Dawnharbor (the template city).** Three levels: a long quay lined with barrels, crates,
+**Town: Dawnharbor (the gold standard for every city's detail and polish).** Three levels: a long quay lined with barrels, crates,
 nets and carts, a stone-walled terrace above with lamp posts, ivy and flower boxes, and a cliff top
 with the lighthouse and chapel.
 Every building its own model (tavern, sail loft, harbormaster's office, shipwright, row houses,

@@ -98,7 +98,9 @@ update this page when one changes. Each zone's own look and music are in
 
 - Towns have no monsters and no grass tufts.
 - NPCs stand still at idle.
-- Dawnharbor is the template city: a quay, a terrace and a cliff top, every building its own
+- Dawnharbor is the gold standard for how a city looks. Other cities keep its attention to detail
+  and polish but have their own tone; they never copy Dawnharbor's look.
+- Dawnharbor's layout: a quay, a terrace and a cliff top, every building its own
   picture. The Free Market portal has a painted signboard beside it; the Free Market itself uses
   Dawnharbor's panorama and is empty for now.
 - Dawnharbor's store door, stone paths and cliff top stay as they are. The pier was dropped.
