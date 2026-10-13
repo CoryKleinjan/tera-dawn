@@ -199,6 +199,10 @@ func test_jobs_link_up() -> void:
 			check(Content.jobs.has(j.advances_from), "%s: advances_from %s is not a job" % [Scan.where(j), j.advances_from])
 			check(j.advances_from != j.id, "%s: advances from itself" % Scan.where(j))
 		check(String(j.family) != "", "%s: family is empty" % Scan.where(j))
+		if j.partner != &"":
+			check(Content.jobs.has(j.partner), "%s: partner %s is not a job" % [Scan.where(j), j.partner])
+			check(j.partner != j.advances_from and j.partner != j.id, "%s: partner must be a second, different parent" % Scan.where(j))
+			check(j.secondary_stat in StatBlock.BASE, "%s: a blend's secondary_stat must be a base stat" % Scan.where(j))
 		check(j.primary_stat in StatBlock.BASE, "%s: primary_stat is not a base stat" % Scan.where(j))
 		for i in j.advance_gifts.size():
 			var g := j.advance_gifts[i]
@@ -232,7 +236,8 @@ func test_every_advanced_job_is_taught_somewhere() -> void:
 			for j in n.instructs:
 				taught[j] = true
 	for j: JobDef in Content.jobs.values():
-		if j.advances_from != &"":
+		# blends wait for a later tutor (docs/game-rules.md); first-job tutors never offer them
+		if j.advances_from != &"" and j.partner == &"":
 			check(taught.has(j.id), "%s: no placed NPC instructs this job" % Scan.where(j))
 
 func test_job_gifts_suit_the_job() -> void:

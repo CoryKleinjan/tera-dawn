@@ -10,6 +10,11 @@ const FOLLOW := 0.35
 ## its second wind.
 const LEAN := 4.0
 const RAGE_TINT := Color(1.15, 0.8, 0.75)
+## Tints for what player skills do to it, code-drawn until painted effects: hexed (violet),
+## rooted (moss green), burning (ember red).
+const HEX_TINT := Color(0.85, 0.65, 1.1)
+const ROOT_TINT := Color(0.75, 1.05, 0.7)
+const BURN_TINT := Color(1.2, 0.75, 0.6)
 
 var world: TDWorld
 var index := 0
@@ -34,7 +39,8 @@ var _recoil := 0.0
 var _stop_t := 0
 ## How visible it is (fades out and in for a blink), and whether it shows its second wind.
 var _fade := 1.0
-var _enraged := false
+## The tint last given to the rig (see _tint).
+var _tinted := Color.WHITE
 
 static func create(w: TDWorld, i: int, d: MonsterDef, p: Platform) -> TDMob:
 	var m := TDMob.new()
@@ -107,6 +113,7 @@ func _ready() -> void:
 	add_child(rig)
 	if def.tint != Color.WHITE:
 		rig.set_tint(def.tint)
+	_tinted = def.tint
 	if def.light_color.a > 0.0:
 		rig.add_light(def.light_color, def.light_energy, def.size.y)
 	if def.aura_color.a > 0.0:
@@ -128,10 +135,10 @@ func _process(_delta: float) -> void:
 	# winding up a move: a warm pulse and a lean back, so it never comes out of nowhere
 	var winding := flags & SnapshotFlags.MOB_WINDUP != 0 and not dead
 	rig.set_glow(0.5 + 0.5 * sin(Time.get_ticks_msec() / 45.0) if winding else 0.0)
-	var enraged := flags & SnapshotFlags.MOB_ENRAGED != 0
-	if enraged != _enraged:
-		_enraged = enraged
-		rig.set_tint(def.tint * RAGE_TINT if enraged else def.tint)
+	var tint := _tint()
+	if tint != _tinted:
+		_tinted = tint
+		rig.set_tint(tint)
 	var facing := dir
 	if facing == 0:
 		facing = -1 if world.player.position.x < position.x else 1
@@ -153,6 +160,19 @@ func _process(_delta: float) -> void:
 	else:
 		rig.play(&"idle")
 	rig.place(drawn_body_position() + lean, z)
+
+## Its own tint, warmed when enraged and coloured by a hex, root or burn on it.
+func _tint() -> Color:
+	var out := def.tint
+	if flags & SnapshotFlags.MOB_ENRAGED != 0:
+		out *= RAGE_TINT
+	if flags & SnapshotFlags.MOB_HEXED != 0:
+		out *= HEX_TINT
+	if flags & SnapshotFlags.MOB_ROOTED != 0:
+		out *= ROOT_TINT
+	if flags & SnapshotFlags.MOB_BURNING != 0:
+		out *= BURN_TINT
+	return out
 
 ## HP bar and name tag, drawn by the overlay at this monster's projected screen position
 ## (the tag goes in `tags`, which keeps tags apart). A boss's HP is on the boss bar at the

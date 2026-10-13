@@ -6,14 +6,15 @@ extends RefCounted
 
 const CRIT_MULTIPLIER := 1.6
 
-## One damage line from a character's skill against a monster. Returns {damage, crit, miss}.
-static func player_hit(skill: SkillDef, target: MonsterDef, ch: Character) -> Dictionary:
+## One damage line from a character's skill against a monster, with `extra_crit` added to
+## their Critical Rate (a streak, as a share: 0.05 is 5%). Returns {damage, crit, miss}.
+static func player_hit(skill: SkillDef, target: MonsterDef, ch: Character, extra_crit := 0.0) -> Dictionary:
 	var multiplier := skill.damage_at(ch.skills.level(skill))
 	# monsters above the player's level can dodge; accuracy wins that back
 	var miss_chance := clampf((target.level - ch.level) * 0.06 - CharacterStats.accuracy(ch.stats) * 0.004, 0.0, 0.6)
 	if randf() < miss_chance:
 		return {"damage": 0, "crit": false, "miss": true}
-	var crit := randf() < CharacterStats.crit_rate(ch.stats)
+	var crit := randf() < CharacterStats.crit_rate(ch.stats) + extra_crit
 	var spread := ch.magic_range() if skill.magic else ch.damage_range()
 	var dmg := roundi(randi_range(spread.x, spread.y) * multiplier
 		* CharacterStats.damage_bonus(ch.stats, skill.is_ranged())

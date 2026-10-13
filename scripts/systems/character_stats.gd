@@ -7,7 +7,8 @@ extends RefCounted
 const DAMAGE_SCALE := 2.0
 const BASE_CRIT := 0.12
 
-## What the job's one stat (JobDef.damage_stat) is worth in the damage formula.
+## What the job's damage stat (JobDef.damage_stat_value: one stat, or a blend's two added
+## together) is worth in the damage formula.
 const MAIN_STAT_WEIGHT := 3.6
 ## What the other stats give as they grow: Max HP per STR, Max MP per INT, Accuracy per
 ## DEX, Avoidability per LUK, and for CHA a shop discount and more Dawnshards per point.
@@ -21,21 +22,26 @@ const SHARDS_PER_CHA := 0.002
 
 ## Lowest and highest hit before skills, crits and monster level: the stats window's
 ## "Damage" line. max = main stat × MAIN_STAT_WEIGHT × weapon attack / 100, with the stat
-## `JobDef.damage_stat` picks.
+## (or a blend's two stats added together) `JobDef.damage_stat_value` gives.
 static func damage_range(job: JobDef, total: StatBlock) -> Vector2i:
-	var main := total.value(job.damage_stat(total))
+	var main := job.damage_stat_value(total)
 	var top := maxi(1, roundi(main * MAIN_STAT_WEIGHT * total.attack / 100.0 * DAMAGE_SCALE))
 	return Vector2i(maxi(1, roundi(top * job.mastery)), top)
 
 ## Lowest and highest spell hit before the spell's own multiplier, from Magic Attack (which
-## includes INT): (M² / 120) + M. The square keeps spells growing as fast as weapon
-## damage, which grows with both the main stat and Weapon Attack.
+## includes INT, or for a blend with INT both its stats): (M² / 120) + M. The square keeps
+## spells growing as fast as weapon damage, which grows with both the main stat and Weapon
+## Attack.
 static func magic_range(job: JobDef, total: StatBlock) -> Vector2i:
-	var m := magic_attack(total)
+	var m := magic_attack(total, job)
 	var top := maxi(1, roundi(m * m / 120.0 + m))
 	return Vector2i(maxi(1, roundi(top * job.mastery)), top)
 
-static func magic_attack(total: StatBlock) -> int:
+## Magic Attack plus INT. A blend whose stats include INT (a Spellblade's STR and INT) adds
+## both its stats instead, so its spells grow with either.
+static func magic_attack(total: StatBlock, job: JobDef = null) -> int:
+	if job and job.secondary_stat != &"" and &"intelligence" in job.damage_stats():
+		return total.magic_attack + job.damage_stat_value(total)
 	return total.magic_attack + total.intelligence
 
 static func accuracy(total: StatBlock) -> int:

@@ -14,9 +14,15 @@ func offhand() -> EquipDef:
 	var o := character.equipment.at(&"shield")
 	return o.equip_def() if o else null
 
-## Whether this job can use gear meant for `families` (empty means anyone).
+## Whether this job can use gear meant for `families` (empty means anyone). A blend wears
+## both its parent jobs' gear (JobDef.wear_families).
 func can_use(families: Array[StringName]) -> bool:
-	return families.is_empty() or character.job.family in families
+	if families.is_empty():
+		return true
+	for f in character.job.wear_families():
+		if f in families:
+			return true
+	return false
 
 ## Why the character can't wear this, or "" if they can.
 func equip_problem(e: EquipDef) -> String:

@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="JobDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/job_def.gd" id="1_job_def"]
+
+[resource]
+script = ExtResource("1_job_def")
+id = &"hexcaster"
+display_name = "Hexcaster"
+family = &"hexcaster"
+tint = Color(0.78, 0.68, 0.98, 1.0)
+primary_stat = "intelligence"
+secondary_stat = &"luck"
+mastery = 0.65
+description = "Magicians and Thieves who curse monsters so every blow lands harder, then rain dark stars on them. INT and LUK both drive their damage, added together. They learn every Magician and Thief skill and wield both jobs' weapons."
+base_hp = 45
+hp_per_level = 10
+base_mp = 30
+mp_per_level = 12
+ap_per_level = 5
+sp_per_level = 4
+advances_from = &"mage"
+partner = &"thief"
+advance_level = 30
+advance_sp = 1

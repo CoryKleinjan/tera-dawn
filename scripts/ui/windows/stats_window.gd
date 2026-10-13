@@ -70,18 +70,18 @@ func _draw_body() -> void:
 		auto_rect = Rect2(Vector2(_plus_x() - 6 - AUTO_SIZE.x, y - TEXT_MID - AUTO_SIZE.y / 2.0), AUTO_SIZE)
 		add_button(auto_rect, "Auto", auto_assign, true, true)
 	y = _row(y, "Ability Points", str(Game.me.ap.points), Palette.SUN if Game.me.ap.points > 0 else Palette.MIST, 0.0, COL_VALUE, STAT_ROW_H)
-	var main_stat := Game.me.job.damage_stat(s)
+	var main_stats: Array = Game.me.job.damage_stats() if not Game.me.job.uses_best_stat else [Game.me.job.damage_stat(s)]
 	for stat in StatBlock.BASE:
 		var extra := s.value(stat) - Game.me.base.value(stat)
 		var text := str(s.value(stat)) + (" (+%d)" % extra if extra > 0 else "")
 		if Game.me.ap.points > 0:
 			plus_button(Vector2(_plus_x(), y - TEXT_MID - STAT_PLUS / 2.0), Net.ask.bind(&"req_add_ap", [stat]), STAT_PLUS)
-		y = _row(y, StatBlock.LABELS[stat], text, Palette.SUN if stat == main_stat else Palette.MIST, 0.0, COL_VALUE, STAT_ROW_H)
+		y = _row(y, StatBlock.LABELS[stat], text, Palette.SUN if stat in main_stats else Palette.MIST, 0.0, COL_VALUE, STAT_ROW_H)
 	y = _divider(y - STAT_ROW_H + ROW_H)
 	# combat numbers in two columns, so the window ends above the status bar's HP
 	var dmg := Game.me.damage_range()
 	y = _pair(y, ["Damage", "%d ~ %d" % [dmg.x, dmg.y], Palette.SUN], ["Critical Rate", "%d%%" % roundi(CharacterStats.crit_rate(s) * 100)])
-	y = _pair(y, ["Weapon Attack", str(s.attack)], ["Magic Attack", str(CharacterStats.magic_attack(s))])
+	y = _pair(y, ["Weapon Attack", str(s.attack)], ["Magic Attack", str(CharacterStats.magic_attack(s, Game.me.job))])
 	y = _pair(y, ["Weapon Defense", str(s.defense)], ["Magic Defense", str(s.magic_defense)])
 	y = _pair(y, ["Accuracy", str(CharacterStats.accuracy(s))], ["Avoidability", str(CharacterStats.avoid(s))])
 	y = _pair(y, ["Speed", "%d%%" % roundi(CharacterStats.speed_multiplier(s) * 100)], ["Jump", "%d%%" % roundi(CharacterStats.jump_multiplier(s) * 100)])

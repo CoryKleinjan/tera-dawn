@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="JobDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/job_def.gd" id="1_job_def"]
+
+[resource]
+script = ExtResource("1_job_def")
+id = &"wildhunter"
+display_name = "Wildhunter"
+family = &"wildhunter"
+tint = Color(0.9, 0.88, 0.7, 1.0)
+primary_stat = "dexterity"
+secondary_stat = &"strength"
+mastery = 0.65
+description = "Archers and Warriors who mark their prey and charge in, with blade and bow at point-blank range. DEX and STR both drive their damage, added together. They learn every Archer and Warrior skill and wield both jobs' weapons."
+base_hp = 50
+hp_per_level = 14
+base_mp = 20
+mp_per_level = 5
+ap_per_level = 5
+sp_per_level = 4
+advances_from = &"archer"
+partner = &"warrior"
+advance_level = 30
+advance_sp = 1

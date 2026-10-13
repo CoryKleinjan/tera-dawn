@@ -22,7 +22,7 @@ func test_every_job_gets_a_max_level_character_in_gear_it_can_wear() -> void:
 	for job in TestCharacters.jobs():
 		var c := TestCharacters.build(TestCharacters.name_for(job), job)
 		check_eq(c.job, job, "%s: the job" % job.id)
-		check_eq(c.level, Character.MAX_LEVEL, "%s: the level cap" % job.id)
+		check_eq(c.level, TestCharacters.LEVEL, "%s: the test level" % job.id)
 		check_eq(c.shards, TestCharacters.SHARDS, "%s: Dawnshards" % job.id)
 		check_eq(c.ap.points, 0, "%s: every Ability Point spent" % job.id)
 		check(c.gear.weapon() != null, "%s: holds a weapon" % job.id)
@@ -50,7 +50,7 @@ func test_the_gear_is_the_best_the_job_can_wear() -> void:
 
 func test_a_job_with_two_weapon_kinds_wields_its_first_and_carries_the_other() -> void:
 	for job in TestCharacters.jobs():
-		var weapons := TestCharacters.best_weapons(job, Character.MAX_LEVEL)
+		var weapons := TestCharacters.best_weapons(job, TestCharacters.LEVEL)
 		if weapons.size() < 2:
 			continue
 		var c := TestCharacters.build("Arms", job)

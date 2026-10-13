@@ -317,7 +317,10 @@ func test_skill_window_lists_every_skill_of_every_job() -> void:
 			c.skills.points = 5)
 		var book: TDSkillWindow = _open("skills")
 		var line := book.jobs()
-		check_eq(line.size(), 2, "%s: tabs (Beginner and the job)" % j.id)
+		if j.partner == &"":
+			check_eq(line.size(), 2, "%s: tabs (Beginner and the job)" % j.id)
+		else:
+			check_eq(line, [Character.START_JOB, j.advances_from, j.partner, j.id] as Array[StringName], "%s: tabs (Beginner, both parents, the blend)" % j.id)
 		for t in line.size():
 			await _click_tab(book, t)
 			check_eq(book.tab, t, "%s: clicking tab %d" % [j.id, t])

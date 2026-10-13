@@ -1,0 +1,29 @@
+{
+  "source": "art/source/blend_icons_test.png",
+  "out_dir": "assets/sprites/skills",
+  "scale": 0.065,
+  "keep": "largest",
+  "inset": 16,
+  "cells": [
+    [
+      "sunfall_blade",
+      "hex"
+    ],
+    [
+      "lucky_streak",
+      "call_the_fleet"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      1024,
+      2048
+    ],
+    "cols": [
+      0,
+      1024,
+      2048
+    ]
+  }
+}
