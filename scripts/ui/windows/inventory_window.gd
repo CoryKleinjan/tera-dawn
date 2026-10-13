@@ -59,17 +59,27 @@ func _scroll() -> ScrollDef:
 	return s.item as ScrollDef
 
 func _click(at: Vector2, button: int, double: bool) -> void:
+	var i := slot_at(at)
 	if button == MOUSE_BUTTON_RIGHT:
 		scrolling = -1
+		if i >= 0 and _shop():
+			_shop().sell_from(tab, i)
 	if button != MOUSE_BUTTON_LEFT:
 		return
-	var i := slot_at(at)
 	if i >= 0 and _scroll() and tab == ItemDef.Tab.EQUIP:
 		if Game.me.inventory.at(tab, i):
 			use_scroll_on(i)
 		return
 	if i >= 0 and double:
-		use_slot(i)
+		if _shop():
+			_shop().sell_from(tab, i)
+		else:
+			use_slot(i)
+
+## The shop window while a shop is open (double-click and right-click then sell), or null.
+func _shop() -> TDShopWindow:
+	var shop: TDShopWindow = hud.windows.get("shop")
+	return shop if shop and shop.visible else null
 
 func _tab_clicked(i: int) -> void:
 	tab = i as ItemDef.Tab
@@ -101,6 +111,8 @@ func _tooltip_at(at: Vector2) -> Tip:
 	var i := slot_at(at)
 	var stack := Game.me.inventory.at(tab, i) if i >= 0 else null
 	var hint := ""
+	if stack and _shop():
+		return Tip.new(stack, "Double-click to sell (%d each)" % stack.item.sell_price, true)
 	match tab:
 		ItemDef.Tab.EQUIP:
 			hint = "Click to use the scroll here" if _scroll() else "Double-click to equip"

@@ -53,6 +53,8 @@ var tooltip: TDItemTooltip
 var chat: TDChat
 var invites: TDInvites
 var prompt: TDPrompt
+## A yes-or-no question while playing ("Sell Iron Helm for 400 Dawnshards?").
+var confirm: TDConfirm
 ## The invisible button over the minimap that opens the world map.
 var minimap_button: Button
 ## Quest complete, job advance and achievement pop-ups.
@@ -93,6 +95,10 @@ func _ready() -> void:
 	add_child(invites)
 	prompt = TDPrompt.new()
 	add_child(prompt)
+	confirm = TDConfirm.new()
+	confirm.theme = ui_theme
+	confirm.hide()
+	add_child(confirm)
 	banners = TDBanners.new()
 	banners.world = world
 	banners.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -269,7 +275,7 @@ func show_player_shop(owner: int, owner_name: String, title_text: String, items:
 
 ## Typing in the chat box or a text prompt: keys shouldn't move the player.
 func typing() -> bool:
-	return chat.typing() or prompt.visible
+	return chat.typing() or prompt.visible or confirm.visible
 
 ## Minding your own shop: you stay put.
 func selling() -> bool:
@@ -398,11 +404,14 @@ func resume() -> void:
 	game_menu.hide()
 	title.hide()
 
-## Esc. While playing: closes the top window, or opens the game menu, or closes it again.
+## Esc. While playing: cancels a question, closes the top window, or opens the game menu, or closes it again.
 ## Before that, the title screen has it first (TDTitleScreen.escape): a question is cancelled,
 ## the creator goes back, and character select logs out.
 func escape() -> void:
 	if title.escape() or not world.started:
+		return
+	if confirm.visible:
+		confirm.cancel()
 		return
 	if title.visible:
 		if game_menu.visible:
