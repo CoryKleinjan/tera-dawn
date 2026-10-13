@@ -1,21 +1,21 @@
 class_name TDCharacterSelect
 extends CenterContainer
-## Character select, shown after logging in to a server: a slot for each of the account's
-## characters on that server (their hero, name, level and job) and empty slots up to the
-## limit, with Play, Create, Delete and Log out. TDTitleScreen decides what the buttons do;
-## the list comes from the server (Net.characters).
+## Character select, shown once a game is started or joined: a slot for each character
+## saved on this computer (their hero, name, level and job) and empty slots up to the
+## limit, with Play, Create, Delete and Back. TDTitleScreen decides what the buttons do;
+## the list is Net.characters.
 
 signal play_requested(char_name: String)
 signal create_requested
 signal delete_requested(char_name: String)
-signal logged_out
+signal left
 
 const SLOT_SIZE := Vector2(112, 168)
 ## All the slots fit in one row.
-const COLUMNS := TDLobby.MAX_CHARACTERS
+const COLUMNS := CharacterStore.MAX_CHARACTERS
 
 var heading: Label
-## Which server and account this is.
+## Which game this is: solo, hosting, or a friend's.
 var subheading: Label
 ## While hosting: the address friends type to join, and the firewall button.
 var host_panel: TDHostPanel
@@ -25,7 +25,7 @@ var slots: Array[Button] = []
 var play_button: Button
 var create_button: Button
 var delete_button: Button
-var logout_button: Button
+var leave_button: Button
 var message: Label
 ## The characters shown: {name, level, job, look} like Net.characters.
 var characters: Array = []
@@ -52,7 +52,7 @@ func _init() -> void:
 	grid.add_theme_constant_override("h_separation", 10)
 	grid.add_theme_constant_override("v_separation", 10)
 	col.add_child(grid)
-	for i in TDLobby.MAX_CHARACTERS:
+	for i in CharacterStore.MAX_CHARACTERS:
 		var slot := _slot_button(i)
 		slots.append(slot)
 		grid.add_child(slot)
@@ -62,11 +62,11 @@ func _init() -> void:
 	play_button = _button("Play", func() -> void: play_requested.emit(selected))
 	create_button = _button("Create", func() -> void: create_requested.emit())
 	delete_button = _button("Delete", func() -> void: delete_requested.emit(selected))
-	logout_button = _button("Log out", func() -> void: logged_out.emit())
-	col.add_child(UiBuild.centered_row([play_button, create_button, delete_button, logout_button]))
+	leave_button = _button("Back", func() -> void: left.emit())
+	col.add_child(UiBuild.centered_row([play_button, create_button, delete_button, leave_button]))
 
-## Shows the account's characters, picking `pick` (or keeping the one picked, or the first).
-## `where` names the server and account under the heading.
+## Shows the characters, picking `pick` (or keeping the one picked, or the first).
+## `where` names the game under the heading.
 func show_characters(list: Array, pick := "", where := "") -> void:
 	characters = list
 	if where != "":
@@ -108,7 +108,7 @@ func _refresh() -> void:
 			(slots[i].find_child("Line", true, false) as Label).add_theme_color_override("font_color", Palette.INK_SOFT if on else Palette.MIST)
 	play_button.disabled = selected == ""
 	delete_button.disabled = selected == ""
-	create_button.disabled = characters.size() >= TDLobby.MAX_CHARACTERS
+	create_button.disabled = characters.size() >= CharacterStore.MAX_CHARACTERS
 
 func _slot_button(i: int) -> Button:
 	var b := Button.new()

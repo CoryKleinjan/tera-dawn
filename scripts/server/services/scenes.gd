@@ -26,7 +26,7 @@ func on_scene_done(peer: int, id: StringName) -> void:
 	p.scene = &""
 	p.character.saw(id)
 	p.dirty_character = true
-	server.store.save(p.character)
+	server.save(p)
 
 ## Stops a scene without noting it as seen (they left the map, or attacked, so it isn't playing).
 func stop(p: SimPlayer) -> void:

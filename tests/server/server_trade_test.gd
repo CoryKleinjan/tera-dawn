@@ -101,7 +101,7 @@ func test_disconnecting_cancels_the_trade() -> void:
 	h.ask(2, &"req_trade_offer", [ItemDef.Tab.ETC, 0, 3])
 	h.leave(2)
 	check_eq(bob.character.shards, 500, "Bob's Dawnshards back")
-	check_eq(h.server.store.load_character("Ann").inventory.count_of(leaf), 10, "Ann saved with her leaves")
+	check_eq(h.saved("Ann").inventory.count_of(leaf), 10, "Ann saved with her leaves")
 	check(h.told(3, "Ann left."), "Bob told")
 
 func test_quest_items_cant_be_offered() -> void:

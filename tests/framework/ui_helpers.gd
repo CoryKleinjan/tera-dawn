@@ -16,7 +16,7 @@ var test: Node
 var world: TDWorld
 var hud: TDHud
 var _save_dir := ""
-var _username := ""
+var _address := ""
 
 func _init(owner: Node) -> void:
 	test = owner
@@ -34,7 +34,7 @@ func start(char_name := "Uitester") -> void:
 ## Opens the game on its title screen, not playing yet.
 func open_title() -> void:
 	_save_dir = Net.save_dir
-	_username = Game.last_username
+	_address = Game.last_address
 	Net.save_dir = SAVE_DIR
 	clear_saves()
 	world = load("res://scenes/world.tscn").instantiate() as TDWorld
@@ -52,19 +52,24 @@ func stop() -> void:
 	Net.stop()
 	Net.save_dir = _save_dir
 	Game.social = {}
-	Game.last_username = _username
+	Game.last_address = _address
 	Game.me = Character.create("")
 	clear_saves()
 	DirAccess.remove_absolute(SAVE_DIR)
 
 static func clear_saves() -> void:
+	clear_saves_at(SAVE_DIR)
 	DirAccess.make_dir_recursive_absolute(SAVE_DIR)
-	for d in DirAccess.get_directories_at(SAVE_DIR):
-		for f in DirAccess.get_files_at(SAVE_DIR.path_join(d)):
-			DirAccess.remove_absolute(SAVE_DIR.path_join(d).path_join(f))
-		DirAccess.remove_absolute(SAVE_DIR.path_join(d))
-	for f in DirAccess.get_files_at(SAVE_DIR):
-		DirAccess.remove_absolute(SAVE_DIR.path_join(f))
+
+## Deletes a character save folder and everything in it.
+static func clear_saves_at(dir: String) -> void:
+	if not DirAccess.dir_exists_absolute(dir):
+		return
+	for d in DirAccess.get_directories_at(dir):
+		clear_saves_at(dir.path_join(d))
+	for f in DirAccess.get_files_at(dir):
+		DirAccess.remove_absolute(dir.path_join(f))
+	DirAccess.remove_absolute(dir)
 
 ## The server's side of this game's player.
 func player() -> SimPlayer:

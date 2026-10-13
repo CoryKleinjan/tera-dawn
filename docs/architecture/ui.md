@@ -37,12 +37,12 @@ quickslots, chat, the windows (the window manager above), the first-time hints, 
 menu (Esc) and the settings screen, and Esc and pausing (`escape`, `show_title`, `resume`).
 
 `TDTitleScreen` (`scripts/ui/title_screen.gd`, `hud.title`) is the dimmed layer over the game
-before you play and while paused: the key art, the title card (the logo over Play, Settings
-and Quit, and the Play page with Play solo, Host and the server login and register boxes),
-character select, the creator and their questions. It runs the login flow from the first
-button to `Net.joined` (see [multiplayer](multiplayer.md)) and tells the HUD through signals:
-`settings_requested`, `quit_requested` and `left_game` (logged out or dropped: show the title
-card again). The HUD puts the game menu and settings screen on it. Esc goes to
+before you play and while paused: the key art, the title card (the logo over Play solo, Host
+co-op, Join a friend, Settings and Quit, and the Join page with the host's address),
+character select, the creator and their questions. It runs everything from the first button
+to `Net.joined` (see [multiplayer](multiplayer.md)) and tells the HUD through signals:
+`settings_requested`, `quit_requested` and `left_game` (left, dropped or turned away: show
+the title card again). The HUD puts the game menu and settings screen on it. Esc goes to
 `TDTitleScreen.escape` first, which handles the title screens' own steps back and returns false
 when Esc belongs to the game. A new screen before the game goes on the title screen; a new
 in-game piece goes on the HUD.
@@ -83,14 +83,15 @@ keep the default, so an old or hand-edited file never breaks the game.
   fires.
 - **DevSettings** holds developer-only switches, on a Developer tab that only debug builds
   (the editor, a debug export) show; a release build ignores them. `test_characters` makes
-  Play solo and Host log in to a test account (`TestCharacters.ACCOUNT`) with a
-  `Character.MAX_LEVEL` character of every job in the best gear it can wear, every skill
-  at its highest level and `TestCharacters.SHARDS` Dawnshards. They're made the first time
-  (`TDLobby.on_local_login`), kept as played after that, and made again after "Rebuild test
+  character select (solo, host or join) list the test characters, saved in their own folder
+  (`TestCharacters.FOLDER`): a `Character.MAX_LEVEL` character of every job in the best gear
+  it can wear, every skill at its highest level and `TestCharacters.SHARDS` Dawnshards.
+  They're made the first time (`TestCharacters.prepare`, from `Net.open_saves`), kept as
+  played after that (but put back in their job's town), and made again after "Rebuild test
   characters". Everything is picked from the data (`TestCharacters.best_gear_for`), so new
-  jobs, skills and gear show up with no code change. The player's own characters stay on
-  `AccountStore.LOCAL`, untouched. Character select shows `TDLobby.MAX_CHARACTERS` slots,
-  so raise it when there are more jobs than that.
+  jobs, skills and gear show up with no code change. The player's own characters stay as
+  they are. Character select shows `CharacterStore.MAX_CHARACTERS` slots, so raise it when
+  there are more jobs than that.
 
 The settings screen (`TDSettingsMenu`) changes a section, calls `Settings.apply(section)` so
 the change shows at once, and `Settings.save()` when it closes. To add a setting, add the

@@ -9,8 +9,8 @@ with depth of field, tilt-shift blur, bloom, dynamic lights and shadows. Gamepla
 [rendering](docs/architecture/rendering.md)). The renderer is Forward+ (Vulkan, or Direct3D 12
 on Windows).
 
-**What's in it:** play solo, host, or log in to a server with accounts and up to six characters
-each; a world of regions, towns, fields and boss hunting grounds joined by portals, ships and
+**What's in it:** play solo, or co-op with up to four players (one hosts, friends join
+bringing their own characters), with up to six characters saved on each player's computer; a world of regions, towns, fields and boss hunting grounds joined by portals, ships and
 coaches; a Beginner and five jobs (Warrior, Archer, Magician, Thief, Pirate) with skill books,
 quickslots, melee, ranged and magic combat; MapleStory-style stats, gear, upgrade scrolls and
 drops; NPCs, shops, storage and quests; chat, parties, buddies, guilds, trades, fame and player
@@ -24,21 +24,14 @@ code is laid out and links a page per system, with how to add a monster, map, it
 
 1. Install [Godot 4.7](https://godotengine.org/download) (the standard build; C# isn't needed).
 2. In the Project Manager, choose **Import** and pick this folder's `project.godot`.
-3. Press **F5**. On the title screen pick **Play solo**, **Host** (friends join on UDP port
-   7350, which must be forwarded to host over the internet), or enter a server address,
-   username and password and **Log in** (or **Register**). Then pick or make a character.
+3. Press **F5**. On the title screen pick **Play solo**, **Host co-op** (friends join on UDP
+   port 7350, which must be forwarded to host over the internet), or **Join a friend** and
+   type the host's address. Then pick or make a character.
 
-Dedicated server, with no window and no player of its own:
-
-```sh
-godot --headless --path . -- --server --port 7350
-```
-
-It keeps accounts and characters under its own `user://characters/` and saves every 10
-seconds, on map changes and when players leave. Passwords are stored only as salted PBKDF2
-hashes, and the connection is encrypted (DTLS) with a key and certificate in
-`user://characters/tls/`, made on first start. To let players verify an official server, put
-its real certificate there and ship it as `certs/<address>.crt`. See
+Characters are saved on each player's own computer under `user://characters/`. A player
+joining a friend brings one along; the host sends it back to be saved every 10 seconds, on
+map changes and when they leave. The connection is encrypted (DTLS) with a key and
+certificate the host makes in `user://characters/tls/` on first start. See
 [multiplayer](docs/architecture/multiplayer.md).
 
 ## Controls

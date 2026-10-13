@@ -24,11 +24,11 @@ var preview := PaperdollView.new()
 var heading: Label
 var name_field: LineEdit
 var create_button: Button
-## Why the server turned the last Create down (a name that's taken...).
+## Why the last Create was turned down (a name that's taken...).
 var message: Label
 ## Every choice row's value label, keyed by "look:<kind>" or "outfit:<slot>".
 var values := {}
-## Waiting for the server to answer a Create; another Create meanwhile is ignored.
+## Waiting for a Create to be answered; another Create meanwhile is ignored.
 var pending := false
 var _pose := 0
 
@@ -155,7 +155,7 @@ func show_message(text: String) -> void:
 	message.text = text
 	message.visible = text != ""
 
-## The server turned the Create down: says why and lets the player try again.
+## The Create was turned down: says why and lets the player try again.
 func refused(reason: String) -> void:
 	_set_pending(false)
 	show_message(reason)

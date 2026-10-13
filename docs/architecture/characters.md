@@ -5,9 +5,9 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
 ## Character creation and looks
 
 **Create** on character select opens the character creator (`TDCreator`): a name and the
-look and outfit, sent with `req_create_character` (`NewCharacter.to_dict()`). The server keeps
-only what the creator offers and makes a level 1 character in the starting job
-(`Character.START_JOB`), then sends the list back with the new character picked.
+look and outfit (`NewCharacter`). `Net.create_character` makes a level 1 character in the
+starting job (`Character.START_JOB`) and saves it on this computer (`CharacterStore.create`),
+then character select shows the list with the new character picked.
 
 - **Appearance** (on the Character) is a skin tone, face, eye colour, hairstyle and hair
   colour, each the id of a `LookDef` in `data/looks/`. Add an option by adding a file;

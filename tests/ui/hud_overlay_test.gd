@@ -225,7 +225,7 @@ func test_overlay_draws_the_faint_screen() -> void:
 func test_title_screen_draws_and_hides() -> void:
 	check(not ui.hud.title.visible, "playing hides the title screen")
 	ui.hud.show_title(false)
-	check(ui.hud.title.visible and ui.hud.title.start_panel.visible and not ui.hud.game_menu.visible, "the title shows the start panel")
+	check(ui.hud.title.visible and ui.hud.title.main_menu.visible and not ui.hud.game_menu.visible, "the title shows the main menu")
 	check(await ui.redraw(ui.hud.title), "the title screen draws")
 	ui.hud.show_title(true)
 	check(ui.hud.game_menu.visible and not ui.hud.title.title_card.visible, "the game menu shows Resume, Settings, Leave and Quit")
@@ -347,33 +347,23 @@ func test_title_screen_hides_the_status_bar_and_minimap() -> void:
 	check(not ui.hud.minimap_button.visible, "no minimap button either")
 	check(await ui.redraw(ui.hud.overlay), "the overlay draws without the minimap")
 
-func test_play_solo_and_host_have_their_own_row() -> void:
-	var hud := ui.hud
-	var account_row := hud.title.login_button.get_parent()
-	check(hud.title.register_button.get_parent() == account_row, "Log in and Register share a row")
-	check(hud.title.play_button.get_parent() == hud.title.host_button.get_parent(), "Play solo and Host share a row")
-	var offline_row := hud.title.play_button.get_parent()
-	check(offline_row != account_row, "a row of their own")
-	var rows := hud.title.start_panel.get_children()
-	var at := rows.find(offline_row)
-	check(at == 0 and at < rows.find(account_row), "first, over the account boxes")
-	var label := rows[at + 1] as Label
-	check(label != null and label.text == "Or play online", "with a small label under them for the rest")
-
-func test_the_title_opens_on_a_small_menu_and_play_shows_the_choices() -> void:
+func test_the_title_menu_offers_solo_host_and_join() -> void:
 	ui.hud.show_title(false)
-	check(ui.hud.title.main_menu.visible and not ui.hud.title.play_page.visible, "Play, Settings and Quit first")
-	ui.hud.title.menu_play_button.pressed.emit()
-	check(ui.hud.title.play_page.visible and not ui.hud.title.main_menu.visible, "Play shows solo, host and online")
+	var title := ui.hud.title
+	var order := title.main_menu.get_children().map(func(b: Button) -> String: return b.text)
+	check_eq(order, ["Play solo", "Host co-op", "Join a friend", "Settings", "Quit"], "the menu")
+	check(not title.join_page.visible, "the Join page waits")
+	title.join_button.pressed.emit()
+	check(title.join_page.visible and not title.main_menu.visible, "Join a friend asks for the address")
 	await ui.press("pause")
-	check(ui.hud.title.main_menu.visible and not ui.hud.title.play_page.visible, "Esc goes back to the menu")
-	Net.refused.emit(TDLobby.WRONG_LOGIN)
-	check(ui.hud.title.play_page.visible and ui.hud.title.message.visible, "a refusal shows on the Play page, by the boxes")
+	check(title.main_menu.visible and not title.join_page.visible, "Esc goes back to the menu")
+	Net.refused.emit("Couldn't reach the host.")
+	check(title.main_menu.visible and title.message.visible, "a refusal shows under the menu")
 
 func test_title_boxes_keep_their_hints_clear_of_the_caret() -> void:
-	for f: LineEdit in [ui.hud.title.address_field, ui.hud.title.username_field, ui.hud.title.password_field, ui.hud.title.confirm_field]:
-		check(f.placeholder_text.begins_with(UiStyle.HINT_ROOM), "%s: room between the caret and the hint" % f.placeholder_text.strip_edges())
-		check_eq(f.alignment, HORIZONTAL_ALIGNMENT_LEFT, "%s: left-aligned, so an empty box's caret starts before the hint" % f.placeholder_text.strip_edges())
+	var f := ui.hud.title.address_field
+	check(f.placeholder_text.begins_with(UiStyle.HINT_ROOM), "room between the caret and the hint")
+	check_eq(f.alignment, HORIZONTAL_ALIGNMENT_LEFT, "left-aligned, so an empty box's caret starts before the hint")
 
 func test_first_hints_name_the_real_keys() -> void:
 	var town: String = ui.hud.hint_texts[TDHud.Hint.TOWN]

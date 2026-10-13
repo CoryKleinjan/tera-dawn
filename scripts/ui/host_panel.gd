@@ -1,7 +1,7 @@
 class_name TDHostPanel
 extends VBoxContainer
-## On character select while hosting: what friends on the same network type in Server to
-## join (with a Copy button), and on Windows a button that lets them through the firewall
+## On character select while hosting: what friends on the same network type under Join a
+## friend (with a Copy button), and on Windows a button that lets them through the firewall
 ## when it would block them (LanHost).
 
 var address_label: Label
@@ -34,11 +34,11 @@ func refresh(port: int) -> void:
 	address = found[0] + suffix if not found.is_empty() else ""
 	address_label.tooltip_text = ""
 	if address != "":
-		address_label.text = "Friends on your network type %s in Server" % address
+		address_label.text = "Friends on your network join with %s" % address
 		if found.size() > 1:
 			address_label.tooltip_text = "If that doesn't work, try %s" % ", ".join(Array(found.slice(1)).map(func(a: String) -> String: return a + suffix))
 	else:
-		address_label.text = "No home network found. Friends type this computer's IP address in Server."
+		address_label.text = "No home network found. Friends join with this computer's IP address."
 	copy_button.visible = address != ""
 	if _thread:
 		return  # still waiting on the Windows prompt

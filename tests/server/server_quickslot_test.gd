@@ -68,7 +68,7 @@ func test_an_empty_kind_clears_the_slot() -> void:
 func test_quickslots_are_saved() -> void:
 	_slot(5, &"skill", &"power_strike")
 	h.leave(2)
-	var saved := h.server.store.load_character("Ann")
+	var saved := h.saved("Ann")
 	check(saved != null and saved.quickslots[5] == [&"skill", &"power_strike"], "kept after leaving")
 
 func test_unknown_players_are_ignored() -> void:

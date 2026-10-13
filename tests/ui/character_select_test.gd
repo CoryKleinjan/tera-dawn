@@ -1,6 +1,6 @@
 extends TestCase
-## Character select: what logging in (or playing solo) shows, picking, playing, deleting
-## with the name typed, the slot limit, and going back to it from the game menu.
+## Character select: what playing solo shows, picking, playing, deleting with the name
+## typed, the slot limit, and going back to it from the game menu.
 
 var ui: UiHelpers
 
@@ -12,7 +12,7 @@ func after_each() -> void:
 	ui.stop()
 
 func _solo() -> void:
-	ui.hud.title._on_play()
+	ui.hud.title._on_solo()
 	await ui.ticks(2)
 
 func _make(names: Array) -> void:
@@ -24,8 +24,8 @@ func test_play_solo_shows_character_select_with_empty_slots() -> void:
 	await _solo()
 	var sel := ui.hud.title.character_select
 	check(sel.visible and not ui.hud.title.title_card.visible, "character select shown")
-	check_eq(sel.subheading.text, "Playing solo on this computer", "says where")
-	check_eq(sel.slots.size(), TDLobby.MAX_CHARACTERS, "a slot for each character allowed")
+	check_eq(sel.subheading.text, "Playing solo", "says where")
+	check_eq(sel.slots.size(), CharacterStore.MAX_CHARACTERS, "a slot for each character allowed")
 	check_eq(sel.slots[0].find_child("Title", true, false).text, "Empty slot", "empty")
 	check(sel.play_button.disabled and sel.delete_button.disabled, "nothing to play or delete")
 	check(not sel.create_button.disabled, "can create")
@@ -77,7 +77,7 @@ func test_cancel_keeps_the_character() -> void:
 func test_create_is_off_when_every_slot_is_full() -> void:
 	await _solo()
 	var names := []
-	for i in TDLobby.MAX_CHARACTERS:
+	for i in CharacterStore.MAX_CHARACTERS:
 		names.append("Hero%d" % i)
 	await _make(names)
 	check(ui.hud.title.character_select.create_button.disabled, "no room")
@@ -96,67 +96,45 @@ func test_the_game_menu_goes_back_to_character_select() -> void:
 	check_eq(Net.mode, Net.Mode.SINGLE, "still connected")
 	check(Net.server.sessions.is_empty(), "nobody in the world")
 
-func test_log_out_goes_back_to_the_title() -> void:
+func test_back_goes_back_to_the_title() -> void:
 	await _solo()
-	ui.hud.title.character_select.logout_button.pressed.emit()
+	ui.hud.title.character_select.leave_button.pressed.emit()
 	await ui.ticks(1)
 	check(ui.hud.title.title_card.visible and not ui.hud.title.character_select.visible, "title card")
 	check_eq(Net.mode, Net.Mode.NONE, "disconnected")
 
-func test_register_asks_for_the_password_twice() -> void:
-	ui.hud.title.username_field.text = "rowan"
-	ui.hud.title.password_field.text = "longenough"
-	ui.hud.title.register_button.pressed.emit()
-	check(ui.hud.title.confirm_row.visible, "second box shown")
-	ui.hud.title.confirm_field.text = "different!"
-	ui.hud.title.register_button.pressed.emit()
-	check_eq(ui.hud.title.message.text, "The passwords don't match.", "checked before sending")
-	check_eq(Net.mode, Net.Mode.NONE, "not connecting")
-	ui.hud.title.password_field.text = "short"
-	ui.hud.title.confirm_field.text = "short"
-	ui.hud.title.register_button.pressed.emit()
-	check_eq(ui.hud.title.message.text, "Passwords need at least 8 characters.", "too short")
-
-func test_a_refused_login_is_shown_on_the_title_card() -> void:
-	Net.refused.emit(TDLobby.WRONG_LOGIN)
+func test_a_refusal_is_shown_on_the_title_card() -> void:
+	Net.refused.emit("Couldn't reach the host.")
 	check(ui.hud.title.title_card.visible, "still on the title card")
-	check_eq(ui.hud.title.message.text, TDLobby.WRONG_LOGIN, "says why")
+	check_eq(ui.hud.title.message.text, "Couldn't reach the host.", "says why")
 
-func test_logging_in_remembers_the_username_and_server_but_not_the_password() -> void:
+func test_joining_remembers_the_address() -> void:
 	var path := Settings.path
-	Settings.path = "user://test_settings_login.cfg"
-	ui.hud.title.address_field.text = "127.0.0.1"
-	ui.hud.title.username_field.text = "rowan"
-	ui.hud.title.password_field.text = "dawn breaks over"
-	ui.hud.title._on_log_in()
+	Settings.path = "user://test_settings_join.cfg"
+	ui.hud.title.join_button.pressed.emit()
+	ui.hud.title.address_field.text = "127.0.0.1:7399"
+	ui.hud.title.connect_button.pressed.emit()
+	check_eq(Net.mode, Net.Mode.CLIENT, "joining")
+	check_eq(ui.hud.title.message.text, "Joining 127.0.0.1:7399…", "says so")
 	Net.stop()
 	var cfg := ConfigFile.new()
 	cfg.load(Settings.path)
-	check_eq(cfg.get_value("player", "username", ""), "rowan", "username saved")
-	check_eq(cfg.get_value("player", "address", ""), "127.0.0.1", "server saved")
-	var text := FileAccess.get_file_as_string(Settings.path)
-	check(not text.contains("dawn breaks over"), "no password in the file")
-	check_eq(ui.hud.title.password_field.text, "", "the box is cleared once sent")
+	check_eq(cfg.get_value("player", "address", ""), "127.0.0.1:7399", "address saved")
 	DirAccess.remove_absolute(Settings.path)
 	Settings.path = path
 
-func test_enter_registers_while_the_second_password_box_shows() -> void:
-	ui.hud.title.address_field.text = "127.0.0.1"
-	ui.hud.title.username_field.text = "rowan"
-	ui.hud.title.password_field.text = "longenough"
-	ui.hud.title.register_button.pressed.emit()
-	ui.hud.title.confirm_field.text = "different!"
-	for f: LineEdit in [ui.hud.title.address_field, ui.hud.title.username_field, ui.hud.title.password_field]:
-		f.text_submitted.emit(f.text)
-		check(ui.hud.title.confirm_row.visible, "Enter in %s keeps registering" % f.placeholder_text)
-		check_eq(ui.hud.title.message.text, "The passwords don't match.", "and checks the second box")
-	check_eq(Net.mode, Net.Mode.NONE, "nothing sent")
+func test_join_needs_an_address() -> void:
+	ui.hud.title.join_button.pressed.emit()
+	ui.hud.title.address_field.text = "  "
+	ui.hud.title.address_field.text_submitted.emit("  ")
+	check_eq(Net.mode, Net.Mode.NONE, "not joining")
+	check_eq(ui.hud.title.message.text, "Type the address your friend sees when they host.", "says what to type")
 
-func test_escape_on_character_select_logs_out() -> void:
+func test_escape_on_character_select_leaves_the_game() -> void:
 	await _solo()
 	await ui.press("pause")
 	check(ui.hud.title.title_card.visible and not ui.hud.title.character_select.visible, "title card")
-	check_eq(Net.mode, Net.Mode.NONE, "logged out")
+	check_eq(Net.mode, Net.Mode.NONE, "left the game")
 
 func test_escape_in_the_creator_goes_back() -> void:
 	await _solo()
@@ -165,7 +143,7 @@ func test_escape_in_the_creator_goes_back() -> void:
 	await ui.press("pause")
 	check(not ui.hud.title.creator.visible and ui.hud.title.character_select.visible, "back on character select")
 	check(ui.hud.title.character_select.create_button.has_focus(), "Create has the focus")
-	check_eq(Net.mode, Net.Mode.SINGLE, "still logged in")
+	check_eq(Net.mode, Net.Mode.SINGLE, "still in the game")
 
 func test_escape_cancels_deleting() -> void:
 	await _solo()
@@ -175,7 +153,7 @@ func test_escape_cancels_deleting() -> void:
 	check(not ui.hud.title.delete_confirm.visible and ui.hud.title.character_select.visible, "back on character select")
 	check(ui.hud.title.character_select.play_button.has_focus(), "Play has the focus")
 	check_eq(Net.characters.size(), 1, "not deleted")
-	check_eq(Net.mode, Net.Mode.SINGLE, "still logged in")
+	check_eq(Net.mode, Net.Mode.SINGLE, "still in the game")
 
 func test_cancel_puts_the_focus_back_on_play() -> void:
 	await _solo()
@@ -207,7 +185,7 @@ func test_a_refused_create_can_be_tried_again() -> void:
 	creator.name_field.text = "Ann"
 	creator.create_button.pressed.emit()
 	await ui.ticks(2)
-	check_eq(creator.message.text, "Ann is taken. Try another name.", "says why")
+	check_eq(creator.message.text, "You already have a character called Ann.", "says why")
 	check(not creator.create_button.disabled, "Create works again")
 
 func test_leaving_the_world_clears_the_chat_and_closes_windows() -> void:
@@ -251,8 +229,19 @@ func test_being_dropped_while_playing_goes_back_to_the_title() -> void:
 	await _make(["Ann"])
 	Net.play("Ann")
 	await ui.ticks(3)
-	Net.ev_refused(TDLobby.TAKEN_OVER, true)
+	Net.ev_refused("Dropped.", true)
 	await ui.ticks(1)
 	check(not ui.world.started, "out of the world")
 	check(ui.hud.title.visible and ui.hud.title.title_card.visible, "on the title card")
-	check_eq(ui.hud.title.message.text, TDLobby.TAKEN_OVER, "says why")
+	check_eq(ui.hud.title.message.text, "Dropped.", "says why")
+
+func test_playing_saves_on_this_computer() -> void:
+	await _solo()
+	await _make(["Ann"])
+	Net.play("Ann")
+	await ui.ticks(3)
+	ui.player().character.shards = 99
+	ui.hud.show_title(true)
+	ui.hud.game_menu.characters_button.pressed.emit()
+	await ui.ticks(3)
+	check_eq(CharacterStore.new(UiHelpers.SAVE_DIR).load_character("Ann").shards, 99, "saved")

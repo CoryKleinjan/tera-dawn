@@ -137,8 +137,9 @@ update this page when one changes. Each zone's own look and music are in
 - Captain Marlo's ship carries players from the start island to Dawnharbor; coachman Rook takes them
   to the job towns (400-500 Dawnshards, the same for everyone); the towns are also joined by a ring
   of portals. Developer test characters start in their job's town.
-- Multiplayer: Play solo, Host on UDP 7350 (shows the LAN address with Copy), or join with
-  `address:port`.
+- Not an MMO: no accounts, usernames or passwords. Play solo, Host co-op on UDP 7350 (shows the
+  LAN address with Copy), or Join a friend with `address:port`. Up to 4 players counting the
+  host; each brings a character saved on their own computer, and their progress saves there.
 
 ## Story
 

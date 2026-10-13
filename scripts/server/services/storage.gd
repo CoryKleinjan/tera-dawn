@@ -21,4 +21,4 @@ func _at_storage(peer: int, npc_id: StringName, tab: int, slot: int, change_: Ca
 		tell(p, problem)
 	p.dirty_character = true
 	p.dirty_vitals = true
-	server.store.save(p.character)
+	server.save(p)
