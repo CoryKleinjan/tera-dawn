@@ -171,7 +171,7 @@ static func achievement_row(done: bool) -> TDUiBox:
 const BOOK := ["book/book_pages", Vector4(40, 44, 40, 48), Vector2(30, 0)]
 
 ## Panels with an ornament in the middle of an edge (draw them with draw_panel; WorldSkin
-## has the guild tag and shop sign):
+## has the guild tag):
 ## [texture, margins (left, top, right, bottom), middle kept (across, down)], in art pixels.
 ## The arch panel's bottom border takes in the light trim under its dark middle, so content
 ## padded past it never sits on the trim.

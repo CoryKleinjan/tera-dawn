@@ -65,21 +65,6 @@ func unequip(place: StringName, i := -1) -> String:
 	c.inventory.put(ItemDef.Tab.EQUIP, i, stack)
 	return ""
 
-## The most of `stat` any gear this character wears, or could wear at this level, asks for.
-func most_needed(stat: StringName) -> int:
-	var c := character
-	var gear: Array[EquipDef] = []
-	for s: ItemStack in c.equipment.worn.values():
-		gear.append(s.equip_def())
-	for i in Inventory.SLOTS:
-		var s := c.inventory.at(ItemDef.Tab.EQUIP, i)
-		if s and can_use(s.equip_def().jobs) and s.equip_def().required_level <= c.level:
-			gear.append(s.equip_def())
-	var most := 0
-	for e in gear:
-		most = maxi(most, e.requirements().get(stat, 0))
-	return most
-
 # ---------- upgrade scrolls ----------
 
 ## Why the scroll in Use slot `use_slot` can't go on the gear in Equip slot `equip_slot`, or "".

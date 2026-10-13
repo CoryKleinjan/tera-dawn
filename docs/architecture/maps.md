@@ -5,7 +5,7 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
 ## How to add a map
 
 1. Create `data/maps/<id>.tres` as a **MapDef**. Give it an `id`, a display name, a size and
-   a `biome` (`data/biomes/meadow.tres` or `ember.tres`, or a new BiomeDef).
+   a `biome` (`data/biomes/meadow.tres` or `harbor.tres`, or a new BiomeDef).
 2. Lay it out: `platforms` (one-way, numbered from 1; the floor is 0), `climbables` (x, top,
    bottom and a climb style: rope, vine, ladder or rope ladder) and `portals`.
 3. Fill it: `spawns`, `npcs` (an **NpcPlacement** with an NpcDef and an x) and hand-placed
@@ -70,7 +70,7 @@ The same NpcDef can stand in several maps (Brin is in every town).
 Travel NPCs (ships, wagons) list **TravelRoute**s in `NpcDef.travel` (destination, arrival x,
 fare, "Ship"/"Wagon"); their dialogue offers "Travel" and `ServerTravel.on_travel` moves the
 player, charging `TravelRoute.price` (everyone pays the same fare). Each trip's label also shows the
-destination's `MapDef.level_text` unless it's a town ("Wagon to Ember Hollow (Lv. 6-12,
+destination's `MapDef.level_text` unless it's a town ("Wagon to Fern Hollow (Lv. 6-12,
 150 Dawnshards)", `TDDialogueWindow.travel_label`). A **UseDef** with `teleport` set to a map id, or to `town`, is a return scroll.
 
 The content tests (`tests/content/`) check that every portal points at a real map and every

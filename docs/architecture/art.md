@@ -8,14 +8,17 @@ Drop the sheet in `art/source/`, write a manifest in `art/sheets/`, and run
 `python3 tools/art/slice_sheets.py <name>`. `art/sheets/README.md` explains the manifest. The
 cut sprites land in `assets/sprites/`, ready to be referenced from data.
 
-Hero layers come from `python3 tools/art/paperdoll_layers.py` instead (after
+The hero is being rebuilt as a new paperdoll (painted parts in the NPC style, hands with
+fingers, hair under hats from Cory's template sheets; see [game rules](../game-rules.md)). Until
+it is approved, the old hero below stays in game.
+
+The old hero's layers come from `python3 tools/art/paperdoll_layers.py` instead (after
 `slice_sheets.py paperdoll_body`). A new **clothing cut** is a sheet of the body wearing the
 piece in every pose, on the body sheet's grid, item in greys: `art/source/<place>_<style>_frames.png`
 with a manifest `art/sheets/<place>_<style>_frames.json` (copy `top_tunic_frames.json`; place
 is top, bottom or shoes). The tool lifts the piece off each pose into
 `layers/<place>_<style>.png`, and any item with `worn_style = &"<style>"` wears it. A sheet that
-came back unusable goes in `WORN_BROKEN` (currently smock), and its items use the nearest cut
-(Berry Smock wears a tunic).
+came back unusable goes in `WORN_BROKEN`, and its items use the nearest cut.
 
 `paperdoll_layers.py` is a thin entry point for the `tools/art/paperdoll/` package, one module
 per part. `common.py` holds the paths, sizes and name lists (`WORN_BROKEN`, `WEAPON_KINDS`,
@@ -29,7 +32,8 @@ writes the region mask, rig and `--preview`. A new kind of layer is a module wit
 ## Making art with Gemini
 
 Art comes from Google's Gemini image model through its batch API (half price). Follow the art
-rules in `CLAUDE.md` (painted style, clean anti-aliased edges, icons matching worn gear).
+rules in [game rules](../game-rules.md) (painted style, clean anti-aliased edges, icons matching
+worn gear) and the house rules in `CLAUDE.md` (ask about the look, small test first).
 Art for a zone, its town or a sub-zone keeps that zone's palette, light and materials from
 [zone vibes](../zone-vibes.md).
 

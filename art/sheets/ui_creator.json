@@ -76,7 +76,8 @@
           28
         ]
       ],
-      "scale": 0.75
+      "scale": 0.75,
+      "save": false
     },
     "arrow_left": {
       "blank": [

@@ -66,7 +66,8 @@
         252
       ],
       "grow": 1.21,
-      "flat_bottom": true
+      "flat_bottom": true,
+      "save": false
     },
     "ground_left": {
       "crop": [
@@ -133,7 +134,8 @@
         26,
         246,
         251
-      ]
+      ],
+      "save": false
     },
     "tall_grass": {
       "crop": [
@@ -247,7 +249,8 @@
         251,
         252
       ],
-      "grow": 1.21
+      "grow": 1.21,
+      "save": false
     },
     "building_large": {
       "crop": [
