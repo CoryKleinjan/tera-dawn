@@ -9,23 +9,24 @@ var world: TDWorld
 func _init(w: TDWorld) -> void:
 	world = w
 
-## Someone used a skill: their swing (yours already showed), then the damage on each
-## monster hit. `lines` is [[mob index, [[damage, kind], ...]], ...].
-func show_skill(peer: int, skill: SkillDef, at: Vector2, face: int, lines: Array) -> void:
+## Someone used a skill aimed `aim`: their swing (yours already showed), then the damage
+## on each monster hit. `lines` is [[mob index, [[damage, kind], ...]], ...].
+func show_skill(peer: int, skill: SkillDef, at: Vector2, face: int, lines: Array, aim := Hitbox.Aim.AHEAD) -> void:
 	if skill == null:
 		return
 	var who := world.actor(peer)
 	if who is TDAvatar:
 		(who as TDAvatar).play_skill(skill)
-		add_effect(skill.effect, at + Vector2(0, -TDPlayer.CHEST), face)
+		add_effect(skill.effect, TDWorldFx.swing_point(at, face, aim), face, null, aim)
 		world.sound_at(skill.cast_sound(), at)
 	var views := world.mobs()
 	var mine := who == world.player
-	var from := at + Vector2(face * 20, -TDPlayer.CHEST - 2)
+	var way := Hitbox.aim_direction(face, aim)
+	var from := at + Vector2(0, -TDPlayer.CHEST) + way * 20 + Vector2(0, -2)
 	if skill.projectile and lines.is_empty():
 		# nothing in range: it flies off and fades
 		for i in skill.hits:
-			world.fx_layer.add_child(TDProjectile.create(world, skill.projectile, from, from + Vector2(face * skill.projectile.max_range, 0), i * 7, null, Callable()))
+			world.fx_layer.add_child(TDProjectile.create(world, skill.projectile, from, from + way * skill.projectile.max_range, i * 7, null, Callable()))
 	for line in lines:
 		var m: TDMob = views[line[0]] if line[0] < views.size() else null
 		if m == null:
@@ -33,6 +34,8 @@ func show_skill(peer: int, skill: SkillDef, at: Vector2, face: int, lines: Array
 		var hits: Array = line[1]
 		if skill.projectile == null:
 			_show_hits(skill, m, hits, face, mine)
+			if mine:
+				_melee_hit[m.index] = world.tick
 			continue
 		# each hit lands with its own projectile
 		for i in hits.size():
@@ -43,8 +46,31 @@ func show_skill(peer: int, skill: SkillDef, at: Vector2, face: int, lines: Array
 			world.fx_layer.add_child(TDProjectile.create(world, skill.projectile, from, Vector2.ZERO, i * 7, m, land))
 
 ## Hit-stop: how many ticks a blow freezes the monster (and your swing), plain and critical.
+## Melee blows hold longer than shots, so they feel heavy.
 const HIT_STOP := 3
 const CRIT_STOP := 6
+const MELEE_HIT_STOP := 5
+const MELEE_CRIT_STOP := 9
+## Screen shake for a critical shot, a critical melee blow, and a monster your melee blow
+## just finished off (within KILL_KICK_TICKS of the blow).
+const CRIT_SHAKE := 0.35
+const MELEE_CRIT_SHAKE := 0.5
+const KILL_KICK := 0.4
+const KILL_KICK_TICKS := 30
+
+## Monster index -> the world tick your last melee blow landed on it (see KILL_KICK).
+var _melee_hit := {}
+
+## Where a swing's effect is drawn for someone standing at `feet`: at their chest, or above
+## their head or below their middle when aimed up or down.
+static func swing_point(feet: Vector2, face: int, aim: Hitbox.Aim) -> Vector2:
+	var chest := feet + Vector2(0, -TDPlayer.CHEST)
+	match aim:
+		Hitbox.Aim.UP:
+			return chest + Vector2(0, -TDPlayer.CHEST)
+		Hitbox.Aim.DOWN:
+			return chest + Vector2(0, TDPlayer.CHEST)
+	return chest
 
 ## Damage numbers and hit effects for `hits` on monster `m` (`first` stacks numbers above
 ## earlier ones). Your own hits also get hit-stop, and crits a little screen shake.
@@ -61,12 +87,19 @@ func _show_hits(skill: SkillDef, m: TDMob, hits: Array, face: int, mine: bool, f
 			add_effect(Content.effect(EffectDef.CRITICAL), mid, face)
 	if not landed:
 		return
-	var stop := (CRIT_STOP if crit else HIT_STOP) if mine else 0
+	var stop := 0
+	if mine:
+		if skill.is_ranged():
+			stop = CRIT_STOP if crit else HIT_STOP
+		else:
+			stop = MELEE_CRIT_STOP if crit else MELEE_HIT_STOP
 	m.hit_react(face, stop)
 	if mine:
 		world.player.hit_stop(stop)
+		if not skill.is_ranged():
+			world.player.recoil()
 		if crit:
-			world.shake(0.35)
+			world.shake(CRIT_SHAKE if skill.is_ranged() else MELEE_CRIT_SHAKE)
 	burst(mid, m.def.aura_color if m.def.aura_color.a > 0.0 else Color(1.9, 1.5, 0.9), 8 if crit else 4, 0.6)
 	add_effect(skill.hit_effect, mid, face)
 
@@ -141,6 +174,9 @@ func show_mob_death(index: int) -> void:
 		flash(mid, Color(1.0, 0.85, 0.6), 4.0 if m.def.boss else 2.0)
 		if m.def.boss:
 			world.shake(0.8)
+		elif world.tick - int(_melee_hit.get(index, -KILL_KICK_TICKS - 1)) <= KILL_KICK_TICKS:
+			world.shake(KILL_KICK)
+		_melee_hit.erase(index)
 
 ## A brief flash of light at a spot that fades by itself.
 func flash(at: Vector2, col: Color, energy: float) -> void:
@@ -186,10 +222,11 @@ func add_number(pos: Vector2, value: int, kind: String) -> void:
 	world.fx_layer.add_child(n)
 
 ## Plays an effect. Effects that follow someone (heal, level up) follow `follow`, or you.
-func add_effect(def: EffectDef, pos: Vector2, face: int, follow: Node2D = null) -> void:
+## `aim` turns it to point up or down (aimed swings).
+func add_effect(def: EffectDef, pos: Vector2, face: int, follow: Node2D = null, aim := Hitbox.Aim.AHEAD) -> void:
 	if def == null:
 		return
 	if def.follow_player and follow == null:
 		follow = world.player
-	world.fx_layer.add_child(TDEffect.create(world, def, pos, face, follow))
+	world.fx_layer.add_child(TDEffect.create(world, def, pos, face, follow, aim))
 	world.sound_at(def.sound, follow.position if follow else pos)

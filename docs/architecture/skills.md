@@ -44,4 +44,15 @@ Ranged and magic skills:
 - `weapons` limits a skill to weapon kinds; `magic` uses Magic Attack (INT included) through
   `CharacterStats.magic_range` instead of the weapon.
 
+Aiming and melee weight:
+- Attacks with `aims` on (the default) turn with the held direction: Up aims up, Down in the
+  air aims down (`Hitbox.Aim`, chosen in `TDPlayer._held_aim`, kept to real aims by
+  `SkillDef.aim_for`). The aim travels in `req_skill` and `ev_skill`; the server checks
+  `Hitbox.aimed_area` and every client turns the swing effect (`TDEffect`) and any shot that way.
+- A skill without a projectile is melee (`SkillDef.is_ranged`): it knocks monsters back
+  `MapInstance.MELEE_KNOCKBACK` times harder, holds a longer hit-stop and kicks the camera
+  (`TDWorldFx`), and pushes you back (`TDPlayer.recoil`). A downward melee blow that meets a
+  monster on your screen bounces you at once (`TDPlayer.POGO_SPEED`); the server still decides
+  the damage.
+
 Damage is worked out in `scripts/world/combat.gd`, so balance changes stay in one place.

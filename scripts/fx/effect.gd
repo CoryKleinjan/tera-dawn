@@ -8,12 +8,15 @@ var def: EffectDef
 var face := 1
 ## The actor it moves with (def.follow_player effects), or null.
 var follow: Node2D
+## Which way it points (Hitbox.Aim): aimed swings turn it up or down.
+var aim := Hitbox.Aim.AHEAD
 var t := 0
 var sprite: Sprite3D
 var flash: OmniLight3D
 
-static func create(w: TDWorld, d: EffectDef, at: Vector2, facing: int, follows: Node2D = null) -> TDEffect:
+static func create(w: TDWorld, d: EffectDef, at: Vector2, facing: int, follows: Node2D = null, aiming := Hitbox.Aim.AHEAD) -> TDEffect:
 	var e := TDEffect.new()
+	e.aim = aiming
 	e.follow = follows
 	e.world = w
 	e.def = d
@@ -25,6 +28,7 @@ func _ready() -> void:
 	if not def.frames.is_empty():
 		sprite = TDStage.effect_sprite(def.frames[0], Color(def.energy, def.energy, def.energy), def.texel)
 		sprite.flip_h = face < 0
+		sprite.rotation.z = -_turn()  # the stage's y points up, the game's down
 		add_child(sprite)
 	if def.light_color.a > 0.0:
 		flash = TDStage.light(def.light_color, def.light_energy, def.light_range)
@@ -48,6 +52,15 @@ func _ready() -> void:
 		add_child(burst)
 	_sync()
 
+## How far it's turned in game space (y down): a quarter turn from ahead to up or down.
+func _turn() -> float:
+	match aim:
+		Hitbox.Aim.UP:
+			return -face * PI / 2.0
+		Hitbox.Aim.DOWN:
+			return face * PI / 2.0
+	return 0.0
+
 func step() -> void:
 	t += 1
 	if is_instance_valid(follow):
@@ -59,7 +72,7 @@ func step() -> void:
 
 func _sync() -> void:
 	var k := float(t) / def.duration()
-	var at := position + Vector2(def.offset.x * face, def.offset.y)
+	var at := position + Vector2(def.offset.x * face, def.offset.y).rotated(_turn())
 	if sprite:
 		var i := mini(int(t / 60.0 * def.fps), def.frames.size() - 1)
 		if def.lifetime > 0:
