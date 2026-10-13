@@ -25,6 +25,8 @@ const FOLDERS := {
 var monsters := {}
 var npcs := {}
 var items := {}
+## Items loaded by add_items_from rather than from data/ (the tests' own gear).
+var extra_items: Array[StringName] = []
 var skills := {}
 var effects := {}
 var maps := {}
@@ -45,6 +47,15 @@ func _ready() -> void:
 	for m in monsters.values():
 		var card := CardDef.for_monster(m, art)
 		items[card.id] = card
+
+## Loads more items from a folder: the tests' own gear (tests/fixtures/gear), which they wear
+## and trade while the game itself has no equipment.
+## Their ids are kept in `extra_items`, so checks on the game's own content can leave them out.
+func add_items_from(path: String) -> void:
+	var more := _load_folder(path, {})
+	for id: StringName in more:
+		items[id] = more[id]
+		extra_items.append(id)
 
 ## The Monster Book card of a monster.
 func card(m: MonsterDef) -> CardDef:

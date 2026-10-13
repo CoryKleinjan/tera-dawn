@@ -69,6 +69,8 @@ func test_bosses_outclass_their_map() -> void:
 
 func test_items_have_sane_prices_and_stacks() -> void:
 	for i: ItemDef in Content.items.values():
+		if i.id in Content.extra_items:
+			continue
 		var w := Scan.where(i)
 		check(i.sell_price >= 0, "%s: sell_price is %d" % [w, i.sell_price])
 		check(i.stack_size() >= 1, "%s: stack_size is %d" % [w, i.stack_size()])
@@ -84,6 +86,8 @@ func test_items_have_sane_prices_and_stacks() -> void:
 ## boss, so nobody waits on a single spawn for their next weapon.
 func test_mid_game_weapons_drop_in_two_places() -> void:
 	for i: ItemDef in Content.items.values():
+		if i.id in Content.extra_items:
+			continue
 		var e := i as EquipDef
 		if e == null or e.weapon_kind == &"" or e.required_level < 15 or e.required_level > 35:
 			continue
@@ -217,6 +221,8 @@ func test_job_requirements_are_reachable_with_ability_points() -> void:
 
 func test_gear_has_sane_requirements_and_stats() -> void:
 	for i: ItemDef in Content.items.values():
+		if i.id in Content.extra_items:
+			continue
 		var e := i as EquipDef
 		if e == null:
 			continue
@@ -234,6 +240,8 @@ func test_gear_has_sane_requirements_and_stats() -> void:
 
 func test_use_items_have_sane_numbers() -> void:
 	for i: ItemDef in Content.items.values():
+		if i.id in Content.extra_items:
+			continue
 		var u := i as UseDef
 		if u:
 			var w := Scan.where(u)

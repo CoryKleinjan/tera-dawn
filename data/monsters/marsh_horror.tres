@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=28 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=20 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/marsh_horror.tres" id="2_marsh_horror"]
@@ -11,38 +11,6 @@
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_helmet_hp_60.tres" id="9_scroll_helmet_hp_60"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_luk_60.tres" id="10_scroll_top_luk_60"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_int_60.tres" id="11_scroll_top_int_60"]
-[ext_resource type="Resource" path="res://data/items/equips/deckhand_trousers.tres" id="12_deckhand_trousers"]
-[ext_resource type="Resource" path="res://data/items/equips/deckhand_coat.tres" id="13_deckhand_coat"]
-[ext_resource type="Resource" path="res://data/items/equips/lume_earrings.tres" id="14_lume_earrings"]
-[ext_resource type="Resource" path="res://data/items/equips/viper_star.tres" id="15_viper_claw"]
-
-[sub_resource type="Resource" id="Resource_12"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("15_viper_claw")
-chance = 0.0225
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_11"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("14_lume_earrings")
-chance = 0.015
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_10"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("13_deckhand_coat")
-chance = 0.015
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_9"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("12_deckhand_trousers")
-chance = 0.015
-min_amount = 1
-max_amount = 1
 
 [sub_resource type="Resource" id="Resource_8"]
 script = ExtResource("3_drop_entry")
@@ -115,4 +83,4 @@ flying = false
 jumps = true
 sprite_frames = ExtResource("2_marsh_horror")
 sprite_scale = 1.0
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8")])

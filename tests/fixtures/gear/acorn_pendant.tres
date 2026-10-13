@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="EquipDef" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/equip_def.gd" id="1_equip_def"]
+[ext_resource type="Texture2D" path="res://tests/fixtures/gear/test_icon.png" id="2_acorn_pendant"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="3_shard_pickup"]
+[ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="4_stat_block"]
+
+[sub_resource type="Resource" id="Resource_1"]
+script = ExtResource("4_stat_block")
+max_hp = 40
+defense = 2
+
+[resource]
+script = ExtResource("1_equip_def")
+id = &"acorn_pendant"
+display_name = "Acorn Pendant"
+description = "A lucky acorn on a leather cord."
+icon = ExtResource("2_acorn_pendant")
+sprite_scale = 0.4
+glow_color = Color(0.690196, 0.478431, 0.270588, 1.0)
+pickup_effect = ExtResource("3_shard_pickup")
+sell_price = 2192
+slot = 8
+required_level = 20
+stats = SubResource("Resource_1")
+variance = 2
+upgrade_slots = 3
