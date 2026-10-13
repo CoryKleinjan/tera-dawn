@@ -1,7 +1,8 @@
 extends TestCase
 ## The hero's resting and moving poses: one standing frame and a blink (hero_idle_test), and
 ## whatever he holds points the way he faces (forward, or straight up or down), never back
-## at where he came from. Weapon angles come from art/sheets/paperdoll_rig.json through
+## at where he came from; and every weapon sits in his front hand, in the staff's fist.
+## Weapon angles come from art/sheets/paperdoll_rig.json through
 ## tools/art/paperdoll_layers.py into the hero's rig.
 
 ## Frames where he isn't swinging: standing, walking, running with his arm forward, in the air,
@@ -164,3 +165,47 @@ func test_the_fall_is_turned_partway_upright_about_his_hips() -> void:
 	check_eq(body.rotation.z, 0.0, "landing stands him straight")
 	check((body.position - TDStage.to3d(feet)).length() < 0.0001, "on his feet")
 	rig.queue_free()
+
+## Which of his two fists is nearest the viewer on each frame: the rig's weapon point ("grip")
+## or its other hand ("shield"). Cory 2026-10-12: a weapon is always in his front hand (walk1
+## and walk3 the weapon fist, walk2 and walk4 the other; run1 the fist swung forward; hurt and
+## crouch the other hand; jump the weapon fist).
+const FRONT_FIST := {
+	"idle1": "grip", "idle2": "grip", "idle3": "grip", "idle4": "grip", "blink": "grip",
+	"walk1": "grip", "walk2": "shield", "walk3": "grip", "walk4": "shield",
+	"run1": "shield", "run2": "grip", "run3": "grip", "run4": "grip",
+	"attack1": "grip", "attack2": "grip", "hit": "grip", "hurt": "shield",
+	"jump": "grip", "fall": "grip", "land": "grip", "crouch": "shield",
+	"slash1": "grip", "slash2": "grip", "slash3": "grip", "faint1": "grip",
+}
+
+func test_every_weapon_is_in_his_front_hand() -> void:
+	var frames: Array = Paperdoll.rig().get("frames", [])
+	for name: String in FRONT_FIST:
+		var f := _frame(name)
+		if not check(f >= 0, "the rig has a %s frame" % name):
+			continue
+		var fr: Dictionary = frames[f]
+		if not check(fr.has("grip") and fr.has("shield"), "%s has both fists placed" % name):
+			continue
+		var front := Vector2(fr[FRONT_FIST[name]][0], fr[FRONT_FIST[name]][1])
+		var back_key := "shield" if FRONT_FIST[name] == "grip" else "grip"
+		var back := Vector2(fr[back_key][0], fr[back_key][1])
+		for kind: String in fr.get("holds", {}):
+			var h: Variant = Paperdoll.hold(f, StringName(kind))
+			check(h["grip"].distance_to(front) < h["grip"].distance_to(back),
+				"%s: the %s is in his front hand (%s), not his back one (%s)" % [name, kind, front, back])
+
+func test_every_weapon_kind_is_held_where_the_staff_is() -> void:
+	# the staff is the model every kind copies (Cory 2026-10-12): the same fist on every frame,
+	# and no kind missing from a frame where the staff is in his hand
+	var frames: Array = Paperdoll.rig().get("frames", [])
+	for f in frames.size():
+		var staff: Variant = Paperdoll.hold(f, &"staff")
+		for kind: String in ["sword", "bow", "wand", "star", "knuckle", "gun"]:
+			var h: Variant = Paperdoll.hold(f, StringName(kind))
+			if staff == null:
+				check(h == null, "%s: no %s where the staff is put away" % [frames[f]["name"], kind])
+			elif check(h != null, "%s: the %s is in his hand, like the staff" % [frames[f]["name"], kind]):
+				check(h["grip"].distance_to(staff["grip"]) <= 12.0,
+					"%s: the %s is in the staff's fist (%s, staff %s)" % [frames[f]["name"], kind, h["grip"], staff["grip"]])
