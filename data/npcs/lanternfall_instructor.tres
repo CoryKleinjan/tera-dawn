@@ -11,5 +11,5 @@ title = "Thief Instructor"
 sprite_frames = ExtResource("2_sprite")
 greeting = "You found me. That's the first test passed. Want the second?"
 lines = PackedStringArray("Advance at level 10, with the stat the path asks for.", "Practise on the fields outside town. That's what they're for.")
-instructs = Array[StringName]([&"thief", &"hexcaster", &"swashbuckler"])
+instructs = Array[StringName]([&"thief"])
 storage = false

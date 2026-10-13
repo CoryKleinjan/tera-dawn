@@ -33,6 +33,6 @@ A blend is a JobDef with `advances_from` and `partner` set to its two first jobs
 so its skill book opens too (the skill window shows its tab just before the blend's).
 Damage adds both stats together (`JobDef.damage_stat_value`, and Magic Attack for a blend with
 INT); Auto splits points evenly (`AbilityPoints.auto_plan`); it wears either parent's gear
-(`JobDef.wear_families`). Add its id to both parents' instructors' `instructs`. Until the
-tear tutors exist, the first-job instructors hand out the blends at Lv 30.
+(`JobDef.wear_families`). No tutor offers the blends yet: a later tutor will, by listing
+their ids in its `instructs`. The first-job instructors never offer them.
 

@@ -71,10 +71,13 @@ update this page when one changes. Each zone's own look and music are in
   and adds its own finisher and signature skill (max 10 each); 4 Skill Points a level, so
   everything is maxed by the third tier at Lv 50. Both stats add together for damage (no
   averaging); Auto splits points evenly. It wields every weapon and off-hand of both jobs.
-  No Ability Point reset on advancing.
+  No Ability Point reset on advancing. A later tutor offers the blends; the first-job tutors
+  never do.
 - Every job is built to attack and be fun solo: no tank or healer jobs.
 - Third tier (Lv 50, planned): five jobs, each joining two blends that share no first job, so
-  each cares about four stats; each also gets its own two-handed weapon.
+  each cares about four stats. It uses every weapon of its four first jobs plus its own
+  two-handed weapon, opens every skill of those four jobs and both blends, and adds one
+  ultimate skill that hits a very large area and a huge number of monsters.
 - Max level is 100.
 - Off-hand slot (once the Shield slot): Warriors and Beginners wear a shield, a Thief throwing
   stars (with a dagger in hand), a Magician a book, an Archer a quiver worn on the back, a Pirate a pistol (with knuckles). Stars

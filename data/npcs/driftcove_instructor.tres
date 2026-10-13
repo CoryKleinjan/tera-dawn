@@ -11,5 +11,5 @@ title = "Pirate Instructor"
 sprite_frames = ExtResource("2_sprite")
 greeting = "Ahoy. Fists or flintlock, it's all the same to the sea. Want to sail with my crew?"
 lines = PackedStringArray("Advance at level 10, with the stat the path asks for.", "Practise on the fields outside town. That's what they're for.")
-instructs = Array[StringName]([&"pirate", &"swashbuckler", &"sharpshooter"])
+instructs = Array[StringName]([&"pirate"])
 storage = false

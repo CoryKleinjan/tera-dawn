@@ -236,7 +236,8 @@ func test_every_advanced_job_is_taught_somewhere() -> void:
 			for j in n.instructs:
 				taught[j] = true
 	for j: JobDef in Content.jobs.values():
-		if j.advances_from != &"":
+		# blends wait for a later tutor (docs/game-rules.md); first-job tutors never offer them
+		if j.advances_from != &"" and j.partner == &"":
 			check(taught.has(j.id), "%s: no placed NPC instructs this job" % Scan.where(j))
 
 func test_job_gifts_suit_the_job() -> void:
