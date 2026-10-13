@@ -19,7 +19,7 @@ generated: fix art in the sheet or manifest, never in the output.
 Every sprite is cut at two texels per art pixel and keeps the smooth, anti-aliased edge of the
 painting, and the game blends that edge in (`TDStage.style_sprite`). Cut at one texel per art
 pixel with on/off alpha, the dark outline showed as a stair-stepped, pixelated line on a 1080p
-screen (Cory, 2026-10-11: "do this for all assets"). `detail` and `alpha` default to this;
+screen. `detail` and `alpha` default to this for every asset;
 `tools/art/tests/test_smooth_edges.py` checks the cut sprites.
 
 ## Adding a sheet
@@ -189,8 +189,9 @@ body) places their pieces on every body frame and writes the layers, region map 
   back on an off-colour background is flooded to magenta from each cell's border first.
   Gloves are cuffless mittens painted from their icons (`glove_mittens`), one piece per hand.
 - **The rig** (`paperdoll_rig.json`, in 128 px frames): the weapon hand, weapon angle, shield
-  and head tilt per frame, how each weapon kind is held (`holds`) and which frames hold it
-  behind him (`weapon_behind`). His hands are fingerless mittens, so a weapon only needs to sit
+  and head tilt per frame, how each weapon kind is held (`holds`, every kind copying the staff's)
+  and the frames where the shield point's hand is the front one (`front`), so the weapon always
+  stays in the front hand. His hands are fingerless mittens, so a weapon only needs to sit
   under the fist. `--preview` writes `art/build/paperdoll_preview.png`.
 - To redraw part of the body, `tools/art/body_panels.py` cuts close-up panels of a few cells
   for a Gemini edit and pastes back only what changed (`hands`) or everything above the shorts

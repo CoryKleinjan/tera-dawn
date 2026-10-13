@@ -1,0 +1,134 @@
+# Game rules
+
+How the game should look and play. These are Cory's decisions; follow them in every change and
+update this page when one changes. Each zone's own look and music are in
+[zone vibes](zone-vibes.md); how the code works is in [ARCHITECTURE.md](../ARCHITECTURE.md).
+
+## Art
+
+- Painted look only, never pixel art. The NPC sprites are the style reference: rich warm colours,
+  strong light and shadow with bright highlights, visible painted texture at a fairly chunky brush
+  scale, dark outline. The chibi boy hero (`art/reference/hero.png`) sets character proportions.
+- MapleStory sets scale, feel, UI, layout and animation; the look and names are the game's own.
+- High resolution everywhere, UI included: art is made and cut at about twice its on-screen size,
+  never stretched or upscaled, never blurry.
+- Clean edges: soft anti-aliased cut edges, never on/off pixels, never thicker outlines, no stray
+  pixels or magenta fringe.
+- Prefer a proper repaint over a crude cut in code. Keep every painted sheet, even unused ones; only
+  make or repaint art the game uses; never reuse the old ChatGPT sheets.
+
+## Hero
+
+- Chibi proportions, drawn about 13% larger than the first cut. Hands are mittens (NPC hands still
+  have fingers).
+- Looks exactly the same in menus (equipment, creator, character select) as in game: one renderer.
+- Animation: walk only, 15% faster after about 0.4 s of moving; run frames never play. No walk bob;
+  the walk has a stride shift. Standing, he breathes and blinks. Only a slight tilt when falling.
+  No jump sound. No character shadows.
+- Buffs and spells have no pose, just a flash in the skill's colour. Skill effects draw on the
+  hero's layer.
+
+## Gear
+
+- An item's icon and its worn or held look are the same object: shape, colours and details. Worn
+  gear is cut the same way the icons are, keeps their detail, uses the hero's near-black outline,
+  and is never cut off.
+- Every piece of gear is its own layer on the paperdoll.
+- Shields: the back side on the off hand, about a third visible.
+- Gloves: cuffless mittens in the glove's colours.
+
+## Hats and hair
+
+- Hats fit the MapleStory way: sized to the whole head and hair, face open, lined up with the eyes.
+  The steel helm sits low so its visor slits are on his eyes, with no brown part under it. No part
+  of the head pokes out the side.
+- Nothing on a hat, hood or helm covers the shoulders (no capes, mantles, collars or pads). Hoods
+  have an open face. Bandanas sit low on the brow and stay small.
+- Two hairstyles for now: tousled (boy) and ponytail (girl). The other painted hair sheets are kept
+  but out of the game.
+- Hair is slightly wider than the head. Keep the forehead bangs; trim floating bits and tufts that
+  hang past the front of the face; no hair near the mouth.
+- Under a hat each pose shows only its own hair, cut along the hat's lower edge: nothing new is
+  drawn, nothing reshaped, no hair copied between poses. The ponytail's tail never shows under a hat
+  (the back of the head stays covered). No seam between hat and hair.
+
+## Weapons
+
+- Always in the front hand (nearest the viewer), on every frame: on the walk that is walk1 a,
+  walk2 b, walk3 a, walk4 b. Never moved to the back hand, not even to smooth an animation.
+- In hand on every pose except climbing, when it goes on his back.
+- Fingers over the grip; the same spot in the hand and the same angle to the forearm every frame;
+  smooth changes between frames. Never upside down, never over the face, none on level-up.
+- Drawn in front of everything except the hands; when the palm shows (the fall), in front of all.
+- The staff's holds are the model for every kind, but each kind has its own grip point. Wands are
+  gripped halfway along the shaft. Bows sit level when sitting and at their true angle when
+  crouching, with the arm drawn over the string. Guns point and shoot with the barrel along the
+  forearm. Throwing stars sit in the front fist behind the hand, points sticking out. Knuckles are a
+  big glove centred over the front fist.
+- No throw or shot effects (no projectile leaving the hand, empty fist, arrow on the string, glint or
+  punch burst).
+- No ammo for any weapon. Claws were dropped; thieves use throwing stars.
+- Shops sell only basic weapons; better weapons come from monster drops.
+- Future dual-wield is the one exception to the front-hand rule.
+
+## Maps and scenery
+
+- Map names show only at the top of the screen; nothing labels a map in the world.
+- Every piece of land is walkable: no arches or floating rock islands, nothing that looks like
+  ground but isn't. No two exits of a map lead to the same map. Maps can be wide and multi-level.
+- Characters, NPCs, ropes and ladders draw in front of land. Portals draw in front of land and
+  scenery, behind ropes, NPCs, monsters and players; no NPC stands on a portal.
+- Portals are a blue-white light pillar on the ground, at exits and doorways.
+- Platforms and land cast no shadows. Platform end caps line up with the platform. Terrace walls stop
+  straight down from the bottom of the path's end stone, with the path's thin outline, standing
+  straight up and down. Wall ivy hangs flush with the platform's bottom edge.
+- Ladders, ropes and vines stand straight and line up at every joint.
+- Buildings, props and decorations are flat 2D front views with a flat bottom, never a perspective
+  picture cut flat. Every building is unique and at proper scale; windows, doors and props are in
+  proportion across a map. Nothing (ropes, chains, cloth) ends in mid-air.
+- No houses in monster maps unless a quest needs one or Cory asks. Shops are proper full-size
+  buildings.
+- Backdrops: one high-quality, sharp picture for the whole background, not strips. Dawnharbor's 4K
+  panorama is the template. Clouds drift in front of it.
+- Sparse ground scenery, each piece wholly on its platform; few lanterns, never overlapping buildings,
+  NPCs or scenery.
+
+## Towns
+
+- Towns have no monsters and no grass tufts.
+- NPCs stand still at idle.
+- Dawnharbor is the template city: a quay, a terrace and a cliff top, every building its own
+  picture. The Free Market portal has a painted signboard beside it; the Free Market itself uses
+  Dawnharbor's panorama and is empty for now.
+- One city (Dawnharbor) and one monster zone are set exactly right before any world-wide art pass.
+
+## Monsters and levels
+
+- Two or three monster kinds per map (a boss counts as one). Each kind belongs to one zone unless
+  Cory says otherwise. A monster taken out of a zone stays in the files.
+- Every spawn is inside its map's level range; fix a mismatch by changing monster levels, not by
+  removing monsters.
+- The paths players walk between towns stay at Lv 10 or below the whole way, so new players can
+  reach every job town. Dead-end training branches climb in smooth steps to a boss on the top map.
+- Level cap Lv 35. Monster HP is 40% lower than first tuned and EXP needed per level is halved
+  (monster and quest EXP unchanged), so early levels go fast; about 40 hours to the cap was only a
+  starting reference.
+
+## UI
+
+- Painted travel leather and parchment. No fake stitching; the close X fits the style; the minimap
+  frame matches the bottom bar.
+- Monster HP bars have no dragon emblem. Quest marks are a painted "!", "?" and three dots.
+- The equipment window shows the hero on a stencil with the slots around him.
+- No clouds on the title screen.
+
+## Audio and travel
+
+- Every town, field and boss map plays its zone's music: one town track, one field track and one
+  more upbeat, dangerous boss track per zone. Lanternfall sounds like a thieves' den.
+- Kenney CC0 sound effects; the title theme and jingles stay.
+- Captain Marlo's ship carries players from the start island to Dawnharbor; coachman Rook takes them
+  to the job towns (400-500 Dawnshards, the same for everyone); the towns are also joined by a ring
+  of portals. Developer test characters start in their job's town.
+- Multiplayer: Play solo, Host on UDP 7350 (shows the LAN address with Copy), or join with
+  `address:port`.

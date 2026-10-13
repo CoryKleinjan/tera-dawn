@@ -21,8 +21,7 @@ only what the creator offers and makes a level 1 character in the starting job
   rig (`HeroBody.make_rig`) in a little 3D stage of its own, lit and colour graded like the map
   showing now (`TDStage.light_portrait`, `shaders/grade.gdshaderinc`), so he looks exactly as he
   does in game. There is no separate menu drawing to keep in step. The hero is a bare body strip (`hero.png`) with layers
-  that play frame for frame with it: hair (front, a back part drawn behind him, and a
-  version for under a hat), faces and their irises, clothes, a cape and round or kite shields
+  that play frame for frame with it: hair (front, and a back part drawn behind him), faces and their irises, clothes, a cape and round or kite shields
   (`assets/animations/paperdoll/`). `tools/art/paperdoll_layers.py` builds them from the
   paperdoll sheets, together with the body's region map (`hero_regions.png`: skin, chest,
   shorts, feet) and rig (`hero_rig.json`: head, face, neck, hand and shield per frame, and
@@ -31,8 +30,9 @@ only what the creator offers and makes a level 1 character in the starting job
   `shoes_boots`...) lifted off sheets of the body wearing them; each item names its cut in
   `EquipDef.worn_style`. Hair, irises, capes, shields, gloves and those cuts are greyscale art
   tinted with the hair, eye or item colour (`EquipDef.look_color` or the icon). Under a hat
-  the hair's `_hat` layer leaves the face clear, and is cut where the hat's `haircut_<hat>.png`
-  strip says, so no hair pokes out of the hat's top or sides (hair below its edge still shows). A
+  his own hair layer is cut where the hat's `haircut_<hat>_<style>.png` strip says
+  (`Piece.hair_cuts`), so no hair pokes out of the hat's top or sides and no loose bits hang;
+  the ponytail's tail is cut away too. Nothing new is drawn for under a hat. A
   helm is drawn smaller than his head, with its eye holes on his eyes, so while one is worn its
   `headcut_<helm>.png` strip (laid out like the body strip) also cuts his body and face where
   his head would poke out of it. In the 3D stage the hero and his layers are lit like
@@ -45,11 +45,12 @@ only what the creator offers and makes a level 1 character in the starting job
   every frame from its pose (`assets/sprites/characters/pieces/<name>.json`, written by
   `tools/art/paperdoll/pieces.py`), over him or under his body as the pose says. A weapon is
   in his fist with his fingers drawn over its grip (the piece is cut where `fist_<kind>.png`
-  has his fingers, `shaders/paperdoll_piece.gdshaderinc`), behind him on far-hand frames and
-  on his back while he climbs or sits. Each kind is held its own way (a bow upright, a staff
-  planted; "holds" in `art/sheets/paperdoll_rig.json`; the sword sways a little through each
-  animation, a throwing star sits behind his fist with its points sticking out, and a gun is
-  turned level with its grip in his fist). Every weapon is its own icon art
+  has his fingers, `shaders/paperdoll_piece.gdshaderinc`), always in his front hand (the rig's
+  `front` moves the shield to the other hand on frames where the far fist is the weapon point),
+  and on his back while he climbs. Every kind copies the staff's holds ("holds" in
+  `art/sheets/paperdoll_rig.json`): the same spot in the front fist and the same angle to the
+  forearm on every frame, with its own grip point. A bow lies across the forearm, a gun's barrel
+  runs along it, and a throwing star sits behind his fist with its points sticking out. Every weapon is its own icon art
   (`weapon_item_<id>`); the tinted `weapon_<kind>` pictures are for a weapon with no icon cell.
   A shield's back sits on his far arm behind him with about a third showing, and its face is on
   his back while he climbs (`shield_item_<id>`). Hats are `hat_item_<id>` in their own colours
@@ -68,9 +69,9 @@ only what the creator offers and makes a level 1 character in the starting job
   staff smashes), and other names play as they are, except "cast" (`WeaponStyle.SPELL`):
   buffs and spells make no motion, the hero flashes the skill's colour (`SkillDef.flash`,
   `SpriteRig.pulse`). Frames have their own durations (a held wind-up), and `TDPlayer` adds a
-  ready stance after fighting, a run at top speed, a turn, the top of a jump, a landing crouch
-  only after a real drop and a walk that keeps step with his speed (walk and run share the
-  step, `SpriteRig.STEP_CYCLES`). Every walk frame is drawn mid-stride, so on the passing
+  ready stance after fighting, a turn, the top of a jump, a landing crouch only after a real
+  drop and a walk that keeps step with his speed and picks up 15% pace after about 0.4 s
+  (`SpriteRig.STEP_CYCLES`; the run frames never play). Every walk frame is drawn mid-stride, so on the passing
   steps (`Paperdoll.PASSING_STEPS`) the shaders slide his lower legs in toward each other,
   his body and every strip layer alike (`shaders/paperdoll_stride.gdshaderinc`). Standing, he breathes (the rig's body rises and settles
   slightly from his feet, so every layer moves with it: `SpriteRig.breathes`, `BREATH_*`) and blinks

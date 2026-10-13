@@ -61,10 +61,10 @@ welcome *(inferred)*.
 | Sub-zone | Role | Lv | What changes | Monsters |
 | --- | --- | --- | --- | --- |
 | Dawnrise Meadow | First field | 1-3 | Nothing: the zone look as painted, open sunrise meadow | Dewling, Mossling, Petal Bat |
-| Sunny Slope | Easy field | 2-3 | Brighter: clear blue sky, golden horizon, more saturated | Tide Dewling, Mossling, Petal Bat |
-| Mushroom Dell | Training | 4-6 | Cooler shade under giant mushrooms, lilac sky, misty, green spores | Sporecap, Sproutcap, Sea Gull |
-| Tidal Flats | Training, boss | 3-12 | Island shore: sea-blue sky, peach low sky, pale washed backdrop | Shell Crab, Sea Gull; boss Old Clawbeard |
-| Fern Hollow | Training, boss | 4-12 | Shaded mossy hollow, deep green light, light shafts, green motes | Fern Boar, Boulderkin; boss Fern Boar Chief |
+| Sunny Slope | Easy field | 2-6 | Brighter: clear blue sky, golden horizon, more saturated | Tide Dewling, Mossling, Petal Bat |
+| Mushroom Dell | Training | 4-8 | Cooler shade under giant mushrooms, lilac sky, misty, green spores | Sporecap, Sproutcap, Sea Gull |
+| Tidal Flats | Training, boss | 7-12 | Island shore: sea-blue sky, peach low sky, pale washed backdrop | Shell Crab, Sea Gull; boss Old Clawbeard |
+| Fern Hollow | Training, boss | 6-12 | Shaded mossy hollow, deep green light, light shafts, green motes | Fern Boar, Boulderkin; boss Fern Boar Chief |
 
 ## Dawnharbor Coast
 
@@ -81,13 +81,15 @@ snare, steady travelling tempo. Town: the same instruments plus accordion touche
 warmer, a cheerful harbour-market tune. Free Market: plucked guitar, light strings, flute, hand
 claps and light snare, a friendly bargaining shuffle (its own track).
 
-**Town: Dawnharbor (the template city).** Three levels: a long quay with a walkable wooden pier
-and Marlo's ship, a stone-walled terrace above, and a cliff top with the lighthouse and chapel.
+**Town: Dawnharbor (the template city).** Three levels: a long quay lined with barrels, crates,
+nets and carts, a stone-walled terrace above with lamp posts, ivy and flower boxes, and a cliff top
+with the lighthouse and chapel.
 Every building its own model (tavern, sail loft, harbormaster's office, shipwright, row houses,
 lighthouse, chapel). One 4K warm-morning harbour panorama fills the background; clouds drift.
-Layout: `/mnt/project-files/plans/dawnharbor-city-layout.md`.
+Layout: `/mnt/project-files/plans/done/dawnharbor-city-layout.md`.
 
-**Free Market:** the trading hall off the quay, harbour palette indoors *(inferred)*.
+**Free Market:** reached through a portal on the quay with a painted signboard beside it; uses
+Dawnharbor's panorama, no field plants, empty for now (no stalls).
 
 | Sub-zone | Role | Lv | What changes | Monsters |
 | --- | --- | --- | --- | --- |
@@ -242,5 +244,5 @@ sails and rope everywhere *(inferred beyond the buildings)*.
   town follows Dawnharbor's multi-level layout later.
 - Lanternfall sits at permanent dusk while the world is endless dawn; keep it as the one dusk zone?
 - Dawnrise Isle has two boss maps (Fern Hollow and Tidal Flats); keep both?
-- Most border fields are among their zone's highest-level maps (Cinder Pass 23-29, Ashen Wastes
-  20-31, Dusk Bridge 22-33); is that intended for crossings?
+- Dawnharbor's fields borrow neighbouring zones' monsters until it gets its own harbour monsters
+  (agreed; their look is still to be asked).
