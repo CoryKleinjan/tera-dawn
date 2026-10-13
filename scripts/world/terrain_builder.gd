@@ -144,12 +144,17 @@ func _solid_wall(map: MapDef, platform: int, biome: BiomeDef) -> void:
 	var x1 := d.x + d.width - inset.y
 	var rect := Rect2(x0, top, x1 - x0, bottom - top)
 	_add(_strip("SolidWall", biome.ground_side, rect, TDStage.art_size(biome.ground_side), TDStage.LAND_FRONT - 0.01))
-	# corner stones down each end, flush with the wall's ends
-	for corner: Texture2D in [biome.terrace_corner_left, biome.terrace_corner_right]:
+	# each end gets the biome's corner stones, or else the square end stones' own outline
+	for right in [false, true]:
+		var corner: Texture2D = biome.terrace_corner_right if right else biome.terrace_corner_left
+		var out := 0.0
+		if corner == null and biome.terrace_left != null and biome.terrace_right != null:
+			corner = PlatformSkin.square_edge(biome, right)
+			out = PlatformSkin.EDGE_OUT * PlatformSkin.texel(biome)
 		if corner == null:
 			continue
 		var tile := TDStage.art_size(corner)
-		var x := x0 if corner == biome.terrace_corner_left else x1 - tile.x
+		var x := x1 - tile.x + out if right else x0 - out
 		var r := Rect2(x, top, tile.x, rect.size.y)
 		_add(_strip("TerraceCorner", corner, r, tile, TDStage.LAND_FRONT - 0.005, false))
 

@@ -57,18 +57,10 @@ static func square_inset(biome: BiomeDef) -> Vector2:
 ## last few mostly opaque rows.
 static func _bottom_margin(img: Image, right: bool) -> float:
 	const ROWS := 6
-	var w := img.get_width()
 	var margins: Array[int] = []
 	for y in range(img.get_height() - 1, -1, -1):
-		var solid := 0
-		var edge := -1
-		for i in w:
-			var x := w - 1 - i if right else i
-			if img.get_pixel(x, y).a > 0.5:
-				solid += 1
-				if edge < 0:
-					edge = i
-		if solid * 2 >= w:
+		var edge := _row_edge(img, y, right)
+		if edge >= 0:
 			margins.append(edge)
 			if margins.size() == ROWS:
 				break
@@ -76,6 +68,59 @@ static func _bottom_margin(img: Image, right: bool) -> float:
 		return 0.0
 	margins.sort()
 	return margins[margins.size() / 2]
+
+## A strip one texel tall of a raised terrace's square end stone's outer edge along its bottom
+## (the outline and the texels either side of it), cached per biome and end: repeated down a
+## wall's end it gives the wall the path's own outline. EDGE_OUT of its columns lie outside
+## the stone.
+const EDGE_OUT := 1
+const EDGE_WIDTH := 4
+static func square_edge(biome: BiomeDef, right: bool) -> ImageTexture:
+	var key := "edge:%s:%s" % [biome.get_instance_id(), right]
+	if not _surface.has(key):
+		var parts := pieces(biome, true)
+		var img: Image = parts[-1] if right else parts[0]
+		var w := img.get_width()
+		var sums: Array[Color] = []
+		sums.resize(EDGE_WIDTH)
+		sums.fill(Color(0, 0, 0, 0))
+		var rows := 0
+		for y in range(img.get_height() - 1, -1, -1):
+			var edge := _row_edge(img, y, right)
+			if edge < 0:
+				continue
+			for c in EDGE_WIDTH:
+				var i := edge - EDGE_OUT + c  # counted in from the outer end
+				var x := w - 1 - i if right else i
+				var p := img.get_pixel(clampi(x, 0, w - 1), y) if i >= 0 else Color(0, 0, 0, 0)
+				# premultiplied, so see-through texels don't tint the average
+				sums[c] += Color(p.r * p.a, p.g * p.a, p.b * p.a, p.a)
+			rows += 1
+			if rows == 6:
+				break
+		var out := Image.create(EDGE_WIDTH, 1, false, Image.FORMAT_RGBA8)
+		for c in EDGE_WIDTH:
+			var q: Color = sums[c] / maxf(1.0, rows)
+			var col := Color(q.r / q.a, q.g / q.a, q.b / q.a, q.a) if q.a > 0.0 else Color(0, 0, 0, 0)
+			out.set_pixel(EDGE_WIDTH - 1 - c if right else c, 0, col)
+		var tex := ImageTexture.create_from_image(out)
+		tex.set_meta(&"art_density", TDStage.art_density(biome.platform_middle))
+		_surface[key] = tex
+	return _surface[key]
+
+## How many see-through texels a mostly opaque row of `img` has at one end, or -1 when the
+## row is mostly see-through.
+static func _row_edge(img: Image, y: int, right: bool) -> int:
+	var w := img.get_width()
+	var solid := 0
+	var edge := -1
+	for i in w:
+		var x := w - 1 - i if right else i
+		if img.get_pixel(x, y).a > 0.5:
+			solid += 1
+			if edge < 0:
+				edge = i
+	return edge if solid * 2 >= w else -1
 
 ## [left cap, middles..., right cap] as images (the square terrace ends as caps when `square`).
 static func pieces(biome: BiomeDef, square := false) -> Array[Image]:
