@@ -14,8 +14,9 @@ update this page when one changes. Each zone's own look and music are in
   never stretched or upscaled, never blurry.
 - Clean edges: soft anti-aliased cut edges, never on/off pixels, never thicker outlines, no stray
   pixels or magenta fringe.
-- Prefer a proper repaint over a crude cut in code. Keep every painted sheet, even unused ones; only
-  make or repaint art the game uses; never reuse the old ChatGPT sheets.
+- Prefer a proper repaint over a crude cut in code. Only make or repaint art the game uses. Music
+  and art the game no longer uses is dropped (git history keeps it), including the sheets of
+  dropped features. Never reuse the old ChatGPT sheets.
 
 ## Hero
 
@@ -46,8 +47,7 @@ update this page when one changes. Each zone's own look and music are in
   is cut away.
 - Nothing on a hat, hood or helm covers the shoulders (no capes, mantles, collars or pads). Hoods
   have an open face. Bandanas sit low on the brow and stay small.
-- Two hairstyles for now: tousled (boy) and ponytail (girl). The other painted hair sheets are kept
-  but out of the game.
+- Two hairstyles for now: tousled (boy) and ponytail (girl).
 - Hair is slightly wider than the head. Keep the forehead bangs; trim floating bits and tufts that
   hang past the front of the face; no hair near the mouth.
 - Under a hat each pose shows only its own hair, cut along the hat's lower edge: nothing new is

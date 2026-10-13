@@ -1053,32 +1053,6 @@
    }
   },
   {
-   "id": "hair_long_frames",
-   "prompts": "tera-dawn-chatgpt-art-prompts-5.md",
-   "batch": "H1",
-   "with": "H",
-   "refs": [
-    "paperdoll_hair.png"
-   ],
-   "save": "hair_long_frames.png",
-   "replaces": null,
-   "kind": "anim",
-   "stands": false,
-   "cells": [
-    4,
-    8
-   ],
-   "anchor": "paperdoll_body",
-   "note": "H1 lists all six styles; send it for LONG only (one image per style). New (not in game). Round 5: made by editing the game's body sheet (the first try traced Gemini's broken body).",
-   "fill": {
-    "style": "LONG"
-   },
-   "edit": {
-    "base": "art/source/paperdoll_body.png",
-    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in this hairstyle on his bald head: LONG, straight hair down past the shoulders with a side fringe. It follows his body in every pose. Draw the hair in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline; the body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. Draw ONLY the hair: nothing else changes. The hair sways a little with the motion. In the back views (21-25) show the back of the hair. No face."
-   }
-  },
-  {
    "id": "hair_ponytail_frames",
    "prompts": "tera-dawn-chatgpt-art-prompts-5.md",
    "batch": "H1",
@@ -1102,84 +1076,6 @@
    "edit": {
     "base": "art/source/paperdoll_body.png",
     "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in this hairstyle on his bald head: PONYTAIL, hair pulled back into one high ponytail tied with a cloth band. It follows his body in every pose. Draw the hair in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline; the body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. Draw ONLY the hair: nothing else changes. The ponytail swings behind the head when he runs or jumps. In the back views (21-25) show the back of the hair. No face."
-   }
-  },
-  {
-   "id": "hair_twin_tails_frames",
-   "prompts": "tera-dawn-chatgpt-art-prompts-5.md",
-   "batch": "H1",
-   "with": "H",
-   "refs": [
-    "paperdoll_hair.png"
-   ],
-   "save": "hair_twin_tails_frames.png",
-   "replaces": null,
-   "kind": "anim",
-   "stands": false,
-   "cells": [
-    4,
-    8
-   ],
-   "anchor": "paperdoll_body",
-   "note": "H1 lists all six styles; send it for TWIN TAILS only (one image per style). New (not in game). Round 5: made by editing the game's body sheet (the first try traced Gemini's broken body).",
-   "fill": {
-    "style": "TWIN TAILS"
-   },
-   "edit": {
-    "base": "art/source/paperdoll_body.png",
-    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in this hairstyle on his bald head: TWIN TAILS, two bunches, one on each side, tied with little ribbons. It follows his body in every pose. Draw the hair in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline; the body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. Draw ONLY the hair: nothing else changes. In the back views (21-25) show the back of the hair. No face."
-   }
-  },
-  {
-   "id": "hair_bun_frames",
-   "prompts": "tera-dawn-chatgpt-art-prompts-5.md",
-   "batch": "H1",
-   "with": "H",
-   "refs": [
-    "paperdoll_hair.png"
-   ],
-   "save": "hair_bun_frames.png",
-   "replaces": null,
-   "kind": "anim",
-   "stands": false,
-   "cells": [
-    4,
-    8
-   ],
-   "anchor": "paperdoll_body",
-   "note": "H1 lists all six styles; send it for BUN only (one image per style). New (not in game). Round 5: made by editing the game's body sheet (the first try traced Gemini's broken body).",
-   "fill": {
-    "style": "BUN"
-   },
-   "edit": {
-    "base": "art/source/paperdoll_body.png",
-    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in this hairstyle on his bald head: BUN, hair wound into a round bun on top of the head with a few loose strands. It follows his body in every pose. Draw the hair in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline; the body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. Draw ONLY the hair: nothing else changes. In the back views (21-25) show the back of the hair. No face."
-   }
-  },
-  {
-   "id": "hair_crest_frames",
-   "prompts": "tera-dawn-chatgpt-art-prompts-5.md",
-   "batch": "H1",
-   "with": "H",
-   "refs": [
-    "paperdoll_hair.png"
-   ],
-   "save": "hair_crest_frames.png",
-   "replaces": null,
-   "kind": "anim",
-   "stands": false,
-   "cells": [
-    4,
-    8
-   ],
-   "anchor": "paperdoll_body",
-   "note": "H1 lists all six styles; send it for CREST only (one image per style). New (not in game). Round 5: made by editing the game's body sheet (the first try traced Gemini's broken body).",
-   "fill": {
-    "style": "CREST"
-   },
-   "edit": {
-    "base": "art/source/paperdoll_body.png",
-    "text": "This sheet is my bald base body in 32 labelled poses (8 columns x 4 rows). On EACH of the 32 figures, dress him in this hairstyle on his bald head: CREST, shaved short at the sides with a tall swept-up crest on top. It follows his body in every pose. Draw the hair in GREYSCALE only (white to dark grey tones, no colour) with the normal dark outline; the body itself keeps its normal colours. Keep every figure, label and grid line exactly where it is: do not move, resize, redraw or re-pose the body. Draw ONLY the hair: nothing else changes. In the back views (21-25) show the back of the hair. No face."
    }
   },
   {
@@ -1711,23 +1607,6 @@
    ],
    "anchor": "paperdoll_body",
    "note": "New (manifest exists, no PNG yet). Match items_magician.png icons; consider also attaching that icon sheet's regen result."
-  },
-  {
-   "id": "held_claws",
-   "prompts": "tera-dawn-chatgpt-art-prompts-8.md",
-   "batch": "W5",
-   "with": "W",
-   "refs": [],
-   "save": "held_claws.png",
-   "replaces": null,
-   "kind": "still",
-   "stands": false,
-   "cells": [
-    2,
-    3
-   ],
-   "anchor": "paperdoll_body",
-   "note": "New (manifest exists, no PNG yet). Match items_thief.png icons; consider also attaching that icon sheet's regen result."
   },
   {
    "id": "held_pirate",
@@ -8932,28 +8811,6 @@
    "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
    "edit": {
     "base": "art/source/held_magic.png",
-    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). Each item keeps its exact outline, angle, handle and grip position, so it still fits the same hand and the same place in its cell. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
-   }
-  },
-  {
-   "id": "paint_held_claws",
-   "prompts": null,
-   "batch": "painted leftovers: held_claws (edit)",
-   "with": null,
-   "refs": [],
-   "save": "held_claws_painted.png",
-   "replaces": null,
-   "kind": "still",
-   "stands": false,
-   "cells": [
-    1,
-    1
-   ],
-   "anchor": null,
-   "size": "2K",
-   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
-   "edit": {
-    "base": "art/source/held_claws.png",
     "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). Each item keeps its exact outline, angle, handle and grip position, so it still fits the same hand and the same place in its cell. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
    }
   },
