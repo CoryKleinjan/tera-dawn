@@ -11459,6 +11459,59 @@
     ],
     "text": "The first image is an empty magenta canvas. On it, paint a sheet of TWO separate skill icons side by side, each centred in its own half of the canvas for my 2D side-scrolling game, with a WIDE band of plain magenta (at least a tenth of the canvas) around and between them, none touching another, all the same size. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished skill icons from the same set: match their badge shape, frame thickness, metal trim, inner background glow, painting style and level of detail exactly, but use a BOLDER, DARKER brown outline like the NPCs'. Each icon is a square badge with softly rounded corners: a thick painted frame with a thin bright metal trim, and inside it a darker painted background of the frame's colour with a soft glow behind the subject. Each icon shows ONE bold, simple subject filling most of the badge, lit brightly enough to read clearly even when the icon is shown very small. Left, All Hands (frame warm gold, darker bronze trim): a brass ship bell swinging and ringing, bold curved sound lines around it. Right, Deadeye (frame warm gold, darker bronze trim): a flintlock pistol aimed to the right, a golden crosshair glinting in front of its muzzle. Strict rules: 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) Bold dark brown outline around each badge and its subject, the same thickness on all. 3) No letters, words or numbers anywhere. 4) Flat pure magenta #FF00FF background everywhere outside the badges."
    }
+  },
+  {
+   "id": "greenbough_city_archers_lodge",
+   "prompts": null,
+   "batch": "Greenbough city test: Archers' Lodge (new building)",
+   "with": null,
+   "refs": [],
+   "save": "greenbough_city_archers_lodge.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 thread 'Cities up to Dawnharbor's standard' (Cory 22:05Z 'Yes' to the Greenbough look questions): test before the full Greenbough batch; every town's art matches its own zone tone (docs/zone-vibes.md).",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/greenbough-city/building_archers_lodge_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/greenbough-city/treehouse_ref.png",
+     "/mnt/project-files/art-sheets/greenbough-city/hut_ref.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Greenbough Village, the archers' forest village in my 2D side-scrolling game: a lively, airy hunters' village among giant oaks, lit by fresh yellow-green daylight. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, bark, moss, worn and chipped spots, slight colour variation between planks and thatch). The third and fourth images are two other buildings from the same village: match their style, palette, outline thickness and level of detail exactly, so all three clearly belong to the same village. The new building is the ARCHERS' LODGE, the grandest building in the village, a little wider than it is tall: a long two-storey lodge of honey-coloured oak planks and round log posts, standing on a low base of mossy fieldstones; a steep roof of golden straw thatch layered with green leaf thatch, with moss patches; carved leaf and antler trim along the roof beams; a big pair of antlers mounted over the entrance; a wide arched wooden double door in the middle of the ground floor; warm glowing windows with small panes and wooden shutters on both floors; two long green-and-gold cloth banners painted with a crossed bow and arrow (pictures only, no writing) hanging flat against the wall on either side of the door, fixed at top and bottom; a few arrows in a wall rack and a strung longbow hung on pegs beside the door. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: its stone base reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, grass, roots, people or shadow. 3) The door is a real doorway at ground level, centred left to right in the building. 4) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 5) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. No blue roof tiles or cream plaster (that is a different town). Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "greenbough_backdrop_panorama",
+   "prompts": null,
+   "batch": "Greenbough city: one 4K forest backdrop (test)",
+   "with": null,
+   "refs": [],
+   "save": "greenbough_backdrop_panorama.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-13 thread 'Cities up to Dawnharbor's standard' (Cory 22:05Z 'Yes' to the Greenbough look questions): test before the full Greenbough batch; every town's art matches its own zone tone (docs/zone-vibes.md).",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/greenbough-city/backdrop_panorama_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/greenbough-city/treehouse_ref.png"
+    ],
+    "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Greenbough Village, the archers' forest village in my 2D side-scrolling game: towering trees and treehouses, lively, airy and adventurous. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, dark brown outlines, and plenty of hand-painted detail (wood grain, bark, moss, worn and chipped spots, slight colour variation between planks and thatch). Paint the background in that same style, a little softer and lighter in contrast so it sits behind the characters. The third image is a treehouse from the same village: match its palette of honey oak, warm brown bark and fresh green leaves. The scene: a deep forest of GIANT oak trees in fresh daylight. Huge straight oak trunks of different widths stand across the whole picture, the nearest ones in the middle distance, others fading back layer by layer into soft leaf-green mist. High up, broad leafy canopies arch across the top of the picture, with a wide pale yellow gap of open sky glowing through the leaves in the middle. Long soft golden light shafts slant down through the canopy into the mist, and small green-gold motes float in the light. Far back between the trunks, a few small distant treehouses with straw and leaf-thatch roofs sit on platforms in the branches, with a plank bridge between two far trees, its ropes tied off to both trees. The lower part of the picture is a soft misty forest floor of ferns and bushes in the distance. Colours: deep green at the very top, pale yellow and gold where the sky shows, yellow-green sunlight, leaf-green mist. Strict rules: 1) Side-on view at eye level, as if standing on the forest floor, every trunk straight up and down. 2) No people, no characters, no animals, no birds. No clouds. 3) Nothing in the near foreground: no ground, roots, grass, logs or leaves in front; the closest trees are in the middle distance. 4) The left and right edges continue naturally (trunks, mist and leaves), nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere."
+   }
   }
  ]
 }
