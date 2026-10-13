@@ -95,6 +95,38 @@ class EditBase(unittest.TestCase):
             self.assertEqual(aspect, "4:3")
 
 
+class Runners(unittest.TestCase):
+    """Several runners share gemini-pass-1: each writes only its own state file, all count."""
+    SHEETS = [{"id": "a", "batch": "x"}, {"id": "b", "batch": "x"}, {"id": "c", "batch": "x", "anchor": "a"}]
+
+    def make(self, d, name):
+        with mock.patch.object(gemini_pass, "OUT", d), mock.patch.dict(os.environ, {"GEMINI_PASS_STATE": name}):
+            return gemini_pass.Pass({"sheets": self.SHEETS}, 10.0)
+
+    def test_runners_see_each_other_and_never_overwrite(self):
+        with tempfile.TemporaryDirectory() as d, mock.patch.object(gemini_pass, "OUT", d):
+            first, second = self.make(d, "state.json"), self.make(d, "state-2.json")
+            first.state["a"] = {"path": "a.png", "cost": 1.0}
+            first.save()
+            second.state["b"] = {"path": "b.png", "cost": 2.0}
+            second.state["_jobs"] = [{"ids": ["c"], "sheets": {}}]
+            second.save()
+            first.state["_redone"] = {"cost": 0.5}
+            first.save()  # rewrites only state.json; the second runner's records stay
+            with open(os.path.join(d, "state-2.json")) as f:
+                self.assertIn("b", json.load(f))
+            for p in (first, second):
+                self.assertTrue(p.done("a") and p.done("b"))
+                self.assertEqual(p.queued(), {"c"})
+                self.assertEqual(p.anchor_result(self.SHEETS[2]), "a.png")
+                self.assertAlmostEqual(p.spent(), 1.0 + 2.0 + 0.5 + gemini_pass.PRICE.get(p.model, 0.25) * 0.5)
+
+    def test_default_is_the_old_state_file(self):
+        with tempfile.TemporaryDirectory() as d, mock.patch.object(gemini_pass, "OUT", d), \
+                mock.patch.dict(os.environ, {"GEMINI_PASS_STATE": ""}):
+            self.assertEqual(gemini_pass.state_path(), os.path.join(d, "state.json"))
+
+
 class OutPath(unittest.TestCase):
     def test_never_overwrites_an_earlier_try(self):
         with tempfile.TemporaryDirectory() as d, mock.patch.object(gemini_sheet, "OUT_DIR", d):

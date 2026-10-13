@@ -25,8 +25,12 @@ family's anchor comes back before the sheets that attach it. --batch does one st
 finished wave, then submit the next) and exits; --wait keeps stepping until everything is made.
 --limit and --only apply to --now runs.
 References are uploaded once with the Files API, which keeps them for 48 hours.
+Several runners can work at once: each sets GEMINI_PASS_STATE to its own state file name in
+gemini-pass-1 (e.g. state-lumewood.json; default state.json) and writes only that file, while
+every state*.json there counts for what is made, queued and spent.
 """
 import argparse
+import glob
 import hashlib
 import json
 import os
@@ -94,11 +98,23 @@ def load_list():
         return json.load(f)
 
 
-def load_state():
-    if os.path.exists(STATE):
-        with open(STATE, encoding="utf-8") as f:
+def state_path():
+    """This runner's own state file: GEMINI_PASS_STATE (a name in OUT, or a path), else state.json."""
+    return os.path.join(OUT, os.environ.get("GEMINI_PASS_STATE") or os.path.basename(STATE))
+
+
+def load_state(path=None):
+    path = path or state_path()
+    if os.path.exists(path):
+        with open(path, encoding="utf-8") as f:
             return json.load(f)
     return {}
+
+
+def other_state_files(own):
+    """Every other runner's state file in OUT."""
+    return [p for p in sorted(glob.glob(os.path.join(OUT, "state*.json")))
+            if os.path.abspath(p) != os.path.abspath(own)]
 
 
 class Pass:
@@ -112,7 +128,9 @@ class Pass:
         self.price = PRICE.get(self.model, 0.25)
         self.budget = budget
         self.dry_run = dry_run
-        self.state = load_state()
+        self.state_file = state_path()
+        self.state = load_state(self.state_file)  # this runner's own records, the only ones it writes
+        self.others = {}  # path -> (mtime, size, state), re-read when the file changes
         self.lock = threading.Lock()
 
     # --- bookkeeping --------------------------------------------------------------------
@@ -121,30 +139,55 @@ class Pass:
         """Full price of one try at `sheet`, at its own output size if it sets one."""
         return self.price * SIZE_PRICE.get(sheet.get("size", self.size), 1.0)
 
-    def spent(self):
-        """Dollars spent, plus what batch jobs still running will cost."""
-        done = sum(v.get("cost", 0) for k, v in self.state.items() if not k.startswith("_"))
-        jobs = self.state.get("_jobs", [])
-        return done + self.state.get("_redone", {}).get("cost", 0) + \
+    def states(self):
+        """Every runner's state, this runner's last."""
+        out = []
+        for path in other_state_files(self.state_file):
+            st = os.stat(path)
+            cached = self.others.get(path)
+            if not cached or cached[:2] != (st.st_mtime, st.st_size):
+                try:
+                    cached = self.others[path] = (st.st_mtime, st.st_size, load_state(path))
+                except ValueError:  # caught mid-write: read it again
+                    time.sleep(1)
+                    cached = self.others[path] = (st.st_mtime, st.st_size, load_state(path))
+            out.append(cached[2])
+        return out + [self.state]
+
+    def sheet_entries(self):
+        """Sheet records from every runner; this runner's own win."""
+        out = {}
+        for st in self.states():
+            out.update({k: v for k, v in st.items() if not k.startswith("_")})
+        return out
+
+    def spent_in(self, state):
+        done = sum(v.get("cost", 0) for k, v in state.items() if not k.startswith("_"))
+        jobs = state.get("_jobs", [])
+        return done + state.get("_redone", {}).get("cost", 0) + \
             sum(self.price_for(self.by_id.get(i, {})) * BATCH_DISCOUNT
                 for j in jobs if not j.get("collected") for i in j["ids"])
 
+    def spent(self):
+        """Dollars spent by every runner, plus what batch jobs still running will cost."""
+        return sum(self.spent_in(st) for st in self.states())
+
     def save(self):
         os.makedirs(OUT, exist_ok=True)
-        tmp = STATE + ".tmp"
+        tmp = self.state_file + ".tmp"
         with open(tmp, "w", encoding="utf-8") as f:
             json.dump(self.state, f, indent=1)
-        os.replace(tmp, STATE)
+        os.replace(tmp, self.state_file)
 
     def done(self, sid):
-        return sid in self.state
+        return sid in self.sheet_entries()
 
     def queued(self):
-        return {i for j in self.state.get("_jobs", []) if not j.get("collected") for i in j["ids"]}
+        return {i for st in self.states() for j in st.get("_jobs", []) if not j.get("collected") for i in j["ids"]}
 
     def anchor_result(self, sheet):
         a = sheet.get("anchor")
-        return self.state.get(a, {}).get("path") if a else None
+        return self.sheet_entries().get(a, {}).get("path") if a else None
 
     # --- one sheet ----------------------------------------------------------------------
 
@@ -460,7 +503,7 @@ class Pass:
 
     def plan_batch(self):
         """Free: the waves batch mode would send, assuming every sheet comes back."""
-        made, n = set(self.state), 0
+        made, n = set(self.sheet_entries()), 0
         while True:
             wave = [s["id"] for s in self.sheets if s.get("batch") and s["id"] not in made and
                     not (s.get("anchor") and self.by_id.get(s["anchor"], {}).get("batch") and s["anchor"] not in made)]
@@ -477,9 +520,9 @@ class Pass:
         rows = ["# Gemini pass 1", "",
                 "Model %s at %s. Spent about $%.2f. Nothing here is in the game yet." % (self.model, self.size, self.spent()),
                 "", "| Sheet | Result | What the checker found |", "| --- | --- | --- |"]
-        counts = {}
+        counts, entries = {}, self.sheet_entries()
         for s in self.sheets:
-            e = self.state.get(s["id"])
+            e = entries.get(s["id"])
             if not e:
                 status, detail = ("not made", "") if s.get("batch") else ("no prompt", s.get("note", ""))
             elif "error" in e:
@@ -499,8 +542,9 @@ class Pass:
         print("Report: %s" % os.path.join(OUT, "report.md"))
 
     def contact_sheet(self, thumb=360, per_row=6):
-        made = [(s["id"], self.state[s["id"]]) for s in self.sheets
-                if self.state.get(s["id"], {}).get("path") and os.path.exists(self.state[s["id"]]["path"])]
+        entries = self.sheet_entries()
+        made = [(s["id"], entries[s["id"]]) for s in self.sheets
+                if entries.get(s["id"], {}).get("path") and os.path.exists(entries[s["id"]]["path"])]
         if not made:
             return
         th = thumb * 9 // 16 + 22
@@ -537,6 +581,8 @@ def main():
     spec = load_list()
     p = Pass(spec, args.budget or spec.get("budget", 25.0), args.dry_run)
     for sid in args.redo:
+        if sid not in p.state and sid in p.sheet_entries():
+            sys.exit("%s was made by another runner; redo it from the runner whose state file has it." % sid)
         old = p.state.pop(sid, None)
         if old is not None:
             # The old result stays on disk; only its record goes. Its cost stays counted.
