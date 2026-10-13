@@ -231,3 +231,20 @@ func test_real_new_character_round_trip() -> void:
 	var back := Character.new()
 	back.load_dict(c.to_dict())
 	check_eq(back.to_dict(), c.to_dict(), "identical")
+
+func test_server_load_hands_back_sp_a_late_job_lost() -> void:
+	fx.job().sp_per_level = 1
+	var next := fx.job(&"t_next", &"t_family", &"t_job")
+	next.advance_sp = 1
+	fx.skill(&"t_cut", SkillDef.Kind.ATTACK, &"t_next").max_level = 40
+	# advanced at Lv 12 under the old rule: 11 levels at 1, the advance's 1, 2 levels at 3
+	var path := "user://t_late_sp.json"
+	var f := FileAccess.open(path, FileAccess.WRITE)
+	f.store_string(JSON.stringify({"name": "Late", "job": "t_next", "level": 14, "sp": 11 + 1 + 6}))
+	f.close()
+	var c := CharacterStore.load_file(path, "Late")
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+	check_eq(c.skills.points, 9 + 1 + 4 * 3, "topped up to what advancing at Lv 10 would have given")
+	var plain := Character.new()
+	plain.load_dict({"name": "Late", "job": "t_next", "level": 14, "sp": 3})
+	check_eq(plain.skills.points, 3, "a plain load (the client's copy) keeps what the server sent")
