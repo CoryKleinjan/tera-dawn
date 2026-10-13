@@ -243,6 +243,7 @@ func on_skill(peer: int, skill_id: StringName, at: Vector2, face: int, aim := 0)
 	if skill.recharge_ticks(lvl) > 0:
 		p.recharge[skill.id] = skill.recharge_ticks(lvl)
 	p.dirty_vitals = true
+	var aimed := skill.aim_for(clampi(aim, 0, Hitbox.Aim.size() - 1) as Hitbox.Aim)
 	if skill.kind == SkillDef.Kind.BUFF:
 		_cast_buff(p, skill, lvl)
 		if skill.party:
@@ -251,11 +252,13 @@ func on_skill(peer: int, skill_id: StringName, at: Vector2, face: int, aim := 0)
 				if skill.effect:
 					p.map.broadcast(&"ev_effect", [skill.effect.id, o.position.x, o.position.y, o.face, o.peer])
 		p.map.broadcast(&"ev_skill", [p.peer, skill.id, p.position.x, p.position.y, p.face, [], Hitbox.Aim.AHEAD])
+	elif skill.kind == SkillDef.Kind.MOVE:
+		ServerMoves.use(p, skill, aimed)
 	else:
 		# attacking gives a hidden player away
 		if c.skills.end_hiding():
 			p.dirty_character = true
-		p.map.use_skill(p, skill, skill.aim_for(clampi(aim, 0, Hitbox.Aim.size() - 1) as Hitbox.Aim))
+		p.map.use_skill(p, skill, aimed)
 
 ## A buff from `skill` at `lvl` lands on `p` (the caster, or a party member): its heal, then
 ## the buff itself.
