@@ -34,7 +34,12 @@ update this page when one changes. Each zone's own look and music are in
 - A bit metroidvania, like Hollow Knight: the hero starts and stops at once, steers freely in the
   air, hops short when jump is let go early and falls faster than he rises. A full jump keeps its
   height, so every map stays reachable.
-- No dash for the hero: each job gets its own movement skill instead (to come).
+- No dash for the hero: each job has its own movement skill instead. Warrior Charge (a lunge
+  that only shoves monsters aside, no damage; once per jump in the air too), Thief Flash Jump (a
+  second jump in mid-air), Magician Blink (a teleport the held way, up and down too), Archer
+  Backstep Leap (springs back still facing ahead), Pirate Rolling Dash (a low roll on the ground
+  nothing can hit). Beginners have none. Their effects are code-drawn stand-ins until painted
+  ones are made with Gemini in the same look as every other skill effect.
 - Attacks and most attack skills aim: up hits overhead, down (in the air only) hits below. Buffs
   don't aim. A downward melee blow that meets a monster bounces him off it (pogo).
 - He can move while swinging and keeps facing the swing until it ends.

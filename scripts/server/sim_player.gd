@@ -40,6 +40,7 @@ var inv := 0          # invincibility ticks after being hit
 var faint_t := 0      # ticks left lying fainted
 var item_cd := 0      # ticks before another potion can be used
 var since_move := 0   # ticks since the last movement report
+var dodge_t := 0      # ticks nothing can hit them (a roll, see ServerMoves)
 ## The cutscene playing on their screen (a CutsceneDef id, see ServerScenes), or empty.
 ## Monsters leave them alone meanwhile.
 var scene: StringName = &""
@@ -87,6 +88,8 @@ func step() -> bool:
 		cooldown -= 1
 	if inv > 0:
 		inv -= 1
+	if dodge_t > 0:
+		dodge_t -= 1
 	if item_cd > 0:
 		item_cd -= 1
 	if faint_t > 0:

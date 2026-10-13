@@ -44,6 +44,9 @@ const POGO_SPEED := -8.5
 ## many ticks (without steering).
 const RECOIL := 2.5
 const RECOIL_TICKS := 4
+## Upward speed of a Flash Jump and lift of a Backstep Leap (movement skills, see MoveDef).
+const AIR_JUMP_SPEED := -7.5
+const BACKSTEP_LIFT := -4.5
 ## Ticks spent falling through a platform after down + jump.
 const DROP_TICKS := 16
 ## Ticks of the landing pose after a fall.
@@ -125,6 +128,12 @@ var _freeze_t := 0    # ticks held still after being hit (see knock_back)
 var _lock_t := 0      # ticks the knockback carries you without steering
 var _jumping := false # rising from your own jump (letting go cuts it short)
 var _aim := Hitbox.Aim.AHEAD  # which way the current attack aims
+## A movement skill carrying you (Charge, Rolling Dash): its MoveDef, ticks left and speed.
+var _move_def: MoveDef
+var _move_t := 0
+var _move_speed := 0.0
+## Movement skills already used in this jump (ids): each works once per jump in the air.
+var _air_moves := {}
 ## The chair you're sitting on (the server said so), or empty. Moving gets you up.
 var sitting: StringName = &""
 
@@ -197,6 +206,7 @@ func knock_back(from_x: float) -> void:
 		_jumping = false
 		_freeze_t = HURT_FREEZE
 		_lock_t = HURT_LOCK
+		_move_t = 0
 		jump_grace.cancel()
 
 ## Your melee blow ahead landed: a little push back. (A downward blow already bounced you,
@@ -328,8 +338,11 @@ func _use(skill: SkillDef) -> void:
 	if problem != "":
 		world.add_log(problem, Palette.INFO)
 		return
-	cooldown = skill.cooldown
 	var aim := skill.aim_for(_held_aim())
+	if skill.kind == SkillDef.Kind.MOVE:
+		_start_move(skill, aim)
+		return
+	cooldown = skill.cooldown
 	# buffs and spells make no motion: he flashes the skill's colour and carries on
 	var anim := body.use_skill(Game.me.look(), skill)
 	if anim != &"":
@@ -343,6 +356,44 @@ func _use(skill: SkillDef) -> void:
 		_jumping = false
 	Net.ask(&"req_skill", [skill.id, position, face, aim])
 	world.add_effect(skill.effect, TDWorldFx.swing_point(position, face, aim), face, null, aim)
+	Sound.play(skill.cast_sound())
+
+## Starts movement skill `skill` aimed `aim` (a Blink goes that way), if it can go off here:
+## on the ground, or once per jump in the air. Tells the server from where it started.
+func _start_move(skill: SkillDef, aim: Hitbox.Aim) -> void:
+	var m := skill.move
+	if not (m.on_ground if on_ground else m.in_air and not _air_moves.has(skill.id)):
+		return
+	cooldown = skill.cooldown
+	if not on_ground:
+		_air_moves[skill.id] = true
+	var from := position
+	var speed := m.distance_at(Game.me.skills.level(skill)) / maxf(1.0, m.ticks)
+	match m.style:
+		MoveDef.Style.CHARGE, MoveDef.Style.ROLL:
+			_move_def = m
+			_move_t = m.ticks
+			_move_speed = face * speed
+		MoveDef.Style.AIR_JUMP:
+			vel = Vector2(face * speed, AIR_JUMP_SPEED)
+			_lock_t = m.ticks
+		MoveDef.Style.BACKSTEP:
+			vel = Vector2(-face * speed, BACKSTEP_LIFT)
+			_lock_t = m.ticks
+			on_ground = false
+		MoveDef.Style.BLINK:
+			position = m.blink_to(from, face, aim, Game.me.skills.level(skill), float(world.map.width), float(world.map.ground_y))
+			vel = Vector2.ZERO
+			on_ground = false
+	_jumping = false
+	jump_grace.cancel()
+	if m.style == MoveDef.Style.CHARGE:
+		var anim := body.use_skill(Game.me.look(), skill)
+		if anim != &"":
+			action_t = m.ticks
+			action_anim = anim
+	Net.ask(&"req_skill", [skill.id, from, face, aim])
+	TDMoveFx.play(world, m, from, position, self)
 	Sound.play(skill.cast_sound())
 
 ## Whether `skill` aimed `aim` from here meets a living monster, as this screen shows them
@@ -404,7 +455,7 @@ func _leave_climb() -> void:
 			platform = pl
 
 func _grab_climbable() -> bool:
-	if grab_cd > 0:
+	if grab_cd > 0 or _move_t > 0:
 		return false
 	var c := world.layout.climbable_near(position)
 	if c == null:
@@ -438,8 +489,9 @@ func _top_speed(base: float) -> float:
 func _move() -> void:
 	var left := _held("move_left") or auto_walk < 0
 	var right := _held("move_right") or auto_walk > 0
-	# knocked back (or recoiling from your own blow): carried along without steering
-	var rooted := _lock_t > 0
+	# knocked back (or recoiling from your own blow, or springing away with a movement
+	# skill): carried along without steering
+	var rooted := _lock_t > 0 or _move_t > 0
 	if _lock_t > 0:
 		_lock_t -= 1
 	var acc := ACCEL_GROUND if on_ground else ACCEL_AIR
@@ -489,7 +541,12 @@ func _move() -> void:
 	if vel.y >= 0.0:
 		_jumping = false
 
-	vel.y = minf(vel.y + gravity(vel.y), MAX_FALL)
+	# a Charge or roll: straight ahead at its own speed, a Charge flat even in the air
+	var flat := _move_t > 0 and _move_def.style == MoveDef.Style.CHARGE
+	if _move_t > 0:
+		_move_t -= 1
+		vel.x = _move_speed
+	vel.y = 0.0 if flat else minf(vel.y + gravity(vel.y), MAX_FALL)
 	var prev_y := position.y
 	var hard_landing := vel.y > -JUMP_SPEED * CharacterStats.jump_multiplier(Game.me.stats) + HARD_LANDING
 	var was_falling := vel.y > 4.0
@@ -514,6 +571,8 @@ func _move() -> void:
 		position.y = float(world.map.ground_y)
 		vel.y = 0
 	jump_grace.step(on_ground)
+	if on_ground:
+		_air_moves.clear()
 
 # ---------- HD-2D visuals ----------
 
@@ -537,6 +596,8 @@ func _animation() -> StringName:
 		return action_anim
 	if inv > SimPlayer.HURT_INV - HURT_POSE_TICKS and inv <= SimPlayer.HURT_INV: # just got hit (see knock_back)
 		return &"hurt"
+	if _move_t > 0 and _move_def.style == MoveDef.Style.ROLL:
+		return &"crouch" # rolls low (a roll pose comes with the rebuilt hero)
 	if not on_ground:
 		if absf(vel.y) < APEX_SPEED:
 			return &"jump_apex"

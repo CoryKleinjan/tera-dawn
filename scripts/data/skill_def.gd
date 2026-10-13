@@ -10,8 +10,8 @@ extends Resource
 ## Add a skill by saving a SkillDef in data/skills/: it shows up in its job's tab of the
 ## skill window, and players put it on a quickslot to use it.
 
-enum Kind { ATTACK, BUFF, PASSIVE }
-const KIND_NAMES := ["Attack", "Buff", "Passive"]
+enum Kind { ATTACK, BUFF, PASSIVE, MOVE }
+const KIND_NAMES := ["Attack", "Buff", "Passive", "Movement"]
 ## The flash of a skill that goes off as a spell without a colour of its own (an attack with
 ## a wand's or staff's spell motion, like Dawn Slash in a Magician's hands): soft dawn gold.
 const DEFAULT_FLASH := Color(1.0, 0.9, 0.65)
@@ -58,6 +58,10 @@ const DEFAULT_FLASH := Color(1.0, 0.9, 0.65)
 ## Holding up aims it upward, and down (in the air) aims it downward (Hitbox.Aim). Off for an
 ## attack that only ever works ahead of the player.
 @export var aims := true
+
+@export_group("Movement")
+## How a movement skill (Kind.MOVE) carries the hero.
+@export var move: MoveDef
 
 @export_group("Buffs and passives")
 ## What it adds to the character's stats while a buff lasts, or always for a passive.
@@ -119,7 +123,7 @@ func is_ranged() -> bool:
 
 ## The aim it actually takes when used aimed `aim`: only aiming attacks turn.
 func aim_for(aim: Hitbox.Aim) -> Hitbox.Aim:
-	return aim if kind == Kind.ATTACK and aims else Hitbox.Aim.AHEAD
+	return aim if kind in [Kind.ATTACK, Kind.MOVE] and aims else Hitbox.Aim.AHEAD
 
 ## A player can press it (attacks and buffs; passives are always on).
 func is_active() -> bool:
@@ -139,6 +143,8 @@ func describe_level(level: int) -> PackedStringArray:
 		if max_targets > 1:
 			line += ", up to %d monsters" % max_targets
 		out.append(line)
+	if kind == Kind.MOVE and move:
+		out.append("Distance: %d" % roundi(move.distance_at(level)))
 	var s := stats_at(level)
 	for f in s.nonzero():
 		out.append("%s %s" % [StatBlock.LABELS[f], StatBlock.format(f, s.value(f))])

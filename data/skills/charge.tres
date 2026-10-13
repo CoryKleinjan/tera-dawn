@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="SkillDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
+[ext_resource type="Script" path="res://scripts/data/move_def.gd" id="2_move_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/quick_step.png" id="3_icon"]
+
+[sub_resource type="Resource" id="Resource_move"]
+script = ExtResource("2_move_def")
+style = 0
+distance = 110.0
+distance_per_level = 10.0
+ticks = 12
+on_ground = true
+in_air = true
+untouchable = true
+shoves = 4
+color = Color(2, 1.6, 0.8, 1)
+
+[resource]
+script = ExtResource("1_skill_def")
+id = &"charge"
+display_name = "Charge"
+job = &"warrior"
+max_level = 5
+kind = 3
+description = "Lunge ahead, shoving the monsters in your way aside. Works once per jump in the air too."
+mp_cost = 6
+cooldown = 180
+action_ticks = 12
+move = SubResource("Resource_move")
+icon = ExtResource("3_icon")

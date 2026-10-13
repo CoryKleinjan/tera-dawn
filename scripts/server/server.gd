@@ -229,12 +229,15 @@ func on_skill(peer: int, skill_id: StringName, at: Vector2, face: int, aim := 0)
 	p.report_move(at, face, skill.animation, false)
 	p.cooldown = skill.cooldown
 	p.dirty_vitals = true
+	var aimed := skill.aim_for(clampi(aim, 0, Hitbox.Aim.size() - 1) as Hitbox.Aim)
 	if skill.kind == SkillDef.Kind.BUFF:
 		c.skills.add_buff(skill)
 		p.dirty_character = true
 		p.map.broadcast(&"ev_skill", [p.peer, skill.id, p.position.x, p.position.y, p.face, [], Hitbox.Aim.AHEAD])
+	elif skill.kind == SkillDef.Kind.MOVE:
+		ServerMoves.use(p, skill, aimed)
 	else:
-		p.map.use_skill(p, skill, skill.aim_for(clampi(aim, 0, Hitbox.Aim.size() - 1) as Hitbox.Aim))
+		p.map.use_skill(p, skill, aimed)
 
 ## Puts a skill or item on a quickslot (an empty `kind` clears it).
 func on_set_quickslot(peer: int, i: int, kind: StringName, id: StringName) -> void:

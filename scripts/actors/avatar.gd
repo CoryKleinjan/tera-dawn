@@ -76,6 +76,8 @@ func apply_info(info: Array) -> void:
 func play_skill(skill: SkillDef) -> void:
 	if skill == null or body == null:
 		return
+	if skill.move and skill.move.style != MoveDef.Style.CHARGE:
+		return # only a Charge swings; the other moves show in how they move
 	var anim := body.use_skill(look, skill)
 	if anim != &"":
 		animation = anim
