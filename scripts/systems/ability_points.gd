@@ -1,14 +1,15 @@
 class_name AbilityPoints
 extends CharacterPart
-## A character's Ability Points: the ones left to spend on STR, DEX, INT or LUK, the Auto
-## button's plan, and the one free reset a job instructor gives a Beginner (Character.ap).
+## A character's Ability Points: the ones left to spend on the base stats (StatBlock.BASE),
+## the Auto button's plan, and the one free reset a job instructor gives a Beginner
+## (Character.ap).
 
 ## Unspent Ability Points.
 var points := 0
 ## Whether the one free reset a job instructor gives a Beginner is used up.
 var reset_used := false
 
-## Spends `amount` points (at most what's left) on STR, DEX, INT or LUK.
+## Spends `amount` points (at most what's left) on a base stat.
 func spend(stat: StringName, amount := 1) -> bool:
 	if points <= 0 or amount <= 0 or not stat in StatBlock.BASE:
 		return false
@@ -19,22 +20,12 @@ func spend(stat: StringName, amount := 1) -> bool:
 	c.recalc()
 	return true
 
-## How the Auto button spends the unspent points, as {stat: amount}: enough of the job's
-## secondary stat to wear its gear (what's worn, and what's in the bag at this level), and
-## the rest in its primary stat.
+## How the Auto button spends the unspent points, as {stat: amount}: all of them in the
+## job's one stat (gear only ever asks for that one).
 func auto_plan() -> Dictionary:
-	var out := {}
 	if points <= 0:
-		return out
-	var c := character
-	var main := StringName(c.job.primary_stat)
-	var second := StringName(c.job.secondary_stat)
-	var short := mini(points, maxi(0, c.gear.most_needed(second) - c.stats.value(second)))
-	if short > 0 and second != main:
-		out[second] = short
-	if points - short > 0:
-		out[main] = out.get(main, 0) + points - short
-	return out
+		return {}
+	return {StringName(character.job.primary_stat): points}
 
 ## Points spent so far: how far the base stats are above the job's starting stats.
 func spent() -> int:
@@ -43,9 +34,22 @@ func spent() -> int:
 		out += maxi(0, character.base.value(stat) - _starting_stat(stat))
 	return out
 
+## What a stat started at: the starting stats of the job the character's line began with.
 func _starting_stat(stat: StringName) -> int:
-	var job := character.job
-	return job.starting_stats.value(stat) if job.starting_stats else 0
+	var line := character.job_line()
+	var first := Content.job(line[-1]) if not line.is_empty() else character.job
+	return first.starting_stats.value(stat) if first and first.starting_stats else 0
+
+## Hands back every point spent, with the base stats back where the character started (the
+## free reset saved characters get when the stat rules change, see CharacterCodec).
+func refund_all() -> void:
+	var c := character
+	for stat in StatBlock.BASE:
+		var extra := c.base.value(stat) - _starting_stat(stat)
+		if extra > 0:
+			points += extra
+			c.base.set(stat, _starting_stat(stat))
+	c.recalc()
 
 ## Why a `next` instructor can't hand out the free reset, or "" if they can: once per
 ## character, for a Beginner who has spent points but lacks the stats `next` asks for.

@@ -34,6 +34,7 @@ const OFFHAND_NAMES := {&"shield": "a shield", &"star": "throwing stars", &"book
 @export var required_dexterity := 0
 @export var required_intelligence := 0
 @export var required_luck := 0
+@export var required_charisma := 0
 
 @export_group("Stats")
 @export var stats: StatBlock
@@ -130,7 +131,7 @@ func requirements() -> Dictionary:
 	if required_level > 0:
 		out[&"level"] = required_level
 	for pair in [[&"strength", required_strength], [&"dexterity", required_dexterity],
-			[&"intelligence", required_intelligence], [&"luck", required_luck]]:
+			[&"intelligence", required_intelligence], [&"luck", required_luck], [&"charisma", required_charisma]]:
 		if pair[1] > 0:
 			out[pair[0]] = pair[1]
 	return out

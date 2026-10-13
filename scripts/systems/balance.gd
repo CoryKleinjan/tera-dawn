@@ -19,8 +19,7 @@ static func typical(job_id: StringName, level: int) -> Character:
 	c.level = level
 	var j := c.job
 	var points := (level - 1) * j.ap_per_level
-	c.base.set(StringName(j.primary_stat), c.base.value(StringName(j.primary_stat)) + points * 3 / 4)
-	c.base.set(StringName(j.secondary_stat), c.base.value(StringName(j.secondary_stat)) + points - points * 3 / 4)
+	c.base.set(StringName(j.primary_stat), c.base.value(StringName(j.primary_stat)) + points)
 	c.recalc()
 	# the best of each kind of gear they could wear (by the stat their attack uses)
 	var best := {}

@@ -284,8 +284,11 @@ func pick_up(p: SimPlayer, d: SimDrop) -> bool:
 		_remove_drop(d, p.peer)
 		_add_card(p, (d.item as CardDef).monster)
 		return true
+	var found := d.amount
 	if d.item.is_currency:
-		ch.shards += d.amount
+		# Charisma finds a few more
+		found = roundi(d.amount * CharacterStats.shard_bonus(ch.stats))
+		ch.shards += found
 		p.dirty_vitals = true
 	elif d.stack:
 		if not ch.inventory.add_stack(d.stack):
@@ -300,7 +303,7 @@ func pick_up(p: SimPlayer, d: SimDrop) -> bool:
 		p.dirty_character = true
 	_remove_drop(d, p.peer)
 	if d.item.is_currency:
-		show_gain(p, &"shards", d.amount)
+		show_gain(p, &"shards", found)
 	else:
 		# the client merges pickups of the same item into one log line
 		Net.send(p.peer, &"ev_pickup", [d.item.id, d.amount])

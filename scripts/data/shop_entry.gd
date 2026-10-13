@@ -10,3 +10,7 @@ const PRICE_MARKUP := 4
 
 func cost() -> int:
 	return price if price > 0 else maxi(1, item.sell_price * PRICE_MARKUP)
+
+## What one costs `ch`, after their Charisma's discount (CharacterStats.shop_discount).
+func cost_for(ch: Character) -> int:
+	return maxi(1, roundi(cost() * (1.0 - CharacterStats.shop_discount(ch.stats))))
