@@ -11096,6 +11096,31 @@
     ],
     "text": "The first image is one repeating tile of the back wall inside a harbour town's shop: a wooden beam band at the top, cream plaster with square wooden windows in the middle, and a blue chair rail above wooden panelling at the bottom. Repaint it as the back wall inside the cosy harbour tavern shown in the second image, keeping the same layout bands in the same places: at the top a heavy dark oak ceiling beam running straight across; in the middle the tavern's timber frame seen from inside, cream plaster panels divided by dark oak posts and a few diagonal braces like the outside of the tavern, with small square wooden windows with small panes glowing warm golden evening light; at the bottom dark oak plank wainscoting with a plain wooden rail on top. The plaster between the posts and windows is plain: no shelves, no pictures, no signs, no objects on the wall. Everything is seen straight from the front, flat, with no perspective, no top faces and no side depth. The left and right edges of the image must join seamlessly when the tile is repeated side by side: nothing is cut off at the edges, and the beams and wainscot line up across the join. Paint in the same style as the third image and the rest of the wall: rich warm colours, strong light and shadow with bright highlights, visible painted texture at a fairly chunky brush scale (wood grain, worn patches), a thin dark outline. Painted, never pixel art. Same image size and layout."
    }
+  },
+  {
+   "id": "tutorial_girl",
+   "prompts": null,
+   "batch": "Tutorial beach: the girl and her shell (test)",
+   "with": null,
+   "refs": [],
+   "save": "tutorial_girl.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    4,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 main story thread (Cory 15:13Z 'do it.'): small test of the tutorial girl (Girl on the Beach / Rowan's Granddaughter) and the Beach Shell she gives you. Edit of npcs_harbor_4 keeping its layout. Shown to Cory before anything goes in game.",
+   "edit": {
+    "base": "art/source/npcs_harbor_4.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ],
+    "text": "The first image is a sheet of NPC characters for my 2D side-scrolling game: two rows, each row the same characters standing in the same spots, with a label above each. Keep the sheet's size, layout, magenta background, label bands, and each character's position, size, chibi proportions and art style exactly. The second image shows more of my game's NPC characters; the new ones must look like they belong with them: soft cel-painted shading, rich warm colours, dark brown outlines, painted cloth folds and worn patches. Replace the characters as follows, the same thing in both rows of each column: Column 1 (label it GIRL): a small cheerful girl of about eight who lives by the sea, the same height as the kid in the first image: copper-red hair in two short braids tied with string, freckles across her nose and cheeks, big bright eyes, a simple sun-yellow knee-length dress with a faded blue sash tied at the waist that has one small sewn patch, barefoot with a little sand on her feet. She stands still in a calm, happy pose, hands at her sides. Column 2 (label it SHELL): one large seashell drawn alone, filling most of the cell, the kind a child would pick as the best shell on the beach: a fan-shaped scallop shell with soft ridges, creamy white fading to warm coral pink at the edges, with a pearly sheen, seen from the front. Column 3 (label it EMPTY) and column 4 (label it EMPTY): leave empty, plain magenta. Rules: the girl stands upright, facing slightly toward the viewer, both feet flat on one level ground line, full body in its cell. Hands are simple rounded fingerless mittens in the game's style. Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background everywhere outside the characters, the shell and the labels."
+   }
   }
  ]
 }
