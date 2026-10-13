@@ -9,6 +9,11 @@ func weapon() -> EquipDef:
 	var w := character.equipment.at(&"weapon")
 	return w.equip_def() if w else null
 
+## What's worn in the shield slot (a shield, stars, a book, a quiver or a pistol), or null.
+func offhand() -> EquipDef:
+	var o := character.equipment.at(&"shield")
+	return o.equip_def() if o else null
+
 ## Whether this job can use gear meant for `families` (empty means anyone).
 func can_use(families: Array[StringName]) -> bool:
 	return families.is_empty() or character.job.family in families

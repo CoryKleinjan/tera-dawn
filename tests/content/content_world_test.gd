@@ -271,20 +271,8 @@ func test_the_start_is_reachable_from_every_map() -> void:
 
 func test_every_town_has_a_storage_keeper() -> void:
 	for m: MapDef in Content.maps.values():
-		if m.town and m.id != &"free_market" and m.id != Character.START_MAP:
+		if m.town and m.id != Character.START_MAP:
 			check(m.npcs.any(func(p: NpcPlacement) -> bool: return p.npc and p.npc.storage), "%s: town has no storage keeper" % Scan.where(m))
-
-func test_market_maps_have_a_market_clerk() -> void:
-	var markets := 0
-	for m: MapDef in Content.maps.values():
-		if m.market:
-			markets += 1
-			check(m.npcs.any(func(p: NpcPlacement) -> bool: return p.npc and p.npc.market), "%s: market map without a market NPC" % Scan.where(m))
-	check(markets >= 1, "there is a Free Market map")
-	for m: MapDef in Content.maps.values():
-		for p in m.npcs:
-			if p and p.npc and p.npc.market:
-				check(m.market, "%s: %s helps set up shops on a map that isn't a market" % [Scan.where(m), p.npc.id])
 
 ## Monsters kept in the game's files that no map spawns yet: Ember Hollow's boss, left over
 ## when Dawnrise Isle's Ember Hollow became Fern Hollow (its fire monsters now hold
@@ -449,8 +437,10 @@ func test_rooms_have_one_door_out_to_their_town() -> void:
 		var w := Scan.where(m)
 		check(not m.town and m.spawns.is_empty(), "%s: a room is not a town and has no monsters" % w)
 		check(m.world_pos == Vector2.ZERO, "%s: a room isn't drawn on the world map (its town is)" % w)
-		if check(m.portals.size() == 1, "%s: a room has one door, it has %d portals" % [w, m.portals.size()]):
-			var out := m.portals[0]
+		# besides its door, a room may have a quest's way in (a job test's Trial Ground)
+		var doors := m.portals.filter(func(p: PortalDef) -> bool: return p.while_on == null)
+		if check(doors.size() == 1, "%s: a room has one door, it has %d portals" % [w, doors.size()]):
+			var out: PortalDef = doors[0]
 			check(out.door, "%s: its way out is a door" % w)
 			check(out.target_map == m.return_map, "%s: its door leads to %s, its return_map is %s" % [w, out.target_map, m.return_map])
 			var town: MapDef = Content.maps.get(m.return_map)

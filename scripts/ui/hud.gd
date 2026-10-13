@@ -282,9 +282,8 @@ func _build_windows() -> void:
 	# opened by other players
 	var player := TDPlayerMenuWindow.new()
 	var trade := TDTradeWindow.new()
-	var player_shop := TDPlayerShopWindow.new()
 	for pair in [["inventory", inventory], ["equipment", equipment], ["stats", stats], ["quests", quests], ["skills", skills], ["worldmap", worldmap],
-			["community", community], ["collection", collection], ["dialogue", dialogue], ["shop", shop], ["storage", storage], ["player", player], ["trade", trade], ["player_shop", player_shop]]:
+			["community", community], ["collection", collection], ["dialogue", dialogue], ["shop", shop], ["storage", storage], ["player", player], ["trade", trade]]:
 		var w: TDWindow = pair[1]
 		w.hud = self
 		windows[pair[0]] = w
@@ -306,17 +305,9 @@ func open_shop(npc: TDNpc) -> void:
 func show_trade(state: Dictionary) -> void:
 	windows["trade"].show_state(state)
 
-## A player shop you're looking at (or your own).
-func show_player_shop(owner: int, owner_name: String, title_text: String, items: Array) -> void:
-	windows["player_shop"].show_shop(owner, owner_name, title_text, items)
-
 ## Typing in the chat box or a text prompt: keys shouldn't move the player.
 func typing() -> bool:
 	return chat.typing() or prompt.visible or confirm.visible
-
-## Minding your own shop: you stay put.
-func selling() -> bool:
-	return windows["player_shop"].selling()
 
 func toggle_window(action: String) -> void:
 	if windows.has(action):

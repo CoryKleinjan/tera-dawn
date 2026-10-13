@@ -22,12 +22,12 @@ func check() -> void:
 	book.learn(Content.skill(&"power_strike"))
 	book.learn(slash)
 	book.learn(Content.skill(&"iron_body"))
-	book.learn(Content.skill(&"toughness"))
+	book.learn(Content.skill(&"blade_mastery"))
 	await _ticks(1)
 	_check(Game.me.skills.level(slash) == 1 and Game.me.skills.points == 1, "spending Skill Points learns skills")
 	_check(Game.me.quickslots[0] == [&"skill", &"power_strike"] and Game.me.quickslots[1] == [&"skill", &"dawn_slash"]
 		and Game.me.quickslots[2] == [&"skill", &"iron_body"], "learned skills go on the free quickslots")
-	_check(Game.me.max_hp() == Game.me.job.base_hp + Game.me.level * Game.me.job.hp_per_level + Game.me.equipment.bonus().max_hp + 15, "Toughness raises Max HP")
+	_check(Game.me.stats.melee_damage == 2, "Blade Mastery raises Melee Damage")
 	await _press("skills")
 	# Iron Body raises defense until it wears off.
 	var defense := Game.me.stats.defense

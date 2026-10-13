@@ -14,7 +14,7 @@ const SHOP_GEAR := [&"training_sword", &"leaf_cap", &"linen_tunic", &"trail_pant
 ## Each job's basic weapons, handed over when advancing (the first is worn at once).
 const ADVANCE_WEAPONS := {
 	&"warrior": [&"bronze_sword"], &"mage": [&"apprentice_wand"], &"archer": [&"willow_bow"],
-	&"thief": [&"iron_star"], &"pirate": [&"brass_knuckle", &"driftwood_pistol"],
+	&"thief": [&"rusty_dagger", &"iron_star"], &"pirate": [&"brass_knuckle", &"driftwood_pistol"],
 }
 
 static func install() -> void:

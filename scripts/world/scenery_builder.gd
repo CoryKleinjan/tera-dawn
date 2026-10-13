@@ -275,10 +275,10 @@ func _climbable(c: ClimbableDef, platforms: Array[Platform]) -> void:
 ## sparkles rising through it. Doors get one too (see _door). A locked portal only shows once
 ## it opens (TDStage.show_open_portals).
 func _portal(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
-	# one node per portal, so a locked one (PortalDef.opens_after) can be hidden until it opens
+	# one node per portal, so a locked one (PortalDef.locked) can be hidden while it's shut
 	var holder := Node3D.new()
 	root.add_child(holder)
-	if p.opens_after:
+	if p.locked():
 		stage.locked_portals[holder] = p
 	var base := Vector2(p.x, pl.y + 3.0)
 	if not biome.portal_frames.is_empty():

@@ -4,10 +4,15 @@ extends RefCounted
 ## and back. Character.to_dict() and Character.load_dict() call these.
 
 ## Everything about the character.
+## Bumped when what the stats do changes, so older saves get their Ability Points back once
+## to spend again (1: one stat per job, Charisma, 2026-10-13).
+const STAT_RULES := 1
+
 static func to_dict(c: Character) -> Dictionary:
 	return {
 		"name": c.name, "appearance": c.appearance.to_dict(), "level": c.level, "xp": c.xp, "shards": c.shards, "map_id": c.map_id,
 		"job": c.job.id, "base": c.base.to_dict(), "ap": c.ap.points, "ap_reset_used": c.ap.reset_used,
+		"stat_rules": STAT_RULES,
 		"hp": c.health.hp, "mp": c.mp,
 		"inventory": c.inventory.to_dict(), "equipment": c.equipment.to_dict(), "storage": c.storage.to_dict(),
 		"quests": c.quests.to_dict(),
@@ -46,6 +51,7 @@ static func load_dict(c: Character, data: Dictionary) -> void:
 		# a save from before stats existed: hand out the points for the levels it has
 		c.ap.points = (c.level - 1) * c.job.ap_per_level
 	c.ap.reset_used = bool(data.get("ap_reset_used", c.ap.reset_used))
+	var refund := data.get("base") is Dictionary and int(data.get("stat_rules", 0)) < STAT_RULES
 	if data.get("inventory") is Dictionary:
 		c.inventory.load_dict(data["inventory"])
 	if data.get("equipment") is Dictionary:
@@ -106,6 +112,9 @@ static func load_dict(c: Character, data: Dictionary) -> void:
 		c.counters = {}
 		for k in data["counters"]:
 			c.counters[str(k)] = int(data["counters"][k])
+	if refund:
+		# the stat rules changed since this was saved: every Ability Point back to spend again
+		c.ap.refund_all()
 	c.recalc()
 	c.health.set_hp(maxi(1, int(data.get("hp", c.max_hp()))))
 	c.mp = clampi(int(data.get("mp", c.max_mp())), 0, c.max_mp())

@@ -33,8 +33,6 @@ extends Resource
 @export var world_pos := Vector2.ZERO
 ## Towns are safe places to respawn and where return scrolls take you.
 @export var town := false
-## A free market: players may open their own shops here.
-@export var market := false
 ## The town you wake up in after fainting here, and where a return scroll goes. Empty means
 ## this map if it's a town, else the starting map.
 @export var return_map: StringName
@@ -43,10 +41,13 @@ extends Resource
 ## Inside a building: a small room with a wall instead of sky, entered by a door from
 ## `return_map` (the town it stands in). The world map shows you in that town.
 @export var interior := false
-## Its own track (a boss lair, the Free Market). Empty: its region's town or field music (music_id).
+## Its own track (a boss lair). Empty: its region's town or field music (music_id).
 @export var music: StringName
 ## A cutscene each character sees the first time they arrive (see CutsceneDef).
 @export var intro_scene: CutsceneDef
+## Each player gets a copy of their own (a job test fought alone, even in co-op). The copy
+## starts fresh every time they come in.
+@export var solo := false
 
 @export_group("Layout")
 ## One-way platforms, numbered from 1 in this order (0 is the floor).
@@ -70,6 +71,11 @@ extends Resource
 ## Faint white glows hanging out over the water, drawn in code (TDStage._build_tears): x
 ## across the map and height above the floor, in game pixels. Nobody in the game mentions them.
 @export var tears: Array[Vector2] = []
+## A tear that opens when a player first stands on this platform (-1: the tears are always
+## there): they only show from then on, `tear_scene` plays, and the monsters marked
+## `SpawnDef.from_tear` step out of the first tear.
+@export var tear_platform := -1
+@export var tear_scene: CutsceneDef
 
 var _look: BiomeDef
 
@@ -114,11 +120,12 @@ func return_town() -> StringName:
 		return return_map
 	return id if town else Character.START_MAP
 
-## The map you're "in" on the world map: the town outside, for a room inside a building.
+## The map you're "in" on the world map: the town outside, for a room inside a building or
+## a solo map (a job test's Trial Ground).
 func outside() -> StringName:
-	return return_town() if interior else id
+	return return_town() if interior or solo else id
 
-## The track that plays here: its own, else its region's town music for towns, markets and
+## The track that plays here: its own, else its region's town music for towns and
 ## rooms, and its region's field music for everywhere else.
 func music_id() -> StringName:
 	if music != &"":
@@ -126,7 +133,7 @@ func music_id() -> StringName:
 	var r: RegionDef = Content.regions.get(region)
 	if r == null:
 		return &""
-	return r.town_music if town or market or interior else r.field_music
+	return r.town_music if town or interior else r.field_music
 
 ## The maps its portals lead to.
 func neighbours() -> Array[StringName]:

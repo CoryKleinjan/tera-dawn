@@ -69,8 +69,14 @@ func _draw() -> void:
 			draw_texture_rect(icon, TDWindow.fit(icon, r.grow(-4)), false)
 		if thing is SkillDef:
 			var skill := thing as SkillDef
+			var k := 0.0
 			if p and p.cooldown > 0:
-				var k := clampf(float(p.cooldown) / skill.cooldown, 0, 1)
+				k = clampf(float(p.cooldown) / skill.cooldown, 0, 1)
+			# its own recharge, when longer: how much of it is left
+			var full := skill.recharge_ticks(Game.me.skills.level(skill))
+			if p and full > 0 and p.recharge.has(skill.id):
+				k = maxf(k, clampf(float(p.recharge[skill.id]) / full, 0, 1))
+			if k > 0.0:
 				var cover := UiSkin.tex("hud/cooldown_cover")
 				var part := Rect2(Vector2.ZERO, cover.get_size() * Vector2(1, k))
 				draw_texture_rect_region(cover, Rect2(r.position + Vector2(3, 3), Vector2(SLOT - 6, (SLOT - 6) * k)), part, Color(1, 1, 1, 0.75))

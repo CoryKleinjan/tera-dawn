@@ -15,6 +15,8 @@ const KIND_NAMES := ["Attack", "Buff", "Passive", "Movement"]
 ## The flash of a skill that goes off as a spell without a colour of its own (an attack with
 ## a wand's or staff's spell motion, like Dawn Slash in a Magician's hands): soft dawn gold.
 const DEFAULT_FLASH := Color(1.0, 0.9, 0.65)
+## How far a party buff reaches from the caster, in game pixels (about a screen).
+const PARTY_REACH := 640.0
 
 @export var id: StringName
 @export var display_name := ""
@@ -39,6 +41,10 @@ const DEFAULT_FLASH := Color(1.0, 0.9, 0.65)
 @export var cooldown := 24
 ## Ticks the player spends in the attack pose (he can still move meanwhile).
 @export var action_ticks := 16
+## Seconds before this skill can be used again, on top of the shared cooldown (0: none).
+## Attack Speed doesn't shorten it.
+@export var recharge := 0.0
+@export var recharge_per_level := 0.0
 
 @export_group("Attack")
 ## How far in front of the player it reaches, and how tall the hit area is.
@@ -55,6 +61,17 @@ const DEFAULT_FLASH := Color(1.0, 0.9, 0.65)
 @export var projectile: ProjectileDef
 ## Weapon kinds it needs (EquipDef.weapon_kind); empty for any.
 @export var weapons: Array[StringName] = []
+## What it needs in the shield slot (EquipDef.offhand_kind: "star", "book", "quiver",
+## "pistol"); empty for anything or nothing.
+@export var offhand: Array[StringName] = []
+## How hard it knocks monsters back, against a normal hit.
+@export var knockback := 1.0
+## Above 0, the blast lands on the nearest monster in reach and also hits every monster within
+## this many pixels of it (up to max_targets).
+@export var splash := 0.0
+## Seconds each monster it hits is slowed (SimMob.SLOW).
+@export var slow := 0.0
+@export var slow_per_level := 0.0
 ## Holding up aims it upward, and down (in the air) aims it downward (Hitbox.Aim). Off for an
 ## attack that only ever works ahead of the player.
 @export var aims := true
@@ -64,6 +81,18 @@ const DEFAULT_FLASH := Color(1.0, 0.9, 0.65)
 @export var move: MoveDef
 
 @export_group("Buffs and passives")
+## A buff that also reaches every party member on the map within PARTY_REACH.
+@export var party := false
+## Heals this share of Max HP as it goes off (a buff with no duration is just the heal).
+@export var heal := 0.0
+@export var heal_per_level := 0.0
+## While the buff lasts, this share of the damage taken comes out of MP instead of HP.
+@export var mp_guard := 0.0
+@export var mp_guard_per_level := 0.0
+## While the buff lasts, monster hits don't knock the player back.
+@export var steady := false
+## While the buff lasts, monsters can't see or hit the player; attacking ends it.
+@export var hide := false
 ## What it adds to the character's stats while a buff lasts, or always for a passive.
 @export var stats: StatBlock
 @export var stats_per_level: StatBlock
@@ -95,6 +124,19 @@ const DEFAULT_FLASH := Color(1.0, 0.9, 0.65)
 
 func mp_at(level: int) -> int:
 	return mp_cost + roundi(mp_cost_per_level * maxi(0, level - 1))
+
+## Recharge length in physics ticks (60 a second).
+func recharge_ticks(level: int) -> int:
+	return roundi(maxf(0.0, recharge + recharge_per_level * maxi(0, level - 1)) * 60.0)
+
+func slow_ticks(level: int) -> int:
+	return roundi(maxf(0.0, slow + slow_per_level * maxi(0, level - 1)) * 60.0)
+
+func heal_at(level: int) -> float:
+	return heal + heal_per_level * maxi(0, level - 1) if level > 0 else 0.0
+
+func mp_guard_at(level: int) -> float:
+	return clampf(mp_guard + mp_guard_per_level * maxi(0, level - 1), 0.0, 1.0) if level > 0 else 0.0
 
 func damage_at(level: int) -> float:
 	return damage_multiplier + damage_per_level * maxi(0, level - 1)
@@ -143,6 +185,10 @@ func describe_level(level: int) -> PackedStringArray:
 		if max_targets > 1:
 			line += ", up to %d monsters" % max_targets
 		out.append(line)
+		if slow_ticks(level) > 0:
+			out.append("Slows them for %s seconds" % _seconds(slow_ticks(level)))
+	if heal_at(level) > 0.0:
+		out.append("Heals %d%% of Max HP" % roundi(heal_at(level) * 100))
 	if kind == Kind.MOVE and move:
 		out.append("Distance: %d" % roundi(move.distance_at(level)))
 	var s := stats_at(level)
@@ -152,9 +198,24 @@ func describe_level(level: int) -> PackedStringArray:
 		out.append("HP recovery +%d" % regen_hp_at(level))
 	if regen_mp_at(level) > 0:
 		out.append("MP recovery +%d" % regen_mp_at(level))
-	if kind == Kind.BUFF:
+	if mp_guard_at(level) > 0.0:
+		out.append("%d%% of damage taken comes out of MP" % roundi(mp_guard_at(level) * 100))
+	if steady:
+		out.append("No knockback")
+	if hide:
+		out.append("Monsters can't see you; attacking ends it")
+	if kind == Kind.BUFF and duration_ticks(level) > 0:
 		out.append("Lasts %d seconds" % roundi(duration_ticks(level) / 60.0))
+	if party:
+		out.append("Also reaches party members nearby")
+	if recharge_ticks(level) > 0:
+		out.append("Recharges in %s seconds" % _seconds(recharge_ticks(level)))
 	return out
+
+## "1.5" or "20" seconds from ticks.
+static func _seconds(ticks: int) -> String:
+	var sec := ticks / 60.0
+	return str(roundi(sec)) if is_equal_approx(sec, roundf(sec)) else "%.1f" % sec
 
 ## The colour the player flashes when this goes off as a buff or spell.
 func flash_color() -> Color:

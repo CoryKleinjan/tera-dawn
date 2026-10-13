@@ -459,26 +459,6 @@ func req_fame(target_peer: int, up: bool) -> void:
 	if server:
 		server.social.on_fame(_sender(), target_peer, up)
 
-@rpc("any_peer", "call_local", "reliable")
-func req_shop_open(title: String, entries: Array) -> void:
-	if server:
-		server.social.on_shop_open(_sender(), title, entries)
-
-@rpc("any_peer", "call_local", "reliable")
-func req_shop_view(owner: int) -> void:
-	if server:
-		server.social.on_shop_view(_sender(), owner)
-
-@rpc("any_peer", "call_local", "reliable")
-func req_shop_buy(owner: int, index: int, item_id: StringName) -> void:
-	if server:
-		server.social.on_shop_buy(_sender(), owner, index, item_id)
-
-@rpc("any_peer", "call_local", "reliable")
-func req_shop_leave(owner: int) -> void:
-	if server:
-		server.social.on_shop_leave(_sender(), owner)
-
 # ---------- events: server -> client ----------
 
 ## The host let us in: on to character select, with this computer's characters.
@@ -595,11 +575,6 @@ func ev_trade(state: Dictionary) -> void:
 		world.hud.show_trade(state)
 
 @rpc("authority", "call_local", "reliable")
-func ev_player_shop(owner: int, owner_name: String, title: String, items: Array) -> void:
-	if world:
-		world.hud.show_player_shop(owner, owner_name, title, items)
-
-@rpc("authority", "call_local", "reliable")
 func ev_mob_shot(index: int, move_index: int, x: float, y: float) -> void:
 	if world:
 		world.show_mob_shot(index, move_index, Vector2(x, y))
@@ -655,6 +630,12 @@ func ev_effect(effect_id: StringName, x: float, y: float, face: int, follow_peer
 func ev_drop(snap: Array) -> void:
 	if world:
 		world.add_drop(snap)
+
+## The map's tear opened (MapInstance.check_tear).
+@rpc("authority", "call_local", "reliable")
+func ev_tear() -> void:
+	if world:
+		world.open_tear()
 
 @rpc("authority", "call_local", "reliable")
 func ev_drop_gone(id: int, by: int) -> void:

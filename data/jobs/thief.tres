@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="JobDef" load_steps=9 format=3]
+[gd_resource type="Resource" script_class="JobDef" format=3]
 
 [ext_resource type="Script" path="res://scripts/data/job_def.gd" id="1_job_def"]
 [ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="2_stat_block"]
@@ -6,6 +6,7 @@
 [ext_resource type="Resource" path="res://data/items/use/red_potion.tres" id="5_red_potion"]
 [ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="q_blue_potion"]
 [ext_resource type="Script" path="res://scripts/data/item_def.gd" id="q_item_def"]
+[ext_resource type="Resource" path="res://data/quests/jtest_thief.tres" id="20_test"]
 
 [sub_resource type="Resource" id="Resource_3"]
 script = ExtResource("3_drop_entry")
@@ -25,9 +26,8 @@ display_name = "Thief"
 family = &"thief"
 tint = Color(0.815686, 0.713725, 0.909804, 1.0)
 primary_stat = "luck"
-secondary_stat = "dexterity"
 mastery = 0.6
-description = "Quick and quiet, throwing stars or striking with daggers. Luck drives their damage."
+description = "Quick and quiet, striking with a dagger and throwing stars. Luck drives their damage and keeps them out of harm's way."
 base_hp = 50
 hp_per_level = 12
 base_mp = 20
@@ -39,3 +39,4 @@ advance_requirements = SubResource("Resource_1")
 advance_gifts = Array[ExtResource("3_drop_entry")]([SubResource("Resource_3")])
 advance_sp = 1
 starting_quickslots = Array[ExtResource("q_item_def")]([ExtResource("5_red_potion"), ExtResource("q_blue_potion")])
+advance_quest = ExtResource("20_test")

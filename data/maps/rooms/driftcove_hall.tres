@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=21 format=3]
+[gd_resource type="Resource" script_class="MapDef" format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/rooms/driftcove_room.tres" id="2_driftcove"]
@@ -12,6 +12,15 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/rooms/driftcove/rack.png" id="10_rack"]
 [ext_resource type="Texture2D" path="res://assets/sprites/rooms/driftcove/barrel.png" id="11_barrel"]
 [ext_resource type="Texture2D" path="res://assets/sprites/rooms/driftcove/lamp.png" id="12_lamp"]
+[ext_resource type="Resource" path="res://data/quests/jtest_pirate.tres" id="20_test"]
+
+[sub_resource type="Resource" id="TrialGate"]
+script = ExtResource("3_portal_def")
+x = 980.0
+platform = 0
+target_map = &"trial_driftcove"
+target_x = 180.0
+while_on = ExtResource("20_test")
 
 [sub_resource type="Resource" id="Door"]
 script = ExtResource("3_portal_def")
@@ -89,6 +98,6 @@ start_x = 240.0
 region = &"driftcove"
 return_map = &"driftcove"
 interior = true
-portals = Array[ExtResource("3_portal_def")]([SubResource("Door")])
+portals = Array[ExtResource("3_portal_def")]([SubResource("Door"), SubResource("TrialGate")])
 npcs = Array[ExtResource("4_npc_placement")]([SubResource("Keeper")])
 props = Array[ExtResource("6_prop_placement")]([SubResource("Prop_0"), SubResource("Prop_1"), SubResource("Prop_2"), SubResource("Prop_3"), SubResource("Prop_4"), SubResource("Prop_5")])

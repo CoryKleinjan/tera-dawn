@@ -13,7 +13,7 @@ func test_skill_effect_plays_in_front_of_the_hero_and_records_depth() -> void:
 		e.free()
 
 func test_projectile_records_depth() -> void:
-	var def: ProjectileDef = (load("res://data/skills/star_throw.tres") as SkillDef).projectile
+	var def: ProjectileDef = (load("res://data/skills/star_scatter.tres") as SkillDef).projectile
 	var p := TDProjectile.create(null, def, Vector2.ZERO, Vector2(100, 0), 0, null, Callable())
 	p._ready()
 	check_eq(p.sprite.alpha_cut, SpriteBase3D.ALPHA_CUT_OPAQUE_PREPASS, "the star records its depth")

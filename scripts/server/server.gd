@@ -22,11 +22,11 @@ const COOLDOWN_SLACK := 4
 var lobby: TDLobby
 ## peer id -> SimPlayer
 var sessions := {}
-## map id -> MapInstance
+## map id -> MapInstance (a solo map's copies are keyed by `instance_key`)
 var maps := {}
 var tick := 0
 var _drop_ids := 0
-## Chat, buddies, parties, trades, guilds, fame and player shops.
+## Chat, buddies, parties, trades, guilds and fame.
 var social: TDSocial
 ## The requests about the player's things, NPC shops, storage, getting around, quests and
 ## jobs, one part each (scripts/server/services/).
@@ -82,10 +82,25 @@ func next_drop_id() -> int:
 	_drop_ids += 1
 	return _drop_ids
 
-func map_instance(id: StringName) -> MapInstance:
-	if not maps.has(id):
-		maps[id] = MapInstance.new(self, Content.map(id))
-	return maps[id]
+## The running map `id` (for a solo map, `p`'s own copy).
+func map_instance(id: StringName, p: SimPlayer = null) -> MapInstance:
+	var key := instance_key(id, p)
+	if not maps.has(key):
+		maps[key] = MapInstance.new(self, Content.map(id))
+	return maps[key]
+
+## Where `maps` keeps map `id` for `p`: the id, or for a solo map the id and their peer.
+func instance_key(id: StringName, p: SimPlayer) -> StringName:
+	if p != null and Content.map(id).solo:
+		return StringName("%s#%d" % [id, p.peer])
+	return id
+
+## Takes the player off their map, dropping a solo map's copy so it starts fresh next time.
+func _off_map(p: SimPlayer) -> void:
+	p.map.remove_player(p)
+	p.map.broadcast(&"ev_player_left", [p.peer])
+	if p.map.def.solo:
+		maps.erase(instance_key(p.map.def.id, p))
 
 ## Sends the player what changed about their character this tick.
 func _flush(p: SimPlayer) -> void:
@@ -130,8 +145,7 @@ func leave(peer: int) -> void:
 		p.character.map_id = _town_for(p)
 	social.left(p)
 	sessions.erase(peer)
-	p.map.remove_player(p)
-	p.map.broadcast(&"ev_player_left", [peer])
+	_off_map(p)
 	save(p)
 	print("%s left" % p.character.name)
 
@@ -140,10 +154,9 @@ func leave(peer: int) -> void:
 func enter_map(p: SimPlayer, id: StringName, x: float) -> void:
 	if p.map:
 		social.changed_map(p)
-		p.map.remove_player(p)
-		p.map.broadcast(&"ev_player_left", [p.peer])
+		_off_map(p)
 	scenes.stop(p)
-	var m := map_instance(id)
+	var m := map_instance(id, p)
 	p.chair = &""
 	p.character.visit(id)
 	m.add_player(p, x)
@@ -202,21 +215,19 @@ func player_of(peer: int) -> SimPlayer:
 
 func on_move(peer: int, at: Vector2, face: int, anim: StringName, climbing: bool) -> void:
 	var p := player_of(peer)
-	if p and social.shops.has(peer):
-		# minding a shop: stay put
-		if p.position.distance_to(at) > 2.0:
-			Net.send(peer, &"ev_place", [p.position.x, p.position.y])
-		return
 	if p and not p.report_move(at, face, anim, climbing) and not p.fainted():
 		Net.send(peer, &"ev_place", [p.position.x, p.position.y])
 	elif p:
 		quests.reached(p)
+		p.map.check_tear(p)
 
 ## `aim` is a Hitbox.Aim: up or down for an aiming attack, else ahead.
 func on_skill(peer: int, skill_id: StringName, at: Vector2, face: int, aim := 0) -> void:
 	var p := player_of(peer)
 	var skill: SkillDef = Content.skills.get(skill_id)
 	if p == null or skill == null or p.fainted() or p.cooldown > COOLDOWN_SLACK:
+		return
+	if p.recharge.get(skill.id, 0) > COOLDOWN_SLACK:
 		return
 	# fighting means no cutscene is playing on their screen, so monsters may hit them again
 	scenes.stop(p)
@@ -225,19 +236,39 @@ func on_skill(peer: int, skill_id: StringName, at: Vector2, face: int, aim := 0)
 	if problem != "":
 		p.map.tell(p, problem, Palette.INFO)
 		return
-	c.spend_mp(skill.mp_at(c.skills.level(skill)))
+	var lvl := c.skills.level(skill)
+	c.spend_mp(skill.mp_at(lvl))
 	p.report_move(at, face, skill.animation, false)
-	p.cooldown = skill.cooldown
+	p.cooldown = CharacterStats.attack_ticks(skill.cooldown, c.stats)
+	if skill.recharge_ticks(lvl) > 0:
+		p.recharge[skill.id] = skill.recharge_ticks(lvl)
 	p.dirty_vitals = true
 	var aimed := skill.aim_for(clampi(aim, 0, Hitbox.Aim.size() - 1) as Hitbox.Aim)
 	if skill.kind == SkillDef.Kind.BUFF:
-		c.skills.add_buff(skill)
-		p.dirty_character = true
+		_cast_buff(p, skill, lvl)
+		if skill.party:
+			for o in social.party_near(p, SkillDef.PARTY_REACH):
+				_cast_buff(o, skill, lvl)
+				if skill.effect:
+					p.map.broadcast(&"ev_effect", [skill.effect.id, o.position.x, o.position.y, o.face, o.peer])
 		p.map.broadcast(&"ev_skill", [p.peer, skill.id, p.position.x, p.position.y, p.face, [], Hitbox.Aim.AHEAD])
 	elif skill.kind == SkillDef.Kind.MOVE:
 		ServerMoves.use(p, skill, aimed)
 	else:
+		# attacking gives a hidden player away
+		if c.skills.end_hiding():
+			p.dirty_character = true
 		p.map.use_skill(p, skill, aimed)
+
+## A buff from `skill` at `lvl` lands on `p` (the caster, or a party member): its heal, then
+## the buff itself.
+func _cast_buff(p: SimPlayer, skill: SkillDef, lvl: int) -> void:
+	var c := p.character
+	if skill.heal_at(lvl) > 0.0:
+		c.health.heal(roundi(c.max_hp() * skill.heal_at(lvl)))
+		p.dirty_vitals = true
+	c.skills.add_buff(skill, lvl)
+	p.dirty_character = true
 
 ## Puts a skill or item on a quickslot (an empty `kind` clears it).
 func on_set_quickslot(peer: int, i: int, kind: StringName, id: StringName) -> void:

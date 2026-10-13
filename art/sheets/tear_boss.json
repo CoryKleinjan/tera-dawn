@@ -1,0 +1,141 @@
+{
+  "source": "art/source/mon_tear_boss.png",
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/tear_boss",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "move1",
+      "move2"
+    ],
+    [
+      ""
+    ],
+    [
+      "move3",
+      "windup",
+      "strike",
+      "special"
+    ],
+    [
+      ""
+    ],
+    [
+      "hurt",
+      "enraged",
+      "defeated1",
+      "defeated2"
+    ]
+  ],
+  "sets": {
+    "tear_boss": {
+      "frames": {
+        "idle1": "tear_boss:idle1",
+        "idle2": "tear_boss:idle2",
+        "move1": "tear_boss:move1",
+        "move2": "tear_boss:move2",
+        "move3": "tear_boss:move3",
+        "windup": "tear_boss:windup",
+        "strike": "tear_boss:strike",
+        "special": "tear_boss:special",
+        "hurt": "tear_boss:hurt",
+        "enraged": "tear_boss:enraged",
+        "defeated1": "tear_boss:defeated1",
+        "defeated2": "tear_boss:defeated2"
+      },
+      "anchor": "mass",
+      "baseline": "bottom",
+      "out": "assets/sprites/monsters/tear_boss.png",
+      "sprite_frames": "assets/animations/tear_boss.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "move1",
+            "move2",
+            "move3",
+            "move2"
+          ],
+          "fps": 6
+        },
+        "attack": {
+          "frames": [
+            "windup",
+            "strike",
+            "special"
+          ],
+          "fps": 3,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated1",
+            "defeated2"
+          ],
+          "fps": 2,
+          "loop": false
+        }
+      }
+    }
+  },
+  "overrides": {},
+  "inset": 2,
+  "scale": 0.2726,
+  "detail": 3.66,
+  "grid": {
+    "rows": [
+      33,
+      344,
+      376,
+      687,
+      720,
+      1030
+    ],
+    "cols": [
+      [
+        0,
+        376,
+        767,
+        1159,
+        1536
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        376,
+        767,
+        1159,
+        1536
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        376,
+        767,
+        1159,
+        1536
+      ]
+    ]
+  }
+}

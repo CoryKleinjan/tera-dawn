@@ -67,9 +67,9 @@ func _check_skill_rules() -> void:
 	c.skills.tick_buffs(step.duration_ticks(1))
 	_check(c.skills.buffs.is_empty() and c.stats.speed == speed, "and wears off after its time")
 	c.skills.points = 3
-	var wind: SkillDef = Content.skill(&"second_wind")
-	c.skills.learn(wind)
-	_check(c.skills.regen_bonus().x == wind.regen_hp, "Second Wind adds HP recovery")
+	var aid: SkillDef = Content.skill(&"first_aid")
+	c.skills.learn(aid)
+	_check(c.skills.level(aid) == 1 and aid.heal_at(1) > 0.0 and aid.recharge_ticks(1) > 0, "First Aid heals, then takes a while to use again")
 	var back := Character.new()
 	back.load_dict(c.to_dict())
 	_check(back.skills.learned == c.skills.learned and back.skills.points == c.skills.points and back.quickslots == c.quickslots, "skills, Skill Points and quickslots save")
@@ -95,6 +95,8 @@ func _check_jobs() -> void:
 	c.level = 10
 	_check(c.advance(warrior).contains("STR"), "advancing to Warrior needs 35 STR")
 	c.base.strength = 35
+	_check(c.advance(warrior) == "Pass the Job Test first.", "advancing to Warrior needs the Job Test")
+	c.quests.done[warrior.advance_quest.id] = true
 	var hp := c.max_hp()
 	_check(c.advance(warrior) == "" and c.job == warrior, "a level 10 Beginner with 35 STR becomes a Warrior")
 	_check(c.gear.weapon() == Content.item(&"bronze_sword") and c.max_hp() >= hp, "the Warrior gets a Bronze Sword and wears it")

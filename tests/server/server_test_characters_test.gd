@@ -43,6 +43,8 @@ func test_the_gear_is_the_best_the_job_can_wear() -> void:
 				worn = c.equipment.at(&"weapon")
 				if worn.equip_def().weapon_kind != e.weapon_kind:
 					continue
+			if e.slot == EquipDef.Slot.SHIELD and worn and worn.equip_def().offhand_kind != e.offhand_kind:
+				continue
 			check(worn != null and worn.equip_def().required_level >= e.required_level,
 				"%s wears nothing below the %s's level" % [job.id, e.id])
 

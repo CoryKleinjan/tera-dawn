@@ -15,11 +15,10 @@ extends Resource
 @export var family: StringName
 ## The job's colour, for the places that show jobs (the hero now wears his job's gear instead).
 @export var tint := Color.WHITE
-## The stat that drives damage (STR for warriors) and the one that helps a little.
-@export_enum("strength", "dexterity", "intelligence", "luck") var primary_stat := "strength"
-@export_enum("strength", "dexterity", "intelligence", "luck") var secondary_stat := "dexterity"
-## Hit with whichever of STR, DEX, INT or LUK is highest instead of `primary_stat`, so any
-## build works (the Beginner, who hasn't picked a path yet).
+## The one stat that drives the job's damage (STR for warriors). No other stat adds to it.
+@export_enum("strength", "dexterity", "intelligence", "luck", "charisma") var primary_stat := "strength"
+## Hit with whichever base stat is highest instead of `primary_stat`, so any build works
+## (the Beginner, who hasn't picked a path yet).
 @export var uses_best_stat := false
 ## The lowest hit as a fraction of the highest (MapleStory's mastery).
 @export_range(0.1, 0.95) var mastery := 0.6
@@ -40,6 +39,9 @@ extends Resource
 @export var advance_level := 10
 ## Base stats (STR, DEX, INT, LUK, before gear) needed to advance.
 @export var advance_requirements: StatBlock
+## A quest to hand in first (the job tutor's test). Handing it in advances you right away
+## when nothing else stands in the way (ServerQuests.on_quest_complete).
+@export var advance_quest: QuestDef
 ## Items handed over when advancing (each gives `min_amount`): the job's basic weapon (the
 ## first weapon here is worn right away, see Character.advance), and potions.
 ## Better weapons only drop.
@@ -59,20 +61,15 @@ extends Resource
 ## gear; the creator lets them pick one of each kind (see NewCharacter).
 @export var creator_gear: Array[EquipDef] = []
 
-## The stats behind weapon damage for these `total` stats: [main, helper]. Usually
-## `primary_stat` and `secondary_stat`; with `uses_best_stat` the main one is the highest
-## (`primary_stat` wins ties) and the helper is `secondary_stat`, or `primary_stat` when
-## the highest is the secondary one.
-func damage_stats(total: StatBlock) -> Array[StringName]:
+## The stat behind weapon damage for these `total` stats: `primary_stat`, or with
+## `uses_best_stat` the highest base stat (`primary_stat` wins ties).
+func damage_stat(total: StatBlock) -> StringName:
 	var main := StringName(primary_stat)
-	var helper := StringName(secondary_stat)
 	if uses_best_stat:
 		for stat in StatBlock.BASE:
 			if total.value(stat) > total.value(main):
 				main = stat
-		if helper == main:
-			helper = StringName(primary_stat)
-	return [main, helper]
+	return main
 
 ## What advancing takes, as readable lines ("Level 10", "35 STR").
 func requirement_lines() -> PackedStringArray:

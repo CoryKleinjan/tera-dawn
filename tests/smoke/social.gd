@@ -1,7 +1,7 @@
 extends SmokeArea
-## Playing with others: chat, parties, buddies, trading, fame, guilds and player shops.
+## Playing with others: chat, parties, buddies, trading, fame and guilds.
 
-## Chat, parties, buddies, trading, guilds, fame and player shops, with a second
+## Chat, parties, buddies, trading, guilds and fame, with a second
 ## character played straight on the server (it has no game of its own).
 func check() -> void:
 	var social := Net.server.social
@@ -118,33 +118,6 @@ func check() -> void:
 	Net.ask(&"req_chat", ["/g hi guild"])
 	await _ticks(2)
 	_check(str(chat.lines[-1]["text"]) == "[Guild] %s: hi guild" % ch.name, "/g talks to the guild")
-	# a player shop in the free market
-	Net.server.enter_map(_me(), &"dawnharbor", 300)
-	await _ticks(3)
-	var market: PortalDef = Content.map(&"dawnharbor").portals.filter(func(p: PortalDef) -> bool: return p.target_map == &"free_market")[0]
-	_teleport(Vector2(market.x, world.map.ground_y))
-	await _ticks(2)
-	await _tap("move_up")
-	await _ticks(4)
-	_check(world.map.id == &"free_market", "Dawnharbor's portal leads to the Free Market")
-	Net.server.enter_map(ally, &"free_market", 900)
-	ch.inventory.add(Content.item(&"petal_wing"), 4)
-	_me().dirty_character = true
-	await _ticks(3)
-	var stall: TDPlayerShopWindow = world.hud.windows["player_shop"]
-	stall.setup()
-	stall.add_entry(ItemDef.Tab.ETC, Game.me.inventory.find(Content.item(&"petal_wing")), 120)
-	stall.open_shop()
-	await _ticks(3)
-	_check(social.shops.has(_me().peer) and world.hud.selling() and Game.me.inventory.count_of(Content.item(&"petal_wing")) == 0, "opening a shop puts your goods on display")
-	await _ticks(TDServer.SNAPSHOT_EVERY)
-	_check(world.player_infos.get(_me().peer, [""])[-1] == stall.shop_title, "others see the shop sign")
-	var before := ch.shards
-	social.on_shop_view(ally.peer, _me().peer)
-	social.on_shop_buy(ally.peer, _me().peer, 0, &"petal_wing")
-	await _ticks(3)
-	_check(ally.character.inventory.count_of(Content.item(&"petal_wing")) == 4 and ch.shards == before + 120, "buying pays the owner")
-	_check(not social.shops.has(_me().peer) and not world.hud.selling(), "a sold-out shop closes")
 	# leaving takes them out of the party
 	social.left(ally)
 	Net.server.sessions.erase(ally.peer)

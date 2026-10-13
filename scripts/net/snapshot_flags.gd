@@ -20,3 +20,5 @@ const MOB_ENRAGED := 128
 const PLAYER_FAINTED := 1
 const PLAYER_BLINK := 2
 const PLAYER_CLIMBING := 4
+## Hidden by a buff (Dark Sight): others see a faint outline.
+const PLAYER_HIDDEN := 8

@@ -10,77 +10,80 @@ func before_each() -> void:
 func after_each() -> void:
 	fx.cleanup()
 
-func _job(primary: String, secondary: String, mastery := 0.5) -> JobDef:
+func _job(primary: String, mastery := 0.5) -> JobDef:
 	var j := fx.job()
 	j.primary_stat = primary
-	j.secondary_stat = secondary
 	j.mastery = mastery
 	return j
 
 func test_damage_range_formula() -> void:
-	# (20 × 4 + 10) × 10 / 100 × 2 = 18, lowest 18 × 0.5 = 9
+	# 20 × 3.6 × 10 / 100 × 2 = 14.4 -> 14, lowest 14 × 0.5 = 7
 	var s := UnitHelpers.stats({"strength": 20, "dexterity": 10, "attack": 10})
-	check_eq(CharacterStats.damage_range(_job("strength", "dexterity"), s), Vector2i(9, 18), "range")
+	check_eq(CharacterStats.damage_range(_job("strength"), s), Vector2i(7, 14), "range")
 
-func test_damage_range_uses_the_jobs_own_stats() -> void:
-	var s := UnitHelpers.stats({"strength": 100, "dexterity": 10, "luck": 30, "attack": 10})
-	# thief-like: (30 × 4 + 10) × 10 / 100 × 2 = 26
-	check_eq(CharacterStats.damage_range(_job("luck", "dexterity"), s).y, 26, "luck main")
-	# warrior-like: (100 × 4 + 10) × 0.2 = 82
-	check_eq(CharacterStats.damage_range(_job("strength", "dexterity"), s).y, 82, "strength main")
-	# archer-like: (10 × 4 + 100) × 0.2 = 28
-	check_eq(CharacterStats.damage_range(_job("dexterity", "strength"), s).y, 28, "dex main")
+func test_damage_range_uses_only_the_jobs_own_stat() -> void:
+	var s := UnitHelpers.stats({"strength": 100, "dexterity": 10, "luck": 30, "charisma": 50, "attack": 10})
+	# 30 × 3.6 × 10 / 100 × 2 = 21.6 -> 22
+	check_eq(CharacterStats.damage_range(_job("luck"), s).y, 22, "luck")
+	check_eq(CharacterStats.damage_range(_job("strength"), s).y, 72, "strength")
+	check_eq(CharacterStats.damage_range(_job("dexterity"), s).y, 7, "dex")
+	check_eq(CharacterStats.damage_range(_job("charisma"), s).y, 36, "charisma")
+	var more_other := UnitHelpers.stats({"strength": 100, "dexterity": 90, "attack": 10})
+	check_eq(CharacterStats.damage_range(_job("strength"), more_other).y, 72, "no other stat adds to it")
 
 func test_a_job_that_uses_its_best_stat_hits_with_the_highest() -> void:
-	var j := _job("strength", "dexterity")
+	var j := _job("strength")
 	j.uses_best_stat = true
 	var s := UnitHelpers.stats({"strength": 10, "dexterity": 15, "intelligence": 40, "attack": 10})
-	check_eq(j.damage_stats(s), [&"intelligence", &"dexterity"], "INT is highest, DEX still helps")
-	# (40 × 4 + 15) × 10 / 100 × 2 = 35
-	check_eq(CharacterStats.damage_range(j, s).y, 35, "INT main")
+	check_eq(j.damage_stat(s), &"intelligence", "INT is highest")
+	check_eq(CharacterStats.damage_range(j, s).y, 29, "INT main: 40 × 3.6 × 0.2")
 	s.intelligence = 4
-	check_eq(j.damage_stats(s), [&"dexterity", &"strength"], "DEX highest: STR helps instead")
+	check_eq(j.damage_stat(s), &"dexterity", "DEX highest")
 	s.strength = 15
-	check_eq(j.damage_stats(s), [&"strength", &"dexterity"], "a tie goes to the primary stat")
+	check_eq(j.damage_stat(s), &"strength", "a tie goes to the primary stat")
 	j.uses_best_stat = false
 	s.luck = 99
-	check_eq(j.damage_stats(s), [&"strength", &"dexterity"], "other jobs keep their own stats")
+	check_eq(j.damage_stat(s), &"strength", "other jobs keep their own stat")
 
-func test_more_main_stat_means_more_damage_than_more_secondary() -> void:
-	var j := _job("strength", "dexterity")
-	var base := CharacterStats.damage_range(j, UnitHelpers.stats({"strength": 20, "dexterity": 20, "attack": 20})).y
-	var more_main := CharacterStats.damage_range(j, UnitHelpers.stats({"strength": 30, "dexterity": 20, "attack": 20})).y
-	var more_second := CharacterStats.damage_range(j, UnitHelpers.stats({"strength": 20, "dexterity": 30, "attack": 20})).y
-	check(more_main > more_second, "main stat counts four times")
-	check(more_second > base, "secondary still helps")
+func test_what_each_stat_gives_as_it_grows() -> void:
+	var j := _job("strength")
+	var none := StatBlock.new()
+	var s := UnitHelpers.stats({"strength": 50, "intelligence": 40, "dexterity": 30, "luck": 20, "charisma": 100})
+	check_eq(CharacterStats.max_hp(j, 10, s) - CharacterStats.max_hp(j, 10, none), 50, "STR adds Max HP")
+	check_eq(CharacterStats.max_mp(j, 10, s) - CharacterStats.max_mp(j, 10, none), 40, "INT adds Max MP")
+	check_eq(CharacterStats.accuracy(s), 24, "DEX adds Accuracy")
+	check_eq(CharacterStats.avoid(s), 15, "LUK adds Avoidability")
+	check(is_equal_approx(CharacterStats.shop_discount(s), 0.1), "CHA takes 10% off at 100")
+	check(is_equal_approx(CharacterStats.shop_discount(UnitHelpers.stats({"charisma": 900})), CharacterStats.MAX_DISCOUNT), "the discount is capped")
+	check(is_equal_approx(CharacterStats.shard_bonus(s), 1.2), "CHA finds 20% more Dawnshards at 100")
 
 func test_damage_range_never_below_one() -> void:
-	var j := _job("strength", "dexterity", 0.1)
+	var j := _job("strength", 0.1)
 	check_eq(CharacterStats.damage_range(j, StatBlock.new()), Vector2i(1, 1), "no stats, no attack")
 	check_eq(CharacterStats.damage_range(j, UnitHelpers.stats({"strength": 1, "attack": 1})), Vector2i(1, 1), "tiny")
 
 func test_mastery_sets_the_low_end() -> void:
-	var s := UnitHelpers.stats({"strength": 50, "attack": 50})  # top = 200 × 50 / 100 × 2 = 200
-	check_eq(CharacterStats.damage_range(_job("strength", "dexterity", 0.6), s), Vector2i(120, 200), "60%")
-	check_eq(CharacterStats.damage_range(_job("strength", "dexterity", 0.95), s), Vector2i(190, 200), "95%")
+	var s := UnitHelpers.stats({"strength": 50, "attack": 50})  # top = 50 × 3.6 × 50 / 100 × 2 = 180
+	check_eq(CharacterStats.damage_range(_job("strength", 0.6), s), Vector2i(108, 180), "60%")
+	check_eq(CharacterStats.damage_range(_job("strength", 0.95), s), Vector2i(171, 180), "95%")
 
 func test_magic_range_formula() -> void:
 	# M = 40 + 20 = 60: 60² / 120 + 60 = 90
 	var s := UnitHelpers.stats({"intelligence": 40, "magic_attack": 20})
 	check_eq(CharacterStats.magic_attack(s), 60, "magic attack includes INT")
-	check_eq(CharacterStats.magic_range(_job("intelligence", "luck", 0.5), s), Vector2i(45, 90), "range")
-	check_eq(CharacterStats.magic_range(_job("intelligence", "luck"), StatBlock.new()), Vector2i(1, 1), "floor of one")
+	check_eq(CharacterStats.magic_range(_job("intelligence", 0.5), s), Vector2i(45, 90), "range")
+	check_eq(CharacterStats.magic_range(_job("intelligence"), StatBlock.new()), Vector2i(1, 1), "floor of one")
 
 func test_magic_range_ignores_weapon_attack() -> void:
-	var j := _job("intelligence", "luck")
+	var j := _job("intelligence")
 	var a := CharacterStats.magic_range(j, UnitHelpers.stats({"intelligence": 40}))
 	var b := CharacterStats.magic_range(j, UnitHelpers.stats({"intelligence": 40, "attack": 500, "strength": 99}))
 	check_eq(a, b, "only INT and Magic Attack")
 
 func test_accuracy_and_avoid() -> void:
 	var s := UnitHelpers.stats({"dexterity": 10, "luck": 4, "accuracy": 3, "avoid": 2})
-	check_eq(CharacterStats.accuracy(s), 3 + 8 + 2, "accuracy = acc + 0.8 DEX + 0.5 LUK")
-	check_eq(CharacterStats.avoid(s), 2 + 3 + 2, "avoid = avoid + 0.25 DEX + 0.5 LUK (rounded)")
+	check_eq(CharacterStats.accuracy(s), 3 + 8, "accuracy = acc + 0.8 DEX")
+	check_eq(CharacterStats.avoid(s), 2 + 3, "avoid = avoid + 0.75 LUK")
 	check_eq(CharacterStats.accuracy(StatBlock.new()), 0, "zero")
 
 func test_crit_rate() -> void:
@@ -127,3 +130,13 @@ func test_stat_block_rolled_and_format() -> void:
 	check_eq(s.attack, 5, "plus doesn't change the original")
 	s.add(null)
 	check_eq(s.attack, 5, "adding null is a no-op")
+
+func test_charisma_talks_shop_prices_down() -> void:
+	var line := ShopEntry.new()
+	line.item = fx.use()
+	line.price = 1000
+	var c := fx.character(null, {"charisma": 50})
+	check_eq(line.cost_for(c), 950, "5% off at 50 CHA")
+	c.base.charisma = 0
+	c.recalc()
+	check_eq(line.cost_for(c), 1000, "full price with none")

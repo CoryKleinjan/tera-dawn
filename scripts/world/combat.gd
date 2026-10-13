@@ -16,6 +16,7 @@ static func player_hit(skill: SkillDef, target: MonsterDef, ch: Character) -> Di
 	var crit := randf() < CharacterStats.crit_rate(ch.stats)
 	var spread := ch.magic_range() if skill.magic else ch.damage_range()
 	var dmg := roundi(randi_range(spread.x, spread.y) * multiplier
+		* CharacterStats.damage_bonus(ch.stats, skill.is_ranged())
 		* (CRIT_MULTIPLIER if crit else 1.0))
 	# higher-level monsters shrug off some damage
 	dmg = maxi(1, dmg - maxi(0, target.level - ch.level) * 2)

@@ -2,34 +2,35 @@
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="2_stat_block"]
-[ext_resource type="Resource" path="res://data/effects/iron_body_aura.tres" id="3_heal"]
-[ext_resource type="Texture2D" path="res://assets/sprites/skills/iron_body.png" id="4_iron_body"]
-
-[sub_resource type="Resource" id="Resource_2"]
-script = ExtResource("2_stat_block")
-defense = 3
+[ext_resource type="Resource" path="res://data/effects/iron_body_aura.tres" id="e_iron_body_aura"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/iron_body.png" id="i_iron_body"]
 
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("2_stat_block")
 defense = 5
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("2_stat_block")
+defense = 4
 
 [resource]
 script = ExtResource("1_skill_def")
 id = &"iron_body"
 display_name = "Iron Body"
 job = &"warrior"
-max_level = 20
+max_level = 8
 kind = 1
-description = "Brace yourself: Weapon Defense goes up for a while."
+description = "Brace yourself: Weapon Defense rises and nothing knocks you back for a while."
 mp_cost = 8
-mp_cost_per_level = 0.5
+mp_cost_per_level = 0.57143
 cooldown = 30
 action_ticks = 12
+duration = 40.0
+duration_per_level = 10.28571
+animation = &"cast"
+steady = true
+flash = Color(0.62, 0.74, 1.0, 1)
+effect = ExtResource("e_iron_body_aura")
+icon = ExtResource("i_iron_body")
 stats = SubResource("Resource_1")
 stats_per_level = SubResource("Resource_2")
-duration = 40.0
-duration_per_level = 8.0
-animation = &"cast"
-effect = ExtResource("3_heal")
-icon = ExtResource("4_iron_body")
-flash = Color(0.62, 0.74, 1.0, 1)

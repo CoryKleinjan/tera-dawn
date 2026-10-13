@@ -76,6 +76,12 @@ func use_skill(look: Dictionary, skill: SkillDef) -> StringName:
 	_swing = true
 	return anim
 
+## How see-through he is drawn: below 1 while hidden by a buff (Dark Sight, HIDDEN_VEIL).
+var veil := 1.0
+## Opacity of a hidden hero: your own, and someone else's faint outline.
+const HIDDEN_VEIL := 0.45
+const HIDDEN_VEIL_OTHERS := 0.2
+
 ## Draws the hero this frame: between his last two ticks (TDWorld.drawn), raised onto his
 ## chair, playing `anim` at `speed` (see stride_speed) and facing `face` (always the same way
 ## on a rope or ladder, while `climbing`). `blinking` hides him every other few ticks of
@@ -87,7 +93,7 @@ func draw(anim: StringName, speed: float, face: int, climbing: bool, blinking: b
 	rig.set_speed(speed)
 	_swing = false
 	rig.face(1 if climbing else face)
-	rig.set_opacity(0.0 if blinking and clock % BLINK_TICKS < BLINK_TICKS / 2 else 1.0)
+	rig.set_opacity((0.0 if blinking and clock % BLINK_TICKS < BLINK_TICKS / 2 else 1.0) * veil)
 	companion.set_chair(chair)
 	companion.set_pet(pet, _owner.position)
 	companion.follow(at, face, _z, _world.layout.ground_below(_owner.position))
