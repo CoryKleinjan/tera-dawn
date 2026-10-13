@@ -20,7 +20,8 @@ func _rich() -> Character:
 	c.shards = 9876
 	c.ap.points = 4
 	c.ap.reset_used = true
-	c.skills.points = 2
+	# every Skill Point Lv 12 earned (11 levels × 3) less the 5 spent below
+	c.skills.points = 28
 	c.map_id = Content.maps.keys()[0]
 	var sword := fx.equip(&"t_sword", EquipDef.Slot.WEAPON, {"attack": 20}, 3)
 	var worn := ItemStack.exact(sword)
@@ -35,8 +36,10 @@ func _rich() -> Character:
 	c.storage.add(fx.etc(), 9)
 	var passive := fx.skill(&"t_passive", SkillDef.Kind.PASSIVE)
 	passive.stats = UnitHelpers.stats({"defense": 7})
+	passive.max_level = 20
 	var buff := fx.skill(&"t_buff", SkillDef.Kind.BUFF)
 	buff.stats = UnitHelpers.stats({"attack": 4})
+	buff.max_level = 20
 	buff.duration = 30.0
 	c.skills.learned[passive.id] = 3
 	c.skills.learned[buff.id] = 2
@@ -82,7 +85,7 @@ func test_round_trip_basics() -> void:
 	check_eq(b.shards, 9876, "shards")
 	check_eq(b.ap.points, 4, "AP")
 	check(b.ap.reset_used, "free AP reset used")
-	check_eq(b.skills.points, 2, "SP")
+	check_eq(b.skills.points, 28, "SP")
 	check_eq(b.map_id, c.map_id, "map")
 	check(b.job == c.job, "job")
 	check_eq(b.base.to_dict(), c.base.to_dict(), "base stats")
@@ -197,6 +200,7 @@ func test_save_from_before_stats_hands_out_ap() -> void:
 func test_save_from_before_skills_hands_out_sp_and_potion_keys() -> void:
 	var c := fx.character()
 	c.job.starting_quickslots = [fx.use(&"t_red"), fx.use(&"t_blue")]
+	fx.skill(&"t_cut")
 	c.load_dict({"name": "Old", "job": "t_job", "level": 4, "base": {"strength": 10}, "ap": 0})
 	check_eq(c.skills.points, 9, "3 levels × 3 SP")
 	check_eq(c.quickslots[Character.QUICKSLOTS - 2], [&"item", &"t_red"], "first potion key")

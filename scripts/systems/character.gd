@@ -176,6 +176,7 @@ func gain_xp(n: int) -> int:
 	if gained > 0:
 		ap.points += gained * job.ap_per_level
 		skills.points += gained * job.sp_per_level
+		skills.keep_in_room()
 		recalc()
 		refill()
 	return gained
@@ -310,13 +311,16 @@ func advance_problem(next: JobDef) -> String:
 		return "Make room in your %s inventory first." % ItemDef.TAB_NAMES[full]
 	return ""
 
-## Becomes `next` (see advance_problem) and receives its gifts and SP. Returns why not, or "".
+## Becomes `next` (see advance_problem) and receives its gifts and SP (as many as taking it at
+## its advance level would have given). Returns why not, or "".
 func advance(next: JobDef) -> String:
 	var problem := advance_problem(next)
 	if problem != "":
 		return problem
 	job = next
-	skills.points += next.advance_sp
+	# a job taken late still pays its Skill Points for every level since it opened
+	skills.points += next.advance_sp + (level - next.advance_level) * next.sp_per_level
+	skills.keep_in_room()
 	for g in next.advance_gifts:
 		if g.item is EquipDef:
 			inventory.add_stack(ItemStack.unrolled(g.item, 1))
