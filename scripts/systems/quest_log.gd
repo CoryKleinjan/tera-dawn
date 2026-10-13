@@ -85,6 +85,22 @@ func _to_do_on(q: QuestDef, c: Character, m: MapDef) -> bool:
 func record_kill(monster: MonsterDef) -> Array[QuestDef]:
 	return _bump(func(o: QuestObjective) -> bool: return o.kind == QuestObjective.Kind.KILL and o.monster == monster)
 
+## Counts standing on platform `platform` of map `map_id`. Returns the quests it moved on.
+func record_reach(map_id: StringName, platform: int) -> Array[QuestDef]:
+	return _bump(func(o: QuestObjective) -> bool: return o.kind == QuestObjective.Kind.REACH and o.map == map_id and o.platform == platform)
+
+## Whether a quest in progress still wants `c` to reach a spot on map `map_id`.
+func wants_reach(map_id: StringName) -> bool:
+	for id in active:
+		var q: QuestDef = Content.quests.get(id)
+		if q == null:
+			continue
+		for i in q.objectives.size():
+			var o := q.objectives[i]
+			if o.kind == QuestObjective.Kind.REACH and o.map == map_id and active[id][i] < o.count:
+				return true
+	return false
+
 ## Counts arriving on a map. Returns the quests it moved on.
 func record_visit(map_id: StringName) -> Array[QuestDef]:
 	return _bump(func(o: QuestObjective) -> bool: return o.kind == QuestObjective.Kind.VISIT and o.map == map_id)
@@ -126,7 +142,7 @@ func complete(q: QuestDef, c: Character) -> String:
 	if full >= 0:
 		return "Make room in your %s inventory first." % ItemDef.TAB_NAMES[full]
 	for o in q.objectives:
-		if o.kind == QuestObjective.Kind.COLLECT:
+		if o.kind == QuestObjective.Kind.COLLECT and not o.keep:
 			c.inventory.remove(o.item, o.count)
 	active.erase(q.id)
 	done[q.id] = int(done.get(q.id, 0)) + 1

@@ -30,6 +30,17 @@ extends Resource
 ## Cutscenes that play when the quest is taken and when it's handed in (see CutsceneDef).
 @export var start_scene: CutsceneDef
 @export var finish_scene: CutsceneDef
+## Key hints for a tutorial, shown at the bottom of the screen: `offer_hint` while the quest
+## can be taken or handed in and its NPC is on your map, `hint` while it's in progress. Write
+## keys as {action} (e.g. {jump}); they show the player's own key (TDHud.quest_hint).
+@export var offer_hint := ""
+@export var hint := ""
+## An item the giver tosses to your feet when you take the quest (picked up for a COLLECT
+## objective). Empty: none.
+@export var gift_on_accept: ItemDef
+## Taken by itself, without asking, the moment the quest it requires is handed in: the next
+## step of a tutorial. Its start_scene usually says the offer.
+@export var auto_start := false
 
 @export_group("Objectives")
 @export var objectives: Array[QuestObjective] = []

@@ -70,8 +70,13 @@ func test_quest_objectives_point_at_real_things() -> void:
 							check(spawned.has(o.drop_from.id), "%s.drop_from %s lives on no map" % [what, o.drop_from.id])
 				QuestObjective.Kind.VISIT:
 					check(Content.maps.has(o.map), "%s.map %s is not a map" % [what, o.map])
+				QuestObjective.Kind.REACH:
+					if check(Content.maps.has(o.map), "%s.map %s is not a map" % [what, o.map]):
+						var m := Content.map(o.map)
+						check(o.platform > 0 and o.platform < m.platforms.size() + 1, "%s.platform %d is not a ledge on %s" % [what, o.platform, o.map])
+					check(o.spot_name != "", "%s.spot_name is empty" % what)
 				_:
-					fail("%s.kind %d is not KILL, COLLECT or VISIT" % [what, o.kind])
+					fail("%s.kind %d is not KILL, COLLECT, VISIT or REACH" % [what, o.kind])
 
 func test_quest_items_only_drop_for_their_quest() -> void:
 	# a quest_item that a monster drops for everyone would fill bags with unsellable junk
@@ -169,7 +174,8 @@ func test_maps_have_a_biome_region_and_town() -> void:
 		check(Content.regions.has(m.region), "%s: region %s is not a region" % [Scan.where(m), m.region])
 		var home: MapDef = Content.maps.get(m.return_town())
 		if check(home != null, "%s: return_map %s is not a map" % [Scan.where(m), m.return_town()]):
-			check(home.town, "%s: return_map %s is not a town" % [Scan.where(m), home.id])
+			# the tutorial beach wakes you on the beach: its way to town opens only at its end
+			check(home.town or m.id == Character.NEW_MAP, "%s: return_map %s is not a town" % [Scan.where(m), home.id])
 		if not m.town:
 			check(m.return_map != &"" or m.return_town() != m.id, "%s: is not a town and has no return_map" % Scan.where(m))
 

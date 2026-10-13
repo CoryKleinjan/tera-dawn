@@ -21,15 +21,18 @@ var _address := ""
 func _init(owner: Node) -> void:
 	test = owner
 
-## Starts single player as `char_name` and waits until the server has put them on the
-## starting map. Monsters can't hurt the player.
-func start(char_name := "Uitester") -> void:
+## Starts single player as `char_name` and waits until the server has put them in the first
+## town (Character.START_MAP; a new character wakes on the tutorial beach, whose opening
+## cutscene this skips unseen). Monsters can't hurt the player. `tutorial` stays on the beach.
+func start(char_name := "Uitester", tutorial := false) -> void:
 	await open_title()
 	Net.play_single()
 	Net.create_character(char_name, NewCharacter.new())
 	Net.play(char_name)
 	await ticks(3)
 	player().inv = 100000000
+	if not tutorial:
+		await enter_map(Character.START_MAP, Content.map(Character.START_MAP).start_x)
 
 ## Opens the game on its title screen, not playing yet.
 func open_title() -> void:

@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="QuestDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="1_50sa0"]
+[ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="3_filgh"]
+[ext_resource type="Resource" path="res://data/cutscenes/daybreak_race.tres" id="4_ksdnq"]
+
+[sub_resource type="Resource" id="Resource_ji6rw"]
+script = ExtResource("1_50sa0")
+kind = 3
+map = &"daybreak_shore"
+platform = 1
+spot_name = "the big rock"
+
+[resource]
+script = ExtResource("3_filgh")
+id = &"tut1_race"
+title = "Race to the Big Rock"
+giver = &"girl_on_beach"
+offer_text = "You're all wet. Here, hold my hands. Huh, they feel warm today.
+
+Do you have a name? It's okay if you forgot. Grandpa says the sea makes people forget things.
+
+You can stay. But you have to play with me first. That's the rule. Race you to the big rock! Ready... go!"
+progress_text = "Race you to the big rock! Ready... go!"
+complete_text = "I win! You're slow. That's okay, you just woke up."
+start_scene = ExtResource("4_ksdnq")
+offer_hint = "Walk to her and press {move_up} to talk"
+hint = "{move_left} {move_right} to move, {jump} to jump"
+objectives = Array[ExtResource("1_50sa0")]([SubResource("Resource_ji6rw")])
+reward_xp = 5

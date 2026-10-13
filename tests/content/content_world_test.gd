@@ -197,7 +197,7 @@ func test_every_portal_has_a_way_back() -> void:
 		for i in m.portals.size():
 			var p := m.portals[i]
 			var there: MapDef = Content.maps.get(p.target_map) if p else null
-			if there == null:
+			if there == null or p.one_way:
 				continue
 			check(there.portals.any(func(b: PortalDef) -> bool: return b.target_map == m.id),
 				"%s: portals[%d] leads to %s, which has no portal back" % [Scan.where(m), i, p.target_map])
@@ -259,6 +259,8 @@ func _reachable(from: StringName) -> Dictionary:
 func test_every_map_is_reachable_from_the_start() -> void:
 	check(Content.maps.has(Character.START_MAP), "Character.START_MAP %s is not a map" % Character.START_MAP)
 	var seen := _reachable(Character.START_MAP)
+	# the tutorial beach is where new characters start, and nothing leads back to it
+	seen.merge(_reachable(Character.NEW_MAP))
 	for id in Content.maps:
 		check(seen.has(id), "%s: can't be reached from %s by portals or travel" % [Scan.where(Content.maps[id]), Character.START_MAP])
 
@@ -325,6 +327,8 @@ func _sources() -> Dictionary:
 		for r in q.reward_items:
 			if r and r.item:
 				out[r.item.id] = "reward of %s" % q.id
+		if q.gift_on_accept:
+			out[q.gift_on_accept.id] = "gift of %s" % q.id
 		for o in q.objectives:
 			if o and o.kind == QuestObjective.Kind.COLLECT and o.drop_from and o.item and spawned.has(o.drop_from.id):
 				out[o.item.id] = "quest drop from %s" % o.drop_from.id

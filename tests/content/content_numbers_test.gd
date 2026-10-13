@@ -151,8 +151,8 @@ func test_quests_have_sane_levels_counts_and_rewards() -> void:
 				check(o.drop_chance > 0.0 and o.drop_chance <= 1.0, "%s: objectives[%d].drop_chance is %s" % [w, i, o.drop_chance])
 				if o.item:
 					check(o.count <= o.item.stack_size() * Inventory.SLOTS, "%s: objectives[%d] wants %d %s, more than a bag holds" % [w, i, o.count, o.item.id])
-			if o.kind == QuestObjective.Kind.VISIT:
-				check_eq(o.count, 1, "%s: objectives[%d].count of a VISIT" % [w, i])
+			if o.kind == QuestObjective.Kind.VISIT or o.kind == QuestObjective.Kind.REACH:
+				check_eq(o.count, 1, "%s: objectives[%d].count of a VISIT or REACH" % [w, i])
 
 func test_quests_ask_for_monsters_near_their_level() -> void:
 	for q: QuestDef in Content.quests.values():

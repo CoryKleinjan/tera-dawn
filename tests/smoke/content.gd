@@ -112,7 +112,7 @@ func _check_world_graph() -> void:
 			var there: MapDef = Content.maps.get(p.target_map)
 			if there == null:
 				problems.append("%s portal to missing %s" % [id, p.target_map])
-			elif not there.portals.any(func(b: PortalDef) -> bool: return b.target_map == id):
+			elif not p.one_way and not there.portals.any(func(b: PortalDef) -> bool: return b.target_map == id):
 				problems.append("%s -> %s has no way back" % [id, p.target_map])
 			elif p.target_x < 0 or p.target_x > there.width or there.portals.any(func(b: PortalDef) -> bool: return absf(b.x - p.target_x) < 34):
 				problems.append("%s -> %s lands on a portal or off the map" % [id, p.target_map])
@@ -121,11 +121,12 @@ func _check_world_graph() -> void:
 		for s in m.spawns:
 			if s.platform > m.platforms.size():
 				problems.append("%s spawns on a missing platform" % id)
-		if not m.town and m.return_town() == id:
+		if not m.town and m.return_town() == id and id != Character.NEW_MAP:
 			problems.append("%s has no town" % id)
 	# walk the portals and travel routes from the meadow
-	var seen := {&"meadow": true}
-	var todo: Array[StringName] = [&"meadow"]
+	# (and from the tutorial beach, where new characters start and nothing leads back to)
+	var seen := {&"meadow": true, Character.NEW_MAP: true}
+	var todo: Array[StringName] = [&"meadow", Character.NEW_MAP]
 	while not todo.is_empty():
 		var id: StringName = todo.pop_back()
 		var nexts: Array[StringName] = Content.maps[id].neighbours()
@@ -147,7 +148,7 @@ func _check_world_graph() -> void:
 	var missing := []
 	for id in Content.quests:
 		for o in Content.quests[id].objectives:
-			if o.kind == QuestObjective.Kind.COLLECT and not dropped.has(o.item.id) and o.drop_from == null:
+			if o.kind == QuestObjective.Kind.COLLECT and not dropped.has(o.item.id) and o.drop_from == null and Content.quests[id].gift_on_accept != o.item:
 				missing.append(o.item.id)
 	_check(missing.is_empty(), "every item a quest asks for drops somewhere %s" % [missing])
 	var bosses := Content.monsters.values().filter(func(m: MonsterDef) -> bool: return m.boss)

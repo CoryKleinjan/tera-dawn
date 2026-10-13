@@ -209,6 +209,8 @@ func on_move(peer: int, at: Vector2, face: int, anim: StringName, climbing: bool
 		return
 	if p and not p.report_move(at, face, anim, climbing) and not p.fainted():
 		Net.send(peer, &"ev_place", [p.position.x, p.position.y])
+	elif p:
+		quests.reached(p)
 
 func on_skill(peer: int, skill_id: StringName, at: Vector2, face: int) -> void:
 	var p := player_of(peer)

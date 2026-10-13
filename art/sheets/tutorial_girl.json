@@ -1,0 +1,84 @@
+{
+  "source": "art/source/tutorial_girl.png",
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/tutorial_girl",
+  "cells": [
+    [
+      "girl_on_beach_1",
+      "",
+      "beach_shell",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      ""
+    ],
+    [
+      ""
+    ]
+  ],
+  "overrides": {
+    "girl_on_beach_1": {
+      "scale": 0.192
+    },
+    "beach_shell": {
+      "save": true,
+      "out_dir": "assets/sprites/items",
+      "scale": 0.16,
+      "keep": "largest"
+    }
+  },
+  "sets": {
+    "girl_on_beach": {
+      "frames": {
+        "idle1": "tutorial_girl:girl_on_beach_1"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/girl_on_beach.png",
+      "sprite_frames": "assets/animations/npc_girl_on_beach.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle1"
+          ],
+          "fps": 1.5
+        }
+      }
+    }
+  },
+  "grid": {
+    "rows": [
+      0,
+      514,
+      518,
+      1030
+    ],
+    "cols": [
+      [
+        0,
+        370,
+        374,
+        812,
+        817,
+        1164,
+        1168,
+        1536
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        1536
+      ]
+    ]
+  },
+  "inset": 2
+}

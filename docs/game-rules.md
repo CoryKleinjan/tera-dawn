@@ -150,3 +150,8 @@ update this page when one changes. Each zone's own look and music are in
   dawns before the story reveals them, and nobody knows what Dawnshards really are at first.
 - Most quests and NPCs have nothing to do with the story. Cory reviews every story character,
   quest, cutscene and line before it goes in the game.
+- New characters wake on Daybreak Shore, the tutorial beach before Dawnrise Village. A girl
+  (labelled "Girl on the Beach", no title) teaches the keys as games she plays with you; a key
+  hint shows at the bottom of the screen for each step. Her last quest opens a one-way portal
+  to the village, where she stands by Elder Rowan as "Rowan's Granddaughter". Her name is never
+  shown. A faint white glow sits out on the water; nobody mentions it.

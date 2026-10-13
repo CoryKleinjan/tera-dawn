@@ -37,6 +37,8 @@ enum Hint { TOWN, FIELD }
 ## How long each first-time hint stays up, and where it sits.
 const FIRST_HINT_TIME := 40.0
 const FIRST_HINT_Y := 138.0
+## A quest's key hint sits this far above the status bar.
+const QUEST_HINT_GAP := 14.0
 ## Hint -> its text, built from the player's keybinds (_update_keys_help).
 var hint_texts := {}
 ## Hint -> how long it has shown so far.
@@ -170,6 +172,15 @@ func _show_first_hints(delta: float) -> void:
 		_hint_for = Game.me.name if Game.me.level == 1 else ""
 		for kind in _hint_t:
 			_hint_t[kind] = 0.0
+	var quest := quest_hint()
+	if quest != "":
+		# a quest teaching a key: its hint stays up at the bottom until the step is done
+		keys_help.visible = not title.visible and not any_window_open()
+		keys_help.text = quest
+		keys_help.modulate.a = 1.0
+		keys_help.reset_size()
+		keys_help.position = Vector2((TDWorld.VIEW.x - keys_help.size.x) / 2.0, TDWorld.VIEW.y - TDStatusBar.HEIGHT - keys_help.size.y - QUEST_HINT_GAP)
+		return
 	var kind := hint_kind()
 	var t: float = _hint_t[kind]
 	keys_help.visible = _hint_for != "" and t < FIRST_HINT_TIME and not title.visible and not any_window_open()
@@ -181,6 +192,32 @@ func _show_first_hints(delta: float) -> void:
 	keys_help.modulate.a = clampf((FIRST_HINT_TIME - t) / 2.0, 0.0, 1.0) * clampf(t / 0.5, 0.0, 1.0)
 	keys_help.reset_size()
 	keys_help.position = Vector2((TDWorld.VIEW.x - keys_help.size.x) / 2.0, FIRST_HINT_Y)
+
+## The key hint of the quest you're doing (QuestDef.hint), or else of one waiting for you to
+## talk to someone standing here (QuestDef.offer_hint), with its keys filled in; "" if none.
+func quest_hint() -> String:
+	var me := Game.me
+	var here := {}
+	for n in world.npcs():
+		here[n.def.id] = true
+	var offer := ""
+	for q: QuestDef in Content.quests.values():
+		if q.hint == "" and q.offer_hint == "":
+			continue
+		var s := me.quests.status(q, me)
+		if s == QuestLog.Status.ACTIVE and q.hint != "":
+			return keys_in(q.hint)
+		if offer == "" and q.offer_hint != "" and ((s == QuestLog.Status.AVAILABLE and here.has(q.giver))
+				or (s == QuestLog.Status.READY and here.has(q.turn_in_npc()))):
+			offer = q.offer_hint
+	return keys_in(offer)
+
+## `text` with each {action} swapped for the key it's bound to: "{jump} to jump" -> "Space to jump".
+static func keys_in(text: String) -> String:
+	var re := RegEx.create_from_string("\\{(\\w+)\\}")
+	for m in re.search_all(text):
+		text = text.replace(m.get_string(), TDStatusBar._key_name(m.get_string(1)))
+	return text
 
 ## Which first-time hint fits the map you're on.
 func hint_kind() -> Hint:

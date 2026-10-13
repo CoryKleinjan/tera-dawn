@@ -9,6 +9,10 @@ const SCALE := 0.78
 
 var world: TDWorld
 var def: NpcDef
+## Where the map puts them; it can show them only at some points of your quests.
+var placement: NpcPlacement
+## Whether they stand here for you now (placement.shown_to). Hidden ones can't be talked to.
+var shown := true
 var face := 1
 var rig: SpriteRig
 
@@ -16,6 +20,7 @@ static func create(w: TDWorld, placement: NpcPlacement, p: Platform) -> TDNpc:
 	var n := TDNpc.new()
 	n.world = w
 	n.def = placement.npc
+	n.placement = placement
 	n.face = placement.face
 	n.position = Vector2(placement.x, p.y)
 	return n
@@ -26,6 +31,14 @@ func _ready() -> void:
 	rig.set_tint(def.tint)
 	add_child(rig)
 	rig.hold_still()
+	refresh()
+
+## Shows or hides them by where you are in your quests (NpcPlacement.shown_to).
+func refresh() -> void:
+	shown = placement == null or placement.shown_to(Game.me)
+	visible = shown
+	if rig:
+		rig.visible = shown
 
 ## Game pixels per art pixel for `npc`'s art (see TDStage.art_density).
 static func texel(npc: NpcDef) -> float:

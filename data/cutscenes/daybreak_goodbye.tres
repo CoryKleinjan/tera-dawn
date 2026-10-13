@@ -1,0 +1,52 @@
+[gd_resource type="Resource" script_class="CutsceneDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/cutscene_def.gd" id="1_olx17"]
+[ext_resource type="Script" path="res://scripts/data/cutscene_step.gd" id="2_mg233"]
+
+[sub_resource type="Resource" id="Resource_mt0h5"]
+script = ExtResource("2_mg233")
+kind = 6
+speaker = &"girl_on_beach"
+text = "Go see Elder Rowan in the village. He's my grandpa. He likes new people."
+
+[sub_resource type="Resource" id="Resource_slukm"]
+script = ExtResource("2_mg233")
+kind = 6
+speaker = &"girl_on_beach"
+text = "I have to go home first or he'll worry. Bye!"
+
+[sub_resource type="Resource" id="Resource_or73l"]
+script = ExtResource("2_mg233")
+kind = 7
+who = &"girl_on_beach"
+x = 1960.0
+speed = 4.0
+
+[sub_resource type="Resource" id="Resource_gixla"]
+script = ExtResource("2_mg233")
+kind = 9
+who = &"girl_on_beach"
+shown = false
+
+[sub_resource type="Resource" id="Resource_f757r"]
+script = ExtResource("2_mg233")
+kind = 13
+
+[sub_resource type="Resource" id="Resource_8nrcl"]
+script = ExtResource("2_mg233")
+kind = 3
+ticks = 40
+at = Vector2(1860, 470)
+
+[sub_resource type="Resource" id="Resource_m64u8"]
+script = ExtResource("2_mg233")
+
+[sub_resource type="Resource" id="Resource_1sojr"]
+script = ExtResource("2_mg233")
+kind = 5
+ticks = 40
+
+[resource]
+script = ExtResource("1_olx17")
+id = &"daybreak_goodbye"
+steps = Array[ExtResource("2_mg233")]([SubResource("Resource_mt0h5"), SubResource("Resource_slukm"), SubResource("Resource_or73l"), SubResource("Resource_gixla"), SubResource("Resource_f757r"), SubResource("Resource_8nrcl"), SubResource("Resource_m64u8"), SubResource("Resource_1sojr")])

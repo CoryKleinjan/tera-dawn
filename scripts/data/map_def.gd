@@ -67,6 +67,9 @@ extends Resource
 ## when this is on: a quest needs the house there, or Cory asked for one. Monster maps have
 ## no houses otherwise (tests/content/content_houses_test.gd).
 @export var houses_allowed := false
+## Faint white glows hanging out over the water, drawn in code (TDStage._build_tears): x
+## across the map and height above the floor, in game pixels. Nobody in the game mentions them.
+@export var tears: Array[Vector2] = []
 
 var _look: BiomeDef
 

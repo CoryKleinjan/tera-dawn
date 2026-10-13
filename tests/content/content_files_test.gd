@@ -80,7 +80,8 @@ func test_named_defs_have_names() -> void:
 		if res == null:
 			continue
 		for field in ["display_name", "title"]:
-			if field in res and not (res is MapDef and field == "title"):
+			# maps have no title; an NPC may go by a name alone (the girl on the beach)
+			if field in res and not ((res is MapDef or res is NpcDef) and field == "title"):
 				check(String(res.get(field)).strip_edges() != "", "%s: %s is empty" % [path, field])
 
 func test_items_skills_and_jobs_have_descriptions() -> void:

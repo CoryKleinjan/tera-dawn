@@ -93,6 +93,8 @@ var run_t := 0        # ticks spent at top speed (faster after RUN_AFTER, see _t
 var loot_cd := 0      # ticks before the loot key asks for the next item
 ## A cutscene walking you: -1 left, 1 right, 0 not (your keys don't work meanwhile).
 var auto_walk := 0
+## A cutscene holding you in a pose (CutsceneStep.Kind.POSE), or empty.
+var scene_pose := &""
 ## Coyote time and jump buffering (see JumpGrace).
 var jump_grace := JumpGrace.new()
 var _reported := &""  # the animation the server last heard about
@@ -291,7 +293,8 @@ func _use(skill: SkillDef) -> void:
 func _interact() -> bool:
 	if not (_tapped("move_up") and on_ground):
 		return false
-	if world.layout.portal_at(position):
+	var portal := world.layout.portal_at(position)
+	if portal and portal.open_to(Game.me):
 		_report()
 		# fade out before asking: a local server answers at once, and the next map's
 		# fade-in (TDWorld.enter_map) must come after this
@@ -438,6 +441,8 @@ func _process(_delta: float) -> void:
 	body.draw(anim, HeroBody.stride_speed(anim, vel.x), face, is_climbing(), inv > 0 and not fainted(), inv, sitting, Game.me.pet)
 
 func _animation() -> StringName:
+	if scene_pose != &"":
+		return scene_pose
 	if fainted():
 		return &"faint"
 	if sitting != &"":

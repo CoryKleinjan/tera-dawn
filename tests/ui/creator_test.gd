@@ -118,6 +118,9 @@ func test_create_starts_the_game_with_the_choices() -> void:
 func test_the_equipment_window_shows_the_dressed_hero() -> void:
 	await _play("Fresh")
 	await _create_and_play()
+	# a new character wakes in the tutorial's opening cutscene, which hides the HUD
+	ui.world.scenes.skip()
+	await ui.ticks(2)
 	var w: TDEquipmentWindow = ui.hud.windows["equipment"]
 	w.visible = true
 	check(await ui.redraw(w), "draws")

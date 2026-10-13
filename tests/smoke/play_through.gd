@@ -38,6 +38,10 @@ func start_game() -> void:
 	_check(world.player.rig.paperdoll.look == Game.me.look(), "the hero is drawn with that look")
 	_check(Net.server != null and _me() != null, "single player runs its own server")
 	p = world.player
+	_check(world.map.id == Character.NEW_MAP, "a new character wakes on the tutorial beach")
+	# the tutorial has its own tests (server_tutorial_test, tutorial_test): play on in the village
+	Net.server.enter_map(_me(), Character.START_MAP, Content.map(Character.START_MAP).start_x)
+	await _ticks(3)
 	_check(p.on_ground, "player starts on the ground")
 	_check(world.npcs().size() == 4, "the village has its four NPCs (Mira keeps shop indoors)")
 	await _ticks(5)

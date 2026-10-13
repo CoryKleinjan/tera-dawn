@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="QuestDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="1_5x84g"]
+[ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="3_q07r2"]
+[ext_resource type="Resource" path="res://data/cutscenes/daybreak_lookout.tres" id="4_f3s1f"]
+
+[sub_resource type="Resource" id="Resource_udl0v"]
+script = ExtResource("1_5x84g")
+kind = 3
+map = &"daybreak_shore"
+platform = 2
+spot_name = "her lookout"
+
+[resource]
+script = ExtResource("3_q07r2")
+id = &"tut2_lookout"
+title = "Her Lookout"
+giver = &"girl_on_beach"
+requires = Array[StringName]([&"tut1_race"])
+offer_text = "Up here! This is my lookout. Climb the rope."
+progress_text = "Up here! This is my lookout. Climb the rope."
+complete_text = "I come up here every morning. Grandpa says every morning is a fresh start.
+
+See my drawing? That's the brightest morning ever. I dream about it. It's so bright you can't see anything else."
+start_scene = ExtResource("4_f3s1f")
+offer_hint = "Walk to her and press {move_up} to talk"
+hint = "Stand by the rope and hold {move_up} to climb"
+auto_start = true
+objectives = Array[ExtResource("1_5x84g")]([SubResource("Resource_udl0v")])
+reward_xp = 5

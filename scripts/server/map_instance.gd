@@ -118,13 +118,20 @@ func tell(p: SimPlayer, text: String, col: Color) -> void:
 func show_gain(p: SimPlayer, kind: StringName, amount: int) -> void:
 	Net.send(p.peer, &"ev_gain", [kind, amount])
 
-## The NPC with this id when the player is close enough to deal with them, or null.
+## The NPC with this id when the player is close enough to deal with them, or null. Only
+## placements the player can see count (NpcPlacement.shown_to).
 func npc_near(p: SimPlayer, npc_id: StringName, reach := 160.0) -> NpcDef:
 	for placement in def.npcs:
 		var at := Vector2(placement.x, layout.platforms[placement.platform].y)
-		if placement.npc.id == npc_id and p.position.distance_to(at) <= reach:
+		if placement.npc.id == npc_id and p.position.distance_to(at) <= reach and placement.shown_to(p.character):
 			return placement.npc
 	return null
+
+## Tosses `item` down by the player's feet, theirs to pick up (a quest's gift_on_accept).
+func toss_to(p: SimPlayer, item: ItemDef) -> void:
+	var ground := layout.ground_below(p.position)
+	var flight := DropFlight.create(p.position + Vector2(0, -90), ground, p.position.x + 24.0 * p.face)
+	spawn_drop(item, 1, null, flight, p.peer)
 
 # ---------- combat ----------
 

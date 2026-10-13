@@ -38,7 +38,7 @@ var _bars := Vector3.ZERO
 var _bars_t := 0
 ## who -> [x, speed] for everyone walking.
 var _walks := {}
-## NPC id -> [x, face, visible] as they stood before the cutscene touched them.
+## TDNpc -> [x, face, visible] as they stood before the cutscene touched them.
 var _saved := {}
 ## The music playing before a MUSIC step changed it ("" if none did).
 var _music_before: StringName = &""
@@ -70,6 +70,7 @@ func play(scene: CutsceneDef) -> void:
 	_cam_follow = &""
 	_music_changed = false
 	world.hud.visible = false
+	world.hud.windows["dialogue"].visible = false
 	overlay.begin()
 	_next()
 
@@ -196,6 +197,19 @@ func _start(s: CutsceneStep) -> void:
 			Sound.music(s.sound)
 		CutsceneStep.Kind.SOUND:
 			Sound.play(s.sound)
+		CutsceneStep.Kind.POSE:
+			if s.who == CutsceneStep.HERO:
+				world.player.scene_pose = s.pose
+			else:
+				var npc := _npc(s.who)
+				if npc:
+					_save(s.who)
+					if s.pose == &"":
+						npc.rig.hold_still()
+					elif npc.rig.has_animation(s.pose):
+						npc.rig.play(s.pose)
+		CutsceneStep.Kind.PLACE:
+			world.show_for_me()
 
 ## Whether step `s` is over, so the next can start.
 func _done(s: CutsceneStep) -> bool:
@@ -271,13 +285,12 @@ func _finish() -> void:
 	Net.ask(&"req_scene_done", [id])
 
 func _restore() -> void:
-	for id: StringName in _saved:
-		var npc := _npc(id)
-		if npc:
-			npc.position.x = _saved[id][0]
-			npc.face = _saved[id][1]
-			npc.visible = _saved[id][2]
-			npc.rig.visible = _saved[id][2]
+	for npc: TDNpc in _saved:
+		if is_instance_valid(npc):
+			npc.position.x = _saved[npc][0]
+			npc.face = _saved[npc][1]
+			npc.visible = _saved[npc][2]
+			npc.rig.visible = _saved[npc][2]
 			npc.rig.hold_still()
 	_saved.clear()
 	_walks.clear()
@@ -286,6 +299,7 @@ func _restore() -> void:
 	_fade = Vector3.ZERO
 	_bars = Vector3.ZERO
 	world.player.auto_walk = 0
+	world.player.scene_pose = &""
 	world.player.rig.visible = world.started
 	world.camera.scene_center = null
 	if _music_changed:
@@ -294,6 +308,8 @@ func _restore() -> void:
 	overlay.end()
 	world.hud.visible = true
 	index = -1
+	# quests the cutscene's lines finished can change who stands here
+	world.show_for_me()
 
 # ---------- who's who ----------
 
@@ -312,8 +328,8 @@ func _npc(id: StringName) -> TDNpc:
 ## Remembers how an NPC stood before the cutscene first changed them.
 func _save(id: StringName) -> void:
 	var npc := _npc(id)
-	if npc and not _saved.has(id):
-		_saved[id] = [npc.position.x, npc.face, npc.visible]
+	if npc and not _saved.has(npc):
+		_saved[npc] = [npc.position.x, npc.face, npc.visible]
 
 func _speaker_name(s: CutsceneStep) -> String:
 	if s.speaker_name != "":

@@ -128,6 +128,8 @@ func _draw_minimap(mm: Rect2) -> void:
 		draw_rect(r, MINIMAP_LAND)
 		draw_rect(Rect2(r.position + Vector2(0, 2), Vector2(r.size.x, 1)), Color(0.35, 0.24, 0.14, 0.9))
 	for p in world.map.portals:
+		if not p.open_to(Game.me):
+			continue
 		var at := inner.position + Vector2(p.x * sx, world.platforms[p.platform].y * sy - 5)
 		if p.door:
 			_minimap_door(at)
@@ -284,6 +286,6 @@ func _draw_world_text() -> void:
 			(f as TDEffect).draw_caption(self, st.screen(f.position, 0.2))
 	for portal in world.map.portals:
 		var base := Vector2(portal.x, world.platforms[portal.platform].y)
-		if world.started and absf(p.position.x - base.x) < 60 and absf(p.position.y - base.y) < 8:
+		if world.started and portal.open_to(Game.me) and absf(p.position.x - base.x) < 60 and absf(p.position.y - base.y) < 8:
 			var target := Content.map(portal.target_map)
 			WorldSkin.draw_hint(self, st.screen(base + Vector2(0, -128), -0.3), _portal_hint(portal, target))

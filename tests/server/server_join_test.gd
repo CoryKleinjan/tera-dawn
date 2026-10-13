@@ -22,7 +22,7 @@ func test_join_sends_the_character_then_the_starting_map() -> void:
 		kinds.append(e[1])
 	check(kinds.find(&"ev_joined") < kinds.find(&"ev_enter_map"), "the character comes before the map")
 	check_eq(h.last(2, &"ev_joined")[0]["name"], "Ann", "the joined character's name")
-	check_eq(h.last(2, &"ev_enter_map")[0], Character.START_MAP, "a new character starts on the starting map")
+	check_eq(h.last(2, &"ev_enter_map")[0], Character.NEW_MAP, "a new character starts on the tutorial beach")
 	check_eq(h.events(2).size(), h.api.sent.size(), "every event went to peer 2")
 	check_eq(h.count(2, &"ev_refused"), 0, "nothing refused")
 
