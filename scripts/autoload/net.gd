@@ -492,11 +492,13 @@ func ev_save(character: Dictionary) -> void:
 	if saves and playing != "" and str(character.get("name", "")).to_lower() == playing.to_lower():
 		saves.save_data(playing, character)
 
-## Our character left the world (saved just before): back to character select.
+## Our character left the world (saved just before): back to character select, listing
+## this computer's own characters or the test characters as the Developer setting now says.
 @rpc("authority", "call_local", "reliable")
 func ev_left_world(char_name: String) -> void:
 	playing = ""
-	_list_characters(char_name)
+	open_saves()
+	characters_changed.emit(char_name if saves.exists(char_name) else "")
 
 ## The server said no. With `drop`, it's also closing the connection.
 @rpc("authority", "call_local", "reliable")
