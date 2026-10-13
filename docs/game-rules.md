@@ -139,3 +139,11 @@ update this page when one changes. Each zone's own look and music are in
   of portals. Developer test characters start in their job's town.
 - Multiplayer: Play solo, Host on UDP 7350 (shows the LAN address with Copy), or join with
   `address:port`.
+
+## Story
+
+- The world is Morrowmere. The main story (Tera and the Dawn curse) stays hidden until well past
+  today's Lv 35 content: no in-game text names Tera's Dawn, the curse, the tears or the other
+  dawns before the story reveals them, and nobody knows what Dawnshards really are at first.
+- Most quests and NPCs have nothing to do with the story. Cory reviews every story character,
+  quest, cutscene and line before it goes in the game.

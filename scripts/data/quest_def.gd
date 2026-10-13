@@ -27,6 +27,9 @@ extends Resource
 ## The offer and progress pages also list every job a Beginner can advance into and what
 ## each takes, built from the JobDefs so it never drifts from them.
 @export var lists_job_paths := false
+## Cutscenes that play when the quest is taken and when it's handed in (see CutsceneDef).
+@export var start_scene: CutsceneDef
+@export var finish_scene: CutsceneDef
 
 @export_group("Objectives")
 @export var objectives: Array[QuestObjective] = []

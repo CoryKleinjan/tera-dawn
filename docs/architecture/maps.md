@@ -26,6 +26,8 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
    the world map (pixels of the painting, `TDWorldMapWindow.WORLD`, inside its region's
    `zone_rect`), `level_text`, and either `town = true` or the
    `return_map` where fainting and Return Scrolls send you.
+6. Optionally give it an `intro_scene`, a cutscene played the first time a character arrives
+   (see [cutscenes](cutscenes.md)).
 
 ## The shape of the world
 

@@ -45,6 +45,8 @@ extends Resource
 @export var interior := false
 ## Its own track (a boss lair, the Free Market). Empty: its region's town or field music (music_id).
 @export var music: StringName
+## A cutscene each character sees the first time they arrive (see CutsceneDef).
+@export var intro_scene: CutsceneDef
 
 @export_group("Layout")
 ## One-way platforms, numbered from 1 in this order (0 is the floor).

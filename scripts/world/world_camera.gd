@@ -24,6 +24,9 @@ var look := 0.0
 var floor_y := 0.0
 ## Screen shake strength (0..1); it fades by itself (see shake()).
 var _shake := 0.0
+## Where a cutscene holds the camera's centre (game pixels), or null to follow the hero.
+## The cutscene moves it smoothly itself, so the camera sits exactly there.
+var scene_center: Variant = null
 
 func _init(w: TDWorld) -> void:
 	world = w
@@ -34,6 +37,17 @@ func target() -> Vector2:
 	return Vector2(
 		clampf(world.player.position.x + look - view.x / 2.0, 0, maxf(0.0, float(world.map.width) - view.x)),
 		clampf(floor_y - view.y * STAND_AT, 0, maxf(0.0, float(world.map.height) - view.y)))
+
+## The top left of the view centred on `center`, kept inside the map.
+func box_at(center: Vector2) -> Vector2:
+	var view := TDWorld.world_view()
+	return Vector2(
+		clampf(center.x - view.x / 2.0, 0, maxf(0.0, float(world.map.width) - view.x)),
+		clampf(center.y - view.y / 2.0, 0, maxf(0.0, float(world.map.height) - view.y)))
+
+## The centre of what the camera shows now, in game pixels.
+func center() -> Vector2:
+	return pos + TDWorld.world_view() / 2.0
 
 ## Jumps straight to the target (a new map), keeping its aim.
 func jump_to_target() -> void:
@@ -67,7 +81,10 @@ func shake(amount: float) -> void:
 func step() -> void:
 	_prev = pos
 	aim()
-	pos += (target() - pos) * Vector2(0.12, 0.1)
+	if scene_center is Vector2:
+		pos = box_at(scene_center)
+	else:
+		pos += (target() - pos) * Vector2(0.12, 0.1)
 	_shake = maxf(0.0, _shake - 0.04)
 
 ## Every frame: aims the stage between the last two ticks, shaken if it's shaking.

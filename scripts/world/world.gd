@@ -52,6 +52,8 @@ var avatar_layer: Node2D
 var fx_layer: Node2D
 ## Shows the server's events: swings, damage numbers, shots and effects.
 var fx: TDWorldFx
+## Plays cutscenes the server sends (see TDCutscenePlayer).
+var scenes: TDCutscenePlayer
 var hud: TDHud
 ## Keeps the monsters, other players and drops in step with the server (see SnapshotSync).
 var sync: SnapshotSync
@@ -89,6 +91,9 @@ func _ready() -> void:
 	hud = TDHud.new()
 	hud.world = self
 	add_child(hud)
+	scenes = TDCutscenePlayer.new()
+	scenes.world = self
+	add_child(scenes)
 	# the title screen shows the meadow until the server puts the player somewhere
 	load_map(Character.START_MAP)
 	player.place(map.start_x, platforms[0].y)
@@ -115,6 +120,7 @@ func start() -> void:
 ## (going back to character select).
 func stop(stay_connected := false) -> void:
 	started = false
+	scenes.stop()
 	if not stay_connected:
 		Net.stop()
 	sync.clear_avatars()
@@ -129,6 +135,8 @@ func stop(stay_connected := false) -> void:
 
 ## The server put the player on a map: build it and show what's on it.
 func enter_map(id: StringName, x: float, state: Dictionary) -> void:
+	# a cutscene belongs to the map it started on (the server stops it too)
+	scenes.stop()
 	for w in ["player", "player_shop"]:
 		hud.windows[w].visible = false
 	load_map(id)
@@ -250,7 +258,16 @@ func click_avatar(a: TDAvatar) -> void:
 
 ## Keys don't move the player while they type or mind a shop.
 func input_blocked() -> bool:
-	return hud.typing() or hud.selling()
+	return hud.typing() or hud.selling() or scenes.playing()
+
+## The server started cutscene `id` for you. One this game doesn't have is answered as
+## finished, so the server doesn't wait on it.
+func play_scene(id: StringName) -> void:
+	var def: CutsceneDef = Content.cutscenes.get(id)
+	if def == null:
+		Net.ask(&"req_scene_done", [id])
+		return
+	scenes.play(def)
 
 ## A chat line arrived; map chat also shows in a bubble over the speaker.
 func show_chat(kind: String, from: String, text: String, from_peer: int) -> void:
@@ -326,6 +343,7 @@ func _physics_process(_delta: float) -> void:
 	# the game carries on behind the menu (it's online), but you stand still
 	if started and not hud.title.visible:
 		player.step()
+	scenes.step()
 	for layer in [mob_layer, npc_layer, avatar_layer, drop_layer, fx_layer]:
 		for c in layer.get_children():
 			_prev[c] = c.position

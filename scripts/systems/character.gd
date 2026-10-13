@@ -71,6 +71,8 @@ var visited: Array[String] = []
 var achievements: Array[String] = []
 ## Tallies achievements count that aren't kept anywhere else, by Counters name.
 var counters := {}
+## Cutscene ids already watched (or skipped), so none plays twice.
+var scenes_seen: Array[String] = []
 
 func _init() -> void:
 	equipment.changed.connect(recalc)
@@ -199,6 +201,15 @@ func visit(id: StringName) -> bool:
 		return false
 	visited.append(String(id))
 	return true
+
+## Whether this character has already watched (or skipped) cutscene `id`.
+func has_seen(id: StringName) -> bool:
+	return scenes_seen.has(String(id))
+
+## Notes cutscene `id` as watched.
+func saw(id: StringName) -> void:
+	if not has_seen(id):
+		scenes_seen.append(String(id))
 
 ## The pet that's out, or null.
 func pet_def() -> PetDef:

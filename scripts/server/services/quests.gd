@@ -48,6 +48,7 @@ func on_quest_accept(peer: int, npc_id: StringName, quest_id: StringName) -> voi
 	p.dirty_character = true
 	tell(p, "New quest: %s" % q.title, Palette.SUN)
 	progress(p, c.quests.record_visit(p.map.def.id))
+	server.scenes.play(p, q.start_scene)
 
 func on_quest_complete(peer: int, npc_id: StringName, quest_id: StringName) -> void:
 	var p := player_of(peer)
@@ -63,6 +64,7 @@ func on_quest_complete(peer: int, npc_id: StringName, quest_id: StringName) -> v
 	Net.send(p.peer, &"ev_jingle", [QUEST_JINGLE])
 	if q.reward_xp > 0:
 		server.give_xp(p, q.reward_xp)
+	server.scenes.play(p, q.finish_scene)
 
 func on_quest_forfeit(peer: int, quest_id: StringName) -> void:
 	var p := player_of(peer)

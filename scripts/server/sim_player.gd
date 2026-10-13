@@ -40,6 +40,10 @@ var inv := 0          # invincibility ticks after being hit
 var faint_t := 0      # ticks left lying fainted
 var item_cd := 0      # ticks before another potion can be used
 var since_move := 0   # ticks since the last movement report
+## The cutscene playing on their screen (a CutsceneDef id, see ServerScenes), or empty.
+## Monsters leave them alone meanwhile.
+var scene: StringName = &""
+var scene_t := 0      # ticks before a scene that never ended stops anyway
 
 ## The client needs a fresh copy of the whole Character (inventory, gear, stats).
 var dirty_character := false
@@ -52,6 +56,10 @@ func _init(p: int, c: Character) -> void:
 
 func fainted() -> bool:
 	return faint_t > 0
+
+## Watching a cutscene: monsters don't touch or shoot them.
+func in_scene() -> bool:
+	return scene != &""
 
 func stands_on(plat: Platform) -> bool:
 	return not fainted() and absf(position.y - plat.y) < 6 and plat.contains_x(position.x)

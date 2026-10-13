@@ -386,6 +386,14 @@ func req_quest_forfeit(quest_id: StringName) -> void:
 	if server:
 		server.quests.on_quest_forfeit(_sender(), quest_id)
 
+# --- cutscenes (ServerScenes) ---
+
+## The cutscene the server sent ended on this player's screen (watched or skipped).
+@rpc("any_peer", "call_local", "reliable")
+func req_scene_done(scene_id: StringName) -> void:
+	if server:
+		server.scenes.on_scene_done(_sender(), scene_id)
+
 # --- jobs, Ability and Skill Points (ServerJobs) ---
 
 @rpc("any_peer", "call_local", "reliable")
@@ -606,6 +614,12 @@ func ev_mob_shot(index: int, x: float, y: float) -> void:
 func ev_jingle(id: StringName) -> void:
 	if world:
 		Sound.jingle(id)
+
+## A cutscene for you alone (see TDCutscenePlayer); answered with req_scene_done.
+@rpc("authority", "call_local", "reliable")
+func ev_scene(scene_id: StringName) -> void:
+	if world:
+		world.play_scene(scene_id)
 
 @rpc("authority", "call_local", "reliable")
 func ev_level_up(peer: int, level: int) -> void:

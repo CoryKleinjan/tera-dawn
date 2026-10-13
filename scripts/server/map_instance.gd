@@ -195,7 +195,7 @@ func touch_player(p: SimPlayer, m: SimMob) -> void:
 
 ## A monster (`def`, standing at `from_x`) hit a player, by touch or with a shot.
 func hurt_player(p: SimPlayer, def: MonsterDef, from_x: float) -> void:
-	if p.inv > 0 or p.fainted():
+	if p.inv > 0 or p.fainted() or p.in_scene():
 		return
 	var dmg := Combat.monster_hit(def, p.character)
 	p.inv = 40 if dmg == 0 else SimPlayer.HURT_INV
