@@ -98,7 +98,8 @@
           31
         ]
       ],
-      "scale": 1.1552
+      "scale": 1.1552,
+      "save": false
     },
     "swatch": {
       "blank": [
@@ -109,7 +110,8 @@
           30
         ]
       ],
-      "scale": 1.1782
+      "scale": 1.1782,
+      "save": false
     },
     "swatch_on": {
       "blank": [
@@ -120,7 +122,8 @@
           31
         ]
       ],
-      "scale": 1.2174
+      "scale": 1.2174,
+      "save": false
     },
     "random": {
       "blank": [

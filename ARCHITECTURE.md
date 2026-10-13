@@ -41,6 +41,7 @@ second. Only the stage turns that into 3D (32 game pixels per 3D unit).
 
 ## Pages
 
+- [Game rules](docs/game-rules.md): how the game should look and play; read it before any change.
 - [Multiplayer, accounts and players together](docs/architecture/multiplayer.md): the server, client, snapshots, accounts and character select, parties and trades.
 - [Characters: looks, extras, balance and player actions](docs/architecture/characters.md): character creation, the paperdoll hero, chairs, pets, Monster Book, achievements, balance, how to add a player action.
 - [Folders](docs/architecture/folders.md): what lives in each folder.

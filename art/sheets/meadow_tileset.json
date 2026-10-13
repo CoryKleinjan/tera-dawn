@@ -151,6 +151,36 @@
     },
     "tall_grass": {
       "flat_bottom": true
+    },
+    "platform_small": {
+      "save": false
+    },
+    "corner_small": {
+      "save": false
+    },
+    "ground_middle": {
+      "save": false
+    },
+    "ground_left": {
+      "save": false
+    },
+    "corner_large": {
+      "save": false
+    },
+    "slope_down": {
+      "save": false
+    },
+    "platform_medium": {
+      "save": false
+    },
+    "ground_right": {
+      "save": false
+    },
+    "platform_large": {
+      "save": false
+    },
+    "slope_up": {
+      "save": false
     }
   }
 }

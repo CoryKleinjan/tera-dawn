@@ -77,7 +77,8 @@
         246,
         201
       ],
-      "grow": 0.91
+      "grow": 0.91,
+      "save": false
     },
     "ground_middle": {
       "crop": [
@@ -86,7 +87,8 @@
         251,
         226
       ],
-      "grow": 0.91
+      "grow": 0.91,
+      "save": false
     },
     "ground_right": {
       "crop": [
@@ -95,7 +97,8 @@
         252,
         201
       ],
-      "grow": 0.91
+      "grow": 0.91,
+      "save": false
     },
     "platform_small": {
       "crop": [
@@ -104,7 +107,8 @@
         252,
         226
       ],
-      "grow": 0.88
+      "grow": 0.88,
+      "save": false
     },
     "platform_medium": {
       "crop": [
@@ -113,7 +117,8 @@
         252,
         226
       ],
-      "grow": 0.86
+      "grow": 0.86,
+      "save": false
     },
     "platform_large": {
       "crop": [
@@ -122,7 +127,8 @@
         247,
         226
       ],
-      "grow": 0.96
+      "grow": 0.96,
+      "save": false
     },
     "edge_grass": {
       "crop": [
@@ -256,7 +262,8 @@
         229
       ],
       "grow": 1.25,
-      "flat_bottom": true
+      "flat_bottom": true,
+      "save": false
     },
     "building_small": {
       "crop": [
@@ -266,7 +273,8 @@
         229
       ],
       "grow": 1.17,
-      "flat_bottom": true
+      "flat_bottom": true,
+      "save": false
     },
     "signature_prop": {
       "crop": [

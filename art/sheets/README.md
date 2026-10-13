@@ -19,7 +19,7 @@ generated: fix art in the sheet or manifest, never in the output.
 Every sprite is cut at two texels per art pixel and keeps the smooth, anti-aliased edge of the
 painting, and the game blends that edge in (`TDStage.style_sprite`). Cut at one texel per art
 pixel with on/off alpha, the dark outline showed as a stair-stepped, pixelated line on a 1080p
-screen (Cory, 2026-10-11: "do this for all assets"). `detail` and `alpha` default to this;
+screen. `detail` and `alpha` default to this for every asset;
 `tools/art/tests/test_smooth_edges.py` checks the cut sprites.
 
 ## Adding a sheet
@@ -154,13 +154,12 @@ list in `paperdoll_body.json`.
   their own `region` manifest (`ui_windows_frames`, `ui_menu_panel`, `ui_dialogue_rows`,
   `ui_book_rows`, `ui_creator_frame`). Pieces cut from older sheets use `<sheet>_old`
   manifests (`ui_old`, `ui_hud_old`, `ui_menu_old`, `ui_dialogue_old`, `items_parts_2_old`,
-  `skill_icons_old`, `projectiles_old`, `skill_effects_old`). `item_slot_hover` is unused (the
-  windows brighten `item_slot`).
+  `skill_icons_old`, `projectiles_old`, `skill_effects_old`).
 - **Items, pets, projectiles**: into `assets/sprites/items/` (named by item id), `pets/` (and
   `assets/animations/pet_*.tres`) and `projectiles/`.
-- **Not used yet** (`save` false, into `art/build/`): `ui_map_icons`, `ui_controls_leather`,
-  `ui_extras_leather`, `paperdoll_grip`, `hair_tousled_frames_2`, `paperdoll_gloves_2`, and
-  `hero_main` (painted hero reference).
+- **Reference only** (`save` false, into `art/build/`): `hero_main` (the painted hero reference).
+  Cells the game doesn't load have `"save": false` in their overrides, so the slicer skips them;
+  art the game never uses is removed rather than kept in the repo.
 
 ## The paperdoll (hero layers)
 
@@ -180,7 +179,7 @@ body) places their pieces on every body frame and writes the layers, region map 
   the hero is `cape_front`.
 - **Weapons** are cut from their item icons (`items_*`, at full size): the tool straightens
   each (a gun's barrel turned level) and makes it the picture he holds (`weapon_item_<id>`, a
-  piece placed in his fist every frame). The old `held_*` sheets stay in `art/source/` unused.
+  piece placed in his fist every frame). `held_magic` stays in `art/source/` only as a Gemini edit base.
 - **Worn gear in its own colours** (`art/source/worn/<item id>.png`, `shield_backs`,
   `hats_items_*` and their `_only` twins): Gemini edits of the body sheet or the hat sheet with
   the item's icon as reference. `tools/art/paperdoll/items.py` lifts each piece off the body by
@@ -189,8 +188,9 @@ body) places their pieces on every body frame and writes the layers, region map 
   back on an off-colour background is flooded to magenta from each cell's border first.
   Gloves are cuffless mittens painted from their icons (`glove_mittens`), one piece per hand.
 - **The rig** (`paperdoll_rig.json`, in 128 px frames): the weapon hand, weapon angle, shield
-  and head tilt per frame, how each weapon kind is held (`holds`) and which frames hold it
-  behind him (`weapon_behind`). His hands are fingerless mittens, so a weapon only needs to sit
+  and head tilt per frame, how each weapon kind is held (`holds`, every kind copying the staff's)
+  and the frames where the shield point's hand is the front one (`front`), so the weapon always
+  stays in the front hand. His hands are fingerless mittens, so a weapon only needs to sit
   under the fist. `--preview` writes `art/build/paperdoll_preview.png`.
 - To redraw part of the body, `tools/art/body_panels.py` cuts close-up panels of a few cells
   for a Gemini edit and pastes back only what changed (`hands`) or everything above the shorts

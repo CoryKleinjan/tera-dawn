@@ -5,6 +5,8 @@ rendering (Octopath Traveler style depth, lighting and bloom). Its own look, not
 The game will grow much larger, so keep code extendable and readable.
 
 ## Where things are
+- `docs/game-rules.md`: every rule for how the game should look and play (hero, gear, weapons,
+  hair and hats, maps, towns, monsters and levels, UI, audio). Follow it and keep it current.
 - `ARCHITECTURE.md`: the big picture, an index of `docs/architecture/*.md` (one page per system
   and "how to add" guide), and the code conventions. Read the page for the system you touch.
 - `docs/zone-vibes.md`: each zone's style and music guide (palette, light, materials,
@@ -34,6 +36,7 @@ python3 tools/art/gemini_pass.py --dry-run                           # Gemini ba
 - Plan first: post a short plan (what changes, which files, choices) and wait for Cory's OK
   before changing code or assets.
 - Branch fresh off `main` for every change; never stack branches or PRs on other feature branches.
+- Merge a PR only after Cory says "merge" and CI is green; an "ok" or "looks good" isn't one.
 - No screenshots in replies or PRs for fixes unless Cory asks.
 
 ### Art style
@@ -58,5 +61,10 @@ python3 tools/art/gemini_pass.py --dry-run                           # Gemini ba
 - Only make or repaint art the game uses. Never use old ChatGPT sheets from git history.
 
 ### Game rules
-- Characters, NPCs, ropes and ladders draw in front of land; no character shadows.
+The full list is `docs/game-rules.md`. The ones most often broken:
+- Weapons are always in the front hand, at the same angle to the forearm every frame. No ammo.
+- Under a hat each pose shows only its own hair, trimmed; never draw new hair. Hats never cover
+  the shoulders.
+- Characters, NPCs, ropes and ladders draw in front of land; no character or land shadows.
 - NPCs stand still at idle. Map names only at the top of the screen. Towns have no monsters.
+- 2-3 monster kinds per map, each kind in one zone; paths between towns stay Lv 10 or below.

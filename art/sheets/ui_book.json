@@ -168,7 +168,8 @@
           29
         ]
       ],
-      "scale": 0.9738
+      "scale": 0.9738,
+      "save": false
     }
   },
   "inset": 6

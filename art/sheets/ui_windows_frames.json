@@ -56,7 +56,8 @@
           33
         ]
       ],
-      "scale": 1.2034
+      "scale": 1.2034,
+      "save": false
     },
     "equip_doll_bg": {
       "blank": [
@@ -67,7 +68,8 @@
           32
         ]
       ],
-      "scale": 1.144
+      "scale": 1.144,
+      "save": false
     }
   },
   "recolor": "dark_parchment"

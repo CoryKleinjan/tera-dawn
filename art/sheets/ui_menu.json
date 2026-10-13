@@ -57,7 +57,8 @@
           17
         ]
       ],
-      "scale": 1.894
+      "scale": 1.894,
+      "save": false
     },
     "dropdown": {
       "recolor": "dark_parchment",
