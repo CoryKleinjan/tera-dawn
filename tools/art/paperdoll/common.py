@@ -94,6 +94,7 @@ HAIR_HEAD_ONLY = ("long", "ponytail", "twin_tails")  # ...hairstyles showing onl
 HAIR_HEAD_ONLY_OVAL = (1.1, 0.9, 0.55)  # ...inside this oval (half width, half height, raised: head radii), above his mouth
 HAIR_HEAD_ONLY_BACK = (1.15, 1.05, 0.0)  # ...or from behind, this one (his whole head, down to his neck)
 HAIR_FACE_FRONT = 0.0  # under a hat no hair sticks out past the front of his face: none off his head forward of this (head radii from its middle)
+HAIR_FACE_OVER = 0.08  # ...though it may reach this far past his head (head radii), so it covers it
 HAIR_HAT_POSE = "sit"  # ...and every pose wears this pose's hair under a hat (for those styles)
 HAIR_CUT_SOFT = 1.5   # ...its edge blurred this much (frame pixels), so the hair fades out under the hat
 HAIR_CUT_TUCK = 2      # ...and stops this many pixels inside the hat, so hair and head run on under its soft edge

@@ -396,7 +396,8 @@ def save_hair_cut(hero, name, head=False):
 def nothing_ahead(cut, hero, heads):
     """A style's cut strip that also hides the hair sticking out past the front of his face
     (Cory 2026-10-13: bangs that hang past the front of his face look awkward; the bangs over
-    his forehead stay): off his head and forward of HAIR_FACE_FRONT, on every frame but those
+    his forehead stay): more than HAIR_FACE_OVER off his head (it stays a little wider than his head, so it
+    covers it: Cory 2026-10-13) and forward of HAIR_FACE_FRONT, on every frame but those
     from behind."""
     out = cut.copy()
     fw = hero.fw
@@ -404,7 +405,7 @@ def nothing_ahead(cut, hero, heads):
         if n in BACK_VIEW:
             continue
         ahead, _ = head_axes(px.shape, fi, fi["head"])
-        out[:, i * fw:(i + 1) * fw][(ahead > HAIR_FACE_FRONT) & ~ss.dilate(heads[i], 1)] = 255
+        out[:, i * fw:(i + 1) * fw][(ahead > HAIR_FACE_FRONT) & ~ss.dilate(heads[i], round(HAIR_FACE_OVER * fi["r"]))] = 255
     return out
 
 
@@ -534,7 +535,7 @@ def save_head_cut(hero, name):
         for ax, ay, *_ in spots + hero.hands[n].get("hands", []):
             head &= ~(((xx - ax) ** 2 + (yy - ay) ** 2 < (HEAD_CUT_HAND * fi["r"]) ** 2)
                       & ((xx - hx) ** 2 + (yy - hy) ** 2 > (HEAD_CUT_KEEP * fi["r"]) ** 2))
-        cut = head & head_area(fi, fw, fh) & hair[:, i * fw:(i + 1) * fw] & ~ss.dilate(helm, HAIR_CUT_TUCK)  # (none under its soft edge)
+        cut = head & head_area(fi, fw, fh) & hair[:, i * fw:(i + 1) * fw] & ~helm  # (none under its soft edge either: Cory 2026-10-13)
         soft = Image.fromarray(cut.astype(np.uint8) * 255).filter(ImageFilter.BoxBlur(1))
         strip[:, i * fw:(i + 1) * fw, 3] = np.asarray(soft)
     strip[..., :3] = 255
