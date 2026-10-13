@@ -11227,7 +11227,7 @@
   {
    "id": "skill_icons_9",
    "prompts": null,
-   "batch": "Class skill icons (Shoulder Bash)",
+   "batch": "Class skill icons (Shoulder Bash, Rolling Dash)",
    "with": null,
    "refs": [],
    "save": "skill_icons_9.png",
@@ -11235,19 +11235,19 @@
    "kind": "still",
    "stands": false,
    "cells": [
-    1,
+    2,
     1
    ],
    "anchor": null,
    "size": "2K",
-   "note": "2026-10-13 class skills thread (Cory 19:14Z: 'bash shouldnt show a person in the icon, just show a shoulder'; card pick: padded shoulder): Shoulder Bash repaint.",
+   "note": "2026-10-13 class skills thread (Cory 19:14Z: 'bash shouldnt show a person in the icon, just show a shoulder'; card pick: padded shoulder): Shoulder Bash repaint. Plus Rolling Dash (Cory 19:14Z: 'rolling dash shouldnt show a person'; card pick: wave curl).",
    "edit": {
-    "base": "/mnt/project-files/art-sheets/skill-icons/blank_1x1.png",
+    "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x1.png",
     "refs": [
      "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
      "/mnt/project-files/art-sheets/gemini-pass-1/skill_icons_test.png"
     ],
-    "text": "The first image is an empty magenta canvas. On it, paint ONE skill icon for my 2D side-scrolling game, centred, with a wide band of plain magenta (at least a tenth of the canvas) all around it. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished skill icons from the same set: match their badge shape, frame thickness, metal trim, inner background glow, painting style and level of detail exactly, with a bold dark brown outline like the NPCs'. The icon is a square badge with softly rounded corners: a thick painted frame in warm brown with a thin bright copper trim, and inside it a darker warm brown painted background with a soft glow. Subject: Shoulder Bash. Show ONLY a shoulder and upper arm, no head, no face, no body, no person: a brown leather-padded tunic shoulder seen from the side, thrusting forward from the left and slamming into a bright golden-white impact burst on the right, with small rock chips and a puff of dust. The shoulder is big and bold, filling most of the badge, lit brightly so it reads clearly when tiny. Strict rules: 0) Exactly ONE badge, no labels. 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) No letters, words or numbers anywhere. 3) Flat pure magenta #FF00FF background everywhere outside the badge."
+    "text": "The first image is an empty magenta canvas. On it, paint TWO separate skill icons for my 2D side-scrolling game, side by side, each centred in its own half of the canvas, the same size, with a wide band of plain magenta (at least a tenth of the canvas) around and between them, not touching. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished skill icons from the same set: match their badge shape, frame thickness, metal trim, inner background glow, painting style and level of detail exactly, with a bold dark brown outline like the NPCs'. Each icon is a square badge with softly rounded corners: a thick painted frame with a thin bright metal trim, and inside it a darker painted background of the frame's colour with a soft glow. Left, Shoulder Bash (frame warm brown, copper trim): Show ONLY a shoulder and upper arm, no head, no face, no body, no person: a brown leather-padded tunic shoulder seen from the side, thrusting forward from the left and slamming into a bright golden-white impact burst on the right, with small rock chips and a puff of dust. The shoulder is big and bold, filling most of the badge, lit brightly so it reads clearly when tiny. Right, Rolling Dash (frame rich gold, bright gold trim): ONLY a big curling blue-green sea wave sweeping forward from left to right, white foam on its crest, with a brown leather pirate tricorn hat tumbling through the curl; no head, no face, no person. Bold and simple, filling most of the badge. Strict rules: 0) Exactly TWO badges, no labels. 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) No letters, words or numbers anywhere. 3) Flat pure magenta #FF00FF background everywhere outside the badges."
    }
   },
   {
