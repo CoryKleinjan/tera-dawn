@@ -22,8 +22,9 @@ func _sound_ids() -> Dictionary:
 		if s.cast_sound() != &"":
 			out[s.cast_sound()] = "skill %s" % s.id
 	for m: MonsterDef in Content.monsters.values():
-		if m.shot and m.shot.sound != &"":
-			out[m.shot.sound] = "monster %s" % m.id
+		for shot in m.projectiles():
+			if shot.sound != &"":
+				out[shot.sound] = "monster %s" % m.id
 	for id in [Sound.CLICK, TDWindow.OPEN_SOUND, TDWindow.CLOSE_SOUND, TDPlayer.HURT_SOUND, TDPlayer.PORTAL_SOUND]:
 		out[id] = "code"
 	return out

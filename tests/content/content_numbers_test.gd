@@ -49,10 +49,31 @@ func test_monsters_have_positive_stats() -> void:
 		check(m.respawn_ticks.x > 0 and m.respawn_ticks.x <= m.respawn_ticks.y, "%s: respawn_ticks %s must be positive and low to high" % [w, m.respawn_ticks])
 		if m.flying:
 			check(m.hover_height > 0, "%s: flying with hover_height %s" % [w, m.hover_height])
-		if m.shot:
-			check(m.shot_range > 0 and m.shot_cooldown > 0, "%s: shot_range %s / shot_cooldown %d must be positive" % [w, m.shot_range, m.shot_cooldown])
+		check(m.sight > 0, "%s: sight is %s" % [w, m.sight])
+		for mv in m.moves:
+			if not check(mv != null, "%s: a move is empty" % w):
+				continue
+			check(mv.reach > mv.min_reach and mv.windup > 0 and mv.cooldown > 0 and mv.power > 0, "%s: move %s needs reach > min_reach and a positive windup, cooldown and power" % [w, mv.id])
+			if mv.kind in [MonsterMove.Kind.LUNGE, MonsterMove.Kind.CHARGE, MonsterMove.Kind.SWOOP, MonsterMove.Kind.BLINK]:
+				check(mv.distance > 0 and mv.speed > 0, "%s: move %s needs a distance and speed" % [w, mv.id])
+			if mv.kind == MonsterMove.Kind.SWOOP:
+				check(m.flying, "%s: only fliers can swoop (%s)" % [w, mv.id])
+			if m.stationary:
+				check(mv.kind in [MonsterMove.Kind.SHOT, MonsterMove.Kind.SLAM], "%s: never moves, so it can't %s" % [w, mv.id])
 		if m.splits_into:
 			check(m.splits_into.level <= m.level, "%s: splits into %s, which is a higher level (%d > %d)" % [w, m.splits_into.id, m.splits_into.level, m.level])
+
+func test_monsters_have_one_or_two_moves_and_bosses_three() -> void:
+	for m: MonsterDef in Content.monsters.values():
+		var w := Scan.where(m)
+		if m.boss:
+			check_eq(m.moves.size(), 3, "%s: a boss has three moves" % w)
+			var kinds := {}
+			for mv in m.moves:
+				kinds[mv.kind] = true
+			check_eq(kinds.size(), 3, "%s: a boss's three moves are all different" % w)
+		else:
+			check_between(m.moves.size(), 1, 2, "%s: one or two moves" % w)
 
 func test_bosses_outclass_their_map() -> void:
 	for map: MapDef in Content.maps.values():

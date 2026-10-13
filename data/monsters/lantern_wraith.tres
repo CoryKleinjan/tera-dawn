@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=31 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=34 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
-[ext_resource type="Resource" path="res://data/projectiles/mob_shadow.tres" id="2_mob_shadow"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/lantern_wraith.tres" id="3_lantern_wraith"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="5_dawnshard"]
@@ -17,6 +16,10 @@
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_int_60.tres" id="15_scroll_top_int_60"]
 [ext_resource type="Resource" path="res://data/items/use/power_elixir.tres" id="22_power_elixir"]
 [ext_resource type="Resource" path="res://data/items/setup/lantern_bench.tres" id="p11_lantern_bench"]
+[ext_resource type="Resource" path="res://data/monster_moves/boss_shot_shadow.tres" id="mv_boss_shot_shadow"]
+[ext_resource type="Resource" path="res://data/monster_moves/boss_swoop.tres" id="mv_boss_swoop"]
+[ext_resource type="Resource" path="res://data/monster_moves/blink.tres" id="mv_blink"]
+[ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="mv_script"]
 
 [sub_resource type="Resource" id="Resource_18"]
 script = ExtResource("4_drop_entry")
@@ -118,16 +121,15 @@ max_hp = 50424
 attack = 114
 exp_reward = 10384
 speed = 1.3
-size = Vector2(86.0, 134.0)
+size = Vector2(57.0, 89.0)
 boss = true
 flying = true
 hover_height = 80.0
-shot = ExtResource("2_mob_shadow")
-shot_range = 380.0
-shot_cooldown = 110
-aggressive = true
+sight = 700.0
+moves = Array[ExtResource("mv_script")]([ExtResource("mv_boss_shot_shadow"), ExtResource("mv_boss_swoop"), ExtResource("mv_blink")])
+keep_distance = 160.0
 sprite_frames = ExtResource("3_lantern_wraith")
-sprite_scale = 1.65
+sprite_scale = 1.1
 light_color = Color(0.501961, 0.376471, 1.0, 1.0)
 drops = Array[ExtResource("4_drop_entry")]([SubResource("P11_lantern_bench"), SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_18")])
 respawn_ticks = Vector2i(1800, 2400)

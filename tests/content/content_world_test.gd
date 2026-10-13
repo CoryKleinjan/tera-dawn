@@ -392,7 +392,7 @@ func test_there_is_enough_content() -> void:
 	# the same floors the smoke test keeps
 	var towns := Content.maps.values().filter(func(m: MapDef) -> bool: return m.town)
 	var bosses := Content.monsters.values().filter(func(m: MonsterDef) -> bool: return m.boss)
-	var shooters := Content.monsters.values().filter(func(m: MonsterDef) -> bool: return m.shot != null)
+	var shooters := Content.monsters.values().filter(func(m: MonsterDef) -> bool: return not m.projectiles().is_empty())
 	var splitters := Content.monsters.values().filter(func(m: MonsterDef) -> bool: return m.splits_into != null)
 	var scrolls := Content.items.values().filter(func(i: ItemDef) -> bool: return i is ScrollDef)
 	check(Content.maps.has(&"meadow") and Content.maps.has(&"hollow"), "the starting maps meadow and hollow exist")

@@ -8,6 +8,7 @@ const DATA := "res://data"
 ## Folder (under data/) -> the classes a file there may be. The most specific folder wins.
 const EXPECTED := {
 	"monsters": ["MonsterDef"],
+	"monster_moves": ["MonsterMove"],
 	"npcs": ["NpcDef"],
 	"items": ["ItemDef"],
 	"items/equips": ["EquipDef"],

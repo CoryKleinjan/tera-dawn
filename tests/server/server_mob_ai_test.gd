@@ -109,25 +109,51 @@ func test_a_monster_far_away_doesnt_hurt() -> void:
 	h.step(60)
 	check_eq(p.character.health.hp, p.character.max_hp(), "untouched")
 
-func _shooter() -> MonsterDef:
-	var d := ServerHarness.monster(&"shooter", 100000, 1)
+## A move of `kind` for a test monster, ready the moment it fits.
+static func _move(kind: MonsterMove.Kind, reach := 320.0) -> MonsterMove:
+	var mv := MonsterMove.new()
+	mv.id = &"test_move"
+	mv.kind = kind
+	mv.reach = reach
+	mv.windup = 20
+	mv.cooldown = 150
+	mv.recover = 20
+	if kind == MonsterMove.Kind.SHOT:
+		mv.projectile = load("res://data/projectiles/mob_bolt.tres")
+	return mv
+
+## A monster with `mv`, ready to use it straight away.
+func _with_move(mv: MonsterMove, id := &"mover") -> MonsterDef:
+	var d := ServerHarness.monster(id, 100000, 1)
 	d.level = 50
-	d.stationary = true
-	d.aggressive = true
-	d.shot = load("res://data/projectiles/mob_bolt.tres")
-	d.shot_range = 320.0
-	d.shot_cooldown = 150
+	d.attack = 10
+	d.sight = 320.0
+	d.moves = [mv]
 	return d
 
-func test_an_aggressive_shooter_fires_at_a_player_in_range() -> void:
+func _ready_now(m: SimMob) -> void:
+	m.moves.cool.fill(0)
+	m.moves.gap = 0
+
+func _shooter() -> MonsterDef:
+	var d := _with_move(_move(MonsterMove.Kind.SHOT), &"shooter")
+	d.attack = 1
+	d.stationary = true
+	return d
+
+func test_a_shooter_fires_at_a_player_in_sight() -> void:
 	var map := h.field_with([ServerHarness.spawn(_shooter())])
 	var m := map.mobs[0]
 	m.position.x = 500.0
-	m.shot_t = 1
+	_ready_now(m)
 	var p := h.join(2, "Ann", ServerHarness.FIELD, 300.0)
 	var full := p.character.health.hp
 	h.step(1)
-	check_eq(h.last(2, &"ev_mob_shot"), [0, 300.0, 600.0 - SimPlayer.CHEST], "fires at where Ann stands")
+	check(int(m.snapshot()[4]) & SnapshotFlags.MOB_WINDUP != 0, "winds up first")
+	check_eq(h.count(2, &"ev_mob_shot"), 0, "no shot yet")
+	h.step(20)
+	check_eq(h.last(2, &"ev_mob_shot"), [0, 0, 300.0, 600.0 - SimPlayer.CHEST], "fires at where Ann stands")
+	check(int(m.snapshot()[4]) & SnapshotFlags.MOB_WINDUP == 0, "and the wind-up ends")
 	check_eq(m.dir, -1, "turned to face her")
 	var flight: int = m.shots[0][1]
 	h.step(flight - 1)
@@ -139,53 +165,303 @@ func test_stepping_out_of_the_way_dodges_a_shot() -> void:
 	var map := h.field_with([ServerHarness.spawn(_shooter())])
 	var m := map.mobs[0]
 	m.position.x = 500.0
-	m.shot_t = 1
+	_ready_now(m)
 	var p := h.join(2, "Ann", ServerHarness.FIELD, 300.0)
-	h.step(1)
+	h.step(21)
+	check_eq(m.shots.size(), 1, "fired")
 	h.place(p, 240.0)
 	h.step(int(m.shots[0][1]))
 	check(m.shots.is_empty(), "the shot landed")
 	check_eq(p.character.health.hp, p.character.max_hp(), "missed her")
 
-func test_a_shooter_winds_up_before_it_fires_only_with_someone_to_aim_at() -> void:
-	var map := h.field_with([ServerHarness.spawn(_shooter())])
-	var m := map.mobs[0]
-	m.position.x = 500.0
-	m.shot_t = SimMob.WINDUP_TICKS + 5
-	h.step(1)
-	check(int(m.snapshot()[4]) & SnapshotFlags.MOB_WINDUP == 0, "nobody in range: no wind-up")
-	h.join(2, "Ann", ServerHarness.FIELD, 300.0)
-	h.step(3)
-	check(int(m.snapshot()[4]) & SnapshotFlags.MOB_WINDUP == 0, "not yet: the shot is still a while off")
-	h.step(2)
-	check(int(m.snapshot()[4]) & SnapshotFlags.MOB_WINDUP != 0, "winding up for the last ticks before the shot")
-	h.step(SimMob.WINDUP_TICKS)
-	check_eq(h.count(2, &"ev_mob_shot"), 1, "then it fires")
-	check(int(m.snapshot()[4]) & SnapshotFlags.MOB_WINDUP == 0, "and the wind-up ends")
-
-func test_shooters_ignore_players_out_of_range() -> void:
+func test_monsters_ignore_players_out_of_sight() -> void:
 	var map := h.field_with([ServerHarness.spawn(_shooter())])
 	var m := map.mobs[0]
 	m.position.x = 1000.0
-	m.shot_t = 1
+	_ready_now(m)
 	h.join(2, "Ann", ServerHarness.FIELD, 300.0)
-	h.step(30)
-	check_eq(h.count(2, &"ev_mob_shot"), 0, "no shot at 700 px")
+	h.step(60)
+	check_eq(m.target, 0, "didn't notice Ann 700 px away")
+	check_eq(h.count(2, &"ev_mob_shot"), 0, "no shot")
 
-func test_a_calm_shooter_only_fires_at_whoever_hit_it() -> void:
-	var d := _shooter()
-	d.aggressive = false
+func test_a_monster_notices_a_player_who_comes_in_sight() -> void:
+	var d := _walker()
 	var map := h.field_with([ServerHarness.spawn(d)])
 	var m := map.mobs[0]
-	m.position.x = 500.0
-	m.shot_t = 1
-	h.join(2, "Ann", ServerHarness.FIELD, 300.0)
-	h.step(30)
-	check_eq(h.count(2, &"ev_mob_shot"), 0, "leaves Ann alone")
+	m.position.x = 1000.0
+	var p := h.join(2, "Ann", ServerHarness.FIELD, 300.0)
+	h.step(5)
+	check_eq(m.target, 0, "too far to notice")
+	h.place(p, 1000.0 - d.sight + 20.0)
+	h.step(1)
+	check_eq(m.target, 2, "notices her once she's in sight")
+	var x := m.position.x
+	h.step(10)
+	check_near(m.position.x, x - 10 * d.speed * SimMob.CHASE_SPEED, "and goes after her")
+
+func test_a_monster_gives_up_after_losing_sight() -> void:
+	var d := _walker()
+	var map := h.field_with([ServerHarness.spawn(d)])
+	var m := map.mobs[0]
+	m.position.x = 600.0
+	var p := h.join(2, "Ann", ServerHarness.FIELD, 450.0)
+	h.step(1)
+	check_eq(m.target, 2, "noticed her")
+	h.place(p, 1900.0)
+	h.step(SimMob.SIGHT_TICKS - 5)
+	check_eq(m.target, 2, "still after her for a while")
+	h.step(10)
+	check_eq(m.target, 0, "then gives up")
+
+func test_it_goes_for_the_nearest_player_it_sees() -> void:
+	var map := h.field_with([ServerHarness.spawn(_walker())])
+	var m := map.mobs[0]
+	m.position.x = 600.0
+	h.join(2, "Ann", ServerHarness.FIELD, 400.0)
+	h.join(3, "Bo", ServerHarness.FIELD, 700.0)
+	h.step(1)
+	check_eq(m.target, 3, "Bo is closer")
+
+func test_it_keeps_after_its_target_while_it_can_see_them() -> void:
+	var map := h.field_with([ServerHarness.spawn(_walker())])
+	var m := map.mobs[0]
+	m.position.x = 600.0
+	h.join(2, "Ann", ServerHarness.FIELD, 700.0)
+	h.step(1)
+	check_eq(m.target, 2, "after Ann")
+	var bo := h.join(3, "Bo", ServerHarness.FIELD, 1200.0)
+	m.hurt(1, 3) # Bo hits it from afar
+	h.step(1)
+	check_eq(m.target, 2, "still after Ann, who's in front of it")
+	h.place(map.players[2], 1900.0)
+	h.step(SimMob.SIGHT_TICKS + 2)
+	check_eq(m.target, 3, "Ann gone: turns on Bo, who hit it")
+	check(bo != null, "Bo joined")
+
+func test_a_lunge_hurts_and_each_player_once() -> void:
+	var mv := _move(MonsterMove.Kind.LUNGE, 120.0)
+	mv.distance = 80.0
+	mv.speed = 5.0
+	mv.power = 3.0
+	var d := _with_move(mv)
+	var map := h.field_with([ServerHarness.spawn(d)])
+	var m := map.mobs[0]
+	m.position.x = 600.0
+	_ready_now(m)
+	var p := h.join(2, "Ann", ServerHarness.FIELD, 520.0)
+	p.inv = 0
+	h.step(1)
+	check(m.moves.winding(), "winds up")
+	h.place(p, 520.0)
+	h.step(20) # strikes
+	var hurt_by := 0
+	for i in 30:
+		h.place(p, 520.0)
+		h.step(1)
+		if p.character.health.hp < p.character.max_hp():
+			hurt_by = p.character.max_hp() - p.character.health.hp
+			break
+	check_between(hurt_by, 20, 36, "the lunge hits for its power (3x an attack of 10)")
+	check(m.position.x < 600.0, "it lunged forward")
+
+func test_a_charge_dashes_along_the_platform() -> void:
+	var mv := _move(MonsterMove.Kind.CHARGE, 300.0)
+	mv.distance = 200.0
+	mv.speed = 8.0
+	var map := h.field_with([ServerHarness.spawn(_with_move(mv))])
+	var m := map.mobs[0]
+	m.position.x = 800.0
+	_ready_now(m)
+	h.join(2, "Ann", ServerHarness.FIELD, 600.0)
+	h.step(21)
+	check(not m.moves.winding(), "done winding up")
+	h.step(25)
+	check_near(m.position.x, 600.0, "dashed 200 px toward her", 1.0)
+
+func test_a_slam_misses_a_player_in_the_air() -> void:
+	var mv := _move(MonsterMove.Kind.SLAM, 100.0)
+	mv.radius = 120.0
+	mv.power = 2.0
+	var map := h.field_with([ServerHarness.spawn(_with_move(mv))])
+	var m := map.mobs[0]
+	m.position.x = 600.0
+	_ready_now(m)
+	var p := h.join(2, "Ann", ServerHarness.FIELD, 690.0)
+	h.step(1)
+	check(m.moves.winding(), "winds up")
+	h.place(p, 690.0, ServerHarness.GROUND - 40.0) # jumps
+	h.step(20)
+	check_eq(h.last(2, &"ev_mob_move").slice(1, 2), [&"slam"], "slams")
+	check_eq(p.character.health.hp, p.character.max_hp(), "jumping over it dodges it")
+
+func test_a_slam_hurts_a_player_on_the_ground_nearby() -> void:
+	var mv := _move(MonsterMove.Kind.SLAM, 100.0)
+	mv.radius = 120.0
+	mv.power = 2.0
+	var map := h.field_with([ServerHarness.spawn(_with_move(mv))])
+	var m := map.mobs[0]
+	m.position.x = 600.0
+	_ready_now(m)
+	var p := h.join(2, "Ann", ServerHarness.FIELD, 690.0)
+	h.step(21)
+	check_between(p.character.max_hp() - p.character.health.hp, 13, 24, "hit for its power (2x an attack of 10)")
+
+func test_a_swoop_dives_down_to_the_player() -> void:
+	var mv := _move(MonsterMove.Kind.SWOOP, 250.0)
+	mv.distance = 260.0
+	mv.speed = 5.0
+	var d := _with_move(mv)
+	d.flying = true
+	d.hover_height = 60.0
+	var map := h.field_with([ServerHarness.spawn(d)])
+	var m := map.mobs[0]
+	m.position.x = 600.0
+	_ready_now(m)
+	var p := h.join(2, "Ann", ServerHarness.FIELD, 450.0)
+	var lowest := -INF
+	var hurt := false
+	for i in 120:
+		h.place(p, 450.0)
+		h.step(1)
+		lowest = maxf(lowest, m.body_position().y)
+		hurt = hurt or p.character.health.hp < p.character.max_hp()
+	check(lowest > ServerHarness.GROUND - 20.0, "dived down to her feet (lowest body %s)" % lowest)
+	check(hurt, "and hit her")
+	check(not m.moves.busy(), "then climbed back up and rested")
+	check_eq(m.hop, 0.0, "back at its height")
+
+func test_a_hit_doesnt_knock_a_monster_out_of_its_move() -> void:
+	var mv := _move(MonsterMove.Kind.CHARGE, 300.0)
+	mv.distance = 200.0
+	mv.speed = 8.0
+	var map := h.field_with([ServerHarness.spawn(_with_move(mv))])
+	var m := map.mobs[0]
+	m.position.x = 800.0
+	_ready_now(m)
+	h.join(2, "Ann", ServerHarness.FIELD, 600.0)
+	h.step(5)
 	m.hurt(1, 2)
-	m.shot_t = 1
-	h.step(15)
-	check_eq(h.count(2, &"ev_mob_shot"), 1, "shoots back once hit")
+	check_eq(m.kx, 0.0, "no knockback mid-move")
+	h.step(16)
+	check(m.moves.busy() and not m.moves.winding(), "charging anyway")
+
+func _boss(moves: Array[MonsterMove]) -> MonsterDef:
+	var d := ServerHarness.monster(&"test_boss", 100000, 1)
+	d.level = 50
+	d.boss = true
+	d.sight = 700.0
+	d.moves = moves
+	return d
+
+func test_a_boss_never_uses_the_same_move_twice_in_a_row() -> void:
+	var a := _move(MonsterMove.Kind.LUNGE, 400.0)
+	a.distance = 10.0
+	a.cooldown = 1
+	var b := _move(MonsterMove.Kind.SLAM, 400.0)
+	b.cooldown = 1
+	var map := h.field_with([ServerHarness.spawn(_boss([a, b]))])
+	var m := map.mobs[0]
+	m.position.x = 600.0
+	_ready_now(m)
+	h.join(2, "Ann", ServerHarness.FIELD, 900.0)
+	var used: Array[int] = []
+	for i in 2000:
+		var before := m.moves.index
+		h.step(1)
+		if m.moves.index >= 0 and m.moves.index != before:
+			used.append(m.moves.index)
+		if used.size() >= 6:
+			break
+	check(used.size() >= 6, "used moves: %s" % [used])
+	for i in range(1, used.size()):
+		check(used[i] != used[i - 1], "move %d differs from the one before (%s)" % [i, used])
+
+func test_a_boss_goes_for_whoever_hurt_it_most() -> void:
+	var map := h.field_with([ServerHarness.spawn(_boss([]))])
+	var m := map.mobs[0]
+	m.position.x = 600.0
+	h.join(2, "Ann", ServerHarness.FIELD, 650.0)
+	h.join(3, "Bo", ServerHarness.FIELD, 1000.0)
+	h.step(1)
+	check_eq(m.target, 2, "Ann is nearest")
+	m.health.damage(50)
+	m.hurt(1, 3)
+	m.health.damage(5)
+	m.hurt(1, 2)
+	h.step(1)
+	check_eq(m.target, 3, "Bo did the most damage")
+
+func test_a_boss_aims_where_the_player_is_heading() -> void:
+	var map := h.field_with([ServerHarness.spawn(_boss([_move(MonsterMove.Kind.SHOT, 600.0)]))])
+	var m := map.mobs[0]
+	m.position.x = 1000.0
+	m.dir = -1
+	var p := h.join(2, "Ann", ServerHarness.FIELD, 500.0)
+	_ready_now(m)
+	m.moves.gap = 30
+	for i in 50:
+		h.place(p, 500.0 + i * 3.0) # running toward it
+		h.step(1)
+		if h.count(2, &"ev_mob_shot") > 0:
+			break
+	var shot: Array = h.last(2, &"ev_mob_shot")
+	check(not shot.is_empty(), "it fired")
+	if not shot.is_empty():
+		check(shot[2] > p.position.x + 20.0, "aimed ahead of her (at %s, she's at %s)" % [shot[2], p.position.x])
+
+func test_a_boss_leaps_to_the_players_platform() -> void:
+	var field := ServerHarness.field_def()
+	field.platforms.append(ServerHarness.platform(100, 450, 500))
+	field.spawns.append(ServerHarness.spawn(_boss([])))
+	h.add_map(field)
+	var map := h.server.map_instance(ServerHarness.FIELD)
+	var m := map.mobs[0]
+	m.position.x = 700.0
+	var p := h.join(2, "Ann", ServerHarness.FIELD, 300.0)
+	h.place(p, 300.0, 450.0)
+	for i in 200:
+		h.place(p, 300.0, 450.0)
+		h.step(1)
+		if m.plat.y == 450.0 and not m.moves.busy():
+			break
+	check_eq(m.plat.y, 450.0, "now on her platform")
+	check_eq(m.position.y, 450.0, "standing on it")
+	check_between(m.position.x, 100.0, 600.0, "within it")
+
+func test_a_boss_gets_a_second_wind_at_half_hp() -> void:
+	var map := h.field_with([ServerHarness.spawn(_boss([]))])
+	var m := map.mobs[0]
+	m.position.x = 1500.0
+	h.join(2, "Ann", ServerHarness.FIELD, 300.0)
+	h.step(1)
+	check(not m.enraged, "calm at full HP")
+	m.health.damage(m.def.max_hp / 2 + 1)
+	h.step(1)
+	check(m.enraged, "angry below half")
+	check(int(m.snapshot()[4]) & SnapshotFlags.MOB_ENRAGED != 0, "clients see it")
+	check_eq(h.last(2, &"ev_mob_move").slice(1, 2), [&"rage"], "with a burst")
+
+func test_a_blink_reappears_behind_the_player() -> void:
+	var mv := _move(MonsterMove.Kind.BLINK, 500.0)
+	mv.min_reach = 100.0
+	mv.distance = 60.0
+	mv.speed = 6.0
+	var map := h.field_with([ServerHarness.spawn(_with_move(mv))])
+	var m := map.mobs[0]
+	m.position.x = 1000.0
+	_ready_now(m)
+	var p := h.join(2, "Ann", ServerHarness.FIELD, 700.0)
+	p.face = 1 # facing the monster
+	var was_hidden := false
+	for i in 60:
+		h.place(p, 700.0)
+		p.face = 1
+		h.step(1)
+		was_hidden = was_hidden or int(m.snapshot()[4]) & SnapshotFlags.MOB_HIDDEN != 0
+		if was_hidden and not m.moves.hidden:
+			break
+	check(was_hidden, "vanished")
+	check(m.position.x < 700.0, "came back behind her (at %s)" % m.position.x)
 
 func _slime() -> MonsterDef:
 	var small := ServerHarness.monster(&"small_slime", 1, 2)

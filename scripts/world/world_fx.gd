@@ -118,16 +118,41 @@ func dust(feet: Vector2, dir: int, amount: int) -> void:
 ## Dust's colour: pale sandy brown, not glowing.
 const DUST := Color(0.82, 0.74, 0.6, 0.6)
 
-## Monster `index` fired its shot at the point `aim`.
-func show_mob_shot(index: int, aim: Vector2) -> void:
+## Monster `index` fired its shot (move `move_index`) at the point `aim`.
+func show_mob_shot(index: int, move_index: int, aim: Vector2) -> void:
 	var views := world.mobs()
-	if index >= views.size() or views[index].def.shot == null:
+	if index >= views.size() or move_index >= views[index].def.moves.size():
 		return
 	var m := views[index]
+	var shot := m.def.moves[move_index].projectile
+	if shot == null:
+		return
 	m.dir = -1 if aim.x < m.position.x else 1
 	var from := m.body_position() + Vector2(m.dir * m.def.size.x * 0.4, -m.def.size.y * 0.55)
-	world.fx_layer.add_child(TDProjectile.create(world, m.def.shot, from, aim, 0, null, Callable()))
-	world.sound_at(m.def.shot.sound, from)
+	world.fx_layer.add_child(TDProjectile.create(world, shot, from, aim, 0, null, Callable()))
+	world.sound_at(shot.sound, from)
+
+## Monster `index`'s move did `what` at `at` (see Net.ev_mob_move): a slam's dust and
+## shake, a landing's dust, a blink's puff of light, a boss's second wind.
+func show_mob_move(index: int, what: StringName, at: Vector2) -> void:
+	var views := world.mobs()
+	var m: TDMob = views[index] if index < views.size() else null
+	match what:
+		&"slam":
+			var reach := m.def.size.x if m else 60.0
+			dust(at + Vector2(-reach * 0.5, 0), -1, 18)
+			dust(at + Vector2(reach * 0.5, 0), 1, 18)
+			if world.player and absf(world.player.position.x - at.x) < 500.0:
+				world.shake(0.5 if m and m.def.boss else 0.25)
+		&"land":
+			dust(at, 0, 14 if m and m.def.boss else 8)
+		&"blink":
+			burst(at + Vector2(0, -30), Color(0.7, 0.6, 1.6), 16, 0.8)
+		&"rage":
+			burst(at + Vector2(0, -40), Color(2.0, 0.6, 0.3), 30, 1.2)
+			flash(at + Vector2(0, -40), Color(1.0, 0.45, 0.25), 2.5)
+			if m:
+				m.rig.pulse(Color(1.0, 0.4, 0.3))
 
 func show_mob_death(index: int) -> void:
 	var views := world.mobs()

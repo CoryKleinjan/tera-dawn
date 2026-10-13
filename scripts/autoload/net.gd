@@ -598,9 +598,16 @@ func ev_player_shop(owner: int, owner_name: String, title: String, items: Array)
 		world.hud.show_player_shop(owner, owner_name, title, items)
 
 @rpc("authority", "call_local", "reliable")
-func ev_mob_shot(index: int, x: float, y: float) -> void:
+func ev_mob_shot(index: int, move_index: int, x: float, y: float) -> void:
 	if world:
-		world.show_mob_shot(index, Vector2(x, y))
+		world.show_mob_shot(index, move_index, Vector2(x, y))
+
+## A monster's move did something worth showing at (x, y): "slam", "land", "blink" or
+## "rage" (a boss's second wind).
+@rpc("authority", "call_local", "reliable")
+func ev_mob_move(index: int, what: StringName, x: float, y: float) -> void:
+	if world:
+		world.fx.show_mob_move(index, what, Vector2(x, y))
 
 ## A short piece of music for you alone (a quest done, a new job), played over the map's
 ## track (Sound.jingle).

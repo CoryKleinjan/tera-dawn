@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MonsterMove" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="1_monster_move"]
+[ext_resource type="Resource" path="res://data/projectiles/mob_seed.tres" id="2_mob_seed"]
+
+[resource]
+script = ExtResource("1_monster_move")
+id = &"shot_seed"
+kind = 5
+reach = 320.0
+windup = 22
+cooldown = 150
+power = 1.0
+recover = 24
+projectile = ExtResource("2_mob_seed")

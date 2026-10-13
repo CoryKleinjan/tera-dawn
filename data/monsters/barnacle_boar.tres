@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=20 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=23 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/barnacle_boar.tres" id="2_barnacle_boar"]
@@ -11,6 +11,9 @@
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_gloves_att_60.tres" id="9_scroll_gloves_att_60"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_shield_def_60.tres" id="10_scroll_shield_def_60"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_weapon_matt_10.tres" id="11_scroll_weapon_matt_10"]
+[ext_resource type="Resource" path="res://data/monster_moves/charge.tres" id="mv_charge"]
+[ext_resource type="Resource" path="res://data/monster_moves/lunge.tres" id="mv_lunge"]
+[ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="mv_script"]
 
 [sub_resource type="Resource" id="Resource_8"]
 script = ExtResource("3_drop_entry")
@@ -80,6 +83,7 @@ speed = 1.25
 size = Vector2(60.0, 42.0)
 boss = false
 flying = false
+moves = Array[ExtResource("mv_script")]([ExtResource("mv_charge"), ExtResource("mv_lunge")])
 sprite_frames = ExtResource("2_barnacle_boar")
 sprite_scale = 1.0
 drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8")])
