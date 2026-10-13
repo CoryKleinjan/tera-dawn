@@ -2,7 +2,7 @@ extends SmokeArea
 ## Ranged and magic attacks: arrows, spells and throwing stars.
 
 ## An Archer's bow shoots arrows that fly to the monster (no ammo needed), a Magician's
-## Energy Bolt uses magic, and a thief's stars throw with nothing in the bag.
+## Ice Spike uses magic, and a Thief's stars in the shield slot throw with nothing in the bag.
 func check() -> void:
 	var ch := _me().character
 	var meadow: MapInstance = Net.server.maps[&"meadow"]
@@ -46,21 +46,27 @@ func check() -> void:
 	ch.equipment.take(&"weapon")
 	ch.equipment.put(&"weapon", ItemStack.exact(Content.item(&"apprentice_wand")))
 	ch.base.intelligence = 60
-	ch.skills.learned[&"energy_bolt"] = 1
+	ch.skills.learned[&"ice_spike"] = 1
 	ch.recalc()
-	var bolt: SkillDef = Content.skill(&"energy_bolt")
+	var bolt: SkillDef = Content.skill(&"ice_spike")
 	var magic := ch.magic_range()
 	_check(magic.y > ch.damage_range().y, "a Magician's spells hit harder than their wand")
 	var hit := Combat.player_hit(bolt, m.def, ch)
-	_check(hit["miss"] or (hit["damage"] >= 1 and hit["damage"] <= roundi(magic.y * 1.6) + 1), "Energy Bolt's damage comes from Magic Attack")
+	_check(hit["miss"] or (hit["damage"] >= 1 and hit["damage"] <= roundi(magic.y * 1.6) + 1), "Ice Spike's damage comes from Magic Attack")
 	# a thief throws with nothing in the bag
 	ch.job = Content.job(&"thief")
 	ch.equipment.take(&"weapon")
-	ch.equipment.put(&"weapon", ItemStack.exact(Content.item(&"iron_star")))
-	ch.skills.learned[&"lucky_seven"] = 1
-	_check(ch.skills.use_problem(Content.skill(&"lucky_seven")) == "", "Lucky Seven needs no ammo")
-	ch.skills.learned[&"flash_fist"] = 1
-	_check(ch.skills.use_problem(Content.skill(&"flash_fist")).contains("needs a knuckle"), "Flash Fist needs a knuckle")
+	ch.equipment.put(&"weapon", ItemStack.exact(Content.item(&"rusty_dagger")))
+	ch.skills.learned[&"star_scatter"] = 1
+	_check(ch.skills.use_problem(Content.skill(&"star_scatter")).contains("throwing stars"), "Star Scatter needs stars in the shield slot")
+	var shield := ch.equipment.take(&"shield")
+	ch.equipment.put(&"shield", ItemStack.exact(Content.item(&"iron_star")))
+	_check(ch.skills.use_problem(Content.skill(&"star_scatter")) == "", "and needs no ammo")
+	ch.skills.learned[&"riptide_combo"] = 1
+	_check(ch.skills.use_problem(Content.skill(&"riptide_combo")).contains("needs a knuckle"), "Riptide Combo needs a knuckle")
+	ch.equipment.take(&"shield")
+	if shield:
+		ch.equipment.put(&"shield", shield)
 	# back to a Warrior with a sword for the rest of the test
 	ch.job = Content.job(&"warrior")
 	ch.equipment.take(&"weapon")

@@ -1,29 +1,30 @@
 [gd_resource type="Resource" script_class="SkillDef" load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
-[ext_resource type="Resource" path="res://data/effects/swish.tres" id="2_swish"]
-[ext_resource type="Resource" path="res://data/effects/power_strike_hit.tres" id="3_critical"]
-[ext_resource type="Texture2D" path="res://assets/sprites/skills/power_strike.png" id="4_power_strike"]
+[ext_resource type="Resource" path="res://data/effects/swish.tres" id="e_swish"]
+[ext_resource type="Resource" path="res://data/effects/power_strike_hit.tres" id="h_power_strike_hit"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/power_strike.png" id="i_power_strike"]
 
 [resource]
 script = ExtResource("1_skill_def")
 id = &"power_strike"
 display_name = "Power Strike"
 job = &"warrior"
-max_level = 20
+max_level = 15
 kind = 0
-description = "Put your whole weight behind one blow against a single monster."
+description = "Put your whole weight behind one blow that sends a single monster flying."
 mp_cost = 4
-mp_cost_per_level = 0.3
+mp_cost_per_level = 0.28571
+damage_multiplier = 1.8
+damage_per_level = 0.14286
+hits = 1
+max_targets = 1
 cooldown = 26
 action_ticks = 18
 reach = 96.0
 height = 100.0
-max_targets = 1
-hits = 1
-damage_multiplier = 1.6
-damage_per_level = 0.08
+knockback = 2.0
 animation = &"attack"
-effect = ExtResource("2_swish")
-hit_effect = ExtResource("3_critical")
-icon = ExtResource("4_power_strike")
+effect = ExtResource("e_swish")
+hit_effect = ExtResource("h_power_strike_hit")
+icon = ExtResource("i_power_strike")

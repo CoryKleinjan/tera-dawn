@@ -7,7 +7,7 @@
 
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("4_stat_block")
-attack = 29
+attack = 24
 
 [resource]
 script = ExtResource("1_equip_def")
@@ -25,4 +25,4 @@ required_level = 15
 stats = SubResource("Resource_1")
 variance = 2
 weapon_kind = &"knuckle"
-required_strength = 40
+required_charisma = 40

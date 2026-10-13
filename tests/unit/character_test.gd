@@ -124,7 +124,7 @@ func test_recalc_without_job_does_nothing() -> void:
 func test_damage_range_uses_total_stats() -> void:
 	var c := fx.character(null, {"strength": 20, "dexterity": 10})
 	c.equipment.put(&"weapon", ItemStack.exact(fx.equip(&"t_a", EquipDef.Slot.WEAPON, {"attack": 10})))
-	check_eq(c.damage_range(), Vector2i(9, 18), "range")
+	check_eq(c.damage_range(), Vector2i(7, 14), "range: 20 STR × 3.6 × 10 / 100 × 2")
 
 # ---------- Ability Points ----------
 
@@ -171,24 +171,14 @@ func test_auto_ap_fills_the_primary_stat() -> void:
 	c.ap.points = 0
 	check_eq(c.ap.auto_plan(), {}, "nothing to spend")
 
-func test_auto_ap_keeps_enough_secondary_for_gear() -> void:
-	var c := fx.character(null, {"strength": 10, "dexterity": 5})
-	c.level = 10
-	var worn := fx.equip(&"t_worn", EquipDef.Slot.WEAPON)
-	worn.required_dexterity = 7
-	c.equipment.put(&"weapon", ItemStack.exact(worn))
-	var bagged := fx.equip(&"t_bagged", EquipDef.Slot.TOP)
-	bagged.required_dexterity = 9
-	c.inventory.add_stack(ItemStack.exact(bagged))
-	var later := fx.equip(&"t_later", EquipDef.Slot.SHOES)
-	later.required_dexterity = 30
-	later.required_level = 20
-	c.inventory.add_stack(ItemStack.exact(later))
-	c.recalc()
-	c.ap.points = 10
-	check_eq(c.ap.auto_plan(), {&"dexterity": 4, &"strength": 6}, "DEX up to the bag's top (not gear for later levels), the rest in STR")
-	c.ap.points = 3
-	check_eq(c.ap.auto_plan(), {&"dexterity": 3}, "gear first when points are short")
+func test_refund_all_hands_back_every_point_above_the_start() -> void:
+	var j := fx.job()
+	j.starting_stats = UnitHelpers.stats({"strength": 4, "luck": 4})
+	var c := fx.character(j, {"strength": 14, "dexterity": 3, "luck": 6})
+	c.ap.points = 2
+	c.ap.refund_all()
+	check_eq(c.ap.points, 2 + 10 + 3 + 2, "points back")
+	check_eq([c.base.strength, c.base.dexterity, c.base.luck], [4, 0, 4], "back to the start")
 
 func test_stats_short_of_a_job() -> void:
 	var beginner := fx.job(&"t_beginner")
@@ -571,7 +561,7 @@ func test_advance_changes_job_gives_gifts_and_refills() -> void:
 	c.health.damage(50)
 	check_eq(c.advance(next), "", "advanced")
 	check_eq(c.job.id, &"t_next", "new job")
-	check_eq(c.max_hp(), 50 + 10 * 20, "new job's HP growth")
+	check_eq(c.max_hp(), 50 + 10 * 20 + c.stats.strength, "new job's HP growth, plus STR")
 	check_eq(c.health.hp, c.max_hp(), "refilled")
 	check_eq(c.gear.weapon(), sword, "the gift weapon is worn")
 	check_eq(c.equipment.at(&"weapon").stats.attack, 17, "gift gear unrolled")

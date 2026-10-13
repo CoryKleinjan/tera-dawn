@@ -61,9 +61,9 @@ func test_melee_knocks_harder_than_a_shot() -> void:
 	_mob_at(Vector2(60, 0))
 	_attack(Hitbox.Aim.AHEAD)
 	var melee := absf(mob.kx)
-	p.character.skills.learned[&"pebble_toss"] = 1
+	p.character.skills.learned[&"ice_spike"] = 1
 	p.character.mp = 999
-	_attack(Hitbox.Aim.AHEAD, &"pebble_toss")
+	_attack(Hitbox.Aim.AHEAD, &"ice_spike")
 	check_near(absf(mob.kx), SimMob.KNOCKBACK, "a shot pushes the usual amount")
 	check_near(melee, SimMob.KNOCKBACK * MapInstance.MELEE_KNOCKBACK, "a blow pushes harder")
 

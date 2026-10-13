@@ -55,6 +55,8 @@ static func main_attack(c: Character) -> Array:
 		var lvl := clampi(c.level - (9 if s.job != &"beginner" else 0), 1, s.max_level)
 		if s.weapons.size() > 0 and (c.gear.weapon() == null or not s.weapons.has(c.gear.weapon().weapon_kind)):
 			continue
+		if s.offhand.size() > 0 and (c.gear.offhand() == null or not s.offhand.has(c.gear.offhand().offhand_kind)):
+			continue
 		if _average(c, s, lvl) * s.hits > _average(c, best, best_level) * best.hits:
 			best = s
 			best_level = lvl

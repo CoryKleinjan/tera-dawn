@@ -207,9 +207,14 @@ func test_skills_have_usable_numbers() -> void:
 				check(s.max_targets >= 1 and s.hits >= 1, "%s: max_targets %d / hits %d must be at least 1" % [w, s.max_targets, s.hits])
 				check(s.damage_at(1) > 0 and s.damage_at(s.max_level) >= s.damage_at(1), "%s: damage must be positive and not fall with level" % w)
 			SkillDef.Kind.BUFF:
+				if s.heal > 0.0 and s.duration <= 0.0:
+					# a heal and nothing after it (First Aid)
+					check(s.heal_at(s.max_level) >= s.heal_at(1), "%s: heal must not fall with level" % w)
+					continue
 				check(s.duration > 0, "%s: buff duration is %s" % [w, s.duration])
 				check(s.duration_ticks(s.max_level) > 0, "%s: buff ends before it starts at max level" % w)
-				check(s.stats != null or s.stats_per_level != null, "%s: buff adds no stats" % w)
+				check(s.stats != null or s.stats_per_level != null or s.regen_mp > 0 or s.mp_guard > 0.0 or s.hide or s.steady,
+					"%s: buff does nothing while it lasts" % w)
 			SkillDef.Kind.PASSIVE:
 				check(s.stats != null or s.stats_per_level != null or s.regen_hp > 0 or s.regen_mp > 0 or s.regen_hp_per_level > 0 or s.regen_mp_per_level > 0,
 					"%s: passive adds nothing" % w)

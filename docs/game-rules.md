@@ -46,6 +46,22 @@ update this page when one changes. Each zone's own look and music are in
   pose plays with the swing effect turned up or down.
 - Job skills will be flashy and grand, like MapleStory.
 
+## Jobs, stats and skills
+
+- Each first job has one stat that drives its damage, and no other stat adds to it: Warrior STR,
+  Magician INT, Thief LUK, Archer DEX, Pirate CHA (Charisma). Gear asks only for the job's own
+  stat; Auto puts every Ability Point there.
+- What each stat also gives as it grows: STR Max HP, INT Max MP, DEX Accuracy, LUK Avoidability,
+  CHA slightly lower shop prices (capped) and more Dawnshards found.
+- A first job has six skills: a movement skill, a quick single-target attack, a crowd attack, a self
+  buff, a party buff (reaches party members nearby) and a passive. Their max levels add up to the
+  SP earned from Lv 10 to 30, so all are maxed by the second tier at Lv 30. No finishers in the
+  first job; later tiers get them.
+- Shield slot: Warriors and Beginners wear a shield, a Thief throwing stars (with a dagger in hand),
+  a Magician a book, an Archer a quiver worn on the back, a Pirate a pistol (with knuckles). Stars
+  and pistols never run out. A Thief's dagger hits one monster and the stars hit a crowd; a
+  Pirate's fists hit one and the pistol a crowd.
+
 ## Gear
 
 - The game has no equipment for now: every item, icon and worn picture was removed to be redrawn
@@ -88,7 +104,7 @@ update this page when one changes. Each zone's own look and music are in
   big glove centred over the front fist.
 - No throw or shot effects (no projectile leaving the hand, empty fist, arrow on the string, glint or
   punch burst).
-- No ammo for any weapon. Claws were dropped; thieves use throwing stars.
+- No ammo for any weapon. Claws were dropped; thieves use a dagger and throwing stars.
 - Shops sell only basic weapons; better weapons come from monster drops.
 - Future dual-wield is the one exception to the front-hand rule.
 

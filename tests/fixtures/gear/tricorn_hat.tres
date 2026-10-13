@@ -25,5 +25,5 @@ jobs = Array[StringName]([&"pirate"])
 required_level = 10
 stats = SubResource("Resource_1")
 variance = 2
-required_strength = 25
+required_charisma = 25
 look_shape = &"tricorn"

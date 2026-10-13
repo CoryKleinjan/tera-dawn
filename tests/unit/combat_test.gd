@@ -13,7 +13,7 @@ func after_each() -> void:
 
 ## A level-10 character whose physical range is exactly 9..18 and who never crits.
 func _fighter(extra := {}) -> Character:
-	var values := {"strength": 20, "dexterity": 10, "attack": 10, "crit": -12}
+	var values := {"strength": 25, "dexterity": 10, "attack": 10, "crit": -12}
 	values.merge(extra, true)
 	var c := fx.character(null, {})
 	c.base = UnitHelpers.stats(values)

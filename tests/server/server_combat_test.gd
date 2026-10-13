@@ -163,7 +163,7 @@ func test_monster_respawns_with_full_hp_after_its_timer() -> void:
 func test_skills_you_dont_know_are_refused() -> void:
 	_setup(1000)
 	var mp := p.character.mp
-	_attack(2, &"pebble_toss")
+	_attack(2, &"shoulder_bash")
 	check_eq(h.count(2, &"ev_skill"), 0, "not used")
 	check(h.told(2, "You don't know that skill."), "told why")
 	check_eq(p.character.mp, mp, "no MP spent")
@@ -174,30 +174,30 @@ func test_unknown_skill_ids_are_ignored() -> void:
 	check_eq(h.api.sent.size(), 0, "nothing happens")
 
 func test_learned_skill_spends_its_mp_and_reaches_further() -> void:
-	_setup(1000, 10, 1, 480.0)
+	_setup(1000, 10, 1, 400.0)
 	var c := p.character
 	c.skills.points = 1
-	h.ask(2, &"req_learn_skill", [&"pebble_toss"])
-	check_eq(c.skills.learned.get(&"pebble_toss"), 1, "learned")
+	h.ask(2, &"req_learn_skill", [&"shoulder_bash"])
+	check_eq(c.skills.learned.get(&"shoulder_bash"), 1, "learned")
 	check_eq(c.skills.points, 0, "Skill Point spent")
 	var mp := c.mp
-	_attack(2, &"pebble_toss")
-	check_eq(c.mp, mp - Content.skill(&"pebble_toss").mp_at(1), "MP paid")
-	check_eq((h.last(2, &"ev_skill")[5] as Array).size(), 1, "hit the monster 180 px away")
+	_attack(2, &"shoulder_bash")
+	check_eq(c.mp, mp - Content.skill(&"shoulder_bash").mp_at(1), "MP paid")
+	check_eq((h.last(2, &"ev_skill")[5] as Array).size(), 1, "hit the monster 100 px away, past a plain swing")
 
 func test_learning_without_skill_points_is_refused() -> void:
 	_setup()
-	h.ask(2, &"req_learn_skill", [&"pebble_toss"])
-	check(not p.character.skills.learned.has(&"pebble_toss"), "not learned")
+	h.ask(2, &"req_learn_skill", [&"shoulder_bash"])
+	check(not p.character.skills.learned.has(&"shoulder_bash"), "not learned")
 	check(h.told(2, "You have no Skill Points left."), "told why")
 
 func test_not_enough_mp_refuses_the_skill() -> void:
 	_setup(1000)
-	p.character.skills.learned[&"pebble_toss"] = 1
+	p.character.skills.learned[&"shoulder_bash"] = 1
 	p.character.mp = 2
-	_attack(2, &"pebble_toss")
+	_attack(2, &"shoulder_bash")
 	check_eq(h.count(2, &"ev_skill"), 0, "not used")
-	check(h.told(2, "Not enough MP for Pebble Toss."), "told why")
+	check(h.told(2, "Not enough MP for Shoulder Bash."), "told why")
 	check_eq(p.character.mp, 2, "MP kept")
 
 func test_a_buff_raises_stats_until_it_wears_off() -> void:

@@ -2,24 +2,24 @@
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="2_stat_block"]
-[ext_resource type="Texture2D" path="res://assets/sprites/skills/toughness.png" id="3_toughness"]
-
-[sub_resource type="Resource" id="Resource_2"]
-script = ExtResource("2_stat_block")
-max_hp = 15
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/gun_shot.png" id="i_gun_shot"]
 
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("2_stat_block")
-max_hp = 15
+ranged_damage = 2
+
+[sub_resource type="Resource" id="Resource_2"]
+script = ExtResource("2_stat_block")
+ranged_damage = 2
 
 [resource]
 script = ExtResource("1_skill_def")
-id = &"toughness"
-display_name = "Toughness"
-job = &"warrior"
+id = &"deadeye"
+display_name = "Deadeye"
+job = &"pirate"
 max_level = 10
 kind = 2
-description = "Years of training harden the body. Raises Max HP."
+description = "A sailor's aim: ranged hits do more damage, skills included."
+icon = ExtResource("i_gun_shot")
 stats = SubResource("Resource_1")
 stats_per_level = SubResource("Resource_2")
-icon = ExtResource("3_toughness")
