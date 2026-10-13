@@ -27,6 +27,8 @@ const KNOCKBACK_DECAY := 0.82
 const CHASE_SPEED := 1.3
 ## Speed while slowed by a skill (SkillDef.slow), as a multiple of its usual speed.
 const SLOW := 0.45
+## Ticks between the damage numbers of a burn (SkillDef.burn): one a second.
+const BURN_EVERY := 60
 ## Ticks between changes of direction while patrolling (first walk, then later ones).
 const FIRST_WALK_TICKS := Vector2i(60, 200)
 const WALK_TICKS := Vector2i(60, 220)
@@ -61,6 +63,12 @@ var dir := 1
 var walk_t := 0     # ticks until the next change of direction
 var kx := 0.0       # knockback speed
 var slow_t := 0     # ticks left slowed by a skill
+var root_t := 0     # ticks left rooted: it can't move (it can still attack)
+var hex_t := 0      # ticks left hexed: it takes `hex_amount` more damage from everyone
+var hex_amount := 0.0
+var burn_t := 0     # ticks left burning, `burn_damage` every BURN_EVERY ticks
+var burn_damage := 0
+var burn_by := 0    # peer id of the player whose hit set it alight
 var hurt_t := 0
 var aggro := 0      # ticks left targeting `target`
 var target := 0     # peer id of the player it's after
@@ -122,6 +130,12 @@ func _reset() -> void:
 	kx = 0.0
 	hurt_t = 0
 	slow_t = 0
+	root_t = 0
+	hex_t = 0
+	hex_amount = 0.0
+	burn_t = 0
+	burn_damage = 0
+	burn_by = 0
 	aggro = 0
 	target = 0
 	dead = false
@@ -229,16 +243,26 @@ func step() -> void:
 		hurt_t -= 1
 	if slow_t > 0:
 		slow_t -= 1
+	if root_t > 0:
+		root_t -= 1
+	if hex_t > 0:
+		hex_t -= 1
+	if burn_t > 0:
+		burn_t -= 1
+		if burn_t % BURN_EVERY == 0:
+			map.burn(self)
+			if dead:
+				return
 	if moves.busy():
 		moves.step(chased)
 	elif hurt_t > 0:
-		if not def.stationary:
+		if not def.stationary and root_t == 0:
 			position.x += kx
 		kx *= KNOCKBACK_DECAY
 	elif not (chased and moves.try_start(chased)):
 		_walk(chased)
 	if def.jumps and not def.flying and not moves.busy():
-		if hop <= 0.0 and hurt_t == 0 and randf() < HOP_CHANCE:
+		if hop <= 0.0 and hurt_t == 0 and root_t == 0 and randf() < HOP_CHANCE:
 			hop_v = def.jump_power
 		hop += hop_v
 		hop_v -= HOP_GRAVITY
@@ -263,7 +287,7 @@ func step() -> void:
 
 ## Walking: after its target when it has one and can reach them, else patrolling.
 func _walk(chased: SimPlayer) -> void:
-	if def.stationary:
+	if def.stationary or root_t > 0:
 		if chased:
 			dir = -1 if chased.position.x < position.x else 1
 		return
@@ -330,6 +354,34 @@ func can_target(p: SimPlayer) -> bool:
 ## Slows it for `ticks` (a skill's chill), or keeps the longer slow it already has.
 func slow(ticks: int) -> void:
 	slow_t = maxi(slow_t, ticks)
+
+## Roots it in place for `ticks` (it can still attack), or keeps the longer root.
+func root(ticks: int) -> void:
+	root_t = maxi(root_t, ticks)
+
+## Hexes it: for `ticks` it takes `amount` more damage (0.2 = 20%) from everyone. A stronger
+## hex replaces a weaker one.
+func hex(amount: float, ticks: int) -> void:
+	if amount >= hex_amount or hex_t <= 0:
+		hex_amount = amount
+	hex_t = maxi(hex_t, ticks)
+
+func hexed() -> bool:
+	return hex_t > 0
+
+## What a hit on it is multiplied by (more while hexed).
+func damage_taken() -> float:
+	return 1.0 + (hex_amount if hex_t > 0 else 0.0)
+
+## Sets it alight: `per_second` damage once a second for `ticks`, credited to `by`. A hotter
+## burn replaces a cooler one.
+func set_burning(per_second: int, ticks: int, by: int) -> void:
+	if per_second <= 0 or ticks <= 0:
+		return
+	if per_second >= burn_damage or burn_t <= 0:
+		burn_damage = per_second
+		burn_by = by
+	burn_t = maxi(burn_t, ticks)
 
 ## Whether it notices `p`: within its sight across and not too far above or below.
 func sees(p: SimPlayer) -> bool:
@@ -452,4 +504,10 @@ func snapshot() -> Array:
 		flags |= SnapshotFlags.MOB_HIDDEN
 	if enraged:
 		flags |= SnapshotFlags.MOB_ENRAGED
+	if hex_t > 0:
+		flags |= SnapshotFlags.MOB_HEXED
+	if root_t > 0:
+		flags |= SnapshotFlags.MOB_ROOTED
+	if burn_t > 0:
+		flags |= SnapshotFlags.MOB_BURNING
 	return [position.x, position.y - hop, dir, roundi(health.fraction() * 1000.0), flags]

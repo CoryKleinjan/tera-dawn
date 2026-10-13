@@ -16,11 +16,18 @@ var selected: StringName = &""
 func _init() -> void:
 	super("Skills", Vector2(300, LIST_Y + ROWS * ROW_H + 150))
 
-## The jobs with a tab, oldest first.
+## The jobs with a tab, oldest first; a blend's other parent job just before the blend itself
+## (Beginner, Warrior, Magician, Spellblade).
 func jobs() -> Array[StringName]:
-	var line := Game.me.job_line()
-	line.reverse()
-	return line
+	var path := Game.me.job_path()
+	path.reverse()
+	var out: Array[StringName] = []
+	out.assign(path.slice(0, path.size() - 1))
+	for id in Game.me.job_line():
+		if not id in path:
+			out.append(id)
+	out.append(path[-1])
+	return out
 
 ## The skills in the open tab, sorted by name.
 func listed() -> Array[SkillDef]:

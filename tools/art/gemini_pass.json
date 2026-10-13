@@ -11459,6 +11459,110 @@
     ],
     "text": "The first image is an empty magenta canvas. On it, paint a sheet of TWO separate skill icons side by side, each centred in its own half of the canvas for my 2D side-scrolling game, with a WIDE band of plain magenta (at least a tenth of the canvas) around and between them, none touching another, all the same size. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished skill icons from the same set: match their badge shape, frame thickness, metal trim, inner background glow, painting style and level of detail exactly, but use a BOLDER, DARKER brown outline like the NPCs'. Each icon is a square badge with softly rounded corners: a thick painted frame with a thin bright metal trim, and inside it a darker painted background of the frame's colour with a soft glow behind the subject. Each icon shows ONE bold, simple subject filling most of the badge, lit brightly enough to read clearly even when the icon is shown very small. Left, All Hands (frame warm gold, darker bronze trim): a brass ship bell swinging and ringing, bold curved sound lines around it. Right, Deadeye (frame warm gold, darker bronze trim): a flintlock pistol aimed to the right, a golden crosshair glinting in front of its muzzle. Strict rules: 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) Bold dark brown outline around each badge and its subject, the same thickness on all. 3) No letters, words or numbers anywhere. 4) Flat pure magenta #FF00FF background everywhere outside the badges."
    }
+  },
+  {
+   "id": "blend_icons_test",
+   "prompts": null,
+   "batch": "Blend skill icons (test)",
+   "with": null,
+   "refs": [],
+   "save": "blend_icons_test.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 second tier of jobs thread (Cory 21:25Z 'go ahead and paint the new icons', 21:25Z 'second tier jobs should all be silver icons'): small test of the ten blend skill icons, silver frames. Shown to Cory before the other six.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x2.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/skill_icons_test.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint FOUR separate skill icons for my 2D side-scrolling game, laid out in 2 rows of 2, each a square badge with softly rounded corners centred in its own quarter of the canvas and fully inside it (no badge touches or runs off any canvas edge), all the same size, with a wide band of plain magenta (at least a tenth of the canvas) around and between them, not touching. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished skill icons from the same set: match their badge shape, frame thickness, metal trim, inner background glow, painting style and level of detail exactly, with a bold dark brown outline like the NPCs'. These four icons are for the game's advanced jobs, so every one has the SAME frame: polished bright silver with a thin white-silver trim and cool blue-white highlights, clearly brighter and shinier than plain grey, and inside it a dark slate-grey painted background with a soft glow behind the subject in the subject's own colour. Each icon shows ONE bold, simple object or effect (no people, no faces) filling most of the badge, lit brightly enough to read clearly even when the icon is shown very small. Top left, Sunfall Blade: a broad steel sword plunging point-down into the ground, a blazing wall of golden-white sunlight bursting out to both sides from where it strikes. Top right, Hex: a glowing violet curse sigil, a ring of jagged arcane marks around a single staring eye shape, wisps of dark purple smoke curling off it. Bottom left, Lucky Streak: three old gold coins tumbling in a row from left to right, each one bigger and brighter than the last, with a sharp white sparkle of luck on the biggest. Bottom right, Call the Fleet: a black iron ship's cannon firing to the right, a big orange muzzle flash and three round cannonballs arcing away over small blue waves. Strict rules: 0) Exactly FOUR square badges, each wholly inside its quarter, no labels. 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) All four frames identical polished silver. 3) No letters, words or numbers anywhere. 4) Flat pure magenta #FF00FF background everywhere outside the badges."
+   }
+  },
+  {
+   "id": "blend_icons_1",
+   "prompts": null,
+   "batch": "Blend skill icons (set)",
+   "with": null,
+   "refs": [],
+   "save": "blend_icons_1.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 second tier of jobs thread (Cory 21:54Z 'Looks good' on blend_icons_test): the other six silver blend skill icons, matching blend_icons_test: Elemental Edge, Starfall, Blade Storm, Wrath of the Grove.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x2.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/blend_icons_test.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint FOUR separate skill icons for my 2D side-scrolling game, laid out in 2 rows of 2, each a square badge with softly rounded corners centred in its own quarter of the canvas and fully inside it (no badge touches or runs off any canvas edge), all the same size, with a wide band of plain magenta (at least a tenth of the canvas) around and between them, not touching. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished icons from this exact set: match their polished silver frame with thin white-silver trim, dark slate-grey inner background, soft glow behind the subject, badge size, painting style and level of detail exactly. Each icon shows ONE bold, simple object or effect (no people, no faces) filling most of the badge, lit brightly enough to read clearly even when the icon is shown very small. Top left, Elemental Edge: a steel sword blade held upright, its edge split into three glowing bands running down it, orange fire, pale-blue frost and crackling yellow lightning. Top right, Starfall: several dark violet stars with glowing white cores streaking down diagonally from upper right to lower left, long purple trails behind them. Bottom left, Blade Storm: a curved cutlass and a flintlock pistol spinning around each other in a bright silver whirlwind of slash arcs, small sparks flying out. Bottom right, Wrath of the Grove: thick thorned green-brown roots bursting up out of cracked earth, curling outward to both sides, small leaves and dirt flying. Strict rules: 0) Exactly FOUR square badges, each wholly inside its quarter, no labels. 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) All four frames identical polished silver, exactly like the third image. 3) No letters, words, numbers or letter-like runes anywhere. 4) Flat pure magenta #FF00FF background everywhere outside the badges."
+   }
+  },
+  {
+   "id": "blend_icons_2",
+   "prompts": null,
+   "batch": "Blend skill icons (set)",
+   "with": null,
+   "refs": [],
+   "save": "blend_icons_2.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 second tier of jobs thread (Cory 21:54Z 'Looks good' on blend_icons_test): the other six silver blend skill icons, matching blend_icons_test: two takes each of Ricochet and Hunter's Mark, Cory picks.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x2.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/blend_icons_test.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint FOUR separate skill icons for my 2D side-scrolling game, laid out in 2 rows of 2, each a square badge with softly rounded corners centred in its own quarter of the canvas and fully inside it (no badge touches or runs off any canvas edge), all the same size, with a wide band of plain magenta (at least a tenth of the canvas) around and between them, not touching. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished icons from this exact set: match their polished silver frame with thin white-silver trim, dark slate-grey inner background, soft glow behind the subject, badge size, painting style and level of detail exactly. Each icon shows ONE bold, simple object or effect (no people, no faces) filling most of the badge, lit brightly enough to read clearly even when the icon is shown very small. Top left and bottom left are two takes of Ricochet: one brass bullet zig-zagging between three small bright impact sparks, a thin glowing yellow trail tracing its bouncing path; the bottom-left take bounces the other way. Top right and bottom right are two takes of Hunter's Mark: a bold glowing red-orange hunter's target mark, a ring with four inward points, with a green-fletched arrow flying straight into its centre; the bottom-right take shows the mark larger with the arrow coming in from the other side. Strict rules: 0) Exactly FOUR square badges, each wholly inside its quarter, no labels. 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) All four frames identical polished silver, exactly like the third image. 3) No letters, words, numbers or letter-like runes anywhere. 4) Flat pure magenta #FF00FF background everywhere outside the badges."
+   }
+  },
+  {
+   "id": "blend_icons_2b",
+   "prompts": null,
+   "batch": "Blend skill icons (Ricochet, Hunter's Mark redo)",
+   "with": null,
+   "refs": [],
+   "save": "blend_icons_2b.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 second tier of jobs thread (Cory 22:10Z 'Yes' to repaint for ~$0.07): redo of blend_icons_2, which drifted (square frames, flat vector look, modern bullet). Matches blend_icons_1; two takes each of Ricochet and Hunter's Mark.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x2.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/blend_icons_1.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint FOUR separate skill icons for my 2D side-scrolling game, laid out in 2 rows of 2, each a square badge with softly rounded corners centred in its own quarter of the canvas and fully inside it (no badge touches or runs off any canvas edge), all the same size, with a wide band of plain magenta (at least a tenth of the canvas) around and between them, not touching. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished icons from this exact set (the new icons must look like they belong on the same sheet): match their polished silver frame with thin white-silver trim, dark slate-grey inner background, soft glow behind the subject, badge size, painting style and level of detail exactly. Each icon shows ONE bold, simple object or effect (no people, no faces) filling most of the badge, painted with the same soft brushwork and chunky painted texture as the third image (NOT flat vector shapes, NOT crisp graphic-design outlines), lit brightly enough to read clearly even when the icon is shown very small. Top left and bottom left are two takes of Ricochet: one old round grey lead musket ball (a plain ball, NOT a modern pointed bullet or cartridge) zig-zagging between three small bright impact sparks, a thin glowing yellow trail tracing its bouncing path; the bottom-left take bounces the other way. Top right and bottom right are two takes of Hunter's Mark: a bold glowing red-orange hunter's target mark, a ring with four inward points, with a green-fletched arrow flying straight into its centre; the bottom-right take shows the mark larger with the arrow coming in from the other side. Strict rules: 0) Exactly FOUR square badges, each wholly inside its quarter, no labels. 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) All four frames identical polished silver with SOFTLY ROUNDED CORNERS, exactly like the third image; never square or sharp-cornered frames. 3) No letters, words, numbers or letter-like runes anywhere. 4) Flat pure magenta #FF00FF background everywhere outside the badges."
+   }
   }
  ]
 }
