@@ -78,6 +78,8 @@ update this page when one changes. Each zone's own look and music are in
   all four of their stats add together for damage. It uses every weapon of its four first
   jobs plus its own two-handed weapon, opens every skill of those four jobs and both blends,
   and adds one ultimate skill that hits a very large area and a huge number of monsters.
+- Fourth tier (planned): one job, Harbinger. It has every skill and weapon in the game, and
+  all five stats add together for its damage.
 - Max level is 100.
 - Off-hand slot (once the Shield slot): Warriors and Beginners wear a shield, a Thief throwing
   stars (with a dagger in hand), a Magician a book, an Archer a quiver worn on the back, a Pirate a pistol (with knuckles). Stars
