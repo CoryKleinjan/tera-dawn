@@ -138,8 +138,8 @@ func _solid_wall(map: MapDef, platform: int, biome: BiomeDef) -> void:
 	var d := map.platforms[platform - 1]
 	var top := d.y + FLOOR_FILL_TOP
 	var bottom := map.surface_y(map.land_under(platform)) + FLOOR_FILL_TOP
-	# the wall stops where the square end stones of the top edge are painted, not past them
-	var inset := PlatformSkin.square_inset(biome, FLOOR_FILL_TOP)
+	# the wall runs straight down from the bottom of the top edge's square end stones
+	var inset := PlatformSkin.square_inset(biome)
 	var x0 := d.x + inset.x
 	var x1 := d.x + d.width - inset.y
 	var rect := Rect2(x0, top, x1 - x0, bottom - top)

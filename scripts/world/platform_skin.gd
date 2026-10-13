@@ -41,25 +41,25 @@ static func texture(biome: BiomeDef, width: float, square := false) -> ImageText
 static func overhang(square: bool) -> float:
 	return 0.0 if square else OVERHANG
 
-## How far in from the platform's ends a raised terrace's square ends are painted, in game
-## pixels (x the left end, y the right), measured `below` game pixels under the walking
-## surface: the wall under it stops there, so it doesn't stick out past the end stones.
-static func square_inset(biome: BiomeDef, below: float) -> Vector2:
+## How far in from the platform's ends a raised terrace's square end stones reach at their
+## bottom, in game pixels (x the left end, y the right): the wall under them starts there,
+## straight down from the bottom of the path, so it doesn't stick out past it.
+static func square_inset(biome: BiomeDef) -> Vector2:
 	if biome.terrace_left == null or biome.terrace_right == null:
 		return Vector2.ZERO
-	var key := "inset:%s:%s" % [biome.get_instance_id(), below]
+	var key := "inset:%s" % biome.get_instance_id()
 	if not _surface.has(key):
 		var parts := pieces(biome, true)
-		var from := surface_row(biome) + roundi(below / texel(biome))
-		_surface[key] = Vector2(_end_margin(parts[0], from, false), _end_margin(parts[-1], from, true)) * texel(biome)
+		_surface[key] = Vector2(_bottom_margin(parts[0], false), _bottom_margin(parts[-1], true)) * texel(biome)
 	return _surface[key]
 
-## The typical count of see-through columns at one end of `img`, over its rows from `from`
-## down to its last mostly opaque row (the middle value, so a rounded corner doesn't count).
-static func _end_margin(img: Image, from: int, right: bool) -> float:
+## The see-through columns at one end of `img` along its bottom: the middle value over its
+## last few mostly opaque rows.
+static func _bottom_margin(img: Image, right: bool) -> float:
+	const ROWS := 6
 	var w := img.get_width()
 	var margins: Array[int] = []
-	for y in range(from, img.get_height()):
+	for y in range(img.get_height() - 1, -1, -1):
 		var solid := 0
 		var edge := -1
 		for i in w:
@@ -68,9 +68,10 @@ static func _end_margin(img: Image, from: int, right: bool) -> float:
 				solid += 1
 				if edge < 0:
 					edge = i
-		if solid * 2 < w:
-			break
-		margins.append(edge)
+		if solid * 2 >= w:
+			margins.append(edge)
+			if margins.size() == ROWS:
+				break
 	if margins.is_empty():
 		return 0.0
 	margins.sort()
