@@ -1,26 +1,20 @@
 extends TestCase
 ## Developer test characters (TestCharacters): one per job at the level cap, in the best gear
-## the job can wear and able to wear all of it, with every skill and the Dawnshards; the
-## local login puts them on their own account, leaves the player's own alone, makes only the
-## missing ones unless asked to rebuild, and nobody else can reach them.
+## the job can wear and able to wear all of it, with every skill and the Dawnshards; they're
+## kept in their own folder apart from the player's own characters, only the missing ones
+## are made unless asked to rebuild, and each is put back in its job's town.
 
 const ServerHarness := preload("res://tests/framework/server_helpers.gd")
 
 var h: ServerHarness
-var lobby: TDLobby
+var store: CharacterStore
 
 func before_each() -> void:
 	h = ServerHarness.new()
-	lobby = h.server.lobby
-	h.server.local_player = true
-	h.api.peers.append(1)
+	store = CharacterStore.new(h.dir.path_join(TestCharacters.FOLDER))
 
 func after_each() -> void:
 	h.close()
-
-func _test_login(mode := TestCharacters.Mode.ON) -> Dictionary:
-	h.ask(1, &"req_local_login", [mode])
-	return lobby.account_of(1)
 
 # ---------- the characters ----------
 
@@ -90,56 +84,43 @@ func test_every_job_is_listed_starting_job_first() -> void:
 	check_eq(jobs.size(), Content.jobs.size(), "every job")
 	check_eq(jobs[0].id, Character.START_JOB, "the starting job first")
 
-# ---------- logging in ----------
+# ---------- the test characters' folder ----------
 
-func test_the_test_account_has_one_character_per_job_and_leaves_the_local_one_alone() -> void:
-	h.ask(1, &"req_local_login")
-	h.ask(1, &"req_create_character", ["Mine", ServerHarness.made()])
-	lobby.dropped(1)
-	var a := _test_login()
-	check_eq(a["username"], TestCharacters.ACCOUNT, "on the test account")
-	check_eq(a["characters"].size(), Content.jobs.size(), "one per job")
-	check_eq(h.last(1, &"ev_logged_in")[1].size(), Content.jobs.size(), "character select lists them")
-	check_eq(lobby.accounts.load_account(AccountStore.LOCAL)["characters"], ["Mine"], "the player's own account is untouched")
-	lobby.dropped(1)
-	h.ask(1, &"req_local_login", [TestCharacters.Mode.OFF])
-	check_eq(lobby.account_of(1)["username"], AccountStore.LOCAL, "turned off: back on the own account")
+func test_one_character_per_job_in_its_own_folder() -> void:
+	var own := CharacterStore.new(h.dir)
+	own.create("Mine", NewCharacter.new())
+	TestCharacters.prepare(store, false)
+	check_eq(store.names().size(), Content.jobs.size(), "one per job")
+	check_eq(store.slots().size(), mini(Content.jobs.size(), CharacterStore.MAX_CHARACTERS), "character select lists them")
+	check_eq(own.names(), ["Mine"] as Array[String], "the player's own characters are untouched")
 
 func test_they_are_kept_until_rebuilt() -> void:
-	var a := _test_login()
-	var first: String = a["characters"][0]
-	var c := h.server.store.load_character(first)
+	TestCharacters.prepare(store, false)
+	var first: String = store.names()[0]
+	var c := store.load_character(first)
 	c.shards = 7
-	h.server.store.save(c)
-	lobby.dropped(1)
-	_test_login()
-	check_eq(h.server.store.load_character(first).shards, 7, "kept as played")
-	for n: String in lobby.account_of(1)["characters"]:
-		var kept := h.server.store.load_character(n)
-		kept.map_id = &"meadow"
-		h.server.store.save(kept)
-	lobby.dropped(1)
-	_test_login()
-	for n: String in lobby.account_of(1)["characters"]:
-		var kept := h.server.store.load_character(n)
+	store.save(c)
+	TestCharacters.prepare(store, false)
+	check_eq(store.load_character(first).shards, 7, "kept as played")
+	for n in store.names():
+		var kept := store.load_character(n)
+		kept.map_id = &"nowhere"
+		store.save(kept)
+	TestCharacters.prepare(store, false)
+	for n in store.names():
+		var kept := store.load_character(n)
 		check_eq(kept.map_id, TestCharacters.home_town(kept.job), "%s back in its town" % n)
-	lobby.dropped(1)
-	_test_login(TestCharacters.Mode.REBUILD)
-	check_eq(h.server.store.load_character(first).shards, TestCharacters.SHARDS, "made fresh")
-	check_eq(lobby.account_of(1)["characters"].size(), Content.jobs.size(), "still one per job")
+	TestCharacters.prepare(store, true)
+	check_eq(store.load_character(first).shards, TestCharacters.SHARDS, "made fresh")
+	check_eq(store.names().size(), Content.jobs.size(), "still one per job")
 
 func test_a_taken_name_gets_a_number() -> void:
-	var job := TestCharacters.jobs()[0]
-	h.server.store.save(Character.create(TestCharacters.name_for(job)))
-	var a := _test_login()
-	check(not TestCharacters.name_for(job) in a["characters"], "someone else's character isn't taken over")
-	check_eq(h.server.store.load_character(TestCharacters.name_for(job)).level, 1, "and isn't touched")
-
-func test_nobody_who_joined_can_reach_them() -> void:
-	h.api.peers.append(2)
-	h.ask(2, &"req_local_login", [TestCharacters.Mode.ON])
-	check(lobby.account_of(2).is_empty(), "not for someone who joined")
-	check(not lobby.accounts.exists(TestCharacters.ACCOUNT), "nothing made")
-	h.server.local_player = false
-	h.ask(1, &"req_local_login", [TestCharacters.Mode.ON])
-	check(lobby.account_of(1).is_empty(), "not on a server without a local player")
+	var job := TestCharacters.jobs()[1]
+	store.save(Character.create(TestCharacters.name_for(job)))
+	TestCharacters.prepare(store, false)
+	check_eq(store.load_character(TestCharacters.name_for(job)).job.id, Character.START_JOB, "a Beginner with that name isn't taken over")
+	var named := ""
+	for n in store.names():
+		if store.load_character(n).job == job:
+			named = n
+	check(named.begins_with(TestCharacters.name_for(job).substr(0, 8)) and named != TestCharacters.name_for(job), "the job's one gets a number (%s)" % named)

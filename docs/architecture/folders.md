@@ -14,12 +14,13 @@ scripts/
                       index), Game (your character copy, name and server address), Net
                       (connections and the protocol), SteamService, Sound (music and effects)
   settings/           SettingsSection and its sections: Keybinds, AudioSettings, VideoSettings
-  server/             TDServer, MapInstance, SimPlayer, SimMob, SimDrop, CharacterStore, TDSocial
+  server/             TDServer, TDLobby, MapInstance, SimPlayer, SimMob, SimDrop, TDSocial
   server/social/      TDSocial's parts: chat, parties, trade, guilds, player shops
   server/services/    TDServer's parts (ServerPart): items, NPC shops, storage, travel, quests, jobs
   net/                SnapshotFlags (the bits both sides read in snapshots), SnapshotCodec (packs them)
   data/               Resource classes for everything in data/
-  systems/            Character (and CharacterCodec, its save format) and its parts SkillBook,
+  systems/            Character (and CharacterCodec, its save format; CharacterStore keeps them
+                      on this computer) and its parts SkillBook,
                       AbilityPoints and Gear (CharacterPart), Appearance, NewCharacter,
                       Inventory, Equipment,
                       ItemStack, CharacterStats, MonsterBook, Achievements, Counters, Balance
@@ -28,7 +29,7 @@ scripts/
   world/              World (what you see), WorldCamera, SnapshotSync (server views), WorldFx (hits, numbers, effects), Stage +
                       Terrain/Backdrop/Scenery builders, MapLayout, Platform, DropFlight, Combat
   fx/                 Flipbook effects and floating text
-  ui/                 HUD, title screen (login), status bar, overlay, quickslots, character
+  ui/                 HUD, title screen, status bar, overlay, quickslots, character
                       creator, game menu, settings screen, modals (TDModal), UiSkin, UiStyle,
                       WorldSkin, UiBuild, Palette
   ui/windows/         Every draggable window (all extend TDWindow), SlotGrid, ScrollList,

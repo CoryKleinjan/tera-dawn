@@ -40,8 +40,8 @@ func check() -> void:
 				bot_peer = peer
 		if bot_peer != 0:
 			break
-	_check(bot_peer != 0, "the second game registers on the host over an encrypted connection and joins")
-	_check(Net.server.lobby.accounts.exists(BotClient.USERNAME), "the bot's account is saved on the host")
+	_check(bot_peer != 0, "the second game joins the host over an encrypted connection, bringing its own character")
+	_check(not CharacterStore.new(save_dir).exists(BotClient.CHARACTER), "the bot's character isn't saved on the host")
 	if bot_peer == 0:
 		OS.kill(bot)
 		return
@@ -68,7 +68,7 @@ func check() -> void:
 			break
 	_check(bot_player.character.xp != xp or bot_player.character.level != level, "the joining player's attacks defeat a monster on the server")
 	_check(seen_name == "Bot", "the host sees the other player, with their name")
-	for i in 1200:
+	for i in 2400:
 		await _ticks(1)
 		if not OS.is_process_running(bot):
 			break
@@ -78,6 +78,7 @@ func check() -> void:
 	DirAccess.remove_absolute(bot_result)
 	_check(result is Dictionary and result.get("saw_host", false), "the other player sees the host %s" % [result])
 	_check(result is Dictionary and result.get("saw_mobs", false) and result.get("saw_hits", false), "the other player sees the monsters and their own hits")
+	_check(result is Dictionary and result.get("saved", false), "the other player's progress is saved on their own computer")
 	for i in 120:
 		await _ticks(1)
 		if not Net.server.sessions.has(bot_peer):

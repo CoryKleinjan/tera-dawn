@@ -5,8 +5,8 @@ extends Node
 ## requests clients send through Net. This file keeps the players, maps, saving and the
 ## requests about moving and fighting; the rest are handled by its parts under
 ## scripts/server/services/ (items, NPC shops, storage, travel, quests, jobs) and by
-## TDSocial (everything players do with each other). A dedicated server runs only this; a
-## host or a single-player game runs it next to its own client.
+## TDSocial (everything players do with each other). A single-player or hosted game runs
+## it next to its own client. Characters are saved by each player's own game (`save`).
 
 ## Ticks between position snapshots (60 / 3 = 20 a second).
 const SNAPSHOT_EVERY := 3
@@ -18,12 +18,8 @@ const SAVE_EVERY := 600
 ## Attack requests may arrive this many ticks early, to allow for network jitter.
 const COOLDOWN_SLACK := 4
 
-var store: CharacterStore
-## Accounts, logging in and character select.
+## Letting players in and putting the characters they bring into the world.
 var lobby: TDLobby
-## Whether a player at this game's own keyboard plays here (single player or host). Only
-## they can use the password-free LOCAL account.
-var local_player := false
 ## peer id -> SimPlayer
 var sessions := {}
 ## map id -> MapInstance
@@ -42,10 +38,11 @@ var quests: ServerQuests
 var jobs: ServerJobs
 var scenes: ServerScenes
 
+## `save_dir` is where this game keeps what the server owns (its guilds).
 func _init(save_dir := "user://characters") -> void:
-	store = CharacterStore.new(save_dir)
+	DirAccess.make_dir_recursive_absolute(save_dir)
 	social = TDSocial.new(self, save_dir)
-	lobby = TDLobby.new(self, save_dir)
+	lobby = TDLobby.new(self)
 	items = ServerItems.new(self)
 	npc_shop = ServerNpcShop.new(self)
 	storage = ServerStorage.new(self)
@@ -74,7 +71,12 @@ func _physics_process(_delta: float) -> void:
 
 func save_all() -> void:
 	for p: SimPlayer in sessions.values():
-		store.save(p.character)
+		save(p)
+
+## Saves the player's character: the server sends it to their own game, which keeps it on
+## their computer (CharacterStore), so it goes with them to the next game they play.
+func save(p: SimPlayer) -> void:
+	Net.send(p.peer, &"ev_save", [p.character.to_dict()])
 
 func next_drop_id() -> int:
 	_drop_ids += 1
@@ -99,8 +101,8 @@ func _flush(p: SimPlayer) -> void:
 
 # ---------- joining and leaving ----------
 
-## Puts a logged-in player's character `c` (picked at character select, see TDLobby) into
-## the world.
+## Puts the character `c` a player brought (picked at their character select, see TDLobby)
+## into the world.
 func enter_game(peer: int, c: Character) -> void:
 	if social.player_named(c.name) != null:
 		lobby.refuse(peer, "%s is already playing." % c.name)
@@ -112,12 +114,12 @@ func enter_game(peer: int, c: Character) -> void:
 	enter_map(p, c.map_id, Content.map(c.map_id).start_x)
 	print("%s joined (peer %d)" % [c.name, peer])
 
-## A connection closed: out of the world, and logged out.
+## A connection closed: out of the world.
 func disconnected(peer: int) -> void:
 	leave(peer)
 	lobby.dropped(peer)
 
-## Takes a player out of the world (saving them). They stay logged in. A player who leaves
+## Takes a player out of the world (saving them). They stay connected. A player who leaves
 ## while fainted is revived first, so they come back in town.
 func leave(peer: int) -> void:
 	var p := player_of(peer)
@@ -130,7 +132,7 @@ func leave(peer: int) -> void:
 	sessions.erase(peer)
 	p.map.remove_player(p)
 	p.map.broadcast(&"ev_player_left", [peer])
-	store.save(p.character)
+	save(p)
 	print("%s left" % p.character.name)
 
 ## Moves the player to map `id` at `x` (through a portal, a trip, a return scroll or
@@ -147,7 +149,7 @@ func enter_map(p: SimPlayer, id: StringName, x: float) -> void:
 	m.add_player(p, x)
 	Net.send(p.peer, &"ev_enter_map", [id, x, m.full_state()])
 	quests.progress(p, p.character.quests.record_visit(id))
-	store.save(p.character)
+	save(p)
 	scenes.play(p, m.def.intro_scene)
 
 ## Sends a fainted player back to town with half their HP and MP.
@@ -182,7 +184,7 @@ func give_xp(p: SimPlayer, amount: int) -> void:
 		p.dirty_character = true
 		p.map.broadcast(&"ev_level_up", [p.peer, c.level])
 		p.map.tell(p, "Level up! You reached Lv. %d" % c.level, Palette.SUN)
-		store.save(c)
+		save(p)
 
 ## Tells the player about achievements they've just reached; their game unlocks them on Steam.
 func check_achievements(p: SimPlayer) -> void:

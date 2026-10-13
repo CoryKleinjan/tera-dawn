@@ -24,7 +24,7 @@ func on_advance(peer: int, npc_id: StringName, job_id: StringName) -> void:
 	Net.send(p.peer, &"ev_jingle", [ADVANCE_JINGLE])
 	if not next.advance_gifts.is_empty():
 		tell(p, "Your instructor hands you: %s." % next.gifts_text(), Palette.SUN)
-	server.store.save(p.character)
+	server.save(p)
 
 ## The free Ability Point reset from the instructor `npc_id` of `job_id` the player stands by.
 func on_reset_ap(peer: int, npc_id: StringName, job_id: StringName) -> void:
@@ -39,7 +39,7 @@ func on_reset_ap(peer: int, npc_id: StringName, job_id: StringName) -> void:
 	p.dirty_character = true
 	p.dirty_vitals = true
 	tell(p, "Your Ability Points are back: %d to spend." % p.character.ap.points, Palette.SUN)
-	server.store.save(p.character)
+	server.save(p)
 
 ## The job `job_id` if the player stands by the instructor `npc_id` and it teaches that
 ## job, else null.

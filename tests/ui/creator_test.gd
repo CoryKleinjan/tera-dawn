@@ -13,7 +13,7 @@ func after_each() -> void:
 
 ## Plays solo and opens the creator from character select, with `char_name` typed in.
 func _play(char_name: String) -> void:
-	ui.hud.title._on_play()
+	ui.hud.title._on_solo()
 	await ui.ticks(2)
 	ui.hud.title.character_select.create_button.pressed.emit()
 	ui.hud.title.creator.name_field.text = char_name
@@ -90,7 +90,7 @@ func test_a_name_that_is_taken_is_shown_in_the_creator() -> void:
 	ui.hud.title.creator.create_button.pressed.emit()
 	await ui.ticks(2)
 	check(ui.hud.title.creator.visible, "still in the creator")
-	check_eq(ui.hud.title.creator.message.text, "fresh is taken. Try another name.", "why")
+	check_eq(ui.hud.title.creator.message.text, "You already have a character called Fresh.", "why")
 
 func test_create_goes_back_to_character_select_with_it_picked() -> void:
 	await _play("Fresh")

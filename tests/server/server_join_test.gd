@@ -1,6 +1,7 @@
 extends TestCase
-## Playing a character and leaving the server, and characters being saved and loaded
-## between visits. Accounts and character select are in server_accounts_test.
+## Bringing a character into a game and leaving it, a full game, and characters being sent
+## back to their player's game to save. Making, naming and deleting characters on the
+## player's own computer is in character_store_test.
 
 const ServerHarness := preload("res://tests/framework/server_helpers.gd")
 
@@ -34,23 +35,52 @@ func test_new_character_is_a_level_1_beginner_with_full_health() -> void:
 	check_eq(c.mp, c.max_mp(), "full MP")
 	check_eq(c.shards, 0, "no Dawnshards")
 
-func test_an_empty_name_is_refused() -> void:
-	h.log_in(2, "ann_acct")
-	h.server.lobby.on_create(2, "  !!  ", ServerHarness.made())
-	check_eq(h.last(2, &"ev_refused"), ["Please pick a name.", false], "why")
-	check_eq(h.server.store.saved_names(), [] as Array[String], "nothing saved")
-
-func test_names_are_unique_on_the_server_in_any_case() -> void:
+func test_a_name_already_playing_is_refused() -> void:
 	h.join(2, "Ann")
-	h.log_in(3, "someone_else")
-	h.server.lobby.on_create(3, "aNN", ServerHarness.made())
-	check_eq(h.last(3, &"ev_refused"), ["aNN is taken. Try another name.", false], "why")
-	check(not AccountStore.owns(h.server.lobby.account_of(3), "aNN"), "not made")
+	h.api.peers.append(3)
+	h.server.lobby.on_play(3, Character.create("aNN").to_dict())
+	check_eq(h.last(3, &"ev_refused"), ["aNN is already playing.", false], "why")
+	check(not h.server.sessions.has(3), "not in the world")
 
-func test_names_lose_characters_that_are_not_allowed() -> void:
-	h.log_in(2, "ann_acct")
-	h.server.lobby.on_create(2, "  An<n>!  ", ServerHarness.made())
-	check_eq(h.server.lobby.account_of(2)["characters"], ["Ann"] as Array[String], "cleaned name")
+func test_a_character_that_cannot_be_read_is_refused() -> void:
+	h.api.peers.append(2)
+	h.server.lobby.on_play(2, {"level": 3})
+	check_eq(h.last(2, &"ev_refused"), ["That character's save couldn't be read.", false], "why")
+	check(not h.server.sessions.has(2), "not in the world")
+
+func test_a_character_on_a_map_this_game_lacks_starts_on_the_starting_map() -> void:
+	var data := Character.create("Ann").to_dict()
+	data["map_id"] = "nowhere_at_all"
+	h.api.peers.append(2)
+	h.server.lobby.on_play(2, data)
+	check_eq(h.last(2, &"ev_enter_map")[0], Character.START_MAP, "the starting map")
+
+func test_playing_twice_on_one_connection_is_ignored() -> void:
+	h.join(2, "Ann")
+	h.server.lobby.on_play(2, Character.create("Bob").to_dict())
+	check_eq(h.server.sessions[2].character.name, "Ann", "still Ann")
+
+func test_the_game_holds_four_players_counting_the_host() -> void:
+	for peer in [2, 3, 4]:
+		h.api.peers.append(peer)
+		h.server.lobby.connected(peer)
+		check_eq(h.count(peer, &"ev_welcome"), 1, "peer %d let in" % peer)
+	h.api.peers.append(5)
+	h.server.lobby.connected(5)
+	check_eq(h.last(5, &"ev_refused"), [TDLobby.FULL % Net.MAX_PLAYERS, true], "a fifth is told it's full")
+	check_eq(h.count(5, &"ev_welcome"), 0, "and not let in")
+	h.server.lobby.on_play(5, Character.create("Eve").to_dict())
+	check(not h.server.sessions.has(5), "it can't play while it's being dropped")
+
+func test_leaving_for_character_select_saves_then_says_so() -> void:
+	var a := h.join(2, "Ann")
+	a.character.shards = 42
+	h.ask(2, &"req_leave_character")
+	var kinds := h.api.sent.filter(func(e: Array) -> bool: return e[0] == 2).map(func(e: Array) -> StringName: return e[1])
+	check(kinds.find(&"ev_save") >= 0 and kinds.find(&"ev_save") < kinds.find(&"ev_left_world"), "saved first")
+	check_eq(h.last(2, &"ev_left_world"), ["Ann"], "back to character select")
+	check_eq(h.saved("Ann").shards, 42, "with her Dawnshards")
+	check(not h.server.sessions.has(2), "out of the world")
 
 func test_leaving_saves_the_character_and_tells_the_map() -> void:
 	var a := h.join(2, "Ann")
@@ -60,8 +90,8 @@ func test_leaving_saves_the_character_and_tells_the_map() -> void:
 	check_eq(h.last(3, &"ev_player_left"), [2], "Bob sees Ann leave")
 	check(not h.server.sessions.has(2), "session gone")
 	check(not h.server.maps[ServerHarness.FIELD].players.has(2), "off the map")
-	check(h.server.store.exists("Ann"), "save file written")
-	check_eq(h.server.store.load_character("Ann").shards, 1234, "saved Dawnshards")
+	check(h.saved("Ann") != null, "sent to her game to save")
+	check_eq(h.saved("Ann").shards, 1234, "saved Dawnshards")
 
 func test_rejoining_after_a_restart_loads_the_saved_character() -> void:
 	var a := h.join(2, "Ann")
@@ -84,9 +114,9 @@ func test_everyone_is_saved_every_save_interval() -> void:
 	var a := h.join(2, "Ann")
 	a.character.shards = 55
 	h.step(TDServer.SAVE_EVERY - 1)
-	check_eq(h.server.store.load_character("Ann").shards, 0, "not saved yet")
+	check_eq(h.saved("Ann").shards, 0, "not saved yet")
 	h.step(1)
-	check_eq(h.server.store.load_character("Ann").shards, 55, "saved on the interval")
+	check_eq(h.saved("Ann").shards, 55, "saved on the interval")
 
 func test_players_on_a_map_see_each_other_in_snapshots() -> void:
 	h.join(2, "Ann")

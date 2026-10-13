@@ -80,7 +80,7 @@ func test_advancing_is_celebrated_and_sent_to_the_player() -> void:
 func test_the_new_job_is_saved_at_once() -> void:
 	_ready_for_mage()
 	_advance()
-	var saved := h.server.store.load_character("Ann")
+	var saved := h.saved("Ann")
 	check(saved != null and saved.job.id == &"mage", "saved as a Magician")
 
 func test_too_low_a_level_is_refused_and_told() -> void:

@@ -1,17 +1,17 @@
 class_name BotClient
 extends Node
-## A second player for the smoke test's multiplayer check. It registers an account on the
-## host on the port given after `--` (over the encrypted connection), makes a character and
-## plays it, keeps attacking for a while (at least 20 swings), and writes what it saw to the
-## file given after the port (RESULT_PATH if none):
+## A second player for the smoke test's multiplayer check. It joins the host on the port
+## given after `--` (over the encrypted connection), makes a character on its own side and
+## brings it in, keeps attacking for a while (at least 20 swings), and writes what it saw to
+## the file given after the port (RESULT_PATH if none), and what its own save of the
+## character holds once it's done:
 ##   godot --headless --path . res://tests/bot_client.tscn -- 7391 user://smoke_test_bot.json
 
 const RESULT_PATH := "user://smoke_test_bot.json"
-const USERNAME := "smoke_bot"
-const PASSWORD := "bot password 123"
+const CHARACTER := "Bot"
 
 var world: TDWorld
-var result := {"joined": false, "saw_host": false, "saw_mobs": false, "saw_hits": false}
+var result := {"joined": false, "saw_host": false, "saw_mobs": false, "saw_hits": false, "saved": false}
 
 func _ready() -> void:
 	_run.call_deferred()
@@ -24,12 +24,15 @@ func _run() -> void:
 	var args := OS.get_cmdline_user_args()
 	var port := int(args[0]) if args.size() > 0 else Net.DEFAULT_PORT
 	var result_path: String = args[1] if args.size() > 1 else RESULT_PATH
+	# the bot's characters are its own, apart from the host's
+	Net.save_dir = "user://smoke_test_bot_characters_%d" % OS.get_process_id()
 	world = load("res://scenes/world.tscn").instantiate() as TDWorld
 	add_child(world)
 	await _ticks(2)
-	Net.characters_changed.connect(func(_selected: String) -> void: Net.play("Bot"))
-	Net.logged_in.connect(func() -> void: Net.create_character("Bot", NewCharacter.new()))
-	Net.log_in("127.0.0.1", USERNAME, PASSWORD, true, port)
+	Net.welcomed.connect(func() -> void:
+		Net.create_character(CHARACTER, NewCharacter.new())
+		Net.play(CHARACTER))
+	Net.join("127.0.0.1", port)
 	for i in 900:
 		await _ticks(1)
 		if world.started:
@@ -47,11 +50,22 @@ func _run() -> void:
 		for f in world.fx_layer.get_children():
 			result["saw_hits"] = result["saw_hits"] or (f is TDFloatText and f.kind != "taken")
 		# keep swinging long enough for the host to see a monster defeated
-		if i >= 20 and result.values().all(func(v: bool) -> bool: return v):
+		if i >= 20 and result.keys().all(func(k: String) -> bool: return k == "saved" or result[k]):
+			break
+	# the host sends the character back to be saved here, at least every few seconds
+	var saves := CharacterStore.new(Net.save_dir)
+	for i in TDServer.SAVE_EVERY + 60:
+		await _ticks(1)
+		var c := saves.load_character(CHARACTER)
+		if c and c.xp + c.level > 1:
+			result["saved"] = true
 			break
 	var f := FileAccess.open(result_path, FileAccess.WRITE)
 	f.store_string(JSON.stringify(result))
 	f.close()
 	Net.stop()
 	await _ticks(10)
+	for file in DirAccess.get_files_at(Net.save_dir):
+		DirAccess.remove_absolute(Net.save_dir.path_join(file))
+	DirAccess.remove_absolute(Net.save_dir)
 	get_tree().quit()

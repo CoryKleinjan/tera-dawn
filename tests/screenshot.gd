@@ -69,9 +69,9 @@ func _run() -> void:
 	await _frames(10)
 	if only == "" or only == "title":
 		await _shot("title")
-	for f in ["dawnling.json", "mira.json", "accounts/~local.json"]:
+	for f in ["dawnling.json", "mira.json", "order.json"]:
 		DirAccess.remove_absolute("user://screenshot_characters/" + f)
-	world.hud.title._on_play()
+	world.hud.title._on_solo()
 	await _physics(2)
 	if only == "" or only == "creator":
 		# The character creator, with a name and a few choices made.

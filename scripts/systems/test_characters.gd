@@ -5,19 +5,19 @@ extends RefCounted
 ## Everything is read from the data, so a new job, skill or piece of gear shows up here with
 ## no code change.
 ##
-## Each starts in its job's town (home_town), every time the account is logged in to.
+## Each starts in its job's town (home_town), every time character select lists them.
 ##
-## They live on their own local account (ACCOUNT), never on the player's own. With the
-## Developer setting on (DevSettings), Play solo and Host log the player at the keyboard in
-## to it instead of AccountStore.LOCAL (see TDLobby.on_local_login). Only debug builds (the
-## editor, or a debug export) honour it, so a shipped game never can.
+## They're saved in their own folder (FOLDER, inside this computer's character saves), never
+## with the player's own characters. With the Developer setting on (DevSettings), Play solo,
+## Host and Join list them instead (see Net.open_saves). Only debug builds (the editor, or a
+## debug export) honour it, so a shipped game never can.
 
-## What the client asks for when it logs in to the local account.
+## Which characters to list: the player's own, the test characters, or the test characters
+## made again from scratch (picking up new gear).
 enum Mode { OFF, ON, REBUILD }
 
-## The test characters' account. Like AccountStore.LOCAL, the "~" can't be typed into a
-## username, so nobody can register it or log in to it from outside.
-const ACCOUNT := "~test"
+## The test characters' folder, inside the character saves.
+const FOLDER := "dev"
 ## A test character is called this plus its job's name (cut to CharacterStore.MAX_NAME).
 const NAME_PREFIX := "Dev "
 const SHARDS := 50000
@@ -44,6 +44,32 @@ static func path_to(job: JobDef) -> Array[JobDef]:
 	while j and j.id != Character.START_JOB and not j in out:
 		out.push_front(j)
 		j = Content.jobs.get(j.advances_from)
+	return out
+
+## Makes sure `store` has one test character of every job, making the ones missing, or
+## every one again when `rebuild`. Each one kept is put back in its job's town.
+static func prepare(store: CharacterStore, rebuild: bool) -> void:
+	var have := {}
+	for n in store.names():
+		var c := store.load_character(n)
+		if c and not have.has(c.job):
+			have[c.job] = c
+	for job in jobs():
+		var kept: Character = have.get(job)
+		if kept and not rebuild:
+			kept.map_id = home_town(job)
+			store.save(kept)
+		else:
+			store.save(build(kept.name if kept else _free_name(store, job), job))
+
+## A name for a new `job` test character that `store` doesn't have yet.
+static func _free_name(store: CharacterStore, job: JobDef) -> String:
+	var base := name_for(job)
+	var out := base
+	var n := 2
+	while store.exists(out):
+		out = base.substr(0, CharacterStore.MAX_NAME - str(n).length()) + str(n)
+		n += 1
 	return out
 
 ## The name a test character of `job` is first offered.
