@@ -3,8 +3,7 @@
 // greys run down to a deep shade of it (outlines stay dark) and paler ones up to a light tint
 // of it, so dark colours keep their highlights and light ones their shading. Works in sRGB.
 
-// The grey the gear art is mostly drawn in (sRGB, 0-1; paperdoll_layers.lift puts its middle
-// grey here): it shows as the item colour.
+// The grey the gear art is mostly drawn in (sRGB, 0-1): it shows as the item colour.
 const float GEAR_MID = 0.78;
 // How dark the darkest grey turns (share of the colour) and how pale the palest (towards white).
 const float GEAR_DEEP = 0.12;

@@ -24,9 +24,9 @@ const LIGHT_HEIGHT := 33.0
 ## The walk and run cycles play at their drawn speed at this ground speed (game pixels a
 ## tick), faster or slower in step with him, so his feet don't slide.
 const STRIDE_SPEED := 3.7
-## The fall pose is painted leaning about 15 degrees off upright; he's turned 8 degrees back
-## toward standing (Cory 2026-10-12), about his hips, so the fall reads less tipped over.
-const UPRIGHT := {&"fall": {"angle": 8.0, "pivot": Vector2(150, 150)}}
+## Poses turned toward upright in game, per animation: {"angle": degrees, "pivot": frame
+## pixels}. None: every pose shows as painted (art/reference/hero_look.png).
+const UPRIGHT := {}
 ## Ticks in one blink while he can't be hurt after a hit: hidden for the first half of each.
 const BLINK_TICKS := 8
 

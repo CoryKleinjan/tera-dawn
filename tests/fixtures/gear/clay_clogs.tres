@@ -20,6 +20,5 @@ glow_color = Color(0.62, 0.85, 1.0, 1.0)
 pickup_effect = ExtResource("pickup")
 sell_price = 6
 slot = 4
-worn_style = &"clogs"
 stats = SubResource("stats")
 variance = 1

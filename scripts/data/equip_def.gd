@@ -6,8 +6,6 @@ extends ItemDef
 ## Kinds of gear. A slot kind can have several places on the body (two rings).
 enum Slot { WEAPON, HAT, TOP, BOTTOM, SHOES, GLOVES, CAPE, EARRINGS, PENDANT, RING, SHIELD }
 const SLOT_NAMES := ["Weapon", "Hat", "Top", "Bottom", "Shoes", "Gloves", "Cape", "Earrings", "Pendant", "Ring", "Off-hand"]
-## Slots whose pieces can have a worn_style cut, and the name its layers start with.
-const WORN_STYLE_PLACES := {Slot.TOP: "top", Slot.BOTTOM: "bottom", Slot.SHOES: "shoes"}
 
 @export var slot: Slot = Slot.WEAPON
 ## What each off-hand kind is called in messages ("Learn Star Scatter: needs throwing stars").
@@ -44,24 +42,14 @@ const OFFHAND_NAMES := {&"shield": "a shield", &"star": "throwing stars", &"book
 @export var upgrade_slots := 7
 
 @export_group("Look")
-## Layered art of this piece worn, frame for frame like the hero's SpriteFrames. Until it
-## exists, the piece is shown on the hero with stand-ins (see Paperdoll).
-@export var worn_frames: SpriteFrames
-## For a top, bottom or shoes without worn_frames: the cut it's worn as, greyscale art tinted
-## with its look colour: res://assets/animations/paperdoll/<place>_<style>.tres (worn_style_path),
-## e.g. "tunic", "coat", "robe", "vest"; "trousers", "breeches"; "shoes", "boots", "sandals",
-## "clogs". Empty: it only recolours the part of the body it covers.
-@export var worn_style: StringName
-## The shape of a hat or shield's art. Hats: "cap", "helm", "hood", "bandana", "wizard",
-## "tricorn" (Paperdoll.hat_piece; empty: a cap). Shields: "kite", or empty for a round one
-## (Paperdoll.SHIELDS).
+## How it looks on the hero is its own art (Paperdoll: layers/worn_item_<id>.png, or a weapon
+## or shield's piece), made by tools/art/hero_build.py. A hat's shape: which of the hat/hair
+## templates it is painted on, "helm", "tricorn", "bandana", "hood" or "wizard"; the hair under
+## it is that shape's.
 @export var look_shape: StringName
-## The colour it's shown in. Fully transparent takes the main colour of its icon.
+## The colour it's shown in (a weapon's streak). Fully transparent takes the main colour of
+## its icon.
 @export var look_color := Color(0, 0, 0, 0)
-## For a weapon with its own held picture (Paperdoll.weapon_piece): how big it's drawn in his
-## hand against others of its kind (a claymore 1.3). Read by tools/art/paperdoll_layers.py, so
-## run it after changing this.
-@export var held_size := 1.0
 
 ## Icon colours worked out so far: item id -> Color.
 static var _icon_colors := {}
@@ -114,13 +102,6 @@ static func main_color(tex: Texture2D) -> Color:
 		return Color(0.7, 0.7, 0.7)
 	sum /= weight
 	return Color(sum.x, sum.y, sum.z)
-
-## Where its worn_style layer is (empty without one): top_tunic.tres for a top in "tunic".
-func worn_style_path() -> String:
-	var place: String = WORN_STYLE_PLACES.get(slot, "")
-	if worn_style == &"" or place == "":
-		return ""
-	return "res://assets/animations/paperdoll/%s_%s.tres" % [place, worn_style]
 
 func slot_name() -> String:
 	return SLOT_NAMES[slot]

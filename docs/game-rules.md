@@ -20,14 +20,14 @@ update this page when one changes. Each zone's own look and music are in
 
 ## Hero
 
-- The hero is being rebuilt as a new paperdoll from the reference (`art/reference/hero.png`) in
-  the NPC style: white tee and grey shorts as the base, the reference face, hands with fingers.
-  The old hero stays in game until the new one is approved. `art/reference/hero_look.png` (boy
-  and girl in every pose, tunic, trousers and each hat type) is the approved look to match.
+- The hero is a paperdoll in the NPC style, a boy or a girl (the hairstyle picks the body), hands
+  with fingers. `art/reference/hero_look.png` (boy and girl in every pose, tunic, trousers and
+  each hat type) is the approved look to match. Each body has one painted face; the creator
+  picks the skin tone, hairstyle and hair colour.
 - Chibi proportions, drawn about 13% larger than the first cut.
 - Looks exactly the same in menus (equipment, creator, character select) as in game: one renderer.
 - Animation: walk only, 15% faster after about 0.4 s of moving; run frames never play. No walk bob;
-  the walk has a stride shift. Standing, he breathes and blinks. Only a slight tilt when falling.
+  the walk is four painted steps. Standing, he breathes and blinks. Poses show as painted.
   No jump sound. No character shadows.
 - Buffs and spells have no pose, just a flash in the skill's colour. Skill effects draw on the
   hero's layer.

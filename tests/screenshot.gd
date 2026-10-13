@@ -81,7 +81,6 @@ func _run() -> void:
 		creator.name_field.text = "Dawnling"
 		creator.step("look:%d" % LookDef.Kind.HAIR, 2)
 		creator.step("look:%d" % LookDef.Kind.HAIR_COLOR, 3)
-		creator.step("look:%d" % LookDef.Kind.FACE, 2)
 		creator.step("outfit:%d" % EquipDef.Slot.TOP, 1)
 		await _frames(10)
 		await _shot("creator")
@@ -180,7 +179,7 @@ func _run() -> void:
 		for i in outfits.size():
 			var o: Array = outfits[i]
 			var made := NewCharacter.new()
-			for pair in [[&"hair", o[1]], [&"hair_color", o[2]], [&"skin", o[3]], [&"face", o[4]]]:
+			for pair in [[&"hair", o[1]], [&"hair_color", o[2]], [&"skin", o[3]]]:
 				made.appearance.set(pair[0], StringName(pair[1]))
 			var c := Character.create(o[0], Character.START_JOB, made)
 			for id in o[5]:

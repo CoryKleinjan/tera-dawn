@@ -77,7 +77,7 @@ screen. `detail` and `alpha` default to this for every asset;
   pink glow round it; `card_flat` is a card fill for an item that runs out of its cell (with `crop`).
 - `round_top`: rebuilds a round button's rim that ran under the label box.
 - `medal_symbol`: keeps only the symbol on a cream medal, outlined (the quest markers).
-- `painted_sky`, `sky_body` (the sun or moon), `hero_attack_arc`.
+- `painted_sky`, `sky_body` (the sun or moon).
 
 `recolor` names one of `RECOLORS`: `dark_parchment` turns the leather UI sheets' pale parchment
 into dark leather (the game writes light text on its panels), `leather` recolours older purple
@@ -114,7 +114,7 @@ Godot `SpriteFrames` resource. Frames can come from any manifest, as `"<sheet>:<
   (room for hair and hats). Both are in art pixels. Animations may give per-frame `durations`.
 
 Actors look for `idle`, `move` (monsters), `attack`, `hurt` and `die`; the hero has its own
-list in `paperdoll_body.json`.
+list in `tools/art/hero_build.py` (`ANIMATIONS`).
 
 ## Sheet families
 
@@ -159,37 +159,21 @@ list in `paperdoll_body.json`.
   per cell, named by skill id) into `assets/sprites/skills/`; `skill_icons` keeps only `bow_shot`.
 - **Items, pets, projectiles**: into `assets/sprites/items/` (named by item id), `pets/` (and
   `assets/animations/pet_*.tres`) and `projectiles/`.
-- **Reference only** (`save` false, into `art/build/`): `hero_main` (the painted hero reference).
-  Cells the game doesn't load have `"save": false` in their overrides, so the slicer skips them;
+- Cells the game doesn't load have `"save": false` in their overrides, so the slicer skips them;
   art the game never uses is removed rather than kept in the repo.
 
-## The paperdoll (hero layers)
+## The paperdoll (the hero)
 
-This is the old hero, in game until the new paperdoll hero (being rebuilt in the NPC style, with
-fingers) is approved and replaces it.
+The hero is not cut by the slicer: `tools/art/hero_build.py` builds him from
+`art/source/hero/`, laid out like Cory's approved look (`art/reference/hero_look.png`).
 
-`paperdoll_body` cuts the bare hero strip (`pad_top` leaves room for hair). The other paperdoll
-sheets cut into `art/build/` only, and `tools/art/paperdoll_layers.py` (run after re-cutting the
-body) places their pieces on every body frame and writes the layers, region map and rig.
-
-- `paperdoll_hair`, `_faces`, `_hats` / `_hats_only` (each hat shape on a head beside a bare
-  head, and the same with heads erased; lined up by the head's shoulders), `_shield_round`,
-  `_shield_kite` (its own layout; `poses` names the cell each pose uses) and `_weapons`
-  (greyscale templates per weapon kind).
-- **Worn sheets** (`hair_<style>_frames`, `gloves_frames`, `cape_frames`, `top_*_frames`,
-  `bottom_*_frames`, `shoes_*_frames`): edits of `art/source/paperdoll_body.png`, so they keep
-  its size and `grid`. They show the body wearing the piece in greys; the tool lifts the greys
-  into a gear layer the game tints. Unusable cuts are listed in `WORN_BROKEN`
-  (`tools/art/paperdoll/common.py`) and their items wear the nearest cut. The cape's part over
-  the hero is `cape_front`.
-- **Weapons** are cut from their item icons (`items_*`, at full size): the tool straightens
-  each (a gun's barrel turned level) and makes it the picture he holds (`weapon_item_<id>`, a
-  piece placed in his fist every frame). `held_magic` stays in `art/source/` only as a Gemini edit base.
-- **The rig** (`paperdoll_rig.json`, in 128 px frames): the weapon hand, weapon angle, shield
-  and head tilt per frame, how each weapon kind is held (`holds`, every kind copying the staff's)
-  and the frames where the shield point's hand is the front one (`front`), so the weapon always
-  stays in the front hand. The old hero's hands are closed fists, so a weapon only needs to
-  sit under the fist. `--preview` writes `art/build/paperdoll_preview.png`.
-- To redraw part of the body, `tools/art/body_panels.py` cuts close-up panels of a few cells
-  for a Gemini edit and pastes back only what changed (`hands`) or everything above the shorts
-  (`upper`); `worn-base` and `worn-cells` redress changed cells on the worn sheets.
+- `body_boy.png`, `body_girl.png`: each body as one 3x4 sheet of poses (idle, blink, jump,
+  fall, four walk steps, lunge, follow-through, hurt), painted face and all.
+- `body_<body>_bald.png`, `_jerkin`, `_trousers`: Gemini edits of that sheet with one thing
+  changed. The tool lifts each piece off by the difference, so it lines up frame for frame.
+  New clothes are another such edit, named in `WORN`.
+- `hats_boy.png`, `hats_girl.png`: Cory's hat/hair templates, one cell per hat shape (helm,
+  tricorn, bandana, hood, wizard) and a bare head. Each hat item is drawn in one of these
+  shapes (`HAT_ITEMS`); the tool places the cell on his head on every pose and writes the
+  hair under it and the cut of his head.
+- `--preview` writes `art/build/hero_preview.png` to check the result.

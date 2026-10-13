@@ -2,23 +2,24 @@
 """Build the paperdoll hero from its painted sheets (art/source/hero/).
 
 The hero is a boy or a girl body (the hairstyle picks it: tousled is the boy, ponytail the
-girl), each painted as one 3x4 animation sheet. Everything he wears is a Gemini edit of that
-same sheet with one thing changed (the body bald, a tunic on, trousers on), so each piece is
-lifted off by comparing the edit with the sheet it was made from, and lines up with the body
-frame for frame. Hats are painted once, on the idle pose, and placed on his head in every frame.
+girl), each painted as one 3x4 animation sheet (body_<body>.png). Everything he wears is a
+Gemini edit of that same sheet with one thing changed (body_<body>_bald.png, _jerkin, _trousers),
+so each piece is lifted off by comparing the edit with the sheet it was made from, and lines up
+with the body frame for frame. The hats come from Cory's hat/hair template sheets
+(hats_<body>.png: one cell per hat shape, and one bare head), placed on his head on every pose.
 
     python3 tools/art/hero_build.py             # everything
     python3 tools/art/hero_build.py --preview   # also art/build/hero_preview.png
 
 Writes (every strip is laid out like the body strip, both bodies side by side):
-- assets/sprites/characters/hero.png: the bald bodies. hero_regions.png: which pixels are skin
-  (the skin tone recolours them). hero_rig.json: where his head and hand are on each frame.
+- assets/sprites/characters/hero.png: the bald bodies with their painted faces.
+  hero_regions.png: which pixels are skin (the skin tone recolours them). hero_rig.json: each
+  frame's pose, body and where his head is.
 - assets/animations/hero.tres and hero_girl.tres: each body's animations over the strip.
-- assets/sprites/characters/layers/hair_<style>.png: the hair, greyscale (tinted with the
-  hair colour), and the hair cut under each hat (pieces/haircut_<hat>_<style>.png).
-- layers/worn_item_<id>.png: worn tops and bottoms, in their own colours.
-- pieces/hat_item_<id>.json (+ pictures): each hat, placed on his head on every frame.
-- pieces/weapon_item_<id>.json (+ picture and fist mask): the sword, in his front fist.
+- layers/hair_<style>.png: the hair, greyscale (tinted with the hair colour), and
+  layers/hair_<style>_<shape>.png, the hair under each hat shape (from its template cell).
+- pieces/headcut_<shape>.png: where his body is cut away under each hat shape.
+- layers/worn_item_<id>.png: worn gear (WORN, HAT_ITEMS), in its own colours.
 """
 import json
 import math
@@ -90,14 +91,16 @@ ANIMATIONS = [
 ]
 
 ## Worn items with their own art, by the sheet they are lifted from (body_<body>_<sheet>.png).
-WORN = {"tunic": "linen_tunic", "trousers": "trail_pants"}
-## Hats: the cell of hats_<body>.png each item's hat is painted in, by (row, column).
-HATS = {
-    "iron_helm": (0, 0), "tricorn_hat": (0, 1), "dusk_bandana": (0, 2),
-    "green_hood": (1, 0), "apprentice_hat": (1, 1),
-}
+## A body without the sheet doesn't show the item.
+WORN = {"jerkin": "squire_jerkin", "trousers": "squire_trousers"}
+## Hat shapes (EquipDef.look_shape): the cell of the hat/hair template sheets
+## (hats_<body>.png) each is painted in, by (row, column). The hair under every hat of a
+## shape is that cell's.
+HAT_SHAPES = {"helm": (0, 0), "tricorn": (0, 1), "bandana": (0, 2), "hood": (1, 0), "wizard": (1, 1)}
 ## The cell of hats_<body>.png with no hat (to compare the others with).
 HATLESS = (1, 2)
+## Hats with their own art, by the template cell (shape) they are painted on.
+HAT_ITEMS = {"squire_helm": "helm"}
 
 
 def frame_index(body, pose):
@@ -252,10 +255,14 @@ def save(img, path):
     print("wrote", os.path.relpath(path, ROOT))
 
 
-def grey(rgb):
-    """Greyscale art to tint (hair): its brightness, lifted so the hair colour shows."""
-    lum = (rgb * [0.299, 0.587, 0.114]).sum(2)
-    lum = np.clip(lum / max(np.percentile(lum, 90), 1e-3) * 0.85, 0, 1)
+def luma(rgb):
+    return (rgb * [0.299, 0.587, 0.114]).sum(2)
+
+
+def grey(rgb, bright):
+    """Greyscale art to tint (hair): its brightness, lifted so `bright` (the hair's bright
+    brightness) is 0.85 and the hair colour shows."""
+    lum = np.clip(luma(rgb) / max(bright, 1e-3) * 0.85, 0, 1)
     return np.repeat(lum[..., None], 3, 2)
 
 
@@ -269,6 +276,21 @@ class Body:
         self.base = keyed("body_" + name)
         self.bald = aligned(keyed("body_%s_bald" % name), self.base)
         self.fit = Fit(self.base[POSES["idle"]][1])
+        rgb, a = self.hair("idle")
+        self.hair_bright = float(np.percentile(luma(rgb)[a > 0.9], 90))
+
+    def hair_mask(self, rc):
+        """His brown hair on a cell of the base sheet (what the bald sheet took away)."""
+        rgb = self.base[rc][0]
+        return dilate(close(changed(self.base[rc], self.bald[rc], 0.12) & hairish(rgb), 2), 2)
+
+    def bare(self, rc):
+        """A cell without hair: his body as painted (its face), with the bald sheet only where
+        his hair was (the bald sheet repainted some eyes badly). Alpha is the bald sheet's."""
+        rgb, a = self.base[rc]
+        brgb, ba = self.bald[rc]
+        own = ~self.hair_mask(rc) & (a > 0.5)
+        return np.where(own[..., None], rgb, brgb), ba
 
     def hair_region(self, rc):
         """Where his hair is on a cell (what the bald sheet took away), a little grown."""
@@ -278,12 +300,15 @@ class Body:
         """The hair on a pose: (rgb, alpha) of what the bald sheet took away."""
         rc = POSES[pose]
         rgb, a = self.base[rc]
-        m = changed(self.base[rc], self.bald[rc], 0.12)
+        m = changed(self.base[rc], self.bald[rc], 0.12) & hairish(rgb)  # (not a repainted eye)
         m = close(m, 3) & (a > 0.02)
         return rgb, a * dilate(m, 1) * np.where(m, 1.0, 0.5)
 
     def worn(self, sheet):
-        """A worn piece on every pose: {pose: (rgb, alpha)} of what the edit put on."""
+        """A worn piece on every pose: {pose: (rgb, alpha)} of what the edit put on, or {} if
+        this body has no such sheet."""
+        if not os.path.exists(os.path.join(SRC, "body_%s_%s.png" % (self.name, sheet))):
+            return {}
         edit = aligned(keyed("body_%s_%s" % (self.name, sheet)), self.base)
         out = {}
         for pose, rc in POSES.items():
@@ -321,7 +346,7 @@ def build_bodies(bodies):
     strip, regions = new_strip(), new_strip()
     for body in bodies.values():
         for pose, rc in POSES.items():
-            rgb, a = body.bald[rc]
+            rgb, a = body.bare(rc)
             put(strip, body.name, pose, body.fit.frame(rgb, a))
             skin = skin_mask(rgb, a)
             reg = np.zeros_like(rgb)
@@ -333,15 +358,20 @@ def build_bodies(bodies):
 
 
 def build_hair(bodies):
-    hair = {}
+    """Each hairstyle's hair, greyscale: hair_<style>.png. Returns the hair's colour (the
+    tint that makes the greyscale look as painted) for the rig."""
+    tints = []
     for body in bodies.values():
         strip = new_strip()
         for pose in POSES:
             rgb, a = body.hair(pose)
-            put(strip, body.name, pose, body.fit.frame(grey(rgb), a))
-        hair[body.name] = strip
+            put(strip, body.name, pose, body.fit.frame(grey(rgb, body.hair_bright), a))
         save(strip, os.path.join(LAYERS, "hair_%s.png" % STYLES[body.name]))
-    return hair
+        rgb, a = body.hair("idle")
+        m = a > 0.9
+        g = grey(rgb, body.hair_bright)[m][:, 0]
+        tints.append([float(np.median(rgb[m][:, i][g > 0.2] / g[g > 0.2])) for i in range(3)])
+    return [round(min(1.0, sum(t[i] for t in tints) / len(tints)), 3) for i in range(3)]
 
 
 def build_worn(bodies):
@@ -420,6 +450,15 @@ def hair_coloured(rgb):
     return (r >= g) & (g >= b) & (sat > 0.25) & (mx < 0.8) & ((g - b) > 0.25 * (r - b))
 
 
+def hairish(rgb):
+    """Pixels that could be his hair, shadows and highlights too: warm (red over blue), not
+    pale. The bald sheet also changed his eyes a little; they are blue, violet or white."""
+    r, g, b = rgb[..., 0], rgb[..., 1], rgb[..., 2]
+    mx, mn = rgb.max(2), rgb.min(2)
+    pale = (mx > 0.8) & ((mx - mn) < 0.25 * mx)
+    return (r > b * 1.05) & (r >= g) & ~pale
+
+
 def fill_holes(m):
     """A mask with everything it encloses filled in."""
     h, w = m.shape
@@ -439,21 +478,110 @@ class Hats:
         self.cells = {rc: c for rc, c in aligned(self.cells, {rc: idle for rc in self.cells}, rows).items()}
         self.track, self.box, self.centre = track_head(body)
 
-    def hat(self, rc):
-        """A hat's (rgb, alpha) on the idle cell: what the edit added over his head, down to
-        just below his chin (a hood's collar is the cloak's, not the hat's)."""
-        bare = self.cells[HATLESS]
+    def piece(self, rc):
+        """A template cell's hat and the hair under it, on the idle cell: (rgb, alpha, shows),
+        `shows` being where his face shows through it (his ear only if the hat leaves it out)."""
+        body = self.body
         rgb, a = self.cells[rc]
-        m = changed(self.cells[rc], bare, 0.14) & ~hair_coloured(rgb)
+        bald = body.bald[POSES["idle"]]
         y0, chin, x0, x1 = self.box
-        m[chin + 12:] = False
-        m = close(m, 2)
+        # line the template's face up with his (the repaint moved the head a little): match
+        # the eyes and mouth, between the brim and the chin
+        base = body.base[POSES["idle"]]
+        fy0 = chin - (chin - y0) * 2 // 5
+        ref = base[0][fy0:chin, x0:x1] * base[1][fy0:chin, x0:x1, None]
+        best = (1e9, 0, 0)
+        for dy in range(-14, 15):
+            for dx in range(-14, 15):
+                r2, a2 = shifted(rgb, dy, dx), shifted(a, dy, dx)
+                d = np.abs(r2[fy0:chin, x0:x1] * a2[fy0:chin, x0:x1, None] - ref).mean()
+                if d < best[0]:
+                    best = (d, dy, dx)
+        _, dy, dx = best
+        rgb, a = shifted(rgb, dy, dx), shifted(a, dy, dx)
+        # his face stays his own on every pose: on the bald head only strong changes count
+        # (the hat, hair over his forehead), not the re-painted face
+        head = np.zeros_like(a, bool)
+        head[y0:chin, x0:x1] = bald[1][y0:chin, x0:x1] > 0.5
+        head = ~dilate(~head, 3, outside=True)
+        out_m = changed((rgb, a), bald, 0.14) & ~head
+        mx, mn = rgb.max(2), rgb.min(2)
+        pale = (mx > 0.8) & ((mx - mn) < 0.25 * mx)
+        strong = changed((rgb, a), bald, 0.4) & head & ~pale  # never the face's highlights
+        strong &= dilate(~dilate(~strong, 3, outside=True), 3)  # no specks from the face
+        # and all the hair painted over his head (fine strands too: they hide his ear)
+        hairp = close(changed((rgb, a), bald, 0.12) & hair_coloured(rgb), 2) & head
+        in_m = strong | hairp
+        # above the hat's lower edge it is all hat: any change there counts (its band)
+        m0 = out_m | in_m
+        in_m |= changed((rgb, a), bald, 0.14) & head & (hair_cut(m0) | fill_holes(m0))
+        m = out_m | in_m
         lab, n = label(m)
-        sizes = np.bincount(lab.ravel())
+        touch = np.unique(lab[out_m & m])
+        m = np.isin(lab, touch[touch > 0])  # only what comes in from around his head
+        # below the chin all of it stays as painted: her whole tail, but not the thin lines
+        # of a re-painted collar
+        low = np.arange(m.shape[0])[:, None] > chin + 12
+        m = (m & ~low) | (m & low & dilate(~dilate(~m, 4, outside=True), 4))
+        m = main_parts(close(m, 3))
+        holes = fill_holes(m) & ~m
+        lab, n = label(holes)
+        sizes = np.bincount(lab.ravel(), minlength=n + 1)
         sizes[0] = 0
-        m = lab == np.argmax(sizes)  # the hat itself, not crumbs
-        m = fill_holes(m) & (a > 0.5) & ~(hair_coloured(rgb) & ~m)
-        return rgb, a * dilate(m, 1) * np.where(m, 1.0, 0.5)
+        m = (m | (sizes[lab] < 6000) & holes) & (a > 0.02)  # a hood's opening stays his face
+        shows = np.zeros_like(m)
+        shows[y0:chin + 12] = (bald[1][y0:chin + 12] > 0.5) & ~m[y0:chin + 12]
+        # a hat covering the side of his head: the back edge of the face opening is the
+        # template's own (his cheek, no ear)
+        if m[y0:chin, x0:x0 + (x1 - x0) // 3].mean() > 0.3:
+            cols = np.arange(m.shape[1])[None, :]
+            ring = shows & dilate(~shows, 18, outside=True) & (cols < x0 + (x1 - x0) * 0.4) & (a > 0.5)
+            m |= ring
+            shows &= ~ring
+        return rgb, a * dilate(m, 1) * np.where(m, 1.0, 0.5), shows
+
+    def place(self, img, pose):
+        """Art on the idle cell moved onto a pose: turned about the head's centre, shifted."""
+        dx, dy, deg = self.track[pose]
+        if img.ndim == 3:  # one channel at a time (rotate takes greyscale, RGB or RGBA)
+            return np.dstack([self.place(img[..., i], pose) for i in range(img.shape[2])])
+        return shifted(rotate(img, deg, self.centre), int(dy), int(dx))
+
+    def shape(self, rc):
+        """A hat shape on every pose: {pose: (hat, hair, cut)}: the hat (rgb, alpha), the hair
+        under it (rgb, alpha: the template's, and the strands painted over his face below it)
+        and where his body is cut away under it (mask: bare head poking out, an ear it hides)."""
+        body = self.body
+        rgb, a, shows = self.piece(rc)
+        hairs = close(hair_coloured(rgb) & (a > 0.02), 2) & (a > 0.02)
+        y0, chin, x0, x1 = self.box
+        idle_head = np.zeros_like(a)
+        idle_head[y0:chin - 4, x0:x1] = body.bald[POSES["idle"]][1][y0:chin - 4, x0:x1]
+        out = {}
+        for pose, prc in POSES.items():
+            dy = self.track[pose][1]
+            placed = self.place(np.dstack([rgb, a, hairs, shows, idle_head]), pose)
+            prgb, pa = placed[..., :3], placed[..., 3]
+            on_hair = placed[..., 4] > 0.5
+            hm = pa > 0.5
+            above = hair_cut(hm) | fill_holes(hm)
+            rows = np.arange(hm.shape[0])[:, None]
+            # his own strands painted over his face below the hat stay as painted
+            brgb, ba = body.base[prc]
+            face = ~above & (body.bald[prc][1] > 0.5) & (rows < chin + dy + 10)
+            strands = body.hair_mask(prc) & face & (ba > 0.5)
+            hair_a = np.where(on_hair, pa, 0.0)
+            hair_rgb = np.where(on_hair[..., None], prgb, 0.0)
+            hair_rgb = np.where(strands[..., None], brgb, hair_rgb)
+            hair_a = np.maximum(hair_a, np.where(strands, ba, 0.0))
+            hat = (prgb, np.where(on_hair, 0.0, pa))
+            # none of his bare head pokes out of the hat; on his head only what the
+            # template shows (no ear where the hat covers it), never an arm beside it
+            cut = hair_cut(hm)
+            head = dilate(placed[..., 6] > 0.5, 4)
+            cut |= head & ~dilate(placed[..., 5] > 0.5, 3) & ~hm
+            out[pose] = (hat, (hair_rgb, hair_a), cut)
+        return out
 
 
 def place_mask(mask, track, centre):
@@ -480,3 +608,130 @@ def hair_cut(hat_mask):
     bottom[cols.max() + 1:] = bottom[cols.max()]
     above = np.arange(h)[:, None] < bottom[None, :]
     return above & ~filled
+
+
+# ---------- writing it all ----------
+
+def build_hats(bodies):
+    """For each hat shape: the hair under it (hair_<style>_<shape>.png, greyscale like the hair)
+    and where the body is cut away under it (pieces/headcut_<shape>.png, alpha). For each hat
+    with its own art (HAT_ITEMS): its picture on every pose (worn_item_<id>.png)."""
+    items = {item: new_strip() for item in HAT_ITEMS}
+    for shape, rc in HAT_SHAPES.items():
+        cuts = new_strip()
+        for body in bodies.values():
+            hair = new_strip()
+            for pose, (hat, (hrgb, ha), cut) in hats_of(body).shape(rc).items():
+                put(hair, body.name, pose, body.fit.frame(grey(hrgb, body.hair_bright), ha))
+                white = np.ones(cut.shape + (3,))
+                put(cuts, body.name, pose, body.fit.frame(white, cut.astype(float)))
+                for item, item_shape in HAT_ITEMS.items():
+                    if item_shape == shape:
+                        put(items[item], body.name, pose, body.fit.frame(*hat))
+            save(hair, os.path.join(LAYERS, "hair_%s_%s.png" % (STYLES[body.name], shape)))
+        save(cuts, os.path.join(PIECES, "headcut_%s.png" % shape))
+    for item, strip in items.items():
+        save(strip, os.path.join(LAYERS, "worn_item_%s.png" % item))
+
+
+_HATS = {}
+
+
+def hats_of(body):
+    """One body's Hats (its head tracked once)."""
+    if body.name not in _HATS:
+        _HATS[body.name] = Hats(body)
+    return _HATS[body.name]
+
+
+def build_rig(bodies, hair_tint):
+    """hero_rig.json: per strip frame its pose and where his head is; the colours the art's
+    regions are painted in (the skin tone and hair colour recolour from those)."""
+    frames = []
+    skin = []
+    for body in bodies.values():
+        hats = hats_of(body)
+        y0, chin, x0, x1 = hats.box
+        for pose, rc in POSES.items():
+            dx, dy, _deg = hats.track[pose]
+            cx, cy = (x0 + x1) / 2 + dx, (y0 + chin) / 2 + dy
+            ys, xs = np.nonzero(body.bald[rc][1] > 0.5)
+            frames.append({
+                "name": pose, "body": body.name,
+                "head": body.fit.point(cx, cy), "face": body.fit.point(cx, cy),
+                "head_top": body.fit.point(cx, y0 + dy), "neck": body.fit.point(cx, chin + dy),
+                "head_size": [round((x1 - x0) * body.fit.scale), round((chin - y0) * body.fit.scale)],
+                "feet": body.fit.point((xs.min() + xs.max()) / 2, ys.max()),
+            })
+        rgb, a = body.bare(POSES["idle"])
+        skin.append(rgb[skin_mask(rgb, a)].mean(0))
+    skin = [round(float(v), 3) for v in np.mean(skin, 0)]
+    colors = [[1, 1, 1]] * 11
+    colors[1] = hair_tint  # Paperdoll.Region.HAIR
+    colors[2] = skin  # SKIN
+    rig = {"frame_size": [FRAME_W, FRAME_H],
+           "regions": ["none", "hair", "skin", "eyes", "top", "bottom", "shoes", "cape", "weapon", "shield", "gloves"],
+           "frames": frames, "weapons": {}, "region_colors": colors}
+    path = os.path.join(CHARS, "hero_rig.json")
+    with open(path, "w") as f:
+        json.dump(rig, f, indent=1)
+        f.write("\n")
+    print("wrote", os.path.relpath(path, ROOT))
+
+
+def build_animations():
+    """Each body's animations over the strip: hero.tres (the boy) and hero_girl.tres."""
+    for body in BODIES:
+        used = []
+        for _name, poses, _fps, _loop, _lengths in ANIMATIONS:
+            for pose in poses:
+                if frame_index(body, pose) not in used:
+                    used.append(frame_index(body, pose))
+        out = ['[gd_resource type="SpriteFrames" load_steps=%d format=3]' % (len(used) + 2), "",
+               '[ext_resource type="Texture2D" path="res://assets/sprites/characters/hero.png" id="1_strip"]', ""]
+        for i in used:
+            out += ['[sub_resource type="AtlasTexture" id="f%d"]' % i, 'atlas = ExtResource("1_strip")',
+                    "region = Rect2(%d, 0, %d, %d)" % (i * FRAME_W, FRAME_W, FRAME_H), ""]
+        anims = []
+        for name, poses, fps, loop, lengths in ANIMATIONS:
+            frames = ", ".join('{"duration": %s, "texture": SubResource("f%d")}'
+                               % (float(lengths[k]) if lengths else 1.0, frame_index(body, p)) for k, p in enumerate(poses))
+            anims.append('{"frames": [%s], "loop": %s, "name": &"%s", "speed": %s}'
+                         % (frames, "true" if loop else "false", name, float(fps)))
+        out += ["[resource]", "animations = [%s]" % ", ".join(anims), ""]
+        path = os.path.join(ANIMS, "hero.tres" if body == "boy" else "hero_%s.tres" % body)
+        with open(path, "w") as f:
+            f.write("\n".join(out))
+        print("wrote", os.path.relpath(path, ROOT))
+
+
+def preview(bodies):
+    """art/build/hero_preview.png: every frame of the body with each layer, to check by eye."""
+    rows = [Image.open(os.path.join(CHARS, "hero.png"))]
+    for name in sorted(os.listdir(LAYERS)):
+        if name.startswith(("hair_", "worn_item_")) and name.endswith(".png"):
+            layer = Image.open(os.path.join(LAYERS, name))
+            if layer.width == rows[0].width:
+                row = rows[0].copy()
+                row.alpha_composite(layer)
+                rows.append(row)
+    out = Image.new("RGBA", (rows[0].width, FRAME_H * len(rows)), (60, 60, 60, 255))
+    for i, r in enumerate(rows):
+        out.alpha_composite(r, (0, i * FRAME_H))
+    save(out, os.path.join(ROOT, "art", "build", "hero_preview.png"))
+
+
+def main(argv):
+    bodies = {name: Body(name) for name in BODIES}
+    build_bodies(bodies)
+    tint = build_hair(bodies)
+    build_worn(bodies)
+    build_hats(bodies)
+    build_rig(bodies, tint)
+    build_animations()
+    if "--preview" in argv:
+        preview(bodies)
+
+
+if __name__ == "__main__":
+    main(sys.argv[1:])

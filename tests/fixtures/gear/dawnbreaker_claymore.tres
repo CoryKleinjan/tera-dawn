@@ -28,4 +28,3 @@ variance = 3
 upgrade_slots = 7
 weapon_kind = &"sword"
 required_strength = 105
-held_size = 1.3

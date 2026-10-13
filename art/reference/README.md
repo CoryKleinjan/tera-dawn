@@ -1,7 +1,6 @@
 # Art reference
 
-`hero.png` is the chibi boy hero, the first idle pose of the painted hero sheet
-(`art/source/hero_main.png`). He sets the proportions for the hero and every character:
+`hero.png` is the chibi boy hero, the first idle pose of the old painted hero sheet. He sets the proportions for the hero and every character:
 
 - Chibi proportions: a big head (about half his height) on a small body.
 - Big glossy eyes with a dark top lash, a deep-blue iris and white highlights.

@@ -308,29 +308,6 @@ def key_dark(cell, bg, shadow):
     return cell / 255.0, fg.astype(float)
 
 
-def fix_hero_attack_arc(rgb, alpha, source=None):
-    """hero_main Attack 2: keep the sword blade, drop the blue slash arc around it (the game draws its own)."""
-    cell = (rgb * 255).astype(int)
-    m = alpha > 0.5
-    h, w = m.shape
-    yy, xx = np.mgrid[0:h, 0:w]
-    x0, y0, x1, y1 = 230.0, 141.0, 330.0, 184.0  # the blade, hilt to tip
-    dx, dy = x1 - x0, y1 - y0
-    proj = ((xx - x0) * dx + (yy - y0) * dy) / (dx * dx + dy * dy)
-    t = proj.clip(0, 1)
-    dist = np.hypot(xx - (x0 + t * dx), yy - (y0 + t * dy))
-    blue = (cell[..., 2] - cell[..., 0] > 45) & (cell[..., 2] > 110)
-    bluish = cell[..., 2] > cell[..., 0] + 8
-    m = m & ~((xx > 246) & ((dist > 10) | blue))
-    m = m & ~((xx > 214) & (xx <= 246) & (yy > 150) & (dist > 10) & bluish)
-    m = m & ~((proj > 0.985) & (xx > 300))
-    hole = ~m & (xx > 236) & (t < 0.97) & (dist <= 7.5)  # where the arc covered the blade
-    cell[hole] = (196, 200, 214)
-    edge = ~m & (xx > 236) & (t < 0.93) & (dist > 7.5) & (dist <= 9.2) & (dx * (yy - y0) - dy * (xx - x0) < 0)
-    cell[edge] = (14, 16, 26)
-    return cell / 255.0, (m | hole | edge).astype(float)
-
-
 def fix_glow_backdrop(rgb, alpha, source=None):
     """Icon sheets with a soft warm glow painted behind each item: everything reachable from the
     cell border through magenta, pink or cream (never orange or gold) is background, so the
@@ -448,7 +425,7 @@ def fix_sky_body(rgb, alpha, source=None):
 
 
 # Per-cell clean-ups a manifest can ask for with "fix": "<name>".
-FIXES = {"hero_attack_arc": fix_hero_attack_arc, "glow_backdrop": fix_glow_backdrop,
+FIXES = {"glow_backdrop": fix_glow_backdrop,
          "glow_backdrop_holes": fix_glow_backdrop_holes,
          "painted_sky": fix_painted_sky, "sky_body": fix_sky_body}
 def fix_round_top(rgb, alpha, source=None, band=28):
@@ -1146,7 +1123,7 @@ def main():
     for p in paths:
         with open(p) as f:
             source = json.load(f).get("source")
-        if source is None:  # not a sheet (paperdoll_rig.json is read by paperdoll_layers.py)
+        if source is None:  # not a sheet
             continue
         if os.path.exists(os.path.join(ROOT, source)):
             ready.append(p)

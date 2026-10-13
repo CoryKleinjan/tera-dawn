@@ -100,6 +100,8 @@ func _init() -> void:
 	cols.add_child(right)
 	right.add_child(UiBuild.label("Appearance", 15, Palette.EMBER))
 	for kind in LookDef.Kind.values():
+		if Content.looks_of(kind).is_empty():
+			continue # (a kind with nothing to pick, such as faces painted on the body)
 		right.add_child(_row("look:%d" % kind, LookDef.KIND_NAMES[kind], func(step: int) -> void:
 			made.appearance.cycle(kind, step)))
 	right.add_child(UiBuild.label("Outfit", 15, Palette.EMBER))
@@ -203,6 +205,8 @@ func look() -> Dictionary:
 
 func _refresh() -> void:
 	for kind in LookDef.Kind.values():
+		if not values.has("look:%d" % kind):
+			continue
 		var l := made.appearance.part(kind)
 		(values["look:%d" % kind] as Label).text = l.display_name if l else "-"
 	for kind in NewCharacter.outfit_kinds(job):
