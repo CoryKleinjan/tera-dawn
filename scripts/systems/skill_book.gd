@@ -54,6 +54,50 @@ func learn(skill: SkillDef) -> String:
 	c.recalc()
 	return ""
 
+## How many more levels the character could still learn: one for every level left on each
+## skill of their job line. Unspent Skill Points never go above this (see keep_in_room).
+func room() -> int:
+	var line := character.job_line()
+	var out := 0
+	for s: SkillDef in Content.skills.values():
+		if not s.innate and s.job in line:
+			out += maxi(0, s.max_level - level(s))
+	return out
+
+## Drops unspent Skill Points that no skill could ever take.
+func keep_in_room() -> void:
+	points = mini(points, room())
+
+## Skill Points spent on learned levels.
+func spent() -> int:
+	var out := 0
+	for id in learned:
+		var s: SkillDef = Content.skills.get(id)
+		if s and not s.innate:
+			out += learned[id]
+	return out
+
+## Every Skill Point the character's level and job line have earned, as if each job was taken
+## the moment it opened (a job taken later loses nothing).
+func earned() -> int:
+	var c := character
+	var out := 0
+	var until := c.level
+	for id in c.job_line():
+		var j: JobDef = Content.job(id)
+		var from := j.advance_level if j.advances_from != &"" else 1
+		out += maxi(0, until - from) * j.sp_per_level
+		if j.advances_from != &"":
+			out += j.advance_sp
+		until = mini(until, from)
+	return out
+
+## Hands back any Skill Points a character is owed (earned minus spent), then keeps them in
+## room. Run when a character loads, so a job taken late before this rule existed catches up.
+func settle() -> void:
+	points = maxi(points, earned() - spent())
+	keep_in_room()
+
 ## Why `skill` can't be used right now, or "".
 func use_problem(skill: SkillDef) -> String:
 	var c := character

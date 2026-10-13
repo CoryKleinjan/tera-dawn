@@ -45,6 +45,8 @@ static func load_file(path: String, char_name: String) -> Character:
 	var c := Character.create(char_name)
 	c.load_dict(data)
 	c.name = char_name
+	# hand back Skill Points a job taken late used to lose, and drop any no skill could take
+	c.skills.settle()
 	return c
 
 ## The name saved in the file `char_name` would use, or "" if there's none. Names that only

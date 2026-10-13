@@ -2,7 +2,9 @@ class_name TDShopWindow
 extends TDWindow
 ## A shop: what the shopkeeper sells on the left, your bag on the right. Double-click a
 ## line to buy, or one of your items to sell it, in the amount picked at the bottom (1, 10
-## or 100). Buying and selling are requests the server answers. Closes when you walk away.
+## or 100). Items also sell when dragged here or double-clicked in the Inventory window while
+## the shop is open; gear asks first. Buying and selling are requests the server answers.
+## Closes when you walk away.
 
 const ROW_H := 44.0
 const LIST_W := 262.0
@@ -21,6 +23,8 @@ const CHIP_SCALE := 0.68
 ## The amount chips: wide enough for "×100" between the art's end caps.
 const CHIP_W := 62.0
 const CHIP_CAPS := 2 * 20 * CHIP_SCALE
+## Under your bag: how to sell (two lines to fit the bag's width).
+const SELL_HINT: Array[String] = ["Double-click or drag", "your items here to sell"]
 
 var npc: TDNpc
 var shop: ShopDef
@@ -89,6 +93,9 @@ func _draw_body() -> void:
 		DrawUtil.text(self, Game.num_font, r.get_center() + Vector2(0, 5), label, DrawUtil.fit_size(Game.num_font, label, 13, CHIP_W - CHIP_CAPS), Palette.INK if on else Palette.MIST, 0, 0 if on else 3, Palette.NIGHT)
 	var purse_y := GRID_Y + grid.rows() * (SLOT + GAP) + 8
 	draw_shards(Vector2(GRID_X, purse_y + 16), shards)
+	for i in SELL_HINT.size():
+		DrawUtil.text(self, Game.ui_font, Vector2(GRID_X, purse_y + 40 + i * 15), SELL_HINT[i],
+			DrawUtil.fit_size(Game.ui_font, SELL_HINT[i], 12, size.x - PAD - GRID_X), Palette.MUTED, 1)
 	draw_button(_sell_etc_rect(), "Sell all Etc", Game.me.inventory.free_slots(ItemDef.Tab.ETC) < Inventory.SLOTS)
 
 # ---------- input ----------
@@ -122,9 +129,31 @@ func buy(i: int) -> void:
 
 ## Asks to sell the current amount from bag slot `i` of the open tab.
 func sell(i: int) -> void:
-	if Game.me.inventory.at(tab, i):
-		Net.ask(&"req_sell", [npc.def.id, tab, i, amount])
-		hud.tooltip.clear(self)
+	sell_from(tab, i)
+
+## Asks to sell the current amount from bag slot `i` of tab `from_tab`. Gear asks first,
+## since a piece sold is gone for good.
+func sell_from(from_tab: int, i: int) -> void:
+	var held := Game.me.inventory.at(from_tab, i)
+	if held == null or npc == null:
+		return
+	hud.tooltip.clear(self)
+	var ask_server := func() -> void: Net.ask(&"req_sell", [npc.def.id, from_tab, i, amount])
+	if from_tab != ItemDef.Tab.EQUIP:
+		ask_server.call()
+		return
+	hud.confirm.open("Sell %s for %d Dawnshards?" % [held.display_name(), held.item.sell_price], "Sell", func() -> void:
+		# only if the same piece is still there and the shop still open
+		var now := Game.me.inventory.at(from_tab, i)
+		if visible and now and now.item == held.item:
+			ask_server.call())
+
+func _can_drop_data(_at: Vector2, data: Variant) -> bool:
+	return DragPayload.is_bag_item(data)
+
+func _drop_data(_at: Vector2, data: Variant) -> void:
+	var d := DragPayload.of(data)
+	sell_from(d.tab, d.index)
 
 func _tooltip_at(at: Vector2) -> Tip:
 	var row := list.row_at(at, shop.items.size())

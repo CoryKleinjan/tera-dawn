@@ -43,6 +43,7 @@ func test_gain_xp_exactly_need_levels_up_with_zero_left() -> void:
 
 func test_gain_xp_many_levels_at_once() -> void:
 	var c := fx.character()
+	fx.skill(&"t_cut")
 	check_eq(c.gain_xp(27 + 220 + 742 + 10), 3, "three levels")
 	check_eq(c.level, 4, "level 4")
 	check_eq(c.xp, 10, "leftover")
@@ -582,9 +583,54 @@ func test_advance_gives_sp() -> void:
 	var c: Character = setup[0]
 	var next: JobDef = setup[1]
 	next.advance_sp = 2
+	fx.skill(&"t_cut", SkillDef.Kind.ATTACK, &"t_next")
 	c.skills.points = 0
 	check_eq(c.advance(next), "", "advanced")
 	check_eq(c.skills.points, 2, "SP to learn a first skill")
+
+func test_late_advance_pays_the_missed_sp() -> void:
+	var setup := _advance_setup()
+	var c: Character = setup[0]
+	var next: JobDef = setup[1]
+	next.advance_sp = 1
+	fx.skill(&"t_cut", SkillDef.Kind.ATTACK, &"t_next").max_level = 20
+	c.level = 13
+	c.skills.points = 0
+	check_eq(c.advance(next), "", "advanced at 13")
+	check_eq(c.skills.points, 1 + 3 * 3, "as many SP as advancing at 10 and levelling to 13")
+
+func test_sp_never_above_what_skills_can_take() -> void:
+	var c := fx.character()
+	var cut := fx.skill(&"t_cut")
+	c.skills.points = 8
+	c.gain_xp(27)
+	check_eq(c.skills.points, 10, "levelling stops at the 10 levels the job's skills have")
+	check_eq(c.skills.learn(cut), "", "learned one")
+	c.gain_xp(c.xp_need())
+	check_eq(c.skills.points, 9, "still no more than the levels left")
+	fx.skill(&"t_other_job", SkillDef.Kind.ATTACK, &"t_elsewhere")
+	c.skills.points = 50
+	c.skills.keep_in_room()
+	check_eq(c.skills.points, 9, "another job's skills don't count")
+
+func test_settle_hands_back_missed_sp() -> void:
+	var setup := _advance_setup()
+	var c: Character = setup[0]
+	var next: JobDef = setup[1]
+	next.advance_sp = 1
+	var cut := fx.skill(&"t_cut", SkillDef.Kind.ATTACK, &"t_next")
+	cut.max_level = 40
+	fx.skill(&"t_jab")
+	c.job = next
+	c.level = 14
+	c.skills.learned = {&"t_jab": 9, &"t_cut": 2}
+	c.skills.points = 0
+	c.skills.settle()
+	# t_job Lv 1-10: 27, t_next Lv 10-14: 1 + 12; 11 spent
+	check_eq(c.skills.points, 27 + 13 - 11, "earned minus spent")
+	c.skills.points = 99
+	c.skills.settle()
+	check_eq(c.skills.points, 38 + 1, "and never more than the skills can take")
 
 func test_advance_needs_room_for_gifts() -> void:
 	var setup := _advance_setup()
