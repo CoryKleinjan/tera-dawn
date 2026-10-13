@@ -396,8 +396,8 @@ func remove_drop(id: int, by: int) -> void:
 func show_skill(peer: int, skill: SkillDef, at: Vector2, face: int, lines: Array, aim := 0) -> void:
 	fx.show_skill(peer, skill, at, face, lines, aim as Hitbox.Aim)
 
-func show_mob_shot(index: int, aim: Vector2) -> void:
-	fx.show_mob_shot(index, aim)
+func show_mob_shot(index: int, move_index: int, aim: Vector2) -> void:
+	fx.show_mob_shot(index, move_index, aim)
 
 func show_mob_death(index: int) -> void:
 	fx.show_mob_death(index)

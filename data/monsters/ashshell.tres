@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=17 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=19 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/ashshell.tres" id="2_ashshell"]
@@ -9,6 +9,8 @@
 [ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="loot_white_potion"]
 [ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="loot_elixir"]
 [ext_resource type="Resource" path="res://data/items/use/mana_elixir.tres" id="loot_mana_elixir"]
+[ext_resource type="Resource" path="res://data/monster_moves/lunge.tres" id="mv_lunge"]
+[ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="mv_script"]
 
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("3_drop_entry")
@@ -69,6 +71,7 @@ attack = 24
 exp_reward = 55
 speed = 0.35
 size = Vector2(64.0, 48.0)
+moves = Array[ExtResource("mv_script")]([ExtResource("mv_lunge")])
 sprite_frames = ExtResource("2_ashshell")
 drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_loot0"), SubResource("Resource_loot1"), SubResource("Resource_loot2"), SubResource("Resource_loot5"), SubResource("Resource_loot6")])
 light_color = Color(1.0, 0.47843137254901963, 0.22745098039215686, 1.0)

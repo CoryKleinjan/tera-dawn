@@ -152,7 +152,7 @@ func _check_world_graph() -> void:
 				missing.append(o.item.id)
 	_check(missing.is_empty(), "every item a quest asks for drops somewhere %s" % [missing])
 	var bosses := Content.monsters.values().filter(func(m: MonsterDef) -> bool: return m.boss)
-	var shooters := Content.monsters.values().filter(func(m: MonsterDef) -> bool: return m.shot != null)
+	var shooters := Content.monsters.values().filter(func(m: MonsterDef) -> bool: return not m.projectiles().is_empty())
 	var splitters := Content.monsters.values().filter(func(m: MonsterDef) -> bool: return m.splits_into != null)
 	_check(Content.monsters.size() >= 50 and bosses.size() >= 6 and shooters.size() >= 10 and splitters.size() >= 4,
 		"%d monsters, with bosses, shooters and splitters" % Content.monsters.size())

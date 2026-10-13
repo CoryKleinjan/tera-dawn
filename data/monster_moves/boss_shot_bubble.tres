@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MonsterMove" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="1_monster_move"]
+[ext_resource type="Resource" path="res://data/projectiles/mob_bubble.tres" id="2_mob_bubble"]
+
+[resource]
+script = ExtResource("1_monster_move")
+id = &"boss_shot_bubble"
+kind = 5
+reach = 380.0
+windup = 22
+cooldown = 110
+power = 1.0
+recover = 20
+projectile = ExtResource("2_mob_bubble")

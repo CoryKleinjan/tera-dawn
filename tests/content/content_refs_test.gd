@@ -299,9 +299,13 @@ func test_monsters_that_split_or_shoot_point_at_real_things() -> void:
 				check(m.splits_into != m, "%s: splits into itself" % w)
 				check(m.split_count >= 1, "%s: split_count is %d" % [w, m.split_count])
 				check(m.splits_into.splits_into == null, "%s: splits into %s, which splits again (MapDef.roster only follows one level)" % [w, m.splits_into.id])
-		if m.shot:
-			check(m.shot.resource_path.begins_with("res://data/projectiles/"), "%s: shot is %s, not a file in data/projectiles" % [w, m.shot.resource_path])
-			check(m.shot.texture != null, "%s: shot %s has no texture" % [w, m.shot.resource_path])
+		for mv in m.moves:
+			if not check(mv != null and mv.resource_path.begins_with("res://data/monster_moves/"), "%s: move %s is not a file in data/monster_moves" % [w, mv.resource_path if mv else "(empty)"]):
+				continue
+			if mv.kind == MonsterMove.Kind.SHOT:
+				if check(mv.projectile != null, "%s: shot move %s fires nothing" % [w, mv.id]):
+					check(mv.projectile.resource_path.begins_with("res://data/projectiles/"), "%s: %s fires %s, not a file in data/projectiles" % [w, mv.id, mv.projectile.resource_path])
+					check(mv.projectile.texture != null, "%s: %s fires %s, which has no texture" % [w, mv.id, mv.projectile.resource_path])
 
 func test_gear_points_at_real_skills_and_jobs() -> void:
 	var families := {}

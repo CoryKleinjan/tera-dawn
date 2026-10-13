@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=31 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=34 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
-[ext_resource type="Resource" path="res://data/projectiles/mob_seed.tres" id="2_mob_seed"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/elder_treant.tres" id="3_elder_treant"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="5_dawnshard"]
@@ -17,6 +16,10 @@
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_shield_def_60.tres" id="15_scroll_shield_def_60"]
 [ext_resource type="Resource" path="res://data/items/use/power_elixir.tres" id="22_power_elixir"]
 [ext_resource type="Resource" path="res://data/items/setup/stump_seat.tres" id="p11_stump_seat"]
+[ext_resource type="Resource" path="res://data/monster_moves/boss_shot_seed.tres" id="mv_boss_shot_seed"]
+[ext_resource type="Resource" path="res://data/monster_moves/boss_slam.tres" id="mv_boss_slam"]
+[ext_resource type="Resource" path="res://data/monster_moves/boss_lunge.tres" id="mv_boss_lunge"]
+[ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="mv_script"]
 
 [sub_resource type="Resource" id="Resource_18"]
 script = ExtResource("4_drop_entry")
@@ -118,13 +121,13 @@ max_hp = 42663
 attack = 106
 exp_reward = 8835
 speed = 0.5
-size = Vector2(96.0, 150.0)
+size = Vector2(62.0, 97.0)
 boss = true
 flying = false
-shot = ExtResource("2_mob_seed")
-shot_range = 380.0
-shot_cooldown = 110
+sight = 700.0
+moves = Array[ExtResource("mv_script")]([ExtResource("mv_boss_shot_seed"), ExtResource("mv_boss_slam"), ExtResource("mv_boss_lunge")])
+keep_distance = 140.0
 sprite_frames = ExtResource("3_elder_treant")
-sprite_scale = 1.77
+sprite_scale = 1.15
 drops = Array[ExtResource("4_drop_entry")]([SubResource("P11_stump_seat"), SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_18")])
 respawn_ticks = Vector2i(1800, 2400)
