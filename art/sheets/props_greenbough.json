@@ -1,0 +1,59 @@
+{
+  "source": "art/source/props_greenbough.png",
+  "out_dir": "assets/sprites/tiles/greenbough",
+  "label_band": 0,
+  "inset": 4,
+  "cells": [
+    [
+      "prop_target",
+      "prop_arrow_rack",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "prop_hide_rack",
+      "",
+      "prop_signpost",
+      ""
+    ]
+  ],
+  "overrides": {
+    "prop_target": {
+      "scale": 0.1273,
+      "flat_bottom": true
+    },
+    "prop_arrow_rack": {
+      "scale": 0.1103,
+      "flat_bottom": true
+    },
+    "prop_hide_rack": {
+      "scale": 0.1374,
+      "flat_bottom": true
+    },
+    "prop_signpost": {
+      "scale": 0.16,
+      "flat_bottom": true
+    }
+  },
+  "grid": {
+    "rows": [
+      0,
+      573,
+      1148,
+      1728
+    ],
+    "cols": [
+      0,
+      768,
+      1536,
+      2304,
+      3072
+    ]
+  }
+}

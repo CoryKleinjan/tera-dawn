@@ -1,136 +1,216 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=26 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=54 format=3]
 
-[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
-[ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
-[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="3_platform_def"]
-[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="4_climbable_def"]
-[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="5_portal_def"]
-[ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="6_npc_placement"]
-[ext_resource type="Script" path="res://scripts/data/building_placement.gd" id="7_building_placement"]
-[ext_resource type="Resource" path="res://data/buildings/greenbough_large.tres" id="10_greenbough_large"]
-[ext_resource type="Resource" path="res://data/buildings/greenbough_small.tres" id="11_greenbough_small"]
-[ext_resource type="Resource" path="res://data/npcs/greenbough_taxi.tres" id="12_greenbough_taxi"]
-[ext_resource type="Resource" path="res://data/npcs/greenbough_shop.tres" id="13_greenbough_shop"]
-[ext_resource type="Resource" path="res://data/npcs/storage_keeper.tres" id="14_storage_keeper"]
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="map_def"]
+[ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="greenwood"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="platform_def"]
+[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="climbable_def"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="portal_def"]
+[ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="npc_placement"]
+[ext_resource type="Script" path="res://scripts/data/building_placement.gd" id="building_placement"]
+[ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="prop_placement"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
+[ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="backdrop_layer_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/greenbough/panorama.png" id="panorama"]
+[ext_resource type="Resource" path="res://data/buildings/greenbough_small.tres" id="b_hut"]
+[ext_resource type="Resource" path="res://data/buildings/greenbough_fletcher_store.tres" id="b_store"]
+[ext_resource type="Resource" path="res://data/buildings/greenbough_archers_lodge.tres" id="b_lodge"]
+[ext_resource type="Resource" path="res://data/buildings/greenbough_large.tres" id="b_treehouse"]
+[ext_resource type="Resource" path="res://data/buildings/greenbough_lookout.tres" id="b_lookout"]
+[ext_resource type="Resource" path="res://data/buildings/greenbough_hunters_cabin.tres" id="b_cabin"]
+[ext_resource type="Resource" path="res://data/npcs/greenbough_taxi.tres" id="n_taxi"]
+[ext_resource type="Resource" path="res://data/npcs/greenbough_forager.tres" id="n_forager"]
+[ext_resource type="Resource" path="res://data/npcs/greenbough_shop.tres" id="n_shop"]
+[ext_resource type="Resource" path="res://data/npcs/greenbough_keeper.tres" id="n_keeper"]
+[ext_resource type="Resource" path="res://data/npcs/greenbough_kid.tres" id="n_kid"]
+[ext_resource type="Resource" path="res://data/npcs/greenbough_hunter.tres" id="n_hunter"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough/lamp_post.png" id="t_lamp"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough/prop_signpost.png" id="t_signpost"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough/prop_arrow_rack.png" id="t_arrow_rack"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough/prop_target.png" id="t_target"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough/prop_hide_rack.png" id="t_hide_rack"]
 
 [sub_resource type="Resource" id="Portal_west"]
-script = ExtResource("5_portal_def")
+script = ExtResource("portal_def")
 x = 60.0
 platform = 0
 target_map = &"bough_trail"
 target_x = 2560.0
 
-[sub_resource type="Resource" id="Portal_mid"]
-script = ExtResource("5_portal_def")
-x = 2443.0
-platform = 0
-target_map = &"mossy_glade"
-target_x = 120.0
-
-[sub_resource type="Resource" id="Portal_east"]
-script = ExtResource("5_portal_def")
-x = 3119.0
-platform = 0
-target_map = &"whispering_grove"
-target_x = 120.0
-
-[sub_resource type="Resource" id="Building_0"]
-script = ExtResource("7_building_placement")
-building = ExtResource("10_greenbough_large")
-x = 635.0
-platform = 0
-flip = true
-scale = 1.0
-tint = Color(0.92, 0.9, 0.94, 1.0)
-
-[sub_resource type="Resource" id="Building_1"]
-script = ExtResource("7_building_placement")
-building = ExtResource("11_greenbough_small")
-x = 1140.0
-platform = 0
-flip = false
-scale = 1.15
-tint = Color(1.0, 1.0, 1.0, 1.0)
-
 [sub_resource type="Resource" id="Door_store"]
-script = ExtResource("5_portal_def")
-x = 1140.0
+script = ExtResource("portal_def")
+x = 1155.0
 platform = 0
 target_map = &"greenbough_store"
 target_x = 240.0
 door = true
 
-[sub_resource type="Resource" id="Building_3"]
-script = ExtResource("7_building_placement")
-building = ExtResource("10_greenbough_large")
-x = 1654.0
-platform = 0
-flip = false
-scale = 1.12
-tint = Color(1.0, 1.0, 1.0, 1.0)
-
 [sub_resource type="Resource" id="Door_hall"]
-script = ExtResource("5_portal_def")
-x = 1654.0
+script = ExtResource("portal_def")
+x = 1760.0
 platform = 0
 target_map = &"greenbough_hall"
 target_x = 240.0
 door = true
 
-[sub_resource type="Resource" id="Building_4"]
-script = ExtResource("7_building_placement")
-building = ExtResource("11_greenbough_small")
-x = 2173.0
+[sub_resource type="Resource" id="Portal_mid"]
+script = ExtResource("portal_def")
+x = 2830.0
 platform = 0
-flip = false
-scale = 0.98
-tint = Color(1.0, 0.92, 0.88, 1.0)
+target_map = &"mossy_glade"
+target_x = 120.0
 
-[sub_resource type="Resource" id="Building_7"]
-script = ExtResource("7_building_placement")
-building = ExtResource("10_greenbough_large")
-x = 2778.0
+[sub_resource type="Resource" id="Portal_east"]
+script = ExtResource("portal_def")
+x = 4200.0
 platform = 0
-flip = true
-scale = 1.0
-tint = Color(1.0, 0.95, 0.9, 1.0)
+target_map = &"whispering_grove"
+target_x = 120.0
+
+[sub_resource type="Resource" id="Backdrop_picture"]
+script = ExtResource("backdrop_layer_def")
+textures = Array[Texture2D]([ExtResource("panorama")])
+mode = 2
+depth = 300.0
+screen_top = Vector2(-0.2, -0.2)
+
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+hide_layers = PackedInt32Array(0, 1, 2, 3, 4, 5, 6)
+hide_ground_decor = PackedInt32Array(0)
+more_backdrop = Array[ExtResource("backdrop_layer_def")]([SubResource("Backdrop_picture")])
+
+[sub_resource type="Resource" id="Building_hut"]
+script = ExtResource("building_placement")
+building = ExtResource("b_hut")
+x = 613.0
+platform = 0
+
+[sub_resource type="Resource" id="Building_store"]
+script = ExtResource("building_placement")
+building = ExtResource("b_store")
+x = 1155.0
+platform = 0
+
+[sub_resource type="Resource" id="Building_lodge"]
+script = ExtResource("building_placement")
+building = ExtResource("b_lodge")
+x = 1760.0
+platform = 0
+
+[sub_resource type="Resource" id="Building_treehouse"]
+script = ExtResource("building_placement")
+building = ExtResource("b_treehouse")
+x = 2346.0
+platform = 0
+
+[sub_resource type="Resource" id="Building_lookout"]
+script = ExtResource("building_placement")
+building = ExtResource("b_lookout")
+x = 3155.0
+platform = 0
+
+[sub_resource type="Resource" id="Building_cabin"]
+script = ExtResource("building_placement")
+building = ExtResource("b_cabin")
+x = 3616.0
+platform = 0
 
 [sub_resource type="Resource" id="Npc_taxi"]
-script = ExtResource("6_npc_placement")
-npc = ExtResource("12_greenbough_taxi")
-x = 330.0
+script = ExtResource("npc_placement")
+npc = ExtResource("n_taxi")
+x = 300.0
+platform = 0
+face = 1
+
+[sub_resource type="Resource" id="Npc_forager"]
+script = ExtResource("npc_placement")
+npc = ExtResource("n_forager")
+x = 867.0
 platform = 0
 face = 1
 
 [sub_resource type="Resource" id="Npc_shop"]
-script = ExtResource("6_npc_placement")
-npc = ExtResource("13_greenbough_shop")
-x = 1372.0
+script = ExtResource("npc_placement")
+npc = ExtResource("n_shop")
+x = 1443.0
 platform = 0
 face = -1
 
-[sub_resource type="Resource" id="Npc_storage"]
-script = ExtResource("6_npc_placement")
-npc = ExtResource("14_storage_keeper")
-x = 1953.0
+[sub_resource type="Resource" id="Npc_keeper"]
+script = ExtResource("npc_placement")
+npc = ExtResource("n_keeper")
+x = 2078.0
 platform = 0
 face = -1
+
+[sub_resource type="Resource" id="Npc_kid"]
+script = ExtResource("npc_placement")
+npc = ExtResource("n_kid")
+x = 3371.0
+platform = 0
+face = -1
+
+[sub_resource type="Resource" id="Npc_hunter"]
+script = ExtResource("npc_placement")
+npc = ExtResource("n_hunter")
+x = 4010.0
+platform = 0
+face = -1
+
+[sub_resource type="Resource" id="Prop_signpost"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_signpost")
+x = 175.0
+
+[sub_resource type="Resource" id="Prop_lamp_west"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_lamp")
+x = 400.0
+light_color = Color(1.0, 0.75, 0.44, 1.0)
+light_energy = 1.5
+light_height = 130.0
+
+[sub_resource type="Resource" id="Prop_arrow_rack"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_arrow_rack")
+x = 2620.0
+
+[sub_resource type="Resource" id="Prop_lamp_east"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_lamp")
+x = 2700.0
+light_color = Color(1.0, 0.75, 0.44, 1.0)
+light_energy = 1.5
+light_height = 130.0
+
+[sub_resource type="Resource" id="Prop_target"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_target")
+x = 2930.0
+
+[sub_resource type="Resource" id="Prop_hide_rack"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_hide_rack")
+x = 3920.0
 
 [resource]
-script = ExtResource("1_map_def")
+script = ExtResource("map_def")
 id = &"greenbough"
 display_name = "Greenbough Village"
-biome = ExtResource("2_greenwood")
-width = 3179
+biome = ExtResource("greenwood")
+variant = SubResource("Variant")
+width = 4260
 height = 700
 ground_y = 620
+lantern_spacing = 0.0
 start_x = 300.0
-platforms = Array[ExtResource("3_platform_def")]([])
-climbables = Array[ExtResource("4_climbable_def")]([])
-npcs = Array[ExtResource("6_npc_placement")]([SubResource("Npc_taxi"), SubResource("Npc_shop"), SubResource("Npc_storage")])
-buildings = Array[ExtResource("7_building_placement")]([SubResource("Building_0"), SubResource("Building_1"), SubResource("Building_3"), SubResource("Building_4"), SubResource("Building_7")])
+platforms = Array[ExtResource("platform_def")]([])
+climbables = Array[ExtResource("climbable_def")]([])
+npcs = Array[ExtResource("npc_placement")]([SubResource("Npc_taxi"), SubResource("Npc_forager"), SubResource("Npc_shop"), SubResource("Npc_keeper"), SubResource("Npc_kid"), SubResource("Npc_hunter")])
+props = Array[ExtResource("prop_placement")]([SubResource("Prop_signpost"), SubResource("Prop_lamp_west"), SubResource("Prop_arrow_rack"), SubResource("Prop_lamp_east"), SubResource("Prop_target"), SubResource("Prop_hide_rack")])
+buildings = Array[ExtResource("building_placement")]([SubResource("Building_hut"), SubResource("Building_store"), SubResource("Building_lodge"), SubResource("Building_treehouse"), SubResource("Building_lookout"), SubResource("Building_cabin")])
 region = &"greenbough"
 world_pos = Vector2(390.0, 150.0)
 town = true
 level_text = "Town"
-portals = Array[ExtResource("5_portal_def")]([SubResource("Portal_west"), SubResource("Portal_mid"), SubResource("Portal_east"), SubResource("Door_store"), SubResource("Door_hall")])
+portals = Array[ExtResource("portal_def")]([SubResource("Portal_west"), SubResource("Door_store"), SubResource("Door_hall"), SubResource("Portal_mid"), SubResource("Portal_east")])

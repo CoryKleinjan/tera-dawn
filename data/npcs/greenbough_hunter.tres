@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/npc_greenbough_hunter.tres" id="2_sprite"]
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"greenbough_hunter"
+display_name = "Kestrel"
+title = "Hunter"
+sprite_frames = ExtResource("2_sprite")
+greeting = "Quiet feet, steady hands. The boars hear a careless hunter a mile off."
+lines = PackedStringArray("The best shots come from up in the branches.", "Ranger Yew says I loose too early. Ranger Yew is right.")
+storage = false
