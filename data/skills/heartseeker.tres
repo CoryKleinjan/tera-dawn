@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Resource" path="res://data/projectiles/arrow.tres" id="p_arrow"]
 [ext_resource type="Resource" path="res://data/effects/arrow_hit.tres" id="h_arrow_hit"]
-[ext_resource type="Texture2D" path="res://assets/sprites/skills/arrow_blow.png" id="i_arrow_blow"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/heartseeker.png" id="i_arrow_blow"]
 
 [resource]
 script = ExtResource("1_skill_def")

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Resource" path="res://data/effects/heal.tres" id="e_heal"]
-[ext_resource type="Texture2D" path="res://assets/sprites/skills/toughness.png" id="i_toughness"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/first_aid.png" id="i_toughness"]
 
 [resource]
 script = ExtResource("1_skill_def")

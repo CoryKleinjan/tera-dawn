@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Resource" path="res://data/effects/swish.tres" id="e_swish"]
 [ext_resource type="Resource" path="res://data/effects/power_strike_hit.tres" id="h_power_strike_hit"]
-[ext_resource type="Texture2D" path="res://assets/sprites/skills/flash_fist.png" id="i_flash_fist"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/shoulder_bash.png" id="i_flash_fist"]
 
 [resource]
 script = ExtResource("1_skill_def")

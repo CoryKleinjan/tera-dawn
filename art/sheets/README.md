@@ -154,7 +154,9 @@ list in `paperdoll_body.json`.
   their own `region` manifest (`ui_windows_frames`, `ui_menu_panel`, `ui_dialogue_rows`,
   `ui_book_rows`, `ui_creator_frame`). Pieces cut from older sheets use `<sheet>_old`
   manifests (`ui_old`, `ui_hud_old`, `ui_menu_old`, `ui_dialogue_old`, `items_parts_2_old`,
-  `skill_icons_old`, `projectiles_old`, `skill_effects_old`).
+  `projectiles_old`, `skill_effects_old`).
+- **Skill icons**: `skill_icons_<sheet>` cut the painted Gemini badges (2x2 sheets, one skill
+  per cell, named by skill id) into `assets/sprites/skills/`; `skill_icons` keeps only `bow_shot`.
 - **Items, pets, projectiles**: into `assets/sprites/items/` (named by item id), `pets/` (and
   `assets/animations/pet_*.tres`) and `projectiles/`.
 - **Reference only** (`save` false, into `art/build/`): `hero_main` (the painted hero reference).

@@ -11120,6 +11120,345 @@
     ],
     "text": "The first image is a 12-frame animation sheet of a boss monster for my 2D side-scrolling game: three rows of four frames on a magenta background, each frame with its numbered label in the dark band above it (IDLE 1, IDLE 2, MOVE 1, MOVE 2, MOVE 3, ATTACK WIND-UP, ATTACK STRIKE, SPECIAL, HURT, ENRAGED, DEFEATED 1, DEFEATED 2). Keep the sheet's size, grid, label bands and labels, and keep each frame's pose, size, facing and place in its cell exactly. Replace the coral-reef titan with a new boss, the same creature in every frame: a hulking stone beast that came out of a rift of white light, as if from a world that is already gone. Its body is heavy pale grey-blue stone with a faint violet tint, broad shoulders, huge stone fists and thick legs, the same build as the titan. Deep cracks run all over it and soft white starlight glows from inside the cracks; tiny star specks glint on its stone like a night sky. Its face is a blunt stone brow with two calm glowing white eyes and no mouth detail except a dark crack. Where the titan has a ship's wheel on its chest, the beast has a round glowing white core set in the stone. Remove all coral, seaweed, fish and bubbles. Frame details: ATTACK WIND-UP raises one fist with its cracks glowing brighter; ATTACK STRIKE slams the fist down with a small burst of white light at the ground; SPECIAL opens its chest core in a bright white flare with a few drifting star specks; HURT recoils with a few stone chips flying; ENRAGED glows strongly white-violet from every crack and the eyes blaze; DEFEATED 1 cracks apart with chips falling and the glow fading; DEFEATED 2 lies collapsed in a heap of dark stone with the light gone out. The second image shows my game's NPC characters; the beast must look like it belongs with them: rich colours, strong light and shadow with bright highlights, visible painted texture on the stone at a fairly chunky brush scale, and a dark outline. Painted, not pixel art: smooth painted shading, no visible pixels, no dithering. No ground shadow under it. Flat pure magenta #FF00FF background everywhere outside the creature and its light effects and the label bands."
    }
+  },
+  {
+   "id": "skill_icons_test",
+   "prompts": null,
+   "batch": "Class skill icons (test)",
+   "with": null,
+   "refs": [],
+   "save": "skill_icons_test.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 class skills thread (Cory 18:42Z 'do it.'): small test of the new painted class skill icons, job-coloured badge frames (Beginner brown, Warrior crimson, Magician blue, Thief black, Archer green, Pirate gold). Shown to Cory before the full set (~33 icons) or anything goes in game.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x2.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint a sheet of FOUR separate skill icons for my 2D side-scrolling game, laid out in 2 rows of 2, each centred in its own quarter of the canvas with a wide band of plain magenta around it, none touching another, all four the same size. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. Paint the icons in exactly that style. Each icon is a square badge with softly rounded corners: a thick painted frame with a thin bright metal trim, and inside it a darker painted background of the frame's colour with a soft glow behind the subject. Each icon shows ONE bold, simple subject filling most of the badge, readable even when the icon is shown very small. Top left, Power Strike (frame deep crimson red, gold trim): a broad steel sword swinging down hard, a burst of golden impact light and flying sparks where it strikes. Top right, Ice Spike (frame rich royal blue, silver trim): one long jagged pale-blue ice spike flying diagonally up to the right, a frosty trail behind it and small ice shards breaking off. Bottom left, Dark Sight (frame charcoal black, thin silver trim): a hooded thief figure in dark clothes fading away into curling dark grey and violet shadow smoke, only the outline of the hood and shoulders still clear. Bottom right, Broadside (frame warm gold, darker bronze trim): an old flintlock pistol firing to the right, a big bright orange muzzle flash with three small lead shots fanning out. Strict rules: 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) Bold dark brown outline around each badge and its subject, the same thickness on all four. 3) No letters, words or numbers anywhere. 4) Flat pure magenta #FF00FF background everywhere outside the four badges."
+   }
+  },
+  {
+   "id": "skill_icons_1",
+   "prompts": null,
+   "batch": "Class skill icons (set)",
+   "with": null,
+   "refs": [],
+   "save": "skill_icons_1.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 class skills thread (Cory 18:53Z 'those look great. make the rest of them.'): the rest of the painted class skill icons after skill_icons_test, matching it: Shoulder Bash, Quick Step, First Aid, Charge.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x2.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/skill_icons_test.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint a sheet of FOUR separate skill icons, laid out in 2 rows of 2, each centred in its own quarter of the canvas for my 2D side-scrolling game, with a WIDE band of plain magenta (at least a tenth of the canvas) around and between them, none touching another, all the same size. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished skill icons from the same set: match their badge shape, frame thickness, metal trim, inner background glow, painting style and level of detail exactly, but use a BOLDER, DARKER brown outline like the NPCs'. Each icon is a square badge with softly rounded corners: a thick painted frame with a thin bright metal trim, and inside it a darker painted background of the frame's colour with a soft glow behind the subject. Each icon shows ONE bold, simple subject filling most of the badge, lit brightly enough to read clearly even when the icon is shown very small. Top left, Shoulder Bash (frame warm chestnut brown, bronze trim): a young adventurer in a plain tunic barging shoulder-first to the right into a burst of dust and a bright yellow impact flash. Top right, Quick Step (frame warm chestnut brown, bronze trim): a brown leather boot with small white wings at the heel, leaping forward with green speed streaks behind it. Bottom left, First Aid (frame warm chestnut brown, bronze trim): a rolled linen bandage wrapped around a fresh green healing leaf, soft green-white sparkles rising from it. Bottom right, Charge (frame deep crimson red, gold trim): a big round steel shield with a gold rim rushing forward to the right, a golden dust streak trailing behind and a cone-shaped shockwave in front. Strict rules: 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) Bold dark brown outline around each badge and its subject, the same thickness on all. 3) No letters, words or numbers anywhere. 4) Flat pure magenta #FF00FF background everywhere outside the badges."
+   }
+  },
+  {
+   "id": "skill_icons_2",
+   "prompts": null,
+   "batch": "Class skill icons (set)",
+   "with": null,
+   "refs": [],
+   "save": "skill_icons_2.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 class skills thread (Cory 18:53Z 'those look great. make the rest of them.'): the rest of the painted class skill icons after skill_icons_test, matching it: Dawn Slash, Iron Body, War Cry, Blade Mastery.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x2.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/skill_icons_test.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint a sheet of FOUR separate skill icons, laid out in 2 rows of 2, each centred in its own quarter of the canvas for my 2D side-scrolling game, with a WIDE band of plain magenta (at least a tenth of the canvas) around and between them, none touching another, all the same size. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished skill icons from the same set: match their badge shape, frame thickness, metal trim, inner background glow, painting style and level of detail exactly, but use a BOLDER, DARKER brown outline like the NPCs'. Each icon is a square badge with softly rounded corners: a thick painted frame with a thin bright metal trim, and inside it a darker painted background of the frame's colour with a soft glow behind the subject. Each icon shows ONE bold, simple subject filling most of the badge, lit brightly enough to read clearly even when the icon is shown very small. Top left, Dawn Slash (frame deep crimson red, gold trim): a wide glowing golden crescent arc of dawn light sweeping across the badge, a sword hilt at the start of the arc, bright sparks along its edge. Top right, Iron Body (frame deep crimson red, gold trim): a polished steel breastplate glowing with a cool blue-white sheen, small sparks bouncing off it. Bottom left, War Cry (frame deep crimson red, gold trim): a warrior in a horned steel helmet seen in profile, shouting with mouth wide open, bold golden sound waves bursting out in front. Bottom right, Blade Mastery (frame deep crimson red, gold trim): two steel swords crossed behind a small gold laurel, their edges gleaming with a bright polished highlight. Strict rules: 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) Bold dark brown outline around each badge and its subject, the same thickness on all. 3) No letters, words or numbers anywhere. 4) Flat pure magenta #FF00FF background everywhere outside the badges."
+   }
+  },
+  {
+   "id": "skill_icons_2b",
+   "prompts": null,
+   "batch": "Class skill icons (Warrior redo)",
+   "with": null,
+   "refs": [],
+   "save": "skill_icons_2b.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 class skills thread: redo of skill_icons_2, which came back broken (a 6x4 grid of 24 small labelled pixel-art icons instead of four painted badges). Same four Warrior icons.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x2.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/skill_icons_test.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint a sheet of FOUR separate skill icons, laid out in 2 rows of 2, each centred in its own quarter of the canvas for my 2D side-scrolling game, with a WIDE band of plain magenta (at least a tenth of the canvas) around and between them, none touching another, all the same size. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished skill icons from the same set: match their badge shape, frame thickness, metal trim, inner background glow, painting style and level of detail exactly, but use a BOLDER, DARKER brown outline like the NPCs'. Each icon is a square badge with softly rounded corners: a thick painted frame with a thin bright metal trim, and inside it a darker painted background of the frame's colour with a soft glow behind the subject. Each icon shows ONE bold, simple subject filling most of the badge, lit brightly enough to read clearly even when the icon is shown very small. Top left, Dawn Slash (frame deep crimson red, gold trim): a wide glowing golden crescent arc of dawn light sweeping across the badge, a sword hilt at the start of the arc, bright sparks along its edge. Top right, Iron Body (frame deep crimson red, gold trim): a polished steel breastplate glowing with a cool blue-white sheen, small sparks bouncing off it. Bottom left, War Cry (frame deep crimson red, gold trim): a warrior in a horned steel helmet seen in profile, shouting with mouth wide open, bold golden sound waves bursting out in front. Bottom right, Blade Mastery (frame deep crimson red, gold trim): two steel swords crossed behind a small gold laurel, their edges gleaming with a bright polished highlight. Strict rules: 0) Exactly FOUR badges in total, one per quarter, large; never a grid of many small icons and never any labels. 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) Bold dark brown outline around each badge and its subject, the same thickness on all. 3) No letters, words or numbers anywhere. 4) Flat pure magenta #FF00FF background everywhere outside the badges."
+   }
+  },
+  {
+   "id": "skill_icons_9",
+   "prompts": null,
+   "batch": "Class skill icons (Shoulder Bash, Rolling Dash)",
+   "with": null,
+   "refs": [],
+   "save": "skill_icons_9.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    2,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 class skills thread (Cory 19:14Z: 'bash shouldnt show a person in the icon, just show a shoulder'; card pick: padded shoulder): Shoulder Bash repaint. Plus Rolling Dash (Cory 19:14Z: 'rolling dash shouldnt show a person'; card pick: wave curl).",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x1.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/skill_icons_test.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint TWO separate skill icons for my 2D side-scrolling game, side by side, each centred in its own half of the canvas, the same size, with a wide band of plain magenta (at least a tenth of the canvas) around and between them, not touching. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished skill icons from the same set: match their badge shape, frame thickness, metal trim, inner background glow, painting style and level of detail exactly, with a bold dark brown outline like the NPCs'. Each icon is a square badge with softly rounded corners: a thick painted frame with a thin bright metal trim, and inside it a darker painted background of the frame's colour with a soft glow. Left, Shoulder Bash (frame warm brown, copper trim): Show ONLY a shoulder and upper arm, no head, no face, no body, no person: a brown leather-padded tunic shoulder seen from the side, thrusting forward from the left and slamming into a bright golden-white impact burst on the right, with small rock chips and a puff of dust. The shoulder is big and bold, filling most of the badge, lit brightly so it reads clearly when tiny. Right, Rolling Dash (frame rich gold, bright gold trim): ONLY a big curling blue-green sea wave sweeping forward from left to right, white foam on its crest, with a brown leather pirate tricorn hat tumbling through the curl; no head, no face, no person. Bold and simple, filling most of the badge. Strict rules: 0) Exactly TWO badges, no labels. 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) No letters, words or numbers anywhere. 3) Flat pure magenta #FF00FF background everywhere outside the badges."
+   }
+  },
+  {
+   "id": "skill_icons_9b",
+   "prompts": null,
+   "batch": "Class skill icons (Shoulder Bash, Rolling Dash redo)",
+   "with": null,
+   "refs": [],
+   "save": "skill_icons_9b.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 class skills thread: redo of skill_icons_9, which came back broken (both badges ran off the bottom of the canvas) and showed a whole arm and fist for Shoulder Bash. 2x2 sheet so each badge has room: two takes of each icon, Cory picks.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x2.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/skill_icons_test.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint FOUR separate skill icons for my 2D side-scrolling game, laid out in 2 rows of 2, each a square badge centred in its own quarter of the canvas and fully inside it (no badge touches or runs off any canvas edge), all the same size, with a wide band of plain magenta (at least a tenth of the canvas) around and between them, not touching. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished skill icons from the same set: match their badge shape, frame thickness, metal trim, inner background glow, painting style and level of detail exactly, with a bold dark brown outline like the NPCs'. Each icon is a square badge with softly rounded corners: a thick painted frame with a thin bright metal trim, and inside it a darker painted background of the frame's colour with a soft glow. Top left and bottom left are two takes of Shoulder Bash (frame warm brown, copper trim): Show ONLY a shoulder, no forearm, no hand, no fist, no head, no face, no body, no person: a brown leather-padded tunic shoulder seen from the side, thrusting forward from the left and slamming into a bright golden-white impact burst on the right, with small rock chips and a puff of dust. The shoulder is big and bold, filling most of the badge, lit brightly so it reads clearly when tiny; the bottom-left take shows the padded shoulder closer up, its round leather pad and stitching filling the badge. Top right and bottom right are two takes of Rolling Dash (frame rich gold, bright gold trim): ONLY a big curling blue-green sea wave sweeping forward from left to right, white foam on its crest, with a brown leather pirate tricorn hat tumbling through the curl; no head, no face, no person. Bold and simple, filling most of the badge; the bottom-right take shows the wave curling the other way with the hat higher in the curl. Strict rules: 0) Exactly FOUR square badges, each wholly inside its quarter, no labels. 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) No letters, words or numbers anywhere. 3) Flat pure magenta #FF00FF background everywhere outside the badges."
+   }
+  },
+  {
+   "id": "skill_icons_3",
+   "prompts": null,
+   "batch": "Class skill icons (set)",
+   "with": null,
+   "refs": [],
+   "save": "skill_icons_3.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 class skills thread (Cory 18:53Z 'those look great. make the rest of them.'): the rest of the painted class skill icons after skill_icons_test, matching it: Blink, Fire Burst, Magic Guard, Mana Spring.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x2.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/skill_icons_test.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint a sheet of FOUR separate skill icons, laid out in 2 rows of 2, each centred in its own quarter of the canvas for my 2D side-scrolling game, with a WIDE band of plain magenta (at least a tenth of the canvas) around and between them, none touching another, all the same size. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished skill icons from the same set: match their badge shape, frame thickness, metal trim, inner background glow, painting style and level of detail exactly, but use a BOLDER, DARKER brown outline like the NPCs'. Each icon is a square badge with softly rounded corners: a thick painted frame with a thin bright metal trim, and inside it a darker painted background of the frame's colour with a soft glow behind the subject. Each icon shows ONE bold, simple subject filling most of the badge, lit brightly enough to read clearly even when the icon is shown very small. Top left, Blink (frame rich royal blue, silver trim): a jagged blue-white lightning bolt jumping from a small glowing point at the bottom left to another at the top right, crackling white sparks at both ends. Top right, Fire Burst (frame rich royal blue, silver trim): an orange-red fireball bursting open into a ring of flame, glowing embers flying outward. Bottom left, Magic Guard (frame rich royal blue, silver trim): a glowing violet magic barrier made of six-sided panels, curved like a shield, a strike of light cracking harmlessly against it. Bottom right, Mana Spring (frame rich royal blue, silver trim): a small fountain of glowing blue water rising from a ring of mossy stones, blue sparkles drifting up. Strict rules: 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) Bold dark brown outline around each badge and its subject, the same thickness on all. 3) No letters, words or numbers anywhere. 4) Flat pure magenta #FF00FF background everywhere outside the badges."
+   }
+  },
+  {
+   "id": "skill_icons_4",
+   "prompts": null,
+   "batch": "Class skill icons (set)",
+   "with": null,
+   "refs": [],
+   "save": "skill_icons_4.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 class skills thread (Cory 18:53Z 'those look great. make the rest of them.'): the rest of the painted class skill icons after skill_icons_test, matching it: Mana Well, Flash Jump, Shadow Fang, Star Scatter.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x2.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/skill_icons_test.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint a sheet of FOUR separate skill icons, laid out in 2 rows of 2, each centred in its own quarter of the canvas for my 2D side-scrolling game, with a WIDE band of plain magenta (at least a tenth of the canvas) around and between them, none touching another, all the same size. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished skill icons from the same set: match their badge shape, frame thickness, metal trim, inner background glow, painting style and level of detail exactly, but use a BOLDER, DARKER brown outline like the NPCs'. Each icon is a square badge with softly rounded corners: a thick painted frame with a thin bright metal trim, and inside it a darker painted background of the frame's colour with a soft glow behind the subject. Each icon shows ONE bold, simple subject filling most of the badge, lit brightly enough to read clearly even when the icon is shown very small. Top left, Mana Well (frame rich royal blue, silver trim): a deep round stone well brimming with glowing blue mana, a single bright blue drop hanging above it. Top right, Flash Jump (frame charcoal black, thin silver trim): a dark leather boot kicking off a puff of violet shadow in mid-air, faint violet afterimages of the boot trailing behind. Bottom left, Shadow Fang (frame charcoal black, thin silver trim): a curved steel dagger thrusting forward, two sharp violet slash marks crossing in front of its tip. Bottom right, Star Scatter (frame charcoal black, thin silver trim): five silver four-pointed throwing stars fanning out from the lower left, spinning, with short white motion trails. Strict rules: 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) Bold dark brown outline around each badge and its subject, the same thickness on all. 3) No letters, words or numbers anywhere. 4) Flat pure magenta #FF00FF background everywhere outside the badges."
+   }
+  },
+  {
+   "id": "skill_icons_4b",
+   "prompts": null,
+   "batch": "Class skill icons (frame redo)",
+   "with": null,
+   "refs": [],
+   "save": "skill_icons_4b.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 class skills thread (Cory 19:16Z card pick 'Repaint'): redo of skill_icons_4, whose frames came out flatter and squarer than the rest of their jobs' icons and whose background came out plum instead of magenta.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x2.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/skill_icons_test.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/skill_icons_3.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/skill_icons_5.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint a sheet of FOUR separate skill icons, laid out in 2 rows of 2, each centred in its own quarter of the canvas for my 2D side-scrolling game, with a WIDE band of plain magenta (at least a tenth of the canvas) around and between them, none touching another, all the same size. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished skill icons from the same set: match their badge shape, frame thickness, metal trim, inner background glow, painting style and level of detail exactly, but use a BOLDER, DARKER brown outline like the NPCs'. Each icon is a square badge with softly rounded corners: a thick painted frame with a thin bright metal trim, and inside it a darker painted background of the frame's colour with a soft glow behind the subject. Each icon shows ONE bold, simple subject filling most of the badge, lit brightly enough to read clearly even when the icon is shown very small. Top left, Mana Well (frame rich royal blue, silver trim): a deep round stone well brimming with glowing blue mana, a single bright blue drop hanging above it. Top right, Flash Jump (frame charcoal black, thin silver trim): a dark leather boot kicking off a puff of violet shadow in mid-air, faint violet afterimages of the boot trailing behind. Bottom left, Shadow Fang (frame charcoal black, thin silver trim): a curved steel dagger thrusting forward, two sharp violet slash marks crossing in front of its tip. Bottom right, Star Scatter (frame charcoal black, thin silver trim): five silver four-pointed throwing stars fanning out from the lower left, spinning, with short white motion trails. The fourth image shows finished Magician icons: Mana Well's badge must have exactly that thick rounded blue frame with silver trim. The fifth image shows finished Thief icons: Flash Jump, Shadow Fang and Star Scatter must have exactly that thick rounded charcoal-black frame with silver trim. Never thin, flat or sharp-cornered frames. Strict rules: 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) Bold dark brown outline around each badge and its subject, the same thickness on all. 3) No letters, words or numbers anywhere. 4) Flat pure bright magenta #FF00FF background (not plum, not pink, not purple) everywhere outside the badges."
+   }
+  },
+  {
+   "id": "skill_icons_5",
+   "prompts": null,
+   "batch": "Class skill icons (set)",
+   "with": null,
+   "refs": [],
+   "save": "skill_icons_5.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 class skills thread (Cory 18:53Z 'those look great. make the rest of them.'): the rest of the painted class skill icons after skill_icons_test, matching it: Dark Sight, Haste, Nimble Body, Backstep Leap.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x2.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/skill_icons_test.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint a sheet of FOUR separate skill icons, laid out in 2 rows of 2, each centred in its own quarter of the canvas for my 2D side-scrolling game, with a WIDE band of plain magenta (at least a tenth of the canvas) around and between them, none touching another, all the same size. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished skill icons from the same set: match their badge shape, frame thickness, metal trim, inner background glow, painting style and level of detail exactly, but use a BOLDER, DARKER brown outline like the NPCs'. Each icon is a square badge with softly rounded corners: a thick painted frame with a thin bright metal trim, and inside it a darker painted background of the frame's colour with a soft glow behind the subject. Each icon shows ONE bold, simple subject filling most of the badge, lit brightly enough to read clearly even when the icon is shown very small. Top left, Dark Sight (frame charcoal black, thin silver trim): a hooded thief in dark clothes fading away into curling grey and violet shadow smoke; a BRIGHT violet rim light outlines the hood, face opening and shoulders so the figure stands out clearly against the dark smoke. Top right, Haste (frame charcoal black, thin silver trim): a dark winged boot dashing forward with bright cyan speed streaks behind it. Bottom left, Nimble Body (frame charcoal black, thin silver trim): a lithe acrobat in dark clothes in the middle of a backflip, light curved motion arcs around the body. Bottom right, Backstep Leap (frame forest green, gold trim): a green-hooded archer leaping backward to the left while still facing right, bow in hand, a green-gold gust of wind and swirling leaves beneath. Strict rules: 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) Bold dark brown outline around each badge and its subject, the same thickness on all. 3) No letters, words or numbers anywhere. 4) Flat pure magenta #FF00FF background everywhere outside the badges."
+   }
+  },
+  {
+   "id": "skill_icons_6",
+   "prompts": null,
+   "batch": "Class skill icons (set)",
+   "with": null,
+   "refs": [],
+   "save": "skill_icons_6.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 class skills thread (Cory 18:53Z 'those look great. make the rest of them.'): the rest of the painted class skill icons after skill_icons_test, matching it: Heartseeker, Arrow Rain, Focus, Keen Eyes.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x2.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/skill_icons_test.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint a sheet of FOUR separate skill icons, laid out in 2 rows of 2, each centred in its own quarter of the canvas for my 2D side-scrolling game, with a WIDE band of plain magenta (at least a tenth of the canvas) around and between them, none touching another, all the same size. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished skill icons from the same set: match their badge shape, frame thickness, metal trim, inner background glow, painting style and level of detail exactly, but use a BOLDER, DARKER brown outline like the NPCs'. Each icon is a square badge with softly rounded corners: a thick painted frame with a thin bright metal trim, and inside it a darker painted background of the frame's colour with a soft glow behind the subject. Each icon shows ONE bold, simple subject filling most of the badge, lit brightly enough to read clearly even when the icon is shown very small. Top left, Heartseeker (frame forest green, gold trim): a single arrow streaking to the right with a bright gold glowing tip and a long golden trail behind it. Top right, Arrow Rain (frame forest green, gold trim): many arrows falling diagonally down from the top of the badge, each with a short golden trail. Bottom left, Focus (frame forest green, gold trim): a fully drawn wooden longbow with an arrow nocked, pointing right, a soft glowing green line showing its aim. Bottom right, Keen Eyes (frame forest green, gold trim): one sharp glowing golden eye with a thin crosshair glint over its pupil. Strict rules: 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) Bold dark brown outline around each badge and its subject, the same thickness on all. 3) No letters, words or numbers anywhere. 4) Flat pure magenta #FF00FF background everywhere outside the badges."
+   }
+  },
+  {
+   "id": "skill_icons_7",
+   "prompts": null,
+   "batch": "Class skill icons (set)",
+   "with": null,
+   "refs": [],
+   "save": "skill_icons_7.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 class skills thread (Cory 18:53Z 'those look great. make the rest of them.'): the rest of the painted class skill icons after skill_icons_test, matching it: Critical Shot, Rolling Dash, Riptide Combo, Full Sail.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x2.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/skill_icons_test.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint a sheet of FOUR separate skill icons, laid out in 2 rows of 2, each centred in its own quarter of the canvas for my 2D side-scrolling game, with a WIDE band of plain magenta (at least a tenth of the canvas) around and between them, none touching another, all the same size. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished skill icons from the same set: match their badge shape, frame thickness, metal trim, inner background glow, painting style and level of detail exactly, but use a BOLDER, DARKER brown outline like the NPCs'. Each icon is a square badge with softly rounded corners: a thick painted frame with a thin bright metal trim, and inside it a darker painted background of the frame's colour with a soft glow behind the subject. Each icon shows ONE bold, simple subject filling most of the badge, lit brightly enough to read clearly even when the icon is shown very small. Top left, Critical Shot (frame forest green, gold trim): an arrow striking dead centre of a red and white bullseye target with a bright burst of light. Top right, Rolling Dash (frame warm gold, darker bronze trim): a pirate in a red bandana tucked into a forward roll, a spray of white sea foam and dust behind. Bottom left, Riptide Combo (frame warm gold, darker bronze trim): a fist in a brass knuckle punching forward through a spiral of sea water, foam flying. Bottom right, Full Sail (frame warm gold, darker bronze trim): a billowing cream ship sail on a wooden mast, filled with wind, blue sky streaks behind. Strict rules: 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) Bold dark brown outline around each badge and its subject, the same thickness on all. 3) No letters, words or numbers anywhere. 4) Flat pure magenta #FF00FF background everywhere outside the badges."
+   }
+  },
+  {
+   "id": "skill_icons_8",
+   "prompts": null,
+   "batch": "Class skill icons (set)",
+   "with": null,
+   "refs": [],
+   "save": "skill_icons_8.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    2,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 class skills thread (Cory 18:53Z 'those look great. make the rest of them.'): the rest of the painted class skill icons after skill_icons_test, matching it: All Hands, Deadeye.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x1.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/skill_icons_test.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint a sheet of TWO separate skill icons side by side, each centred in its own half of the canvas for my 2D side-scrolling game, with a WIDE band of plain magenta (at least a tenth of the canvas) around and between them, none touching another, all the same size. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished skill icons from the same set: match their badge shape, frame thickness, metal trim, inner background glow, painting style and level of detail exactly, but use a BOLDER, DARKER brown outline like the NPCs'. Each icon is a square badge with softly rounded corners: a thick painted frame with a thin bright metal trim, and inside it a darker painted background of the frame's colour with a soft glow behind the subject. Each icon shows ONE bold, simple subject filling most of the badge, lit brightly enough to read clearly even when the icon is shown very small. Left, All Hands (frame warm gold, darker bronze trim): a brass ship bell swinging and ringing, bold curved sound lines around it. Right, Deadeye (frame warm gold, darker bronze trim): a flintlock pistol aimed to the right, a golden crosshair glinting in front of its muzzle. Strict rules: 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) Bold dark brown outline around each badge and its subject, the same thickness on all. 3) No letters, words or numbers anywhere. 4) Flat pure magenta #FF00FF background everywhere outside the badges."
+   }
   }
  ]
 }
