@@ -93,7 +93,8 @@
           30
         ]
       ],
-      "scale": 1.2596
+      "scale": 1.2596,
+      "save": false
     },
     "dialogue_frame": {
       "blank": [
@@ -185,7 +186,8 @@
           31
         ]
       ],
-      "scale": 1.5622
+      "scale": 1.5622,
+      "save": false
     }
   },
   "background": [

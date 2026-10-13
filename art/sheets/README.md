@@ -154,13 +154,12 @@ list in `paperdoll_body.json`.
   their own `region` manifest (`ui_windows_frames`, `ui_menu_panel`, `ui_dialogue_rows`,
   `ui_book_rows`, `ui_creator_frame`). Pieces cut from older sheets use `<sheet>_old`
   manifests (`ui_old`, `ui_hud_old`, `ui_menu_old`, `ui_dialogue_old`, `items_parts_2_old`,
-  `skill_icons_old`, `projectiles_old`, `skill_effects_old`). `item_slot_hover` is unused (the
-  windows brighten `item_slot`).
+  `skill_icons_old`, `projectiles_old`, `skill_effects_old`).
 - **Items, pets, projectiles**: into `assets/sprites/items/` (named by item id), `pets/` (and
   `assets/animations/pet_*.tres`) and `projectiles/`.
-- **Not used yet** (`save` false, into `art/build/`): `ui_map_icons`, `ui_controls_leather`,
-  `ui_extras_leather`, `paperdoll_grip`, `hair_tousled_frames_2`, `paperdoll_gloves_2`, and
-  `hero_main` (painted hero reference).
+- **Reference only** (`save` false, into `art/build/`): `hero_main` (the painted hero reference).
+  Cells the game doesn't load have `"save": false` in their overrides, so the slicer skips them;
+  art the game never uses is removed rather than kept in the repo.
 
 ## The paperdoll (hero layers)
 
@@ -180,7 +179,7 @@ body) places their pieces on every body frame and writes the layers, region map 
   the hero is `cape_front`.
 - **Weapons** are cut from their item icons (`items_*`, at full size): the tool straightens
   each (a gun's barrel turned level) and makes it the picture he holds (`weapon_item_<id>`, a
-  piece placed in his fist every frame). The old `held_*` sheets stay in `art/source/` unused.
+  piece placed in his fist every frame). `held_magic` stays in `art/source/` only as a Gemini edit base.
 - **Worn gear in its own colours** (`art/source/worn/<item id>.png`, `shield_backs`,
   `hats_items_*` and their `_only` twins): Gemini edits of the body sheet or the hat sheet with
   the item's icon as reference. `tools/art/paperdoll/items.py` lifts each piece off the body by

@@ -41,7 +41,8 @@
         620,
         515
       ],
-      "scale": 0.3314
+      "scale": 0.3314,
+      "save": false
     },
     "lantern_lit": {
       "crop": [
