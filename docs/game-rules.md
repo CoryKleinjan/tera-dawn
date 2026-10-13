@@ -75,7 +75,8 @@ update this page when one changes. Each zone's own look and music are in
   never do.
 - Every job is built to attack and be fun solo: no tank or healer jobs.
 - No job is shown or named to the player until they can choose it: no menu, list, tooltip,
-  quest or NPC line hints at a later job before then.
+  quest or NPC line hints at a later job before then. The one exception: Beginners see the
+  five first jobs and what each needs, so they can plan their stats.
 - Third tier (Lv 50, planned): five jobs, each joining two blends that share no first job, so
   all four of their stats add together for damage. It uses every weapon of its four first
   jobs plus its own two-handed weapon, opens every skill of those four jobs and both blends,
