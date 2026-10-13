@@ -52,7 +52,7 @@ func check() -> void:
 	var magic := ch.magic_range()
 	_check(magic.y > ch.damage_range().y, "a Magician's spells hit harder than their wand")
 	var hit := Combat.player_hit(bolt, m.def, ch)
-	_check(hit["miss"] or (hit["damage"] >= 1 and hit["damage"] <= roundi(magic.y * 1.6) + 1), "Ice Spike's damage comes from Magic Attack")
+	_check(hit["miss"] or (hit["damage"] >= 1 and hit["damage"] <= roundi(magic.y * bolt.damage_at(1) * Combat.CRIT_MULTIPLIER) + 1), "Ice Spike's damage comes from Magic Attack")
 	# a thief throws with nothing in the bag
 	ch.job = Content.job(&"thief")
 	ch.equipment.take(&"weapon")
