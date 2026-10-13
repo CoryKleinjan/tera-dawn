@@ -14744,6 +14744,32 @@
     "refs": [],
     "text": "This is one repeating tile of the back wall inside a harbour town shop. REMOVE the two tall wooden shelves and everything on them, the hanging bundles of herbs, the pegs they hang from and the hanging fishing net. Where they were, paint plain, empty cream plaster wall that matches the plaster already around the window: the same warm cream colour, the same soft painted brush texture and the same gentle light. The plaster is completely empty: nothing on it, nothing hanging from the cornice. Keep the tall wooden window with its square panes, its lintel, its sill and the harbour view through it EXACTLY as they are, in the same place and size, fully intact (where the net covered its top right corner, finish the wood frame the same as its top left). Keep the carved wooden cornice at the top and the blue chair rail with its sun medallion and the rope-trimmed wood panelling at the bottom EXACTLY as they are. The left and right edges of the image must still join seamlessly when the tile repeats. Same image size, layout and painted style, never pixel art."
    }
+  },
+  {
+   "id": "room_dawnharbor_tavern_wall",
+   "prompts": null,
+   "batch": "room back wall (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_dawnharbor_tavern_wall.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-13 Dawnharbor thread (Cory 09:15Z: yes to a ~$0.12 tavern test). Back wall for the new tavern room inside Dawnharbor's quay tavern; bar, tables, hearth, barrels and lamps reuse existing room props. Shown to Cory before anything goes in game.",
+   "edit": {
+    "base": "art/source/room_dawnharbor_wall.png",
+    "refs": [
+     "assets/sprites/buildings/dawnharbor/tavern.png",
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ],
+    "text": "The first image is one repeating tile of the back wall inside a harbour town's shop: a wooden beam band at the top, cream plaster with square wooden windows in the middle, and a blue chair rail above wooden panelling at the bottom. Repaint it as the back wall inside the cosy harbour tavern shown in the second image, keeping the same layout bands in the same places: at the top a heavy dark oak ceiling beam running straight across; in the middle the tavern's timber frame seen from inside, cream plaster panels divided by dark oak posts and a few diagonal braces like the outside of the tavern, with small square wooden windows with small panes glowing warm golden evening light; at the bottom dark oak plank wainscoting with a plain wooden rail on top. The plaster between the posts and windows is plain: no shelves, no pictures, no signs, no objects on the wall. Everything is seen straight from the front, flat, with no perspective, no top faces and no side depth. The left and right edges of the image must join seamlessly when the tile is repeated side by side: nothing is cut off at the edges, and the beams and wainscot line up across the join. Paint in the same style as the third image and the rest of the wall: rich warm colours, strong light and shadow with bright highlights, visible painted texture at a fairly chunky brush scale (wood grain, worn patches), a thin dark outline. Painted, never pixel art. Same image size and layout."
+   }
   }
  ]
 }

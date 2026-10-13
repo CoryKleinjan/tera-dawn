@@ -1,0 +1,28 @@
+{
+  "source": "art/source/room_dawnharbor_tavern_wall.png",
+  "detail": 1,
+  "out_dir": "assets/sprites/rooms/dawnharbor",
+  "background": [
+    255,
+    0,
+    255
+  ],
+  "scale": 0.2477,
+  "label_band": 0,
+  "inset": 0,
+  "grid": {
+    "rows": [
+      0,
+      4097
+    ],
+    "cols": [
+      0,
+      2886
+    ]
+  },
+  "cells": [
+    [
+      "tavern_wall"
+    ]
+  ]
+}
