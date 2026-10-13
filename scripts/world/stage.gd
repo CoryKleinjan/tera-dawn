@@ -83,6 +83,8 @@ const PRIORITY_PLAYER := PRIORITY_OTHER_PLAYER + HERO_PRIORITIES
 const PRIORITY_EFFECT := PRIORITY_PLAYER + HERO_PRIORITIES
 ## Seconds a map change takes to fade out (and again to fade in).
 const FADE_TIME := 0.25
+## Seconds a screen flash takes to fade (to a hundredth of its strength).
+const FLASH_TIME := 0.18
 
 var world: TDWorld
 var camera: Camera3D
@@ -100,6 +102,8 @@ var post_material: ShaderMaterial
 ## 0 shows the scene, 1 is faded out (see fade_to).
 var fade := 0.0
 var _fade_target := 0.0
+## How strongly the screen is washed with a flash (see flash_screen); fades by itself.
+var _flash := 0.0
 
 ## The stage showing now, whose light a menu's hero is lit by (light_portrait).
 static var current: TDStage
@@ -553,6 +557,12 @@ static func _beam_texture() -> ImageTexture:
 func fade_to(target: float) -> void:
 	_fade_target = target
 
+## Washes the screen with `col` at `strength` (0 to 1) for a moment (you got hit).
+func flash_screen(col: Color, strength: float) -> void:
+	_flash = maxf(_flash, strength)
+	post_material.set_shader_parameter(&"flash_color", col)
+	post_material.set_shader_parameter(&"flash", _flash)
+
 ## Fades out at once (the next map starts dark and fades in).
 func set_faded(v: float) -> void:
 	fade = v
@@ -631,6 +641,9 @@ func _process(delta: float) -> void:
 	if fade != _fade_target:
 		fade = move_toward(fade, _fade_target, delta / FADE_TIME)
 		post_material.set_shader_parameter(&"fade", fade)
+	if _flash > 0.0:
+		_flash = 0.0 if _flash < 0.01 else _flash * pow(0.01, delta / FLASH_TIME)
+		post_material.set_shader_parameter(&"flash", _flash)
 	var t := Time.get_ticks_msec() / 1000.0
 	for l: OmniLight3D in get_tree().get_nodes_in_group(&"flicker"):
 		var seed_ := float(l.get_instance_id() % 997)

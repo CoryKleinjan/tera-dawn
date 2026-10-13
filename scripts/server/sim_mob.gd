@@ -149,10 +149,12 @@ func wake(x: float, by: int) -> void:
 	aggro = AGGRO_TICKS
 	target = by
 
-func hurt(from_face: int, by: int) -> void:
+## It was hit by player `by`, knocked away towards `from_face` (-1 or 1), `force` times
+## the usual push (melee blows push harder).
+func hurt(from_face: int, by: int, force := 1.0) -> void:
 	hurt_t = HURT_TICKS
 	# in the middle of a move it isn't knocked out of it
-	kx = 0.0 if moves.busy() else from_face * KNOCKBACK
+	kx = 0.0 if moves.busy() else from_face * KNOCKBACK * force
 	show_hp = SHOW_HP_TICKS
 	threat[by] = threat.get(by, 0.0) + maxf(1.0, _hp_seen - health.hp)
 	_hp_seen = health.hp

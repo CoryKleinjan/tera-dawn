@@ -266,9 +266,9 @@ func req_move(at: Vector2, face: int, anim: StringName, climbing: bool) -> void:
 		server.on_move(_sender(), at, face, anim, climbing)
 
 @rpc("any_peer", "call_local", "reliable")
-func req_skill(skill_id: StringName, at: Vector2, face: int) -> void:
+func req_skill(skill_id: StringName, at: Vector2, face: int, aim := 0) -> void:
 	if server:
-		server.on_skill(_sender(), skill_id, at, face)
+		server.on_skill(_sender(), skill_id, at, face, aim)
 
 @rpc("any_peer", "call_local", "reliable")
 func req_loot() -> void:
@@ -565,9 +565,9 @@ func ev_log(text: String, color: String) -> void:
 		world.add_log(text, Color(color))
 
 @rpc("authority", "call_local", "reliable")
-func ev_skill(peer: int, skill_id: StringName, x: float, y: float, face: int, lines: Array) -> void:
+func ev_skill(peer: int, skill_id: StringName, x: float, y: float, face: int, lines: Array, aim := 0) -> void:
 	if world:
-		world.show_skill(peer, Content.skills.get(skill_id), Vector2(x, y), face, lines)
+		world.show_skill(peer, Content.skills.get(skill_id), Vector2(x, y), face, lines, aim)
 
 @rpc("authority", "call_local", "reliable")
 func ev_mob_died(index: int) -> void:

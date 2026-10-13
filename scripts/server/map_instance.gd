@@ -134,9 +134,13 @@ func toss_to(p: SimPlayer, item: ItemDef) -> void:
 
 # ---------- combat ----------
 
-## Resolves a player's skill against the monsters in front of them. Returns how many were hit.
-func use_skill(p: SimPlayer, skill: SkillDef) -> int:
-	var area := Hitbox.attack_area(p.position, p.face, skill.reach, skill.height)
+## How much harder a melee blow knocks a monster back than a shot does.
+const MELEE_KNOCKBACK := 1.6
+
+## Resolves a player's skill against the monsters in front of them (or above or below them,
+## for an aimed attack). Returns how many were hit.
+func use_skill(p: SimPlayer, skill: SkillDef, aim := Hitbox.Aim.AHEAD) -> int:
+	var area := Hitbox.aimed_area(p.position, p.face, aim, skill.reach, skill.height)
 	var targets: Array[SimMob] = []
 	for m in mobs:
 		if not m.dead and area.intersects(m.hurtbox.rect_at(m.body_position())):
@@ -163,8 +167,12 @@ func use_skill(p: SimPlayer, skill: SkillDef) -> int:
 		if m.health.is_dead():
 			killed.append(m)
 		else:
-			m.hurt(p.face, p.peer)
-	broadcast(&"ev_skill", [p.peer, skill.id, p.position.x, p.position.y, p.face, lines])
+			# up and down blows push it away from the player, whichever way they face
+			var away := p.face
+			if aim != Hitbox.Aim.AHEAD and m.position.x != p.position.x:
+				away = 1 if m.position.x > p.position.x else -1
+			m.hurt(away, p.peer, 1.0 if skill.is_ranged() else MELEE_KNOCKBACK)
+	broadcast(&"ev_skill", [p.peer, skill.id, p.position.x, p.position.y, p.face, lines, aim])
 	for m in killed:
 		kill_mob(m, p)
 	return targets.size()

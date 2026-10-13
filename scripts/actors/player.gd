@@ -2,9 +2,12 @@ class_name TDPlayer
 extends Node2D
 ## Your own character. position is the point between the feet, in game pixels.
 ## Movement and climbing are hand-tuned platformer physics that run right here, so they
-## feel instant; where you are goes to the server a few times a second. Attacks, portals,
-## looting and potions are requests the server answers (see Net). The attack key uses the
-## basic attack; the quickslot keys use whatever skill or item is on that slot.
+## feel instant. They are snappy, Hollow Knight style: he starts and stops at once, steers
+## freely in the air, hops short when jump is let go early and falls faster than he rises.
+## Where you are goes to the server a few times a second. Attacks, portals, looting and
+## potions are requests the server answers (see Net). The attack key uses the basic attack;
+## the quickslot keys use whatever skill or item is on that slot. Holding Up or Down (in the
+## air) aims an attack that way.
 
 ## How tall he stands, feet to the top of his head, in game pixels at HeroBody.SCALE: speech
 ## bubbles and shop signs go just over it.
@@ -20,17 +23,27 @@ const REPORT_EVERY := 3
 
 # ---------- movement (game pixels and ticks) ----------
 ## Acceleration on the ground and in the air.
-const ACCEL_GROUND := 0.8
-const ACCEL_AIR := 0.28
+const ACCEL_GROUND := 1.4
+const ACCEL_AIR := 0.9
 ## Top running speed, before the speed stat.
 const RUN_SPEED := 3.7
 ## Share of the speed kept each tick with no direction held, on the ground and in the air.
-const FRICTION_GROUND := 0.7
-const FRICTION_AIR := 0.98
+const FRICTION_GROUND := 0.45
+const FRICTION_AIR := 0.7
 ## Upward speed of a jump, before the jump stat.
 const JUMP_SPEED := -9.8
+## Gravity while rising, and the stronger pull once falling.
 const GRAVITY := 0.5
+const FALL_GRAVITY := 0.62
 const MAX_FALL := 12.0
+## Letting go of jump while still rising faster than this cuts the jump short (a hop).
+const JUMP_CUT := -3.0
+## Upward speed of the bounce off a monster hit by a downward blow (pogo).
+const POGO_SPEED := -8.5
+## How fast your own landed melee blow pushes you back (game pixels a tick), and for how
+## many ticks (without steering).
+const RECOIL := 2.5
+const RECOIL_TICKS := 4
 ## Ticks spent falling through a platform after down + jump.
 const DROP_TICKS := 16
 ## Ticks of the landing pose after a fall.
@@ -41,7 +54,14 @@ const HARD_LANDING := 1.5
 ## Closest the feet get to the map's left and right edges.
 const EDGE := 14.0
 ## Knockback speed when a monster hits you (away from it, and up).
-const KNOCKBACK := Vector2(3.5, -4.5)
+const KNOCKBACK := Vector2(4.5, -4.0)
+## Ticks the knockback carries you without steering, and the freeze before it (the whole
+## hero holds still for a beat so the hit reads).
+const HURT_LOCK := 9
+const HURT_FREEZE := 4
+## How strongly the screen flashes when you're hit, and in what colour.
+const HURT_FLASH := 0.35
+const HURT_FLASH_COLOR := Color(1.0, 0.85, 0.8)
 ## Ticks of the hurt pose at the start of the invincibility after a hit.
 const HURT_POSE_TICKS := 20
 ## Ticks of the level-up pose.
@@ -101,6 +121,10 @@ var _reported := &""  # the animation the server last heard about
 var speech := ""      # the last thing said in map chat, shown in a bubble
 var speech_t := 0
 var _stop_t := 0      # hit-stop ticks left (the swing holds still, see hit_stop)
+var _freeze_t := 0    # ticks held still after being hit (see knock_back)
+var _lock_t := 0      # ticks the knockback carries you without steering
+var _jumping := false # rising from your own jump (letting go cuts it short)
+var _aim := Hitbox.Aim.AHEAD  # which way the current attack aims
 ## The chair you're sitting on (the server said so), or empty. Moving gets you up.
 var sitting: StringName = &""
 
@@ -165,11 +189,22 @@ func knock_back(from_x: float) -> void:
 	world.shake(0.3)
 	Sound.play(HURT_SOUND)
 	inv = SimPlayer.HURT_INV
+	world.stage.flash_screen(HURT_FLASH_COLOR, HURT_FLASH)
 	if not is_climbing():
 		vel = Vector2(-KNOCKBACK.x if position.x < from_x else KNOCKBACK.x, KNOCKBACK.y)
 		on_ground = false
 		run_t = 0
+		_jumping = false
+		_freeze_t = HURT_FREEZE
+		_lock_t = HURT_LOCK
 		jump_grace.cancel()
+
+## Your melee blow ahead landed: a little push back. (A downward blow already bounced you,
+## see _use.)
+func recoil() -> void:
+	if _aim == Hitbox.Aim.AHEAD and not is_climbing():
+		vel.x = -face * RECOIL
+		_lock_t = maxi(_lock_t, RECOIL_TICKS)
 
 ## The server didn't accept where you said you were, and puts you back.
 func correct(at: Vector2) -> void:
@@ -192,6 +227,12 @@ func step() -> void:
 		return
 	if inv > 0:
 		inv -= 1
+	if _freeze_t > 0:
+		# just hit: hold still for a beat (timers keep running on the server)
+		_freeze_t -= 1
+		if world.tick % REPORT_EVERY == 0:
+			_report()
+		return
 	if action_t > 0:
 		action_t -= 1
 	elif ready_t > 0:
@@ -269,7 +310,17 @@ func use_quickslot(i: int) -> void:
 		return
 	_use(Content.skills.get(q[1]))
 
+## Which way an attack goes if used now: up while Up is held, down while Down is held in
+## the air, else ahead.
+func _held_aim() -> Hitbox.Aim:
+	if _held("move_up"):
+		return Hitbox.Aim.UP
+	if _held("move_down") and not on_ground:
+		return Hitbox.Aim.DOWN
+	return Hitbox.Aim.AHEAD
+
 ## Swings right away and asks the server to work out what it hits (or casts a buff).
+## A downward melee blow that meets a monster bounces you straight off it.
 func _use(skill: SkillDef) -> void:
 	if skill == null or is_climbing() or cooldown > 0:
 		return
@@ -278,6 +329,7 @@ func _use(skill: SkillDef) -> void:
 		world.add_log(problem, Palette.INFO)
 		return
 	cooldown = skill.cooldown
+	var aim := skill.aim_for(_held_aim())
 	# buffs and spells make no motion: he flashes the skill's colour and carries on
 	var anim := body.use_skill(Game.me.look(), skill)
 	if anim != &"":
@@ -285,9 +337,22 @@ func _use(skill: SkillDef) -> void:
 		action_anim = anim
 		ready_t = READY_TICKS
 		cheer_t = 0
-	Net.ask(&"req_skill", [skill.id, position, face])
-	world.add_effect(skill.effect, position + Vector2(0, -CHEST), face)
+		_aim = aim
+	if aim == Hitbox.Aim.DOWN and not skill.is_ranged() and _meets_monster(skill, aim):
+		vel.y = POGO_SPEED
+		_jumping = false
+	Net.ask(&"req_skill", [skill.id, position, face, aim])
+	world.add_effect(skill.effect, TDWorldFx.swing_point(position, face, aim), face, null, aim)
 	Sound.play(skill.cast_sound())
+
+## Whether `skill` aimed `aim` from here meets a living monster, as this screen shows them
+## (the server decides the damage; this only lets the bounce happen at once).
+func _meets_monster(skill: SkillDef, aim: Hitbox.Aim) -> bool:
+	var area := Hitbox.aimed_area(position, face, aim, skill.reach, skill.height)
+	for m in world.mobs():
+		if not m.dead and area.intersects(Hitbox.new(m.def.size).rect_at(m.body_position())):
+			return true
+	return false
 
 ## Up on the ground: enter a portal, or talk to the NPC in front of you.
 func _interact() -> bool:
@@ -359,6 +424,11 @@ func _grab_climbable() -> bool:
 	jump_grace.cancel()
 	return true
 
+## The pull of gravity on someone moving up or down at `vy`: stronger once falling, so a
+## jump drops back faster than it rose (MapReach runs the same rule).
+static func gravity(vy: float) -> float:
+	return FALL_GRAVITY if vy >= 0.0 else GRAVITY
+
 ## Top ground speed: `base` at first, rising by PACE_BONUS over PACE_RAMP ticks once he
 ## has kept moving flat out for RUN_AFTER ticks.
 func _top_speed(base: float) -> float:
@@ -368,18 +438,25 @@ func _top_speed(base: float) -> float:
 func _move() -> void:
 	var left := _held("move_left") or auto_walk < 0
 	var right := _held("move_right") or auto_walk > 0
-	var rooted := action_t > 0 and on_ground
+	# knocked back (or recoiling from your own blow): carried along without steering
+	var rooted := _lock_t > 0
+	if _lock_t > 0:
+		_lock_t -= 1
 	var acc := ACCEL_GROUND if on_ground else ACCEL_AIR
 	var base_speed := RUN_SPEED * CharacterStats.speed_multiplier(Game.me.stats)
 	var max_speed := _top_speed(base_speed)
 	var was_face := face
+	# mid-swing he keeps facing the way he swung, even moving the other way
+	var turns := action_t == 0
 	if left and not right and not rooted:
 		vel.x = maxf(-max_speed, vel.x - acc)
-		face = -1
+		if turns:
+			face = -1
 	elif right and not left and not rooted:
 		vel.x = minf(max_speed, vel.x + acc)
-		face = 1
-	else:
+		if turns:
+			face = 1
+	elif not rooted:
 		vel.x *= FRICTION_GROUND if on_ground else FRICTION_AIR
 	if absf(vel.x) < 0.05:
 		vel.x = 0
@@ -404,9 +481,15 @@ func _move() -> void:
 			vel.y = 1
 		else:
 			vel.y = JUMP_SPEED * CharacterStats.jump_multiplier(Game.me.stats)
+			_jumping = true
 		on_ground = false
+	# letting go of jump on the way up turns it into a short hop
+	if _jumping and not _held("jump") and vel.y < JUMP_CUT:
+		vel.y = JUMP_CUT
+	if vel.y >= 0.0:
+		_jumping = false
 
-	vel.y = minf(vel.y + GRAVITY, MAX_FALL)
+	vel.y = minf(vel.y + gravity(vel.y), MAX_FALL)
 	var prev_y := position.y
 	var hard_landing := vel.y > -JUMP_SPEED * CharacterStats.jump_multiplier(Game.me.stats) + HARD_LANDING
 	var was_falling := vel.y > 4.0

@@ -212,7 +212,8 @@ func on_move(peer: int, at: Vector2, face: int, anim: StringName, climbing: bool
 	elif p:
 		quests.reached(p)
 
-func on_skill(peer: int, skill_id: StringName, at: Vector2, face: int) -> void:
+## `aim` is a Hitbox.Aim: up or down for an aiming attack, else ahead.
+func on_skill(peer: int, skill_id: StringName, at: Vector2, face: int, aim := 0) -> void:
 	var p := player_of(peer)
 	var skill: SkillDef = Content.skills.get(skill_id)
 	if p == null or skill == null or p.fainted() or p.cooldown > COOLDOWN_SLACK:
@@ -231,9 +232,9 @@ func on_skill(peer: int, skill_id: StringName, at: Vector2, face: int) -> void:
 	if skill.kind == SkillDef.Kind.BUFF:
 		c.skills.add_buff(skill)
 		p.dirty_character = true
-		p.map.broadcast(&"ev_skill", [p.peer, skill.id, p.position.x, p.position.y, p.face, []])
+		p.map.broadcast(&"ev_skill", [p.peer, skill.id, p.position.x, p.position.y, p.face, [], Hitbox.Aim.AHEAD])
 	else:
-		p.map.use_skill(p, skill)
+		p.map.use_skill(p, skill, skill.aim_for(clampi(aim, 0, Hitbox.Aim.size() - 1) as Hitbox.Aim))
 
 ## Puts a skill or item on a quickslot (an empty `kind` clears it).
 func on_set_quickslot(peer: int, i: int, kind: StringName, id: StringName) -> void:

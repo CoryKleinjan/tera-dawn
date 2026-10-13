@@ -1,6 +1,6 @@
 extends TestCase
 ## Hitbox: the box stands on the feet, and an attack covers `reach` in front and a little
-## behind, mirrored when facing left.
+## behind, mirrored when facing left; aimed up or down it stands on end over or under the feet.
 
 func test_box_stands_on_the_feet() -> void:
 	var box := Hitbox.new(Vector2(30, 60))
@@ -36,3 +36,24 @@ func test_custom_reach_behind() -> void:
 	var a := Hitbox.attack_area(Vector2(100, 500), 1, 80.0, 50.0, 0.0)
 	check_eq(a.position.x, 100.0, "nothing behind")
 	check_eq(a.size.x, 80.0, "just the reach")
+
+func test_aimed_ahead_is_the_plain_attack() -> void:
+	check_eq(Hitbox.aimed_area(Vector2(100, 500), -1, Hitbox.Aim.AHEAD, 80.0, 50.0),
+		Hitbox.attack_area(Vector2(100, 500), -1, 80.0, 50.0), "same box")
+
+func test_aimed_up_reaches_overhead() -> void:
+	var a := Hitbox.aimed_area(Vector2(100, 500), 1, Hitbox.Aim.UP, 80.0, 50.0)
+	check_eq(a.get_center().x, 100.0, "centred on him")
+	check_eq(a.size.x, 50.0, "as wide as the attack is tall")
+	check_eq(a.position.y, 500.0 - Hitbox.UP_FROM - 80.0, "reach above the start")
+	check(not a.has_point(Vector2(160, 480)), "nothing ahead")
+
+func test_aimed_down_reaches_below() -> void:
+	var a := Hitbox.aimed_area(Vector2(100, 500), 1, Hitbox.Aim.DOWN, 80.0, 50.0)
+	check_eq(a.end.y, 580.0, "reach below the feet")
+	check(a.has_point(Vector2(100, 540)), "a monster under him")
+
+func test_aim_directions() -> void:
+	check_eq(Hitbox.aim_direction(-1, Hitbox.Aim.AHEAD), Vector2.LEFT, "ahead is the way he faces")
+	check_eq(Hitbox.aim_direction(-1, Hitbox.Aim.UP), Vector2.UP, "up")
+	check_eq(Hitbox.aim_direction(1, Hitbox.Aim.DOWN), Vector2.DOWN, "down")

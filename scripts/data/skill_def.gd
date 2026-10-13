@@ -37,7 +37,7 @@ const DEFAULT_FLASH := Color(1.0, 0.9, 0.65)
 @export var mp_cost_per_level := 0.0
 ## Ticks before any attack can be used again.
 @export var cooldown := 24
-## Ticks the player is rooted in the attack pose.
+## Ticks the player spends in the attack pose (he can still move meanwhile).
 @export var action_ticks := 16
 
 @export_group("Attack")
@@ -55,6 +55,9 @@ const DEFAULT_FLASH := Color(1.0, 0.9, 0.65)
 @export var projectile: ProjectileDef
 ## Weapon kinds it needs (EquipDef.weapon_kind); empty for any.
 @export var weapons: Array[StringName] = []
+## Holding up aims it upward, and down (in the air) aims it downward (Hitbox.Aim). Off for an
+## attack that only ever works ahead of the player.
+@export var aims := true
 
 @export_group("Buffs and passives")
 ## What it adds to the character's stats while a buff lasts, or always for a passive.
@@ -108,6 +111,15 @@ func regen_hp_at(level: int) -> int:
 
 func regen_mp_at(level: int) -> int:
 	return regen_mp + regen_mp_per_level * maxi(0, level - 1) if level > 0 else 0
+
+## Shot from a distance (it has a projectile), rather than a melee blow. Melee blows hit
+## harder on screen: longer hit-stop, recoil and knockback (see TDWorldFx, MapInstance).
+func is_ranged() -> bool:
+	return projectile != null
+
+## The aim it actually takes when used aimed `aim`: only aiming attacks turn.
+func aim_for(aim: Hitbox.Aim) -> Hitbox.Aim:
+	return aim if kind == Kind.ATTACK and aims else Hitbox.Aim.AHEAD
 
 ## A player can press it (attacks and buffs; passives are always on).
 func is_active() -> bool:
