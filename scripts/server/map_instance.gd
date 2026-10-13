@@ -72,8 +72,7 @@ func remove_player(p: SimPlayer) -> void:
 	players.erase(p.peer)
 	_sent_info.erase(p.peer)
 	for m in mobs:
-		if m.target == p.peer:
-			m.aggro = 0
+		m.forget(p.peer)
 
 ## Everything a client needs on arriving: monsters and items as they are right now.
 func full_state() -> Dictionary:
@@ -208,11 +207,12 @@ func kill_mob(m: SimMob, killer: SimPlayer) -> void:
 func touch_player(p: SimPlayer, m: SimMob) -> void:
 	hurt_player(p, m.def, m.position.x)
 
-## A monster (`def`, standing at `from_x`) hit a player, by touch or with a shot.
-func hurt_player(p: SimPlayer, def: MonsterDef, from_x: float) -> void:
+## A monster (`def`, standing at `from_x`) hit a player, by touch or with one of its
+## moves (`power` times its attack, see MonsterMove).
+func hurt_player(p: SimPlayer, def: MonsterDef, from_x: float, power := 1.0) -> void:
 	if p.inv > 0 or p.fainted() or p.in_scene():
 		return
-	var dmg := Combat.monster_hit(def, p.character)
+	var dmg := Combat.monster_hit(def, p.character, power)
 	p.inv = 40 if dmg == 0 else SimPlayer.HURT_INV
 	broadcast(&"ev_number", [p.position.x, p.position.y - 70, dmg, "miss" if dmg == 0 else "taken"])
 	if dmg == 0:

@@ -5,6 +5,7 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
 ```
 data/                 Content, one .tres per thing
   monsters/ npcs/ items/ skills/ effects/ jobs/ looks/   Looked up by id through Content
+  monster_moves/      Monster attacks, shared by monster families (MonsterMove)
   achievements/       Milestones, unlocked on Steam too (AchievementDef)
   items/equips/ items/use/ items/etc/ items/setup/   Subfolders are scanned too
   maps/ biomes/ climb_styles/ buildings/    Maps and how they look (maps/rooms/ and
@@ -14,7 +15,8 @@ scripts/
                       index), Game (your character copy, name and server address), Net
                       (connections and the protocol), SteamService, Sound (music and effects)
   settings/           SettingsSection and its sections: Keybinds, AudioSettings, VideoSettings
-  server/             TDServer, TDLobby, MapInstance, SimPlayer, SimMob, SimDrop, TDSocial
+  server/             TDServer, TDLobby, MapInstance, SimPlayer, SimMob (+ MobMoves), SimDrop,
+                      TDSocial
   server/social/      TDSocial's parts: chat, parties, trade, guilds, player shops
   server/services/    TDServer's parts (ServerPart): items, NPC shops, storage, travel, quests, jobs
   net/                SnapshotFlags (the bits both sides read in snapshots), SnapshotCodec (packs them)

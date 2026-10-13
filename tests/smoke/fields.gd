@@ -53,7 +53,9 @@ func check() -> void:
 	_teleport(Vector2(sentry.position.x + 150, sentry.plat.y))
 	ch.health.reset(ch.max_hp())
 	var hp: int = ch.health.hp
-	sentry.shot_t = 1
+	sentry.moves.cool[0] = 0
+	sentry.moves.gap = 0
+	_me().inv = 0 # not still blinking from an earlier hit
 	var shots := 0
 	var landed := false
 	for i in 400:

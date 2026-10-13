@@ -24,15 +24,15 @@ extends Resource
 ## Hops around its platform now and then (a pixel speed straight up).
 @export var jumps := false
 @export var jump_power := 7.0
-## Never walks (a plant, a cannon); it still turns to shoot.
+## Never walks (a plant, a cannon); it still turns to attack.
 @export var stationary := false
-## Shoots this at players up to `shot_range` game pixels away, every `shot_cooldown` ticks.
-## A shot flies in a straight line to where the player stood, so it can be dodged.
-@export var shot: ProjectileDef
-@export var shot_range := 320.0
-@export var shot_cooldown := 150
-## Shoots anyone who comes in range, not only whoever hit it last.
-@export var aggressive := false
+## How far away it notices a player (horizontally) and starts attacking them. Hitting it
+## makes it notice you from anywhere.
+@export var sight := 260.0
+## Its attacks (see MonsterMove and data/monster_moves/). None: it only hurts by touch.
+@export var moves: Array[MonsterMove] = []
+## Keeps about this far from its target when it has no close move ready (shooters).
+@export var keep_distance := 0.0
 ## Defeated, it bursts into `split_count` of these. They don't come back on their own:
 ## they wait for the next time this one is defeated.
 @export var splits_into: MonsterDef
@@ -57,3 +57,11 @@ extends Resource
 @export var drops: Array[DropEntry] = []
 ## Ticks before a slain monster returns, picked between x and y.
 @export var respawn_ticks := Vector2i(360, 540)
+
+## What its shot moves fire (empty when it has none).
+func projectiles() -> Array[ProjectileDef]:
+	var out: Array[ProjectileDef] = []
+	for mv in moves:
+		if mv and mv.kind == MonsterMove.Kind.SHOT and mv.projectile:
+			out.append(mv.projectile)
+	return out
