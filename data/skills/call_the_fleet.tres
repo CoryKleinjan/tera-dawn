@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Resource" path="res://data/projectiles/bullet.tres" id="p_bullet"]
 [ext_resource type="Resource" path="res://data/effects/bullet_hit.tres" id="e_bullet_hit"]
-[ext_resource type="Texture2D" path="res://assets/sprites/skills/broadside.png" id="i_icon"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/call_the_fleet.png" id="i_icon"]
 
 [resource]
 script = ExtResource("1_skill_def")

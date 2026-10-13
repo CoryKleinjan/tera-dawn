@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Resource" path="res://data/effects/buff_rise.tres" id="e_buff_rise"]
-[ext_resource type="Texture2D" path="res://assets/sprites/skills/fire_burst.png" id="i_icon"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/elemental_edge.png" id="i_icon"]
 
 [resource]
 script = ExtResource("1_skill_def")

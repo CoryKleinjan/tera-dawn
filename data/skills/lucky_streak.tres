@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SkillDef" format=3]
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/skills/keen_eyes.png" id="i_icon"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/lucky_streak.png" id="i_icon"]
 
 [resource]
 script = ExtResource("1_skill_def")

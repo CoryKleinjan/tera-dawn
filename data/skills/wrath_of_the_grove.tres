@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Resource" path="res://data/effects/dust.tres" id="e_dust"]
 [ext_resource type="Resource" path="res://data/effects/hit.tres" id="e_hit"]
-[ext_resource type="Texture2D" path="res://assets/sprites/skills/arrow_rain.png" id="i_icon"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/wrath_of_the_grove.png" id="i_icon"]
 
 [resource]
 script = ExtResource("1_skill_def")
