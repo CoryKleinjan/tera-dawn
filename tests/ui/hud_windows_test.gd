@@ -358,6 +358,8 @@ func test_skill_plus_learns_through_the_server() -> void:
 ## A character with quests in progress, ready to hand in and done.
 func _quest_log(c: Character) -> void:
 	c.level = 12
+	# past the Job Tests (five of them, one per tutor, are open to a Lv 10 Beginner)
+	c.job = Content.job(&"warrior")
 	var avail := Content.quests.values().filter(func(q: QuestDef) -> bool: return c.quests.status(q, c) == QuestLog.Status.AVAILABLE)
 	avail.sort_custom(func(a: QuestDef, b: QuestDef) -> bool: return String(a.id) < String(b.id))
 	c.quests.done[avail[0].id] = 1

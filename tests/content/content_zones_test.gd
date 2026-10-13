@@ -26,7 +26,8 @@ func test_each_monster_lives_in_one_region() -> void:
 		if m.region in BORROWING_REGIONS:
 			continue
 		for s in m.spawns:
-			if s and s.monster:
+			# what steps out of a job test's tear is the same in every job town (Cory)
+			if s and s.monster and not s.from_tear:
 				if not regions_of.has(s.monster.id):
 					regions_of[s.monster.id] = {}
 				regions_of[s.monster.id][m.region] = true

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="QuestDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="1_quest_def"]
+[ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="2_quest_objective"]
+[ext_resource type="Resource" path="res://data/monsters/tear_boss.tres" id="3_boss"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
+
+[sub_resource type="Resource" id="Boss"]
+script = ExtResource("2_quest_objective")
+monster = ExtResource("3_boss")
+count = 1
+
+[resource]
+script = ExtResource("1_quest_def")
+id = &"jtest_mage"
+title = "Job Test"
+giver = &"lumewood_instructor"
+min_level = 10
+jobs = Array[StringName]([&"beginner"])
+offer_text = "You have reached the tenth step of your studies. Every Magician walks the trial once. Cross the trial ground to its far end, and let the light guide you."
+progress_text = "The trial ground is through the light by the wall."
+complete_text = "You stood against something none of us has a name for. You are a Magician now. Come, my scholars must hear this from you."
+hint = "Step into the light by the wall and press {move_up}"
+reward_xp = 1000
+objectives = Array[ExtResource("2_quest_objective")]([SubResource("Boss")])
+reward_items = Array[ExtResource("4_drop_entry")]([])

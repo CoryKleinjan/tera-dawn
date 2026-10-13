@@ -22,6 +22,9 @@ var drops := {}
 var _sent_mobs: Array[PackedByteArray] = []
 ## peer -> the player info (info() + shop sign) last sent to this map's players.
 var _sent_info := {}
+## Its tear (MapDef.tear_platform) has opened, and what came out of it has stepped out.
+var tear_open := false
+var _tear_woken := false
 
 func _init(s: TDServer, map_def: MapDef) -> void:
 	server = s
@@ -34,6 +37,9 @@ func _init(s: TDServer, map_def: MapDef) -> void:
 			m.sleep()
 			m.parent = mobs[r[2]]
 			mobs[r[2]].children.append(m)
+		elif r[3].from_tear:
+			m.sleep()
+			m.from_tear = true
 		mobs.append(m)
 
 func step() -> void:
@@ -74,10 +80,38 @@ func remove_player(p: SimPlayer) -> void:
 	for m in mobs:
 		m.forget(p.peer)
 
-## Everything a client needs on arriving: monsters and items as they are right now.
+## Everything a client needs on arriving: monsters and items as they are right now, and
+## whether the tear is open.
 func full_state() -> Dictionary:
 	return {"mobs": mobs.map(func(m: SimMob) -> Array: return m.snapshot()),
-		"drops": drops.values().map(func(d: SimDrop) -> Array: return d.snapshot())}
+		"drops": drops.values().map(func(d: SimDrop) -> Array: return d.snapshot()),
+		"tear": tear_open}
+
+# ---------- the tear ----------
+
+## Opens the map's tear when the player first stands on its platform: everyone here sees
+## it, `tear_scene` plays for them, and what's waiting steps out once it ends.
+func check_tear(p: SimPlayer) -> void:
+	if tear_open or def.tear_platform < 0 or def.tear_platform >= layout.platforms.size():
+		return
+	if not p.stands_on(layout.platforms[def.tear_platform]):
+		return
+	tear_open = true
+	broadcast(&"ev_tear", [])
+	server.scenes.play(p, def.tear_scene)
+	if p.scene == &"":
+		wake_tear(p)
+
+## The monsters waiting for the tear step out of it, angry at `p` (once; when the tear
+## scene ends, or right away if it didn't play).
+func wake_tear(p: SimPlayer) -> void:
+	if not tear_open or _tear_woken:
+		return
+	_tear_woken = true
+	var x := def.tears[0].x if not def.tears.is_empty() else p.position.x
+	for m in mobs:
+		if m.from_tear:
+			m.wake(x, p.peer)
 
 ## Where everyone and everything is, sent to this map's players many times a second as
 ## bytes (SnapshotCodec). Monsters that haven't changed since the last one are left out

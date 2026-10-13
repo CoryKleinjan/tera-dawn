@@ -22,7 +22,7 @@ const COOLDOWN_SLACK := 4
 var lobby: TDLobby
 ## peer id -> SimPlayer
 var sessions := {}
-## map id -> MapInstance
+## map id -> MapInstance (a solo map's copies are keyed by `instance_key`)
 var maps := {}
 var tick := 0
 var _drop_ids := 0
@@ -82,10 +82,25 @@ func next_drop_id() -> int:
 	_drop_ids += 1
 	return _drop_ids
 
-func map_instance(id: StringName) -> MapInstance:
-	if not maps.has(id):
-		maps[id] = MapInstance.new(self, Content.map(id))
-	return maps[id]
+## The running map `id` (for a solo map, `p`'s own copy).
+func map_instance(id: StringName, p: SimPlayer = null) -> MapInstance:
+	var key := instance_key(id, p)
+	if not maps.has(key):
+		maps[key] = MapInstance.new(self, Content.map(id))
+	return maps[key]
+
+## Where `maps` keeps map `id` for `p`: the id, or for a solo map the id and their peer.
+func instance_key(id: StringName, p: SimPlayer) -> StringName:
+	if p != null and Content.map(id).solo:
+		return StringName("%s#%d" % [id, p.peer])
+	return id
+
+## Takes the player off their map, dropping a solo map's copy so it starts fresh next time.
+func _off_map(p: SimPlayer) -> void:
+	p.map.remove_player(p)
+	p.map.broadcast(&"ev_player_left", [p.peer])
+	if p.map.def.solo:
+		maps.erase(instance_key(p.map.def.id, p))
 
 ## Sends the player what changed about their character this tick.
 func _flush(p: SimPlayer) -> void:
@@ -130,8 +145,7 @@ func leave(peer: int) -> void:
 		p.character.map_id = _town_for(p)
 	social.left(p)
 	sessions.erase(peer)
-	p.map.remove_player(p)
-	p.map.broadcast(&"ev_player_left", [peer])
+	_off_map(p)
 	save(p)
 	print("%s left" % p.character.name)
 
@@ -140,10 +154,9 @@ func leave(peer: int) -> void:
 func enter_map(p: SimPlayer, id: StringName, x: float) -> void:
 	if p.map:
 		social.changed_map(p)
-		p.map.remove_player(p)
-		p.map.broadcast(&"ev_player_left", [p.peer])
+		_off_map(p)
 	scenes.stop(p)
-	var m := map_instance(id)
+	var m := map_instance(id, p)
 	p.chair = &""
 	p.character.visit(id)
 	m.add_player(p, x)
@@ -211,6 +224,7 @@ func on_move(peer: int, at: Vector2, face: int, anim: StringName, climbing: bool
 		Net.send(peer, &"ev_place", [p.position.x, p.position.y])
 	elif p:
 		quests.reached(p)
+		p.map.check_tear(p)
 
 ## `aim` is a Hitbox.Aim: up or down for an aiming attack, else ahead.
 func on_skill(peer: int, skill_id: StringName, at: Vector2, face: int, aim := 0) -> void:
