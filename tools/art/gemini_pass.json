@@ -14816,6 +14816,29 @@
     "refs": [],
     "text": "These are two labelled cells on magenta, each a bald head with shoulders wearing a steel helm. ERASE the bald heads, faces, ears, necks and shoulders from both cells and fill where they were with the same flat bright magenta #FF00FF, leaving ONLY the steel helm. It stays EXACTLY where it is, the same size, shape and colours, with its own outline and shading; where the head showed through its openings is now magenta. Keep every label and grid line exactly where it is."
    }
+  },
+  {
+   "id": "hair_tousled_hat_frames",
+   "prompts": null,
+   "batch": "under-hat hair test (edit)",
+   "with": null,
+   "refs": [],
+   "save": "hair_tousled_hat_frames.png",
+   "replaces": null,
+   "kind": "anim",
+   "stands": false,
+   "cells": [
+    4,
+    8
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 worn-gear thread (Cory 22:08Z: OK to paint new under-hat hair; 00:56Z yes to a one-style test). The tousled hair sheet with the same hair as it sits under a snug hat: flat on the crown, forehead bangs and side tufts kept, nothing sticking out past his face. Test for one style before the other five.",
+   "edit": {
+    "base": "art/source/hair_tousled_frames.png",
+    "refs": [],
+    "text": "This is my game hero's hair sheet: a bald chibi boy wearing the same messy grey hair in 32 labelled poses, on a pure magenta background. Keep EVERYTHING exactly as it is (every cell, label, grid line, pose, body, size, position, the blank face, the grey colour and the soft painted style) and change ONLY the hair: repaint it as the same hairstyle the way it sits when he wears a snug hat. The hair on top of his head is pressed flat against the scalp, following the round shape of his head, with no tufts or spikes rising above it. Keep the same short forehead bangs, and the same side and back tufts around his ears and neck, so it is clearly the same hairstyle, but every strand stays close to his head: nothing sticks out past the front of his face, and the hair is only a little wider than his head all round so it covers it. In the poses seen from behind (21 ROPE 1, 22 ROPE 2, 23 LADDER 1, 24 LADDER 2, 25 CLIMB IDLE) the back of his head is covered by the same flattened hair. Same grey, same soft hand-painted shading and dark outline as now, no pixel-art look. The background stays flat pure magenta #FF00FF."
+   }
   }
  ]
 }
