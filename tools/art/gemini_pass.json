@@ -14820,7 +14820,7 @@
   {
    "id": "hair_tousled_hat_frames",
    "prompts": null,
-   "batch": "under-hat hair test (edit)",
+   "batch": null,
    "with": null,
    "refs": [],
    "save": "hair_tousled_hat_frames.png",
@@ -14833,7 +14833,7 @@
    ],
    "anchor": null,
    "size": "2K",
-   "note": "2026-10-13 worn-gear thread (Cory 22:08Z: OK to paint new under-hat hair; 00:56Z yes to a one-style test). The tousled hair sheet with the same hair as it sits under a snug hat: flat on the crown, forehead bangs and side tufts kept, nothing sticking out past his face. Test for one style before the other five.",
+   "note": "2026-10-13 worn-gear thread (Cory 22:08Z: OK to paint new under-hat hair; 00:56Z yes to a one-style test). The tousled hair sheet with the same hair as it sits under a snug hat: flat on the crown, forehead bangs and side tufts kept, nothing sticking out past his face. Test for one style before the other five. Result (01:08Z): a smooth grey cap with no tufts or bangs; Cory (01:10Z) chose cutting the existing hairstyles to the hat's shape instead, so it is not used.",
    "edit": {
     "base": "art/source/hair_tousled_frames.png",
     "refs": [],
