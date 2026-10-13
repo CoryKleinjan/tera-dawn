@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=29 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=19 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="Resource" path="res://data/projectiles/mob_bubble.tres" id="2_mob_bubble"]
@@ -11,39 +11,6 @@
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_gloves_att_60.tres" id="9_scroll_gloves_att_60"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_earring_int_60.tres" id="10_scroll_earring_int_60"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_armor_def_60.tres" id="11_scroll_armor_def_60"]
-[ext_resource type="Resource" path="res://data/items/equips/copper_ring.tres" id="12_copper_ring"]
-[ext_resource type="Resource" path="res://data/items/equips/shell_earrings.tres" id="13_shell_earrings"]
-[ext_resource type="Resource" path="res://data/items/equips/traveler_cape.tres" id="14_traveler_cape"]
-[ext_resource type="Resource" path="res://data/items/equips/flintlock.tres" id="15_flintlock"]
-[ext_resource type="Resource" path="res://data/items/equips/iron_knuckle.tres" id="w2_iron_knuckle"]
-
-[sub_resource type="Resource" id="Resource_11"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("15_flintlock")
-chance = 0.0225
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_10"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("14_traveler_cape")
-chance = 0.015
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_9"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("13_shell_earrings")
-chance = 0.015
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_8"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("12_copper_ring")
-chance = 0.015
-min_amount = 1
-max_amount = 1
 
 [sub_resource type="Resource" id="Resource_7"]
 script = ExtResource("4_drop_entry")
@@ -94,13 +61,6 @@ chance = 1.0
 min_amount = 15
 max_amount = 31
 
-[sub_resource type="Resource" id="Drop2_iron_knuckle"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("w2_iron_knuckle")
-chance = 0.0225
-min_amount = 1
-max_amount = 1
-
 [resource]
 script = ExtResource("1_monster_def")
 id = &"coral_turret"
@@ -118,4 +78,4 @@ shot = ExtResource("2_mob_bubble")
 aggressive = true
 sprite_frames = ExtResource("3_coral_turret")
 sprite_scale = 1.0
-drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Drop2_iron_knuckle")])
+drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7")])

@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://scripts/data/job_def.gd" id="1_job_def"]
 [ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="2_stat_block"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
-[ext_resource type="Resource" path="res://data/items/equips/bronze_sword.tres" id="4_bronze_sword"]
 [ext_resource type="Resource" path="res://data/items/use/red_potion.tres" id="5_red_potion"]
 [ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="q_blue_potion"]
 [ext_resource type="Script" path="res://scripts/data/item_def.gd" id="q_item_def"]
@@ -14,13 +13,6 @@ item = ExtResource("5_red_potion")
 chance = 1.0
 min_amount = 20
 max_amount = 20
-
-[sub_resource type="Resource" id="Resource_2"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("4_bronze_sword")
-chance = 1.0
-min_amount = 1
-max_amount = 1
 
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("2_stat_block")
@@ -44,6 +36,6 @@ ap_per_level = 5
 advances_from = &"beginner"
 advance_level = 10
 advance_requirements = SubResource("Resource_1")
-advance_gifts = Array[ExtResource("3_drop_entry")]([SubResource("Resource_2"), SubResource("Resource_3")])
+advance_gifts = Array[ExtResource("3_drop_entry")]([SubResource("Resource_3")])
 advance_sp = 1
 starting_quickslots = Array[ExtResource("q_item_def")]([ExtResource("5_red_potion"), ExtResource("q_blue_potion")])

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=17 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/petal_bat.tres" id="2_petal_bat"]
@@ -7,8 +7,6 @@
 [ext_resource type="Resource" path="res://data/items/etc/petal_wing.tres" id="loot_petal_wing"]
 [ext_resource type="Resource" path="res://data/items/use/red_potion.tres" id="loot_red_potion"]
 [ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="loot_blue_potion"]
-[ext_resource type="Resource" path="res://data/items/equips/petal_cape.tres" id="loot_petal_cape"]
-[ext_resource type="Resource" path="res://data/items/equips/dewdrop_earrings.tres" id="loot_dewdrop_earrings"]
 
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("3_drop_entry")
@@ -45,20 +43,6 @@ chance = 0.04
 min_amount = 1
 max_amount = 1
 
-[sub_resource type="Resource" id="Resource_loot3"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("loot_petal_cape")
-chance = 0.02
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_loot4"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("loot_dewdrop_earrings")
-chance = 0.02
-min_amount = 1
-max_amount = 1
-
 [resource]
 script = ExtResource("1_monster_def")
 id = &"petal_bat"
@@ -70,6 +54,6 @@ exp_reward = 13
 speed = 1.1
 size = Vector2(40.0, 30.0)
 sprite_frames = ExtResource("2_petal_bat")
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_loot0"), SubResource("Resource_loot1"), SubResource("Resource_loot2"), SubResource("Resource_loot3"), SubResource("Resource_loot4")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_loot0"), SubResource("Resource_loot1"), SubResource("Resource_loot2")])
 flying = true
 hover_height = 56.0

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=29 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=21 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="Resource" path="res://data/projectiles/mob_seed.tres" id="2_mob_seed"]
@@ -12,38 +12,6 @@
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_luk_60.tres" id="10_scroll_top_luk_60"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_gloves_att_10.tres" id="11_scroll_gloves_att_10"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_int_60.tres" id="12_scroll_top_int_60"]
-[ext_resource type="Resource" path="res://data/items/equips/acorn_pendant.tres" id="13_acorn_pendant"]
-[ext_resource type="Resource" path="res://data/items/equips/hiking_boots.tres" id="14_hiking_boots"]
-[ext_resource type="Resource" path="res://data/items/equips/brigand_gloves.tres" id="15_brigand_gloves"]
-[ext_resource type="Resource" path="res://data/items/equips/saltwood_pistol.tres" id="16_saltwood_pistol"]
-
-[sub_resource type="Resource" id="Resource_12"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("16_saltwood_pistol")
-chance = 0.0225
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_11"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("15_brigand_gloves")
-chance = 0.015
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_10"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("14_hiking_boots")
-chance = 0.015
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_9"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("13_acorn_pendant")
-chance = 0.015
-min_amount = 1
-max_amount = 1
 
 [sub_resource type="Resource" id="Resource_8"]
 script = ExtResource("4_drop_entry")
@@ -117,4 +85,4 @@ hover_height = 56.0
 shot = ExtResource("2_mob_seed")
 sprite_frames = ExtResource("3_cliff_harpy")
 sprite_scale = 1.0
-drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12")])
+drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8")])

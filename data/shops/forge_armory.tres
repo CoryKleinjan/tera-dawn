@@ -1,63 +1,9 @@
-[gd_resource type="Resource" script_class="ShopDef" load_steps=25 format=3]
+[gd_resource type="Resource" script_class="ShopDef" load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/shop_def.gd" id="1_shop_def"]
 [ext_resource type="Script" path="res://scripts/data/shop_entry.gd" id="2_shop_entry"]
-[ext_resource type="Resource" path="res://data/items/equips/bronze_sword.tres" id="3_bronze_sword"]
-[ext_resource type="Resource" path="res://data/items/equips/iron_helm.tres" id="7_iron_helm"]
-[ext_resource type="Resource" path="res://data/items/equips/bronze_mail.tres" id="8_bronze_mail"]
-[ext_resource type="Resource" path="res://data/items/equips/steel_helm.tres" id="9_steel_helm"]
-[ext_resource type="Resource" path="res://data/items/equips/steel_cuirass.tres" id="10_steel_cuirass"]
-[ext_resource type="Resource" path="res://data/items/equips/steel_greaves.tres" id="11_steel_greaves"]
-[ext_resource type="Resource" path="res://data/items/equips/steel_sabatons.tres" id="12_steel_sabatons"]
-[ext_resource type="Resource" path="res://data/items/equips/oak_shield.tres" id="13_oak_shield"]
-[ext_resource type="Resource" path="res://data/items/equips/kite_shield.tres" id="14_kite_shield"]
 [ext_resource type="Resource" path="res://data/items/setup/ember_throne.tres" id="s_ember_throne"]
 [ext_resource type="Resource" path="res://data/items/setup/boar_hide_rug.tres" id="s_boar_hide_rug"]
-
-[sub_resource type="Resource" id="Resource_12"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("14_kite_shield")
-price = 0
-
-[sub_resource type="Resource" id="Resource_11"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("13_oak_shield")
-price = 0
-
-[sub_resource type="Resource" id="Resource_10"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("12_steel_sabatons")
-price = 0
-
-[sub_resource type="Resource" id="Resource_9"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("11_steel_greaves")
-price = 0
-
-[sub_resource type="Resource" id="Resource_8"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("10_steel_cuirass")
-price = 0
-
-[sub_resource type="Resource" id="Resource_7"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("9_steel_helm")
-price = 0
-
-[sub_resource type="Resource" id="Resource_6"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("8_bronze_mail")
-price = 0
-
-[sub_resource type="Resource" id="Resource_5"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("7_iron_helm")
-price = 0
-
-[sub_resource type="Resource" id="Resource_1"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("3_bronze_sword")
-price = 0
 
 [sub_resource type="Resource" id="Entry_ember_throne"]
 script = ExtResource("2_shop_entry")
@@ -73,4 +19,4 @@ price = 6000
 script = ExtResource("1_shop_def")
 id = &"forge_armory"
 display_name = "Emberforge Armory"
-items = Array[ExtResource("2_shop_entry")]([SubResource("Resource_1"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Entry_ember_throne"), SubResource("Entry_boar_hide_rug")])
+items = Array[ExtResource("2_shop_entry")]([SubResource("Entry_ember_throne"), SubResource("Entry_boar_hide_rug")])

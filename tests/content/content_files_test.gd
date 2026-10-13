@@ -131,6 +131,8 @@ func test_content_has_nothing_without_a_file() -> void:
 			var res: Resource = table[id]
 			if res is CardDef:
 				continue # made at startup for every monster
+			if kind == "items" and id in Content.extra_items:
+				continue # the tests' own gear
 			check(res.resource_path.begins_with(Content.FOLDERS[kind] + "/"),
 				"Content.%s[%s]: comes from %s, not a file in %s" % [kind, id, res.resource_path, Content.FOLDERS[kind]])
 

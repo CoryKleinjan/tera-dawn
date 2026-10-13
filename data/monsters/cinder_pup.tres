@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=26 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=18 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/cinder_pup.tres" id="2_cinder_pup"]
@@ -10,31 +10,6 @@
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_cape_mdef_60.tres" id="8_scroll_cape_mdef_60"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_luk_60.tres" id="9_scroll_top_luk_60"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_dex_60.tres" id="10_scroll_top_dex_60"]
-[ext_resource type="Resource" path="res://data/items/equips/copper_ring.tres" id="11_copper_ring"]
-[ext_resource type="Resource" path="res://data/items/equips/canvas_gloves.tres" id="12_canvas_gloves"]
-[ext_resource type="Resource" path="res://data/items/equips/sandals.tres" id="13_sandals"]
-[ext_resource type="Resource" path="res://data/items/equips/iron_broadsword.tres" id="w2_iron_broadsword"]
-
-[sub_resource type="Resource" id="Resource_10"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("13_sandals")
-chance = 0.015
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_9"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("12_canvas_gloves")
-chance = 0.015
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_8"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("11_copper_ring")
-chance = 0.015
-min_amount = 1
-max_amount = 1
 
 [sub_resource type="Resource" id="Resource_7"]
 script = ExtResource("3_drop_entry")
@@ -85,13 +60,6 @@ chance = 1.0
 min_amount = 11
 max_amount = 23
 
-[sub_resource type="Resource" id="Drop2_iron_broadsword"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("w2_iron_broadsword")
-chance = 0.0225
-min_amount = 1
-max_amount = 1
-
 [resource]
 script = ExtResource("1_monster_def")
 id = &"cinder_pup"
@@ -106,4 +74,4 @@ boss = false
 flying = false
 sprite_frames = ExtResource("2_cinder_pup")
 sprite_scale = 1.0
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Drop2_iron_broadsword")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7")])

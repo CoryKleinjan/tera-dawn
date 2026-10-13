@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=33 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=29 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="Resource" path="res://data/projectiles/mob_bubble.tres" id="2_mob_bubble"]
@@ -14,9 +14,6 @@
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_armor_def_60.tres" id="12_scroll_armor_def_60"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_weapon_matt_60.tres" id="13_scroll_weapon_matt_60"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_int_60.tres" id="14_scroll_top_int_60"]
-[ext_resource type="Resource" path="res://data/items/equips/patched_trousers.tres" id="15_patched_trousers"]
-[ext_resource type="Resource" path="res://data/items/equips/canvas_gloves.tres" id="16_canvas_gloves"]
-[ext_resource type="Resource" path="res://data/items/equips/sandals.tres" id="17_sandals"]
 [ext_resource type="Resource" path="res://data/items/use/power_elixir.tres" id="18_power_elixir"]
 [ext_resource type="Resource" path="res://data/items/setup/barrel_seat.tres" id="p11_barrel_seat"]
 
@@ -26,27 +23,6 @@ item = ExtResource("18_power_elixir")
 chance = 0.5
 min_amount = 1
 max_amount = 3
-
-[sub_resource type="Resource" id="Resource_13"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("17_sandals")
-chance = 0.3
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_12"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("16_canvas_gloves")
-chance = 0.3
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_11"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("15_patched_trousers")
-chance = 0.3
-min_amount = 1
-max_amount = 1
 
 [sub_resource type="Resource" id="Resource_10"]
 script = ExtResource("4_drop_entry")
@@ -142,5 +118,5 @@ shot_range = 380.0
 shot_cooldown = 110
 sprite_frames = ExtResource("3_old_clawbeard")
 sprite_scale = 1.28
-drops = Array[ExtResource("4_drop_entry")]([SubResource("P11_barrel_seat"), SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14")])
+drops = Array[ExtResource("4_drop_entry")]([SubResource("P11_barrel_seat"), SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_14")])
 respawn_ticks = Vector2i(1800, 2400)

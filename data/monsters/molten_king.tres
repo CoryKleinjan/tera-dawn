@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=63 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=31 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="Resource" path="res://data/projectiles/mob_ember.tres" id="2_mob_ember"]
@@ -15,25 +15,8 @@
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_weapon_matt_10.tres" id="13_scroll_weapon_matt_10"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_cape_mdef_60.tres" id="14_scroll_cape_mdef_60"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_weapon_att_60.tres" id="15_scroll_weapon_att_60"]
-[ext_resource type="Resource" path="res://data/items/equips/lantern_pendant.tres" id="16_lantern_pendant"]
-[ext_resource type="Resource" path="res://data/items/equips/stormsail_trousers.tres" id="17_stormsail_trousers"]
-[ext_resource type="Resource" path="res://data/items/equips/stormsail_boots.tres" id="18_stormsail_boots"]
-[ext_resource type="Resource" path="res://data/items/equips/starlit_cape.tres" id="19_starlit_cape"]
-[ext_resource type="Resource" path="res://data/items/equips/windrunner_boots.tres" id="20_windrunner_boots"]
-[ext_resource type="Resource" path="res://data/items/equips/moonweave_hat.tres" id="21_moonweave_hat"]
 [ext_resource type="Resource" path="res://data/items/use/power_elixir.tres" id="22_power_elixir"]
 [ext_resource type="Resource" path="res://data/items/setup/ember_throne.tres" id="p11_ember_throne"]
-[ext_resource type="Resource" path="res://data/items/equips/dawnbreaker_claymore.tres" id="d35_dawnbreaker_claymore"]
-[ext_resource type="Resource" path="res://data/items/equips/emberforge_aegis.tres" id="d35_emberforge_aegis"]
-[ext_resource type="Resource" path="res://data/items/equips/emberplate_helm.tres" id="d35_emberplate_helm"]
-[ext_resource type="Resource" path="res://data/items/equips/emberplate_greaves.tres" id="d35_emberplate_greaves"]
-[ext_resource type="Resource" path="res://data/items/equips/emberplate_sabatons.tres" id="d35_emberplate_sabatons"]
-[ext_resource type="Resource" path="res://data/items/equips/sunforged_helm.tres" id="d35_sunforged_helm"]
-[ext_resource type="Resource" path="res://data/items/equips/sunforged_cuirass.tres" id="d35_sunforged_cuirass"]
-[ext_resource type="Resource" path="res://data/items/equips/sunforged_greaves.tres" id="d35_sunforged_greaves"]
-[ext_resource type="Resource" path="res://data/items/equips/sunforged_sabatons.tres" id="d35_sunforged_sabatons"]
-[ext_resource type="Resource" path="res://data/items/equips/sunstone_ring.tres" id="d35_sunstone_ring"]
-[ext_resource type="Resource" path="res://data/items/equips/dragonhide_gloves.tres" id="d35_dragonhide_gloves"]
 
 [sub_resource type="Resource" id="Resource_18"]
 script = ExtResource("4_drop_entry")
@@ -41,48 +24,6 @@ item = ExtResource("22_power_elixir")
 chance = 0.5
 min_amount = 1
 max_amount = 3
-
-[sub_resource type="Resource" id="Resource_17"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("21_moonweave_hat")
-chance = 0.3
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_16"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("20_windrunner_boots")
-chance = 0.3
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_15"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("19_starlit_cape")
-chance = 0.3
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_14"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("18_stormsail_boots")
-chance = 0.3
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_13"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("17_stormsail_trousers")
-chance = 0.3
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_12"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("16_lantern_pendant")
-chance = 0.3
-min_amount = 1
-max_amount = 1
 
 [sub_resource type="Resource" id="Resource_11"]
 script = ExtResource("4_drop_entry")
@@ -168,83 +109,6 @@ chance = 0.08
 min_amount = 1
 max_amount = 1
 
-[sub_resource type="Resource" id="Drop35_dawnbreaker_claymore"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_dawnbreaker_claymore")
-chance = 0.15
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop35_emberforge_aegis"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_emberforge_aegis")
-chance = 0.1
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop35_emberplate_helm"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_emberplate_helm")
-chance = 0.1
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop35_emberplate_greaves"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_emberplate_greaves")
-chance = 0.1
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop35_emberplate_sabatons"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_emberplate_sabatons")
-chance = 0.1
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop35_sunforged_helm"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_sunforged_helm")
-chance = 0.1
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop35_sunforged_cuirass"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_sunforged_cuirass")
-chance = 0.1
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop35_sunforged_greaves"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_sunforged_greaves")
-chance = 0.1
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop35_sunforged_sabatons"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_sunforged_sabatons")
-chance = 0.1
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop35_sunstone_ring"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_sunstone_ring")
-chance = 0.1
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop35_dragonhide_gloves"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("d35_dragonhide_gloves")
-chance = 0.1
-min_amount = 1
-max_amount = 1
-
 [resource]
 script = ExtResource("1_monster_def")
 id = &"molten_king"
@@ -264,5 +128,5 @@ sprite_frames = ExtResource("3_molten_king")
 sprite_scale = 2.1
 light_color = Color(1.0, 0.478431, 0.227451, 1.0)
 aura_color = Color(1.0, 0.478431, 0.227451, 1.0)
-drops = Array[ExtResource("4_drop_entry")]([SubResource("P11_ember_throne"), SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18"), SubResource("Drop35_dawnbreaker_claymore"), SubResource("Drop35_emberforge_aegis"), SubResource("Drop35_emberplate_helm"), SubResource("Drop35_emberplate_greaves"), SubResource("Drop35_emberplate_sabatons"), SubResource("Drop35_sunforged_helm"), SubResource("Drop35_sunforged_cuirass"), SubResource("Drop35_sunforged_greaves"), SubResource("Drop35_sunforged_sabatons"), SubResource("Drop35_sunstone_ring"), SubResource("Drop35_dragonhide_gloves")])
+drops = Array[ExtResource("4_drop_entry")]([SubResource("P11_ember_throne"), SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_18")])
 respawn_ticks = Vector2i(1800, 2400)
