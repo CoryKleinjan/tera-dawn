@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=24 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=26 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/meadow.tres" id="2_meadow"]
@@ -11,6 +11,8 @@
 [ext_resource type="Resource" path="res://data/npcs/guide_sorrel.tres" id="40_guide_sorrel"]
 [ext_resource type="Resource" path="res://data/npcs/wagon_driver.tres" id="41_wagon_driver"]
 [ext_resource type="Resource" path="res://data/npcs/captain_marlo.tres" id="42_captain_marlo"]
+[ext_resource type="Resource" path="res://data/npcs/rowans_granddaughter.tres" id="43_granddaughter"]
+[ext_resource type="Resource" path="res://data/quests/tut5_dewling_jelly.tres" id="44_tut5"]
 
 [sub_resource type="Resource" id="House_west"]
 script = ExtResource("bp_script")
@@ -67,6 +69,14 @@ x = 1240.0
 platform = 0
 face = -1
 
+[sub_resource type="Resource" id="Npc_granddaughter"]
+script = ExtResource("5_npc_placement")
+npc = ExtResource("43_granddaughter")
+x = 1180.0
+platform = 0
+face = 1
+after_taking = ExtResource("44_tut5")
+
 [sub_resource type="Resource" id="Npc_sorrel"]
 script = ExtResource("5_npc_placement")
 npc = ExtResource("40_guide_sorrel")
@@ -118,5 +128,5 @@ world_pos = Vector2(150.0, 270.0)
 town = true
 level_text = "Town"
 portals = Array[ExtResource("4_portal_def")]([SubResource("Portal_west"), SubResource("Portal_east"), SubResource("Door_elder"), SubResource("Door_store")])
-npcs = Array[ExtResource("5_npc_placement")]([SubResource("Npc_elder"), SubResource("Npc_sorrel"), SubResource("Npc_hobb"), SubResource("Npc_marlo")])
+npcs = Array[ExtResource("5_npc_placement")]([SubResource("Npc_elder"), SubResource("Npc_sorrel"), SubResource("Npc_hobb"), SubResource("Npc_marlo"), SubResource("Npc_granddaughter")])
 buildings = Array[ExtResource("bp_script")]([SubResource("House_west"), SubResource("House_elder"), SubResource("House_store"), SubResource("House_east")])

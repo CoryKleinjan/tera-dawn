@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="CutsceneDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/cutscene_def.gd" id="1_dua5o"]
+[ext_resource type="Script" path="res://scripts/data/cutscene_step.gd" id="2_feluu"]
+
+[sub_resource type="Resource" id="Resource_vlwm3"]
+script = ExtResource("2_feluu")
+kind = 7
+who = &"girl_on_beach"
+x = 900.0
+speed = 4.0
+
+[sub_resource type="Resource" id="Resource_sqx00"]
+script = ExtResource("2_feluu")
+kind = 9
+who = &"girl_on_beach"
+shown = false
+
+[sub_resource type="Resource" id="Resource_3ctxp"]
+script = ExtResource("2_feluu")
+kind = 13
+
+[sub_resource type="Resource" id="Resource_mqiib"]
+script = ExtResource("2_feluu")
+kind = 3
+ticks = 50
+at = Vector2(1180, 380)
+
+[sub_resource type="Resource" id="Resource_k511y"]
+script = ExtResource("2_feluu")
+kind = 6
+speaker = &"girl_on_beach"
+text = "Up here! This is my lookout. Climb the rope."
+
+[sub_resource type="Resource" id="Resource_ejk6a"]
+script = ExtResource("2_feluu")
+kind = 5
+ticks = 40
+
+[resource]
+script = ExtResource("1_dua5o")
+id = &"daybreak_lookout"
+steps = Array[ExtResource("2_feluu")]([SubResource("Resource_vlwm3"), SubResource("Resource_sqx00"), SubResource("Resource_3ctxp"), SubResource("Resource_mqiib"), SubResource("Resource_k511y"), SubResource("Resource_ejk6a")])

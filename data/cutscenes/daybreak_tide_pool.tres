@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="CutsceneDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/cutscene_def.gd" id="1_fffv1"]
+[ext_resource type="Script" path="res://scripts/data/cutscene_step.gd" id="2_2xkkj"]
+
+[sub_resource type="Resource" id="Resource_tfmcs"]
+script = ExtResource("2_2xkkj")
+kind = 6
+speaker = &"girl_on_beach"
+text = "Dewlings got into my tide pool again. They never come near me. Rude. You'll have to get them."
+
+[sub_resource type="Resource" id="Resource_ayn85"]
+script = ExtResource("2_2xkkj")
+kind = 7
+who = &"girl_on_beach"
+x = 1250.0
+speed = 4.0
+
+[sub_resource type="Resource" id="Resource_rs3a5"]
+script = ExtResource("2_2xkkj")
+kind = 9
+who = &"girl_on_beach"
+shown = false
+
+[sub_resource type="Resource" id="Resource_282bb"]
+script = ExtResource("2_2xkkj")
+kind = 13
+
+[sub_resource type="Resource" id="Resource_73s62"]
+script = ExtResource("2_2xkkj")
+kind = 3
+at = Vector2(1500, 470)
+
+[sub_resource type="Resource" id="Resource_8yir4"]
+script = ExtResource("2_2xkkj")
+ticks = 50
+
+[sub_resource type="Resource" id="Resource_ildw1"]
+script = ExtResource("2_2xkkj")
+kind = 5
+ticks = 40
+
+[resource]
+script = ExtResource("1_fffv1")
+id = &"daybreak_tide_pool"
+steps = Array[ExtResource("2_2xkkj")]([SubResource("Resource_tfmcs"), SubResource("Resource_ayn85"), SubResource("Resource_rs3a5"), SubResource("Resource_282bb"), SubResource("Resource_73s62"), SubResource("Resource_8yir4"), SubResource("Resource_ildw1")])

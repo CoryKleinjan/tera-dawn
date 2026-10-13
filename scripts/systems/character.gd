@@ -12,7 +12,11 @@ extends RefCounted
 ## Base stats, gear or Ability Points changed: anything showing stats should refresh.
 signal stats_changed
 
+## The first town: where the way out of the tutorial leads, and where you wake after fainting
+## with no town nearer.
 const START_MAP := &"dawnrise_village"
+## Where a brand-new character starts: the tutorial beach (START_MAP if there is none).
+const NEW_MAP := &"daybreak_shore"
 const START_JOB := &"beginner"
 ## Quickslots on the HUD, each bound to a key (quick_1 ... quick_8).
 const QUICKSLOTS := 8
@@ -98,6 +102,7 @@ static func create(char_name: String, job_id := START_JOB, made: NewCharacter = 
 	c.put_starting_quickslots()
 	c.recalc()
 	c.refill()
+	c.map_id = NEW_MAP if Content.maps.has(NEW_MAP) else START_MAP
 	return c
 
 ## How the character looks to everyone: their appearance and the worn gear that shows

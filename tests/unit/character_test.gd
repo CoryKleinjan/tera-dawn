@@ -742,7 +742,7 @@ func test_create_beginner_from_content() -> void:
 	check_eq(c.quickslots[Character.QUICKSLOTS - 1], [&"item", &"blue_potion"], "blue potion key")
 	check_eq(c.health.hp, c.max_hp(), "full HP")
 	check_eq(c.mp, c.max_mp(), "full MP")
-	check_eq(c.map_id, Character.START_MAP, "starts on the meadow")
+	check_eq(c.map_id, Character.NEW_MAP, "starts on the tutorial beach")
 
 func test_real_beginner_can_reach_warrior() -> void:
 	var c := Character.create("Hero")

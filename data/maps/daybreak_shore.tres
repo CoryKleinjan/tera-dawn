@@ -1,0 +1,116 @@
+[gd_resource type="Resource" script_class="MapDef" format=3]
+
+[ext_resource type="Resource" path="res://data/biomes/meadow.tres" id="1_8hvfq"]
+[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="3_fg3cc"]
+[ext_resource type="Resource" path="res://data/climb_styles/rope.tres" id="4_jcelx"]
+[ext_resource type="Resource" path="res://data/cutscenes/daybreak_shore_intro.tres" id="5_1whi3"]
+[ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="6_y4w3w"]
+[ext_resource type="Resource" path="res://data/npcs/girl_on_beach.tres" id="7_wifi0"]
+[ext_resource type="Resource" path="res://data/quests/tut1_race.tres" id="8_cn7il"]
+[ext_resource type="Resource" path="res://data/quests/tut2_lookout.tres" id="9_625ut"]
+[ext_resource type="Resource" path="res://data/quests/tut4_tide_pool.tres" id="10_fy3gl"]
+[ext_resource type="Resource" path="res://data/quests/tut5_dewling_jelly.tres" id="11_1i7q6"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="12_1lham"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="13_kb7jc"]
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="15_74mwe"]
+[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="16_ys0uu"]
+[ext_resource type="Resource" path="res://data/monsters/dewling.tres" id="17_cipxd"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="20_gjxqo"]
+
+[sub_resource type="Resource" id="Resource_yh0k4"]
+script = ExtResource("3_fg3cc")
+x = 1100.0
+top = 410.0
+bottom = 620.0
+style = ExtResource("4_jcelx")
+
+[sub_resource type="Resource" id="Resource_xeban"]
+script = ExtResource("6_y4w3w")
+npc = ExtResource("7_wifi0")
+x = 560.0
+until_taking = ExtResource("8_cn7il")
+
+[sub_resource type="Resource" id="Resource_owawj"]
+script = ExtResource("6_y4w3w")
+npc = ExtResource("7_wifi0")
+x = 820.0
+platform = 1
+face = -1
+after_taking = ExtResource("8_cn7il")
+until_taking = ExtResource("9_625ut")
+
+[sub_resource type="Resource" id="Resource_bcsgr"]
+script = ExtResource("6_y4w3w")
+npc = ExtResource("7_wifi0")
+x = 1230.0
+platform = 2
+face = -1
+after_taking = ExtResource("9_625ut")
+until_taking = ExtResource("10_fy3gl")
+
+[sub_resource type="Resource" id="Resource_5q78o"]
+script = ExtResource("6_y4w3w")
+npc = ExtResource("7_wifi0")
+x = 1340.0
+after_taking = ExtResource("10_fy3gl")
+until_done = ExtResource("11_1i7q6")
+
+[sub_resource type="Resource" id="Resource_63r5f"]
+script = ExtResource("12_1lham")
+x = 700.0
+y = 550.0
+width = 160.0
+
+[sub_resource type="Resource" id="Resource_7regm"]
+script = ExtResource("12_1lham")
+x = 1060.0
+y = 410.0
+width = 220.0
+
+[sub_resource type="Resource" id="Resource_ual6t"]
+script = ExtResource("12_1lham")
+x = 1400.0
+y = 560.0
+width = 320.0
+
+[sub_resource type="Resource" id="Resource_kblgp"]
+script = ExtResource("13_kb7jc")
+x = 1880.0
+target_map = &"dawnrise_village"
+target_x = 260.0
+opens_after = ExtResource("11_1i7q6")
+one_way = true
+
+[sub_resource type="Resource" id="Resource_xhnrr"]
+script = ExtResource("16_ys0uu")
+monster = ExtResource("17_cipxd")
+platform = 3
+count = 4
+
+[sub_resource type="Resource" id="Resource_afyww"]
+script = ExtResource("20_gjxqo")
+sky_mid = Color(0.3098, 0.5255, 0.6588, 1)
+sky_low = Color(0.9412, 0.7216, 0.5647, 1)
+ambient_color = Color(0.3529, 0.5412, 0.6902, 1)
+fog_color = Color(0.6118, 0.7843, 0.8157, 1)
+backdrop_tint = Color(0.8784, 0.9333, 0.9608, 1)
+hide_layers = PackedInt32Array(3)
+hide_ground_decor = PackedInt32Array()
+
+[resource]
+script = ExtResource("15_74mwe")
+id = &"daybreak_shore"
+display_name = "Daybreak Shore"
+biome = ExtResource("1_8hvfq")
+variant = SubResource("Resource_afyww")
+width = 2000
+region = &"dawnrise_isle"
+return_map = &"daybreak_shore"
+level_text = "Lv. 1-2"
+intro_scene = ExtResource("5_1whi3")
+platforms = Array[ExtResource("12_1lham")]([SubResource("Resource_63r5f"), SubResource("Resource_7regm"), SubResource("Resource_ual6t")])
+climbables = Array[ExtResource("3_fg3cc")]([SubResource("Resource_yh0k4")])
+portals = Array[ExtResource("13_kb7jc")]([SubResource("Resource_kblgp")])
+spawns = Array[ExtResource("16_ys0uu")]([SubResource("Resource_xhnrr")])
+npcs = Array[ExtResource("6_y4w3w")]([SubResource("Resource_xeban"), SubResource("Resource_owawj"), SubResource("Resource_bcsgr"), SubResource("Resource_5q78o")])
+tears = Array[Vector2]([Vector2(390, 190)])

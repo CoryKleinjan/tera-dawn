@@ -94,6 +94,9 @@ func _ready() -> void:
 	scenes = TDCutscenePlayer.new()
 	scenes.world = self
 	add_child(scenes)
+	Game.character_changed.connect(func() -> void:
+		if not scenes.playing():
+			show_for_me())
 	# the title screen shows the meadow until the server puts the player somewhere
 	load_map(Character.START_MAP)
 	player.place(map.start_x, platforms[0].y)
@@ -174,6 +177,13 @@ func load_map(id: StringName) -> void:
 	camera.jump_to_target()
 	stage.build()
 
+## Shows the NPCs and portals that are there for you at this point of your quests (an NPC's
+## NpcPlacement, a portal's opens_after). A cutscene calls it when it ends.
+func show_for_me() -> void:
+	for n: TDNpc in npc_layer.get_children():
+		n.refresh()
+	stage.show_open_portals(Game.me)
+
 func show_banner(text: String) -> void:
 	banner_text = text
 	banner_t = BANNER_TICKS + BANNER_DELAY
@@ -223,10 +233,12 @@ func mobs() -> Array[TDMob]:
 		out.append(c as TDMob)
 	return out
 
+## The NPCs standing here for you (not ones your quests hide, see TDNpc.shown).
 func npcs() -> Array[TDNpc]:
 	var out: Array[TDNpc] = []
-	for c in npc_layer.get_children():
-		out.append(c as TDNpc)
+	for c: TDNpc in npc_layer.get_children():
+		if c.shown:
+			out.append(c)
 	return out
 
 func npc_near(pos: Vector2) -> TDNpc:

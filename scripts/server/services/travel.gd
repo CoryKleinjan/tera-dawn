@@ -8,7 +8,7 @@ func on_portal(peer: int) -> void:
 	if p == null or p.fainted():
 		return
 	var portal := p.map.layout.portal_at(p.position)
-	if portal and Content.maps.has(portal.target_map):
+	if portal and portal.open_to(p.character) and Content.maps.has(portal.target_map):
 		server.enter_map(p, portal.target_map, portal.target_x)
 
 ## Takes the player on trip `index` of the NPC `npc_id` they stand by, if they can pay its

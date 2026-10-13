@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="QuestDef" format=3]
+
+[ext_resource type="Resource" path="res://data/cutscenes/daybreak_goodbye.tres" id="1_ks33i"]
+[ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="2_aardj"]
+[ext_resource type="Resource" path="res://data/items/etc/dewling_droplet.tres" id="3_rtktt"]
+[ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="5_xdg0w"]
+
+[sub_resource type="Resource" id="Resource_02qj4"]
+script = ExtResource("2_aardj")
+kind = 1
+item = ExtResource("3_rtktt")
+count = 3
+
+[resource]
+script = ExtResource("5_xdg0w")
+id = &"tut5_dewling_jelly"
+title = "Dewling Jelly"
+giver = &"girl_on_beach"
+requires = Array[StringName]([&"tut4_tide_pool"])
+offer_text = "Dewlings leave squishy drops. Can you get me three? I'm making a jelly sandwich. Not for eating. Just to look at."
+progress_text = "Still need three. They wobble when you hold them."
+complete_text = "Perfect! You're good at this. You'll be a real adventurer."
+finish_scene = ExtResource("1_ks33i")
+offer_hint = "A \"!\" means someone has a quest. Press {move_up} to talk"
+hint = "{attack} to attack, {loot} to pick up what they drop"
+objectives = Array[ExtResource("2_aardj")]([SubResource("Resource_02qj4")])
+reward_xp = 15

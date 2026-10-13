@@ -89,6 +89,8 @@ var camera: Camera3D
 var env: Environment
 var sun: DirectionalLight3D
 var map_root: Node3D
+## The scenery of portals that open after a quest (PortalDef.opens_after) -> their PortalDef.
+var locked_portals := {}
 var motes: CPUParticles3D
 var backdrop: BackdropBuilder
 var dist := 0.0
@@ -397,6 +399,7 @@ func build() -> void:
 		map_root.queue_free()
 	map_root = Node3D.new()
 	add_child(map_root)
+	locked_portals.clear()
 	var map := world.map
 	var biome := map.look()
 	var rng := RandomNumberGenerator.new()
@@ -409,7 +412,14 @@ func build() -> void:
 	SceneryBuilder.new(self, map_root).build(map, world.platforms, rng)
 	if biome.light_shafts:
 		_build_light_shafts(map, biome, rng)
+	_build_tears(map)
 	follow(world.cam)
+	show_open_portals(Game.me)
+
+## Shows the locked portals `c` has opened and hides the rest.
+func show_open_portals(c: Character) -> void:
+	for node: Node3D in locked_portals:
+		node.visible = (locked_portals[node] as PortalDef).open_to(c)
 
 func _apply_biome(b: BiomeDef) -> void:
 	var sky_mat := env.sky.sky_material as ShaderMaterial
@@ -480,6 +490,47 @@ func _build_light_shafts(map: MapDef, biome: BiomeDef, rng: RandomNumberGenerato
 		beam.add_to_group(&"light_shaft")
 		map_root.add_child(beam)
 		x += rng.randf_range(260.0, 520.0)
+
+## How far back the glows over the water (MapDef.tears) hang, their size (3D units) and colour.
+const TEAR_Z := -6.0
+const TEAR_SIZE := 2.6
+const TEAR_COLOR := Color(1.0, 0.98, 0.94, 0.55)
+
+## The map's faint white glows over the water: soft, bright in the middle, slowly breathing.
+func _build_tears(map: MapDef) -> void:
+	for at in map.tears:
+		var mat := StandardMaterial3D.new()
+		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		mat.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+		mat.albedo_texture = _glow_texture()
+		mat.albedo_color = TEAR_COLOR
+		mat.disable_receive_shadows = true
+		mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+		var q := QuadMesh.new()
+		q.size = Vector2(TEAR_SIZE, TEAR_SIZE)
+		var glow := MeshInstance3D.new()
+		glow.mesh = q
+		glow.material_override = mat
+		glow.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		glow.position = to3d(Vector2(at.x, map.ground_y - at.y), TEAR_Z)
+		glow.add_to_group(&"tear")
+		map_root.add_child(glow)
+
+static var _glow: ImageTexture
+
+## A round glow: white in the middle, fading softly to nothing at the edge.
+static func _glow_texture() -> ImageTexture:
+	if _glow == null:
+		var n := 64
+		var img := Image.create(n, n, false, Image.FORMAT_RGBA8)
+		for y in n:
+			for x in n:
+				var d := Vector2(x - (n - 1) / 2.0, y - (n - 1) / 2.0).length() / (n / 2.0)
+				var a := pow(clampf(1.0 - d, 0.0, 1.0), 2.2)
+				img.set_pixel(x, y, Color(1, 1, 1, a))
+		_glow = ImageTexture.create_from_image(img)
+	return _glow
 
 static var _beam: ImageTexture
 
@@ -581,6 +632,8 @@ func _process(delta: float) -> void:
 	for l: OmniLight3D in get_tree().get_nodes_in_group(&"flicker"):
 		var seed_ := float(l.get_instance_id() % 997)
 		l.light_energy = float(l.get_meta(&"energy")) * (0.88 + 0.08 * sin(t * 7.0 + seed_) + 0.04 * sin(t * 13.0 + seed_ * 2.0))
+	for glow: MeshInstance3D in get_tree().get_nodes_in_group(&"tear"):
+		(glow.material_override as StandardMaterial3D).albedo_color.a = TEAR_COLOR.a * (0.75 + 0.25 * sin(t * 1.3))
 	for beam: MeshInstance3D in get_tree().get_nodes_in_group(&"light_shaft"):
 		var m := beam.material_override as StandardMaterial3D
 		m.albedo_color.a = float(beam.get_meta(&"alpha")) * (0.7 + 0.3 * sin(t * 0.4 + float(beam.get_meta(&"phase"))))

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CutsceneDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/cutscene_def.gd" id="1_peuvf"]
+[ext_resource type="Script" path="res://scripts/data/cutscene_step.gd" id="2_rnr8q"]
+
+[sub_resource type="Resource" id="Resource_87une"]
+script = ExtResource("2_rnr8q")
+kind = 6
+speaker = &"girl_on_beach"
+text = "This one's for you. Catch!"
+
+[resource]
+script = ExtResource("1_peuvf")
+id = &"daybreak_shell"
+steps = Array[ExtResource("2_rnr8q")]([SubResource("Resource_87une")])

@@ -297,7 +297,7 @@ func _process(delta: float) -> void:
 	super(delta)
 	if visible and typing():
 		_shown = minf(_shown + TYPE_SPEED * delta, text.length())
-	if visible and (npc == null or not is_instance_valid(npc) or hud.world.player.position.distance_to(npc.position) > REACH):
+	if visible and (npc == null or not is_instance_valid(npc) or not npc.shown or hud.world.player.position.distance_to(npc.position) > REACH):
 		visible = false
 	if visible:
 		_fit()

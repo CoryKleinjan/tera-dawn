@@ -1,0 +1,73 @@
+[gd_resource type="Resource" script_class="CutsceneDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/cutscene_def.gd" id="1_gkc1y"]
+[ext_resource type="Script" path="res://scripts/data/cutscene_step.gd" id="2_wpxji"]
+
+[sub_resource type="Resource" id="Resource_qllt2"]
+script = ExtResource("2_wpxji")
+kind = 12
+who = &"hero"
+pose = &"faint"
+
+[sub_resource type="Resource" id="Resource_o40ob"]
+script = ExtResource("2_wpxji")
+kind = 2
+ticks = 1
+
+[sub_resource type="Resource" id="Resource_my6ql"]
+script = ExtResource("2_wpxji")
+kind = 3
+ticks = 1
+at = Vector2(560, 470)
+
+[sub_resource type="Resource" id="Resource_11vij"]
+script = ExtResource("2_wpxji")
+ticks = 120
+
+[sub_resource type="Resource" id="Resource_lyhn8"]
+script = ExtResource("2_wpxji")
+kind = 3
+ticks = 300
+at = Vector2(200, 470)
+
+[sub_resource type="Resource" id="Resource_gh25l"]
+script = ExtResource("2_wpxji")
+
+[sub_resource type="Resource" id="Resource_ykvbd"]
+script = ExtResource("2_wpxji")
+kind = 8
+who = &"girl_on_beach"
+face = -1
+
+[sub_resource type="Resource" id="Resource_j1yk6"]
+script = ExtResource("2_wpxji")
+kind = 6
+speaker = &"girl_on_beach"
+text = "Hey. Hey! Are you alive?"
+
+[sub_resource type="Resource" id="Resource_inbu8"]
+script = ExtResource("2_wpxji")
+kind = 6
+speaker = &"girl_on_beach"
+text = "You washed up on my beach. Nobody washes up on my beach."
+
+[sub_resource type="Resource" id="Resource_e26oa"]
+script = ExtResource("2_wpxji")
+kind = 12
+who = &"hero"
+
+[sub_resource type="Resource" id="Resource_1qwo8"]
+script = ExtResource("2_wpxji")
+kind = 5
+ticks = 40
+
+[sub_resource type="Resource" id="Resource_alue8"]
+script = ExtResource("2_wpxji")
+kind = 2
+ticks = 30
+amount = 0.0
+
+[resource]
+script = ExtResource("1_gkc1y")
+id = &"daybreak_shore_intro"
+steps = Array[ExtResource("2_wpxji")]([SubResource("Resource_qllt2"), SubResource("Resource_o40ob"), SubResource("Resource_my6ql"), SubResource("Resource_11vij"), SubResource("Resource_lyhn8"), SubResource("Resource_gh25l"), SubResource("Resource_ykvbd"), SubResource("Resource_j1yk6"), SubResource("Resource_inbu8"), SubResource("Resource_e26oa"), SubResource("Resource_1qwo8"), SubResource("Resource_alue8")])

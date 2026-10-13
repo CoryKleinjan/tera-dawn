@@ -1,7 +1,7 @@
 class_name ServerQuests
 extends ServerPart
 ## Quests on the server: taking, handing in and giving up quests, and telling players how
-## their quests are going as they kill monsters, pick things up and visit maps. The rules
+## their quests are going as they kill monsters, pick things up, visit maps and climb to spots. The rules
 ## are QuestLog's.
 
 ## The jingle (a Sound.jingle id, sent as ev_jingle) for finishing a quest.
@@ -41,14 +41,30 @@ func on_quest_accept(peer: int, npc_id: StringName, quest_id: StringName) -> voi
 	var q: QuestDef = Content.quests.get(quest_id)
 	if p == null or q == null or q.giver != npc_id or p.map.npc_near(p, npc_id) == null:
 		return
+	if p.character.quests.status(q, p.character) == QuestLog.Status.AVAILABLE:
+		start(p, q)
+
+## Gives the player quest `q` (already checked as theirs to take).
+func start(p: SimPlayer, q: QuestDef) -> void:
 	var c := p.character
-	if c.quests.status(q, c) != QuestLog.Status.AVAILABLE:
-		return
 	c.quests.accept(q)
 	p.dirty_character = true
 	tell(p, "New quest: %s" % q.title, Palette.SUN)
 	progress(p, c.quests.record_visit(p.map.def.id))
+	reached(p)
+	if q.gift_on_accept:
+		p.map.toss_to(p, q.gift_on_accept)
 	server.scenes.play(p, q.start_scene)
+
+## Counts the spot the player stands on toward quests asking them to reach it.
+func reached(p: SimPlayer) -> void:
+	var c := p.character
+	if not c.quests.wants_reach(p.map.def.id):
+		return
+	var platforms := p.map.layout.platforms
+	for i in platforms.size():
+		if p.stands_on(platforms[i]):
+			progress(p, c.quests.record_reach(p.map.def.id, i))
 
 func on_quest_complete(peer: int, npc_id: StringName, quest_id: StringName) -> void:
 	var p := player_of(peer)
@@ -65,6 +81,10 @@ func on_quest_complete(peer: int, npc_id: StringName, quest_id: StringName) -> v
 	if q.reward_xp > 0:
 		server.give_xp(p, q.reward_xp)
 	server.scenes.play(p, q.finish_scene)
+	var c := p.character
+	for next: QuestDef in Content.quests.values():
+		if next.auto_start and next.requires.has(q.id) and c.quests.status(next, c) == QuestLog.Status.AVAILABLE:
+			start(p, next)
 
 func on_quest_forfeit(peer: int, quest_id: StringName) -> void:
 	var p := player_of(peer)

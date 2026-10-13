@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="QuestDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="1_15kef"]
+[ext_resource type="Resource" path="res://data/monsters/dewling.tres" id="2_tjtwn"]
+[ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="4_ijqmo"]
+[ext_resource type="Resource" path="res://data/cutscenes/daybreak_tide_pool.tres" id="5_p2817"]
+
+[sub_resource type="Resource" id="Resource_s0fll"]
+script = ExtResource("1_15kef")
+monster = ExtResource("2_tjtwn")
+count = 3
+
+[resource]
+script = ExtResource("4_ijqmo")
+id = &"tut4_tide_pool"
+title = "The Tide Pool"
+giver = &"girl_on_beach"
+requires = Array[StringName]([&"tut3_shell"])
+offer_text = "Dewlings got into my tide pool again. They never come near me. Rude. You'll have to get them."
+progress_text = "Dewlings got into my tide pool again. They never come near me. Rude. You'll have to get them."
+complete_text = "You did it! They'll be back tomorrow. They always come back."
+start_scene = ExtResource("5_p2817")
+offer_hint = "Walk to her and press {move_up} to talk"
+hint = "{attack} to attack, {loot} to pick up what they drop"
+auto_start = true
+objectives = Array[ExtResource("1_15kef")]([SubResource("Resource_s0fll")])
+reward_xp = 10

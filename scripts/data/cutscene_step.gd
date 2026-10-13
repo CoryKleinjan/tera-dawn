@@ -32,6 +32,12 @@ enum Kind {
 	MUSIC,
 	## Plays sound effect `sound` (a Sound.play id).
 	SOUND,
+	## `who` holds animation `pose` (your hero's "faint" lies them on the ground) until another
+	## POSE step for them or the end; an empty `pose` lets them move as usual again.
+	POSE,
+	## Puts the NPCs where your quests now have them (NpcPlacement): someone a quest just moved
+	## shows up at their new spot. Without it they move there when the cutscene ends.
+	PLACE,
 }
 
 ## `who` / `speaker` for your own hero.
@@ -46,11 +52,13 @@ const WALK_SPEED := 1.6
 @export_range(0.0, 1.0) var amount := 1.0
 ## CAMERA: where the camera's centre goes, in game pixels.
 @export var at := Vector2.ZERO
-## CAMERA_FOLLOW, MOVE, FACE and SHOW: who.
+## CAMERA_FOLLOW, MOVE, FACE, SHOW and POSE: who.
 @export var who: StringName
 ## MOVE: where they walk to (game pixels across the map), and how fast.
 @export var x := 0.0
 @export var speed := WALK_SPEED
+## POSE: the animation to hold ("" to stop).
+@export var pose: StringName
 ## FACE: -1 left, 1 right.
 @export var face := 1
 ## SHOW: whether they're shown.
@@ -79,7 +87,7 @@ func problem() -> String:
 				return "SAY has no text"
 			if speaker != &"" and not _known(speaker):
 				return "SAY speaker %s is not the hero or an NPC" % speaker
-		Kind.CAMERA_FOLLOW, Kind.MOVE, Kind.FACE, Kind.SHOW:
+		Kind.CAMERA_FOLLOW, Kind.MOVE, Kind.FACE, Kind.SHOW, Kind.POSE:
 			if who == &"":
 				return "%s needs someone in `who`" % Kind.keys()[kind]
 			if not _known(who):

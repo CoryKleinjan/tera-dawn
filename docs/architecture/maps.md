@@ -29,6 +29,16 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
 6. Optionally give it an `intro_scene`, a cutscene played the first time a character arrives
    (see [cutscenes](cutscenes.md)).
 
+A portal with `opens_after` set to a quest is hidden, and goes nowhere, until the player has
+handed that quest in (`PortalDef.open_to`; `TDStage.locked_portals`); `one_way` means no portal
+leads back (the content tests let it). `tears` hangs faint white glows out over the water,
+drawn in code (`TDStage._build_tears`); nothing in the game mentions them.
+
+New characters start on `Character.NEW_MAP`, the tutorial beach Daybreak Shore. It's off the
+world map (`world_pos` zero), wakes you on the beach if you faint there, and its one-way
+portal to Dawnrise Village (`Character.START_MAP`, the first town) opens when the girl's last
+quest is handed in. Characters made before it never see it.
+
 ## The shape of the world
 
 Each **region** is a major zone with one main city (`RegionDef.capital`) in the middle: a

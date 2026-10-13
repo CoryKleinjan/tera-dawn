@@ -7,7 +7,15 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
 Create `data/npcs/<id>.tres` as an **NpcDef** (name, title, sprite, a `greeting`, and the
 `lines` they say when you pick Chat), then place it on a map with an **NpcPlacement**.
 Pressing Up next to them opens `TDDialogueWindow`, which lists what they offer. To make NPCs
-offer something new, add an option in `TDDialogueWindow._options()`.
+offer something new, add an option in `TDDialogueWindow._options()`. `title` may be empty for
+someone known by a name alone (the girl on the beach).
+
+Someone who moves along a quest chain (the girl leading you down the tutorial beach) is placed
+once per spot, each **NpcPlacement** shown only for part of the chain: `after_taking`,
+`until_taking` and `until_done` name quests. The server only lets you talk to placements your
+character can see (`NpcPlacement.shown_to`); the client hides the others (`TDNpc.shown`,
+refreshed by `TDWorld.show_for_me` when the character changes, held back while a cutscene
+plays).
 
 ## How to add a quest
 
@@ -20,7 +28,17 @@ in, its **QuestObjective**s, and its rewards (EXP, Dawnshards, items). Objective
 - **COLLECT** `count` of an `item` (taken when handed in). Give it a `drop_from` monster and a
   `drop_chance` to make a quest item that only drops for players on the quest (set
   `quest_item` on the ItemDef so it can't be sold or dropped);
-- **VISIT** a `map`.
+- **VISIT** a `map`;
+- **REACH** a spot: stand on `platform` of `map` (its name, `spot_name`, reads "Reach the
+  big rock"). The server counts it as the player moves (`ServerQuests.reached`).
+
+A COLLECT objective with `keep` on leaves the item in the bag ("Pick up a Beach Shell").
+
+Tutorial quests teach a key: `offer_hint` shows at the bottom of the screen while the quest can
+be taken or handed in and its NPC is on your map, `hint` while it's in progress, with
+`{action}` replaced by the player's own key (`TDHud.quest_hint`). `gift_on_accept` tosses an
+item at your feet when it's taken, and `auto_start` takes the quest by itself when the one it
+`requires` is handed in (its `start_scene` usually says the offer).
 
 NPCs offer their quests on their own: a "!" over their head when one is available, "?" when
 one is ready to hand in. `QuestLog` (in `Character`) holds progress and the rules; the
