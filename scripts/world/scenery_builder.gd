@@ -13,6 +13,9 @@ const PORTAL_SORT := 50.0
 ## How far the middle of the portal's glowing ground patch is above the bottom of its frames
 ## (texels; the halo fades out below it). The patch is what stands on the land.
 const PORTAL_GROUND := 19.0
+## How opaque the portal's light pillar is: still a bright pillar, with the land and backdrop
+## behind it showing faintly through.
+const PORTAL_ALPHA := 0.7
 ## Open ground between two of a town's background houses (`town_decor`), and the least
 ## between one and a building's edge, in game pixels.
 const BACK_HOUSE_GAP := 100.0
@@ -296,7 +299,7 @@ func _portal(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
 		s.alpha_cut = SpriteBase3D.ALPHA_CUT_DISABLED
 		s.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		s.offset = Vector2(0, biome.portal_frames[0].get_height() / 2.0)
-		s.modulate = Color(1.2, 1.25, 1.3)
+		s.modulate = Color(1.2, 1.25, 1.3, PORTAL_ALPHA)
 		s.position = at
 		# light is see-through and writes no depth, so it is drawn in sorted order: sort it as
 		# nearer than any building or scenery (a tall building's middle sorts nearer than its door)
