@@ -5,6 +5,7 @@ import math
 import json
 
 from .common import *  # noqa: F401,F403
+from .hair import head_axes
 from .pieces import PIECES, draw_piece, load_piece, pose, save_piece
 
 
@@ -385,10 +386,26 @@ def save_hair_cut(hero, name, head=False):
                                 [fi["head"] for fi in hero.info], [n in BACK_VIEW for n in hero.names])
             if style in HAIR_HEAD_ONLY:
                 cut = as_in(cut, hair, hero, HAIR_HAT_POSE)
+            cut = nothing_ahead(cut, hero, heads)
             # (softened only where some of this hair shows beside it: none peeks out along a soft
             # edge with nothing beside it)
             hard = (cut[..., 3] > 0) & ~ss.dilate(hair & (cut[..., 3] == 0), HAIR_CUT_TUCK + 1)
             save_strip(softened(cut, hard), name, "haircut", "hair_cuts", style)
+
+
+def nothing_ahead(cut, hero, heads):
+    """A style's cut strip that also hides the hair sticking out past the front of his face
+    (Cory 2026-10-13: bangs that hang past the front of his face look awkward; the bangs over
+    his forehead stay): off his head and forward of HAIR_FACE_FRONT, on every frame but those
+    from behind."""
+    out = cut.copy()
+    fw = hero.fw
+    for i, (n, px, fi) in enumerate(zip(hero.names, hero.frames, hero.info)):
+        if n in BACK_VIEW:
+            continue
+        ahead, _ = head_axes(px.shape, fi, fi["head"])
+        out[:, i * fw:(i + 1) * fw][(ahead > HAIR_FACE_FRONT) & ~ss.dilate(heads[i], 1)] = 255
+    return out
 
 
 def as_in(cut, hair, hero, pose_name):
