@@ -11199,6 +11199,32 @@
    }
   },
   {
+   "id": "skill_icons_2b",
+   "prompts": null,
+   "batch": "Class skill icons (Warrior redo)",
+   "with": null,
+   "refs": [],
+   "save": "skill_icons_2b.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 class skills thread: redo of skill_icons_2, which came back broken (a 6x4 grid of 24 small labelled pixel-art icons instead of four painted badges). Same four Warrior icons.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x2.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/skill_icons_test.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint a sheet of FOUR separate skill icons, laid out in 2 rows of 2, each centred in its own quarter of the canvas for my 2D side-scrolling game, with a WIDE band of plain magenta (at least a tenth of the canvas) around and between them, none touching another, all the same size. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished skill icons from the same set: match their badge shape, frame thickness, metal trim, inner background glow, painting style and level of detail exactly, but use a BOLDER, DARKER brown outline like the NPCs'. Each icon is a square badge with softly rounded corners: a thick painted frame with a thin bright metal trim, and inside it a darker painted background of the frame's colour with a soft glow behind the subject. Each icon shows ONE bold, simple subject filling most of the badge, lit brightly enough to read clearly even when the icon is shown very small. Top left, Dawn Slash (frame deep crimson red, gold trim): a wide glowing golden crescent arc of dawn light sweeping across the badge, a sword hilt at the start of the arc, bright sparks along its edge. Top right, Iron Body (frame deep crimson red, gold trim): a polished steel breastplate glowing with a cool blue-white sheen, small sparks bouncing off it. Bottom left, War Cry (frame deep crimson red, gold trim): a warrior in a horned steel helmet seen in profile, shouting with mouth wide open, bold golden sound waves bursting out in front. Bottom right, Blade Mastery (frame deep crimson red, gold trim): two steel swords crossed behind a small gold laurel, their edges gleaming with a bright polished highlight. Strict rules: 0) Exactly FOUR badges in total, one per quarter, large; never a grid of many small icons and never any labels. 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) Bold dark brown outline around each badge and its subject, the same thickness on all. 3) No letters, words or numbers anywhere. 4) Flat pure magenta #FF00FF background everywhere outside the badges."
+   }
+  },
+  {
    "id": "skill_icons_3",
    "prompts": null,
    "batch": "Class skill icons (set)",
