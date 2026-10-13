@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="2_stat_block"]
 [ext_resource type="Resource" path="res://data/effects/focus_aura.tres" id="e_focus_aura"]
-[ext_resource type="Texture2D" path="res://assets/sprites/skills/bow_shot.png" id="i_bow_shot"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/focus.png" id="i_bow_shot"]
 
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("2_stat_block")

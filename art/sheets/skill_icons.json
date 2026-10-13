@@ -5,35 +5,35 @@
   "keep": "largest",
   "cells": [
     [
-      "pebble_toss",
-      "quick_step",
-      "second_wind",
-      "power_strike",
-      "iron_body",
+      "",
+      "",
+      "",
+      "",
+      "",
       ""
-    ],
-    [
-      "toughness",
-      "bow_shot",
-      "double_shot",
-      "arrow_blow",
-      "focus",
-      "critical_shot"
     ],
     [
       "",
-      "energy_bolt",
-      "arcane_claw",
-      "magic_armor",
-      "mp_boost",
+      "bow_shot",
+      "",
+      "",
+      "",
       ""
     ],
     [
-      "gun_shot",
-      "flash_fist",
-      "somersault_kick",
-      "quick_draw",
-      "bullet_time",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "",
+      "",
       ""
     ]
   ],
@@ -55,19 +55,5 @@
       1051,
       1261
     ]
-  },
-  "overrides": {
-    "energy_bolt": {
-      "blank_top": 22
-    },
-    "arcane_claw": {
-      "blank_top": 22
-    },
-    "magic_armor": {
-      "blank_top": 22
-    },
-    "mp_boost": {
-      "blank_top": 22
-    }
   }
 }

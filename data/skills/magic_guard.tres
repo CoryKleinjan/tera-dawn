@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Resource" path="res://data/effects/magic_armor_aura.tres" id="e_magic_armor_aura"]
-[ext_resource type="Texture2D" path="res://assets/sprites/skills/magic_armor.png" id="i_magic_armor"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/magic_guard.png" id="i_magic_armor"]
 
 [resource]
 script = ExtResource("1_skill_def")

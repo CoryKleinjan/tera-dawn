@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Resource" path="res://data/effects/flash_fist.tres" id="e_flash_fist"]
 [ext_resource type="Resource" path="res://data/effects/critical.tres" id="h_critical"]
-[ext_resource type="Texture2D" path="res://assets/sprites/skills/somersault_kick.png" id="i_somersault_kick"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/riptide_combo.png" id="i_somersault_kick"]
 
 [resource]
 script = ExtResource("1_skill_def")

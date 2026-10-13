@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Script" path="res://scripts/data/move_def.gd" id="2_move_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/skills/quick_step.png" id="3_icon"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/blink.png" id="3_icon"]
 
 [sub_resource type="Resource" id="Resource_move"]
 script = ExtResource("2_move_def")
