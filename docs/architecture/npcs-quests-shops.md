@@ -24,7 +24,8 @@ in, its **QuestObjective**s, and its rewards (EXP, Dawnshards, items). Objective
 
 NPCs offer their quests on their own: a "!" over their head when one is available, "?" when
 one is ready to hand in. `QuestLog` (in `Character`) holds progress and the rules; the
-server's `on_quest_accept` / `on_quest_complete` apply them.
+server's `on_quest_accept` / `on_quest_complete` apply them. A quest can play a cutscene when
+it's taken (`start_scene`) and handed in (`finish_scene`); see [cutscenes](cutscenes.md).
 
 ## How to add a shop
 

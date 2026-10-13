@@ -249,6 +249,10 @@ func add_item(it: ItemDef) -> ItemDef:
 	_register("items", it.id, it)
 	return it
 
+func add_cutscene(c: CutsceneDef) -> CutsceneDef:
+	_register("cutscenes", c.id, c)
+	return c
+
 ## A flat 2000 x 700 field (floor at y 600) whose town is TOWN.
 static func field_def(id := FIELD) -> MapDef:
 	var m := MapDef.new()

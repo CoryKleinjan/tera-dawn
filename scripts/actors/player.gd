@@ -91,6 +91,8 @@ var ready_t := 0      # ticks of the combat-ready stance left after an attack
 var turn_t := 0       # ticks of the turn pose
 var run_t := 0        # ticks spent at top speed (faster after RUN_AFTER, see _top_speed)
 var loot_cd := 0      # ticks before the loot key asks for the next item
+## A cutscene walking you: -1 left, 1 right, 0 not (your keys don't work meanwhile).
+var auto_walk := 0
 ## Coyote time and jump buffering (see JumpGrace).
 var jump_grace := JumpGrace.new()
 var _reported := &""  # the animation the server last heard about
@@ -361,8 +363,8 @@ func _top_speed(base: float) -> float:
 	return base * (1.0 + PACE_BONUS * built)
 
 func _move() -> void:
-	var left := _held("move_left")
-	var right := _held("move_right")
+	var left := _held("move_left") or auto_walk < 0
+	var right := _held("move_right") or auto_walk > 0
 	var rooted := action_t > 0 and on_ground
 	var acc := ACCEL_GROUND if on_ground else ACCEL_AIR
 	var base_speed := RUN_SPEED * CharacterStats.speed_multiplier(Game.me.stats)

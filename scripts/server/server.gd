@@ -40,6 +40,7 @@ var storage: ServerStorage
 var travel: ServerTravel
 var quests: ServerQuests
 var jobs: ServerJobs
+var scenes: ServerScenes
 
 func _init(save_dir := "user://characters") -> void:
 	store = CharacterStore.new(save_dir)
@@ -51,6 +52,7 @@ func _init(save_dir := "user://characters") -> void:
 	travel = ServerTravel.new(self)
 	quests = ServerQuests.new(self)
 	jobs = ServerJobs.new(self)
+	scenes = ServerScenes.new(self)
 
 func _physics_process(_delta: float) -> void:
 	tick += 1
@@ -60,6 +62,7 @@ func _physics_process(_delta: float) -> void:
 	social.step(tick)
 	lobby.step(tick)
 	for p: SimPlayer in sessions.values():
+		scenes.step(p)
 		_flush(p)
 	if tick % SNAPSHOT_EVERY == 0:
 		for m: MapInstance in maps.values():
@@ -137,6 +140,7 @@ func enter_map(p: SimPlayer, id: StringName, x: float) -> void:
 		social.changed_map(p)
 		p.map.remove_player(p)
 		p.map.broadcast(&"ev_player_left", [p.peer])
+	scenes.stop(p)
 	var m := map_instance(id)
 	p.chair = &""
 	p.character.visit(id)
@@ -144,6 +148,7 @@ func enter_map(p: SimPlayer, id: StringName, x: float) -> void:
 	Net.send(p.peer, &"ev_enter_map", [id, x, m.full_state()])
 	quests.progress(p, p.character.quests.record_visit(id))
 	store.save(p.character)
+	scenes.play(p, m.def.intro_scene)
 
 ## Sends a fainted player back to town with half their HP and MP.
 func revive(p: SimPlayer) -> void:
@@ -208,6 +213,8 @@ func on_skill(peer: int, skill_id: StringName, at: Vector2, face: int) -> void:
 	var skill: SkillDef = Content.skills.get(skill_id)
 	if p == null or skill == null or p.fainted() or p.cooldown > COOLDOWN_SLACK:
 		return
+	# fighting means no cutscene is playing on their screen, so monsters may hit them again
+	scenes.stop(p)
 	var c := p.character
 	var problem := c.skills.use_problem(skill)
 	if problem != "":

@@ -19,6 +19,7 @@ const FOLDERS := {
 	"regions": "res://data/regions",
 	"looks": "res://data/looks",
 	"achievements": "res://data/achievements",
+	"cutscenes": "res://data/cutscenes",
 }
 
 var monsters := {}
@@ -34,6 +35,7 @@ var regions := {}
 var looks := {}
 ## AchievementDefs; Achievements lists them in order and measures them.
 var achievements := {}
+var cutscenes := {}
 
 func _ready() -> void:
 	for kind in FOLDERS:
@@ -78,6 +80,9 @@ func quest(id: StringName) -> QuestDef:
 func look(id: StringName) -> LookDef:
 	return _lookup(looks, id, "look")
 
+func cutscene(id: StringName) -> CutsceneDef:
+	return _lookup(cutscenes, id, "cutscene")
+
 ## The creator's options of one kind, in order (the first is the default).
 func looks_of(kind: LookDef.Kind) -> Array[LookDef]:
 	var out: Array[LookDef] = []
@@ -103,6 +108,8 @@ func _lookup(table: Dictionary, id: StringName, what: String) -> Resource:
 
 ## Loads every resource in a folder and its subfolders into a dictionary keyed by its `id`.
 func _load_folder(path: String, out: Dictionary) -> Dictionary:
+	if not DirAccess.dir_exists_absolute(path):
+		return out
 	for sub in DirAccess.get_directories_at(path):
 		_load_folder(path.path_join(sub), out)
 	for file in DirAccess.get_files_at(path):

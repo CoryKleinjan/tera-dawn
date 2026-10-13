@@ -229,7 +229,7 @@ func _shot_target(chased: SimPlayer) -> SimPlayer:
 	return best
 
 func _in_range(p: SimPlayer) -> bool:
-	return not p.fainted() and absf(p.position.x - position.x) <= def.shot_range and absf(p.position.y - position.y) <= SHOT_Y_RANGE
+	return not p.fainted() and not p.in_scene() and absf(p.position.x - position.x) <= def.shot_range and absf(p.position.y - position.y) <= SHOT_Y_RANGE
 
 ## Where its shots leave from.
 func muzzle() -> Vector2:
