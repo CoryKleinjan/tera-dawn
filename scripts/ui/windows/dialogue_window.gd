@@ -99,10 +99,6 @@ func _options() -> Array:
 			hud.windows["storage"].open(npc)])
 	if def.guild:
 		out.append(["Found a guild", _guild_page])
-	if def.market:
-		out.append(["Set up a shop", func() -> void:
-			visible = false
-			hud.windows["player_shop"].setup(), ICON_SHOP])
 	if not def.travel.is_empty():
 		out.append(["Travel", _travel_list])
 	if not _jobs_offered().is_empty():

@@ -1,7 +1,7 @@
 class_name ScrollList
 extends RefCounted
 ## A list in a window that shows `rows` rows at a time and scrolls one row per mouse wheel
-## step (a shop's lines, the quest log, a player shop). Rows are counted from the top of the
+## step (a shop's lines, the quest log). Rows are counted from the top of the
 ## whole list: `row_rect(i)` is where row `i` is drawn while it's scrolled into view.
 
 ## The "scroll for more" line sits this far under the last row.

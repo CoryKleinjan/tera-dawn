@@ -54,8 +54,6 @@ func _invite_problem(p: SimPlayer, kind: String, o: SimPlayer) -> String:
 				return "%s needs to be on this map to trade." % them
 			if social.trades.has(p.peer) or social.trades.has(o.peer):
 				return "One of you is already trading."
-			if social.shops.has(p.peer) or social.shops.has(o.peer):
-				return "Not while minding a shop."
 		"guild":
 			var g := social.guild_of(me)
 			if g.is_empty() or g["master"] != me:

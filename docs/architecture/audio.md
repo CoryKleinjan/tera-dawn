@@ -23,7 +23,7 @@ instead of racing it. Tests drive `Sound.advance` by hand (`tests/unit/sound_mus
 ## Where sounds come from
 
 - **Map music**: `MapDef.music_id()`. A map's own `music` (boss lairs: their zone's
-  `boss_<zone>`; the Free Market), else its region's `town_music` (towns, markets and rooms) or
+  `boss_<zone>`), else its region's `town_music` (towns and rooms) or
   `field_music` (everywhere else; `RegionDef`). The title screen and character select play
   `TDWorld.TITLE_MUSIC`.
   Every track follows `docs/zone-vibes.md`.

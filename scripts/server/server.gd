@@ -26,7 +26,7 @@ var sessions := {}
 var maps := {}
 var tick := 0
 var _drop_ids := 0
-## Chat, buddies, parties, trades, guilds, fame and player shops.
+## Chat, buddies, parties, trades, guilds and fame.
 var social: TDSocial
 ## The requests about the player's things, NPC shops, storage, getting around, quests and
 ## jobs, one part each (scripts/server/services/).
@@ -215,11 +215,6 @@ func player_of(peer: int) -> SimPlayer:
 
 func on_move(peer: int, at: Vector2, face: int, anim: StringName, climbing: bool) -> void:
 	var p := player_of(peer)
-	if p and social.shops.has(peer):
-		# minding a shop: stay put
-		if p.position.distance_to(at) > 2.0:
-			Net.send(peer, &"ev_place", [p.position.x, p.position.y])
-		return
 	if p and not p.report_move(at, face, anim, climbing) and not p.fainted():
 		Net.send(peer, &"ev_place", [p.position.x, p.position.y])
 	elif p:

@@ -397,7 +397,6 @@ decor_density = -1.0
 region = &"dawnharbor"
 world_pos = Vector2(590, 355)
 town = false
-market = false
 return_map = &"dawnharbor"
 level_text = "Lv. 15-20"
 interior = false

@@ -10872,32 +10872,6 @@
    }
   },
   {
-   "id": "dawnharbor_market_sign",
-   "prompts": null,
-   "batch": "Dawnharbor city: Free Market signboard",
-   "with": null,
-   "refs": [],
-   "save": "dawnharbor_market_sign.png",
-   "replaces": null,
-   "kind": "still",
-   "stands": true,
-   "cells": [
-    1,
-    1
-   ],
-   "anchor": null,
-   "size": "2K",
-   "note": "2026-10-12 harbor-city thread (Cory 03:13-03:16Z): a painted signboard beside the Free Market portal shows where it leads. First try (03:25Z) came back in 3/4 (foot top and beam end showing); redone as a strict front elevation (Cory 03:27Z).",
-   "edit": {
-    "base": "/mnt/project-files/art-sheets/dawnharbor-city/market_sign_base.png",
-    "refs": [
-     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
-     "art/source/building_dawnharbor_tavern.png"
-    ],
-    "text": "The first image is an empty magenta canvas. On it, paint ONE market signpost for the harbour town in my 2D side-scrolling game. It stands beside the entrance to the town's Free Market. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture. The third image is a building from the same town: match its style, palette, outline thickness and level of detail exactly. The signpost: a sturdy weathered wooden post, about one and a half times as tall as a person, set in a low flat wooden foot that is a plain rectangle in this front view. Near the top a wooden arm sticks out to the right, braced by a short diagonal strut. From the arm hangs a wide rectangular wooden signboard on two short iron chains; each chain is fixed to the arm at the top and to the board at the bottom, nothing loose or dangling. The board has a carved frame and is painted with a simple bold emblem: a plump tied coin purse with a few gold coins beside a small brass balance scale, on a warm red-and-cream striped background like a market awning. Strict rules: 1) A strictly flat 2D front elevation, like a technical drawing seen dead-on at eye level, perfectly upright. Every wooden part is a flat rectangle: the post shows only its front face, the arm shows only its front face with a square-cut end and no visible end grain or depth, the foot shows only its front face and no top. No 3/4, isometric or perspective angle anywhere. The board hangs flat facing the viewer. 2) The bottom of the foot is ONE flat straight horizontal edge. No ground, shadow or grass under it. 3) The signpost fills most of the canvas height with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, words or numbers anywhere. Flat pure magenta #FF00FF background everywhere outside the signpost."
-   }
-  },
-  {
    "id": "dawnharbor_pier",
    "prompts": null,
    "batch": "Dawnharbor city: wooden pier (test)",

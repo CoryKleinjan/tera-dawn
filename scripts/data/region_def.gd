@@ -23,6 +23,6 @@ extends Resource
 
 @export_group("Music")
 ## The tracks (Sound.music ids, files in assets/audio/music/) for its towns (and the rooms
-## and markets in them) and for its fields. A map can play its own (MapDef.music).
+## in them) and for its fields. A map can play its own (MapDef.music).
 @export var town_music: StringName
 @export var field_music: StringName

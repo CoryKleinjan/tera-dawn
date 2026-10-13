@@ -71,7 +71,7 @@ welcome *(inferred)*.
 
 ## Dawnharbor Coast
 
-Lv 10-22 · towns Dawnharbor and the Free Market · `harbor` biome · neighbours Driftcove and
+Lv 10-22 · town Dawnharbor · `harbor` biome · neighbours Driftcove and
 Greenbough. The busy port at the heart of the mainland; open, breezy and prosperous.
 
 **Keep (art):** warm early morning over the sea: navy sky top `#1c2e5c`, peach-cream horizon
@@ -81,8 +81,7 @@ wood, rope, sails, stone harbour walls.
 
 **Keep (music):** breezy, travelling, sea wind. Field: acoustic guitar, strings, flute, light
 snare, steady travelling tempo. Town: the same instruments plus accordion touches, busier and
-warmer, a cheerful harbour-market tune. Free Market: plucked guitar, light strings, flute, hand
-claps and light snare, a friendly bargaining shuffle (its own track).
+warmer, a cheerful harbour-market tune.
 
 **Town: Dawnharbor (the gold standard for every city's detail and polish).** Three levels: a long quay lined with barrels, crates,
 nets and carts, a stone-walled terrace above with lamp posts, ivy and flower boxes, and a cliff top
@@ -91,8 +90,6 @@ Every building its own model (tavern, sail loft, harbormaster's office, shipwrig
 lighthouse, chapel). One 4K warm-morning harbour panorama fills the background; clouds drift.
 Layout: `/mnt/project-files/plans/done/dawnharbor-city-layout.md`.
 
-**Free Market:** reached through a portal on the quay with a painted signboard beside it; uses
-Dawnharbor's panorama, no field plants, empty for now (no stalls).
 
 | Sub-zone | Role | Lv | What changes | Monsters |
 | --- | --- | --- | --- | --- |
