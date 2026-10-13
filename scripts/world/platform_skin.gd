@@ -41,6 +41,41 @@ static func texture(biome: BiomeDef, width: float, square := false) -> ImageText
 static func overhang(square: bool) -> float:
 	return 0.0 if square else OVERHANG
 
+## How far in from the platform's ends a raised terrace's square ends are painted, in game
+## pixels (x the left end, y the right), measured `below` game pixels under the walking
+## surface: the wall under it stops there, so it doesn't stick out past the end stones.
+static func square_inset(biome: BiomeDef, below: float) -> Vector2:
+	if biome.terrace_left == null or biome.terrace_right == null:
+		return Vector2.ZERO
+	var key := "inset:%s:%s" % [biome.get_instance_id(), below]
+	if not _surface.has(key):
+		var parts := pieces(biome, true)
+		var from := surface_row(biome) + roundi(below / texel(biome))
+		_surface[key] = Vector2(_end_margin(parts[0], from, false), _end_margin(parts[-1], from, true)) * texel(biome)
+	return _surface[key]
+
+## The typical count of see-through columns at one end of `img`, over its rows from `from`
+## down to its last mostly opaque row (the middle value, so a rounded corner doesn't count).
+static func _end_margin(img: Image, from: int, right: bool) -> float:
+	var w := img.get_width()
+	var margins: Array[int] = []
+	for y in range(from, img.get_height()):
+		var solid := 0
+		var edge := -1
+		for i in w:
+			var x := w - 1 - i if right else i
+			if img.get_pixel(x, y).a > 0.5:
+				solid += 1
+				if edge < 0:
+					edge = i
+		if solid * 2 < w:
+			break
+		margins.append(edge)
+	if margins.is_empty():
+		return 0.0
+	margins.sort()
+	return margins[margins.size() / 2]
+
 ## [left cap, middles..., right cap] as images (the square terrace ends as caps when `square`).
 static func pieces(biome: BiomeDef, square := false) -> Array[Image]:
 	var out: Array[Image] = []
