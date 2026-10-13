@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MapDef" load_steps=23 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
-[ext_resource type="Resource" path="res://data/biomes/rooms/dawnharbor_room.tres" id="2_dawnharbor"]
+[ext_resource type="Resource" path="res://data/biomes/rooms/dawnharbor_store_room.tres" id="2_dawnharbor"]
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="3_portal_def"]
 [ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="4_npc_placement"]
 [ext_resource type="Resource" path="res://data/npcs/harbor_store.tres" id="5_harbor_store"]
@@ -76,7 +76,7 @@ texture = ExtResource("12_lamp")
 x = 520.0
 depth = -1.0
 scale = 1.0
-y = 300.0
+y = 283.0
 light_color = Color(1.0, 0.8, 0.5, 1.0)
 light_energy = 2.2
 light_height = 20.0
@@ -87,7 +87,7 @@ texture = ExtResource("12_lamp")
 x = 940.0
 depth = -1.0
 scale = 1.0
-y = 300.0
+y = 283.0
 light_color = Color(1.0, 0.8, 0.5, 1.0)
 light_energy = 2.2
 light_height = 20.0
