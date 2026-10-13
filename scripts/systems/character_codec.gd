@@ -66,8 +66,6 @@ static func load_dict(c: Character, data: Dictionary) -> void:
 	else:
 		# a save from before skills existed: hand out the points for the levels it has
 		skills.points = (c.level - 1) * c.job.sp_per_level
-	# hand back points a job taken late used to lose, and drop any no skill could take
-	skills.settle()
 	skills.buffs.clear()
 	if data.get("buffs") is Dictionary:
 		for k in data["buffs"]:

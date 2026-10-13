@@ -26,7 +26,8 @@ It then appears in its job's tab of the skill window (K). Players spend Skill Po
 buff goes on the first free quickslot. A job taken late still pays the Skill Points of every
 level since it opened (`Character.advance`), and unspent points never go above the levels
 left on the job line's skills (`SkillBook.room`), so a new skill raises that limit by itself.
-Saves settle up on load (`SkillBook.settle`). Quickslots (`Character.quickslots`, eight keys in
+Saves settle up when the server loads them (`SkillBook.settle`, from
+`CharacterStore.load_file`). Quickslots (`Character.quickslots`, eight keys in
 `Game.QUICKSLOT_ACTIONS`) hold skills or items and are saved with the character. The
 server checks the skill is known and pays its MP (`TDServer.on_skill`), then works out what
 it hits (`MapInstance.use_skill`) or starts the buff (`SkillBook.add_buff`, counted down
