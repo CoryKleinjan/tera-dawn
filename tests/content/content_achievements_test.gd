@@ -34,7 +34,7 @@ const SHIPPED := [
 	{"id": "best_friend", "steam": "ACH_BEST_FRIEND", "title": "Best Friend", "text": "Bring out a pet.", "kind": "pets", "goal": 1},
 	{"id": "well_liked", "steam": "ACH_WELL_LIKED", "title": "Well Liked", "text": "Reach 10 fame.", "kind": "fame", "goal": 10},
 	{"id": "guildmate", "steam": "ACH_GUILDMATE", "title": "Guildmate", "text": "Join a guild.", "kind": "guild", "goal": 1},
-	{"id": "dealmaker", "steam": "ACH_DEALMAKER", "title": "Dealmaker", "text": "Finish a trade or a shop sale.", "kind": "deals", "goal": 1},
+	{"id": "dealmaker", "steam": "ACH_DEALMAKER", "title": "Dealmaker", "text": "Finish a trade.", "kind": "deals", "goal": 1},
 ]
 
 const DIR := "res://data/achievements"

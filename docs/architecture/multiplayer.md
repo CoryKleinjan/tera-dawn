@@ -22,7 +22,9 @@ TDWorld  ───────────────────────�
   players' games to save (`TDServer.save`, `ev_save`). `TDServer` itself keeps the players, maps, saving and the requests about moving and
   fighting; the other requests are handled by its parts in `scripts/server/services/`
   (`ServerItems`, `ServerNpcShop`, `ServerStorage`, `ServerTravel`, `ServerQuests`,
-  `ServerJobs`, each a `ServerPart`), the way `TDSocial` splits into `scripts/server/social/`.
+  `ServerJobs`, `ServerScenes`, each a `ServerPart`), the way `TDSocial` splits into
+  `scripts/server/social/`. `ServerMoves` (`scripts/server/server_moves.gd`) runs the server's
+  side of the job movement skills.
 - **Client** (`scripts/world/`, `scripts/actors/`): `TDWorld` shows the map you're on. Your own
   hero (`TDPlayer`) moves and climbs on your machine so it feels instant, like MapleStory, and
   reports where it is 20 times a second; the server checks the report is possible and puts you
@@ -32,7 +34,7 @@ TDWorld  ───────────────────────�
   second as packed bytes (`SnapshotCodec`) so even a busy map fits in one network packet:
   they hold only positions, facing, HP, animation and flags, and leave out monsters that
   haven't changed (every monster goes in once a second). A player's name, level, look, gear,
-  chair, pet and shop sign go separately (`ev_player_info`), reliably and only when they change.
+  chair and pet go separately (`ev_player_info`), reliably and only when they change.
 - **Net** (`scripts/autoload/net.gd`) is the whole protocol in one file. `req_*` methods go from
   a client to the server (grouped by the server part that answers them), `ev_*` methods from the server to clients. UI and actors call
   `Net.ask(&"req_…", [args])`; the server answers with events, and `Game.me` (your copy of

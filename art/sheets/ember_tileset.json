@@ -177,7 +177,8 @@
         224,
         230
       ],
-      "grow": 1.22
+      "grow": 1.22,
+      "save": false
     },
     "ledge_roots": {
       "crop": [

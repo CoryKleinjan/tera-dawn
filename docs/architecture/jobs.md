@@ -11,9 +11,9 @@ and a `tint` the hero is drawn in until the job has its own art.
 Everyone starts as `Character.START_JOB` (the Beginner, which lists starting stats, gear,
 items and the potions put on the last quickslots, `starting_quickslots`). A job that others
 reach sets `advances_from`, `advance_level`, `advance_requirements`
-(base STR/DEX/INT/LUK/CHA, usually just the main stat) and `advance_gifts`: the job's basic
-shop weapon and off-hand (the first of each is worn at once in place of a Beginner's; one of
-the job's own line stays on), and potions. Better weapons only drop. To let an NPC hand it out, add its id to that
+(base STR/DEX/INT/LUK/CHA, usually just the main stat) and `advance_gifts`: potions for now;
+once gear returns, also the job's basic shop weapon and off-hand (the first of each is worn at
+once in place of a Beginner's; one of the job's own line stays on). Better weapons only drop. To let an NPC hand it out, add its id to that
 NPC's `instructs`: their dialogue then offers "Choose a job", and the server
 (`ServerJobs.on_advance` → `Character.advance`) checks the requirements again before changing it.
 `advance_quest` is a quest to hand in first, the tutor's Job Test (`data/quests/jtest_<job>.tres`:

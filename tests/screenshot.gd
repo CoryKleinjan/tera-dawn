@@ -64,6 +64,7 @@ func _run() -> void:
 	DirAccess.make_dir_recursive_absolute(out)
 	var only := args[1] if args.size() > 1 else ""
 	Net.save_dir = "user://screenshot_characters"
+	TestGear.install()  # the game has no gear for now; the shots dress the hero in the test gear
 	var world: TDWorld = load("res://scenes/world.tscn").instantiate()
 	add_child(world)
 	await _frames(10)

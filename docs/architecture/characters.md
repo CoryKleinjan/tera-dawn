@@ -12,7 +12,8 @@ then character select shows the list with the new character picked.
 - **Appearance** (on the Character) is a skin tone, face, eye colour, hairstyle and hair
   colour, each the id of a `LookDef` in `data/looks/`. Add an option by adding a file;
   `creator` and `order` decide whether and where the creator lists it.
-- **Outfit** choices come from the starting job's `creator_gear` (one piece per kind).
+- **Outfit** choices come from the starting job's `creator_gear` (one piece per kind). It is
+  empty while the gear is being redrawn, so the creator offers no outfit for now.
 - **Looks** travel in each player's info (`ev_player_info`, sent when it changes; `Character.look()`: appearance and the worn
   gear that shows), so everyone sees everyone's hair and gear.
 - **Drawing** is done by `Paperdoll`, which works out the layers from a look;
@@ -20,50 +21,27 @@ then character select shows the list with the new character picked.
   select, the equipment window) draw him the same way: `PaperdollView` stands the world's own
   rig (`HeroBody.make_rig`) in a little 3D stage of its own, lit and colour graded like the map
   showing now (`TDStage.light_portrait`, `shaders/grade.gdshaderinc`), so he looks exactly as he
-  does in game. There is no separate menu drawing to keep in step. The hero is a bare body strip (`hero.png`) with layers
-  that play frame for frame with it: hair (front, and a back part drawn behind him), faces and their irises, clothes, a cape and round or kite shields
-  (`assets/animations/paperdoll/`). `tools/art/paperdoll_layers.py` builds them from the
-  paperdoll sheets, together with the body's region map (`hero_regions.png`: skin, chest,
-  shorts, feet) and rig (`hero_rig.json`: head, face, neck, hand and shield per frame, and
-  how each weapon kind is held). The skin tone recolours the body through the paperdoll
-  shaders. Worn tops, bottoms and shoes are greyscale cuts (`top_tunic`, `bottom_trousers`,
-  `shoes_boots`...) lifted off sheets of the body wearing them; each item names its cut in
-  `EquipDef.worn_style`. Hair, irises, capes, shields, gloves and those cuts are greyscale art
-  tinted with the hair, eye or item colour (`EquipDef.look_color` or the icon). Under a hat
-  his own hair layer is cut where the hat's `haircut_<hat>_<style>.png` strip says
-  (`Piece.hair_cuts`), so no hair pokes out of the hat's top or sides and no loose bits hang;
-  the ponytail's tail is cut away too. Nothing new is drawn for under a hat. A
-  helm is drawn smaller than his head, with its eye holes on his eyes, so while one is worn its
-  `headcut_<helm>.png` strip (laid out like the body strip) also cuts his body and face where
-  his head would poke out of it. In the 3D stage the hero and his layers are lit like
-  everyone else, sampled from mipmaps and blended at their edges so he looks like his menu
-  picture (`shaders/paperdoll_stage.gdshaderinc`; every hero strip's `.import` has mipmaps on,
-  and `PaperdollSprite` draws his layers in order with their own render priorities,
-  `TDStage.PRIORITY_*`). Gear that keeps its shape (a **weapon**, a **shield**, a **hat**) is a
-  `Paperdoll.Piece` instead of a strip: one picture per view (held, on his back; a shield's
-  back and face; a hat from the side and from behind) that the game places, turns and sizes on
-  every frame from its pose (`assets/sprites/characters/pieces/<name>.json`, written by
-  `tools/art/paperdoll/pieces.py`), over him or under his body as the pose says. A weapon is
-  in his fist with his fingers drawn over its grip (the piece is cut where `fist_<kind>.png`
-  has his fingers, `shaders/paperdoll_piece.gdshaderinc`), always in his front hand (the rig's
-  `front` moves the shield to the other hand on frames where the far fist is the weapon point),
-  and on his back while he climbs. Every kind copies the staff's holds ("holds" in
-  `art/sheets/paperdoll_rig.json`): the same spot in the front fist and the same angle to the
-  forearm on every frame, with its own grip point. A bow lies across the forearm, a gun's barrel
-  runs along it, and a throwing star sits behind his fist with its points sticking out. Every weapon is its own icon art
-  (`weapon_item_<id>`); the tinted `weapon_<kind>` pictures are for a weapon with no icon cell.
-  A shield's back sits on his far arm behind him with about a third showing, and its face is on
-  his back while he climbs (`shield_item_<id>`). Hats are `hat_item_<id>` in their own colours
-  (a closed helm is placed so its eye holes sit over his eyes, and its dark inside is cut out
-  so his face shows), or the tinted shape
-  `hat_<shape>` (`EquipDef.look_shape`). Tops, bottoms, shoes, gloves and capes bend with his
-  body, so they stay strips: an item with its own art is `worn_item_<id>` (and a cape's
-  `_behind`), in its own colours from its icon (`tools/art/paperdoll/items.py`, Gemini sheets
-  of the body wearing it); the rest are the greyscale cuts. Gear layers (worn cuts, gloves,
-  capes, tinted shields, hats and weapons) are tinted by `shaders/gear_tint.gdshaderinc`,
-  which keeps the painted shading; an open coat gets an undershirt. `LookDef.frames` and
-  `EquipDef.worn_frames` take any new layered art without code changes. The strip is cut at
-  the painted sheet's full resolution: `Paperdoll.ART_SCALE` strip pixels make one hero pixel.
+  does in game. There is no separate menu drawing to keep in step.
+- **The old hero's layers** (in game until the new paperdoll hero, being rebuilt from
+  `art/reference/hero.png`, is approved and replaces them): a bare body strip (`hero.png`)
+  with layers that play frame for frame with it: hair (front and back), faces and irises, and
+  worn cuts (`assets/animations/paperdoll/`). `tools/art/paperdoll_layers.py` builds them, with
+  the body's region map (`hero_regions.png`) and rig (`hero_rig.json`: head, face, neck, hand
+  and off-hand per frame, and how each weapon kind is held). The skin tone recolours the body;
+  hair, irises and greyscale gear cuts are tinted (`shaders/gear_tint.gdshaderinc` keeps the
+  painted shading). Under a hat his own hair layer is cut where the hat's
+  `haircut_<hat>_<style>.png` strip says (`Piece.hair_cuts`). In the 3D stage his layers are
+  lit like everyone else, sampled from mipmaps and blended at their edges
+  (`shaders/paperdoll_stage.gdshaderinc`), drawn in order with their own render priorities
+  (`TDStage.PRIORITY_*`). Gear that keeps its shape (weapon, off-hand, hat) is a
+  `Paperdoll.Piece`: one picture per view that the game places, turns and sizes on every frame
+  (`assets/sprites/characters/pieces/<name>.json`, written by `tools/art/paperdoll/pieces.py`).
+  A weapon is always in his front fist with his fingers drawn over its grip (`fist_<kind>.png`,
+  `shaders/paperdoll_piece.gdshaderinc`) and on his back while he climbs; every kind copies the
+  staff's holds ("holds" in `art/sheets/paperdoll_rig.json`) with its own grip point. Clothes,
+  shoes and capes bend with his body, so they stay strips (`EquipDef.worn_style`,
+  `EquipDef.worn_frames`). The strip is cut at the painted sheet's full resolution:
+  `Paperdoll.ART_SCALE` strip pixels make one hero pixel.
 - **Animation**: each weapon fights its own way (`WeaponStyle`): a skill's motion ("attack",
   "slash") becomes the weapon's own animation (a bow shoots, a star is thrown, knuckles punch, a
   staff smashes), and other names play as they are, except "cast" (`WeaponStyle.SPELL`):

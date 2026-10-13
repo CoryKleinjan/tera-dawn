@@ -43,6 +43,8 @@ a map look (`MapDef.variant`) for it, and update the entry when the zone changes
   checks these monster and level rules.
 - Roles below: **border** fields cross to a neighbouring zone, **training** fields lead deeper,
   the **boss** map ends the branch.
+- Each job town also has a **Trial Ground** (Lv 10-11) for its job test, where a tear opens and
+  the tear boss waits; it keeps its zone's look.
 
 ---
 
@@ -63,6 +65,7 @@ welcome *(inferred)*.
 
 | Sub-zone | Role | Lv | What changes | Monsters |
 | --- | --- | --- | --- | --- |
+| Daybreak Shore | Tutorial | 1-2 | The zone look on a sunrise beach *(inferred)* | Dewling |
 | Dawnrise Meadow | First field | 1-3 | Nothing: the zone look as painted, open sunrise meadow | Dewling, Mossling, Petal Bat |
 | Sunny Slope | Easy field | 2-6 | Brighter: clear blue sky, golden horizon, more saturated | Tide Dewling, Mossling, Petal Bat |
 | Mushroom Dell | Training | 4-8 | Cooler shade under giant mushrooms, lilac sky, misty, green spores | Sporecap, Sproutcap, Sea Gull |
@@ -71,7 +74,7 @@ welcome *(inferred)*.
 
 ## Dawnharbor Coast
 
-Lv 10-22 · town Dawnharbor · `harbor` biome · neighbours Driftcove and
+Lv 3-22 · town Dawnharbor · `harbor` biome · neighbours Driftcove and
 Greenbough. The busy port at the heart of the mainland; open, breezy and prosperous.
 
 **Keep (art):** warm early morning over the sea: navy sky top `#1c2e5c`, peach-cream horizon
@@ -101,7 +104,7 @@ Layout: `/mnt/project-files/plans/done/dawnharbor-city-layout.md`.
 
 ## Greenbough Wilds
 
-Lv 10-30 · town Greenbough Village (Archers) · `greenwood` biome · neighbours Dawnharbor and
+Lv 9-28 · town Greenbough Village (Archers) · `greenwood` biome · neighbours Dawnharbor and
 Lumewood. Towering trees and rope bridges; lively, airy, hunter's forest.
 
 **Keep (art):** fresh daylight through leaves: deep green sky top `#173a29`, pale yellow horizon
@@ -128,7 +131,7 @@ rope bridges; life happens up in the branches *(inferred)*.
 
 ## Lumewood
 
-Lv 10-30 · town Lumewood Sanctum (Magicians) · `lumewood` biome · neighbours Greenbough and
+Lv 9-30 · town Lumewood Sanctum (Magicians) · `lumewood` biome · neighbours Greenbough and
 Emberreach. A glowing, dreaming forest; mystical, serene, wondrous.
 
 **Keep (art):** twilight glow: indigo sky top `#120e33`, lavender horizon `#c8a7ff`, soft violet
@@ -154,7 +157,7 @@ windows; calm and scholarly, lit by crystals and glowing plants *(inferred beyon
 
 ## Emberreach
 
-Lv 10-32 · town Emberforge (Warriors) · `forge` biome · neighbours Lumewood and Lanternfall.
+Lv 7-31 · town Emberforge (Warriors) · `forge` biome · neighbours Lumewood and Lanternfall.
 Cinder hills and forges; proud, hot, hardworking, heroic.
 
 **Keep (art):** ember glow: dark ember-brown sky top `#24120c`, orange horizon `#ffb060`, amber
@@ -181,7 +184,7 @@ and iron-bound doors; smoke and forge glow *(inferred beyond the buildings)*.
 
 ## Lanternfall
 
-Lv 10-35 · town Lanternfall (Thieves) · `lantern` biome · neighbours Emberreach and Driftcove.
+Lv 9-30 · town Lanternfall (Thieves) · `lantern` biome · neighbours Emberreach and Driftcove.
 A city of lanterns at dusk; sly, playful, mysterious but charming, never horror.
 
 **Keep (art):** dusk: near-black navy sky top `#090e24`, amber horizon `#dfa060`, cool lavender
@@ -209,7 +212,7 @@ Boss: a fast heist-gone-wrong chase.
 
 ## Driftcove
 
-Lv 10-30 · town Driftcove (Pirates) · `coast` biome · neighbours Dawnharbor and Lanternfall.
+Lv 9-30 · town Driftcove (Pirates) · `coast` biome · neighbours Dawnharbor and Lanternfall.
 Sea caves, wrecks and beaches; swashbuckling, jolly, watery.
 
 **Keep (art):** tropical sea light: deep teal sky top `#132f4a`, cream horizon `#ffe2a7`, warm

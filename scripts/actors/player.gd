@@ -10,7 +10,7 @@ extends Node2D
 ## air) aims an attack that way.
 
 ## How tall he stands, feet to the top of his head, in game pixels at HeroBody.SCALE: speech
-## bubbles and shop signs go just over it.
+## bubbles go just over it.
 const HEIGHT := 68.0
 ## About how wide he is drawn, in game pixels: what the HUD keeps out of the way of.
 const WIDTH := 42.0

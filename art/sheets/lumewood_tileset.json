@@ -68,7 +68,8 @@
         252,
         227
       ],
-      "grow": 1.25
+      "grow": 1.25,
+      "save": false
     },
     "ground_left": {
       "crop": [
@@ -137,7 +138,8 @@
         246,
         201
       ],
-      "grow": 0.94
+      "grow": 0.94,
+      "save": false
     },
     "tall_grass": {
       "crop": [

@@ -26,7 +26,7 @@ tests/run_all.sh                 # every Godot test + smoke test, as CI runs it
 tests/run_all.sh inventory       # only tests matching a name
 python3 -m unittest discover -s tools/art/tests -t tools/art/tests   # art tool tests
 python3 tools/art/slice_sheets.py [manifest]                         # cut sheets into assets/
-python3 tools/art/paperdoll_layers.py                                # rebuild hero layers
+python3 tools/art/paperdoll_layers.py                                # rebuild the old hero's layers
 python3 tools/art/gemini_pass.py --dry-run                           # Gemini batch cost check (free)
 ```
 
@@ -58,12 +58,15 @@ python3 tools/art/gemini_pass.py --dry-run                           # Gemini ba
 - Ask Cory about the look first, run a small test, and show results before the full batch and
   before anything goes in game. Every run is paid: ask before redoing a sheet unless it came
   back broken.
+- Approved art is final: use it exactly as approved; never re-trim, recombine or remake it, and
+  post a plan before any new render, composite or preview.
 - Only make or repaint art the game uses. Never use old ChatGPT sheets from git history.
 
 ### Game rules
 The full list is `docs/game-rules.md`. The ones most often broken:
 - Weapons are always in the front hand, at the same angle to the forearm every frame. No ammo.
-- Under a hat each pose shows only its own hair, trimmed; never draw new hair.
+- Hair under hats follows Cory's hat/hair template sheets (one cell per hat type).
+- Hats and hoods end at the neck. Hands have fingers.
 - Characters, NPCs, ropes and ladders draw in front of land; no character or land shadows.
 - NPCs stand still at idle. Map names only at the top of the screen. Towns have no monsters.
 - 2-3 monster kinds per map, each kind in one zone; paths between towns stay Lv 10 or below.

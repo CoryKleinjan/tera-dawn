@@ -74,7 +74,8 @@
         870
       ],
       "art_px": 4.0,
-      "trim": false
+      "trim": false,
+      "save": false
     },
     "terrace_corner_right": {
       "crop": [
@@ -84,7 +85,8 @@
         870
       ],
       "art_px": 4.0,
-      "trim": false
+      "trim": false,
+      "save": false
     }
   }
 }
