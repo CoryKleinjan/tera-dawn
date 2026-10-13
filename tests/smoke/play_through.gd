@@ -129,6 +129,23 @@ func visit_shop() -> void:
 	shop.sell(tusk_slot)
 	await _ticks(1)
 	_check(Game.me.inventory.count_of(Content.item(&"boar_tusk")) == 4 and Game.me.shards == shards_now + Content.item(&"boar_tusk").sell_price, "selling one Boar Tusk pays its price")
+	# with the shop open, the Inventory window sells too: double-click, right-click or drag
+	var tusk: ItemDef = Content.item(&"boar_tusk")
+	var bag: TDInventoryWindow = world.hud.windows["inventory"]
+	bag.tab = ItemDef.Tab.ETC
+	bag._click(bag.slot_rect(tusk_slot).get_center(), MOUSE_BUTTON_LEFT, true)
+	await _ticks(1)
+	_check(Game.me.inventory.count_of(tusk) == 3, "double-clicking an item in the Inventory sells it while a shop is open")
+	bag._click(bag.slot_rect(tusk_slot).get_center(), MOUSE_BUTTON_RIGHT, false)
+	await _ticks(1)
+	_check(Game.me.inventory.count_of(tusk) == 2, "right-clicking it sells it too")
+	shop._drop_data(Vector2.ZERO, DragPayload.bag_item(ItemDef.Tab.ETC, tusk_slot))
+	await _ticks(1)
+	_check(Game.me.inventory.count_of(tusk) == 1, "dragging an item onto the shop sells it")
+	# gear asks first (only while the shop sells some)
+	if gear_line >= 0:
+		await _sell_gear_from_bag(bag, mira.def.shop.items[gear_line].item)
+	bag.tab = ItemDef.Tab.USE
 	Net.ask(&"req_sell_all_etc", [mira.def.id])
 	await _ticks(1)
 	_check(Game.me.inventory.free_slots(ItemDef.Tab.ETC) == Inventory.SLOTS, "Sell all Etc empties the Etc tab")
@@ -151,6 +168,23 @@ func visit_shop() -> void:
 	await _tap("move_up")
 	await _ticks(4)
 	_check(world.map.id == Character.START_MAP and absf(world.player.position.x - door.x) < 120, "the room's door leads back out beside the shop")
+
+## Double-clicks a piece of gear `bought` in the Inventory with a shop open: it asks, then sells on OK.
+func _sell_gear_from_bag(bag: TDInventoryWindow, bought: ItemDef) -> void:
+	var gear_slot := -1
+	for i in Inventory.SLOTS:
+		var st := Game.me.inventory.at(ItemDef.Tab.EQUIP, i)
+		if st and st.item == bought:
+			gear_slot = i
+	bag.tab = ItemDef.Tab.EQUIP
+	var shards_now := Game.me.shards
+	bag._click(bag.slot_rect(gear_slot).get_center(), MOUSE_BUTTON_LEFT, true)
+	await _ticks(1)
+	_check(world.hud.confirm.visible and Game.me.inventory.count_of(bought) == 1, "selling gear asks first")
+	world.hud.confirm.ok_button.pressed.emit()
+	await _ticks(1)
+	_check(Game.me.inventory.count_of(bought) == 0 and Game.me.shards == shards_now + bought.sell_price, "and sells it on OK")
+	bag.tab = ItemDef.Tab.USE
 
 ## Out of the village to the meadow.
 func go_to_meadow() -> void:
