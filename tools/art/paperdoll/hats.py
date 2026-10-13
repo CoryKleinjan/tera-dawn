@@ -379,7 +379,26 @@ def save_hair_cut(hero, name, head=False):
     save_strip(softened(strip), name, "haircut", "hair_cut")
     for style in HAIRSTYLES:  # (every style: just his own hair, cut to the hat's shape)
         if os.path.exists(os.path.join(LAYERS, f"hair_{style}.png")):
-            save_strip(softened(strip), name, "haircut", "hair_cuts", style)
+            cut = without_tail(strip, hero) if style in HAIR_TAILS else strip
+            save_strip(softened(cut), name, "haircut", "hair_cuts", style)
+
+
+def without_tail(strip, hero):
+    """A cut strip that also hides a tail hanging off his head (Cory 2026-10-13: the ponytail
+    itself doesn't show under a helmet): his hair more than HAIR_TAIL_OVER head radii off his
+    bald head, or below HAIR_CUT_LOW under its middle, in every frame."""
+    out = strip.copy()
+    fw, fh = hero.fw, hero.fh
+    yy, xx = np.mgrid[0:fh, 0:fw]
+    for i, (px, fi) in enumerate(zip(hero.frames, hero.info)):
+        paint = (px[..., 3] > 127) & (px[..., :3].max(2) >= HEAD_CUT_DARK * 255)
+        hx, hy = fi["head"]
+        head = flood(paint, (int(hx), int(hy)))
+        head[int(hy + fi["r"]):] = False  # (not his body below the chin)
+        near = (yy - hy) ** 2 + (xx - hx) ** 2 <= ((1 + HAIR_TAIL_OVER) * fi["r"]) ** 2  # (not an arm raised beside it)
+        keep = grown(head, max(1, round(HAIR_TAIL_OVER * fi["r"]))) & near & (yy <= hy + HAIR_CUT_LOW * fi["r"])
+        out[:, i * fw:(i + 1) * fw][~keep] = 255
+    return out
 
 
 def softened(strip, hard=None):
