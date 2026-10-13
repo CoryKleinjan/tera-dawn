@@ -1,6 +1,7 @@
 {
   "source": "art/source/anim_mossling.png",
   "scale": 0.157,
+  "detail": 2.56,
   "label_band": 0.2,
   "strip_labels": true,
   "save": false,

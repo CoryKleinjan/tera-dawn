@@ -4,47 +4,58 @@
 
 [sub_resource type="AtlasTexture" id="f0"]
 atlas = ExtResource("1_strip")
-region = Rect2(0, 0, 204, 153)
+region = Rect2(0, 0, 368, 277)
+metadata/art_density = 3.66
 
 [sub_resource type="AtlasTexture" id="f1"]
 atlas = ExtResource("1_strip")
-region = Rect2(204, 0, 204, 153)
+region = Rect2(368, 0, 368, 277)
+metadata/art_density = 3.66
 
 [sub_resource type="AtlasTexture" id="f2"]
 atlas = ExtResource("1_strip")
-region = Rect2(408, 0, 204, 153)
+region = Rect2(736, 0, 368, 277)
+metadata/art_density = 3.66
 
 [sub_resource type="AtlasTexture" id="f3"]
 atlas = ExtResource("1_strip")
-region = Rect2(612, 0, 204, 153)
+region = Rect2(1104, 0, 368, 277)
+metadata/art_density = 3.66
 
 [sub_resource type="AtlasTexture" id="f4"]
 atlas = ExtResource("1_strip")
-region = Rect2(816, 0, 204, 153)
+region = Rect2(1472, 0, 368, 277)
+metadata/art_density = 3.66
 
 [sub_resource type="AtlasTexture" id="f5"]
 atlas = ExtResource("1_strip")
-region = Rect2(1020, 0, 204, 153)
+region = Rect2(1840, 0, 368, 277)
+metadata/art_density = 3.66
 
 [sub_resource type="AtlasTexture" id="f6"]
 atlas = ExtResource("1_strip")
-region = Rect2(1224, 0, 204, 153)
+region = Rect2(2208, 0, 368, 277)
+metadata/art_density = 3.66
 
 [sub_resource type="AtlasTexture" id="f7"]
 atlas = ExtResource("1_strip")
-region = Rect2(1428, 0, 204, 153)
+region = Rect2(2576, 0, 368, 277)
+metadata/art_density = 3.66
 
 [sub_resource type="AtlasTexture" id="f8"]
 atlas = ExtResource("1_strip")
-region = Rect2(1632, 0, 204, 153)
+region = Rect2(2944, 0, 368, 277)
+metadata/art_density = 3.66
 
 [sub_resource type="AtlasTexture" id="f10"]
 atlas = ExtResource("1_strip")
-region = Rect2(2040, 0, 204, 153)
+region = Rect2(3680, 0, 368, 277)
+metadata/art_density = 3.66
 
 [sub_resource type="AtlasTexture" id="f11"]
 atlas = ExtResource("1_strip")
-region = Rect2(2244, 0, 204, 153)
+region = Rect2(4048, 0, 368, 277)
+metadata/art_density = 3.66
 
 [resource]
 animations = [{"frames": [{"duration": 1.0, "texture": SubResource("f0")}, {"duration": 1.0, "texture": SubResource("f1")}], "loop": true, "name": &"idle", "speed": 3.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f2")}, {"duration": 1.0, "texture": SubResource("f3")}, {"duration": 1.0, "texture": SubResource("f4")}, {"duration": 1.0, "texture": SubResource("f3")}], "loop": true, "name": &"move", "speed": 6.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f5")}, {"duration": 1.0, "texture": SubResource("f6")}, {"duration": 1.0, "texture": SubResource("f7")}], "loop": false, "name": &"attack", "speed": 3.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f8")}], "loop": true, "name": &"hurt", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f10")}, {"duration": 1.0, "texture": SubResource("f11")}], "loop": false, "name": &"die", "speed": 2.0}]

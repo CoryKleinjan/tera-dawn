@@ -116,5 +116,6 @@
   "inset": 2,
   "label_band": 0.2,
   "strip_labels": true,
-  "scale": 0.1553
+  "scale": 0.1553,
+  "detail": 2.56
 }

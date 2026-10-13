@@ -142,9 +142,12 @@ static func land_sink(z: float, surface: float) -> float:
 static func view_distance() -> float:
 	return (TDWorld.world_view().y / PX) / 2.0 / tan(deg_to_rad(FOV / 2.0))
 
-## Texels per art pixel of `texture` (ART_DENSITY; a built texture can carry its own as
-## the "art_density" meta). An animation frame counts as the strip it's cut from.
+## Texels per art pixel of `texture` (ART_DENSITY; a built texture or an animation frame can
+## carry its own as the "art_density" meta). An animation frame without one counts as the strip
+## it's cut from.
 static func art_density(texture: Texture2D) -> float:
+	if texture != null and texture.has_meta(&"art_density"):
+		return texture.get_meta(&"art_density")
 	if texture is AtlasTexture:
 		texture = (texture as AtlasTexture).atlas
 	if texture == null:
