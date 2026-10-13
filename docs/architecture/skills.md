@@ -50,7 +50,7 @@ Ranged and magic skills:
 - A weapon (`EquipDef`) names its `weapon_kind` (sword, dagger, bow, wand, staff, knuckle)
   and an optional `basic_attack` skill that replaces the plain swing (a bow's Shoot). Ranged
   weapons need no ammo.
-- `weapons` limits a skill to weapon kinds and `offhand` to what's worn in the shield slot
+- `weapons` limits a skill to weapon kinds and `offhand` to what's worn in the off-hand slot
   (a Thief's stars, a Pirate's pistol); `magic` uses Magic Attack (INT included) through
   `CharacterStats.magic_range` instead of the weapon.
 

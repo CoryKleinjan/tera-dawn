@@ -341,7 +341,7 @@ func advance(next: JobDef) -> String:
 ## Wears the first weapon among `next`'s gifts when the one worn isn't made for the new job
 ## (the Beginner's Training Sword), so a new Magician casts with the wand just handed over.
 ## A weapon of the job's own line that the player found stays on. The same goes for an
-## off-hand among the gifts (a Thief's stars, a Pirate's pistol) in the shield slot.
+## off-hand among the gifts (a Thief's stars, a Pirate's pistol) in the off-hand slot.
 func _wear_advance_weapon(next: JobDef) -> void:
 	for slot in [EquipDef.Slot.WEAPON, EquipDef.Slot.SHIELD]:
 		var worn := gear.weapon() if slot == EquipDef.Slot.WEAPON else gear.offhand()

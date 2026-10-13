@@ -5,7 +5,7 @@ extends ItemDef
 
 ## Kinds of gear. A slot kind can have several places on the body (two rings).
 enum Slot { WEAPON, HAT, TOP, BOTTOM, SHOES, GLOVES, CAPE, EARRINGS, PENDANT, RING, SHIELD }
-const SLOT_NAMES := ["Weapon", "Hat", "Top", "Bottom", "Shoes", "Gloves", "Cape", "Earrings", "Pendant", "Ring", "Shield"]
+const SLOT_NAMES := ["Weapon", "Hat", "Top", "Bottom", "Shoes", "Gloves", "Cape", "Earrings", "Pendant", "Ring", "Off-hand"]
 ## Slots whose pieces can have a worn_style cut, and the name its layers start with.
 const WORN_STYLE_PLACES := {Slot.TOP: "top", Slot.BOTTOM: "bottom", Slot.SHOES: "shoes"}
 
@@ -20,8 +20,8 @@ const OFFHAND_NAMES := {&"shield": "a shield", &"star": "throwing stars", &"book
 ## Replaces the plain attack while wielded (a bow's shot). Null keeps the basic attack.
 @export var basic_attack: SkillDef
 
-@export_group("Shield slot")
-## What a piece worn in the shield slot is: "shield", or a job's off-hand ("star" for a
+@export_group("Off-hand slot")
+## What a piece worn in the off-hand slot is: "shield", or a job's off-hand ("star" for a
 ## Thief's throwing stars, "book" for a Magician, "quiver" for an Archer, "pistol" for a
 ## Pirate). Skills can need one (SkillDef.offhand). Off-hands are gear, never used up.
 @export var offhand_kind: StringName = &"shield"

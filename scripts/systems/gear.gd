@@ -9,7 +9,7 @@ func weapon() -> EquipDef:
 	var w := character.equipment.at(&"weapon")
 	return w.equip_def() if w else null
 
-## What's worn in the shield slot (a shield, stars, a book, a quiver or a pistol), or null.
+## What's worn in the off-hand slot (a shield, stars, a book, a quiver or a pistol), or null.
 func offhand() -> EquipDef:
 	var o := character.equipment.at(&"shield")
 	return o.equip_def() if o else null

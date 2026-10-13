@@ -26,7 +26,7 @@ const PLACES_FOR := {
 const PLACE_NAMES := {
 	&"hat": "Hat", &"earrings": "Earrings", &"pendant": "Pendant", &"cape": "Cape",
 	&"top": "Top", &"weapon": "Weapon", &"gloves": "Gloves", &"bottom": "Bottom",
-	&"shield": "Shield", &"shoes": "Shoes", &"ring_1": "Ring", &"ring_2": "Ring",
+	&"shield": "Off-hand", &"shoes": "Shoes", &"ring_1": "Ring", &"ring_2": "Ring",
 }
 
 ## place -> ItemStack
