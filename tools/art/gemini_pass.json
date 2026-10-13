@@ -11875,29 +11875,6 @@
    }
   },
   {
-   "id": "greenbough_props_flat",
-   "prompts": null,
-   "batch": "Greenbough city: props sheet, tilted props redrawn flat",
-   "with": null,
-   "refs": [],
-   "save": "greenbough_props_flat.png",
-   "replaces": null,
-   "kind": "still",
-   "stands": true,
-   "cells": [
-    4,
-    3
-   ],
-   "anchor": null,
-   "size": "4K",
-   "note": "2026-10-13 thread 'Cities up to Dawnharbor's standard': eight props of greenbough_props came back with a slight 3/4 top. Only the redrawn cells get pasted into the sheet; target, arrow rack, hide frame and signpost stay as painted. Waiting on Cory's pick on the props card.",
-   "edit": {
-    "base": "/mnt/project-files/art-sheets/gemini-pass-1/greenbough_props.png",
-    "refs": [],
-    "text": "This is a sheet of twelve props for a 2D side-scrolling game. Eight of them are drawn at a slight three-quarter angle, so the top of each one shows. Redraw ONLY these eight as perfectly flat 2D side views at eye level, like an architect's elevation, keeping each one's design, size, colours, painted style and dark outline and its place on the sheet: the stack of logs (show only the round cut log ends facing us, stacked in a neat pyramid, no log length going back), the two hay bales (only their flat front faces, no top face), the mossy planter of ferns and flowers (only its front board, the plants rising above it, no top rim or inside visible), the barrel (straight side view, its top a straight horizontal line, no oval top), the log bench (only its front side, no seat top surface), the tree stump with the axe (straight side view, its cut top a straight horizontal line, no oval top), the wheelbarrow of firewood (a straight side view with one wheel, its tray a flat side panel, firewood ends showing above it), and the apple basket (straight side view, its rim a straight horizontal line, apples and mushrooms rising above it). Each stands on ONE flat straight horizontal bottom edge with nothing under it. Keep the archery target, the arrow rack, the hide drying frame and the signpost EXACTLY as they are. Keep the grid lines and the flat pure magenta #FF00FF background."
-   }
-  },
-  {
    "id": "greenbough_oak_decks_flat",
    "prompts": null,
    "batch": "Greenbough city: oak deck and bridge redrawn as flat side views",
