@@ -121,9 +121,11 @@ func wake(x: float, by: int) -> void:
 	aggro = AGGRO_TICKS
 	target = by
 
-func hurt(from_face: int, by: int) -> void:
+## It was hit by player `by`, knocked away towards `from_face` (-1 or 1), `force` times
+## the usual push (melee blows push harder).
+func hurt(from_face: int, by: int, force := 1.0) -> void:
 	hurt_t = HURT_TICKS
-	kx = from_face * KNOCKBACK
+	kx = from_face * KNOCKBACK * force
 	aggro = AGGRO_TICKS
 	target = by
 	show_hp = SHOW_HP_TICKS

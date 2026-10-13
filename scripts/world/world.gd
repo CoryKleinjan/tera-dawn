@@ -393,8 +393,8 @@ func remove_drop(id: int, by: int) -> void:
 
 # ---------- presentation (see TDWorldFx) ----------
 
-func show_skill(peer: int, skill: SkillDef, at: Vector2, face: int, lines: Array) -> void:
-	fx.show_skill(peer, skill, at, face, lines)
+func show_skill(peer: int, skill: SkillDef, at: Vector2, face: int, lines: Array, aim := 0) -> void:
+	fx.show_skill(peer, skill, at, face, lines, aim as Hitbox.Aim)
 
 func show_mob_shot(index: int, aim: Vector2) -> void:
 	fx.show_mob_shot(index, aim)
@@ -418,5 +418,5 @@ func sound_at(id: StringName, pos: Vector2) -> void:
 	Sound.play(id, SOUND_FADE_DB * k)
 
 ## Plays an effect. Effects that follow someone (heal, level up) follow `follow`, or you.
-func add_effect(def: EffectDef, pos: Vector2, face: int, follow: Node2D = null) -> void:
-	fx.add_effect(def, pos, face, follow)
+func add_effect(def: EffectDef, pos: Vector2, face: int, follow: Node2D = null, aim := Hitbox.Aim.AHEAD) -> void:
+	fx.add_effect(def, pos, face, follow, aim)

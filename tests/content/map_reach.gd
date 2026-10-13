@@ -103,7 +103,7 @@ func _sim(pos: Vector2, vel: Vector2, dir: int, drop_from: int) -> Array:
 			vel.x = clampf(vel.x + dir * TDPlayer.ACCEL_AIR, -TDPlayer.RUN_SPEED, TDPlayer.RUN_SPEED)
 		else:
 			vel.x *= TDPlayer.FRICTION_AIR
-		vel.y = minf(vel.y + TDPlayer.GRAVITY, TDPlayer.MAX_FALL)
+		vel.y = minf(vel.y + TDPlayer.gravity(vel.y), TDPlayer.MAX_FALL)
 		var prev_y := pos.y
 		pos.x = clampf(pos.x + vel.x, TDPlayer.EDGE, map.width - TDPlayer.EDGE)
 		pos.y += vel.y

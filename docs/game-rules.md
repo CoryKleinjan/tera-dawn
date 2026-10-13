@@ -29,6 +29,23 @@ update this page when one changes. Each zone's own look and music are in
 - Buffs and spells have no pose, just a flash in the skill's colour. Skill effects draw on the
   hero's layer.
 
+## Movement and combat feel
+
+- A bit metroidvania, like Hollow Knight: the hero starts and stops at once, steers freely in the
+  air, hops short when jump is let go early and falls faster than he rises. A full jump keeps its
+  height, so every map stays reachable.
+- No dash for the hero: each job gets its own movement skill instead (to come).
+- Attacks and most attack skills aim: up hits overhead, down (in the air only) hits below. Buffs
+  don't aim. A downward melee blow that meets a monster bounces him off it (pogo).
+- He can move while swinging and keeps facing the swing until it ends.
+- Melee hits feel heavy: longer hit-stop, a small push back on him, a harder knockback on the
+  monster, a camera kick on crits and kills. Ranged hits (arrows, stars, bullets, spells) stay
+  light.
+- Getting hit freezes him a beat, flashes the screen and knocks him away without steering.
+- New poses (up and down slashes) wait for the rebuilt paperdoll hero; until then the attack
+  pose plays with the swing effect turned up or down.
+- Job skills will be flashy and grand, like MapleStory.
+
 ## Gear
 
 - The game has no equipment for now: every item, icon and worn picture was removed to be redrawn
