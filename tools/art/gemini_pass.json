@@ -11847,6 +11847,55 @@
     ],
     "text": "The first image is a sheet of NPC villagers for Greenbough, the archers' forest village in my 2D side-scrolling game: two rows, each row the same characters standing in the same spots, with a label above each. Change ONLY column 4, the empty cell on the right of both rows: remove the faded ghost figure in the bottom one and paint a new villager in column 4 of both rows, the same character in the same calm standing pose in both rows, at the same size, chibi proportions and ground line as the other three. Label both cells KEEPER. The new villager is the village STORAGE KEEPER: a stout, friendly middle-aged woman with rosy cheeks and auburn hair in a thick braid, a moss-green dress with a brown leather apron full of pockets, a big iron ring of keys on her belt, holding a small iron-bound wooden chest in both hands. She matches the second image's art style and the other villagers on the sheet: soft cel-painted shading, rich warm colours in forest greens, browns and gold, dark brown outlines, painted cloth folds and worn patches. Hands are simple rounded fingerless mittens in the game's style. Keep columns 1 to 3 exactly as they are. Painted, not pixel art. Flat pure magenta #FF00FF background everywhere outside the characters and labels."
    }
+  },
+  {
+   "id": "greenbough_oak_decks",
+   "prompts": null,
+   "batch": "Greenbough city: oak-trunk deck and rope bridge (raised levels)",
+   "with": null,
+   "refs": [],
+   "save": "greenbough_oak_decks.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    2
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-13 thread 'Cities up to Dawnharbor's standard': Greenbough's raised levels (Cory OK'd 'forest floor plus two platforms up on giant oak trunks, ladders and one plank bridge anchored at both ends', 22:05Z). Each piece is a PlatformDef.look. Waiting on Cory's OK for the spend.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/greenbough-city/props_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/greenbough_city_archers_lodge.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint TWO separate pieces of walkable land for Greenbough Village, the archers' forest village among giant oaks in my 2D side-scrolling game, one above the other with a wide band of plain magenta between and around them. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture (bark, moss, wood grain, worn spots). The third image is the Archers' Lodge from the same village: match its palette (honey oak planks, warm brown bark, green moss and leaves), outline thickness and level of detail. TOP piece, filling most of the upper 60 percent of the canvas width-wise (about four times as wide as it is tall): a long raised wooden DECK held up by three huge, thick, straight oak trunk pillars standing on the ground, one at each end and one in the middle, their bark mossy, with a few leafy twigs; the deck is a flat walkway of thick honey-oak planks laid across a heavy log beam, its top edge one long perfectly straight level line, with a low plank railing only at its two far ends. The trunks reach straight down to ONE flat straight bottom edge, all three ending on the same ground line. BOTTOM piece, in the lower part of the canvas (about six times as wide as it is tall): a short plank ROPE BRIDGE seen from the side: a perfectly straight level walkway of wooden planks between two thick wooden posts, one at each end, with two hand ropes running from post to post along its whole length, tied firmly to both posts; nothing below the bridge. Strict rules: 1) Pure side view at eye level: no top surface of the deck or bridge planks visible, every walkway edge perfectly horizontal, every trunk and post perfectly vertical. 2) Nothing under the deck's bottom edge: no ground, grass, roots or shadow. 3) Nothing (rope, vine, cloth) ends loose in mid-air. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words. No buildings, no people. Flat pure magenta #FF00FF background everywhere outside the two pieces, with no magenta or pink inside them."
+   }
+  },
+  {
+   "id": "greenbough_props_flat",
+   "prompts": null,
+   "batch": "Greenbough city: props sheet, tilted props redrawn flat",
+   "with": null,
+   "refs": [],
+   "save": "greenbough_props_flat.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    4,
+    3
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-13 thread 'Cities up to Dawnharbor's standard': eight props of greenbough_props came back with a slight 3/4 top. Only the redrawn cells get pasted into the sheet; target, arrow rack, hide frame and signpost stay as painted. Waiting on Cory's pick on the props card.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/greenbough_props.png",
+    "refs": [],
+    "text": "This is a sheet of twelve props for a 2D side-scrolling game. Eight of them are drawn at a slight three-quarter angle, so the top of each one shows. Redraw ONLY these eight as perfectly flat 2D side views at eye level, like an architect's elevation, keeping each one's design, size, colours, painted style and dark outline and its place on the sheet: the stack of logs (show only the round cut log ends facing us, stacked in a neat pyramid, no log length going back), the two hay bales (only their flat front faces, no top face), the mossy planter of ferns and flowers (only its front board, the plants rising above it, no top rim or inside visible), the barrel (straight side view, its top a straight horizontal line, no oval top), the log bench (only its front side, no seat top surface), the tree stump with the axe (straight side view, its cut top a straight horizontal line, no oval top), the wheelbarrow of firewood (a straight side view with one wheel, its tray a flat side panel, firewood ends showing above it), and the apple basket (straight side view, its rim a straight horizontal line, apples and mushrooms rising above it). Each stands on ONE flat straight horizontal bottom edge with nothing under it. Keep the archery target, the arrow rack, the hide drying frame and the signpost EXACTLY as they are. Keep the grid lines and the flat pure magenta #FF00FF background."
+   }
   }
  ]
 }
