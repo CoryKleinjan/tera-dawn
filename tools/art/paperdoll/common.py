@@ -47,7 +47,7 @@ OUTLINE_LIGHT = 120   # of these, ones darker than this (mean of r, g, b)
 BACK_VIEW = ("rope1", "rope2", "ladder1", "ladder2", "climb_idle")
 # The face's expression per frame (anything not listed: normal).
 EXPRESSIONS = {"blink": "blink", "hit": "ouch", "hurt": "ouch", "faint1": "dizzy", "faint2": "dizzy"}
-HAIRSTYLES = ["tousled", "long", "ponytail", "twin_tails", "bun", "crest"]
+HAIRSTYLES = ["tousled", "ponytail"]  # one boy's and one girl's style for now (Cory 2026-10-13)
 FACES = ["bright", "determined", "rosy", "freckled", "cheeky"]
 WEAPON_KINDS = ["sword", "bow", "wand", "staff", "star", "knuckle", "gun"]
 
@@ -87,15 +87,6 @@ HELM_HUG, HELM_NUDGE = 1.06, 0.5  # hats.hugging: a helm's shell this times his 
 HELM_BAND, HELM_OPEN, HELM_SIZE = 0.75, 1.15, (0.8, 1.15)
 HAIR_CUT_HEAD, HAIR_CUT_REACH = 0.85, 0.5  # hats.save_hair_cut: each column's own edge over his head, nearby edges off it
 HAIR_CUT_CREST = 0.6  # ...on a helm, a stretch ending this far above the head's middle is a crest, not the edge
-HAIR_CUT_SPECK, HAIR_CUT_CRUMB = 0.15, 0.03  # ...and a patch smaller than this (head radii squared) off by itself, or this anywhere
-HAIR_CUT_TOUCH, HAIR_CUT_HELD = 4, 0.7  # ...a patch the cut chopped less than this share of it at the hat (within that) is loose
-HAIR_CUT_BODY = 2     # ...or one the cut reached not touching his head within this (frame pixels)
-HAIR_HEAD_ONLY = ("long", "ponytail", "twin_tails")  # ...hairstyles showing only the hair on his head under a hat (no tails or hanging locks)
-HAIR_HEAD_ONLY_OVAL = (1.1, 0.9, 0.55)  # ...inside this oval (half width, half height, raised: head radii), above his mouth
-HAIR_HEAD_ONLY_BACK = (1.15, 1.05, 0.0)  # ...or from behind, this one (his whole head, down to his neck)
-HAIR_FACE_FRONT = 0.0  # under a hat no hair sticks out past the front of his face: none off his head forward of this (head radii from its middle)
-HAIR_FACE_OVER = 0.08  # ...though it may reach this far past his head (head radii), so it covers it
-HAIR_HAT_POSE = "sit"  # ...and every pose wears this pose's hair under a hat (for those styles)
 HAIR_CUT_SOFT = 1.5   # ...its edge blurred this much (frame pixels), so the hair fades out under the hat
 HAIR_CUT_TUCK = 2      # ...and stops this many pixels inside the hat, so hair and head run on under its soft edge
 HAIR_CUT_LOW = 0.75    # ...and never below this far under the head's middle (head radii)
