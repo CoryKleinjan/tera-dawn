@@ -11251,6 +11251,32 @@
    }
   },
   {
+   "id": "skill_icons_9b",
+   "prompts": null,
+   "batch": "Class skill icons (Shoulder Bash, Rolling Dash redo)",
+   "with": null,
+   "refs": [],
+   "save": "skill_icons_9b.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 class skills thread: redo of skill_icons_9, which came back broken (both badges ran off the bottom of the canvas) and showed a whole arm and fist for Shoulder Bash. 2x2 sheet so each badge has room: two takes of each icon, Cory picks.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x2.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/skill_icons_test.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint FOUR separate skill icons for my 2D side-scrolling game, laid out in 2 rows of 2, each a square badge centred in its own quarter of the canvas and fully inside it (no badge touches or runs off any canvas edge), all the same size, with a wide band of plain magenta (at least a tenth of the canvas) around and between them, not touching. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished skill icons from the same set: match their badge shape, frame thickness, metal trim, inner background glow, painting style and level of detail exactly, with a bold dark brown outline like the NPCs'. Each icon is a square badge with softly rounded corners: a thick painted frame with a thin bright metal trim, and inside it a darker painted background of the frame's colour with a soft glow. Top left and bottom left are two takes of Shoulder Bash (frame warm brown, copper trim): Show ONLY a shoulder, no forearm, no hand, no fist, no head, no face, no body, no person: a brown leather-padded tunic shoulder seen from the side, thrusting forward from the left and slamming into a bright golden-white impact burst on the right, with small rock chips and a puff of dust. The shoulder is big and bold, filling most of the badge, lit brightly so it reads clearly when tiny; the bottom-left take shows the padded shoulder closer up, its round leather pad and stitching filling the badge. Top right and bottom right are two takes of Rolling Dash (frame rich gold, bright gold trim): ONLY a big curling blue-green sea wave sweeping forward from left to right, white foam on its crest, with a brown leather pirate tricorn hat tumbling through the curl; no head, no face, no person. Bold and simple, filling most of the badge; the bottom-right take shows the wave curling the other way with the hat higher in the curl. Strict rules: 0) Exactly FOUR square badges, each wholly inside its quarter, no labels. 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) No letters, words or numbers anywhere. 3) Flat pure magenta #FF00FF background everywhere outside the badges."
+   }
+  },
+  {
    "id": "skill_icons_3",
    "prompts": null,
    "batch": "Class skill icons (set)",
