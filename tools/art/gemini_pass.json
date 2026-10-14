@@ -11643,6 +11643,238 @@
     ],
     "text": "The first image is an empty magenta canvas. On it, paint ONE building for Lanternfall, the thieves' town in my 2D side-scrolling game: a city of lanterns that is always at dusk, sly, playful, mysterious but charming, never spooky. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn plaster, chipped brick, slight colour variation between beams and tiles). The third image is the THIEVES' DEN I want, but it is drawn at an angle, which is wrong for my game. Repaint the same building with the same materials, colours and details: smoky ochre plaster between dark soot-stained timber beams, a ground floor of dark red-brown brick, slate-blue roof tiles, a crooked brick chimney, small dormer, golden diamond-pane windows with shutters, the heavy studded door with a peephole grille under a plum cloth awning, two iron wall lanterns beside the door, the teal banner with a key, and the round sign with a black mask and crossed daggers on an iron bracket. The fourth image is another house from the same town that IS drawn the right way: copy its viewpoint exactly. Like it, the new Den is a pure flat FRONT ELEVATION, like an architect's drawing of one wall: ONE gable end faces the viewer straight on, so the roof is seen only as a symmetric triangle outline with tiles along its two edges, and no side wall, corner or roof slope going back is visible at all. The Den is a tall narrow three-storey townhouse, taller than it is wide, each upper storey jutting out slightly over the one below (shown only as a ledge with small brackets, all in the same flat plane), with the door centred at ground level. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, no side walls, every horizontal line level and every wall edge vertical; left and right outlines of each storey are straight vertical lines. 2) The bottom of the whole building is ONE straight horizontal line: its brick base reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, cobbles, ground line, ground patch, grass, people or shadow. 3) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. No cream plaster. Nothing (rope, cloth, chain) ends loose in mid-air. No glow halo spilling onto the background. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
    }
+  },
+  {
+   "id": "lanternfall_city_store",
+   "prompts": null,
+   "batch": "Lanternfall city: store (new building)",
+   "with": null,
+   "refs": [],
+   "save": "lanternfall_city_store.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-14 thread 'Lanternfall up to Dawnharbor's standard': Cory approved the flat Thieves' Den and the backdrop, and said 'Yes' (00:15Z) to the full Lanternfall batch (~$0.85). Lanternfall's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/lanternfall-city/building_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/lanternfall_city_thieves_den_flat.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Lanternfall, the thieves' town in my 2D side-scrolling game: a city of lanterns that is always at dusk, sly, playful, mysterious but charming, never spooky; tall narrow crooked half-timbered houses packed along cobbled alleys, cool lavender dusk light against warm golden lantern glow. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn plaster, chipped brick, slight colour variation between beams and tiles). The third image is the Thieves' Den from the same town: match its style, palette (smoky ochre plaster, dark soot-stained timber beams, dark red-brown brick, slate-blue roof tiles, iron lanterns, plum and teal cloth), outline thickness, level of detail and flat front viewpoint exactly, so they clearly belong to the same street. The new building is the LANTERNFALL STORE, the town's general store, a little wider than it is tall and smaller than the Den: a two-storey half-timbered shop of smoky ochre plaster and dark beams over a dark brick ground floor, a slate-blue roof with one gable facing the viewer and a small chimney; a centred wooden door at ground level with a small round window in it; a wide bay-less shop window on each side of the door with small golden panes and crates of goods stacked behind the glass, under a striped teal-and-plum cloth awning fixed flat to the wall; a wooden sign hanging from an iron bracket by the upper window, painted with a sack and a gold coin (a picture only, no writing), its chains attached at both ends; one iron wall lantern by the door. Strict rules: 1) Pure flat FRONT ELEVATION at eye level, like the third image: only the front face shows, the roof seen only as its outline, no roof surface seen from above, no side walls or corners going back, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: everything reaches down to the same ground line, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, cobbles, ground line, ground patch, grass, people or shadow. 3) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. No cream plaster and no bright blue glazed tiles (that is a different town). Nothing (rope, cloth, chain) ends loose in mid-air. No glow halo spilling onto the background. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "lanternfall_city_inn",
+   "prompts": null,
+   "batch": "Lanternfall city: inn (new building)",
+   "with": null,
+   "refs": [],
+   "save": "lanternfall_city_inn.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-14 thread 'Lanternfall up to Dawnharbor's standard': Cory approved the flat Thieves' Den and the backdrop, and said 'Yes' (00:15Z) to the full Lanternfall batch (~$0.85). Lanternfall's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/lanternfall-city/building_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/lanternfall_city_thieves_den_flat.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Lanternfall, the thieves' town in my 2D side-scrolling game: a city of lanterns that is always at dusk, sly, playful, mysterious but charming, never spooky; tall narrow crooked half-timbered houses packed along cobbled alleys, cool lavender dusk light against warm golden lantern glow. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn plaster, chipped brick, slight colour variation between beams and tiles). The third image is the Thieves' Den from the same town: match its style, palette (smoky ochre plaster, dark soot-stained timber beams, dark red-brown brick, slate-blue roof tiles, iron lanterns, plum and teal cloth), outline thickness, level of detail and flat front viewpoint exactly, so they clearly belong to the same street. The new building is the CROOKED LANTERN INN, a cosy three-storey inn, about as wide as it is tall: two gables side by side facing the viewer, the left one a little taller and leaning a touch, smoky ochre plaster between dark beams over a dark brick ground floor, slate-blue roofs with two leaning brick chimneys; a wide arched wooden double door in the middle of the ground floor with two warm glowing windows on each side; upper windows with flower boxes of small purple flowers fixed to the sills; a hanging sign on an iron bracket painted with a lantern and a bed (pictures only, no writing), chains attached at both ends; a short string of small golden lanterns hanging along the front under the eaves, fixed at both ends to the wall. Strict rules: 1) Pure flat FRONT ELEVATION at eye level, like the third image: only the front face shows, the roof seen only as its outline, no roof surface seen from above, no side walls or corners going back, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: everything reaches down to the same ground line, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, cobbles, ground line, ground patch, grass, people or shadow. 3) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. No cream plaster and no bright blue glazed tiles (that is a different town). Nothing (rope, cloth, chain) ends loose in mid-air. No glow halo spilling onto the background. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "lanternfall_city_clock_tower",
+   "prompts": null,
+   "batch": "Lanternfall city: clock tower (new building)",
+   "with": null,
+   "refs": [],
+   "save": "lanternfall_city_clock_tower.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-14 thread 'Lanternfall up to Dawnharbor's standard': Cory approved the flat Thieves' Den and the backdrop, and said 'Yes' (00:15Z) to the full Lanternfall batch (~$0.85). Lanternfall's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/lanternfall-city/building_tall_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/lanternfall_city_thieves_den_flat.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Lanternfall, the thieves' town in my 2D side-scrolling game: a city of lanterns that is always at dusk, sly, playful, mysterious but charming, never spooky; tall narrow crooked half-timbered houses packed along cobbled alleys, cool lavender dusk light against warm golden lantern glow. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn plaster, chipped brick, slight colour variation between beams and tiles). The third image is the Thieves' Den from the same town: match its style, palette (smoky ochre plaster, dark soot-stained timber beams, dark red-brown brick, slate-blue roof tiles, iron lanterns, plum and teal cloth), outline thickness, level of detail and flat front viewpoint exactly, so they clearly belong to the same street. The new building is the LANTERNFALL CLOCK TOWER, much taller than it is wide: a tall narrow square tower of dark red-brown brick with dark timber bands, a big round clock face near the top with a cream-gold dial, dark iron hands and simple tick marks (no numbers, no letters), above it an open belfry arch with a small bronze bell, then a steep pointed slate-blue spire with a little iron weathervane shaped like a key; a small arched wooden door at the bottom, centred; a few narrow glowing slit windows up the shaft; two iron wall lanterns by the door. Strict rules: 1) Pure flat FRONT ELEVATION at eye level, like the third image: only the front face shows, the roof seen only as its outline, no roof surface seen from above, no side walls or corners going back, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: everything reaches down to the same ground line, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, cobbles, ground line, ground patch, grass, people or shadow. 3) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. No cream plaster and no bright blue glazed tiles (that is a different town). Nothing (rope, cloth, chain) ends loose in mid-air. No glow halo spilling onto the background. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "lanternfall_lamp_post",
+   "prompts": null,
+   "batch": "Lanternfall city: lamp post",
+   "with": null,
+   "refs": [],
+   "save": "lanternfall_lamp_post.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-14 thread 'Lanternfall up to Dawnharbor's standard': Cory approved the flat Thieves' Den and the backdrop, and said 'Yes' (00:15Z) to the full Lanternfall batch (~$0.85). Lanternfall's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/lanternfall-city/building_tall_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/lanternfall_city_thieves_den_flat.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE lamp post for Lanternfall, the thieves' town in my 2D side-scrolling game: a city of lanterns that is always at dusk, sly, playful, mysterious but charming, never spooky; tall narrow crooked half-timbered houses packed along cobbled alleys, cool lavender dusk light against warm golden lantern glow. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn plaster, chipped brick, slight colour variation between beams and tiles). The third image is the Thieves' Den from the same town: match its style, palette (smoky ochre plaster, dark soot-stained timber beams, dark red-brown brick, slate-blue roof tiles, iron lanterns, plum and teal cloth), outline thickness, level of detail and flat front viewpoint exactly, so they clearly belong to the same street. The lamp: a tall slim black wrought-iron post, about two and a half times as tall as a person, on a small square dark brick footing, with a curled iron scroll near the top and an iron lantern with small panes set firmly ON TOP of the post under a little pointed cap. The lantern is lit with a warm golden flame. Nothing hangs from it. Strict rules: 1) Pure side view at eye level, perfectly upright and centred. 2) The bottom of the footing is ONE flat straight horizontal edge. No ground, shadow or cobbles under it. 3) The lamp fills most of the canvas height with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words. No glow halo spilling onto the background. Flat pure magenta #FF00FF background everywhere outside the lamp. Do not draw any characters."
+   }
+  },
+  {
+   "id": "lanternfall_props",
+   "prompts": null,
+   "batch": "Lanternfall city: props sheet",
+   "with": null,
+   "refs": [],
+   "save": "lanternfall_props.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    4,
+    3
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-14 thread 'Lanternfall up to Dawnharbor's standard': Cory approved the flat Thieves' Den and the backdrop, and said 'Yes' (00:15Z) to the full Lanternfall batch (~$0.85). Lanternfall's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/lanternfall-city/props_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/lanternfall_city_thieves_den_flat.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint a sheet of TWELVE separate props for Lanternfall, the thieves' town in my 2D side-scrolling game: a city of lanterns that is always at dusk, sly, playful, mysterious but charming, never spooky; tall narrow crooked half-timbered houses packed along cobbled alleys, cool lavender dusk light against warm golden lantern glow, laid out in 3 rows of 4, evenly spaced, each prop centred in its own quarter-by-third area of the canvas with a wide band of plain magenta around it, and no prop touching another. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn plaster, chipped brick, slight colour variation between beams and tiles). The third image is the Thieves' Den from the same town: match its style, palette (smoky ochre plaster, dark soot-stained timber beams, dark red-brown brick, slate-blue roof tiles, iron lanterns, plum and teal cloth), outline thickness, level of detail and flat front viewpoint exactly, so they clearly belong to the same street. The twelve props, in reading order: Row 1: 1) a stack of three wooden crates, 2) a wooden rain barrel with iron hoops, 3) a small market stall with a plum-and-teal striped cloth roof on two posts and a counter of bread and apples, 4) a pile of burlap sacks. Row 2: 5) a short wooden ladder-backed bench, 6) a black iron street sign post with a blank hanging board on chains attached at both ends, 7) a two-wheeled hand cart with a canvas-covered load, 8) a stone flower trough with purple flowers. Row 3: 9) a stack of wooden kegs, 10) a small wooden notice board on two legs with blank paper notes pinned to it, 11) a tall iron birdcage-style lantern on a short stand, lit, 12) a dark brick chimney pot cluster on a small brick base. Strict rules: 1) Every prop in pure FLAT SIDE VIEW at eye level, like an elevation drawing: only the front face shows, NO top surface, lid, seat top or box top visible, every edge level or vertical; standing upright on its own flat bottom edge, sized as it would be next to a person (barrels and crates about waist high). 2) No ground, shadow, cobbles or base under any prop. 3) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. 4) No letters, numbers, words or labels anywhere, no grid lines, no borders and no frames. 5) Nothing (rope, cloth, chain) ends loose in mid-air. Flat pure magenta #FF00FF background everywhere outside the props, with no magenta or pink anywhere inside them. Do not draw any characters."
+   }
+  },
+  {
+   "id": "lanternfall_walkways",
+   "prompts": null,
+   "batch": "Lanternfall city: balcony walkway and rooftop lane (raised levels)",
+   "with": null,
+   "refs": [],
+   "save": "lanternfall_walkways.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    2
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-14 thread 'Lanternfall up to Dawnharbor's standard': Cory approved the flat Thieves' Den and the backdrop, and said 'Yes' (00:15Z) to the full Lanternfall batch (~$0.85). Lanternfall's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/lanternfall-city/props_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/lanternfall_city_thieves_den_flat.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint TWO separate pieces of walkable land for Lanternfall, the thieves' town in my 2D side-scrolling game: a city of lanterns that is always at dusk, sly, playful, mysterious but charming, never spooky; tall narrow crooked half-timbered houses packed along cobbled alleys, cool lavender dusk light against warm golden lantern glow, one above the other with a wide band of plain magenta between and around them. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn plaster, chipped brick, slight colour variation between beams and tiles). The third image is the Thieves' Den from the same town: match its style, palette (smoky ochre plaster, dark soot-stained timber beams, dark red-brown brick, slate-blue roof tiles, iron lanterns, plum and teal cloth), outline thickness, level of detail and flat front viewpoint exactly, so they clearly belong to the same street. TOP piece, filling most of the upper half of the canvas width-wise (about four times as wide as it is tall): a long raised timber BALCONY WALKWAY held up by three straight square pillars of dark red-brown brick standing on the ground, one at each end and one in the middle; the walkway is a thick dark timber beam with plank edging, its top edge one long perfectly straight level line, with a low black iron railing only at its two far ends, and two small iron lanterns hanging on short chains under the beam, fixed at the top. The three pillars reach straight down to ONE flat straight bottom edge, all ending on the same ground line. BOTTOM piece, in the lower part of the canvas (about six times as wide as it is tall): a ROOFTOP LANE: a long level strip of dark brick wall topped with a flat walkway of stone slabs, with a row of slate-blue roof tiles running along the front face under the slabs like an eave, and two short brick chimney pots standing on top at the ends; its top edge perfectly straight and level, its bottom edge one straight line. Strict rules: 1) Pure side view at eye level: no top surface of the walkways visible, every walkway edge perfectly horizontal, every pillar perfectly vertical. 2) Nothing under the bottom edges: no ground, grass, cobbles or shadow. 3) Nothing (rope, cloth, chain) ends loose in mid-air. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words. No buildings, no people. Flat pure magenta #FF00FF background everywhere outside the two pieces, with no magenta or pink inside them."
+   }
+  },
+  {
+   "id": "lanternfall_townsfolk",
+   "prompts": null,
+   "batch": "Lanternfall city: three townsfolk and the storage keeper",
+   "with": null,
+   "refs": [],
+   "save": "lanternfall_townsfolk.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    4,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-14 thread 'Lanternfall up to Dawnharbor's standard': Cory approved the flat Thieves' Den and the backdrop, and said 'Yes' (00:15Z) to the full Lanternfall batch (~$0.85). Lanternfall's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/lanternfall-city/townsfolk_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "art/source/npcs_lanternfall.png"
+    ],
+    "text": "The first image is an empty sheet for NPC characters in my 2D side-scrolling game: 4 columns and 2 rows of equal cells divided by thin dark lines. The second image shows four of my game's NPC characters, and the third image shows the NPCs who already live in Lanternfall, the thieves' town at dusk; the new ones must look like they belong with them, at the same size and chibi proportions: soft cel-painted shading, rich colours in plum, teal, navy, ochre and warm gold, dark brown outlines, painted cloth folds and worn patches. Do NOT copy any character from the second or third image. Paint four NEW townsfolk of Lanternfall, one per column, the same character in both rows of each column, standing still in the same calm pose in both rows (the bottom row may blink): Column 1: a cheeky lamplighter girl in a teal coat and a flat cap, carrying a long brass lamplighter's pole upright beside her. Column 2: a dapper old card sharp with a grey moustache, a plum waistcoat and a top hat, shuffling a deck of cards. Column 3: a small street urchin boy in a patched ochre jacket and too-big boots, holding an apple behind his back with a sly grin. Column 4: the town's STORAGE KEEPER, a sharp-eyed middle-aged locksmith woman with short dark hair and round spectacles, a navy leather apron full of little tools, a big ring of iron keys on her belt, holding a small padlocked iron-bound chest. Rules: every character stands upright, facing slightly toward the viewer, both feet flat on one level ground line, full body inside its cell. Hands are simple rounded fingerless mittens in the game's style. No labels, letters or words anywhere. Keep the thin dividing lines. Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background everywhere outside the characters and lines."
+   }
+  },
+  {
+   "id": "room_lanternfall_store_wall",
+   "prompts": null,
+   "batch": "Lanternfall room back wall: store (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_lanternfall_store_wall.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-14 thread 'Lanternfall up to Dawnharbor's standard': Cory approved the flat Thieves' Den and the backdrop, and said 'Yes' (00:15Z) to the full Lanternfall batch (~$0.85). Lanternfall's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "art/source/room_lanternfall_wall.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ],
+    "text": "The first image is one repeating tile of the back wall inside a building in Lanternfall, the thieves' town that is always at dusk. Keep the thick horizontal wooden beam at the top, the vertical wooden post in the middle, and the carved dark wooden wainscot with waves and a crescent moon along the bottom EXACTLY as they are, in the same places. Repaint ONLY the wall panels between them, and the hanging scroll and the windows. Paint the panels as smoky ochre plaster with a few cracks and worn patches showing dark brick, lit by cool lavender dusk light with warm golden lamplight. Remove the hanging scroll. On each side of the post, one tall window with small panes and a deep wooden sill, showing a view of crooked slate rooftops and glowing windows under a navy-to-amber dusk sky. Apart from the windows the panels are plain and empty: no shelves, no goods, nothing hanging. Everything is seen straight from the front, flat against the wall, with no perspective, no top faces and no side depth; nothing ends loose in mid-air. The left and right edges of the image must join seamlessly when the tile is repeated side by side. Paint in the same style as the second image and the rest of the wall: rich warm colours, strong light and shadow with bright highlights, visible painted texture at a fairly chunky brush scale, a thin dark outline. Painted, never pixel art. No letters or words. Same image size and layout."
+   }
+  },
+  {
+   "id": "room_lanternfall_den_wall",
+   "prompts": null,
+   "batch": "Lanternfall room back wall: Thieves' Den (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_lanternfall_den_wall.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-14 thread 'Lanternfall up to Dawnharbor's standard': Cory approved the flat Thieves' Den and the backdrop, and said 'Yes' (00:15Z) to the full Lanternfall batch (~$0.85). Lanternfall's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "art/source/room_lanternfall_wall.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ],
+    "text": "The first image is one repeating tile of the back wall inside a building in Lanternfall, the thieves' town that is always at dusk. Keep the thick horizontal wooden beam at the top, the vertical wooden post in the middle, and the carved dark wooden wainscot with waves and a crescent moon along the bottom EXACTLY as they are, in the same places. Repaint ONLY the wall panels between them, and the hanging scroll and the windows. Paint the panels as smoky ochre plaster with a few cracks and worn patches showing dark brick, lit by cool lavender dusk light with warm golden lamplight. Remove the hanging scroll and the windows. On the left panel, a round dark wooden plaque with a black mask over two crossed daggers, fixed flat to the wall. On the right panel, a long teal cloth banner painted with a big iron key (a picture only, no writing), hanging flat against the plaster and fixed at top and bottom, with one iron wall lantern beside it, lit. Everything is seen straight from the front, flat against the wall, with no perspective, no top faces and no side depth; nothing ends loose in mid-air. The left and right edges of the image must join seamlessly when the tile is repeated side by side. Paint in the same style as the second image and the rest of the wall: rich warm colours, strong light and shadow with bright highlights, visible painted texture at a fairly chunky brush scale, a thin dark outline. Painted, never pixel art. No letters or words. Same image size and layout."
+   }
   }
  ]
 }
