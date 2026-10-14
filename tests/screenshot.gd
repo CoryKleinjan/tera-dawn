@@ -15,10 +15,9 @@ func _shot(name: String) -> void:
 	var w := get_child(0) as TDWorld
 	if w:
 		w.player.inv = 100000 if w.started else 0
-	# Freeze the game and show the player, who may be mid-blink from their invincibility.
+	# Freeze the game for the shot.
 	get_tree().paused = true
 	if w:
-		w.player.rig.set_opacity(1.0)
 		# windows still growing in and speech still typing out show finished
 		for win: TDWindow in w.hud.windows.values():
 			win.settle()
@@ -64,7 +63,7 @@ func _run() -> void:
 	DirAccess.make_dir_recursive_absolute(out)
 	var only := args[1] if args.size() > 1 else ""
 	Net.save_dir = "user://screenshot_characters"
-	TestGear.install()  # the game has no gear for now; the shots dress the hero in the test gear
+	TestGear.install()  # the game has no gear for now; the shots use the test gear
 	var world: TDWorld = load("res://scenes/world.tscn").instantiate()
 	add_child(world)
 	await _frames(10)
@@ -79,7 +78,6 @@ func _run() -> void:
 		world.hud.title.character_select.create_button.pressed.emit()
 		var creator := world.hud.title.creator
 		creator.name_field.text = "Dawnling"
-		creator.step("look:%d" % LookDef.Kind.HAIR, 1)
 		creator.step("outfit:%d" % EquipDef.Slot.TOP, 1)
 		await _frames(10)
 		await _shot("creator")
@@ -121,28 +119,6 @@ func _run() -> void:
 		p.face = -1
 		await _physics(40)
 		await _shot("meadow")
-	if only == "" or only == "hero":
-		# The hero just after the blow with each kind of weapon: the weapon in his fist, its
-		# own motion, and a swung blade's streak.
-		_teleport(world, Vector2(1120, 620))
-		p.face = 1
-		var kept: ItemStack = ch.equipment.take(&"weapon")
-		for id in [&"dawn_blade", &"willow_bow", &"oak_staff", &"rusty_dagger", &"iron_knuckle"]:
-			ch.equipment.take(&"weapon")
-			ch.equipment.put(&"weapon", ItemStack.exact(Content.item(id)))
-			ch.recalc()
-			_me().dirty_character = true
-			await _physics(60)
-			p.action_anim = WeaponStyle.animation_for(ch.look(), &"attack")
-			p.action_t = 40
-			p._swing = true
-			await _physics(17)
-			await _shot("hero_" + String(Paperdoll.kind_of(Content.item(id) as EquipDef)))
-		ch.equipment.take(&"weapon")
-		if kept:
-			ch.equipment.put(&"weapon", kept)
-		ch.recalc()
-		_me().dirty_character = true
 	if only == "" or only == "action":
 		# Dawn Slash into a pack of Dewlings on the second platform.
 		_teleport(world, Vector2(230, 500))
@@ -160,57 +136,6 @@ func _run() -> void:
 		Input.action_release("quick_1")
 		await _physics(3)
 		await _shot("action")
-	if only == "" or only == "lookbook":
-		# Four players with their own looks, in the warrior's starter gear or none: in the
-		# map he starts on, then close up in menus (the equipment window's dressed hero).
-		var meadow: MapInstance = _me().map
-		var stand := _me().position
-		p.face = -1
-		world.scenes.skip()  # (the intro cutscene would letterbox the shot)
-		await _physics(240) # let the level-up banner pass
-		var outfits := [
-			["Bramble", "hair_ponytail", []],
-			["Garrick", "hair_tousled", ["squire_helm", "squire_jerkin", "squire_trousers"]],
-			["Ondine", "hair_ponytail", ["squire_helm", "squire_trousers"]],
-			["Wren", "hair_tousled", ["squire_jerkin", "squire_trousers"]],
-		]
-		var models := []
-		for i in outfits.size():
-			var o: Array = outfits[i]
-			var made := NewCharacter.new()
-			made.appearance.hair = StringName(o[1])
-			var c := Character.create(o[0], Character.START_JOB, made)
-			for id in o[2]:
-				var e: EquipDef = Content.item(StringName(id))
-				c.equipment.put(c.equipment.place_for(e), ItemStack.exact(e))
-			var m := SimPlayer.new(500 + i, c)
-			meadow.add_player(m, stand.x + 90.0 + i * 80.0)
-			m.position.y = stand.y
-			m.face = -1 if i % 2 else 1
-			models.append(m)
-		await _physics(30)
-		await _shot("lookbook")
-		var sheet := ColorRect.new()
-		sheet.color = Palette.NIGHT
-		sheet.size = TDWorld.VIEW
-		world.hud.add_child(sheet)
-		for i in models.size():
-			for j in 2:
-				var view := PaperdollView.new()
-				view.position = Vector2(10 + i * 188, 20 + j * 260)
-				view.size = Vector2(184, 240)
-				view.max_zoom = 3.0
-				view.set_look(models[i].character.look())
-				view.facing = 1 if j == 0 else -1
-				view.play(&"idle" if j == 0 else &"walk")
-				view.playing = false
-				sheet.add_child(view)
-		await _frames(3)
-		await _shot("lookbook_close")
-		sheet.queue_free()
-		for m in models:
-			meadow.remove_player(m)
-		await _physics(3)
 	if only == "" or only == "village":
 		# The elder and shopkeeper by the village, with a few lines in the log and the chat.
 		var elder := world.npcs()[0]

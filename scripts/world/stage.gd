@@ -20,8 +20,8 @@ const TEXEL := 1.25
 ## Texels per art pixel of the art in these folders. tools/art/slice_sheets.py cuts every
 ## sheet at 2 texels per art pixel ("art_px" land at "density" 2, everything else at "detail" 2)
 ## with smooth edges, so outlines stay clean on a 1080p screen. The art is painted, not pixel art:
-## "art pixel" is just the unit the game sizes it in. Art anywhere else (the hero's layers, the
-## UI) has one texel per art pixel.
+## "art pixel" is just the unit the game sizes it in. Art anywhere else (the UI) has one texel
+## per art pixel.
 const ART_DENSITY := {
 	"res://assets/sprites/npcs/": 2.0,
 	"res://assets/sprites/monsters/": 2.0,
@@ -75,12 +75,8 @@ const Z_EFFECT := 0.8
 ## Render priorities. See-through things (every sprite's soft edge) are drawn back to front, by
 ## how far away the middle of each one is, which goes wrong for a tall building behind a short
 ## character. Priority comes first: the scenery, NPCs, monsters and drops are drawn at 0, then
-## other players' heroes, then yours, then effects. A hero takes HERO_PRIORITIES priorities, one
-## per layer (PaperdollSprite).
-const HERO_PRIORITIES := 60
-const PRIORITY_OTHER_PLAYER := 1
-const PRIORITY_PLAYER := PRIORITY_OTHER_PLAYER + HERO_PRIORITIES
-const PRIORITY_EFFECT := PRIORITY_PLAYER + HERO_PRIORITIES
+## effects.
+const PRIORITY_EFFECT := 1
 ## Seconds a map change takes to fade out (and again to fade in).
 const FADE_TIME := 0.25
 ## Seconds a screen flash takes to fade (to a hundredth of its strength).
@@ -195,12 +191,12 @@ static func style_sprite(s: SpriteBase3D, texel := TEXEL, shaded := true) -> voi
 	s.double_sided = true
 
 ## A sprite whose origin is the bottom centre of its texture, `texel` game pixels per art
-## pixel (see art_density).
+## pixel (see art_density). No texture (an item whose art is being remade) makes an empty one.
 static func sprite(texture: Texture2D, texel := TEXEL, shaded := true) -> Sprite3D:
 	var s := Sprite3D.new()
 	s.texture = texture
 	style_sprite(s, texel / art_density(texture), shaded)
-	s.offset = Vector2(0, texture.get_height() / 2.0)
+	s.offset = Vector2(0, texture.get_height() / 2.0 if texture else 0.0)
 	return s
 
 ## Unshaded, soft-edged sprite with HDR colour so it blooms (glows, effects, the sun).

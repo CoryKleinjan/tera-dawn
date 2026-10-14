@@ -98,14 +98,14 @@ func _save_order(list: Array[String]) -> void:
 	if f:
 		f.store_string(JSON.stringify(list))
 
-## The characters as character select shows them ({name, level, job, look}), at most
+## The characters as character select shows them ({name, level, job}), at most
 ## MAX_CHARACTERS, in the order they were made.
 func slots() -> Array:
 	var out := []
 	for n in names():
 		var c := load_character(n)
 		if c:
-			out.append({"name": c.name, "level": c.level, "job": c.job.display_name, "look": c.look()})
+			out.append({"name": c.name, "level": c.level, "job": c.job.display_name})
 		if out.size() >= MAX_CHARACTERS:
 			break
 	return out

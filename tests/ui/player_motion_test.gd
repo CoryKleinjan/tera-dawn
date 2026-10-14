@@ -1,6 +1,6 @@
 extends TestCase
-## Your own character's animation in a running game: an attack plays your weapon's motion,
-## then a ready stance; holding a direction long enough picks up pace but keeps the walk; a hop lands
+## What your own character is doing (the animation name everyone else is told) in a running
+## game: an attack makes the skill's motion, then a ready stance; holding a direction long enough picks up pace but keeps the walk; a hop lands
 ## without the landing crouch; buffs make no motion.
 ## Runs on Dawnrise Meadow's open floor.
 
@@ -18,13 +18,13 @@ func after_each() -> void:
 	Input.action_release("move_right")
 	ui.stop()
 
-func test_an_attack_plays_the_weapons_motion_then_a_ready_stance() -> void:
+func test_an_attack_makes_the_skills_motion_then_a_ready_stance() -> void:
 	ui.teleport(FLOOR)
 	me.on_ground = true
 	await ui.ticks(2)
 	var skill := Game.me.skills.basic_attack()
 	me._use(skill)
-	check_eq(me._animation(), WeaponStyle.animation_for(Game.me.look(), skill.animation), "the weapon's own blow")
+	check_eq(me._animation(), skill.animation, "the skill's own blow")
 	await ui.ticks(skill.action_ticks + 2)
 	check_eq(me._animation(), &"ready", "ready for the next one")
 	await ui.ticks(TDPlayer.READY_TICKS)

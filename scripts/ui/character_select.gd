@@ -1,7 +1,7 @@
 class_name TDCharacterSelect
 extends CenterContainer
 ## Character select, shown once a game is started or joined: a slot for each character
-## saved on this computer (their hero, name, level and job) and empty slots up to the
+## saved on this computer (their name, level and job) and empty slots up to the
 ## limit, with Play, Create, Delete and Back. TDTitleScreen decides what the buttons do;
 ## the list is Net.characters.
 
@@ -10,7 +10,7 @@ signal create_requested
 signal delete_requested(char_name: String)
 signal left
 
-const SLOT_SIZE := Vector2(112, 168)
+const SLOT_SIZE := Vector2(112, 64)
 ## All the slots fit in one row.
 const COLUMNS := CharacterStore.MAX_CHARACTERS
 
@@ -27,7 +27,7 @@ var create_button: Button
 var delete_button: Button
 var leave_button: Button
 var message: Label
-## The characters shown: {name, level, job, look} like Net.characters.
+## The characters shown: {name, level, job} like Net.characters.
 var characters: Array = []
 ## The picked character's name ("" for none).
 var selected := ""
@@ -126,20 +126,9 @@ func _slot_button(i: int) -> Button:
 	col.offset_top = 8
 	col.offset_bottom = -6
 	col.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	col.alignment = BoxContainer.ALIGNMENT_CENTER
 	col.add_theme_constant_override("separation", 2)
 	b.add_child(col)
-	var stage := Panel.new()
-	stage.name = "Stage"
-	stage.custom_minimum_size = Vector2(0, 108)
-	stage.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	stage.add_theme_stylebox_override("panel", UiSkin.plain_panel())
-	col.add_child(stage)
-	var preview := PaperdollView.new()
-	preview.name = "Preview"
-	preview.set_anchors_preset(Control.PRESET_FULL_RECT)
-	preview.offset_bottom = -6
-	preview.max_zoom = 2.0
-	stage.add_child(preview)
 	var title := UiBuild.label("", 15, Palette.SUN, HORIZONTAL_ALIGNMENT_CENTER)
 	title.name = "Title"
 	title.add_theme_font_override("font", Game.num_font)
@@ -157,10 +146,8 @@ func _slot_button(i: int) -> Button:
 
 ## Shows one character in a slot, or an empty slot for {}.
 func _fill_slot(b: Button, c: Dictionary) -> void:
-	var preview := b.find_child("Preview", true, false) as PaperdollView
 	var title := b.find_child("Title", true, false) as Label
 	var line := b.find_child("Line", true, false) as Label
-	preview.visible = not c.is_empty()
 	if c.is_empty():
 		title.text = "Empty slot"
 		title.add_theme_color_override("font_color", Palette.MUTED)
@@ -168,8 +155,6 @@ func _fill_slot(b: Button, c: Dictionary) -> void:
 		line.text = "Create one"
 		b.tooltip_text = "Make a new character here"
 		return
-	preview.set_look(c["look"])
-	preview.play(&"idle")
 	title.text = c["name"]
 	line.text = "Lv %d %s" % [int(c["level"]), c["job"]]
 	b.tooltip_text = ""

@@ -93,10 +93,6 @@ func follow(owner_feet: Vector2, owner_face: int, z: float, ground: float) -> vo
 	_body.position = TDStage.to3d(pet_pos + Vector2(0, -hop), z + 0.01)
 	_body.flip_h = pet_face < 0
 
-## How far the sitter is raised to sit on the chair, in game pixels.
-func seat_lift() -> float:
-	return TDStage.art_size(chair.icon, TDStage.TEXEL * chair.seat_scale).y * 0.45 if chair and chair.icon else 0.0
-
 ## The top of the pet's head, for its name tag and speech bubble.
 func pet_head() -> Vector2:
 	if _body is AnimatedSprite3D:

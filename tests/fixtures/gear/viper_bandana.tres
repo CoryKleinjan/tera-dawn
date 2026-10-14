@@ -27,5 +27,3 @@ stats = SubResource("Resource_1")
 variance = 2
 upgrade_slots = 7
 required_luck = 50
-look_shape = &"bandana"
-look_color = Color(0.369, 0.431, 0.188, 1)

@@ -34,6 +34,6 @@ func check() -> void:
 	_check(Game.me.job.id == &"mage" and Game.me.gear.weapon() == Content.item(&"apprentice_wand"), "the server makes them a Magician and hands them a wand to wear")
 	Net.ask(&"req_equip", [Game.me.inventory.find(Content.item(&"apprentice_wand")), &"weapon"])
 	await _ticks(2)
-	_check(world.player.rig.paperdoll.look["gear"].get("weapon") == "apprentice_wand", "the hero is drawn holding the wand once it's worn")
+	_check(Game.me.equipment.at(&"weapon") != null and Game.me.equipment.at(&"weapon").item == Content.item(&"apprentice_wand"), "the wand stays worn")
 	Net.server.enter_map(_me(), &"meadow", 300)
 	await _ticks(3)

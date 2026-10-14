@@ -4,7 +4,7 @@ extends Node2D
 ## window (see TDDialogueWindow).
 
 ## Everyone's NPC art is drawn this much smaller than other art (TDStage.TEXEL), so the
-## townsfolk stand a little taller than the hero (HeroBody.SCALE), as in MapleStory.
+## townsfolk stand a little taller than the hero (TDPlayer.HEIGHT), as in MapleStory.
 const SCALE := 0.78
 
 var world: TDWorld

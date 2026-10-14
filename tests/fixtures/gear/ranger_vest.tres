@@ -26,4 +26,3 @@ required_level = 15
 stats = SubResource("Resource_1")
 variance = 2
 required_dexterity = 40
-look_color = Color(0.753, 0.533, 0.314, 1)

@@ -1,8 +1,7 @@
-[gd_resource type="Resource" script_class="EquipDef" load_steps=6 format=3]
+[gd_resource type="Resource" script_class="EquipDef" load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/equip_def.gd" id="script"]
 [ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="stat_block"]
-[ext_resource type="Texture2D" path="res://assets/sprites/items/novice_slippers.png" id="icon"]
 [ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="pickup"]
 
 [sub_resource type="Resource" id="stats"]
@@ -15,7 +14,6 @@ script = ExtResource("script")
 id = &"novice_slippers"
 display_name = "Novice Slippers"
 description = "Soft slippers for a new magician."
-icon = ExtResource("icon")
 sprite_scale = 0.36
 glow_color = Color(0.55, 0.7, 1.0, 1.0)
 pickup_effect = ExtResource("pickup")

@@ -128,7 +128,7 @@ func snapshot(full := false) -> PackedByteArray:
 			_sent_mobs[i] = r
 	return SnapshotCodec.encode(tick, records, players.values().map(func(p: SimPlayer) -> Array: return p.motion()))
 
-## Sends this map's players the info (name, level, look, gear, chair, pet) of
+## Sends this map's players the info (name, level, job, guild, chair, pet) of
 ## every player whose info changed since it was last sent. Reliable, unlike snapshots.
 func send_player_info() -> void:
 	for p: SimPlayer in players.values():

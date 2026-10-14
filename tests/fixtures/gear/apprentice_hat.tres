@@ -26,4 +26,3 @@ required_level = 10
 stats = SubResource("Resource_1")
 variance = 2
 required_intelligence = 25
-look_shape = &"wizard"

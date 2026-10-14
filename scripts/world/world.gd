@@ -101,7 +101,6 @@ func _ready() -> void:
 	load_map(Character.START_MAP)
 	player.place(map.start_x, platforms[0].y)
 	snap_camera()
-	player.rig.visible = false
 	Sound.music(TITLE_MUSIC)
 
 func _exit_tree() -> void:
@@ -115,7 +114,6 @@ func _layer() -> Node2D:
 
 func start() -> void:
 	started = true
-	player.rig.visible = true
 	# no music change here: the map still loaded is the title screen's, and the server
 	# sends the real one (enter_map) right after, which starts its track
 
@@ -127,7 +125,6 @@ func stop(stay_connected := false) -> void:
 	if not stay_connected:
 		Net.stop()
 	sync.clear_avatars()
-	player.rig.visible = false
 	Game.social = {}
 	hud.invites.clear()
 	hud.chat.clear()

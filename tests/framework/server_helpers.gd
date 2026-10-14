@@ -132,13 +132,13 @@ func join(peer: int, char_name: String, map := FIELD, x := 300.0) -> SimPlayer:
 	return p
 
 ## Brings `char_name` into the game on `peer` the way a player's game does (req_play): as
-## last saved (`saved`), or new with the creator's choices (`look`, or the defaults).
-func play(peer: int, char_name: String, look := {}) -> void:
+## last saved (`saved`), or new with the creator's choices (`choices`, or the defaults).
+func play(peer: int, char_name: String, choices := {}) -> void:
 	if not api.peers.has(peer):
 		api.peers.append(peer)
 	var data: Dictionary = api.saves.get(char_name.to_lower(), {})
 	if data.is_empty():
-		var made := NewCharacter.from_dict(look if not look.is_empty() else made())
+		var made := NewCharacter.from_dict(choices if not choices.is_empty() else made())
 		data = Character.create(char_name, Character.START_JOB, made).to_dict()
 	server.lobby.on_play(peer, data)
 
@@ -199,8 +199,8 @@ func snapshot(peer: int) -> Dictionary:
 	var ev := last(peer, &"ev_snapshot")
 	return SnapshotCodec.decode(ev[0]) if not ev.is_empty() else {}
 
-## The latest info `peer` was sent about player `of` ([name, level, job, guild, chair, pet,
-## look]), or [].
+## The latest info `peer` was sent about player `of` ([name, level, job, guild, chair, pet]),
+## or [].
 func player_info(peer: int, of: int) -> Array:
 	for i in range(events(peer, &"ev_player_info").size() - 1, -1, -1):
 		var ev: Array = events(peer, &"ev_player_info")[i]

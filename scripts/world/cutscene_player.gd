@@ -188,8 +188,6 @@ func _start(s: CutsceneStep) -> void:
 				_save(s.who)
 				npc.visible = s.shown
 				npc.rig.visible = s.shown
-			elif s.who == CutsceneStep.HERO:
-				world.player.rig.visible = s.shown
 		CutsceneStep.Kind.MUSIC:
 			if not _music_changed:
 				_music_before = Sound.current_music
@@ -300,7 +298,6 @@ func _restore() -> void:
 	_bars = Vector3.ZERO
 	world.player.auto_walk = 0
 	world.player.scene_pose = &""
-	world.player.rig.visible = world.started
 	world.camera.scene_center = null
 	if _music_changed:
 		Sound.music(_music_before)

@@ -9,10 +9,10 @@ extends Node2D
 ## the quickslot keys use whatever skill or item is on that slot. Holding Up or Down (in the
 ## air) aims an attack that way.
 
-## How tall he stands, feet to the top of his head, in game pixels at HeroBody.SCALE: speech
-## bubbles go just over it.
+## How tall he stands, feet to the top of his head, in game pixels: speech bubbles go just
+## over it. Kept from his old look while his new one is made (see HeroBody).
 const HEIGHT := 68.0
-## About how wide he is drawn, in game pixels: what the HUD keeps out of the way of.
+## About how wide he is, in game pixels: what the HUD keeps out of the way of.
 const WIDTH := 42.0
 ## His chest above his feet (game pixels): where skill effects and shots start, and where
 ## loot flies to.
@@ -58,8 +58,8 @@ const HARD_LANDING := 1.5
 const EDGE := 14.0
 ## Knockback speed when a monster hits you (away from it, and up).
 const KNOCKBACK := Vector2(4.5, -4.0)
-## Ticks the knockback carries you without steering, and the freeze before it (the whole
-## hero holds still for a beat so the hit reads).
+## Ticks the knockback carries you without steering, and the freeze before it (he holds
+## still for a beat so the hit reads).
 const HURT_LOCK := 9
 const HURT_FREEZE := 4
 ## How strongly the screen flashes when you're hit, and in what colour.
@@ -125,7 +125,6 @@ var jump_grace := JumpGrace.new()
 var _reported := &""  # the animation the server last heard about
 var speech := ""      # the last thing said in map chat, shown in a bubble
 var speech_t := 0
-var _stop_t := 0      # hit-stop ticks left (the swing holds still, see hit_stop)
 var _freeze_t := 0    # ticks held still after being hit (see knock_back)
 var _lock_t := 0      # ticks the knockback carries you without steering
 var _jumping := false # rising from your own jump (letting go cuts it short)
@@ -139,24 +138,14 @@ var _air_moves := {}
 ## The chair you're sitting on (the server said so), or empty. Moving gets you up.
 var sitting: StringName = &""
 
-## How you're drawn: the rig, your chair and pet (see HeroBody).
+## How you're drawn: your chair and pet (see HeroBody).
 var body: HeroBody
-var rig: SpriteRig:
-	get:
-		return body.rig if body else null
 var companion: TDCompanion:
 	get:
 		return body.companion if body else null
 
 func _ready() -> void:
 	body = HeroBody.new(self, world, Z)
-	_dress()
-	Game.character_changed.connect(_dress)
-
-## Shows your look and the gear you wear (the server sends a new copy when it changes).
-func _dress() -> void:
-	if Game.me:
-		rig.dress(Game.me.look())
 
 func place(x: float, y: float) -> void:
 	position = Vector2(x, y)
@@ -188,12 +177,6 @@ func sit(chair_id: StringName) -> void:
 	if sitting != &"":
 		vel = Vector2.ZERO
 		action_t = 0
-
-## Your blow landed: hold the swing still for a few ticks (hit-stop) so it reads as a hit.
-func hit_stop(ticks: int) -> void:
-	if ticks > 0:
-		_stop_t = maxi(_stop_t, ticks)
-		rig.freeze(true)
 
 ## The server says a monster hit you: blink, get knocked away from it, and the screen jolts.
 func knock_back(from_x: float) -> void:
@@ -230,10 +213,6 @@ func level_up() -> void:
 # ---------- per tick ----------
 
 func step() -> void:
-	if _stop_t > 0:
-		_stop_t -= 1
-		if _stop_t == 0:
-			rig.freeze(false)
 	if speech_t > 0:
 		speech_t -= 1
 	if down:
@@ -353,11 +332,10 @@ func _use(skill: SkillDef) -> void:
 	if skill.kind == SkillDef.Kind.MOVE:
 		_start_move(skill, aim)
 		return
-	# buffs and spells make no motion: he flashes the skill's colour and carries on
-	var anim := body.use_skill(Game.me.look(), skill)
-	if anim != &"":
+	# buffs and spells make no motion: he carries on with what he was doing
+	if not skill.is_spell():
 		action_t = CharacterStats.attack_ticks(skill.action_ticks, Game.me.stats)
-		action_anim = anim
+		action_anim = skill.animation
 		ready_t = READY_TICKS
 		cheer_t = 0
 		_aim = aim
@@ -399,11 +377,9 @@ func _start_move(skill: SkillDef, aim: Hitbox.Aim) -> void:
 			on_ground = false
 	_jumping = false
 	jump_grace.cancel()
-	if m.style == MoveDef.Style.CHARGE:
-		var anim := body.use_skill(Game.me.look(), skill)
-		if anim != &"":
-			action_t = m.ticks
-			action_anim = anim
+	if m.style == MoveDef.Style.CHARGE and not skill.is_spell():
+		action_t = m.ticks
+		action_anim = skill.animation
 	Net.ask(&"req_skill", [skill.id, from, face, aim])
 	TDMoveFx.play(world, m, from, position, self)
 	Sound.play(skill.cast_sound())
@@ -593,10 +569,9 @@ func _move() -> void:
 func _process(_delta: float) -> void:
 	if body == null or world == null or world.map == null:
 		return
-	var anim := _animation()
-	body.veil = HeroBody.HIDDEN_VEIL if Game.me.skills.hidden() else 1.0
-	body.draw(anim, HeroBody.stride_speed(anim, vel.x), face, is_climbing(), inv > 0 and not fainted(), inv, sitting, Game.me.pet)
+	body.draw(face, sitting, Game.me.pet)
 
+## What he is doing, as an animation name: the server passes it on to everyone else.
 func _animation() -> StringName:
 	if scene_pose != &"":
 		return scene_pose
@@ -624,7 +599,7 @@ func _animation() -> StringName:
 	if turn_t > 0:
 		return &"turn"
 	if absf(vel.x) > 0.3:
-		return &"walk" # a faster pace just speeds up the walk (see HeroBody.stride_speed)
+		return &"walk" # a faster pace is still a walk
 	if _held("move_down"):
 		return &"crouch"
 	if ready_t > 0:
