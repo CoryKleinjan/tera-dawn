@@ -375,49 +375,12 @@ func test_title_boxes_keep_their_hints_clear_of_the_caret() -> void:
 	check(f.placeholder_text.begins_with(UiStyle.HINT_ROOM), "room between the caret and the hint")
 	check_eq(f.alignment, HORIZONTAL_ALIGNMENT_LEFT, "left-aligned, so an empty box's caret starts before the hint")
 
-func test_first_hint_names_the_real_keys() -> void:
-	var field: String = ui.hud.field_hint
-	check(not field.contains("Dawn Slash"), "no skill a new character doesn't have")
-	check(field.contains("A, D, F, G… quickslots"), "the quickslot keys: %s" % field)
-	check(field.contains("%s attack" % TDStatusBar._key_name("attack")) and field.contains("%s loot" % TDStatusBar._key_name("loot")), "attack and loot: %s" % field)
-
-func test_first_hint_shows_on_the_first_field_and_never_in_town() -> void:
+func test_no_controls_box_for_a_new_character() -> void:
+	# the tutorial teaches the keys; the game shows no controls box of its own
 	var hud := ui.hud
 	check(ui.world.map.town, "a new character starts in a town")
 	await ui.frames(3)
 	check(not hud.keys_help.visible, "no controls box in town")
 	await ui.enter_map(&"meadow", 300)
 	await ui.frames(3)
-	check(hud.keys_help.visible and hud.keys_help.text == hud.field_hint, "the field hint shows on the first field")
-	await ui.enter_map(Character.START_MAP, 300)
-	await ui.frames(2)
-	check(not hud.keys_help.visible, "and goes again back in town")
-	await ui.enter_map(&"meadow", 300)
-	await ui.frames(2)
-	hud._hint_t = TDHud.FIRST_HINT_TIME
-	await ui.frames(2)
-	check(not hud.keys_help.visible, "it goes once its time is up")
-
-func test_first_hint_hides_and_waits_behind_windows() -> void:
-	var hud := ui.hud
-	await ui.enter_map(&"meadow", 300)
-	await ui.frames(3)
-	check(hud.keys_help.visible, "the hint shows")
-	hud.toggle_window("quests")
-	await ui.frames(1)
-	var t: float = hud._hint_t
-	await ui.frames(10)
-	check(not hud.keys_help.visible, "a window hides it")
-	check_eq(hud._hint_t, t, "and its time waits")
-	hud.toggle_window("quests")
-	await ui.frames(2)
-	check(hud.keys_help.visible and hud._hint_t > t, "back once it's closed, counting on")
-
-func test_first_hints_are_only_for_new_characters() -> void:
-	ui.world.stop(true)
-	await ui.frames(1)
-	await ui.edit(func(c: Character) -> void: c.level = 5)
-	ui.world.start()
-	await ui.enter_map(&"meadow", 300)
-	await ui.frames(3)
-	check(not ui.hud.keys_help.visible, "a character past level 1 sees no first-time hint")
+	check(not hud.keys_help.visible, "nor on their first field")

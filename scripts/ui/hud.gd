@@ -27,23 +27,12 @@ var _settings_from: Control
 const SEE_THROUGH := 0.25
 const SEE_THROUGH_SPEED := 4.0
 const SEE_THROUGH_RANGE := 400.0
-## A new character's first-time hint on their first hunting field: the keys for fighting,
-## following the player's keybinds (the full list is in Settings > Controls). It shows for
-## FIRST_HINT_TIME seconds, counted only while no window is open over the game. Towns show no
-## controls box. Quest key hints share this label.
+## The key hint of the quest step you're on (quest_hint), such as the tutorial's. The game
+## shows no controls box of its own: the tutorial teaches the keys, and the full list is in
+## Settings > Controls.
 var keys_help: Label
-## How long the first-time hint stays up, and where it sits.
-const FIRST_HINT_TIME := 40.0
-const FIRST_HINT_Y := 138.0
 ## A quest's key hint sits this far above the status bar.
 const QUEST_HINT_GAP := 14.0
-## The first-time hint's text, built from the player's keybinds (_update_keys_help).
-var field_hint := ""
-## How long the first-time hint has shown so far.
-var _hint_t := 0.0
-## The character the first-time hint is for: one that was level 1 when it came into the
-## game ("" for none, so an old character never sees them).
-var _hint_for := ""
 var ui_theme: Theme
 ## Holds the windows so raising one never lifts it above the tooltip or the title menu.
 var window_layer: Control
@@ -155,38 +144,18 @@ func _process(delta: float) -> void:
 	menu_cog.visible = world != null and world.started
 	# the minimap (drawn by the overlay) only shows once there's a character
 	minimap_button.visible = world != null and world.started
-	_show_first_hints(delta)
+	_show_quest_hint()
 
-## The first-time controls, for a brand-new character: the town hint while they're in a town,
-## the field hint on their first field. Hidden (and its time paused) behind any window, so it
-## never covers a dialogue.
-func _show_first_hints(delta: float) -> void:
-	if world == null or not world.started:
-		_hint_for = ""
-		keys_help.hide()
-		return
-	if _hint_for != Game.me.name:
-		# a new character to hint for: start the hint again
-		_hint_for = Game.me.name if Game.me.level == 1 else ""
-		_hint_t = 0.0
-	var quest := quest_hint()
-	if quest != "":
-		# a quest teaching a key: its hint stays up at the bottom until the step is done
-		keys_help.visible = not title.visible and not any_window_open()
-		keys_help.text = quest
-		keys_help.modulate.a = 1.0
-		keys_help.reset_size()
-		keys_help.position = Vector2((TDWorld.VIEW.x - keys_help.size.x) / 2.0, TDWorld.VIEW.y - TDStatusBar.HEIGHT - keys_help.size.y - QUEST_HINT_GAP)
-		return
-	keys_help.visible = (_hint_for != "" and not world.map.town and _hint_t < FIRST_HINT_TIME
-			and not title.visible and not any_window_open())
+## The key hint of the quest step you're on, at the bottom of the screen. Hidden behind any
+## window, so it never covers a dialogue.
+func _show_quest_hint() -> void:
+	var quest := quest_hint() if world != null and world.started else ""
+	keys_help.visible = quest != "" and not title.visible and not any_window_open()
 	if not keys_help.visible:
 		return
-	_hint_t += delta
-	keys_help.text = field_hint
-	keys_help.modulate.a = clampf((FIRST_HINT_TIME - _hint_t) / 2.0, 0.0, 1.0) * clampf(_hint_t / 0.5, 0.0, 1.0)
+	keys_help.text = quest
 	keys_help.reset_size()
-	keys_help.position = Vector2((TDWorld.VIEW.x - keys_help.size.x) / 2.0, FIRST_HINT_Y)
+	keys_help.position = Vector2((TDWorld.VIEW.x - keys_help.size.x) / 2.0, TDWorld.VIEW.y - TDStatusBar.HEIGHT - keys_help.size.y - QUEST_HINT_GAP)
 
 ## The key hint of the quest you're doing (QuestDef.hint), or else of one waiting for you to
 ## talk to someone standing here (QuestDef.offer_hint), with its keys filled in; "" if none.
@@ -332,7 +301,7 @@ func _build_title() -> void:
 	title.quit_requested.connect(_quit)
 	title.left_game.connect(func() -> void: show_title(false))
 
-	# a new character's first steps: the controls (TDHud._show_first_hints)
+	# a quest step's key hint (TDHud._show_quest_hint)
 	keys_help = Label.new()
 	keys_help.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	keys_help.add_theme_font_size_override("font_size", 13)
@@ -348,8 +317,6 @@ func _build_title() -> void:
 	keys_help.hide()
 	add_child(keys_help)
 	move_child(keys_help, title.get_index())
-	_update_keys_help()
-	Settings.changed.connect(_on_settings_changed)
 
 	# while playing: the game menu (Esc), on the title screen right over the title card, so
 	# character select and its questions stay above it
@@ -384,19 +351,6 @@ func _on_to_characters() -> void:
 func _quit() -> void:
 	Net.stop()
 	get_tree().quit()
-
-func _on_settings_changed(section: SettingsSection) -> void:
-	if section is Keybinds:
-		_update_keys_help()
-
-## The first-time hint, naming the player's own keys: fighting, picking up and the first
-## quickslots (empty for a new character, so no skill is named).
-func _update_keys_help() -> void:
-	var k := func(action: String) -> String: return TDStatusBar._key_name(action)
-	var slots := []
-	for i in range(1, 5):
-		slots.append(k.call("quick_%d" % i))
-	field_hint = "%s attack · %s loot · %s… quickslots" % [k.call("attack"), k.call("loot"), ", ".join(slots)]
 
 ## The title screen (not playing yet) or the game menu (playing).
 func show_title(paused: bool) -> void:
