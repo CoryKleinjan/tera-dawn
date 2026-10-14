@@ -1,0 +1,42 @@
+{
+  "source": "art/source/lanternfall_walkways.png",
+  "art_px": 4.66,
+  "out_dir": "assets/sprites/tiles/lanternfall",
+  "label_band": 0,
+  "inset": 0,
+  "grid": {
+    "rows": [
+      0,
+      884,
+      1728
+    ],
+    "cols": [
+      0,
+      3072
+    ]
+  },
+  "cells": [
+    [
+      "balcony_walkway"
+    ],
+    [
+      "rooftop_lane"
+    ]
+  ],
+  "overrides": {
+    "balcony_walkway": {
+      "blank": [
+        [
+          0,
+          849,
+          3072,
+          884
+        ]
+      ],
+      "flat_bottom": true
+    },
+    "rooftop_lane": {
+      "flat_bottom": true
+    }
+  }
+}

@@ -197,8 +197,11 @@ dark. Walking upright bass, muted clarinet (and muted trumpet), pizzicato string
 finger snaps, accordion and celesta touches. Town: relaxed swagger. Field: sneaky tiptoe caper.
 Boss: a fast heist-gone-wrong chase.
 
-**Town: Lanternfall.** Narrow half-timbered houses packed along lantern-lit alleys, always at dusk
-*(inferred beyond the buildings)*.
+**Town: Lanternfall.** Always at dusk, the one dusk town (Cory). Tall narrow half-timbered houses of
+smoky ochre plaster and dark soot-stained beams over dark brick, slate-blue roofs, crooked chimneys,
+iron wall lanterns, hanging signs on brackets, plum and teal awnings; no cream plaster (Dawnharbor's).
+A cobbled street with a brick-pillared balcony walkway and a rooftop lane joined by ladders; a dusk
+rooftop panorama behind.
 
 | Sub-zone | Role | Lv | What changes | Monsters |
 | --- | --- | --- | --- | --- |
@@ -245,7 +248,6 @@ sails and rope everywhere *(inferred beyond the buildings)*.
   their vibes before they get their own light settings.
 - Town vibes beyond the current buildings and music are inferred; confirm them, and whether each
   town follows Dawnharbor's multi-level layout later.
-- Lanternfall sits at permanent dusk while the world is endless dawn; keep it as the one dusk zone?
 - Dawnrise Isle has two boss maps (Fern Hollow and Tidal Flats); keep both?
 - Dawnharbor's fields borrow neighbouring zones' monsters until it gets its own harbour monsters
   (agreed; their look is still to be asked).
