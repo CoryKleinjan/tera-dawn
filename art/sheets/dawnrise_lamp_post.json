@@ -1,0 +1,35 @@
+{
+  "source": "art/source/dawnrise_lamp_post.png",
+  "out_dir": "assets/sprites/tiles/dawnrise",
+  "label_band": 0,
+  "inset": 0,
+  "grid": {
+    "rows": [
+      0,
+      2047
+    ],
+    "cols": [
+      0,
+      1151
+    ]
+  },
+  "cells": [
+    [
+      "lamp_post"
+    ]
+  ],
+  "overrides": {
+    "lamp_post": {
+      "scale": 0.055,
+      "flat_bottom": true,
+      "blank": [
+        [
+          0,
+          1903,
+          1152,
+          2048
+        ]
+      ]
+    }
+  }
+}
