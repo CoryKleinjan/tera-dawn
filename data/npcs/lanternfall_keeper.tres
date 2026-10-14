@@ -6,9 +6,9 @@
 [resource]
 script = ExtResource("1_npc_def")
 id = &"lanternfall_keeper"
-display_name = "Sable"
+display_name = "Hesper"
 title = "Storage Keeper"
 sprite_frames = ExtResource("2_sprite")
-greeting = "Sable's strongboxes. There's no lock in town I can't open, so trust me: yours stay shut."
+greeting = "Hesper's strongboxes. There's no lock in town I can't open, so trust me: yours stay shut."
 lines = PackedStringArray("Ten Dawnshards a stack, and nobody touches it but you.", "The keepers in every town can hand back what you leave here.")
 storage = true

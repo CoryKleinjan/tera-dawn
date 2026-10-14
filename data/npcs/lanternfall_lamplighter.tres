@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_npc_def")
 id = &"lanternfall_lamplighter"
-display_name = "Pell"
+display_name = "Lettie"
 title = "Lamplighter"
 sprite_frames = ExtResource("2_sprite")
 greeting = "Every lantern in Lanternfall, lit by me before the first star. Well, most of them."
