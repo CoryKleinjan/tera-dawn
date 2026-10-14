@@ -1,0 +1,42 @@
+{
+  "source": "art/source/props_lanternfall_2.png",
+  "out_dir": "assets/sprites/tiles/lanternfall",
+  "label_band": 0,
+  "inset": 8,
+  "cells": [
+    [
+      "prop_cart",
+      "prop_flower_trough",
+      "prop_chimney_pots"
+    ]
+  ],
+  "overrides": {
+    "prop_flower_trough": {
+      "scale": 0.1,
+      "flat_bottom": true,
+      "keep": "largest"
+    },
+    "prop_chimney_pots": {
+      "scale": 0.1,
+      "flat_bottom": true,
+      "keep": "largest"
+    },
+    "prop_cart": {
+      "scale": 0.1,
+      "flat_bottom": true,
+      "keep": "largest"
+    }
+  },
+  "grid": {
+    "rows": [
+      0,
+      1120
+    ],
+    "cols": [
+      0,
+      1024,
+      2048,
+      3072
+    ]
+  }
+}

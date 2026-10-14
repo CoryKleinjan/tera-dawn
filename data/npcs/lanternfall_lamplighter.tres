@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/npc_lanternfall_lamplighter.tres" id="2_sprite"]
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"lanternfall_lamplighter"
+display_name = "Lettie"
+title = "Lamplighter"
+sprite_frames = ExtResource("2_sprite")
+greeting = "Every lantern in Lanternfall, lit by me before the first star. Well, most of them."
+lines = PackedStringArray("The dark corners? Those are for the thieves. Professional courtesy.", "Mind the pole. It has bumped more heads than it has lit wicks.")
