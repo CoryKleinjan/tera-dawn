@@ -10580,6 +10580,58 @@
    ],
    "text": "Paint the game's base character, the chibi boy from the first attached picture, as a 4-frame animation: one frame in each of the 4 cells, like a MapleStory character sprite sheet. He faces right in a slight three-quarter side view in every frame, at exactly the same size, centred in his cell, with his feet on the same ground line near the bottom of every cell. Cell 1: standing idle, arms relaxed at his sides. Cell 2: walking, front leg stepping forward, back arm swinging forward. Cell 3: walking, the other leg forward, arms swapped. Cell 4: a swing, his front arm raised forward and up in a quick strike with the hand closed. Chibi proportions: a big round head about 40% of his height, small body, short legs. He is bald with a smooth head and ears showing, and his face is blank smooth skin with no eyes, eyebrows or mouth (they are added later). He wears only a plain cream short-sleeved undershirt and brown shorts, barefoot. His hands are simple rounded mitten hands with no separate fingers. Style: the warm colours, light from the upper left and thin dark plum-brown outline of the painted villagers in the second attached picture, but cleaner: smooth soft painted shading with a bright highlight, little brush texture. Keep the grid lines. No text."
   }
+ },
+ {
+  "id": "mshero_robe_test",
+  "prompts": null,
+  "batch": "maple hero test (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_robe_test.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 18:48Z 'sure. lets see it.'): MapleStory-style test paints 2-3 of 3. An item painted over the flat green silhouette of mshero_body_test, so it lands on the body in every frame; green and magenta are both keyed out as background.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/silhouette_2x4.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_body_test.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Each cell holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: standing, walking, walking, swinging his arm up). On each green shape, paint ONLY a young mage's robe, worn exactly where the boy's shirt and shorts are and fitting his pose in that cell: a deep blue robe-tunic with short wide sleeves over the upper arms, a hem that reaches just above the knees, gold trim along the collar, sleeves and hem, a purple cloth sash tied at the waist with hanging ends, and a few small details (stitching, a little star clasp, a pouch on the sash). Paint nothing else: leave every part of each green shape that the robe does not cover flat pure #00FF00 green, exactly as it is, and leave the background flat pure magenta #FF00FF. Do not paint skin, a face, hands, legs, feet or a body. Do not move, resize or redraw any shape. Style: the warm colours, light from the upper left and thin dark plum-brown outline of the painted villagers in the second attached picture, but cleaner: smooth soft painted shading with a bright highlight, lots of small busy painted detail. Keep the grid lines. No text."
+  }
+ },
+ {
+  "id": "mshero_hair_test",
+  "prompts": null,
+  "batch": "maple hero test (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_hair_test.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 18:48Z 'sure. lets see it.'): MapleStory-style test paints 2-3 of 3. An item painted over the flat green silhouette of mshero_body_test, so it lands on the body in every frame; green and magenta are both keyed out as background.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/silhouette_2x4.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_body_test.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Each cell holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: standing, walking, walking, swinging his arm up). On each green shape, paint ONLY a boy's hair on the top and back of the head, fitting the head's angle in that cell: tousled chestnut-brown hair with a few spiky locks, a fringe falling over the top of the forehead, short at the back, ears left showing. Paint nothing else: leave every part of each green shape that the hair does not cover flat pure #00FF00 green, exactly as it is, and leave the background flat pure magenta #FF00FF. Do not paint skin, a face, hands, legs, feet or a body. Do not move, resize or redraw any shape. Style: the warm colours, light from the upper left and thin dark plum-brown outline of the painted villagers in the second attached picture, but cleaner: smooth soft painted shading with a bright highlight, lots of small busy painted detail. Keep the grid lines. No text."
+  }
  }
 ]
 }
