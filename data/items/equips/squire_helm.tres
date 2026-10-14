@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="EquipDef" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/equip_def.gd" id="script"]
+[ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="stat_block"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/squire_helm.png" id="icon"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="pickup"]
+
+[sub_resource type="Resource" id="stats"]
+script = ExtResource("stat_block")
+defense = 5
+
+[resource]
+script = ExtResource("script")
+id = &"squire_helm"
+display_name = "Squire Helm"
+description = "A plain steel helm for a new warrior."
+icon = ExtResource("icon")
+sprite_scale = 0.36
+glow_color = Color(1.0, 0.55, 0.45, 1.0)
+pickup_effect = ExtResource("pickup")
+sell_price = 250
+slot = 1
+jobs = Array[StringName]([&"warrior"])
+required_level = 10
+stats = SubResource("stats")
+variance = 1
+look_shape = &"helm"

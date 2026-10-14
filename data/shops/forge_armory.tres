@@ -1,9 +1,33 @@
-[gd_resource type="Resource" script_class="ShopDef" load_steps=7 format=3]
+[gd_resource type="Resource" script_class="ShopDef" load_steps=15 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/shop_def.gd" id="1_shop_def"]
 [ext_resource type="Script" path="res://scripts/data/shop_entry.gd" id="2_shop_entry"]
 [ext_resource type="Resource" path="res://data/items/setup/ember_throne.tres" id="s_ember_throne"]
 [ext_resource type="Resource" path="res://data/items/setup/boar_hide_rug.tres" id="s_boar_hide_rug"]
+[ext_resource type="Resource" path="res://data/items/equips/squire_helm.tres" id="e_squire_helm"]
+[ext_resource type="Resource" path="res://data/items/equips/squire_jerkin.tres" id="e_squire_jerkin"]
+[ext_resource type="Resource" path="res://data/items/equips/squire_trousers.tres" id="e_squire_trousers"]
+[ext_resource type="Resource" path="res://data/items/equips/squire_boots.tres" id="e_squire_boots"]
+
+[sub_resource type="Resource" id="Entry_squire_helm"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("e_squire_helm")
+price = 0
+
+[sub_resource type="Resource" id="Entry_squire_jerkin"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("e_squire_jerkin")
+price = 0
+
+[sub_resource type="Resource" id="Entry_squire_trousers"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("e_squire_trousers")
+price = 0
+
+[sub_resource type="Resource" id="Entry_squire_boots"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("e_squire_boots")
+price = 0
 
 [sub_resource type="Resource" id="Entry_ember_throne"]
 script = ExtResource("2_shop_entry")
@@ -19,4 +43,4 @@ price = 6000
 script = ExtResource("1_shop_def")
 id = &"forge_armory"
 display_name = "Emberforge Armory"
-items = Array[ExtResource("2_shop_entry")]([SubResource("Entry_ember_throne"), SubResource("Entry_boar_hide_rug")])
+items = Array[ExtResource("2_shop_entry")]([SubResource("Entry_squire_helm"), SubResource("Entry_squire_jerkin"), SubResource("Entry_squire_trousers"), SubResource("Entry_squire_boots"), SubResource("Entry_ember_throne"), SubResource("Entry_boar_hide_rug")])

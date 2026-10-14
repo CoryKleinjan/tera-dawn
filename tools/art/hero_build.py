@@ -20,7 +20,7 @@ Writes (every strip is laid out like the body strip, both bodies side by side):
 - layers/hair_<style>.png: the hair, and
   layers/hair_<style>_<shape>.png, the hair under each hat shape (from its template cell).
 - pieces/headcut_<shape>.png: where his body is cut away under each hat shape.
-- layers/worn_item_<id>.png: worn gear (WORN, HAT_ITEMS), in its own colours.
+- layers/worn_item_<id>.png: worn gear (WORN, HAT_ITEMS, HAT_SHEETS), in its own colours.
 """
 import json
 import math
@@ -92,8 +92,18 @@ ANIMATIONS = [
 ]
 
 ## Worn items with their own art, by the sheet they are lifted from (body_<body>_<sheet>.png).
-## A body without the sheet doesn't show the item.
-WORN = {"jerkin": "squire_jerkin", "trousers": "squire_trousers"}
+## A body without the sheet doesn't show the item. Each job's starter set: a top, trousers and
+## shoes (its hat is in HAT_ITEMS).
+WORN = {
+    "jerkin": "squire_jerkin", "trousers": "squire_trousers", "squire_boots": "squire_boots",
+    "novice_robe": "novice_robe", "novice_trousers": "novice_trousers", "novice_slippers": "novice_slippers",
+    "footpad_jerkin": "footpad_jerkin", "footpad_trousers": "footpad_trousers", "footpad_boots": "footpad_boots",
+    "hunters_vest": "hunters_vest", "hunters_trousers": "hunters_trousers", "hunters_boots": "hunters_boots",
+    "deckhand_coat": "deckhand_coat", "deckhand_trousers": "deckhand_trousers", "deckhand_boots": "deckhand_boots",
+}
+## The sheets above that are trousers: they replace his shorts, and his bare feet below them
+## stay his own.
+BOTTOMS = {"trousers", "novice_trousers", "footpad_trousers", "hunters_trousers", "deckhand_trousers"}
 ## Hat shapes (EquipDef.look_shape): the cell of the hat/hair template sheets
 ## (hats_<body>.png) each is painted in, by (row, column). The hair under every hat of a
 ## shape is that cell's.
@@ -101,7 +111,12 @@ HAT_SHAPES = {"helm": (0, 0), "tricorn": (0, 1), "bandana": (0, 2), "hood": (1, 
 ## The cell of hats_<body>.png with no hat (to compare the others with).
 HATLESS = (1, 2)
 ## Hats with their own art, by the template cell (shape) they are painted on.
-HAT_ITEMS = {"squire_helm": "helm"}
+HAT_ITEMS = {"squire_helm": "helm", "novice_hat": "wizard", "footpad_bandana": "bandana",
+             "hunters_hood": "hood", "deckhand_tricorn": "tricorn"}
+## Hats painted on their own copy of the template (hats_<body>_<sheet>.png: the template with
+## only that hat's cell repainted), by item. The rest are the template's own hats. The hair
+## under them is still the template's.
+HAT_SHEETS = {"footpad_bandana": "footpad"}
 
 
 def frame_index(body, pose):
@@ -304,12 +319,12 @@ class Body:
             m = close(changed(edit[rc], self.base[rc]), 4) & (a > 0.02)
             # the edit redraws his hair a little differently; none of that is the piece
             m &= ~(self.hair_region(rc) & ~dilate(self.bald[rc][1] > 0.5, 3))
-            if sheet == "trousers":  # his pale shirt re-rendered paler is not the trousers
+            if sheet in BOTTOMS:  # his pale shirt re-rendered paler is not the trousers
                 m &= ~((rgb.mean(2) > 0.7) & (self.base[rc][0].mean(2) > 0.6))
             m &= dilate(~dilate(~m, 5, outside=True), 5)  # and no thin lines (redrawn outlines)
             # still bare skin, much as it was (his feet under trousers; a top keeps all it has)
             bare = (skin_mask(rgb, a) & skin_mask(*self.base[rc])
-                    & (np.abs(rgb - self.base[rc][0]).max(2) < 0.2) & (sheet == "trousers"))
+                    & (np.abs(rgb - self.base[rc][0]).max(2) < 0.2) & (sheet in BOTTOMS))
             m = main_parts(fill_holes(m) & ~bare)
             out[pose] = (rgb, a * dilate(m, 1) * np.where(m, 1.0, 0.5))
         return out
@@ -441,12 +456,12 @@ def fill_holes(m):
 
 
 class Hats:
-    """The hats painted on one body's idle pose (hats_<body>.png), and where its head is on
-    every pose."""
+    """The hats painted on one body's idle pose (hats_<body>.png, or a repainted copy of it,
+    hats_<body>_<sheet>.png), and where its head is on every pose."""
 
-    def __init__(self, body):
+    def __init__(self, body, sheet=None):
         self.body = body
-        self.cells = keyed("hats_" + body.name, 2, 3)
+        self.cells = keyed("hats_" + body.name + ("_" + sheet if sheet else ""), 2, 3)
         idle = body.base[POSES["idle"]]
         rows = slice(idle[1].shape[0] // 2, idle[1].shape[0])  # line them up by his legs
         self.cells = {rc: c for rc, c in aligned(self.cells, {rc: idle for rc in self.cells}, rows).items()}
@@ -600,10 +615,14 @@ def build_hats(bodies):
                 white = np.ones(cut.shape + (3,))
                 put(cuts, body.name, pose, body.fit.frame(white, cut.astype(float)))
                 for item, item_shape in HAT_ITEMS.items():
-                    if item_shape == shape:
+                    if item_shape == shape and item not in HAT_SHEETS:
                         put(items[item], body.name, pose, body.fit.frame(*hat))
             save(hair, os.path.join(LAYERS, "hair_%s_%s.png" % (STYLES[body.name], shape)))
         save(cuts, os.path.join(PIECES, "headcut_%s.png" % shape))
+    for item, sheet in HAT_SHEETS.items():
+        for body in bodies.values():
+            for pose, (hat, _, _) in hats_of(body, sheet).shape(HAT_SHAPES[HAT_ITEMS[item]]).items():
+                put(items[item], body.name, pose, body.fit.frame(*hat))
     for item, strip in items.items():
         save(strip, os.path.join(LAYERS, "worn_item_%s.png" % item))
 
@@ -611,11 +630,11 @@ def build_hats(bodies):
 _HATS = {}
 
 
-def hats_of(body):
-    """One body's Hats (its head tracked once)."""
-    if body.name not in _HATS:
-        _HATS[body.name] = Hats(body)
-    return _HATS[body.name]
+def hats_of(body, sheet=None):
+    """One body's Hats from the template (or its repainted copy `sheet`), each made once."""
+    if (body.name, sheet) not in _HATS:
+        _HATS[(body.name, sheet)] = Hats(body, sheet)
+    return _HATS[(body.name, sheet)]
 
 
 def build_rig(bodies):

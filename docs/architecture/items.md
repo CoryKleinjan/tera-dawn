@@ -70,11 +70,13 @@ for the loot key, and stays there if its tab is full.
 
 ## How to add a weapon
 
-- **Worn gear** (tops, bottoms, hats): a Gemini edit of the body sheet with the piece on
-  (`art/source/hero/body_<body>_<piece>.png`, one per body), and for a hat the same shape as
-  its template cell. Name it in `WORN` or `HAT_ITEMS` in `tools/art/hero_build.py` and run it:
-  it writes `layers/worn_item_<id>.png`. The item's icon is painted to match (see
-  `art/sheets/README.md`).
+- **Worn gear** (tops, bottoms, shoes, hats): a Gemini edit of the body sheet with the piece on
+  (`art/source/hero/body_<body>_<piece>.png`), named in `WORN` in `tools/art/hero_build.py`
+  (trousers also in `BOTTOMS`). A hat is one of the template's hat shapes: the template's own
+  hat goes in `HAT_ITEMS`; a new hat of a shape is the template with only that cell repainted
+  (`hats_<body>_<sheet>.png`), in `HAT_ITEMS` and `HAT_SHEETS`. Run the build: it writes
+  `layers/worn_item_<id>.png`. One icon per item, shared by both bodies, painted from the worn
+  piece (the starter sets' icons are cut by `art/sheets/starter_armor_icons.json`).
 - **Weapons and shields** wait on their art: the rig has no holds yet (`hero_rig.json`
   "weapons"). Until then any weapon is held as a sword (`Paperdoll.kind_of`) with no picture.
 - **A new weapon kind**: give it a row in `WeaponStyle.MOTIONS` and its hold in the rig.

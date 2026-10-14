@@ -95,10 +95,14 @@ update this page when one changes. Each zone's own look and music are in
 
 ## Gear
 
-- The game has no equipment for now: every item, icon and worn picture was removed to be redrawn
-  for the new hero (2026-10-13). The equipment system (slots, the equip window, stats) stays, and
-  the tests bring their own plain gear (`tests/fixtures/gear`). New gear starts fresh: each piece
-  is painted worn and as a matching icon; the old icons are never used.
+- Gear is being redrawn for the new hero: the old items, icons and worn pictures were removed
+  (2026-10-13) and are never used again. Each first job has a starter armor set (hat, top,
+  trousers, shoes; Lv 10, that job and its blends only), sold in its town's shop: Warrior
+  Squire set (Emberforge), Magician Novice set (Lumewood), Thief Footpad set (Lanternfall),
+  Archer Hunter's set (Greenbough), Pirate Deckhand set (Driftcove). Tests still bring their own
+  plain gear (`tests/fixtures/gear`) for what the game doesn't have yet.
+- Each piece of gear is painted once, worn on the hero, plus one icon that the boy and the girl
+  share. (The starter sets were also painted on the girl.)
 - An item's icon and its worn or held look are the same object: shape, colours and details. Worn
   gear is cut the same way the icons are, keeps their detail, uses the hero's near-black outline,
   and is never cut off.
