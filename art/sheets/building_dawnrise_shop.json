@@ -1,0 +1,35 @@
+{
+  "source": "art/source/building_dawnrise_shop.png",
+  "art_px": 4.277,
+  "out_dir": "assets/sprites/buildings/dawnrise",
+  "label_band": 0,
+  "inset": 0,
+  "grid": {
+    "rows": [
+      0,
+      1376
+    ],
+    "cols": [
+      0,
+      1433
+    ]
+  },
+  "cells": [
+    [
+      "shop"
+    ]
+  ],
+  "flat_bottom": true,
+  "overrides": {
+    "shop": {
+      "blank": [
+        [
+          0,
+          1259,
+          1434,
+          1377
+        ]
+      ]
+    }
+  }
+}

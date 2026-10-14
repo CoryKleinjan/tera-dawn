@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/npc_dawnrise_farmer.tres" id="2_sprite"]
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"dawnrise_farmer"
+display_name = "Tobin"
+title = "Farmer"
+sprite_frames = ExtResource("2_sprite")
+greeting = "Morning! Up here you can see the whole village wake up."
+lines = PackedStringArray("The windmill grinds Poppy's flour. Best bread on the island, if you ask me.", "The Dewlings come right up to the fence some mornings. Harmless little things.")
+storage = false
