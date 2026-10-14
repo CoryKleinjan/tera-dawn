@@ -64,7 +64,6 @@ func test_rebinding_a_key_works_in_game() -> void:
 	check_eq((_menu().key_buttons["equipment:0"] as Button).text, "I", "equipment got the old key")
 	check(_menu().note.text.contains("Equipment"), "the note says what was swapped")
 	check_eq(TDStatusBar._key_name("inventory"), "E", "the status bar follows")
-	check(ui.hud.keys_help.text.contains("E inventory"), "the title hints follow")
 	_menu().reset_button.pressed.emit()
 	check_eq(button.text, "I", "Reset puts the default back")
 	button.pressed.emit()

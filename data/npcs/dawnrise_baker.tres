@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/npc_dawnrise_baker.tres" id="2_sprite"]
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"dawnrise_baker"
+display_name = "Poppy"
+title = "Baker"
+sprite_frames = ExtResource("2_sprite")
+greeting = "Fresh from the oven! Smells like a good start to the day, doesn't it?"
+lines = PackedStringArray("Mira sells my loaves in her shop. Take one for the road.", "I've been up since before the sun. Somebody has to bake for this village!")
+storage = false
