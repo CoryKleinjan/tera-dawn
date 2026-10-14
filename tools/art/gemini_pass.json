@@ -12417,6 +12417,32 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Each cell holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: climbing a rope, climbing a rope, holding a rope with both hands above his head, climbing a ladder, climbing a ladder, holding a ladder, standing; cell 8 is empty). He is seen from BEHIND, his back to the viewer. Use the second attached picture ONLY to see the look and style of a young magician's outfit (do not copy its pose or add its figure). On the feet of each green shape, paint ONLY a pair of soft magician's slippers: deep blue cloth with gold trim around the opening and gently curled pointed toes, following each foot's pose in that cell. Paint nothing else: no legs, body or clothes. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, as if the arms were not there, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Style: the warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline and small busy painted detail of the robe in the second attached picture. Keep the grid lines. No text, no labels."
   }
+ },
+ {
+  "id": "mshero_body_walk",
+  "prompts": null,
+  "batch": "maple hero sheets (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_walk.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 23:48Z 'Do it' to a 4-step body walk, body first, ~$0.07 of ~$0.49): the old walk frames are one pose; two versions of a 4-step walk cycle to pick frames from.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/frames_2x4.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_move.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "Paint the game's base character walking: exactly the same chibi boy as in the first attached picture (same head, ears, blank face with no eyes, brows or mouth, bald, cream short-sleeved undershirt, brown shorts, barefoot, rounded mitten hands closed in fists with no separate fingers or thumbs, same size and proportions as the figures in that picture, same clean smooth painted style and thin dark plum-brown outline). The base picture is a sheet of 8 cells (2 rows of 4); paint ONE full figure in each cell, centred, at the same size in every cell, with his feet on the same ground line near the bottom of the cell, like a MapleStory character sprite sheet. In every cell he faces right in a slight three-quarter side view, the same angle as the first cell of the first attached picture. Each row is one walk cycle of 4 clearly different steps, and the two rows are two versions of the same cycle to choose from. Cell 1 and cell 5: CONTACT, a long stride, the leg on the RIGHT side of the picture stepping far forward with its heel down, the leg on the LEFT side stretched far back on its toes, the arm on the LEFT side swung forward and the arm on the RIGHT side swung back. Cell 2 and cell 6: PASSING, the left-side leg now straight under him carrying his weight, the right-side knee lifted and bent as that foot swings through behind, body a little higher, arms close to his sides. Cell 3 and cell 7: CONTACT the other way, a long stride, the leg on the LEFT side stepping far forward with its heel down, the leg on the RIGHT side stretched far back on its toes, the arm on the RIGHT side swung forward and the arm on the LEFT side swung back (the opposite of cell 1). Cell 4 and cell 8: PASSING the other way, the right-side leg straight under him, the left-side knee lifted and bent as that foot swings through, body a little higher, arms close to his sides. The legs must look clearly different from one cell to the next so the walk animates; the strides in cells 1, 3, 5 and 7 are wide, with a clear gap between the feet. Keep the background flat pure magenta #FF00FF and keep the grid lines. Nothing else in the cells: no weapons, props, shadows, effects, text or labels. Light from the upper left."
+  }
  }
 ]
 }
