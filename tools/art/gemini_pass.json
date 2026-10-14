@@ -12662,6 +12662,381 @@
    "refs": [],
    "text": "This sheet shows the same young chibi boy six times (2 rows x 3 columns), each with a different hat. Change ONLY row 1, cell 3 (his red bandana).\nRepaint that bandana as exactly the same bandana (the same shape, size, fit low on his brow, knot and two short tails at the back of his head) but in black cloth with a thin silver-grey stitched trim along its lower edge, simple starter gear for a new thief. Keep his hair under and around it exactly as it is painted now; draw no new hair.\nKeep his face, body, pose and outline, every other cell, the painting style, the pure magenta #FF00FF background and the cell borders exactly as they are. No text."
   }
+ },
+ {
+  "id": "starter_warrior_top_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_warrior_top_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/warrior_top_boy_idle.png"
+   ],
+   "text": "The first image is an animation sheet of a young chibi girl with a brown ponytail in 12 cells (3 rows x 4 columns). The second image is ONE picture of a boy wearing the piece to copy. In EVERY cell dress her upper body in his top, simple starter gear for a new warrior. It must be exactly the same top the boy wears in the second image (a padded dull red-brown quilted cloth squire's jerkin with vertical stitched padding lines, a plain round neck, short sleeves to just above the elbow and the hem at her hips): the same shape, cut, length, colours, trim, buttons, stitching and details, fitted to her body. Copy only the top from the second image; do not copy his pose, face, hair or anything else.\nIt follows her pose in each cell. Change nothing else: her arms below the sleeves, hands, shorts, legs, bare feet, head, face, hair and ponytail stay exactly as they are. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_warrior_shoes_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_warrior_shoes_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/warrior_shoes_boy_idle.png"
+   ],
+   "text": "The first image is an animation sheet of a young chibi girl with a brown ponytail in 12 cells (3 rows x 4 columns). The second image is ONE picture of a boy wearing the piece to copy. In EVERY cell put his footwear on both of her bare feet, simple starter gear for a new warrior. It must be exactly the same footwear the boy wears in the second image (sturdy red-brown leather ankle boots with a plain dull-steel toe cap and a thick dark sole, a few scuffs, the same dull red-brown as a padded quilted squire's jerkin): the same shape, cut, length, colours, trim, buttons, stitching and details, fitted to her body. Copy only the footwear from the second image; do not copy his pose, face, hair or anything else.\nThey follow her feet and legs in each cell, standing on the same baseline. Change nothing else: her shirt, grey shorts, arms, hands, head, face, hair and ponytail stay exactly as they are, and her legs above the footwear stay bare. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_mage_top_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_mage_top_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/mage_top_boy_idle.png"
+   ],
+   "text": "The first image is an animation sheet of a young chibi girl with a brown ponytail in 12 cells (3 rows x 4 columns). The second image is ONE picture of a boy wearing the piece to copy. In EVERY cell dress her upper body in his top, simple starter gear for a new magician. It must be exactly the same top the boy wears in the second image (a royal-blue cloth mage's tunic-robe (the same bright royal blue as a blue wizard's hat) with a narrow gold trim at the round neck, the sleeve ends and the hem; short sleeves to just above the elbow; the hem at mid-thigh; a plain dark-purple cloth sash tied at the waist): the same shape, cut, length, colours, trim, buttons, stitching and details, fitted to her body. Copy only the top from the second image; do not copy his pose, face, hair or anything else.\nIt follows her pose in each cell. Change nothing else: her arms below the sleeves, hands, shorts, legs, bare feet, head, face, hair and ponytail stay exactly as they are. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_mage_bottom_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_mage_bottom_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/mage_bottom_boy_idle.png"
+   ],
+   "text": "The first image is an animation sheet of a young chibi girl with a brown ponytail in 12 cells (3 rows x 4 columns). The second image is ONE picture of a boy wearing the piece to copy. In EVERY cell replace her grey shorts with his trousers, simple starter gear for a new magician. It must be exactly the same trousers the boy wears in the second image (loose dark navy-purple cloth trousers that reach down to his ankles): the same shape, cut, length, colours, trim, buttons, stitching and details, fitted to her body. Copy only the trousers from the second image; do not copy his pose, face, hair or anything else.\nThey follow her legs in each cell. Change nothing else: her shirt, arms, hands, bare feet, head, face, hair and ponytail stay exactly as they are. No belt, no boots. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_mage_shoes_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_mage_shoes_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/mage_shoes_boy_idle.png"
+   ],
+   "text": "The first image is an animation sheet of a young chibi girl with a brown ponytail in 12 cells (3 rows x 4 columns). The second image is ONE picture of a boy wearing the piece to copy. In EVERY cell put his footwear on both of her bare feet, simple starter gear for a new magician. It must be exactly the same footwear the boy wears in the second image (soft royal-blue cloth slippers with a narrow gold trim around the opening, slightly pointed toes and thin dark soles): the same shape, cut, length, colours, trim, buttons, stitching and details, fitted to her body. Copy only the footwear from the second image; do not copy his pose, face, hair or anything else.\nThey follow her feet and legs in each cell, standing on the same baseline. Change nothing else: her shirt, grey shorts, arms, hands, head, face, hair and ponytail stay exactly as they are, and her legs above the footwear stay bare. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_thief_top_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_thief_top_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/thief_top_boy_idle.png"
+   ],
+   "text": "The first image is an animation sheet of a young chibi girl with a brown ponytail in 12 cells (3 rows x 4 columns). The second image is ONE picture of a boy wearing the piece to copy. In EVERY cell dress her upper body in his top, simple starter gear for a new thief. It must be exactly the same top the boy wears in the second image (a fitted black leather thief's jerkin with short sleeves to just above the elbow, the hem at his hips, two small silver-buckled straps across the chest and silver-grey stitching): the same shape, cut, length, colours, trim, buttons, stitching and details, fitted to her body. Copy only the top from the second image; do not copy his pose, face, hair or anything else.\nIt follows her pose in each cell. Change nothing else: her arms below the sleeves, hands, shorts, legs, bare feet, head, face, hair and ponytail stay exactly as they are. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_thief_bottom_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_thief_bottom_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/thief_bottom_boy_idle.png"
+   ],
+   "text": "The first image is an animation sheet of a young chibi girl with a brown ponytail in 12 cells (3 rows x 4 columns). The second image is ONE picture of a boy wearing the piece to copy. In EVERY cell replace her grey shorts with his trousers, simple starter gear for a new thief. It must be exactly the same trousers the boy wears in the second image (snug charcoal-grey cloth trousers that reach down to his ankles, with black cloth bands wrapped just below the knees): the same shape, cut, length, colours, trim, buttons, stitching and details, fitted to her body. Copy only the trousers from the second image; do not copy his pose, face, hair or anything else.\nThey follow her legs in each cell. Change nothing else: her shirt, arms, hands, bare feet, head, face, hair and ponytail stay exactly as they are. No belt, no boots. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_thief_shoes_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_thief_shoes_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/thief_shoes_boy_idle.png"
+   ],
+   "text": "The first image is an animation sheet of a young chibi girl with a brown ponytail in 12 cells (3 rows x 4 columns). The second image is ONE picture of a boy wearing the piece to copy. In EVERY cell put his footwear on both of her bare feet, simple starter gear for a new thief. It must be exactly the same footwear the boy wears in the second image (soft black leather boots that reach mid-shin, wrapped with thin silver-grey cords, with thin quiet soles): the same shape, cut, length, colours, trim, buttons, stitching and details, fitted to her body. Copy only the footwear from the second image; do not copy his pose, face, hair or anything else.\nThey follow her feet and legs in each cell, standing on the same baseline. Change nothing else: her shirt, grey shorts, arms, hands, head, face, hair and ponytail stay exactly as they are, and her legs above the footwear stay bare. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_archer_top_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_archer_top_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/archer_top_boy_idle.png"
+   ],
+   "text": "The first image is an animation sheet of a young chibi girl with a brown ponytail in 12 cells (3 rows x 4 columns). The second image is ONE picture of a boy wearing the piece to copy. In EVERY cell dress her upper body in his top, simple starter gear for a new archer. It must be exactly the same top the boy wears in the second image (a forest-green leather archer's vest worn over his shirt (his shirt's short sleeves still show), laced at the front with brown leather cord, with a brown stitched trim along the hem at his hips): the same shape, cut, length, colours, trim, buttons, stitching and details, fitted to her body. Copy only the top from the second image; do not copy his pose, face, hair or anything else.\nIt follows her pose in each cell. Change nothing else: her arms below the sleeves, hands, shorts, legs, bare feet, head, face, hair and ponytail stay exactly as they are. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_archer_bottom_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_archer_bottom_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/archer_bottom_boy_idle.png"
+   ],
+   "text": "The first image is an animation sheet of a young chibi girl with a brown ponytail in 12 cells (3 rows x 4 columns). The second image is ONE picture of a boy wearing the piece to copy. In EVERY cell replace her grey shorts with his trousers, simple starter gear for a new archer. It must be exactly the same trousers the boy wears in the second image (warm brown cloth trousers that reach down to his ankles, with darker brown leather patches on the knees): the same shape, cut, length, colours, trim, buttons, stitching and details, fitted to her body. Copy only the trousers from the second image; do not copy his pose, face, hair or anything else.\nThey follow her legs in each cell. Change nothing else: her shirt, arms, hands, bare feet, head, face, hair and ponytail stay exactly as they are. No belt, no boots. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_archer_shoes_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_archer_shoes_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/archer_shoes_boy_idle.png"
+   ],
+   "text": "The first image is an animation sheet of a young chibi girl with a brown ponytail in 12 cells (3 rows x 4 columns). The second image is ONE picture of a boy wearing the piece to copy. In EVERY cell put his footwear on both of her bare feet, simple starter gear for a new archer. It must be exactly the same footwear the boy wears in the second image (brown lace-up leather boots that reach mid-shin, with a forest-green cloth cuff at the top): the same shape, cut, length, colours, trim, buttons, stitching and details, fitted to her body. Copy only the footwear from the second image; do not copy his pose, face, hair or anything else.\nThey follow her feet and legs in each cell, standing on the same baseline. Change nothing else: her shirt, grey shorts, arms, hands, head, face, hair and ponytail stay exactly as they are, and her legs above the footwear stay bare. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_pirate_top_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_pirate_top_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/pirate_top_boy_idle.png"
+   ],
+   "text": "The first image is an animation sheet of a young chibi girl with a brown ponytail in 12 cells (3 rows x 4 columns). The second image is ONE picture of a boy wearing the piece to copy. In EVERY cell dress her upper body in his top, simple starter gear for a new pirate. It must be exactly the same top the boy wears in the second image (a short deep-red pirate's coat with gold trim along every edge and a row of small gold buttons, open at the front over his shirt, short sleeves ending in folded-back gold-trimmed cuffs above the elbow, the hem at his hips): the same shape, cut, length, colours, trim, buttons, stitching and details, fitted to her body. Copy only the top from the second image; do not copy his pose, face, hair or anything else.\nIt follows her pose in each cell. Change nothing else: her arms below the sleeves, hands, shorts, legs, bare feet, head, face, hair and ponytail stay exactly as they are. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_pirate_bottom_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_pirate_bottom_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/pirate_bottom_boy_idle.png"
+   ],
+   "text": "The first image is an animation sheet of a young chibi girl with a brown ponytail in 12 cells (3 rows x 4 columns). The second image is ONE picture of a boy wearing the piece to copy. In EVERY cell replace her grey shorts with his trousers, simple starter gear for a new pirate. It must be exactly the same trousers the boy wears in the second image (loose cream-and-red horizontally striped sailor trousers that end at mid-calf): the same shape, cut, length, colours, trim, buttons, stitching and details, fitted to her body. Copy only the trousers from the second image; do not copy his pose, face, hair or anything else.\nThey follow her legs in each cell. Change nothing else: her shirt, arms, hands, bare feet, head, face, hair and ponytail stay exactly as they are. No belt, no boots. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_pirate_shoes_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_pirate_shoes_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/pirate_shoes_boy_idle.png"
+   ],
+   "text": "The first image is an animation sheet of a young chibi girl with a brown ponytail in 12 cells (3 rows x 4 columns). The second image is ONE picture of a boy wearing the piece to copy. In EVERY cell put his footwear on both of her bare feet, simple starter gear for a new pirate. It must be exactly the same footwear the boy wears in the second image (tall black leather boots reaching just below the knee, with a wide folded-down cuff and a small gold buckle on the front): the same shape, cut, length, colours, trim, buttons, stitching and details, fitted to her body. Copy only the footwear from the second image; do not copy his pose, face, hair or anything else.\nThey follow her feet and legs in each cell, standing on the same baseline. Change nothing else: her shirt, grey shorts, arms, hands, head, face, hair and ponytail stay exactly as they are, and her legs above the footwear stay bare. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_thief_hat_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_thief_hat_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   2,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/hats_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/thief_hat_boy_cell.png"
+   ],
+   "text": "The first image shows the same young chibi girl six times (2 rows x 3 columns), each with a different hat. Change ONLY row 1, cell 3 (her red bandana).\nRepaint that bandana as exactly the same bandana the boy wears in the second image: black cloth with a thin silver-grey stitched trim along its lower edge, the same shape, size, fit low on the brow, knot and two short tails at the back of the head, fitted to her head. Copy only the bandana; do not copy his face or hair. Keep her hair under and around it, and her short tail below it, exactly as they are painted now; draw no new hair.\nKeep her face, body, pose and outline, every other cell, the painting style, the pure magenta #FF00FF background and the cell borders exactly as they are. No text."
+  }
  }
 ]
 }
