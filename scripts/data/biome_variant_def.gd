@@ -50,10 +50,25 @@ const KEEP_COLOR := Color(0, 0, 0, 0)
 ## already fill the street.
 @export var hide_town_decor := false
 
+@export_group("Land")
+## The sub zone's own land pieces (BiomeDef's platform, terrace and ground pictures), e.g. a
+## town's paved stone terraces in a forest zone. Any left empty stay the biome's own.
+@export var platform_left: Texture2D
+@export var platform_middle: Texture2D
+@export var platform_middle_alt: Texture2D
+@export var platform_right: Texture2D
+@export var terrace_left: Texture2D
+@export var terrace_right: Texture2D
+@export var terrace_corner_left: Texture2D
+@export var terrace_corner_right: Texture2D
+@export var ground_side: Texture2D
+
 const COLORS := ["sky_top", "sky_mid", "sky_low", "sky_horizon", "sun_color", "light_color", "ambient_color",
 	"fog_color", "mote_color", "grade_tint", "grade_lift", "light_shaft_color"]
 const NUMBERS := ["light_energy", "ambient_energy", "grade_lift_amount", "grade_saturation"]
 const TOGGLES := ["motes_rise", "light_shafts"]
+const LAND := ["platform_left", "platform_middle", "platform_middle_alt", "platform_right", "terrace_left",
+	"terrace_right", "terrace_corner_left", "terrace_corner_right", "ground_side"]
 
 ## `base` with this variant applied: a copy, so the shared biome is never changed.
 func apply(base: BiomeDef) -> BiomeDef:
@@ -89,4 +104,7 @@ func apply(base: BiomeDef) -> BiomeDef:
 		b.ground_decor = decor
 	if hide_town_decor:
 		b.town_decor = []
+	for key in LAND:
+		if get(key) != null:
+			b.set(key, get(key))
 	return b

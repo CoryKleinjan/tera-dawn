@@ -1,0 +1,113 @@
+{
+  "source": "art/source/props_lumewood.png",
+  "out_dir": "assets/sprites/tiles/lumewood",
+  "label_band": 0,
+  "inset": 4,
+  "grid": {
+    "rows": [
+      0,
+      600,
+      1150,
+      1728
+    ],
+    "cols": [
+      [
+        0,
+        860,
+        1436,
+        2258,
+        3072
+      ],
+      [
+        0,
+        688,
+        1563,
+        1950,
+        2431,
+        3072
+      ],
+      [
+        0,
+        820,
+        1500,
+        2280,
+        3072
+      ]
+    ]
+  },
+  "cells": [
+    [
+      "prop_fountain",
+      "prop_crystals",
+      "prop_mushroom_planter",
+      "prop_book_cart"
+    ],
+    [
+      "prop_star_globe",
+      "prop_bench",
+      "prop_crystal_pillar",
+      "prop_scroll_barrel",
+      "prop_crystal_pillar_2"
+    ],
+    [
+      "prop_lectern",
+      "prop_telescope",
+      "prop_books",
+      "prop_urn"
+    ]
+  ],
+  "overrides": {
+    "prop_fountain": {
+      "scale": 0.0885,
+      "flat_bottom": true
+    },
+    "prop_crystals": {
+      "scale": 0.1035,
+      "flat_bottom": true
+    },
+    "prop_mushroom_planter": {
+      "scale": 0.0628,
+      "flat_bottom": true
+    },
+    "prop_book_cart": {
+      "scale": 0.0951,
+      "flat_bottom": true
+    },
+    "prop_star_globe": {
+      "scale": 0.1138,
+      "flat_bottom": true
+    },
+    "prop_bench": {
+      "scale": 0.0951,
+      "flat_bottom": true
+    },
+    "prop_crystal_pillar": {
+      "scale": 0.1,
+      "flat_bottom": true
+    },
+    "prop_scroll_barrel": {
+      "scale": 0.0848,
+      "flat_bottom": true
+    },
+    "prop_lectern": {
+      "scale": 0.101,
+      "flat_bottom": true
+    },
+    "prop_telescope": {
+      "scale": 0.11,
+      "flat_bottom": true
+    },
+    "prop_books": {
+      "scale": 0.0755,
+      "flat_bottom": true
+    },
+    "prop_urn": {
+      "scale": 0.0755,
+      "flat_bottom": true
+    },
+    "prop_crystal_pillar_2": {
+      "scale": 0.102,
+      "flat_bottom": true
+    }
+  }
+}

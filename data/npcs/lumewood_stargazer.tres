@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/npc_lumewood_stargazer.tres" id="2_sprite"]
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"lumewood_stargazer"
+display_name = "Aldous"
+title = "Stargazer"
+sprite_frames = ExtResource("2_sprite")
+greeting = "Ah, a traveller. The stars noticed you long before I did."
+lines = PackedStringArray("From the observatory you can count every glass dome in the forest.", "The sky over Starfall Ridge is the clearest in the land.")
+storage = false

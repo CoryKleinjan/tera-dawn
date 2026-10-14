@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/npc_lumewood_kid.tres" id="2_sprite"]
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"lumewood_kid"
+display_name = "Lumi"
+title = "Sanctum Kid"
+sprite_frames = ExtResource("2_sprite")
+greeting = "Look! I made a light all by myself! ...Mostly by myself."
+lines = PackedStringArray("The mushrooms glow brighter when you sing to them.", "When I grow up I'll study in the big library.")
+storage = false
