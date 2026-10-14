@@ -205,6 +205,8 @@ update this page when one changes. Each zone's own look and music are in
 - Monster HP bars have no dragon emblem. Quest marks are a painted "!", "?" and three dots.
 - The equipment window shows the hero on a stencil with the slots around him.
 - No clouds on the title screen.
+- No controls box on screen, in towns or fields: the tutorial teaches the keys (its step hints
+  show at the bottom), and the full list is in Settings > Controls.
 - Skill icons are painted NPC-style badges: one bold subject (no people for Shoulder Bash or
   Rolling Dash) in a thick rounded frame of the job's colour: Beginner warm brown, Warrior
   crimson, Magician blue, Thief charcoal black with silver trim, Archer green, Pirate gold.
