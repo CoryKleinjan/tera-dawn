@@ -7,20 +7,20 @@
     [
       "prop_target",
       "prop_arrow_rack",
-      "",
-      ""
+      "prop_logs",
+      "prop_hay"
     ],
     [
-      "",
-      "",
-      "",
-      ""
+      "prop_planter",
+      "prop_barrel",
+      "prop_bench",
+      "prop_stump"
     ],
     [
       "prop_hide_rack",
-      "",
+      "prop_wheelbarrow",
       "prop_signpost",
-      ""
+      "prop_basket"
     ]
   ],
   "overrides": {
@@ -38,6 +38,38 @@
     },
     "prop_signpost": {
       "scale": 0.16,
+      "flat_bottom": true
+    },
+    "prop_logs": {
+      "scale": 0.1412,
+      "flat_bottom": true
+    },
+    "prop_hay": {
+      "scale": 0.1692,
+      "flat_bottom": true
+    },
+    "prop_planter": {
+      "scale": 0.1318,
+      "flat_bottom": true
+    },
+    "prop_barrel": {
+      "scale": 0.1579,
+      "flat_bottom": true
+    },
+    "prop_bench": {
+      "scale": 0.1566,
+      "flat_bottom": true
+    },
+    "prop_stump": {
+      "scale": 0.1256,
+      "flat_bottom": true
+    },
+    "prop_wheelbarrow": {
+      "scale": 0.1537,
+      "flat_bottom": true
+    },
+    "prop_basket": {
+      "scale": 0.0982,
       "flat_bottom": true
     }
   },
