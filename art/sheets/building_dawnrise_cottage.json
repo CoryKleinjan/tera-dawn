@@ -1,0 +1,35 @@
+{
+  "source": "art/source/building_dawnrise_cottage.png",
+  "art_px": 4.967,
+  "out_dir": "assets/sprites/buildings/dawnrise",
+  "label_band": 0,
+  "inset": 0,
+  "grid": {
+    "rows": [
+      0,
+      1376
+    ],
+    "cols": [
+      0,
+      1433
+    ]
+  },
+  "cells": [
+    [
+      "cottage"
+    ]
+  ],
+  "flat_bottom": true,
+  "overrides": {
+    "cottage": {
+      "blank": [
+        [
+          0,
+          1318,
+          1434,
+          1377
+        ]
+      ]
+    }
+  }
+}

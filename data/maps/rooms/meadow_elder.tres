@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MapDef" load_steps=18 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
-[ext_resource type="Resource" path="res://data/biomes/rooms/meadow_room.tres" id="2_meadow"]
+[ext_resource type="Resource" path="res://data/biomes/rooms/meadow_elder_room.tres" id="2_meadow"]
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="3_portal_def"]
 [ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="4_npc_placement"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="5_prop_placement"]
@@ -16,7 +16,7 @@ script = ExtResource("3_portal_def")
 x = 150.0
 platform = 0
 target_map = &"dawnrise_village"
-target_x = 1053.0
+target_x = 970.0
 door = true
 
 [sub_resource type="Resource" id="Prop_0"]

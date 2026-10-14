@@ -11922,6 +11922,259 @@
    }
   },
   {
+   "id": "dawnrise_city_elder_house",
+   "prompts": null,
+   "batch": "Dawnrise city test redo: Elder Rowan's house, flat front view",
+   "with": null,
+   "refs": [],
+   "save": "dawnrise_city_elder_house.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 thread 'Dawnrise Village up to Dawnharbor's standard' (Cory 23:42Z 'Yea' to the Dawnrise look questions): test before the full Dawnrise batch; Dawnrise Isle's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnrise-city/building_elder_house_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Dawnrise Village, the small, cosy starting village of my 2D side-scrolling game: the softest, most innocent, welcoming place in the game, on a sunny island lit by warm golden sunrise light (warm gold #ffe2b0 light, peach and rose-pink glow, shadows leaning plum-violet, never black). Shapes are round, soft and friendly. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (stone texture, wood grain, thatch straw, worn and chipped spots, slight colour variation between stones and planks). The new building is ELDER ROWAN'S HOUSE, the biggest house in the humble village, a little wider than it is tall: a cosy, rounded one-and-a-half-storey cottage of warm honey-coloured fieldstone with timber framing, on a low base of rounded stones; a big, fat, soft golden straw thatch roof with rounded edges that curves down over the eaves, with one round dormer window in the thatch; a short stone chimney; rose-pink and peach painted wooden shutters; warm glowing windows with small panes; flower boxes full of wildflowers under the windows; a climbing rose with pink flowers growing up beside the door; a round-topped wooden front door with iron hinges in the middle of the ground floor, under a small thatched porch hood; a small brass bell hung on a bracket beside the door. It feels humble, lived-in and loved, simpler than a city house. Strict rules: 1) Pure flat front elevation at eye level, like an architect's front drawing: we look straight at the long front wall, which is a flat rectangle. NO side wall, NO gable end, NO corner of the house shows, and nothing recedes into depth. The thatch roof shows only as a soft band rising above the front wall with a level eave line and a level ridge line; its left and right ends are rounded off symmetrically, never sloping back in perspective. The dormer sits in that band facing straight at us. Every horizontal line level, every wall edge vertical, the house left-right symmetrical in outline. 2) The bottom of the whole building is ONE straight horizontal line: its stone base reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no doorstep, steps, path, ground patch, ground line, grass, roots, fence, people or shadow. 3) The door is a real doorway at ground level, centred left to right in the building. 4) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 5) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. No blue roof tiles, no cream or white plaster (that is a different town). Nothing (rope, cloth, chain) ends loose in mid-air. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink-magenta anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "dawnrise_backdrop_panorama",
+   "prompts": null,
+   "batch": "Dawnrise city test redo: 4K sunrise meadow backdrop, no figures",
+   "with": null,
+   "refs": [],
+   "save": "dawnrise_backdrop_panorama.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-13 thread 'Dawnrise Village up to Dawnharbor's standard' (Cory 23:42Z 'Yea' to the Dawnrise look questions): test before the full Dawnrise batch; Dawnrise Isle's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnrise-city/backdrop_panorama_base.png",
+    "refs": [],
+    "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Dawnrise Village, the small, cosy starting village of my 2D side-scrolling game, on a gentle sunny island: the softest, most innocent and hopeful place in the game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (grass, leaves, flowers, soft clouds). Paint the background in that style, a little softer and lighter in contrast so it sits behind the characters. The scene: a sunrise meadow. Soft rolling green hills fade back layer by layer into rose-pink haze, dotted with wildflowers (white, yellow, pink), a few round friendly trees, small rocks and a winding dirt path. Far back on one hill stand two or three tiny thatched cottages and a small windmill. On the far right the hills open onto a calm sea with a little wooden jetty far away, the water sparkling gold under the sun. The sun is just rising over the far horizon, low and warm, with long soft golden light shafts and small golden motes floating in the air. Round soft clouds with peach undersides. Colours: deep plum sky at the very top (#2b2152), fading through rose-pink (#e8a49a) to a glowing peach horizon (#ffd3a0), warm gold light (#ffe2b0) on every lit edge, shadows leaning plum-violet, never black. Strict rules: 1) Side-on view at eye level, as if standing in the meadow, the horizon level. 2) No people, no characters, no figures of any kind, no animals, no birds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft, distant meadow seen across a valley, with no large flowers, grass blades, fences or rocks close to the viewer; the closest hills are in the middle distance and every flower is a tiny far-away dot. 4) The left and right edges continue naturally (hills, sky and haze), nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere."
+   }
+  },
+  {
+   "id": "dawnrise_city_shop",
+   "prompts": null,
+   "batch": "Dawnrise city: Mira's shop (new building)",
+   "with": null,
+   "refs": [],
+   "save": "dawnrise_city_shop.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-14 thread 'Dawnrise Village up to Dawnharbor's standard': Cory approved the Elder Rowan's house + backdrop repaint and the full Dawnrise batch ('Yes' 00:15Z). Dawnrise Isle's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnrise-city/building_elder_house_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/dawnrise_city_elder_house_2.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Dawnrise Village, the small, cosy starting village of my 2D side-scrolling game: the softest, most innocent, welcoming place in the game, on a sunny island lit by warm golden sunrise light (warm gold light, peach and rose-pink glow, shadows leaning plum-violet, never black). Shapes are round, soft and friendly. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (stone texture, wood grain, thatch straw, worn and chipped spots, slight colour variation between stones and planks). The third image is Elder Rowan's house from the same village: match its style, palette (warm honey fieldstone, dark timber framing, fat soft golden straw thatch, rose-pink heart shutters, flower boxes, climbing roses, rounded stone base), outline thickness and level of detail exactly, so they clearly belong to the same village. The new building is MIRA'S SHOP, the village's little general store, a little wider than it is tall and a bit smaller than Elder Rowan's house: a cosy one-storey cottage of honey fieldstone and timber framing on a rounded stone base, under a fat golden straw thatch roof; a round-topped wooden door at ground level in the middle; on each side of the door a wide shop window with small panes and a deep wooden sill displaying loaves, jars and apples; a soft striped peach-and-rose cloth awning stretched flat across the front above the windows and door, fixed to the wall at both ends; a wooden shop sign on an iron bracket showing a painted picture of a basket (picture only, no writing); a small flower box under each window. Strict rules: 1) Pure flat front elevation at eye level, like an architect's front drawing: we look straight at the front wall, which is a flat shape. NO side wall, NO gable end seen from the side, NO corner of the building shows, and nothing recedes into depth. Any thatch roof shows only as a soft band rising above the front wall with level eave and ridge lines, its ends rounded off symmetrically, never sloping back in perspective. Every horizontal line level, every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: everything reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no doorstep, steps, path, ground patch, ground line, grass, roots, fence, people or shadow. 3) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. No blue roof tiles, no cream or white plaster (that is a different town). Nothing (rope, cloth, chain) ends loose in mid-air. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink-magenta anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "dawnrise_city_windmill",
+   "prompts": null,
+   "batch": "Dawnrise city: windmill (new building)",
+   "with": null,
+   "refs": [],
+   "save": "dawnrise_city_windmill.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-14 thread 'Dawnrise Village up to Dawnharbor's standard': Cory approved the Elder Rowan's house + backdrop repaint and the full Dawnrise batch ('Yes' 00:15Z). Dawnrise Isle's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnrise-city/building_tall_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/dawnrise_city_elder_house_2.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Dawnrise Village, the small, cosy starting village of my 2D side-scrolling game: the softest, most innocent, welcoming place in the game, on a sunny island lit by warm golden sunrise light (warm gold light, peach and rose-pink glow, shadows leaning plum-violet, never black). Shapes are round, soft and friendly. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (stone texture, wood grain, thatch straw, worn and chipped spots, slight colour variation between stones and planks). The third image is Elder Rowan's house from the same village: match its style, palette (warm honey fieldstone, dark timber framing, fat soft golden straw thatch, rose-pink heart shutters, flower boxes, climbing roses, rounded stone base), outline thickness and level of detail exactly, so they clearly belong to the same village. The new building is the village WINDMILL, much taller than it is wide: a round-shouldered tower of honey fieldstone, wider at the bottom and narrowing gently to the top, seen straight from the front as a flat tapering shape, with a cap of fat golden straw thatch; four big wooden sail frames with peach-coloured cloth sails fixed in an X across the front of the cap on a round wooden hub, every sail tied neatly to its frame; a round-topped wooden door at ground level in the middle of the base and one small round window above it; a few climbing roses at the base. The sails fit completely inside the picture. Strict rules: 1) Pure flat front elevation at eye level, like an architect's front drawing: we look straight at the front wall, which is a flat shape. NO side wall, NO gable end seen from the side, NO corner of the building shows, and nothing recedes into depth. Any thatch roof shows only as a soft band rising above the front wall with level eave and ridge lines, its ends rounded off symmetrically, never sloping back in perspective. Every horizontal line level, every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: everything reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no doorstep, steps, path, ground patch, ground line, grass, roots, fence, people or shadow. 3) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. No blue roof tiles, no cream or white plaster (that is a different town). Nothing (rope, cloth, chain) ends loose in mid-air. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink-magenta anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "dawnrise_city_cottage",
+   "prompts": null,
+   "batch": "Dawnrise city: family cottage (new building)",
+   "with": null,
+   "refs": [],
+   "save": "dawnrise_city_cottage.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-14 thread 'Dawnrise Village up to Dawnharbor's standard': Cory approved the Elder Rowan's house + backdrop repaint and the full Dawnrise batch ('Yes' 00:15Z). Dawnrise Isle's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnrise-city/building_elder_house_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/dawnrise_city_elder_house_2.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Dawnrise Village, the small, cosy starting village of my 2D side-scrolling game: the softest, most innocent, welcoming place in the game, on a sunny island lit by warm golden sunrise light (warm gold light, peach and rose-pink glow, shadows leaning plum-violet, never black). Shapes are round, soft and friendly. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (stone texture, wood grain, thatch straw, worn and chipped spots, slight colour variation between stones and planks). The third image is Elder Rowan's house from the same village: match its style, palette (warm honey fieldstone, dark timber framing, fat soft golden straw thatch, rose-pink heart shutters, flower boxes, climbing roses, rounded stone base), outline thickness and level of detail exactly, so they clearly belong to the same village. The new building is a small FAMILY COTTAGE, smaller and humbler than Elder Rowan's house, a little wider than it is tall: a one-storey cottage of honey fieldstone with dark timber framing on a rounded stone base, under a fat golden straw thatch roof with a short stone chimney; a round-topped wooden door at ground level in the middle with a small horseshoe over it; one window with peach shutters on each side of the door; a flower box under each window; a little bird box fixed to the wall beside the door; a strip of sunflowers growing against one side of the front wall, resting on the ground line. Strict rules: 1) Pure flat front elevation at eye level, like an architect's front drawing: we look straight at the front wall, which is a flat shape. NO side wall, NO gable end seen from the side, NO corner of the building shows, and nothing recedes into depth. Any thatch roof shows only as a soft band rising above the front wall with level eave and ridge lines, its ends rounded off symmetrically, never sloping back in perspective. Every horizontal line level, every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: everything reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no doorstep, steps, path, ground patch, ground line, grass, roots, fence, people or shadow. 3) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. No blue roof tiles, no cream or white plaster (that is a different town). Nothing (rope, cloth, chain) ends loose in mid-air. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink-magenta anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "dawnrise_props",
+   "prompts": null,
+   "batch": "Dawnrise city: props sheet",
+   "with": null,
+   "refs": [],
+   "save": "dawnrise_props.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    4,
+    3
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-14 thread 'Dawnrise Village up to Dawnharbor's standard': Cory approved the Elder Rowan's house + backdrop repaint and the full Dawnrise batch ('Yes' 00:15Z). Dawnrise Isle's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnrise-city/props_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/dawnrise_city_elder_house_2.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint a sheet of TWELVE separate props for Dawnrise Village, the small, cosy starting village of my 2D side-scrolling game: the softest, most innocent, welcoming place in the game, on a sunny island lit by warm golden sunrise light (warm gold light, peach and rose-pink glow, shadows leaning plum-violet, never black). Shapes are round, soft and friendly. Lay them out in 3 rows of 4, evenly spaced, each prop centred in its own quarter-by-third area of the canvas with a wide band of plain magenta around it, and no prop touching another. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (stone texture, wood grain, thatch straw, worn and chipped spots, slight colour variation between stones and planks). The third image is Elder Rowan's house from the same village: match its style, palette (warm honey fieldstone, dark timber framing, fat soft golden straw thatch, rose-pink heart shutters, flower boxes, climbing roses, rounded stone base), outline thickness and level of detail exactly, so the props clearly belong on its village green. The twelve props, in reading order: Row 1: 1) a round stone well with a little golden thatch roof on two wooden posts and a wooden crank, its bucket resting on the stone rim, 2) a short section of white-washed wooden picket fence with rounded tops, 3) two round golden hay bales side by side, 4) a long raised wooden flower bed full of wildflowers and pink tulips. Row 2: 5) a raised wooden vegetable bed with cabbages, carrot tops and a pumpkin, 6) two woven straw beehives (skeps) standing on a small wooden bench, 7) a friendly scarecrow with a straw hat and a patched peach shirt on a wooden pole, 8) a wooden wheelbarrow full of orange pumpkins. Row 3: 9) a small wooden garden bench, 10) a stone water trough, 11) a wooden signpost with two blank rounded arrow boards, 12) a woven basket of fresh bread loaves and eggs. Strict rules: 1) Every prop in pure flat side view at eye level, like an architect's elevation drawing, standing upright on its own flat bottom edge, sized as it would be next to a person (hay bales and the trough about knee to waist high). NO top surface of anything shows: the top of every bed, trough, well rim, barrow, bench and basket is seen exactly edge-on as a single straight line, never as an oval or a slanted face, and nothing recedes into depth. 2) No ground, shadow, grass or base under any prop. 3) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. 4) No letters, numbers, words or labels anywhere, no grid lines, no borders and no frames. 5) Nothing (rope, cloth) ends loose in mid-air. 6) Flat pure magenta #FF00FF background everywhere outside the props, with no magenta or pink-magenta anywhere inside them. Do not draw any characters."
+   }
+  },
+  {
+   "id": "dawnrise_lamp_post",
+   "prompts": null,
+   "batch": "Dawnrise city: lamp post",
+   "with": null,
+   "refs": [],
+   "save": "dawnrise_lamp_post.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-14 thread 'Dawnrise Village up to Dawnharbor's standard': Cory approved the Elder Rowan's house + backdrop repaint and the full Dawnrise batch ('Yes' 00:15Z). Dawnrise Isle's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/dawnrise-city/lamp_post_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/dawnrise_city_elder_house_2.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE lamp post for Dawnrise Village, the small, cosy starting village of my 2D side-scrolling game: the softest, most innocent, welcoming place in the game, on a sunny island lit by warm golden sunrise light (warm gold light, peach and rose-pink glow, shadows leaning plum-violet, never black). Shapes are round, soft and friendly. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (stone texture, wood grain, thatch straw, worn and chipped spots, slight colour variation between stones and planks). The third image is Elder Rowan's house from the same village: match its style, palette (warm honey fieldstone, dark timber framing, fat soft golden straw thatch, rose-pink heart shutters, flower boxes, climbing roses, rounded stone base), outline thickness and level of detail exactly, so they clearly belong to the same village. The lamp: a short, friendly, straight wooden post, about twice as tall as a person, on a small round fieldstone footing, with a few climbing roses winding up it, and a round wooden lantern set firmly on top of the post under a tiny golden thatch cap. The lantern is lit, with a warm golden flame behind its glass panes. Nothing hangs from it. Strict rules: 1) Pure side view at eye level, perfectly upright and centred. 2) The bottom of the footing is ONE flat straight horizontal edge. No ground, shadow or grass under it. 3) The lamp fills most of the canvas height with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words. No glow halo spilling onto the background. Flat pure magenta #FF00FF background everywhere outside the lamp. Do not draw any characters."
+   }
+  },
+  {
+   "id": "dawnrise_townsfolk",
+   "prompts": null,
+   "batch": "Dawnrise city: two townsfolk NPCs",
+   "with": null,
+   "refs": [],
+   "save": "dawnrise_townsfolk.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    4,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-14 thread 'Dawnrise Village up to Dawnharbor's standard': Cory approved the Elder Rowan's house + backdrop repaint and the full Dawnrise batch ('Yes' 00:15Z). Dawnrise Isle's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "art/source/npcs_harbor_3.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ],
+    "text": "The first image is a sheet of NPC characters for my 2D side-scrolling game: two rows, each row the same characters standing in the same spots, with a label above each. Keep the sheet's size, layout, magenta background, label bands, and each character's position, size, chibi proportions and art style exactly. The second image shows more of my game's NPC characters; the new ones must look like they belong with them: soft cel-painted shading, rich warm colours, dark brown outlines, painted cloth folds and worn patches. They live in Dawnrise Village, the small, cosy, sunny starting village of the game, so give them soft warm sunrise colours: honey, peach, rose, straw gold and meadow green. Replace the characters with new villagers of Dawnrise, the same character in both rows of each column, standing still in the same calm pose in both rows: Column 1 (label it FARMER): a sturdy, smiling middle-aged farmer with a round sun-browned face and a short brown beard, a wide straw hat, a rolled-up peach shirt, green dungarees and boots, holding a wooden pitchfork upright at his side. Column 2 (label it BAKER): a plump, cheerful young woman baker with rosy cheeks and her hair tied up under a white kerchief, a rose-pink dress with a flour-dusted apron, holding a round loaf of bread in both hands. Column 3 (label it EMPTY) and Column 4 (label it EMPTY): leave completely empty, plain magenta, with nothing left of the old characters or their items. Rules: every character stands upright, facing slightly toward the viewer, both feet flat on one level ground line, full body in its cell. Hands are simple rounded fingerless mittens in the game's style. Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background everywhere outside the characters and labels. Do not copy any character from the second image."
+   }
+  },
+  {
+   "id": "room_dawnrise_shop_wall",
+   "prompts": null,
+   "batch": "Dawnrise room back wall: Mira's shop (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_dawnrise_shop_wall.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-14 thread 'Dawnrise Village up to Dawnharbor's standard': Cory approved the Elder Rowan's house + backdrop repaint and the full Dawnrise batch ('Yes' 00:15Z). Dawnrise Isle's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "art/source/room_meadow_wall.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ],
+    "text": "The first image is one repeating tile of the back wall inside a cottage in Dawnrise Village, the small, cosy, sunny starting village of my 2D side-scrolling game. Keep the thick horizontal timber beam at the top, the wooden rail across the middle and the vertical plank wainscot below it EXACTLY in the same places and sizes. Repaint the whole tile in a soft painted style, removing every stair-stepped or pixel-looking edge. Repaint the wall area between the top beam and the rail as warm honey-coloured fieldstone with dark timber framing (no cream or white plaster, no blue), lit by warm golden sunrise light with soft peach highlights and plum-violet shadows. Remove the dried flowers, the rope and both cloth banners. In the centre paint one wide round-topped window with small panes and a deep sill, showing a sunny view of a sunrise meadow with a peach sky. On both sides of the window the stone wall is plain and empty: no shelves, no goods, nothing hanging. Everything is seen straight from the front, flat against the wall, with no perspective, no top faces and no side depth; nothing ends loose in mid-air. The left and right edges of the image must join seamlessly when the tile is repeated side by side, so nothing may be cut off at either edge. Paint in the same style as the second image: rich warm colours, strong light and shadow with bright highlights, visible painted texture at a fairly chunky brush scale, a thin dark outline. Painted, never pixel art. No letters or words. Same image size and layout."
+   }
+  },
+  {
+   "id": "room_dawnrise_elder_wall",
+   "prompts": null,
+   "batch": "Dawnrise room back wall: Elder Rowan's house (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_dawnrise_elder_wall.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-14 thread 'Dawnrise Village up to Dawnharbor's standard': Cory approved the Elder Rowan's house + backdrop repaint and the full Dawnrise batch ('Yes' 00:15Z). Dawnrise Isle's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "art/source/room_meadow_wall.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ],
+    "text": "The first image is one repeating tile of the back wall inside a cottage in Dawnrise Village, the small, cosy, sunny starting village of my 2D side-scrolling game. Keep the thick horizontal timber beam at the top, the wooden rail across the middle and the vertical plank wainscot below it EXACTLY in the same places and sizes. Repaint the whole tile in a soft painted style, removing every stair-stepped or pixel-looking edge. Repaint the wall area between the top beam and the rail as warm honey-coloured fieldstone with dark timber framing (no cream or white plaster, no blue), lit by warm golden sunrise light with soft peach highlights and plum-violet shadows. Remove the dried flowers, the rope and both cloth banners. In the centre paint one small round window with a cross frame and peach shutters, showing a peach sunrise sky. On each side of the window hang one small framed painting of a sunrise over green hills, fixed flat to the wall, well inside the tile. Otherwise the wall is plain. Everything is seen straight from the front, flat against the wall, with no perspective, no top faces and no side depth; nothing ends loose in mid-air. The left and right edges of the image must join seamlessly when the tile is repeated side by side, so nothing may be cut off at either edge. Paint in the same style as the second image: rich warm colours, strong light and shadow with bright highlights, visible painted texture at a fairly chunky brush scale, a thin dark outline. Painted, never pixel art. No letters or words. Same image size and layout."
+   }
+  },
+  {
    "id": "lanternfall_city_thieves_den",
    "prompts": null,
    "batch": "Lanternfall city test: Thieves' Den (new building)",

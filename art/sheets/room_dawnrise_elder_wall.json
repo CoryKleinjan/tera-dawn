@@ -1,0 +1,28 @@
+{
+  "source": "art/source/room_dawnrise_elder_wall.png",
+  "detail": 1,
+  "out_dir": "assets/sprites/rooms/meadow",
+  "background": [
+    255,
+    0,
+    255
+  ],
+  "scale": 0.3202,
+  "label_band": 0,
+  "inset": 0,
+  "grid": {
+    "rows": [
+      242,
+      3404
+    ],
+    "cols": [
+      0,
+      3616
+    ]
+  },
+  "cells": [
+    [
+      "elder_wall"
+    ]
+  ]
+}
