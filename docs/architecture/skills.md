@@ -21,8 +21,8 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
      per skill in `SimPlayer.recharge` and `TDPlayer`).
    - Attacks can also `slow` what they hit, `splash` (hit the nearest monster in the area and
      everything within `splash` of it), push harder (`knockback`), or not aim (`aims`).
-   - The hero animation to play and the effects to show (`effect` on the player,
-     `hit_effect` on each target).
+   - The motion the player makes (`animation`; "cast" makes none) and the effects to show
+     (`effect` on the player, `hit_effect` on each target).
 2. Effects are **EffectDef**s in `data/effects/`: a flipbook of frames from
    `assets/sprites/effects/`, its speed and size, an optional light and particle burst.
    Effects the game fires on its own rather than through a skill or item (celebrate, monster

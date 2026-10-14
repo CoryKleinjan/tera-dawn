@@ -51,13 +51,12 @@ The Shield slot is called Off-hand in the game (its place key stays `shield`): i
 ## How to add an item or piece of gear
 
 1. Give it an icon in `assets/sprites/items/<id>.png`: a painted cell on an item sheet (a Gemini
-   edit in `tools/art/gemini_pass.json`, cut by its `art/sheets/items_*.json` manifest). Gear's
-   icon shows the same object the hero wears (shape, colours, details).
-2. Create the `.tres` in `data/items/equips/` (make the folder; the game has no gear while it is
-   redrawn for the new hero), `use/`, `etc/`, `scrolls/` or `setup/` as an **EquipDef**, **UseDef**
-   or **ItemDef**. Fill in `id`, name, description, icon and `sell_price`; for gear, the slot,
-   requirements and a **StatBlock** in `stats`. Worn gear needs its art on the hero (below);
-   a hat also names its template shape in `look_shape` (helm, tricorn, bandana, hood, wizard).
+   edit in `tools/art/gemini_pass.json`, cut by its `art/sheets/items_*.json` manifest). Gear
+   has no icon for now (its look is being restarted with the hero's); an item slot shows the
+   item's name instead, and a drop shows only its glow.
+2. Create the `.tres` in `data/items/equips/`, `use/`, `etc/`, `scrolls/` or `setup/` as an
+   **EquipDef**, **UseDef** or **ItemDef**. Fill in `id`, name, description, icon and
+   `sell_price`; for gear, the slot, requirements and a **StatBlock** in `stats`.
 3. Make something drop it: a **DropEntry** on a monster's `drops` (item, chance from 0 to 1,
    amount range). Rare gear is usually 1 to 4%.
 
@@ -70,17 +69,7 @@ for the loot key, and stays there if its tab is full.
 
 ## How to add a weapon
 
-- **Worn gear** (tops, bottoms, shoes, hats): a Gemini edit of the body sheet with the piece on
-  (`art/source/hero/body_<body>_<piece>.png`), named in `WORN` in `tools/art/hero_build.py`
-  (trousers also in `BOTTOMS`). A hat is one of the template's hat shapes: the template's own
-  hat goes in `HAT_ITEMS`; a new hat of a shape is the template with only that cell repainted
-  (`hats_<body>_<sheet>.png`), in `HAT_ITEMS` and `HAT_SHEETS`. Run the build: it writes
-  `layers/worn_item_<id>.png`. One icon per item, shared by both bodies, painted from the worn
-  piece (the starter sets' icons are cut by `art/sheets/starter_armor_icons.json`).
-- **Weapons and shields** wait on their art: the rig has no holds yet (`hero_rig.json`
-  "weapons"). Until then any weapon is held as a sword (`Paperdoll.kind_of`) with no picture.
-- **A new weapon kind**: give it a row in `WeaponStyle.MOTIONS` and its hold in the rig.
-- **A new motion**: add the animation to `ANIMATIONS` in `tools/art/hero_build.py`
-  (poses, fps, per-frame lengths), point the kinds that use it at it in
-  `WeaponStyle.MOTIONS`, list it in `WeaponStyle.ACTIONS`, and give it a `SpriteRig.FALLBACK`
-  for sprites that don't have it.
+A weapon is an **EquipDef** in the Weapon slot with a `weapon_kind` (sword, dagger, bow, wand,
+staff, knuckle...), which skills can ask for (`SkillDef.weapons`), and optionally a
+`basic_attack` that replaces the plain attack while it is wielded. It has no art for now: how
+weapons look and are held comes back with the hero's new look.

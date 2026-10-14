@@ -1,64 +1,26 @@
-# Characters: looks, extras, balance and player actions
+# Characters: creation, extras, balance and player actions
 
 Part of the [architecture docs](../../ARCHITECTURE.md).
 
-## Character creation and looks
+## Character creation and how heroes show
 
 **Create** on character select opens the character creator (`TDCreator`): a name and the
-look and outfit (`NewCharacter`). `Net.create_character` makes a level 1 character in the
+starting outfit (`NewCharacter`). `Net.create_character` makes a level 1 character in the
 starting job (`Character.START_JOB`) and saves it on this computer (`CharacterStore.create`),
-then character select shows the list with the new character picked.
+then character select shows the list (name, level and job) with the new character picked.
 
-- **Appearance** (on the Character) is a set of `LookDef` ids from `data/looks/`; only the
-  hairstyle has options for now, and it names its body (`LookDef.body`: boy or girl). The skin,
-  face, eye and hair colour kinds stay, empty: nothing is recoloured, so a new tone is new
-  painted art. The creator leaves out kinds with nothing to pick. Add an option by adding a file;
-  `creator` and `order` decide whether and where the creator lists it.
 - **Outfit** choices come from the starting job's `creator_gear` (one piece per kind). It is
-  empty while the gear is being redrawn, so the creator offers no outfit for now.
-- **Looks** travel in each player's info (`ev_player_info`, sent when it changes; `Character.look()`: appearance and the worn
-  gear that shows), so everyone sees everyone's hair and gear.
-- **Drawing** is done by `Paperdoll`, which works out the layers from a look;
-  `PaperdollSprite` shows it in the world (on `SpriteRig`). Menus (the creator, character
-  select, the equipment window) draw him the same way: `PaperdollView` stands the world's own
-  rig (`HeroBody.make_rig`) in a little 3D stage of its own, lit by a fixed near-white light
-  (`PaperdollView.LIGHT`) so he shows his painted colours. There is one way to paint him:
-  every part, in game and in every menu, uses `shaders/hero.gdshader` and nothing else; only
-  the light differs (the map's in game).
-- **The hero's layers**: both bodies side by side on one strip (`hero.png`, bald, with their
-  painted faces), each with its own animations over it (`hero.tres` for the boy,
-  `hero_girl.tres` for the girl; `Paperdoll.BODIES`), and layers laid out like the strip that
-  play frame for frame with it: the hair (`layers/hair_<style>.png`) and each worn piece
-  (`layers/worn_item_<id>.png`), all in their painted colours, never recoloured.
-  `tools/art/hero_build.py` builds them all, with the rig (`hero_rig.json`: each frame's pose,
-  body and head).
-  A hat is drawn in one of the template shapes (`EquipDef.look_shape`: helm, tricorn, bandana,
-  hood, wizard): under it the hair is that shape's (`layers/hair_<style>_<shape>.png`) and the
-  hero shader cuts his head away where the hat hides it (`pieces/headcut_<shape>.png`). In the
-  3D stage his layers are lit like everyone else, sampled from mipmaps and blended at their
-  edges (`shaders/hero.gdshader`), drawn in order with their own render
-  priorities (`TDStage.PRIORITY_*`). Weapons and shields will be a `Paperdoll.Piece` (one
-  picture placed in his front fist on every frame); none are drawn yet. The strip is cut at
-  the painted sheet's full resolution: `Paperdoll.ART_SCALE` strip pixels make one hero pixel.
-- **Animation**: each weapon fights its own way (`WeaponStyle`): a skill's motion ("attack",
-  "slash") becomes the weapon's own animation (a bow shoots, a star is thrown, knuckles punch, a
-  staff smashes), and other names play as they are, except "cast" (`WeaponStyle.SPELL`):
-  buffs and spells make no motion, the hero flashes the skill's colour (`SkillDef.flash`,
-  `SpriteRig.pulse`). Frames have their own durations (a held wind-up), and `TDPlayer` adds a
-  ready stance after fighting, a turn, the top of a jump, a landing crouch only after a real
-  drop and a walk that keeps step with his speed and picks up 15% pace after about 0.4 s
-  (`SpriteRig.STEP_CYCLES`; the run frames never play). Standing, he breathes (the rig's body rises and settles
-  slightly from his feet, so every layer moves with it: `SpriteRig.breathes`, `BREATH_*`) and blinks
-  now and then, sometimes twice (the "blink" animation, `SpriteRig.BLINK_EVERY`), in menus too.
-  NPCs hold still (`SpriteRig.hold_still`). Poses not drawn yet fall back to the nearest
-  one (`SpriteRig.FALLBACK`). `WeaponTrail` draws the streak a
-  swung blade leaves and the flash of a shot.
+  empty while the gear is being remade, so the creator offers no outfit for now.
+- **No look yet**: the hero's look and all equipment visuals are being restarted from Cory's
+  original reference (`art/reference/hero.png`), so a character has no appearance and the
+  hero has no sprite. Older saves and clients that carry an appearance still load; it is left
+  out.
 - **One body for every hero**: your hero (`TDPlayer`) and other players' (`TDAvatar`) each
-  work out their pose (from your keys, or from the snapshot), and `HeroBody`
-  (`scripts/components/hero_body.gd`) draws it the same way for both: the rig with its light
-  (`HeroBody.FRAMES`, `SCALE`, `LIGHT`), the chair lift, the walk keeping step
-  (`stride_speed`), the blink after a hit, a skill's weapon motion or spell flash
-  (`use_skill`), and the companion. A change to how heroes are drawn goes there.
+  work out what they are doing (from your keys, or from the snapshot: an animation name such
+  as "walk", "attack" or a skill's `animation`), and `HeroBody`
+  (`scripts/components/hero_body.gd`) shows them the same way for both. For now it only brings
+  along the companion (chair and pet); the new look goes there. The sizes the game needs for a
+  hero (`TDPlayer.HEIGHT`, `WIDTH`, `CHEST`, `SimPlayer.HURTBOX_SIZE`) are constants.
 
 ### Chairs, pets, the Monster Book and achievements
 

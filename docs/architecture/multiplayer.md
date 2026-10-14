@@ -33,7 +33,7 @@ TDWorld  ───────────────────────�
   `WorldCamera` follows your hero). Snapshots go out 20 times a
   second as packed bytes (`SnapshotCodec`) so even a busy map fits in one network packet:
   they hold only positions, facing, HP, animation and flags, and leave out monsters that
-  haven't changed (every monster goes in once a second). A player's name, level, look, gear,
+  haven't changed (every monster goes in once a second). A player's name, level, job, guild,
   chair and pet go separately (`ev_player_info`), reliably and only when they change.
 - **Net** (`scripts/autoload/net.gd`) is the whole protocol in one file. `req_*` methods go from
   a client to the server (grouped by the server part that answers them), `ev_*` methods from the server to clients. UI and actors call
