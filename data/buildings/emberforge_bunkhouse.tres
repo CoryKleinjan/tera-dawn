@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BuildingDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/building_def.gd" id="1_building_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/buildings/emberforge/bunkhouse.png" id="2_bunkhouse"]
+
+[resource]
+script = ExtResource("1_building_def")
+id = &"emberforge_bunkhouse"
+texture = ExtResource("2_bunkhouse")
+height = 290.0
+door_x = 0.438
+chimney = Vector2(0.715, 0.99)

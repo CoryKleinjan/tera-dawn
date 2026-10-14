@@ -12242,6 +12242,340 @@
     "text": "The first image is one repeating tile of the back wall inside the Magicians' Library, the magicians' guild hall, in Lumewood Sanctum, the calm, scholarly magicians' town of my 2D side-scrolling game. Keep the carved wooden star frieze and beams at the top, the wooden panelling at the bottom, and the overall layout EXACTLY in the same places, at the same image size. Repaint the whole tile so it is painted, never pixel art: smooth soft painted shading, no visible pixels or stair-stepped edges. Repaint the stone wall in the middle as pale lilac-grey stone blocks with violet-grey mortar in soft violet twilight light, and give the top frieze and bottom panelling a softer painted finish in the same warm wood. Remove the round window, the two hanging star charts and the crystals and flowers. In the centre of the stone wall, a large round stained-glass window of blue and violet glass with a star in the middle. On each side, a long violet cloth banner painted with an open book and a star (a picture only, no writing), hanging flat against the stone and fixed at top and bottom, and a small glowing blue crystal set in a silver bracket on the wall below each banner. Everything is seen straight from the front, flat against the wall, with no perspective, no top faces and no side depth; nothing ends loose in mid-air. The left and right edges of the image must join seamlessly when the tile is repeated side by side. Paint in the same style as the second image: rich colours, strong light and shadow with bright highlights, visible painted texture at a fairly chunky brush scale, a thin dark outline. No letters, runes or words. Same image size and layout."
    }
   },
+  {
+   "id": "emberforge_city_warriors_hall",
+   "prompts": null,
+   "batch": "Emberforge city test: Warriors' Hall (new building)",
+   "with": null,
+   "refs": [],
+   "save": "emberforge_city_warriors_hall.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 thread 'Emberforge up to Dawnharbor's standard' (Cory 23:41Z 'Do it' to the Emberforge look questions): test before the full Emberforge batch; Emberforge's own tone (docs/zone-vibes.md Emberreach), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/emberforge-city/building_warriors_hall_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Emberforge, the warriors' forge town in my 2D side-scrolling game: proud, hot, hardworking and heroic, built among cinder hills and volcanic ridges, lit by warm amber forge light under an ember-brown sky. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (stone blocks, wood grain, iron rivets, soot, worn and chipped spots, slight colour variation between stones and roof tiles). Use this palette: grey stone blocks, terracotta roof tiles, dark oak beams, black iron straps and rivets, and orange forge-lit windows. The new building is the WARRIORS' HALL, the grandest building in the town, a little wider than it is tall: a solid two-storey hall of big grey stone blocks on a heavy dark stone plinth, with stout square stone buttresses at both corners; a steep terracotta tile roof with a raised central gable; two tall stone chimneys with iron caps, one at each end of the roof; a big arched oak double door in the middle of the ground floor, bound with black iron straps and studded with rivets; tall narrow windows on both floors glowing warm orange from the forge-light inside, with iron bars; a large round shield with crossed swords mounted on the gable above the door; two long crimson cloth banners with a gold crossed-swords emblem (pictures only, no writing) hanging flat against the wall on either side of the door, fixed at top and bottom; a pair of iron braziers fixed flat to the wall beside the door, each with a small steady flame. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: its stone plinth reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, ground line, rubble, people or shadow. 3) The door is a real doorway at ground level, centred left to right in the building. 4) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 5) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. No blue roof tiles or cream plaster (that is a different town). Nothing (rope, cloth, chain) ends loose in mid-air. No smoke or glow spilling onto the background. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "emberforge_backdrop_panorama",
+   "prompts": null,
+   "batch": "Emberforge city: one 4K volcanic backdrop (test)",
+   "with": null,
+   "refs": [],
+   "save": "emberforge_backdrop_panorama.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-13 thread 'Emberforge up to Dawnharbor's standard' (Cory 23:41Z 'Do it' to the Emberforge look questions): test before the full Emberforge batch; Emberforge's own tone (docs/zone-vibes.md Emberreach), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/emberforge-city/backdrop_panorama_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ],
+    "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Emberforge, the warriors' forge town in my 2D side-scrolling game: proud, hot, hardworking and heroic, built among cinder hills and volcanic ridges, lit by warm amber forge light under an ember-brown sky. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (stone blocks, wood grain, iron rivets, soot, worn and chipped spots, slight colour variation between stones and roof tiles). Paint the background in that same style, a little softer and lighter in contrast so it sits behind the characters. Use a palette of grey stone, terracotta roofs and warm orange forge-light. The scene: a range of dark volcanic ridges and jagged cinder peaks seen across a wide valley at dusk. The ridges stand in layers, the nearest in the middle distance in deep brown-grey rock, the farther ones fading back into warm orange-red haze. One big dormant volcano in the far distance has a faint orange glow at its crater and a soft column of grey smoke drifting up. Thin glowing lava streams trickle down a few far slopes. In the middle distance, the silhouettes of a few stone forge buildings with terracotta roofs and tall chimneys sit on terraces cut into a ridge, their windows glowing orange, the chimneys letting out soft grey smoke; a stone viaduct with arches crosses between two ridges. Small glowing embers drift upward through the whole scene. Colours: dark ember-brown at the very top of the sky (#24120c), warming to a bright orange horizon (#ffb060) with amber light (#ffd0a0), and an orange-red haze (#bf592f) low in the valley. Warm and heroic, not dark or scary. Strict rules: 1) Side-on view at eye level, as if standing in the town looking out, the horizon level. 2) No people, no characters, no animals, no birds, no dragons. 3) Nothing in the near foreground: no ground, rocks, rubble or plants in front; the closest things are in the middle distance. 4) The left and right edges continue naturally (ridges and haze), nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere."
+   }
+  },
+  {
+   "id": "emberforge_city_great_forge",
+   "prompts": null,
+   "batch": "Emberforge city: great forge (new building)",
+   "with": null,
+   "refs": [],
+   "save": "emberforge_city_great_forge.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-14 thread 'Emberforge up to Dawnharbor's standard': Cory approved the Warriors' Hall + backdrop test ('These look good as is' 23:59Z) and the full Emberforge batch incl. two flat replacement buildings ('Yes' 00:06Z). Emberforge's own tone (docs/zone-vibes.md Emberreach), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/emberforge-city/building_wide_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/emberforge_city_warriors_hall.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Emberforge, the warriors' forge town in my 2D side-scrolling game: proud, hot, hardworking and heroic, built among cinder hills and volcanic ridges, lit by warm amber forge light under an ember-brown sky. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (stone blocks, wood grain, iron rivets, soot, worn and chipped spots, slight colour variation between stones and roof tiles). The third image is the Warriors' Hall from the same town: match its style, palette (grey stone blocks with soot, terracotta roof tiles, dark oak beams and doors, black iron straps and rivets, orange forge-lit windows, crimson cloth with gold crossed swords), outline thickness and level of detail exactly, so they clearly belong to the same town. The new building is the GREAT FORGE, the town's biggest workshop, wider than it is tall: a long one-storey stone forge building with a terracotta tile roof, one huge square stone chimney stack rising high above one end of the roof with an iron cap; the middle of the front is a wide open arched forge mouth glowing bright orange-yellow from the furnace inside, with a big anvil silhouetted in the glow; heavy oak beams over the arch held by black iron straps and rivets; a pair of big leather bellows hung flat on the wall beside the arch; a row of iron tongs and hammers on wall hooks; small barred windows glowing orange on each side. The arch's floor is level with the ground line. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: everything reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, ground line, rubble, people or shadow. 3) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. No blue roof tiles or cream plaster (that is a different town). Nothing (rope, cloth, chain) ends loose in mid-air. No smoke or glow spilling onto the background. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "emberforge_city_armoury",
+   "prompts": null,
+   "batch": "Emberforge city: armoury (new building)",
+   "with": null,
+   "refs": [],
+   "save": "emberforge_city_armoury.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-14 thread 'Emberforge up to Dawnharbor's standard': Cory approved the Warriors' Hall + backdrop test ('These look good as is' 23:59Z) and the full Emberforge batch incl. two flat replacement buildings ('Yes' 00:06Z). Emberforge's own tone (docs/zone-vibes.md Emberreach), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/emberforge-city/building_wide_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/emberforge_city_warriors_hall.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Emberforge, the warriors' forge town in my 2D side-scrolling game: proud, hot, hardworking and heroic, built among cinder hills and volcanic ridges, lit by warm amber forge light under an ember-brown sky. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (stone blocks, wood grain, iron rivets, soot, worn and chipped spots, slight colour variation between stones and roof tiles). The third image is the Warriors' Hall from the same town: match its style, palette (grey stone blocks with soot, terracotta roof tiles, dark oak beams and doors, black iron straps and rivets, orange forge-lit windows, crimson cloth with gold crossed swords), outline thickness and level of detail exactly, so they clearly belong to the same town. The new building is the ARMOURY, a little wider than it is tall: a sturdy two-storey stone building with a terracotta tile roof and one stone chimney; a centred iron-bound oak double door at ground level; on each side a wide shop window with iron bars and a flat display of a helmet, a breastplate and crossed swords behind the glass, lit warm orange; a round shield with a hammer and sword painted on it (a picture only, no writing) hung from an iron bracket above the door, fixed firmly; crimson awnings stretched flat above the windows. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: everything reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, ground line, rubble, people or shadow. 3) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. No blue roof tiles or cream plaster (that is a different town). Nothing (rope, cloth, chain) ends loose in mid-air. No smoke or glow spilling onto the background. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "emberforge_city_bunkhouse",
+   "prompts": null,
+   "batch": "Emberforge city: bunkhouse (new building)",
+   "with": null,
+   "refs": [],
+   "save": "emberforge_city_bunkhouse.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-14 thread 'Emberforge up to Dawnharbor's standard': Cory approved the Warriors' Hall + backdrop test ('These look good as is' 23:59Z) and the full Emberforge batch incl. two flat replacement buildings ('Yes' 00:06Z). Emberforge's own tone (docs/zone-vibes.md Emberreach), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/emberforge-city/building_wide_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/emberforge_city_warriors_hall.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Emberforge, the warriors' forge town in my 2D side-scrolling game: proud, hot, hardworking and heroic, built among cinder hills and volcanic ridges, lit by warm amber forge light under an ember-brown sky. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (stone blocks, wood grain, iron rivets, soot, worn and chipped spots, slight colour variation between stones and roof tiles). The third image is the Warriors' Hall from the same town: match its style, palette (grey stone blocks with soot, terracotta roof tiles, dark oak beams and doors, black iron straps and rivets, orange forge-lit windows, crimson cloth with gold crossed swords), outline thickness and level of detail exactly, so they clearly belong to the same town. The new building is the WARRIORS' BUNKHOUSE, a long plain barracks, wider than it is tall: one and a half storeys of grey stone on the ground floor and dark oak timber framing above, a terracotta tile roof with two small stone chimneys; a centred plank door with iron hinges; a neat row of small shuttered windows glowing warm along both floors; a wooden weapon rack fixed flat to the wall beside the door holding two spears and a sword; a crimson pennant on a short pole at the roof end, fixed firmly. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: everything reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, ground line, rubble, people or shadow. 3) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. No blue roof tiles or cream plaster (that is a different town). Nothing (rope, cloth, chain) ends loose in mid-air. No smoke or glow spilling onto the background. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "emberforge_city_forge_cottage",
+   "prompts": null,
+   "batch": "Emberforge city: forge cottage (flat replacement) (new building)",
+   "with": null,
+   "refs": [],
+   "save": "emberforge_city_forge_cottage.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-14 thread 'Emberforge up to Dawnharbor's standard': Cory approved the Warriors' Hall + backdrop test ('These look good as is' 23:59Z) and the full Emberforge batch incl. two flat replacement buildings ('Yes' 00:06Z). Emberforge's own tone (docs/zone-vibes.md Emberreach), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/emberforge-city/building_wide_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/emberforge_city_warriors_hall.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Emberforge, the warriors' forge town in my 2D side-scrolling game: proud, hot, hardworking and heroic, built among cinder hills and volcanic ridges, lit by warm amber forge light under an ember-brown sky. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (stone blocks, wood grain, iron rivets, soot, worn and chipped spots, slight colour variation between stones and roof tiles). The third image is the Warriors' Hall from the same town: match its style, palette (grey stone blocks with soot, terracotta roof tiles, dark oak beams and doors, black iron straps and rivets, orange forge-lit windows, crimson cloth with gold crossed swords), outline thickness and level of detail exactly, so they clearly belong to the same town. The new building is a SMITH'S COTTAGE, a little wider than it is tall: a cosy one-storey home of grey stone with dark oak timber framing, a terracotta tile roof and one tall stone chimney; a plank door at ground level on one side; a glowing window with wooden shutters; on the other side a small open arched hearth set into the wall with a low glowing fire, its floor level with the ground line; a horseshoe nailed above the door; a few iron tools on hooks. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: everything reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, ground line, rubble, people or shadow. 3) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. No blue roof tiles or cream plaster (that is a different town). Nothing (rope, cloth, chain) ends loose in mid-air. No smoke or glow spilling onto the background. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "emberforge_city_store",
+   "prompts": null,
+   "batch": "Emberforge city: general store (flat replacement) (new building)",
+   "with": null,
+   "refs": [],
+   "save": "emberforge_city_store.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-14 thread 'Emberforge up to Dawnharbor's standard': Cory approved the Warriors' Hall + backdrop test ('These look good as is' 23:59Z) and the full Emberforge batch incl. two flat replacement buildings ('Yes' 00:06Z). Emberforge's own tone (docs/zone-vibes.md Emberreach), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/emberforge-city/building_wide_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/emberforge_city_warriors_hall.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Emberforge, the warriors' forge town in my 2D side-scrolling game: proud, hot, hardworking and heroic, built among cinder hills and volcanic ridges, lit by warm amber forge light under an ember-brown sky. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (stone blocks, wood grain, iron rivets, soot, worn and chipped spots, slight colour variation between stones and roof tiles). The third image is the Warriors' Hall from the same town: match its style, palette (grey stone blocks with soot, terracotta roof tiles, dark oak beams and doors, black iron straps and rivets, orange forge-lit windows, crimson cloth with gold crossed swords), outline thickness and level of detail exactly, so they clearly belong to the same town. The new building is the GENERAL STORE, a little wider than it is tall and smaller than the hall: a two-storey shop of grey stone on the ground floor and dark oak timber framing above, a terracotta tile roof with one stone chimney; a centred oak door with iron straps at ground level; a wide shop window on each side with a display shelf of potions, rope coils and lanterns fixed flat behind the glass, glowing warm; a striped crimson-and-cream cloth awning stretched flat above the windows; a wooden sign on an iron bracket painted with a pickaxe and a sack (a picture only, no writing), its chains attached at both ends. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: everything reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, ground line, rubble, people or shadow. 3) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. No blue roof tiles or cream plaster (that is a different town). Nothing (rope, cloth, chain) ends loose in mid-air. No smoke or glow spilling onto the background. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "emberforge_props",
+   "prompts": null,
+   "batch": "Emberforge city: props sheet",
+   "with": null,
+   "refs": [],
+   "save": "emberforge_props.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    4,
+    3
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-14 thread 'Emberforge up to Dawnharbor's standard': Cory approved the Warriors' Hall + backdrop test ('These look good as is' 23:59Z) and the full Emberforge batch incl. two flat replacement buildings ('Yes' 00:06Z). Emberforge's own tone (docs/zone-vibes.md Emberreach), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/emberforge-city/props_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/emberforge_city_warriors_hall.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint a sheet of TWELVE separate props for Emberforge, the warriors' forge town in my 2D side-scrolling game: proud, hot, hardworking and heroic, built among cinder hills and volcanic ridges, lit by warm amber forge light under an ember-brown sky, laid out in 3 rows of 4, evenly spaced, each prop centred in its own quarter-by-third area of the canvas with a wide band of plain magenta around it, and no prop touching another. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (stone blocks, wood grain, iron rivets, soot, worn and chipped spots, slight colour variation between stones and roof tiles). The third image is the Warriors' Hall from the same town: match its style, palette (grey stone blocks with soot, terracotta roof tiles, dark oak beams and doors, black iron straps and rivets, orange forge-lit windows, crimson cloth with gold crossed swords), outline thickness and level of detail exactly, so the props clearly belong on its street. The twelve props, in reading order: Row 1: 1) a big black iron anvil on a squat round wooden block, 2) a small wooden ore cart on four iron wheels, heaped with dark ore lumps glowing faintly orange, 3) a stone bin full of black coal, 4) a wooden weapon rack holding three swords and two spears upright. Row 2: 5) a wooden quench barrel with iron hoops, 6) a round grindstone wheel in a wooden frame with a crank handle, 7) a straw training dummy on a wooden post with a dented iron helmet, 8) a neat stack of iron ingots on a low wooden pallet. Row 3: 9) a wooden stand holding a round shield and a kite shield, 10) a wooden crate with iron corners, 11) a long plain stone bench, 12) a pile of round firewood logs bound with an iron band. Strict rules: 1) Every prop in PURE SIDE VIEW at eye level, like a flat elevation: no top surface of anything visible (barrel, bin, crate, cart and pallet tops are a single straight horizontal edge, never an oval or a box top), standing upright on its own flat bottom edge, sized as it would be next to a person (barrels about waist high). 2) No ground, shadow, ground line, grass or base under any prop. 3) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. 4) No letters, numbers, words or labels anywhere, no grid lines, no borders and no frames. 5) No characters. 6) Flat pure magenta #FF00FF background everywhere outside the props, with no magenta or pink anywhere inside them."
+   }
+  },
+  {
+   "id": "emberforge_brazier",
+   "prompts": null,
+   "batch": "Emberforge city: brazier lamp post",
+   "with": null,
+   "refs": [],
+   "save": "emberforge_brazier.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-14 thread 'Emberforge up to Dawnharbor's standard': Cory approved the Warriors' Hall + backdrop test ('These look good as is' 23:59Z) and the full Emberforge batch incl. two flat replacement buildings ('Yes' 00:06Z). Emberforge's own tone (docs/zone-vibes.md Emberreach), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/emberforge-city/brazier_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/emberforge_city_warriors_hall.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE street brazier for Emberforge, the warriors' forge town in my 2D side-scrolling game: proud, hot, hardworking and heroic, built among cinder hills and volcanic ridges, lit by warm amber forge light under an ember-brown sky; it is the town's lamp post. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (stone blocks, wood grain, iron rivets, soot, worn and chipped spots, slight colour variation between stones and roof tiles). The third image is the Warriors' Hall from the same town: match its style, palette (grey stone blocks with soot, terracotta roof tiles, dark oak beams and doors, black iron straps and rivets, orange forge-lit windows, crimson cloth with gold crossed swords), outline thickness and level of detail exactly. The brazier: a tall square grey stone pillar, about two and a half times as tall as a person, on a slightly wider stone footing, bound with black iron bands and rivets, carrying a wide black iron fire bowl on top with a steady warm flame. Nothing hangs from it. Strict rules: 1) Pure side view at eye level, perfectly upright and centred; the bowl's rim is a straight horizontal line, its inside not visible. 2) The bottom of the footing is ONE flat straight horizontal edge. No ground, ground line, shadow or rubble under it. 3) The brazier fills most of the canvas height with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words. No glow halo or smoke spilling onto the background. No characters. Flat pure magenta #FF00FF background everywhere outside the brazier."
+   }
+  },
+  {
+   "id": "emberforge_terraces",
+   "prompts": null,
+   "batch": "Emberforge city: stone terrace walls (raised levels)",
+   "with": null,
+   "refs": [],
+   "save": "emberforge_terraces.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    2
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-14 thread 'Emberforge up to Dawnharbor's standard': Cory approved the Warriors' Hall + backdrop test ('These look good as is' 23:59Z) and the full Emberforge batch incl. two flat replacement buildings ('Yes' 00:06Z). Emberforge's own tone (docs/zone-vibes.md Emberreach), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/emberforge-city/props_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/emberforge_city_warriors_hall.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint TWO separate pieces of walkable stone terrace for Emberforge, the warriors' forge town in my 2D side-scrolling game: proud, hot, hardworking and heroic, built among cinder hills and volcanic ridges, lit by warm amber forge light under an ember-brown sky, one above the other with a wide band of plain magenta between and around them. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (stone blocks, wood grain, iron rivets, soot, worn and chipped spots, slight colour variation between stones and roof tiles). The third image is the Warriors' Hall from the same town: match its style, palette (grey stone blocks with soot, terracotta roof tiles, dark oak beams and doors, black iron straps and rivets, orange forge-lit windows, crimson cloth with gold crossed swords), outline thickness and level of detail exactly, so the terraces clearly belong to the same town. TOP piece, in the upper part of the canvas (about four times as wide as it is tall): a raised stone TERRACE seen from the side: a solid retaining wall of big grey stone blocks with soot stains, bound by a horizontal black iron band with rivets, with a row of flat dark capstones along its top whose top edge is one long perfectly straight level line; a low iron railing only at its two far ends; the wall reaches straight down to ONE flat straight bottom edge. BOTTOM piece, in the lower part of the canvas (about six times as wide as it is tall, much thinner): a stone LEDGE: a long thin slab of dark capstones on a strip of grey stone blocks, its top edge one perfectly straight level line and its bottom edge one straight line, held up by two square stone corbels under its two ends. Strict rules: 1) Pure side view at eye level: no top surface of any stone visible, every edge horizontal or vertical. 2) Nothing under the pieces: no ground, rubble or shadow. 3) Nothing (rope, chain, cloth) ends loose in mid-air. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words. No buildings, no people. Flat pure magenta #FF00FF background everywhere outside the two pieces, with no magenta or pink inside them."
+   }
+  },
+  {
+   "id": "emberforge_townsfolk",
+   "prompts": null,
+   "batch": "Emberforge city: three townsfolk plus storage keeper",
+   "with": null,
+   "refs": [],
+   "save": "emberforge_townsfolk.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    4,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-14 thread 'Emberforge up to Dawnharbor's standard': Cory approved the Warriors' Hall + backdrop test ('These look good as is' 23:59Z) and the full Emberforge batch incl. two flat replacement buildings ('Yes' 00:06Z). Emberforge's own tone (docs/zone-vibes.md Emberreach), never Dawnharbor's look.",
+   "edit": {
+    "base": "art/source/npcs_harbor_3.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "art/source/npcs_emberforge.png"
+    ],
+    "text": "The first image is a sheet of NPC characters for my 2D side-scrolling game: two rows, each row the same characters standing in the same spots, with a label above each. Keep the sheet's size, layout, magenta background, label bands, and each character's position, size, chibi proportions and art style exactly. The second image shows more of my game's NPC characters, and the third image shows the NPCs who already live in Emberforge, the warriors' forge town; the new ones must look like they belong with them: soft cel-painted shading, rich warm colours in crimson, iron grey, leather brown and soot, dark brown outlines, painted cloth folds, soot smudges and worn patches. Replace the four characters with new townsfolk of Emberforge, the same character in both rows of each column, standing still in the same calm pose in both rows, with nothing else left over from the first image: Column 1 (label it APPRENTICE): a stocky young smith's apprentice boy with short red hair, soot on his cheeks, a rolled-up linen shirt, a scorched leather apron and thick gloves, holding a pair of iron tongs at his side. Column 2 (label it VETERAN): a proud old retired warrior with a grey moustache and an eyepatch, a battered crimson tabard over chainmail, leaning on a walking stick. Column 3 (label it KID): a small cheerful child in a crimson tunic and a dented pot worn as a helmet, holding a little wooden sword. Column 4 (label it KEEPER): the town's storage keeper, a broad, kind middle-aged man with a thick black beard, a grey wool tunic with a heavy leather vest, a big iron ring of keys on his belt, holding a small iron-bound chest in both hands. Rules: every character stands upright, facing slightly toward the viewer, both feet flat on one level ground line, full body in its cell. Hands are simple rounded fingerless mittens in the game's style. Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background everywhere outside the characters and labels."
+   }
+  },
+  {
+   "id": "room_emberforge_store_wall",
+   "prompts": null,
+   "batch": "Emberforge room back wall: general store (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_emberforge_store_wall.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-14 thread 'Emberforge up to Dawnharbor's standard': Cory approved the Warriors' Hall + backdrop test ('These look good as is' 23:59Z) and the full Emberforge batch incl. two flat replacement buildings ('Yes' 00:06Z). Emberforge's own tone (docs/zone-vibes.md Emberreach), never Dawnharbor's look.",
+   "edit": {
+    "base": "art/source/room_emberforge_wall.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ],
+    "text": "The first image is one repeating tile of the back wall inside the general store of Emberforge, the warriors' forge town. Keep the thick horizontal wooden beam with its two iron brackets at the top, the central vertical wooden post, and the wooden wainscot panels with the iron post foot along the bottom EXACTLY as they are, in the same places. Repaint ONLY the stone wall between the top beam and the wainscot, on both sides of the post. Remove the two lattice windows and the red sun banners completely. Paint the wall as warm grey stone blocks with soot stains, lit by warm amber forge light. On each side of the post, one arched window with small iron-framed panes and a deep stone sill, showing a view of dark volcanic ridges under an orange dusk sky with drifting embers. Below each window, a plain stone wall; no shelves, no goods, nothing hanging. Everything is seen straight from the front, flat against the wall, with no perspective, no top faces and no side depth; nothing ends loose in mid-air. The left and right edges of the image must join seamlessly when the tile is repeated side by side. Paint in the same style as the second image and the rest of the wall: rich warm colours, strong light and shadow with bright highlights, visible painted texture at a fairly chunky brush scale, a thin dark outline. Painted, never pixel art. No letters or words. Same image size and layout."
+   }
+  },
+  {
+   "id": "room_emberforge_hall_wall",
+   "prompts": null,
+   "batch": "Emberforge room back wall: Warriors' Hall (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_emberforge_hall_wall.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-14 thread 'Emberforge up to Dawnharbor's standard': Cory approved the Warriors' Hall + backdrop test ('These look good as is' 23:59Z) and the full Emberforge batch incl. two flat replacement buildings ('Yes' 00:06Z). Emberforge's own tone (docs/zone-vibes.md Emberreach), never Dawnharbor's look.",
+   "edit": {
+    "base": "art/source/room_emberforge_wall.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ],
+    "text": "The first image is one repeating tile of the back wall inside the Warriors' Hall, the warriors' guild hall of Emberforge, the forge town. Keep the thick horizontal wooden beam with its two iron brackets at the top, the central vertical wooden post, and the wooden wainscot panels with the iron post foot along the bottom EXACTLY as they are, in the same places. Repaint ONLY the stone wall between the top beam and the wainscot, on both sides of the post. Remove the two lattice windows and the red sun banners completely. Paint the wall as warm grey stone blocks with soot stains, lit by warm amber forge light. On the left side of the post, a big round iron-rimmed wooden shield with two longswords crossed behind it, fixed flat to the wall. On the right side, a long crimson cloth banner with a gold crossed-swords emblem (a picture only, no writing), hanging flat against the stone from an iron rod and fixed at top and bottom, with a black iron wall torch with a steady flame on each side of it. Everything is seen straight from the front, flat against the wall, with no perspective, no top faces and no side depth; nothing ends loose in mid-air. The left and right edges of the image must join seamlessly when the tile is repeated side by side. Paint in the same style as the second image and the rest of the wall: rich warm colours, strong light and shadow with bright highlights, visible painted texture at a fairly chunky brush scale, a thin dark outline. Painted, never pixel art. No letters or words. Same image size and layout."
+   }
+  },
  {
   "id": "lanternfall_city_thieves_den",
   "prompts": null,
