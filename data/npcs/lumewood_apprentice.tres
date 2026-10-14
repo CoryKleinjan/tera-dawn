@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_npc_def")
 id = &"lumewood_apprentice"
-display_name = "Tobin"
+display_name = "Ansel"
 title = "Apprentice"
 sprite_frames = ExtResource("2_sprite")
 greeting = "Archmage Celest says if I read this whole book, I'll learn one spell. One!"
