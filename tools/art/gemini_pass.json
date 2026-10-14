@@ -11835,6 +11835,56 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Each cell holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: arm raised to swing, striking, following through, casting with fists forward, casting with arms overhead, crouching, sitting on the ground, lying on his back fainted). He faces right in a three-quarter view; his SWORD ARM is the arm on the LEFT side of the picture and his SHIELD ARM is the arm on the RIGHT side. Use the second attached picture ONLY to see the look and style of a young warrior's gear (do not copy its pose or add its figure). In each cell, paint ONLY the same round wooden shield as in the second attached picture, seen from its BACK side (inner oak planks with an X cross brace and an iron rim with rivets, no handle or strap), held on the fist on the RIGHT side of the shape (his shield hand), centred on that fist and moving with it in every cell. Paint the whole shield, even where it overlaps the green body; it will be drawn behind him later. In the lying fainted cell it lies flat on the ground beside him. Paint nothing else: no hands, arms or body. Paint every piece WHOLE, with no gaps, notches or holes where an arm, hand or another piece would cover it; parts that will be hidden are still painted completely. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: exactly the look of the steel helmet in the second attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail. Keep the grid lines. No text, no labels."
   }
+ },
+ {
+  "id": "mshero_war_sword_move_fill",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_war_sword_move_fill.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 22:27Z 'Regeb with no holes', answering 'Should I fill the sword grip and jerkin hole for $0.14?'): fills the gap on a plain magenta base (figure removed), the way sword4 worked.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/warrior/sword_move_on_magenta.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Most cells hold one sword whose grip is missing: there is an empty gap between the brass crossguard and the small round brass pommel. In every cell, fill that gap with the missing brown leather-wrapped grip, painted continuously from the crossguard to the pommel along the sword's straight line, so each sword is one complete, unbroken sword. Keep the blade, crossguard and pommel exactly as they are, in exactly the same place, size and angle. Leave empty cells empty and the rest of the background flat pure magenta #FF00FF. Paint nothing else: no hands, figures or other objects. Style: match the existing sword exactly, with the warm colours and thin dark plum-brown outline of the painted villagers in the attached picture. Keep the grid lines. No text."
+  }
+ },
+ {
+  "id": "mshero_war_jerkin_move_fill",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_war_jerkin_move_fill.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 22:27Z 'Regeb with no holes', answering 'Should I fill the sword grip and jerkin hole for $0.14?'): fills the gap on a plain magenta base (figure removed), the way sword4 worked.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/warrior/jerkin_move_on_magenta.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cells hold a quilted padded warrior's jerkin with a leather belt, on its own with no body inside. Some jerkins have a missing hole or notch where an arm or fist used to cover them, most clearly in cell 6 (bottom row, second cell). In every cell, fill any hole, gap or notch with the same quilted padded cloth, stitching and belt, continuing the shapes naturally, so each jerkin is one complete, unbroken garment. Keep everything that is already painted exactly as it is, in exactly the same place, size and angle; do not redraw, move or resize any jerkin. Leave empty cells empty and the rest of the background flat pure magenta #FF00FF. Paint nothing else: no body, arms, hands, head or other objects. Style: match the existing jerkin exactly, with the warm colours and thin dark plum-brown outline of the painted villagers in the attached picture. Keep the grid lines. No text."
+  }
  }
 ]
 }
