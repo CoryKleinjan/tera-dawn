@@ -13497,6 +13497,29 @@
    "refs": [],
    "text": "The image shows a chibi boy wearing a tall black leather boots reaching just below the knee, with a wide folded-down cuff and a small gold buckle on the front. Paint ONLY that pair of shoes on its own as the game's inventory icon. Show the pair standing side by side, seen from the front-side. It must be exactly the same pair of shoes: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
   }
+ },
+ {
+  "id": "starter_pirate_hat_icon_2",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_pirate_hat_icon_2.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base). Redo: the first try kept the boy's whole body under the hat (broken).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/pirate_hat_boy_cell.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a black pirate tricorn hat with gold trim. Paint ONLY that hat on its own as the game's inventory icon and REMOVE the boy completely: no head, face, hair, body, shirt, shorts, arms or legs anywhere in the picture, only the hat. Show the hat seen from the front as it sits on a head, with nothing under it. It must be exactly the same tricorn: the same shape, size, black felt, gold trim and details as he wears it; no patches, no stitching repairs, no feather, no skull. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). One item only, no text."
+  }
  }
 ]
 }
