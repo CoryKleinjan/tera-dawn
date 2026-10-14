@@ -1,22 +1,22 @@
 {
-  "source": "art/source/building_lumewood_large.png",
-  "art_px": 3.505,
+  "source": "art/source/building_lumewood_dormitory.png",
+  "art_px": 4.296,
   "out_dir": "assets/sprites/buildings/lumewood",
   "label_band": 0,
   "inset": 0,
   "grid": {
     "rows": [
       0,
-      1378
+      1376
     ],
     "cols": [
       0,
-      741
+      1433
     ]
   },
   "cells": [
     [
-      "large"
+      "dormitory"
     ]
   ],
   "flat_bottom": true

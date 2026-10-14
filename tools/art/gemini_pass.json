@@ -4554,50 +4554,6 @@
    }
   },
   {
-   "id": "building_lumewood_large",
-   "prompts": null,
-   "batch": "building lumewood large (edit)",
-   "with": null,
-   "refs": [],
-   "save": "building_lumewood_large.png",
-   "replaces": null,
-   "kind": "still",
-   "stands": true,
-   "cells": [
-    1,
-    1
-   ],
-   "anchor": null,
-   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
-   "edit": {
-    "base": "assets/sprites/buildings/lumewood/large.png",
-    "base_scale": 4.68,
-    "text": "This is one building from my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same building with the same outline shape, size, proportions, colours, roof, windows, signs and door in the same places, the same crisp dark plum-brown outline and the same light from the upper left. Use the smaller pixels for real detail the big blocks could not show: wood grain, roof tiles or shingles, stone courses, window frames and panes, hinges, trims. It stays one single building, filling the image the same way. Nothing else in the picture: no ground, grass, shadow, people or sky; the background is flat pure magenta #FF00FF."
-   }
-  },
-  {
-   "id": "building_lumewood_small",
-   "prompts": null,
-   "batch": "building lumewood small (edit)",
-   "with": null,
-   "refs": [],
-   "save": "building_lumewood_small.png",
-   "replaces": null,
-   "kind": "still",
-   "stands": true,
-   "cells": [
-    1,
-    1
-   ],
-   "anchor": null,
-   "note": "2026-10-10 environment-resolution thread: redrawn with finer pixels so it shows at the land's pixel size (TDStage.TEXEL game px per art pixel).",
-   "edit": {
-    "base": "assets/sprites/buildings/lumewood/small.png",
-    "base_scale": 5.28,
-    "text": "This is one building from my game, enlarged so its pixels are big blocks. Redraw it as detailed pixel art with pixels about four times smaller: the same building with the same outline shape, size, proportions, colours, roof, windows, signs and door in the same places, the same crisp dark plum-brown outline and the same light from the upper left. Use the smaller pixels for real detail the big blocks could not show: wood grain, roof tiles or shingles, stone courses, window frames and panes, hinges, trims. It stays one single building, filling the image the same way. Nothing else in the picture: no ground, grass, shadow, people or sky; the background is flat pure magenta #FF00FF."
-   }
-  },
-  {
    "id": "eq_top_plate_frames",
    "prompts": "tera-dawn-chatgpt-art-prompts-6.md",
    "batch": "T1",
@@ -5097,50 +5053,6 @@
    "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
    "edit": {
     "base": "art/source/building_lanternfall_small.png",
-    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
-   }
-  },
-  {
-   "id": "paint_building_lumewood_large",
-   "prompts": null,
-   "batch": "painted look: building_lumewood_large (edit)",
-   "with": null,
-   "refs": [],
-   "save": "building_lumewood_large_painted.png",
-   "replaces": null,
-   "kind": "still",
-   "stands": true,
-   "cells": [
-    1,
-    1
-   ],
-   "anchor": null,
-   "size": "2K",
-   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
-   "edit": {
-    "base": "art/source/building_lumewood_large.png",
-    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
-   }
-  },
-  {
-   "id": "paint_building_lumewood_small",
-   "prompts": null,
-   "batch": "painted look: building_lumewood_small (edit)",
-   "with": null,
-   "refs": [],
-   "save": "building_lumewood_small_painted.png",
-   "replaces": null,
-   "kind": "still",
-   "stands": true,
-   "cells": [
-    1,
-    1
-   ],
-   "anchor": null,
-   "size": "2K",
-   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
-   "edit": {
-    "base": "art/source/building_lumewood_small.png",
     "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern HD-2D game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
    }
   },
@@ -9738,56 +9650,6 @@
    }
   },
   {
-   "id": "flat_building_lumewood_large",
-   "prompts": null,
-   "batch": "flat side-on building: lumewood_large (edit)",
-   "with": null,
-   "refs": [],
-   "save": "building_lumewood_large_flat.png",
-   "replaces": null,
-   "kind": "still",
-   "stands": true,
-   "cells": [
-    1,
-    1
-   ],
-   "anchor": null,
-   "size": "2K",
-   "note": "2026-10-11 flat-buildings thread: the 3/4-view building redrawn as a flat side-on facade to fit the 2D side-scroller view (Cory).",
-   "edit": {
-    "base": "art/source/building_lumewood_large.png",
-    "text": "Draw a NEW picture of this building from my 2D side-scrolling game, seen from a different angle. Right now it is drawn in a slightly angled 3/4 view, where you can see a side or look down onto the roof. I need it as a flat front elevation, like a building in a classic 2D side-scroller or a theatre backdrop flat: the camera looks straight at the front at eye level, so the front faces us flat. Do NOT show any side wall, corner or the top of the roof; the roof is seen edge-on from the front. No perspective at all: every horizontal line (eaves, beams, sills, the ground line) is perfectly level and every wall edge is perfectly vertical. It is still the same building, a round stone wizard tower: pale stone walls, the crystal glass dome roof with its brass ribs and the blue crystal spire on top, the round windows with glowing blue panes and the arched wooden door, in the same colours and at about the same height and width. The door or entrance sits at the bottom and is fully visible. The bottom edge of the building is one perfectly straight horizontal line along the ground, with nothing below it: no steps, no ground patch, no shadow. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background.",
-    "new_view": true
-   }
-  },
-  {
-   "id": "flat_building_lumewood_small",
-   "prompts": null,
-   "batch": "flat side-on building: lumewood_small (edit)",
-   "with": null,
-   "refs": [],
-   "save": "building_lumewood_small_flat.png",
-   "replaces": null,
-   "kind": "still",
-   "stands": true,
-   "cells": [
-    1,
-    1
-   ],
-   "anchor": null,
-   "size": "2K",
-   "note": "2026-10-11 flat-buildings thread: the 3/4-view building redrawn as a flat side-on facade to fit the 2D side-scroller view (Cory).",
-   "edit": {
-    "base": "art/source/building_lumewood_small.png",
-    "text": "Draw a NEW picture of this building from my 2D side-scrolling game, seen from a different angle. Right now it is drawn in a slightly angled 3/4 view, where you can see a side or look down onto the roof. I need it as a flat front elevation, like a building in a classic 2D side-scroller or a theatre backdrop flat: the camera looks straight at the front at eye level, so the front faces us flat. Do NOT show any side wall, corner or the top of the roof; the roof is seen edge-on from the front. No perspective at all: every horizontal line (eaves, beams, sills, the ground line) is perfectly level and every wall edge is perfectly vertical. It is still the same building, a giant blue mushroom house: the blue scalloped cap, the cream stalk walls, the round window and the arched wooden door, in the same colours and at about the same height and width. The door or entrance sits at the bottom and is fully visible. The bottom edge of the building is one perfectly straight horizontal line along the ground, with nothing below it: no steps, no ground patch, no shadow. Keep the same soft hand-painted look: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Last time the mushroom came out too big and its cap was cut off: draw the whole mushroom house, its full round cap, smaller and centred. The WHOLE building, every part of it (roof, chimney, mast, tree crown, cap), fits inside the picture with a clear band of magenta on all four sides; draw it smaller if needed, never cut anything off at an edge. The other attached images are two buildings from the same game that are already drawn in the wanted flat front view: copy their camera angle and flatness exactly, but not their design. Flat pure magenta #FF00FF background.",
-    "new_view": true,
-    "refs": [
-     "art/source/building_lanternfall_small.png",
-     "art/source/building_emberreach_large.png"
-    ]
-   }
-  },
-  {
    "id": "paint_logo",
    "prompts": null,
    "batch": "painted look: paint_logo (edit)",
@@ -10115,54 +9977,6 @@
    }
   },
   {
-   "id": "front_building_lumewood_large",
-   "prompts": null,
-   "batch": "front-view building: lumewood_large (edit)",
-   "with": null,
-   "refs": [],
-   "save": "building_lumewood_large_front.png",
-   "replaces": null,
-   "kind": "still",
-   "stands": true,
-   "cells": [
-    1,
-    1
-   ],
-   "anchor": null,
-   "size": "2K",
-   "note": "2026-10-11 buildings round 2 (Cory): pure front view, no roof tops, wall base flat along the whole bottom, nothing below it, sits on the ground.",
-   "edit": {
-    "base": "art/source/building_lumewood_large.png",
-    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a round stone wizard tower drawn as a flat front silhouette: pale stone walls with straight vertical sides, the crystal glass dome roof shown only as its front half-circle outline with brass ribs and the blue crystal spire on top, round windows with glowing blue panes and the arched wooden door. Its base is straight and flat along the ground, not curved, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
-    "new_view": true,
-    "base_margin": 0.08
-   }
-  },
-  {
-   "id": "front_building_lumewood_small",
-   "prompts": null,
-   "batch": "front-view building: lumewood_small (edit)",
-   "with": null,
-   "refs": [],
-   "save": "building_lumewood_small_front.png",
-   "replaces": null,
-   "kind": "still",
-   "stands": true,
-   "cells": [
-    1,
-    1
-   ],
-   "anchor": null,
-   "size": "2K",
-   "note": "2026-10-11 buildings round 2 (Cory): pure front view, no roof tops, wall base flat along the whole bottom, nothing below it, sits on the ground.",
-   "edit": {
-    "base": "art/source/building_lumewood_small.png",
-    "text": "Redraw this building from my 2D side-scrolling game as a pure front elevation, like an architect's front view or a flat theatre backdrop: the camera looks straight at the front at eye level, from directly in front. Rules, all of them strict: 1) Only the front face shows. No side walls, no corners, no depth. 2) No roof surface seen from above. Each roof shows only as its front outline: a gable triangle, or a straight band of roof edge along the top of the wall. The side wings' roofs must also be straight-on, not sloping away from us. 3) No perspective: every horizontal line is perfectly level, every wall edge perfectly vertical, and the building is left-right balanced. 4) The wall itself stands on the ground: the base of the wall runs as one straight, solid horizontal line along the whole bottom of the building, edge to edge. Nothing hangs below it or stands in front of it: no anvil, stumps, barrels, steps, posts, legs, stilts, roots, ground patch or shadow. 5) The whole building, chimney top included, fits inside the picture with a clear band of magenta on every side. Nothing is cut off. Keep it the same building: a giant blue mushroom house: the blue scalloped cap seen straight from the side (its underside edge level, no top surface seen from above), the cream stalk walls with a straight flat base on the ground, the round window and the arched wooden door. The whole cap fits inside the picture, with the same colours and about the same size. Keep the same soft hand-painted look as now: smooth painted shading, gentle gradients, thin dark plum-brown outlines, warm light from the upper left, no visible pixels and no pixel-art look. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building.",
-    "new_view": true,
-    "base_margin": 0.08
-   }
-  },
-  {
    "id": "front2_building_dawnharbor_small",
    "prompts": null,
    "batch": "front-view building redo: dawnharbor_small (edit)",
@@ -10473,60 +10287,6 @@
    "edit": {
     "base": "art/source/building_lanternfall_small.png",
     "text": "The first image is a building from my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have. Repaint the building in the SAME art style as those characters: the same soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, the same rich warm saturated colours, the same bold dark brown outlines of the same thickness relative to the details, and the same amount of hand-painted detail (wood grain, worn and chipped spots, slight colour variation between stones, planks, tiles or thatch, warm light in any windows). Keep the building itself: a small half-timbered house: terracotta tile gable roof with moss seen straight-on, timber frame, pale plaster, stone base, the shuttered window, the purple curtain doorway and the hanging lantern. Keep its shape, its front-on view and its colours, with the colours made richer. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof or top surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: every part of it, middle and any side wings, reaches down to the same ground line, edge to edge, with nothing hanging lower and no part standing higher. Nothing below the base or in front of it: no steps, path, ground patch, ground line or shadow. 3) The whole building fits inside the picture with a clear band of magenta on every side; nothing is cut off. 4) Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building. Do not draw any characters.",
-    "new_view": true,
-    "base_margin": 0.08,
-    "refs": [
-     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
-    ]
-   }
-  },
-  {
-   "id": "npcstyle_building_lumewood_large",
-   "prompts": null,
-   "batch": "NPC-style building: lumewood_large (edit)",
-   "with": null,
-   "refs": [],
-   "save": "building_lumewood_large_npcstyle.png",
-   "replaces": null,
-   "kind": "still",
-   "stands": true,
-   "cells": [
-    1,
-    1
-   ],
-   "anchor": null,
-   "size": "2K",
-   "note": "2026-10-11 (Cory 21:56Z 'yes this is better'): restyle to match the NPCs, like the Dawnharbor house test.",
-   "edit": {
-    "base": "art/source/building_lumewood_large.png",
-    "text": "The first image is a building from my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have. Repaint the building in the SAME art style as those characters: the same soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, the same rich warm saturated colours, the same bold dark brown outlines of the same thickness relative to the details, and the same amount of hand-painted detail (wood grain, worn and chipped spots, slight colour variation between stones, planks, tiles or thatch, warm light in any windows). Keep the building itself: a round stone wizard tower drawn as a flat front silhouette: pale stone walls with straight vertical sides, the crystal glass dome roof shown only as its front half-circle outline with brass ribs and the blue crystal spire on top, round windows with glowing blue panes and the arched wooden door. Its base is straight and flat along the ground, not curved. Keep its shape, its front-on view and its colours, with the colours made richer. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof or top surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: every part of it, middle and any side wings, reaches down to the same ground line, edge to edge, with nothing hanging lower and no part standing higher. Nothing below the base or in front of it: no steps, path, ground patch, ground line or shadow. 3) The whole building fits inside the picture with a clear band of magenta on every side; nothing is cut off. 4) Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building. Do not draw any characters.",
-    "new_view": true,
-    "base_margin": 0.08,
-    "refs": [
-     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
-    ]
-   }
-  },
-  {
-   "id": "npcstyle_building_lumewood_small",
-   "prompts": null,
-   "batch": "NPC-style building: lumewood_small (edit)",
-   "with": null,
-   "refs": [],
-   "save": "building_lumewood_small_npcstyle.png",
-   "replaces": null,
-   "kind": "still",
-   "stands": true,
-   "cells": [
-    1,
-    1
-   ],
-   "anchor": null,
-   "size": "2K",
-   "note": "2026-10-11 (Cory 21:56Z 'yes this is better'): restyle to match the NPCs, like the Dawnharbor house test.",
-   "edit": {
-    "base": "art/source/building_lumewood_small.png",
-    "text": "The first image is a building from my 2D side-scrolling game. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have. Repaint the building in the SAME art style as those characters: the same soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, the same rich warm saturated colours, the same bold dark brown outlines of the same thickness relative to the details, and the same amount of hand-painted detail (wood grain, worn and chipped spots, slight colour variation between stones, planks, tiles or thatch, warm light in any windows). Keep the building itself: a giant blue mushroom house: the blue scalloped cap seen straight from the side (its underside edge level, no top surface seen from above), the cream stalk walls with a straight flat base on the ground, the round window and the arched wooden door. The whole cap fits inside the picture. Keep its shape, its front-on view and its colours, with the colours made richer. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof or top surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: every part of it, middle and any side wings, reaches down to the same ground line, edge to edge, with nothing hanging lower and no part standing higher. Nothing below the base or in front of it: no steps, path, ground patch, ground line or shadow. 3) The whole building fits inside the picture with a clear band of magenta on every side; nothing is cut off. 4) Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background, with no magenta or pink anywhere inside the building. Do not draw any characters.",
     "new_view": true,
     "base_margin": 0.08,
     "refs": [
@@ -12175,12 +11935,12 @@
    }
   },
   {
-   "id": "lanternfall_city_thieves_den",
+   "id": "lumewood_city_library",
    "prompts": null,
-   "batch": "Lanternfall city test: Thieves' Den (new building)",
+   "batch": "Lumewood city test: Magicians' Library (new building)",
    "with": null,
    "refs": [],
-   "save": "lanternfall_city_thieves_den.png",
+   "save": "lumewood_city_library.png",
    "replaces": null,
    "kind": "still",
    "stands": true,
@@ -12190,24 +11950,22 @@
    ],
    "anchor": null,
    "size": "2K",
-   "note": "2026-10-13 thread 'Lanternfall up to Dawnharbor's standard' (Cory 23:42Z 'Yes. Looks good' to the Lanternfall look questions: permanent dusk, smoky ochre plaster, dark beams, dark brick, slate-blue roofs, plum and teal awnings): test before the full Lanternfall batch; Lanternfall's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "note": "2026-10-13 thread 'Lumewood up to Dawnharbor's standard' (Cory 23:42Z 'Yea' to the Lumewood look questions): test before the full Lumewood batch; Lumewood's own tone (docs/zone-vibes.md), never Dawnharbor's look. Cory 23:44Z: no 3D-looking buildings, so the old crystal-dome tower is not used as a reference.",
    "edit": {
-    "base": "/mnt/project-files/art-sheets/lanternfall-city/building_base.png",
+    "base": "/mnt/project-files/art-sheets/lumewood-city/building_wide_base.png",
     "refs": [
-     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
-     "/mnt/project-files/art-sheets/lanternfall-city/current_lanternfall_large.png",
-     "/mnt/project-files/art-sheets/lanternfall-city/current_lanternfall_small.png"
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
     ],
-    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Lanternfall, the thieves' town in my 2D side-scrolling game: a city of lanterns that is always at dusk, sly, playful, mysterious but charming, never spooky; tall narrow crooked houses packed along cobbled alleys, cool lavender dusk light against warm golden lantern glow. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn plaster, chipped brick, slight colour variation between beams and tiles). The third and fourth images are two older houses from the same town: keep their half-timbered shape, but paint the new building with MORE detail and richer light and shadow than they have. The new building is the THIEVES' DEN, the hall of the town's thieves' guild and the grandest building on the street, a little taller than it is wide: a crooked three-storey half-timbered townhouse, each upper storey jutting out slightly over the one below; walls of smoky ochre plaster, worn and stained, between dark soot-stained timber beams; a ground floor of dark red-brown brick; a steep roof of slate-blue tiles with a crooked brick chimney and a small dormer window; a heavy dark wooden door at ground level, centred, with iron studs and a peephole grille, under a small plum-coloured cloth awning; warm golden glowing windows with small diamond panes and half-closed shutters; a round wooden sign on an iron bracket beside the door, painted with a black mask and a pair of crossed daggers (pictures only, no writing), hung firmly at both ends; two iron wall lanterns with warm flames on either side of the door; a teal cloth banner with a key emblem hanging flat against the upper wall, fixed at top and bottom; Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical (the crooked charm comes from the shapes, not from perspective). 2) The bottom of the whole building is ONE straight horizontal line: its brick base reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, cobbles, ground patch, grass, people or shadow. 3) The door is a real doorway at ground level, centred left to right in the building. 4) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 5) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. No cream plaster and no bright blue glazed tiles (that is a different town). Nothing (rope, cloth, chain) ends loose in mid-air. No glow halo spilling onto the background. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Lumewood Sanctum, the magicians' town in my 2D side-scrolling game: a calm, scholarly town of round pale-stone towers in a glowing, dreaming forest, lit by soft violet twilight and glowing blue crystals. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and plenty of hand-painted detail (stone texture, chipped and worn edges, glass reflections, slight colour variation between stones). Materials for the whole town: pale lilac-grey stone blocks, blue glass domes with silver-blue ribs, round windows, warm wooden doors with silver-blue iron fittings. The new building is the MAGICIANS' LIBRARY, the grandest building in the town, a little wider than it is tall: a two-storey hall of pale lilac-grey stone blocks on a low plinth of larger stone blocks, with a round tower at each end; a large blue glass dome with silver-blue ribs in the middle of the roof, a glowing blue crystal on its tip, and smaller glass domes capping the two end towers; tall arched windows full of glowing bookshelves and blue light on the ground floor, round windows on the upper floor; a wide arched wooden double door with silver-blue iron fittings in the middle of the ground floor, under a carved stone arch set with a glowing crystal; two long violet cloth banners painted with an open book and a star (pictures only, no writing) hanging flat against the wall on either side of the door, fixed at top and bottom; a few small blue crystal clusters growing from the stone at the corners of the plinth. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical; the domes and round towers are drawn as flat front silhouettes. 2) The bottom of the whole building is ONE straight horizontal line: its stone plinth reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, grass, roots, people or shadow. 3) The door is a real doorway at ground level, centred left to right in the building. 4) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 5) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, runes or words anywhere. No blue roof tiles, cream plaster or wooden thatch (those are other towns). Nothing (rope, cloth, chain) ends loose in mid-air. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
    }
   },
   {
-   "id": "lanternfall_backdrop_panorama",
+   "id": "lumewood_backdrop_panorama",
    "prompts": null,
-   "batch": "Lanternfall city: one 4K dusk rooftop backdrop (test)",
+   "batch": "Lumewood city: one 4K twilight forest backdrop (test)",
    "with": null,
    "refs": [],
-   "save": "lanternfall_backdrop_panorama.png",
+   "save": "lumewood_backdrop_panorama.png",
    "replaces": null,
    "kind": "still",
    "stands": false,
@@ -12217,23 +11975,22 @@
    ],
    "anchor": null,
    "size": "4K",
-   "note": "2026-10-13 thread 'Lanternfall up to Dawnharbor's standard' (Cory 23:42Z 'Yes. Looks good' to the Lanternfall look questions: permanent dusk, smoky ochre plaster, dark beams, dark brick, slate-blue roofs, plum and teal awnings): test before the full Lanternfall batch; Lanternfall's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "note": "2026-10-13 thread 'Lumewood up to Dawnharbor's standard' (Cory 23:42Z 'Yea' to the Lumewood look questions): test before the full Lumewood batch; Lumewood's own tone (docs/zone-vibes.md), never Dawnharbor's look. Cory 23:44Z: no 3D-looking buildings, so the old crystal-dome tower is not used as a reference.",
    "edit": {
-    "base": "/mnt/project-files/art-sheets/lanternfall-city/backdrop_panorama_base.png",
+    "base": "/mnt/project-files/art-sheets/lumewood-city/backdrop_panorama_base.png",
     "refs": [
-     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
-     "/mnt/project-files/art-sheets/lanternfall-city/current_lanternfall_large.png"
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
     ],
-    "text": "The first image is a blank canvas showing only a soft dusk colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Lanternfall, the thieves' town in my 2D side-scrolling game: a city of lanterns that is always at dusk, sly, playful, mysterious but charming, never spooky; tall narrow crooked houses packed along cobbled alleys, cool lavender dusk light against warm golden lantern glow. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn plaster, chipped brick, slight colour variation between beams and tiles). Paint the background in that same style, a little softer and lighter in contrast so it sits behind the characters. The third image is a house from the same town: match its half-timbered shapes, but use smoky ochre plaster, dark beams, dark brick and slate-blue roofs. The scene: a sprawling skyline of crooked rooftops at dusk, seen from street level. Tall narrow half-timbered houses of different heights crowd the whole width of the picture, with steep slate-blue roofs, leaning brick chimneys, little dormers, a few thin spires and one distant clock tower; the nearest roofs are in the middle distance, others fade back row after row into deep blue fog. Many small windows glow warm gold, and strings of small golden lanterns hang between some of the houses, tied to both houses. The sky goes from near-black navy at the very top through deep blue and lavender to a warm amber glow along the horizon behind the rooftops; a few early stars at the top; small golden motes drift upward in the air. Colours: navy #090e24 at the top, amber #dfa060 at the horizon, cool lavender light #c7bfff on the roofs, deep blue fog #3a3a6f between the rows, warm gold lantern light. Strict rules: 1) Side-on view at eye level, every wall and chimney straight up and down, no looking down on the roofs. 2) No people, no characters, no animals, no birds, no moon. No clouds. 3) Nothing in the near foreground: no street, cobbles, walls or lamps in front; the closest houses are in the middle distance. 4) The left and right edges continue naturally (houses, fog, sky), nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. Charming and cosy, never spooky."
+    "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Lumewood Sanctum, the magicians' town in my 2D side-scrolling game: a glowing, dreaming forest; mystical, serene and wondrous. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and plenty of hand-painted detail (stone texture, chipped and worn edges, glass reflections, slight colour variation between stones). Paint the background in that same style, a little softer and lighter in contrast so it sits behind the characters. The scene: a twilight forest of tall slender trees with soft violet-blue leaves, layer after layer fading back into violet fog. Between the trees in the middle distance and far away, several round pale-stone towers and large glass domes glow softly from inside with blue and lavender light, some on low hills, one tall slim observatory tower far off. Glowing blue and teal mushrooms and small glowing plants dot the misty forest floor in the distance, and blue crystals catch the light. The sky is deep indigo at the very top, fading to a glowing lavender horizon low in the middle, with a few faint stars at the top and soft pale violet light shafts slanting down through the trees. Many small blue-white motes drift upward through the whole scene. Colours: indigo #120e33 at the very top, lavender #c8a7ff at the horizon, soft violet light #d8c7ff, violet fog #7961c7 low down. Strict rules: 1) Side-on view at eye level, as if standing on the forest floor, every trunk and tower straight up and down. 2) No people, no characters, no animals, no birds. No moon. 3) Nothing in the near foreground: no ground, roots, grass, rocks or leaves in front; the closest trees are in the middle distance. 4) The left and right edges continue naturally (trees, fog and glow), nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, runes or words anywhere."
    }
   },
   {
-   "id": "lanternfall_city_thieves_den_flat",
+   "id": "lumewood_city_store",
    "prompts": null,
-   "batch": "Lanternfall city: Thieves' Den repainted as a flat front view",
+   "batch": "Lumewood city: magic store (new building)",
    "with": null,
    "refs": [],
-   "save": "lanternfall_city_thieves_den_flat.png",
+   "save": "lumewood_city_store.png",
    "replaces": null,
    "kind": "still",
    "stands": true,
@@ -12243,24 +12000,23 @@
    ],
    "anchor": null,
    "size": "2K",
-   "note": "2026-10-13 thread 'Lanternfall up to Dawnharbor's standard': the first Den test came back in 3/4; Cory 23:59Z 'Yes' to a flat repaint (~$0.07) keeping its colours and details. Backdrop approved.",
+   "note": "2026-10-13 thread 'Lumewood up to Dawnharbor's standard': Cory approved the Library + backdrop test ('They look good! Go ahead' 23:59Z). Lumewood's own tone (docs/zone-vibes.md), never Dawnharbor's look. Spend waits on Cory's OK.",
    "edit": {
-    "base": "/mnt/project-files/art-sheets/lanternfall-city/building_base.png",
+    "base": "/mnt/project-files/art-sheets/lumewood-city/building_wide_base.png",
     "refs": [
      "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
-     "/mnt/project-files/art-sheets/gemini-pass-1/lanternfall_city_thieves_den.png",
-     "/mnt/project-files/art-sheets/lanternfall-city/current_lanternfall_large.png"
+     "/mnt/project-files/art-sheets/gemini-pass-1/lumewood_city_library.png"
     ],
-    "text": "The first image is an empty magenta canvas. On it, paint ONE building for Lanternfall, the thieves' town in my 2D side-scrolling game: a city of lanterns that is always at dusk, sly, playful, mysterious but charming, never spooky. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn plaster, chipped brick, slight colour variation between beams and tiles). The third image is the THIEVES' DEN I want, but it is drawn at an angle, which is wrong for my game. Repaint the same building with the same materials, colours and details: smoky ochre plaster between dark soot-stained timber beams, a ground floor of dark red-brown brick, slate-blue roof tiles, a crooked brick chimney, small dormer, golden diamond-pane windows with shutters, the heavy studded door with a peephole grille under a plum cloth awning, two iron wall lanterns beside the door, the teal banner with a key, and the round sign with a black mask and crossed daggers on an iron bracket. The fourth image is another house from the same town that IS drawn the right way: copy its viewpoint exactly. Like it, the new Den is a pure flat FRONT ELEVATION, like an architect's drawing of one wall: ONE gable end faces the viewer straight on, so the roof is seen only as a symmetric triangle outline with tiles along its two edges, and no side wall, corner or roof slope going back is visible at all. The Den is a tall narrow three-storey townhouse, taller than it is wide, each upper storey jutting out slightly over the one below (shown only as a ledge with small brackets, all in the same flat plane), with the door centred at ground level. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, no side walls, every horizontal line level and every wall edge vertical; left and right outlines of each storey are straight vertical lines. 2) The bottom of the whole building is ONE straight horizontal line: its brick base reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, cobbles, ground line, ground patch, grass, people or shadow. 3) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. No cream plaster. Nothing (rope, cloth, chain) ends loose in mid-air. No glow halo spilling onto the background. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Lumewood Sanctum, the magicians' town in my 2D side-scrolling game: a calm, scholarly town of round pale-stone towers in a glowing, dreaming forest, lit by soft violet twilight and glowing blue crystals. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and plenty of hand-painted detail (stone texture, chipped and worn edges, glass reflections, slight colour variation between stones). The third image is the Magicians' Library from the same town: match its style, palette (pale lilac-grey stone blocks, a plinth of larger stone blocks, blue glass domes with silver-blue ribs, glowing blue crystals, round windows, violet cloth, warm wooden doors with silver-blue iron fittings), outline thickness and level of detail exactly, so they clearly belong to the same town. The new building is the town's MAGIC STORE, a little wider than it is tall and smaller than the library: a one-and-a-half-storey shop of pale lilac-grey stone on a stone plinth, with a low blue glass half-dome roof with silver-blue ribs and a small glowing crystal on top; a centred arched wooden door at ground level with silver-blue fittings; a wide round-topped shop window on each side of the door with shelves of glowing potion bottles, scrolls and crystals behind the glass; a small violet cloth awning fixed flat to the wall above each window; a wooden sign hanging from an iron bracket beside the upper floor, painted with a potion bottle and a star (a picture only, no writing), its chains attached at both ends. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical; any dome or round tower is drawn as a flat front silhouette, with no windows wrapping around a curved side. 2) The bottom of the whole building is ONE straight horizontal line: everything reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, grass, roots, people or shadow. 3) The door is a real doorway at ground level, centred left to right in the building. 4) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 5) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, runes or words anywhere. No blue roof tiles, cream plaster or wooden thatch (those are other towns). Nothing (rope, cloth, chain) ends loose in mid-air. No glow spilling onto the background. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
    }
   },
   {
-   "id": "lanternfall_city_store",
+   "id": "lumewood_city_observatory",
    "prompts": null,
-   "batch": "Lanternfall city: store (new building)",
+   "batch": "Lumewood city: observatory tower (new building)",
    "with": null,
    "refs": [],
-   "save": "lanternfall_city_store.png",
+   "save": "lumewood_city_observatory.png",
    "replaces": null,
    "kind": "still",
    "stands": true,
@@ -12270,23 +12026,23 @@
    ],
    "anchor": null,
    "size": "2K",
-   "note": "2026-10-14 thread 'Lanternfall up to Dawnharbor's standard': Cory approved the flat Thieves' Den and the backdrop, and said 'Yes' (00:15Z) to the full Lanternfall batch (~$0.85). Lanternfall's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "note": "2026-10-13 thread 'Lumewood up to Dawnharbor's standard': Cory approved the Library + backdrop test ('They look good! Go ahead' 23:59Z). Lumewood's own tone (docs/zone-vibes.md), never Dawnharbor's look. Spend waits on Cory's OK.",
    "edit": {
-    "base": "/mnt/project-files/art-sheets/lanternfall-city/building_base.png",
+    "base": "/mnt/project-files/art-sheets/lumewood-city/building_tall_base.png",
     "refs": [
      "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
-     "/mnt/project-files/art-sheets/gemini-pass-1/lanternfall_city_thieves_den_flat.png"
+     "/mnt/project-files/art-sheets/gemini-pass-1/lumewood_city_library.png"
     ],
-    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Lanternfall, the thieves' town in my 2D side-scrolling game: a city of lanterns that is always at dusk, sly, playful, mysterious but charming, never spooky; tall narrow crooked half-timbered houses packed along cobbled alleys, cool lavender dusk light against warm golden lantern glow. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn plaster, chipped brick, slight colour variation between beams and tiles). The third image is the Thieves' Den from the same town: match its style, palette (smoky ochre plaster, dark soot-stained timber beams, dark red-brown brick, slate-blue roof tiles, iron lanterns, plum and teal cloth), outline thickness, level of detail and flat front viewpoint exactly, so they clearly belong to the same street. The new building is the LANTERNFALL STORE, the town's general store, a little wider than it is tall and smaller than the Den: a two-storey half-timbered shop of smoky ochre plaster and dark beams over a dark brick ground floor, a slate-blue roof with one gable facing the viewer and a small chimney; a centred wooden door at ground level with a small round window in it; a wide bay-less shop window on each side of the door with small golden panes and crates of goods stacked behind the glass, under a striped teal-and-plum cloth awning fixed flat to the wall; a wooden sign hanging from an iron bracket by the upper window, painted with a sack and a gold coin (a picture only, no writing), its chains attached at both ends; one iron wall lantern by the door. Strict rules: 1) Pure flat FRONT ELEVATION at eye level, like the third image: only the front face shows, the roof seen only as its outline, no roof surface seen from above, no side walls or corners going back, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: everything reaches down to the same ground line, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, cobbles, ground line, ground patch, grass, people or shadow. 3) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. No cream plaster and no bright blue glazed tiles (that is a different town). Nothing (rope, cloth, chain) ends loose in mid-air. No glow halo spilling onto the background. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Lumewood Sanctum, the magicians' town in my 2D side-scrolling game: a calm, scholarly town of round pale-stone towers in a glowing, dreaming forest, lit by soft violet twilight and glowing blue crystals. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and plenty of hand-painted detail (stone texture, chipped and worn edges, glass reflections, slight colour variation between stones). The third image is the Magicians' Library from the same town: match its style, palette (pale lilac-grey stone blocks, a plinth of larger stone blocks, blue glass domes with silver-blue ribs, glowing blue crystals, round windows, violet cloth, warm wooden doors with silver-blue iron fittings), outline thickness and level of detail exactly, so they clearly belong to the same town. The new building is the OBSERVATORY TOWER, much taller than it is wide: a slim round tower of pale lilac-grey stone, drawn as a flat front, rising from a wider stone plinth, with a band of carved stone between each floor; a centred arched wooden door at ground level; a column of round glowing windows up the front; at the top, a small blue glass dome with silver-blue ribs and a brass telescope pointing up and to the right out of an open slot in the dome; a little violet pennant on a pole on top of the dome. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical; any dome or round tower is drawn as a flat front silhouette, with no windows wrapping around a curved side. 2) The bottom of the whole building is ONE straight horizontal line: everything reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, grass, roots, people or shadow. 3) The door is a real doorway at ground level, centred left to right in the building. 4) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 5) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, runes or words anywhere. No blue roof tiles, cream plaster or wooden thatch (those are other towns). Nothing (rope, cloth, chain) ends loose in mid-air. No glow spilling onto the background. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
    }
   },
   {
-   "id": "lanternfall_city_inn",
+   "id": "lumewood_city_alchemist",
    "prompts": null,
-   "batch": "Lanternfall city: inn (new building)",
+   "batch": "Lumewood city: alchemist's workshop (new building)",
    "with": null,
    "refs": [],
-   "save": "lanternfall_city_inn.png",
+   "save": "lumewood_city_alchemist.png",
    "replaces": null,
    "kind": "still",
    "stands": true,
@@ -12296,23 +12052,23 @@
    ],
    "anchor": null,
    "size": "2K",
-   "note": "2026-10-14 thread 'Lanternfall up to Dawnharbor's standard': Cory approved the flat Thieves' Den and the backdrop, and said 'Yes' (00:15Z) to the full Lanternfall batch (~$0.85). Lanternfall's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "note": "2026-10-13 thread 'Lumewood up to Dawnharbor's standard': Cory approved the Library + backdrop test ('They look good! Go ahead' 23:59Z). Lumewood's own tone (docs/zone-vibes.md), never Dawnharbor's look. Spend waits on Cory's OK.",
    "edit": {
-    "base": "/mnt/project-files/art-sheets/lanternfall-city/building_base.png",
+    "base": "/mnt/project-files/art-sheets/lumewood-city/building_wide_base.png",
     "refs": [
      "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
-     "/mnt/project-files/art-sheets/gemini-pass-1/lanternfall_city_thieves_den_flat.png"
+     "/mnt/project-files/art-sheets/gemini-pass-1/lumewood_city_library.png"
     ],
-    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Lanternfall, the thieves' town in my 2D side-scrolling game: a city of lanterns that is always at dusk, sly, playful, mysterious but charming, never spooky; tall narrow crooked half-timbered houses packed along cobbled alleys, cool lavender dusk light against warm golden lantern glow. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn plaster, chipped brick, slight colour variation between beams and tiles). The third image is the Thieves' Den from the same town: match its style, palette (smoky ochre plaster, dark soot-stained timber beams, dark red-brown brick, slate-blue roof tiles, iron lanterns, plum and teal cloth), outline thickness, level of detail and flat front viewpoint exactly, so they clearly belong to the same street. The new building is the CROOKED LANTERN INN, a cosy three-storey inn, about as wide as it is tall: two gables side by side facing the viewer, the left one a little taller and leaning a touch, smoky ochre plaster between dark beams over a dark brick ground floor, slate-blue roofs with two leaning brick chimneys; a wide arched wooden double door in the middle of the ground floor with two warm glowing windows on each side; upper windows with flower boxes of small purple flowers fixed to the sills; a hanging sign on an iron bracket painted with a lantern and a bed (pictures only, no writing), chains attached at both ends; a short string of small golden lanterns hanging along the front under the eaves, fixed at both ends to the wall. Strict rules: 1) Pure flat FRONT ELEVATION at eye level, like the third image: only the front face shows, the roof seen only as its outline, no roof surface seen from above, no side walls or corners going back, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: everything reaches down to the same ground line, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, cobbles, ground line, ground patch, grass, people or shadow. 3) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. No cream plaster and no bright blue glazed tiles (that is a different town). Nothing (rope, cloth, chain) ends loose in mid-air. No glow halo spilling onto the background. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Lumewood Sanctum, the magicians' town in my 2D side-scrolling game: a calm, scholarly town of round pale-stone towers in a glowing, dreaming forest, lit by soft violet twilight and glowing blue crystals. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and plenty of hand-painted detail (stone texture, chipped and worn edges, glass reflections, slight colour variation between stones). The third image is the Magicians' Library from the same town: match its style, palette (pale lilac-grey stone blocks, a plinth of larger stone blocks, blue glass domes with silver-blue ribs, glowing blue crystals, round windows, violet cloth, warm wooden doors with silver-blue iron fittings), outline thickness and level of detail exactly, so they clearly belong to the same town. The new building is the ALCHEMIST'S WORKSHOP, about as wide as it is tall: a one-storey stone workshop of pale lilac-grey stone on a stone plinth, with a pale stone chimney on one side giving off a thin curl of teal-glowing smoke that fades out above the chimney; a short blue glass dome on the roof; a centred arched wooden door at ground level; a round glowing window on each side of the door showing bubbling flasks; a shelf of glass flasks with glowing teal, violet and blue liquids fixed flat against the wall beside the door; a few glowing blue mushrooms growing at the corners of the plinth. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical; any dome or round tower is drawn as a flat front silhouette, with no windows wrapping around a curved side. 2) The bottom of the whole building is ONE straight horizontal line: everything reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, grass, roots, people or shadow. 3) The door is a real doorway at ground level, centred left to right in the building. 4) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 5) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, runes or words anywhere. No blue roof tiles, cream plaster or wooden thatch (those are other towns). Nothing (rope, cloth, chain) ends loose in mid-air. No glow spilling onto the background. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
    }
   },
   {
-   "id": "lanternfall_city_clock_tower",
+   "id": "lumewood_city_dormitory",
    "prompts": null,
-   "batch": "Lanternfall city: clock tower (new building)",
+   "batch": "Lumewood city: apprentices' dormitory (new building)",
    "with": null,
    "refs": [],
-   "save": "lanternfall_city_clock_tower.png",
+   "save": "lumewood_city_dormitory.png",
    "replaces": null,
    "kind": "still",
    "stands": true,
@@ -12322,49 +12078,23 @@
    ],
    "anchor": null,
    "size": "2K",
-   "note": "2026-10-14 thread 'Lanternfall up to Dawnharbor's standard': Cory approved the flat Thieves' Den and the backdrop, and said 'Yes' (00:15Z) to the full Lanternfall batch (~$0.85). Lanternfall's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "note": "2026-10-13 thread 'Lumewood up to Dawnharbor's standard': Cory approved the Library + backdrop test ('They look good! Go ahead' 23:59Z). Lumewood's own tone (docs/zone-vibes.md), never Dawnharbor's look. Spend waits on Cory's OK.",
    "edit": {
-    "base": "/mnt/project-files/art-sheets/lanternfall-city/building_tall_base.png",
+    "base": "/mnt/project-files/art-sheets/lumewood-city/building_wide_base.png",
     "refs": [
      "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
-     "/mnt/project-files/art-sheets/gemini-pass-1/lanternfall_city_thieves_den_flat.png"
+     "/mnt/project-files/art-sheets/gemini-pass-1/lumewood_city_library.png"
     ],
-    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Lanternfall, the thieves' town in my 2D side-scrolling game: a city of lanterns that is always at dusk, sly, playful, mysterious but charming, never spooky; tall narrow crooked half-timbered houses packed along cobbled alleys, cool lavender dusk light against warm golden lantern glow. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn plaster, chipped brick, slight colour variation between beams and tiles). The third image is the Thieves' Den from the same town: match its style, palette (smoky ochre plaster, dark soot-stained timber beams, dark red-brown brick, slate-blue roof tiles, iron lanterns, plum and teal cloth), outline thickness, level of detail and flat front viewpoint exactly, so they clearly belong to the same street. The new building is the LANTERNFALL CLOCK TOWER, much taller than it is wide: a tall narrow square tower of dark red-brown brick with dark timber bands, a big round clock face near the top with a cream-gold dial, dark iron hands and simple tick marks (no numbers, no letters), above it an open belfry arch with a small bronze bell, then a steep pointed slate-blue spire with a little iron weathervane shaped like a key; a small arched wooden door at the bottom, centred; a few narrow glowing slit windows up the shaft; two iron wall lanterns by the door. Strict rules: 1) Pure flat FRONT ELEVATION at eye level, like the third image: only the front face shows, the roof seen only as its outline, no roof surface seen from above, no side walls or corners going back, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: everything reaches down to the same ground line, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, cobbles, ground line, ground patch, grass, people or shadow. 3) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. No cream plaster and no bright blue glazed tiles (that is a different town). Nothing (rope, cloth, chain) ends loose in mid-air. No glow halo spilling onto the background. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Lumewood Sanctum, the magicians' town in my 2D side-scrolling game: a calm, scholarly town of round pale-stone towers in a glowing, dreaming forest, lit by soft violet twilight and glowing blue crystals. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and plenty of hand-painted detail (stone texture, chipped and worn edges, glass reflections, slight colour variation between stones). The third image is the Magicians' Library from the same town: match its style, palette (pale lilac-grey stone blocks, a plinth of larger stone blocks, blue glass domes with silver-blue ribs, glowing blue crystals, round windows, violet cloth, warm wooden doors with silver-blue iron fittings), outline thickness and level of detail exactly, so they clearly belong to the same town. The new building is the APPRENTICES' DORMITORY, a little taller than it is wide: a modest two-storey house of pale lilac-grey stone on a stone plinth, with a steep pointed roof of slate-blue stone slates and a small glowing crystal finial; a centred arched wooden door at ground level; small round windows on both floors glowing with warm candlelight, a flower box of glowing blue flowers fixed under each upper window; a small violet cloth banner painted with a star (a picture only) hanging flat beside the door, fixed at top and bottom. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical; any dome or round tower is drawn as a flat front silhouette, with no windows wrapping around a curved side. 2) The bottom of the whole building is ONE straight horizontal line: everything reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, grass, roots, people or shadow. 3) The door is a real doorway at ground level, centred left to right in the building. 4) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 5) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, runes or words anywhere. No blue roof tiles, cream plaster or wooden thatch (those are other towns). Nothing (rope, cloth, chain) ends loose in mid-air. No glow spilling onto the background. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
    }
   },
   {
-   "id": "lanternfall_lamp_post",
+   "id": "lumewood_props",
    "prompts": null,
-   "batch": "Lanternfall city: lamp post",
+   "batch": "Lumewood city: props sheet",
    "with": null,
    "refs": [],
-   "save": "lanternfall_lamp_post.png",
-   "replaces": null,
-   "kind": "still",
-   "stands": true,
-   "cells": [
-    1,
-    1
-   ],
-   "anchor": null,
-   "size": "2K",
-   "note": "2026-10-14 thread 'Lanternfall up to Dawnharbor's standard': Cory approved the flat Thieves' Den and the backdrop, and said 'Yes' (00:15Z) to the full Lanternfall batch (~$0.85). Lanternfall's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
-   "edit": {
-    "base": "/mnt/project-files/art-sheets/lanternfall-city/building_tall_base.png",
-    "refs": [
-     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
-     "/mnt/project-files/art-sheets/gemini-pass-1/lanternfall_city_thieves_den_flat.png"
-    ],
-    "text": "The first image is an empty magenta canvas. On it, paint ONE lamp post for Lanternfall, the thieves' town in my 2D side-scrolling game: a city of lanterns that is always at dusk, sly, playful, mysterious but charming, never spooky; tall narrow crooked half-timbered houses packed along cobbled alleys, cool lavender dusk light against warm golden lantern glow. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn plaster, chipped brick, slight colour variation between beams and tiles). The third image is the Thieves' Den from the same town: match its style, palette (smoky ochre plaster, dark soot-stained timber beams, dark red-brown brick, slate-blue roof tiles, iron lanterns, plum and teal cloth), outline thickness, level of detail and flat front viewpoint exactly, so they clearly belong to the same street. The lamp: a tall slim black wrought-iron post, about two and a half times as tall as a person, on a small square dark brick footing, with a curled iron scroll near the top and an iron lantern with small panes set firmly ON TOP of the post under a little pointed cap. The lantern is lit with a warm golden flame. Nothing hangs from it. Strict rules: 1) Pure side view at eye level, perfectly upright and centred. 2) The bottom of the footing is ONE flat straight horizontal edge. No ground, shadow or cobbles under it. 3) The lamp fills most of the canvas height with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words. No glow halo spilling onto the background. Flat pure magenta #FF00FF background everywhere outside the lamp. Do not draw any characters."
-   }
-  },
-  {
-   "id": "lanternfall_props",
-   "prompts": null,
-   "batch": "Lanternfall city: props sheet",
-   "with": null,
-   "refs": [],
-   "save": "lanternfall_props.png",
+   "save": "lumewood_props.png",
    "replaces": null,
    "kind": "still",
    "stands": true,
@@ -12374,49 +12104,75 @@
    ],
    "anchor": null,
    "size": "4K",
-   "note": "2026-10-14 thread 'Lanternfall up to Dawnharbor's standard': Cory approved the flat Thieves' Den and the backdrop, and said 'Yes' (00:15Z) to the full Lanternfall batch (~$0.85). Lanternfall's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "note": "2026-10-13 thread 'Lumewood up to Dawnharbor's standard': Cory approved the Library + backdrop test ('They look good! Go ahead' 23:59Z). Lumewood's own tone (docs/zone-vibes.md), never Dawnharbor's look. Spend waits on Cory's OK.",
    "edit": {
-    "base": "/mnt/project-files/art-sheets/lanternfall-city/props_base.png",
+    "base": "/mnt/project-files/art-sheets/lumewood-city/props_base.png",
     "refs": [
      "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
-     "/mnt/project-files/art-sheets/gemini-pass-1/lanternfall_city_thieves_den_flat.png"
+     "/mnt/project-files/art-sheets/gemini-pass-1/lumewood_city_library.png"
     ],
-    "text": "The first image is an empty magenta canvas. On it, paint a sheet of TWELVE separate props for Lanternfall, the thieves' town in my 2D side-scrolling game: a city of lanterns that is always at dusk, sly, playful, mysterious but charming, never spooky; tall narrow crooked half-timbered houses packed along cobbled alleys, cool lavender dusk light against warm golden lantern glow, laid out in 3 rows of 4, evenly spaced, each prop centred in its own quarter-by-third area of the canvas with a wide band of plain magenta around it, and no prop touching another. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn plaster, chipped brick, slight colour variation between beams and tiles). The third image is the Thieves' Den from the same town: match its style, palette (smoky ochre plaster, dark soot-stained timber beams, dark red-brown brick, slate-blue roof tiles, iron lanterns, plum and teal cloth), outline thickness, level of detail and flat front viewpoint exactly, so they clearly belong to the same street. The twelve props, in reading order: Row 1: 1) a stack of three wooden crates, 2) a wooden rain barrel with iron hoops, 3) a small market stall with a plum-and-teal striped cloth roof on two posts and a counter of bread and apples, 4) a pile of burlap sacks. Row 2: 5) a short wooden ladder-backed bench, 6) a black iron street sign post with a blank hanging board on chains attached at both ends, 7) a two-wheeled hand cart with a canvas-covered load, 8) a stone flower trough with purple flowers. Row 3: 9) a stack of wooden kegs, 10) a small wooden notice board on two legs with blank paper notes pinned to it, 11) a tall iron birdcage-style lantern on a short stand, lit, 12) a dark brick chimney pot cluster on a small brick base. Strict rules: 1) Every prop in pure FLAT SIDE VIEW at eye level, like an elevation drawing: only the front face shows, NO top surface, lid, seat top or box top visible, every edge level or vertical; standing upright on its own flat bottom edge, sized as it would be next to a person (barrels and crates about waist high). 2) No ground, shadow, cobbles or base under any prop. 3) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. 4) No letters, numbers, words or labels anywhere, no grid lines, no borders and no frames. 5) Nothing (rope, cloth, chain) ends loose in mid-air. Flat pure magenta #FF00FF background everywhere outside the props, with no magenta or pink anywhere inside them. Do not draw any characters."
+    "text": "The first image is an empty magenta canvas. On it, paint a sheet of TWELVE separate props for Lumewood Sanctum, the magicians' town in my 2D side-scrolling game: a calm, scholarly town of round pale-stone towers in a glowing, dreaming forest, lit by soft violet twilight and glowing blue crystals, laid out in 3 rows of 4, evenly spaced, each prop centred in its own quarter-by-third area of the canvas with a wide band of plain magenta around it, and no prop touching another. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and plenty of hand-painted detail (stone texture, chipped and worn edges, glass reflections, slight colour variation between stones). The third image is the Magicians' Library from the same town: match its style, palette (pale lilac-grey stone blocks, a plinth of larger stone blocks, blue glass domes with silver-blue ribs, glowing blue crystals, round windows, violet cloth, warm wooden doors with silver-blue iron fittings), outline thickness and level of detail exactly, so the props clearly belong on its street. The twelve props, in reading order: Row 1: 1) a small crystal fountain: a pale stone basin seen exactly from the side, with a tall glowing blue crystal standing in its middle and a thin arc of glowing water falling back into the basin, 2) a cluster of tall glowing blue crystals growing from a small stone, 3) a long pale stone planter full of glowing blue and teal mushrooms, 4) a wooden book cart with two wheels, stacked with old books and rolled scrolls. Row 2: 5) a brass star globe of rings with a small glowing orb in the centre, on a slim brass stand with a flat round foot, 6) a pale stone bench with carved legs, 7) a short pale stone pillar topped with a glowing crystal, 8) a wooden barrel of rolled scrolls. Row 3: 9) a reading lectern of dark wood holding an open book, 10) a small brass telescope on a three-legged stand, all three feet on the same ground line, 11) a stack of three large old books with a lit candle on top, 12) a pale stone urn of glowing violet flowers. Strict rules: 1) Every prop in pure side view at eye level, standing upright on its own flat bottom edge, sized as it would be next to a person (benches and barrels about knee to waist high), with no top surface visible: no seat, basin, cart bed or barrel top seen from above. 2) No ground, shadow, grass or base under any prop. 3) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. 4) No letters, numbers, runes, words or labels anywhere, no grid lines, no borders and no frames. No glow spilling onto the background. 5) Flat pure magenta #FF00FF background everywhere outside the props, with no magenta or pink anywhere inside them. Do not draw any characters."
    }
   },
   {
-   "id": "lanternfall_walkways",
+   "id": "lumewood_lamp_post",
    "prompts": null,
-   "batch": "Lanternfall city: balcony walkway and rooftop lane (raised levels)",
+   "batch": "Lumewood city: lamp post",
    "with": null,
    "refs": [],
-   "save": "lanternfall_walkways.png",
+   "save": "lumewood_lamp_post.png",
    "replaces": null,
    "kind": "still",
    "stands": true,
    "cells": [
     1,
-    2
+    1
    ],
    "anchor": null,
-   "size": "4K",
-   "note": "2026-10-14 thread 'Lanternfall up to Dawnharbor's standard': Cory approved the flat Thieves' Den and the backdrop, and said 'Yes' (00:15Z) to the full Lanternfall batch (~$0.85). Lanternfall's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "size": "2K",
+   "note": "2026-10-13 thread 'Lumewood up to Dawnharbor's standard': Cory approved the Library + backdrop test ('They look good! Go ahead' 23:59Z). Lumewood's own tone (docs/zone-vibes.md), never Dawnharbor's look. Spend waits on Cory's OK.",
    "edit": {
-    "base": "/mnt/project-files/art-sheets/lanternfall-city/props_base.png",
+    "base": "/mnt/project-files/art-sheets/lumewood-city/lamp_post_base.png",
     "refs": [
      "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
-     "/mnt/project-files/art-sheets/gemini-pass-1/lanternfall_city_thieves_den_flat.png"
+     "/mnt/project-files/art-sheets/gemini-pass-1/lumewood_city_library.png"
     ],
-    "text": "The first image is an empty magenta canvas. On it, paint TWO separate pieces of walkable land for Lanternfall, the thieves' town in my 2D side-scrolling game: a city of lanterns that is always at dusk, sly, playful, mysterious but charming, never spooky; tall narrow crooked half-timbered houses packed along cobbled alleys, cool lavender dusk light against warm golden lantern glow, one above the other with a wide band of plain magenta between and around them. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn plaster, chipped brick, slight colour variation between beams and tiles). The third image is the Thieves' Den from the same town: match its style, palette (smoky ochre plaster, dark soot-stained timber beams, dark red-brown brick, slate-blue roof tiles, iron lanterns, plum and teal cloth), outline thickness, level of detail and flat front viewpoint exactly, so they clearly belong to the same street. TOP piece, filling most of the upper half of the canvas width-wise (about four times as wide as it is tall): a long raised timber BALCONY WALKWAY held up by three straight square pillars of dark red-brown brick standing on the ground, one at each end and one in the middle; the walkway is a thick dark timber beam with plank edging, its top edge one long perfectly straight level line, with a low black iron railing only at its two far ends, and two small iron lanterns hanging on short chains under the beam, fixed at the top. The three pillars reach straight down to ONE flat straight bottom edge, all ending on the same ground line. BOTTOM piece, in the lower part of the canvas (about six times as wide as it is tall): a ROOFTOP LANE: a long level strip of dark brick wall topped with a flat walkway of stone slabs, with a row of slate-blue roof tiles running along the front face under the slabs like an eave, and two short brick chimney pots standing on top at the ends; its top edge perfectly straight and level, its bottom edge one straight line. Strict rules: 1) Pure side view at eye level: no top surface of the walkways visible, every walkway edge perfectly horizontal, every pillar perfectly vertical. 2) Nothing under the bottom edges: no ground, grass, cobbles or shadow. 3) Nothing (rope, cloth, chain) ends loose in mid-air. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words. No buildings, no people. Flat pure magenta #FF00FF background everywhere outside the two pieces, with no magenta or pink inside them."
+    "text": "The first image is an empty magenta canvas. On it, paint ONE lamp post for Lumewood Sanctum, the magicians' town in my 2D side-scrolling game: a calm, scholarly town of round pale-stone towers in a glowing, dreaming forest, lit by soft violet twilight and glowing blue crystals. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and plenty of hand-painted detail (stone texture, chipped and worn edges, glass reflections, slight colour variation between stones). The third image is the Magicians' Library from the same town: match its style, palette (pale lilac-grey stone blocks, a plinth of larger stone blocks, blue glass domes with silver-blue ribs, glowing blue crystals, round windows, violet cloth, warm wooden doors with silver-blue iron fittings), outline thickness and level of detail exactly. The lamp: a tall slim post of pale lilac-grey stone, about two and a half times as tall as a person, on a small square stone footing, with a silver-blue iron cage on top holding a glowing blue crystal instead of a flame, under a tiny blue glass cap. Nothing hangs from it. Strict rules: 1) Pure side view at eye level, perfectly upright and centred. 2) The bottom of the footing is ONE flat straight horizontal edge. No ground, shadow or grass under it. 3) The lamp fills most of the canvas height with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words. No glow halo spilling onto the background. Flat pure magenta #FF00FF background everywhere outside the lamp. Do not draw any characters."
    }
   },
   {
-   "id": "lanternfall_townsfolk",
+   "id": "lumewood_terrace_pieces",
    "prompts": null,
-   "batch": "Lanternfall city: three townsfolk and the storage keeper",
+   "batch": "Lumewood city: pale-stone terrace pieces (edit of Dawnharbor's layout)",
    "with": null,
    "refs": [],
-   "save": "lanternfall_townsfolk.png",
+   "save": "lumewood_terrace_pieces.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 thread 'Lumewood up to Dawnharbor's standard': Cory approved the Library + backdrop test ('They look good! Go ahead' 23:59Z). Lumewood's own tone (docs/zone-vibes.md), never Dawnharbor's look. Spend waits on Cory's OK. Raised terraces Cory OK'd at 23:42Z ('Yea').",
+   "edit": {
+    "base": "art/source/terrace_pieces_dawnharbor.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/lumewood_city_library.png"
+    ],
+    "text": "The first image is a sheet of painted ground pieces for a raised stone terrace in my 2D side-scrolling game: the top row is the top edge of the terrace cut into four pieces that join side by side (END LEFT, MIDDLE A, MIDDLE B, END RIGHT), and below are a left corner column, a repeating stone wall, and a right corner column. Keep the sheet's size, layout, labels, magenta background, every piece's outline shape, position and size EXACTLY, so the pieces still join seamlessly and the wall still repeats. Repaint ONLY the materials so they belong to Lumewood Sanctum, the magicians' town in my 2D side-scrolling game: a calm, scholarly town of round pale-stone towers in a glowing, dreaming forest, lit by soft violet twilight and glowing blue crystals. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and plenty of hand-painted detail (stone texture, chipped and worn edges, glass reflections, slight colour variation between stones). The third image is the Magicians' Library from that town: use its pale lilac-grey stone blocks, soft violet-grey mortar and level of detail. Top row: the coping slab becomes pale lilac-grey dressed stone, and the grass and pink flowers on top become soft blue-violet moss with a few small glowing blue crystals and tiny glowing teal mushrooms, in the same places. Corner columns and wall: the same pale lilac-grey stone with violet-grey mortar, a few stones with faint worn chips. Everything stays a flat front view, with no top surface seen from above. Painted, not pixel art. No letters or words except the existing labels. Flat pure magenta #FF00FF background everywhere outside the pieces."
+   }
+  },
+  {
+   "id": "lumewood_townsfolk",
+   "prompts": null,
+   "batch": "Lumewood city: three townsfolk + storage keeper",
+   "with": null,
+   "refs": [],
+   "save": "lumewood_townsfolk.png",
    "replaces": null,
    "kind": "still",
    "stands": false,
@@ -12426,23 +12182,23 @@
    ],
    "anchor": null,
    "size": "2K",
-   "note": "2026-10-14 thread 'Lanternfall up to Dawnharbor's standard': Cory approved the flat Thieves' Den and the backdrop, and said 'Yes' (00:15Z) to the full Lanternfall batch (~$0.85). Lanternfall's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "note": "2026-10-13 thread 'Lumewood up to Dawnharbor's standard': Cory approved the Library + backdrop test ('They look good! Go ahead' 23:59Z). Lumewood's own tone (docs/zone-vibes.md), never Dawnharbor's look. Spend waits on Cory's OK. Cory 22:58Z: no duplicate NPCs, so Lumewood gets its own storage keeper (column 4) instead of Brin.",
    "edit": {
-    "base": "/mnt/project-files/art-sheets/lanternfall-city/townsfolk_base.png",
+    "base": "art/source/npcs_harbor_3.png",
     "refs": [
      "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
-     "art/source/npcs_lanternfall.png"
+     "art/source/npcs_lumewood.png"
     ],
-    "text": "The first image is an empty sheet for NPC characters in my 2D side-scrolling game: 4 columns and 2 rows of equal cells divided by thin dark lines. The second image shows four of my game's NPC characters, and the third image shows the NPCs who already live in Lanternfall, the thieves' town at dusk; the new ones must look like they belong with them, at the same size and chibi proportions: soft cel-painted shading, rich colours in plum, teal, navy, ochre and warm gold, dark brown outlines, painted cloth folds and worn patches. Do NOT copy any character from the second or third image. Paint four NEW townsfolk of Lanternfall, one per column, the same character in both rows of each column, standing still in the same calm pose in both rows (the bottom row may blink): Column 1: a cheeky lamplighter girl in a teal coat and a flat cap, carrying a long brass lamplighter's pole upright beside her. Column 2: a dapper old card sharp with a grey moustache, a plum waistcoat and a top hat, shuffling a deck of cards. Column 3: a small street urchin boy in a patched ochre jacket and too-big boots, holding an apple behind his back with a sly grin. Column 4: the town's STORAGE KEEPER, a sharp-eyed middle-aged locksmith woman with short dark hair and round spectacles, a navy leather apron full of little tools, a big ring of iron keys on her belt, holding a small padlocked iron-bound chest. Rules: every character stands upright, facing slightly toward the viewer, both feet flat on one level ground line, full body inside its cell. Hands are simple rounded fingerless mittens in the game's style. No labels, letters or words anywhere. Keep the thin dividing lines. Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background everywhere outside the characters and lines."
+    "text": "The first image is a sheet of NPC characters for my 2D side-scrolling game: two rows, each row the same characters standing in the same spots, with a label above each. Keep the sheet's size, layout, magenta background, label bands, and each character's position, size, chibi proportions and art style exactly. The second image shows more of my game's NPC characters, and the third image shows the NPCs who already live in Lumewood Sanctum, the calm, scholarly magicians' town in a glowing twilight forest; the new ones must look like they belong with them: soft cel-painted shading, rich colours in violets, lavender, deep blues and silver with warm skin tones, dark outlines, painted cloth folds and worn patches. Replace all four characters, including the one in column 4 and anything else in the cells (flags, orbs, objects), with new townsfolk of Lumewood, the same character in both rows of each column, standing still in the same calm pose in both rows: Column 1 (label it APPRENTICE): a young apprentice mage in a short lavender robe and a blue sash, hugging an oversized old book with a star on its cover. Column 2 (label it STARGAZER): a kindly old man stargazer with a long white beard, a deep blue robe with a silver star trim, and a small brass spyglass in one hand. Column 3 (label it KID): a small cheerful child in a violet tunic and a little pointed cap, with a tiny glowing blue light floating just above one open hand. Column 4 (label it KEEPER): the town's STORAGE KEEPER, a tall, tidy middle-aged woman with dark hair in a neat bun and round spectacles, a slate-blue robe with a brown leather apron full of pockets, a big silver ring of keys on her belt, holding a small silver-bound wooden chest in both hands. Rules: every character stands upright, facing slightly toward the viewer, both feet flat on one level ground line, full body in its cell. Hands are simple rounded fingerless mittens in the game's style. Do not copy any character from the second or third images. Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background everywhere outside the characters and labels."
    }
   },
   {
-   "id": "room_lanternfall_store_wall",
+   "id": "room_lumewood_store_wall",
    "prompts": null,
-   "batch": "Lanternfall room back wall: store (edit)",
+   "batch": "Lumewood room back wall: the magic store (edit)",
    "with": null,
    "refs": [],
-   "save": "room_lanternfall_store_wall.png",
+   "save": "room_lumewood_store_wall.png",
    "replaces": null,
    "kind": "still",
    "stands": false,
@@ -12452,22 +12208,22 @@
    ],
    "anchor": null,
    "size": "4K",
-   "note": "2026-10-14 thread 'Lanternfall up to Dawnharbor's standard': Cory approved the flat Thieves' Den and the backdrop, and said 'Yes' (00:15Z) to the full Lanternfall batch (~$0.85). Lanternfall's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "note": "2026-10-13 thread 'Lumewood up to Dawnharbor's standard': Cory approved the Library + backdrop test ('They look good! Go ahead' 23:59Z). Lumewood's own tone (docs/zone-vibes.md), never Dawnharbor's look. Spend waits on Cory's OK.",
    "edit": {
-    "base": "art/source/room_lanternfall_wall.png",
+    "base": "art/source/room_lumewood_wall.png",
     "refs": [
      "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
     ],
-    "text": "The first image is one repeating tile of the back wall inside a building in Lanternfall, the thieves' town that is always at dusk. Keep the thick horizontal wooden beam at the top, the vertical wooden post in the middle, and the carved dark wooden wainscot with waves and a crescent moon along the bottom EXACTLY as they are, in the same places. Repaint ONLY the wall panels between them, and the hanging scroll and the windows. Paint the panels as smoky ochre plaster with a few cracks and worn patches showing dark brick, lit by cool lavender dusk light with warm golden lamplight. Remove the hanging scroll. On each side of the post, one tall window with small panes and a deep wooden sill, showing a view of crooked slate rooftops and glowing windows under a navy-to-amber dusk sky. Apart from the windows the panels are plain and empty: no shelves, no goods, nothing hanging. Everything is seen straight from the front, flat against the wall, with no perspective, no top faces and no side depth; nothing ends loose in mid-air. The left and right edges of the image must join seamlessly when the tile is repeated side by side. Paint in the same style as the second image and the rest of the wall: rich warm colours, strong light and shadow with bright highlights, visible painted texture at a fairly chunky brush scale, a thin dark outline. Painted, never pixel art. No letters or words. Same image size and layout."
+    "text": "The first image is one repeating tile of the back wall inside the magic store in Lumewood Sanctum, the calm, scholarly magicians' town of my 2D side-scrolling game. Keep the carved wooden star frieze and beams at the top, the wooden panelling at the bottom, and the overall layout EXACTLY in the same places, at the same image size. Repaint the whole tile so it is painted, never pixel art: smooth soft painted shading, no visible pixels or stair-stepped edges. Repaint the stone wall in the middle as pale lilac-grey stone blocks with violet-grey mortar in soft violet twilight light, and give the top frieze and bottom panelling a softer painted finish in the same warm wood. Remove the round window, the two hanging star charts and the crystals and flowers. In the centre of the stone wall, one tall arched window with silver-blue leading and a deep stone sill, showing a twilight view of violet trees and a glowing glass dome. On both sides of the window the stone is plain and empty: no shelves, no goods, nothing hanging. Everything is seen straight from the front, flat against the wall, with no perspective, no top faces and no side depth; nothing ends loose in mid-air. The left and right edges of the image must join seamlessly when the tile is repeated side by side. Paint in the same style as the second image: rich colours, strong light and shadow with bright highlights, visible painted texture at a fairly chunky brush scale, a thin dark outline. No letters, runes or words. Same image size and layout."
    }
   },
   {
-   "id": "room_lanternfall_den_wall",
+   "id": "room_lumewood_hall_wall",
    "prompts": null,
-   "batch": "Lanternfall room back wall: Thieves' Den (edit)",
+   "batch": "Lumewood room back wall: the Magicians' Library (edit)",
    "with": null,
    "refs": [],
-   "save": "room_lanternfall_den_wall.png",
+   "save": "room_lumewood_hall_wall.png",
    "replaces": null,
    "kind": "still",
    "stands": false,
@@ -12477,65 +12233,13 @@
    ],
    "anchor": null,
    "size": "4K",
-   "note": "2026-10-14 thread 'Lanternfall up to Dawnharbor's standard': Cory approved the flat Thieves' Den and the backdrop, and said 'Yes' (00:15Z) to the full Lanternfall batch (~$0.85). Lanternfall's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "note": "2026-10-13 thread 'Lumewood up to Dawnharbor's standard': Cory approved the Library + backdrop test ('They look good! Go ahead' 23:59Z). Lumewood's own tone (docs/zone-vibes.md), never Dawnharbor's look. Spend waits on Cory's OK.",
    "edit": {
-    "base": "art/source/room_lanternfall_wall.png",
+    "base": "art/source/room_lumewood_wall.png",
     "refs": [
      "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
     ],
-    "text": "The first image is one repeating tile of the back wall inside a building in Lanternfall, the thieves' town that is always at dusk. Keep the thick horizontal wooden beam at the top, the vertical wooden post in the middle, and the carved dark wooden wainscot with waves and a crescent moon along the bottom EXACTLY as they are, in the same places. Repaint ONLY the wall panels between them, and the hanging scroll and the windows. Paint the panels as smoky ochre plaster with a few cracks and worn patches showing dark brick, lit by cool lavender dusk light with warm golden lamplight. Remove the hanging scroll and the windows. On the left panel, a round dark wooden plaque with a black mask over two crossed daggers, fixed flat to the wall. On the right panel, a long teal cloth banner painted with a big iron key (a picture only, no writing), hanging flat against the plaster and fixed at top and bottom, with one iron wall lantern beside it, lit. Everything is seen straight from the front, flat against the wall, with no perspective, no top faces and no side depth; nothing ends loose in mid-air. The left and right edges of the image must join seamlessly when the tile is repeated side by side. Paint in the same style as the second image and the rest of the wall: rich warm colours, strong light and shadow with bright highlights, visible painted texture at a fairly chunky brush scale, a thin dark outline. Painted, never pixel art. No letters or words. Same image size and layout."
-   }
-  },
-  {
-   "id": "lanternfall_props_flat",
-   "prompts": null,
-   "batch": "Lanternfall city: repaint five props flat",
-   "with": null,
-   "refs": [],
-   "save": "lanternfall_props_flat.png",
-   "replaces": null,
-   "kind": "still",
-   "stands": true,
-   "cells": [
-    4,
-    3
-   ],
-   "anchor": null,
-   "size": "4K",
-   "note": "2026-10-14 thread 'Lanternfall up to Dawnharbor's standard': Cory 00:46Z 'Just repaint the props. Everything else is good.' (~$0.12). Only cells 1, 5, 7, 8 and 12 get pasted into lanternfall_props.png; the other cells stay as painted.",
-   "edit": {
-    "base": "/mnt/project-files/art-sheets/gemini-pass-1/lanternfall_props.png",
-    "refs": [
-     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
-     "/mnt/project-files/art-sheets/gemini-pass-1/lanternfall_city_thieves_den_flat.png"
-    ],
-    "text": "The first image is a sheet of twelve props for Lanternfall, the thieves' town at dusk in my 2D side-scrolling game, in 3 rows of 4 cells. Five of them are drawn at an angle, showing their top surfaces, which is wrong for my game. Repaint ONLY these five, each in its own cell, at the same size, position, colours and level of detail, as a pure flat SIDE VIEW like an architect's elevation drawing: only the front face shows, NO top surface, lid, seat or box top visible at all, every edge perfectly level or vertical, standing upright on one flat straight bottom edge. Row 1, cell 1: the stack of three wooden crates, now seen exactly from the front as flat squares (two side by side on the bottom, one centred on top), no crate tops or sides showing. Row 2, cell 1: the wooden bench, now seen exactly from the front: a straight backrest above a seat edge seen only as a thin plank edge, four straight legs, no seat surface visible. Row 2, cell 3: the canvas-covered hand cart, now seen exactly from the side: one big wheel, a flat-sided wooden cart bed with the canvas cover as an arch, its two handles level, resting on the wheel and a short leg so its bottom is level. Row 2, cell 4: the stone flower trough, now seen exactly from the front as a flat rectangle of stone with purple flowers growing up out of it, no top rim surface visible. Row 3, cell 4: the brick chimney pots, now seen exactly from the front: a flat rectangle of dark brick with three round clay pots standing on it side by side, shown only as flat upright shapes, no top openings seen from above. Keep the other seven props EXACTLY as they are, pixel for pixel. The second image shows my game's NPC characters for the art style, and the third image is a building from the same town for the palette and flat viewpoint. Painted, not pixel art: smooth painted shading with visible soft brush texture. No ground, shadow or base under any prop. No letters or words anywhere. Keep the thin dividing lines. Flat pure magenta #FF00FF background everywhere outside the props, with no magenta or pink inside them. Do not draw any characters."
-   }
-  },
-  {
-   "id": "lanternfall_props_flat_2",
-   "prompts": null,
-   "batch": "Lanternfall city: three props painted fresh as flat side views",
-   "with": null,
-   "refs": [],
-   "save": "lanternfall_props_flat_2.png",
-   "replaces": null,
-   "kind": "still",
-   "stands": true,
-   "cells": [
-    3,
-    1
-   ],
-   "anchor": null,
-   "size": "4K",
-   "note": "2026-10-14 thread 'Lanternfall up to Dawnharbor's standard': the edit left the cart, trough and chimney pots in 3/4; Cory 01:31Z 'Regenerate them' (~$0.12). Fresh paint on a blank canvas, not an edit.",
-   "edit": {
-    "base": "/mnt/project-files/art-sheets/lanternfall-city/props_base.png",
-    "refs": [
-     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
-     "/mnt/project-files/art-sheets/lanternfall-city/props_with_flat_crates_bench.png"
-    ],
-    "text": "The first image is an empty magenta canvas. On it, paint THREE separate props for Lanternfall, the thieves' town at dusk in my 2D side-scrolling game, side by side in one row, each centred in its own third of the canvas with a wide band of plain magenta around it, none touching. The second image shows my game's NPC characters: paint in exactly their style (soft cel-painted shading, bright highlights, rich warm colours, bold dark brown outlines, painted wood grain and worn spots). The third image is the town's props sheet: match its palette, outline thickness and level of detail, and copy the viewpoint of its crates (top left) and bench (middle left), which are drawn the right way: a pure flat FRONT ELEVATION like an architect's drawing, where only the front face shows and no top surface is visible. Do NOT copy the cart, flower trough or chimney pots from that sheet; they are drawn at an angle, which is wrong. The three props, left to right: 1) a small two-wheeled hand cart seen exactly side-on: a rectangular wooden cart bed drawn as a flat side panel of planks, a canvas cover over the load drawn as a flat rounded hump outline with rope ties, one big spoked wheel drawn as a perfect circle, two straight handles pointing level to one side resting on a short straight wooden leg, so the wheel bottom and the leg bottom sit on the same ground line. 2) a long stone flower trough seen exactly from the front: a flat rectangle of grey stone blocks with chipped edges, its top edge one straight level line with no rim surface showing, and purple and lilac flowers with green leaves growing straight up out of it. 3) a cluster of chimney pots seen exactly from the front: a flat rectangle of dark red-brown brick with a straight level top edge, and on it three round clay chimney pots of different heights standing side by side, each drawn as a flat upright shape with straight sides and a flat top edge, no openings or tops seen from above. Strict rules: 1) Every prop in pure flat side view at eye level: NO top surface of anything visible, every edge perfectly level or vertical, each standing upright on ONE flat straight bottom edge. 2) No ground, shadow, grass or base under any prop. 3) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. 4) No letters, numbers, words, grid lines, borders or frames. 5) Nothing (rope, cloth) ends loose in mid-air. Flat pure magenta #FF00FF background everywhere outside the props, with no magenta or pink anywhere inside them. Do not draw any characters."
+    "text": "The first image is one repeating tile of the back wall inside the Magicians' Library, the magicians' guild hall, in Lumewood Sanctum, the calm, scholarly magicians' town of my 2D side-scrolling game. Keep the carved wooden star frieze and beams at the top, the wooden panelling at the bottom, and the overall layout EXACTLY in the same places, at the same image size. Repaint the whole tile so it is painted, never pixel art: smooth soft painted shading, no visible pixels or stair-stepped edges. Repaint the stone wall in the middle as pale lilac-grey stone blocks with violet-grey mortar in soft violet twilight light, and give the top frieze and bottom panelling a softer painted finish in the same warm wood. Remove the round window, the two hanging star charts and the crystals and flowers. In the centre of the stone wall, a large round stained-glass window of blue and violet glass with a star in the middle. On each side, a long violet cloth banner painted with an open book and a star (a picture only, no writing), hanging flat against the stone and fixed at top and bottom, and a small glowing blue crystal set in a silver bracket on the wall below each banner. Everything is seen straight from the front, flat against the wall, with no perspective, no top faces and no side depth; nothing ends loose in mid-air. The left and right edges of the image must join seamlessly when the tile is repeated side by side. Paint in the same style as the second image: rich colours, strong light and shadow with bright highlights, visible painted texture at a fairly chunky brush scale, a thin dark outline. No letters, runes or words. Same image size and layout."
    }
   }
  ]
