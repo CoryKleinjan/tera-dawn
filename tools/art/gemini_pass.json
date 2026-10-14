@@ -11669,6 +11669,244 @@
     ],
     "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Driftcove, the pirates' hideout in my 2D side-scrolling game: a jolly, swashbuckling cove built from beached ship hulls and wreck timber inside a big sea cave, lit by cool turquoise light from the cave mouth with warm lantern glow. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, dark brown outlines, and plenty of hand-painted detail (wood grain, rope fibres, patched canvas, barnacles, worn and chipped spots, slight colour variation between planks). Paint the background in that same style, a little softer and lighter in contrast so it sits behind the characters. The third image is a beached ship from the same cove: match its palette of warm brown wreck timber, cream canvas and rope. The scene: we stand inside a huge sea cave looking out. Dark teal rock walls and a rough rock ceiling frame the top and both sides of the picture, with hanging kelp and a few small warm lanterns strung on rope along the rock, the rope fixed at both ends. In the middle, the cave opens wide onto a calm turquoise sea at sunrise: a cream and pale gold sky glowing low over the horizon, deep teal higher up, cool sparkles on the water. Out on the water, a moored pirate ship with patched cream sails and a cheerful flag, and the broken masts and ribs of two old wrecks poking out of the shallows. Just inside the cave mouth, far back, a calm turquoise lagoon with small rock pools and coral. Colours: deep teal sky top #132f4a, cream horizon #ffe2a7, warm cream light #fff0c7, turquoise haze #8ed0d8. Strict rules: 1) Side-on view at eye level, every mast straight up and down, the horizon perfectly level. 2) No people, no characters, no animals, no birds. 3) Nothing in the near foreground: the bottom of the picture is calm turquoise water and the cave's rock edge, and nothing else. NO decks, floors, planks, piers, ship rails, stairs, masts, poles, sails or ropes anywhere on our side of the cave mouth; the cave walls are bare rock with kelp and the lantern string only. The closest things are in the middle distance. 4) The left and right edges continue naturally (cave rock), nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. No skulls. No white plaster houses, blue roof tiles, stone quay or lighthouse (that is a different town)."
    }
+  },
+  {
+   "id": "driftcove_city_mast_lookout",
+   "prompts": null,
+   "batch": "Driftcove city: mast lookout (new building)",
+   "with": null,
+   "refs": [],
+   "save": "driftcove_city_mast_lookout.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-14 thread 'Driftcove up to Dawnharbor's standard': Cory approved the boat store (as painted) + backdrop test ('Yea' 00:09Z). Full-batch spend still waiting on his OK. Driftcove's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/driftcove-city/building_tall_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/driftcove_city_boat_store_2.png",
+     "/mnt/project-files/art-sheets/driftcove-city/beached_ship_ref.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Driftcove, the pirates' hideout in my 2D side-scrolling game: a jolly, swashbuckling cove built from beached ship hulls and wreck timber inside a big sea cave, lit by cool turquoise light from the cave mouth with warm lantern glow. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, rope fibres, patched canvas, barnacles, worn and chipped spots, slight colour variation between planks). The third image is the store from the same cove and the fourth a beached ship from it: match their style, palette (warm brown wreck timber, dark weathered planks, brass-rimmed portholes, cream patched canvas, red-and-cream stripes, rope, a few barnacles), outline thickness and level of detail exactly, so they clearly belong to the same cove. The new building is the MAST LOOKOUT, much taller than it is wide: a single thick old ship's mast standing straight up, its foot set in a squat square base of stacked wreck timber and iron-hooped barrels, all reaching down to the same ground line; a straight rope ladder with wooden rungs runs up the front of the mast from the base to a round crow's nest of curved planks near the top, its rope rails tied firmly at both ends; a short yard arm crosses the mast just below the crow's nest with a furled cream patched sail lashed to it along its whole length; on top of the mast a small red-and-cream flag with a plain anchor; a lit brass lantern hangs from a hook fixed to the crow's nest. Strict rules: 1) Pure flat front view at eye level, like an architect's elevation drawing: ONLY the front face shows, there is NO side wall, NO corner and NO second face on either side, no roof or deck surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: everything reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, sand, rocks, water, ground patch, people or shadow; no ground line drawn under it. 3) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. No skulls. No blue roof tiles, cream plaster or stone walls (that is a different town). Nothing (rope, cloth, chain, net) ends loose in mid-air. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters, and do not copy anything else from the reference images."
+   }
+  },
+  {
+   "id": "driftcove_city_net_loft",
+   "prompts": null,
+   "batch": "Driftcove city: net loft (new building)",
+   "with": null,
+   "refs": [],
+   "save": "driftcove_city_net_loft.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-14 thread 'Driftcove up to Dawnharbor's standard': Cory approved the boat store (as painted) + backdrop test ('Yea' 00:09Z). Full-batch spend still waiting on his OK. Driftcove's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/driftcove-city/building_store_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/driftcove_city_boat_store_2.png",
+     "/mnt/project-files/art-sheets/driftcove-city/beached_ship_ref.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Driftcove, the pirates' hideout in my 2D side-scrolling game: a jolly, swashbuckling cove built from beached ship hulls and wreck timber inside a big sea cave, lit by cool turquoise light from the cave mouth with warm lantern glow. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, rope fibres, patched canvas, barnacles, worn and chipped spots, slight colour variation between planks). The third image is the store from the same cove and the fourth a beached ship from it: match their style, palette (warm brown wreck timber, dark weathered planks, brass-rimmed portholes, cream patched canvas, red-and-cream stripes, rope, a few barnacles), outline thickness and level of detail exactly, so they clearly belong to the same cove. The new building is the NET LOFT, a little taller than it is wide: a two-storey shed of dark weathered wreck planks built from the bow of an old boat standing upright, with a peaked roof of overlapping tarred planks; a wide loft hatch on the upper floor with its two plank doors swung open flat against the wall and a wooden beam with a pulley sticking straight out above it, its rope running down to a cleat on the wall; big fishing nets hung flat across the upper wall from pegs at both ends, with round glass and cork floats in them; a centred plank door at ground level with iron straps; a round porthole window either side of the door; crab pots and an oar leaning flat against the wall on the ground line. Strict rules: 1) Pure flat front view at eye level, like an architect's elevation drawing: ONLY the front face shows, there is NO side wall, NO corner and NO second face on either side, no roof or deck surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: everything reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, sand, rocks, water, ground patch, people or shadow; no ground line drawn under it. 3) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. No skulls. No blue roof tiles, cream plaster or stone walls (that is a different town). Nothing (rope, cloth, chain, net) ends loose in mid-air. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters, and do not copy anything else from the reference images."
+   }
+  },
+  {
+   "id": "driftcove_city_captains_cabin",
+   "prompts": null,
+   "batch": "Driftcove city: captain's cabin (new building)",
+   "with": null,
+   "refs": [],
+   "save": "driftcove_city_captains_cabin.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-14 thread 'Driftcove up to Dawnharbor's standard': Cory approved the boat store (as painted) + backdrop test ('Yea' 00:09Z). Full-batch spend still waiting on his OK. Driftcove's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/driftcove-city/building_store_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/driftcove_city_boat_store_2.png",
+     "/mnt/project-files/art-sheets/driftcove-city/beached_ship_ref.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Driftcove, the pirates' hideout in my 2D side-scrolling game: a jolly, swashbuckling cove built from beached ship hulls and wreck timber inside a big sea cave, lit by cool turquoise light from the cave mouth with warm lantern glow. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, rope fibres, patched canvas, barnacles, worn and chipped spots, slight colour variation between planks). The third image is the store from the same cove and the fourth a beached ship from it: match their style, palette (warm brown wreck timber, dark weathered planks, brass-rimmed portholes, cream patched canvas, red-and-cream stripes, rope, a few barnacles), outline thickness and level of detail exactly, so they clearly belong to the same cove. The new building is the CAPTAIN'S CABIN, a little wider than it is tall, the finest house in the cove: the tall carved STERN of a grand old galleon standing upright on the sand, seen straight from behind: a row of big arched gallery windows with small glowing panes across the upper floor, a carved gilded rail and scrollwork along the top edge, a small balcony with turned balusters running flat across the front under the windows, the ship's lantern on top centre lit warm gold, and dark polished timber below with a centred double door at ground level framed by two carved posts; a coiled rope and a brass bell mounted flat beside the door; red-and-cream bunting strung flat across the front from one end of the stern to the other, tied at both ends. Strict rules: 1) Pure flat front view at eye level, like an architect's elevation drawing: ONLY the front face shows, there is NO side wall, NO corner and NO second face on either side, no roof or deck surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: everything reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, sand, rocks, water, ground patch, people or shadow; no ground line drawn under it. 3) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. No skulls. No blue roof tiles, cream plaster or stone walls (that is a different town). Nothing (rope, cloth, chain, net) ends loose in mid-air. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters, and do not copy anything else from the reference images."
+   }
+  },
+  {
+   "id": "driftcove_hull_decks",
+   "prompts": null,
+   "batch": "Driftcove city: beached-hull decks (raised levels)",
+   "with": null,
+   "refs": [],
+   "save": "driftcove_hull_decks.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    2
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-14 thread 'Driftcove up to Dawnharbor's standard': Cory approved the boat store (as painted) + backdrop test ('Yea' 00:09Z). Full-batch spend still waiting on his OK. Driftcove's own tone (docs/zone-vibes.md), never Dawnharbor's look. Raised levels Cory OK'd at 23:42Z ('two raised decks on beached hulls reached by rope ladders'); each piece is a PlatformDef.look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/driftcove-city/props_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/driftcove_city_boat_store_2.png",
+     "/mnt/project-files/art-sheets/driftcove-city/beached_ship_ref.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint TWO separate pieces of walkable land for Driftcove, the pirates' hideout in my 2D side-scrolling game: a jolly, swashbuckling cove built from beached ship hulls and wreck timber inside a big sea cave, lit by cool turquoise light from the cave mouth with warm lantern glow, one above the other with a wide band of plain magenta between and around them. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, rope fibres, patched canvas, barnacles, worn and chipped spots, slight colour variation between planks). The third image is the store from the same cove and the fourth a beached ship from it: match their style, palette (warm brown wreck timber, dark weathered planks, brass-rimmed portholes, cream patched canvas, red-and-cream stripes, rope, a few barnacles), outline thickness and level of detail exactly, so they clearly belong to the same cove. TOP piece, filling most of the upper 60 percent of the canvas width-wise (about four times as wide as it is tall): the long side of a big old BEACHED SHIP HULL, seen exactly side-on, used as a raised walkway: its deck edge along the top is ONE long perfectly straight level line with a low wooden railing only at its two far ends; below it the curved hull planks with a row of brass-rimmed portholes and a few barnacles and kelp strands, the hull resting on thick upright wooden props and stacked barrels, all reaching straight down to ONE flat straight bottom edge on the same ground line. BOTTOM piece, in the lower part of the canvas (about six times as wide as it is tall): a shorter raised GANGPLANK WALKWAY seen from the side: a perfectly straight level walkway of thick ship planks resting on two thick old mast stumps, one at each end, with a rope hand line running from stump to stump along its whole length, tied firmly to both; nothing below the walkway between the stumps. Strict rules: 1) Pure side view at eye level: no top surface of any deck or plank visible, every walkway edge perfectly horizontal, every post perfectly vertical. 2) Nothing under the bottom edges: no sand, rocks, water or shadow. 3) Nothing (rope, kelp, net, cloth) ends loose in mid-air. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words. No skulls. No buildings, no people. Flat pure magenta #FF00FF background everywhere outside the two pieces, with no magenta or pink inside them."
+   }
+  },
+  {
+   "id": "driftcove_props",
+   "prompts": null,
+   "batch": "Driftcove city: props sheet",
+   "with": null,
+   "refs": [],
+   "save": "driftcove_props.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    4,
+    3
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-14 thread 'Driftcove up to Dawnharbor's standard': Cory approved the boat store (as painted) + backdrop test ('Yea' 00:09Z). Full-batch spend still waiting on his OK. Driftcove's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/driftcove-city/props_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/driftcove_city_boat_store_2.png",
+     "/mnt/project-files/art-sheets/driftcove-city/beached_ship_ref.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint a sheet of TWELVE separate props for Driftcove, the pirates' hideout in my 2D side-scrolling game: a jolly, swashbuckling cove built from beached ship hulls and wreck timber inside a big sea cave, lit by cool turquoise light from the cave mouth with warm lantern glow, laid out in 3 rows of 4, evenly spaced, each prop centred in its own quarter-by-third area of the canvas with a wide band of plain magenta around it, and no prop touching another. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, rope fibres, patched canvas, barnacles, worn and chipped spots, slight colour variation between planks). The third image is the store from the same cove and the fourth a beached ship from it: match their style, palette (warm brown wreck timber, dark weathered planks, brass-rimmed portholes, cream patched canvas, red-and-cream stripes, rope, a few barnacles), outline thickness and level of detail exactly, so the props clearly belong on its decks. The twelve props, in reading order: Row 1: 1) an old iron ship's cannon on a wooden carriage with two spoked wheels, seen exactly side-on, barrel level, 2) a closed wooden treasure chest with iron bands and a brass lock, seen exactly from the front, 3) a big coil of thick rope lying in a low round pile, seen from the side, 4) a large iron anchor standing upright on its crown, its ring at the top with a short rope tied to it and wrapped around the shank. Row 2: 5) two wooden barrels side by side with iron hoops, seen from the side, 6) a carved wooden ship's figurehead of a smiling mermaid, painted in faded colours, standing upright on a wooden block, 7) a big wooden ship's wheel with spokes, mounted upright on a short wooden post, seen exactly face-on, 8) a stack of three wooden crates, seen exactly from the front. Row 3: 9) a wooden rack holding three oars standing upright, 10) a lobster pot cage and a fishing net bundle beside it, both resting on the ground line, 11) a small rowing boat lying on the sand, seen exactly side-on, 12) a cheerful pirate flag on a short pole fixed in a small barrel: red and cream with a plain anchor on it. Strict rules: 1) Every prop in pure side or front view at eye level, like an elevation drawing: NO top surface of any barrel, chest, crate, boat or base is visible, every flat top is drawn as a single straight line, every horizontal edge level; each prop stands upright on its own flat bottom edge, sized as it would be next to a person (barrels and chests about waist high). 2) No ground, sand, water, shadow or base under any prop. 3) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. 4) No letters, numbers, words or labels anywhere, no skulls, no grid lines, no borders and no frames. 5) Nothing (rope, net, cloth) ends loose in mid-air. 6) Flat pure magenta #FF00FF background everywhere outside the props, with no magenta or pink anywhere inside them. Do not draw any characters."
+   }
+  },
+  {
+   "id": "driftcove_lamp_post",
+   "prompts": null,
+   "batch": "Driftcove city: lamp post",
+   "with": null,
+   "refs": [],
+   "save": "driftcove_lamp_post.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-14 thread 'Driftcove up to Dawnharbor's standard': Cory approved the boat store (as painted) + backdrop test ('Yea' 00:09Z). Full-batch spend still waiting on his OK. Driftcove's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/driftcove-city/lamp_post_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/driftcove_city_boat_store_2.png",
+     "/mnt/project-files/art-sheets/driftcove-city/beached_ship_ref.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE lamp post for Driftcove, the pirates' hideout in my 2D side-scrolling game: a jolly, swashbuckling cove built from beached ship hulls and wreck timber inside a big sea cave, lit by cool turquoise light from the cave mouth with warm lantern glow. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, rope fibres, patched canvas, barnacles, worn and chipped spots, slight colour variation between planks). The third image is the store from the same cove and the fourth a beached ship from it: match their style, palette (warm brown wreck timber, dark weathered planks, brass-rimmed portholes, cream patched canvas, red-and-cream stripes, rope, a few barnacles), outline thickness and level of detail exactly, so they clearly belong to the same cove. The lamp: a tall straight post made from an old wooden OAR standing blade-down, set in a small iron-hooped wooden barrel base, about two and a half times as tall as a person, with rope wrapped tightly around the shaft in two places; at the top a short iron arm holding a brass ship's lantern hung firmly from it on a short iron hook. The lantern is lit, with a warm golden flame behind its glass panes. Strict rules: 1) Pure side view at eye level, perfectly upright and centred. 2) The bottom of the barrel base is ONE flat straight horizontal edge, with no top surface of the barrel visible. No ground, sand, shadow or water under it. 3) The lamp fills most of the canvas height with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words. No glow halo spilling onto the background. Nothing ends loose in mid-air. Flat pure magenta #FF00FF background everywhere outside the lamp. Do not draw any characters, and do not copy anything else from the reference images."
+   }
+  },
+  {
+   "id": "driftcove_townsfolk",
+   "prompts": null,
+   "batch": "Driftcove city: three townsfolk + storage keeper",
+   "with": null,
+   "refs": [],
+   "save": "driftcove_townsfolk.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    4,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-14 thread 'Driftcove up to Dawnharbor's standard': Cory approved the boat store (as painted) + backdrop test ('Yea' 00:09Z). Full-batch spend still waiting on his OK. Driftcove's own tone (docs/zone-vibes.md), never Dawnharbor's look. Keeper replaces Brin in Driftcove (no duplicate NPCs, Cory 22:58Z).",
+   "edit": {
+    "base": "art/source/npcs_harbor_3.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "art/source/npcs_driftcove.png"
+    ],
+    "text": "The first image is a sheet of NPC characters for my 2D side-scrolling game: two rows, each row the same characters standing in the same spots, with a label above each. Keep the sheet's size, layout, magenta background, label bands, and each character's position, size, chibi proportions and art style exactly. Remove EVERYTHING else from the first image: every old character, flag, banner, orb, staff and faded figure is gone. The second image shows more of my game's NPC characters, and the third image shows the NPCs who already live in Driftcove, the jolly pirates' cove; the new ones must look like they belong with them but must be clearly DIFFERENT people (do not copy any of them): soft cel-painted shading, rich warm colours in sea teal, reds, cream and brown, dark brown outlines, painted cloth folds and worn patches. Paint four new villagers of Driftcove, the same character in both rows of each column, standing still in the same calm pose in both rows: Column 1 (label it DECKHAND): a cheerful skinny teenage boy deckhand with messy red hair, a red bandana tied low and small on his brow, a cream shirt with rolled sleeves, patched brown knee breeches and bare feet, holding a wooden mop upright beside him. Column 2 (label it FISHER): a thin, bald old fisherman with a big curly grey moustache and no beard, a yellow oilskin coat and tall rubber boots, holding a fishing rod upright with its line wound on the reel and a small fish basket on his hip. Column 3 (label it PARROT GIRL): a small lively girl with dark curly hair in two puffs, a teal and white striped dress with a red sash, a bright green and red parrot perched on her shoulder. Column 4 (label it KEEPER): the cove's STORAGE KEEPER, a stout, broad-shouldered quartermaster woman with short grey hair, a navy coat with brass buttons over a striped shirt, a big iron ring of keys on her belt, holding a thick leather ledger under one arm. Rules: every character stands upright, facing slightly toward the viewer, both feet flat on one level ground line, full body in its cell, all four at the same size and chibi proportions. Hands are simple rounded fingerless mittens in the game's style. Painted, not pixel art: smooth painted shading, no visible pixels. No skulls. Flat pure magenta #FF00FF background everywhere outside the characters and labels."
+   }
+  },
+  {
+   "id": "room_driftcove_store_wall",
+   "prompts": null,
+   "batch": "Driftcove room back wall: boat store (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_driftcove_store_wall.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-14 thread 'Driftcove up to Dawnharbor's standard': Cory approved the boat store (as painted) + backdrop test ('Yea' 00:09Z). Full-batch spend still waiting on his OK. Driftcove's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "art/source/room_driftcove_wall.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ],
+    "text": "The first image is one repeating tile of the back wall inside the store of Driftcove, the jolly pirates' cove, a shop built under an upturned boat. Keep the two curving rope-bound hull ribs framing the left and right sides, the beam with rope bindings at the top, and the studded rail and plank panelling at the bottom EXACTLY as they are, in the same places. Repaint ONLY the plank wall between the two ribs. Remove the old porthole and the old net. Paint the wall as warm weathered ship planks lit by soft turquoise light, and in the centre one big round brass-rimmed porthole with a deep rim, showing a sunny turquoise sea with a distant sail. On both sides of the porthole the planks are plain and empty: no shelves, no goods, nothing hanging. Everything is seen straight from the front, flat against the wall, with no perspective, no top faces and no side depth; nothing ends loose in mid-air. The left and right edges of the image must join seamlessly when the tile is repeated side by side. Also repaint every edge in the image with smooth, soft, painted edges, never stair-stepped or pixelated. Paint in the same style as the second image and the rest of the wall: rich warm colours, strong light and shadow with bright highlights, visible painted texture at a fairly chunky brush scale, a thin dark outline. Painted, never pixel art. No letters, words or skulls. Same image size and layout."
+   }
+  },
+  {
+   "id": "room_driftcove_quarters_wall",
+   "prompts": null,
+   "batch": "Driftcove room back wall: Pirates' Quarters (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_driftcove_quarters_wall.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-14 thread 'Driftcove up to Dawnharbor's standard': Cory approved the boat store (as painted) + backdrop test ('Yea' 00:09Z). Full-batch spend still waiting on his OK. Driftcove's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "art/source/room_driftcove_wall.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ],
+    "text": "The first image is one repeating tile of the back wall inside the Pirates' Quarters, the pirates' guild hall of Driftcove, the jolly pirates' cove. Keep the two curving rope-bound hull ribs framing the left and right sides, the beam with rope bindings at the top, and the studded rail and plank panelling at the bottom EXACTLY as they are, in the same places. Repaint ONLY the plank wall between the two ribs. Remove the old porthole and the old net. Paint the wall as dark polished ship planks with warm lantern light. In the centre, a big wooden ship's wheel mounted flat on the wall with two cutlasses crossed beneath it and a brass spyglass laid across above it, all fixed flat to the wall. On each side, a long red-and-cream striped flag painted with a plain anchor (a picture only, no writing), hanging flat against the planks and fixed at top and bottom. Everything is seen straight from the front, flat against the wall, with no perspective, no top faces and no side depth; nothing ends loose in mid-air. The left and right edges of the image must join seamlessly when the tile is repeated side by side. Also repaint every edge in the image with smooth, soft, painted edges, never stair-stepped or pixelated. Paint in the same style as the second image and the rest of the wall: rich warm colours, strong light and shadow with bright highlights, visible painted texture at a fairly chunky brush scale, a thin dark outline. Painted, never pixel art. No letters, words or skulls. Same image size and layout."
+   }
   }
  ]
 }
