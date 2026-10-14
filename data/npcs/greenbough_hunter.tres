@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_npc_def")
 id = &"greenbough_hunter"
-display_name = "Kestrel"
+display_name = "Briar"
 title = "Hunter"
 sprite_frames = ExtResource("2_sprite")
 greeting = "Quiet feet, steady hands. The boars hear a careless hunter a mile off."

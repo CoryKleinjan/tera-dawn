@@ -10,5 +10,5 @@ display_name = "Linnet"
 title = "Village Kid"
 sprite_frames = ExtResource("2_sprite")
 greeting = "I hit the target twice today! Well... the stand. But that counts!"
-lines = PackedStringArray("When I grow up I'll be an archer like Kestrel.", "The lookout tower is the best place to see the whole forest.")
+lines = PackedStringArray("When I grow up I'll be an archer like Briar.", "The lookout tower is the best place to see the whole forest.")
 storage = false
