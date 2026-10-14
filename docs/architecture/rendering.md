@@ -43,7 +43,7 @@ and sunk (`land_sink`) so their base tucks behind the grass edge at any camera h
 match best, so a long platform never reads as small ones pasted together.
 
 All art in the world (land, buildings, ropes and ladders, lanterns, portals, backdrop layers,
-room interiors, NPCs, monsters, pets, drops, effects and projectiles; not yet the hero's layers)
+room interiors, NPCs, monsters, pets, drops, effects and projectiles)
 is cut at two texels per art pixel with its smooth painted edge and drawn at `TDStage.TEXEL` game
 pixels per art pixel (`TDStage.art_density`, `art_size`; `TDStage.ART_DENSITY` lists the
 folders), so the whole screen shows one pixel size and outlines stay clean.

@@ -41,19 +41,6 @@ const OFFHAND_NAMES := {&"shield": "a shield", &"star": "throwing stars", &"book
 ## Upgrade slots for scrolls (not used yet).
 @export var upgrade_slots := 7
 
-@export_group("Look")
-## How it looks on the hero is its own art (Paperdoll: layers/worn_item_<id>.png, or a weapon
-## or shield's piece), made by tools/art/hero_build.py. A hat's shape: which of the hat/hair
-## templates it is painted on, "helm", "tricorn", "bandana", "hood" or "wizard"; the hair under
-## it is that shape's.
-@export var look_shape: StringName
-## The colour of a weapon's streak (never a recolour of its art). Fully transparent takes the
-## main colour of its icon.
-@export var look_color := Color(0, 0, 0, 0)
-
-## Icon colours worked out so far: item id -> Color.
-static var _icon_colors := {}
-
 func tab() -> Tab:
 	return Tab.EQUIP
 
@@ -72,36 +59,6 @@ static func families_text(families: Array[StringName]) -> String:
 	if names.size() <= 1:
 		return "".join(names)
 	return ", ".join(names.slice(0, -1)) + " and " + names[-1]
-
-## Its streak colour: `look_color`, else its icon's main colour.
-func worn_color() -> Color:
-	if look_color.a > 0.0:
-		return look_color
-	if not _icon_colors.has(id):
-		_icon_colors[id] = main_color(icon)
-	return _icon_colors[id]
-
-## The typical colour of a picture's mid-tones (not its outline or shine).
-static func main_color(tex: Texture2D) -> Color:
-	var img := tex.get_image() if tex else null
-	if img == null:
-		return Color(0.7, 0.7, 0.7)
-	if img.is_compressed():
-		img.decompress()
-	var sum := Vector3.ZERO
-	var weight := 0.0
-	for y in range(0, img.get_height(), 2):
-		for x in range(0, img.get_width(), 2):
-			var c := img.get_pixel(x, y)
-			if c.a < 0.5 or c.v < 0.22 or c.v > 0.97:
-				continue
-			var w := 0.25 + c.s # colourful pixels say more about it than grey ones
-			sum += Vector3(c.r, c.g, c.b) * w
-			weight += w
-	if weight == 0.0:
-		return Color(0.7, 0.7, 0.7)
-	sum /= weight
-	return Color(sum.x, sum.y, sum.z)
 
 func slot_name() -> String:
 	return SLOT_NAMES[slot]

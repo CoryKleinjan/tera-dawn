@@ -1,12 +1,11 @@
 # Tera's Dawn: notes for Claude
 
-A MapleStory-inspired 2D side-scroller in Godot 4.7 (Forward+), shipping on Steam with HD-2D
-rendering (Octopath Traveler style depth, lighting and bloom). Its own look, not a close copy.
+A MapleStory-inspired 2D side-scroller in Godot 4.7 (Forward+), shipping on Steam with a hand-painted look. Its own look, not a close copy.
 The game will grow much larger, so keep code extendable and readable.
 
 ## Where things are
 - `docs/game-rules.md`: every rule for how the game should look and play (hero, gear, weapons,
-  hair and hats, maps, towns, monsters and levels, UI, audio). Follow it and keep it current.
+  maps, towns, monsters and levels, UI, audio). Follow it and keep it current.
 - `ARCHITECTURE.md`: the big picture, an index of `docs/architecture/*.md` (one page per system
   and "how to add" guide), and the code conventions. Read the page for the system you touch.
 - `docs/zone-vibes.md`: each zone's style and music guide (palette, light, materials,
@@ -26,7 +25,6 @@ tests/run_all.sh                 # every Godot test + smoke test, as CI runs it
 tests/run_all.sh inventory       # only tests matching a name
 python3 -m unittest discover -s tools/art/tests -t tools/art/tests   # art tool tests
 python3 tools/art/slice_sheets.py [manifest]                         # cut sheets into assets/
-python3 tools/art/hero_build.py --preview                            # rebuild the hero strips and layers
 python3 tools/art/gemini_pass.py --dry-run                           # Gemini batch cost check (free)
 ```
 
@@ -70,9 +68,9 @@ python3 tools/art/gemini_pass.py --dry-run                           # Gemini ba
 
 ### Game rules
 The full list is `docs/game-rules.md`. The ones most often broken:
-- Weapons are always in the front hand, at the same angle to the forearm every frame. No ammo.
-- Hair under hats follows Cory's hat/hair template sheets (one cell per hat type).
-- Hats and hoods end at the neck. Hands have fingers.
+- The hero's look and all equipment visuals are being restarted from Cory's original reference
+  `art/reference/hero.png`: the game has no hero or gear art for now.
+- No ammo for any weapon.
 - Characters, NPCs, ropes and ladders draw in front of land; no character or land shadows.
 - NPCs stand still at idle. Map names only at the top of the screen. Towns have no monsters.
 - 2-3 monster kinds per map, each kind in one zone; paths between towns stay Lv 10 or below.

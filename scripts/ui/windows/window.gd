@@ -199,6 +199,7 @@ class Tip:
 		compare = compare_
 
 ## An item slot: frame, icon and stack count. `dim` greys it out (being dragged, unusable).
+## An item with no icon (gear whose art is being remade) shows its name instead.
 func draw_slot(r: Rect2, stack: ItemStack, dim := false, label := "") -> void:
 	var hot := r.has_point(_hover)
 	draw_texture_rect(UiSkin.tex("item_slot"), r, false, Color(1.3, 1.2, 1.0) if hot else Color.WHITE)
@@ -211,8 +212,22 @@ func draw_slot(r: Rect2, stack: ItemStack, dim := false, label := "") -> void:
 		return
 	if stack.item.icon:
 		draw_texture_rect(stack.item.icon, fit(stack.item.icon, r.grow(-5)), false, Color(1, 1, 1, 0.35 if dim else 1.0))
+	else:
+		_draw_slot_name(r, stack.item.display_name, dim)
 	if stack.count > 1:
 		DrawUtil.text(self, Game.num_font, r.end + Vector2(-4, -3), str(stack.count), 12, Palette.MIST, -1, 4, Palette.NIGHT)
+
+## An item's name across its slot, in up to two lines, in place of the icon it hasn't got.
+func _draw_slot_name(r: Rect2, text: String, dim: bool) -> void:
+	var words := text.split(" ")
+	var lines := PackedStringArray([text])
+	if words.size() > 1:
+		lines = PackedStringArray([" ".join(words.slice(0, words.size() / 2)), " ".join(words.slice(words.size() / 2))])
+	var col := Color(Palette.MIST, 0.35 if dim else 0.9)
+	for i in lines.size():
+		var y := r.get_center().y + 4 + (i - (lines.size() - 1) / 2.0) * 10
+		DrawUtil.text(self, Game.ui_font, Vector2(r.get_center().x, y), lines[i],
+			DrawUtil.fit_size(Game.ui_font, lines[i], 9, r.size.x - 8, 6), col, 0, 3, Palette.NIGHT)
 
 ## A button drawn with the UI sheet's button art; dimmed when it can't be used. `small` is
 ## the short kind that fits in a list row. The art is scaled to the button's height (only its

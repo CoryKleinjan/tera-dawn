@@ -1,7 +1,7 @@
 class_name SnapshotSync
 extends RefCounted
 ## Keeps TDWorld's views of the map in step with the server: the monsters and other players
-## in each snapshot (SnapshotCodec), other players' info (name, level, look...) and the drops
+## in each snapshot (SnapshotCodec), other players' info (name, level, job...) and the drops
 ## on the ground. Net hands these to TDWorld, which passes them on here.
 
 var world: TDWorld
@@ -9,7 +9,7 @@ var world: TDWorld
 var drops := {}
 ## peer id -> TDAvatar
 var avatars := {}
-## peer id -> another player's info (name, level, look...; see MapInstance.send_player_info),
+## peer id -> another player's info (name, level, job...; see MapInstance.send_player_info),
 ## kept so an avatar made after it arrived still gets it.
 var player_infos := {}
 
@@ -53,7 +53,7 @@ func apply_snapshot(snap: Dictionary) -> void:
 		if not seen.has(peer):
 			remove_avatar(peer)
 
-## Another player's name, level, look and the like changed.
+## Another player's name, level, job and the like changed.
 func set_player_info(peer: int, info: Array) -> void:
 	player_infos[peer] = info
 	if avatars.has(peer):

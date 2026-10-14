@@ -53,16 +53,16 @@ func test_listed_in_the_order_they_were_made() -> void:
 	var slot: Dictionary = store.slots()[0]
 	check_eq(slot["name"], "Zed", "slot name")
 	check_eq(int(slot["level"]), 1, "slot level")
-	check(slot.has("look") and slot.has("job"), "slot look and job")
+	check(slot.has("job"), "slot job")
 
-func test_a_new_character_is_a_beginner_with_the_look_picked() -> void:
+func test_a_new_character_is_a_beginner_with_the_outfit_picked() -> void:
 	var made := NewCharacter.new()
-	made.appearance.hair = &"hair_ponytail"
+	made.outfit[EquipDef.Slot.TOP] = Content.item(&"meadow_shirt")
 	store.create("Ann", made)
 	var c := store.load_character("ann")
 	check_eq(c.name, "Ann", "the name as it was made")
 	check_eq(c.job.id, Character.START_JOB, "a Beginner")
-	check_eq(c.appearance.hair, &"hair_ponytail", "the hair picked")
+	check_eq(c.equipment.at(&"top").item.id, &"meadow_shirt", "the top picked")
 
 func test_deleting_moves_the_save_aside_and_frees_the_name() -> void:
 	store.create("Ann", NewCharacter.new())

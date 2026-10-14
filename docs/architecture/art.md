@@ -8,18 +8,13 @@ Drop the sheet in `art/source/`, write a manifest in `art/sheets/`, and run
 `python3 tools/art/slice_sheets.py <name>`. `art/sheets/README.md` explains the manifest. The
 cut sprites land in `assets/sprites/`, ready to be referenced from data.
 
-The hero is not cut by the slicer: `python3 tools/art/hero_build.py` builds his strips, layers,
-rig and animations from the painted sheets in `art/source/hero/` (see `art/sheets/README.md`
-"The paperdoll"). Each body is one sheet of poses, and each piece he wears is a Gemini edit of
-that sheet with the piece on, lifted off by the difference so it lines up frame for frame. Hats
-are drawn in one of the shapes on Cory's hat/hair template sheets (`hats_<body>.png`), which the
-tool places on his head on every pose. `--preview` writes `art/build/hero_preview.png`.
+The hero and all equipment have no art for now: their look is being restarted from Cory's
+original reference, `art/reference/hero.png`.
 
 ## Making art with Gemini
 
 Art comes from Google's Gemini image model through its batch API (half price). Follow the art
-rules in [game rules](../game-rules.md) (painted style, clean anti-aliased edges, icons matching
-worn gear) and the house rules in `CLAUDE.md` (ask about the look, small test first).
+rules in [game rules](../game-rules.md) (painted style, clean anti-aliased edges) and the house rules in `CLAUDE.md` (ask about the look, small test first).
 Art for a zone, its town or a sub-zone keeps that zone's palette, light and materials from
 [zone vibes](../zone-vibes.md).
 

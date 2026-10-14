@@ -6,7 +6,7 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
 
 Create `data/jobs/<id>.tres` as a **JobDef**: its one main stat (`primary_stat`), mastery, HP and MP
 growth, Ability Points per level, its `family` (the job line gear names in `EquipDef.jobs`),
-and a `tint` the hero is drawn in until the job has its own art.
+and a `tint` (the job's colour, where jobs are shown).
 
 Everyone starts as `Character.START_JOB` (the Beginner, which lists starting stats, gear,
 items and the potions put on the last quickslots, `starting_quickslots`). A job that others

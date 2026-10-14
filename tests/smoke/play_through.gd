@@ -20,11 +20,9 @@ func start_game() -> void:
 	var creator := world.hud.title.creator
 	_check(creator.visible and not select.visible and not world.started, "Create opens the character creator")
 	creator.name_field.text = "Tester"
-	creator.step("look:%d" % LookDef.Kind.HAIR, 1)
 	creator.step("outfit:%d" % EquipDef.Slot.TOP, 1)
-	var chosen := creator.made.appearance.to_dict()
 	var top: EquipDef = creator.made.outfit[EquipDef.Slot.TOP]
-	_check(creator.preview.look["appearance"] == chosen and creator.preview.look["gear"]["top"] == String(top.id), "the preview shows every choice")
+	_check(creator.value_text("outfit:%d" % EquipDef.Slot.TOP) == top.display_name, "the creator shows the outfit picked")
 	creator.create_button.pressed.emit()
 	await _ticks(2)
 	_check(select.visible and select.selected == "Tester" and not world.started, "Create goes back to character select with the new character picked")
@@ -32,9 +30,8 @@ func start_game() -> void:
 	await _ticks(2)
 	_me().inv = 100000 # keep monsters from hurting the player mid-test
 	_check(world.started and not world.hud.title.visible and Game.me.name == "Tester", "Play starts a single-player game as the named character")
-	_check(Game.me.appearance.to_dict() == chosen and Game.me.equipment.at(&"top").item == top, "the character has the look and outfit picked")
+	_check(Game.me.equipment.at(&"top").item == top, "the character has the outfit picked")
 	_check(Game.me.job.id == Character.START_JOB, "a new character starts as a Beginner")
-	_check(world.player.rig.paperdoll.look == Game.me.look(), "the hero is drawn with that look")
 	_check(Net.server != null and _me() != null, "single player runs its own server")
 	p = world.player
 	_check(world.map.id == Character.NEW_MAP, "a new character wakes on the tutorial beach")
@@ -326,11 +323,7 @@ func dawn_slash() -> void:
 	p.cooldown = 0
 	_me().cooldown = 0
 	await _tap("quick_2")
-	var slash := WeaponStyle.animation_for(Game.me.look(), &"slash")
-	if WeaponStyle.is_spell(slash):
-		_check(p.action_t == 0, "Dawn Slash with a wand or staff is a spell: no motion")
-	else:
-		_check(p.action_anim == slash, "Dawn Slash plays its motion for the weapon in hand")
+	_check(p.action_anim == Content.skill(&"dawn_slash").animation, "Dawn Slash makes its motion")
 	# MP regen may tick once during the key press, and a kill that levels up refills MP.
 	_check(Game.me.level > level or mp_before - Game.me.mp >= Content.skill(&"dawn_slash").mp_at(1) - 1, "Dawn Slash spends MP")
 

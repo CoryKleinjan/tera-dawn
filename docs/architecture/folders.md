@@ -27,11 +27,11 @@ scripts/
   data/               Resource classes for everything in data/
   systems/            Character (and CharacterCodec, its save format; CharacterStore keeps them
                       on this computer) and its parts SkillBook,
-                      AbilityPoints and Gear (CharacterPart), Appearance, NewCharacter,
+                      AbilityPoints and Gear (CharacterPart), NewCharacter,
                       Inventory, Equipment,
                       ItemStack, CharacterStats, MonsterBook, Achievements, Counters, Balance
-  components/         Health, Hitbox, JumpGrace, WeaponTrail, SpriteRig, HeroBody (a hero's rig and
-                      companion), Paperdoll (+ Sprite, View)
+  components/         Health, Hitbox, JumpGrace, SpriteRig, HeroBody (how a hero shows: for now
+                      only the companion)
   actors/             Player (you), Avatar (other players), Companion (chairs, pets), Mob, Npc, Drop views
   world/              World (what you see), WorldCamera, SnapshotSync (server views), WorldFx (hits, numbers, effects), Stage +
                       Terrain/Backdrop/Scenery builders, MapLayout, Platform, DropFlight, Combat
@@ -50,12 +50,11 @@ assets/
 art/
   source/             The art sheets (Gemini batch output, painted)
   sheets/             One manifest per sheet: how to cut it
-  source/hero/        The hero's painted body sheets, worn-gear edits and hat templates
-  reference/          hero.png (hero proportions) and hero_look.png (the approved hero look)
+  reference/          hero.png (Cory's original hero: proportions, and the start of his new look)
 store/                Steam capsules and key art
 tools/art/            Slicer and its helpers (platform_pieces, climb_pieces, clean_sheet, land_pixels),
-                      Gemini batch runner (gemini_pass.py + gemini_pass.json), the hero
-                      (hero_build.py), store-art cropper, fx textures, contact-sheet preview;
+                      Gemini batch runner (gemini_pass.py + gemini_pass.json), store-art
+                      cropper, fx textures, contact-sheet preview;
                       sheet_check.py (checks Gemini results), rekey_sheet.py, strip_template.py,
                       gemini_sheet.py (Gemini API helpers)
 tools/audio/          Lyria music runner (lyria_pass.py + lyria_cues.json), make_music.py (loops, jingles), make_sfx.py

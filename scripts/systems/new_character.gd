@@ -1,13 +1,12 @@
 class_name NewCharacter
 extends RefCounted
-## The choices made in the character creator: an Appearance and the starting outfit. The
-## client sends it with its first join (`to_dict`), and the server checks every choice
-## against what the creator offers before making the character (`Character.create`).
+## The choices made in the character creator: the starting outfit. The client sends it with
+## its first join (`to_dict`), and the server checks every choice against what the creator
+## offers before making the character (`Character.create`).
 ##
 ## Outfit choices come from the starting job's `creator_gear`: one piece per kind of gear
 ## (top, bottom, shoes...). Kinds not chosen keep the job's `starting_gear`.
 
-var appearance := Appearance.new()
 ## Gear kind (EquipDef.Slot) -> the EquipDef picked for it.
 var outfit := {}
 
@@ -46,7 +45,6 @@ func cycle_outfit(job: JobDef, kind: EquipDef.Slot, step: int) -> void:
 
 ## Every choice made at random.
 func roll(job: JobDef, rng: RandomNumberGenerator = null) -> void:
-	appearance = Appearance.random(rng)
 	for kind in outfit_kinds(job):
 		var options := outfit_options(job, kind)
 		outfit[kind] = options[rng.randi_range(0, options.size() - 1) if rng else randi() % options.size()]
@@ -66,19 +64,13 @@ func to_dict() -> Dictionary:
 	var gear := []
 	for kind in outfit:
 		gear.append(String(outfit[kind].id))
-	return {"look": appearance.to_dict(), "outfit": gear}
+	return {"outfit": gear}
 
 ## The choices a client sent, keeping only what the creator offers a new `job` character.
-## Anything missing or not on offer stays as the default.
+## Anything missing or not on offer stays as the default (an older client's "look" is left
+## out).
 static func from_dict(data: Dictionary, job_id := Character.START_JOB) -> NewCharacter:
 	var n := NewCharacter.new(job_id)
-	var look: Variant = data.get("look")
-	if look is Dictionary:
-		var a := Appearance.new()
-		a.load_dict(look)
-		for kind in LookDef.Kind.values():
-			if a.part(kind) and a.part(kind).creator:
-				n.appearance.set(LookDef.FIELDS[kind], a.part(kind).id)
 	var job := Content.job(job_id)
 	var gear: Variant = data.get("outfit")
 	if gear is Array:

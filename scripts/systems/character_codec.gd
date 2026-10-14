@@ -10,7 +10,7 @@ const STAT_RULES := 1
 
 static func to_dict(c: Character) -> Dictionary:
 	return {
-		"name": c.name, "appearance": c.appearance.to_dict(), "level": c.level, "xp": c.xp, "shards": c.shards, "map_id": c.map_id,
+		"name": c.name, "level": c.level, "xp": c.xp, "shards": c.shards, "map_id": c.map_id,
 		"job": c.job.id, "came_from": String(c.came_from), "base": c.base.to_dict(), "ap": c.ap.points, "ap_reset_used": c.ap.reset_used,
 		"stat_rules": STAT_RULES,
 		"hp": c.health.hp, "mp": c.mp,
@@ -31,11 +31,10 @@ static func _string_keys(d: Dictionary) -> Dictionary:
 	return out
 
 ## Loads what to_dict() wrote into `c`. Missing or bad values keep the current ones, so
-## older saves still load.
+## older saves still load (and what they carry that's gone, such as an "appearance", is left
+## out).
 static func load_dict(c: Character, data: Dictionary) -> void:
 	c.name = str(data.get("name", c.name))
-	if data.get("appearance") is Dictionary:
-		c.appearance.load_dict(data["appearance"])
 	c.level = maxi(1, int(data.get("level", c.level)))
 	c.xp = maxi(0, int(data.get("xp", c.xp)))
 	c.shards = maxi(0, int(data.get("shards", c.shards)))

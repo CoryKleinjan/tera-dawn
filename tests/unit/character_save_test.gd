@@ -189,6 +189,13 @@ func test_missing_hp_and_mp_load_full() -> void:
 	check_eq(c.mp, c.max_mp(), "full MP")
 	check_eq(c.max_hp(), 80, "level 3 max HP")
 
+func test_save_with_an_old_appearance_loads_without_it() -> void:
+	var c := fx.character()
+	c.load_dict({"name": "Old", "job": "t_job", "level": 3, "base": {}, "sp": 0,
+		"appearance": {"skin": "", "face": "", "eyes": "", "hair": "hair_ponytail", "hair_color": ""}})
+	check_eq([c.name, c.level], ["Old", 3], "the rest loads")
+	check(not c.to_dict().has("appearance"), "and the look is not saved again")
+
 func test_save_from_before_stats_hands_out_ap() -> void:
 	var c := fx.character()
 	c.load_dict({"name": "Old", "job": "t_job", "level": 7, "sp": 0})

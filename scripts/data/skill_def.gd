@@ -151,17 +151,17 @@ const STREAK_MAX := 10
 @export var regen_mp_per_level := 0
 
 @export_group("Look")
-## The motion the player makes: "attack" (the weapon's own basic blow) or "slash" (its big
-## one) are worked out from the weapon worn (WeaponStyle); any other name is a hero animation
-## played as it is (assets/animations/hero.tres). "cast" (buffs, and a wand's or staff's
-## spells) makes no motion at all: the player flashes `flash` instead (WeaponStyle.SPELL).
+## The motion the player makes: "attack" (a basic blow), "slash" (a big one) or any other
+## name ("throw"), passed on to everyone watching. "cast" (SPELL: buffs and spells) makes no
+## motion at all, so the player carries on with what they were doing.
 @export var animation := &"attack"
 ## "1.5" or "2" from a number.
 static func _number(n: float) -> String:
 	return str(roundi(n)) if is_equal_approx(n, roundf(n)) else "%.1f" % n
 
-## The colour the player flashes when a buff or spell goes off, each skill its own.
-## Transparent: DEFAULT_FLASH (see flash_color).
+## The colour the player flashes when a buff or spell goes off, each skill its own (kept for
+## the hero's new look: nothing draws him while it is made). Transparent: DEFAULT_FLASH (see
+## flash_color).
 @export var flash := Color(0, 0, 0, 0)
 ## Played in front of the player, flipped with their facing.
 @export var effect: EffectDef
@@ -246,6 +246,13 @@ func regen_mp_at(level: int) -> int:
 ## harder on screen: longer hit-stop, recoil and knockback (see TDWorldFx, MapInstance).
 func is_ranged() -> bool:
 	return projectile != null
+
+## The motion of buffs and spells (see `animation`).
+const SPELL := &"cast"
+
+## A buff or spell, which makes no motion (see `animation`).
+func is_spell() -> bool:
+	return animation == SPELL
 
 ## The aim it actually takes when used aimed `aim`: only aiming attacks turn.
 func aim_for(aim: Hitbox.Aim) -> Hitbox.Aim:

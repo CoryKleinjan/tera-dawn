@@ -48,7 +48,7 @@ var save_dir := "user://characters"
 ## The characters character select is showing (this computer's own, or the test characters
 ## with the Developer setting on); see `open_saves`.
 var saves: CharacterStore
-## The characters as character select shows them: {name, level, job, look}.
+## The characters as character select shows them: {name, level, job}.
 var characters: Array = []
 ## The character this player is playing ("" at character select).
 var playing := ""
@@ -516,7 +516,7 @@ func ev_snapshot(data: PackedByteArray) -> void:
 	if world:
 		world.apply_snapshot(SnapshotCodec.decode(data))
 
-## Another player's name, level, look and the like, when it changes (see MapInstance.send_player_info).
+## Another player's name, level, job and the like, when it changes (see MapInstance.send_player_info).
 @rpc("authority", "call_local", "reliable")
 func ev_player_info(peer: int, info: Array) -> void:
 	if world:

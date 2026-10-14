@@ -22,4 +22,3 @@ sell_price = 8
 slot = 1
 stats = SubResource("stats")
 variance = 1
-look_shape = &"cap"

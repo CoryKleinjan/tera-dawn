@@ -49,7 +49,7 @@ screen. `detail` and `alpha` default to this for every asset;
 | `shadow` | `false` | Dark sheets: also remove the soft drop shadow under the sprite. |
 | `alpha` | `"smooth"` | `"smooth"` keeps each sprite's anti-aliased edge (and feathers the cut a `fix` makes); `"soft"` also keeps the faint glow round it (effects, UI); `"hard"` makes every pixel fully on or off (never for game art). |
 | `min_area` | `6` | Specks smaller than this (art pixels) are dropped. |
-| `scale` | `0.25` | Shrink from sheet pixels to art pixels, the unit the game sizes art in. The hero is 0.25; match its pixel size. Land art uses `art_px`. |
+| `scale` | `0.25` | Shrink from sheet pixels to art pixels, the unit the game sizes art in. Land art uses `art_px`. |
 | `detail` | `2` | With `scale`: texels cut per art pixel, so the art keeps its detail and a clean edge on screen. The output folder must be in `TDStage.ART_DENSITY` at the same number. Set `1` where `scale` already cuts two texels per art pixel (rooms, backdrops, props) or the art is drawn at its cut size (UI). An animation set (`sets`) may use another number: its frames carry it as `art_density` metadata, so a monster shown big (`sprite_scale` above 1) is cut sharper at the same size. Monsters use about `2.56 x sprite_scale` (one texel per screen pixel at 1080p, like the NPCs), up to `1 / scale` (one texel per sheet pixel). |
 | `art_px` | | Land art (tiles, platform pieces, ground, buildings): sheet pixels per art pixel. Sets `scale` to `density / art_px x grow`, so all land shows at one pixel size (`TDStage.TEXEL`, `TDStage.art_density`). |
 | `density` | `2` | With `art_px`: texels per art pixel (the game reads 2 for the folders in `TDStage.ART_DENSITY`). |
@@ -113,8 +113,8 @@ Godot `SpriteFrames` resource. Frames can come from any manifest, as `"<sheet>:<
 - `nudge`: `{"frame": [dx, dy]}` fine-tunes one frame. `pad_top`: empty rows above every frame
   (room for hair and hats). Both are in art pixels. Animations may give per-frame `durations`.
 
-Actors look for `idle`, `move` (monsters), `attack`, `hurt` and `die`; the hero has its own
-list in `tools/art/hero_build.py` (`ANIMATIONS`).
+Actors look for `idle`, `move` (monsters), `attack`, `hurt` and `die`. The hero and all gear
+have no art for now: their look is being restarted from `art/reference/hero.png`.
 
 ## Sheet families
 
@@ -164,22 +164,6 @@ list in `tools/art/hero_build.py` (`ANIMATIONS`).
   `assets/animations/pet_*.tres`) and `projectiles/`.
 - Cells the game doesn't load have `"save": false` in their overrides, so the slicer skips them;
   art the game never uses is removed rather than kept in the repo.
-
-## The paperdoll (the hero)
-
-The hero is not cut by the slicer: `tools/art/hero_build.py` builds him from
-`art/source/hero/`, laid out like Cory's approved look (`art/reference/hero_look.png`).
-
-- `body_boy.png`, `body_girl.png`: each body as one 3x4 sheet of poses (idle, blink, jump,
-  fall, four walk steps, lunge, follow-through, hurt), painted face and all.
-- `body_<body>_bald.png`, `_jerkin`, `_trousers`: Gemini edits of that sheet with one thing
-  changed. The tool lifts each piece off by the difference, so it lines up frame for frame.
-  New clothes are another such edit, named in `WORN`.
-- `hats_boy.png`, `hats_girl.png`: Cory's hat/hair templates, one cell per hat shape (helm,
-  tricorn, bandana, hood, wizard) and a bare head. Each hat item is drawn in one of these
-  shapes (`HAT_ITEMS`); the tool places the cell on his head on every pose and writes the
-  hair under it and the cut of his head.
-- `--preview` writes `art/build/hero_preview.png` to check the result.
 
 ## Town kit
 

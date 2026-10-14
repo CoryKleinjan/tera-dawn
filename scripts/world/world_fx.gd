@@ -48,7 +48,7 @@ func show_skill(peer: int, skill: SkillDef, at: Vector2, face: int, lines: Array
 				_show_hits(skill, m, [hits[i]], face, mine, i)
 			world.fx_layer.add_child(TDProjectile.create(world, skill.projectile, from, Vector2.ZERO, i * 7, m, land))
 
-## Hit-stop: how many ticks a blow freezes the monster (and your swing), plain and critical.
+## Hit-stop: how many ticks a blow freezes the monster, plain and critical.
 ## Melee blows hold longer than shots, so they feel heavy.
 const HIT_STOP := 3
 const CRIT_STOP := 6
@@ -98,7 +98,6 @@ func _show_hits(skill: SkillDef, m: TDMob, hits: Array, face: int, mine: bool, f
 			stop = MELEE_CRIT_STOP if crit else MELEE_HIT_STOP
 	m.hit_react(face, stop)
 	if mine:
-		world.player.hit_stop(stop)
 		if not skill.is_ranged():
 			world.player.recoil()
 		if crit:

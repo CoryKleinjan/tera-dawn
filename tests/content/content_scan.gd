@@ -27,7 +27,6 @@ const EXPECTED := {
 	"buildings": ["BuildingDef"],
 	"climb_styles": ["ClimbStyleDef"],
 	"projectiles": ["ProjectileDef"],
-	"looks": ["LookDef"],
 	"achievements": ["AchievementDef"],
 	"cutscenes": ["CutsceneDef"],
 }

@@ -23,8 +23,9 @@ data/*.tres  ──►  Content (autoload)  ──►  World loads a MapDef  ─
   (one slot's worth of an item, with its own rolled stats for gear) and `CharacterStats` (the
   MapleStory formulas). The server owns each player's `Character`; `Game.me` is your copy.
 - **Components** (`scripts/components/`) are small reusable parts any actor can use: `Health`,
-  `Hitbox`, `SpriteRig` (sprite, animation, light and aura), `HeroBody` (how every hero is
-  drawn) and the paperdoll that dresses heroes (see [characters](docs/architecture/characters.md)).
+  `Hitbox`, `SpriteRig` (sprite, animation, light and aura) and `HeroBody` (how every hero shows;
+  for now only his chair and pet, while his look is restarted: see
+  [characters](docs/architecture/characters.md)).
 - **Server** (`scripts/server/`) runs the game for everyone (see [multiplayer](docs/architecture/multiplayer.md)).
 - **Actors** (`scripts/actors/`) are what you see in the world: your hero, other players,
   monsters, NPCs and drops.
@@ -43,7 +44,7 @@ second. Only the stage turns that into 3D (32 game pixels per 3D unit).
 
 - [Game rules](docs/game-rules.md): how the game should look and play; read it before any change.
 - [Multiplayer and players together](docs/architecture/multiplayer.md): the server, client, snapshots, co-op and characters saved on each computer, parties and trades.
-- [Characters: looks, extras, balance and player actions](docs/architecture/characters.md): character creation, the paperdoll hero, chairs, pets, Monster Book, achievements, balance, how to add a player action.
+- [Characters: creation, extras, balance and player actions](docs/architecture/characters.md): character creation, how heroes show, chairs, pets, Monster Book, achievements, balance, how to add a player action.
 - [Folders](docs/architecture/folders.md): what lives in each folder.
 - [Draw order and the stage](docs/architecture/rendering.md): the 3D layers, depths and pixel size of the diorama, world-anchored text.
 - [Monsters](docs/architecture/monsters.md): how to add a monster.
@@ -55,7 +56,7 @@ second. Only the stage turns that into 3D (32 game pixels per 3D unit).
   screen, the settings menu.
 - [NPCs, quests and shops](docs/architecture/npcs-quests-shops.md): how to add an NPC, a quest or a shop.
 - [Cutscenes](docs/architecture/cutscenes.md): how to add a cutscene and play it on a map or quest.
-- [Art](docs/architecture/art.md): how to add art, the slicer, hero layers, Gemini batch generation.
+- [Art](docs/architecture/art.md): how to add art, the slicer, Gemini batch generation.
 - [Zone vibes](docs/zone-vibes.md): each zone's style and music guide, and how its town and sub-zones vary it.
 - [Music and sound](docs/architecture/audio.md): how to add music or a sound effect, where they play, making music with Lyria.
 

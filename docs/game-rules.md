@@ -22,23 +22,16 @@ update this page when one changes. Each zone's own look and music are in
 
 ## Hero
 
-- The hero is a paperdoll in the NPC style, a boy or a girl (the hairstyle picks the body), hands
-  with fingers. `art/reference/hero_look.png` (boy and girl in every pose, tunic, trousers and
-  each hat type) is the approved look to match. Each body has one painted face; the creator
-  picks the hairstyle (and so the body).
-- Chibi proportions, drawn about 13% larger than the first cut.
-- Looks exactly the same in menus (equipment, creator, character select) as in game: one renderer.
-- Animation: walk only, 15% faster after about 0.4 s of moving; run frames never play. No walk bob;
-  the walk is four painted steps. Standing, he breathes and blinks. Poses show as painted.
-  No jump sound. No character shadows.
-- Buffs and spells have no pose, just a flash in the skill's colour. Skill effects draw on the
-  hero's layer.
+- The hero's look and all equipment visuals are being restarted from Cory's original reference
+  `art/reference/hero.png`: for now the game has no hero or gear art, and the hero has no sprite.
+- Male only for now.
 
 ## Movement and combat feel
 
 - A bit metroidvania, like Hollow Knight: the hero starts and stops at once, steers freely in the
   air, hops short when jump is let go early and falls faster than he rises. A full jump keeps its
   height, so every map stays reachable.
+- He walks, never runs, and walks 15% faster after about 0.4 s of moving. No jump sound.
 - No dash for the hero: each job has its own movement skill instead. Warrior Charge (a lunge
   that only shoves monsters aside, no damage; once per jump in the air too), Thief Flash Jump (a
   second jump in mid-air), Magician Blink (a teleport the held way, up and down too), Archer
@@ -47,13 +40,13 @@ update this page when one changes. Each zone's own look and music are in
   ones are made with Gemini in the same look as every other skill effect.
 - Attacks and most attack skills aim: up hits overhead, down (in the air only) hits below. Buffs
   don't aim. A downward melee blow that meets a monster bounces him off it (pogo).
-- He can move while swinging and keeps facing the swing until it ends.
+- He can move while swinging and keeps facing the swing until it ends. Buffs and spells make no
+  swing: he carries on with what he was doing.
 - Melee hits feel heavy: longer hit-stop, a small push back on him, a harder knockback on the
   monster, a camera kick on crits and kills. Ranged hits (arrows, stars, bullets, spells) stay
   light.
 - Getting hit freezes him a beat, flashes the screen and knocks him away without steering.
-- New poses (up and down slashes) wait for the rebuilt paperdoll hero; until then the attack
-  pose plays with the swing effect turned up or down.
+- An aimed attack turns its swing effect up or down.
 - Job skills will be flashy and grand, like MapleStory.
 
 ## Jobs, stats and skills
@@ -95,65 +88,24 @@ update this page when one changes. Each zone's own look and music are in
 
 ## Gear
 
-- Gear is being redrawn for the new hero: the old items, icons and worn pictures were removed
-  (2026-10-13) and are never used again. Each first job has a starter armor set (hat, top,
-  trousers, shoes; Lv 10, that job and its blends only), sold in its town's shop: Warrior
-  Squire set (Emberforge), Magician Novice set (Lumewood), Thief Footpad set (Lanternfall),
-  Archer Hunter's set (Greenbough), Pirate Deckhand set (Driftcove). Tests still bring their own
-  plain gear (`tests/fixtures/gear`) for what the game doesn't have yet.
-- Each piece of gear is painted once, worn on the hero, plus one icon that the boy and the girl
-  share. (The starter sets were also painted on the girl.)
-- An item's icon and its worn or held look are the same object: shape, colours and details. Worn
-  gear is cut the same way the icons are, keeps their detail, uses the hero's near-black outline,
-  and is never cut off.
-- Every piece of gear is its own layer on the paperdoll.
-
-## Hats and hair
-
-- Hats fit the MapleStory way: sized to the whole head and hair, face open, lined up with the eyes.
-  Helmets have a low dome and the nose guard reaches down between the eyes. No part of the head
-  pokes out the side.
-- Hats and hoods end at the neck: no cape or cloth over the back (cloaks are their own item), and
-  hoods have no collar, scarf, capelet, clasp or shoulder pieces; the bare neck shows below. Every
-  hairstyle wears the same hood.
-- Hoods have an open face. Bandanas sit low on the brow and stay small.
-- Two hairstyles for now: tousled (boy) and ponytail (girl).
-- Hair is slightly wider than the head. Keep the forehead bangs; trim floating bits and tufts that
-  hang past the front of the face; no hair near the mouth.
-- Hair under hats follows Cory's template sheets, one per hairstyle with a cell for every hat type
-  (`boy_tousled.png`, `girl_ponytail.png` in the project's `references/hat-hair-templates/`):
-  the painted hair in each cell is how that hairstyle looks under that hat. The girl's short tail hangs below each hat behind her neck (none
-  under the hood); under a helmet her hair hangs down behind her shoulders and never sticks up or
-  out. A new hairstyle needs a template with every hat type; a new hat type needs a cell for every
-  hairstyle. Every hat is drawn in one of the template hat types. No seam between hat and hair.
-- The old hero (until it is replaced) shows only its own hair under a hat, cut along the hat's
-  lower edge, with the ponytail's tail cut away.
+- Gear has no art for now (see Hero): items keep their names, stats, slots, prices and job
+  requirements, and a slot shows an item's name in place of its icon. Each first job has a
+  starter armor set (hat, top, trousers, shoes; Lv 10, that job and its blends only), sold in its
+  town's shop: Warrior Squire set (Emberforge), Magician Novice set (Lumewood), Thief Footpad set
+  (Lanternfall), Archer Hunter's set (Greenbough), Pirate Deckhand set (Driftcove). Tests still
+  bring their own plain gear (`tests/fixtures/gear`) for what the game doesn't have yet.
 
 ## Weapons
 
-- Always in the front hand (nearest the viewer), on every frame: on the walk that is walk1 a,
-  walk2 b, walk3 a, walk4 b. Never moved to the back hand, not even to smooth an animation.
-- In hand on every pose except climbing, when it goes on his back.
-- Fingers over the grip; the same spot in the hand and the same angle to the forearm every frame;
-  smooth changes between frames. Never upside down, never over the face, none on level-up.
-- Drawn in front of everything except the hands; when the palm shows (the fall), in front of all.
-- The staff's holds are the model for every kind, but each kind has its own grip point. Wands are
-  gripped halfway along the shaft. Bows sit level when sitting and at their true angle when
-  crouching, with the arm drawn over the string. Guns point and shoot with the barrel along the
-  forearm. Throwing stars sit in the front fist behind the hand, points sticking out. Knuckles are a
-  big glove centred over the front fist.
-- No throw or shot effects (no projectile leaving the hand, empty fist, arrow on the string, glint or
-  punch burst).
 - No ammo for any weapon. Claws were dropped; thieves use a dagger and throwing stars.
 - Shops sell only basic weapons; better weapons come from monster drops.
-- Future dual-wield is the one exception to the front-hand rule.
 
 ## Maps and scenery
 
 - Map names show only at the top of the screen; nothing labels a map in the world.
 - Every piece of land is walkable: no arches or floating rock islands, nothing that looks like
   ground but isn't. No two exits of a map lead to the same map. Maps can be wide and multi-level.
-- Characters, NPCs, ropes and ladders draw in front of land. Portals draw in front of land and
+- Characters, NPCs, ropes and ladders draw in front of land; characters cast no shadows. Portals draw in front of land and
   scenery, behind ropes, NPCs, monsters and players; no NPC stands on a portal.
 - Portals are a blue-white light pillar on the ground, at exits and doorways, 70% opaque.
 - Platforms and land cast no shadows. Platform end caps line up with the platform. Terrace walls stop
@@ -247,7 +199,8 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
 - Painted travel leather and parchment. No fake stitching; the close X fits the style; the minimap
   frame matches the bottom bar.
 - Monster HP bars have no dragon emblem. Quest marks are a painted "!", "?" and three dots.
-- The equipment window shows the hero on a stencil with the slots around him.
+- The equipment window lays its slots out like a person (hat on top, shoes at the bottom), with
+  what the gear adds beside them.
 - No clouds on the title screen.
 - No controls box on screen, in towns or fields: the tutorial teaches the keys (its step hints
   show at the bottom), and the full list is in Settings > Controls.

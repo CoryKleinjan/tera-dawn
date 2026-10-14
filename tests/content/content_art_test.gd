@@ -38,10 +38,13 @@ func test_npcs_have_art() -> void:
 		if n.sprite_frames:
 			_frames(n.sprite_frames, w + ": sprite_frames", [&"idle"])
 
+## Every item has an icon, except gear: its art is being remade (docs/game-rules.md), so an
+## icon it has must still load.
 func test_items_have_icons() -> void:
 	for i: ItemDef in Content.items.values():
 		var w := Scan.where(i)
-		_texture(i.icon, w + ": icon")
+		if i.icon or not i is EquipDef:
+			_texture(i.icon, w + ": icon")
 		for k in i.world_frames.size():
 			_texture(i.world_frames[k], "%s: world_frames[%d]" % [w, k])
 		if i.pile_texture:
@@ -72,7 +75,6 @@ func test_climb_styles_have_textures() -> void:
 		if c:
 			_texture(c.middle, path + ": middle")
 			check(c.climb_animation in [&"rope", &"ladder"], "%s: climb_animation %s is not rope or ladder" % [path, c.climb_animation])
-			check(HeroBody.FRAMES.has_animation(c.climb_animation), "%s: hero has no %s animation" % [path, c.climb_animation])
 
 func test_biomes_have_their_art() -> void:
 	for path in Scan.files(Scan.DATA.path_join("biomes")):
@@ -130,22 +132,3 @@ func test_map_props_have_textures() -> void:
 				_texture(p.texture, "%s: props[%d].texture" % [Scan.where(m), k])
 				check_between(p.x, 0, m.width, "%s: props[%d].x" % [Scan.where(m), k])
 				check(p.scale > 0, "%s: props[%d].scale is %s" % [Scan.where(m), k, p.scale])
-
-func test_hero_has_every_animation_the_game_plays() -> void:
-	_frames(HeroBody.FRAMES, "assets/animations/hero.tres", [&"idle", &"rope", &"ladder"])
-
-## Every strip and piece picture of the hero imports with mipmaps: he shows smaller than his
-## art is cut, and the stage samples his art from them (hero.gdshader). Godot
-## imports a new picture without, so a new hero layer needs `mipmaps/generate=true` in its
-## .import file. (The fist, hair and head cut masks are read pixel by pixel, without.)
-func test_hero_art_imports_with_mipmaps() -> void:
-	var files: Array[String] = ["res://assets/sprites/characters/hero.png"]
-	for dir in ["res://assets/sprites/characters/layers/", Paperdoll.PIECE_DIR]:
-		for f in DirAccess.get_files_at(dir):
-			if f.ends_with(".png") and not (f.begins_with("fist_") or f.begins_with("haircut_") or f.begins_with("headcut_")):
-				files.append(dir + f)
-	check(files.size() > 10, "found the hero's art")
-	for f in files:
-		var cfg := ConfigFile.new()
-		if check(cfg.load(f + ".import") == OK, "%s has an .import file" % f):
-			check(cfg.get_value("params", "mipmaps/generate", false), "%s.import: mipmaps/generate=true" % f)

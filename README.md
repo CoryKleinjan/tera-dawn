@@ -3,7 +3,7 @@
 A 2D side-scrolling solo or co-op (up to four players) action RPG inspired by MapleStory, built with **Godot 4.7** for
 Steam (Windows, macOS, Linux and Steam Deck).
 
-It has an **HD-2D** look in the style of Octopath Traveler: painted sprites in a lit 3D diorama
+It has a hand-painted look: painted sprites in a lit 3D diorama
 with depth of field, tilt-shift blur, bloom, dynamic lights and shadows. Gameplay stays a flat
 2D side-scroller; only `scripts/world/stage.gd` turns the map into 3D (see
 [rendering](docs/architecture/rendering.md)). The renderer is Forward+ (Vulkan, or Direct3D 12
