@@ -12176,6 +12176,31 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cells 1 to 6 each hold one short blue magician's robe (gold trim, gold star clasp, purple sash tied at the waist) with no one wearing it. Some robes have pieces missing: a notch bitten out of the lower left hem in cells 1 and 2, and a big hole in the chest below the collar in cell 6. In every cell, paint any missing cloth back in so each robe is one complete, unbroken robe with a continuous hem, trim and outline. Keep the open neck and the split between the two front tails open, as they are. Keep everything that is there exactly as it is, in exactly the same place, size and angle. Leave empty cells empty and the rest of the background flat pure magenta #FF00FF. Paint nothing else: no hands, arms, figures or other objects. Style: match the existing painting exactly, with the warm colours and thin dark plum-brown outline of the painted villagers in the attached picture. No text."
   }
+ },
+ {
+  "id": "mshero_war_jerkin_move2_fill",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_war_jerkin_move2_fill.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 22:54Z 'Yes' to 'Should I give the jerkin the same fill for $0.07?'): fills the idle hem notch and hurt hole on a plain magenta base, like the robe fill.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/warrior/jerkin_move2_on_magenta.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cells 1 to 6 each hold one quilted tan padded warrior's jerkin (stitched rows, stand collar, toggles, brown leather belt with a brass buckle) with no one wearing it. Some have pieces missing: a notch bitten out of the lower left hem in cells 1 and 2, and a big hole in the chest below the collar in cell 6. In every cell, paint any missing cloth back in so each jerkin is one complete, unbroken jerkin with a continuous hem, quilting and outline. Keep the open neck and the split between the two front tails open, as they are. Keep everything that is there exactly as it is, in exactly the same place, size and angle. Leave empty cells empty and the rest of the background flat pure magenta #FF00FF. Paint nothing else: no hands, arms, figures or other objects. Style: match the existing painting exactly, with the warm colours and thin dark plum-brown outline of the painted villagers in the attached picture. No text."
+  }
  }
 ]
 }
