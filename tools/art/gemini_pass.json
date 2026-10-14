@@ -10788,32 +10788,6 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Each cell holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: standing, walking, walking, swinging his arm up). He faces right. In each cell, paint ONLY a small round wooden shield seen from its BACK (inner) side, strapped to the arm on the LEFT side of the shape (his back arm, the one farther from the viewer), in EVERY cell including the swing: the inside of oak planks with a cross brace, two brown leather arm straps with brass buckles and a wooden hand grip, and the iron rim showing around the edge; the shield's front face and boss are NOT visible. About the size of his chest, held at chest-to-waist height on that back arm and partly overlapping the back edge of his body, following the arm in each pose; in the swinging cell it is held at his back side near the waist. The shield may stick out past the green shape over the magenta. Paint nothing else: no hands, body or clothes. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape. Style: the warm colours, light from the upper left and thin dark plum-brown outline of the painted villagers in the second attached picture, but cleaner: smooth soft painted shading with a bright highlight, small busy painted detail. Keep the grid lines. No text."
   }
- },
- {
-  "id": "mshero_shield3_test",
-  "prompts": null,
-  "batch": "maple hero test (edit)",
-  "with": null,
-  "refs": [],
-  "save": "mshero_shield3_test.png",
-  "replaces": null,
-  "kind": "anim",
-  "stands": false,
-  "cells": [
-   2,
-   4
-  ],
-  "anchor": null,
-  "size": "2K",
-  "note": "2026-10-14 thread 'New hero' (Cory 19:39Z 'The shield should be on the other arm and behind him', answering 'repaint just the shield on his other, forward arm ($0.07)... Should I repaint the shield?'): shield2 landed on the sword arm; this one goes on the arm on the RIGHT side of the image and is drawn behind the body.",
-  "edit": {
-   "base": "/mnt/project-files/art-sheets/maple-hero/bases/silhouette_2x4.png",
-   "refs": [
-    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_body_test.png",
-    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
-   ],
-   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Each cell holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: standing, walking, walking, swinging his arm up). He faces right. In each cell, paint ONLY a small round wooden shield seen from its BACK (inner) side, strapped to the arm on the RIGHT side of the green shape (the arm nearer the right edge of the cell, toward where he is facing), NOT the arm on the left side. Inner side: oak planks with an X cross brace, a riveted leather handle and the iron rim around the edge; the front face and boss are not visible. About the size of his chest, its centre on the forearm of that right-side arm at chest-to-waist height, following that arm in each pose: in the standing cell at his right side, in the walking cells where that arm swings forward, and in the swinging cell low at the front of his chest under the raised arm. The shield will be drawn BEHIND his body, so paint it whole, overlapping the green shape and sticking out past its right edge over the magenta. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Paint nothing else: no hands, arms, body or clothes. Do not move, resize or redraw any shape. Style: the warm colours, light from the upper left and thin dark plum-brown outline of the painted villagers in the second attached picture, but cleaner: smooth soft painted shading with a bright highlight, small busy painted detail. Keep the grid lines. No text."
-  }
  }
 ]
 }
