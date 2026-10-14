@@ -42,7 +42,7 @@
 [sub_resource type="Resource" id="Balcony"]
 script = ExtResource("platform_def")
 x = 3600.0
-y = 453.0
+y = 753.0
 width = 700.0
 look = ExtResource("t_balcony_walkway")
 look_span = 0.97
@@ -51,7 +51,7 @@ look_top = 36.0
 [sub_resource type="Resource" id="Rooftop"]
 script = ExtResource("platform_def")
 x = 4500.0
-y = 504.9
+y = 804.9
 width = 900.0
 look = ExtResource("t_rooftop_lane")
 look_span = 0.97
@@ -60,29 +60,29 @@ look_top = 83.0
 [sub_resource type="Resource" id="Ladder_0"]
 script = ExtResource("climbable_def")
 x = 3640.0
-top = 453.0
-bottom = 620.0
+top = 753.0
+bottom = 920.0
 style = ExtResource("ladder")
 
 [sub_resource type="Resource" id="Ladder_1"]
 script = ExtResource("climbable_def")
 x = 4260.0
-top = 453.0
-bottom = 620.0
+top = 753.0
+bottom = 920.0
 style = ExtResource("ladder")
 
 [sub_resource type="Resource" id="Ladder_2"]
 script = ExtResource("climbable_def")
 x = 4540.0
-top = 504.9
-bottom = 620.0
+top = 804.9
+bottom = 920.0
 style = ExtResource("ladder")
 
 [sub_resource type="Resource" id="Ladder_3"]
 script = ExtResource("climbable_def")
 x = 5360.0
-top = 504.9
-bottom = 620.0
+top = 804.9
+bottom = 920.0
 style = ExtResource("ladder")
 
 [sub_resource type="Resource" id="Portal_west"]
@@ -265,13 +265,13 @@ x = 3240.0
 script = ExtResource("prop_placement")
 texture = ExtResource("t_prop_crates")
 x = 4130.0
-y = 453.0
+y = 753.0
 
 [sub_resource type="Resource" id="Prop_lamp_roof"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_lamp_post")
 x = 4660.0
-y = 504.9
+y = 804.9
 light_color = Color(1.0, 0.75, 0.44, 1.0)
 light_energy = 1.5
 light_height = 130.0
@@ -290,7 +290,7 @@ x = 2610.0
 script = ExtResource("prop_placement")
 texture = ExtResource("t_prop_chimney_pots")
 x = 5250.0
-y = 504.9
+y = 804.9
 
 [sub_resource type="Resource" id="Prop_cart"]
 script = ExtResource("prop_placement")
@@ -304,8 +304,8 @@ display_name = "Lanternfall"
 biome = ExtResource("lantern")
 variant = SubResource("Variant")
 width = 5580
-height = 700
-ground_y = 620
+height = 1000
+ground_y = 920
 lantern_spacing = 0.0
 start_x = 300.0
 platforms = Array[ExtResource("platform_def")]([SubResource("Balcony"), SubResource("Rooftop")])
