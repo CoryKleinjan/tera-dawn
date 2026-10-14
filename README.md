@@ -62,7 +62,7 @@ Settings (controls, volume, video quality) are saved in `user://settings.cfg`.
 ```sh
 tests/run_all.sh              # everything, as CI runs it on every pull request
 tests/run_all.sh inventory    # only tests whose file or name contains "inventory"
-python3 -m unittest discover -s tools/art/tests -t tools/art/tests   # art tools (numpy, Pillow)
+python3 -m unittest discover -s tools/art/tests -t tools/art/tests   # art tools (numpy, Pillow, opencv-python-headless)
 ```
 
 `run_all.sh` fails if any test fails or Godot prints a script error. It runs:

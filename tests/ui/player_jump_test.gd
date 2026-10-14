@@ -1,7 +1,8 @@
 extends TestCase
 ## Your own character's jump in a running game: coyote time after walking off a ledge and
 ## jump buffering before landing (JumpGrace), and neither changes how high you go; letting go
-## early makes a short hop, and he falls faster than he rises.
+## early makes a short hop, and he falls faster than he rises; he stays standing on a
+## platform whose top isn't a whole pixel.
 ## Runs on Dawnrise Meadow: off the right edge of the one-way platform at x 600..880, y 420,
 ## and over open floor at x 1305.
 
@@ -141,3 +142,13 @@ func test_he_falls_faster_than_he_rises() -> void:
 			down += 1
 	check(me.on_ground, "landed")
 	check(down < up, "the way down (%d ticks) is quicker than the way up (%d)" % [down, up])
+
+func test_he_stays_on_a_platform_whose_top_is_not_a_whole_pixel() -> void:
+	var deck := Platform.new(1200, 472.7, 300)
+	ui.world.platforms.append(deck)
+	ui.teleport(Vector2(1300, 440))
+	me.on_ground = false
+	await ui.ticks(30)
+	check_eq(me.platform, deck, "landed on it")
+	check(absf(me.position.y - deck.y) < 0.01, "and still stands on it (y %s)" % me.position.y)
+	ui.world.platforms.erase(deck)
