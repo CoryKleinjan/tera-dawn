@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="EquipDef" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/equip_def.gd" id="script"]
+[ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="stat_block"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/hunters_hood.png" id="icon"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="pickup"]
+
+[sub_resource type="Resource" id="stats"]
+script = ExtResource("stat_block")
+defense = 5
+
+[resource]
+script = ExtResource("script")
+id = &"hunters_hood"
+display_name = "Hunter's Hood"
+description = "A green hood for a new archer."
+icon = ExtResource("icon")
+sprite_scale = 0.36
+glow_color = Color(0.6, 0.95, 0.55, 1.0)
+pickup_effect = ExtResource("pickup")
+sell_price = 250
+slot = 1
+jobs = Array[StringName]([&"archer"])
+required_level = 10
+stats = SubResource("stats")
+variance = 1
+look_shape = &"hood"

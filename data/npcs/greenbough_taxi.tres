@@ -14,7 +14,7 @@ by = "Coach"
 [resource]
 script = ExtResource("1_npc_def")
 id = &"greenbough_taxi"
-display_name = "Coachman Hazel"
+display_name = "Coachman Thistle"
 title = "Taxi"
 sprite_frames = ExtResource("2_sprite")
 greeting = "Back to Dawnharbor? Hop on."

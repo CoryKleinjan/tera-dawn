@@ -2,7 +2,7 @@ extends TestCase
 ## The floor and platforms aren't cluttered: the biome's scattered trees, bushes, rocks and
 ## flowers stand wholly on their own land, clear of buildings, portals, NPCs, ropes and
 ## ladders, props and lanterns, never on top of each other, and only as often as the shared
-## density allows (see DecorPlacement).
+## density allows (see DecorPlacement); nothing grows on a hanging bridge.
 
 const Scan := preload("res://tests/content/content_scan.gd")
 
@@ -112,3 +112,10 @@ func test_density_can_be_set_per_map() -> void:
 	check(DecorPlacement.platform_pieces(m, _rng(m)).is_empty(), "a map with decor_density 0 has no platform scenery")
 	m.decor_density = -1.0
 	check_eq(DecorPlacement.density(m), DecorPlacement.DENSITY, "-1 uses the shared density")
+
+func test_nothing_grows_on_a_hanging_bridge() -> void:
+	for m in _outdoor():
+		for p in DecorPlacement.platform_pieces(m, _rng(m)):
+			for d in m.platforms:
+				if d.hangs and absf(p.y - d.y) < 1.0 and p.x > d.x + 1.0 and p.x < d.x + d.width - 1.0:
+					check(false, "%s: scenery stands on the bridge at x %d" % [Scan.where(m), p.x])

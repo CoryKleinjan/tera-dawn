@@ -6,9 +6,10 @@ extends TestCase
 
 const Scan := preload("res://tests/content/content_scan.gd")
 
-## The most of a building's base (game pixels) that may show below the walking line, hidden
-## by the floor's front, at any camera height: about a doorstep.
-const MAX_TUCK := 6.0
+## The most of a building's base (game pixels) that may sink below the walking line, hidden
+## by the floor's front, at any camera height: the base sink (TDStage.BASE_SINK) plus about
+## a doorstep.
+const MAX_TUCK := TDStage.BASE_SINK + 4.0
 
 ## The camera heights to check: the middle of the view at its highest, middle and lowest.
 func _centers(m: MapDef) -> Array[float]:

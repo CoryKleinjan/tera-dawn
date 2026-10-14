@@ -121,16 +121,22 @@ static func land_depth(z: float) -> float:
 		return front
 	return lerpf(front, -SCENERY_LAYER, clampf((front - z) / (front + SCENERY_DEEP), 0.0, 1.0))
 
+## Game pixels everything standing on the land sinks below its walking line, so a flat base
+## (a building, a crate) tucks behind the dips of the land's painted top edge instead of
+## showing a sliver of backdrop under it.
+const BASE_SINK := 6.0
+
 ## Stands `s` (origin at its bottom centre) on the land at `foot` (game pixels), at content
 ## depth `z`: at its land_depth, scaled so it shows as big as it would at `z`, and sunk
-## (land_sink) so its base tucks behind the land's grass edge instead of floating over it.
+## (land_sink, plus BASE_SINK) so its base tucks behind the land's grass edge instead of
+## floating over it.
 ## Pass keep_size = false for art sized for the play line (buildings).
 static func stand_on_land(s: SpriteBase3D, foot: Vector2, z: float, keep_size := true) -> void:
 	var d := land_depth(z)
 	if keep_size:
 		var cam_z := cos(deg_to_rad(PITCH)) * view_distance()
 		s.pixel_size *= (cam_z - d) / (cam_z - minf(z, d))
-	s.position = to3d(foot, d) + Vector3(0, -land_sink(d, foot.y), 0)
+	s.position = to3d(foot + Vector2(0, BASE_SINK), d) + Vector3(0, -land_sink(d, foot.y), 0)
 
 ## How far (3D units) something at depth `z` standing on land whose top is at game-y `surface`
 ## must sink so its base never shows above the land's front edge. The camera looks down on

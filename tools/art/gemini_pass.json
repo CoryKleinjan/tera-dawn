@@ -12340,6 +12340,1186 @@
     ],
     "text": "The first image is one repeating tile of the back wall inside the Pirates' Quarters, the pirates' guild hall of Driftcove, the jolly pirates' cove. Keep the two curving rope-bound hull ribs framing the left and right sides, the beam with rope bindings at the top, and the studded rail and plank panelling at the bottom EXACTLY as they are, in the same places. Repaint ONLY the plank wall between the two ribs. Remove the old porthole and the old net. Paint the wall as dark polished ship planks with warm lantern light. In the centre, a big wooden ship's wheel mounted flat on the wall with two cutlasses crossed beneath it and a brass spyglass laid across above it, all fixed flat to the wall. On each side, a long red-and-cream striped flag painted with a plain anchor (a picture only, no writing), hanging flat against the planks and fixed at top and bottom. Everything is seen straight from the front, flat against the wall, with no perspective, no top faces and no side depth; nothing ends loose in mid-air. The left and right edges of the image must join seamlessly when the tile is repeated side by side. Also repaint every edge in the image with smooth, soft, painted edges, never stair-stepped or pixelated. Paint in the same style as the second image and the rest of the wall: rich warm colours, strong light and shadow with bright highlights, visible painted texture at a fairly chunky brush scale, a thin dark outline. Painted, never pixel art. No letters, words or skulls. Same image size and layout."
    }
+  },
+ {
+  "id": "starter_warrior_shoes_boy",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_warrior_shoes_boy.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:44Z 'generate starting armor sets for each job', 02:50Z shoes matching each set, 02:50:44Z 'lets make all these images'). Wave 1: boy worn sheets, cut as the difference from body_boy.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_boy_base.png",
+   "refs": [],
+   "text": "This is an animation sheet of a young chibi boy in 12 cells (3 rows x 4 columns). In EVERY cell put sturdy red-brown leather ankle boots with a plain dull-steel toe cap and a thick dark sole, a few scuffs, the same dull red-brown as a padded quilted squire's jerkin on both of his bare feet, simple starter gear for a new warrior. They follow his feet and legs in each cell, standing on the same baseline.\nChange nothing else: his shirt, grey shorts, arms, hands, head and hair stay exactly as they are, and his legs above the footwear stay bare. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
   }
+ },
+ {
+  "id": "starter_mage_top_boy",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_mage_top_boy.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:44Z 'generate starting armor sets for each job', 02:50Z shoes matching each set, 02:50:44Z 'lets make all these images'). Wave 1: boy worn sheets, cut as the difference from body_boy.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_boy_base.png",
+   "refs": [],
+   "text": "This is an animation sheet of a young chibi boy in 12 cells (3 rows x 4 columns). In EVERY cell dress his upper body in a royal-blue cloth mage's tunic-robe (the same bright royal blue as a blue wizard's hat) with a narrow gold trim at the round neck, the sleeve ends and the hem; short sleeves to just above the elbow; the hem at mid-thigh; a plain dark-purple cloth sash tied at the waist. It is simple starter gear for a new magician: no armour plates, no emblem, no collar, no cape. It follows his pose in each cell.\nChange nothing else: his arms below the sleeves, hands, shorts, legs, bare feet, head and hair stay exactly as they are. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_mage_bottom_boy",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_mage_bottom_boy.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:44Z 'generate starting armor sets for each job', 02:50Z shoes matching each set, 02:50:44Z 'lets make all these images'). Wave 1: boy worn sheets, cut as the difference from body_boy.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_boy_base.png",
+   "refs": [],
+   "text": "This is an animation sheet of a young chibi boy in 12 cells (3 rows x 4 columns). In EVERY cell replace his grey shorts with loose dark navy-purple cloth trousers that reach down to his ankles, simple starter gear for a new magician, with a few painted folds. They follow his legs in each cell.\nChange nothing else: his shirt, arms, hands, bare feet, head and hair stay exactly as they are. No belt, no boots. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_mage_shoes_boy",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_mage_shoes_boy.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:44Z 'generate starting armor sets for each job', 02:50Z shoes matching each set, 02:50:44Z 'lets make all these images'). Wave 1: boy worn sheets, cut as the difference from body_boy.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_boy_base.png",
+   "refs": [],
+   "text": "This is an animation sheet of a young chibi boy in 12 cells (3 rows x 4 columns). In EVERY cell put soft royal-blue cloth slippers with a narrow gold trim around the opening, slightly pointed toes and thin dark soles on both of his bare feet, simple starter gear for a new magician. They follow his feet and legs in each cell, standing on the same baseline.\nChange nothing else: his shirt, grey shorts, arms, hands, head and hair stay exactly as they are, and his legs above the footwear stay bare. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_thief_top_boy",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_thief_top_boy.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:44Z 'generate starting armor sets for each job', 02:50Z shoes matching each set, 02:50:44Z 'lets make all these images'). Wave 1: boy worn sheets, cut as the difference from body_boy.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_boy_base.png",
+   "refs": [],
+   "text": "This is an animation sheet of a young chibi boy in 12 cells (3 rows x 4 columns). In EVERY cell dress his upper body in a fitted black leather thief's jerkin with short sleeves to just above the elbow, the hem at his hips, two small silver-buckled straps across the chest and silver-grey stitching. It is simple starter gear for a new thief: no armour plates, no emblem, no collar, no cape. It follows his pose in each cell.\nChange nothing else: his arms below the sleeves, hands, shorts, legs, bare feet, head and hair stay exactly as they are. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_thief_bottom_boy",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_thief_bottom_boy.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:44Z 'generate starting armor sets for each job', 02:50Z shoes matching each set, 02:50:44Z 'lets make all these images'). Wave 1: boy worn sheets, cut as the difference from body_boy.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_boy_base.png",
+   "refs": [],
+   "text": "This is an animation sheet of a young chibi boy in 12 cells (3 rows x 4 columns). In EVERY cell replace his grey shorts with snug charcoal-grey cloth trousers that reach down to his ankles, with black cloth bands wrapped just below the knees, simple starter gear for a new thief, with a few painted folds. They follow his legs in each cell.\nChange nothing else: his shirt, arms, hands, bare feet, head and hair stay exactly as they are. No belt, no boots. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_thief_shoes_boy",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_thief_shoes_boy.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:44Z 'generate starting armor sets for each job', 02:50Z shoes matching each set, 02:50:44Z 'lets make all these images'). Wave 1: boy worn sheets, cut as the difference from body_boy.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_boy_base.png",
+   "refs": [],
+   "text": "This is an animation sheet of a young chibi boy in 12 cells (3 rows x 4 columns). In EVERY cell put soft black leather boots that reach mid-shin, wrapped with thin silver-grey cords, with thin quiet soles on both of his bare feet, simple starter gear for a new thief. They follow his feet and legs in each cell, standing on the same baseline.\nChange nothing else: his shirt, grey shorts, arms, hands, head and hair stay exactly as they are, and his legs above the footwear stay bare. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_archer_top_boy",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_archer_top_boy.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:44Z 'generate starting armor sets for each job', 02:50Z shoes matching each set, 02:50:44Z 'lets make all these images'). Wave 1: boy worn sheets, cut as the difference from body_boy.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_boy_base.png",
+   "refs": [],
+   "text": "This is an animation sheet of a young chibi boy in 12 cells (3 rows x 4 columns). In EVERY cell dress his upper body in a forest-green leather archer's vest worn over his shirt (his shirt's short sleeves still show), laced at the front with brown leather cord, with a brown stitched trim along the hem at his hips. It is simple starter gear for a new archer: no armour plates, no emblem, no collar, no cape. It follows his pose in each cell.\nChange nothing else: his arms below the sleeves, hands, shorts, legs, bare feet, head and hair stay exactly as they are. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_archer_bottom_boy",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_archer_bottom_boy.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:44Z 'generate starting armor sets for each job', 02:50Z shoes matching each set, 02:50:44Z 'lets make all these images'). Wave 1: boy worn sheets, cut as the difference from body_boy.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_boy_base.png",
+   "refs": [],
+   "text": "This is an animation sheet of a young chibi boy in 12 cells (3 rows x 4 columns). In EVERY cell replace his grey shorts with warm brown cloth trousers that reach down to his ankles, with darker brown leather patches on the knees, simple starter gear for a new archer, with a few painted folds. They follow his legs in each cell.\nChange nothing else: his shirt, arms, hands, bare feet, head and hair stay exactly as they are. No belt, no boots. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_archer_shoes_boy",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_archer_shoes_boy.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:44Z 'generate starting armor sets for each job', 02:50Z shoes matching each set, 02:50:44Z 'lets make all these images'). Wave 1: boy worn sheets, cut as the difference from body_boy.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_boy_base.png",
+   "refs": [],
+   "text": "This is an animation sheet of a young chibi boy in 12 cells (3 rows x 4 columns). In EVERY cell put brown lace-up leather boots that reach mid-shin, with a forest-green cloth cuff at the top on both of his bare feet, simple starter gear for a new archer. They follow his feet and legs in each cell, standing on the same baseline.\nChange nothing else: his shirt, grey shorts, arms, hands, head and hair stay exactly as they are, and his legs above the footwear stay bare. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_pirate_top_boy",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_pirate_top_boy.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:44Z 'generate starting armor sets for each job', 02:50Z shoes matching each set, 02:50:44Z 'lets make all these images'). Wave 1: boy worn sheets, cut as the difference from body_boy.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_boy_base.png",
+   "refs": [],
+   "text": "This is an animation sheet of a young chibi boy in 12 cells (3 rows x 4 columns). In EVERY cell dress his upper body in a short deep-red pirate's coat with gold trim along every edge and a row of small gold buttons, open at the front over his shirt, short sleeves ending in folded-back gold-trimmed cuffs above the elbow, the hem at his hips. It is simple starter gear for a new pirate: no armour plates, no emblem, no collar, no cape. It follows his pose in each cell.\nChange nothing else: his arms below the sleeves, hands, shorts, legs, bare feet, head and hair stay exactly as they are. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_pirate_bottom_boy",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_pirate_bottom_boy.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:44Z 'generate starting armor sets for each job', 02:50Z shoes matching each set, 02:50:44Z 'lets make all these images'). Wave 1: boy worn sheets, cut as the difference from body_boy.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_boy_base.png",
+   "refs": [],
+   "text": "This is an animation sheet of a young chibi boy in 12 cells (3 rows x 4 columns). In EVERY cell replace his grey shorts with loose cream-and-red horizontally striped sailor trousers that end at mid-calf, simple starter gear for a new pirate, with a few painted folds. They follow his legs in each cell.\nChange nothing else: his shirt, arms, hands, bare feet, head and hair stay exactly as they are. No belt, no boots. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_pirate_shoes_boy",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_pirate_shoes_boy.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:44Z 'generate starting armor sets for each job', 02:50Z shoes matching each set, 02:50:44Z 'lets make all these images'). Wave 1: boy worn sheets, cut as the difference from body_boy.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_boy_base.png",
+   "refs": [],
+   "text": "This is an animation sheet of a young chibi boy in 12 cells (3 rows x 4 columns). In EVERY cell put tall black leather boots reaching just below the knee, with a wide folded-down cuff and a small gold buckle on the front on both of his bare feet, simple starter gear for a new pirate. They follow his feet and legs in each cell, standing on the same baseline.\nChange nothing else: his shirt, grey shorts, arms, hands, head and hair stay exactly as they are, and his legs above the footwear stay bare. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_thief_hat_boy",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_thief_hat_boy.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   2,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:44Z 'generate starting armor sets for each job', 02:50Z shoes matching each set, 02:50:44Z 'lets make all these images'). Wave 1: boy worn sheets, cut as the difference from body_boy.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/hats_boy_base.png",
+   "refs": [],
+   "text": "This sheet shows the same young chibi boy six times (2 rows x 3 columns), each with a different hat. Change ONLY row 1, cell 3 (his red bandana).\nRepaint that bandana as exactly the same bandana (the same shape, size, fit low on his brow, knot and two short tails at the back of his head) but in black cloth with a thin silver-grey stitched trim along its lower edge, simple starter gear for a new thief. Keep his hair under and around it exactly as it is painted now; draw no new hair.\nKeep his face, body, pose and outline, every other cell, the painting style, the pure magenta #FF00FF background and the cell borders exactly as they are. No text."
+  }
+ },
+ {
+  "id": "starter_warrior_top_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_warrior_top_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/warrior_top_boy_idle.png"
+   ],
+   "text": "The first image is an animation sheet of a young chibi girl with a brown ponytail in 12 cells (3 rows x 4 columns). The second image is ONE picture of a boy wearing the piece to copy. In EVERY cell dress her upper body in his top, simple starter gear for a new warrior. It must be exactly the same top the boy wears in the second image (a padded dull red-brown quilted cloth squire's jerkin with vertical stitched padding lines, a plain round neck, short sleeves to just above the elbow and the hem at her hips): the same shape, cut, length, colours, trim, buttons, stitching and details, fitted to her body. Copy only the top from the second image; do not copy his pose, face, hair or anything else.\nIt follows her pose in each cell. Change nothing else: her arms below the sleeves, hands, shorts, legs, bare feet, head, face, hair and ponytail stay exactly as they are. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_warrior_shoes_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_warrior_shoes_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/warrior_shoes_boy_idle.png"
+   ],
+   "text": "The first image is an animation sheet of a young chibi girl with a brown ponytail in 12 cells (3 rows x 4 columns). The second image is ONE picture of a boy wearing the piece to copy. In EVERY cell put his footwear on both of her bare feet, simple starter gear for a new warrior. It must be exactly the same footwear the boy wears in the second image (sturdy red-brown leather ankle boots with a plain dull-steel toe cap and a thick dark sole, a few scuffs, the same dull red-brown as a padded quilted squire's jerkin): the same shape, cut, length, colours, trim, buttons, stitching and details, fitted to her body. Copy only the footwear from the second image; do not copy his pose, face, hair or anything else.\nThey follow her feet and legs in each cell, standing on the same baseline. Change nothing else: her shirt, grey shorts, arms, hands, head, face, hair and ponytail stay exactly as they are, and her legs above the footwear stay bare. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_mage_top_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_mage_top_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/mage_top_boy_idle.png"
+   ],
+   "text": "The first image is an animation sheet of a young chibi girl with a brown ponytail in 12 cells (3 rows x 4 columns). The second image is ONE picture of a boy wearing the piece to copy. In EVERY cell dress her upper body in his top, simple starter gear for a new magician. It must be exactly the same top the boy wears in the second image (a royal-blue cloth mage's tunic-robe (the same bright royal blue as a blue wizard's hat) with a narrow gold trim at the round neck, the sleeve ends and the hem; short sleeves to just above the elbow; the hem at mid-thigh; a plain dark-purple cloth sash tied at the waist): the same shape, cut, length, colours, trim, buttons, stitching and details, fitted to her body. Copy only the top from the second image; do not copy his pose, face, hair or anything else.\nIt follows her pose in each cell. Change nothing else: her arms below the sleeves, hands, shorts, legs, bare feet, head, face, hair and ponytail stay exactly as they are. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_mage_bottom_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_mage_bottom_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/mage_bottom_boy_idle.png"
+   ],
+   "text": "The first image is an animation sheet of a young chibi girl with a brown ponytail in 12 cells (3 rows x 4 columns). The second image is ONE picture of a boy wearing the piece to copy. In EVERY cell replace her grey shorts with his trousers, simple starter gear for a new magician. It must be exactly the same trousers the boy wears in the second image (loose dark navy-purple cloth trousers that reach down to his ankles): the same shape, cut, length, colours, trim, buttons, stitching and details, fitted to her body. Copy only the trousers from the second image; do not copy his pose, face, hair or anything else.\nThey follow her legs in each cell. Change nothing else: her shirt, arms, hands, bare feet, head, face, hair and ponytail stay exactly as they are. No belt, no boots. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_mage_shoes_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_mage_shoes_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/mage_shoes_boy_idle.png"
+   ],
+   "text": "The first image is an animation sheet of a young chibi girl with a brown ponytail in 12 cells (3 rows x 4 columns). The second image is ONE picture of a boy wearing the piece to copy. In EVERY cell put his footwear on both of her bare feet, simple starter gear for a new magician. It must be exactly the same footwear the boy wears in the second image (soft royal-blue cloth slippers with a narrow gold trim around the opening, slightly pointed toes and thin dark soles): the same shape, cut, length, colours, trim, buttons, stitching and details, fitted to her body. Copy only the footwear from the second image; do not copy his pose, face, hair or anything else.\nThey follow her feet and legs in each cell, standing on the same baseline. Change nothing else: her shirt, grey shorts, arms, hands, head, face, hair and ponytail stay exactly as they are, and her legs above the footwear stay bare. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_thief_top_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_thief_top_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/thief_top_boy_idle.png"
+   ],
+   "text": "The first image is an animation sheet of a young chibi girl with a brown ponytail in 12 cells (3 rows x 4 columns). The second image is ONE picture of a boy wearing the piece to copy. In EVERY cell dress her upper body in his top, simple starter gear for a new thief. It must be exactly the same top the boy wears in the second image (a fitted black leather thief's jerkin with short sleeves to just above the elbow, the hem at his hips, two small silver-buckled straps across the chest and silver-grey stitching): the same shape, cut, length, colours, trim, buttons, stitching and details, fitted to her body. Copy only the top from the second image; do not copy his pose, face, hair or anything else.\nIt follows her pose in each cell. Change nothing else: her arms below the sleeves, hands, shorts, legs, bare feet, head, face, hair and ponytail stay exactly as they are. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_thief_bottom_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_thief_bottom_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/thief_bottom_boy_idle.png"
+   ],
+   "text": "The first image is an animation sheet of a young chibi girl with a brown ponytail in 12 cells (3 rows x 4 columns). The second image is ONE picture of a boy wearing the piece to copy. In EVERY cell replace her grey shorts with his trousers, simple starter gear for a new thief. It must be exactly the same trousers the boy wears in the second image (snug charcoal-grey cloth trousers that reach down to his ankles, with black cloth bands wrapped just below the knees): the same shape, cut, length, colours, trim, buttons, stitching and details, fitted to her body. Copy only the trousers from the second image; do not copy his pose, face, hair or anything else.\nThey follow her legs in each cell. Change nothing else: her shirt, arms, hands, bare feet, head, face, hair and ponytail stay exactly as they are. No belt, no boots. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_thief_shoes_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_thief_shoes_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/thief_shoes_boy_idle.png"
+   ],
+   "text": "The first image is an animation sheet of a young chibi girl with a brown ponytail in 12 cells (3 rows x 4 columns). The second image is ONE picture of a boy wearing the piece to copy. In EVERY cell put his footwear on both of her bare feet, simple starter gear for a new thief. It must be exactly the same footwear the boy wears in the second image (soft black leather boots that reach mid-shin, wrapped with thin silver-grey cords, with thin quiet soles): the same shape, cut, length, colours, trim, buttons, stitching and details, fitted to her body. Copy only the footwear from the second image; do not copy his pose, face, hair or anything else.\nThey follow her feet and legs in each cell, standing on the same baseline. Change nothing else: her shirt, grey shorts, arms, hands, head, face, hair and ponytail stay exactly as they are, and her legs above the footwear stay bare. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_archer_top_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_archer_top_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/archer_top_boy_idle.png"
+   ],
+   "text": "The first image is an animation sheet of a young chibi girl with a brown ponytail in 12 cells (3 rows x 4 columns). The second image is ONE picture of a boy wearing the piece to copy. In EVERY cell dress her upper body in his top, simple starter gear for a new archer. It must be exactly the same top the boy wears in the second image (a forest-green leather archer's vest worn over his shirt (his shirt's short sleeves still show), laced at the front with brown leather cord, with a brown stitched trim along the hem at his hips): the same shape, cut, length, colours, trim, buttons, stitching and details, fitted to her body. Copy only the top from the second image; do not copy his pose, face, hair or anything else.\nIt follows her pose in each cell. Change nothing else: her arms below the sleeves, hands, shorts, legs, bare feet, head, face, hair and ponytail stay exactly as they are. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_archer_bottom_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_archer_bottom_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/archer_bottom_boy_idle.png"
+   ],
+   "text": "The first image is an animation sheet of a young chibi girl with a brown ponytail in 12 cells (3 rows x 4 columns). The second image is ONE picture of a boy wearing the piece to copy. In EVERY cell replace her grey shorts with his trousers, simple starter gear for a new archer. It must be exactly the same trousers the boy wears in the second image (warm brown cloth trousers that reach down to his ankles, with darker brown leather patches on the knees): the same shape, cut, length, colours, trim, buttons, stitching and details, fitted to her body. Copy only the trousers from the second image; do not copy his pose, face, hair or anything else.\nThey follow her legs in each cell. Change nothing else: her shirt, arms, hands, bare feet, head, face, hair and ponytail stay exactly as they are. No belt, no boots. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_archer_shoes_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_archer_shoes_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/archer_shoes_boy_idle.png"
+   ],
+   "text": "The first image is an animation sheet of a young chibi girl with a brown ponytail in 12 cells (3 rows x 4 columns). The second image is ONE picture of a boy wearing the piece to copy. In EVERY cell put his footwear on both of her bare feet, simple starter gear for a new archer. It must be exactly the same footwear the boy wears in the second image (brown lace-up leather boots that reach mid-shin, with a forest-green cloth cuff at the top): the same shape, cut, length, colours, trim, buttons, stitching and details, fitted to her body. Copy only the footwear from the second image; do not copy his pose, face, hair or anything else.\nThey follow her feet and legs in each cell, standing on the same baseline. Change nothing else: her shirt, grey shorts, arms, hands, head, face, hair and ponytail stay exactly as they are, and her legs above the footwear stay bare. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_pirate_top_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_pirate_top_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/pirate_top_boy_idle.png"
+   ],
+   "text": "The first image is an animation sheet of a young chibi girl with a brown ponytail in 12 cells (3 rows x 4 columns). The second image is ONE picture of a boy wearing the piece to copy. In EVERY cell dress her upper body in his top, simple starter gear for a new pirate. It must be exactly the same top the boy wears in the second image (a short deep-red pirate's coat with gold trim along every edge and a row of small gold buttons, open at the front over his shirt, short sleeves ending in folded-back gold-trimmed cuffs above the elbow, the hem at his hips): the same shape, cut, length, colours, trim, buttons, stitching and details, fitted to her body. Copy only the top from the second image; do not copy his pose, face, hair or anything else.\nIt follows her pose in each cell. Change nothing else: her arms below the sleeves, hands, shorts, legs, bare feet, head, face, hair and ponytail stay exactly as they are. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_pirate_bottom_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_pirate_bottom_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/pirate_bottom_boy_idle.png"
+   ],
+   "text": "The first image is an animation sheet of a young chibi girl with a brown ponytail in 12 cells (3 rows x 4 columns). The second image is ONE picture of a boy wearing the piece to copy. In EVERY cell replace her grey shorts with his trousers, simple starter gear for a new pirate. It must be exactly the same trousers the boy wears in the second image (loose cream-and-red horizontally striped sailor trousers that end at mid-calf): the same shape, cut, length, colours, trim, buttons, stitching and details, fitted to her body. Copy only the trousers from the second image; do not copy his pose, face, hair or anything else.\nThey follow her legs in each cell. Change nothing else: her shirt, arms, hands, bare feet, head, face, hair and ponytail stay exactly as they are. No belt, no boots. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_pirate_shoes_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_pirate_shoes_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/pirate_shoes_boy_idle.png"
+   ],
+   "text": "The first image is an animation sheet of a young chibi girl with a brown ponytail in 12 cells (3 rows x 4 columns). The second image is ONE picture of a boy wearing the piece to copy. In EVERY cell put his footwear on both of her bare feet, simple starter gear for a new pirate. It must be exactly the same footwear the boy wears in the second image (tall black leather boots reaching just below the knee, with a wide folded-down cuff and a small gold buckle on the front): the same shape, cut, length, colours, trim, buttons, stitching and details, fitted to her body. Copy only the footwear from the second image; do not copy his pose, face, hair or anything else.\nThey follow her feet and legs in each cell, standing on the same baseline. Change nothing else: her shirt, grey shorts, arms, hands, head, face, hair and ponytail stay exactly as they are, and her legs above the footwear stay bare. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_thief_hat_girl",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_thief_hat_girl.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   2,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:50:44Z 'lets make all these images'; 03:20Z 'go ahead with the girls version'). Wave 2: girl worn sheets, matched to the boy's piece (his idle cell attached), cut as the difference from body_girl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/hats_girl_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/starter-armor/refs/thief_hat_boy_cell.png"
+   ],
+   "text": "The first image shows the same young chibi girl six times (2 rows x 3 columns), each with a different hat. Change ONLY row 1, cell 3 (her red bandana).\nRepaint that bandana as exactly the same bandana the boy wears in the second image: black cloth with a thin silver-grey stitched trim along its lower edge, the same shape, size, fit low on the brow, knot and two short tails at the back of the head, fitted to her head. Copy only the bandana; do not copy his face or hair. Keep her hair under and around it, and her short tail below it, exactly as they are painted now; draw no new hair.\nKeep her face, body, pose and outline, every other cell, the painting style, the pure magenta #FF00FF background and the cell borders exactly as they are. No text."
+  }
+ },
+ {
+  "id": "starter_warrior_hat_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_warrior_hat_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/warrior_hat_boy_cell.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a low rounded steel helm with a riveted brim band, a nose guard and small cheek guards. Paint ONLY that hat on its own as the game's inventory icon. Show the hat on its own, as it sits on a head, seen from the front, with nothing under it (no head, face or hair). It must be exactly the same hat: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_warrior_top_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_warrior_top_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/warrior_top_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a a padded dull red-brown quilted cloth squire's jerkin with vertical stitched padding lines, a plain round neck, short sleeves, a few worn patches. Paint ONLY that top on its own as the game's inventory icon. Show it from the front as if it stands upright on an invisible body, with nothing inside it (no body, arms, head or shirt under it). It must be exactly the same top: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_warrior_bottom_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_warrior_bottom_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/warrior_bottom_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a dark charcoal cloth trousers to the ankles with slightly worn knees. Paint ONLY that pair of trousers on its own as the game's inventory icon. Show them from the front as if worn by an invisible body, with nothing inside them (no legs or feet).It must be exactly the same pair of trousers: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_warrior_shoes_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_warrior_shoes_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/warrior_shoes_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a sturdy red-brown leather ankle boots with a plain dull-steel toe cap and a thick dark sole, a few scuffs, the same dull red-brown as a padded quilted squire's jerkin. Paint ONLY that pair of shoes on its own as the game's inventory icon. Show the pair standing side by side, seen from the front-side. It must be exactly the same pair of shoes: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_mage_hat_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_mage_hat_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/mage_hat_boy_cell.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a tall pointed blue wizard's hat with a wide brim, a dark purple band and a slightly bent tip. Paint ONLY that hat on its own as the game's inventory icon. Show the hat on its own, as it sits on a head, seen from the front, with nothing under it (no head, face or hair). It must be exactly the same hat: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_mage_top_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_mage_top_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/mage_top_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a a royal-blue cloth mage's tunic-robe (the same bright royal blue as a blue wizard's hat) with a narrow gold trim at the round neck, the sleeve ends and the hem; short sleeves to just above the elbow; the hem at mid-thigh; a plain dark-purple cloth sash tied at the waist. Paint ONLY that top on its own as the game's inventory icon. Show it from the front as if it stands upright on an invisible body, with nothing inside it (no body, arms, head or shirt under it). It must be exactly the same top: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_mage_bottom_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_mage_bottom_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/mage_bottom_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a loose dark navy-purple cloth trousers that reach down to his ankles. Paint ONLY that pair of trousers on its own as the game's inventory icon. Show them from the front as if worn by an invisible body, with nothing inside them (no legs or feet).It must be exactly the same pair of trousers: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_mage_shoes_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_mage_shoes_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/mage_shoes_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a soft royal-blue cloth slippers with a narrow gold trim around the opening, slightly pointed toes and thin dark soles. Paint ONLY that pair of shoes on its own as the game's inventory icon. Show the pair standing side by side, seen from the front-side. It must be exactly the same pair of shoes: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_thief_hat_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_thief_hat_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/thief_hat_boy_cell.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a black cloth bandana with a thin silver-grey stitched trim, its knot and two short tails. Paint ONLY that hat on its own as the game's inventory icon. Show the hat on its own, as it sits on a head, seen from the front, with nothing under it (no head, face or hair). It must be exactly the same hat: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_thief_top_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_thief_top_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/thief_top_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a a fitted black leather thief's jerkin with short sleeves to just above the elbow, the hem at his hips, two small silver-buckled straps across the chest and silver-grey stitching. Paint ONLY that top on its own as the game's inventory icon. Show it from the front as if it stands upright on an invisible body, with nothing inside it (no body, arms, head or shirt under it). It must be exactly the same top: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_thief_bottom_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_thief_bottom_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/thief_bottom_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a snug charcoal-grey cloth trousers that reach down to his ankles, with black cloth bands wrapped just below the knees. Paint ONLY that pair of trousers on its own as the game's inventory icon. Show them from the front as if worn by an invisible body, with nothing inside them (no legs or feet).It must be exactly the same pair of trousers: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_thief_shoes_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_thief_shoes_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/thief_shoes_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a soft black leather boots that reach mid-shin, wrapped with thin silver-grey cords, with thin quiet soles. Paint ONLY that pair of shoes on its own as the game's inventory icon. Show the pair standing side by side, seen from the front-side. It must be exactly the same pair of shoes: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_archer_hat_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_archer_hat_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/archer_hat_boy_cell.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a green archer's hood. Paint ONLY that hat on its own as the game's inventory icon. Show the hat on its own, as it sits on a head, seen from the front, with nothing under it (no head, face or hair). It must be exactly the same hat: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_archer_top_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_archer_top_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/archer_top_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a a forest-green leather archer's vest worn over his shirt (his shirt's short sleeves still show), laced at the front with brown leather cord, with a brown stitched trim along the hem at his hips. Paint ONLY that top on its own as the game's inventory icon. Show it from the front as if it stands upright on an invisible body, with nothing inside it (no body, arms, head or shirt under it). It must be exactly the same top: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_archer_bottom_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_archer_bottom_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/archer_bottom_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a warm brown cloth trousers that reach down to his ankles, with darker brown leather patches on the knees. Paint ONLY that pair of trousers on its own as the game's inventory icon. Show them from the front as if worn by an invisible body, with nothing inside them (no legs or feet).It must be exactly the same pair of trousers: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_archer_shoes_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_archer_shoes_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/archer_shoes_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a brown lace-up leather boots that reach mid-shin, with a forest-green cloth cuff at the top. Paint ONLY that pair of shoes on its own as the game's inventory icon. Show the pair standing side by side, seen from the front-side. It must be exactly the same pair of shoes: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_pirate_hat_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_pirate_hat_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/pirate_hat_boy_cell.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a black pirate tricorn hat with gold trim. Paint ONLY that hat on its own as the game's inventory icon. Show the hat on its own, as it sits on a head, seen from the front, with nothing under it (no head, face or hair). It must be exactly the same hat: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_pirate_top_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_pirate_top_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/pirate_top_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a a short deep-red pirate's coat with gold trim along every edge and a row of small gold buttons, open at the front over his shirt, short sleeves ending in folded-back gold-trimmed cuffs above the elbow, the hem at his hips. Paint ONLY that top on its own as the game's inventory icon. Show it from the front as if it stands upright on an invisible body, with nothing inside it (no body, arms, head or shirt under it). It must be exactly the same top: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_pirate_bottom_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_pirate_bottom_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/pirate_bottom_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a loose cream-and-red horizontally striped sailor trousers that end at mid-calf. Paint ONLY that pair of trousers on its own as the game's inventory icon. Show them from the front as if worn by an invisible body, with nothing inside them (no legs or feet).It must be exactly the same pair of trousers: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_pirate_shoes_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_pirate_shoes_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/pirate_shoes_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a tall black leather boots reaching just below the knee, with a wide folded-down cuff and a small gold buckle on the front. Paint ONLY that pair of shoes on its own as the game's inventory icon. Show the pair standing side by side, seen from the front-side. It must be exactly the same pair of shoes: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_pirate_hat_icon_2",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_pirate_hat_icon_2.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base). Redo: the first try kept the boy's whole body under the hat (broken).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/pirate_hat_boy_cell.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a black pirate tricorn hat with gold trim. Paint ONLY that hat on its own as the game's inventory icon and REMOVE the boy completely: no head, face, hair, body, shirt, shorts, arms or legs anywhere in the picture, only the hat. Show the hat seen from the front as it sits on a head, with nothing under it. It must be exactly the same tricorn: the same shape, size, black felt, gold trim and details as he wears it; no patches, no stitching repairs, no feather, no skull. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). One item only, no text."
+  }
+ }
 ]
 }

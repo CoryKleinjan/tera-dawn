@@ -1,9 +1,33 @@
-[gd_resource type="Resource" script_class="ShopDef" load_steps=7 format=3]
+[gd_resource type="Resource" script_class="ShopDef" load_steps=15 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/shop_def.gd" id="1_shop_def"]
 [ext_resource type="Script" path="res://scripts/data/shop_entry.gd" id="2_shop_entry"]
 [ext_resource type="Resource" path="res://data/items/setup/coral_seat.tres" id="s_coral_seat"]
 [ext_resource type="Resource" path="res://data/items/setup/barrel_seat.tres" id="s_barrel_seat"]
+[ext_resource type="Resource" path="res://data/items/equips/deckhand_tricorn.tres" id="e_deckhand_tricorn"]
+[ext_resource type="Resource" path="res://data/items/equips/deckhand_coat.tres" id="e_deckhand_coat"]
+[ext_resource type="Resource" path="res://data/items/equips/deckhand_trousers.tres" id="e_deckhand_trousers"]
+[ext_resource type="Resource" path="res://data/items/equips/deckhand_boots.tres" id="e_deckhand_boots"]
+
+[sub_resource type="Resource" id="Entry_deckhand_tricorn"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("e_deckhand_tricorn")
+price = 0
+
+[sub_resource type="Resource" id="Entry_deckhand_coat"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("e_deckhand_coat")
+price = 0
+
+[sub_resource type="Resource" id="Entry_deckhand_trousers"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("e_deckhand_trousers")
+price = 0
+
+[sub_resource type="Resource" id="Entry_deckhand_boots"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("e_deckhand_boots")
+price = 0
 
 [sub_resource type="Resource" id="Entry_coral_seat"]
 script = ExtResource("2_shop_entry")
@@ -19,4 +43,4 @@ price = 6000
 script = ExtResource("1_shop_def")
 id = &"shipwright"
 display_name = "Driftcove Outfitter"
-items = Array[ExtResource("2_shop_entry")]([SubResource("Entry_coral_seat"), SubResource("Entry_barrel_seat")])
+items = Array[ExtResource("2_shop_entry")]([SubResource("Entry_deckhand_tricorn"), SubResource("Entry_deckhand_coat"), SubResource("Entry_deckhand_trousers"), SubResource("Entry_deckhand_boots"), SubResource("Entry_coral_seat"), SubResource("Entry_barrel_seat")])
