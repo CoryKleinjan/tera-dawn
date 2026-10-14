@@ -11897,6 +11897,29 @@
     "refs": [],
     "text": "This sheet shows a raised wooden deck on oak trunks (top) and a rope bridge (bottom) for a flat 2D side-scrolling game, but both are drawn from slightly above, so the tops of the planks show and the posts are doubled front and back. Redraw BOTH as perfectly flat side elevations, seen exactly from the side at the height of the walkway, like an architect's elevation. TOP piece: the deck becomes ONE thin straight horizontal band: the side edge of the plank walkway (a row of plank ends seen edge-on, only a few pixels of wood grain tall) resting on the long log beam, with no plank surface visible at all; a single low railing at each far end (one post and one rail each, no second row behind); and below it three huge, tall, thick oak trunks reaching straight down from the beam to the bottom edge, about twice as tall as they are now, mossy bark with a few leafy twigs. All three trunks end on one flat straight bottom edge; remove the thin ground line under them. BOTTOM piece: the bridge becomes one thin straight horizontal walkway band (plank edges seen side-on, no plank tops) between ONE post at each end, with the two hand ropes running straight along from post to post, firmly tied, and no guy ropes, stakes or anything else. Keep the colours, wood and moss texture, painted style and dark outline. Flat pure magenta #FF00FF background everywhere outside the two pieces."
    }
+  },
+  {
+   "id": "greenbough_props_flat",
+   "prompts": null,
+   "batch": "Greenbough city: props sheet, tilted props redrawn flat",
+   "with": null,
+   "refs": [],
+   "save": "greenbough_props_flat.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    4,
+    3
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-13 thread 'Cities up to Dawnharbor's standard': eight props of greenbough_props came back with a slight 3/4 top. Only the redrawn cells get pasted into the sheet; target, arrow rack, hide frame and signpost stay as painted. Cory picked Repaint 2026-10-14 00:22Z.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/greenbough_props.png",
+    "refs": [],
+    "text": "This is a sheet of twelve props for a 2D side-scrolling game. Eight of them are drawn at a slight three-quarter angle, so the top of each one shows. Redraw ONLY these eight as perfectly flat 2D side views at eye level, like an architect's elevation, keeping each one's design, size, colours, painted style and dark outline and its place on the sheet: the stack of logs (show only the round cut log ends facing us, stacked in a neat pyramid, no log length going back), the two hay bales (only their flat front faces, no top face), the mossy planter of ferns and flowers (only its front board, the plants rising above it, no top rim or inside visible), the barrel (straight side view, its top a straight horizontal line, no oval top), the log bench (only its front side, no seat top surface), the tree stump with the axe (straight side view, its cut top a straight horizontal line, no oval top), the wheelbarrow of firewood (a straight side view with one wheel, its tray a flat side panel, firewood ends showing above it), and the apple basket (straight side view, its rim a straight horizontal line, apples and mushrooms rising above it). Each stands on ONE flat straight horizontal bottom edge with nothing under it. Keep the archery target, the arrow rack, the hide drying frame and the signpost EXACTLY as they are. Keep the grid lines and the flat pure magenta #FF00FF background."
+   }
   }
  ]
 }
