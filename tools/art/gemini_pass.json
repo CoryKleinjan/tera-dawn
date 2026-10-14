@@ -10866,6 +10866,32 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Each cell holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: standing, walking, walking, swinging his arm up). He faces right. On the feet of each green shape, paint ONLY a pair of brown leather adventurer's boots reaching to mid-shin, worn on his feet and following each foot's pose in that cell (standing, stepping, swinging): rounded toes, a darker sole, a turned-down cuff at the top and a small buckle strap. Paint nothing else: no legs above the boots, body, arms or clothes. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape. Style: the warm colours, light from the upper left and thin dark plum-brown outline of the painted villagers in the second attached picture, but cleaner: smooth soft painted shading with a bright highlight, small busy painted detail. Keep the grid lines. No text."
   }
+ },
+ {
+  "id": "mshero_sword3_test",
+  "prompts": null,
+  "batch": "maple hero test (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_sword3_test.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 19:56Z 'We shouldn't generate the weapons with a gap for the fist. Let's remake that sword with no gap. It looks fantastic outside of that'): sword2 with its grip painted whole.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/silhouette_2x4.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_sword2_test.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4), each holding one flat bright green (#00FF00) figure shape. The first attached picture is the same sheet with a sword painted in each cell; in some cells its grip is broken by a green gap where the figure's fist is. Paint exactly that same sword in exactly the same place, size and angle in every cell, but as one complete, unbroken sword: the steel blade, brass crossguard, the whole brown leather-wrapped grip painted continuously from the crossguard to the round brass pommel, with nothing missing or cut out. Paint the whole sword on top, over the green shape where they overlap; no fist or hand over it. Leave every part of each green shape the sword does not cover flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Paint nothing else: no hands, arms, body or clothes. Do not move, resize or redraw any shape. Style: the same as the sword in the first attached picture, with the warm colours and thin dark plum-brown outline of the painted villagers in the second attached picture. Keep the grid lines. No text."
+  }
  }
 ]
 }
