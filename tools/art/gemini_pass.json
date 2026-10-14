@@ -12126,6 +12126,56 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Each cell holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: standing, standing, walking, walking, jumping, flinching after a hit; cells 7 and 8 are empty and must stay empty). He faces right in a three-quarter view; his SWORD ARM is the arm on the LEFT side of the picture and his SHIELD ARM is the arm on the RIGHT side. Use the second attached picture ONLY to see the look and style of a young warrior's gear (do not copy its pose or add its figure). On each green shape, paint ONLY sturdy warrior's trousers worn on his legs from the waist to mid-shin: thick dark olive-brown cloth with reinforced knee patches and visible stitching, tucked in at the bottom where boots will go; they follow his legs in each pose. Paint nothing else: no torso, belt, feet, boots or gear. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, as if the arms were not there, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: exactly the look of the steel helmet in the second attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail. Keep the grid lines. No text, no labels."
   }
+ },
+ {
+  "id": "mshero_mag_tome_move_fill",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_mag_tome_move_fill.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 22:49Z 'I meant the white background should work for the gear too', after 'Should I fill the wand and tome for $0.14?' and the $0.21 tome/wand/robe fill ask): fills the holes on a plain magenta base (figure removed), the way the sword fill worked. Wand came out whole, so not filled.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/magician/tome_move_on_magenta.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cells 1 to 6 each hold one closed spellbook (deep purple leather cover, gold corner caps, gold star emblem, cream page edges) with a large bite missing from its cover. In every cell, paint the missing part back in so each book is one complete, unbroken closed book: a whole purple cover with all four gold corner caps, the whole gold star emblem in the middle and a continuous outline all the way round. Keep the parts that are there exactly as they are, in exactly the same place, size and angle. Leave empty cells empty and the rest of the background flat pure magenta #FF00FF. Paint nothing else: no hands, arms, figures or other objects. Style: match the existing painting exactly, with the warm colours and thin dark plum-brown outline of the painted villagers in the attached picture. No text."
+  }
+ },
+ {
+  "id": "mshero_mag_robe_move_fill",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_mag_robe_move_fill.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 22:49Z 'I meant the white background should work for the gear too', after 'Should I fill the wand and tome for $0.14?' and the $0.21 tome/wand/robe fill ask): fills the holes on a plain magenta base (figure removed), the way the sword fill worked. Wand came out whole, so not filled.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/magician/robe_move_on_magenta.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cells 1 to 6 each hold one short blue magician's robe (gold trim, gold star clasp, purple sash tied at the waist) with no one wearing it. Some robes have pieces missing: a notch bitten out of the lower left hem in cells 1 and 2, and a big hole in the chest below the collar in cell 6. In every cell, paint any missing cloth back in so each robe is one complete, unbroken robe with a continuous hem, trim and outline. Keep the open neck and the split between the two front tails open, as they are. Keep everything that is there exactly as it is, in exactly the same place, size and angle. Leave empty cells empty and the rest of the background flat pure magenta #FF00FF. Paint nothing else: no hands, arms, figures or other objects. Style: match the existing painting exactly, with the warm colours and thin dark plum-brown outline of the painted villagers in the attached picture. No text."
+  }
  }
 ]
 }
