@@ -1,136 +1,320 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=26 format=3]
+[gd_resource type="Resource" script_class="MapDef" format=3]
 
-[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
-[ext_resource type="Resource" path="res://data/biomes/coast.tres" id="2_coast"]
-[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="3_platform_def"]
-[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="4_climbable_def"]
-[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="5_portal_def"]
-[ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="6_npc_placement"]
-[ext_resource type="Script" path="res://scripts/data/building_placement.gd" id="7_building_placement"]
-[ext_resource type="Resource" path="res://data/buildings/driftcove_large.tres" id="10_driftcove_large"]
-[ext_resource type="Resource" path="res://data/buildings/driftcove_small.tres" id="11_driftcove_small"]
-[ext_resource type="Resource" path="res://data/npcs/driftcove_taxi.tres" id="12_driftcove_taxi"]
-[ext_resource type="Resource" path="res://data/npcs/driftcove_shop.tres" id="13_driftcove_shop"]
-[ext_resource type="Resource" path="res://data/npcs/storage_keeper.tres" id="14_storage_keeper"]
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="map_def"]
+[ext_resource type="Resource" path="res://data/biomes/coast.tres" id="coast"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="platform_def"]
+[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="climbable_def"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="portal_def"]
+[ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="npc_placement"]
+[ext_resource type="Script" path="res://scripts/data/building_placement.gd" id="building_placement"]
+[ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="prop_placement"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
+[ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="backdrop_layer_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/driftcove/panorama.png" id="panorama"]
+[ext_resource type="Resource" path="res://data/buildings/driftcove_boat_store.tres" id="b_boat_store"]
+[ext_resource type="Resource" path="res://data/buildings/driftcove_small.tres" id="b_small"]
+[ext_resource type="Resource" path="res://data/buildings/driftcove_large.tres" id="b_large"]
+[ext_resource type="Resource" path="res://data/buildings/driftcove_mast_lookout.tres" id="b_mast_lookout"]
+[ext_resource type="Resource" path="res://data/buildings/driftcove_captains_cabin.tres" id="b_captains_cabin"]
+[ext_resource type="Resource" path="res://data/buildings/driftcove_net_loft.tres" id="b_net_loft"]
+[ext_resource type="Resource" path="res://data/npcs/driftcove_taxi.tres" id="n_taxi"]
+[ext_resource type="Resource" path="res://data/npcs/driftcove_shop.tres" id="n_shop"]
+[ext_resource type="Resource" path="res://data/npcs/driftcove_keeper.tres" id="n_keeper"]
+[ext_resource type="Resource" path="res://data/npcs/driftcove_deckhand.tres" id="n_deckhand"]
+[ext_resource type="Resource" path="res://data/npcs/driftcove_fisher.tres" id="n_fisher"]
+[ext_resource type="Resource" path="res://data/npcs/driftcove_parrot_girl.tres" id="n_parrot_girl"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/lamp_post.png" id="t_lamp_post"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/prop_anchor.png" id="t_prop_anchor"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/prop_barrels.png" id="t_prop_barrels"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/prop_cannon.png" id="t_prop_cannon"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/prop_chest.png" id="t_prop_chest"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/prop_crates.png" id="t_prop_crates"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/prop_figurehead.png" id="t_prop_figurehead"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/prop_flag.png" id="t_prop_flag"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/prop_lobster_pot.png" id="t_prop_lobster_pot"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/prop_oar_rack.png" id="t_prop_oar_rack"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/prop_rope_coil.png" id="t_prop_rope_coil"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/prop_rowboat.png" id="t_prop_rowboat"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/prop_ship_wheel.png" id="t_prop_ship_wheel"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/hull_deck.png" id="t_hull"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/jetty.png" id="t_jetty"]
+[ext_resource type="Resource" path="res://data/climb_styles/rope_ladder.tres" id="rope_ladder"]
+
+[sub_resource type="Resource" id="Hull_deck"]
+script = ExtResource("platform_def")
+x = 2850.0
+y = 441.5
+width = 760.0
+look = ExtResource("t_hull")
+look_span = 0.9
+look_top = 54.5
+
+[sub_resource type="Resource" id="Jetty"]
+script = ExtResource("platform_def")
+x = 3700.0
+y = 507.2
+width = 420.0
+look = ExtResource("t_jetty")
+look_span = 0.9
+look_top = 35.7
+
+[sub_resource type="Resource" id="Ladder_hull_west"]
+script = ExtResource("climbable_def")
+x = 2880.0
+top = 441.5
+bottom = 620.0
+style = ExtResource("rope_ladder")
+
+[sub_resource type="Resource" id="Ladder_hull_east"]
+script = ExtResource("climbable_def")
+x = 3580.0
+top = 441.5
+bottom = 620.0
+style = ExtResource("rope_ladder")
+
+[sub_resource type="Resource" id="Ladder_jetty"]
+script = ExtResource("climbable_def")
+x = 4090.0
+top = 507.2
+bottom = 620.0
+style = ExtResource("rope_ladder")
 
 [sub_resource type="Resource" id="Portal_west"]
-script = ExtResource("5_portal_def")
+script = ExtResource("portal_def")
 x = 60.0
 platform = 0
 target_map = &"saltwind_cliffs"
 target_x = 2760.0
 
-[sub_resource type="Resource" id="Portal_mid"]
-script = ExtResource("5_portal_def")
-x = 2340.0
-platform = 0
-target_map = &"tidepools"
-target_x = 120.0
-
-[sub_resource type="Resource" id="Portal_east"]
-script = ExtResource("5_portal_def")
-x = 3011.0
-platform = 0
-target_map = &"sandy_shoals"
-target_x = 120.0
-
-[sub_resource type="Resource" id="Building_0"]
-script = ExtResource("7_building_placement")
-building = ExtResource("10_driftcove_large")
-x = 574.0
-platform = 0
-flip = true
-scale = 1.0
-tint = Color(0.92, 0.9, 0.94, 1.0)
-
-[sub_resource type="Resource" id="Building_1"]
-script = ExtResource("7_building_placement")
-building = ExtResource("11_driftcove_small")
-x = 1059.0
-platform = 0
-flip = false
-scale = 1.15
-tint = Color(1.0, 1.0, 1.0, 1.0)
-
 [sub_resource type="Resource" id="Door_store"]
-script = ExtResource("5_portal_def")
-x = 1059.0
+script = ExtResource("portal_def")
+x = 700.0
 platform = 0
 target_map = &"driftcove_store"
 target_x = 240.0
 door = true
 
-[sub_resource type="Resource" id="Building_3"]
-script = ExtResource("7_building_placement")
-building = ExtResource("10_driftcove_large")
-x = 1664.0
-platform = 0
-flip = false
-scale = 1.12
-tint = Color(1.0, 1.0, 1.0, 1.0)
-
 [sub_resource type="Resource" id="Door_hall"]
-script = ExtResource("5_portal_def")
-x = 1664.0
+script = ExtResource("portal_def")
+x = 1780.0
 platform = 0
 target_map = &"driftcove_hall"
 target_x = 240.0
 door = true
 
-[sub_resource type="Resource" id="Building_4"]
-script = ExtResource("7_building_placement")
-building = ExtResource("11_driftcove_small")
-x = 2094.0
+[sub_resource type="Resource" id="Portal_mid"]
+script = ExtResource("portal_def")
+x = 2600.0
 platform = 0
-flip = false
-scale = 0.98
-tint = Color(1.0, 0.92, 0.88, 1.0)
+target_map = &"tidepools"
+target_x = 120.0
 
-[sub_resource type="Resource" id="Building_7"]
-script = ExtResource("7_building_placement")
-building = ExtResource("10_driftcove_large")
-x = 2614.0
+[sub_resource type="Resource" id="Portal_east"]
+script = ExtResource("portal_def")
+x = 5450.0
 platform = 0
-flip = true
-scale = 1.0
-tint = Color(1.0, 0.95, 0.9, 1.0)
+target_map = &"sandy_shoals"
+target_x = 120.0
+
+[sub_resource type="Resource" id="Backdrop_picture"]
+script = ExtResource("backdrop_layer_def")
+textures = Array[Texture2D]([ExtResource("panorama")])
+mode = 2
+depth = 300.0
+screen_top = Vector2(-0.2, -0.2)
+
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+hide_layers = PackedInt32Array(0, 1, 2, 3, 4, 5, 6)
+hide_town_decor = true
+more_backdrop = Array[ExtResource("backdrop_layer_def")]([SubResource("Backdrop_picture")])
+
+[sub_resource type="Resource" id="Building_boat_store"]
+script = ExtResource("building_placement")
+building = ExtResource("b_boat_store")
+x = 700.0
+platform = 0
+
+[sub_resource type="Resource" id="Building_small"]
+script = ExtResource("building_placement")
+building = ExtResource("b_small")
+x = 1300.0
+platform = 0
+
+[sub_resource type="Resource" id="Building_large"]
+script = ExtResource("building_placement")
+building = ExtResource("b_large")
+x = 1780.0
+platform = 0
+scale = 1.15
+
+[sub_resource type="Resource" id="Building_mast_lookout"]
+script = ExtResource("building_placement")
+building = ExtResource("b_mast_lookout")
+x = 2330.0
+platform = 0
+
+[sub_resource type="Resource" id="Building_captains_cabin"]
+script = ExtResource("building_placement")
+building = ExtResource("b_captains_cabin")
+x = 4480.0
+platform = 0
+
+[sub_resource type="Resource" id="Building_net_loft"]
+script = ExtResource("building_placement")
+building = ExtResource("b_net_loft")
+x = 5100.0
+platform = 0
 
 [sub_resource type="Resource" id="Npc_taxi"]
-script = ExtResource("6_npc_placement")
-npc = ExtResource("12_driftcove_taxi")
-x = 330.0
+script = ExtResource("npc_placement")
+npc = ExtResource("n_taxi")
+x = 300.0
 platform = 0
 face = 1
 
 [sub_resource type="Resource" id="Npc_shop"]
-script = ExtResource("6_npc_placement")
-npc = ExtResource("13_driftcove_shop")
-x = 1317.0
+script = ExtResource("npc_placement")
+npc = ExtResource("n_shop")
+x = 1000.0
 platform = 0
 face = -1
 
-[sub_resource type="Resource" id="Npc_storage"]
-script = ExtResource("6_npc_placement")
-npc = ExtResource("14_storage_keeper")
-x = 1894.0
+[sub_resource type="Resource" id="Npc_keeper"]
+script = ExtResource("npc_placement")
+npc = ExtResource("n_keeper")
+x = 2090.0
 platform = 0
 face = -1
+
+[sub_resource type="Resource" id="Npc_deckhand"]
+script = ExtResource("npc_placement")
+npc = ExtResource("n_deckhand")
+x = 3230.0
+platform = 1
+face = -1
+
+[sub_resource type="Resource" id="Npc_fisher"]
+script = ExtResource("npc_placement")
+npc = ExtResource("n_fisher")
+x = 3880.0
+platform = 2
+face = 1
+
+[sub_resource type="Resource" id="Npc_parrot_girl"]
+script = ExtResource("npc_placement")
+npc = ExtResource("n_parrot_girl")
+x = 4800.0
+platform = 0
+face = -1
+
+[sub_resource type="Resource" id="Prop_0_prop_rowboat"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_rowboat")
+x = 170.0
+
+[sub_resource type="Resource" id="Prop_1_lamp_post"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_lamp_post")
+x = 420.0
+light_color = Color(1.0, 0.78, 0.48, 1.0)
+light_energy = 1.5
+light_height = 120.0
+
+[sub_resource type="Resource" id="Prop_2_prop_crates"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_crates")
+x = 1080.0
+
+[sub_resource type="Resource" id="Prop_3_prop_barrels"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_barrels")
+x = 1490.0
+
+[sub_resource type="Resource" id="Prop_4_prop_chest"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_chest")
+x = 2140.0
+
+[sub_resource type="Resource" id="Prop_5_lamp_post"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_lamp_post")
+x = 2500.0
+light_color = Color(1.0, 0.78, 0.48, 1.0)
+light_energy = 1.5
+light_height = 120.0
+
+[sub_resource type="Resource" id="Prop_6_prop_oar_rack"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_oar_rack")
+x = 2760.0
+
+[sub_resource type="Resource" id="Prop_7_prop_cannon"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_cannon")
+x = 2990.0
+y = 441.5
+
+[sub_resource type="Resource" id="Prop_8_prop_ship_wheel"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_ship_wheel")
+x = 3420.0
+y = 441.5
+
+[sub_resource type="Resource" id="Prop_9_prop_flag"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_flag")
+x = 3730.0
+y = 507.2
+
+[sub_resource type="Resource" id="Prop_10_prop_rope_coil"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_rope_coil")
+x = 3790.0
+y = 507.2
+
+[sub_resource type="Resource" id="Prop_11_prop_lobster_pot"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_lobster_pot")
+x = 3990.0
+y = 507.2
+
+[sub_resource type="Resource" id="Prop_12_prop_anchor"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_anchor")
+x = 4195.0
+
+[sub_resource type="Resource" id="Prop_13_prop_figurehead"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_figurehead")
+x = 4730.0
+
+[sub_resource type="Resource" id="Prop_14_lamp_post"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_lamp_post")
+x = 4870.0
+light_color = Color(1.0, 0.78, 0.48, 1.0)
+light_energy = 1.5
+light_height = 120.0
 
 [resource]
-script = ExtResource("1_map_def")
+script = ExtResource("map_def")
 id = &"driftcove"
 display_name = "Driftcove"
-biome = ExtResource("2_coast")
-width = 3071
+biome = ExtResource("coast")
+variant = SubResource("Variant")
+width = 5520
 height = 700
 ground_y = 620
+lantern_spacing = 0.0
 start_x = 300.0
-platforms = Array[ExtResource("3_platform_def")]([])
-climbables = Array[ExtResource("4_climbable_def")]([])
-npcs = Array[ExtResource("6_npc_placement")]([SubResource("Npc_taxi"), SubResource("Npc_shop"), SubResource("Npc_storage")])
-buildings = Array[ExtResource("7_building_placement")]([SubResource("Building_0"), SubResource("Building_1"), SubResource("Building_3"), SubResource("Building_4"), SubResource("Building_7")])
+platforms = Array[ExtResource("platform_def")]([SubResource("Hull_deck"), SubResource("Jetty")])
+climbables = Array[ExtResource("climbable_def")]([SubResource("Ladder_hull_west"), SubResource("Ladder_hull_east"), SubResource("Ladder_jetty")])
+npcs = Array[ExtResource("npc_placement")]([SubResource("Npc_taxi"), SubResource("Npc_shop"), SubResource("Npc_keeper"), SubResource("Npc_deckhand"), SubResource("Npc_fisher"), SubResource("Npc_parrot_girl")])
+props = Array[ExtResource("prop_placement")]([SubResource("Prop_0_prop_rowboat"), SubResource("Prop_1_lamp_post"), SubResource("Prop_2_prop_crates"), SubResource("Prop_3_prop_barrels"), SubResource("Prop_4_prop_chest"), SubResource("Prop_5_lamp_post"), SubResource("Prop_6_prop_oar_rack"), SubResource("Prop_7_prop_cannon"), SubResource("Prop_8_prop_ship_wheel"), SubResource("Prop_9_prop_flag"), SubResource("Prop_10_prop_rope_coil"), SubResource("Prop_11_prop_lobster_pot"), SubResource("Prop_12_prop_anchor"), SubResource("Prop_13_prop_figurehead"), SubResource("Prop_14_lamp_post")])
+buildings = Array[ExtResource("building_placement")]([SubResource("Building_boat_store"), SubResource("Building_small"), SubResource("Building_large"), SubResource("Building_mast_lookout"), SubResource("Building_captains_cabin"), SubResource("Building_net_loft")])
 region = &"driftcove"
 world_pos = Vector2(365.0, 495.0)
 town = true
 level_text = "Town"
-portals = Array[ExtResource("5_portal_def")]([SubResource("Portal_west"), SubResource("Portal_mid"), SubResource("Portal_east"), SubResource("Door_store"), SubResource("Door_hall")])
+portals = Array[ExtResource("portal_def")]([SubResource("Portal_west"), SubResource("Door_store"), SubResource("Door_hall"), SubResource("Portal_mid"), SubResource("Portal_east")])

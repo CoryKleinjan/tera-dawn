@@ -1,0 +1,67 @@
+{
+  "source": "art/source/props_driftcove.png",
+  "out_dir": "assets/sprites/tiles/driftcove",
+  "label_band": 0,
+  "inset": 0,
+  "region": [
+    0,
+    1150,
+    3072,
+    1728
+  ],
+  "grid": {
+    "rows": [
+      0,
+      578
+    ],
+    "cols": [
+      0,
+      760,
+      1540,
+      2470,
+      3072
+    ]
+  },
+  "cells": [
+    [
+      "prop_oar_rack",
+      "prop_lobster_pot",
+      "prop_rowboat",
+      "prop_flag"
+    ]
+  ],
+  "overrides": {
+    "prop_oar_rack": {
+      "scale": 0.1455,
+      "flat_bottom": true,
+      "keep": "largest"
+    },
+    "prop_lobster_pot": {
+      "scale": 0.119,
+      "flat_bottom": true,
+      "keep": "all",
+      "crop": [
+        0,
+        150,
+        780,
+        578
+      ]
+    },
+    "prop_rowboat": {
+      "scale": 0.125,
+      "flat_bottom": true,
+      "keep": "largest",
+      "crop": [
+        0,
+        150,
+        930,
+        578
+      ]
+    },
+    "prop_flag": {
+      "scale": 0.1786,
+      "flat_bottom": true,
+      "keep": "largest"
+    }
+  }
+}

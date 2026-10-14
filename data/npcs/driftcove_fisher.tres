@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/npc_driftcove_fisher.tres" id="2_sprite"]
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"driftcove_fisher"
+display_name = "Old Gil"
+title = "Fisher"
+sprite_frames = ExtResource("2_sprite")
+greeting = "Bites are good when the tide turns. Sit a while, if you're quiet."
+lines = PackedStringArray("Forty years I've fished this cove. Forty years the same crab steals my bait.", "The sea gives what it likes. Today it likes giving me boots.")
+storage = false

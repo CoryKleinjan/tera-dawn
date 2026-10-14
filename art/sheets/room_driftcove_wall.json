@@ -1,5 +1,5 @@
 {
-  "source": "art/source/room_driftcove_wall.png",
+  "source": "art/source/room_driftcove_store_wall.png",
   "detail": 1,
   "out_dir": "assets/sprites/rooms/driftcove",
   "background": [
