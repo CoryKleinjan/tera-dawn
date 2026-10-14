@@ -218,8 +218,9 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
   mark, base on the ground line, nothing cut off, stray bits, glow halos, a clear backdrop
   foreground). Results go in exactly as painted; one that fails goes to Cory as keep, repaint or
   leave out. Cleaning up a cut (background, ground line, stray bits) is fine; nothing is retouched.
-- **In game**: the town content test checks the town has everything above, its buildings are its
-  own, its NPCs stand mid-platform and its ladders sit on wall faces.
+- **In game**: the content tests check the town has its buildings, shop and storage keeper, its
+  building pictures are its own, its NPCs have their own names and stand mid-platform, and its
+  ladders stay clear of platform ends.
 
 ## Monsters and levels
 
