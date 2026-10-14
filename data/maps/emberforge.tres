@@ -41,42 +41,44 @@
 
 [sub_resource type="Resource" id="Terrace_mid"]
 script = ExtResource("platform_def")
-x = 1620.0
+x = 1641.9
 y = 781.1
-width = 560.0
+width = 516.2
 look = ExtResource("t_terrace")
+look_span = 0.6637
 
 [sub_resource type="Resource" id="Terrace_up"]
 script = ExtResource("platform_def")
-x = 4200.0
+x = 4229.7
 y = 695.7
-width = 760.0
+width = 700.6
 look = ExtResource("t_terrace")
+look_span = 0.6637
 
 [sub_resource type="Resource" id="Ladder_mid_west"]
 script = ExtResource("climbable_def")
-x = 1650.0
+x = 1686.9
 top = 781.1
 bottom = 1020.0
 style = ExtResource("ladder")
 
 [sub_resource type="Resource" id="Ladder_mid_east"]
 script = ExtResource("climbable_def")
-x = 2150.0
+x = 2113.1
 top = 781.1
 bottom = 1020.0
 style = ExtResource("ladder")
 
 [sub_resource type="Resource" id="Ladder_up_west"]
 script = ExtResource("climbable_def")
-x = 4230.0
+x = 4274.7
 top = 695.7
 bottom = 1020.0
 style = ExtResource("ladder")
 
 [sub_resource type="Resource" id="Ladder_up_east"]
 script = ExtResource("climbable_def")
-x = 4930.0
+x = 4885.3
 top = 695.7
 bottom = 1020.0
 style = ExtResource("ladder")
@@ -178,7 +180,7 @@ face = -1
 [sub_resource type="Resource" id="Npc_keeper"]
 script = ExtResource("npc_placement")
 npc = ExtResource("n_keeper")
-x = 2095.0
+x = 2050.0
 platform = 1
 face = -1
 
