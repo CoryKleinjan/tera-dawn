@@ -10554,6 +10554,32 @@
     ],
     "text": "The first image is one repeating tile of the back wall inside the Pirates' Quarters, the pirates' guild hall of Driftcove, the jolly pirates' cove. Keep the two curving rope-bound hull ribs framing the left and right sides, the beam with rope bindings at the top, and the studded rail and plank panelling at the bottom EXACTLY as they are, in the same places. Repaint ONLY the plank wall between the two ribs. Remove the old porthole and the old net. Paint the wall as dark polished ship planks with warm lantern light. In the centre, a big wooden ship's wheel mounted flat on the wall with two cutlasses crossed beneath it and a brass spyglass laid across above it, all fixed flat to the wall. On each side, a long red-and-cream striped flag painted with a plain anchor (a picture only, no writing), hanging flat against the planks and fixed at top and bottom. Everything is seen straight from the front, flat against the wall, with no perspective, no top faces and no side depth; nothing ends loose in mid-air. The left and right edges of the image must join seamlessly when the tile is repeated side by side. Also repaint every edge in the image with smooth, soft, painted edges, never stair-stepped or pixelated. Paint in the same style as the second image and the rest of the wall: rich warm colours, strong light and shadow with bright highlights, visible painted texture at a fairly chunky brush scale, a thin dark outline. Painted, never pixel art. No letters, words or skulls. Same image size and layout."
    }
+  },
+ {
+  "id": "mshero_body_test",
+  "prompts": null,
+  "batch": "maple hero test (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_test.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 18:45Z 'lets try to do it like maplestory', 18:48Z 'sure. lets see it.'): MapleStory-style test, 3 paints. Body template per frame; then items painted over its flat green silhouette.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/frames_1x4.png",
+   "refs": [
+    "/mnt/project-files/references/hero.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "Paint the game's base character, the chibi boy from the first attached picture, as a 4-frame animation: one frame in each of the 4 cells, like a MapleStory character sprite sheet. He faces right in a slight three-quarter side view in every frame, at exactly the same size, centred in his cell, with his feet on the same ground line near the bottom of every cell. Cell 1: standing idle, arms relaxed at his sides. Cell 2: walking, front leg stepping forward, back arm swinging forward. Cell 3: walking, the other leg forward, arms swapped. Cell 4: a swing, his front arm raised forward and up in a quick strike with the hand closed. Chibi proportions: a big round head about 40% of his height, small body, short legs. He is bald with a smooth head and ears showing, and his face is blank smooth skin with no eyes, eyebrows or mouth (they are added later). He wears only a plain cream short-sleeved undershirt and brown shorts, barefoot. His hands are simple rounded mitten hands with no separate fingers. Style: the warm colours, light from the upper left and thin dark plum-brown outline of the painted villagers in the second attached picture, but cleaner: smooth soft painted shading with a bright highlight, little brush texture. Keep the grid lines. No text."
   }
+ }
 ]
 }
