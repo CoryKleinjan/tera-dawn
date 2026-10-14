@@ -202,7 +202,8 @@ class Pass:
         if res["path"]:
             entry["check"] = sheet_check.check(
                 res["path"], sheet.get("cells"), sheet.get("kind", "still"),
-                self.replaced(sheet) or anchor, sheet.get("must_have"), sheet.get("stands"))
+                self.replaced(sheet) or anchor, sheet.get("must_have"), sheet.get("stands"),
+                sheet.get("town_check"))
         return entry
 
     def recheck(self):
@@ -211,7 +212,8 @@ class Pass:
             e = self.state.get(s["id"])
             if e and e.get("path") and os.path.exists(e["path"]):
                 e["check"] = sheet_check.check(e["path"], s.get("cells"), s.get("kind", "still"),
-                                               self.replaced(s) or self.anchor_result(s), s.get("must_have"), s.get("stands"))
+                                               self.replaced(s) or self.anchor_result(s), s.get("must_have"), s.get("stands"),
+                                                       s.get("town_check"))
         self.save()
         self.report()
 
@@ -431,7 +433,8 @@ class Pass:
                     entry["cost"] = each
                     s = self.by_id[sid]
                     entry["check"] = sheet_check.check(meta_s["path"], s.get("cells"), s.get("kind", "still"),
-                                                       self.replaced(s) or self.anchor_result(s), s.get("must_have"), s.get("stands"))
+                                                       self.replaced(s) or self.anchor_result(s), s.get("must_have"), s.get("stands"),
+                                                       s.get("town_check"))
                 except gemini_sheet.GeminiError as e:
                     entry = {"error": str(e).splitlines()[0][:300],
                              "cost": each if row and "response" in row else 0}
