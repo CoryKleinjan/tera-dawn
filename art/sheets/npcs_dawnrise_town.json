@@ -1,0 +1,93 @@
+{
+  "source": "art/source/npcs_dawnrise_town.png",
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/npcs_dawnrise_town",
+  "cells": [
+    [
+      ""
+    ],
+    [
+      ""
+    ],
+    [
+      "farmer_2",
+      "",
+      "baker_2"
+    ]
+  ],
+  "overrides": {
+    "farmer_2": {
+      "scale": 0.2253,
+      "keep": "largest"
+    },
+    "baker_2": {
+      "scale": 0.2253,
+      "keep": "largest"
+    }
+  },
+  "sets": {
+    "dawnrise_farmer": {
+      "frames": {
+        "idle1": "npcs_dawnrise_town:farmer_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/dawnrise_farmer.png",
+      "sprite_frames": "assets/animations/npc_dawnrise_farmer.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle1"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "dawnrise_baker": {
+      "frames": {
+        "idle1": "npcs_dawnrise_town:baker_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/dawnrise_baker.png",
+      "sprite_frames": "assets/animations/npc_dawnrise_baker.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle1"
+          ],
+          "fps": 1.5
+        }
+      }
+    }
+  },
+  "grid": {
+    "rows": [
+      0,
+      512,
+      518,
+      1030
+    ],
+    "cols": [
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        372,
+        377,
+        812
+      ]
+    ]
+  },
+  "inset": 2
+}
