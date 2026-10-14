@@ -11875,6 +11875,32 @@
     ],
     "text": "The first image is one repeating tile of the back wall inside a building in Lanternfall, the thieves' town that is always at dusk. Keep the thick horizontal wooden beam at the top, the vertical wooden post in the middle, and the carved dark wooden wainscot with waves and a crescent moon along the bottom EXACTLY as they are, in the same places. Repaint ONLY the wall panels between them, and the hanging scroll and the windows. Paint the panels as smoky ochre plaster with a few cracks and worn patches showing dark brick, lit by cool lavender dusk light with warm golden lamplight. Remove the hanging scroll and the windows. On the left panel, a round dark wooden plaque with a black mask over two crossed daggers, fixed flat to the wall. On the right panel, a long teal cloth banner painted with a big iron key (a picture only, no writing), hanging flat against the plaster and fixed at top and bottom, with one iron wall lantern beside it, lit. Everything is seen straight from the front, flat against the wall, with no perspective, no top faces and no side depth; nothing ends loose in mid-air. The left and right edges of the image must join seamlessly when the tile is repeated side by side. Paint in the same style as the second image and the rest of the wall: rich warm colours, strong light and shadow with bright highlights, visible painted texture at a fairly chunky brush scale, a thin dark outline. Painted, never pixel art. No letters or words. Same image size and layout."
    }
+  },
+  {
+   "id": "lanternfall_props_flat",
+   "prompts": null,
+   "batch": "Lanternfall city: repaint five props flat",
+   "with": null,
+   "refs": [],
+   "save": "lanternfall_props_flat.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    4,
+    3
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-14 thread 'Lanternfall up to Dawnharbor's standard': Cory 00:46Z 'Just repaint the props. Everything else is good.' (~$0.12). Only cells 1, 5, 7, 8 and 12 get pasted into lanternfall_props.png; the other cells stay as painted.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/lanternfall_props.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/lanternfall_city_thieves_den_flat.png"
+    ],
+    "text": "The first image is a sheet of twelve props for Lanternfall, the thieves' town at dusk in my 2D side-scrolling game, in 3 rows of 4 cells. Five of them are drawn at an angle, showing their top surfaces, which is wrong for my game. Repaint ONLY these five, each in its own cell, at the same size, position, colours and level of detail, as a pure flat SIDE VIEW like an architect's elevation drawing: only the front face shows, NO top surface, lid, seat or box top visible at all, every edge perfectly level or vertical, standing upright on one flat straight bottom edge. Row 1, cell 1: the stack of three wooden crates, now seen exactly from the front as flat squares (two side by side on the bottom, one centred on top), no crate tops or sides showing. Row 2, cell 1: the wooden bench, now seen exactly from the front: a straight backrest above a seat edge seen only as a thin plank edge, four straight legs, no seat surface visible. Row 2, cell 3: the canvas-covered hand cart, now seen exactly from the side: one big wheel, a flat-sided wooden cart bed with the canvas cover as an arch, its two handles level, resting on the wheel and a short leg so its bottom is level. Row 2, cell 4: the stone flower trough, now seen exactly from the front as a flat rectangle of stone with purple flowers growing up out of it, no top rim surface visible. Row 3, cell 4: the brick chimney pots, now seen exactly from the front: a flat rectangle of dark brick with three round clay pots standing on it side by side, shown only as flat upright shapes, no top openings seen from above. Keep the other seven props EXACTLY as they are, pixel for pixel. The second image shows my game's NPC characters for the art style, and the third image is a building from the same town for the palette and flat viewpoint. Painted, not pixel art: smooth painted shading with visible soft brush texture. No ground, shadow or base under any prop. No letters or words anywhere. Keep the thin dividing lines. Flat pure magenta #FF00FF background everywhere outside the props, with no magenta or pink inside them. Do not draw any characters."
+   }
   }
  ]
 }
