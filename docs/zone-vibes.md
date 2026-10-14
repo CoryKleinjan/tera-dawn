@@ -60,8 +60,11 @@ ropes, small rocks and trees. Round, soft, friendly shapes; small cute monsters.
 **Keep (music):** innocent and carefree. Town: music box, ocarina, acoustic guitar, soft strings,
 gentle bouncy tempo. Field: strings, flute, light percussion, bright skipping melody.
 
-**Town: Dawnrise Village.** Small and cosy, humbler than Dawnharbor: cottages, gardens, a warm
-welcome *(inferred)*.
+**Town: Dawnrise Village.** Small and cosy, humbler than Dawnharbor: a village green with a low
+grassy rise (ladder up) where the windmill stands. Round honey-stone and timber cottages under fat
+golden thatch, rose and peach heart shutters, flower boxes, climbing roses; no blue tiles or cream
+plaster. Buildings: Elder Rowan's house, Mira's shop (striped awning), a family cottage, the
+windmill. Rose-wound lamp posts. One 4K sunrise meadow panorama (hills, village, windmill, sea).
 
 | Sub-zone | Role | Lv | What changes | Monsters |
 | --- | --- | --- | --- | --- |
@@ -142,8 +145,11 @@ spell creatures.
 **Keep (music):** mystical and sparkling. Town: celesta, glass harmonica, harp arpeggios, wordless
 choir pads, floating. Field: celesta, harp, strings, gentle bells, dreamy but moving forward.
 
-**Town: Lumewood Sanctum.** Round pale-stone towers with blue glass and crystal domes, round
-windows; calm and scholarly, lit by crystals and glowing plants *(inferred beyond the buildings)*.
+**Town: Lumewood Sanctum.** Pale lilac-grey stone with blue glass domes and silver-blue ribs,
+round windows, violet banners and glowing blue crystals for light; calm and scholarly, under soft
+violet twilight. A street and two stone terraces (the Magicians' Library and store below, the
+dormitory and observatory above); crystal fountain, book cart, star globe and glowing-mushroom
+planters.
 
 | Sub-zone | Role | Lv | What changes | Monsters |
 | --- | --- | --- | --- | --- |
@@ -197,8 +203,11 @@ dark. Walking upright bass, muted clarinet (and muted trumpet), pizzicato string
 finger snaps, accordion and celesta touches. Town: relaxed swagger. Field: sneaky tiptoe caper.
 Boss: a fast heist-gone-wrong chase.
 
-**Town: Lanternfall.** Narrow half-timbered houses packed along lantern-lit alleys, always at dusk
-*(inferred beyond the buildings)*.
+**Town: Lanternfall.** Always at dusk, the one dusk town (Cory). Tall narrow half-timbered houses of
+smoky ochre plaster and dark soot-stained beams over dark brick, slate-blue roofs, crooked chimneys,
+iron wall lanterns, hanging signs on brackets, plum and teal awnings; no cream plaster (Dawnharbor's).
+A cobbled street with a brick-pillared balcony walkway and a rooftop lane joined by ladders; a dusk
+rooftop panorama behind.
 
 | Sub-zone | Role | Lv | What changes | Monsters |
 | --- | --- | --- | --- | --- |
@@ -224,8 +233,13 @@ and reef creatures.
 rollicking shanty feel without singing. Field: marimba, steel-string guitar, flowing strings,
 light island percussion.
 
-**Town: Driftcove.** A pirate hideout built from beached ship hulls and wreck timber in sea caves,
-sails and rope everywhere *(inferred beyond the buildings)*.
+**Town: Driftcove.** A jolly pirate hideout built from beached ship hulls and wreck timber in a
+big sea cave, lit turquoise from the cave mouth with warm lantern glow. Dark and sun-bleached wreck
+timber, patched canvas, rope, portholes, brass, barnacles and kelp, red-and-cream striped awnings
+and anchor flags (no skulls, no plaster or blue tiles). Two levels: a sandy floor plus a beached
+hull deck and a jetty reached by rope ladders. Every building its own picture (boat store, grog
+shack, Pirates' Quarters, mast lookout, captain's cabin, net loft); one 4K sea-cave panorama looks
+out on a sunrise cove with wrecks and a moored pirate ship.
 
 | Sub-zone | Role | Lv | What changes | Monsters |
 | --- | --- | --- | --- | --- |
@@ -245,7 +259,6 @@ sails and rope everywhere *(inferred beyond the buildings)*.
   their vibes before they get their own light settings.
 - Town vibes beyond the current buildings and music are inferred; confirm them, and whether each
   town follows Dawnharbor's multi-level layout later.
-- Lanternfall sits at permanent dusk while the world is endless dawn; keep it as the one dusk zone?
 - Dawnrise Isle has two boss maps (Fern Hollow and Tidal Flats); keep both?
 - Dawnharbor's fields borrow neighbouring zones' monsters until it gets its own harbour monsters
   (agreed; their look is still to be asked).

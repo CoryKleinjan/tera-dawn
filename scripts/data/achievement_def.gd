@@ -6,8 +6,8 @@ extends Resource
 ## (Achievements.measure) is at least `goal`.
 ##
 ## `id` and `steam` never change once shipped: saved characters keep the id and Steamworks
-## knows the Steam name. That's why level_50 keeps its name from when the level cap was 50,
-## though its goal is now 35, the highest level.
+## knows the Steam name. level_50 kept its name
+## while the cap was 35; its goal is level 50 again now that the cap is 100.
 
 @export var id: StringName
 ## The achievement's API name in the Steamworks app (upper case, like ACH_FIRST_HUNT).

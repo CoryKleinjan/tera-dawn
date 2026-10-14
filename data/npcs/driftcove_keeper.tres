@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/npc_driftcove_keeper.tres" id="2_sprite"]
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"driftcove_keeper"
+display_name = "Quartermaster Bess"
+title = "Storage Keeper"
+sprite_frames = ExtResource("2_sprite")
+greeting = "Bess's hold, tight as a sealed barrel. Stow it here and any keeper in any town can hand it back."
+lines = PackedStringArray("Ten Dawnshards a stack, and not a single coin goes missing.", "I keep a ledger of every crate in this cove. Every one.")
+storage = true

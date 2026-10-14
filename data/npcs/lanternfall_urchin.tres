@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/npc_lanternfall_urchin.tres" id="2_sprite"]
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"lanternfall_urchin"
+display_name = "Nim"
+title = "Street Urchin"
+sprite_frames = ExtResource("2_sprite")
+greeting = "Apple? What apple? I don't have an apple."
+lines = PackedStringArray("The rooftops are the quickest way across town. Don't tell anyone.", "One day the Den will take me in. You'll see.")

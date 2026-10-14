@@ -33,7 +33,7 @@ Shared pieces for what's inside a window (`scripts/ui/windows/`):
 ## The HUD and the title screen
 
 `TDHud` (`scripts/ui/hud.gd`) is the screen UI while playing: the status bar, overlay,
-quickslots, chat, the windows (the window manager above), the first-time hints, the game
+quickslots, chat, the windows (the window manager above), a quest step's key hint, the game
 menu (Esc) and the settings screen, and Esc and pausing (`escape`, `show_title`, `resume`).
 
 `TDTitleScreen` (`scripts/ui/title_screen.gd`, `hud.title`) is the dimmed layer over the game

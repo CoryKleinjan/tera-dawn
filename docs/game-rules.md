@@ -10,6 +10,8 @@ update this page when one changes. Each zone's own look and music are in
   strong light and shadow with bright highlights, visible painted texture at a fairly chunky brush
   scale, dark outline. The chibi boy hero (`art/reference/hero.png`) sets character proportions.
 - MapleStory sets scale, feel, UI, layout and animation; the look and names are the game's own.
+- Nothing is recoloured in code (no tint, modulate or palette swap). Another skin tone, hair colour
+  or armour colour is its own painted sheet, put together as painted.
 - High resolution everywhere, UI included: art is made and cut at about twice its on-screen size,
   never stretched or upscaled, never blurry.
 - Clean edges: soft anti-aliased cut edges, never on/off pixels, never thicker outlines, no stray
@@ -24,8 +26,6 @@ update this page when one changes. Each zone's own look and music are in
   with fingers. `art/reference/hero_look.png` (boy and girl in every pose, tunic, trousers and
   each hat type) is the approved look to match. Each body has one painted face; the creator
   picks the hairstyle (and so the body).
-- Nothing on the hero is recoloured in game. Another skin tone, hair colour or colour of armour
-  is its own painted art (the same sheet painted again in the new colours), put together as is.
 - Chibi proportions, drawn about 13% larger than the first cut.
 - Looks exactly the same in menus (equipment, creator, character select) as in game: one renderer.
 - Animation: walk only, 15% faster after about 0.4 s of moving; run frames never play. No walk bob;
@@ -97,7 +97,8 @@ update this page when one changes. Each zone's own look and music are in
 
 - The game has no equipment for now: every item, icon and worn picture was removed to be redrawn
   for the new hero (2026-10-13). The equipment system (slots, the equip window, stats) stays, and
-  the tests bring their own plain gear (`tests/fixtures/gear`).
+  the tests bring their own plain gear (`tests/fixtures/gear`). New gear starts fresh: each piece
+  is painted worn and as a matching icon; the old icons are never used.
 - An item's icon and its worn or held look are the same object: shape, colours and details. Worn
   gear is cut the same way the icons are, keeps their detail, uses the hero's near-black outline,
   and is never cut off.
@@ -120,7 +121,7 @@ update this page when one changes. Each zone's own look and music are in
   the painted hair in each cell is how that hairstyle looks under that hat. The girl's short tail hangs below each hat behind her neck (none
   under the hood); under a helmet her hair hangs down behind her shoulders and never sticks up or
   out. A new hairstyle needs a template with every hat type; a new hat type needs a cell for every
-  hairstyle. No seam between hat and hair.
+  hairstyle. Every hat is drawn in one of the template hat types. No seam between hat and hair.
 - The old hero (until it is replaced) shows only its own hair under a hat, cut along the hat's
   lower edge, with the ponytail's tail cut away.
 
@@ -154,7 +155,8 @@ update this page when one changes. Each zone's own look and music are in
 - Platforms and land cast no shadows. Platform end caps line up with the platform. Terrace walls stop
   straight down from the bottom of the path's end stone, with the path's thin outline, standing
   straight up and down. Wall ivy hangs flush with the platform's bottom edge.
-- Ladders, ropes and vines stand straight and line up at every joint.
+- Ladders, ropes and vines stand straight and line up at every joint. Ladders sit on flat wall
+  faces and never stick out past a corner.
 - Buildings, props and decorations are flat 2D front views with a flat bottom, never a perspective
   picture cut flat. Every building is unique and at proper scale; windows, doors and props are in
   proportion across a map. Nothing (ropes, chains, cloth) ends in mid-air.
@@ -167,8 +169,14 @@ update this page when one changes. Each zone's own look and music are in
 
 ## Towns
 
-- Towns have no monsters and no grass tufts.
+- Towns have no monsters and no grass tufts. No how-to-play box in towns (the first field's
+  controls hint stays).
 - NPCs stand still at idle.
+- No duplicate NPCs anywhere in the game: every town has its own shopkeepers, storage keeper and
+  townsfolk. A character who travels (the ship's captain at both ends of the voyage, a job tutor
+  in their hall and at their Trial Ground) is one person, not a copy, and may appear in more
+  than one place.
+- Every building in a town is its own picture, painted in that town's tone.
 - Dawnharbor is the gold standard for how a city looks. Other cities keep its attention to detail
   and polish but have their own tone; they never copy Dawnharbor's look. Change Dawnharbor only
   with great care: show Cory any change to it before it goes in.
@@ -194,9 +202,9 @@ update this page when one changes. Each zone's own look and music are in
   that fits the distance, never the same move twice in a row, aim where the player is heading,
   leap to the player's platform, chain a charge or pounce into a slam, and get a second wind at
   half HP. In co-op they go for whoever has hurt them most lately.
-- Level cap Lv 35. Monster HP is 40% lower than first tuned and EXP needed per level is halved
-  (monster and quest EXP unchanged), so early levels go fast; about 40 hours to the cap was only a
-  starting reference.
+- Max level is 100; monsters and maps reach about Lv 30 so far. Monster HP is 40% lower than first
+  tuned and EXP needed per level is halved (monster and quest EXP unchanged), so early levels go
+  fast; about 40 hours to Lv 35 was only a starting reference.
 
 ## UI
 
@@ -205,6 +213,8 @@ update this page when one changes. Each zone's own look and music are in
 - Monster HP bars have no dragon emblem. Quest marks are a painted "!", "?" and three dots.
 - The equipment window shows the hero on a stencil with the slots around him.
 - No clouds on the title screen.
+- No controls box on screen, in towns or fields: the tutorial teaches the keys (its step hints
+  show at the bottom), and the full list is in Settings > Controls.
 - Skill icons are painted NPC-style badges: one bold subject (no people for Shoulder Bash or
   Rolling Dash) in a thick rounded frame of the job's colour: Beginner warm brown, Warrior
   crimson, Magician blue, Thief charcoal black with silver trim, Archer green, Pirate gold.

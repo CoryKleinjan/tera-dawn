@@ -1,0 +1,83 @@
+{
+  "source": "art/source/props_lanternfall.png",
+  "out_dir": "assets/sprites/tiles/lanternfall",
+  "label_band": 0,
+  "inset": 8,
+  "cells": [
+    [
+      "prop_crates",
+      "prop_barrel",
+      "prop_stall",
+      "prop_sacks"
+    ],
+    [
+      "prop_bench",
+      "prop_sign",
+      "",
+      ""
+    ],
+    [
+      "prop_kegs",
+      "prop_notice_board",
+      "",
+      ""
+    ]
+  ],
+  "overrides": {
+    "prop_barrel": {
+      "scale": 0.11,
+      "flat_bottom": true,
+      "keep": "largest"
+    },
+    "prop_stall": {
+      "scale": 0.15,
+      "flat_bottom": true,
+      "keep": "largest"
+    },
+    "prop_sacks": {
+      "scale": 0.1,
+      "flat_bottom": true,
+      "keep": "largest"
+    },
+    "prop_sign": {
+      "scale": 0.15,
+      "flat_bottom": true,
+      "keep": "largest"
+    },
+    "prop_kegs": {
+      "scale": 0.11,
+      "flat_bottom": true,
+      "keep": "largest"
+    },
+    "prop_notice_board": {
+      "scale": 0.13,
+      "flat_bottom": true,
+      "keep": "largest"
+    },
+    "prop_crates": {
+      "scale": 0.11,
+      "flat_bottom": true,
+      "keep": "largest"
+    },
+    "prop_bench": {
+      "scale": 0.11,
+      "flat_bottom": true,
+      "keep": "largest"
+    }
+  },
+  "grid": {
+    "rows": [
+      0,
+      576,
+      1152,
+      1728
+    ],
+    "cols": [
+      0,
+      768,
+      1536,
+      2304,
+      3072
+    ]
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "source": "art/source/npcs_driftcove_town.png",
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/npcs_driftcove_town",
+  "cells": [
+    [
+      ""
+    ],
+    [
+      ""
+    ],
+    [
+      "deckhand_2",
+      "",
+      "fisher_2",
+      "",
+      "parrot_girl_2",
+      "",
+      "keeper_2"
+    ]
+  ],
+  "overrides": {
+    "deckhand_2": {
+      "scale": 0.2253,
+      "keep": "largest"
+    },
+    "fisher_2": {
+      "scale": 0.2253,
+      "keep": "largest",
+      "blank": [
+        [
+          0,
+          120,
+          140,
+          290
+        ]
+      ]
+    },
+    "parrot_girl_2": {
+      "scale": 0.2253,
+      "keep": "largest"
+    },
+    "keeper_2": {
+      "scale": 0.2253,
+      "keep": "largest"
+    }
+  },
+  "sets": {
+    "driftcove_deckhand": {
+      "frames": {
+        "idle1": "npcs_driftcove_town:deckhand_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/driftcove_deckhand.png",
+      "sprite_frames": "assets/animations/npc_driftcove_deckhand.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle1"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "driftcove_fisher": {
+      "frames": {
+        "idle1": "npcs_driftcove_town:fisher_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/driftcove_fisher.png",
+      "sprite_frames": "assets/animations/npc_driftcove_fisher.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle1"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "driftcove_parrot_girl": {
+      "frames": {
+        "idle1": "npcs_driftcove_town:parrot_girl_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/driftcove_parrot_girl.png",
+      "sprite_frames": "assets/animations/npc_driftcove_parrot_girl.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle1"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "driftcove_keeper": {
+      "frames": {
+        "idle1": "npcs_driftcove_town:keeper_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/driftcove_keeper.png",
+      "sprite_frames": "assets/animations/npc_driftcove_keeper.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle1"
+          ],
+          "fps": 1.5
+        }
+      }
+    }
+  },
+  "grid": {
+    "rows": [
+      0,
+      513,
+      517,
+      1030
+    ],
+    "cols": [
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        376,
+        381,
+        817,
+        822,
+        1167,
+        1172,
+        1536
+      ]
+    ]
+  },
+  "inset": 2
+}

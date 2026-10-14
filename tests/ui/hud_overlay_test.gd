@@ -3,8 +3,8 @@ extends TestCase
 ## text prompt and the overlay (log, banner, party, quest tracker, buffs, fainting) all draw
 ## with something to show, and their hit tests and buttons work. Name tags fit their names,
 ## and the log, toasts and the map's sign keep clear of what's under them. The quickslots and
-## quest tracker fade over the hero, the tracker lists three quests, and the first-time hints
-## show town keys in town, fighting keys on the first field, and never over a window.
+## quest tracker fade over the hero, the tracker lists three quests, and the first-time hint
+## shows the fighting keys on the first field, never in town and never over a window.
 
 var ui: UiHelpers
 
@@ -375,55 +375,12 @@ func test_title_boxes_keep_their_hints_clear_of_the_caret() -> void:
 	check(f.placeholder_text.begins_with(UiStyle.HINT_ROOM), "room between the caret and the hint")
 	check_eq(f.alignment, HORIZONTAL_ALIGNMENT_LEFT, "left-aligned, so an empty box's caret starts before the hint")
 
-func test_first_hints_name_the_real_keys() -> void:
-	var town: String = ui.hud.hint_texts[TDHud.Hint.TOWN]
-	var field: String = ui.hud.hint_texts[TDHud.Hint.FIELD]
-	check(not field.contains("Dawn Slash"), "no skill a new character doesn't have")
-	check(field.contains("A, D, F, G… quickslots"), "the quickslot keys: %s" % field)
-	check(field.contains("%s attack" % TDStatusBar._key_name("attack")) and field.contains("%s loot" % TDStatusBar._key_name("loot")), "attack and loot: %s" % field)
-	for pair in [["K", "skills"], ["Q", "quests"], ["W", "world map"], ["O", "community"], ["L", "collection"], ["S", "character"], ["I", "inventory"]]:
-		check(town.contains("%s %s" % pair), "names %s %s" % pair)
-	check(town.contains("jump") and town.contains("talks") and town.contains("Esc menu"), "moving, talking and the menu: %s" % town)
-	check(not town.contains("attack") and not town.contains("loot") and not town.contains("quickslots"), "no fighting keys in town: %s" % town)
-
-func test_first_hints_show_the_town_keys_then_the_field_keys() -> void:
+func test_no_controls_box_for_a_new_character() -> void:
+	# the tutorial teaches the keys; the game shows no controls box of its own
 	var hud := ui.hud
 	check(ui.world.map.town, "a new character starts in a town")
 	await ui.frames(3)
-	check(hud.keys_help.visible and hud.keys_help.text == hud.hint_texts[TDHud.Hint.TOWN], "the town hint shows: %s" % hud.keys_help.text)
+	check(not hud.keys_help.visible, "no controls box in town")
 	await ui.enter_map(&"meadow", 300)
 	await ui.frames(3)
-	check(hud.keys_help.visible and hud.keys_help.text == hud.hint_texts[TDHud.Hint.FIELD], "the field hint shows on the first field")
-	hud._hint_t[TDHud.Hint.FIELD] = TDHud.FIRST_HINT_TIME
-	await ui.frames(2)
-	check(not hud.keys_help.visible, "each hint goes once its time is up")
-	await ui.enter_map(Character.START_MAP, 300)
-	await ui.frames(2)
-	check(hud.keys_help.visible and hud.keys_help.text == hud.hint_texts[TDHud.Hint.TOWN], "the town hint keeps its own time")
-
-func test_first_hints_hide_and_wait_behind_windows() -> void:
-	var hud := ui.hud
-	await ui.frames(3)
-	check(hud.keys_help.visible, "the hint shows")
-	hud.toggle_window("quests")
-	await ui.frames(1)
-	var t: float = hud._hint_t[TDHud.Hint.TOWN]
-	await ui.frames(10)
-	check(not hud.keys_help.visible, "a window hides it")
-	check_eq(hud._hint_t[TDHud.Hint.TOWN], t, "and its time waits")
-	hud.toggle_window("quests")
-	var elder: NpcDef = Content.npcs.values().filter(func(d: NpcDef) -> bool: return not Content.quests_of(d.id).is_empty())[0]
-	hud.open_dialogue(ui.npc_beside(elder))
-	await ui.frames(2)
-	check(hud.windows["dialogue"].visible and not hud.keys_help.visible, "so does a dialogue")
-	hud.close_top_window()
-	await ui.frames(2)
-	check(hud.keys_help.visible and hud._hint_t[TDHud.Hint.TOWN] > t, "back once it's closed, counting on")
-
-func test_first_hints_are_only_for_new_characters() -> void:
-	ui.world.stop(true)
-	await ui.frames(1)
-	await ui.edit(func(c: Character) -> void: c.level = 5)
-	ui.world.start()
-	await ui.frames(3)
-	check(not ui.hud.keys_help.visible, "a character past level 1 sees no first-time hint")
+	check(not hud.keys_help.visible, "nor on their first field")

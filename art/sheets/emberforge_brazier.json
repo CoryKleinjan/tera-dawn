@@ -1,0 +1,27 @@
+{
+  "source": "art/source/emberforge_brazier.png",
+  "out_dir": "assets/sprites/tiles/emberforge",
+  "label_band": 0,
+  "inset": 0,
+  "grid": {
+    "rows": [
+      0,
+      2048
+    ],
+    "cols": [
+      0,
+      1152
+    ]
+  },
+  "cells": [
+    [
+      "brazier"
+    ]
+  ],
+  "overrides": {
+    "brazier": {
+      "scale": 0.065,
+      "flat_bottom": true
+    }
+  }
+}

@@ -79,13 +79,17 @@ func test_streets_have_no_long_empty_stretches() -> void:
 	for m in _streets():
 		var levels := [0]
 		for i in m.platforms.size():
-			if m.platforms[i].solid:
+			if _stands(m.platforms[i]):
 				levels.append(i + 1)
 		for plat: int in levels:
 			var land := Vector2(0, m.width) if plat == 0 else Vector2(m.platforms[plat - 1].x, m.platforms[plat - 1].x + m.platforms[plat - 1].width)
 			var y := m.surface_y(plat)
 			var spans: Array[Vector2] = [Vector2(land.x, land.x), Vector2(land.y, land.y)]
 			spans.append_array(m.solid_spans_on(plat))
+			if plat == 0:
+				for d in m.platforms:
+					if d.look and not d.solid and not d.hangs:
+						spans.append(Vector2(d.x, d.x + d.width))
 			for b in m.buildings:
 				if b.platform == plat:
 					spans.append(b.span())
@@ -103,6 +107,11 @@ func test_streets_have_no_long_empty_stretches() -> void:
 			for s in spans:
 				check(s.x - reach <= MAX_EMPTY, "%s: x %d-%d on platform %d is empty street (%d px, want at most %d)" % [Scan.where(m), reach, s.x, plat, s.x - reach, MAX_EMPTY])
 				reach = maxf(reach, s.y)
+
+## Raised land you walk on top of: a solid terrace, or a painted deck standing on the floor
+## (its trunks fill the street under it).
+func _stands(d: PlatformDef) -> bool:
+	return d.solid or (d.look != null and not d.hangs)
 
 func test_background_houses_are_spaced_out() -> void:
 	var seen := 0

@@ -1,0 +1,23 @@
+{
+  "source": "art/source/building_driftcove_boat_store.png",
+  "art_px": 4.292,
+  "out_dir": "assets/sprites/buildings/driftcove",
+  "label_band": 0,
+  "inset": 0,
+  "grid": {
+    "rows": [
+      0,
+      1376
+    ],
+    "cols": [
+      0,
+      1433
+    ]
+  },
+  "cells": [
+    [
+      "boat_store"
+    ]
+  ],
+  "flat_bottom": true
+}

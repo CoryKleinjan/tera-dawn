@@ -1,0 +1,28 @@
+{
+  "source": "art/source/lumewood_backdrop.png",
+  "detail": 1,
+  "out_dir": "assets/sprites/backgrounds/lumewood",
+  "background": [
+    255,
+    0,
+    255
+  ],
+  "scale": 1.0,
+  "label_band": 0,
+  "inset": 0,
+  "grid": {
+    "rows": [
+      0,
+      1316
+    ],
+    "cols": [
+      0,
+      3072
+    ]
+  },
+  "cells": [
+    [
+      "panorama"
+    ]
+  ]
+}

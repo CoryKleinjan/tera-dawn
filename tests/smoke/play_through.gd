@@ -42,7 +42,7 @@ func start_game() -> void:
 	Net.server.enter_map(_me(), Character.START_MAP, Content.map(Character.START_MAP).start_x)
 	await _ticks(3)
 	_check(p.on_ground, "player starts on the ground")
-	_check(world.npcs().size() == 4, "the village has its four NPCs (Mira keeps shop indoors)")
+	_check(world.npcs().size() == 6, "the village has its six NPCs (Mira keeps shop indoors)")
 	await _ticks(5)
 	_check(world.mobs().all(func(m: TDMob) -> bool: return m.known), "the server tells the game where every monster is")
 

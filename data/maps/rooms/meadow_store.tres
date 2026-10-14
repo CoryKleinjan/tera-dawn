@@ -18,7 +18,7 @@ script = ExtResource("3_portal_def")
 x = 150.0
 platform = 0
 target_map = &"dawnrise_village"
-target_x = 1515.0
+target_x = 1520.0
 door = true
 
 [sub_resource type="Resource" id="Keeper"]
