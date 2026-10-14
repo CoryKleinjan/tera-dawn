@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShopDef" load_steps=19 format=3]
+[gd_resource type="Resource" script_class="ShopDef" load_steps=23 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/shop_def.gd" id="1_shop_def"]
 [ext_resource type="Script" path="res://scripts/data/shop_entry.gd" id="2_shop_entry"]
@@ -10,6 +10,8 @@
 [ext_resource type="Resource" path="res://data/items/equips/novice_robe.tres" id="e_novice_robe"]
 [ext_resource type="Resource" path="res://data/items/equips/novice_trousers.tres" id="e_novice_trousers"]
 [ext_resource type="Resource" path="res://data/items/equips/novice_slippers.tres" id="e_novice_slippers"]
+[ext_resource type="Resource" path="res://data/items/equips/novice_wand.tres" id="e_novice_wand"]
+[ext_resource type="Resource" path="res://data/items/equips/novice_tome.tres" id="e_novice_tome"]
 
 [sub_resource type="Resource" id="Entry_novice_hat"]
 script = ExtResource("2_shop_entry")
@@ -29,6 +31,16 @@ price = 0
 [sub_resource type="Resource" id="Entry_novice_slippers"]
 script = ExtResource("2_shop_entry")
 item = ExtResource("e_novice_slippers")
+price = 0
+
+[sub_resource type="Resource" id="Entry_novice_wand"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("e_novice_wand")
+price = 0
+
+[sub_resource type="Resource" id="Entry_novice_tome"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("e_novice_tome")
 price = 0
 
 [sub_resource type="Resource" id="Resource_13"]
@@ -55,4 +67,4 @@ price = 6000
 script = ExtResource("1_shop_def")
 id = &"arcanum"
 display_name = "Lumewood Arcanum"
-items = Array[ExtResource("2_shop_entry")]([SubResource("Entry_novice_hat"), SubResource("Entry_novice_robe"), SubResource("Entry_novice_trousers"), SubResource("Entry_novice_slippers"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Entry_crystal_chair")])
+items = Array[ExtResource("2_shop_entry")]([SubResource("Entry_novice_hat"), SubResource("Entry_novice_robe"), SubResource("Entry_novice_trousers"), SubResource("Entry_novice_slippers"), SubResource("Entry_novice_wand"), SubResource("Entry_novice_tome"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Entry_crystal_chair")])

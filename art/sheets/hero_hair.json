@@ -1,0 +1,274 @@
+{
+  "source": "art/source/hero/hair.png",
+  "out_dir": "art/build/hero/hair",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "walk1",
+      "walk2",
+      "jump",
+      "hurt",
+      "",
+      ""
+    ],
+    [
+      "swing1",
+      "swing2",
+      "swing3",
+      "cast1",
+      "cast2",
+      "crouch",
+      "sit",
+      "faint"
+    ],
+    [
+      "bow1",
+      "bow2",
+      "",
+      "throw1",
+      "throw2",
+      "throw3",
+      "pistol1",
+      "pistol2"
+    ],
+    [
+      "rope1",
+      "rope2",
+      "rope_hold",
+      "ladder1",
+      "",
+      "ladder_hold",
+      "back",
+      ""
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      675,
+      1350,
+      2025,
+      2700
+    ],
+    "cols": [
+      0,
+      600,
+      1200,
+      1800,
+      2400,
+      3000,
+      3600,
+      4200,
+      4800
+    ]
+  },
+  "inset": 0,
+  "label_band": 0,
+  "trim": false,
+  "dark_key": false,
+  "defringe": false,
+  "scale": 0.111,
+  "save": false,
+  "sets": {
+    "hero_hair": {
+      "frames": {
+        "idle1": "hero_hair:idle1",
+        "idle2": "hero_hair:idle2",
+        "walk1": "hero_hair:walk1",
+        "walk2": "hero_hair:walk2",
+        "jump": "hero_hair:jump",
+        "hurt": "hero_hair:hurt",
+        "swing1": "hero_hair:swing1",
+        "swing2": "hero_hair:swing2",
+        "swing3": "hero_hair:swing3",
+        "cast1": "hero_hair:cast1",
+        "cast2": "hero_hair:cast2",
+        "crouch": "hero_hair:crouch",
+        "sit": "hero_hair:sit",
+        "faint": "hero_hair:faint",
+        "bow1": "hero_hair:bow1",
+        "bow2": "hero_hair:bow2",
+        "throw1": "hero_hair:throw1",
+        "throw2": "hero_hair:throw2",
+        "throw3": "hero_hair:throw3",
+        "pistol1": "hero_hair:pistol1",
+        "pistol2": "hero_hair:pistol2",
+        "rope1": "hero_hair:rope1",
+        "rope2": "hero_hair:rope2",
+        "rope_hold": "hero_hair:rope_hold",
+        "ladder1": "hero_hair:ladder1",
+        "ladder_hold": "hero_hair:ladder_hold",
+        "back": "hero_hair:back"
+      },
+      "anchor": "cell",
+      "baseline": "cell",
+      "out": "assets/sprites/hero/hair.png",
+      "sprite_frames": "assets/animations/hero/hair.tres",
+      "animations": {
+        "idle1": {
+          "frames": [
+            "idle1"
+          ],
+          "fps": 1
+        },
+        "idle2": {
+          "frames": [
+            "idle2"
+          ],
+          "fps": 1
+        },
+        "walk1": {
+          "frames": [
+            "walk1"
+          ],
+          "fps": 1
+        },
+        "walk2": {
+          "frames": [
+            "walk2"
+          ],
+          "fps": 1
+        },
+        "jump": {
+          "frames": [
+            "jump"
+          ],
+          "fps": 1
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "swing1": {
+          "frames": [
+            "swing1"
+          ],
+          "fps": 1
+        },
+        "swing2": {
+          "frames": [
+            "swing2"
+          ],
+          "fps": 1
+        },
+        "swing3": {
+          "frames": [
+            "swing3"
+          ],
+          "fps": 1
+        },
+        "cast1": {
+          "frames": [
+            "cast1"
+          ],
+          "fps": 1
+        },
+        "cast2": {
+          "frames": [
+            "cast2"
+          ],
+          "fps": 1
+        },
+        "crouch": {
+          "frames": [
+            "crouch"
+          ],
+          "fps": 1
+        },
+        "sit": {
+          "frames": [
+            "sit"
+          ],
+          "fps": 1
+        },
+        "faint": {
+          "frames": [
+            "faint"
+          ],
+          "fps": 1
+        },
+        "bow1": {
+          "frames": [
+            "bow1"
+          ],
+          "fps": 1
+        },
+        "bow2": {
+          "frames": [
+            "bow2"
+          ],
+          "fps": 1
+        },
+        "throw1": {
+          "frames": [
+            "throw1"
+          ],
+          "fps": 1
+        },
+        "throw2": {
+          "frames": [
+            "throw2"
+          ],
+          "fps": 1
+        },
+        "throw3": {
+          "frames": [
+            "throw3"
+          ],
+          "fps": 1
+        },
+        "pistol1": {
+          "frames": [
+            "pistol1"
+          ],
+          "fps": 1
+        },
+        "pistol2": {
+          "frames": [
+            "pistol2"
+          ],
+          "fps": 1
+        },
+        "rope1": {
+          "frames": [
+            "rope1"
+          ],
+          "fps": 1
+        },
+        "rope2": {
+          "frames": [
+            "rope2"
+          ],
+          "fps": 1
+        },
+        "rope_hold": {
+          "frames": [
+            "rope_hold"
+          ],
+          "fps": 1
+        },
+        "ladder1": {
+          "frames": [
+            "ladder1"
+          ],
+          "fps": 1
+        },
+        "ladder_hold": {
+          "frames": [
+            "ladder_hold"
+          ],
+          "fps": 1
+        },
+        "back": {
+          "frames": [
+            "back"
+          ],
+          "fps": 1
+        }
+      }
+    }
+  }
+}

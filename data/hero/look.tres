@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="HeroLookDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/hero_look_def.gd" id="1_look"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/hero/body.tres" id="2_body"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/hero/face.tres" id="3_face"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/hero/hair.tres" id="4_hair"]
+
+[resource]
+script = ExtResource("1_look")
+body = ExtResource("2_body")
+face = ExtResource("3_face")
+hair = ExtResource("4_hair")
+animations = {
+&"attack": {"fps": 12.0, "frames": [&"swing1", &"swing2", &"swing3"], "loop": false},
+&"attack_bow": {"fps": 8.0, "frames": [&"bow1", &"bow2", &"bow1"], "loop": false},
+&"cast": {"fps": 8.0, "frames": [&"cast1", &"cast2"], "loop": false},
+&"climb_idle": {"fps": 1.0, "frames": [&"rope_hold"], "loop": true},
+&"crouch": {"fps": 1.0, "frames": [&"crouch"], "loop": true},
+&"faint": {"fps": 1.0, "frames": [&"faint"], "loop": true},
+&"gun": {"fps": 10.0, "frames": [&"pistol1", &"pistol2"], "loop": false},
+&"hurt": {"fps": 1.0, "frames": [&"hurt"], "loop": true},
+&"idle": {"fps": 1.5, "frames": [&"idle1", &"idle2"], "loop": true},
+&"jump": {"fps": 1.0, "frames": [&"jump"], "loop": true},
+&"ladder": {"fps": 4.0, "frames": [&"ladder1", &"ladder_hold"], "loop": true},
+&"rope": {"fps": 4.0, "frames": [&"rope1", &"rope2"], "loop": true},
+&"sit": {"fps": 1.0, "frames": [&"sit"], "loop": true},
+&"throw": {"fps": 12.0, "frames": [&"throw1", &"throw2", &"throw3"], "loop": false},
+&"walk": {"fps": 5.0, "frames": [&"walk1", &"walk2"], "loop": true}
+}
+same_as = {
+&"fall": &"jump",
+&"jump_apex": &"jump",
+&"land": &"idle",
+&"level_up": &"idle",
+&"ready": &"idle",
+&"slash": &"attack",
+&"turn": &"idle"
+}

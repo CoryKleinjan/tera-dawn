@@ -19,13 +19,15 @@ var job := &""
 var guild := ""
 var speech := ""
 var speech_t := 0
-## How they're drawn: their chair and pet (see HeroBody).
+## How they're drawn: their painted layers, chair and pet (see HeroBody).
 var body: HeroBody
 var companion: TDCompanion:
 	get:
 		return body.companion if body else null
 var chair: StringName = &""
 var pet: StringName = &""
+## What they wear, place -> EquipDef (drawn by their HeroBody).
+var worn := {}
 
 static func create(w: TDWorld, peer_id: int) -> TDAvatar:
 	var a := TDAvatar.new()
@@ -45,7 +47,7 @@ func apply(state: Array) -> void:
 		position = target # first sight or a portal hop: no gliding across the map
 	known = true
 
-## Takes their [name, level, job, guild, chair, pet], sent when it changes.
+## Takes their [name, level, job, guild, chair, pet, worn gear], sent when it changes.
 func apply_info(info: Array) -> void:
 	char_name = info[0]
 	level = info[1]
@@ -53,6 +55,7 @@ func apply_info(info: Array) -> void:
 	guild = str(info[3])
 	chair = StringName(str(info[4]))
 	pet = StringName(str(info[5]))
+	worn = Equipment.defs_from_ids(info[6]) if info.size() > 6 and info[6] is Dictionary else {}
 
 ## They used a skill: they make its motion (a buff or spell makes none).
 func play_skill(skill: SkillDef) -> void:
@@ -77,7 +80,8 @@ func _process(_delta: float) -> void:
 	if body == null or world == null or world.map == null:
 		return
 	companion.visible = known
-	body.draw(face, chair, pet)
+	body.visible = known
+	body.draw(face, chair, pet, animation, worn)
 
 ## Their name tag (and guild) under their feet, put in `tags` for the overlay to draw.
 func draw_tag(tags: TDNameTags, at: Vector2) -> void:

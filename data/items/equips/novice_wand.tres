@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="EquipDef" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/equip_def.gd" id="script"]
+[ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="stat_block"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="pickup"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/hero/novice_wand.tres" id="worn"]
+
+[sub_resource type="Resource" id="stats"]
+script = ExtResource("stat_block")
+attack = 8
+magic_attack = 24
+
+[resource]
+script = ExtResource("script")
+id = &"novice_wand"
+display_name = "Novice Wand"
+description = "A wooden wand tipped with a blue crystal for a new magician."
+sprite_scale = 0.36
+glow_color = Color(0.55, 0.7, 1.0, 1.0)
+pickup_effect = ExtResource("pickup")
+sell_price = 375
+slot = 0
+weapon_kind = &"wand"
+worn = ExtResource("worn")
+jobs = Array[StringName]([&"mage"])
+required_level = 10
+stats = SubResource("stats")
+variance = 1

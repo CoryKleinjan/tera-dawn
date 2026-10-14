@@ -1,0 +1,94 @@
+{
+  "source": "art/source/hero/squire_boots.png",
+  "out_dir": "art/build/hero/squire_boots",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "walk1",
+      "walk2",
+      "jump",
+      "hurt",
+      "",
+      ""
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      675
+    ],
+    "cols": [
+      0,
+      600,
+      1200,
+      1800,
+      2400,
+      3000,
+      3600,
+      4200,
+      4800
+    ]
+  },
+  "inset": 0,
+  "label_band": 0,
+  "trim": false,
+  "dark_key": false,
+  "defringe": false,
+  "scale": 0.111,
+  "save": false,
+  "sets": {
+    "hero_squire_boots": {
+      "frames": {
+        "idle1": "hero_squire_boots:idle1",
+        "idle2": "hero_squire_boots:idle2",
+        "walk1": "hero_squire_boots:walk1",
+        "walk2": "hero_squire_boots:walk2",
+        "jump": "hero_squire_boots:jump",
+        "hurt": "hero_squire_boots:hurt"
+      },
+      "anchor": "cell",
+      "baseline": "cell",
+      "out": "assets/sprites/hero/squire_boots.png",
+      "sprite_frames": "assets/animations/hero/squire_boots.tres",
+      "animations": {
+        "idle1": {
+          "frames": [
+            "idle1"
+          ],
+          "fps": 1
+        },
+        "idle2": {
+          "frames": [
+            "idle2"
+          ],
+          "fps": 1
+        },
+        "walk1": {
+          "frames": [
+            "walk1"
+          ],
+          "fps": 1
+        },
+        "walk2": {
+          "frames": [
+            "walk2"
+          ],
+          "fps": 1
+        },
+        "jump": {
+          "frames": [
+            "jump"
+          ],
+          "fps": 1
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        }
+      }
+    }
+  }
+}

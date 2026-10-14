@@ -24,6 +24,16 @@ const OFFHAND_NAMES := {&"shield": "a shield", &"star": "throwing stars", &"book
 ## Pirate). Skills can need one (SkillDef.offhand). Off-hands are gear, never used up.
 @export var offhand_kind: StringName = &"shield"
 
+@export_group("Worn look")
+## Its painted layer on the hero (art/sheets/hero_<id>.json), frames named as in HeroLookDef.
+## Frames it has no painting for show the hero without it. Null shows nothing.
+@export var worn: SpriteFrames
+## A hat or helmet that covers his hair, so the hair layer isn't drawn under it.
+@export var hides_hair := false
+## An off-hand held in front of his rear arm, under his top (a book), rather than slung behind
+## him (a shield).
+@export var worn_in_front := false
+
 @export_group("Requirements")
 ## Job lines that can wear it (JobDef.family); empty for anyone.
 @export var jobs: Array[StringName] = []

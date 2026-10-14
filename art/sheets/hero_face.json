@@ -1,0 +1,221 @@
+{
+  "source": "art/source/hero/face.png",
+  "out_dir": "art/build/hero/face",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "walk1",
+      "walk2",
+      "jump",
+      "hurt",
+      "",
+      ""
+    ],
+    [
+      "swing1",
+      "swing2",
+      "swing3",
+      "cast1",
+      "cast2",
+      "crouch",
+      "sit",
+      "faint"
+    ],
+    [
+      "bow1",
+      "bow2",
+      "",
+      "throw1",
+      "throw2",
+      "throw3",
+      "pistol1",
+      "pistol2"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      675,
+      1350,
+      2025
+    ],
+    "cols": [
+      0,
+      600,
+      1200,
+      1800,
+      2400,
+      3000,
+      3600,
+      4200,
+      4800
+    ]
+  },
+  "inset": 0,
+  "label_band": 0,
+  "trim": false,
+  "dark_key": false,
+  "defringe": false,
+  "scale": 0.111,
+  "save": false,
+  "sets": {
+    "hero_face": {
+      "frames": {
+        "idle1": "hero_face:idle1",
+        "idle2": "hero_face:idle2",
+        "walk1": "hero_face:walk1",
+        "walk2": "hero_face:walk2",
+        "jump": "hero_face:jump",
+        "hurt": "hero_face:hurt",
+        "swing1": "hero_face:swing1",
+        "swing2": "hero_face:swing2",
+        "swing3": "hero_face:swing3",
+        "cast1": "hero_face:cast1",
+        "cast2": "hero_face:cast2",
+        "crouch": "hero_face:crouch",
+        "sit": "hero_face:sit",
+        "faint": "hero_face:faint",
+        "bow1": "hero_face:bow1",
+        "bow2": "hero_face:bow2",
+        "throw1": "hero_face:throw1",
+        "throw2": "hero_face:throw2",
+        "throw3": "hero_face:throw3",
+        "pistol1": "hero_face:pistol1",
+        "pistol2": "hero_face:pistol2"
+      },
+      "anchor": "cell",
+      "baseline": "cell",
+      "out": "assets/sprites/hero/face.png",
+      "sprite_frames": "assets/animations/hero/face.tres",
+      "animations": {
+        "idle1": {
+          "frames": [
+            "idle1"
+          ],
+          "fps": 1
+        },
+        "idle2": {
+          "frames": [
+            "idle2"
+          ],
+          "fps": 1
+        },
+        "walk1": {
+          "frames": [
+            "walk1"
+          ],
+          "fps": 1
+        },
+        "walk2": {
+          "frames": [
+            "walk2"
+          ],
+          "fps": 1
+        },
+        "jump": {
+          "frames": [
+            "jump"
+          ],
+          "fps": 1
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "swing1": {
+          "frames": [
+            "swing1"
+          ],
+          "fps": 1
+        },
+        "swing2": {
+          "frames": [
+            "swing2"
+          ],
+          "fps": 1
+        },
+        "swing3": {
+          "frames": [
+            "swing3"
+          ],
+          "fps": 1
+        },
+        "cast1": {
+          "frames": [
+            "cast1"
+          ],
+          "fps": 1
+        },
+        "cast2": {
+          "frames": [
+            "cast2"
+          ],
+          "fps": 1
+        },
+        "crouch": {
+          "frames": [
+            "crouch"
+          ],
+          "fps": 1
+        },
+        "sit": {
+          "frames": [
+            "sit"
+          ],
+          "fps": 1
+        },
+        "faint": {
+          "frames": [
+            "faint"
+          ],
+          "fps": 1
+        },
+        "bow1": {
+          "frames": [
+            "bow1"
+          ],
+          "fps": 1
+        },
+        "bow2": {
+          "frames": [
+            "bow2"
+          ],
+          "fps": 1
+        },
+        "throw1": {
+          "frames": [
+            "throw1"
+          ],
+          "fps": 1
+        },
+        "throw2": {
+          "frames": [
+            "throw2"
+          ],
+          "fps": 1
+        },
+        "throw3": {
+          "frames": [
+            "throw3"
+          ],
+          "fps": 1
+        },
+        "pistol1": {
+          "frames": [
+            "pistol1"
+          ],
+          "fps": 1
+        },
+        "pistol2": {
+          "frames": [
+            "pistol2"
+          ],
+          "fps": 1
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="EquipDef" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/equip_def.gd" id="script"]
+[ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="stat_block"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="pickup"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/hero/squire_sword.tres" id="worn"]
+
+[sub_resource type="Resource" id="stats"]
+script = ExtResource("stat_block")
+attack = 25
+
+[resource]
+script = ExtResource("script")
+id = &"squire_sword"
+display_name = "Squire Sword"
+description = "A plain steel short sword for a new warrior."
+sprite_scale = 0.36
+glow_color = Color(1.0, 0.55, 0.45, 1.0)
+pickup_effect = ExtResource("pickup")
+sell_price = 375
+slot = 0
+weapon_kind = &"sword"
+worn = ExtResource("worn")
+jobs = Array[StringName]([&"warrior"])
+required_level = 10
+stats = SubResource("stats")
+variance = 1
