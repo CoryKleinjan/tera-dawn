@@ -42,12 +42,16 @@ const REMOVED_LAND := ["arch", "floating_rock", "ledge_vines", "ledge_overhang",
 
 ## A platform's `look` is a piece of land standing on the floor (a tall ledge); floating rock
 ## islands and arches are gone, so a floating platform uses the biome's plain platform front.
-## Its picture reaches down to the floor.
+## Its picture reaches down to the floor, unless it hangs between two platforms (a bridge).
 func test_land_art_stands_on_the_floor() -> void:
 	for m: MapDef in Content.maps.values():
 		for i in m.platforms.size():
 			var p := m.platforms[i]
-			if p.look:
+			if p.look and p.hangs:
+				for end in [p.x, p.x + p.width]:
+					var held := m.platforms.any(func(o: PlatformDef) -> bool: return o != p and is_equal_approx(o.y, p.y) and end >= o.x - 4.0 and end <= o.x + o.width + 4.0)
+					check(held, "%s: platforms[%d] (%s) hangs from nothing at x %d; a bridge's ends meet platforms at its height" % [Scan.where(m), i, p.look.resource_path.get_file(), end])
+			elif p.look:
 				var span := TerrainBuilder.skin_span(p, m.look())
 				var gap := m.ground_y - span.y
 				check(gap <= 4.0, "%s: platforms[%d] (%s) floats %d px above the floor; land art must stand on the ground" % [Scan.where(m), i, p.look.resource_path.get_file(), gap])

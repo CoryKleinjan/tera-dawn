@@ -11563,6 +11563,363 @@
     ],
     "text": "The first image is an empty magenta canvas. On it, paint FOUR separate skill icons for my 2D side-scrolling game, laid out in 2 rows of 2, each a square badge with softly rounded corners centred in its own quarter of the canvas and fully inside it (no badge touches or runs off any canvas edge), all the same size, with a wide band of plain magenta (at least a tenth of the canvas) around and between them, not touching. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished icons from this exact set (the new icons must look like they belong on the same sheet): match their polished silver frame with thin white-silver trim, dark slate-grey inner background, soft glow behind the subject, badge size, painting style and level of detail exactly. Each icon shows ONE bold, simple object or effect (no people, no faces) filling most of the badge, painted with the same soft brushwork and chunky painted texture as the third image (NOT flat vector shapes, NOT crisp graphic-design outlines), lit brightly enough to read clearly even when the icon is shown very small. Top left and bottom left are two takes of Ricochet: one old round grey lead musket ball (a plain ball, NOT a modern pointed bullet or cartridge) zig-zagging between three small bright impact sparks, a thin glowing yellow trail tracing its bouncing path; the bottom-left take bounces the other way. Top right and bottom right are two takes of Hunter's Mark: a bold glowing red-orange hunter's target mark, a ring with four inward points, with a green-fletched arrow flying straight into its centre; the bottom-right take shows the mark larger with the arrow coming in from the other side. Strict rules: 0) Exactly FOUR square badges, each wholly inside its quarter, no labels. 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) All four frames identical polished silver with SOFTLY ROUNDED CORNERS, exactly like the third image; never square or sharp-cornered frames. 3) No letters, words, numbers or letter-like runes anywhere. 4) Flat pure magenta #FF00FF background everywhere outside the badges."
    }
+  },
+  {
+   "id": "greenbough_city_archers_lodge",
+   "prompts": null,
+   "batch": "Greenbough city test: Archers' Lodge (new building)",
+   "with": null,
+   "refs": [],
+   "save": "greenbough_city_archers_lodge.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 thread 'Cities up to Dawnharbor's standard' (Cory 22:05Z 'Yes' to the Greenbough look questions): test before the full Greenbough batch; every town's art matches its own zone tone (docs/zone-vibes.md).",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/greenbough-city/building_archers_lodge_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/greenbough-city/treehouse_ref.png",
+     "/mnt/project-files/art-sheets/greenbough-city/hut_ref.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Greenbough Village, the archers' forest village in my 2D side-scrolling game: a lively, airy hunters' village among giant oaks, lit by fresh yellow-green daylight. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, bark, moss, worn and chipped spots, slight colour variation between planks and thatch). The third and fourth images are two other buildings from the same village: match their style, palette, outline thickness and level of detail exactly, so all three clearly belong to the same village. The new building is the ARCHERS' LODGE, the grandest building in the village, a little wider than it is tall: a long two-storey lodge of honey-coloured oak planks and round log posts, standing on a low base of mossy fieldstones; a steep roof of golden straw thatch layered with green leaf thatch, with moss patches; carved leaf and antler trim along the roof beams; a big pair of antlers mounted over the entrance; a wide arched wooden double door in the middle of the ground floor; warm glowing windows with small panes and wooden shutters on both floors; two long green-and-gold cloth banners painted with a crossed bow and arrow (pictures only, no writing) hanging flat against the wall on either side of the door, fixed at top and bottom; a few arrows in a wall rack and a strung longbow hung on pegs beside the door. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: its stone base reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, grass, roots, people or shadow. 3) The door is a real doorway at ground level, centred left to right in the building. 4) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 5) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. No blue roof tiles or cream plaster (that is a different town). Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "greenbough_backdrop_panorama",
+   "prompts": null,
+   "batch": "Greenbough city: one 4K forest backdrop (test)",
+   "with": null,
+   "refs": [],
+   "save": "greenbough_backdrop_panorama.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-13 thread 'Cities up to Dawnharbor's standard' (Cory 22:05Z 'Yes' to the Greenbough look questions): test before the full Greenbough batch; every town's art matches its own zone tone (docs/zone-vibes.md).",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/greenbough-city/backdrop_panorama_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/greenbough-city/treehouse_ref.png"
+    ],
+    "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Greenbough Village, the archers' forest village in my 2D side-scrolling game: towering trees and treehouses, lively, airy and adventurous. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, dark brown outlines, and plenty of hand-painted detail (wood grain, bark, moss, worn and chipped spots, slight colour variation between planks and thatch). Paint the background in that same style, a little softer and lighter in contrast so it sits behind the characters. The third image is a treehouse from the same village: match its palette of honey oak, warm brown bark and fresh green leaves. The scene: a deep forest of GIANT oak trees in fresh daylight. Huge straight oak trunks of different widths stand across the whole picture, the nearest ones in the middle distance, others fading back layer by layer into soft leaf-green mist. High up, broad leafy canopies arch across the top of the picture, with a wide pale yellow gap of open sky glowing through the leaves in the middle. Long soft golden light shafts slant down through the canopy into the mist, and small green-gold motes float in the light. Far back between the trunks, a few small distant treehouses with straw and leaf-thatch roofs sit on platforms in the branches, with a plank bridge between two far trees, its ropes tied off to both trees. The lower part of the picture is a soft misty forest floor of ferns and bushes in the distance. Colours: deep green at the very top, pale yellow and gold where the sky shows, yellow-green sunlight, leaf-green mist. Strict rules: 1) Side-on view at eye level, as if standing on the forest floor, every trunk straight up and down. 2) No people, no characters, no animals, no birds. No clouds. 3) Nothing in the near foreground: no ground, roots, grass, logs or leaves in front; the closest trees are in the middle distance. 4) The left and right edges continue naturally (trunks, mist and leaves), nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere."
+   }
+  },
+  {
+   "id": "greenbough_city_fletcher_store",
+   "prompts": null,
+   "batch": "Greenbough city: fletcher store (new building)",
+   "with": null,
+   "refs": [],
+   "save": "greenbough_city_fletcher_store.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 thread 'Cities up to Dawnharbor's standard': Cory approved the lodge + backdrop test ('Looks great' 22:18Z) and the full Greenbough batch ('Yes' 22:18Z). Greenbough's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/greenbough-city/building_archers_lodge_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/greenbough_city_archers_lodge.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Greenbough Village, the archers' forest village in my 2D side-scrolling game: a lively, airy hunters' village among giant oaks, lit by fresh yellow-green daylight. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, bark, moss, worn and chipped spots, slight colour variation between planks and thatch). The third image is the Archers' Lodge from the same village: match its style, palette (honey oak planks, round log posts, golden straw and green leaf thatch with moss, mossy fieldstone base, green-and-gold cloth), outline thickness and level of detail exactly, so they clearly belong to the same village. The new building is the FLETCHER'S STORE, the village's general store, a little wider than it is tall and smaller than the lodge: a one-and-a-half-storey workshop of honey oak planks on a mossy fieldstone base, with a golden straw thatch roof patched with green leaf thatch; a centred wooden door at ground level with a small round window above it; a wide shop window on each side of the door with a wooden shutter propped flat open above it and a display shelf of bows and arrow bundles fixed flat against the wall beneath; a wooden sign hanging from an iron bracket beside the upper window, painted with an arrow and a feather (a picture only, no writing), its chains attached at both ends. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: everything reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, grass, roots, people or shadow. 3) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. No blue roof tiles or cream plaster (that is a different town). Nothing (rope, cloth, chain) ends loose in mid-air. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "greenbough_city_lookout",
+   "prompts": null,
+   "batch": "Greenbough city: lookout (new building)",
+   "with": null,
+   "refs": [],
+   "save": "greenbough_city_lookout.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 thread 'Cities up to Dawnharbor's standard': Cory approved the lodge + backdrop test ('Looks great' 22:18Z) and the full Greenbough batch ('Yes' 22:18Z). Greenbough's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/greenbough-city/building_tall_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/greenbough_city_archers_lodge.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Greenbough Village, the archers' forest village in my 2D side-scrolling game: a lively, airy hunters' village among giant oaks, lit by fresh yellow-green daylight. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, bark, moss, worn and chipped spots, slight colour variation between planks and thatch). The third image is the Archers' Lodge from the same village: match its style, palette (honey oak planks, round log posts, golden straw and green leaf thatch with moss, mossy fieldstone base, green-and-gold cloth), outline thickness and level of detail exactly, so they clearly belong to the same village. The new building is the village LOOKOUT TOWER, much taller than it is wide: four straight round log legs braced with crossed timbers, all four legs standing on the same ground line, carrying a small hut at the top with golden straw and leaf thatch, a plank railing around its platform, a little green-and-gold pennant on a pole on the roof, and a wooden ladder up the middle of the tower from the ground to the platform, its rails straight and touching the ground. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: everything reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, grass, roots, people or shadow. 3) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. No blue roof tiles or cream plaster (that is a different town). Nothing (rope, cloth, chain) ends loose in mid-air. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "greenbough_city_hunters_cabin",
+   "prompts": null,
+   "batch": "Greenbough city: hunters cabin (new building)",
+   "with": null,
+   "refs": [],
+   "save": "greenbough_city_hunters_cabin.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 thread 'Cities up to Dawnharbor's standard': Cory approved the lodge + backdrop test ('Looks great' 22:18Z) and the full Greenbough batch ('Yes' 22:18Z). Greenbough's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/greenbough-city/building_archers_lodge_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/greenbough_city_archers_lodge.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE new building for Greenbough Village, the archers' forest village in my 2D side-scrolling game: a lively, airy hunters' village among giant oaks, lit by fresh yellow-green daylight. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, bark, moss, worn and chipped spots, slight colour variation between planks and thatch). The third image is the Archers' Lodge from the same village: match its style, palette (honey oak planks, round log posts, golden straw and green leaf thatch with moss, mossy fieldstone base, green-and-gold cloth), outline thickness and level of detail exactly, so they clearly belong to the same village. The new building is the HUNTERS' CABIN, a little wider than it is tall: a cosy one-storey cabin of round stacked honey-brown logs on a mossy fieldstone base, a steep straw and leaf thatch roof with moss, a fieldstone chimney on one side, a centred plank door at ground level with iron hinges, a glowing window with wooden shutters on each side of the door, a small pair of antlers over the door, two animal pelts stretched flat on the wall, and a neat stack of split firewood against the wall under the eaves, resting on the ground line. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, every horizontal line level and every wall edge vertical. 2) The bottom of the whole building is ONE straight horizontal line: everything reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, ground patch, grass, roots, people or shadow. 3) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. No blue roof tiles or cream plaster (that is a different town). Nothing (rope, cloth, chain) ends loose in mid-air. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
+  },
+  {
+   "id": "greenbough_props",
+   "prompts": null,
+   "batch": "Greenbough city: props sheet",
+   "with": null,
+   "refs": [],
+   "save": "greenbough_props.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    4,
+    3
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-13 thread 'Cities up to Dawnharbor's standard': Cory approved the lodge + backdrop test ('Looks great' 22:18Z) and the full Greenbough batch ('Yes' 22:18Z). Greenbough's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/greenbough-city/props_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/greenbough_city_archers_lodge.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint a sheet of TWELVE separate props for Greenbough Village, the archers' forest village in my 2D side-scrolling game: a lively, airy hunters' village among giant oaks, lit by fresh yellow-green daylight, laid out in 3 rows of 4, evenly spaced, each prop centred in its own quarter-by-third area of the canvas with a wide band of plain magenta around it, and no prop touching another. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, bark, moss, worn and chipped spots, slight colour variation between planks and thatch). The third image is the Archers' Lodge from the same village: match its style, palette (honey oak planks, round log posts, golden straw and green leaf thatch with moss, mossy fieldstone base, green-and-gold cloth), outline thickness and level of detail exactly, so the props clearly belong on its street. The twelve props, in reading order: Row 1: 1) a round straw archery target with red, white and gold rings on a simple wooden A-frame stand, 2) a wooden quiver rack with a row of arrows standing upright in it, 3) a stack of cut oak logs, 4) two square hay bales, one on top of the other. Row 2: 5) a long mossy wooden planter full of ferns and small yellow wildflowers, 6) a wooden rain barrel with iron hoops, 7) a rustic bench made of a split log on two log legs, 8) a tree stump with a woodcutter's axe stuck in its top. Row 3: 9) a wooden drying frame with an animal hide stretched and tied at all four corners, 10) a two-wheeled wooden hand cart loaded with firewood, 11) a wooden signpost with two blank leaf-shaped arrow boards, 12) a woven basket full of red apples and brown mushrooms. Strict rules: 1) Every prop in pure side view at eye level, standing upright on its own flat bottom edge, sized as it would be next to a person (barrels and hay bales about waist high). 2) No ground, shadow, grass or base under any prop. 3) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. 4) No letters, numbers, words or labels anywhere, no grid lines, no borders and no frames. 5) Flat pure magenta #FF00FF background everywhere outside the props, with no magenta or pink anywhere inside them. Do not draw any characters."
+   }
+  },
+  {
+   "id": "greenbough_lamp_post",
+   "prompts": null,
+   "batch": "Greenbough city: lamp post",
+   "with": null,
+   "refs": [],
+   "save": "greenbough_lamp_post.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 thread 'Cities up to Dawnharbor's standard': Cory approved the lodge + backdrop test ('Looks great' 22:18Z) and the full Greenbough batch ('Yes' 22:18Z). Greenbough's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/greenbough-city/lamp_post_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/greenbough_city_archers_lodge.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE lamp post for Greenbough Village, the archers' forest village in my 2D side-scrolling game: a lively, airy hunters' village among giant oaks, lit by fresh yellow-green daylight. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, bark, moss, worn and chipped spots, slight colour variation between planks and thatch). The third image is the Archers' Lodge from the same village: match its style, palette (honey oak planks, round log posts, golden straw and green leaf thatch with moss, mossy fieldstone base, green-and-gold cloth), outline thickness and level of detail exactly, . The lamp: a tall straight carved honey-oak post, about two and a half times as tall as a person, on a small mossy fieldstone footing, carved with climbing leaves, with a wooden lantern box set firmly on top of the post under a tiny straw and leaf thatch cap. The lantern is lit, with a warm golden flame behind its glass panes. Nothing hangs from it. Strict rules: 1) Pure side view at eye level, perfectly upright and centred. 2) The bottom of the footing is ONE flat straight horizontal edge. No ground, shadow or grass under it. 3) The lamp fills most of the canvas height with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words. No glow halo spilling onto the background. Flat pure magenta #FF00FF background everywhere outside the lamp."
+   }
+  },
+  {
+   "id": "greenbough_townsfolk",
+   "prompts": null,
+   "batch": "Greenbough city: three townsfolk NPCs",
+   "with": null,
+   "refs": [],
+   "save": "greenbough_townsfolk.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    4,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 thread 'Cities up to Dawnharbor's standard': Cory approved the lodge + backdrop test ('Looks great' 22:18Z) and the full Greenbough batch ('Yes' 22:18Z). Greenbough's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "art/source/npcs_harbor_3.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "art/source/npcs_greenbough.png"
+    ],
+    "text": "The first image is a sheet of NPC characters for my 2D side-scrolling game: two rows, each row the same characters standing in the same spots, with a label above each. Keep the sheet's size, layout, magenta background, label bands, and each character's position, size, chibi proportions and art style exactly. The second image shows more of my game's NPC characters, and the third image shows the NPCs who already live in Greenbough, the archers' forest village; the new ones must look like they belong with them: soft cel-painted shading, rich warm colours in forest greens, browns and gold, dark brown outlines, painted cloth folds and worn patches. Replace the four characters with new villagers of Greenbough, the same character in both rows of each column, standing still in the same calm pose in both rows: Column 1 (label it HUNTER): a lean young woman hunter in a green tunic, brown leather vest and boots, a quiver of arrows on her back and a strung bow held at her side. Column 2 (label it FORAGER): a kindly old man forager with a bushy white beard, a moss-green cloak and a woven basket of mushrooms and herbs on his arm. Column 3 (label it KID): a small cheerful child in a leaf-green tunic and a little brown cap with a feather, holding a small toy wooden bow. Column 4 (label it EMPTY): leave empty, plain magenta. Rules: every character stands upright, facing slightly toward the viewer, both feet flat on one level ground line, full body in its cell. Hands are simple rounded fingerless mittens in the game's style. Painted, not pixel art: smooth painted shading, no visible pixels. Flat pure magenta #FF00FF background everywhere outside the characters and labels."
+   }
+  },
+  {
+   "id": "room_greenbough_store_wall",
+   "prompts": null,
+   "batch": "Greenbough room back wall: Fletcher's store (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_greenbough_store_wall.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-13 thread 'Cities up to Dawnharbor's standard': Cory approved the lodge + backdrop test ('Looks great' 22:18Z) and the full Greenbough batch ('Yes' 22:18Z). Greenbough's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "art/source/room_greenbough_wall.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ],
+    "text": "The first image is one repeating tile of the back wall inside a treehouse shop in Greenbough, the archers' forest village. Keep the leafy canopy and the thick horizontal oak beam at the top, the two curving tree trunks framing the left and right sides, and the mossy floor edge at the bottom EXACTLY as they are, in the same places. Repaint ONLY the plank wall between the two trunks. Remove the round window and the little sun banner. Paint the wall as warm honey-oak planks with a soft yellow-green daylight feel, and in the centre one tall arched wooden window with small panes and a deep sill, showing a sunny view of giant green oak trunks and leaves. On both sides of the window the planks are plain and empty: no shelves, no goods, nothing hanging. Everything is seen straight from the front, flat against the wall, with no perspective, no top faces and no side depth; nothing ends loose in mid-air. The left and right edges of the image must join seamlessly when the tile is repeated side by side. Also smooth the moss tufts along the bottom so they are painted with soft edges, not stair-stepped. Paint in the same style as the second image and the rest of the wall: rich warm colours, strong light and shadow with bright highlights, visible painted texture at a fairly chunky brush scale, a thin dark outline. Painted, never pixel art. Same image size and layout."
+   }
+  },
+  {
+   "id": "room_greenbough_lodge_wall",
+   "prompts": null,
+   "batch": "Greenbough room back wall: Archers' Lodge (edit)",
+   "with": null,
+   "refs": [],
+   "save": "room_greenbough_lodge_wall.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-13 thread 'Cities up to Dawnharbor's standard': Cory approved the lodge + backdrop test ('Looks great' 22:18Z) and the full Greenbough batch ('Yes' 22:18Z). Greenbough's own tone (docs/zone-vibes.md), never Dawnharbor's look.",
+   "edit": {
+    "base": "art/source/room_greenbough_wall.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ],
+    "text": "The first image is one repeating tile of the back wall inside the Archers' Lodge, the archers' guild hall of Greenbough, the forest village. Keep the leafy canopy and the thick horizontal oak beam at the top, the two curving tree trunks framing the left and right sides, and the mossy floor edge at the bottom EXACTLY as they are, in the same places. Repaint ONLY the plank wall between the two trunks. Remove the round window and the little sun banner. Paint the wall as warm honey-oak planks with a soft yellow-green daylight feel. In the centre, a large pair of antlers mounted on a carved wooden shield, with two longbows crossed beneath it, fixed flat to the wall. On each side, a long green-and-gold cloth banner painted with a crossed bow and arrow (a picture only, no writing), hanging flat against the planks and fixed at top and bottom. Everything is seen straight from the front, flat against the wall, with no perspective, no top faces and no side depth; nothing ends loose in mid-air. The left and right edges of the image must join seamlessly when the tile is repeated side by side. Also smooth the moss tufts along the bottom so they are painted with soft edges, not stair-stepped. Paint in the same style as the second image and the rest of the wall: rich warm colours, strong light and shadow with bright highlights, visible painted texture at a fairly chunky brush scale, a thin dark outline. Painted, never pixel art. Same image size and layout."
+   }
+  },
+  {
+   "id": "greenbough_townsfolk_keeper",
+   "prompts": null,
+   "batch": "Greenbough city: storage keeper in the empty townsfolk cell",
+   "with": null,
+   "refs": [],
+   "save": "greenbough_townsfolk_keeper.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    4,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 thread 'Cities up to Dawnharbor's standard': Cory's rule 'no duplicate npcs across the entire game' (22:58Z); he OK'd this $0.07 edit ('Yes' 22:59Z). Only column 4 gets pasted into greenbough_townsfolk.png; the other cells stay as painted.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/greenbough_townsfolk.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+    ],
+    "text": "The first image is a sheet of NPC villagers for Greenbough, the archers' forest village in my 2D side-scrolling game: two rows, each row the same characters standing in the same spots, with a label above each. Change ONLY column 4, the empty cell on the right of both rows: remove the faded ghost figure in the bottom one and paint a new villager in column 4 of both rows, the same character in the same calm standing pose in both rows, at the same size, chibi proportions and ground line as the other three. Label both cells KEEPER. The new villager is the village STORAGE KEEPER: a stout, friendly middle-aged woman with rosy cheeks and auburn hair in a thick braid, a moss-green dress with a brown leather apron full of pockets, a big iron ring of keys on her belt, holding a small iron-bound wooden chest in both hands. She matches the second image's art style and the other villagers on the sheet: soft cel-painted shading, rich warm colours in forest greens, browns and gold, dark brown outlines, painted cloth folds and worn patches. Hands are simple rounded fingerless mittens in the game's style. Keep columns 1 to 3 exactly as they are. Painted, not pixel art. Flat pure magenta #FF00FF background everywhere outside the characters and labels."
+   }
+  },
+  {
+   "id": "greenbough_oak_decks",
+   "prompts": null,
+   "batch": "Greenbough city: oak-trunk deck and rope bridge (raised levels)",
+   "with": null,
+   "refs": [],
+   "save": "greenbough_oak_decks.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    2
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-13 thread 'Cities up to Dawnharbor's standard': Greenbough's raised levels (Cory OK'd 'forest floor plus two platforms up on giant oak trunks, ladders and one plank bridge anchored at both ends', 22:05Z). Each piece is a PlatformDef.look. Waiting on Cory's OK for the spend.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/greenbough-city/props_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/greenbough_city_archers_lodge.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint TWO separate pieces of walkable land for Greenbough Village, the archers' forest village among giant oaks in my 2D side-scrolling game, one above the other with a wide band of plain magenta between and around them. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture (bark, moss, wood grain, worn spots). The third image is the Archers' Lodge from the same village: match its palette (honey oak planks, warm brown bark, green moss and leaves), outline thickness and level of detail. TOP piece, filling most of the upper 60 percent of the canvas width-wise (about four times as wide as it is tall): a long raised wooden DECK held up by three huge, thick, straight oak trunk pillars standing on the ground, one at each end and one in the middle, their bark mossy, with a few leafy twigs; the deck is a flat walkway of thick honey-oak planks laid across a heavy log beam, its top edge one long perfectly straight level line, with a low plank railing only at its two far ends. The trunks reach straight down to ONE flat straight bottom edge, all three ending on the same ground line. BOTTOM piece, in the lower part of the canvas (about six times as wide as it is tall): a short plank ROPE BRIDGE seen from the side: a perfectly straight level walkway of wooden planks between two thick wooden posts, one at each end, with two hand ropes running from post to post along its whole length, tied firmly to both posts; nothing below the bridge. Strict rules: 1) Pure side view at eye level: no top surface of the deck or bridge planks visible, every walkway edge perfectly horizontal, every trunk and post perfectly vertical. 2) Nothing under the deck's bottom edge: no ground, grass, roots or shadow. 3) Nothing (rope, vine, cloth) ends loose in mid-air. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words. No buildings, no people. Flat pure magenta #FF00FF background everywhere outside the two pieces, with no magenta or pink inside them."
+   }
+  },
+  {
+   "id": "greenbough_oak_decks_flat",
+   "prompts": null,
+   "batch": "Greenbough city: oak deck and bridge redrawn as flat side views",
+   "with": null,
+   "refs": [],
+   "save": "greenbough_oak_decks_flat.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    2
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-13 thread 'Greenbough up to Dawnharbor's standard': greenbough_oak_decks came back in 3/4 (plank tops, doubled posts). Redraw from the side. Waiting on Cory's OK for the spend.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/greenbough_oak_decks.png",
+    "new_view": true,
+    "refs": [],
+    "text": "This sheet shows a raised wooden deck on oak trunks (top) and a rope bridge (bottom) for a flat 2D side-scrolling game, but both are drawn from slightly above, so the tops of the planks show and the posts are doubled front and back. Redraw BOTH as perfectly flat side elevations, seen exactly from the side at the height of the walkway, like an architect's elevation. TOP piece: the deck becomes ONE thin straight horizontal band: the side edge of the plank walkway (a row of plank ends seen edge-on, only a few pixels of wood grain tall) resting on the long log beam, with no plank surface visible at all; a single low railing at each far end (one post and one rail each, no second row behind); and below it three huge, tall, thick oak trunks reaching straight down from the beam to the bottom edge, about twice as tall as they are now, mossy bark with a few leafy twigs. All three trunks end on one flat straight bottom edge; remove the thin ground line under them. BOTTOM piece: the bridge becomes one thin straight horizontal walkway band (plank edges seen side-on, no plank tops) between ONE post at each end, with the two hand ropes running straight along from post to post, firmly tied, and no guy ropes, stakes or anything else. Keep the colours, wood and moss texture, painted style and dark outline. Flat pure magenta #FF00FF background everywhere outside the two pieces."
+   }
+  },
+  {
+   "id": "greenbough_props_flat",
+   "prompts": null,
+   "batch": "Greenbough city: props sheet, tilted props redrawn flat",
+   "with": null,
+   "refs": [],
+   "save": "greenbough_props_flat.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    4,
+    3
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-13 thread 'Cities up to Dawnharbor's standard': eight props of greenbough_props came back with a slight 3/4 top. Only the redrawn cells get pasted into the sheet; target, arrow rack, hide frame and signpost stay as painted. Cory picked Repaint 2026-10-14 00:22Z.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/gemini-pass-1/greenbough_props.png",
+    "refs": [],
+    "text": "This is a sheet of twelve props for a 2D side-scrolling game. Eight of them are drawn at a slight three-quarter angle, so the top of each one shows. Redraw ONLY these eight as perfectly flat 2D side views at eye level, like an architect's elevation, keeping each one's design, size, colours, painted style and dark outline and its place on the sheet: the stack of logs (show only the round cut log ends facing us, stacked in a neat pyramid, no log length going back), the two hay bales (only their flat front faces, no top face), the mossy planter of ferns and flowers (only its front board, the plants rising above it, no top rim or inside visible), the barrel (straight side view, its top a straight horizontal line, no oval top), the log bench (only its front side, no seat top surface), the tree stump with the axe (straight side view, its cut top a straight horizontal line, no oval top), the wheelbarrow of firewood (a straight side view with one wheel, its tray a flat side panel, firewood ends showing above it), and the apple basket (straight side view, its rim a straight horizontal line, apples and mushrooms rising above it). Each stands on ONE flat straight horizontal bottom edge with nothing under it. Keep the archery target, the arrow rack, the hide drying frame and the signpost EXACTLY as they are. Keep the grid lines and the flat pure magenta #FF00FF background."
+   }
   }
  ]
 }
