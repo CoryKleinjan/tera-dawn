@@ -10892,6 +10892,31 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4), each holding one flat bright green (#00FF00) figure shape. The first attached picture is the same sheet with a sword painted in each cell; in some cells its grip is broken by a green gap where the figure's fist is. Paint exactly that same sword in exactly the same place, size and angle in every cell, but as one complete, unbroken sword: the steel blade, brass crossguard, the whole brown leather-wrapped grip painted continuously from the crossguard to the round brass pommel, with nothing missing or cut out. Paint the whole sword on top, over the green shape where they overlap; no fist or hand over it. Leave every part of each green shape the sword does not cover flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Paint nothing else: no hands, arms, body or clothes. Do not move, resize or redraw any shape. Style: the same as the sword in the first attached picture, with the warm colours and thin dark plum-brown outline of the painted villagers in the second attached picture. Keep the grid lines. No text."
   }
+ },
+ {
+  "id": "mshero_sword4_test",
+  "prompts": null,
+  "batch": "maple hero test (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_sword4_test.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 20:02Z 'Yes. We want all weapons to be printed without a gap in the future', answering 'Should I try it?' for 1 paint ~$0.07): sword3 kept the gap over the green figure, so this fills the grip on a plain magenta base of sword2 (figure removed).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/sword2_on_magenta.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Each cell holds one sword, but its grip is missing: there is an empty gap between the brass crossguard and the round brass pommel. In every cell, fill that gap with the missing brown leather-wrapped grip, painted continuously from the crossguard to the pommel along the sword's straight line, so each sword is one complete, unbroken sword. Keep the blade, crossguard and pommel exactly as they are, in exactly the same place, size and angle. Leave the rest of the background flat pure magenta #FF00FF. Paint nothing else: no hands, figures or other objects. Style: match the existing sword exactly, with the warm colours and thin dark plum-brown outline of the painted villagers in the attached picture. Keep the grid lines. No text."
+  }
  }
 ]
 }
