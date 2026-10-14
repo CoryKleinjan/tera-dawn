@@ -126,6 +126,13 @@ func test_scenery_keeps_its_size_and_tucks_in() -> void:
 	check(s.position.y < -map.ground_y / TDStage.PX, "its base sinks behind the grass edge")
 	s.free()
 
+func test_flat_bases_sink_below_the_land_edge() -> void:
+	# a crate or a building's flat base hides the dips of the land's painted top edge
+	var s := TDStage.sprite(map.biome.edge_grass[0])
+	TDStage.stand_on_land(s, Vector2(100, map.ground_y), 0.0, false)
+	check(s.position.y <= -(map.ground_y + TDStage.BASE_SINK) / TDStage.PX + 0.0001, "sunk at least BASE_SINK")
+	s.free()
+
 func test_portals_stand_in_front_of_the_land_behind_everyone() -> void:
 	check(TDStage.Z_PORTAL > TDStage.LAND_FRONT, "portals stand in front of the land and scenery")
 	for z in [TDStage.Z_CLIMBABLE, TDStage.Z_NPC, TDStage.Z_MONSTER, TDStage.Z_DROP, TDStage.Z_OTHER_PLAYER, TDStage.Z_PLAYER]:
