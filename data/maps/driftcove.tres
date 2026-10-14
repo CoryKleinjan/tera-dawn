@@ -52,11 +52,11 @@ look_top = 54.5
 [sub_resource type="Resource" id="Jetty"]
 script = ExtResource("platform_def")
 x = 3700.0
-y = 537.5
+y = 550.25
 width = 420.0
 look = ExtResource("t_jetty")
 look_span = 0.9
-look_top = 65.5
+look_top = 78.0
 
 [sub_resource type="Resource" id="Ladder_hull_west"]
 script = ExtResource("climbable_def")
@@ -75,7 +75,7 @@ style = ExtResource("rope_ladder")
 [sub_resource type="Resource" id="Ladder_jetty"]
 script = ExtResource("climbable_def")
 x = 4090.0
-top = 537.5
+top = 550.25
 bottom = 620.0
 style = ExtResource("rope_ladder")
 
@@ -265,19 +265,19 @@ y = 441.5
 script = ExtResource("prop_placement")
 texture = ExtResource("t_prop_flag")
 x = 3730.0
-y = 537.5
+y = 550.25
 
 [sub_resource type="Resource" id="Prop_10_prop_rope_coil"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_prop_rope_coil")
 x = 3790.0
-y = 537.5
+y = 550.25
 
 [sub_resource type="Resource" id="Prop_11_prop_lobster_pot"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_prop_lobster_pot")
 x = 3990.0
-y = 537.5
+y = 550.25
 
 [sub_resource type="Resource" id="Prop_12_prop_anchor"]
 script = ExtResource("prop_placement")
