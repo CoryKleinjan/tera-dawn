@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://day7pdw6jlk8a"
-path="res://.godot/imported/small.png-e8868ba09e65be37de49d4c676c26c5d.ctex"
+uid="uid://nd2ha8mve3mi"
+path="res://.godot/imported/prop_star_globe.png-71b832d7ae1301705ae4308367107682.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/buildings/lumewood/small.png"
-dest_files=["res://.godot/imported/small.png-e8868ba09e65be37de49d4c676c26c5d.ctex"]
+source_file="res://assets/sprites/tiles/lumewood/prop_star_globe.png"
+dest_files=["res://.godot/imported/prop_star_globe.png-71b832d7ae1301705ae4308367107682.ctex"]
 
 [params]
 
