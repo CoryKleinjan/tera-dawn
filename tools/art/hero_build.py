@@ -315,11 +315,13 @@ class Body:
         _dx, dy, _deg = hats_of(self).track[pose]
         inside = ~dilate(self.base[rc][1] <= 0.5, 3, outside=True)
         out = np.zeros_like(inside)
-        for edit in self._covers:
+        for sheet, edit in zip(("tunic", "trousers"), self._covers):
             trgb, ta = edit[rc]
             mx, mn = trgb.max(2), trgb.min(2)
             white = (mx > 0.85) & (mx - mn < 0.15)  # (the boy's tunic came back with a white sticker edge)
             m = changed(edit[rc], self.base[rc]) & ~skin_mask(trgb, ta) & ~white & inside  # (not re-painted skin)
+            if sheet == "trousers":  # his shorts, never his feet below them (their patches come back as holes)
+                m &= ~skin_mask(*self.base[rc])
             m = close(m, 4)
             m[: int(hats_of(self).box[1] + dy) + 4] = False
             out |= main_parts(fill_holes(m))

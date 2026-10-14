@@ -167,6 +167,7 @@ func _run() -> void:
 		var meadow: MapInstance = _me().map
 		var stand := _me().position
 		p.face = -1
+		world.scenes.skip()  # (the intro cutscene would letterbox the shot)
 		await _physics(240) # let the level-up banner pass
 		var outfits := [
 			["Bramble", "hair_ponytail", "hair_color_copper", "skin_honey", []],
