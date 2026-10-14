@@ -5,9 +5,8 @@ extends Node3D
 ## (hair, gear) in step with whatever frame he is showing, and drawn back to front.
 ## SpriteRig.dress() makes one; give it a look with `set_look`.
 
-const SHADER := preload("res://shaders/paperdoll_sprite.gdshader")
-## The layers' own: lit and drawn like the body (paperdoll_stage.gdshaderinc).
-const LAYER_SHADER := preload("res://shaders/paperdoll_layer.gdshader")
+## The one shader every part of him is drawn with, in the world and in the menus.
+const SHADER := preload("res://shaders/hero.gdshader")
 ## How far layers sit in front of (or behind) the body, in 3D units. Layers are spread
 ## within that, in drawing order.
 const DEPTH := 0.01
@@ -146,7 +145,7 @@ func _place(s: Sprite3D, l: Paperdoll.Layer, i: int, frame: int, mirror: bool) -
 ## regions), which the shader samples.
 static func _layer_material(l: Paperdoll.Layer) -> ShaderMaterial:
 	var mat := ShaderMaterial.new()
-	mat.shader = LAYER_SHADER
+	mat.shader = SHADER
 	if l.piece:
 		mat.set_shader_parameter(&"strip", null)  # set per frame (_place): the pose's picture
 	else:

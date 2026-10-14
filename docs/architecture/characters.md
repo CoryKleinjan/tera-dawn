@@ -21,9 +21,10 @@ then character select shows the list with the new character picked.
 - **Drawing** is done by `Paperdoll`, which works out the layers from a look;
   `PaperdollSprite` shows it in the world (on `SpriteRig`). Menus (the creator, character
   select, the equipment window) draw him the same way: `PaperdollView` stands the world's own
-  rig (`HeroBody.make_rig`) in a little 3D stage of its own, lit and colour graded like the map
-  showing now (`TDStage.light_portrait`, `shaders/grade.gdshaderinc`), so he looks exactly as he
-  does in game. There is no separate menu drawing to keep in step.
+  rig (`HeroBody.make_rig`) in a little 3D stage of its own, lit by a fixed near-white light
+  (`PaperdollView.LIGHT`) so he shows his painted colours. There is one way to paint him:
+  every part, in game and in every menu, uses `shaders/hero.gdshader` and nothing else; only
+  the light differs (the map's in game).
 - **The hero's layers**: both bodies side by side on one strip (`hero.png`, bald, with their
   painted faces), each with its own animations over it (`hero.tres` for the boy,
   `hero_girl.tres` for the girl; `Paperdoll.BODIES`), and layers laid out like the strip that
@@ -33,9 +34,9 @@ then character select shows the list with the new character picked.
   body and head).
   A hat is drawn in one of the template shapes (`EquipDef.look_shape`: helm, tricorn, bandana,
   hood, wizard): under it the hair is that shape's (`layers/hair_<style>_<shape>.png`) and the
-  body shader cuts his head away where the hat hides it (`pieces/headcut_<shape>.png`). In the
+  hero shader cuts his head away where the hat hides it (`pieces/headcut_<shape>.png`). In the
   3D stage his layers are lit like everyone else, sampled from mipmaps and blended at their
-  edges (`shaders/paperdoll_stage.gdshaderinc`), drawn in order with their own render
+  edges (`shaders/hero.gdshader`), drawn in order with their own render
   priorities (`TDStage.PRIORITY_*`). Weapons and shields will be a `Paperdoll.Piece` (one
   picture placed in his front fist on every frame); none are drawn yet. The strip is cut at
   the painted sheet's full resolution: `Paperdoll.ART_SCALE` strip pixels make one hero pixel.

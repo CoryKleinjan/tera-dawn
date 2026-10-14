@@ -58,7 +58,7 @@ class Layer:
 		strip = s
 		behind = back
 
-	## Sets a layer material's uniforms (the paperdoll_layer shader).
+	## Sets a layer material's uniforms (the hero shader): its fist and hair cuts.
 	func apply(mat: ShaderMaterial) -> void:
 		mat.set_shader_parameter(&"has_hair_cut", false)
 		mat.set_shader_parameter(&"has_fist", piece != null and piece.fist != null)
@@ -66,7 +66,7 @@ class Layer:
 			mat.set_shader_parameter(&"fist", piece.fist)
 			mat.set_shader_parameter(&"frame_size", FRAME_SIZE)
 
-	## Sets the uniforms that place a piece's fist cut (paperdoll_piece.gdshaderinc) for
+	## Sets the uniforms that place a piece's fist cut (hero.gdshader) for
 	## frame `frame` in pose `p` (Piece.pose).
 	func apply_pose(mat: ShaderMaterial, frame: int, p: Dictionary) -> void:
 		if piece.fist == null:
@@ -214,7 +214,7 @@ func _add_piece(p: Piece) -> void:
 		l.piece = p
 		layers.append(l)
 
-## Sets a dressing material's uniforms (the paperdoll_sprite shader): the head cut.
+## Sets a dressing material's uniforms (the hero shader): the head cut.
 func apply(mat: ShaderMaterial) -> void:
 	mat.set_shader_parameter(&"has_head_cut", head_cut != null)
 	if head_cut:

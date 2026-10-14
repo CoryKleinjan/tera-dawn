@@ -224,3 +224,26 @@ func test_the_rig_has_every_frame_of_the_hero() -> void:
 func test_a_weapon_is_held_as_its_kind() -> void:
 	check_eq(Paperdoll.kind_of(Content.item(&"willow_bow") as EquipDef), &"bow", "a bow")
 	check_eq(Paperdoll.kind_of(null), Paperdoll.DEFAULT_WEAPON, "bare hands fight like a sword")
+
+func test_every_part_of_him_is_painted_with_the_one_hero_shader() -> void:
+	# one way to paint the hero, in game and in every menu (Cory 2026-10-14)
+	var look := _look(Appearance.new(), {"hat": "squire_helm", "top": "squire_jerkin", "bottom": "squire_trousers"})
+	var view := PaperdollView.new()
+	view.set_look(look)
+	var world_rig := HeroBody.make_rig(TDStage.PRIORITY_PLAYER)
+	world_rig.dress(look)
+	for rig: SpriteRig in [world_rig, view._rig]:
+		var doll := rig.paperdoll
+		check_eq((doll.body.material_override as ShaderMaterial).shader, PaperdollSprite.SHADER, "his body")
+		var parts := 0
+		for n in doll.get_children():
+			if n is SpriteBase3D and not n.is_queued_for_deletion():
+				parts += 1
+				check_eq((n.material_override as ShaderMaterial).shader, PaperdollSprite.SHADER, "his %s" % n.name)
+		check_eq(parts, doll.doll.layers.size(), "every layer drawn")
+	world_rig.free()
+	view.free()
+
+func test_menus_light_him_near_white() -> void:
+	for c in [PaperdollView.LIGHT, HeroBody.LIGHT]:
+		check(minf(c.r, minf(c.g, c.b)) >= 0.9, "%s is near white" % c)
