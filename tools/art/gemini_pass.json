@@ -11616,6 +11616,33 @@
     ],
     "text": "The first image is a blank canvas showing only a soft dusk colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Lanternfall, the thieves' town in my 2D side-scrolling game: a city of lanterns that is always at dusk, sly, playful, mysterious but charming, never spooky; tall narrow crooked houses packed along cobbled alleys, cool lavender dusk light against warm golden lantern glow. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn plaster, chipped brick, slight colour variation between beams and tiles). Paint the background in that same style, a little softer and lighter in contrast so it sits behind the characters. The third image is a house from the same town: match its half-timbered shapes, but use smoky ochre plaster, dark beams, dark brick and slate-blue roofs. The scene: a sprawling skyline of crooked rooftops at dusk, seen from street level. Tall narrow half-timbered houses of different heights crowd the whole width of the picture, with steep slate-blue roofs, leaning brick chimneys, little dormers, a few thin spires and one distant clock tower; the nearest roofs are in the middle distance, others fade back row after row into deep blue fog. Many small windows glow warm gold, and strings of small golden lanterns hang between some of the houses, tied to both houses. The sky goes from near-black navy at the very top through deep blue and lavender to a warm amber glow along the horizon behind the rooftops; a few early stars at the top; small golden motes drift upward in the air. Colours: navy #090e24 at the top, amber #dfa060 at the horizon, cool lavender light #c7bfff on the roofs, deep blue fog #3a3a6f between the rows, warm gold lantern light. Strict rules: 1) Side-on view at eye level, every wall and chimney straight up and down, no looking down on the roofs. 2) No people, no characters, no animals, no birds, no moon. No clouds. 3) Nothing in the near foreground: no street, cobbles, walls or lamps in front; the closest houses are in the middle distance. 4) The left and right edges continue naturally (houses, fog, sky), nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. Charming and cosy, never spooky."
    }
+  },
+  {
+   "id": "lanternfall_city_thieves_den_flat",
+   "prompts": null,
+   "batch": "Lanternfall city: Thieves' Den repainted as a flat front view",
+   "with": null,
+   "refs": [],
+   "save": "lanternfall_city_thieves_den_flat.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-13 thread 'Lanternfall up to Dawnharbor's standard': the first Den test came back in 3/4; Cory 23:59Z 'Yes' to a flat repaint (~$0.07) keeping its colours and details. Backdrop approved.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/lanternfall-city/building_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/lanternfall_city_thieves_den.png",
+     "/mnt/project-files/art-sheets/lanternfall-city/current_lanternfall_large.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE building for Lanternfall, the thieves' town in my 2D side-scrolling game: a city of lanterns that is always at dusk, sly, playful, mysterious but charming, never spooky. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, worn plaster, chipped brick, slight colour variation between beams and tiles). The third image is the THIEVES' DEN I want, but it is drawn at an angle, which is wrong for my game. Repaint the same building with the same materials, colours and details: smoky ochre plaster between dark soot-stained timber beams, a ground floor of dark red-brown brick, slate-blue roof tiles, a crooked brick chimney, small dormer, golden diamond-pane windows with shutters, the heavy studded door with a peephole grille under a plum cloth awning, two iron wall lanterns beside the door, the teal banner with a key, and the round sign with a black mask and crossed daggers on an iron bracket. The fourth image is another house from the same town that IS drawn the right way: copy its viewpoint exactly. Like it, the new Den is a pure flat FRONT ELEVATION, like an architect's drawing of one wall: ONE gable end faces the viewer straight on, so the roof is seen only as a symmetric triangle outline with tiles along its two edges, and no side wall, corner or roof slope going back is visible at all. The Den is a tall narrow three-storey townhouse, taller than it is wide, each upper storey jutting out slightly over the one below (shown only as a ledge with small brackets, all in the same flat plane), with the door centred at ground level. Strict rules: 1) Pure front view at eye level: only the front face shows, no roof surface seen from above, no side walls, every horizontal line level and every wall edge vertical; left and right outlines of each storey are straight vertical lines. 2) The bottom of the whole building is ONE straight horizontal line: its brick base reaches down to the same ground line from edge to edge, with nothing hanging lower. Nothing below the base or in front of it: no steps, path, cobbles, ground line, ground patch, grass, people or shadow. 3) The whole building fits inside the picture, centred, with a clear band of magenta on every side. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere. No cream plaster. Nothing (rope, cloth, chain) ends loose in mid-air. No glow halo spilling onto the background. Flat pure magenta #FF00FF background everywhere outside the building, with no magenta or pink anywhere inside it. Do not draw any characters."
+   }
   }
  ]
 }
