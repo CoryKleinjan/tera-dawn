@@ -125,7 +125,7 @@ static func npc_rect(n: NpcPlacement) -> Rect2:
 ## wider than the part you can stand on).
 static func platform_rect(d: PlatformDef, biome: BiomeDef) -> Rect2:
 	var span := TerrainBuilder.skin_span(d, biome)
-	var w := d.width / PlatformDef.LOOK_SPAN if d.look else d.width
+	var w := d.width / d.look_span if d.look else d.width
 	return Rect2(d.x + (d.width - w) * 0.5, span.x, w, span.y - span.x)
 
 ## Where a lantern's middle may stand (left and right ends as x and y): inside the map's
