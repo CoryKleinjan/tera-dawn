@@ -60,8 +60,11 @@ ropes, small rocks and trees. Round, soft, friendly shapes; small cute monsters.
 **Keep (music):** innocent and carefree. Town: music box, ocarina, acoustic guitar, soft strings,
 gentle bouncy tempo. Field: strings, flute, light percussion, bright skipping melody.
 
-**Town: Dawnrise Village.** Small and cosy, humbler than Dawnharbor: cottages, gardens, a warm
-welcome *(inferred)*.
+**Town: Dawnrise Village.** Small and cosy, humbler than Dawnharbor: a village green with a low
+grassy rise (ladder up) where the windmill stands. Round honey-stone and timber cottages under fat
+golden thatch, rose and peach heart shutters, flower boxes, climbing roses; no blue tiles or cream
+plaster. Buildings: Elder Rowan's house, Mira's shop (striped awning), a family cottage, the
+windmill. Rose-wound lamp posts. One 4K sunrise meadow panorama (hills, village, windmill, sea).
 
 | Sub-zone | Role | Lv | What changes | Monsters |
 | --- | --- | --- | --- | --- |
