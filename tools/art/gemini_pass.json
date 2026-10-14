@@ -12072,6 +12072,60 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 6 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: standing, standing, walking, walking, jumping, flinching after a hit). Cells 7 and 8 are empty and must stay empty. He faces right in a three-quarter view; his WAND ARM is the arm on the LEFT side of the picture and his BOOK ARM is the arm on the RIGHT side. Use the second attached picture ONLY to see the look and style of a young magician's outfit (do not copy its pose or add its figure). In each cell, paint ONLY a closed magician's spellbook held against the fist on the RIGHT side of the shape (his book hand), centred on that fist and moving with it: a thick small tome with a deep purple leather cover, gold corner caps, a gold star emblem on the cover and cream page edges, seen at a slight angle. Paint the whole book, even where it overlaps the green body; it will be drawn behind him later. Paint nothing else: no hands, arms or body. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, as if the arms were not there, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Style: the warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline and small busy painted detail of the robe in the second attached picture. Keep the grid lines. No text, no labels."
   }
+ },
+ {
+  "id": "mshero_war_jerkin_move2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_war_jerkin_move2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 22:43Z 'We need to get them fixed.' after the plain-background fills came back oversized): Warrior jerkin/trousers repaint on the move silhouette with the 'guide is behind, paint whole' prompt.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/silhouette_move.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_move.png",
+    "/mnt/project-files/art-sheets/maple-hero/bodies/look_warrior.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Each cell holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: standing, standing, walking, walking, jumping, flinching after a hit; cells 7 and 8 are empty and must stay empty). He faces right in a three-quarter view; his SWORD ARM is the arm on the LEFT side of the picture and his SHIELD ARM is the arm on the RIGHT side. Use the second attached picture ONLY to see the look and style of a young warrior's gear (do not copy its pose or add its figure). On each green shape, paint ONLY a padded warrior's jerkin worn over his torso and upper arms: quilted brown-tan padded cloth in stitched rows, short sleeves over the upper arms, a high padded collar, a broad brown leather belt with a brass buckle at the waist, and the hem just below the belt; it follows his body and arms in each pose. Paint nothing else: no head, hands, legs, trousers, boots or gear. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, as if the arms were not there, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: exactly the look of the steel helmet in the second attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_war_trousers_move2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_war_trousers_move2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 22:43Z 'We need to get them fixed.' after the plain-background fills came back oversized): Warrior jerkin/trousers repaint on the move silhouette with the 'guide is behind, paint whole' prompt.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/silhouette_move.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_move.png",
+    "/mnt/project-files/art-sheets/maple-hero/bodies/look_warrior.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Each cell holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: standing, standing, walking, walking, jumping, flinching after a hit; cells 7 and 8 are empty and must stay empty). He faces right in a three-quarter view; his SWORD ARM is the arm on the LEFT side of the picture and his SHIELD ARM is the arm on the RIGHT side. Use the second attached picture ONLY to see the look and style of a young warrior's gear (do not copy its pose or add its figure). On each green shape, paint ONLY sturdy warrior's trousers worn on his legs from the waist to mid-shin: thick dark olive-brown cloth with reinforced knee patches and visible stitching, tucked in at the bottom where boots will go; they follow his legs in each pose. Paint nothing else: no torso, belt, feet, boots or gear. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, as if the arms were not there, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: exactly the look of the steel helmet in the second attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail. Keep the grid lines. No text, no labels."
+  }
  }
 ]
 }
