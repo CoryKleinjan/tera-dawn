@@ -11025,6 +11025,114 @@
    ],
    "text": "Paint the game's base character: exactly the same chibi boy as in the first attached picture (same head, ears, blank face with no eyes, brows or mouth, bald, cream short-sleeved undershirt, brown shorts, barefoot, rounded mitten hands closed in fists with no separate fingers, same size and proportions, same clean smooth painted style and thin dark plum-brown outline). The base picture is a sheet of 8 cells (2 rows of 4); paint ONE full figure in each cell, centred, at the same size in every cell, with his feet on the same ground line near the bottom of the cell, like a MapleStory character sprite sheet. His SWORD ARM is the arm on the LEFT side of the picture; his SHIELD ARM is the arm on the RIGHT side of the picture. In every cell he is seen from BEHIND (his back to the viewer, the back of his bald head, no face), climbing. Row 1: cell 1 climbing a rope, left hand high and right hand low, gripping above his head; cell 2 climbing a rope, right hand high and left hand low; cell 3 holding still on a rope, both hands gripping above his head, legs together; cell 4 climbing a ladder, left hand and right foot high. Row 2: cell 5 climbing a ladder, right hand and left foot high; cell 6 holding still on a ladder, both hands at head height; cell 7 standing seen from behind, arms at his sides; cell 8 standing seen from behind, a step to the side. Do not draw the rope or ladder; only the boy. Keep the background flat pure magenta #FF00FF and keep the grid lines. Nothing else in the cells: no weapons, props, shadows, effects or text. Light from the upper left."
   }
+ },
+ {
+  "id": "mshero_body_move2",
+  "prompts": null,
+  "batch": "maple hero sheets (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_move2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 20:32Z 'Yes.' to repainting the four body sheets for $0.28): fixes the bad cells of mshero_body_move and keeps the good ones.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/body_move_v1.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_body_test.png",
+    "/mnt/project-files/references/hero.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "This is a sheet of 8 cells (2 rows of 4) of the game's base character, a chibi boy with a blank face. Keep every cell listed as KEEP exactly as it is. Repaint ONLY the cells listed as REPAINT, as the same boy (same head, ears, blank face with no eyes, brows or mouth, bald, cream short-sleeved undershirt, brown shorts, barefoot, rounded mitten fists with no separate fingers, same size, same clean smooth painted style and thin dark plum-brown outline, same feet ground line). His SWORD ARM is the arm on the LEFT side of the picture; his SHIELD ARM is the arm on the RIGHT side of the picture. Faces right in a slight three-quarter side view. KEEP cell 1 (idle), cell 2 (idle breathing), cell 3 (walk, left-side leg forward) and cell 7 (jump). REPAINT cell 4: walk passing pose, one leg straight under him and the other knee lifted and bent as it swings through, body a little higher, arms close to his sides. REPAINT cell 5: walk with the RIGHT-side leg stepping forward and the LEFT-side leg back, the mirror of cell 3's legs, and the arms swung the opposite way to cell 3. REPAINT cell 6: walk passing pose again, the other knee lifted. REPAINT cell 8: hurt, flinching backwards, his upper body and head leaning back away from the right, both arms pulled in close to his chest, knees slightly bent, one foot lifting. Keep the background flat pure magenta #FF00FF and keep the grid lines. Nothing else in the cells: no weapons, props, ropes, ladders, shadows, effects or text. Light from the upper left."
+  }
+ },
+ {
+  "id": "mshero_body_action2",
+  "prompts": null,
+  "batch": "maple hero sheets (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_action2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 20:32Z 'Yes.' to repainting the four body sheets for $0.28): fixes the bad cells of mshero_body_action and keeps the good ones.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/body_action_v1.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_body_test.png",
+    "/mnt/project-files/references/hero.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "This is a sheet of 8 cells (2 rows of 4) of the game's base character, a chibi boy with a blank face. Keep every cell listed as KEEP exactly as it is. Repaint ONLY the cells listed as REPAINT, as the same boy (same head, ears, blank face with no eyes, brows or mouth, bald, cream short-sleeved undershirt, brown shorts, barefoot, rounded mitten fists with no separate fingers, same size, same clean smooth painted style and thin dark plum-brown outline, same feet ground line). His SWORD ARM is the arm on the LEFT side of the picture; his SHIELD ARM is the arm on the RIGHT side of the picture. Faces right in a slight three-quarter side view. KEEP cell 1 (wind-up), cells 4 to 8. REPAINT cell 2: swing strike, the SAME left-side sword arm that is raised in cell 1 now swung forward and down in front of him at chest height, fist closed; the right-side shield arm stays low at his side, hanging relaxed like in a walk. REPAINT cell 3: swing follow-through, the same left-side sword arm low and forward across his front, the right-side shield arm still low and relaxed at his side. In cells 2 and 3 only the sword arm moves; the shield arm must not reach forward. Keep the background flat pure magenta #FF00FF and keep the grid lines. Nothing else in the cells: no weapons, props, ropes, ladders, shadows, effects or text. Light from the upper left."
+  }
+ },
+ {
+  "id": "mshero_body_ranged2",
+  "prompts": null,
+  "batch": "maple hero sheets (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_ranged2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 20:32Z 'Yes.' to repainting the four body sheets for $0.28): fixes the bad cells of mshero_body_ranged and keeps the good ones.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/body_ranged_v1.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_body_test.png",
+    "/mnt/project-files/references/hero.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "This is a sheet of 8 cells (2 rows of 4) of the game's base character, a chibi boy with a blank face. Keep every cell listed as KEEP exactly as it is. Repaint ONLY the cells listed as REPAINT, as the same boy (same head, ears, blank face with no eyes, brows or mouth, bald, cream short-sleeved undershirt, brown shorts, barefoot, rounded mitten fists with no separate fingers, same size, same clean smooth painted style and thin dark plum-brown outline, same feet ground line). His SWORD ARM is the arm on the LEFT side of the picture; his SHIELD ARM is the arm on the RIGHT side of the picture. Faces right in a slight three-quarter side view. KEEP cells 1, 2, 4, 5, 7 and 8. REPAINT cell 3: bow release, the right-side arm still straight forward with fist closed, the left-side arm now flung back and open away from his cheek, elbow behind his shoulder, a clear change from cell 2. REPAINT cell 6: throw follow-through, standing in place with feet apart (not walking), the left-side throwing arm swung down and across in front of his belly after the throw, fist closed, body leaning slightly forward. Keep the background flat pure magenta #FF00FF and keep the grid lines. Nothing else in the cells: no weapons, props, ropes, ladders, shadows, effects or text. Light from the upper left."
+  }
+ },
+ {
+  "id": "mshero_body_climb2",
+  "prompts": null,
+  "batch": "maple hero sheets (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_climb2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 20:32Z 'Yes.' to repainting the four body sheets for $0.28): fixes the bad cells of mshero_body_climb and keeps the good ones.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/body_climb_v1.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_body_test.png",
+    "/mnt/project-files/references/hero.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "This is a sheet of 8 cells (2 rows of 4) of the game's base character, a chibi boy with a blank face. Keep every cell listed as KEEP exactly as it is. Repaint ONLY the cells listed as REPAINT, as the same boy (same head, ears, blank face with no eyes, brows or mouth, bald, cream short-sleeved undershirt, brown shorts, barefoot, rounded mitten fists with no separate fingers, same size, same clean smooth painted style and thin dark plum-brown outline, same feet ground line). His SWORD ARM is the arm on the LEFT side of the picture; his SHIELD ARM is the arm on the RIGHT side of the picture. Seen from BEHIND (his back to the viewer, the back of his bald head). Remove every rope and ladder from all cells and leave only the boy on flat magenta, filling in his hands, arms and legs where the rope or ladder covered them. KEEP the poses of cells 1, 2, 3, 6 and 7. REPAINT cell 5: climbing a ladder, the mirror of cell 4: his right-side hand high and left-side hand low at shoulder height, his left-side knee lifted high and right-side leg straight. REPAINT cell 8: standing seen from behind like cell 7, but with his weight on one foot and the other heel lifted, arms at his sides; his back to the viewer, not side-on. Keep the background flat pure magenta #FF00FF and keep the grid lines. Nothing else in the cells: no weapons, props, ropes, ladders, shadows, effects or text. Light from the upper left."
+  }
  }
 ]
 }
