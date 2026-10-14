@@ -1,7 +1,6 @@
 // The map's colour grade (BiomeDef "Atmosphere"): shadows are pushed toward `lift`, the colour
 // is (de)saturated and multiplied by `tint`. The finishing pass (post.gdshader) grades the
-// whole scene with it and a menu's hero (PaperdollView) his own picture, so he looks the same
-// in both. TDStage sets both from the map.
+// whole scene with it. TDStage sets it from the map.
 uniform vec4 tint : source_color = vec4(1.0, 1.0, 1.0, 1.0);
 uniform vec4 lift : source_color = vec4(0.0, 0.0, 0.0, 1.0);
 uniform float lift_amount = 0.0;

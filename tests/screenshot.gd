@@ -493,6 +493,7 @@ func _run() -> void:
 			meadow.remove_player(other)
 	if only == "" or only == "windows":
 		# Inventory, equipment and character windows with some loot, one tooltip showing.
+		world.scenes.skip()  # (the intro cutscene would hide the windows)
 		for id in [&"leather_boots", &"petal_cape", &"moss_ring", &"oak_shield", &"dawn_blade"]:
 			ch.inventory.add(Content.item(id))
 		for id in [&"boar_tusk", &"petal_wing", &"dewling_droplet"]:

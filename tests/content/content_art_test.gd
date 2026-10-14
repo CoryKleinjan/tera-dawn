@@ -135,7 +135,7 @@ func test_hero_has_every_animation_the_game_plays() -> void:
 	_frames(HeroBody.FRAMES, "assets/animations/hero.tres", [&"idle", &"rope", &"ladder"])
 
 ## Every strip and piece picture of the hero imports with mipmaps: he shows smaller than his
-## art is cut, and the stage samples his art from them (paperdoll_stage.gdshaderinc). Godot
+## art is cut, and the stage samples his art from them (hero.gdshader). Godot
 ## imports a new picture without, so a new hero layer needs `mipmaps/generate=true` in its
 ## .import file. (The fist, hair and head cut masks are read pixel by pixel, without.)
 func test_hero_art_imports_with_mipmaps() -> void:
