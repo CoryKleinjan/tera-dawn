@@ -18,7 +18,7 @@
     ],
     [
       "prop_hide_rack",
-      "prop_wheelbarrow",
+      "",
       "prop_signpost",
       ""
     ]
@@ -54,10 +54,6 @@
     },
     "prop_bench": {
       "scale": 0.1566,
-      "flat_bottom": true
-    },
-    "prop_wheelbarrow": {
-      "scale": 0.1537,
       "flat_bottom": true
     }
   },
