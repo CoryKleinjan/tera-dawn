@@ -14,7 +14,7 @@ by = "Coach"
 [resource]
 script = ExtResource("1_npc_def")
 id = &"emberforge_taxi"
-display_name = "Coachman Coal"
+display_name = "Coachman Flint"
 title = "Taxi"
 sprite_frames = ExtResource("2_sprite")
 greeting = "Back to Dawnharbor? Hop on."
