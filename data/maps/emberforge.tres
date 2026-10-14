@@ -42,7 +42,7 @@
 [sub_resource type="Resource" id="Terrace_mid"]
 script = ExtResource("platform_def")
 x = 1641.9
-y = 781.1
+y = 781.0
 width = 516.2
 look = ExtResource("t_terrace")
 look_span = 0.6637
@@ -50,7 +50,7 @@ look_span = 0.6637
 [sub_resource type="Resource" id="Terrace_up"]
 script = ExtResource("platform_def")
 x = 4229.7
-y = 695.7
+y = 696.0
 width = 700.6
 look = ExtResource("t_terrace")
 look_span = 0.6637
@@ -58,28 +58,28 @@ look_span = 0.6637
 [sub_resource type="Resource" id="Ladder_mid_west"]
 script = ExtResource("climbable_def")
 x = 1686.9
-top = 781.1
+top = 781.0
 bottom = 1020.0
 style = ExtResource("ladder")
 
 [sub_resource type="Resource" id="Ladder_mid_east"]
 script = ExtResource("climbable_def")
 x = 2113.1
-top = 781.1
+top = 781.0
 bottom = 1020.0
 style = ExtResource("ladder")
 
 [sub_resource type="Resource" id="Ladder_up_west"]
 script = ExtResource("climbable_def")
 x = 4274.7
-top = 695.7
+top = 696.0
 bottom = 1020.0
 style = ExtResource("ladder")
 
 [sub_resource type="Resource" id="Ladder_up_east"]
 script = ExtResource("climbable_def")
 x = 4885.3
-top = 695.7
+top = 696.0
 bottom = 1020.0
 style = ExtResource("ladder")
 
@@ -289,7 +289,7 @@ light_height = 118.0
 script = ExtResource("prop_placement")
 texture = ExtResource("t_brazier")
 x = 4290.0
-y = 695.7
+y = 696.0
 light_color = Color(1.0, 0.62, 0.3, 1.0)
 light_energy = 1.6
 light_height = 118.0
@@ -298,7 +298,7 @@ light_height = 118.0
 script = ExtResource("prop_placement")
 texture = ExtResource("t_dummy")
 x = 4840.0
-y = 695.7
+y = 696.0
 
 [sub_resource type="Resource" id="Backdrop_picture"]
 script = ExtResource("backdrop_layer_def")
