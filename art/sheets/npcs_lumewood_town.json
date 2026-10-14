@@ -1,0 +1,138 @@
+{
+  "source": "art/source/npcs_lumewood_town.png",
+  "label_band": 0,
+  "save": false,
+  "out_dir": "art/build/npcs_lumewood_town",
+  "cells": [
+    [
+      ""
+    ],
+    [
+      ""
+    ],
+    [
+      "apprentice_2",
+      "stargazer_2",
+      "kid_2",
+      "keeper_2"
+    ]
+  ],
+  "overrides": {
+    "apprentice_2": {
+      "scale": 0.21,
+      "keep": "largest"
+    },
+    "stargazer_2": {
+      "scale": 0.21,
+      "keep": "largest"
+    },
+    "kid_2": {
+      "scale": 0.25,
+      "blank_top": 46
+    },
+    "keeper_2": {
+      "scale": 0.21,
+      "keep": "largest"
+    }
+  },
+  "sets": {
+    "lumewood_apprentice": {
+      "frames": {
+        "idle1": "npcs_lumewood_town:apprentice_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/lumewood_apprentice.png",
+      "sprite_frames": "assets/animations/npc_lumewood_apprentice.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle1"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "lumewood_stargazer": {
+      "frames": {
+        "idle1": "npcs_lumewood_town:stargazer_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/lumewood_stargazer.png",
+      "sprite_frames": "assets/animations/npc_lumewood_stargazer.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle1"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "lumewood_kid": {
+      "frames": {
+        "idle1": "npcs_lumewood_town:kid_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/lumewood_kid.png",
+      "sprite_frames": "assets/animations/npc_lumewood_kid.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle1"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "lumewood_keeper": {
+      "frames": {
+        "idle1": "npcs_lumewood_town:keeper_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/lumewood_keeper.png",
+      "sprite_frames": "assets/animations/npc_lumewood_keeper.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle1"
+          ],
+          "fps": 1.5
+        }
+      }
+    }
+  },
+  "grid": {
+    "rows": [
+      0,
+      512,
+      518,
+      1030
+    ],
+    "cols": [
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        420,
+        826,
+        1136,
+        1536
+      ]
+    ]
+  },
+  "inset": 2
+}

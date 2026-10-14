@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/npc_lumewood_apprentice.tres" id="2_sprite"]
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"lumewood_apprentice"
+display_name = "Tobin"
+title = "Apprentice"
+sprite_frames = ExtResource("2_sprite")
+greeting = "Archmage Celest says if I read this whole book, I'll learn one spell. One!"
+lines = PackedStringArray("Page four hundred and twelve. Still no spell.", "The library's crystals hum when it's about to rain.")
+storage = false

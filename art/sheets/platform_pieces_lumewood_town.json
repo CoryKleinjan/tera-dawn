@@ -1,0 +1,48 @@
+{
+  "source": "art/source/terrace_pieces_lumewood_town.png",
+  "art_px": 4.5,
+  "out_dir": "assets/sprites/platforms/lumewood_town",
+  "label_band": 0.2,
+  "inset": 6,
+  "keep": "largest",
+  "region": [
+    0,
+    0,
+    1774,
+    305
+  ],
+  "grid": {
+    "rows": [
+      0,
+      305
+    ],
+    "cols": [
+      0,
+      279,
+      887,
+      1494,
+      1774
+    ]
+  },
+  "cells": [
+    [
+      "cap_left",
+      "middle_a",
+      "middle_b",
+      "cap_right"
+    ]
+  ],
+  "strip_labels": true,
+  "overrides": {
+    "cap_left": {
+      "blank": [
+        [
+          0,
+          0,
+          175,
+          35
+        ]
+      ]
+    }
+  }
+}

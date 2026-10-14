@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="BuildingDef" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/building_def.gd" id="1_building_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/buildings/lumewood/small.png" id="2_small"]
+[ext_resource type="Texture2D" path="res://assets/sprites/buildings/lumewood/alchemist.png" id="2_alchemist"]
 
 [resource]
 script = ExtResource("1_building_def")
-id = &"lumewood_small"
-texture = ExtResource("2_small")
-height = 282.5
-door_x = 0.48
+id = &"lumewood_alchemist"
+texture = ExtResource("2_alchemist")
+height = 300.0
+door_x = 0.495

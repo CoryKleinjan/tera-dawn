@@ -1,136 +1,399 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=26 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=84 format=3]
 
-[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
-[ext_resource type="Resource" path="res://data/biomes/lumewood.tres" id="2_lumewood"]
-[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="3_platform_def"]
-[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="4_climbable_def"]
-[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="5_portal_def"]
-[ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="6_npc_placement"]
-[ext_resource type="Script" path="res://scripts/data/building_placement.gd" id="7_building_placement"]
-[ext_resource type="Resource" path="res://data/buildings/lumewood_large.tres" id="10_lumewood_large"]
-[ext_resource type="Resource" path="res://data/buildings/lumewood_small.tres" id="11_lumewood_small"]
-[ext_resource type="Resource" path="res://data/npcs/lumewood_taxi.tres" id="12_lumewood_taxi"]
-[ext_resource type="Resource" path="res://data/npcs/lumewood_shop.tres" id="13_lumewood_shop"]
-[ext_resource type="Resource" path="res://data/npcs/storage_keeper.tres" id="14_storage_keeper"]
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="map_def"]
+[ext_resource type="Resource" path="res://data/biomes/lumewood.tres" id="lumewood"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="platform_def"]
+[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="climbable_def"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="portal_def"]
+[ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="npc_placement"]
+[ext_resource type="Script" path="res://scripts/data/building_placement.gd" id="building_placement"]
+[ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="prop_placement"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
+[ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="backdrop_layer_def"]
+[ext_resource type="Resource" path="res://data/climb_styles/ladder.tres" id="ladder"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/lumewood/panorama.png" id="panorama"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lumewood_town/cap_left.png" id="p_cap_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lumewood_town/middle_a.png" id="p_middle_a"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lumewood_town/middle_b.png" id="p_middle_b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lumewood_town/cap_right.png" id="p_cap_right"]
+[ext_resource type="Resource" path="res://data/buildings/lumewood_library.tres" id="b_library"]
+[ext_resource type="Resource" path="res://data/buildings/lumewood_store.tres" id="b_store"]
+[ext_resource type="Resource" path="res://data/buildings/lumewood_observatory.tres" id="b_observatory"]
+[ext_resource type="Resource" path="res://data/buildings/lumewood_alchemist.tres" id="b_alchemist"]
+[ext_resource type="Resource" path="res://data/buildings/lumewood_dormitory.tres" id="b_dormitory"]
+[ext_resource type="Resource" path="res://data/npcs/lumewood_taxi.tres" id="n_lumewood_taxi"]
+[ext_resource type="Resource" path="res://data/npcs/lumewood_shop.tres" id="n_lumewood_shop"]
+[ext_resource type="Resource" path="res://data/npcs/lumewood_apprentice.tres" id="n_lumewood_apprentice"]
+[ext_resource type="Resource" path="res://data/npcs/lumewood_stargazer.tres" id="n_lumewood_stargazer"]
+[ext_resource type="Resource" path="res://data/npcs/lumewood_kid.tres" id="n_lumewood_kid"]
+[ext_resource type="Resource" path="res://data/npcs/lumewood_keeper.tres" id="n_lumewood_keeper"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood/lamp_post.png" id="t_lamp_post"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood/prop_fountain.png" id="t_prop_fountain"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood/prop_crystals.png" id="t_prop_crystals"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood/prop_mushroom_planter.png" id="t_prop_mushroom_planter"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood/prop_book_cart.png" id="t_prop_book_cart"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood/prop_star_globe.png" id="t_prop_star_globe"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood/prop_bench.png" id="t_prop_bench"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood/prop_crystal_pillar.png" id="t_prop_crystal_pillar"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood/prop_crystal_pillar_2.png" id="t_prop_crystal_pillar_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood/prop_scroll_barrel.png" id="t_prop_scroll_barrel"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood/prop_lectern.png" id="t_prop_lectern"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood/prop_telescope.png" id="t_prop_telescope"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood/prop_books.png" id="t_prop_books"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood/prop_urn.png" id="t_prop_urn"]
+
+[sub_resource type="Resource" id="Plat_terrace"]
+script = ExtResource("platform_def")
+x = 1850.0
+y = 770.0
+width = 1500.0
+solid = true
+
+[sub_resource type="Resource" id="Plat_spire"]
+script = ExtResource("platform_def")
+x = 2500.0
+y = 620.0
+width = 600.0
+solid = true
+
+[sub_resource type="Resource" id="Ladder_west"]
+script = ExtResource("climbable_def")
+x = 1880.0
+top = 770.0
+bottom = 920.0
+style = ExtResource("ladder")
+
+[sub_resource type="Resource" id="Ladder_east"]
+script = ExtResource("climbable_def")
+x = 3320.0
+top = 770.0
+bottom = 920.0
+style = ExtResource("ladder")
+
+[sub_resource type="Resource" id="Ladder_spire_west"]
+script = ExtResource("climbable_def")
+x = 2530.0
+top = 620.0
+bottom = 770.0
+style = ExtResource("ladder")
+
+[sub_resource type="Resource" id="Ladder_spire_east"]
+script = ExtResource("climbable_def")
+x = 3070.0
+top = 620.0
+bottom = 770.0
+style = ExtResource("ladder")
 
 [sub_resource type="Resource" id="Portal_west"]
-script = ExtResource("5_portal_def")
+script = ExtResource("portal_def")
 x = 60.0
 platform = 0
 target_map = &"glimmer_path"
 target_x = 2360.0
 
-[sub_resource type="Resource" id="Portal_mid"]
-script = ExtResource("5_portal_def")
-x = 1944.0
+[sub_resource type="Resource" id="Npc_taxi"]
+script = ExtResource("npc_placement")
+npc = ExtResource("n_lumewood_taxi")
+x = 280.0
 platform = 0
-target_map = &"glowcap_hollow"
-target_x = 120.0
+face = 1
 
-[sub_resource type="Resource" id="Portal_east"]
-script = ExtResource("5_portal_def")
-x = 2417.0
-platform = 0
-target_map = &"starfall_ridge"
-target_x = 120.0
-
-[sub_resource type="Resource" id="Building_0"]
-script = ExtResource("7_building_placement")
-building = ExtResource("10_lumewood_large")
-x = 526.0
-platform = 0
-flip = true
+[sub_resource type="Resource" id="Prop_crystals_west"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_crystals")
+x = 170.0
+y = -1.0
+depth = -3.0
 scale = 1.0
-tint = Color(0.92, 0.9, 0.94, 1.0)
 
-[sub_resource type="Resource" id="Building_1"]
-script = ExtResource("7_building_placement")
-building = ExtResource("11_lumewood_small")
-x = 907.0
+[sub_resource type="Resource" id="Prop_lamp_west"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_lamp_post")
+x = 430.0
+y = -1.0
+depth = -3.0
+scale = 1.0
+light_color = Color(0.62, 0.8, 1.0, 1.0)
+light_energy = 1.5
+light_height = 120.0
+
+[sub_resource type="Resource" id="Building_store"]
+script = ExtResource("building_placement")
+building = ExtResource("b_store")
+x = 650.0
 platform = 0
 flip = false
-scale = 1.15
-tint = Color(1.0, 1.0, 1.0, 1.0)
+scale = 1.0
 
 [sub_resource type="Resource" id="Door_store"]
-script = ExtResource("5_portal_def")
-x = 907.0
+script = ExtResource("portal_def")
+x = 650.0
 platform = 0
 target_map = &"lumewood_store"
 target_x = 240.0
 door = true
 
-[sub_resource type="Resource" id="Building_3"]
-script = ExtResource("7_building_placement")
-building = ExtResource("10_lumewood_large")
-x = 1309.0
+[sub_resource type="Resource" id="Npc_shop"]
+script = ExtResource("npc_placement")
+npc = ExtResource("n_lumewood_shop")
+x = 880.0
+platform = 0
+face = -1
+
+[sub_resource type="Resource" id="Npc_keeper"]
+script = ExtResource("npc_placement")
+npc = ExtResource("n_lumewood_keeper")
+x = 970.0
+platform = 0
+face = -1
+
+[sub_resource type="Resource" id="Prop_planter"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_mushroom_planter")
+x = 1065.0
+y = -1.0
+depth = -3.0
+scale = 1.0
+
+[sub_resource type="Resource" id="Building_library"]
+script = ExtResource("building_placement")
+building = ExtResource("b_library")
+x = 1350.0
 platform = 0
 flip = false
-scale = 1.12
-tint = Color(1.0, 1.0, 1.0, 1.0)
+scale = 1.0
 
 [sub_resource type="Resource" id="Door_hall"]
-script = ExtResource("5_portal_def")
-x = 1309.0
+script = ExtResource("portal_def")
+x = 1350.0
 platform = 0
 target_map = &"lumewood_hall"
 target_x = 240.0
 door = true
 
-[sub_resource type="Resource" id="Building_4"]
-script = ExtResource("7_building_placement")
-building = ExtResource("11_lumewood_small")
-x = 1680.0
+[sub_resource type="Resource" id="Prop_lamp_library"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_lamp_post")
+x = 1630.0
+y = -1.0
+depth = -3.0
+scale = 1.0
+light_color = Color(0.62, 0.8, 1.0, 1.0)
+light_energy = 1.5
+light_height = 120.0
+
+[sub_resource type="Resource" id="Portal_mid"]
+script = ExtResource("portal_def")
+x = 1730.0
+platform = 0
+target_map = &"glowcap_hollow"
+target_x = 120.0
+
+[sub_resource type="Resource" id="Wall_barrel"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_scroll_barrel")
+x = 2010.0
+y = 920.0
+scale = 1.0
+on_wall = true
+
+[sub_resource type="Resource" id="Wall_books"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_books")
+x = 2380.0
+y = 920.0
+scale = 1.0
+on_wall = true
+
+[sub_resource type="Resource" id="Wall_cart"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_book_cart")
+x = 2700.0
+y = 920.0
+scale = 1.0
+on_wall = true
+
+[sub_resource type="Resource" id="Wall_bench"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_bench")
+x = 2850.0
+y = 920.0
+scale = 1.0
+on_wall = true
+
+[sub_resource type="Resource" id="Wall_urn"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_urn")
+x = 3000.0
+y = 920.0
+scale = 1.0
+on_wall = true
+
+[sub_resource type="Resource" id="Wall_pillar"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_crystal_pillar_2")
+x = 3200.0
+y = 920.0
+scale = 1.0
+on_wall = true
+
+[sub_resource type="Resource" id="Building_alchemist"]
+script = ExtResource("building_placement")
+building = ExtResource("b_alchemist")
+x = 3600.0
 platform = 0
 flip = false
-scale = 0.98
-tint = Color(1.0, 0.92, 0.88, 1.0)
-
-[sub_resource type="Resource" id="Building_7"]
-script = ExtResource("7_building_placement")
-building = ExtResource("10_lumewood_large")
-x = 2171.0
-platform = 0
-flip = true
 scale = 1.0
-tint = Color(1.0, 0.95, 0.9, 1.0)
 
-[sub_resource type="Resource" id="Npc_taxi"]
-script = ExtResource("6_npc_placement")
-npc = ExtResource("12_lumewood_taxi")
-x = 330.0
+[sub_resource type="Resource" id="Prop_lamp_east"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_lamp_post")
+x = 3850.0
+y = -1.0
+depth = -3.0
+scale = 1.0
+light_color = Color(0.62, 0.8, 1.0, 1.0)
+light_energy = 1.5
+light_height = 120.0
+
+[sub_resource type="Resource" id="Portal_east"]
+script = ExtResource("portal_def")
+x = 3940.0
 platform = 0
+target_map = &"starfall_ridge"
+target_x = 120.0
+
+[sub_resource type="Resource" id="Building_dormitory"]
+script = ExtResource("building_placement")
+building = ExtResource("b_dormitory")
+x = 2150.0
+platform = 1
+flip = false
+scale = 1.0
+
+[sub_resource type="Resource" id="Prop_lectern"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_lectern")
+x = 2290.0
+y = 773.0
+depth = -3.0
+scale = 1.0
+
+[sub_resource type="Resource" id="Prop_lamp_terrace"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_lamp_post")
+x = 2370.0
+y = 773.0
+depth = -3.0
+scale = 1.0
+light_color = Color(0.62, 0.8, 1.0, 1.0)
+light_energy = 1.5
+light_height = 120.0
+
+[sub_resource type="Resource" id="Npc_apprentice"]
+script = ExtResource("npc_placement")
+npc = ExtResource("n_lumewood_apprentice")
+x = 2430.0
+platform = 1
+face = -1
+
+[sub_resource type="Resource" id="Prop_fountain"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_fountain")
+x = 3195.0
+y = 773.0
+depth = -3.0
+scale = 1.0
+light_color = Color(0.55, 0.85, 1.0, 1.0)
+light_energy = 1.2
+light_height = 50.0
+
+[sub_resource type="Resource" id="Npc_kid"]
+script = ExtResource("npc_placement")
+npc = ExtResource("n_lumewood_kid")
+x = 3270.0
+platform = 1
+face = -1
+
+[sub_resource type="Resource" id="Prop_globe"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_star_globe")
+x = 2595.0
+y = 623.0
+depth = -3.0
+scale = 1.0
+
+[sub_resource type="Resource" id="Npc_stargazer"]
+script = ExtResource("npc_placement")
+npc = ExtResource("n_lumewood_stargazer")
+x = 2650.0
+platform = 2
 face = 1
 
-[sub_resource type="Resource" id="Npc_shop"]
-script = ExtResource("6_npc_placement")
-npc = ExtResource("13_lumewood_shop")
-x = 1133.0
-platform = 0
-face = -1
+[sub_resource type="Resource" id="Building_observatory"]
+script = ExtResource("building_placement")
+building = ExtResource("b_observatory")
+x = 2800.0
+platform = 2
+flip = false
+scale = 1.0
 
-[sub_resource type="Resource" id="Npc_storage"]
-script = ExtResource("6_npc_placement")
-npc = ExtResource("14_storage_keeper")
-x = 1486.0
-platform = 0
-face = -1
+[sub_resource type="Resource" id="Prop_telescope"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_telescope")
+x = 2975.0
+y = 623.0
+depth = -3.0
+scale = 1.0
+
+[sub_resource type="Resource" id="Prop_pillar_spire"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_crystal_pillar")
+x = 3030.0
+y = 623.0
+depth = -3.0
+scale = 1.0
+light_color = Color(0.55, 0.8, 1.0, 1.0)
+light_energy = 1.0
+light_height = 45.0
+
+[sub_resource type="Resource" id="Backdrop_picture"]
+script = ExtResource("backdrop_layer_def")
+textures = Array[Texture2D]([ExtResource("panorama")])
+mode = 2
+depth = 300.0
+screen_top = Vector2(-0.2, -0.2)
+
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+hide_layers = PackedInt32Array(0, 1, 2, 3, 4, 5, 6)
+hide_ground_decor = PackedInt32Array(0, 1)
+more_backdrop = Array[ExtResource("backdrop_layer_def")]([SubResource("Backdrop_picture")])
+platform_left = ExtResource("p_cap_left")
+platform_middle = ExtResource("p_middle_a")
+platform_middle_alt = ExtResource("p_middle_b")
+platform_right = ExtResource("p_cap_right")
+terrace_left = ExtResource("p_cap_left")
+terrace_right = ExtResource("p_cap_right")
 
 [resource]
-script = ExtResource("1_map_def")
+script = ExtResource("map_def")
 id = &"lumewood"
 display_name = "Lumewood Sanctum"
-biome = ExtResource("2_lumewood")
-width = 2477
-height = 700
-ground_y = 620
+biome = ExtResource("lumewood")
+variant = SubResource("Variant")
+width = 4000
+height = 1000
+ground_y = 920
+lantern_spacing = 0.0
 start_x = 300.0
-platforms = Array[ExtResource("3_platform_def")]([])
-climbables = Array[ExtResource("4_climbable_def")]([])
-npcs = Array[ExtResource("6_npc_placement")]([SubResource("Npc_taxi"), SubResource("Npc_shop"), SubResource("Npc_storage")])
-buildings = Array[ExtResource("7_building_placement")]([SubResource("Building_0"), SubResource("Building_1"), SubResource("Building_3"), SubResource("Building_4"), SubResource("Building_7")])
+platforms = Array[ExtResource("platform_def")]([SubResource("Plat_terrace"), SubResource("Plat_spire")])
+climbables = Array[ExtResource("climbable_def")]([SubResource("Ladder_west"), SubResource("Ladder_east"), SubResource("Ladder_spire_west"), SubResource("Ladder_spire_east")])
+npcs = Array[ExtResource("npc_placement")]([SubResource("Npc_taxi"), SubResource("Npc_shop"), SubResource("Npc_keeper"), SubResource("Npc_apprentice"), SubResource("Npc_kid"), SubResource("Npc_stargazer")])
+props = Array[ExtResource("prop_placement")]([SubResource("Prop_crystals_west"), SubResource("Prop_lamp_west"), SubResource("Prop_planter"), SubResource("Prop_lamp_library"), SubResource("Wall_barrel"), SubResource("Wall_books"), SubResource("Wall_cart"), SubResource("Wall_bench"), SubResource("Wall_urn"), SubResource("Wall_pillar"), SubResource("Prop_lamp_east"), SubResource("Prop_lectern"), SubResource("Prop_lamp_terrace"), SubResource("Prop_fountain"), SubResource("Prop_globe"), SubResource("Prop_telescope"), SubResource("Prop_pillar_spire")])
+buildings = Array[ExtResource("building_placement")]([SubResource("Building_store"), SubResource("Building_library"), SubResource("Building_alchemist"), SubResource("Building_dormitory"), SubResource("Building_observatory")])
 region = &"lumewood"
 world_pos = Vector2(647.0, 118.0)
 town = true
 level_text = "Town"
-portals = Array[ExtResource("5_portal_def")]([SubResource("Portal_west"), SubResource("Portal_mid"), SubResource("Portal_east"), SubResource("Door_store"), SubResource("Door_hall")])
+portals = Array[ExtResource("portal_def")]([SubResource("Portal_west"), SubResource("Door_store"), SubResource("Door_hall"), SubResource("Portal_mid"), SubResource("Portal_east")])
