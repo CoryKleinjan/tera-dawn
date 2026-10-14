@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/npc_greenbough_keeper.tres" id="2_sprite"]
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"greenbough_keeper"
+display_name = "Marta"
+title = "Storage Keeper"
+sprite_frames = ExtResource("2_sprite")
+greeting = "Marta's lockboxes, safe as an oak. Leave it here and the keepers in every town can hand it back to you."
+lines = PackedStringArray("Ten Dawnshards a stack, and I'll even dust it.", "Nothing's gone missing since the squirrels learned their lesson.")
+storage = true

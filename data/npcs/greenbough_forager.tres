@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/npc_greenbough_forager.tres" id="2_sprite"]
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"greenbough_forager"
+display_name = "Old Fenwick"
+title = "Forager"
+sprite_frames = ExtResource("2_sprite")
+greeting = "Red caps for stew, brown caps for tea, and the spotted ones for nobody at all."
+lines = PackedStringArray("I've walked these woods sixty years and they still surprise me.", "Mind the moss on the high boughs. It's slicker than it looks.")
+storage = false
