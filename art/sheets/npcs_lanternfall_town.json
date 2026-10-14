@@ -1,0 +1,164 @@
+{
+  "source": "art/source/npcs_lanternfall_town.png",
+  "label_band": 0.12,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/npcs_lanternfall_town",
+  "cells": [
+    [
+      "lamplighter_1",
+      "card_sharp_1",
+      "urchin_1",
+      "keeper_1"
+    ],
+    [
+      "lamplighter_2",
+      "card_sharp_2",
+      "urchin_2",
+      "keeper_2"
+    ]
+  ],
+  "overrides": {
+    "lamplighter_1": {
+      "scale": 0.18,
+      "keep": "largest"
+    },
+    "lamplighter_2": {
+      "scale": 0.18,
+      "keep": "largest"
+    },
+    "card_sharp_1": {
+      "scale": 0.18,
+      "keep": "largest"
+    },
+    "card_sharp_2": {
+      "scale": 0.18,
+      "keep": "largest"
+    },
+    "urchin_1": {
+      "scale": 0.18,
+      "keep": "largest",
+      "blank": [
+        [
+          290,
+          190,
+          384,
+          330
+        ]
+      ]
+    },
+    "urchin_2": {
+      "scale": 0.18,
+      "keep": "largest",
+      "blank": [
+        [
+          290,
+          190,
+          384,
+          330
+        ]
+      ]
+    },
+    "keeper_1": {
+      "scale": 0.18,
+      "keep": "largest"
+    },
+    "keeper_2": {
+      "scale": 0.18,
+      "keep": "largest"
+    }
+  },
+  "grid": {
+    "rows": [
+      0,
+      515,
+      1030
+    ],
+    "cols": [
+      0,
+      384,
+      768,
+      1152,
+      1536
+    ]
+  },
+  "inset": 6,
+  "sets": {
+    "lanternfall_lamplighter": {
+      "frames": {
+        "idle1": "npcs_lanternfall_town:lamplighter_1",
+        "idle2": "npcs_lanternfall_town:lamplighter_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/lanternfall_lamplighter.png",
+      "sprite_frames": "assets/animations/npc_lanternfall_lamplighter.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "lanternfall_card_sharp": {
+      "frames": {
+        "idle1": "npcs_lanternfall_town:card_sharp_1",
+        "idle2": "npcs_lanternfall_town:card_sharp_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/lanternfall_card_sharp.png",
+      "sprite_frames": "assets/animations/npc_lanternfall_card_sharp.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "lanternfall_urchin": {
+      "frames": {
+        "idle1": "npcs_lanternfall_town:urchin_1",
+        "idle2": "npcs_lanternfall_town:urchin_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/lanternfall_urchin.png",
+      "sprite_frames": "assets/animations/npc_lanternfall_urchin.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "lanternfall_keeper": {
+      "frames": {
+        "idle1": "npcs_lanternfall_town:keeper_1",
+        "idle2": "npcs_lanternfall_town:keeper_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/lanternfall_keeper.png",
+      "sprite_frames": "assets/animations/npc_lanternfall_keeper.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 1.5
+        }
+      }
+    }
+  }
+}

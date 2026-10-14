@@ -1,0 +1,35 @@
+{
+  "source": "art/source/building_lanternfall_clock_tower.png",
+  "art_px": 4.277,
+  "out_dir": "assets/sprites/buildings/lanternfall",
+  "label_band": 0,
+  "inset": 0,
+  "grid": {
+    "rows": [
+      0,
+      2047
+    ],
+    "cols": [
+      0,
+      1151
+    ]
+  },
+  "cells": [
+    [
+      "clock_tower"
+    ]
+  ],
+  "flat_bottom": true,
+  "overrides": {
+    "clock_tower": {
+      "blank": [
+        [
+          0,
+          1951,
+          1152,
+          2048
+        ]
+      ]
+    }
+  }
+}

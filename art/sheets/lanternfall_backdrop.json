@@ -1,28 +1,28 @@
 {
-  "source": "art/source/room_lanternfall_wall.png",
+  "source": "art/source/lanternfall_backdrop.png",
   "detail": 1,
-  "out_dir": "assets/sprites/rooms/lanternfall",
+  "out_dir": "assets/sprites/backgrounds/lanternfall",
   "background": [
     255,
     0,
     255
   ],
-  "scale": 0.2481,
+  "scale": 1.0,
   "label_band": 0,
   "inset": 0,
   "grid": {
     "rows": [
       0,
-      4095
+      1316
     ],
     "cols": [
       0,
-      3139
+      3072
     ]
   },
   "cells": [
     [
-      "wall"
+      "panorama"
     ]
   ]
 }
