@@ -11885,6 +11885,31 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cells hold a quilted padded warrior's jerkin with a leather belt, on its own with no body inside. Some jerkins have a missing hole or notch where an arm or fist used to cover them, most clearly in cell 6 (bottom row, second cell). In every cell, fill any hole, gap or notch with the same quilted padded cloth, stitching and belt, continuing the shapes naturally, so each jerkin is one complete, unbroken garment. Keep everything that is already painted exactly as it is, in exactly the same place, size and angle; do not redraw, move or resize any jerkin. Leave empty cells empty and the rest of the background flat pure magenta #FF00FF. Paint nothing else: no body, arms, hands, head or other objects. Style: match the existing jerkin exactly, with the warm colours and thin dark plum-brown outline of the painted villagers in the attached picture. Keep the grid lines. No text."
   }
+ },
+ {
+  "id": "mshero_war_trousers_move_fill",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_war_trousers_move_fill.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 22:27Z 'Regeb with no holes', 22:30Z 'it looks like there's a hole in the pants too'): fills the trouser notches on a plain magenta base.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/warrior/trousers_move_on_magenta.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cells hold a pair of sturdy olive-brown warrior's trousers with knee patches, on their own with no body inside. Some have a missing notch or bite where a hand or arm used to cover them: on the left hip in cells 1 and 2 (top row), and on the back leg in cell 6 (bottom row, second cell), where the leg is cut short. In every cell, fill any notch, gap or missing part with the same cloth, seams and patches, continuing the shapes naturally (in cell 6 complete the leg down to mid-shin), so each pair is one complete, unbroken garment. Keep everything that is already painted exactly as it is, in exactly the same place, size and angle; do not redraw, move or resize anything. Leave empty cells empty and the rest of the background flat pure magenta #FF00FF. Paint nothing else: no body, legs, feet or other objects. Style: match the existing trousers exactly, with the warm colours and thin dark plum-brown outline of the painted villagers in the attached picture. Keep the grid lines. No text."
+  }
  }
 ]
 }
