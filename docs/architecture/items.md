@@ -56,11 +56,8 @@ The Shield slot is called Off-hand in the game (its place key stays `shield`): i
 2. Create the `.tres` in `data/items/equips/` (make the folder; the game has no gear while it is
    redrawn for the new hero), `use/`, `etc/`, `scrolls/` or `setup/` as an **EquipDef**, **UseDef**
    or **ItemDef**. Fill in `id`, name, description, icon and `sell_price`; for gear, the slot,
-   requirements and a **StatBlock** in `stats`. A top, bottom or shoes also needs a
-   `worn_style`, the cut it's drawn in on the hero (tops: tunic, coat, robe, vest, plate,
-   undershirt; bottoms: trousers, pants, breeches, shorts, greaves; shoes: shoes, boots,
-   sandals, clogs, sabatons), tinted with its colour; `tests/unit/appearance_test.gd` checks
-   the cut exists.
+   requirements and a **StatBlock** in `stats`. Worn gear needs its art on the hero (below);
+   a hat also names its template shape in `look_shape` (helm, tricorn, bandana, hood, wizard).
 3. Make something drop it: a **DropEntry** on a monster's `drops` (item, chance from 0 to 1,
    amount range). Rare gear is usually 1 to 4%.
 
@@ -73,21 +70,15 @@ for the loot key, and stays there if its tab is full.
 
 ## How to add a weapon
 
-- **A new weapon item** of an existing kind is just an item (above) with its `weapon_kind` and
-  its icon on an `items_*` sheet: `python3 tools/art/paperdoll_layers.py` turns the icon into
-  the picture he holds (`weapon_item_<id>`, a piece placed in his fist each frame), so it looks
-  the same in his hand as in the bag. `held_size` grows or shrinks it against its kind.
-- **New shields, hats, clothes and gloves** wait for the new paperdoll hero, which paints gear
-  per part from its icon. Until then a new piece is drawn with its shape's tinted art or its
-  `worn_style` cut in its colour.
-- **A new weapon kind**: draw its greyscale template on the paperdoll weapons sheet (add its
-  cell to `paperdoll_weapons.json` and `WEAPON_KINDS` in `tools/art/paperdoll/common.py`), say how it's
-  held in `art/sheets/paperdoll_rig.json` "holds" ("like" another kind, or an angle per frame,
-  "behind" for frames it goes behind him; add it to `AXIAL` if a long weapon drawn slanted
-  should be straightened, `GRIPPED` if the fingers wrap it, `ON_BACK` if it's carried on the back), give it
-  a row in `WeaponStyle.MOTIONS`, then run the tool and check `art/build/paperdoll_preview.png`
-  (one row of frames per kind).
-- **A new motion**: add the animation to the hero set in `art/sheets/paperdoll_body.json`
-  (frames, fps, per-frame `durations`), point the kinds that use it at it in
+- **Worn gear** (tops, bottoms, hats): a Gemini edit of the body sheet with the piece on
+  (`art/source/hero/body_<body>_<piece>.png`, one per body), and for a hat the same shape as
+  its template cell. Name it in `WORN` or `HAT_ITEMS` in `tools/art/hero_build.py` and run it:
+  it writes `layers/worn_item_<id>.png`. The item's icon is painted to match (see
+  `art/sheets/README.md`).
+- **Weapons and shields** wait on their art: the rig has no holds yet (`hero_rig.json`
+  "weapons"). Until then any weapon is held as a sword (`Paperdoll.kind_of`) with no picture.
+- **A new weapon kind**: give it a row in `WeaponStyle.MOTIONS` and its hold in the rig.
+- **A new motion**: add the animation to `ANIMATIONS` in `tools/art/hero_build.py`
+  (poses, fps, per-frame lengths), point the kinds that use it at it in
   `WeaponStyle.MOTIONS`, list it in `WeaponStyle.ACTIONS`, and give it a `SpriteRig.FALLBACK`
   for sprites that don't have it.

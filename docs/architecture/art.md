@@ -8,26 +8,12 @@ Drop the sheet in `art/source/`, write a manifest in `art/sheets/`, and run
 `python3 tools/art/slice_sheets.py <name>`. `art/sheets/README.md` explains the manifest. The
 cut sprites land in `assets/sprites/`, ready to be referenced from data.
 
-The hero is being rebuilt as a new paperdoll (painted parts in the NPC style, hands with
-fingers, hair under hats from Cory's template sheets; see [game rules](../game-rules.md)). Until
-it is approved, the old hero below stays in game.
-
-The old hero's layers come from `python3 tools/art/paperdoll_layers.py` instead (after
-`slice_sheets.py paperdoll_body`). A new **clothing cut** is a sheet of the body wearing the
-piece in every pose, on the body sheet's grid, item in greys: `art/source/<place>_<style>_frames.png`
-with a manifest `art/sheets/<place>_<style>_frames.json` (copy `top_tunic_frames.json`; place
-is top, bottom or shoes). The tool lifts the piece off each pose into
-`layers/<place>_<style>.png`, and any item with `worn_style = &"<style>"` wears it. A sheet that
-came back unusable goes in `WORN_BROKEN`, and its items use the nearest cut.
-
-`paperdoll_layers.py` is a thin entry point for the `tools/art/paperdoll/` package, one module
-per part. `common.py` holds the paths, sizes and name lists (`WORN_BROKEN`, `WEAPON_KINDS`,
-`HAIRSTYLES`, `FACES`, ...) and the helpers that cut, place and write layers; `body.py` reads
-the body strip and hand-placed rig; `hair.py`, `faces.py`, `hats.py`, `worn.py` (clothes, cape,
-shields), `gloves.py` and `weapons.py` each make their layers; `build.py` runs them in turn and
-writes the region mask, rig and `--preview`. A new kind of layer is a module with a
-`<thing>_layers(hero, ...)` step called from `build.main`. Every name stays importable as
-`paperdoll_layers.<name>` (the art tool tests and `grip_guide.py` use them).
+The hero is not cut by the slicer: `python3 tools/art/hero_build.py` builds his strips, layers,
+rig and animations from the painted sheets in `art/source/hero/` (see `art/sheets/README.md`
+"The paperdoll"). Each body is one sheet of poses, and each piece he wears is a Gemini edit of
+that sheet with the piece on, lifted off by the difference so it lines up frame for frame. Hats
+are drawn in one of the shapes on Cory's hat/hair template sheets (`hats_<body>.png`), which the
+tool places on his head on every pose. `--preview` writes `art/build/hero_preview.png`.
 
 ## Making art with Gemini
 

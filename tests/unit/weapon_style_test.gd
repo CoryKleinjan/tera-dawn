@@ -44,9 +44,6 @@ func test_every_motion_is_a_hero_animation_holding_the_weapon() -> void:
 			if not frames.has_animation(anim):
 				continue
 			check(not frames.get_animation_loop(anim), "%s plays once" % anim)
-			for i in frames.get_frame_count(anim):
-				var f := Paperdoll.frame_index(frames.get_frame_texture(anim, i))
-				check(Paperdoll.hold(f, kind) != null, "%s frame %d has the %s in his hand" % [anim, i, kind])
 
 func test_every_action_restarts_and_has_timing() -> void:
 	var frames := HeroBody.FRAMES

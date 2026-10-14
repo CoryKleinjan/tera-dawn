@@ -9,8 +9,10 @@ look and outfit (`NewCharacter`). `Net.create_character` makes a level 1 charact
 starting job (`Character.START_JOB`) and saves it on this computer (`CharacterStore.create`),
 then character select shows the list with the new character picked.
 
-- **Appearance** (on the Character) is a skin tone, face, eye colour, hairstyle and hair
-  colour, each the id of a `LookDef` in `data/looks/`. Add an option by adding a file;
+- **Appearance** (on the Character) is a set of `LookDef` ids from `data/looks/`; only the
+  hairstyle has options for now, and it names its body (`LookDef.body`: boy or girl). The skin,
+  face, eye and hair colour kinds stay, empty: nothing is recoloured, so a new tone is new
+  painted art. The creator leaves out kinds with nothing to pick. Add an option by adding a file;
   `creator` and `order` decide whether and where the creator lists it.
 - **Outfit** choices come from the starting job's `creator_gear` (one piece per kind). It is
   empty while the gear is being redrawn, so the creator offers no outfit for now.
@@ -22,26 +24,21 @@ then character select shows the list with the new character picked.
   rig (`HeroBody.make_rig`) in a little 3D stage of its own, lit and colour graded like the map
   showing now (`TDStage.light_portrait`, `shaders/grade.gdshaderinc`), so he looks exactly as he
   does in game. There is no separate menu drawing to keep in step.
-- **The old hero's layers** (in game until the new paperdoll hero, being rebuilt from
-  `art/reference/hero.png`, is approved and replaces them): a bare body strip (`hero.png`)
-  with layers that play frame for frame with it: hair (front and back), faces and irises, and
-  worn cuts (`assets/animations/paperdoll/`). `tools/art/paperdoll_layers.py` builds them, with
-  the body's region map (`hero_regions.png`) and rig (`hero_rig.json`: head, face, neck, hand
-  and off-hand per frame, and how each weapon kind is held). The skin tone recolours the body;
-  hair, irises and greyscale gear cuts are tinted (`shaders/gear_tint.gdshaderinc` keeps the
-  painted shading). Under a hat his own hair layer is cut where the hat's
-  `haircut_<hat>_<style>.png` strip says (`Piece.hair_cuts`). In the 3D stage his layers are
-  lit like everyone else, sampled from mipmaps and blended at their edges
-  (`shaders/paperdoll_stage.gdshaderinc`), drawn in order with their own render priorities
-  (`TDStage.PRIORITY_*`). Gear that keeps its shape (weapon, off-hand, hat) is a
-  `Paperdoll.Piece`: one picture per view that the game places, turns and sizes on every frame
-  (`assets/sprites/characters/pieces/<name>.json`, written by `tools/art/paperdoll/pieces.py`).
-  A weapon is always in his front fist with his fingers drawn over its grip (`fist_<kind>.png`,
-  `shaders/paperdoll_piece.gdshaderinc`) and on his back while he climbs; every kind copies the
-  staff's holds ("holds" in `art/sheets/paperdoll_rig.json`) with its own grip point. Clothes,
-  shoes and capes bend with his body, so they stay strips (`EquipDef.worn_style`,
-  `EquipDef.worn_frames`). The strip is cut at the painted sheet's full resolution:
-  `Paperdoll.ART_SCALE` strip pixels make one hero pixel.
+- **The hero's layers**: both bodies side by side on one strip (`hero.png`, bald, with their
+  painted faces), each with its own animations over it (`hero.tres` for the boy,
+  `hero_girl.tres` for the girl; `Paperdoll.BODIES`), and layers laid out like the strip that
+  play frame for frame with it: the hair (`layers/hair_<style>.png`) and each worn piece
+  (`layers/worn_item_<id>.png`), all in their painted colours, never recoloured.
+  `tools/art/hero_build.py` builds them all, with the rig (`hero_rig.json`: each frame's pose,
+  body and head).
+  A hat is drawn in one of the template shapes (`EquipDef.look_shape`: helm, tricorn, bandana,
+  hood, wizard): under it the hair is that shape's (`layers/hair_<style>_<shape>.png`) and the
+  body shader cuts his head away where the hat hides it (`pieces/headcut_<shape>.png`). In the
+  3D stage his layers are lit like everyone else, sampled from mipmaps and blended at their
+  edges (`shaders/paperdoll_stage.gdshaderinc`), drawn in order with their own render
+  priorities (`TDStage.PRIORITY_*`). Weapons and shields will be a `Paperdoll.Piece` (one
+  picture placed in his front fist on every frame); none are drawn yet. The strip is cut at
+  the painted sheet's full resolution: `Paperdoll.ART_SCALE` strip pixels make one hero pixel.
 - **Animation**: each weapon fights its own way (`WeaponStyle`): a skill's motion ("attack",
   "slash") becomes the weapon's own animation (a bow shoots, a star is thrown, knuckles punch, a
   staff smashes), and other names play as they are, except "cast" (`WeaponStyle.SPELL`):
@@ -49,13 +46,10 @@ then character select shows the list with the new character picked.
   `SpriteRig.pulse`). Frames have their own durations (a held wind-up), and `TDPlayer` adds a
   ready stance after fighting, a turn, the top of a jump, a landing crouch only after a real
   drop and a walk that keeps step with his speed and picks up 15% pace after about 0.4 s
-  (`SpriteRig.STEP_CYCLES`; the run frames never play). Every walk frame is drawn mid-stride, so on the passing
-  steps (`Paperdoll.PASSING_STEPS`) the shaders slide his lower legs in toward each other,
-  his body and every strip layer alike (`shaders/paperdoll_stride.gdshaderinc`). Standing, he breathes (the rig's body rises and settles
+  (`SpriteRig.STEP_CYCLES`; the run frames never play). Standing, he breathes (the rig's body rises and settles
   slightly from his feet, so every layer moves with it: `SpriteRig.breathes`, `BREATH_*`) and blinks
   now and then, sometimes twice (the "blink" animation, `SpriteRig.BLINK_EVERY`), in menus too.
-  NPCs hold still (`SpriteRig.hold_still`). Held weapons point forward on every resting and
-  moving frame (`tests/unit/hero_pose_test.gd`). Poses not drawn yet fall back to the nearest
+  NPCs hold still (`SpriteRig.hold_still`). Poses not drawn yet fall back to the nearest
   one (`SpriteRig.FALLBACK`). `WeaponTrail` draws the streak a
   swung blade leaves and the flash of a shot.
 - **One body for every hero**: your hero (`TDPlayer`) and other players' (`TDAvatar`) each

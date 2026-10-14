@@ -1,8 +1,8 @@
 class_name PaperdollSprite
 extends Node3D
 ## The dressed hero in the 3D stage. It goes on the hero's AnimatedSprite3D (SpriteRig's
-## body): it recolours his skin and clothes with the paperdoll shader, and keeps the layers
-## (hair, face, gear) in step with whatever frame he is showing, and drawn back to front.
+## body): it cuts his head under a hat with the paperdoll shader, and keeps the layers
+## (hair, gear) in step with whatever frame he is showing, and drawn back to front.
 ## SpriteRig.dress() makes one; give it a look with `set_look`.
 
 const SHADER := preload("res://shaders/paperdoll_sprite.gdshader")
@@ -65,8 +65,8 @@ func set_look(new_look: Dictionary) -> void:
 		if l.piece:
 			a = Sprite3D.new()
 		else:
-			a = AnimatedSprite3D.new()
-			(a as AnimatedSprite3D).sprite_frames = l.frames
+			a = AnimatedSprite3D.new()  # the body's frames: the shader draws the layer's strip
+			(a as AnimatedSprite3D).sprite_frames = doll.frames
 		TDStage.style_sprite(a, _texel)
 		a.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		a.material_override = _layer_material(l)
@@ -142,15 +142,14 @@ func _place(s: Sprite3D, l: Paperdoll.Layer, i: int, frame: int, mirror: bool) -
 	s.modulate = body.modulate
 	l.apply_pose(s.material_override as ShaderMaterial, frame, p)
 
-## A layer's material: its frames are regions of one strip, which the shader samples, in
-## the layer's colour.
+## A layer's material: its strip (laid out like the body strip, so the body's frames are its
+## regions), which the shader samples.
 static func _layer_material(l: Paperdoll.Layer) -> ShaderMaterial:
 	var mat := ShaderMaterial.new()
 	mat.shader = LAYER_SHADER
 	if l.piece:
 		mat.set_shader_parameter(&"strip", null)  # set per frame (_place): the pose's picture
 	else:
-		var tex := l.frames.get_frame_texture(&"idle", 0) if l.frames.has_animation(&"idle") else null
-		mat.set_shader_parameter(&"strip", tex.atlas if tex is AtlasTexture else tex)
+		mat.set_shader_parameter(&"strip", l.strip)
 	l.apply(mat)
 	return mat

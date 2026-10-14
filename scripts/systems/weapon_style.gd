@@ -7,8 +7,8 @@ extends RefCounted
 ## everyone watching you work it out the same way from the weapon you wear, so they all see
 ## the same motion.
 ##
-## Add a weapon kind with a row here, its holds in art/sheets/paperdoll_rig.json and its
-## picture on the paperdoll weapons sheet (see docs/architecture/items.md "How to add a weapon").
+## Add a weapon kind with a row here and its hold in the hero's rig (tools/art/hero_build.py;
+## see docs/architecture/items.md "How to add a weapon").
 
 ## weapon kind -> {motion: animation}
 const MOTIONS := {

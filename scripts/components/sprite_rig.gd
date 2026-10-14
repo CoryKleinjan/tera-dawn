@@ -121,6 +121,24 @@ func dress(look: Dictionary) -> void:
 		paperdoll = PaperdollSprite.new(body as AnimatedSprite3D, (body as AnimatedSprite3D).pixel_size * TDStage.PX, hero_priority)
 		body.add_child(paperdoll)
 	paperdoll.set_look(look)
+	set_frames(paperdoll.doll.frames)
+
+## Swaps the body's animations for another set laid out the same way (a girl's body for a
+## boy's), staying on the same animation and frame.
+func set_frames(frames: SpriteFrames) -> void:
+	var a := body as AnimatedSprite3D
+	if a == null or frames == null or frames == _frames:
+		return
+	var anim := a.animation
+	var frame := a.frame
+	var progress := a.frame_progress
+	var playing := a.is_playing()
+	_frames = frames
+	a.sprite_frames = frames
+	a.animation = anim if frames.has_animation(anim) else &"idle"
+	a.set_frame_and_progress(mini(frame, frames.get_frame_count(a.animation) - 1), progress)
+	if playing:
+		a.play()
 
 func add_light(col: Color, energy: float, height_px: float) -> void:
 	light = TDStage.light(col, energy, 3.5)

@@ -50,13 +50,13 @@ assets/
 art/
   source/             The art sheets (Gemini batch output, painted)
   sheets/             One manifest per sheet: how to cut it
-  reference/          hero.png, the reference for hero proportions
+  source/hero/        The hero's painted body sheets, worn-gear edits and hat templates
+  reference/          hero.png (hero proportions) and hero_look.png (the approved hero look)
 store/                Steam capsules and key art
 tools/art/            Slicer and its helpers (platform_pieces, climb_pieces, clean_sheet, land_pixels),
-                      Gemini batch runner (gemini_pass.py + gemini_pass.json), paperdoll layers
-                      (paperdoll_layers.py, entry point for the paperdoll/ package), store-art
-                      cropper, fx textures, contact-sheet preview; sheet_check.py (checks Gemini
-                      results), rekey_sheet.py, strip_template.py, body_panels.py, grip_guide.py,
+                      Gemini batch runner (gemini_pass.py + gemini_pass.json), the hero
+                      (hero_build.py), store-art cropper, fx textures, contact-sheet preview;
+                      sheet_check.py (checks Gemini results), rekey_sheet.py, strip_template.py,
                       gemini_sheet.py (Gemini API helpers)
 tools/audio/          Lyria music runner (lyria_pass.py + lyria_cues.json), make_music.py (loops, jingles), make_sfx.py
 docs/architecture/    One page per system (linked from ARCHITECTURE.md)

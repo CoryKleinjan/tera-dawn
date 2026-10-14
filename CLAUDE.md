@@ -26,7 +26,7 @@ tests/run_all.sh                 # every Godot test + smoke test, as CI runs it
 tests/run_all.sh inventory       # only tests matching a name
 python3 -m unittest discover -s tools/art/tests -t tools/art/tests   # art tool tests
 python3 tools/art/slice_sheets.py [manifest]                         # cut sheets into assets/
-python3 tools/art/paperdoll_layers.py                                # rebuild the old hero's layers
+python3 tools/art/hero_build.py --preview                            # rebuild the hero strips and layers
 python3 tools/art/gemini_pass.py --dry-run                           # Gemini batch cost check (free)
 ```
 

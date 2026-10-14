@@ -20,7 +20,6 @@ glow_color = Color(0.490196, 0.560784, 0.701961, 1.0)
 pickup_effect = ExtResource("3_shard_pickup")
 sell_price = 736
 slot = 3
-worn_style = &"trousers"
 required_level = 10
 stats = SubResource("Resource_1")
 variance = 2

@@ -166,11 +166,11 @@ func test_the_creators_choices_make_a_beginner_with_that_look() -> void:
 func test_others_see_your_look_and_gear() -> void:
 	var a := h.join(2, "Ann")
 	h.join(3, "Bob", ServerHarness.FIELD, 700.0)
-	a.character.appearance.hair_color = &"hair_color_copper"
+	a.character.appearance.hair = &"hair_ponytail"
 	h.step(TDServer.SNAPSHOT_EVERY)
 	var look: Dictionary = h.player_info(3, 2)[6]
 	check_eq(look, a.character.look(), "Ann's look in her info")
-	check_eq(look["appearance"]["hair_color"], "hair_color_copper", "her hair colour")
+	check_eq(look["appearance"]["hair"], "hair_ponytail", "her hairstyle")
 	check_eq(look["gear"]["weapon"], "training_sword", "her sword")
 
 func test_player_info_is_sent_only_when_it_changes() -> void:

@@ -1,7 +1,8 @@
 class_name Appearance
 extends RefCounted
-## What a character was made to look like: skin tone, face, eye colour, hairstyle and hair
-## colour, each the id of a LookDef. What they wear is on top of this (see Paperdoll).
+## What a character was made to look like: each the id of a LookDef. Only the hairstyle has
+## options for now (it picks the body); skin tone, face, eye and hair colour are painted on
+## the body. What they wear is on top of this (see Paperdoll).
 
 var skin: StringName
 var face: StringName

@@ -1,115 +1,66 @@
 class_name Paperdoll
 extends RefCounted
 ## How a character looks, worked out from their look (Character.look(): appearance and the
-## gear that shows). The hero is drawn as layers: a bare body, then hair, face and each piece
-## of gear, each a strip that plays frame for frame with the body. PaperdollSprite shows it
-## in the world and PaperdollView in menus.
+## gear that shows). The hero is a boy or a girl body (the hairstyle's LookDef.body), drawn as
+## layers that play frame for frame with it: a bald body with its painted face, then each
+## piece of gear and the hair, each a strip laid out like the body strip
+## (tools/art/hero_build.py makes them all from the painted sheets in art/source/hero/).
+## PaperdollSprite shows it in the world and PaperdollView in menus.
 ##
-## The body (hero.png) comes with a region map (hero_regions.png: which pixels are skin, the
-## chest, the shorts and the feet) and a rig (hero_rig.json: where his head, face, neck, hand
-## and shield are in every frame), both made with the layers by tools/art/paperdoll_layers.py.
-## The skin tone recolours his skin. A worn top, bottom or shoes is a greyscale cut tinted with
-## its colour (EquipDef.worn_style: a tunic, boots...) over the bare skin, or its own art
-## (EquipDef.worn_frames); with neither it recolours the chest, shorts or feet. A bottom's cut
-## also recolours the shorts, so no grey shows at its edges. Hair, irises, capes,
-## shields and gloves are greyscale art tinted with the hair, eye or item colour. The weapon
-## a weapon, a shield and a hat keep their shape, so each is a Piece: one picture per view that
-## goes in his fist, on his arm or on his head on every frame, where the rig says, with his
-## fingers drawn over a weapon's grip (fist masks); a weapon kind is held its own way (a bow
-## upright, a staff planted). The hair under a hat is his own hair, cut where the hat hides it
-## (Piece.hair_cuts) so none pokes out of its top or sides. A helm drawn smaller than his
-## head also cuts away his head and face where they would poke out of it (Piece.head_cut), only
-## while it is worn.
+## The body (hero.png, both bodies side by side) comes with a rig (hero_rig.json: each frame's
+## pose and where his head is). Everything is drawn in its painted colours, never recoloured:
+## another skin tone, hair colour or gear colour is its own painted art. Worn gear is
+## layers/worn_item_<id>.png. A hat is drawn
+## in one of the hat shapes of the hat/hair templates (EquipDef.look_shape): under it shows
+## that shape's hair for his hairstyle (hair_<style>_<shape>.png) instead of his own, and his
+## body is cut away where the hat hides it (pieces/headcut_<shape>.png: his ear under a helm).
+## A weapon or shield keeps its shape, so it is a Piece: one picture per view placed in his
+## fist or on his arm on every frame, where the rig says.
 
-## The parts of the body, as hero_regions.png numbers them. Hair, eyes, cape, weapon, shield
-## and gloves are layers now, so only skin, top, bottom and shoes are on the map.
-enum Region { NONE, HAIR, SKIN, EYES, TOP, BOTTOM, SHOES, CAPE, WEAPON, SHIELD, GLOVES }
-const REGIONS := 11
-## Worn places that show on the hero, in drawing order (back to front) for layered art.
+## Worn places with art of their own, in drawing order (back to front) over his body. The hat
+## and weapon go over the hair, after these.
+const WORN_PLACES: Array[StringName] = [&"cape", &"bottom", &"shoes", &"top", &"gloves"]
+## Every worn place that shows on him (Character.look sends these).
 const SHOWN_PLACES: Array[StringName] = [&"cape", &"bottom", &"shoes", &"top", &"gloves", &"shield", &"hat", &"weapon"]
-## The body region a worn piece without art of its own recolours.
-const PLACE_REGIONS := {&"bottom": Region.BOTTOM, &"shoes": Region.SHOES, &"top": Region.TOP}
-## How strongly it recolours it (a little of the body's shading shows through).
-const PLACE_STRENGTH := 0.85
-## The chest and feet are skin when nothing is worn there.
-const BARE_SKIN: Array[StringName] = [&"top", &"shoes"]
 
-const FRAMES := preload("res://assets/animations/hero.tres")
+## Each body's animations over the strip, by LookDef.body.
+const BODIES := {
+	&"boy": preload("res://assets/animations/hero.tres"),
+	&"girl": preload("res://assets/animations/hero_girl.tres"),
+}
+const DEFAULT_BODY := &"boy"
+## Any body's animations (every body has the same ones, with the same timings).
+const FRAMES: SpriteFrames = BODIES[DEFAULT_BODY]
 const STRIP := preload("res://assets/sprites/characters/hero.png")
-const MASK := preload("res://assets/sprites/characters/hero_regions.png")
 const RIG_PATH := "res://assets/sprites/characters/hero_rig.json"
-## The art for worn places with no art of their own: tinted with the piece's colour.
-const CAPE := preload("res://assets/animations/paperdoll/cape.tres")
-## The cape's part in front of him: its collar and clasp, or all of it seen from behind (climbing).
-const CAPE_FRONT := preload("res://assets/animations/paperdoll/cape_front.tres")
-const SHIELD := preload("res://assets/animations/paperdoll/shield_round.tres")
-## Gloves on both hands (climbing: bare hands).
-const GLOVES := preload("res://assets/animations/paperdoll/gloves.tres")
-## Pieces (Piece): gear that keeps its shape, one picture per view placed on him each frame.
-## weapon_<kind> (greyscale, tinted) or weapon_item_<id> (from its icon), shield_item_<id>,
-## hat_<shape> (greyscale, tinted) or hat_item_<id>; fist_<kind>.png cuts his fingers out of a
-## weapon over its grip.
+## Layer strips: hair_<style>.png, hair_<style>_<hat shape>.png, worn_item_<id>.png.
+const LAYER_DIR := "res://assets/sprites/characters/layers/"
+## Pieces (Piece): weapon_item_<id> and shield_item_<id>, one picture per view placed on him
+## each frame; fist_<kind>.png cuts his fingers out of a weapon over its grip. Also each hat
+## shape's head cut (headcut_<shape>.png).
 const PIECE_DIR := "res://assets/sprites/characters/pieces/"
-## The kind a weapon without one is drawn as.
+## The kind a weapon without one is held as.
 const DEFAULT_WEAPON := &"sword"
-## Tops worn open at the front (EquipDef.worn_style), with UNDERSHIRT under them so his
-## chest isn't bare, in UNDERSHIRT_COLOR (a plain linen).
-const OPEN_TOPS: Array[StringName] = [&"coat"]
-const UNDERSHIRT := preload("res://assets/animations/paperdoll/top_undershirt.tres")
-const UNDERSHIRT_COLOR := Color(0.86, 0.82, 0.72)
-## A piece's own art, drawn from its icon in its own colours (tools/art/paperdoll/items.py):
-## worn_item_<id>.tres over him, and for a cape worn_item_<id>_behind.tres under his body
-## (the part hanging behind him).
-const OWN_DIR := "res://assets/animations/paperdoll/worn_item_"
-## The hat shape (EquipDef.look_shape, piece hat_<shape>) of a hat with none.
-const DEFAULT_HAT := &"cap"
-## Shields by EquipDef.look_shape (any other: SHIELD).
-const SHIELDS := {&"kite": preload("res://assets/animations/paperdoll/shield_kite.tres")}
 ## The hero's frame size in pixels; every frame of the strip is this big.
 const FRAME_SIZE := Vector2(256, 208)
 ## How many strip pixels make one "hero pixel", the unit the game sizes him in (TDStage.TEXEL):
-## the strip is cut at the full resolution of the painted sheet, twice as fine as the hero is sized.
+## the strip is cut at twice the size he is drawn.
 const ART_SCALE := 2.0
-## The walk's passing steps (paperdoll_stride.gdshaderinc): every walk frame is drawn mid-stride,
-## so on these, where his arms swing past his body, his lower legs slide in toward each other
-## and his steps show. Per frame: the x between his legs (frame pixels; the back leg is left of
-## it), the y they start to lean in from, and how far each foot moves in at the ground.
-const PASSING_STEPS := {
-	&"walk2": {"split": 133.0, "top": 172.0, "shift": 16.0},
-	&"walk4": {"split": 131.0, "top": 172.0, "shift": 16.0},
-}
-## How many passing steps the shader holds (stride_steps in paperdoll_stride.gdshaderinc).
-const STRIDE_SLOTS := 4
-
-## A layer of art, played in step with the hero and multiplied by `tint`, or with `gear`
-## (greyscale gear art) shaded in it, its light and dark greys turning light and deep shades
-## of the colour (gear_tint.gdshaderinc).
+## A layer of art, played in step with the hero: a strip laid out like the body strip, or a
+## piece placed on each frame.
 class Layer:
-	var frames: SpriteFrames
+	var strip: Texture2D
 	## Or a piece, placed on each frame (then `behind` is per frame: Piece.pose).
 	var piece: Piece
 	var behind := false
-	var tint := Color.WHITE
-	var gear := false
-	## Hair under a hat: the hat's hair cut strip (Piece.hair_cut), or for his face under a helm
-	## its head cut strip (Piece.head_cut); null when nothing is cut.
-	var hair_cut: Texture2D
 
-	func _init(f: SpriteFrames, back: bool, t := Color.WHITE, g := false) -> void:
-		frames = f
+	func _init(s: Texture2D, back: bool) -> void:
+		strip = s
 		behind = back
-		tint = t
-		gear = g
 
 	## Sets a layer material's uniforms (the paperdoll_layer shader).
 	func apply(mat: ShaderMaterial) -> void:
-		mat.set_shader_parameter(&"tint", tint)
-		mat.set_shader_parameter(&"gear", gear)
-		mat.set_shader_parameter(&"has_hair_cut", hair_cut != null)
-		if hair_cut:
-			mat.set_shader_parameter(&"hair_cut", hair_cut)
-		if piece == null:
-			Paperdoll.apply_stride(mat)
+		mat.set_shader_parameter(&"has_hair_cut", false)
 		mat.set_shader_parameter(&"has_fist", piece != null and piece.fist != null)
 		if piece and piece.fist:
 			mat.set_shader_parameter(&"fist", piece.fist)
@@ -129,28 +80,18 @@ class Layer:
 		mat.set_shader_parameter(&"grow", p["scale"])
 		mat.set_shader_parameter(&"picture_size", (v["picture"] as Texture2D).get_size())
 
-## Gear that keeps its shape (a weapon, shield or hat): a picture per view (held, on his back,
-## from the side, from behind...), which goes on him at the place, angle and size its pose for
-## each frame says, over him or under his body (tools/art/paperdoll/pieces.py writes them).
+## Gear that keeps its shape (a weapon or shield): a picture per view (held, on his back...),
+## which goes on him at the place, angle and size its pose for each frame says, over him or
+## under his body.
 class Piece:
 	var name := ""
 	## view -> {"picture": Texture2D, "anchor": Vector2 (the picture point "at" names)}
 	var views := {}
-	## Per body frame: null (not shown) or {"view": String, "at": Vector2 (frame pixels),
+	## Per strip frame: null (not shown) or {"view": String, "at": Vector2 (frame pixels),
 	## "angle": radians clockwise, "scale": float, "behind": bool, "fist": bool}.
 	var frames: Array = []
-	## Greyscale art, shaded in the item's colour.
-	var tinted := false
 	## The fist mask strip cutting his fingers out over its grip (fist_<kind>.png), or null.
 	var fist: Texture2D
-	## A hat's strip of where his hair is hidden under it (haircut_<name>.png), or null.
-	var hair_cut: Texture2D
-	## Each hairstyle's own strip (haircut_<name>_<style>.png, which also hides the bits of that
-	## hair the cut would leave hanging loose), by style ("tousled" for hair_tousled).
-	var hair_cuts := {}
-	## A helm's strip of where his head and face are cut away around it (headcut_<name>.png,
-	## laid out like the body strip), or null.
-	var head_cut: Texture2D
 
 	static var _cache := {}
 
@@ -164,7 +105,6 @@ class Piece:
 		if data is Dictionary:
 			p = Piece.new()
 			p.name = id
-			p.tinted = data.get("tinted", false)
 			for view in data["views"]:
 				var v: Dictionary = data["views"][view]
 				p.views[view] = {"picture": load(v["picture"]), "anchor": Vector2(v["anchor"][0], v["anchor"][1])}
@@ -173,19 +113,10 @@ class Piece:
 					"angle": deg_to_rad(e["angle"]), "scale": float(e["scale"]), "behind": e["behind"], "fist": e["fist"]})
 			if data.get("fist") is String and ResourceLoader.exists(PIECE_DIR + "fist_" + data["fist"] + ".png"):
 				p.fist = load(PIECE_DIR + "fist_" + data["fist"] + ".png")
-			if data.get("hair_cut") is String and ResourceLoader.exists(data["hair_cut"]):
-				p.hair_cut = load(data["hair_cut"])
-			var cuts: Variant = data.get("hair_cuts")
-			if cuts is Dictionary:
-				for style: String in cuts:
-					if ResourceLoader.exists(cuts[style]):
-						p.hair_cuts[style] = load(cuts[style])
-			if data.get("head_cut") is String and ResourceLoader.exists(data["head_cut"]):
-				p.head_cut = load(data["head_cut"])
 		_cache[id] = p
 		return p
 
-	## How it sits on body frame `frame` (see `frames`), or null when it doesn't show.
+	## How it sits on strip frame `frame` (see `frames`), or null when it doesn't show.
 	func pose(frame: int) -> Variant:
 		return frames[frame] if frame >= 0 and frame < frames.size() else null
 
@@ -193,11 +124,9 @@ class Piece:
 	func picture(p: Dictionary) -> Texture2D:
 		return views[p["view"]]["picture"]
 
-## Per region: colour to recolour it with (alpha: how much, 0 keeps the art's own).
-var tints := PackedColorArray()
-## Per region: 1 hides it.
-var hidden := PackedFloat32Array()
-## The body's cut around a helm (Piece.head_cut), or null.
+## The body's animations (BODIES).
+var frames: SpriteFrames = FRAMES
+## Where the body is cut away under the hat (headcut_<shape>.png), or null.
 var head_cut: Texture2D
 ## Back to front: the ones `behind` go under the body, the rest over it.
 var layers: Array[Layer] = []
@@ -206,14 +135,6 @@ var weapon_kind := &""
 var weapon_tint := Color.WHITE
 
 static var _rig: Dictionary
-static var _refs: PackedVector3Array
-static var _strides: PackedVector4Array
-
-func _init() -> void:
-	tints.resize(REGIONS)
-	tints.fill(Color(0, 0, 0, 0))
-	hidden.resize(REGIONS)
-	hidden.fill(0.0)
 
 ## Works out how a look is drawn.
 static func dress(look: Dictionary) -> Paperdoll:
@@ -229,216 +150,75 @@ static func dress(look: Dictionary) -> Paperdoll:
 				gear[StringName(place)] = e
 
 	# the body
-	var skin := a.part(LookDef.Kind.SKIN)
-	if skin and skin.recolors():
-		d.tints[Region.SKIN] = skin.color
-	for place in BARE_SKIN:
-		if not gear.has(place):
-			d.tints[PLACE_REGIONS[place]] = d.tints[Region.SKIN]
-	var cuts := {}  # place -> the worn_style layer it's drawn with
-	var own := {}  # place -> own_art() of the piece worn there
-	for place in gear:
-		var art := own_art(gear[place])
-		if not art.is_empty():
-			own[place] = art
-	for place in PLACE_REGIONS:
-		var e: EquipDef = gear.get(place)
-		if e == null or e.worn_frames or own.has(place):
-			continue
-		var cut := worn_cut(e)
-		if cut:
-			cuts[place] = cut
-		if cut and place in BARE_SKIN:  # the cut covers what it covers; skin shows around it
-			d.tints[PLACE_REGIONS[place]] = d.tints[Region.SKIN]
-		else:
-			var c := e.worn_color()
-			c.a = PLACE_STRENGTH
-			d.tints[PLACE_REGIONS[place]] = c
-
-	# behind him
 	var hair := a.part(LookDef.Kind.HAIR)
-	var hair_tone := _look_color(a.part(LookDef.Kind.HAIR_COLOR), Region.HAIR)
-	var cape: EquipDef = gear.get(&"cape")
-	if cape:
-		if own.has(&"cape"):
-			d._add(own[&"cape"].get("behind"), true)
-		elif cape.worn_frames:
-			d._add(cape.worn_frames, true)
-		else:
-			d._add(CAPE, true, cape.worn_color(), true)
-	if hair and not gear.has(&"hat"):
-		d._add(hair.back_frames, true, hair_tone)
+	d.frames = BODIES.get(hair.body if hair else DEFAULT_BODY, FRAMES)
+	var hat: EquipDef = gear.get(&"hat")
+	if hat and ResourceLoader.exists(head_cut_path(hat.look_shape)):
+		d.head_cut = load(head_cut_path(hat.look_shape))
+
+	# behind him, then over him
+	var shield: EquipDef = gear.get(&"shield")
+	var own_shield := Piece.named("shield_item_" + String(shield.id)) if shield else null
+	for place in WORN_PLACES:
+		var e: EquipDef = gear.get(place)
+		var art := worn_strip(e)
+		if art:
+			d._add(art, false)
+	if own_shield:  # on his far arm, behind him; on his back as he climbs
+		d._add_piece(own_shield)
+	if hair:
+		var hair_art := hair_strip(hair, hat.look_shape if hat else &"")
+		if hair_art:
+			d._add(hair_art, false)
+	var hat_art := worn_strip(hat)
+	if hat_art:
+		d._add(hat_art, false)
 	var weapon: EquipDef = gear.get(&"weapon")
 	if weapon:
 		d.weapon_kind = kind_of(weapon)
 		d.weapon_tint = weapon.worn_color()
-
-	# over him
-	for place in [&"bottom", &"shoes", &"top", &"gloves"]:
-		var e: EquipDef = gear.get(place)
-		var mittens: Array[Piece] = glove_pieces(e) if place == &"gloves" else ([] as Array[Piece])
-		if not mittens.is_empty():  # a mitten on each hand (Piece)
-			for p: Piece in mittens:
-				d._add_piece(p)
-		elif own.has(place):
-			d._add(own[place]["front"], false)
-			if PLACE_REGIONS.has(place):
-				d.hidden[PLACE_REGIONS[place]] = 1.0
-		elif e and e.worn_frames:
-			d._add(e.worn_frames, false)
-			if PLACE_REGIONS.has(place):
-				d.hidden[PLACE_REGIONS[place]] = 1.0
-		elif cuts.has(place):
-			if place == &"top" and e.worn_style in OPEN_TOPS:
-				d._add(UNDERSHIRT, false, UNDERSHIRT_COLOR, true)
-			d._add(cuts[place], false, e.worn_color(), true)
-		elif e and place == &"gloves":
-			d._add(GLOVES, false, e.worn_color(), true)
-	if own.has(&"cape"):
-		d._add(own[&"cape"]["front"], false)
-	elif cape and cape.worn_frames == null:
-		d._add(CAPE_FRONT, false, cape.worn_color(), true)
-	var hat: EquipDef = gear.get(&"hat")
-	var own_hat := Piece.named("hat_item_" + String(hat.id)) if hat else null
-	var hat_on: Piece = own_hat if own_hat or hat == null or hat.worn_frames else hat_piece(hat)
-	if hat_on and hat_on.head_cut:  # nothing of his head pokes out of a small helm
-		d.head_cut = hat_on.head_cut
-	var face := a.part(LookDef.Kind.FACE)
-	if face:
-		var before := d.layers.size()
-		d._add(face.frames, false)
-		d._add(face.detail_frames, false, _look_color(a.part(LookDef.Kind.EYES), Region.EYES))
-		for l in d.layers.slice(before):
-			l.hair_cut = d.head_cut
-	if hair:
-		var before := d.layers.size()
-		d._add(hair.frames, false, hair_tone)
-		if hat_on and d.layers.size() > before:  # none of it pokes out of the hat's top or sides
-			d.layers[-1].hair_cut = hat_on.hair_cuts.get(String(hair.id).trim_prefix("hair_"), hat_on.hair_cut)
-	var shield: EquipDef = gear.get(&"shield")
-	if shield:
-		var own_shield := Piece.named("shield_item_" + String(shield.id))
-		if own_shield:  # its back on his far arm, behind him; its face on his back as he climbs
-			d._add_piece(own_shield)
-		elif shield.worn_frames:
-			d._add(shield.worn_frames, false)
-		else:
-			d._add(SHIELDS.get(shield.look_shape, SHIELD), false, shield.worn_color(), true)
-	if hat:
-		if own_hat:
-			d._add_piece(own_hat)
-		elif hat.worn_frames:
-			d._add(hat.worn_frames, false)
-		else:
-			d._add_piece(hat_on, hat.worn_color())
-	if weapon and weapon.worn_frames: # over the hat: a sword raised over his head
-		d._add(weapon.worn_frames, false)
-	elif weapon:
-		var held := weapon_piece(weapon)
-		d._add_piece(held, Color.WHITE if held.name.begins_with("weapon_item_") else weapon.worn_color())
+		d._add_piece(Piece.named("weapon_item_" + String(weapon.id)))
 	return d
 
-## A piece's own art (OWN_DIR): {"front": SpriteFrames, "behind": SpriteFrames (if any)},
-## or {} when it has none and is drawn with its kind's tinted greyscale art.
-static func own_art(e: EquipDef) -> Dictionary:
-	if e == null or e.slot in [EquipDef.Slot.WEAPON, EquipDef.Slot.SHIELD, EquipDef.Slot.HAT]:
-		return {}  # (those keep their shape: pieces, see Piece)
-	var base := OWN_DIR + String(e.id)
-	if not ResourceLoader.exists(base + ".tres"):
-		return {}
-	var out := {"front": load(base + ".tres")}
-	if ResourceLoader.exists(base + "_behind.tres"):
-		out["behind"] = load(base + "_behind.tres")
-	return out
+## A piece's own art over him (LAYER_DIR worn_item_<id>.png), or null when it has none.
+static func worn_strip(e: EquipDef) -> Texture2D:
+	if e == null:
+		return null
+	var path := LAYER_DIR + "worn_item_" + String(e.id) + ".png"
+	return load(path) if ResourceLoader.exists(path) else null
 
-## The piece a hat without art of its own is drawn as: its shape's (EquipDef.look_shape),
-## greyscale, tinted with the hat's colour.
-static func hat_piece(e: EquipDef) -> Piece:
-	var shape := Piece.named("hat_" + String(e.look_shape)) if e.look_shape != &"" else null
-	return shape if shape else Piece.named("hat_" + String(DEFAULT_HAT))
+## His hair: the hairstyle's own, or under a hat of shape `hat_shape` that shape's hair for
+## the style (none if it has none drawn).
+static func hair_strip(hair: LookDef, hat_shape: StringName) -> Texture2D:
+	var path := LAYER_DIR + String(hair.id) + ("_" + String(hat_shape) if hat_shape != &"" else "") + ".png"
+	return load(path) if ResourceLoader.exists(path) else null
 
-## Gloves' own mittens, one piece per hand (glove_item_<id>_1 and _2), or [] if they have none.
-static func glove_pieces(e: EquipDef) -> Array[Piece]:
-	var out: Array[Piece] = []
-	if e:
-		for h in [1, 2]:
-			var p := Piece.named("glove_item_%s_%d" % [e.id, h])
-			if p:
-				out.append(p)
-	return out
+## Where the body is cut away under a hat of shape `shape`.
+static func head_cut_path(shape: StringName) -> String:
+	return PIECE_DIR + "headcut_" + String(shape) + ".png"
 
-## The piece a weapon is held as: its own picture (weapon_item_<id>, from its icon, in its
-## own colours) if it has one, else its kind's greyscale picture, tinted with its colour.
-static func weapon_piece(e: EquipDef) -> Piece:
-	var own := Piece.named("weapon_item_" + String(e.id))
-	if own:
-		return own
-	var kind := Piece.named("weapon_" + String(kind_of(e)))
-	return kind if kind else Piece.named("weapon_" + String(DEFAULT_WEAPON))
-
-## The greyscale layer a top, bottom or shoes is worn as (EquipDef.worn_style), or null.
-static func worn_cut(e: EquipDef) -> SpriteFrames:
-	var path := e.worn_style_path()
-	return load(path) if path != "" and ResourceLoader.exists(path) else null
-
-## The kind of weapon an item is held as. A weapon without a kind, or of a kind the rig has
-## no hold for yet (a dagger, until the new hero is drawn), is held as a sword.
+## The kind of weapon an item is held as (how it fights: WeaponStyle). A weapon without a
+## kind, or of a kind WeaponStyle doesn't know, is held as a sword.
 static func kind_of(e: EquipDef) -> StringName:
-	if e == null or e.weapon_kind == &"" or not rig().get("weapons", {}).has(String(e.weapon_kind)):
+	if e == null or e.weapon_kind == &"" or not WeaponStyle.MOTIONS.has(e.weapon_kind):
 		return DEFAULT_WEAPON
 	return e.weapon_kind
 
-func _add(frames: SpriteFrames, behind: bool, tint := Color.WHITE, gear := false) -> void:
-	if frames:
-		layers.append(Layer.new(frames, behind, tint, gear))
+func _add(strip: Texture2D, behind: bool) -> void:
+	if strip:
+		layers.append(Layer.new(strip, behind))
 
-## A piece as a layer: untinted, or greyscale art (Piece.tinted) shaded in `tint`.
-func _add_piece(p: Piece, tint := Color.WHITE) -> void:
+func _add_piece(p: Piece) -> void:
 	if p:
-		var l := Layer.new(null, false, tint if p.tinted else Color.WHITE, p.tinted)
+		var l := Layer.new(null, false)
 		l.piece = p
 		layers.append(l)
 
-## A look's colour, or the art's own colour for the region when it keeps it.
-static func _look_color(l: LookDef, region: Region) -> Color:
-	return l.color if l and l.recolors() else ref_color(region)
-
-## Sets a dressing material's uniforms (the paperdoll_sprite shader). The
-## per-region values go in a tiny texture, one column per region (see paperdoll.gdshaderinc).
+## Sets a dressing material's uniforms (the paperdoll_sprite shader): the head cut.
 func apply(mat: ShaderMaterial) -> void:
-	var data := Image.create(REGIONS, 3, false, Image.FORMAT_RGBAF)
-	var refs := ref_colors()
-	for r in REGIONS:
-		data.set_pixel(r, 0, tints[r])
-		data.set_pixel(r, 1, Color(hidden[r], 0, 0, 1))
-		data.set_pixel(r, 2, Color(refs[r].x, refs[r].y, refs[r].z, 1))
-	mat.set_shader_parameter(&"regions", MASK)
-	mat.set_shader_parameter(&"look_data", ImageTexture.create_from_image(data))
 	mat.set_shader_parameter(&"has_head_cut", head_cut != null)
 	if head_cut:
 		mat.set_shader_parameter(&"head_cut", head_cut)
-	apply_stride(mat)
-
-## Sets a strip material's passing steps (PASSING_STEPS, paperdoll_stride.gdshaderinc).
-static func apply_stride(mat: ShaderMaterial) -> void:
-	var steps := stride_steps()
-	assert(steps.size() <= STRIDE_SLOTS, "more passing steps than the shader holds")
-	var slots := steps.duplicate()
-	slots.resize(STRIDE_SLOTS)
-	mat.set_shader_parameter(&"stride_steps", slots)
-	mat.set_shader_parameter(&"stride_count", steps.size())
-	mat.set_shader_parameter(&"stride_frame", FRAME_SIZE)
-
-## PASSING_STEPS as the shader takes them: (strip frame, split, top, shift) for each step the
-## rig has a frame for.
-static func stride_steps() -> PackedVector4Array:
-	if _strides.is_empty():
-		var frames: Array = rig().get("frames", [])
-		for i in frames.size():
-			var step: Variant = PASSING_STEPS.get(StringName(frames[i].get("name", "")))
-			if step:
-				_strides.append(Vector4(i, step["split"], step["top"], step["shift"]))
-	return _strides
 
 # ---------- the hero's rig (hero_rig.json) ----------
 
@@ -446,21 +226,8 @@ static func rig() -> Dictionary:
 	if _rig.is_empty():
 		var f := FileAccess.open(RIG_PATH, FileAccess.READ)
 		var data: Variant = JSON.parse_string(f.get_as_text()) if f else null
-		_rig = data if data is Dictionary else {"frames": [], "region_colors": []}
+		_rig = data if data is Dictionary else {"frames": []}
 	return _rig
-
-## Each region's typical colour in the art.
-static func ref_colors() -> PackedVector3Array:
-	if _refs.is_empty():
-		var colors: Array = rig().get("region_colors", [])
-		for i in REGIONS:
-			var c: Array = colors[i] if i < colors.size() else [1, 1, 1]
-			_refs.append(Vector3(c[0], c[1], c[2]))
-	return _refs
-
-static func ref_color(region: Region) -> Color:
-	var v := ref_colors()[region]
-	return Color(v.x, v.y, v.z)
 
 ## Which frame of the strip a hero frame texture is.
 static func frame_index(tex: Texture2D) -> int:

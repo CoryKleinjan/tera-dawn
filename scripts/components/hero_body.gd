@@ -13,9 +13,10 @@ const FRAMES := preload("res://assets/animations/hero.tres")
 ## The hero's size against everyone else's art (TDStage.TEXEL). MapleStory proportions: he
 ## stands about a tenth of the screen tall, a little shorter than the townsfolk (TDNpc.SCALE),
 ## so heroes read as young adventurers among grown-ups, and most monsters come up to him.
-## Raised from 0.62 (Cory 2026-10-12: drawn slightly larger); his art is cut at twice this
-## size, so he still shrinks on screen up to 1440p rather than stretching.
-const SCALE := 0.70
+## Raised from 0.62 (Cory 2026-10-12: drawn slightly larger), then set so the new paperdoll
+## stands as tall as the old hero (TDPlayer.HEIGHT); his art is cut at twice this size, so he
+## still shrinks on screen up to 1440p rather than stretching.
+const SCALE := 0.735
 ## A soft warm light that travels with every player, so heroes stand out from the scenery.
 const LIGHT := Color(1.0, 0.86, 0.68)
 const LIGHT_ENERGY := 0.55
@@ -24,9 +25,9 @@ const LIGHT_HEIGHT := 33.0
 ## The walk and run cycles play at their drawn speed at this ground speed (game pixels a
 ## tick), faster or slower in step with him, so his feet don't slide.
 const STRIDE_SPEED := 3.7
-## The fall pose is painted leaning about 15 degrees off upright; he's turned 8 degrees back
-## toward standing (Cory 2026-10-12), about his hips, so the fall reads less tipped over.
-const UPRIGHT := {&"fall": {"angle": 8.0, "pivot": Vector2(150, 150)}}
+## Poses turned toward upright in game, per animation: {"angle": degrees, "pivot": frame
+## pixels}. None: every pose shows as painted (art/reference/hero_look.png).
+const UPRIGHT := {}
 ## Ticks in one blink while he can't be hurt after a hit: hidden for the first half of each.
 const BLINK_TICKS := 8
 
