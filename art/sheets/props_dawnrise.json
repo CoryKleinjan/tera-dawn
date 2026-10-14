@@ -1,0 +1,87 @@
+{
+  "source": "art/source/props_dawnrise.png",
+  "out_dir": "assets/sprites/tiles/dawnrise",
+  "label_band": 0,
+  "inset": 6,
+  "cells": [
+    [
+      "prop_well",
+      "prop_fence",
+      "prop_hay",
+      "prop_flower_bed"
+    ],
+    [
+      "prop_veg_bed",
+      "prop_beehives",
+      "prop_scarecrow",
+      "prop_wheelbarrow"
+    ],
+    [
+      "prop_bench",
+      "",
+      "prop_signpost",
+      "prop_bread_basket"
+    ]
+  ],
+  "overrides": {
+    "prop_well": {
+      "scale": 0.1653,
+      "flat_bottom": true
+    },
+    "prop_fence": {
+      "scale": 0.1467,
+      "flat_bottom": true
+    },
+    "prop_hay": {
+      "scale": 0.1302,
+      "flat_bottom": true
+    },
+    "prop_flower_bed": {
+      "scale": 0.1196,
+      "flat_bottom": true
+    },
+    "prop_veg_bed": {
+      "scale": 0.1002,
+      "flat_bottom": true
+    },
+    "prop_beehives": {
+      "scale": 0.1413,
+      "flat_bottom": true
+    },
+    "prop_scarecrow": {
+      "scale": 0.1681,
+      "flat_bottom": true
+    },
+    "prop_wheelbarrow": {
+      "scale": 0.0985,
+      "flat_bottom": true
+    },
+    "prop_bench": {
+      "scale": 0.112,
+      "flat_bottom": true
+    },
+    "prop_signpost": {
+      "scale": 0.1578,
+      "flat_bottom": true
+    },
+    "prop_bread_basket": {
+      "scale": 0.0728,
+      "flat_bottom": true
+    }
+  },
+  "grid": {
+    "rows": [
+      0,
+      575,
+      1156,
+      1728
+    ],
+    "cols": [
+      0,
+      767,
+      1536,
+      2304,
+      3072
+    ]
+  }
+}

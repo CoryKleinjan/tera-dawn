@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=40 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=69 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/meadow.tres" id="2_meadow"]
@@ -12,6 +12,17 @@
 [ext_resource type="Resource" path="res://data/buildings/dawnrise_windmill.tres" id="b_windmill"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnrise/lamp_post.png" id="t_lamp"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnrise/prop_signpost.png" id="t_signpost"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnrise/prop_fence.png" id="t_fence"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnrise/prop_veg_bed.png" id="t_veg_bed"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnrise/prop_flower_bed.png" id="t_flower_bed"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnrise/prop_bench.png" id="t_bench"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnrise/prop_well.png" id="t_well"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnrise/prop_bread_basket.png" id="t_bread_basket"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnrise/prop_hay.png" id="t_hay"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnrise/prop_scarecrow.png" id="t_scarecrow"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnrise/prop_beehives.png" id="t_beehives"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnrise/prop_wheelbarrow.png" id="t_wheelbarrow"]
 [ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 [ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="backdrop_layer_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/dawnrise/panorama.png" id="panorama"]
@@ -84,6 +95,74 @@ x = 1240.0
 light_color = Color(1.0, 0.75, 0.44, 1.0)
 light_energy = 1.5
 light_height = 110.0
+
+[sub_resource type="Resource" id="Prop_signpost"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_signpost")
+x = 140.0
+depth = -3.0
+
+[sub_resource type="Resource" id="Prop_fence"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_fence")
+x = 300.0
+depth = -1.5
+
+[sub_resource type="Resource" id="Prop_veg_bed"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_veg_bed")
+x = 560.0
+depth = -1.5
+
+[sub_resource type="Resource" id="Prop_flower_bed"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_flower_bed")
+x = 780.0
+depth = -1.5
+
+[sub_resource type="Resource" id="Prop_bench"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_bench")
+x = 1300.0
+depth = -1.5
+
+[sub_resource type="Resource" id="Prop_well"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_well")
+x = 1060.0
+depth = -2.0
+
+[sub_resource type="Resource" id="Prop_bread_basket"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_bread_basket")
+x = 1585.0
+depth = -1.5
+
+[sub_resource type="Resource" id="Prop_hay"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_hay")
+x = 1740.0
+depth = -3.0
+
+[sub_resource type="Resource" id="Prop_scarecrow"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_scarecrow")
+x = 2065.0
+y = 530.0
+depth = -1.5
+
+[sub_resource type="Resource" id="Prop_beehives"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_beehives")
+x = 1950.0
+y = 530.0
+depth = -2.0
+
+[sub_resource type="Resource" id="Prop_wheelbarrow"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_wheelbarrow")
+x = 2160.0
+depth = -3.0
 
 [sub_resource type="Resource" id="Backdrop_picture"]
 script = ExtResource("backdrop_layer_def")
@@ -197,5 +276,5 @@ platforms = Array[ExtResource("3_platform_def")]([SubResource("Plat_rise")])
 climbables = Array[ExtResource("climbable_def")]([SubResource("Ladder_rise")])
 portals = Array[ExtResource("4_portal_def")]([SubResource("Portal_west"), SubResource("Portal_east"), SubResource("Door_elder"), SubResource("Door_store")])
 npcs = Array[ExtResource("5_npc_placement")]([SubResource("Npc_elder"), SubResource("Npc_sorrel"), SubResource("Npc_hobb"), SubResource("Npc_marlo"), SubResource("Npc_granddaughter"), SubResource("Npc_baker"), SubResource("Npc_farmer")])
-props = Array[ExtResource("prop_placement")]([SubResource("Lamp_west"), SubResource("Lamp_east")])
+props = Array[ExtResource("prop_placement")]([SubResource("Lamp_west"), SubResource("Lamp_east"), SubResource("Prop_signpost"), SubResource("Prop_fence"), SubResource("Prop_veg_bed"), SubResource("Prop_flower_bed"), SubResource("Prop_bench"), SubResource("Prop_well"), SubResource("Prop_bread_basket"), SubResource("Prop_hay"), SubResource("Prop_scarecrow"), SubResource("Prop_beehives"), SubResource("Prop_wheelbarrow")])
 buildings = Array[ExtResource("bp_script")]([SubResource("House_cottage"), SubResource("House_elder"), SubResource("House_shop"), SubResource("House_windmill")])
