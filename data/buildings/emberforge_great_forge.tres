@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BuildingDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/building_def.gd" id="1_building_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/buildings/emberforge/great_forge.png" id="2_great_forge"]
+
+[resource]
+script = ExtResource("1_building_def")
+id = &"emberforge_great_forge"
+texture = ExtResource("2_great_forge")
+height = 330.0
+door_x = 0.5
+chimney = Vector2(0.236, 0.99)

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/npc_emberforge_veteran.tres" id="2_sprite"]
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"emberforge_veteran"
+display_name = "Old Garrick"
+title = "Retired Warrior"
+sprite_frames = ExtResource("2_sprite")
+greeting = "Lost this eye holding Cinder Pass. I'd do it again."
+lines = PackedStringArray("Keep your shield up and your boots dry.")
+storage = false

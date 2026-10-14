@@ -1,0 +1,121 @@
+{
+  "source": "art/source/props_emberforge.png",
+  "out_dir": "assets/sprites/tiles/emberforge",
+  "label_band": 0,
+  "inset": 4,
+  "grid": {
+    "rows": [
+      0,
+      603,
+      1210,
+      1728
+    ],
+    "cols": [
+      [
+        0,
+        756,
+        1465,
+        2277,
+        3072
+      ],
+      [
+        0,
+        646,
+        1265,
+        1770,
+        2437,
+        3072
+      ],
+      [
+        0,
+        800,
+        1420,
+        2345,
+        3072
+      ]
+    ]
+  },
+  "cells": [
+    [
+      "prop_anvil",
+      "prop_ore_cart",
+      "prop_coal_bin",
+      "prop_weapon_rack"
+    ],
+    [
+      "prop_quench_barrel",
+      "prop_grindstone",
+      "prop_dummy",
+      "prop_ingots",
+      ""
+    ],
+    [
+      "prop_shield_rack",
+      "prop_crate",
+      "prop_bench",
+      "prop_logs"
+    ]
+  ],
+  "overrides": {
+    "prop_anvil": {
+      "scale": 0.0924,
+      "flat_bottom": true,
+      "keep": "largest"
+    },
+    "prop_ore_cart": {
+      "scale": 0.0925,
+      "flat_bottom": true,
+      "keep": "largest"
+    },
+    "prop_coal_bin": {
+      "scale": 0.0859,
+      "flat_bottom": true,
+      "keep": "largest"
+    },
+    "prop_weapon_rack": {
+      "scale": 0.1259,
+      "flat_bottom": true,
+      "keep": "largest"
+    },
+    "prop_quench_barrel": {
+      "scale": 0.0809,
+      "flat_bottom": true,
+      "keep": "largest"
+    },
+    "prop_grindstone": {
+      "scale": 0.1055,
+      "flat_bottom": true,
+      "keep": "largest"
+    },
+    "prop_dummy": {
+      "scale": 0.1398,
+      "flat_bottom": true,
+      "keep": "largest"
+    },
+    "prop_ingots": {
+      "scale": 0.0886,
+      "flat_bottom": true,
+      "keep": "largest"
+    },
+    "prop_shield_rack": {
+      "scale": 0.1055,
+      "flat_bottom": true,
+      "keep": "largest"
+    },
+    "prop_crate": {
+      "scale": 0.0973,
+      "flat_bottom": true,
+      "keep": "largest"
+    },
+    "prop_bench": {
+      "scale": 0.0722,
+      "flat_bottom": true,
+      "keep": "largest"
+    },
+    "prop_logs": {
+      "scale": 0.099,
+      "flat_bottom": true,
+      "keep": "largest"
+    }
+  }
+}
