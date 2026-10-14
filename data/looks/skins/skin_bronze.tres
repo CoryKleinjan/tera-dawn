@@ -7,5 +7,5 @@ script = ExtResource("1_look_def")
 id = &"skin_bronze"
 display_name = "Bronze"
 kind = 0
-color = Color(0.725, 0.478, 0.306, 1)
+color = Color(0.715, 0.471, 0.367, 1)
 order = 3
