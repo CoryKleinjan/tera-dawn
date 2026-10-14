@@ -6,31 +6,22 @@
   "out_dir": "assets/sprites/ground",
   "cells": [
     [
-      "lumewood_top",
+      "",
       "lumewood_side",
       "lumewood_soil"
     ],
     [
-      "emberreach_top",
+      "",
       "emberreach_side",
       "emberreach_soil"
     ],
     [
-      "lanternfall_top",
+      "",
       "lanternfall_side",
       "lanternfall_soil"
     ]
   ],
   "overrides": {
-    "lumewood_top": {
-      "seamless": true,
-      "crop": [
-        108,
-        42,
-        403,
-        337
-      ]
-    },
     "lumewood_side": {
       "seamless": true,
       "crop": [
@@ -49,15 +40,6 @@
         337
       ]
     },
-    "emberreach_top": {
-      "seamless": true,
-      "crop": [
-        108,
-        42,
-        403,
-        337
-      ]
-    },
     "emberreach_side": {
       "seamless": true,
       "crop": [
@@ -68,15 +50,6 @@
       ]
     },
     "emberreach_soil": {
-      "seamless": true,
-      "crop": [
-        108,
-        42,
-        403,
-        337
-      ]
-    },
-    "lanternfall_top": {
       "seamless": true,
       "crop": [
         108,

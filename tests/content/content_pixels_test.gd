@@ -60,7 +60,7 @@ func test_backdrops_show_at_the_shared_pixel_size() -> void:
 func test_rooms_are_cut_for_the_shared_size() -> void:
 	for path in Scan.files("res://data/biomes/rooms"):
 		var b: BiomeDef = load(path)
-		for tex in [b.ground_top, b.ground_side, b.ground_soil, b.door]:
+		for tex in [b.ground_side, b.ground_soil, b.door]:
 			_cut_for_the_shared_size(tex, path.get_file())
 	for path in Scan.files("res://data/maps/rooms"):
 		var m: MapDef = load(path)

@@ -83,7 +83,7 @@ func test_biomes_have_their_art() -> void:
 			continue
 		# a room inside a building has a door out instead of platforms, lanterns and portals
 		var room := b.door != null
-		var needs := ["ground_top", "ground_side", "ground_soil"]
+		var needs := ["ground_side", "ground_soil"]
 		if not room:
 			needs += ["platform_left", "platform_middle", "platform_right", "lantern"]
 		for f in needs:

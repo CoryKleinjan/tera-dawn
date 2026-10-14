@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="BiomeDef" load_steps=52 format=3]
+[gd_resource type="Resource" script_class="BiomeDef" load_steps=51 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/biome_def.gd" id="1_biome_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ground/lanternfall_top.png" id="2_ground_top"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/lanternfall_side.png" id="3_ground_side"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/lanternfall_soil.png" id="4_ground_soil"]
 [ext_resource type="Texture2D" path="res://assets/sprites/platforms/lanternfall/cap_left.png" id="5_platform_left"]
@@ -195,7 +194,6 @@ sky_horizon = Color(0.8784, 0.6275, 0.3765, 1.0)
 sun_color = Color(1.0, 0.7019607843137254, 0.3607843137254902, 1.0)
 light_color = Color(0.7843, 0.7529, 1.0, 1.0)
 light_energy = 1.2
-cloud_shadows = false
 grade_tint = Color(0.96, 0.95, 1.0, 1)
 grade_lift = Color(0.2, 0.15, 0.45, 1)
 grade_lift_amount = 0.4
@@ -206,7 +204,6 @@ fog_color = Color(0.2275, 0.2275, 0.4392, 1.0)
 mote_color = Color(2.4, 1.8, 0.7, 1.0)
 motes_rise = true
 lantern_light = Color(1.0, 0.7529, 0.3765, 1.0)
-ground_top = ExtResource("2_ground_top")
 ground_side = ExtResource("3_ground_side")
 ground_soil = ExtResource("4_ground_soil")
 platform_left = ExtResource("5_platform_left")

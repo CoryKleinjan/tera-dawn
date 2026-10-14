@@ -31,13 +31,10 @@ extends Resource
 ## Soft beams of sunlight slanting through the scene (dawn meadows, forests).
 @export var light_shafts := false
 @export var light_shaft_color := Color(1.0, 0.85, 0.6, 0.12)
-## Unused since the floor went flat (it has no top for cloud shadows to drift over).
-@export var cloud_shadows := true
 
 @export_group("Ground")
 ## Seamless textures for the floor's painted front: rock (side) in a band under its grass
-## edge, then soil below. ground_top is unused since the floor went flat.
-@export var ground_top: Texture2D
+## edge, then soil below.
 @export var ground_side: Texture2D
 @export var ground_soil: Texture2D
 ## The painted front of a floating platform (art/sheets/platform_pieces_<area>.json): its
