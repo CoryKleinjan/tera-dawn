@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_npc_def")
 id = &"dawnrise_farmer"
-display_name = "Tobin"
+display_name = "Barley"
 title = "Farmer"
 sprite_frames = ExtResource("2_sprite")
 greeting = "Morning! Up here you can see the whole village wake up."
