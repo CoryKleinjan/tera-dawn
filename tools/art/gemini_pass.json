@@ -12258,6 +12258,32 @@
     ],
     "text": "The first image is a sheet of twelve props for Lanternfall, the thieves' town at dusk in my 2D side-scrolling game, in 3 rows of 4 cells. Five of them are drawn at an angle, showing their top surfaces, which is wrong for my game. Repaint ONLY these five, each in its own cell, at the same size, position, colours and level of detail, as a pure flat SIDE VIEW like an architect's elevation drawing: only the front face shows, NO top surface, lid, seat or box top visible at all, every edge perfectly level or vertical, standing upright on one flat straight bottom edge. Row 1, cell 1: the stack of three wooden crates, now seen exactly from the front as flat squares (two side by side on the bottom, one centred on top), no crate tops or sides showing. Row 2, cell 1: the wooden bench, now seen exactly from the front: a straight backrest above a seat edge seen only as a thin plank edge, four straight legs, no seat surface visible. Row 2, cell 3: the canvas-covered hand cart, now seen exactly from the side: one big wheel, a flat-sided wooden cart bed with the canvas cover as an arch, its two handles level, resting on the wheel and a short leg so its bottom is level. Row 2, cell 4: the stone flower trough, now seen exactly from the front as a flat rectangle of stone with purple flowers growing up out of it, no top rim surface visible. Row 3, cell 4: the brick chimney pots, now seen exactly from the front: a flat rectangle of dark brick with three round clay pots standing on it side by side, shown only as flat upright shapes, no top openings seen from above. Keep the other seven props EXACTLY as they are, pixel for pixel. The second image shows my game's NPC characters for the art style, and the third image is a building from the same town for the palette and flat viewpoint. Painted, not pixel art: smooth painted shading with visible soft brush texture. No ground, shadow or base under any prop. No letters or words anywhere. Keep the thin dividing lines. Flat pure magenta #FF00FF background everywhere outside the props, with no magenta or pink inside them. Do not draw any characters."
    }
+  },
+  {
+   "id": "lanternfall_props_flat_2",
+   "prompts": null,
+   "batch": "Lanternfall city: three props painted fresh as flat side views",
+   "with": null,
+   "refs": [],
+   "save": "lanternfall_props_flat_2.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": true,
+   "cells": [
+    3,
+    1
+   ],
+   "anchor": null,
+   "size": "4K",
+   "note": "2026-10-14 thread 'Lanternfall up to Dawnharbor's standard': the edit left the cart, trough and chimney pots in 3/4; Cory 01:31Z 'Regenerate them' (~$0.12). Fresh paint on a blank canvas, not an edit.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/lanternfall-city/props_base.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/lanternfall-city/props_with_flat_crates_bench.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint THREE separate props for Lanternfall, the thieves' town at dusk in my 2D side-scrolling game, side by side in one row, each centred in its own third of the canvas with a wide band of plain magenta around it, none touching. The second image shows my game's NPC characters: paint in exactly their style (soft cel-painted shading, bright highlights, rich warm colours, bold dark brown outlines, painted wood grain and worn spots). The third image is the town's props sheet: match its palette, outline thickness and level of detail, and copy the viewpoint of its crates (top left) and bench (middle left), which are drawn the right way: a pure flat FRONT ELEVATION like an architect's drawing, where only the front face shows and no top surface is visible. Do NOT copy the cart, flower trough or chimney pots from that sheet; they are drawn at an angle, which is wrong. The three props, left to right: 1) a small two-wheeled hand cart seen exactly side-on: a rectangular wooden cart bed drawn as a flat side panel of planks, a canvas cover over the load drawn as a flat rounded hump outline with rope ties, one big spoked wheel drawn as a perfect circle, two straight handles pointing level to one side resting on a short straight wooden leg, so the wheel bottom and the leg bottom sit on the same ground line. 2) a long stone flower trough seen exactly from the front: a flat rectangle of grey stone blocks with chipped edges, its top edge one straight level line with no rim surface showing, and purple and lilac flowers with green leaves growing straight up out of it. 3) a cluster of chimney pots seen exactly from the front: a flat rectangle of dark red-brown brick with a straight level top edge, and on it three round clay chimney pots of different heights standing side by side, each drawn as a flat upright shape with straight sides and a flat top edge, no openings or tops seen from above. Strict rules: 1) Every prop in pure flat side view at eye level: NO top surface of anything visible, every edge perfectly level or vertical, each standing upright on ONE flat straight bottom edge. 2) No ground, shadow, grass or base under any prop. 3) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. 4) No letters, numbers, words, grid lines, borders or frames. 5) Nothing (rope, cloth) ends loose in mid-air. Flat pure magenta #FF00FF background everywhere outside the props, with no magenta or pink anywhere inside them. Do not draw any characters."
+   }
   }
  ]
 }
