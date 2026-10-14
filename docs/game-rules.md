@@ -164,6 +164,11 @@ update this page when one changes. Each zone's own look and music are in
 
 - Towns have no monsters and no grass tufts.
 - NPCs stand still at idle.
+- No duplicate NPCs anywhere in the game: every town has its own shopkeepers, storage keeper and
+  townsfolk. A character who travels (the ship's captain at both ends of the voyage, a job tutor
+  in their hall and at their Trial Ground) is one person, not a copy, and may appear in more
+  than one place.
+- Every building in a town is its own picture, painted in that town's tone.
 - Dawnharbor is the gold standard for how a city looks. Other cities keep its attention to detail
   and polish but have their own tone; they never copy Dawnharbor's look. Change Dawnharbor only
   with great care: show Cory any change to it before it goes in.
