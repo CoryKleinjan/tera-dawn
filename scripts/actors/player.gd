@@ -569,7 +569,9 @@ func _move() -> void:
 		for pl in world.platforms:
 			if pl == drop_from and drop_t > 0:
 				continue
-			if pl.contains_x(position.x) and prev_y <= pl.y and position.y >= pl.y:
+			# a little slack: position is single precision, so standing on a top like 472.7
+			# leaves the feet a hair below it
+			if pl.contains_x(position.x) and prev_y <= pl.y + 0.01 and position.y >= pl.y:
 				position.y = pl.y
 				vel.y = 0
 				on_ground = true
