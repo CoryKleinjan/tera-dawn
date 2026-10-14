@@ -30,7 +30,7 @@ data/*.tres  ──►  Content (autoload)  ──►  World loads a MapDef  ─
 - **Actors** (`scripts/actors/`) are what you see in the world: your hero, other players,
   monsters, NPCs and drops.
 - **World** (`scripts/world/`) shows the map you're on: `world.gd` builds it and shows the
-  server's events (camera in `WorldCamera`, snapshots through `SnapshotSync`), `stage.gd` and its builders turn a map into the painted diorama.
+  server's events (camera in `WorldCamera`, snapshots through `SnapshotSync`), `stage.gd` and its builders turn a map into the lit diorama.
 - **UI** (`scripts/ui/`) draws the HUD (`TDHud`) and the title screen (`TDTitleScreen`,
   solo, host or join) from the sliced UI sheets through `UiSkin` (art), `UiStyle` (styled controls) and
   `WorldSkin` (bars, tags and bubbles over the world).

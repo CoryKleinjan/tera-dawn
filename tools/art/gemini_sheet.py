@@ -30,7 +30,7 @@ DEFAULT_MODEL = "gemini-3.1-flash-image"
 # Aspect ratios the image models accept; the request uses the one closest to the batch's own reference.
 ASPECTS = ["1:1", "2:3", "3:2", "3:4", "4:3", "4:5", "5:4", "9:16", "16:9", "21:9"]
 # What the model "said" after Message 0, so the batch reads like the next turn of the chat.
-READY_REPLY = "Ready. Chibi HD-2D pixel art matching the attached hero, on flat magenta #FF00FF, exact labelled grids."
+READY_REPLY = "Ready. Chibi hand-painted art matching the attached hero, on flat magenta #FF00FF, exact labelled grids."
 
 FENCE = re.compile(r"^```[^\n]*\n(.*?)^```[ \t]*$", re.S | re.M)
 HEADING = re.compile(r"^#{2,3} .*$", re.M)

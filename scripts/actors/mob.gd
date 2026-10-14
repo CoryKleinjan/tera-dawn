@@ -104,7 +104,7 @@ func step() -> void:
 	if death_t > 0 and incoming <= 0:
 		death_t -= 1
 
-# ---------- HD-2D visuals ----------
+# ---------- Visuals ----------
 
 func _ready() -> void:
 	z = TDStage.Z_MONSTER + randf() * TDStage.Z_MONSTER_SPREAD

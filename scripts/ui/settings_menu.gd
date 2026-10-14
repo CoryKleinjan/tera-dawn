@@ -3,7 +3,7 @@ extends CenterContainer
 ## The settings screen, opened from the title screen and the game menu. One page per tab:
 ##   Controls  two keys for every action (Keybinds); click one, then press the new key
 ##   Audio     a volume slider for each bus and a mute (AudioSettings)
-##   Video     the window, frame rate and HD-2D effects (VideoSettings)
+##   Video     the window, frame rate and lighting effects (VideoSettings)
 ##   Developer test characters (DevSettings); debug builds only
 ## Every change is applied at once through the Settings autoload and saved when the screen
 ## closes. To add a tab, write a `_build_<name>` page and list it in `_init`.
