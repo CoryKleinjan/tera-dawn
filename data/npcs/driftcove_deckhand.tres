@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_npc_def")
 id = &"driftcove_deckhand"
-display_name = "Finn"
+display_name = "Jory"
 title = "Deckhand"
 sprite_frames = ExtResource("2_sprite")
 greeting = "Mind the wet planks! I just mopped those. Well, some of them."
