@@ -10814,6 +10814,58 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4), each holding one flat bright green (#00FF00) figure shape. The first attached picture is the same sheet with a round wooden shield, seen from its back side, painted in each cell. Paint exactly that same shield in exactly the same place, size and angle in every cell, but WITHOUT the leather handle or any strap, grip, buckle or rivets for holding it: just the inner side of the oak planks with the X cross brace, and the iron rim with rivets around the edge. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Paint nothing else: no hands, arms, body or clothes. Do not move, resize or redraw any shape. Style: the same as the shield in the first attached picture, with the warm colours and thin dark plum-brown outline of the painted villagers in the second attached picture. Keep the grid lines. No text."
   }
+ },
+ {
+  "id": "mshero_helmet_test",
+  "prompts": null,
+  "batch": "maple hero test (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_helmet_test.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 19:46:57Z 'he als osneed some boots and a helmet', 19:47:58Z 'warriro helmets should cover most of his head.', 19:50:26Z 'okay. do it.' to 2 paints ~$0.14): MapleStory-style layer over the flat green silhouette of mshero_body_test; green and magenta keyed out as background.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/silhouette_2x4.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_body_test.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Each cell holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: standing, walking, walking, swinging his arm up). He faces right. On the head of each green shape, paint ONLY a young warrior's full steel helmet that covers most of his head: the top, back and sides of the head, his ears and the back of his neck, with a rounded open face opening so his whole face (eyes, nose, mouth, cheeks) stays uncovered, plus a brass rim along the edge of the face opening, a raised ridge over the crown and a few rivets. It fits the big round chibi head snugly at its angle in each cell, slightly larger than the head outline as a real helmet would be. Leave the face area inside the opening flat green. Paint nothing else: no face, hair, body, arms or clothes. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape. Style: the warm colours, light from the upper left and thin dark plum-brown outline of the painted villagers in the second attached picture, but cleaner: smooth soft painted shading with a bright highlight, small busy painted detail. Keep the grid lines. No text."
+  }
+ },
+ {
+  "id": "mshero_boots_test",
+  "prompts": null,
+  "batch": "maple hero test (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_boots_test.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 19:46:57Z 'he als osneed some boots and a helmet', 19:47:58Z 'warriro helmets should cover most of his head.', 19:50:26Z 'okay. do it.' to 2 paints ~$0.14): MapleStory-style layer over the flat green silhouette of mshero_body_test; green and magenta keyed out as background.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/silhouette_2x4.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_body_test.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Each cell holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: standing, walking, walking, swinging his arm up). He faces right. On the feet of each green shape, paint ONLY a pair of brown leather adventurer's boots reaching to mid-shin, worn on his feet and following each foot's pose in that cell (standing, stepping, swinging): rounded toes, a darker sole, a turned-down cuff at the top and a small buckle strap. Paint nothing else: no legs above the boots, body, arms or clothes. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape. Style: the warm colours, light from the upper left and thin dark plum-brown outline of the painted villagers in the second attached picture, but cleaner: smooth soft painted shading with a bright highlight, small busy painted detail. Keep the grid lines. No text."
+  }
  }
 ]
 }
