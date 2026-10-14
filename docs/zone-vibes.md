@@ -142,8 +142,11 @@ spell creatures.
 **Keep (music):** mystical and sparkling. Town: celesta, glass harmonica, harp arpeggios, wordless
 choir pads, floating. Field: celesta, harp, strings, gentle bells, dreamy but moving forward.
 
-**Town: Lumewood Sanctum.** Round pale-stone towers with blue glass and crystal domes, round
-windows; calm and scholarly, lit by crystals and glowing plants *(inferred beyond the buildings)*.
+**Town: Lumewood Sanctum.** Pale lilac-grey stone with blue glass domes and silver-blue ribs,
+round windows, violet banners and glowing blue crystals for light; calm and scholarly, under soft
+violet twilight. A street and two stone terraces (the Magicians' Library and store below, the
+dormitory and observatory above); crystal fountain, book cart, star globe and glowing-mushroom
+planters.
 
 | Sub-zone | Role | Lv | What changes | Monsters |
 | --- | --- | --- | --- | --- |
