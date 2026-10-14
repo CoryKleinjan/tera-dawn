@@ -1,6 +1,6 @@
 class_name VideoSettings
 extends SettingsSection
-## The window (mode, size, vsync, frame rate cap) and the HD-2D effects that cost the most
+## The window (mode, size, vsync, frame rate cap) and the lighting effects that cost the most
 ## on slower computers. TDStage reads the effects whenever Settings.changed fires.
 
 enum WindowMode { WINDOWED, FULLSCREEN, BORDERLESS }
