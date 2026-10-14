@@ -11349,6 +11349,60 @@
    ],
    "text": "Paint the game's base character: exactly the same chibi boy as in the first two attached pictures (same head, ears, blank face with no eyes, brows or mouth, bald, cream short-sleeved undershirt, brown shorts, barefoot, same size and proportions, same clean smooth painted style and thin dark plum-brown outline). His hands are always rounded MITTEN hands closed in fists, with no separate fingers and no thumbs showing, in every cell. The base picture is a sheet of 8 cells (2 rows of 4); paint ONE full figure in each of cells 1 to 6, centred, at the same size as in the attached pictures, with his feet on the same ground line near the bottom of the cell. Leave cells 7 and 8 empty magenta. His SWORD ARM is the arm on the LEFT side of the picture; his SHIELD ARM is the arm on the RIGHT side of the picture. Cells 1 and 2 (two versions to choose from), facing right in a slight three-quarter side view: he has just been hit from the front and flinches backwards, head and upper body tipped back away from the right, both fists pulled up close to his chest, knees bent, one foot lifting off the ground; standing in place, not walking. Cells 3 and 4 (two versions), facing right in a slight three-quarter side view, standing with feet apart: the bow release, like the third cell of the first row of the first attached picture, his right-side arm straight forward at shoulder height with the fist closed, and his left-side arm flung back behind him at shoulder height after letting go of the string, with that hand a closed round mitten fist, not open. Cells 5 and 6 (two versions), seen from BEHIND (his back to the viewer, the back of his bald head, no face), climbing a ladder, like the fourth cell of the second attached picture but the other way round: his LEFT-side hand reaching high above his head and his right-side hand low at shoulder height, his LEFT-side knee lifted high and his right-side leg straight. Keep the background flat pure magenta #FF00FF and keep the grid lines. Nothing else in the cells: no rope, ladder, bow, weapons, props, shadows, effects, text or labels. Light from the upper left."
   }
+ },
+ {
+  "id": "mshero_hair_fix",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_hair_fix.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 21:14Z 'Okay. Make fainted hair' after the $0.14 face-and-hair quote for the faint and new frames): hair for the fainted frame and face and hair for the hurt frame.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/silhouette_fix.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_fix.png",
+    "/mnt/project-files/art-sheets/maple-hero/bodies/look_ref_idle.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds a flat bright green (#00FF00) shape of the boy in the first attached picture lying flat on his back on the ground, fainted, his head on the RIGHT. Cell 2 holds a flat bright green shape of the boy flinching backwards after being hit, standing on one leg, facing right with his head tipped back. All other cells are empty magenta and stay empty. Use the second attached picture ONLY to see what his hair looks like (do not copy its pose or add its figure): tousled chestnut-brown hair with a few spiky locks, a fringe over the top of the forehead, short at the back, ears showing. In cell 1 paint ONLY that hair on the green head, lying down: his head is on the right with the top of his head pointing right and slightly down toward the ground, his face turned up toward the viewer, so the hair spreads on the ground around the top of his head and the fringe falls back off his forehead, leaving his face area flat green. In cell 2 paint ONLY that hair on the green head, tipped back at the head's angle, the fringe on the front of the forehead, the face area flat green. Paint nothing else: no skin, face, body or clothes. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Style: the warm colours, light from the upper left and thin dark plum-brown outline of the painted villagers in the third attached picture, but cleaner: smooth soft painted shading with a bright highlight, small busy painted detail. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_face_fix",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_face_fix.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 21:14Z 'Okay. Make fainted hair' after the $0.14 face-and-hair quote for the faint and new frames): hair for the fainted frame and face and hair for the hurt frame.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/silhouette_fix.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_fix.png",
+    "/mnt/project-files/art-sheets/maple-hero/bodies/look_ref_idle.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds a flat bright green (#00FF00) shape of the boy in the first attached picture lying flat on his back on the ground, fainted, his head on the RIGHT. Cell 2 holds a flat bright green shape of the boy flinching backwards after being hit, standing on one leg, facing right with his head tipped back. All other cells are empty magenta and stay empty. Use the second attached picture ONLY to see what his face looks like (do not copy its pose or add its figure). Cell 1 stays exactly as it is, all green: do not paint in it. In cell 2 paint ONLY his face on the front of the green head (the right side, in front of the ear), turned three-quarters to the right and tipped back with the head: eyes squeezed shut as two short curved lines, eyebrows pinched up in pain, a small open 'ow' mouth, a tiny hint of nose and a soft pink blush, the same size and style as the face in the second attached picture. Paint only those features; the skin around them stays flat green. Do not paint hair, hands, clothes or a body. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Style: the warm colours, light from the upper left and thin dark plum-brown outline of the painted villagers in the third attached picture, but cleaner: smooth soft painted shading with a bright highlight, small busy painted detail. Keep the grid lines. No text, no labels."
+  }
  }
 ]
 }
