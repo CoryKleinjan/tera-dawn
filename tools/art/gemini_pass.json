@@ -12340,6 +12340,328 @@
     ],
     "text": "The first image is one repeating tile of the back wall inside the Pirates' Quarters, the pirates' guild hall of Driftcove, the jolly pirates' cove. Keep the two curving rope-bound hull ribs framing the left and right sides, the beam with rope bindings at the top, and the studded rail and plank panelling at the bottom EXACTLY as they are, in the same places. Repaint ONLY the plank wall between the two ribs. Remove the old porthole and the old net. Paint the wall as dark polished ship planks with warm lantern light. In the centre, a big wooden ship's wheel mounted flat on the wall with two cutlasses crossed beneath it and a brass spyglass laid across above it, all fixed flat to the wall. On each side, a long red-and-cream striped flag painted with a plain anchor (a picture only, no writing), hanging flat against the planks and fixed at top and bottom. Everything is seen straight from the front, flat against the wall, with no perspective, no top faces and no side depth; nothing ends loose in mid-air. The left and right edges of the image must join seamlessly when the tile is repeated side by side. Also repaint every edge in the image with smooth, soft, painted edges, never stair-stepped or pixelated. Paint in the same style as the second image and the rest of the wall: rich warm colours, strong light and shadow with bright highlights, visible painted texture at a fairly chunky brush scale, a thin dark outline. Painted, never pixel art. No letters, words or skulls. Same image size and layout."
    }
+  },
+ {
+  "id": "starter_warrior_shoes_boy",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_warrior_shoes_boy.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:44Z 'generate starting armor sets for each job', 02:50Z shoes matching each set, 02:50:44Z 'lets make all these images'). Wave 1: boy worn sheets, cut as the difference from body_boy.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_boy_base.png",
+   "refs": [],
+   "text": "This is an animation sheet of a young chibi boy in 12 cells (3 rows x 4 columns). In EVERY cell put sturdy red-brown leather ankle boots with a plain dull-steel toe cap and a thick dark sole, a few scuffs, the same dull red-brown as a padded quilted squire's jerkin on both of his bare feet, simple starter gear for a new warrior. They follow his feet and legs in each cell, standing on the same baseline.\nChange nothing else: his shirt, grey shorts, arms, hands, head and hair stay exactly as they are, and his legs above the footwear stay bare. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
   }
+ },
+ {
+  "id": "starter_mage_top_boy",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_mage_top_boy.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:44Z 'generate starting armor sets for each job', 02:50Z shoes matching each set, 02:50:44Z 'lets make all these images'). Wave 1: boy worn sheets, cut as the difference from body_boy.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_boy_base.png",
+   "refs": [],
+   "text": "This is an animation sheet of a young chibi boy in 12 cells (3 rows x 4 columns). In EVERY cell dress his upper body in a royal-blue cloth mage's tunic-robe (the same bright royal blue as a blue wizard's hat) with a narrow gold trim at the round neck, the sleeve ends and the hem; short sleeves to just above the elbow; the hem at mid-thigh; a plain dark-purple cloth sash tied at the waist. It is simple starter gear for a new magician: no armour plates, no emblem, no collar, no cape. It follows his pose in each cell.\nChange nothing else: his arms below the sleeves, hands, shorts, legs, bare feet, head and hair stay exactly as they are. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_mage_bottom_boy",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_mage_bottom_boy.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:44Z 'generate starting armor sets for each job', 02:50Z shoes matching each set, 02:50:44Z 'lets make all these images'). Wave 1: boy worn sheets, cut as the difference from body_boy.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_boy_base.png",
+   "refs": [],
+   "text": "This is an animation sheet of a young chibi boy in 12 cells (3 rows x 4 columns). In EVERY cell replace his grey shorts with loose dark navy-purple cloth trousers that reach down to his ankles, simple starter gear for a new magician, with a few painted folds. They follow his legs in each cell.\nChange nothing else: his shirt, arms, hands, bare feet, head and hair stay exactly as they are. No belt, no boots. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_mage_shoes_boy",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_mage_shoes_boy.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:44Z 'generate starting armor sets for each job', 02:50Z shoes matching each set, 02:50:44Z 'lets make all these images'). Wave 1: boy worn sheets, cut as the difference from body_boy.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_boy_base.png",
+   "refs": [],
+   "text": "This is an animation sheet of a young chibi boy in 12 cells (3 rows x 4 columns). In EVERY cell put soft royal-blue cloth slippers with a narrow gold trim around the opening, slightly pointed toes and thin dark soles on both of his bare feet, simple starter gear for a new magician. They follow his feet and legs in each cell, standing on the same baseline.\nChange nothing else: his shirt, grey shorts, arms, hands, head and hair stay exactly as they are, and his legs above the footwear stay bare. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_thief_top_boy",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_thief_top_boy.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:44Z 'generate starting armor sets for each job', 02:50Z shoes matching each set, 02:50:44Z 'lets make all these images'). Wave 1: boy worn sheets, cut as the difference from body_boy.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_boy_base.png",
+   "refs": [],
+   "text": "This is an animation sheet of a young chibi boy in 12 cells (3 rows x 4 columns). In EVERY cell dress his upper body in a fitted black leather thief's jerkin with short sleeves to just above the elbow, the hem at his hips, two small silver-buckled straps across the chest and silver-grey stitching. It is simple starter gear for a new thief: no armour plates, no emblem, no collar, no cape. It follows his pose in each cell.\nChange nothing else: his arms below the sleeves, hands, shorts, legs, bare feet, head and hair stay exactly as they are. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_thief_bottom_boy",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_thief_bottom_boy.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:44Z 'generate starting armor sets for each job', 02:50Z shoes matching each set, 02:50:44Z 'lets make all these images'). Wave 1: boy worn sheets, cut as the difference from body_boy.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_boy_base.png",
+   "refs": [],
+   "text": "This is an animation sheet of a young chibi boy in 12 cells (3 rows x 4 columns). In EVERY cell replace his grey shorts with snug charcoal-grey cloth trousers that reach down to his ankles, with black cloth bands wrapped just below the knees, simple starter gear for a new thief, with a few painted folds. They follow his legs in each cell.\nChange nothing else: his shirt, arms, hands, bare feet, head and hair stay exactly as they are. No belt, no boots. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_thief_shoes_boy",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_thief_shoes_boy.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:44Z 'generate starting armor sets for each job', 02:50Z shoes matching each set, 02:50:44Z 'lets make all these images'). Wave 1: boy worn sheets, cut as the difference from body_boy.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_boy_base.png",
+   "refs": [],
+   "text": "This is an animation sheet of a young chibi boy in 12 cells (3 rows x 4 columns). In EVERY cell put soft black leather boots that reach mid-shin, wrapped with thin silver-grey cords, with thin quiet soles on both of his bare feet, simple starter gear for a new thief. They follow his feet and legs in each cell, standing on the same baseline.\nChange nothing else: his shirt, grey shorts, arms, hands, head and hair stay exactly as they are, and his legs above the footwear stay bare. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_archer_top_boy",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_archer_top_boy.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:44Z 'generate starting armor sets for each job', 02:50Z shoes matching each set, 02:50:44Z 'lets make all these images'). Wave 1: boy worn sheets, cut as the difference from body_boy.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_boy_base.png",
+   "refs": [],
+   "text": "This is an animation sheet of a young chibi boy in 12 cells (3 rows x 4 columns). In EVERY cell dress his upper body in a forest-green leather archer's vest worn over his shirt (his shirt's short sleeves still show), laced at the front with brown leather cord, with a brown stitched trim along the hem at his hips. It is simple starter gear for a new archer: no armour plates, no emblem, no collar, no cape. It follows his pose in each cell.\nChange nothing else: his arms below the sleeves, hands, shorts, legs, bare feet, head and hair stay exactly as they are. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_archer_bottom_boy",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_archer_bottom_boy.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:44Z 'generate starting armor sets for each job', 02:50Z shoes matching each set, 02:50:44Z 'lets make all these images'). Wave 1: boy worn sheets, cut as the difference from body_boy.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_boy_base.png",
+   "refs": [],
+   "text": "This is an animation sheet of a young chibi boy in 12 cells (3 rows x 4 columns). In EVERY cell replace his grey shorts with warm brown cloth trousers that reach down to his ankles, with darker brown leather patches on the knees, simple starter gear for a new archer, with a few painted folds. They follow his legs in each cell.\nChange nothing else: his shirt, arms, hands, bare feet, head and hair stay exactly as they are. No belt, no boots. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_archer_shoes_boy",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_archer_shoes_boy.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:44Z 'generate starting armor sets for each job', 02:50Z shoes matching each set, 02:50:44Z 'lets make all these images'). Wave 1: boy worn sheets, cut as the difference from body_boy.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_boy_base.png",
+   "refs": [],
+   "text": "This is an animation sheet of a young chibi boy in 12 cells (3 rows x 4 columns). In EVERY cell put brown lace-up leather boots that reach mid-shin, with a forest-green cloth cuff at the top on both of his bare feet, simple starter gear for a new archer. They follow his feet and legs in each cell, standing on the same baseline.\nChange nothing else: his shirt, grey shorts, arms, hands, head and hair stay exactly as they are, and his legs above the footwear stay bare. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_pirate_top_boy",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_pirate_top_boy.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:44Z 'generate starting armor sets for each job', 02:50Z shoes matching each set, 02:50:44Z 'lets make all these images'). Wave 1: boy worn sheets, cut as the difference from body_boy.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_boy_base.png",
+   "refs": [],
+   "text": "This is an animation sheet of a young chibi boy in 12 cells (3 rows x 4 columns). In EVERY cell dress his upper body in a short deep-red pirate's coat with gold trim along every edge and a row of small gold buttons, open at the front over his shirt, short sleeves ending in folded-back gold-trimmed cuffs above the elbow, the hem at his hips. It is simple starter gear for a new pirate: no armour plates, no emblem, no collar, no cape. It follows his pose in each cell.\nChange nothing else: his arms below the sleeves, hands, shorts, legs, bare feet, head and hair stay exactly as they are. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_pirate_bottom_boy",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_pirate_bottom_boy.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:44Z 'generate starting armor sets for each job', 02:50Z shoes matching each set, 02:50:44Z 'lets make all these images'). Wave 1: boy worn sheets, cut as the difference from body_boy.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_boy_base.png",
+   "refs": [],
+   "text": "This is an animation sheet of a young chibi boy in 12 cells (3 rows x 4 columns). In EVERY cell replace his grey shorts with loose cream-and-red horizontally striped sailor trousers that end at mid-calf, simple starter gear for a new pirate, with a few painted folds. They follow his legs in each cell.\nChange nothing else: his shirt, arms, hands, bare feet, head and hair stay exactly as they are. No belt, no boots. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_pirate_shoes_boy",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_pirate_shoes_boy.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:44Z 'generate starting armor sets for each job', 02:50Z shoes matching each set, 02:50:44Z 'lets make all these images'). Wave 1: boy worn sheets, cut as the difference from body_boy.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/body_boy_base.png",
+   "refs": [],
+   "text": "This is an animation sheet of a young chibi boy in 12 cells (3 rows x 4 columns). In EVERY cell put tall black leather boots reaching just below the knee, with a wide folded-down cuff and a small gold buckle on the front on both of his bare feet, simple starter gear for a new pirate. They follow his feet and legs in each cell, standing on the same baseline.\nChange nothing else: his shirt, grey shorts, arms, hands, head and hair stay exactly as they are, and his legs above the footwear stay bare. Keep every cell's pose, position, size, face, body, outline, painting style and the pure magenta #FF00FF background and cell borders exactly as they are. Rich painted colours with visible cloth folds and worn patches, the same dark outline. No text."
+  }
+ },
+ {
+  "id": "starter_thief_hat_boy",
+  "prompts": null,
+  "batch": "starter armor (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_thief_hat_boy.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   2,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 02:44Z 'generate starting armor sets for each job', 02:50Z shoes matching each set, 02:50:44Z 'lets make all these images'). Wave 1: boy worn sheets, cut as the difference from body_boy.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/hats_boy_base.png",
+   "refs": [],
+   "text": "This sheet shows the same young chibi boy six times (2 rows x 3 columns), each with a different hat. Change ONLY row 1, cell 3 (his red bandana).\nRepaint that bandana as exactly the same bandana (the same shape, size, fit low on his brow, knot and two short tails at the back of his head) but in black cloth with a thin silver-grey stitched trim along its lower edge, simple starter gear for a new thief. Keep his hair under and around it exactly as it is painted now; draw no new hair.\nKeep his face, body, pose and outline, every other cell, the painting style, the pure magenta #FF00FF background and the cell borders exactly as they are. No text."
+  }
+ }
 ]
 }
