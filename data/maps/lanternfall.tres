@@ -1,136 +1,249 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=26 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=63 format=3]
 
-[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
-[ext_resource type="Resource" path="res://data/biomes/lantern.tres" id="2_lantern"]
-[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="3_platform_def"]
-[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="4_climbable_def"]
-[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="5_portal_def"]
-[ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="6_npc_placement"]
-[ext_resource type="Script" path="res://scripts/data/building_placement.gd" id="7_building_placement"]
-[ext_resource type="Resource" path="res://data/buildings/lanternfall_large.tres" id="10_lanternfall_large"]
-[ext_resource type="Resource" path="res://data/buildings/lanternfall_small.tres" id="11_lanternfall_small"]
-[ext_resource type="Resource" path="res://data/npcs/lanternfall_taxi.tres" id="12_lanternfall_taxi"]
-[ext_resource type="Resource" path="res://data/npcs/lanternfall_shop.tres" id="13_lanternfall_shop"]
-[ext_resource type="Resource" path="res://data/npcs/storage_keeper.tres" id="14_storage_keeper"]
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="map_def"]
+[ext_resource type="Resource" path="res://data/biomes/lantern.tres" id="lantern"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="platform_def"]
+[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="climbable_def"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="portal_def"]
+[ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="npc_placement"]
+[ext_resource type="Script" path="res://scripts/data/building_placement.gd" id="building_placement"]
+[ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="prop_placement"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
+[ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="backdrop_layer_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/lanternfall/panorama.png" id="panorama"]
+[ext_resource type="Resource" path="res://data/buildings/lanternfall_large.tres" id="b_large"]
+[ext_resource type="Resource" path="res://data/buildings/lanternfall_small.tres" id="b_small"]
+[ext_resource type="Resource" path="res://data/buildings/lanternfall_store.tres" id="b_store"]
+[ext_resource type="Resource" path="res://data/buildings/lanternfall_thieves_den.tres" id="b_thieves_den"]
+[ext_resource type="Resource" path="res://data/buildings/lanternfall_inn.tres" id="b_inn"]
+[ext_resource type="Resource" path="res://data/buildings/lanternfall_clock_tower.tres" id="b_clock_tower"]
+[ext_resource type="Resource" path="res://data/npcs/lanternfall_taxi.tres" id="n_taxi"]
+[ext_resource type="Resource" path="res://data/npcs/lanternfall_shop.tres" id="n_shop"]
+[ext_resource type="Resource" path="res://data/npcs/lanternfall_keeper.tres" id="n_keeper"]
+[ext_resource type="Resource" path="res://data/npcs/lanternfall_card_sharp.tres" id="n_card_sharp"]
+[ext_resource type="Resource" path="res://data/npcs/lanternfall_urchin.tres" id="n_urchin"]
+[ext_resource type="Resource" path="res://data/npcs/lanternfall_lamplighter.tres" id="n_lamplighter"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall/lamp_post.png" id="t_lamp_post"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall/prop_sign.png" id="t_prop_sign"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall/prop_barrel.png" id="t_prop_barrel"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall/prop_stall.png" id="t_prop_stall"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall/prop_sacks.png" id="t_prop_sacks"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall/prop_kegs.png" id="t_prop_kegs"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall/prop_notice_board.png" id="t_prop_notice_board"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall/prop_crates.png" id="t_prop_crates"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall/prop_bench.png" id="t_prop_bench"]
 
 [sub_resource type="Resource" id="Portal_west"]
-script = ExtResource("5_portal_def")
+script = ExtResource("portal_def")
 x = 60.0
 platform = 0
 target_map = &"dusk_bridge"
 target_x = 2360.0
 
-[sub_resource type="Resource" id="Portal_mid"]
-script = ExtResource("5_portal_def")
-x = 2039.0
-platform = 0
-target_map = &"lantern_alley"
-target_x = 120.0
-
-[sub_resource type="Resource" id="Portal_east"]
-script = ExtResource("5_portal_def")
-x = 2580.0
-platform = 0
-target_map = &"shadow_marsh"
-target_x = 120.0
-
-[sub_resource type="Resource" id="Building_0"]
-script = ExtResource("7_building_placement")
-building = ExtResource("10_lanternfall_large")
-x = 553.0
-platform = 0
-flip = true
-scale = 1.0
-tint = Color(0.92, 0.9, 0.94, 1.0)
-
-[sub_resource type="Resource" id="Building_1"]
-script = ExtResource("7_building_placement")
-building = ExtResource("11_lanternfall_small")
-x = 967.0
-platform = 0
-flip = false
-scale = 1.15
-tint = Color(1.0, 1.0, 1.0, 1.0)
-
 [sub_resource type="Resource" id="Door_store"]
-script = ExtResource("5_portal_def")
-x = 967.0
+script = ExtResource("portal_def")
+x = 1060.0
 platform = 0
 target_map = &"lanternfall_store"
 target_x = 240.0
 door = true
 
-[sub_resource type="Resource" id="Building_3"]
-script = ExtResource("7_building_placement")
-building = ExtResource("10_lanternfall_large")
-x = 1397.0
-platform = 0
-flip = false
-scale = 1.12
-tint = Color(1.0, 1.0, 1.0, 1.0)
-
 [sub_resource type="Resource" id="Door_hall"]
-script = ExtResource("5_portal_def")
-x = 1397.0
+script = ExtResource("portal_def")
+x = 1650.0
 platform = 0
 target_map = &"lanternfall_hall"
 target_x = 240.0
 door = true
 
-[sub_resource type="Resource" id="Building_4"]
-script = ExtResource("7_building_placement")
-building = ExtResource("11_lanternfall_small")
-x = 1796.0
+[sub_resource type="Resource" id="Portal_mid"]
+script = ExtResource("portal_def")
+x = 1980.0
 platform = 0
-flip = false
-scale = 0.98
-tint = Color(1.0, 0.92, 0.88, 1.0)
+target_map = &"lantern_alley"
+target_x = 120.0
 
-[sub_resource type="Resource" id="Building_7"]
-script = ExtResource("7_building_placement")
-building = ExtResource("10_lanternfall_large")
-x = 2292.0
+[sub_resource type="Resource" id="Portal_east"]
+script = ExtResource("portal_def")
+x = 4060.0
+platform = 0
+target_map = &"shadow_marsh"
+target_x = 120.0
+
+[sub_resource type="Resource" id="Backdrop_picture"]
+script = ExtResource("backdrop_layer_def")
+textures = Array[Texture2D]([ExtResource("panorama")])
+mode = 2
+depth = 300.0
+screen_top = Vector2(-0.2, -0.2)
+
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+hide_layers = PackedInt32Array(0, 1, 2, 3, 4, 5, 6)
+hide_ground_decor = PackedInt32Array(0)
+more_backdrop = Array[ExtResource("backdrop_layer_def")]([SubResource("Backdrop_picture")])
+
+[sub_resource type="Resource" id="Building_row"]
+script = ExtResource("building_placement")
+building = ExtResource("b_large")
+x = 650.0
 platform = 0
 flip = true
-scale = 1.0
-tint = Color(1.0, 0.95, 0.9, 1.0)
+
+[sub_resource type="Resource" id="Building_store"]
+script = ExtResource("building_placement")
+building = ExtResource("b_store")
+x = 1060.0
+platform = 0
+
+[sub_resource type="Resource" id="Building_den"]
+script = ExtResource("building_placement")
+building = ExtResource("b_thieves_den")
+x = 1650.0
+platform = 0
+
+[sub_resource type="Resource" id="Building_pawn"]
+script = ExtResource("building_placement")
+building = ExtResource("b_small")
+x = 2350.0
+platform = 0
+
+[sub_resource type="Resource" id="Building_inn"]
+script = ExtResource("building_placement")
+building = ExtResource("b_inn")
+x = 2900.0
+platform = 0
+
+[sub_resource type="Resource" id="Building_tower"]
+script = ExtResource("building_placement")
+building = ExtResource("b_clock_tower")
+x = 3400.0
+platform = 0
 
 [sub_resource type="Resource" id="Npc_taxi"]
-script = ExtResource("6_npc_placement")
-npc = ExtResource("12_lanternfall_taxi")
-x = 330.0
+script = ExtResource("npc_placement")
+npc = ExtResource("n_taxi")
+x = 300.0
 platform = 0
 face = 1
 
 [sub_resource type="Resource" id="Npc_shop"]
-script = ExtResource("6_npc_placement")
-npc = ExtResource("13_lanternfall_shop")
-x = 1174.0
+script = ExtResource("npc_placement")
+npc = ExtResource("n_shop")
+x = 1340.0
 platform = 0
 face = -1
 
-[sub_resource type="Resource" id="Npc_storage"]
-script = ExtResource("6_npc_placement")
-npc = ExtResource("14_storage_keeper")
-x = 1603.0
+[sub_resource type="Resource" id="Npc_keeper"]
+script = ExtResource("npc_placement")
+npc = ExtResource("n_keeper")
+x = 1430.0
 platform = 0
 face = -1
+
+[sub_resource type="Resource" id="Npc_card_sharp"]
+script = ExtResource("npc_placement")
+npc = ExtResource("n_card_sharp")
+x = 2600.0
+platform = 0
+face = 1
+
+[sub_resource type="Resource" id="Npc_urchin"]
+script = ExtResource("npc_placement")
+npc = ExtResource("n_urchin")
+x = 3570.0
+platform = 0
+face = -1
+
+[sub_resource type="Resource" id="Npc_lamplighter"]
+script = ExtResource("npc_placement")
+npc = ExtResource("n_lamplighter")
+x = 3720.0
+platform = 0
+face = -1
+
+[sub_resource type="Resource" id="Prop_sign"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_sign")
+x = 170.0
+
+[sub_resource type="Resource" id="Prop_lamp_west"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_lamp_post")
+x = 440.0
+light_color = Color(1.0, 0.75, 0.44, 1.0)
+light_energy = 1.5
+light_height = 130.0
+
+[sub_resource type="Resource" id="Prop_barrel"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_barrel")
+x = 860.0
+
+[sub_resource type="Resource" id="Prop_bench"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_bench")
+x = 1400.0
+
+[sub_resource type="Resource" id="Prop_stall"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_stall")
+x = 2150.0
+
+[sub_resource type="Resource" id="Prop_lamp_mid"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_lamp_post")
+x = 2520.0
+light_color = Color(1.0, 0.75, 0.44, 1.0)
+light_energy = 1.5
+light_height = 130.0
+
+[sub_resource type="Resource" id="Prop_kegs"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_kegs")
+x = 3170.0
+
+[sub_resource type="Resource" id="Prop_notice"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_notice_board")
+x = 3240.0
+
+[sub_resource type="Resource" id="Prop_sacks"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_sacks")
+x = 3820.0
+
+[sub_resource type="Resource" id="Prop_crates"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_crates")
+x = 3920.0
+
+[sub_resource type="Resource" id="Prop_lamp_east"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_lamp_post")
+x = 3980.0
+light_color = Color(1.0, 0.75, 0.44, 1.0)
+light_energy = 1.5
+light_height = 130.0
 
 [resource]
-script = ExtResource("1_map_def")
+script = ExtResource("map_def")
 id = &"lanternfall"
 display_name = "Lanternfall"
-biome = ExtResource("2_lantern")
-width = 2640
+biome = ExtResource("lantern")
+variant = SubResource("Variant")
+width = 4120
 height = 700
 ground_y = 620
+lantern_spacing = 0.0
 start_x = 300.0
-platforms = Array[ExtResource("3_platform_def")]([])
-climbables = Array[ExtResource("4_climbable_def")]([])
-npcs = Array[ExtResource("6_npc_placement")]([SubResource("Npc_taxi"), SubResource("Npc_shop"), SubResource("Npc_storage")])
-buildings = Array[ExtResource("7_building_placement")]([SubResource("Building_0"), SubResource("Building_1"), SubResource("Building_3"), SubResource("Building_4"), SubResource("Building_7")])
+platforms = Array[ExtResource("platform_def")]([])
+climbables = Array[ExtResource("climbable_def")]([])
+npcs = Array[ExtResource("npc_placement")]([SubResource("Npc_taxi"), SubResource("Npc_shop"), SubResource("Npc_keeper"), SubResource("Npc_card_sharp"), SubResource("Npc_urchin"), SubResource("Npc_lamplighter")])
+props = Array[ExtResource("prop_placement")]([SubResource("Prop_sign"), SubResource("Prop_lamp_west"), SubResource("Prop_barrel"), SubResource("Prop_bench"), SubResource("Prop_stall"), SubResource("Prop_lamp_mid"), SubResource("Prop_kegs"), SubResource("Prop_notice"), SubResource("Prop_sacks"), SubResource("Prop_crates"), SubResource("Prop_lamp_east")])
+buildings = Array[ExtResource("building_placement")]([SubResource("Building_row"), SubResource("Building_store"), SubResource("Building_den"), SubResource("Building_pawn"), SubResource("Building_inn"), SubResource("Building_tower")])
 region = &"lanternfall"
 world_pos = Vector2(620.0, 410.0)
 town = true
 level_text = "Town"
-portals = Array[ExtResource("5_portal_def")]([SubResource("Portal_west"), SubResource("Portal_mid"), SubResource("Portal_east"), SubResource("Door_store"), SubResource("Door_hall")])
+portals = Array[ExtResource("portal_def")]([SubResource("Portal_west"), SubResource("Door_store"), SubResource("Door_hall"), SubResource("Portal_mid"), SubResource("Portal_east")])

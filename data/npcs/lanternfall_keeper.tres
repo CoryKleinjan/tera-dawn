@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/npc_lanternfall_keeper.tres" id="2_sprite"]
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"lanternfall_keeper"
+display_name = "Sable"
+title = "Storage Keeper"
+sprite_frames = ExtResource("2_sprite")
+greeting = "Sable's strongboxes. There's no lock in town I can't open, so trust me: yours stay shut."
+lines = PackedStringArray("Ten Dawnshards a stack, and nobody touches it but you.", "The keepers in every town can hand back what you leave here.")
+storage = true

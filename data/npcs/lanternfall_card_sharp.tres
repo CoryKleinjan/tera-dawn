@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/npc_lanternfall_card_sharp.tres" id="2_sprite"]
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"lanternfall_card_sharp"
+display_name = "Old Dace"
+title = "Card Sharp"
+sprite_frames = ExtResource("2_sprite")
+greeting = "Pick a card. Any card. No, not that one."
+lines = PackedStringArray("Luck is just practice wearing a nice hat.", "I never cheat. I simply know where every card is.")
