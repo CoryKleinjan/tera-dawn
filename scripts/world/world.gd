@@ -1,6 +1,6 @@
 class_name TDWorld
 extends Node2D
-## What the player sees: the map they're on, drawn as an HD-2D diorama by TDStage, with
+## What the player sees: the map they're on, drawn as a lit diorama by TDStage, with
 ## their own hero, the monsters, other players, NPCs, drops and effects, plus the camera
 ## and the HUD. The server decides what happens (see TDServer); this shows its events
 ## (through Net) and runs your own movement so it feels instant.
