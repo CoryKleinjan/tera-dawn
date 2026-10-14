@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=54 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=62 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="greenwood"]
@@ -28,6 +28,51 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough/prop_arrow_rack.png" id="t_arrow_rack"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough/prop_target.png" id="t_target"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough/prop_hide_rack.png" id="t_hide_rack"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough/oak_deck.png" id="t_deck"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough/rope_bridge.png" id="t_bridge"]
+[ext_resource type="Resource" path="res://data/climb_styles/ladder.tres" id="ladder"]
+
+[sub_resource type="Resource" id="Deck_west"]
+script = ExtResource("platform_def")
+x = 3420.0
+y = 472.7
+width = 700.0
+look = ExtResource("t_deck")
+look_span = 0.97
+look_top = 3.0
+
+[sub_resource type="Resource" id="Bridge"]
+script = ExtResource("platform_def")
+x = 4120.0
+y = 472.7
+width = 500.0
+look = ExtResource("t_bridge")
+look_span = 0.97
+look_top = 58.0
+hangs = true
+
+[sub_resource type="Resource" id="Deck_east"]
+script = ExtResource("platform_def")
+x = 4620.0
+y = 472.7
+width = 700.0
+look = ExtResource("t_deck")
+look_span = 0.97
+look_top = 3.0
+
+[sub_resource type="Resource" id="Ladder_west"]
+script = ExtResource("climbable_def")
+x = 3470.0
+top = 472.7
+bottom = 620.0
+style = ExtResource("ladder")
+
+[sub_resource type="Resource" id="Ladder_east"]
+script = ExtResource("climbable_def")
+x = 5270.0
+top = 472.7
+bottom = 620.0
+style = ExtResource("ladder")
 
 [sub_resource type="Resource" id="Portal_west"]
 script = ExtResource("portal_def")
@@ -61,7 +106,7 @@ target_x = 120.0
 
 [sub_resource type="Resource" id="Portal_east"]
 script = ExtResource("portal_def")
-x = 4200.0
+x = 5520.0
 platform = 0
 target_map = &"whispering_grove"
 target_x = 120.0
@@ -113,8 +158,8 @@ platform = 0
 [sub_resource type="Resource" id="Building_cabin"]
 script = ExtResource("building_placement")
 building = ExtResource("b_cabin")
-x = 3616.0
-platform = 0
+x = 3790.0
+platform = 1
 
 [sub_resource type="Resource" id="Npc_taxi"]
 script = ExtResource("npc_placement")
@@ -147,15 +192,15 @@ face = -1
 [sub_resource type="Resource" id="Npc_kid"]
 script = ExtResource("npc_placement")
 npc = ExtResource("n_kid")
-x = 3371.0
+x = 4370.0
 platform = 0
 face = -1
 
 [sub_resource type="Resource" id="Npc_hunter"]
 script = ExtResource("npc_placement")
 npc = ExtResource("n_hunter")
-x = 4010.0
-platform = 0
+x = 4960.0
+platform = 3
 face = -1
 
 [sub_resource type="Resource" id="Prop_signpost"]
@@ -192,7 +237,8 @@ x = 2930.0
 [sub_resource type="Resource" id="Prop_hide_rack"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_hide_rack")
-x = 3920.0
+x = 4780.0
+y = 472.7
 
 [resource]
 script = ExtResource("map_def")
@@ -200,13 +246,13 @@ id = &"greenbough"
 display_name = "Greenbough Village"
 biome = ExtResource("greenwood")
 variant = SubResource("Variant")
-width = 4260
+width = 5580
 height = 700
 ground_y = 620
 lantern_spacing = 0.0
 start_x = 300.0
-platforms = Array[ExtResource("platform_def")]([])
-climbables = Array[ExtResource("climbable_def")]([])
+platforms = Array[ExtResource("platform_def")]([SubResource("Deck_west"), SubResource("Bridge"), SubResource("Deck_east")])
+climbables = Array[ExtResource("climbable_def")]([SubResource("Ladder_west"), SubResource("Ladder_east")])
 npcs = Array[ExtResource("npc_placement")]([SubResource("Npc_taxi"), SubResource("Npc_forager"), SubResource("Npc_shop"), SubResource("Npc_keeper"), SubResource("Npc_kid"), SubResource("Npc_hunter")])
 props = Array[ExtResource("prop_placement")]([SubResource("Prop_signpost"), SubResource("Prop_lamp_west"), SubResource("Prop_arrow_rack"), SubResource("Prop_lamp_east"), SubResource("Prop_target"), SubResource("Prop_hide_rack")])
 buildings = Array[ExtResource("building_placement")]([SubResource("Building_hut"), SubResource("Building_store"), SubResource("Building_lodge"), SubResource("Building_treehouse"), SubResource("Building_lookout"), SubResource("Building_cabin")])

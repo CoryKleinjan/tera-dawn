@@ -20,12 +20,20 @@ const LOOK_GRASS := 7.0
 ## stands on (`MapDef.land_under`) instead of hanging as a thin floating ledge. You still
 ## walk in front of it along the land below, the classic side-scroller way.
 @export var solid := false
+## Share of the `look` picture's width you can stand on (a flat deck's planks run almost
+## edge to edge).
+@export var look_span := LOOK_SPAN
+## Art pixels of the `look` picture that rise above the top edge (grass, rails, ropes).
+@export var look_top := LOOK_GRASS
+## The `look` hangs between two platforms (a rope bridge) instead of standing on the floor:
+## each end meets another platform at the same height.
+@export var hangs := false
 
 ## Game pixels per texel of `look`.
 func look_texel() -> float:
-	return width / (look.get_width() * LOOK_SPAN) if look else 0.0
+	return width / (look.get_width() * look_span) if look else 0.0
 
-## How far a `look` picture's grass rises above the top edge, in game pixels.
+## How far a `look` picture rises above the top edge, in game pixels.
 func look_grass() -> float:
-	return LOOK_GRASS * look_texel() * TDStage.art_density(look) if look else 0.0
+	return look_top * look_texel() * TDStage.art_density(look) if look else 0.0
 
