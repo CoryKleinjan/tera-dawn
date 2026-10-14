@@ -1,7 +1,7 @@
 class_name PaperdollSprite
 extends Node3D
 ## The dressed hero in the 3D stage. It goes on the hero's AnimatedSprite3D (SpriteRig's
-## body): it recolours his skin and clothes with the paperdoll shader, and keeps the layers
+## body): it cuts his head under a hat with the paperdoll shader, and keeps the layers
 ## (hair, gear) in step with whatever frame he is showing, and drawn back to front.
 ## SpriteRig.dress() makes one; give it a look with `set_look`.
 
@@ -143,7 +143,7 @@ func _place(s: Sprite3D, l: Paperdoll.Layer, i: int, frame: int, mirror: bool) -
 	l.apply_pose(s.material_override as ShaderMaterial, frame, p)
 
 ## A layer's material: its strip (laid out like the body strip, so the body's frames are its
-## regions), which the shader samples, in the layer's colour.
+## regions), which the shader samples.
 static func _layer_material(l: Paperdoll.Layer) -> ShaderMaterial:
 	var mat := ShaderMaterial.new()
 	mat.shader = LAYER_SHADER

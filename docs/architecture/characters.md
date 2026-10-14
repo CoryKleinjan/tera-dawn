@@ -9,10 +9,10 @@ look and outfit (`NewCharacter`). `Net.create_character` makes a level 1 charact
 starting job (`Character.START_JOB`) and saves it on this computer (`CharacterStore.create`),
 then character select shows the list with the new character picked.
 
-- **Appearance** (on the Character) is a skin tone, hairstyle and hair colour, each the id of a
-  `LookDef` in `data/looks/` (the face and eye kinds stay, empty: each body has its painted
-  face, and the creator leaves out kinds with nothing to pick). A hairstyle names its body
-  (`LookDef.body`: boy or girl). Add an option by adding a file;
+- **Appearance** (on the Character) is a set of `LookDef` ids from `data/looks/`; only the
+  hairstyle has options for now, and it names its body (`LookDef.body`: boy or girl). The skin,
+  face, eye and hair colour kinds stay, empty: nothing is recoloured, so a new tone is new
+  painted art. The creator leaves out kinds with nothing to pick. Add an option by adding a file;
   `creator` and `order` decide whether and where the creator lists it.
 - **Outfit** choices come from the starting job's `creator_gear` (one piece per kind). It is
   empty while the gear is being redrawn, so the creator offers no outfit for now.
@@ -27,10 +27,10 @@ then character select shows the list with the new character picked.
 - **The hero's layers**: both bodies side by side on one strip (`hero.png`, bald, with their
   painted faces), each with its own animations over it (`hero.tres` for the boy,
   `hero_girl.tres` for the girl; `Paperdoll.BODIES`), and layers laid out like the strip that
-  play frame for frame with it: the hair (`layers/hair_<style>.png`, greyscale, tinted with the
-  hair colour) and each worn piece in its own colours (`layers/worn_item_<id>.png`).
-  `tools/art/hero_build.py` builds them all, with the region map (`hero_regions.png`: his skin,
-  which the skin tone recolours) and rig (`hero_rig.json`: each frame's pose, body and head).
+  play frame for frame with it: the hair (`layers/hair_<style>.png`) and each worn piece
+  (`layers/worn_item_<id>.png`), all in their painted colours, never recoloured.
+  `tools/art/hero_build.py` builds them all, with the rig (`hero_rig.json`: each frame's pose,
+  body and head).
   A hat is drawn in one of the template shapes (`EquipDef.look_shape`: helm, tricorn, bandana,
   hood, wizard): under it the hair is that shape's (`layers/hair_<style>_<shape>.png`) and the
   body shader cuts his head away where the hat hides it (`pieces/headcut_<shape>.png`). In the

@@ -47,8 +47,8 @@ const OFFHAND_NAMES := {&"shield": "a shield", &"star": "throwing stars", &"book
 ## templates it is painted on, "helm", "tricorn", "bandana", "hood" or "wizard"; the hair under
 ## it is that shape's.
 @export var look_shape: StringName
-## The colour it's shown in (a weapon's streak). Fully transparent takes the main colour of
-## its icon.
+## The colour of a weapon's streak (never a recolour of its art). Fully transparent takes the
+## main colour of its icon.
 @export var look_color := Color(0, 0, 0, 0)
 
 ## Icon colours worked out so far: item id -> Color.
@@ -73,7 +73,7 @@ static func families_text(families: Array[StringName]) -> String:
 		return "".join(names)
 	return ", ".join(names.slice(0, -1)) + " and " + names[-1]
 
-## The colour it's shown in while worn: `look_color`, else its icon's main colour.
+## Its streak colour: `look_color`, else its icon's main colour.
 func worn_color() -> Color:
 	if look_color.a > 0.0:
 		return look_color

@@ -21,7 +21,6 @@ func start_game() -> void:
 	_check(creator.visible and not select.visible and not world.started, "Create opens the character creator")
 	creator.name_field.text = "Tester"
 	creator.step("look:%d" % LookDef.Kind.HAIR, 1)
-	creator.step("look:%d" % LookDef.Kind.HAIR_COLOR, 2)
 	creator.step("outfit:%d" % EquipDef.Slot.TOP, 1)
 	var chosen := creator.made.appearance.to_dict()
 	var top: EquipDef = creator.made.outfit[EquipDef.Slot.TOP]

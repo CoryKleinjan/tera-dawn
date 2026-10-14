@@ -79,8 +79,7 @@ func _run() -> void:
 		world.hud.title.character_select.create_button.pressed.emit()
 		var creator := world.hud.title.creator
 		creator.name_field.text = "Dawnling"
-		creator.step("look:%d" % LookDef.Kind.HAIR, 2)
-		creator.step("look:%d" % LookDef.Kind.HAIR_COLOR, 3)
+		creator.step("look:%d" % LookDef.Kind.HAIR, 1)
 		creator.step("outfit:%d" % EquipDef.Slot.TOP, 1)
 		await _frames(10)
 		await _shot("creator")
@@ -162,7 +161,7 @@ func _run() -> void:
 		await _physics(3)
 		await _shot("action")
 	if only == "" or only == "lookbook":
-		# Five players with their own looks, in the warrior's starter gear or none: in the
+		# Four players with their own looks, in the warrior's starter gear or none: in the
 		# map he starts on, then close up in menus (the equipment window's dressed hero).
 		var meadow: MapInstance = _me().map
 		var stand := _me().position
@@ -170,20 +169,18 @@ func _run() -> void:
 		world.scenes.skip()  # (the intro cutscene would letterbox the shot)
 		await _physics(240) # let the level-up banner pass
 		var outfits := [
-			["Bramble", "hair_ponytail", "hair_color_copper", "skin_honey", []],
-			["Garrick", "hair_tousled", "hair_color_ink", "skin_umber", ["squire_helm", "squire_jerkin", "squire_trousers"]],
-			["Ondine", "hair_ponytail", "hair_color_blossom", "skin_porcelain", ["squire_helm", "squire_trousers"]],
-			["Wren", "hair_tousled", "hair_color_frost", "skin_bronze", ["squire_jerkin", "squire_trousers"]],
-			["Marlo", "hair_tousled", "hair_color_moss", "skin_cocoa", []],
+			["Bramble", "hair_ponytail", []],
+			["Garrick", "hair_tousled", ["squire_helm", "squire_jerkin", "squire_trousers"]],
+			["Ondine", "hair_ponytail", ["squire_helm", "squire_trousers"]],
+			["Wren", "hair_tousled", ["squire_jerkin", "squire_trousers"]],
 		]
 		var models := []
 		for i in outfits.size():
 			var o: Array = outfits[i]
 			var made := NewCharacter.new()
-			for pair in [[&"hair", o[1]], [&"hair_color", o[2]], [&"skin", o[3]]]:
-				made.appearance.set(pair[0], StringName(pair[1]))
+			made.appearance.hair = StringName(o[1])
 			var c := Character.create(o[0], Character.START_JOB, made)
-			for id in o[4]:
+			for id in o[2]:
 				var e: EquipDef = Content.item(StringName(id))
 				c.equipment.put(c.equipment.place_for(e), ItemStack.exact(e))
 			var m := SimPlayer.new(500 + i, c)

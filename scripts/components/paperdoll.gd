@@ -7,20 +7,16 @@ extends RefCounted
 ## (tools/art/hero_build.py makes them all from the painted sheets in art/source/hero/).
 ## PaperdollSprite shows it in the world and PaperdollView in menus.
 ##
-## The body (hero.png, both bodies side by side) comes with a region map (hero_regions.png:
-## which pixels are skin, so the skin tone recolours them) and a rig (hero_rig.json: each
-## frame's pose and where his head is). Hair is greyscale, tinted with the hair colour.
-## Worn gear is its own art in its own colours (layers/worn_item_<id>.png). A hat is drawn
+## The body (hero.png, both bodies side by side) comes with a rig (hero_rig.json: each frame's
+## pose and where his head is). Everything is drawn in its painted colours, never recoloured:
+## another skin tone, hair colour or gear colour is its own painted art. Worn gear is
+## layers/worn_item_<id>.png. A hat is drawn
 ## in one of the hat shapes of the hat/hair templates (EquipDef.look_shape): under it shows
 ## that shape's hair for his hairstyle (hair_<style>_<shape>.png) instead of his own, and his
 ## body is cut away where the hat hides it (pieces/headcut_<shape>.png: his ear under a helm).
 ## A weapon or shield keeps its shape, so it is a Piece: one picture per view placed in his
 ## fist or on his arm on every frame, where the rig says.
 
-## The parts of the body, as hero_regions.png numbers them. Only skin is on the map now;
-## the rest are kept so the numbers stay put.
-enum Region { NONE, HAIR, SKIN, EYES, TOP, BOTTOM, SHOES, CAPE, WEAPON, SHIELD, GLOVES }
-const REGIONS := 11
 ## Worn places with art of their own, in drawing order (back to front) over his body. The hat
 ## and weapon go over the hair, after these.
 const WORN_PLACES: Array[StringName] = [&"cape", &"bottom", &"shoes", &"top", &"gloves"]
@@ -36,7 +32,6 @@ const DEFAULT_BODY := &"boy"
 ## Any body's animations (every body has the same ones, with the same timings).
 const FRAMES: SpriteFrames = BODIES[DEFAULT_BODY]
 const STRIP := preload("res://assets/sprites/characters/hero.png")
-const MASK := preload("res://assets/sprites/characters/hero_regions.png")
 const RIG_PATH := "res://assets/sprites/characters/hero_rig.json"
 ## Layer strips: hair_<style>.png, hair_<style>_<hat shape>.png, worn_item_<id>.png.
 const LAYER_DIR := "res://assets/sprites/characters/layers/"
@@ -52,26 +47,19 @@ const FRAME_SIZE := Vector2(256, 208)
 ## the strip is cut at twice the size he is drawn.
 const ART_SCALE := 2.0
 ## A layer of art, played in step with the hero: a strip laid out like the body strip, or a
-## piece placed on each frame. Multiplied by `tint`, or with `gear` (greyscale gear art) shaded
-## in it (gear_tint.gdshaderinc).
+## piece placed on each frame.
 class Layer:
 	var strip: Texture2D
 	## Or a piece, placed on each frame (then `behind` is per frame: Piece.pose).
 	var piece: Piece
 	var behind := false
-	var tint := Color.WHITE
-	var gear := false
 
-	func _init(s: Texture2D, back: bool, t := Color.WHITE, g := false) -> void:
+	func _init(s: Texture2D, back: bool) -> void:
 		strip = s
 		behind = back
-		tint = t
-		gear = g
 
 	## Sets a layer material's uniforms (the paperdoll_layer shader).
 	func apply(mat: ShaderMaterial) -> void:
-		mat.set_shader_parameter(&"tint", tint)
-		mat.set_shader_parameter(&"gear", gear)
 		mat.set_shader_parameter(&"has_hair_cut", false)
 		mat.set_shader_parameter(&"has_fist", piece != null and piece.fist != null)
 		if piece and piece.fist:
@@ -102,8 +90,6 @@ class Piece:
 	## Per strip frame: null (not shown) or {"view": String, "at": Vector2 (frame pixels),
 	## "angle": radians clockwise, "scale": float, "behind": bool, "fist": bool}.
 	var frames: Array = []
-	## Greyscale art, shaded in the item's colour.
-	var tinted := false
 	## The fist mask strip cutting his fingers out over its grip (fist_<kind>.png), or null.
 	var fist: Texture2D
 
@@ -119,7 +105,6 @@ class Piece:
 		if data is Dictionary:
 			p = Piece.new()
 			p.name = id
-			p.tinted = data.get("tinted", false)
 			for view in data["views"]:
 				var v: Dictionary = data["views"][view]
 				p.views[view] = {"picture": load(v["picture"]), "anchor": Vector2(v["anchor"][0], v["anchor"][1])}
@@ -139,10 +124,6 @@ class Piece:
 	func picture(p: Dictionary) -> Texture2D:
 		return views[p["view"]]["picture"]
 
-## Per region: colour to recolour it with (alpha: how much, 0 keeps the art's own).
-var tints := PackedColorArray()
-## Per region: 1 hides it.
-var hidden := PackedFloat32Array()
 ## The body's animations (BODIES).
 var frames: SpriteFrames = FRAMES
 ## Where the body is cut away under the hat (headcut_<shape>.png), or null.
@@ -154,13 +135,6 @@ var weapon_kind := &""
 var weapon_tint := Color.WHITE
 
 static var _rig: Dictionary
-static var _refs: PackedVector3Array
-
-func _init() -> void:
-	tints.resize(REGIONS)
-	tints.fill(Color(0, 0, 0, 0))
-	hidden.resize(REGIONS)
-	hidden.fill(0.0)
 
 ## Works out how a look is drawn.
 static func dress(look: Dictionary) -> Paperdoll:
@@ -178,9 +152,6 @@ static func dress(look: Dictionary) -> Paperdoll:
 	# the body
 	var hair := a.part(LookDef.Kind.HAIR)
 	d.frames = BODIES.get(hair.body if hair else DEFAULT_BODY, FRAMES)
-	var skin := a.part(LookDef.Kind.SKIN)
-	if skin and skin.recolors():
-		d.tints[Region.SKIN] = skin.color
 	var hat: EquipDef = gear.get(&"hat")
 	if hat and ResourceLoader.exists(head_cut_path(hat.look_shape)):
 		d.head_cut = load(head_cut_path(hat.look_shape))
@@ -198,7 +169,7 @@ static func dress(look: Dictionary) -> Paperdoll:
 	if hair:
 		var hair_art := hair_strip(hair, hat.look_shape if hat else &"")
 		if hair_art:
-			d._add(hair_art, false, _look_color(a.part(LookDef.Kind.HAIR_COLOR), Region.HAIR))
+			d._add(hair_art, false)
 	var hat_art := worn_strip(hat)
 	if hat_art:
 		d._add(hat_art, false)
@@ -233,32 +204,18 @@ static func kind_of(e: EquipDef) -> StringName:
 		return DEFAULT_WEAPON
 	return e.weapon_kind
 
-func _add(strip: Texture2D, behind: bool, tint := Color.WHITE, gear := false) -> void:
+func _add(strip: Texture2D, behind: bool) -> void:
 	if strip:
-		layers.append(Layer.new(strip, behind, tint, gear))
+		layers.append(Layer.new(strip, behind))
 
-## A piece as a layer: untinted, or greyscale art (Piece.tinted) shaded in `tint`.
-func _add_piece(p: Piece, tint := Color.WHITE) -> void:
+func _add_piece(p: Piece) -> void:
 	if p:
-		var l := Layer.new(null, false, tint if p.tinted else Color.WHITE, p.tinted)
+		var l := Layer.new(null, false)
 		l.piece = p
 		layers.append(l)
 
-## A look's colour, or the art's own colour for the region when it keeps it.
-static func _look_color(l: LookDef, region: Region) -> Color:
-	return l.color if l and l.recolors() else ref_color(region)
-
-## Sets a dressing material's uniforms (the paperdoll_sprite shader). The
-## per-region values go in a tiny texture, one column per region (see paperdoll.gdshaderinc).
+## Sets a dressing material's uniforms (the paperdoll_sprite shader): the head cut.
 func apply(mat: ShaderMaterial) -> void:
-	var data := Image.create(REGIONS, 3, false, Image.FORMAT_RGBAF)
-	var refs := ref_colors()
-	for r in REGIONS:
-		data.set_pixel(r, 0, tints[r])
-		data.set_pixel(r, 1, Color(hidden[r], 0, 0, 1))
-		data.set_pixel(r, 2, Color(refs[r].x, refs[r].y, refs[r].z, 1))
-	mat.set_shader_parameter(&"regions", MASK)
-	mat.set_shader_parameter(&"look_data", ImageTexture.create_from_image(data))
 	mat.set_shader_parameter(&"has_head_cut", head_cut != null)
 	if head_cut:
 		mat.set_shader_parameter(&"head_cut", head_cut)
@@ -269,21 +226,8 @@ static func rig() -> Dictionary:
 	if _rig.is_empty():
 		var f := FileAccess.open(RIG_PATH, FileAccess.READ)
 		var data: Variant = JSON.parse_string(f.get_as_text()) if f else null
-		_rig = data if data is Dictionary else {"frames": [], "region_colors": []}
+		_rig = data if data is Dictionary else {"frames": []}
 	return _rig
-
-## Each region's typical colour in the art.
-static func ref_colors() -> PackedVector3Array:
-	if _refs.is_empty():
-		var colors: Array = rig().get("region_colors", [])
-		for i in REGIONS:
-			var c: Array = colors[i] if i < colors.size() else [1, 1, 1]
-			_refs.append(Vector3(c[0], c[1], c[2]))
-	return _refs
-
-static func ref_color(region: Region) -> Color:
-	var v := ref_colors()[region]
-	return Color(v.x, v.y, v.z)
 
 ## Which frame of the strip a hero frame texture is.
 static func frame_index(tex: Texture2D) -> int:

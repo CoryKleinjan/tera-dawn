@@ -11,12 +11,10 @@ func _look(a: Appearance, gear := {}) -> Dictionary:
 # ---------- Appearance ----------
 
 func test_every_kind_has_creator_options() -> void:
-	# one boy's and one girl's hairstyle for now (Cory 2026-10-13); four or more skin tones and
-	# hair colours; the face and eyes are painted on each body, so there are none to pick
+	# one boy's and one girl's hairstyle for now (Cory 2026-10-13); nothing is recoloured
+	# (Cory 2026-10-14: another skin tone or hair colour is its own painted art)
 	check_eq(Content.looks_of(LookDef.Kind.HAIR).size(), 2, "a boy's and a girl's hairstyle")
-	for kind in [LookDef.Kind.SKIN, LookDef.Kind.HAIR_COLOR]:
-		check(Content.looks_of(kind).size() >= 4, "%s has at least 4 options" % LookDef.KIND_NAMES[kind])
-	for kind in [LookDef.Kind.FACE, LookDef.Kind.EYES]:
+	for kind in [LookDef.Kind.SKIN, LookDef.Kind.FACE, LookDef.Kind.EYES, LookDef.Kind.HAIR_COLOR]:
 		check(Content.looks_of(kind).is_empty(), "no %s options" % LookDef.KIND_NAMES[kind])
 
 func test_a_new_appearance_takes_the_first_option_of_each_kind() -> void:
@@ -28,7 +26,6 @@ func test_a_new_appearance_takes_the_first_option_of_each_kind() -> void:
 func test_the_default_look_is_the_boy_as_drawn() -> void:
 	var d := Paperdoll.dress(_look(Appearance.new()))
 	check_eq(d.frames, Paperdoll.BODIES[&"boy"], "the boy's body")
-	check_eq(d.tints[Paperdoll.Region.SKIN].a, 0.0, "his skin keeps its painted colour")
 	check(d.weapon_kind == &"", "no weapon")
 	check(d.head_cut == null, "his whole head")
 	var hair := Content.looks_of(LookDef.Kind.HAIR)[0]
@@ -56,9 +53,9 @@ func test_appearance_round_trips_and_ignores_bad_ids() -> void:
 	var b := Appearance.new()
 	b.load_dict(a.to_dict())
 	check_eq(b.to_dict(), a.to_dict(), "round trip")
-	b.load_dict({"hair": "no_such_hair", "skin": String(a.hair_color)})
+	b.load_dict({"hair": "no_such_hair", "skin": String(a.hair)})
 	check_eq(b.hair, a.hair, "an unknown hair keeps the current one")
-	check_eq(b.skin, a.skin, "a hair colour isn't a skin")
+	check_eq(b.skin, a.skin, "a hairstyle isn't a skin")
 
 func _rng() -> RandomNumberGenerator:
 	var rng := RandomNumberGenerator.new()
@@ -134,11 +131,11 @@ func test_create_uses_the_choices() -> void:
 
 func test_appearance_is_saved_with_the_character() -> void:
 	var n := NewCharacter.new()
-	n.appearance.hair_color = Content.looks_of(LookDef.Kind.HAIR_COLOR)[-1].id
+	n.appearance.hair = &"hair_ponytail"
 	var c := Character.create("Pip", Character.START_JOB, n)
 	var back := Character.create("Pip")
 	back.load_dict(c.to_dict())
-	check_eq(back.appearance.hair_color, n.appearance.hair_color, "hair colour saved")
+	check_eq(back.appearance.hair, &"hair_ponytail", "hairstyle saved")
 
 func test_a_save_from_before_appearances_gets_the_default_look() -> void:
 	var c := Character.create("Old")
@@ -165,13 +162,11 @@ func _strip_layer(d: Paperdoll, strip: Texture2D) -> Paperdoll.Layer:
 			return l
 	return null
 
-func test_looks_recolour_the_hero() -> void:
-	var a := Appearance.new()
-	a.skin = &"skin_umber"
-	a.hair_color = &"hair_color_frost"
-	var d := Paperdoll.dress(_look(a))
-	check_eq(d.tints[Paperdoll.Region.SKIN], Content.look(&"skin_umber").color, "skin")
-	check_eq(_hair_layer(d, a).tint, Content.look(&"hair_color_frost").color, "hair")
+func test_nothing_is_recoloured() -> void:
+	# everything shows in its painted colours (Cory 2026-10-14)
+	var d := Paperdoll.dress(_look(Appearance.new(), {"hat": "squire_helm", "top": "squire_jerkin"}))
+	for l in d.layers:
+		check(l.strip != null, "a painted strip, drawn as it is")
 
 func test_every_hairstyle_has_its_hair_bare_and_under_each_hat_shape() -> void:
 	# the hair under each hat follows that shape's template cell (Cory 2026-10-13)
@@ -201,7 +196,6 @@ func test_worn_gear_is_its_own_art() -> void:
 	check(top != null and bottom != null, "the jerkin and trousers are drawn")
 	if top and bottom:
 		check(d.layers.find(bottom) < d.layers.find(top), "the jerkin over the trousers")
-		check_eq(top.tint, Color.WHITE, "in their painted colours")
 		check_eq(top.strip.get_size(), Paperdoll.STRIP.get_size(), "laid out like the body")
 	var plain := Paperdoll.dress(_look(Appearance.new(), {"top": "linen_tunic"}))
 	check_eq(plain.layers.size(), 1, "gear with no art yet draws nothing (his hair only)")
@@ -218,7 +212,6 @@ func test_the_rig_has_every_frame_of_the_hero() -> void:
 	var frames: Array = Paperdoll.rig()["frames"]
 	check_eq(Vector2(Paperdoll.rig()["frame_size"][0], Paperdoll.rig()["frame_size"][1]), Paperdoll.FRAME_SIZE, "FRAME_SIZE matches the art")
 	check_eq(frames.size(), int(Paperdoll.STRIP.get_width() / Paperdoll.FRAME_SIZE.x), "one rig entry per frame")
-	check_eq(Paperdoll.MASK.get_size(), Paperdoll.STRIP.get_size(), "the region map matches the strip")
 	for body in Paperdoll.BODIES:
 		var anims: SpriteFrames = Paperdoll.BODIES[body]
 		check_eq(anims.get_animation_names(), Paperdoll.FRAMES.get_animation_names(), "%s has every animation" % body)

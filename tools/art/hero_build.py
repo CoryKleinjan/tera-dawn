@@ -3,20 +3,21 @@
 
 The hero is a boy or a girl body (the hairstyle picks it: tousled is the boy, ponytail the
 girl), each painted as one 3x4 animation sheet (body_<body>.png). Everything he wears is a
-Gemini edit of that same sheet with one thing changed (body_<body>_bald.png, _jerkin, _trousers; _tunic only marks his shirt),
-so each piece is lifted off by comparing the edit with the sheet it was made from, and lines up
-with the body frame for frame. The hats come from Cory's hat/hair template sheets
+Gemini edit of that same sheet with one thing changed (body_<body>_bald.png, _jerkin,
+_trousers), so each piece is lifted off by comparing the edit with the sheet it was made from,
+and lines up with the body frame for frame. The hats come from Cory's hat/hair template sheets
 (hats_<body>.png: one cell per hat shape, and one bare head), placed on his head on every pose.
+Everything keeps its painted colours: a new skin tone, hair colour or gear colour is its own
+painted sheet, never a recolour.
 
     python3 tools/art/hero_build.py             # everything
     python3 tools/art/hero_build.py --preview   # also art/build/hero_preview.png
 
 Writes (every strip is laid out like the body strip, both bodies side by side):
 - assets/sprites/characters/hero.png: the bald bodies with their painted faces.
-  hero_regions.png: which pixels are skin (the skin tone recolours them). hero_rig.json: each
-  frame's pose, body and where his head is.
+  hero_rig.json: each frame's pose, body and where his head is.
 - assets/animations/hero.tres and hero_girl.tres: each body's animations over the strip.
-- layers/hair_<style>.png: the hair, greyscale (tinted with the hair colour), and
+- layers/hair_<style>.png: the hair, and
   layers/hair_<style>_<shape>.png, the hair under each hat shape (from its template cell).
 - pieces/headcut_<shape>.png: where his body is cut away under each hat shape.
 - layers/worn_item_<id>.png: worn gear (WORN, HAT_ITEMS), in its own colours.
@@ -255,17 +256,6 @@ def save(img, path):
     print("wrote", os.path.relpath(path, ROOT))
 
 
-def luma(rgb):
-    return (rgb * [0.299, 0.587, 0.114]).sum(2)
-
-
-def grey(rgb, bright):
-    """Greyscale art to tint (hair): its brightness, lifted so `bright` (the hair's bright
-    brightness) is 0.85 and the hair colour shows."""
-    lum = np.clip(luma(rgb) / max(bright, 1e-3) * 0.85, 0, 1)
-    return np.repeat(lum[..., None], 3, 2)
-
-
 # ---------- the parts ----------
 
 class Body:
@@ -276,8 +266,6 @@ class Body:
         self.base = keyed("body_" + name)
         self.bald = aligned(keyed("body_%s_bald" % name), self.base)
         self.fit = Fit(self.base[POSES["idle"]][1])
-        rgb, a = self.hair("idle")
-        self.hair_bright = float(np.percentile(luma(rgb)[a > 0.9], 90))
 
     def hair_mask(self, rc):
         """His brown hair on a cell of the base sheet (what the bald sheet took away)."""
@@ -303,29 +291,6 @@ class Body:
         m = changed(self.base[rc], self.bald[rc], 0.12) & hairish(rgb)  # (not a repainted eye)
         m = close(m, 3) & (a > 0.02)
         return rgb, a * dilate(m, 1) * np.where(m, 1.0, 0.5)
-
-    def clothes(self, pose):
-        """His painted shirt and shorts on a pose: where the tunic and trousers edits
-        (body_<body>_tunic.png, _trousers) put cloth on him below the chin. Their colours are
-        too close to his skin (the cream shirt, the shorts' brown patches) to tell apart by
-        colour, so the skin tone must not recolour them."""
-        rc = POSES[pose]
-        if not hasattr(self, "_covers"):
-            self._covers = [aligned(keyed("body_%s_%s" % (self.name, s)), self.base) for s in ("tunic", "trousers")]
-        _dx, dy, _deg = hats_of(self).track[pose]
-        inside = ~dilate(self.base[rc][1] <= 0.5, 3, outside=True)
-        out = np.zeros_like(inside)
-        for sheet, edit in zip(("tunic", "trousers"), self._covers):
-            trgb, ta = edit[rc]
-            mx, mn = trgb.max(2), trgb.min(2)
-            white = (mx > 0.85) & (mx - mn < 0.15)  # (the boy's tunic came back with a white sticker edge)
-            m = changed(edit[rc], self.base[rc]) & ~skin_mask(trgb, ta) & ~white & inside  # (not re-painted skin)
-            if sheet == "trousers":  # his shorts, never his feet below them (their patches come back as holes)
-                m &= ~skin_mask(*self.base[rc])
-            m = close(m, 4)
-            m[: int(hats_of(self).box[1] + dy) + 4] = False
-            out |= main_parts(fill_holes(m))
-        return out
 
     def worn(self, sheet):
         """A worn piece on every pose: {pose: (rgb, alpha)} of what the edit put on, or {} if
@@ -366,35 +331,21 @@ def skin_mask(rgb, alpha):
 
 
 def build_bodies(bodies):
-    strip, regions = new_strip(), new_strip()
+    strip = new_strip()
     for body in bodies.values():
         for pose, rc in POSES.items():
-            rgb, a = body.bare(rc)
-            put(strip, body.name, pose, body.fit.frame(rgb, a))
-            skin = skin_mask(rgb, a) & ~body.clothes(pose)
-            reg = np.zeros_like(rgb)
-            reg[..., 0] = np.where(skin, 2 * 16 / 255.0, 0.0)  # Paperdoll.Region.SKIN
-            put(regions, body.name, pose, body.fit.frame(reg, a))
+            put(strip, body.name, pose, body.fit.frame(*body.bare(rc)))
     save(strip, os.path.join(CHARS, "hero.png"))
-    save(regions, os.path.join(CHARS, "hero_regions.png"))
     return strip
 
 
 def build_hair(bodies):
-    """Each hairstyle's hair, greyscale: hair_<style>.png. Returns the hair's colour (the
-    tint that makes the greyscale look as painted) for the rig."""
-    tints = []
+    """Each hairstyle's hair, as painted: hair_<style>.png."""
     for body in bodies.values():
         strip = new_strip()
         for pose in POSES:
-            rgb, a = body.hair(pose)
-            put(strip, body.name, pose, body.fit.frame(grey(rgb, body.hair_bright), a))
+            put(strip, body.name, pose, body.fit.frame(*body.hair(pose)))
         save(strip, os.path.join(LAYERS, "hair_%s.png" % STYLES[body.name]))
-        rgb, a = body.hair("idle")
-        m = a > 0.9
-        g = grey(rgb, body.hair_bright)[m][:, 0]
-        tints.append([float(np.median(rgb[m][:, i][g > 0.2] / g[g > 0.2])) for i in range(3)])
-    return [round(min(1.0, sum(t[i] for t in tints) / len(tints)), 3) for i in range(3)]
 
 
 def build_worn(bodies):
@@ -636,7 +587,7 @@ def hair_cut(hat_mask):
 # ---------- writing it all ----------
 
 def build_hats(bodies):
-    """For each hat shape: the hair under it (hair_<style>_<shape>.png, greyscale like the hair)
+    """For each hat shape: the hair under it (hair_<style>_<shape>.png, as painted on the template)
     and where the body is cut away under it (pieces/headcut_<shape>.png, alpha). For each hat
     with its own art (HAT_ITEMS): its picture on every pose (worn_item_<id>.png)."""
     items = {item: new_strip() for item in HAT_ITEMS}
@@ -645,7 +596,7 @@ def build_hats(bodies):
         for body in bodies.values():
             hair = new_strip()
             for pose, (hat, (hrgb, ha), cut) in hats_of(body).shape(rc).items():
-                put(hair, body.name, pose, body.fit.frame(grey(hrgb, body.hair_bright), ha))
+                put(hair, body.name, pose, body.fit.frame(hrgb, ha))
                 white = np.ones(cut.shape + (3,))
                 put(cuts, body.name, pose, body.fit.frame(white, cut.astype(float)))
                 for item, item_shape in HAT_ITEMS.items():
@@ -667,11 +618,9 @@ def hats_of(body):
     return _HATS[body.name]
 
 
-def build_rig(bodies, hair_tint):
-    """hero_rig.json: per strip frame its pose and where his head is; the colours the art's
-    regions are painted in (the skin tone and hair colour recolour from those)."""
+def build_rig(bodies):
+    """hero_rig.json: per strip frame its pose, body and where his head is."""
     frames = []
-    skin = []
     for body in bodies.values():
         hats = hats_of(body)
         y0, chin, x0, x1 = hats.box
@@ -686,15 +635,7 @@ def build_rig(bodies, hair_tint):
                 "head_size": [round((x1 - x0) * body.fit.scale), round((chin - y0) * body.fit.scale)],
                 "feet": body.fit.point((xs.min() + xs.max()) / 2, ys.max()),
             })
-        rgb, a = body.bare(POSES["idle"])
-        skin.append(rgb[skin_mask(rgb, a) & ~body.clothes("idle")].mean(0))
-    skin = [round(float(v), 3) for v in np.mean(skin, 0)]
-    colors = [[1, 1, 1]] * 11
-    colors[1] = hair_tint  # Paperdoll.Region.HAIR
-    colors[2] = skin  # SKIN
-    rig = {"frame_size": [FRAME_W, FRAME_H],
-           "regions": ["none", "hair", "skin", "eyes", "top", "bottom", "shoes", "cape", "weapon", "shield", "gloves"],
-           "frames": frames, "weapons": {}, "region_colors": colors}
+    rig = {"frame_size": [FRAME_W, FRAME_H], "frames": frames, "weapons": {}}
     path = os.path.join(CHARS, "hero_rig.json")
     with open(path, "w") as f:
         json.dump(rig, f, indent=1)
@@ -747,10 +688,10 @@ def preview(bodies):
 def main(argv):
     bodies = {name: Body(name) for name in BODIES}
     build_bodies(bodies)
-    tint = build_hair(bodies)
+    build_hair(bodies)
     build_worn(bodies)
     build_hats(bodies)
-    build_rig(bodies, tint)
+    build_rig(bodies)
     build_animations()
     if "--preview" in argv:
         preview(bodies)

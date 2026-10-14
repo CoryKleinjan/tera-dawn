@@ -105,7 +105,7 @@ func test_create_goes_back_to_character_select_with_it_picked() -> void:
 func test_create_starts_the_game_with_the_choices() -> void:
 	await _play("Fresh")
 	var c := ui.hud.title.creator
-	c.step("look:%d" % LookDef.Kind.SKIN, 2)
+	c.step("look:%d" % LookDef.Kind.HAIR, 1)
 	c.step("outfit:%d" % EquipDef.Slot.SHOES, 1)
 	var want := c.made.appearance.to_dict()
 	var shoes: EquipDef = c.made.outfit[EquipDef.Slot.SHOES]

@@ -23,7 +23,9 @@ update this page when one changes. Each zone's own look and music are in
 - The hero is a paperdoll in the NPC style, a boy or a girl (the hairstyle picks the body), hands
   with fingers. `art/reference/hero_look.png` (boy and girl in every pose, tunic, trousers and
   each hat type) is the approved look to match. Each body has one painted face; the creator
-  picks the skin tone, hairstyle and hair colour.
+  picks the hairstyle (and so the body).
+- Nothing on the hero is recoloured in game. Another skin tone, hair colour or colour of armour
+  is its own painted art (the same sheet painted again in the new colours), put together as is.
 - Chibi proportions, drawn about 13% larger than the first cut.
 - Looks exactly the same in menus (equipment, creator, character select) as in game: one renderer.
 - Animation: walk only, 15% faster after about 0.4 s of moving; run frames never play. No walk bob;
