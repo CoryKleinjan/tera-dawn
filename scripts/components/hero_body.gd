@@ -17,8 +17,9 @@ const FRAMES := preload("res://assets/animations/hero.tres")
 ## stands as tall as the old hero (TDPlayer.HEIGHT); his art is cut at twice this size, so he
 ## still shrinks on screen up to 1440p rather than stretching.
 const SCALE := 0.735
-## A soft warm light that travels with every player, so heroes stand out from the scenery.
-const LIGHT := Color(1.0, 0.86, 0.68)
+## A soft light that travels with every player, so heroes stand out from the scenery: near
+## white, so his painted colours show as painted (a warm one turned him red).
+const LIGHT := Color(1.0, 0.97, 0.93)
 const LIGHT_ENERGY := 0.55
 ## Where his light sits above his feet (game pixels).
 const LIGHT_HEIGHT := 33.0
