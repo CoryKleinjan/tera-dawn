@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=76 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=78 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="map_def"]
 [ext_resource type="Resource" path="res://data/biomes/lantern.tres" id="lantern"]
@@ -37,6 +37,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall/rooftop_lane.png" id="t_rooftop_lane"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall/prop_flower_trough.png" id="t_prop_flower_trough"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall/prop_chimney_pots.png" id="t_prop_chimney_pots"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall/prop_cart.png" id="t_prop_cart"]
 
 [sub_resource type="Resource" id="Balcony"]
 script = ExtResource("platform_def")
@@ -291,6 +292,11 @@ texture = ExtResource("t_prop_chimney_pots")
 x = 5250.0
 y = 504.9
 
+[sub_resource type="Resource" id="Prop_cart"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_prop_cart")
+x = 4400.0
+
 [resource]
 script = ExtResource("map_def")
 id = &"lanternfall"
@@ -305,7 +311,7 @@ start_x = 300.0
 platforms = Array[ExtResource("platform_def")]([SubResource("Balcony"), SubResource("Rooftop")])
 climbables = Array[ExtResource("climbable_def")]([SubResource("Ladder_0"), SubResource("Ladder_1"), SubResource("Ladder_2"), SubResource("Ladder_3")])
 npcs = Array[ExtResource("npc_placement")]([SubResource("Npc_taxi"), SubResource("Npc_shop"), SubResource("Npc_keeper"), SubResource("Npc_urchin"), SubResource("Npc_lamplighter"), SubResource("Npc_card_sharp")])
-props = Array[ExtResource("prop_placement")]([SubResource("Prop_sign"), SubResource("Prop_lamp_west"), SubResource("Prop_barrel"), SubResource("Prop_bench"), SubResource("Prop_stall"), SubResource("Prop_lamp_mid"), SubResource("Prop_kegs"), SubResource("Prop_notice"), SubResource("Prop_crates"), SubResource("Prop_lamp_roof"), SubResource("Prop_sacks"), SubResource("Prop_trough"), SubResource("Prop_pots")])
+props = Array[ExtResource("prop_placement")]([SubResource("Prop_sign"), SubResource("Prop_lamp_west"), SubResource("Prop_barrel"), SubResource("Prop_bench"), SubResource("Prop_stall"), SubResource("Prop_lamp_mid"), SubResource("Prop_kegs"), SubResource("Prop_notice"), SubResource("Prop_crates"), SubResource("Prop_lamp_roof"), SubResource("Prop_sacks"), SubResource("Prop_trough"), SubResource("Prop_pots"), SubResource("Prop_cart")])
 buildings = Array[ExtResource("building_placement")]([SubResource("Building_row"), SubResource("Building_store"), SubResource("Building_den"), SubResource("Building_pawn"), SubResource("Building_inn"), SubResource("Building_tower")])
 region = &"lanternfall"
 world_pos = Vector2(620.0, 410.0)

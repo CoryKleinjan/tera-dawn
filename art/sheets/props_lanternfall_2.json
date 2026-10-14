@@ -5,7 +5,7 @@
   "inset": 8,
   "cells": [
     [
-      "",
+      "prop_cart",
       "prop_flower_trough",
       "prop_chimney_pots"
     ]
@@ -17,6 +17,11 @@
       "keep": "largest"
     },
     "prop_chimney_pots": {
+      "scale": 0.1,
+      "flat_bottom": true,
+      "keep": "largest"
+    },
+    "prop_cart": {
       "scale": 0.1,
       "flat_bottom": true,
       "keep": "largest"
