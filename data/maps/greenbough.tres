@@ -212,7 +212,6 @@ face = -1
 script = ExtResource("prop_placement")
 texture = ExtResource("t_signpost")
 x = 175.0
-y = 627.0
 
 [sub_resource type="Resource" id="Prop_lamp_west"]
 script = ExtResource("prop_placement")
@@ -226,7 +225,6 @@ light_height = 130.0
 script = ExtResource("prop_placement")
 texture = ExtResource("t_arrow_rack")
 x = 2620.0
-y = 627.0
 
 [sub_resource type="Resource" id="Prop_lamp_east"]
 script = ExtResource("prop_placement")
@@ -240,43 +238,38 @@ light_height = 130.0
 script = ExtResource("prop_placement")
 texture = ExtResource("t_target")
 x = 2930.0
-y = 627.0
 
 [sub_resource type="Resource" id="Prop_hide_rack"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_hide_rack")
 x = 4780.0
-y = 478.0
+y = 472.7
 
 [sub_resource type="Resource" id="Prop_logs"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_logs")
 x = 4060.0
-y = 478.0
+y = 472.7
 
 [sub_resource type="Resource" id="Prop_hay"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_hay")
 x = 4250.0
-y = 627.0
 
 [sub_resource type="Resource" id="Prop_barrel"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_barrel")
 x = 1530.0
-y = 627.0
 
 [sub_resource type="Resource" id="Prop_bench"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_bench")
 x = 2200.0
-y = 627.0
 
 [sub_resource type="Resource" id="Prop_wheelbarrow"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_wheelbarrow")
 x = 1975.0
-y = 627.0
 
 [resource]
 script = ExtResource("map_def")
