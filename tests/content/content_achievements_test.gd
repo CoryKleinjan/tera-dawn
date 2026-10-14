@@ -8,8 +8,8 @@ extends TestCase
 const Scan := preload("res://tests/content/content_scan.gd")
 
 ## The achievements as they were when they lived in code, in order. Saved characters keep
-## these ids and Steamworks these Steam names, so none may change. level_50 keeps its name
-## from when the level cap was 50.
+## these ids and Steamworks these Steam names, so none may change. level_50's goal is level 50
+## again (it was 35 while that was the cap).
 const SHIPPED := [
 	{"id": "first_hunt", "steam": "ACH_FIRST_HUNT", "title": "First Hunt", "text": "Defeat a monster.", "kind": "kills", "goal": 1},
 	{"id": "hunter", "steam": "ACH_HUNTER", "title": "Hunter", "text": "Defeat 500 monsters.", "kind": "kills", "goal": 500},
@@ -19,7 +19,7 @@ const SHIPPED := [
 	{"id": "level_5", "steam": "REACH_LEVEL_5", "title": "Growing Up", "text": "Reach level 5.", "kind": "level", "goal": 5},
 	{"id": "level_10", "steam": "ACH_LEVEL_10", "title": "Finding Your Feet", "text": "Reach level 10.", "kind": "level", "goal": 10},
 	{"id": "level_30", "steam": "ACH_LEVEL_30", "title": "Seasoned", "text": "Reach level 30.", "kind": "level", "goal": 30},
-	{"id": "level_50", "steam": "ACH_LEVEL_50", "title": "Hero of Tera", "text": "Reach level 35, the highest level.", "kind": "level", "goal": 35},
+	{"id": "level_50", "steam": "ACH_LEVEL_50", "title": "Hero of Tera", "text": "Reach level 50.", "kind": "level", "goal": 50},
 	{"id": "first_job", "steam": "ACH_FIRST_JOB", "title": "A Calling", "text": "Take up a job.", "kind": "job", "goal": 1},
 	{"id": "helper", "steam": "ACH_HELPER", "title": "Helping Hand", "text": "Finish 10 quests.", "kind": "quests", "goal": 10},
 	{"id": "hero_for_hire", "steam": "ACH_HERO_FOR_HIRE", "title": "Hero for Hire", "text": "Finish 30 quests.", "kind": "quests", "goal": 30},

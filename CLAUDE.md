@@ -47,6 +47,8 @@ python3 tools/art/gemini_pass.py --dry-run                           # Gemini ba
 - Clean edges: cut sprites at about twice on-screen resolution with soft anti-aliased edges,
   never on/off edge pixels (the slicer's `detail` 2 and `"alpha": "smooth"` defaults; the game
   blends the edge in). Never make outlines thicker.
+- Never recolour art in code (no tint, modulate or palette swap): another skin, hair or armour
+  colour is its own painted sheet, put together as painted.
 - An item's inventory/equipment icon shows the same object the character wears (same shape,
   colours, details); keep them matching.
 
