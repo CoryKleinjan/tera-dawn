@@ -29,6 +29,7 @@ import os
 import sys
 from collections import deque
 
+import cv2
 import numpy as np
 from PIL import Image, ImageFilter
 
@@ -74,56 +75,41 @@ N8 = N4 + [(-1, -1), (-1, 1), (1, -1), (1, 1)]
 
 
 def label(mask):
-    """Connected components (8-neighbour). Returns (labels, count)."""
-    h, w = mask.shape
-    lab = np.zeros((h, w), np.int32)
-    n = 0
-    for y, x in zip(*np.nonzero(mask)):
-        if lab[y, x]:
-            continue
-        n += 1
-        lab[y, x] = n
-        q = deque([(y, x)])
-        while q:
-            cy, cx = q.popleft()
-            for dy, dx in N8:
-                ny, nx = cy + dy, cx + dx
-                if 0 <= ny < h and 0 <= nx < w and mask[ny, nx] and not lab[ny, nx]:
-                    lab[ny, nx] = n
-                    q.append((ny, nx))
-    return lab, n
+    """Connected components (8-neighbour), numbered in reading order of each piece's first
+    pixel. Returns (labels, count)."""
+    n, lab = cv2.connectedComponents((mask != 0).astype(np.uint8), connectivity=8, ltype=cv2.CV_32S)
+    if n <= 1:
+        return np.zeros(mask.shape, np.int32), 0
+    ids, first = np.unique(lab.ravel(), return_index=True)
+    ids = ids[ids > 0][np.argsort(first[ids > 0], kind="stable")]
+    order = np.zeros(n, np.int32)
+    order[ids] = np.arange(1, n, dtype=np.int32)
+    return order[lab], n - 1
 
 
 def flood(mask, seeds):
     """Pixels of `mask` 4-connected to any seed."""
-    h, w = mask.shape
-    out = np.zeros_like(mask)
-    q = deque()
-    for s in seeds:
-        if mask[s] and not out[s]:
-            out[s] = True
-            q.append(s)
-    while q:
-        y, x = q.popleft()
-        for dy, dx in N4:
-            ny, nx = y + dy, x + dx
-            if 0 <= ny < h and 0 <= nx < w and mask[ny, nx] and not out[ny, nx]:
-                out[ny, nx] = True
-                q.append((ny, nx))
-    return out
+    seeds = list(seeds)
+    if not seeds:
+        return np.zeros_like(mask)
+    n, lab = cv2.connectedComponents((mask != 0).astype(np.uint8), connectivity=4, ltype=cv2.CV_32S)
+    ys, xs = zip(*seeds)
+    keep = np.zeros(n, bool)
+    keep[lab[np.array(ys), np.array(xs)]] = True
+    keep[0] = False
+    return keep[lab].astype(mask.dtype)
 
 
 def dilate(m, r, outside=False):
     """Grows a mask by r pixels (a square), without wrapping round the edges. `outside`: whether
     the area past the edges counts as in the mask (True for "near the clear background", since a
     cell's art can run to its edge)."""
-    h, w = m.shape
-    pad = np.pad(m, r, constant_values=outside)
-    out = m.copy()
-    for dy in range(-r, r + 1):
-        for dx in range(-r, r + 1):
-            out |= pad[r + dy:r + dy + h, r + dx:r + dx + w]
-    return out
+    if r <= 0:
+        return m.copy()
+    square = np.ones((2 * r + 1, 2 * r + 1), np.uint8)
+    out = cv2.dilate((m != 0).astype(np.uint8), square, borderType=cv2.BORDER_CONSTANT,
+                     borderValue=1 if outside else 0)
+    return out.astype(bool)
 
 
 def background_color(rgb):

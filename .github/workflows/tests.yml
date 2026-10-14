@@ -20,7 +20,7 @@ jobs:
 
       - name: Art tool tests
         run: |
-          python3 -m pip install --quiet numpy pillow
+          python3 -m pip install --quiet numpy pillow opencv-python-headless
           python3 -m unittest discover -s tools/art/tests -t tools/art/tests
 
       - name: Cache Godot
