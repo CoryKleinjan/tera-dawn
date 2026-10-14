@@ -233,8 +233,13 @@ and reef creatures.
 rollicking shanty feel without singing. Field: marimba, steel-string guitar, flowing strings,
 light island percussion.
 
-**Town: Driftcove.** A pirate hideout built from beached ship hulls and wreck timber in sea caves,
-sails and rope everywhere *(inferred beyond the buildings)*.
+**Town: Driftcove.** A jolly pirate hideout built from beached ship hulls and wreck timber in a
+big sea cave, lit turquoise from the cave mouth with warm lantern glow. Dark and sun-bleached wreck
+timber, patched canvas, rope, portholes, brass, barnacles and kelp, red-and-cream striped awnings
+and anchor flags (no skulls, no plaster or blue tiles). Two levels: a sandy floor plus a beached
+hull deck and a jetty reached by rope ladders. Every building its own picture (boat store, grog
+shack, Pirates' Quarters, mast lookout, captain's cabin, net loft); one 4K sea-cave panorama looks
+out on a sunrise cove with wrecks and a moored pirate ship.
 
 | Sub-zone | Role | Lv | What changes | Monsters |
 | --- | --- | --- | --- | --- |

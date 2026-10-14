@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BuildingDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/building_def.gd" id="1_building_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/buildings/driftcove/boat_store.png" id="2_boat_store"]
+
+[resource]
+script = ExtResource("1_building_def")
+id = &"driftcove_boat_store"
+texture = ExtResource("2_boat_store")
+height = 330.0
+door_x = 0.42

@@ -1,0 +1,27 @@
+{
+  "source": "art/source/driftcove_lamp_post.png",
+  "out_dir": "assets/sprites/tiles/driftcove",
+  "label_band": 0,
+  "inset": 0,
+  "grid": {
+    "rows": [
+      0,
+      2048
+    ],
+    "cols": [
+      0,
+      1152
+    ]
+  },
+  "cells": [
+    [
+      "lamp_post"
+    ]
+  ],
+  "overrides": {
+    "lamp_post": {
+      "scale": 0.0708,
+      "flat_bottom": true
+    }
+  }
+}

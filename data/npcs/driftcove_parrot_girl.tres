@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/npc_driftcove_parrot_girl.tres" id="2_sprite"]
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"driftcove_parrot_girl"
+display_name = "Coral"
+title = "Parrot Keeper"
+sprite_frames = ExtResource("2_sprite")
+greeting = "This is Squawk! He knows six words. Four of them are rude."
+lines = PackedStringArray("Squawk found a gold coin on the beach once. He won't tell me where.", "When I grow up I'm going to sail all the way past the horizon.")
+storage = false
