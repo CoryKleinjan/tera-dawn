@@ -1,0 +1,161 @@
+{
+  "source": "art/source/npcs_greenbough_town.png",
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/npcs_greenbough_town",
+  "cells": [
+    [
+      ""
+    ],
+    [
+      ""
+    ],
+    [
+      "hunter_2",
+      "",
+      "forager_2",
+      "",
+      "kid_2",
+      "",
+      "keeper_2"
+    ]
+  ],
+  "overrides": {
+    "hunter_2": {
+      "scale": 0.2253,
+      "keep": "largest"
+    },
+    "forager_2": {
+      "scale": 0.2253,
+      "keep": "largest",
+      "blank": [
+        [
+          0,
+          60,
+          95,
+          330
+        ]
+      ]
+    },
+    "kid_2": {
+      "scale": 0.2253,
+      "keep": "largest",
+      "blank": [
+        [
+          300,
+          110,
+          405,
+          210
+        ]
+      ]
+    },
+    "keeper_2": {
+      "scale": 0.2253,
+      "keep": "largest"
+    }
+  },
+  "sets": {
+    "greenbough_hunter": {
+      "frames": {
+        "idle1": "npcs_greenbough_town:hunter_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/greenbough_hunter.png",
+      "sprite_frames": "assets/animations/npc_greenbough_hunter.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle1"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "greenbough_forager": {
+      "frames": {
+        "idle1": "npcs_greenbough_town:forager_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/greenbough_forager.png",
+      "sprite_frames": "assets/animations/npc_greenbough_forager.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle1"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "greenbough_kid": {
+      "frames": {
+        "idle1": "npcs_greenbough_town:kid_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/greenbough_kid.png",
+      "sprite_frames": "assets/animations/npc_greenbough_kid.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle1"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "greenbough_keeper": {
+      "frames": {
+        "idle1": "npcs_greenbough_town:keeper_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/greenbough_keeper.png",
+      "sprite_frames": "assets/animations/npc_greenbough_keeper.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle1"
+          ],
+          "fps": 1.5
+        }
+      }
+    }
+  },
+  "grid": {
+    "rows": [
+      0,
+      512,
+      518,
+      1030
+    ],
+    "cols": [
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        372,
+        377,
+        815,
+        820,
+        1225,
+        1230,
+        1536
+      ]
+    ]
+  },
+  "inset": 2
+}

@@ -46,6 +46,9 @@ const KEEP_COLOR := Color(0, 0, 0, 0)
 @export var hide_ground_decor: PackedInt32Array = []
 ## Extra scenery scattered along its floor, on top of the biome's ground_decor.
 @export var more_ground_decor: Array[DecorDef] = []
+## Leaves out the biome's background houses (town_decor), for a town whose own buildings
+## already fill the street.
+@export var hide_town_decor := false
 
 const COLORS := ["sky_top", "sky_mid", "sky_low", "sky_horizon", "sun_color", "light_color", "ambient_color",
 	"fog_color", "mote_color", "grade_tint", "grade_lift", "light_shaft_color"]
@@ -84,4 +87,6 @@ func apply(base: BiomeDef) -> BiomeDef:
 				decor.append(base.ground_decor[i])
 		decor.append_array(more_ground_decor)
 		b.ground_decor = decor
+	if hide_town_decor:
+		b.town_decor = []
 	return b
