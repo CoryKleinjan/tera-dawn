@@ -11133,6 +11133,195 @@
    ],
    "text": "This is a sheet of 8 cells (2 rows of 4) of the game's base character, a chibi boy with a blank face. Keep every cell listed as KEEP exactly as it is. Repaint ONLY the cells listed as REPAINT, as the same boy (same head, ears, blank face with no eyes, brows or mouth, bald, cream short-sleeved undershirt, brown shorts, barefoot, rounded mitten fists with no separate fingers, same size, same clean smooth painted style and thin dark plum-brown outline, same feet ground line). His SWORD ARM is the arm on the LEFT side of the picture; his SHIELD ARM is the arm on the RIGHT side of the picture. Seen from BEHIND (his back to the viewer, the back of his bald head). Remove every rope and ladder from all cells and leave only the boy on flat magenta, filling in his hands, arms and legs where the rope or ladder covered them. KEEP the poses of cells 1, 2, 3, 6 and 7. REPAINT cell 5: climbing a ladder, the mirror of cell 4: his right-side hand high and left-side hand low at shoulder height, his left-side knee lifted high and right-side leg straight. REPAINT cell 8: standing seen from behind like cell 7, but with his weight on one foot and the other heel lifted, arms at his sides; his back to the viewer, not side-on. Keep the background flat pure magenta #FF00FF and keep the grid lines. Nothing else in the cells: no weapons, props, ropes, ladders, shadows, effects or text. Light from the upper left."
   }
+ },
+ {
+  "id": "mshero_face_move",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_face_move.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 20:19Z 'Do it all.' to the 4-sheet plan incl. face and hair per sheet; 20:41Z picked whole frames for the body): layer over the green silhouette of the assembled body sheet; green and magenta keyed out.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/silhouette_move.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_move.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_face_test.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Each cell holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: standing, standing, walking, walking, jumping, crouching; cells 7 and 8 are empty). He faces right. On the head of each green shape, paint ONLY the same friendly chibi boy's face as in the second attached picture: two large dark brown eyes with white shine highlights, short brown eyebrows, a small happy mouth, a tiny hint of nose and a soft pink blush on the cheek, on the front of the head (the right side, in front of the ear), turned three-quarters to the right, the same size in every cell, following the head's tilt. Paint only the eyes, brows, mouth, nose and blush; the skin around them stays flat green. Do not paint skin, hands, arms, clothes, hair or a body. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape. Leave empty cells empty. Style: the warm colours, light from the upper left and thin dark plum-brown outline of the painted villagers in the third attached picture, but cleaner: smooth soft painted shading with a bright highlight, small busy painted detail. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_face_action",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_face_action.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 20:19Z 'Do it all.' to the 4-sheet plan incl. face and hair per sheet; 20:41Z picked whole frames for the body): layer over the green silhouette of the assembled body sheet; green and magenta keyed out.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/silhouette_action.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_action.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_face_test.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Each cell holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: arm raised to swing, striking, following through, casting with fists forward, casting with arms overhead, crouching, sitting on the ground, lying on his back fainted). He faces right. On the head of each green shape, paint ONLY the same friendly chibi boy's face as in the second attached picture: two large dark brown eyes with white shine highlights, short brown eyebrows, a small happy mouth, a tiny hint of nose and a soft pink blush on the cheek, on the front of the head (the right side, in front of the ear), turned three-quarters to the right, the same size in every cell, following the head's tilt. In the fainted cell (cell 8) his eyes are closed, drawn as two small curved lines, with a small open mouth. Paint only the eyes, brows, mouth, nose and blush; the skin around them stays flat green. Do not paint skin, hands, arms, clothes, hair or a body. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape. Leave empty cells empty. Style: the warm colours, light from the upper left and thin dark plum-brown outline of the painted villagers in the third attached picture, but cleaner: smooth soft painted shading with a bright highlight, small busy painted detail. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_face_ranged",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_face_ranged.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 20:19Z 'Do it all.' to the 4-sheet plan incl. face and hair per sheet; 20:41Z picked whole frames for the body): layer over the green silhouette of the assembled body sheet; green and magenta keyed out.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/silhouette_ranged.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_ranged.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_face_test.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Each cell holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: arm pointed forward, drawing a bow, releasing, winding up a throw, throwing, following through, aiming forward, arm kicked up). He faces right. On the head of each green shape, paint ONLY the same friendly chibi boy's face as in the second attached picture: two large dark brown eyes with white shine highlights, short brown eyebrows, a small happy mouth, a tiny hint of nose and a soft pink blush on the cheek, on the front of the head (the right side, in front of the ear), turned three-quarters to the right, the same size in every cell, following the head's tilt. Paint only the eyes, brows, mouth, nose and blush; the skin around them stays flat green. Do not paint skin, hands, arms, clothes, hair or a body. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape. Leave empty cells empty. Style: the warm colours, light from the upper left and thin dark plum-brown outline of the painted villagers in the third attached picture, but cleaner: smooth soft painted shading with a bright highlight, small busy painted detail. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_hair_move",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_hair_move.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 20:19Z 'Do it all.' to the 4-sheet plan incl. face and hair per sheet; 20:41Z picked whole frames for the body): layer over the green silhouette of the assembled body sheet; green and magenta keyed out.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/silhouette_move.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_move.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_hair_test.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Each cell holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: standing, standing, walking, walking, jumping, crouching; cells 7 and 8 are empty). He faces right. On each green shape, paint ONLY the same boy's hair as in the second attached picture, on the top and back of the head, fitting the head's angle in that cell: tousled chestnut-brown hair with a few spiky locks, a fringe falling over the top of the forehead, short at the back, ears left showing. Paint nothing else: no skin, face, hands, legs, feet or body. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape. Leave empty cells empty. Style: the warm colours, light from the upper left and thin dark plum-brown outline of the painted villagers in the third attached picture, but cleaner: smooth soft painted shading with a bright highlight, small busy painted detail. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_hair_action",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_hair_action.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 20:19Z 'Do it all.' to the 4-sheet plan incl. face and hair per sheet; 20:41Z picked whole frames for the body): layer over the green silhouette of the assembled body sheet; green and magenta keyed out.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/silhouette_action.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_action.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_hair_test.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Each cell holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: arm raised to swing, striking, following through, casting with fists forward, casting with arms overhead, crouching, sitting on the ground, lying on his back fainted). He faces right. On each green shape, paint ONLY the same boy's hair as in the second attached picture, on the top and back of the head, fitting the head's angle in that cell: tousled chestnut-brown hair with a few spiky locks, a fringe falling over the top of the forehead, short at the back, ears left showing. Paint nothing else: no skin, face, hands, legs, feet or body. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape. Leave empty cells empty. Style: the warm colours, light from the upper left and thin dark plum-brown outline of the painted villagers in the third attached picture, but cleaner: smooth soft painted shading with a bright highlight, small busy painted detail. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_hair_ranged",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_hair_ranged.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 20:19Z 'Do it all.' to the 4-sheet plan incl. face and hair per sheet; 20:41Z picked whole frames for the body): layer over the green silhouette of the assembled body sheet; green and magenta keyed out.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/silhouette_ranged.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_ranged.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_hair_test.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Each cell holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: arm pointed forward, drawing a bow, releasing, winding up a throw, throwing, following through, aiming forward, arm kicked up). He faces right. On each green shape, paint ONLY the same boy's hair as in the second attached picture, on the top and back of the head, fitting the head's angle in that cell: tousled chestnut-brown hair with a few spiky locks, a fringe falling over the top of the forehead, short at the back, ears left showing. Paint nothing else: no skin, face, hands, legs, feet or body. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape. Leave empty cells empty. Style: the warm colours, light from the upper left and thin dark plum-brown outline of the painted villagers in the third attached picture, but cleaner: smooth soft painted shading with a bright highlight, small busy painted detail. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_hair_climb",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_hair_climb.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'New hero' (Cory 20:19Z 'Do it all.' to the 4-sheet plan incl. face and hair per sheet; 20:41Z picked whole frames for the body): layer over the green silhouette of the assembled body sheet; green and magenta keyed out.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/silhouette_climb.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_climb.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_hair_test.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Each cell holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: climbing a rope, climbing a rope, holding a rope with both hands above his head, climbing a ladder, climbing a ladder, holding a ladder, standing; cell 8 is empty). He is seen from behind, his back to the viewer. On each green shape, paint ONLY the same boy's hair as in the second attached picture, on the top and back of the head, fitting the head's angle in that cell: tousled chestnut-brown hair with a few spiky locks, seen from behind, covering the back of the head down to the nape, ears left showing. Paint nothing else: no skin, face, hands, legs, feet or body. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape. Leave empty cells empty. Style: the warm colours, light from the upper left and thin dark plum-brown outline of the painted villagers in the third attached picture, but cleaner: smooth soft painted shading with a bright highlight, small busy painted detail. Keep the grid lines. No text, no labels."
+  }
  }
 ]
 }
