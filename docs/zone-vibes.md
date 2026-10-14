@@ -20,6 +20,9 @@ a map look (`MapDef.variant`) for it, and update the entry when the zone changes
   great care.
 - **New content**: a new sub-zone, building or track starts from its zone's "Keep" lines plus its
   own row. A new zone gets an entry here before any art or music is made for it.
+- **Town cards**: each town's own materials (its signature) are in `tools/art/towns/<town>.json`;
+  no other town uses them. A new town's card is filled from its zone's entry here (see
+  `docs/game-rules.md`, "Making a town").
 - Text marked *(inferred)* is not settled yet; confirm it with Cory before building on it.
 
 ## World-wide (every zone)
@@ -120,7 +123,8 @@ birdsong-like woodwinds, light skipping rhythm. Field: wooden flutes, strings, h
 swinging hunting rhythm.
 
 **Town: Greenbough Village.** Treehouses built into giant oaks, reached by ladders and linked by
-rope bridges; life happens up in the branches *(inferred)*.
+rope bridges; life happens up in the branches. Honey oak planks, log posts, straw-and-leaf
+thatch and antler trim.
 
 | Sub-zone | Role | Lv | What changes | Monsters |
 | --- | --- | --- | --- | --- |
@@ -176,7 +180,7 @@ taiko, a strong friendly march. Field: low brass, string ostinato, war drums, en
 dark.
 
 **Town: Emberforge.** Stone forge halls with terracotta roofs and tall chimneys, glowing windows
-and iron-bound doors; smoke and forge glow *(inferred beyond the buildings)*.
+and iron-bound doors; smoke and forge glow. Grey forge stone, iron straps and rivets.
 
 | Sub-zone | Role | Lv | What changes | Monsters |
 | --- | --- | --- | --- | --- |
@@ -257,8 +261,6 @@ out on a sunrise cove with wrecks and a moored pirate ship.
 
 - Windmill Downs, Gull Bluffs and Smugglers' Grotto still use the plain harbour look; confirm
   their vibes before they get their own light settings.
-- Town vibes beyond the current buildings and music are inferred; confirm them, and whether each
-  town follows Dawnharbor's multi-level layout later.
 - Dawnrise Isle has two boss maps (Fern Hollow and Tidal Flats); keep both?
 - Dawnharbor's fields borrow neighbouring zones' monsters until it gets its own harbour monsters
   (agreed; their look is still to be asked).

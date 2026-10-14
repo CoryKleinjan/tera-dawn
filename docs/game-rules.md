@@ -162,33 +162,65 @@ update this page when one changes. Each zone's own look and music are in
 - Ladders, ropes and vines stand straight and line up at every joint. Ladders sit on flat wall
   faces and never stick out past a corner.
 - Buildings, props and decorations are flat 2D front views with a flat bottom, never a perspective
-  picture cut flat. Every building is unique and at proper scale; windows, doors and props are in
-  proportion across a map. Nothing (ropes, chains, cloth) ends in mid-air.
+  picture cut flat. They sit flush on the ground with no gap under them (the stage sinks every base
+  a few pixels; fix a leftover gap in the map's data). Every building is unique and at proper
+  scale; windows, doors and props are in proportion across a map. Nothing (ropes, chains, cloth)
+  ends in mid-air.
 - No houses in monster maps unless a quest needs one or Cory asks. Shops are proper full-size
   buildings.
 - Backdrops: one high-quality, sharp picture for the whole background, not strips. Dawnharbor's 4K
   panorama is the template. Clouds drift in front of it.
 - Sparse ground scenery, each piece wholly on its platform; few lanterns, never overlapping buildings,
   NPCs or scenery.
+- No on-screen controls or how-to-play text anywhere: the tutorial teaches new characters the keys.
 
 ## Towns
 
-- Towns have no monsters and no grass tufts. No how-to-play box in towns (the first field's
-  controls hint stays).
-- NPCs stand still at idle.
-- No duplicate NPCs anywhere in the game: every town has its own shopkeepers, storage keeper and
-  townsfolk. A character who travels (the ship's captain at both ends of the voyage, a job tutor
-  in their hall and at their Trial Ground) is one person, not a copy, and may appear in more
-  than one place.
-- Every building in a town is its own picture, painted in that town's tone.
+- Towns have no monsters and no grass tufts.
+- NPCs stand still at idle; town villagers use the second idle frame. An NPC stands in the middle
+  of a plank, jetty or platform, never at its edge, on a rope or on a portal.
+- No duplicate NPCs anywhere in the game, names included: every town has its own shopkeepers,
+  storage keeper and townsfolk. A character who travels (the ship's captain at both ends of the
+  voyage, a job tutor in their hall and at their Trial Ground, the coachmen) is one person, not a
+  copy, and may appear in more than one place. Check every branch before naming a new NPC
+  (`python3 tools/art/town_kit.py names <name>`).
+- Every building in a town is its own picture, painted in that town's tone, and used only there.
 - Dawnharbor is the gold standard for how a city looks. Other cities keep its attention to detail
   and polish but have their own tone; they never copy Dawnharbor's look. Change Dawnharbor only
   with great care: show Cory any change to it before it goes in.
 - Dawnharbor's layout: a quay, a terrace and a cliff top, every building its own
   picture. There is no Free Market and no player shops.
 - Dawnharbor's store door, stone paths and cliff top stay as they are. The pier was dropped.
-- One city (Dawnharbor) and one monster zone are set exactly right before any world-wide art pass.
-  Reference maps from other games are for layout and spacing only.
+- Reference maps from other games are for layout and spacing only.
+
+## Making a town
+
+Every new town is made the same way, so it reaches Dawnharbor's level the first time. The tool is
+`tools/art/town_kit.py`; how to use it is in [art/sheets/README.md](../art/sheets/README.md#town-kit).
+
+- **What a town has**: 5 or 6 buildings (its store and its job hall among them), a 4K backdrop
+  panorama, a lamp post, 6 or 12 props, three townsfolk and its own storage keeper, and its own
+  store and hall room walls. Raised levels when the town has them.
+- **The town card first**: `tools/art/towns/<town>.json` holds the town's look from
+  [zone vibes](zone-vibes.md) (mood, light, palette, materials, painted texture), its signature
+  materials, and its building, prop and townsfolk lists. Cory agrees the card before any paint.
+- **Fixed canvases**: every piece is painted on one of the kit's canvases. Building canvases mark
+  the doorway at the bottom centre at a door's size next to the hero; buildings are painted around
+  that door and cut at one kit scale, so doors match in every town and a building's height comes
+  from its painting.
+- **Locked prompts**: the kit writes every Gemini entry from the card in the same words. One
+  building, the lamp or the backdrop per paint; props six to a sheet; townsfolk four to a sheet.
+  Buildings get only the NPC style picture and this town's approved buildings as references; the
+  backdrop and props get none. Every prompt bans the other towns' signature materials.
+- **Pilot, then the rest**: the first building and the backdrop are painted and shown to Cory
+  first. Once he likes them, they become the references for the rest of the town.
+- **Checks reject, never fix**: sheet_check runs the kit's checks on every result (door on its
+  mark, base on the ground line, nothing cut off, stray bits, glow halos, a clear backdrop
+  foreground). Results go in exactly as painted; one that fails goes to Cory as keep, repaint or
+  leave out. Cleaning up a cut (background, ground line, stray bits) is fine; nothing is retouched.
+- **In game**: the content tests check the town has its buildings, shop and storage keeper, its
+  building pictures are its own, its NPCs have their own names and stand mid-platform, and its
+  ladders stay clear of platform ends.
 
 ## Monsters and levels
 

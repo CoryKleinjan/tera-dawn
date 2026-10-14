@@ -23,6 +23,11 @@ Checks:
   the eye still decides: it can't see a top face drawn above a flat bottom)
 - must have (with --must-have): a colour (e.g. W1's green grip rod) is in the cells that need it
   and absent from the cells that must not have it
+- town kit (with --town, the entry's "town_check" from tools/art/town_kit.py): the building's door
+  covers its doorway mark and its base sits on the mark's ground line; nothing is cut off at the
+  canvas or cell edge; no stray bits away from the art (leftover flags, candles, figures); no ground
+  line wider than the base; no pink glow round the art; a backdrop's bottom quarter is quiet (no
+  near foreground). These reject (fail) or flag (warn); they never change the picture.
 """
 import argparse
 import json
@@ -43,6 +48,14 @@ FLAT_BOTTOM_BAND = 0.06  # how far up (share of the sprite's height) "just above
 FLAT_BOTTOM_EDGE = 0.01  # rows (share of the sprite's height) that count as its bottom edge
 FLAT_BOTTOM_MIN = 0.6  # the bottom edge's width relative to the widest row in that band
 BACKGROUND_NEAR = 60  # colour distance (summed over R, G, B) that still counts as the background
+EDGE_GAP = 4  # town kit: art this close to the canvas or cell edge counts as cut off
+STRAY_MIN = 0.0004  # town kit: a separate piece this share of the cell is a stray bit, not a speck
+STRAY_GAP = 12  # town kit: a piece further than this from the main art is separate from it
+DOOR_COVER = 0.9  # town kit: share of the doorway mark the building must cover
+BASE_TOLERANCE = 0.02  # town kit: how far (share of the height) the base may sit off the ground line
+GROUND_LINE = 1.12  # town kit: the bottom rows this much wider than the base above are a ground line
+HALO_SHARE = 0.25  # town kit: share of the ring round the art that may be pink glow
+BUSY_FOREGROUND = 1.3  # town kit: a backdrop's bottom quarter this much busier than the whole is near foreground
 
 
 def load_rgb(path):
@@ -147,13 +160,20 @@ def opaque_pixels(rgb, bg, boxes):
     return np.concatenate(out) if out else np.zeros((0, 3))
 
 
-def check(path, cells=None, kind="still", anchor=None, must_have=None, stands=False):
+def check(path, cells=None, kind="still", anchor=None, must_have=None, stands=False, town=None):
     rgb = load_rgb(path)
     bg = background_color(rgb)
     results = []
 
     def add(name, status, detail):
         results.append({"check": name, "status": status, "detail": detail})
+
+    if town and town.get("kind") in ("backdrop", "wall"):
+        # a town kit scene is painted edge to edge, with no magenta
+        add("background", "pass", "a scene, painted edge to edge")
+        if town["kind"] == "backdrop":
+            add(*busy_foreground(rgb))
+        return summarise(path, results)
 
     is_magenta = np.abs(bg - MAGENTA).sum() < 90
     # A darker or pinker magenta still keys (the slicer keys against the sheet's own colour).
@@ -239,7 +259,128 @@ def check(path, cells=None, kind="still", anchor=None, must_have=None, stands=Fa
         add("flat bottom", "pass" if not slanted else "warn",
             "every sprite" if not slanted else "cells %s end in a slanted or pointed bottom" % ", ".join(map(str, slanted)))
 
+    if town:
+        for r in town_checks(rgb, bg, town, boxes):
+            add(*r)
+
     return summarise(path, results)
+
+
+# ---------- town kit ----------
+
+def art_mask(rgb, bg, box):
+    """Opaque art in a box, edge to edge (no label band: kit canvases have no labels)."""
+    y0, y1, x0, x1 = box
+    cell = rgb[y0:y1, x0:x1].astype(np.float64)
+    _, alpha = key_magenta(cell, bg)
+    return alpha > 0.5, cell
+
+
+def pieces(mask):
+    """(main piece's mask, [areas of separate pieces]) of an art mask."""
+    lab, n = label(mask)
+    if not n:
+        return mask, []
+    areas = np.bincount(lab.ravel())[1:]
+    main = lab == int(areas.argmax()) + 1
+    near = dilate(main, STRAY_GAP)
+    apart = [int(a) for i, a in enumerate(areas) if i != areas.argmax() and not (near & (lab == i + 1)).any()]
+    return main, apart
+
+
+def touches_edge(mask):
+    g = EDGE_GAP
+    return bool(mask[:g].any() or mask[-g:].any() or mask[:, :g].any() or mask[:, -g:].any())
+
+
+def ground_line(mask):
+    """Whether the bottom few rows run wider than the base just above them (Gemini's ground line)."""
+    rows = np.flatnonzero(mask.sum(1) >= 3)
+    if len(rows) < 40:
+        return False
+
+    def span(y):
+        xs = np.flatnonzero(mask[y])
+        return xs[-1] - xs[0] + 1 if len(xs) else 0
+
+    bottom = rows[-1]
+    edge = max(span(y) for y in range(bottom - 5, bottom + 1))
+    above = max(span(y) for y in range(bottom - 40, bottom - 10))
+    return above > 0 and edge > GROUND_LINE * above
+
+
+def halo(cell, mask, bg):
+    """Share of the ring just outside the art that is pink-purple glow rather than the background."""
+    ring = dilate(mask, 8) & ~mask
+    if not ring.any():
+        return 0.0
+    px = cell[ring]
+    off_bg = np.abs(px - bg).sum(1) > 40
+    tinted = off_bg & (px[:, 0] > 120) & (px[:, 2] > 120) & (px[:, 1] < px[:, 0] * 0.7)
+    return float(tinted.mean())
+
+
+def busy_foreground(rgb):
+    """A backdrop's bottom quarter should be quiet: far-away land, water or sky. Flowers, grass,
+    rocks or planks close to the viewer fill it with strong edges (calibrated on the six town
+    panoramas: Dawnharbor 0.4, Dawnrise's flower meadow 1.7)."""
+    import cv2
+    g = np.asarray(Image.fromarray(rgb.astype(np.uint8)).convert("L").resize((1536, max(1, round(1536 * rgb.shape[0] / rgb.shape[1]))))).astype(np.float32)
+    m = np.hypot(cv2.Sobel(g, cv2.CV_32F, 1, 0), cv2.Sobel(g, cv2.CV_32F, 0, 1))
+    ratio = float(m[int(m.shape[0] * 0.75):].mean() / max(m.mean(), 1e-6))
+    return ("clear foreground", "pass" if ratio < BUSY_FOREGROUND else "warn",
+            "bottom quarter %.2fx as busy as the whole%s" % (ratio, "" if ratio < BUSY_FOREGROUND else ": near foreground?"))
+
+
+def town_checks(rgb, bg, town, boxes):
+    """The town kit's checks for one result (see the module notes). Returns (name, status, detail)."""
+    out = []
+    h, w = rgb.shape[:2]
+    kind = town.get("kind")
+    if kind == "sheet":  # pieces laid out on a fixed sheet: only the glow applies
+        glows = [i + 1 for i, box in enumerate(boxes) if halo(*reversed(art_mask(rgb, bg, box)), bg) > HALO_SHARE]
+        return [("glow halo", "warn" if glows else "pass", "cells %s" % glows if glows else "none")]
+    if kind in ("building", "single"):
+        boxes = [(0, h, 0, w)]
+    else:  # leave out the divider lines Gemini sometimes paints between cells
+        boxes = [(y0 + 6, y1 - 6, x0 + 6, x1 - 6) for y0, y1, x0, x1 in boxes]
+    cut, strays, lines, glows = [], [], [], []
+    for i, box in enumerate(boxes):
+        mask, cell = art_mask(rgb, bg, box)
+        if not mask.any():
+            continue
+        main, apart = pieces(mask)
+        cell_area = mask.size
+        if touches_edge(mask):
+            cut.append(i + 1)
+        if [a for a in apart if a > STRAY_MIN * cell_area]:
+            strays.append(i + 1)
+        if kind != "sheet" and ground_line(main):
+            lines.append(i + 1)
+        if halo(cell, mask, bg) > HALO_SHARE:
+            glows.append(i + 1)
+        if kind == "building":
+            x0, y0, x1, y1 = town["door"]
+            cover = mask[y0:y1, x0:x1].mean()
+            out.append(("door on its mark", "pass" if cover >= DOOR_COVER else "fail",
+                        "the building covers %d%% of the doorway mark" % round(cover * 100)))
+            rows = np.flatnonzero(main.sum(1) >= 3)
+            off = abs(int(rows[-1]) + 1 - y1) / h if len(rows) else 1.0
+            out.append(("base on the ground line", "pass" if off <= BASE_TOLERANCE else "fail",
+                        "%d px from the doorway's bottom" % round(off * h)))
+    one = kind in ("building", "single")
+    where = (lambda c: "the art") if one else (lambda c: "cells %s" % ", ".join(map(str, c)))
+    out.append(("not cut off", "fail" if cut and one else ("warn" if cut else "pass"),
+                "%s touch%s the edge" % (where(cut), "es" if one else "") if cut else "a clear margin all round"))
+    out.append(("stray bits", "warn" if strays else "pass",
+                "%s ha%s pieces apart from the art (leftovers? the cut drops them)" % (where(strays), "s" if one else "ve")
+                if strays else "none"))
+    out.append(("ground line", "warn" if lines else "pass",
+                "%s stand%s on a line wider than the base (the cut removes it)" % (where(lines), "s" if one else "")
+                if lines else "none"))
+    out.append(("glow halo", "warn" if glows else "pass",
+                "%s ha%s a pink glow round the edge" % (where(glows), "s" if one else "ve") if glows else "none"))
+    return out
 
 
 def flat_bottom(mask):
@@ -276,10 +417,12 @@ def main():
     ap.add_argument("--anchor", help="sheet whose colours this one should match")
     ap.add_argument("--must-have", help='JSON, e.g. {"rgb": [0,255,0], "in": [1,2], "not_in": [21]}')
     ap.add_argument("--stands", action="store_true", help="things that stand on a map: check for flat bottoms")
+    ap.add_argument("--town", help='town kit checks, JSON, e.g. {"kind": "building", "door": [604, 923, 829, 1267]}')
     ap.add_argument("--json", action="store_true", help="print the result as JSON")
     args = ap.parse_args()
     res = check(args.sheet, args.cells, args.kind, args.anchor,
-                json.loads(args.must_have) if args.must_have else None, args.stands)
+                json.loads(args.must_have) if args.must_have else None, args.stands,
+                json.loads(args.town) if args.town else None)
     if args.json:
         print(json.dumps(res, indent=1))
         return

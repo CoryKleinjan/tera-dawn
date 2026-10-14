@@ -58,8 +58,12 @@ python3 tools/art/gemini_pass.py --dry-run                           # Gemini ba
 - Anything that stands on a map (buildings, props, decorations) is a flat 2D front elevation
   with a flat bottom, never a 3/4 view cut flat: its entry sets `"stands": true`.
 - Ask Cory about the look first, run a small test, and show results before the full batch and
-  before anything goes in game. Every run is paid: ask before redoing a sheet unless it came
-  back broken.
+  before anything goes in game. Every run is paid: never repaint anything without Cory's OK for
+  that repaint, even a result that came back broken.
+- Never fix body art (poses, arms, hands, fists) by pasting, mirroring or compositing pieces;
+  offer a repaint instead. Cleaning up a cut (background, border lines) is fine.
+- New towns use the town kit (`tools/art/town_kit.py`, rules in `docs/game-rules.md` "Making a
+  town"): a town card, fixed canvases, locked prompts, checks that reject and never fix.
 - Approved art is final: use it exactly as approved; never re-trim, recombine or remake it, and
   post a plan before any new render, composite or preview.
 - Only make or repaint art the game uses. Never use old ChatGPT sheets from git history.

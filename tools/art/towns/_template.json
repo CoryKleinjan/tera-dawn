@@ -1,0 +1,38 @@
+{
+ "id": "<town id>",
+ "name": "<the town's name>",
+ "role": "<who lives there, e.g. \"the thieves' town\">",
+ "mood": "<one line of feel, from docs/zone-vibes.md>",
+ "light": "<the light, from docs/zone-vibes.md>",
+ "palette": "<the colours, with the zone's hex values>",
+ "materials": "<what its buildings are made of>",
+ "texture": "<the painted detail to show (wood grain, cracked plaster...)>",
+ "signature": "<its own materials that no other town may use>",
+ "buildings": [
+  {
+   "id": "<id>",
+   "name": "<Name>",
+   "canvas": "building_wide",
+   "look": "<one-line look>"
+  }
+ ],
+ "approved_refs": [],
+ "backdrop": "<the panorama's scene>",
+ "backdrop_bottom": "<what the bottom quarter of the panorama shows (far away, nothing near)>",
+ "lamp": "<the lamp post's look>",
+ "props": [
+  "<prop seen exactly from the side>"
+ ],
+ "raised": "<materials for the raised levels' top, wall and corners, or null>",
+ "townsfolk": [
+  {
+   "label": "<ROLE>",
+   "look": "<look>"
+  }
+ ],
+ "npc_refs": [],
+ "rooms": {
+  "store": "<look>",
+  "hall": "<look>"
+ }
+}

@@ -135,15 +135,18 @@ list in `tools/art/hero_build.py` (`ANIMATIONS`).
   picture). The game
   joins them into one picture per platform (`PlatformSkin`), so `crop` off a clipped ornament on
   a piece's inner edge.
-- **Buildings** (`building_<area>_<large|small>`): one building per sheet; `art_px` is the
-  sheet's height over the building's art height (BuildingDef `height` / `TDStage.TEXEL`).
+- **Buildings** (`building_<town>_<building>`): one building per sheet and manifest; `art_px` is
+  the sheet's height over the building's art height (BuildingDef `height` / `TDStage.TEXEL`).
+  Town kit buildings all use `art_px` 3.461 (Dawnharbor's tavern scale), so every door is the same
+  size; `town_kit.py height <cut png>` gives the BuildingDef `height`.
 - **Rooms** (`room_<town>`): furniture and floors, at 2 texels per art pixel. Crate, plant,
   `floor_soil` and missing floors come from `room_props_<town>` (one town per row of
   `room_props.png`). The back wall has its own manifest (`room_<town>_wall`; its `grid` width
   is the repeat, its first columns cross-faded so it tiles); stacked floor cells have
   `room_<town>_floor` with a `region`.
 - **Backdrops and ropes/props** come from finer redraws (`*_fine.png`); each cell's `scale`
-  makes it two texels per art pixel at its on-screen size.
+  makes it two texels per art pixel at its on-screen size. A town's backdrop is one 4K panorama
+  (like Dawnharbor's), never strips.
 - **Climb pieces** (`ropes_props_b`'s `"climb"` section, tops from `climb_tops_fine`): the
   slicer runs `tools/art/climb_pieces.py`, which centres each middle piece on its rope or rails
   and cuts and pads each end piece to carry on from it. The game stacks pieces edge to edge
@@ -177,3 +180,26 @@ The hero is not cut by the slicer: `tools/art/hero_build.py` builds him from
   shapes (`HAT_ITEMS`); the tool places the cell on his head on every pose and writes the
   hair under it and the cut of his head.
 - `--preview` writes `art/build/hero_preview.png` to check the result.
+
+## Town kit
+
+Every new town is painted with `tools/art/town_kit.py` (the rules are in `docs/game-rules.md`,
+"Making a town"):
+
+1. Copy `tools/art/towns/_template.json` to `tools/art/towns/<town>.json` and fill it from
+   `docs/zone-vibes.md`. `signature` is the town's own materials; every other town's prompts ban
+   them. The first building in `buildings` is the pilot. Cory agrees the card first.
+2. `python3 tools/art/town_kit.py entries <town> --pilot --write` adds the pilot building and the
+   backdrop to `gemini_pass.json`; dry-run, ask Cory, run, show him. Add the approved pilot to
+   `approved_refs`, then `entries <town> --write` adds the rest (existing ids are never replaced;
+   a repaint gets its own id).
+3. Each entry carries a `town_check`; `gemini_pass.py` passes it to `sheet_check.py`, which
+   reports the door on its mark, the base on the ground line, art cut off at the edge, stray
+   bits, glow halos and a busy backdrop foreground. Fails go to Cory as keep, repaint or leave
+   out; results are never retouched.
+4. Cut each building with its own `building_<town>_<building>` manifest at `art_px` 3.461 and set
+   its BuildingDef `height` from `town_kit.py height`.
+
+The fixed canvases live in `tools/art/templates/town/` (`town_kit.py canvases` redraws them):
+`building_wide`, `building_narrow`, `building_tall` (doorway marked at the bottom centre),
+`lamp_post`, `props` (2x3), `panorama`, `townsfolk` (1x4) and `room_wall`.
