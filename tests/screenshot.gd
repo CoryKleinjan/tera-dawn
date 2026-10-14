@@ -163,9 +163,9 @@ func _run() -> void:
 		await _shot("action")
 	if only == "" or only == "lookbook":
 		# Five players with their own looks, in the warrior's starter gear or none: in the
-		# meadow, then close up in menus (the equipment window's dressed hero).
-		var meadow: MapInstance = Net.server.maps[&"meadow"]
-		_teleport(world, Vector2(1500, 620))
+		# map he starts on, then close up in menus (the equipment window's dressed hero).
+		var meadow: MapInstance = _me().map
+		var stand := _me().position
 		p.face = -1
 		await _physics(240) # let the level-up banner pass
 		var outfits := [
@@ -186,8 +186,8 @@ func _run() -> void:
 				var e: EquipDef = Content.item(StringName(id))
 				c.equipment.put(c.equipment.place_for(e), ItemStack.exact(e))
 			var m := SimPlayer.new(500 + i, c)
-			meadow.add_player(m, 1150.0 + i * 70.0)
-			m.position.y = 620
+			meadow.add_player(m, stand.x + 90.0 + i * 80.0)
+			m.position.y = stand.y
 			m.face = -1 if i % 2 else 1
 			models.append(m)
 		await _physics(30)

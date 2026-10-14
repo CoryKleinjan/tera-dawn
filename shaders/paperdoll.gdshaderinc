@@ -20,14 +20,13 @@ vec4 dress_region(vec4 src, vec2 uv) {
 	if (t.a <= 0.0) {
 		return src;
 	}
-	vec3 luma = vec3(0.299, 0.587, 0.114);
 	vec3 ref = texelFetch(look_data, ivec2(r, 2), 0).rgb;
-	// the hero is sampled in linear colour; the look's colours are sRGB
+	// the hero is sampled in linear colour; the look's colours are sRGB. Each channel is scaled
+	// by how the new colour compares with the art's typical one, so the painted light, shade
+	// and blush all stay, only in the new tone.
 	t.rgb = pow(t.rgb, vec3(2.2));
 	ref = pow(ref, vec3(2.2));
-	// (capped, so shine on dark art doesn't turn white on light colours)
-	float shade = min(dot(src.rgb, luma) / max(dot(ref, luma), 0.05), 1.4);
-	vec3 recoloured = clamp(t.rgb * shade, 0.0, 1.0);
+	vec3 recoloured = clamp(src.rgb * t.rgb / max(ref, vec3(0.02)), 0.0, 1.0);
 	return vec4(mix(src.rgb, recoloured, t.a), src.a);
 }
 

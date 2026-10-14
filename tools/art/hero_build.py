@@ -3,7 +3,7 @@
 
 The hero is a boy or a girl body (the hairstyle picks it: tousled is the boy, ponytail the
 girl), each painted as one 3x4 animation sheet (body_<body>.png). Everything he wears is a
-Gemini edit of that same sheet with one thing changed (body_<body>_bald.png, _jerkin, _trousers),
+Gemini edit of that same sheet with one thing changed (body_<body>_bald.png, _jerkin, _trousers; _tunic only marks his shirt),
 so each piece is lifted off by comparing the edit with the sheet it was made from, and lines up
 with the body frame for frame. The hats come from Cory's hat/hair template sheets
 (hats_<body>.png: one cell per hat shape, and one bare head), placed on his head on every pose.
@@ -304,6 +304,27 @@ class Body:
         m = close(m, 3) & (a > 0.02)
         return rgb, a * dilate(m, 1) * np.where(m, 1.0, 0.5)
 
+    def clothes(self, pose):
+        """His painted shirt and shorts on a pose: where the tunic and trousers edits
+        (body_<body>_tunic.png, _trousers) put cloth on him below the chin. Their colours are
+        too close to his skin (the cream shirt, the shorts' brown patches) to tell apart by
+        colour, so the skin tone must not recolour them."""
+        rc = POSES[pose]
+        if not hasattr(self, "_covers"):
+            self._covers = [aligned(keyed("body_%s_%s" % (self.name, s)), self.base) for s in ("tunic", "trousers")]
+        _dx, dy, _deg = hats_of(self).track[pose]
+        inside = ~dilate(self.base[rc][1] <= 0.5, 3, outside=True)
+        out = np.zeros_like(inside)
+        for edit in self._covers:
+            trgb, ta = edit[rc]
+            mx, mn = trgb.max(2), trgb.min(2)
+            white = (mx > 0.85) & (mx - mn < 0.15)  # (the boy's tunic came back with a white sticker edge)
+            m = changed(edit[rc], self.base[rc]) & ~skin_mask(trgb, ta) & ~white & inside  # (not re-painted skin)
+            m = close(m, 4)
+            m[: int(hats_of(self).box[1] + dy) + 4] = False
+            out |= main_parts(fill_holes(m))
+        return out
+
     def worn(self, sheet):
         """A worn piece on every pose: {pose: (rgb, alpha)} of what the edit put on, or {} if
         this body has no such sheet."""
@@ -348,7 +369,7 @@ def build_bodies(bodies):
         for pose, rc in POSES.items():
             rgb, a = body.bare(rc)
             put(strip, body.name, pose, body.fit.frame(rgb, a))
-            skin = skin_mask(rgb, a)
+            skin = skin_mask(rgb, a) & ~body.clothes(pose)
             reg = np.zeros_like(rgb)
             reg[..., 0] = np.where(skin, 2 * 16 / 255.0, 0.0)  # Paperdoll.Region.SKIN
             put(regions, body.name, pose, body.fit.frame(reg, a))
@@ -664,7 +685,7 @@ def build_rig(bodies, hair_tint):
                 "feet": body.fit.point((xs.min() + xs.max()) / 2, ys.max()),
             })
         rgb, a = body.bare(POSES["idle"])
-        skin.append(rgb[skin_mask(rgb, a)].mean(0))
+        skin.append(rgb[skin_mask(rgb, a) & ~body.clothes("idle")].mean(0))
     skin = [round(float(v), 3) for v in np.mean(skin, 0)]
     colors = [[1, 1, 1]] * 11
     colors[1] = hair_tint  # Paperdoll.Region.HAIR
