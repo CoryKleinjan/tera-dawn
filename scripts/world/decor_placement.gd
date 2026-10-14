@@ -61,13 +61,16 @@ static func floor_pieces(map: MapDef, rng: RandomNumberGenerator) -> Array[Piece
 			out.append_array(scatter(rule, land, map.ground_y, rng, back, 1.0))
 	return out
 
-## The scenery along each floating platform (platform_decor), platform by platform.
+## The scenery along each floating platform (platform_decor), platform by platform. Nothing
+## grows on a bridge hanging between two platforms.
 static func platform_pieces(map: MapDef, rng: RandomNumberGenerator) -> Array[Piece]:
 	var out: Array[Piece] = []
 	if map.look() == null:
 		return out
 	for i in map.platforms.size():
 		var d := map.platforms[i]
+		if d.hangs:
+			continue
 		var avoid := standing_on(map, i + 1)
 		for rule in map.look().platform_decor:
 			out.append_array(scatter(rule, Vector2(d.x, d.x + d.width), d.y, rng, avoid, density(map)))
