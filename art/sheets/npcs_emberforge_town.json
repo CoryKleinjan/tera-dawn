@@ -1,0 +1,145 @@
+{
+  "source": "art/source/npcs_emberforge_town.png",
+  "label_band": 0.2,
+  "strip_labels": true,
+  "save": false,
+  "out_dir": "art/build/npcs_emberforge_town",
+  "cells": [
+    [
+      ""
+    ],
+    [
+      ""
+    ],
+    [
+      "apprentice_2",
+      "",
+      "veteran_2",
+      "",
+      "kid_2",
+      "",
+      "keeper_2"
+    ]
+  ],
+  "overrides": {
+    "apprentice_2": {
+      "scale": 0.2253,
+      "keep": "largest"
+    },
+    "veteran_2": {
+      "scale": 0.2253,
+      "keep": "largest"
+    },
+    "kid_2": {
+      "scale": 0.2253,
+      "keep": "largest"
+    },
+    "keeper_2": {
+      "scale": 0.2253,
+      "keep": "largest"
+    }
+  },
+  "sets": {
+    "emberforge_apprentice": {
+      "frames": {
+        "idle1": "npcs_emberforge_town:apprentice_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/emberforge_apprentice.png",
+      "sprite_frames": "assets/animations/npc_emberforge_apprentice.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle1"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "emberforge_veteran": {
+      "frames": {
+        "idle1": "npcs_emberforge_town:veteran_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/emberforge_veteran.png",
+      "sprite_frames": "assets/animations/npc_emberforge_veteran.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle1"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "emberforge_kid": {
+      "frames": {
+        "idle1": "npcs_emberforge_town:kid_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/emberforge_kid.png",
+      "sprite_frames": "assets/animations/npc_emberforge_kid.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle1"
+          ],
+          "fps": 1.5
+        }
+      }
+    },
+    "emberforge_keeper": {
+      "frames": {
+        "idle1": "npcs_emberforge_town:keeper_2"
+      },
+      "anchor": "head",
+      "baseline": "bottom",
+      "out": "assets/sprites/npcs/emberforge_keeper.png",
+      "sprite_frames": "assets/animations/npc_emberforge_keeper.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle1"
+          ],
+          "fps": 1.5
+        }
+      }
+    }
+  },
+  "grid": {
+    "rows": [
+      0,
+      513,
+      518,
+      1030
+    ],
+    "cols": [
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        1536
+      ],
+      [
+        0,
+        376,
+        381,
+        770,
+        775,
+        1164,
+        1169,
+        1536
+      ]
+    ]
+  },
+  "inset": 2
+}

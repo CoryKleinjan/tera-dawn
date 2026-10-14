@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="NpcDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1_npc_def"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/npc_emberforge_keeper.tres" id="2_sprite"]
+
+[resource]
+script = ExtResource("1_npc_def")
+id = &"emberforge_keeper"
+display_name = "Dorrick"
+title = "Storage Keeper"
+sprite_frames = ExtResource("2_sprite")
+greeting = "Dorrick's strongboxes, iron-bound and forge-sealed. Leave it here and any keeper in any town can hand it back."
+lines = PackedStringArray("Ten Dawnshards a stack. Not even a dragon could crack these locks.")
+storage = true
