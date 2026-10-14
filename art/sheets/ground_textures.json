@@ -6,26 +6,17 @@
   "out_dir": "assets/sprites/ground",
   "cells": [
     [
-      "meadow_top",
+      "",
       "meadow_side",
       "meadow_soil"
     ],
     [
-      "ember_top",
+      "",
       "ember_side",
       "ember_soil"
     ]
   ],
   "overrides": {
-    "meadow_top": {
-      "seamless": true,
-      "crop": [
-        26,
-        42,
-        446,
-        462
-      ]
-    },
     "meadow_side": {
       "seamless": true,
       "crop": [
@@ -36,15 +27,6 @@
       ]
     },
     "meadow_soil": {
-      "seamless": true,
-      "crop": [
-        26,
-        42,
-        446,
-        462
-      ]
-    },
-    "ember_top": {
       "seamless": true,
       "crop": [
         26,

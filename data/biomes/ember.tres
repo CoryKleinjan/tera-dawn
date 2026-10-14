@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="BiomeDef" load_steps=46 format=3]
+[gd_resource type="Resource" script_class="BiomeDef" load_steps=45 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/biome_def.gd" id="1_biome_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ground/ember_top.png" id="2_ember_top"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/ember_side.png" id="3_ember_side"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/ember_soil.png" id="4_ember_soil"]
 [ext_resource type="Texture2D" path="res://assets/sprites/platforms/ember/cap_left.png" id="5_platform_left"]
@@ -161,7 +160,6 @@ sky_horizon = Color(1.0, 0.6078431372549019, 0.3607843137254902, 1.0)
 sun_color = Color(1.0, 0.7019607843137254, 0.3607843137254902, 1.0)
 light_color = Color(1.0, 0.6901960784313725, 0.47843137254901963, 1.0)
 light_energy = 1.5
-cloud_shadows = false
 grade_tint = Color(1.0, 0.95, 0.9, 1)
 grade_lift = Color(0.45, 0.15, 0.2, 1)
 grade_lift_amount = 0.35
@@ -171,7 +169,6 @@ fog_color = Color(0.7254901960784313, 0.25882352941176473, 0.23137254901960785, 
 mote_color = Color(3.0, 1.2, 0.4, 1.0)
 motes_rise = true
 lantern_light = Color(1.0, 0.5411764705882353, 0.2901960784313726, 1.0)
-ground_top = ExtResource("2_ember_top")
 ground_side = ExtResource("3_ember_side")
 ground_soil = ExtResource("4_ember_soil")
 platform_left = ExtResource("5_platform_left")

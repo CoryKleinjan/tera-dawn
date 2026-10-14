@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="BiomeDef" load_steps=13 format=3]
+[gd_resource type="Resource" script_class="BiomeDef" load_steps=12 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/biome_def.gd" id="1_biome_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/rooms/dawnharbor/floor_top.png" id="2_floor_top"]
 [ext_resource type="Texture2D" path="res://assets/sprites/rooms/dawnharbor/floor_side.png" id="3_floor_side"]
 [ext_resource type="Texture2D" path="res://assets/sprites/rooms/dawnharbor/floor_soil.png" id="4_floor_soil"]
 [ext_resource type="Texture2D" path="res://assets/sprites/rooms/dawnharbor/tavern_wall.png" id="5_wall"]
@@ -43,8 +42,6 @@ grade_lift = Color(0.3, 0.22, 0.16, 1.0)
 grade_lift_amount = 0.15
 grade_saturation = 1.05
 light_shafts = false
-cloud_shadows = false
-ground_top = ExtResource("2_floor_top")
 ground_side = ExtResource("3_floor_side")
 ground_soil = ExtResource("4_floor_soil")
 backdrop = Array[ExtResource("7_backdrop_layer_def")]([SubResource("Wall")])

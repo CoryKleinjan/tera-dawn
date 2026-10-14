@@ -6,31 +6,22 @@
   "out_dir": "assets/sprites/ground",
   "cells": [
     [
-      "dawnharbor_top",
+      "",
       "dawnharbor_side",
       "dawnharbor_soil"
     ],
     [
-      "driftcove_top",
+      "",
       "driftcove_side",
       "driftcove_soil"
     ],
     [
-      "greenbough_top",
+      "",
       "greenbough_side",
       "greenbough_soil"
     ]
   ],
   "overrides": {
-    "dawnharbor_top": {
-      "seamless": true,
-      "crop": [
-        108,
-        42,
-        403,
-        337
-      ]
-    },
     "dawnharbor_side": {
       "seamless": true,
       "crop": [
@@ -50,15 +41,6 @@
         337
       ]
     },
-    "driftcove_top": {
-      "seamless": true,
-      "crop": [
-        108,
-        42,
-        403,
-        337
-      ]
-    },
     "driftcove_side": {
       "seamless": true,
       "crop": [
@@ -69,15 +51,6 @@
       ]
     },
     "driftcove_soil": {
-      "seamless": true,
-      "crop": [
-        108,
-        42,
-        403,
-        337
-      ]
-    },
-    "greenbough_top": {
       "seamless": true,
       "crop": [
         108,

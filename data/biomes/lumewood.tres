@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="BiomeDef" load_steps=52 format=3]
+[gd_resource type="Resource" script_class="BiomeDef" load_steps=51 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/biome_def.gd" id="1_biome_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ground/lumewood_top.png" id="2_ground_top"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/lumewood_side.png" id="3_ground_side"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/lumewood_soil.png" id="4_ground_soil"]
 [ext_resource type="Texture2D" path="res://assets/sprites/platforms/lumewood/cap_left.png" id="5_platform_left"]
@@ -206,7 +205,6 @@ fog_color = Color(0.4784, 0.3843, 0.7843, 1.0)
 mote_color = Color(1.0, 1.6, 2.6, 1.0)
 motes_rise = true
 lantern_light = Color(0.6588, 0.7843, 1.0, 1.0)
-ground_top = ExtResource("2_ground_top")
 ground_side = ExtResource("3_ground_side")
 ground_soil = ExtResource("4_ground_soil")
 platform_left = ExtResource("5_platform_left")
