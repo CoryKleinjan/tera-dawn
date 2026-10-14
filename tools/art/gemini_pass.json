@@ -13037,6 +13037,466 @@
    ],
    "text": "The first image shows the same young chibi girl six times (2 rows x 3 columns), each with a different hat. Change ONLY row 1, cell 3 (her red bandana).\nRepaint that bandana as exactly the same bandana the boy wears in the second image: black cloth with a thin silver-grey stitched trim along its lower edge, the same shape, size, fit low on the brow, knot and two short tails at the back of the head, fitted to her head. Copy only the bandana; do not copy his face or hair. Keep her hair under and around it, and her short tail below it, exactly as they are painted now; draw no new hair.\nKeep her face, body, pose and outline, every other cell, the painting style, the pure magenta #FF00FF background and the cell borders exactly as they are. No text."
   }
+ },
+ {
+  "id": "starter_warrior_hat_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_warrior_hat_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/warrior_hat_boy_cell.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a low rounded steel helm with a riveted brim band, a nose guard and small cheek guards. Paint ONLY that hat on its own as the game's inventory icon. Show the hat on its own, as it sits on a head, seen from the front, with nothing under it (no head, face or hair). It must be exactly the same hat: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_warrior_top_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_warrior_top_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/warrior_top_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a a padded dull red-brown quilted cloth squire's jerkin with vertical stitched padding lines, a plain round neck, short sleeves, a few worn patches. Paint ONLY that top on its own as the game's inventory icon. Show it from the front as if it stands upright on an invisible body, with nothing inside it (no body, arms, head or shirt under it). It must be exactly the same top: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_warrior_bottom_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_warrior_bottom_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/warrior_bottom_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a dark charcoal cloth trousers to the ankles with slightly worn knees. Paint ONLY that pair of trousers on its own as the game's inventory icon. Show them from the front as if worn by an invisible body, with nothing inside them (no legs or feet).It must be exactly the same pair of trousers: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_warrior_shoes_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_warrior_shoes_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/warrior_shoes_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a sturdy red-brown leather ankle boots with a plain dull-steel toe cap and a thick dark sole, a few scuffs, the same dull red-brown as a padded quilted squire's jerkin. Paint ONLY that pair of shoes on its own as the game's inventory icon. Show the pair standing side by side, seen from the front-side. It must be exactly the same pair of shoes: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_mage_hat_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_mage_hat_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/mage_hat_boy_cell.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a tall pointed blue wizard's hat with a wide brim, a dark purple band and a slightly bent tip. Paint ONLY that hat on its own as the game's inventory icon. Show the hat on its own, as it sits on a head, seen from the front, with nothing under it (no head, face or hair). It must be exactly the same hat: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_mage_top_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_mage_top_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/mage_top_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a a royal-blue cloth mage's tunic-robe (the same bright royal blue as a blue wizard's hat) with a narrow gold trim at the round neck, the sleeve ends and the hem; short sleeves to just above the elbow; the hem at mid-thigh; a plain dark-purple cloth sash tied at the waist. Paint ONLY that top on its own as the game's inventory icon. Show it from the front as if it stands upright on an invisible body, with nothing inside it (no body, arms, head or shirt under it). It must be exactly the same top: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_mage_bottom_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_mage_bottom_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/mage_bottom_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a loose dark navy-purple cloth trousers that reach down to his ankles. Paint ONLY that pair of trousers on its own as the game's inventory icon. Show them from the front as if worn by an invisible body, with nothing inside them (no legs or feet).It must be exactly the same pair of trousers: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_mage_shoes_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_mage_shoes_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/mage_shoes_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a soft royal-blue cloth slippers with a narrow gold trim around the opening, slightly pointed toes and thin dark soles. Paint ONLY that pair of shoes on its own as the game's inventory icon. Show the pair standing side by side, seen from the front-side. It must be exactly the same pair of shoes: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_thief_hat_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_thief_hat_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/thief_hat_boy_cell.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a black cloth bandana with a thin silver-grey stitched trim, its knot and two short tails. Paint ONLY that hat on its own as the game's inventory icon. Show the hat on its own, as it sits on a head, seen from the front, with nothing under it (no head, face or hair). It must be exactly the same hat: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_thief_top_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_thief_top_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/thief_top_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a a fitted black leather thief's jerkin with short sleeves to just above the elbow, the hem at his hips, two small silver-buckled straps across the chest and silver-grey stitching. Paint ONLY that top on its own as the game's inventory icon. Show it from the front as if it stands upright on an invisible body, with nothing inside it (no body, arms, head or shirt under it). It must be exactly the same top: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_thief_bottom_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_thief_bottom_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/thief_bottom_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a snug charcoal-grey cloth trousers that reach down to his ankles, with black cloth bands wrapped just below the knees. Paint ONLY that pair of trousers on its own as the game's inventory icon. Show them from the front as if worn by an invisible body, with nothing inside them (no legs or feet).It must be exactly the same pair of trousers: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_thief_shoes_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_thief_shoes_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/thief_shoes_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a soft black leather boots that reach mid-shin, wrapped with thin silver-grey cords, with thin quiet soles. Paint ONLY that pair of shoes on its own as the game's inventory icon. Show the pair standing side by side, seen from the front-side. It must be exactly the same pair of shoes: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_archer_hat_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_archer_hat_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/archer_hat_boy_cell.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a green archer's hood. Paint ONLY that hat on its own as the game's inventory icon. Show the hat on its own, as it sits on a head, seen from the front, with nothing under it (no head, face or hair). It must be exactly the same hat: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_archer_top_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_archer_top_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/archer_top_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a a forest-green leather archer's vest worn over his shirt (his shirt's short sleeves still show), laced at the front with brown leather cord, with a brown stitched trim along the hem at his hips. Paint ONLY that top on its own as the game's inventory icon. Show it from the front as if it stands upright on an invisible body, with nothing inside it (no body, arms, head or shirt under it). It must be exactly the same top: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_archer_bottom_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_archer_bottom_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/archer_bottom_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a warm brown cloth trousers that reach down to his ankles, with darker brown leather patches on the knees. Paint ONLY that pair of trousers on its own as the game's inventory icon. Show them from the front as if worn by an invisible body, with nothing inside them (no legs or feet).It must be exactly the same pair of trousers: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_archer_shoes_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_archer_shoes_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/archer_shoes_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a brown lace-up leather boots that reach mid-shin, with a forest-green cloth cuff at the top. Paint ONLY that pair of shoes on its own as the game's inventory icon. Show the pair standing side by side, seen from the front-side. It must be exactly the same pair of shoes: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_pirate_hat_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_pirate_hat_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/pirate_hat_boy_cell.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a black pirate tricorn hat with gold trim. Paint ONLY that hat on its own as the game's inventory icon. Show the hat on its own, as it sits on a head, seen from the front, with nothing under it (no head, face or hair). It must be exactly the same hat: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_pirate_top_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_pirate_top_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/pirate_top_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a a short deep-red pirate's coat with gold trim along every edge and a row of small gold buttons, open at the front over his shirt, short sleeves ending in folded-back gold-trimmed cuffs above the elbow, the hem at his hips. Paint ONLY that top on its own as the game's inventory icon. Show it from the front as if it stands upright on an invisible body, with nothing inside it (no body, arms, head or shirt under it). It must be exactly the same top: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_pirate_bottom_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_pirate_bottom_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/pirate_bottom_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a loose cream-and-red horizontally striped sailor trousers that end at mid-calf. Paint ONLY that pair of trousers on its own as the game's inventory icon. Show them from the front as if worn by an invisible body, with nothing inside them (no legs or feet).It must be exactly the same pair of trousers: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
+ },
+ {
+  "id": "starter_pirate_shoes_icon",
+  "prompts": null,
+  "batch": "starter armor icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "starter_pirate_shoes_icon.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-14 thread 'Starter armor sets per job' (Cory 03:37Z 'Go ahead and make the icons. The girls and boys armor should be able to share an icon'). Wave 3: one inventory icon per piece, painted from the boy's worn piece (single-cell base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/starter-armor/refs/pirate_shoes_boy_idle.png",
+   "refs": [],
+   "text": "The image shows a chibi boy wearing a tall black leather boots reaching just below the knee, with a wide folded-down cuff and a small gold buckle on the front. Paint ONLY that pair of shoes on its own as the game's inventory icon. Show the pair standing side by side, seen from the front-side. It must be exactly the same pair of shoes: the same shape, cut, length, colours, trim, buttons, stitching, worn patches and details as he wears it. Large and centred, filling most of the square, on a pure magenta #FF00FF background. Painted in the same style as the boy: rich warm colours, strong light from the upper left with bright highlights, visible painted texture and the same thin dark outline (no thick sticker border, no glow, no shadow under it). Do not change its design or colours; add nothing. One item only, no text."
+  }
  }
 ]
 }
