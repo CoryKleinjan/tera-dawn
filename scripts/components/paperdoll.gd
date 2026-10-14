@@ -226,10 +226,10 @@ static func hair_strip(hair: LookDef, hat_shape: StringName) -> Texture2D:
 static func head_cut_path(shape: StringName) -> String:
 	return PIECE_DIR + "headcut_" + String(shape) + ".png"
 
-## The kind of weapon an item is held as. A weapon without a kind, or of a kind the rig has
-## no hold for yet (a dagger, until the new hero is drawn), is held as a sword.
+## The kind of weapon an item is held as (how it fights: WeaponStyle). A weapon without a
+## kind, or of a kind WeaponStyle doesn't know, is held as a sword.
 static func kind_of(e: EquipDef) -> StringName:
-	if e == null or e.weapon_kind == &"" or not rig().get("weapons", {}).has(String(e.weapon_kind)):
+	if e == null or e.weapon_kind == &"" or not WeaponStyle.MOTIONS.has(e.weapon_kind):
 		return DEFAULT_WEAPON
 	return e.weapon_kind
 

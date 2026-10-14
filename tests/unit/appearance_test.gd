@@ -228,5 +228,6 @@ func test_the_rig_has_every_frame_of_the_hero() -> void:
 				check(Paperdoll.anchor(f, &"head_top") != null, "%s %s %d has a head" % [body, anim, i])
 				check_eq(frames[f].get("body"), String(body), "%s %s %d is on its own body" % [body, anim, i])
 
-func test_a_weapon_without_a_hold_is_held_as_a_sword() -> void:
-	check_eq(Paperdoll.kind_of(Content.item(&"willow_bow") as EquipDef), Paperdoll.DEFAULT_WEAPON, "until weapons are drawn")
+func test_a_weapon_is_held_as_its_kind() -> void:
+	check_eq(Paperdoll.kind_of(Content.item(&"willow_bow") as EquipDef), &"bow", "a bow")
+	check_eq(Paperdoll.kind_of(null), Paperdoll.DEFAULT_WEAPON, "bare hands fight like a sword")

@@ -144,7 +144,7 @@ func test_hero_art_imports_with_mipmaps() -> void:
 		for f in DirAccess.get_files_at(dir):
 			if f.ends_with(".png") and not (f.begins_with("fist_") or f.begins_with("haircut_") or f.begins_with("headcut_")):
 				files.append(dir + f)
-	check(files.size() > 40, "found the hero's art")
+	check(files.size() > 10, "found the hero's art")
 	for f in files:
 		var cfg := ConfigFile.new()
 		if check(cfg.load(f + ".import") == OK, "%s has an .import file" % f):

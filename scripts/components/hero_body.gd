@@ -13,9 +13,10 @@ const FRAMES := preload("res://assets/animations/hero.tres")
 ## The hero's size against everyone else's art (TDStage.TEXEL). MapleStory proportions: he
 ## stands about a tenth of the screen tall, a little shorter than the townsfolk (TDNpc.SCALE),
 ## so heroes read as young adventurers among grown-ups, and most monsters come up to him.
-## Raised from 0.62 (Cory 2026-10-12: drawn slightly larger); his art is cut at twice this
-## size, so he still shrinks on screen up to 1440p rather than stretching.
-const SCALE := 0.70
+## Raised from 0.62 (Cory 2026-10-12: drawn slightly larger), then set so the new paperdoll
+## stands as tall as the old hero (TDPlayer.HEIGHT); his art is cut at twice this size, so he
+## still shrinks on screen up to 1440p rather than stretching.
+const SCALE := 0.735
 ## A soft warm light that travels with every player, so heroes stand out from the scenery.
 const LIGHT := Color(1.0, 0.86, 0.68)
 const LIGHT_ENERGY := 0.55
