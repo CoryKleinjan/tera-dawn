@@ -11,12 +11,34 @@
       "hurt",
       "",
       ""
+    ],
+    [
+      "swing1",
+      "swing2",
+      "swing3",
+      "cast1",
+      "cast2",
+      "crouch",
+      "sit",
+      "faint"
+    ],
+    [
+      "rope1",
+      "rope2",
+      "rope_hold",
+      "ladder1",
+      "",
+      "ladder_hold",
+      "back",
+      ""
     ]
   ],
   "grid": {
     "rows": [
       0,
-      675
+      675,
+      1350,
+      2025
     ],
     "cols": [
       0,
@@ -45,7 +67,21 @@
         "walk1": "hero_novice_trousers:walk1",
         "walk2": "hero_novice_trousers:walk2",
         "jump": "hero_novice_trousers:jump",
-        "hurt": "hero_novice_trousers:hurt"
+        "hurt": "hero_novice_trousers:hurt",
+        "swing1": "hero_novice_trousers:swing1",
+        "swing2": "hero_novice_trousers:swing2",
+        "swing3": "hero_novice_trousers:swing3",
+        "cast1": "hero_novice_trousers:cast1",
+        "cast2": "hero_novice_trousers:cast2",
+        "crouch": "hero_novice_trousers:crouch",
+        "sit": "hero_novice_trousers:sit",
+        "faint": "hero_novice_trousers:faint",
+        "rope1": "hero_novice_trousers:rope1",
+        "rope2": "hero_novice_trousers:rope2",
+        "rope_hold": "hero_novice_trousers:rope_hold",
+        "ladder1": "hero_novice_trousers:ladder1",
+        "ladder_hold": "hero_novice_trousers:ladder_hold",
+        "back": "hero_novice_trousers:back"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -85,6 +121,90 @@
         "hurt": {
           "frames": [
             "hurt"
+          ],
+          "fps": 1
+        },
+        "swing1": {
+          "frames": [
+            "swing1"
+          ],
+          "fps": 1
+        },
+        "swing2": {
+          "frames": [
+            "swing2"
+          ],
+          "fps": 1
+        },
+        "swing3": {
+          "frames": [
+            "swing3"
+          ],
+          "fps": 1
+        },
+        "cast1": {
+          "frames": [
+            "cast1"
+          ],
+          "fps": 1
+        },
+        "cast2": {
+          "frames": [
+            "cast2"
+          ],
+          "fps": 1
+        },
+        "crouch": {
+          "frames": [
+            "crouch"
+          ],
+          "fps": 1
+        },
+        "sit": {
+          "frames": [
+            "sit"
+          ],
+          "fps": 1
+        },
+        "faint": {
+          "frames": [
+            "faint"
+          ],
+          "fps": 1
+        },
+        "rope1": {
+          "frames": [
+            "rope1"
+          ],
+          "fps": 1
+        },
+        "rope2": {
+          "frames": [
+            "rope2"
+          ],
+          "fps": 1
+        },
+        "rope_hold": {
+          "frames": [
+            "rope_hold"
+          ],
+          "fps": 1
+        },
+        "ladder1": {
+          "frames": [
+            "ladder1"
+          ],
+          "fps": 1
+        },
+        "ladder_hold": {
+          "frames": [
+            "ladder_hold"
+          ],
+          "fps": 1
+        },
+        "back": {
+          "frames": [
+            "back"
           ],
           "fps": 1
         }

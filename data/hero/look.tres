@@ -36,3 +36,4 @@ same_as = {
 &"slash": &"attack",
 &"turn": &"idle"
 }
+weapon_behind = Array[StringName]([&"swing1"])

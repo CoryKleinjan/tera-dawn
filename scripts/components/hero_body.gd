@@ -30,7 +30,8 @@ var _world: TDWorld
 var _z: float
 ## One sprite per layer, back to front, made as needed.
 var _layers: Array[Sprite3D] = []
-## The animation showing and when it started (msec), so frames run from its start.
+## The animation showing and the physics tick it started on, so frames run from its start in
+## game time (a slow frame doesn't skip or hold a step).
 var _anim := &""
 var _since := 0
 
@@ -52,10 +53,10 @@ func draw(face: int, chair: StringName, pet: StringName, anim: StringName, worn:
 	companion.follow(at, face, _z, _world.layout.ground_below(_owner.position))
 	if anim != _anim:
 		_anim = anim
-		_since = Time.get_ticks_msec()
+		_since = Engine.get_physics_frames()
 	var weapon: EquipDef = worn.get(&"weapon")
-	var frame := LOOK.frame_at(anim, weapon.weapon_kind if weapon else &"", (Time.get_ticks_msec() - _since) / 1000.0)
-	var stack := layers(worn)
+	var frame := LOOK.frame_at(anim, weapon.weapon_kind if weapon else &"", float(Engine.get_physics_frames() - _since) / Engine.physics_ticks_per_second)
+	var stack := layers(worn, frame)
 	while _layers.size() < stack.size():
 		_layers.append(_new_layer())
 	for i in _layers.size():
@@ -68,16 +69,21 @@ func draw(face: int, chair: StringName, pet: StringName, anim: StringName, worn:
 			s.flip_h = face < 0
 			s.position = TDStage.to3d(at, _z + i * LAYER_STEP)
 
-## His layers back to front for what he wears (place -> EquipDef): what hangs behind him, his
-## body, his trousers and shoes, an off-hand held in front, his top, his face, his hair (unless
-## a hat covers it), his hat and his weapon.
-static func layers(worn: Dictionary) -> Array[SpriteFrames]:
+## His layers back to front on `frame` for what he wears (place -> EquipDef): what hangs behind
+## him, his body, his trousers and shoes, an off-hand held in front, his top, his face, his hair
+## (unless a hat covers it on this frame), his hat and his weapon. On the frames in
+## HeroLookDef.weapon_behind (a sword raised behind his head) the weapon goes behind him instead.
+static func layers(worn: Dictionary, frame: StringName) -> Array[SpriteFrames]:
 	var out: Array[SpriteFrames] = []
 	var offhand: EquipDef = worn.get(&"shield")
 	var hat: EquipDef = worn.get(&"hat")
+	var weapon: EquipDef = worn.get(&"weapon")
+	var behind := frame in LOOK.weapon_behind
 	var back := BACK.map(func(p): return worn.get(p))
 	if offhand and not offhand.worn_in_front:
 		back.push_front(offhand)
+	if behind:
+		back.push_front(weapon)
 	_add(out, back)
 	out.append(LOOK.body)
 	_add(out, UNDER.map(func(p): return worn.get(p)))
@@ -85,9 +91,9 @@ static func layers(worn: Dictionary) -> Array[SpriteFrames]:
 		_add(out, [offhand])
 	_add(out, OVER.map(func(p): return worn.get(p)))
 	out.append(LOOK.face)
-	if not (hat and hat.hides_hair):
+	if not (hat and hat.hides_hair and hat.worn and hat.worn.has_animation(frame)):
 		out.append(LOOK.hair)
-	_add(out, [hat, worn.get(&"weapon")])
+	_add(out, [hat, null if behind else weapon])
 	return out
 
 static func _add(out: Array[SpriteFrames], gear: Array) -> void:

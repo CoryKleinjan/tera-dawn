@@ -15,6 +15,8 @@ extends Resource
 @export var animations: Dictionary = {}
 ## Animation names that show another's frames: "slash" plays "attack", "fall" plays "jump".
 @export var same_as: Dictionary = {}
+## Frames where his weapon is behind him (a sword raised behind his head), so it draws first.
+@export var weapon_behind: Array[StringName] = []
 
 ## The frame `anim` shows `seconds` after it started, holding `weapon_kind`: a frame name, or
 ## the first idle frame when nothing matches.
