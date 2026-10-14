@@ -1,6 +1,6 @@
 class_name SpriteRig
 extends Node3D
-## The 3D body of a 2D actor: an animated pixel-art sprite standing in the HD-2D stage,
+## The 3D body of a 2D actor: an animated painted sprite standing in the stage,
 ## and optionally a light and glowing particles. Characters cast no shadows.
 ##
 ## Actors keep their logic in 2D game pixels and call `place()` every frame. Animations

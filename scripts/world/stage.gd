@@ -1,6 +1,6 @@
 class_name TDStage
 extends Node3D
-## The HD-2D view of the map: painted sprites standing in a lit 3D diorama.
+## How the map is drawn: painted sprites standing in a lit 3D diorama.
 ## Gameplay stays 2D (game pixels, y down); this node owns the camera, sky, light and
 ## post effects, and asks the builders to turn the map into 3D:
 ##   TerrainBuilder  the painted front skins of the floor and the platforms

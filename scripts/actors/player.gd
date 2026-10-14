@@ -564,7 +564,7 @@ func _move() -> void:
 	if on_ground:
 		_air_moves.clear()
 
-# ---------- HD-2D visuals ----------
+# ---------- Visuals ----------
 
 func _process(_delta: float) -> void:
 	if body == null or world == null or world.map == null:

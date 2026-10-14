@@ -30,7 +30,7 @@ data/*.tres  ──►  Content (autoload)  ──►  World loads a MapDef  ─
 - **Actors** (`scripts/actors/`) are what you see in the world: your hero, other players,
   monsters, NPCs and drops.
 - **World** (`scripts/world/`) shows the map you're on: `world.gd` builds it and shows the
-  server's events (camera in `WorldCamera`, snapshots through `SnapshotSync`), `stage.gd` and its builders turn a map into the HD-2D diorama.
+  server's events (camera in `WorldCamera`, snapshots through `SnapshotSync`), `stage.gd` and its builders turn a map into the painted diorama.
 - **UI** (`scripts/ui/`) draws the HUD (`TDHud`) and the title screen (`TDTitleScreen`,
   solo, host or join) from the sliced UI sheets through `UiSkin` (art), `UiStyle` (styled controls) and
   `WorldSkin` (bars, tags and bubbles over the world).
@@ -46,7 +46,7 @@ second. Only the stage turns that into 3D (32 game pixels per 3D unit).
 - [Multiplayer and players together](docs/architecture/multiplayer.md): the server, client, snapshots, co-op and characters saved on each computer, parties and trades.
 - [Characters: creation, extras, balance and player actions](docs/architecture/characters.md): character creation, how heroes show, chairs, pets, Monster Book, achievements, balance, how to add a player action.
 - [Folders](docs/architecture/folders.md): what lives in each folder.
-- [Draw order and the HD-2D stage](docs/architecture/rendering.md): the 3D layers, depths and pixel size of the diorama, world-anchored text.
+- [Draw order and the stage](docs/architecture/rendering.md): the 3D layers, depths and pixel size of the diorama, world-anchored text.
 - [Monsters](docs/architecture/monsters.md): how to add a monster.
 - [Maps, buildings and towns](docs/architecture/maps.md): how to add a map or a building, town layout, rooms.
 - [Skills](docs/architecture/skills.md): how to add a skill.

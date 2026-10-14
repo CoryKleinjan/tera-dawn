@@ -1,4 +1,4 @@
-# Draw order and the HD-2D stage
+# Draw order and the stage
 
 Part of the [architecture docs](../../ARCHITECTURE.md).
 
