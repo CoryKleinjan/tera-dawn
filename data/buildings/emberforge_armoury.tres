@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BuildingDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/building_def.gd" id="1_building_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/buildings/emberforge/armoury.png" id="2_armoury"]
+
+[resource]
+script = ExtResource("1_building_def")
+id = &"emberforge_armoury"
+texture = ExtResource("2_armoury")
+height = 360.0
+door_x = 0.499
+chimney = Vector2(0.21, 0.99)

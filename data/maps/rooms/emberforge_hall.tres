@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MapDef" format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
-[ext_resource type="Resource" path="res://data/biomes/rooms/emberforge_room.tres" id="2_emberforge"]
+[ext_resource type="Resource" path="res://data/biomes/rooms/emberforge_hall_room.tres" id="2_emberforge"]
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="3_portal_def"]
 [ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="4_npc_placement"]
 [ext_resource type="Resource" path="res://data/npcs/emberforge_instructor.tres" id="5_emberforge_instructor"]
@@ -27,7 +27,7 @@ script = ExtResource("3_portal_def")
 x = 150.0
 platform = 0
 target_map = &"emberforge"
-target_x = 1682.0
+target_x = 4660.0
 door = true
 
 [sub_resource type="Resource" id="Keeper"]

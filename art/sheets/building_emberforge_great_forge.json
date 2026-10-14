@@ -1,0 +1,41 @@
+{
+  "source": "art/source/building_emberforge_great_forge.png",
+  "art_px": 3.924,
+  "out_dir": "assets/sprites/buildings/emberforge",
+  "label_band": 0,
+  "inset": 0,
+  "grid": {
+    "rows": [
+      0,
+      1377
+    ],
+    "cols": [
+      0,
+      1434
+    ]
+  },
+  "cells": [
+    [
+      "great_forge"
+    ]
+  ],
+  "flat_bottom": true,
+  "overrides": {
+    "great_forge": {
+      "blank": [
+        [
+          0,
+          1132,
+          75,
+          1377
+        ],
+        [
+          1371,
+          1132,
+          1434,
+          1377
+        ]
+      ]
+    }
+  }
+}
