@@ -30,9 +30,10 @@ update this page when one changes. Each zone's own look and music are in
   turns). The weapon is one painting held in his near fist at the walk's angle; the shield or
   tome is in his far hand and only shows while the weapon does.
 - Draw order, back to front: off-hand (shield), cape, body, trousers, shoes, tome, top, gloves,
-  face, hair (hidden under helmets), hat, weapon (behind his head on the swing wind-up).
+  face, hair (hidden under helmets), hat, weapon, then his fists over its grip.
 - Animations are shared across similar actions (one swing for all melee, one cast for all
-  spells); his walk is 4 steps, slow.
+  spells); his walk is 4 steps, slow. Attack animations are on hold: he attacks in his standing
+  pose until they are redone.
 - Male only for now.
 
 ## Movement and combat feel

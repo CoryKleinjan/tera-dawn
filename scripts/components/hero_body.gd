@@ -72,22 +72,18 @@ func draw(face: int, chair: StringName, pet: StringName, anim: StringName, worn:
 ## His layers back to front on `frame` for what he wears (place -> EquipDef): what hangs behind
 ## him, his body, his trousers and shoes, an off-hand held in front, his top, his face, his hair
 ## (unless a hat covers it on this frame), his hat, his weapon and his fists over its grip. The
-## off-hand only shows while the weapon does. On the frames in HeroLookDef.weapon_behind (a sword
-## raised behind his head) the weapon goes behind him instead, still in his fist. Under long
-## sleeves the fists painted with bare forearms are left off.
+## off-hand only shows while the weapon does. Under long sleeves the fists painted with bare
+## forearms are left off.
 static func layers(worn: Dictionary, frame: StringName) -> Array[SpriteFrames]:
 	var out: Array[SpriteFrames] = []
 	var offhand: EquipDef = worn.get(&"shield")
 	var hat: EquipDef = worn.get(&"hat")
 	var weapon: EquipDef = worn.get(&"weapon")
-	var behind := frame in LOOK.weapon_behind
 	if weapon and not (weapon.worn and weapon.worn.has_animation(frame)):
 		offhand = null  # put away with the weapon (sitting, lying down)
 	var back := BACK.map(func(p): return worn.get(p))
 	if offhand and not offhand.worn_in_front:
 		back.push_front(offhand)
-	if behind:
-		back.push_front(weapon)
 	_add(out, back)
 	out.append(LOOK.body)
 	_add(out, UNDER.map(func(p): return worn.get(p)))
@@ -97,7 +93,7 @@ static func layers(worn: Dictionary, frame: StringName) -> Array[SpriteFrames]:
 	out.append(LOOK.face)
 	if not (hat and hat.hides_hair and hat.worn and hat.worn.has_animation(frame)):
 		out.append(LOOK.hair)
-	_add(out, [hat, null if behind else weapon])
+	_add(out, [hat, weapon])
 	var top: EquipDef = worn.get(&"top")
 	if weapon and not (top and top.long_sleeves and frame in LOOK.bare_arm_frames):
 		out.append(LOOK.hands)

@@ -13,11 +13,11 @@
       ""
     ],
     [
-      "swing1",
-      "swing2",
-      "swing3",
-      "cast1",
-      "cast2",
+      "",
+      "",
+      "",
+      "",
+      "",
       "crouch",
       "sit",
       ""
@@ -36,9 +36,9 @@
   "grid": {
     "rows": [
       0,
-      675,
-      1350,
-      2025
+      720,
+      1440,
+      2160
     ],
     "cols": [
       0,
@@ -69,11 +69,6 @@
         "jump": "hero_novice_hat:jump",
         "hurt": "hero_novice_hat:hurt",
         "walk3": "hero_novice_hat:walk3",
-        "swing1": "hero_novice_hat:swing1",
-        "swing2": "hero_novice_hat:swing2",
-        "swing3": "hero_novice_hat:swing3",
-        "cast1": "hero_novice_hat:cast1",
-        "cast2": "hero_novice_hat:cast2",
         "crouch": "hero_novice_hat:crouch",
         "sit": "hero_novice_hat:sit",
         "rope1": "hero_novice_hat:rope1",
@@ -127,36 +122,6 @@
         "walk3": {
           "frames": [
             "walk3"
-          ],
-          "fps": 1
-        },
-        "swing1": {
-          "frames": [
-            "swing1"
-          ],
-          "fps": 1
-        },
-        "swing2": {
-          "frames": [
-            "swing2"
-          ],
-          "fps": 1
-        },
-        "swing3": {
-          "frames": [
-            "swing3"
-          ],
-          "fps": 1
-        },
-        "cast1": {
-          "frames": [
-            "cast1"
-          ],
-          "fps": 1
-        },
-        "cast2": {
-          "frames": [
-            "cast2"
           ],
           "fps": 1
         },

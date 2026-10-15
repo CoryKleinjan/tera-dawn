@@ -13,11 +13,11 @@
       ""
     ],
     [
-      "swing1",
-      "swing2",
-      "swing3",
-      "cast1",
-      "cast2",
+      "",
+      "",
+      "",
+      "",
+      "",
       "crouch",
       "sit",
       "faint"
@@ -46,10 +46,10 @@
   "grid": {
     "rows": [
       0,
-      675,
-      1350,
-      2025,
-      2700
+      720,
+      1440,
+      2160,
+      2880
     ],
     "cols": [
       0,
@@ -80,11 +80,6 @@
         "jump": "hero_hair:jump",
         "hurt": "hero_hair:hurt",
         "walk3": "hero_hair:walk3",
-        "swing1": "hero_hair:swing1",
-        "swing2": "hero_hair:swing2",
-        "swing3": "hero_hair:swing3",
-        "cast1": "hero_hair:cast1",
-        "cast2": "hero_hair:cast2",
         "crouch": "hero_hair:crouch",
         "sit": "hero_hair:sit",
         "faint": "hero_hair:faint",
@@ -146,36 +141,6 @@
         "walk3": {
           "frames": [
             "walk3"
-          ],
-          "fps": 1
-        },
-        "swing1": {
-          "frames": [
-            "swing1"
-          ],
-          "fps": 1
-        },
-        "swing2": {
-          "frames": [
-            "swing2"
-          ],
-          "fps": 1
-        },
-        "swing3": {
-          "frames": [
-            "swing3"
-          ],
-          "fps": 1
-        },
-        "cast1": {
-          "frames": [
-            "cast1"
-          ],
-          "fps": 1
-        },
-        "cast2": {
-          "frames": [
-            "cast2"
           ],
           "fps": 1
         },

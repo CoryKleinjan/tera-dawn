@@ -3,7 +3,7 @@ extends Resource
 ## How the hero is drawn: his painted layers and which frames each animation shows. Every layer
 ## (his body, face and hair here, and each piece of gear's `EquipDef.worn`) is a SpriteFrames
 ## cut from the same cells (art/sheets/hero_*.json), so the layers line up frame by frame;
-## each frame is a one-frame animation named after its cell ("idle1", "swing2", "rope_hold").
+## each frame is a one-frame animation named after its cell ("idle1", "walk2", "rope_hold").
 ## HeroBody stacks them in a fixed order.
 
 @export var body: SpriteFrames
@@ -18,10 +18,9 @@ extends Resource
 ## "fps": frames a second, "loop": whether it repeats}. "<name>_<weapon kind>" is used instead
 ## while that kind of weapon is held (a bow's "attack_bow").
 @export var animations: Dictionary = {}
-## Animation names that show another's frames: "slash" plays "attack", "fall" plays "jump".
+## Animation names that show another's frames: "fall" plays "jump". Anything with no frames
+## (attacks, for now) shows him standing.
 @export var same_as: Dictionary = {}
-## Frames where his weapon is behind him (a sword raised behind his head), so it draws first.
-@export var weapon_behind: Array[StringName] = []
 
 ## The frame `anim` shows `seconds` after it started, holding `weapon_kind`: a frame name, or
 ## the first idle frame when nothing matches.
