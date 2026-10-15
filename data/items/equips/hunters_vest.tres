@@ -12,6 +12,12 @@ defense = 6
 
 [resource]
 script = ExtResource("script")
+frame_art = {
+&"roll2": &"roll1"
+}
+nudges = {
+&"roll2": Vector4(2, -28, -180, 0)
+}
 id = &"hunters_vest"
 display_name = "Hunter's Vest"
 description = "A laced leather vest for a new archer."

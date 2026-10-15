@@ -10,6 +10,9 @@
 
 [resource]
 script = ExtResource("1_style")
+frame_art = {
+&"roll2": &"roll1"
+}
 id = &"messy"
 display_name = "Messy"
 frames = ExtResource("2_frames")
@@ -29,7 +32,7 @@ nudges = {
 &"lunge": Vector4(26, 3.9, 3, 0),
 &"pinning": Vector4(5, 6.2, 15, 0),
 &"roll1": Vector4(12.4, 17.8, 45, 0),
-&"roll2": Vector4(6.6, 33.6, -174, 0),
+&"roll2": Vector4(-12.4, 62.2, -135, 0),
 &"sit": Vector4(-3.6, 23.7, 0, 0),
 &"skyward1": Vector4(18.9, 18.5, 20, 0),
 &"skyward2": Vector4(-0.2, -6.7, 0, 0),

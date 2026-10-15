@@ -5,6 +5,9 @@
 
 [resource]
 script = ExtResource("1_style")
+frame_art = {
+&"roll2": &"roll1"
+}
 id = &"plain"
 display_name = "Plain"
 frames = ExtResource("2_frames")
@@ -23,7 +26,7 @@ nudges = {
 &"lunge": Vector4(25.7, 3.8, 3, 0),
 &"pinning": Vector4(3.4, 5.6, 15, 0),
 &"roll1": Vector4(8.3, 14.9, 45, 0),
-&"roll2": Vector4(9.9, 21, -174, 0),
+&"roll2": Vector4(-6.3, 52.1, -135, 0),
 &"sit": Vector4(-3.6, 23.7, 0, 0),
 &"skyward1": Vector4(16.8, 17.7, 20, 0),
 &"skyward2": Vector4(-0.2, -6.7, 0, 0),

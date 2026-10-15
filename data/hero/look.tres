@@ -14,6 +14,16 @@ hairs = Array[Resource]([ExtResource("4_hair")])
 hands = ExtResource("5_hands")
 bare_arm_frames = Array[StringName]([&"crouch"])
 resting_hand_frames = Array[StringName]([&"faint", &"crouch"])
+nudges = {
+&"body": {
+&"roll2": Vector4(0, 0, -180, 0)
+}
+}
+frame_art = {
+&"body": {
+&"roll2": &"roll1"
+}
+}
 animations = {
 &"attack": {"fps": 10.0, "frames": [&"swing1", &"swing2", &"swing3"], "loop": false},
 &"cast": {"fps": 6.0, "frames": [&"cast1", &"cast2"], "loop": false},

@@ -103,7 +103,8 @@
         "throw3": "hero_hunters_hood:idle1",
         "pistol1": "hero_hunters_hood:idle1",
         "pistol2": "hero_hunters_hood:idle1",
-        "ambush2": "hero_hunters_hood:back"
+        "ambush2": "hero_hunters_hood:back",
+        "faint": "hero_hunters_hood:idle1"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -359,6 +360,12 @@
         "ambush2": {
           "frames": [
             "ambush2"
+          ],
+          "fps": 1
+        },
+        "faint": {
+          "frames": [
+            "faint"
           ],
           "fps": 1
         }
