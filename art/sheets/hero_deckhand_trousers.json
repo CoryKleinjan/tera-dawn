@@ -135,7 +135,8 @@
         "swing2": "hero_deckhand_trousers:swing2",
         "swing3": "hero_deckhand_trousers:swing3",
         "sit": "hero_deckhand_trousers:sit",
-        "faint": "hero_deckhand_trousers:faint"
+        "faint": "hero_deckhand_trousers:faint",
+        "bow2": "hero_deckhand_trousers:bow2"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -385,6 +386,12 @@
         "faint": {
           "frames": [
             "faint"
+          ],
+          "fps": 1
+        },
+        "bow2": {
+          "frames": [
+            "bow2"
           ],
           "fps": 1
         }
