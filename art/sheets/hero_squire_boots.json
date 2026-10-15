@@ -67,7 +67,7 @@
         "walk1": "hero_squire_boots:walk1",
         "walk2": "hero_squire_boots:walk2",
         "jump": "hero_squire_boots:jump",
-        "hurt": "hero_squire_boots:hurt",
+        "hurt": "hero_squire_boots:idle1",
         "walk3": "hero_squire_boots:walk3",
         "crouch": "hero_squire_boots:crouch",
         "sit": "hero_squire_boots:sit",

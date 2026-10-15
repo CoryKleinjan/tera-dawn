@@ -67,7 +67,7 @@
         "walk1": "hero_squire_trousers:walk1",
         "walk2": "hero_squire_trousers:walk2",
         "jump": "hero_squire_trousers:jump",
-        "hurt": "hero_squire_trousers:hurt",
+        "hurt": "hero_squire_trousers:idle1",
         "walk3": "hero_squire_trousers:walk3",
         "crouch": "hero_squire_trousers:crouch",
         "sit": "hero_squire_trousers:sit",

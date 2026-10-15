@@ -78,7 +78,7 @@
         "walk1": "hero_hair:walk1",
         "walk2": "hero_hair:walk2",
         "jump": "hero_hair:jump",
-        "hurt": "hero_hair:hurt",
+        "hurt": "hero_hair:idle1",
         "walk3": "hero_hair:walk3",
         "crouch": "hero_hair:crouch",
         "sit": "hero_hair:sit",

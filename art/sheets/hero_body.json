@@ -78,7 +78,7 @@
         "walk1": "hero_body:walk1",
         "walk2": "hero_body:walk2",
         "jump": "hero_body:jump",
-        "hurt": "hero_body:hurt",
+        "hurt": "hero_body:idle1",
         "walk3": "hero_body:walk3",
         "crouch": "hero_body:crouch",
         "sit": "hero_body:sit",

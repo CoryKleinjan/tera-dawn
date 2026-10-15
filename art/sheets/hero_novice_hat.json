@@ -67,7 +67,7 @@
         "walk1": "hero_novice_hat:walk1",
         "walk2": "hero_novice_hat:walk2",
         "jump": "hero_novice_hat:jump",
-        "hurt": "hero_novice_hat:hurt",
+        "hurt": "hero_novice_hat:idle1",
         "walk3": "hero_novice_hat:walk3",
         "crouch": "hero_novice_hat:crouch",
         "sit": "hero_novice_hat:sit",

@@ -67,7 +67,7 @@
         "walk1": "hero_novice_slippers:walk1",
         "walk2": "hero_novice_slippers:walk2",
         "jump": "hero_novice_slippers:jump",
-        "hurt": "hero_novice_slippers:hurt",
+        "hurt": "hero_novice_slippers:idle1",
         "walk3": "hero_novice_slippers:walk3",
         "crouch": "hero_novice_slippers:crouch",
         "sit": "hero_novice_slippers:sit",
