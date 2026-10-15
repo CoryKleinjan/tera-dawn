@@ -11,7 +11,7 @@ data/                 Content, one .tres per thing
   items/use/ items/etc/ items/scrolls/ items/setup/  Subfolders are scanned too (gear goes in
                                             items/equips/ once it is redrawn)
   hero/               HeroLookDef (look.tres: his layers and animations); held/ has each held
-                      weapon or off-hand's pins per frame (HeldDef), set in the grip editor
+                      weapon or off-hand's pins per frame (HeldDef), set in the pose editor
   maps/ biomes/ climb_styles/ buildings/    Maps and how they look (maps/rooms/ and
                                             biomes/rooms/: the insides of buildings)
 scripts/
@@ -44,8 +44,8 @@ scripts/
   ui/windows/         Every draggable window (all extend TDWindow), SlotGrid, ScrollList,
                       DragPayload
   ui/widgets/         UI pieces that aren't windows: item tooltip, chat, invites, prompt
-  dev/                Tools played in Godot, not part of the game: the hero grip editor
-                      (scenes/dev/hero_grip_editor.tscn)
+  dev/                Tools played in Godot, not part of the game: the hero pose editor
+                      (scenes/dev/hero_pose_editor.tscn)
 assets/
   sprites/            Cut sprites, one folder per kind (generated, don't hand-edit)
   animations/         SpriteFrames for animated actors (generated)

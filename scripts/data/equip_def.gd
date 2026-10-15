@@ -28,6 +28,9 @@ const OFFHAND_NAMES := {&"shield": "a shield", &"star": "throwing stars", &"book
 ## Its painted layer on the hero (art/sheets/hero_<id>.json), frames named as in HeroLookDef.
 ## Frames it has no painting for show the hero without it. Null shows nothing.
 @export var worn: SpriteFrames
+## Its worn layer moved by hand in the pose editor: frame -> Vector4(x, y, degrees clockwise,
+## places up the stack) (HeroBody.Layer). A held piece uses its pins instead.
+@export var nudges: Dictionary = {}
 ## A hat or helmet that covers his hair, so the hair layer isn't drawn under it.
 @export var hides_hair := false
 ## A weapon or off-hand: one painting held in his hand, pinned per frame (HeldDef), drawn instead
