@@ -11,6 +11,9 @@ extends Resource
 @export var hair: SpriteFrames
 ## His fists painted on their own, drawn over the weapon he holds so his hand wraps its grip.
 @export var hands: SpriteFrames
+## Frames whose fists were painted with bare forearms, left off under long sleeves
+## (EquipDef.long_sleeves).
+@export var bare_arm_frames: Array[StringName] = []
 ## Animation name (what TDPlayer._animation() says he is doing) -> {"frames": [frame names],
 ## "fps": frames a second, "loop": whether it repeats}. "<name>_<weapon kind>" is used instead
 ## while that kind of weapon is held (a bow's "attack_bow").

@@ -8,15 +8,26 @@
       "walk1",
       "walk2",
       "jump",
-      "",
+      "hurt",
       "walk3",
+      ""
+    ],
+    [
+      "swing1",
+      "swing2",
+      "",
+      "cast1",
+      "cast2",
+      "crouch",
+      "",
       ""
     ]
   ],
   "grid": {
     "rows": [
       0,
-      675
+      675,
+      1350
     ],
     "cols": [
       0,
@@ -45,7 +56,13 @@
         "walk1": "hero_hands:walk1",
         "walk2": "hero_hands:walk2",
         "jump": "hero_hands:jump",
-        "walk3": "hero_hands:walk3"
+        "hurt": "hero_hands:hurt",
+        "walk3": "hero_hands:walk3",
+        "swing1": "hero_hands:swing1",
+        "swing2": "hero_hands:swing2",
+        "cast1": "hero_hands:cast1",
+        "cast2": "hero_hands:cast2",
+        "crouch": "hero_hands:crouch"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -82,9 +99,45 @@
           ],
           "fps": 1
         },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
         "walk3": {
           "frames": [
             "walk3"
+          ],
+          "fps": 1
+        },
+        "swing1": {
+          "frames": [
+            "swing1"
+          ],
+          "fps": 1
+        },
+        "swing2": {
+          "frames": [
+            "swing2"
+          ],
+          "fps": 1
+        },
+        "cast1": {
+          "frames": [
+            "cast1"
+          ],
+          "fps": 1
+        },
+        "cast2": {
+          "frames": [
+            "cast2"
+          ],
+          "fps": 1
+        },
+        "crouch": {
+          "frames": [
+            "crouch"
           ],
           "fps": 1
         }
