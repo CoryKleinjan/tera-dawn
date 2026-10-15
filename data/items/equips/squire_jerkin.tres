@@ -24,6 +24,3 @@ jobs = Array[StringName]([&"warrior"])
 required_level = 10
 stats = SubResource("stats")
 variance = 1
-nudges = {
-&"walk2": Vector4(3, 0, 0, 0)
-}
