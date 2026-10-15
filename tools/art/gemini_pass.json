@@ -17118,6 +17118,58 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 and 2 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: curled into a tight ball, knees to chest, arms wrapped around his shins, his feet tucked in close under him; cell 2: seen from BEHIND, his back to the viewer, mid backhand slash, feet planted apart). Cells 3, 4, 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact footwear already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a young pirate's tall cuffed boots: black leather boots reaching up to just below the knee, with a wide folded-down cuff at the top and sturdy dark soles. Paint BOTH feet in every cell; each foot is whole and rounded, never cut off flat, and the same size as the green foot it covers. In cell 1 the boots sit exactly on the small green feet tucked in under the curled-up ball, the same size as those feet, never hanging below him or floating apart. In cell 2 he is seen from BEHIND, exactly like the boy in the fourth attached picture, whose footwear shows its heels and backs: paint the footwear seen from behind, with the HEEL of each one facing the viewer and the toes pointing AWAY into the picture, hidden behind the heel. Never paint the toes pointing sideways or at the viewer. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing or gear. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
   }
+ },
+ {
+  "id": "mshero_body_arms_clear",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_arms_clear.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 21:0xZ: 'swing 1 needs to be redone across the board', 'his arm should not cover his face', 'some poses are missing the fist'; 21:08Z 'do all the reprints i asked for'): swing1 and skyward2 body with the raised arm clear of his head.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_arms_face_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_arms_face_ref.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cell 1 and cell 2 each hold the same painted bald chibi boy in a cream undershirt and brown shorts, facing right. Cells 3 to 8 are empty and must stay empty. In both cells one of his arms is raised and crosses over his head, so it hides part of his head and its fist is lost behind his head. Repaint ONLY that raised arm in each cell so it never crosses his head or face: cell 1, winding up for a big overhead slash: lift that arm high and BACK, up and to the LEFT of his head, with the elbow bent and the closed mitten fist held clearly above and behind his back shoulder, leaving a clear gap of magenta between the arm and his head; cell 2, leaping upward with an uppercut: stretch that arm straight UP from his shoulder on the LEFT side of his head, beside it and never over it, with the closed mitten fist high above the top of his head, leaving a clear gap of magenta between the arm and his head. In both cells his whole head and face stay fully uncovered, and BOTH of his fists are clearly visible: the raised fist and his other fist, which stays exactly where it is now in front of his chest. Each fist is one round closed mitten with no fingers, like the boy's fists in the first attached picture, and he has exactly two arms and two fists. Keep everything else exactly as it is, pixel for pixel: his head, body, other arm, other fist, shorts, legs, feet, size and position. Do not add any weapon, object or extra limb. Keep the background flat pure magenta #FF00FF and keep the grid lines. Leave cells 3 to 8 empty. Style: match the existing painting exactly (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the second attached picture. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_hat_hair_faint",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_hat_hair_faint.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory: 'we need a faint print for each hair style too'; 21:08Z 'do all the reprints i asked for'): hair sticking out under the wizard hat, bandana, hood and tricorn on the faint pose.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/faint_hat_hair_silhouette.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/faint_hat_hair_ref.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 4 each hold the flat outline of a small boy lying flat on his back, fainted, with his head on the right: his head and body are flat bright green (#00FF00) and his hat is flat pure blue (#0000FF). Cell 1's hat is a tall pointed wizard hat, cell 2's a tied bandana, cell 3's a hood, cell 4's a pirate tricorn, exactly as the boy wears them in cells 1 to 4 of the first attached picture. Cells 5 to 8 are empty and must stay empty. Cell 5 of the first attached picture shows the same boy lying the same way with his own hair and no hat: short, messy, spiky chestnut-brown hair with a swept fringe. In cells 1 to 4, paint ONLY the bits of that same chestnut-brown hair that would naturally stick out from under that hat as he lies there, and nothing else: cell 1 a messy swept fringe poking out under the brim over his forehead and tufts at the back of his head; cell 2 a tuft of spiky hair sticking out of the top of the bandana and a few locks at the back; cell 3 a few strands of fringe falling out of the hood's opening onto his forehead; cell 4 a swept fringe under the front brim over his forehead and locks at the back of his head. Each lock starts at the edge of the blue hat and lies over the green head, sized to match him. Paint the hair WHOLE and solid, every lock fully closed, with no holes. Do NOT paint the hat: leave every blue pixel flat pure #0000FF exactly as it is, with no felt, cloth, trim, shading or outline on it. Do NOT paint the head, face, ears, body or anything else: leave every green pixel you do not paint hair over flat pure #00FF00, and leave the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Style: exactly the hair in cell 5 of the first attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights and a thin dark plum-brown outline. Keep the grid lines. No text, no labels."
+  }
  }
 ]
 }
