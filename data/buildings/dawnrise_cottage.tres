@@ -7,5 +7,5 @@
 script = ExtResource("1_building_def")
 id = &"dawnrise_cottage"
 texture = ExtResource("2_cottage")
-height = 300.0
+height = 384.0
 door_x = 0.499

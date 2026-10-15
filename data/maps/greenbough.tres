@@ -271,7 +271,8 @@ x = 4250.0
 [sub_resource type="Resource" id="Prop_barrel"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_barrel")
-x = 1530.0
+x = 1490.0
+scale = 0.65
 
 [sub_resource type="Resource" id="Prop_bench"]
 script = ExtResource("prop_placement")

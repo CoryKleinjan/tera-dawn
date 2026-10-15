@@ -45,7 +45,7 @@ MAGENTA = (255, 0, 255)
 # The doorway mark: a flat dark brown doorway with a round top. Gemini paints the door over it.
 DOOR_COLOUR = (74, 44, 30)
 # Sheet pixels per art pixel for every kit building (art/sheets "art_px"). Dawnharbor's tavern, the
-# gold standard, is 3.461: its door is 344 px tall in the painting, about 1.2 heroes in game.
+# gold standard, is 3.461: its doorway mark is 344 px tall in the painting; the door painted in it shows about 1.2 heroes in game.
 KIT_ART_PX = 3.461
 TEXEL = 1.25  # game px per art px (TDStage.TEXEL)
 DOOR_W, DOOR_H = 225, 344  # the doorway mark in canvas px (the tavern's door)

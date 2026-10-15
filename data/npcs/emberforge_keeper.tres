@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_npc_def")
 id = &"emberforge_keeper"
+sprite_scale = 0.89
 display_name = "Dorrick"
 title = "Storage Keeper"
 sprite_frames = ExtResource("2_sprite")

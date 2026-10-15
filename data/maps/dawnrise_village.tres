@@ -54,7 +54,7 @@ style = ExtResource("ladder")
 [sub_resource type="Resource" id="House_cottage"]
 script = ExtResource("bp_script")
 building = ExtResource("b_cottage")
-x = 430.0
+x = 380.0
 platform = 0
 depth = -2.4
 
@@ -77,7 +77,6 @@ script = ExtResource("bp_script")
 building = ExtResource("b_windmill")
 x = 1990.0
 platform = 1
-scale = 0.8
 depth = -2.4
 
 [sub_resource type="Resource" id="Lamp_west"]
