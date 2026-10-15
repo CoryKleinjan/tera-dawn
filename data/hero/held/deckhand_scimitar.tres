@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="HeldDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/held_def.gd" id="1_held"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/hero/held/deckhand_scimitar.tres" id="2_frames"]
+
+[resource]
+script = ExtResource("1_held")
+frames = ExtResource("2_frames")
+anchor = Vector2(12.1, 8.3)
+pins = {&"idle1": Vector4(93.8, 122.2, 0.0, 2), &"idle2": Vector4(93.5, 121.4, 0.0, 2), &"walk1": Vector4(84.8, 124.1, 0.0, 2), &"walk2": Vector4(97.8, 115.0, 0.0, 2), &"walk3": Vector4(86.4, 116.3, 0.0, 2), &"jump": Vector4(88.0, 110.7, 0.0, 2), &"hurt": Vector4(93.8, 122.2, 0.0, 2)}

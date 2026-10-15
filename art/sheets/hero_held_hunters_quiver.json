@@ -1,0 +1,45 @@
+{
+  "source": "art/source/hero/held/hunters_quiver.png",
+  "out_dir": "art/build/hero/held/hunters_quiver",
+  "cells": [
+    [
+      "held"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      358
+    ],
+    "cols": [
+      0,
+      324
+    ]
+  },
+  "inset": 0,
+  "label_band": 0,
+  "trim": false,
+  "dark_key": false,
+  "defringe": false,
+  "scale": 0.111,
+  "save": false,
+  "sets": {
+    "hero_held_hunters_quiver": {
+      "frames": {
+        "held": "hero_held_hunters_quiver:held"
+      },
+      "anchor": "cell",
+      "baseline": "cell",
+      "out": "assets/sprites/hero/held/hunters_quiver.png",
+      "sprite_frames": "assets/animations/hero/held/hunters_quiver.tres",
+      "animations": {
+        "held": {
+          "frames": [
+            "held"
+          ],
+          "fps": 1
+        }
+      }
+    }
+  }
+}

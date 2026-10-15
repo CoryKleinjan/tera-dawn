@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShopDef" load_steps=11 format=3]
+[gd_resource type="Resource" script_class="ShopDef" load_steps=15 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/shop_def.gd" id="1_shop_def"]
 [ext_resource type="Script" path="res://scripts/data/shop_entry.gd" id="2_shop_entry"]
@@ -7,6 +7,8 @@
 [ext_resource type="Resource" path="res://data/items/equips/footpad_trousers.tres" id="e_footpad_trousers"]
 [ext_resource type="Resource" path="res://data/items/equips/footpad_boots.tres" id="e_footpad_boots"]
 
+[ext_resource type="Resource" path="res://data/items/equips/footpad_dagger.tres" id="e_footpad_dagger"]
+[ext_resource type="Resource" path="res://data/items/equips/footpad_star.tres" id="e_footpad_star"]
 [sub_resource type="Resource" id="Entry_footpad_bandana"]
 script = ExtResource("2_shop_entry")
 item = ExtResource("e_footpad_bandana")
@@ -27,8 +29,18 @@ script = ExtResource("2_shop_entry")
 item = ExtResource("e_footpad_boots")
 price = 0
 
+[sub_resource type="Resource" id="Entry_footpad_dagger"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("e_footpad_dagger")
+price = 0
+
+[sub_resource type="Resource" id="Entry_footpad_star"]
+script = ExtResource("2_shop_entry")
+item = ExtResource("e_footpad_star")
+price = 0
+
 [resource]
 script = ExtResource("1_shop_def")
 id = &"fence"
 display_name = "Lanternfall Fence"
-items = Array[ExtResource("2_shop_entry")]([SubResource("Entry_footpad_bandana"), SubResource("Entry_footpad_jerkin"), SubResource("Entry_footpad_trousers"), SubResource("Entry_footpad_boots")])
+items = Array[ExtResource("2_shop_entry")]([SubResource("Entry_footpad_bandana"), SubResource("Entry_footpad_jerkin"), SubResource("Entry_footpad_trousers"), SubResource("Entry_footpad_boots"), SubResource("Entry_footpad_dagger"), SubResource("Entry_footpad_star")])
