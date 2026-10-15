@@ -12489,6 +12489,168 @@
    ],
    "text": "Repaint this walking boy as the passing step on the other foot: exactly the same chibi boy as in the base picture, at exactly the same size and the same place in the picture, with his feet on the same ground line, facing right at the same slight three-quarter angle: same head, ears, blank face with no eyes, brows or mouth, bald, cream short-sleeved undershirt, brown shorts, barefoot, rounded mitten hands closed in fists with no separate fingers or thumbs, same clean smooth painted style and thin dark plum-brown outline. Turn him to the same angle as the first figure of the attached sheet if he looks turned toward the viewer. In the base picture one leg is straight under him and the knee of the leg on the RIGHT side of the picture is lifted. Repaint him the OTHER way round: the leg on the RIGHT side of the picture is now straight under him carrying his weight, and the knee of the leg on the LEFT side is lifted and bent as that foot swings through, body a little higher, arms close to his sides. Only the legs and arms change; the head and body stay where they are. Paint one figure only. Keep the background flat pure magenta #FF00FF. Nothing else: no weapons, props, shadows, effects, text or labels. Light from the upper left."
   }
+ },
+ {
+  "id": "mshero_war_jerkin_walk",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_war_jerkin_walk.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 00:38Z 'Do it' to painting his clothes for the new 3-step walk loop, 6 sheets ~$0.42): over the green silhouette of the new walk (wave 214 cells 1, 2, 5).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/silhouette_walk.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_walk.png",
+    "/mnt/project-files/art-sheets/maple-hero/bodies/look_warrior.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 3 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (walking: a long stride, a passing step with one knee lifted, a shorter stride). Cells 4 to 8 are empty and must stay empty. He faces right in a three-quarter view; his SWORD ARM is the arm on the LEFT side of the picture and his SHIELD ARM is the arm on the RIGHT side. Use the second attached picture ONLY to see the look and style of a young warrior's gear (do not copy its pose or add its figure). On each green shape, paint ONLY a padded warrior's jerkin worn over his torso and upper arms: quilted brown-tan padded cloth in stitched rows, short sleeves over the upper arms, a high padded collar, a broad brown leather belt with a brass buckle at the waist, and the hem just below the belt; it follows his body and arms in each pose. Paint nothing else: no head, hands, legs, trousers, boots or gear. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, as if the arms were not there, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: exactly the look of the steel helmet in the second attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_war_trousers_walk",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_war_trousers_walk.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 00:38Z 'Do it' to painting his clothes for the new 3-step walk loop, 6 sheets ~$0.42): over the green silhouette of the new walk (wave 214 cells 1, 2, 5).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/silhouette_walk.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_walk.png",
+    "/mnt/project-files/art-sheets/maple-hero/bodies/look_warrior.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 3 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (walking: a long stride, a passing step with one knee lifted, a shorter stride). Cells 4 to 8 are empty and must stay empty. He faces right in a three-quarter view; his SWORD ARM is the arm on the LEFT side of the picture and his SHIELD ARM is the arm on the RIGHT side. Use the second attached picture ONLY to see the look and style of a young warrior's gear (do not copy its pose or add its figure). On each green shape, paint ONLY sturdy warrior's trousers worn on his legs from the waist to mid-shin: thick dark olive-brown cloth with reinforced knee patches and visible stitching, tucked in at the bottom where boots will go; they follow his legs in each pose. Paint nothing else: no torso, belt, feet, boots or gear. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, as if the arms were not there, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: exactly the look of the steel helmet in the second attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_war_boots_walk",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_war_boots_walk.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 00:38Z 'Do it' to painting his clothes for the new 3-step walk loop, 6 sheets ~$0.42): over the green silhouette of the new walk (wave 214 cells 1, 2, 5).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/silhouette_walk.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_walk.png",
+    "/mnt/project-files/art-sheets/maple-hero/bodies/look_warrior.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 3 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (walking: a long stride, a passing step with one knee lifted, a shorter stride). Cells 4 to 8 are empty and must stay empty. He faces right in a three-quarter view; his SWORD ARM is the arm on the LEFT side of the picture and his SHIELD ARM is the arm on the RIGHT side. Use the second attached picture ONLY to see the look and style of a young warrior's gear (do not copy its pose or add its figure). On the feet of each green shape, paint ONLY the same brown leather boots as in the second attached picture, reaching to mid-shin, with steel toe caps, a darker sole, a turned-down cuff and a small buckle strap; they follow each foot's pose in that cell. Paint nothing else: no legs above the boots, body or clothes. Paint every piece WHOLE, with no gaps, notches or holes where an arm, hand or another piece would cover it; parts that will be hidden are still painted completely. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: exactly the look of the steel helmet in the second attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_mag_robe_walk",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_mag_robe_walk.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 00:38Z 'Do it' to painting his clothes for the new 3-step walk loop, 6 sheets ~$0.42): over the green silhouette of the new walk (wave 214 cells 1, 2, 5).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/silhouette_walk.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_walk.png",
+    "/mnt/project-files/art-sheets/maple-hero/bodies/look_mage.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 3 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (walking: a long stride, a passing step with one knee lifted, a shorter stride). Cells 4 to 8 are empty and must stay empty. He faces right in a three-quarter view; his WAND ARM is the arm on the LEFT side of the picture and his BOOK ARM is the arm on the RIGHT side. Use the second attached picture ONLY to see the look and style of a young magician's outfit (do not copy its pose or add its figure). On each green shape, paint ONLY the same young magician's robe as in the second attached picture, worn over his torso and upper arms: a deep blue robe-tunic with short wide sleeves, a hem just above the knees, gold trim along the collar, sleeves and hem, a small gold star clasp at the collar and a purple cloth sash tied at the waist with hanging ends. It follows his body, arms and legs in each pose. Paint nothing else: no head, hands, legs below the hem, shoes or gear. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, as if the arms were not there, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Style: the warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline and small busy painted detail of the robe in the second attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_mag_trousers_walk",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_mag_trousers_walk.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 00:38Z 'Do it' to painting his clothes for the new 3-step walk loop, 6 sheets ~$0.42): over the green silhouette of the new walk (wave 214 cells 1, 2, 5).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/silhouette_walk.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_walk.png",
+    "/mnt/project-files/art-sheets/maple-hero/bodies/look_mage.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 3 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (walking: a long stride, a passing step with one knee lifted, a shorter stride). Cells 4 to 8 are empty and must stay empty. He faces right in a three-quarter view; his WAND ARM is the arm on the LEFT side of the picture and his BOOK ARM is the arm on the RIGHT side. Use the second attached picture ONLY to see the look and style of a young magician's outfit (do not copy its pose or add its figure). On each green shape, paint ONLY loose magician's trousers worn on his legs from the waist to the ankles: soft light-tan cloth, loose and a little baggy, gathered at the ankles, with visible seams; they follow his legs in each pose. Paint nothing else: no torso, robe, feet, shoes or gear. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, as if the arms were not there, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Style: the warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline and small busy painted detail of the robe in the second attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_mag_slippers_walk",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_mag_slippers_walk.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 00:38Z 'Do it' to painting his clothes for the new 3-step walk loop, 6 sheets ~$0.42): over the green silhouette of the new walk (wave 214 cells 1, 2, 5).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/silhouette_walk.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_walk.png",
+    "/mnt/project-files/art-sheets/maple-hero/bodies/look_mage.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 3 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (walking: a long stride, a passing step with one knee lifted, a shorter stride). Cells 4 to 8 are empty and must stay empty. He faces right in a three-quarter view; his WAND ARM is the arm on the LEFT side of the picture and his BOOK ARM is the arm on the RIGHT side. Use the second attached picture ONLY to see the look and style of a young magician's outfit (do not copy its pose or add its figure). On the feet of each green shape, paint ONLY a pair of soft magician's slippers: deep blue cloth with gold trim around the opening and gently curled pointed toes, following each foot's pose in that cell. Paint nothing else: no legs, body or clothes. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, as if the arms were not there, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Style: the warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline and small busy painted detail of the robe in the second attached picture. Keep the grid lines. No text, no labels."
+  }
  }
 ]
 }
