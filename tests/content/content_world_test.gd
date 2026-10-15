@@ -390,7 +390,7 @@ func test_there_is_enough_content() -> void:
 	check(bosses.size() >= 6, "bosses: %d, want at least 6" % bosses.size())
 	check(shooters.size() >= 10, "monsters that shoot: %d, want at least 10" % shooters.size())
 	check(splitters.size() >= 4, "monsters that split: %d, want at least 4" % splitters.size())
-	# 150 while the game's equipment is being redrawn (it had about 200 items with it)
+	# about 150 since the old gear was removed (it had about 200 items with it)
 	var items := Content.items.size() - Content.extra_items.size()
 	check(items >= 150, "items: %d, want at least 150" % items)
 	check(scrolls.size() >= 12, "upgrade scrolls: %d, want at least 12" % scrolls.size())

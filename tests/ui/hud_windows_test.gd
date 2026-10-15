@@ -729,8 +729,8 @@ func test_npc_windows_close_when_you_walk_away() -> void:
 	ui.hud.open_shop(b)
 	await ui.frames(2)
 	check(_win("dialogue").visible and _win("storage").visible and _win("shop").visible, "they open next to the NPC")
-	a.position.x += TDDialogueWindow.REACH + 50
-	b.position.x += TDShopWindow.REACH + 50
+	a.position.x += TDWindow.NPC_REACH + 50
+	b.position.x += TDWindow.NPC_REACH + 50
 	await ui.frames(2)
 	check(not _win("dialogue").visible and not _win("storage").visible and not _win("shop").visible, "and close once the NPC is out of reach")
 

@@ -8,7 +8,7 @@
     [
       "",
       "door",
-      "floor_top"
+      ""
     ],
     [
       "counter",
@@ -24,17 +24,6 @@
     ]
   ],
   "overrides": {
-    "floor_top": {
-      "seamless": true,
-      "size": 256,
-      "crop": [
-        0,
-        113,
-        975,
-        1104
-      ],
-      "scale": 0.3896
-    },
     "door": {
       "scale": 0.2455,
       "flat_bottom": true

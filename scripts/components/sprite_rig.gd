@@ -25,9 +25,7 @@ var _frames: SpriteFrames
 var _flash := false
 var _tint := Color.WHITE
 var _lift := 0.0
-## How fast the animation plays (a walk matched to the walking speed), and whether hit-stop
-## holds it still.
-var _speed := 1.0
+## Whether hit-stop holds the animation still.
 var _frozen := false
 ## How squashed the body is right now by a hit (0 none, 1 most); see squash().
 var _squash := 0.0
@@ -135,15 +133,9 @@ func freeze(on: bool) -> void:
 	_frozen = on
 	_apply_speed()
 
-## Plays the animation faster or slower (1 is as drawn), e.g. the walk cycle matched to how
-## fast the actor moves so the feet don't slide.
-func set_speed(scale: float) -> void:
-	_speed = scale
-	_apply_speed()
-
 func _apply_speed() -> void:
 	if body is AnimatedSprite3D:
-		(body as AnimatedSprite3D).speed_scale = 0.0 if _frozen else _speed
+		(body as AnimatedSprite3D).speed_scale = 0.0 if _frozen else 1.0
 
 ## A warm pulsing glow (0 off .. 1 full), e.g. a monster about to strike.
 func set_glow(amount: float) -> void:

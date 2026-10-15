@@ -23,7 +23,7 @@
   },
   "cells": [
     [
-      "floor_top"
+      ""
     ],
     [
       "floor_side"
@@ -31,16 +31,6 @@
   ],
   "inset": 14,
   "overrides": {
-    "floor_top": {
-      "seamless": true,
-      "size": 256,
-      "crop": [
-        219,
-        109,
-        774,
-        663
-      ]
-    },
     "floor_side": {
       "seamless": true,
       "size": 256,

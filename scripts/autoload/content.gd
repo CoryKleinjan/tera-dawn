@@ -47,7 +47,7 @@ func _ready() -> void:
 		items[card.id] = card
 
 ## Loads more items from a folder: the tests' own gear (tests/fixtures/gear), which they wear
-## and trade while the game itself has no equipment.
+## and trade (the game itself has only the starter sets).
 ## Their ids are kept in `extra_items`, so checks on the game's own content can leave them out.
 func add_items_from(path: String) -> void:
 	var more := _load_folder(path, {})

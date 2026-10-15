@@ -122,8 +122,8 @@ update this page when one changes. Each zone's own look and music are in
 
 ## Gear
 
-- Gear has no art for now (see Hero): items keep their names, stats, slots, prices and job
-  requirements, and a slot shows an item's name in place of its icon. Each first job has a
+- Gear is drawn on the hero (see Hero) but has no icons yet: a slot shows an item's name in
+  place of its icon. Each first job has a
   starter armor set (hat, top, trousers, shoes; Lv 10, that job and its blends only), sold in its
   town's shop: Warrior Squire set (Emberforge), Magician Novice set (Lumewood), Thief Footpad set
   (Lanternfall), Archer Hunter's set (Greenbough), Pirate Deckhand set (Driftcove). Tests still

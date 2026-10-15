@@ -8,7 +8,7 @@
   "cells": [
     [
       "",
-      "pedestal",
+      "",
       "name_field"
     ],
     [
@@ -42,18 +42,6 @@
         ]
       ],
       "scale": 1.1686
-    },
-    "pedestal": {
-      "keep": "largest",
-      "blank": [
-        [
-          3,
-          0,
-          151,
-          28
-        ]
-      ],
-      "scale": 1.141
     },
     "arrow_right": {
       "flip": true,

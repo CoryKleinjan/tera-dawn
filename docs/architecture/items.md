@@ -70,5 +70,5 @@ for the loot key, and stays there if its tab is full.
 
 A weapon is an **EquipDef** in the Weapon slot with a `weapon_kind` (sword, dagger, bow, wand,
 staff, knuckle...), which skills can ask for (`SkillDef.weapons`), and optionally a
-`basic_attack` that replaces the plain attack while it is wielded. It has no art for now: how
-weapons look and are held comes back with the hero's new look.
+`basic_attack` that replaces the plain attack while it is wielded. How it looks and is held is
+its hero painting (`data/hero/held/`, see characters.md); it has no icon yet.
