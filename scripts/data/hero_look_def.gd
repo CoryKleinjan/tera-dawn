@@ -9,6 +9,8 @@ extends Resource
 @export var body: SpriteFrames
 @export var face: SpriteFrames
 @export var hair: SpriteFrames
+## His fists painted on their own, drawn over the weapon he holds so his hand wraps its grip.
+@export var hands: SpriteFrames
 ## Animation name (what TDPlayer._animation() says he is doing) -> {"frames": [frame names],
 ## "fps": frames a second, "loop": whether it repeats}. "<name>_<weapon kind>" is used instead
 ## while that kind of weapon is held (a bow's "attack_bow").

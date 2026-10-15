@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="HeroLookDef" load_steps=5 format=3]
+[gd_resource type="Resource" script_class="HeroLookDef" load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/hero_look_def.gd" id="1_look"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/hero/body.tres" id="2_body"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/hero/face.tres" id="3_face"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/hero/hair.tres" id="4_hair"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/hero/hands.tres" id="5_hands"]
 
 [resource]
 script = ExtResource("1_look")
 body = ExtResource("2_body")
 face = ExtResource("3_face")
 hair = ExtResource("4_hair")
+hands = ExtResource("5_hands")
 animations = {
 &"attack": {"fps": 12.0, "frames": [&"swing1", &"swing2", &"swing3"], "loop": false},
 &"attack_bow": {"fps": 8.0, "frames": [&"bow1", &"bow2", &"bow1"], "loop": false},
