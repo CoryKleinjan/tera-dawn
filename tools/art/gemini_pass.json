@@ -14061,6 +14061,31 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Each cell holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: climbing a rope, climbing a rope, holding a rope with both hands above his head, climbing a ladder, climbing a ladder, holding a ladder, standing; cell 8 is empty). He is seen from BEHIND, his back to the viewer, in every cell. The second attached picture shows the piece from the FRONT: use it ONLY for its colours, materials and shape, never its pose or its front details. The third attached picture shows other gear painted correctly from behind on these same shapes: follow how it shows the back. On each green shape, paint ONLY a young pirate's tall cuffed boots: black leather boots reaching up to just below the knee, with a wide folded-down cuff at the top and sturdy dark soles; they follow each foot and lower leg's pose in that cell, toes pointing the way each foot points, seen from BEHIND, showing their BACKS: the rounded heel of each faces the viewer and the toes point AWAY from the viewer into the picture; when a foot is lifted its sole may show. It follows his body in each pose. Paint BOTH boots, one on each foot, in every cell. Paint nothing else: no legs, body or clothes. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Every piece must come out WHOLE and SOLID: no holes, gaps, notches, bites, missing chunks, see-through spots or edges cut off flat anywhere, even where an arm, hand or leg covers it; parts that will be hidden are still painted completely. Before finishing, check every cell for holes and gaps and fill any you find. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights and a thin dark plum-brown outline, like the painted villagers in the fourth attached picture. Keep the grid lines. No text, no labels."
   }
+ },
+ {
+  "id": "mshero_held_whole",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_held_whole.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 14:18-14:19Z: the scimitar and throwing star have gaps where his fist was; dagger and pistol too): the four held pieces filled whole on plain magenta, like the bow. Runs only on Cory's typed go naming it (about $0.07).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/held_gaps_on_magenta.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cells 1 to 4 each hold one weapon with a piece missing where a hand used to hold it. Cell 1: a short steel dagger whose round steel pommel floats apart from its crossguard; fill the gap with its black leather-wrapped grip running straight from the crossguard to the pommel, so it is one whole dagger. Cell 2: a flat four-pointed steel throwing star with a ragged bite missing from its middle and inner edges; fill it in so it is one whole, symmetrical four-pointed star of dark steel with bright sharp edges and a small round hole in the very middle. Cell 3: a curved steel scimitar whose small round brass pommel floats apart from its brass crossguard; fill the gap with its dark leather-wrapped grip running straight from the crossguard to the pommel, so it is one whole scimitar. Cell 4: a flintlock pistol whose curved wooden grip is broken off, with its brass-capped butt floating apart from the rest; fill the gap with the rest of the curved dark wooden grip joining the butt to the lock and barrel, so it is one whole pistol. Keep every existing part exactly as it is, in exactly the same place, size and angle, and keep each piece in its own cell. Each piece must come out WHOLE and SOLID: no holes, gaps, notches, bites or see-through spots anywhere. Leave cells 5 to 8 empty and the rest of the background flat pure magenta #FF00FF. Paint nothing else: no hands, figures or other objects. Style: match the existing paintings exactly, with the warm colours and thin dark plum-brown outline of the painted villagers in the attached picture. Keep the grid lines. No text."
+  }
  }
 ]
 }
