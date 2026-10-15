@@ -48,7 +48,7 @@
       "gravity1",
       "gravity2",
       "ambush1",
-      "",
+      "ambush2",
       "anchor1",
       "anchor2"
     ],
@@ -136,7 +136,8 @@
         "blink": "hero_novice_trousers:blink",
         "lunge": "hero_novice_trousers:lunge",
         "roll1": "hero_novice_trousers:roll1",
-        "roll2": "hero_novice_trousers:roll2"
+        "roll2": "hero_novice_trousers:roll2",
+        "ambush2": "hero_novice_trousers:ambush2"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -392,6 +393,12 @@
         "roll2": {
           "frames": [
             "roll2"
+          ],
+          "fps": 1
+        },
+        "ambush2": {
+          "frames": [
+            "ambush2"
           ],
           "fps": 1
         }

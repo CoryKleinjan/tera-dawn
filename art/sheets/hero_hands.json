@@ -38,7 +38,7 @@
       "gravity1",
       "gravity2",
       "ambush1",
-      "",
+      "ambush2",
       "anchor1",
       "anchor2"
     ],
@@ -116,7 +116,8 @@
         "backstep": "hero_hands:backstep",
         "lunge": "hero_hands:lunge",
         "anchor2": "hero_hands:anchor2",
-        "blink": "hero_hands:blink"
+        "blink": "hero_hands:blink",
+        "ambush2": "hero_hands:ambush2"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -318,6 +319,12 @@
         "blink": {
           "frames": [
             "blink"
+          ],
+          "fps": 1
+        },
+        "ambush2": {
+          "frames": [
+            "ambush2"
           ],
           "fps": 1
         }
