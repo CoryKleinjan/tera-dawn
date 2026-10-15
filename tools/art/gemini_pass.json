@@ -14476,6 +14476,33 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2, 3 and 4 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose. Cells 5, 6, 7 and 8 are empty and must stay empty. He faces right. On each green shape, paint ONLY his SWORD HAND: one closed rounded MITTEN fist, with no separate fingers or thumb, plus his wrist, exactly the same size, shape, angle, skin colour and place as that fist in the same cell of the first attached picture, so it lies exactly on top of it. The sword hand in each cell is: cell 1 (winding up): the fist raised high at the upper LEFT, behind his head; cell 2 (striking): the fist at the end of the arm stretched straight out to the RIGHT at shoulder height, NOT the lower fist; cell 3 (following through): the fist swept low in front of him on the RIGHT, at knee height; cell 4 (knocked back): the low fist on the LEFT side of the picture, NOT the raised one. Paint only that one fist in each cell and nothing else: no other hand, arm, sleeve, body, head, sword or object. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Style: exactly the skin, warm colours, light from the upper left, smooth soft painted shading and thin dark plum-brown outline of the boy in the first attached picture. Keep the grid lines. No text, no labels."
   }
+ },
+ {
+  "id": "mshero_body_cast",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_cast.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 16:04Z asked for a Mage casting animation; 16:10Z 'sound sgood' to the plan): two shared cast frames on the body, painted beside the approved swing, hurt and sit. Runs only on Cory's typed go naming the cost.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/body_swing.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_move.png",
+    "/mnt/project-files/references/hero.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) of the game's base character, a chibi boy with a blank face, on a flat magenta background. Cells 1, 2, 3, 4 and 7 hold the boy; KEEP them exactly as they are. Cells 5, 6 and 8 are EMPTY. Paint the same boy in cells 5 and 6 only, in a NEW pose described below, and leave cell 8 empty. Copy his look exactly from the boys in the base (same head, ears, blank face with no eyes, brows or mouth, bald, cream short-sleeved undershirt, brown shorts, barefoot, rounded mitten fists with no separate fingers, same size, same clean smooth painted style and thin dark plum-brown outline) but NOT their poses. Feet sit on the same ground line as the boys in cells 1 to 4. He faces right in a slight three-quarter side view. His WAND ARM is the arm on the LEFT side of the picture; its fist is a closed mitten fist seen from the side with the thumb on top, so a thin straight wand held in it would lie flat in the picture and never point at the viewer; the whole fist and forearm are clearly visible, never hidden behind his head or body. Cells 5 and 6 are one spell cast with an imaginary wand (do NOT draw the wand). Cell 5, GATHER: feet planted a little apart, body upright and leaning back slightly, wand arm raised with the fist held up high above and in front of his head, elbow bent; the other arm held out in front of his chest, open mitten palm facing forward. Cell 6, RELEASE: front foot stepping forward, body leaning forward, wand arm thrust straight out in front of him at shoulder height, fist far forward; the other arm pulled back low at his side. Paint every figure WHOLE, with no gaps, notches or holes. Keep the background flat pure magenta #FF00FF and keep the grid lines. Nothing else in the cells: no weapons, props, shadows, effects, sparkles or text. Light from the upper left."
+  }
  }
 ]
 }
