@@ -14,9 +14,15 @@ extends Resource
 ## Frames whose fists were painted with bare forearms, left off under long sleeves
 ## (EquipDef.long_sleeves).
 @export var bare_arm_frames: Array[StringName] = []
+## Frames whose fists are drawn over his clothes with or without a weapon out (lying down, a
+## hand resting on his belly).
+@export var resting_hand_frames: Array[StringName] = []
 ## His own parts moved by hand in the pose editor: part (&"body", &"face", &"hair", &"hands")
 ## -> {frame: Vector4(x, y, degrees clockwise, places up the stack)} (HeroBody.Layer).
 @export var nudges: Dictionary = {}
+## His own parts drawn bigger or smaller in the pose editor: part -> {frame: size} (1.0 as
+## painted).
+@export var sizes: Dictionary = {}
 ## Animation name (what TDPlayer._animation() says he is doing) -> {"frames": [frame names],
 ## "fps": frames a second, "loop": whether it repeats}. "<name>_<weapon kind>" is used instead
 ## while that kind of weapon is held (a bow's "attack_bow").

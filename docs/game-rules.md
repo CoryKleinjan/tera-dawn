@@ -25,15 +25,22 @@ update this page when one changes. Each zone's own look and music are in
 - The hero is a chibi boy (`art/reference/hero.png`) painted in layers, MapleStory style: one
   body sheet (bald, blank face, mitten fists), and his face, hair and each piece of gear painted
   over a flat green silhouette of it so they land in place on every frame.
-- Gear is painted whole, never with holes where an arm crosses it. A helmet, hat, shield or tome
+- Gear is painted whole on every frame: no holes, gaps, notches or bites where an arm, hand or
+  leg crosses it, nothing cut off flat, and both shoes or boots on every pose (sitting and lying
+  down too). On climbing and back frames he faces away, so gear shows its BACK: no buttons,
+  buckles, clasps, collar stars, flies, knee patches or toe caps. Every gear prompt says both
+  rules in plain words, names the cells seen from behind, and every result is checked frame by
+  frame on a flat colour before it goes in; a hole is fixed by repainting that piece alone on
+  plain magenta. A helmet, hat, shield or tome
   is one painting pinned to his head or hand on every frame (separate paints only where his head
   turns). The weapon is one painting held in his near fist; the shield or tome is in his far
   hand and only shows while the weapon does. Where each sits, its turn and its layer on every
   frame are set by hand in the pose editor.
 - Draw order, back to front: off-hand (shield), cape, body, trousers, shoes, tome, top, gloves,
   face, hair (hidden under helmets), hat, weapon, then his fists over its grip. In the pose editor
-  any piece (his body, face, hair, fists, each piece of gear) can be moved, turned and moved up or
-  down the stack on any frame; nothing is repainted or cut for it.
+  any piece (his body, face, hair, fists, each piece of gear) can be moved, turned, resized and
+  moved up or down the stack on any frame; nothing is repainted or cut for it. Prefer shrinking
+  to growing: a piece drawn bigger than painted looks softer.
 - Animations are shared across similar actions (one swing for all melee, one cast for all
   spells); his walk is 4 steps, slow. Attack animations are on hold: he attacks in his standing
   pose until they are redone.

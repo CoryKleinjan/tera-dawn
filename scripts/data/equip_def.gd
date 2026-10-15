@@ -31,6 +31,9 @@ const OFFHAND_NAMES := {&"shield": "a shield", &"star": "throwing stars", &"book
 ## Its worn layer moved by hand in the pose editor: frame -> Vector4(x, y, degrees clockwise,
 ## places up the stack) (HeroBody.Layer). A held piece uses its pins instead.
 @export var nudges: Dictionary = {}
+## Frame -> how big its look is drawn there (1.0 as painted), set in the pose editor; its worn
+## layer or held painting grows or shrinks around the point it turns around.
+@export var sizes: Dictionary = {}
 ## A hat or helmet that covers his hair, so the hair layer isn't drawn under it.
 @export var hides_hair := false
 ## A weapon or off-hand: one painting held in his hand, pinned per frame (HeldDef), drawn instead

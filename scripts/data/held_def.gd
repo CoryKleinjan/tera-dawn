@@ -14,6 +14,8 @@ enum Layer { BEHIND, UNDER_TOP, OVER_CLOTHES, OVER_HANDS }
 ## Frame name -> Vector4(x, y, turn in degrees clockwise, Layer): where the anchor sits on that
 ## frame, in the frame's pixels. Frames not listed show it put away.
 @export var pins: Dictionary = {}
+## Frame name -> how big the painting is drawn there (1.0 as painted), around its anchor.
+@export var sizes: Dictionary = {}
 
 func texture() -> Texture2D:
 	return frames.get_frame_texture(&"held", 0) if frames else null
