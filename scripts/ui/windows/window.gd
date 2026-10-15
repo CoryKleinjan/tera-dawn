@@ -46,6 +46,9 @@ const OPEN_SCALE := 0.94
 ## Sounds (Sound.play ids) for opening and closing a window; its buttons click (Sound.CLICK).
 const OPEN_SOUND := &"open"
 const CLOSE_SOUND := &"close"
+## How far the player may walk from the NPC a window was opened from (a shop, storage, a talk)
+## before it closes.
+const NPC_REACH := 170.0
 
 var hud: TDHud
 var title := ""
@@ -84,6 +87,10 @@ func _process(delta: float) -> void:
 			_open_t = minf(1.0, _open_t + delta / OPEN_TIME)
 			_apply_open()
 		queue_redraw()
+
+## Whether `who`, the NPC this window was opened from, is gone or the player walked away from it.
+func walked_away_from(who: TDNpc) -> bool:
+	return who == null or not is_instance_valid(who) or hud.world.player.position.distance_to(who.position) > NPC_REACH
 
 ## Skips the opening animation (and anything else still settling, in subclasses).
 func settle() -> void:
@@ -199,7 +206,7 @@ class Tip:
 		compare = compare_
 
 ## An item slot: frame, icon and stack count. `dim` greys it out (being dragged, unusable).
-## An item with no icon (gear whose art is being remade) shows its name instead.
+## An item with no icon (gear, for now) shows its name instead.
 func draw_slot(r: Rect2, stack: ItemStack, dim := false, label := "") -> void:
 	var hot := r.has_point(_hover)
 	draw_texture_rect(UiSkin.tex("item_slot"), r, false, Color(1.3, 1.2, 1.0) if hot else Color.WHITE)

@@ -1,6 +1,6 @@
 class_name TestGear
-## The game has no equipment for now (it's being redrawn), but the tests still wear, trade and
-## compare gear. This loads their own plain gear (tests/fixtures/gear, the old items with a test
+## The game has only the job starter sets (with no icons yet), but the tests wear, trade and
+## compare much more gear. This loads their own plain gear (tests/fixtures/gear, the old items with a test
 ## icon) and hands it out the way the jobs did, in memory only: the game's data stays as it is.
 
 const FOLDER := "res://tests/fixtures/gear"

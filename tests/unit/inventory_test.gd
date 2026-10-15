@@ -12,10 +12,6 @@ func before_each() -> void:
 func after_each() -> void:
 	fx.cleanup()
 
-func _fill(tab_item: ItemDef, slots: int) -> void:
-	for i in slots:
-		bag.add(tab_item, tab_item.stack_size())
-
 func test_new_bag_is_empty_in_every_tab() -> void:
 	check_eq(bag.tabs.size(), ItemDef.Tab.size(), "one row per tab")
 	for t in ItemDef.Tab.size():

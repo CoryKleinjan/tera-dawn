@@ -41,7 +41,7 @@ var keepsakes := KeepsakeChecks.new(self)
 var network := NetworkChecks.new(self)
 
 func _ready() -> void:
-	# the game has no equipment for now, so the tests bring their own to wear and trade
+	# the game has only starter gear, so the tests bring their own to wear and trade
 	TestGear.install()
 	_run.call_deferred()
 

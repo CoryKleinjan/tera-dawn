@@ -192,7 +192,7 @@ static func style_sprite(s: SpriteBase3D, texel := TEXEL, shaded := true) -> voi
 	s.double_sided = true
 
 ## A sprite whose origin is the bottom centre of its texture, `texel` game pixels per art
-## pixel (see art_density). No texture (an item whose art is being remade) makes an empty one.
+## pixel (see art_density). No texture (an item with no icon yet) makes an empty one.
 static func sprite(texture: Texture2D, texel := TEXEL, shaded := true) -> Sprite3D:
 	var s := Sprite3D.new()
 	s.texture = texture

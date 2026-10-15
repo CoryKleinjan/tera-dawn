@@ -38,7 +38,7 @@ func test_npcs_have_art() -> void:
 		if n.sprite_frames:
 			_frames(n.sprite_frames, w + ": sprite_frames", [&"idle"])
 
-## Every item has an icon, except gear: its art is being remade (docs/game-rules.md), so an
+## Every item has an icon, except gear: it has no icons yet (docs/game-rules.md), so an
 ## icon it has must still load.
 func test_items_have_icons() -> void:
 	for i: ItemDef in Content.items.values():
