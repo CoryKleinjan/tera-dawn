@@ -2,7 +2,7 @@ class_name HeldDef
 extends Resource
 ## A weapon or off-hand as the hero holds it, the MapleStory way: ONE painting, pinned to its
 ## spot on each of his frames, turned and stacked per frame. Placed by hand in
-## tools/hero_grip_editor.tscn, which saves back to this file.
+## scenes/dev/hero_pose_editor.tscn, which saves back to this file.
 
 ## Where the piece goes in his stack on a frame (HeroBody.layers).
 enum Layer { BEHIND, UNDER_TOP, OVER_CLOTHES, OVER_HANDS }

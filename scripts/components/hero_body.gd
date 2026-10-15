@@ -13,7 +13,8 @@ const LOOK: HeroLookDef = preload("res://data/hero/look.tres")
 ## order without fighting over depth.
 const LAYER_STEP := 0.002
 ## Worn places drawn behind his body, and over it under and over his top (a held weapon or
-## off-hand goes where its pin says, HeldDef.Layer).
+## off-hand goes where its pin says, HeldDef.Layer). Any piece can be moved, turned and
+## restacked per frame (Layer).
 const BACK := [&"cape"]
 const UNDER := [&"bottom", &"shoes"]
 const OVER := [&"top", &"gloves"]
@@ -59,43 +60,38 @@ func draw(face: int, chair: StringName, pet: StringName, anim: StringName, worn:
 	var stack := layers(worn, frame)
 	while _layers.size() < stack.size():
 		_layers.append(_new_layer())
+	var size := LOOK.body.get_frame_texture(frame, 0).get_size() if LOOK.body.has_animation(frame) else Vector2.ZERO
 	for i in _layers.size():
 		var s := _layers[i]
-		var layer: Variant = stack[i] if i < stack.size() else null
+		var layer: Layer = stack[i] if i < stack.size() else null
 		s.texture = null
 		s.rotation = Vector3.ZERO
-		if layer is HeldDef:
-			_hold(s, layer, frame, face, at, _z + i * LAYER_STEP)
-		elif layer is SpriteFrames and layer.has_animation(frame):
-			s.texture = layer.get_frame_texture(frame, 0)
-			s.offset = Vector2(0, s.texture.get_height() / 2.0)
-			s.flip_h = face < 0
-			s.position = TDStage.to3d(at, _z + i * LAYER_STEP)
+		var tex := layer.texture(frame) if layer else null
+		if tex and size != Vector2.ZERO:
+			var pin := layer.pin(frame)
+			_place(s, tex, layer.anchor(frame), Vector2(pin.x, pin.y), pin.z, size, face, at, _z + i * LAYER_STEP)
 		s.visible = visible and s.texture != null
 
-## Puts `s` showing a held painting pinned on `frame`: its anchor on the pin, turned, mirrored
-## when he faces left. Pins are in the pixels of his frames, whose bottom middle is at his feet.
-func _hold(s: Sprite3D, held: HeldDef, frame: StringName, face: int, at: Vector2, z: float) -> void:
-	var tex := held.texture()
-	var size := LOOK.body.get_frame_texture(frame, 0).get_size() if LOOK.body.has_animation(frame) else Vector2.ZERO
-	if tex == null or size == Vector2.ZERO:
-		return
-	var pin: Vector4 = held.pins[frame]
+## Puts `s` showing `tex` with its point `anchor` (its own pixels) on `pin` (the pixels of his
+## frames, `size`, whose bottom middle is at his feet), turned `deg` clockwise around it,
+## mirrored when he faces left.
+func _place(s: Sprite3D, tex: Texture2D, anchor: Vector2, pin: Vector2, deg: float, size: Vector2, face: int, at: Vector2, z: float) -> void:
 	var texel := TDStage.TEXEL / TDStage.frames_density(LOOK.body)
 	s.texture = tex
 	s.flip_h = face < 0
-	s.offset = Vector2((tex.get_width() / 2.0 - held.anchor.x) * face, held.anchor.y - tex.get_height() / 2.0)
+	s.offset = Vector2((tex.get_width() / 2.0 - anchor.x) * face, anchor.y - tex.get_height() / 2.0)
 	s.position = TDStage.to3d(at + Vector2((pin.x - size.x / 2.0) * face, pin.y - size.y) * texel, z)
-	s.rotation.z = -deg_to_rad(pin.z) * face
+	s.rotation.z = -deg_to_rad(deg) * face
 
-## His layers back to front on `frame` for what he wears (place -> EquipDef), each a SpriteFrames
-## or a pinned HeldDef: a held piece set behind him, what hangs behind him, his body, his trousers
-## and shoes, held pieces under his top, his top, his face, his hair (unless a hat covers it on
-## this frame), his hat, held pieces over his clothes, his fists over the grip, held pieces over
-## his hands. Each held piece's pin says its layer on that frame. The off-hand only shows while the
-## weapon does. Under long sleeves the fists painted with bare forearms are left off.
-static func layers(worn: Dictionary, frame: StringName) -> Array:
-	var out := []
+## His layers back to front on `frame` for what he wears (place -> EquipDef): a held piece set
+## behind him, what hangs behind him, his body, his trousers and shoes, held pieces under his top,
+## his top, his face, his hair (unless a hat covers it on this frame), his hat, held pieces over
+## his clothes, his fists over the grip, held pieces over his hands. Each held piece's pin says
+## its layer on that frame; any other piece can be moved up or down the stack on a frame by its
+## nudge (Vector4.w). The off-hand only shows while the weapon does. Under long sleeves the fists
+## painted with bare forearms are left off.
+static func layers(worn: Dictionary, frame: StringName) -> Array[Layer]:
+	var out: Array[Layer] = []
 	var offhand: EquipDef = worn.get(&"shield")
 	var hat: EquipDef = worn.get(&"hat")
 	var weapon: EquipDef = worn.get(&"weapon")
@@ -103,33 +99,41 @@ static func layers(worn: Dictionary, frame: StringName) -> Array:
 	var shown := weapon != null and _shows(weapon, frame)
 	if weapon and not shown:
 		offhand = null  # put away with the weapon (sitting, lying down)
-	var held := {}  # HeldDef.Layer -> [HeldDef]
+	var held := {}  # HeldDef.Layer -> [EquipDef]
 	for e: EquipDef in [offhand, weapon]:
 		if e and e.held and e.held.shows(frame):
-			held.get_or_add(e.held.layer(frame), []).append(e.held)
-	out.append_array(held.get(HeldDef.Layer.BEHIND, []))
+			held.get_or_add(e.held.layer(frame), []).append(e)
+	_add(out, held.get(HeldDef.Layer.BEHIND, []), true)
 	_add(out, [offhand] + BACK.map(func(p): return worn.get(p)))
-	out.append(LOOK.body)
+	out.append(Layer.new(LOOK, &"body"))
 	_add(out, UNDER.map(func(p): return worn.get(p)))
-	out.append_array(held.get(HeldDef.Layer.UNDER_TOP, []))
+	_add(out, held.get(HeldDef.Layer.UNDER_TOP, []), true)
 	_add(out, OVER.map(func(p): return worn.get(p)))
-	out.append(LOOK.face)
+	out.append(Layer.new(LOOK, &"face"))
 	if not (hat and hat.hides_hair and hat.worn and hat.worn.has_animation(frame)):
-		out.append(LOOK.hair)
+		out.append(Layer.new(LOOK, &"hair"))
 	_add(out, [hat, weapon])
-	out.append_array(held.get(HeldDef.Layer.OVER_CLOTHES, []))
+	_add(out, held.get(HeldDef.Layer.OVER_CLOTHES, []), true)
 	if shown and not (top and top.long_sleeves and frame in LOOK.bare_arm_frames):
-		out.append(LOOK.hands)
-	out.append_array(held.get(HeldDef.Layer.OVER_HANDS, []))
+		out.append(Layer.new(LOOK, &"hands"))
+	_add(out, held.get(HeldDef.Layer.OVER_HANDS, []), true)
+	out = out.filter(func(l: Layer): return l.shows(frame))
+	# A piece moved up or down the stack goes just past the one it is moved over or under.
+	var keys := {}
+	for i in out.size():
+		var w := out[i].steps(frame)
+		keys[out[i]] = Vector2(i + w + signf(w) * 0.5, i)
+	out.sort_custom(func(a: Layer, b: Layer): return keys[a] < keys[b])
 	return out
 
 static func _shows(e: EquipDef, frame: StringName) -> bool:
 	return e.held.shows(frame) if e.held else e.worn != null and e.worn.has_animation(frame)
 
-static func _add(out: Array, gear: Array) -> void:
+## Adds each piece of `gear` worn as a layer (or, with `held`, its held painting); nulls are skipped.
+static func _add(out: Array[Layer], gear: Array, held := false) -> void:
 	for e in gear:
-		if e and (e as EquipDef).worn:
-			out.append((e as EquipDef).worn)
+		if e and ((e as EquipDef).held if held else (e as EquipDef).worn):
+			out.append(Layer.new(e))
 
 func _new_layer() -> Sprite3D:
 	var s := Sprite3D.new()
@@ -137,3 +141,79 @@ func _new_layer() -> Sprite3D:
 	s.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	_owner.add_child(s)
 	return s
+
+## One layer of his stack: a piece of gear (its worn frames or held painting) or one of his own
+## parts (LOOK's body, face, hair or fists), and where it sits on a frame. Moved by hand in the
+## pose editor (scenes/dev/hero_pose_editor.tscn).
+class Layer:
+	## The EquipDef, or LOOK for his own parts.
+	var owner: Resource
+	## Which of LOOK's parts (&"body", &"face", &"hair", &"hands"); empty for gear.
+	var part: StringName
+	## Texture -> the middle of its painted pixels, what a moved piece turns around.
+	static var _middles := {}
+
+	func _init(o: Resource, p := &"") -> void:
+		owner = o
+		part = p
+
+	## The held painting, when this is a held piece.
+	func held() -> HeldDef:
+		return (owner as EquipDef).held if owner is EquipDef else null
+
+	## Its frames, when this is a worn layer or one of his parts.
+	func frames() -> SpriteFrames:
+		if owner is EquipDef:
+			return (owner as EquipDef).worn
+		return owner.get(part) as SpriteFrames
+
+	## Frame -> Vector4(x, y, degrees clockwise, places up the stack) it is moved by. A held
+	## piece is placed by its pins instead (HeldDef.pins).
+	func nudges() -> Dictionary:
+		if owner is EquipDef:
+			return (owner as EquipDef).nudges
+		return (owner as HeroLookDef).nudges.get(part, {})
+
+	## Moves it by `n` on `frame` (see nudges); zero clears it.
+	func set_nudge(frame: StringName, n: Vector4) -> void:
+		var all := (owner as EquipDef).nudges if owner is EquipDef else (owner as HeroLookDef).nudges.get_or_add(part, {}) as Dictionary
+		if n == Vector4.ZERO:
+			all.erase(frame)
+		else:
+			all[frame] = n
+
+	func shows(frame: StringName) -> bool:
+		var h := held()
+		if h:
+			return h.shows(frame)
+		var f := frames()
+		return f != null and f.has_animation(frame)
+
+	func texture(frame: StringName) -> Texture2D:
+		var h := held()
+		return h.texture() if h else frames().get_frame_texture(frame, 0)
+
+	## How many places up (negative: down) the stack it is moved on `frame`.
+	func steps(frame: StringName) -> int:
+		return 0 if held() else int((nudges().get(frame, Vector4.ZERO) as Vector4).w)
+
+	## The point of its painting that sits on its pin and that it turns around.
+	func anchor(frame: StringName) -> Vector2:
+		var h := held()
+		if h:
+			return h.anchor
+		var tex := texture(frame)
+		if not _middles.has(tex):
+			_middles[tex] = Rect2(tex.get_image().get_used_rect()).get_center()
+		return _middles[tex]
+
+	## Vector3(x, y, degrees clockwise): where its anchor sits on `frame`, in his frame's pixels
+	## (worn layers are painted the size of his frames and line up corner to corner).
+	func pin(frame: StringName) -> Vector3:
+		var h := held()
+		if h:
+			var p: Vector4 = h.pins[frame]
+			return Vector3(p.x, p.y, p.z)
+		var n: Vector4 = nudges().get(frame, Vector4.ZERO)
+		var a := anchor(frame)
+		return Vector3(a.x + n.x, a.y + n.y, n.z)

@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://scripts/dev/hero_grip_editor.gd" id="1_editor"]
+[ext_resource type="Script" path="res://scripts/dev/hero_pose_editor.gd" id="1_editor"]
 
-[node name="HeroGripEditor" type="Control"]
+[node name="HeroPoseEditor" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

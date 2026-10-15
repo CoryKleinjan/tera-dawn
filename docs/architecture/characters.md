@@ -19,8 +19,12 @@ then character select shows the list (name, level and job) with the new characte
   cell named like `idle1` or `walk2`), so layers line up frame by frame; `hides_hair` (helmets,
   hats) sets where it stacks. A weapon or off-hand is instead `EquipDef.held` (`HeldDef`,
   `data/hero/held/`): ONE painting pinned per frame (anchor point, spot, turn and layer), the
-  MapleStory way. Place pins by hand in `scenes/dev/hero_grip_editor.tscn` (play it in Godot:
-  drag, wheel to turn, PgUp/PgDn for the layer, Save writes the file). A character has no picked appearance
+  MapleStory way. Pose him by hand in `scenes/dev/hero_pose_editor.tscn` (play it in Godot:
+  pick the job, pose and what he wears from the dropdowns, click any piece and drag it, wheel to
+  turn, PgUp/PgDn to move it up or down the stack, Save writes the files). Held pieces save to
+  their pins; worn layers to `EquipDef.nudges` and his body, face, hair and fists to
+  `HeroLookDef.nudges` (frame -> Vector4: shift, turn, places up the stack), applied whole by
+  `HeroBody.Layer`. A character has no picked appearance
   yet; older saves that carry one still load.
 - **One body for every hero**: your hero (`TDPlayer`) and other players' (`TDAvatar`) each
   work out what they are doing (from your keys, or from the snapshot: an animation name such
