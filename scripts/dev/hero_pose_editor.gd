@@ -9,9 +9,10 @@ extends Control
 ##
 ##   Left/Right  pose          Tab        next piece       Wheel or Q/E (Shift+Q/E: fine)  turn
 ##   Shift+wheel or [ ]  smaller/bigger (Shift+[ ]: fine)
-##   PgUp/PgDn   up/down stack H          add here / delete here
-##   Add here button  pick a piece that has a painting for this pose and isn't on it
-##   A or Insert  add the picked piece to this frame (only with its own painting for it)
+##   PgUp/PgDn   up/down stack H          show / hide the picked piece here
+##   Shown here  a checkbox per piece: ticked shows it on this pose, unticked takes it off (a
+##               piece with no painting for this pose can't be ticked); click a name to pick it
+##   A or Insert  show the picked piece on this frame (only with its own painting for it)
 ##   Delete or Backspace  delete the piece from this frame
 ##   C           copy the previous frame's place           R    reset the piece on this frame
 ##   Arrow Up/Down  move 0.5 px (with Shift: left/right)   Space  play the walk   Ctrl+S  save
@@ -55,8 +56,8 @@ var _pose_menu: OptionButton
 var _piece_menu: OptionButton
 var _wear_menus := {}  # place -> OptionButton
 var _choices := {}  # place -> [null, EquipDef...] the job can wear there, in its dropdown's order
-var _add_menu: PopupMenu
-var _add_list: Array[HeroBody.Layer] = []  # what _add_menu offers, in its order
+var _shown_row: HFlowContainer  # the Shown here checkboxes
+var _shown_boxes: Array[CheckBox] = []  # one per piece in _pieces (null for his body)
 
 func _ready() -> void:
 	var rest: Array[StringName] = []
@@ -99,16 +100,15 @@ func _build_ui() -> void:
 	rows.add_child(tools)
 	for b in [["< Pose", func(): _step(-1)], ["Pose >", func(): _step(1)], ["Turn left", func(): _turn(-2.0)], ["Turn right", func(): _turn(2.0)], ["Smaller", func(): _resize(-SIZE_STEP)],
 			["Bigger", func(): _resize(SIZE_STEP)], ["Down the stack", func(): _restack(-1)],
-			["Up the stack", func(): _restack(1)], ["Add here", _show_add_menu], ["Delete here", _delete_here], ["Copy previous", _copy_prev],
+			["Up the stack", func(): _restack(1)], ["Copy previous", _copy_prev],
 			["Reset piece", _reset], ["Reset pose", _reset_pose], ["Play walk", _play], ["Save", _save]]:
 		var btn := Button.new()
 		btn.text = b[0]
 		btn.focus_mode = Control.FOCUS_NONE
 		btn.pressed.connect(b[1])
 		tools.add_child(btn)
-	_add_menu = PopupMenu.new()
-	_add_menu.id_pressed.connect(_add_picked)
-	add_child(_add_menu)
+	_shown_row = HFlowContainer.new()
+	rows.add_child(_shown_row)
 	_info = Label.new()
 	rows.add_child(_info)
 	_status = Label.new()
@@ -136,6 +136,7 @@ func _sync() -> void:
 	_hair_menu.select(_hair)
 	_pose_menu.select(_frame)
 	_piece_menu.select(_piece)
+	_sync_shown()
 	queue_redraw()
 
 ## Shows `i` of the job list in his starter gear: in each place, the first thing (lowest level)
@@ -205,6 +206,54 @@ func _pieces_changed() -> void:
 		_piece_menu.add_item(_name(_pieces[i]))
 		if _same(_pieces[i], picked):
 			_piece = i
+	_build_shown()
+	_sync()
+
+## One checkbox per piece but his body, then its name (click the name to pick the piece).
+func _build_shown() -> void:
+	for c in _shown_row.get_children():
+		c.queue_free()
+	_shown_boxes.clear()
+	var title := Label.new()
+	title.text = "Shown here:"
+	_shown_row.add_child(title)
+	for i in _pieces.size():
+		if _pieces[i].part == &"body":
+			_shown_boxes.append(null)
+			continue
+		var pair := HBoxContainer.new()
+		_shown_row.add_child(pair)
+		var box := CheckBox.new()
+		box.focus_mode = Control.FOCUS_NONE
+		box.toggled.connect(func(on): _show_here(i, on))
+		pair.add_child(box)
+		var pick := Button.new()
+		pick.focus_mode = Control.FOCUS_NONE
+		pick.text = _name(_pieces[i])
+		pick.pressed.connect(func(): _piece = i; _sync())
+		pair.add_child(pick)
+		_shown_boxes.append(box)
+
+## Ticks each piece that is drawn on this frame; a worn piece with no painting for it can't be ticked.
+func _sync_shown() -> void:
+	for i in _shown_boxes.size():
+		var box := _shown_boxes[i]
+		if box == null:
+			continue
+		var l := _pieces[i]
+		var on := _drawn(l)
+		box.set_pressed_no_signal(on)
+		var f := l.frames()
+		box.disabled = not on and not l.held() and not (f and f.has_animation(_f()))
+		box.tooltip_text = "No painting for %s" % _f() if box.disabled else ""
+
+## Shows piece `i` on this frame or takes it off, from its checkbox.
+func _show_here(i: int, on: bool) -> void:
+	_piece = i
+	if on:
+		_add_here()
+	else:
+		_delete_here()
 	_sync()
 
 func _sel() -> HeroBody.Layer:
@@ -342,6 +391,7 @@ func _move_to(at: Vector2, deg: float) -> void:
 func _changed(res: Resource) -> void:
 	_dirty[res] = true
 	_status.text = "Changed (not saved yet)"
+	_sync_shown()
 	queue_redraw()
 
 func _nudge(d: Vector2) -> void:
@@ -412,30 +462,6 @@ func _delete_here() -> void:
 		l.set_nudge(_f(), Vector4.ZERO)
 		l.set_size(_f(), 1.0)
 		_changed(l.owner)
-
-## Lists the pieces that have a painting for this pose and are not on it yet (held pieces,
-## one painting each, fit any pose), to add one.
-func _show_add_menu() -> void:
-	_add_menu.clear()
-	_add_list.clear()
-	for l in _pieces:
-		if _drawn(l) or l.part == &"body":
-			continue
-		var f := l.frames()
-		if l.held() or (f and f.has_animation(_f())):
-			_add_list.append(l)
-			_add_menu.add_item(_name(l), _add_list.size() - 1)
-	if _add_list.is_empty():
-		_status.text = "Every piece with a painting for %s is already on it" % _f()
-		return
-	_add_menu.position = Vector2i(get_global_mouse_position()) + Vector2i(get_window().position)
-	_add_menu.reset_size()
-	_add_menu.popup()
-
-func _add_picked(i: int) -> void:
-	_piece = _pieces.find(_add_list[i])
-	_add_here()
-	_sync()
 
 ## Puts the picked piece on this frame with its own painting for this frame (each piece has one
 ## painting per pose); a held piece starts where the previous frame had it.

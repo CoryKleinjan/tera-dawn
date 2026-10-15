@@ -28,9 +28,9 @@ then character select shows the list (name, level and job) with the new characte
   to `EquipDef.nudges`, a face or hairstyle to its `HeroStyleDef.nudges` and his body and fists
   to `HeroLookDef.nudges` (frame ->
   Vector4: shift, turn, places up the stack), and sizes to each one's `sizes` (frame -> share
-  of its painted size), applied whole by `HeroBody.Layer`. Add here / Delete here put a piece
-  on a frame or take it off; the Add here button lists only the pieces with their own painting
-  for that pose (held pieces fit any pose). Held pieces gain or lose that frame's pin; worn
+  of its painted size), applied whole by `HeroBody.Layer`. The Shown here checkboxes put a piece
+  on a frame or take it off; a worn piece with no painting of its own for that pose can't be
+  ticked (held pieces fit any pose). Held pieces gain or lose that frame's pin; worn
   layers and his parts record it in `frame_art` (frame -> the frame whose painting shows there,
   or "" when deleted), and an added piece shows even where the stack
   would leave it off (hair under a hat, fists with no weapon out). A character has no picked appearance
