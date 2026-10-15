@@ -27,7 +27,7 @@ animations = {
 &"rope": {"fps": 4.0, "frames": [&"rope1", &"rope2"], "loop": true},
 &"sit": {"fps": 1.0, "frames": [&"sit"], "loop": true},
 &"throw": {"fps": 12.0, "frames": [&"throw1", &"throw2", &"throw3"], "loop": false},
-&"walk": {"fps": 6.0, "frames": [&"walk1", &"walk2", &"walk3", &"walk2"], "loop": true}
+&"walk": {"fps": 3.5, "frames": [&"walk1", &"walk2", &"walk3", &"walk2"], "loop": true}
 }
 same_as = {
 &"fall": &"jump",
@@ -38,4 +38,4 @@ same_as = {
 &"slash": &"attack",
 &"turn": &"idle"
 }
-weapon_behind = Array[StringName]([&"swing1", &"cast1"])
+weapon_behind = Array[StringName]([&"swing1"])
