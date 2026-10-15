@@ -1,14 +1,17 @@
 extends Control
 ## Poses the hero by hand, frame by frame: open scenes/dev/hero_pose_editor.tscn in Godot and play
 ## it (F6). It draws him the way the game does (HeroBody.layers) in one job's starter gear (pick
-## the job, pose and piece from the dropdowns). Click any piece (his body, face, hair, fists, a piece of clothing, a weapon or off-hand) to pick it,
+## the job, his face and hairstyle, the pose and piece from the dropdowns). Click any piece (his body, face, hair, fists, a piece of clothing, a weapon or off-hand) to pick it,
 ## drag to move it, the mouse wheel turns it, Shift+wheel or [ ] makes it bigger or smaller, and Save writes it back (held pieces to their pins in
-## data/hero/held/, clothes to their item, his own parts to data/hero/look.tres), so each save
+## data/hero/held/, clothes to their item, his face or hairstyle to its file in data/hero/faces/ or
+## data/hero/hairs/, his body and fists to data/hero/look.tres), so each save
 ## replaces the last.
 ##
 ##   Left/Right  pose          Tab        next piece       Wheel or Q/E (Shift+Q/E: fine)  turn
 ##   Shift+wheel or [ ]  smaller/bigger (Shift+[ ]: fine)
-##   PgUp/PgDn   up/down stack H          show/hide here (held pieces)
+##   PgUp/PgDn   up/down stack H          add here / delete here
+##   A or Insert  add the piece to this frame (another frame's painting if it has none here)
+##   Delete or Backspace  delete the piece from this frame
 ##   C           copy the previous frame's place           R    reset the piece on this frame
 ##   Arrow Up/Down  move 0.5 px (with Shift: left/right)   Space  play the walk   Ctrl+S  save
 
@@ -23,7 +26,7 @@ const PLACES := [&"weapon", &"shield", &"hat", &"top", &"bottom", &"shoes", &"gl
 ## How much one step of Smaller/Bigger changes a piece's size (Shift: a fine step).
 const SIZE_STEP := 0.05
 const SIZE_FINE := 0.01
-const PART_NAMES := {&"body": "his body", &"face": "his face", &"hair": "his hair", &"hands": "his fists"}
+const PART_NAMES := {&"body": "his body", &"face": "his face", &"hair": "his hair", &"hair_under": "his hair under the hat", &"hands": "his fists"}
 
 var _jobs: Array[StringName] = []
 var _job := 0
@@ -43,6 +46,10 @@ var _rows: VBoxContainer
 var _info: Label
 var _status: Label
 var _job_menu: OptionButton
+var _face := 0  # which of HeroBody.LOOK.faces he has
+var _hair := 0  # which of HeroBody.LOOK.hairs he has
+var _face_menu: OptionButton
+var _hair_menu: OptionButton
 var _pose_menu: OptionButton
 var _piece_menu: OptionButton
 var _wear_menus := {}  # place -> OptionButton
@@ -77,6 +84,8 @@ func _build_ui() -> void:
 	var bar := HBoxContainer.new()
 	rows.add_child(bar)
 	_job_menu = _menu(bar, "Job", _jobs.map(_job_name), _pick_job)
+	_face_menu = _menu(bar, "Face", HeroBody.LOOK.faces.map(_style_name), func(i): _face = i; _pieces_changed())
+	_hair_menu = _menu(bar, "Hair", HeroBody.LOOK.hairs.map(_style_name), func(i): _hair = i; _pieces_changed())
 	_pose_menu = _menu(bar, "Pose", _frames.map(func(f): return String(f)), func(i): _frame = i; _playing = false; _sync())
 	_piece_menu = _menu(bar, "Piece", [], func(i): _piece = i; _sync())
 	var wear := HFlowContainer.new()
@@ -87,7 +96,7 @@ func _build_ui() -> void:
 	rows.add_child(tools)
 	for b in [["< Pose", func(): _step(-1)], ["Pose >", func(): _step(1)], ["Turn left", func(): _turn(-2.0)], ["Turn right", func(): _turn(2.0)], ["Smaller", func(): _resize(-SIZE_STEP)],
 			["Bigger", func(): _resize(SIZE_STEP)], ["Down the stack", func(): _restack(-1)],
-			["Up the stack", func(): _restack(1)], ["Show/Hide here", _toggle], ["Copy previous", _copy_prev],
+			["Up the stack", func(): _restack(1)], ["Add here", _add_here], ["Delete here", _delete_here], ["Copy previous", _copy_prev],
 			["Reset piece", _reset], ["Reset pose", _reset_pose], ["Play walk", _play], ["Save", _save]]:
 		var btn := Button.new()
 		btn.text = b[0]
@@ -114,9 +123,11 @@ func _menu(bar: Container, label: String, items: Array, picked: Callable) -> Opt
 	pair.add_child(m)
 	return m
 
-## Shows the job, pose and piece picked in the dropdowns and redraws.
+## Shows the job, face, hair, pose and piece picked in the dropdowns and redraws.
 func _sync() -> void:
 	_job_menu.select(_job)
+	_face_menu.select(_face)
+	_hair_menu.select(_hair)
 	_pose_menu.select(_frame)
 	_piece_menu.select(_piece)
 	queue_redraw()
@@ -125,6 +136,20 @@ func _sync() -> void:
 ## the job can wear there that has a look.
 func _job_name(job: StringName) -> String:
 	return String(job).capitalize() if job else "No job"
+
+func _style_name(style: HeroStyleDef) -> String:
+	return style.display_name if style.display_name else String(style.id)
+
+## His face and hairstyle as picked.
+func _face_style() -> HeroStyleDef:
+	return HeroBody.LOOK.faces[_face]
+
+func _hair_style() -> HeroStyleDef:
+	return HeroBody.LOOK.hairs[_hair]
+
+## His layers on this frame, the way the game stacks them.
+func _stack() -> Array[HeroBody.Layer]:
+	return HeroBody.layers(_outfit, _f(), _face_style(), _hair_style())
 
 func _pick_job(i: int) -> void:
 	_job = i
@@ -162,8 +187,12 @@ func _pieces_changed() -> void:
 			var h: HeldDef = _outfit[place].held
 			if h and not _saved_pins.has(h):
 				_saved_pins[h] = [h.pins.duplicate(), h.sizes.duplicate()]
+	var hat: EquipDef = _outfit.get(&"hat")
+	var under: HeroStyleDef = _hair_style().under_hats.get(hat.id) if hat else null
 	for part in PART_NAMES:
-		_pieces.append(HeroBody.Layer.new(HeroBody.LOOK, part))
+		var owner: Resource = {&"face": _face_style(), &"hair": _hair_style(), &"hair_under": under}.get(part, HeroBody.LOOK)
+		if owner:
+			_pieces.append(HeroBody.Layer.new(owner, part))
 	_piece = 0
 	_piece_menu.clear()
 	for i in _pieces.size():
@@ -216,7 +245,7 @@ func _draw() -> void:
 	draw_rect(Rect2(Vector2.ZERO, size), BG)
 	var o := _origin()
 	draw_rect(Rect2(o, _frame_size() * _zoom()), Color(0, 0, 0, 0.06), false)
-	for l in HeroBody.layers(_outfit, _f()):
+	for l in _stack():
 		var p := l.pin(_f())
 		var a := l.anchor(_f())
 		var k := l.size(_f())
@@ -228,7 +257,7 @@ func _draw() -> void:
 
 ## The topmost piece with paint under `at` (screen position), or null.
 func _piece_at(at: Vector2) -> HeroBody.Layer:
-	var stack := HeroBody.layers(_outfit, _f())
+	var stack := _stack()
 	stack.reverse()
 	for l in stack:
 		var p := l.pin(_f())
@@ -277,6 +306,8 @@ func _unhandled_key_input(ev: InputEvent) -> void:
 		KEY_PAGEUP: _restack(1)
 		KEY_PAGEDOWN: _restack(-1)
 		KEY_H: _toggle()
+		KEY_A, KEY_INSERT: _add_here()
+		KEY_DELETE, KEY_BACKSPACE: _delete_here()
 		KEY_C: _copy_prev()
 		KEY_R: _reset()
 		KEY_Q: _turn(-0.5 if ev.shift_pressed else -2.0)
@@ -347,18 +378,65 @@ func _restack(d: int) -> void:
 		l.set_nudge(_f(), Vector4(n.x, n.y, n.z, n.w + d))
 		_changed(l.owner)
 
-## Shows or hides a held piece on this frame (clothes and his parts show wherever they are painted).
+## Deletes the picked piece from this frame if it shows here, else adds it.
 func _toggle() -> void:
 	var l := _sel()
-	var h := l.held() if l else null
-	if h == null:
-		_status.text = "Only a held weapon or off-hand can be shown or hidden per frame"
+	if l and l.shows(_f()) and _drawn(l):
+		_delete_here()
+	else:
+		_add_here()
+
+## Whether the picked piece is drawn on this frame (the stack can leave a piece off: the
+## off-hand with the weapon put away, hair under a hat, fists with no weapon out).
+func _drawn(l: HeroBody.Layer) -> bool:
+	return _stack().any(func(o): return _same(o, l))
+
+## Takes the picked piece off this frame entirely.
+func _delete_here() -> void:
+	var l := _sel()
+	if l == null:
 		return
-	if h.shows(_f()):
+	var h := l.held()
+	if h:
 		h.pins.erase(_f())
+		h.sizes.erase(_f())
 		_changed(h)
 	else:
-		_copy_prev()
+		l.set_frame_art(_f(), &"")
+		l.set_nudge(_f(), Vector4.ZERO)
+		l.set_size(_f(), 1.0)
+		_changed(l.owner)
+
+## Puts the picked piece on this frame: its own painting for this frame if it has one, else the
+## painting (and place) of the nearest earlier frame that shows it, to move into place.
+func _add_here() -> void:
+	var l := _sel()
+	if l == null:
+		return
+	var h := l.held()
+	if h:
+		if not h.shows(_f()):
+			_copy_prev()
+			if not h.shows(_f()):
+				h.pins[_f()] = Vector4(_frame_size().x / 2.0, _frame_size().y / 2.0, 0, HeldDef.Layer.OVER_CLOTHES)
+				_changed(h)
+		if not _drawn(l):
+			_status.text = "Added, but the off-hand only shows when the weapon does: add the weapon here too"
+		return
+	var f := l.frames()
+	if f == null:
+		return
+	if f.has_animation(_f()):
+		l.set_frame_art(_f(), _f())
+	else:
+		for i in range(_frame - 1, _frame - _frames.size(), -1):
+			var g := _frames[posmod(i, _frames.size())]
+			if l.shows(g):
+				l.set_frame_art(_f(), l.art(g))
+				l.set_nudge(_f(), l.nudges().get(g, Vector4.ZERO))
+				l.set_size(_f(), l.size(g))
+				break
+	_changed(l.owner)
 
 ## Puts the picked piece back on this frame: where it is painted, or a held piece where it was
 ## last saved.

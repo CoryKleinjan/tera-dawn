@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="HeroStyleDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/hero_style_def.gd" id="1_style"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/hero/face.tres" id="2_frames"]
+
+[resource]
+script = ExtResource("1_style")
+id = &"plain"
+display_name = "Plain"
+frames = ExtResource("2_frames")
+nudges = {
+&"ambush1": Vector4(14.9, 18.9, 36, 0),
+&"anchor1": Vector4(-2.9, 3.8, 3, 0),
+&"anchor2": Vector4(-25.2, 8.9, -12, 0),
+&"backstep": Vector4(-11.9, -12.3, 3, 0),
+&"blink": Vector4(7, 12.8, 15, 0),
+&"cast1": Vector4(-13.1, -1, -30, 0),
+&"cast2": Vector4(-3.6, 0.4, -0, 0),
+&"gravity1": Vector4(-7.8, 6, 0, 0),
+&"gravity2": Vector4(7.8, 28, 3, 0),
+&"hurt": Vector4(-10.1, 9.3, -24, 0),
+&"leap": Vector4(23.1, -14.1, 15, 0),
+&"lunge": Vector4(25.7, 3.8, 3, 0),
+&"pinning": Vector4(3.4, 5.6, 15, 0),
+&"roll1": Vector4(8.3, 14.9, 45, 0),
+&"roll2": Vector4(9.9, 21, -174, 0),
+&"sit": Vector4(-3.6, 23.7, 0, 0),
+&"skyward1": Vector4(16.8, 17.7, 20, 0),
+&"skyward2": Vector4(-0.2, -6.7, 0, 0),
+&"swing1": Vector4(-1.6, 4.9, -9, 0),
+&"swing2": Vector4(7, 6.5, 15, 0),
+&"swing3": Vector4(17, 13.9, 18, 0)
+}

@@ -27,18 +27,27 @@ const OFFHAND_NAMES := {&"shield": "a shield", &"star": "throwing stars", &"book
 @export_group("Worn look")
 ## Its painted layer on the hero (art/sheets/hero_<id>.json), frames named as in HeroLookDef.
 ## Frames it has no painting for show the hero without it. Null shows nothing.
-@export var worn: SpriteFrames
+@export var worn: SpriteFrames:
+	set(v):
+		worn = v
+		_icon_from_look()
 ## Its worn layer moved by hand in the pose editor: frame -> Vector4(x, y, degrees clockwise,
 ## places up the stack) (HeroBody.Layer). A held piece uses its pins instead.
 @export var nudges: Dictionary = {}
 ## Frame -> how big its look is drawn there (1.0 as painted), set in the pose editor; its worn
 ## layer or held painting grows or shrinks around the point it turns around.
 @export var sizes: Dictionary = {}
+## Frames changed in the pose editor's Add/Delete: frame -> the frame whose painting shows there
+## (another frame's, when added to a frame it has no painting for), or &"" when deleted there.
+@export var frame_art: Dictionary = {}
 ## A hat or helmet that covers his hair, so the hair layer isn't drawn under it.
 @export var hides_hair := false
 ## A weapon or off-hand: one painting held in his hand, pinned per frame (HeldDef), drawn instead
 ## of `worn`.
-@export var held: HeldDef
+@export var held: HeldDef:
+	set(v):
+		held = v
+		_icon_from_look()
 ## A top whose long sleeves reach his wrists (a robe), so the fists painted with bare forearms
 ## (HeroLookDef.bare_arm_frames) aren't drawn over them.
 @export var long_sleeves := false
@@ -62,6 +71,26 @@ const OFFHAND_NAMES := {&"shield": "a shield", &"star": "throwing stars", &"book
 
 func tab() -> Tab:
 	return Tab.EQUIP
+
+## Gear with no icon of its own shows what he wears: its held painting, or its standing (idle1)
+## frame, with the empty space around it dropped.
+func _icon_from_look() -> void:
+	if icon:
+		return
+	var tex: Texture2D = held.texture() if held else (worn.get_frame_texture(&"idle1", 0) if worn and worn.has_animation(&"idle1") else null)
+	if tex == null:
+		return
+	var used := tex.get_image().get_used_rect()
+	if used.size == Vector2i.ZERO:
+		return
+	var a := AtlasTexture.new()
+	if tex is AtlasTexture:
+		a.atlas = (tex as AtlasTexture).atlas
+		a.region = Rect2((tex as AtlasTexture).region.position + Vector2(used.position), used.size)
+	else:
+		a.atlas = tex
+		a.region = Rect2(used)
+	icon = a
 
 func stack_size() -> int:
 	return 1

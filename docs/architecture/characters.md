@@ -12,20 +12,27 @@ then character select shows the list (name, level and job) with the new characte
 - **Outfit** choices come from the starting job's `creator_gear` (one piece per kind). It is
   empty while the gear is being remade, so the creator offers no outfit for now.
 - **Layered look**: the hero is drawn from painted layers, MapleStory style. `HeroLookDef`
-  (`data/hero/look.tres`) holds his body, face and hair and which frames each animation shows
-  (`"<anim>_<weapon kind>"` overrides it, like `attack_bow`; an animation with no frames, such as
-  an attack for now, shows him standing). Each piece of gear's
+  (`data/hero/look.tres`) holds his body and fists, the faces and hairstyles he can have (each a
+  `HeroStyleDef` in `data/hero/faces/` or `data/hero/hairs/`, with its own placements; the first
+  of each is his default, `HeroBody.face_style`/`hair_style`) and which frames each animation
+  shows (`"<anim>_<weapon kind>"` overrides it, like `attack_bow`; an animation with no frames
+  shows him standing). Each piece of gear's
   `EquipDef.worn` is its layer, cut from the same cells (`art/sheets/hero_*.json`, one frame per
   cell named like `idle1` or `walk2`), so layers line up frame by frame; `hides_hair` (helmets,
   hats) sets where it stacks. A weapon or off-hand is instead `EquipDef.held` (`HeldDef`,
   `data/hero/held/`): ONE painting pinned per frame (anchor point, spot, turn and layer), the
   MapleStory way. Pose him by hand in `scenes/dev/hero_pose_editor.tscn` (play it in Godot:
-  pick the job ("No job" for the plain hero), pose and what he wears from the dropdowns, click
+  pick the job ("No job" for the plain hero), face, hair, pose and what he wears from the dropdowns, click
   any piece and drag it, wheel or Q/E to turn, Shift+wheel or [ ] to resize, PgUp/PgDn to move
   it up or down the stack, Save writes the files). Held pieces save to their pins; worn layers
-  to `EquipDef.nudges` and his body, face, hair and fists to `HeroLookDef.nudges` (frame ->
+  to `EquipDef.nudges`, a face or hairstyle to its `HeroStyleDef.nudges` and his body and fists
+  to `HeroLookDef.nudges` (frame ->
   Vector4: shift, turn, places up the stack), and sizes to each one's `sizes` (frame -> share
-  of its painted size), applied whole by `HeroBody.Layer`. A character has no picked appearance
+  of its painted size), applied whole by `HeroBody.Layer`. Add here / Delete here put a piece
+  on a frame or take it off: held pieces gain or lose that frame's pin; worn layers and his parts
+  record it in `frame_art` (frame -> the frame whose painting shows there, another frame's when
+  added where it has none, or "" when deleted), and an added piece shows even where the stack
+  would leave it off (hair under a hat, fists with no weapon out). A character has no picked appearance
   yet; older saves that carry one still load.
 - **One body for every hero**: your hero (`TDPlayer`) and other players' (`TDAvatar`) each
   work out what they are doing (from your keys, or from the snapshot: an animation name such

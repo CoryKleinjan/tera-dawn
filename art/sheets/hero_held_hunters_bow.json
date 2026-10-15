@@ -1,0 +1,45 @@
+{
+  "source": "art/source/hero/held/hunters_bow.png",
+  "out_dir": "art/build/hero/held/hunters_bow",
+  "cells": [
+    [
+      "held"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      572
+    ],
+    "cols": [
+      0,
+      129
+    ]
+  },
+  "inset": 0,
+  "label_band": 0,
+  "trim": false,
+  "dark_key": false,
+  "defringe": false,
+  "scale": 0.111,
+  "save": false,
+  "sets": {
+    "hero_held_hunters_bow": {
+      "frames": {
+        "held": "hero_held_hunters_bow:held"
+      },
+      "anchor": "cell",
+      "baseline": "cell",
+      "out": "assets/sprites/hero/held/hunters_bow.png",
+      "sprite_frames": "assets/animations/hero/held/hunters_bow.tres",
+      "animations": {
+        "held": {
+          "frames": [
+            "held"
+          ],
+          "fps": 1
+        }
+      }
+    }
+  }
+}

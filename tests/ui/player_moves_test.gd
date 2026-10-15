@@ -90,12 +90,12 @@ func test_backstep_springs_back_still_facing_ahead() -> void:
 	check(me.position.x < FLOOR.x - 60.0, "well back")
 	check_eq(me.face, 1, "still facing ahead")
 
-func test_rolling_dash_rolls_low_on_the_ground() -> void:
+func test_rolling_dash_rolls_curled_up_on_the_ground() -> void:
 	var skill: SkillDef = await _learn(&"rolling_dash")
 	await _stand()
 	me._use(skill)
 	await ui.ticks(2)
-	check_eq(me._animation(), &"crouch", "low")
+	check_eq(me._animation(), skill.animation, "curled up in its roll pose")
 	check(ui.player().dodge_t > 0, "the server won't let anything hit him")
 	await ui.ticks(skill.move.ticks)
 	check(me.position.x > FLOOR.x + 80.0, "rolled ahead")

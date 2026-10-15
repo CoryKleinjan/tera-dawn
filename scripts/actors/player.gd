@@ -73,6 +73,8 @@ const CHEER_TICKS := 50
 const LOOT_EVERY := 4
 ## Ticks of the combat-ready stance after an attack, before he relaxes into idle.
 const READY_TICKS := 120
+## Fewest ticks a movement skill's pose shows (a Blink itself is over at once).
+const MOVE_POSE_TICKS := 10
 ## Ticks of the turn pose when he turns round while moving fast on the ground.
 const TURN_TICKS := 5
 ## Ground speed above which turning round skids (kicks up dust and shows the turn pose).
@@ -389,8 +391,9 @@ func _start_move(skill: SkillDef, aim: Hitbox.Aim) -> void:
 			on_ground = false
 	_jumping = false
 	jump_grace.cancel()
-	if m.style == MoveDef.Style.CHARGE and not skill.is_spell():
-		action_t = m.ticks
+	# every move has its own pose
+	if not skill.is_spell():
+		action_t = maxi(m.ticks, MOVE_POSE_TICKS)
 		action_anim = skill.animation
 	Net.ask(&"req_skill", [skill.id, from, face, aim])
 	TDMoveFx.play(world, m, from, position, self)
@@ -598,8 +601,6 @@ func _animation() -> StringName:
 		return action_anim
 	if inv > SimPlayer.HURT_INV - HURT_POSE_TICKS and inv <= SimPlayer.HURT_INV: # just got hit (see knock_back)
 		return &"hurt"
-	if _move_t > 0 and _move_def.style == MoveDef.Style.ROLL:
-		return &"crouch" # rolls low (a roll pose comes with the rebuilt hero)
 	if not on_ground:
 		if absf(vel.y) < APEX_SPEED:
 			return &"jump_apex"
