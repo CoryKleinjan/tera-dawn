@@ -23,6 +23,9 @@ extends Resource
 ## His own parts drawn bigger or smaller in the pose editor: part -> {frame: size} (1.0 as
 ## painted).
 @export var sizes: Dictionary = {}
+## His own parts added to or deleted from frames in the pose editor: part -> {frame: the frame
+## whose painting shows there, or &"" when deleted} (EquipDef.frame_art).
+@export var frame_art: Dictionary = {}
 ## Animation name (what TDPlayer._animation() says he is doing) -> {"frames": [frame names],
 ## "fps": frames a second, "loop": whether it repeats}. "<name>_<weapon kind>" is used instead
 ## while that kind of weapon is held (a bow's "attack_bow").

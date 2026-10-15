@@ -113,12 +113,14 @@ static func layers(worn: Dictionary, frame: StringName) -> Array[Layer]:
 	_add(out, held.get(HeldDef.Layer.UNDER_TOP, []), true)
 	_add(out, OVER.map(func(p): return worn.get(p)))
 	out.append(Layer.new(LOOK, &"face"))
-	if not (hat and hat.hides_hair and hat.worn and hat.worn.has_animation(frame)):
-		out.append(Layer.new(LOOK, &"hair"))
+	var hair := Layer.new(LOOK, &"hair")
+	if hair.added(frame) or not (hat and hat.hides_hair and Layer.new(hat).shows(frame)):
+		out.append(hair)
 	_add(out, [hat, weapon])
 	_add(out, held.get(HeldDef.Layer.OVER_CLOTHES, []), true)
-	if (shown or frame in LOOK.resting_hand_frames) and not (top and top.long_sleeves and frame in LOOK.bare_arm_frames):
-		out.append(Layer.new(LOOK, &"hands"))
+	var hands := Layer.new(LOOK, &"hands")
+	if hands.added(frame) or (shown or frame in LOOK.resting_hand_frames) and not (top and top.long_sleeves and frame in LOOK.bare_arm_frames):
+		out.append(hands)
 	_add(out, held.get(HeldDef.Layer.OVER_HANDS, []), true)
 	out = out.filter(func(l: Layer): return l.shows(frame))
 	# A piece moved up or down the stack goes just past the one it is moved over or under.
@@ -130,7 +132,7 @@ static func layers(worn: Dictionary, frame: StringName) -> Array[Layer]:
 	return out
 
 static func _shows(e: EquipDef, frame: StringName) -> bool:
-	return e.held.shows(frame) if e.held else e.worn != null and e.worn.has_animation(frame)
+	return Layer.new(e).shows(frame)
 
 ## Adds each piece of `gear` worn as a layer (or, with `held`, its held painting); nulls are skipped.
 static func _add(out: Array[Layer], gear: Array, held := false) -> void:
@@ -210,16 +212,39 @@ class Layer:
 		else:
 			all[frame] = k
 
+	## Frame -> the frame whose painting shows there, or &"" for none, set by the pose editor's
+	## Add/Delete (EquipDef.frame_art); frames not listed show their own painting.
+	func frame_art() -> Dictionary:
+		if owner is EquipDef:
+			return (owner as EquipDef).frame_art
+		return (owner as HeroLookDef).frame_art.get(part, {})
+
+	func set_frame_art(frame: StringName, art: Variant) -> void:
+		var all := (owner as EquipDef).frame_art if owner is EquipDef else (owner as HeroLookDef).frame_art.get_or_add(part, {}) as Dictionary
+		if art == null:
+			all.erase(frame)
+		else:
+			all[frame] = art
+
+	## The frame whose painting it shows on `frame` (&"" for none).
+	func art(frame: StringName) -> StringName:
+		return frame_art().get(frame, frame)
+
+	## Added to `frame` by hand, so it shows there even where the stack would leave it off (hair
+	## under a hat, fists with no weapon out).
+	func added(frame: StringName) -> bool:
+		return held() == null and frame_art().get(frame, &"") != &""
+
 	func shows(frame: StringName) -> bool:
 		var h := held()
 		if h:
 			return h.shows(frame)
 		var f := frames()
-		return f != null and f.has_animation(frame)
+		return f != null and f.has_animation(art(frame))
 
 	func texture(frame: StringName) -> Texture2D:
 		var h := held()
-		return h.texture() if h else frames().get_frame_texture(frame, 0)
+		return h.texture() if h else frames().get_frame_texture(art(frame), 0)
 
 	## How many places up (negative: down) the stack it is moved on `frame`.
 	func steps(frame: StringName) -> int:

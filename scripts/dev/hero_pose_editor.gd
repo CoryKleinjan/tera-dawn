@@ -8,7 +8,9 @@ extends Control
 ##
 ##   Left/Right  pose          Tab        next piece       Wheel or Q/E (Shift+Q/E: fine)  turn
 ##   Shift+wheel or [ ]  smaller/bigger (Shift+[ ]: fine)
-##   PgUp/PgDn   up/down stack H          show/hide here (held pieces)
+##   PgUp/PgDn   up/down stack H          add here / delete here
+##   A or Insert  add the piece to this frame (another frame's painting if it has none here)
+##   Delete or Backspace  delete the piece from this frame
 ##   C           copy the previous frame's place           R    reset the piece on this frame
 ##   Arrow Up/Down  move 0.5 px (with Shift: left/right)   Space  play the walk   Ctrl+S  save
 
@@ -87,7 +89,7 @@ func _build_ui() -> void:
 	rows.add_child(tools)
 	for b in [["< Pose", func(): _step(-1)], ["Pose >", func(): _step(1)], ["Turn left", func(): _turn(-2.0)], ["Turn right", func(): _turn(2.0)], ["Smaller", func(): _resize(-SIZE_STEP)],
 			["Bigger", func(): _resize(SIZE_STEP)], ["Down the stack", func(): _restack(-1)],
-			["Up the stack", func(): _restack(1)], ["Show/Hide here", _toggle], ["Copy previous", _copy_prev],
+			["Up the stack", func(): _restack(1)], ["Add here", _add_here], ["Delete here", _delete_here], ["Copy previous", _copy_prev],
 			["Reset piece", _reset], ["Reset pose", _reset_pose], ["Play walk", _play], ["Save", _save]]:
 		var btn := Button.new()
 		btn.text = b[0]
@@ -277,6 +279,8 @@ func _unhandled_key_input(ev: InputEvent) -> void:
 		KEY_PAGEUP: _restack(1)
 		KEY_PAGEDOWN: _restack(-1)
 		KEY_H: _toggle()
+		KEY_A, KEY_INSERT: _add_here()
+		KEY_DELETE, KEY_BACKSPACE: _delete_here()
 		KEY_C: _copy_prev()
 		KEY_R: _reset()
 		KEY_Q: _turn(-0.5 if ev.shift_pressed else -2.0)
@@ -347,18 +351,65 @@ func _restack(d: int) -> void:
 		l.set_nudge(_f(), Vector4(n.x, n.y, n.z, n.w + d))
 		_changed(l.owner)
 
-## Shows or hides a held piece on this frame (clothes and his parts show wherever they are painted).
+## Deletes the picked piece from this frame if it shows here, else adds it.
 func _toggle() -> void:
 	var l := _sel()
-	var h := l.held() if l else null
-	if h == null:
-		_status.text = "Only a held weapon or off-hand can be shown or hidden per frame"
+	if l and l.shows(_f()) and _drawn(l):
+		_delete_here()
+	else:
+		_add_here()
+
+## Whether the picked piece is drawn on this frame (the stack can leave a piece off: the
+## off-hand with the weapon put away, hair under a hat, fists with no weapon out).
+func _drawn(l: HeroBody.Layer) -> bool:
+	return HeroBody.layers(_outfit, _f()).any(func(o): return _same(o, l))
+
+## Takes the picked piece off this frame entirely.
+func _delete_here() -> void:
+	var l := _sel()
+	if l == null:
 		return
-	if h.shows(_f()):
+	var h := l.held()
+	if h:
 		h.pins.erase(_f())
+		h.sizes.erase(_f())
 		_changed(h)
 	else:
-		_copy_prev()
+		l.set_frame_art(_f(), &"")
+		l.set_nudge(_f(), Vector4.ZERO)
+		l.set_size(_f(), 1.0)
+		_changed(l.owner)
+
+## Puts the picked piece on this frame: its own painting for this frame if it has one, else the
+## painting (and place) of the nearest earlier frame that shows it, to move into place.
+func _add_here() -> void:
+	var l := _sel()
+	if l == null:
+		return
+	var h := l.held()
+	if h:
+		if not h.shows(_f()):
+			_copy_prev()
+			if not h.shows(_f()):
+				h.pins[_f()] = Vector4(_frame_size().x / 2.0, _frame_size().y / 2.0, 0, HeldDef.Layer.OVER_CLOTHES)
+				_changed(h)
+		if not _drawn(l):
+			_status.text = "Added, but the off-hand only shows when the weapon does: add the weapon here too"
+		return
+	var f := l.frames()
+	if f == null:
+		return
+	if f.has_animation(_f()):
+		l.set_frame_art(_f(), _f())
+	else:
+		for i in range(_frame - 1, _frame - _frames.size(), -1):
+			var g := _frames[posmod(i, _frames.size())]
+			if l.shows(g):
+				l.set_frame_art(_f(), l.art(g))
+				l.set_nudge(_f(), l.nudges().get(g, Vector4.ZERO))
+				l.set_size(_f(), l.size(g))
+				break
+	_changed(l.owner)
 
 ## Puts the picked piece back on this frame: where it is painted, or a held piece where it was
 ## last saved.

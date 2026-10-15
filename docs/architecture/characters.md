@@ -25,7 +25,11 @@ then character select shows the list (name, level and job) with the new characte
   it up or down the stack, Save writes the files). Held pieces save to their pins; worn layers
   to `EquipDef.nudges` and his body, face, hair and fists to `HeroLookDef.nudges` (frame ->
   Vector4: shift, turn, places up the stack), and sizes to each one's `sizes` (frame -> share
-  of its painted size), applied whole by `HeroBody.Layer`. A character has no picked appearance
+  of its painted size), applied whole by `HeroBody.Layer`. Add here / Delete here put a piece
+  on a frame or take it off: held pieces gain or lose that frame's pin; worn layers and his parts
+  record it in `frame_art` (frame -> the frame whose painting shows there, another frame's when
+  added where it has none, or "" when deleted), and an added piece shows even where the stack
+  would leave it off (hair under a hat, fists with no weapon out). A character has no picked appearance
   yet; older saves that carry one still load.
 - **One body for every hero**: your hero (`TDPlayer`) and other players' (`TDAvatar`) each
   work out what they are doing (from your keys, or from the snapshot: an animation name such

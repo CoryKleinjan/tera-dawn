@@ -37,6 +37,9 @@ const OFFHAND_NAMES := {&"shield": "a shield", &"star": "throwing stars", &"book
 ## Frame -> how big its look is drawn there (1.0 as painted), set in the pose editor; its worn
 ## layer or held painting grows or shrinks around the point it turns around.
 @export var sizes: Dictionary = {}
+## Frames changed in the pose editor's Add/Delete: frame -> the frame whose painting shows there
+## (another frame's, when added to a frame it has no painting for), or &"" when deleted there.
+@export var frame_art: Dictionary = {}
 ## A hat or helmet that covers his hair, so the hair layer isn't drawn under it.
 @export var hides_hair := false
 ## A weapon or off-hand: one painting held in his hand, pinned per frame (HeldDef), drawn instead
