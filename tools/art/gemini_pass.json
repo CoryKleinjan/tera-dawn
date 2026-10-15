@@ -12892,6 +12892,33 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 7 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: standing, standing, walking, walking, walking, jumping, flinching after a hit); cell 8 is empty. He faces right in a three-quarter view; his WEAPON ARM is the arm on the LEFT side of the picture and his OTHER ARM is the arm on the RIGHT side. Use the second attached picture ONLY to see the painting style (do not copy its pose, its gear or its figure). In each cell, paint ONLY one steel throwing star held in the closed fist on the RIGHT side of the shape (his other hand), in every cell: a flat four-pointed star about the size of his fist, dark steel with bright sharp edges and a small round hole in the middle, pinched in the fist with two points showing above it and two below. Paint the WHOLE star ON TOP of the green fist, centred on that fist and moving with it in every cell. Paint nothing else: no hands, arms or body. Paint every piece WHOLE, with no gaps, notches or holes where an arm, hand or another piece would cover it; parts that will be hidden are still painted completely. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: exactly the look of the steel helmet in the second attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail. Keep the grid lines. No text, no labels."
   }
+ },
+ {
+  "id": "mshero_thief_bandana_walk2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_thief_bandana_walk2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 11:45Z 'Repaint that bandana', answering the ~$0.07 option to paint it lower over his temples): Thief bandana repaint over the green silhouette of his walking frames, covering his whole scalp so no hair shows (hides_hair).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/silhouette_walkset.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_walkset.png",
+    "/mnt/project-files/art-sheets/maple-hero/bodies/look_warrior.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 7 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: standing, standing, walking, walking, walking, jumping, flinching after a hit); cell 8 is empty. He faces right in a three-quarter view; his WEAPON ARM is the arm on the LEFT side of the picture and his OTHER ARM is the arm on the RIGHT side. Use the second attached picture ONLY to see the painting style (do not copy its pose, its gear or its figure). On the head of each green shape, paint ONLY a young thief's black cloth bandana: it covers his whole scalp like a snug cap, wrapped over the top, back and sides of his big round head and low over both temples, reaching down to the tops of his ears and the top of his eyebrows, so no hair or bare scalp would show anywhere, with a dark charcoal stitched hem along the forehead and a knot at the back of his head with two short tails hanging down. It fits the head at its angle in each cell, slightly larger than the head outline. Leave his face flat green. Paint nothing else: no hair, face, body, arms or clothes. Paint every piece WHOLE, with no gaps, notches or holes where an arm, hand or another piece would cover it; parts that will be hidden are still painted completely. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: exactly the look of the steel helmet in the second attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail. Keep the grid lines. No text, no labels."
+  }
  }
 ]
 }
