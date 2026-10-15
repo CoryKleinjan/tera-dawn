@@ -12651,6 +12651,33 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 3 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (walking: a long stride, a passing step with one knee lifted, a shorter stride). Cells 4 to 8 are empty and must stay empty. He faces right in a three-quarter view; his WAND ARM is the arm on the LEFT side of the picture and his BOOK ARM is the arm on the RIGHT side. Use the second attached picture ONLY to see the look and style of a young magician's outfit (do not copy its pose or add its figure). On the feet of each green shape, paint ONLY a pair of soft magician's slippers: deep blue cloth with gold trim around the opening and gently curled pointed toes, following each foot's pose in that cell. Paint nothing else: no legs, body or clothes. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, as if the arms were not there, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Style: the warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline and small busy painted detail of the robe in the second attached picture. Keep the grid lines. No text, no labels."
   }
+ },
+ {
+  "id": "mshero_mag_slippers_walk2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_mag_slippers_walk2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 01:14Z 'Yea' to repainting the wizard's walk slippers, 1 sheet ~$0.07): wave 216's back slipper pointed backwards and the sheet redrew the guide figures.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/silhouette_walk.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_walk.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_mag_slippers_move.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 3 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (walking: a long stride, a passing step with one knee lifted, a shorter stride). Cells 4 to 8 are empty and must stay empty. He faces RIGHT. On BOTH feet of each green shape, paint ONLY a soft magician's slipper exactly like the ones in the second attached picture: deep blue cloth with gold trim around the opening and a gently curled pointed toe. EVERY slipper's toe points to the RIGHT, the way he is walking, on the front foot AND on the back foot, even when the back foot is lifted onto its toes; no toe ever points left. Each slipper is the same size as the green foot it covers and sits exactly on it, covering the whole foot, no bigger. Paint nothing else: no legs, body or clothes. The green shape is only a flat placement guide lying BEHIND everything you paint: paint each slipper WHOLE over the green, with no gaps or holes. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is: do not move, resize, redraw or change any green shape, and do not add hair, arms or any figure. Leave the rest of the background flat pure magenta #FF00FF (exactly #FF00FF). Style: the warm colours, light from the upper left, smooth soft painted shading with bright highlights and thin dark plum-brown outline of the slippers in the second attached picture. Keep the grid lines. No text, no labels."
+  }
  }
 ]
 }
