@@ -15,7 +15,6 @@ const COLS := 4
 const GAP := 4.0
 const GRID_Y := 74.0
 const AMOUNTS: Array[int] = [1, 10, 100]
-const REACH := 170.0
 ## Pixels per art pixel of the shop row and amount chip art, and where the row art's item niche is.
 const ROW_SCALE := (ROW_H - 4) / 63.0
 const NICHE := Rect2(11, 10, 42, 42)
@@ -48,7 +47,7 @@ func open(who: TDNpc) -> void:
 
 func _process(delta: float) -> void:
 	super(delta)
-	if visible and (npc == null or not is_instance_valid(npc) or hud.world.player.position.distance_to(npc.position) > REACH):
+	if visible and walked_away_from(npc):
 		visible = false
 		hud.tooltip.clear(self)
 

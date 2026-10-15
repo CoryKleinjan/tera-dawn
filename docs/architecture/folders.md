@@ -4,12 +4,11 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
 
 ```
 data/                 Content, one .tres per thing
-  monsters/ npcs/ items/ skills/ effects/ jobs/ looks/   Looked up by id through Content
+  monsters/ npcs/ items/ skills/ effects/ jobs/   Looked up by id through Content
   monster_moves/      Monster attacks, shared by monster families (MonsterMove)
   achievements/       Milestones, unlocked on Steam too (AchievementDef)
   quests/ shops/ regions/ cutscenes/ projectiles/    Also looked up by id
-  items/use/ items/etc/ items/scrolls/ items/setup/  Subfolders are scanned too (gear goes in
-                                            items/equips/ once it is redrawn)
+  items/use/ items/etc/ items/scrolls/ items/setup/ items/equips/  Subfolders are scanned too
   hero/               HeroLookDef (look.tres: his layers and animations); held/ has each held
                       weapon or off-hand's pins per frame (HeldDef), set in the pose editor
   maps/ biomes/ climb_styles/ buildings/    Maps and how they look (maps/rooms/ and
@@ -66,5 +65,5 @@ docs/architecture/    One page per system (linked from ARCHITECTURE.md)
 tests/                Test runner (unit/, server/, content/, ui/ suites on framework/), smoke test
                       (`smoke_test.gd` runs the checks in `smoke/`, with a second game joining),
                       bot client, screenshot scene, balance report, run_all.sh; fixtures/ holds the
-                      tests' own plain gear (TestGear), loaded while the game has no equipment
+                      tests' own wider set of gear (TestGear); the game itself has only starter sets
 ```

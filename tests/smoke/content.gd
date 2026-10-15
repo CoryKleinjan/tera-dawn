@@ -62,7 +62,7 @@ func check() -> void:
 				problems.append("monster %s drops nothing" % id)
 	for id in Content.items:
 		var item: ItemDef = Content.items[id]
-		if item.icon == null and not item is EquipDef: # gear art is being remade
+		if item.icon == null and not item is EquipDef: # gear has no icons yet
 			problems.append("item %s has no icon" % id)
 		if item is EquipDef and (item as EquipDef).stats == null:
 			problems.append("equip %s has no stats" % id)

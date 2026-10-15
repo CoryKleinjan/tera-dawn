@@ -10,7 +10,7 @@ starting job (`Character.START_JOB`) and saves it on this computer (`CharacterSt
 then character select shows the list (name, level and job) with the new character picked.
 
 - **Outfit** choices come from the starting job's `creator_gear` (one piece per kind). It is
-  empty while the gear is being remade, so the creator offers no outfit for now.
+  empty for now (no starting outfits are painted yet), so the creator offers none.
 - **Layered look**: the hero is drawn from painted layers, MapleStory style. `HeroLookDef`
   (`data/hero/look.tres`) holds his body and fists, the faces and hairstyles he can have (each a
   `HeroStyleDef` in `data/hero/faces/` or `data/hero/hairs/`, with its own placements; the first

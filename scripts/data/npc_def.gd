@@ -25,5 +25,3 @@ extends Resource
 @export var guild := false
 ## Trips they offer (ships, wagons...).
 @export var travel: Array[TravelRoute] = []
-## Until they have their own art, NPCs can share a sprite in their own colour.
-@export var tint := Color.WHITE

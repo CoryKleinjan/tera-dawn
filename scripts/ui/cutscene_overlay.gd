@@ -25,7 +25,6 @@ var bars := 0.0
 ## The line being said, who says it and their portrait (null for none).
 var speaker := ""
 var portrait: Texture2D
-var portrait_tint := Color.WHITE
 var text := ""
 ## How many characters of `text` show so far (they appear like TDDialogueWindow's).
 var _shown := 0.0
@@ -46,10 +45,9 @@ func end() -> void:
 	bars = 0.0
 	hide_speech()
 
-func say(who: String, picture: Texture2D, tint: Color, line: String) -> void:
+func say(who: String, picture: Texture2D, line: String) -> void:
 	speaker = who
 	portrait = picture
-	portrait_tint = tint
 	text = line
 	_shown = 0.0
 
@@ -122,7 +120,7 @@ func _draw_speech(_bar_h: float) -> void:
 		var bust := TDWindow.fit(portrait, niche.grow(-4))
 		var big := bust.size * TDDialogueWindow.BUST_SCALE
 		bust = Rect2(Vector2(bust.get_center().x - big.x / 2.0, bust.end.y - big.y), big)
-		draw_texture_rect(portrait, bust, false, portrait_tint)
+		draw_texture_rect(portrait, bust, false)
 	var left := frame.position.x + TDDialogueWindow.TEXT_LEFT * FRAME_SCALE
 	var y := frame.position.y + TDDialogueWindow.TEXT_TOP * FRAME_SCALE
 	if speaker != "":

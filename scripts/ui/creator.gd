@@ -2,8 +2,8 @@ class_name TDCreator
 extends CenterContainer
 ## The character creator, opened from character select: a name and a row of arrows for
 ## each starting outfit choice. Every new character starts in the starting job
-## (Character.START_JOB); the options come from the job's `creator_gear`. (The hero's look is
-## being remade, so there is no preview or appearance to pick for now.)
+## (Character.START_JOB); the options come from the job's `creator_gear`. (No starting outfits
+## are painted yet, so there is no preview or appearance to pick for now.)
 
 ## Create was pressed with this name and these choices.
 signal created(char_name: String, made: NewCharacter)
