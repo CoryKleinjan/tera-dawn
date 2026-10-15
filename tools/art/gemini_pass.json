@@ -16441,6 +16441,33 @@
    ],
    "text": "The base picture is an EMPTY sheet of 8 cells (2 rows of 4) on a flat magenta background. Paint the game's base character, a chibi boy, once in each cell listed below, in the pose given for that cell. The first attached picture shows this exact boy in several poses: copy his look exactly (same head, ears, blank face with no eyes, brows or mouth, bald, cream short-sleeved undershirt, brown shorts, barefoot, rounded MITTEN fists with no separate fingers, NO open hands, same size as the boys there, same clean smooth painted style and thin dark plum-brown outline) but NOT his poses. Each new pose must be clearly different from the poses in the first attached picture. He faces right in a slight three-quarter side view. His WEAPON ARM is the arm on the LEFT side of the picture; its fist is a closed mitten fist seen from the side with the thumb on top, so a weapon held in it would lie flat in the picture, never pointing at the viewer; the whole fist and forearm are clearly visible, never hidden behind his head or body. Standing poses have their feet on a common ground line near the bottom of the cell, like the boys in the first attached picture; mid-air poses float clearly above that line. Do NOT draw any weapon, bow, wand, chain, anchor or other object. Paint him in cell 1 ONLY; cells 2 to 8 are EMPTY and must stay empty. Cell 1, BACKHAND SLASH: he still faces RIGHT with his face and chest turned toward the viewer in the same slight three-quarter view as in the first attached picture (NEVER his back), feet apart and planted, torso twisted a little to the left; his weapon arm (the arm on the LEFT side of the picture) has just swept back across his body and is stretched out behind him to the LEFT at shoulder height, fist closed with the thumb on top; the other arm is bent with its fist at his hip. Paint every figure WHOLE, with no gaps, notches or holes, and one figure per listed cell only. Keep the background flat pure magenta #FF00FF and keep the grid lines. Nothing else in the cells: no weapons, props, shadows, motion lines, effects or text. Light from the upper left."
   }
+ },
+ {
+  "id": "mshero_war_jerkin_fix2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_war_jerkin_fix2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 19:29Z 'the warrior crouch pose jerkin is wrong.'): repaint of the war jerkin on crouch.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_war_jerkin2_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_war_jerkin2_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_war_jerkin_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: crouched low with knees bent and fists up). Cells 2, 3, 4, 5, 6, 7 and 8 are empty and must stay empty. He faces right in a slight three-quarter side view. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a padded warrior's jerkin worn over his torso and upper arms: quilted brown-tan padded cloth in stitched rows, short sleeves over the upper arms, a high padded collar, a broad brown leather belt with a brass buckle at the waist, and the hem just below the belt. It follows his body and arms in each pose, however they bend, stretch, tuck or turn. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. Where a pose shows his back or curls him up, paint the part of the piece that would be seen from that side. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
  }
 ]
 }
