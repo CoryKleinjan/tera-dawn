@@ -14584,6 +14584,32 @@
    ],
    "text": "The base picture is an EMPTY sheet of 8 cells (2 rows of 4) on a flat magenta background. Paint the game's base character, a chibi boy, once in each cell listed below, in the pose given for that cell. The first attached picture shows this exact boy in several poses: copy his look exactly (same head, ears, blank face with no eyes, brows or mouth, bald, cream short-sleeved undershirt, brown shorts, barefoot, rounded MITTEN fists with no separate fingers, NO open hands, same size as the boys there, same clean smooth painted style and thin dark plum-brown outline) but NOT his poses. Each new pose must be clearly different from the poses in the first attached picture. He faces right in a slight three-quarter side view. His WEAPON ARM is the arm on the LEFT side of the picture; its fist is a closed mitten fist seen from the side with the thumb on top, so a weapon held in it would lie flat in the picture, never pointing at the viewer; the whole fist and forearm are clearly visible, never hidden behind his head or body. Standing poses have their feet on a common ground line near the bottom of the cell, like the boys in the first attached picture; mid-air poses float clearly above that line. Do NOT draw any weapon, bow, wand, chain, anchor or other object. Cell 1, KNEELING SHOT: down on one knee (back knee on the ground, front foot flat), body upright, the arm on the RIGHT side of the picture stretched forward and angled down toward the ground ahead, its fist closed, and the arm on the LEFT side bent with its fist pulled back to his cheek, as if aiming a bow down. Cell 2, FORWARD LEAP: high in the air leaping forward, body leaning forward, knees tucked up, both arms swept back behind him. Cell 3, BACK HOP: in the air hopping backward while still facing right, legs stretched forward, body leaning back, both arms out in front for balance. Cell 4, VANISH: crouched, both forearms crossed in front of his face, fists closed, as if about to disappear. Cell 5, SHOULDER CHARGE: a long lunging stride forward, front shoulder lowered and driving forward, the arm on the RIGHT side of the picture tucked in against his chest, head down. Cell 6, ROLL: curled up tight into a ball on the ground, knees to chest, arms wrapped around his shins, chin tucked, seen from the side, tumbling forward. Cell 7, ROLL turned: the same tight ball half a turn further, now upside down, his back on the ground and his feet up at the top, still tucked tight. Cell 8 is EMPTY and must stay empty. Paint every figure WHOLE, with no gaps, notches or holes, and one figure per listed cell only. Keep the background flat pure magenta #FF00FF and keep the grid lines. Nothing else in the cells: no weapons, props, shadows, motion lines, effects or text. Light from the upper left."
   }
+ },
+ {
+  "id": "mshero_hat_hair",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_hat_hair.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 16:41Z 'for each hair style print one set of hair to stick out per hat. i will handle putting it in.'; 16:51Z 'yes' to the 1 sheet ~$0.07 question): hair tufts that stick out from under each of the 5 hats.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/hat_hair_silhouette.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/hat_hair_ref.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 5 each hold one flat bright green (#00FF00) shape: the exact outline of the boy wearing a hat in the same cell of the first attached picture (cell 1 a steel helmet, cell 2 a tall pointed wizard hat with a wide brim, cell 3 a tied bandana, cell 4 a hood, cell 5 a pirate tricorn). Cells 6, 7 and 8 are empty and must stay empty. Cell 6 of the first attached picture shows the same boy with his own hair and no hat: short, messy, spiky chestnut-brown hair with a swept fringe. In each of cells 1 to 5, paint ONLY the bits of that same chestnut-brown hair that would naturally stick out from under that cell's hat, and nothing else: cell 1 a few short spiky locks poking out under the helmet's rim at the back and the side of his neck, above the ear; cell 2 a messy swept fringe poking out under the brim over his forehead and tufts at the back of his neck; cell 3 a tuft of spiky hair sticking up out of the top of the bandana and a few locks at the back; cell 4 a few strands of fringe falling out of the hood's opening onto his forehead; cell 5 a swept fringe under the front brim and locks at the back of his neck. Each piece of hair is placed exactly where it would meet the hat and head on that cell's green shape, sized to match him; it may reach a little past the green outline where hair sticks out. Paint the hair WHOLE and solid, every lock fully closed, with no holes. Do NOT paint the hat, head, face, ears, body or anything else: leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Style: exactly the hair in cell 6 of the first attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights and a thin dark plum-brown outline. Keep the grid lines. No text, no labels."
+  }
  }
 ]
 }
