@@ -2,11 +2,11 @@ class_name HeroBody
 extends RefCounted
 ## How a hero shows in the world, yours (TDPlayer) or another player's (TDAvatar): his painted
 ## layers stacked frame by frame (HeroLookDef: body, face and hair, then each piece of gear's
-## EquipDef.worn), the chair he sits on and the pet trotting after him (TDCompanion). Both kinds
+## EquipDef.worn) and the pet trotting after him (TDCompanion). Both kinds
 ## of hero draw the same way.
 ##
 ##   body = HeroBody.new(self, world, z)               # in _ready: adds the companion
-##   body.draw(face, chair, pet, animation, worn)      # every frame
+##   body.draw(face, pet, animation, worn)             # every frame
 
 const LOOK: HeroLookDef = preload("res://data/hero/look.tres")
 ## How far in front of the one below it each layer sits (3D units), so the layers stack in
@@ -19,7 +19,7 @@ const BACK := [&"cape"]
 const UNDER := [&"bottom", &"shoes"]
 const OVER := [&"top", &"gloves"]
 
-## The chair they sit on and the pet trotting after them.
+## The pet trotting after them.
 var companion: TDCompanion
 var visible := true:
 	set(v):
@@ -45,11 +45,10 @@ func _init(owner: Node2D, world: TDWorld, z: float) -> void:
 	owner.add_child(companion)
 
 ## Draws the hero this frame, between his last two ticks (TDWorld.drawn), facing `face`, doing
-## `anim` (TDPlayer._animation) and wearing `worn` (place -> EquipDef). His chair and pet (item
-## ids, or empty) follow him.
-func draw(face: int, chair: StringName, pet: StringName, anim: StringName, worn: Dictionary) -> void:
+## `anim` (TDPlayer._animation) and wearing `worn` (place -> EquipDef). His pet (an item id,
+## or empty) follows him.
+func draw(face: int, pet: StringName, anim: StringName, worn: Dictionary) -> void:
 	var at := _world.drawn(_owner)
-	companion.set_chair(chair)
 	companion.set_pet(pet, _owner.position)
 	companion.follow(at, face, _z, _world.layout.ground_below(_owner.position))
 	if anim != _anim:

@@ -265,6 +265,12 @@ func req_move(at: Vector2, face: int, anim: StringName, climbing: bool) -> void:
 	if server:
 		server.on_move(_sender(), at, face, anim, climbing)
 
+## Sit down on the ground (`down`) or get up.
+@rpc("any_peer", "call_local", "reliable")
+func req_sit(down: bool) -> void:
+	if server:
+		server.on_sit(_sender(), down)
+
 @rpc("any_peer", "call_local", "reliable")
 func req_skill(skill_id: StringName, at: Vector2, face: int, aim := 0) -> void:
 	if server:
@@ -299,7 +305,7 @@ func req_use_item(slot: int) -> void:
 	if server:
 		server.items.on_use_item(_sender(), slot)
 
-## Sit on the chair, or bring out the pet, in Setup slot `slot` (again to stop).
+## Bring out the pet in Setup slot `slot` (again to send it home).
 @rpc("any_peer", "call_local", "reliable")
 func req_setup(slot: int) -> void:
 	if server:
@@ -527,11 +533,11 @@ func ev_player_left(peer: int) -> void:
 	if world:
 		world.remove_avatar(peer)
 
-## You sat down on a chair (or got up, with an empty id).
+## You sat down on the ground (or got up).
 @rpc("authority", "call_local", "reliable")
-func ev_sit(chair_id: StringName) -> void:
+func ev_sit(down: bool) -> void:
 	if world:
-		world.player.sit(chair_id)
+		world.player.sit(down)
 
 ## You reached an achievement.
 @rpc("authority", "call_local", "reliable")

@@ -17,6 +17,7 @@ const ACTIONS := [
 	{"action": "move_up", "label": "Up, climb, talk, portals", "group": "Movement", "keys": [KEY_UP], "pad": [JOY_BUTTON_DPAD_UP], "axis": [JOY_AXIS_LEFT_Y, -1.0]},
 	{"action": "move_down", "label": "Down, climb down", "group": "Movement", "keys": [KEY_DOWN], "pad": [JOY_BUTTON_DPAD_DOWN], "axis": [JOY_AXIS_LEFT_Y, 1.0]},
 	{"action": "jump", "label": "Jump", "group": "Movement", "keys": [KEY_SPACE, KEY_ALT], "pad": [JOY_BUTTON_A]},
+	{"action": "sit", "label": "Sit", "group": "Movement", "keys": [KEY_C]},
 	{"action": "attack", "label": "Attack", "group": "Combat", "keys": [KEY_X, KEY_CTRL], "pad": [JOY_BUTTON_X]},
 	{"action": "loot", "label": "Pick up", "group": "Combat", "keys": [KEY_Z], "pad": [JOY_BUTTON_B]},
 	{"action": "quick_1", "label": "Quickslot 1", "group": "Quickslots", "keys": [KEY_A, KEY_SHIFT], "pad": [JOY_BUTTON_Y]},

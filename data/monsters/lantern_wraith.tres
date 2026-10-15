@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=34 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=32 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/lantern_wraith.tres" id="3_lantern_wraith"]
@@ -15,7 +15,6 @@
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_helmet_hp_60.tres" id="14_scroll_helmet_hp_60"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_int_60.tres" id="15_scroll_top_int_60"]
 [ext_resource type="Resource" path="res://data/items/use/power_elixir.tres" id="22_power_elixir"]
-[ext_resource type="Resource" path="res://data/items/setup/lantern_bench.tres" id="p11_lantern_bench"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_shot_shadow.tres" id="mv_boss_shot_shadow"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_swoop.tres" id="mv_boss_swoop"]
 [ext_resource type="Resource" path="res://data/monster_moves/blink.tres" id="mv_blink"]
@@ -105,13 +104,6 @@ chance = 1.0
 min_amount = 216
 max_amount = 432
 
-[sub_resource type="Resource" id="P11_lantern_bench"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("p11_lantern_bench")
-chance = 0.08
-min_amount = 1
-max_amount = 1
-
 [resource]
 script = ExtResource("1_monster_def")
 id = &"lantern_wraith"
@@ -131,5 +123,5 @@ keep_distance = 160.0
 sprite_frames = ExtResource("3_lantern_wraith")
 sprite_scale = 1.1
 light_color = Color(0.501961, 0.376471, 1.0, 1.0)
-drops = Array[ExtResource("4_drop_entry")]([SubResource("P11_lantern_bench"), SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_18")])
+drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_18")])
 respawn_ticks = Vector2i(1800, 2400)

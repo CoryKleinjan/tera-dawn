@@ -2148,25 +2148,6 @@
    "note": "3 pets x 9 frames; also cut as pets_icons."
   },
   {
-   "id": "chairs",
-   "prompts": "tera-dawn-chatgpt-art-prompts-4.md",
-   "batch": "P2",
-   "with": null,
-   "refs": [
-    "hero_main.png"
-   ],
-   "save": "chairs.png",
-   "replaces": "art/source/chairs.png",
-   "kind": "still",
-   "stands": false,
-   "cells": [
-    3,
-    3
-   ],
-   "anchor": "hero_main",
-   "note": "Part 4 P2 (newest)."
-  },
-  {
    "id": "items_parts_1",
    "prompts": "tera-dawn-chatgpt-art-prompts-3.md",
    "batch": "I7",
@@ -6234,28 +6215,6 @@
    "edit": {
     "base": "art/source/projectiles_old.png",
     "text": "Repaint this whole image as soft hand-painted glowing game effects, like the painted spell effects of a modern hand-painted game: smooth painted light, gentle colour gradients and soft glowing edges. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. These are light and magic effects, so they have NO outlines at all: no dark line or border around any swish, slash, spark, beam, sparkle, puff or glow; their edges are made of light that fades softly into the background. Keep everything else exactly the same: the same effects, shapes, silhouettes, sizes, positions, colours and layout, and the cell labels and grid lines unchanged. Keep every colour as it is and keep each effect bright and luminous. Effects made of many small sparkles or particles stay made of many small separate sparkles or particles (for example DAWN SLASH 3 stays a scattered trail of golden sparkles along the curve, not a solid crescent). Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
-   }
-  },
-  {
-   "id": "paint_chairs",
-   "prompts": null,
-   "batch": "painted leftovers: chairs (edit)",
-   "with": null,
-   "refs": [],
-   "save": "chairs_painted.png",
-   "replaces": null,
-   "kind": "still",
-   "stands": false,
-   "cells": [
-    1,
-    1
-   ],
-   "anchor": null,
-   "size": "2K",
-   "note": "2026-10-11 painted-leftovers thread: the last pixel-art sheet the game uses, repainted as soft painted art with the same layout (plans/pixel-art-still-in-game.md).",
-   "edit": {
-    "base": "art/source/chairs.png",
-    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern hand-painted game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout, and the cell labels and grid lines unchanged. Keep every colour as it is (do not mute or darken it). Each item keeps its exact outline, angle, handle and grip position, so it still fits the same hand and the same place in its cell. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added."
    }
   },
   {

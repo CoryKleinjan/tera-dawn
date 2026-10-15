@@ -8,8 +8,8 @@
 script = ExtResource("1_npc_def")
 id = &"pet_keeper"
 display_name = "Pet Keeper Pip"
-title = "Pets & Chairs"
+title = "Pets"
 sprite_frames = ExtResource("2_sprite")
-greeting = "Looking for a friend? My pets follow you anywhere and pick up what you leave behind. Chairs too, for a good long sit!"
-lines = PackedStringArray("Pets get hungry. Keep some Pet Snacks on you, or they'll trot home.", "Sitting on a chair heals you faster. Move and you'll hop off.", "Bosses sometimes leave fancy chairs behind. Bring me a story about one!")
+greeting = "Looking for a friend? My pets follow you anywhere and pick up what you leave behind."
+lines = PackedStringArray("Pets get hungry. Keep some Pet Snacks on you, or they'll trot home.", "Tired? Sit down for a while and you'll mend faster. My pets keep watch, but one bump and you're back on your feet.")
 shop = ExtResource("3_pet_shop")

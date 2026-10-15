@@ -8,7 +8,7 @@ extends RefCounted
 const BOSSES := "bosses"
 ## Upgrade scrolls that worked.
 const SCROLLS := "scrolls"
-## Times sat on a chair.
+## Times sat down.
 const SAT := "sat"
 ## Times a pet was brought out.
 const PETS := "pets"

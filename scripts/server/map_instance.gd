@@ -128,7 +128,7 @@ func snapshot(full := false) -> PackedByteArray:
 			_sent_mobs[i] = r
 	return SnapshotCodec.encode(tick, records, players.values().map(func(p: SimPlayer) -> Array: return p.motion()))
 
-## Sends this map's players the info (name, level, job, guild, chair, pet, worn gear) of
+## Sends this map's players the info (name, level, job, guild, pet, worn gear) of
 ## every player whose info changed since it was last sent. Reliable, unlike snapshots.
 func send_player_info() -> void:
 	for p: SimPlayer in players.values():
@@ -386,6 +386,9 @@ func hurt_player(p: SimPlayer, def: MonsterDef, from_x: float, power := 1.0) -> 
 		return
 	var dmg := Combat.monster_hit(def, p.character, power)
 	p.inv = 40 if dmg == 0 else SimPlayer.HURT_INV
+	if p.sitting: # any hit, even a miss, gets you up
+		p.sitting = false
+		Net.send(p.peer, &"ev_sit", [false])
 	broadcast(&"ev_number", [p.position.x, p.position.y - 70, dmg, "miss" if dmg == 0 else "taken"])
 	if dmg == 0:
 		return

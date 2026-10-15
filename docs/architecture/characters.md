@@ -35,17 +35,20 @@ then character select shows the list (name, level and job) with the new characte
   work out what they are doing (from your keys, or from the snapshot: an animation name such
   as "walk", "attack" or a skill's `animation`), and `HeroBody`
   (`scripts/components/hero_body.gd`) shows them the same way for both. It stacks one sprite per
-  layer in a fixed order (`HeroBody.layers`) and brings along the companion (chair and pet).
+  layer in a fixed order (`HeroBody.layers`) and brings along the companion (the pet).
   Other players' gear reaches you as item ids in their info (`SimPlayer.info`). The sizes the game needs for a
   hero (`TDPlayer.HEIGHT`, `WIDTH`, `CHEST`, `SimPlayer.HURTBOX_SIZE`) are constants.
 
-### Chairs, pets, the Monster Book and achievements
+### Sitting, pets, the Monster Book and achievements
 
-- **Chairs** (`ChairDef`) and **pets** (`PetDef`) live in the Setup tab and are used with
-  `req_setup`. The server keeps the chair you sit on in `SimPlayer.chair` (moving clears it)
-  and adds its regen; the pet that's out is `Character.pet`, with `pet_full` dropping every
-  `hunger_ticks` and `MapInstance._pet_step` picking up drops within `loot_reach`. Both go out
-  in the player's info, and `TDCompanion` (owned by each `HeroBody`) draws them next to you and other players.
+- **Sitting** is on the ground (there are no chairs): the Sit key asks `req_sit`, the server
+  keeps it in `SimPlayer.sitting` and doubles the base regen while it's on. Moving
+  (`SimPlayer.report_move`) or a monster hit (`MapInstance.hurt_player`) clears it; others see
+  the "sit" animation in the snapshot.
+- **Pets** (`PetDef`) live in the Setup tab and are brought out with `req_setup`. The pet
+  that's out is `Character.pet`, with `pet_full` dropping every `hunger_ticks` and
+  `MapInstance._pet_step` picking up drops within `loot_reach`. It goes out in the player's
+  info, and `TDCompanion` (owned by each `HeroBody`) draws it next to you and other players.
 - **The Monster Book** (`MonsterBook`, on the Character) counts kills and cards per monster.
   `Content` makes a `CardDef` for every monster at startup (`card_<id>`, no files); monsters
   drop it at `CardDef.CHANCE` until your page is full, and picking it up files it in the book

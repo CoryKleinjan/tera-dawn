@@ -363,22 +363,21 @@ func _run() -> void:
 		Net.server.enter_map(_me(), &"meadow", 300)
 		await _physics(10)
 	if only == "" or only == "keepsakes":
-		# Sitting on a chair with a pet out, a friend doing the same, and the Monster Book.
+		# Sitting on the ground with a pet out, a friend doing the same, and the Monster Book.
 		var meadow: MapInstance = Net.server.maps[&"meadow"]
 		_teleport(world, Vector2(900, 620))
 		p.face = 1
 		var friend := SimPlayer.new(400, Character.create("Mossy"))
 		meadow.add_player(friend, 1060.0)
 		friend.face = -1
-		friend.chair = &"cushion_chair"
+		friend.sitting = true
 		friend.animation = &"sit"
 		friend.character.pet = &"pet_sprout"
-		for id in [&"ember_throne", &"pet_emberkit"]:
-			ch.inventory.add(Content.item(id))
+		ch.inventory.add(Content.item(&"pet_emberkit"))
 		_me().dirty_character = true
 		await _physics(3)
-		for id in [&"ember_throne", &"pet_emberkit"]:
-			Net.ask(&"req_setup", [Game.me.inventory.find(Content.item(id))])
+		Net.ask(&"req_setup", [Game.me.inventory.find(Content.item(&"pet_emberkit"))])
+		Net.ask(&"req_sit", [true])
 		var dew: MonsterDef = Content.monster(&"dewling")
 		for id in [&"dewling", &"mossling", &"petal_bat", &"sproutcap", &"spore_puff", &"sporecap", &"tide_dewling", &"fern_boar", &"shell_crab"]:
 			ch.book.pages[id] = [40 + id.length() * 7, mini(5, id.length() % 6)]
@@ -388,7 +387,7 @@ func _run() -> void:
 		await _physics(240)
 		world.log_lines.clear()
 		await _frames(3)
-		await _shot("chairs_pets")
+		await _shot("sitting_pets")
 		world.hud.toggle_window("collection")
 		world.hud.windows["collection"].show_monster(dew)
 		await _frames(3)
@@ -398,7 +397,7 @@ func _run() -> void:
 		await _shot("achievements")
 		world.hud.toggle_window("collection")
 		meadow.remove_player(friend)
-		Net.ask(&"req_setup", [Game.me.inventory.find(Content.item(&"ember_throne"))])
+		Net.ask(&"req_sit", [false])
 		await _physics(3)
 	if only == "" or only == "players":
 		# Two other players nearby. They're on the server but have no game connected.

@@ -42,8 +42,6 @@ func _kind_line(item: ItemDef) -> String:
 		return "Equip · "
 	if item is UseDef:
 		return "Use"
-	if item is ChairDef:
-		return "Setup · Chair"
 	if item is PetDef:
 		return "Setup · Pet"
 	if item is CardDef:
@@ -64,7 +62,7 @@ func test_every_item_has_a_tooltip_naming_its_kind() -> void:
 			var text := " ".join(_texts(lines))
 			check(text.contains(item.description.split(" ")[0]), "%s: the description is shown" % item.id)
 		kinds[_kind_line(item)] = true
-	check_eq(kinds.size(), 7, "item kinds seen (gear, use, chair, pet, card, scroll, etc)")
+	check_eq(kinds.size(), 6, "item kinds seen (gear, use, pet, card, scroll, etc)")
 
 func test_every_item_tooltip_draws() -> void:
 	for item: ItemDef in Content.items.values():
@@ -147,15 +145,13 @@ func test_use_tooltips_say_what_they_restore() -> void:
 		if u.pet_food > 0:
 			check(texts.has("Pet food: +%d fullness" % u.pet_food), "%s: says it's pet food" % u.id)
 
-func test_scroll_chair_and_pet_tooltips() -> void:
+func test_scroll_and_pet_tooltips() -> void:
 	for item: ItemDef in Content.items.values():
 		var texts := _texts(_lines_for(ItemStack.create(item)))
 		if item is ScrollDef:
 			var sc := item as ScrollDef
 			check(texts[1].contains(sc.slot_text()), "%s: names the gear it fits" % item.id)
 			check(texts.has("Success rate: %d%%" % roundi(sc.chance * 100.0)), "%s: gives its success rate" % item.id)
-		elif item is ChairDef:
-			check(texts.has("While sitting: +%d HP, +%d MP each recovery" % [(item as ChairDef).regen_hp, (item as ChairDef).regen_mp]), "%s: gives its recovery" % item.id)
 		elif item is PetDef:
 			check(texts.has("Picks up items within %d px of you" % roundi((item as PetDef).loot_reach)), "%s: gives its reach" % item.id)
 

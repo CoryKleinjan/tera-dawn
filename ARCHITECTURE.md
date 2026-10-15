@@ -24,7 +24,7 @@ data/*.tres  ──►  Content (autoload)  ──►  World loads a MapDef  ─
   MapleStory formulas). The server owns each player's `Character`; `Game.me` is your copy.
 - **Components** (`scripts/components/`) are small reusable parts any actor can use: `Health`,
   `Hitbox`, `SpriteRig` (sprite, animation, light and aura) and `HeroBody` (how every hero shows: his
-  painted layers, chair and pet; see [characters](docs/architecture/characters.md)).
+  painted layers and pet; see [characters](docs/architecture/characters.md)).
 - **Server** (`scripts/server/`) runs the game for everyone (see [multiplayer](docs/architecture/multiplayer.md)).
 - **Actors** (`scripts/actors/`) are what you see in the world: your hero, other players,
   monsters, NPCs and drops.
@@ -43,7 +43,7 @@ second. Only the stage turns that into 3D (32 game pixels per 3D unit).
 
 - [Game rules](docs/game-rules.md): how the game should look and play; read it before any change.
 - [Multiplayer and players together](docs/architecture/multiplayer.md): the server, client, snapshots, co-op and characters saved on each computer, parties and trades.
-- [Characters: creation, extras, balance and player actions](docs/architecture/characters.md): character creation, how heroes show, chairs, pets, Monster Book, achievements, balance, how to add a player action.
+- [Characters: creation, extras, balance and player actions](docs/architecture/characters.md): character creation, how heroes show, sitting, pets, Monster Book, achievements, balance, how to add a player action.
 - [Folders](docs/architecture/folders.md): what lives in each folder.
 - [Draw order and the stage](docs/architecture/rendering.md): the 3D layers, depths and pixel size of the diorama, world-anchored text.
 - [Monsters](docs/architecture/monsters.md): how to add a monster.

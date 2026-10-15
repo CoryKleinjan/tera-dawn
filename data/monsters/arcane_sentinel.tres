@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=34 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=32 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/arcane_sentinel.tres" id="anim"]
@@ -15,7 +15,6 @@
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_luk_60.tres" id="14_scroll_top_luk_60"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_int_60.tres" id="15_scroll_top_int_60"]
 [ext_resource type="Resource" path="res://data/items/use/power_elixir.tres" id="22_power_elixir"]
-[ext_resource type="Resource" path="res://data/items/setup/crystal_chair.tres" id="p11_crystal_chair"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_shot_bolt.tres" id="mv_boss_shot_bolt"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_slam.tres" id="mv_boss_slam"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_charge.tres" id="mv_boss_charge"]
@@ -105,13 +104,6 @@ chance = 1.0
 min_amount = 216
 max_amount = 432
 
-[sub_resource type="Resource" id="P11_crystal_chair"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("p11_crystal_chair")
-chance = 0.08
-min_amount = 1
-max_amount = 1
-
 [resource]
 script = ExtResource("1_monster_def")
 id = &"arcane_sentinel"
@@ -130,5 +122,5 @@ keep_distance = 140.0
 sprite_frames = ExtResource("anim")
 sprite_scale = 1.5
 light_color = Color(0.690196, 0.564706, 1.0, 1.0)
-drops = Array[ExtResource("4_drop_entry")]([SubResource("P11_crystal_chair"), SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_18")])
+drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_18")])
 respawn_ticks = Vector2i(1800, 2400)
