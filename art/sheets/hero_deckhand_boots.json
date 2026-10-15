@@ -8,14 +8,14 @@
       "walk1",
       "walk2",
       "jump",
-      "",
+      "hurt",
       "walk3",
       ""
     ],
     [
-      "",
-      "",
-      "",
+      "swing1",
+      "swing2",
+      "swing3",
       "",
       "",
       "",
@@ -74,7 +74,10 @@
         "ladder1": "hero_deckhand_boots:ladder1",
         "ladder_hold": "hero_deckhand_boots:ladder_hold",
         "back": "hero_deckhand_boots:back",
-        "hurt": "hero_deckhand_boots:idle1"
+        "swing1": "hero_deckhand_boots:swing1",
+        "swing2": "hero_deckhand_boots:swing2",
+        "swing3": "hero_deckhand_boots:swing3",
+        "hurt": "hero_deckhand_boots:hurt"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -150,6 +153,24 @@
         "back": {
           "frames": [
             "back"
+          ],
+          "fps": 1
+        },
+        "swing1": {
+          "frames": [
+            "swing1"
+          ],
+          "fps": 1
+        },
+        "swing2": {
+          "frames": [
+            "swing2"
+          ],
+          "fps": 1
+        },
+        "swing3": {
+          "frames": [
+            "swing3"
           ],
           "fps": 1
         },

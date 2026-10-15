@@ -8,18 +8,18 @@
       "walk1",
       "walk2",
       "jump",
-      "",
+      "hurt",
       "walk3",
       ""
     ],
     [
+      "swing1",
+      "swing2",
+      "swing3",
       "",
       "",
       "",
-      "",
-      "",
-      "",
-      "",
+      "sit",
       ""
     ],
     [
@@ -74,7 +74,11 @@
         "ladder1": "hero_hunters_vest:ladder1",
         "ladder_hold": "hero_hunters_vest:ladder_hold",
         "back": "hero_hunters_vest:back",
-        "hurt": "hero_hunters_vest:idle1"
+        "swing1": "hero_hunters_vest:swing1",
+        "swing2": "hero_hunters_vest:swing2",
+        "swing3": "hero_hunters_vest:swing3",
+        "hurt": "hero_hunters_vest:hurt",
+        "sit": "hero_hunters_vest:sit"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -153,9 +157,33 @@
           ],
           "fps": 1
         },
+        "swing1": {
+          "frames": [
+            "swing1"
+          ],
+          "fps": 1
+        },
+        "swing2": {
+          "frames": [
+            "swing2"
+          ],
+          "fps": 1
+        },
+        "swing3": {
+          "frames": [
+            "swing3"
+          ],
+          "fps": 1
+        },
         "hurt": {
           "frames": [
             "hurt"
+          ],
+          "fps": 1
+        },
+        "sit": {
+          "frames": [
+            "sit"
           ],
           "fps": 1
         }

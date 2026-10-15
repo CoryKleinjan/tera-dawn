@@ -8,18 +8,18 @@
       "walk1",
       "walk2",
       "jump",
-      "",
+      "hurt",
       "walk3",
       ""
     ],
     [
+      "swing1",
+      "swing2",
+      "swing3",
       "",
       "",
       "",
-      "",
-      "",
-      "",
-      "",
+      "sit",
       ""
     ],
     [
@@ -74,7 +74,11 @@
         "ladder1": "hero_footpad_trousers:ladder1",
         "ladder_hold": "hero_footpad_trousers:ladder_hold",
         "back": "hero_footpad_trousers:back",
-        "hurt": "hero_footpad_trousers:idle1"
+        "swing1": "hero_footpad_trousers:swing1",
+        "swing2": "hero_footpad_trousers:swing2",
+        "swing3": "hero_footpad_trousers:swing3",
+        "hurt": "hero_footpad_trousers:hurt",
+        "sit": "hero_footpad_trousers:sit"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -153,9 +157,33 @@
           ],
           "fps": 1
         },
+        "swing1": {
+          "frames": [
+            "swing1"
+          ],
+          "fps": 1
+        },
+        "swing2": {
+          "frames": [
+            "swing2"
+          ],
+          "fps": 1
+        },
+        "swing3": {
+          "frames": [
+            "swing3"
+          ],
+          "fps": 1
+        },
         "hurt": {
           "frames": [
             "hurt"
+          ],
+          "fps": 1
+        },
+        "sit": {
+          "frames": [
+            "sit"
           ],
           "fps": 1
         }

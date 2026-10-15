@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=15 format=3]
+[gd_resource type="SpriteFrames" load_steps=14 format=3]
 
 [ext_resource type="Texture2D" path="res://assets/sprites/hero/deckhand_trousers.png" id="1_strip"]
 
@@ -50,9 +50,5 @@ region = Rect2(2460, 0, 246, 161)
 atlas = ExtResource("1_strip")
 region = Rect2(2706, 0, 246, 161)
 
-[sub_resource type="AtlasTexture" id="f12"]
-atlas = ExtResource("1_strip")
-region = Rect2(2952, 0, 246, 161)
-
 [resource]
-animations = [{"frames": [{"duration": 1.0, "texture": SubResource("f0")}], "loop": true, "name": &"idle1", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f1")}], "loop": true, "name": &"idle2", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f2")}], "loop": true, "name": &"walk1", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f3")}], "loop": true, "name": &"walk2", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f4")}], "loop": true, "name": &"walk3", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f5")}], "loop": true, "name": &"jump", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f6")}], "loop": true, "name": &"rope1", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f7")}], "loop": true, "name": &"rope2", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f8")}], "loop": true, "name": &"rope_hold", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f9")}], "loop": true, "name": &"ladder1", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f10")}], "loop": true, "name": &"ladder_hold", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f11")}], "loop": true, "name": &"back", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f12")}], "loop": true, "name": &"hurt", "speed": 1.0}]
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("f0")}], "loop": true, "name": &"idle1", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f1")}], "loop": true, "name": &"idle2", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f2")}], "loop": true, "name": &"walk1", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f3")}], "loop": true, "name": &"walk2", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f4")}], "loop": true, "name": &"walk3", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f5")}], "loop": true, "name": &"jump", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f6")}], "loop": true, "name": &"rope1", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f7")}], "loop": true, "name": &"rope2", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f8")}], "loop": true, "name": &"rope_hold", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f9")}], "loop": true, "name": &"ladder1", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f10")}], "loop": true, "name": &"ladder_hold", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f11")}], "loop": true, "name": &"back", "speed": 1.0}]

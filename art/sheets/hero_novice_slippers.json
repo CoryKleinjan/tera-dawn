@@ -13,9 +13,9 @@
       ""
     ],
     [
-      "",
-      "",
-      "",
+      "swing1",
+      "swing2",
+      "swing3",
       "",
       "",
       "crouch",
@@ -67,17 +67,20 @@
         "walk1": "hero_novice_slippers:walk1",
         "walk2": "hero_novice_slippers:walk2",
         "jump": "hero_novice_slippers:jump",
-        "hurt": "hero_novice_slippers:idle1",
         "walk3": "hero_novice_slippers:walk3",
         "crouch": "hero_novice_slippers:crouch",
-        "sit": "hero_novice_slippers:sit",
         "faint": "hero_novice_slippers:faint",
         "rope1": "hero_novice_slippers:rope1",
         "rope2": "hero_novice_slippers:rope2",
         "rope_hold": "hero_novice_slippers:rope_hold",
         "ladder1": "hero_novice_slippers:ladder1",
         "ladder_hold": "hero_novice_slippers:ladder_hold",
-        "back": "hero_novice_slippers:back"
+        "back": "hero_novice_slippers:back",
+        "swing1": "hero_novice_slippers:swing1",
+        "swing2": "hero_novice_slippers:swing2",
+        "swing3": "hero_novice_slippers:swing3",
+        "hurt": "hero_novice_slippers:hurt",
+        "sit": "hero_novice_slippers:sit"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -114,12 +117,6 @@
           ],
           "fps": 1
         },
-        "hurt": {
-          "frames": [
-            "hurt"
-          ],
-          "fps": 1
-        },
         "walk3": {
           "frames": [
             "walk3"
@@ -129,12 +126,6 @@
         "crouch": {
           "frames": [
             "crouch"
-          ],
-          "fps": 1
-        },
-        "sit": {
-          "frames": [
-            "sit"
           ],
           "fps": 1
         },
@@ -177,6 +168,36 @@
         "back": {
           "frames": [
             "back"
+          ],
+          "fps": 1
+        },
+        "swing1": {
+          "frames": [
+            "swing1"
+          ],
+          "fps": 1
+        },
+        "swing2": {
+          "frames": [
+            "swing2"
+          ],
+          "fps": 1
+        },
+        "swing3": {
+          "frames": [
+            "swing3"
+          ],
+          "fps": 1
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "sit": {
+          "frames": [
+            "sit"
           ],
           "fps": 1
         }

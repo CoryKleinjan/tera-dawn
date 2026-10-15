@@ -13,9 +13,9 @@
       ""
     ],
     [
-      "",
-      "",
-      "",
+      "swing1",
+      "swing2",
+      "swing3",
       "",
       "",
       "crouch",
@@ -58,7 +58,11 @@
         "jump": "hero_hands:jump",
         "walk3": "hero_hands:walk3",
         "crouch": "hero_hands:crouch",
-        "faint": "hero_hands:faint"
+        "faint": "hero_hands:faint",
+        "swing1": "hero_hands:swing1",
+        "swing2": "hero_hands:swing2",
+        "swing3": "hero_hands:swing3",
+        "hurt": "hero_hands:hurt"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -110,6 +114,30 @@
         "faint": {
           "frames": [
             "faint"
+          ],
+          "fps": 1
+        },
+        "swing1": {
+          "frames": [
+            "swing1"
+          ],
+          "fps": 1
+        },
+        "swing2": {
+          "frames": [
+            "swing2"
+          ],
+          "fps": 1
+        },
+        "swing3": {
+          "frames": [
+            "swing3"
+          ],
+          "fps": 1
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
           ],
           "fps": 1
         }
