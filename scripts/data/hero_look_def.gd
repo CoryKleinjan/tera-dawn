@@ -1,14 +1,15 @@
 class_name HeroLookDef
 extends Resource
 ## How the hero is drawn: his painted layers and which frames each animation shows. Every layer
-## (his body, face and hair here, and each piece of gear's `EquipDef.worn`) is a SpriteFrames
-## cut from the same cells (art/sheets/hero_*.json), so the layers line up frame by frame;
-## each frame is a one-frame animation named after its cell ("idle1", "walk2", "rope_hold").
-## HeroBody stacks them in a fixed order.
+## (his body and fists here, each face and hairstyle's HeroStyleDef.frames and each piece of
+## gear's `EquipDef.worn`) is a SpriteFrames cut from the same cells (art/sheets/hero_*.json),
+## so the layers line up frame by frame; each frame is a one-frame animation named after its
+## cell ("idle1", "walk2", "rope_hold"). HeroBody stacks them in a fixed order.
 
 @export var body: SpriteFrames
-@export var face: SpriteFrames
-@export var hair: SpriteFrames
+## The faces and hairstyles he can have (HeroStyleDef), the first of each his default.
+@export var faces: Array[Resource] = []
+@export var hairs: Array[Resource] = []
 ## His fists painted on their own, drawn over the weapon he holds so his hand wraps its grip.
 @export var hands: SpriteFrames
 ## Frames whose fists were painted with bare forearms, left off under long sleeves
@@ -17,18 +18,22 @@ extends Resource
 ## Frames whose fists are drawn over his clothes with or without a weapon out (lying down, a
 ## hand resting on his belly).
 @export var resting_hand_frames: Array[StringName] = []
-## His own parts moved by hand in the pose editor: part (&"body", &"face", &"hair", &"hands")
+## His own parts moved by hand in the pose editor: part (&"body", &"hands"; a face or hairstyle
+## keeps its own, HeroStyleDef)
 ## -> {frame: Vector4(x, y, degrees clockwise, places up the stack)} (HeroBody.Layer).
 @export var nudges: Dictionary = {}
 ## His own parts drawn bigger or smaller in the pose editor: part -> {frame: size} (1.0 as
 ## painted).
 @export var sizes: Dictionary = {}
+## His own parts added to or deleted from frames in the pose editor: part -> {frame: the frame
+## whose painting shows there, or &"" when deleted} (EquipDef.frame_art).
+@export var frame_art: Dictionary = {}
 ## Animation name (what TDPlayer._animation() says he is doing) -> {"frames": [frame names],
 ## "fps": frames a second, "loop": whether it repeats}. "<name>_<weapon kind>" is used instead
 ## while that kind of weapon is held (a bow's "attack_bow").
 @export var animations: Dictionary = {}
 ## Animation names that show another's frames: "fall" plays "jump". Anything with no frames
-## (attacks, for now) shows him standing.
+## shows him standing.
 @export var same_as: Dictionary = {}
 
 ## The frame `anim` shows `seconds` after it started, holding `weapon_kind`: a frame name, or

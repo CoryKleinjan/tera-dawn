@@ -41,9 +41,12 @@ update this page when one changes. Each zone's own look and music are in
   any piece (his body, face, hair, fists, each piece of gear) can be moved, turned, resized and
   moved up or down the stack on any frame; nothing is repainted or cut for it. Prefer shrinking
   to growing: a piece drawn bigger than painted looks softer.
+- Every piece of gear has frames for every pose in the game, whatever its job: every job's
+  attack (swing, bow, pistol, throw, cast) and every skill pose added later, since the Harbinger
+  wears all gear and uses all skills. A new body pose means new frames for all gear.
 - Animations are shared across similar actions (one swing for all melee, one cast for all
-  spells); his walk is 4 steps, slow. Attack animations are on hold: he attacks in his standing
-  pose until they are redone.
+  spells); his walk is 4 steps, slow. Melee attacks play one 3-frame swing with the weapon
+  only turning in the picture, never edge-on.
 - Male only for now.
 
 ## Movement and combat feel

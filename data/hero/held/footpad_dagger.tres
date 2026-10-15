@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="HeldDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/held_def.gd" id="1_held"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/hero/held/footpad_dagger.tres" id="2_frames"]
+
+[resource]
+script = ExtResource("1_held")
+frames = ExtResource("2_frames")
+anchor = Vector2(12.9, 8.0)
+pins = {
+&"ambush1": Vector4(177.8, 104, -25, 2),
+&"anchor1": Vector4(161, 60.4, -70, 2),
+&"anchor2": Vector4(142, 89.5, -25, 2),
+&"backstep": Vector4(159.9, 69.3, -25, 2),
+&"blink": Vector4(127.5, 91.7, -115, 2),
+&"cast1": Vector4(147, 30, -115, 2),
+&"cast2": Vector4(176, 90, -25, 2),
+&"gravity1": Vector4(88.3, 43.6, -130, 2),
+&"gravity2": Vector4(163.3, 112.9, 65, 2),
+&"hurt": Vector4(84, 120, 40, 2),
+&"idle1": Vector4(90.4, 121.1, 0.0, 2),
+&"idle2": Vector4(90.5, 120.6, 0.4, 2),
+&"jump": Vector4(84.3, 110.0, 14.7, 2),
+&"leap": Vector4(83.9, 85, 155, 2),
+&"lunge": Vector4(162.1, 123, 0, 2),
+&"pinning": Vector4(170, 99.5, 0, 2),
+&"skyward1": Vector4(95, 125.2, 125, 2),
+&"skyward2": Vector4(107.3, 21.2, -115, 2),
+&"swing1": Vector4(88, 57, 200, 2),
+&"swing2": Vector4(157, 91, -45, 2),
+&"swing3": Vector4(152, 125, 20, 2),
+&"walk1": Vector4(82.5, 116.6, -1.1, 2),
+&"walk2": Vector4(97.6, 116.4, -0.9, 2),
+&"walk3": Vector4(84.5, 110.2, 12.1, 2)
+}

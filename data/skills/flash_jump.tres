@@ -29,3 +29,4 @@ cooldown = 10
 action_ticks = 18
 move = SubResource("Resource_move")
 icon = ExtResource("3_icon")
+animation = &"leap"

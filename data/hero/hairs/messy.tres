@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="HeroStyleDef" load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/hero_style_def.gd" id="1_style"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/hero/hair.tres" id="2_frames"]
+[ext_resource type="Resource" path="res://data/hero/hairs/messy_under_novice_hat.tres" id="3_under"]
+[ext_resource type="Resource" path="res://data/hero/hairs/messy_under_footpad_bandana.tres" id="4_under"]
+[ext_resource type="Resource" path="res://data/hero/hairs/messy_under_hunters_hood.tres" id="5_under"]
+[ext_resource type="Resource" path="res://data/hero/hairs/messy_under_squire_helm.tres" id="6_under"]
+[ext_resource type="Resource" path="res://data/hero/hairs/messy_under_deckhand_tricorn.tres" id="7_under"]
+
+[resource]
+script = ExtResource("1_style")
+id = &"messy"
+display_name = "Messy"
+frames = ExtResource("2_frames")
+nudges = {
+&"ambush1": Vector4(18.4, 20.9, 36, 0),
+&"anchor1": Vector4(-2.6, 3.9, 3, 0),
+&"anchor2": Vector4(-26.6, 8.7, -12, 0),
+&"backstep": Vector4(-11.6, -12.2, 3, 0),
+&"blink": Vector4(8.6, 13.3, 15, 0),
+&"cast1": Vector4(-16.5, -0.8, -30, 0),
+&"cast2": Vector4(-3.6, 0.4, -0, 0),
+&"gravity1": Vector4(-7.8, 6, 0, 0),
+&"gravity2": Vector4(8.1, 28, 3, 0),
+&"hurt": Vector4(-24.5, 11.1, -24, 0),
+&"leap": Vector4(24.7, -13.5, 15, 0),
+&"lunge": Vector4(26, 3.9, 3, 0),
+&"pinning": Vector4(5, 6.2, 15, 0),
+&"roll1": Vector4(12.4, 17.8, 45, 0),
+&"roll2": Vector4(6.6, 33.6, -174, 0),
+&"sit": Vector4(-3.6, 23.7, 0, 0),
+&"skyward1": Vector4(18.9, 18.5, 20, 0),
+&"skyward2": Vector4(-0.2, -6.7, 0, 0),
+&"swing1": Vector4(-2.6, 4.7, -9, 0),
+&"swing2": Vector4(8.6, 7.1, 15, 0),
+&"swing3": Vector4(18.9, 14.6, 18, 0)
+}
+under_hats = {
+&"novice_hat": ExtResource("3_under"),
+&"footpad_bandana": ExtResource("4_under"),
+&"hunters_hood": ExtResource("5_under"),
+&"squire_helm": ExtResource("6_under"),
+&"deckhand_tricorn": ExtResource("7_under")
+}

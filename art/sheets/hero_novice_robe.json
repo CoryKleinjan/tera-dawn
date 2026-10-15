@@ -13,11 +13,11 @@
       ""
     ],
     [
-      "",
-      "",
-      "",
-      "",
-      "",
+      "swing1",
+      "swing2",
+      "swing3",
+      "cast1",
+      "cast2",
       "crouch",
       "sit",
       "faint"
@@ -31,6 +31,36 @@
       "ladder_hold",
       "back",
       ""
+    ],
+    [
+      "bow1",
+      "bow2",
+      "",
+      "throw1",
+      "throw2",
+      "throw3",
+      "pistol1",
+      "pistol2"
+    ],
+    [
+      "skyward1",
+      "skyward2",
+      "gravity1",
+      "gravity2",
+      "ambush1",
+      "",
+      "anchor1",
+      "anchor2"
+    ],
+    [
+      "pinning",
+      "leap",
+      "backstep",
+      "blink",
+      "lunge",
+      "roll1",
+      "roll2",
+      ""
     ]
   ],
   "grid": {
@@ -38,7 +68,10 @@
       0,
       720,
       1440,
-      2160
+      2160,
+      2880,
+      3600,
+      4320
     ],
     "cols": [
       0,
@@ -67,17 +100,43 @@
         "walk1": "hero_novice_robe:walk1",
         "walk2": "hero_novice_robe:walk2",
         "jump": "hero_novice_robe:jump",
-        "hurt": "hero_novice_robe:hurt",
         "walk3": "hero_novice_robe:walk3",
         "crouch": "hero_novice_robe:crouch",
-        "sit": "hero_novice_robe:sit",
         "faint": "hero_novice_robe:faint",
         "rope1": "hero_novice_robe:rope1",
         "rope2": "hero_novice_robe:rope2",
         "rope_hold": "hero_novice_robe:rope_hold",
         "ladder1": "hero_novice_robe:ladder1",
         "ladder_hold": "hero_novice_robe:ladder_hold",
-        "back": "hero_novice_robe:back"
+        "back": "hero_novice_robe:back",
+        "swing1": "hero_novice_robe:swing1",
+        "swing2": "hero_novice_robe:swing2",
+        "swing3": "hero_novice_robe:swing3",
+        "hurt": "hero_novice_robe:hurt",
+        "sit": "hero_novice_robe:sit",
+        "bow1": "hero_novice_robe:bow1",
+        "bow2": "hero_novice_robe:bow2",
+        "throw1": "hero_novice_robe:throw1",
+        "throw2": "hero_novice_robe:throw2",
+        "throw3": "hero_novice_robe:throw3",
+        "pistol1": "hero_novice_robe:pistol1",
+        "pistol2": "hero_novice_robe:pistol2",
+        "cast1": "hero_novice_robe:cast1",
+        "cast2": "hero_novice_robe:cast2",
+        "skyward1": "hero_novice_robe:skyward1",
+        "skyward2": "hero_novice_robe:skyward2",
+        "gravity1": "hero_novice_robe:gravity1",
+        "gravity2": "hero_novice_robe:gravity2",
+        "ambush1": "hero_novice_robe:ambush1",
+        "anchor1": "hero_novice_robe:anchor1",
+        "anchor2": "hero_novice_robe:anchor2",
+        "pinning": "hero_novice_robe:pinning",
+        "leap": "hero_novice_robe:leap",
+        "backstep": "hero_novice_robe:backstep",
+        "blink": "hero_novice_robe:blink",
+        "lunge": "hero_novice_robe:lunge",
+        "roll1": "hero_novice_robe:roll1",
+        "roll2": "hero_novice_robe:roll2"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -114,12 +173,6 @@
           ],
           "fps": 1
         },
-        "hurt": {
-          "frames": [
-            "hurt"
-          ],
-          "fps": 1
-        },
         "walk3": {
           "frames": [
             "walk3"
@@ -129,12 +182,6 @@
         "crouch": {
           "frames": [
             "crouch"
-          ],
-          "fps": 1
-        },
-        "sit": {
-          "frames": [
-            "sit"
           ],
           "fps": 1
         },
@@ -177,6 +224,174 @@
         "back": {
           "frames": [
             "back"
+          ],
+          "fps": 1
+        },
+        "swing1": {
+          "frames": [
+            "swing1"
+          ],
+          "fps": 1
+        },
+        "swing2": {
+          "frames": [
+            "swing2"
+          ],
+          "fps": 1
+        },
+        "swing3": {
+          "frames": [
+            "swing3"
+          ],
+          "fps": 1
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "sit": {
+          "frames": [
+            "sit"
+          ],
+          "fps": 1
+        },
+        "bow1": {
+          "frames": [
+            "bow1"
+          ],
+          "fps": 1
+        },
+        "bow2": {
+          "frames": [
+            "bow2"
+          ],
+          "fps": 1
+        },
+        "throw1": {
+          "frames": [
+            "throw1"
+          ],
+          "fps": 1
+        },
+        "throw2": {
+          "frames": [
+            "throw2"
+          ],
+          "fps": 1
+        },
+        "throw3": {
+          "frames": [
+            "throw3"
+          ],
+          "fps": 1
+        },
+        "pistol1": {
+          "frames": [
+            "pistol1"
+          ],
+          "fps": 1
+        },
+        "pistol2": {
+          "frames": [
+            "pistol2"
+          ],
+          "fps": 1
+        },
+        "cast1": {
+          "frames": [
+            "cast1"
+          ],
+          "fps": 1
+        },
+        "cast2": {
+          "frames": [
+            "cast2"
+          ],
+          "fps": 1
+        },
+        "skyward1": {
+          "frames": [
+            "skyward1"
+          ],
+          "fps": 1
+        },
+        "skyward2": {
+          "frames": [
+            "skyward2"
+          ],
+          "fps": 1
+        },
+        "gravity1": {
+          "frames": [
+            "gravity1"
+          ],
+          "fps": 1
+        },
+        "gravity2": {
+          "frames": [
+            "gravity2"
+          ],
+          "fps": 1
+        },
+        "ambush1": {
+          "frames": [
+            "ambush1"
+          ],
+          "fps": 1
+        },
+        "anchor1": {
+          "frames": [
+            "anchor1"
+          ],
+          "fps": 1
+        },
+        "anchor2": {
+          "frames": [
+            "anchor2"
+          ],
+          "fps": 1
+        },
+        "pinning": {
+          "frames": [
+            "pinning"
+          ],
+          "fps": 1
+        },
+        "leap": {
+          "frames": [
+            "leap"
+          ],
+          "fps": 1
+        },
+        "backstep": {
+          "frames": [
+            "backstep"
+          ],
+          "fps": 1
+        },
+        "blink": {
+          "frames": [
+            "blink"
+          ],
+          "fps": 1
+        },
+        "lunge": {
+          "frames": [
+            "lunge"
+          ],
+          "fps": 1
+        },
+        "roll1": {
+          "frames": [
+            "roll1"
+          ],
+          "fps": 1
+        },
+        "roll2": {
+          "frames": [
+            "roll2"
           ],
           "fps": 1
         }

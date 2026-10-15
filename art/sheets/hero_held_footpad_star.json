@@ -1,0 +1,45 @@
+{
+  "source": "art/source/hero/held/footpad_star.png",
+  "out_dir": "art/build/hero/held/footpad_star",
+  "cells": [
+    [
+      "held"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      182
+    ],
+    "cols": [
+      0,
+      181
+    ]
+  },
+  "inset": 0,
+  "label_band": 0,
+  "trim": false,
+  "dark_key": false,
+  "defringe": false,
+  "scale": 0.111,
+  "save": false,
+  "sets": {
+    "hero_held_footpad_star": {
+      "frames": {
+        "held": "hero_held_footpad_star:held"
+      },
+      "anchor": "cell",
+      "baseline": "cell",
+      "out": "assets/sprites/hero/held/footpad_star.png",
+      "sprite_frames": "assets/animations/hero/held/footpad_star.tres",
+      "animations": {
+        "held": {
+          "frames": [
+            "held"
+          ],
+          "fps": 1
+        }
+      }
+    }
+  }
+}

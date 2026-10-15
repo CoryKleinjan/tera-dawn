@@ -59,8 +59,6 @@ func apply_info(info: Array) -> void:
 func play_skill(skill: SkillDef) -> void:
 	if skill == null or skill.is_spell():
 		return
-	if skill.move and skill.move.style != MoveDef.Style.CHARGE:
-		return # only a Charge swings; the other moves show in how they move
 	animation = skill.animation
 
 func fainted() -> bool:

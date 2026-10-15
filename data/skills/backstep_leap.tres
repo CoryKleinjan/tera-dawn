@@ -31,3 +31,4 @@ recharge_per_level = -0.25
 action_ticks = 14
 move = SubResource("Resource_move")
 icon = ExtResource("3_icon")
+animation = &"backstep"

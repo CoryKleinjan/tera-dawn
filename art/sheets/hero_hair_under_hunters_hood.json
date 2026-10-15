@@ -1,0 +1,45 @@
+{
+  "source": "art/source/hero/hair_under_hunters_hood.png",
+  "out_dir": "art/build/hero/hair_under_hunters_hood",
+  "cells": [
+    [
+      "idle1"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      720
+    ],
+    "cols": [
+      0,
+      1100
+    ]
+  },
+  "inset": 0,
+  "label_band": 0,
+  "trim": false,
+  "dark_key": false,
+  "defringe": true,
+  "scale": 0.111,
+  "save": false,
+  "sets": {
+    "hero_hair_under_hunters_hood": {
+      "frames": {
+        "idle1": "hero_hair_under_hunters_hood:idle1"
+      },
+      "anchor": "cell",
+      "baseline": "cell",
+      "out": "assets/sprites/hero/hair_under_hunters_hood.png",
+      "sprite_frames": "assets/animations/hero/hair_under_hunters_hood.tres",
+      "animations": {
+        "idle1": {
+          "frames": [
+            "idle1"
+          ],
+          "fps": 1
+        }
+      }
+    }
+  }
+}
