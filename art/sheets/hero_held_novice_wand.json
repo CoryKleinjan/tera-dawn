@@ -1,0 +1,45 @@
+{
+  "source": "art/source/hero/held/novice_wand.png",
+  "out_dir": "art/build/hero/held/novice_wand",
+  "cells": [
+    [
+      "held"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      99
+    ],
+    "cols": [
+      0,
+      199
+    ]
+  },
+  "inset": 0,
+  "label_band": 0,
+  "trim": false,
+  "dark_key": false,
+  "defringe": false,
+  "scale": 0.111,
+  "save": false,
+  "sets": {
+    "hero_held_novice_wand": {
+      "frames": {
+        "held": "hero_held_novice_wand:held"
+      },
+      "anchor": "cell",
+      "baseline": "cell",
+      "out": "assets/sprites/hero/held/novice_wand.png",
+      "sprite_frames": "assets/animations/hero/held/novice_wand.tres",
+      "animations": {
+        "held": {
+          "frames": [
+            "held"
+          ],
+          "fps": 1
+        }
+      }
+    }
+  }
+}

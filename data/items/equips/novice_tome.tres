@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/data/equip_def.gd" id="script"]
 [ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="stat_block"]
 [ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="pickup"]
-[ext_resource type="SpriteFrames" path="res://assets/animations/hero/novice_tome.tres" id="worn"]
+[ext_resource type="Resource" path="res://data/hero/held/novice_tome.tres" id="held"]
 
 [sub_resource type="Resource" id="stats"]
 script = ExtResource("stat_block")
@@ -20,8 +20,7 @@ pickup_effect = ExtResource("pickup")
 sell_price = 300
 slot = 10
 offhand_kind = &"book"
-worn = ExtResource("worn")
-worn_in_front = true
+held = ExtResource("held")
 jobs = Array[StringName]([&"mage"])
 required_level = 10
 stats = SubResource("stats")

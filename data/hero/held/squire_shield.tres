@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="HeldDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/held_def.gd" id="1_held"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/hero/held/squire_shield.tres" id="2_frames"]
+
+[resource]
+script = ExtResource("1_held")
+frames = ExtResource("2_frames")
+anchor = Vector2(35.9, 36.3)
+pins = {
+&"crouch": Vector4(153.3, 106.7, 0, 0),
+&"hurt": Vector4(164.8, 129.4, -0.6, 0),
+&"idle1": Vector4(148.9, 119.8, 0, 0),
+&"idle2": Vector4(149.5, 120, 0, 0),
+&"jump": Vector4(159.2, 107.4, 0, 0),
+&"sit": Vector4(144.5, 120.9, 0, 0),
+&"walk1": Vector4(158.1, 115.2, 0, 0),
+&"walk2": Vector4(145.6, 121.6, 0, 0),
+&"walk3": Vector4(159, 108, 0, 0)
+}

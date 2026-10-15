@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnb7fbc3ed40h"
-path="res://.godot/imported/squire_shield.png-bab3e9f7c23d24952cad55cd5a131444.ctex"
+uid="uid://rq0w3jc45ev5"
+path="res://.godot/imported/squire_shield.png-c06078af9cb212a68c3884f50d81790d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/hero/squire_shield.png"
-dest_files=["res://.godot/imported/squire_shield.png-bab3e9f7c23d24952cad55cd5a131444.ctex"]
+source_file="res://assets/sprites/hero/held/squire_shield.png"
+dest_files=["res://.godot/imported/squire_shield.png-c06078af9cb212a68c3884f50d81790d.ctex"]
 
 [params]
 

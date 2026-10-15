@@ -29,7 +29,7 @@ const EXPECTED := {
 	"projectiles": ["ProjectileDef"],
 	"achievements": ["AchievementDef"],
 	"cutscenes": ["CutsceneDef"],
-	"hero": ["HeroLookDef"],
+	"hero": ["HeroLookDef", "HeldDef"],
 }
 
 ## Every .tres file under `dir`, sorted.
