@@ -13671,6 +13671,33 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Each cell holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: climbing a rope, climbing a rope, holding a rope with both hands above his head, climbing a ladder, climbing a ladder, holding a ladder, standing; cell 8 is empty). He is seen from BEHIND, his back to the viewer, exactly like the boy in the second attached picture, whose boots show their heels and backs. On the feet of each green shape, paint ONLY a pair of soft deep blue cloth magician's slippers with gold trim, seen from BEHIND like those boots: the rounded HEEL of each slipper faces the viewer, with the gold trim around the back of the opening at his ankle; the pointed curled toes point AWAY from the viewer, into the picture, so they are hidden behind the heel (at most the very tip peeks up past it). Do not paint the toes or the curl facing the viewer. When a foot is lifted, its sole may show. Paint nothing else: no legs, body or clothes. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Every piece must come out WHOLE and SOLID: no holes, gaps, notches, bites, missing chunks, see-through spots or edges cut off flat anywhere, even where an arm, hand or leg used to cover it. Before finishing, check every cell for holes and gaps and fill any you find. Style: the same slippers as the Magician wears (deep blue cloth, gold trim), with warm colours, light from the upper left, smooth soft painted shading and a thin dark plum-brown outline, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
   }
+ },
+ {
+  "id": "mshero_body_swing_sit",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_swing_sit.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 13:47Z 'repaint the sitting poses'; 13:55Z 'i like your plan. go with it.' to step 1 'paint the sitting and swing body test: 1 sheet, about $0.07'): straight-leg sitting and a new 3-frame melee swing in which one weapon painting only rotates in the picture, never turns edge-on.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/body_action.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_move.png",
+    "/mnt/project-files/references/hero.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "This is a sheet of 8 cells (2 rows of 4) of the game's base character, a chibi boy with a blank face, on a flat magenta background. Keep every cell listed as KEEP exactly as it is. Repaint ONLY the cells listed as REPAINT, as the same boy (same head, ears, blank face with no eyes, brows or mouth, bald, cream short-sleeved undershirt, brown shorts, barefoot, rounded mitten fists with no separate fingers, same size, same clean smooth painted style and thin dark plum-brown outline, same feet ground line as the standing boy in the first attached picture). He faces right in a slight three-quarter side view. His SWORD ARM is the arm on the LEFT side of the picture. KEEP cells 4, 5, 6 and 8 exactly as they are. Cells 1, 2 and 3 are one melee swing with an imaginary straight sword (do NOT draw the sword). In all three, the sword fist is a closed mitten fist seen from the side with the thumb on top, gripping as if around a sword handle, so a flat sword in that fist would lie flat in the picture and never turn edge-on toward the viewer; the whole fist and forearm are clearly visible, never hidden behind his head or body. Feet stay planted apart on the ground line in all three, body turned the same way. REPAINT cell 1 (wind-up): sword arm raised up and back above and behind his head, elbow bent, fist up high; the other arm forward and low for balance. REPAINT cell 2 (strike): sword arm swung forward and straight out in front of his chest at shoulder height, fist forward; body leaning slightly forward. REPAINT cell 3 (follow-through): sword arm carried on down, low and forward in front of his hips, fist below his waist, body leaning forward. In cells 2 and 3 the other arm stays low and relaxed at his side. REPAINT cell 7 (sitting): the same boy sitting on the ground with BOTH legs straight out in front of him, knees NOT bent, legs flat on the ground and slightly apart, both bare feet visible with toes up, upper body upright, both hands resting on the ground beside his hips. Paint every repainted figure WHOLE, with no gaps, notches or holes. Keep the background flat pure magenta #FF00FF and keep the grid lines. Nothing else in the cells: no weapons, props, shadows, effects or text. Light from the upper left."
+  }
  }
 ]
 }
