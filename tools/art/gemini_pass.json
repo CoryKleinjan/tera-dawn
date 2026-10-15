@@ -12443,6 +12443,52 @@
    ],
    "text": "Paint the game's base character walking: exactly the same chibi boy as in the first attached picture (same head, ears, blank face with no eyes, brows or mouth, bald, cream short-sleeved undershirt, brown shorts, barefoot, rounded mitten hands closed in fists with no separate fingers or thumbs, same size and proportions as the figures in that picture, same clean smooth painted style and thin dark plum-brown outline). The base picture is a sheet of 8 cells (2 rows of 4); paint ONE full figure in each cell, centred, at the same size in every cell, with his feet on the same ground line near the bottom of the cell, like a MapleStory character sprite sheet. In every cell he faces right in a slight three-quarter side view, the same angle as the first cell of the first attached picture. Each row is one walk cycle of 4 clearly different steps, and the two rows are two versions of the same cycle to choose from. Cell 1 and cell 5: CONTACT, a long stride, the leg on the RIGHT side of the picture stepping far forward with its heel down, the leg on the LEFT side stretched far back on its toes, the arm on the LEFT side swung forward and the arm on the RIGHT side swung back. Cell 2 and cell 6: PASSING, the left-side leg now straight under him carrying his weight, the right-side knee lifted and bent as that foot swings through behind, body a little higher, arms close to his sides. Cell 3 and cell 7: CONTACT the other way, a long stride, the leg on the LEFT side stepping far forward with its heel down, the leg on the RIGHT side stretched far back on its toes, the arm on the RIGHT side swung forward and the arm on the LEFT side swung back (the opposite of cell 1). Cell 4 and cell 8: PASSING the other way, the right-side leg straight under him, the left-side knee lifted and bent as that foot swings through, body a little higher, arms close to his sides. The legs must look clearly different from one cell to the next so the walk animates; the strides in cells 1, 3, 5 and 7 are wide, with a clear gap between the feet. Keep the background flat pure magenta #FF00FF and keep the grid lines. Nothing else in the cells: no weapons, props, shadows, effects, text or labels. Light from the upper left."
   }
+ },
+ {
+  "id": "mshero_body_walk_stride_b",
+  "prompts": null,
+  "batch": "maple hero sheets (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_walk_stride_b.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": null,
+  "anchor": null,
+  "size": "1K",
+  "note": "2026-10-15 thread 'New hero' (Cory 00:16Z chose 'Paint 2 steps' on the card: the other-leg stride and its passing step as two single pictures, ~$0.14): one pose per picture, because 4-cell walk sheets come back as the same stride.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/walk_stride_a.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_move.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "Repaint this walking boy as the NEXT step of his walk: exactly the same chibi boy as in the base picture, at exactly the same size and the same place in the picture, with his feet on the same ground line, facing right at the same slight three-quarter angle: same head, ears, blank face with no eyes, brows or mouth, bald, cream short-sleeved undershirt, brown shorts, barefoot, rounded mitten hands closed in fists with no separate fingers or thumbs, same clean smooth painted style and thin dark plum-brown outline. In the base picture the leg on the RIGHT side of the picture steps forward and the arm on the LEFT side swings forward. Repaint him mid-stride the OTHER way round: the leg on the LEFT side of the picture now steps far forward with its heel down, the leg on the RIGHT side is stretched far back on its toes, the arm on the RIGHT side swings forward and the arm on the LEFT side swings back. A wide stride with a clear gap between the feet. Only the legs and arms change; the head and body stay where they are. Paint one figure only. Keep the background flat pure magenta #FF00FF. Nothing else: no weapons, props, shadows, effects, text or labels. Light from the upper left."
+  }
+ },
+ {
+  "id": "mshero_body_walk_pass_b",
+  "prompts": null,
+  "batch": "maple hero sheets (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_walk_pass_b.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": null,
+  "anchor": null,
+  "size": "1K",
+  "note": "2026-10-15 thread 'New hero' (Cory 00:16Z chose 'Paint 2 steps' on the card: the other-leg stride and its passing step as two single pictures, ~$0.14): one pose per picture, because 4-cell walk sheets come back as the same stride.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/walk_pass_a.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_move.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "Repaint this walking boy as the passing step on the other foot: exactly the same chibi boy as in the base picture, at exactly the same size and the same place in the picture, with his feet on the same ground line, facing right at the same slight three-quarter angle: same head, ears, blank face with no eyes, brows or mouth, bald, cream short-sleeved undershirt, brown shorts, barefoot, rounded mitten hands closed in fists with no separate fingers or thumbs, same clean smooth painted style and thin dark plum-brown outline. Turn him to the same angle as the first figure of the attached sheet if he looks turned toward the viewer. In the base picture one leg is straight under him and the knee of the leg on the RIGHT side of the picture is lifted. Repaint him the OTHER way round: the leg on the RIGHT side of the picture is now straight under him carrying his weight, and the knee of the leg on the LEFT side is lifted and bent as that foot swings through, body a little higher, arms close to his sides. Only the legs and arms change; the head and body stay where they are. Paint one figure only. Keep the background flat pure magenta #FF00FF. Nothing else: no weapons, props, shadows, effects, text or labels. Light from the upper left."
+  }
  }
 ]
 }
