@@ -7,8 +7,8 @@ extends Resource
 
 @export var id: StringName
 @export var texture: Texture2D
-## How tall it stands on screen, in game pixels (the hero is about 105). A house is about
-## 2.5 heroes, a shop or hall 3 to 3.5.
+## How tall it stands on screen, in game pixels (the hero is about 88). Sized so its door is
+## about 1.2 heroes (docs/game-rules.md); the rest of the building follows from its painting.
 @export var height := 280.0
 ## The middle of the doorway across the picture: 0 is its left edge, 1 its right (as drawn,
 ## before a placement flips it).

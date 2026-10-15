@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_npc_def")
 id = &"lanternfall_card_sharp"
+sprite_scale = 1.08
 display_name = "Old Dace"
 title = "Card Sharp"
 sprite_frames = ExtResource("2_sprite")

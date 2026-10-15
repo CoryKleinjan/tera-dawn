@@ -14,6 +14,7 @@ by = "Coach"
 [resource]
 script = ExtResource("1_npc_def")
 id = &"lanternfall_taxi"
+sprite_scale = 1.1
 display_name = "Coachman Gage"
 title = "Taxi"
 sprite_frames = ExtResource("2_sprite")

@@ -7,6 +7,6 @@
 script = ExtResource("1_building_def")
 id = &"emberforge_bunkhouse"
 texture = ExtResource("2_bunkhouse")
-height = 290.0
+height = 435.0
 door_x = 0.438
 chimney = Vector2(0.715, 0.99)
