@@ -56,7 +56,6 @@
         "walk1": "hero_hands:walk1",
         "walk2": "hero_hands:walk2",
         "jump": "hero_hands:jump",
-        "hurt": "hero_hands:idle1",
         "walk3": "hero_hands:walk3",
         "crouch": "hero_hands:crouch",
         "faint": "hero_hands:faint"
@@ -93,12 +92,6 @@
         "jump": {
           "frames": [
             "jump"
-          ],
-          "fps": 1
-        },
-        "hurt": {
-          "frames": [
-            "hurt"
           ],
           "fps": 1
         },

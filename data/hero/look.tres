@@ -16,10 +16,22 @@ bare_arm_frames = Array[StringName]([&"crouch"])
 resting_hand_frames = Array[StringName]([&"faint", &"crouch"])
 nudges = {
 &"face": {
-&"hurt": Vector4(13, -2, 0, 0)
+&"hurt": Vector4(-10.1, 9.3, -24, 0),
+&"sit": Vector4(-3.6, 23.7, 0, 0),
+&"swing1": Vector4(-1.6, 4.9, -9, 0),
+&"swing2": Vector4(7, 6.5, 15, 0),
+&"swing3": Vector4(17, 13.9, 18, 0)
+},
+&"hair": {
+&"hurt": Vector4(-24.5, 11.1, -24, 0),
+&"sit": Vector4(-3.6, 23.7, 0, 0),
+&"swing1": Vector4(-2.6, 4.7, -9, 0),
+&"swing2": Vector4(8.6, 7.1, 15, 0),
+&"swing3": Vector4(18.9, 14.6, 18, 0)
 }
 }
 animations = {
+&"attack": {"fps": 10.0, "frames": [&"swing1", &"swing2", &"swing3"], "loop": false},
 &"attack_bow": {"fps": 8.0, "frames": [&"bow1", &"bow2", &"bow1"], "loop": false},
 &"climb_idle": {"fps": 1.0, "frames": [&"rope_hold"], "loop": true},
 &"crouch": {"fps": 1.0, "frames": [&"crouch"], "loop": true},
@@ -39,6 +51,7 @@ same_as = {
 &"jump_apex": &"jump",
 &"land": &"idle",
 &"level_up": &"idle",
+&"slash": &"attack",
 &"ready": &"idle",
 &"turn": &"idle"
 }

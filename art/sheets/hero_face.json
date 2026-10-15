@@ -70,7 +70,7 @@
         "hurt": "hero_face:hurt",
         "walk3": "hero_face:walk3",
         "crouch": "hero_face:crouch",
-        "sit": "hero_face:sit",
+        "sit": "hero_face:idle1",
         "faint": "hero_face:faint",
         "bow1": "hero_face:bow1",
         "bow2": "hero_face:bow2",
@@ -78,7 +78,10 @@
         "throw2": "hero_face:throw2",
         "throw3": "hero_face:throw3",
         "pistol1": "hero_face:pistol1",
-        "pistol2": "hero_face:pistol2"
+        "pistol2": "hero_face:pistol2",
+        "swing1": "hero_face:idle1",
+        "swing2": "hero_face:idle1",
+        "swing3": "hero_face:idle1"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -184,6 +187,24 @@
         "pistol2": {
           "frames": [
             "pistol2"
+          ],
+          "fps": 1
+        },
+        "swing1": {
+          "frames": [
+            "swing1"
+          ],
+          "fps": 1
+        },
+        "swing2": {
+          "frames": [
+            "swing2"
+          ],
+          "fps": 1
+        },
+        "swing3": {
+          "frames": [
+            "swing3"
           ],
           "fps": 1
         }

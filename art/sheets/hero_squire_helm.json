@@ -70,14 +70,17 @@
         "hurt": "hero_squire_helm:idle1",
         "walk3": "hero_squire_helm:walk3",
         "crouch": "hero_squire_helm:crouch",
-        "sit": "hero_squire_helm:sit",
+        "sit": "hero_squire_helm:idle1",
         "faint": "hero_squire_helm:faint",
         "rope1": "hero_squire_helm:rope1",
         "rope2": "hero_squire_helm:rope2",
         "rope_hold": "hero_squire_helm:rope_hold",
         "ladder1": "hero_squire_helm:ladder1",
         "ladder_hold": "hero_squire_helm:ladder_hold",
-        "back": "hero_squire_helm:back"
+        "back": "hero_squire_helm:back",
+        "swing1": "hero_squire_helm:idle1",
+        "swing2": "hero_squire_helm:idle1",
+        "swing3": "hero_squire_helm:idle1"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -177,6 +180,24 @@
         "back": {
           "frames": [
             "back"
+          ],
+          "fps": 1
+        },
+        "swing1": {
+          "frames": [
+            "swing1"
+          ],
+          "fps": 1
+        },
+        "swing2": {
+          "frames": [
+            "swing2"
+          ],
+          "fps": 1
+        },
+        "swing3": {
+          "frames": [
+            "swing3"
           ],
           "fps": 1
         }

@@ -81,7 +81,7 @@
         "hurt": "hero_hair:idle1",
         "walk3": "hero_hair:walk3",
         "crouch": "hero_hair:crouch",
-        "sit": "hero_hair:sit",
+        "sit": "hero_hair:idle1",
         "faint": "hero_hair:faint",
         "bow1": "hero_hair:bow1",
         "bow2": "hero_hair:bow2",
@@ -95,7 +95,10 @@
         "rope_hold": "hero_hair:rope_hold",
         "ladder1": "hero_hair:ladder1",
         "ladder_hold": "hero_hair:ladder_hold",
-        "back": "hero_hair:back"
+        "back": "hero_hair:back",
+        "swing1": "hero_hair:idle1",
+        "swing2": "hero_hair:idle1",
+        "swing3": "hero_hair:idle1"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -237,6 +240,24 @@
         "back": {
           "frames": [
             "back"
+          ],
+          "fps": 1
+        },
+        "swing1": {
+          "frames": [
+            "swing1"
+          ],
+          "fps": 1
+        },
+        "swing2": {
+          "frames": [
+            "swing2"
+          ],
+          "fps": 1
+        },
+        "swing3": {
+          "frames": [
+            "swing3"
           ],
           "fps": 1
         }

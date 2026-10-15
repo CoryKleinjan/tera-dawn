@@ -13,9 +13,9 @@
       ""
     ],
     [
-      "",
-      "",
-      "",
+      "swing1",
+      "swing2",
+      "swing3",
       "",
       "",
       "crouch",
@@ -78,7 +78,7 @@
         "walk1": "hero_body:walk1",
         "walk2": "hero_body:walk2",
         "jump": "hero_body:jump",
-        "hurt": "hero_body:idle1",
+        "hurt": "hero_body:hurt",
         "walk3": "hero_body:walk3",
         "crouch": "hero_body:crouch",
         "sit": "hero_body:sit",
@@ -95,7 +95,10 @@
         "rope_hold": "hero_body:rope_hold",
         "ladder1": "hero_body:ladder1",
         "ladder_hold": "hero_body:ladder_hold",
-        "back": "hero_body:back"
+        "back": "hero_body:back",
+        "swing1": "hero_body:swing1",
+        "swing2": "hero_body:swing2",
+        "swing3": "hero_body:swing3"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -237,6 +240,24 @@
         "back": {
           "frames": [
             "back"
+          ],
+          "fps": 1
+        },
+        "swing1": {
+          "frames": [
+            "swing1"
+          ],
+          "fps": 1
+        },
+        "swing2": {
+          "frames": [
+            "swing2"
+          ],
+          "fps": 1
+        },
+        "swing3": {
+          "frames": [
+            "swing3"
           ],
           "fps": 1
         }

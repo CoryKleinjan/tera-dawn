@@ -20,6 +20,13 @@ pickup_effect = ExtResource("pickup")
 sell_price = 250
 slot = 1
 worn = ExtResource("worn")
+nudges = {
+&"hurt": Vector4(-23.2, 11.2, -24, 0),
+&"sit": Vector4(-3.6, 23.7, -0, 0),
+&"swing1": Vector4(-2.1, 4.8, -9, 0),
+&"swing2": Vector4(7.8, 6.8, 15, 0),
+&"swing3": Vector4(18, 14.2, 18, 0)
+}
 hides_hair = true
 jobs = Array[StringName]([&"warrior"])
 required_level = 10

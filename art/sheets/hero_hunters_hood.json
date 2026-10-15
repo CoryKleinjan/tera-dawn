@@ -74,7 +74,11 @@
         "ladder1": "hero_hunters_hood:ladder1",
         "ladder_hold": "hero_hunters_hood:ladder_hold",
         "back": "hero_hunters_hood:back",
-        "hurt": "hero_hunters_hood:idle1"
+        "hurt": "hero_hunters_hood:idle1",
+        "swing1": "hero_hunters_hood:idle1",
+        "swing2": "hero_hunters_hood:idle1",
+        "swing3": "hero_hunters_hood:idle1",
+        "sit": "hero_hunters_hood:idle1"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -156,6 +160,30 @@
         "hurt": {
           "frames": [
             "hurt"
+          ],
+          "fps": 1
+        },
+        "swing1": {
+          "frames": [
+            "swing1"
+          ],
+          "fps": 1
+        },
+        "swing2": {
+          "frames": [
+            "swing2"
+          ],
+          "fps": 1
+        },
+        "swing3": {
+          "frames": [
+            "swing3"
+          ],
+          "fps": 1
+        },
+        "sit": {
+          "frames": [
+            "sit"
           ],
           "fps": 1
         }

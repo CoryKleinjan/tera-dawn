@@ -7,4 +7,16 @@
 script = ExtResource("1_held")
 frames = ExtResource("2_frames")
 anchor = Vector2(4.3, 2.6)
-pins = {&"idle1": Vector4(102.9, 124.4, 0.0, 2), &"idle2": Vector4(102.7, 123.7, -1.2, 2), &"walk1": Vector4(93.9, 126.4, 0.0, 2), &"walk2": Vector4(106.9, 117.2, 0.0, 2), &"jump": Vector4(72.7, 95.7, 0.0, 2), &"hurt": Vector4(102.9, 124.4, 0.0, 2), &"walk3": Vector4(95.5, 118.5, 0.0, 2), &"crouch": Vector4(101.9, 76.6, 0.0, 2)}
+pins = {
+&"crouch": Vector4(101.9, 76.6, 0.0, 2),
+&"hurt": Vector4(84, 120, 40, 2),
+&"idle1": Vector4(102.9, 124.4, 0.0, 2),
+&"idle2": Vector4(102.7, 123.7, -1.2, 2),
+&"jump": Vector4(72.7, 95.7, 0.0, 2),
+&"swing1": Vector4(88, 57, 200, 2),
+&"swing2": Vector4(157, 91, -45, 2),
+&"swing3": Vector4(152, 125, 20, 2),
+&"walk1": Vector4(93.9, 126.4, 0.0, 2),
+&"walk2": Vector4(106.9, 117.2, 0.0, 2),
+&"walk3": Vector4(95.5, 118.5, 0.0, 2)
+}
