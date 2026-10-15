@@ -20,7 +20,7 @@ then character select shows the list (name, level and job) with the new characte
   hats) sets where it stacks. A weapon or off-hand is instead `EquipDef.held` (`HeldDef`,
   `data/hero/held/`): ONE painting pinned per frame (anchor point, spot, turn and layer), the
   MapleStory way. Pose him by hand in `scenes/dev/hero_pose_editor.tscn` (play it in Godot:
-  pick the job, pose and what he wears from the dropdowns, click any piece and drag it, wheel to
+  pick the job ("No job" for the plain hero), pose and what he wears from the dropdowns, click any piece and drag it, wheel or Q/E to
   turn, PgUp/PgDn to move it up or down the stack, Save writes the files). Held pieces save to
   their pins; worn layers to `EquipDef.nudges` and his body, face, hair and fists to
   `HeroLookDef.nudges` (frame -> Vector4: shift, turn, places up the stack), applied whole by
