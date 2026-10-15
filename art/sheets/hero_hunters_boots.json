@@ -135,7 +135,8 @@
         "blink": "hero_hunters_boots:blink",
         "lunge": "hero_hunters_boots:lunge",
         "roll1": "hero_hunters_boots:roll1",
-        "roll2": "hero_hunters_boots:roll2"
+        "roll2": "hero_hunters_boots:roll2",
+        "faint": "hero_hunters_boots:faint"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -385,6 +386,12 @@
         "roll2": {
           "frames": [
             "roll2"
+          ],
+          "fps": 1
+        },
+        "faint": {
+          "frames": [
+            "faint"
           ],
           "fps": 1
         }

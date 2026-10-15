@@ -132,7 +132,11 @@
         "lunge": "hero_deckhand_boots:lunge",
         "roll1": "hero_deckhand_boots:roll1",
         "faint": "hero_deckhand_boots:faint",
-        "sit": "hero_deckhand_boots:sit"
+        "sit": "hero_deckhand_boots:sit",
+        "crouch": "hero_deckhand_boots:crouch",
+        "bow1": "hero_deckhand_boots:bow1",
+        "throw2": "hero_deckhand_boots:throw2",
+        "roll2": "hero_deckhand_boots:roll2"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -364,6 +368,30 @@
         "sit": {
           "frames": [
             "sit"
+          ],
+          "fps": 1
+        },
+        "crouch": {
+          "frames": [
+            "crouch"
+          ],
+          "fps": 1
+        },
+        "bow1": {
+          "frames": [
+            "bow1"
+          ],
+          "fps": 1
+        },
+        "throw2": {
+          "frames": [
+            "throw2"
+          ],
+          "fps": 1
+        },
+        "roll2": {
+          "frames": [
+            "roll2"
           ],
           "fps": 1
         }

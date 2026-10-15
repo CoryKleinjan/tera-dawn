@@ -135,7 +135,8 @@
         "roll1": "hero_footpad_jerkin:roll1",
         "roll2": "hero_footpad_jerkin:roll2",
         "faint": "hero_footpad_jerkin:faint",
-        "sit": "hero_footpad_jerkin:sit"
+        "sit": "hero_footpad_jerkin:sit",
+        "crouch": "hero_footpad_jerkin:crouch"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -385,6 +386,12 @@
         "sit": {
           "frames": [
             "sit"
+          ],
+          "fps": 1
+        },
+        "crouch": {
+          "frames": [
+            "crouch"
           ],
           "fps": 1
         }

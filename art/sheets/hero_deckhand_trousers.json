@@ -129,7 +129,13 @@
         "blink": "hero_deckhand_trousers:blink",
         "lunge": "hero_deckhand_trousers:lunge",
         "roll1": "hero_deckhand_trousers:roll1",
-        "roll2": "hero_deckhand_trousers:roll2"
+        "roll2": "hero_deckhand_trousers:roll2",
+        "hurt": "hero_deckhand_trousers:hurt",
+        "swing1": "hero_deckhand_trousers:swing1",
+        "swing2": "hero_deckhand_trousers:swing2",
+        "swing3": "hero_deckhand_trousers:swing3",
+        "sit": "hero_deckhand_trousers:sit",
+        "faint": "hero_deckhand_trousers:faint"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -343,6 +349,42 @@
         "roll2": {
           "frames": [
             "roll2"
+          ],
+          "fps": 1
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "swing1": {
+          "frames": [
+            "swing1"
+          ],
+          "fps": 1
+        },
+        "swing2": {
+          "frames": [
+            "swing2"
+          ],
+          "fps": 1
+        },
+        "swing3": {
+          "frames": [
+            "swing3"
+          ],
+          "fps": 1
+        },
+        "sit": {
+          "frames": [
+            "sit"
+          ],
+          "fps": 1
+        },
+        "faint": {
+          "frames": [
+            "faint"
           ],
           "fps": 1
         }

@@ -130,7 +130,12 @@
         "pinning": "hero_squire_trousers:pinning",
         "leap": "hero_squire_trousers:leap",
         "backstep": "hero_squire_trousers:backstep",
-        "lunge": "hero_squire_trousers:lunge"
+        "lunge": "hero_squire_trousers:lunge",
+        "throw3": "hero_squire_trousers:throw3",
+        "pistol1": "hero_squire_trousers:pistol1",
+        "pistol2": "hero_squire_trousers:pistol2",
+        "blink": "hero_squire_trousers:blink",
+        "roll2": "hero_squire_trousers:roll2"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -350,6 +355,36 @@
         "lunge": {
           "frames": [
             "lunge"
+          ],
+          "fps": 1
+        },
+        "throw3": {
+          "frames": [
+            "throw3"
+          ],
+          "fps": 1
+        },
+        "pistol1": {
+          "frames": [
+            "pistol1"
+          ],
+          "fps": 1
+        },
+        "pistol2": {
+          "frames": [
+            "pistol2"
+          ],
+          "fps": 1
+        },
+        "blink": {
+          "frames": [
+            "blink"
+          ],
+          "fps": 1
+        },
+        "roll2": {
+          "frames": [
+            "roll2"
           ],
           "fps": 1
         }

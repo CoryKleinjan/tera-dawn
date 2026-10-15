@@ -133,7 +133,10 @@
         "backstep": "hero_novice_slippers:backstep",
         "blink": "hero_novice_slippers:blink",
         "lunge": "hero_novice_slippers:lunge",
-        "roll1": "hero_novice_slippers:roll1"
+        "roll1": "hero_novice_slippers:roll1",
+        "anchor2": "hero_novice_slippers:anchor2",
+        "pinning": "hero_novice_slippers:pinning",
+        "roll2": "hero_novice_slippers:roll2"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -371,6 +374,24 @@
         "roll1": {
           "frames": [
             "roll1"
+          ],
+          "fps": 1
+        },
+        "anchor2": {
+          "frames": [
+            "anchor2"
+          ],
+          "fps": 1
+        },
+        "pinning": {
+          "frames": [
+            "pinning"
+          ],
+          "fps": 1
+        },
+        "roll2": {
+          "frames": [
+            "roll2"
           ],
           "fps": 1
         }
