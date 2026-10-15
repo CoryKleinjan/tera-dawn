@@ -71,9 +71,8 @@ func test_moving_gets_you_up() -> void:
 	check(not p.sitting, "walking off")
 
 func test_getting_hit_gets_you_up() -> void:
-	var mob := p.map.mobs[0]
 	h.ask(2, &"req_sit", [true])
-	p.map.hurt_player(p, mob.def, mob.position.x)
+	p.map.hurt_player(p, Content.monster(&"dewling"), 340.0)
 	check(not p.sitting, "knocked up")
 	check_eq(h.last(2, &"ev_sit"), [false], "client told")
 
