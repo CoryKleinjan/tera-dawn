@@ -1,7 +1,7 @@
 extends TestCase
 ## Every reference between content resolves: drops, shops, quests, NPCs and where they
 ## stand, spawns, portals, travel routes, jobs and their gifts, skills, monsters that split
-## or shoot, gear, pets and chairs, maps and their regions. Each failure names
+## or shoot, gear, pets, maps and their regions. Each failure names
 ## the file and the field.
 
 const Scan := preload("res://tests/content/content_scan.gd")
@@ -364,13 +364,6 @@ func test_pets_have_food_and_sane_numbers() -> void:
 		check(p.loot_reach > 0 and p.loot_every > 0 and p.hunger_ticks > 0 and p.body_scale > 0, "%s: loot_reach, loot_every, hunger_ticks and body_scale must be positive" % Scan.where(p))
 	for p: PetDef in pets:
 		check(not p.chatter.is_empty() and p.chatter.all(func(l: String) -> bool: return l.strip_edges() != ""), "%s: chatter is empty or has blank lines" % Scan.where(p))
-
-func test_chairs_restore_something() -> void:
-	for i: ItemDef in Content.items.values():
-		var c := i as ChairDef
-		if c:
-			check(c.regen_hp > 0 or c.regen_mp > 0, "%s: regen_hp and regen_mp are both 0" % Scan.where(c))
-			check(c.seat_scale > 0, "%s: seat_scale is %s" % [Scan.where(c), c.seat_scale])
 
 func test_pickup_effects_are_real_effects() -> void:
 	for i: ItemDef in Content.items.values():

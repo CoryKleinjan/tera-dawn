@@ -135,10 +135,10 @@ var _move_t := 0
 var _move_speed := 0.0
 ## Movement skills already used in this jump (ids): each works once per jump in the air.
 var _air_moves := {}
-## The chair you're sitting on (the server said so), or empty. Moving gets you up.
-var sitting: StringName = &""
+## Sitting on the ground (the server said so). Moving or getting hit gets you up.
+var sitting := false
 
-## How you're drawn: your painted layers, chair and pet (see HeroBody).
+## How you're drawn: your painted layers and pet (see HeroBody).
 var body: HeroBody
 var companion: TDCompanion:
 	get:
@@ -153,7 +153,7 @@ func place(x: float, y: float) -> void:
 	climb = null
 	on_ground = true
 	down = false
-	sitting = &""
+	sitting = false
 	platform = world.platforms[0]
 	jump_grace.cancel()
 	_report()
@@ -168,13 +168,13 @@ func fainted() -> bool:
 func faint() -> void:
 	down = true
 	climb = null
-	sitting = &""
+	sitting = false
 	Sound.jingle(FAINT_JINGLE)
 
-## The server sat you down on a chair (or got you up, with an empty id).
-func sit(chair_id: StringName) -> void:
-	sitting = chair_id
-	if sitting != &"":
+## The server sat you down on the ground (or got you up).
+func sit(down_: bool) -> void:
+	sitting = down_
+	if sitting:
 		vel = Vector2.ZERO
 		action_t = 0
 
@@ -183,6 +183,7 @@ func knock_back(from_x: float) -> void:
 	world.shake(0.3)
 	Sound.play(HURT_SOUND)
 	inv = SimPlayer.HURT_INV
+	sitting = false # the server gets you up too
 	world.stage.flash_screen(HURT_FLASH_COLOR, HURT_FLASH)
 	# a steadying buff (Iron Body) keeps you on your feet
 	if not is_climbing() and not Game.me.skills.steady():
@@ -247,15 +248,21 @@ func step() -> void:
 		loot_cd -= 1
 	if not Game.me.skills.buffs.is_empty():
 		Game.me.skills.tick_buffs() # the server ends them too; this keeps timers and speed in step
-	if sitting != &"":
-		# any move gets you up; the server sees you move and does the same
+	if sitting:
+		# the sit key again, or any move, gets you up
+		var up := _tapped("sit")
 		for a in ["move_left", "move_right", "move_up", "move_down", "jump", "attack"]:
-			if _held(a):
-				sitting = &""
-		if sitting != &"":
+			up = up or _held(a)
+		if up:
+			sitting = false
+			Net.ask(&"req_sit", [false])
+		else:
 			if world.tick % REPORT_EVERY == 0 or _animation() != _reported:
 				_report()
 			return
+	elif _tapped("sit") and _can_sit():
+		_report()
+		Net.ask(&"req_sit", [true])
 	_attacks()
 	# hold the loot key to pick up everything in reach, one item after another
 	if _held("loot") and loot_cd == 0 and not is_climbing():
@@ -269,6 +276,11 @@ func step() -> void:
 			_move()
 	if world.tick % REPORT_EVERY == 0 or _animation() != _reported:
 		_report()
+
+## Standing still on the ground with nothing else going on (the server checks too).
+func _can_sit() -> bool:
+	return on_ground and not is_climbing() and not fainted() and action_t == 0 and _move_t == 0 \
+		and scene_pose == &"" and absf(vel.x) < 0.01
 
 ## Whether an input is held, unless typing or minding a shop.
 func _held(action: StringName) -> bool:
@@ -569,7 +581,7 @@ func _move() -> void:
 func _process(_delta: float) -> void:
 	if body == null or world == null or world.map == null:
 		return
-	body.draw(face, sitting, Game.me.pet, _animation(), Game.me.equipment.defs())
+	body.draw(face, Game.me.pet, _animation(), Game.me.equipment.defs())
 
 ## What he is doing, as an animation name: the server passes it on to everyone else.
 func _animation() -> StringName:
@@ -577,7 +589,7 @@ func _animation() -> StringName:
 		return scene_pose
 	if fainted():
 		return &"faint"
-	if sitting != &"":
+	if sitting:
 		return &"sit"
 	if is_climbing():
 		var moving := _held("move_up") or _held("move_down")

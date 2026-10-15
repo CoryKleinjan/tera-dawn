@@ -38,7 +38,6 @@ There are four inventory tabs, and the class of the item decides which one it go
 | **UseDef** | Use | Potions: HP / MP restored (flat and percent), effect, cooldown |
 | **ScrollDef** | Use | Upgrade scrolls: the gear `slots` they work on, a success `chance` and the `stats` they add. Each use spends one of the gear's `upgrade_slots` (`ItemStack.slots_used`; `upgrades` counts the ones that worked) |
 | **ItemDef** | Etc | Monster parts and anything else; stacks up to `max_stack` |
-| **ChairDef** | Setup | Chairs: extra `regen_hp` / `regen_mp` while sitting |
 | **PetDef** | Setup | Pets: `loot_reach`, `loot_every`, `hunger_ticks` and their `chatter` |
 | **CardDef** | (book) | Monster Book cards, made by `Content` for every monster |
 

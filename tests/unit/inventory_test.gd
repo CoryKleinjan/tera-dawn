@@ -27,16 +27,16 @@ func test_items_go_to_their_own_tab() -> void:
 	var e := fx.equip()
 	var u := fx.use()
 	var x := fx.etc()
-	var chair := ChairDef.new()
-	chair.id = &"t_chair"
+	var pet := PetDef.new()
+	pet.id = &"t_pet"
 	bag.add(e)
 	bag.add(u)
 	bag.add(x)
-	bag.add(chair)
+	bag.add(pet)
 	check_eq(bag.at(ItemDef.Tab.EQUIP, 0).item, e, "gear in Equip")
 	check_eq(bag.at(ItemDef.Tab.USE, 0).item, u, "potion in Use")
 	check_eq(bag.at(ItemDef.Tab.ETC, 0).item, x, "etc in Etc")
-	check_eq(bag.at(ItemDef.Tab.SETUP, 0).item, chair, "chair in Setup")
+	check_eq(bag.at(ItemDef.Tab.SETUP, 0).item, pet, "pet in Setup")
 
 func test_add_tops_up_existing_stack_before_new_slot() -> void:
 	var x := fx.etc(&"t_etc", 10)

@@ -1,6 +1,6 @@
 extends TestCase
-## The Setup tab through the server: sitting on chairs (and their extra regeneration),
-## pets coming out, picking up loot, getting hungry and being fed. Also achievements
+## Sitting on the ground (and its faster regeneration) and the Setup tab through the
+## server: pets coming out, picking up loot, getting hungry and being fed. Also achievements
 ## reaching the player as ev_achievement.
 
 const ServerHarness := preload("res://tests/framework/server_helpers.gd")
@@ -8,16 +8,13 @@ const ServerHarness := preload("res://tests/framework/server_helpers.gd")
 var h: ServerHarness
 var p: SimPlayer
 var c: Character
-var stool: ChairDef
 var sprout: PetDef
 
 func before_each() -> void:
 	h = ServerHarness.new()
 	p = h.join(2, "Ann", ServerHarness.FIELD, 300.0)
 	c = p.character
-	stool = Content.item(&"wooden_stool")
 	sprout = Content.item(&"pet_sprout")
-	c.inventory.put(ItemDef.Tab.SETUP, 0, ItemStack.create(stool))
 	c.inventory.put(ItemDef.Tab.SETUP, 1, ItemStack.create(sprout))
 
 func after_each() -> void:
@@ -28,24 +25,24 @@ func _regen_tick() -> void:
 	p.map.tick = 119
 	h.step(1)
 
-# ---------- chairs ----------
+# ---------- sitting ----------
 
-func test_sitting_on_a_chair() -> void:
-	h.ask(2, &"req_setup", [0])
-	check_eq(p.chair, stool.id, "sitting")
-	check_eq(h.last(2, &"ev_sit"), [stool.id], "client told")
+func test_sitting_down() -> void:
+	h.ask(2, &"req_sit", [true])
+	check(p.sitting, "sitting")
+	check_eq(h.last(2, &"ev_sit"), [true], "client told")
 	check_eq(int(c.counters.get(Counters.SAT, 0)), 1, "counted")
 
-func test_a_chair_adds_to_regeneration() -> void:
+func test_sitting_doubles_regeneration() -> void:
 	c.health.set_hp(10)
 	c.mp = 0
 	_regen_tick()
 	check_eq(c.health.hp, 12, "2 HP standing at level 1")
 	check_eq(c.mp, 2, "2 MP standing at level 1")
-	h.ask(2, &"req_setup", [0])
+	h.ask(2, &"req_sit", [true])
 	_regen_tick()
-	check_eq(c.health.hp, 12 + 2 + stool.regen_hp, "the chair's extra HP")
-	check_eq(c.mp, 2 + 2 + stool.regen_mp, "the chair's extra MP")
+	check_eq(c.health.hp, 12 + 4, "4 HP sitting")
+	check_eq(c.mp, 2 + 4, "4 MP sitting")
 
 func test_no_regeneration_between_regen_ticks() -> void:
 	c.health.set_hp(10)
@@ -53,35 +50,37 @@ func test_no_regeneration_between_regen_ticks() -> void:
 	h.step(119)
 	check_eq(c.health.hp, 10, "nothing until tick 120")
 
-func test_using_the_chair_again_gets_up() -> void:
-	h.ask(2, &"req_setup", [0])
-	h.ask(2, &"req_setup", [0])
-	check_eq(p.chair, &"", "standing")
-	check_eq(h.last(2, &"ev_sit"), [&""], "client told")
+func test_getting_up() -> void:
+	h.ask(2, &"req_sit", [true])
+	h.ask(2, &"req_sit", [false])
+	check(not p.sitting, "standing")
+	check_eq(h.last(2, &"ev_sit"), [false], "client told")
 
 func test_you_cant_sit_in_the_air() -> void:
 	h.place(p, 300.0, 500.0)
-	h.ask(2, &"req_setup", [0])
-	check_eq(p.chair, &"", "not sitting")
+	h.ask(2, &"req_sit", [true])
+	check(not p.sitting, "not sitting")
 	check(h.told(2, "You can't sit here."), "told why")
+	check_eq(h.last(2, &"ev_sit"), [false], "client kept standing")
 
-func test_moving_gets_you_off_the_chair() -> void:
-	h.ask(2, &"req_setup", [0])
-	h.ask(2, &"req_move", [Vector2(301, 600), 1, &"idle", false])
-	check_eq(p.chair, stool.id, "a pixel of drift is fine")
+func test_moving_gets_you_up() -> void:
+	h.ask(2, &"req_sit", [true])
+	h.ask(2, &"req_move", [Vector2(301, 600), 1, &"sit", false])
+	check(p.sitting, "a pixel of drift is fine")
 	h.ask(2, &"req_move", [Vector2(310, 600), 1, &"walk", false])
-	check_eq(p.chair, &"", "walking off")
+	check(not p.sitting, "walking off")
 
-func test_changing_maps_gets_you_off_the_chair() -> void:
-	h.ask(2, &"req_setup", [0])
+func test_getting_hit_gets_you_up() -> void:
+	var mob := p.map.mobs[0]
+	h.ask(2, &"req_sit", [true])
+	p.map.hurt_player(p, mob.def, mob.position.x)
+	check(not p.sitting, "knocked up")
+	check_eq(h.last(2, &"ev_sit"), [false], "client told")
+
+func test_changing_maps_gets_you_up() -> void:
+	h.ask(2, &"req_sit", [true])
 	h.move_to(p, ServerHarness.TOWN)
-	check_eq(p.chair, &"", "standing")
-
-func test_others_see_your_chair() -> void:
-	h.join(3, "Bob", ServerHarness.FIELD, 800.0)
-	h.ask(2, &"req_setup", [0])
-	h.step(TDServer.SNAPSHOT_EVERY)
-	check_eq(h.player_info(3, 2)[4], stool.id, "chair in Ann's info")
+	check(not p.sitting, "standing")
 
 # ---------- pets ----------
 
@@ -172,12 +171,12 @@ func test_using_the_pet_again_sends_it_home() -> void:
 # ---------- achievements ----------
 
 func test_sitting_down_earns_take_a_seat_once() -> void:
-	h.ask(2, &"req_setup", [0])
+	h.ask(2, &"req_sit", [true])
 	h.step(1)
 	check_eq(h.events(2, &"ev_achievement"), [["take_a_seat"]], "sent once")
 	check_has(c.achievements, "take_a_seat", "kept on the character")
-	h.ask(2, &"req_setup", [0])
-	h.ask(2, &"req_setup", [0])
+	h.ask(2, &"req_sit", [false])
+	h.ask(2, &"req_sit", [true])
 	h.step(61)
 	check_eq(h.count(2, &"ev_achievement"), 1, "not sent again")
 

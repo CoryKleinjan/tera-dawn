@@ -14,7 +14,7 @@ bringing their own characters), with up to six characters saved on each player's
 coaches; a Beginner and five jobs (Warrior, Archer, Magician, Thief, Pirate) with skill books,
 quickslots, melee, ranged and magic combat; MapleStory-style stats, gear slots (the gear itself is being redrawn), upgrade scrolls
 and drops; NPCs, shops, storage and quests; chat, parties, buddies, guilds, trades and fame;
-chairs, pets, the Monster Book and Steam achievements.
+sitting, pets, the Monster Book and Steam achievements.
 
 All content is data in `data/`, and all art is painted sheets in `art/source/` cut into
 `assets/` by `tools/art/slice_sheets.py`. [ARCHITECTURE.md](ARCHITECTURE.md) explains how the

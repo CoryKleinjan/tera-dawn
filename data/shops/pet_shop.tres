@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShopDef" load_steps=15 format=3]
+[gd_resource type="Resource" script_class="ShopDef" load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/shop_def.gd" id="1_shop_def"]
 [ext_resource type="Script" path="res://scripts/data/shop_entry.gd" id="2_shop_entry"]
@@ -6,18 +6,6 @@
 [ext_resource type="Resource" path="res://data/items/setup/pet_sprout.tres" id="4_pet_sprout"]
 [ext_resource type="Resource" path="res://data/items/setup/pet_emberkit.tres" id="5_pet_emberkit"]
 [ext_resource type="Resource" path="res://data/items/use/pet_snack.tres" id="6_pet_snack"]
-[ext_resource type="Resource" path="res://data/items/setup/wooden_stool.tres" id="7_wooden_stool"]
-[ext_resource type="Resource" path="res://data/items/setup/cushion_chair.tres" id="8_cushion_chair"]
-
-[sub_resource type="Resource" id="Resource_6"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("8_cushion_chair")
-price = 9000
-
-[sub_resource type="Resource" id="Resource_5"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("7_wooden_stool")
-price = 3000
 
 [sub_resource type="Resource" id="Resource_4"]
 script = ExtResource("2_shop_entry")
@@ -42,5 +30,5 @@ price = 12000
 [resource]
 script = ExtResource("1_shop_def")
 id = &"pet_shop"
-display_name = "Pip's Pets & Seats"
-items = Array[ExtResource("2_shop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6")])
+display_name = "Pip's Pets"
+items = Array[ExtResource("2_shop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4")])

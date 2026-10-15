@@ -199,7 +199,7 @@ func snapshot(peer: int) -> Dictionary:
 	var ev := last(peer, &"ev_snapshot")
 	return SnapshotCodec.decode(ev[0]) if not ev.is_empty() else {}
 
-## The latest info `peer` was sent about player `of` ([name, level, job, guild, chair, pet]),
+## The latest info `peer` was sent about player `of` ([name, level, job, guild, pet, worn gear]),
 ## or [].
 func player_info(peer: int, of: int) -> Array:
 	for i in range(events(peer, &"ev_player_info").size() - 1, -1, -1):

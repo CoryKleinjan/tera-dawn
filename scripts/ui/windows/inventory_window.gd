@@ -1,7 +1,7 @@
 class_name TDInventoryWindow
 extends TDWindow
 ## The bag (I): Equip, Use, Etc and Setup tabs of item slots. Double-click gear to wear it, a
-## potion to use it, a chair or pet to sit or bring it out, drag to rearrange, drag onto the equipment window to equip, and drag
+## potion to use it, a pet to bring it out, drag to rearrange, drag onto the equipment window to equip, and drag
 ## out of every window to drop it on the ground. Double-clicking an upgrade scroll picks it
 ## up: the next click on a piece of gear uses it there (right-click puts it back).
 
@@ -121,9 +121,7 @@ func _tooltip_at(at: Vector2) -> Tip:
 			if stack and stack.item is ScrollDef:
 				hint = "Double-click, then click the gear"
 		ItemDef.Tab.SETUP:
-			if stack and stack.item is ChairDef:
-				hint = "Double-click to sit (move to get up)"
-			elif stack and stack.item is PetDef:
+			if stack and stack.item is PetDef:
 				hint = "Double-click to bring out or send home"
 	return Tip.new(stack, hint, true)
 

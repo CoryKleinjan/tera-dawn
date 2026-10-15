@@ -77,10 +77,6 @@ func _lines() -> Array:
 			out.append(["Restores %d MP" % mp, Palette.MP, 12])
 		if u.pet_food > 0:
 			out.append(["Pet food: +%d fullness" % u.pet_food, Palette.PET, 12])
-	elif item is ChairDef:
-		var ch := item as ChairDef
-		out.append(["Setup · Chair", Palette.MUTED, 11])
-		out.append(["While sitting: +%d HP, +%d MP each recovery" % [ch.regen_hp, ch.regen_mp], Palette.GOOD, 12])
 	elif item is PetDef:
 		var pet := item as PetDef
 		out.append(["Setup · Pet", Palette.MUTED, 11])

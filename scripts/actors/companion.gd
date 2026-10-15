@@ -1,14 +1,12 @@
 class_name TDCompanion
 extends Node2D
-## What comes along with a player (yours or someone else's): the chair they're sitting on
-## and the pet trotting after them. The player moves it each frame with `follow`.
-## Pets with `sprite_frames` play idle, walk, jump and happy; pets and chairs without art
-## of their own use their item icon as their body.
+## What comes along with a player (yours or someone else's): the pet trotting after them.
+## The player moves it each frame with `follow`. Pets with `sprite_frames` play idle, walk,
+## jump and happy; pets without art of their own use their item icon as their body.
 
 ## How far behind its owner a pet keeps, in game pixels.
 const PET_GAP := 72.0
 
-var chair: ChairDef
 var pet: PetDef
 ## Where the pet is, in game pixels (its feet).
 var pet_pos := Vector2.ZERO
@@ -16,20 +14,7 @@ var pet_face := 1
 var speech := ""
 var speech_t := 0
 var _walk := 0.0
-var _seat: Sprite3D
 var _body: SpriteBase3D
-
-func set_chair(id: StringName) -> void:
-	var c := Content.items.get(id) as ChairDef
-	if c == chair:
-		return
-	chair = c
-	if _seat:
-		_seat.queue_free()
-		_seat = null
-	if chair and chair.icon:
-		_seat = TDStage.sprite(chair.icon, TDStage.TEXEL * chair.seat_scale)
-		add_child(_seat)
 
 ## Brings out a pet (or puts it away with an empty id) next to `at`.
 func set_pet(id: StringName, at: Vector2) -> void:
@@ -60,14 +45,11 @@ func say(text: String) -> void:
 	speech = text
 	speech_t = 240
 
-## Puts the chair under the owner's feet and moves the pet toward its spot behind them.
+## Moves the pet toward its spot behind its owner.
 ## `ground` is the top of whatever is under the owner (for the pet to walk on).
 func follow(owner_feet: Vector2, owner_face: int, z: float, ground: float) -> void:
 	if speech_t > 0:
 		speech_t -= 1
-	if _seat:
-		_seat.position = TDStage.to3d(owner_feet + Vector2(0, 2), z - 0.03)
-		_seat.flip_h = owner_face < 0
 	if _body == null:
 		return
 	var want := Vector2(owner_feet.x - owner_face * PET_GAP, ground)

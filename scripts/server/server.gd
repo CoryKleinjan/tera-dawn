@@ -157,7 +157,7 @@ func enter_map(p: SimPlayer, id: StringName, x: float) -> void:
 		_off_map(p)
 	scenes.stop(p)
 	var m := map_instance(id, p)
-	p.chair = &""
+	p.sitting = false
 	p.character.visit(id)
 	m.add_player(p, x)
 	Net.send(p.peer, &"ev_enter_map", [id, x, m.full_state()])
@@ -220,6 +220,22 @@ func on_move(peer: int, at: Vector2, face: int, anim: StringName, climbing: bool
 	elif p:
 		quests.reached(p)
 		p.map.check_tear(p)
+
+## Sits the player down on the ground (`down`) or gets them up. Sitting regenerates faster
+## (SimPlayer.step); moving or getting hit gets them up.
+func on_sit(peer: int, down: bool) -> void:
+	var p := player_of(peer)
+	if p == null or p.sitting == down:
+		return
+	if down and (p.fainted() or p.climbing or p.in_scene() or p.map.layout.platform_under(p.position) == null):
+		p.map.tell(p, "You can't sit here.", MapInstance.BAD)
+		Net.send(peer, &"ev_sit", [false])
+		return
+	p.sitting = down
+	if down:
+		p.character.count(Counters.SAT)
+		p.dirty_character = true
+	Net.send(peer, &"ev_sit", [down])
 
 ## `aim` is a Hitbox.Aim: up or down for an aiming attack, else ahead.
 func on_skill(peer: int, skill_id: StringName, at: Vector2, face: int, aim := 0) -> void:

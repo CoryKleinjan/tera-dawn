@@ -34,7 +34,7 @@ scripts/
                       ItemStack, CharacterStats, MonsterBook, Achievements, Counters, Balance
   components/         Health, Hitbox, JumpGrace, SpriteRig, HeroBody (how a hero shows: his painted
                       layers and his companion)
-  actors/             Player (you), Avatar (other players), Companion (chairs, pets), Mob, Npc, Drop views
+  actors/             Player (you), Avatar (other players), Companion (pets), Mob, Npc, Drop views
   world/              World (what you see), WorldCamera, SnapshotSync (server views), WorldFx (hits, numbers, effects), Stage +
                       Terrain/Backdrop/Scenery builders, MapLayout, Platform, DropFlight, Combat
   fx/                 Flipbook effects and floating text
