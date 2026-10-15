@@ -12,12 +12,9 @@ body = ExtResource("2_body")
 face = ExtResource("3_face")
 hair = ExtResource("4_hair")
 hands = ExtResource("5_hands")
+bare_arm_frames = Array[StringName]([&"crouch"])
 animations = {
-&"attack": {"fps": 12.0, "frames": [&"swing1", &"swing2", &"swing3"], "loop": false},
 &"attack_bow": {"fps": 8.0, "frames": [&"bow1", &"bow2", &"bow1"], "loop": false},
-&"attack_sword": {"fps": 8.0, "frames": [&"swing1", &"swing2"], "loop": false},
-&"attack_wand": {"fps": 8.0, "frames": [&"swing2", &"cast1"], "loop": false},
-&"cast": {"fps": 8.0, "frames": [&"cast1", &"cast2"], "loop": false},
 &"climb_idle": {"fps": 1.0, "frames": [&"rope_hold"], "loop": true},
 &"crouch": {"fps": 1.0, "frames": [&"crouch"], "loop": true},
 &"faint": {"fps": 1.0, "frames": [&"faint"], "loop": true},
@@ -37,7 +34,5 @@ same_as = {
 &"land": &"idle",
 &"level_up": &"idle",
 &"ready": &"idle",
-&"slash": &"attack",
 &"turn": &"idle"
 }
-weapon_behind = Array[StringName]([&"swing1"])

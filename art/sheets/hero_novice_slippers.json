@@ -13,11 +13,11 @@
       ""
     ],
     [
-      "swing1",
-      "swing2",
-      "swing3",
-      "cast1",
-      "cast2",
+      "",
+      "",
+      "",
+      "",
+      "",
       "crouch",
       "sit",
       "faint"
@@ -36,9 +36,9 @@
   "grid": {
     "rows": [
       0,
-      675,
-      1350,
-      2025
+      720,
+      1440,
+      2160
     ],
     "cols": [
       0,
@@ -69,11 +69,6 @@
         "jump": "hero_novice_slippers:jump",
         "hurt": "hero_novice_slippers:hurt",
         "walk3": "hero_novice_slippers:walk3",
-        "swing1": "hero_novice_slippers:swing1",
-        "swing2": "hero_novice_slippers:swing2",
-        "swing3": "hero_novice_slippers:swing3",
-        "cast1": "hero_novice_slippers:cast1",
-        "cast2": "hero_novice_slippers:cast2",
         "crouch": "hero_novice_slippers:crouch",
         "sit": "hero_novice_slippers:sit",
         "faint": "hero_novice_slippers:faint",
@@ -128,36 +123,6 @@
         "walk3": {
           "frames": [
             "walk3"
-          ],
-          "fps": 1
-        },
-        "swing1": {
-          "frames": [
-            "swing1"
-          ],
-          "fps": 1
-        },
-        "swing2": {
-          "frames": [
-            "swing2"
-          ],
-          "fps": 1
-        },
-        "swing3": {
-          "frames": [
-            "swing3"
-          ],
-          "fps": 1
-        },
-        "cast1": {
-          "frames": [
-            "cast1"
-          ],
-          "fps": 1
-        },
-        "cast2": {
-          "frames": [
-            "cast2"
           ],
           "fps": 1
         },

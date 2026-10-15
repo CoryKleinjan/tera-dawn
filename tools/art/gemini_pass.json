@@ -12704,6 +12704,32 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 6 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: standing, standing, walking, walking, walking, jumping). Cells 7 and 8 are empty and must stay empty. He faces right. His SWORD ARM is the arm on the LEFT side of the picture. On each green shape, paint ONLY his sword hand: the closed rounded MITTEN fist at the end of the arm on the LEFT side of the picture, with no separate fingers or thumb, plus his wrist, exactly the same size, shape, angle, skin colour and place as that fist in the same cell of the first attached picture, so it lies exactly on top of it. Paint nothing above the wrist and nothing else: no other hand, arm, sleeve, body, head, sword or object. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Style: exactly the skin, warm colours, light from the upper left, smooth soft painted shading and thin dark plum-brown outline of the boy in the first attached picture. Keep the grid lines. No text, no labels."
   }
+ },
+ {
+  "id": "mshero_front_fist2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_front_fist2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 02:45Z 'the sword should be covered by his hand for the warrior'): the front-fist layer for the frames the first one missed (hurt, swing1, swing2, cast1, cast2, crouch), 1 sheet ~$0.07.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/silhouette_fist2.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_fist2.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 6 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose. Cells 7 and 8 are empty and must stay empty. He faces right. On each green shape, paint ONLY his SWORD HAND: one closed rounded MITTEN fist, with no separate fingers or thumb, plus his wrist, exactly the same size, shape, angle, skin colour and place as that fist in the same cell of the first attached picture, so it lies exactly on top of it. The sword hand in each cell is: cell 1 (flinching): the fist held low in front of his chest, the LEFT of the two fists; cell 2 (sword raised): the fist raised high at the upper left, above his head; cell 3 (swinging): the fist held out in front of his chest on the right; cell 4 (thrusting): the fist at the end of the arm stretched straight out to the right; cell 5 (both arms up): the raised fist on the LEFT side of the picture, NOT the right one; cell 6 (crouching): the fist on the LEFT side of the picture, in front of his belly. Paint only that one fist in each cell and nothing else: no other hand, arm, sleeve, body, head, sword or object. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Style: exactly the skin, warm colours, light from the upper left, smooth soft painted shading and thin dark plum-brown outline of the boy in the first attached picture. Keep the grid lines. No text, no labels."
+  }
  }
 ]
 }

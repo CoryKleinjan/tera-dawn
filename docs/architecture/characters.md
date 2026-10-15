@@ -13,9 +13,10 @@ then character select shows the list (name, level and job) with the new characte
   empty while the gear is being remade, so the creator offers no outfit for now.
 - **Layered look**: the hero is drawn from painted layers, MapleStory style. `HeroLookDef`
   (`data/hero/look.tres`) holds his body, face and hair and which frames each animation shows
-  (`"<anim>_<weapon kind>"` overrides it, like `attack_sword`). Each piece of gear's
+  (`"<anim>_<weapon kind>"` overrides it, like `attack_bow`; an animation with no frames, such as
+  an attack for now, shows him standing). Each piece of gear's
   `EquipDef.worn` is its layer, cut from the same cells (`art/sheets/hero_*.json`, one frame per
-  cell named like `idle1` or `swing2`), so layers line up frame by frame; `hides_hair` (helmets,
+  cell named like `idle1` or `walk2`), so layers line up frame by frame; `hides_hair` (helmets,
   hats) and `worn_in_front` (a tome) set where it stacks. A character has no picked appearance
   yet; older saves that carry one still load.
 - **One body for every hero**: your hero (`TDPlayer`) and other players' (`TDAvatar`) each

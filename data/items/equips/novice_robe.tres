@@ -21,6 +21,7 @@ pickup_effect = ExtResource("pickup")
 sell_price = 375
 slot = 2
 worn = ExtResource("worn")
+long_sleeves = true
 jobs = Array[StringName]([&"mage"])
 required_level = 10
 stats = SubResource("stats")

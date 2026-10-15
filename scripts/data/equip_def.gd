@@ -33,6 +33,9 @@ const OFFHAND_NAMES := {&"shield": "a shield", &"star": "throwing stars", &"book
 ## An off-hand held in front of his rear arm, under his top (a book), rather than slung behind
 ## him (a shield).
 @export var worn_in_front := false
+## A top whose long sleeves reach his wrists (a robe), so the fists painted with bare forearms
+## (HeroLookDef.bare_arm_frames) aren't drawn over them.
+@export var long_sleeves := false
 
 @export_group("Requirements")
 ## Job lines that can wear it (JobDef.family); empty for anyone.
