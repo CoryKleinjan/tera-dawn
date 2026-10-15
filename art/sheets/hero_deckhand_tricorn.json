@@ -56,7 +56,7 @@
   "label_band": 0,
   "trim": false,
   "dark_key": false,
-  "defringe": false,
+  "defringe": true,
   "scale": 0.111,
   "save": false,
   "sets": {
