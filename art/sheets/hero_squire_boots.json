@@ -135,7 +135,8 @@
         "backstep": "hero_squire_boots:backstep",
         "blink": "hero_squire_boots:blink",
         "lunge": "hero_squire_boots:lunge",
-        "roll1": "hero_squire_boots:roll1"
+        "roll1": "hero_squire_boots:roll1",
+        "roll2": "hero_squire_boots:roll2"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -385,6 +386,12 @@
         "roll1": {
           "frames": [
             "roll1"
+          ],
+          "fps": 1
+        },
+        "roll2": {
+          "frames": [
+            "roll2"
           ],
           "fps": 1
         }

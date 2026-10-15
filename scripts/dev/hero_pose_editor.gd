@@ -10,7 +10,8 @@ extends Control
 ##   Left/Right  pose          Tab        next piece       Wheel or Q/E (Shift+Q/E: fine)  turn
 ##   Shift+wheel or [ ]  smaller/bigger (Shift+[ ]: fine)
 ##   PgUp/PgDn   up/down stack H          add here / delete here
-##   A or Insert  add the piece to this frame (another frame's painting if it has none here)
+##   Add here button  pick a piece that has a painting for this pose and isn't on it
+##   A or Insert  add the picked piece to this frame (only with its own painting for it)
 ##   Delete or Backspace  delete the piece from this frame
 ##   C           copy the previous frame's place           R    reset the piece on this frame
 ##   Arrow Up/Down  move 0.5 px (with Shift: left/right)   Space  play the walk   Ctrl+S  save
@@ -54,6 +55,8 @@ var _pose_menu: OptionButton
 var _piece_menu: OptionButton
 var _wear_menus := {}  # place -> OptionButton
 var _choices := {}  # place -> [null, EquipDef...] the job can wear there, in its dropdown's order
+var _add_menu: PopupMenu
+var _add_list: Array[HeroBody.Layer] = []  # what _add_menu offers, in its order
 
 func _ready() -> void:
 	var rest: Array[StringName] = []
@@ -96,13 +99,16 @@ func _build_ui() -> void:
 	rows.add_child(tools)
 	for b in [["< Pose", func(): _step(-1)], ["Pose >", func(): _step(1)], ["Turn left", func(): _turn(-2.0)], ["Turn right", func(): _turn(2.0)], ["Smaller", func(): _resize(-SIZE_STEP)],
 			["Bigger", func(): _resize(SIZE_STEP)], ["Down the stack", func(): _restack(-1)],
-			["Up the stack", func(): _restack(1)], ["Add here", _add_here], ["Delete here", _delete_here], ["Copy previous", _copy_prev],
+			["Up the stack", func(): _restack(1)], ["Add here", _show_add_menu], ["Delete here", _delete_here], ["Copy previous", _copy_prev],
 			["Reset piece", _reset], ["Reset pose", _reset_pose], ["Play walk", _play], ["Save", _save]]:
 		var btn := Button.new()
 		btn.text = b[0]
 		btn.focus_mode = Control.FOCUS_NONE
 		btn.pressed.connect(b[1])
 		tools.add_child(btn)
+	_add_menu = PopupMenu.new()
+	_add_menu.id_pressed.connect(_add_picked)
+	add_child(_add_menu)
 	_info = Label.new()
 	rows.add_child(_info)
 	_status = Label.new()
@@ -407,8 +413,32 @@ func _delete_here() -> void:
 		l.set_size(_f(), 1.0)
 		_changed(l.owner)
 
-## Puts the picked piece on this frame: its own painting for this frame if it has one, else the
-## painting (and place) of the nearest earlier frame that shows it, to move into place.
+## Lists the pieces that have a painting for this pose and are not on it yet (held pieces,
+## one painting each, fit any pose), to add one.
+func _show_add_menu() -> void:
+	_add_menu.clear()
+	_add_list.clear()
+	for l in _pieces:
+		if _drawn(l) or l.part == &"body":
+			continue
+		var f := l.frames()
+		if l.held() or (f and f.has_animation(_f())):
+			_add_list.append(l)
+			_add_menu.add_item(_name(l), _add_list.size() - 1)
+	if _add_list.is_empty():
+		_status.text = "Every piece with a painting for %s is already on it" % _f()
+		return
+	_add_menu.position = Vector2i(get_global_mouse_position()) + Vector2i(get_window().position)
+	_add_menu.reset_size()
+	_add_menu.popup()
+
+func _add_picked(i: int) -> void:
+	_piece = _pieces.find(_add_list[i])
+	_add_here()
+	_sync()
+
+## Puts the picked piece on this frame with its own painting for this frame (each piece has one
+## painting per pose); a held piece starts where the previous frame had it.
 func _add_here() -> void:
 	var l := _sel()
 	if l == null:
@@ -426,16 +456,10 @@ func _add_here() -> void:
 	var f := l.frames()
 	if f == null:
 		return
-	if f.has_animation(_f()):
-		l.set_frame_art(_f(), _f())
-	else:
-		for i in range(_frame - 1, _frame - _frames.size(), -1):
-			var g := _frames[posmod(i, _frames.size())]
-			if l.shows(g):
-				l.set_frame_art(_f(), l.art(g))
-				l.set_nudge(_f(), l.nudges().get(g, Vector4.ZERO))
-				l.set_size(_f(), l.size(g))
-				break
+	if not f.has_animation(_f()):
+		_status.text = "%s has no painting for %s" % [_name(l), _f()]
+		return
+	l.set_frame_art(_f(), _f())
 	_changed(l.owner)
 
 ## Puts the picked piece back on this frame: where it is painted, or a held piece where it was

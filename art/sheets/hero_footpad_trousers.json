@@ -134,7 +134,9 @@
         "blink": "hero_footpad_trousers:blink",
         "lunge": "hero_footpad_trousers:lunge",
         "roll1": "hero_footpad_trousers:roll1",
-        "faint": "hero_footpad_trousers:faint"
+        "faint": "hero_footpad_trousers:faint",
+        "anchor2": "hero_footpad_trousers:anchor2",
+        "roll2": "hero_footpad_trousers:roll2"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -378,6 +380,18 @@
         "faint": {
           "frames": [
             "faint"
+          ],
+          "fps": 1
+        },
+        "anchor2": {
+          "frames": [
+            "anchor2"
+          ],
+          "fps": 1
+        },
+        "roll2": {
+          "frames": [
+            "roll2"
           ],
           "fps": 1
         }

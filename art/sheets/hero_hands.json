@@ -114,7 +114,9 @@
         "pinning": "hero_hands:pinning",
         "leap": "hero_hands:leap",
         "backstep": "hero_hands:backstep",
-        "lunge": "hero_hands:lunge"
+        "lunge": "hero_hands:lunge",
+        "anchor2": "hero_hands:anchor2",
+        "blink": "hero_hands:blink"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -304,6 +306,18 @@
         "lunge": {
           "frames": [
             "lunge"
+          ],
+          "fps": 1
+        },
+        "anchor2": {
+          "frames": [
+            "anchor2"
+          ],
+          "fps": 1
+        },
+        "blink": {
+          "frames": [
+            "blink"
           ],
           "fps": 1
         }
