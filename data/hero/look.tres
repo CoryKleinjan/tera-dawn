@@ -13,6 +13,7 @@ hair = ExtResource("4_hair")
 animations = {
 &"attack": {"fps": 12.0, "frames": [&"swing1", &"swing2", &"swing3"], "loop": false},
 &"attack_bow": {"fps": 8.0, "frames": [&"bow1", &"bow2", &"bow1"], "loop": false},
+&"attack_sword": {"fps": 8.0, "frames": [&"swing1", &"swing2"], "loop": false},
 &"attack_wand": {"fps": 8.0, "frames": [&"swing2", &"cast1"], "loop": false},
 &"cast": {"fps": 8.0, "frames": [&"cast1", &"cast2"], "loop": false},
 &"climb_idle": {"fps": 1.0, "frames": [&"rope_hold"], "loop": true},
@@ -37,4 +38,4 @@ same_as = {
 &"slash": &"attack",
 &"turn": &"idle"
 }
-weapon_behind = Array[StringName]([&"swing1"])
+weapon_behind = Array[StringName]([&"swing1", &"cast1"])

@@ -15,12 +15,12 @@
     [
       "swing1",
       "swing2",
-      "swing3",
+      "",
       "cast1",
       "cast2",
       "crouch",
-      "sit",
-      "faint"
+      "",
+      ""
     ]
   ],
   "grid": {
@@ -59,12 +59,9 @@
         "hurt": "hero_squire_sword:hurt",
         "swing1": "hero_squire_sword:swing1",
         "swing2": "hero_squire_sword:swing2",
-        "swing3": "hero_squire_sword:swing3",
         "cast1": "hero_squire_sword:cast1",
         "cast2": "hero_squire_sword:cast2",
-        "crouch": "hero_squire_sword:crouch",
-        "sit": "hero_squire_sword:sit",
-        "faint": "hero_squire_sword:faint"
+        "crouch": "hero_squire_sword:crouch"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -119,12 +116,6 @@
           ],
           "fps": 1
         },
-        "swing3": {
-          "frames": [
-            "swing3"
-          ],
-          "fps": 1
-        },
         "cast1": {
           "frames": [
             "cast1"
@@ -140,18 +131,6 @@
         "crouch": {
           "frames": [
             "crouch"
-          ],
-          "fps": 1
-        },
-        "sit": {
-          "frames": [
-            "sit"
-          ],
-          "fps": 1
-        },
-        "faint": {
-          "frames": [
-            "faint"
           ],
           "fps": 1
         }
