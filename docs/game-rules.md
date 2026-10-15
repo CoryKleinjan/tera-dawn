@@ -138,6 +138,10 @@ update this page when one changes. Each zone's own look and music are in
   a few pixels; fix a leftover gap in the map's data). Every building is unique and at proper
   scale; windows, doors and props are in proportion across a map. Nothing (ropes, chains, cloth)
   ends in mid-air.
+- Sizes next to the hero (he stands about 88 game px): every door is about 1.2 heroes (Dawnharbor's
+  tavern), grown-up townsfolk about 1 hero and kids a little less, a barrel about 0.6 and a lamp
+  post 1.5 to 1.9. A building that misses is recut whole from its painting at the right size
+  (its manifest's `art_px` and its `height`), never stretched.
 - No houses in monster maps unless a quest needs one or Cory asks. Shops are proper full-size
   buildings.
 - Backdrops: one high-quality, sharp picture for the whole background, not strips. Dawnharbor's 4K

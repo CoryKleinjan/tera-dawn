@@ -138,7 +138,7 @@ platform = 0
 [sub_resource type="Resource" id="Building_small"]
 script = ExtResource("building_placement")
 building = ExtResource("b_small")
-x = 1300.0
+x = 1250.0
 platform = 0
 
 [sub_resource type="Resource" id="Building_large"]
@@ -176,7 +176,7 @@ face = 1
 [sub_resource type="Resource" id="Npc_shop"]
 script = ExtResource("npc_placement")
 npc = ExtResource("n_shop")
-x = 1000.0
+x = 970.0
 platform = 0
 face = -1
 
@@ -224,12 +224,12 @@ light_height = 120.0
 [sub_resource type="Resource" id="Prop_2_prop_crates"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_prop_crates")
-x = 1080.0
+x = 1065.0
 
 [sub_resource type="Resource" id="Prop_3_prop_barrels"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_prop_barrels")
-x = 1490.0
+x = 1505.0
 
 [sub_resource type="Resource" id="Prop_4_prop_chest"]
 script = ExtResource("prop_placement")

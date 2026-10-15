@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_npc_def")
 id = &"lanternfall_keeper"
+sprite_scale = 1.1
 display_name = "Hesper"
 title = "Storage Keeper"
 sprite_frames = ExtResource("2_sprite")

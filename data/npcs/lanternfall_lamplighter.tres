@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_npc_def")
 id = &"lanternfall_lamplighter"
+sprite_scale = 1.08
 display_name = "Lettie"
 title = "Lamplighter"
 sprite_frames = ExtResource("2_sprite")

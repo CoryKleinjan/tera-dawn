@@ -102,7 +102,7 @@ door = true
 
 [sub_resource type="Resource" id="Door_hall"]
 script = ExtResource("portal_def")
-x = 1650.0
+x = 1690.0
 platform = 0
 target_map = &"lanternfall_hall"
 target_x = 240.0
@@ -152,7 +152,7 @@ platform = 0
 [sub_resource type="Resource" id="Building_den"]
 script = ExtResource("building_placement")
 building = ExtResource("b_thieves_den")
-x = 1650.0
+x = 1690.0
 platform = 0
 
 [sub_resource type="Resource" id="Building_pawn"]
@@ -223,7 +223,7 @@ x = 170.0
 [sub_resource type="Resource" id="Prop_lamp_west"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_lamp_post")
-x = 440.0
+x = 380.0
 light_color = Color(1.0, 0.75, 0.44, 1.0)
 light_energy = 1.5
 light_height = 130.0
@@ -284,7 +284,7 @@ x = 5450.0
 [sub_resource type="Resource" id="Prop_trough"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_prop_flower_trough")
-x = 2610.0
+x = 2595.0
 
 [sub_resource type="Resource" id="Prop_pots"]
 script = ExtResource("prop_placement")

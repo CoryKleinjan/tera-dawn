@@ -27,7 +27,7 @@ script = ExtResource("3_portal_def")
 x = 150.0
 platform = 0
 target_map = &"lanternfall"
-target_x = 1720.0
+target_x = 1760.0
 door = true
 
 [sub_resource type="Resource" id="Keeper"]

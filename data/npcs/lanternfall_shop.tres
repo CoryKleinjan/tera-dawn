@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("1_npc_def")
 id = &"lanternfall_shop"
+sprite_scale = 1.1
 display_name = "Fence Quill"
 title = "Equipment"
 sprite_frames = ExtResource("2_sprite")
