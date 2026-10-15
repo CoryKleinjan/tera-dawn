@@ -2,38 +2,18 @@
 
 [ext_resource type="Script" path="res://scripts/data/hero_look_def.gd" id="1_look"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/hero/body.tres" id="2_body"]
-[ext_resource type="SpriteFrames" path="res://assets/animations/hero/face.tres" id="3_face"]
-[ext_resource type="SpriteFrames" path="res://assets/animations/hero/hair.tres" id="4_hair"]
+[ext_resource type="Resource" path="res://data/hero/faces/plain.tres" id="3_face"]
+[ext_resource type="Resource" path="res://data/hero/hairs/messy.tres" id="4_hair"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/hero/hands.tres" id="5_hands"]
 
 [resource]
 script = ExtResource("1_look")
 body = ExtResource("2_body")
-face = ExtResource("3_face")
-hair = ExtResource("4_hair")
+faces = Array[Resource]([ExtResource("3_face")])
+hairs = Array[Resource]([ExtResource("4_hair")])
 hands = ExtResource("5_hands")
 bare_arm_frames = Array[StringName]([&"crouch"])
 resting_hand_frames = Array[StringName]([&"faint", &"crouch"])
-nudges = {
-&"face": {
-&"cast1": Vector4(-13.1, -1, -30, 0),
-&"cast2": Vector4(-3.6, 0.4, -0, 0),
-&"hurt": Vector4(-10.1, 9.3, -24, 0),
-&"sit": Vector4(-3.6, 23.7, 0, 0),
-&"swing1": Vector4(-1.6, 4.9, -9, 0),
-&"swing2": Vector4(7, 6.5, 15, 0),
-&"swing3": Vector4(17, 13.9, 18, 0)
-},
-&"hair": {
-&"cast1": Vector4(-16.5, -0.8, -30, 0),
-&"cast2": Vector4(-3.6, 0.4, -0, 0),
-&"hurt": Vector4(-24.5, 11.1, -24, 0),
-&"sit": Vector4(-3.6, 23.7, 0, 0),
-&"swing1": Vector4(-2.6, 4.7, -9, 0),
-&"swing2": Vector4(8.6, 7.1, 15, 0),
-&"swing3": Vector4(18.9, 14.6, 18, 0)
-}
-}
 animations = {
 &"attack": {"fps": 10.0, "frames": [&"swing1", &"swing2", &"swing3"], "loop": false},
 &"cast": {"fps": 6.0, "frames": [&"cast1", &"cast2"], "loop": false},

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="HeroStyleDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/hero_style_def.gd" id="1_style"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/hero/face.tres" id="2_frames"]
+
+[resource]
+script = ExtResource("1_style")
+id = &"plain"
+display_name = "Plain"
+frames = ExtResource("2_frames")
+nudges = {
+&"cast1": Vector4(-13.1, -1, -30, 0),
+&"cast2": Vector4(-3.6, 0.4, -0, 0),
+&"hurt": Vector4(-10.1, 9.3, -24, 0),
+&"sit": Vector4(-3.6, 23.7, 0, 0),
+&"swing1": Vector4(-1.6, 4.9, -9, 0),
+&"swing2": Vector4(7, 6.5, 15, 0),
+&"swing3": Vector4(17, 13.9, 18, 0)
+}

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="HeroStyleDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/hero_style_def.gd" id="1_style"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/hero/hair.tres" id="2_frames"]
+
+[resource]
+script = ExtResource("1_style")
+id = &"messy"
+display_name = "Messy"
+frames = ExtResource("2_frames")
+nudges = {
+&"cast1": Vector4(-16.5, -0.8, -30, 0),
+&"cast2": Vector4(-3.6, 0.4, -0, 0),
+&"hurt": Vector4(-24.5, 11.1, -24, 0),
+&"sit": Vector4(-3.6, 23.7, 0, 0),
+&"swing1": Vector4(-2.6, 4.7, -9, 0),
+&"swing2": Vector4(8.6, 7.1, 15, 0),
+&"swing3": Vector4(18.9, 14.6, 18, 0)
+}

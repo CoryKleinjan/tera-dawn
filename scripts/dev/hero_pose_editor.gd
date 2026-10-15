@@ -1,9 +1,10 @@
 extends Control
 ## Poses the hero by hand, frame by frame: open scenes/dev/hero_pose_editor.tscn in Godot and play
 ## it (F6). It draws him the way the game does (HeroBody.layers) in one job's starter gear (pick
-## the job, pose and piece from the dropdowns). Click any piece (his body, face, hair, fists, a piece of clothing, a weapon or off-hand) to pick it,
+## the job, his face and hairstyle, the pose and piece from the dropdowns). Click any piece (his body, face, hair, fists, a piece of clothing, a weapon or off-hand) to pick it,
 ## drag to move it, the mouse wheel turns it, Shift+wheel or [ ] makes it bigger or smaller, and Save writes it back (held pieces to their pins in
-## data/hero/held/, clothes to their item, his own parts to data/hero/look.tres), so each save
+## data/hero/held/, clothes to their item, his face or hairstyle to its file in data/hero/faces/ or
+## data/hero/hairs/, his body and fists to data/hero/look.tres), so each save
 ## replaces the last.
 ##
 ##   Left/Right  pose          Tab        next piece       Wheel or Q/E (Shift+Q/E: fine)  turn
@@ -45,6 +46,10 @@ var _rows: VBoxContainer
 var _info: Label
 var _status: Label
 var _job_menu: OptionButton
+var _face := 0  # which of HeroBody.LOOK.faces he has
+var _hair := 0  # which of HeroBody.LOOK.hairs he has
+var _face_menu: OptionButton
+var _hair_menu: OptionButton
 var _pose_menu: OptionButton
 var _piece_menu: OptionButton
 var _wear_menus := {}  # place -> OptionButton
@@ -79,6 +84,8 @@ func _build_ui() -> void:
 	var bar := HBoxContainer.new()
 	rows.add_child(bar)
 	_job_menu = _menu(bar, "Job", _jobs.map(_job_name), _pick_job)
+	_face_menu = _menu(bar, "Face", HeroBody.LOOK.faces.map(_style_name), func(i): _face = i; _pieces_changed())
+	_hair_menu = _menu(bar, "Hair", HeroBody.LOOK.hairs.map(_style_name), func(i): _hair = i; _pieces_changed())
 	_pose_menu = _menu(bar, "Pose", _frames.map(func(f): return String(f)), func(i): _frame = i; _playing = false; _sync())
 	_piece_menu = _menu(bar, "Piece", [], func(i): _piece = i; _sync())
 	var wear := HFlowContainer.new()
@@ -116,9 +123,11 @@ func _menu(bar: Container, label: String, items: Array, picked: Callable) -> Opt
 	pair.add_child(m)
 	return m
 
-## Shows the job, pose and piece picked in the dropdowns and redraws.
+## Shows the job, face, hair, pose and piece picked in the dropdowns and redraws.
 func _sync() -> void:
 	_job_menu.select(_job)
+	_face_menu.select(_face)
+	_hair_menu.select(_hair)
 	_pose_menu.select(_frame)
 	_piece_menu.select(_piece)
 	queue_redraw()
@@ -127,6 +136,20 @@ func _sync() -> void:
 ## the job can wear there that has a look.
 func _job_name(job: StringName) -> String:
 	return String(job).capitalize() if job else "No job"
+
+func _style_name(style: HeroStyleDef) -> String:
+	return style.display_name if style.display_name else String(style.id)
+
+## His face and hairstyle as picked.
+func _face_style() -> HeroStyleDef:
+	return HeroBody.LOOK.faces[_face]
+
+func _hair_style() -> HeroStyleDef:
+	return HeroBody.LOOK.hairs[_hair]
+
+## His layers on this frame, the way the game stacks them.
+func _stack() -> Array[HeroBody.Layer]:
+	return HeroBody.layers(_outfit, _f(), _face_style(), _hair_style())
 
 func _pick_job(i: int) -> void:
 	_job = i
@@ -165,7 +188,8 @@ func _pieces_changed() -> void:
 			if h and not _saved_pins.has(h):
 				_saved_pins[h] = [h.pins.duplicate(), h.sizes.duplicate()]
 	for part in PART_NAMES:
-		_pieces.append(HeroBody.Layer.new(HeroBody.LOOK, part))
+		var owner: Resource = {&"face": _face_style(), &"hair": _hair_style()}.get(part, HeroBody.LOOK)
+		_pieces.append(HeroBody.Layer.new(owner, part))
 	_piece = 0
 	_piece_menu.clear()
 	for i in _pieces.size():
@@ -218,7 +242,7 @@ func _draw() -> void:
 	draw_rect(Rect2(Vector2.ZERO, size), BG)
 	var o := _origin()
 	draw_rect(Rect2(o, _frame_size() * _zoom()), Color(0, 0, 0, 0.06), false)
-	for l in HeroBody.layers(_outfit, _f()):
+	for l in _stack():
 		var p := l.pin(_f())
 		var a := l.anchor(_f())
 		var k := l.size(_f())
@@ -230,7 +254,7 @@ func _draw() -> void:
 
 ## The topmost piece with paint under `at` (screen position), or null.
 func _piece_at(at: Vector2) -> HeroBody.Layer:
-	var stack := HeroBody.layers(_outfit, _f())
+	var stack := _stack()
 	stack.reverse()
 	for l in stack:
 		var p := l.pin(_f())
@@ -362,7 +386,7 @@ func _toggle() -> void:
 ## Whether the picked piece is drawn on this frame (the stack can leave a piece off: the
 ## off-hand with the weapon put away, hair under a hat, fists with no weapon out).
 func _drawn(l: HeroBody.Layer) -> bool:
-	return HeroBody.layers(_outfit, _f()).any(func(o): return _same(o, l))
+	return _stack().any(func(o): return _same(o, l))
 
 ## Takes the picked piece off this frame entirely.
 func _delete_here() -> void:
