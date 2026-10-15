@@ -13293,6 +13293,132 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 7 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: standing, standing, walking, walking, walking, jumping, flinching after a hit); cell 8 is empty. He faces right in a three-quarter view; his WEAPON ARM is the arm on the LEFT side of the picture and his OTHER ARM is the arm on the RIGHT side. Use the second attached picture ONLY to see the painting style (do not copy its pose, its gear or its figure). In each cell, paint ONLY a young pirate's flintlock pistol held in the closed fist on the RIGHT side of the shape (his other hand), in every cell: a short dark wooden pistol with a curved grip, a brass-capped butt and a brass flintlock, and a short steel barrel pointing down toward the ground, about as long as his forearm. Paint the WHOLE pistol ON TOP of the green fist, its grip painted completely across the fist and moving with it in every cell. Paint nothing else: no hands, arms or body. Paint every piece WHOLE, with no gaps, notches or holes where an arm, hand or another piece would cover it; parts that will be hidden are still painted completely. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: exactly the look of the steel helmet in the second attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail. Keep the grid lines. No text, no labels."
   }
+ },
+ {
+  "id": "mshero_war_jerkin_back",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_war_jerkin_back.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 13:10Z 'do the reprints', answering the 5-sheet ~$0.35 Warrior repaint question): Warrior jerkin on the climbing and back frames, painted from the front; repainted as back views over wave 'mshero_war_jerkin_climb' itself.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/mshero_war_jerkin_climb.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. In each cell a boy, shown as a flat bright green (#00FF00) shape, climbs a rope or ladder or stands, always seen from BEHIND with his back to the viewer, and wears a painted padded jerkin. Wrongly, the padded jerkin in cells 1, 2, 4, 5, 6 and 7 is painted from the FRONT: a front opening with toggle buttons and a brass belt buckle. Repaint the padded jerkin in those cells as seen from the BACK, like the one in cell 3: a plain quilted back panel with no opening and no buttons, and the leather belt running plainly across his back with no buckle. Keep each one's shape, colours, stitching and quilting. Keep every outline, place, size and angle exactly as it is; do not move, resize or redraw any shape, and do not add any figure. Leave every flat green shape exactly as it is, empty cells empty and the rest of the background flat pure magenta #FF00FF. Paint the piece WHOLE with no gaps, notches or holes. Style: match the existing painting exactly (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the attached picture. Keep the grid lines. No text."
+  }
+ },
+ {
+  "id": "mshero_war_trousers_back",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_war_trousers_back.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 13:10Z 'do the reprints', answering the 5-sheet ~$0.35 Warrior repaint question): Warrior trousers on the climbing and back frames show the fly, pockets and knee patches; repainted as back views over 'mshero_war_trousers_climb'.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/mshero_war_trousers_climb.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. In each cell a boy, shown as a flat bright green (#00FF00) shape, climbs a rope or ladder or stands, always seen from BEHIND with his back to the viewer, and wears a painted pair of olive-brown trousers. Wrongly, the pair of olive-brown trousers in cells 1, 2, 4, 5, 6 and 7 is painted from the FRONT: a front fly, front pockets and knee patches. Repaint the pair of olive-brown trousers in those cells as seen from the BACK, like the one in cell 3: the seat of the trousers with a plain back seam down the middle, no fly, no front pockets and no knee patches. Keep each one's shape, colours, stitching and quilting. Keep every outline, place, size and angle exactly as it is; do not move, resize or redraw any shape, and do not add any figure. Leave every flat green shape exactly as it is, empty cells empty and the rest of the background flat pure magenta #FF00FF. Paint the piece WHOLE with no gaps, notches or holes. Style: match the existing painting exactly (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the attached picture. Keep the grid lines. No text."
+  }
+ },
+ {
+  "id": "mshero_war_boots_back",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_war_boots_back.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 13:10Z 'do the reprints', answering the 5-sheet ~$0.35 Warrior repaint question): Warrior boots on the climbing and back frames show their steel toe caps; repainted as back views over 'mshero_war_boots_climb'.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/mshero_war_boots_climb.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. In each cell a boy, shown as a flat bright green (#00FF00) shape, climbs a rope or ladder or stands, always seen from BEHIND with his back to the viewer, and wears a painted pair of brown leather boots. Wrongly, the pair of brown leather boots in cells 1, 2, 4, 5, 6 and 7 is painted from the FRONT: steel toe caps and toes pointing at the viewer. Repaint the pair of brown leather boots in those cells as seen from the BACK, like the one in cell 3: the heels and backs of the boots with the turned-down cuffs, no steel toe caps showing; when a foot is lifted, its sole may show, as in cell 3. Keep each one's shape, colours, stitching and quilting. Keep every outline, place, size and angle exactly as it is; do not move, resize or redraw any shape, and do not add any figure. Leave every flat green shape exactly as it is, empty cells empty and the rest of the background flat pure magenta #FF00FF. Paint the piece WHOLE with no gaps, notches or holes. Style: match the existing painting exactly (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the attached picture. Keep the grid lines. No text."
+  }
+ },
+ {
+  "id": "mshero_war_boots_sitfaint",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_war_boots_sitfaint.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 13:10Z 'do the reprints', answering the 5-sheet ~$0.35 Warrior repaint question): the sitting frame has only one boot (the bent leg is bare) and lying down has one; repainted over 'mshero_war_boots_action' itself.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/mshero_war_boots_action.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Each cell holds a boy shown as a flat bright green (#00FF00) shape, wearing painted brown leather boots with steel toe caps, turned-down cuffs and a small buckle strap. In cell 7 (bottom row, third: sitting on the ground) and cell 8 (bottom row, fourth: lying on his back) only ONE foot has a boot; his other foot is still bare green. In those two cells, paint the missing boot on the bare green foot, matching the other boot exactly and following that foot's pose. Leave cells 1 to 6 exactly as they are. Keep every outline, place, size and angle exactly as it is; do not move, resize or redraw any shape, and do not add any figure. Leave every flat green shape exactly as it is, empty cells empty and the rest of the background flat pure magenta #FF00FF. Paint the piece WHOLE with no gaps, notches or holes. Style: match the existing painting exactly (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the attached picture. Keep the grid lines. No text."
+  }
+ },
+ {
+  "id": "mshero_hand_faint",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_hand_faint.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 13:10Z 'do the reprints', answering the 5-sheet ~$0.35 Warrior repaint question): lying down, the jerkin covers the hand resting on his belly; his resting hands painted as their own layer over the clothes.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/silhouette_action.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_action.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Each cell holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose. In cell 8 (bottom row, fourth: lying on his back) and cell 7 (bottom row, third: sitting on the ground), paint ONLY his two bare hands, each a closed rounded mitten fist with no separate fingers and no forearm, exactly where those hands are in the same cells of the first attached picture, matching their bare skin, shading and outline; in cell 8 one hand rests on his belly. Paint nothing in cells 1 to 6 and nothing else in cells 7 and 8: no head, body, arms, sleeves, legs or clothes. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape. Style: the warm colours, light from the upper left and thin dark plum-brown outline of the painted villagers in the second attached picture, but cleaner: smooth soft painted shading with a bright highlight. Keep the grid lines. No text."
+  }
  }
 ]
 }
