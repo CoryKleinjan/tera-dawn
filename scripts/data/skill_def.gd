@@ -23,6 +23,11 @@ const MARK_CLOSE := 90.0
 const BURN_SECONDS := 3
 ## The most attacks in a row a streak counts.
 const STREAK_MAX := 10
+## An ambush (`ambush`) looks for monsters this far up or down from the player, and this far
+## behind them; monsters this close to one another count as one group.
+const AMBUSH_HEIGHT := 180.0
+const AMBUSH_BEHIND := 20.0
+const AMBUSH_GROUP := 110.0
 
 @export var id: StringName
 @export var display_name := ""
@@ -103,6 +108,29 @@ const STREAK_MAX := 10
 @export var mark_close_bonus := 0.0
 @export var mark_close_per_level := 0.0
 @export var mark_time := 0.0
+
+@export_group("Moving monsters")
+## Monster control: each first job has one skill that throws, drags or holds monsters, made
+## to combo with the others (launch them, hold them up, slam them down, gather them).
+## Bosses take the damage but are never launched, pulled or stunned (SimMob.controllable).
+## Throws each monster it hits this fast up into the air (SimMob.launch): it can't move or
+## attack until it lands.
+@export var launch := 0.0
+## Before it hits, yanks every airborne monster within `reach` on both sides down to the
+## ground and grounds fliers for SimMob.DOWNED_TICKS; then it hits only grounded monsters.
+@export var slam := false
+## Seconds each monster it hits is stunned: it can't move or attack, and one in the air
+## hangs there (SimMob.stun).
+@export var stun := 0.0
+@export var stun_per_level := 0.0
+## Its root (`root`) also holds a monster in the air at the height it was hit.
+@export var pin := false
+## Drags each monster it hits to this many pixels in front of the player (0: no pull).
+@export var pull := 0.0
+## Above 0, the player first blinks to the biggest group of monsters within this many pixels
+## ahead (SkillDef.ambush_spot, worked out alike on the client and the server), then hits
+## around where they land.
+@export var ambush := 0.0
 
 @export_group("Movement")
 ## How a movement skill (Kind.MOVE) carries the hero.
@@ -193,6 +221,36 @@ static func grown(base: float, per: float, level: int) -> float:
 
 func root_ticks(level: int) -> int:
 	return roundi(grown(root, root_per_level, level) * 60.0)
+
+## Where an ambush (`ambush`) from `from`, facing `face`, lands among monsters whose bodies
+## are at `bodies`: under the middle of the biggest group within AMBUSH_GROUP of one
+## another (level with the lowest of them, so its blow reaches up to the rest), ahead of the player within `ambush` and AMBUSH_HEIGHT up or down (nearest group on a
+## tie). Vector2.INF when nothing is there. The client and the server work it out alike.
+func ambush_spot(from: Vector2, face: int, bodies: Array[Vector2]) -> Vector2:
+	var ahead: Array[Vector2] = []
+	for b in bodies:
+		var dx := (b.x - from.x) * face
+		if dx >= -AMBUSH_BEHIND and dx <= ambush and absf(b.y - from.y) <= AMBUSH_HEIGHT:
+			ahead.append(b)
+	var best := Vector2.INF
+	var best_count := 0
+	for b in ahead:
+		var count := 0
+		var sum_x := 0.0
+		var low := b.y
+		for o in ahead:
+			if o.distance_to(b) <= AMBUSH_GROUP:
+				count += 1
+				sum_x += o.x
+				low = maxf(low, o.y)
+		var middle := Vector2(sum_x / count, low)
+		if count > best_count or count == best_count and absf(middle.x - from.x) < absf(best.x - from.x):
+			best_count = count
+			best = middle
+	return best
+
+func stun_ticks(level: int) -> int:
+	return roundi(grown(stun, stun_per_level, level) * 60.0)
 
 func hex_at(level: int) -> float:
 	return grown(hex, hex_per_level, level)

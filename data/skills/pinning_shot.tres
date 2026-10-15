@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="SkillDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
+[ext_resource type="Resource" path="res://data/projectiles/arrow.tres" id="p_arrow"]
+[ext_resource type="Resource" path="res://data/effects/arrow_hit.tres" id="h_arrow_hit"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/heartseeker.png" id="i_stand_in"]
+
+[resource]
+script = ExtResource("1_skill_def")
+id = &"pinning_shot"
+display_name = "Pinning Shot"
+job = &"archer"
+max_level = 10
+kind = 0
+description = "A heavy arrow pins one monster where it is, even in mid-air, so it can't move for a few seconds. Needs a bow."
+mp_cost = 8
+mp_cost_per_level = 0.4
+damage_multiplier = 2.0
+damage_per_level = 0.12
+hits = 1
+max_targets = 1
+weapons = Array[StringName]([&"bow"])
+knockback = 0.0
+root = 2.0
+root_per_level = 0.2
+pin = true
+cooldown = 30
+action_ticks = 20
+recharge = 5.0
+recharge_per_level = -0.2
+reach = 400.0
+height = 120.0
+animation = &"pinning_shot"
+projectile = ExtResource("p_arrow")
+hit_effect = ExtResource("h_arrow_hit")
+icon = ExtResource("i_stand_in")

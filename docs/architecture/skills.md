@@ -87,4 +87,16 @@ Second-tier skill rules (all in `MapInstance.use_skill`):
 - Passives: `streak_crit` (Critical Rate per attack in a row, `SimPlayer.streak`, reset when
   hit) and `bounce` (shots bounce on to one more monster).
 
+Monster-control skills (one per first job, all in `MapInstance.use_skill` and `SimMob`):
+- `launch` throws what it hits up (`SimMob.launch`, `tossed`); `slam` first yanks airborne
+  monsters within reach down and grounds fliers (`SimMob.slam_down`, `downed_t`,
+  `SnapshotFlags.MOB_DOWNED`), then hits only grounded ones; `stun` holds a monster out of
+  action and in the air (`SimMob.stun`, `hang_t`, `SnapshotFlags.MOB_STUNNED`, stars drawn by
+  `TDMob`); `pin` makes a root hold it in the air too; `pull` drags it in front of the player.
+- `ambush` blinks the player into the biggest group ahead first (`SkillDef.ambush_spot`,
+  worked out alike by `TDPlayer` and `MapInstance._ambush`; the server sends `ev_place`). Its
+  `move` only gives the blink bolt its colour.
+- A thrown or stunned monster (`SimMob.held`) can't move, attack or hurt by touch. Bosses
+  (`SimMob.controllable`) take the damage but are never thrown, dragged or stunned.
+
 Damage is worked out in `scripts/world/combat.gd`, so balance changes stay in one place.
