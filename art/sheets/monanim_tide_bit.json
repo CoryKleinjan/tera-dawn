@@ -1,0 +1,75 @@
+{
+  "source": "art/source/monanim_tide_bit.png",
+  "save": false,
+  "out_dir": "art/build/monanim_tide_bit",
+  "cells": [
+    [
+      "jump1",
+      "",
+      "jump2",
+      "",
+      "knock_up"
+    ],
+    [
+      ""
+    ],
+    [
+      ""
+    ],
+    [
+      ""
+    ],
+    [
+      "knock_down",
+      "",
+      "pounce_windup",
+      "",
+      "pounce"
+    ]
+  ],
+  "inset": 20,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "scale": 0.0995,
+  "detail": 2.56,
+  "grid": {
+    "rows": [
+      0,
+      503,
+      511,
+      585,
+      615,
+      1100
+    ],
+    "cols": [
+      [
+        0,
+        384,
+        415,
+        785,
+        816,
+        1200
+      ],
+      [
+        0,
+        1200
+      ],
+      [
+        0,
+        1200
+      ],
+      [
+        0,
+        1200
+      ],
+      [
+        0,
+        384,
+        415,
+        785,
+        816,
+        1200
+      ]
+    ]
+  }
+}

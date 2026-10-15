@@ -37,7 +37,15 @@
         "walk3": "fire_imp_archer:walk3",
         "attack": "fire_imp_archer:attack",
         "hurt": "fire_imp_archer:hurt",
-        "defeated": "fire_imp_archer:defeated"
+        "defeated": "fire_imp_archer:defeated",
+        "jump1": "monanim_fire_imp_archer:jump1",
+        "jump2": "monanim_fire_imp_archer:jump2",
+        "knock_up": "monanim_fire_imp_archer:knock_up",
+        "knock_down": "monanim_fire_imp_archer:knock_down",
+        "lunge_windup": "monanim_fire_imp_archer:lunge_windup",
+        "lunge": "monanim_fire_imp_archer:lunge",
+        "shot_windup": "monanim_fire_imp_archer:shot_windup",
+        "shot": "monanim_fire_imp_archer:shot"
       },
       "anchor": "mass",
       "baseline": "bottom",
@@ -79,6 +87,50 @@
           ],
           "fps": 1,
           "loop": false
+        },
+        "jump": {
+          "frames": [
+            "jump1",
+            "jump2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "knock_up": {
+          "frames": [
+            "knock_up"
+          ],
+          "fps": 1
+        },
+        "knock_down": {
+          "frames": [
+            "knock_down"
+          ],
+          "fps": 1
+        },
+        "lunge_windup": {
+          "frames": [
+            "lunge_windup"
+          ],
+          "fps": 1
+        },
+        "lunge": {
+          "frames": [
+            "lunge"
+          ],
+          "fps": 1
+        },
+        "shot_windup": {
+          "frames": [
+            "shot_windup"
+          ],
+          "fps": 1
+        },
+        "shot": {
+          "frames": [
+            "shot"
+          ],
+          "fps": 1
         }
       }
     }

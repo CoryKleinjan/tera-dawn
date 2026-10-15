@@ -1,46 +1,106 @@
-[gd_resource type="SpriteFrames" load_steps=10 format=3]
+[gd_resource type="SpriteFrames" load_steps=22 format=3]
 
 [ext_resource type="Texture2D" path="res://assets/sprites/monsters/barnacle_boar.png" id="1_strip"]
 
 [sub_resource type="AtlasTexture" id="f0"]
 atlas = ExtResource("1_strip")
-region = Rect2(0, 0, 330, 214)
+region = Rect2(0, 0, 346, 336)
 metadata/art_density = 4.5
 
 [sub_resource type="AtlasTexture" id="f1"]
 atlas = ExtResource("1_strip")
-region = Rect2(330, 0, 330, 214)
+region = Rect2(346, 0, 346, 336)
 metadata/art_density = 4.5
 
 [sub_resource type="AtlasTexture" id="f2"]
 atlas = ExtResource("1_strip")
-region = Rect2(660, 0, 330, 214)
+region = Rect2(692, 0, 346, 336)
 metadata/art_density = 4.5
 
 [sub_resource type="AtlasTexture" id="f3"]
 atlas = ExtResource("1_strip")
-region = Rect2(990, 0, 330, 214)
+region = Rect2(1038, 0, 346, 336)
 metadata/art_density = 4.5
 
 [sub_resource type="AtlasTexture" id="f4"]
 atlas = ExtResource("1_strip")
-region = Rect2(1320, 0, 330, 214)
+region = Rect2(1384, 0, 346, 336)
 metadata/art_density = 4.5
 
 [sub_resource type="AtlasTexture" id="f5"]
 atlas = ExtResource("1_strip")
-region = Rect2(1650, 0, 330, 214)
+region = Rect2(1730, 0, 346, 336)
 metadata/art_density = 4.5
 
 [sub_resource type="AtlasTexture" id="f6"]
 atlas = ExtResource("1_strip")
-region = Rect2(1980, 0, 330, 214)
+region = Rect2(2076, 0, 346, 336)
 metadata/art_density = 4.5
 
 [sub_resource type="AtlasTexture" id="f7"]
 atlas = ExtResource("1_strip")
-region = Rect2(2310, 0, 330, 214)
+region = Rect2(2422, 0, 346, 336)
+metadata/art_density = 4.5
+
+[sub_resource type="AtlasTexture" id="f8"]
+atlas = ExtResource("1_strip")
+region = Rect2(2768, 0, 346, 336)
+metadata/art_density = 4.5
+
+[sub_resource type="AtlasTexture" id="f9"]
+atlas = ExtResource("1_strip")
+region = Rect2(3114, 0, 346, 336)
+metadata/art_density = 4.5
+
+[sub_resource type="AtlasTexture" id="f10"]
+atlas = ExtResource("1_strip")
+region = Rect2(3460, 0, 346, 336)
+metadata/art_density = 4.5
+
+[sub_resource type="AtlasTexture" id="f11"]
+atlas = ExtResource("1_strip")
+region = Rect2(3806, 0, 346, 336)
+metadata/art_density = 4.5
+
+[sub_resource type="AtlasTexture" id="f12"]
+atlas = ExtResource("1_strip")
+region = Rect2(4152, 0, 346, 336)
+metadata/art_density = 4.5
+
+[sub_resource type="AtlasTexture" id="f13"]
+atlas = ExtResource("1_strip")
+region = Rect2(4498, 0, 346, 336)
+metadata/art_density = 4.5
+
+[sub_resource type="AtlasTexture" id="f14"]
+atlas = ExtResource("1_strip")
+region = Rect2(4844, 0, 346, 336)
+metadata/art_density = 4.5
+
+[sub_resource type="AtlasTexture" id="f15"]
+atlas = ExtResource("1_strip")
+region = Rect2(5190, 0, 346, 336)
+metadata/art_density = 4.5
+
+[sub_resource type="AtlasTexture" id="f16"]
+atlas = ExtResource("1_strip")
+region = Rect2(5536, 0, 346, 336)
+metadata/art_density = 4.5
+
+[sub_resource type="AtlasTexture" id="f17"]
+atlas = ExtResource("1_strip")
+region = Rect2(5882, 0, 346, 336)
+metadata/art_density = 4.5
+
+[sub_resource type="AtlasTexture" id="f18"]
+atlas = ExtResource("1_strip")
+region = Rect2(6228, 0, 346, 336)
+metadata/art_density = 4.5
+
+[sub_resource type="AtlasTexture" id="f19"]
+atlas = ExtResource("1_strip")
+region = Rect2(6574, 0, 346, 336)
 metadata/art_density = 4.5
 
 [resource]
-animations = [{"frames": [{"duration": 1.0, "texture": SubResource("f0")}, {"duration": 1.0, "texture": SubResource("f1")}], "loop": true, "name": &"idle", "speed": 3.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f2")}, {"duration": 1.0, "texture": SubResource("f3")}, {"duration": 1.0, "texture": SubResource("f4")}, {"duration": 1.0, "texture": SubResource("f3")}], "loop": true, "name": &"move", "speed": 7.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f5")}], "loop": true, "name": &"attack", "speed": 4.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f6")}], "loop": true, "name": &"hurt", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f7")}], "loop": false, "name": &"die", "speed": 1.0}]
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("f0")}, {"duration": 1.0, "texture": SubResource("f1")}], "loop": true, "name": &"idle", "speed": 3.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f2")}, {"duration": 1.0, "texture": SubResource("f3")}, {"duration": 1.0, "texture": SubResource("f4")}, {"duration": 1.0, "texture": SubResource("f3")}], "loop": true, "name": &"move", "speed": 7.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f5")}], "loop": true, "name": &"attack", "speed": 4.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f6")}], "loop": true, "name": &"hurt", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f7")}], "loop": false, "name": &"die", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f8")}, {"duration": 1.0, "texture": SubResource("f9")}], "loop": false, "name": &"jump", "speed": 8.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f10")}], "loop": true, "name": &"knock_up", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f11")}], "loop": true, "name": &"knock_down", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f12")}], "loop": true, "name": &"lunge_windup", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f13")}], "loop": true, "name": &"lunge", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f14")}], "loop": true, "name": &"charge_windup", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f15")}], "loop": true, "name": &"charge", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f16")}], "loop": true, "name": &"pounce_windup", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f17")}], "loop": true, "name": &"pounce", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f18")}], "loop": true, "name": &"slam_windup", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f19")}], "loop": true, "name": &"slam", "speed": 1.0}]

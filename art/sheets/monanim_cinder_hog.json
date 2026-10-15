@@ -1,0 +1,99 @@
+{
+  "source": "art/source/monanim_cinder_hog.png",
+  "save": false,
+  "out_dir": "art/build/monanim_cinder_hog",
+  "cells": [
+    [
+      "jump1",
+      "",
+      "jump2",
+      "",
+      "knock_up",
+      "",
+      "knock_down"
+    ],
+    [
+      ""
+    ],
+    [
+      ""
+    ],
+    [
+      ""
+    ],
+    [
+      "lunge_windup",
+      "",
+      "lunge",
+      "",
+      "charge_windup",
+      "",
+      "charge"
+    ],
+    [
+      ""
+    ],
+    [
+      ""
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "scale": 0.2086,
+  "detail": 2.56,
+  "grid": {
+    "rows": [
+      0,
+      455,
+      459,
+      548,
+      552,
+      999,
+      1003,
+      1100
+    ],
+    "cols": [
+      [
+        0,
+        406,
+        409,
+        824,
+        827,
+        1242,
+        1245,
+        1600
+      ],
+      [
+        0,
+        1600
+      ],
+      [
+        0,
+        1600
+      ],
+      [
+        0,
+        1600
+      ],
+      [
+        0,
+        406,
+        409,
+        824,
+        827,
+        1242,
+        1245,
+        1600
+      ],
+      [
+        0,
+        1600
+      ],
+      [
+        0,
+        1600
+      ]
+    ]
+  }
+}

@@ -37,7 +37,12 @@
         "fly3": "ash_wraith:fly3",
         "attack": "ash_wraith:attack",
         "hurt": "ash_wraith:hurt",
-        "defeated": "ash_wraith:defeated"
+        "defeated": "ash_wraith:defeated",
+        "knock_down": "monanim_ash_wraith:knock_down",
+        "swoop_windup": "monanim_ash_wraith:swoop_windup",
+        "swoop": "monanim_ash_wraith:swoop",
+        "shot_windup": "monanim_ash_wraith:shot_windup",
+        "shot": "monanim_ash_wraith:shot"
       },
       "anchor": "mass",
       "baseline": "cell",
@@ -79,6 +84,36 @@
           ],
           "fps": 1,
           "loop": false
+        },
+        "knock_down": {
+          "frames": [
+            "knock_down"
+          ],
+          "fps": 1
+        },
+        "swoop_windup": {
+          "frames": [
+            "swoop_windup"
+          ],
+          "fps": 1
+        },
+        "swoop": {
+          "frames": [
+            "swoop"
+          ],
+          "fps": 1
+        },
+        "shot_windup": {
+          "frames": [
+            "shot_windup"
+          ],
+          "fps": 1
+        },
+        "shot": {
+          "frames": [
+            "shot"
+          ],
+          "fps": 1
         }
       }
     }

@@ -1,0 +1,35 @@
+{
+  "source": "art/source/monanim_ash_bat.png",
+  "save": false,
+  "out_dir": "art/build/monanim_ash_bat",
+  "cells": [
+    [
+      "knock_down",
+      "",
+      "swoop_windup",
+      "",
+      "swoop"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "scale": 0.098,
+  "detail": 2.56,
+  "grid": {
+    "rows": [
+      0,
+      550
+    ],
+    "cols": [
+      [
+        0,
+        399,
+        402,
+        799,
+        802,
+        1200
+      ]
+    ]
+  }
+}

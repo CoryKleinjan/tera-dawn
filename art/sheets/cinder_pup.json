@@ -37,7 +37,13 @@
         "walk3": "cinder_pup:walk3",
         "attack": "cinder_pup:attack",
         "hurt": "cinder_pup:hurt",
-        "defeated": "cinder_pup:defeated"
+        "defeated": "cinder_pup:defeated",
+        "jump1": "monanim_cinder_pup:jump1",
+        "jump2": "monanim_cinder_pup:jump2",
+        "knock_up": "monanim_cinder_pup:knock_up",
+        "knock_down": "monanim_cinder_pup:knock_down",
+        "charge_windup": "monanim_cinder_pup:charge_windup",
+        "charge": "monanim_cinder_pup:charge"
       },
       "anchor": "mass",
       "baseline": "bottom",
@@ -79,6 +85,38 @@
           ],
           "fps": 1,
           "loop": false
+        },
+        "jump": {
+          "frames": [
+            "jump1",
+            "jump2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "knock_up": {
+          "frames": [
+            "knock_up"
+          ],
+          "fps": 1
+        },
+        "knock_down": {
+          "frames": [
+            "knock_down"
+          ],
+          "fps": 1
+        },
+        "charge_windup": {
+          "frames": [
+            "charge_windup"
+          ],
+          "fps": 1
+        },
+        "charge": {
+          "frames": [
+            "charge"
+          ],
+          "fps": 1
         }
       }
     }

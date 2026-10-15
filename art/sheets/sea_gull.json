@@ -37,7 +37,10 @@
         "fly3": "sea_gull:fly3",
         "attack": "sea_gull:attack",
         "hurt": "sea_gull:hurt",
-        "defeated": "sea_gull:defeated"
+        "defeated": "sea_gull:defeated",
+        "knock_down": "monanim_sea_gull:knock_down",
+        "swoop_windup": "monanim_sea_gull:swoop_windup",
+        "swoop": "monanim_sea_gull:swoop"
       },
       "anchor": "mass",
       "baseline": "cell",
@@ -79,6 +82,24 @@
           ],
           "fps": 1,
           "loop": false
+        },
+        "knock_down": {
+          "frames": [
+            "knock_down"
+          ],
+          "fps": 1
+        },
+        "swoop_windup": {
+          "frames": [
+            "swoop_windup"
+          ],
+          "fps": 1
+        },
+        "swoop": {
+          "frames": [
+            "swoop"
+          ],
+          "fps": 1
         }
       }
     }

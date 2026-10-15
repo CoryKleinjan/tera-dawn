@@ -1,0 +1,59 @@
+{
+  "source": "art/source/monanim_shell_crab.png",
+  "save": false,
+  "out_dir": "art/build/monanim_shell_crab",
+  "cells": [
+    [
+      "jump1",
+      "",
+      "jump2",
+      "",
+      "knock_up"
+    ],
+    [
+      ""
+    ],
+    [
+      "knock_down",
+      "",
+      "lunge_windup",
+      "",
+      "lunge"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "scale": 0.1484,
+  "detail": 2.56,
+  "grid": {
+    "rows": [
+      0,
+      549,
+      552,
+      1100
+    ],
+    "cols": [
+      [
+        0,
+        398,
+        402,
+        799,
+        802,
+        1200
+      ],
+      [
+        0,
+        1200
+      ],
+      [
+        0,
+        398,
+        402,
+        799,
+        802,
+        1200
+      ]
+    ]
+  }
+}
