@@ -114,7 +114,8 @@
         "blink": "hero_hair:idle1",
         "lunge": "hero_hair:idle1",
         "roll1": "hero_hair:idle1",
-        "roll2": "hero_hair:idle1"
+        "roll2": "hero_hair:idle1",
+        "ambush2": "hero_hair:back"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -370,6 +371,12 @@
         "roll2": {
           "frames": [
             "roll2"
+          ],
+          "fps": 1
+        },
+        "ambush2": {
+          "frames": [
+            "ambush2"
           ],
           "fps": 1
         }

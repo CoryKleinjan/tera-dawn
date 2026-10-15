@@ -48,7 +48,7 @@
       "gravity1",
       "gravity2",
       "ambush1",
-      "",
+      "ambush2",
       "anchor1",
       "anchor2"
     ],
@@ -136,7 +136,8 @@
         "roll2": "hero_footpad_jerkin:roll2",
         "faint": "hero_footpad_jerkin:faint",
         "sit": "hero_footpad_jerkin:sit",
-        "crouch": "hero_footpad_jerkin:crouch"
+        "crouch": "hero_footpad_jerkin:crouch",
+        "ambush2": "hero_footpad_jerkin:ambush2"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -392,6 +393,12 @@
         "crouch": {
           "frames": [
             "crouch"
+          ],
+          "fps": 1
+        },
+        "ambush2": {
+          "frames": [
+            "ambush2"
           ],
           "fps": 1
         }

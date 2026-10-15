@@ -38,7 +38,7 @@ animations = {
 &"lunge": {"fps": 1.0, "frames": [&"lunge"], "loop": true},
 &"pinning_shot": {"fps": 1.0, "frames": [&"pinning"], "loop": true},
 &"roll": {"fps": 8.0, "frames": [&"roll1", &"roll2"], "loop": true},
-&"shadow_ambush": {"fps": 1.0, "frames": [&"ambush1"], "loop": true},
+&"shadow_ambush": {"fps": 8.0, "frames": [&"ambush1", &"ambush2"], "loop": false},
 &"skyward_cleave": {"fps": 8.0, "frames": [&"skyward1", &"skyward2"], "loop": false}
 }
 same_as = {

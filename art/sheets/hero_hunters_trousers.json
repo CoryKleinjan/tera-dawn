@@ -48,7 +48,7 @@
       "gravity1",
       "gravity2",
       "ambush1",
-      "",
+      "ambush2",
       "anchor1",
       "anchor2"
     ],
@@ -136,7 +136,8 @@
         "lunge": "hero_hunters_trousers:lunge",
         "roll1": "hero_hunters_trousers:roll1",
         "roll2": "hero_hunters_trousers:roll2",
-        "faint": "hero_hunters_trousers:faint"
+        "faint": "hero_hunters_trousers:faint",
+        "ambush2": "hero_hunters_trousers:ambush2"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -392,6 +393,12 @@
         "faint": {
           "frames": [
             "faint"
+          ],
+          "fps": 1
+        },
+        "ambush2": {
+          "frames": [
+            "ambush2"
           ],
           "fps": 1
         }

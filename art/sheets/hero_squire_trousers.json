@@ -48,7 +48,7 @@
       "gravity1",
       "gravity2",
       "ambush1",
-      "",
+      "ambush2",
       "anchor1",
       "anchor2"
     ],
@@ -136,7 +136,8 @@
         "pistol2": "hero_squire_trousers:pistol2",
         "blink": "hero_squire_trousers:blink",
         "roll2": "hero_squire_trousers:roll2",
-        "roll1": "hero_squire_trousers:roll1"
+        "roll1": "hero_squire_trousers:roll1",
+        "ambush2": "hero_squire_trousers:ambush2"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -392,6 +393,12 @@
         "roll1": {
           "frames": [
             "roll1"
+          ],
+          "fps": 1
+        },
+        "ambush2": {
+          "frames": [
+            "ambush2"
           ],
           "fps": 1
         }

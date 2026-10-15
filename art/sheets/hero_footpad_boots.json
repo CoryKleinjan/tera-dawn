@@ -48,7 +48,7 @@
       "gravity1",
       "gravity2",
       "ambush1",
-      "",
+      "ambush2",
       "anchor1",
       "anchor2"
     ],
@@ -136,7 +136,8 @@
         "roll1": "hero_footpad_boots:roll1",
         "roll2": "hero_footpad_boots:roll2",
         "faint": "hero_footpad_boots:faint",
-        "swing1": "hero_footpad_boots:swing1"
+        "swing1": "hero_footpad_boots:swing1",
+        "ambush2": "hero_footpad_boots:ambush2"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -392,6 +393,12 @@
         "swing1": {
           "frames": [
             "swing1"
+          ],
+          "fps": 1
+        },
+        "ambush2": {
+          "frames": [
+            "ambush2"
           ],
           "fps": 1
         }
