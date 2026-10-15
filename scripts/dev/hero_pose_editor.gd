@@ -26,7 +26,7 @@ const PLACES := [&"weapon", &"shield", &"hat", &"top", &"bottom", &"shoes", &"gl
 ## How much one step of Smaller/Bigger changes a piece's size (Shift: a fine step).
 const SIZE_STEP := 0.05
 const SIZE_FINE := 0.01
-const PART_NAMES := {&"body": "his body", &"face": "his face", &"hair": "his hair", &"hands": "his fists"}
+const PART_NAMES := {&"body": "his body", &"face": "his face", &"hair": "his hair", &"hair_under": "his hair under the hat", &"hands": "his fists"}
 
 var _jobs: Array[StringName] = []
 var _job := 0
@@ -187,9 +187,12 @@ func _pieces_changed() -> void:
 			var h: HeldDef = _outfit[place].held
 			if h and not _saved_pins.has(h):
 				_saved_pins[h] = [h.pins.duplicate(), h.sizes.duplicate()]
+	var hat: EquipDef = _outfit.get(&"hat")
+	var under: HeroStyleDef = _hair_style().under_hats.get(hat.id) if hat else null
 	for part in PART_NAMES:
-		var owner: Resource = {&"face": _face_style(), &"hair": _hair_style()}.get(part, HeroBody.LOOK)
-		_pieces.append(HeroBody.Layer.new(owner, part))
+		var owner: Resource = {&"face": _face_style(), &"hair": _hair_style(), &"hair_under": under}.get(part, HeroBody.LOOK)
+		if owner:
+			_pieces.append(HeroBody.Layer.new(owner, part))
 	_piece = 0
 	_piece_menu.clear()
 	for i in _pieces.size():

@@ -1,7 +1,10 @@
-[gd_resource type="Resource" script_class="HeroStyleDef" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="HeroStyleDef" load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/hero_style_def.gd" id="1_style"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/hero/hair.tres" id="2_frames"]
+[ext_resource type="Resource" path="res://data/hero/hairs/messy_under_novice_hat.tres" id="3_under"]
+[ext_resource type="Resource" path="res://data/hero/hairs/messy_under_footpad_bandana.tres" id="4_under"]
+[ext_resource type="Resource" path="res://data/hero/hairs/messy_under_hunters_hood.tres" id="5_under"]
 
 [resource]
 script = ExtResource("1_style")
@@ -16,4 +19,9 @@ nudges = {
 &"swing1": Vector4(-2.6, 4.7, -9, 0),
 &"swing2": Vector4(8.6, 7.1, 15, 0),
 &"swing3": Vector4(18.9, 14.6, 18, 0)
+}
+under_hats = {
+&"novice_hat": ExtResource("3_under"),
+&"footpad_bandana": ExtResource("4_under"),
+&"hunters_hood": ExtResource("5_under")
 }

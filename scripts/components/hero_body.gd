@@ -90,7 +90,7 @@ func _place(s: Sprite3D, tex: Texture2D, anchor: Vector2, pin: Vector2, deg: flo
 ## His layers back to front on `frame` for what he wears (place -> EquipDef), with his face and
 ## hairstyle (HeroStyleDef, LOOK's first of each when null): a held piece set
 ## behind him, what hangs behind him, his body, his trousers and shoes, held pieces under his top,
-## his top, his face, his hair (unless a hat covers it on this frame), his hat, held pieces over
+## his top, his face, his hair (or under a hat that covers it, the bits of it sticking out), his hat, held pieces over
 ## his clothes, his fists over the grip (or resting, LOOK.resting_hand_frames), held pieces over
 ## his hands. Each held piece's pin says
 ## its layer on that frame; any other piece can be moved up or down the stack on a frame by its
@@ -116,9 +116,12 @@ static func layers(worn: Dictionary, frame: StringName, face: HeroStyleDef = nul
 	_add(out, held.get(HeldDef.Layer.UNDER_TOP, []), true)
 	_add(out, OVER.map(func(p): return worn.get(p)))
 	out.append(Layer.new(face if face else LOOK.faces[0], &"face"))
-	var hair := Layer.new(hair_style if hair_style else LOOK.hairs[0], &"hair")
+	var hs: HeroStyleDef = hair_style if hair_style else LOOK.hairs[0]
+	var hair := Layer.new(hs, &"hair")
 	if hair.added(frame) or not (hat and hat.hides_hair and Layer.new(hat).shows(frame)):
 		out.append(hair)
+	elif hs.under_hats.has(hat.id):
+		out.append(Layer.new(hs.under_hats[hat.id], &"hair_under"))  # the bits sticking out
 	_add(out, [hat, weapon])
 	_add(out, held.get(HeldDef.Layer.OVER_CLOTHES, []), true)
 	var hands := Layer.new(LOOK, &"hands")
@@ -157,7 +160,7 @@ func _new_layer() -> Sprite3D:
 class Layer:
 	## The EquipDef or HeroStyleDef, or LOOK for his body and fists.
 	var owner: Resource
-	## Which of his parts (&"body", &"face", &"hair", &"hands"); empty for gear.
+	## Which of his parts (&"body", &"face", &"hair", &"hair_under", &"hands"); empty for gear.
 	var part: StringName
 	## Texture -> the middle of its painted pixels, what a moved piece turns around.
 	static var _middles := {}

@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="HeroStyleDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/hero_style_def.gd" id="1_style"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/hero/hair_under_novice_hat.tres" id="2_frames"]
+
+[resource]
+script = ExtResource("1_style")
+id = &"messy_under_novice_hat"
+display_name = "Messy under the hat"
+frames = ExtResource("2_frames")
+nudges = {
+&"cast1": Vector4(-20.4, 0.5, -30, 0),
+&"cast2": Vector4(-3.6, 0.4, -0, 0),
+&"crouch": Vector4(6, 10, 0, 0),
+&"hurt": Vector4(-27.7, 12, -24, 0),
+&"idle2": Vector4(0, 1, 0, 0),
+&"jump": Vector4(0, -6, 0, 0),
+&"sit": Vector4(-3.6, 23.7, -0, 0),
+&"swing1": Vector4(-3.8, 4.9, -9, 0),
+&"swing2": Vector4(10.6, 7.2, 15, 0),
+&"swing3": Vector4(21.4, 14.9, 18, 0),
+&"walk1": Vector4(0, -1, 0, 0),
+&"walk2": Vector4(0, -6.5, 0, 0),
+&"walk3": Vector4(0, -6, 0, 0)
+}
+frame_art = {
+&"cast1": &"idle1",
+&"cast2": &"idle1",
+&"crouch": &"idle1",
+&"hurt": &"idle1",
+&"idle2": &"idle1",
+&"jump": &"idle1",
+&"sit": &"idle1",
+&"swing1": &"idle1",
+&"swing2": &"idle1",
+&"swing3": &"idle1",
+&"walk1": &"idle1",
+&"walk2": &"idle1",
+&"walk3": &"idle1"
+}
