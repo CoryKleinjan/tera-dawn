@@ -267,6 +267,78 @@ func _run() -> void:
 		Input.action_release("quick_1")
 		await _physics(5)
 		await _shot("ranged")
+	if only == "" or only == "control":
+		# Each job's monster-control skill in action, on a few monsters of a field's widest
+		# platform with monsters on it.
+		Net.server.enter_map(_me(), &"sandy_shoals", 300.0)
+		await _physics(60)
+		var field: MapInstance = _me().map
+		var plat: Platform = null
+		for m in field.mobs:
+			if not m.def.flying and not m.def.boss and (plat == null or m.plat.w > plat.w):
+				plat = m.plat
+		var ground: Array = field.mobs.filter(func(m: SimMob) -> bool: return m.plat == plat and not m.def.flying)
+		var left := plat.x + 60.0
+		var pack := func(xs: Array) -> void:
+			for i in mini(xs.size(), ground.size()):
+				var m: SimMob = ground[i]
+				_place_mob(m, left + xs[i])
+				m.hop = 0.0
+				m.hop_v = 0.0
+				m.tossed = false
+				m.stun_t = 0
+				m.hang_t = 0
+				m.root_t = 0
+				m.health.reset(1000000) # so no blow finishes it before the shot
+			for i in range(xs.size(), ground.size()):
+				_place_mob(ground[i], plat.x + plat.w - 20.0)
+		var cast := func(job: StringName, id: StringName, after: int) -> void:
+			ch.job = Content.job(job)
+			ch.skills.learned[id] = 10
+			ch.set_quickslot(0, &"skill", id)
+			ch.mp = 500
+			ch.recalc()
+			_me().dirty_character = true
+			await _physics(20)
+			_me().cooldown = 0
+			_me().recharge.clear()
+			p.cooldown = 0
+			p.recharge.clear()
+			world.hud.banners.clear()
+			Input.action_press("quick_1")
+			await _physics(2)
+			Input.action_release("quick_1")
+			await _physics(after)
+			world.hud.banners.clear()
+			await _shot("control_" + String(id))
+		var stand := func(x: float) -> void:
+			_teleport(world, Vector2(left + x, plat.y))
+			p.face = 1
+		stand.call(0.0)
+		pack.call([60, 90, 120])
+		await cast.call(&"warrior", &"skyward_cleave", 16)
+		await _physics(80)
+		stand.call(100.0)
+		pack.call([40, 100, 180])
+		for i in 2:
+			ground[i].launch(9.0)
+		await _physics(12)
+		await cast.call(&"mage", &"gravity_well", 14)
+		await _physics(80)
+		stand.call(0.0)
+		pack.call([220, 250, 280])
+		await cast.call(&"thief", &"shadow_ambush", 40)
+		await _physics(80)
+		stand.call(0.0)
+		pack.call([220])
+		ground[0].launch(6.0)
+		ch.equipment.take(&"weapon")
+		ch.equipment.put(&"weapon", ItemStack.exact(Content.item(&"willow_bow")))
+		await cast.call(&"archer", &"pinning_shot", 20)
+		await _physics(80)
+		stand.call(0.0)
+		pack.call([180, 230, 260])
+		await cast.call(&"pirate", &"anchor_haul", 14)
 	if only == "" or only == "worldmap":
 		world.hud.toggle_window("worldmap")
 		var wm: TDWorldMapWindow = world.hud.windows["worldmap"]

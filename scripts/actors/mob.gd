@@ -15,6 +15,14 @@ const RAGE_TINT := Color(1.15, 0.8, 0.75)
 const HEX_TINT := Color(0.85, 0.65, 1.1)
 const ROOT_TINT := Color(0.75, 1.05, 0.7)
 const BURN_TINT := Color(1.2, 0.75, 0.6)
+## Stunned (SkillDef.stun): code-drawn stars circling over its head until painted effects
+## replace them: how many, how wide their circle (screen pixels), how fast they go round.
+const STUN_STARS := 3
+const STUN_RADIUS := 20.0
+const STUN_SPIN := 0.006
+const STUN_COLOR := Color(1.0, 0.92, 0.45)
+## How fast a flier drops to the ground when slammed and rises again after (share per tick).
+const DOWN_SPEED := 0.2
 
 var world: TDWorld
 var index := 0
@@ -41,6 +49,8 @@ var _stop_t := 0
 var _fade := 1.0
 ## The tint last given to the rig (see _tint).
 var _tinted := Color.WHITE
+## How much of a flier's hover it shows: 0 while a slam holds it down (SkillDef.slam).
+var _hover := 1.0
 
 static func create(w: TDWorld, i: int, d: MonsterDef, p: Platform) -> TDMob:
 	var m := TDMob.new()
@@ -84,12 +94,12 @@ func hit_react(face: int, stop_ticks := 0) -> void:
 
 ## Feet position including the hover height of flying monsters.
 func body_position() -> Vector2:
-	return position + SimMob.hover_offset(def, phase)
+	return position + SimMob.hover_offset(def, phase) * _hover
 
 ## body_position() where it is drawn this frame (between ticks, see TDWorld.drawn), with
 ## its hit recoil.
 func drawn_body_position() -> Vector2:
-	return world.drawn(self) + SimMob.hover_offset(def, phase) + Vector2(_recoil, 0)
+	return world.drawn(self) + SimMob.hover_offset(def, phase) * _hover + Vector2(_recoil, 0)
 
 func step() -> void:
 	_recoil *= 0.75
@@ -101,6 +111,7 @@ func step() -> void:
 		return
 	phase += 0.08
 	position += (target - position) * FOLLOW
+	_hover = move_toward(_hover, 0.0 if flags & SnapshotFlags.MOB_DOWNED != 0 else 1.0, DOWN_SPEED)
 	if death_t > 0 and incoming <= 0:
 		death_t -= 1
 
@@ -132,6 +143,10 @@ func _process(_delta: float) -> void:
 	rig.set_opacity(clampf(death_t / 30.0, 0.0, 1.0) if fallen else _fade)
 	var hurt := flags & SnapshotFlags.MOB_HURT != 0
 	rig.set_flash(hurt and Engine.get_physics_frames() % 4 < 2)
+	# stunned: frozen mid-flinch until it comes round
+	var stunned := stunned()
+	if _stop_t == 0:
+		rig.freeze(stunned)
 	# winding up a move: a warm pulse and a lean back, so it never comes out of nowhere
 	var winding := flags & SnapshotFlags.MOB_WINDUP != 0 and not dead
 	rig.set_glow(0.5 + 0.5 * sin(Time.get_ticks_msec() / 45.0) if winding else 0.0)
@@ -150,7 +165,7 @@ func _process(_delta: float) -> void:
 		rig.play(&"die")
 	elif flags & SnapshotFlags.MOB_CASTING != 0:
 		rig.play(&"attack")
-	elif hurt:
+	elif hurt or stunned:
 		rig.play(&"hurt")
 	elif winding:
 		rig.play(&"idle")
@@ -184,6 +199,21 @@ func draw_tag(ci: CanvasItem, at: Vector2, top: Vector2, tags: TDNameTags) -> vo
 		tags.add_name(at + Vector2(0, 4), "Lv.%d %s" % [def.level, def.display_name], Palette.MIST)
 	if flags & SnapshotFlags.MOB_SHOW_HP != 0 and not def.boss:
 		WorldSkin.draw_monster_hp(ci, top + Vector2(0, -16), maxf(54.0, def.size.x * 1.1), hp)
+	if stunned():
+		_draw_stun(ci, top + Vector2(0, -44))
+
+func stunned() -> bool:
+	return flags & SnapshotFlags.MOB_STUNNED != 0 and not dead
+
+## Stars circling over a stunned monster's head (`at`, on screen).
+func _draw_stun(ci: CanvasItem, at: Vector2) -> void:
+	var turn := Time.get_ticks_msec() * STUN_SPIN
+	for i in STUN_STARS:
+		var a := turn + TAU * i / STUN_STARS
+		var p := at + Vector2(cos(a) * STUN_RADIUS, sin(a) * STUN_RADIUS * 0.35)
+		var r := 5.0 + 1.5 * sin(a)
+		ci.draw_circle(p, r + 2.0, Color(0.25, 0.15, 0.05, 0.8))
+		ci.draw_circle(p, r, STUN_COLOR)
 
 ## Whether its name tag shows: only while it's hurt (its HP bar is up) or for a boss, so a
 ## field of monsters isn't a field of labels.
