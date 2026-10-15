@@ -13,7 +13,7 @@ face = ExtResource("3_face")
 hair = ExtResource("4_hair")
 hands = ExtResource("5_hands")
 bare_arm_frames = Array[StringName]([&"crouch"])
-resting_hand_frames = Array[StringName]([&"faint"])
+resting_hand_frames = Array[StringName]([&"faint", &"crouch"])
 nudges = {
 &"face": {
 &"hurt": Vector4(13, -2, 0, 0)
