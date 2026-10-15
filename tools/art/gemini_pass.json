@@ -16978,6 +16978,146 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose. Cells 2, 3, 4, 5, 6, 7 and 8 are empty and must stay empty. He is seen from behind. On the green shape, paint ONLY his WEAPON HAND: one closed rounded MITTEN fist, with no separate fingers or thumb, plus his wrist, exactly the same size, shape, angle, skin colour and place as that fist in the same cell of the first attached picture, so it lies exactly on top of it. The weapon hand is the fist at the end of the arm stretched out to the RIGHT, NOT the hand folded across his chest. Paint only that one fist and nothing else: no other hand, arm, sleeve, body, head, weapon or object. Leave every part of the green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Style: exactly the skin, warm colours, light from the upper left, smooth soft painted shading and thin dark plum-brown outline of the boy in the first attached picture. Keep the grid lines. No text, no labels."
   }
+ },
+ {
+  "id": "mshero_war_boots_fix3",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_war_boots_fix3.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 21:06Z 'yes' to the 8 boot repaints ~$0.54: backhand boots seen from behind, roll boots on his tucked feet): war boots on ambush2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_war_boots_b2_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_war_boots_b2_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_war_boots_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_war_boots_back.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: seen from BEHIND, his back to the viewer, mid backhand slash, feet planted apart). Cells 2, 3, 4, 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact footwear already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY the same brown leather boots as in the second attached picture, reaching to mid-shin, with steel toe caps, a darker sole, a turned-down cuff and a small buckle strap. Paint BOTH feet in every cell; each foot is whole and rounded, never cut off flat, and the same size as the green foot it covers. In cell 1 he is seen from BEHIND, exactly like the boy in the fourth attached picture, whose footwear shows its heels and backs: paint the footwear seen from behind, with the HEEL of each one facing the viewer and the toes pointing AWAY into the picture, hidden behind the heel. Never paint the toes pointing sideways or at the viewer. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing or gear. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_mag_slippers_fix3",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_mag_slippers_fix3.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 21:06Z 'yes' to the 8 boot repaints ~$0.54: backhand boots seen from behind, roll boots on his tucked feet): mag slippers on ambush2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_mag_slippers_b2_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_mag_slippers_b2_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_mag_slippers_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_mag_slippers_back2.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: seen from BEHIND, his back to the viewer, mid backhand slash, feet planted apart). Cells 2, 3, 4, 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact footwear already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a pair of soft magician's slippers: deep blue cloth with gold trim around the opening and gently curled pointed toes. Paint BOTH feet in every cell; each foot is whole and rounded, never cut off flat, and the same size as the green foot it covers. In cell 1 he is seen from BEHIND, exactly like the boy in the fourth attached picture, whose footwear shows its heels and backs: paint the footwear seen from behind, with the HEEL of each one facing the viewer and the toes pointing AWAY into the picture, hidden behind the heel. Never paint the toes pointing sideways or at the viewer. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing or gear. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_thief_boots_fix3",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_thief_boots_fix3.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 21:06Z 'yes' to the 8 boot repaints ~$0.54: backhand boots seen from behind, roll boots on his tucked feet): thief boots on roll1, ambush2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_thief_boots_b2_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_thief_boots_b2_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_thief_boots_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_thief_boots_back.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 and 2 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: curled into a tight ball, knees to chest, arms wrapped around his shins, his feet tucked in close under him; cell 2: seen from BEHIND, his back to the viewer, mid backhand slash, feet planted apart). Cells 3, 4, 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact footwear already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a young thief's quiet boots: soft dark brown leather boots reaching just above the ankle, with a folded-over top, thin dark soles and a small strap. Paint BOTH feet in every cell; each foot is whole and rounded, never cut off flat, and the same size as the green foot it covers. In cell 1 the boots sit exactly on the small green feet tucked in under the curled-up ball, the same size as those feet, never hanging below him or floating apart. In cell 2 he is seen from BEHIND, exactly like the boy in the fourth attached picture, whose footwear shows its heels and backs: paint the footwear seen from behind, with the HEEL of each one facing the viewer and the toes pointing AWAY into the picture, hidden behind the heel. Never paint the toes pointing sideways or at the viewer. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing or gear. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_archer_boots_fix3",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_archer_boots_fix3.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 21:06Z 'yes' to the 8 boot repaints ~$0.54: backhand boots seen from behind, roll boots on his tucked feet): archer boots on roll1, ambush2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_archer_boots_b2_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_archer_boots_b2_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_archer_boots_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_archer_boots_back.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 and 2 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: curled into a tight ball, knees to chest, arms wrapped around his shins, his feet tucked in close under him; cell 2: seen from BEHIND, his back to the viewer, mid backhand slash, feet planted apart). Cells 3, 4, 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact footwear already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a young archer's lace-up boots: brown leather boots reaching a little above the ankle, laced up the front with pale cord, with sturdy dark soles. Paint BOTH feet in every cell; each foot is whole and rounded, never cut off flat, and the same size as the green foot it covers. In cell 1 the boots sit exactly on the small green feet tucked in under the curled-up ball, the same size as those feet, never hanging below him or floating apart. In cell 2 he is seen from BEHIND, exactly like the boy in the fourth attached picture, whose footwear shows its heels and backs: paint the footwear seen from behind, with the HEEL of each one facing the viewer and the toes pointing AWAY into the picture, hidden behind the heel. Never paint the toes pointing sideways or at the viewer. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing or gear. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_pirate_boots_fix3",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_pirate_boots_fix3.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 21:06Z 'yes' to the 8 boot repaints ~$0.54: backhand boots seen from behind, roll boots on his tucked feet): pirate boots on roll1, ambush2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_pirate_boots_b2_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_pirate_boots_b2_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_pirate_boots_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_pirate_boots_back.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 and 2 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: curled into a tight ball, knees to chest, arms wrapped around his shins, his feet tucked in close under him; cell 2: seen from BEHIND, his back to the viewer, mid backhand slash, feet planted apart). Cells 3, 4, 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact footwear already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a young pirate's tall cuffed boots: black leather boots reaching up to just below the knee, with a wide folded-down cuff at the top and sturdy dark soles. Paint BOTH feet in every cell; each foot is whole and rounded, never cut off flat, and the same size as the green foot it covers. In cell 1 the boots sit exactly on the small green feet tucked in under the curled-up ball, the same size as those feet, never hanging below him or floating apart. In cell 2 he is seen from BEHIND, exactly like the boy in the fourth attached picture, whose footwear shows its heels and backs: paint the footwear seen from behind, with the HEEL of each one facing the viewer and the toes pointing AWAY into the picture, hidden behind the heel. Never paint the toes pointing sideways or at the viewer. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing or gear. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
  }
 ]
 }
