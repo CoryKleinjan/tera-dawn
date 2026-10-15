@@ -29,7 +29,17 @@ animations = {
 &"rope": {"fps": 4.0, "frames": [&"rope1", &"rope2"], "loop": true},
 &"sit": {"fps": 1.0, "frames": [&"sit"], "loop": true},
 &"throw": {"fps": 12.0, "frames": [&"throw1", &"throw2", &"throw3"], "loop": false},
-&"walk": {"fps": 3.5, "frames": [&"walk1", &"walk2", &"walk3", &"walk2"], "loop": true}
+&"walk": {"fps": 3.5, "frames": [&"walk1", &"walk2", &"walk3", &"walk2"], "loop": true},
+&"anchor_haul": {"fps": 6.0, "frames": [&"anchor1", &"anchor2"], "loop": false},
+&"backstep": {"fps": 1.0, "frames": [&"backstep"], "loop": true},
+&"blink": {"fps": 1.0, "frames": [&"blink"], "loop": true},
+&"gravity_well": {"fps": 6.0, "frames": [&"gravity1", &"gravity2"], "loop": false},
+&"leap": {"fps": 1.0, "frames": [&"leap"], "loop": true},
+&"lunge": {"fps": 1.0, "frames": [&"lunge"], "loop": true},
+&"pinning_shot": {"fps": 1.0, "frames": [&"pinning"], "loop": true},
+&"roll": {"fps": 8.0, "frames": [&"roll1", &"roll2"], "loop": true},
+&"shadow_ambush": {"fps": 1.0, "frames": [&"ambush1"], "loop": true},
+&"skyward_cleave": {"fps": 8.0, "frames": [&"skyward1", &"skyward2"], "loop": false}
 }
 same_as = {
 &"fall": &"jump",
