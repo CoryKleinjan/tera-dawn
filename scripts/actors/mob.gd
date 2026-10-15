@@ -18,7 +18,7 @@ const BURN_TINT := Color(1.2, 0.75, 0.6)
 ## Stunned (SkillDef.stun): code-drawn stars circling over its head until painted effects
 ## replace them: how many, how wide their circle (screen pixels), how fast they go round.
 const STUN_STARS := 3
-const STUN_RADIUS := 14.0
+const STUN_RADIUS := 20.0
 const STUN_SPIN := 0.006
 const STUN_COLOR := Color(1.0, 0.92, 0.45)
 ## How fast a flier drops to the ground when slammed and rises again after (share per tick).
@@ -200,7 +200,7 @@ func draw_tag(ci: CanvasItem, at: Vector2, top: Vector2, tags: TDNameTags) -> vo
 	if flags & SnapshotFlags.MOB_SHOW_HP != 0 and not def.boss:
 		WorldSkin.draw_monster_hp(ci, top + Vector2(0, -16), maxf(54.0, def.size.x * 1.1), hp)
 	if stunned():
-		_draw_stun(ci, top + Vector2(0, -28))
+		_draw_stun(ci, top + Vector2(0, -44))
 
 func stunned() -> bool:
 	return flags & SnapshotFlags.MOB_STUNNED != 0 and not dead
@@ -211,8 +211,8 @@ func _draw_stun(ci: CanvasItem, at: Vector2) -> void:
 	for i in STUN_STARS:
 		var a := turn + TAU * i / STUN_STARS
 		var p := at + Vector2(cos(a) * STUN_RADIUS, sin(a) * STUN_RADIUS * 0.35)
-		var r := 3.0 + 1.0 * sin(a)
-		ci.draw_circle(p, r + 1.5, Color(0.25, 0.15, 0.05, 0.8))
+		var r := 5.0 + 1.5 * sin(a)
+		ci.draw_circle(p, r + 2.0, Color(0.25, 0.15, 0.05, 0.8))
 		ci.draw_circle(p, r, STUN_COLOR)
 
 ## Whether its name tag shows: only while it's hurt (its HP bar is up) or for a boss, so a
