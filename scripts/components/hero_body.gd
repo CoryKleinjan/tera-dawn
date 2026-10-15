@@ -88,7 +88,8 @@ func _place(s: Sprite3D, tex: Texture2D, anchor: Vector2, pin: Vector2, deg: flo
 ## His layers back to front on `frame` for what he wears (place -> EquipDef): a held piece set
 ## behind him, what hangs behind him, his body, his trousers and shoes, held pieces under his top,
 ## his top, his face, his hair (unless a hat covers it on this frame), his hat, held pieces over
-## his clothes, his fists over the grip, held pieces over his hands. Each held piece's pin says
+## his clothes, his fists over the grip (or resting, LOOK.resting_hand_frames), held pieces over
+## his hands. Each held piece's pin says
 ## its layer on that frame; any other piece can be moved up or down the stack on a frame by its
 ## nudge (Vector4.w). The off-hand only shows while the weapon does. Under long sleeves the fists
 ## painted with bare forearms are left off.
@@ -116,7 +117,7 @@ static func layers(worn: Dictionary, frame: StringName) -> Array[Layer]:
 		out.append(Layer.new(LOOK, &"hair"))
 	_add(out, [hat, weapon])
 	_add(out, held.get(HeldDef.Layer.OVER_CLOTHES, []), true)
-	if shown and not (top and top.long_sleeves and frame in LOOK.bare_arm_frames):
+	if (shown or frame in LOOK.resting_hand_frames) and not (top and top.long_sleeves and frame in LOOK.bare_arm_frames):
 		out.append(Layer.new(LOOK, &"hands"))
 	_add(out, held.get(HeldDef.Layer.OVER_HANDS, []), true)
 	out = out.filter(func(l: Layer): return l.shows(frame))

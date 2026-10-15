@@ -14,6 +14,9 @@ extends Resource
 ## Frames whose fists were painted with bare forearms, left off under long sleeves
 ## (EquipDef.long_sleeves).
 @export var bare_arm_frames: Array[StringName] = []
+## Frames whose fists are drawn over his clothes with or without a weapon out (lying down, a
+## hand resting on his belly).
+@export var resting_hand_frames: Array[StringName] = []
 ## His own parts moved by hand in the pose editor: part (&"body", &"face", &"hair", &"hands")
 ## -> {frame: Vector4(x, y, degrees clockwise, places up the stack)} (HeroBody.Layer).
 @export var nudges: Dictionary = {}

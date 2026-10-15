@@ -20,7 +20,7 @@
       "",
       "crouch",
       "",
-      ""
+      "faint"
     ]
   ],
   "grid": {
@@ -58,7 +58,8 @@
         "jump": "hero_hands:jump",
         "hurt": "hero_hands:hurt",
         "walk3": "hero_hands:walk3",
-        "crouch": "hero_hands:crouch"
+        "crouch": "hero_hands:crouch",
+        "faint": "hero_hands:faint"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -110,6 +111,12 @@
         "crouch": {
           "frames": [
             "crouch"
+          ],
+          "fps": 1
+        },
+        "faint": {
+          "frames": [
+            "faint"
           ],
           "fps": 1
         }
