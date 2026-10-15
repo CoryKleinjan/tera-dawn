@@ -71,7 +71,8 @@ func draw(face: int, chair: StringName, pet: StringName, anim: StringName, worn:
 
 ## His layers back to front on `frame` for what he wears (place -> EquipDef): what hangs behind
 ## him, his body, his trousers and shoes, an off-hand held in front, his top, his face, his hair
-## (unless a hat covers it on this frame), his hat and his weapon. On the frames in
+## (unless a hat covers it on this frame), his hat and his weapon. The off-hand only shows while
+## the weapon does. On the frames in
 ## HeroLookDef.weapon_behind (a sword raised behind his head) the weapon goes behind him instead.
 static func layers(worn: Dictionary, frame: StringName) -> Array[SpriteFrames]:
 	var out: Array[SpriteFrames] = []
@@ -79,6 +80,8 @@ static func layers(worn: Dictionary, frame: StringName) -> Array[SpriteFrames]:
 	var hat: EquipDef = worn.get(&"hat")
 	var weapon: EquipDef = worn.get(&"weapon")
 	var behind := frame in LOOK.weapon_behind
+	if weapon and not (weapon.worn and weapon.worn.has_animation(frame)):
+		offhand = null  # put away with the weapon (sitting, lying down)
 	var back := BACK.map(func(p): return worn.get(p))
 	if offhand and not offhand.worn_in_front:
 		back.push_front(offhand)
