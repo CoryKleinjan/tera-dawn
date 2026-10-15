@@ -138,7 +138,7 @@ var _air_moves := {}
 ## The chair you're sitting on (the server said so), or empty. Moving gets you up.
 var sitting: StringName = &""
 
-## How you're drawn: your chair and pet (see HeroBody).
+## How you're drawn: your painted layers, chair and pet (see HeroBody).
 var body: HeroBody
 var companion: TDCompanion:
 	get:
@@ -569,7 +569,7 @@ func _move() -> void:
 func _process(_delta: float) -> void:
 	if body == null or world == null or world.map == null:
 		return
-	body.draw(face, sitting, Game.me.pet)
+	body.draw(face, sitting, Game.me.pet, _animation(), Game.me.equipment.defs())
 
 ## What he is doing, as an animation name: the server passes it on to everyone else.
 func _animation() -> StringName:

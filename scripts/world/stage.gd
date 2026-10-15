@@ -24,6 +24,7 @@ const TEXEL := 1.25
 ## per art pixel.
 const ART_DENSITY := {
 	"res://assets/sprites/npcs/": 2.0,
+	"res://assets/sprites/hero/": 2.0,
 	"res://assets/sprites/monsters/": 2.0,
 	"res://assets/sprites/pets/": 2.0,
 	"res://assets/sprites/items/": 2.0,

@@ -160,6 +160,7 @@ func motion() -> Array:
 	return [peer, position.x, position.y, face, animation, flags]
 
 ## What else other clients need to show this player, which changes rarely:
-## [name, level, job, guild, chair, pet].
+## [name, level, job, guild, chair, pet, worn gear (Equipment.ids)].
 func info() -> Array:
-	return [character.name, character.level, character.job.id, character.guild, chair, character.pet]
+	return [character.name, character.level, character.job.id, character.guild, chair, character.pet,
+		character.equipment.ids()]

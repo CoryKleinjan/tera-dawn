@@ -11,15 +11,19 @@ then character select shows the list (name, level and job) with the new characte
 
 - **Outfit** choices come from the starting job's `creator_gear` (one piece per kind). It is
   empty while the gear is being remade, so the creator offers no outfit for now.
-- **No look yet**: the hero's look and all equipment visuals are being restarted from Cory's
-  original reference (`art/reference/hero.png`), so a character has no appearance and the
-  hero has no sprite. Older saves and clients that carry an appearance still load; it is left
-  out.
+- **Layered look**: the hero is drawn from painted layers, MapleStory style. `HeroLookDef`
+  (`data/hero/look.tres`) holds his body, face and hair and which frames each animation shows
+  (`"<anim>_<weapon kind>"` overrides it, like `attack_sword`). Each piece of gear's
+  `EquipDef.worn` is its layer, cut from the same cells (`art/sheets/hero_*.json`, one frame per
+  cell named like `idle1` or `swing2`), so layers line up frame by frame; `hides_hair` (helmets,
+  hats) and `worn_in_front` (a tome) set where it stacks. A character has no picked appearance
+  yet; older saves that carry one still load.
 - **One body for every hero**: your hero (`TDPlayer`) and other players' (`TDAvatar`) each
   work out what they are doing (from your keys, or from the snapshot: an animation name such
   as "walk", "attack" or a skill's `animation`), and `HeroBody`
-  (`scripts/components/hero_body.gd`) shows them the same way for both. For now it only brings
-  along the companion (chair and pet); the new look goes there. The sizes the game needs for a
+  (`scripts/components/hero_body.gd`) shows them the same way for both. It stacks one sprite per
+  layer in a fixed order (`HeroBody.layers`) and brings along the companion (chair and pet).
+  Other players' gear reaches you as item ids in their info (`SimPlayer.info`). The sizes the game needs for a
   hero (`TDPlayer.HEIGHT`, `WIDTH`, `CHEST`, `SimPlayer.HURTBOX_SIZE`) are constants.
 
 ### Chairs, pets, the Monster Book and achievements

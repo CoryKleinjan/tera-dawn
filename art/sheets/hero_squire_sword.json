@@ -1,0 +1,147 @@
+{
+  "source": "art/source/hero/squire_sword.png",
+  "out_dir": "art/build/hero/squire_sword",
+  "cells": [
+    [
+      "idle1",
+      "idle2",
+      "walk1",
+      "walk2",
+      "jump",
+      "hurt",
+      "walk3",
+      ""
+    ],
+    [
+      "swing1",
+      "swing2",
+      "",
+      "cast1",
+      "cast2",
+      "crouch",
+      "",
+      ""
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      675,
+      1350
+    ],
+    "cols": [
+      0,
+      1100,
+      2200,
+      3300,
+      4400,
+      5500,
+      6600,
+      7700,
+      8800
+    ]
+  },
+  "inset": 0,
+  "label_band": 0,
+  "trim": false,
+  "dark_key": false,
+  "defringe": false,
+  "scale": 0.111,
+  "save": false,
+  "sets": {
+    "hero_squire_sword": {
+      "frames": {
+        "idle1": "hero_squire_sword:idle1",
+        "idle2": "hero_squire_sword:idle2",
+        "walk1": "hero_squire_sword:walk1",
+        "walk2": "hero_squire_sword:walk2",
+        "jump": "hero_squire_sword:jump",
+        "hurt": "hero_squire_sword:hurt",
+        "walk3": "hero_squire_sword:walk3",
+        "swing1": "hero_squire_sword:swing1",
+        "swing2": "hero_squire_sword:swing2",
+        "cast1": "hero_squire_sword:cast1",
+        "cast2": "hero_squire_sword:cast2",
+        "crouch": "hero_squire_sword:crouch"
+      },
+      "anchor": "cell",
+      "baseline": "cell",
+      "out": "assets/sprites/hero/squire_sword.png",
+      "sprite_frames": "assets/animations/hero/squire_sword.tres",
+      "animations": {
+        "idle1": {
+          "frames": [
+            "idle1"
+          ],
+          "fps": 1
+        },
+        "idle2": {
+          "frames": [
+            "idle2"
+          ],
+          "fps": 1
+        },
+        "walk1": {
+          "frames": [
+            "walk1"
+          ],
+          "fps": 1
+        },
+        "walk2": {
+          "frames": [
+            "walk2"
+          ],
+          "fps": 1
+        },
+        "jump": {
+          "frames": [
+            "jump"
+          ],
+          "fps": 1
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "walk3": {
+          "frames": [
+            "walk3"
+          ],
+          "fps": 1
+        },
+        "swing1": {
+          "frames": [
+            "swing1"
+          ],
+          "fps": 1
+        },
+        "swing2": {
+          "frames": [
+            "swing2"
+          ],
+          "fps": 1
+        },
+        "cast1": {
+          "frames": [
+            "cast1"
+          ],
+          "fps": 1
+        },
+        "cast2": {
+          "frames": [
+            "cast2"
+          ],
+          "fps": 1
+        },
+        "crouch": {
+          "frames": [
+            "crouch"
+          ],
+          "fps": 1
+        }
+      }
+    }
+  }
+}

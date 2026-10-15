@@ -23,9 +23,8 @@ data/*.tres  ──►  Content (autoload)  ──►  World loads a MapDef  ─
   (one slot's worth of an item, with its own rolled stats for gear) and `CharacterStats` (the
   MapleStory formulas). The server owns each player's `Character`; `Game.me` is your copy.
 - **Components** (`scripts/components/`) are small reusable parts any actor can use: `Health`,
-  `Hitbox`, `SpriteRig` (sprite, animation, light and aura) and `HeroBody` (how every hero shows;
-  for now only his chair and pet, while his look is restarted: see
-  [characters](docs/architecture/characters.md)).
+  `Hitbox`, `SpriteRig` (sprite, animation, light and aura) and `HeroBody` (how every hero shows: his
+  painted layers, chair and pet; see [characters](docs/architecture/characters.md)).
 - **Server** (`scripts/server/`) runs the game for everyone (see [multiplayer](docs/architecture/multiplayer.md)).
 - **Actors** (`scripts/actors/`) are what you see in the world: your hero, other players,
   monsters, NPCs and drops.

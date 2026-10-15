@@ -52,8 +52,8 @@ The Shield slot is called Off-hand in the game (its place key stays `shield`): i
 
 1. Give it an icon in `assets/sprites/items/<id>.png`: a painted cell on an item sheet (a Gemini
    edit in `tools/art/gemini_pass.json`, cut by its `art/sheets/items_*.json` manifest). Gear
-   has no icon for now (its look is being restarted with the hero's); an item slot shows the
-   item's name instead, and a drop shows only its glow.
+   has no icon yet; an item slot shows the item's name instead, and a drop shows only its glow.
+   Gear the hero wears also sets `worn` (its layer, see [characters](characters.md)).
 2. Create the `.tres` in `data/items/equips/`, `use/`, `etc/`, `scrolls/` or `setup/` as an
    **EquipDef**, **UseDef** or **ItemDef**. Fill in `id`, name, description, icon and
    `sell_price`; for gear, the slot, requirements and a **StatBlock** in `stats`.
