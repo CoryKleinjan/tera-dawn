@@ -78,16 +78,23 @@ update this page when one changes. Each zone's own look and music are in
   stat; Auto puts every Ability Point there.
 - What each stat also gives as it grows: STR Max HP, INT Max MP, DEX Accuracy, LUK Avoidability,
   CHA slightly lower shop prices (capped) and more Dawnshards found.
-- A first job has six skills: a movement skill, a quick single-target attack, a crowd attack, a self
-  buff, a party buff (reaches party members nearby) and a passive. Their max levels add up to the
-  SP earned from Lv 10 to 30, so all are maxed by the second tier at Lv 30. No finishers in the
-  first job; later tiers get them.
+- A first job has seven skills: a movement skill, a quick single-target attack, a crowd attack, a
+  self buff, a party buff (reaches party members nearby), a passive and a monster-control skill.
+  The SP earned from Lv 10 to 30 maxes all but the control skill (max 10), so players choose
+  what to leave unmaxed; no bonus SP makes up for it. No finishers in the first job; later
+  tiers get them.
+- Monster control, one per job, made to combo: Warrior Skyward Cleave throws monsters in front
+  into the air; Magician Gravity Well pulls airborne monsters down, then hits every grounded one
+  around; Thief Shadow Ambush blinks into the biggest group ahead (ground or air) and stuns it;
+  Archer Pinning Shot pins one monster in place, even in mid-air; Pirate Anchor Haul drags
+  monsters in a line back to the hero. Thrown or stunned monsters can't move, attack or hurt by
+  touch. Every one deals damage. Bosses take the damage but are never thrown, dragged or stunned.
 - Second tier (Lv 30): every first job picks one of two blends of itself and another first job:
   Spellblade (Warrior + Magician), Hexcaster (Magician + Thief), Swashbuckler (Thief + Pirate),
   Sharpshooter (Pirate + Archer), Wildhunter (Archer + Warrior). A blend is the same job from
   either side. It keeps its own first-job skills, opens all of the other job's first-job skills,
   and adds its own finisher and signature skill (max 10 each); 4 Skill Points a level, so
-  everything is maxed by the third tier at Lv 50. Both stats add together for damage (no
+  nearly everything is maxed by the third tier at Lv 50 (the control skills leave some choice). Both stats add together for damage (no
   averaging); Auto splits points evenly. It wields every weapon and off-hand of both jobs.
   No Ability Point reset on advancing. A later tutor offers the blends; the first-job tutors
   never do.

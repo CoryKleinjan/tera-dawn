@@ -336,6 +336,10 @@ func _use(skill: SkillDef) -> void:
 		return
 	if skill.kind == SkillDef.Kind.MOVE and not _can_move(skill):
 		return
+	var ambush_to := _ambush_spot(skill)
+	if skill.ambush > 0.0 and ambush_to == Vector2.INF:
+		world.add_log("There are no monsters ahead to ambush.", Palette.INFO)
+		return
 	cooldown = CharacterStats.attack_ticks(skill.cooldown, Game.me.stats)
 	var lvl := Game.me.skills.level(skill)
 	if skill.recharge_ticks(lvl) > 0:
@@ -354,9 +358,32 @@ func _use(skill: SkillDef) -> void:
 	if aim == Hitbox.Aim.DOWN and not skill.is_ranged() and _meets_monster(skill, aim):
 		vel.y = POGO_SPEED
 		_jumping = false
+	if ambush_to != Vector2.INF:
+		var from := position
+		position = ambush_to
+		vel = Vector2.ZERO
+		on_ground = false
+		_jumping = false
+		if skill.move:
+			TDMoveFx.play(world, skill.move, from, position, self)
 	Net.ask(&"req_skill", [skill.id, position, face, aim])
 	world.add_effect(skill.effect, TDWorldFx.swing_point(position, face, aim), face, null, aim)
 	Sound.play(skill.cast_sound())
+
+## Where an ambush (SkillDef.ambush) lands among the monsters this screen shows, kept on
+## the map; Vector2.INF for any other skill or when no monsters are ahead. The server works
+## it out the same way and has the last word.
+func _ambush_spot(skill: SkillDef) -> Vector2:
+	if skill.ambush <= 0.0:
+		return Vector2.INF
+	var bodies: Array[Vector2] = []
+	for m in world.mobs():
+		if not m.dead:
+			bodies.append(m.body_position())
+	var to := skill.ambush_spot(position, face, bodies)
+	if to == Vector2.INF:
+		return to
+	return Vector2(clampf(to.x, EDGE, float(world.map.width) - EDGE), clampf(to.y, 0.0, float(world.map.ground_y)))
 
 ## Whether movement skill `skill` can go off here: on the ground, or once per jump in the air.
 func _can_move(skill: SkillDef) -> bool:

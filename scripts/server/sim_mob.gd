@@ -39,6 +39,8 @@ const IDLE_CHANCE := 0.3
 const HOP_GRAVITY := 0.35
 const HOP_CHANCE := 1.0 / 80.0
 const WAKE_HOP := 5.0
+## Ticks a flier pulled down by a slam (SkillDef.slam) stays on the ground.
+const DOWNED_TICKS := 120
 ## How far around a player's hurtbox a landing shot still hits.
 const SHOT_GROW := 14
 ## Bosses: how fast the damage they remember fades (per tick), how far ahead they cut a
@@ -64,6 +66,10 @@ var walk_t := 0     # ticks until the next change of direction
 var kx := 0.0       # knockback speed
 var slow_t := 0     # ticks left slowed by a skill
 var root_t := 0     # ticks left rooted: it can't move (it can still attack)
+var stun_t := 0     # ticks left stunned: it can't move or attack
+var hang_t := 0     # ticks left held at its height in the air (a stun or a pin)
+var tossed := false # thrown into the air by a skill: it can't move or attack until it lands
+var downed_t := 0   # ticks left a flier is pulled down to the ground (SkillDef.slam)
 var hex_t := 0      # ticks left hexed: it takes `hex_amount` more damage from everyone
 var hex_amount := 0.0
 var burn_t := 0     # ticks left burning, `burn_damage` every BURN_EVERY ticks
@@ -131,6 +137,10 @@ func _reset() -> void:
 	hurt_t = 0
 	slow_t = 0
 	root_t = 0
+	stun_t = 0
+	hang_t = 0
+	tossed = false
+	downed_t = 0
 	hex_t = 0
 	hex_amount = 0.0
 	burn_t = 0
@@ -196,6 +206,8 @@ func die() -> void:
 	respawn = randi_range(def.respawn_ticks.x, def.respawn_ticks.y)
 	moves.cancel()
 	hop = 0.0
+	tossed = false
+	hang_t = 0
 
 ## Forgets `peer` (they left the map).
 func forget(peer: int) -> void:
@@ -208,15 +220,15 @@ func forget(peer: int) -> void:
 
 ## How far above its feet a monster's body floats: flying monsters hover and bob (by
 ## `phase`), others don't. Clients (TDMob) use the same.
-static func hover_offset(d: MonsterDef, phase_now: float) -> Vector2:
-	if d.flying:
+static func hover_offset(d: MonsterDef, phase_now: float, downed := false) -> Vector2:
+	if d.flying and not downed:
 		return Vector2(0, -d.hover_height + sin(phase_now * 1.5) * 6.0)
 	return Vector2.ZERO
 
 ## Feet position including the hover height of flying monsters, hops and dives.
 func body_position() -> Vector2:
 	if def.flying:
-		return position + hover_offset(def, phase) + Vector2(0, -hop)
+		return position + hover_offset(def, phase, downed_t > 0) + Vector2(0, -hop)
 	return position + Vector2(0, -hop)
 
 func step() -> void:
@@ -245,6 +257,12 @@ func step() -> void:
 		slow_t -= 1
 	if root_t > 0:
 		root_t -= 1
+	if stun_t > 0:
+		stun_t -= 1
+	if hang_t > 0:
+		hang_t -= 1
+	if downed_t > 0:
+		downed_t -= 1
 	if hex_t > 0:
 		hex_t -= 1
 	if burn_t > 0:
@@ -256,19 +274,20 @@ func step() -> void:
 	if moves.busy():
 		moves.step(chased)
 	elif hurt_t > 0:
-		if not def.stationary and root_t == 0:
+		if not def.stationary and root_t == 0 and stun_t == 0:
 			position.x += kx
 		kx *= KNOCKBACK_DECAY
-	elif not (chased and moves.try_start(chased)):
+	elif not held() and not (chased and moves.try_start(chased)):
 		_walk(chased)
-	if def.jumps and not def.flying and not moves.busy():
-		if hop <= 0.0 and hurt_t == 0 and root_t == 0 and randf() < HOP_CHANCE:
+	if (tossed or def.jumps and not def.flying) and not moves.busy() and hang_t == 0:
+		if not tossed and hop <= 0.0 and hurt_t == 0 and root_t == 0 and stun_t == 0 and randf() < HOP_CHANCE:
 			hop_v = def.jump_power
 		hop += hop_v
 		hop_v -= HOP_GRAVITY
 		if hop <= 0.0:
 			hop = 0.0
 			hop_v = 0.0
+			tossed = false
 	var half := def.size.x / 2.0
 	if position.x < area.x + half:
 		position.x = area.x + half
@@ -278,7 +297,8 @@ func step() -> void:
 		position.x = area.x + area.w - half
 		if dir > 0:
 			dir = -1
-	if moves.hidden:
+	# a stunned or thrown monster can't hurt anyone, even by touch
+	if moves.hidden or held():
 		return
 	var body := hurtbox.rect_at(body_position())
 	for p in map.players.values():
@@ -358,6 +378,71 @@ func slow(ticks: int) -> void:
 ## Roots it in place for `ticks` (it can still attack), or keeps the longer root.
 func root(ticks: int) -> void:
 	root_t = maxi(root_t, ticks)
+
+## Whether skills may throw, drag or stun it: every monster but a boss.
+func controllable() -> bool:
+	return not def.boss
+
+## Whether it is held out of action: stunned, or thrown up and not yet landed.
+func held() -> bool:
+	return stun_t > 0 or tossed
+
+## Stops what it's doing without dropping it out of the air (a move ends on the ground).
+func _interrupt() -> void:
+	var h := hop
+	moves.cancel()
+	hop = h
+
+## Throws it up at `speed` (SkillDef.launch): it can't move or attack until it lands.
+## Fliers are already up there, and bosses can't be thrown.
+func launch(speed: float) -> void:
+	if not controllable() or def.flying:
+		return
+	_interrupt()
+	tossed = true
+	hang_t = 0
+	hop_v = speed
+
+## Stuns it for `ticks` (SkillDef.stun): it can't move or attack, and hangs where it is in
+## the air. Bosses can't be stunned.
+func stun(ticks: int) -> void:
+	if not controllable() or ticks <= 0:
+		return
+	_interrupt()
+	stun_t = maxi(stun_t, ticks)
+	hold_up(ticks)
+
+## Holds it at its height in the air for `ticks` (a stun, or a pin: SkillDef.pin).
+func hold_up(ticks: int) -> void:
+	if hop > 0.0:
+		hang_t = maxi(hang_t, ticks)
+		hop_v = 0.0
+
+## Yanks it down to the ground (SkillDef.slam): a flier stays down for DOWNED_TICKS.
+## Bosses stay up.
+func slam_down() -> void:
+	if not controllable():
+		return
+	if hop > 0.0:
+		_interrupt()
+		hop = 0.0
+		hop_v = 0.0
+		tossed = false
+		hang_t = 0
+	if def.flying:
+		downed_t = DOWNED_TICKS
+
+## On the ground (not hopping, thrown or hovering).
+func grounded() -> bool:
+	return hop <= 0.0 and (not def.flying or downed_t > 0)
+
+## Drags it along its stretch of platform to `x` (SkillDef.pull). Bosses can't be dragged.
+func drag_to(x: float) -> void:
+	if not controllable() or def.stationary:
+		return
+	var half := def.size.x / 2.0
+	position.x = clampf(x, area.x + half, area.x + area.w - half)
+	kx = 0.0
 
 ## Hexes it: for `ticks` it takes `amount` more damage (0.2 = 20%) from everyone. A stronger
 ## hex replaces a weaker one.
@@ -508,6 +593,10 @@ func snapshot() -> Array:
 		flags |= SnapshotFlags.MOB_HEXED
 	if root_t > 0:
 		flags |= SnapshotFlags.MOB_ROOTED
+	if stun_t > 0:
+		flags |= SnapshotFlags.MOB_STUNNED
+	if downed_t > 0:
+		flags |= SnapshotFlags.MOB_DOWNED
 	if burn_t > 0:
 		flags |= SnapshotFlags.MOB_BURNING
 	return [position.x, position.y - hop, dir, roundi(health.fraction() * 1000.0), flags]

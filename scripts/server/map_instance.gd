@@ -178,6 +178,10 @@ const MARK_JUMP := 420.0
 ## Resolves a player's skill against the monsters in front of them (or above or below them,
 ## for an aimed attack, or all round for one that hits `around`). Returns how many were hit.
 func use_skill(p: SimPlayer, skill: SkillDef, aim := Hitbox.Aim.AHEAD) -> int:
+	if skill.ambush > 0.0:
+		_ambush(p, skill)
+	if skill.slam:
+		_slam(p, skill)
 	var targets := _targets(p, skill, aim)
 	var lvl := p.character.skills.level(skill)
 	var push := skill.knockback * (1.0 if skill.is_ranged() else MELEE_KNOCKBACK)
@@ -263,6 +267,14 @@ func _after_hit(p: SimPlayer, skill: SkillDef, lvl: int, m: SimMob, hits: Array)
 		m.root(skill.root_ticks(lvl))
 	if skill.hex_at(lvl) > 0.0:
 		m.hex(skill.hex_at(lvl), skill.hex_ticks(lvl))
+	if skill.pin:
+		m.hold_up(skill.root_ticks(lvl))
+	if skill.launch > 0.0:
+		m.launch(skill.launch)
+	if skill.stun_ticks(lvl) > 0:
+		m.stun(skill.stun_ticks(lvl))
+	if skill.pull > 0.0:
+		m.drag_to(p.position.x + p.face * skill.pull)
 	var element := p.character.skills.element_buff()
 	if element.is_empty() or not _any_landed(hits):
 		return
@@ -276,6 +288,31 @@ func _after_hit(p: SimPlayer, skill: SkillDef, lvl: int, m: SimMob, hits: Array)
 			m.set_burning(roundi(dealt * buff.burn_at(blvl) / SkillDef.BURN_SECONDS), SkillDef.BURN_SECONDS * SimMob.BURN_EVERY, p.peer)
 		SkillBook.Element.ICE:
 			m.slow(buff.slow_ticks(blvl))
+
+## An ambush (SkillDef.ambush): puts `p` in the middle of the biggest group of monsters
+## ahead, where their own screen already put them (SkillDef.ambush_spot), and tells them
+## when this map sees it differently.
+func _ambush(p: SimPlayer, skill: SkillDef) -> void:
+	var bodies: Array[Vector2] = []
+	for m in mobs:
+		if not m.dead:
+			bodies.append(m.body_position())
+	var to := skill.ambush_spot(p.position, p.face, bodies)
+	if to == Vector2.INF:
+		return
+	to = Vector2(clampf(to.x, TDPlayer.EDGE, def.width - TDPlayer.EDGE), clampf(to.y, 0.0, def.ground_y))
+	if to.distance_to(p.position) > 0.5:
+		p.position = to
+		Net.send(p.peer, &"ev_place", [to.x, to.y])
+
+## A slam (SkillDef.slam): yanks every monster in the air within the skill's reach on both
+## sides of `p` down to the ground before the blow lands.
+func _slam(p: SimPlayer, skill: SkillDef) -> void:
+	var area := Hitbox.attack_area(p.position, p.face, skill.reach, skill.height)
+	area = area.merge(Hitbox.attack_area(p.position, -p.face, skill.reach, skill.height))
+	for m in mobs:
+		if not m.dead and area.intersects(m.hurtbox.rect_at(m.body_position())):
+			m.slam_down()
 
 ## The nearest standing monster within BOUNCE_REACH of the last of `targets` that `hit`
 ## doesn't already hold, or null.
@@ -315,7 +352,9 @@ func _targets(p: SimPlayer, skill: SkillDef, aim: Hitbox.Aim) -> Array[SimMob]:
 		area = area.merge(Hitbox.aimed_area(p.position, -p.face, aim, skill.reach, skill.height))
 	var targets: Array[SimMob] = []
 	for m in mobs:
-		if not m.dead and area.intersects(m.hurtbox.rect_at(m.body_position())):
+		if m.dead or skill.slam and m.controllable() and not m.grounded():
+			continue
+		if area.intersects(m.hurtbox.rect_at(m.body_position())):
 			targets.append(m)
 	var from := p.position
 	if skill.splash > 0.0 and not targets.is_empty():

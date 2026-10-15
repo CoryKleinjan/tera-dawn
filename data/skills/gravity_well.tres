@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="SkillDef" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
+[ext_resource type="Resource" path="res://data/effects/critical.tres" id="h_critical"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/ice_spike.png" id="i_stand_in"]
+
+[resource]
+script = ExtResource("1_skill_def")
+id = &"gravity_well"
+display_name = "Gravity Well"
+job = &"mage"
+max_level = 10
+kind = 0
+description = "Pull every monster in the air around you down to the ground, then a shockwave hits up to eight grounded monsters on both sides. Uses Magic Attack."
+mp_cost = 14
+mp_cost_per_level = 0.6
+damage_multiplier = 1.3
+damage_per_level = 0.1
+hits = 1
+max_targets = 8
+magic = true
+knockback = 0.5
+around = true
+slam = true
+cooldown = 30
+action_ticks = 20
+recharge = 6.0
+recharge_per_level = -0.2
+reach = 200.0
+height = 260.0
+animation = &"slash"
+flash = Color(0.7, 0.55, 1.0, 1)
+hit_effect = ExtResource("h_critical")
+icon = ExtResource("i_stand_in")

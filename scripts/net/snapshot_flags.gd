@@ -21,6 +21,10 @@ const MOB_HEXED := 256
 const MOB_ROOTED := 512
 ## Burning (SkillDef.burn): clients tint it ember red.
 const MOB_BURNING := 1024
+## Stunned (SkillDef.stun): clients freeze it and circle stars over its head.
+const MOB_STUNNED := 2048
+## A flier pulled down to the ground (SkillDef.slam): clients drop its hover.
+const MOB_DOWNED := 4096
 
 # ---------- players (SimPlayer.snapshot, read by TDAvatar) ----------
 const PLAYER_FAINTED := 1
