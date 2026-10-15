@@ -14610,6 +14610,32 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 5 each hold one flat bright green (#00FF00) shape: the exact outline of the boy wearing a hat in the same cell of the first attached picture (cell 1 a steel helmet, cell 2 a tall pointed wizard hat with a wide brim, cell 3 a tied bandana, cell 4 a hood, cell 5 a pirate tricorn). Cells 6, 7 and 8 are empty and must stay empty. Cell 6 of the first attached picture shows the same boy with his own hair and no hat: short, messy, spiky chestnut-brown hair with a swept fringe. In each of cells 1 to 5, paint ONLY the bits of that same chestnut-brown hair that would naturally stick out from under that cell's hat, and nothing else: cell 1 a few short spiky locks poking out under the helmet's rim at the back and the side of his neck, above the ear; cell 2 a messy swept fringe poking out under the brim over his forehead and tufts at the back of his neck; cell 3 a tuft of spiky hair sticking up out of the top of the bandana and a few locks at the back; cell 4 a few strands of fringe falling out of the hood's opening onto his forehead; cell 5 a swept fringe under the front brim and locks at the back of his neck. Each piece of hair is placed exactly where it would meet the hat and head on that cell's green shape, sized to match him; it may reach a little past the green outline where hair sticks out. Paint the hair WHOLE and solid, every lock fully closed, with no holes. Do NOT paint the hat, head, face, ears, body or anything else: leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Style: exactly the hair in cell 6 of the first attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights and a thin dark plum-brown outline. Keep the grid lines. No text, no labels."
   }
+ },
+ {
+  "id": "mshero_hat_hair2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_hat_hair2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 17:56Z 'yes. repaint them.' to the 17:07Z 1 sheet ~$0.07 question): repaint of the helmet and tricorn hair pieces from mshero_hat_hair, which painted the whole hat too. The hat is now a flat blue guide shape so the hair is the only thing painted.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/hat_hair2_silhouette.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/hat_hair2_ref.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 and 2 each hold the flat outline of a small boy wearing a hat: his head and body are flat bright green (#00FF00) and his hat is flat pure blue (#0000FF). Cell 1's hat is a steel helmet, cell 2's hat is a pirate tricorn, exactly as the boy wears them in cells 1 and 2 of the first attached picture. Cells 3 to 8 are empty and must stay empty. Cell 3 of the first attached picture shows the same boy with his own hair and no hat: short, messy, spiky chestnut-brown hair with a swept fringe. In cells 1 and 2, paint ONLY the bits of that same chestnut-brown hair that would naturally stick out from under that hat, and nothing else: cell 1 a few short spiky locks poking out below the helmet's rim at the back of his neck and above his ear; cell 2 a swept fringe poking out under the tricorn's front brim over his forehead and a few locks at the back of his neck. Each lock starts at the edge of the blue hat and lies over the green head, sized to match him. Paint the hair WHOLE and solid, every lock fully closed, with no holes. Do NOT paint the hat: leave every blue pixel flat pure #0000FF exactly as it is, with no metal, felt, trim, shading or outline on it. Do NOT paint the head, face, ears, body or anything else: leave every green pixel you do not paint hair over flat pure #00FF00, and leave the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Style: exactly the hair in cell 3 of the first attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights and a thin dark plum-brown outline. Keep the grid lines. No text, no labels."
+  }
  }
 ]
 }
