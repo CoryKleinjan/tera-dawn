@@ -42,7 +42,7 @@ animations = {
 &"walk": {"fps": 3.5, "frames": [&"walk1", &"walk2", &"walk3", &"walk2"], "loop": true},
 &"anchor_haul": {"fps": 6.0, "frames": [&"anchor1", &"anchor2"], "loop": false},
 &"backstep": {"fps": 1.0, "frames": [&"backstep"], "loop": true},
-&"gravity_well": {"fps": 6.0, "frames": [&"gravity1", &"gravity2"], "loop": false},
+&"gravity_well": {"fps": 1.0, "frames": [&"gravity1"], "loop": true},
 &"leap": {"fps": 1.0, "frames": [&"leap"], "loop": true},
 &"lunge": {"fps": 1.0, "frames": [&"lunge"], "loop": true},
 &"pinning_shot": {"fps": 1.0, "frames": [&"pinning"], "loop": true},
