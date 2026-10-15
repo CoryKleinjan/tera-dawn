@@ -10,7 +10,6 @@ const GAP := 4.0
 const GRID_Y := 74.0
 const GRID_W := COLS * (SLOT + GAP) - GAP
 const BAG_X := PAD + GRID_W + 24
-const REACH := 170.0
 
 var npc: TDNpc
 var tab := ItemDef.Tab.ETC
@@ -31,7 +30,7 @@ func open(who: TDNpc) -> void:
 
 func _process(delta: float) -> void:
 	super(delta)
-	if visible and (npc == null or not is_instance_valid(npc) or hud.world.player.position.distance_to(npc.position) > REACH):
+	if visible and walked_away_from(npc):
 		visible = false
 		hud.tooltip.clear(self)
 

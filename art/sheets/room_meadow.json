@@ -8,7 +8,7 @@
     [
       "",
       "door",
-      "floor_top",
+      "",
       "floor_side"
     ],
     [
@@ -25,17 +25,6 @@
     ]
   ],
   "overrides": {
-    "floor_top": {
-      "seamless": true,
-      "size": 256,
-      "crop": [
-        90,
-        76,
-        876,
-        862
-      ],
-      "scale": 0.3896
-    },
     "floor_side": {
       "seamless": true,
       "size": 256,

@@ -1,7 +1,7 @@
 # Art reference
 
 `hero.png` is Cory's original hero: the chibi boy, the first idle pose of the old painted hero
-sheet. The hero's look and all equipment visuals are being restarted from him. He sets the
+sheet. The layered hero and all equipment visuals were rebuilt from him. He sets the
 proportions for the hero and every character:
 
 - Chibi proportions: a big head (about half his height) on a small body.

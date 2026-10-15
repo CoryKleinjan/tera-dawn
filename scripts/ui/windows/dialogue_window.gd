@@ -39,8 +39,6 @@ const ICON_QUEST_ACTIVE := "hud/quest_in_progress"
 const ICON_SHOP := "icon_dawnshard"
 const ICON_CHAT := "hud/speech_bubble"
 const ICON_SIZE := 18.0
-## Walk this far from the NPC and the window closes.
-const REACH := 170.0
 
 var npc: TDNpc
 ## What they're saying; setting it starts the typewriter over.
@@ -293,7 +291,7 @@ func _process(delta: float) -> void:
 	super(delta)
 	if visible and typing():
 		_shown = minf(_shown + TYPE_SPEED * delta, text.length())
-	if visible and (npc == null or not is_instance_valid(npc) or not npc.shown or hud.world.player.position.distance_to(npc.position) > REACH):
+	if visible and (walked_away_from(npc) or not npc.shown):
 		visible = false
 	if visible:
 		_fit()
@@ -322,7 +320,7 @@ func _draw_body() -> void:
 		var bust := fit(tex, niche.grow(-4))
 		var big := bust.size * BUST_SCALE
 		bust = Rect2(Vector2(bust.get_center().x - big.x / 2.0, bust.end.y - big.y), big)
-		draw_texture_rect(tex, bust, false, npc.def.tint)
+		draw_texture_rect(tex, bust, false)
 	# their name, then what they say, appearing a little at a time
 	var left := frame.position.x + TEXT_LEFT * FRAME_SCALE
 	var y := frame.position.y + TEXT_TOP * FRAME_SCALE

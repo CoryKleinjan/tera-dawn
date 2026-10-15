@@ -31,16 +31,11 @@
       "crate",
       "plant",
       "floor_soil",
-      "floor_top"
+      ""
     ]
   ],
   "overrides": {
     "floor_soil": {
-      "seamless": true, "inset": 28,
-      "size": 256,
-      "keep": "all"
-    },
-    "floor_top": {
       "seamless": true, "inset": 28,
       "size": 256,
       "keep": "all"

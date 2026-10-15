@@ -168,7 +168,7 @@ func _start(s: CutsceneStep) -> void:
 			_cam_ticks = 0
 			world.camera.scene_center = null
 		CutsceneStep.Kind.SAY:
-			overlay.say(_speaker_name(s), _portrait(s), _tint(s), s.text)
+			overlay.say(_speaker_name(s), _portrait(s), s.text)
 		CutsceneStep.Kind.MOVE:
 			var who := _body(s.who)
 			if who:
@@ -341,7 +341,3 @@ func _portrait(s: CutsceneStep) -> Texture2D:
 	if placed:
 		return placed.portrait()
 	return null
-
-func _tint(s: CutsceneStep) -> Color:
-	var npc: NpcDef = Content.npcs.get(s.speaker)
-	return npc.tint if npc else Color.WHITE
