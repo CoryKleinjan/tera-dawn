@@ -16,7 +16,7 @@ frame_art = {
 &"roll2": &"roll1"
 }
 nudges = {
-&"roll2": Vector4(-42, -94, -180, 0)
+&"roll2": Vector4(-32, -67, -180, 0)
 }
 id = &"footpad_boots"
 display_name = "Footpad Boots"
