@@ -27,10 +27,12 @@ update this page when one changes. Each zone's own look and music are in
   over a flat green silhouette of it so they land in place on every frame.
 - Gear is painted whole, never with holes where an arm crosses it. A helmet, hat, shield or tome
   is one painting pinned to his head or hand on every frame (separate paints only where his head
-  turns). The weapon is one painting held in his near fist at the walk's angle; the shield or
-  tome is in his far hand and only shows while the weapon does.
+  turns). The weapon is one painting held in his near fist; the shield or tome is in his far
+  hand and only shows while the weapon does. Where each sits, its turn and its layer on every
+  frame are set by hand in the grip editor.
 - Draw order, back to front: off-hand (shield), cape, body, trousers, shoes, tome, top, gloves,
-  face, hair (hidden under helmets), hat, weapon, then his fists over its grip.
+  face, hair (hidden under helmets), hat, weapon, then his fists over its grip (a held piece can be
+  moved to another layer on any frame in the grip editor).
 - Animations are shared across similar actions (one swing for all melee, one cast for all
   spells); his walk is 4 steps, slow. Attack animations are on hold: he attacks in his standing
   pose until they are redone.

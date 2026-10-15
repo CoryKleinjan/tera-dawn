@@ -30,9 +30,9 @@ const OFFHAND_NAMES := {&"shield": "a shield", &"star": "throwing stars", &"book
 @export var worn: SpriteFrames
 ## A hat or helmet that covers his hair, so the hair layer isn't drawn under it.
 @export var hides_hair := false
-## An off-hand held in front of his rear arm, under his top (a book), rather than slung behind
-## him (a shield).
-@export var worn_in_front := false
+## A weapon or off-hand: one painting held in his hand, pinned per frame (HeldDef), drawn instead
+## of `worn`.
+@export var held: HeldDef
 ## A top whose long sleeves reach his wrists (a robe), so the fists painted with bare forearms
 ## (HeroLookDef.bare_arm_frames) aren't drawn over them.
 @export var long_sleeves := false

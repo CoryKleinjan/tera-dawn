@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7duchekwpn3s"
-path="res://.godot/imported/squire_sword.png-b54f551ff7d2be5e71a0ae18f671014b.ctex"
+uid="uid://c0bu0pcdhx6jr"
+path="res://.godot/imported/novice_wand.png-9f58d600312a28a254fd7bc8310e6238.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/hero/squire_sword.png"
-dest_files=["res://.godot/imported/squire_sword.png-b54f551ff7d2be5e71a0ae18f671014b.ctex"]
+source_file="res://assets/sprites/hero/held/novice_wand.png"
+dest_files=["res://.godot/imported/novice_wand.png-9f58d600312a28a254fd7bc8310e6238.ctex"]
 
 [params]
 

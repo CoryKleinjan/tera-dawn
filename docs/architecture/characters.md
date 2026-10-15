@@ -17,7 +17,10 @@ then character select shows the list (name, level and job) with the new characte
   an attack for now, shows him standing). Each piece of gear's
   `EquipDef.worn` is its layer, cut from the same cells (`art/sheets/hero_*.json`, one frame per
   cell named like `idle1` or `walk2`), so layers line up frame by frame; `hides_hair` (helmets,
-  hats) and `worn_in_front` (a tome) set where it stacks. A character has no picked appearance
+  hats) sets where it stacks. A weapon or off-hand is instead `EquipDef.held` (`HeldDef`,
+  `data/hero/held/`): ONE painting pinned per frame (anchor point, spot, turn and layer), the
+  MapleStory way. Place pins by hand in `scenes/dev/hero_grip_editor.tscn` (play it in Godot:
+  drag, wheel to turn, PgUp/PgDn for the layer, Save writes the file). A character has no picked appearance
   yet; older saves that carry one still load.
 - **One body for every hero**: your hero (`TDPlayer`) and other players' (`TDAvatar`) each
   work out what they are doing (from your keys, or from the snapshot: an animation name such

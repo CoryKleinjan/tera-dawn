@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ugia3lqlfeh7"
-path="res://.godot/imported/novice_tome.png-99984cbaf31d774ade9adcf4031862b5.ctex"
+uid="uid://d2v3hldnrhqdd"
+path="res://.godot/imported/novice_tome.png-c07a9a781856046028a7de292d90bc7f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/hero/novice_tome.png"
-dest_files=["res://.godot/imported/novice_tome.png-99984cbaf31d774ade9adcf4031862b5.ctex"]
+source_file="res://assets/sprites/hero/held/novice_tome.png"
+dest_files=["res://.godot/imported/novice_tome.png-c07a9a781856046028a7de292d90bc7f.ctex"]
 
 [params]
 
