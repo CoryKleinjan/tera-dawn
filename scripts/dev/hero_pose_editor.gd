@@ -2,11 +2,12 @@ extends Control
 ## Poses the hero by hand, frame by frame: open scenes/dev/hero_pose_editor.tscn in Godot and play
 ## it (F6). It draws him the way the game does (HeroBody.layers) in one job's starter gear (pick
 ## the job, pose and piece from the dropdowns). Click any piece (his body, face, hair, fists, a piece of clothing, a weapon or off-hand) to pick it,
-## drag to move it, the mouse wheel turns it, and Save writes it back (held pieces to their pins in
+## drag to move it, the mouse wheel turns it, Shift+wheel or [ ] makes it bigger or smaller, and Save writes it back (held pieces to their pins in
 ## data/hero/held/, clothes to their item, his own parts to data/hero/look.tres), so each save
 ## replaces the last.
 ##
-##   Left/Right  pose          Tab        next piece       Wheel or Q/E (Shift: fine)  turn
+##   Left/Right  pose          Tab        next piece       Wheel or Q/E (Shift+Q/E: fine)  turn
+##   Shift+wheel or [ ]  smaller/bigger (Shift+[ ]: fine)
 ##   PgUp/PgDn   up/down stack H          show/hide here (held pieces)
 ##   C           copy the previous frame's place           R    reset the piece on this frame
 ##   Arrow Up/Down  move 0.5 px (with Shift: left/right)   Space  play the walk   Ctrl+S  save
@@ -19,6 +20,9 @@ const BG := Color(0.86, 0.83, 0.77)
 const LAYER_NAMES := ["behind him", "under his top", "over his clothes", "over his hands"]
 ## Places he can wear something in the editor, as dropdowns (Equipment.PLACES_FOR).
 const PLACES := [&"weapon", &"shield", &"hat", &"top", &"bottom", &"shoes", &"gloves", &"cape"]
+## How much one step of Smaller/Bigger changes a piece's size (Shift: a fine step).
+const SIZE_STEP := 0.05
+const SIZE_FINE := 0.01
 const PART_NAMES := {&"body": "his body", &"face": "his face", &"hair": "his hair", &"hands": "his fists"}
 
 var _jobs: Array[StringName] = []
@@ -29,7 +33,7 @@ var _piece := 0
 var _frames: Array[StringName] = []
 var _frame := 0
 var _dirty := {}  # Resource to save -> true
-var _saved_pins := {}  # HeldDef -> its pins as last saved, what Reset puts a held piece back to
+var _saved_pins := {}  # HeldDef -> [its pins, its sizes] as last saved, what Reset puts it back to
 var _drag := false
 var _grab := Vector2.ZERO
 var _playing := false
@@ -81,7 +85,8 @@ func _build_ui() -> void:
 		_wear_menus[place] = _menu(wear, String(place).capitalize(), [], func(i): _wear(place, i))
 	var tools := HFlowContainer.new()
 	rows.add_child(tools)
-	for b in [["< Pose", func(): _step(-1)], ["Pose >", func(): _step(1)], ["Turn left", func(): _turn(-2.0)], ["Turn right", func(): _turn(2.0)], ["Down the stack", func(): _restack(-1)],
+	for b in [["< Pose", func(): _step(-1)], ["Pose >", func(): _step(1)], ["Turn left", func(): _turn(-2.0)], ["Turn right", func(): _turn(2.0)], ["Smaller", func(): _resize(-SIZE_STEP)],
+			["Bigger", func(): _resize(SIZE_STEP)], ["Down the stack", func(): _restack(-1)],
 			["Up the stack", func(): _restack(1)], ["Show/Hide here", _toggle], ["Copy previous", _copy_prev],
 			["Reset piece", _reset], ["Reset pose", _reset_pose], ["Play walk", _play], ["Save", _save]]:
 		var btn := Button.new()
@@ -156,7 +161,7 @@ func _pieces_changed() -> void:
 			_pieces.append(HeroBody.Layer.new(_outfit[place]))
 			var h: HeldDef = _outfit[place].held
 			if h and not _saved_pins.has(h):
-				_saved_pins[h] = h.pins.duplicate()
+				_saved_pins[h] = [h.pins.duplicate(), h.sizes.duplicate()]
 	for part in PART_NAMES:
 		_pieces.append(HeroBody.Layer.new(HeroBody.LOOK, part))
 	_piece = 0
@@ -202,7 +207,7 @@ func _process(delta: float) -> void:
 		var p := l.pin(_f())
 		var stack: String = LAYER_NAMES[int(l.held().layer(_f()))] if l.held() else "%+d places in the stack" % l.steps(_f())
 		var moved: Vector2 = Vector2(p.x, p.y) - l.anchor(_f()) if not l.held() else Vector2(p.x, p.y)
-		text = "%s: %s %.1f, %.1f  turned %.1f°  %s" % [_name(l), "moved" if not l.held() else "at", moved.x, moved.y, p.z, stack]
+		text = "%s: %s %.1f, %.1f  turned %.1f°  size %d%%  %s" % [_name(l), "moved" if not l.held() else "at", moved.x, moved.y, p.z, roundi(l.size(_f()) * 100), stack]
 	elif l:
 		text = "%s: not on this frame%s" % [_name(l), " (H shows it)" if l.held() else ""]
 	_info.text = "%s   pose %s (%d/%d)   %s" % [_job_name(_jobs[_job]), _f(), _frame + 1, _frames.size(), text]
@@ -214,10 +219,11 @@ func _draw() -> void:
 	for l in HeroBody.layers(_outfit, _f()):
 		var p := l.pin(_f())
 		var a := l.anchor(_f())
-		draw_set_transform(o + Vector2(p.x, p.y) * _zoom(), deg_to_rad(p.z), Vector2(_zoom(), _zoom()))
+		var k := l.size(_f())
+		draw_set_transform(o + Vector2(p.x, p.y) * _zoom(), deg_to_rad(p.z), Vector2.ONE * _zoom() * k)
 		draw_texture(l.texture(_f()), -a)
 		if _same(l, _sel()):
-			draw_circle(Vector2.ZERO, 1.0, Color(1, 0.2, 0.6, 0.8))  # what it turns around
+			draw_circle(Vector2.ZERO, 1.0 / k, Color(1, 0.2, 0.6, 0.8))  # what it turns around
 		draw_set_transform(Vector2.ZERO)
 
 ## The topmost piece with paint under `at` (screen position), or null.
@@ -227,7 +233,7 @@ func _piece_at(at: Vector2) -> HeroBody.Layer:
 	for l in stack:
 		var p := l.pin(_f())
 		var tex := l.texture(_f())
-		var px := ((at - _origin()) / _zoom() - Vector2(p.x, p.y)).rotated(-deg_to_rad(p.z)) + l.anchor(_f())
+		var px := ((at - _origin()) / _zoom() - Vector2(p.x, p.y)).rotated(-deg_to_rad(p.z)) / l.size(_f()) + l.anchor(_f())
 		if not _images.has(tex):
 			_images[tex] = tex.get_image()
 		var img: Image = _images[tex]
@@ -237,7 +243,11 @@ func _piece_at(at: Vector2) -> HeroBody.Layer:
 
 func _gui_input(ev: InputEvent) -> void:
 	if ev is InputEventMouseButton and ev.pressed and ev.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
-		_turn((0.5 if ev.shift_pressed else 2.0) * (1 if ev.button_index == MOUSE_BUTTON_WHEEL_DOWN else -1))
+		var up: int = 1 if ev.button_index == MOUSE_BUTTON_WHEEL_UP else -1
+		if ev.shift_pressed:
+			_resize(SIZE_STEP * up)
+		else:
+			_turn(-2.0 * up)
 	elif ev is InputEventMouseButton and ev.button_index == MOUSE_BUTTON_LEFT:
 		_drag = false
 		if ev.pressed:
@@ -271,6 +281,8 @@ func _unhandled_key_input(ev: InputEvent) -> void:
 		KEY_R: _reset()
 		KEY_Q: _turn(-0.5 if ev.shift_pressed else -2.0)
 		KEY_E: _turn(0.5 if ev.shift_pressed else 2.0)
+		KEY_BRACKETLEFT: _resize(-(SIZE_FINE if ev.shift_pressed else SIZE_STEP))
+		KEY_BRACKETRIGHT: _resize(SIZE_FINE if ev.shift_pressed else SIZE_STEP)
 		KEY_SPACE: _play()
 		KEY_S:
 			if ev.ctrl_pressed or ev.meta_pressed:
@@ -306,6 +318,18 @@ func _turn(deg: float) -> void:
 	if l and l.shows(_f()):
 		var p := l.pin(_f())
 		_move_to(Vector2(p.x, p.y), snappedf(p.z + deg, 0.1))
+
+## Makes the picked piece `d` bigger (negative: smaller) on this frame, as a share of its
+## painted size. Bigger than painted looks softer, so the editor says so.
+func _resize(d: float) -> void:
+	var l := _sel()
+	if l == null or not l.shows(_f()):
+		return
+	var k := clampf(snappedf(l.size(_f()) + d, 0.01), 0.1, 3.0)
+	l.set_size(_f(), k)
+	_changed(l.held() if l.held() else l.owner)
+	if k > 1.0:
+		_status.text = "Changed (not saved yet). Bigger than painted, so it will look a little softer"
 
 ## Moves the picked piece `d` places up (or down) the stack on this frame: a held piece to the
 ## next of its layers, anything else past the piece above (or below) it.
@@ -350,14 +374,16 @@ func _reset_pose() -> void:
 func _reset_piece(l: HeroBody.Layer) -> void:
 	var h := l.held()
 	if h:
-		var saved: Dictionary = _saved_pins.get_or_add(h, h.pins.duplicate())
-		if saved.has(_f()):
-			h.pins[_f()] = saved[_f()]
+		var saved: Array = _saved_pins.get_or_add(h, [h.pins.duplicate(), h.sizes.duplicate()])
+		if saved[0].has(_f()):
+			h.pins[_f()] = saved[0][_f()]
 		else:
 			h.pins.erase(_f())
+		l.set_size(_f(), saved[1].get(_f(), 1.0))
 		_changed(h)
-	elif l.nudges().has(_f()):
+	elif l.nudges().has(_f()) or l.sizes().has(_f()):
 		l.set_nudge(_f(), Vector4.ZERO)
+		l.set_size(_f(), 1.0)
 		_changed(l.owner)
 
 ## The place of the nearest earlier frame that has one, copied onto this frame.
@@ -374,9 +400,11 @@ func _copy_prev() -> void:
 		if places.has(f):
 			if h:
 				h.pins[_f()] = h.pins[f]
+				l.set_size(_f(), l.size(f))
 				_changed(h)
 			elif l.shows(_f()):
 				l.set_nudge(_f(), places[f])
+				l.set_size(_f(), l.size(f))
 				_changed(l.owner)
 			return
 
@@ -398,7 +426,7 @@ func _save() -> void:
 	for res: Resource in _dirty:
 		var err := ResourceSaver.save(res, res.resource_path)
 		if res is HeldDef and err == OK:
-			_saved_pins[res] = (res as HeldDef).pins.duplicate()
+			_saved_pins[res] = [(res as HeldDef).pins.duplicate(), (res as HeldDef).sizes.duplicate()]
 		saved.append("%s %s" % [res.resource_path.get_file(), "saved" if err == OK else "FAILED (%s)" % error_string(err)])
 	_dirty.clear()
 	_status.text = ", ".join(saved) if saved else "Nothing changed"

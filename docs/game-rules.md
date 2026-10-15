@@ -32,8 +32,9 @@ update this page when one changes. Each zone's own look and music are in
   frame are set by hand in the pose editor.
 - Draw order, back to front: off-hand (shield), cape, body, trousers, shoes, tome, top, gloves,
   face, hair (hidden under helmets), hat, weapon, then his fists over its grip. In the pose editor
-  any piece (his body, face, hair, fists, each piece of gear) can be moved, turned and moved up or
-  down the stack on any frame; nothing is repainted or cut for it.
+  any piece (his body, face, hair, fists, each piece of gear) can be moved, turned, resized and
+  moved up or down the stack on any frame; nothing is repainted or cut for it. Prefer shrinking
+  to growing: a piece drawn bigger than painted looks softer.
 - Animations are shared across similar actions (one swing for all melee, one cast for all
   spells); his walk is 4 steps, slow. Attack animations are on hold: he attacks in his standing
   pose until they are redone.

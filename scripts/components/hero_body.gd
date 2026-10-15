@@ -66,22 +66,24 @@ func draw(face: int, chair: StringName, pet: StringName, anim: StringName, worn:
 		var layer: Layer = stack[i] if i < stack.size() else null
 		s.texture = null
 		s.rotation = Vector3.ZERO
+		s.scale = Vector3.ONE
 		var tex := layer.texture(frame) if layer else null
 		if tex and size != Vector2.ZERO:
 			var pin := layer.pin(frame)
-			_place(s, tex, layer.anchor(frame), Vector2(pin.x, pin.y), pin.z, size, face, at, _z + i * LAYER_STEP)
+			_place(s, tex, layer.anchor(frame), Vector2(pin.x, pin.y), pin.z, layer.size(frame), size, face, at, _z + i * LAYER_STEP)
 		s.visible = visible and s.texture != null
 
 ## Puts `s` showing `tex` with its point `anchor` (its own pixels) on `pin` (the pixels of his
-## frames, `size`, whose bottom middle is at his feet), turned `deg` clockwise around it,
-## mirrored when he faces left.
-func _place(s: Sprite3D, tex: Texture2D, anchor: Vector2, pin: Vector2, deg: float, size: Vector2, face: int, at: Vector2, z: float) -> void:
+## frames, `size`, whose bottom middle is at his feet), turned `deg` clockwise and drawn `k`
+## times as big around it, mirrored when he faces left.
+func _place(s: Sprite3D, tex: Texture2D, anchor: Vector2, pin: Vector2, deg: float, k: float, size: Vector2, face: int, at: Vector2, z: float) -> void:
 	var texel := TDStage.TEXEL / TDStage.frames_density(LOOK.body)
 	s.texture = tex
 	s.flip_h = face < 0
 	s.offset = Vector2((tex.get_width() / 2.0 - anchor.x) * face, anchor.y - tex.get_height() / 2.0)
 	s.position = TDStage.to3d(at + Vector2((pin.x - size.x / 2.0) * face, pin.y - size.y) * texel, z)
 	s.rotation.z = -deg_to_rad(deg) * face
+	s.scale = Vector3(k, k, 1.0)
 
 ## His layers back to front on `frame` for what he wears (place -> EquipDef): a held piece set
 ## behind him, what hangs behind him, his body, his trousers and shoes, held pieces under his top,
@@ -181,6 +183,31 @@ class Layer:
 			all.erase(frame)
 		else:
 			all[frame] = n
+
+	## Frame -> how big it is drawn there (1.0 as painted).
+	func sizes() -> Dictionary:
+		if held():
+			return held().sizes
+		if owner is EquipDef:
+			return (owner as EquipDef).sizes
+		return (owner as HeroLookDef).sizes.get(part, {})
+
+	func size(frame: StringName) -> float:
+		return float(sizes().get(frame, 1.0))
+
+	## Draws it `k` times as big on `frame` (see sizes); 1.0 clears it.
+	func set_size(frame: StringName, k: float) -> void:
+		var all: Dictionary
+		if held():
+			all = held().sizes
+		elif owner is EquipDef:
+			all = (owner as EquipDef).sizes
+		else:
+			all = (owner as HeroLookDef).sizes.get_or_add(part, {})
+		if is_equal_approx(k, 1.0):
+			all.erase(frame)
+		else:
+			all[frame] = k
 
 	func shows(frame: StringName) -> bool:
 		var h := held()

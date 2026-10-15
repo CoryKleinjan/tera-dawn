@@ -17,6 +17,9 @@ extends Resource
 ## His own parts moved by hand in the pose editor: part (&"body", &"face", &"hair", &"hands")
 ## -> {frame: Vector4(x, y, degrees clockwise, places up the stack)} (HeroBody.Layer).
 @export var nudges: Dictionary = {}
+## His own parts drawn bigger or smaller in the pose editor: part -> {frame: size} (1.0 as
+## painted).
+@export var sizes: Dictionary = {}
 ## Animation name (what TDPlayer._animation() says he is doing) -> {"frames": [frame names],
 ## "fps": frames a second, "loop": whether it repeats}. "<name>_<weapon kind>" is used instead
 ## while that kind of weapon is held (a bow's "attack_bow").
