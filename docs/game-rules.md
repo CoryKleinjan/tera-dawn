@@ -22,8 +22,17 @@ update this page when one changes. Each zone's own look and music are in
 
 ## Hero
 
-- The hero's look and all equipment visuals are being restarted from Cory's original reference
-  `art/reference/hero.png`: for now the game has no hero or gear art, and the hero has no sprite.
+- The hero is a chibi boy (`art/reference/hero.png`) painted in layers, MapleStory style: one
+  body sheet (bald, blank face, mitten fists), and his face, hair and each piece of gear painted
+  over a flat green silhouette of it so they land in place on every frame.
+- Gear is painted whole, never with holes where an arm crosses it. A helmet, hat, shield or tome
+  is one painting pinned to his head or hand on every frame (separate paints only where his head
+  turns). The weapon is one painting held in his near fist at the walk's angle; the shield or
+  tome is in his far hand and only shows while the weapon does.
+- Draw order, back to front: off-hand (shield), cape, body, trousers, shoes, tome, top, gloves,
+  face, hair (hidden under helmets), hat, weapon (behind his head on the swing wind-up).
+- Animations are shared across similar actions (one swing for all melee, one cast for all
+  spells); his walk is 4 steps, slow.
 - Male only for now.
 
 ## Movement and combat feel

@@ -68,8 +68,9 @@ python3 tools/art/gemini_pass.py --dry-run                           # Gemini ba
 
 ### Game rules
 The full list is `docs/game-rules.md`. The ones most often broken:
-- The hero's look and all equipment visuals are being restarted from Cory's original reference
-  `art/reference/hero.png`: the game has no hero or gear art for now.
+- The hero is painted in layers (MapleStory way): one body sheet, and each face, hair and piece
+  of gear painted over its green silhouette; head pieces and off-hands are one pinned painting.
+  The Warrior set is the reference; see `docs/architecture/characters.md`.
 - No ammo for any weapon.
 - Characters, NPCs, ropes and ladders draw in front of land; no character or land shadows.
 - NPCs stand still at idle. Map names only at the top of the screen. Towns have no monsters.
