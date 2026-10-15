@@ -1,0 +1,57 @@
+{
+  "source": "art/source/monanim_bramble_boar.png",
+  "save": false,
+  "out_dir": "art/build/monanim_bramble_boar",
+  "cells": [
+    [
+      "jump1",
+      "jump2",
+      "knock_up",
+      "knock_down",
+      "charge_windup"
+    ],
+    [
+      ""
+    ],
+    [
+      "charge",
+      "slam_windup",
+      "slam",
+      "pounce_windup",
+      "pounce"
+    ]
+  ],
+  "inset": 4,
+  "scale": 0.1508,
+  "detail": 3.56,
+  "grid": {
+    "rows": [
+      0,
+      492,
+      550,
+      1054
+    ],
+    "cols": [
+      [
+        0,
+        400,
+        799,
+        1200,
+        1600,
+        2000
+      ],
+      [
+        0,
+        2000
+      ],
+      [
+        0,
+        400,
+        799,
+        1200,
+        1600,
+        2000
+      ]
+    ]
+  }
+}

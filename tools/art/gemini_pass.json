@@ -16978,6 +16978,58 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose. Cells 2, 3, 4, 5, 6, 7 and 8 are empty and must stay empty. He is seen from behind. On the green shape, paint ONLY his WEAPON HAND: one closed rounded MITTEN fist, with no separate fingers or thumb, plus his wrist, exactly the same size, shape, angle, skin colour and place as that fist in the same cell of the first attached picture, so it lies exactly on top of it. The weapon hand is the fist at the end of the arm stretched out to the RIGHT, NOT the hand folded across his chest. Paint only that one fist and nothing else: no other hand, arm, sleeve, body, head, weapon or object. Leave every part of the green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Style: exactly the skin, warm colours, light from the upper left, smooth soft painted shading and thin dark plum-brown outline of the boy in the first attached picture. Keep the grid lines. No text, no labels."
   }
+ },
+ {
+  "id": "monanim_bramble_boar",
+  "prompts": null,
+  "batch": "monster animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "monanim_bramble_boar.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   5
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'Monster animations' (Cory 20:26Z 'test ok'): test sheet of new Bramble Boar frames: jump x2, knocked up, knocked down, wind-up + strike for charge, slam and pounce.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_2x5.png",
+   "refs": [
+    "art/source/mon_bramble_boar.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 10 cells (2 rows of 5) on a flat magenta background. The first attached picture is the game's Bramble Boar: a stout green boar covered in a thick tangle of thorny bramble vines with dark blackberries, a shaggy golden-brown beard, pale curved tusks, a pink snout, pink cheek blush and a small glowing golden light-mote on top of its back. Paint this exact boar once in every cell, in the pose given for that cell: copy its look exactly (same body, vines, berries, beard, tusks, face, colours, glowing mote, same size as the boars in the first attached picture, same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different. It always faces RIGHT, seen from the side. Poses on the ground stand on one shared ground line near the bottom of each cell, like the boars in the first attached picture; mid-air poses float clearly above that line. Row 1. Cell 1, JUMP TAKE-OFF: crouched low on bent legs, about to spring up, head up. Cell 2, JUMP IN THE AIR: high in the air, legs tucked under its belly, ears back. Cell 3, KNOCKED UP: thrown helplessly up into the air, tumbling backwards and tipped onto its back with its belly and four legs flailing upward, eyes squeezed shut, mouth open in surprise. Cell 4, KNOCKED DOWN: lying flat on its side on the ground line, legs limp and sticking out, dazed with dizzy swirl eyes and tongue out, still clearly alive (not defeated). Cell 5, CHARGE WIND-UP: rearing back on its hind legs, front hooves pawing the air, head tossed up, ready to rush forward. Row 2. Cell 6, CHARGE: rushing forward at full speed, head down with tusks forward, body stretched low, legs in a long galloping stride. Cell 7, SLAM WIND-UP: rising up high on its hind legs, front legs lifted over its head, gathering weight to crash down. Cell 8, SLAM: front legs and chest crashing down onto the ground line, head low, body bunched, back legs kicked up behind. Cell 9, POUNCE WIND-UP: crouched very low, rump high, head forward and eyes fixed ahead, ready to leap forward. Cell 10, POUNCE: leaping forward through the air in a long arc, front legs stretched forward, back legs stretched behind, mouth open with tusks first. Exactly one boar per cell. Do NOT draw dust, speed lines, impact marks, glows, shadows, ground, grass or any effect or object: only the boar. Each boar fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. No text, no labels, no numbers."
+  }
+ },
+ {
+  "id": "monanim_bramble_boar_2",
+  "prompts": null,
+  "batch": "monster animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "monanim_bramble_boar_2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   5
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'Monster animations' (Cory 21:47Z 'Repaint it'): repaint of the Bramble Boar test without painted labels, with clearly different wind-ups and a deeper take-off crouch.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_2x5.png",
+   "refs": [
+    "art/source/mon_bramble_boar.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 10 cells (2 rows of 5) on a flat magenta background. The first attached picture is the game's Bramble Boar: a stout green boar covered in a thick tangle of thorny bramble vines with dark blackberries, a shaggy golden-brown beard, pale curved tusks, a pink snout, pink cheek blush and a small glowing golden light-mote on top of its back. Paint this exact boar once in every cell, in the pose given for that cell: copy its look exactly (same body, vines, berries, beard, tusks, face, colours, glowing mote, same size as the boars in the first attached picture, same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different. It always faces RIGHT, seen from the side. Poses on the ground stand on one shared ground line near the bottom of each cell, like the boars in the first attached picture; mid-air poses float clearly above that line. Row 1. Cell 1, JUMP TAKE-OFF: squatting very deep, belly almost touching the ground line, all four legs folded and coiled like springs, head tipped up toward the sky. Cell 2, JUMP IN THE AIR: high in the air, legs tucked under its belly, ears back. Cell 3, KNOCKED UP: thrown helplessly up into the air, tumbling backwards and tipped onto its back with its belly and four legs flailing upward, eyes squeezed shut, mouth open in surprise. Cell 4, KNOCKED DOWN: lying flat on its side on the ground line, legs limp and sticking out, dazed with dizzy swirl eyes and tongue out, still clearly alive (not defeated). Cell 5, CHARGE WIND-UP: all four hooves on the ground, head lowered with tusks pointing forward, body pulled back over its hind legs, one front hoof scraping the ground behind it like a bull about to charge. It does NOT rear up. Row 2. Cell 6, CHARGE: rushing forward at full speed, head down with tusks forward, body stretched low, legs in a long galloping stride. Cell 7, SLAM WIND-UP: standing straight up tall on its hind legs only, body vertical, both front legs raised high above its head, mouth open in a roar. This is the only cell where it stands upright. Cell 8, SLAM: front legs and chest crashing down onto the ground line, head low, body bunched, back legs kicked up behind. Cell 9, POUNCE WIND-UP: crouched very low, rump high, head forward and eyes fixed ahead, ready to leap forward. Cell 10, POUNCE: leaping forward through the air in a long arc, front legs stretched forward, back legs stretched behind, mouth open with tusks first. Exactly one boar per cell. Do NOT draw dust, speed lines, impact marks, glows, shadows, ground, grass or any effect or object: only the boar. Each boar fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the boar on flat magenta."
+  }
  }
 ]
 }

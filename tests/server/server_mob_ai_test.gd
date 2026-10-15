@@ -150,6 +150,7 @@ func test_a_shooter_fires_at_a_player_in_sight() -> void:
 	var full := p.character.health.hp
 	h.step(1)
 	check(int(m.snapshot()[4]) & SnapshotFlags.MOB_WINDUP != 0, "winds up first")
+	check_eq(int(m.snapshot()[5]), 1, "clients know which move, to show its frames")
 	check_eq(h.count(2, &"ev_mob_shot"), 0, "no shot yet")
 	h.step(20)
 	check_eq(h.last(2, &"ev_mob_shot"), [0, 0, 300.0, 600.0 - SimPlayer.CHEST], "fires at where Ann stands")

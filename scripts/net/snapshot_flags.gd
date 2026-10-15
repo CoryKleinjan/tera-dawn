@@ -25,6 +25,12 @@ const MOB_BURNING := 1024
 const MOB_STUNNED := 2048
 ## A flier pulled down to the ground (SkillDef.slam): clients drop its hover.
 const MOB_DOWNED := 4096
+## In the air on its own (a hop or a leap): clients show its jump pose.
+const MOB_AIRBORNE := 8192
+## Thrown up by a skill (SkillDef.launch): clients show it knocked up.
+const MOB_TOSSED := 16384
+## Lying knocked down after a throw or a slam: clients show it knocked down.
+const MOB_FLOORED := 32768
 
 # ---------- players (SimPlayer.snapshot, read by TDAvatar) ----------
 const PLAYER_FAINTED := 1

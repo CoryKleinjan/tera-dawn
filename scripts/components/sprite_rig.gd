@@ -11,6 +11,7 @@ extends Node3D
 const FALLBACK := {
 	&"move": &"idle", &"attack": &"move", &"hurt": &"idle", &"die": &"hurt",
 	&"walk": &"move", &"run": &"walk", &"fall": &"jump", &"land": &"idle",
+	&"knock_up": &"hurt", &"knock_down": &"hurt",
 }
 ## How long a flash of colour (pulse(), a monster's rage) takes to fade, in seconds.
 const PULSE_TIME := 0.45
@@ -111,6 +112,10 @@ func play(anim: StringName, from_start := false) -> void:
 	elif a != current or from_start:
 		_t = 0.0
 	current = anim
+
+## Whether it has frames of its own for `anim` (no fallback).
+func has(anim: StringName) -> bool:
+	return _frames != null and _frames.has_animation(anim)
 
 ## 1 faces right, -1 faces left (the art faces right).
 func face(dir: int) -> void:
