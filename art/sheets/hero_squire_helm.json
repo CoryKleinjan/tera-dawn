@@ -9,7 +9,7 @@
       "walk2",
       "jump",
       "hurt",
-      "",
+      "walk3",
       ""
     ],
     [
@@ -68,6 +68,7 @@
         "walk2": "hero_squire_helm:walk2",
         "jump": "hero_squire_helm:jump",
         "hurt": "hero_squire_helm:hurt",
+        "walk3": "hero_squire_helm:walk3",
         "swing1": "hero_squire_helm:swing1",
         "swing2": "hero_squire_helm:swing2",
         "swing3": "hero_squire_helm:swing3",
@@ -121,6 +122,12 @@
         "hurt": {
           "frames": [
             "hurt"
+          ],
+          "fps": 1
+        },
+        "walk3": {
+          "frames": [
+            "walk3"
           ],
           "fps": 1
         },

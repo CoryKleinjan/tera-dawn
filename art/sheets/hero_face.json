@@ -9,7 +9,7 @@
       "walk2",
       "jump",
       "hurt",
-      "",
+      "walk3",
       ""
     ],
     [
@@ -68,6 +68,7 @@
         "walk2": "hero_face:walk2",
         "jump": "hero_face:jump",
         "hurt": "hero_face:hurt",
+        "walk3": "hero_face:walk3",
         "swing1": "hero_face:swing1",
         "swing2": "hero_face:swing2",
         "swing3": "hero_face:swing3",
@@ -122,6 +123,12 @@
         "hurt": {
           "frames": [
             "hurt"
+          ],
+          "fps": 1
+        },
+        "walk3": {
+          "frames": [
+            "walk3"
           ],
           "fps": 1
         },
