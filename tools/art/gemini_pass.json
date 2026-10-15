@@ -12919,6 +12919,168 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 7 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: standing, standing, walking, walking, walking, jumping, flinching after a hit); cell 8 is empty. He faces right in a three-quarter view; his WEAPON ARM is the arm on the LEFT side of the picture and his OTHER ARM is the arm on the RIGHT side. Use the second attached picture ONLY to see the painting style (do not copy its pose, its gear or its figure). On the head of each green shape, paint ONLY a young thief's black cloth bandana: it covers his whole scalp like a snug cap, wrapped over the top, back and sides of his big round head and low over both temples, reaching down to the tops of his ears and the top of his eyebrows, so no hair or bare scalp would show anywhere, with a dark charcoal stitched hem along the forehead and a knot at the back of his head with two short tails hanging down. It fits the head at its angle in each cell, slightly larger than the head outline. Leave his face flat green. Paint nothing else: no hair, face, body, arms or clothes. Paint every piece WHOLE, with no gaps, notches or holes where an arm, hand or another piece would cover it; parts that will be hidden are still painted completely. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: exactly the look of the steel helmet in the second attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail. Keep the grid lines. No text, no labels."
   }
+ },
+ {
+  "id": "mshero_archer_hood_walk",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_archer_hood_walk.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 11:51Z 'Move on to the next job paint after thief', the Archer set of the ~$0.42-per-job plan): Archer starter set layer over the green silhouette of his walking frames.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/silhouette_walkset.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_walkset.png",
+    "/mnt/project-files/art-sheets/maple-hero/bodies/look_warrior.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 7 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: standing, standing, walking, walking, walking, jumping, flinching after a hit); cell 8 is empty. He faces right in a three-quarter view; his WEAPON ARM is the arm on the LEFT side of the picture and his OTHER ARM is the arm on the RIGHT side. Use the second attached picture ONLY to see the painting style (do not copy its pose, its gear or its figure). On the head of each green shape, paint ONLY a young archer's green cloth hood, pulled up: forest green wool covering his whole scalp, the top, back and sides of his big round head, framing his face from the forehead down past his cheeks, with a darker green lining showing at the front edge, a short point at the back of the head and a small shoulder cape (a short capelet) over the tops of his shoulders. It fits the head at its angle in each cell, slightly larger than the head outline, so no hair or bare scalp would show. Leave his face flat green. Paint nothing else: no hair, face, arms or clothes below the capelet. Paint every piece WHOLE, with no gaps, notches or holes where an arm, hand or another piece would cover it; parts that will be hidden are still painted completely. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: exactly the look of the steel helmet in the second attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_archer_vest_walk",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_archer_vest_walk.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 11:51Z 'Move on to the next job paint after thief', the Archer set of the ~$0.42-per-job plan): Archer starter set layer over the green silhouette of his walking frames.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/silhouette_walkset.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_walkset.png",
+    "/mnt/project-files/art-sheets/maple-hero/bodies/look_warrior.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 7 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: standing, standing, walking, walking, walking, jumping, flinching after a hit); cell 8 is empty. He faces right in a three-quarter view; his WEAPON ARM is the arm on the LEFT side of the picture and his OTHER ARM is the arm on the RIGHT side. Use the second attached picture ONLY to see the painting style (do not copy its pose, its gear or its figure). On each green shape, paint ONLY a young archer's laced leather vest worn over his torso and upper arms: a tan brown leather vest laced up the front with a thin cord, over a cream linen shirt with short sleeves over the upper arms, a brown leather strap running from one shoulder across his chest, and a narrow brown belt with a small horn buckle at the waist; the hem is just below the belt; it follows his body and arms in each pose. Paint nothing else: no head, hands, legs, trousers, boots or gear. Paint every piece WHOLE, with no gaps, notches or holes where an arm, hand or another piece would cover it; parts that will be hidden are still painted completely. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: exactly the look of the steel helmet in the second attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_archer_trousers_walk",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_archer_trousers_walk.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 11:51Z 'Move on to the next job paint after thief', the Archer set of the ~$0.42-per-job plan): Archer starter set layer over the green silhouette of his walking frames.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/silhouette_walkset.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_walkset.png",
+    "/mnt/project-files/art-sheets/maple-hero/bodies/look_warrior.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 7 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: standing, standing, walking, walking, walking, jumping, flinching after a hit); cell 8 is empty. He faces right in a three-quarter view; his WEAPON ARM is the arm on the LEFT side of the picture and his OTHER ARM is the arm on the RIGHT side. Use the second attached picture ONLY to see the painting style (do not copy its pose, its gear or its figure). On the legs of each green shape, paint ONLY a young archer's patched trousers: olive brown cloth trousers from the waist to the ankles with a couple of lighter sewn-on patches at the knees; they follow each leg's pose in that cell. Paint nothing else: no feet, body or clothes above the waist. Paint every piece WHOLE, with no gaps, notches or holes where an arm, hand or another piece would cover it; parts that will be hidden are still painted completely. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: exactly the look of the steel helmet in the second attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_archer_boots_walk",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_archer_boots_walk.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 11:51Z 'Move on to the next job paint after thief', the Archer set of the ~$0.42-per-job plan): Archer starter set layer over the green silhouette of his walking frames.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/silhouette_walkset.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_walkset.png",
+    "/mnt/project-files/art-sheets/maple-hero/bodies/look_warrior.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 7 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: standing, standing, walking, walking, walking, jumping, flinching after a hit); cell 8 is empty. He faces right in a three-quarter view; his WEAPON ARM is the arm on the LEFT side of the picture and his OTHER ARM is the arm on the RIGHT side. Use the second attached picture ONLY to see the painting style (do not copy its pose, its gear or its figure). On the feet of each green shape, paint ONLY a young archer's lace-up boots: brown leather boots reaching a little above the ankle, laced up the front with pale cord, with sturdy dark soles; they follow each foot's pose in that cell, toes pointing the way each foot points. Paint nothing else: no legs above the boots, body or clothes. Paint every piece WHOLE, with no gaps, notches or holes where an arm, hand or another piece would cover it; parts that will be hidden are still painted completely. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: exactly the look of the steel helmet in the second attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_archer_bow_walk",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_archer_bow_walk.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 11:51Z 'Move on to the next job paint after thief', the Archer set of the ~$0.42-per-job plan): Archer starter set layer over the green silhouette of his walking frames.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/silhouette_walkset.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_walkset.png",
+    "/mnt/project-files/art-sheets/maple-hero/bodies/look_warrior.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 7 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: standing, standing, walking, walking, walking, jumping, flinching after a hit); cell 8 is empty. He faces right in a three-quarter view; his WEAPON ARM is the arm on the LEFT side of the picture and his OTHER ARM is the arm on the RIGHT side. Use the second attached picture ONLY to see the painting style (do not copy its pose, its gear or its figure). In each cell, paint ONLY a young archer's short wooden bow held in the closed fist on the LEFT side of the shape (his weapon hand), in every cell: a simple curved bow of honey-brown wood about as tall as his body from shoulder to knee, held upright by its leather-wrapped middle, with a thin pale bowstring running straight from tip to tip on the side away from the viewer and no arrow. The fist grips the middle of the bow; the bow stands upright the same way in every cell. Paint the WHOLE bow ON TOP of the green fist: the grip is painted completely across the fist, never left out. Paint nothing else: no hands, arms or body. Paint every piece WHOLE, with no gaps, notches or holes where an arm, hand or another piece would cover it; parts that will be hidden are still painted completely. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: exactly the look of the steel helmet in the second attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_archer_quiver_walk",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_archer_quiver_walk.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 11:51Z 'Move on to the next job paint after thief', the Archer set of the ~$0.42-per-job plan): Archer starter set layer over the green silhouette of his walking frames.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/silhouette_walkset.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_walkset.png",
+    "/mnt/project-files/art-sheets/maple-hero/bodies/look_warrior.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 7 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (row by row: standing, standing, walking, walking, walking, jumping, flinching after a hit); cell 8 is empty. He faces right in a three-quarter view; his WEAPON ARM is the arm on the LEFT side of the picture and his OTHER ARM is the arm on the RIGHT side. Use the second attached picture ONLY to see the painting style (do not copy its pose, its gear or its figure). In each cell, paint ONLY a young archer's leather quiver worn on his back: a brown leather tube about as long as his torso, slung at an angle behind his back so its top sits behind the shoulder on the LEFT side of the shape and a few feathered arrow ends (white and green fletching) poke out above that shoulder, with a small strap buckle near the top. It sits behind his back at the same angle in every cell, moving with his body. Paint the WHOLE quiver even where his body would hide it. Paint nothing else: no straps across his chest, hands, arms or body. Paint every piece WHOLE, with no gaps, notches or holes where an arm, hand or another piece would cover it; parts that will be hidden are still painted completely. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: exactly the look of the steel helmet in the second attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail. Keep the grid lines. No text, no labels."
+  }
  }
 ]
 }
