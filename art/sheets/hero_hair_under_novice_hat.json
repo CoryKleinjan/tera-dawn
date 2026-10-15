@@ -3,7 +3,8 @@
   "out_dir": "art/build/hero/hair_under_novice_hat",
   "cells": [
     [
-      "idle1"
+      "idle1",
+      "faint"
     ]
   ],
   "grid": {
@@ -13,7 +14,8 @@
     ],
     "cols": [
       0,
-      1100
+      1100,
+      2200
     ]
   },
   "inset": 0,
@@ -26,7 +28,8 @@
   "sets": {
     "hero_hair_under_novice_hat": {
       "frames": {
-        "idle1": "hero_hair_under_novice_hat:idle1"
+        "idle1": "hero_hair_under_novice_hat:idle1",
+        "faint": "hero_hair_under_novice_hat:faint"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -36,6 +39,12 @@
         "idle1": {
           "frames": [
             "idle1"
+          ],
+          "fps": 1
+        },
+        "faint": {
+          "frames": [
+            "faint"
           ],
           "fps": 1
         }
