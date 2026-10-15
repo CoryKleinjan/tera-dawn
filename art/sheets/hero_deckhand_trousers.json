@@ -13,7 +13,7 @@
       ""
     ],
     [
-      "swing1",
+      "",
       "swing2",
       "swing3",
       "cast1",
@@ -38,7 +38,7 @@
       "",
       "throw1",
       "throw2",
-      "throw3",
+      "",
       "pistol1",
       "pistol2"
     ],
@@ -56,7 +56,7 @@
       "pinning",
       "leap",
       "backstep",
-      "blink",
+      "",
       "lunge",
       "roll1",
       "roll2",
@@ -110,7 +110,6 @@
         "bow1": "hero_deckhand_trousers:bow1",
         "throw1": "hero_deckhand_trousers:throw1",
         "throw2": "hero_deckhand_trousers:throw2",
-        "throw3": "hero_deckhand_trousers:throw3",
         "pistol1": "hero_deckhand_trousers:pistol1",
         "pistol2": "hero_deckhand_trousers:pistol2",
         "crouch": "hero_deckhand_trousers:crouch",
@@ -126,12 +125,10 @@
         "pinning": "hero_deckhand_trousers:pinning",
         "leap": "hero_deckhand_trousers:leap",
         "backstep": "hero_deckhand_trousers:backstep",
-        "blink": "hero_deckhand_trousers:blink",
         "lunge": "hero_deckhand_trousers:lunge",
         "roll1": "hero_deckhand_trousers:roll1",
         "roll2": "hero_deckhand_trousers:roll2",
         "hurt": "hero_deckhand_trousers:hurt",
-        "swing1": "hero_deckhand_trousers:swing1",
         "swing2": "hero_deckhand_trousers:swing2",
         "swing3": "hero_deckhand_trousers:swing3",
         "sit": "hero_deckhand_trousers:sit",
@@ -234,12 +231,6 @@
           ],
           "fps": 1
         },
-        "throw3": {
-          "frames": [
-            "throw3"
-          ],
-          "fps": 1
-        },
         "pistol1": {
           "frames": [
             "pistol1"
@@ -330,12 +321,6 @@
           ],
           "fps": 1
         },
-        "blink": {
-          "frames": [
-            "blink"
-          ],
-          "fps": 1
-        },
         "lunge": {
           "frames": [
             "lunge"
@@ -357,12 +342,6 @@
         "hurt": {
           "frames": [
             "hurt"
-          ],
-          "fps": 1
-        },
-        "swing1": {
-          "frames": [
-            "swing1"
           ],
           "fps": 1
         },

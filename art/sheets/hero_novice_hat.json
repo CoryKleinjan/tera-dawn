@@ -77,7 +77,6 @@
         "ladder1": "hero_novice_hat:ladder1",
         "ladder_hold": "hero_novice_hat:ladder_hold",
         "back": "hero_novice_hat:back",
-        "swing1": "hero_novice_hat:idle1",
         "swing2": "hero_novice_hat:idle1",
         "swing3": "hero_novice_hat:idle1",
         "cast1": "hero_novice_hat:idle1",
@@ -92,7 +91,6 @@
         "pinning": "hero_novice_hat:idle1",
         "leap": "hero_novice_hat:idle1",
         "backstep": "hero_novice_hat:idle1",
-        "blink": "hero_novice_hat:idle1",
         "lunge": "hero_novice_hat:idle1",
         "roll1": "hero_novice_hat:idle1",
         "roll2": "hero_novice_hat:idle1",
@@ -100,7 +98,6 @@
         "bow2": "hero_novice_hat:idle1",
         "throw1": "hero_novice_hat:idle1",
         "throw2": "hero_novice_hat:idle1",
-        "throw3": "hero_novice_hat:idle1",
         "pistol1": "hero_novice_hat:idle1",
         "pistol2": "hero_novice_hat:idle1",
         "ambush2": "hero_novice_hat:back",
@@ -201,12 +198,6 @@
           ],
           "fps": 1
         },
-        "swing1": {
-          "frames": [
-            "swing1"
-          ],
-          "fps": 1
-        },
         "swing2": {
           "frames": [
             "swing2"
@@ -291,12 +282,6 @@
           ],
           "fps": 1
         },
-        "blink": {
-          "frames": [
-            "blink"
-          ],
-          "fps": 1
-        },
         "lunge": {
           "frames": [
             "lunge"
@@ -336,12 +321,6 @@
         "throw2": {
           "frames": [
             "throw2"
-          ],
-          "fps": 1
-        },
-        "throw3": {
-          "frames": [
-            "throw3"
           ],
           "fps": 1
         },

@@ -13,7 +13,7 @@
       ""
     ],
     [
-      "swing1",
+      "",
       "swing2",
       "swing3",
       "cast1",
@@ -38,7 +38,7 @@
       "",
       "throw1",
       "throw2",
-      "throw3",
+      "",
       "pistol1",
       "pistol2"
     ],
@@ -56,7 +56,7 @@
       "pinning",
       "leap",
       "backstep",
-      "blink",
+      "",
       "lunge",
       "roll1",
       "roll2",
@@ -107,7 +107,6 @@
         "ladder1": "hero_footpad_trousers:ladder1",
         "ladder_hold": "hero_footpad_trousers:ladder_hold",
         "back": "hero_footpad_trousers:back",
-        "swing1": "hero_footpad_trousers:swing1",
         "swing2": "hero_footpad_trousers:swing2",
         "swing3": "hero_footpad_trousers:swing3",
         "hurt": "hero_footpad_trousers:hurt",
@@ -116,7 +115,6 @@
         "bow2": "hero_footpad_trousers:bow2",
         "throw1": "hero_footpad_trousers:throw1",
         "throw2": "hero_footpad_trousers:throw2",
-        "throw3": "hero_footpad_trousers:throw3",
         "pistol1": "hero_footpad_trousers:pistol1",
         "pistol2": "hero_footpad_trousers:pistol2",
         "crouch": "hero_footpad_trousers:crouch",
@@ -131,7 +129,6 @@
         "pinning": "hero_footpad_trousers:pinning",
         "leap": "hero_footpad_trousers:leap",
         "backstep": "hero_footpad_trousers:backstep",
-        "blink": "hero_footpad_trousers:blink",
         "lunge": "hero_footpad_trousers:lunge",
         "roll1": "hero_footpad_trousers:roll1",
         "faint": "hero_footpad_trousers:faint",
@@ -216,12 +213,6 @@
           ],
           "fps": 1
         },
-        "swing1": {
-          "frames": [
-            "swing1"
-          ],
-          "fps": 1
-        },
         "swing2": {
           "frames": [
             "swing2"
@@ -267,12 +258,6 @@
         "throw2": {
           "frames": [
             "throw2"
-          ],
-          "fps": 1
-        },
-        "throw3": {
-          "frames": [
-            "throw3"
           ],
           "fps": 1
         },
@@ -357,12 +342,6 @@
         "backstep": {
           "frames": [
             "backstep"
-          ],
-          "fps": 1
-        },
-        "blink": {
-          "frames": [
-            "blink"
           ],
           "fps": 1
         },

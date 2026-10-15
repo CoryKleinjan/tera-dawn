@@ -13,7 +13,7 @@
       ""
     ],
     [
-      "swing1",
+      "",
       "swing2",
       "swing3",
       "cast1",
@@ -28,7 +28,7 @@
       "",
       "throw1",
       "throw2",
-      "throw3",
+      "",
       "pistol1",
       "pistol2"
     ],
@@ -46,7 +46,7 @@
       "pinning",
       "leap",
       "backstep",
-      "blink",
+      "",
       "lunge",
       "roll1",
       "roll2",
@@ -92,7 +92,6 @@
         "walk3": "hero_hands:walk3",
         "crouch": "hero_hands:crouch",
         "faint": "hero_hands:faint",
-        "swing1": "hero_hands:swing1",
         "swing2": "hero_hands:swing2",
         "swing3": "hero_hands:swing3",
         "hurt": "hero_hands:hurt",
@@ -100,7 +99,6 @@
         "bow2": "hero_hands:bow2",
         "throw1": "hero_hands:throw1",
         "throw2": "hero_hands:throw2",
-        "throw3": "hero_hands:throw3",
         "pistol1": "hero_hands:pistol1",
         "pistol2": "hero_hands:pistol2",
         "cast1": "hero_hands:cast1",
@@ -116,7 +114,6 @@
         "backstep": "hero_hands:backstep",
         "lunge": "hero_hands:lunge",
         "anchor2": "hero_hands:anchor2",
-        "blink": "hero_hands:blink",
         "ambush2": "hero_hands:ambush2"
       },
       "anchor": "cell",
@@ -172,12 +169,6 @@
           ],
           "fps": 1
         },
-        "swing1": {
-          "frames": [
-            "swing1"
-          ],
-          "fps": 1
-        },
         "swing2": {
           "frames": [
             "swing2"
@@ -217,12 +208,6 @@
         "throw2": {
           "frames": [
             "throw2"
-          ],
-          "fps": 1
-        },
-        "throw3": {
-          "frames": [
-            "throw3"
           ],
           "fps": 1
         },
@@ -313,12 +298,6 @@
         "anchor2": {
           "frames": [
             "anchor2"
-          ],
-          "fps": 1
-        },
-        "blink": {
-          "frames": [
-            "blink"
           ],
           "fps": 1
         },
