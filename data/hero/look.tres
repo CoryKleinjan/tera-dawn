@@ -16,6 +16,8 @@ bare_arm_frames = Array[StringName]([&"crouch"])
 resting_hand_frames = Array[StringName]([&"faint", &"crouch"])
 nudges = {
 &"face": {
+&"cast1": Vector4(-13.1, -1, -30, 0),
+&"cast2": Vector4(-3.6, 0.4, -0, 0),
 &"hurt": Vector4(-10.1, 9.3, -24, 0),
 &"sit": Vector4(-3.6, 23.7, 0, 0),
 &"swing1": Vector4(-1.6, 4.9, -9, 0),
@@ -23,6 +25,8 @@ nudges = {
 &"swing3": Vector4(17, 13.9, 18, 0)
 },
 &"hair": {
+&"cast1": Vector4(-16.5, -0.8, -30, 0),
+&"cast2": Vector4(-3.6, 0.4, -0, 0),
 &"hurt": Vector4(-24.5, 11.1, -24, 0),
 &"sit": Vector4(-3.6, 23.7, 0, 0),
 &"swing1": Vector4(-2.6, 4.7, -9, 0),
@@ -32,6 +36,7 @@ nudges = {
 }
 animations = {
 &"attack": {"fps": 10.0, "frames": [&"swing1", &"swing2", &"swing3"], "loop": false},
+&"cast": {"fps": 6.0, "frames": [&"cast1", &"cast2"], "loop": false},
 &"attack_bow": {"fps": 8.0, "frames": [&"bow1", &"bow2", &"bow1"], "loop": false},
 &"climb_idle": {"fps": 1.0, "frames": [&"rope_hold"], "loop": true},
 &"crouch": {"fps": 1.0, "frames": [&"crouch"], "loop": true},

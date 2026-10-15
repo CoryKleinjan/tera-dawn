@@ -14530,6 +14530,60 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4) of the game's base character, a chibi boy with a blank face, on a flat magenta background. Cells 1, 2, 3, 4 and 7 hold the boy; KEEP them exactly as they are. Cells 5, 6 and 8 are EMPTY. Paint the same boy in cells 5 and 6 only, in a NEW pose described below, and leave cell 8 empty. Copy his look exactly from the boys in the base (same head, ears, blank face with no eyes, brows or mouth, bald, cream short-sleeved undershirt, brown shorts, barefoot, rounded mitten fists with no separate fingers, same size, same clean smooth painted style and thin dark plum-brown outline) but NOT their poses. Feet sit on the same ground line as the boys in cells 1 to 4. He faces right in a slight three-quarter side view. His WAND ARM is the arm on the LEFT side of the picture; its fist is a closed mitten fist seen from the side with the thumb on top, so a thin straight wand held in it would lie flat in the picture and never point at the viewer; the whole fist and forearm are clearly visible, never hidden behind his head or body. Cells 5 and 6 are one spell cast with an imaginary wand (do NOT draw the wand). BOTH of his hands are closed rounded MITTEN FISTS in both cells, with NO fingers, NO open palm and no separate thumb. Cell 5, GATHER: feet together, standing tall, body leaning back slightly, wand arm raised straight up with the fist held high above his head; the other fist held close in front of his chest. Cell 6, RELEASE: feet planted side by side a little apart (NOT a lunge, no long stride), body upright and leaning only slightly forward, BOTH arms pushed straight out in front of him together at chest height, the two fists side by side close together, wand fist on the near side. Cell 6 must look clearly different from the punch in cell 2: two arms forward together, not one. Paint every figure WHOLE, with no gaps, notches or holes. Keep the background flat pure magenta #FF00FF and keep the grid lines. Nothing else in the cells: no weapons, props, shadows, effects, sparkles or text. Light from the upper left."
   }
+ },
+ {
+  "id": "mshero_body_skills_a",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_skills_a.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 16:38Z 'i like the skill ideas', 'we also need poses for the movement abilities', 'lets make those at the same time', to the 2 body sheets ~$0.14 question): Skyward Cleave, Gravity Well, Shadow Ambush and Anchor Haul poses, 2 frames each.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/body_blank8.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_swing.png",
+    "/mnt/project-files/references/hero.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 8 cells (2 rows of 4) on a flat magenta background. Paint the game's base character, a chibi boy, once in each cell listed below, in the pose given for that cell. The first attached picture shows this exact boy in several poses: copy his look exactly (same head, ears, blank face with no eyes, brows or mouth, bald, cream short-sleeved undershirt, brown shorts, barefoot, rounded MITTEN fists with no separate fingers, NO open hands, same size as the boys there, same clean smooth painted style and thin dark plum-brown outline) but NOT his poses. Each new pose must be clearly different from the poses in the first attached picture. He faces right in a slight three-quarter side view. His WEAPON ARM is the arm on the LEFT side of the picture; its fist is a closed mitten fist seen from the side with the thumb on top, so a weapon held in it would lie flat in the picture, never pointing at the viewer; the whole fist and forearm are clearly visible, never hidden behind his head or body. Standing poses have their feet on a common ground line near the bottom of the cell, like the boys in the first attached picture; mid-air poses float clearly above that line. Do NOT draw any weapon, bow, wand, chain, anchor or other object. Cell 1, RISING CUT wind-up: crouched low, knees deeply bent, weapon fist held low behind his back hip. Cell 2, RISING CUT finish: springing up onto his toes, body stretched tall, weapon arm flung straight up overhead, fist high above his head, the other arm swung down and back. Cell 3, GRAVITY PULL gather: feet apart, both arms raised high above his head with both fists up, leaning back slightly. Cell 4, GRAVITY PULL slam: dropped into a low squat, both fists slammed down to the ground in front of his feet. Cell 5, DASH STAB: body low and leaning far forward in a long dash, weapon fist thrust straight out low in front at waist height, the other arm swept back. Cell 6, BACKHAND SLASH: torso twisted round, weapon arm swept across his chest and out behind him on the left at shoulder height, the other fist at his hip. Cell 7, THROW: front foot stepping forward, weapon arm flung forward and up as if hurling something heavy, fist high in front of him, the other arm back. Cell 8, HAUL: leaning far back, heels dug in, front leg straight, both fists pulled in close to his chest one in front of the other, as if hauling a heavy rope toward him. Paint every figure WHOLE, with no gaps, notches or holes, and one figure per listed cell only. Keep the background flat pure magenta #FF00FF and keep the grid lines. Nothing else in the cells: no weapons, props, shadows, motion lines, effects or text. Light from the upper left."
+  }
+ },
+ {
+  "id": "mshero_body_skills_b",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_skills_b.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 16:38Z 'i like the skill ideas', 'we also need poses for the movement abilities', 'lets make those at the same time', to the 2 body sheets ~$0.14 question): Pinning Shot, Flash Jump, Backstep Leap, Blink, Charge and Rolling Dash poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/body_blank8.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_swing.png",
+    "/mnt/project-files/references/hero.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 8 cells (2 rows of 4) on a flat magenta background. Paint the game's base character, a chibi boy, once in each cell listed below, in the pose given for that cell. The first attached picture shows this exact boy in several poses: copy his look exactly (same head, ears, blank face with no eyes, brows or mouth, bald, cream short-sleeved undershirt, brown shorts, barefoot, rounded MITTEN fists with no separate fingers, NO open hands, same size as the boys there, same clean smooth painted style and thin dark plum-brown outline) but NOT his poses. Each new pose must be clearly different from the poses in the first attached picture. He faces right in a slight three-quarter side view. His WEAPON ARM is the arm on the LEFT side of the picture; its fist is a closed mitten fist seen from the side with the thumb on top, so a weapon held in it would lie flat in the picture, never pointing at the viewer; the whole fist and forearm are clearly visible, never hidden behind his head or body. Standing poses have their feet on a common ground line near the bottom of the cell, like the boys in the first attached picture; mid-air poses float clearly above that line. Do NOT draw any weapon, bow, wand, chain, anchor or other object. Cell 1, KNEELING SHOT: down on one knee (back knee on the ground, front foot flat), body upright, the arm on the RIGHT side of the picture stretched forward and angled down toward the ground ahead, its fist closed, and the arm on the LEFT side bent with its fist pulled back to his cheek, as if aiming a bow down. Cell 2, FORWARD LEAP: high in the air leaping forward, body leaning forward, knees tucked up, both arms swept back behind him. Cell 3, BACK HOP: in the air hopping backward while still facing right, legs stretched forward, body leaning back, both arms out in front for balance. Cell 4, VANISH: crouched, both forearms crossed in front of his face, fists closed, as if about to disappear. Cell 5, SHOULDER CHARGE: a long lunging stride forward, front shoulder lowered and driving forward, the arm on the RIGHT side of the picture tucked in against his chest, head down. Cell 6, ROLL: curled up tight into a ball on the ground, knees to chest, arms wrapped around his shins, chin tucked, seen from the side, tumbling forward. Cell 7, ROLL turned: the same tight ball half a turn further, now upside down, his back on the ground and his feet up at the top, still tucked tight. Cell 8 is EMPTY and must stay empty. Paint every figure WHOLE, with no gaps, notches or holes, and one figure per listed cell only. Keep the background flat pure magenta #FF00FF and keep the grid lines. Nothing else in the cells: no weapons, props, shadows, motion lines, effects or text. Light from the upper left."
+  }
  }
 ]
 }

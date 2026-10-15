@@ -8,6 +8,8 @@ script = ExtResource("1_held")
 frames = ExtResource("2_frames")
 anchor = Vector2(35.9, 36.3)
 pins = {
+&"cast1": Vector4(108, 95, 0, 0),
+&"cast2": Vector4(165, 90, 0, 0),
 &"crouch": Vector4(153.3, 106.7, 0, 0),
 &"hurt": Vector4(148, 57, -20, 0),
 &"idle1": Vector4(148.9, 119.8, 0, 0),

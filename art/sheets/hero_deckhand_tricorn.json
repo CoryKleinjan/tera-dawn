@@ -78,7 +78,9 @@
         "swing1": "hero_deckhand_tricorn:idle1",
         "swing2": "hero_deckhand_tricorn:idle1",
         "swing3": "hero_deckhand_tricorn:idle1",
-        "sit": "hero_deckhand_tricorn:idle1"
+        "sit": "hero_deckhand_tricorn:idle1",
+        "cast1": "hero_deckhand_tricorn:idle1",
+        "cast2": "hero_deckhand_tricorn:idle1"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -184,6 +186,18 @@
         "sit": {
           "frames": [
             "sit"
+          ],
+          "fps": 1
+        },
+        "cast1": {
+          "frames": [
+            "cast1"
+          ],
+          "fps": 1
+        },
+        "cast2": {
+          "frames": [
+            "cast2"
           ],
           "fps": 1
         }
