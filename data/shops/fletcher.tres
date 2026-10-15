@@ -1,8 +1,7 @@
-[gd_resource type="Resource" script_class="ShopDef" load_steps=13 format=3]
+[gd_resource type="Resource" script_class="ShopDef" load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/shop_def.gd" id="1_shop_def"]
 [ext_resource type="Script" path="res://scripts/data/shop_entry.gd" id="2_shop_entry"]
-[ext_resource type="Resource" path="res://data/items/setup/stump_seat.tres" id="s_stump_seat"]
 [ext_resource type="Resource" path="res://data/items/equips/hunters_hood.tres" id="e_hunters_hood"]
 [ext_resource type="Resource" path="res://data/items/equips/hunters_vest.tres" id="e_hunters_vest"]
 [ext_resource type="Resource" path="res://data/items/equips/hunters_trousers.tres" id="e_hunters_trousers"]
@@ -28,13 +27,8 @@ script = ExtResource("2_shop_entry")
 item = ExtResource("e_hunters_boots")
 price = 0
 
-[sub_resource type="Resource" id="Entry_stump_seat"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("s_stump_seat")
-price = 6000
-
 [resource]
 script = ExtResource("1_shop_def")
 id = &"fletcher"
 display_name = "Greenbough Fletcher"
-items = Array[ExtResource("2_shop_entry")]([SubResource("Entry_hunters_hood"), SubResource("Entry_hunters_vest"), SubResource("Entry_hunters_trousers"), SubResource("Entry_hunters_boots"), SubResource("Entry_stump_seat")])
+items = Array[ExtResource("2_shop_entry")]([SubResource("Entry_hunters_hood"), SubResource("Entry_hunters_vest"), SubResource("Entry_hunters_trousers"), SubResource("Entry_hunters_boots")])

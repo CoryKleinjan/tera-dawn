@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=34 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=32 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/reef_titan.tres" id="3_reef_titan"]
@@ -15,7 +15,6 @@
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_weapon_att_60.tres" id="14_scroll_weapon_att_60"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_earring_int_60.tres" id="15_scroll_earring_int_60"]
 [ext_resource type="Resource" path="res://data/items/use/power_elixir.tres" id="22_power_elixir"]
-[ext_resource type="Resource" path="res://data/items/setup/coral_seat.tres" id="p11_coral_seat"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_shot_bubble.tres" id="mv_boss_shot_bubble"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_slam.tres" id="mv_boss_slam"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_charge.tres" id="mv_boss_charge"]
@@ -105,13 +104,6 @@ chance = 1.0
 min_amount = 216
 max_amount = 432
 
-[sub_resource type="Resource" id="P11_coral_seat"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("p11_coral_seat")
-chance = 0.08
-min_amount = 1
-max_amount = 1
-
 [resource]
 script = ExtResource("1_monster_def")
 id = &"reef_titan"
@@ -128,5 +120,5 @@ sight = 700.0
 moves = Array[ExtResource("mv_script")]([ExtResource("mv_boss_shot_bubble"), ExtResource("mv_boss_slam"), ExtResource("mv_boss_charge")])
 sprite_frames = ExtResource("3_reef_titan")
 sprite_scale = 1.6
-drops = Array[ExtResource("4_drop_entry")]([SubResource("P11_coral_seat"), SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_18")])
+drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_18")])
 respawn_ticks = Vector2i(1800, 2400)

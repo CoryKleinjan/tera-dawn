@@ -743,11 +743,7 @@ func test_pet_def_lookup() -> void:
 	check_eq(p.tab(), ItemDef.Tab.SETUP, "pets in Setup")
 	check_eq(p.stack_size(), 1, "pets don't stack")
 
-func test_chair_and_use_defs() -> void:
-	var chair := ChairDef.new()
-	chair.max_stack = 50
-	check_eq(chair.tab(), ItemDef.Tab.SETUP, "chairs in Setup")
-	check_eq(chair.stack_size(), 1, "chairs don't stack")
+func test_use_defs() -> void:
 	var u := fx.use()
 	u.heal_hp = 50
 	u.heal_hp_percent = 10

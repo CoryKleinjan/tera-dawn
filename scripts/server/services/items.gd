@@ -1,7 +1,7 @@
 class_name ServerItems
 extends ServerPart
 ## The player's own things: using items (potions, pet food, return scrolls), the Setup tab
-## (chairs and pets), upgrade scrolls, wearing gear, and moving or dropping bag items.
+## (pets), upgrade scrolls, wearing gear, and moving or dropping bag items.
 
 # ---------- Use tab ----------
 
@@ -76,8 +76,7 @@ func _used(p: SimPlayer, u: UseDef, slot: int) -> void:
 
 # ---------- Setup tab ----------
 
-## Uses what's in Setup slot `slot`: sit on a chair (or get up), or bring out a pet (or
-## send it home).
+## Uses what's in Setup slot `slot`: brings out a pet (or sends it home).
 func on_setup(peer: int, slot: int) -> void:
 	var p := player_of(peer)
 	if p == null or not Inventory.valid_slot(ItemDef.Tab.SETUP, slot):
@@ -85,22 +84,8 @@ func on_setup(peer: int, slot: int) -> void:
 	var stack := p.character.inventory.at(ItemDef.Tab.SETUP, slot)
 	if stack == null:
 		return
-	if stack.item is ChairDef:
-		_sit(p, stack.item as ChairDef)
-	elif stack.item is PetDef:
+	if stack.item is PetDef:
 		_call_pet(p, stack.item as PetDef)
-
-func _sit(p: SimPlayer, chair: ChairDef) -> void:
-	if p.chair == chair.id:
-		p.chair = &""
-	elif p.fainted() or p.climbing or p.map.layout.platform_under(p.position) == null:
-		tell(p, "You can't sit here.")
-		return
-	else:
-		p.chair = chair.id
-		p.character.count(Counters.SAT)
-		p.dirty_character = true
-	Net.send(p.peer, &"ev_sit", [p.chair])
 
 func _call_pet(p: SimPlayer, pet: PetDef) -> void:
 	var c := p.character
