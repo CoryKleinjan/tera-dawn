@@ -13419,6 +13419,181 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Each cell holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose. In cell 8 (bottom row, fourth: lying on his back) and cell 7 (bottom row, third: sitting on the ground), paint ONLY his two bare hands, each a closed rounded mitten fist with no separate fingers and no forearm, exactly where those hands are in the same cells of the first attached picture, matching their bare skin, shading and outline; in cell 8 one hand rests on his belly. Paint nothing in cells 1 to 6 and nothing else in cells 7 and 8: no head, body, arms, sleeves, legs or clothes. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape. Style: the warm colours, light from the upper left and thin dark plum-brown outline of the painted villagers in the second attached picture, but cleaner: smooth soft painted shading with a bright highlight. Keep the grid lines. No text."
   }
+ },
+ {
+  "id": "mshero_fill_warrior",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_fill_warrior.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 13:16Z 'yes. be careful in the prompts to be clear about no holes or gaps', answering the 8-sheet ~$0.55 gear-fix question): Warrior jerkin (hurt, crouch, sit, faint) and trousers (idle1, idle2, sit, faint) holes, filled alone on magenta like sword4.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/fills/fill_warrior.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. The filled cells each hold one piece of a boy's painted clothing on its own, with no body inside: cells 1 to 4 a quilted padded jerkin with a leather belt (staggering back, crouching, sitting, lying on his back); cells 5 to 8 olive-brown trousers with knee patches (standing, standing, sitting with knees bent, lying down). Each piece has holes, gaps, notches or flat cut-off edges where his arms, legs or body used to cover it. In every cell, fill every hole, gap and notch and finish every cut-off edge with the same cloth, stitching, trim and colours, continuing the folds and shapes naturally, so each piece is one complete, unbroken garment as if nothing had ever been in front of it. Keep everything already painted exactly as it is, in exactly the same place, size, pose and angle; do not redraw, move, resize or straighten any piece. Leave empty cells empty and the rest of the background flat pure magenta #FF00FF. Paint nothing else: no body, skin, arms, hands, legs, head or other objects. Every piece must come out WHOLE and SOLID: no holes, gaps, notches, bites, missing chunks, see-through spots or edges cut off flat anywhere, even where an arm, hand or leg used to cover it. Before finishing, check every cell for holes and gaps and fill any you find. Style: match the existing painting exactly (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_fill_robe",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_fill_robe.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 13:16Z 'yes. be careful in the prompts to be clear about no holes or gaps', answering the 8-sheet ~$0.55 gear-fix question): Magician robe holes (walk2, hurt, crouch, sit, faint), filled alone on magenta.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/fills/fill_robe.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. The filled cells each hold one piece of a boy's painted clothing on its own, with no body inside: cells 1 to 5 a deep blue robe-tunic with gold trim, a star clasp and a purple sash (walking, staggering back, crouching, sitting, lying on his back); cells 6 to 8 are empty. Each piece has holes, gaps, notches or flat cut-off edges where his arms, legs or body used to cover it. In every cell, fill every hole, gap and notch and finish every cut-off edge with the same cloth, stitching, trim and colours, continuing the folds and shapes naturally, so each piece is one complete, unbroken garment as if nothing had ever been in front of it. Keep everything already painted exactly as it is, in exactly the same place, size, pose and angle; do not redraw, move, resize or straighten any piece. Leave empty cells empty and the rest of the background flat pure magenta #FF00FF. Paint nothing else: no body, skin, arms, hands, legs, head or other objects. Every piece must come out WHOLE and SOLID: no holes, gaps, notches, bites, missing chunks, see-through spots or edges cut off flat anywhere, even where an arm, hand or leg used to cover it. Before finishing, check every cell for holes and gaps and fill any you find. Style: match the existing painting exactly (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_fill_mag_trousers",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_fill_mag_trousers.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 13:16Z 'yes. be careful in the prompts to be clear about no holes or gaps', answering the 8-sheet ~$0.55 gear-fix question): Magician trousers holes (idle1, idle2, walk2, crouch, sit, faint) and the flat-cut boots/slippers on crouch, filled alone on magenta.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/fills/fill_mag_trousers.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. The filled cells each hold one piece of a boy's painted clothing on its own, with no body inside: cells 1 to 6 loose cream trousers (standing, standing, walking, crouching, sitting, lying down); cell 7 a pair of brown leather boots with steel toe caps; cell 8 a pair of deep blue curled slippers with gold trim, both crouching with their bottoms cut off flat. Paint the whole boot and slipper down to its sole. Each piece has holes, gaps, notches or flat cut-off edges where his arms, legs or body used to cover it. In every cell, fill every hole, gap and notch and finish every cut-off edge with the same cloth, stitching, trim and colours, continuing the folds and shapes naturally, so each piece is one complete, unbroken garment as if nothing had ever been in front of it. Keep everything already painted exactly as it is, in exactly the same place, size, pose and angle; do not redraw, move, resize or straighten any piece. Leave empty cells empty and the rest of the background flat pure magenta #FF00FF. Paint nothing else: no body, skin, arms, hands, legs, head or other objects. Every piece must come out WHOLE and SOLID: no holes, gaps, notches, bites, missing chunks, see-through spots or edges cut off flat anywhere, even where an arm, hand or leg used to cover it. Before finishing, check every cell for holes and gaps and fill any you find. Style: match the existing painting exactly (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_mag_robe_back",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_mag_robe_back.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 13:16Z 'yes. be careful in the prompts to be clear about no holes or gaps', answering the 8-sheet ~$0.55 gear-fix question): Magician robe on the climbing and back frames shows its front (star clasp, collar opening; rope_hold has a hole at the neck); repainted as back views over 'mshero_mag_robe_climb' itself.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/mshero_mag_robe_climb.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. In each cell a boy, shown as a flat bright green (#00FF00) shape, climbs a rope or ladder or stands, always seen from BEHIND with his back to the viewer, and wears a painted deep blue robe-tunic. Wrongly, the deep blue robe-tunic is painted from the FRONT in every cell: a front collar opening with a gold star clasp, gold trim running down the front, and a neck hole. Repaint the deep blue robe-tunic in every filled cell as seen from the BACK, the side that faces the viewer when he turns away: a plain blue back panel with no opening, no star and no trim down the middle, a plain gold-trimmed collar band across the back of his neck with no hole, gold trim only on the sleeve ends and hem, and the purple sash running plainly across his back with no knot. Keep each one's shape, size, place, colours and trim; only the side shown changes. Leave every flat green shape exactly as it is, do not move, resize or redraw any shape, do not add any figure, leave empty cells empty and the rest of the background flat pure magenta #FF00FF. Every piece must come out WHOLE and SOLID: no holes, gaps, notches, bites, missing chunks, see-through spots or edges cut off flat anywhere, even where an arm, hand or leg used to cover it. Before finishing, check every cell for holes and gaps and fill any you find. Style: match the existing painting exactly (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_mag_hat_back",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_mag_hat_back.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 13:16Z 'yes. be careful in the prompts to be clear about no holes or gaps', answering the 8-sheet ~$0.55 gear-fix question): Magician hat on the climbing and back frames shows its front star; repainted as back views over 'mshero_mag_hat_climb' itself.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/mshero_mag_hat_climb.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. In each cell a boy, shown as a flat bright green (#00FF00) shape, climbs a rope or ladder or stands, always seen from BEHIND with his back to the viewer, and wears a painted pointed blue wizard hat. Wrongly, the pointed blue wizard hat is painted from the FRONT in every cell: the gold star on its band faces the viewer. Repaint the pointed blue wizard hat in every filled cell as seen from the BACK, the side that faces the viewer when he turns away: the gold band runs plainly around the back of the hat with NO star (the star is on the front, hidden from behind), the brim and the bent, flopping tip of the cone as seen from behind. Keep each one's shape, size, place, colours and trim; only the side shown changes. Leave every flat green shape exactly as it is, do not move, resize or redraw any shape, do not add any figure, leave empty cells empty and the rest of the background flat pure magenta #FF00FF. Every piece must come out WHOLE and SOLID: no holes, gaps, notches, bites, missing chunks, see-through spots or edges cut off flat anywhere, even where an arm, hand or leg used to cover it. Before finishing, check every cell for holes and gaps and fill any you find. Style: match the existing painting exactly (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_mag_slippers_back",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_mag_slippers_back.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 13:16Z 'yes. be careful in the prompts to be clear about no holes or gaps', answering the 8-sheet ~$0.55 gear-fix question): Magician slippers on the climbing and back frames point their curled toes at the viewer; repainted as back views over 'mshero_mag_slippers_climb' itself.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/mshero_mag_slippers_climb.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. In each cell a boy, shown as a flat bright green (#00FF00) shape, climbs a rope or ladder or stands, always seen from BEHIND with his back to the viewer, and wears a painted pair of deep blue curled slippers. Wrongly, the pair of deep blue curled slippers is painted from the FRONT in every cell: the curled pointed toes point at the viewer. Repaint the pair of deep blue curled slippers in every filled cell as seen from the BACK, the side that faces the viewer when he turns away: the rounded HEELS face the viewer with the gold trim around the opening at the back of his ankle; the curled toes point away from the viewer and are hidden or just peek out past the heel. When a foot is lifted, its sole may show. Keep each one's shape, size, place, colours and trim; only the side shown changes. Leave every flat green shape exactly as it is, do not move, resize or redraw any shape, do not add any figure, leave empty cells empty and the rest of the background flat pure magenta #FF00FF. Every piece must come out WHOLE and SOLID: no holes, gaps, notches, bites, missing chunks, see-through spots or edges cut off flat anywhere, even where an arm, hand or leg used to cover it. Before finishing, check every cell for holes and gaps and fill any you find. Style: match the existing painting exactly (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_mag_slippers_sitfaint",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_mag_slippers_sitfaint.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 13:16Z 'yes. be careful in the prompts to be clear about no holes or gaps', answering the 8-sheet ~$0.55 gear-fix question): sitting and lying down have only one slipper; repainted over 'mshero_mag_slippers_action' itself.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/mshero_mag_slippers_action.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Each cell holds a boy shown as a flat bright green (#00FF00) shape, wearing painted deep blue cloth slippers with gold trim and gently curled pointed toes. In cell 7 (bottom row, third: sitting on the ground) and cell 8 (bottom row, fourth: lying on his back) only ONE foot has a slipper; his other foot is still bare green. In those two cells, paint the missing slipper on the bare green foot, matching the other slipper exactly and following that foot's pose, toes pointing the way the foot points. Leave cells 1 to 6 exactly as they are. Leave every flat green shape exactly as it is, do not move, resize or redraw any shape, do not add any figure, leave empty cells empty and the rest of the background flat pure magenta #FF00FF. Every piece must come out WHOLE and SOLID: no holes, gaps, notches, bites, missing chunks, see-through spots or edges cut off flat anywhere, even where an arm, hand or leg used to cover it. Before finishing, check every cell for holes and gaps and fill any you find. Style: match the existing painting exactly (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the attached picture. Keep the grid lines. No text, no labels."
+  }
  }
 ]
 }

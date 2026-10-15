@@ -25,7 +25,13 @@ update this page when one changes. Each zone's own look and music are in
 - The hero is a chibi boy (`art/reference/hero.png`) painted in layers, MapleStory style: one
   body sheet (bald, blank face, mitten fists), and his face, hair and each piece of gear painted
   over a flat green silhouette of it so they land in place on every frame.
-- Gear is painted whole, never with holes where an arm crosses it. A helmet, hat, shield or tome
+- Gear is painted whole on every frame: no holes, gaps, notches or bites where an arm, hand or
+  leg crosses it, nothing cut off flat, and both shoes or boots on every pose (sitting and lying
+  down too). On climbing and back frames he faces away, so gear shows its BACK: no buttons,
+  buckles, clasps, collar stars, flies, knee patches or toe caps. Every gear prompt says both
+  rules in plain words, names the cells seen from behind, and every result is checked frame by
+  frame on a flat colour before it goes in; a hole is fixed by repainting that piece alone on
+  plain magenta. A helmet, hat, shield or tome
   is one painting pinned to his head or hand on every frame (separate paints only where his head
   turns). The weapon is one painting held in his near fist; the shield or tome is in his far
   hand and only shows while the weapon does. Where each sits, its turn and its layer on every
