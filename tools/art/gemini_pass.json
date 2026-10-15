@@ -14503,6 +14503,33 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4) of the game's base character, a chibi boy with a blank face, on a flat magenta background. Cells 1, 2, 3, 4 and 7 hold the boy; KEEP them exactly as they are. Cells 5, 6 and 8 are EMPTY. Paint the same boy in cells 5 and 6 only, in a NEW pose described below, and leave cell 8 empty. Copy his look exactly from the boys in the base (same head, ears, blank face with no eyes, brows or mouth, bald, cream short-sleeved undershirt, brown shorts, barefoot, rounded mitten fists with no separate fingers, same size, same clean smooth painted style and thin dark plum-brown outline) but NOT their poses. Feet sit on the same ground line as the boys in cells 1 to 4. He faces right in a slight three-quarter side view. His WAND ARM is the arm on the LEFT side of the picture; its fist is a closed mitten fist seen from the side with the thumb on top, so a thin straight wand held in it would lie flat in the picture and never point at the viewer; the whole fist and forearm are clearly visible, never hidden behind his head or body. Cells 5 and 6 are one spell cast with an imaginary wand (do NOT draw the wand). Cell 5, GATHER: feet planted a little apart, body upright and leaning back slightly, wand arm raised with the fist held up high above and in front of his head, elbow bent; the other arm held out in front of his chest, open mitten palm facing forward. Cell 6, RELEASE: front foot stepping forward, body leaning forward, wand arm thrust straight out in front of him at shoulder height, fist far forward; the other arm pulled back low at his side. Paint every figure WHOLE, with no gaps, notches or holes. Keep the background flat pure magenta #FF00FF and keep the grid lines. Nothing else in the cells: no weapons, props, shadows, effects, sparkles or text. Light from the upper left."
   }
+ },
+ {
+  "id": "mshero_body_cast2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_cast2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero': repaint of mshero_body_cast (gather had an open hand with fingers; release looked like the swing strike). Cory 16:26Z 'repaint them' to the $0.07 question.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bodies/body_swing.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_move.png",
+    "/mnt/project-files/references/hero.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) of the game's base character, a chibi boy with a blank face, on a flat magenta background. Cells 1, 2, 3, 4 and 7 hold the boy; KEEP them exactly as they are. Cells 5, 6 and 8 are EMPTY. Paint the same boy in cells 5 and 6 only, in a NEW pose described below, and leave cell 8 empty. Copy his look exactly from the boys in the base (same head, ears, blank face with no eyes, brows or mouth, bald, cream short-sleeved undershirt, brown shorts, barefoot, rounded mitten fists with no separate fingers, same size, same clean smooth painted style and thin dark plum-brown outline) but NOT their poses. Feet sit on the same ground line as the boys in cells 1 to 4. He faces right in a slight three-quarter side view. His WAND ARM is the arm on the LEFT side of the picture; its fist is a closed mitten fist seen from the side with the thumb on top, so a thin straight wand held in it would lie flat in the picture and never point at the viewer; the whole fist and forearm are clearly visible, never hidden behind his head or body. Cells 5 and 6 are one spell cast with an imaginary wand (do NOT draw the wand). BOTH of his hands are closed rounded MITTEN FISTS in both cells, with NO fingers, NO open palm and no separate thumb. Cell 5, GATHER: feet together, standing tall, body leaning back slightly, wand arm raised straight up with the fist held high above his head; the other fist held close in front of his chest. Cell 6, RELEASE: feet planted side by side a little apart (NOT a lunge, no long stride), body upright and leaning only slightly forward, BOTH arms pushed straight out in front of him together at chest height, the two fists side by side close together, wand fist on the near side. Cell 6 must look clearly different from the punch in cell 2: two arms forward together, not one. Paint every figure WHOLE, with no gaps, notches or holes. Keep the background flat pure magenta #FF00FF and keep the grid lines. Nothing else in the cells: no weapons, props, shadows, effects, sparkles or text. Light from the upper left."
+  }
  }
 ]
 }
