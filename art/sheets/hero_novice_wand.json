@@ -19,7 +19,7 @@
       "cast1",
       "cast2",
       "crouch",
-      "sit",
+      "",
       ""
     ]
   ],
@@ -62,8 +62,7 @@
         "swing3": "hero_novice_wand:swing3",
         "cast1": "hero_novice_wand:cast1",
         "cast2": "hero_novice_wand:cast2",
-        "crouch": "hero_novice_wand:crouch",
-        "sit": "hero_novice_wand:sit"
+        "crouch": "hero_novice_wand:crouch"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -139,12 +138,6 @@
         "crouch": {
           "frames": [
             "crouch"
-          ],
-          "fps": 1
-        },
-        "sit": {
-          "frames": [
-            "sit"
           ],
           "fps": 1
         }
