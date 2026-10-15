@@ -13698,6 +13698,33 @@
    ],
    "text": "This is a sheet of 8 cells (2 rows of 4) of the game's base character, a chibi boy with a blank face, on a flat magenta background. Keep every cell listed as KEEP exactly as it is. Repaint ONLY the cells listed as REPAINT, as the same boy (same head, ears, blank face with no eyes, brows or mouth, bald, cream short-sleeved undershirt, brown shorts, barefoot, rounded mitten fists with no separate fingers, same size, same clean smooth painted style and thin dark plum-brown outline, same feet ground line as the standing boy in the first attached picture). He faces right in a slight three-quarter side view. His SWORD ARM is the arm on the LEFT side of the picture. KEEP cells 4, 5, 6 and 8 exactly as they are. Cells 1, 2 and 3 are one melee swing with an imaginary straight sword (do NOT draw the sword). In all three, the sword fist is a closed mitten fist seen from the side with the thumb on top, gripping as if around a sword handle, so a flat sword in that fist would lie flat in the picture and never turn edge-on toward the viewer; the whole fist and forearm are clearly visible, never hidden behind his head or body. Feet stay planted apart on the ground line in all three, body turned the same way. REPAINT cell 1 (wind-up): sword arm raised up and back above and behind his head, elbow bent, fist up high; the other arm forward and low for balance. REPAINT cell 2 (strike): sword arm swung forward and straight out in front of his chest at shoulder height, fist forward; body leaning slightly forward. REPAINT cell 3 (follow-through): sword arm carried on down, low and forward in front of his hips, fist below his waist, body leaning forward. In cells 2 and 3 the other arm stays low and relaxed at his side. REPAINT cell 7 (sitting): the same boy sitting on the ground with BOTH legs straight out in front of him, knees NOT bent, legs flat on the ground and slightly apart, both bare feet visible with toes up, upper body upright, both hands resting on the ground beside his hips. Paint every repainted figure WHOLE, with no gaps, notches or holes. Keep the background flat pure magenta #FF00FF and keep the grid lines. Nothing else in the cells: no weapons, props, shadows, effects or text. Light from the upper left."
   }
+ },
+ {
+  "id": "mshero_body_swing_sit2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_swing_sit2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero': retry of mshero_body_swing_sit (Gemini kept the old poses) on a base with those cells blanked, plus a new hurt pose (Cory 14:05Z 'i dont like that hurt pose. lets make a new one instead.'). Runs only on Cory's typed go naming it.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/body_action_blank.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bodies/body_move.png",
+    "/mnt/project-files/references/hero.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) of the game's base character, a chibi boy with a blank face, on a flat magenta background. Cells 5, 6 and 8 hold the boy; KEEP them exactly as they are. Cells 1, 2, 3, 4 and 7 are EMPTY: paint the same boy in each of them, in a NEW pose described below. The first attached picture shows the same boy standing: copy his look exactly (same head, ears, blank face with no eyes, brows or mouth, bald, cream short-sleeved undershirt, brown shorts, barefoot, rounded mitten fists with no separate fingers, same size, same clean smooth painted style and thin dark plum-brown outline) but NOT his pose. Feet sit on the same ground line as the boys in cells 5 and 6. He faces right in a slight three-quarter side view. His SWORD ARM is the arm on the LEFT side of the picture. Cells 1, 2 and 3 are one big overhead melee chop with an imaginary straight sword (do NOT draw the sword). In all three his feet are planted wide apart, front foot forward, and his sword fist is a closed mitten fist seen from the side with the thumb on top, so a flat sword held in it would lie flat in the picture and never turn edge-on to the viewer; the whole fist and forearm are clearly visible, never hidden behind his head or body. Cell 1, WIND-UP: body leaning back, sword arm bent with the fist held high up BEHIND his head, elbow pointing up. Cell 2, STRIKE: body leaning forward, sword arm stretched straight out in front of him at shoulder height, fist far forward. Cell 3, FOLLOW-THROUGH: body bent forward, sword arm swept down so the fist is low in front of his knees. The other arm stays low and relaxed at his side in cells 2 and 3. Cell 4, HURT: knocked back by a hit from the front, upper body leaning back, head tipped back, one arm thrown up and back, the other arm out to the side, knees slightly bent, both feet on the ground. Cell 7, SITTING: sitting on the ground with BOTH legs stretched straight out in front of him, knees straight and NOT bent, the backs of his legs flat on the ground, both bare feet visible with toes pointing up, upper body upright, both hands resting flat on the ground beside his hips. Paint every figure WHOLE, with no gaps, notches or holes. Keep the background flat pure magenta #FF00FF and keep the grid lines. Nothing else in the cells: no weapons, props, shadows, effects or text. Light from the upper left."
+  }
  }
 ]
 }
