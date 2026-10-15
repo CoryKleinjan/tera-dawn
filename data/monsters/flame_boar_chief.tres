@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=20 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=18 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/flame_boar_chief.tres" id="2_flame_boar_chief"]
@@ -7,7 +7,6 @@
 [ext_resource type="Resource" path="res://data/items/etc/chief_mane.tres" id="loot_chief_mane"]
 [ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="loot_white_potion"]
 [ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="loot_elixir"]
-[ext_resource type="Resource" path="res://data/items/setup/boar_hide_rug.tres" id="p11_boar_hide_rug"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_charge.tres" id="mv_boss_charge"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_slam.tres" id="mv_boss_slam"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_pounce.tres" id="mv_boss_pounce"]
@@ -55,13 +54,6 @@ chance = 0.3
 min_amount = 1
 max_amount = 2
 
-[sub_resource type="Resource" id="P11_boar_hide_rug"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("p11_boar_hide_rug")
-chance = 0.08
-min_amount = 1
-max_amount = 1
-
 [resource]
 script = ExtResource("1_monster_def")
 id = &"flame_boar_chief"
@@ -76,7 +68,7 @@ sight = 700.0
 moves = Array[ExtResource("mv_script")]([ExtResource("mv_boss_charge"), ExtResource("mv_boss_slam"), ExtResource("mv_boss_pounce")])
 sprite_frames = ExtResource("2_flame_boar_chief")
 sprite_scale = 1.1
-drops = Array[ExtResource("3_drop_entry")]([SubResource("P11_boar_hide_rug"), SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_loot0"), SubResource("Resource_loot1"), SubResource("Resource_loot6")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_loot0"), SubResource("Resource_loot1"), SubResource("Resource_loot6")])
 boss = true
 light_color = Color(1.0, 0.47843137254901963, 0.22745098039215686, 1.0)
 light_energy = 2.4

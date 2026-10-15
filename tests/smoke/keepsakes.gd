@@ -1,7 +1,7 @@
 extends SmokeArea
-## Keepsakes: chairs, pets, the Monster Book and achievements.
+## Keepsakes: sitting, pets, the Monster Book and achievements.
 
-## Chairs, pets, the Monster Book and achievements.
+## Sitting, pets, the Monster Book and achievements.
 func check() -> void:
 	var me := _me()
 	var ch := me.character
@@ -9,25 +9,19 @@ func check() -> void:
 	me.inv = 100000
 	_teleport(Vector2(300, 620))
 	await _ticks(3)
-	# chairs: sit, heal faster, get up by moving
-	var stool: ChairDef = Content.item(&"wooden_stool")
-	ch.inventory.add(stool)
-	me.dirty_character = true
-	await _ticks(2)
-	var inv: TDInventoryWindow = world.hud.windows["inventory"]
-	inv.tab = ItemDef.Tab.SETUP
-	inv.use_slot(Game.me.inventory.find(stool))
+	# sitting: on the ground, heal faster, get up by moving
+	await _tap("sit")
 	await _ticks(3)
-	_check(me.chair == &"wooden_stool" and world.player.sitting == &"wooden_stool" and world.player._animation() == &"sit", "double-clicking a chair sits you on it")
+	_check(me.sitting and world.player.sitting and world.player._animation() == &"sit", "the sit key sits you down")
 	_check(ch.achievements.has("take_a_seat") and world.hud.banners.toasts.any(func(t: AchievementDef) -> bool: return t.title == "Take a Seat"), "sitting down earns an achievement")
 	ch.health.set_hp(10)
 	var hp := ch.health.hp
 	map.tick = (map.tick / 120 + 1) * 120 - 1
 	await _ticks(1)
-	_check(ch.health.hp - hp == 2 + ch.level / 3 + ch.skills.regen_bonus().x + stool.regen_hp, "a chair adds to HP recovery")
+	_check(ch.health.hp - hp == (2 + ch.level / 3) * 2 + ch.skills.regen_bonus().x, "sitting doubles HP recovery")
 	await _hold("move_right", 6)
 	await _ticks(4)
-	_check(me.chair == &"" and world.player.sitting == &"", "moving gets you up")
+	_check(not me.sitting and not world.player.sitting, "moving gets you up")
 	# pets: bring one out, it picks things up nearby, it eats, it gets hungry
 	var pup: PetDef = Content.item(&"pet_puffpaw")
 	ch.inventory.add(pup)

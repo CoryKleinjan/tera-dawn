@@ -17,7 +17,7 @@ const HURTBOX_SIZE := Vector2(19, 40)
 ## Their chest above their feet: where monsters aim their shots (and TDPlayer.CHEST).
 const CHEST := 34.0
 ## Ticks between HP / MP regeneration, and what's regained each time: a base plus
-## level / divisor, plus the character's regen bonus and their chair's.
+## level / divisor, plus the character's regen bonus. Sitting regains the base part twice.
 const REGEN_EVERY := 120
 const REGEN_BASE := 2
 const REGEN_HP_LEVELS := 3
@@ -31,8 +31,8 @@ var face := 1
 ## The animation the client says it is playing, passed on to everyone else on the map.
 var animation := &"idle"
 var climbing := false
-## The chair (a ChairDef id) they're sitting on, or empty.
-var chair: StringName = &""
+## Sitting on the ground (see TDServer.on_sit). Moving or getting hit gets them up.
+var sitting := false
 var hurtbox := Hitbox.new(HURTBOX_SIZE)
 
 var cooldown := 0     # ticks before the next attack
@@ -96,14 +96,14 @@ func stands_on(plat: Platform) -> bool:
 	return not fainted() and absf(position.y - plat.y) < 6 and plat.contains_x(position.x)
 
 ## Applies a movement report. False (and the position stays) when it isn't possible.
-## Moving gets you up off a chair.
+## Moving gets you up.
 func report_move(at: Vector2, facing: int, anim: StringName, on_rope: bool) -> bool:
 	var ticks := maxi(1, since_move)
 	since_move = 0
 	if fainted() or at.distance_to(position) > MAX_STEP * ticks + 40.0:
 		return false
-	if chair != &"" and (at.distance_to(position) > 2.0 or on_rope):
-		chair = &""
+	if sitting and (at.distance_to(position) > 2.0 or on_rope):
+		sitting = false
 	position = Vector2(clampf(at.x, 0.0, float(map.def.width)), clampf(at.y, -200.0, float(map.def.height)))
 	face = 1 if facing >= 0 else -1
 	animation = anim
@@ -137,11 +137,9 @@ func step() -> bool:
 			dirty_character = true
 	if map.tick % REGEN_EVERY == 0:
 		var bonus := character.skills.regen_bonus()
-		var seat := Content.items.get(chair) as ChairDef
-		if seat:
-			bonus += Vector2i(seat.regen_hp, seat.regen_mp)
-		character.health.heal(REGEN_BASE + character.level / REGEN_HP_LEVELS + bonus.x)
-		character.restore_mp(REGEN_BASE + character.level / REGEN_MP_LEVELS + bonus.y)
+		var times := 2 if sitting else 1
+		character.health.heal((REGEN_BASE + character.level / REGEN_HP_LEVELS) * times + bonus.x)
+		character.restore_mp((REGEN_BASE + character.level / REGEN_MP_LEVELS) * times + bonus.y)
 		dirty_vitals = true
 	return false
 
@@ -160,7 +158,7 @@ func motion() -> Array:
 	return [peer, position.x, position.y, face, animation, flags]
 
 ## What else other clients need to show this player, which changes rarely:
-## [name, level, job, guild, chair, pet, worn gear (Equipment.ids)].
+## [name, level, job, guild, pet, worn gear (Equipment.ids)].
 func info() -> Array:
-	return [character.name, character.level, character.job.id, character.guild, chair, character.pet,
+	return [character.name, character.level, character.job.id, character.guild, character.pet,
 		character.equipment.ids()]

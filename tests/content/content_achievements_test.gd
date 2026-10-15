@@ -30,7 +30,7 @@ const SHIPPED := [
 	{"id": "scholar", "steam": "ACH_SCHOLAR", "title": "Monster Scholar", "text": "Complete 15 Monster Book pages.", "kind": "pages", "goal": 15},
 	{"id": "lucky_scroll", "steam": "ACH_LUCKY_SCROLL", "title": "Lucky Scroll", "text": "Have an upgrade scroll work.", "kind": "scrolls", "goal": 1},
 	{"id": "nest_egg", "steam": "ACH_NEST_EGG", "title": "Nest Egg", "text": "Hold 100,000 Dawnshards.", "kind": "shards", "goal": 100000},
-	{"id": "take_a_seat", "steam": "ACH_TAKE_A_SEAT", "title": "Take a Seat", "text": "Sit on a chair.", "kind": "sat", "goal": 1},
+	{"id": "take_a_seat", "steam": "ACH_TAKE_A_SEAT", "title": "Take a Seat", "text": "Sit down for a rest.", "kind": "sat", "goal": 1},
 	{"id": "best_friend", "steam": "ACH_BEST_FRIEND", "title": "Best Friend", "text": "Bring out a pet.", "kind": "pets", "goal": 1},
 	{"id": "well_liked", "steam": "ACH_WELL_LIKED", "title": "Well Liked", "text": "Reach 10 fame.", "kind": "fame", "goal": 10},
 	{"id": "guildmate", "steam": "ACH_GUILDMATE", "title": "Guildmate", "text": "Join a guild.", "kind": "guild", "goal": 1},

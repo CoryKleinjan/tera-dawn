@@ -66,6 +66,8 @@ update this page when one changes. Each zone's own look and music are in
   monster, a camera kick on crits and kills. Ranged hits (arrows, stars, bullets, spells) stay
   light.
 - Getting hit freezes him a beat, flashes the screen and knocks him away without steering.
+- No chairs: the Sit key sits him on the ground, where he regains HP and MP twice as fast (the
+  base part). Moving, the Sit key again or any monster hit gets him up.
 - An aimed attack turns its swing effect up or down.
 - Job skills will be flashy and grand, like MapleStory.
 
