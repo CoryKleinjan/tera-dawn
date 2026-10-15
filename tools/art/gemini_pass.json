@@ -17170,6 +17170,32 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 4 each hold the flat outline of a small boy lying flat on his back, fainted, with his head on the right: his head and body are flat bright green (#00FF00) and his hat is flat pure blue (#0000FF). Cell 1's hat is a tall pointed wizard hat, cell 2's a tied bandana, cell 3's a hood, cell 4's a pirate tricorn, exactly as the boy wears them in cells 1 to 4 of the first attached picture. Cells 5 to 8 are empty and must stay empty. Cell 5 of the first attached picture shows the same boy lying the same way with his own hair and no hat: short, messy, spiky chestnut-brown hair with a swept fringe. In cells 1 to 4, paint ONLY the bits of that same chestnut-brown hair that would naturally stick out from under that hat as he lies there, and nothing else: cell 1 a messy swept fringe poking out under the brim over his forehead and tufts at the back of his head; cell 2 a tuft of spiky hair sticking out of the top of the bandana and a few locks at the back; cell 3 a few strands of fringe falling out of the hood's opening onto his forehead; cell 4 a swept fringe under the front brim over his forehead and locks at the back of his head. Each lock starts at the edge of the blue hat and lies over the green head, sized to match him. Paint the hair WHOLE and solid, every lock fully closed, with no holes. Do NOT paint the hat: leave every blue pixel flat pure #0000FF exactly as it is, with no felt, cloth, trim, shading or outline on it. Do NOT paint the head, face, ears, body or anything else: leave every green pixel you do not paint hair over flat pure #00FF00, and leave the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Style: exactly the hair in cell 5 of the first attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights and a thin dark plum-brown outline. Keep the grid lines. No text, no labels."
   }
+ },
+ {
+  "id": "mshero_body_arms_up",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_arms_up.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 21:42Z 'Arms should not cover the face in any pose'; 21:45Z 'Skyward 2, cast 1 and gravity 1 need to be redrawn so his arm doesn cover the face'): fresh paint of the three poses (an edit of the old cells held the pose, wave 241).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/arms_up_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/arms_up_old.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cell 4 holds a painted bald chibi boy standing at rest, facing right, in a cream undershirt with rolled sleeves and brown shorts, barefoot. Leave cell 4 exactly as it is. Cells 1, 2 and 3 are empty: paint the SAME boy in each of them, a new painting in a new pose, exactly the same size as the boy in cell 4, with his feet on the same ground line and his body in the middle of the cell, facing right. He is bald, with no face and no hair: keep his head bare exactly like the boy in cell 4. Cell 1, casting a spell: his near arm is lifted FORWARD and up in front of him, out to the right, with the elbow bent and the closed mitten fist held up at the height of the top of his head but well to the RIGHT of his head, with a wide gap of magenta between the arm and his head; his other fist is in front of his chest. Cell 2, pulling something down from the sky: both arms are raised high and spread wide in a big V, each fist well above and well outside his head, one to the upper left and one to the upper right, with a wide gap of magenta between each arm and his head; his legs are planted apart. Cell 3, leaping into an uppercut: he is in the air with one knee raised; his near arm punches straight up and forward on a diagonal to the upper RIGHT, the closed mitten fist high above and to the right of his head, with a wide gap of magenta between the arm and his head; his other fist is low in front of his chest. In every cell no arm, hand or fist ever crosses or touches his head, and BOTH fists are fully visible. Each fist is one round closed mitten with no fingers. He has exactly two arms and two legs. The first attached picture shows his OLD poses, where the arms are too close to the head: use it only for his look, colours and size, and do NOT copy those poses. Do not add any weapon, object, text or extra figure. Leave cells 5 to 8 empty. Keep the background flat pure magenta #FF00FF and keep the grid lines. Style: exactly like the boy in cell 4 (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the second attached picture. No text, no labels."
+  }
  }
 ]
 }
