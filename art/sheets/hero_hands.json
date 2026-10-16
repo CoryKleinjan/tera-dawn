@@ -35,7 +35,7 @@
     [
       "",
       "skyward2",
-      "gravity1",
+      "",
       "gravity2",
       "ambush1",
       "ambush2",
@@ -80,6 +80,7 @@
   "dark_key": false,
   "defringe": false,
   "scale": 0.111,
+  "fix": "guide_green",
   "save": false,
   "sets": {
     "hero_hands": {
@@ -101,7 +102,6 @@
         "throw2": "hero_hands:throw2",
         "pistol1": "hero_hands:pistol1",
         "pistol2": "hero_hands:pistol2",
-        "gravity1": "hero_hands:gravity1",
         "gravity2": "hero_hands:gravity2",
         "ambush1": "hero_hands:ambush1",
         "anchor1": "hero_hands:anchor1",
@@ -219,12 +219,6 @@
         "pistol2": {
           "frames": [
             "pistol2"
-          ],
-          "fps": 1
-        },
-        "gravity1": {
-          "frames": [
-            "gravity1"
           ],
           "fps": 1
         },

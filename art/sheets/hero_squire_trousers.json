@@ -45,7 +45,7 @@
     [
       "",
       "skyward2",
-      "gravity1",
+      "",
       "gravity2",
       "ambush1",
       "ambush2",
@@ -117,7 +117,6 @@
         "bow2": "hero_squire_trousers:bow2",
         "throw1": "hero_squire_trousers:throw1",
         "throw2": "hero_squire_trousers:throw2",
-        "gravity1": "hero_squire_trousers:gravity1",
         "gravity2": "hero_squire_trousers:gravity2",
         "ambush1": "hero_squire_trousers:ambush1",
         "anchor1": "hero_squire_trousers:anchor1",
@@ -269,12 +268,6 @@
         "throw2": {
           "frames": [
             "throw2"
-          ],
-          "fps": 1
-        },
-        "gravity1": {
-          "frames": [
-            "gravity1"
           ],
           "fps": 1
         },

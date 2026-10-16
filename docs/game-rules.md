@@ -47,7 +47,7 @@ update this page when one changes. Each zone's own look and music are in
 - His arms, fists and held weapons never cover his face, in any pose; both fists show. Blink
   has no pose of its own: he just vanishes and reappears.
 - Animations are shared across similar actions (one swing for all melee, one cast for all
-  spells); his walk is 4 steps, slow. Melee attacks play one 3-frame swing with the weapon
+  spells); his walk is 4 steps, slow. Melee attacks play one 2-frame swing (swing2, swing3) with the weapon
   only turning in the picture, never edge-on.
 - Male only for now.
 

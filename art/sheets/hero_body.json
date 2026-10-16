@@ -45,7 +45,7 @@
     [
       "",
       "skyward2",
-      "gravity1",
+      "",
       "gravity2",
       "ambush1",
       "ambush2",
@@ -91,6 +91,7 @@
   "dark_key": false,
   "defringe": false,
   "scale": 0.111,
+  "fix": "guide_green",
   "save": false,
   "sets": {
     "hero_body": {
@@ -122,7 +123,6 @@
         "cast1": "hero_body:cast1",
         "cast2": "hero_body:cast2",
         "skyward2": "hero_body:skyward2",
-        "gravity1": "hero_body:gravity1",
         "gravity2": "hero_body:gravity2",
         "ambush1": "hero_body:ambush1",
         "anchor1": "hero_body:anchor1",
@@ -299,12 +299,6 @@
         "skyward2": {
           "frames": [
             "skyward2"
-          ],
-          "fps": 1
-        },
-        "gravity1": {
-          "frames": [
-            "gravity1"
           ],
           "fps": 1
         },
