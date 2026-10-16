@@ -1,0 +1,75 @@
+{
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.2003,
+  "detail": 3.29,
+  "source": "art/source/boss_elder_treant_lunge.png",
+  "save": false,
+  "out_dir": "art/build/boss_elder_treant_lunge_b",
+  "cells": [
+    [
+      "lunge2"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      540
+    ],
+    "cols": [
+      [
+        380,
+        908
+      ]
+    ]
+  },
+  "overrides": {
+    "lunge2": {
+      "blank": [
+        [
+          31,
+          0,
+          40,
+          459
+        ],
+        [
+          31,
+          521,
+          40,
+          536
+        ],
+        [
+          452,
+          0,
+          461,
+          226
+        ],
+        [
+          452,
+          283,
+          461,
+          536
+        ],
+        [
+          468,
+          0,
+          520,
+          216
+        ],
+        [
+          468,
+          299,
+          520,
+          536
+        ],
+        [
+          513,
+          0,
+          520,
+          536
+        ]
+      ],
+      "drop_edge": true
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "source": "art/source/boss_old_clawbeard_lunge.png",
+  "save": false,
+  "out_dir": "art/build/boss_old_clawbeard_lunge",
+  "cells": [
+    [
+      "lunge_windup2",
+      "",
+      "lunge2",
+      "",
+      "lunge_recover"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.2978,
+  "detail": 3.27,
+  "grid": {
+    "rows": [
+      0,
+      540
+    ],
+    "cols": [
+      [
+        0,
+        353,
+        363,
+        881,
+        892,
+        1260
+      ]
+    ]
+  },
+  "overrides": {}
+}

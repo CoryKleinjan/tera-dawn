@@ -1,0 +1,35 @@
+{
+  "source": "art/source/boss_lantern_wraith_shot.png",
+  "save": false,
+  "out_dir": "art/build/boss_lantern_wraith_shot",
+  "cells": [
+    [
+      "shot_windup2",
+      "",
+      "shot2",
+      "",
+      "shot_recover"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.2654,
+  "detail": 2.72,
+  "grid": {
+    "rows": [
+      0,
+      540
+    ],
+    "cols": [
+      [
+        0,
+        416,
+        423,
+        837,
+        844,
+        1260
+      ]
+    ]
+  },
+  "overrides": {}
+}

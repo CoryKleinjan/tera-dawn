@@ -1,0 +1,60 @@
+{
+  "source": "art/source/boss_lantern_wraith_phase.png",
+  "save": false,
+  "out_dir": "art/build/boss_lantern_wraith_phase",
+  "cells": [
+    [
+      "phase1",
+      "",
+      "phase2",
+      "",
+      "phase3"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.2615,
+  "detail": 2.72,
+  "grid": {
+    "rows": [
+      0,
+      540
+    ],
+    "cols": [
+      [
+        0,
+        417,
+        424,
+        832,
+        838,
+        1260
+      ]
+    ]
+  },
+  "overrides": {
+    "phase1": {
+      "crop": [
+        0,
+        0,
+        10000,
+        468
+      ]
+    },
+    "phase2": {
+      "crop": [
+        0,
+        0,
+        10000,
+        467
+      ]
+    },
+    "phase3": {
+      "crop": [
+        0,
+        0,
+        10000,
+        467
+      ]
+    }
+  }
+}
