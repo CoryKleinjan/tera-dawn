@@ -10,6 +10,6 @@ display_name = "Warlord Brannoc"
 title = "Warrior Instructor"
 sprite_frames = ExtResource("2_sprite")
 greeting = "Strength is forged, not found. Step up to the anvil, if you dare."
-lines = PackedStringArray("Advance at level 10, with the stat the path asks for.", "Practise on the fields outside town. That's what they're for.")
+lines = PackedStringArray("Pass my Job Test and the path is yours.", "Practise on the fields outside town. That's what they're for.")
 instructs = Array[StringName]([&"warrior"])
 storage = false

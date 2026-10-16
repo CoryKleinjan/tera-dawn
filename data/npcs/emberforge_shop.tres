@@ -11,6 +11,6 @@ display_name = "Smith Tamsin"
 title = "Equipment"
 sprite_frames = ExtResource("2_sprite")
 greeting = "Gear for the Warrior path. Take a look."
-lines = PackedStringArray("Everything here's made in town.", "Check the level and stat each piece asks for.")
+lines = PackedStringArray("Everything here's made in town.", "Check the stat each piece asks for.")
 shop = ExtResource("3_forge_armory")
 storage = false

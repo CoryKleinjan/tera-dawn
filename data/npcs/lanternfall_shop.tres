@@ -12,6 +12,6 @@ display_name = "Fence Quill"
 title = "Equipment"
 sprite_frames = ExtResource("2_sprite")
 greeting = "Gear for the Thief path. Take a look."
-lines = PackedStringArray("Everything here's made in town.", "Check the level and stat each piece asks for.")
+lines = PackedStringArray("Everything here's made in town.", "Check the stat each piece asks for.")
 shop = ExtResource("3_fence")
 storage = false
