@@ -17,7 +17,7 @@ TDWorld  ───────────────────────�
 - **Server** (`scripts/server/`): `TDServer` holds every connected player as a `SimPlayer`
   (their `Character`, position and timers) and runs one `MapInstance` per visited map: its
   `SimMob`s, the `SimDrop`s on the ground and the players on it. It decides everything that
-  matters: hits, damage, kills, EXP, levels, drops, who picks what up, HP and MP, potions,
+  matters: hits, damage, kills, Dawn Essence, drops, who picks what up, HP and MP, potions,
   gear, portals, fainting. It never keeps characters itself: it sends them back to their
   players' games to save (`TDServer.save`, `ev_save`). `TDServer` itself keeps the players, maps, saving and the requests about moving and
   fighting; the other requests are handled by its parts in `scripts/server/services/`
@@ -33,7 +33,7 @@ TDWorld  ───────────────────────�
   `WorldCamera` follows your hero). Snapshots go out 20 times a
   second as packed bytes (`SnapshotCodec`) so even a busy map fits in one network packet:
   they hold only positions, facing, HP, animation and flags, and leave out monsters that
-  haven't changed (every monster goes in once a second). A player's name, level, job, guild,
+  haven't changed (every monster goes in once a second). A player's name, job, guild,
   pet and worn gear go separately (`ev_player_info`), reliably and only when they change.
 - **Net** (`scripts/autoload/net.gd`) is the whole protocol in one file. `req_*` methods go from
   a client to the server (grouped by the server part that answers them), `ev_*` methods from the server to clients. UI and actors call
@@ -71,14 +71,13 @@ computer, and they bring one along to whatever game they play.
   they're in the world. A friend who connects gets `ev_welcome` (on to their character
   select), or, when the game already has `Net.MAX_PLAYERS` counting the host, `ev_refused`
   ("This game is full") and is dropped. `Net.play` sends the picked character's data with
-  `req_play`; `TDLobby.on_play` reads it (`CharacterStore.from_dict`, which also settles its
-  Skill Points), puts it on the starting map if the game doesn't have the map it was on, and
+  `req_play`; `TDLobby.on_play` reads it (`CharacterStore.from_dict`), puts it on the starting map if the game doesn't have the map it was on, and
   `TDServer.enter_game` refuses a name that's already playing. `req_leave_character` saves
   and answers `ev_left_world` (back to character select, still in the game; leaving while
   fainted wakes you in town first). Every other request is ignored until a character is in
   the world, because the server finds the player by peer first.
 - **Saving**: the server sends each player their character (`ev_save`) every
-  `TDServer.SAVE_EVERY` ticks, on map changes, level ups and other big moments, when they
+  `TDServer.SAVE_EVERY` ticks, on map changes and other big moments, when they
   leave the world, and when the host stops. `Net.ev_save` writes it to `Net.saves`, only for
   the character being played. The host's own character goes the same way, to itself.
 - **Encryption** (`TDTls`): a host turns on DTLS for ENet with the key and certificate in
@@ -106,7 +105,7 @@ monsters it splits into (those sleep, dead, until their parent is defeated).
 `TDSocial` (`scripts/server/social.gd`, owned by the server) runs everything players do with
 each other: chat and its slash commands, invitations (`ev_invite` / `req_invite_answer`),
 buddies (kept on the Character), parties (server memory only; `party_shares` hands out kill
-EXP), trades (offers are held by the server until both press Trade, then swapped, or handed
+essence), trades (offers are held by the server until both press Trade, then swapped, or handed
 back on cancel), guilds (saved in `guilds.data` next to the character saves) and fame. Each player gets a summary of their buddies, party and
 guild through `ev_social` whenever it changes (`Game.social`); the community window, the
 player menu, the party HP list and the trade window (`scripts/ui/windows/`) read it.

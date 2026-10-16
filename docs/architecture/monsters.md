@@ -9,7 +9,7 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
    the animations `idle`, `move`, `attack`, `hurt` and `die` (any missing one falls back to
    `idle`; single images get a little procedural bob and squash instead).
 2. Create `data/monsters/<id>.tres` as a **MonsterDef** (in the editor: right-click
-   `data/monsters/` → New Resource → MonsterDef). Fill in `id`, name, level, HP, attack, EXP,
+   `data/monsters/` → New Resource → MonsterDef). Fill in `id`, name, level, HP, attack, `essence`,
    speed, hitbox `size`, and either `texture` or `sprite_frames`. Use `sprite_scale` if the art
    is too big or small next to the hero.
 3. Add drops: each `DropEntry` is an item, a chance and an amount range.

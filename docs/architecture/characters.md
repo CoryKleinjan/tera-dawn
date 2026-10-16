@@ -5,9 +5,9 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
 ## Character creation and how heroes show
 
 **Create** on character select opens the character creator (`TDCreator`): a name and the
-starting outfit (`NewCharacter`). `Net.create_character` makes a level 1 character in the
+starting outfit (`NewCharacter`). `Net.create_character` makes a new character in the
 starting job (`Character.START_JOB`) and saves it on this computer (`CharacterStore.create`),
-then character select shows the list (name, level and job) with the new character picked.
+then character select shows the list (name and job) with the new character picked.
 
 - **Outfit** choices come from the starting job's `creator_gear` (one piece per kind). It is
   empty for now (no starting outfits are painted yet), so the creator offers none.
@@ -75,10 +75,10 @@ then character select shows the list (name, level and job) with the new characte
 
 ### Balance
 
-`Balance` builds a typical character for any job and level (points in the main stat, the best
-gear they could wear) and works out how many hits of their main attack a monster takes and how
-many kills a level needs. The smoke test keeps every job inside `Balance.BAND` against every
-monster of its level; `tests/balance_report.tscn` prints the full table when tuning.
+`Balance` builds a typical character for any job and tier of progress (stat points bought in
+the main stat, the best gear made for that tier) and works out how many hits of their main
+attack a monster takes and how many kills pay for a tier. The smoke test keeps every job inside
+`Balance.BAND` against every monster of its tier; `tests/balance_report.tscn` prints the full table when tuning.
 
 ### How to add something the player does
 
