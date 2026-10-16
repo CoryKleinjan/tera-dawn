@@ -37,7 +37,13 @@
         "walk3": "thornling:walk3",
         "attack": "thornling:attack",
         "hurt": "thornling:hurt",
-        "defeated": "thornling:defeated"
+        "defeated": "thornling:defeated",
+        "jump1": "monanim_thornling:jump1",
+        "jump2": "monanim_thornling:jump2",
+        "knock_up": "monanim_thornling:knock_up",
+        "knock_down": "monanim_thornling:knock_down",
+        "pounce_windup": "monanim_thornling:pounce_windup",
+        "pounce": "monanim_thornling:pounce"
       },
       "anchor": "mass",
       "baseline": "bottom",
@@ -79,6 +85,38 @@
           ],
           "fps": 1,
           "loop": false
+        },
+        "jump": {
+          "frames": [
+            "jump1",
+            "jump2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "knock_up": {
+          "frames": [
+            "knock_up"
+          ],
+          "fps": 1
+        },
+        "knock_down": {
+          "frames": [
+            "knock_down"
+          ],
+          "fps": 1
+        },
+        "pounce_windup": {
+          "frames": [
+            "pounce_windup"
+          ],
+          "fps": 1
+        },
+        "pounce": {
+          "frames": [
+            "pounce"
+          ],
+          "fps": 1
         }
       }
     }

@@ -37,7 +37,12 @@
         "fly3": "grove_wisp:fly3",
         "attack": "grove_wisp:attack",
         "hurt": "grove_wisp:hurt",
-        "defeated": "grove_wisp:defeated"
+        "defeated": "grove_wisp:defeated",
+        "swoop_windup": "monanim_grove_wisp:swoop_windup",
+        "swoop": "monanim_grove_wisp:swoop",
+        "knock_down": "monanim_grove_wisp:knock_down",
+        "shot_windup": "monanim_grove_wisp_b:shot_windup",
+        "shot": "monanim_grove_wisp_b:shot"
       },
       "anchor": "mass",
       "baseline": "cell",
@@ -79,6 +84,36 @@
           ],
           "fps": 1,
           "loop": false
+        },
+        "swoop_windup": {
+          "frames": [
+            "swoop_windup"
+          ],
+          "fps": 1
+        },
+        "swoop": {
+          "frames": [
+            "swoop"
+          ],
+          "fps": 1
+        },
+        "knock_down": {
+          "frames": [
+            "knock_down"
+          ],
+          "fps": 1
+        },
+        "shot_windup": {
+          "frames": [
+            "shot_windup"
+          ],
+          "fps": 1
+        },
+        "shot": {
+          "frames": [
+            "shot"
+          ],
+          "fps": 1
         }
       }
     }

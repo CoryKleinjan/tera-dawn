@@ -1,0 +1,31 @@
+{
+  "source": "art/source/monanim_cliff_harpy_b.png",
+  "save": false,
+  "out_dir": "art/build/monanim_cliff_harpy_b",
+  "cells": [
+    [
+      "shot_windup",
+      "",
+      "shot"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "scale": 0.1293,
+  "detail": 2.56,
+  "grid": {
+    "rows": [
+      0,
+      550
+    ],
+    "cols": [
+      [
+        0,
+        399,
+        402,
+        800
+      ]
+    ]
+  }
+}

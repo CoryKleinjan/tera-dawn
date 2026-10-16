@@ -37,7 +37,12 @@
         "fly3": "cliff_harpy:fly3",
         "attack": "cliff_harpy:attack",
         "hurt": "cliff_harpy:hurt",
-        "defeated": "cliff_harpy:defeated"
+        "defeated": "cliff_harpy:defeated",
+        "swoop_windup": "monanim_cliff_harpy:swoop_windup",
+        "swoop": "monanim_cliff_harpy:swoop",
+        "knock_down": "monanim_cliff_harpy:knock_down",
+        "shot_windup": "monanim_cliff_harpy_b:shot_windup",
+        "shot": "monanim_cliff_harpy_b:shot"
       },
       "anchor": "mass",
       "baseline": "cell",
@@ -79,6 +84,36 @@
           ],
           "fps": 1,
           "loop": false
+        },
+        "swoop_windup": {
+          "frames": [
+            "swoop_windup"
+          ],
+          "fps": 1
+        },
+        "swoop": {
+          "frames": [
+            "swoop"
+          ],
+          "fps": 1
+        },
+        "knock_down": {
+          "frames": [
+            "knock_down"
+          ],
+          "fps": 1
+        },
+        "shot_windup": {
+          "frames": [
+            "shot_windup"
+          ],
+          "fps": 1
+        },
+        "shot": {
+          "frames": [
+            "shot"
+          ],
+          "fps": 1
         }
       }
     }
