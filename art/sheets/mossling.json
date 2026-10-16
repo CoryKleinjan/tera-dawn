@@ -30,7 +30,13 @@
         "walk3": "mossling:walk3",
         "attack": "mossling:attack",
         "hurt": "mossling:hurt",
-        "defeated": "mossling:defeated"
+        "defeated": "mossling:defeated",
+        "jump1": "monanim_mossling:jump1",
+        "jump2": "monanim_mossling:jump2",
+        "knock_up": "monanim_mossling:knock_up",
+        "knock_down": "monanim_mossling:knock_down",
+        "pounce": "monanim_mossling:pounce",
+        "pounce_windup": "monanim_mossling_b:pounce_windup"
       },
       "anchor": "mass",
       "baseline": "bottom",
@@ -72,6 +78,38 @@
           ],
           "fps": 1,
           "loop": false
+        },
+        "jump": {
+          "frames": [
+            "jump1",
+            "jump2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "knock_up": {
+          "frames": [
+            "knock_up"
+          ],
+          "fps": 1
+        },
+        "knock_down": {
+          "frames": [
+            "knock_down"
+          ],
+          "fps": 1
+        },
+        "pounce": {
+          "frames": [
+            "pounce"
+          ],
+          "fps": 1
+        },
+        "pounce_windup": {
+          "frames": [
+            "pounce_windup"
+          ],
+          "fps": 1
         }
       }
     }

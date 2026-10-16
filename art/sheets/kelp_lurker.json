@@ -37,7 +37,15 @@
         "hop3": "kelp_lurker:hop3",
         "attack": "kelp_lurker:attack",
         "hurt": "kelp_lurker:hurt",
-        "defeated": "kelp_lurker:defeated"
+        "defeated": "kelp_lurker:defeated",
+        "jump1": "monanim_kelp_lurker:jump1",
+        "jump2": "monanim_kelp_lurker:jump2",
+        "knock_up": "monanim_kelp_lurker:knock_up",
+        "knock_down": "monanim_kelp_lurker:knock_down",
+        "pounce_windup": "monanim_kelp_lurker:pounce_windup",
+        "pounce": "monanim_kelp_lurker:pounce",
+        "slam_windup": "monanim_kelp_lurker:slam_windup",
+        "slam": "monanim_kelp_lurker:slam"
       },
       "anchor": "mass",
       "baseline": "cell",
@@ -78,6 +86,50 @@
           ],
           "fps": 1,
           "loop": false
+        },
+        "jump": {
+          "frames": [
+            "jump1",
+            "jump2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "knock_up": {
+          "frames": [
+            "knock_up"
+          ],
+          "fps": 1
+        },
+        "knock_down": {
+          "frames": [
+            "knock_down"
+          ],
+          "fps": 1
+        },
+        "pounce_windup": {
+          "frames": [
+            "pounce_windup"
+          ],
+          "fps": 1
+        },
+        "pounce": {
+          "frames": [
+            "pounce"
+          ],
+          "fps": 1
+        },
+        "slam_windup": {
+          "frames": [
+            "slam_windup"
+          ],
+          "fps": 1
+        },
+        "slam": {
+          "frames": [
+            "slam"
+          ],
+          "fps": 1
         }
       }
     }

@@ -1,0 +1,35 @@
+{
+  "source": "art/source/monanim_dusk_moth.png",
+  "save": false,
+  "out_dir": "art/build/monanim_dusk_moth",
+  "cells": [
+    [
+      "knock_down",
+      "",
+      "swoop_windup",
+      "",
+      "swoop"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "scale": 0.1238,
+  "detail": 2.56,
+  "grid": {
+    "rows": [
+      0,
+      550
+    ],
+    "cols": [
+      [
+        0,
+        424,
+        427,
+        851,
+        854,
+        1200
+      ]
+    ]
+  }
+}

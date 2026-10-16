@@ -1,0 +1,91 @@
+{
+  "source": "art/source/monanim_glowcap.png",
+  "save": false,
+  "out_dir": "art/build/monanim_glowcap",
+  "cells": [
+    [
+      ""
+    ],
+    [
+      "",
+      "jump1",
+      "",
+      "jump2",
+      "",
+      "knock_up",
+      ""
+    ],
+    [
+      ""
+    ],
+    [
+      ""
+    ],
+    [
+      ""
+    ],
+    [
+      "",
+      "knock_down",
+      "",
+      "pounce_windup",
+      "",
+      "pounce",
+      ""
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "scale": 0.1464,
+  "detail": 2.56,
+  "grid": {
+    "rows": [
+      0,
+      12,
+      519,
+      530,
+      594,
+      606,
+      1100
+    ],
+    "cols": [
+      [
+        0,
+        1200
+      ],
+      [
+        0,
+        12,
+        396,
+        408,
+        792,
+        804,
+        1187,
+        1200
+      ],
+      [
+        0,
+        1200
+      ],
+      [
+        0,
+        1200
+      ],
+      [
+        0,
+        1200
+      ],
+      [
+        0,
+        12,
+        396,
+        408,
+        792,
+        804,
+        1187,
+        1200
+      ]
+    ]
+  }
+}
