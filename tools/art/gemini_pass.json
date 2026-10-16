@@ -20428,6 +20428,29 @@
    ],
    "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game\\'s monster \"Seedwing\" once, floating in its idle pose on magenta. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, markings, face, every glowing part, light-mote, gem, flame or other detail it has in its idle pose, the same size as in the first attached picture, the same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different from the others. Every glowing part and detail it has in the first attached picture is there in every cell. It always faces RIGHT, seen from the side, its face turned to the right. Both of its long maple-key wings and its leaf and sprout are there in every cell. It flies: every pose is in the air above the ground line except the knocked-down pose, which lies on it. Where a pose names body parts it does not have (legs, wings, mouth), show the same idea with the body it has. Cell 1, SWOOP WIND-UP: pulled up and back in the air, wings or body drawn back and raised high, ready to dive. Cell 2, SWOOP: diving steeply down and forward through the air, wings or body swept back, head first. Cell 3, KNOCKED DOWN: fallen out of the air and lying flat on its side on the ground line, wings or body limp and spread on the ground, dazed with dizzy swirl eyes and tongue out, still clearly alive (not defeated). Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
   }
+ },
+ {
+  "id": "mshero_body_skyward2_headback",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_skyward2_headback.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 01:56Z 'Yes' to the priced ~$0.07 edit): skyward2 from mshero_body_skyward2_edit cell 2 with the head tilted back so the raised near arm is clear of his face.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/skyward2_head_back_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cell 1 holds a painted bald chibi boy punching straight ahead, cell 2 the same boy springing up with one knee raised and one arm swept up high, cell 4 the same boy standing at rest. Leave cells 1 and 4 exactly as they are. Change only cell 2, and in cell 2 change only his head: tilt his whole head back, as if looking up toward the sky, so his chin lifts and his head leans back and away from the raised arm, leaving a clear gap of magenta between his face side of the head and the raised arm everywhere. The raised arm must not cross, touch or overlap his head or face at all. Keep his body, both arms, both legs, his raised fist and his low fist exactly as they are, with the same size, shape and position. He is bald, with no face and no hair: keep his head bare and the same size. He has exactly two arms and two legs. Do not add any weapon, object, ground, dust, motion lines, text or extra figure. Leave cells 3 and 5 to 8 empty. Keep the background flat pure magenta #FF00FF and keep the grid lines. Same painting style as the rest of the sheet. No text, no labels."
+  }
  }
 ]
 }
