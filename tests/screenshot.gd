@@ -586,7 +586,7 @@ func _run() -> void:
 
 ## Frames of a boss fighting the player on its own map (see "boss_anims"): its intro roar,
 ## each of its moves in order, its second wind and its fall, saved as boss_<id>_<nnnn>.png
-## every two ticks (30 a second, real time).
+## every four ticks (15 a second, real time).
 func _boss_anims(world: TDWorld, id: String) -> void:
 	# one physics tick per drawn frame, so a slow renderer doesn't skip ticks between shots
 	Engine.max_physics_steps_per_frame = 1
@@ -607,7 +607,7 @@ func _boss_anims(world: TDWorld, id: String) -> void:
 	var film := func(ticks: int) -> void:
 		var until: int = Net.server.tick + ticks
 		while Net.server.tick < until:
-			var next: int = Net.server.tick + 2
+			var next: int = Net.server.tick + 4
 			while Net.server.tick < next:
 				await _physics(1)
 			await _shot("boss_%s_%04d" % [id, shots[0]])
