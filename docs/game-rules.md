@@ -252,6 +252,10 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
 - Playing solo, the chat box shows only the last few lines, briefly; achievements are solo goals.
 - No controls box on screen, in towns or fields: the tutorial teaches the keys (its step hints
   show at the bottom), and the full list is in Settings > Controls.
+- Everything works on a gamepad (the Steam Deck). Holding the left trigger turns to quickslots
+  4-8 (Y, RB, LB, RT, B), Back opens a window menu, and with a window open a pad cursor stands
+  in for the mouse (A click and drag, X right-click, Y double-click, B closes). Key hints name
+  the pad's buttons while it's in use.
 - Skill icons are painted NPC-style badges: one bold subject (no people for Shoulder Bash or
   Rolling Dash) in a thick rounded frame of the job's colour: Beginner warm brown, Warrior
   crimson, Magician blue, Thief charcoal black with silver trim, Archer green, Pirate gold.
