@@ -22453,7 +22453,7 @@
  {
   "id": "mshero_thief_hair_b7",
   "prompts": null,
-  "batch": null,
+  "batch": "maple hero layers (edit)",
   "with": null,
   "refs": [],
   "save": "mshero_thief_hair_b7.png",
@@ -22466,13 +22466,40 @@
   ],
   "anchor": null,
   "size": "2K",
-  "note": "2026-10-16 thread 'Hero pose review' cross-job check (Cory 17:15Z 'you need to reference similar poses', 17:16Z 'bandana still need their own hair', 17:17Z 'reference all jobs poses against eachother'): the thief bandana's own hair (front, back, fainted): locks below the bandana, none out of its top HELD (Cory 18:48Z 'do the repaints'): flipped as it is, the bandana lies across his face on faint, so this sheet waits for Cory's own faint bandana placement; cell 3's guide is then rebuilt from it and \"batch\" set back to \"maple hero layers (edit)\".",
+  "note": "2026-10-16 thread 'Hero pose review' cross-job check (Cory 17:15Z 'you need to reference similar poses', 17:16Z 'bandana still need their own hair', 17:17Z 'reference all jobs poses against eachother'): the thief bandana's own hair (front, back, fainted): locks below the bandana, none out of its top. Released by Cory 19:45Z (\"you can go ahead and paint it now though\", \"ill just flip it to fit the faint position\"): cell 3 shows the bandana where the game puts it on faint now, and he flips the hair to fit in the pose editor.",
   "edit": {
    "base": "/mnt/project-files/art-sheets/maple-hero/bases/b7_bandana_hair_sil.png",
    "refs": [
     "/mnt/project-files/art-sheets/maple-hero/bases/b7_bandana_hair_ref.png"
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 3 each hold the flat outline of a small boy wearing a tied bandana: his head and body are flat bright green (#00FF00) and his bandana is flat pure blue (#0000FF), exactly as he wears it in cells 1 to 3 of the attached picture. Cell 1: standing, facing right in a slight three-quarter view, seen from the FRONT. Cell 2: standing, seen from BEHIND, his back to the viewer. Cell 3: lying flat on his back, fainted, his head on the right. Cells 4 to 8 are empty and must stay empty. Cells 5 to 7 of the attached picture show the same boy in the same three poses with his own hair and no bandana: short, messy, spiky chestnut-brown hair with a swept fringe. In cells 1 to 3, paint ONLY the bits of that same chestnut-brown hair that show below the bandana, and nothing else: the bandana covers the whole top of his head, so no hair sticks up out of its top or pokes out of its sides above the ears. Cell 1: a few short locks at his temple and in front of his ear, below the bandana's edge, and short locks at the back of his neck below the knot. Cell 2: short hair at the back of his head and neck, from under the bandana's bottom edge down to his nape, between his ears, with the knot's tails lying over it. Cell 3: a few short locks at his temple and in front of his ear below the bandana's edge, and short locks at the back of his head where it lies on the ground. Each lock starts at the edge of the blue bandana and lies over the green head, sized to match him. Paint the hair WHOLE and solid, every lock fully closed, with no holes. Do NOT paint the bandana: leave every blue pixel flat pure #0000FF exactly as it is, with no cloth, shading or outline on it. Do NOT paint the head, face, ears, body or anything else: leave every green pixel you do not paint hair over flat pure #00FF00, and leave the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Style: exactly the hair in cells 5 to 7 of the attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_mag_slippers_b8",
+  "prompts": null,
+  "batch": null,
+  "with": null,
+  "refs": [],
+  "save": "mshero_mag_slippers_b8.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Hero pose review' feet check (Cory 19:16Z 'as long as the foot matches which way it points for every pose and equip, thats fine'): the magician's back slipper on cast1 and skyward2 curled backwards while his foot and every other job's boot point forward; fresh paint with every toe forward.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b8_mag_slippers_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/b8_mag_slippers_body.png",
+    "/mnt/project-files/art-sheets/maple-hero/bases/b8_mag_slippers_look.png",
+    "/mnt/project-files/art-sheets/maple-hero/bases/b8_mag_slippers_example.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 and 2 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose. Cell 1: winding up a spell, standing in a low wide stance with his feet planted apart, elbows out, one fist at each hip. Cell 2: springing up on one leg, his other knee raised high, one arm punched straight out ahead and the other fist at his chest. Cells 3 to 8 are empty and must stay empty. He faces RIGHT in a slight three-quarter side view, seen from the FRONT. The second attached picture shows this exact piece already painted on the same boy in two other poses: copy its colours, materials, shape and details exactly, never its poses. The third attached picture is laid out like the base: in cells 1 and 2 a DIFFERENT pair of boots is already painted correctly on the same green boy. Copy only how they sit on his feet and which way each toe points; never copy their colours, materials or details. On each green shape, paint ONLY a pair of soft magician's slippers: deep blue cloth with gold trim around the opening and a gently curled pointed toe. EVERY slipper's toe points to the RIGHT, the way he faces, on the front foot AND on the back foot, exactly like the boots in the third attached picture; no toe ever points left and no curl ever sits at the left end of a slipper. Paint BOTH feet in every cell; each slipper is the same size as the green foot it covers and sits exactly on it, covering the whole foot, no bigger. The green shape is only a flat placement guide lying BEHIND everything you paint: paint each slipper WHOLE straight over it, with no gaps, notches, bites or holes anywhere. Paint nothing else: no legs, body, head, hands or other clothing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: exactly the painting style of the slippers in the second attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline. Keep the grid lines. No text, no labels."
   }
  }
 ]
