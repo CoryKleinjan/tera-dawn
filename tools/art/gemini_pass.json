@@ -8267,6 +8267,58 @@
    }
   },
   {
+   "id": "skill_icons_10",
+   "prompts": null,
+   "batch": "Monster-control skill icons",
+   "with": null,
+   "refs": [],
+   "save": "skill_icons_10.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    2,
+    2
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-16 monster-control skills thread (#251): icons for Skyward Cleave, Gravity Well, Shadow Ambush, Pinning Shot, replacing the stand-ins.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x2.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/skill_icons_test.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint FOUR separate skill icons for my 2D side-scrolling game, laid out in 2 rows of 2, each a square badge centred in its own quarter of the canvas and fully inside it (no badge touches or runs off any canvas edge), all the same size, with a wide band of plain magenta (at least a tenth of the canvas) around and between them, not touching. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished skill icons from the same set: match their badge shape, frame thickness, metal trim, inner background glow, painting style and level of detail exactly, with a bold dark brown outline like the NPCs'. Each icon is a square badge with softly rounded corners: a thick painted frame with a thin bright metal trim, and inside it a darker painted background of the frame's colour with a soft glow behind the subject. Each icon shows ONE bold, simple subject filling most of the badge, lit brightly enough to read clearly even when the icon is shown very small. No people, no heads, no faces, no hands, no bodies: objects only. Top left, Skyward Cleave (frame deep crimson red, gold trim): a steel sword sweeping upward in a bright golden arc of light from bottom left to top right, flinging a chunk of rock and dust high into the air above it. Top right, Gravity Well (frame rich royal blue, silver trim): a swirling deep blue and violet vortex of magic in the upper half pulling three falling rocks straight down onto cracked ground, a bright ring shockwave bursting out along the ground. Bottom left, Shadow Ambush (frame charcoal black, thin silver trim): a curved dagger lunging out of a puff of dark purple smoke, with three small bright golden stars circling above the blade. Bottom right, Pinning Shot (frame forest green, gold trim): a wooden arrow with green fletching held fast in mid-air inside a glowing green ring of light, short bright lines showing it is locked in place. Strict rules: 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) Bold dark brown outline around each badge and its subject, the same thickness on all. 3) No letters, words or numbers anywhere. 4) Flat pure magenta #FF00FF background everywhere outside the badges."
+   }
+  },
+  {
+   "id": "skill_icons_11",
+   "prompts": null,
+   "batch": "Monster-control skill icons",
+   "with": null,
+   "refs": [],
+   "save": "skill_icons_11.png",
+   "replaces": null,
+   "kind": "still",
+   "stands": false,
+   "cells": [
+    1,
+    1
+   ],
+   "anchor": null,
+   "size": "2K",
+   "note": "2026-10-16 monster-control skills thread (#251): icon for Anchor Haul, replacing the stand-in.",
+   "edit": {
+    "base": "/mnt/project-files/art-sheets/skill-icons/blank_1x1.png",
+    "refs": [
+     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+     "/mnt/project-files/art-sheets/gemini-pass-1/skill_icons_test.png"
+    ],
+    "text": "The first image is an empty magenta canvas. On it, paint ONE skill icon for my 2D side-scrolling game: a square badge centred on the canvas and fully inside it, with a wide band of plain magenta (at least a tenth of the canvas) all around it. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished skill icons from the same set: match their badge shape, frame thickness, metal trim, inner background glow, painting style and level of detail exactly, with a bold dark brown outline like the NPCs'. Each icon is a square badge with softly rounded corners: a thick painted frame with a thin bright metal trim, and inside it a darker painted background of the frame's colour with a soft glow behind the subject. Each icon shows ONE bold, simple subject filling most of the badge, lit brightly enough to read clearly even when the icon is shown very small. No people, no heads, no faces, no hands, no bodies: objects only. Anchor Haul (frame warm gold, darker bronze trim): a heavy dark iron ship's anchor on a thick chain, being hauled back from right to left, the chain pulled taut in a curve, with bold speed lines behind the anchor. Strict rules: 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) Bold dark brown outline around each badge and its subject, the same thickness on all. 3) No letters, words or numbers anywhere. 4) Flat pure magenta #FF00FF background everywhere outside the badges."
+   }
+  },
+  {
    "id": "skill_icons_3",
    "prompts": null,
    "batch": "Class skill icons (set)",
