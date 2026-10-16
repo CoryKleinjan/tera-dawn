@@ -98,6 +98,8 @@ var dist := 0.0
 var camera_attrs: CameraAttributesPractical
 ## The finishing pass (post.gdshader): blur, grade and the fade between maps.
 var post_material: ShaderMaterial
+## Leaves framing the screen's top corners, on maps whose look has them.
+var corner_frame := CornerFrame.new()
 ## 0 shows the scene, 1 is faded out (see fade_to).
 var fade := 0.0
 var _fade_target := 0.0
@@ -292,6 +294,7 @@ func _ready() -> void:
 	_build_sun()
 	_build_motes()
 	_build_post()
+	add_child(corner_frame)
 	apply_video(Settings.video)
 
 func _exit_tree() -> void:
@@ -416,6 +419,7 @@ func build() -> void:
 	_apply_biome(biome)
 	_apply_fog(map)
 	_apply_place(map)
+	corner_frame.show_for(biome)
 	TerrainBuilder.new(self, map_root).build(map, world.platforms)
 	backdrop = BackdropBuilder.new(self, map_root)
 	backdrop.build(map, rng)
