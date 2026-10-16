@@ -71,7 +71,13 @@
         "shot_recover": "boss_arcane_sentinel_shot:shot_recover",
         "slam_windup2": "boss_arcane_sentinel_slam:slam_windup2",
         "slam2": "boss_arcane_sentinel_slam:slam2",
-        "slam_recover": "boss_arcane_sentinel_slam:slam_recover"
+        "slam_recover": "boss_arcane_sentinel_slam:slam_recover",
+        "intro1": "boss_arcane_sentinel_intro:intro1",
+        "intro2": "boss_arcane_sentinel_intro:intro2",
+        "intro3": "boss_arcane_sentinel_intro:intro3",
+        "phase1": "boss_arcane_sentinel_phase:phase1",
+        "phase2": "boss_arcane_sentinel_phase:phase2",
+        "phase3": "boss_arcane_sentinel_phase:phase3"
       },
       "anchor": "mass",
       "baseline": "bottom",
@@ -195,6 +201,34 @@
             "slam_recover"
           ],
           "fps": 1
+        },
+        "intro": {
+          "frames": [
+            "intro1",
+            "intro2",
+            "intro3"
+          ],
+          "fps": 5,
+          "durations": [
+            2,
+            4,
+            2
+          ],
+          "loop": false
+        },
+        "phase": {
+          "frames": [
+            "phase1",
+            "phase2",
+            "phase3"
+          ],
+          "fps": 5,
+          "durations": [
+            2,
+            4,
+            2
+          ],
+          "loop": false
         }
       }
     }

@@ -25,13 +25,53 @@ func build(map: MapDef, rng: RandomNumberGenerator) -> void:
 
 ## The 3D heights of a strip or picture layer's top (x) and bottom (y) edges on `map`. The land is flat,
 ## so nothing hides the bottom edge of the nearest strip but the floor: its art runs on down
-## as painted ground, tall enough that the edge stays behind the floor or below the view
-## wherever the camera is (content_backdrop_test checks every map).
+## as painted ground, and on a tall map the strips sit lower (strip_center), so the edge stays
+## behind the floor or below the view wherever the camera is (content_backdrop_test checks
+## every map).
 static func strip_edges(map: MapDef, layer: BackdropLayerDef) -> Vector2:
-	var z := -layer.depth
+	var center := strip_center(map) if layer.mode == BackdropLayerDef.Mode.STRIP else TDStage.backdrop_center(map)
+	return _edges_for(map, layer, center)
+
+static func _edges_for(map: MapDef, layer: BackdropLayerDef, center: float) -> Vector2:
 	var tex: Texture2D = layer.textures[0]
-	var top := TDStage.screen_height_at(layer.screen_top.x, z, TDStage.backdrop_center(map))
+	var top := TDStage.screen_height_at(layer.screen_top.x, -layer.depth, center)
 	return Vector2(top, top - tex.get_height() * layer_pixel_size(map, layer))
+
+## The view centre (game y) the strips are placed for: the backdrop's own, or on a map taller
+## than the nearest strip covers, lower, just enough that its painted ground stays behind the
+## floor or below the view wherever the camera is. Every strip moves together, so they keep
+## their look; climbing a tall map, they sink away below you.
+static func strip_center(map: MapDef) -> float:
+	var center := TDStage.backdrop_center(map)
+	var near := nearest_layer(map.look())
+	if near == null or near.mode != BackdropLayerDef.Mode.STRIP:
+		return center
+	var low := _floor_hides(map, -near.depth)
+	# lowering the view centre a game pixel lowers the strip 1 / PX
+	return center + maxf(0.0, (_edges_for(map, near, center).y - low) * TDStage.PX)
+
+## The strip or picture layer nearest the camera (its bottom shows lowest), or null.
+static func nearest_layer(b: BiomeDef) -> BackdropLayerDef:
+	var near: BackdropLayerDef = null
+	for layer in b.backdrop:
+		if layer.mode != BackdropLayerDef.Mode.SCATTER and not layer.textures.is_empty():
+			if near == null or layer.depth < near.depth:
+				near = layer
+	return near
+
+## The highest 3D height at depth z that ever shows, at any view centre, between the floor's
+## painted top edge and the bottom of the view: a strip whose bottom edge is no higher never
+## shows it. Lower centres raise the floor faster than the strip, higher ones put it below the
+## view, so it is highest where the floor's edge meets the bottom of the view.
+static func _floor_hides(map: MapDef, z: float) -> float:
+	var r := TDStage.view_center_range(map.height)
+	var edge := float(map.ground_y)
+	if map.look().platform_middle:
+		edge = PlatformSkin.span(map.look(), map.ground_y).x
+	var floor_top := TDStage.to3d(Vector2(0, edge)).y
+	var meets := (TDStage.screen_height_at(1.0, TDStage.LAND_FRONT, 0.0) - floor_top) * TDStage.PX
+	var c := clampf(meets, r.x, r.y)
+	return TDStage.screen_height_at(minf(TDStage.screen_frac_at(floor_top, TDStage.LAND_FRONT, c), 1.0), z, c)
 
 ## Texel size in 3D units of a strip or picture layer's art on `map`: a picture is stretched
 ## to cover the whole span the view sweeps over, a strip shows at its `texel`.

@@ -50,6 +50,13 @@ const KEEP_COLOR := Color(0, 0, 0, 0)
 ## Leaves out the biome's background houses (town_decor), for a town whose own buildings
 ## already fill the street.
 @export var hide_town_decor := false
+## Leaves out the grass tufts along the land's edges and the plants on its platforms, for
+## land painted with its own grass and flowers.
+@export var hide_edge_grass := false
+@export var hide_platform_decor := false
+## Leaves in the screen's top corners (BiomeDef.frame_left / frame_right), when set.
+@export var frame_left: Texture2D
+@export var frame_right: Texture2D
 
 @export_group("Land")
 ## The sub zone's own land pieces (BiomeDef's platform, terrace and ground pictures), e.g. a
@@ -100,6 +107,13 @@ func apply(base: BiomeDef) -> BiomeDef:
 		b.ground_decor = decor
 	if hide_town_decor:
 		b.town_decor = []
+	if hide_edge_grass:
+		b.edge_grass = []
+	if hide_platform_decor:
+		b.platform_decor = []
+	for key in ["frame_left", "frame_right"]:
+		if get(key) != null:
+			b.set(key, get(key))
 	for key in LAND:
 		if get(key) != null:
 			b.set(key, get(key))

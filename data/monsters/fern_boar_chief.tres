@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MonsterDef" load_steps=18 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
-[ext_resource type="SpriteFrames" path="res://assets/animations/bramble_boar.tres" id="2_flame_boar_chief"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/fern_boar_chief.tres" id="2_fern_boar_chief"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/chief_mane.tres" id="loot_chief_mane"]
@@ -66,9 +66,9 @@ speed = 1.0
 size = Vector2(103.0, 87.0)
 sight = 700.0
 moves = Array[ExtResource("mv_script")]([ExtResource("mv_boss_charge"), ExtResource("mv_boss_slam"), ExtResource("mv_boss_pounce")])
-sprite_frames = ExtResource("2_flame_boar_chief")
+intro_ticks = 100
+sprite_frames = ExtResource("2_fern_boar_chief")
 sprite_scale = 1.1
 drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_loot0"), SubResource("Resource_loot1"), SubResource("Resource_loot6")])
 boss = true
 respawn_ticks = Vector2i(1800, 2400)
-tint = Color(0.8, 1.0, 0.72, 1)

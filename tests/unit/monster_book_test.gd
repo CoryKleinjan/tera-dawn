@@ -1,5 +1,5 @@
 extends TestCase
-## MonsterBook: kills, cards up to a full set, completed pages, the book level and the
+## MonsterBook: kills, cards up to a full set, completed pages, the book rank and the
 ## stat bonus it gives the character, and the save format.
 
 var fx: UnitHelpers
@@ -22,7 +22,7 @@ func test_unseen_monster_is_empty() -> void:
 	check_eq(book.kills(m), 0, "kills")
 	check_eq(book.cards(m), 0, "cards")
 	check(not book.complete(m), "not complete")
-	check_eq(book.level(), 1, "book starts at level 1")
+	check_eq(book.rank(), 1, "book starts at rank 1")
 
 func test_kills_count_per_monster() -> void:
 	var a := fx.monster(&"t_a")
@@ -52,13 +52,13 @@ func test_card_alone_marks_seen() -> void:
 	check(book.seen(m), "seen")
 	check_eq(book.kills(m), 0, "no kills")
 
-func test_book_level_every_three_pages() -> void:
+func test_book_rank_every_three_pages() -> void:
 	var expect := [1, 1, 1, 2, 2, 2, 3]
 	for n in expect.size():
 		if n > 0:
 			_complete(fx.monster(StringName("t_m%d" % n)))
 		check_eq(book.completed(), n, "%d pages" % n)
-		check_eq(book.level(), expect[n], "level with %d pages" % n)
+		check_eq(book.rank(), expect[n], "rank with %d pages" % n)
 
 func test_bonus_is_one_per_level_past_first() -> void:
 	check_eq(book.bonus().nonzero().size(), 0, "level 1 gives nothing")
@@ -81,7 +81,7 @@ func test_book_bonus_reaches_character_stats() -> void:
 		for i in CardDef.SET:
 			c.book.add_card(m)
 	c.recalc()
-	check_eq(c.stats.strength, 11, "book level 2 adds 1 STR")
+	check_eq(c.stats.strength, 11, "book rank 2 adds 1 STR")
 	check_eq(c.base.strength, 10, "base untouched")
 
 func test_save_round_trip() -> void:

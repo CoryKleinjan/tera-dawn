@@ -16,6 +16,8 @@ const PORTAL_GROUND := 19.0
 ## How opaque the portal's light pillar is: still a bright pillar, with the land and backdrop
 ## behind it showing faintly through.
 const PORTAL_ALPHA := 0.7
+## How far back a chest or wall stands (content depth): just behind the walking line.
+const BREAKABLE_DEPTH := -1.0
 ## Open ground between two of a town's background houses (`town_decor`), and the least
 ## between one and a building's edge, in game pixels.
 const BACK_HOUSE_GAP := 100.0
@@ -62,6 +64,8 @@ func build(map: MapDef, platforms: Array[Platform], rng: RandomNumberGenerator) 
 			_door(p, platforms[p.platform], biome)
 		else:
 			_portal(p, platforms[p.platform], biome)
+	for i in map.breakables.size():
+		_breakable(i, map.breakables[i], platforms[map.breakables[i].platform])
 	_lanterns(map, biome, rng)
 	_flyers(map, biome, rng)
 
@@ -189,6 +193,17 @@ func _prop(p: PropPlacement, map: MapDef) -> void:
 		var l := TDStage.light(p.light_color, p.light_energy, 4.0)
 		l.position = s.position + Vector3(0, p.light_height / TDStage.PX, 0.6)
 		root.add_child(l)
+
+## A chest or wall that breaks open when hit (BreakableDef), standing just behind the walking
+## line at its `height`. TDStage.show_breakables shows it whole or broken for you.
+func _breakable(i: int, b: BreakableDef, pl: Platform) -> void:
+	if b.whole == null:
+		return
+	var s := TDStage.sprite(b.whole, b.texel() * TDStage.art_density(b.whole))
+	TDStage.stand_on_land(s, Vector2(b.x, pl.y + 3.0), BREAKABLE_DEPTH)
+	s.set_meta(&"rest", s.position)
+	root.add_child(s)
+	stage.breakables[i] = s
 
 ## A building standing at full size just behind the walking line, its door at `b.x`.
 ## Sized so it shows `height` game pixels tall at the play line despite standing further back.

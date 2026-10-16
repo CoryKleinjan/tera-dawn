@@ -9,8 +9,8 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
    the animations `idle`, `move`, `attack`, `hurt` and `die` (any missing one falls back to
    `idle`; single images get a little procedural bob and squash instead).
 2. Create `data/monsters/<id>.tres` as a **MonsterDef** (in the editor: right-click
-   `data/monsters/` → New Resource → MonsterDef). Fill in `id`, name, level, HP, attack, `essence`,
-   speed, hitbox `size`, and either `texture` or `sprite_frames`. Use `sprite_scale` if the art
+   `data/monsters/` → New Resource → MonsterDef). Fill in `id`, name, `level` (a hidden tuning tier, never shown),
+   HP, attack and `essence` as it should be on the nearest map to a town it lives on, speed, hitbox `size`, and either `texture` or `sprite_frames`. Use `sprite_scale` if the art
    is too big or small next to the hero.
 3. Add drops: each `DropEntry` is an item, a chance and an amount range.
 4. Optional: `flying` with `hover_height`, `boss`, a `light_color` or `aura_color` for
@@ -57,3 +57,9 @@ The server runs monsters (`SimMob`), so co-op players all see the same fight.
 - To tune a family, change its preset; to give one monster a different move, make a new
   preset file.
 
+## Strength by distance
+
+`MonsterStrength.on_map` makes a monster `PER_MAP` (15%) stronger for every map farther from the
+nearest town (`WorldRoutes.steps_from_town`) than the nearest map it lives on: its HP, the damage
+it deals and the Dawn Essence it gives (`SimMob.strength`, `max_hp()`, `essence()`). Bosses keep
+their own numbers. The client only sees HP as a fraction, so nothing changes there.

@@ -150,17 +150,20 @@ func leave(peer: int) -> void:
 	print("%s left" % p.character.name)
 
 ## Moves the player to map `id` at `x` (through a portal, a trip, a return scroll or
-## reviving), and tells them what's there.
-func enter_map(p: SimPlayer, id: StringName, x: float) -> void:
+## reviving), standing on platform `platform` (the floor unless a portal says otherwise),
+## and tells them what's there.
+func enter_map(p: SimPlayer, id: StringName, x: float, platform := 0) -> void:
 	if p.map:
 		social.changed_map(p)
 		_off_map(p)
 	scenes.stop(p)
 	var m := map_instance(id, p)
+	if platform < 0 or platform >= m.layout.platforms.size():
+		platform = 0
 	p.sitting = false
 	p.character.visit(id)
-	m.add_player(p, x)
-	Net.send(p.peer, &"ev_enter_map", [id, x, m.full_state()])
+	m.add_player(p, x, platform)
+	Net.send(p.peer, &"ev_enter_map", [id, x, m.full_state(), platform])
 	quests.progress(p, p.character.quests.record_visit(id))
 	save(p)
 	scenes.play(p, m.def.intro_scene)

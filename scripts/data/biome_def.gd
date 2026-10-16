@@ -79,6 +79,12 @@ extends Resource
 @export var portal_frames: Array[Texture2D] = []
 ## Rooms inside buildings: the doorway out, drawn on the back wall at every door portal.
 @export var door: Texture2D
+## Optional: dark leaves hanging into the screen's top corners, close to the camera, framing
+## the view like Hollow Knight's foreground plants (art/sheets/<area>_leaves.json: the left
+## and right halves of one 16:9 picture, each kept whole). Drawn over the world and under the
+## HUD, as tall as the screen, so they keep their place on any screen shape.
+@export var frame_left: Texture2D
+@export var frame_right: Texture2D
 
 @export_group("Ambient life")
 ## Birds or other small creatures crossing the sky behind the scene (their "move" or

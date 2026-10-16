@@ -36,7 +36,8 @@ extends Resource
 ## The town you wake up in after fainting here, and where a return scroll goes. Empty means
 ## this map if it's a town, else the starting map.
 @export var return_map: StringName
-## "Lv. 10-15": who it's for, shown on the world map.
+## "Lv. 10-15": the tuning tier it's made for. Never shown to players (there are no levels
+## in the game); content tests use it to keep the zones in order.
 @export var level_text := ""
 ## Inside a building: a small room with a wall instead of sky, entered by a door from
 ## `return_map` (the town it stands in). The world map shows you in that town.
@@ -54,6 +55,8 @@ extends Resource
 @export var platforms: Array[PlatformDef] = []
 @export var climbables: Array[ClimbableDef] = []
 @export var portals: Array[PortalDef] = []
+## Chests and walls that break open when the player hits them, once per character.
+@export var breakables: Array[BreakableDef] = []
 
 @export_group("Inhabitants")
 @export var spawns: Array[SpawnDef] = []

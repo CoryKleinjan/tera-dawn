@@ -359,10 +359,10 @@ func _hit_touching(mv: MonsterMove) -> void:
 		if p.peer in hit or not body.intersects(p.hurtbox.rect_at(p.position)):
 			continue
 		hit.append(p.peer)
-		mob.map.hurt_player(p, mob.def, mob.position.x, mv.power)
+		mob.map.hurt_player(p, mob.def, mob.position.x, mv.power * mob.strength)
 
 func _slam(mv: MonsterMove) -> void:
 	mob.map.broadcast(&"ev_mob_move", [mob.index, &"slam", mob.position.x, mob.position.y])
 	for p: SimPlayer in mob.map.players.values():
 		if absf(p.position.x - mob.position.x) <= mv.radius and absf(p.position.y - mob.plat.y) <= SLAM_FEET:
-			mob.map.hurt_player(p, mob.def, mob.position.x, mv.power)
+			mob.map.hurt_player(p, mob.def, mob.position.x, mv.power * mob.strength)

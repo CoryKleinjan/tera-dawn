@@ -8,8 +8,15 @@ func on_portal(peer: int) -> void:
 	if p == null or p.fainted():
 		return
 	var portal := p.map.layout.portal_at(p.position)
-	if portal and portal.open_to(p.character) and Content.maps.has(portal.target_map):
-		server.enter_map(p, portal.target_map, portal.target_x)
+	if portal == null or not portal.open_to(p.character) or not Content.maps.has(portal.target_map):
+		return
+	# the near end of a shortcut: its far end opens for good
+	var found := portal.opens_shortcut != &"" and p.character.find_secret(portal.opens_shortcut)
+	if found:
+		p.dirty_character = true
+	server.enter_map(p, portal.target_map, portal.target_x, portal.target_platform)
+	if found:
+		tell(p, "You found a shortcut.", Palette.SUN)
 
 ## Takes the player on trip `index` of the NPC `npc_id` they stand by, if they can pay its
 ## fare (TravelRoute.price).

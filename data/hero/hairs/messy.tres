@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="HeroStyleDef" load_steps=8 format=3]
+[gd_resource type="Resource" script_class="HeroStyleDef" format=3]
 
 [ext_resource type="Script" path="res://scripts/data/hero_style_def.gd" id="1_style"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/hero/hair.tres" id="2_frames"]
@@ -10,9 +10,6 @@
 
 [resource]
 script = ExtResource("1_style")
-frame_art = {
-&"roll2": &"roll1"
-}
 id = &"messy"
 display_name = "Messy"
 frames = ExtResource("2_frames")
@@ -22,7 +19,7 @@ nudges = {
 &"anchor2": Vector4(-26.6, 8.7, -12, 0),
 &"backstep": Vector4(-11.6, -12.2, 3, 0),
 &"cast1": Vector4(0.2, 2.8, -14, 0),
-&"cast2": Vector4(-5.2, -5.9, -0, 0),
+&"cast2": Vector4(-5.2, -5.9, 0, 0),
 &"gravity1": Vector4(21.6, 11.7, 0, 0),
 &"gravity2": Vector4(8.1, 28, 3, 0),
 &"hurt": Vector4(-24.5, 11.1, -24, 0),
@@ -30,16 +27,18 @@ nudges = {
 &"lunge": Vector4(26, 3.9, 3, 0),
 &"pinning": Vector4(5, 6.2, 15, 0),
 &"roll1": Vector4(12.4, 17.8, 45, 0),
-&"roll2": Vector4(-12.4, 62.2, -135, 0),
 &"sit": Vector4(-3.6, 23.7, 0, 0),
-&"skyward2": Vector4(-5.2, -5.9, -0, 0),
+&"skyward2": Vector4(-5.2, -5.9, 0, 0),
 &"swing2": Vector4(8.6, 7.1, 15, 0),
 &"swing3": Vector4(18.9, 14.6, 18, 0)
 }
+frame_art = {
+&"roll2": &""
+}
 under_hats = {
-&"novice_hat": ExtResource("3_under"),
+&"deckhand_tricorn": ExtResource("7_under"),
 &"footpad_bandana": ExtResource("4_under"),
 &"hunters_hood": ExtResource("5_under"),
-&"squire_helm": ExtResource("6_under"),
-&"deckhand_tricorn": ExtResource("7_under")
+&"novice_hat": ExtResource("3_under"),
+&"squire_helm": ExtResource("6_under")
 }

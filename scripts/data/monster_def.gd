@@ -6,6 +6,8 @@ extends Resource
 
 @export var id: StringName
 @export var display_name := ""
+## The tuning tier its numbers were made for (Balance checks it against players that far
+## along). Never shown to players: there are no levels in the game.
 @export var level := 1
 @export var max_hp := 10
 ## Damage dealt to the player on contact, before the player's defence.
