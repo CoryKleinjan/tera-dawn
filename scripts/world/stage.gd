@@ -437,25 +437,35 @@ func show_open_portals(c: Character) -> void:
 		node.visible = (locked_portals[node] as PortalDef).open_to(c)
 
 ## Shows each chest and wall broken open if `c` has broken theirs (gone, if it has no broken
-## picture), else whole.
+## picture), else whole. A fake wall already fading away is left to fade.
 func show_breakables(c: Character) -> void:
 	for i: int in breakables:
 		var b := world.map.breakables[i]
 		var s := breakables[i] as Sprite3D
+		if s.has_meta(&"fading"):
+			continue
 		var open := c.found_secret(b.id)
 		s.texture = b.broken if open and b.broken else b.whole
 		s.visible = not open or b.broken != null
 
 ## How far a chest or wall shakes when hit, in game pixels.
 const SHAKE := 4.0
+## Seconds a fake wall takes to fade away once walked into.
+const FAKE_WALL_FADE := 0.8
 
 ## Chest or wall `i` was hit: it shakes, or breaks open (`broke`) and shows its broken picture
-## (or is gone, with none).
+## (or is gone, with none). A fake wall walked into fades away instead.
 func strike_breakable(i: int, broke: bool) -> void:
 	var s: Sprite3D = breakables.get(i)
 	if s == null:
 		return
 	var b := world.map.breakables[i]
+	if broke and b.walk_through:
+		s.set_meta(&"fading", true)
+		var fade := s.create_tween()
+		fade.tween_property(s, "transparency", 1.0, FAKE_WALL_FADE)
+		fade.tween_callback(s.hide)
+		return
 	if broke and b.broken:
 		s.texture = b.broken
 	elif broke:

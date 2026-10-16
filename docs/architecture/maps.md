@@ -28,7 +28,9 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
 5. Place it in the world: its `region` (a **RegionDef** in `data/regions/`), `world_pos` on
    the world map (pixels of the painting, `TDWorldMapWindow.WORLD`, inside its region's
    `zone_rect`), `level_text` (a hidden tuning tier, never shown), and either `town = true` or the
-   `return_map` where fainting and Return Scrolls send you.
+   `return_map` where fainting and Return Scrolls send you. In a region drawn to shape
+   (`RegionDef.shaped_zone`) also give it a `zone_pos`: where its top-left corner sits on the
+   zone map, in game pixels, touching each map its portals lead to (below).
 6. Optionally give it an `intro_scene`, a cutscene played the first time a character arrives
    (see [cutscenes](cutscenes.md)).
 
@@ -61,6 +63,11 @@ after `hits` blows. Each character breaks their own, once for good (`Character.s
 they see it shake and break (`ev_struck`). A chest's `loot` and Monster Book `card` spill for
 whoever broke it. A wall's id is the shortcut it opens: both its ends are `shortcut` portals,
 so breaking it opens the way on both maps. With no `broken` picture it is gone once broken.
+A **fake wall** (`walk_through`) takes no blows: it fades the first time a player steps into it
+(`MapInstance.check_secrets` after each move report) and opens the `shortcut` portal behind it
+the same way, so put it where the main way never crosses, at the end of a side ledge or a nook,
+looking like the room's wall. Standing on a secret ledge finds it too (`MapDef.ledge_secret`),
+so the zone map can show it.
 
 A `solo` map gives each player a copy of their own, started fresh every time they come in
 (`TDServer.map_instance` keys it by peer; `_off_map` drops it). It isn't on the world map: you
@@ -89,6 +96,15 @@ travel NPCs (coaches between walkable regions are shortcuts, not routes), and
 city inside its region. The world map (W) draws the major routes city to city; clicking a
 region opens its zone view (its `zone_rect` of the painting, zoomed in) with every map and path,
 and where each exit leads. A new region needs a `capital`, `label_pos` and `zone_rect`.
+
+A region with `shaped_zone` (Greenbough first) is drawn the Hollow Knight way instead: every map
+is a room of its own width and height placed at its `zone_pos` (game pixels on one zone map), so
+the canopy sits above the town and the roots below. Rooms never overlap; two rooms a portal joins
+touch, and the portal stands by the edge they share: within 300 px of a side edge, or along a top
+or bottom edge over the stretch they share (`content_routes_test`). MapleStory portals still do
+the travelling; the zone map draws each as a gap in the shared edge. A boss arena's way home
+isn't a door. `TDWorldMapWindow` shows rooms once visited, secret ledges and the doors behind
+shortcuts and fake or breakable walls once found, and the player where they stand.
 
 An NpcDef with `storage = true` keeps the player's storage (`Character.storage`, an
 Inventory saved with the character; `ServerStorage.on_store` / `on_retrieve`, `TDStorageWindow`).

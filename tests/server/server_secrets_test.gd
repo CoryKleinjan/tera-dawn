@@ -1,7 +1,8 @@
 extends TestCase
 ## Secrets on the server: portals that land on a raised platform, shortcuts that stay shut
-## until found from their open end, and chests and walls that break open after enough blows,
-## once per character, spilling their loot for whoever broke them.
+## until found from their open end, chests and walls that break open after enough blows,
+## once per character, spilling their loot for whoever broke them, fake walls that open when
+## walked into, and secret ledges found by standing on them.
 
 const ServerHarness := preload("res://tests/framework/server_helpers.gd")
 
@@ -10,6 +11,9 @@ const NEAR_X := 1800.0
 const FAR_X := 1700.0
 const CHEST_X := 400.0
 const WALL_X := 1000.0
+const FAKE_X := 1300.0
+const SECRET_X := 240.0
+const SECRET_Y := 470.0
 
 var h: ServerHarness
 var p: SimPlayer
@@ -27,6 +31,14 @@ func before_each() -> void:
 	field.breakables.append(_breakable(&"test_chest", CHEST_X, 2, [ServerHarness.drop(potion, 3)]))
 	field.breakables.append(_breakable(&"test_wall", WALL_X, 3, []))
 	field.portals.append(_portal(WALL_X, ServerHarness.TOWN, 900.0, 0, &"test_wall"))
+	# a fake wall with a way behind it, and a secret ledge
+	var fake := _breakable(&"test_fake", FAKE_X, 1, [])
+	fake.walk_through = true
+	field.breakables.append(fake)
+	field.portals.append(_portal(FAKE_X, ServerHarness.TOWN, 1100.0, 0, &"test_fake"))
+	var ledge := ServerHarness.platform(SECRET_X - 40.0, SECRET_Y, 160.0)
+	ledge.secret = true
+	field.platforms.append(ledge)
 	h.add_map(field)
 	# the town: the far end of the drop, up to the field's ledge, and a plain way back
 	var town := ServerHarness.town_def()
@@ -67,6 +79,10 @@ func _hit(who: SimPlayer) -> void:
 func _portal_from(who: SimPlayer, x: float, y := ServerHarness.GROUND) -> void:
 	h.place(who, x, y)
 	h.ask(who.peer, &"req_portal")
+
+## `who` reports walking to `x` (on the floor, or at `y`).
+func _walk(who: SimPlayer, x: float, y := ServerHarness.GROUND) -> void:
+	h.ask(who.peer, &"req_move", [Vector2(x, y), 1, &"walk", false])
 
 # ---------- arriving up high ----------
 
@@ -165,6 +181,41 @@ func test_blows_are_forgotten_when_you_leave_the_map() -> void:
 	h.clear()
 	_hit(p)
 	check_eq(h.last(2, &"ev_struck"), [0, false], "it takes both blows again")
+
+# ---------- fake walls and secret ledges ----------
+
+func test_walking_into_a_fake_wall_opens_the_way_behind_it() -> void:
+	h.place(p, FAKE_X - 60.0)
+	check(not p.map.def.portals[2].open_to(c), "the way behind it is shut")
+	_walk(p, FAKE_X - 30.0)
+	check(not c.found_secret(&"test_fake"), "not found from beside it")
+	_walk(p, FAKE_X)
+	check(c.found_secret(&"test_fake"), "found by walking into it")
+	check_eq(h.last(2, &"ev_struck"), [2, true], "it fades for Ann")
+	check(p.map.def.portals[2].open_to(c), "the way behind it opens")
+	check(h.told(2, "You found a hidden way."), "told")
+
+func test_blows_pass_through_a_fake_wall() -> void:
+	h.place(p, FAKE_X - 40.0)
+	_hit(p)
+	check(not c.found_secret(&"test_fake"), "hitting it finds nothing")
+	check_eq(h.count(2, &"ev_struck"), 0, "and it doesn't shake")
+
+func test_a_fake_wall_opens_for_each_player_on_their_own() -> void:
+	var bob := h.join(3, "Bob", ServerHarness.FIELD, FAKE_X - 60.0)
+	h.place(p, FAKE_X - 20.0)
+	_walk(p, FAKE_X)
+	check(c.found_secret(&"test_fake") and not bob.character.found_secret(&"test_fake"), "only Ann's is open")
+	check_eq(h.count(3, &"ev_struck"), 0, "Bob doesn't see it fade")
+
+func test_standing_on_a_secret_ledge_finds_it() -> void:
+	var ledge := p.map.def.ledge_secret(p.map.def.platforms.size())
+	h.place(p, SECRET_X, SECRET_Y - 30.0)
+	_walk(p, SECRET_X + 10.0, SECRET_Y - 20.0)
+	check(not c.found_secret(ledge), "not found from the air above it")
+	_walk(p, SECRET_X + 20.0, SECRET_Y)
+	check(c.found_secret(ledge), "found by standing on it")
+	check(p.dirty_character, "the client hears of it")
 
 func test_secrets_are_saved_with_the_character() -> void:
 	c.find_secret(&"test_chest")

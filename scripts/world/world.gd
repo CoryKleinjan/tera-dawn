@@ -278,12 +278,16 @@ func open_tear() -> void:
 const STRUCK_SPARKS := Color(2.6, 2.2, 1.4)
 
 ## A chest or wall you hit shook, or broke open (`broke`): a hit flash on it, and when it
-## breaks a burst of sparks and dust with the find sound.
+## breaks a burst of sparks and dust with the find sound. A fake wall you walked into just
+## fades with the find sound.
 func strike_breakable(i: int, broke: bool) -> void:
 	if i < 0 or i >= map.breakables.size():
 		return
 	stage.strike_breakable(i, broke)
 	var b := map.breakables[i]
+	if b.walk_through:
+		Sound.play(&"sparkle")
+		return
 	var foot := Vector2(b.x, platforms[b.platform].y)
 	var middle := foot - Vector2(0, b.size().y / 2.0)
 	add_effect(Content.effects.get(&"hit"), middle, 1)

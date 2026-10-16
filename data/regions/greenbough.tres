@@ -12,5 +12,6 @@ capital = &"greenbough"
 label_pos = Vector2(180.0, 105.0)
 level_text = "Lv. 9-28"
 zone_rect = Rect2(250.0, 15.0, 330.0, 217.0)
+shaped_zone = true
 town_music = &"town_greenbough"
 field_music = &"field_greenbough"

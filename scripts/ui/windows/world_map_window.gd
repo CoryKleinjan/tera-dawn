@@ -4,12 +4,19 @@ extends TDWindow
 ## - The **world view**: the painted map (assets/sprites/ui/world_map.png) with every region's
 ##   name and main city, and the major routes between regions (WorldRoutes): on foot as a row of dots,
 ##   ships as thin dashes. Clicking a region opens its zone view.
-## - A **zone view**: one region up close (for now a zoomed-in part of the same painting,
-##   RegionDef.zone_rect) with every map in it as a dot, the paths between them, and where each
-##   exit to another region leads. A back arrow returns to the world view.
-## Hovering a dot or a region tells you about it in the strip under the map. Positions come
-## from MapDef.world_pos and RegionDef.label_pos/zone_rect, in world-map units: the painting's
-## own pixels (WORLD). A new painting means placing every dot and region name on it again.
+## - A **zone view**: one region up close, with where each exit to another region leads and a
+##   back arrow to the world view, drawn one of two ways:
+##   - dots: a zoomed-in part of the same painting (RegionDef.zone_rect) with every map in it
+##     as a dot and the paths between them;
+##   - to shape, the Hollow Knight way (RegionDef.shaped_zone): every map a room of its real
+##     size where it sits in the zone (MapDef.zone_pos), with its ledges, ropes and doors, inked
+##     on dark paper. Rooms show once you've been there; secret ledges, and doors behind a
+##     shortcut or a fake or breakable wall, once you've found them. You're marked where you
+##     stand.
+## Hovering a dot, room or region tells you about it in the strip under the map. Positions on
+## the painting come from MapDef.world_pos and RegionDef.label_pos/zone_rect, in world-map
+## units: the painting's own pixels (WORLD). A new painting means placing every dot and region
+## name on it again.
 
 ## The painting's size in pixels: the world-map units.
 const WORLD := Vector2(955, 629)
@@ -42,6 +49,35 @@ const UNKNOWN_DOT := Color(0.55, 0.5, 0.45)
 var hovered: StringName = &""
 var hovered_region: StringName = &""
 
+## A zone drawn to shape: dark paper; each room filled with its region's colour darkened by
+## ROOM_SHADE (ROOM_SHADE_LIT hovered), edged lightened by ROOM_EDGE_TINT, its land lightened
+## by ROOM_LAND_TINT; ropes and ladders in ROOM_ROPE.
+const PAPER := Color("1a120b")
+const ROOM_SHADE := 0.72
+const ROOM_SHADE_LIT := 0.56
+const ROOM_EDGE_TINT := 0.45
+const ROOM_LAND_TINT := 0.15
+const ROOM_ROPE := Color(0.85, 0.7, 0.45, 0.85)
+## How far in from the map area the rooms keep (room for the exit labels at the sides).
+const SHAPE_MARGIN := Vector2(70, 34)
+## Room names: their size, and the smallest they shrink to before they're left to the strip.
+const ROOM_LABEL := 11
+const ROOM_LABEL_MIN := 8
+## A door between rooms: the gap it makes in their edges and how far a way into a room you
+## haven't found yet reaches out (screen pixels); how far a door keeps from a corner (game
+## pixels); how far an exit's arrow reaches out of its room (screen pixels).
+const DOOR_GAP := 7.0
+const DOOR_STUB := 6.0
+const DOOR_CORNER := 40.0
+const EXIT_REACH := 22.0
+## The you-are-here ring in a room: smaller than on the painting.
+const HERE_IN_ROOM := 7.0
+
+## Game pixels on the shown zone's map -> screen pixels (see `_shape_fit`), worked out once
+## per zone.
+var _fit := Transform2D()
+var _fit_zone: StringName = &""
+
 func _init() -> void:
 	super("World Map", WORLD * MAP_SCALE + Vector2((PAD - 4) * 2, TITLE_H + 4 + INFO_H))
 
@@ -69,6 +105,21 @@ func to_screen(p: Vector2) -> Vector2:
 	var a := _area()
 	var v := view()
 	return a.position + (p - v.position) / v.size * a.size
+
+## Whether the zone on show is drawn to shape (RegionDef.shaped_zone).
+func shaped() -> bool:
+	var r: RegionDef = Content.regions.get(zone)
+	return r != null and r.shaped_zone
+
+## Where map `m` shows in the zone view: the middle of its room in a zone drawn to shape,
+## else its dot on the painting.
+func spot(m: MapDef) -> Vector2:
+	return room_rect(m).get_center() if shaped() else to_screen(m.world_pos)
+
+## Whether the zone view shows `m`: every dot (one not found yet as "???"), but only the
+## rooms you've been to.
+func shows(m: MapDef) -> bool:
+	return not shaped() or known(m)
 
 ## The maps placed on the world map.
 static func placed() -> Array[MapDef]:
@@ -102,6 +153,10 @@ func _here() -> StringName:
 
 func _draw_body() -> void:
 	var a := _area()
+	if shaped():
+		draw_rect(a, PAPER)
+		_draw_shaped_zone()
+		return
 	var tex := UiSkin.tex("world_map")
 	var v := view()
 	var k := Vector2(tex.get_size()) / WORLD
@@ -169,8 +224,8 @@ func _draw_dot(c: Vector2, town: bool, on: bool, found := true) -> void:
 	if on:
 		draw_arc(c, 10.0, 0, TAU, 24, Palette.SUN, 1.5, true)
 
-func _draw_here(c: Vector2) -> void:
-	var pulse := 12.0 + sin(Engine.get_physics_frames() * 0.12) * 2.5
+func _draw_here(c: Vector2, ring := 12.0) -> void:
+	var pulse := ring + sin(Engine.get_physics_frames() * 0.12) * ring * 0.2
 	draw_arc(c, pulse, 0, TAU, 24, Palette.NIGHT, 4.0, true)
 	draw_arc(c, pulse, 0, TAU, 24, Palette.SUN, 2.0, true)
 
@@ -236,15 +291,22 @@ func _draw_zone() -> void:
 	var h: MapDef = Content.maps.get(here)
 	if h and h.region == zone:
 		_draw_here(to_screen(h.world_pos))
+	_draw_zone_frame(r, h)
+
+## The back arrow, and the strip under the map: the hovered map, else the one you're on, else
+## the zone's city.
+func _draw_zone_frame(r: RegionDef, here: MapDef) -> void:
 	icon_button(back_rect(), "creator/arrow_left", func() -> void: open_zone(&""))
-	_draw_info(Content.maps.get(hovered if hovered != &"" else here if h and h.region == zone else r.capital))
+	var on := here != null and here.region == zone
+	_draw_info(Content.maps.get(hovered if hovered != &"" else here.id if on else r.capital))
 
 func back_rect() -> Rect2:
 	return Rect2(_area().position + Vector2(6, 6), BACK_SIZE)
 
 ## The zone's ways out to other regions, each {"map": the map it leaves from, "region": where
 ## it leads, "by", "from"/"to": the road on screen (cut at the view's edge), "label",
-## "label_at"}. Walking exits come from the portals; trips from the zone's travel NPCs.
+## "label_at"}. Walking exits come from the portals; trips from the zone's travel NPCs. In a
+## zone drawn to shape a walking exit leaves its room through the edge by its portal.
 func zone_exits() -> Array:
 	var out := []
 	var a := _area().grow(-2)
@@ -257,20 +319,27 @@ func zone_exits() -> Array:
 			for pair in route.crossings:
 				var inside: MapDef = Content.maps[pair[0]] if Content.maps[pair[0]].region == zone else Content.maps[pair[1]]
 				var outside: MapDef = Content.maps[pair[1]] if inside.id == pair[0] else Content.maps[pair[0]]
-				legs.append([inside, outside.world_pos])
+				legs.append([inside, outside.world_pos, outside.id])
 		else:
 			var mine: RegionDef = Content.regions[zone]
-			legs.append([Content.maps.get(mine.capital), capital_pos(other)])
+			legs.append([Content.maps.get(mine.capital), capital_pos(other), &""])
 		for leg in legs:
 			var inside: MapDef = leg[0]
 			if inside == null:
 				continue
 			var from := to_screen(inside.world_pos)
 			var to := clip_to(from, to_screen(leg[1]), a)
+			if shaped():
+				var road := _shaped_exit(inside, leg[2], leg[1])
+				from = road[0]
+				to = clip_to(from, road[1], a)
 			var dir := (to - from).normalized()
 			var label := "To " + other.display_name + ("" if route.by == "Walk" else " (%s)" % route.by)
 			var w := DrawUtil.text_width(Game.ui_font, label, 11)
 			var at := to - dir * 14.0 + Vector2(0, 4)
+			if shaped():
+				# past the arrow's tip, clear of the rooms
+				at = to + Vector2(dir.x * (w / 2.0 + 4.0), dir.y * 12.0 + 4.0)
 			at.x = clampf(at.x, a.position.x + w / 2.0 + 4, a.end.x - w / 2.0 - 4)
 			at.y = clampf(at.y, a.position.y + 14, a.end.y - 6)
 			out.append({"map": inside.id, "region": other.id, "by": route.by, "from": from, "to": to, "label": label, "label_at": at})
@@ -311,7 +380,7 @@ func _draw_info(m: MapDef) -> void:
 	if m.id == _here():
 		bits.append("You are here")
 	var ways := []
-	for id in WorldRoutes.linked(m.id):
+	for id in (doors_out(m) if shaped() else WorldRoutes.linked(m.id)):
 		var to: MapDef = Content.maps.get(id)
 		if to:
 			ways.append(to.display_name if known(to) else UNKNOWN)
@@ -348,6 +417,10 @@ func _hovered(at: Vector2) -> void:
 	hovered_region = &""
 	if zone == &"":
 		hovered_region = region_at(at)
+	elif shaped():
+		for m in placed_in(zone):
+			if shows(m) and room_rect(m).grow(2.0).has_point(at):
+				hovered = m.id
 	else:
 		var best := NODE_PICK
 		for m in placed_in(zone):
@@ -356,3 +429,198 @@ func _hovered(at: Vector2) -> void:
 				best = d
 				hovered = m.id
 	queue_redraw()
+
+# ---------- zone view drawn to shape ----------
+
+## The area a zone's rooms cover on its zone map (game pixels, MapDef.zone_pos): every room,
+## found or not, so the view never shifts as you explore.
+static func zone_bounds(region: StringName) -> Rect2:
+	var out := Rect2()
+	var first := true
+	for m in placed_in(region):
+		out = m.zone_rect() if first else out.merge(m.zone_rect())
+		first = false
+	return out
+
+## Game pixels on the shown zone's map -> screen pixels: its rooms fit inside the map area,
+## less SHAPE_MARGIN, in the middle.
+func _shape_fit() -> Transform2D:
+	if _fit_zone == zone:
+		return _fit
+	var bounds := zone_bounds(zone)
+	var room := _area().grow_individual(-SHAPE_MARGIN.x, -SHAPE_MARGIN.y, -SHAPE_MARGIN.x, -SHAPE_MARGIN.y)
+	var k := 1.0
+	if bounds.has_area():
+		k = minf(room.size.x / bounds.size.x, room.size.y / bounds.size.y)
+	_fit = Transform2D(0.0, Vector2(k, k), 0.0, room.get_center() - bounds.get_center() * k)
+	_fit_zone = zone
+	return _fit
+
+## Where a point on the zone map (game pixels) shows on screen.
+func zone_to_screen(p: Vector2) -> Vector2:
+	return _shape_fit() * p
+
+## Where point `at` of map `m` (game pixels in it) shows on screen.
+func _in_room(m: MapDef, at: Vector2) -> Vector2:
+	return _shape_fit() * (m.zone_pos + at)
+
+## The screen area map `m`'s room covers.
+func room_rect(m: MapDef) -> Rect2:
+	var fit := _shape_fit()
+	return Rect2(fit * m.zone_pos, m.zone_rect().size * fit.get_scale())
+
+## Whether the zone map shows platform `i` (from 1) of `m`: every ledge but a secret one you
+## haven't stood on yet.
+static func ledge_shown(m: MapDef, i: int) -> bool:
+	return not m.platforms[i - 1].secret or Game.me == null or Game.me.found_secret(m.ledge_secret(i))
+
+## Where a door of room `m`, standing at `at` (game pixels in `m`), meets the edge it shares
+## with the room it leads to, `to`, on the zone map, and which way it leads out of `m`, as
+## [point, direction]; empty when the two rooms don't touch.
+static func door_edge(m: MapDef, to: MapDef, at: Vector2) -> Array:
+	var a := m.zone_rect()
+	var b := to.zone_rect()
+	var p := m.zone_pos + at
+	var right := is_equal_approx(a.end.x, b.position.x)
+	if right or is_equal_approx(b.end.x, a.position.x):
+		var lo := maxf(a.position.y, b.position.y)
+		var hi := minf(a.end.y, b.end.y)
+		if hi > lo:
+			return [Vector2(a.end.x if right else a.position.x, _along(p.y, lo, hi)), Vector2.RIGHT if right else Vector2.LEFT]
+	var down := is_equal_approx(a.end.y, b.position.y)
+	if down or is_equal_approx(b.end.y, a.position.y):
+		var lo := maxf(a.position.x, b.position.x)
+		var hi := minf(a.end.x, b.end.x)
+		if hi > lo:
+			return [Vector2(_along(p.x, lo, hi), a.end.y if down else a.position.y), Vector2.DOWN if down else Vector2.UP]
+	return []
+
+## `v` kept on the shared stretch of edge `lo`..`hi`, off its corners where there's room.
+static func _along(v: float, lo: float, hi: float) -> float:
+	var keep := minf(DOOR_CORNER, (hi - lo) / 2.0)
+	return clampf(v, lo + keep, hi - keep)
+
+## Whether the zone view draws portal `p` of room `m` as a door into room `to`: a way you can
+## use (not a shortcut, or a way behind a wall, you haven't found yet) between two rooms of the
+## zone that touch. A boss arena's way home isn't a door.
+func _door_shown(m: MapDef, p: PortalDef, to: MapDef) -> bool:
+	if to == m or to.region != zone or to.world_pos == Vector2.ZERO or p.one_way or p.after_boss:
+		return false
+	if Game.me and not p.open_to(Game.me):
+		return false
+	return not door_edge(m, to, Vector2(p.x, m.surface_y(p.platform))).is_empty()
+
+## The doors the zone view draws, each [room, point on screen, direction out of the room,
+## whether the room beyond is shown], from every room you've been to (see `_door_shown`).
+func room_doors() -> Array:
+	var out := []
+	for m in placed_in(zone):
+		if not shows(m):
+			continue
+		for p in m.portals:
+			var to: MapDef = Content.maps.get(p.target_map)
+			if to and _door_shown(m, p, to):
+				var edge := door_edge(m, to, Vector2(p.x, m.surface_y(p.platform)))
+				out.append([m, zone_to_screen(edge[0]), edge[1], shows(to)])
+	return out
+
+## The maps the zone view shows a door from `m` into.
+func doors_out(m: MapDef) -> Array[StringName]:
+	var out: Array[StringName] = []
+	for p in m.portals:
+		var to: MapDef = Content.maps.get(p.target_map)
+		if to and not to.id in out and _door_shown(m, p, to):
+			out.append(to.id)
+	return out
+
+func _draw_shaped_zone() -> void:
+	var r: RegionDef = Content.regions[zone]
+	var rooms := placed_in(zone).filter(shows)
+	var fill := r.color.darkened(ROOM_SHADE)
+	var lit := r.color.darkened(ROOM_SHADE_LIT)
+	var edge := r.color.lightened(ROOM_EDGE_TINT)
+	for m: MapDef in rooms:
+		draw_rect(room_rect(m), lit if m.id == hovered else fill)
+	for m: MapDef in rooms:
+		_draw_room_land(m, r.color.lightened(ROOM_LAND_TINT))
+	for m: MapDef in rooms:
+		draw_rect(room_rect(m), edge, false, 1.5)
+	for door in room_doors():
+		var at: Vector2 = door[1]
+		var out: Vector2 = door[2]
+		var along := Vector2(absf(out.y), absf(out.x)) * DOOR_GAP / 2.0
+		draw_line(at - along, at + along, lit if door[0].id == hovered else fill, 3.0)
+		if not door[3]:
+			draw_line(at, at + out * DOOR_STUB, edge, 1.5)  # a way on into a room not found yet
+	for exit in zone_exits():
+		_draw_route(exit.from, exit.to, exit.by, exit.map == hovered)
+	for m: MapDef in rooms:
+		_draw_room_name(m)
+	for exit in zone_exits():
+		DrawUtil.text(self, Game.ui_font, exit.label_at, exit.label, 11, TRIP, 0, 4, Palette.NIGHT)
+	var here: MapDef = Content.maps.get(_here())
+	if here and here.region == zone:
+		_draw_here(_here_spot(here), HERE_IN_ROOM)
+	_draw_zone_frame(r, here)
+
+## A room's land: its floor, its ledges (raised land filled down to what it stands on; secret
+## ones once found) and its ropes and ladders.
+func _draw_room_land(m: MapDef, land: Color) -> void:
+	var k := _shape_fit().get_scale()
+	var floor_at := _in_room(m, Vector2(0, m.ground_y))
+	draw_rect(Rect2(floor_at, Vector2(m.width, m.height - m.ground_y) * k), Color(land, 0.45))
+	draw_line(floor_at, floor_at + Vector2(m.width * k.x, 0), land, 1.5)
+	for c in m.climbables:
+		draw_line(_in_room(m, Vector2(c.x, c.top)), _in_room(m, Vector2(c.x, c.bottom)), ROOM_ROPE, 1.0)
+	for i in range(1, m.platforms.size() + 1):
+		if not ledge_shown(m, i):
+			continue
+		var d := m.platforms[i - 1]
+		var left := _in_room(m, Vector2(d.x, d.y))
+		if d.solid:
+			var below := m.surface_y(m.land_under(i))
+			draw_rect(Rect2(left, Vector2(d.width, below - d.y) * k), Color(land, 0.3))
+		draw_line(left, left + Vector2(d.width * k.x, 0), land, 1.5)
+
+## A room's name in its middle, when it fits there (the strip under the map names any room).
+func _draw_room_name(m: MapDef) -> void:
+	var box := room_rect(m)
+	var size := DrawUtil.fit_size(Game.ui_font, m.display_name, ROOM_LABEL, box.size.x - 4.0, ROOM_LABEL_MIN)
+	if DrawUtil.text_width(Game.ui_font, m.display_name, size) > box.size.x - 2.0 or box.size.y < size + 4:
+		return
+	var col := Palette.SUN if m.id == hovered else Color("fff4dc")
+	var c := box.get_center()
+	DrawUtil.text(self, Game.ui_font, Vector2(c.x, DrawUtil.cap_baseline(c.y, size)), m.display_name, size, col, 0, 3, Palette.NIGHT)
+
+## Where you are in a zone drawn to shape: where you stand in your room, or (inside a
+## building) at its door in the town.
+func _here_spot(here: MapDef) -> Vector2:
+	var world := hud.world if hud else null
+	if world and world.map and world.player:
+		if world.map.id == here.id:
+			return _in_room(here, world.player.position)
+		for p in here.portals:
+			if p.target_map == world.map.id:
+				return _in_room(here, Vector2(p.x, here.surface_y(p.platform)))
+	return room_rect(here).get_center()
+
+## The road out of the zone from room `inside`, drawn to shape, as [from, to] on screen: out
+## through the edge nearest its portal to `outside` (a map of the other region), EXIT_REACH
+## long; for a trip (no `outside`), from the room's middle towards `far` (where the other
+## region's city is on the painting).
+func _shaped_exit(inside: MapDef, outside: StringName, far: Vector2) -> Array:
+	var box := room_rect(inside)
+	for p in inside.portals:
+		if p.target_map != outside:
+			continue
+		var at := _in_room(inside, Vector2(p.x, inside.surface_y(p.platform)))
+		var gaps := {Vector2.LEFT: at.x - box.position.x, Vector2.RIGHT: box.end.x - at.x, Vector2.UP: at.y - box.position.y, Vector2.DOWN: box.end.y - at.y}
+		var out := Vector2.LEFT
+		for dir: Vector2 in gaps:
+			if gaps[dir] < gaps[out]:
+				out = dir
+		var from: Vector2 = at + out * float(gaps[out])
+		return [from, from + out * EXIT_REACH]
+	var c := box.get_center()
+	var mine: RegionDef = Content.regions[zone]
+	return [c, c + (far - capital_pos(mine)).normalized() * WORLD.length()]

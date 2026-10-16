@@ -2,8 +2,9 @@ class_name BreakableDef
 extends Resource
 ## Something on a map that breaks open when the player hits it: a chest, whose loot spills
 ## out, or a wall, which opens the shortcut behind it (a PortalDef whose `shortcut` is this
-## id). Each character breaks their own once, for good (Character.secrets); it stands whole
-## for everyone who hasn't, whoever else broke theirs.
+## id). A fake wall (`walk_through`) opens the same way when the player walks into it. Each
+## character breaks their own once, for good (Character.secrets); it stands whole for
+## everyone who hasn't, whoever else broke theirs.
 
 ## Its id in Character.secrets, unique across the game. A wall's is the shortcut it opens.
 @export var id: StringName
@@ -12,6 +13,9 @@ extends Resource
 @export var platform := 0
 ## Blows it takes to break.
 @export var hits := 1
+## A fake wall: blows pass through it, and so do you. It fades the first time you step into
+## it and opens the way behind it for good, as if broken (`hits` doesn't count).
+@export var walk_through := false
 ## Its picture standing whole, and once broken (an opened chest, a wall with a hole in it);
 ## with no broken picture it is gone once broken.
 @export var whole: Texture2D

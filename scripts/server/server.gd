@@ -222,6 +222,7 @@ func on_move(peer: int, at: Vector2, face: int, anim: StringName, climbing: bool
 	elif p:
 		quests.reached(p)
 		p.map.check_tear(p)
+		p.map.check_secrets(p)
 
 ## Sits the player down on the ground (`down`) or gets them up. Sitting regenerates faster
 ## (SimPlayer.step); moving or getting hit gets them up.

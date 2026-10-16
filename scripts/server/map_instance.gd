@@ -7,6 +7,8 @@ extends RefCounted
 
 ## Game pixels between the items a monster drops.
 const DROP_SPACING := 26.0
+## How high above a player's feet a fake wall must reach for them to have stepped into it.
+const WALK_IN_HEIGHT := 20.0
 const BAD := Color("ff8a99")
 
 var server: TDServer
@@ -347,15 +349,15 @@ func kill_mob(m: SimMob, killer: SimPlayer) -> void:
 
 # ---------- chests and walls ----------
 
-## Lands the skill's blow on every chest or wall in its area that still stands whole for `p`,
-## and breaks open each one that has taken its last (BreakableDef.hits). Only `p` sees it
-## shake or break: everyone breaks their own.
+## Lands the skill's blow on every chest or wall in its area that still stands whole for `p`
+## (a fake wall lets it through), and breaks open each one that has taken its last
+## (BreakableDef.hits). Only `p` sees it shake or break: everyone breaks their own.
 func _strike_breakables(p: SimPlayer, skill: SkillDef, aim: Hitbox.Aim) -> void:
 	if breakables.is_empty():
 		return
 	var area := _skill_area(p, skill, aim)
 	for b in breakables:
-		if b.whole_for(p) and area.intersects(b.def.rect(b.foot)):
+		if not b.def.walk_through and b.whole_for(p) and area.intersects(b.def.rect(b.foot)):
 			if b.strike(p):
 				_break_open(p, b)
 			else:
@@ -379,7 +381,18 @@ func _break_open(p: SimPlayer, b: SimBreakable) -> void:
 		var x := clampf(b.foot.x + (i - (loot.size() - 1) / 2.0) * DROP_SPACING, plat.x + 8, plat.x + plat.w - 8)
 		spawn_drop(loot[i][0], loot[i][1], null, DropFlight.create(b.foot + Vector2(0, -20), plat.y, x), p.peer)
 	if def.portals.any(func(o: PortalDef) -> bool: return o.shortcut == b.def.id):
-		tell(p, "You found a shortcut.", Palette.SUN)
+		tell(p, "You found a hidden way." if b.def.walk_through else "You found a shortcut.", Palette.SUN)
+
+## What `p` finds by walking: a fake wall they step into fades for them and opens the way
+## behind it, like a broken wall, and a secret ledge they stand on is theirs to see on the
+## zone map from then on (MapDef.ledge_secret).
+func check_secrets(p: SimPlayer) -> void:
+	for b in breakables:
+		if b.def.walk_through and b.whole_for(p) and b.def.rect(b.foot).has_point(p.position + Vector2(0, -WALK_IN_HEIGHT)):
+			_break_open(p, b)
+	for i in def.platforms.size():
+		if def.platforms[i].secret and p.stands_on(layout.platforms[i + 1]) and p.character.find_secret(def.ledge_secret(i + 1)):
+			p.dirty_character = true
 
 ## A monster touched a player.
 func touch_player(p: SimPlayer, m: SimMob) -> void:
