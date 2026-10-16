@@ -22622,7 +22622,7 @@
  {
   "id": "mshero_pirate_coat_b12",
   "prompts": null,
-  "batch": null,
+  "batch": "maple hero layers (edit)",
   "with": null,
   "refs": [],
   "save": "mshero_pirate_coat_b12.png",
@@ -22635,7 +22635,7 @@
   ],
   "anchor": null,
   "size": "2K",
-  "note": "2026-10-16 thread 'Hero pose review' (Cory 21:17Z 'the pirate sitting coat should go behind him, not cover his legs'): the Pirate coat on sit, its front skirt off his legs and its skirt and tails behind him on the ground; an edit of its own painting on the green boy",
+  "note": "2026-10-16 thread 'Hero pose review' (Cory 21:17Z 'the pirate sitting coat should go behind him, not cover his legs'): the Pirate coat on sit, its front skirt off his legs and its skirt and tails behind him on the ground; an edit of its own painting on the green boy. Released by Cory 21:22Z (\"yes\") to the priced line 21:20Z (\"Paint the Pirate coat on sit again that way: 1 sheet for about $0.07? Yes or no.\").",
   "edit": {
    "base": "/mnt/project-files/art-sheets/maple-hero/bases/b12_pirate_coat_sit_base.png",
    "refs": [],
