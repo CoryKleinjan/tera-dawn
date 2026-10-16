@@ -112,8 +112,8 @@ static func load_dict(c: Character, data: Dictionary) -> void:
 	if not data.has("jobs_passed"):
 		# a save from before job switching: the jobs it advanced through count as passed
 		for id in c.job_path():
-			var j: JobDef = Content.jobs.get(id)
-			if j and not j.is_starting_job() and not c.has_passed(j):
+			var passed: JobDef = Content.jobs.get(id)
+			if passed and not passed.is_starting_job() and not c.has_passed(passed):
 				c.jobs_passed.append(String(id))
 	if refund:
 		# the stat rules changed since this was saved: the essence of every stat point back
