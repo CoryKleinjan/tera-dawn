@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=84 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=92 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
@@ -12,7 +12,6 @@
 [ext_resource type="Resource" path="res://data/monsters/barkcap.tres" id="10_barkcap"]
 [ext_resource type="Resource" path="res://data/monsters/grove_wisp.tres" id="11_grove_wisp"]
 [ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="12_breakable_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/rooms/greenbough/crate.png" id="13_crate"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="14_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="15_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="16_elixir"]
@@ -23,6 +22,15 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/stump.png" id="21_stump"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/bush_large.png" id="22_bush_large"]
 [ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="23_biome_variant_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/chest.png" id="24_chest"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/chest_open.png" id="25_chest_open"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/greenbough_fields/leaves_left.png" id="26_leaves_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/greenbough_fields/leaves_right.png" id="27_leaves_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/greenbough_fields/cap_left.png" id="28_cap_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/greenbough_fields/middle_a.png" id="29_middle_a"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/greenbough_fields/middle_b.png" id="30_middle_b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/greenbough_fields/cap_right.png" id="31_cap_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground/greenbough_fields_side.png" id="32_ground_side"]
 
 [sub_resource type="Resource" id="Platform_1"]
 script = ExtResource("3_platform_def")
@@ -355,8 +363,9 @@ id = &"old_oak_heights_far_chest"
 x = 1910.0
 platform = 6
 hits = 1
-whole = ExtResource("13_crate")
-height = 44.0
+whole = ExtResource("24_chest")
+broken = ExtResource("25_chest_open")
+height = 48.0
 loot = Array[ExtResource("14_drop_entry")]([SubResource("Loot_0_0"), SubResource("Loot_0_1"), SubResource("Loot_0_2")])
 card = ExtResource("10_barkcap")
 
@@ -384,8 +393,9 @@ id = &"old_oak_heights_high_chest"
 x = 2910.0
 platform = 7
 hits = 1
-whole = ExtResource("13_crate")
-height = 44.0
+whole = ExtResource("24_chest")
+broken = ExtResource("25_chest_open")
+height = 48.0
 loot = Array[ExtResource("14_drop_entry")]([SubResource("Loot_1_0"), SubResource("Loot_1_1"), SubResource("Loot_1_2")])
 card = ExtResource("11_grove_wisp")
 
@@ -436,6 +446,16 @@ fog_end = 130.0
 fog_density = 0.53
 light_shafts = 1
 light_shaft_color = Color(1, 0.88, 0.6, 0.18)
+hide_ground_decor = PackedInt32Array(0, 1, 3)
+hide_edge_grass = true
+hide_platform_decor = true
+frame_left = ExtResource("26_leaves_left")
+frame_right = ExtResource("27_leaves_right")
+platform_left = ExtResource("28_cap_left")
+platform_middle = ExtResource("29_middle_a")
+platform_middle_alt = ExtResource("30_middle_b")
+platform_right = ExtResource("31_cap_right")
+ground_side = ExtResource("32_ground_side")
 
 [resource]
 script = ExtResource("1_map_def")
