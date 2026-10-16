@@ -52,8 +52,7 @@ func check() -> void:
 	Net.server.enter_map(bot_player, &"meadow", 300)
 	# hold a Dewling in front of the bot until its attacks defeat one
 	var meadow: MapInstance = Net.server.maps[&"meadow"]
-	var level := bot_player.character.level
-	var xp := bot_player.character.xp
+	var essence := bot_player.character.essence
 	var seen_name := ""
 	for i in 1200:
 		await _ticks(1)
@@ -64,9 +63,9 @@ func check() -> void:
 				m.area = m.plat # floor Dewlings keep away from the meadow's entrance, where the bot stands
 				m.position.x = bot_player.position.x + 40
 				break
-		if bot_player.character.xp != xp or bot_player.character.level != level:
+		if bot_player.character.essence > essence:
 			break
-	_check(bot_player.character.xp != xp or bot_player.character.level != level, "the joining player's attacks defeat a monster on the server")
+	_check(bot_player.character.essence > essence, "the joining player's attacks defeat a monster on the server")
 	_check(seen_name == "Bot", "the host sees the other player, with their name")
 	for i in 2400:
 		await _ticks(1)

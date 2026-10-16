@@ -1,13 +1,18 @@
 extends SmokeArea
 ## The skill book, quickslots, buffs and passives in the game.
 
-## A Warrior with Skill Points learns skills in the skill window: they land on quickslots,
+## A Warrior with Dawn Essence buys skills in the skill window: they land on quickslots,
 ## a buff raises stats until it runs out, and a passive is always on.
 func check() -> void:
 	var ch := _me().character
 	ch.job = Content.job(&"warrior")
-	ch.skills.points = 5
 	ch.skills.learned.clear()
+	ch.skills.paid.clear()
+	# enough Dawn Essence for five skill levels
+	var essence := 0
+	for n in 5:
+		essence += CharacterStats.skill_price(n)
+	ch.essence = essence
 	ch.quickslots.fill([])
 	_me().dirty_character = true
 	await _ticks(2)
@@ -18,13 +23,13 @@ func check() -> void:
 	var slash: SkillDef = Content.skill(&"dawn_slash")
 	book.learn(slash)
 	await _ticks(1)
-	_check(Game.me.skills.level(slash) == 0 and Game.me.skills.points == 5, "Dawn Slash needs Power Strike first")
+	_check(Game.me.skills.level(slash) == 0 and Game.me.essence == essence, "Dawn Slash needs Power Strike first")
 	book.learn(Content.skill(&"power_strike"))
 	book.learn(slash)
 	book.learn(Content.skill(&"iron_body"))
 	book.learn(Content.skill(&"blade_mastery"))
 	await _ticks(1)
-	_check(Game.me.skills.level(slash) == 1 and Game.me.skills.points == 1, "spending Skill Points learns skills")
+	_check(Game.me.skills.level(slash) == 1 and Game.me.essence == CharacterStats.skill_price(4), "spending Dawn Essence learns skills, each level dearer than the last")
 	_check(Game.me.quickslots[0] == [&"skill", &"power_strike"] and Game.me.quickslots[1] == [&"skill", &"dawn_slash"]
 		and Game.me.quickslots[2] == [&"skill", &"iron_body"], "learned skills go on the free quickslots")
 	_check(Game.me.stats.melee_damage == 2, "Blade Mastery raises Melee Damage")

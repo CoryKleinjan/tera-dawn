@@ -30,12 +30,12 @@ func learn_problem(skill: SkillDef) -> String:
 		return "You can't learn %s." % skill.display_name
 	if level(skill) >= skill.max_level:
 		return "%s is already at its highest level." % skill.display_name
-	if character.essence < price():
-		return "You need %d Dawn Essence for that." % price()
 	if skill.requires != &"":
 		var need: SkillDef = Content.skills.get(skill.requires)
 		if need and level(need) < skill.requires_level:
 			return "Learn %s to level %d first." % [need.display_name, skill.requires_level]
+	if character.essence < price():
+		return "You need %d Dawn Essence for that." % price()
 	return ""
 
 ## Buys one more level of `skill` with Dawn Essence. A newly learned skill goes on the first

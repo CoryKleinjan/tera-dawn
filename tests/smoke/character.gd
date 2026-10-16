@@ -1,5 +1,5 @@
 extends SmokeArea
-## A character without the world: inventory, equipment, stats, saving, jobs and skills.
+## A character without the world: inventory, equipment, buying stats, saving, jobs and skills.
 
 ## Inventory, equipment, stats and saving, without the world.
 func check() -> void:
@@ -28,15 +28,17 @@ func check() -> void:
 	c.gear.equip(_first_filled(c, ItemDef.Tab.EQUIP))
 	_check(c.stats.defense > defense, "wearing a hat raises Weapon Defense")
 	c.inventory.add(Content.item(&"dawn_blade"))
-	_check(c.gear.equip(_first_filled(c, ItemDef.Tab.EQUIP)) != "", "level 1 can't wear the level 8 Dawn Blade")
+	_check(c.gear.equip(_first_filled(c, ItemDef.Tab.EQUIP)) != "", "a new Beginner can't wear the Dawn Blade (35 STR)")
 
-	# levels give Ability Points, and STR raises damage
-	c.gain_xp(c.xp_need())
-	_check(c.level == 2 and c.ap.points == c.job.ap_per_level, "levelling up gives Ability Points")
-	var top := c.damage_range().y
+	# Dawn Essence buys stats, each point dearer than the last, and STR raises damage
+	_check(c.essence == 0 and c.ap.buy(&"strength") == 0, "no Dawn Essence, no stat points")
+	var cost := 0
 	for n in 5:
-		c.ap.spend(&"strength")
-	_check(c.ap.points == 0 and c.damage_range().y > top, "spending AP on STR raises damage")
+		cost += CharacterStats.stat_price(n)
+	c.gain_essence(cost)
+	var top := c.damage_range().y
+	_check(c.ap.buy(&"strength", 5) == 5 and c.essence == 0 and c.ap.spent() == 5, "Dawn Essence buys stat points at their prices")
+	_check(c.damage_range().y > top and c.ap.price(&"strength") > CharacterStats.stat_price(0), "STR raises damage, and the next point costs more")
 
 	# saving and loading keeps the bag and the gear
 	c.inventory.add(tusk, 3)
@@ -45,20 +47,20 @@ func check() -> void:
 	var back := store.load_character("Tester")
 	_check(back != null and JSON.stringify(back.inventory.to_dict()) == JSON.stringify(c.inventory.to_dict())
 		and JSON.stringify(back.equipment.to_dict()) == JSON.stringify(c.equipment.to_dict())
-		and back.base.strength == c.base.strength and back.level == 2, "saving and loading keeps inventory, equipment and stats")
+		and back.base.strength == c.base.strength and back.ap.spent() == 5 and back.essence == c.essence, "saving and loading keeps inventory, equipment and stats")
 	_check(CharacterStore.clean_name("  Dawn<ling>!  ") == "Dawnling", "character names are cleaned up")
 	_check_jobs()
 	_check_skill_rules()
 
-## Skill Points, Beginner skills, buffs and save files, without the world.
+## Buying skills with Dawn Essence, Beginner skills, buffs and save files, without the world.
 func _check_skill_rules() -> void:
 	var c := Character.create("Skiller")
-	_check(c.skills.points == 0 and c.skills.level(Content.skill(Character.BASIC_ATTACK)) == 1, "a new character knows only the basic attack")
-	c.gain_xp(c.xp_need())
-	_check(c.skills.points == 1, "a Beginner gets 1 Skill Point a level")
+	_check(c.skills.spent() == 0 and c.skills.level(Content.skill(Character.BASIC_ATTACK)) == 1, "a new character knows only the basic attack")
 	var step: SkillDef = Content.skill(&"quick_step")
-	_check(c.skills.learn(step) == "" and c.skills.level(step) == 1 and c.skills.points == 0, "a Beginner learns Quick Step")
-	_check(c.skills.learn(step) != "", "no Skill Points, no more levels")
+	_check(c.skills.learn(step).contains("Dawn Essence"), "learning a skill costs Dawn Essence")
+	c.gain_essence(c.skills.price())
+	_check(c.skills.learn(step) == "" and c.skills.level(step) == 1 and c.essence == 0, "a Beginner learns Quick Step")
+	_check(c.skills.learn(step) != "", "no Dawn Essence, no more levels")
 	_check(c.skills.learn(Content.skill(&"power_strike")) != "", "a Beginner can't learn Warrior skills")
 	var speed := c.stats.speed
 	c.mp = 100
@@ -66,22 +68,27 @@ func _check_skill_rules() -> void:
 	_check(c.stats.speed > speed, "Quick Step makes you faster")
 	c.skills.tick_buffs(step.duration_ticks(1))
 	_check(c.skills.buffs.is_empty() and c.stats.speed == speed, "and wears off after its time")
-	c.skills.points = 3
+	c.gain_essence(c.skills.price())
 	var aid: SkillDef = Content.skill(&"first_aid")
 	c.skills.learn(aid)
 	_check(c.skills.level(aid) == 1 and aid.heal_at(1) > 0.0 and aid.recharge_ticks(1) > 0, "First Aid heals, then takes a while to use again")
 	var back := Character.new()
 	back.load_dict(c.to_dict())
-	_check(back.skills.learned == c.skills.learned and back.skills.points == c.skills.points and back.quickslots == c.quickslots, "skills, Skill Points and quickslots save")
+	_check(back.skills.learned == c.skills.learned and back.skills.paid == c.skills.paid and back.quickslots == c.quickslots, "skills, what was paid for them and quickslots save")
+	# a save from before Dawn Essence: its EXP and unspent Skill Points become essence
 	var old := c.to_dict()
-	old.erase("sp")
+	old.erase("essence")
 	old.erase("skills")
+	old.erase("skills_paid")
 	old.erase("quickslots")
 	old["level"] = 12
+	old["xp"] = 40
+	old["sp"] = 3
 	old["job"] = "warrior"
 	var legacy := Character.new()
 	legacy.load_dict(old)
-	_check(legacy.skills.points == 11 * 3 and legacy.quickslots[Character.QUICKSLOTS - 2] == [&"item", &"red_potion"], "older saves get Skill Points for their levels")
+	var sp_worth := CharacterStats.skill_price(0) + CharacterStats.skill_price(1) + CharacterStats.skill_price(2)
+	_check(legacy.essence == 40 + sp_worth and legacy.quickslots[Character.QUICKSLOTS - 2] == [&"item", &"red_potion"], "older saves turn their EXP and Skill Points into Dawn Essence")
 
 ## Starting as a Beginner, advancing, and gear only some jobs can use.
 func _check_jobs() -> void:
@@ -91,14 +98,12 @@ func _check_jobs() -> void:
 	var mage: JobDef = Content.job(&"mage")
 	for id in [&"warrior", &"archer", &"mage", &"thief", &"pirate"]:
 		_check(Content.jobs.has(id) and Content.job(id).advances_from == &"beginner", "%s is a first job" % id)
-	_check(c.advance(warrior).begins_with("You need to be level"), "a level 1 Beginner can't advance")
-	c.level = 10
 	_check(c.advance(warrior).contains("STR"), "advancing to Warrior needs 35 STR")
 	c.base.strength = 35
 	_check(c.advance(warrior) == "Pass the Job Test first.", "advancing to Warrior needs the Job Test")
 	c.quests.done[warrior.advance_quest.id] = true
 	var hp := c.max_hp()
-	_check(c.advance(warrior) == "" and c.job == warrior, "a level 10 Beginner with 35 STR becomes a Warrior")
+	_check(c.advance(warrior) == "" and c.job == warrior, "a Beginner with 35 STR who passed the Job Test becomes a Warrior")
 	_check(c.gear.weapon() == Content.item(&"bronze_sword") and c.max_hp() >= hp, "the Warrior gets a Bronze Sword and wears it")
 	_check(c.advance(mage) != "", "a Warrior can't then become a Magician")
 	var wand: EquipDef = Content.item(&"apprentice_wand")

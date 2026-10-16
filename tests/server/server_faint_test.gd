@@ -1,5 +1,5 @@
 extends TestCase
-## Fainting: a monster's blow that takes the last HP, the EXP it costs, lying still, and
+## Fainting: a monster's blow that takes the last HP, the Dawn Essence it costs, lying still, and
 ## waking up in town with half HP and MP and a moment of invincibility.
 
 const ServerHarness := preload("res://tests/framework/server_helpers.gd")
@@ -12,30 +12,31 @@ var c: Character
 func before_each() -> void:
 	h = ServerHarness.new()
 	var brute := ServerHarness.monster(&"brute", 100000, 1)
-	brute.level = 50 # can't be dodged
 	brute.attack = 100000
 	map = h.field_with([ServerHarness.spawn(brute)])
 	map.mobs[0].position.x = 300.0
 	p = h.join(2, "Ann", ServerHarness.FIELD, 300.0)
 	c = p.character
-	c.xp = 15
+	c.base.luck = 0 # no avoid: the blow can't be dodged
+	c.recalc()
+	c.essence = 15
 
 func after_each() -> void:
 	h.close()
 
-func test_losing_all_hp_faints_and_costs_a_tenth_of_your_exp() -> void:
+func test_losing_all_hp_faints_and_costs_a_tenth_of_your_essence() -> void:
 	h.step(1)
 	check(p.fainted(), "fainted")
 	check_eq(c.health.hp, 0, "no HP")
-	check_eq(c.xp, 14, "lost 10% (rounded down)")
+	check_eq(c.essence, 14, "lost 10% (rounded down)")
 	check_eq(h.count(2, &"ev_fainted"), 1, "told the client")
-	check(h.told(2, "You fainted and lost 1 EXP."), "told the player")
+	check(h.told(2, "You fainted and lost 1 Dawn Essence."), "told the player")
 
 func test_fainted_players_take_no_more_hits() -> void:
 	h.step(1)
 	h.step(20)
 	check_eq(h.count(2, &"ev_hurt"), 1, "hurt once")
-	check_eq(c.xp, 14, "lost EXP once")
+	check_eq(c.essence, 14, "lost essence once")
 
 func test_you_wake_up_in_the_maps_town_after_lying_still() -> void:
 	h.step(1)

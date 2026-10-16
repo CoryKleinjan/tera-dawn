@@ -1,9 +1,13 @@
 extends TestCase
 ## Numbers in content make sense: chances are 0 to 1, amount ranges run low to high,
-## HP, levels and prices are positive, shops never pay more than they charge, levels sit
+## HP, Dawn Essence and prices are positive, shops never pay more than they charge, levels sit
 ## inside their map's and region's ranges, and skills, jobs and items have usable values.
 
 const Scan := preload("res://tests/content/content_scan.gd")
+## The tier a Beginner takes a first job at (see Balance.typical): one tier for every
+## CharacterStats.GROWTH_POINTS stat points bought, and the gear tier (EquipDef.required_level)
+## of a first job's weapons.
+const FIRST_JOB_TIER := 10
 
 func _check_drop(d: DropEntry, what: String) -> void:
 	if d == null:
@@ -42,7 +46,7 @@ func test_monsters_have_positive_stats() -> void:
 		check(m.level >= 1, "%s: level is %d" % [w, m.level])
 		check(m.max_hp >= 1, "%s: max_hp is %d" % [w, m.max_hp])
 		check(m.attack >= 0, "%s: attack is %d" % [w, m.attack])
-		check(m.exp_reward >= 1, "%s: exp_reward is %d" % [w, m.exp_reward])
+		check(m.essence >= 1, "%s: essence is %d" % [w, m.essence])
 		check(m.speed >= 0.0, "%s: speed is %s" % [w, m.speed])
 		check(m.size.x > 0 and m.size.y > 0, "%s: size is %s" % [w, m.size])
 		check(m.sprite_scale > 0, "%s: sprite_scale is %s" % [w, m.sprite_scale])
@@ -123,14 +127,11 @@ func test_mid_game_weapons_drop_in_two_places() -> void:
 
 ## Better weapons come only from monsters: shops sell nothing above a first job's weapon.
 func test_shops_only_sell_basic_weapons() -> void:
-	var first_job_level := 0
-	for j in JobDef.paths_from(Character.START_JOB):
-		first_job_level = maxi(first_job_level, j.advance_level)
 	for s: ShopDef in Content.shops.values():
 		for e in s.items:
 			var w := e.item as EquipDef
 			if w and w.weapon_kind != &"":
-				check(w.required_level <= first_job_level, "%s: sells %s (level %d), a weapon only monsters should drop" % [Scan.where(s), w.id, w.required_level])
+				check(w.required_level <= FIRST_JOB_TIER, "%s: sells %s (tier %d), a weapon only monsters should drop" % [Scan.where(s), w.id, w.required_level])
 
 func test_shops_never_pay_more_than_they_charge() -> void:
 	for s: ShopDef in Content.shops.values():
@@ -160,8 +161,8 @@ func test_quests_have_sane_levels_counts_and_rewards() -> void:
 		var w := Scan.where(q)
 		check(q.min_level >= 1, "%s: min_level is %d" % [w, q.min_level])
 		check(q.max_level == 0 or q.max_level >= q.min_level, "%s: max_level %d is below min_level %d" % [w, q.max_level, q.min_level])
-		check(q.reward_xp >= 0 and q.reward_shards >= 0, "%s: reward_xp %d / reward_shards %d is negative" % [w, q.reward_xp, q.reward_shards])
-		check(q.reward_xp > 0 or q.reward_shards > 0 or not q.reward_items.is_empty(), "%s: rewards nothing" % w)
+		check(q.reward_essence >= 0 and q.reward_shards >= 0, "%s: reward_essence %d / reward_shards %d is negative" % [w, q.reward_essence, q.reward_shards])
+		check(q.reward_essence > 0 or q.reward_shards > 0 or not q.reward_items.is_empty(), "%s: rewards nothing" % w)
 		check(q.offer_text != "" and q.progress_text != "" and q.complete_text != "", "%s: offer_text, progress_text or complete_text is empty" % w)
 		for i in q.objectives.size():
 			var o := q.objectives[i]
@@ -182,15 +183,6 @@ func test_quests_ask_for_monsters_near_their_level() -> void:
 			var m: MonsterDef = o.monster if o and o.kind == QuestObjective.Kind.KILL else null
 			if m:
 				check(m.level <= q.min_level + 15, "%s: objectives[%d] wants level %d %s from level %d players" % [Scan.where(q), i, m.level, m.id, q.min_level])
-
-func test_required_quests_are_open_by_the_time_you_get_there() -> void:
-	# a quest needing another one that unlocks at a higher level can never be offered first
-	for q: QuestDef in Content.quests.values():
-		for r in q.requires:
-			var before: QuestDef = Content.quests.get(r)
-			if before:
-				check(before.min_level <= maxi(q.min_level, 1) or q.max_level == 0, "%s: requires %s, which opens at level %d (above %d)" % [Scan.where(q), r, before.min_level, q.min_level])
-				check(q.max_level == 0 or before.min_level <= q.max_level, "%s: requires %s (level %d+) but stops at level %d" % [Scan.where(q), r, before.min_level, q.max_level])
 
 func test_skills_have_usable_numbers() -> void:
 	for s: SkillDef in Content.skills.values():
@@ -225,25 +217,24 @@ func test_jobs_have_usable_growth() -> void:
 	for j: JobDef in Content.jobs.values():
 		var w := Scan.where(j)
 		check_between(j.mastery, 0.1, 0.95, "%s: mastery" % w)
-		check(j.base_hp > 0 and j.base_mp >= 0 and j.hp_per_level > 0 and j.mp_per_level >= 0, "%s: HP / MP growth must be positive" % w)
-		check(j.ap_per_level >= 1 and j.sp_per_level >= 1, "%s: ap_per_level %d / sp_per_level %d" % [w, j.ap_per_level, j.sp_per_level])
+		check(j.base_hp > 0 and j.base_mp >= 0 and j.hp_growth > 0 and j.mp_growth >= 0, "%s: HP / MP growth must be positive" % w)
 		if j.advances_from != &"":
 			var from: JobDef = Content.jobs.get(j.advances_from)
-			check(j.advance_level >= 2, "%s: advance_level is %d" % [w, j.advance_level])
-			if from and from.advances_from != &"":
-				check(j.advance_level > from.advance_level, "%s: advance_level %d is not above %s's %d" % [w, j.advance_level, from.id, from.advance_level])
+			if from:
+				check(j.tier() > from.tier(), "%s: tier %d is not above %s's %d" % [w, j.tier(), from.id, from.tier()])
 
-func test_job_requirements_are_reachable_with_ability_points() -> void:
-	# a Beginner at the advance level must be able to meet every stat requirement
+func test_job_requirements_are_reachable_by_the_first_job_tier() -> void:
+	# a Beginner who has bought a first-job tier's stat points must be able to meet every
+	# stat requirement
 	var start: JobDef = Content.jobs.get(Character.START_JOB)
+	var budget := (FIRST_JOB_TIER - 1) * CharacterStats.GROWTH_POINTS
 	for j: JobDef in Content.jobs.values():
 		if j.advances_from != Character.START_JOB or j.advance_requirements == null or start == null:
 			continue
-		var budget := start.ap_per_level * (j.advance_level - 1)
 		var need := 0
 		for stat in StatBlock.BASE:
 			need += maxi(0, j.advance_requirements.value(stat) - start.starting_stats.value(stat))
-		check(need <= budget, "%s: needs %d Ability Points by level %d but a Beginner only gets %d" % [Scan.where(j), need, j.advance_level, budget])
+		check(need <= budget, "%s: needs %d stat points bought but a Beginner at tier %d has %d" % [Scan.where(j), need, FIRST_JOB_TIER, budget])
 
 func test_gear_has_sane_requirements_and_stats() -> void:
 	for i: ItemDef in Content.items.values():

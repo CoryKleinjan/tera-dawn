@@ -1,6 +1,6 @@
 extends TestCase
-## Attacks and skills against monsters on the server: what gets hit, damage, kills, EXP,
-## levelling up, cooldowns, MP, buffs and monsters coming back.
+## Attacks and skills against monsters on the server: what gets hit, damage, kills, Dawn
+## Essence, cooldowns, MP, buffs and monsters coming back.
 
 const ServerHarness := preload("res://tests/framework/server_helpers.gd")
 
@@ -16,8 +16,8 @@ func after_each() -> void:
 	h.close()
 
 ## A field with `count` test monsters of `hp` HP, all at `x`, and Ann at 300 facing right.
-func _setup(hp := 1, exp := 10, count := 1, x := 340.0) -> void:
-	mob_def = ServerHarness.monster(&"test_mob", hp, exp)
+func _setup(hp := 1, essence := 10, count := 1, x := 340.0) -> void:
+	mob_def = ServerHarness.monster(&"test_mob", hp, essence)
 	map = h.field_with([ServerHarness.spawn(mob_def, count)])
 	for m in map.mobs:
 		m.position.x = x
@@ -89,42 +89,23 @@ func test_a_hit_monster_turns_on_its_attacker() -> void:
 	check_eq(m.aggro, 600, "angry")
 	check_eq(m.show_hp, SimMob.SHOW_HP_TICKS, "HP bar shown")
 
-func test_killing_a_monster_announces_it_and_gives_exp() -> void:
+func test_killing_a_monster_announces_it_and_gives_essence() -> void:
 	_setup(1, 10)
 	h.join(3, "Bob", ServerHarness.FIELD, 900.0)
 	_attack()
 	check(map.mobs[0].dead, "dead")
 	check_eq(h.last(2, &"ev_mob_died"), [0], "killer told")
 	check_eq(h.last(3, &"ev_mob_died"), [0], "others on the map told")
-	check_eq(p.character.xp, 10, "EXP")
-	check_eq(h.last(2, &"ev_gain"), [&"exp", 10], "EXP shown rising over the player")
-	check(not h.told(2, "EXP"), "not in the message log")
+	check_eq(p.character.essence, 10, "Dawn Essence")
+	var fly := h.last(2, &"ev_essence")
+	check_eq(fly.size(), 3, "the essence flies to the player")
+	check_eq(fly[2], 10, "all of it")
+	check_eq(h.count(3, &"ev_essence"), 0, "only to the killer")
+	check_eq(h.count(2, &"ev_gain"), 0, "it flies from the monster instead of rising over the player")
+	check(not h.told(2, "Essence"), "not in the message log")
 	h.step(1)
 	# the first kill also earns an achievement, so the whole character is sent
-	check_eq(h.last(2, &"ev_character")[0]["xp"], 10, "the update carries the new EXP")
-
-func test_enough_exp_levels_you_up() -> void:
-	var need := Character.create("x").xp_need(1)
-	_setup(1, need + 3)
-	h.join(3, "Bob", ServerHarness.FIELD, 900.0)
-	var c := p.character
-	_attack()
-	check_eq(c.level, 2, "level")
-	check_eq(c.xp, 3, "EXP left over")
-	check_eq(c.ap.points, c.job.ap_per_level, "Ability Points")
-	check_eq(c.skills.points, c.job.sp_per_level, "Skill Points")
-	check_eq(c.health.hp, c.max_hp(), "refilled")
-	check_eq(h.last(2, &"ev_level_up"), [2, 2], "level up shown to the player")
-	check_eq(h.last(3, &"ev_level_up"), [2, 2], "and to the map")
-	h.step(1)
-	check_eq(h.last(2, &"ev_character")[0]["level"], 2, "full character sent after a level up")
-
-func test_a_big_kill_can_give_several_levels() -> void:
-	var probe := Character.create("x")
-	_setup(1, probe.xp_need(1) + probe.xp_need(2))
-	_attack()
-	check_eq(p.character.level, 3, "two levels at once")
-	check_eq(p.character.ap.points, 2 * p.character.job.ap_per_level, "points for both")
+	check_eq(h.last(2, &"ev_character")[0]["essence"], 10, "the update carries the new essence")
 
 func test_attacks_wait_for_the_cooldown() -> void:
 	_setup(100000)
@@ -176,20 +157,24 @@ func test_unknown_skill_ids_are_ignored() -> void:
 func test_learned_skill_spends_its_mp_and_reaches_further() -> void:
 	_setup(1000, 10, 1, 400.0)
 	var c := p.character
-	c.skills.points = 1
+	c.essence = c.skills.price() + 5
 	h.ask(2, &"req_learn_skill", [&"shoulder_bash"])
 	check_eq(c.skills.learned.get(&"shoulder_bash"), 1, "learned")
-	check_eq(c.skills.points, 0, "Skill Point spent")
+	check_eq(c.essence, 5, "its price in Dawn Essence spent")
+	check_eq(c.skills.paid.get(&"shoulder_bash"), CharacterStats.skill_price(0), "and kept as paid")
 	var mp := c.mp
 	_attack(2, &"shoulder_bash")
 	check_eq(c.mp, mp - Content.skill(&"shoulder_bash").mp_at(1), "MP paid")
 	check_eq((h.last(2, &"ev_skill")[5] as Array).size(), 1, "hit the monster 100 px away, past a plain swing")
 
-func test_learning_without_skill_points_is_refused() -> void:
+func test_learning_without_enough_essence_is_refused() -> void:
 	_setup()
+	var c := p.character
+	c.essence = c.skills.price() - 1
 	h.ask(2, &"req_learn_skill", [&"shoulder_bash"])
-	check(not p.character.skills.learned.has(&"shoulder_bash"), "not learned")
-	check(h.told(2, "You have no Skill Points left."), "told why")
+	check(not c.skills.learned.has(&"shoulder_bash"), "not learned")
+	check_eq(c.essence, c.skills.price() - 1, "nothing spent")
+	check(h.told(2, "You need %d Dawn Essence for that." % c.skills.price()), "told why")
 
 func test_not_enough_mp_refuses_the_skill() -> void:
 	_setup(1000)

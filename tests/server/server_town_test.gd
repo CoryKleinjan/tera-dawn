@@ -233,40 +233,50 @@ func test_a_coach_only_goes_where_you_have_been() -> void:
 
 # ---------- job instructors ----------
 
-## A Beginner who put 20 points into STR instead of the INT a Magician needs.
+## A Beginner who bought 20 points of STR instead of the INT a Magician needs, spending all
+## their Dawn Essence. Returns the STR they started with.
 func _misbuilt() -> int:
 	var start := c.job.starting_stats.strength
-	c.base.strength = start + 20
-	c.ap.points = 0
-	c.recalc()
+	c.essence = 0
+	TestCharacters.grant_stat(c, &"strength", 20)
 	return start
 
-func test_an_instructor_resets_a_misbuilt_beginners_ap_once() -> void:
+## The Dawn Essence the first `n` points of one stat cost.
+static func _cost(n: int) -> int:
+	var out := 0
+	for i in n:
+		out += CharacterStats.stat_price(i)
+	return out
+
+func test_an_instructor_resets_a_misbuilt_beginners_stats_once() -> void:
 	var start := _misbuilt()
+	check_eq(c.base.strength, start + 20, "20 points bought")
+	check_eq(c.essence, 0, "all spent")
 	h.place(p, INSTRUCTOR_X)
 	h.ask(2, &"req_reset_ap", [&"test_instructor", &"mage"])
 	check_eq(c.base.strength, start, "STR back where it started")
-	check_eq(c.ap.points, 20, "every point back")
+	check_eq(c.essence, _cost(20), "every point's essence back")
 	check(c.ap.reset_used, "used up")
-	check(h.told(2, "Your Ability Points are back: 20 to spend."), "told")
-	c.ap.spend(&"strength", 20)
+	check(h.told(2, "Your stats are reset, and their Dawn Essence is back: %d to spend." % _cost(20)), "told")
+	check_eq(c.ap.buy(&"strength", 20), 20, "bought again")
 	h.ask(2, &"req_reset_ap", [&"test_instructor", &"mage"])
-	check_eq(c.ap.points, 0, "no second reset")
+	check_eq(c.essence, 0, "no second reset")
 	check(h.told(2, "You've already had your free reset."), "told why")
 
-func test_no_ap_reset_once_the_stats_are_there() -> void:
+func test_no_stat_reset_once_the_stats_are_there() -> void:
 	_misbuilt()
 	c.base.intelligence = 20
+	c.recalc()
 	h.place(p, INSTRUCTOR_X)
 	h.ask(2, &"req_reset_ap", [&"test_instructor", &"mage"])
-	check_eq(c.ap.points, 0, "nothing back")
+	check_eq(c.essence, 0, "nothing back")
 	check(not c.ap.reset_used, "still unused")
 
-func test_ap_reset_needs_you_by_an_instructor_of_that_job() -> void:
+func test_stat_reset_needs_you_by_an_instructor_of_that_job() -> void:
 	_misbuilt()
 	h.ask(2, &"req_reset_ap", [&"test_instructor", &"mage"])
-	check_eq(c.ap.points, 0, "too far away")
+	check_eq(c.essence, 0, "too far away")
 	h.place(p, INSTRUCTOR_X)
 	h.ask(2, &"req_reset_ap", [&"test_instructor", &"warrior"])
-	check_eq(c.ap.points, 0, "they don't teach Warriors")
+	check_eq(c.essence, 0, "they don't teach Warriors")
 	check(not c.ap.reset_used, "still unused")

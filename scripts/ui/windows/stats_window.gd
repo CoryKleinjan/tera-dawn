@@ -112,7 +112,6 @@ static func path_text(c: Character, j: JobDef) -> String:
 	var short := c.stats_short_of(j)
 	var bits := []
 	if short.is_empty():
-		var lines := j.requirement_lines()
 		bits = Array(j.requirement_lines())
 	for stat in StatBlock.BASE:
 		if short.has(stat):

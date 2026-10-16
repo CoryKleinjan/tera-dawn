@@ -1,6 +1,6 @@
 extends TestCase
 ## Players together through the server: chat channels and whispers, invitations,
-## parties (and their shared EXP), buddy lists and the ev_social summary.
+## parties (and their shared Dawn Essence), buddy lists and the ev_social summary.
 
 const ServerHarness := preload("res://tests/framework/server_helpers.gd")
 
@@ -153,7 +153,7 @@ func test_a_party_holds_six() -> void:
 	check(h.told(2, "Your party is full."), "the seventh is refused")
 	check(h.server.social.party_of("Mate3") == null, "Mate3 stays out")
 
-func test_party_members_on_the_map_share_kill_exp() -> void:
+func test_party_members_on_the_map_share_kill_essence() -> void:
 	_accept(2, "party", 3)
 	_accept(2, "party", 4)
 	var d := ServerHarness.monster(&"test_mob", 1, 10)
@@ -162,9 +162,12 @@ func test_party_members_on_the_map_share_kill_exp() -> void:
 	map.mobs.append(m)
 	ServerHarness.no_cards(ann, d)
 	map.kill_mob(m, ann)
-	check_eq(ann.character.xp, 10, "the killer gets it all")
-	check_eq(bob.character.xp, 4, "Bob on the map gets 40%")
-	check_eq(cat.character.xp, 0, "Cat in town gets nothing")
+	check_eq(ann.character.essence, 10, "the killer gets it all")
+	check_eq(bob.character.essence, 4, "Bob on the map gets 40%")
+	check_eq(cat.character.essence, 0, "Cat in town gets nothing")
+	var fly := h.last(3, &"ev_essence")
+	check(fly.size() == 3 and fly[2] == 4, "Bob's share flies to him from the monster")
+	check_eq(h.count(4, &"ev_essence"), 0, "none to Cat")
 	check_eq(bob.character.book.kills(d), 1, "the kill counts for Bob's book and quests too")
 	check_eq(cat.character.book.kills(d), 0, "but not Cat's")
 
@@ -177,7 +180,7 @@ func test_a_fainted_party_member_gets_no_share() -> void:
 func test_the_smallest_share_is_one() -> void:
 	_accept(2, "party", 3)
 	var shares: Array = h.server.social.party_shares(ann, 1)
-	check(shares.size() == 1 and shares[0][0] == bob and shares[0][1] == 1, "one EXP")
+	check(shares.size() == 1 and shares[0][0] == bob and shares[0][1] == 1, "one Dawn Essence")
 
 func test_leaving_a_party_of_two_breaks_it_up() -> void:
 	_accept(2, "party", 3)

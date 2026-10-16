@@ -1,6 +1,6 @@
 extends TestCase
-## Guilds (founding cost and level, names, invitations, leaving, saving) and fame (from
-## level 15, once a day, the same player once a month).
+## Guilds (founding cost, names, invitations, leaving, saving) and fame (once a day, the
+## same player once a month).
 
 const ServerHarness := preload("res://tests/framework/server_helpers.gd")
 
@@ -23,7 +23,6 @@ func after_each() -> void:
 	h.close()
 
 func _found(name := "Dawnguard") -> void:
-	ann.character.level = TDSocial.GUILD_LEVEL
 	ann.character.shards = TDSocial.GUILD_COST
 	h.ask(2, &"req_guild_create", [&"test_clerk", name])
 
@@ -37,16 +36,7 @@ func test_founding_a_guild_costs_its_fee() -> void:
 	check_eq(g["master"], "Ann", "master")
 	check(h.told(2, "You founded the guild Dawnguard!"), "told")
 
-func test_founding_needs_the_level() -> void:
-	ann.character.level = TDSocial.GUILD_LEVEL - 1
-	ann.character.shards = TDSocial.GUILD_COST
-	h.ask(2, &"req_guild_create", [&"test_clerk", "Dawnguard"])
-	check_eq(ann.character.guild, "", "no guild")
-	check_eq(ann.character.shards, TDSocial.GUILD_COST, "nothing paid")
-	check(h.told(2, "You need to be level 10 to found a guild."), "told")
-
 func test_founding_needs_the_dawnshards() -> void:
-	ann.character.level = TDSocial.GUILD_LEVEL
 	ann.character.shards = TDSocial.GUILD_COST - 1
 	h.ask(2, &"req_guild_create", [&"test_clerk", "Dawnguard"])
 	check_eq(ann.character.guild, "", "no guild")
@@ -67,7 +57,6 @@ func test_guild_names_are_unique_in_any_case() -> void:
 	check(h.told(2, "There's already a guild called DAWNGUARD."), "told")
 
 func test_guilds_are_founded_only_at_the_guild_npc() -> void:
-	ann.character.level = TDSocial.GUILD_LEVEL
 	ann.character.shards = TDSocial.GUILD_COST
 	h.place(ann, 1500.0)
 	h.ask(2, &"req_guild_create", [&"test_elder", "Dawnguard"])
@@ -126,29 +115,17 @@ func test_founding_twice_is_refused() -> void:
 
 # ---------- fame ----------
 
-func _famous() -> void:
-	ann.character.level = TDSocial.FAME_LEVEL
-
-func test_fame_needs_level_15() -> void:
-	ann.character.level = TDSocial.FAME_LEVEL - 1
-	h.ask(2, &"req_fame", [3, true])
-	check_eq(bob.character.fame, 0, "no fame")
-	check(h.told(2, "You can give fame from level 15."), "told")
-
 func test_raising_someones_fame() -> void:
-	_famous()
 	h.ask(2, &"req_fame", [3, true])
 	check_eq(bob.character.fame, 1, "+1")
 	check_eq(ann.character.fame_day, SocialGuilds.today(), "Ann's daily fame spent")
 	check(h.told(3, "Ann raised your fame."), "Bob told")
 
 func test_lowering_someones_fame() -> void:
-	_famous()
 	h.ask(2, &"req_chat", ["/defame bob"])
 	check_eq(bob.character.fame, -1, "-1")
 
 func test_fame_once_a_day() -> void:
-	_famous()
 	h.join(4, "Cat", ServerHarness.TOWN)
 	h.ask(2, &"req_fame", [3, true])
 	h.ask(2, &"req_fame", [4, true])
@@ -156,7 +133,6 @@ func test_fame_once_a_day() -> void:
 	check(h.told(2, "You've already given fame today."), "told")
 
 func test_someone_else_the_next_day() -> void:
-	_famous()
 	h.join(4, "Cat", ServerHarness.TOWN)
 	ann.character.fame_day = SocialGuilds.today() - 1
 	ann.character.fame_given["Bob"] = SocialGuilds.today() - 1
@@ -164,7 +140,6 @@ func test_someone_else_the_next_day() -> void:
 	check_eq(h.server.sessions[4].character.fame, 1, "Cat gets it")
 
 func test_the_same_player_once_a_month() -> void:
-	_famous()
 	var day := SocialGuilds.today()
 	ann.character.fame_day = day - 29
 	ann.character.fame_given["Bob"] = day - 29
@@ -176,7 +151,6 @@ func test_the_same_player_once_a_month() -> void:
 	check_eq(bob.character.fame, 1, "30 days later is fine")
 
 func test_no_fame_for_yourself_or_across_maps() -> void:
-	_famous()
 	h.ask(2, &"req_chat", ["/fame ann"])
 	check(h.told(2, "You can't give yourself fame."), "yourself")
 	h.move_to(bob, ServerHarness.FIELD)
@@ -185,7 +159,6 @@ func test_no_fame_for_yourself_or_across_maps() -> void:
 	check_eq(bob.character.fame, 0, "no fame")
 
 func test_fame_is_saved() -> void:
-	_famous()
 	h.ask(2, &"req_fame", [3, true])
 	h.leave(3)
 	check_eq(h.saved("Bob").fame, 1, "Bob's fame saved")

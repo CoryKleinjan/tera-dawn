@@ -34,22 +34,12 @@ func _visit_quest(id := &"t_visit", map := &"t_far") -> QuestDef:
 	o.map = map
 	return fx.quest(id, [o])
 
-func test_can_take_level_window() -> void:
+func test_can_take_ignores_the_old_level_window() -> void:
 	var q := _kill_quest()
 	q.min_level = 5
 	q.max_level = 8
-	c.level = 4
-	check(not c.quests.can_take(q, c), "too low")
-	check_eq(c.quests.status(q, c), QuestLog.Status.LOCKED, "locked")
-	c.level = 5
-	check(c.quests.can_take(q, c), "min level")
-	c.level = 8
-	check(c.quests.can_take(q, c), "max level")
-	c.level = 9
-	check(not c.quests.can_take(q, c), "too high")
-	q.max_level = 0
-	c.level = 200
-	check(c.quests.can_take(q, c), "0 means no cap")
+	check(c.quests.can_take(q, c), "no level to be too low or too high for")
+	check_eq(c.quests.status(q, c), QuestLog.Status.AVAILABLE, "available")
 
 func test_can_take_job_list() -> void:
 	var q := _kill_quest()
@@ -235,7 +225,6 @@ func test_real_repeatable_quest_reopens() -> void:
 	var q := Content.quest(&"q06_tusk_collector")
 	check(q.repeatable, "tusk collector repeats")
 	var c2 := fx.character()
-	c2.level = q.min_level
 	c2.quests.done[q.id] = 1
 	check_eq(c2.quests.status(q, c2), QuestLog.Status.AVAILABLE, "available after handing in")
 

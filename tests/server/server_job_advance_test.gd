@@ -1,6 +1,6 @@
 extends TestCase
 ## Choosing a job at an instructor, through the server (req_advance): who may advance and
-## where, the gifts and Skill Points that come with it, a full bag holding it back, and the
+## where, the gifts that come with it, a full bag holding it back, and the
 ## new job being announced and saved. The smoke test covers the happy path through the
 ## dialogue window; these cover the refusals.
 
@@ -33,7 +33,6 @@ func after_each() -> void:
 
 ## A Beginner who meets every Magician requirement, the Job Test included.
 func _ready_for_mage() -> void:
-	c.level = mage.advance_level
 	c.base.intelligence = mage.advance_requirements.intelligence
 	c.quests.done[mage.advance_quest.id] = true
 	c.recalc()
@@ -41,12 +40,12 @@ func _ready_for_mage() -> void:
 func _advance(npc := &"test_instructor", job := &"mage") -> void:
 	h.ask(2, &"req_advance", [npc, job])
 
-func test_advancing_changes_the_job_and_hands_out_the_gifts_and_sp() -> void:
+func test_advancing_changes_the_job_and_hands_out_the_gifts() -> void:
 	_ready_for_mage()
-	var sp := c.skills.points
+	c.essence = 50
 	_advance()
 	check_eq(c.job, mage, "a Magician now")
-	check_eq(c.skills.points, sp + mage.advance_sp, "the job's Skill Points")
+	check_eq(c.essence, 50, "no essence given or taken")
 	check_eq(c.gear.weapon(), wand, "the wand, worn at once")
 	check_eq(c.inventory.count_of(blue), 30, "the mana potions")
 	check(h.told(2, "You are now a Magician!"), "told")
@@ -55,7 +54,6 @@ func test_advancing_changes_the_job_and_hands_out_the_gifts_and_sp() -> void:
 func test_every_job_gets_its_basic_weapon_worn() -> void:
 	for job in JobDef.paths_from(Character.START_JOB):
 		var who := Character.create("Gift" + String(job.id), Character.START_JOB)
-		who.level = job.advance_level
 		if job.advance_requirements:
 			for stat in StatBlock.BASE:
 				who.base.set(stat, maxi(who.base.value(stat), job.advance_requirements.value(stat)))
@@ -84,14 +82,6 @@ func test_the_new_job_is_saved_at_once() -> void:
 	_advance()
 	var saved := h.saved("Ann")
 	check(saved != null and saved.job.id == &"mage", "saved as a Magician")
-
-func test_too_low_a_level_is_refused_and_told() -> void:
-	_ready_for_mage()
-	c.level = mage.advance_level - 1
-	_advance()
-	check_eq(c.job.id, &"beginner", "still a Beginner")
-	check(h.told(2, "You need to be level %d to become a Magician." % mage.advance_level), "told why")
-	check_eq(c.inventory.count_of(wand), 0, "no gift")
 
 func test_missing_stats_are_refused_and_told() -> void:
 	_ready_for_mage()
@@ -141,9 +131,9 @@ func test_a_full_use_tab_holds_the_advance_back() -> void:
 func test_a_job_can_only_be_chosen_once() -> void:
 	_ready_for_mage()
 	_advance()
-	var sp := c.skills.points
+	c.essence = 50
 	_advance()
-	check_eq(c.skills.points, sp, "no second round of Skill Points")
+	check_eq(c.essence, 50, "nothing given a second time")
 	check_eq(c.gear.weapon(), wand, "the first wand is worn")
 	check_eq(c.inventory.count_of(wand), 0, "no second wand")
 	check(h.told(2, "A Magician can't become a Magician."), "told")

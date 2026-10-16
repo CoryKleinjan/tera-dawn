@@ -3,15 +3,15 @@ extends Node
 ## Balance), and how many kills pay for a tier. Run: godot --headless --path . res://tests/balance_report.tscn
 
 func _ready() -> void:
-	var by_level := {}
+	var by_tier := {}
 	for m: MonsterDef in Content.monsters.values():
 		if not m.boss and m.splits_into == null or not m.boss:
-			by_level[m.level] = by_level.get(m.level, []) + [m]
-	var levels := by_level.keys()
-	levels.sort()
+			by_tier[m.level] = by_tier.get(m.level, []) + [m]
+	var tiers := by_tier.keys()
+	tiers.sort()
 	print("tier monster              hp   ess  kills/tier " + "  ".join(Balance.lines().map(func(j: StringName) -> String: return String(j).substr(0, 7).rpad(7))))
-	for lvl: int in levels:
-		for m: MonsterDef in by_level[lvl]:
+	for lvl: int in tiers:
+		for m: MonsterDef in by_tier[lvl]:
 			var row := "%3d  %-18s %6d %5d %8.1f   " % [lvl, m.id, m.max_hp, m.essence, Balance.kills_per_tier(lvl, m)]
 			for j in Balance.lines():
 				row += "%7.1f  " % Balance.hits_to_kill(Balance.typical(j, maxi(1, lvl)), m)

@@ -1,5 +1,5 @@
 extends TestCase
-## The Lv 10 job test on the server, with the real content (Greenbough's, the others are the
+## The job test on the server, with the real content (Greenbough's, the others are the
 ## same): a Beginner can't advance without it; the tutor's Job Test opens a way to a Trial
 ## Ground each player has to themselves; reaching the far end opens a tear and the boss steps
 ## out once its scene ends; beating it and handing the test in makes you an Archer and sends
@@ -22,7 +22,6 @@ func before_each() -> void:
 	p = h.join(2, "Ann", HALL, 700.0)
 	c = p.character
 	archer = Content.job(&"archer")
-	c.level = archer.advance_level
 	c.base.dexterity = archer.advance_requirements.dexterity
 	c.recalc()
 
@@ -71,7 +70,6 @@ func test_the_trial_gate_opens_only_during_the_test() -> void:
 
 func test_each_player_has_their_own_trial_ground() -> void:
 	var other := h.join(3, "Bo", HALL, 700.0)
-	other.character.level = 10
 	_into_trial()
 	_into_trial(other, 3)
 	check_eq(other.map.def.id, TRIAL, "both on the Trial Ground")
@@ -127,10 +125,11 @@ func test_leaving_starts_it_fresh_and_fainting_sends_you_to_town() -> void:
 	check(not _boss(p.map).dead, "so it steps out at once")
 
 func test_a_fresh_beginner_can_beat_it() -> void:
-	# a Lv 10 Beginner's basic attack, stats as levelling would leave them
+	# a Beginner ready for their job (Balance tier 10)'s basic attack, every stat point
+	# bought in STR as the Auto button would
 	var hero := Character.create("Tester", Character.START_JOB)
-	TestCharacters._level_to(hero, 10)
-	TestCharacters._spend_ap(hero)
+	hero.base.strength += 9 * CharacterStats.GROWTH_POINTS
+	hero.recalc()
 	var boss: MonsterDef = Content.monster(&"tear_boss")
 	var skill: SkillDef = Content.skills[Character.BASIC_ATTACK]
 	var dealt := 0

@@ -141,11 +141,10 @@ func test_goals_of_one_kind_climb() -> void:
 		seen[key] = a.id
 
 func test_goals_are_reachable() -> void:
-	var c := Character.new()
 	for a in Achievements.all():
-		if a.kind == "level":
-			check(c.xp_need(a.goal) > 0, "achievement %s: level %d has no EXP curve" % [a.id, a.goal])
-			check(a.goal <= Character.MAX_LEVEL, "achievement %s: level %d is past the Lv %d cap" % [a.id, a.goal, Character.MAX_LEVEL])
+		if a.kind == "stats":
+			# no more than a player at the top of the game's content so far has bought
+			check(a.goal <= TestCharacters.STAT_POINTS, "achievement %s: buy %d stat points, but the content so far is for %d" % [a.id, a.goal, TestCharacters.STAT_POINTS])
 		if a.kind == "maps":
 			check(a.goal <= Content.maps.size(), "achievement %s: visit %d maps, but there are %d" % [a.id, a.goal, Content.maps.size()])
 		if a.kind == "pages":

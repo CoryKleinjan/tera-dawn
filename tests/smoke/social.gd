@@ -30,7 +30,7 @@ func check() -> void:
 	var labels: Array = menu.actions().map(func(a: Array) -> String: return a[0])
 	_check(menu.visible and labels.has("Invite to party") and labels.has("Trade") and labels.has("Add buddy"), "clicking a player opens what you can do with them")
 	menu.visible = false
-	# a party, shared EXP
+	# a party, shared Dawn Essence
 	Net.ask(&"req_social", [&"party", "Ally"])
 	await _ticks(1)
 	var id: int = social.invites.keys().filter(func(k: int) -> bool: return social.invites[k]["to"] == ally.peer)[0]
@@ -38,10 +38,10 @@ func check() -> void:
 	await _ticks(35)
 	var party: Dictionary = Game.social.get("party", {})
 	_check(party.get("leader") == ch.name and party.get("members", []).size() == 2, "a party forms when the invite is accepted")
-	var xp := ally.character.xp
+	var essence := ally.character.essence
 	var mob: SimMob = _me().map.mobs.filter(func(m: SimMob) -> bool: return not m.dead)[0]
 	_me().map.kill_mob(mob, _me())
-	_check(ally.character.xp > xp or ally.character.level > 1, "party members on the map share the EXP")
+	_check(ally.character.essence > essence, "party members on the map share the Dawn Essence")
 	Net.ask(&"req_chat", ["/p go team"])
 	await _ticks(2)
 	_check(str(chat.lines[-1]["text"]) == "[Party] %s: go team" % ch.name, "/p talks to the party")
@@ -87,7 +87,6 @@ func check() -> void:
 	await _ticks(2)
 	_check(ally.character.shards == 700 and not trade.visible, "cancelling gives back what was offered")
 	# fame
-	ch.level = maxi(ch.level, TDSocial.FAME_LEVEL)
 	ch.fame_day = -1
 	Net.ask(&"req_fame", [ally.peer, true])
 	Net.ask(&"req_fame", [ally.peer, true])
@@ -97,7 +96,6 @@ func check() -> void:
 	Net.server.enter_map(ally, &"dawnharbor", 400)
 	await _ticks(3)
 	ch.shards = TDSocial.GUILD_COST + 100
-	ch.level = maxi(ch.level, TDSocial.GUILD_LEVEL)
 	# Hollis keeps the guild register in Dawnharbor's Guild Hall
 	Net.server.enter_map(_me(), &"dawnharbor_guild", 240)
 	Net.server.enter_map(ally, &"dawnharbor_guild", 400)

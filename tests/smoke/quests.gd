@@ -24,7 +24,7 @@ func check() -> void:
 	await _ticks(1)
 	_check(Game.me.quests.active.has(q1.id), "accepting it starts the quest")
 	talk.choose(talk.options.size() - 1)
-	var xp_level: int = Game.me.level * 100000 + Game.me.xp
+	var essence: int = Game.me.essence
 	var potions := Game.me.inventory.count_of(Content.item(&"red_potion"))
 	var shards := Game.me.shards
 	var dewlings := meadow.mobs.filter(func(m: SimMob) -> bool: return m.def.id == &"dewling")
@@ -44,7 +44,7 @@ func check() -> void:
 	await _ticks(1)
 	_check(Game.me.quests.done.has(q1.id) and not Game.me.quests.active.has(q1.id), "handing it in finishes it")
 	_check(Game.me.inventory.count_of(Content.item(&"red_potion")) == potions + 5 and Game.me.shards >= shards + q1.reward_shards
-		and Game.me.level * 100000 + Game.me.xp > xp_level, "it pays its EXP, Dawnshards and potions")
+		and Game.me.essence >= essence + q1.reward_essence and q1.reward_essence > 0, "it pays its Dawn Essence, Dawnshards and potions")
 	talk.choose(talk.options.size() - 1)
 
 	# Petal Nectar only drops for someone on Sweet Nectar.
@@ -58,7 +58,6 @@ func check() -> void:
 	_check(nectar_drops.call() == 0, "quest items don't drop without the quest")
 	var ch := _me().character
 	ch.quests.done[&"q02_moss_for_the_stall"] = 1
-	ch.level = maxi(ch.level, 3)
 	ch.quests.accept(Content.quest(&"q04_sweet_nectar"))
 	for n in 10:
 		bat._reset()

@@ -37,8 +37,8 @@ func test_sitting_doubles_regeneration() -> void:
 	c.health.set_hp(10)
 	c.mp = 0
 	_regen_tick()
-	check_eq(c.health.hp, 12, "2 HP standing at level 1")
-	check_eq(c.mp, 2, "2 MP standing at level 1")
+	check_eq(c.health.hp, 12, "2 HP standing, before any stats are bought")
+	check_eq(c.mp, 2, "2 MP standing, before any stats are bought")
 	h.ask(2, &"req_sit", [true])
 	_regen_tick()
 	check_eq(c.health.hp, 12 + 4, "4 HP sitting")
@@ -179,13 +179,14 @@ func test_sitting_down_earns_take_a_seat_once() -> void:
 	h.step(61)
 	check_eq(h.count(2, &"ev_achievement"), 1, "not sent again")
 
-func test_reaching_level_5_earns_an_achievement() -> void:
-	var need := 0
-	for lvl in range(1, 5):
-		need += c.xp_need(lvl)
-	h.server.give_xp(p, need)
+func test_buying_20_stat_points_earns_an_achievement() -> void:
+	var bought := c.ap.bought(&"strength")
+	for i in 20:
+		c.essence += CharacterStats.stat_price(bought + i)
+	h.ask(2, &"req_auto_stats")
+	check_eq(c.ap.spent(), 20, "20 points bought")
 	h.step(1)
-	check_has(h.events(2, &"ev_achievement"), ["level_5"], "level 5")
+	check_has(h.events(2, &"ev_achievement"), ["level_5"], "Growing Up")
 
 func test_achievements_are_noticed_on_the_minute_too() -> void:
 	c.shards = 100000
@@ -199,7 +200,7 @@ func test_others_see_the_achievement_sparkle() -> void:
 	h.ask(2, &"req_setup", [1])
 	h.step(1)
 	check_eq(h.last(2, &"ev_achievement"), ["best_friend"], "pet achievement")
-	check_eq(h.last(3, &"ev_effect")[0], EffectDef.CELEBRATE, "Bob sees the sparkle, not a level up")
+	check_eq(h.last(3, &"ev_effect")[0], EffectDef.CELEBRATE, "Bob sees the sparkle")
 	check_eq(h.count(3, &"ev_achievement"), 0, "but isn't sent the achievement")
 
 func test_a_first_kill_earns_first_hunt() -> void:

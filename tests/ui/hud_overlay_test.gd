@@ -18,25 +18,26 @@ func after_each() -> void:
 func test_status_bar_draws_any_state() -> void:
 	var bar := ui.hud.status
 	check(bar.visible and bar.size.y == TDStatusBar.HEIGHT, "the status bar runs along the bottom")
-	for state in [[1, 0], [30, 1], [99, 5]]:
+	for state in [[0, 0], [250, 1], [9999999, 5]]:
 		await ui.edit(func(c: Character) -> void:
-			c.level = state[0]
-			c.xp = c.xp_need() / 2
+			c.essence = state[0]
 			c.mp = state[1]
 			c.shards = 9999999)
-		check(await ui.redraw(bar), "the status bar draws at level %d" % state[0])
+		check(await ui.redraw(bar), "the status bar draws with %d Dawn Essence" % state[0])
 
-func test_status_bar_says_max_level_at_the_cap() -> void:
+func test_status_bar_shows_dawn_essence() -> void:
 	var bar := ui.hud.status
-	await ui.edit(func(c: Character) -> void:
-		c.level = 20
-		c.xp = c.xp_need() / 4)
-	check_eq(bar.exp_text(), "%.1f%%" % (100.0 * Game.me.xp / Game.me.xp_need()), "how far to the next level")
-	await ui.edit(func(c: Character) -> void:
-		c.level = Character.MAX_LEVEL
-		c.xp = 0)
-	check_eq(bar.exp_text(), "Max level", "at the cap")
-	check(await ui.redraw(bar), "the status bar draws at the cap")
+	await ui.edit(func(c: Character) -> void: c.essence = 0)
+	check_eq(bar.essence_text(), "Dawn Essence 0", "no essence")
+	check_eq(TDStatusBar.essence_fill(Game.me), 0.0, "an empty bar")
+	# a fresh character's cheapest buy is a first stat point or skill level, both the base price
+	var cheapest := CharacterStats.stat_price(0)
+	await ui.edit(func(c: Character) -> void: c.essence = cheapest / 2)
+	check_eq(bar.essence_text(), "Dawn Essence %d" % (cheapest / 2), "the essence in hand")
+	check(TDStatusBar.essence_fill(Game.me) > 0.0 and TDStatusBar.essence_fill(Game.me) < 1.0, "part full on the way to the next buy")
+	await ui.edit(func(c: Character) -> void: c.essence = cheapest * 3)
+	check_eq(TDStatusBar.essence_fill(Game.me), 1.0, "full once it pays for something")
+	check(await ui.redraw(bar), "the status bar draws full")
 
 func test_quickslots_hold_skills_and_items() -> void:
 	var slots := ui.hud.quickslots
@@ -122,7 +123,6 @@ func test_prompt_answers_with_what_was_typed() -> void:
 
 func test_overlay_draws_everything_it_can_show() -> void:
 	await ui.edit(func(c: Character) -> void:
-		c.level = 20
 		c.job = Content.job(&"warrior")
 		for q: QuestDef in Content.quests.values().slice(0, 5):
 			c.quests.accept(q)
@@ -131,7 +131,7 @@ func test_overlay_draws_everything_it_can_show() -> void:
 				c.skills.learned[s.id] = 1
 				c.skills.buffs[s.id] = [1, 600]
 		c.guild = "Dawnbreakers")
-	Game.social = {"party": {"leader": "Mossy", "members": [["Mossy", 7, 22, "warrior", 0.5, "meadow"], [Game.me.name, 1, 20, "warrior", 1.0, "meadow"], ["Kestrel", 8, 18, "archer", 0.1, "hollow"]]}}
+	Game.social = {"party": {"leader": "Mossy", "members": [["Mossy", 7, "warrior", 0.5, "meadow"], [Game.me.name, 1, "warrior", 1.0, "meadow"], ["Kestrel", 8, "archer", 0.1, "hollow"]]}}
 	for i in 8:
 		ui.world.add_log("Log line %d" % i, Palette.MIST)
 	ui.world.show_banner("A Banner")
@@ -318,24 +318,26 @@ func test_pickups_of_the_same_item_merge() -> void:
 	ui.world.show_pickup(tuft, 1)
 	check_eq(ui.world.log_lines[-1]["text"], "Picked up %s" % tuft.display_name, "later pickups start a new line")
 
-func test_exp_and_dawnshards_float_over_you() -> void:
+func test_essence_and_dawnshards_float_over_you() -> void:
 	ui.world.log_lines.clear()
-	ui.world.show_gain(&"exp", 9)
+	ui.world.show_gain(&"essence", 9)
 	ui.world.show_gain(&"shards", 8)
 	var gains: Array = ui.world.fx_layer.get_children().filter(func(f: Node) -> bool: return f is TDFloatText and f.is_gain())
 	check_eq(gains.size(), 2, "two rising numbers")
 	check(ui.world.log_lines.is_empty(), "nothing in the log")
-	check_eq((gains[0] as TDFloatText).gain_text(), "+9 EXP", "EXP")
+	check_eq((gains[0] as TDFloatText).gain_text(), "+9 Dawn Essence", "Dawn Essence")
 	check_eq((gains[1] as TDFloatText).gain_text(), "+8 Dawnshards", "Dawnshards")
 	check(gains[1].position.y < gains[0].position.y, "the second stacks above the first")
 	check(await ui.redraw(ui.hud.overlay), "the overlay draws them")
 
-func test_killing_shows_exp_over_you_not_in_the_log() -> void:
+func test_gaining_essence_shows_over_you_not_in_the_log() -> void:
 	ui.world.log_lines.clear()
-	ui.player().map.server.give_xp(ui.player(), 3)
+	var before := Game.me.essence
+	ui.player().map.server.give_essence(ui.player(), 3)
 	await ui.ticks(2)
-	check(ui.world.log_lines.all(func(l: Dictionary) -> bool: return not l["text"].contains("EXP")), "no EXP line in the log")
-	check(ui.world.fx_layer.get_children().any(func(f: Node) -> bool: return f is TDFloatText and f.is_gain()), "a rising +3 EXP")
+	check(ui.world.log_lines.all(func(l: Dictionary) -> bool: return not l["text"].contains("Dawn Essence")), "no Dawn Essence line in the log")
+	check(ui.world.fx_layer.get_children().any(func(f: Node) -> bool: return f is TDFloatText and f.is_gain()), "a rising +3 Dawn Essence")
+	check_eq(Game.me.essence, before + 3, "the essence reached the client")
 
 # ---------- title screen ----------
 
