@@ -123,4 +123,3 @@ rage_ticks = 100
 sprite_frames = ExtResource("2_grotto_tusker")
 sprite_scale = 0.73
 drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12")])
-respawn_ticks = Vector2i(1800, 2400)

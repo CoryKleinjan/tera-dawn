@@ -55,12 +55,11 @@ func test_waking_up_gives_half_hp_and_mp_and_invincibility() -> void:
 	check_eq(p.inv, 120, "a moment of invincibility")
 
 func test_fainting_in_a_town_wakes_you_in_that_town() -> void:
-	var town := h.server.map_instance(ServerHarness.TOWN)
 	h.move_to(p, ServerHarness.TOWN, 900.0)
 	c.health.set_hp(0)
 	p.faint_t = 1
 	h.step(1)
-	check(p.map == town, "same town")
+	check_eq(p.map.def.id, ServerHarness.TOWN, "same town")
 	check_eq(p.position.x, 500.0, "at its start")
 
 func test_a_map_without_a_return_map_sends_you_to_the_start_map() -> void:

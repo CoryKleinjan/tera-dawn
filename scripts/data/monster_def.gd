@@ -62,8 +62,6 @@ extends Resource
 
 @export_group("Loot")
 @export var drops: Array[DropEntry] = []
-## Ticks before a slain monster returns, picked between x and y.
-@export var respawn_ticks := Vector2i(360, 540)
 
 ## What its shot moves fire (empty when it has none).
 func projectiles() -> Array[ProjectileDef]:

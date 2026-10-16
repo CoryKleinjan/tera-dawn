@@ -97,7 +97,7 @@ func test_beating_it_makes_you_an_archer_and_sends_you_to_celest() -> void:
 	var boss := _boss(p.map)
 	p.map.kill_mob(boss, p)
 	check_eq(c.quests.status(Content.quests[TEST], c), QuestLog.Status.READY, "the test is passed")
-	h.step(boss.def.respawn_ticks.y + SimMob.DEATH_FADE_TICKS + 10)
+	h.step(3000)
 	check(boss.dead, "and it doesn't come back")
 	# the tutor watches from the start of the course, and takes it in there
 	_put(p, 330.0)
