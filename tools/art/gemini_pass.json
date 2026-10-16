@@ -22501,6 +22501,54 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 and 2 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose. Cell 1: winding up a spell, standing in a low wide stance with his feet planted apart, elbows out, one fist at each hip. Cell 2: springing up on one leg, his other knee raised high, one arm punched straight out ahead and the other fist at his chest. Cells 3 to 8 are empty and must stay empty. He faces RIGHT in a slight three-quarter side view, seen from the FRONT. The second attached picture shows this exact piece already painted on the same boy in two other poses: copy its colours, materials, shape and details exactly, never its poses. The third attached picture is laid out like the base: in cells 1 and 2 a DIFFERENT pair of boots is already painted correctly on the same green boy. Copy only how they sit on his feet and which way each toe points; never copy their colours, materials or details. On each green shape, paint ONLY a pair of soft magician's slippers: deep blue cloth with gold trim around the opening and a gently curled pointed toe. EVERY slipper's toe points to the RIGHT, the way he faces, on the front foot AND on the back foot, exactly like the boots in the third attached picture; no toe ever points left and no curl ever sits at the left end of a slipper. Paint BOTH feet in every cell; each slipper is the same size as the green foot it covers and sits exactly on it, covering the whole foot, no bigger. The green shape is only a flat placement guide lying BEHIND everything you paint: paint each slipper WHOLE straight over it, with no gaps, notches, bites or holes anywhere. Paint nothing else: no legs, body, head, hands or other clothing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: exactly the painting style of the slippers in the second attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline. Keep the grid lines. No text, no labels."
   }
+ },
+ {
+  "id": "mshero_pirate_trousers_b9",
+  "prompts": null,
+  "batch": null,
+  "with": null,
+  "refs": [],
+  "save": "mshero_pirate_trousers_b9.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Hero pose review' (Cory 19:55Z 'which sheets missed'): the Pirate trousers on crouch, backstep and sit: painted on the place the Thief trousers fill, from one pair of Pirate trousers (no sheet of boys attached)",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b9_pirate_trousers_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/b9_pirate_trousers_swatch.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 3 each hold a flat bright green (#00FF00) shape with a flat cream area over its hips and legs, on a flat magenta background. Cells 4 to 8 are empty and must stay empty. Each cream area is a pair of trousers on the green shape's legs: paint every cream area as the young pirate's striped sailor trousers in the attached picture: cream cloth with thin navy blue stripes running down along each leg and following its folds, soft folds at the hips and knees, and a thin dark plum-brown outline. Keep each cream area's outline exactly: the same shape, size and position, so the trousers cover exactly that area and nothing more; paint nothing outside it. Leave every green pixel flat pure #00FF00 exactly as it is and the background flat pure magenta #FF00FF. Do not change the green shapes, do not paint any face, skin, body, boots or other clothing, do not add any figure, and leave empty cells empty. Style: exactly the painting style of the trousers in the attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_thief_jerkin_b9",
+  "prompts": null,
+  "batch": null,
+  "with": null,
+  "refs": [],
+  "save": "mshero_thief_jerkin_b9.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Hero pose review' (Cory 19:55Z 'which sheets missed'): the Thief jerkin on ladder1: its own painting with both sleeves carried down over the white shirt still showing at the elbows",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b9_thief_jerkin_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds a painted dark brown leather jerkin with charcoal grey short sleeves, seen from behind, over a flat bright green (#00FF00) shape, on a flat magenta background. Cells 2 to 8 are empty and must stay empty. At the end of each sleeve, a flat grey patch carries that sleeve a little further down its arm, over the elbow: paint both patches as part of the same charcoal grey sleeves, with the same cloth, soft folds, shading and thin dark plum-brown outline, so each sleeve reaches past the elbow in one piece with no seam or band. Keep everything else exactly as it is: the jerkin's outline, shape, size, position, colours and every detail. Leave every green pixel flat pure #00FF00 exactly as it is and the background flat pure magenta #FF00FF. Do not paint any skin, hand, head or other clothing, do not add anything, and leave empty cells empty. Keep the grid lines. No text, no labels."
+  }
  }
 ]
 }

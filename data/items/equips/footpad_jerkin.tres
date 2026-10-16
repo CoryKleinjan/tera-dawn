@@ -14,7 +14,8 @@ defense = 6
 script = ExtResource("script")
 frame_art = {
 &"roll2": &"roll1",
-&"rope2": &"rope1"
+&"rope2": &"rope1",
+&"skyward2": &"cast2"
 }
 nudges = {
 &"roll2": Vector4(11, -30, -180, 0),
