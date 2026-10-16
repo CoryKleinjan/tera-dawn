@@ -3,27 +3,28 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ctfihxvvlv7im"
-path="res://.godot/imported/kelp_lurker.png-e2790005c9104450029908781c33fa8a.ctex"
+path.bptc="res://.godot/imported/kelp_lurker.png-e2790005c9104450029908781c33fa8a.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/sprites/monsters/kelp_lurker.png"
-dest_files=["res://.godot/imported/kelp_lurker.png-e2790005c9104450029908781c33fa8a.ctex"]
+dest_files=["res://.godot/imported/kelp_lurker.png-e2790005c9104450029908781c33fa8a.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

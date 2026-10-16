@@ -147,8 +147,7 @@ func burst(at: Vector2, col: Color, amount: int, speed := 1.0) -> void:
 ## A little puff of dust kicked up at someone's feet: landing (`dir` 0, both ways) or
 ## skidding round (`dir` the way it sprays, -1 or 1).
 func dust(feet: Vector2, dir: int, amount: int) -> void:
-	var p := TDStage.particles(DUST, amount, 0.22)
-	(p.mesh.material as StandardMaterial3D).blend_mode = BaseMaterial3D.BLEND_MODE_MIX  # dust doesn't glow
+	var p := TDStage.particles(DUST, amount, 0.22, false)  # dust doesn't glow
 	p.one_shot = true
 	p.explosiveness = 0.9
 	p.lifetime = 0.45

@@ -132,9 +132,7 @@ func _smoke(at: Vector3, biome: BiomeDef) -> void:
 	p.preprocess = 5.0
 	var q := QuadMesh.new()
 	q.size = Vector2(0.9, 0.9)
-	var m := TDStage.additive_material(biome.smoke_color)
-	m.blend_mode = BaseMaterial3D.BLEND_MODE_MIX
-	q.material = m
+	q.material = TDStage.additive_material(biome.smoke_color, false)
 	p.mesh = q
 	p.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	p.direction = Vector3(0.3, 1, 0)

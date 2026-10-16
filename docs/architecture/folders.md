@@ -49,7 +49,7 @@ assets/
   sprites/            Cut sprites, one folder per kind (generated, don't hand-edit)
   animations/         SpriteFrames for animated actors (generated)
   audio/music/        Looping tracks and jingles (.ogg, named by id; tools/audio/make_music.py)
-  audio/sfx/          Sound effects (.ogg, named by id, _1 _2 for variants; tools/audio/make_sfx.py)
+  audio/sfx/          Sound effects (.wav, named by id, _1 _2 for variants; tools/audio/make_sfx.py)
 art/
   source/             The art sheets (Gemini batch output, painted)
   sheets/             One manifest per sheet: how to cut it

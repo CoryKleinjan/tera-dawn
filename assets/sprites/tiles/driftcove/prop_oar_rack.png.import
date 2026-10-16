@@ -3,27 +3,28 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cn2l16g0chgh0"
-path="res://.godot/imported/prop_oar_rack.png-7baeac2ce060c85e41a3f91820e93523.ctex"
+path.bptc="res://.godot/imported/prop_oar_rack.png-7baeac2ce060c85e41a3f91820e93523.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/sprites/tiles/driftcove/prop_oar_rack.png"
-dest_files=["res://.godot/imported/prop_oar_rack.png-7baeac2ce060c85e41a3f91820e93523.ctex"]
+dest_files=["res://.godot/imported/prop_oar_rack.png-7baeac2ce060c85e41a3f91820e93523.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

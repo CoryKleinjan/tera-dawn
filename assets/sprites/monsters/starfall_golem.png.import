@@ -3,27 +3,28 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cgtxj78lkesp2"
-path="res://.godot/imported/starfall_golem.png-276c01e224808d5a12f09ec7490bd09a.ctex"
+path.bptc="res://.godot/imported/starfall_golem.png-276c01e224808d5a12f09ec7490bd09a.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/sprites/monsters/starfall_golem.png"
-dest_files=["res://.godot/imported/starfall_golem.png-276c01e224808d5a12f09ec7490bd09a.ctex"]
+dest_files=["res://.godot/imported/starfall_golem.png-276c01e224808d5a12f09ec7490bd09a.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

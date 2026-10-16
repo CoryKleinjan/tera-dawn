@@ -3,27 +3,28 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cejaduptvic6n"
-path="res://.godot/imported/row_house.png-d05d11d075805a8774bca8585e423f7b.ctex"
+path.bptc="res://.godot/imported/row_house.png-d05d11d075805a8774bca8585e423f7b.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/sprites/buildings/dawnharbor/row_house.png"
-dest_files=["res://.godot/imported/row_house.png-d05d11d075805a8774bca8585e423f7b.ctex"]
+dest_files=["res://.godot/imported/row_house.png-d05d11d075805a8774bca8585e423f7b.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
