@@ -37,6 +37,10 @@ extends Resource
 ## they wait for the next time this one is defeated.
 @export var splits_into: MonsterDef
 @export var split_count := 2
+## Bosses: ticks it stands roaring (its "intro" animation) when it first sees a player, and
+## (its "phase" animation) when it gets its second wind at half HP. 0 skips the roar.
+@export var intro_ticks := 0
+@export var rage_ticks := 0
 
 @export_group("Looks")
 ## Animated monsters: SpriteFrames with idle, move, attack, hurt and die (missing ones fall back to idle).

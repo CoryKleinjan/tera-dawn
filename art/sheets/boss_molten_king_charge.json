@@ -1,0 +1,33 @@
+{
+  "source": "art/source/boss_molten_king_charge.png",
+  "save": false,
+  "out_dir": "art/build/boss_molten_king_charge",
+  "cells": [
+    [
+      "charge_windup2",
+      "",
+      "charge2",
+      "",
+      ""
+    ]
+  ],
+  "inset": 4,
+  "scale": 0.23,
+  "detail": 3.47,
+  "grid": {
+    "rows": [
+      0,
+      442
+    ],
+    "cols": [
+      [
+        0,
+        418,
+        424,
+        857,
+        863,
+        1200
+      ]
+    ]
+  }
+}
