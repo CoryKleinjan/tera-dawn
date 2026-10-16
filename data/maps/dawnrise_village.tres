@@ -134,34 +134,35 @@ depth = -2.0
 [sub_resource type="Resource" id="Prop_bread_basket"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_bread_basket")
-x = 1585.0
+x = 1520.0
 depth = -1.5
 
 [sub_resource type="Resource" id="Prop_hay"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_hay")
-x = 1740.0
-depth = -3.0
+x = 1930.0
+y = 620.0
+on_wall = true
 
 [sub_resource type="Resource" id="Prop_scarecrow"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_scarecrow")
-x = 2065.0
-y = 530.0
+x = 440.0
 depth = -1.5
 
 [sub_resource type="Resource" id="Prop_beehives"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_beehives")
-x = 1950.0
+x = 2068.0
 y = 530.0
 depth = -2.0
 
 [sub_resource type="Resource" id="Prop_wheelbarrow"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_wheelbarrow")
-x = 2160.0
-depth = -3.0
+x = 2060.0
+y = 620.0
+on_wall = true
 
 [sub_resource type="Resource" id="Backdrop_picture"]
 script = ExtResource("backdrop_layer_def")
@@ -208,7 +209,7 @@ after_taking = ExtResource("44_tut5")
 [sub_resource type="Resource" id="Npc_baker"]
 script = ExtResource("5_npc_placement")
 npc = ExtResource("n_baker")
-x = 1640.0
+x = 1590.0
 platform = 0
 face = -1
 
@@ -222,7 +223,7 @@ face = -1
 [sub_resource type="Resource" id="Npc_farmer"]
 script = ExtResource("5_npc_placement")
 npc = ExtResource("n_farmer")
-x = 1880.0
+x = 1910.0
 platform = 1
 face = 1
 

@@ -82,6 +82,18 @@ func test_skins_are_as_wide_as_their_platform() -> void:
 		var surface_y := -s.position.y * TDStage.PX + PlatformSkin.surface_row(map.biome) * s.pixel_size * TDStage.PX
 		check_near(surface_y, d.y, "platform %d's walking surface is its top edge" % i, 0.5)
 
+func test_a_ledge_painted_into_the_scenery_draws_nothing() -> void:
+	root.free()
+	map.platforms[1].in_scenery = true
+	root = Node3D.new()
+	TerrainBuilder.new(null, root).build(map, MapLayout.new(map).platforms)
+	var skins := _sprites().filter(func(s: Sprite3D) -> bool: return s.texture is ImageTexture)
+	check_eq(skins.size(), 1, "only the other platform gets a skin")
+	for s: Sprite3D in _sprites():
+		var at := Vector2(s.position.x, -s.position.y) * TDStage.PX
+		check(absf(at.y - map.platforms[1].y) > 30.0, "nothing grows on the painted ledge (a sprite at %s)" % at)
+	check_eq(TerrainBuilder.skin_span(map.platforms[1], map.biome), Vector2(300, 300), "it covers nothing")
+
 func test_land_art_shows_at_one_pixel_size() -> void:
 	for s: Sprite3D in _sprites():
 		var density := TDStage.art_density(s.texture)

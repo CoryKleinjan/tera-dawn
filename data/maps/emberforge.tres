@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=81 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=85 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="map_def"]
 [ext_resource type="Resource" path="res://data/biomes/forge.tres" id="forge"]
@@ -54,6 +54,34 @@ y = 696.0
 width = 700.6
 look = ExtResource("t_terrace")
 look_span = 0.6637
+
+[sub_resource type="Resource" id="Terrace_mid_west_wing"]
+script = ExtResource("platform_def")
+x = 1516.0
+y = 857.05
+width = 125.9
+in_scenery = true
+
+[sub_resource type="Resource" id="Terrace_mid_east_wing"]
+script = ExtResource("platform_def")
+x = 2158.1
+y = 857.05
+width = 123.9
+in_scenery = true
+
+[sub_resource type="Resource" id="Terrace_up_west_wing"]
+script = ExtResource("platform_def")
+x = 4058.0
+y = 799.22
+width = 171.7
+in_scenery = true
+
+[sub_resource type="Resource" id="Terrace_up_east_wing"]
+script = ExtResource("platform_def")
+x = 4930.3
+y = 799.22
+width = 169.7
+in_scenery = true
 
 [sub_resource type="Resource" id="Ladder_mid_west"]
 script = ExtResource("climbable_def")
@@ -187,7 +215,7 @@ face = -1
 [sub_resource type="Resource" id="Npc_kid"]
 script = ExtResource("npc_placement")
 npc = ExtResource("n_kid")
-x = 4010.0
+x = 4120.0
 platform = 0
 face = 1
 
@@ -325,7 +353,7 @@ height = 1100
 ground_y = 1020
 lantern_spacing = 0.0
 start_x = 300.0
-platforms = Array[ExtResource("platform_def")]([SubResource("Terrace_mid"), SubResource("Terrace_up")])
+platforms = Array[ExtResource("platform_def")]([SubResource("Terrace_mid"), SubResource("Terrace_up"), SubResource("Terrace_mid_west_wing"), SubResource("Terrace_mid_east_wing"), SubResource("Terrace_up_west_wing"), SubResource("Terrace_up_east_wing")])
 climbables = Array[ExtResource("climbable_def")]([SubResource("Ladder_mid_west"), SubResource("Ladder_mid_east"), SubResource("Ladder_up_west"), SubResource("Ladder_up_east")])
 npcs = Array[ExtResource("npc_placement")]([SubResource("Npc_taxi"), SubResource("Npc_shop"), SubResource("Npc_apprentice"), SubResource("Npc_keeper"), SubResource("Npc_kid"), SubResource("Npc_veteran")])
 props = Array[ExtResource("prop_placement")]([SubResource("Prop_brazier_west"), SubResource("Prop_bench"), SubResource("Prop_crate"), SubResource("Prop_ingots"), SubResource("Prop_brazier_terrace"), SubResource("Prop_brazier_forge"), SubResource("Prop_anvil"), SubResource("Prop_quench_barrel"), SubResource("Prop_grindstone"), SubResource("Prop_weapon_rack"), SubResource("Prop_shield_rack"), SubResource("Prop_logs"), SubResource("Prop_ore_cart"), SubResource("Prop_coal_bin"), SubResource("Prop_brazier_east"), SubResource("Prop_brazier_hall"), SubResource("Prop_dummy")])

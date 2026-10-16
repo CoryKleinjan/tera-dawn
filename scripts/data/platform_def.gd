@@ -31,6 +31,10 @@ const LOOK_GRASS := 7.0
 ## A secret ledge: only a job's movement skill gets you up to it (Flash Jump, Blink, Charge,
 ## Rolling Dash, Backstep Leap), never a plain jump or a rope, and the minimap leaves it out.
 @export var secret := false
+## A deck or ledge already painted into the scenery behind it (a treehouse's deck, a
+## lookout's floor, a crow's nest, a terrace's railed wing): it draws nothing of its own and
+## grows no decor, so the painting is what you stand on.
+@export var in_scenery := false
 
 ## Game pixels per texel of `look`.
 func look_texel() -> float:

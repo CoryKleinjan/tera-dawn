@@ -274,7 +274,7 @@ scale = 1.0
 [sub_resource type="Resource" id="Prop_lectern"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_prop_lectern")
-x = 2290.0
+x = 2245.0
 y = 773.0
 depth = -1.5
 scale = 1.0

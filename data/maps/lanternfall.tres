@@ -183,14 +183,14 @@ face = 1
 [sub_resource type="Resource" id="Npc_shop"]
 script = ExtResource("npc_placement")
 npc = ExtResource("n_shop")
-x = 1340.0
+x = 1305.0
 platform = 0
 face = -1
 
 [sub_resource type="Resource" id="Npc_keeper"]
 script = ExtResource("npc_placement")
 npc = ExtResource("n_keeper")
-x = 1430.0
+x = 1420.0
 platform = 0
 face = -1
 
@@ -236,7 +236,7 @@ x = 860.0
 [sub_resource type="Resource" id="Prop_bench"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_prop_bench")
-x = 1400.0
+x = 2800.0
 
 [sub_resource type="Resource" id="Prop_stall"]
 script = ExtResource("prop_placement")
@@ -279,7 +279,7 @@ light_height = 130.0
 [sub_resource type="Resource" id="Prop_sacks"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_prop_sacks")
-x = 5450.0
+x = 5250.0
 
 [sub_resource type="Resource" id="Prop_trough"]
 script = ExtResource("prop_placement")

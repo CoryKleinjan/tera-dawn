@@ -143,7 +143,8 @@ func test_quest_items_drop_only_while_the_quest_wants_them() -> void:
 	h.move_to(p, ServerHarness.TOWN, GIVER_X)
 	h.ask(2, &"req_quest_accept", [&"test_giver", q_collect.id])
 	h.move_to(p, ServerHarness.FIELD, 300.0)
-	h.step(200) # the first quarry comes back
+	field = h.server.maps[ServerHarness.FIELD] # loaded fresh, the first quarry back
+	h.step(30) # past the swing's cooldown
 	for m in field.mobs:
 		m.position.x = 340.0
 	h.ask(2, &"req_skill", [&"basic_attack", p.position, 1])

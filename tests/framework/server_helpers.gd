@@ -291,7 +291,6 @@ static func monster(id := &"test_mob", hp := 1, essence := 10) -> MonsterDef:
 	d.essence = essence
 	d.speed = 0.0
 	d.size = Vector2(36, 30)
-	d.respawn_ticks = Vector2i(100, 100)
 	return d
 
 static func drop(item: ItemDef, amount := 1, chance := 1.0) -> DropEntry:
