@@ -240,7 +240,8 @@ script = ExtResource("8_portal_def")
 x = 2310.0
 platform = 14
 target_map = &"old_oak_heights"
-target_x = 0.0
+target_x = 160.0
+target_platform = 1
 
 [sub_resource type="Resource" id="Portal_2"]
 script = ExtResource("8_portal_def")

@@ -175,7 +175,7 @@ script = ExtResource("8_portal_def")
 x = 2600.0
 platform = 0
 target_map = &"elder_root"
-target_x = 0.0
+target_x = 300.0
 shortcut = &"greenbough_root_wall"
 
 [sub_resource type="Resource" id="Spawn_0"]
