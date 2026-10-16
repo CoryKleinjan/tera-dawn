@@ -1,0 +1,83 @@
+{
+  "source": "art/source/monanim_tear_boss.png",
+  "save": false,
+  "out_dir": "art/build/monanim_tear_boss",
+  "cells": [
+    [
+      "jump1",
+      "",
+      "jump2",
+      "",
+      "pounce_windup",
+      "",
+      "pounce"
+    ],
+    [
+      ""
+    ],
+    [
+      "slam_windup",
+      "",
+      "slam",
+      "",
+      "shot_windup",
+      "",
+      "shot"
+    ],
+    [
+      ""
+    ],
+    [
+      ""
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "scale": 0.2137,
+  "detail": 3.66,
+  "grid": {
+    "rows": [
+      0,
+      549,
+      553,
+      1036,
+      1039,
+      1100
+    ],
+    "cols": [
+      [
+        0,
+        396,
+        400,
+        799,
+        802,
+        1201,
+        1205,
+        1600
+      ],
+      [
+        0,
+        1600
+      ],
+      [
+        0,
+        396,
+        400,
+        799,
+        802,
+        1201,
+        1205,
+        1600
+      ],
+      [
+        0,
+        1600
+      ],
+      [
+        0,
+        1600
+      ]
+    ]
+  }
+}

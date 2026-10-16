@@ -1,0 +1,67 @@
+{
+  "source": "art/source/monanim_old_clawbeard.png",
+  "save": false,
+  "out_dir": "art/build/monanim_old_clawbeard",
+  "cells": [
+    [
+      "jump1",
+      "",
+      "jump2",
+      "",
+      "lunge_windup",
+      "",
+      "lunge"
+    ],
+    [
+      ""
+    ],
+    [
+      "charge_windup",
+      "",
+      "charge",
+      "",
+      "shot_windup",
+      "",
+      "shot"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "scale": 0.2988,
+  "detail": 3.27,
+  "grid": {
+    "rows": [
+      0,
+      549,
+      551,
+      1100
+    ],
+    "cols": [
+      [
+        0,
+        408,
+        411,
+        824,
+        826,
+        1239,
+        1242,
+        1600
+      ],
+      [
+        0,
+        1600
+      ],
+      [
+        0,
+        408,
+        411,
+        824,
+        826,
+        1239,
+        1242,
+        1600
+      ]
+    ]
+  }
+}
