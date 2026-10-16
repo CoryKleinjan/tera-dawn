@@ -146,8 +146,9 @@ const SKILL_REACH := Vector2(520, 420)
 
 ## The movement skills (SkillDef.move) that carry the player onto platform `target` in one
 ## go, at level 1, from somewhere this reach already gets to: straight from standing on a
-## platform (a Charge, Rolling Dash, Backstep Leap or Blink) or in the air during a jump,
-## standing or running (any of them but the roll). Returns their ids.
+## platform (a Charge, Backstep Leap or Blink, or a Rolling Dash off its end, jumping out of
+## it or not) or in the air during a jump, standing or running (any of them but the roll).
+## Returns their ids.
 func skills_reaching(target: int) -> Array[StringName]:
 	var out: Array[StringName] = []
 	for s: SkillDef in Content.skills.values():
@@ -191,11 +192,12 @@ func _ground_move(move: MoveDef, from: Vector2, dir: int, pl: Platform) -> Array
 		MoveDef.Style.BLINK:
 			return _blink(move, from, dir)
 		MoveDef.Style.ROLL:
-			# rolled off the end of the platform with some of the roll left
+			# rolled off the end of the platform with some of the roll left, or jumped out of it
 			var out := []
 			var edge := Vector2(pl.x + pl.w + 1.0 if dir > 0 else pl.x - 1.0, pl.y)
 			for left in range(move.ticks, 0, -4):
 				out.append_array(_sim(edge, Vector2(dir * speed, 0), dir, -1, left))
+				out.append_array(_sim(edge, Vector2(dir * speed, TDPlayer.JUMP_SPEED), dir, -1, left))
 			return out
 	return []
 

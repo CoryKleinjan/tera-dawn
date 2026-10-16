@@ -148,6 +148,13 @@ update this page when one changes. Each zone's own look and music are in
 - Map names show only at the top of the screen; nothing labels a map in the world.
 - Every piece of land is walkable: no arches or floating rock islands, nothing that looks like
   ground but isn't. No two exits of a map lead to the same map. Maps can be wide and multi-level.
+- A zone's fields are a web you can loop through, stacked like Hollow Knight's (canopy above,
+  roots below), each with 2 to 4 exits; Greenbough is the pilot. Shortcuts open one way until
+  you find them, then work both ways; a breakable wall opens one.
+- Every field has two secret ledges only a job's movement skill reaches: a high one (Flash Jump,
+  Blink) and a far one across a gap (every movement skill). Each holds a chest a character opens
+  once (shards, potions, a 60% scroll, a local Monster Book card). Secret ledges and shortcuts
+  stay off the minimap and world map.
 - Characters, NPCs, ropes and ladders draw in front of land; characters cast no shadows. Portals draw in front of land and
   scenery, behind ropes, NPCs, monsters and players; no NPC stands on a portal.
 - Portals are a blue-white light pillar on the ground, at exits and doorways, 70% opaque.

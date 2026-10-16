@@ -12,7 +12,8 @@ extends Resource
 @export var platform := 0
 ## Blows it takes to break.
 @export var hits := 1
-## Its picture standing whole, and once broken (an opened chest, a wall with a hole in it).
+## Its picture standing whole, and once broken (an opened chest, a wall with a hole in it);
+## with no broken picture it is gone once broken.
 @export var whole: Texture2D
 @export var broken: Texture2D
 ## How tall it stands, in game pixels: its pictures are scaled to this. A blow lands when an

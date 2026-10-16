@@ -432,16 +432,21 @@ func show_open_portals(c: Character) -> void:
 	for node: Node3D in locked_portals:
 		node.visible = (locked_portals[node] as PortalDef).open_to(c)
 
-## Shows each chest and wall broken open if `c` has broken theirs, else whole.
+## Shows each chest and wall broken open if `c` has broken theirs (gone, if it has no broken
+## picture), else whole.
 func show_breakables(c: Character) -> void:
 	for i: int in breakables:
 		var b := world.map.breakables[i]
-		(breakables[i] as Sprite3D).texture = b.broken if c.found_secret(b.id) and b.broken else b.whole
+		var s := breakables[i] as Sprite3D
+		var open := c.found_secret(b.id)
+		s.texture = b.broken if open and b.broken else b.whole
+		s.visible = not open or b.broken != null
 
 ## How far a chest or wall shakes when hit, in game pixels.
 const SHAKE := 4.0
 
-## Chest or wall `i` was hit: it shakes, or breaks open (`broke`) and shows its broken picture.
+## Chest or wall `i` was hit: it shakes, or breaks open (`broke`) and shows its broken picture
+## (or is gone, with none).
 func strike_breakable(i: int, broke: bool) -> void:
 	var s: Sprite3D = breakables.get(i)
 	if s == null:
@@ -449,6 +454,9 @@ func strike_breakable(i: int, broke: bool) -> void:
 	var b := world.map.breakables[i]
 	if broke and b.broken:
 		s.texture = b.broken
+	elif broke:
+		s.visible = false
+		return
 	var rest: Vector3 = s.get_meta(&"rest", s.position)
 	var t := s.create_tween()
 	for k in [1.0, -0.8, 0.5, -0.25, 0.0]:
