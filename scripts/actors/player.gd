@@ -71,6 +71,11 @@ const HURT_POSE_TICKS := 20
 const CHEER_TICKS := 50
 ## Ticks between asking the server for the next item while the loot key is held.
 const LOOT_EVERY := 4
+## Ticks an attack or skill press made too early (still swinging, or on cooldown) is kept
+## for: it goes off as soon as he can, so a press just before the swing ends isn't lost.
+const ATTACK_BUFFER_TICKS := 8
+## Ticks between portal press and the map change, so the screen fades out first.
+const PORTAL_FADE_TICKS := 12
 ## Ticks of the combat-ready stance after an attack, before he relaxes into idle.
 const READY_TICKS := 120
 ## Fewest ticks a movement skill's pose shows (a Blink itself is over at once).
@@ -128,6 +133,11 @@ var _reported := &""  # the animation the server last heard about
 var speech := ""      # the last thing said in map chat, shown in a bubble
 var speech_t := 0
 var _freeze_t := 0    # ticks held still after being hit (see knock_back)
+var _stop_t := 0      # hit-stop: ticks held mid-swing after your melee blow lands (see hit_stop)
+var _portal_t := 0    # ticks until the portal you stepped into takes you (see _interact)
+## A skill pressed too early, and for how many more ticks it's kept (ATTACK_BUFFER_TICKS).
+var _queued: SkillDef
+var _queued_t := 0
 var _lock_t := 0      # ticks the knockback carries you without steering
 var _jumping := false # rising from your own jump (letting go cuts it short)
 var _aim := Hitbox.Aim.AHEAD  # which way the current attack aims
@@ -158,6 +168,10 @@ func place(x: float, y: float) -> void:
 	sitting = false
 	platform = world.platforms[0]
 	jump_grace.cancel()
+	_stop_t = 0
+	_portal_t = 0
+	_queued = null
+	_queued_t = 0
 	_report()
 
 func is_climbing() -> bool:
@@ -198,6 +212,13 @@ func knock_back(from_x: float) -> void:
 		_move_t = 0
 		jump_grace.cancel()
 
+## Your melee blow landed: he holds mid-swing for `ticks` (the monster freezes too, see
+## TDMob.hit_react), so the blow feels heavy. Presses meanwhile are kept, not lost.
+func hit_stop(ticks: int) -> void:
+	if ticks > _stop_t and not is_climbing():
+		_stop_t = ticks
+		body.hold(ticks)
+
 ## Your melee blow ahead landed: a little push back. (A downward blow already bounced you,
 ## see _use.)
 func recoil() -> void:
@@ -222,6 +243,19 @@ func step() -> void:
 		return
 	if inv > 0:
 		inv -= 1
+	if _portal_t > 0:
+		# stepping through a portal: the screen fades out, then the server moves you
+		_portal_t -= 1
+		if _portal_t == 0:
+			Net.ask(&"req_portal")
+		return
+	if _stop_t > 0:
+		# hit-stop: held mid-swing for a beat so the blow lands; presses are still kept
+		_stop_t -= 1
+		if _tapped("jump"):
+			jump_grace.press()
+		_attacks()
+		return
 	if _freeze_t > 0:
 		# just hit: hold still for a beat (timers keep running on the server)
 		_freeze_t -= 1
@@ -303,7 +337,37 @@ func _attacks() -> void:
 			use_quickslot(i)
 			return
 	if _tapped("attack"):
-		_use(Game.me.skills.basic_attack())
+		_press(Game.me.skills.basic_attack())
+	elif _queued_t > 0:
+		if _stop_t == 0:
+			_queued_t -= 1 # a hit-stop doesn't eat into the wait
+		if _ready_for(_queued):
+			var skill := _queued
+			_queued = null
+			_queued_t = 0
+			_use(skill)
+	elif _held("attack") and cooldown == 0 and _stop_t == 0:
+		# holding the attack key keeps swinging (quietly stops if it can't)
+		var basic := Game.me.skills.basic_attack()
+		if _ready_for(basic) and Game.me.skills.use_problem(basic) == "":
+			_use(basic)
+
+## A skill key went down: use it now, or keep it for a few ticks if he's still busy.
+func _press(skill: SkillDef) -> void:
+	if skill == null:
+		return
+	if _ready_for(skill):
+		_queued = null
+		_queued_t = 0
+		_use(skill)
+	else:
+		_queued = skill
+		_queued_t = ATTACK_BUFFER_TICKS
+
+## Whether `skill` could go off this tick as far as timing goes (not climbing, no cooldown,
+## no recharge, not held by hit-stop).
+func _ready_for(skill: SkillDef) -> bool:
+	return skill != null and not is_climbing() and cooldown == 0 and _stop_t == 0 and not recharge.has(skill.id)
 
 ## Does what's on quickslot `i`: a skill, or the first stack of an item.
 func use_quickslot(i: int) -> void:
@@ -316,7 +380,7 @@ func use_quickslot(i: int) -> void:
 		if slot >= 0:
 			Net.ask(&"req_setup" if item.tab() == ItemDef.Tab.SETUP else &"req_use_item", [slot])
 		return
-	_use(Content.skills.get(q[1]))
+	_press(Content.skills.get(q[1]))
 
 ## Which way an attack goes if used now: up while Up is held, down while Down is held in
 ## the air, else ahead.
@@ -446,7 +510,7 @@ func _interact() -> bool:
 		# fade-in (TDWorld.enter_map) must come after this
 		world.stage.fade_to(1.0)
 		Sound.play(PORTAL_SOUND)
-		Net.ask(&"req_portal")
+		_portal_t = PORTAL_FADE_TICKS
 		return true
 	var npc := world.npc_near(position)
 	if npc:

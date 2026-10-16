@@ -23,6 +23,8 @@ const STUN_SPIN := 0.006
 const STUN_COLOR := Color(1.0, 0.92, 0.45)
 ## How fast a flier drops to the ground when slammed and rises again after (share per tick).
 const DOWN_SPEED := 0.2
+## Physics ticks a hit flashes the monster white: one short flash per hit, not a strobe.
+const HIT_FLASH_TICKS := 5
 
 var world: TDWorld
 var index := 0
@@ -47,6 +49,8 @@ var _last_x := 0.0
 ## Hit reaction: how far it is pushed back (game pixels, fading) and hit-stop ticks left.
 var _recoil := 0.0
 var _stop_t := 0
+var _flash_until := 0   # physics tick the current hit flash ends on
+var _was_hurt := false
 ## How visible it is (fades out and in for a blink), and whether it shows its second wind.
 var _fade := 1.0
 ## The tint last given to the rig (see _tint).
@@ -92,6 +96,7 @@ func kill() -> void:
 func hit_react(face: int, stop_ticks := 0) -> void:
 	_recoil = 6.0 * face
 	_stop_t = maxi(_stop_t, stop_ticks)
+	_flash_until = Engine.get_physics_frames() + HIT_FLASH_TICKS
 	if rig:
 		rig.squash(1.0)
 
@@ -144,8 +149,12 @@ func _process(_delta: float) -> void:
 	var hidden := flags & SnapshotFlags.MOB_HIDDEN != 0
 	_fade = move_toward(_fade, 0.0 if hidden else 1.0, 0.25)
 	rig.set_opacity(clampf(death_t / 30.0, 0.0, 1.0) if fallen else _fade)
+	# a short white flash when a hit lands (hit_react), or when the server says it was hurt
 	var hurt := flags & SnapshotFlags.MOB_HURT != 0
-	rig.set_flash(hurt and Engine.get_physics_frames() % 4 < 2)
+	if hurt and not _was_hurt:
+		_flash_until = maxi(_flash_until, Engine.get_physics_frames() + HIT_FLASH_TICKS)
+	_was_hurt = hurt
+	rig.set_flash(Engine.get_physics_frames() < _flash_until)
 	# stunned: frozen mid-flinch until it comes round
 	var stunned := stunned()
 	if _stop_t == 0:
