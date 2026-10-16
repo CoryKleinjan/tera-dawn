@@ -21672,6 +21672,81 @@
    ],
    "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's boss monster \"Molten King\" once, standing in its idle pose on magenta: a huge black lava boar with glowing orange cracks, tusks, a spiked crown of horns and a mane of flame and smoke. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, markings, face, every glowing crack, tusk, horn, flame and smoke detail it has in its idle pose, the same size as in the first attached picture, the same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different from the others. Every glowing part and detail it has in the first attached picture is there in every cell. It always faces RIGHT, seen from the side, its face turned to the right. Poses stand on one shared ground line near the bottom of each cell, like in the first attached picture. It is a boss: every pose is big, bold and dramatic, with strong clear body shapes that read at a glance. This is its DEFEAT. Cell 1, DEATH STAGGER: reeling back from a final blow, head tossed back and to the side, legs wobbling, mouth open. Cell 2, DEATH KNEEL: front legs buckling under it so it sinks down onto its front knees, head drooping low, its glowing cracks dimming and its flame mane shrinking. Cell 3, DEATH FALLEN: collapsed on its side flat on the ground line, eyes closed, legs limp, its cracks dark with only a faint ember glow, its flame mane gone to a thin wisp of smoke. Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
   }
+ },
+ {
+  "id": "boss_molten_king_fix_recover",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_molten_king_fix_recover.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations': redo of the Molten King test frames that came back cut off at the sheet edge (or, for phase, a copy of the style picture); he is drawn smaller and the NPC style ref is left out. cells charge_recover, slam_recover, shot_recover.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x3.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/molten_king_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's boss monster \"Molten King\" once, standing in its idle pose on magenta: a huge black lava boar with glowing orange cracks, tusks, a spiked crown of horns and a mane of flame and smoke. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, markings, face, every glowing crack, tusk, horn, flame and smoke detail it has in its idle pose, the same size as in the first attached picture, the same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different from the others. Every glowing part and detail it has in the first attached picture is there in every cell. It always faces RIGHT, seen from the side, its face turned to the right. Poses stand on one shared ground line near the bottom of each cell, like in the first attached picture. It is a boss: every pose is big, bold and dramatic, with strong clear body shapes that read at a glance. Draw him SMALLER than his cell: he fills only about 70% of the cell's width, centred, with a wide magenta margin on every side, his snout and tusks and tail fully inside the cell. Cell 1, CHARGE RECOVER: skidding to a stop, front legs braced stiff and planted forward, body leaning back, head tossed up, snorting. Cell 2, SLAM RECOVER: pushing back up onto all four legs after slamming the ground, head low and shaking, body still tense, regaining its balance. Cell 3, SHOT RECOVER: mouth closing, head pulling back up to level, standing square on all four legs, snorting. Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+ {
+  "id": "boss_molten_king_fix_end",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_molten_king_fix_end.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   2
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations': redo of the Molten King test frames that came back cut off at the sheet edge (or, for phase, a copy of the style picture); he is drawn smaller and the NPC style ref is left out. cells intro3, death3.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x2.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/molten_king_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 2 cells (1 row of 2, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's boss monster \"Molten King\" once, standing in its idle pose on magenta: a huge black lava boar with glowing orange cracks, tusks, a spiked crown of horns and a mane of flame and smoke. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, markings, face, every glowing crack, tusk, horn, flame and smoke detail it has in its idle pose, the same size as in the first attached picture, the same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different from the others. Every glowing part and detail it has in the first attached picture is there in every cell. It always faces RIGHT, seen from the side, its face turned to the right. Poses stand on one shared ground line near the bottom of each cell, like in the first attached picture. It is a boss: every pose is big, bold and dramatic, with strong clear body shapes that read at a glance. Draw him SMALLER than his cell: he fills only about 70% of the cell's width, centred, with a wide magenta margin on every side, his snout and tusks and tail fully inside the cell. Cell 1, INTRO READY: on all four legs in a wide fighting stance, head lowered towards the right with tusks forward, ready to fight. Cell 2, DEATH FALLEN: collapsed on its side flat on the ground line, eyes closed, legs limp, its cracks dark with only a faint ember glow, its flame mane gone to a thin wisp of smoke. Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+ {
+  "id": "boss_molten_king_fix_phase",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_molten_king_fix_phase.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations': redo of the Molten King test frames that came back cut off at the sheet edge (or, for phase, a copy of the style picture); he is drawn smaller and the NPC style ref is left out. cells phase1, phase2, phase3.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x3.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/molten_king_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's boss monster \"Molten King\" once, standing in its idle pose on magenta: a huge black lava boar with glowing orange cracks, tusks, a spiked crown of horns and a mane of flame and smoke. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, markings, face, every glowing crack, tusk, horn, flame and smoke detail it has in its idle pose, the same size as in the first attached picture, the same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different from the others. Every glowing part and detail it has in the first attached picture is there in every cell. It always faces RIGHT, seen from the side, its face turned to the right. Poses stand on one shared ground line near the bottom of each cell, like in the first attached picture. It is a boss: every pose is big, bold and dramatic, with strong clear body shapes that read at a glance. Draw him SMALLER than his cell: he fills only about 70% of the cell's width, centred, with a wide magenta margin on every side, his snout and tusks and tail fully inside the cell. This is its PHASE CHANGE at half health, when it gets furious and stronger. Cell 1, PHASE HUNCH: hunched low and shaking with fury, head down, legs bent, its glowing cracks brighter than in the idle pose. Cell 2, PHASE ROAR: reared up on its back legs, head thrown back roaring, flame mane blazing huge and tall, its glowing cracks blazing bright orange-yellow all over its body. Cell 3, PHASE LAND: slammed back down onto all four legs in a wide, low, furious stance, head lowered with tusks forward, its cracks still blazing bright and its flame mane bigger than in its idle pose. Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
  }
 ]
 }
