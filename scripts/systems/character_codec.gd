@@ -16,7 +16,7 @@ static func to_dict(c: Character) -> Dictionary:
 		"hp": c.health.hp, "mp": c.mp,
 		"inventory": c.inventory.to_dict(), "equipment": c.equipment.to_dict(), "storage": c.storage.to_dict(),
 		"quests": c.quests.to_dict(),
-		"skills": _string_keys(c.skills.learned), "sp": c.skills.points, "buffs": _string_keys(c.skills.buffs), "element": c.skills.element,
+		"skills": _string_keys(c.skills.learned), "sp": c.skills.points, "buffs": _string_keys(c.skills.buffs),
 		"quickslots": c.quickslots.map(func(q: Array) -> Array: return q.map(func(v) -> String: return String(v))),
 		"buddies": c.buddies.duplicate(), "fame": c.fame, "fame_day": c.fame_day, "fame_given": c.fame_given.duplicate(), "guild": c.guild,
 		"book": c.book.to_dict(), "pet": String(c.pet), "pet_full": c.pet_full, "visited": c.visited.duplicate(),
@@ -79,7 +79,6 @@ static func load_dict(c: Character, data: Dictionary) -> void:
 			var b: Variant = data["buffs"][k]
 			if Content.skills.has(StringName(k)) and b is Array and b.size() == 2:
 				skills.buffs[StringName(k)] = [int(b[0]), int(b[1])]
-	skills.element = clampi(int(data.get("element", 0)), 0, SkillBook.ELEMENTS.size() - 1)
 	if data.get("quickslots") is Array:
 		var saved: Array = data["quickslots"]
 		for i in Character.QUICKSLOTS:

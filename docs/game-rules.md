@@ -42,8 +42,8 @@ update this page when one changes. Each zone's own look and music are in
   moved up or down the stack on any frame; nothing is repainted or cut for it. Prefer shrinking
   to growing: a piece drawn bigger than painted looks softer.
 - Every piece of gear has frames for every pose in the game, whatever its job: every job's
-  attack (swing, bow, pistol, throw, cast) and every skill pose added later, since the Harbinger
-  wears all gear and uses all skills. A new body pose means new frames for all gear.
+  attack (swing, bow, pistol, throw, cast) and every skill pose added later. A new body pose
+  means new frames for all gear.
 - His arms, fists and held weapons never cover his face, in any pose; both fists show. Blink
   has no pose of its own: he just vanishes and reappears.
 - Animations are shared across similar actions (one swing for all melee, one cast for all
@@ -88,8 +88,7 @@ update this page when one changes. Each zone's own look and music are in
 - A first job has seven skills: a movement skill, a quick single-target attack, a crowd attack, a
   self buff, a party buff (reaches party members nearby), a passive and a monster-control skill.
   The SP earned from Lv 10 to 30 maxes all but the control skill (max 10), so players choose
-  what to leave unmaxed; no bonus SP makes up for it. No finishers in the first job; later
-  tiers get them.
+  what to leave unmaxed; no bonus SP makes up for it.
 - Monster control, one per job, made to combo: Warrior Skyward Cleave throws monsters in front
   into the air; Magician Gravity Well pulls airborne monsters down, then hits every grounded one
   around; Thief Shadow Ambush blinks into the biggest group ahead (ground or air) and stuns it;
@@ -99,23 +98,23 @@ update this page when one changes. Each zone's own look and music are in
 - Second tier (Lv 30): every first job picks one of two blends of itself and another first job:
   Spellblade (Warrior + Magician), Hexcaster (Magician + Thief), Swashbuckler (Thief + Pirate),
   Sharpshooter (Pirate + Archer), Wildhunter (Archer + Warrior). A blend is the same job from
-  either side. It keeps its own first-job skills, opens all of the other job's first-job skills,
-  and adds its own finisher and signature skill (max 10 each); 4 Skill Points a level, so
-  nearly everything is maxed by the third tier at Lv 50 (the control skills leave some choice). Both stats add together for damage (no
-  averaging); Auto splits points evenly. It wields every weapon and off-hand of both jobs.
+  either side. It keeps its own first-job skills and opens all of the other job's first-job
+  skills; it has no skills of its own (its draw is combining the two jobs). Both stats add
+  together for damage (no averaging); Auto splits points evenly. It wields every weapon and off-hand of both jobs.
   No Ability Point reset on advancing. A later tutor offers the blends; the first-job tutors
   never do.
 - Every job is built to attack and be fun solo: no tank or healer jobs.
 - No job is shown or named to the player until they can choose it: no menu, list, tooltip,
   quest or NPC line hints at a later job before then. The one exception: Beginners see the
   five first jobs and what each needs, so they can plan their stats.
-- Third tier (Lv 50, planned): five jobs, each joining two blends that share no first job, so
-  all four of their stats add together for damage. It uses every weapon of its four first
-  jobs plus its own two-handed weapon, opens every skill of those four jobs and both blends,
-  and adds one ultimate skill that hits a very large area and a huge number of monsters.
-- Fourth tier (planned): one job, Harbinger. It has every skill and weapon in the game, and
-  all five stats add together for its damage. It unlocks only after the story reveals the hero
-  is the harbinger; until then nothing in the game names it.
+- Third tier (Lv 50, planned): each blend splits into two jobs, each leaning into one of its
+  two parents: Spellblade into Bladecaller (Warrior) or Runeblade (Magician), Hexcaster into
+  Warlock (Magician) or Nightweaver (Thief), Swashbuckler into Cutthroat (Thief) or Dread
+  Pirate (Pirate), Sharpshooter into Gunslinger (Pirate) or Hawkeye (Archer), Wildhunter into
+  Stalker (Archer) or Berserker (Warrior). It joins no new job: it keeps both parents' skills
+  and weapons (no two-handed weapons), both stats still add evenly, and it adds four skills of
+  its own that differ by lean: three skills and one ultimate that hits a very large area.
+- There is no Harbinger job: the harbinger is only a story reveal.
 - Max level is 100.
 - Off-hand slot (once the Shield slot): Warriors and Beginners wear a shield, a Thief throwing
   stars (with a dagger in hand), a Magician a book, an Archer a quiver worn on the back, a Pirate a pistol (with a scimitar). Stars
