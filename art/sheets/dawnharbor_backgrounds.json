@@ -70,16 +70,19 @@
   "overrides": {
     "far": {
       "extend_bottom": 589,
-      "scale": 0.1516
+      "scale": 0.1516,
+      "feather_top": 0.2
     },
     "mid": {
       "extend_bottom": 512,
-      "scale": 0.3232
+      "scale": 0.3232,
+      "feather_top": 0.2
     },
     "near": {
       "extend_bottom": 461,
       "scale": 0.3135,
-      "ground": "art/source/backdrop_ground/dawnharbor_near.png"
+      "ground": "art/source/backdrop_ground/dawnharbor_near.png",
+      "feather_top": 0.2
     },
     "landmark": {
       "scale": 0.7571

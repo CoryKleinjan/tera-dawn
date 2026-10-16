@@ -66,40 +66,41 @@
   "overrides": {
     "far": {
       "extend_bottom": 589,
-      "blank": [
-        [
-          0,
-          0,
-          534,
-          112
-        ]
+      "scale": 0.505,
+      "crop": [
+        540,
+        0,
+        99999,
+        99999
       ],
-      "scale": 0.505
+      "feather_top": 0.2
     },
     "mid": {
       "extend_bottom": 512,
-      "blank": [
-        [
-          0,
-          0,
-          534,
-          112
-        ]
+      "scale": 0.5344,
+      "crop": [
+        540,
+        0,
+        99999,
+        99999
       ],
-      "scale": 0.5344
+      "feather_top": 0.2
     },
     "near": {
       "extend_bottom": 461,
-      "blank": [
-        [
-          0,
-          0,
-          534,
-          112
-        ]
-      ],
       "scale": 0.4657,
-      "ground": "art/source/backdrop_ground/lumewood_near.png"
+      "ground": "art/source/backdrop_ground/lumewood_near.png",
+      "crop": [
+        540,
+        0,
+        99999,
+        99999
+      ],
+      "ground_span": [
+        0.0,
+        1.0
+      ],
+      "feather_top": 0.2
     },
     "landmark": {
       "blank": [

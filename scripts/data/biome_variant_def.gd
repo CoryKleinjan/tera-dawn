@@ -22,6 +22,9 @@ const KEEP_COLOR := Color(0, 0, 0, 0)
 @export var ambient_color := KEEP_COLOR
 @export var ambient_energy := -1.0
 @export var fog_color := KEEP_COLOR
+@export var fog_begin := -1.0
+@export var fog_end := -1.0
+@export var fog_density := -1.0
 @export var mote_color := KEEP_COLOR
 @export var motes_rise := Toggle.KEEP
 
@@ -34,8 +37,6 @@ const KEEP_COLOR := Color(0, 0, 0, 0)
 @export var light_shaft_color := KEEP_COLOR
 
 @export_group("Scenery")
-## Multiplies every backdrop layer's tint: a misty, dusky or sunlit take on the same painting.
-@export var backdrop_tint := Color.WHITE
 ## Backdrop layers (indexes into BiomeDef.backdrop) this sub zone leaves out.
 @export var hide_layers: PackedInt32Array = []
 ## Backdrop layers of its own, added after the biome's (e.g. one painted picture for a town
@@ -65,7 +66,8 @@ const KEEP_COLOR := Color(0, 0, 0, 0)
 
 const COLORS := ["sky_top", "sky_mid", "sky_low", "sky_horizon", "sun_color", "light_color", "ambient_color",
 	"fog_color", "mote_color", "grade_tint", "grade_lift", "light_shaft_color"]
-const NUMBERS := ["light_energy", "ambient_energy", "grade_lift_amount", "grade_saturation"]
+const NUMBERS := ["light_energy", "ambient_energy", "fog_begin", "fog_end", "fog_density", "grade_lift_amount",
+	"grade_saturation"]
 const TOGGLES := ["motes_rise", "light_shafts"]
 const LAND := ["platform_left", "platform_middle", "platform_middle_alt", "platform_right", "terrace_left",
 	"terrace_right", "terrace_corner_left", "terrace_corner_right", "ground_side"]
@@ -82,18 +84,12 @@ func apply(base: BiomeDef) -> BiomeDef:
 	for key in TOGGLES:
 		if get(key) != Toggle.KEEP:
 			b.set(key, get(key) == Toggle.ON)
-	if backdrop_tint != Color.WHITE or not hide_layers.is_empty() or not more_backdrop.is_empty():
+	if not hide_layers.is_empty() or not more_backdrop.is_empty():
 		var layers: Array[BackdropLayerDef] = []
 		for i in base.backdrop.size():
-			if i in hide_layers:
-				continue
-			var layer: BackdropLayerDef = base.backdrop[i].duplicate()
-			layer.tint *= backdrop_tint
-			layers.append(layer)
-		for extra in more_backdrop:
-			var layer: BackdropLayerDef = extra.duplicate()
-			layer.tint *= backdrop_tint
-			layers.append(layer)
+			if i not in hide_layers:
+				layers.append(base.backdrop[i])
+		layers.append_array(more_backdrop)
 		b.backdrop = layers
 	if not more_ground_decor.is_empty() or not hide_ground_decor.is_empty():
 		var decor: Array[DecorDef] = []

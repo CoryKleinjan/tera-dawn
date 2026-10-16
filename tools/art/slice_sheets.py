@@ -65,6 +65,7 @@ DEFAULTS = {
     "density": 2,             # with art_px: sprite texels per art pixel
     "grow": 1.0,              # with art_px: draw this piece a little bigger or smaller (0.8 to 1.25)
     "flat_bottom": False,     # stands on the ground: True squares off a rounded bottom (flat_bottom_rows), a number cuts that many rows
+    "feather_top": 0,         # backdrop strips: fade the top this share of the strip's height in, so a cut-flat top melts into the sky
 }
 
 
@@ -818,7 +819,8 @@ def cut_cell(rgb_full, bg, box, opts):
         cell[ry0:ry1] = cell[ry0 + dy:ry1 + dy].copy()
     for bx0, by0, bx1, by1 in opts.get("blank", []):  # paint rects over with background (a label beside the art)
         cell[by0:by1, bx0:bx1] = bg
-    if "crop" in opts:  # [x0, y0, x1, y1] inside the cell, in source pixels
+    cell_w = cell.shape[1]
+    if "crop" in opts:  # [x0, y0, x1, y1] inside the cell, in source pixels (past the edge means to the edge)
         cx0, cy0, cx1, cy1 = opts["crop"]
         cell = cell[cy0:cy1, cx0:cx1]
         label_px = 0
@@ -898,13 +900,32 @@ def cut_cell(rgb_full, bg, box, opts):
         sheet_y = (y0 + ins + opts.get("crop", [0, 0])[1]) * opts["scale"] + by0
         out.append({"image": Image.fromarray(px, "RGBA"), "x": int(bx0), "y": int(by0),
                     "sheet_y": float(sheet_y),
-                    "cell_w": alpha.shape[1], "cell_h": alpha.shape[0], "detail": opts["detail"]})
+                    "cell_w": alpha.shape[1], "cell_h": alpha.shape[0], "detail": opts["detail"],
+                    # the share of the cell's width the crop kept, left and right edge (a painted ground lines up by it)
+                    "span": (min(opts["crop"][0], cell_w) / cell_w, min(opts["crop"][2], cell_w) / cell_w)
+                    if "crop" in opts else (0.0, 1.0)})
     return out
 
 
-def extend_bottom(img, n):
+BOTTOM_FADE_ROWS = 28  # a strip's last rows that fade into extend_bottom's pad
+STREAK_ROWS = 24  # rows over which extend_bottom's pad goes from the strip's edge colours to one even colour
+
+
+def feather_top(img, share):
+    """Fades a backdrop strip's top in over `share` of its height (smoothstep), so a top the
+    sheet's cell cut flat (sky, roofs, treetops running off the cell) melts into what's behind
+    instead of ending in a straight line. Only alpha changes; the painting stays as it is."""
+    a = np.asarray(img.convert("RGBA")).astype(float)
+    n = max(1, int(round(a.shape[0] * share)))
+    t = np.clip(np.arange(a.shape[0]) / n, 0.0, 1.0)
+    a[..., 3] *= (t * t * (3 - 2 * t))[:, None]
+    return Image.fromarray(a.round().clip(0, 255).astype(np.uint8), "RGBA")
+
+
+def extend_bottom(img, n, fade=True):
     """Continues a parallax strip n rows further down in its own colours, so a layer
-    never shows sky under it. The colour is the strip's bottom edge, blurred sideways."""
+    never shows sky under it. The colour is the strip's bottom edge, blurred sideways.
+    `fade` also fades the strip's last rows into it (not for a strip with painted ground below)."""
     a = np.asarray(img).astype(float)
     h, w, _ = a.shape
     edge = a[h - 8:h - 2].mean(0)  # skip the last rows (anti-aliasing against the divider)
@@ -916,9 +937,15 @@ def extend_bottom(img, n):
     out = np.zeros((h + n, w, 4))
     out[:h] = a
     for i in range(n):
-        t = min(1.0, i / max(1, n * 0.5))
+        t = min(1.0, i / STREAK_ROWS)  # the edge's own colours soon even out, so no streaks run down the screen
         out[h + i] = soft * (1 - t) + flat * t
-    out[h - 2:h + 4] = (out[h - 2:h + 4] + soft) / 2  # soften the join
+    # the strip's own last rows fade into the pad, so its painting ends in a soft haze, not a line
+    b = min(BOTTOM_FADE_ROWS, h // 4) if fade else 0
+    t = np.clip((np.arange(b) + 1) / b, 0.0, 1.0)
+    t = (t * t * (3 - 2 * t))[:, None, None]
+    if b:
+        rgb = out[h - b:h, :, :3] * (1 - t) + soft[None, :, :3] * t
+        out[h - b:h, :, :3] = np.where(out[h - b:h, :, 3:] > 0, rgb, out[h - b:h, :, :3])
     out[..., 3] = np.where(np.arange(h + n)[:, None] >= h - 2, 255, out[..., 3])
     return Image.fromarray(out.clip(0, 255).astype(np.uint8), "RGBA")
 
@@ -964,11 +991,17 @@ def flatten_bottom(img, rows=True):
 GROUND_BLEND = 12  # rows over which a strip's own bottom fades into its painted ground
 
 
-def paint_ground(img, ground, strip_h):
+def paint_ground(img, ground, strip_h, painted=(0.0, 1.0), kept=(0.0, 1.0)):
     """Swaps an extend_bottom pad for painted ground: `ground` is a picture of the whole padded
     strip whose lower part was painted on as ground (a Gemini edit of it), so the backdrop runs
     on down to the floor instead of ending in a blur. The strip's own rows above strip_h stay
-    exactly as cut; below, the ground picture takes over, fading in over GROUND_BLEND rows."""
+    exactly as cut; below, the ground picture takes over, fading in over GROUND_BLEND rows.
+    `painted` is the share of the cell's width the ground was painted for (left, right edge) and
+    `kept` the share the strip's crop keeps now: only the matching part of the ground is used."""
+    pw = painted[1] - painted[0]
+    gx0 = (kept[0] - painted[0]) / pw * ground.width
+    gx1 = (kept[1] - painted[0]) / pw * ground.width
+    ground = ground.crop((int(round(gx0)), 0, int(round(gx1)), ground.height))
     a = np.asarray(img.convert("RGBA")).astype(float)
     g = np.asarray(ground.convert("RGBA").resize(img.size, Image.LANCZOS)).astype(float)
     g[..., 3] = 255.0  # the ground is solid wherever it is used (below the strip's skyline)
@@ -1118,11 +1151,14 @@ def process(manifest_path, grid_only=False, sprites=None):
                     im = seamless_middle(im, opts["seamless_middle"])
                 if opts.get("flat_bottom"):
                     im = flatten_bottom(im, opts["flat_bottom"])
+                if opts.get("feather_top"):
+                    im = feather_top(im, opts["feather_top"])
                 if opts.get("extend_bottom"):
                     strip_h = im.height
-                    im = extend_bottom(im, opts["extend_bottom"])
+                    im = extend_bottom(im, opts["extend_bottom"], fade=not opts.get("ground"))
                     if opts.get("ground"):
-                        im = paint_ground(im, Image.open(os.path.join(ROOT, opts["ground"])), strip_h)
+                        im = paint_ground(im, Image.open(os.path.join(ROOT, opts["ground"])), strip_h,
+                                          opts.get("ground_span", p["span"]), p["span"])
                 p["image"] = im
                 if sprites is not None:
                     sprites[f"{sheet_id}:{pname}"] = p

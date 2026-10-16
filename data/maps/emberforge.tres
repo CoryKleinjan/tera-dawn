@@ -309,7 +309,7 @@ screen_top = Vector2(-0.2, -0.2)
 
 [sub_resource type="Resource" id="Variant"]
 script = ExtResource("variant_def")
-hide_layers = PackedInt32Array(0, 2, 3, 4, 5, 6)
+hide_layers = PackedInt32Array(0, 2, 3, 4, 5)
 hide_ground_decor = PackedInt32Array(0)
 hide_town_decor = true
 more_backdrop = Array[ExtResource("backdrop_layer_def")]([SubResource("Backdrop_picture")])

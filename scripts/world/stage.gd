@@ -122,6 +122,8 @@ static func land_depth(z: float) -> float:
 ## (a building, a crate) tucks behind the dips of the land's painted top edge instead of
 ## showing a sliver of backdrop under it.
 const BASE_SINK := 6.0
+## A town's backdrop haze, as a share of its biome's (towns are for looking around).
+const TOWN_FOG := 0.6
 
 ## Stands `s` (origin at its bottom centre) on the land at `foot` (game pixels), at content
 ## depth `z`: at its land_depth, scaled so it shows as big as it would at `z`, and sunk
@@ -298,14 +300,12 @@ func _build_environment() -> void:
 	for i in 7:
 		env.set_glow_level(i, 1.0 if i in [1, 2, 3, 4, 5] else 0.0)
 	env.ssao_enabled = true
-	env.ssao_radius = 1.2
-	env.ssao_intensity = 1.6
+	# a small radius: shading in creases of the land, never a halo round the characters in front of it
+	env.ssao_radius = 0.25
+	env.ssao_intensity = 1.0
 	env.fog_enabled = true
 	env.fog_mode = Environment.FOG_MODE_DEPTH
-	env.fog_depth_begin = dist + 12.0
-	env.fog_depth_end = dist + 160.0
 	env.fog_depth_curve = 1.6
-	env.fog_density = 0.6
 	env.fog_sky_affect = 0.0
 	env.adjustment_enabled = true
 	env.adjustment_saturation = 1.08
@@ -388,6 +388,7 @@ func build() -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = hash(map.id)
 	_apply_biome(biome)
+	_apply_fog(map)
 	_apply_place(map)
 	TerrainBuilder.new(self, map_root).build(map, world.platforms)
 	backdrop = BackdropBuilder.new(self, map_root)
@@ -424,6 +425,14 @@ func _apply_biome(b: BiomeDef) -> void:
 	motes.gravity = Vector3(0, 0.35 if b.motes_rise else 0.05, 0)
 	motes.direction = Vector3(0.2 if b.motes_rise else 0.3, 1, 0)
 
+## The backdrop haze (BiomeDef fog_*), measured back from the play line. Towns are for looking
+## around, so theirs is lighter; a room's back wall is close, so it stays sharp with none.
+func _apply_fog(map: MapDef) -> void:
+	var b := map.look()
+	env.fog_depth_begin = dist + b.fog_begin
+	env.fog_depth_end = dist + b.fog_end
+	env.fog_density = 0.0 if map.interior else b.fog_density * (TOWN_FOG if map.town else 1.0)
+
 ## The camera distance that shows TDWorld.world_view().y game pixels at the play line.
 func _fit_distance() -> void:
 	dist = view_distance()
@@ -431,19 +440,17 @@ func _fit_distance() -> void:
 ## The window changed shape: refit the camera and rebuild the scenery for the new view.
 func fit_view() -> void:
 	_fit_distance()
-	env.fog_depth_begin = dist + 12.0
-	env.fog_depth_end = dist + 160.0
+	if world.map:
+		_apply_fog(world.map)
 	camera_attrs.dof_blur_near_distance = dist - 6.0
 	sun.directional_shadow_max_distance = dist + 30.0
 	if world.map and map_root:
 		build()
 
-## Towns are for looking around: their backdrop is kept clearer (less fog) than a hunting
-## field's, where the eye should stay on the play line. A room's back wall is close, so it
-## stays sharp with no haze. The far blur is only a light touch of depth everywhere: the
-## painted backdrops should read sharp, never smeared.
+## Towns are for looking around: their backdrop is kept clearer than a hunting field's,
+## where the eye should stay on the play line, and a room's back wall stays sharp. The far blur
+## is only a light touch of depth everywhere: the painted backdrops should read sharp, never smeared.
 func _apply_place(map: MapDef) -> void:
-	env.fog_density = 0.0 if map.interior else 0.35 if map.town else 0.6
 	camera_attrs.dof_blur_far_distance = dist + (14.0 if map.interior else 10.0 if map.town else 3.0)
 	camera_attrs.dof_blur_amount = 0.01 if map.interior else 0.015 if map.town else 0.02
 
