@@ -135,6 +135,10 @@ func test_video_saves_and_loads() -> void:
 	v.vsync = false
 	v.bloom = false
 	v.fog = false
+	v.shadows = false
+	v.depth_of_field = false
+	v.render_scale = 0.7
+	v.anti_aliasing = 0
 	var cfg := ConfigFile.new()
 	v.save_to(cfg)
 	var back := VideoSettings.new()
@@ -143,13 +147,17 @@ func test_video_saves_and_loads() -> void:
 	check_eq(back.window_mode, VideoSettings.WindowMode.FULLSCREEN, "window mode")
 	check_eq(back.window_size, Vector2i(1280, 720), "window size")
 	check_eq([back.max_fps, back.vsync, back.bloom, back.ambient_occlusion, back.fog], [60, false, false, true, false], "frame cap, vsync and effects")
+	check_eq([back.shadows, back.depth_of_field, back.render_scale, back.anti_aliasing], [false, false, 0.7, 0], "shadows, depth of field, render scale and anti-aliasing")
 	cfg.set_value("video", "window_mode", 9)
 	cfg.set_value("video", "window_size", Vector2i(123, 45))
 	cfg.set_value("video", "max_fps", 77)
+	cfg.set_value("video", "render_scale", 0.33)
+	cfg.set_value("video", "anti_aliasing", 3)
 	var fresh := VideoSettings.new()
 	fresh.reset()
 	fresh.load_from(cfg)
 	check_eq([fresh.window_mode, fresh.window_size, fresh.max_fps], [VideoSettings.WindowMode.WINDOWED, Vector2i(1600, 900), 0], "values the menu doesn't offer keep the defaults")
+	check_eq([fresh.render_scale, fresh.anti_aliasing], [1.0, 4], "and so do a render scale or anti-aliasing it doesn't offer")
 	fresh.toggle_fullscreen()
 	check_eq(fresh.window_mode, VideoSettings.WindowMode.BORDERLESS, "F11 goes fullscreen")
 	fresh.toggle_fullscreen()

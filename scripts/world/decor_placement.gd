@@ -162,10 +162,7 @@ static var _used := {}
 static func visible_span(texture: Texture2D, texel: float, flip: bool) -> Vector2:
 	var key := texture.resource_path if texture.resource_path else str(texture.get_instance_id())
 	if not _used.has(key):
-		var img := texture.get_image()
-		if img and img.is_compressed():
-			img.decompress()
-		var used := img.get_used_rect() if img else Rect2i(Vector2i.ZERO, texture.get_size())
+		var used := TextureBounds.used_rect(texture)
 		var w := texture.get_width() * 0.5
 		_used[key] = Vector2(used.position.x - w, used.end.x - w) / TDStage.art_density(texture)
 	var s: Vector2 = _used[key] * texel

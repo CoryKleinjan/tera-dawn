@@ -17,6 +17,19 @@ const OVERHANG := 8.0
 
 static var _cache := {}
 static var _surface := {}
+## Biome (and square ends or not) -> its pieces as images, read back once.
+static var _pieces := {}
+## [piece, piece, overlap, from] -> how well they match (_match), which repeats for every
+## platform of a biome.
+static var _matches := {}
+
+## Lets go of every skin, piece and match worked out so far: called when the map's biome
+## changes, so the last biome's pictures don't stay in memory.
+static func forget() -> void:
+	_cache.clear()
+	_surface.clear()
+	_pieces.clear()
+	_matches.clear()
 
 ## Game pixels per texel of the pieces: TDStage.TEXEL per art pixel.
 static func texel(biome: BiomeDef) -> float:
@@ -28,7 +41,7 @@ static func texel(biome: BiomeDef) -> float:
 static func texture(biome: BiomeDef, width: float, square := false) -> ImageTexture:
 	square = square and biome.terrace_left != null and biome.terrace_right != null
 	var cols := maxi(1, roundi((width + 2.0 * overhang(square)) / texel(biome)))
-	var key := "%s:%d:%s" % [biome.resource_path if biome.resource_path else str(biome.get_instance_id()), cols, square]
+	var key := [_art(biome, square), cols]
 	if not _cache.has(key):
 		var img := compose(pieces(biome, square), cols)
 		img.generate_mipmaps()
@@ -124,17 +137,26 @@ static func _row_edge(img: Image, y: int, right: bool) -> int:
 
 ## [left cap, middles..., right cap] as images (the square terrace ends as caps when `square`).
 static func pieces(biome: BiomeDef, square := false) -> Array[Image]:
+	var key := _art(biome, square)
+	if _pieces.has(key):
+		return _pieces[key]
 	var out: Array[Image] = []
-	var left := biome.terrace_left if square else biome.platform_left
-	var right := biome.terrace_right if square else biome.platform_right
-	for t: Texture2D in [left, biome.platform_middle, biome.platform_middle_alt, right]:
+	for t: Texture2D in key:
 		if t:
 			var img := t.get_image()
 			if img.is_compressed():
 				img.decompress()
 			img.convert(Image.FORMAT_RGBA8)
 			out.append(img)
+	_pieces[key] = out
 	return out
+
+## The pieces' art: [left cap, middle, second middle, right cap] (the square terrace ends as
+## caps when `square`). Maps of one region share it even when each has its own look (a
+## BiomeVariantDef copy of the biome), so it is what skins are kept by.
+static func _art(biome: BiomeDef, square: bool) -> Array:
+	return [biome.terrace_left if square else biome.platform_left, biome.platform_middle,
+		biome.platform_middle_alt, biome.terrace_right if square else biome.platform_right]
 
 ## Texel rows above the walking surface (grass, crystals): the first row at least half
 ## opaque is where feet go.
@@ -227,6 +249,12 @@ static func layout(parts: Array[Image], cols: int) -> Array:
 ## How much `prev`'s last `o` columns and `next`'s columns from `from` on differ along the
 ## best swap-over path between them (lower matches better).
 static func _match(prev: Image, next: Image, o: int, from: int) -> float:
+	var key := [prev, next, o, from]
+	if not _matches.has(key):
+		_matches[key] = _match_now(prev, next, o, from)
+	return _matches[key]
+
+static func _match_now(prev: Image, next: Image, o: int, from: int) -> float:
 	var h := mini(prev.get_height(), next.get_height())
 	var acc := _path_costs(prev, prev.get_width() - o, next, from, o, h)
 	var best := INF

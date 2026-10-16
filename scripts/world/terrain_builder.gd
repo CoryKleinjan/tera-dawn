@@ -71,8 +71,12 @@ func _build_floor(map: MapDef, ground: Platform, biome: BiomeDef) -> void:
 ## neither is blended with its neighbour, so each copy meets the next exactly.
 static var _edges := {}
 
+## Lets go of the floor edges built so far (the map's biome changed).
+static func forget() -> void:
+	_edges.clear()
+
 static func floor_edge(biome: BiomeDef) -> ImageTexture:
-	var key := biome.resource_path if biome.resource_path else str(biome.get_instance_id())
+	var key := biome.platform_middle
 	if not _edges.has(key):
 		var parts := PlatformSkin.pieces(biome)
 		var middles := parts.slice(1, parts.size() - 1)

@@ -104,8 +104,17 @@ var _flash := 0.0
 
 ## The stage showing now.
 static var current: TDStage
+## The platform art the land was last built from (a new region's frees the old skins).
+var _platform_art: Texture2D
+## How long a window's size must hold before the map is built again for it.
+const RESIZE_SETTLE_MS := 250
+## When to build the map again for a new window size (msec; 0 for none), see fit_view.
+var _rebuild_at := 0
 
 static var _soft_dot: Texture2D
+## [colour, glow] -> particle dot material; [colour, size, glow] -> its quad (see particles).
+static var _dot_materials := {}
+static var _dot_meshes := {}
 
 # ---------- helpers for everyone ----------
 
@@ -229,28 +238,39 @@ static func light(col: Color, energy: float, range_: float, shadows := false) ->
 	o.shadow_enabled = shadows
 	return o
 
-static func additive_material(col: Color) -> StandardMaterial3D:
+## A soft round dot material for particles, made once per colour and kept: hits make sparks
+## many times a second. `glow` adds it onto what's behind (sparks, embers); off, it blends
+## like paint (dust, smoke). Shared, so never change the one this returns.
+static func additive_material(col: Color, glow := true) -> StandardMaterial3D:
+	var key := [col, glow]
+	if _dot_materials.has(key):
+		return _dot_materials[key]
 	if _soft_dot == null:
 		_soft_dot = load("res://assets/sprites/fx/soft_dot.png")
 	var m := StandardMaterial3D.new()
 	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	m.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+	m.blend_mode = BaseMaterial3D.BLEND_MODE_ADD if glow else BaseMaterial3D.BLEND_MODE_MIX
 	m.billboard_mode = BaseMaterial3D.BILLBOARD_PARTICLES
 	m.vertex_color_use_as_albedo = true
 	m.albedo_color = col
 	m.albedo_texture = _soft_dot
 	m.disable_receive_shadows = true
+	_dot_materials[key] = m
 	return m
 
-## Glowing particles (sparks, embers, dust motes). Colours may be HDR.
-static func particles(col: Color, amount: int, size: float) -> CPUParticles3D:
+## Glowing particles (sparks, embers, dust motes). Colours may be HDR. The dot mesh is shared
+## per colour and size (see additive_material).
+static func particles(col: Color, amount: int, size: float, glow := true) -> CPUParticles3D:
 	var p := CPUParticles3D.new()
 	p.amount = amount
-	var q := QuadMesh.new()
-	q.size = Vector2(size, size)
-	q.material = additive_material(col)
-	p.mesh = q
+	var key := [col, size, glow]
+	if not _dot_meshes.has(key):
+		var q := QuadMesh.new()
+		q.size = Vector2(size, size)
+		q.material = additive_material(col, glow)
+		_dot_meshes[key] = q
+	p.mesh = _dot_meshes[key]
 	p.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	return p
 
@@ -266,12 +286,11 @@ func _ready() -> void:
 	camera.rotation_degrees = Vector3(-PITCH, 0, 0)
 	add_child(camera)
 	camera.make_current()
-	# soft sprite edges (alpha to coverage, see style_sprite)
-	get_viewport().msaa_3d = Viewport.MSAA_4X
 	_build_environment()
 	_build_sun()
 	_build_motes()
 	_build_post()
+	apply_video(Settings.video)
 
 func _exit_tree() -> void:
 	if current == self:
@@ -310,14 +329,11 @@ func _build_environment() -> void:
 	env.adjustment_enabled = true
 	env.adjustment_saturation = 1.08
 	env.adjustment_contrast = 1.08
-	apply_video(Settings.video)
 	Settings.changed.connect(_on_settings_changed)
 	var we := WorldEnvironment.new()
 	we.environment = env
 	camera_attrs = CameraAttributesPractical.new()
-	camera_attrs.dof_blur_far_enabled = true
 	camera_attrs.dof_blur_far_transition = 14.0
-	camera_attrs.dof_blur_near_enabled = true
 	camera_attrs.dof_blur_near_distance = dist - 6.0
 	camera_attrs.dof_blur_near_transition = 5.0
 	we.camera_attributes = camera_attrs
@@ -332,11 +348,13 @@ func apply_video(v: VideoSettings) -> void:
 	env.glow_enabled = v.bloom
 	env.ssao_enabled = v.ambient_occlusion
 	env.fog_enabled = v.fog
+	camera_attrs.dof_blur_far_enabled = v.depth_of_field
+	camera_attrs.dof_blur_near_enabled = v.depth_of_field
+	sun.shadow_enabled = v.shadows
 
 func _build_sun() -> void:
 	sun = DirectionalLight3D.new()
 	sun.basis = Basis.looking_at(Vector3(-0.75, -0.48, -0.45).normalized(), Vector3.UP)
-	sun.shadow_enabled = true
 	sun.shadow_blur = 1.0
 	sun.shadow_bias = 0.03
 	sun.shadow_normal_bias = 0.3
@@ -382,9 +400,14 @@ func build() -> void:
 		map_root.queue_free()
 	map_root = Node3D.new()
 	add_child(map_root)
+	_rebuild_at = 0
 	locked_portals.clear()
 	var map := world.map
 	var biome := map.look()
+	if biome.platform_middle != _platform_art:  # another region: let the last one's built land go
+		_platform_art = biome.platform_middle
+		PlatformSkin.forget()
+		TerrainBuilder.forget()
 	var rng := RandomNumberGenerator.new()
 	rng.seed = hash(map.id)
 	_apply_biome(biome)
@@ -444,8 +467,9 @@ func fit_view() -> void:
 		_apply_fog(world.map)
 	camera_attrs.dof_blur_near_distance = dist - 6.0
 	sun.directional_shadow_max_distance = dist + 30.0
+	# dragging a window's edge sends a stream of sizes: the map is built again once it settles
 	if world.map and map_root:
-		build()
+		_rebuild_at = Time.get_ticks_msec() + RESIZE_SETTLE_MS
 
 ## Towns are for looking around: their backdrop is kept clearer than a hunting field's,
 ## where the eye should stay on the play line, and a room's back wall stays sharp. The far blur
@@ -629,6 +653,8 @@ static func screen_frac_at(h: float, z: float, center: float) -> float:
 	return 0.5 - tan(rel) / (2.0 * tan(deg_to_rad(FOV / 2.0)))
 
 func _process(delta: float) -> void:
+	if _rebuild_at > 0 and Time.get_ticks_msec() >= _rebuild_at:
+		build()
 	if backdrop:
 		backdrop.drift(delta)
 	if fade != _fade_target:

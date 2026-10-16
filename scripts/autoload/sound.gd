@@ -3,7 +3,7 @@ extends Node
 ##
 ## Sounds are files named by id, so adding one means adding a file, not code:
 ##   assets/audio/music/<id>.ogg   a looping track (`music`) or a short jingle (`jingle`)
-##   assets/audio/sfx/<id>.ogg     a sound effect (`play`); <id>_1.ogg, <id>_2.ogg ... are
+##   assets/audio/sfx/<id>.wav     a sound effect (`play`); <id>_1.wav, <id>_2.wav ... are
 ##                                 variants of one sound, picked at random each time
 ## Data names the ids: a region's town and field music (RegionDef, MapDef.music_id), an
 ## effect's sound (EffectDef.sound), a skill's or projectile's sound (SkillDef.cast_sound).
@@ -155,9 +155,9 @@ static func load_sfx(dir: String) -> Dictionary:
 	if not DirAccess.dir_exists_absolute(dir):
 		return out
 	for file in DirAccess.get_files_at(dir):
-		# exported games list "hit.ogg.import" (or .remap) rather than the file itself
+		# exported games list "hit.wav.import" (or .remap) rather than the file itself
 		file = file.trim_suffix(".import").trim_suffix(".remap")
-		if file.get_extension() != "ogg":
+		if file.get_extension() != "wav":
 			continue
 		var stream: AudioStream = load(dir.path_join(file))
 		if stream == null:

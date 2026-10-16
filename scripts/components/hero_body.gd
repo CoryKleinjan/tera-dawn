@@ -6,7 +6,8 @@ extends RefCounted
 ## of hero draw the same way.
 ##
 ##   body = HeroBody.new(self, world, z)               # in _ready: adds the companion
-##   body.draw(face, pet, animation, worn)             # every frame
+##   body.draw(face, pet, animation, worn)             # every frame (the layers are set up
+##                                                      # again only when the frame, facing, gear or looks change)
 
 const LOOK: HeroLookDef = preload("res://data/hero/look.tres")
 ## How far in front of the one below it each layer sits (3D units), so the layers stack in
@@ -34,6 +35,11 @@ var _world: TDWorld
 var _z: float
 ## One sprite per layer, back to front, made as needed.
 var _layers: Array[Sprite3D] = []
+## What the layers were last set up for (frame, facing, gear and looks): while it stays the
+## same, only where he stands changes, so the stack isn't built again.
+var _shown: Array = []
+## Each layer's place relative to his feet, in game pixels, as last set up.
+var _offsets: Array[Vector2] = []
 ## The animation showing and the physics tick it started on, so frames run from its start in
 ## game time (a slow frame doesn't skip or hold a step).
 var _anim := &""
@@ -64,9 +70,22 @@ func draw(face: int, pet: StringName, anim: StringName, worn: Dictionary) -> voi
 		_since = Engine.get_physics_frames()
 	var weapon: EquipDef = worn.get(&"weapon")
 	var frame := LOOK.frame_at(anim, weapon.weapon_kind if weapon else &"", float(Engine.get_physics_frames() - _since) / Engine.physics_ticks_per_second)
+	var shown := [frame, face, face_style, hair_style, worn.values()]
+	if shown != _shown:
+		_shown = shown
+		_set_up(worn, frame, face)
+	for i in _layers.size():
+		var s := _layers[i]
+		if s.texture:
+			s.position = TDStage.to3d(at + _offsets[i], _z + i * LAYER_STEP)
+
+## Sets every layer up for `frame` facing `face` in `worn`: which picture it shows, turned,
+## sized and mirrored, and where it sits from his feet (_offsets).
+func _set_up(worn: Dictionary, frame: StringName, face: int) -> void:
 	var stack := layers(worn, frame, face_style, hair_style)
 	while _layers.size() < stack.size():
 		_layers.append(_new_layer())
+		_offsets.append(Vector2.ZERO)
 	var size := LOOK.body.get_frame_texture(frame, 0).get_size() if LOOK.body.has_animation(frame) else Vector2.ZERO
 	for i in _layers.size():
 		var s := _layers[i]
@@ -77,20 +96,21 @@ func draw(face: int, pet: StringName, anim: StringName, worn: Dictionary) -> voi
 		var tex := layer.texture(frame) if layer else null
 		if tex and size != Vector2.ZERO:
 			var pin := layer.pin(frame)
-			_place(s, tex, layer.anchor(frame), Vector2(pin.x, pin.y), pin.z, layer.size(frame), size, face, at, _z + i * LAYER_STEP)
+			_offsets[i] = _place(s, tex, layer.anchor(frame), Vector2(pin.x, pin.y), pin.z, layer.size(frame), size, face)
 		s.visible = visible and s.texture != null
 
 ## Puts `s` showing `tex` with its point `anchor` (its own pixels) on `pin` (the pixels of his
 ## frames, `size`, whose bottom middle is at his feet), turned `deg` clockwise and drawn `k`
-## times as big around it, mirrored when he faces left.
-func _place(s: Sprite3D, tex: Texture2D, anchor: Vector2, pin: Vector2, deg: float, k: float, size: Vector2, face: int, at: Vector2, z: float) -> void:
+## times as big around it, mirrored when he faces left. Returns where it sits from his feet,
+## in game pixels.
+func _place(s: Sprite3D, tex: Texture2D, anchor: Vector2, pin: Vector2, deg: float, k: float, size: Vector2, face: int) -> Vector2:
 	var texel := TDStage.TEXEL / TDStage.frames_density(LOOK.body)
 	s.texture = tex
 	s.flip_h = face < 0
 	s.offset = Vector2((tex.get_width() / 2.0 - anchor.x) * face, anchor.y - tex.get_height() / 2.0)
-	s.position = TDStage.to3d(at + Vector2((pin.x - size.x / 2.0) * face, pin.y - size.y) * texel, z)
 	s.rotation.z = -deg_to_rad(deg) * face
 	s.scale = Vector3(k, k, 1.0)
+	return Vector2((pin.x - size.x / 2.0) * face, pin.y - size.y) * texel
 
 ## His layers back to front on `frame` for what he wears (place -> EquipDef), with his face and
 ## hairstyle (HeroStyleDef, LOOK's first of each when null): a held piece set
@@ -276,7 +296,7 @@ class Layer:
 			return h.anchor
 		var tex := texture(frame)
 		if not _middles.has(tex):
-			_middles[tex] = Rect2(tex.get_image().get_used_rect()).get_center()
+			_middles[tex] = Rect2(TextureBounds.used_rect(tex)).get_center()
 		return _middles[tex]
 
 	## Vector3(x, y, degrees clockwise): where its anchor sits on `frame`, in his frame's pixels

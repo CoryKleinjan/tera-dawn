@@ -20,6 +20,8 @@ var _hover := -1
 var grid := SlotGrid.new(Vector2(PAD, PAD), COLS, Character.QUICKSLOTS, SLOT, GAP)
 ## The drag this panel started, for when it ends (see `_notification`).
 var _drag := DragPayload.Tracker.new()
+## What was last drawn (_drawn_state).
+var _drawn := []
 
 ## The panel's size: COLS slots across, as many rows as it takes.
 static func panel_size() -> Vector2:
@@ -42,7 +44,26 @@ func _process(delta: float) -> void:
 	visible = world != null and world.started
 	if visible:
 		hud.fade_over_people(self, delta)
-	queue_redraw()
+	# drawn again only when something it shows changed
+	var state := _drawn_state()
+	if state != _drawn:
+		_drawn = state
+		queue_redraw()
+
+## Everything _draw shows, to tell when it needs drawing again.
+func _drawn_state() -> Array:
+	if not visible:
+		return []
+	var p := world.player
+	var out := [_hover, size, Game.me.quickslots.duplicate(true), p.cooldown if p else 0, p.recharge.duplicate() if p else {}]
+	for i in Character.QUICKSLOTS:
+		var thing := content(i)
+		if thing is SkillDef:
+			out.append(Game.me.skills.use_problem(thing))
+		elif thing is ItemDef:
+			out.append(Game.me.inventory.count_of(thing))
+		out.append(TDStatusBar._key_name(Game.QUICKSLOT_ACTIONS[i]))
+	return out
 
 func slot_rect(i: int) -> Rect2:
 	return grid.rect(i)
