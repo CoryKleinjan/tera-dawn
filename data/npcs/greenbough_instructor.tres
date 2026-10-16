@@ -10,6 +10,6 @@ display_name = "Ranger Yew"
 title = "Archer Instructor"
 sprite_frames = ExtResource("2_sprite")
 greeting = "The forest teaches patience. So do I. If you would walk the path of the bow, speak."
-lines = PackedStringArray("Advance at level 10, with the stat the path asks for.", "Practise on the fields outside town. That's what they're for.")
+lines = PackedStringArray("Pass my Job Test and the path is yours.", "Practise on the fields outside town. That's what they're for.")
 instructs = Array[StringName]([&"archer"])
 storage = false
