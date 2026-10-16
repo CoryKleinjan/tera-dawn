@@ -16,6 +16,13 @@ extends Resource
 @export var ambient_color := Color("7a6ab8")
 @export var ambient_energy := 0.35
 @export var fog_color := Color("e8a49a")
+## Distance haze over the backdrop (never the play area): it starts `fog_begin` units behind
+## the play line, is full `fog_end` units behind it, at most `fog_density` strong. Stronger,
+## nearer haze pushes the backdrop back so the hero and monsters stand out, and a dark
+## fog_color dims a borrowed backdrop for a gloomier sub-zone by light, not by recolouring it.
+@export var fog_begin := 12.0
+@export var fog_end := 160.0
+@export_range(0.0, 1.0) var fog_density := 0.6
 ## HDR colour of the floating motes; rising makes them drift up like embers.
 @export var mote_color := Color(1.8, 1.5, 0.9)
 @export var motes_rise := false

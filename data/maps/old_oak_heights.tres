@@ -222,7 +222,9 @@ sky_top = Color(0.1, 0.24, 0.32, 1)
 sky_mid = Color(0.42, 0.6, 0.5, 1)
 light_energy = 1.5
 fog_color = Color(0.52, 0.6, 0.4, 1)
-backdrop_tint = Color(0.86, 0.9, 0.74, 1)
+fog_begin = 0.0
+fog_end = 130.0
+fog_density = 0.53
 light_shafts = 1
 light_shaft_color = Color(1, 0.88, 0.6, 0.18)
 

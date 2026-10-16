@@ -229,7 +229,9 @@ script = ExtResource("variant_def")
 light_energy = 0.9
 sky_top = Color(0.01961, 0.01961, 0.06275, 1)
 fog_color = Color(0.102, 0.06275, 0.1569, 1)
-backdrop_tint = Color(0.4784, 0.4392, 0.5647, 1)
+fog_begin = 0.0
+fog_end = 130.0
+fog_density = 0.95
 hide_layers = PackedInt32Array(3)
 
 [sub_resource type="Resource" id="Portal_arena"]

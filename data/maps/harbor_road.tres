@@ -284,7 +284,9 @@ sky_mid = Color(0.4784, 0.5647, 0.6902, 1)
 light_energy = 1.6
 grade_saturation = 1.0
 fog_color = Color(0.7216, 0.7686, 0.8314, 1)
-backdrop_tint = Color(0.9098, 0.9255, 0.949, 1)
+fog_begin = 0.0
+fog_end = 130.0
+fog_density = 0.46
 
 [sub_resource type="Resource" id="Portal_downs"]
 script = ExtResource("7_portal_def")

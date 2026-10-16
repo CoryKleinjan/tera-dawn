@@ -320,7 +320,9 @@ fog_color = Color(0.549, 0.7843, 0.7216, 1)
 sky_low = Color(0.6588, 0.8784, 0.7843, 1)
 motes_rise = 1
 mote_color = Color(1.2, 2.2, 2, 1)
-backdrop_tint = Color(0.8157, 0.9333, 0.8941, 1)
+fog_begin = 0.0
+fog_end = 130.0
+fog_density = 0.5
 
 [resource]
 script = ExtResource("1_map_def")

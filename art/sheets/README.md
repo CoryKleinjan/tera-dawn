@@ -66,7 +66,7 @@ screen. `detail` and `alpha` default to this for every asset;
 | `recolor` | | A palette change from `RECOLORS` (below). |
 | `save` | `true` | `false`: cells only feed animation sets (or are for later, cut into `art/build/`). |
 | `climb` | | Rope and ladder pieces to line up, per climb style: `{"ladder": {"top": "ladder_top", "middle": "ladder_middle", "bottom": "ladder_bottom"}}` (`top`, `bottom` optional). See Climb pieces. |
-| `overrides` | | Per-cell versions of any key above, plus: `crop` `[x0, y0, x1, y1]`; `flip` (mirror); `out_dir`; `seamless` (tileable texture, with `size`); `seamless_middle` (end-cap width in sprite px: the middle is cross-faded so it tiles between its caps); `extend_bottom` (pad a backdrop downward) with optional `ground` (a picture of the padded strip used in its place); `patch` (`[[x0, y0, x1, y1, dx], ...]`: copy a rect from dx pixels across, to remove an ornament that would stretch in a 9-slice); `patch_rows` (`[[y0, y1, dy], ...]`: replace rows with the rows dy away, to remove a divider drawn across the art). |
+| `overrides` | | Per-cell versions of any key above, plus: `crop` `[x0, y0, x1, y1]`; `flip` (mirror); `out_dir`; `seamless` (tileable texture, with `size`); `seamless_middle` (end-cap width in sprite px: the middle is cross-faded so it tiles between its caps); `extend_bottom` (pad a backdrop downward; its last rows fade into the pad) with optional `ground` (a picture of the padded strip used in its place) and `ground_span` (`[left, right]`: the share of the cell's width the ground was painted for, when the crop keeps less); `feather_top` (fade the top this share of the height in, so a strip the cell cut flat melts into the sky); `patch` (`[[x0, y0, x1, y1, dx], ...]`: copy a rect from dx pixels across, to remove an ornament that would stretch in a 9-slice); `patch_rows` (`[[y0, y1, dy], ...]`: replace rows with the rows dy away, to remove a divider drawn across the art). |
 
 ## Clean-ups and palette changes
 
@@ -150,7 +150,9 @@ every layer comes out the same size and they line up when stacked.
   `room_<town>_floor` with a `region`.
 - **Backdrops and ropes/props** come from finer redraws (`*_fine.png`); each cell's `scale`
   makes it two texels per art pixel at its on-screen size. A town's backdrop is one 4K panorama
-  (like Dawnharbor's), never strips.
+  (like Dawnharbor's), never strips. A field strip whose label sits over its art is cut with a
+  `crop` that starts past the label (never a `blank`, which leaves a see-through box the game
+  repeats across the sky), with `feather_top` so a top the cell cut flat fades in.
 - **Climb pieces** (`ropes_props_b`'s `"climb"` section, tops from `climb_tops_fine`): the
   slicer runs `tools/art/climb_pieces.py`, which centres each middle piece on its rope or rails
   and cuts and pads each end piece to carry on from it. The game stacks pieces edge to edge
