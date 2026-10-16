@@ -1,0 +1,33 @@
+{
+  "source": "art/source/boss_molten_king_shot.png",
+  "save": false,
+  "out_dir": "art/build/boss_molten_king_shot",
+  "cells": [
+    [
+      "shot_windup2",
+      "",
+      "shot2",
+      "",
+      ""
+    ]
+  ],
+  "inset": 4,
+  "scale": 0.22,
+  "detail": 3.47,
+  "grid": {
+    "rows": [
+      0,
+      486
+    ],
+    "cols": [
+      [
+        0,
+        397,
+        403,
+        844,
+        850,
+        1200
+      ]
+    ]
+  }
+}

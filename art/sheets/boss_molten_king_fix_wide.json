@@ -1,0 +1,33 @@
+{
+  "source": "art/source/boss_molten_king_fix_wide.png",
+  "save": false,
+  "out_dir": "art/build/boss_molten_king_fix_wide",
+  "cells": [
+    [
+      "shot_recover",
+      "",
+      "death3",
+      "",
+      "phase3"
+    ]
+  ],
+  "inset": 4,
+  "scale": 0.225,
+  "detail": 3.47,
+  "grid": {
+    "rows": [
+      0,
+      478
+    ],
+    "cols": [
+      [
+        0,
+        417,
+        423,
+        837,
+        843,
+        1260
+      ]
+    ]
+  }
+}

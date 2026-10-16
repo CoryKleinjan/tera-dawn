@@ -210,6 +210,22 @@ func show_mob_move(index: int, what: StringName, at: Vector2) -> void:
 			flash(at + Vector2(0, -40), Color(1.0, 0.45, 0.25), 2.5)
 			if m:
 				m.rig.pulse(Color(1.0, 0.4, 0.3))
+			if m and m.def.rage_ticks > 0:
+				_roar_shake(at)
+		&"roar":
+			_roar_shake(at)
+
+## Ticks into a boss's roar (MonsterDef.intro_ticks / rage_ticks) when it peaks: the
+## screen shakes and dust flies then.
+const ROAR_PEAK_TICKS := 24
+
+## A boss's roar shaking the ground at `at`, at the peak of its roar.
+func _roar_shake(at: Vector2) -> void:
+	await world.get_tree().create_timer(ROAR_PEAK_TICKS / 60.0).timeout
+	if world.player and absf(world.player.position.x - at.x) < 700.0:
+		world.shake(0.7)
+	dust(at + Vector2(-40, 0), -1, 16)
+	dust(at + Vector2(40, 0), 1, 16)
 
 func show_mob_death(index: int) -> void:
 	var views := world.mobs()
@@ -217,7 +233,11 @@ func show_mob_death(index: int) -> void:
 		var m := views[index]
 		m.kill()
 		var mid := m.body_position() + Vector2(0, -m.def.size.y / 2.0)
-		add_effect(Content.effect(EffectDef.MONSTER_POOF), mid, 1)
+		if m.def.boss:
+			# a boss takes the final blow with a long hit-stop, then plays its own fall
+			m.hit_react(0, 10)
+		else:
+			add_effect(Content.effect(EffectDef.MONSTER_POOF), mid, 1)
 		# a pop of dawn-motes (the monster's spark going free) and a brief flash of light
 		burst(mid, Color(2.2, 1.8, 1.0), 16 if m.def.boss else 10, 1.3 if m.def.boss else 1.0)
 		flash(mid, Color(1.0, 0.85, 0.6), 4.0 if m.def.boss else 2.0)

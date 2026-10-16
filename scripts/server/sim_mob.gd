@@ -104,6 +104,10 @@ var from_tear := false
 var threat := {}
 var enraged := false
 var stuck_t := 0
+## Ticks left roaring on the spot (MonsterDef.intro_ticks / rage_ticks), and whether it has
+## roared its intro since it last came back.
+var roar_t := 0
+var _introduced := false
 ## How fast its target is moving (smoothed, pixels per tick), to aim ahead of them.
 var target_velocity := Vector2.ZERO
 var _target_last := Vector2.ZERO
@@ -163,6 +167,8 @@ func _reset() -> void:
 	threat.clear()
 	enraged = false
 	stuck_t = 0
+	roar_t = 0
+	_introduced = false
 	target_velocity = Vector2.ZERO
 	_hit_by = 0
 	_hit_t = 0
@@ -212,6 +218,7 @@ func die() -> void:
 	hop = 0.0
 	tossed = false
 	hang_t = 0
+	roar_t = 0
 
 ## Forgets `peer` (they left the map).
 func forget(peer: int) -> void:
@@ -252,8 +259,14 @@ func step() -> void:
 		show_hp -= 1
 	if def.boss and not enraged and health.fraction() <= 0.5:
 		enraged = true
+		roar_t = def.rage_ticks
 		map.broadcast(&"ev_mob_move", [index, &"rage", body_position().x, body_position().y])
 	var chased := _update_target()
+	if def.boss and chased and not _introduced:
+		_introduced = true
+		roar_t = def.intro_ticks
+		if roar_t > 0:
+			map.broadcast(&"ev_mob_move", [index, &"roar", body_position().x, body_position().y])
 	moves.tick()
 	if hurt_t > 0:
 		hurt_t -= 1
@@ -279,6 +292,11 @@ func step() -> void:
 				return
 	if moves.busy():
 		moves.step(chased)
+	elif roar_t > 0:
+		# roaring on the spot (after any move it was in): it turns to face its target
+		roar_t -= 1
+		if chased:
+			dir = -1 if chased.position.x < position.x else 1
 	elif hurt_t > 0:
 		if not def.stationary and root_t == 0 and stun_t == 0:
 			position.x += kx
@@ -616,5 +634,7 @@ func snapshot() -> Array:
 		flags |= SnapshotFlags.MOB_AIRBORNE
 	if burn_t > 0:
 		flags |= SnapshotFlags.MOB_BURNING
+	if roar_t > 0 and not moves.busy():
+		flags |= SnapshotFlags.MOB_ROARING
 	var move := moves.index + 1 if moves.busy() else 0
 	return [position.x, position.y - hop, dir, roundi(health.fraction() * 1000.0), flags, move]

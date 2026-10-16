@@ -1,0 +1,33 @@
+{
+  "source": "art/source/boss_molten_king_slam.png",
+  "save": false,
+  "out_dir": "art/build/boss_molten_king_slam",
+  "cells": [
+    [
+      "slam_windup2",
+      "",
+      "slam2",
+      "",
+      ""
+    ]
+  ],
+  "inset": 4,
+  "scale": 0.2125,
+  "detail": 3.47,
+  "grid": {
+    "rows": [
+      0,
+      550
+    ],
+    "cols": [
+      [
+        0,
+        397,
+        403,
+        797,
+        803,
+        1200
+      ]
+    ]
+  }
+}

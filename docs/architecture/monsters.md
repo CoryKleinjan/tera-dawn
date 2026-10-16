@@ -19,6 +19,12 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
 5. Give it one or two `moves` (three, all different, for a boss) from `data/monster_moves/`
    (see below), and a `sight` (how far away it notices players; starters 120, shooters 340,
    bosses 700).
+   Bosses can have more frames: a move's animation and its `<move>_windup` can hold two
+   frames each (wind-up held, strike looped or held), and `<move>_recover` shows while it gets
+   its balance back. Set `intro_ticks` / `rage_ticks` to make it stand roaring (its `intro`
+   animation when it first sees a player, `phase` at its second wind); its `die` animation
+   plays out over `TDMob.BOSS_DEATH_TICKS` before it fades. Molten King is the example
+   (`art/sheets/molten_king.json`, frames from `boss_molten_king_*.json`).
 6. Optional behavior (`SimMob` runs it): `jumps` hops now and then; `stationary` never walks
    (it can only shoot or slam); `keep_distance` backs away from a player crowding it when no
    close move is ready; `splits_into` with `split_count` bursts into smaller monsters when

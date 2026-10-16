@@ -25,6 +25,9 @@ const STUN_COLOR := Color(1.0, 0.92, 0.45)
 const DOWN_SPEED := 0.2
 ## Physics ticks a hit flashes the monster white: one short flash per hit, not a strobe.
 const HIT_FLASH_TICKS := 5
+## Ticks a defeated boss stays on screen: its whole death animation, then the fade
+## (others take SimMob.DEATH_FADE_TICKS).
+const BOSS_DEATH_TICKS := 120
 
 var world: TDWorld
 var index := 0
@@ -82,14 +85,18 @@ func apply(state: Array) -> void:
 		position = target # first sight, back from the dead or from a blink: no gliding in
 		death_t = 0
 	if dead and not was_dead and known:
-		death_t = SimMob.DEATH_FADE_TICKS
+		death_t = death_ticks()
 	known = true
 
 ## The server says it was defeated: start fading out now rather than at the next snapshot.
 func kill() -> void:
 	if not dead:
 		flags |= SnapshotFlags.MOB_DEAD
-		death_t = SimMob.DEATH_FADE_TICKS
+		death_t = death_ticks()
+
+## Ticks it takes to fall and fade out once defeated.
+func death_ticks() -> int:
+	return BOSS_DEATH_TICKS if def.boss else SimMob.DEATH_FADE_TICKS
 
 ## It was hit (by an attack facing `face`): a squash, a small push back and, for your own
 ## hits, a few frames of hit-stop so the blow lands.
@@ -175,6 +182,8 @@ func _process(_delta: float) -> void:
 	var lean := Vector2.ZERO
 	var mv := current_move()
 	var windup := StringName(String(mv.animation_name()) + "_windup") if mv else &""
+	var recover := StringName(String(mv.animation_name()) + "_recover") if mv else &""
+	var roar := &"phase" if flags & SnapshotFlags.MOB_ENRAGED != 0 else &"intro"
 	if fallen:
 		rig.play(&"die")
 	elif flags & SnapshotFlags.MOB_TOSSED != 0:
@@ -183,6 +192,12 @@ func _process(_delta: float) -> void:
 		rig.play(&"knock_down")
 	elif flags & SnapshotFlags.MOB_CASTING != 0:
 		rig.play(mv.animation_name() if mv and rig.has(mv.animation_name()) else &"attack")
+	elif flags & SnapshotFlags.MOB_ROARING != 0:
+		# a boss's intro or second-wind roar
+		rig.play(roar if rig.has(roar) else &"attack")
+	elif mv and not winding and rig.has(recover):
+		# getting its balance back after a move
+		rig.play(recover)
 	elif hurt or stunned:
 		rig.play(&"hurt")
 	elif winding and rig.has(windup):

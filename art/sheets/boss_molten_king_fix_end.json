@@ -1,0 +1,41 @@
+{
+  "source": "art/source/boss_molten_king_fix_end.png",
+  "save": false,
+  "out_dir": "art/build/boss_molten_king_fix_end",
+  "cells": [
+    [
+      "intro3",
+      "",
+      ""
+    ]
+  ],
+  "inset": 4,
+  "scale": 0.2625,
+  "detail": 3.47,
+  "grid": {
+    "rows": [
+      0,
+      517
+    ],
+    "cols": [
+      [
+        0,
+        409,
+        415,
+        800
+      ]
+    ]
+  },
+  "overrides": {
+    "intro3": {
+      "blank": [
+        [
+          0,
+          0,
+          40,
+          50
+        ]
+      ]
+    }
+  }
+}

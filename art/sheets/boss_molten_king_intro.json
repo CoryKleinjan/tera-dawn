@@ -1,0 +1,33 @@
+{
+  "source": "art/source/boss_molten_king_intro.png",
+  "save": false,
+  "out_dir": "art/build/boss_molten_king_intro",
+  "cells": [
+    [
+      "intro1",
+      "",
+      "intro2",
+      "",
+      ""
+    ]
+  ],
+  "inset": 4,
+  "scale": 0.22,
+  "detail": 3.47,
+  "grid": {
+    "rows": [
+      0,
+      550
+    ],
+    "cols": [
+      [
+        0,
+        430,
+        436,
+        817,
+        823,
+        1200
+      ]
+    ]
+  }
+}
