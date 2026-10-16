@@ -301,7 +301,7 @@ func advance(next: JobDef) -> String:
 	if problem != "":
 		return problem
 	var first_time := not has_passed(next)
-	came_from = job.id if next.partner != &"" else &""
+	came_from = job.id if next.partner != &"" and next.opens_from(job.id) else &""
 	job = next
 	skills.forget_outside(next.line())
 	if first_time:

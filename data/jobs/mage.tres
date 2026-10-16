@@ -14,3 +14,20 @@ chance = 1.0
 min_amount = 30
 max_amount = 30
 
+[resource]
+script = ExtResource("1_job_def")
+id = &"mage"
+display_name = "Magician"
+family = &"mage"
+tint = Color(0.788235, 0.768627, 1.0, 1.0)
+primary_stat = "intelligence"
+mastery = 0.65
+description = "Scholars of dawnlight who hurl spells with wands and staves. Intelligence drives their magic and deepens their MP."
+base_hp = 40
+hp_growth = 8
+base_mp = 40
+mp_growth = 16
+advances_from = &"beginner"
+advance_gifts = Array[ExtResource("3_drop_entry")]([SubResource("Resource_3")])
+starting_quickslots = Array[ExtResource("q_item_def")]([ExtResource("q_red_potion"), ExtResource("5_blue_potion")])
+advance_quest = ExtResource("20_test")

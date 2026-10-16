@@ -1,6 +1,6 @@
 extends TestCase
 ## Character rules: Dawn Essence and growth, HP and MP, recalc, buying stats, skills bought
-## with essence, buffs and their expiry, quickslots, storage, job advancement, tallies,
+## with essence, buffs and their expiry, quickslots, storage, job advancement and switching, tallies,
 ## visited maps, pets, and a fresh character from real content.
 
 var fx: UnitHelpers
@@ -186,15 +186,6 @@ func test_refund_all_hands_back_the_essence_of_every_point_above_the_start() -> 
 	check_eq(c.essence, 2 + 723 + 76 + 42, "essence back")
 	check_eq([c.base.strength, c.base.dexterity, c.base.luck], [4, 0, 4], "back to the start")
 	check_eq(c.ap.spent(), 0, "nothing bought")
-
-func test_stats_short_of_a_job() -> void:
-	var beginner := fx.job(&"t_beginner")
-	var thief := fx.job(&"t_thief", &"t_thieves", &"t_beginner")
-	thief.advance_requirements = UnitHelpers.stats({"luck": 25, "dexterity": 10})
-	var c := fx.character(beginner, {"luck": 4, "dexterity": 12})
-	check_eq(c.stats_short_of(thief), {&"luck": 25}, "only LUK is short")
-	c.base.luck = 25
-	check_eq(c.stats_short_of(thief), {}, "ready")
 
 # ---------- skills ----------
 
@@ -562,30 +553,42 @@ func test_retrieve_needs_room() -> void:
 func _advance_setup() -> Array:
 	var first := fx.job(&"t_job")
 	var next := fx.job(&"t_next", &"t_warrior", &"t_job")
-	next.advance_requirements = UnitHelpers.stats({"strength": 35})
 	next.hp_growth = 20
 	var c := fx.character(first, {"strength": 35})
 	return [c, next]
 
-func test_advance_requirements() -> void:
+func test_advance_needs_no_stats() -> void:
 	var setup := _advance_setup()
 	var c: Character = setup[0]
 	var next: JobDef = setup[1]
-	check_eq(c.advance_problem(next), "", "meets everything")
-	c.base.strength = 34
-	check_ne(c.advance_problem(next), "", "STR too low")
-	c.base.strength = 35
-	c.equipment.put(&"hat", ItemStack.exact(fx.equip(&"t_hat", EquipDef.Slot.HAT, {"strength": 50})))
-	c.base.strength = 20
-	check_ne(c.advance_problem(next), "", "gear STR doesn't count")
+	c.base.strength = 0
+	check_eq(c.advance_problem(next), "", "no stats asked")
 
-func test_advance_only_from_previous_job() -> void:
+func test_advance_refuses_the_job_you_are() -> void:
 	var setup := _advance_setup()
 	var c: Character = setup[0]
-	var later := fx.job(&"t_later", &"t_warrior", &"t_next")
-	check_ne(c.advance_problem(later), "", "can't skip a job")
-	check_ne(c.advance(later), "", "advance refused")
+	var next: JobDef = setup[1]
+	check_eq(c.advance_problem(c.job), "You're already a T Job.", "a Beginner")
+	next.display_name = "Archer"
+	check_eq(c.advance(next), "", "advanced")
+	check_eq(c.advance_problem(next), "You're already an Archer.", "an before a vowel")
+	check_eq(c.advance(next), "You're already an Archer.", "advance refused")
+
+func test_advance_only_where_the_job_opens() -> void:
+	var setup := _advance_setup()
+	var c: Character = setup[0]
+	var next: JobDef = setup[1]
+	var first := c.job
+	fx.job(&"t_other", &"t_mage", &"t_job")
+	var blend := fx.job(&"t_blend", &"t_blends", &"t_next")
+	blend.partner = &"t_other"
+	check(not c.can_become(blend), "a Beginner can't skip to a blend")
+	check_eq(c.advance(blend), "A T Job can't become a T Blend.", "advance refused")
 	check_eq(c.job.id, &"t_job", "job unchanged")
+	check(c.can_become(next), "a first job is open")
+	check_eq(c.advance(next), "", "advanced")
+	check(c.can_become(blend), "a parent can become the blend")
+	check(not c.can_become(first), "nobody goes back to being a Beginner")
 
 func test_advance_changes_job_gives_gifts_and_refills() -> void:
 	var setup := _advance_setup()
@@ -669,50 +672,118 @@ func test_advance_leaves_a_gift_weapon_it_cant_wear_in_the_bag() -> void:
 	check_eq(c.gear.weapon(), null, "too heavy to wear")
 	check_eq(c.inventory.count_of(heavy), 1, "in the bag")
 
-func test_requirement_lines() -> void:
+func test_line_runs_back_through_every_parent() -> void:
 	var setup := _advance_setup()
+	var c: Character = setup[0]
 	var next: JobDef = setup[1]
-	check_eq(Array(next.requirement_lines()), ["35 STR"], "lines")
+	fx.job(&"t_other", &"t_mage", &"t_job")
+	var blend := fx.job(&"t_blend", &"t_blends", &"t_next")
+	blend.partner = &"t_other"
+	check_eq(c.job.line(), [&"t_job"] as Array[StringName], "a Beginner")
+	check_eq(next.line(), [&"t_next", &"t_job"] as Array[StringName], "a first job and the Beginner")
+	check_eq(blend.line(), [&"t_blend", &"t_next", &"t_other", &"t_job"] as Array[StringName], "a blend and both parents")
 
-## A Beginner (starting STR 12, DEX 5) who put 18 points in STR and a path asking for 30 INT.
-func _reset_setup() -> Array:
+# ---------- switching jobs ----------
+
+## A Warrior-like `next` (passed, with a Beginner skill and two levels of a Warrior skill
+## bought, the Warrior skill on a quickslot and its buff running) and a Mage-like `other`,
+## each with a Job Test and a potion gift.
+func _switch_setup() -> Dictionary:
 	var first := fx.job(&"t_job")
-	first.starting_stats = UnitHelpers.stats({"strength": 12, "dexterity": 5})
-	var next := fx.job(&"t_mind", &"t_mage", &"t_job")
-	next.advance_requirements = UnitHelpers.stats({"intelligence": 30})
-	var c := fx.character(first, {"strength": 30, "dexterity": 5})
-	c.essence = 2
-	return [c, next]
+	var next := fx.job(&"t_next", &"t_warrior", &"t_job")
+	var other := fx.job(&"t_other", &"t_mage", &"t_job")
+	var potion := fx.use(&"t_potion")
+	for j: JobDef in [next, other]:
+		j.advance_quest = fx.quest(StringName("t_%s_test" % j.id))
+		j.advance_gifts = [UnitHelpers.drop(potion, 20)]
+	var jab := fx.skill(&"t_jab")
+	var cut := fx.skill(&"t_cut", SkillDef.Kind.ATTACK, &"t_next")
+	var spark := fx.skill(&"t_spark", SkillDef.Kind.ATTACK, &"t_other")
+	var c := fx.character(first, {"strength": 20, "intelligence": 7})
+	c.quests.done[next.advance_quest.id] = true
+	check_eq(c.advance(next), "", "became the first job")
+	c.essence = CharacterStats.skill_price(0) + CharacterStats.skill_price(1) + CharacterStats.skill_price(2)
+	c.skills.learn(jab)
+	c.skills.learn(cut)
+	c.skills.learn(cut)
+	c.skills.buffs[cut.id] = [2, 100]
+	check_eq(c.essence, 0, "everything spent")
+	return {"c": c, "first": first, "next": next, "other": other, "potion": potion, "jab": jab, "cut": cut, "spark": spark}
 
-func test_ap_reset_gives_back_the_essence_of_every_point_once() -> void:
-	var setup := _reset_setup()
-	var c: Character = setup[0]
-	var next: JobDef = setup[1]
-	check_eq(c.ap.spent(), 18, "18 points in STR")
-	check_eq(c.ap.reset(next), "", "reset")
-	check_eq(c.base.strength, 12, "back to the starting STR")
-	check_eq(c.base.dexterity, 5, "DEX untouched")
-	# the first 18 points of one stat: 2,883
-	check_eq(c.essence, 2 + 2883, "the 18 points' essence back plus the 2 unspent")
-	check_eq(c.stats.strength, 12, "totals worked out again")
-	check(c.ap.reset_used, "used up")
-	check_eq(c.ap.buy(&"strength", 5), 5, "bought again")
-	check_ne(c.ap.reset(next), "", "only once")
-	check_eq(c.base.strength, 17, "the second one changes nothing")
+func test_advance_remembers_the_jobs_passed() -> void:
+	var s := _switch_setup()
+	var c: Character = s["c"]
+	check_eq(Array(c.jobs_passed), ["t_next"], "the first job is passed")
+	check(c.has_passed(s["next"]), "has passed it")
+	check(not c.has_passed(s["other"]), "not the other")
+	check(c.can_become(s["other"]), "another first job is open")
+	check(not c.can_become(s["next"]), "not the job you are")
+	check(not c.can_become(s["first"]), "nor the Beginner")
 
-func test_ap_reset_only_for_a_beginner_short_of_the_stats() -> void:
-	var setup := _reset_setup()
-	var c: Character = setup[0]
-	var next: JobDef = setup[1]
-	c.base.intelligence = 30
-	check_ne(c.ap.reset_problem(next), "", "already has the INT")
-	c.base.intelligence = 0
-	c.base.strength = 12
-	check_ne(c.ap.reset_problem(next), "", "nothing spent")
-	c.base.strength = 30
-	check_eq(c.ap.reset_problem(next), "", "spent and short")
-	c.job = next
-	check_ne(c.ap.reset_problem(next), "", "not a Beginner any more")
+func test_switching_needs_the_job_test_the_first_time() -> void:
+	var s := _switch_setup()
+	var c: Character = s["c"]
+	var other: JobDef = s["other"]
+	check_eq(c.advance(other), "Pass the %s first." % other.advance_quest.title, "the Job Test first")
+	check_eq(c.job, s["next"], "job unchanged")
+	check_eq(c.skills.level(s["cut"]), 2, "skills kept")
+	check_eq(c.essence, 0, "nothing handed back")
+
+func test_switching_drops_the_old_jobs_skills_and_refunds_what_was_paid() -> void:
+	var s := _switch_setup()
+	var c: Character = s["c"]
+	var cut: SkillDef = s["cut"]
+	var paid := int(c.skills.paid[cut.id])
+	check_eq(paid, CharacterStats.skill_price(1) + CharacterStats.skill_price(2), "what the two levels cost")
+	check(c.quickslot_of(&"skill", cut.id) >= 0, "on a quickslot")
+	var base := c.base.to_dict()
+	var str_total := c.stats.strength
+	check_eq(c.skills_lost_by(s["other"]), [cut] as Array[SkillDef], "only the Warrior skill would go")
+	c.quests.done[s["other"].advance_quest.id] = true
+	check_eq(c.advance(s["other"]), "", "switched")
+	check_eq(c.job, s["other"], "the other job")
+	check_eq(c.skills.level(cut), 0, "the old job's skill is forgotten")
+	check(not c.skills.paid.has(cut.id), "and what was paid for it")
+	check_eq(c.essence, paid, "exactly what was paid comes back")
+	check_eq(c.quickslot_of(&"skill", cut.id), -1, "its quickslot empties")
+	check(not c.skills.buffs.has(cut.id), "its buff ends")
+	check_eq(c.skills.level(s["jab"]), 1, "the Beginner skill stays")
+	check_eq(c.base.to_dict(), base, "stats stay")
+	check_eq(c.stats.strength, str_total, "and their totals")
+	check_eq(c.skills.price(), CharacterStats.skill_price(1), "the next level costs as if the old skill was never bought")
+	check_eq(c.inventory.count_of(s["potion"]), 40, "gifts the first time")
+	check(c.has_passed(s["other"]), "now passed too")
+
+func test_switching_back_is_free_and_gives_no_gifts_again() -> void:
+	var s := _switch_setup()
+	var c: Character = s["c"]
+	var next: JobDef = s["next"]
+	var other: JobDef = s["other"]
+	c.quests.done[other.advance_quest.id] = true
+	check_eq(c.advance(other), "", "switched")
+	c.essence += CharacterStats.skill_price(1)
+	var essence := c.essence
+	check_eq(c.skills.learn(s["spark"]), "", "a skill of the new job")
+	c.quests.done.erase(next.advance_quest.id)
+	c.quests.done.erase(other.advance_quest.id)
+	var potions := c.inventory.count_of(s["potion"])
+	check_eq(c.advance_problem(next), "", "a job passed before needs no Job Test")
+	check_eq(c.advance(next), "", "switched back")
+	check_eq(c.job, next, "the first job again")
+	check_eq(c.inventory.count_of(s["potion"]), potions, "no second gifts")
+	check_eq(c.skills.level(s["spark"]), 0, "the other job's skill goes")
+	check_eq(c.essence, essence, "its essence comes back")
+	check_eq(c.skills.level(s["cut"]), 0, "the skill dropped before stays dropped")
+	check_eq(Array(c.jobs_passed), ["t_next", "t_other"], "each job listed once")
+	check_eq(c.advance(other), "", "and back again, free")
+
+func test_switching_needs_no_room_for_gifts_once_passed() -> void:
+	var s := _switch_setup()
+	var c: Character = s["c"]
+	c.quests.done[s["other"].advance_quest.id] = true
+	check_eq(c.advance(s["other"]), "", "switched")
+	c.inventory.add(fx.use(&"t_junk", 1), Inventory.SLOTS)
+	check_eq(c.advance(s["next"]), "", "a full Use tab doesn't matter: no gifts come")
 
 # ---------- tallies, maps, pets ----------
 
@@ -781,11 +852,9 @@ func test_create_beginner_from_content() -> void:
 func test_real_beginner_can_reach_warrior() -> void:
 	var c := Character.create("Hero")
 	var w := Content.job(&"warrior")
-	check_ne(c.advance_problem(w), "", "a new Beginner can't")
-	c.base.strength = w.advance_requirements.strength
-	check_eq(c.advance_problem(w), "Pass the Job Test first.", "the Job Test first")
+	check_eq(c.advance_problem(w), "Pass the Job Test first.", "a new Beginner needs only the Job Test")
 	c.quests.done[w.advance_quest.id] = true
-	check_eq(c.advance_problem(w), "", "STR and the test enough")
+	check_eq(c.advance_problem(w), "", "the test is enough")
 	check_eq(c.advance(w), "", "advanced")
 	check_eq(c.job.id, &"warrior", "warrior")
 

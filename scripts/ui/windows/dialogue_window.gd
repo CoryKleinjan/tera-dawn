@@ -197,17 +197,20 @@ func _job_list() -> void:
 ## comes back), why not yet, and the choice.
 func _job_page(j: JobDef) -> void:
 	var problem := Game.me.advance_problem(j)
-	var say := j.description
+	var parts := PackedStringArray()
+	if j.description != "":
+		parts.append(j.description)
 	if Game.me.has_passed(j):
-		say += "\n\nYou passed this path before, so it's yours again for the asking."
+		parts.append("You passed this path before, so it's yours again for the asking.")
 	var lost := Game.me.skills_lost_by(j)
 	if not lost.is_empty():
 		var back := 0
 		for s in lost:
 			back += int(Game.me.skills.paid.get(s.id, 0))
-		say += "\n\nYou would forget %s, and get back %d Dawn Essence." % [ServerJobs.skill_names(lost), back]
+		parts.append("You would forget %s, and get back %d Dawn Essence." % [ServerJobs.skill_names(lost), back])
 	if problem != "":
-		say += "\n\n" + problem
+		parts.append(problem)
+	var say := "\n\n".join(parts)
 	var opts := []
 	if problem == "":
 		opts.append(["Become " + ServerJobs.with_article(j.display_name), func() -> void:

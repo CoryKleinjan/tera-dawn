@@ -1,6 +1,7 @@
 extends TestCase
 ## Choosing a job at an instructor, through the server (req_advance): who may advance and
-## where, the gifts that come with it, a full bag holding it back, and the
+## where, the gifts that come with it, a full bag holding it back, switching between first
+## jobs (the skills that go and their essence back, free the second time), and the
 ## new job being announced and saved. The smoke test covers the happy path through the
 ## dialogue window; these cover the refusals.
 
@@ -8,6 +9,7 @@ const ServerHarness := preload("res://tests/framework/server_helpers.gd")
 
 const INSTRUCTOR_X := 900.0
 const MERCHANT_X := 400.0
+const WARRIOR_TUTOR_X := 1700.0
 
 var h: ServerHarness
 var p: SimPlayer
@@ -24,6 +26,7 @@ func before_each() -> void:
 	var town := ServerHarness.town_def()
 	ServerHarness.npc(town, &"test_instructor", INSTRUCTOR_X).instructs = [&"mage"]
 	ServerHarness.npc(town, &"test_merchant", MERCHANT_X)
+	ServerHarness.npc(town, &"test_warrior_tutor", WARRIOR_TUTOR_X).instructs = [&"warrior"]
 	h.add_map(town)
 	p = h.join(2, "Ann", ServerHarness.TOWN, INSTRUCTOR_X)
 	c = p.character
@@ -31,11 +34,20 @@ func before_each() -> void:
 func after_each() -> void:
 	h.close()
 
-## A Beginner who meets every Magician requirement, the Job Test included.
+## A Beginner who has passed the Magician's Job Test.
 func _ready_for_mage() -> void:
-	c.base.intelligence = mage.advance_requirements.intelligence
 	c.quests.done[mage.advance_quest.id] = true
+
+## A Warrior (passed) who bought Power Strike, with no essence left over.
+func _as_warrior() -> SkillDef:
+	c.job = Content.job(&"warrior")
+	c.jobs_passed.assign(["warrior"])
 	c.recalc()
+	var strike := Content.skill(&"power_strike")
+	c.essence = c.skills.price()
+	check_eq(c.skills.learn(strike), "", "Power Strike bought")
+	check_eq(c.essence, 0, "nothing left over")
+	return strike
 
 func _advance(npc := &"test_instructor", job := &"mage") -> void:
 	h.ask(2, &"req_advance", [npc, job])
@@ -54,10 +66,6 @@ func test_advancing_changes_the_job_and_hands_out_the_gifts() -> void:
 func test_every_job_gets_its_basic_weapon_worn() -> void:
 	for job in JobDef.paths_from(Character.START_JOB):
 		var who := Character.create("Gift" + String(job.id), Character.START_JOB)
-		if job.advance_requirements:
-			for stat in StatBlock.BASE:
-				who.base.set(stat, maxi(who.base.value(stat), job.advance_requirements.value(stat)))
-		who.recalc()
 		who.quests.done[job.advance_quest.id] = true
 		var old := who.gear.weapon()
 		check_eq(who.advance(job), "", "%s: advanced" % job.id)
@@ -83,12 +91,13 @@ func test_the_new_job_is_saved_at_once() -> void:
 	var saved := h.saved("Ann")
 	check(saved != null and saved.job.id == &"mage", "saved as a Magician")
 
-func test_missing_stats_are_refused_and_told() -> void:
-	_ready_for_mage()
-	c.base.intelligence = mage.advance_requirements.intelligence - 1
+func test_the_job_test_is_needed_but_no_stats() -> void:
 	_advance()
 	check_eq(c.job.id, &"beginner", "still a Beginner")
-	check(h.told(2, "INT to become a Magician."), "told which stat")
+	check(h.told(2, "Pass the Job Test first."), "told why")
+	_ready_for_mage()
+	_advance()
+	check_eq(c.job, mage, "the Job Test is enough, on a Beginner's starting stats")
 
 func test_advancing_needs_you_by_the_instructor() -> void:
 	_ready_for_mage()
@@ -103,7 +112,7 @@ func test_only_an_instructor_of_that_job_can_advance_you() -> void:
 	_advance(&"test_merchant")
 	check_eq(c.job.id, &"beginner", "a merchant doesn't teach jobs")
 	h.place(p, INSTRUCTOR_X)
-	c.base.strength = 35
+	c.quests.done[Content.job(&"warrior").advance_quest.id] = true
 	_advance(&"test_instructor", &"warrior")
 	check_eq(c.job.id, &"beginner", "this instructor doesn't teach Warriors")
 	_advance(&"test_instructor", &"no_such_job")
@@ -136,7 +145,60 @@ func test_a_job_can_only_be_chosen_once() -> void:
 	check_eq(c.essence, 50, "nothing given a second time")
 	check_eq(c.gear.weapon(), wand, "the first wand is worn")
 	check_eq(c.inventory.count_of(wand), 0, "no second wand")
-	check(h.told(2, "A Magician can't become a Magician."), "told")
+	check(h.told(2, "You're already a Magician."), "told")
+
+func test_switching_jobs_drops_the_old_skills_and_hands_back_their_essence() -> void:
+	var strike := _as_warrior()
+	var paid := int(c.skills.paid[strike.id])
+	var base := c.base.to_dict()
+	check(c.quickslot_of(&"skill", strike.id) >= 0, "Power Strike on a quickslot")
+	_advance()
+	check_eq(c.job.id, &"warrior", "the Magician's Job Test first")
+	check(h.told(2, "Pass the Job Test first."), "told why")
+	check_eq(c.skills.level(strike), 1, "skills kept until then")
+	_ready_for_mage()
+	_advance()
+	check_eq(c.job, mage, "a Magician now")
+	check_eq(c.skills.level(strike), 0, "Power Strike forgotten")
+	check_eq(c.essence, paid, "exactly what it cost comes back")
+	check_eq(c.quickslot_of(&"skill", strike.id), -1, "its quickslot empties")
+	check_eq(c.base.to_dict(), base, "stats stay")
+	check(h.told(2, "You are now a Magician!"), "told")
+	check(h.told(2, "You forget Power Strike, and %d Dawn Essence comes back to you." % paid), "told what went and what came back")
+	check(h.told(2, "Your instructor hands you: Apprentice Wand, 30 Blue Potion."), "the first time, the gifts")
+	check(c.has_passed(mage), "passed")
+	var saved := h.saved("Ann")
+	check(saved != null and saved.has_passed(mage) and saved.has_passed(Content.job(&"warrior")), "both jobs saved as passed")
+
+func test_switching_back_is_free_and_gives_nothing_again() -> void:
+	_as_warrior()
+	_ready_for_mage()
+	_advance()
+	check_eq(c.job, mage, "a Magician")
+	var spike := Content.skill(&"ice_spike")
+	c.essence += c.skills.price()
+	check_eq(c.skills.learn(spike), "", "a Magician skill bought")
+	var paid := int(c.skills.paid[spike.id])
+	var essence := c.essence
+	var blues := c.inventory.count_of(blue)
+	var reds := c.inventory.count_of(Content.item(&"red_potion"))
+	h.clear()
+	h.place(p, WARRIOR_TUTOR_X)
+	_advance(&"test_warrior_tutor", &"warrior")
+	check_eq(c.job.id, &"warrior", "a Warrior again, with no Job Test")
+	check(h.told(2, "You are a Warrior again!"), "told")
+	check(not h.told(2, "Your instructor hands you"), "no gifts the second time")
+	check_eq(c.inventory.count_of(blue), blues, "no more Blue Potions")
+	check_eq(c.inventory.count_of(Content.item(&"red_potion")), reds, "no more Red Potions")
+	check_eq(c.skills.level(spike), 0, "the Magician skill goes")
+	check_eq(c.essence, essence + paid, "and its essence comes back")
+	check(h.told(2, "You forget Ice Spike, and %d Dawn Essence comes back to you." % paid), "told")
+	h.clear()
+	h.place(p, INSTRUCTOR_X)
+	_advance()
+	check_eq(c.job, mage, "and a Magician again, free")
+	check(h.told(2, "You are a Magician again!"), "told")
+	check(not h.told(2, "You forget"), "nothing to forget")
 
 func test_unknown_players_are_ignored() -> void:
 	h.ask(9, &"req_advance", [&"test_instructor", &"mage"])

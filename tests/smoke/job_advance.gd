@@ -13,7 +13,6 @@ func check() -> void:
 	_check(world.map.outside() == &"lumewood", "the Magicians' Library is a room in Lumewood")
 	var guide: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"lumewood_instructor")[0]
 	ch.job = Content.job(&"beginner")
-	ch.base.intelligence = 20
 	ch.quests.done[&"jtest_mage"] = true
 	_me().dirty_character = true
 	await _ticks(2)
@@ -27,7 +26,7 @@ func check() -> void:
 	labels = talk.options.map(func(o: Array) -> String: return o[0])
 	_check(labels == ["Magician", "Back"], "Lumewood's instructor teaches Magicians")
 	talk.choose(labels.find("Magician"))
-	_check(talk.options[0][0] == "Become a Magician", "a Beginner with 20 INT who passed the Job Test may become a Magician")
+	_check(talk.options[0][0] == "Become a Magician", "a Beginner who passed the Job Test may become a Magician")
 	talk.choose(0)
 	await _ticks(2)
 	_check(Game.me.job.id == &"mage" and Game.me.gear.weapon() == Content.item(&"apprentice_wand"), "the server makes them a Magician and hands them a wand to wear")
