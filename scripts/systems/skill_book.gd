@@ -62,6 +62,30 @@ func can_learn_any() -> bool:
 		return false
 	return Content.skills.values().any(func(skill: SkillDef) -> bool: return learn_problem(skill) == "")
 
+## The skills learned that a job of `line` (JobDef.line) can't use.
+func outside(line: Array[StringName]) -> Array[SkillDef]:
+	var out: Array[SkillDef] = []
+	for id in learned:
+		var s: SkillDef = Content.skills.get(id)
+		if s and not s.innate and not s.job in line and learned[id] > 0:
+			out.append(s)
+	return out
+
+## Forgets every skill a job of `line` can't use (see outside): the Dawn Essence paid for each
+## comes back and its quickslot empties. Returns the essence handed back.
+func forget_outside(line: Array[StringName]) -> int:
+	var back := 0
+	for s in outside(line):
+		back += int(paid.get(s.id, 0))
+		learned.erase(s.id)
+		paid.erase(s.id)
+		buffs.erase(s.id)
+		var slot := character.quickslot_of(&"skill", s.id)
+		if slot >= 0:
+			character.set_quickslot(slot, &"", &"")
+	character.essence += back
+	return back
+
 ## Dawn Essence for the next skill level: each level bought (of any skill) makes the next
 ## one cost more (CharacterStats.skill_price).
 func price() -> int:

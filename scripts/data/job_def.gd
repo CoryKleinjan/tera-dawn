@@ -44,10 +44,9 @@ extends Resource
 ## For a blend, the other first job that can advance into it too. Its skills open to this job
 ## and its gear fits.
 @export var partner: StringName
-## Base stats (STR, DEX, INT, LUK, before gear) needed to advance.
-@export var advance_requirements: StatBlock
-## A quest to hand in first (the job tutor's test). Handing it in advances you right away
-## when nothing else stands in the way (ServerQuests.on_quest_complete).
+## A quest to hand in the first time (the job tutor's Job Test). Handing it in advances you
+## right away when nothing else stands in the way (ServerQuests.on_quest_complete); a job
+## passed once is free to switch back to.
 @export var advance_quest: QuestDef
 ## Items handed over when advancing (each gives `min_amount`): the job's basic weapon (the
 ## first weapon here is worn right away, see Character.advance), and potions.
@@ -75,16 +74,6 @@ func damage_stat(total: StatBlock) -> StringName:
 			if total.value(stat) > total.value(main):
 				main = stat
 	return main
-
-## What advancing takes, as readable lines ("35 STR").
-func requirement_lines() -> PackedStringArray:
-	var out := PackedStringArray()
-	if advance_requirements:
-		for stat in StatBlock.BASE:
-			var n := advance_requirements.value(stat)
-			if n > 0:
-				out.append("%d %s" % [n, StatBlock.LABELS[stat]])
-	return out
 
 ## "Apprentice Wand, 30 Blue Potion": the advance gifts, for the message on advancing.
 func gifts_text() -> String:
@@ -155,6 +144,16 @@ func wear_families() -> Array[StringName]:
 				out.append(j.family)
 	return out
 
-## "Warrior: Level 10, 35 STR", for lists of the paths open to a Beginner.
-func path_line() -> String:
-	return "%s: %s" % [display_name, ", ".join(requirement_lines())]
+## The jobs whose skills this job may learn: itself and every job it advances from, both
+## parents for a blend (a Spellblade learns Warrior and Magician skills).
+func line() -> Array[StringName]:
+	var out: Array[StringName] = [id]
+	var i := 0
+	while i < out.size():
+		var j: JobDef = Content.jobs.get(out[i])
+		if j:
+			for parent in j.parents():
+				if not parent in out:
+					out.append(parent)
+		i += 1
+	return out

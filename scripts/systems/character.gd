@@ -36,9 +36,12 @@ var job: JobDef
 ## The job this character advanced into `job` from (for a blend, which of its two parents),
 ## or empty for a job reached the usual way.
 var came_from: StringName = &""
+## Ids of every job this character has passed (its Job Test taken and its gifts handed over),
+## so switching back to one is free.
+var jobs_passed: Array[String] = []
 ## Stats from the job and the points bought, before gear.
 var base := StatBlock.new()
-## Buying stats, and the free reset.
+## Buying stats.
 var ap := AbilityPoints.new(self)
 var inventory := Inventory.new()
 ## Kept by storage keepers in town.
@@ -234,17 +237,6 @@ func retrieve(tab: int, i: int) -> String:
 
 # ---------- jobs ----------
 
-## The base stats still short of what advancing to `next` asks for, as {stat: amount needed}
-## (empty when the stats are there).
-func stats_short_of(next: JobDef) -> Dictionary:
-	var out := {}
-	if next.advance_requirements:
-		for stat in StatBlock.BASE:
-			var need := next.advance_requirements.value(stat)
-			if base.value(stat) < need:
-				out[stat] = need
-	return out
-
 ## The jobs this character has been, newest first: their job, the one they advanced from
 ## (`came_from` for a blend), and so on back to the Beginner.
 func job_path() -> Array[StringName]:
@@ -269,14 +261,31 @@ func job_line() -> Array[StringName]:
 				out.append(parent)
 	return out
 
-## Why the character can't advance to `next`, or "" if they can.
+## Whether this character has passed `j` before (see jobs_passed).
+func has_passed(j: JobDef) -> bool:
+	return jobs_passed.has(String(j.id))
+
+## Whether a tutor teaching `next` would offer it: a first job to anyone past the Beginner
+## (switching from another first job or a blend), a blend to one of its parents, and any job
+## passed before.
+func can_become(next: JobDef) -> bool:
+	if next == job or next.is_starting_job():
+		return false
+	return next.tier() == 1 or next.opens_from(job.id) or has_passed(next)
+
+## The skills this character would lose by becoming `next` (those outside its JobDef.line).
+func skills_lost_by(next: JobDef) -> Array[SkillDef]:
+	return skills.outside(next.line())
+
+## Why the character can't become `next`, or "" if they can.
 func advance_problem(next: JobDef) -> String:
-	if not next.opens_from(job.id):
+	if next == job:
+		var article := "an" if next.display_name.substr(0, 1).to_lower() in ["a", "e", "i", "o", "u"] else "a"
+		return "You're already %s %s." % [article, next.display_name]
+	if not can_become(next):
 		return "A %s can't become a %s." % [job.display_name, next.display_name]
-	if next.advance_requirements:
-		for stat in StatBlock.BASE:
-			if base.value(stat) < next.advance_requirements.value(stat):
-				return "You need %d %s to become a %s." % [next.advance_requirements.value(stat), StatBlock.LABELS[stat], next.display_name]
+	if has_passed(next):
+		return ""
 	if next.advance_quest and not quests.done.has(next.advance_quest.id):
 		return "Pass the %s first." % next.advance_quest.title
 	var full := inventory.tab_without_room(next.advance_gifts.map(func(g: DropEntry) -> Array: return [g.item, 1 if g.item is EquipDef else g.min_amount]))
@@ -284,18 +293,24 @@ func advance_problem(next: JobDef) -> String:
 		return "Make room in your %s inventory first." % ItemDef.TAB_NAMES[full]
 	return ""
 
-## Becomes `next` (see advance_problem) and receives its gifts. Returns why not, or "".
+## Becomes `next` (see advance_problem). The skills of the old job that `next` can't use go,
+## and the Dawn Essence paid for them comes back; stats stay. The first time, it receives the
+## job's gifts. Returns why not, or "".
 func advance(next: JobDef) -> String:
 	var problem := advance_problem(next)
 	if problem != "":
 		return problem
-	came_from = job.id if next.partner != &"" else &""
+	var first_time := not has_passed(next)
+	came_from = job.id if next.partner != &"" and next.opens_from(job.id) else &""
 	job = next
-	for g in next.advance_gifts:
-		if g.item is EquipDef:
-			inventory.add_stack(ItemStack.unrolled(g.item, 1))
-		elif g.item:
-			inventory.add(g.item, g.min_amount)
+	skills.forget_outside(next.line())
+	if first_time:
+		jobs_passed.append(String(next.id))
+		for g in next.advance_gifts:
+			if g.item is EquipDef:
+				inventory.add_stack(ItemStack.unrolled(g.item, 1))
+			elif g.item:
+				inventory.add(g.item, g.min_amount)
 	recalc()
 	_wear_advance_weapon(next)
 	refill()

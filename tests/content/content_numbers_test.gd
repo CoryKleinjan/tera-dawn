@@ -223,18 +223,14 @@ func test_jobs_have_usable_growth() -> void:
 			if from:
 				check(j.tier() > from.tier(), "%s: tier %d is not above %s's %d" % [w, j.tier(), from.id, from.tier()])
 
-func test_job_requirements_are_reachable_by_the_first_job_tier() -> void:
-	# a Beginner who has bought a first-job tier's stat points must be able to meet every
-	# stat requirement
-	var start: JobDef = Content.jobs.get(Character.START_JOB)
-	var budget := (FIRST_JOB_TIER - 1) * CharacterStats.GROWTH_POINTS
+func test_every_first_job_has_a_job_test_anyone_may_take() -> void:
+	# no stat gate: the Job Test is the way in, and any job may take it to switch
 	for j: JobDef in Content.jobs.values():
-		if j.advances_from != Character.START_JOB or j.advance_requirements == null or start == null:
+		if j.advances_from != Character.START_JOB:
 			continue
-		var need := 0
-		for stat in StatBlock.BASE:
-			need += maxi(0, j.advance_requirements.value(stat) - start.starting_stats.value(stat))
-		check(need <= budget, "%s: needs %d stat points bought but a Beginner at tier %d has %d" % [Scan.where(j), need, FIRST_JOB_TIER, budget])
+		if not check(j.advance_quest != null, "%s: a first job needs a Job Test (advance_quest)" % Scan.where(j)):
+			continue
+		check(j.advance_quest.jobs.is_empty(), "%s: its Job Test %s is limited to %s, but any job may take it" % [Scan.where(j), j.advance_quest.id, j.advance_quest.jobs])
 
 func test_gear_has_sane_requirements_and_stats() -> void:
 	for i: ItemDef in Content.items.values():

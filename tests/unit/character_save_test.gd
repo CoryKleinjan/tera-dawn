@@ -1,6 +1,6 @@
 extends TestCase
 ## Character.to_dict / load_dict: a full round trip (gear rolled stats and scroll upgrades,
-## Dawn Essence, skills and what was paid for them, buffs, quickslots, buddies, fame, guild, Monster Book, pet, visited maps,
+## Dawn Essence, jobs passed, skills and what was paid for them, buffs, quickslots, buddies, fame, guild, Monster Book, pet, visited maps,
 ## achievements, tallies), bad values, and the older save formats load_dict still accepts.
 
 var fx: UnitHelpers
@@ -17,7 +17,7 @@ func _rich() -> Character:
 	c.name = "Saver"
 	c.essence = 345
 	c.shards = 9876
-	c.ap.reset_used = true
+	c.jobs_passed.assign(["t_next", "t_other"])
 	c.map_id = Content.maps.keys()[0]
 	var sword := fx.equip(&"t_sword", EquipDef.Slot.WEAPON, {"attack": 20}, 3)
 	var worn := ItemStack.exact(sword)
@@ -78,7 +78,7 @@ func test_round_trip_basics() -> void:
 	check_eq(b.name, "Saver", "name")
 	check_eq(b.essence, 345, "essence")
 	check_eq(b.shards, 9876, "shards")
-	check(b.ap.reset_used, "free stat reset used")
+	check_eq(Array(b.jobs_passed), ["t_next", "t_other"], "jobs passed")
 	check_eq(b.map_id, c.map_id, "map")
 	check(b.job == c.job, "job")
 	check_eq(b.base.to_dict(), c.base.to_dict(), "base stats")
@@ -136,7 +136,7 @@ func test_save_has_essence_and_no_levels_or_points() -> void:
 	var d := _rich().to_dict()
 	check_eq(d["essence"], 345, "essence saved")
 	check(d.has("skills_paid"), "what skills cost saved")
-	for gone in ["level", "xp", "ap", "sp"]:
+	for gone in ["level", "xp", "ap", "sp", "ap_reset_used"]:
 		check(not d.has(gone), "no %s" % gone)
 
 func test_save_is_stable() -> void:
@@ -224,6 +224,44 @@ func test_save_from_before_essence_prices_points_from_what_was_bought() -> void:
 	check_eq(c.essence, 104 + 50, "each point worth the next price")
 	check_eq(c.base.strength, 3, "stats kept")
 	check_eq(c.skills.learned[&"t_skill"], 2, "skills kept")
+	check_eq(c.skills.paid, {&"t_skill": 17 + 31}, "and priced as bought, so a job switch can hand it back")
+
+func test_save_from_before_essence_prices_each_skill_in_turn() -> void:
+	fx.skill(&"t_a")
+	fx.skill(&"t_b")
+	var c := fx.character()
+	c.load_dict({"name": "Old", "job": "t_job", "level": 9, "stat_rules": CharacterCodec.STAT_RULES,
+		"base": {}, "skills": {"t_a": 1, "t_b": 2}})
+	var paid := int(c.skills.paid[&"t_a"]) + int(c.skills.paid[&"t_b"])
+	check_eq(paid, 17 + 31 + 50, "three levels at the first three prices")
+	check_eq(c.skills.paid.size(), 2, "both priced")
+
+func test_jobs_passed_survives_json() -> void:
+	var c := fx.character()
+	c.jobs_passed.assign(["t_next"])
+	var back := Character.new()
+	back.load_dict(JSON.parse_string(JSON.stringify(c.to_dict())))
+	check_eq(Array(back.jobs_passed), ["t_next"], "kept")
+	check(back.has_passed(fx.job(&"t_next", &"t_warrior", &"t_job")), "and counts as passed")
+
+func test_save_from_before_switching_counts_its_path_as_passed() -> void:
+	var first := fx.job(&"t_job")
+	fx.job(&"t_next", &"t_warrior", &"t_job")
+	fx.job(&"t_other", &"t_mage", &"t_job")
+	var blend := fx.job(&"t_blend", &"t_blends", &"t_next")
+	blend.partner = &"t_other"
+	var c := fx.character(first)
+	c.load_dict({"name": "Old", "job": "t_next", "essence": 0, "base": {}})
+	check_eq(Array(c.jobs_passed), ["t_next"], "its first job, not the Beginner")
+	var b := fx.character(first)
+	b.load_dict({"name": "Old", "job": "t_blend", "came_from": "t_other", "essence": 0, "base": {}})
+	check_eq(Array(b.jobs_passed), ["t_blend", "t_other"], "a blend and the parent it came from")
+	var fresh := fx.character(first)
+	fresh.load_dict({"name": "Old", "job": "t_job", "essence": 0, "base": {}})
+	check(fresh.jobs_passed.is_empty(), "a Beginner has passed nothing")
+	var newer := fx.character(first)
+	newer.load_dict({"name": "New", "job": "t_next", "essence": 0, "base": {}, "jobs_passed": []})
+	check(newer.jobs_passed.is_empty(), "a newer save keeps its own list")
 
 func test_save_from_before_one_stat_per_job_gets_its_points_back_once() -> void:
 	var c := fx.character()
