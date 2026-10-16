@@ -13,7 +13,7 @@
       ""
     ],
     [
-      "swing1",
+      "",
       "swing2",
       "swing3",
       "cast1",
@@ -38,12 +38,12 @@
       "",
       "throw1",
       "throw2",
-      "throw3",
+      "",
       "pistol1",
       "pistol2"
     ],
     [
-      "skyward1",
+      "",
       "skyward2",
       "gravity1",
       "gravity2",
@@ -56,7 +56,7 @@
       "pinning",
       "leap",
       "backstep",
-      "blink",
+      "",
       "lunge",
       "roll1",
       "roll2",
@@ -107,7 +107,6 @@
         "ladder1": "hero_hunters_vest:ladder1",
         "ladder_hold": "hero_hunters_vest:ladder_hold",
         "back": "hero_hunters_vest:back",
-        "swing1": "hero_hunters_vest:swing1",
         "swing2": "hero_hunters_vest:swing2",
         "swing3": "hero_hunters_vest:swing3",
         "hurt": "hero_hunters_vest:hurt",
@@ -116,14 +115,9 @@
         "bow2": "hero_hunters_vest:bow2",
         "throw1": "hero_hunters_vest:throw1",
         "throw2": "hero_hunters_vest:throw2",
-        "throw3": "hero_hunters_vest:throw3",
         "pistol1": "hero_hunters_vest:pistol1",
         "pistol2": "hero_hunters_vest:pistol2",
         "crouch": "hero_hunters_vest:crouch",
-        "cast1": "hero_hunters_vest:cast1",
-        "cast2": "hero_hunters_vest:cast2",
-        "skyward1": "hero_hunters_vest:skyward1",
-        "skyward2": "hero_hunters_vest:skyward2",
         "gravity1": "hero_hunters_vest:gravity1",
         "gravity2": "hero_hunters_vest:gravity2",
         "ambush1": "hero_hunters_vest:ambush1",
@@ -132,12 +126,14 @@
         "pinning": "hero_hunters_vest:pinning",
         "leap": "hero_hunters_vest:leap",
         "backstep": "hero_hunters_vest:backstep",
-        "blink": "hero_hunters_vest:blink",
         "lunge": "hero_hunters_vest:lunge",
         "roll1": "hero_hunters_vest:roll1",
         "roll2": "hero_hunters_vest:roll2",
         "faint": "hero_hunters_vest:faint",
-        "ambush2": "hero_hunters_vest:ambush2"
+        "ambush2": "hero_hunters_vest:ambush2",
+        "cast1": "hero_hunters_vest:cast1",
+        "cast2": "hero_hunters_vest:cast2",
+        "skyward2": "hero_hunters_vest:skyward2"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -216,12 +212,6 @@
           ],
           "fps": 1
         },
-        "swing1": {
-          "frames": [
-            "swing1"
-          ],
-          "fps": 1
-        },
         "swing2": {
           "frames": [
             "swing2"
@@ -270,12 +260,6 @@
           ],
           "fps": 1
         },
-        "throw3": {
-          "frames": [
-            "throw3"
-          ],
-          "fps": 1
-        },
         "pistol1": {
           "frames": [
             "pistol1"
@@ -291,30 +275,6 @@
         "crouch": {
           "frames": [
             "crouch"
-          ],
-          "fps": 1
-        },
-        "cast1": {
-          "frames": [
-            "cast1"
-          ],
-          "fps": 1
-        },
-        "cast2": {
-          "frames": [
-            "cast2"
-          ],
-          "fps": 1
-        },
-        "skyward1": {
-          "frames": [
-            "skyward1"
-          ],
-          "fps": 1
-        },
-        "skyward2": {
-          "frames": [
-            "skyward2"
           ],
           "fps": 1
         },
@@ -366,12 +326,6 @@
           ],
           "fps": 1
         },
-        "blink": {
-          "frames": [
-            "blink"
-          ],
-          "fps": 1
-        },
         "lunge": {
           "frames": [
             "lunge"
@@ -399,6 +353,24 @@
         "ambush2": {
           "frames": [
             "ambush2"
+          ],
+          "fps": 1
+        },
+        "cast1": {
+          "frames": [
+            "cast1"
+          ],
+          "fps": 1
+        },
+        "cast2": {
+          "frames": [
+            "cast2"
+          ],
+          "fps": 1
+        },
+        "skyward2": {
+          "frames": [
+            "skyward2"
           ],
           "fps": 1
         }

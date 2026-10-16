@@ -77,12 +77,10 @@
         "ladder1": "hero_novice_hat:ladder1",
         "ladder_hold": "hero_novice_hat:ladder_hold",
         "back": "hero_novice_hat:back",
-        "swing1": "hero_novice_hat:idle1",
         "swing2": "hero_novice_hat:idle1",
         "swing3": "hero_novice_hat:idle1",
         "cast1": "hero_novice_hat:idle1",
         "cast2": "hero_novice_hat:idle1",
-        "skyward1": "hero_novice_hat:idle1",
         "skyward2": "hero_novice_hat:idle1",
         "gravity1": "hero_novice_hat:idle1",
         "gravity2": "hero_novice_hat:idle1",
@@ -92,7 +90,6 @@
         "pinning": "hero_novice_hat:idle1",
         "leap": "hero_novice_hat:idle1",
         "backstep": "hero_novice_hat:idle1",
-        "blink": "hero_novice_hat:idle1",
         "lunge": "hero_novice_hat:idle1",
         "roll1": "hero_novice_hat:idle1",
         "roll2": "hero_novice_hat:idle1",
@@ -100,10 +97,10 @@
         "bow2": "hero_novice_hat:idle1",
         "throw1": "hero_novice_hat:idle1",
         "throw2": "hero_novice_hat:idle1",
-        "throw3": "hero_novice_hat:idle1",
         "pistol1": "hero_novice_hat:idle1",
         "pistol2": "hero_novice_hat:idle1",
-        "ambush2": "hero_novice_hat:back"
+        "ambush2": "hero_novice_hat:back",
+        "faint": "hero_novice_hat:idle1"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -200,12 +197,6 @@
           ],
           "fps": 1
         },
-        "swing1": {
-          "frames": [
-            "swing1"
-          ],
-          "fps": 1
-        },
         "swing2": {
           "frames": [
             "swing2"
@@ -227,12 +218,6 @@
         "cast2": {
           "frames": [
             "cast2"
-          ],
-          "fps": 1
-        },
-        "skyward1": {
-          "frames": [
-            "skyward1"
           ],
           "fps": 1
         },
@@ -290,12 +275,6 @@
           ],
           "fps": 1
         },
-        "blink": {
-          "frames": [
-            "blink"
-          ],
-          "fps": 1
-        },
         "lunge": {
           "frames": [
             "lunge"
@@ -338,12 +317,6 @@
           ],
           "fps": 1
         },
-        "throw3": {
-          "frames": [
-            "throw3"
-          ],
-          "fps": 1
-        },
         "pistol1": {
           "frames": [
             "pistol1"
@@ -359,6 +332,12 @@
         "ambush2": {
           "frames": [
             "ambush2"
+          ],
+          "fps": 1
+        },
+        "faint": {
+          "frames": [
+            "faint"
           ],
           "fps": 1
         }

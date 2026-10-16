@@ -13,7 +13,7 @@
       ""
     ],
     [
-      "swing1",
+      "",
       "swing2",
       "swing3",
       "cast1",
@@ -38,12 +38,12 @@
       "",
       "throw1",
       "throw2",
-      "throw3",
+      "",
       "pistol1",
       "pistol2"
     ],
     [
-      "skyward1",
+      "",
       "skyward2",
       "gravity1",
       "gravity2",
@@ -56,7 +56,7 @@
       "pinning",
       "leap",
       "backstep",
-      "blink",
+      "",
       "lunge",
       "roll1",
       "roll2",
@@ -109,7 +109,6 @@
         "ladder1": "hero_novice_robe:ladder1",
         "ladder_hold": "hero_novice_robe:ladder_hold",
         "back": "hero_novice_robe:back",
-        "swing1": "hero_novice_robe:swing1",
         "swing2": "hero_novice_robe:swing2",
         "swing3": "hero_novice_robe:swing3",
         "hurt": "hero_novice_robe:hurt",
@@ -118,13 +117,8 @@
         "bow2": "hero_novice_robe:bow2",
         "throw1": "hero_novice_robe:throw1",
         "throw2": "hero_novice_robe:throw2",
-        "throw3": "hero_novice_robe:throw3",
         "pistol1": "hero_novice_robe:pistol1",
         "pistol2": "hero_novice_robe:pistol2",
-        "cast1": "hero_novice_robe:cast1",
-        "cast2": "hero_novice_robe:cast2",
-        "skyward1": "hero_novice_robe:skyward1",
-        "skyward2": "hero_novice_robe:skyward2",
         "gravity1": "hero_novice_robe:gravity1",
         "gravity2": "hero_novice_robe:gravity2",
         "ambush1": "hero_novice_robe:ambush1",
@@ -133,11 +127,13 @@
         "pinning": "hero_novice_robe:pinning",
         "leap": "hero_novice_robe:leap",
         "backstep": "hero_novice_robe:backstep",
-        "blink": "hero_novice_robe:blink",
         "lunge": "hero_novice_robe:lunge",
         "roll1": "hero_novice_robe:roll1",
         "roll2": "hero_novice_robe:roll2",
-        "ambush2": "hero_novice_robe:ambush2"
+        "ambush2": "hero_novice_robe:ambush2",
+        "cast1": "hero_novice_robe:cast1",
+        "cast2": "hero_novice_robe:cast2",
+        "skyward2": "hero_novice_robe:skyward2"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -228,12 +224,6 @@
           ],
           "fps": 1
         },
-        "swing1": {
-          "frames": [
-            "swing1"
-          ],
-          "fps": 1
-        },
         "swing2": {
           "frames": [
             "swing2"
@@ -282,12 +272,6 @@
           ],
           "fps": 1
         },
-        "throw3": {
-          "frames": [
-            "throw3"
-          ],
-          "fps": 1
-        },
         "pistol1": {
           "frames": [
             "pistol1"
@@ -297,30 +281,6 @@
         "pistol2": {
           "frames": [
             "pistol2"
-          ],
-          "fps": 1
-        },
-        "cast1": {
-          "frames": [
-            "cast1"
-          ],
-          "fps": 1
-        },
-        "cast2": {
-          "frames": [
-            "cast2"
-          ],
-          "fps": 1
-        },
-        "skyward1": {
-          "frames": [
-            "skyward1"
-          ],
-          "fps": 1
-        },
-        "skyward2": {
-          "frames": [
-            "skyward2"
           ],
           "fps": 1
         },
@@ -372,12 +332,6 @@
           ],
           "fps": 1
         },
-        "blink": {
-          "frames": [
-            "blink"
-          ],
-          "fps": 1
-        },
         "lunge": {
           "frames": [
             "lunge"
@@ -399,6 +353,24 @@
         "ambush2": {
           "frames": [
             "ambush2"
+          ],
+          "fps": 1
+        },
+        "cast1": {
+          "frames": [
+            "cast1"
+          ],
+          "fps": 1
+        },
+        "cast2": {
+          "frames": [
+            "cast2"
+          ],
+          "fps": 1
+        },
+        "skyward2": {
+          "frames": [
+            "skyward2"
           ],
           "fps": 1
         }

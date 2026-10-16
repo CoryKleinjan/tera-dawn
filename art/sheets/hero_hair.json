@@ -28,7 +28,7 @@
       "",
       "throw1",
       "throw2",
-      "throw3",
+      "",
       "pistol1",
       "pistol2"
     ],
@@ -87,7 +87,6 @@
         "bow2": "hero_hair:bow2",
         "throw1": "hero_hair:throw1",
         "throw2": "hero_hair:throw2",
-        "throw3": "hero_hair:throw3",
         "pistol1": "hero_hair:pistol1",
         "pistol2": "hero_hair:pistol2",
         "rope1": "hero_hair:rope1",
@@ -96,12 +95,10 @@
         "ladder1": "hero_hair:ladder1",
         "ladder_hold": "hero_hair:ladder_hold",
         "back": "hero_hair:back",
-        "swing1": "hero_hair:idle1",
         "swing2": "hero_hair:idle1",
         "swing3": "hero_hair:idle1",
         "cast1": "hero_hair:idle1",
         "cast2": "hero_hair:idle1",
-        "skyward1": "hero_hair:idle1",
         "skyward2": "hero_hair:idle1",
         "gravity1": "hero_hair:idle1",
         "gravity2": "hero_hair:idle1",
@@ -111,7 +108,6 @@
         "pinning": "hero_hair:idle1",
         "leap": "hero_hair:idle1",
         "backstep": "hero_hair:idle1",
-        "blink": "hero_hair:idle1",
         "lunge": "hero_hair:idle1",
         "roll1": "hero_hair:idle1",
         "roll2": "hero_hair:idle1",
@@ -206,12 +202,6 @@
           ],
           "fps": 1
         },
-        "throw3": {
-          "frames": [
-            "throw3"
-          ],
-          "fps": 1
-        },
         "pistol1": {
           "frames": [
             "pistol1"
@@ -260,12 +250,6 @@
           ],
           "fps": 1
         },
-        "swing1": {
-          "frames": [
-            "swing1"
-          ],
-          "fps": 1
-        },
         "swing2": {
           "frames": [
             "swing2"
@@ -287,12 +271,6 @@
         "cast2": {
           "frames": [
             "cast2"
-          ],
-          "fps": 1
-        },
-        "skyward1": {
-          "frames": [
-            "skyward1"
           ],
           "fps": 1
         },
@@ -347,12 +325,6 @@
         "backstep": {
           "frames": [
             "backstep"
-          ],
-          "fps": 1
-        },
-        "blink": {
-          "frames": [
-            "blink"
           ],
           "fps": 1
         },

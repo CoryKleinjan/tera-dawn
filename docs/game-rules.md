@@ -44,6 +44,8 @@ update this page when one changes. Each zone's own look and music are in
 - Every piece of gear has frames for every pose in the game, whatever its job: every job's
   attack (swing, bow, pistol, throw, cast) and every skill pose added later, since the Harbinger
   wears all gear and uses all skills. A new body pose means new frames for all gear.
+- His arms, fists and held weapons never cover his face, in any pose; both fists show. Blink
+  has no pose of its own: he just vanishes and reappears.
 - Animations are shared across similar actions (one swing for all melee, one cast for all
   spells); his walk is 4 steps, slow. Melee attacks play one 3-frame swing with the weapon
   only turning in the picture, never edge-on.

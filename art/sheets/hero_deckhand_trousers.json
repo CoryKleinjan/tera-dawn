@@ -13,7 +13,7 @@
       ""
     ],
     [
-      "swing1",
+      "",
       "swing2",
       "swing3",
       "cast1",
@@ -38,12 +38,12 @@
       "",
       "throw1",
       "throw2",
-      "throw3",
+      "",
       "pistol1",
       "pistol2"
     ],
     [
-      "skyward1",
+      "",
       "skyward2",
       "gravity1",
       "gravity2",
@@ -56,7 +56,7 @@
       "pinning",
       "leap",
       "backstep",
-      "blink",
+      "",
       "lunge",
       "roll1",
       "roll2",
@@ -110,14 +110,9 @@
         "bow1": "hero_deckhand_trousers:bow1",
         "throw1": "hero_deckhand_trousers:throw1",
         "throw2": "hero_deckhand_trousers:throw2",
-        "throw3": "hero_deckhand_trousers:throw3",
         "pistol1": "hero_deckhand_trousers:pistol1",
         "pistol2": "hero_deckhand_trousers:pistol2",
         "crouch": "hero_deckhand_trousers:crouch",
-        "cast1": "hero_deckhand_trousers:cast1",
-        "cast2": "hero_deckhand_trousers:cast2",
-        "skyward1": "hero_deckhand_trousers:skyward1",
-        "skyward2": "hero_deckhand_trousers:skyward2",
         "gravity1": "hero_deckhand_trousers:gravity1",
         "gravity2": "hero_deckhand_trousers:gravity2",
         "ambush1": "hero_deckhand_trousers:ambush1",
@@ -126,18 +121,19 @@
         "pinning": "hero_deckhand_trousers:pinning",
         "leap": "hero_deckhand_trousers:leap",
         "backstep": "hero_deckhand_trousers:backstep",
-        "blink": "hero_deckhand_trousers:blink",
         "lunge": "hero_deckhand_trousers:lunge",
         "roll1": "hero_deckhand_trousers:roll1",
         "roll2": "hero_deckhand_trousers:roll2",
         "hurt": "hero_deckhand_trousers:hurt",
-        "swing1": "hero_deckhand_trousers:swing1",
         "swing2": "hero_deckhand_trousers:swing2",
         "swing3": "hero_deckhand_trousers:swing3",
         "sit": "hero_deckhand_trousers:sit",
         "faint": "hero_deckhand_trousers:faint",
         "bow2": "hero_deckhand_trousers:bow2",
-        "ambush2": "hero_deckhand_trousers:ambush2"
+        "ambush2": "hero_deckhand_trousers:ambush2",
+        "cast1": "hero_deckhand_trousers:cast1",
+        "cast2": "hero_deckhand_trousers:cast2",
+        "skyward2": "hero_deckhand_trousers:skyward2"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -234,12 +230,6 @@
           ],
           "fps": 1
         },
-        "throw3": {
-          "frames": [
-            "throw3"
-          ],
-          "fps": 1
-        },
         "pistol1": {
           "frames": [
             "pistol1"
@@ -255,30 +245,6 @@
         "crouch": {
           "frames": [
             "crouch"
-          ],
-          "fps": 1
-        },
-        "cast1": {
-          "frames": [
-            "cast1"
-          ],
-          "fps": 1
-        },
-        "cast2": {
-          "frames": [
-            "cast2"
-          ],
-          "fps": 1
-        },
-        "skyward1": {
-          "frames": [
-            "skyward1"
-          ],
-          "fps": 1
-        },
-        "skyward2": {
-          "frames": [
-            "skyward2"
           ],
           "fps": 1
         },
@@ -330,12 +296,6 @@
           ],
           "fps": 1
         },
-        "blink": {
-          "frames": [
-            "blink"
-          ],
-          "fps": 1
-        },
         "lunge": {
           "frames": [
             "lunge"
@@ -357,12 +317,6 @@
         "hurt": {
           "frames": [
             "hurt"
-          ],
-          "fps": 1
-        },
-        "swing1": {
-          "frames": [
-            "swing1"
           ],
           "fps": 1
         },
@@ -399,6 +353,24 @@
         "ambush2": {
           "frames": [
             "ambush2"
+          ],
+          "fps": 1
+        },
+        "cast1": {
+          "frames": [
+            "cast1"
+          ],
+          "fps": 1
+        },
+        "cast2": {
+          "frames": [
+            "cast2"
+          ],
+          "fps": 1
+        },
+        "skyward2": {
+          "frames": [
+            "skyward2"
           ],
           "fps": 1
         }

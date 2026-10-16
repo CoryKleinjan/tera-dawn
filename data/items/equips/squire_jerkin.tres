@@ -11,6 +11,12 @@ defense = 6
 
 [resource]
 script = ExtResource("script")
+frame_art = {
+&"roll2": &"roll1"
+}
+nudges = {
+&"roll2": Vector4(34, -24, -180, 0)
+}
 id = &"squire_jerkin"
 display_name = "Squire Jerkin"
 description = "A padded jerkin for a new warrior."

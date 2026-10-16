@@ -17032,6 +17032,831 @@
   }
  },
  {
+  "id": "mshero_war_boots_fix3",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_war_boots_fix3.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 21:06Z 'yes' to the 8 boot repaints ~$0.54: backhand boots seen from behind, roll boots on his tucked feet): war boots on ambush2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_war_boots_b2_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_war_boots_b2_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_war_boots_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_war_boots_back.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: seen from BEHIND, his back to the viewer, mid backhand slash, feet planted apart). Cells 2, 3, 4, 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact footwear already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY the same brown leather boots as in the second attached picture, reaching to mid-shin, with steel toe caps, a darker sole, a turned-down cuff and a small buckle strap. Paint BOTH feet in every cell; each foot is whole and rounded, never cut off flat, and the same size as the green foot it covers. In cell 1 he is seen from BEHIND, exactly like the boy in the fourth attached picture, whose footwear shows its heels and backs: paint the footwear seen from behind, with the HEEL of each one facing the viewer and the toes pointing AWAY into the picture, hidden behind the heel. Never paint the toes pointing sideways or at the viewer. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing or gear. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_mag_slippers_fix3",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_mag_slippers_fix3.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 21:06Z 'yes' to the 8 boot repaints ~$0.54: backhand boots seen from behind, roll boots on his tucked feet): mag slippers on ambush2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_mag_slippers_b2_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_mag_slippers_b2_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_mag_slippers_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_mag_slippers_back2.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: seen from BEHIND, his back to the viewer, mid backhand slash, feet planted apart). Cells 2, 3, 4, 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact footwear already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a pair of soft magician's slippers: deep blue cloth with gold trim around the opening and gently curled pointed toes. Paint BOTH feet in every cell; each foot is whole and rounded, never cut off flat, and the same size as the green foot it covers. In cell 1 he is seen from BEHIND, exactly like the boy in the fourth attached picture, whose footwear shows its heels and backs: paint the footwear seen from behind, with the HEEL of each one facing the viewer and the toes pointing AWAY into the picture, hidden behind the heel. Never paint the toes pointing sideways or at the viewer. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing or gear. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_thief_boots_fix3",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_thief_boots_fix3.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 21:06Z 'yes' to the 8 boot repaints ~$0.54: backhand boots seen from behind, roll boots on his tucked feet): thief boots on roll1, ambush2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_thief_boots_b2_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_thief_boots_b2_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_thief_boots_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_thief_boots_back.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 and 2 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: curled into a tight ball, knees to chest, arms wrapped around his shins, his feet tucked in close under him; cell 2: seen from BEHIND, his back to the viewer, mid backhand slash, feet planted apart). Cells 3, 4, 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact footwear already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a young thief's quiet boots: soft dark brown leather boots reaching just above the ankle, with a folded-over top, thin dark soles and a small strap. Paint BOTH feet in every cell; each foot is whole and rounded, never cut off flat, and the same size as the green foot it covers. In cell 1 the boots sit exactly on the small green feet tucked in under the curled-up ball, the same size as those feet, never hanging below him or floating apart. In cell 2 he is seen from BEHIND, exactly like the boy in the fourth attached picture, whose footwear shows its heels and backs: paint the footwear seen from behind, with the HEEL of each one facing the viewer and the toes pointing AWAY into the picture, hidden behind the heel. Never paint the toes pointing sideways or at the viewer. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing or gear. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_archer_boots_fix3",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_archer_boots_fix3.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 21:06Z 'yes' to the 8 boot repaints ~$0.54: backhand boots seen from behind, roll boots on his tucked feet): archer boots on roll1, ambush2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_archer_boots_b2_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_archer_boots_b2_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_archer_boots_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_archer_boots_back.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 and 2 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: curled into a tight ball, knees to chest, arms wrapped around his shins, his feet tucked in close under him; cell 2: seen from BEHIND, his back to the viewer, mid backhand slash, feet planted apart). Cells 3, 4, 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact footwear already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a young archer's lace-up boots: brown leather boots reaching a little above the ankle, laced up the front with pale cord, with sturdy dark soles. Paint BOTH feet in every cell; each foot is whole and rounded, never cut off flat, and the same size as the green foot it covers. In cell 1 the boots sit exactly on the small green feet tucked in under the curled-up ball, the same size as those feet, never hanging below him or floating apart. In cell 2 he is seen from BEHIND, exactly like the boy in the fourth attached picture, whose footwear shows its heels and backs: paint the footwear seen from behind, with the HEEL of each one facing the viewer and the toes pointing AWAY into the picture, hidden behind the heel. Never paint the toes pointing sideways or at the viewer. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing or gear. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_pirate_boots_fix3",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_pirate_boots_fix3.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 21:06Z 'yes' to the 8 boot repaints ~$0.54: backhand boots seen from behind, roll boots on his tucked feet): pirate boots on roll1, ambush2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_pirate_boots_b2_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_pirate_boots_b2_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_pirate_boots_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_pirate_boots_back.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 and 2 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: curled into a tight ball, knees to chest, arms wrapped around his shins, his feet tucked in close under him; cell 2: seen from BEHIND, his back to the viewer, mid backhand slash, feet planted apart). Cells 3, 4, 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact footwear already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a young pirate's tall cuffed boots: black leather boots reaching up to just below the knee, with a wide folded-down cuff at the top and sturdy dark soles. Paint BOTH feet in every cell; each foot is whole and rounded, never cut off flat, and the same size as the green foot it covers. In cell 1 the boots sit exactly on the small green feet tucked in under the curled-up ball, the same size as those feet, never hanging below him or floating apart. In cell 2 he is seen from BEHIND, exactly like the boy in the fourth attached picture, whose footwear shows its heels and backs: paint the footwear seen from behind, with the HEEL of each one facing the viewer and the toes pointing AWAY into the picture, hidden behind the heel. Never paint the toes pointing sideways or at the viewer. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing or gear. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_body_arms_clear",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_arms_clear.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 21:0xZ: 'swing 1 needs to be redone across the board', 'his arm should not cover his face', 'some poses are missing the fist'; 21:08Z 'do all the reprints i asked for'): swing1 and skyward2 body with the raised arm clear of his head.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_arms_face_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_arms_face_ref.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cell 1 and cell 2 each hold the same painted bald chibi boy in a cream undershirt and brown shorts, facing right. Cells 3 to 8 are empty and must stay empty. In both cells one of his arms is raised and crosses over his head, so it hides part of his head and its fist is lost behind his head. Repaint ONLY that raised arm in each cell so it never crosses his head or face: cell 1, winding up for a big overhead slash: lift that arm high and BACK, up and to the LEFT of his head, with the elbow bent and the closed mitten fist held clearly above and behind his back shoulder, leaving a clear gap of magenta between the arm and his head; cell 2, leaping upward with an uppercut: stretch that arm straight UP from his shoulder on the LEFT side of his head, beside it and never over it, with the closed mitten fist high above the top of his head, leaving a clear gap of magenta between the arm and his head. In both cells his whole head and face stay fully uncovered, and BOTH of his fists are clearly visible: the raised fist and his other fist, which stays exactly where it is now in front of his chest. Each fist is one round closed mitten with no fingers, like the boy's fists in the first attached picture, and he has exactly two arms and two fists. Keep everything else exactly as it is, pixel for pixel: his head, body, other arm, other fist, shorts, legs, feet, size and position. Do not add any weapon, object or extra limb. Keep the background flat pure magenta #FF00FF and keep the grid lines. Leave cells 3 to 8 empty. Style: match the existing painting exactly (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the second attached picture. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_hat_hair_faint",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_hat_hair_faint.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory: 'we need a faint print for each hair style too'; 21:08Z 'do all the reprints i asked for'): hair sticking out under the wizard hat, bandana, hood and tricorn on the faint pose.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/faint_hat_hair_silhouette.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/faint_hat_hair_ref.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 4 each hold the flat outline of a small boy lying flat on his back, fainted, with his head on the right: his head and body are flat bright green (#00FF00) and his hat is flat pure blue (#0000FF). Cell 1's hat is a tall pointed wizard hat, cell 2's a tied bandana, cell 3's a hood, cell 4's a pirate tricorn, exactly as the boy wears them in cells 1 to 4 of the first attached picture. Cells 5 to 8 are empty and must stay empty. Cell 5 of the first attached picture shows the same boy lying the same way with his own hair and no hat: short, messy, spiky chestnut-brown hair with a swept fringe. In cells 1 to 4, paint ONLY the bits of that same chestnut-brown hair that would naturally stick out from under that hat as he lies there, and nothing else: cell 1 a messy swept fringe poking out under the brim over his forehead and tufts at the back of his head; cell 2 a tuft of spiky hair sticking out of the top of the bandana and a few locks at the back; cell 3 a few strands of fringe falling out of the hood's opening onto his forehead; cell 4 a swept fringe under the front brim over his forehead and locks at the back of his head. Each lock starts at the edge of the blue hat and lies over the green head, sized to match him. Paint the hair WHOLE and solid, every lock fully closed, with no holes. Do NOT paint the hat: leave every blue pixel flat pure #0000FF exactly as it is, with no felt, cloth, trim, shading or outline on it. Do NOT paint the head, face, ears, body or anything else: leave every green pixel you do not paint hair over flat pure #00FF00, and leave the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Style: exactly the hair in cell 5 of the first attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights and a thin dark plum-brown outline. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_body_arms_up",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_arms_up.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 21:42Z 'Arms should not cover the face in any pose'; 21:45Z 'Skyward 2, cast 1 and gravity 1 need to be redrawn so his arm doesn cover the face'): fresh paint of the three poses (an edit of the old cells held the pose, wave 241).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/arms_up_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/arms_up_old.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cell 4 holds a painted bald chibi boy standing at rest, facing right, in a cream undershirt with rolled sleeves and brown shorts, barefoot. Leave cell 4 exactly as it is. Cells 1, 2 and 3 are empty: paint the SAME boy in each of them, a new painting in a new pose, exactly the same size as the boy in cell 4, with his feet on the same ground line and his body in the middle of the cell, facing right. He is bald, with no face and no hair: keep his head bare exactly like the boy in cell 4. Cell 1, casting a spell: his near arm is lifted FORWARD and up in front of him, out to the right, with the elbow bent and the closed mitten fist held up at the height of the top of his head but well to the RIGHT of his head, with a wide gap of magenta between the arm and his head; his other fist is in front of his chest. Cell 2, pulling something down from the sky: both arms are raised high and spread wide in a big V, each fist well above and well outside his head, one to the upper left and one to the upper right, with a wide gap of magenta between each arm and his head; his legs are planted apart. Cell 3, leaping into an uppercut: he is in the air with one knee raised; his near arm punches straight up and forward on a diagonal to the upper RIGHT, the closed mitten fist high above and to the right of his head, with a wide gap of magenta between the arm and his head; his other fist is low in front of his chest. In every cell no arm, hand or fist ever crosses or touches his head, and BOTH fists are fully visible. Each fist is one round closed mitten with no fingers. He has exactly two arms and two legs. The first attached picture shows his OLD poses, where the arms are too close to the head: use it only for his look, colours and size, and do NOT copy those poses. Do not add any weapon, object, text or extra figure. Leave cells 5 to 8 empty. Keep the background flat pure magenta #FF00FF and keep the grid lines. Style: exactly like the boy in cell 4 (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the second attached picture. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_body_arms_up2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_arms_up2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 22:26Z 'He needs to have the other hand forward'; 22:26Z gravity is one pose, going down until he hits the ground; 22:27Z 'Need a new gravity 1' to the priced 1-sheet ~$0.07 question): cast1 and skyward2 with the near arm raised, gravity1 a downward plunge.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/arms_up_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/arms_up_old.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cell 4 holds a painted bald chibi boy standing at rest, facing right, in a cream undershirt with rolled sleeves and brown shorts, barefoot. Leave cell 4 exactly as it is. Cells 1, 2 and 3 are empty: paint the SAME boy in each of them, a new painting in a new pose, exactly the same size as the boy in cell 4, his body in the middle of the cell, seen from the side and facing RIGHT. He is bald, with no face and no hair: keep his head bare exactly like the boy in cell 4. His NEAR arm is the arm on the viewer's side, drawn IN FRONT of his body; his FAR arm is on the other side, partly behind his body. Cell 1, casting a spell, feet on the same ground line as cell 4: his NEAR arm reaches FORWARD and up in front of him toward the right, elbow slightly bent, the closed mitten fist held out ahead of him at about the height of his eyes, well to the RIGHT of his face with a wide gap of magenta between the arm and his head; his FAR arm is pulled back, its fist at his far hip behind his body. Cell 2, plunging straight DOWN through the air to slam into the ground: he is in mid air, higher than the ground line, dropping feet first, his body upright and leaning slightly forward, knees bent a little; BOTH arms point straight DOWN below him with both closed mitten fists aimed at the ground, the near fist in front of his near leg and the far fist beside his far leg, well below his head. Cell 3, leaping into an uppercut, in the air with one knee raised: his NEAR arm punches straight up and forward on a diagonal to the upper RIGHT, the closed mitten fist high above and to the right of his head, with a wide gap of magenta between the arm and his head; his FAR arm is pulled back, its fist low at his far hip behind his body. In every cell no arm, hand or fist ever crosses or touches his head, and both fists are visible. Each fist is one round closed mitten with no fingers. He has exactly two arms and two legs. The first attached picture shows his OLD poses: use it only for his look, colours and size, and do NOT copy those poses. Do not add any weapon, object, ground, dust, motion lines, text or extra figure. Leave cells 5 to 8 empty. Keep the background flat pure magenta #FF00FF and keep the grid lines. Style: exactly like the boy in cell 4 (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the second attached picture. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_body_arms_up3",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_arms_up3.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 22:39Z 'Try again' to the priced ~$0.07 retry): third try at cast1/skyward2 with the other arm forward and gravity1 a downward plunge; arms named by picture side.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/arms_up_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/arms_up_old.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cell 4 holds a painted bald chibi boy standing at rest, turned toward the right, in a cream undershirt with rolled sleeves and brown shorts, barefoot. Leave cell 4 exactly as it is. Cells 1, 2 and 3 are empty: paint the SAME boy in each of them, a new painting in a new pose, exactly the same size as the boy in cell 4, his body in the middle of the cell, turned toward the right like in cell 4. He is bald, with no face and no hair: keep his head bare exactly like the boy in cell 4. In cell 4 his two shoulders are on the LEFT side and the RIGHT side of the picture; call them the LEFT-SIDE arm and the RIGHT-SIDE arm. Cell 1, casting a spell, feet on the same ground line as cell 4: the LEFT-SIDE arm swings across IN FRONT of his chest and reaches forward and up toward the right, its closed mitten fist held out ahead of him at about eye height, well to the right of his head with a wide gap of magenta between it and his head. The RIGHT-SIDE arm hangs down low beside his body, its fist at his hip. The raised arm is the LEFT-SIDE arm, never the RIGHT-SIDE arm. Cell 2, plunging straight DOWN to slam into the ground: he is in mid air, high in the cell, falling feet first with his legs straight and together pointing down; his body is stretched out tall and straight; BOTH arms are straight and point straight DOWN past his hips, with both closed mitten fists below his hips pointing at the ground, like a diver going down feet first. His knees are NOT tucked up. Cell 3, leaping into an uppercut, in the air with one knee raised: the LEFT-SIDE arm punches up across IN FRONT of his chest on a diagonal to the upper right, its closed mitten fist high above and to the right of his head, with a wide gap of magenta between it and his head. The RIGHT-SIDE arm hangs down low beside his body, its fist at his hip. The raised arm is the LEFT-SIDE arm, never the RIGHT-SIDE arm. In every cell no arm, hand or fist ever crosses or touches his head, and both fists are visible. Each fist is one round closed mitten with no fingers. He has exactly two arms and two legs. The first attached picture shows his OLD poses: use it only for his look, colours and size, and do NOT copy those poses. Do not add any weapon, object, ground, dust, motion lines, text or extra figure. Leave cells 5 to 8 empty. Keep the background flat pure magenta #FF00FF and keep the grid lines. Style: exactly like the boy in cell 4 (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the second attached picture. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_body_arms_up4",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_arms_up4.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 22:50Z 'retry' to the priced ~$0.07 option: no old-pose reference, swing 2 as the arm guide): fourth try at cast1/skyward2 with the punching arm raised and gravity1 a downward plunge.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/arms_up_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/swing2_guide.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cell 4 holds a painted bald chibi boy standing at rest, turned toward the right, in a cream undershirt with rolled sleeves and brown shorts, barefoot. Leave cell 4 exactly as it is. Cells 1, 2 and 3 are empty: paint the SAME boy in each of them, a new painting in a new pose, exactly the same size as the boy in cell 4, his body in the middle of the cell, turned toward the right. He is bald, with no face and no hair: keep his head bare exactly like the boy in cell 4. The first attached picture shows the same boy throwing a straight punch forward: one arm is stretched out ahead of him (the PUNCHING arm) and the other fist is held low. Use that picture to know which arm is which; do not copy its pose. Cell 1, casting a spell, feet on the same ground line as cell 4: the PUNCHING arm from the first attached picture is lifted forward and up, its closed mitten fist held out ahead of him at about eye height, well to the right of his face with a wide gap of magenta between it and his head; the other fist stays low, exactly where it is in the first attached picture. Cell 2, plunging straight DOWN to slam into the ground: he is high in the air, falling feet first; his body leans forward with his head low over his knees; BOTH arms are straight and thrust DOWN in front of his legs, both closed mitten fists side by side below his feet, pointing at the ground, as if punching the ground from above. Cell 3, leaping into an uppercut, in the air with one knee raised: the PUNCHING arm from the first attached picture punches straight up on a diagonal to the upper right, its closed mitten fist high above and to the right of his head, with a wide gap of magenta between it and his head; the other fist stays low, exactly where it is in the first attached picture. In every cell no arm, hand or fist ever crosses or touches his head, and both fists are visible. Each fist is one round closed mitten with no fingers. He has exactly two arms and two legs. Do not add any weapon, object, ground, dust, motion lines, text or extra figure. Leave cells 5 to 8 empty. Keep the background flat pure magenta #FF00FF and keep the grid lines. Style: exactly like the boy in cell 4 (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the second attached picture. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_war_jerkin_armsup",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_war_jerkin_armsup.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 23:06Z 'Yes' to putting the try-4 body in and painting gear for the 3 poses, 16 sheets ~$1.09): war jerkin on the new cast1, gravity1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_war_jerkin_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2 and 3 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: casting a spell: one fist raised up and out to the right of his head, the other fist at his chest; cell 2: diving head first down toward the ground in mid air, body tilted forward and down, legs trailing up behind, both arms reaching down with both fists side by side under his head; cell 3: leaping into an uppercut, one knee raised: one fist punched up and forward to the upper right of his head, the other fist low at his chest). Cells 4, 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a padded warrior's jerkin worn over his torso and upper arms: quilted brown-tan padded cloth in stitched rows, short sleeves over the upper arms, a high padded collar, a broad brown leather belt with a brass buckle at the waist, and the hem just below the belt. It follows his body and arms in each pose, however they bend, stretch, tuck or turn. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_war_trousers_armsup",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_war_trousers_armsup.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 23:06Z 'Yes' to putting the try-4 body in and painting gear for the 3 poses, 16 sheets ~$1.09): war trousers on the new cast1, gravity1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_war_trousers_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2 and 3 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: casting a spell: one fist raised up and out to the right of his head, the other fist at his chest; cell 2: diving head first down toward the ground in mid air, body tilted forward and down, legs trailing up behind, both arms reaching down with both fists side by side under his head; cell 3: leaping into an uppercut, one knee raised: one fist punched up and forward to the upper right of his head, the other fist low at his chest). Cells 4, 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY sturdy warrior's trousers worn on his legs from the waist to mid-shin: thick dark olive-brown cloth with reinforced knee patches and visible stitching, tucked in at the bottom where boots will go. They follow his legs in each pose, however they bend, stretch, kneel or tuck, and cover each leg whole down to where the foot begins. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_war_boots_armsup",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_war_boots_armsup.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 23:06Z 'Yes' to putting the try-4 body in and painting gear for the 3 poses, 16 sheets ~$1.09): war boots on the new cast1, gravity1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_war_boots_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2 and 3 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: casting a spell: one fist raised up and out to the right of his head, the other fist at his chest; cell 2: diving head first down toward the ground in mid air, body tilted forward and down, legs trailing up behind, both arms reaching down with both fists side by side under his head; cell 3: leaping into an uppercut, one knee raised: one fist punched up and forward to the upper right of his head, the other fist low at his chest). Cells 4, 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY the same brown leather boots as in the second attached picture, reaching to mid-shin, with steel toe caps, a darker sole, a turned-down cuff and a small buckle strap. Paint BOTH feet in every cell, following each foot however it points; each foot is whole and rounded, never cut off flat, and the same size as the green foot it covers. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_mag_robe_armsup",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_mag_robe_armsup.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 23:06Z 'Yes' to putting the try-4 body in and painting gear for the 3 poses, 16 sheets ~$1.09): mag robe on the new cast1, gravity1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_mag_robe_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2 and 3 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: casting a spell: one fist raised up and out to the right of his head, the other fist at his chest; cell 2: diving head first down toward the ground in mid air, body tilted forward and down, legs trailing up behind, both arms reaching down with both fists side by side under his head; cell 3: leaping into an uppercut, one knee raised: one fist punched up and forward to the upper right of his head, the other fist low at his chest). Cells 4, 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY the same young magician's robe as in the second attached picture, worn over his torso and upper arms: a deep blue robe-tunic with short wide sleeves, a hem just above the knees, gold trim along the collar, sleeves and hem, a small gold star clasp at the collar and a purple cloth sash tied at the waist with hanging ends. It follows his body and arms in each pose, however they bend, stretch, tuck or turn. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_mag_trousers_armsup",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_mag_trousers_armsup.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 23:06Z 'Yes' to putting the try-4 body in and painting gear for the 3 poses, 16 sheets ~$1.09): mag trousers on the new cast1, gravity1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_mag_trousers_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2 and 3 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: casting a spell: one fist raised up and out to the right of his head, the other fist at his chest; cell 2: diving head first down toward the ground in mid air, body tilted forward and down, legs trailing up behind, both arms reaching down with both fists side by side under his head; cell 3: leaping into an uppercut, one knee raised: one fist punched up and forward to the upper right of his head, the other fist low at his chest). Cells 4, 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY loose magician's trousers worn on his legs from the waist to the ankles: soft light-tan cloth, loose and a little baggy, gathered at the ankles, with visible seams. They follow his legs in each pose, however they bend, stretch, kneel or tuck, and cover each leg whole down to where the foot begins. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_mag_slippers_armsup",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_mag_slippers_armsup.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 23:06Z 'Yes' to putting the try-4 body in and painting gear for the 3 poses, 16 sheets ~$1.09): mag slippers on the new cast1, gravity1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_mag_slippers_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2 and 3 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: casting a spell: one fist raised up and out to the right of his head, the other fist at his chest; cell 2: diving head first down toward the ground in mid air, body tilted forward and down, legs trailing up behind, both arms reaching down with both fists side by side under his head; cell 3: leaping into an uppercut, one knee raised: one fist punched up and forward to the upper right of his head, the other fist low at his chest). Cells 4, 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a pair of soft magician's slippers: deep blue cloth with gold trim around the opening and gently curled pointed toes. Paint BOTH feet in every cell, following each foot however it points; each foot is whole and rounded, never cut off flat, and the same size as the green foot it covers. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_thief_jerkin_armsup",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_thief_jerkin_armsup.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 23:06Z 'Yes' to putting the try-4 body in and painting gear for the 3 poses, 16 sheets ~$1.09): thief jerkin on the new cast1, gravity1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_thief_jerkin_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2 and 3 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: casting a spell: one fist raised up and out to the right of his head, the other fist at his chest; cell 2: diving head first down toward the ground in mid air, body tilted forward and down, legs trailing up behind, both arms reaching down with both fists side by side under his head; cell 3: leaping into an uppercut, one knee raised: one fist punched up and forward to the upper right of his head, the other fist low at his chest). Cells 4, 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a young thief's buckled leather jerkin worn over his torso and upper arms: dark brown leather over a charcoal grey shirt, short sleeves over the upper arms, two straps crossing his chest with small silver buckles, a narrow dark belt with a small pouch at the waist, and the hem just below the belt. It follows his body and arms in each pose, however they bend, stretch, tuck or turn. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_thief_trousers_armsup",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_thief_trousers_armsup.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 23:06Z 'Yes' to putting the try-4 body in and painting gear for the 3 poses, 16 sheets ~$1.09): thief trousers on the new cast1, gravity1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_thief_trousers_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2 and 3 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: casting a spell: one fist raised up and out to the right of his head, the other fist at his chest; cell 2: diving head first down toward the ground in mid air, body tilted forward and down, legs trailing up behind, both arms reaching down with both fists side by side under his head; cell 3: leaping into an uppercut, one knee raised: one fist punched up and forward to the upper right of his head, the other fist low at his chest). Cells 4, 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a young thief's wrapped trousers: charcoal grey cloth trousers from the waist to the ankles, with dark strips of cloth wrapped around the lower legs from the knee down. They follow his legs in each pose, however they bend, stretch, kneel or tuck, and cover each leg whole down to where the foot begins. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_thief_boots_armsup",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_thief_boots_armsup.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 23:06Z 'Yes' to putting the try-4 body in and painting gear for the 3 poses, 16 sheets ~$1.09): thief boots on the new cast1, gravity1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_thief_boots_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2 and 3 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: casting a spell: one fist raised up and out to the right of his head, the other fist at his chest; cell 2: diving head first down toward the ground in mid air, body tilted forward and down, legs trailing up behind, both arms reaching down with both fists side by side under his head; cell 3: leaping into an uppercut, one knee raised: one fist punched up and forward to the upper right of his head, the other fist low at his chest). Cells 4, 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a young thief's quiet boots: soft dark brown leather boots reaching just above the ankle, with a folded-over top, thin dark soles and a small strap. Paint BOTH feet in every cell, following each foot however it points; each foot is whole and rounded, never cut off flat, and the same size as the green foot it covers. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_archer_vest_armsup",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_archer_vest_armsup.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 23:06Z 'Yes' to putting the try-4 body in and painting gear for the 3 poses, 16 sheets ~$1.09): archer vest on the new cast1, gravity1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_archer_vest_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2 and 3 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: casting a spell: one fist raised up and out to the right of his head, the other fist at his chest; cell 2: diving head first down toward the ground in mid air, body tilted forward and down, legs trailing up behind, both arms reaching down with both fists side by side under his head; cell 3: leaping into an uppercut, one knee raised: one fist punched up and forward to the upper right of his head, the other fist low at his chest). Cells 4, 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a young archer's laced leather vest worn over his torso and upper arms: a tan brown leather vest laced up the front with a thin cord, over a cream linen shirt with short sleeves over the upper arms, a brown leather strap running from one shoulder across his chest, and a narrow brown belt with a small horn buckle at the waist; the hem is just below the belt. It follows his body and arms in each pose, however they bend, stretch, tuck or turn. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_archer_trousers_armsup",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_archer_trousers_armsup.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 23:06Z 'Yes' to putting the try-4 body in and painting gear for the 3 poses, 16 sheets ~$1.09): archer trousers on the new cast1, gravity1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_archer_trousers_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2 and 3 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: casting a spell: one fist raised up and out to the right of his head, the other fist at his chest; cell 2: diving head first down toward the ground in mid air, body tilted forward and down, legs trailing up behind, both arms reaching down with both fists side by side under his head; cell 3: leaping into an uppercut, one knee raised: one fist punched up and forward to the upper right of his head, the other fist low at his chest). Cells 4, 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a young archer's patched trousers: olive brown cloth trousers from the waist to the ankles with a couple of lighter sewn-on patches at the knees. They follow his legs in each pose, however they bend, stretch, kneel or tuck, and cover each leg whole down to where the foot begins. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_archer_boots_armsup",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_archer_boots_armsup.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 23:06Z 'Yes' to putting the try-4 body in and painting gear for the 3 poses, 16 sheets ~$1.09): archer boots on the new cast1, gravity1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_archer_boots_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2 and 3 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: casting a spell: one fist raised up and out to the right of his head, the other fist at his chest; cell 2: diving head first down toward the ground in mid air, body tilted forward and down, legs trailing up behind, both arms reaching down with both fists side by side under his head; cell 3: leaping into an uppercut, one knee raised: one fist punched up and forward to the upper right of his head, the other fist low at his chest). Cells 4, 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a young archer's lace-up boots: brown leather boots reaching a little above the ankle, laced up the front with pale cord, with sturdy dark soles. Paint BOTH feet in every cell, following each foot however it points; each foot is whole and rounded, never cut off flat, and the same size as the green foot it covers. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_pirate_coat_armsup",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_pirate_coat_armsup.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 23:06Z 'Yes' to putting the try-4 body in and painting gear for the 3 poses, 16 sheets ~$1.09): pirate coat on the new cast1, gravity1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_pirate_coat_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2 and 3 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: casting a spell: one fist raised up and out to the right of his head, the other fist at his chest; cell 2: diving head first down toward the ground in mid air, body tilted forward and down, legs trailing up behind, both arms reaching down with both fists side by side under his head; cell 3: leaping into an uppercut, one knee raised: one fist punched up and forward to the upper right of his head, the other fist low at his chest). Cells 4, 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a young pirate's red coat worn over his torso and upper arms: a deep red wool coat trimmed in gold along the front edges and cuffs, open at the front over a cream linen shirt, with short sleeves over the upper arms ending in gold-trimmed cuffs, a wide black belt with a square brass buckle at the waist, and coat tails reaching to mid-thigh. It follows his body and arms in each pose, however they bend, stretch, tuck or turn. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_pirate_trousers_armsup",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_pirate_trousers_armsup.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 23:06Z 'Yes' to putting the try-4 body in and painting gear for the 3 poses, 16 sheets ~$1.09): pirate trousers on the new cast1, gravity1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_pirate_trousers_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2 and 3 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: casting a spell: one fist raised up and out to the right of his head, the other fist at his chest; cell 2: diving head first down toward the ground in mid air, body tilted forward and down, legs trailing up behind, both arms reaching down with both fists side by side under his head; cell 3: leaping into an uppercut, one knee raised: one fist punched up and forward to the upper right of his head, the other fist low at his chest). Cells 4, 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a young pirate's striped sailor trousers: loose cream trousers with thin navy blue stripes running down the legs, from the waist to just below the knee. They follow his legs in each pose, however they bend, stretch, kneel or tuck, and cover each leg whole down to where the foot begins. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_pirate_boots_armsup",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_pirate_boots_armsup.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 23:06Z 'Yes' to putting the try-4 body in and painting gear for the 3 poses, 16 sheets ~$1.09): pirate boots on the new cast1, gravity1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_pirate_boots_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2 and 3 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: casting a spell: one fist raised up and out to the right of his head, the other fist at his chest; cell 2: diving head first down toward the ground in mid air, body tilted forward and down, legs trailing up behind, both arms reaching down with both fists side by side under his head; cell 3: leaping into an uppercut, one knee raised: one fist punched up and forward to the upper right of his head, the other fist low at his chest). Cells 4, 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a young pirate's tall cuffed boots: black leather boots reaching up to just below the knee, with a wide folded-down cuff at the top and sturdy dark soles. Paint BOTH feet in every cell, following each foot however it points; each foot is whole and rounded, never cut off flat, and the same size as the green foot it covers. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_front_fist_armsup",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_front_fist_armsup.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-15 thread 'New hero' (Cory 23:06Z 'Yes' to putting the try-4 body in and painting gear for the 3 poses, 16 sheets ~$1.09): the front weapon fist on the new cast1, gravity1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_armsup_body.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2 and 3 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose. Cells 4, 5, 6, 7 and 8 are empty and must stay empty. On each green shape, paint ONLY his WEAPON HAND: one closed rounded MITTEN fist, with no separate fingers or thumb, plus his wrist, exactly the same size, shape, angle, skin colour and place as that fist in the same cell of the first attached picture, so it lies exactly on top of it. The weapon hand is: in cell 1 the fist raised up to the right of his head (not the fist at his chest); in cell 2 the lower fist on the RIGHT side of the pair under his head; in cell 3 the fist punched up to the upper right (not the fist at his chest). Paint only that one fist in each cell and nothing else: no other hand, arm, sleeve, body, head, weapon or object. Leave every part of the green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Style: exactly the skin, warm colours, light from the upper left, smooth soft painted shading and thin dark plum-brown outline of the boy in the first attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_body_near_arm_up",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_near_arm_up.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 00:14Z 'Yes' to the priced ~$0.07 guided body paint): cast1 and skyward2 with the NEAR arm (closest to the camera) raised, painted over a flat colour guide (green body, blue near arm across his chest).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/near_arm_up_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cell 4 holds a painted bald chibi boy standing at rest, turned toward the right, in a cream undershirt with rolled sleeves and brown shorts, barefoot. Leave cell 4 exactly as it is. Cells 1 and 2 each hold a flat colour GUIDE of the same boy in a new pose: the GREEN shape is his head, body, legs and his far arm with its fist held low behind his hip; the BLUE shape is his NEAR arm, the arm closest to the viewer, which crosses IN FRONT of his chest, below his chin, and reaches up and forward to a round closed mitten fist at the end of the blue shape. Paint the SAME boy as cell 4 over each guide, covering the guide completely so no flat green or blue is left: same size, same outline as the guide, his body turned toward the right. The raised arm is always the BLUE one: it starts at the shoulder nearest the viewer and is painted ON TOP of his chest and shirt, with his far arm mostly hidden behind his body and only its low fist showing beside his hip. Cell 1 is casting a spell, feet on the ground; cell 2 is leaping into an uppercut with one knee raised. He is bald, with no face and no hair: keep his head bare exactly like the boy in cell 4. No arm, hand or fist ever crosses or touches his head. Each fist is one round closed mitten with no fingers. He has exactly two arms and two legs. Do not add any weapon, object, ground, dust, motion lines, text or extra figure. Leave cells 3 and 5 to 8 empty. Keep the background flat pure magenta #FF00FF and keep the grid lines. Style: exactly like the boy in cell 4 (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the attached picture. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_body_skill_poses",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_skill_poses.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 00:27Z 'Do it' to the priced ~$0.07 plan): totally new cast1, cast2, skyward1, skyward2 body poses over drawn colour guides (green body, blue near arm).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/new_skill_poses_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cell 4 holds a painted bald chibi boy standing at rest, turned toward the right, in a cream undershirt with rolled sleeves and brown shorts, barefoot. Leave cell 4 exactly as it is. Cells 1, 2, 3 and 5 each hold a rough flat colour GUIDE of the same boy in a new pose: the GREEN shapes are his head, body, legs and his far arm; the BLUE shape is his NEAR arm, the arm closest to the viewer, ending in his near fist. Paint the SAME boy as cell 4 over each guide in that pose, covering the guide completely so no flat green or blue is left: same size as cell 4, the same proportions as cell 4 (big round head, short body), turned toward the right. The blue arm is always the near arm, painted ON TOP of his body; the far arm is mostly behind his body with only its fist showing. Cell 1: winding up a spell, knees bent, his near fist pulled back low beside his hip, the far fist low in front. Cell 2: casting, stepping forward, his near arm thrust straight out ahead of him at chest height, below his chin, the far fist low. Cell 3: crouching low to spring, his near fist down and behind him near the ground. Cell 5: springing up into the air with one knee raised, his near arm swept up high and forward, out in front of him and well clear of his head. He is bald, with no face and no hair: keep his head bare exactly like the boy in cell 4. No arm, hand or fist ever crosses or touches his head or face, and both fists are visible. Each fist is one round closed mitten with no fingers. He has exactly two arms and two legs. Do not add any weapon, object, ground, dust, motion lines, text or extra figure. Leave cells 6 to 8 empty. Keep the background flat pure magenta #FF00FF and keep the grid lines. Style: exactly like the boy in cell 4 (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the attached picture. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_body_near_arm_up2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_near_arm_up2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 00:57Z 'Yes' to the priced ~$0.07 repaint): cast2 (straight thrust) and skyward2 (knee-up spring) with the NEAR arm out, over colour guides made from the good skill_poses bodies (green body, blue near arm).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/near_arm_up2_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cell 4 holds a painted bald chibi boy standing at rest, turned toward the right, in a cream undershirt with rolled sleeves and brown shorts, barefoot. Leave cell 4 exactly as it is. Cells 1 and 2 each hold a flat colour GUIDE of the same boy in a new pose: the GREEN shape is his head, body, legs and his far arm with its fist held low behind his hip; the BLUE shape is his NEAR arm, the arm closest to the viewer. Paint the SAME boy as cell 4 over each guide, covering the guide completely so no flat green or blue is left: same size, same outline as the guide, his body turned toward the right, in a natural, lively, well-drawn pose. The blue arm is always the NEAR arm: it starts at the shoulder nearest the viewer and is painted ON TOP of his chest and shirt, with its sleeve over his chest; his far arm is mostly hidden behind his body with only its low fist showing beside his hip. Cell 1: stepping forward into a lunge and punching, his NEAR arm thrust straight out ahead of him at chest height, below his chin. Cell 2: springing up into the air with one knee raised, his NEAR arm swept up high and forward, its fist above and well to the right of his head. He is bald, with no face and no hair: keep his head bare exactly like the boy in cell 4. No arm, hand or fist ever crosses or touches his head. Each fist is one round closed mitten with no fingers. He has exactly two arms and two legs. Do not add any weapon, object, ground, dust, motion lines, text or extra figure. Leave cells 3 and 5 to 8 empty. Keep the background flat pure magenta #FF00FF and keep the grid lines. Style: exactly like the boy in cell 4 (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the attached picture. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_body_skyward2_edit",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_skyward2_edit.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 01:19Z 'Yes. Try that' to the priced ~$0.07 edit): skyward2 made by editing a copy of the good near-arm cast2 (mshero_body_near_arm_up2 cell 1): swing the same extended arm up, lift one knee.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/skyward2_from_cast2_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cells 1 and 2 hold the same painted bald chibi boy punching, turned toward the right, his arm stretched straight out ahead of him. Cell 4 holds the same boy standing at rest. Leave cells 1 and 4 exactly as they are. Change only cell 2: keep the same boy, the same painting style, the same size and the SAME stretched-out arm, the one that is already reaching out in cell 2. Swing that same arm up so it points high and forward on a diagonal, its closed mitten fist above and well to the right of his head, with a clear gap of magenta between the arm and his head, like an uppercut thrown into the sky. Keep that arm's sleeve and shoulder exactly where they are now, on the front of his chest. Keep his other fist low and tucked at his waist exactly as it is. Lift his front knee up high as if springing into the air, the other leg straight below him, his body a little stretched upward. He is bald, with no face and no hair: keep his head bare. No arm, hand or fist crosses or touches his head. He has exactly two arms and two legs. Do not add any weapon, object, ground, dust, motion lines, text or extra figure. Leave cells 3 and 5 to 8 empty. Keep the background flat pure magenta #FF00FF and keep the grid lines. No text, no labels."
+  }
+ },
+ {
   "id": "monanim_bramble_boar",
   "prompts": null,
   "batch": "monster animations (edit)",
@@ -19654,6 +20479,529 @@
     "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
    ],
    "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game\\'s monster \"Seedwing\" once, floating in its idle pose on magenta. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, markings, face, every glowing part, light-mote, gem, flame or other detail it has in its idle pose, the same size as in the first attached picture, the same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different from the others. Every glowing part and detail it has in the first attached picture is there in every cell. It always faces RIGHT, seen from the side, its face turned to the right. Both of its long maple-key wings and its leaf and sprout are there in every cell. It flies: every pose is in the air above the ground line except the knocked-down pose, which lies on it. Where a pose names body parts it does not have (legs, wings, mouth), show the same idea with the body it has. Cell 1, SWOOP WIND-UP: pulled up and back in the air, wings or body drawn back and raised high, ready to dive. Cell 2, SWOOP: diving steeply down and forward through the air, wings or body swept back, head first. Cell 3, KNOCKED DOWN: fallen out of the air and lying flat on its side on the ground line, wings or body limp and spread on the ground, dazed with dizzy swirl eyes and tongue out, still clearly alive (not defeated). Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+ {
+  "id": "mshero_body_skyward2_headback",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_skyward2_headback.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 01:56Z 'Yes' to the priced ~$0.07 edit): skyward2 from mshero_body_skyward2_edit cell 2 with the head tilted back so the raised near arm is clear of his face.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/skyward2_head_back_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cell 1 holds a painted bald chibi boy punching straight ahead, cell 2 the same boy springing up with one knee raised and one arm swept up high, cell 4 the same boy standing at rest. Leave cells 1 and 4 exactly as they are. Change only cell 2, and in cell 2 change only his head: tilt his whole head back, as if looking up toward the sky, so his chin lifts and his head leans back and away from the raised arm, leaving a clear gap of magenta between his face side of the head and the raised arm everywhere. The raised arm must not cross, touch or overlap his head or face at all. Keep his body, both arms, both legs, his raised fist and his low fist exactly as they are, with the same size, shape and position. He is bald, with no face and no hair: keep his head bare and the same size. He has exactly two arms and two legs. Do not add any weapon, object, ground, dust, motion lines, text or extra figure. Leave cells 3 and 5 to 8 empty. Keep the background flat pure magenta #FF00FF and keep the grid lines. Same painting style as the rest of the sheet. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_body_skyward2_elbow",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_skyward2_elbow.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 02:42Z 'Yes' to the priced ~$0.07 edit): skyward2 from the near-arm cast2: upper arm straight out ahead, bent at the elbow so the forearm points up, knee lifted.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/skyward2_from_cast2_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cells 1 and 2 hold the same painted bald chibi boy punching, turned toward the right, his arm stretched straight out ahead of him. Cell 4 holds the same boy standing at rest. Leave cells 1 and 4 exactly as they are. Change only cell 2: keep the same boy, the same painting style, the same size and the SAME stretched-out arm. Keep that arm's upper arm exactly where it is now, straight out ahead of him at chest height, from the same shoulder on the front of his chest to the elbow. Bend that arm at the elbow so the forearm points straight UP, with the closed mitten fist up high, well out in front of his face and to the right of it, like a raised fist held up in front of him. A wide gap of magenta separates the whole arm and fist from his head and face. Keep his other fist low and tucked at his waist exactly as it is. Lift his front knee up high as if springing into the air, the other leg straight below him. Keep his head upright and exactly as it is. He is bald, with no face and no hair: keep his head bare, with no nose or other features. No arm, hand or fist crosses or touches his head. Each fist is one round closed mitten with no fingers. He has exactly two arms and two legs. Do not add any weapon, object, ground, dust, motion lines, text or extra figure. Leave cells 3 and 5 to 8 empty. Keep the background flat pure magenta #FF00FF and keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_body_skyward2_guide",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_skyward2_guide.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 02:58Z 'Yes' to the priced ~$0.07 edit): skyward2 from the near-arm cast2 with a flat blue L-arm guide (upper arm level, forearm up, gap from face).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/skyward2_elbow_guide_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cell 1 holds a painted bald chibi boy punching, turned toward the right, his near arm stretched straight out ahead. Cell 4 holds the same boy standing at rest. Leave cells 1 and 4 exactly as they are. Cell 2 holds the same boy, but his near arm is drawn as a flat BLUE shape: a guide for the pose. Repaint ONLY cell 2: paint over the blue shape so it becomes his real arm, in the same painting style as the rest of him, following the blue shape exactly. The blue shape is an L: the upper arm goes from his shoulder on the front of his chest straight out ahead, level, at chest height; at the elbow it bends at a right angle and the forearm points straight UP; the round blue end at the top is his closed mitten fist, held high, out in front of his face and to the right of it. The sleeve of his cream shirt covers the upper part of the upper arm, like his other sleeve; the rest is bare skin with the same dark outline. Keep the wide gap of magenta between the arm and his head exactly as shown: no part of the arm, sleeve or fist touches or crosses his head. Keep his other fist low at his waist exactly as it is. Lift his front knee up high as if springing into the air, the other leg straight below him. Keep his head upright and exactly as it is: bald, with no face, no hair, no nose and no other features. Each fist is one round closed mitten with no fingers. He has exactly two arms and two legs. No blue may remain. Do not add any weapon, object, ground, dust, motion lines, text or extra figure. Leave cells 3 and 5 to 8 empty. Keep the background flat pure magenta #FF00FF and keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_body_skyward2_knee",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_skyward2_knee.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 03:15Z: arm straight out, knee up like jumping): skyward2 from the cast2 body with a flat blue leg guide (front knee up, back leg straight down); arm left as cast2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/skyward2_knee_guide_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cell 1 holds a painted bald chibi boy punching, turned toward the right, his near arm stretched straight out ahead at chest height. Cell 4 holds the same boy standing at rest. Leave cells 1 and 4 exactly as they are. Cell 2 holds the same boy with the same arms, but his hips and legs are drawn as a flat BLUE shape: a guide for the pose. Repaint ONLY cell 2: keep his head, body and BOTH ARMS exactly as they are, pixel for pixel, including the near arm stretched straight out ahead and the other fist low at his chest. Paint over the blue shape so it becomes his real hips and legs, following the blue shape exactly, like the boy jumping: his front knee lifted high in front of him with the lower leg hanging down below the knee, and his back leg straight below him, pointing down. He wears the same brown shorts as in cell 1 over the tops of his legs, with bare legs and bare feet below, in the same painting style and dark outline as the rest of him. Keep his head bald with no face, no hair, no nose and no other features. Each fist is one round closed mitten with no fingers. He has exactly two arms and two legs. No blue may remain. Do not add any weapon, object, ground, dust, shadow, motion lines, text or extra figure. Leave cells 3 and 5 to 8 empty. Keep the background flat pure magenta #FF00FF and keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_war_jerkin_skill4",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_war_jerkin_skill4.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 03:57Z 'make the equipment and the fist' to the priced 16 sheets ~$1.09): war jerkin on the new cast1, cast2, skyward1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_war_jerkin_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2, 3 and 4 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: winding up a spell: standing in a low wide stance, elbows out, one fist at each hip; cell 2: lunging forward with one arm punched straight out ahead at chest height, the other fist at his chest; cell 3: crouched down on one knee, one fist pressed on the ground in front of him, the other arm held out to the right; cell 4: jumping with one knee raised high, one arm punched straight out ahead at chest height, the other fist at his chest). Cells 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a padded warrior's jerkin worn over his torso and upper arms: quilted brown-tan padded cloth in stitched rows, short sleeves over the upper arms, a high padded collar, a broad brown leather belt with a brass buckle at the waist, and the hem just below the belt. It follows his body and arms in each pose, however they bend, stretch, tuck or turn. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_war_trousers_skill4",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_war_trousers_skill4.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 03:57Z 'make the equipment and the fist' to the priced 16 sheets ~$1.09): war trousers on the new cast1, cast2, skyward1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_war_trousers_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2, 3 and 4 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: winding up a spell: standing in a low wide stance, elbows out, one fist at each hip; cell 2: lunging forward with one arm punched straight out ahead at chest height, the other fist at his chest; cell 3: crouched down on one knee, one fist pressed on the ground in front of him, the other arm held out to the right; cell 4: jumping with one knee raised high, one arm punched straight out ahead at chest height, the other fist at his chest). Cells 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY sturdy warrior's trousers worn on his legs from the waist to mid-shin: thick dark olive-brown cloth with reinforced knee patches and visible stitching, tucked in at the bottom where boots will go. They follow his legs in each pose, however they bend, stretch, kneel or tuck, and cover each leg whole down to where the foot begins. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_war_boots_skill4",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_war_boots_skill4.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 03:57Z 'make the equipment and the fist' to the priced 16 sheets ~$1.09): war boots on the new cast1, cast2, skyward1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_war_boots_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2, 3 and 4 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: winding up a spell: standing in a low wide stance, elbows out, one fist at each hip; cell 2: lunging forward with one arm punched straight out ahead at chest height, the other fist at his chest; cell 3: crouched down on one knee, one fist pressed on the ground in front of him, the other arm held out to the right; cell 4: jumping with one knee raised high, one arm punched straight out ahead at chest height, the other fist at his chest). Cells 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY the same brown leather boots as in the second attached picture, reaching to mid-shin, with steel toe caps, a darker sole, a turned-down cuff and a small buckle strap. Paint BOTH feet in every cell, following each foot however it points; each foot is whole and rounded, never cut off flat, and the same size as the green foot it covers. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_mag_robe_skill4",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_mag_robe_skill4.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 03:57Z 'make the equipment and the fist' to the priced 16 sheets ~$1.09): mag robe on the new cast1, cast2, skyward1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_mag_robe_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2, 3 and 4 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: winding up a spell: standing in a low wide stance, elbows out, one fist at each hip; cell 2: lunging forward with one arm punched straight out ahead at chest height, the other fist at his chest; cell 3: crouched down on one knee, one fist pressed on the ground in front of him, the other arm held out to the right; cell 4: jumping with one knee raised high, one arm punched straight out ahead at chest height, the other fist at his chest). Cells 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY the same young magician's robe as in the second attached picture, worn over his torso and upper arms: a deep blue robe-tunic with short wide sleeves, a hem just above the knees, gold trim along the collar, sleeves and hem, a small gold star clasp at the collar and a purple cloth sash tied at the waist with hanging ends. It follows his body and arms in each pose, however they bend, stretch, tuck or turn. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_mag_trousers_skill4",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_mag_trousers_skill4.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 03:57Z 'make the equipment and the fist' to the priced 16 sheets ~$1.09): mag trousers on the new cast1, cast2, skyward1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_mag_trousers_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2, 3 and 4 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: winding up a spell: standing in a low wide stance, elbows out, one fist at each hip; cell 2: lunging forward with one arm punched straight out ahead at chest height, the other fist at his chest; cell 3: crouched down on one knee, one fist pressed on the ground in front of him, the other arm held out to the right; cell 4: jumping with one knee raised high, one arm punched straight out ahead at chest height, the other fist at his chest). Cells 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY loose magician's trousers worn on his legs from the waist to the ankles: soft light-tan cloth, loose and a little baggy, gathered at the ankles, with visible seams. They follow his legs in each pose, however they bend, stretch, kneel or tuck, and cover each leg whole down to where the foot begins. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_mag_slippers_skill4",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_mag_slippers_skill4.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 03:57Z 'make the equipment and the fist' to the priced 16 sheets ~$1.09): mag slippers on the new cast1, cast2, skyward1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_mag_slippers_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2, 3 and 4 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: winding up a spell: standing in a low wide stance, elbows out, one fist at each hip; cell 2: lunging forward with one arm punched straight out ahead at chest height, the other fist at his chest; cell 3: crouched down on one knee, one fist pressed on the ground in front of him, the other arm held out to the right; cell 4: jumping with one knee raised high, one arm punched straight out ahead at chest height, the other fist at his chest). Cells 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a pair of soft magician's slippers: deep blue cloth with gold trim around the opening and gently curled pointed toes. Paint BOTH feet in every cell, following each foot however it points; each foot is whole and rounded, never cut off flat, and the same size as the green foot it covers. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_thief_jerkin_skill4",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_thief_jerkin_skill4.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 03:57Z 'make the equipment and the fist' to the priced 16 sheets ~$1.09): thief jerkin on the new cast1, cast2, skyward1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_thief_jerkin_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2, 3 and 4 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: winding up a spell: standing in a low wide stance, elbows out, one fist at each hip; cell 2: lunging forward with one arm punched straight out ahead at chest height, the other fist at his chest; cell 3: crouched down on one knee, one fist pressed on the ground in front of him, the other arm held out to the right; cell 4: jumping with one knee raised high, one arm punched straight out ahead at chest height, the other fist at his chest). Cells 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a young thief's buckled leather jerkin worn over his torso and upper arms: dark brown leather over a charcoal grey shirt, short sleeves over the upper arms, two straps crossing his chest with small silver buckles, a narrow dark belt with a small pouch at the waist, and the hem just below the belt. It follows his body and arms in each pose, however they bend, stretch, tuck or turn. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_thief_trousers_skill4",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_thief_trousers_skill4.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 03:57Z 'make the equipment and the fist' to the priced 16 sheets ~$1.09): thief trousers on the new cast1, cast2, skyward1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_thief_trousers_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2, 3 and 4 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: winding up a spell: standing in a low wide stance, elbows out, one fist at each hip; cell 2: lunging forward with one arm punched straight out ahead at chest height, the other fist at his chest; cell 3: crouched down on one knee, one fist pressed on the ground in front of him, the other arm held out to the right; cell 4: jumping with one knee raised high, one arm punched straight out ahead at chest height, the other fist at his chest). Cells 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a young thief's wrapped trousers: charcoal grey cloth trousers from the waist to the ankles, with dark strips of cloth wrapped around the lower legs from the knee down. They follow his legs in each pose, however they bend, stretch, kneel or tuck, and cover each leg whole down to where the foot begins. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_thief_boots_skill4",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_thief_boots_skill4.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 03:57Z 'make the equipment and the fist' to the priced 16 sheets ~$1.09): thief boots on the new cast1, cast2, skyward1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_thief_boots_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2, 3 and 4 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: winding up a spell: standing in a low wide stance, elbows out, one fist at each hip; cell 2: lunging forward with one arm punched straight out ahead at chest height, the other fist at his chest; cell 3: crouched down on one knee, one fist pressed on the ground in front of him, the other arm held out to the right; cell 4: jumping with one knee raised high, one arm punched straight out ahead at chest height, the other fist at his chest). Cells 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a young thief's quiet boots: soft dark brown leather boots reaching just above the ankle, with a folded-over top, thin dark soles and a small strap. Paint BOTH feet in every cell, following each foot however it points; each foot is whole and rounded, never cut off flat, and the same size as the green foot it covers. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_archer_vest_skill4",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_archer_vest_skill4.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 03:57Z 'make the equipment and the fist' to the priced 16 sheets ~$1.09): archer vest on the new cast1, cast2, skyward1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_archer_vest_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2, 3 and 4 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: winding up a spell: standing in a low wide stance, elbows out, one fist at each hip; cell 2: lunging forward with one arm punched straight out ahead at chest height, the other fist at his chest; cell 3: crouched down on one knee, one fist pressed on the ground in front of him, the other arm held out to the right; cell 4: jumping with one knee raised high, one arm punched straight out ahead at chest height, the other fist at his chest). Cells 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a young archer's laced leather vest worn over his torso and upper arms: a tan brown leather vest laced up the front with a thin cord, over a cream linen shirt with short sleeves over the upper arms, a brown leather strap running from one shoulder across his chest, and a narrow brown belt with a small horn buckle at the waist; the hem is just below the belt. It follows his body and arms in each pose, however they bend, stretch, tuck or turn. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_archer_trousers_skill4",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_archer_trousers_skill4.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 03:57Z 'make the equipment and the fist' to the priced 16 sheets ~$1.09): archer trousers on the new cast1, cast2, skyward1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_archer_trousers_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2, 3 and 4 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: winding up a spell: standing in a low wide stance, elbows out, one fist at each hip; cell 2: lunging forward with one arm punched straight out ahead at chest height, the other fist at his chest; cell 3: crouched down on one knee, one fist pressed on the ground in front of him, the other arm held out to the right; cell 4: jumping with one knee raised high, one arm punched straight out ahead at chest height, the other fist at his chest). Cells 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a young archer's patched trousers: olive brown cloth trousers from the waist to the ankles with a couple of lighter sewn-on patches at the knees. They follow his legs in each pose, however they bend, stretch, kneel or tuck, and cover each leg whole down to where the foot begins. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_archer_boots_skill4",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_archer_boots_skill4.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 03:57Z 'make the equipment and the fist' to the priced 16 sheets ~$1.09): archer boots on the new cast1, cast2, skyward1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_archer_boots_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2, 3 and 4 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: winding up a spell: standing in a low wide stance, elbows out, one fist at each hip; cell 2: lunging forward with one arm punched straight out ahead at chest height, the other fist at his chest; cell 3: crouched down on one knee, one fist pressed on the ground in front of him, the other arm held out to the right; cell 4: jumping with one knee raised high, one arm punched straight out ahead at chest height, the other fist at his chest). Cells 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a young archer's lace-up boots: brown leather boots reaching a little above the ankle, laced up the front with pale cord, with sturdy dark soles. Paint BOTH feet in every cell, following each foot however it points; each foot is whole and rounded, never cut off flat, and the same size as the green foot it covers. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_pirate_coat_skill4",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_pirate_coat_skill4.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 03:57Z 'make the equipment and the fist' to the priced 16 sheets ~$1.09): pirate coat on the new cast1, cast2, skyward1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_pirate_coat_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2, 3 and 4 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: winding up a spell: standing in a low wide stance, elbows out, one fist at each hip; cell 2: lunging forward with one arm punched straight out ahead at chest height, the other fist at his chest; cell 3: crouched down on one knee, one fist pressed on the ground in front of him, the other arm held out to the right; cell 4: jumping with one knee raised high, one arm punched straight out ahead at chest height, the other fist at his chest). Cells 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a young pirate's red coat worn over his torso and upper arms: a deep red wool coat trimmed in gold along the front edges and cuffs, open at the front over a cream linen shirt, with short sleeves over the upper arms ending in gold-trimmed cuffs, a wide black belt with a square brass buckle at the waist, and coat tails reaching to mid-thigh. It follows his body and arms in each pose, however they bend, stretch, tuck or turn. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_pirate_trousers_skill4",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_pirate_trousers_skill4.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 03:57Z 'make the equipment and the fist' to the priced 16 sheets ~$1.09): pirate trousers on the new cast1, cast2, skyward1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_pirate_trousers_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2, 3 and 4 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: winding up a spell: standing in a low wide stance, elbows out, one fist at each hip; cell 2: lunging forward with one arm punched straight out ahead at chest height, the other fist at his chest; cell 3: crouched down on one knee, one fist pressed on the ground in front of him, the other arm held out to the right; cell 4: jumping with one knee raised high, one arm punched straight out ahead at chest height, the other fist at his chest). Cells 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a young pirate's striped sailor trousers: loose cream trousers with thin navy blue stripes running down the legs, from the waist to just below the knee. They follow his legs in each pose, however they bend, stretch, kneel or tuck, and cover each leg whole down to where the foot begins. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_pirate_boots_skill4",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_pirate_boots_skill4.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 03:57Z 'make the equipment and the fist' to the priced 16 sheets ~$1.09): pirate boots on the new cast1, cast2, skyward1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_body.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_pirate_boots_walk.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2, 3 and 4 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: winding up a spell: standing in a low wide stance, elbows out, one fist at each hip; cell 2: lunging forward with one arm punched straight out ahead at chest height, the other fist at his chest; cell 3: crouched down on one knee, one fist pressed on the ground in front of him, the other arm held out to the right; cell 4: jumping with one knee raised high, one arm punched straight out ahead at chest height, the other fist at his chest). Cells 5, 6, 7 and 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. On each green shape, paint ONLY a young pirate's tall cuffed boots: black leather boots reaching up to just below the knee, with a wide folded-down cuff at the top and sturdy dark soles. Paint BOTH feet in every cell, following each foot however it points; each foot is whole and rounded, never cut off flat, and the same size as the green foot it covers. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. His arms never cover his face or head, so nothing you paint goes over his head. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_front_fist_skill4",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_front_fist_skill4.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 03:57Z 'make the equipment and the fist' to the priced 16 sheets ~$1.09): the front weapon fist on the new cast1, cast2, skyward1 and skyward2 poses.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/fix_skill4_body.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2, 3 and 4 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose. Cells 5, 6, 7 and 8 are empty and must stay empty. On each green shape, paint ONLY his WEAPON HAND: one closed rounded MITTEN fist, with no separate fingers or thumb, plus his wrist, exactly the same size, shape, angle, skin colour and place as that fist in the same cell of the first attached picture, so it lies exactly on top of it. The weapon hand is the hand nearest the viewer: in cell 1 the fist at his hip on the LEFT side of the picture, drawn in front of his body (not the fist on the right); in cell 2 the fist punched straight out to the right (not the fist at his chest); in cell 3 the fist pressed on the ground in front of his knee at the lower left (not the fist held out to the right); in cell 4 the fist punched straight out to the right (not the fist at his chest). Paint only that one fist in each cell and nothing else: no other hand, arm, sleeve, body, head, weapon or object. Leave every part of the green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Style: exactly the skin, warm colours, light from the upper left, smooth soft painted shading and thin dark plum-brown outline of the boy in the first attached picture. Keep the grid lines. No text, no labels."
   }
  }
 ]

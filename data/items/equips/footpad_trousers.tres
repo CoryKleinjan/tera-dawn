@@ -12,6 +12,12 @@ defense = 4
 
 [resource]
 script = ExtResource("script")
+frame_art = {
+&"roll2": &"roll1"
+}
+nudges = {
+&"roll2": Vector4(-21, -71, -180, 0)
+}
 id = &"footpad_trousers"
 display_name = "Footpad Trousers"
 description = "Wrapped trousers for a new thief."

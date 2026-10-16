@@ -13,7 +13,7 @@
       ""
     ],
     [
-      "swing1",
+      "",
       "swing2",
       "swing3",
       "cast1",
@@ -38,12 +38,12 @@
       "",
       "throw1",
       "throw2",
-      "throw3",
+      "",
       "pistol1",
       "pistol2"
     ],
     [
-      "skyward1",
+      "",
       "skyward2",
       "gravity1",
       "gravity2",
@@ -56,7 +56,7 @@
       "pinning",
       "leap",
       "backstep",
-      "blink",
+      "",
       "lunge",
       "roll1",
       "roll2",
@@ -109,7 +109,6 @@
         "ladder1": "hero_squire_jerkin:ladder1",
         "ladder_hold": "hero_squire_jerkin:ladder_hold",
         "back": "hero_squire_jerkin:back",
-        "swing1": "hero_squire_jerkin:swing1",
         "swing2": "hero_squire_jerkin:swing2",
         "swing3": "hero_squire_jerkin:swing3",
         "hurt": "hero_squire_jerkin:hurt",
@@ -118,13 +117,8 @@
         "bow2": "hero_squire_jerkin:bow2",
         "throw1": "hero_squire_jerkin:throw1",
         "throw2": "hero_squire_jerkin:throw2",
-        "throw3": "hero_squire_jerkin:throw3",
         "pistol1": "hero_squire_jerkin:pistol1",
         "pistol2": "hero_squire_jerkin:pistol2",
-        "cast1": "hero_squire_jerkin:cast1",
-        "cast2": "hero_squire_jerkin:cast2",
-        "skyward1": "hero_squire_jerkin:skyward1",
-        "skyward2": "hero_squire_jerkin:skyward2",
         "gravity1": "hero_squire_jerkin:gravity1",
         "gravity2": "hero_squire_jerkin:gravity2",
         "ambush1": "hero_squire_jerkin:ambush1",
@@ -133,11 +127,13 @@
         "pinning": "hero_squire_jerkin:pinning",
         "leap": "hero_squire_jerkin:leap",
         "backstep": "hero_squire_jerkin:backstep",
-        "blink": "hero_squire_jerkin:blink",
         "lunge": "hero_squire_jerkin:lunge",
         "roll1": "hero_squire_jerkin:roll1",
         "roll2": "hero_squire_jerkin:roll2",
-        "ambush2": "hero_squire_jerkin:ambush2"
+        "ambush2": "hero_squire_jerkin:ambush2",
+        "cast1": "hero_squire_jerkin:cast1",
+        "cast2": "hero_squire_jerkin:cast2",
+        "skyward2": "hero_squire_jerkin:skyward2"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -228,12 +224,6 @@
           ],
           "fps": 1
         },
-        "swing1": {
-          "frames": [
-            "swing1"
-          ],
-          "fps": 1
-        },
         "swing2": {
           "frames": [
             "swing2"
@@ -282,12 +272,6 @@
           ],
           "fps": 1
         },
-        "throw3": {
-          "frames": [
-            "throw3"
-          ],
-          "fps": 1
-        },
         "pistol1": {
           "frames": [
             "pistol1"
@@ -297,30 +281,6 @@
         "pistol2": {
           "frames": [
             "pistol2"
-          ],
-          "fps": 1
-        },
-        "cast1": {
-          "frames": [
-            "cast1"
-          ],
-          "fps": 1
-        },
-        "cast2": {
-          "frames": [
-            "cast2"
-          ],
-          "fps": 1
-        },
-        "skyward1": {
-          "frames": [
-            "skyward1"
-          ],
-          "fps": 1
-        },
-        "skyward2": {
-          "frames": [
-            "skyward2"
           ],
           "fps": 1
         },
@@ -372,12 +332,6 @@
           ],
           "fps": 1
         },
-        "blink": {
-          "frames": [
-            "blink"
-          ],
-          "fps": 1
-        },
         "lunge": {
           "frames": [
             "lunge"
@@ -399,6 +353,24 @@
         "ambush2": {
           "frames": [
             "ambush2"
+          ],
+          "fps": 1
+        },
+        "cast1": {
+          "frames": [
+            "cast1"
+          ],
+          "fps": 1
+        },
+        "cast2": {
+          "frames": [
+            "cast2"
+          ],
+          "fps": 1
+        },
+        "skyward2": {
+          "frames": [
+            "skyward2"
           ],
           "fps": 1
         }
