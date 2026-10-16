@@ -4,7 +4,8 @@
   "cells": [
     [
       "idle1",
-      "faint"
+      "faint",
+      "back"
     ]
   ],
   "grid": {
@@ -15,7 +16,8 @@
     "cols": [
       0,
       1100,
-      2200
+      2200,
+      3300
     ]
   },
   "inset": 0,
@@ -30,7 +32,8 @@
     "hero_hair_under_footpad_bandana": {
       "frames": {
         "idle1": "hero_hair_under_footpad_bandana:idle1",
-        "faint": "hero_hair_under_footpad_bandana:faint"
+        "faint": "hero_hair_under_footpad_bandana:faint",
+        "back": "hero_hair_under_footpad_bandana:back"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -46,6 +49,12 @@
         "faint": {
           "frames": [
             "faint"
+          ],
+          "fps": 1
+        },
+        "back": {
+          "frames": [
+            "back"
           ],
           "fps": 1
         }

@@ -10,6 +10,7 @@ display_name = "Messy under the tricorn"
 frames = ExtResource("2_frames")
 nudges = {
 &"ambush1": Vector4(27.3, 21.1, 36, 0),
+&"ambush2": Vector4(-10.5, 5.4, 0, 0),
 &"anchor2": Vector4(-29.4, 9.9, -12, 0),
 &"backstep": Vector4(-10.8, -12.4, 3, 0),
 &"bow1": Vector4(-1.2, -1.4, -3, 0),
