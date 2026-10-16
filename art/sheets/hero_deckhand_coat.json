@@ -49,7 +49,7 @@
       "gravity2",
       "ambush1",
       "ambush2",
-      "anchor1",
+      "",
       "anchor2"
     ],
     [
@@ -120,7 +120,6 @@
         "crouch": "hero_deckhand_coat:crouch",
         "gravity2": "hero_deckhand_coat:gravity2",
         "ambush1": "hero_deckhand_coat:ambush1",
-        "anchor1": "hero_deckhand_coat:anchor1",
         "anchor2": "hero_deckhand_coat:anchor2",
         "pinning": "hero_deckhand_coat:pinning",
         "leap": "hero_deckhand_coat:leap",
@@ -281,12 +280,6 @@
         "ambush1": {
           "frames": [
             "ambush1"
-          ],
-          "fps": 1
-        },
-        "anchor1": {
-          "frames": [
-            "anchor1"
           ],
           "fps": 1
         },

@@ -49,7 +49,7 @@
       "gravity2",
       "ambush1",
       "ambush2",
-      "anchor1",
+      "",
       "anchor2"
     ],
     [
@@ -122,7 +122,6 @@
         "pistol2": "hero_novice_slippers:pistol2",
         "gravity2": "hero_novice_slippers:gravity2",
         "ambush1": "hero_novice_slippers:ambush1",
-        "anchor1": "hero_novice_slippers:anchor1",
         "leap": "hero_novice_slippers:leap",
         "backstep": "hero_novice_slippers:backstep",
         "lunge": "hero_novice_slippers:lunge",
@@ -293,12 +292,6 @@
         "ambush1": {
           "frames": [
             "ambush1"
-          ],
-          "fps": 1
-        },
-        "anchor1": {
-          "frames": [
-            "anchor1"
           ],
           "fps": 1
         },

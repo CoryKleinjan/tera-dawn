@@ -40,7 +40,7 @@ animations = {
 &"sit": {"fps": 1.0, "frames": [&"sit"], "loop": true},
 &"throw": {"fps": 8.0, "frames": [&"throw1", &"throw2"], "loop": false},
 &"walk": {"fps": 3.5, "frames": [&"walk1", &"walk2", &"walk3", &"walk2"], "loop": true},
-&"anchor_haul": {"fps": 6.0, "frames": [&"anchor1", &"anchor2"], "loop": false},
+&"anchor_haul": {"fps": 6.0, "frames": [&"anchor2"], "loop": false},
 &"backstep": {"fps": 1.0, "frames": [&"backstep"], "loop": true},
 &"gravity_well": {"fps": 1.0, "frames": [&"gravity2"], "loop": true},
 &"leap": {"fps": 1.0, "frames": [&"leap"], "loop": true},

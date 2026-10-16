@@ -84,7 +84,6 @@
         "skyward2": "hero_footpad_bandana:idle1",
         "gravity2": "hero_footpad_bandana:idle1",
         "ambush1": "hero_footpad_bandana:idle1",
-        "anchor1": "hero_footpad_bandana:idle1",
         "anchor2": "hero_footpad_bandana:idle1",
         "pinning": "hero_footpad_bandana:idle1",
         "leap": "hero_footpad_bandana:idle1",
@@ -230,12 +229,6 @@
         "ambush1": {
           "frames": [
             "ambush1"
-          ],
-          "fps": 1
-        },
-        "anchor1": {
-          "frames": [
-            "anchor1"
           ],
           "fps": 1
         },

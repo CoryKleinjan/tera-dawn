@@ -13,7 +13,6 @@ display_name = "Plain"
 frames = ExtResource("2_frames")
 nudges = {
 &"ambush1": Vector4(14.9, 18.9, 36, 0),
-&"anchor1": Vector4(-2.9, 3.8, 3, 0),
 &"anchor2": Vector4(-25.2, 8.9, -12, 0),
 &"backstep": Vector4(-11.9, -12.3, 3, 0),
 &"cast1": Vector4(3.6, 2.6, -14, 0),

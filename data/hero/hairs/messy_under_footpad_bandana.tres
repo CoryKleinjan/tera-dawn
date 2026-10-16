@@ -10,7 +10,6 @@ display_name = "Messy under the bandana"
 frames = ExtResource("2_frames")
 nudges = {
 &"ambush1": Vector4(19.8, 15.1, 36, 0),
-&"anchor1": Vector4(-2.6, 3.4, 3, 0),
 &"anchor2": Vector4(-26.3, 10.7, -12, 0),
 &"backstep": Vector4(-11.6, -12.7, 3, 0),
 &"bow1": Vector4(-0.5, -1.1, -3, 0),
@@ -42,7 +41,6 @@ nudges = {
 }
 frame_art = {
 &"ambush1": &"idle1",
-&"anchor1": &"idle1",
 &"anchor2": &"idle1",
 &"backstep": &"idle1",
 &"bow1": &"idle1",

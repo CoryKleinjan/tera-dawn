@@ -26,7 +26,6 @@ worn = ExtResource("worn")
 nudges = {
 &"ambush1": Vector4(16.7, 19.9, 36, 0),
 &"ambush2": Vector4(-10.5, 5.4, 0, 0),
-&"anchor1": Vector4(-2.8, 3.8, 3, 0),
 &"anchor2": Vector4(-26, 8.8, -12, 0),
 &"backstep": Vector4(-11.7, -12.3, 3, 0),
 &"bow1": Vector4(-0.4, -1.6, -3, 0),
