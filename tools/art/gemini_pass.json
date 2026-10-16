@@ -20549,6 +20549,29 @@
    "refs": [],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cell 1 holds a painted bald chibi boy punching, turned toward the right, his near arm stretched straight out ahead. Cell 4 holds the same boy standing at rest. Leave cells 1 and 4 exactly as they are. Cell 2 holds the same boy, but his near arm is drawn as a flat BLUE shape: a guide for the pose. Repaint ONLY cell 2: paint over the blue shape so it becomes his real arm, in the same painting style as the rest of him, following the blue shape exactly. The blue shape is an L: the upper arm goes from his shoulder on the front of his chest straight out ahead, level, at chest height; at the elbow it bends at a right angle and the forearm points straight UP; the round blue end at the top is his closed mitten fist, held high, out in front of his face and to the right of it. The sleeve of his cream shirt covers the upper part of the upper arm, like his other sleeve; the rest is bare skin with the same dark outline. Keep the wide gap of magenta between the arm and his head exactly as shown: no part of the arm, sleeve or fist touches or crosses his head. Keep his other fist low at his waist exactly as it is. Lift his front knee up high as if springing into the air, the other leg straight below him. Keep his head upright and exactly as it is: bald, with no face, no hair, no nose and no other features. Each fist is one round closed mitten with no fingers. He has exactly two arms and two legs. No blue may remain. Do not add any weapon, object, ground, dust, motion lines, text or extra figure. Leave cells 3 and 5 to 8 empty. Keep the background flat pure magenta #FF00FF and keep the grid lines. No text, no labels."
   }
+ },
+ {
+  "id": "mshero_body_skyward2_knee",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_skyward2_knee.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 03:15Z: arm straight out, knee up like jumping): skyward2 from the cast2 body with a flat blue leg guide (front knee up, back leg straight down); arm left as cast2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/skyward2_knee_guide_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cell 1 holds a painted bald chibi boy punching, turned toward the right, his near arm stretched straight out ahead at chest height. Cell 4 holds the same boy standing at rest. Leave cells 1 and 4 exactly as they are. Cell 2 holds the same boy with the same arms, but his hips and legs are drawn as a flat BLUE shape: a guide for the pose. Repaint ONLY cell 2: keep his head, body and BOTH ARMS exactly as they are, pixel for pixel, including the near arm stretched straight out ahead and the other fist low at his chest. Paint over the blue shape so it becomes his real hips and legs, following the blue shape exactly, like the boy jumping: his front knee lifted high in front of him with the lower leg hanging down below the knee, and his back leg straight below him, pointing down. He wears the same brown shorts as in cell 1 over the tops of his legs, with bare legs and bare feet below, in the same painting style and dark outline as the rest of him. Keep his head bald with no face, no hair, no nose and no other features. Each fist is one round closed mitten with no fingers. He has exactly two arms and two legs. No blue may remain. Do not add any weapon, object, ground, dust, shadow, motion lines, text or extra figure. Leave cells 3 and 5 to 8 empty. Keep the background flat pure magenta #FF00FF and keep the grid lines. No text, no labels."
+  }
  }
 ]
 }
