@@ -8,8 +8,9 @@ extends TestCase
 const Scan := preload("res://tests/content/content_scan.gd")
 
 ## The achievements as they were when they lived in code, in order. Saved characters keep
-## these ids and Steamworks these Steam names, so none may change. level_50's goal is level 50
-## again (it was 35 while that was the cap).
+## these ids and Steamworks these Steam names, so none may change. Three were made solo goals
+## when the game became single player first (Cory, 2026-10-16): level_50 (now every boss),
+## well_liked (a boss untouched) and dealmaker (every map of a zone).
 const SHIPPED := [
 	{"id": "first_hunt", "steam": "ACH_FIRST_HUNT", "title": "First Hunt", "text": "Defeat a monster.", "kind": "kills", "goal": 1},
 	{"id": "hunter", "steam": "ACH_HUNTER", "title": "Hunter", "text": "Defeat 500 monsters.", "kind": "kills", "goal": 500},
@@ -19,7 +20,7 @@ const SHIPPED := [
 	{"id": "level_5", "steam": "REACH_LEVEL_5", "title": "Growing Up", "text": "Reach level 5.", "kind": "level", "goal": 5},
 	{"id": "level_10", "steam": "ACH_LEVEL_10", "title": "Finding Your Feet", "text": "Reach level 10.", "kind": "level", "goal": 10},
 	{"id": "level_30", "steam": "ACH_LEVEL_30", "title": "Seasoned", "text": "Reach level 30.", "kind": "level", "goal": 30},
-	{"id": "level_50", "steam": "ACH_LEVEL_50", "title": "Hero of Tera", "text": "Reach level 50.", "kind": "level", "goal": 50},
+	{"id": "level_50", "steam": "ACH_LEVEL_50", "title": "Hero of Tera", "text": "Defeat every boss in Tera.", "kind": "boss_kinds", "goal": 8},
 	{"id": "first_job", "steam": "ACH_FIRST_JOB", "title": "A Calling", "text": "Take up a job.", "kind": "job", "goal": 1},
 	{"id": "helper", "steam": "ACH_HELPER", "title": "Helping Hand", "text": "Finish 10 quests.", "kind": "quests", "goal": 10},
 	{"id": "hero_for_hire", "steam": "ACH_HERO_FOR_HIRE", "title": "Hero for Hire", "text": "Finish 30 quests.", "kind": "quests", "goal": 30},
@@ -32,9 +33,9 @@ const SHIPPED := [
 	{"id": "nest_egg", "steam": "ACH_NEST_EGG", "title": "Nest Egg", "text": "Hold 100,000 Dawnshards.", "kind": "shards", "goal": 100000},
 	{"id": "take_a_seat", "steam": "ACH_TAKE_A_SEAT", "title": "Take a Seat", "text": "Sit down for a rest.", "kind": "sat", "goal": 1},
 	{"id": "best_friend", "steam": "ACH_BEST_FRIEND", "title": "Best Friend", "text": "Bring out a pet.", "kind": "pets", "goal": 1},
-	{"id": "well_liked", "steam": "ACH_WELL_LIKED", "title": "Well Liked", "text": "Reach 10 fame.", "kind": "fame", "goal": 10},
+	{"id": "well_liked", "steam": "ACH_WELL_LIKED", "title": "Untouchable", "text": "Defeat a boss without taking a hit on its map.", "kind": "clean_bosses", "goal": 1},
 	{"id": "guildmate", "steam": "ACH_GUILDMATE", "title": "Guildmate", "text": "Join a guild.", "kind": "guild", "goal": 1},
-	{"id": "dealmaker", "steam": "ACH_DEALMAKER", "title": "Dealmaker", "text": "Finish a trade.", "kind": "deals", "goal": 1},
+	{"id": "dealmaker", "steam": "ACH_DEALMAKER", "title": "Seen It All", "text": "Visit every map of a zone.", "kind": "zones_explored", "goal": 1},
 ]
 
 const DIR := "res://data/achievements"
@@ -151,6 +152,10 @@ func test_goals_are_reachable() -> void:
 			check(a.goal <= Content.monsters.size(), "achievement %s: %d pages, but there are %d monsters" % [a.id, a.goal, Content.monsters.size()])
 		if a.kind == "quests":
 			check(a.goal <= Content.quests.size(), "achievement %s: finish %d quests, but there are %d" % [a.id, a.goal, Content.quests.size()])
+		if a.kind == "boss_kinds":
+			check_eq(a.goal, Achievements.bosses_on_maps(), "achievement %s: every boss means the bosses on maps" % a.id)
+		if a.kind == "zones_explored":
+			check(a.goal <= Content.regions.size(), "achievement %s: %d zones, but there are %d" % [a.id, a.goal, Content.regions.size()])
 
 func test_find_returns_each_achievement() -> void:
 	for a in Achievements.all():

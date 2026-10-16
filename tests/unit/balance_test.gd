@@ -25,7 +25,7 @@ func test_band_is_sane() -> void:
 func test_every_line_beats_its_level_in_band() -> void:
 	for lvl in SAMPLE_LEVELS:
 		var m := _monster_near(lvl)
-		for j in Balance.LINES:
+		for j in Balance.lines():
 			var hits := Balance.hits_to_kill(Balance.typical(j, m.level), m)
 			check_between(hits, Balance.BAND.x - 0.2, Balance.BAND.y, "%s vs %s (Lv %d)" % [j, m.id, m.level])
 
@@ -35,7 +35,7 @@ func test_typical_is_beginner_before_ten() -> void:
 	check_eq(Balance.typical(&"mage", 10).job.id, &"mage", "mage at 10")
 
 func test_typical_spends_all_points() -> void:
-	for j in Balance.LINES:
+	for j in Balance.lines():
 		var c := Balance.typical(j, 20)
 		var start: StatBlock = Content.job(&"beginner").starting_stats
 		var spent := 0
@@ -46,7 +46,7 @@ func test_typical_spends_all_points() -> void:
 		check(c.base.value(main) - start.value(main) >= spent / 2, "%s puts most into the main stat" % j)
 
 func test_typical_wears_a_weapon_it_can_use() -> void:
-	for j in Balance.LINES:
+	for j in Balance.lines():
 		var c := Balance.typical(j, 20)
 		check(c.gear.weapon() != null, "%s has a weapon" % j)
 		var e := c.gear.weapon()
@@ -55,13 +55,13 @@ func test_typical_wears_a_weapon_it_can_use() -> void:
 
 func test_typical_gets_stronger_with_level() -> void:
 	var m := _monster_near(20)
-	for j in Balance.LINES:
+	for j in Balance.lines():
 		var low := Balance.hits_to_kill(Balance.typical(j, 12), m)
 		var high := Balance.hits_to_kill(Balance.typical(j, 30), m)
 		check(high < low, "%s at 30 kills faster than at 12" % j)
 
 func test_main_attack_is_known_to_the_job() -> void:
-	for j in Balance.LINES:
+	for j in Balance.lines():
 		var c := Balance.typical(j, 20)
 		var attack: Array = Balance.main_attack(c)
 		var s: SkillDef = attack[0]

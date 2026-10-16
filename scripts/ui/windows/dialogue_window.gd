@@ -157,13 +157,14 @@ func _travel_list() -> void:
 	for i in npc.def.travel.size():
 		var r := npc.def.travel[i]
 		var dest: MapDef = Content.maps.get(r.target_map)
-		if dest == null:
+		if dest == null or not r.open_to(Game.me):
 			continue
 		opts.append([travel_label(r, dest), func() -> void:
 			Net.ask(&"req_travel", [npc.def.id, i])
 			visible = false])
+	var none := opts.is_empty()
 	opts.append(["Back", func() -> void: _main_page(greeting)])
-	_page("Where to?", opts)
+	_page("You haven't been to any of the towns on this route yet." if none else "Where to?", opts)
 
 ## "Wagon to Fern Hollow (Lv. 6-12, 150 Dawnshards)": the trip, who the destination is for
 ## (its MapDef.level_text; towns, whose text just says "Town", leave it out) and the fare.

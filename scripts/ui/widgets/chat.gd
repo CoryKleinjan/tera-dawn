@@ -3,7 +3,8 @@ extends Control
 ## The chat box at the bottom left. Enter opens a line to type in; what you type is said
 ## to everyone on the map (it also shows in a bubble over your head). Start with a command
 ## for other channels: /w Name (whisper), /p (party), /g (guild), /b (buddies). /help lists
-## the rest. Lines fade after a while unless the box is open.
+## the rest. Lines fade after a while unless the box is open. Playing alone, there's no one
+## to talk to, so the box stays out of the way: only the last few lines show, briefly.
 
 const W := 380.0
 const LINES := 7
@@ -12,6 +13,9 @@ const LINE_H := 17.0
 const TOP := 13.0
 const INSET := 12.0
 const FADE_TICKS := 900
+## Playing alone: how long a line shows and how many show at once (the box closed).
+const SOLO_FADE_TICKS := 240
+const SOLO_LINES := 3
 const COLORS := {"all": Color("f4ecff"), "pet": Palette.PET, "whisper": Color("ff9ee6"), "whisper_sent": Color("ff9ee6"),
 	"party": Color("ffb36b"), "guild": Palette.GUILD, "buddy": Color("8fe0ff"), "system": Palette.MUTED}
 
@@ -94,13 +98,17 @@ func add(kind: String, from: String, text: String) -> void:
 		_:
 			shown = "%s: %s" % [from, text]
 	for l in DrawUtil.wrap_text(Game.ui_font, shown, 13, W - INSET * 2.0):
-		lines.append({"text": l, "color": COLORS.get(kind, Palette.MIST), "t": FADE_TICKS})
+		lines.append({"text": l, "color": COLORS.get(kind, Palette.MIST), "t": SOLO_FADE_TICKS if solo() else FADE_TICKS})
 	while lines.size() > 60:
 		lines.pop_front()
 
+## Playing alone (no one else can join).
+static func solo() -> bool:
+	return Net.mode == Net.Mode.SINGLE
+
 func _draw() -> void:
 	var open_box := field.visible
-	var shown := lines.slice(maxi(0, lines.size() - LINES))
+	var shown := lines.slice(maxi(0, lines.size() - (LINES if open_box or not solo() else SOLO_LINES)))
 	if open_box:
 		# as wide as the line to type in under it, ending just above it
 		UiSkin.draw_box(self, UiSkin.box("social/chat_frame", 20, 14), Rect2(0, -6, W, field.position.y + 4), 0.7)

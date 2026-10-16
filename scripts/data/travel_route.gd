@@ -9,3 +9,10 @@ extends Resource
 @export var price := 0
 ## How it's described: "Ship", "Wagon", "Balloon".
 @export var by := "Wagon"
+## Only offered once the traveller has been to `target_map` (coaches go back to towns
+## you know, not ahead of you).
+@export var needs_visit := false
+
+## Whether `c` may take this trip.
+func open_to(c: Character) -> bool:
+	return not needs_visit or c.visited.has(String(target_map))

@@ -69,6 +69,7 @@ func add_player(p: SimPlayer, x: float) -> void:
 	p.position = Vector2(x, layout.platforms[0].y)
 	p.climbing = false
 	p.since_move = 0
+	p.hurt_here = false
 	p.character.map_id = def.id
 	players[p.peer] = p
 	# the newcomer needs everyone's info, and everyone needs theirs: resend it all
@@ -195,19 +196,7 @@ func use_skill(p: SimPlayer, skill: SkillDef, aim := Hitbox.Aim.AHEAD) -> int:
 		hit_mobs.append(m)
 		landed = landed or _any_landed(hits)
 	if not targets.is_empty():
-		var extra := _bounce_target(targets, hit_mobs)
-		var element := p.character.skills.element_buff()
-		# Ricochet: a shot bounces on to one more monster
-		var bounce := p.character.skills.bounce() if skill.is_ranged() else 0.0
-		if bounce > 0.0 and extra:
-			lines.append([extra.index, _strike(p, skill, lvl, extra, bounce)])
-			hit_mobs.append(extra)
-			extra = _bounce_target(targets, hit_mobs)
-		# Elemental Edge set to lightning: a spark jumps to one more monster
-		if not element.is_empty() and p.character.skills.element == SkillBook.Element.LIGHTNING and extra:
-			var spark: float = element[0].spark_at(element[1])
-			lines.append([extra.index, _strike(p, skill, lvl, extra, spark, 1)])
-			hit_mobs.append(extra)
+		_extra_strikes(p, skill, lvl, targets, hit_mobs, lines)
 		if skill.marks():
 			p.mark = targets[0].index
 			p.mark_skill = skill
@@ -230,6 +219,21 @@ func use_skill(p: SimPlayer, skill: SkillDef, aim := Hitbox.Aim.AHEAD) -> int:
 	for m in killed:
 		kill_mob(m, p)
 	return targets.size()
+
+## Hits beyond the skill's own targets, added to `hit_mobs` and `lines`: Ricochet bounces
+## a shot on to one more monster, and Elemental Edge set to lightning sparks to another.
+func _extra_strikes(p: SimPlayer, skill: SkillDef, lvl: int, targets: Array[SimMob], hit_mobs: Array[SimMob], lines: Array) -> void:
+	var extra := _bounce_target(targets, hit_mobs)
+	var bounce := p.character.skills.bounce() if skill.is_ranged() else 0.0
+	if bounce > 0.0 and extra:
+		lines.append([extra.index, _strike(p, skill, lvl, extra, bounce)])
+		hit_mobs.append(extra)
+		extra = _bounce_target(targets, hit_mobs)
+	var element := p.character.skills.element_buff()
+	if not element.is_empty() and p.character.skills.element == SkillBook.Element.LIGHTNING and extra:
+		var spark: float = element[0].spark_at(element[1])
+		lines.append([extra.index, _strike(p, skill, lvl, extra, spark, 1)])
+		hit_mobs.append(extra)
 
 ## Hits `m` with `skill` (at `lvl`) for `share` of the usual damage, `count` lines (the
 ## skill's own, plus extras on a hexed monster), and takes the damage off. Returns the lines
@@ -261,6 +265,12 @@ static func _any_landed(hits: Array) -> bool:
 ## What else a hit does to a monster that's still standing: the skill's slow, root and hex,
 ## and the player's running element (Elemental Edge: fire burns, ice chills).
 func _after_hit(p: SimPlayer, skill: SkillDef, lvl: int, m: SimMob, hits: Array) -> void:
+	_control(p, skill, lvl, m)
+	if _any_landed(hits):
+		_element_effect(p, m, hits)
+
+## What `skill` does to `m` beyond damage: slows, roots, hexes, pins, launches, stuns, pulls.
+func _control(p: SimPlayer, skill: SkillDef, lvl: int, m: SimMob) -> void:
 	if skill.slow_ticks(lvl) > 0:
 		m.slow(skill.slow_ticks(lvl))
 	if skill.root_ticks(lvl) > 0:
@@ -275,8 +285,11 @@ func _after_hit(p: SimPlayer, skill: SkillDef, lvl: int, m: SimMob, hits: Array)
 		m.stun(skill.stun_ticks(lvl))
 	if skill.pull > 0.0:
 		m.drag_to(p.position.x + p.face * skill.pull)
+
+## Elemental Edge on a blow that landed: fire sets `m` burning for a share of `hits`, ice slows it.
+func _element_effect(p: SimPlayer, m: SimMob, hits: Array) -> void:
 	var element := p.character.skills.element_buff()
-	if element.is_empty() or not _any_landed(hits):
+	if element.is_empty():
 		return
 	var buff: SkillDef = element[0]
 	var blvl: int = element[1]
@@ -381,13 +394,17 @@ func kill_mob(m: SimMob, killer: SimPlayer) -> void:
 	for i in m.children.size():
 		m.children[i].wake(m.position.x + (i - (m.children.size() - 1) / 2.0) * 30.0, killer.peer)
 	server.give_xp(killer, m.def.exp_reward)
+	# the killer's party on this map shares the EXP, and the kill counts for their quests too
+	var credited: Array[SimPlayer] = [killer]
 	for share in server.social.party_shares(killer, m.def.exp_reward):
 		server.give_xp(share[0], share[1])
-	server.quests.record_kill(killer, m.def)
+		credited.append(share[0])
+	for p in credited:
+		server.quests.record_kill(p, m.def)
 	if m.def.boss:
 		# everyone at the fight beat it: its Monster Book page (and the arena's way home)
 		for p: SimPlayer in players.values():
-			if p != killer:
+			if not p in credited:
 				p.character.book.record_kill(m.def)
 			p.dirty_character = true
 	var loot := []
@@ -445,6 +462,7 @@ func hurt_player(p: SimPlayer, def: MonsterDef, from_x: float, power := 1.0) -> 
 	p.character.health.damage(dmg)
 	p.dirty_vitals = true
 	p.streak = 0
+	p.hurt_here = true
 	Net.send(p.peer, &"ev_hurt", [from_x])
 	if p.character.health.is_dead():
 		p.faint_t = SimPlayer.FAINT_TICKS

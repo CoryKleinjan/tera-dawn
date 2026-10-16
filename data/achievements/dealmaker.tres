@@ -6,8 +6,8 @@
 script = ExtResource("1_achievement_def")
 id = &"dealmaker"
 steam = "ACH_DEALMAKER"
-title = "Dealmaker"
-text = "Finish a trade."
-kind = "deals"
+title = "Seen It All"
+text = "Visit every map of a zone."
+kind = "zones_explored"
 goal = 1
 order = 240

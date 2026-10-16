@@ -23,7 +23,7 @@ func advance(p: SimPlayer, next: JobDef) -> void:
 	p.dirty_character = true
 	p.dirty_vitals = true
 	p.map.broadcast(&"ev_effect", [EffectDef.CELEBRATE, p.position.x, p.position.y, 1, p.peer])
-	tell(p, "You are now a %s!" % next.display_name, Palette.SUN)
+	tell(p, "You are now %s!" % with_article(next.display_name), Palette.SUN)
 	Net.send(p.peer, &"ev_jingle", [ADVANCE_JINGLE])
 	if not next.advance_gifts.is_empty():
 		tell(p, "Your instructor hands you: %s." % next.gifts_text(), Palette.SUN)
@@ -72,3 +72,7 @@ func on_learn_skill(peer: int, skill_id: StringName) -> void:
 		return
 	p.dirty_character = true
 	p.dirty_vitals = true
+
+## "a Warrior", "an Archer".
+static func with_article(noun: String) -> String:
+	return ("an " if noun.substr(0, 1).to_lower() in ["a", "e", "i", "o", "u"] else "a ") + noun

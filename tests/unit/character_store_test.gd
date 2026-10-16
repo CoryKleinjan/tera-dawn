@@ -85,4 +85,43 @@ func test_saves_without_an_order_are_listed_by_name() -> void:
 	store.save(Character.create("Mo"))
 	store.save(Character.create("Al"))
 	DirAccess.remove_absolute(dir.path_join(CharacterStore.ORDER_FILE))
+	DirAccess.remove_absolute(dir.path_join(CharacterStore.ORDER_FILE + SafeFile.BACKUP))
 	check_eq(store.names(), ["Al", "Mo"] as Array[String], "by name")
+
+func test_a_save_keeps_the_last_good_one_as_a_backup() -> void:
+	store.create("Ann", NewCharacter.new())
+	var c := store.load_character("Ann")
+	c.level = 7
+	store.save(c)
+	var path := dir.path_join("ann.json")
+	check(FileAccess.file_exists(path + SafeFile.BACKUP), "the save before it is kept")
+	check(not FileAccess.file_exists(path + SafeFile.TEMP), "no half-written file left")
+	check_eq(store.load_character("Ann").level, 7, "the new save loads")
+
+func test_a_broken_save_loads_from_its_backup() -> void:
+	store.create("Ann", NewCharacter.new())
+	var c := store.load_character("Ann")
+	c.level = 7
+	store.save(c)
+	var f := FileAccess.open(dir.path_join("ann.json"), FileAccess.WRITE)
+	f.store_string("{\"name\": \"Ann\", \"lev") # cut off mid-write
+	f.close()
+	var back := store.load_character("Ann")
+	check(back != null, "still loads")
+	if back:
+		check_eq(back.level, 1, "from the save before")
+	check_eq(store.names(), ["Ann"] as Array[String], "still listed")
+
+func test_a_lost_save_is_found_from_its_backup() -> void:
+	store.create("Ann", NewCharacter.new())
+	store.save(store.load_character("Ann"))
+	DirAccess.remove_absolute(dir.path_join("ann.json"))
+	check(store.exists("Ann"), "still there")
+	check_eq(store.names(), ["Ann"] as Array[String], "still listed")
+
+func test_deleting_moves_the_backup_aside_too() -> void:
+	store.create("Ann", NewCharacter.new())
+	store.save(store.load_character("Ann"))
+	store.remove("Ann")
+	check(not store.exists("Ann"), "gone")
+	check_eq(store.names(), [] as Array[String], "not listed")

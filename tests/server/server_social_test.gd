@@ -165,6 +165,8 @@ func test_party_members_on_the_map_share_kill_exp() -> void:
 	check_eq(ann.character.xp, 10, "the killer gets it all")
 	check_eq(bob.character.xp, 4, "Bob on the map gets 40%")
 	check_eq(cat.character.xp, 0, "Cat in town gets nothing")
+	check_eq(bob.character.book.kills(d), 1, "the kill counts for Bob's book and quests too")
+	check_eq(cat.character.book.kills(d), 0, "but not Cat's")
 
 func test_a_fainted_party_member_gets_no_share() -> void:
 	_accept(2, "party", 3)

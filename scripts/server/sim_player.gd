@@ -44,6 +44,7 @@ var item_cd := 0      # ticks before another potion can be used
 var since_move := 0   # ticks since the last movement report
 var dodge_t := 0      # ticks nothing can hit them (a roll, see ServerMoves)
 var streak := 0       # attacks in a row that landed since they were last hit (SkillDef.streak_crit)
+var hurt_here := false # took damage since arriving on this map (a boss beaten untouched counts)
 ## The monster they've marked (SkillDef.mark_bonus, a SimMob index, -1 for none), the skill
 ## and level that marked it, and ticks left.
 var mark := -1

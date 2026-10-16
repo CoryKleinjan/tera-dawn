@@ -436,6 +436,20 @@ func test_beating_a_boss_opens_the_way_home_for_everyone_there() -> void:
 	h.ask(3, &"req_portal")
 	check_eq(bo.map.def.id, ServerHarness.TOWN, "Bo goes home through it")
 
+func test_a_boss_beaten_untouched_counts() -> void:
+	var boss := _boss([])
+	var map := h.field_with([ServerHarness.spawn(boss)])
+	var ann := h.join(2, "Ann", ServerHarness.FIELD, 300.0)
+	ServerHarness.no_cards(ann, boss)
+	map.kill_mob(map.mobs[0], ann)
+	check_eq(int(ann.character.counters.get(Counters.CLEAN_BOSSES, 0)), 1, "untouched")
+	ann.inv = 0
+	map.hurt_player(ann, boss, 0.0)
+	map.mobs[0].health.reset(boss.max_hp)
+	map.kill_mob(map.mobs[0], ann)
+	check_eq(int(ann.character.counters.get(Counters.CLEAN_BOSSES, 0)), 1, "a hit spoils it")
+	check_eq(int(ann.character.counters.get(Counters.BOSSES, 0)), 2, "both count as bosses")
+
 func test_a_boss_goes_for_whoever_hurt_it_most() -> void:
 	var map := h.field_with([ServerHarness.spawn(_boss([]))])
 	var m := map.mobs[0]

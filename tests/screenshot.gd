@@ -52,6 +52,15 @@ func _teleport(world: TDWorld, at: Vector2) -> void:
 	world.player.vel = Vector2.ZERO
 	_me().position = at
 
+## Moves the player to map `id` at `x` and waits for it to load.
+func _go(id: StringName, x := 300.0) -> void:
+	Net.server.enter_map(_me(), id, x)
+	await _physics(10)
+
+## The NPC with this id on the map the player is on.
+func _npc(world: TDWorld, id: StringName) -> TDNpc:
+	return world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == id)[0]
+
 ## Puts a monster somewhere on its platform (on the server, which the game then shows).
 func _place_mob(m: SimMob, x: float) -> void:
 	m.position.x = x
@@ -71,6 +80,7 @@ func _run() -> void:
 		await _shot("title")
 	for f in ["dawnling.json", "mira.json", "order.json"]:
 		DirAccess.remove_absolute("user://screenshot_characters/" + f)
+		DirAccess.remove_absolute("user://screenshot_characters/" + f + SafeFile.BACKUP)
 	world.hud.title._on_solo()
 	await _physics(2)
 	if only == "" or only == "creator":
@@ -99,7 +109,9 @@ func _run() -> void:
 	_me().dirty_character = true
 	var p := world.player
 	_me().inv = 100000
-	await _physics(2)
+	# new characters start in the village now; the shots below are set in the meadow
+	Net.server.enter_map(_me(), &"meadow", 1120)
+	await _physics(10)
 	if only == "" or only == "menu":
 		# The game menu, then each settings tab.
 		_teleport(world, Vector2(1120, 620))
@@ -137,9 +149,10 @@ func _run() -> void:
 		await _physics(3)
 		await _shot("action")
 	if only == "" or only == "village":
-		# The elder and shopkeeper by the village, with a few lines in the log and the chat.
-		var elder := world.npcs()[0]
-		_teleport(world, Vector2(elder.position.x - 40, 620))
+		# The elder in the village, with a few lines in the log and the chat.
+		await _go(Character.START_MAP)
+		var elder := _npc(world, &"village_elder")
+		_teleport(world, Vector2(elder.position.x - 40, elder.position.y))
 		p.face = 1
 		world.show_pickup(Content.item(&"moss_tuft"), 3)
 		world.add_log("Quest accepted: Moss for the Stall", Palette.SUN)
@@ -151,8 +164,9 @@ func _run() -> void:
 		world.hud.chat.lines.clear()
 	if only == "chat":
 		# Speech bubbles (short, two lines, a pet) and the open chat box with a few lines.
-		var elder := world.npcs()[0]
-		_teleport(world, Vector2(elder.position.x - 40, 620))
+		await _go(Character.START_MAP)
+		var elder := _npc(world, &"village_elder")
+		_teleport(world, Vector2(elder.position.x - 40, elder.position.y))
 		p.face = 1
 		await _physics(5)
 		world.show_chat("all", ch.name, "Hi!", 1)
@@ -168,8 +182,9 @@ func _run() -> void:
 		world.hud.chat.close()
 	if only == "" or only == "dialogue":
 		# Talking to the elder.
-		var elder := world.npcs()[0]
-		_teleport(world, Vector2(elder.position.x - 40, 620))
+		await _go(Character.START_MAP)
+		var elder := _npc(world, &"village_elder")
+		_teleport(world, Vector2(elder.position.x - 40, elder.position.y))
 		await _physics(5)
 		elder.talk()
 		await _frames(3)
@@ -177,8 +192,9 @@ func _run() -> void:
 		world.hud.windows["dialogue"].visible = false
 	if only == "" or only == "shop":
 		# Mira's shop with some loot to sell.
-		var mira: TDNpc = world.npcs()[1]
-		_teleport(world, Vector2(mira.position.x - 40, 620))
+		await _go(&"meadow_store")
+		var mira := _npc(world, &"shopkeeper")
+		_teleport(world, Vector2(mira.position.x - 40, mira.position.y))
 		ch.shards = 1250
 		for id in [&"boar_tusk", &"petal_wing", &"dewling_droplet"]:
 			ch.inventory.add(Content.item(id), randi_range(3, 40))
@@ -194,8 +210,9 @@ func _run() -> void:
 		ch.quests.accept(Content.quest(&"q02_moss_for_the_stall"))
 		ch.inventory.add(Content.item(&"moss_tuft"), 4)
 		_me().dirty_character = true
-		var elder := world.npcs()[0]
-		_teleport(world, Vector2(elder.position.x - 40, 620))
+		await _go(Character.START_MAP)
+		var elder := _npc(world, &"village_elder")
+		_teleport(world, Vector2(elder.position.x - 40, elder.position.y))
 		await _physics(5)
 		elder.talk()
 		var talk: TDDialogueWindow = world.hud.windows["dialogue"]
@@ -207,7 +224,8 @@ func _run() -> void:
 		world.hud.toggle_window("quests")
 	if only == "" or only == "jobs":
 		# Guide Sorrel's Magician page, then a Pirate (tinted hero) next to her.
-		var guide: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"guide_sorrel")[0]
+		await _go(Character.START_MAP)
+		var guide := _npc(world, &"guide_sorrel")
 		ch.level = maxi(ch.level, 8)
 		ch.base.intelligence = 20
 		_me().dirty_character = true
@@ -222,6 +240,7 @@ func _run() -> void:
 		talk.visible = false
 		ch.job = Content.job(&"beginner")
 	if only == "" or only == "skills":
+		await _go(&"meadow", 1120)
 		# A Warrior's skill book, quickslots and a running buff.
 		ch.job = Content.job(&"warrior")
 		ch.level = maxi(ch.level, 14)
@@ -245,6 +264,7 @@ func _run() -> void:
 		await _shot("skills")
 		world.hud.toggle_window("skills")
 	if only == "" or only == "ranged":
+		await _go(&"meadow", 1300)
 		# An Archer's Heartseeker in flight, and a Magician's spell from a second player.
 		ch.job = Content.job(&"archer")
 		ch.equipment.take(&"weapon")
@@ -541,14 +561,9 @@ func _run() -> void:
 			print("rope: the hero isn't on the rope at ", p.position)
 		await _shot("rope")
 	if only == "" or only == "hollow":
-		_teleport(world, Vector2(2530, 620))
-		await _physics(3)
-		Input.action_press("move_up")
-		await _physics(2)
-		Input.action_release("move_up")
+		await _go(&"hollow", 760)
 		_me().inv = 100000
-		_teleport(world, Vector2(760, 620))
-		await _physics(60)
+		await _physics(50)
 		var hollow: MapInstance = Net.server.maps[&"hollow"]
 		for m in hollow.mobs:
 			if m.def.id == &"fern_boar" and m.plat == hollow.layout.platforms[0]:
