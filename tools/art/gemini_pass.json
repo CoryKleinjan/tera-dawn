@@ -22453,7 +22453,7 @@
  {
   "id": "mshero_thief_hair_b7",
   "prompts": null,
-  "batch": "maple hero layers (edit)",
+  "batch": null,
   "with": null,
   "refs": [],
   "save": "mshero_thief_hair_b7.png",
@@ -22466,7 +22466,7 @@
   ],
   "anchor": null,
   "size": "2K",
-  "note": "2026-10-16 thread 'Hero pose review' cross-job check (Cory 17:15Z 'you need to reference similar poses', 17:16Z 'bandana still need their own hair', 17:17Z 'reference all jobs poses against eachother'): the thief bandana's own hair (front, back, fainted): locks below the bandana, none out of its top",
+  "note": "2026-10-16 thread 'Hero pose review' cross-job check (Cory 17:15Z 'you need to reference similar poses', 17:16Z 'bandana still need their own hair', 17:17Z 'reference all jobs poses against eachother'): the thief bandana's own hair (front, back, fainted): locks below the bandana, none out of its top HELD (Cory 18:48Z 'do the repaints'): flipped as it is, the bandana lies across his face on faint, so this sheet waits for Cory's own faint bandana placement; cell 3's guide is then rebuilt from it and \"batch\" set back to \"maple hero layers (edit)\".",
   "edit": {
    "base": "/mnt/project-files/art-sheets/maple-hero/bases/b7_bandana_hair_sil.png",
    "refs": [
