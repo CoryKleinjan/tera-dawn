@@ -95,11 +95,13 @@ func instance_key(id: StringName, p: SimPlayer) -> StringName:
 		return StringName("%s#%d" % [id, p.peer])
 	return id
 
-## Takes the player off their map, dropping a solo map's copy so it starts fresh next time.
+## Takes the player off their map. A map nobody is on any more (a solo map as soon as its
+## player leaves) is dropped, so it starts fresh next time: its monsters back, its ground
+## cleared. Defeated monsters only come back this way.
 func _off_map(p: SimPlayer) -> void:
 	p.map.remove_player(p)
 	p.map.broadcast(&"ev_player_left", [p.peer])
-	if p.map.def.solo:
+	if p.map.players.is_empty():
 		maps.erase(instance_key(p.map.def.id, p))
 
 ## Sends the player what changed about their character this tick.

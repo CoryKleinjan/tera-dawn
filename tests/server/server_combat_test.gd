@@ -1,6 +1,6 @@
 extends TestCase
 ## Attacks and skills against monsters on the server: what gets hit, damage, kills, Dawn
-## Essence, cooldowns, MP, buffs and monsters coming back.
+## Essence, cooldowns, MP, buffs and monsters staying down until the map loads fresh.
 
 const ServerHarness := preload("res://tests/framework/server_helpers.gd")
 
@@ -127,19 +127,42 @@ func test_dead_monsters_are_not_hit() -> void:
 	_attack()
 	check_eq(h.last(2, &"ev_skill")[5], [], "nothing to hit")
 
-func test_monster_respawns_with_full_hp_after_its_timer() -> void:
+func test_a_defeated_monster_stays_down_while_you_are_on_the_map() -> void:
 	_setup(5)
 	var m := map.mobs[0]
 	m.health.damage(4)
-	h.ask(2, &"req_skill", [&"basic_attack", p.position, p.face])
+	_attack()
 	check(m.dead, "defeated")
-	# 40 ticks of dying, then respawn_ticks (100)
-	h.step(139)
-	check(m.dead, "still gone one tick early")
-	h.step(1)
-	check(not m.dead, "back")
-	check_eq(m.health.hp, 5, "full HP")
-	check_eq(m.target, 0, "forgot who beat it")
+	h.step(3000)
+	check(m.dead, "still gone")
+
+func test_leaving_and_coming_back_brings_the_monsters_back_at_full_hp() -> void:
+	_setup(5)
+	var m := map.mobs[0]
+	m.health.damage(4)
+	_attack()
+	h.move_to(p, ServerHarness.TOWN)
+	check(not h.server.maps.has(ServerHarness.FIELD), "nobody on the field, so it's dropped")
+	h.move_to(p, ServerHarness.FIELD)
+	var fresh: MapInstance = h.server.maps[ServerHarness.FIELD]
+	check(fresh != map, "the field loads fresh")
+	check(not fresh.mobs[0].dead, "back")
+	check_eq(fresh.mobs[0].health.hp, 5, "full HP")
+
+func test_in_co_op_a_map_resets_only_once_everyone_has_left() -> void:
+	_setup(5)
+	var bob := h.join(3, "Bob", ServerHarness.FIELD, 300.0)
+	var m := map.mobs[0]
+	m.health.damage(4)
+	_attack()
+	h.move_to(p, ServerHarness.TOWN)
+	h.move_to(p, ServerHarness.FIELD)
+	check(h.server.maps[ServerHarness.FIELD] == map, "Bob stayed, so the field kept going")
+	check(m.dead, "and the monster is still gone")
+	h.move_to(p, ServerHarness.TOWN)
+	h.move_to(bob, ServerHarness.TOWN)
+	h.move_to(p, ServerHarness.FIELD)
+	check(not h.server.maps[ServerHarness.FIELD].mobs[0].dead, "everyone left, so it's back")
 
 func test_skills_you_dont_know_are_refused() -> void:
 	_setup(1000)

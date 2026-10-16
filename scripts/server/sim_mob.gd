@@ -3,7 +3,8 @@ extends RefCounted
 ## A monster as the server runs it: it patrols its platform (or the stretch of it its
 ## SpawnDef allows), targets a player who comes in sight or hits it, chases them while
 ## they're level with it and attacks with its moves (MobMoves), hurts players it touches,
-## and comes back some time after it is defeated. Flying monsters do the same in the air.
+## and stays down once defeated until the map loads fresh (see TDServer._off_map).
+## Flying monsters do the same in the air.
 ## Depending on its MonsterDef it may hop, stand still, or split into smaller monsters
 ## (those wait asleep until their parent is defeated). Bosses target whoever has hurt
 ## them most lately, leap to the player's platform, and get a second wind at half HP.
@@ -79,7 +80,6 @@ var aggro := 0      # ticks left targeting `target`
 var target := 0     # peer id of the player it's after
 var dead := false
 var death_t := 0
-var respawn := 0
 var phase := 0.0
 var show_hp := 0    # ticks left showing the HP bar
 var hop := 0.0      # height above the platform (a hop or a move; negative dives down)
@@ -91,7 +91,8 @@ var shots := []
 ## The monsters this one splits into (see MapDef.roster), and the one it split off.
 var children: Array[SimMob] = []
 var parent: SimMob
-## A split-off monster waiting for its parent to be defeated.
+## Out of play: a split-off monster waiting for its parent to be defeated, or one that
+## was defeated and has faded away.
 var asleep := false
 ## Waits for the map's tear and stays down once defeated (SpawnDef.from_tear).
 var from_tear := false
@@ -213,7 +214,6 @@ func hurt(from_face: int, by: int, force := 1.0) -> void:
 func die() -> void:
 	dead = true
 	death_t = DEATH_FADE_TICKS
-	respawn = randi_range(def.respawn_ticks.x, def.respawn_ticks.y)
 	moves.cancel()
 	hop = 0.0
 	tossed = false
@@ -248,12 +248,8 @@ func step() -> void:
 	if dead:
 		if death_t > 0:
 			death_t -= 1
-		elif parent or from_tear:
+		else:
 			asleep = true
-		elif not asleep:
-			respawn -= 1
-			if respawn <= 0:
-				_reset()
 		return
 	if show_hp > 0:
 		show_hp -= 1

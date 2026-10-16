@@ -14,8 +14,9 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
    is too big or small next to the hero.
 3. Add drops: each `DropEntry` is an item, a chance and an amount range.
 4. Optional: `flying` with `hover_height`, `boss`, a `light_color` or `aura_color` for
-   glowing monsters, a `tint` (one sprite can stand in for several monsters), and
-   `respawn_ticks`.
+   glowing monsters, and a `tint` (one sprite can stand in for several monsters).
+   Defeated monsters don't come back on a timer: a map nobody is on any more is dropped
+   (`TDServer._off_map`) and loads fresh, monsters and all, when someone next enters.
 5. Give it one or two `moves` (three, all different, for a boss) from `data/monster_moves/`
    (see below), and a `sight` (how far away it notices players; starters 120, shooters 340,
    bosses 700).

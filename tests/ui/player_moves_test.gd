@@ -17,7 +17,6 @@ func before_each() -> void:
 	# meadow monsters come after you: keep them out of the way
 	for m in ui.player().map.mobs:
 		m.dead = true
-		m.respawn = 1 << 30
 
 func after_each() -> void:
 	Input.action_release("move_up")
