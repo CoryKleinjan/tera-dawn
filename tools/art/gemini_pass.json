@@ -17730,6 +17730,31 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cell 4 holds a painted bald chibi boy standing at rest, turned toward the right, in a cream undershirt with rolled sleeves and brown shorts, barefoot. Leave cell 4 exactly as it is. Cells 1 and 2 each hold a flat colour GUIDE of the same boy in a new pose: the GREEN shape is his head, body, legs and his far arm with its fist held low behind his hip; the BLUE shape is his NEAR arm, the arm closest to the viewer, which crosses IN FRONT of his chest, below his chin, and reaches up and forward to a round closed mitten fist at the end of the blue shape. Paint the SAME boy as cell 4 over each guide, covering the guide completely so no flat green or blue is left: same size, same outline as the guide, his body turned toward the right. The raised arm is always the BLUE one: it starts at the shoulder nearest the viewer and is painted ON TOP of his chest and shirt, with his far arm mostly hidden behind his body and only its low fist showing beside his hip. Cell 1 is casting a spell, feet on the ground; cell 2 is leaping into an uppercut with one knee raised. He is bald, with no face and no hair: keep his head bare exactly like the boy in cell 4. No arm, hand or fist ever crosses or touches his head. Each fist is one round closed mitten with no fingers. He has exactly two arms and two legs. Do not add any weapon, object, ground, dust, motion lines, text or extra figure. Leave cells 3 and 5 to 8 empty. Keep the background flat pure magenta #FF00FF and keep the grid lines. Style: exactly like the boy in cell 4 (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the attached picture. No text, no labels."
   }
+ },
+ {
+  "id": "mshero_body_skill_poses",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_skill_poses.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 00:27Z 'Do it' to the priced ~$0.07 plan): totally new cast1, cast2, skyward1, skyward2 body poses over drawn colour guides (green body, blue near arm).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/new_skill_poses_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cell 4 holds a painted bald chibi boy standing at rest, turned toward the right, in a cream undershirt with rolled sleeves and brown shorts, barefoot. Leave cell 4 exactly as it is. Cells 1, 2, 3 and 5 each hold a rough flat colour GUIDE of the same boy in a new pose: the GREEN shapes are his head, body, legs and his far arm; the BLUE shape is his NEAR arm, the arm closest to the viewer, ending in his near fist. Paint the SAME boy as cell 4 over each guide in that pose, covering the guide completely so no flat green or blue is left: same size as cell 4, the same proportions as cell 4 (big round head, short body), turned toward the right. The blue arm is always the near arm, painted ON TOP of his body; the far arm is mostly behind his body with only its fist showing. Cell 1: winding up a spell, knees bent, his near fist pulled back low beside his hip, the far fist low in front. Cell 2: casting, stepping forward, his near arm thrust straight out ahead of him at chest height, below his chin, the far fist low. Cell 3: crouching low to spring, his near fist down and behind him near the ground. Cell 5: springing up into the air with one knee raised, his near arm swept up high and forward, out in front of him and well clear of his head. He is bald, with no face and no hair: keep his head bare exactly like the boy in cell 4. No arm, hand or fist ever crosses or touches his head or face, and both fists are visible. Each fist is one round closed mitten with no fingers. He has exactly two arms and two legs. Do not add any weapon, object, ground, dust, motion lines, text or extra figure. Leave cells 6 to 8 empty. Keep the background flat pure magenta #FF00FF and keep the grid lines. Style: exactly like the boy in cell 4 (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the attached picture. No text, no labels."
+  }
  }
 ]
 }
