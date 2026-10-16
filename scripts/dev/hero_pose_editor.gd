@@ -464,7 +464,8 @@ func _delete_here() -> void:
 		_changed(l.owner)
 
 ## Puts the picked piece on this frame with its own painting for this frame (each piece has one
-## painting per pose); a held piece starts where the previous frame had it.
+## painting per pose), or one it borrows when it has none for this frame (_nearest_art); a held
+## piece starts where the previous frame had it.
 func _add_here() -> void:
 	var l := _sel()
 	if l == null:
@@ -482,11 +483,26 @@ func _add_here() -> void:
 	var f := l.frames()
 	if f == null:
 		return
-	if not f.has_animation(_f()):
-		_status.text = "%s has no painting for %s" % [_name(l), _f()]
+	var art := _f() if f.has_animation(_f()) else _nearest_art(l)
+	if art == &"":
+		_status.text = "%s has no painting at all" % _name(l)
 		return
-	l.set_frame_art(_f(), _f())
+	l.set_frame_art(_f(), art)
 	_changed(l.owner)
+	if art != _f():
+		_status.text = "%s has no painting for %s: showing its %s painting, move it into place" % [_name(l), _f(), art]
+
+## The painting a piece with none of its own for this frame borrows: the one it shows on the
+## nearest earlier frame, else its first idle painting, else any it has; &"" when it has none.
+func _nearest_art(l: HeroBody.Layer) -> StringName:
+	for i in range(_frame - 1, _frame - _frames.size(), -1):
+		var a := l.art(_frames[posmod(i, _frames.size())])
+		if a != &"" and l.frames().has_animation(a):
+			return a
+	if l.frames().has_animation(&"idle1"):
+		return &"idle1"
+	var names := l.frames().get_animation_names()
+	return StringName(names[0]) if names.size() > 0 else &""
 
 ## Puts the picked piece back on this frame: where it is painted, or a held piece where it was
 ## last saved.
