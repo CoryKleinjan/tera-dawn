@@ -22553,7 +22553,7 @@
  {
   "id": "mshero_archer_hood_b10f",
   "prompts": null,
-  "batch": null,
+  "batch": "maple hero layers (edit)",
   "with": null,
   "refs": [],
   "save": "mshero_archer_hood_b10f.png",
@@ -22566,7 +22566,7 @@
   ],
   "anchor": null,
   "size": "2K",
-  "note": "2026-10-16 thread 'Hero pose review' (Cory 20:21Z 'the archer hood isnt supposed to have shoulder parts attached to the hood', 'THIS IS A RULE: NONE OF THE HELMETS SHOULD EVER HAVE SHOULDER PARTS ATTACHED'): the Archer hood's front (idle1, idle2, walk1, walk2, jump, walk3) paintings without the cape on its bottom edge; the hood ends at his neck",
+  "note": "2026-10-16 thread 'Hero pose review' (Cory 20:21Z 'the archer hood isnt supposed to have shoulder parts attached to the hood', 'THIS IS A RULE: NONE OF THE HELMETS SHOULD EVER HAVE SHOULDER PARTS ATTACHED'): the Archer hood's front (idle1, idle2, walk1, walk2, jump, walk3) paintings without the cape on its bottom edge; the hood ends at his neck. Released by Cory 20:33Z (\"yes\") to the priced line 20:29Z (\"Paint the Archer hood again without the cape, so it ends at his neck: 2 sheets (front and back views) for about $0.14? Yes or no.\").",
   "edit": {
    "base": "/mnt/project-files/art-sheets/maple-hero/bases/b10_hood_front_base.png",
    "refs": [],
@@ -22576,7 +22576,7 @@
  {
   "id": "mshero_archer_hood_b10b",
   "prompts": null,
-  "batch": null,
+  "batch": "maple hero layers (edit)",
   "with": null,
   "refs": [],
   "save": "mshero_archer_hood_b10b.png",
@@ -22589,7 +22589,7 @@
   ],
   "anchor": null,
   "size": "2K",
-  "note": "2026-10-16 thread 'Hero pose review' (Cory 20:21Z 'the archer hood isnt supposed to have shoulder parts attached to the hood', 'THIS IS A RULE: NONE OF THE HELMETS SHOULD EVER HAVE SHOULDER PARTS ATTACHED'): the Archer hood's back (rope1, rope2, rope_hold, ladder1, ladder_hold, back) paintings without the cape on its bottom edge; the hood ends at his neck",
+  "note": "2026-10-16 thread 'Hero pose review' (Cory 20:21Z 'the archer hood isnt supposed to have shoulder parts attached to the hood', 'THIS IS A RULE: NONE OF THE HELMETS SHOULD EVER HAVE SHOULDER PARTS ATTACHED'): the Archer hood's back (rope1, rope2, rope_hold, ladder1, ladder_hold, back) paintings without the cape on its bottom edge; the hood ends at his neck. Released by Cory 20:33Z (\"yes\") to the priced line 20:29Z (\"Paint the Archer hood again without the cape, so it ends at his neck: 2 sheets (front and back views) for about $0.14? Yes or no.\").",
   "edit": {
    "base": "/mnt/project-files/art-sheets/maple-hero/bases/b10_hood_back_base.png",
    "refs": [],
