@@ -414,7 +414,8 @@ func test_quest_pages_list_what_the_log_holds() -> void:
 					check_eq(s, QuestLog.Status.AVAILABLE, "%s available" % q.id)
 				TDQuestWindow.Page.DONE:
 					check(me.quests.done.has(q.id), "%s done" % q.id)
-		for i in listed.size():
+		# rows past the first screenful scroll into view (test_quest_done_page_lists_every_finished_quest)
+		for i in mini(listed.size(), TDQuestWindow.ROWS):
 			var row := log.row_rect(i)
 			if row.end.y > log.size.y:
 				fail("%s: row %d (%s) runs off the bottom of the window" % [TDQuestWindow.PAGE_NAMES[page], i, listed[i].id])

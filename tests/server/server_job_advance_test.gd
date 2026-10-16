@@ -168,7 +168,7 @@ func test_switching_jobs_drops_the_old_skills_and_hands_back_their_essence() -> 
 	check_eq(c.job.id, &"warrior", "the Magician's Job Test first")
 	check(h.told(2, "Pass the Job Test first."), "told why")
 	check_eq(c.skills.level(strike), 1, "skills kept until then")
-	_ready_for_mage()
+	c.quests.done[mage.advance_quest.id] = true
 	_advance()
 	check_eq(c.job, mage, "a Magician now")
 	check_eq(c.skills.level(strike), 0, "Power Strike forgotten")
