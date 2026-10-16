@@ -49,7 +49,7 @@
       "gravity2",
       "ambush1",
       "ambush2",
-      "anchor1",
+      "",
       "anchor2"
     ],
     [
@@ -125,7 +125,6 @@
         "skyward2": "hero_body:skyward2",
         "gravity2": "hero_body:gravity2",
         "ambush1": "hero_body:ambush1",
-        "anchor1": "hero_body:anchor1",
         "anchor2": "hero_body:anchor2",
         "pinning": "hero_body:pinning",
         "leap": "hero_body:leap",
@@ -311,12 +310,6 @@
         "ambush1": {
           "frames": [
             "ambush1"
-          ],
-          "fps": 1
-        },
-        "anchor1": {
-          "frames": [
-            "anchor1"
           ],
           "fps": 1
         },

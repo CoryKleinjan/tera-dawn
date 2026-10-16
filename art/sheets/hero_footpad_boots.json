@@ -49,7 +49,7 @@
       "gravity2",
       "ambush1",
       "ambush2",
-      "anchor1",
+      "",
       "anchor2"
     ],
     [
@@ -120,7 +120,6 @@
         "crouch": "hero_footpad_boots:crouch",
         "gravity2": "hero_footpad_boots:gravity2",
         "ambush1": "hero_footpad_boots:ambush1",
-        "anchor1": "hero_footpad_boots:anchor1",
         "anchor2": "hero_footpad_boots:anchor2",
         "pinning": "hero_footpad_boots:pinning",
         "leap": "hero_footpad_boots:leap",
@@ -286,12 +285,6 @@
         "ambush1": {
           "frames": [
             "ambush1"
-          ],
-          "fps": 1
-        },
-        "anchor1": {
-          "frames": [
-            "anchor1"
           ],
           "fps": 1
         },

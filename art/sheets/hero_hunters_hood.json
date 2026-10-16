@@ -83,7 +83,6 @@
         "skyward2": "hero_hunters_hood:idle1",
         "gravity2": "hero_hunters_hood:idle1",
         "ambush1": "hero_hunters_hood:idle1",
-        "anchor1": "hero_hunters_hood:idle1",
         "anchor2": "hero_hunters_hood:idle1",
         "pinning": "hero_hunters_hood:idle1",
         "leap": "hero_hunters_hood:idle1",
@@ -229,12 +228,6 @@
         "ambush1": {
           "frames": [
             "ambush1"
-          ],
-          "fps": 1
-        },
-        "anchor1": {
-          "frames": [
-            "anchor1"
           ],
           "fps": 1
         },

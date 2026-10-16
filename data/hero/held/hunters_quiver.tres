@@ -9,7 +9,6 @@ frames = ExtResource("2_frames")
 anchor = Vector2(39.0, 41.5)
 pins = {
 &"ambush1": Vector4(124.7, 115.3, 18, 0),
-&"anchor1": Vector4(110.1, 103.2, 1.5, 0),
 &"anchor2": Vector4(92.1, 107.4, -6, 0),
 &"backstep": Vector4(102.9, 90.4, 1.5, 0),
 &"cast1": Vector4(114, 100, 0, 0),

@@ -39,7 +39,7 @@
       "gravity2",
       "ambush1",
       "ambush2",
-      "anchor1",
+      "",
       "anchor2"
     ],
     [
@@ -104,7 +104,6 @@
         "pistol2": "hero_hands:pistol2",
         "gravity2": "hero_hands:gravity2",
         "ambush1": "hero_hands:ambush1",
-        "anchor1": "hero_hands:anchor1",
         "pinning": "hero_hands:pinning",
         "leap": "hero_hands:leap",
         "backstep": "hero_hands:backstep",
@@ -231,12 +230,6 @@
         "ambush1": {
           "frames": [
             "ambush1"
-          ],
-          "fps": 1
-        },
-        "anchor1": {
-          "frames": [
-            "anchor1"
           ],
           "fps": 1
         },

@@ -49,7 +49,7 @@
       "gravity2",
       "ambush1",
       "ambush2",
-      "anchor1",
+      "",
       "anchor2"
     ],
     [
@@ -119,7 +119,6 @@
         "throw2": "hero_squire_trousers:throw2",
         "gravity2": "hero_squire_trousers:gravity2",
         "ambush1": "hero_squire_trousers:ambush1",
-        "anchor1": "hero_squire_trousers:anchor1",
         "anchor2": "hero_squire_trousers:anchor2",
         "pinning": "hero_squire_trousers:pinning",
         "leap": "hero_squire_trousers:leap",
@@ -280,12 +279,6 @@
         "ambush1": {
           "frames": [
             "ambush1"
-          ],
-          "fps": 1
-        },
-        "anchor1": {
-          "frames": [
-            "anchor1"
           ],
           "fps": 1
         },

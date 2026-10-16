@@ -10,7 +10,6 @@ anchor = Vector2(12.1, 8.3)
 pins = {
 &"ambush1": Vector4(175.5, 104.2, 0, 2),
 &"ambush2": Vector4(165.3, 78.7, 0, 2),
-&"anchor1": Vector4(161, 60.4, -70, 2),
 &"anchor2": Vector4(142, 89.5, -25, 2),
 &"backstep": Vector4(159.9, 69.3, -25, 2),
 &"cast1": Vector4(98.4, 108.2, 160, 2),
