@@ -67,7 +67,9 @@ update this page when one changes. Each zone's own look and music are in
   don't aim. A downward melee blow that meets a monster bounces him off it (pogo).
 - He can move while swinging and keeps facing the swing until it ends. Buffs and spells make no
   swing: he carries on with what he was doing.
-- Melee hits feel heavy: longer hit-stop, a small push back on him, a harder knockback on the
+- Holding attack keeps swinging, and a press made just before he can swing again goes off
+  when he can (no lost presses). A hit flashes the monster white once.
+- Melee hits feel heavy: longer hit-stop (he and the monster both hold still), a small push back on him, a harder knockback on the
   monster, a camera kick on crits and kills. Ranged hits (arrows, stars, bullets, spells) stay
   light.
 - Getting hit freezes him a beat, flashes the screen and knocks him away without steering.
@@ -116,7 +118,7 @@ update this page when one changes. Each zone's own look and music are in
   is the harbinger; until then nothing in the game names it.
 - Max level is 100.
 - Off-hand slot (once the Shield slot): Warriors and Beginners wear a shield, a Thief throwing
-  stars (with a dagger in hand), a Magician a book, an Archer a quiver worn on the back, a Pirate a pistol (with knuckles). Stars
+  stars (with a dagger in hand), a Magician a book, an Archer a quiver worn on the back, a Pirate a pistol (with a scimitar). Stars
   and pistols never run out. A Thief's dagger hits one monster and the stars hit a crowd; a
   Pirate's fists hit one and the pistol a crowd.
 

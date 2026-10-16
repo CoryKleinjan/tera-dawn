@@ -63,7 +63,7 @@ func check() -> void:
 	ch.equipment.put(&"shield", ItemStack.exact(Content.item(&"iron_star")))
 	_check(ch.skills.use_problem(Content.skill(&"star_scatter")) == "", "and needs no ammo")
 	ch.skills.learned[&"riptide_combo"] = 1
-	_check(ch.skills.use_problem(Content.skill(&"riptide_combo")).contains("needs a knuckle"), "Riptide Combo needs a knuckle")
+	_check(ch.skills.use_problem(Content.skill(&"riptide_combo")).contains("needs a sword"), "Riptide Combo needs a scimitar (a sword)")
 	ch.equipment.take(&"shield")
 	if shield:
 		ch.equipment.put(&"shield", shield)

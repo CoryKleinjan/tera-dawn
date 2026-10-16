@@ -11,9 +11,9 @@ extends RefCounted
 ##   grace.step(on_ground)
 
 ## Ticks after walking off a ledge that a jump still works.
-const COYOTE_TICKS := 5
+const COYOTE_TICKS := 8
 ## Ticks before landing that a jump press is kept for.
-const BUFFER_TICKS := 5
+const BUFFER_TICKS := 8
 
 var since_ground := COYOTE_TICKS + 1   # ticks since last standing on something
 var since_press := BUFFER_TICKS + 1    # ticks since the jump key went down

@@ -70,8 +70,8 @@ Aiming and melee weight:
   `SkillDef.aim_for`). The aim travels in `req_skill` and `ev_skill`; the server checks
   `Hitbox.aimed_area` and every client turns the swing effect (`TDEffect`) and any shot that way.
 - A skill without a projectile is melee (`SkillDef.is_ranged`): it knocks monsters back
-  `MapInstance.MELEE_KNOCKBACK` times harder, holds a longer hit-stop and kicks the camera
-  (`TDWorldFx`), and pushes you back (`TDPlayer.recoil`). A downward melee blow that meets a
+  `MapInstance.MELEE_KNOCKBACK` times harder, holds a longer hit-stop (on the monster and on you,
+  `TDPlayer.hit_stop`) and kicks the camera (`TDWorldFx`), and pushes you back (`TDPlayer.recoil`). A downward melee blow that meets a
   monster on your screen bounces you at once (`TDPlayer.POGO_SPEED`); the server still decides
   the damage.
 

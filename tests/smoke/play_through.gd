@@ -85,7 +85,7 @@ func visit_shop() -> void:
 	_teleport(Vector2(door.x, 620))
 	await _ticks(2)
 	await _tap("move_up")
-	await _ticks(4)
+	await _ticks(TDPlayer.PORTAL_FADE_TICKS + 4)
 	_check(world.map.id == &"meadow_store" and world.map.interior, "pressing Up in the doorway walks into the shop")
 	_check(world.map.outside() == Character.START_MAP, "the shop is inside the village")
 	# Mira runs a shop: buy potions, sell monster parts.
@@ -166,7 +166,7 @@ func visit_shop() -> void:
 	_teleport(Vector2(out.x, 620))
 	await _ticks(2)
 	await _tap("move_up")
-	await _ticks(4)
+	await _ticks(TDPlayer.PORTAL_FADE_TICKS + 4)
 	_check(world.map.id == Character.START_MAP and absf(world.player.position.x - door.x) < 120, "the room's door leads back out beside the shop")
 
 ## Double-clicks a piece of gear `bought` in the Inventory with a shop open: it asks, then sells on OK.
@@ -193,7 +193,7 @@ func go_to_meadow() -> void:
 	_teleport(Vector2(to_meadow.x, 620))
 	await _ticks(2)
 	await _tap("move_up")
-	await _ticks(4)
+	await _ticks(TDPlayer.PORTAL_FADE_TICKS + 4)
 	_check(world.map.id == &"meadow" and not world.map.town and not world.mobs().is_empty(), "the village's east exit leads to the meadow, where the monsters are")
 
 ## Killing a Dewling, its EXP and Dawnshards.

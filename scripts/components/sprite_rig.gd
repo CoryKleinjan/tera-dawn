@@ -15,6 +15,8 @@ const FALLBACK := {
 }
 ## How long a flash of colour (pulse(), a monster's rage) takes to fade, in seconds.
 const PULSE_TIME := 0.45
+## The hit flash (set_flash): an even, over-bright white.
+const HIT_FLASH := Color(2.4, 2.4, 2.4)
 
 var body: SpriteBase3D
 var light: OmniLight3D
@@ -123,7 +125,8 @@ func face(dir: int) -> void:
 func place(feet: Vector2, z: float) -> void:
 	body.position = TDStage.to3d(feet + Vector2(0, -_lift), z)
 
-## Tints the sprite bright red-white while it is hit.
+## Lights the sprite up white for a moment (a hit landing): brighter than white, so it
+## reads as a flash of light, not a colour.
 func set_flash(on: bool) -> void:
 	if on != _flash:
 		_flash = on
@@ -150,7 +153,7 @@ func set_glow(amount: float) -> void:
 
 func _apply_modulate() -> void:
 	if _flash:
-		body.modulate = Color(2.2, 1.0, 1.0)
+		body.modulate = HIT_FLASH
 	else:
 		var col := _tint.lerp(Color(1.9, 1.35, 0.9), _glow * 0.6)
 		if _pulse > 0.0:
