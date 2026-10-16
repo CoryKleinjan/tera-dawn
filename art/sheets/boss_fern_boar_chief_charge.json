@@ -1,0 +1,35 @@
+{
+  "source": "art/source/boss_fern_boar_chief_charge.png",
+  "save": false,
+  "out_dir": "art/build/boss_fern_boar_chief_charge",
+  "cells": [
+    [
+      "charge_windup",
+      "",
+      "charge_windup2",
+      "",
+      "charge"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.2814,
+  "detail": 2.75,
+  "grid": {
+    "rows": [
+      7,
+      534
+    ],
+    "cols": [
+      [
+        9,
+        422,
+        431,
+        835,
+        843,
+        1251
+      ]
+    ]
+  },
+  "overrides": {}
+}

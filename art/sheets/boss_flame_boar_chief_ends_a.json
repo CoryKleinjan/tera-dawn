@@ -1,0 +1,84 @@
+{
+  "source": "art/source/boss_flame_boar_chief_ends_a.png",
+  "save": false,
+  "out_dir": "art/build/boss_flame_boar_chief_ends_a",
+  "cells": [
+    [
+      "charge2",
+      "",
+      "charge_recover",
+      "",
+      "slam2"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.3016,
+  "detail": 2.75,
+  "grid": {
+    "rows": [
+      0,
+      482
+    ],
+    "cols": [
+      [
+        0,
+        417,
+        423,
+        841,
+        847,
+        1260
+      ]
+    ]
+  },
+  "overrides": {
+    "charge2": {
+      "blank": [
+        [
+          0,
+          0,
+          420,
+          116
+        ],
+        [
+          0,
+          431,
+          409,
+          436
+        ]
+      ]
+    },
+    "charge_recover": {
+      "blank": [
+        [
+          0,
+          0,
+          420,
+          116
+        ],
+        [
+          0,
+          431,
+          410,
+          436
+        ]
+      ]
+    },
+    "slam2": {
+      "blank": [
+        [
+          0,
+          0,
+          420,
+          116
+        ],
+        [
+          0,
+          431,
+          405,
+          436
+        ]
+      ]
+    }
+  }
+}

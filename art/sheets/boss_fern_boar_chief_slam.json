@@ -1,0 +1,96 @@
+{
+  "source": "art/source/boss_fern_boar_chief_slam.png",
+  "save": false,
+  "out_dir": "art/build/boss_fern_boar_chief_slam",
+  "cells": [
+    [
+      "slam_windup",
+      "",
+      "slam_windup2",
+      "",
+      "slam"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.2785,
+  "detail": 2.75,
+  "grid": {
+    "rows": [
+      0,
+      540
+    ],
+    "cols": [
+      [
+        0,
+        435,
+        441,
+        833,
+        839,
+        1260
+      ]
+    ]
+  },
+  "overrides": {
+    "slam_windup": {
+      "blank": [
+        [
+          0,
+          501,
+          91,
+          506
+        ],
+        [
+          126,
+          501,
+          427,
+          506
+        ]
+      ]
+    },
+    "slam_windup2": {
+      "blank": [
+        [
+          0,
+          501,
+          104,
+          506
+        ],
+        [
+          139,
+          501,
+          384,
+          506
+        ]
+      ]
+    },
+    "slam": {
+      "blank": [
+        [
+          0,
+          501,
+          192,
+          506
+        ],
+        [
+          233,
+          501,
+          286,
+          506
+        ],
+        [
+          308,
+          501,
+          314,
+          506
+        ],
+        [
+          335,
+          501,
+          413,
+          506
+        ]
+      ]
+    }
+  }
+}

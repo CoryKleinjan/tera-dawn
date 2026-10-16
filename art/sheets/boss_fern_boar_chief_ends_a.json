@@ -1,0 +1,66 @@
+{
+  "source": "art/source/boss_fern_boar_chief_ends_a.png",
+  "save": false,
+  "out_dir": "art/build/boss_fern_boar_chief_ends_a",
+  "cells": [
+    [
+      "charge2",
+      "",
+      "charge_recover",
+      "",
+      "slam2"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.2785,
+  "detail": 2.75,
+  "grid": {
+    "rows": [
+      0,
+      540
+    ],
+    "cols": [
+      [
+        0,
+        417,
+        423,
+        837,
+        843,
+        1260
+      ]
+    ]
+  },
+  "overrides": {
+    "charge2": {
+      "blank": [
+        [
+          0,
+          420,
+          409,
+          425
+        ]
+      ]
+    },
+    "charge_recover": {
+      "blank": [
+        [
+          0,
+          420,
+          406,
+          425
+        ]
+      ]
+    },
+    "slam2": {
+      "blank": [
+        [
+          0,
+          420,
+          409,
+          425
+        ]
+      ]
+    }
+  }
+}

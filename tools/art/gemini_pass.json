@@ -22899,6 +22899,331 @@
   }
  },
  {
+  "id": "boss_arcane_sentinel_intro_v2",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_arcane_sentinel_intro_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations' (Cory 21:34Z 'do it' / 'repaint' to the 13-sheet ~$0.88 run: 5 repaints + Fern Boar Chief's 8): exact base aspect, no NPC style ref. cells intro1, intro2, intro3.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x3_wide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/arcane_sentinel_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's boss monster \"Arcane Sentinel\" once, in its idle pose on magenta: a guardian golem of carved grey rune-stones with glowing blue and gold runes, a round stone head with one glowing eye, a glowing purple-and-gold orb core in its chest, and separate floating stone hands, shoulder stones and feet that hover beside its body without arms or legs joining them. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, markings, face, every rune, the eye, the glowing orb core and every floating stone piece, every glowing part and detail it has in its idle pose, the same size as in the first attached picture, the same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different from the others. Every glowing part and detail it has in the first attached picture is there in every cell. It always faces the same way as in the first attached picture, turned toward the right. Poses stand on one shared ground line near the bottom of each cell, like in the first attached picture. It is a boss: every pose is big, bold and dramatic, with strong clear body shapes that read at a glance. Draw it SMALLER than its cell: it fills only about 70% of the cell's width and 75% of its height, centred, with a wide magenta margin on every side, every part of it fully inside the cell. It has NO mouth: its face is only its single round glowing eye. Never paint a mouth, teeth, jaw or a second eye; in every cell its one eye is open and glowing, never blank or dark. Cell 1, INTRO RISE: hovering pieces drawn in close and low, head bowed, its single eye fixed forward, glowering, gathering itself. Cell 2, INTRO ROAR: thrown up tall and wide, head tilted back, floating hands flung wide and high above it, its single eye and orb core blazing at their brightest. Cell 3, INTRO READY: dropped into a wide, low fighting stance facing right, floating hands raised in front of it, ready to fight. Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+{
+  "id": "boss_arcane_sentinel_phase_v2",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_arcane_sentinel_phase_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations' (Cory 21:34Z 'do it' / 'repaint' to the 13-sheet ~$0.88 run: 5 repaints + Fern Boar Chief's 8): exact base aspect, no NPC style ref. cells phase1, phase2, phase3.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x3_wide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/arcane_sentinel_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's boss monster \"Arcane Sentinel\" once, in its idle pose on magenta: a guardian golem of carved grey rune-stones with glowing blue and gold runes, a round stone head with one glowing eye, a glowing purple-and-gold orb core in its chest, and separate floating stone hands, shoulder stones and feet that hover beside its body without arms or legs joining them. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, markings, face, every rune, the eye, the glowing orb core and every floating stone piece, every glowing part and detail it has in its idle pose, the same size as in the first attached picture, the same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different from the others. Every glowing part and detail it has in the first attached picture is there in every cell. It always faces the same way as in the first attached picture, turned toward the right. Poses stand on one shared ground line near the bottom of each cell, like in the first attached picture. It is a boss: every pose is big, bold and dramatic, with strong clear body shapes that read at a glance. Draw it SMALLER than its cell: it fills only about 70% of the cell's width and 75% of its height, centred, with a wide magenta margin on every side, every part of it fully inside the cell. It has NO mouth: its face is only its single round glowing eye. Never paint a mouth, teeth, jaw or a second eye; in every cell its one eye is open and glowing, never blank or dark. Cell 1, PHASE HUNCH: pieces pulled in tight and low, head down, shaking with fury, its eye and runes brighter than in the idle pose. Cell 2, PHASE ROAR: risen to its full height, floating hands flung wide and high, its eye and orb core blaze fiery red-orange and its runes glow red. Cell 3, PHASE LAND: back down in a wide, low, furious fighting stance, floating hands raised, its eye and orb core blaze fiery red-orange and its runes glow red. Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+{
+  "id": "boss_flame_boar_chief_ends_a_v2",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_flame_boar_chief_ends_a_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations' (Cory 21:34Z 'do it' / 'repaint' to the 13-sheet ~$0.88 run: 5 repaints + Fern Boar Chief's 8): exact base aspect, no NPC style ref. cells charge2, charge_recover, slam2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x3_wide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/flame_boar_chief_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's boss monster \"Flame Boar Chief\" once, in its idle pose on magenta: a big brown wild boar chief with a mane of bright orange-yellow flames along its back, a flame on its tail tip, glowing orange eyes, pale tusks, a pink snout and pink cheek blush. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, markings, face, the flame mane, tail flame, glowing eyes and tusks, every glowing part and detail it has in its idle pose, the same size as in the first attached picture, the same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different from the others. Every glowing part and detail it has in the first attached picture is there in every cell. It always faces RIGHT, seen from the side, its face turned to the right. Poses stand on one shared ground line near the bottom of each cell, like in the first attached picture. It is a boss: every pose is big, bold and dramatic, with strong clear body shapes that read at a glance. Draw it SMALLER than its cell: it fills only about 70% of the cell's width and 75% of its height, centred, with a wide magenta margin on every side, every part of it fully inside the cell. It is a cute chunky cartoon game monster painted exactly like the first attached picture, NOT a realistic animal: the same big head, chunky round body, short sturdy legs, the same smooth soft painted shading and thin dark plum-brown outline, in every cell. The three cells must look clearly different from each other at a glance: a different body angle, different leg positions and a different head height in each. Cell 1, CHARGE (OTHER STRIDE): rushing forward at full speed, head down and forward, in the opposite stride to a run's first step: front reaching far forward, back pushed far back, body stretched long and low. Cell 2, CHARGE RECOVER: skidding to a stop, front legs braced stiff and planted far forward, body leaning back, head tossed up. Cell 3, SLAM (IMPACT): its front or fists smashed down hard onto the ground line, head and chest driven low, back raised high, the whole body bunched from the blow. Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+{
+  "id": "boss_flame_boar_chief_ends_b_v2",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_flame_boar_chief_ends_b_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations' (Cory 21:34Z 'do it' / 'repaint' to the 13-sheet ~$0.88 run: 5 repaints + Fern Boar Chief's 8): exact base aspect, no NPC style ref. cells slam_recover, pounce2, pounce_recover.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x3_wide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/flame_boar_chief_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's boss monster \"Flame Boar Chief\" once, in its idle pose on magenta: a big brown wild boar chief with a mane of bright orange-yellow flames along its back, a flame on its tail tip, glowing orange eyes, pale tusks, a pink snout and pink cheek blush. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, markings, face, the flame mane, tail flame, glowing eyes and tusks, every glowing part and detail it has in its idle pose, the same size as in the first attached picture, the same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different from the others. Every glowing part and detail it has in the first attached picture is there in every cell. It always faces RIGHT, seen from the side, its face turned to the right. Poses stand on one shared ground line near the bottom of each cell, like in the first attached picture. It is a boss: every pose is big, bold and dramatic, with strong clear body shapes that read at a glance. Draw it SMALLER than its cell: it fills only about 70% of the cell's width and 75% of its height, centred, with a wide magenta margin on every side, every part of it fully inside the cell. It is a cute chunky cartoon game monster painted exactly like the first attached picture, NOT a realistic animal: the same big head, chunky round body, short sturdy legs, the same smooth soft painted shading and thin dark plum-brown outline, in every cell. The three cells must look clearly different from each other at a glance: a different body angle, different leg positions and a different head height in each. Cell 1, SLAM RECOVER: rump up high and front legs splayed wide, head hanging low near the ground and shaking off the blow, eyes squeezed shut. Cell 2, POUNCE (LANDING): tilted nose-down, front legs just hitting the ground line, back legs still up in the air behind it, mouth open. Cell 3, POUNCE RECOVER: sitting back on its haunches, front legs straight, head held high and proud, looking forward. Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+{
+  "id": "boss_fern_boar_chief_charge",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_fern_boar_chief_charge.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations' (Cory 21:34Z 'do it' / 'repaint' to the 13-sheet ~$0.88 run: 5 repaints + Fern Boar Chief's 8): exact base aspect, no NPC style ref. cells charge_windup, charge_windup2, charge.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x3_wide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/fern_boar_chief_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's boss monster \"Fern Boar Chief\" once, in its idle pose on magenta: a big old boar chieftain of the green woods with moss-green bristly hide, a mane of curled green fern fronds along its head and back, a rough plate of brown bark armour on its shoulder, a shaggy brown beard under its jaw, long ivory tusks, a pink snout, small amber eyes and pink cheek blush. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, markings, face, the fern-frond mane, bark shoulder plate, brown beard, tusks and amber eyes, every glowing part and detail it has in its idle pose, the same size as in the first attached picture, the same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different from the others. Every glowing part and detail it has in the first attached picture is there in every cell. It always faces RIGHT, seen from the side, its face turned to the right. Poses stand on one shared ground line near the bottom of each cell, like in the first attached picture. It is a boss: every pose is big, bold and dramatic, with strong clear body shapes that read at a glance. Draw it SMALLER than its cell: it fills only about 70% of the cell's width and 75% of its height, centred, with a wide magenta margin on every side, every part of it fully inside the cell. It is a cute chunky cartoon game monster painted exactly like the first attached picture, NOT a realistic animal: the same big head, chunky round body, short sturdy legs, the same smooth soft painted shading and thin dark plum-brown outline, in every cell. Cell 1, CHARGE WIND-UP: all feet on the ground, head lowered and pointing forward, body pulled back, one foot scraping the ground behind it, about to rush forward; it does NOT rear up. Cell 2, CHARGE WIND-UP (DEEPEST): crouched even lower than a normal wind-up, head down and pointing straight forward, back foot dug in and kicking back, every part tensed, about to explode forward; it does NOT rear up. Cell 3, CHARGE: rushing forward at full speed, head down with tusks forward, body stretched low, legs in a long galloping stride. Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+{
+  "id": "boss_fern_boar_chief_slam",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_fern_boar_chief_slam.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations' (Cory 21:34Z 'do it' / 'repaint' to the 13-sheet ~$0.88 run: 5 repaints + Fern Boar Chief's 8): exact base aspect, no NPC style ref. cells slam_windup, slam_windup2, slam.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x3_wide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/fern_boar_chief_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's boss monster \"Fern Boar Chief\" once, in its idle pose on magenta: a big old boar chieftain of the green woods with moss-green bristly hide, a mane of curled green fern fronds along its head and back, a rough plate of brown bark armour on its shoulder, a shaggy brown beard under its jaw, long ivory tusks, a pink snout, small amber eyes and pink cheek blush. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, markings, face, the fern-frond mane, bark shoulder plate, brown beard, tusks and amber eyes, every glowing part and detail it has in its idle pose, the same size as in the first attached picture, the same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different from the others. Every glowing part and detail it has in the first attached picture is there in every cell. It always faces RIGHT, seen from the side, its face turned to the right. Poses stand on one shared ground line near the bottom of each cell, like in the first attached picture. It is a boss: every pose is big, bold and dramatic, with strong clear body shapes that read at a glance. Draw it SMALLER than its cell: it fills only about 70% of the cell's width and 75% of its height, centred, with a wide magenta margin on every side, every part of it fully inside the cell. It is a cute chunky cartoon game monster painted exactly like the first attached picture, NOT a realistic animal: the same big head, chunky round body, short sturdy legs, the same smooth soft painted shading and thin dark plum-brown outline, in every cell. Cell 1, SLAM WIND-UP: rising up tall on its hind legs, front legs lifted over its head, gathering weight to crash down. Cell 2, SLAM WIND-UP (HIGHEST): risen up as tall as it can go, body almost upright, front limbs or upper body raised high above its head, about to crash down. Cell 3, SLAM: front legs and chest crashing down onto the ground line, head low, body bunched, back legs kicked up behind. Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+{
+  "id": "boss_fern_boar_chief_pounce",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_fern_boar_chief_pounce.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations' (Cory 21:34Z 'do it' / 'repaint' to the 13-sheet ~$0.88 run: 5 repaints + Fern Boar Chief's 8): exact base aspect, no NPC style ref. cells pounce_windup, pounce_windup2, pounce.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x3_wide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/fern_boar_chief_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's boss monster \"Fern Boar Chief\" once, in its idle pose on magenta: a big old boar chieftain of the green woods with moss-green bristly hide, a mane of curled green fern fronds along its head and back, a rough plate of brown bark armour on its shoulder, a shaggy brown beard under its jaw, long ivory tusks, a pink snout, small amber eyes and pink cheek blush. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, markings, face, the fern-frond mane, bark shoulder plate, brown beard, tusks and amber eyes, every glowing part and detail it has in its idle pose, the same size as in the first attached picture, the same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different from the others. Every glowing part and detail it has in the first attached picture is there in every cell. It always faces RIGHT, seen from the side, its face turned to the right. Poses stand on one shared ground line near the bottom of each cell, like in the first attached picture. It is a boss: every pose is big, bold and dramatic, with strong clear body shapes that read at a glance. Draw it SMALLER than its cell: it fills only about 70% of the cell's width and 75% of its height, centred, with a wide magenta margin on every side, every part of it fully inside the cell. It is a cute chunky cartoon game monster painted exactly like the first attached picture, NOT a realistic animal: the same big head, chunky round body, short sturdy legs, the same smooth soft painted shading and thin dark plum-brown outline, in every cell. Cell 1, POUNCE WIND-UP: crouched very low, rump high, head forward and eyes fixed ahead, ready to leap forward. Cell 2, POUNCE WIND-UP (DEEPEST): crouched as low as it can go with its rear raised, front pressed down, eyes fixed ahead, about to leap forward. Cell 3, POUNCE: leaping forward through the air in a long arc, front legs stretched forward, back legs stretched behind, mouth open with tusks first. Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+{
+  "id": "boss_fern_boar_chief_ends_a",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_fern_boar_chief_ends_a.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations' (Cory 21:34Z 'do it' / 'repaint' to the 13-sheet ~$0.88 run: 5 repaints + Fern Boar Chief's 8): exact base aspect, no NPC style ref. cells charge2, charge_recover, slam2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x3_wide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/fern_boar_chief_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's boss monster \"Fern Boar Chief\" once, in its idle pose on magenta: a big old boar chieftain of the green woods with moss-green bristly hide, a mane of curled green fern fronds along its head and back, a rough plate of brown bark armour on its shoulder, a shaggy brown beard under its jaw, long ivory tusks, a pink snout, small amber eyes and pink cheek blush. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, markings, face, the fern-frond mane, bark shoulder plate, brown beard, tusks and amber eyes, every glowing part and detail it has in its idle pose, the same size as in the first attached picture, the same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different from the others. Every glowing part and detail it has in the first attached picture is there in every cell. It always faces RIGHT, seen from the side, its face turned to the right. Poses stand on one shared ground line near the bottom of each cell, like in the first attached picture. It is a boss: every pose is big, bold and dramatic, with strong clear body shapes that read at a glance. Draw it SMALLER than its cell: it fills only about 70% of the cell's width and 75% of its height, centred, with a wide magenta margin on every side, every part of it fully inside the cell. It is a cute chunky cartoon game monster painted exactly like the first attached picture, NOT a realistic animal: the same big head, chunky round body, short sturdy legs, the same smooth soft painted shading and thin dark plum-brown outline, in every cell. The three cells must look clearly different from each other at a glance: a different body angle, different leg positions and a different head height in each. Cell 1, CHARGE (OTHER STRIDE): rushing forward at full speed, head down and forward, in the opposite stride to a run's first step: front reaching far forward, back pushed far back, body stretched long and low. Cell 2, CHARGE RECOVER: skidding to a stop, front legs braced stiff and planted far forward, body leaning back, head tossed up. Cell 3, SLAM (IMPACT): its front or fists smashed down hard onto the ground line, head and chest driven low, back raised high, the whole body bunched from the blow. Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+{
+  "id": "boss_fern_boar_chief_ends_b",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_fern_boar_chief_ends_b.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations' (Cory 21:34Z 'do it' / 'repaint' to the 13-sheet ~$0.88 run: 5 repaints + Fern Boar Chief's 8): exact base aspect, no NPC style ref. cells slam_recover, pounce2, pounce_recover.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x3_wide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/fern_boar_chief_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's boss monster \"Fern Boar Chief\" once, in its idle pose on magenta: a big old boar chieftain of the green woods with moss-green bristly hide, a mane of curled green fern fronds along its head and back, a rough plate of brown bark armour on its shoulder, a shaggy brown beard under its jaw, long ivory tusks, a pink snout, small amber eyes and pink cheek blush. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, markings, face, the fern-frond mane, bark shoulder plate, brown beard, tusks and amber eyes, every glowing part and detail it has in its idle pose, the same size as in the first attached picture, the same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different from the others. Every glowing part and detail it has in the first attached picture is there in every cell. It always faces RIGHT, seen from the side, its face turned to the right. Poses stand on one shared ground line near the bottom of each cell, like in the first attached picture. It is a boss: every pose is big, bold and dramatic, with strong clear body shapes that read at a glance. Draw it SMALLER than its cell: it fills only about 70% of the cell's width and 75% of its height, centred, with a wide magenta margin on every side, every part of it fully inside the cell. It is a cute chunky cartoon game monster painted exactly like the first attached picture, NOT a realistic animal: the same big head, chunky round body, short sturdy legs, the same smooth soft painted shading and thin dark plum-brown outline, in every cell. The three cells must look clearly different from each other at a glance: a different body angle, different leg positions and a different head height in each. Cell 1, SLAM RECOVER: rump up high and front legs splayed wide, head hanging low near the ground and shaking off the blow, eyes squeezed shut. Cell 2, POUNCE (LANDING): tilted nose-down, front legs just hitting the ground line, back legs still up in the air behind it, mouth open. Cell 3, POUNCE RECOVER: sitting back on its haunches, front legs straight, head held high and proud, looking forward. Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+{
+  "id": "boss_fern_boar_chief_intro",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_fern_boar_chief_intro.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations' (Cory 21:34Z 'do it' / 'repaint' to the 13-sheet ~$0.88 run: 5 repaints + Fern Boar Chief's 8): exact base aspect, no NPC style ref. cells intro1, intro2, intro3.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x3_wide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/fern_boar_chief_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's boss monster \"Fern Boar Chief\" once, in its idle pose on magenta: a big old boar chieftain of the green woods with moss-green bristly hide, a mane of curled green fern fronds along its head and back, a rough plate of brown bark armour on its shoulder, a shaggy brown beard under its jaw, long ivory tusks, a pink snout, small amber eyes and pink cheek blush. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, markings, face, the fern-frond mane, bark shoulder plate, brown beard, tusks and amber eyes, every glowing part and detail it has in its idle pose, the same size as in the first attached picture, the same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different from the others. Every glowing part and detail it has in the first attached picture is there in every cell. It always faces RIGHT, seen from the side, its face turned to the right. Poses stand on one shared ground line near the bottom of each cell, like in the first attached picture. It is a boss: every pose is big, bold and dramatic, with strong clear body shapes that read at a glance. Draw it SMALLER than its cell: it fills only about 70% of the cell's width and 75% of its height, centred, with a wide magenta margin on every side, every part of it fully inside the cell. It is a cute chunky cartoon game monster painted exactly like the first attached picture, NOT a realistic animal: the same big head, chunky round body, short sturdy legs, the same smooth soft painted shading and thin dark plum-brown outline, in every cell. Cell 1, INTRO RISE: head low, eyes fixed forward, glowering, pawing the ground, gathering itself. Cell 2, INTRO ROAR: reared up on its hind legs, head thrown back, mouth wide open in a mighty roar at the sky, front legs raised. Cell 3, INTRO READY: dropped into a wide, low fighting stance facing right, tusks forward, ready to fight. Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+{
+  "id": "boss_fern_boar_chief_phase",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_fern_boar_chief_phase.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations' (Cory 21:34Z 'do it' / 'repaint' to the 13-sheet ~$0.88 run: 5 repaints + Fern Boar Chief's 8): exact base aspect, no NPC style ref. cells phase1, phase2, phase3.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x3_wide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/fern_boar_chief_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's boss monster \"Fern Boar Chief\" once, in its idle pose on magenta: a big old boar chieftain of the green woods with moss-green bristly hide, a mane of curled green fern fronds along its head and back, a rough plate of brown bark armour on its shoulder, a shaggy brown beard under its jaw, long ivory tusks, a pink snout, small amber eyes and pink cheek blush. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, markings, face, the fern-frond mane, bark shoulder plate, brown beard, tusks and amber eyes, every glowing part and detail it has in its idle pose, the same size as in the first attached picture, the same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different from the others. Every glowing part and detail it has in the first attached picture is there in every cell. It always faces RIGHT, seen from the side, its face turned to the right. Poses stand on one shared ground line near the bottom of each cell, like in the first attached picture. It is a boss: every pose is big, bold and dramatic, with strong clear body shapes that read at a glance. Draw it SMALLER than its cell: it fills only about 70% of the cell's width and 75% of its height, centred, with a wide magenta margin on every side, every part of it fully inside the cell. It is a cute chunky cartoon game monster painted exactly like the first attached picture, NOT a realistic animal: the same big head, chunky round body, short sturdy legs, the same smooth soft painted shading and thin dark plum-brown outline, in every cell. Cell 1, PHASE HUNCH: hunched low and shaking with fury, head down, bristling. Cell 2, PHASE ROAR: reared up to its full height roaring, front legs raised, its fern mane bristling up huge and its eyes glowing fierce amber. Cell 3, PHASE LAND: back down on all four legs in a wide, low, furious stance, its fern mane bristling up huge and its eyes glowing fierce amber. Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+{
+  "id": "boss_fern_boar_chief_death",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_fern_boar_chief_death.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations' (Cory 21:34Z 'do it' / 'repaint' to the 13-sheet ~$0.88 run: 5 repaints + Fern Boar Chief's 8): exact base aspect, no NPC style ref. cells death1, death2, death3.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x3_wide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/fern_boar_chief_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's boss monster \"Fern Boar Chief\" once, in its idle pose on magenta: a big old boar chieftain of the green woods with moss-green bristly hide, a mane of curled green fern fronds along its head and back, a rough plate of brown bark armour on its shoulder, a shaggy brown beard under its jaw, long ivory tusks, a pink snout, small amber eyes and pink cheek blush. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, markings, face, the fern-frond mane, bark shoulder plate, brown beard, tusks and amber eyes, every glowing part and detail it has in its idle pose, the same size as in the first attached picture, the same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different from the others. Every glowing part and detail it has in the first attached picture is there in every cell. It always faces RIGHT, seen from the side, its face turned to the right. Poses stand on one shared ground line near the bottom of each cell, like in the first attached picture. It is a boss: every pose is big, bold and dramatic, with strong clear body shapes that read at a glance. Draw it SMALLER than its cell: it fills only about 70% of the cell's width and 75% of its height, centred, with a wide magenta margin on every side, every part of it fully inside the cell. It is a cute chunky cartoon game monster painted exactly like the first attached picture, NOT a realistic animal: the same big head, chunky round body, short sturdy legs, the same smooth soft painted shading and thin dark plum-brown outline, in every cell. Cell 1, DEATH STAGGER: reeling back from a final blow, head tossed back and to the side, legs wobbling. Cell 2, DEATH SINK: buckling at the knees and sinking toward the ground line, head drooping low, eyes half closed. Cell 3, DEATH FALLEN: collapsed on its side flat on the ground line, eyes closed, its fern mane drooping limp; it lies on the ground line, wide and low, fully inside the cell. Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+{
+  "id": "boss_grotto_tusker_main_v2",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_grotto_tusker_main_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations' (Cory 21:34Z 'do it' / 'repaint' to the 13-sheet ~$0.88 run: 5 repaints + Fern Boar Chief's 8): exact base aspect, no NPC style ref. Its own painting, replacing the tinted barnacle boar. cells idle1, idle2, move1, move2, move3, windup, strike, special, hurt, enraged, defeated1, defeated2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_3x4_43.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/barnacle_boar_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 12 cells (3 rows of 4, numbered left to right, then top to bottom) on a flat magenta background. Paint a NEW boss monster for the game, \"Grotto Tusker\": a huge old sea-cave boar: wet dark slate-blue hide crusted with pale barnacles and small shells, dripping strands of dark green kelp in its mane, long yellowed tusks, a pink snout, small pale eyes and pink cheek blush, with an old iron smuggler's lantern glowing warm yellow, hanging from a short rope tied around one tusk. The first attached picture shows a smaller, ordinary boar from the same game: use it ONLY for the painting style (smooth soft painted shading, warm light from the upper left, thin dark plum-brown outline), the cute chunky body shape and the face style; do NOT copy its colours, coat or markings. \"Grotto Tusker\" is bigger, older and heavier than that boar, clearly a chief. Paint it once in every cell, in the pose given for that cell, always with exactly the same look, colours and details. It always faces RIGHT, seen from the side, its face turned to the right. Poses stand on one shared ground line near the bottom of each cell. In EVERY one of the 12 cells the old iron lantern hangs from a short rope tied around its near tusk, glowing warm yellow; never leave the lantern out of a cell. Draw NO shadow, puddle, ground patch or floor under it: only the monster on flat magenta. Write NO pose names, labels or captions under or above the cells. Draw it SMALLER than its cell: it fills only about 75% of the cell's width, centred, with a wide magenta margin on every side, its snout, tusks and tail fully inside the cell. Cell 1, IDLE 1: standing on all four legs, calm and heavy, head slightly low. Cell 2, IDLE 2: the same stance breathing in, chest and back slightly raised. Cell 3, MOVE 1: walking forward, front left leg and back right leg forward. Cell 4, MOVE 2: walking, legs passing under its body. Cell 5, MOVE 3: walking forward, front right leg and back left leg forward. Cell 6, ATTACK WIND-UP: head lowered with tusks forward, body pulled back over its hind legs, about to strike. Cell 7, ATTACK STRIKE: thrusting its head forward and up, tusks first, in a hard goring jab. Cell 8, SPECIAL: tossing its head up with a mighty snort, the lantern swinging up. Cell 9, HURT: flinching back with its eyes squeezed shut, head pulled away. Cell 10, ENRAGED: standing in a wide, low furious stance, its eyes glowing fierce and its lantern blazing bright. Cell 11, DEFEATED 1: staggering, legs wobbling, head drooping, eyes half closed. Cell 12, DEFEATED 2: lying on its side flat on the ground line, eyes closed, legs limp. Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+ {
   "id": "greenbough_fields_land",
   "prompts": null,
   "batch": "Greenbough fields test: earth ledges, raised ground and its wall (edit)",
