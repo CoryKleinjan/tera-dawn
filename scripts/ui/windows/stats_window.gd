@@ -2,8 +2,7 @@ class_name TDStatsWindow
 extends TDWindow
 ## Character info (S): job, HP/MP, unspent Dawn Essence, the four base stats with what gear
 ## adds and what the next point of each costs, a "+" per stat the essence pays for (and Auto,
-## once you have a job), and everything the stats work out to in combat. A Beginner also sees
-## the job paths and the stats each one still needs, so essence doesn't go where it shuts a path.
+## once you have a job), and everything the stats work out to in combat.
 
 const ROW_H := 17.0
 ## The Dawn Essence row and the four stat rows are taller, so each "+" (STAT_PLUS tall)
@@ -18,10 +17,8 @@ const COL_RIGHT := 168.0
 const COL_RIGHT_VALUE := 98.0
 ## The room kept between a left-hand value and the right-hand column's label.
 const COL_GAP := 8.0
-## The window's height without the job paths, and the paths' rows.
+## The window's height.
 const BASE_H := 357.0
-const PATH_ROW_H := 13.0
-const PATHS_TOP := 18.0
 const AUTO_SIZE := Vector2(46, 20)
 
 ## Where the last row ended when the window was last drawn (for checking it fits).
@@ -31,27 +28,6 @@ var auto_rect := Rect2()
 
 func _init() -> void:
 	super("Character", Vector2(330, BASE_H))
-
-func _process(delta: float) -> void:
-	if visible:
-		size.y = wanted_height()
-	super(delta)
-
-func toggle() -> void:
-	size.y = wanted_height()
-	super()
-
-## The window's height for the character as they are now: taller for a Beginner, who sees
-## the job paths.
-func wanted_height() -> float:
-	var paths := _paths()
-	return BASE_H + (PATHS_TOP + paths.size() * PATH_ROW_H if not paths.is_empty() else 0.0)
-
-## The jobs a Beginner could advance into (none once you have a job).
-func _paths() -> Array[JobDef]:
-	if Game.me.job == null or not Game.me.job.is_starting_job():
-		return []
-	return JobDef.paths_from(Game.me.job.id)
 
 func _draw_body() -> void:
 	var s := Game.me.stats
@@ -88,35 +64,7 @@ func _draw_body() -> void:
 	y = _pair(y, ["Weapon Defense", str(s.defense)], ["Magic Defense", str(s.magic_defense)])
 	y = _pair(y, ["Accuracy", str(CharacterStats.accuracy(s))], ["Avoidability", str(CharacterStats.avoid(s))])
 	y = _pair(y, ["Speed", "%d%%" % roundi(CharacterStats.speed_multiplier(s) * 100)], ["Jump", "%d%%" % roundi(CharacterStats.jump_multiplier(s) * 100)])
-	content_end = _draw_paths(y)
-
-## A Beginner's job paths: the ones whose stats are there in green, the rest with what's
-## still short ("Thief: 25 LUK (you have 4)"). Returns where the rows end.
-func _draw_paths(y: float) -> float:
-	var paths := _paths()
-	if paths.is_empty():
-		return y
-	_divider(y)
-	var top := y + 6
-	DrawUtil.text(self, Game.ui_font, Vector2(PAD + 2, top), "Job paths (base stats needed)", 11, Palette.MUTED, 1)
-	for i in paths.size():
-		var ready := Game.me.stats_short_of(paths[i]).is_empty()
-		DrawUtil.text(self, Game.ui_font, Vector2(PAD + 2, top + (i + 1) * PATH_ROW_H), path_text(Game.me, paths[i]), 11,
-			Palette.GOOD if ready else Palette.MIST, 1, 3, Color(Palette.NIGHT, 0.6))
-	y += PATHS_TOP + paths.size() * PATH_ROW_H
-	return y
-
-## One path's line for character `c`: every stat it asks for when they're all there,
-## otherwise only the ones still short and what `c` has of each.
-static func path_text(c: Character, j: JobDef) -> String:
-	var short := c.stats_short_of(j)
-	var bits := []
-	if short.is_empty():
-		bits = Array(j.requirement_lines())
-	for stat in StatBlock.BASE:
-		if short.has(stat):
-			bits.append("%d %s (you have %d)" % [short[stat], StatBlock.LABELS[stat], c.base.value(stat)])
-	return "%s: %s" % [j.display_name, ", ".join(bits) if not bits.is_empty() else "ready"]
+	content_end = y
 
 ## Spends essence on the job's damage stats the way AbilityPoints.auto does. The server does
 ## the spending.

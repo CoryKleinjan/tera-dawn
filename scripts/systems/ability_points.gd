@@ -1,11 +1,7 @@
 class_name AbilityPoints
 extends CharacterPart
 ## Buying base stats (StatBlock.BASE) with Dawn Essence: each point in a stat costs more than
-## the last one bought in it (CharacterStats.stat_price). Also the Auto button, and the one
-## free reset a job instructor gives a Beginner (Character.ap).
-
-## Whether the one free reset a job instructor gives a Beginner is used up.
-var reset_used := false
+## the last one bought in it (CharacterStats.stat_price), and the Auto button (Character.ap).
 
 ## Points bought in `stat`: how far it is above where the character started.
 func bought(stat: StringName) -> int:
@@ -67,35 +63,11 @@ func _starting_stat(stat: StringName) -> int:
 	return first.starting_stats.value(stat) if first and first.starting_stats else 0
 
 ## Hands back the essence of every point bought, with the base stats back where the
-## character started (also the free reset saved characters get when the stat rules change,
-## see CharacterCodec).
+## character started: the free reset saved characters get when the stat rules change (see
+## CharacterCodec).
 func refund_all() -> void:
 	var c := character
 	c.essence += essence_spent()
 	for stat in StatBlock.BASE:
 		c.base.set(stat, mini(c.base.value(stat), _starting_stat(stat)))
 	c.recalc()
-
-## Why a `next` instructor can't hand out the free reset, or "" if they can: once per
-## character, for a Beginner who has bought stats but lacks the ones `next` asks for.
-func reset_problem(next: JobDef) -> String:
-	var c := character
-	if not c.job.is_starting_job():
-		return "Only a %s can have their stats reset." % c.job.display_name
-	if reset_used:
-		return "You've already had your free reset."
-	if c.stats_short_of(next).is_empty():
-		return "You already have the stats a %s needs." % next.display_name
-	if spent() == 0:
-		return "You haven't bought any stats yet."
-	return ""
-
-## The free reset (see reset_problem): base stats go back to the job's starting stats and
-## the essence spent on them comes back. Returns why not, or "".
-func reset(next: JobDef) -> String:
-	var problem := reset_problem(next)
-	if problem != "":
-		return problem
-	refund_all()
-	reset_used = true
-	return ""

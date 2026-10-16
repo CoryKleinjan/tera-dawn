@@ -106,9 +106,6 @@ static func build(char_name: String, job: JobDef) -> Character:
 	var c := Character.create(char_name, Character.START_JOB)
 	# advanced the way a player would, so stats bought and job gifts add up as usual
 	for next in path_to(job):
-		var short := c.stats_short_of(next)
-		for stat: StringName in short:
-			grant_stat(c, stat, short[stat] - c.base.value(stat))
 		if next.advance_quest:
 			c.quests.done[next.advance_quest.id] = true
 		var problem := c.advance(next)

@@ -81,6 +81,7 @@ func _check_skill_rules() -> void:
 	old.erase("skills")
 	old.erase("skills_paid")
 	old.erase("quickslots")
+	old.erase("jobs_passed")
 	old["level"] = 12
 	old["xp"] = 40
 	old["sp"] = 3
@@ -89,6 +90,7 @@ func _check_skill_rules() -> void:
 	legacy.load_dict(old)
 	var sp_worth := CharacterStats.skill_price(0) + CharacterStats.skill_price(1) + CharacterStats.skill_price(2)
 	_check(legacy.essence == 40 + sp_worth and legacy.quickslots[Character.QUICKSLOTS - 2] == [&"item", &"red_potion"], "older saves turn their EXP and Skill Points into Dawn Essence")
+	_check(legacy.jobs_passed.size() == 1 and legacy.has_passed(Content.job(&"warrior")), "older saves count the jobs they advanced through as passed")
 
 ## Starting as a Beginner, advancing, and gear only some jobs can use.
 func _check_jobs() -> void:
@@ -98,14 +100,15 @@ func _check_jobs() -> void:
 	var mage: JobDef = Content.job(&"mage")
 	for id in [&"warrior", &"archer", &"mage", &"thief", &"pirate"]:
 		_check(Content.jobs.has(id) and Content.job(id).advances_from == &"beginner", "%s is a first job" % id)
-	_check(c.advance(warrior).contains("STR"), "advancing to Warrior needs 35 STR")
-	c.base.strength = 35
-	_check(c.advance(warrior) == "Pass the Job Test first.", "advancing to Warrior needs the Job Test")
+	_check(c.advance(warrior) == "Pass the %s first." % warrior.advance_quest.title, "advancing to Warrior needs the Job Test, and no stats")
 	c.quests.done[warrior.advance_quest.id] = true
+	c.base.strength = 35  # what the gifted Bronze Sword needs to be worn
+	c.recalc()
 	var hp := c.max_hp()
-	_check(c.advance(warrior) == "" and c.job == warrior, "a Beginner with 35 STR who passed the Job Test becomes a Warrior")
+	_check(c.advance(warrior) == "" and c.job == warrior and c.has_passed(warrior), "a Beginner who passed the Job Test becomes a Warrior")
 	_check(c.gear.weapon() == Content.item(&"bronze_sword") and c.max_hp() >= hp, "the Warrior gets a Bronze Sword and wears it")
-	_check(c.advance(mage) != "", "a Warrior can't then become a Magician")
+	_check(c.advance(warrior) != "", "a Warrior can't become a Warrior again")
+	_check(c.can_become(mage) and c.advance(mage) == "Pass the %s first." % mage.advance_quest.title, "a Warrior may switch to Magician, after its Job Test")
 	var wand: EquipDef = Content.item(&"apprentice_wand")
 	c.inventory.add(wand)
 	var slot := -1
