@@ -24281,6 +24281,98 @@
    "refs": [],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds the flat bright green (#00FF00) shape of a small boy sitting on the ground, facing right, with his legs stretched out in front of him to the right, wearing a painted long red pirate coat with gold trim and a black belt. Cells 2 to 8 are empty and must stay empty. The coat's long front skirt lies over his legs. Repaint the coat so that its skirt goes BEHIND him: the coat stays open at the front and ends at his belt and hips, so no part of it lies on his legs, and its long skirt and tails hang down behind his back and lie spread out on the ground behind him, to the left. Where the skirt lay over his legs, show the flat pure #00FF00 green of his legs, and flat pure magenta #FF00FF outside his body. Keep the top of the coat exactly as it is: its shoulders, sleeves, collar, the white shirt front, the belt and buckle, their size, position, colours, folds, shading and thin dark outline. Leave every green pixel the coat does not cover flat pure #00FF00 exactly as it is, and the background flat pure magenta #FF00FF. Do not paint any face, skin, hands, legs, trousers, boots or other clothing, do not move, resize or redraw the green shape, do not add any figure, and leave empty cells empty. Style: exactly the painting style of the coat already in the base picture. Keep the grid lines. No text, no labels."
   }
+ },
+ {
+  "id": "mshero_war_jerkin_b13",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_war_jerkin_b13.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Hero pose review' (Cory 22:14Z: only main's Magician robe looks right on pistol2, 'it should be looking at the back of their uniform'): the squire_jerkin on pistol2 seen from behind; an edit of its own pistol2 painting on the green boy, with its own painting from behind in cell 2 as the design. Released by Cory 22:42Z (\"yes\") to the priced line 22:34Z (\"Paint the backs of the Warrior jerkin, Thief jerkin, Archer vest and Pirate coat on pistol2? It's 4 sheets for about $0.27\")",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b13_squire_jerkin_pistol2_back_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds the flat bright green (#00FF00) shape of a small boy whose body is turned AWAY from the viewer, so we see his BACK: only his head turns to look to the right, his near fist is raised up to the right and his other arm is bent at his side. On it is painted a padded warrior's jerkin of quilted tan-brown cloth in stitched rows, with short puffed sleeves, a high padded collar and a broad brown leather belt, but it is painted from the FRONT: its high collar opens at the front, toggles and laces run down its front, and its belt has a big brass buckle. Cell 2 holds the same jerkin painted from BEHIND on the same boy standing with his back to the viewer: leave cell 2 exactly as it is. Cells 3 to 8 are empty and must stay empty. Repaint the jerkin in cell 1 so that it is seen from BEHIND, with the same back as in cell 2: the same quilted tan-brown cloth with its stitched rows running straight down from the collar to the hem, and the broad brown belt as one plain band with no buckle. Take away the opening at the front of the collar, the toggles and laces, and the brass buckle: none of them shows from behind. At the top, the collar is seen from behind: a plain padded collar band across the back of his neck, right under the green head. Keep the jerkin's outline, size, position, sleeves and length exactly as they are in cell 1, and keep its colours, material, shading and thin dark plum-brown outline. Leave every green pixel the jerkin does not cover flat pure #00FF00 exactly as it is, and the background flat pure magenta #FF00FF. Do not paint any face, skin, hands, head or other clothing, do not move, resize or redraw the green shape, do not add any figure, and leave empty cells empty. Style: exactly the painting style of the jerkin already in cells 1 and 2. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_thief_jerkin_b13",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_thief_jerkin_b13.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Hero pose review' (Cory 22:14Z: only main's Magician robe looks right on pistol2, 'it should be looking at the back of their uniform'): the footpad_jerkin on pistol2 seen from behind; an edit of its own pistol2 painting on the green boy, with its own painting from behind in cell 2 as the design. Released by Cory 22:42Z (\"yes\") to the priced line 22:34Z (\"Paint the backs of the Warrior jerkin, Thief jerkin, Archer vest and Pirate coat on pistol2? It's 4 sheets for about $0.27\")",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b13_footpad_jerkin_pistol2_back_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds the flat bright green (#00FF00) shape of a small boy whose body is turned AWAY from the viewer, so we see his BACK: only his head turns to look to the right, his near fist is raised up to the right and his other arm is bent at his side. On it is painted a thief's dark brown leather jerkin with charcoal grey short sleeves, a dark leather belt and a small pouch, but it is painted from the FRONT: two leather straps with a metal buckle cross its front, a pouch hangs at its front, and its belt has a metal buckle. Cell 2 holds the same jerkin painted from BEHIND on the same boy standing with his back to the viewer: leave cell 2 exactly as it is. Cells 3 to 8 are empty and must stay empty. Repaint the jerkin in cell 1 so that it is seen from BEHIND, with the same back as in cell 2: one plain dark brown leather back panel with soft folds and stitched seams, the dark belt as one plain band with no buckle, and the small pouch hanging on the belt at the right of the picture. Take away the crossing straps and their buckle, the pouch at the front and the belt buckle: none of them shows from behind. At the top, the collar is seen from behind: the plain leather edge of the jerkin across the back of his neck, right under the green head. Keep the jerkin's outline, size, position, sleeves and length exactly as they are in cell 1, and keep its colours, material, shading and thin dark plum-brown outline. Leave every green pixel the jerkin does not cover flat pure #00FF00 exactly as it is, and the background flat pure magenta #FF00FF. Do not paint any face, skin, hands, head or other clothing, do not move, resize or redraw the green shape, do not add any figure, and leave empty cells empty. Style: exactly the painting style of the jerkin already in cells 1 and 2. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_archer_vest_b13",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_archer_vest_b13.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Hero pose review' (Cory 22:14Z: only main's Magician robe looks right on pistol2, 'it should be looking at the back of their uniform'): the hunters_vest on pistol2 seen from behind; an edit of its own pistol2 painting on the green boy, with its own painting from behind in cell 2 as the design. Released by Cory 22:42Z (\"yes\") to the priced line 22:34Z (\"Paint the backs of the Warrior jerkin, Thief jerkin, Archer vest and Pirate coat on pistol2? It's 4 sheets for about $0.27\")",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b13_hunters_vest_pistol2_back_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds the flat bright green (#00FF00) shape of a small boy whose body is turned AWAY from the viewer, so we see his BACK: only his head turns to look to the right, his near fist is raised up to the right and his other arm is bent at his side. On it is painted an archer's tan leather vest over a cream linen shirt with short sleeves, with a brown leather strap and a narrow brown belt, but it is painted from the FRONT: it is laced up its front with a crossed cord, a horn hangs on its belt, and the belt has a buckle. Cell 2 holds the same vest painted from BEHIND on the same boy standing with his back to the viewer: leave cell 2 exactly as it is. Cells 3 to 8 are empty and must stay empty. Repaint the vest in cell 1 so that it is seen from BEHIND, with the same back as in cell 2: one plain tan leather back panel, the brown leather strap running diagonally across his back from one shoulder down to the opposite hip, and the narrow brown belt as one plain band with no buckle. Take away the lacing and cord, the horn and the buckle: none of them shows from behind. At the top, the collar is seen from behind: the plain edge of the vest and the cream shirt collar across the back of his neck, right under the green head. Keep the vest's outline, size, position, sleeves and length exactly as they are in cell 1, and keep its colours, material, shading and thin dark plum-brown outline. Leave every green pixel the vest does not cover flat pure #00FF00 exactly as it is, and the background flat pure magenta #FF00FF. Do not paint any face, skin, hands, head or other clothing, do not move, resize or redraw the green shape, do not add any figure, and leave empty cells empty. Style: exactly the painting style of the vest already in cells 1 and 2. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_pirate_coat_b13",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_pirate_coat_b13.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Hero pose review' (Cory 22:14Z: only main's Magician robe looks right on pistol2, 'it should be looking at the back of their uniform'): the deckhand_coat on pistol2 seen from behind; an edit of its own pistol2 painting on the green boy, with its own painting from behind in cell 2 as the design. Released by Cory 22:42Z (\"yes\") to the priced line 22:34Z (\"Paint the backs of the Warrior jerkin, Thief jerkin, Archer vest and Pirate coat on pistol2? It's 4 sheets for about $0.27\")",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b13_deckhand_coat_pistol2_back_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds the flat bright green (#00FF00) shape of a small boy whose body is turned AWAY from the viewer, so we see his BACK: only his head turns to look to the right, his near fist is raised up to the right and his other arm is bent at his side. On it is painted a pirate's long red coat trimmed with gold, with long sleeves ending in wide gold-trimmed cuffs and a black belt, but it is painted from the FRONT: it hangs open down its front, with his white shirt and white cloth showing down the middle, gold-trimmed front edges, and a gold buckle on the belt. Cell 2 holds the same coat painted from BEHIND on the same boy standing with his back to the viewer: leave cell 2 exactly as it is. Cells 3 to 8 are empty and must stay empty. Repaint the coat in cell 1 so that it is seen from BEHIND, with the same back as in cell 2: the coat closed all the way across his back, one red back panel from the collar down to the hem, the black belt as one plain band with no buckle, and a split vent edged in gold in the middle of the hem. Take away the white shirt and all the white cloth down the middle, the open front edges and the buckle: none of them shows from behind. At the top, the collar is seen from behind: a red collar edged in gold across the back of his neck, right under the green head. Keep the coat's outline, size, position, sleeves and length exactly as they are in cell 1, and keep its colours, material, shading and thin dark plum-brown outline. Leave every green pixel the coat does not cover flat pure #00FF00 exactly as it is, and the background flat pure magenta #FF00FF. Do not paint any face, skin, hands, head or other clothing, do not move, resize or redraw the green shape, do not add any figure, and leave empty cells empty. Style: exactly the painting style of the coat already in cells 1 and 2. Keep the grid lines. No text, no labels."
+  }
  }
 ]
 }
