@@ -22298,6 +22298,182 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose. Cell 1: seen from BEHIND, his back to the viewer, feet planted wide apart, one arm stretched out to the right in a backhand slash and the other arm bent in front of him. Cells 2 to 8 are empty and must stay empty. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. The fourth attached picture shows the BACK of this piece. The fifth attached picture is laid out like the base: in cell 1 a DIFFERENT pair of boots is already painted correctly on the same green boy. Copy only how they sit on his feet; never copy their colours, materials or details. On each green shape, paint ONLY a pair of soft magician's slippers: deep blue cloth with gold trim around the opening and gently curled pointed toes. Paint BOTH feet in every cell, following each foot however it points; each foot is whole and rounded, never cut off flat, and the same size as the green foot it covers. He is seen from BEHIND: paint the BACK of both slippers, showing the heels toward the viewer, both alike, as in the fourth attached picture. His left foot is turned out to the left: that slipper follows it, seen from behind and a little from its side, its toe ending in a small rounded point with no big curl, like the left boot in cell 1 of the fifth attached picture. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint: paint each piece WHOLE straight over it, with no gaps, notches, bites or holes anywhere. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
   }
+ },
+ {
+  "id": "mshero_pirate_trousers_b7",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_pirate_trousers_b7.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Hero pose review' cross-job check (Cory 17:15Z 'you need to reference similar poses', 17:16Z 'bandana still need their own hair', 17:17Z 'reference all jobs poses against eachother'): the pirate trousers on crouch, sit and backstep, restyled from the thief trousers on the same poses",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b7_pirate_trousers_src.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_pirate_trousers_walk.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 3 each hold one painted pair of charcoal grey cloth trousers on a flat magenta background, painted exactly where a boy wears them (the boy himself is not shown). Cell 1: worn by a boy crouching low with both knees bent and his feet planted wide apart. Cell 2: worn by a boy sitting on the ground with both legs stretched out in front of him to the right. Cell 3: worn by a boy hopping backwards in the air with both knees bent and his feet together under him. Cells 4 to 8 are empty and must stay empty. Repaint each pair as a young pirate's striped sailor trousers, as in the attached picture: cream cloth with thin navy blue stripes running down along each leg, following its folds; no grey, no wrapped strips of cloth anywhere. Keep each pair exactly as it is in every other way: the same outline, shape, size, folds and position in its cell, so it still sits exactly on the same boy in the same pose. Only the colours, material and details change. Paint nothing else: no body, skin, head, hands or other clothing. Leave the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add anything. Leave empty cells empty. Style: exactly the painting style of the trousers in the attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_pirate_boots_b7",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_pirate_boots_b7.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Hero pose review' cross-job check (Cory 17:15Z 'you need to reference similar poses', 17:16Z 'bandana still need their own hair', 17:17Z 'reference all jobs poses against eachother'): the pirate boots on sit, restyled from the thief boots on the same pose",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b7_pirate_boots_src.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_pirate_boots_walk.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds one painted pair of brown leather boots, the two boots side by side on a flat magenta background, painted exactly where a boy wears them (the boy himself is not shown). Cell 1: worn by a boy sitting on the ground with both legs stretched out in front of him to the right. Cells 2 to 8 are empty and must stay empty. Repaint them as a young pirate's cuffed boots, as in the attached picture: black leather boots with a wide folded-down cuff at the top and sturdy dark soles; exactly two boots. Keep them exactly as they are in every other way: the same outline, shape, size, folds and position in their cell, so they still sit exactly on the same boy in the same pose. Only the colours, material and details change. Paint nothing else: no body, skin, head, hands or other clothing. Leave the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add anything. Leave empty cells empty. Style: exactly the painting style of the boots in the attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_thief_trousers_b7",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_thief_trousers_b7.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Hero pose review' cross-job check (Cory 17:15Z 'you need to reference similar poses', 17:16Z 'bandana still need their own hair', 17:17Z 'reference all jobs poses against eachother'): the thief trousers on throw1, restyled from the pirate trousers on the same pose",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b7_thief_trousers_src.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_thief_trousers_walk.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds one painted pair of cream trousers with thin navy blue stripes on a flat magenta background, painted exactly where a boy wears them (the boy himself is not shown). Cell 1: worn by a boy standing with both feet flat on the ground, a little apart. Cells 2 to 8 are empty and must stay empty. Repaint them as a young thief's trousers, as in the attached picture: plain charcoal grey cloth with no stripes. Keep them exactly as they are in every other way: the same outline, shape, size, folds and position in their cell, so they still sit exactly on the same boy in the same pose. Only the colours, material and details change. Paint nothing else: no body, skin, head, hands or other clothing. Leave the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add anything. Leave empty cells empty. Style: exactly the painting style of the trousers in the attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_archer_boots_b7",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_archer_boots_b7.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Hero pose review' cross-job check (Cory 17:15Z 'you need to reference similar poses', 17:16Z 'bandana still need their own hair', 17:17Z 'reference all jobs poses against eachother'): the archer boots on throw1, restyled from the thief boots on the same pose",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b7_archer_boots_src.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_archer_boots_walk.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds one painted pair of dark brown leather boots with folded-over tops on a flat magenta background, painted exactly where a boy wears them (the boy himself is not shown). Cell 1: worn by a boy standing with both feet flat on the ground, a little apart. Cells 2 to 8 are empty and must stay empty. Repaint them as a young archer's lace-up boots, as in the attached picture: brown leather boots laced up the front with pale cord, with sturdy dark soles; both boots flat on the ground. Keep them exactly as they are in every other way: the same outline, shape, size, folds and position in their cell, so they still sit exactly on the same boy in the same pose. Only the colours, material and details change. Paint nothing else: no body, skin, head, hands or other clothing. Leave the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add anything. Leave empty cells empty. Style: exactly the painting style of the boots in the attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_thief_jerkin_b7",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_thief_jerkin_b7.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Hero pose review' cross-job check (Cory 17:15Z 'you need to reference similar poses', 17:16Z 'bandana still need their own hair', 17:17Z 'reference all jobs poses against eachother'): the thief jerkin on skyward2, ladder1 and roll1, restyled from the warrior jerkin on the same poses",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b7_thief_jerkin_src.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_thief_jerkin_walk.png",
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_thief_jerkin_back.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 3 each hold one painted padded tan cloth jerkin with short sleeves on a flat magenta background, painted exactly where a boy wears it (the boy himself is not shown). Cell 1: worn by a boy standing on one leg with his other knee raised high, one arm punched straight forward and the other fist at his chest, seen from the FRONT. Cell 2: worn by a boy climbing a ladder, seen from BEHIND, his back to the viewer: one arm reaching up above his head, the other arm bent with its fist by his shoulder. Cell 3: worn by a boy curled up into a tight ball in mid roll, knees pulled up to his chest and both arms hugging his knees, seen from the side. Cells 4 to 8 are empty and must stay empty. Repaint each jerkin as a young thief's buckled leather jerkin, as in the first attached picture: dark brown leather over a charcoal grey shirt, with charcoal grey short sleeves, two straps crossing his chest with small silver buckles, a narrow dark belt with a small pouch at the waist, and the hem just below the belt; no tan cloth and no quilted padding anywhere. Cell 2 is seen from BEHIND: paint the BACK of the jerkin there, as in the second attached picture, with no straps, buckles or pouch from its front showing. Keep each jerkin exactly as it is in every other way: the same outline, shape, size, folds and position in its cell, so it still sits exactly on the same boy in the same pose. Only the colours, material and details change. Paint nothing else: no body, skin, head, hands or other clothing. Leave the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add anything. Leave empty cells empty. Style: exactly the painting style of the jerkin in the first attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_pirate_coat_b7",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_pirate_coat_b7.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Hero pose review' cross-job check (Cory 17:15Z 'you need to reference similar poses', 17:16Z 'bandana still need their own hair', 17:17Z 'reference all jobs poses against eachother'): the pirate coat on sit, its brown front skirt repainted red",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b7_pirate_coat_src.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/mshero_pirate_coat_walk.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds a painted young pirate's red coat on a flat magenta background, painted exactly where a boy wears it as he sits on the ground with both legs stretched out in front of him to the right (the boy himself is not shown). Cells 2 to 8 are empty and must stay empty. Below the black belt, the front skirt of the coat that lies over his lap, reaching to the right, is painted brown by mistake: repaint that skirt in the coat's own deep red wool, with a smooth gold-trimmed hem like the coat's other edges, as in the attached picture. The coat has no brown anywhere. Keep everything else exactly as it is: the outline, shape, size and position of the whole coat, its gold trim, the cream shirt front, the black belt with its brass buckle, both sleeves and the red tail behind him on the left. Paint nothing else: no body, skin, head, hands or other clothing. Leave the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add anything. Leave empty cells empty. Style: exactly the painting style of the coat in the attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_thief_hair_b7",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_thief_hair_b7.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Hero pose review' cross-job check (Cory 17:15Z 'you need to reference similar poses', 17:16Z 'bandana still need their own hair', 17:17Z 'reference all jobs poses against eachother'): the thief bandana's own hair (front, back, fainted): locks below the bandana, none out of its top",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b7_bandana_hair_sil.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/b7_bandana_hair_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 3 each hold the flat outline of a small boy wearing a tied bandana: his head and body are flat bright green (#00FF00) and his bandana is flat pure blue (#0000FF), exactly as he wears it in cells 1 to 3 of the attached picture. Cell 1: standing, facing right in a slight three-quarter view, seen from the FRONT. Cell 2: standing, seen from BEHIND, his back to the viewer. Cell 3: lying flat on his back, fainted, his head on the right. Cells 4 to 8 are empty and must stay empty. Cells 5 to 7 of the attached picture show the same boy in the same three poses with his own hair and no bandana: short, messy, spiky chestnut-brown hair with a swept fringe. In cells 1 to 3, paint ONLY the bits of that same chestnut-brown hair that show below the bandana, and nothing else: the bandana covers the whole top of his head, so no hair sticks up out of its top or pokes out of its sides above the ears. Cell 1: a few short locks at his temple and in front of his ear, below the bandana's edge, and short locks at the back of his neck below the knot. Cell 2: short hair at the back of his head and neck, from under the bandana's bottom edge down to his nape, between his ears, with the knot's tails lying over it. Cell 3: a few short locks at his temple and in front of his ear below the bandana's edge, and short locks at the back of his head where it lies on the ground. Each lock starts at the edge of the blue bandana and lies over the green head, sized to match him. Paint the hair WHOLE and solid, every lock fully closed, with no holes. Do NOT paint the bandana: leave every blue pixel flat pure #0000FF exactly as it is, with no cloth, shading or outline on it. Do NOT paint the head, face, ears, body or anything else: leave every green pixel you do not paint hair over flat pure #00FF00, and leave the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Style: exactly the hair in cells 5 to 7 of the attached picture: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline. Keep the grid lines. No text, no labels."
+  }
  }
 ]
 }
