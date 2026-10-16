@@ -241,8 +241,8 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
   the "Lv. a-b" level_text) only so content tests keep the zones in order.
 - Monster strength: each kind's own HP, attack and Dawn Essence are what it is on the map nearest
   a town that it lives on; on each map farther from the nearest town than that it is 15% stronger
-  (HP, attack and essence). Shortcuts don't count toward that distance. Bosses keep their own
-  numbers.
+  (HP, attack and essence). Shortcuts and one-way ways home (a boss arena's) don't count
+  toward that distance. Bosses keep their own numbers.
 - The paths players walk between towns stay gentle (tuning tier 10 or below) the whole way, so new
   players can reach every job town. Dead-end training branches climb in smooth steps to a boss
   past the top map.
