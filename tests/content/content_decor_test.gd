@@ -2,7 +2,8 @@ extends TestCase
 ## The floor and platforms aren't cluttered: the biome's scattered trees, bushes, rocks and
 ## flowers stand wholly on their own land, clear of buildings, portals, NPCs, ropes and
 ## ladders, props and lanterns, never on top of each other, and only as often as the shared
-## density allows (see DecorPlacement); nothing grows on a hanging bridge.
+## density allows (see DecorPlacement); in towns even the tree line keeps clear of all of
+## that and no two pieces overlap; nothing grows on a hanging bridge.
 
 const Scan := preload("res://tests/content/content_scan.gd")
 
@@ -48,7 +49,7 @@ func test_floor_scenery_keeps_clear() -> void:
 		back.append_array(LanternPlacement.keep_clear(m))
 		for p in DecorPlacement.floor_pieces(m, _rng(m)):
 			var s := p.span()
-			for a in (back if DecorPlacement.is_back(p.rule) else near):
+			for a in (back if DecorPlacement.is_back(p.rule) and not m.town else near):
 				check(_clear(s, a), "%s: a %s at x %d overlaps scenery at x %d-%d" % [Scan.where(m), p.texture.resource_path.get_file(), p.x, a.x, a.y])
 		# the things it keeps clear of, named directly
 		for p in DecorPlacement.floor_pieces(m, _rng(m)):
@@ -56,7 +57,7 @@ func test_floor_scenery_keeps_clear() -> void:
 			for b in m.buildings:
 				if b.platform == 0:
 					check(_clear(s, b.span()), "%s: a %s stands in front of or behind %s" % [Scan.where(m), p.texture.resource_path.get_file(), b.building.id])
-			if DecorPlacement.is_back(p.rule):
+			if DecorPlacement.is_back(p.rule) and not m.town:
 				continue
 			for n in m.npcs:
 				if n.platform == 0:
@@ -93,6 +94,16 @@ func test_pieces_of_a_kind_never_overlap() -> void:
 				if a.rule == b.rule and is_equal_approx(a.y, b.y):
 					check(_clear(a.span(), b.span()), "%s: two %s pieces overlap at x %d and %d" % [Scan.where(m), a.rule.textures[0].resource_path.get_file(), a.x, b.x])
 
+func test_town_scenery_never_overlaps() -> void:
+	for m in _outdoor():
+		if not m.town:
+			continue
+		var all := DecorPlacement.floor_pieces(m, _rng(m)).filter(func(p: DecorPlacement.Piece) -> bool: return not m.look().town_decor.has(p.rule))
+		for i in all.size():
+			for j in range(i + 1, all.size()):
+				check(_clear(all[i].span(), all[j].span()), "%s: a %s at x %d overlaps a %s at x %d" % [Scan.where(m),
+						all[i].texture.resource_path.get_file(), all[i].x, all[j].texture.resource_path.get_file(), all[j].x])
+
 func test_scenery_is_sparse() -> void:
 	# Each rule fills at most one slot per (its nearest spacing / density) of the land.
 	for m in _outdoor():
@@ -112,6 +123,8 @@ func test_density_can_be_set_per_map() -> void:
 	check(DecorPlacement.platform_pieces(m, _rng(m)).is_empty(), "a map with decor_density 0 has no platform scenery")
 	m.decor_density = -1.0
 	check_eq(DecorPlacement.density(m), DecorPlacement.DENSITY, "-1 uses the shared density")
+	m.town = true
+	check_eq(DecorPlacement.density(m), DecorPlacement.TOWN_DENSITY, "-1 in a town uses the town density")
 
 func test_nothing_grows_on_a_hanging_bridge() -> void:
 	for m in _outdoor():

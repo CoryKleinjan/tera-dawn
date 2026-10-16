@@ -9,14 +9,17 @@ extends RefCounted
 ## - sits wholly on the land it stands on: inside the map's floor, or inside its platform's
 ##   ends;
 ## - keeps clear of what stands on that land (buildings, portals, NPCs, ropes and ladders,
-##   props, lanterns), so it never shows in front of or behind them. Pieces far back (the
-##   tree line, a field's distant houses) only keep clear of buildings and lanterns;
-## - never overlaps another piece from the same rule;
+##   props, lanterns), so it never shows in front of or behind them. In a field, pieces far
+##   back (the tree line, distant houses) only keep clear of buildings and lanterns; in a town
+##   they keep clear of everything, so no exit or prop stands in front of a tree or a house;
+## - never overlaps another piece from the same rule, and in a town no other piece at all;
 ## - stands `density` as often as its DecorDef asks (wider gaps between slots).
 
 ## How often the biome's scenery stands, as a share of what its DecorDefs ask for, when a
 ## map leaves `MapDef.decor_density` at -1. Every biome's rules are spaced for 1.0.
 const DENSITY := 0.7
+## The same for a town: half as often, since its own props already fill the street.
+const TOWN_DENSITY := 0.35
 ## Open ground kept between a piece and anything it keeps clear of, in game pixels.
 const GAP := 8.0
 ## Rules whose nearest depth is at or behind this stand far back (see the class notes).
@@ -40,7 +43,9 @@ class Piece:
 
 ## How often this map's scenery stands (0 for none).
 static func density(map: MapDef) -> float:
-	return DENSITY if map.decor_density < 0.0 else map.decor_density
+	if map.decor_density >= 0.0:
+		return map.decor_density
+	return TOWN_DENSITY if map.town else DENSITY
 
 ## The floor's scenery (ground_decor), then a building-less town's houses (town_decor), in
 ## the order they are drawn.
@@ -55,21 +60,26 @@ static func floor_pieces(map: MapDef, rng: RandomNumberGenerator) -> Array[Piece
 	var back := building_spans(map, 0)
 	back.append_array(lanterns)
 	for rule in map.look().ground_decor:
-		out.append_array(scatter(rule, land, map.ground_y, rng, back if is_back(rule) else near, density(map)))
+		var got := scatter(rule, land, map.ground_y, rng, near if map.town or not is_back(rule) else back, density(map))
+		if map.town:
+			# later rules keep clear of these too
+			for p in got:
+				near.append(p.span())
+		out.append_array(got)
 	if map.town and map.buildings.is_empty():
 		for rule in map.look().town_decor:
 			out.append_array(scatter(rule, land, map.ground_y, rng, back, 1.0))
 	return out
 
 ## The scenery along each floating platform (platform_decor), platform by platform. Nothing
-## grows on a bridge hanging between two platforms.
+## grows on a bridge hanging between two platforms or on a ledge painted into the scenery.
 static func platform_pieces(map: MapDef, rng: RandomNumberGenerator) -> Array[Piece]:
 	var out: Array[Piece] = []
 	if map.look() == null:
 		return out
 	for i in map.platforms.size():
 		var d := map.platforms[i]
-		if d.hangs:
+		if d.hangs or d.in_scenery:
 			continue
 		var avoid := standing_on(map, i + 1)
 		for rule in map.look().platform_decor:

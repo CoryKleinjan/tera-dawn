@@ -253,10 +253,10 @@ func _door(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
 ## is drawn one texture pixel taller than its slot, so the joints never show a hairline gap; the
 ## next piece covers the extra row. All the pieces stand straight up and down on screen under
 ## the climbable's top (upright_sprite.gdshader), so the stack reads as one straight ladder.
-## Like characters, climbables cast no shadows.
+## Like characters, climbables cast no shadows. One painted into the scenery draws nothing.
 func _climbable(c: ClimbableDef, platforms: Array[Platform]) -> void:
 	var st := c.style
-	if st == null:
+	if st == null or c.in_scenery:
 		return
 	var z := TDStage.Z_CLIMBABLE
 	var flip := st.top_flipped(ClimbStyleDef.ledge_room(c.x, c.top, platforms))

@@ -54,8 +54,8 @@ func test_ladders_and_ropes_line_up_in_every_map() -> void:
 		var layout := MapLayout.new(m)
 		for i in m.climbables.size():
 			var c := m.climbables[i]
-			if c == null or c.style == null:
-				continue
+			if c == null or c.style == null or c.in_scenery:
+				continue  # one painted into the scenery draws nothing
 			var st := c.style
 			var root := Node3D.new()
 			SceneryBuilder.new(null, root)._climbable(c, layout.platforms)
