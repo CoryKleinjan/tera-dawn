@@ -264,7 +264,7 @@ func click_avatar(a: TDAvatar) -> void:
 
 ## Keys don't move the player while they type or watch a cutscene.
 func input_blocked() -> bool:
-	return hud.typing() or scenes.playing()
+	return hud.holds_input() or scenes.playing()
 
 ## The server started cutscene `id` for you. One this game doesn't have is answered as
 ## finished, so the server doesn't wait on it.

@@ -48,6 +48,13 @@ the title card again). The HUD puts the game menu and settings screen on it. Esc
 when Esc belongs to the game. A new screen before the game goes on the title screen; a new
 in-game piece goes on the HUD.
 
+`TDPad` (`scripts/ui/pad.gd`, `hud.pad`) makes the gamepad work everywhere: it turns the pad's
+page with the left trigger, opens `TDPadMenu` (Back, a button per `TDHud.WINDOW_ACTIONS`), and
+while a window is open and the pad was used last it draws a cursor that pushes real mouse
+events through the viewport, so a new window works on the pad with no extra code. While it's
+busy (`blocking`) the hero stands still (`TDWorld.input_blocked`). Pad A presses focused menu
+buttons (`ui_accept`).
+
 ## UI art and building blocks
 
 - **`UiSkin`**: the UI textures (`tex`, `sized`), nine-patch styles (`box`, `draw_box`), the
@@ -76,7 +83,9 @@ keep the default, so an old or hand-edited file never breaks the game.
   group on the Controls tab, its default keys and its gamepad buttons; `apply` writes them to
   the `InputMap`. To add an action the player can press, add a line there and nothing else.
   Two actions never share a key: setting a used key swaps it. `pause` (Esc) can't be changed,
-  so the menu is always reachable.
+  so the menu is always reachable. Pad buttons sit on two pages: `pad`/`axis` normally,
+  `pad2`/`axis2` while the left trigger is held (`Keybinds.use_pad_page`); `pad_text` names
+  them, and `TDStatusBar._key_name` uses it while the pad is in use (`TDPad.using_pad`).
 - **AudioSettings** sets the Master, Music and Effects buses (`default_bus_layout.tres`); the
   Sound autoload plays everything on them (see [music and sound](audio.md)).
 - **VideoSettings** sets the window, vsync and frame cap, and the stage's costly effects
