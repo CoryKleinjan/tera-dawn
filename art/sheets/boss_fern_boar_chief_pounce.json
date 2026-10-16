@@ -1,0 +1,35 @@
+{
+  "source": "art/source/boss_fern_boar_chief_pounce.png",
+  "save": false,
+  "out_dir": "art/build/boss_fern_boar_chief_pounce",
+  "cells": [
+    [
+      "pounce_windup",
+      "",
+      "pounce_windup2",
+      "",
+      "pounce"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.2785,
+  "detail": 2.75,
+  "grid": {
+    "rows": [
+      0,
+      540
+    ],
+    "cols": [
+      [
+        0,
+        417,
+        423,
+        812,
+        818,
+        1260
+      ]
+    ]
+  },
+  "overrides": {}
+}

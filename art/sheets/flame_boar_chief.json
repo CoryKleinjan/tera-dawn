@@ -69,7 +69,13 @@
         "pounce": "boss_flame_boar_chief_pounce:pounce",
         "slam_windup": "boss_flame_boar_chief_slam:slam_windup",
         "slam_windup2": "boss_flame_boar_chief_slam:slam_windup2",
-        "slam": "boss_flame_boar_chief_slam:slam"
+        "slam": "boss_flame_boar_chief_slam:slam",
+        "charge2": "boss_flame_boar_chief_ends_a:charge2",
+        "charge_recover": "boss_flame_boar_chief_ends_a:charge_recover",
+        "slam2": "boss_flame_boar_chief_ends_a:slam2",
+        "slam_recover": "boss_flame_boar_chief_ends_b:slam_recover",
+        "pounce2": "boss_flame_boar_chief_ends_b:pounce2",
+        "pounce_recover": "boss_flame_boar_chief_ends_b:pounce_recover"
       },
       "anchor": "mass",
       "baseline": "bottom",
@@ -131,9 +137,11 @@
         },
         "charge": {
           "frames": [
-            "charge"
+            "charge",
+            "charge2"
           ],
-          "fps": 1
+          "fps": 8,
+          "loop": false
         },
         "pounce_windup": {
           "frames": [
@@ -145,9 +153,11 @@
         },
         "pounce": {
           "frames": [
-            "pounce"
+            "pounce",
+            "pounce2"
           ],
-          "fps": 1
+          "fps": 8,
+          "loop": false
         },
         "slam_windup": {
           "frames": [
@@ -159,9 +169,11 @@
         },
         "slam": {
           "frames": [
-            "slam"
+            "slam",
+            "slam2"
           ],
-          "fps": 1
+          "fps": 8,
+          "loop": false
         },
         "intro": {
           "frames": [
@@ -190,6 +202,24 @@
             2
           ],
           "loop": false
+        },
+        "charge_recover": {
+          "frames": [
+            "charge_recover"
+          ],
+          "fps": 1
+        },
+        "slam_recover": {
+          "frames": [
+            "slam_recover"
+          ],
+          "fps": 1
+        },
+        "pounce_recover": {
+          "frames": [
+            "pounce_recover"
+          ],
+          "fps": 1
         }
       }
     }

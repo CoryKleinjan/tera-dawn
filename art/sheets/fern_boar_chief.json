@@ -1,0 +1,262 @@
+{
+  "source": "art/source/boss_fern_boar_chief_main.png",
+  "label_band": 0,
+  "save": false,
+  "out_dir": "art/build/fern_boar_chief",
+  "cells": [
+    [
+      "idle1",
+      "",
+      "idle2",
+      "",
+      "move1",
+      "",
+      "move2"
+    ],
+    [
+      ""
+    ],
+    [
+      "move3",
+      "",
+      "windup",
+      "",
+      "strike",
+      "",
+      "special"
+    ],
+    [
+      ""
+    ],
+    [
+      "hurt",
+      "",
+      "enraged",
+      "",
+      "defeated1",
+      "",
+      "defeated2"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      398,
+      402,
+      799,
+      803,
+      1200
+    ],
+    "cols": [
+      [
+        0,
+        398,
+        402,
+        798,
+        802,
+        1198,
+        1202,
+        1600
+      ],
+      [
+        0,
+        1600
+      ],
+      [
+        0,
+        398,
+        402,
+        798,
+        802,
+        1198,
+        1202,
+        1600
+      ],
+      [
+        0,
+        1600
+      ],
+      [
+        0,
+        398,
+        402,
+        798,
+        802,
+        1198,
+        1202,
+        1600
+      ]
+    ]
+  },
+  "inset": 4,
+  "scale": 0.2978,
+  "detail": 2.75,
+  "sets": {
+    "fern_boar_chief": {
+      "anchor": "mass",
+      "baseline": "bottom",
+      "out": "assets/sprites/monsters/fern_boar_chief.png",
+      "sprite_frames": "assets/animations/fern_boar_chief.tres",
+      "frames": {
+        "idle1": "fern_boar_chief:idle1",
+        "idle2": "fern_boar_chief:idle2",
+        "move1": "fern_boar_chief:move1",
+        "move2": "fern_boar_chief:move2",
+        "move3": "fern_boar_chief:move3",
+        "windup": "fern_boar_chief:windup",
+        "strike": "fern_boar_chief:strike",
+        "special": "fern_boar_chief:special",
+        "hurt": "fern_boar_chief:hurt",
+        "enraged": "fern_boar_chief:enraged",
+        "charge_windup": "boss_fern_boar_chief_charge:charge_windup",
+        "charge_windup2": "boss_fern_boar_chief_charge:charge_windup2",
+        "charge": "boss_fern_boar_chief_charge:charge",
+        "slam_windup": "boss_fern_boar_chief_slam:slam_windup",
+        "slam_windup2": "boss_fern_boar_chief_slam:slam_windup2",
+        "slam": "boss_fern_boar_chief_slam:slam",
+        "pounce_windup": "boss_fern_boar_chief_pounce:pounce_windup",
+        "pounce_windup2": "boss_fern_boar_chief_pounce:pounce_windup2",
+        "pounce": "boss_fern_boar_chief_pounce:pounce",
+        "charge2": "boss_fern_boar_chief_ends_a:charge2",
+        "charge_recover": "boss_fern_boar_chief_ends_a:charge_recover",
+        "slam2": "boss_fern_boar_chief_ends_a:slam2",
+        "slam_recover": "boss_fern_boar_chief_ends_b:slam_recover",
+        "pounce2": "boss_fern_boar_chief_ends_b:pounce2",
+        "pounce_recover": "boss_fern_boar_chief_ends_b:pounce_recover",
+        "intro1": "boss_fern_boar_chief_intro:intro1",
+        "intro2": "boss_fern_boar_chief_intro:intro2",
+        "intro3": "boss_fern_boar_chief_intro:intro3",
+        "death1": "boss_fern_boar_chief_death:death1",
+        "death2": "boss_fern_boar_chief_death:death2",
+        "death3": "boss_fern_boar_chief_death:death3"
+      },
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "move1",
+            "move2",
+            "move3",
+            "move2"
+          ],
+          "fps": 6
+        },
+        "attack": {
+          "frames": [
+            "windup",
+            "strike",
+            "special"
+          ],
+          "fps": 3,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "death1",
+            "death2",
+            "death3"
+          ],
+          "fps": 4,
+          "durations": [
+            1,
+            1,
+            3
+          ],
+          "loop": false
+        },
+        "charge_windup": {
+          "frames": [
+            "charge_windup",
+            "charge_windup2"
+          ],
+          "fps": 3,
+          "loop": false
+        },
+        "charge": {
+          "frames": [
+            "charge",
+            "charge2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "charge_recover": {
+          "frames": [
+            "charge_recover"
+          ],
+          "fps": 1
+        },
+        "slam_windup": {
+          "frames": [
+            "slam_windup",
+            "slam_windup2"
+          ],
+          "fps": 3,
+          "loop": false
+        },
+        "slam": {
+          "frames": [
+            "slam",
+            "slam2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "slam_recover": {
+          "frames": [
+            "slam_recover"
+          ],
+          "fps": 1
+        },
+        "pounce_windup": {
+          "frames": [
+            "pounce_windup",
+            "pounce_windup2"
+          ],
+          "fps": 3,
+          "loop": false
+        },
+        "pounce": {
+          "frames": [
+            "pounce",
+            "pounce2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "pounce_recover": {
+          "frames": [
+            "pounce_recover"
+          ],
+          "fps": 1
+        },
+        "intro": {
+          "frames": [
+            "intro1",
+            "intro2",
+            "intro3"
+          ],
+          "fps": 5,
+          "durations": [
+            2,
+            4,
+            2
+          ],
+          "loop": false
+        }
+      }
+    }
+  }
+}

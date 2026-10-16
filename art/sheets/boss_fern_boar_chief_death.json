@@ -1,0 +1,35 @@
+{
+  "source": "art/source/boss_fern_boar_chief_death.png",
+  "save": false,
+  "out_dir": "art/build/boss_fern_boar_chief_death",
+  "cells": [
+    [
+      "death1",
+      "",
+      "death2",
+      "",
+      "death3"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.2949,
+  "detail": 2.75,
+  "grid": {
+    "rows": [
+      0,
+      540
+    ],
+    "cols": [
+      [
+        0,
+        417,
+        423,
+        836,
+        842,
+        1260
+      ]
+    ]
+  },
+  "overrides": {}
+}
