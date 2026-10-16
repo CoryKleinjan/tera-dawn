@@ -6,8 +6,8 @@
 script = ExtResource("1_achievement_def")
 id = &"well_liked"
 steam = "ACH_WELL_LIKED"
-title = "Well Liked"
-text = "Reach 10 fame."
-kind = "fame"
-goal = 10
+title = "Untouchable"
+text = "Defeat a boss without taking a hit on its map."
+kind = "clean_bosses"
+goal = 1
 order = 220

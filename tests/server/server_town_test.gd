@@ -218,6 +218,19 @@ func test_travel_needs_you_by_the_driver() -> void:
 	check_eq(p.map.def.id, ServerHarness.TOWN, "still in town")
 	check_eq(c.shards, 150, "nothing paid")
 
+func test_a_coach_only_goes_where_you_have_been() -> void:
+	var driver: NpcDef = Content.maps[ServerHarness.TOWN].npcs.filter(func(n: NpcPlacement) -> bool: return n.npc.id == &"test_driver")[0].npc
+	driver.travel[0].needs_visit = true
+	c.visited.erase(String(ServerHarness.FIELD))
+	h.place(p, DRIVER_X)
+	c.shards = 150
+	h.ask(2, &"req_travel", [&"test_driver", 0])
+	check_eq(p.map.def.id, ServerHarness.TOWN, "not before you've been there")
+	check_eq(c.shards, 150, "nothing paid")
+	c.visit(ServerHarness.FIELD)
+	h.ask(2, &"req_travel", [&"test_driver", 0])
+	check_eq(p.map.def.id, ServerHarness.FIELD, "and once you have")
+
 # ---------- job instructors ----------
 
 ## A Beginner who put 20 points into STR instead of the INT a Magician needs.

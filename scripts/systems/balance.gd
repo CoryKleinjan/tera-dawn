@@ -7,8 +7,14 @@ extends RefCounted
 
 ## Hits a level-matched monster should take with the main attack, low to high.
 const BAND := Vector2(1.5, 9.0)
-## The job you are at `level` along each line (Beginners advance at 10).
-const LINES := [&"warrior", &"archer", &"mage", &"thief", &"pirate"]
+
+## The first jobs (each a line a Beginner can take at 10), from the game's jobs. Second
+## jobs join the checks once players are offered them.
+static func lines() -> Array[StringName]:
+	var out: Array[StringName] = []
+	for j in JobDef.paths_from(Character.START_JOB):
+		out.append(j.id)
+	return out
 
 ## A character of `job_id` at `level`, as a player who spent their points sensibly would have.
 static func typical(job_id: StringName, level: int) -> Character:
@@ -43,8 +49,8 @@ static func _score(c: Character, e: EquipDef) -> int:
 	return (s.magic_attack + s.intelligence if c.job.primary_stat == "intelligence" else s.attack * 3) \
 		+ s.value(StringName(c.job.primary_stat)) + s.defense / 4
 
-## The attack this character would mostly use: the strongest attack skill they could have
-## (at the level their SP allows), or the basic attack.
+## The attack this character would mostly use: the attack skill they could have (at the
+## level their SP allows) with the most damage per second, or the basic attack.
 static func main_attack(c: Character) -> Array:
 	var best: SkillDef = c.skills.basic_attack()
 	var best_level := 1
@@ -57,10 +63,16 @@ static func main_attack(c: Character) -> Array:
 			continue
 		if s.offhand.size() > 0 and (c.gear.offhand() == null or not s.offhand.has(c.gear.offhand().offhand_kind)):
 			continue
-		if _average(c, s, lvl) * s.hits > _average(c, best, best_level) * best.hits:
+		if per_second(c, s, lvl) > per_second(c, best, best_level):
 			best = s
 			best_level = lvl
 	return [best, best_level]
+
+## Average damage per second using only `s` at `lvl`: a cast's hits over the time until it
+## can be cast again (the shared cooldown, or its own recharge when that's longer).
+static func per_second(c: Character, s: SkillDef, lvl: int) -> float:
+	var ticks := maxi(1, maxi(s.cooldown, s.recharge_ticks(lvl)))
+	return _average(c, s, lvl) * s.hits * 60.0 / ticks
 
 static func _average(c: Character, s: SkillDef, lvl: int) -> float:
 	var spread := c.magic_range() if s.magic else c.damage_range()

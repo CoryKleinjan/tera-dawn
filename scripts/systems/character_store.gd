@@ -3,7 +3,8 @@ extends RefCounted
 ## The characters saved on this computer, one JSON file per character name, in the order
 ## they were made (`order.json`). Each player keeps their own characters here and brings
 ## one along to whatever game they play: solo, hosting, or joining a friend's (see Net).
-## Deleted characters are moved to `deleted/`, where they can be put back by hand.
+## Deleted characters are moved to `deleted/`, where they can be put back by hand. Saves
+## are written through SafeFile, so each keeps a `.bak` of the last good save.
 
 const MAX_NAME := 12
 ## How many characters character select has room for.
@@ -28,7 +29,7 @@ func _path(char_name: String) -> String:
 	return folder.path_join(char_name.to_lower().replace(" ", "_") + ".json")
 
 func exists(char_name: String) -> bool:
-	return FileAccess.file_exists(_path(char_name))
+	return SafeFile.exists(_path(char_name))
 
 ## The saved character with this name (in any case), named as it was made, or null if
 ## there isn't one.
@@ -38,10 +39,7 @@ func load_character(char_name: String) -> Character:
 ## Reads a character from a save file, named `char_name` or, if that's "", the name saved
 ## in the file. Null if it's missing or unreadable.
 static func load_file(path: String, char_name: String) -> Character:
-	if not FileAccess.file_exists(path):
-		return null
-	var f := FileAccess.open(path, FileAccess.READ)
-	var data: Variant = JSON.parse_string(f.get_as_text()) if f else null
+	var data: Variant = SafeFile.read_json(path)
 	if not data is Dictionary:
 		return null
 	return from_dict(data, char_name)
@@ -67,7 +65,11 @@ func saved_name(char_name: String) -> String:
 ## Every character saved here.
 func saved_characters() -> Array[Character]:
 	var out: Array[Character] = []
-	for f in DirAccess.get_files_at(folder):
+	var files := DirAccess.get_files_at(folder)
+	for f in files:
+		# a save whose file was lost mid-write still has its backup
+		if f.ends_with(".json" + SafeFile.BACKUP) and not files.has(f.trim_suffix(SafeFile.BACKUP)):
+			f = f.trim_suffix(SafeFile.BACKUP)
 		if f.ends_with(".json") and f != ORDER_FILE:
 			var c := load_file(folder.path_join(f), "")
 			if c and c.name != "":
@@ -78,8 +80,7 @@ func saved_characters() -> Array[Character]:
 ## doesn't know yet, copied in by hand say, go at the end by name).
 func names() -> Array[String]:
 	var out: Array[String] = []
-	var f := FileAccess.open(folder.path_join(ORDER_FILE), FileAccess.READ)
-	var order: Variant = JSON.parse_string(f.get_as_text()) if f else null
+	var order: Variant = SafeFile.read_json(folder.path_join(ORDER_FILE))
 	if order is Array:
 		for n in order:
 			var saved := saved_name(str(n))
@@ -94,9 +95,7 @@ func names() -> Array[String]:
 	return out
 
 func _save_order(list: Array[String]) -> void:
-	var f := FileAccess.open(folder.path_join(ORDER_FILE), FileAccess.WRITE)
-	if f:
-		f.store_string(JSON.stringify(list))
+	SafeFile.write_text(folder.path_join(ORDER_FILE), JSON.stringify(list))
 
 ## The characters as character select shows them ({name, level, job}), at most
 ## MAX_CHARACTERS, in the order they were made.
@@ -144,6 +143,11 @@ func remove(char_name: String) -> void:
 	if FileAccess.file_exists(to):
 		DirAccess.remove_absolute(to)
 	DirAccess.rename_absolute(_path(char_name), to)
+	# its backup goes too, so it doesn't come back
+	if FileAccess.file_exists(_path(char_name) + SafeFile.BACKUP):
+		if FileAccess.file_exists(to + SafeFile.BACKUP):
+			DirAccess.remove_absolute(to + SafeFile.BACKUP)
+		DirAccess.rename_absolute(_path(char_name) + SafeFile.BACKUP, to + SafeFile.BACKUP)
 	for n in list.duplicate():
 		if n.to_lower() == char_name.to_lower():
 			list.erase(n)
@@ -156,10 +160,7 @@ func save(c: Character) -> void:
 ## the order if it's new.
 func save_data(char_name: String, data: Dictionary) -> void:
 	var fresh := not exists(char_name)
-	var f := FileAccess.open(_path(char_name), FileAccess.WRITE)
-	if f:
-		f.store_string(JSON.stringify(data))
-		f.close()
+	SafeFile.write_text(_path(char_name), JSON.stringify(data))
 	if fresh:
 		var list := names()
 		if not list.has(char_name):

@@ -57,8 +57,6 @@ func test_a_finished_trade_counts_as_a_deal() -> void:
 	h.ask(2, &"req_trade_ready")
 	h.ask(3, &"req_trade_ready")
 	check_eq(int(ann.character.counters.get(Counters.DEALS, 0)), 1, "Ann's tally")
-	h.step(1)
-	check_has(h.events(3, &"ev_achievement"), ["dealmaker"], "Bob earns Dealmaker")
 
 func test_changing_the_offer_unreadies_both() -> void:
 	h.ask(2, &"req_trade_ready")

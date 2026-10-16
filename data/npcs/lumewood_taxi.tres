@@ -10,6 +10,7 @@ target_map = &"dawnharbor"
 target_x = 300.0
 price = 400
 by = "Coach"
+needs_visit = true
 
 [resource]
 script = ExtResource("1_npc_def")

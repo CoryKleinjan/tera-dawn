@@ -86,13 +86,25 @@ func check() -> void:
 	_check(Game.me.inventory.count_of(tusk) == 7 and Game.me.storage.count_of(tusk) == 0, "and it can be taken back")
 	vault.visible = false
 	var rook: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"harbor_taxi")[0]
+	# Earlier checks may have been to some job towns: start from none.
+	var towns: Array[String] = ["greenbough", "lumewood", "emberforge", "lanternfall", "driftcove"]
+	for c: Character in [_me().character, Game.me]:
+		c.visited = c.visited.filter(func(id: String) -> bool: return not towns.has(id))
 	_teleport(Vector2(rook.position.x - 30, rook.position.y))
 	await _ticks(2)
 	await _tap("move_up")
 	labels = talk.options.map(func(o: Array) -> String: return o[0])
 	talk.choose(labels.find("Travel"))
 	labels = talk.options.map(func(o: Array) -> String: return o[0])
-	_check(labels.size() == 6, "Rook's coach goes to all five job towns")
+	_check(labels == ["Back"], "Rook's coach goes nowhere you haven't been yet")
+	talk.choose(labels.find("Back"))
+	for town in towns:
+		_me().character.visit(StringName(town))
+		Game.me.visit(StringName(town))
+	labels = talk.options.map(func(o: Array) -> String: return o[0])
+	talk.choose(labels.find("Travel"))
+	labels = talk.options.map(func(o: Array) -> String: return o[0])
+	_check(labels.size() == 6, "and once you have, it goes to all five job towns")
 	talk.choose(0)
 	await _ticks(3)
 	_check(world.map.id == &"greenbough", "the coach takes you to Greenbough")

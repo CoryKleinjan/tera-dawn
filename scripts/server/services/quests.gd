@@ -12,6 +12,8 @@ func record_kill(p: SimPlayer, monster: MonsterDef) -> void:
 	p.character.book.record_kill(monster)
 	if monster.boss:
 		p.character.count(Counters.BOSSES)
+		if not p.hurt_here:
+			p.character.count(Counters.CLEAN_BOSSES)
 	progress(p, p.character.quests.record_kill(monster))
 
 ## Shows how quests that collect `item` are going after picking one up.

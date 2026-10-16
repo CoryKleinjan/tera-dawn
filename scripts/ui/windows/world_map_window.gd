@@ -34,6 +34,10 @@ const ROUTE_DOT_GAP := 9.0
 
 ## The region shown up close, or none for the world view.
 var zone: StringName = &""
+## How a field the player hasn't been to yet is named and drawn.
+const UNKNOWN := "???"
+const UNKNOWN_DOT := Color(0.55, 0.5, 0.45)
+
 ## The hovered map (zone view) and region (world view).
 var hovered: StringName = &""
 var hovered_region: StringName = &""
@@ -148,8 +152,15 @@ func _draw_route(from: Vector2, to: Vector2, by: String, lit: bool) -> void:
 		draw_dashed_line(from, to, ROAD_EDGE, 3.5, 8.0)
 		draw_dashed_line(from, to, col, 1.6, 8.0)
 
-func _draw_dot(c: Vector2, town: bool, on: bool) -> void:
-	if town:
+## Whether the player has found `m`: towns are always shown, fields once visited.
+static func known(m: MapDef) -> bool:
+	return m.town or Game.me == null or Game.me.visited.has(String(m.id))
+
+func _draw_dot(c: Vector2, town: bool, on: bool, found := true) -> void:
+	if not found:
+		draw_circle(c, 4.5, Palette.NIGHT)
+		draw_circle(c, 3.0, Palette.SUN if on else UNKNOWN_DOT)
+	elif town:
 		draw_circle(c, 8.5, Palette.NIGHT)
 		draw_circle(c, 7.0, Palette.GOLD_TRIM)
 		draw_circle(c, 4.5, Palette.PLUM)
@@ -219,10 +230,10 @@ func _draw_zone() -> void:
 	for exit in zone_exits():
 		_draw_route(exit.from, exit.to, exit.by, exit.map == hovered)
 	for m in maps:
-		_draw_dot(to_screen(m.world_pos), m.town, m.id == hovered)
+		_draw_dot(to_screen(m.world_pos), m.town, m.id == hovered, known(m))
 	for m in maps:
 		var c := to_screen(m.world_pos)
-		DrawUtil.text(self, Game.ui_font, c + Vector2(0, 19 if m.town else 16), m.display_name, 11,
+		DrawUtil.text(self, Game.ui_font, c + Vector2(0, 19 if m.town else 16), m.display_name if known(m) else UNKNOWN, 11,
 			Palette.SUN if m.id == hovered else Color("fff4dc"), 0, 4, Palette.NIGHT)
 	for exit in zone_exits():
 		DrawUtil.text(self, Game.ui_font, exit.label_at, exit.label, 11, TRIP, 0, 4, Palette.NIGHT)
@@ -292,6 +303,10 @@ func _draw_info(m: MapDef) -> void:
 		return
 	var y := size.y - INFO_H + 23
 	var r: RegionDef = Content.regions.get(m.region)
+	if not known(m):
+		DrawUtil.text(self, Game.num_font, Vector2(INFO_X, y), UNKNOWN, 16, Palette.SUN, 1, 4, Palette.NIGHT)
+		DrawUtil.text(self, Game.ui_font, Vector2(INFO_X, y + 18), "%sNot explored yet" % ((r.display_name + "  ·  ") if r else ""), 12, Palette.MIST, 1, 3, Palette.NIGHT)
+		return
 	var name := m.display_name + ("  ·  Town" if m.town else "")
 	DrawUtil.text(self, Game.num_font, Vector2(INFO_X, y), name, 16, Palette.SUN, 1, 4, Palette.NIGHT)
 	var bits := []
@@ -305,7 +320,7 @@ func _draw_info(m: MapDef) -> void:
 	for id in WorldRoutes.linked(m.id):
 		var to: MapDef = Content.maps.get(id)
 		if to:
-			ways.append(to.display_name)
+			ways.append(to.display_name if known(to) else UNKNOWN)
 	if not ways.is_empty():
 		bits.append("Leads to " + ", ".join(ways))
 	DrawUtil.text(self, Game.ui_font, Vector2(INFO_X, y + 18), "  ·  ".join(bits), 12, Palette.MIST, 1, 3, Palette.NIGHT)

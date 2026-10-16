@@ -19,7 +19,7 @@ func on_travel(peer: int, npc_id: StringName, index: int) -> void:
 	if npc == null or index < 0 or index >= npc.travel.size():
 		return
 	var route := npc.travel[index]
-	if not Content.maps.has(route.target_map):
+	if not Content.maps.has(route.target_map) or not route.open_to(p.character):
 		return
 	if p.character.shards < route.price:
 		tell(p, ServerNpcShop.NOT_ENOUGH_SHARDS)

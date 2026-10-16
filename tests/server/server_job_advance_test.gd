@@ -151,3 +151,7 @@ func test_a_job_can_only_be_chosen_once() -> void:
 func test_unknown_players_are_ignored() -> void:
 	h.ask(9, &"req_advance", [&"test_instructor", &"mage"])
 	check_eq(h.count(9, &"ev_log"), 0, "nothing sent")
+
+func test_job_names_take_a_or_an() -> void:
+	check_eq(ServerJobs.with_article("Archer"), "an Archer", "an before a vowel")
+	check_eq(ServerJobs.with_article("Magician"), "a Magician", "a before a consonant")

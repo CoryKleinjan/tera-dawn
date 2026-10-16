@@ -5,8 +5,7 @@ extends SocialPart
 # ---------- guilds ----------
 
 func load_guilds() -> void:
-	var f := FileAccess.open(social.guild_path, FileAccess.READ)
-	var data: Variant = JSON.parse_string(f.get_as_text()) if f else null
+	var data: Variant = SafeFile.read_json(social.guild_path)
 	if data is Dictionary:
 		for k in data:
 			var g: Variant = data[k]
@@ -14,9 +13,7 @@ func load_guilds() -> void:
 				social.guilds[str(k)] = {"name": str(g.get("name", k)), "master": str(g.get("master", "")), "members": (g["members"] as Array).map(func(m) -> String: return str(m))}
 
 func save_guilds() -> void:
-	var f := FileAccess.open(social.guild_path, FileAccess.WRITE)
-	if f:
-		f.store_string(JSON.stringify(social.guilds))
+	SafeFile.write_text(social.guild_path, JSON.stringify(social.guilds))
 
 ## Founds a guild named `guild_name` at a guild NPC.
 func on_create(peer: int, npc_id: StringName, guild_name: String) -> void:

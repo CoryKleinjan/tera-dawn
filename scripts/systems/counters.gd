@@ -14,5 +14,7 @@ const SAT := "sat"
 const PETS := "pets"
 ## Trades finished.
 const DEALS := "deals"
+## Bosses defeated without taking a hit since arriving on their map.
+const CLEAN_BOSSES := "clean_bosses"
 ## Every tally above.
-const ALL: Array[String] = [BOSSES, SCROLLS, SAT, PETS, DEALS]
+const ALL: Array[String] = [BOSSES, SCROLLS, SAT, PETS, DEALS, CLEAN_BOSSES]

@@ -64,7 +64,7 @@ then character select shows the list (name, level and job) with the new characte
   and sends `ev_achievement`; the client shows it and calls `SteamService.unlock_achievement`
   with its `steam` id. Add one by adding a `.tres` (a new `id`, a `steam` name defined in
   Steamworks, the next `order`). Never change a shipped `id` or `steam` name: saves keep the
-  id and Steamworks the name (`level_50` kept its name while the cap was 35; its goal is 50 again). A new kind of tally gets a name in `Counters` and is added with
+  id and Steamworks the name (`level_50`, `well_liked` and `dealmaker` kept their names when they became solo goals). A new kind of tally gets a name in `Counters` and is added with
   `Character.count(Counters.<NAME>)`.
 
 ### Balance

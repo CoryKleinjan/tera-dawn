@@ -244,6 +244,8 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
 - The equipment window lays its slots out like a person (hat on top, shoes at the bottom), with
   what the gear adds beside them.
 - No clouds on the title screen.
+- The world map shows towns always and a field only once visited (as "???" before).
+- Playing solo, the chat box shows only the last few lines, briefly; achievements are solo goals.
 - No controls box on screen, in towns or fields: the tutorial teaches the keys (its step hints
   show at the bottom), and the full list is in Settings > Controls.
 - Skill icons are painted NPC-style badges: one bold subject (no people for Shoulder Bash or
@@ -256,7 +258,8 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
   more upbeat, dangerous boss track per zone. Lanternfall sounds like a thieves' den.
 - Kenney CC0 sound effects; the title theme and jingles stay.
 - Captain Marlo's ship carries players from the start island to Dawnharbor; coachman Rook takes them
-  to the job towns (400-500 Dawnshards, the same for everyone); the towns are also joined by a ring
+  to the job towns (400-500 Dawnshards, the same for everyone), but coaches only go to towns the
+  player has already been to; the towns are also joined by a ring
   of portals. Developer test characters start in their job's town.
 - Not an MMO: no accounts, usernames or passwords. Play leads to Solo or Co-op; Co-op leads to Host
   (UDP 7350, shows the LAN address with Copy) or Join (`address:port`). Up to 4 players counting the

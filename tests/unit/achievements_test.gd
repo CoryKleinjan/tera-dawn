@@ -44,6 +44,18 @@ func _raise(c: Character, kind: String, n: int) -> void:
 		"shards": c.shards = n
 		"fame": c.fame = n
 		"guild": c.guild = "Dawn" if n > 0 else ""
+		"boss_kinds":
+			c.book.pages.clear()
+			var bosses := Content.monsters.values().filter(func(m: MonsterDef) -> bool: return m.boss)
+			for i in n:
+				c.book.record_kill(bosses[i])
+		"zones_explored":
+			c.visited.clear()
+			var regions := Content.regions.values()
+			for i in n:
+				for m: MapDef in Content.maps.values():
+					if m.region == regions[i].id:
+						c.visit(m.id)
 		_: c.counters[kind] = n
 
 func test_every_achievement_reached_exactly_at_goal() -> void:
