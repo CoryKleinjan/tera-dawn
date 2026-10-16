@@ -1,0 +1,61 @@
+[gd_resource type="SpriteFrames" load_steps=13 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/grotto_tusker.png" id="1_strip"]
+
+[sub_resource type="AtlasTexture" id="f0"]
+atlas = ExtResource("1_strip")
+region = Rect2(0, 0, 354, 297)
+metadata/art_density = 2.75
+
+[sub_resource type="AtlasTexture" id="f1"]
+atlas = ExtResource("1_strip")
+region = Rect2(354, 0, 354, 297)
+metadata/art_density = 2.75
+
+[sub_resource type="AtlasTexture" id="f2"]
+atlas = ExtResource("1_strip")
+region = Rect2(708, 0, 354, 297)
+metadata/art_density = 2.75
+
+[sub_resource type="AtlasTexture" id="f3"]
+atlas = ExtResource("1_strip")
+region = Rect2(1062, 0, 354, 297)
+metadata/art_density = 2.75
+
+[sub_resource type="AtlasTexture" id="f4"]
+atlas = ExtResource("1_strip")
+region = Rect2(1416, 0, 354, 297)
+metadata/art_density = 2.75
+
+[sub_resource type="AtlasTexture" id="f5"]
+atlas = ExtResource("1_strip")
+region = Rect2(1770, 0, 354, 297)
+metadata/art_density = 2.75
+
+[sub_resource type="AtlasTexture" id="f6"]
+atlas = ExtResource("1_strip")
+region = Rect2(2124, 0, 354, 297)
+metadata/art_density = 2.75
+
+[sub_resource type="AtlasTexture" id="f7"]
+atlas = ExtResource("1_strip")
+region = Rect2(2478, 0, 354, 297)
+metadata/art_density = 2.75
+
+[sub_resource type="AtlasTexture" id="f8"]
+atlas = ExtResource("1_strip")
+region = Rect2(2832, 0, 354, 297)
+metadata/art_density = 2.75
+
+[sub_resource type="AtlasTexture" id="f10"]
+atlas = ExtResource("1_strip")
+region = Rect2(3540, 0, 354, 297)
+metadata/art_density = 2.75
+
+[sub_resource type="AtlasTexture" id="f11"]
+atlas = ExtResource("1_strip")
+region = Rect2(3894, 0, 354, 297)
+metadata/art_density = 2.75
+
+[resource]
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("f0")}, {"duration": 1.0, "texture": SubResource("f1")}], "loop": true, "name": &"idle", "speed": 3.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f2")}, {"duration": 1.0, "texture": SubResource("f3")}, {"duration": 1.0, "texture": SubResource("f4")}, {"duration": 1.0, "texture": SubResource("f3")}], "loop": true, "name": &"move", "speed": 6.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f5")}, {"duration": 1.0, "texture": SubResource("f6")}, {"duration": 1.0, "texture": SubResource("f7")}], "loop": false, "name": &"attack", "speed": 3.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f8")}], "loop": true, "name": &"hurt", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f10")}, {"duration": 3.0, "texture": SubResource("f11")}], "loop": false, "name": &"die", "speed": 2.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f5")}], "loop": true, "name": &"charge_windup", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f6")}], "loop": true, "name": &"charge", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f5")}], "loop": true, "name": &"slam_windup", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f6")}], "loop": true, "name": &"slam", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f5")}], "loop": true, "name": &"pounce_windup", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f6")}], "loop": true, "name": &"pounce", "speed": 1.0}]
