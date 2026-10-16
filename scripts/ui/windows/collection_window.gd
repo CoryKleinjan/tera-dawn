@@ -3,7 +3,7 @@ extends TDWindow
 ## The Monster Book and achievements (L). The book has a page for every monster: unmet
 ## ones are shadows, met ones show how many you've beaten and which of their five cards
 ## you've found, and found cards reveal what the monster drops. Completed pages raise the
-## book's level, which adds to every main stat. Achievements lists every milestone and how
+## book's rank, which adds to every main stat. Achievements lists every milestone and how
 ## close you are to it.
 
 const TABS := ["Monster Book", "Achievements"]
@@ -81,9 +81,9 @@ func _draw_body() -> void:
 
 func _draw_book() -> void:
 	var book := Game.me.book
-	draw_label(Vector2(PAD, 84), "Book Lv. %d  ·  %d/%d pages  ·  %d cards" % [book.level(), book.completed(), _monsters.size(), book.total_cards()], Palette.SUN, 12)
-	if book.level() > 1:
-		draw_label(Vector2(size.x - PAD, 84), "+%d to every stat" % (book.level() - 1), Palette.GOOD, 11, -1)
+	draw_label(Vector2(PAD, 84), "Book rank %d  ·  %d/%d pages  ·  %d cards" % [book.rank(), book.completed(), _monsters.size(), book.total_cards()], Palette.SUN, 12)
+	if book.rank() > 1:
+		draw_label(Vector2(size.x - PAD, 84), "+%d to every stat" % (book.rank() - 1), Palette.GOOD, 11, -1)
 	UiSkin.draw_book(self, _book_rect(), LEFT_PAGE_W, BOOK_SCALE)
 	for i in COLS * ROWS:
 		var k := page * COLS * ROWS + i
@@ -129,8 +129,9 @@ func _draw_detail() -> void:
 		return
 	DrawUtil.text(self, Game.num_font, Vector2(x, y), m.display_name, 15, Palette.INK, 1)
 	y += 18
-	_ink(Vector2(x, y), "Lv. %d%s" % [m.level, "  ·  BOSS" if m.boss else ""], Palette.EMBER if m.boss else Palette.INK_SOFT)
-	y += 18
+	if m.boss:
+		_ink(Vector2(x, y), "BOSS", Palette.EMBER)
+		y += 18
 	for line in ["HP %d  ·  Essence %d" % [m.max_hp, m.essence], "Defeated: %d" % book.kills(m), "Cards: %d/%d" % [book.cards(m), CardDef.SET]]:
 		_ink(Vector2(x, y), line)
 		y += 16

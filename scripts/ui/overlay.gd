@@ -203,7 +203,7 @@ func _minimap_door(at: Vector2) -> void:
 func _draw_boss_bar(top_center: Vector2) -> bool:
 	for m in world.mobs():
 		if m.draws_boss_bar():
-			WorldSkin.draw_boss_bar(self, top_center, "Lv.%d %s" % [m.def.level, m.def.display_name], m.hp)
+			WorldSkin.draw_boss_bar(self, top_center, m.def.display_name, m.hp)
 			return true
 	return false
 

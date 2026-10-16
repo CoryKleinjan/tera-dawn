@@ -32,9 +32,13 @@ func _init(s: TDServer, map_def: MapDef) -> void:
 	server = s
 	def = map_def
 	layout = MapLayout.new(map_def)
+	var steps := WorldRoutes.steps_from_town()
+	var strength := {}
 	for r in def.roster():
 		var plat := layout.platforms[r[1]]
-		var m := SimMob.new(self, mobs.size(), r[0], plat, r[3].patrol_area(plat))
+		if not strength.has(r[0]):
+			strength[r[0]] = MonsterStrength.on_map(r[0], def.id, steps)
+		var m := SimMob.new(self, mobs.size(), r[0], plat, r[3].patrol_area(plat), strength[r[0]])
 		if r[2] >= 0:
 			m.sleep()
 			m.parent = mobs[r[2]]
@@ -310,10 +314,10 @@ func kill_mob(m: SimMob, killer: SimPlayer) -> void:
 	for i in m.children.size():
 		m.children[i].wake(m.position.x + (i - (m.children.size() - 1) / 2.0) * 30.0, killer.peer)
 	var from := m.body_position()
-	server.give_essence(killer, m.def.essence, from)
+	server.give_essence(killer, m.essence(), from)
 	# the killer's party on this map shares the essence, and the kill counts for their quests too
 	var credited: Array[SimPlayer] = [killer]
-	for share in server.social.party_shares(killer, m.def.essence):
+	for share in server.social.party_shares(killer, m.essence()):
 		server.give_essence(share[0], share[1], from)
 		credited.append(share[0])
 	for p in credited:
@@ -379,7 +383,7 @@ func _break_open(p: SimPlayer, b: SimBreakable) -> void:
 
 ## A monster touched a player.
 func touch_player(p: SimPlayer, m: SimMob) -> void:
-	hurt_player(p, m.def, m.position.x)
+	hurt_player(p, m.def, m.position.x, m.strength)
 
 ## A monster (`def`, standing at `from_x`) hit a player, by touch or with one of its
 ## moves (`power` times its attack, see MonsterMove).
@@ -476,7 +480,7 @@ func has_room(p: SimPlayer, d: SimDrop) -> bool:
 
 func _add_card(p: SimPlayer, m: MonsterDef) -> void:
 	var book := p.character.book
-	var level := book.level()
+	var rank := book.rank()
 	if not book.add_card(m):
 		tell(p, "Your %s page is already complete." % m.display_name, Palette.MIST)
 		return
@@ -484,9 +488,9 @@ func _add_card(p: SimPlayer, m: MonsterDef) -> void:
 	tell(p, "Monster Book: %s card (%d/%d)" % [m.display_name, book.cards(m), CardDef.SET], Palette.CARD)
 	if book.complete(m):
 		tell(p, "You completed the %s page!" % m.display_name, Palette.SUN)
-	if book.level() > level:
+	if book.rank() > rank:
 		p.character.recalc()
-		tell(p, "Your Monster Book reached level %d: +%d to every stat." % [book.level(), book.level() - 1], Palette.SUN)
+		tell(p, "Your Monster Book reached rank %d: +%d to every stat." % [book.rank(), book.rank() - 1], Palette.SUN)
 		broadcast(&"ev_effect", [EffectDef.CELEBRATE, p.position.x, p.position.y, 1, p.peer])
 
 ## The pet that's out gets hungrier, and picks up what it can reach.

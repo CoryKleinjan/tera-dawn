@@ -33,7 +33,7 @@ func check() -> void:
 	var labels: Array = talk.options.map(func(o: Array) -> String: return o[0])
 	_check(labels.has("Travel"), "the wagon driver offers to travel")
 	talk.choose(labels.find("Travel"))
-	_check(str(talk.options[0][0]) == "Wagon to Fern Hollow (%s, 150 Dawnshards)" % Content.map(&"hollow").level_text, "the trip lists where it goes, who it's for and the fare: %s" % talk.options[0][0])
+	_check(str(talk.options[0][0]) == "Wagon to Fern Hollow (150 Dawnshards)", "the trip lists where it goes and the fare, no level: %s" % talk.options[0][0])
 	talk.choose(0)
 	await _until(func() -> bool: return world.map.id == &"hollow" and Game.me.shards == 850, 30)
 	_check(world.map.id == &"hollow" and Game.me.shards == 850, "the wagon takes you there for 150 Dawnshards")

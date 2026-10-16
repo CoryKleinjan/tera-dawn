@@ -166,15 +166,10 @@ func _travel_list() -> void:
 	opts.append(["Back", func() -> void: _main_page(greeting)])
 	_page("You haven't been to any of the towns on this route yet." if none else "Where to?", opts)
 
-## "Wagon to Fern Hollow (Lv. 6-12, 150 Dawnshards)": the trip, who the destination is for
-## (its MapDef.level_text; towns, whose text just says "Town", leave it out) and the fare.
+## "Wagon to Fern Hollow (150 Dawnshards)": the trip and its fare.
 static func travel_label(r: TravelRoute, dest: MapDef) -> String:
 	var fare := r.price
-	var bits := PackedStringArray()
-	if dest.level_text != "" and not dest.town:
-		bits.append(dest.level_text)
-	bits.append("free" if fare == 0 else "%d Dawnshards" % fare)
-	return "%s to %s (%s)" % [r.by, dest.display_name, ", ".join(bits)]
+	return "%s to %s (%s)" % [r.by, dest.display_name, "free" if fare == 0 else "%d Dawnshards" % fare]
 
 ## The jobs this instructor teaches that the player could become (Character.can_become).
 func _jobs_offered() -> Array[JobDef]:

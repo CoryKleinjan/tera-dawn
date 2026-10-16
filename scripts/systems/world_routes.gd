@@ -103,3 +103,33 @@ static func _walkable(a: StringName, b: StringName, by_pair: Dictionary) -> bool
 				reached[next] = true
 				todo.append(next)
 	return reached.has(b)
+
+## How many maps each map is from the nearest town, as map id -> steps: towns are 0, the
+## fields next to them 1, and so on, walking through any portal in either direction (rooms
+## and arenas count as a map too). Maps no town reaches are left out.
+static func steps_from_town() -> Dictionary:
+	var next := {}
+	for m: MapDef in Content.maps.values():
+		for p in m.portals:
+			if p.target_map == m.id or not Content.maps.has(p.target_map):
+				continue
+			for pair in [[m.id, p.target_map], [p.target_map, m.id]]:
+				if not next.has(pair[0]):
+					next[pair[0]] = []
+				if not pair[1] in next[pair[0]]:
+					next[pair[0]].append(pair[1])
+	var out := {}
+	var todo: Array[StringName] = []
+	for m: MapDef in Content.maps.values():
+		if m.town and not m.interior:
+			out[m.id] = 0
+			todo.append(m.id)
+	var i := 0
+	while i < todo.size():
+		var at := todo[i]
+		i += 1
+		for to: StringName in next.get(at, []):
+			if not out.has(to):
+				out[to] = out[at] + 1
+				todo.append(to)
+	return out
