@@ -22618,6 +22618,29 @@
    "refs": [],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds a painted dark brown leather jerkin with charcoal grey short sleeves, seen from behind, over a flat bright green (#00FF00) shape, on a flat magenta background. Cells 2 to 8 are empty and must stay empty. At the end of each sleeve there is a small flat grey patch. Paint each patch as the last part of that same charcoal grey sleeve, with the same cloth, soft folds, shading and thin dark plum-brown outline, so the sleeve is one piece with no seam or band. Each sleeve ENDS exactly where its grey patch ends, just past the elbow, with a neat hem: the rest of the arm below it, the forearm and the fist, stays flat pure #00FF00 green with nothing painted on it. The sleeves stay short, the same length as on the rest of his clothes. Keep everything else exactly as it is: the jerkin's outline, shape, size, position, colours and every detail. Leave every other green pixel flat pure #00FF00 exactly as it is and the background flat pure magenta #FF00FF. Do not paint any skin, hand, head or other clothing, do not add anything, and leave empty cells empty. Keep the grid lines. No text, no labels."
   }
+ },
+ {
+  "id": "mshero_pirate_coat_b12",
+  "prompts": null,
+  "batch": null,
+  "with": null,
+  "refs": [],
+  "save": "mshero_pirate_coat_b12.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Hero pose review' (Cory 21:17Z 'the pirate sitting coat should go behind him, not cover his legs'): the Pirate coat on sit, its front skirt off his legs and its skirt and tails behind him on the ground; an edit of its own painting on the green boy",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b12_pirate_coat_sit_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds the flat bright green (#00FF00) shape of a small boy sitting on the ground, facing right, with his legs stretched out in front of him to the right, wearing a painted long red pirate coat with gold trim and a black belt. Cells 2 to 8 are empty and must stay empty. The coat's long front skirt lies over his legs. Repaint the coat so that its skirt goes BEHIND him: the coat stays open at the front and ends at his belt and hips, so no part of it lies on his legs, and its long skirt and tails hang down behind his back and lie spread out on the ground behind him, to the left. Where the skirt lay over his legs, show the flat pure #00FF00 green of his legs, and flat pure magenta #FF00FF outside his body. Keep the top of the coat exactly as it is: its shoulders, sleeves, collar, the white shirt front, the belt and buckle, their size, position, colours, folds, shading and thin dark outline. Leave every green pixel the coat does not cover flat pure #00FF00 exactly as it is, and the background flat pure magenta #FF00FF. Do not paint any face, skin, hands, legs, trousers, boots or other clothing, do not move, resize or redraw the green shape, do not add any figure, and leave empty cells empty. Style: exactly the painting style of the coat already in the base picture. Keep the grid lines. No text, no labels."
+  }
  }
 ]
 }
