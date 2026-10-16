@@ -52,8 +52,6 @@
         "special": "old_clawbeard:special",
         "hurt": "old_clawbeard:hurt",
         "enraged": "old_clawbeard:enraged",
-        "defeated1": "old_clawbeard:defeated1",
-        "defeated2": "old_clawbeard:defeated2",
         "jump1": "monanim_old_clawbeard:jump1",
         "jump2": "monanim_old_clawbeard:jump2",
         "lunge_windup": "monanim_old_clawbeard:lunge_windup",
@@ -61,7 +59,25 @@
         "charge_windup": "monanim_old_clawbeard:charge_windup",
         "charge": "monanim_old_clawbeard:charge",
         "shot_windup": "monanim_old_clawbeard:shot_windup",
-        "shot": "monanim_old_clawbeard:shot"
+        "shot": "monanim_old_clawbeard:shot",
+        "charge_windup2": "boss_old_clawbeard_charge:charge_windup2",
+        "charge2": "boss_old_clawbeard_charge:charge2",
+        "charge_recover": "boss_old_clawbeard_charge:charge_recover",
+        "death1": "boss_old_clawbeard_death:death1",
+        "death2": "boss_old_clawbeard_death:death2",
+        "death3": "boss_old_clawbeard_death:death3",
+        "intro1": "boss_old_clawbeard_intro:intro1",
+        "intro2": "boss_old_clawbeard_intro:intro2",
+        "intro3": "boss_old_clawbeard_intro:intro3",
+        "lunge_windup2": "boss_old_clawbeard_lunge:lunge_windup2",
+        "lunge2": "boss_old_clawbeard_lunge:lunge2",
+        "lunge_recover": "boss_old_clawbeard_lunge:lunge_recover",
+        "phase1": "boss_old_clawbeard_phase:phase1",
+        "phase2": "boss_old_clawbeard_phase:phase2",
+        "phase3": "boss_old_clawbeard_phase:phase3",
+        "shot_windup2": "boss_old_clawbeard_shot:shot_windup2",
+        "shot2": "boss_old_clawbeard_shot:shot2",
+        "shot_recover": "boss_old_clawbeard_shot:shot_recover"
       },
       "anchor": "mass",
       "baseline": "bottom",
@@ -101,10 +117,16 @@
         },
         "die": {
           "frames": [
-            "defeated1",
-            "defeated2"
+            "death1",
+            "death2",
+            "death3"
           ],
-          "fps": 2,
+          "fps": 4,
+          "durations": [
+            1,
+            1,
+            3
+          ],
           "loop": false
         },
         "jump": {
@@ -117,39 +139,96 @@
         },
         "lunge_windup": {
           "frames": [
-            "lunge_windup"
+            "lunge_windup",
+            "lunge_windup2"
           ],
-          "fps": 1
+          "fps": 3,
+          "loop": false
         },
         "lunge": {
           "frames": [
-            "lunge"
+            "lunge",
+            "lunge2"
           ],
-          "fps": 1
+          "fps": 8,
+          "loop": false
         },
         "charge_windup": {
           "frames": [
-            "charge_windup"
+            "charge_windup",
+            "charge_windup2"
           ],
-          "fps": 1
+          "fps": 3,
+          "loop": false
         },
         "charge": {
           "frames": [
-            "charge"
+            "charge",
+            "charge2"
           ],
-          "fps": 1
+          "fps": 8
         },
         "shot_windup": {
           "frames": [
-            "shot_windup"
+            "shot_windup",
+            "shot_windup2"
           ],
-          "fps": 1
+          "fps": 3,
+          "loop": false
         },
         "shot": {
           "frames": [
-            "shot"
+            "shot",
+            "shot2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "charge_recover": {
+          "frames": [
+            "charge_recover"
           ],
           "fps": 1
+        },
+        "lunge_recover": {
+          "frames": [
+            "lunge_recover"
+          ],
+          "fps": 1
+        },
+        "shot_recover": {
+          "frames": [
+            "shot_recover"
+          ],
+          "fps": 1
+        },
+        "intro": {
+          "frames": [
+            "intro1",
+            "intro2",
+            "intro3"
+          ],
+          "fps": 5,
+          "durations": [
+            2,
+            4,
+            2
+          ],
+          "loop": false
+        },
+        "phase": {
+          "frames": [
+            "phase1",
+            "phase2",
+            "phase3"
+          ],
+          "fps": 5,
+          "durations": [
+            2,
+            4,
+            2
+          ],
+          "loop": false
         }
       }
     }

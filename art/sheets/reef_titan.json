@@ -52,8 +52,6 @@
         "special": "reef_titan:special",
         "hurt": "reef_titan:hurt",
         "enraged": "reef_titan:enraged",
-        "defeated1": "reef_titan:defeated1",
-        "defeated2": "reef_titan:defeated2",
         "jump1": "monanim_reef_titan:jump1",
         "jump2": "monanim_reef_titan:jump2",
         "charge_windup": "monanim_reef_titan:charge_windup",
@@ -61,7 +59,25 @@
         "slam_windup": "monanim_reef_titan:slam_windup",
         "slam": "monanim_reef_titan:slam",
         "shot_windup": "monanim_reef_titan:shot_windup",
-        "shot": "monanim_reef_titan:shot"
+        "shot": "monanim_reef_titan:shot",
+        "charge_windup2": "boss_reef_titan_charge:charge_windup2",
+        "charge2": "boss_reef_titan_charge:charge2",
+        "charge_recover": "boss_reef_titan_charge:charge_recover",
+        "death1": "boss_reef_titan_death:death1",
+        "death2": "boss_reef_titan_death:death2",
+        "death3": "boss_reef_titan_death:death3",
+        "intro1": "boss_reef_titan_intro:intro1",
+        "intro2": "boss_reef_titan_intro:intro2",
+        "intro3": "boss_reef_titan_intro:intro3",
+        "phase1": "boss_reef_titan_phase:phase1",
+        "phase2": "boss_reef_titan_phase:phase2",
+        "phase3": "boss_reef_titan_phase:phase3",
+        "shot_windup2": "boss_reef_titan_shot:shot_windup2",
+        "shot2": "boss_reef_titan_shot:shot2",
+        "shot_recover": "boss_reef_titan_shot:shot_recover",
+        "slam_windup2": "boss_reef_titan_slam:slam_windup2",
+        "slam2": "boss_reef_titan_slam:slam2",
+        "slam_recover": "boss_reef_titan_slam:slam_recover"
       },
       "anchor": "mass",
       "baseline": "bottom",
@@ -101,10 +117,16 @@
         },
         "die": {
           "frames": [
-            "defeated1",
-            "defeated2"
+            "death1",
+            "death2",
+            "death3"
           ],
-          "fps": 2,
+          "fps": 4,
+          "durations": [
+            1,
+            1,
+            3
+          ],
           "loop": false
         },
         "jump": {
@@ -117,39 +139,96 @@
         },
         "charge_windup": {
           "frames": [
-            "charge_windup"
+            "charge_windup",
+            "charge_windup2"
           ],
-          "fps": 1
+          "fps": 3,
+          "loop": false
         },
         "charge": {
           "frames": [
-            "charge"
+            "charge",
+            "charge2"
           ],
-          "fps": 1
+          "fps": 8
         },
         "slam_windup": {
           "frames": [
-            "slam_windup"
+            "slam_windup",
+            "slam_windup2"
           ],
-          "fps": 1
+          "fps": 3,
+          "loop": false
         },
         "slam": {
           "frames": [
-            "slam"
+            "slam",
+            "slam2"
           ],
-          "fps": 1
+          "fps": 8,
+          "loop": false
         },
         "shot_windup": {
           "frames": [
-            "shot_windup"
+            "shot_windup",
+            "shot_windup2"
           ],
-          "fps": 1
+          "fps": 3,
+          "loop": false
         },
         "shot": {
           "frames": [
-            "shot"
+            "shot",
+            "shot2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "charge_recover": {
+          "frames": [
+            "charge_recover"
           ],
           "fps": 1
+        },
+        "shot_recover": {
+          "frames": [
+            "shot_recover"
+          ],
+          "fps": 1
+        },
+        "slam_recover": {
+          "frames": [
+            "slam_recover"
+          ],
+          "fps": 1
+        },
+        "intro": {
+          "frames": [
+            "intro1",
+            "intro2",
+            "intro3"
+          ],
+          "fps": 5,
+          "durations": [
+            2,
+            4,
+            2
+          ],
+          "loop": false
+        },
+        "phase": {
+          "frames": [
+            "phase1",
+            "phase2",
+            "phase3"
+          ],
+          "fps": 5,
+          "durations": [
+            2,
+            4,
+            2
+          ],
+          "loop": false
         }
       }
     }

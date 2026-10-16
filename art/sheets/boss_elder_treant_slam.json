@@ -1,0 +1,64 @@
+{
+  "source": "art/source/boss_elder_treant_slam.png",
+  "save": false,
+  "out_dir": "art/build/boss_elder_treant_slam",
+  "cells": [
+    [
+      "slam_windup2",
+      "",
+      "slam2",
+      "",
+      "slam_recover"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.2399,
+  "detail": 3.29,
+  "grid": {
+    "rows": [
+      0,
+      540
+    ],
+    "cols": [
+      [
+        0,
+        413,
+        426,
+        834,
+        847,
+        1260
+      ]
+    ]
+  },
+  "key": [
+    0.25,
+    0.52
+  ],
+  "overrides": {
+    "slam_windup2": {
+      "crop": [
+        0,
+        0,
+        10000,
+        513
+      ]
+    },
+    "slam2": {
+      "crop": [
+        0,
+        0,
+        10000,
+        513
+      ]
+    },
+    "slam_recover": {
+      "crop": [
+        0,
+        0,
+        10000,
+        513
+      ]
+    }
+  }
+}

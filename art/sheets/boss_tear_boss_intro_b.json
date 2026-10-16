@@ -1,0 +1,63 @@
+{
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.1835,
+  "detail": 3.66,
+  "source": "art/source/boss_tear_boss_intro.png",
+  "save": false,
+  "out_dir": "art/build/boss_tear_boss_intro_b",
+  "cells": [
+    [
+      "intro2"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      540
+    ],
+    "cols": [
+      [
+        368,
+        888
+      ]
+    ]
+  },
+  "overrides": {
+    "intro2": {
+      "blank": [
+        [
+          43,
+          0,
+          52,
+          131
+        ],
+        [
+          43,
+          149,
+          52,
+          152
+        ],
+        [
+          43,
+          273,
+          52,
+          536
+        ],
+        [
+          464,
+          0,
+          473,
+          113
+        ],
+        [
+          464,
+          229,
+          473,
+          536
+        ]
+      ],
+      "drop_edge": true
+    }
+  }
+}

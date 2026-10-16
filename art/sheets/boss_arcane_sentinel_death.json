@@ -1,0 +1,92 @@
+{
+  "source": "art/source/boss_arcane_sentinel_death.png",
+  "save": false,
+  "out_dir": "art/build/boss_arcane_sentinel_death",
+  "cells": [
+    [
+      "death1",
+      "",
+      "death2",
+      "",
+      "death3"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.1736,
+  "detail": 4.57,
+  "grid": {
+    "rows": [
+      0,
+      540
+    ],
+    "cols": [
+      [
+        0,
+        417,
+        424,
+        837,
+        844,
+        1260
+      ]
+    ]
+  },
+  "overrides": {
+    "death1": {
+      "crop": [
+        0,
+        0,
+        10000,
+        452
+      ]
+    },
+    "death2": {
+      "crop": [
+        0,
+        0,
+        10000,
+        452
+      ]
+    },
+    "death3": {
+      "blank": [
+        [
+          0,
+          453,
+          22,
+          458
+        ],
+        [
+          49,
+          453,
+          65,
+          458
+        ],
+        [
+          194,
+          453,
+          222,
+          458
+        ],
+        [
+          255,
+          453,
+          279,
+          458
+        ],
+        [
+          333,
+          453,
+          340,
+          458
+        ],
+        [
+          382,
+          453,
+          408,
+          458
+        ]
+      ]
+    }
+  }
+}

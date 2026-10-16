@@ -1,0 +1,35 @@
+{
+  "source": "art/source/boss_elder_treant_intro.png",
+  "save": false,
+  "out_dir": "art/build/boss_elder_treant_intro",
+  "cells": [
+    [
+      "intro1",
+      "",
+      "intro2",
+      "",
+      "intro3"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.2223,
+  "detail": 3.29,
+  "grid": {
+    "rows": [
+      0,
+      540
+    ],
+    "cols": [
+      [
+        0,
+        417,
+        424,
+        836,
+        843,
+        1260
+      ]
+    ]
+  },
+  "overrides": {}
+}
