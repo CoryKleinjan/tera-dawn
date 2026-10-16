@@ -142,9 +142,11 @@ func _build_menu_button() -> void:
 	move_child(cog, window_layer.get_index())
 	menu_cog = cog
 
-## The quest hint, worked out every QUEST_HINT_EVERY frames (see _show_quest_hint).
+## The quest hint, worked out every QUEST_HINT_EVERY frames, or at once when _hint_key changes
+## (see _show_quest_hint).
 var _hint := ""
 var _hint_wait := 0
+var _hint_key := []
 static var _key_pattern: RegEx
 
 func _process(delta: float) -> void:
@@ -156,9 +158,12 @@ func _process(delta: float) -> void:
 ## The key hint of the quest step you're on, at the bottom of the screen. Hidden behind any
 ## window, so it never covers a dialogue.
 func _show_quest_hint() -> void:
-	# a few times a second is plenty: it walks every quest
+	# a few times a second is plenty: it walks every quest. Starting, a new map or character,
+	# or taking or handing in a quest works it out at once.
+	var key := _hint_state()
 	_hint_wait -= 1
-	if _hint_wait <= 0:
+	if _hint_wait <= 0 or key != _hint_key:
+		_hint_key = key
 		_hint_wait = QUEST_HINT_EVERY
 		_hint = quest_hint() if world != null and world.started else ""
 	var quest := _hint if world != null and world.started else ""
@@ -170,6 +175,13 @@ func _show_quest_hint() -> void:
 	keys_help.text = quest
 	keys_help.reset_size()
 	keys_help.position = Vector2((TDWorld.VIEW.x - keys_help.size.x) / 2.0, TDWorld.VIEW.y - TDStatusBar.HEIGHT - keys_help.size.y - QUEST_HINT_GAP)
+
+## What changes the quest hint straight away (the timer catches the rest, such as kill counts).
+func _hint_state() -> Array:
+	if world == null or not world.started or Game.me == null:
+		return []
+	var me := Game.me
+	return [me.get_instance_id(), me.quests.active.size(), me.quests.done.size(), world.map.id if world.map else &"", world.npcs().size()]
 
 ## The key hint of the quest you're doing (QuestDef.hint), or else of one waiting for you to
 ## talk to someone standing here (QuestDef.offer_hint), with its keys filled in; "" if none.
