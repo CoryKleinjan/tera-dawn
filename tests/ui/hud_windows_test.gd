@@ -258,37 +258,24 @@ func test_stats_show_plus_only_where_the_essence_pays() -> void:
 	check_eq(_plus_rects(stats).size(), StatBlock.BASE.size() - 1, "a + for every stat but STR")
 	check(TDStatsWindow.can_buy_any(Game.me), "something to buy")
 
-func test_stats_window_shows_a_beginner_the_job_paths() -> void:
+func test_stats_window_for_a_beginner() -> void:
 	await ui.edit(func(c: Character) -> void:
 		c.job = Content.job(Character.START_JOB)
-		c.essence = 1000000
-		c.base.strength = 35
-		c.base.dexterity = 4
-		c.base.intelligence = 4
-		c.base.luck = 4
-		c.base.charisma = 4)
+		c.essence = 1000000)
 	var stats: TDStatsWindow = _open("stats")
 	await _redrawn(stats, "stats for a Beginner")
-	var paths := JobDef.paths_from(Character.START_JOB)
-	check(paths.size() >= 5, "a Beginner has every first job ahead")
-	check_eq(stats.size.y, stats.wanted_height(), "the window grows to fit the paths")
-	check(stats.position.y + stats.size.y < TDWorld.VIEW.y - TDStatusBar.HEIGHT, "still ends above the HP bar (%s)" % (stats.position.y + stats.size.y))
-	check(stats.content_end <= stats.size.y - 16, "the last path line (%s) lies inside the window (%s)" % [stats.content_end, stats.size.y])
-	check_eq(TDStatsWindow.path_text(Game.me, Content.job(&"warrior")), "Warrior: 35 STR", "a path whose stats are there")
-	check_eq(TDStatsWindow.path_text(Game.me, Content.job(&"thief")), "Thief: 25 LUK (you have 4)", "what's missing")
-	check_eq(TDStatsWindow.path_text(Game.me, Content.job(&"pirate")), "Pirate: 25 CHA (you have 4)", "only what's missing")
-	for j in paths:
-		var w := DrawUtil.text_width(Game.ui_font, TDStatsWindow.path_text(Game.me, j), 11)
-		check(w < stats.size.x - TDWindow.PAD * 2, "%s's line fits across the window (%d px)" % [j.id, w])
+	check_eq(stats.size.y, TDStatsWindow.BASE_H, "no job paths, no extra room")
+	check(stats.position.y + stats.size.y < TDWorld.VIEW.y - TDStatusBar.HEIGHT, "ends above the HP bar (%s)" % (stats.position.y + stats.size.y))
+	check(stats.content_end <= stats.size.y - 16, "the rows fit")
 	check_eq(stats.auto_rect, Rect2(), "no Auto button for a Beginner")
-	check_eq(_plus_rects(stats).size(), StatBlock.BASE.size(), "the + buttons are still there")
+	check_eq(_plus_rects(stats).size(), StatBlock.BASE.size(), "a + for every stat")
 
-func test_stats_window_hides_the_paths_once_you_have_a_job() -> void:
+func test_stats_window_for_a_warrior() -> void:
 	await ui.edit(func(c: Character) -> void:
 		c.job = Content.job(&"warrior"))
 	var stats: TDStatsWindow = _open("stats")
 	await _redrawn(stats, "stats for a Warrior")
-	check_eq(stats.size.y, TDStatsWindow.BASE_H, "no paths, no extra room")
+	check_eq(stats.size.y, TDStatsWindow.BASE_H, "the same height as a Beginner's")
 	check(stats.content_end <= stats.size.y - 16, "the rows fit")
 
 func test_stats_auto_buys_damage_stats_through_the_server() -> void:
@@ -391,8 +378,10 @@ func test_skill_plus_learns_through_the_server() -> void:
 
 ## A character with quests in progress, ready to hand in and done.
 func _quest_log(c: Character) -> void:
-	# past the Job Tests (five of them, one per tutor, are open to a Beginner)
+	# past the Job Tests (five of them, one per tutor; a Warrior may still take the other four)
 	c.job = Content.job(&"warrior")
+	for job in JobDef.paths_from(Character.START_JOB):
+		c.quests.done[job.advance_quest.id] = 1
 	var avail := Content.quests.values().filter(func(q: QuestDef) -> bool: return c.quests.status(q, c) == QuestLog.Status.AVAILABLE)
 	avail.sort_custom(func(a: QuestDef, b: QuestDef) -> bool: return String(a.id) < String(b.id))
 	c.quests.done[avail[0].id] = 1
@@ -425,7 +414,8 @@ func test_quest_pages_list_what_the_log_holds() -> void:
 					check_eq(s, QuestLog.Status.AVAILABLE, "%s available" % q.id)
 				TDQuestWindow.Page.DONE:
 					check(me.quests.done.has(q.id), "%s done" % q.id)
-		for i in listed.size():
+		# rows past the first screenful scroll into view (test_quest_done_page_lists_every_finished_quest)
+		for i in mini(listed.size(), TDQuestWindow.ROWS):
 			var row := log.row_rect(i)
 			if row.end.y > log.size.y:
 				fail("%s: row %d (%s) runs off the bottom of the window" % [TDQuestWindow.PAGE_NAMES[page], i, listed[i].id])
@@ -709,7 +699,7 @@ func test_every_npc_dialogue_and_its_pages() -> void:
 				_win(key).visible = false
 		npc.free()
 
-func test_choosing_a_path_lists_every_job_and_what_it_takes() -> void:
+func test_choosing_a_path_lists_every_job() -> void:
 	var q: QuestDef = Content.quests[&"q07_choosing_a_path"]
 	check(q.lists_job_paths, "the quest lists the job paths")
 	var npc := ui.npc_beside(Content.npcs[q.giver])
@@ -720,11 +710,57 @@ func test_choosing_a_path_lists_every_job_and_what_it_takes() -> void:
 	if not check(at >= 0, "Sorrel offers %s: %s" % [q.title, labels]):
 		return
 	talk.choose(at)
+	check(talk.text.contains("The paths ahead:"), "the offer lists the paths")
 	for j in JobDef.paths_from(Character.START_JOB):
-		check(talk.text.contains(j.path_line()), "the offer names %s" % j.path_line())
-	check(talk.text.contains("Warrior: 35 STR"), "in the JobDef's own words")
+		check(talk.text.contains("\n" + j.display_name), "the offer names %s" % j.display_name)
+	check(not talk.text.contains("STR"), "and asks for no stats")
 	await _redrawn(talk, "the Choosing a Path offer")
 	check(talk.position.y + talk.size.y < TDWorld.VIEW.y - TDStatusBar.HEIGHT, "the window ends above the status bar")
+
+## Opens `tutor`'s page for the job named `job_name` (through "Choose a job").
+func _job_page(tutor: StringName, job_name: String) -> TDNpc:
+	var npc := ui.npc_beside(Content.npcs[tutor])
+	ui.hud.open_dialogue(npc)
+	var talk: TDDialogueWindow = _win("dialogue")
+	var labels: Array = talk.options.map(func(o: Array) -> String: return o[0])
+	check(labels.has("Choose a job"), "%s offers a job" % tutor)
+	talk.choose(labels.find("Choose a job"))
+	labels = talk.options.map(func(o: Array) -> String: return o[0])
+	check(labels.has(job_name), "%s is offered: %s" % [job_name, labels])
+	talk.choose(labels.find(job_name))
+	return npc
+
+func test_a_job_page_shows_what_switching_costs() -> void:
+	await ui.edit(func(c: Character) -> void:
+		c.job = Content.job(&"warrior")
+		c.jobs_passed.assign(["warrior"])
+		c.quests.done.erase(&"jtest_mage")
+		c.skills.learned[&"power_strike"] = 2
+		c.skills.paid[&"power_strike"] = 48)
+	var npc := _job_page(&"lumewood_instructor", "Magician")
+	var talk: TDDialogueWindow = _win("dialogue")
+	check(talk.text.contains("You would forget Power Strike, and get back 48 Dawn Essence."), "what would go and what comes back: %s" % talk.text)
+	check(talk.text.contains("Pass the Job Test first."), "the Job Test first")
+	check(not talk.text.contains("You passed this path before"), "not passed yet")
+	var labels: Array = talk.options.map(func(o: Array) -> String: return o[0])
+	check_eq(labels, ["Back"], "no Become button yet")
+	await _redrawn(talk, "a Warrior's Magician page")
+	talk.visible = false
+	npc.free()
+
+func test_a_job_page_for_a_job_passed_before() -> void:
+	await ui.edit(func(c: Character) -> void:
+		c.job = Content.job(&"warrior")
+		c.jobs_passed.assign(["warrior", "mage"])
+		c.quests.done.erase(&"jtest_mage"))
+	var npc := _job_page(&"lumewood_instructor", "Magician")
+	var talk: TDDialogueWindow = _win("dialogue")
+	check(talk.text.contains("You passed this path before, so it's yours again for the asking."), "passed before")
+	check(not talk.text.contains("You would forget"), "no skills to lose")
+	check(not talk.text.contains("Pass the Job Test"), "no Job Test again")
+	check_eq(talk.options[0][0], "Become a Magician", "free to switch back")
+	talk.visible = false
+	npc.free()
 
 func test_dialogue_number_keys_pick_options() -> void:
 	var elder: NpcDef = Content.npcs[&"village_elder"]

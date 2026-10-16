@@ -100,8 +100,9 @@ update this page when one changes. Each zone's own look and music are in
   Archer Pinning Shot pins one monster in place, even in mid-air; Pirate Anchor Haul drags
   monsters in a line back to the hero. Thrown or stunned monsters can't move, attack or hurt by
   touch. Every one deals damage. Bosses take the damage but are never thrown, dragged or stunned.
-- First-job tutors open when the hero reaches their town; each job is taken by passing its Job
-  Test once, and switching back to a job already passed is free. Switching jobs at any tutor
+- First-job tutors open when the hero reaches their town, with no stat requirement and no stat
+  reset; each job is taken by passing its Job Test once, and switching back to a job already
+  passed is free (its gifts come only the first time). Switching jobs at any tutor
   that offers one drops the old job's skills and refunds the essence spent on them; stats stay.
 - Second tier: every first job picks one of two blends of itself and another first job:
   Spellblade (Warrior + Magician), Hexcaster (Magician + Thief), Swashbuckler (Thief + Pirate),
@@ -109,13 +110,13 @@ update this page when one changes. Each zone's own look and music are in
   either side. It keeps its own first-job skills and opens all of the other job's first-job
   skills; it has no skills of its own (its draw is combining the two jobs). Both stats add
   together for damage (no averaging); Auto buys both, the cheaper first. It wields every weapon and off-hand of both jobs.
-  No stat reset on advancing. Second- and third-tier tutors open when the hero beats a set
-  boss, found through the tears, while one of the parent jobs; the first-job tutors never
-  offer them.
+  Second- and third-tier jobs open when the hero beats a set boss, found through the tears,
+  while one of the parent jobs. Which tutor teaches them and which boss opens each wait on
+  the story.
 - Every job is built to attack and be fun solo: no tank or healer jobs.
 - No job is shown or named to the player until they can choose it: no menu, list, tooltip,
-  quest or NPC line hints at a later job before then. The one exception: Beginners see the
-  five first jobs and what each needs, so they can plan their stats.
+  quest or NPC line hints at a later job before then. The one exception: Beginners hear the
+  five first jobs named.
 - Third tier (planned): each blend splits into two jobs, each leaning into one of its
   two parents: Spellblade into Bladecaller (Warrior) or Runeblade (Magician), Hexcaster into
   Warlock (Magician) or Nightweaver (Thief), Swashbuckler into Cutthroat (Thief) or Dread

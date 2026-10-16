@@ -85,7 +85,7 @@ func on_quest_complete(peer: int, npc_id: StringName, quest_id: StringName) -> v
 	var c := p.character
 	# a job test: passing it makes you that job
 	for job: JobDef in Content.jobs.values():
-		if job.advance_quest == q and job.opens_from(c.job.id):
+		if job.advance_quest == q and c.can_become(job):
 			server.jobs.advance(p, job)
 	for next: QuestDef in Content.quests.values():
 		if next.auto_start and next.requires.has(q.id) and c.quests.status(next, c) == QuestLog.Status.AVAILABLE:

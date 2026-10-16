@@ -390,17 +390,12 @@ func req_scene_done(scene_id: StringName) -> void:
 	if server:
 		server.scenes.on_scene_done(_sender(), scene_id)
 
-# --- jobs, Ability and Skill Points (ServerJobs) ---
+# --- jobs, stats and skills (ServerJobs) ---
 
 @rpc("any_peer", "call_local", "reliable")
 func req_advance(npc_id: StringName, job_id: StringName) -> void:
 	if server:
 		server.jobs.on_advance(_sender(), npc_id, job_id)
-
-@rpc("any_peer", "call_local", "reliable")
-func req_reset_ap(npc_id: StringName, job_id: StringName) -> void:
-	if server:
-		server.jobs.on_reset_ap(_sender(), npc_id, job_id)
 
 @rpc("any_peer", "call_local", "reliable")
 func req_buy_stat(stat: StringName) -> void:
