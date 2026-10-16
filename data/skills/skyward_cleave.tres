@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Resource" path="res://data/effects/swish.tres" id="e_swish"]
 [ext_resource type="Resource" path="res://data/effects/power_strike_hit.tres" id="h_power_strike_hit"]
-[ext_resource type="Texture2D" path="res://assets/sprites/skills/power_strike.png" id="i_stand_in"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/skyward_cleave.png" id="i_icon"]
 
 [resource]
 script = ExtResource("1_skill_def")
@@ -31,4 +31,4 @@ height = 110.0
 animation = &"skyward_cleave"
 effect = ExtResource("e_swish")
 hit_effect = ExtResource("h_power_strike_hit")
-icon = ExtResource("i_stand_in")
+icon = ExtResource("i_icon")
