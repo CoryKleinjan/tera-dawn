@@ -182,7 +182,7 @@ func test_a_portal_takes_you_to_its_map() -> void:
 	check_eq(p.map.def.id, ServerHarness.FIELD, "on the field")
 	check_eq(p.position, Vector2(150, ServerHarness.GROUND), "at the portal's target")
 	check_eq(h.last(2, &"ev_enter_map").slice(0, 2), [ServerHarness.FIELD, 150.0], "client told")
-	check(not h.server.maps[ServerHarness.TOWN].players.has(2), "left the town")
+	check(not h.server.maps.has(ServerHarness.TOWN), "left the town (nobody on it now, so it's dropped)")
 
 func test_no_portal_no_travel() -> void:
 	h.place(p, PORTAL_X - 40.0)

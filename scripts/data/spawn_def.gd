@@ -1,6 +1,6 @@
 class_name SpawnDef
 extends Resource
-## Puts `count` monsters of one kind on a platform. They respawn after being defeated.
+## Puts `count` monsters of one kind on a platform. Defeated ones stay down until the map loads fresh.
 
 @export var monster: MonsterDef
 ## Index of the platform (0 is the floor).
