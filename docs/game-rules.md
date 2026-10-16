@@ -150,7 +150,8 @@ update this page when one changes. Each zone's own look and music are in
 
 - Map names show only at the top of the screen; nothing labels a map in the world.
 - Every piece of land is walkable: no arches or floating rock islands, nothing that looks like
-  ground but isn't. No two exits of a map lead to the same map. Maps can be wide and multi-level.
+  ground but isn't. A deck, ledge or ladder painted into a building or a terrace (a treehouse
+  deck, a lookout, a crow's nest, a railed wing) can be stood on or climbed too. No two exits of a map lead to the same map. Maps can be wide and multi-level.
 - A zone's fields are a web you can loop through, stacked like Hollow Knight's (canopy above,
   roots below), each with 2 to 4 exits; Greenbough is the pilot. Shortcuts open one way until
   you find them, then work both ways; a breakable wall opens one.

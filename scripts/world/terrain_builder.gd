@@ -16,11 +16,14 @@ func build(map: MapDef, platforms: Array[Platform]) -> void:
 	var biome := map.look()
 	_build_floor(map, platforms[0], biome)
 	for i in range(1, platforms.size()):
-		if map.platforms[i - 1].look:
-			_platform_look(platforms[i], map.platforms[i - 1])
+		var d := map.platforms[i - 1]
+		if d.in_scenery:
+			continue  # the scenery behind it is its painting
+		if d.look:
+			_platform_look(platforms[i], d)
 		else:
-			_platform_front(platforms[i], biome, map.platforms[i - 1].solid)
-		if map.platforms[i - 1].solid:
+			_platform_front(platforms[i], biome, d.solid)
+		if d.solid:
 			_solid_wall(map, i, biome)
 	_edge_grass(map, platforms, biome)
 
@@ -178,6 +181,8 @@ func _solid_wall(map: MapDef, platform: int, biome: BiomeDef) -> void:
 
 ## The game-y span a platform's painted skin covers: x is the top of its grass, y the bottom.
 static func skin_span(d: PlatformDef, biome: BiomeDef) -> Vector2:
+	if d.in_scenery:
+		return Vector2(d.y, d.y)
 	if d.look:
 		var top := d.y - d.look_grass()
 		return Vector2(top, top + d.look.get_height() * d.look_texel())
@@ -203,7 +208,7 @@ func _edge_grass(map: MapDef, platforms: Array[Platform], biome: BiomeDef) -> vo
 	rng.seed = hash(map.id) + 7
 	_grass_along(biome, rng, -300.0, map.width + 300.0, map.ground_y)
 	for i in range(1, platforms.size()):
-		if map.platforms[i - 1].look:
+		if map.platforms[i - 1].look or map.platforms[i - 1].in_scenery:
 			continue # painted land brings its own grass
 		var pl := platforms[i]
 		_grass_along(biome, rng, pl.x + 20.0, pl.x + pl.w - 20.0, pl.y)
