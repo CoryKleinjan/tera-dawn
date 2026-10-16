@@ -40,6 +40,10 @@ const OFFHAND_NAMES := {&"shield": "a shield", &"star": "throwing stars", &"book
 ## Frames changed in the pose editor's Add/Delete: frame -> the frame whose painting shows there
 ## (another frame's, when added to a frame it has no painting for), or &"" when deleted there.
 @export var frame_art: Dictionary = {}
+## Frames where its worn layer is drawn mirrored, set by the pose editor's Flip: frame -> true.
+## It is mirrored around the point it turns around, then turned. A held piece keeps its own
+## (HeldDef.flips).
+@export var flips: Dictionary = {}
 ## A hat or helmet that covers his hair, so the hair layer isn't drawn under it.
 @export var hides_hair := false
 ## A weapon or off-hand: one painting held in his hand, pinned per frame (HeldDef), drawn instead
