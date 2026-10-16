@@ -1,9 +1,14 @@
-[gd_resource type="Resource" script_class="EquipDef" load_steps=6 format=3]
+[gd_resource type="Resource" script_class="EquipDef" format=3]
 
+[ext_resource type="Texture2D" path="res://assets/sprites/hero/squire_jerkin.png" id="1_06xmc"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="pickup"]
 [ext_resource type="Script" path="res://scripts/data/equip_def.gd" id="script"]
 [ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="stat_block"]
-[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="pickup"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/hero/squire_jerkin.tres" id="worn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8yw8u"]
+atlas = ExtResource("1_06xmc")
+region = Rect2(92, 78, 58, 65)
 
 [sub_resource type="Resource" id="stats"]
 script = ExtResource("stat_block")
@@ -11,22 +16,24 @@ defense = 6
 
 [resource]
 script = ExtResource("script")
+slot = 2
+worn = ExtResource("worn")
+nudges = {
+&"cast1": Vector4(3.199997, 3.699997, 0, 0),
+&"pistol2": Vector4(0.9000015, -5.0999985, 0, 0),
+&"roll2": Vector4(34, -24, -180, 0)
+}
 frame_art = {
 &"roll2": &"roll1"
 }
-nudges = {
-&"roll2": Vector4(34, -24, -180, 0)
-}
-id = &"squire_jerkin"
-display_name = "Squire Jerkin"
-description = "A padded jerkin for a new warrior."
-sprite_scale = 0.36
-glow_color = Color(1.0, 0.55, 0.45, 1.0)
-pickup_effect = ExtResource("pickup")
-sell_price = 375
-slot = 2
-worn = ExtResource("worn")
 jobs = Array[StringName]([&"warrior"])
 required_level = 10
 stats = SubResource("stats")
-variance = 1
+id = &"squire_jerkin"
+display_name = "Squire Jerkin"
+description = "A padded jerkin for a new warrior."
+icon = SubResource("AtlasTexture_8yw8u")
+sprite_scale = 0.36
+glow_color = Color(1, 0.55, 0.45, 1)
+pickup_effect = ExtResource("pickup")
+sell_price = 375

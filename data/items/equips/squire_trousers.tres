@@ -1,9 +1,14 @@
-[gd_resource type="Resource" script_class="EquipDef" load_steps=6 format=3]
+[gd_resource type="Resource" script_class="EquipDef" format=3]
 
+[ext_resource type="Texture2D" path="res://assets/sprites/hero/squire_trousers.png" id="1_v1sq2"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="pickup"]
 [ext_resource type="Script" path="res://scripts/data/equip_def.gd" id="script"]
 [ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="stat_block"]
-[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="pickup"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/hero/squire_trousers.tres" id="worn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glg23"]
+atlas = ExtResource("1_v1sq2")
+region = Rect2(100, 110, 46, 42)
 
 [sub_resource type="Resource" id="stats"]
 script = ExtResource("stat_block")
@@ -11,22 +16,23 @@ defense = 4
 
 [resource]
 script = ExtResource("script")
+slot = 3
+worn = ExtResource("worn")
+nudges = {
+&"cast1": Vector4(1.4000015, 0, 0, 0),
+&"roll2": Vector4(7, -38, -180, 0)
+}
 frame_art = {
 &"roll2": &"roll1"
 }
-nudges = {
-&"roll2": Vector4(7, -38, -180, 0)
-}
-id = &"squire_trousers"
-display_name = "Squire Trousers"
-description = "Sturdy trousers for a new warrior."
-sprite_scale = 0.36
-glow_color = Color(1.0, 0.55, 0.45, 1.0)
-pickup_effect = ExtResource("pickup")
-sell_price = 300
-slot = 3
-worn = ExtResource("worn")
 jobs = Array[StringName]([&"warrior"])
 required_level = 10
 stats = SubResource("stats")
-variance = 1
+id = &"squire_trousers"
+display_name = "Squire Trousers"
+description = "Sturdy trousers for a new warrior."
+icon = SubResource("AtlasTexture_glg23")
+sprite_scale = 0.36
+glow_color = Color(1, 0.55, 0.45, 1)
+pickup_effect = ExtResource("pickup")
+sell_price = 300
