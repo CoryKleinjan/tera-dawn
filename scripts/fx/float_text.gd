@@ -29,7 +29,12 @@ func step() -> void:
 	if t > 70:
 		queue_free()
 
+## Closest a number gets to the screen's edges (screen pixels), so it never runs off.
+const SCREEN_MARGIN := Vector2(40, 70)
+
 func draw_at(ci: CanvasItem, at: Vector2) -> void:
+	var v := TDWorld.VIEW
+	at = at.clamp(SCREEN_MARGIN, v - SCREEN_MARGIN)
 	var k := t / 70.0
 	var a := (1.0 - k) / 0.3 if k > 0.7 else 1.0
 	if is_gain():

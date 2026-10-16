@@ -11,7 +11,7 @@ func check() -> void:
 	_teleport(Vector2(west.x, 620))
 	await _ticks(2)
 	await _tap("move_up")
-	await _ticks(4)
+	await _ticks(TDPlayer.PORTAL_FADE_TICKS + 4)
 	_check(world.map.id == &"sunny_slope", "the village's west portal leads to Sunny Slope")
 	_me().inv = 0
 	# a Sporecap splits into Spore Puffs when it's defeated

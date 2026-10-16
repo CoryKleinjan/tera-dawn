@@ -39,6 +39,11 @@ var _layers: Array[Sprite3D] = []
 var _anim := &""
 var _since := 0
 
+## Holds the animation where it is for `ticks` physics ticks (hit-stop, TDPlayer.hit_stop):
+## the frame clock starts that much later.
+func hold(ticks: int) -> void:
+	_since += ticks
+
 ## Adds the companion to `owner`, drawn at depth `z` (TDStage.Z_*).
 func _init(owner: Node2D, world: TDWorld, z: float) -> void:
 	_owner = owner
