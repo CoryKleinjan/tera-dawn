@@ -376,7 +376,7 @@ func _run() -> void:
 		# A field from each region, next to its monsters, a boss, and the world map.
 		_me().inv = 100000
 		for pair in [[&"mushroom_dell", 900], [&"thornwood", 1100], [&"crystal_caves", 1100], [&"smoke_pits", 1100],
-				[&"gloom_woods", 1100], [&"coral_reef", 1100], [&"dusk_bridge", 1300], [&"molten_throne", 1000]]:
+				[&"gloom_woods", 1100], [&"coral_reef", 1100], [&"dusk_bridge", 1300], [&"kings_caldera", 700]]:
 			Net.server.enter_map(_me(), pair[0], pair[1])
 			await _physics(90)
 			await _frames(3)

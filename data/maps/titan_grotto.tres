@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="7_portal_def"]
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
 [ext_resource type="Resource" path="res://data/monsters/barnacle_boar.tres" id="10_barnacle_boar"]
-[ext_resource type="Resource" path="res://data/monsters/reef_titan.tres" id="11_reef_titan"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="12_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tall_grass.png" id="13_tall_grass"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_large.png" id="14_tree_large"]
@@ -70,12 +69,6 @@ y = -1.0
 depth = -7.5
 scale = 1.21
 flip = true
-
-[sub_resource type="Resource" id="Resource_16"]
-script = ExtResource("8_spawn_def")
-monster = ExtResource("11_reef_titan")
-platform = 0
-count = 1
 
 [sub_resource type="Resource" id="Resource_15"]
 script = ExtResource("8_spawn_def")
@@ -194,6 +187,13 @@ fog_color = Color(0.1647, 0.2824, 0.3451, 1)
 backdrop_tint = Color(0.5333, 0.5961, 0.6588, 1)
 hide_layers = PackedInt32Array(3)
 
+[sub_resource type="Resource" id="Portal_arena"]
+script = ExtResource("7_portal_def")
+x = 1940.0
+platform = 0
+target_map = &"titans_pool"
+target_x = 140.0
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"titan_grotto"
@@ -206,11 +206,10 @@ ground_y = 620
 start_x = 120.0
 platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Land_1")])
 climbables = Array[ExtResource("4_climbable_def")]([SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Rope_4_0")])
-portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_9")])
-spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16")])
+portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_9"), SubResource("Portal_arena")])
+spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15")])
 props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_17"), SubResource("Resource_18"), SubResource("Resource_19"), SubResource("Resource_20"), SubResource("Resource_22"), SubResource("Resource_23")])
 region = &"driftcove"
 world_pos = Vector2(300.0, 455.0)
 return_map = &"driftcove"
 level_text = "Lv. 22-30"
-music = &"boss_driftcove"

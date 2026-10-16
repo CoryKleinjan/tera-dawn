@@ -18,7 +18,6 @@
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="16_vhlnm"]
 [ext_resource type="Resource" path="res://data/monsters/kelp_lurker.tres" id="17_71gso"]
 [ext_resource type="Resource" path="res://data/monsters/barnacle_boar.tres" id="18_v8ctv"]
-[ext_resource type="Resource" path="res://data/monsters/grotto_tusker.tres" id="19_na61u"]
 [ext_resource type="Script" path="res://scripts/data/decor_def.gd" id="20_2qgkd"]
 [ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="21_muwax"]
 
@@ -350,14 +349,6 @@ count = 2
 patrol_from = -1.0
 patrol_to = -1.0
 
-[sub_resource type="Resource" id="Resource_4v128"]
-script = ExtResource("16_vhlnm")
-monster = ExtResource("19_na61u")
-platform = 0
-count = 1
-patrol_from = -1.0
-patrol_to = -1.0
-
 [sub_resource type="Resource" id="Resource_ljweq"]
 script = ExtResource("21_muwax")
 sky_top = Color(0.0627451, 0.0941176, 0.156863, 1)
@@ -382,6 +373,13 @@ backdrop_tint = Color(0.501961, 0.564706, 0.658824, 1)
 hide_layers = PackedInt32Array(3)
 more_ground_decor = Array[ExtResource("20_2qgkd")]([])
 
+[sub_resource type="Resource" id="Portal_arena"]
+script = ExtResource("8_v0hwf")
+x = 3140.0
+platform = 0
+target_map = &"tuskers_den"
+target_x = 140.0
+
 [resource]
 script = ExtResource("15_q6phd")
 id = &"smugglers_grotto"
@@ -400,11 +398,10 @@ town = false
 return_map = &"dawnharbor"
 level_text = "Lv. 20-22"
 interior = false
-music = &"boss_dawnharbor"
 platforms = Array[ExtResource("7_5a77d")]([SubResource("Resource_uit6t"), SubResource("Resource_87m7u"), SubResource("Resource_sm1p6"), SubResource("Resource_qupgw"), SubResource("Resource_1xdqn"), SubResource("Resource_gd0cp"), SubResource("Resource_8jkyd"), SubResource("Resource_xj5fg"), SubResource("Resource_nv6yq"), SubResource("Resource_e35bm"), SubResource("Resource_8mtvj"), SubResource("Resource_r4dkn")])
 climbables = Array[ExtResource("3_h2qlq")]([SubResource("Resource_jr4j6"), SubResource("Resource_5appu"), SubResource("Resource_afxr1"), SubResource("Resource_0jqkm"), SubResource("Resource_6adkm"), SubResource("Resource_ttioq"), SubResource("Resource_6sgq8"), SubResource("Resource_p8cqh"), SubResource("Resource_uidym"), SubResource("Resource_qrvo4"), SubResource("Resource_1l7ox"), SubResource("Resource_vtos5")])
-portals = Array[ExtResource("8_v0hwf")]([SubResource("Resource_6c3ii")])
-spawns = Array[ExtResource("16_vhlnm")]([SubResource("Resource_loyx4"), SubResource("Resource_uqekj"), SubResource("Resource_g4coa"), SubResource("Resource_o0myh"), SubResource("Resource_j5jm3"), SubResource("Resource_yh6yx"), SubResource("Resource_lxbmf"), SubResource("Resource_66eil"), SubResource("Resource_gadrn"), SubResource("Resource_b78er"), SubResource("Resource_wuuv8"), SubResource("Resource_pobws"), SubResource("Resource_ixevy"), SubResource("Resource_4v128")])
+portals = Array[ExtResource("8_v0hwf")]([SubResource("Resource_6c3ii"), SubResource("Portal_arena")])
+spawns = Array[ExtResource("16_vhlnm")]([SubResource("Resource_loyx4"), SubResource("Resource_uqekj"), SubResource("Resource_g4coa"), SubResource("Resource_o0myh"), SubResource("Resource_j5jm3"), SubResource("Resource_yh6yx"), SubResource("Resource_lxbmf"), SubResource("Resource_66eil"), SubResource("Resource_gadrn"), SubResource("Resource_b78er"), SubResource("Resource_wuuv8"), SubResource("Resource_pobws"), SubResource("Resource_ixevy")])
 npcs = Array[ExtResource("6_l2s11")]([])
 props = Array[ExtResource("9_4fhit")]([SubResource("Resource_6f5w5"), SubResource("Resource_4nmy4"), SubResource("Resource_g7nll"), SubResource("Resource_g7rl4"), SubResource("Resource_ow4ht")])
 buildings = Array[ExtResource("2_x273b")]([])

@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="7_portal_def"]
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
 [ext_resource type="Resource" path="res://data/monsters/spell_imp.tres" id="9_spell_imp"]
-[ext_resource type="Resource" path="res://data/monsters/arcane_sentinel.tres" id="11_arcane_sentinel"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="12_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_large.png" id="13_tree_large"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_small.png" id="14_tree_small"]
@@ -50,12 +49,6 @@ y = -1.0
 depth = -5.5
 scale = 1.3
 flip = true
-
-[sub_resource type="Resource" id="Resource_22"]
-script = ExtResource("8_spawn_def")
-monster = ExtResource("11_arcane_sentinel")
-platform = 0
-count = 1
 
 [sub_resource type="Resource" id="Resource_21"]
 script = ExtResource("8_spawn_def")
@@ -204,6 +197,13 @@ mote_color = Color(2.6, 1, 2.6, 1)
 grade_lift = Color(0.2902, 0.102, 0.3529, 1)
 grade_lift_amount = 0.45
 
+[sub_resource type="Resource" id="Portal_arena"]
+script = ExtResource("7_portal_def")
+x = 1940.0
+platform = 0
+target_map = &"spire_summit"
+target_x = 140.0
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"arcane_spire"
@@ -216,11 +216,10 @@ ground_y = 620
 start_x = 120.0
 platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Land_1")])
 climbables = Array[ExtResource("4_climbable_def")]([SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12")])
-portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_13")])
-spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18"), SubResource("Resource_19"), SubResource("Resource_20"), SubResource("Resource_21"), SubResource("Resource_22")])
+portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_13"), SubResource("Portal_arena")])
+spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18"), SubResource("Resource_19"), SubResource("Resource_20"), SubResource("Resource_21")])
 props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_23"), SubResource("Resource_24"), SubResource("Resource_25"), SubResource("Resource_28")])
 region = &"lumewood"
 world_pos = Vector2(770.0, 110.0)
 return_map = &"lumewood"
 level_text = "Lv. 22-30"
-music = &"boss_lumewood"

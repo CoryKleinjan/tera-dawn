@@ -354,28 +354,87 @@ func _boss(moves: Array[MonsterMove]) -> MonsterDef:
 	d.moves = moves
 	return d
 
-func test_a_boss_never_uses_the_same_move_twice_in_a_row() -> void:
+## Moves the boss starts over `ticks`, in order.
+func _moves_used(m: SimMob, ticks: int, want: int) -> Array[int]:
+	var used: Array[int] = []
+	for i in ticks:
+		var before := m.moves.index
+		h.step(1)
+		if m.moves.index >= 0 and m.moves.index != before:
+			used.append(m.moves.index)
+		if used.size() >= want:
+			break
+	return used
+
+func _pattern_boss() -> SimMob:
 	var a := _move(MonsterMove.Kind.LUNGE, 400.0)
 	a.distance = 10.0
 	a.cooldown = 1
 	var b := _move(MonsterMove.Kind.SLAM, 400.0)
 	b.cooldown = 1
-	var map := h.field_with([ServerHarness.spawn(_boss([a, b]))])
+	var c := _move(MonsterMove.Kind.SHOT, 400.0)
+	c.cooldown = 1
+	var map := h.field_with([ServerHarness.spawn(_boss([a, b, c]))])
 	var m := map.mobs[0]
 	m.position.x = 600.0
 	_ready_now(m)
 	h.join(2, "Ann", ServerHarness.FIELD, 900.0)
-	var used: Array[int] = []
+	return m
+
+func test_a_boss_goes_through_its_moves_in_order() -> void:
+	var m := _pattern_boss()
+	var used := _moves_used(m, 2000, 7)
+	check_eq(used.size(), 7, "used moves: %s" % [used])
+	for i in range(1, used.size()):
+		check_eq(used[i], (used[i - 1] + 1) % 3, "move %d comes next in the pattern (%s)" % [i, used])
+
+func test_after_its_second_wind_a_boss_strings_two_moves_together() -> void:
+	var m := _pattern_boss()
+	m.health.damage(m.def.max_hp / 2 + 1)
+	h.step(1)
+	var gaps: Array[int] = []
+	var idle := 0
 	for i in 2000:
 		var before := m.moves.index
 		h.step(1)
-		if m.moves.index >= 0 and m.moves.index != before:
-			used.append(m.moves.index)
-		if used.size() >= 6:
+		if not m.moves.busy():
+			idle += 1
+		elif m.moves.index != before and m.moves.index >= 0:
+			gaps.append(idle)
+			idle = 0
+		if gaps.size() >= 7:
 			break
-	check(used.size() >= 6, "used moves: %s" % [used])
-	for i in range(1, used.size()):
-		check(used[i] != used[i - 1], "move %d differs from the one before (%s)" % [i, used])
+	check_eq(gaps.size(), 7, "moves started (%s)" % [gaps])
+	var quick := gaps.slice(1).filter(func(g: int) -> bool: return g <= MobMoves.COMBO_GAP_TICKS + 1)
+	var slow := gaps.slice(1).filter(func(g: int) -> bool: return g >= MobMoves.BOSS_GAP_TICKS)
+	check(quick.size() >= 2 and slow.size() >= 2, "every other move follows straight on (idle ticks before each: %s)" % [gaps])
+
+func test_beating_a_boss_opens_the_way_home_for_everyone_there() -> void:
+	var boss := _boss([])
+	var field := ServerHarness.field_def()
+	field.spawns.append(ServerHarness.spawn(boss))
+	var home := PortalDef.new()
+	home.x = 1800.0
+	home.target_map = ServerHarness.TOWN
+	home.target_x = 300.0
+	home.one_way = true
+	home.after_boss = boss
+	field.portals.append(home)
+	h.add_map(field)
+	h.add_map(ServerHarness.town_def())
+	var map := h.server.map_instance(ServerHarness.FIELD)
+	var ann := h.join(2, "Ann", ServerHarness.FIELD, 1800.0)
+	var bo := h.join(3, "Bo", ServerHarness.FIELD, 1800.0)
+	check(home.locked(), "it waits on the boss")
+	h.ask(2, &"req_portal")
+	check_eq(ann.map.def.id, ServerHarness.FIELD, "shut while the boss stands")
+	ServerHarness.no_cards(ann, boss)
+	map.kill_mob(map.mobs[0], ann)
+	h.step(1)
+	check(home.open_to(ann.character) and home.open_to(bo.character), "open for both of them")
+	check(not h.events(3, &"ev_character").is_empty(), "Bo's game is told")
+	h.ask(3, &"req_portal")
+	check_eq(bo.map.def.id, ServerHarness.TOWN, "Bo goes home through it")
 
 func test_a_boss_goes_for_whoever_hurt_it_most() -> void:
 	var map := h.field_with([ServerHarness.spawn(_boss([]))])
