@@ -11,7 +11,7 @@ const STAT_RULES := 1
 static func to_dict(c: Character) -> Dictionary:
 	return {
 		"name": c.name, "essence": c.essence, "shards": c.shards, "map_id": c.map_id,
-		"job": c.job.id, "came_from": String(c.came_from), "base": c.base.to_dict(), "ap_reset_used": c.ap.reset_used,
+		"job": c.job.id, "came_from": String(c.came_from), "base": c.base.to_dict(), "jobs_passed": c.jobs_passed.duplicate(),
 		"stat_rules": STAT_RULES,
 		"hp": c.health.hp, "mp": c.mp,
 		"inventory": c.inventory.to_dict(), "equipment": c.equipment.to_dict(), "storage": c.storage.to_dict(),
@@ -46,7 +46,6 @@ static func load_dict(c: Character, data: Dictionary) -> void:
 	c.came_from = from if c.job and c.job.opens_from(from) else &""
 	if data.get("base") is Dictionary:
 		c.base = StatBlock.from_dict(data["base"])
-	c.ap.reset_used = bool(data.get("ap_reset_used", c.ap.reset_used))
 	var refund := data.get("base") is Dictionary and int(data.get("stat_rules", 0)) < STAT_RULES
 	if data.get("inventory") is Dictionary:
 		c.inventory.load_dict(data["inventory"])
@@ -98,7 +97,7 @@ static func load_dict(c: Character, data: Dictionary) -> void:
 	var pet_id := StringName(str(data.get("pet", "")))
 	c.pet = pet_id if Content.items.get(pet_id) is PetDef else &""
 	c.pet_full = clampi(int(data.get("pet_full", c.pet_full)), 0, PetDef.FULL)
-	for key in ["visited", "achievements", "scenes_seen"]:
+	for key in ["visited", "achievements", "scenes_seen", "jobs_passed"]:
 		if data.get(key) is Array:
 			var list: Array[String] = c.get(key)
 			list.clear()
@@ -110,6 +109,12 @@ static func load_dict(c: Character, data: Dictionary) -> void:
 			c.counters[str(k)] = int(data["counters"][k])
 	if not data.has("essence"):
 		_essence_from_levels(c, data)
+	if not data.has("jobs_passed"):
+		# a save from before job switching: the jobs it advanced through count as passed
+		for id in c.job_path():
+			var j: JobDef = Content.jobs.get(id)
+			if j and not j.is_starting_job() and not c.has_passed(j):
+				c.jobs_passed.append(String(id))
 	if refund:
 		# the stat rules changed since this was saved: the essence of every stat point back
 		c.ap.refund_all()
@@ -129,3 +134,14 @@ static func _essence_from_levels(c: Character, data: Dictionary) -> void:
 	var skill_bought := c.skills.spent()
 	for n in maxi(0, int(data.get("sp", 0))):
 		c.essence += CharacterStats.skill_price(skill_bought + n)
+	# what the skills it learned would have cost, so dropping one in a job switch pays it back
+	var k := 0
+	for id in c.skills.learned:
+		var s: SkillDef = Content.skills.get(id)
+		if s == null or s.innate:
+			continue
+		var cost := 0
+		for n in int(c.skills.learned[id]):
+			cost += CharacterStats.skill_price(k)
+			k += 1
+		c.skills.paid[id] = cost
