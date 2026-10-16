@@ -27,7 +27,7 @@ pins = {
 &"pinning": Vector4(114.1, 78.3, 0, 1),
 &"sit": Vector4(144.5, 120.9, 0.0, 1),
 &"skyward1": Vector4(160, 105.8, 0, 1),
-&"skyward2": Vector4(140.9, 93.9, 0, 1),
+&"skyward2": Vector4(140.9, 104, 0, 1),
 &"swing2": Vector4(143, 108, 0, 1),
 &"swing3": Vector4(103, 100, 0, 1),
 &"walk1": Vector4(158.1, 115.2, 0.0, 1),
