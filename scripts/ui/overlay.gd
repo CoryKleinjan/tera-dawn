@@ -228,13 +228,13 @@ func _draw_party(at: Vector2) -> void:
 	for m in party.get("members", []):
 		if m[0] == Game.me.name:
 			continue
-		var here: bool = StringName(m[5]) == world.map.id
+		var here: bool = StringName(m[4]) == world.map.id
 		var x := at.x
 		if m[0] == party["leader"]:
 			UiSkin.draw_icon(self, "social/leader_star", Rect2(x, y, 12, 12))
 			x += 14
-		DrawUtil.text(self, Game.ui_font, Vector2(x, y + 10), "%s  Lv.%d" % [m[0], m[2]], 11, Palette.MIST if here else Color(Palette.MIST, 0.55), 1, 3, Palette.NIGHT)
-		WorldSkin.draw_party_hp(self, Vector2(at.x - 2, y + 12), 100, float(m[4]))
+		DrawUtil.text(self, Game.ui_font, Vector2(x, y + 10), m[0], 11, Palette.MIST if here else Color(Palette.MIST, 0.55), 1, 3, Palette.NIGHT)
+		WorldSkin.draw_party_hp(self, Vector2(at.x - 2, y + 12), 100, float(m[3]))
 		y += 30
 
 ## A pet's name under it (into `tags`) and what it's saying over it.

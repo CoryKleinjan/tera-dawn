@@ -85,7 +85,7 @@ func _sync() -> void:
 		flash.position = TDStage.to3d(at, TDStage.Z_EFFECT + 0.6)
 		flash.light_energy = def.light_energy * (1.0 - k)
 
-## The caption ("LEVEL UP!"), drawn by the overlay so it stays sharp.
+## The caption, drawn by the overlay so it stays sharp.
 func draw_caption(ci: CanvasItem, at: Vector2) -> void:
 	if def.caption == "" and def.caption_art == null:
 		return

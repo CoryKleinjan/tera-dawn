@@ -106,13 +106,12 @@ func test_gear_for_another_job_is_refused() -> void:
 	check(c.inventory.at(ItemDef.Tab.EQUIP, 0) != null, "still in the bag")
 	check(h.told(2, "can use the Bronze Sword"), "told why")
 
-func test_gear_above_your_level_is_refused() -> void:
+func test_gear_has_no_level_to_wear_it() -> void:
 	var cap := (Content.item(&"leaf_cap") as EquipDef).duplicate() as EquipDef
 	cap.required_level = 5
 	c.inventory.put(ItemDef.Tab.EQUIP, 0, ItemStack.exact(cap))
 	h.ask(2, &"req_equip", [0, &"hat"])
-	check(c.equipment.at(&"hat") == null, "not worn")
-	check(h.told(2, "You need to be level 5"), "told why")
+	check(c.equipment.at(&"hat") != null and c.equipment.at(&"hat").item == cap, "worn: levels are gone")
 
 func test_taking_gear_off_puts_it_in_the_bag() -> void:
 	var top := c.equipment.at(&"top")
@@ -158,26 +157,36 @@ func test_moving_items_to_a_bad_slot_is_ignored() -> void:
 	h.ask(2, &"req_move_item", [ItemDef.Tab.USE, slot, Inventory.SLOTS])
 	check(c.inventory.at(ItemDef.Tab.USE, slot) != null, "stayed")
 
-func test_spending_ability_points() -> void:
-	c.ap.points = 2
+func test_buying_a_stat_spends_its_price_in_essence() -> void:
+	var first := c.ap.price(&"strength")
+	var second := CharacterStats.stat_price(c.ap.bought(&"strength") + 1)
+	c.essence = first + second - 1
 	var strength := c.base.strength
-	h.ask(2, &"req_add_ap", [&"strength"])
+	h.ask(2, &"req_buy_stat", [&"strength"])
 	check_eq(c.base.strength, strength + 1, "STR raised")
-	check_eq(c.ap.points, 1, "point spent")
-	h.ask(2, &"req_add_ap", [&"attack"])
-	check_eq(c.ap.points, 1, "only main stats take points")
+	check_eq(c.essence, second - 1, "its price spent")
+	check_eq(c.ap.price(&"strength"), second, "the next point costs more")
+	h.ask(2, &"req_buy_stat", [&"strength"])
+	check_eq(c.base.strength, strength + 1, "not enough for the next point")
+	check_eq(c.essence, second - 1, "nothing spent")
+	check(h.told(2, "You need %d Dawn Essence for that." % second), "told why")
+	h.ask(2, &"req_buy_stat", [&"attack"])
+	check_eq(c.essence, second - 1, "only base stats can be bought")
 
-func test_spending_many_ability_points_at_once() -> void:
-	c.ap.points = 5
+func test_auto_buys_the_damage_stat_while_the_essence_lasts() -> void:
+	c.essence = 100
+	var strength := c.base.strength
 	var luck := c.base.luck
-	h.ask(2, &"req_add_ap_many", [&"luck", 3])
-	check_eq(c.base.luck, luck + 3, "LUK raised by 3")
-	check_eq(c.ap.points, 2, "three points spent")
-	h.ask(2, &"req_add_ap_many", [&"luck", 50])
-	check_eq(c.base.luck, luck + 5, "never more than the points left")
-	check_eq(c.ap.points, 0, "all spent")
-	c.ap.points = 4
-	h.ask(2, &"req_add_ap_many", [&"luck", -3])
-	h.ask(2, &"req_add_ap_many", [&"attack", 2])
-	check_eq(c.ap.points, 4, "a negative amount or a non-base stat spends nothing")
-	check_eq(c.base.luck, luck + 5, "LUK unchanged")
+	var bought := c.ap.bought(&"strength")
+	var cost := 0
+	var n := 0
+	while cost + CharacterStats.stat_price(bought + n) <= 100:
+		cost += CharacterStats.stat_price(bought + n)
+		n += 1
+	check(n > 0, "100 buys at least one point")
+	h.ask(2, &"req_auto_stats")
+	check_eq(c.base.strength, strength + n, "a Beginner's damage stat is STR")
+	check_eq(c.base.luck, luck, "nothing else")
+	check_eq(c.essence, 100 - cost, "stops when the next point costs more than is left")
+	h.ask(2, &"req_auto_stats")
+	check_eq(c.base.strength, strength + n, "nothing more to buy")

@@ -26,19 +26,16 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
 2. Effects are **EffectDef**s in `data/effects/`: a flipbook of frames from
    `assets/sprites/effects/`, its speed and size, an optional light and particle burst.
    Effects the game fires on its own rather than through a skill or item (celebrate, monster
-   poof, level up, critical) are named as constants on `EffectDef`; code uses those, never
+   poof, critical) are named as constants on `EffectDef`; code uses those, never
    the id as a string.
 3. Give it an icon: a painted badge on a skill icon sheet (a Gemini edit in `tools/art/gemini_pass.json`,
    matching `skill_icons_test`), cut by an `art/sheets/skill_icons_<sheet>.json` manifest into
    `assets/sprites/skills/<skill id>.png`.
 
-It then appears in its job's tab of the skill window (K). Players spend Skill Points on it
-(`SkillBook.learn`, checked by `ServerJobs.on_learn_skill`), and a newly learned attack or
-buff goes on the first free quickslot. A job taken late still pays the Skill Points of every
-level since it opened (`Character.advance`), and unspent points never go above the levels
-left on the job line's skills (`SkillBook.room`), so a new skill raises that limit by itself.
-Saves settle up when the server loads them (`SkillBook.settle`, from
-`CharacterStore.load_file`). Quickslots (`Character.quickslots`, eight keys in
+It then appears in its job's tab of the skill window (K). Players buy its levels with Dawn
+Essence (`SkillBook.learn`, checked by `ServerJobs.on_learn_skill`; `SkillBook.paid` keeps
+what each skill cost), and a newly learned attack or buff goes on the first free quickslot.
+Quickslots (`Character.quickslots`, eight keys in
 `Game.QUICKSLOT_ACTIONS`) hold skills or items and are saved with the character. The
 server checks the skill is known and pays its MP (`TDServer.on_skill`), then works out what
 it hits (`MapInstance.use_skill`) or starts the buff (`SkillBook.add_buff`, counted down

@@ -375,7 +375,7 @@ func _process(_delta: float) -> void:
 func apply_snapshot(snap: Dictionary) -> void:
 	sync.apply_snapshot(snap)
 
-## Another player's name, level, look and the like changed.
+## Another player's name, look and the like changed.
 func set_player_info(peer: int, info: Array) -> void:
 	sync.set_player_info(peer, info)
 
@@ -400,8 +400,8 @@ func show_mob_shot(index: int, move_index: int, aim: Vector2) -> void:
 func show_mob_death(index: int) -> void:
 	fx.show_mob_death(index)
 
-func show_level_up(peer: int, level: int) -> void:
-	fx.show_level_up(peer, level)
+func fly_essence(from: Vector2, amount: int) -> void:
+	fx.fly_essence(from, amount)
 
 func add_number(pos: Vector2, value: int, kind: String) -> void:
 	fx.add_number(pos, value, kind)

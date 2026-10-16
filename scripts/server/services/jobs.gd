@@ -29,7 +29,7 @@ func advance(p: SimPlayer, next: JobDef) -> void:
 		tell(p, "Your instructor hands you: %s." % next.gifts_text(), Palette.SUN)
 	server.save(p)
 
-## The free Ability Point reset from the instructor `npc_id` of `job_id` the player stands by.
+## The free stat reset from the instructor `npc_id` of `job_id` the player stands by.
 func on_reset_ap(peer: int, npc_id: StringName, job_id: StringName) -> void:
 	var p := player_of(peer)
 	var next := _instructed(p, npc_id, job_id)
@@ -41,7 +41,7 @@ func on_reset_ap(peer: int, npc_id: StringName, job_id: StringName) -> void:
 		return
 	p.dirty_character = true
 	p.dirty_vitals = true
-	tell(p, "Your Ability Points are back: %d to spend." % p.character.ap.points, Palette.SUN)
+	tell(p, "Your stats are reset, and their Dawn Essence is back: %d to spend." % p.character.essence, Palette.SUN)
 	server.save(p)
 
 ## The job `job_id` if the player stands by the instructor `npc_id` and it teaches that
@@ -53,14 +53,21 @@ func _instructed(p: SimPlayer, npc_id: StringName, job_id: StringName) -> JobDef
 		return null
 	return next
 
-## Spends `amount` Ability Points on one base stat (the "+" buttons spend one, Auto more).
-## AbilityPoints.spend refuses other stats and never spends more points than there are.
-func on_add_ap(peer: int, stat: StringName, amount := 1) -> void:
+## Buys one point of a base stat with Dawn Essence (the "+" buttons). AbilityPoints.buy
+## refuses other stats and never spends more essence than there is.
+func on_buy_stat(peer: int, stat: StringName) -> void:
 	change(peer, func(c: Character) -> String:
-		c.ap.spend(stat, amount)
+		if c.ap.buy(stat) == 0 and stat in StatBlock.BASE:
+			return "You need %d Dawn Essence for that." % c.ap.price(stat)
 		return "")
 
-## Spends a Skill Point on `skill_id`.
+## The Auto button: buys the job's damage stats while the essence lasts.
+func on_auto_stats(peer: int) -> void:
+	change(peer, func(c: Character) -> String:
+		c.ap.auto()
+		return "")
+
+## Buys a level of `skill_id` with Dawn Essence.
 func on_learn_skill(peer: int, skill_id: StringName) -> void:
 	var p := player_of(peer)
 	var skill: SkillDef = Content.skills.get(skill_id)

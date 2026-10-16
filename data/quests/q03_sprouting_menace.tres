@@ -31,6 +31,6 @@ offer_text = "Sproutcaps have taken the upper meadow. They spread their spores i
 progress_text = "Six Sproutcaps, and three of their caps. Climb the ropes to the upper meadow."
 complete_text = "Well done. The upper meadow can breathe again. These boots served me well in my youth."
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1"), SubResource("Resource_2")])
-reward_xp = 3100
+reward_essence = 3100
 reward_shards = 150
 reward_items = Array[ExtResource("5_drop_entry")]([])

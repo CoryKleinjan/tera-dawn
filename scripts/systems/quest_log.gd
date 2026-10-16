@@ -19,8 +19,6 @@ func status(q: QuestDef, c: Character) -> Status:
 	return Status.AVAILABLE if can_take(q, c) else Status.LOCKED
 
 func can_take(q: QuestDef, c: Character) -> bool:
-	if c.level < q.min_level or (q.max_level > 0 and c.level > q.max_level):
-		return false
 	if not q.jobs.is_empty() and not c.job.id in q.jobs:
 		return false
 	for r in q.requires:
@@ -133,7 +131,7 @@ func quest_drops(monster: MonsterDef, c: Character) -> Array:
 	return out
 
 ## Hands the quest in: takes the collected items, pays the Dawnshard and item rewards and
-## marks it done (EXP goes through TDServer.give_xp so levelling up is shown).
+## marks it done (Dawn Essence goes through TDServer.give_essence so the gain is shown).
 ## Returns why it couldn't, or "".
 func complete(q: QuestDef, c: Character) -> String:
 	if not is_ready(q, c):

@@ -18,7 +18,7 @@ func check() -> void:
 	var hp := ch.health.hp
 	map.tick = (map.tick / 120 + 1) * 120 - 1
 	await _ticks(1)
-	_check(ch.health.hp - hp == (2 + ch.level / 3) * 2 + ch.skills.regen_bonus().x, "sitting doubles HP recovery")
+	_check(ch.health.hp - hp == (SimPlayer.REGEN_BASE + floori(ch.growth() / SimPlayer.REGEN_HP_GROWTH)) * 2 + ch.skills.regen_bonus().x, "sitting doubles HP recovery")
 	await _hold("move_right", 6)
 	await _ticks(4)
 	_check(not me.sitting and not world.player.sitting, "moving gets you up")

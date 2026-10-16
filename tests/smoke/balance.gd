@@ -1,8 +1,8 @@
 extends SmokeArea
-## Balance: every job against monsters of its level, kills per level, the EXP curve and the
-## achievements' Steam ids.
+## Balance: every job against monsters of its tier, kills per tier, the Dawn Essence prices
+## and the achievements' Steam ids.
 
-## Every job can fight monsters of its level, and levels take a sensible number of kills
+## Every job can fight monsters of its tier, and tiers take a sensible number of kills
 ## (see Balance and tests/balance_report.tscn).
 func check() -> void:
 	var worst := ""
@@ -16,14 +16,16 @@ func check() -> void:
 			var hits := Balance.hits_to_kill(Balance.typical(j, m.level), m)
 			if hits < low or hits > Balance.BAND.y:
 				worst += " %s/%s %.1f" % [j, m.id, hits]
-		var kills := Balance.kills_per_level(m.level, m)
-		# a slime's bits only come with the slime (it pays for both), so nobody levels on bits
+		var kills := Balance.kills_per_tier(m.level, m)
+		# a slime's bits only come with the slime (it pays for both), so nobody grows on bits
 		if kills > 1000.0 and not _only_split_from(m):
 			slow += " %s %.0f" % [m.id, kills]
-	_check(worst == "", "every job beats monsters of its level in a few hits%s" % worst)
-	_check(slow == "", "no monster takes too many kills a level%s" % slow)
-	var c := Character.new()
-	_check(c.xp_need(1) < 100 and c.xp_need(30) > c.xp_need(20) * 2, "early levels are quick and later ones take longer")
+	_check(worst == "", "every job beats monsters of its tier in a few hits%s" % worst)
+	_check(slow == "", "no monster takes too many kills a tier%s" % slow)
+	# the stat point a tier-20 or tier-30 character buys next (all in one stat, as Balance.typical)
+	var at_20 := CharacterStats.stat_price(19 * CharacterStats.GROWTH_POINTS)
+	var at_30 := CharacterStats.stat_price(29 * CharacterStats.GROWTH_POINTS)
+	_check(CharacterStats.stat_price(0) < 100 and CharacterStats.skill_price(0) < 100 and at_30 > at_20 * 2, "the first stat points are cheap and later ones cost more")
 	var steam_ids := {}
 	var achievements := Achievements.all()
 	for a in achievements:

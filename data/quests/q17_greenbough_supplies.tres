@@ -30,6 +30,6 @@ offer_text = "I need 20 Bramble Tusks for my work. You'll find them in Thornwood
 progress_text = "20 Bramble Tusks from Thornwood."
 complete_text = "Perfect quality. Here's a scroll I've been saving. Try it on your weapon."
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1")])
-reward_xp = 23500
+reward_essence = 23500
 reward_shards = 1500
 reward_items = Array[ExtResource("4_drop_entry")]([SubResource("Resource_2")])

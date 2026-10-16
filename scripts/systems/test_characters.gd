@@ -1,7 +1,8 @@
 class_name TestCharacters
 extends RefCounted
-## Developer-only test characters: one per job at LEVEL, wearing the best gear
-## that job can wear, with every skill learned to its highest level and plenty of Dawnshards.
+## Developer-only test characters: one per job with STAT_POINTS stat points bought, wearing the
+## best gear that job can wear up to GEAR_TIER, with every skill learned to its highest level
+## and plenty of Dawnshards and Dawn Essence.
 ## Everything is read from the data, so a new job, skill or piece of gear shows up here with
 ## no code change.
 ##
@@ -21,9 +22,13 @@ const FOLDER := "dev"
 ## A test character is called this plus its job's name (cut to CharacterStore.MAX_NAME).
 const NAME_PREFIX := "Dev "
 const SHARDS := 50000
-## The level test characters are made at: the top of the game's content so far, under the
-## Character.MAX_LEVEL cap.
-const LEVEL := 35
+## Dawn Essence left over to try buying with.
+const ESSENCE := 5000
+## The gear tier test characters wear up to (EquipDef.required_level, until gear tiers come
+## from the maps): the top of the game's content so far.
+const GEAR_TIER := 35
+## Stat points test characters have bought, all told: what a player that far along would.
+const STAT_POINTS := (GEAR_TIER - 1) * CharacterStats.GROWTH_POINTS
 
 ## Whether this build may make and use test characters: never in a release export.
 static func allowed() -> bool:
@@ -99,40 +104,41 @@ static func home_town(job: JobDef) -> StringName:
 ## A test character of `job` called `char_name`.
 static func build(char_name: String, job: JobDef) -> Character:
 	var c := Character.create(char_name, Character.START_JOB)
-	# levelled and advanced the way a player would, so AP, SP and job gifts add up as usual
+	# advanced the way a player would, so stats bought and job gifts add up as usual
 	for next in path_to(job):
-		_level_to(c, next.advance_level)
 		var short := c.stats_short_of(next)
 		for stat: StringName in short:
-			c.ap.spend(stat, short[stat] - c.base.value(stat))
+			grant_stat(c, stat, short[stat] - c.base.value(stat))
 		if next.advance_quest:
 			c.quests.done[next.advance_quest.id] = true
 		var problem := c.advance(next)
 		if problem != "":
 			push_warning("Test character %s couldn't become a %s: %s" % [char_name, next.display_name, problem])
 			break
-	_level_to(c, LEVEL)
 	_wear_best_gear(c)
-	_spend_ap(c)
+	_buy_stats(c)
 	_learn_every_skill(c)
 	c.shards = SHARDS
+	c.essence = ESSENCE
 	c.map_id = home_town(job)
 	c.recalc()
 	c.refill()
 	return c
 
-static func _level_to(c: Character, lvl: int) -> void:
-	while c.level < mini(lvl, Character.MAX_LEVEL):
-		c.gain_xp(c.xp_need() - c.xp)
+## Buys `n` points of `stat` for `c` with Dawn Essence given for them.
+static func grant_stat(c: Character, stat: StringName, n: int) -> void:
+	for i in maxi(0, n):
+		c.essence += c.ap.price(stat)
+		c.ap.buy(stat)
 
 # ---------- gear ----------
 
-## The best piece of each kind of gear `c`'s job can wear at its level, as place -> EquipDef
+## The best piece of each kind of gear `c`'s job can wear up to GEAR_TIER, as place -> EquipDef
 ## (see best_gear_for).
 static func best_gear(c: Character) -> Dictionary:
-	return best_gear_for(c.job, c.level)
+	return best_gear_for(c.job, GEAR_TIER)
 
-## The best gear a `job` character of level `lvl` can wear, as Equipment place -> EquipDef:
+## The best gear a `job` character can wear up to gear tier `lvl`, as Equipment place -> EquipDef:
 ## per kind, the highest required level, then the most stats (weapon attack counts most).
 ## A kind with more than one place (rings) fills each with the next best piece. The weapon
 ## is the best of the kind the job is handed first when it advances, when it has one, and
@@ -190,7 +196,7 @@ static func _better_offhand(job: JobDef, a: EquipDef, b: EquipDef) -> bool:
 		return own_a
 	return _better(a, b)
 
-## Every piece of gear meant for `job`'s line (or anyone) that a level `lvl` character can wear.
+## Every piece of gear meant for `job`'s line (or anyone) up to gear tier `lvl`.
 static func _wearable(job: JobDef, lvl: int) -> Array[EquipDef]:
 	var out: Array[EquipDef] = []
 	for it: ItemDef in Content.items.values():
@@ -227,23 +233,25 @@ static func _wear_best_gear(c: Character) -> void:
 	var gear := best_gear(c)
 	for place: StringName in gear:
 		c.equipment.put(place, ItemStack.exact(gear[place]))
-	for e in best_weapons(c.job, c.level).slice(1):
+	for e in best_weapons(c.job, GEAR_TIER).slice(1):
 		c.inventory.add_stack(ItemStack.exact(e))
 
 # ---------- stats and skills ----------
 
-## Spends the Ability Points: first whatever the worn gear still asks for, then the rest the
-## Auto button's way.
-static func _spend_ap(c: Character) -> void:
+## Buys stats up to STAT_POINTS: first whatever the worn gear still asks for, then the rest
+## the Auto button's way (the job's damage stats, the cheaper first).
+static func _buy_stats(c: Character) -> void:
 	for s: ItemStack in c.equipment.worn.values():
 		var reqs := s.equip_def().requirements()
 		for stat in StatBlock.BASE:
-			var short := int(reqs.get(stat, 0)) - c.stats.value(stat)
-			if short > 0:
-				c.ap.spend(stat, short)
-	var plan := c.ap.auto_plan()
-	for stat: StringName in plan:
-		c.ap.spend(stat, plan[stat])
+			grant_stat(c, stat, int(reqs.get(stat, 0)) - c.stats.value(stat))
+	var stats := c.job.damage_stats()
+	while c.ap.spent() < STAT_POINTS:
+		var next: StringName = stats[0]
+		for stat in stats:
+			if c.ap.price(stat) < c.ap.price(next):
+				next = stat
+		grant_stat(c, next, 1)
 
 ## Every skill of the job line at its highest level, learned in an order its requirements
 ## allow, so new skills go on the quickslots as they would for a player.
@@ -258,9 +266,9 @@ static func _learn_every_skill(c: Character) -> void:
 	while learned:
 		learned = false
 		for s in todo:
-			c.skills.points = maxi(c.skills.points, 1)
+			c.essence += c.skills.price()
 			while c.skills.learn_problem(s) == "":
 				c.skills.learn(s)
-				c.skills.points = maxi(c.skills.points, 1)
+				c.essence += c.skills.price()
 				learned = true
-	c.skills.points = 0
+	c.essence = 0

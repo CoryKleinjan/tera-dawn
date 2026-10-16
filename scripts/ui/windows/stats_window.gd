@@ -1,12 +1,12 @@
 class_name TDStatsWindow
 extends TDWindow
-## Character info (S): job, level, HP/MP, the four base stats with what gear adds, unspent
-## Ability Points with a "+" per stat (and Auto, once you have a job), and everything the
-## stats work out to in combat. A Beginner also sees the job paths and the stats each one
-## still needs, so points don't go where they shut a path.
+## Character info (S): job, HP/MP, unspent Dawn Essence, the four base stats with what gear
+## adds and what the next point of each costs, a "+" per stat the essence pays for (and Auto,
+## once you have a job), and everything the stats work out to in combat. A Beginner also sees
+## the job paths and the stats each one still needs, so essence doesn't go where it shuts a path.
 
 const ROW_H := 17.0
-## The Ability Points row and the four stat rows are taller, so each "+" (STAT_PLUS tall)
+## The Dawn Essence row and the four stat rows are taller, so each "+" (STAT_PLUS tall)
 ## has a gap above and below it.
 const STAT_ROW_H := 20.0
 const STAT_PLUS := 16.0
@@ -19,7 +19,7 @@ const COL_RIGHT_VALUE := 98.0
 ## The room kept between a left-hand value and the right-hand column's label.
 const COL_GAP := 8.0
 ## The window's height without the job paths, and the paths' rows.
-const BASE_H := 374.0
+const BASE_H := 357.0
 const PATH_ROW_H := 13.0
 const PATHS_TOP := 18.0
 const AUTO_SIZE := Vector2(46, 20)
@@ -56,26 +56,29 @@ func _paths() -> Array[JobDef]:
 func _draw_body() -> void:
 	var s := Game.me.stats
 	var y := 52.0
-	y = _pair(y, ["Job", Game.me.job.display_name], ["Level", str(Game.me.level)])
-	y = _pair(y, ["Guild", Game.me.guild if Game.me.guild != "" else "-"],
+	y = _pair(y, ["Job", Game.me.job.display_name],
 		["Fame", str(Game.me.fame), Palette.GOOD if Game.me.fame > 0 else (Palette.WARN if Game.me.fame < 0 else Palette.MIST)])
 	# the long numbers get a row each, so they line up with the values above
-	y = _row(y, "EXP", TDStatusBar.MAX_LEVEL_TEXT if Game.me.at_max_level() else "%d / %d" % [Game.me.xp, Game.me.xp_need()])
+	y = _row(y, "Guild", Game.me.guild if Game.me.guild != "" else "-")
 	y = _row(y, "HP", "%d / %d" % [Game.me.health.hp, Game.me.max_hp()])
 	y = _row(y, "MP", "%d / %d" % [Game.me.mp, Game.me.max_mp()])
 	y = _divider(y)
 	auto_rect = Rect2()
-	if Game.me.ap.points > 0 and not Game.me.job.is_starting_job():
+	if can_buy_any(Game.me) and not Game.me.job.is_starting_job():
 		# left of the "+" column, so it never touches the STR "+" under it
 		auto_rect = Rect2(Vector2(_plus_x() - 6 - AUTO_SIZE.x, y - TEXT_MID - AUTO_SIZE.y / 2.0), AUTO_SIZE)
 		add_button(auto_rect, "Auto", auto_assign, true, true)
-	y = _row(y, "Ability Points", str(Game.me.ap.points), Palette.SUN if Game.me.ap.points > 0 else Palette.MIST, 0.0, COL_VALUE, STAT_ROW_H)
+	y = _row(y, "Dawn Essence", str(Game.me.essence), Palette.SUN if Game.me.essence > 0 else Palette.MIST, 0.0, COL_VALUE, STAT_ROW_H)
 	var main_stats: Array = Game.me.job.damage_stats() if not Game.me.job.uses_best_stat else [Game.me.job.damage_stat(s)]
 	for stat in StatBlock.BASE:
 		var extra := s.value(stat) - Game.me.base.value(stat)
 		var text := str(s.value(stat)) + (" (+%d)" % extra if extra > 0 else "")
-		if Game.me.ap.points > 0:
-			plus_button(Vector2(_plus_x(), y - TEXT_MID - STAT_PLUS / 2.0), Net.ask.bind(&"req_add_ap", [stat]), STAT_PLUS)
+		var price := Game.me.ap.price(stat)
+		# the next point's price, left of the "+" (dim when the essence doesn't cover it)
+		DrawUtil.text(self, Game.ui_font, Vector2(_plus_x() - 5, y), str(price), 11,
+			Palette.MIST if Game.me.essence >= price else Palette.MUTED, -1, 3, Color(Palette.NIGHT, 0.6))
+		if Game.me.essence >= price:
+			plus_button(Vector2(_plus_x(), y - TEXT_MID - STAT_PLUS / 2.0), Net.ask.bind(&"req_buy_stat", [stat]), STAT_PLUS)
 		y = _row(y, StatBlock.LABELS[stat], text, Palette.SUN if stat in main_stats else Palette.MIST, 0.0, COL_VALUE, STAT_ROW_H)
 	y = _divider(y - STAT_ROW_H + ROW_H)
 	# combat numbers in two columns, so the window ends above the status bar's HP
@@ -109,20 +112,20 @@ static func path_text(c: Character, j: JobDef) -> String:
 	var short := c.stats_short_of(j)
 	var bits := []
 	if short.is_empty():
-		var lines := j.requirement_lines()
-		for i in range(1, lines.size()): # after "Level N"
-			bits.append(lines[i])
+		bits = Array(j.requirement_lines())
 	for stat in StatBlock.BASE:
 		if short.has(stat):
 			bits.append("%d %s (you have %d)" % [short[stat], StatBlock.LABELS[stat], c.base.value(stat)])
 	return "%s: %s" % [j.display_name, ", ".join(bits) if not bits.is_empty() else "ready"]
 
-## Spends every Ability Point the way AbilityPoints.auto_plan says (all in the job's one
-## stat). The server does the spending.
+## Spends essence on the job's damage stats the way AbilityPoints.auto does. The server does
+## the spending.
 func auto_assign() -> void:
-	var plan := Game.me.ap.auto_plan()
-	for stat in plan:
-		Net.ask(&"req_add_ap_many", [stat, plan[stat]])
+	Net.ask(&"req_auto_stats")
+
+## Whether `c`'s essence pays for the next point of any base stat.
+static func can_buy_any(c: Character) -> bool:
+	return StatBlock.BASE.any(func(stat: StringName) -> bool: return c.essence >= c.ap.price(stat))
 
 ## Where the column of "+" buttons starts.
 func _plus_x() -> float:

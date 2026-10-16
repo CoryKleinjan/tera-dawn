@@ -110,7 +110,7 @@ func _flush(p: SimPlayer) -> void:
 		Net.send(p.peer, &"ev_character", [p.character.to_dict()])
 	elif p.dirty_vitals:
 		var c := p.character
-		Net.send(p.peer, &"ev_vitals", [c.health.hp, c.mp, c.xp, c.level, c.shards])
+		Net.send(p.peer, &"ev_vitals", [c.health.hp, c.mp, c.essence, c.shards])
 	p.dirty_character = false
 	p.dirty_vitals = false
 
@@ -186,18 +186,17 @@ func _town_for(p: SimPlayer) -> StringName:
 	var town := p.map.def.return_town() if p.map else Character.START_MAP
 	return town if Content.maps.has(town) else Character.START_MAP
 
-func give_xp(p: SimPlayer, amount: int) -> void:
-	var c := p.character
-	if c.at_max_level():
+## Gives the player Dawn Essence. From a monster (`from` is where it fell) it flies to them;
+## otherwise (a quest) it just shows rising over them.
+func give_essence(p: SimPlayer, amount: int, from := Vector2.INF) -> void:
+	if amount <= 0:
 		return
-	var levels := c.gain_xp(amount)
+	p.character.gain_essence(amount)
 	p.dirty_vitals = true
-	p.map.show_gain(p, &"exp", amount)
-	if levels > 0:
-		p.dirty_character = true
-		p.map.broadcast(&"ev_level_up", [p.peer, c.level])
-		p.map.tell(p, "Level up! You reached Lv. %d" % c.level, Palette.SUN)
-		save(p)
+	if from == Vector2.INF:
+		p.map.show_gain(p, &"essence", amount)
+	else:
+		Net.send(p.peer, &"ev_essence", [from.x, from.y, amount])
 
 ## Tells the player about achievements they've just reached; their game unlocks them on Steam.
 func check_achievements(p: SimPlayer) -> void:

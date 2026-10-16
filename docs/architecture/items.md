@@ -5,30 +5,33 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
 ## Items, equipment and stats
 
 Stats work like MapleStory. A character has base **STR / DEX / INT / LUK / CHA** (their job's
-starting stats plus the Ability Points they spend, 5 per level), and everything they wear adds
+starting stats plus the points they buy with Dawn Essence), and everything they wear adds
 a **StatBlock** on top. `Character.stats` is the total. From it, `CharacterStats` works out:
 
 - **Damage range**: max = main stat × `MAIN_STAT_WEIGHT` × Weapon Attack / 100 × `DAMAGE_SCALE`,
   min = max × the job's mastery. The job's `primary_stat` is its one main stat (STR for
   warriors, CHA for pirates); no other stat adds to damage. A job with `uses_best_stat` (the
   Beginner) hits with whichever base stat is highest (`JobDef.damage_stat`).
-- What each stat also gives: STR Max HP, INT Max MP (and Magic Attack), DEX Accuracy (hitting
-  monsters above your level), LUK Avoidability (dodging their touches), CHA a shop discount
+- What each stat also gives: STR Max HP, INT Max MP (and Magic Attack), DEX Accuracy, LUK Avoidability (dodging their touches), CHA a shop discount
   (`shop_discount`, capped at `MAX_DISCOUNT`, used by `ShopEntry.cost_for`) and more
   Dawnshards picked up (`shard_bonus`). Weapon Defense lowers the damage, Speed and Jump scale
   movement.
-- Max HP and MP: the job's base plus growth per level plus gear, plus STR and INT.
+- Max HP and MP: the job's base plus its `hp_growth`/`mp_growth` times `CharacterStats.growth`
+  (one step per `GROWTH_POINTS` stat points bought) plus gear, plus STR and INT.
 - Attack Speed (%) shortens cooldowns and swings (`attack_ticks`); Melee and Ranged Damage (%)
   raise hits with and without a projectile (`damage_bonus`).
 - When these rules change, `CharacterCodec.STAT_RULES` goes up and older saves get every
-  Ability Point back once (`AbilityPoints.refund_all`).
+  stat point back as essence once (`AbilityPoints.refund_all`).
 
 `Combat` uses those numbers, so all balance lives in `character_stats.gd` and `combat.gd`.
 
-Levels: `Character.xp_need` is the EXP curve (one formula, steeper from Lv 10, tuned with the
-pace bot, then halved for twice the speed: roughly half an hour to Lv 10 and 15-25 to the cap,
-quests included). `Character.MAX_LEVEL`
-(100) is the cap: EXP stops there and the status bar and stats window say "Max level".
+Dawn Essence (`Character.essence`) replaces levels and EXP: monsters (`MonsterDef.essence`,
+flown to the killer by `TDWorldFx.fly_essence`) and quests (`QuestDef.reward_essence`) give
+it, and it buys stat points (`AbilityPoints.buy`, `CharacterStats.stat_price`: each point in a
+stat costs more than the last) and skill levels (`SkillBook.learn`,
+`CharacterStats.skill_price`: each skill level bought makes the next dearer). Fainting loses
+10% of what's unspent (`Combat.faint_penalty`). Saves from before essence turn their EXP and
+unspent points into essence (`CharacterCodec._essence_from_levels`).
 
 There are four inventory tabs, and the class of the item decides which one it goes in:
 

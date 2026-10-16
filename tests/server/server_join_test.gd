@@ -26,10 +26,11 @@ func test_join_sends_the_character_then_the_starting_map() -> void:
 	check_eq(h.events(2).size(), h.api.sent.size(), "every event went to peer 2")
 	check_eq(h.count(2, &"ev_refused"), 0, "nothing refused")
 
-func test_new_character_is_a_level_1_beginner_with_full_health() -> void:
+func test_new_character_is_a_beginner_with_full_health_and_no_essence() -> void:
 	var p := h.join(2, "Ann")
 	var c := p.character
-	check_eq(c.level, 1, "level")
+	check_eq(c.essence, 0, "no Dawn Essence")
+	check_eq(c.ap.spent(), 0, "no stats bought")
 	check_eq(c.job.id, Character.START_JOB, "job")
 	check_eq(c.health.hp, c.max_hp(), "full HP")
 	check_eq(c.mp, c.max_mp(), "full MP")
@@ -44,7 +45,7 @@ func test_a_name_already_playing_is_refused() -> void:
 
 func test_a_character_that_cannot_be_read_is_refused() -> void:
 	h.api.peers.append(2)
-	h.server.lobby.on_play(2, {"level": 3})
+	h.server.lobby.on_play(2, {"essence": 3})
 	check_eq(h.last(2, &"ev_refused"), ["That character's save couldn't be read.", false], "why")
 	check(not h.server.sessions.has(2), "not in the world")
 
@@ -96,12 +97,12 @@ func test_leaving_saves_the_character_and_tells_the_map() -> void:
 func test_rejoining_after_a_restart_loads_the_saved_character() -> void:
 	var a := h.join(2, "Ann")
 	a.character.shards = 777
-	a.character.gain_xp(a.character.xp_need())
+	a.character.gain_essence(321)
 	h.leave(2)
 	h.restart()
 	var again := h.join(2, "ann", ServerHarness.TOWN)
 	check_eq(again.character.shards, 777, "Dawnshards kept")
-	check_eq(again.character.level, 2, "level kept")
+	check_eq(again.character.essence, 321, "Dawn Essence kept")
 	check_eq(again.character.name, "Ann", "the name as it was made")
 
 func test_rejoining_puts_you_back_on_the_map_you_left() -> void:
@@ -157,7 +158,7 @@ func test_the_creators_choices_make_a_beginner_with_that_outfit() -> void:
 	h.play(2, "Ann", made.to_dict())
 	var c: Character = h.server.sessions[2].character
 	check_eq(c.job.id, Character.START_JOB, "a Beginner")
-	check_eq(c.level, 1, "level 1")
+	check_eq(c.essence, 0, "no Dawn Essence yet")
 	check_eq(c.equipment.at(&"top").item.id, &"meadow_shirt", "the top picked")
 	check_eq(h.last(2, &"ev_joined")[0]["name"], "Ann", "the client hears it")
 
@@ -174,9 +175,9 @@ func test_player_info_is_sent_only_when_it_changes() -> void:
 	var before := h.events(3, &"ev_player_info").size()
 	h.step(TDServer.SNAPSHOT_EVERY * 4)
 	check_eq(h.events(3, &"ev_player_info").size(), before, "nothing new while nothing changed")
-	a.character.level = 7
+	a.character.guild = "Dawnguard"
 	h.step(TDServer.SNAPSHOT_EVERY)
-	check_eq(h.player_info(3, 2)[1], 7, "her new level is sent")
+	check_eq(h.player_info(3, 2)[2], "Dawnguard", "her new guild is sent")
 
 func test_a_newcomer_hears_about_everyone_already_there() -> void:
 	h.join(2, "Ann")

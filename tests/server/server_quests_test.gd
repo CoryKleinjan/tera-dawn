@@ -35,7 +35,7 @@ func before_each() -> void:
 
 	q_kill = _quest(&"test_q_kill")
 	q_kill.objectives.append(_objective(QuestObjective.Kind.KILL, 2))
-	q_kill.reward_xp = 5
+	q_kill.reward_essence = 5
 	q_kill.reward_shards = 50
 	q_kill.reward_items.append(ServerHarness.drop(Content.item(&"red_potion"), 3))
 
@@ -100,10 +100,10 @@ func test_quests_are_only_taken_standing_by_the_giver() -> void:
 	h.ask(2, &"req_quest_accept", [&"test_taker", q_kill.id])
 	check(not c.quests.active.has(q_kill.id), "the wrong NPC")
 
-func test_quests_above_your_level_cant_be_taken() -> void:
+func test_quests_have_no_level_to_take_them() -> void:
 	q_kill.min_level = 5
 	h.ask(2, &"req_quest_accept", [&"test_giver", q_kill.id])
-	check(not c.quests.active.has(q_kill.id), "locked")
+	check(c.quests.active.has(q_kill.id), "taken: levels are gone")
 
 func test_kills_count_toward_the_quest() -> void:
 	h.ask(2, &"req_quest_accept", [&"test_giver", q_kill.id])
@@ -116,12 +116,13 @@ func test_handing_in_pays_every_reward() -> void:
 	h.ask(2, &"req_quest_accept", [&"test_giver", q_kill.id])
 	_hunt()
 	check(h.told(2, "Test Q Kill is ready to hand in."), "told it's ready")
-	var xp := c.xp
+	var essence := c.essence
 	var reds := c.inventory.count_of(Content.item(&"red_potion"))
 	h.ask(2, &"req_quest_complete", [&"test_giver", q_kill.id])
 	check(not c.quests.active.has(q_kill.id), "no longer active")
 	check_eq(c.quests.done.get(q_kill.id), 1, "done once")
-	check_eq(c.xp, xp + 5, "EXP reward")
+	check_eq(c.essence, essence + 5, "Dawn Essence reward")
+	check_eq(h.last(2, &"ev_gain"), [&"essence", 5], "shown rising over the player")
 	check_eq(c.shards, 50, "Dawnshard reward")
 	check_eq(c.inventory.count_of(Content.item(&"red_potion")), reds + 3, "item reward")
 	check(h.told(2, "Quest complete: Test Q Kill"), "told")
@@ -199,7 +200,6 @@ func _beside(map_id: StringName, npc_id: StringName) -> void:
 func test_choosing_a_path_is_handed_in_to_the_harbormaster_in_dawnharbor() -> void:
 	var q: QuestDef = Content.quests[&"q07_choosing_a_path"]
 	check_eq(q.turn_in_npc(), &"harbormaster", "handed in at the docks")
-	c.level = q.min_level
 	_beside(&"dawnrise_village", q.giver)
 	h.ask(2, &"req_quest_accept", [q.giver, q.id])
 	if not check(c.quests.active.has(q.id), "taken from Sorrel"):
@@ -212,7 +212,6 @@ func test_choosing_a_path_is_handed_in_to_the_harbormaster_in_dawnharbor() -> vo
 
 func test_choosing_a_path_is_not_handed_in_back_on_the_isle() -> void:
 	var q: QuestDef = Content.quests[&"q07_choosing_a_path"]
-	c.level = q.min_level
 	_beside(&"dawnrise_village", q.giver)
 	h.ask(2, &"req_quest_accept", [q.giver, q.id])
 	_beside(&"dawnharbor", &"harbormaster")

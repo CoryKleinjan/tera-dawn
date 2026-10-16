@@ -1,7 +1,7 @@
 extends TestCase
-## Character rules: EXP and levelling up, HP and MP, recalc, Ability Points, skills and
-## Skill Points, buffs and their expiry, quickslots, storage, job advancement,
-## tallies, visited maps, pets, and a fresh character from real content.
+## Character rules: Dawn Essence and growth, HP and MP, recalc, buying stats, skills bought
+## with essence, buffs and their expiry, quickslots, storage, job advancement, tallies,
+## visited maps, pets, and a fresh character from real content.
 
 var fx: UnitHelpers
 
@@ -11,78 +11,58 @@ func before_each() -> void:
 func after_each() -> void:
 	fx.cleanup()
 
-# ---------- EXP and levels ----------
+# ---------- Dawn Essence and growth ----------
 
-func test_xp_need_formula() -> void:
+func test_gain_essence_adds_up_and_never_takes_away() -> void:
 	var c := fx.character()
-	# 27.5 * lvl^3 up to Lv 10, then 27,500 * (lvl / 10)^1.8
-	var want := {1: 27, 2: 220, 3: 742, 5: 3437, 10: 27500, 11: 32646, 20: 95760, 30: 198678, 35: 262213}
-	for lvl in want:
-		check_eq(c.xp_need(lvl), want[lvl], "level %d" % lvl)
-	c.level = 5
-	check_eq(c.xp_need(), 3437, "defaults to own level")
+	check_eq(c.essence, 0, "a fresh character has none")
+	c.gain_essence(15)
+	check_eq(c.essence, 15, "added")
+	c.gain_essence(0)
+	check_eq(c.essence, 15, "zero gain")
+	c.gain_essence(-5)
+	check_eq(c.essence, 15, "a negative gain takes nothing")
+	c.gain_essence(27)
+	check_eq(c.essence, 42, "adds up")
 
-func test_xp_need_always_grows() -> void:
-	var c := fx.character()
-	for lvl in range(1, 200):
-		check(c.xp_need(lvl + 1) > c.xp_need(lvl), "level %d to %d" % [lvl, lvl + 1])
+func test_stat_prices_climb_with_each_point_in_a_stat() -> void:
+	# 17 × (1 + n / 5) ^ 2.1, rounded
+	var want := {0: 17, 1: 25, 2: 34, 3: 46, 4: 58, 5: 73, 10: 171, 19: 458}
+	for n in want:
+		check_eq(CharacterStats.stat_price(n), want[n], "point %d" % (n + 1))
+	for n in range(0, 200):
+		check(CharacterStats.stat_price(n + 1) > CharacterStats.stat_price(n), "point %d costs more than %d" % [n + 2, n + 1])
 
-func test_gain_xp_below_need_keeps_level() -> void:
-	var c := fx.character()
-	check_eq(c.gain_xp(15), 0, "no level")
-	check_eq(c.level, 1, "still 1")
-	check_eq(c.xp, 15, "xp kept")
-	check_eq(c.gain_xp(0), 0, "zero gain")
-	check_eq(c.xp, 15, "unchanged")
+func test_skill_prices_climb_with_each_level_bought() -> void:
+	# 17 × (1 + k / 3) ^ 2.1, rounded
+	var want := {0: 17, 1: 31, 2: 50, 3: 73, 9: 312}
+	for k in want:
+		check_eq(CharacterStats.skill_price(k), want[k], "level %d" % (k + 1))
+	for k in range(0, 200):
+		check(CharacterStats.skill_price(k + 1) > CharacterStats.skill_price(k), "level %d costs more than %d" % [k + 2, k + 1])
 
-func test_gain_xp_exactly_need_levels_up_with_zero_left() -> void:
+func test_growth_follows_stat_points_bought() -> void:
 	var c := fx.character()
-	check_eq(c.gain_xp(27), 1, "one level")
-	check_eq(c.level, 2, "level 2")
-	check_eq(c.xp, 0, "nothing left over")
-
-func test_gain_xp_many_levels_at_once() -> void:
-	var c := fx.character()
-	fx.skill(&"t_cut")
-	check_eq(c.gain_xp(27 + 220 + 742 + 10), 3, "three levels")
-	check_eq(c.level, 4, "level 4")
-	check_eq(c.xp, 10, "leftover")
-	check_eq(c.ap.points, 15, "5 AP a level")
-	check_eq(c.skills.points, 9, "3 SP a level")
-
-func test_exp_stops_at_the_level_cap() -> void:
-	var c := fx.character()
-	c.level = Character.MAX_LEVEL - 1
-	c.xp = c.xp_need() - 10
-	check_eq(c.gain_xp(c.xp_need() * 3), 1, "one level, to the cap")
-	check_eq(c.level, Character.MAX_LEVEL, "at the cap")
-	check(c.at_max_level(), "at max level")
-	check_eq(c.xp, 0, "the rest is dropped")
-	check_eq(c.gain_xp(1000), 0, "no more levels")
-	check_eq(c.xp, 0, "and no EXP")
-	check_eq(c.level, Character.MAX_LEVEL, "still at the cap")
-
-func test_many_levels_at_once_stop_at_the_cap() -> void:
-	var c := fx.character()
-	c.level = Character.MAX_LEVEL - 3
-	check_eq(c.gain_xp(1 << 40), 3, "three levels and no further")
-	check_eq(c.level, Character.MAX_LEVEL, "capped")
-	check_eq(c.ap.points, 15, "AP for the three levels only")
-
-func test_level_up_raises_max_and_refills() -> void:
-	var c := fx.character()
-	c.health.damage(30)
-	c.spend_mp(10)
-	c.gain_xp(27)
+	check_near(c.growth(), 1.0, "nothing bought")
+	check_eq(c.max_hp(), 60, "50 + 1 × 10")
+	check_eq(c.max_mp(), 25, "20 + 1 × 5")
+	c.base.dexterity = 4
+	c.recalc()
+	check_near(c.growth(), 1.8, "4 points bought")
+	check_eq(c.max_hp(), 68, "50 + 1.8 × 10")
+	c.base.dexterity = 5
+	c.recalc()
+	check_near(c.growth(), 2.0, "one growth step every 5 points")
 	check_eq(c.max_hp(), 70, "50 + 2 × 10")
 	check_eq(c.health.max_hp, 70, "health max follows")
-	check_eq(c.health.hp, 70, "refilled")
-	check_eq(c.mp, 30, "MP refilled to 20 + 2 × 5")
+	check_eq(c.max_mp(), 30, "20 + 2 × 5")
 
-func test_no_level_means_no_refill() -> void:
+func test_buying_a_stat_raises_max_hp_but_does_not_refill() -> void:
 	var c := fx.character()
 	c.health.damage(30)
-	c.gain_xp(5)
+	c.essence = 1000
+	check_eq(c.ap.buy(&"dexterity", 5), 5, "five points")
+	check_eq(c.health.max_hp, 70, "max HP grew")
 	check_eq(c.health.hp, 30, "still hurt")
 
 # ---------- HP, MP and recalc ----------
@@ -128,57 +108,84 @@ func test_damage_range_uses_total_stats() -> void:
 
 # ---------- Ability Points ----------
 
-func test_add_ap_raises_base_stat() -> void:
+func test_buy_stat_spends_essence_at_its_price() -> void:
 	var c := fx.character(null, {"strength": 4})
-	c.ap.points = 2
-	check(c.ap.spend(&"strength"), "spent")
+	check_eq(c.ap.bought(&"strength"), 4, "4 points above a start of 0")
+	check_eq(c.ap.price(&"strength"), 58, "the 5th point")
+	c.essence = 58 + 5
+	check_eq(c.ap.buy(&"strength"), 1, "bought")
 	check_eq(c.base.strength, 5, "base")
 	check_eq(c.stats.strength, 5, "total recalculated")
-	check_eq(c.ap.points, 1, "one left")
+	check_eq(c.essence, 5, "paid 58")
+	check_eq(c.ap.price(&"strength"), 73, "the next point costs more")
+	check_eq(c.ap.price(&"luck"), 17, "a stat with nothing bought is still cheap")
 	for s in StatBlock.BASE:
-		c.ap.points = 1
-		check(c.ap.spend(s), "%s allowed" % s)
+		c.essence = c.ap.price(s)
+		check_eq(c.ap.buy(s), 1, "%s allowed" % s)
+		check_eq(c.essence, 0, "%s paid exactly" % s)
 
-func test_add_ap_refuses_without_points_or_bad_stat() -> void:
+func test_buy_stat_refuses_without_essence_or_bad_stat() -> void:
 	var c := fx.character()
-	c.ap.points = 0
-	check(not c.ap.spend(&"strength"), "no points")
-	c.ap.points = 3
-	check(not c.ap.spend(&"attack"), "attack isn't a base stat")
-	check(not c.ap.spend(&"max_hp"), "max HP isn't either")
-	check(not c.ap.spend(&"nonsense"), "unknown stat")
-	check_eq(c.ap.points, 3, "points kept")
+	c.essence = 16
+	check_eq(c.ap.buy(&"strength"), 0, "1 short of 17")
+	check_eq(c.essence, 16, "nothing spent")
+	c.essence = 1000
+	check_eq(c.ap.buy(&"attack"), 0, "attack isn't a base stat")
+	check_eq(c.ap.buy(&"max_hp"), 0, "max HP isn't either")
+	check_eq(c.ap.buy(&"nonsense"), 0, "unknown stat")
+	check_eq(c.essence, 1000, "essence kept")
 	check_eq(c.base.attack, 0, "nothing raised")
+	check_eq(c.base.strength, 0, "nothing raised")
 
-func test_add_ap_spends_several_but_never_more_than_left() -> void:
+func test_buy_stat_buys_several_but_only_what_essence_pays_for() -> void:
 	var c := fx.character(null, {"luck": 4})
-	c.ap.points = 5
-	check(c.ap.spend(&"luck", 3), "spent three")
-	check_eq(c.base.luck, 7, "LUK")
-	check_eq(c.ap.points, 2, "two left")
-	check(c.ap.spend(&"luck", 10), "spent the rest")
-	check_eq(c.base.luck, 9, "only the two that were left")
-	check_eq(c.ap.points, 0, "none left")
-	c.ap.points = 3
-	check(not c.ap.spend(&"luck", 0), "zero points")
-	check(not c.ap.spend(&"luck", -2), "negative points")
-	check_eq(c.ap.points, 3, "points kept")
+	c.essence = 58 + 73 + 10
+	check_eq(c.ap.buy(&"luck", 3), 2, "the 5th and 6th points, not the 7th")
+	check_eq(c.base.luck, 6, "LUK")
+	check_eq(c.essence, 10, "what's left")
+	c.essence = 1000
+	check_eq(c.ap.buy(&"luck", 0), 0, "zero points")
+	check_eq(c.ap.buy(&"luck", -2), 0, "negative points")
+	check_eq(c.essence, 1000, "essence kept")
 
-func test_auto_ap_fills_the_primary_stat() -> void:
+func test_auto_buys_the_damage_stat_while_it_can() -> void:
 	var c := fx.character(null, {"strength": 10, "dexterity": 5})
-	c.ap.points = 7
-	check_eq(c.ap.auto_plan(), {&"strength": 7}, "all in STR with no gear asking for DEX")
-	c.ap.points = 0
-	check_eq(c.ap.auto_plan(), {}, "nothing to spend")
+	c.essence = 171 + 196 + 222 + 1
+	check_eq(c.ap.auto(), 3, "three points")
+	check_eq(c.base.strength, 13, "all in STR")
+	check_eq(c.base.dexterity, 5, "DEX untouched")
+	check_eq(c.essence, 1, "left over: less than the next point")
+	check_eq(c.ap.auto(), 0, "nothing more to buy")
 
-func test_refund_all_hands_back_every_point_above_the_start() -> void:
+func test_auto_for_a_blend_buys_the_cheaper_damage_stat_first() -> void:
+	var j := fx.job()
+	j.secondary_stat = &"dexterity"
+	var c := fx.character(j, {"strength": 10, "dexterity": 5})
+	c.essence = 73 + 89
+	check_eq(c.ap.auto(), 2, "two points")
+	check_eq([c.base.strength, c.base.dexterity], [10, 7], "both in the cheaper DEX")
+	check_eq(c.essence, 0, "all spent")
+
+func test_spent_counts_points_above_the_start_and_what_they_cost() -> void:
+	var j := fx.job()
+	j.starting_stats = UnitHelpers.stats({"strength": 4, "luck": 4})
+	var c := fx.character(j, {"strength": 6, "dexterity": 1, "luck": 3})
+	check_eq(c.ap.bought(&"strength"), 2, "STR above its start")
+	check_eq(c.ap.bought(&"luck"), 0, "below the start counts as none")
+	check_eq(c.ap.spent(), 3, "2 STR and 1 DEX")
+	check_eq(c.ap.essence_spent(), 17 + 25 + 17, "each stat's points priced from its own first")
+	check_near(c.growth(), 1.6, "growth from the points bought")
+
+func test_refund_all_hands_back_the_essence_of_every_point_above_the_start() -> void:
 	var j := fx.job()
 	j.starting_stats = UnitHelpers.stats({"strength": 4, "luck": 4})
 	var c := fx.character(j, {"strength": 14, "dexterity": 3, "luck": 6})
-	c.ap.points = 2
+	c.essence = 2
 	c.ap.refund_all()
-	check_eq(c.ap.points, 2 + 10 + 3 + 2, "points back")
+	# 10 STR points: 723, 3 DEX: 76, 2 LUK: 42
+	check_eq(c.essence, 2 + 723 + 76 + 42, "essence back")
 	check_eq([c.base.strength, c.base.dexterity, c.base.luck], [4, 0, 4], "back to the start")
+	check_eq(c.ap.spent(), 0, "nothing bought")
 
 func test_stats_short_of_a_job() -> void:
 	var beginner := fx.job(&"t_beginner")
@@ -209,20 +216,54 @@ func test_skill_level_innate_and_null() -> void:
 	s.innate = true
 	check_eq(c.skills.level(s), 1, "innate is at least 1")
 
-func test_learn_spends_sp_and_raises_level() -> void:
+func test_learn_spends_essence_and_raises_level() -> void:
 	var c := fx.character()
 	var s := fx.skill()
-	c.skills.points = 2
+	check_eq(c.skills.price(), 17, "the first skill level")
+	c.essence = 17 + 31
 	check_eq(c.skills.learn(s), "", "learned")
+	check_eq(c.essence, 31, "paid 17")
+	check_eq(c.skills.price(), 31, "the next level costs more")
 	check_eq(c.skills.learn(s), "", "again")
 	check_eq(c.skills.level(s), 2, "level 2")
-	check_eq(c.skills.points, 0, "SP spent")
-	check_ne(c.skills.learn(s), "", "out of SP")
+	check_eq(c.skills.spent(), 2, "two levels bought")
+	check_eq(c.essence, 0, "essence spent")
+	check_eq(c.skills.paid, {&"t_skill": 17 + 31}, "what was paid is kept")
+	check_eq(c.skills.learn(s), "You need 50 Dawn Essence for that.", "out of essence")
 	check_eq(c.skills.level(s), 2, "unchanged")
+
+func test_skill_price_counts_levels_of_every_skill() -> void:
+	var c := fx.character()
+	var a := fx.skill(&"t_a")
+	var b := fx.skill(&"t_b")
+	var innate := fx.skill(&"t_innate")
+	innate.innate = true
+	c.essence = 10000
+	c.skills.learn(a)
+	c.skills.learn(b)
+	c.skills.learned[innate.id] = 1
+	check_eq(c.skills.spent(), 2, "one of each, innate skills not counted")
+	check_eq(c.skills.price(), 50, "the third level bought")
+	check_eq(c.essence, 10000 - 17 - 31, "paid the first two prices")
+
+func test_can_learn_any_needs_essence_and_a_skill_to_learn() -> void:
+	var c := fx.character()
+	fx.skill(&"t_elsewhere", SkillDef.Kind.ATTACK, &"t_someone_else")
+	c.essence = 10000
+	check(not c.skills.can_learn_any(), "no skill of this job")
+	var s := fx.skill()
+	c.essence = 16
+	check(not c.skills.can_learn_any(), "1 short")
+	c.essence = 17
+	check(c.skills.can_learn_any(), "enough for the first level")
+	s.max_level = 1
+	c.skills.learned[s.id] = 1
+	c.essence = 10000
+	check(not c.skills.can_learn_any(), "the only skill is maxed")
 
 func test_learn_refused_cases() -> void:
 	var c := fx.character()
-	c.skills.points = 10
+	c.essence = 10000
 	var innate := fx.skill(&"t_innate")
 	innate.innate = true
 	check_ne(c.skills.learn_problem(innate), "", "innate")
@@ -232,17 +273,17 @@ func test_learn_refused_cases() -> void:
 	maxed.max_level = 2
 	c.skills.learned[maxed.id] = 2
 	check_ne(c.skills.learn_problem(maxed), "", "at max level")
-	check_eq(c.skills.points, 10, "nothing spent")
+	check_eq(c.essence, 10000, "nothing spent")
 
 func test_learn_from_earlier_job_in_line() -> void:
 	fx.job(&"t_job")
 	var c := fx.character(fx.job(&"t_second", &"t_family", &"t_job"))
-	c.skills.points = 1
+	c.essence = c.skills.price()
 	check_eq(c.skills.learn(fx.skill(&"t_old", SkillDef.Kind.ATTACK, &"t_job")), "", "earlier job's skill")
 
 func test_learn_needs_required_skill_level() -> void:
 	var c := fx.character()
-	c.skills.points = 10
+	c.essence = 10000
 	var base_skill := fx.skill(&"t_base")
 	var next := fx.skill(&"t_next")
 	next.requires = &"t_base"
@@ -255,7 +296,7 @@ func test_learn_needs_required_skill_level() -> void:
 
 func test_new_active_skill_goes_on_first_free_quickslot() -> void:
 	var c := fx.character()
-	c.skills.points = 5
+	c.essence = 10000
 	c.set_quickslot(0, &"item", &"t_potion")
 	var s := fx.skill()
 	c.skills.learn(s)
@@ -265,13 +306,13 @@ func test_new_active_skill_goes_on_first_free_quickslot() -> void:
 
 func test_passive_skill_not_put_on_quickslot() -> void:
 	var c := fx.character()
-	c.skills.points = 1
+	c.essence = c.skills.price()
 	c.skills.learn(fx.skill(&"t_passive", SkillDef.Kind.PASSIVE))
 	check_eq(c.quickslots.count([]), Character.QUICKSLOTS, "all still empty")
 
 func test_learn_with_full_quickslots_still_learns() -> void:
 	var c := fx.character()
-	c.skills.points = 1
+	c.essence = c.skills.price()
 	for i in Character.QUICKSLOTS:
 		c.set_quickslot(i, &"item", StringName("t_i%d" % i))
 	check_eq(c.skills.learn(fx.skill()), "", "learned")
@@ -285,7 +326,7 @@ func test_passive_adds_stats_and_regen() -> void:
 	p.regen_hp = 5
 	p.regen_hp_per_level = 2
 	p.regen_mp = 1
-	c.skills.points = 3
+	c.essence = 10000
 	c.skills.learn(p)
 	c.skills.learn(p)
 	c.skills.learn(p)
@@ -521,11 +562,9 @@ func test_retrieve_needs_room() -> void:
 func _advance_setup() -> Array:
 	var first := fx.job(&"t_job")
 	var next := fx.job(&"t_next", &"t_warrior", &"t_job")
-	next.advance_level = 10
 	next.advance_requirements = UnitHelpers.stats({"strength": 35})
-	next.hp_per_level = 20
+	next.hp_growth = 20
 	var c := fx.character(first, {"strength": 35})
-	c.level = 10
 	return [c, next]
 
 func test_advance_requirements() -> void:
@@ -533,9 +572,6 @@ func test_advance_requirements() -> void:
 	var c: Character = setup[0]
 	var next: JobDef = setup[1]
 	check_eq(c.advance_problem(next), "", "meets everything")
-	c.level = 9
-	check_ne(c.advance_problem(next), "", "level too low")
-	c.level = 10
 	c.base.strength = 34
 	check_ne(c.advance_problem(next), "", "STR too low")
 	c.base.strength = 35
@@ -559,68 +595,33 @@ func test_advance_changes_job_gives_gifts_and_refills() -> void:
 	var potion := fx.use(&"t_potion")
 	next.advance_gifts = [UnitHelpers.drop(sword), UnitHelpers.drop(potion, 20)]
 	c.health.damage(50)
+	c.essence = 40
 	check_eq(c.advance(next), "", "advanced")
 	check_eq(c.job.id, &"t_next", "new job")
-	check_eq(c.max_hp(), 50 + 10 * 20 + c.stats.strength, "new job's HP growth, plus STR")
+	# 35 STR points bought: growth 1 + 35 / 5 = 8
+	check_eq(c.max_hp(), 50 + 8 * 20 + 35, "new job's HP growth, plus STR")
+	check_eq(c.essence, 40, "advancing costs and gives no essence")
 	check_eq(c.health.hp, c.max_hp(), "refilled")
 	check_eq(c.gear.weapon(), sword, "the gift weapon is worn")
 	check_eq(c.equipment.at(&"weapon").stats.attack, 17, "gift gear unrolled")
 	check_eq(c.inventory.count_of(potion), 20, "potions")
 	check_eq(Array(c.job_line()), [&"t_next", &"t_job"], "line")
 
-func test_advance_gives_sp() -> void:
+func test_advance_keeps_skills_and_their_price() -> void:
 	var setup := _advance_setup()
 	var c: Character = setup[0]
 	var next: JobDef = setup[1]
-	next.advance_sp = 2
-	fx.skill(&"t_cut", SkillDef.Kind.ATTACK, &"t_next")
-	c.skills.points = 0
-	check_eq(c.advance(next), "", "advanced")
-	check_eq(c.skills.points, 2, "SP to learn a first skill")
-
-func test_late_advance_pays_the_missed_sp() -> void:
-	var setup := _advance_setup()
-	var c: Character = setup[0]
-	var next: JobDef = setup[1]
-	next.advance_sp = 1
-	fx.skill(&"t_cut", SkillDef.Kind.ATTACK, &"t_next").max_level = 20
-	c.level = 13
-	c.skills.points = 0
-	check_eq(c.advance(next), "", "advanced at 13")
-	check_eq(c.skills.points, 1 + 3 * 3, "as many SP as advancing at 10 and levelling to 13")
-
-func test_sp_never_above_what_skills_can_take() -> void:
-	var c := fx.character()
-	var cut := fx.skill(&"t_cut")
-	c.skills.points = 8
-	c.gain_xp(27)
-	check_eq(c.skills.points, 10, "levelling stops at the 10 levels the job's skills have")
-	check_eq(c.skills.learn(cut), "", "learned one")
-	c.gain_xp(c.xp_need())
-	check_eq(c.skills.points, 9, "still no more than the levels left")
-	fx.skill(&"t_other_job", SkillDef.Kind.ATTACK, &"t_elsewhere")
-	c.skills.points = 50
-	c.skills.keep_in_room()
-	check_eq(c.skills.points, 9, "another job's skills don't count")
-
-func test_settle_hands_back_missed_sp() -> void:
-	var setup := _advance_setup()
-	var c: Character = setup[0]
-	var next: JobDef = setup[1]
-	next.advance_sp = 1
+	var jab := fx.skill(&"t_jab")
 	var cut := fx.skill(&"t_cut", SkillDef.Kind.ATTACK, &"t_next")
-	cut.max_level = 40
-	fx.skill(&"t_jab")
-	c.job = next
-	c.level = 14
-	c.skills.learned = {&"t_jab": 9, &"t_cut": 2}
-	c.skills.points = 0
-	c.skills.settle()
-	# t_job Lv 1-10: 27, t_next Lv 10-14: 1 + 12; 11 spent
-	check_eq(c.skills.points, 27 + 13 - 11, "earned minus spent")
-	c.skills.points = 99
-	c.skills.settle()
-	check_eq(c.skills.points, 38 + 1, "and never more than the skills can take")
+	c.essence = 17
+	c.skills.learn(jab)
+	check_ne(c.skills.learn_problem(cut), "", "not before advancing")
+	check_eq(c.advance(next), "", "advanced")
+	check_eq(c.skills.level(jab), 1, "the old job's skill is kept")
+	check_eq(c.skills.price(), 31, "the next level costs the same as before advancing")
+	check_eq(c.skills.learn_problem(cut), "You need 31 Dawn Essence for that.", "the new job's skills are open, for essence")
+	c.essence = 31
+	check_eq(c.skills.learn(cut), "", "learned")
 
 func test_advance_needs_room_for_gifts() -> void:
 	var setup := _advance_setup()
@@ -662,7 +663,7 @@ func test_advance_leaves_a_gift_weapon_it_cant_wear_in_the_bag() -> void:
 	var c: Character = setup[0]
 	var next: JobDef = setup[1]
 	var heavy := fx.equip(&"t_heavy")
-	heavy.required_level = 50
+	heavy.required_strength = 50
 	next.advance_gifts = [UnitHelpers.drop(heavy)]
 	check_eq(c.advance(next), "", "advanced")
 	check_eq(c.gear.weapon(), null, "too heavy to wear")
@@ -671,7 +672,7 @@ func test_advance_leaves_a_gift_weapon_it_cant_wear_in_the_bag() -> void:
 func test_requirement_lines() -> void:
 	var setup := _advance_setup()
 	var next: JobDef = setup[1]
-	check_eq(Array(next.requirement_lines()), ["Level 10", "35 STR"], "lines")
+	check_eq(Array(next.requirement_lines()), ["35 STR"], "lines")
 
 ## A Beginner (starting STR 12, DEX 5) who put 18 points in STR and a path asking for 30 INT.
 func _reset_setup() -> Array:
@@ -680,10 +681,10 @@ func _reset_setup() -> Array:
 	var next := fx.job(&"t_mind", &"t_mage", &"t_job")
 	next.advance_requirements = UnitHelpers.stats({"intelligence": 30})
 	var c := fx.character(first, {"strength": 30, "dexterity": 5})
-	c.ap.points = 2
+	c.essence = 2
 	return [c, next]
 
-func test_ap_reset_gives_back_every_spent_point_once() -> void:
+func test_ap_reset_gives_back_the_essence_of_every_point_once() -> void:
 	var setup := _reset_setup()
 	var c: Character = setup[0]
 	var next: JobDef = setup[1]
@@ -691,10 +692,11 @@ func test_ap_reset_gives_back_every_spent_point_once() -> void:
 	check_eq(c.ap.reset(next), "", "reset")
 	check_eq(c.base.strength, 12, "back to the starting STR")
 	check_eq(c.base.dexterity, 5, "DEX untouched")
-	check_eq(c.ap.points, 20, "18 back plus the 2 unspent")
+	# the first 18 points of one stat: 2,883
+	check_eq(c.essence, 2 + 2883, "the 18 points' essence back plus the 2 unspent")
 	check_eq(c.stats.strength, 12, "totals worked out again")
 	check(c.ap.reset_used, "used up")
-	c.ap.spend(&"strength", 5)
+	check_eq(c.ap.buy(&"strength", 5), 5, "bought again")
 	check_ne(c.ap.reset(next), "", "only once")
 	check_eq(c.base.strength, 17, "the second one changes nothing")
 
@@ -757,7 +759,7 @@ func test_create_beginner_from_content() -> void:
 	var c := Character.create("Hero")
 	var j := Content.job(&"beginner")
 	check_eq(c.name, "Hero", "name")
-	check_eq(c.level, 1, "level 1")
+	check_eq(c.essence, 0, "no essence yet")
 	check(c.job == j, "beginner")
 	check_eq(c.base.to_dict(), j.starting_stats.to_dict(), "starting stats")
 	check_eq(c.equipment.worn.size(), NewCharacter.new().starting_gear(j).size(), "starting gear and the creator's default outfit worn")
@@ -779,12 +781,11 @@ func test_create_beginner_from_content() -> void:
 func test_real_beginner_can_reach_warrior() -> void:
 	var c := Character.create("Hero")
 	var w := Content.job(&"warrior")
-	check_ne(c.advance_problem(w), "", "level 1 can't")
-	c.level = w.advance_level
+	check_ne(c.advance_problem(w), "", "a new Beginner can't")
 	c.base.strength = w.advance_requirements.strength
 	check_eq(c.advance_problem(w), "Pass the Job Test first.", "the Job Test first")
 	c.quests.done[w.advance_quest.id] = true
-	check_eq(c.advance_problem(w), "", "level, STR and the test enough")
+	check_eq(c.advance_problem(w), "", "STR and the test enough")
 	check_eq(c.advance(w), "", "advanced")
 	check_eq(c.job.id, &"warrior", "warrior")
 

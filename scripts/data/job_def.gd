@@ -5,7 +5,7 @@ extends Resource
 ## JobDef in data/jobs/.
 ##
 ## Everyone starts as a Beginner (`advances_from` empty). A job instructor (an NpcDef that
-## `instructs` this job) advances a character from `advances_from` at `advance_level`.
+## `instructs` this job) advances a character from `advances_from`.
 ##
 ## A second-tier job is a blend of two first jobs: `advances_from` and `partner`. Either one can
 ## advance into it, both their skill books open to it, both their stats drive its damage and
@@ -32,13 +32,11 @@ extends Resource
 
 @export_group("Growth")
 @export var base_hp := 50
-@export var hp_per_level := 14
+## Max HP gained for every CharacterStats.GROWTH_POINTS stat points bought with Dawn Essence.
+@export var hp_growth := 14
 @export var base_mp := 20
-@export var mp_per_level := 6
-## Ability Points gained per level, spent in the stats window.
-@export var ap_per_level := 5
-## Skill Points gained per level, spent in the skill window.
-@export var sp_per_level := 3
+## Max MP gained for every CharacterStats.GROWTH_POINTS stat points bought.
+@export var mp_growth := 6
 
 @export_group("Advancement")
 ## The job you advance from (empty: you start as this job).
@@ -46,7 +44,6 @@ extends Resource
 ## For a blend, the other first job that can advance into it too. Its skills open to this job
 ## and its gear fits.
 @export var partner: StringName
-@export var advance_level := 10
 ## Base stats (STR, DEX, INT, LUK, before gear) needed to advance.
 @export var advance_requirements: StatBlock
 ## A quest to hand in first (the job tutor's test). Handing it in advances you right away
@@ -56,8 +53,6 @@ extends Resource
 ## first weapon here is worn right away, see Character.advance), and potions.
 ## Better weapons only drop.
 @export var advance_gifts: Array[DropEntry] = []
-## Skill Points handed over when advancing, so the new job has something to learn right away.
-@export var advance_sp := 0
 
 @export_group("New character")
 @export var starting_stats: StatBlock
@@ -81,9 +76,9 @@ func damage_stat(total: StatBlock) -> StringName:
 				main = stat
 	return main
 
-## What advancing takes, as readable lines ("Level 10", "35 STR").
+## What advancing takes, as readable lines ("35 STR").
 func requirement_lines() -> PackedStringArray:
-	var out := PackedStringArray(["Level %d" % advance_level])
+	var out := PackedStringArray()
 	if advance_requirements:
 		for stat in StatBlock.BASE:
 			var n := advance_requirements.value(stat)
@@ -103,7 +98,13 @@ func gifts_text() -> String:
 func is_starting_job() -> bool:
 	return advances_from == &""
 
-## The jobs a character of job `from` can advance into, by level and then name, so lists
+## 0 for the Beginner, 1 for a first job, 2 for a blend (a job with a `partner`).
+func tier() -> int:
+	if is_starting_job():
+		return 0
+	return 2 if partner != &"" else 1
+
+## The jobs a character of job `from` can advance into, by tier and then name, so lists
 ## of them read the same everywhere.
 static func paths_from(from: StringName) -> Array[JobDef]:
 	var out: Array[JobDef] = []
@@ -111,7 +112,7 @@ static func paths_from(from: StringName) -> Array[JobDef]:
 		if j.opens_from(from):
 			out.append(j)
 	out.sort_custom(func(a: JobDef, b: JobDef) -> bool:
-		return a.display_name < b.display_name if a.advance_level == b.advance_level else a.advance_level < b.advance_level)
+		return a.display_name < b.display_name if a.tier() == b.tier() else a.tier() < b.tier())
 	return out
 
 ## The stats that drive damage: `primary_stat`, and `secondary_stat` when it has one.

@@ -6,7 +6,7 @@ extends TestCase
 const A := &"title"
 const B := &"jingle_quest"
 const C := &"jingle_death"
-const JINGLE := &"jingle_levelup"
+const JINGLE := &"jingle_jobadvance"
 
 func before_each() -> void:
 	_silence()

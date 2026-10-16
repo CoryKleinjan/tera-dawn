@@ -103,7 +103,7 @@ func _run() -> void:
 	Net.play("Dawnling")
 	await _physics(2)
 	var ch := _me().character
-	ch.level = 9
+	ch.essence = 9
 	ch.recalc()
 	ch.refill()
 	_me().dirty_character = true
@@ -226,7 +226,6 @@ func _run() -> void:
 		# Guide Sorrel's Magician page, then a Pirate (tinted hero) next to her.
 		await _go(Character.START_MAP)
 		var guide := _npc(world, &"guide_sorrel")
-		ch.level = maxi(ch.level, 8)
 		ch.base.intelligence = 20
 		_me().dirty_character = true
 		_teleport(world, Vector2(guide.position.x - 50, 620))
@@ -243,8 +242,7 @@ func _run() -> void:
 		await _go(&"meadow", 1120)
 		# A Warrior's skill book, quickslots and a running buff.
 		ch.job = Content.job(&"warrior")
-		ch.level = maxi(ch.level, 14)
-		ch.skills.points = 4
+		ch.essence = maxi(ch.essence, 400)
 		for pair in [[&"power_strike", 6], [&"dawn_slash", 3], [&"iron_body", 2], [&"blade_mastery", 1], [&"quick_step", 2], [&"first_aid", 1]]:
 			ch.skills.learned[pair[0]] = pair[1]
 		ch.set_quickslot(0, &"skill", &"power_strike")
@@ -471,7 +469,6 @@ func _run() -> void:
 		var friends := []
 		for i in 2:
 			var f := SimPlayer.new(300 + i, Character.create(["Mossy", "Kestrel"][i]))
-			f.character.level = 18 + i * 3
 			Net.server.sessions[f.peer] = f
 			social.joined(f)
 			Net.server.enter_map(f, &"dawnharbor", 1000.0 + i * 220.0)
@@ -561,9 +558,8 @@ func _run() -> void:
 			ch.inventory.add(Content.item(id), randi_range(3, 40))
 		ch.inventory.add(Content.item(&"blue_potion"), 12)
 		ch.gear.equip(0)
-		ch.ap.points = 40
-		for n in 30:
-			ch.ap.spend(&"strength")
+		TestCharacters.grant_stat(ch, &"strength", 30)
+		ch.essence += 300
 		ch.inventory.add(Content.item(&"leaf_cap"))
 		ch.gear.equip(_slot_of(&"leaf_cap"))
 		ch.inventory.add(Content.item(&"ember_helm"))
@@ -614,7 +610,7 @@ func _run() -> void:
 			if m.def.id == &"fern_boar" and m.plat == hollow.layout.platforms[0]:
 				_place_mob(m, p.position.x + 150)
 				break
-		ch.xp = ch.xp_need() - 1
+		# the boar's Dawn Essence flies to the hero
 		hollow.kill_mob(hollow.mobs[0], _me())
 		await _physics(25)
 		await _shot("hollow")

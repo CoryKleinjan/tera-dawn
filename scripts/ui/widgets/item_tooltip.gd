@@ -51,9 +51,8 @@ func _lines() -> Array:
 			out.append(["%s only" % EquipDef.families_text(e.jobs), Palette.MIST if Game.me.gear.can_use(e.jobs) else Palette.BAD, 12])
 		var reqs := e.requirements()
 		for key in reqs:
-			var have := Game.me.level if key == &"level" else Game.me.stats.value(key)
-			var label: String = "Level" if key == &"level" else StatBlock.LABELS[key]
-			out.append(["Requires %s %d" % [label, reqs[key]], Palette.MIST if have >= reqs[key] else Palette.BAD, 12])
+			var have := Game.me.stats.value(key)
+			out.append(["Requires %s %d" % [StatBlock.LABELS[key], reqs[key]], Palette.MIST if have >= reqs[key] else Palette.BAD, 12])
 		var base := e.stats if e.stats else StatBlock.new()
 		for f in stack.stats.nonzero():
 			var v := stack.stats.value(f)

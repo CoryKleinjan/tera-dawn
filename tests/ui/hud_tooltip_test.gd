@@ -82,11 +82,12 @@ func test_gear_tooltips_show_requirements_stats_and_upgrades() -> void:
 			check(texts.has("%s: %s" % [StatBlock.LABELS[f], StatBlock.format(f, stack.stats.value(f))]), "%s: lists %s" % [e.id, f])
 		check(texts.has("Upgrades available: %d" % e.upgrade_slots), "%s: lists its upgrade slots" % e.id)
 		var reqs := e.requirements()
+		check(not texts.any(func(t: String) -> bool: return t.begins_with("Requires Level")), "%s: no level requirement" % e.id)
 		for key in reqs:
-			var label: String = "Level" if key == &"level" else StatBlock.LABELS[key]
+			var label: String = StatBlock.LABELS[key]
 			var i := texts.find("Requires %s %d" % [label, reqs[key]])
 			if check(i >= 0, "%s: lists Requires %s %d" % [e.id, label, reqs[key]]):
-				var have := Game.me.level if key == &"level" else Game.me.stats.value(key)
+				var have := Game.me.stats.value(key)
 				check_eq(lines[i][1] == RED, have < reqs[key], "%s: Requires %s is red exactly when not met" % [e.id, label])
 		if not e.jobs.is_empty():
 			var line := "%s only" % EquipDef.families_text(e.jobs)

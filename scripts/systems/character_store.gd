@@ -52,8 +52,6 @@ static func from_dict(data: Dictionary, char_name := "") -> Character:
 	var c := Character.create(char_name)
 	c.load_dict(data)
 	c.name = char_name
-	# hand back Skill Points a job taken late used to lose, and drop any no skill could take
-	c.skills.settle()
 	return c
 
 ## The name saved in the file `char_name` would use, or "" if there's none. Names that only
@@ -97,14 +95,14 @@ func names() -> Array[String]:
 func _save_order(list: Array[String]) -> void:
 	SafeFile.write_text(folder.path_join(ORDER_FILE), JSON.stringify(list))
 
-## The characters as character select shows them ({name, level, job}), at most
+## The characters as character select shows them ({name, job}), at most
 ## MAX_CHARACTERS, in the order they were made.
 func slots() -> Array:
 	var out := []
 	for n in names():
 		var c := load_character(n)
 		if c:
-			out.append({"name": c.name, "level": c.level, "job": c.job.display_name})
+			out.append({"name": c.name, "job": c.job.display_name})
 		if out.size() >= MAX_CHARACTERS:
 			break
 	return out

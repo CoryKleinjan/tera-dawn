@@ -144,7 +144,7 @@ func _guild_page() -> void:
 	if Game.me.guild != "":
 		_page("You're already in %s. Leave it first if you want to found your own." % Game.me.guild, [["Back", func() -> void: _main_page(greeting)]])
 		return
-	_page("A guild of your own costs %d Dawnshards, and you must be level %d. Its name shows under every member's name, and members can talk with /g." % [TDSocial.GUILD_COST, TDSocial.GUILD_LEVEL], [
+	_page("A guild of your own costs %d Dawnshards. Its name shows under every member's name, and members can talk with /g." % TDSocial.GUILD_COST, [
 		["Name the guild", func() -> void:
 			visible = false
 			hud.prompt.ask("Name your guild", "", func(n: String) -> void: Net.ask(&"req_guild_create", [who, n]))],
@@ -206,20 +206,20 @@ func _job_page(j: JobDef) -> void:
 			Net.ask(&"req_advance", [npc.def.id, j.id])
 			visible = false])
 	if Game.me.ap.reset_problem(j) == "":
-		opts.append(["Reset my Ability Points", _reset_ap_page.bind(j)])
+		opts.append(["Reset my stats", _reset_ap_page.bind(j)])
 	opts.append(["Back", _job_list])
 	_page(say, opts)
 
-## The free AP reset: what it does, once, and the choice.
+## The free stat reset: what it does, once, and the choice.
 func _reset_ap_page(j: JobDef) -> void:
-	_page("Built the wrong way? Once, and only once, I can give back all %d Ability Points you've spent. Your stats go back to where you started, so you can put them where a %s needs them." % [Game.me.ap.spent(), j.display_name], [
+	_page("Built the wrong way? Once, and only once, I can give back all %d Dawn Essence you've spent on stats. Your stats go back to where you started, so you can put them where a %s needs them." % [Game.me.ap.essence_spent(), j.display_name], [
 		["Reset them", func() -> void:
 			Net.ask(&"req_reset_ap", [npc.def.id, j.id])
 			visible = false],
 		["Back", _job_page.bind(j)]])
 
 ## For a quest that lists the job paths: a paragraph naming each job a Beginner can
-## advance into and what it takes ("Warrior: Level 10, 35 STR"). "" for other quests.
+## advance into and what it takes ("Warrior: 35 STR"). "" for other quests.
 static func _job_paths(q: QuestDef) -> String:
 	if not q.lists_job_paths:
 		return ""

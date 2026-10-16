@@ -1,6 +1,6 @@
 class_name TDHud
 extends CanvasLayer
-## The screen UI: the status bar (level, HP, MP, EXP, skills, Dawnshards), the in-game
+## The screen UI: the status bar (HP, MP, Dawn Essence, skills, Dawnshards), the in-game
 ## overlay, the game windows (inventory, equipment, character), the game menu (Esc) and the
 ## settings screen. It shows and hides the title screen (TDTitleScreen) and handles Esc.
 ## Art comes from UiSkin.

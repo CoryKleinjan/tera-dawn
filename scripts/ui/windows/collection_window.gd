@@ -131,7 +131,7 @@ func _draw_detail() -> void:
 	y += 18
 	_ink(Vector2(x, y), "Lv. %d%s" % [m.level, "  ·  BOSS" if m.boss else ""], Palette.EMBER if m.boss else Palette.INK_SOFT)
 	y += 18
-	for line in ["HP %d  ·  EXP %d" % [m.max_hp, m.exp_reward], "Defeated: %d" % book.kills(m), "Cards: %d/%d" % [book.cards(m), CardDef.SET]]:
+	for line in ["HP %d  ·  Essence %d" % [m.max_hp, m.essence], "Defeated: %d" % book.kills(m), "Cards: %d/%d" % [book.cards(m), CardDef.SET]]:
 		_ink(Vector2(x, y), line)
 		y += 16
 	y += 4

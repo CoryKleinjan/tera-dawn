@@ -1,6 +1,7 @@
 extends TestCase
-## Developer test characters (TestCharacters): one per job at the level cap, in the best gear
-## the job can wear and able to wear all of it, with every skill and the Dawnshards; they're
+## Developer test characters (TestCharacters): one per job with its stat points bought, in the
+## best gear the job can wear up to the gear tier and able to wear all of it, with every skill,
+## the Dawnshards and Dawn Essence to spare; they're
 ## kept in their own folder apart from the player's own characters, only the missing ones
 ## are made unless asked to rebuild, and each is put back in its job's town.
 
@@ -18,13 +19,13 @@ func after_each() -> void:
 
 # ---------- the characters ----------
 
-func test_every_job_gets_a_max_level_character_in_gear_it_can_wear() -> void:
+func test_every_job_gets_a_grown_character_in_gear_it_can_wear() -> void:
 	for job in TestCharacters.jobs():
 		var c := TestCharacters.build(TestCharacters.name_for(job), job)
 		check_eq(c.job, job, "%s: the job" % job.id)
-		check_eq(c.level, TestCharacters.LEVEL, "%s: the test level" % job.id)
+		check(c.ap.spent() >= TestCharacters.STAT_POINTS, "%s: its stat points bought (%d)" % [job.id, c.ap.spent()])
 		check_eq(c.shards, TestCharacters.SHARDS, "%s: Dawnshards" % job.id)
-		check_eq(c.ap.points, 0, "%s: every Ability Point spent" % job.id)
+		check_eq(c.essence, TestCharacters.ESSENCE, "%s: Dawn Essence to try buying with" % job.id)
 		check(c.gear.weapon() != null, "%s: holds a weapon" % job.id)
 		for place: StringName in c.equipment.worn:
 			var e := c.equipment.at(place).equip_def()
@@ -36,7 +37,7 @@ func test_the_gear_is_the_best_the_job_can_wear() -> void:
 		var c := TestCharacters.build("Gear", job)
 		for it: ItemDef in Content.items.values():
 			var e := it as EquipDef
-			if e == null or not c.gear.can_use(e.jobs) or e.required_level > c.level:
+			if e == null or not c.gear.can_use(e.jobs) or e.required_level > TestCharacters.GEAR_TIER:
 				continue
 			var worn := c.equipment.at(c.equipment.place_for(e))
 			if e.slot == EquipDef.Slot.WEAPON:
@@ -46,11 +47,11 @@ func test_the_gear_is_the_best_the_job_can_wear() -> void:
 			if e.slot == EquipDef.Slot.SHIELD and worn and worn.equip_def().offhand_kind != e.offhand_kind:
 				continue
 			check(worn != null and worn.equip_def().required_level >= e.required_level,
-				"%s wears nothing below the %s's level" % [job.id, e.id])
+				"%s wears nothing below the %s's gear tier" % [job.id, e.id])
 
 func test_a_job_with_two_weapon_kinds_wields_its_first_and_carries_the_other() -> void:
 	for job in TestCharacters.jobs():
-		var weapons := TestCharacters.best_weapons(job, TestCharacters.LEVEL)
+		var weapons := TestCharacters.best_weapons(job, TestCharacters.GEAR_TIER)
 		if weapons.size() < 2:
 			continue
 		var c := TestCharacters.build("Arms", job)

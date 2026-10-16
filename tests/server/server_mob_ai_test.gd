@@ -12,7 +12,16 @@ func before_each() -> void:
 func after_each() -> void:
 	h.close()
 
-## A monster that walks at `speed` and never dodges touches (level 50: no player dodge).
+## Puts `char_name` on the test field at `x` with no luck, so no avoid: nothing they're hit
+## by can be dodged.
+func _join(peer: int, char_name: String, x: float) -> SimPlayer:
+	var p := h.join(peer, char_name, ServerHarness.FIELD, x)
+	p.character.base.luck = 0
+	p.character.recalc()
+	p.character.refill()
+	return p
+
+## A monster that walks at `speed`.
 func _walker(id := &"walker", speed := 1.0) -> MonsterDef:
 	var d := ServerHarness.monster(id, 100000, 1)
 	d.speed = speed
@@ -23,7 +32,7 @@ func test_a_hurt_monster_chases_its_attacker_on_its_platform() -> void:
 	var map := h.field_with([ServerHarness.spawn(d)])
 	var m := map.mobs[0]
 	m.position.x = 600.0
-	var p := h.join(2, "Ann", ServerHarness.FIELD, 300.0)
+	var p := _join(2, "Ann", 300.0)
 	m.hurt(1, 2)
 	h.step(14) # knocked back first
 	var x := m.position.x
@@ -41,7 +50,7 @@ func test_a_monster_doesnt_chase_someone_on_another_platform() -> void:
 	var map := h.server.map_instance(ServerHarness.FIELD)
 	var m := map.mobs[0]
 	m.position.x = 600.0
-	var p := h.join(2, "Ann", ServerHarness.FIELD, 300.0)
+	var p := _join(2, "Ann", 300.0)
 	h.place(p, 300.0, 450.0)
 	m.hurt(1, 2)
 	h.step(14)
@@ -56,7 +65,7 @@ func test_the_chase_ends_when_aggro_runs_out() -> void:
 	var map := h.field_with([ServerHarness.spawn(d)])
 	var m := map.mobs[0]
 	m.position.x = 1500.0
-	h.join(2, "Ann", ServerHarness.FIELD, 300.0)
+	_join(2, "Ann", 300.0)
 	m.hurt(1, 2)
 	h.step(600)
 	check_eq(m.aggro, 0, "calmed down after 600 ticks")
@@ -65,7 +74,7 @@ func test_leaving_the_map_ends_the_chase() -> void:
 	var map := h.field_with([ServerHarness.spawn(_walker())])
 	var m := map.mobs[0]
 	m.position.x = 1500.0
-	var p := h.join(2, "Ann", ServerHarness.FIELD, 300.0)
+	var p := _join(2, "Ann", 300.0)
 	m.hurt(1, 2)
 	h.move_to(p, ServerHarness.TOWN)
 	check_eq(m.aggro, 0, "forgot Ann")
@@ -76,7 +85,7 @@ func test_stationary_monsters_never_move_even_when_hit() -> void:
 	var map := h.field_with([ServerHarness.spawn(d)])
 	var m := map.mobs[0]
 	m.position.x = 340.0
-	var p := h.join(2, "Ann", ServerHarness.FIELD, 300.0)
+	var p := _join(2, "Ann", 300.0)
 	ServerHarness.no_cards(p, d)
 	h.ask(2, &"req_skill", [&"basic_attack", p.position, 1])
 	check(m.health.hp < d.max_hp, "it was hit")
@@ -85,10 +94,9 @@ func test_stationary_monsters_never_move_even_when_hit() -> void:
 
 func test_touching_a_monster_hurts_then_gives_invincibility() -> void:
 	var d := ServerHarness.monster(&"toucher", 100000, 1)
-	d.level = 50 # far above the player: they can't dodge, and the hit is exactly 1
 	var map := h.field_with([ServerHarness.spawn(d)])
 	map.mobs[0].position.x = 300.0
-	var p := h.join(2, "Ann", ServerHarness.FIELD, 300.0)
+	var p := _join(2, "Ann", 300.0)
 	var full := p.character.health.hp
 	h.step(1)
 	check_eq(p.character.health.hp, full - 1, "one damage on touch")
@@ -102,10 +110,9 @@ func test_touching_a_monster_hurts_then_gives_invincibility() -> void:
 
 func test_a_monster_far_away_doesnt_hurt() -> void:
 	var d := ServerHarness.monster(&"toucher", 100000, 1)
-	d.level = 50
 	var map := h.field_with([ServerHarness.spawn(d)])
 	map.mobs[0].position.x = 600.0
-	var p := h.join(2, "Ann", ServerHarness.FIELD, 300.0)
+	var p := _join(2, "Ann", 300.0)
 	h.step(60)
 	check_eq(p.character.health.hp, p.character.max_hp(), "untouched")
 
@@ -125,7 +132,6 @@ static func _move(kind: MonsterMove.Kind, reach := 320.0) -> MonsterMove:
 ## A monster with `mv`, ready to use it straight away.
 func _with_move(mv: MonsterMove, id := &"mover") -> MonsterDef:
 	var d := ServerHarness.monster(id, 100000, 1)
-	d.level = 50
 	d.attack = 10
 	d.sight = 320.0
 	d.moves = [mv]
@@ -146,7 +152,7 @@ func test_a_shooter_fires_at_a_player_in_sight() -> void:
 	var m := map.mobs[0]
 	m.position.x = 500.0
 	_ready_now(m)
-	var p := h.join(2, "Ann", ServerHarness.FIELD, 300.0)
+	var p := _join(2, "Ann", 300.0)
 	var full := p.character.health.hp
 	h.step(1)
 	check(int(m.snapshot()[4]) & SnapshotFlags.MOB_WINDUP != 0, "winds up first")
@@ -167,7 +173,7 @@ func test_stepping_out_of_the_way_dodges_a_shot() -> void:
 	var m := map.mobs[0]
 	m.position.x = 500.0
 	_ready_now(m)
-	var p := h.join(2, "Ann", ServerHarness.FIELD, 300.0)
+	var p := _join(2, "Ann", 300.0)
 	h.step(21)
 	check_eq(m.shots.size(), 1, "fired")
 	h.place(p, 240.0)
@@ -180,7 +186,7 @@ func test_monsters_ignore_players_out_of_sight() -> void:
 	var m := map.mobs[0]
 	m.position.x = 1000.0
 	_ready_now(m)
-	h.join(2, "Ann", ServerHarness.FIELD, 300.0)
+	_join(2, "Ann", 300.0)
 	h.step(60)
 	check_eq(m.target, 0, "didn't notice Ann 700 px away")
 	check_eq(h.count(2, &"ev_mob_shot"), 0, "no shot")
@@ -190,7 +196,7 @@ func test_a_monster_notices_a_player_who_comes_in_sight() -> void:
 	var map := h.field_with([ServerHarness.spawn(d)])
 	var m := map.mobs[0]
 	m.position.x = 1000.0
-	var p := h.join(2, "Ann", ServerHarness.FIELD, 300.0)
+	var p := _join(2, "Ann", 300.0)
 	h.step(5)
 	check_eq(m.target, 0, "too far to notice")
 	h.place(p, 1000.0 - d.sight + 20.0)
@@ -205,7 +211,7 @@ func test_a_monster_gives_up_after_losing_sight() -> void:
 	var map := h.field_with([ServerHarness.spawn(d)])
 	var m := map.mobs[0]
 	m.position.x = 600.0
-	var p := h.join(2, "Ann", ServerHarness.FIELD, 450.0)
+	var p := _join(2, "Ann", 450.0)
 	h.step(1)
 	check_eq(m.target, 2, "noticed her")
 	h.place(p, 1900.0)
@@ -218,8 +224,8 @@ func test_it_goes_for_the_nearest_player_it_sees() -> void:
 	var map := h.field_with([ServerHarness.spawn(_walker())])
 	var m := map.mobs[0]
 	m.position.x = 600.0
-	h.join(2, "Ann", ServerHarness.FIELD, 400.0)
-	h.join(3, "Bo", ServerHarness.FIELD, 700.0)
+	_join(2, "Ann", 400.0)
+	_join(3, "Bo", 700.0)
 	h.step(1)
 	check_eq(m.target, 3, "Bo is closer")
 
@@ -227,10 +233,10 @@ func test_it_keeps_after_its_target_while_it_can_see_them() -> void:
 	var map := h.field_with([ServerHarness.spawn(_walker())])
 	var m := map.mobs[0]
 	m.position.x = 600.0
-	h.join(2, "Ann", ServerHarness.FIELD, 700.0)
+	_join(2, "Ann", 700.0)
 	h.step(1)
 	check_eq(m.target, 2, "after Ann")
-	var bo := h.join(3, "Bo", ServerHarness.FIELD, 1200.0)
+	var bo := _join(3, "Bo", 1200.0)
 	m.hurt(1, 3) # Bo hits it from afar
 	h.step(1)
 	check_eq(m.target, 2, "still after Ann, who's in front of it")
@@ -249,7 +255,7 @@ func test_a_lunge_hurts_and_each_player_once() -> void:
 	var m := map.mobs[0]
 	m.position.x = 600.0
 	_ready_now(m)
-	var p := h.join(2, "Ann", ServerHarness.FIELD, 520.0)
+	var p := _join(2, "Ann", 520.0)
 	p.inv = 0
 	h.step(1)
 	check(m.moves.winding(), "winds up")
@@ -273,7 +279,7 @@ func test_a_charge_dashes_along_the_platform() -> void:
 	var m := map.mobs[0]
 	m.position.x = 800.0
 	_ready_now(m)
-	h.join(2, "Ann", ServerHarness.FIELD, 600.0)
+	_join(2, "Ann", 600.0)
 	h.step(21)
 	check(not m.moves.winding(), "done winding up")
 	h.step(25)
@@ -287,7 +293,7 @@ func test_a_slam_misses_a_player_in_the_air() -> void:
 	var m := map.mobs[0]
 	m.position.x = 600.0
 	_ready_now(m)
-	var p := h.join(2, "Ann", ServerHarness.FIELD, 690.0)
+	var p := _join(2, "Ann", 690.0)
 	h.step(1)
 	check(m.moves.winding(), "winds up")
 	h.place(p, 690.0, ServerHarness.GROUND - 40.0) # jumps
@@ -303,7 +309,7 @@ func test_a_slam_hurts_a_player_on_the_ground_nearby() -> void:
 	var m := map.mobs[0]
 	m.position.x = 600.0
 	_ready_now(m)
-	var p := h.join(2, "Ann", ServerHarness.FIELD, 690.0)
+	var p := _join(2, "Ann", 690.0)
 	h.step(21)
 	check_between(p.character.max_hp() - p.character.health.hp, 13, 24, "hit for its power (2x an attack of 10)")
 
@@ -318,7 +324,7 @@ func test_a_swoop_dives_down_to_the_player() -> void:
 	var m := map.mobs[0]
 	m.position.x = 600.0
 	_ready_now(m)
-	var p := h.join(2, "Ann", ServerHarness.FIELD, 450.0)
+	var p := _join(2, "Ann", 450.0)
 	var lowest := -INF
 	var hurt := false
 	for i in 120:
@@ -339,7 +345,7 @@ func test_a_hit_doesnt_knock_a_monster_out_of_its_move() -> void:
 	var m := map.mobs[0]
 	m.position.x = 800.0
 	_ready_now(m)
-	h.join(2, "Ann", ServerHarness.FIELD, 600.0)
+	_join(2, "Ann", 600.0)
 	h.step(5)
 	m.hurt(1, 2)
 	check_eq(m.kx, 0.0, "no knockback mid-move")
@@ -348,7 +354,6 @@ func test_a_hit_doesnt_knock_a_monster_out_of_its_move() -> void:
 
 func _boss(moves: Array[MonsterMove]) -> MonsterDef:
 	var d := ServerHarness.monster(&"test_boss", 100000, 1)
-	d.level = 50
 	d.boss = true
 	d.sight = 700.0
 	d.moves = moves
@@ -378,7 +383,7 @@ func _pattern_boss() -> SimMob:
 	var m := map.mobs[0]
 	m.position.x = 600.0
 	_ready_now(m)
-	h.join(2, "Ann", ServerHarness.FIELD, 900.0)
+	_join(2, "Ann", 900.0)
 	return m
 
 func test_a_boss_goes_through_its_moves_in_order() -> void:
@@ -423,8 +428,8 @@ func test_beating_a_boss_opens_the_way_home_for_everyone_there() -> void:
 	h.add_map(field)
 	h.add_map(ServerHarness.town_def())
 	var map := h.server.map_instance(ServerHarness.FIELD)
-	var ann := h.join(2, "Ann", ServerHarness.FIELD, 1800.0)
-	var bo := h.join(3, "Bo", ServerHarness.FIELD, 1800.0)
+	var ann := _join(2, "Ann", 1800.0)
+	var bo := _join(3, "Bo", 1800.0)
 	check(home.locked(), "it waits on the boss")
 	h.ask(2, &"req_portal")
 	check_eq(ann.map.def.id, ServerHarness.FIELD, "shut while the boss stands")
@@ -439,7 +444,7 @@ func test_beating_a_boss_opens_the_way_home_for_everyone_there() -> void:
 func test_a_boss_beaten_untouched_counts() -> void:
 	var boss := _boss([])
 	var map := h.field_with([ServerHarness.spawn(boss)])
-	var ann := h.join(2, "Ann", ServerHarness.FIELD, 300.0)
+	var ann := _join(2, "Ann", 300.0)
 	ServerHarness.no_cards(ann, boss)
 	map.kill_mob(map.mobs[0], ann)
 	check_eq(int(ann.character.counters.get(Counters.CLEAN_BOSSES, 0)), 1, "untouched")
@@ -454,8 +459,8 @@ func test_a_boss_goes_for_whoever_hurt_it_most() -> void:
 	var map := h.field_with([ServerHarness.spawn(_boss([]))])
 	var m := map.mobs[0]
 	m.position.x = 600.0
-	h.join(2, "Ann", ServerHarness.FIELD, 650.0)
-	h.join(3, "Bo", ServerHarness.FIELD, 1000.0)
+	_join(2, "Ann", 650.0)
+	_join(3, "Bo", 1000.0)
 	h.step(1)
 	check_eq(m.target, 2, "Ann is nearest")
 	m.health.damage(50)
@@ -470,7 +475,7 @@ func test_a_boss_aims_where_the_player_is_heading() -> void:
 	var m := map.mobs[0]
 	m.position.x = 1000.0
 	m.dir = -1
-	var p := h.join(2, "Ann", ServerHarness.FIELD, 500.0)
+	var p := _join(2, "Ann", 500.0)
 	_ready_now(m)
 	m.moves.gap = 30
 	for i in 50:
@@ -491,7 +496,7 @@ func test_a_boss_leaps_to_the_players_platform() -> void:
 	var map := h.server.map_instance(ServerHarness.FIELD)
 	var m := map.mobs[0]
 	m.position.x = 700.0
-	var p := h.join(2, "Ann", ServerHarness.FIELD, 300.0)
+	var p := _join(2, "Ann", 300.0)
 	h.place(p, 300.0, 450.0)
 	for i in 200:
 		h.place(p, 300.0, 450.0)
@@ -506,7 +511,7 @@ func test_a_boss_gets_a_second_wind_at_half_hp() -> void:
 	var map := h.field_with([ServerHarness.spawn(_boss([]))])
 	var m := map.mobs[0]
 	m.position.x = 1500.0
-	h.join(2, "Ann", ServerHarness.FIELD, 300.0)
+	_join(2, "Ann", 300.0)
 	h.step(1)
 	check(not m.enraged, "calm at full HP")
 	m.health.damage(m.def.max_hp / 2 + 1)
@@ -524,7 +529,7 @@ func test_a_blink_reappears_behind_the_player() -> void:
 	var m := map.mobs[0]
 	m.position.x = 1000.0
 	_ready_now(m)
-	var p := h.join(2, "Ann", ServerHarness.FIELD, 700.0)
+	var p := _join(2, "Ann", 700.0)
 	p.face = 1 # facing the monster
 	var was_hidden := false
 	for i in 60:
@@ -556,7 +561,7 @@ func test_defeating_a_splitter_wakes_its_children_beside_it() -> void:
 	var big := _slime()
 	var map := h.field_with([ServerHarness.spawn(big)])
 	map.mobs[0].position.x = 340.0
-	var p := h.join(2, "Ann", ServerHarness.FIELD, 300.0)
+	var p := _join(2, "Ann", 300.0)
 	ServerHarness.no_cards(p, big)
 	ServerHarness.no_cards(p, big.splits_into)
 	h.ask(2, &"req_skill", [&"basic_attack", p.position, 1])
@@ -572,7 +577,7 @@ func test_split_children_dont_come_back_on_their_own() -> void:
 	var big := _slime()
 	var map := h.field_with([ServerHarness.spawn(big)])
 	map.mobs[0].position.x = 1500.0
-	h.join(2, "Ann", ServerHarness.FIELD, 300.0)
+	_join(2, "Ann", 300.0)
 	var child := map.mobs[1]
 	child.wake(1500.0, 2)
 	child.die()
@@ -585,7 +590,7 @@ func test_a_patrol_range_keeps_monsters_on_its_stretch_of_floor() -> void:
 	s.patrol_from = 900.0
 	s.patrol_to = 1400.0
 	var map := h.field_with([s])
-	var p := h.join(2, "Ann", ServerHarness.FIELD, 300.0)
+	var p := _join(2, "Ann", 300.0)
 	var half := d.size.x / 2.0
 	for m in map.mobs:
 		check_between(m.position.x, 900.0 + half, 1400.0 - half, "spawns in range")

@@ -123,7 +123,7 @@ func test_dawnshards_go_to_the_wallet_by_walking_over_them() -> void:
 	h.step(SimDrop.SETTLE_TICKS + 1)
 	check_eq(ann.character.shards, 40, "picked up without the loot key")
 	check(not map.drops.has(d.id), "gone")
-	check_eq(h.last(2, &"ev_vitals")[4], 40, "wallet sent")
+	check_eq(h.last(2, &"ev_vitals")[3], 40, "wallet sent")
 	check_eq(h.last(2, &"ev_gain"), [&"shards", 40], "shown rising over Ann")
 	check(h.events(2, &"ev_pickup").is_empty() and not h.told(2, "Picked up"), "not in the message log")
 
