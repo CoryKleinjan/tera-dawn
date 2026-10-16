@@ -86,7 +86,7 @@ left out of the fog, all at a depth nearer than `TDStage.FAR`), random decoratio
 world is usually a new biome plus a few maps that use it.
 
 Each region has **one** biome (its style); its fields differ within it. A field keeps its region's `biome` and sets a **BiomeVariantDef** as `MapDef.variant`: only
-what this sub zone changes (sky, light, fog, colour grade, backdrop tint, hidden backdrop
+what this sub zone changes (sky, light, fog colour and haze, colour grade, hidden backdrop
 layers, extra backdrop layers, hidden or extra ground scenery). `MapDef.look()` is the biome with the variant applied; the
 world builders read `look()`, never `biome`. Towns usually use the plain biome; Dawnharbor's
 variant swaps the harbour strips for one painted picture (the clouds stay). `tests/screenshot.gd`

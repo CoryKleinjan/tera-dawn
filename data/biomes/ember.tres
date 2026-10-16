@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BiomeDef" load_steps=45 format=3]
+[gd_resource type="Resource" script_class="BiomeDef" load_steps=43 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/biome_def.gd" id="1_biome_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/ember_side.png" id="3_ember_side"]
@@ -16,7 +16,6 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/ember/smoke_4.png" id="14_smoke_4"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/ember/far_volcanoes.png" id="15_far_volcanoes"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/ember/mid_crags.png" id="16_mid_crags"]
-[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/ember/motes.png" id="17_motes"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/ember/near_ridge.png" id="18_near_ridge"]
 [ext_resource type="Script" path="res://scripts/data/decor_def.gd" id="19_decor_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/tree_large.png" id="20_tree_large"]
@@ -75,17 +74,6 @@ depth = 70.0
 screen_top = Vector2(0.3, 0.3)
 tint = Color(1.0, 1.0, 1.0, 1.0)
 glow = false
-count = 1
-drift = 0.0
-
-[sub_resource type="Resource" id="Resource_5"]
-script = ExtResource("9_backdrop_layer_def")
-textures = Array[Texture2D]([ExtResource("17_motes")])
-mode = 0
-depth = 50.0
-screen_top = Vector2(0.25, 0.25)
-tint = Color(1.6, 1.4, 1.2, 0.8)
-glow = true
 count = 1
 drift = 0.0
 
@@ -176,7 +164,7 @@ platform_middle = ExtResource("6_platform_middle")
 platform_middle_alt = ExtResource("7b_platform_middle_alt")
 platform_right = ExtResource("7_platform_right")
 edge_grass = Array[Texture2D]([ExtResource("8_tall_grass")])
-backdrop = Array[ExtResource("9_backdrop_layer_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6")])
+backdrop = Array[ExtResource("9_backdrop_layer_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_6")])
 ground_decor = Array[ExtResource("19_decor_def")]([SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10")])
 platform_decor = Array[ExtResource("19_decor_def")]([SubResource("Resource_11")])
 lantern = ExtResource("29_lantern_lit")

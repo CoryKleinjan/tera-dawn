@@ -277,7 +277,9 @@ ambient_color = Color(0.3529, 0.4157, 0.6275, 1)
 ambient_energy = 0.45
 fog_color = Color(0.6588, 0.7216, 0.6275, 1)
 mote_color = Color(1.2, 2, 1.4, 1)
-backdrop_tint = Color(0.7843, 0.8471, 0.7843, 1)
+fog_begin = 0.0
+fog_end = 130.0
+fog_density = 0.6
 hide_layers = PackedInt32Array(3)
 
 [resource]

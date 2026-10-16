@@ -54,6 +54,12 @@ manifest's `grow`, a decor or prop `scale`); `tools/art/land_pixels.py --check` 
 keep it there. Edge grass on the floor and platforms stands just behind the skin and peeks
 over its top edge.
 
+The backdrop haze (`BiomeDef.fog_begin`, `fog_end`, `fog_density`) starts behind the play line,
+so it never fades the play area: bright maps use more of it to push the backdrop back so the
+hero and monsters stand out, and a gloomier sub-zone dims a borrowed backdrop with a dark
+`fog_color`, never a tint. Ambient occlusion keeps a small radius, so it shades creases in the
+land and never draws a halo round a character standing in front of it.
+
 Text that belongs to a spot in the world (name tags, hints, damage numbers)
 is never put in the 3D stage: `TDOverlay` projects the spot to the screen and draws it there,
 so depth of field never blurs it and nothing in the world covers it.

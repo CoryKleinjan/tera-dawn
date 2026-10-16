@@ -260,7 +260,9 @@ sky_top = Color(0.06, 0.05, 0.2, 1)
 sky_mid = Color(0.3, 0.32, 0.6, 1)
 sky_horizon = Color(0.78, 0.84, 1, 1)
 fog_color = Color(0.45, 0.48, 0.75, 1)
-backdrop_tint = Color(0.8, 0.82, 1, 1)
+fog_begin = 0.0
+fog_end = 130.0
+fog_density = 0.58
 mote_color = Color(0.75, 0.85, 1, 1)
 
 [resource]

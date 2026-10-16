@@ -184,7 +184,9 @@ light_energy = 1.2
 ambient_color = Color(0.1647, 0.2902, 0.4157, 1)
 ambient_energy = 0.55
 fog_color = Color(0.1647, 0.2824, 0.3451, 1)
-backdrop_tint = Color(0.5333, 0.5961, 0.6588, 1)
+fog_begin = 0.0
+fog_end = 130.0
+fog_density = 0.93
 hide_layers = PackedInt32Array(3)
 
 [sub_resource type="Resource" id="Portal_arena"]

@@ -331,7 +331,9 @@ sky_top = Color(0.06, 0.03, 0.02, 1)
 sky_mid = Color(0.3, 0.12, 0.05, 1)
 light_energy = 1.2
 fog_color = Color(0.35, 0.18, 0.1, 1)
-backdrop_tint = Color(0.72, 0.56, 0.48, 1)
+fog_begin = 0.0
+fog_end = 130.0
+fog_density = 0.91
 grade_saturation = 0.9
 
 [resource]

@@ -60,7 +60,8 @@
         441
       ],
       "extend_bottom": 589,
-      "scale": 0.6185
+      "scale": 0.6185,
+      "feather_top": 0.2
     },
     "mid_hills": {
       "crop": [
@@ -70,7 +71,8 @@
         368
       ],
       "extend_bottom": 512,
-      "scale": 0.4921
+      "scale": 0.4921,
+      "feather_top": 0.2
     },
     "near_treeline": {
       "crop": [
@@ -81,7 +83,8 @@
       ],
       "extend_bottom": 461,
       "scale": 0.4495,
-      "ground": "art/source/backdrop_ground/meadow_near.png"
+      "ground": "art/source/backdrop_ground/meadow_near.png",
+      "feather_top": 0.2
     },
     "clouds": {
       "keep": "split",

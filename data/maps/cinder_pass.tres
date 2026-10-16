@@ -192,7 +192,9 @@ style = ExtResource("5_rope")
 script = ExtResource("variant_def")
 grade_saturation = 0.9
 fog_color = Color(0.5412, 0.4157, 0.3529, 1)
-backdrop_tint = Color(0.7843, 0.7216, 0.6902, 1)
+fog_begin = 0.0
+fog_end = 130.0
+fog_density = 0.72
 
 [resource]
 script = ExtResource("1_map_def")

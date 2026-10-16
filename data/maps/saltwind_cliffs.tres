@@ -306,7 +306,9 @@ script = ExtResource("variant_def")
 sky_mid = Color(0.3725, 0.4902, 0.549, 1)
 fog_color = Color(0.6275, 0.7059, 0.7373, 1)
 grade_saturation = 0.95
-backdrop_tint = Color(0.8471, 0.8784, 0.8941, 1)
+fog_begin = 0.0
+fog_end = 130.0
+fog_density = 0.53
 
 [resource]
 script = ExtResource("1_map_def")

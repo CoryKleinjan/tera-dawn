@@ -369,7 +369,9 @@ grade_lift_amount = -1.0
 grade_saturation = -1.0
 light_shafts = 0
 light_shaft_color = Color(0, 0, 0, 0)
-backdrop_tint = Color(0.501961, 0.564706, 0.658824, 1)
+fog_begin = 0.0
+fog_end = 130.0
+fog_density = 0.95
 hide_layers = PackedInt32Array(3)
 more_ground_decor = Array[ExtResource("20_2qgkd")]([])
 
