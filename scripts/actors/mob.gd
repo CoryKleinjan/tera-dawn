@@ -10,11 +10,8 @@ const FOLLOW := 0.35
 ## its second wind.
 const LEAN := 4.0
 const RAGE_TINT := Color(1.15, 0.8, 0.75)
-## Tints for what player skills do to it, code-drawn until painted effects: hexed (violet),
-## rooted (moss green), burning (ember red).
-const HEX_TINT := Color(0.85, 0.65, 1.1)
+## Tint for a root on it (moss green), code-drawn until painted effects.
 const ROOT_TINT := Color(0.75, 1.05, 0.7)
-const BURN_TINT := Color(1.2, 0.75, 0.6)
 ## Stunned (SkillDef.stun): code-drawn stars circling over its head until painted effects
 ## replace them: how many, how wide their circle (screen pixels), how fast they go round.
 const STUN_STARS := 3
@@ -217,17 +214,13 @@ func _process(_delta: float) -> void:
 func current_move() -> MonsterMove:
 	return def.moves[move - 1] if move > 0 and move <= def.moves.size() else null
 
-## Its own tint, warmed when enraged and coloured by a hex, root or burn on it.
+## Its own tint, warmed when enraged and coloured by a root on it.
 func _tint() -> Color:
 	var out := def.tint
 	if flags & SnapshotFlags.MOB_ENRAGED != 0:
 		out *= RAGE_TINT
-	if flags & SnapshotFlags.MOB_HEXED != 0:
-		out *= HEX_TINT
 	if flags & SnapshotFlags.MOB_ROOTED != 0:
 		out *= ROOT_TINT
-	if flags & SnapshotFlags.MOB_BURNING != 0:
-		out *= BURN_TINT
 	return out
 
 ## HP bar and name tag, drawn by the overlay at this monster's projected screen position

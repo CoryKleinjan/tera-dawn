@@ -75,17 +75,10 @@ Aiming and melee weight:
   monster on your screen bounces you at once (`TDPlayer.POGO_SPEED`); the server still decides
   the damage.
 
-Second-tier skill rules (all in `MapInstance.use_skill`):
+Area and hold rules (all in `MapInstance.use_skill`):
 - `around` hits both sides of the player (a spin, a wall along the platform).
-- `root` stops a monster moving, `hex` makes it take more damage from everyone (with
-  `hexed_extra_hits` for skills that punish hexed monsters), all on `SimMob` and shown to
-  clients as a tint (`SnapshotFlags.MOB_HEXED`, `MOB_ROOTED`, `MOB_BURNING`).
-- `mark_bonus` marks the first monster hit (`SimPlayer.mark`); the mark jumps on when it falls.
-- An `elements` buff (Elemental Edge) cycles fire, ice and lightning on each cast
-  (`SkillBook.element`, saved): fire burns (`SimMob.set_burning`, `MapInstance.burn`), ice
-  slows, lightning sparks to one more monster.
-- Passives: `streak_crit` (Critical Rate per attack in a row, `SimPlayer.streak`, reset when
-  hit) and `bounce` (shots bounce on to one more monster).
+- `root` stops a monster moving (`SimMob.root`), shown to clients as a tint
+  (`SnapshotFlags.MOB_ROOTED`).
 
 Monster-control skills (one per first job, all in `MapInstance.use_skill` and `SimMob`):
 - `launch` throws what it hits up (`SimMob.launch`, `tossed`); `slam` first yanks airborne

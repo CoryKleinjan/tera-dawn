@@ -9,12 +9,6 @@ var learned := {}
 var points := 0
 ## Buffs running: skill id -> [level, ticks left].
 var buffs := {}
-## The element an element buff (SkillDef.elements, Elemental Edge) is set to: an index into
-## ELEMENTS.
-var element := 0
-
-const ELEMENTS := ["Fire", "Ice", "Lightning"]
-enum Element { FIRE, ICE, LIGHTNING }
 
 ## The level the character has in a skill (innate skills are always at least 1).
 func level(skill: SkillDef) -> int:
@@ -129,35 +123,8 @@ func add_buff(skill: SkillDef, lvl := -1) -> void:
 		lvl = level(skill)
 	if skill.duration_ticks(lvl) <= 0:
 		return
-	if skill.elements:
-		# the first cast is fire; each cast while it runs picks the next element
-		element = (element + 1) % ELEMENTS.size() if buffs.has(skill.id) else Element.FIRE
 	buffs[skill.id] = [lvl, skill.duration_ticks(lvl)]
 	character.recalc()
-
-## The running element buff (Elemental Edge) and its level, or [] when none is on.
-func element_buff() -> Array:
-	for id in buffs:
-		var s: SkillDef = Content.skills.get(id)
-		if s and s.elements:
-			return [s, buffs[id][0]]
-	return []
-
-## Critical Rate (in %) each attack in a row adds, from passives (Lucky Streak).
-func streak_crit() -> float:
-	return _passive_sum(func(s: SkillDef, lvl: int) -> float: return s.streak_crit_at(lvl))
-
-## The share of a shot that bounces on to one more monster, from passives (Ricochet).
-func bounce() -> float:
-	return _passive_sum(func(s: SkillDef, lvl: int) -> float: return s.bounce_at(lvl))
-
-func _passive_sum(value: Callable) -> float:
-	var out := 0.0
-	for id in learned:
-		var s: SkillDef = Content.skills.get(id)
-		if s and s.kind == SkillDef.Kind.PASSIVE:
-			out += value.call(s, learned[id])
-	return out
 
 ## Running buffs that keep monster hits from knocking the player back.
 func steady() -> bool:

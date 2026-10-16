@@ -27,8 +27,6 @@ const KNOCKBACK_DECAY := 0.82
 const CHASE_SPEED := 1.3
 ## Speed while slowed by a skill (SkillDef.slow), as a multiple of its usual speed.
 const SLOW := 0.45
-## Ticks between the damage numbers of a burn (SkillDef.burn): one a second.
-const BURN_EVERY := 60
 ## Ticks between changes of direction while patrolling (first walk, then later ones).
 const FIRST_WALK_TICKS := Vector2i(60, 200)
 const WALK_TICKS := Vector2i(60, 220)
@@ -73,11 +71,6 @@ var hang_t := 0     # ticks left held at its height in the air (a stun or a pin)
 var tossed := false # thrown into the air by a skill: it can't move or attack until it lands
 var downed_t := 0   # ticks left a flier is pulled down to the ground (SkillDef.slam)
 var floored_t := 0  # ticks left lying knocked down after a throw or a slam
-var hex_t := 0      # ticks left hexed: it takes `hex_amount` more damage from everyone
-var hex_amount := 0.0
-var burn_t := 0     # ticks left burning, `burn_damage` every BURN_EVERY ticks
-var burn_damage := 0
-var burn_by := 0    # peer id of the player whose hit set it alight
 var hurt_t := 0
 var aggro := 0      # ticks left targeting `target`
 var target := 0     # peer id of the player it's after
@@ -149,11 +142,6 @@ func _reset() -> void:
 	tossed = false
 	downed_t = 0
 	floored_t = 0
-	hex_t = 0
-	hex_amount = 0.0
-	burn_t = 0
-	burn_damage = 0
-	burn_by = 0
 	aggro = 0
 	target = 0
 	dead = false
@@ -282,14 +270,6 @@ func step() -> void:
 		downed_t -= 1
 	if floored_t > 0:
 		floored_t -= 1
-	if hex_t > 0:
-		hex_t -= 1
-	if burn_t > 0:
-		burn_t -= 1
-		if burn_t % BURN_EVERY == 0:
-			map.burn(self)
-			if dead:
-				return
 	if moves.busy():
 		moves.step(chased)
 	elif roar_t > 0:
@@ -472,30 +452,6 @@ func drag_to(x: float) -> void:
 	position.x = clampf(x, area.x + half, area.x + area.w - half)
 	kx = 0.0
 
-## Hexes it: for `ticks` it takes `amount` more damage (0.2 = 20%) from everyone. A stronger
-## hex replaces a weaker one.
-func hex(amount: float, ticks: int) -> void:
-	if amount >= hex_amount or hex_t <= 0:
-		hex_amount = amount
-	hex_t = maxi(hex_t, ticks)
-
-func hexed() -> bool:
-	return hex_t > 0
-
-## What a hit on it is multiplied by (more while hexed).
-func damage_taken() -> float:
-	return 1.0 + (hex_amount if hex_t > 0 else 0.0)
-
-## Sets it alight: `per_second` damage once a second for `ticks`, credited to `by`. A hotter
-## burn replaces a cooler one.
-func set_burning(per_second: int, ticks: int, by: int) -> void:
-	if per_second <= 0 or ticks <= 0:
-		return
-	if per_second >= burn_damage or burn_t <= 0:
-		burn_damage = per_second
-		burn_by = by
-	burn_t = maxi(burn_t, ticks)
-
 ## Whether it notices `p`: within its sight across and not too far above or below.
 func sees(p: SimPlayer) -> bool:
 	if not can_target(p):
@@ -618,8 +574,6 @@ func snapshot() -> Array:
 		flags |= SnapshotFlags.MOB_HIDDEN
 	if enraged:
 		flags |= SnapshotFlags.MOB_ENRAGED
-	if hex_t > 0:
-		flags |= SnapshotFlags.MOB_HEXED
 	if root_t > 0:
 		flags |= SnapshotFlags.MOB_ROOTED
 	if stun_t > 0:
@@ -632,8 +586,6 @@ func snapshot() -> Array:
 		flags |= SnapshotFlags.MOB_TOSSED
 	elif hop > 0.0 and not def.flying:
 		flags |= SnapshotFlags.MOB_AIRBORNE
-	if burn_t > 0:
-		flags |= SnapshotFlags.MOB_BURNING
 	if roar_t > 0 and not moves.busy():
 		flags |= SnapshotFlags.MOB_ROARING
 	var move := moves.index + 1 if moves.busy() else 0

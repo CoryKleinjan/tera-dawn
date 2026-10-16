@@ -57,7 +57,7 @@ func test_a_blend_learns_both_parents_skills() -> void:
 	check(not &"thief" in c.job_line(), "Thief skills don't")
 	c.skills.points = 5
 	check_eq(c.skills.learn(Content.skill(&"power_strike")), "", "learns a Warrior skill")
-	check_eq(c.skills.learn(Content.skill(&"sunfall_blade")), "", "and its own")
+	check_eq(c.skills.learn(Content.skill(&"ice_spike")), "", "and a Magician skill")
 	check(c.skills.learn(Content.skill(&"shadow_fang")) != "", "but not a Thief skill")
 
 func test_came_from_is_saved() -> void:
