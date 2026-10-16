@@ -384,6 +384,12 @@ func kill_mob(m: SimMob, killer: SimPlayer) -> void:
 	for share in server.social.party_shares(killer, m.def.exp_reward):
 		server.give_xp(share[0], share[1])
 	server.quests.record_kill(killer, m.def)
+	if m.def.boss:
+		# everyone at the fight beat it: its Monster Book page (and the arena's way home)
+		for p: SimPlayer in players.values():
+			if p != killer:
+				p.character.book.record_kill(m.def)
+			p.dirty_character = true
 	var loot := []
 	for entry in m.def.drops:
 		var amount := entry.roll()

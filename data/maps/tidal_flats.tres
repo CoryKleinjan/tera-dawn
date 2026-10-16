@@ -10,7 +10,6 @@
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
 [ext_resource type="Resource" path="res://data/monsters/shell_crab.tres" id="9_shell_crab"]
 [ext_resource type="Resource" path="res://data/monsters/sea_gull.tres" id="10_sea_gull"]
-[ext_resource type="Resource" path="res://data/monsters/old_clawbeard.tres" id="12_old_clawbeard"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="13_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/bush_large.png" id="17_bush_large"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tall_grass.png" id="18_tall_grass"]
@@ -33,12 +32,6 @@ y = -1.0
 depth = -2.4
 scale = 0.92
 flip = false
-
-[sub_resource type="Resource" id="Resource_10"]
-script = ExtResource("8_spawn_def")
-monster = ExtResource("12_old_clawbeard")
-platform = 0
-count = 1
 
 [sub_resource type="Resource" id="Resource_9"]
 script = ExtResource("8_spawn_def")
@@ -151,6 +144,13 @@ ambient_color = Color(0.3529, 0.5412, 0.6902, 1)
 backdrop_tint = Color(0.8784, 0.9333, 0.9608, 1)
 hide_layers = PackedInt32Array(3)
 
+[sub_resource type="Resource" id="Portal_arena"]
+script = ExtResource("7_portal_def")
+x = 60.0
+platform = 0
+target_map = &"clawbeard_cove"
+target_x = 140.0
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"tidal_flats"
@@ -163,8 +163,8 @@ ground_y = 820
 start_x = 120.0
 platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Land_1"), SubResource("Land_2"), SubResource("Land_3"), SubResource("Upper_1")])
 climbables = Array[ExtResource("4_climbable_def")]([SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Rope_4_0"), SubResource("Upper_rope")])
-portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_5"), SubResource("Portal_upper")])
-spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10")])
+portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_5"), SubResource("Portal_upper"), SubResource("Portal_arena")])
+spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9")])
 props = Array[ExtResource("13_prop_placement")]([SubResource("Resource_14"), SubResource("Resource_15")])
 region = &"dawnrise_isle"
 world_pos = Vector2(150.0, 375.0)

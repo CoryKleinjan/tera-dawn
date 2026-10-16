@@ -43,9 +43,11 @@ The server runs monsters (`SimMob`), so co-op players all see the same fight.
   A hit doesn't knock a monster out of a move. Shots fly to the aimed spot (`ev_mob_shot`) and
   only hurt if the player is still there; slams miss players in the air. Slams, landings,
   blinks and a boss's second wind send `ev_mob_move` for dust, light and screen shake.
-- **Bosses** never repeat a move twice in a row, aim ahead of a moving player, chain a charge
+- **Bosses** go through their `moves` in order (the first ready one that fits after the last,
+  a pattern players can learn), aim ahead of a moving player, chain a charge
   or pounce into a slam, leap to the player's platform after a moment unable to reach them,
-  and at half HP get a second wind (`MOB_ENRAGED`): faster moves and walking.
+  and at half HP get a second wind (`MOB_ENRAGED`): faster moves and walking, and each move
+  followed at once by the next in the pattern. Order a boss's `moves` the way it should fight.
 - To tune a family, change its preset; to give one monster a different move, make a new
   preset file.
 

@@ -221,15 +221,17 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
 - Every spawn is inside its map's level range; fix a mismatch by changing monster levels, not by
   removing monsters.
 - The paths players walk between towns stay at Lv 10 or below the whole way, so new players can
-  reach every job town. Dead-end training branches climb in smooth steps to a boss on the top map.
+  reach every job town. Dead-end training branches climb in smooth steps to a boss past the top map.
+- A boss fights alone in an arena: a small map about 1.3 screens wide past its zone's top map, no
+  other monsters. Beating it opens a one-way portal there home to the zone's town.
 - Monsters target a player who comes in sight (Lv 1-5 starters only up close) or hits them, and
   give up a few seconds after losing sight. Every monster has one or two moves and every boss
   three different ones; each move winds up with a glow first so it can be dodged. Moves reuse
   the monster's own frames (the attack pose plus motion).
 - Bosses are about 1.5x a normal monster of their kind, not bigger. They fight smarter: the move
-  that fits the distance, never the same move twice in a row, aim where the player is heading,
+  that fits the distance, in a set order players can learn, aim where the player is heading,
   leap to the player's platform, chain a charge or pounce into a slam, and get a second wind at
-  half HP. In co-op they go for whoever has hurt them most lately.
+  half HP (faster, each move followed straight away by the next). In co-op they go for whoever has hurt them most lately.
 - Max level is 100; monsters and maps reach about Lv 30 so far. Monster HP is 40% lower than first
   tuned and EXP needed per level is halved (monster and quest EXP unchanged), so early levels go
   fast; about 40 hours to Lv 35 was only a starting reference.

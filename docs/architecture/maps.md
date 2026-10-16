@@ -30,9 +30,12 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
    (see [cutscenes](cutscenes.md)).
 
 A portal with `opens_after` set to a quest is hidden, and goes nowhere, until the player has
-handed that quest in, and one with `while_on` only while that quest is under way
-(`PortalDef.open_to`; `TDStage.locked_portals`); `one_way` means no portal
-leads back (the content tests let it). `tears` hangs faint white glows out over the water,
+handed that quest in, one with `while_on` only while that quest is under way, and one with
+`after_boss` once the player has beaten that boss (`PortalDef.open_to`; `TDStage.locked_portals`;
+everyone on the map when a boss falls gets the kill); `one_way` means no portal
+leads back (the content tests let it). A boss stands alone in a small arena map (about 1.3
+screens wide, a floor and three low ledges, no lanterns) past the zone's top map, with a portal
+back and a `one_way`, `after_boss` portal home to the zone's town. `tears` hangs faint white glows out over the water,
 drawn in code (`TDStage._build_tears`); nothing in the game mentions them.
 
 A `solo` map gives each player a copy of their own, started fresh every time they come in
