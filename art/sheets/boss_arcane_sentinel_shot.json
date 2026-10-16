@@ -1,0 +1,35 @@
+{
+  "source": "art/source/boss_arcane_sentinel_shot.png",
+  "save": false,
+  "out_dir": "art/build/boss_arcane_sentinel_shot",
+  "cells": [
+    [
+      "shot_windup2",
+      "",
+      "shot2",
+      "",
+      "shot_recover"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.1826,
+  "detail": 4.57,
+  "grid": {
+    "rows": [
+      0,
+      540
+    ],
+    "cols": [
+      [
+        0,
+        417,
+        424,
+        837,
+        844,
+        1260
+      ]
+    ]
+  },
+  "overrides": {}
+}

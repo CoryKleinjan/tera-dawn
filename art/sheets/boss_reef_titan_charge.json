@@ -1,0 +1,60 @@
+{
+  "source": "art/source/boss_reef_titan_charge.png",
+  "save": false,
+  "out_dir": "art/build/boss_reef_titan_charge",
+  "cells": [
+    [
+      "charge_windup2",
+      "",
+      "charge2",
+      "",
+      "charge_recover"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.196,
+  "detail": 3.66,
+  "grid": {
+    "rows": [
+      80,
+      540
+    ],
+    "cols": [
+      [
+        0,
+        412,
+        425,
+        830,
+        843,
+        1260
+      ]
+    ]
+  },
+  "overrides": {
+    "charge_windup2": {
+      "crop": [
+        0,
+        0,
+        10000,
+        385
+      ]
+    },
+    "charge2": {
+      "crop": [
+        0,
+        0,
+        10000,
+        385
+      ]
+    },
+    "charge_recover": {
+      "crop": [
+        0,
+        0,
+        10000,
+        385
+      ]
+    }
+  }
+}

@@ -52,8 +52,24 @@
         "special": "flame_boar_chief:special",
         "hurt": "flame_boar_chief:hurt",
         "enraged": "flame_boar_chief:enraged",
-        "defeated1": "flame_boar_chief:defeated1",
-        "defeated2": "flame_boar_chief:defeated2"
+        "charge_windup": "boss_flame_boar_chief_charge:charge_windup",
+        "charge_windup2": "boss_flame_boar_chief_charge:charge_windup2",
+        "charge": "boss_flame_boar_chief_charge:charge",
+        "death1": "boss_flame_boar_chief_death:death1",
+        "death2": "boss_flame_boar_chief_death:death2",
+        "death3": "boss_flame_boar_chief_death:death3",
+        "intro1": "boss_flame_boar_chief_intro:intro1",
+        "intro2": "boss_flame_boar_chief_intro:intro2",
+        "intro3": "boss_flame_boar_chief_intro:intro3",
+        "phase1": "boss_flame_boar_chief_phase:phase1",
+        "phase2": "boss_flame_boar_chief_phase:phase2",
+        "phase3": "boss_flame_boar_chief_phase:phase3",
+        "pounce_windup": "boss_flame_boar_chief_pounce:pounce_windup",
+        "pounce_windup2": "boss_flame_boar_chief_pounce:pounce_windup2",
+        "pounce": "boss_flame_boar_chief_pounce:pounce",
+        "slam_windup": "boss_flame_boar_chief_slam:slam_windup",
+        "slam_windup2": "boss_flame_boar_chief_slam:slam_windup2",
+        "slam": "boss_flame_boar_chief_slam:slam"
       },
       "anchor": "mass",
       "baseline": "bottom",
@@ -93,10 +109,86 @@
         },
         "die": {
           "frames": [
-            "defeated1",
-            "defeated2"
+            "death1",
+            "death2",
+            "death3"
           ],
-          "fps": 2,
+          "fps": 4,
+          "durations": [
+            1,
+            1,
+            3
+          ],
+          "loop": false
+        },
+        "charge_windup": {
+          "frames": [
+            "charge_windup",
+            "charge_windup2"
+          ],
+          "fps": 3,
+          "loop": false
+        },
+        "charge": {
+          "frames": [
+            "charge"
+          ],
+          "fps": 1
+        },
+        "pounce_windup": {
+          "frames": [
+            "pounce_windup",
+            "pounce_windup2"
+          ],
+          "fps": 3,
+          "loop": false
+        },
+        "pounce": {
+          "frames": [
+            "pounce"
+          ],
+          "fps": 1
+        },
+        "slam_windup": {
+          "frames": [
+            "slam_windup",
+            "slam_windup2"
+          ],
+          "fps": 3,
+          "loop": false
+        },
+        "slam": {
+          "frames": [
+            "slam"
+          ],
+          "fps": 1
+        },
+        "intro": {
+          "frames": [
+            "intro1",
+            "intro2",
+            "intro3"
+          ],
+          "fps": 5,
+          "durations": [
+            2,
+            4,
+            2
+          ],
+          "loop": false
+        },
+        "phase": {
+          "frames": [
+            "phase1",
+            "phase2",
+            "phase3"
+          ],
+          "fps": 5,
+          "durations": [
+            2,
+            4,
+            2
+          ],
           "loop": false
         }
       }
