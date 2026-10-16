@@ -177,6 +177,9 @@ update this page when one changes. Each zone's own look and music are in
   buildings.
 - Backdrops: one high-quality, sharp picture for the whole background, not strips. Dawnharbor's 4K
   panorama is the template. Clouds drift in front of it.
+- Fields look clean, like Hollow Knight's (Greenbough is the pilot): land with one clean grassy edge
+  over plain earth, no tufts or plants strewn along it, few floor plants, and dark leaves framing
+  the screen's top corners. A breakable wall is gone once smashed.
 - Sparse ground scenery, each piece wholly on its platform; few lanterns, never overlapping buildings,
   NPCs or scenery.
 - No on-screen controls or how-to-play text anywhere: the tutorial teaches new characters the keys.
