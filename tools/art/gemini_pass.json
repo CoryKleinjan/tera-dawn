@@ -21220,6 +21220,32 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cells 1, 2 and 3 each hold the same painted bald chibi boy in a cream undershirt and brown shorts, facing right, exactly as in the same cell of the first attached picture, except for two flat guide colours. The flat YELLOW patch marks where one of his arms used to be, touching his face: that old forearm and fist are gone. Repaint every yellow pixel as whatever is behind it: his round bald head, cheek and ear, his cream shirt, or flat magenta background where nothing of him is there, matching the first attached picture's painting of those parts. The flat BLUE shape is a guide for where that arm is now: the blue band is his forearm and the round blue end is his closed mitten fist. Paint over the blue shape so it becomes his real bare forearm and fist, following the blue shape exactly, joined at the elbow to the cream sleeve already there, with the same skin, shading and dark outline as the rest of him. Cell 1, kneeling and punching: the back fist is pulled down and back at his hip, low and behind him. Cell 2, leaning back hauling on a chain: both fists are held out in front of his chest, pulling, well below his chin. Cell 3, winding up to throw: the raised fist is held up and back, behind and to the left of his head. In every cell no arm, sleeve or fist touches or covers his head or face: keep a clear gap of magenta between them. Keep everything else exactly as it is, pixel for pixel: his head, body, his other arm and fist, shorts, legs, feet, size and position. Keep his head bald, with no face, no hair, no nose and no other features. Each fist is one round closed mitten with no fingers. He has exactly two arms and two fists. No yellow and no blue may remain. Do not add any weapon, object, ground, dust, motion lines, text or extra figure. Leave cells 4 to 8 empty. Keep the background flat pure magenta #FF00FF and keep the grid lines. Style: match the existing painting exactly (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the second attached picture. No text, no labels."
   }
+ },
+ {
+  "id": "mshero_body_face_clear2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_face_clear2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Hero pose review' (Cory 12:10Z 'Yes' to the priced ~$0.07 retry): fresh paint of the body on anchor2 and throw1 from a green body + blue arm guide, arms clear of his face (the edit kept the old poses).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/face_arms2_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/face_arms2_ref.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cells 1 and 2 each hold one flat guide shape of a chibi boy facing right: the GREEN part is his head, body and legs, and the BLUE part is where his arms are: each blue band is a forearm and each round blue end is a closed mitten fist. Paint a brand-new, complete boy over each guide shape, following it exactly: the same bald chibi boy as in the first attached picture (same head, skin, cream undershirt with rolled sleeves, brown shorts, bare feet, proportions and painting), but in the pose the guide shows. Cell 1: leaning far back, hauling on a chain, both arms reaching down and forward with both fists held together low in front of his belly, far below his chin. Cell 2: standing, winding up to throw, his back arm raised up and BACK with the fist high behind and to the LEFT of his head. Follow the blue arms exactly: no arm, sleeve or fist may touch or cover his head or face; keep the clear gap of magenta between them. The cream sleeves cover each upper arm by the shoulder; the forearms and fists are bare skin. Each fist is one round closed mitten with no fingers. He has exactly two arms, two fists and two legs. Keep his head bald, with no face, no hair, no nose and no other features. Do not copy the first attached picture's standing pose. No green and no blue may remain. Do not add any weapon, chain, object, ground, dust, motion lines, text or extra figure. Leave cells 3 to 8 empty. Keep the background flat pure magenta #FF00FF and keep the grid lines. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, exactly like the boy in the first attached picture and the painted villagers in the second attached picture. No text, no labels."
+  }
  }
 ]
 }
