@@ -18,13 +18,18 @@ extends Resource
 @export var one_way := false
 ## The portal only opens (and only shows) while this quest is under way (a job test's way in).
 @export var while_on: QuestDef
+## The portal only opens (and only shows) once this boss has been beaten (a boss arena's
+## way home, usually one_way to its town).
+@export var after_boss: MonsterDef
 
-## Whether it opens and shuts with a quest (opens_after, while_on), so it may be hidden.
+## Whether it opens and shuts with a quest or a boss, so it may be hidden.
 func locked() -> bool:
-	return opens_after != null or while_on != null
+	return opens_after != null or while_on != null or after_boss != null
 
 ## Whether `c` can use (and see) it.
 func open_to(c: Character) -> bool:
 	if while_on and not c.quests.active.has(while_on.id):
+		return false
+	if after_boss and c.book.kills(after_boss) <= 0:
 		return false
 	return opens_after == null or c.quests.done.has(opens_after.id)

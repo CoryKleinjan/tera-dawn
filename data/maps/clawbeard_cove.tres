@@ -1,0 +1,80 @@
+[gd_resource type="Resource" script_class="MapDef" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
+[ext_resource type="Resource" path="res://data/biomes/meadow.tres" id="2_biome"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="3_platform_def"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="4_portal_def"]
+[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="5_spawn_def"]
+[ext_resource type="Resource" path="res://data/monsters/old_clawbeard.tres" id="6_boss"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="7_variant_def"]
+
+[sub_resource type="Resource" id="Ledge_left"]
+script = ExtResource("3_platform_def")
+x = 200.0
+y = 735.0
+width = 240.0
+
+[sub_resource type="Resource" id="Ledge_middle"]
+script = ExtResource("3_platform_def")
+x = 510.0
+y = 650.0
+width = 240.0
+
+[sub_resource type="Resource" id="Ledge_right"]
+script = ExtResource("3_platform_def")
+x = 820.0
+y = 735.0
+width = 240.0
+
+[sub_resource type="Resource" id="Portal_back"]
+script = ExtResource("4_portal_def")
+x = 60.0
+platform = 0
+target_map = &"tidal_flats"
+target_x = 140.0
+
+[sub_resource type="Resource" id="Portal_home"]
+script = ExtResource("4_portal_def")
+x = 630.0
+platform = 2
+target_map = &"dawnrise_village"
+target_x = 260.0
+one_way = true
+after_boss = ExtResource("6_boss")
+
+[sub_resource type="Resource" id="Boss"]
+script = ExtResource("5_spawn_def")
+monster = ExtResource("6_boss")
+platform = 0
+count = 1
+patrol_from = 420.0
+patrol_to = 1100.0
+
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("7_variant_def")
+sky_mid = Color(0.3098, 0.5255, 0.6588, 1)
+sky_low = Color(0.9412, 0.7216, 0.5647, 1)
+fog_color = Color(0.6118, 0.7843, 0.8157, 1)
+ambient_color = Color(0.3529, 0.5412, 0.6902, 1)
+backdrop_tint = Color(0.8784, 0.9333, 0.9608, 1)
+hide_layers = PackedInt32Array(3)
+
+[resource]
+script = ExtResource("1_map_def")
+id = &"clawbeard_cove"
+display_name = "Clawbeard's Cove"
+biome = ExtResource("2_biome")
+variant = SubResource("Variant")
+width = 1260
+height = 900
+ground_y = 820
+start_x = 140.0
+lantern_spacing = 0.0
+platforms = Array[ExtResource("3_platform_def")]([SubResource("Ledge_left"), SubResource("Ledge_middle"), SubResource("Ledge_right")])
+portals = Array[ExtResource("4_portal_def")]([SubResource("Portal_back"), SubResource("Portal_home")])
+spawns = Array[ExtResource("5_spawn_def")]([SubResource("Boss")])
+region = &"dawnrise_isle"
+world_pos = Vector2(110.0, 385.0)
+return_map = &"dawnrise_village"
+level_text = "Lv. 10-12"
+music = &"boss_dawnharbor"

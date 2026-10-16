@@ -347,7 +347,7 @@ func rope_and_portal() -> void:
 	var boss := false
 	for m in world.mobs():
 		boss = boss or m.def.boss
-	_check(boss, "Fern Hollow has its boss")
+	_check(not world.mobs().is_empty() and not boss, "Fern Hollow has its monsters, and its boss waits in its own arena")
 
 ## Fainting and waking up in town.
 func faint() -> void:

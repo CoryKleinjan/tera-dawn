@@ -3,14 +3,18 @@ extends RefCounted
 ## Runs a monster's moves (MonsterDef.moves, see MonsterMove) on the server: picks one
 ## that fits how far away its target is, winds up, plays it out (moving the monster and
 ## hurting players it reaches), then rests. SimMob owns it and calls step() each tick.
-## Bosses pick smarter: never the same move twice in a row, aim where the player is
-## heading, chain a charge or pounce into a slam, and leap to the player's platform.
+## Bosses pick smarter: they go through their moves in order (a pattern the player can
+## learn), aim where the player is heading, chain a charge or pounce into a slam, and leap
+## to the player's platform. After their second wind each move is followed at once by the
+## next one in the pattern.
 
 enum Phase { NONE, WINDUP, ACTIVE, RECOVER }
 
 ## Ticks between one move ending and the next starting (bosses wait less).
 const GAP_TICKS := 45
 const BOSS_GAP_TICKS := 20
+## After its second wind a boss follows each move with the next this quickly.
+const COMBO_GAP_TICKS := 6
 ## Players further above or below than this are out of reach of ground moves, shots
 ## and pounces.
 const GROUND_Y_RANGE := 90.0
@@ -63,6 +67,10 @@ var dive := 0.0
 var leap_to: Platform
 var hidden := false
 var _blinked := false
+## A boss after its second wind: the next move follows straight on, ready or not.
+var _follow_up := false
+## The move in progress is such a follow-up (it doesn't start another).
+var _following := false
 
 func _init(m: SimMob) -> void:
 	mob = m
@@ -76,6 +84,8 @@ func reset() -> void:
 	gap = 0
 	hidden = false
 	leap_to = null
+	_follow_up = false
+	_following = false
 	hit.clear()
 	for i in cool.size():
 		cool[i] = randi_range(FIRST_TICKS, maxi(FIRST_TICKS, mob.def.moves[i].cooldown / 2))
@@ -105,17 +115,29 @@ func tick() -> void:
 func try_start(p: SimPlayer) -> bool:
 	if gap > 0 or busy():
 		return false
+	if mob.def.boss:
+		return _next_in_pattern(p)
 	var ready: Array[int] = []
 	for i in cool.size():
 		if cool[i] <= 0 and fits(mob.def.moves[i], p):
 			ready.append(i)
 	if ready.is_empty():
 		return false
-	# bosses never use the same move twice in a row when they have another
-	if mob.def.boss and ready.size() > 1:
-		ready.erase(last)
 	start(ready[randi() % ready.size()], p)
 	return true
+
+## Bosses: the first move after the last one (in MonsterDef.moves order) that is ready
+## and fits; a follow-up after the second wind doesn't wait for its cooldown.
+func _next_in_pattern(p: SimPlayer) -> bool:
+	var follow := _follow_up
+	_follow_up = false
+	for k in cool.size():
+		var i := (last + 1 + k) % cool.size()
+		if (follow or cool[i] <= 0) and fits(mob.def.moves[i], p):
+			start(i, p)
+			_following = follow
+			return true
+	return false
 
 ## Whether a close move (anything but a shot) is ready and `p` is in its reach.
 func close_ready(p: SimPlayer) -> bool:
@@ -289,11 +311,17 @@ func _end() -> void:
 	if index >= 0:
 		cool[index] = _cooldown(current())
 		last = index
+	var moved := index >= 0
 	phase = Phase.NONE
 	index = -1
 	hidden = false
 	mob.hop = 0.0
 	gap = BOSS_GAP_TICKS if mob.def.boss else GAP_TICKS
+	# after its second wind a boss strings two moves together
+	_follow_up = moved and mob.def.boss and mob.enraged and not _following
+	_following = false
+	if _follow_up:
+		gap = COMBO_GAP_TICKS
 
 func _cooldown(mv: MonsterMove) -> int:
 	return roundi(mv.cooldown * (RAGE_COOLDOWN if mob.enraged else 1.0))
@@ -304,6 +332,7 @@ func cancel() -> void:
 		leap_to = null
 	if busy():
 		_end()
+	_follow_up = false
 
 # ---------- motion and hits ----------
 

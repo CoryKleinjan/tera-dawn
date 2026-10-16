@@ -1,39 +1,71 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=24 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=31 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/barnacle_boar.tres" id="2_barnacle_boar"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/barnacle.tres" id="5_barnacle"]
-[ext_resource type="Resource" path="res://data/items/use/honey_bun.tres" id="6_honey_bun"]
+[ext_resource type="Resource" path="res://data/items/use/power_elixir.tres" id="6_power_elixir"]
 [ext_resource type="Resource" path="res://data/items/use/mana_tea.tres" id="7_mana_tea"]
 [ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="8_elixir"]
-[ext_resource type="Resource" path="res://data/items/scrolls/scroll_gloves_att_60.tres" id="9_scroll_gloves_att_60"]
-[ext_resource type="Resource" path="res://data/items/scrolls/scroll_shield_def_60.tres" id="10_scroll_shield_def_60"]
-[ext_resource type="Resource" path="res://data/items/scrolls/scroll_weapon_matt_10.tres" id="11_scroll_weapon_matt_10"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_weapon_att_60.tres" id="9_scroll_weapon_att_60"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_weapon_matt_60.tres" id="10_scroll_weapon_matt_60"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_armor_def_60.tres" id="11_scroll_armor_def_60"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_shield_def_60.tres" id="12_scroll_shield_def_60"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_helmet_hp_60.tres" id="13_scroll_helmet_hp_60"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_str_60.tres" id="14_scroll_top_str_60"]
+[ext_resource type="Resource" path="res://data/items/scrolls/scroll_weapon_att_10.tres" id="15_scroll_weapon_att_10"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_charge.tres" id="mv_boss_charge"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_slam.tres" id="mv_boss_slam"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_pounce.tres" id="mv_boss_pounce"]
 [ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="mv_script"]
 
+[sub_resource type="Resource" id="Resource_12"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("15_scroll_weapon_att_10")
+chance = 0.075
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_11"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("14_scroll_top_str_60")
+chance = 0.25
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_10"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("13_scroll_helmet_hp_60")
+chance = 0.25
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Resource_9"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("12_scroll_shield_def_60")
+chance = 0.25
+min_amount = 1
+max_amount = 1
+
 [sub_resource type="Resource" id="Resource_8"]
 script = ExtResource("3_drop_entry")
-item = ExtResource("11_scroll_weapon_matt_10")
-chance = 0.0036
+item = ExtResource("11_scroll_armor_def_60")
+chance = 0.25
 min_amount = 1
 max_amount = 1
 
 [sub_resource type="Resource" id="Resource_7"]
 script = ExtResource("3_drop_entry")
-item = ExtResource("10_scroll_shield_def_60")
-chance = 0.012
+item = ExtResource("10_scroll_weapon_matt_60")
+chance = 0.25
 min_amount = 1
 max_amount = 1
 
 [sub_resource type="Resource" id="Resource_6"]
 script = ExtResource("3_drop_entry")
-item = ExtResource("9_scroll_gloves_att_60")
-chance = 0.012
+item = ExtResource("9_scroll_weapon_att_60")
+chance = 0.25
 min_amount = 1
 max_amount = 1
 
@@ -53,24 +85,24 @@ max_amount = 1
 
 [sub_resource type="Resource" id="Resource_3"]
 script = ExtResource("3_drop_entry")
-item = ExtResource("6_honey_bun")
-chance = 0.08
+item = ExtResource("6_power_elixir")
+chance = 0.5
 min_amount = 1
-max_amount = 2
+max_amount = 3
 
 [sub_resource type="Resource" id="Resource_2"]
 script = ExtResource("3_drop_entry")
 item = ExtResource("5_barnacle")
-chance = 0.45
-min_amount = 1
-max_amount = 1
+chance = 1.0
+min_amount = 3
+max_amount = 5
 
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("3_drop_entry")
 item = ExtResource("4_dawnshard")
 chance = 1.0
-min_amount = 20
-max_amount = 40
+min_amount = 140
+max_amount = 280
 
 [resource]
 script = ExtResource("1_monster_def")
@@ -88,6 +120,6 @@ sight = 700.0
 moves = Array[ExtResource("mv_script")]([ExtResource("mv_boss_charge"), ExtResource("mv_boss_slam"), ExtResource("mv_boss_pounce")])
 sprite_frames = ExtResource("2_barnacle_boar")
 sprite_scale = 1.3
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12")])
 respawn_ticks = Vector2i(1800, 2400)
 tint = Color(0.82, 0.86, 1.0, 1)
