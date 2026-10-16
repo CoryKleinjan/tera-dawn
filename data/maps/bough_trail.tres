@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="7_portal_def"]
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
 [ext_resource type="Resource" path="res://data/monsters/thornling.tres" id="9_thornling"]
-[ext_resource type="Resource" path="res://data/monsters/leafwing.tres" id="10_leafwing"]
+[ext_resource type="Resource" path="res://data/monsters/seedwing.tres" id="10_seedwing"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="12_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tall_grass.png" id="13_tall_grass"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_large.png" id="15_tree_large"]
@@ -44,19 +44,19 @@ flip = true
 
 [sub_resource type="Resource" id="Resource_31"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_leafwing")
+monster = ExtResource("10_seedwing")
 platform = 9
 count = 2
 
 [sub_resource type="Resource" id="Resource_30"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_leafwing")
+monster = ExtResource("10_seedwing")
 platform = 8
 count = 2
 
 [sub_resource type="Resource" id="Resource_29"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_leafwing")
+monster = ExtResource("10_seedwing")
 platform = 7
 count = 2
 
@@ -68,7 +68,7 @@ count = 2
 
 [sub_resource type="Resource" id="Resource_27"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_leafwing")
+monster = ExtResource("10_seedwing")
 platform = 5
 count = 2
 
@@ -98,7 +98,7 @@ count = 3
 
 [sub_resource type="Resource" id="Resource_22"]
 script = ExtResource("8_spawn_def")
-monster = ExtResource("10_leafwing")
+monster = ExtResource("10_seedwing")
 platform = 0
 count = 3
 

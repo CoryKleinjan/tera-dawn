@@ -1,45 +1,45 @@
 [gd_resource type="SpriteFrames" load_steps=10 format=3]
 
-[ext_resource type="Texture2D" path="res://assets/sprites/monsters/leafwing.png" id="1_strip"]
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/seedwing.png" id="1_strip"]
 
 [sub_resource type="AtlasTexture" id="f0"]
 atlas = ExtResource("1_strip")
-region = Rect2(0, 0, 88, 109)
+region = Rect2(0, 0, 100, 91)
 metadata/art_density = 2.56
 
 [sub_resource type="AtlasTexture" id="f1"]
 atlas = ExtResource("1_strip")
-region = Rect2(88, 0, 88, 109)
+region = Rect2(100, 0, 100, 91)
 metadata/art_density = 2.56
 
 [sub_resource type="AtlasTexture" id="f2"]
 atlas = ExtResource("1_strip")
-region = Rect2(176, 0, 88, 109)
+region = Rect2(200, 0, 100, 91)
 metadata/art_density = 2.56
 
 [sub_resource type="AtlasTexture" id="f3"]
 atlas = ExtResource("1_strip")
-region = Rect2(264, 0, 88, 109)
+region = Rect2(300, 0, 100, 91)
 metadata/art_density = 2.56
 
 [sub_resource type="AtlasTexture" id="f4"]
 atlas = ExtResource("1_strip")
-region = Rect2(352, 0, 88, 109)
+region = Rect2(400, 0, 100, 91)
 metadata/art_density = 2.56
 
 [sub_resource type="AtlasTexture" id="f5"]
 atlas = ExtResource("1_strip")
-region = Rect2(440, 0, 88, 109)
+region = Rect2(500, 0, 100, 91)
 metadata/art_density = 2.56
 
 [sub_resource type="AtlasTexture" id="f6"]
 atlas = ExtResource("1_strip")
-region = Rect2(528, 0, 88, 109)
+region = Rect2(600, 0, 100, 91)
 metadata/art_density = 2.56
 
 [sub_resource type="AtlasTexture" id="f7"]
 atlas = ExtResource("1_strip")
-region = Rect2(616, 0, 88, 109)
+region = Rect2(700, 0, 100, 91)
 metadata/art_density = 2.56
 
 [resource]
