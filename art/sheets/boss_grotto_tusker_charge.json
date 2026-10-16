@@ -1,0 +1,39 @@
+{
+  "source": "art/source/boss_grotto_tusker_charge.png",
+  "save": false,
+  "out_dir": "art/build/boss_grotto_tusker_charge",
+  "cells": [
+    [
+      "charge_windup",
+      "",
+      "charge_windup2",
+      "",
+      "charge"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.2814,
+  "detail": 2.75,
+  "grid": {
+    "rows": [
+      4,
+      537
+    ],
+    "cols": [
+      [
+        8,
+        423,
+        431,
+        835,
+        843,
+        1252
+      ]
+    ]
+  },
+  "overrides": {},
+  "key": [
+    0.2,
+    0.5
+  ]
+}

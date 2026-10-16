@@ -1,0 +1,39 @@
+{
+  "source": "art/source/boss_grotto_tusker_pounce.png",
+  "save": false,
+  "out_dir": "art/build/boss_grotto_tusker_pounce",
+  "cells": [
+    [
+      "pounce_windup",
+      "",
+      "pounce_windup2",
+      "",
+      "pounce"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.2785,
+  "detail": 2.75,
+  "grid": {
+    "rows": [
+      0,
+      540
+    ],
+    "cols": [
+      [
+        0,
+        419,
+        422,
+        815,
+        818,
+        1260
+      ]
+    ]
+  },
+  "overrides": {},
+  "key": [
+    0.2,
+    0.5
+  ]
+}

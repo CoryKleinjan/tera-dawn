@@ -1,0 +1,100 @@
+{
+  "source": "art/source/boss_grotto_tusker_slam.png",
+  "save": false,
+  "out_dir": "art/build/boss_grotto_tusker_slam",
+  "cells": [
+    [
+      "slam_windup",
+      "",
+      "slam_windup2",
+      "",
+      "slam"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.2785,
+  "detail": 2.75,
+  "grid": {
+    "rows": [
+      0,
+      540
+    ],
+    "cols": [
+      [
+        0,
+        432,
+        435,
+        835,
+        838,
+        1260
+      ]
+    ]
+  },
+  "overrides": {
+    "slam_windup": {
+      "blank": [
+        [
+          0,
+          504,
+          91,
+          509
+        ],
+        [
+          126,
+          504,
+          424,
+          509
+        ]
+      ]
+    },
+    "slam_windup2": {
+      "blank": [
+        [
+          0,
+          504,
+          104,
+          509
+        ],
+        [
+          139,
+          504,
+          392,
+          509
+        ]
+      ]
+    },
+    "slam": {
+      "blank": [
+        [
+          0,
+          504,
+          192,
+          509
+        ],
+        [
+          234,
+          504,
+          271,
+          509
+        ],
+        [
+          310,
+          504,
+          314,
+          509
+        ],
+        [
+          338,
+          504,
+          414,
+          509
+        ]
+      ]
+    }
+  },
+  "key": [
+    0.2,
+    0.5
+  ]
+}
