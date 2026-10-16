@@ -58,6 +58,7 @@
   "dark_key": false,
   "defringe": false,
   "scale": 0.111,
+  "fix": "guide_green",
   "save": false,
   "sets": {
     "hero_face": {
@@ -83,7 +84,6 @@
         "cast1": "hero_face:idle1",
         "cast2": "hero_face:idle1",
         "skyward2": "hero_face:idle1",
-        "gravity1": "hero_face:idle1",
         "gravity2": "hero_face:idle1",
         "ambush1": "hero_face:idle1",
         "anchor1": "hero_face:idle1",
@@ -223,12 +223,6 @@
         "skyward2": {
           "frames": [
             "skyward2"
-          ],
-          "fps": 1
-        },
-        "gravity1": {
-          "frames": [
-            "gravity1"
           ],
           "fps": 1
         },

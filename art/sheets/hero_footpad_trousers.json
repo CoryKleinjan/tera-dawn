@@ -45,7 +45,7 @@
     [
       "",
       "skyward2",
-      "gravity1",
+      "",
       "gravity2",
       "ambush1",
       "ambush2",
@@ -91,6 +91,7 @@
   "dark_key": false,
   "defringe": false,
   "scale": 0.111,
+  "fix": "guide_green",
   "save": false,
   "sets": {
     "hero_footpad_trousers": {
@@ -118,7 +119,6 @@
         "pistol1": "hero_footpad_trousers:pistol1",
         "pistol2": "hero_footpad_trousers:pistol2",
         "crouch": "hero_footpad_trousers:crouch",
-        "gravity1": "hero_footpad_trousers:gravity1",
         "gravity2": "hero_footpad_trousers:gravity2",
         "ambush1": "hero_footpad_trousers:ambush1",
         "anchor1": "hero_footpad_trousers:anchor1",
@@ -275,12 +275,6 @@
         "crouch": {
           "frames": [
             "crouch"
-          ],
-          "fps": 1
-        },
-        "gravity1": {
-          "frames": [
-            "gravity1"
           ],
           "fps": 1
         },

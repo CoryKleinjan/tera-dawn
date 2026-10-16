@@ -24,6 +24,7 @@
   "dark_key": false,
   "defringe": true,
   "scale": 0.111,
+  "fix": "guide_blue",
   "save": false,
   "sets": {
     "hero_hair_under_deckhand_tricorn": {

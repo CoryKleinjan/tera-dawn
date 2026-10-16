@@ -554,6 +554,38 @@ def fix_magenta_rim(rgb, alpha, source=None, band=6, radius=6):
     return rgb, alpha
 
 
+def fix_guide_green(rgb, alpha, source=None, band=12):
+    """Hero layers painted over a flat green silhouette: the green guide Gemini left along the
+    piece's edge (a yellow-green rim where skin met the guide, specks in a fold) is background.
+    Only greenish pixels joined to the cut edge go, so green art away from the edge stays; use it
+    on pieces with no green of their own."""
+    r, g, b = rgb[..., 0], rgb[..., 1], rgb[..., 2]
+    lean = (alpha > 0.02) & (g > r - 0.02) & (g > b + 0.15)
+    guide = dilate(alpha < 0.5, band, outside=True) & lean
+    for _ in range(4 * band):  # the whole streak: greenish pixels joined to the edge
+        grown = dilate(guide, 1) & lean
+        if (grown == guide).all():
+            break
+        guide = grown
+    alpha = alpha.copy()
+    alpha[guide] = 0
+    return rgb, alpha
+
+
+def fix_guide_blue(rgb, alpha, source=None):
+    """A flat blue guide shape left in a layer (a hat's place marked under the hair sticking out
+    from it) is background, with the blue fringe round it."""
+    r, g, b = rgb[..., 0], rgb[..., 1], rgb[..., 2]
+    blue = (alpha > 0.02) & (b > 0.55) & (r < 0.4) & (g < 0.4)
+    fringe = dilate(blue, 3) & (alpha > 0.02) & (b > np.maximum(r, g) + 0.12)
+    alpha = alpha.copy()
+    alpha[blue | fringe] = 0
+    return rgb, alpha
+
+
+FIXES["guide_green"] = fix_guide_green
+FIXES["guide_blue"] = fix_guide_blue
+fix_guide_green.local = fix_guide_blue.local = True  # they cut a few spots: feather only there
 FIXES["magenta_rim"] = fix_magenta_rim
 FIXES["round_top"] = fix_round_top
 FIXES["medal_symbol"] = fix_medal_symbol
@@ -803,9 +835,16 @@ def cut_cell(rgb_full, bg, box, opts):
     if opts.get("smooth_edge"):
         alpha = smooth_edge(alpha, opts["smooth_edge"])
     if opts.get("fix"):
-        rgb, alpha = FIXES[opts["fix"]](rgb, alpha, source=cell / 255.0)
+        fix = FIXES[opts["fix"]]
+        before = alpha
+        rgb, alpha = fix(rgb, alpha, source=cell / 255.0)
         if opts["alpha"] == "smooth":  # a clean-up cuts its outline on/off: fade it over about a sprite pixel
-            alpha = feather(alpha, 0.5 / opts["scale"])
+            radius = 0.5 / opts["scale"]
+            soft = feather(alpha, radius)
+            if getattr(fix, "local", False):  # only where it cut, so the rest of the outline stays as painted
+                near = dilate(alpha < before, int(np.ceil(radius)) + 1)
+                soft = np.where(near, soft, alpha)
+            alpha = soft
     rgb, alpha = shrink(rgb, alpha, opts["scale"])
     if opts.get("recolor"):
         rgb = RECOLORS[opts["recolor"]](rgb)

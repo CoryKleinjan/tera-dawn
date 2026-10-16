@@ -45,7 +45,7 @@
     [
       "",
       "skyward2",
-      "gravity1",
+      "",
       "gravity2",
       "ambush1",
       "ambush2",
@@ -118,7 +118,6 @@
         "pistol1": "hero_hunters_boots:pistol1",
         "pistol2": "hero_hunters_boots:pistol2",
         "crouch": "hero_hunters_boots:crouch",
-        "gravity1": "hero_hunters_boots:gravity1",
         "gravity2": "hero_hunters_boots:gravity2",
         "ambush1": "hero_hunters_boots:ambush1",
         "anchor1": "hero_hunters_boots:anchor1",
@@ -275,12 +274,6 @@
         "crouch": {
           "frames": [
             "crouch"
-          ],
-          "fps": 1
-        },
-        "gravity1": {
-          "frames": [
-            "gravity1"
           ],
           "fps": 1
         },

@@ -45,7 +45,7 @@
     [
       "",
       "skyward2",
-      "gravity1",
+      "",
       "gravity2",
       "ambush1",
       "ambush2",
@@ -91,6 +91,7 @@
   "dark_key": false,
   "defringe": false,
   "scale": 0.111,
+  "fix": "guide_green",
   "save": false,
   "sets": {
     "hero_novice_slippers": {
@@ -119,7 +120,6 @@
         "throw2": "hero_novice_slippers:throw2",
         "pistol1": "hero_novice_slippers:pistol1",
         "pistol2": "hero_novice_slippers:pistol2",
-        "gravity1": "hero_novice_slippers:gravity1",
         "gravity2": "hero_novice_slippers:gravity2",
         "ambush1": "hero_novice_slippers:ambush1",
         "anchor1": "hero_novice_slippers:anchor1",
@@ -281,12 +281,6 @@
         "pistol2": {
           "frames": [
             "pistol2"
-          ],
-          "fps": 1
-        },
-        "gravity1": {
-          "frames": [
-            "gravity1"
           ],
           "fps": 1
         },
