@@ -21194,6 +21194,32 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 and 2 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose (cell 1: kneeling on one knee, one arm punched straight forward and the other fist pulled back up by his shoulder; cell 2: seen from BEHIND, his back to the viewer, mid backhand slash with one arm stretched out to the side, feet planted apart). Cells 3, 4, 5, 6, 7 and 8 are empty and must stay empty. He faces right in a slight three-quarter side view. The second attached picture shows this exact piece already painted on the same boy: copy its colours, materials, shape and details exactly, never its poses. The fourth attached picture shows the back of this piece. On each green shape, paint ONLY the same young magician's robe as in the second attached picture, worn over his torso and upper arms: a deep blue robe-tunic with short wide sleeves, a hem just above the knees, gold trim along the collar, sleeves and hem, a small gold star clasp at the collar and a purple cloth sash tied at the waist with hanging ends. It follows his body and arms in each pose, however they bend, stretch, tuck or turn. Every sleeve and the whole body of the garment cover the boy's own white shirt in the first attached picture completely: where the white shirt or its sleeve shows in that picture, the garment covers it, so no white shirt shows anywhere. Cell 2 shows him from BEHIND: paint the BACK of the piece, with no buttons, buckles, clasps, stars, laces or trim that belong on its front. Each piece is exactly the size of the green body part it covers: never blown up, never filling the cell, never a separate standing figure. Keep every green shape exactly where it is, in its own pose; do not redraw any pose. Paint nothing else: no head, hands, other clothing, gear, weapons or objects. The green shape is only a flat placement guide lying BEHIND everything you paint, never in front of it: paint each piece WHOLE straight over the green, including right across the green arms, hands and fists where they cross it, with no gaps, notches, bites or holes anywhere; parts an arm will hide later are still painted completely. Check every cell for holes before finishing. Leave every part of each green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Leave empty cells empty. Style: warm colours, light from the upper left, smooth soft painted shading with bright highlights, thin dark plum-brown outline, small busy painted detail, like the painted villagers in the third attached picture. Keep the grid lines. No text, no labels."
   }
+ },
+ {
+  "id": "mshero_body_face_clear",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_face_clear.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Hero pose review' (Cory 11:48Z 'Yes.' to the priced 7 sheets ~$0.48 for arms off his face): body pinning, anchor2, throw1 with the arm moved clear of his face (yellow = old arm, blue = new arm guide). Step 1 of 2; fists and tops follow on the new body.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/face_arms_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/face_arms_ref.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cells 1, 2 and 3 each hold the same painted bald chibi boy in a cream undershirt and brown shorts, facing right, exactly as in the same cell of the first attached picture, except for two flat guide colours. The flat YELLOW patch marks where one of his arms used to be, touching his face: that old forearm and fist are gone. Repaint every yellow pixel as whatever is behind it: his round bald head, cheek and ear, his cream shirt, or flat magenta background where nothing of him is there, matching the first attached picture's painting of those parts. The flat BLUE shape is a guide for where that arm is now: the blue band is his forearm and the round blue end is his closed mitten fist. Paint over the blue shape so it becomes his real bare forearm and fist, following the blue shape exactly, joined at the elbow to the cream sleeve already there, with the same skin, shading and dark outline as the rest of him. Cell 1, kneeling and punching: the back fist is pulled down and back at his hip, low and behind him. Cell 2, leaning back hauling on a chain: both fists are held out in front of his chest, pulling, well below his chin. Cell 3, winding up to throw: the raised fist is held up and back, behind and to the left of his head. In every cell no arm, sleeve or fist touches or covers his head or face: keep a clear gap of magenta between them. Keep everything else exactly as it is, pixel for pixel: his head, body, his other arm and fist, shorts, legs, feet, size and position. Keep his head bald, with no face, no hair, no nose and no other features. Each fist is one round closed mitten with no fingers. He has exactly two arms and two fists. No yellow and no blue may remain. Do not add any weapon, object, ground, dust, motion lines, text or extra figure. Leave cells 4 to 8 empty. Keep the background flat pure magenta #FF00FF and keep the grid lines. Style: match the existing painting exactly (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the second attached picture. No text, no labels."
+  }
  }
 ]
 }
