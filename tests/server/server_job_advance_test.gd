@@ -34,9 +34,20 @@ func before_each() -> void:
 func after_each() -> void:
 	h.close()
 
-## A Beginner who has passed the Magician's Job Test.
+## A Beginner who has passed the Magician's Job Test, with the INT the gifted wand needs.
 func _ready_for_mage() -> void:
 	c.quests.done[mage.advance_quest.id] = true
+	_strong_enough_for_gifts(c, mage)
+
+## Gives `who` the stats `job`'s gifted gear needs, so it can be worn at once.
+static func _strong_enough_for_gifts(who: Character, job: JobDef) -> void:
+	for g in job.advance_gifts:
+		var e := g.item as EquipDef
+		if e:
+			var reqs := e.requirements()
+			for stat in StatBlock.BASE:
+				who.base.set(stat, maxi(who.base.value(stat), reqs.get(stat, 0)))
+	who.recalc()
 
 ## A Warrior (passed) who bought Power Strike, with no essence left over.
 func _as_warrior() -> SkillDef:
@@ -67,6 +78,7 @@ func test_every_job_gets_its_basic_weapon_worn() -> void:
 	for job in JobDef.paths_from(Character.START_JOB):
 		var who := Character.create("Gift" + String(job.id), Character.START_JOB)
 		who.quests.done[job.advance_quest.id] = true
+		_strong_enough_for_gifts(who, job)
 		var old := who.gear.weapon()
 		check_eq(who.advance(job), "", "%s: advanced" % job.id)
 		var w := who.gear.weapon()

@@ -14,6 +14,8 @@ func check() -> void:
 	var guide: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"lumewood_instructor")[0]
 	ch.job = Content.job(&"beginner")
 	ch.quests.done[&"jtest_mage"] = true
+	ch.base.intelligence = 20  # what the gifted wand needs to be worn
+	ch.recalc()
 	_me().dirty_character = true
 	await _ticks(2)
 	_teleport(Vector2(guide.position.x - 30, guide.position.y))
