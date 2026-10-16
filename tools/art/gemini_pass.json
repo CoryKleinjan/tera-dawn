@@ -17705,6 +17705,31 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1, 2 and 3 each hold one flat bright green (#00FF00) shape: the exact outline of the boy in the same cell of the first attached picture, in the same pose. Cells 4, 5, 6, 7 and 8 are empty and must stay empty. On each green shape, paint ONLY his WEAPON HAND: one closed rounded MITTEN fist, with no separate fingers or thumb, plus his wrist, exactly the same size, shape, angle, skin colour and place as that fist in the same cell of the first attached picture, so it lies exactly on top of it. The weapon hand is: in cell 1 the fist raised up to the right of his head (not the fist at his chest); in cell 2 the lower fist on the RIGHT side of the pair under his head; in cell 3 the fist punched up to the upper right (not the fist at his chest). Paint only that one fist in each cell and nothing else: no other hand, arm, sleeve, body, head, weapon or object. Leave every part of the green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Style: exactly the skin, warm colours, light from the upper left, smooth soft painted shading and thin dark plum-brown outline of the boy in the first attached picture. Keep the grid lines. No text, no labels."
   }
+ },
+ {
+  "id": "mshero_body_near_arm_up",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_near_arm_up.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 00:14Z 'Yes' to the priced ~$0.07 guided body paint): cast1 and skyward2 with the NEAR arm (closest to the camera) raised, painted over a flat colour guide (green body, blue near arm across his chest).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/near_arm_up_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cell 4 holds a painted bald chibi boy standing at rest, turned toward the right, in a cream undershirt with rolled sleeves and brown shorts, barefoot. Leave cell 4 exactly as it is. Cells 1 and 2 each hold a flat colour GUIDE of the same boy in a new pose: the GREEN shape is his head, body, legs and his far arm with its fist held low behind his hip; the BLUE shape is his NEAR arm, the arm closest to the viewer, which crosses IN FRONT of his chest, below his chin, and reaches up and forward to a round closed mitten fist at the end of the blue shape. Paint the SAME boy as cell 4 over each guide, covering the guide completely so no flat green or blue is left: same size, same outline as the guide, his body turned toward the right. The raised arm is always the BLUE one: it starts at the shoulder nearest the viewer and is painted ON TOP of his chest and shirt, with his far arm mostly hidden behind his body and only its low fist showing beside his hip. Cell 1 is casting a spell, feet on the ground; cell 2 is leaping into an uppercut with one knee raised. He is bald, with no face and no hair: keep his head bare exactly like the boy in cell 4. No arm, hand or fist ever crosses or touches his head. Each fist is one round closed mitten with no fingers. He has exactly two arms and two legs. Do not add any weapon, object, ground, dust, motion lines, text or extra figure. Leave cells 3 and 5 to 8 empty. Keep the background flat pure magenta #FF00FF and keep the grid lines. Style: exactly like the boy in cell 4 (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the attached picture. No text, no labels."
+  }
  }
 ]
 }
