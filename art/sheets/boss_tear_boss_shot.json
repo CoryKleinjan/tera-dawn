@@ -1,0 +1,39 @@
+{
+  "source": "art/source/boss_tear_boss_shot.png",
+  "save": false,
+  "out_dir": "art/build/boss_tear_boss_shot",
+  "cells": [
+    [
+      "shot_windup2",
+      "",
+      "shot2",
+      "",
+      "shot_recover"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.1624,
+  "detail": 3.66,
+  "grid": {
+    "rows": [
+      0,
+      540
+    ],
+    "cols": [
+      [
+        0,
+        416,
+        424,
+        836,
+        844,
+        1260
+      ]
+    ]
+  },
+  "key": [
+    0.25,
+    0.52
+  ],
+  "overrides": {}
+}

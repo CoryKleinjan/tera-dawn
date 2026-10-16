@@ -1,0 +1,60 @@
+{
+  "source": "art/source/boss_tear_boss_pounce.png",
+  "save": false,
+  "out_dir": "art/build/boss_tear_boss_pounce",
+  "cells": [
+    [
+      "pounce_windup2",
+      "",
+      "pounce2",
+      "",
+      "pounce_recover"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.1692,
+  "detail": 3.66,
+  "grid": {
+    "rows": [
+      0,
+      540
+    ],
+    "cols": [
+      [
+        0,
+        417,
+        424,
+        837,
+        844,
+        1260
+      ]
+    ]
+  },
+  "overrides": {
+    "pounce_windup2": {
+      "crop": [
+        0,
+        0,
+        10000,
+        473
+      ]
+    },
+    "pounce2": {
+      "crop": [
+        0,
+        0,
+        10000,
+        473
+      ]
+    },
+    "pounce_recover": {
+      "crop": [
+        0,
+        0,
+        10000,
+        473
+      ]
+    }
+  }
+}

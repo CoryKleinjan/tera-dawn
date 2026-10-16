@@ -1,0 +1,35 @@
+{
+  "source": "art/source/boss_tear_boss_slam.png",
+  "save": false,
+  "out_dir": "art/build/boss_tear_boss_slam",
+  "cells": [
+    [
+      "slam_windup2",
+      "",
+      "slam2",
+      "",
+      "slam_recover"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.1863,
+  "detail": 3.66,
+  "grid": {
+    "rows": [
+      0,
+      540
+    ],
+    "cols": [
+      [
+        0,
+        417,
+        423,
+        837,
+        843,
+        1260
+      ]
+    ]
+  },
+  "overrides": {}
+}

@@ -1,0 +1,84 @@
+{
+  "source": "art/source/boss_arcane_sentinel_charge.png",
+  "save": false,
+  "out_dir": "art/build/boss_arcane_sentinel_charge",
+  "cells": [
+    [
+      "charge_windup2",
+      "",
+      "charge2",
+      "",
+      "charge_recover"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.1896,
+  "detail": 4.57,
+  "grid": {
+    "rows": [
+      3,
+      540
+    ],
+    "cols": [
+      [
+        0,
+        416,
+        425,
+        835,
+        843,
+        1260
+      ]
+    ]
+  },
+  "overrides": {
+    "charge_windup2": {
+      "blank": [
+        [
+          0,
+          0,
+          410,
+          100
+        ]
+      ],
+      "crop": [
+        0,
+        0,
+        10000,
+        528
+      ]
+    },
+    "charge2": {
+      "blank": [
+        [
+          0,
+          0,
+          410,
+          100
+        ]
+      ],
+      "crop": [
+        0,
+        0,
+        10000,
+        528
+      ]
+    },
+    "charge_recover": {
+      "blank": [
+        [
+          0,
+          0,
+          410,
+          100
+        ]
+      ],
+      "crop": [
+        0,
+        0,
+        10000,
+        528
+      ]
+    }
+  }
+}
