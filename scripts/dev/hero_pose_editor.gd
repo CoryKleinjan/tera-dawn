@@ -16,12 +16,17 @@ extends Control
 ##   Delete or Backspace  delete the piece from this frame
 ##   C           copy the previous frame's place           R    reset the piece on this frame
 ##   Arrow Up/Down  move 0.5 px (with Shift: left/right)   Space  play the walk   Ctrl+S  save
+##   M           where shots start: with a weapon or off-hand picked, its muzzle goes under the
+##               mouse (every frame); with his fists picked, this frame's shooting hand does
+##               (data/hero/muzzles.tres, see MuzzleSetDef). Shown as a small blue dot.
 
 ## How big he is drawn, at most (smaller when the window is short).
 const MAX_ZOOM := 3.0
 ## Frames in the order they are stepped through (then the rest, A to Z).
 const ORDER := [&"idle1", &"idle2", &"walk1", &"walk2", &"walk3", &"jump", &"hurt", &"crouch", &"sit", &"faint"]
 const BG := Color(0.86, 0.83, 0.77)
+## Where shots start (M).
+const MUZZLE_DOT := Color(0.2, 0.5, 1.0, 0.9)
 const LAYER_NAMES := ["behind him", "under his top", "over his clothes", "over his hands"]
 ## Places he can wear something in the editor, as dropdowns (Equipment.PLACES_FOR).
 const PLACES := [&"weapon", &"shield", &"hat", &"top", &"bottom", &"shoes", &"gloves", &"cape"]
@@ -308,7 +313,12 @@ func _draw() -> void:
 		draw_texture(l.texture(_f()), -a)
 		if _same(l, _sel()):
 			draw_circle(Vector2.ZERO, 1.0 / k, Color(1, 0.2, 0.6, 0.8))  # what it turns around
+		var e := l.owner as EquipDef
+		if l.held() and HeroBody.MUZZLES.points.has(e.id):
+			draw_circle((HeroBody.MUZZLES.points[e.id] as Vector2) - a, 1.2 / k, MUZZLE_DOT)
 		draw_set_transform(Vector2.ZERO)
+	if HeroBody.MUZZLES.hands.has(_f()):
+		draw_circle(o + (HeroBody.MUZZLES.hands[_f()] as Vector2) * _zoom(), 1.2 * _zoom(), MUZZLE_DOT)
 
 ## The topmost piece with paint under `at` (screen position), or null.
 func _piece_at(at: Vector2) -> HeroBody.Layer:
@@ -370,6 +380,7 @@ func _unhandled_key_input(ev: InputEvent) -> void:
 		KEY_BRACKETLEFT: _resize(-(SIZE_FINE if ev.shift_pressed else SIZE_STEP))
 		KEY_BRACKETRIGHT: _resize(SIZE_FINE if ev.shift_pressed else SIZE_STEP)
 		KEY_SPACE: _play()
+		KEY_M: _set_muzzle(get_local_mouse_position())
 		KEY_S:
 			if ev.ctrl_pressed or ev.meta_pressed:
 				_save()
@@ -387,6 +398,24 @@ func _move_to(at: Vector2, deg: float) -> void:
 		var off := at - l.anchor(_f())
 		l.set_nudge(_f(), Vector4(off.x, off.y, deg, l.steps(_f())))
 		_changed(l.owner)
+
+## Puts where shots start under `at` (screen position): the picked held piece's muzzle, or
+## with his fists picked, this frame's shooting hand.
+func _set_muzzle(at: Vector2) -> void:
+	var l := _sel()
+	if l == null or not l.shows(_f()):
+		return
+	var px := (at - _origin()) / _zoom()
+	var muzzles: MuzzleSetDef = HeroBody.MUZZLES
+	if l.held():
+		var p := l.pin(_f())
+		var on := (px - Vector2(p.x, p.y)).rotated(-deg_to_rad(p.z)) / l.size(_f()) + l.anchor(_f())
+		muzzles.points[(l.owner as EquipDef).id] = Vector2(snappedf(on.x, 0.5), snappedf(on.y, 0.5))
+	elif l.part == &"hands":
+		muzzles.hands[_f()] = Vector2(snappedf(px.x, 0.5), snappedf(px.y, 0.5))
+	else:
+		return
+	_changed(muzzles)
 
 func _changed(res: Resource) -> void:
 	_dirty[res] = true

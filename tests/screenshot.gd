@@ -287,6 +287,51 @@ func _run() -> void:
 		Input.action_release("quick_1")
 		await _physics(5)
 		await _shot("ranged")
+	if only == "muzzles":
+		# Each ranged job's shot held still where it leaves, on the frame it leaves on (not in
+		# the full run): `_old` from the chest as it used to, `_new` from the bow, the pistol's
+		# barrel, the star in his hand or the wand's tip (HeroBody.muzzle).
+		await _go(&"greenbough", 900)  # a town: nothing to hit
+		for job: Array in [[&"archer", &"hunters_bow", &"", &"bow_shot"], [&"pirate", &"deckhand_scimitar", &"deckhand_pistol", &"broadside"],
+				[&"thief", &"footpad_dagger", &"footpad_star", &"star_scatter"], [&"mage", &"novice_wand", &"novice_tome", &"fire_burst"]]:
+			for c: Character in [ch, Game.me]:
+				c.job = Content.job(job[0])
+				c.equipment.take(&"weapon")
+				c.equipment.take(&"shield")
+				c.equipment.put(&"weapon", ItemStack.exact(Content.item(job[1])))
+				if job[2] != &"":
+					c.equipment.put(&"shield", ItemStack.exact(Content.item(job[2])))
+			_me().dirty_character = true
+			await _physics(150)  # the job's ribbon and light fade
+			var skill: SkillDef = Content.skill(job[3])
+			var weapon: EquipDef = Game.me.equipment.defs().get(&"weapon")
+			var move := HeroBody.LOOK.resolve(skill.animation, weapon.weapon_kind)
+			var frame: StringName = HeroBody.MUZZLES.frames.get(move, HeroBody.LOOK.frame_at(move, &"", 0.0))
+			var spec: Dictionary = HeroBody.LOOK.animations[move]
+			var ticks := int(((spec["frames"] as Array).find(frame) + 0.4) / float(spec["fps"]) * 60.0)
+			for way in ["old", "new"]:
+				p = world.player
+				_teleport(world, Vector2(900, world.map.ground_y))
+				p.face = 1
+				p.scene_pose = skill.animation
+				await _frames(2)
+				p.body._since = Engine.get_physics_frames() - ticks  # straight to the shot's frame
+				await _frames(1)
+				var feet := p.position
+				var from := feet + Vector2(0, -TDPlayer.CHEST) + Vector2(20, -2)
+				if way == "new":
+					from = feet + (p.body.muzzle(skill.animation, 1) as Vector2)
+				var shot := TDProjectile.create(world, skill.projectile, from, from + Vector2(400, 0), 100000, null, Callable())
+				world.fx_layer.add_child(shot)
+				shot._sync()
+				var at := world.stage.screen(feet, TDStage.Z_PLAYER)
+				await _shot("muzzle_%s_%s" % [job[0], way])
+				shot.queue_free()
+				p.scene_pose = &""
+				await _physics(5)  # so the next pose starts from its first frame
+				var img := Image.load_from_file("%s/muzzle_%s_%s.png" % [out, job[0], way])
+				var k := img.get_width() / TDWorld.VIEW.x
+				img.get_region(Rect2i(Vector2i((at + Vector2(-90, -150)) * k), Vector2i(Vector2(220, 170) * k))).save_png("%s/muzzle_%s_%s.png" % [out, job[0], way])
 	if only == "" or only == "control":
 		# Each job's monster-control skill in action, on a few monsters of a field's widest
 		# platform with monsters on it.
