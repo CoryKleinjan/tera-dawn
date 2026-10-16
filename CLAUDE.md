@@ -74,4 +74,4 @@ The full list is `docs/game-rules.md`. The ones most often broken:
 - No ammo for any weapon.
 - Characters, NPCs, ropes and ladders draw in front of land; no character or land shadows.
 - NPCs stand still at idle. Map names only at the top of the screen. Towns have no monsters.
-- 2-3 monster kinds per map, each kind in one zone; paths between towns stay Lv 10 or below.
+- 2-3 monster kinds per map, each kind in one zone; paths between towns stay gentle (tuning tier 10 or below).

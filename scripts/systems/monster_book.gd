@@ -1,11 +1,11 @@
 class_name MonsterBook
 extends RefCounted
 ## The Monster Book, like MapleStory's: a page for every monster with how many you've
-## beaten and how many of its cards you've found. Completed pages raise the book's level,
-## and each level past the first adds a point to every main stat.
+## beaten and how many of its cards you've found. Completed pages raise the book's rank,
+## and each rank past the first adds a point to every main stat.
 
-## Completed pages per book level.
-const PAGES_PER_LEVEL := 3
+## Completed pages per book rank.
+const PAGES_PER_RANK := 3
 
 ## monster id -> [kills, cards]
 var pages := {}
@@ -55,13 +55,13 @@ func completed() -> int:
 			n += 1
 	return n
 
-func level() -> int:
-	return 1 + completed() / PAGES_PER_LEVEL
+func rank() -> int:
+	return 1 + completed() / PAGES_PER_RANK
 
 ## What the book adds to the character's stats.
 func bonus() -> StatBlock:
 	var out := StatBlock.new()
-	var n := level() - 1
+	var n := rank() - 1
 	out.strength = n
 	out.dexterity = n
 	out.intelligence = n

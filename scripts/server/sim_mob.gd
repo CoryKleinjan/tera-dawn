@@ -54,6 +54,9 @@ const RAGE_SPEED := 1.2
 var map: MapInstance
 var index := 0
 var def: MonsterDef
+## How much stronger than its MonsterDef it is on this map (MonsterStrength): its HP, the
+## damage it deals and the Dawn Essence it gives are all this many times its own.
+var strength := 1.0
 var plat: Platform
 ## The stretch of `plat` it walks on: all of it unless its SpawnDef sets a patrol range.
 var area: Platform
@@ -112,10 +115,11 @@ var _hit_t := 0
 var _home_plat: Platform
 var _home_area: Platform
 
-func _init(m: MapInstance, i: int, d: MonsterDef, p: Platform, patrol: Platform = null) -> void:
+func _init(m: MapInstance, i: int, d: MonsterDef, p: Platform, patrol: Platform = null, power := 1.0) -> void:
 	map = m
 	index = i
 	def = d
+	strength = power
 	plat = p
 	area = patrol if patrol else p
 	_home_plat = plat
@@ -124,11 +128,19 @@ func _init(m: MapInstance, i: int, d: MonsterDef, p: Platform, patrol: Platform 
 	moves = MobMoves.new(self)
 	_reset()
 
+## Its HP on this map: its own, times its strength here.
+func max_hp() -> int:
+	return MonsterStrength.scaled(def.max_hp, strength)
+
+## The Dawn Essence it gives on this map: its own, times its strength here.
+func essence() -> int:
+	return MonsterStrength.scaled(def.essence, strength)
+
 func _reset() -> void:
 	plat = _home_plat
 	area = _home_area
 	var half := def.size.x / 2.0
-	health.reset(def.max_hp)
+	health.reset(max_hp())
 	_hp_seen = health.hp
 	position = Vector2(randf_range(area.x + half, area.x + area.w - half), plat.y)
 	dir = -1 if randf() < 0.5 else 1
@@ -552,7 +564,7 @@ func _step_shots() -> void:
 		shots.remove_at(i)
 		var p := map.players.get(s[0]) as SimPlayer
 		if p and p.hurtbox.rect_at(p.position).grow(SHOT_GROW).has_point(s[2]):
-			map.hurt_player(p, def, position.x, s[3])
+			map.hurt_player(p, def, position.x, s[3] * strength)
 
 ## What clients need to draw it: [x, y, dir, hp fraction (0..1000), flags, move (1 + its
 ## index in def.moves while it uses one, else 0)].

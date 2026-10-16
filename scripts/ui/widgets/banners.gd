@@ -4,8 +4,7 @@ extends Control
 ## advance to a new job, and a toast at the bottom for an achievement. It notices quests and
 ## jobs from your character as the server refreshes it; TDWorld.show_achievement calls
 ## `achievement`. Everything takes turns, one at a time and never over the map-name banner:
-## ribbons first, then toasts. Level ups have their own ribbon on the level up effect
-## (EffectDef.caption_art).
+## ribbons first, then toasts.
 
 ## How long a ribbon and a toast stay up, in frames.
 const RIBBON_TICKS := 150

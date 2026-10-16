@@ -128,13 +128,13 @@ update this page when one changes. Each zone's own look and music are in
 - Off-hand slot (once the Shield slot): Warriors and Beginners wear a shield, a Thief throwing
   stars (with a dagger in hand), a Magician a book, an Archer a quiver worn on the back, a Pirate a pistol (with a scimitar). Stars
   and pistols never run out. A Thief's dagger hits one monster and the stars hit a crowd; a
-  Pirate's fists hit one and the pistol a crowd.
+  Pirate's scimitar hits one and the pistol a crowd.
 
 ## Gear
 
 - Gear is drawn on the hero (see Hero) but has no icons yet: a slot shows an item's name in
   place of its icon. Each first job has a
-  starter armor set (hat, top, trousers, shoes; Lv 10, that job and its blends only), sold in its
+  starter armor set (hat, top, trousers, shoes; that job and its blends only), sold in its
   town's shop: Warrior Squire set (Emberforge), Magician Novice set (Lumewood), Thief Footpad set
   (Lanternfall), Archer Hunter's set (Greenbough), Pirate Deckhand set (Driftcove). Tests still
   bring their own plain gear (`tests/fixtures/gear`) for what the game doesn't have yet.
@@ -222,17 +222,22 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
   building pictures are its own, its NPCs have their own names and stand mid-platform, and its
   ladders stay clear of platform ends.
 
-## Monsters and levels
+## Monsters
 
 - Two or three monster kinds per map (a boss counts as one). Each kind belongs to one zone unless
   Cory says otherwise. A monster taken out of a zone stays in the files.
-- Every spawn is inside its map's level range; fix a mismatch by changing monster levels, not by
-  removing monsters.
-- The paths players walk between towns stay at Lv 10 or below the whole way, so new players can
-  reach every job town. Dead-end training branches climb in smooth steps to a boss past the top map.
+- No levels are shown anywhere: no "Lv." on monsters, bosses, maps, regions, the Monster Book,
+  quests, gear or trips. Monsters, maps and quests keep a hidden tuning tier (MonsterDef.level,
+  the "Lv. a-b" level_text) only so content tests keep the zones in order.
+- Monster strength: each kind's own HP, attack and Dawn Essence are what it is on the map nearest
+  a town that it lives on; on each map farther from the nearest town than that it is 15% stronger
+  (HP, attack and essence). Bosses keep their own numbers.
+- The paths players walk between towns stay gentle (tuning tier 10 or below) the whole way, so new
+  players can reach every job town. Dead-end training branches climb in smooth steps to a boss
+  past the top map.
 - A boss fights alone in an arena: a small map about 1.3 screens wide past its zone's top map, no
   other monsters. Beating it opens a one-way portal there home to the zone's town.
-- Monsters target a player who comes in sight (Lv 1-5 starters only up close) or hits them, and
+- Monsters target a player who comes in sight (the first fields' monsters only up close) or hits them, and
   give up a few seconds after losing sight. Every monster has one or two moves and every boss
   three different ones; each move winds up with a glow first so it can be dodged. Moves reuse
   the monster's own frames (the attack pose plus motion).
@@ -244,9 +249,7 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
   two-frame strike and a recovery pose; they roar an intro when they first see a player and
   roar again at their second wind; their defeat is a painted fall (hit pause, collapse, embers
   fading) rather than a quick poof. Molten King has this first; the others follow as painted.
-- Max level is 100; monsters and maps reach about Lv 30 so far. Monster HP is 40% lower than first
-  tuned and EXP needed per level is halved (monster and quest EXP unchanged), so early levels go
-  fast; about 40 hours to Lv 35 was only a starting reference.
+- Monster HP is 40% lower than first tuned, so fights stay quick.
 
 ## UI
 
@@ -286,9 +289,9 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
 ## Story
 
 - The world is Morrowmere. The main story (Tera and the Dawn curse) stays hidden until well past
-  today's Lv 35 content: no in-game text names Tera's Dawn, the curse or the other dawns before
+  today's content: no in-game text names Tera's Dawn, the curse or the other dawns before
   the story reveals them, and nobody knows what Dawnshards really are at first. The tears are
-  only called that (a tear or rip in the air) from the Lv 10 job test on.
+  only called that (a tear or rip in the air) from the first Job Test on.
 - Most quests and NPCs have nothing to do with the story. Cory reviews every story character,
   quest, cutscene and line before it goes in the game.
 - New characters wake on Daybreak Shore, the tutorial beach before Dawnrise Village. A girl
@@ -296,7 +299,7 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
   hint shows at the bottom of the screen for each step. Her last quest opens a one-way portal
   to the village, where she stands by Elder Rowan as "Rowan's Granddaughter". Her name is never
   shown. A faint white glow sits out on the water; nobody mentions it.
-- At Lv 10 each job tutor gives a Job Test before advancing: a short course on the town's Trial
+- Each first-job tutor gives a Job Test before advancing: a short course on the town's Trial
   Ground, fought alone (every player gets their own copy, even in co-op). At the far end a tear
   opens and one boss, the same for all five jobs (a hulking beast of pale starlit stone), steps
   out. Beating it and handing the test in makes you that job; the tutor sends you to Archmage
