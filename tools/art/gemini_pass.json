@@ -22549,6 +22549,52 @@
    "refs": [],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds a painted dark brown leather jerkin with charcoal grey short sleeves, seen from behind, over a flat bright green (#00FF00) shape, on a flat magenta background. Cells 2 to 8 are empty and must stay empty. At the end of each sleeve, a flat grey patch carries that sleeve a little further down its arm, over the elbow: paint both patches as part of the same charcoal grey sleeves, with the same cloth, soft folds, shading and thin dark plum-brown outline, so each sleeve reaches past the elbow in one piece with no seam or band. Keep everything else exactly as it is: the jerkin's outline, shape, size, position, colours and every detail. Leave every green pixel flat pure #00FF00 exactly as it is and the background flat pure magenta #FF00FF. Do not paint any skin, hand, head or other clothing, do not add anything, and leave empty cells empty. Keep the grid lines. No text, no labels."
   }
+ },
+ {
+  "id": "mshero_archer_hood_b10f",
+  "prompts": null,
+  "batch": null,
+  "with": null,
+  "refs": [],
+  "save": "mshero_archer_hood_b10f.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Hero pose review' (Cory 20:21Z 'the archer hood isnt supposed to have shoulder parts attached to the hood', 'THIS IS A RULE: NONE OF THE HELMETS SHOULD EVER HAVE SHOULDER PARTS ATTACHED'): the Archer hood's front (idle1, idle2, walk1, walk2, jump, walk3) paintings without the cape on its bottom edge; the hood ends at his neck",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b10_hood_front_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 6 each hold the flat bright green (#00FF00) shape of a small boy, facing right in a slight three-quarter view, seen from the FRONT, wearing a painted green hood. Cells 7 and 8 are empty and must stay empty. Each hood has a short cape joined to its bottom edge that hangs below his chin and spreads over his neck, shoulders and chest, with a notch at the front. Repaint each hood WITHOUT that cape: the hood covers only his head and ends in a neat, rounded hem that closes around his face and neck just under his chin, no wider than his head, so no part of it lies on his shoulders or chest. Where the cape was, show the flat pure #00FF00 green of his body, and flat pure magenta #FF00FF outside his body. Keep the open space around his face inside the hood as flat green, exactly as it is. Keep everything else about each hood exactly as it is: its shape around his head, its pointed tip, size, position, tilt, colour, folds, shading and thin dark outline. Leave every green pixel the hood does not cover flat pure #00FF00 exactly as it is, and the background flat pure magenta #FF00FF. Do not paint any face, hair, skin, body or other clothing, do not move, resize or redraw any green shape, do not add any figure or any other piece, and leave empty cells empty. Style: exactly the painting style of the hoods already in the base picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_archer_hood_b10b",
+  "prompts": null,
+  "batch": null,
+  "with": null,
+  "refs": [],
+  "save": "mshero_archer_hood_b10b.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Hero pose review' (Cory 20:21Z 'the archer hood isnt supposed to have shoulder parts attached to the hood', 'THIS IS A RULE: NONE OF THE HELMETS SHOULD EVER HAVE SHOULDER PARTS ATTACHED'): the Archer hood's back (rope1, rope2, rope_hold, ladder1, ladder_hold, back) paintings without the cape on its bottom edge; the hood ends at his neck",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b10_hood_back_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 6 each hold the flat bright green (#00FF00) shape of a small boy seen from BEHIND, his back to the viewer (climbing in cells 1 to 5, standing in cell 6), wearing a painted green hood seen from the back. Cells 7 and 8 are empty and must stay empty. Each hood has a short cape joined to its bottom edge that flares out below his head over the back of his neck, his shoulders and his upper back. Repaint each hood WITHOUT that cape: the hood covers only his head and ends in a neat, rounded hem at the back of his neck, no wider than his head, so no part of it lies on his shoulders or back. Where the cape was, show the flat pure #00FF00 green of his body, and flat pure magenta #FF00FF outside his body. Keep everything else about each hood exactly as it is: its shape around his head, its pointed tip, size, position, tilt, colour, folds, shading and thin dark outline. Leave every green pixel the hood does not cover flat pure #00FF00 exactly as it is, and the background flat pure magenta #FF00FF. Do not paint any face, hair, skin, body or other clothing, do not move, resize or redraw any green shape, do not add any figure or any other piece, and leave empty cells empty. Style: exactly the painting style of the hoods already in the base picture. Keep the grid lines. No text, no labels."
+  }
  }
 ]
 }
