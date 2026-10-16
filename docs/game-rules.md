@@ -149,6 +149,13 @@ update this page when one changes. Each zone's own look and music are in
 - Map names show only at the top of the screen; nothing labels a map in the world.
 - Every piece of land is walkable: no arches or floating rock islands, nothing that looks like
   ground but isn't. No two exits of a map lead to the same map. Maps can be wide and multi-level.
+- A zone's fields are a web you can loop through, stacked like Hollow Knight's (canopy above,
+  roots below), each with 2 to 4 exits; Greenbough is the pilot. Shortcuts open one way until
+  you find them, then work both ways; a breakable wall opens one.
+- Every field has two secret ledges only a job's movement skill reaches: a high one (Flash Jump,
+  Blink) and a far one across a gap (every movement skill). Each holds a chest a character opens
+  once (shards, potions, a 60% scroll, a local Monster Book card). Secret ledges and shortcuts
+  stay off the minimap and world map.
 - Characters, NPCs, ropes and ladders draw in front of land; characters cast no shadows. Portals draw in front of land and
   scenery, behind ropes, NPCs, monsters and players; no NPC stands on a portal.
 - Portals are a blue-white light pillar on the ground, at exits and doorways, 70% opaque.
@@ -170,6 +177,9 @@ update this page when one changes. Each zone's own look and music are in
   buildings.
 - Backdrops: one high-quality, sharp picture for the whole background, not strips. Dawnharbor's 4K
   panorama is the template. Clouds drift in front of it.
+- Fields look clean, like Hollow Knight's (Greenbough is the pilot): land with one clean grassy edge
+  over plain earth, no tufts or plants strewn along it, few floor plants, and dark leaves framing
+  the screen's top corners. A breakable wall is gone once smashed.
 - Sparse ground scenery, each piece wholly on its platform; few lanterns, never overlapping buildings,
   NPCs or scenery.
 - No on-screen controls or how-to-play text anywhere: the tutorial teaches new characters the keys.
@@ -231,7 +241,8 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
   the "Lv. a-b" level_text) only so content tests keep the zones in order.
 - Monster strength: each kind's own HP, attack and Dawn Essence are what it is on the map nearest
   a town that it lives on; on each map farther from the nearest town than that it is 15% stronger
-  (HP, attack and essence). Bosses keep their own numbers.
+  (HP, attack and essence). Shortcuts don't count toward that distance. Bosses keep their own
+  numbers.
 - The paths players walk between towns stay gentle (tuning tier 10 or below) the whole way, so new
   players can reach every job town. Dead-end training branches climb in smooth steps to a boss
   past the top map.

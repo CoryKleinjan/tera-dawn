@@ -1,8 +1,9 @@
 extends TestCase
 ## Everywhere on a map can be walked to: every platform, rope, portal, NPC and monster
 ## spawn is reachable with the hero's own jump (see map_reach.gd) from where players
-## arrive; land-shaped art is a real platform, never background scenery, and stands on the
-## floor (no floating rock islands or arches); and no two exits of a map lead to the same place.
+## arrive, and every secret ledge only with a job's movement skill; land-shaped art is a
+## real platform, never background scenery, and stands on the floor (no floating rock
+## islands or arches); and no two exits of a map lead to the same place.
 
 const Scan := preload("res://tests/content/content_scan.gd")
 const MapReach := preload("res://tests/content/map_reach.gd")
@@ -13,6 +14,8 @@ func test_everything_on_every_map_can_be_reached() -> void:
 		var reach := MapReach.new(m, MapReach.arrivals_of(m))
 		for i in m.platforms.size():
 			var p := m.platforms[i]
+			if p.secret:
+				continue # test_secret_ledges_need_a_movement_skill
 			check(reach.platform_reached(i + 1), "%s: platforms[%d] (x %d-%d, y %d) can't be reached" % [w, i, p.x, p.x + p.width, p.y])
 		for i in m.climbables.size():
 			var c := m.climbables[i]
@@ -23,6 +26,30 @@ func test_everything_on_every_map_can_be_reached() -> void:
 			check(reach.platform_reached(m.npcs[i].platform), "%s: npcs[%d] can't be reached" % [w, i])
 		for i in m.spawns.size():
 			check(reach.platform_reached(m.spawns[i].platform), "%s: spawns[%d] can't be reached" % [w, i])
+
+## A secret ledge (PlatformDef.secret) is out of reach of a plain jump and every rope, but a
+## job's movement skill gets there in one go (Flash Jump, Blink, Charge, Rolling Dash or
+## Backstep Leap, at level 1). Nothing a player needs (a portal, an NPC, a spawn, a rope) stands
+## on one; a chest may.
+func test_secret_ledges_need_a_movement_skill() -> void:
+	var secrets := 0
+	for m: MapDef in Content.maps.values():
+		if not m.platforms.any(func(p: PlatformDef) -> bool: return p.secret):
+			continue
+		var w := Scan.where(m)
+		var reach := MapReach.new(m, MapReach.arrivals_of(m))
+		for i in m.platforms.size():
+			var p := m.platforms[i]
+			if not p.secret:
+				continue
+			secrets += 1
+			var at := "%s: secret platforms[%d] (x %d-%d, y %d)" % [w, i, p.x, p.x + p.width, p.y]
+			check(not reach.platform_reached(i + 1), at + " can be reached without a movement skill")
+			check(not reach.skills_reaching(i + 1).is_empty(), at + " can't be reached with any movement skill")
+			var on := func(thing: Variant) -> bool: return thing.platform == i + 1
+			check(not m.portals.any(on) and not m.npcs.any(on) and not m.spawns.any(on), at + " holds a portal, NPC or spawn")
+			check(not m.climbables.any(func(c: ClimbableDef) -> bool: return p.x <= c.x and c.x <= p.x + p.width and absf(c.top - p.y) < 1.0), at + " has a rope up to it")
+	check(secrets > 0, "no map has a secret ledge")
 
 func test_land_art_is_never_scenery() -> void:
 	var land := {}

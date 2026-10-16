@@ -23222,6 +23222,196 @@
    ],
    "text": "The base picture is an EMPTY sheet of 12 cells (3 rows of 4, numbered left to right, then top to bottom) on a flat magenta background. Paint a NEW boss monster for the game, \"Grotto Tusker\": a huge old sea-cave boar: wet dark slate-blue hide crusted with pale barnacles and small shells, dripping strands of dark green kelp in its mane, long yellowed tusks, a pink snout, small pale eyes and pink cheek blush, with an old iron smuggler's lantern glowing warm yellow, hanging from a short rope tied around one tusk. The first attached picture shows a smaller, ordinary boar from the same game: use it ONLY for the painting style (smooth soft painted shading, warm light from the upper left, thin dark plum-brown outline), the cute chunky body shape and the face style; do NOT copy its colours, coat or markings. \"Grotto Tusker\" is bigger, older and heavier than that boar, clearly a chief. Paint it once in every cell, in the pose given for that cell, always with exactly the same look, colours and details. It always faces RIGHT, seen from the side, its face turned to the right. Poses stand on one shared ground line near the bottom of each cell. In EVERY one of the 12 cells the old iron lantern hangs from a short rope tied around its near tusk, glowing warm yellow; never leave the lantern out of a cell. Draw NO shadow, puddle, ground patch or floor under it: only the monster on flat magenta. Write NO pose names, labels or captions under or above the cells. Draw it SMALLER than its cell: it fills only about 75% of the cell's width, centred, with a wide magenta margin on every side, its snout, tusks and tail fully inside the cell. Cell 1, IDLE 1: standing on all four legs, calm and heavy, head slightly low. Cell 2, IDLE 2: the same stance breathing in, chest and back slightly raised. Cell 3, MOVE 1: walking forward, front left leg and back right leg forward. Cell 4, MOVE 2: walking, legs passing under its body. Cell 5, MOVE 3: walking forward, front right leg and back left leg forward. Cell 6, ATTACK WIND-UP: head lowered with tusks forward, body pulled back over its hind legs, about to strike. Cell 7, ATTACK STRIKE: thrusting its head forward and up, tusks first, in a hard goring jab. Cell 8, SPECIAL: tossing its head up with a mighty snort, the lantern swinging up. Cell 9, HURT: flinching back with its eyes squeezed shut, head pulled away. Cell 10, ENRAGED: standing in a wide, low furious stance, its eyes glowing fierce and its lantern blazing bright. Cell 11, DEFEATED 1: staggering, legs wobbling, head drooping, eyes half closed. Cell 12, DEFEATED 2: lying on its side flat on the ground line, eyes closed, legs limp. Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
   }
+ },
+ {
+  "id": "greenbough_fields_land",
+  "prompts": null,
+  "batch": "Greenbough fields test: earth ledges, raised ground and its wall (edit)",
+  "with": null,
+  "refs": [],
+  "save": "greenbough_fields_land.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Game review' batch 9 (Greenbough map web, Cory OK'd the sketch 18:20Z): small test of the new field look before any full batch. Cory picked earth ledges, dark leaf silhouettes in the top corners and keeping the village street (19:52Z 'go with your picks'). Guide: a floating ledge (cut into cap_left, middle_a, middle_b, cap_right for the field biome) and a raised block (its square ends become terrace_left/right; a square of its wall becomes ground_side, the floor's rock band and the raised ridges' walls). Base 2400x1600, exactly 3:2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/greenbough-fields/bases/land_base.png",
+   "refs": [],
+   "text": "The first image is a guide for a sheet of ground pieces for my 2D side-scrolling game, on a flat magenta #FF00FF background. Flat colours show where each piece goes: green is grass, dark brown is earth, the darker brown below is an earth wall, and the dark line is the outline. Paint over the guide as finished ground for Greenbough Wilds, a sunlit hunter's forest of giant oaks, keeping every shape's position, size and outline EXACTLY, so the pieces still line up and join seamlessly when the sheet is cut apart. TOP: one long floating ledge of mossy forest ground (it will be cut into a left end, two middle pieces and a right end that join side by side). Its top is ONE clean edge of short fresh grass and moss with a few small grass tufts, clover leaves and tiny white flowers poking up along it, the grass curling a little over the edge of the earth. Under the grass is a dark bark-brown earth body with a few roots and small stones, kept simple with little detail inside so it reads at a glance as solid ground. A crisp dark outline runs all round it, a few short roots hang under its bottom edge, and its two ends are rounded. BOTTOM: a raised block of the same ground: the very same grassy edge and earth band along its top, with SQUARE ends, then below the band's lower edge a wall of slightly darker plain earth with a few small roots and pebbles, running straight down off the bottom of the image between straight vertical outlined sides. Keep the wall's texture even across its whole area, with no big features, bright spots or shading toward its edges, so a square of it can repeat as a tile. Style: clean, simple and strongly readable shapes with little clutter, like the hand-made world of Hollow Knight, but in my game's own warm painted style and bright daylight: soft cel-painted shading with clear light and shadow shapes, bright highlights on the lit edges from the upper left, rich warm saturated colours, a bold dark brown outline, and hand-painted texture at a fairly chunky brush scale. Palette: fresh yellow-green grass with pale yellow-green light (#f4ffd0) on its tips, leaf-green moss (#a7d499), dark bark-brown earth. Seen exactly from the side: the grass is a band along the top edge, never a lawn seen from above, and nothing runs back into the picture. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. No magenta or pink inside the art; outside the pieces the background stays flat pure magenta #FF00FF. Do not draw any characters, animals or birds."
+  }
+ },
+ {
+  "id": "greenbough_fields_pieces",
+  "prompts": null,
+  "batch": "Greenbough fields test: hollow trunk, root wall, secret chest (edit)",
+  "with": null,
+  "refs": [],
+  "save": "greenbough_fields_pieces.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": true,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Game review' batch 9 (Greenbough map web, Cory OK'd the sketch 18:20Z): small test of the new field look before any full batch. Cory picked earth ledges, dark leaf silhouettes in the top corners and keeping the village street (19:52Z 'go with your picks'). Guide: the hollow trunk (the trunk shortcut's ends in Deep Canopy and Mossy Glade; the portal glows in its opening), the root wall whole/broken (BreakableDef whole/broken at Elder's Root) and the secret chest closed/open (the ten secret-ledge chests). Base 2400x1600, exactly 3:2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/greenbough-fields/bases/pieces_base.png",
+   "refs": [],
+   "text": "The first image is a guide on a flat magenta #FF00FF background showing five objects for my 2D side-scrolling game as flat colour shapes. Paint each one over its shape as a finished object for Greenbough Wilds, a sunlit hunter's forest of giant oaks, keeping each shape's position, size and outline EXACTLY. 1) LEFT, the hollow trunk: the lower part of a giant old oak, broken off high up into jagged splintered wood, its thick bark mossy, with a few small ferns and mushrooms growing on the lower bark, kept inside the trunk's shape. The dark arch at its bottom is a tall hollow opening into the trunk, deep dark inside, big enough for a person to step into, framed by the rim of the bark. 2) MIDDLE TOP, the root wall: a dense wall of thick tangled oak roots woven tightly together, with packed dark earth and moss between them, blocking a low passage. 3) MIDDLE BOTTOM, the SAME root wall broken open: the identical outside shape, size, colours and roots, but its middle smashed through, with snapped root ends and loose earth round a dark hole where the dark arch is. 4) RIGHT TOP, a small treasure chest of honey oak planks with dark iron bands and corners, a domed lid, a little brass lock and a carved leaf on the front, a touch of moss on it. 5) RIGHT BOTTOM, the SAME chest opened: its box exactly as in the closed chest, and its lid swung open upward so it stands up behind the box, seen from the front, showing the lid's inner side. Style: clean, simple and strongly readable shapes with little clutter, like the hand-made world of Hollow Knight, but in my game's own warm painted style and bright daylight: soft cel-painted shading with clear light and shadow shapes, bright highlights on the lit edges from the upper left, rich warm saturated colours, a bold dark brown outline, and hand-painted texture at a fairly chunky brush scale. Every object is a flat front view at eye level: no top surface shows (no lid top, no stump top face, nothing seen from above), and each stands on ONE flat straight bottom edge with no ground, grass or shadow under it. Nothing glows. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. No magenta or pink inside the art; outside the objects the background stays flat pure magenta #FF00FF. Do not draw any characters, animals or birds."
+  }
+ },
+ {
+  "id": "greenbough_fields_leaves",
+  "prompts": null,
+  "batch": "Greenbough fields test: dark leaf silhouettes for the top corners (edit)",
+  "with": null,
+  "refs": [],
+  "save": "greenbough_fields_leaves.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Game review' batch 9 (Greenbough map web, Cory OK'd the sketch 18:20Z): small test of the new field look before any full batch. Cory picked earth ledges, dark leaf silhouettes in the top corners and keeping the village street (19:52Z 'go with your picks'). Guide: the screen at 16:9 with a leaf cluster in each top corner, cut into a top-left and a top-right piece drawn over the view. Base 2400x1350, exactly 16:9.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/greenbough-fields/bases/leaves_base.png",
+   "refs": [],
+   "text": "The first image is a guide for a frame of foreground leaves for my 2D side-scrolling game, on a flat magenta #FF00FF background. The dark green shapes in the two top corners are leaves hanging into the top corners of the screen very close to the camera, the way Hollow Knight frames its screen with dark foreground plants. Paint over the shapes as two clusters of big broad oak and forest leaves with a few twigs, and one hanging vine on the right, keeping their positions, sizes and overall shapes. They are dark near-silhouettes: deep blackish green (#0e1f16 to #1d3a28), with only a faint lighter green rim where sunlight from behind catches their edges and a few soft veins; simple clean shapes with crisp edges, no bright colours and almost no inner detail, so they frame the picture without drawing the eye. Both clusters run off the top edge, the left one also off the left edge and the right one off the right edge. The rest of the image stays flat pure magenta #FF00FF, with no glow, haze or shadow on it. No magenta or pink inside the leaves. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. Do not draw any characters, animals or birds."
+  }
+ },
+ {
+  "id": "greenbough_fields_glade_backdrop",
+  "prompts": null,
+  "batch": "Greenbough fields test: Mossy Glade backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "greenbough_fields_glade_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-16 thread 'Game review' batch 9 (Greenbough map web, Cory OK'd the sketch 18:20Z): small test of the new field look before any full batch. Cory picked earth ledges, dark leaf silhouettes in the top corners and keeping the village street (19:52Z 'go with your picks'). Guide: one picture behind the whole map (BackdropLayerDef PICTURE, far back) replacing the strips, like the towns' panoramas. Base 4096x2304, exactly 16:9: covers Mossy Glade (3200x1400) on 16:9 and 16:10 screens.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/greenbough-fields/bases/glade_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Mossy Glade, the brightest map of Greenbough Wilds, a sunlit hunter's forest of giant oaks in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and hand-painted texture (bark, moss, leaves). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: a wide sunlit glade deep inside a forest of GIANT oak trees. Huge straight oak trunks of different widths stand at the sides and across the picture, the nearest in the middle distance, others fading back layer by layer into soft leaf-green mist. High above, broad leafy canopies arch over the top of the picture, with a big opening in the middle where pale yellow sky glows through. Strong golden-green light shafts slant down through the opening into the glade, and small green-gold motes float in them. Far back under the trees, soft mossy ground and ferns. Colours: deep green at the very top (#173a29), pale yellow where the sky shows (#fff1b0), yellow-green sunlight (#f4ffd0), leaf-green mist (#a7d499). Strict rules: 1) Side-on view at eye level, every trunk straight up and down. 2) No people, characters, buildings, treehouses, bridges, animals or birds. No clouds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft misty forest floor far away, with nothing close to the viewer (no grass blades, roots, rocks, logs or leaves up front); the closest trunks are in the middle distance. No level branches, ledges or mounds that look like places to stand. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
+ },
+ {
+  "id": "greenbough_fields_thornwood_backdrop",
+  "prompts": null,
+  "batch": "Greenbough fields: Thornwood backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "greenbough_fields_thornwood_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-16 thread 'Game review' batch 9: the new Greenbough field look on Thornwood after Cory saw the Mossy Glade test. One picture behind the whole map (BackdropLayerDef PICTURE, depth 300) in place of the greenwood strips, written like greenbough_fields_glade_backdrop, in this field's colours (zone-vibes.md, its map's look). Base 4096x2304, exactly 16:9: covers every Greenbough field (checked against content_backdrop_test's rules).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/greenbough-fields/bases/thornwood_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Thornwood, a dim, tangled stretch of Greenbough Wilds, a hunter's forest of giant oaks, in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and hand-painted texture (bark, moss, leaves). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: a dim, overgrown part of the giant oak forest, choked with brambles. Gnarled oak trunks stand close together at different distances, the nearest in the middle distance, others fading back layer by layer into thick olive-green fog. Great arching bramble stems with long sharp thorns loop up and down between the far trunks. The canopy above is dense and dark, letting only a few pale patches of light through. Muted, earthy colours with darker shadows: dark olive at the very top (#2b3320), dull moss green (#55663f), olive fog (#6a8a5a), a few pale yellow-green glimmers of light (#d8e0a8). Wary and tangled, but still clearly painted and readable, never black. Strict rules: 1) Side-on view at eye level, every trunk straight up and down. 2) No people, characters, faces, buildings, treehouses, bridges, animals or birds. No clouds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft misty forest floor far away, with nothing close to the viewer (no grass blades, roots, rocks, logs or leaves up front); the closest trunks are in the middle distance. No level branches, ledges or mounds that look like places to stand. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
+ },
+ {
+  "id": "greenbough_fields_deep_canopy_backdrop",
+  "prompts": null,
+  "batch": "Greenbough fields: Deep Canopy backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "greenbough_fields_deep_canopy_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-16 thread 'Game review' batch 9: the new Greenbough field look on Deep Canopy after Cory saw the Mossy Glade test. One picture behind the whole map (BackdropLayerDef PICTURE, depth 300) in place of the greenwood strips, written like greenbough_fields_glade_backdrop, in this field's colours (zone-vibes.md, its map's look). Base 4096x2304, exactly 16:9: covers every Greenbough field (checked against content_backdrop_test's rules).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/greenbough-fields/bases/deep_canopy_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Deep Canopy, the darkest part of Greenbough Wilds, deep under a closed roof of giant oak leaves, in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and hand-painted texture (bark, moss, leaves). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: a tall, dark green space under a closed canopy. Huge straight oak trunks rise through the whole picture at different distances, the nearest in the middle distance, the far ones melting into deep green mist. The leaves close overhead into a dark roof. A few narrow beams of warm golden light pierce down from small gaps in the leaves, slanting across the picture and catching small floating motes. Colours: near-black green at the very top (#06140e), deep forest green (#143820), green mist (#3a5a3a), warm golden beams (#fff2b3). Dark and hushed, but still clearly painted and readable, never black. Strict rules: 1) Side-on view at eye level, every trunk straight up and down. 2) No people, characters, faces, buildings, treehouses, bridges, animals or birds. No clouds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft misty forest floor far away, with nothing close to the viewer (no grass blades, roots, rocks, logs or leaves up front); the closest trunks are in the middle distance. No level branches, ledges or mounds that look like places to stand. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
+ },
+ {
+  "id": "greenbough_fields_old_oak_heights_backdrop",
+  "prompts": null,
+  "batch": "Greenbough fields: Old Oak Heights backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "greenbough_fields_old_oak_heights_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-16 thread 'Game review' batch 9: the new Greenbough field look on Old Oak Heights after Cory saw the Mossy Glade test. One picture behind the whole map (BackdropLayerDef PICTURE, depth 300) in place of the greenwood strips, written like greenbough_fields_glade_backdrop, in this field's colours (zone-vibes.md, its map's look). Base 4096x2304, exactly 16:9: covers every Greenbough field (checked against content_backdrop_test's rules).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/greenbough-fields/bases/old_oak_heights_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Old Oak Heights, high up among the oldest oaks of Greenbough Wilds in warm afternoon light, in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and hand-painted texture (bark, moss, leaves). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: high in the treetops of giant ancient oaks. Enormous old trunks and their upper limbs rise at different distances, wrapped in moss and ivy, the nearest in the middle distance, others fading back into soft green-gold haze. Between them are glimpses of more giant treetops far away and a warm afternoon sky. Golden light shafts slant through the leaves, with small motes floating in them. Colours: blue-green at the very top (#1a3d52), sage haze (#6b9980), warm golden light (#ffe099), soft green haze (#859966). Strict rules: 1) Side-on view at eye level, every trunk straight up and down. 2) No people, characters, faces, buildings, treehouses, bridges, animals or birds. No clouds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft haze and the tops of far-away trees below, with nothing close to the viewer (no branches, leaves or bark up front); the closest trunks are in the middle distance. No level branches, ledges or platforms that look like places to stand. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
+ },
+ {
+  "id": "greenbough_fields_elder_root_backdrop",
+  "prompts": null,
+  "batch": "Greenbough fields: Elder's Root backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "greenbough_fields_elder_root_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-16 thread 'Game review' batch 9: the new Greenbough field look on Elder's Root after Cory saw the Mossy Glade test. One picture behind the whole map (BackdropLayerDef PICTURE, depth 300) in place of the greenwood strips, written like greenbough_fields_glade_backdrop, in this field's colours (zone-vibes.md, its map's look). Base 4096x2304, exactly 16:9: covers every Greenbough field (checked against content_backdrop_test's rules).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/greenbough-fields/bases/elder_root_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Elder's Root, the deepest and most sacred place of Greenbough Wilds, where an ancient tree's roots reach down into the earth, in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and hand-painted texture (bark, moss, leaves). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: a vast, quiet hollow among the roots of one ancient giant tree, in a golden late-afternoon glow. Enormous roots, wider than houses, twist steeply down through the picture at different distances, the nearest in the middle distance, the far ones fading back into warm golden haze. Soft light glows down from above between the roots, and small gold motes drift in the air. Reverent and calm. The tree has no face. Colours: deep warm brown at the very top (#3a2e1a), amber glow (#f0b060), pale gold light (#ffd890), warm root brown (#8a6a3a). Strict rules: 1) Side-on view at eye level; the roots run steeply up and down, never level. 2) No people, characters, faces, buildings, treehouses, bridges, animals or birds. No clouds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft golden haze far away, with nothing close to the viewer (no roots, rocks or leaves up front); the closest roots are in the middle distance. No level roots, ledges or mounds that look like places to stand. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
  }
 ]
 }

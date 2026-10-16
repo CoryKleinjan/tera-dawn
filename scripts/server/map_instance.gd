@@ -18,6 +18,8 @@ var players := {}
 var mobs: Array[SimMob] = []
 ## drop id -> SimDrop
 var drops := {}
+## The chests and walls players break (MapDef.breakables), in the map's order.
+var breakables: Array[SimBreakable] = []
 ## Each monster's record as last sent in a snapshot, so unchanged ones can be left out.
 var _sent_mobs: Array[PackedByteArray] = []
 ## peer -> the player info (info()) last sent to this map's players.
@@ -45,6 +47,9 @@ func _init(s: TDServer, map_def: MapDef) -> void:
 			m.sleep()
 			m.from_tear = true
 		mobs.append(m)
+	for i in def.breakables.size():
+		var b := def.breakables[i]
+		breakables.append(SimBreakable.new(i, b, layout.platforms[b.platform].y))
 
 func step() -> void:
 	tick += 1
@@ -68,9 +73,10 @@ func step() -> void:
 
 # ---------- players coming and going ----------
 
-func add_player(p: SimPlayer, x: float) -> void:
+## Puts the player on this map at `x`, standing on platform `platform` (0 is the floor).
+func add_player(p: SimPlayer, x: float, platform := 0) -> void:
 	p.map = self
-	p.position = Vector2(x, layout.platforms[0].y)
+	p.position = Vector2(x, layout.platforms[platform].y)
 	p.climbing = false
 	p.since_move = 0
 	p.hurt_here = false
@@ -84,6 +90,8 @@ func remove_player(p: SimPlayer) -> void:
 	_sent_info.erase(p.peer)
 	for m in mobs:
 		m.forget(p.peer)
+	for b in breakables:
+		b.forget(p.peer)
 
 ## Everything a client needs on arriving: monsters and items as they are right now, and
 ## whether the tear is open.
@@ -179,6 +187,7 @@ const MELEE_KNOCKBACK := 1.6
 ## Resolves a player's skill against the monsters in front of them (or above or below them,
 ## for an aimed attack, or all round for one that hits `around`). Returns how many were hit.
 func use_skill(p: SimPlayer, skill: SkillDef, aim := Hitbox.Aim.AHEAD) -> int:
+	_strike_breakables(p, skill, aim)
 	if skill.ambush > 0.0:
 		_ambush(p, skill)
 	if skill.slam:
@@ -263,12 +272,18 @@ func _slam(p: SimPlayer, skill: SkillDef) -> void:
 		if not m.dead and area.intersects(m.hurtbox.rect_at(m.body_position())):
 			m.slam_down()
 
-## The monsters a skill hits, nearest first: those in its area, or for a splash, the nearest
-## one in its area and every monster within `splash` of it.
-func _targets(p: SimPlayer, skill: SkillDef, aim: Hitbox.Aim) -> Array[SimMob]:
+## Where a skill reaches: ahead of the player (or above or below them, for an aimed attack),
+## or both ways for one that hits `around`.
+static func _skill_area(p: SimPlayer, skill: SkillDef, aim: Hitbox.Aim) -> Rect2:
 	var area := Hitbox.aimed_area(p.position, p.face, aim, skill.reach, skill.height)
 	if skill.around:
 		area = area.merge(Hitbox.aimed_area(p.position, -p.face, aim, skill.reach, skill.height))
+	return area
+
+## The monsters a skill hits, nearest first: those in its area, or for a splash, the nearest
+## one in its area and every monster within `splash` of it.
+func _targets(p: SimPlayer, skill: SkillDef, aim: Hitbox.Aim) -> Array[SimMob]:
+	var area := _skill_area(p, skill, aim)
 	var targets: Array[SimMob] = []
 	for m in mobs:
 		if m.dead or skill.slam and m.controllable() and not m.grounded():
@@ -329,6 +344,42 @@ func kill_mob(m: SimMob, killer: SimPlayer) -> void:
 	for i in loot.size():
 		var x := clampf(m.position.x + (i - (loot.size() - 1) / 2.0) * DROP_SPACING, m.plat.x + 8, m.plat.x + m.plat.w - 8)
 		spawn_drop(loot[i][0], loot[i][1], null, DropFlight.create(m.position + Vector2(0, -20), m.plat.y, x), killer.peer)
+
+# ---------- chests and walls ----------
+
+## Lands the skill's blow on every chest or wall in its area that still stands whole for `p`,
+## and breaks open each one that has taken its last (BreakableDef.hits). Only `p` sees it
+## shake or break: everyone breaks their own.
+func _strike_breakables(p: SimPlayer, skill: SkillDef, aim: Hitbox.Aim) -> void:
+	if breakables.is_empty():
+		return
+	var area := _skill_area(p, skill, aim)
+	for b in breakables:
+		if b.whole_for(p) and area.intersects(b.def.rect(b.foot)):
+			if b.strike(p):
+				_break_open(p, b)
+			else:
+				Net.send(p.peer, &"ev_struck", [b.index, false])
+
+## `b` breaks open for `p`, for good: its loot spills out for them, and a wall opens its
+## shortcut (the portal behind it, and its far end on the other map, show from now on).
+func _break_open(p: SimPlayer, b: SimBreakable) -> void:
+	p.character.find_secret(b.def.id)
+	p.dirty_character = true
+	Net.send(p.peer, &"ev_struck", [b.index, true])
+	var loot := []
+	for entry in b.def.loot:
+		var amount := entry.roll()
+		if amount > 0:
+			loot.append([entry.item, amount])
+	if b.def.card and not p.character.book.complete(b.def.card):
+		loot.append([Content.card(b.def.card), 1])
+	var plat := layout.platforms[b.def.platform]
+	for i in loot.size():
+		var x := clampf(b.foot.x + (i - (loot.size() - 1) / 2.0) * DROP_SPACING, plat.x + 8, plat.x + plat.w - 8)
+		spawn_drop(loot[i][0], loot[i][1], null, DropFlight.create(b.foot + Vector2(0, -20), plat.y, x), p.peer)
+	if def.portals.any(func(o: PortalDef) -> bool: return o.shortcut == b.def.id):
+		tell(p, "You found a shortcut.", Palette.SUN)
 
 ## A monster touched a player.
 func touch_player(p: SimPlayer, m: SimMob) -> void:

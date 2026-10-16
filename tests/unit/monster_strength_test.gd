@@ -1,7 +1,7 @@
 extends TestCase
-## MonsterStrength and WorldRoutes.steps_from_town: towns are 0 steps out and their fields 1;
-## a monster is its own strength on the nearest map it lives on, PER_MAP stronger for each
-## map farther out, and bosses never change.
+## MonsterStrength and WorldRoutes.steps_from_town: towns are 0 steps out and their fields 1,
+## shortcuts never bring a map nearer; a monster is its own strength on the nearest map it
+## lives on, PER_MAP stronger for each map farther out, and bosses never change.
 
 var steps: Dictionary
 
@@ -16,11 +16,11 @@ func test_towns_are_zero_and_fields_count_up() -> void:
 			check(steps[m.id] >= 1, "%s is a step or more from a town" % m.id)
 			var nearer := false
 			for p in m.portals:
-				nearer = nearer or steps.get(p.target_map, 99) == steps[m.id] - 1
+				nearer = nearer or (not p.is_shortcut() and steps.get(p.target_map, 99) == steps[m.id] - 1)
 			for other: MapDef in Content.maps.values():
 				for p in other.portals:
-					nearer = nearer or (p.target_map == m.id and steps.get(other.id, 99) == steps[m.id] - 1)
-			check(nearer, "%s: a neighbour is one step nearer a town" % m.id)
+					nearer = nearer or (p.target_map == m.id and not p.is_shortcut() and steps.get(other.id, 99) == steps[m.id] - 1)
+			check(nearer, "%s: a neighbour is one step nearer a town, not through a shortcut" % m.id)
 
 func test_every_spawn_is_its_own_strength_at_home_and_stronger_farther_out() -> void:
 	for map: MapDef in Content.maps.values():

@@ -509,9 +509,9 @@ func ev_vitals(hp: int, mp: int, essence: int, shards: int) -> void:
 	Game.apply_vitals(hp, mp, essence, shards)
 
 @rpc("authority", "call_local", "reliable")
-func ev_enter_map(map_id: StringName, x: float, state: Dictionary) -> void:
+func ev_enter_map(map_id: StringName, x: float, state: Dictionary, platform: int) -> void:
 	if world:
-		world.enter_map(map_id, x, state)
+		world.enter_map(map_id, x, state, platform)
 
 @rpc("authority", "call_local", "unreliable_ordered")
 func ev_snapshot(data: PackedByteArray) -> void:
@@ -639,6 +639,12 @@ func ev_drop(snap: Array) -> void:
 func ev_tear() -> void:
 	if world:
 		world.open_tear()
+
+## A chest or wall you hit shook, or broke open (`broke`; MapInstance._strike_breakables).
+@rpc("authority", "call_local", "reliable")
+func ev_struck(index: int, broke: bool) -> void:
+	if world:
+		world.strike_breakable(index, broke)
 
 @rpc("authority", "call_local", "reliable")
 func ev_drop_gone(id: int, by: int) -> void:

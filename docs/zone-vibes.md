@@ -121,7 +121,10 @@ Lumewood. Towering trees and rope bridges; lively, airy, hunter's forest.
 **Keep (art):** fresh daylight through leaves: deep green sky top `#173a29`, pale yellow horizon
 `#fff1b0`, yellow-green light `#f4ffd0`, leaf-green mist `#a7d499`; light shafts, green motes.
 Giant oak trunks, broad leaf canopies, planks, rope bridges and ladders, moss and bark. Monsters
-are plant and woodland creatures.
+are plant and woodland creatures. Fields: one painted backdrop picture each, in its own colours
+below; earth ledges with one grassy edge over plain dark earth; dark oak leaves framing the top
+corners; a hollow trunk at the trunk shortcut, a painted chest on each secret ledge and a wall of
+roots over Elder's Root's shortcut.
 
 **Keep (music):** adventurous and verdant. Town: wooden flutes, harp, plucked strings,
 birdsong-like woodwinds, airy and calm. Field: wooden flutes, strings, hand drums, a quiet

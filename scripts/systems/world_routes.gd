@@ -7,7 +7,8 @@ class_name WorldRoutes
 ## into the other, or by a trip (a ship) to a region you can't walk to. Trips between regions
 ## that are walkable anyway (the coaches) are shortcuts, not routes.
 
-## Two outdoor maps joined by a portal, as [a, b] with a < b. Doors into rooms aren't links.
+## Two outdoor maps joined by a portal, as [a, b] with a < b. Doors into rooms aren't links,
+## and neither are shortcuts (PortalDef.is_shortcut): they're secrets to find.
 static func links() -> Array:
 	var seen := {}
 	var out := []
@@ -15,6 +16,8 @@ static func links() -> Array:
 		if m.interior:
 			continue
 		for p in m.portals:
+			if p.is_shortcut():
+				continue
 			var to: MapDef = Content.maps.get(p.target_map)
 			if to == null or to.interior or to.id == m.id:
 				continue
@@ -103,12 +106,13 @@ static func _walkable(a: StringName, b: StringName, by_pair: Dictionary) -> bool
 
 ## How many maps each map is from the nearest town, as map id -> steps: towns are 0, the
 ## fields next to them 1, and so on, walking through any portal in either direction (rooms
-## and arenas count as a map too). Maps no town reaches are left out.
+## and arenas count as a map too) except shortcuts, which are secrets that lead back from
+## deeper in and don't bring a map nearer. Maps no town reaches are left out.
 static func steps_from_town() -> Dictionary:
 	var next := {}
 	for m: MapDef in Content.maps.values():
 		for p in m.portals:
-			if p.target_map == m.id or not Content.maps.has(p.target_map):
+			if p.target_map == m.id or not Content.maps.has(p.target_map) or p.is_shortcut():
 				continue
 			for pair in [[m.id, p.target_map], [p.target_map, m.id]]:
 				if not next.has(pair[0]):

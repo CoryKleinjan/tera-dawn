@@ -13,12 +13,15 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
    tall ledge) is a platform with that picture as its `look`, never a prop, so everything
    that looks walkable is. Land art stands on the floor: no floating rock islands or
    arches; a floating platform uses the biome's plain platform front. Every platform, rope,
-   portal, NPC and spawn must be reachable with the hero's own jump from where players arrive, and no
-   two portals on a map may lead to the same map (`tests/content/content_reach_test.gd`).
-   A platform more than about 90 px above the one below needs a rope or ladder. A map can
-   be taller than 700 (more floors, more exits); keep `ground_y` 80 above `height`.
+   portal, NPC and spawn must be reachable with the hero's own jump from where players arrive
+   (secret ledges aside, below), and no two portals on a map may lead to the same map
+   (`tests/content/content_reach_test.gd`). A platform more than about 90 px above the one
+   below needs a rope or ladder. A map can be taller than 700 (more floors, more exits); keep
+   `ground_y` 80 above `height`. On a tall map the backdrop strips sit lower
+   (`BackdropBuilder.strip_center`), so climbing up shows more sky.
 4. Connect it: add a **PortalDef** on an existing map whose `target_map` is the new id, and a
-   portal back. Players arriving (a portal's or travel route's `target_x`) and NPCs stay at
+   portal back. A portal lands players on the floor, or on the platform its `target_platform`
+   names (its `target_x` on that platform). Players arriving (a portal's or travel route's `target_x`) and NPCs stay at
    least the quickslot panel's width plus a hero from the map's right edge, so the panel never
    covers them (`tests/content/content_world_test.gd`). The map's name shows only at the top
    of the screen (`display_name`); nothing labels a map out in the world.
@@ -37,6 +40,27 @@ leads back (the content tests let it). A boss stands alone in a small arena map 
 screens wide, a floor and three low ledges, no lanterns) past the zone's top map, with a portal
 back and a `one_way`, `after_boss` portal home to the zone's town. `tears` hangs faint white glows out over the water,
 drawn in code (`TDStage._build_tears`); nothing in the game mentions them.
+
+### Secrets and shortcuts
+
+A **secret ledge** (`PlatformDef.secret`) is reached only with a job's movement skill at level
+1 (Flash Jump, Blink, Charge, Rolling Dash, Backstep Leap), never a plain jump, a rope or a fall,
+and the minimap leaves it out. Nothing a player needs stands on one (a chest may);
+`content_reach_test` checks both ways with `map_reach.gd`'s skill moves. A field has two: a
+high one about 130 px over the ledge you jump from, with nothing over it (Flash Jump, Blink),
+and a far one about 220 px out from a ledge's end and 50 px lower, at least 100 px over anything
+below and too far out to drift onto in a fall from anything above (every movement skill).
+
+A **shortcut** is a pair of portals: its far end (`PortalDef.shortcut`, an id) is hidden and shut
+until the character has found it; its near end (`opens_shortcut`, the same id) is always open
+and going through finds it. Found ids live in `Character.secrets`. `WorldRoutes` leaves
+shortcuts off the world map.
+
+A **breakable** (`MapDef.breakables`, a **BreakableDef**) is a chest or wall that breaks open
+after `hits` blows. Each character breaks their own, once for good (`Character.secrets`); only
+they see it shake and break (`ev_struck`). A chest's `loot` and Monster Book `card` spill for
+whoever broke it. A wall's id is the shortcut it opens: both its ends are `shortcut` portals,
+so breaking it opens the way on both maps. With no `broken` picture it is gone once broken.
 
 A `solo` map gives each player a copy of their own, started fresh every time they come in
 (`TDServer.map_instance` keys it by peer; `_off_map` drops it). It isn't on the world map: you
@@ -81,12 +105,15 @@ spawn at a real platform, so a typo fails a test instead of the game.
 A **BiomeDef** is the look shared by many maps: sky and light colours, ground and platform
 textures, parallax backdrop layers (`BackdropLayerDef`: a tiled strip, scattered pieces, or one
 painted `PICTURE` stretched just wide enough to cover the view from either end of the map and
-left out of the fog, all at a depth nearer than `TDStage.FAR`), random decoration (`DecorDef`), lantern and portal art. A new region of the
+left out of the fog, all at a depth nearer than `TDStage.FAR`), random decoration (`DecorDef`), lantern and portal art, and
+optional leaves hanging into the screen's top corners (`frame_left` / `frame_right`, drawn as tall as the screen by
+`CornerFrame`, over the world and under the HUD, like Hollow Knight's foreground plants). A new region of the
 world is usually a new biome plus a few maps that use it.
 
 Each region has **one** biome (its style); its fields differ within it. A field keeps its region's `biome` and sets a **BiomeVariantDef** as `MapDef.variant`: only
 what this sub zone changes (sky, light, fog colour and haze, colour grade, hidden backdrop
-layers, extra backdrop layers, hidden or extra ground scenery). `MapDef.look()` is the biome with the variant applied; the
+layers, extra backdrop layers, hidden or extra ground scenery, no edge tufts or platform plants for land painted with its
+own grass, its own land pieces and corner leaves). `MapDef.look()` is the biome with the variant applied; the
 world builders read `look()`, never `biome`. Towns usually use the plain biome; Dawnharbor's
 variant swaps the harbour strips for one painted picture (the clouds stay). `tests/screenshot.gd`
 with `subzones` renders every field for a side-by-side look.
@@ -138,8 +165,8 @@ ledge; you still walk in front of it along the street below. Ladders and ropes j
 levels (more than about 90 px needs one). Buildings, NPCs and portals stand on a level by
 their `platform`; each level is its own row for the spacing checks, and nothing should
 stand on the floor straight behind a terrace's wall (lanterns, scattered decor and
-background houses keep clear of it by themselves). Lanterns stand only on open street by themselves; a level gets its own with `MapDef.level_lanterns` (x and platform), drawn in front of the land so the wall of the level above doesn't hide them; ivy and flower boxes hung on a level's wall are props with `on_wall` set. Doors stay on the floor for now, since
-players arrive on a map's floor. In a town the backdrop is laid out for the camera on the
+background houses keep clear of it by themselves). Lanterns stand only on open street by themselves; a level gets its own with `MapDef.level_lanterns` (x and platform), drawn in front of the land so the wall of the level above doesn't hide them; ivy and flower boxes hung on a level's wall are props with `on_wall` set. Doors stay on the floor for now (a portal's
+`target_platform` could land players on a level). In a town the backdrop is laid out for the camera on the
 street (`TDStage.backdrop_center`), so climbing up just shows more sky. Dawnharbor is the
 example: a quay street, a terrace 150 px up and a cliff top 320 px up.
 

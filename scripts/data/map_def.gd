@@ -55,6 +55,8 @@ extends Resource
 @export var platforms: Array[PlatformDef] = []
 @export var climbables: Array[ClimbableDef] = []
 @export var portals: Array[PortalDef] = []
+## Chests and walls that break open when the player hits them, once per character.
+@export var breakables: Array[BreakableDef] = []
 
 @export_group("Inhabitants")
 @export var spawns: Array[SpawnDef] = []
