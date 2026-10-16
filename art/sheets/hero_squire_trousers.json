@@ -130,7 +130,11 @@
         "pistol2": "hero_squire_trousers:pistol2",
         "roll2": "hero_squire_trousers:roll2",
         "roll1": "hero_squire_trousers:roll1",
-        "ambush2": "hero_squire_trousers:ambush2"
+        "ambush2": "hero_squire_trousers:ambush2",
+        "cast1": "hero_squire_trousers:cast1",
+        "cast2": "hero_squire_trousers:cast2",
+        "skyward1": "hero_squire_trousers:skyward1",
+        "skyward2": "hero_squire_trousers:skyward2"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -350,6 +354,30 @@
         "ambush2": {
           "frames": [
             "ambush2"
+          ],
+          "fps": 1
+        },
+        "cast1": {
+          "frames": [
+            "cast1"
+          ],
+          "fps": 1
+        },
+        "cast2": {
+          "frames": [
+            "cast2"
+          ],
+          "fps": 1
+        },
+        "skyward1": {
+          "frames": [
+            "skyward1"
+          ],
+          "fps": 1
+        },
+        "skyward2": {
+          "frames": [
+            "skyward2"
           ],
           "fps": 1
         }

@@ -130,7 +130,11 @@
         "anchor2": "hero_novice_slippers:anchor2",
         "pinning": "hero_novice_slippers:pinning",
         "roll2": "hero_novice_slippers:roll2",
-        "ambush2": "hero_novice_slippers:ambush2"
+        "ambush2": "hero_novice_slippers:ambush2",
+        "cast1": "hero_novice_slippers:cast1",
+        "cast2": "hero_novice_slippers:cast2",
+        "skyward1": "hero_novice_slippers:skyward1",
+        "skyward2": "hero_novice_slippers:skyward2"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -350,6 +354,30 @@
         "ambush2": {
           "frames": [
             "ambush2"
+          ],
+          "fps": 1
+        },
+        "cast1": {
+          "frames": [
+            "cast1"
+          ],
+          "fps": 1
+        },
+        "cast2": {
+          "frames": [
+            "cast2"
+          ],
+          "fps": 1
+        },
+        "skyward1": {
+          "frames": [
+            "skyward1"
+          ],
+          "fps": 1
+        },
+        "skyward2": {
+          "frames": [
+            "skyward2"
           ],
           "fps": 1
         }

@@ -130,7 +130,11 @@
         "roll1": "hero_hunters_vest:roll1",
         "roll2": "hero_hunters_vest:roll2",
         "faint": "hero_hunters_vest:faint",
-        "ambush2": "hero_hunters_vest:ambush2"
+        "ambush2": "hero_hunters_vest:ambush2",
+        "cast1": "hero_hunters_vest:cast1",
+        "cast2": "hero_hunters_vest:cast2",
+        "skyward1": "hero_hunters_vest:skyward1",
+        "skyward2": "hero_hunters_vest:skyward2"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -350,6 +354,30 @@
         "ambush2": {
           "frames": [
             "ambush2"
+          ],
+          "fps": 1
+        },
+        "cast1": {
+          "frames": [
+            "cast1"
+          ],
+          "fps": 1
+        },
+        "cast2": {
+          "frames": [
+            "cast2"
+          ],
+          "fps": 1
+        },
+        "skyward1": {
+          "frames": [
+            "skyward1"
+          ],
+          "fps": 1
+        },
+        "skyward2": {
+          "frames": [
+            "skyward2"
           ],
           "fps": 1
         }
