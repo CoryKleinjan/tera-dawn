@@ -38,8 +38,8 @@ func test_platforms_lie_inside_the_map() -> void:
 func test_arrivals_and_npcs_keep_clear_of_the_quickslots() -> void:
 	var clear := right_edge_clear()
 	for m: MapDef in Content.maps.values():
-		for x: float in MapReach.arrivals_of(m):
-			check(m.width - x >= clear, "%s: players arrive at x %d, %d from the right edge, under the quickslots (want %d+)" % [Scan.where(m), x, m.width - x, clear])
+		for at: Vector2 in MapReach.arrivals_of(m):
+			check(m.width - at.x >= clear, "%s: players arrive at x %d, %d from the right edge, under the quickslots (want %d+)" % [Scan.where(m), at.x, m.width - at.x, clear])
 		for n in m.npcs:
 			check(m.width - n.x >= clear, "%s: %s stands at x %d, %d from the right edge, under the quickslots (want %d+)" % [Scan.where(m), n.npc.id, n.x, m.width - n.x, clear])
 
@@ -211,6 +211,9 @@ func test_portals_land_on_the_map_away_from_portals() -> void:
 				continue
 			var what := "%s: portals[%d].target_x %s on %s" % [Scan.where(m), i, p.target_x, p.target_map]
 			check(p.target_x >= 0 and p.target_x <= there.width, what + " is off the map")
+			var layout := MapLayout.new(there)
+			if check(p.target_platform >= 0 and p.target_platform < layout.platforms.size(), what + ": target_platform %d isn't one of its platforms" % p.target_platform):
+				check(layout.platforms[p.target_platform].contains_x(p.target_x), what + " is off its target_platform %d" % p.target_platform)
 			check(not there.portals.any(func(b: PortalDef) -> bool: return absf(b.x - p.target_x) < 34), what + " lands inside a portal")
 
 func test_portals_land_near_the_portal_back() -> void:

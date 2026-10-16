@@ -76,6 +76,8 @@ var achievements: Array[String] = []
 var counters := {}
 ## Cutscene ids already watched (or skipped), so none plays twice.
 var scenes_seen: Array[String] = []
+## Secrets found, for good: shortcuts opened, walls broken and chests opened (their ids).
+var secrets: Array[String] = []
 
 func _init() -> void:
 	equipment.changed.connect(recalc)
@@ -169,6 +171,17 @@ func has_seen(id: StringName) -> bool:
 func saw(id: StringName) -> void:
 	if not has_seen(id):
 		scenes_seen.append(String(id))
+
+## Whether this character has found secret `id` (a shortcut, a wall or a chest).
+func found_secret(id: StringName) -> bool:
+	return secrets.has(String(id))
+
+## Notes secret `id` as found. True the first time.
+func find_secret(id: StringName) -> bool:
+	if found_secret(id):
+		return false
+	secrets.append(String(id))
+	return true
 
 ## The pet that's out, or null.
 func pet_def() -> PetDef:

@@ -90,6 +90,8 @@ var sun: DirectionalLight3D
 var map_root: Node3D
 ## The scenery of portals that open and shut with a quest (PortalDef.locked) -> their PortalDef.
 var locked_portals := {}
+## Index in MapDef.breakables -> the picture of that chest or wall (SceneryBuilder._breakable).
+var breakables := {}
 var motes: CPUParticles3D
 var backdrop: BackdropBuilder
 var dist := 0.0
@@ -402,6 +404,7 @@ func build() -> void:
 	add_child(map_root)
 	_rebuild_at = 0
 	locked_portals.clear()
+	breakables.clear()
 	var map := world.map
 	var biome := map.look()
 	if biome.platform_middle != _platform_art:  # another region: let the last one's built land go
@@ -422,11 +425,34 @@ func build() -> void:
 	_build_tears(map)
 	follow(world.cam)
 	show_open_portals(Game.me)
+	show_breakables(Game.me)
 
 ## Shows the locked portals `c` has opened and hides the rest.
 func show_open_portals(c: Character) -> void:
 	for node: Node3D in locked_portals:
 		node.visible = (locked_portals[node] as PortalDef).open_to(c)
+
+## Shows each chest and wall broken open if `c` has broken theirs, else whole.
+func show_breakables(c: Character) -> void:
+	for i: int in breakables:
+		var b := world.map.breakables[i]
+		(breakables[i] as Sprite3D).texture = b.broken if c.found_secret(b.id) and b.broken else b.whole
+
+## How far a chest or wall shakes when hit, in game pixels.
+const SHAKE := 4.0
+
+## Chest or wall `i` was hit: it shakes, or breaks open (`broke`) and shows its broken picture.
+func strike_breakable(i: int, broke: bool) -> void:
+	var s: Sprite3D = breakables.get(i)
+	if s == null:
+		return
+	var b := world.map.breakables[i]
+	if broke and b.broken:
+		s.texture = b.broken
+	var rest: Vector3 = s.get_meta(&"rest", s.position)
+	var t := s.create_tween()
+	for k in [1.0, -0.8, 0.5, -0.25, 0.0]:
+		t.tween_property(s, "position", rest + Vector3(k * SHAKE / PX, 0, 0), 0.035)
 
 func _apply_biome(b: BiomeDef) -> void:
 	var sky_mat := env.sky.sky_material as ShaderMaterial

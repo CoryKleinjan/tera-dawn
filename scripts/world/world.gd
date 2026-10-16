@@ -133,13 +133,14 @@ func stop(stay_connected := false) -> void:
 		w.visible = false
 	Sound.music(TITLE_MUSIC)
 
-## The server put the player on a map: build it and show what's on it.
-func enter_map(id: StringName, x: float, state: Dictionary) -> void:
+## The server put the player on a map, at `x` on platform `platform`: build it and show
+## what's on it.
+func enter_map(id: StringName, x: float, state: Dictionary, platform := 0) -> void:
 	# a cutscene belongs to the map it started on (the server stops it too)
 	scenes.stop()
 	hud.windows["player"].visible = false
 	load_map(id)
-	player.place(x, platforms[0].y)
+	player.place(x, platforms[platform].y)
 	var mob_states: Array = state.get("mobs", [])
 	var views := mobs()
 	for i in mini(mob_states.size(), views.size()):
@@ -180,6 +181,7 @@ func show_for_me() -> void:
 	for n: TDNpc in npc_layer.get_children():
 		n.refresh()
 	stage.show_open_portals(Game.me)
+	stage.show_breakables(Game.me)
 
 func show_banner(text: String) -> void:
 	banner_text = text
@@ -271,6 +273,24 @@ func input_blocked() -> bool:
 ## The map's tear just opened (MapDef.tear_platform).
 func open_tear() -> void:
 	stage.show_tears(true)
+
+## Bright sparks where a blow lands on a chest or wall.
+const STRUCK_SPARKS := Color(2.6, 2.2, 1.4)
+
+## A chest or wall you hit shook, or broke open (`broke`): a hit flash on it, and when it
+## breaks a burst of sparks and dust with the find sound.
+func strike_breakable(i: int, broke: bool) -> void:
+	if i < 0 or i >= map.breakables.size():
+		return
+	stage.strike_breakable(i, broke)
+	var b := map.breakables[i]
+	var foot := Vector2(b.x, platforms[b.platform].y)
+	var middle := foot - Vector2(0, b.size().y / 2.0)
+	add_effect(Content.effects.get(&"hit"), middle, 1)
+	if broke:
+		fx.burst(middle, STRUCK_SPARKS, 24, 1.2)
+		fx.dust(foot, 0, 14)
+		Sound.play(&"sparkle")
 
 func play_scene(id: StringName) -> void:
 	var def: CutsceneDef = Content.cutscenes.get(id)

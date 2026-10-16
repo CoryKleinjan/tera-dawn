@@ -7,7 +7,8 @@ class_name WorldRoutes
 ## into the other, or by a trip (a ship) to a region you can't walk to. Trips between regions
 ## that are walkable anyway (the coaches) are shortcuts, not routes.
 
-## Two outdoor maps joined by a portal, as [a, b] with a < b. Doors into rooms aren't links.
+## Two outdoor maps joined by a portal, as [a, b] with a < b. Doors into rooms aren't links,
+## and neither are shortcuts (PortalDef.is_shortcut): they're secrets to find.
 static func links() -> Array:
 	var seen := {}
 	var out := []
@@ -15,6 +16,8 @@ static func links() -> Array:
 		if m.interior:
 			continue
 		for p in m.portals:
+			if p.is_shortcut():
+				continue
 			var to: MapDef = Content.maps.get(p.target_map)
 			if to == null or to.interior or to.id == m.id:
 				continue
