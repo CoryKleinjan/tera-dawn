@@ -13,10 +13,13 @@ defense = 6
 [resource]
 script = ExtResource("script")
 frame_art = {
-&"roll2": &"roll1"
+&"roll2": &"roll1",
+&"rope2": &"rope1",
+&"skyward2": &"cast2"
 }
 nudges = {
-&"roll2": Vector4(11, -30, -180, 0)
+&"roll2": Vector4(11, -30, -180, 0),
+&"rope2": Vector4(-1, 0, 0, 0)
 }
 id = &"footpad_jerkin"
 display_name = "Footpad Jerkin"
