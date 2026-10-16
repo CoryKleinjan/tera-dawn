@@ -19396,6 +19396,162 @@
    ],
    "text": "The base picture is an EMPTY sheet of 8 cells (2 rows of 4, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game\\'s monster \"Marsh Horror\" once, standing in its idle pose on magenta. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, markings, face, every glowing part, light-mote, gem, flame or other detail it has in its idle pose, the same size as in the first attached picture, the same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different from the others. Every glowing part and detail it has in the first attached picture is there in every cell. It always faces RIGHT, seen from the side. Poses on the ground stand on one shared ground line near the bottom of each cell, like in the first attached picture; mid-air poses float clearly above that line. Where a pose names body parts it does not have (legs, wings, mouth), show the same idea with the body it has. Cell 1, JUMP TAKE-OFF: squatting very deep and low, body coiled like a spring, about to spring straight up. Cell 2, JUMP IN THE AIR: high in the air, legs or lower body tucked up under it. Cell 3, KNOCKED UP: thrown helplessly up into the air, tumbling backwards and tipped upside down with its belly up and limbs flailing upward, eyes squeezed shut, mouth open in surprise. Cell 4, KNOCKED DOWN: lying flat on its side on the ground line, limp, dazed with dizzy swirl eyes and tongue out, still clearly alive (not defeated). Cell 5, POUNCE WIND-UP: crouched very low with its rear raised, head forward and eyes fixed ahead, ready to leap forward. Cell 6, POUNCE: leaping forward through the air in a long arc, front stretched forward and back stretched behind. Cell 7, SLAM WIND-UP: rising up as tall as it can, body upright, front limbs or upper body raised high above its head, about to crash down. Cell 8, SLAM: crashing down onto the ground line with its front, head low and body bunched, as if stomping hard. Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour."
   }
+ },
+ {
+  "id": "monanim_cliff_harpy_4a",
+  "prompts": null,
+  "batch": "monster animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "monanim_cliff_harpy_4a.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Monster animations' (Cory 00:41Z 'Okay. So it' [do it] to the priced 4-monster, 6-sheet try, ~$0.41): cliff_harpy split onto a 3-cell sheet (the 5th cell of 1x5 came back empty three times).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x3.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/cliff_harpy_idle.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game\\'s monster \"Cliff Harpy\" once, standing in its idle pose on magenta. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, markings, face, every glowing part, light-mote, gem, flame or other detail it has in its idle pose, the same size as in the first attached picture, the same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different from the others. Every glowing part and detail it has in the first attached picture is there in every cell. It always faces RIGHT, seen from the side. It flies: every pose is in the air above the ground line except the knocked-down pose, which lies on it. Where a pose names body parts it does not have (legs, wings, mouth), show the same idea with the body it has. Cell 1, SWOOP WIND-UP: pulled up and back in the air, wings or body drawn back and raised high, ready to dive. Cell 2, SWOOP: diving steeply down and forward through the air, wings or body swept back, head first. Cell 3, KNOCKED DOWN: fallen out of the air and lying flat on its side on the ground line, wings or body limp and spread on the ground, dazed with dizzy swirl eyes and tongue out, still clearly alive (not defeated). Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+ {
+  "id": "monanim_cliff_harpy_4b",
+  "prompts": null,
+  "batch": "monster animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "monanim_cliff_harpy_4b.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   2
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Monster animations' (Cory 00:41Z 'Okay. So it' [do it] to the priced 4-monster, 6-sheet try, ~$0.41): cliff_harpy split onto a 2-cell sheet (the 5th cell of 1x5 came back empty three times).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x2.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/cliff_harpy_idle.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 2 cells (1 row of 2, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game\\'s monster \"Cliff Harpy\" once, standing in its idle pose on magenta. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, markings, face, every glowing part, light-mote, gem, flame or other detail it has in its idle pose, the same size as in the first attached picture, the same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different from the others. Every glowing part and detail it has in the first attached picture is there in every cell. It always faces RIGHT, seen from the side. It flies: every pose is in the air above the ground line except the knocked-down pose, which lies on it. Where a pose names body parts it does not have (legs, wings, mouth), show the same idea with the body it has. Cell 1, SHOT WIND-UP: gathering power on the spot, leaning back, mouth or hands drawn back, about to fire something forward (draw no projectile). Cell 2, SHOT: thrust forward with mouth wide open or hands, arms or weapon pushed forward as if it has just fired something (draw no projectile, flash or effect). Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+ {
+  "id": "monanim_grove_wisp_4a",
+  "prompts": null,
+  "batch": "monster animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "monanim_grove_wisp_4a.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Monster animations' (Cory 00:41Z 'Okay. So it' [do it] to the priced 4-monster, 6-sheet try, ~$0.41): grove_wisp split onto a 3-cell sheet (the 5th cell of 1x5 came back empty three times).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x3.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/grove_wisp_idle.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game\\'s monster \"Grove Wisp\" once, standing in its idle pose on magenta. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, markings, face, every glowing part, light-mote, gem, flame or other detail it has in its idle pose, the same size as in the first attached picture, the same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different from the others. Every glowing part and detail it has in the first attached picture is there in every cell. It always faces RIGHT, seen from the side. It flies: every pose is in the air above the ground line except the knocked-down pose, which lies on it. Where a pose names body parts it does not have (legs, wings, mouth), show the same idea with the body it has. Cell 1, SWOOP WIND-UP: pulled up and back in the air, wings or body drawn back and raised high, ready to dive. Cell 2, SWOOP: diving steeply down and forward through the air, wings or body swept back, head first. Cell 3, KNOCKED DOWN: fallen out of the air and lying flat on its side on the ground line, wings or body limp and spread on the ground, dazed with dizzy swirl eyes and tongue out, still clearly alive (not defeated). Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+ {
+  "id": "monanim_grove_wisp_4b",
+  "prompts": null,
+  "batch": "monster animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "monanim_grove_wisp_4b.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   2
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Monster animations' (Cory 00:41Z 'Okay. So it' [do it] to the priced 4-monster, 6-sheet try, ~$0.41): grove_wisp split onto a 2-cell sheet (the 5th cell of 1x5 came back empty three times).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x2.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/grove_wisp_idle.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 2 cells (1 row of 2, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game\\'s monster \"Grove Wisp\" once, standing in its idle pose on magenta. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, markings, face, every glowing part, light-mote, gem, flame or other detail it has in its idle pose, the same size as in the first attached picture, the same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different from the others. Every glowing part and detail it has in the first attached picture is there in every cell. It always faces RIGHT, seen from the side. It flies: every pose is in the air above the ground line except the knocked-down pose, which lies on it. Where a pose names body parts it does not have (legs, wings, mouth), show the same idea with the body it has. Cell 1, SHOT WIND-UP: gathering power on the spot, leaning back, mouth or hands drawn back, about to fire something forward (draw no projectile). Cell 2, SHOT: thrust forward with mouth wide open or hands, arms or weapon pushed forward as if it has just fired something (draw no projectile, flash or effect). Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+ {
+  "id": "monanim_leafwing_4",
+  "prompts": null,
+  "batch": "monster animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "monanim_leafwing_4.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Monster animations' (Cory 00:41Z 'Okay. So it' [do it] to the priced 4-monster, 6-sheet try, ~$0.41): leafwing with the doubled pose reworded for a round body.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x3.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/leafwing_idle.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game\\'s monster \"Leafwing\" once, standing in its idle pose on magenta. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, markings, face, every glowing part, light-mote, gem, flame or other detail it has in its idle pose, the same size as in the first attached picture, the same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different from the others. Every glowing part and detail it has in the first attached picture is there in every cell. It always faces RIGHT, seen from the side. It flies: every pose is in the air above the ground line except the knocked-down pose, which lies on it. Where a pose names body parts it does not have (legs, wings, mouth), show the same idea with the body it has. Cell 1, KNOCKED DOWN: fallen out of the air and lying flat on its side on the ground line, wings or body limp and spread on the ground, dazed with dizzy swirl eyes and tongue out, still clearly alive (not defeated). Cell 2, SWOOP WIND-UP: pulled up and back in the air, wings or body drawn back and raised high, ready to dive. Cell 3, SWOOP: the one single acorn tipped steeply head-down and forward, diving, its two leaves swept back up behind it; just one acorn, nothing behind it. Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+ {
+  "id": "monanim_thornling_4",
+  "prompts": null,
+  "batch": "monster animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "monanim_thornling_4.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Monster animations' (Cory 00:41Z 'Okay. So it' [do it] to the priced 4-monster, 6-sheet try, ~$0.41): thornling with the doubled pose reworded for a round body.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_2x3.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/thornling_idle.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 6 cells (2 rows of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game\\'s monster \"Thornling\" once, standing in its idle pose on magenta. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, markings, face, every glowing part, light-mote, gem, flame or other detail it has in its idle pose, the same size as in the first attached picture, the same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different from the others. Every glowing part and detail it has in the first attached picture is there in every cell. It always faces RIGHT, seen from the side. Poses on the ground stand on one shared ground line near the bottom of each cell, like in the first attached picture; mid-air poses float clearly above that line. Where a pose names body parts it does not have (legs, wings, mouth), show the same idea with the body it has. Cell 1, JUMP TAKE-OFF: squatting very deep and low, body coiled like a spring, about to spring straight up. Cell 2, JUMP IN THE AIR: high in the air, legs or lower body tucked up under it. Cell 3, KNOCKED UP: thrown helplessly up into the air, tumbling backwards and tipped upside down with its belly up and limbs flailing upward, eyes squeezed shut, mouth open in surprise. Cell 4, KNOCKED DOWN: lying flat on its side on the ground line, limp, dazed with dizzy swirl eyes and tongue out, still clearly alive (not defeated). Cell 5, POUNCE WIND-UP: the one single round ball squashed lower and wider on the ground, leaning forward, eyes fixed ahead, ready to spring forward. Cell 6, POUNCE: the one single round ball flying forward through the air, tilted forward, feet tucked under it. Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
  }
 ]
 }
