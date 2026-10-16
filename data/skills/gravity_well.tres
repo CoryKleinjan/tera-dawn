@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Resource" path="res://data/effects/critical.tres" id="h_critical"]
-[ext_resource type="Texture2D" path="res://assets/sprites/skills/ice_spike.png" id="i_stand_in"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/gravity_well.png" id="i_icon"]
 
 [resource]
 script = ExtResource("1_skill_def")
@@ -31,4 +31,4 @@ height = 260.0
 animation = &"gravity_well"
 flash = Color(0.7, 0.55, 1.0, 1)
 hit_effect = ExtResource("h_critical")
-icon = ExtResource("i_stand_in")
+icon = ExtResource("i_icon")

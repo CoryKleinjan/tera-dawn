@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Resource" path="res://data/effects/swish.tres" id="e_swish"]
 [ext_resource type="Resource" path="res://data/effects/hit.tres" id="h_hit"]
-[ext_resource type="Texture2D" path="res://assets/sprites/skills/broadside.png" id="i_stand_in"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/anchor_haul.png" id="i_icon"]
 
 [resource]
 script = ExtResource("1_skill_def")
@@ -31,4 +31,4 @@ height = 90.0
 animation = &"anchor_haul"
 effect = ExtResource("e_swish")
 hit_effect = ExtResource("h_hit")
-icon = ExtResource("i_stand_in")
+icon = ExtResource("i_icon")

@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/data/move_def.gd" id="2_move_def"]
 [ext_resource type="Resource" path="res://data/effects/swish.tres" id="e_swish"]
 [ext_resource type="Resource" path="res://data/effects/hit.tres" id="h_hit"]
-[ext_resource type="Texture2D" path="res://assets/sprites/skills/shadow_fang.png" id="i_stand_in"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/shadow_ambush.png" id="i_icon"]
 
 [sub_resource type="Resource" id="Resource_look"]
 script = ExtResource("2_move_def")
@@ -40,4 +40,4 @@ animation = &"shadow_ambush"
 effect = ExtResource("e_swish")
 hit_effect = ExtResource("h_hit")
 move = SubResource("Resource_look")
-icon = ExtResource("i_stand_in")
+icon = ExtResource("i_icon")
