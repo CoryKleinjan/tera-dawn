@@ -20451,6 +20451,29 @@
    "refs": [],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cell 1 holds a painted bald chibi boy punching straight ahead, cell 2 the same boy springing up with one knee raised and one arm swept up high, cell 4 the same boy standing at rest. Leave cells 1 and 4 exactly as they are. Change only cell 2, and in cell 2 change only his head: tilt his whole head back, as if looking up toward the sky, so his chin lifts and his head leans back and away from the raised arm, leaving a clear gap of magenta between his face side of the head and the raised arm everywhere. The raised arm must not cross, touch or overlap his head or face at all. Keep his body, both arms, both legs, his raised fist and his low fist exactly as they are, with the same size, shape and position. He is bald, with no face and no hair: keep his head bare and the same size. He has exactly two arms and two legs. Do not add any weapon, object, ground, dust, motion lines, text or extra figure. Leave cells 3 and 5 to 8 empty. Keep the background flat pure magenta #FF00FF and keep the grid lines. Same painting style as the rest of the sheet. No text, no labels."
   }
+ },
+ {
+  "id": "mshero_body_skyward2_elbow",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_skyward2_elbow.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'New hero' (Cory 02:42Z 'Yes' to the priced ~$0.07 edit): skyward2 from the near-arm cast2: upper arm straight out ahead, bent at the elbow so the forearm points up, knee lifted.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/skyward2_from_cast2_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cells 1 and 2 hold the same painted bald chibi boy punching, turned toward the right, his arm stretched straight out ahead of him. Cell 4 holds the same boy standing at rest. Leave cells 1 and 4 exactly as they are. Change only cell 2: keep the same boy, the same painting style, the same size and the SAME stretched-out arm. Keep that arm's upper arm exactly where it is now, straight out ahead of him at chest height, from the same shoulder on the front of his chest to the elbow. Bend that arm at the elbow so the forearm points straight UP, with the closed mitten fist up high, well out in front of his face and to the right of it, like a raised fist held up in front of him. A wide gap of magenta separates the whole arm and fist from his head and face. Keep his other fist low and tucked at his waist exactly as it is. Lift his front knee up high as if springing into the air, the other leg straight below him. Keep his head upright and exactly as it is. He is bald, with no face and no hair: keep his head bare, with no nose or other features. No arm, hand or fist crosses or touches his head. Each fist is one round closed mitten with no fingers. He has exactly two arms and two legs. Do not add any weapon, object, ground, dust, motion lines, text or extra figure. Leave cells 3 and 5 to 8 empty. Keep the background flat pure magenta #FF00FF and keep the grid lines. No text, no labels."
+  }
  }
 ]
 }
