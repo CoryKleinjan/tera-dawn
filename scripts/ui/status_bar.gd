@@ -197,6 +197,8 @@ static func has_points_waiting(action: String) -> bool:
 	return false
 
 static func _key_name(action: String) -> String:
+	if TDPad.using_pad and Keybinds.pad_text(action) != "":
+		return Keybinds.pad_text(action)
 	for e in InputMap.action_get_events(action):
 		if e is InputEventKey:
 			return OS.get_keycode_string((e as InputEventKey).physical_keycode)

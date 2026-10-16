@@ -52,6 +52,8 @@ var minimap_button: Button
 var banners: TDBanners
 ## The game menu's button in the top left corner (shown while playing).
 var menu_cog: TextureButton
+## The gamepad's window menu and cursor (TDPad).
+var pad: TDPad
 
 func _ready() -> void:
 	layer = 10
@@ -109,6 +111,9 @@ func _ready() -> void:
 	add_child(minimap)
 	move_child(minimap, window_layer.get_index())
 	_build_menu_button()
+	pad = TDPad.new()
+	pad.hud = self
+	add_child(pad)
 	_build_title()
 
 ## The window changed shape (TDWorld.VIEW): move the pieces pinned to the right and bottom
@@ -296,6 +301,10 @@ func show_trade(state: Dictionary) -> void:
 func typing() -> bool:
 	return chat.typing() or prompt.visible or confirm.visible
 
+## Typing, or the gamepad is busy with windows (TDPad.blocking): the hero stands still.
+func holds_input() -> bool:
+	return typing() or pad.blocking()
+
 func toggle_window(action: String) -> void:
 	if windows.has(action):
 		windows[action].toggle()
@@ -405,6 +414,9 @@ func escape() -> void:
 		return
 	if confirm.visible:
 		confirm.cancel()
+		return
+	if pad.menu.visible:
+		pad.close_menu()
 		return
 	if title.visible:
 		if game_menu.visible:

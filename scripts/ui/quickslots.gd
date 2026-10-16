@@ -13,6 +13,8 @@ const GAP := 3.0
 const PAD := 5.0
 ## How far in from the screen's right edge, and up from the status bar, the panel sits.
 const MARGIN := Vector2(6, 4)
+## How dark the slots on the pad's other page are.
+const OFF_PAGE_DIM := 0.6
 
 var world: TDWorld
 var hud: TDHud
@@ -55,15 +57,28 @@ func _drawn_state() -> Array:
 	if not visible:
 		return []
 	var p := world.player
-	var out := [_hover, size, Game.me.quickslots.duplicate(true), p.cooldown if p else 0, p.recharge.duplicate() if p else {}]
+	var out := [_hover, size, Game.me.quickslots.duplicate(true), p.cooldown if p else 0, p.recharge.duplicate() if p else {}, TDPad.using_pad, Keybinds.pad_page]
 	for i in Character.QUICKSLOTS:
 		var thing := content(i)
 		if thing is SkillDef:
 			out.append(Game.me.skills.use_problem(thing))
 		elif thing is ItemDef:
 			out.append(Game.me.inventory.count_of(thing))
-		out.append(TDStatusBar._key_name(Game.QUICKSLOT_ACTIONS[i]))
+		out.append(key_label(i))
 	return out
+
+## The key or pad button shown on slot `i`. With the pad, the page shows as which slots are
+## lit (off_page), so only the button is named ("Y", not "LT+Y").
+static func key_label(i: int) -> String:
+	var action := Game.QUICKSLOT_ACTIONS[i]
+	var text := TDStatusBar._key_name(action)
+	if TDPad.using_pad and Keybinds.pad_page_of(action) == 1:
+		text = text.trim_prefix(Keybinds.PAD_AXIS_NAMES[Keybinds.PAGE_AXIS] + "+")
+	return text
+
+## Whether slot `i` is dimmed because the pad is on the other page (the left trigger turns it).
+static func off_page(i: int) -> bool:
+	return TDPad.using_pad and Keybinds.pad_page_of(Game.QUICKSLOT_ACTIONS[i]) != Keybinds.pad_page
 
 func slot_rect(i: int) -> Rect2:
 	return grid.rect(i)
@@ -108,7 +123,9 @@ func _draw() -> void:
 			if n == 0:
 				draw_rect(r.grow(-3), Color(0.05, 0.02, 0.15, 0.55))
 			DrawUtil.text(self, Game.num_font, r.position + Vector2(4, 13), str(n), 11, Palette.MIST, 1, 4, Palette.NIGHT)
-		DrawUtil.text(self, Game.num_font, r.end + Vector2(-3, -2), TDStatusBar._key_name(Game.QUICKSLOT_ACTIONS[i]), 11, Palette.MIST, -1, 4, Palette.NIGHT)
+		if off_page(i):
+			draw_rect(r.grow(-3), Color(0.05, 0.02, 0.15, OFF_PAGE_DIM))
+		DrawUtil.text(self, Game.num_font, r.end + Vector2(-3, -2), key_label(i), 11, Palette.MIST, -1, 4, Palette.NIGHT)
 
 func _gui_input(event: InputEvent) -> void:
 	var mm := event as InputEventMouseMotion

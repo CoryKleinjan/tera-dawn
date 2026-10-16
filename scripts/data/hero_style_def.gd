@@ -15,6 +15,8 @@ extends Resource
 @export var sizes: Dictionary = {}
 ## Frame -> the frame whose painting shows there, or &"" when deleted (EquipDef.frame_art).
 @export var frame_art: Dictionary = {}
+## Frame -> true where it is drawn mirrored (the pose editor's Flip, EquipDef.flips).
+@export var flips: Dictionary = {}
 ## A hairstyle's bits that stick out from under a hat that covers it: hat item id -> HeroStyleDef,
 ## drawn instead of the hair while that hat is on.
 @export var under_hats: Dictionary = {}

@@ -16,12 +16,18 @@ enum Layer { BEHIND, UNDER_TOP, OVER_CLOTHES, OVER_HANDS }
 @export var pins: Dictionary = {}
 ## Frame name -> how big the painting is drawn there (1.0 as painted), around its anchor.
 @export var sizes: Dictionary = {}
+## Frame name -> true where the painting is drawn mirrored around its anchor, before it is
+## turned (the pose editor's Flip). Its muzzle (MuzzleSetDef) mirrors with it.
+@export var flips: Dictionary = {}
 
 func texture() -> Texture2D:
 	return frames.get_frame_texture(&"held", 0) if frames else null
 
 func shows(frame: StringName) -> bool:
 	return pins.has(frame)
+
+func flipped(frame: StringName) -> bool:
+	return bool(flips.get(frame, false))
 
 func layer(frame: StringName) -> Layer:
 	return int((pins[frame] as Vector4).w) as Layer

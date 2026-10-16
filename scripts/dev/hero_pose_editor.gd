@@ -2,7 +2,7 @@ extends Control
 ## Poses the hero by hand, frame by frame: open scenes/dev/hero_pose_editor.tscn in Godot and play
 ## it (F6). It draws him the way the game does (HeroBody.layers) in one job's starter gear (pick
 ## the job, his face and hairstyle, the pose and piece from the dropdowns). Click any piece (his body, face, hair, fists, a piece of clothing, a weapon or off-hand) to pick it,
-## drag to move it, the mouse wheel turns it, Shift+wheel or [ ] makes it bigger or smaller, and Save writes it back (held pieces to their pins in
+## drag to move it, the mouse wheel turns it, Shift+wheel or [ ] makes it bigger or smaller, F mirrors it, and Save writes it back (held pieces to their pins in
 ## data/hero/held/, clothes to their item, his face or hairstyle to its file in data/hero/faces/ or
 ## data/hero/hairs/, his body and fists to data/hero/look.tres), so each save
 ## replaces the last.
@@ -15,6 +15,8 @@ extends Control
 ##   A or Insert  show the picked piece on this frame (only with its own painting for it)
 ##   Delete or Backspace  delete the piece from this frame
 ##   C           copy the previous frame's place           R    reset the piece on this frame
+##   F           flip: mirror the picked piece on this frame, keeping where it sits and its turn
+##               (F again puts it back as painted)
 ##   Arrow Up/Down  move 0.5 px (with Shift: left/right)   Space  play the walk   Ctrl+S  save
 ##   M           where shots start: with a weapon or off-hand picked, its muzzle goes under the
 ##               mouse (every frame); with his fists picked, this frame's shooting hand does
@@ -43,7 +45,7 @@ var _piece := 0
 var _frames: Array[StringName] = []
 var _frame := 0
 var _dirty := {}  # Resource to save -> true
-var _saved_pins := {}  # HeldDef -> [its pins, its sizes] as last saved, what Reset puts it back to
+var _saved_pins := {}  # HeldDef -> _held_places() as last saved, what Reset puts it back to
 var _drag := false
 var _grab := Vector2.ZERO
 var _playing := false
@@ -104,7 +106,7 @@ func _build_ui() -> void:
 	var tools := HFlowContainer.new()
 	rows.add_child(tools)
 	for b in [["< Pose", func(): _step(-1)], ["Pose >", func(): _step(1)], ["Turn left", func(): _turn(-2.0)], ["Turn right", func(): _turn(2.0)], ["Smaller", func(): _resize(-SIZE_STEP)],
-			["Bigger", func(): _resize(SIZE_STEP)], ["Down the stack", func(): _restack(-1)],
+			["Bigger", func(): _resize(SIZE_STEP)], ["Flip", _flip], ["Down the stack", func(): _restack(-1)],
 			["Up the stack", func(): _restack(1)], ["Copy previous", _copy_prev],
 			["Reset piece", _reset], ["Reset pose", _reset_pose], ["Play walk", _play], ["Save", _save]]:
 		var btn := Button.new()
@@ -198,7 +200,7 @@ func _pieces_changed() -> void:
 			_pieces.append(HeroBody.Layer.new(_outfit[place]))
 			var h: HeldDef = _outfit[place].held
 			if h and not _saved_pins.has(h):
-				_saved_pins[h] = [h.pins.duplicate(), h.sizes.duplicate()]
+				_saved_pins[h] = _held_places(h)
 	var hat: EquipDef = _outfit.get(&"hat")
 	var under: HeroStyleDef = _hair_style().under_hats.get(hat.id) if hat else null
 	for part in PART_NAMES:
@@ -296,7 +298,7 @@ func _process(delta: float) -> void:
 		var p := l.pin(_f())
 		var stack: String = LAYER_NAMES[int(l.held().layer(_f()))] if l.held() else "%+d places in the stack" % l.steps(_f())
 		var moved: Vector2 = Vector2(p.x, p.y) - l.anchor(_f()) if not l.held() else Vector2(p.x, p.y)
-		text = "%s: %s %.1f, %.1f  turned %.1f°  size %d%%  %s" % [_name(l), "moved" if not l.held() else "at", moved.x, moved.y, p.z, roundi(l.size(_f()) * 100), stack]
+		text = "%s: %s %.1f, %.1f  turned %.1f°  size %d%%%s  %s" % [_name(l), "moved" if not l.held() else "at", moved.x, moved.y, p.z, roundi(l.size(_f()) * 100), "  flipped" if l.flipped(_f()) else "", stack]
 	elif l:
 		text = "%s: not on this frame%s" % [_name(l), " (H shows it)" if l.held() else ""]
 	_info.text = "%s   pose %s (%d/%d)   %s" % [_job_name(_jobs[_job]), _f(), _frame + 1, _frames.size(), text]
@@ -309,7 +311,8 @@ func _draw() -> void:
 		var p := l.pin(_f())
 		var a := l.anchor(_f())
 		var k := l.size(_f())
-		draw_set_transform(o + Vector2(p.x, p.y) * _zoom(), deg_to_rad(p.z), Vector2.ONE * _zoom() * k)
+		var flip := -1.0 if l.flipped(_f()) else 1.0  # mirrored around its anchor, then turned
+		draw_set_transform(o + Vector2(p.x, p.y) * _zoom(), deg_to_rad(p.z), Vector2(flip, 1.0) * _zoom() * k)
 		draw_texture(l.texture(_f()), -a)
 		if _same(l, _sel()):
 			draw_circle(Vector2.ZERO, 1.0 / k, Color(1, 0.2, 0.6, 0.8))  # what it turns around
@@ -320,14 +323,22 @@ func _draw() -> void:
 	if HeroBody.MUZZLES.hands.has(_f()):
 		draw_circle(o + (HeroBody.MUZZLES.hands[_f()] as Vector2) * _zoom(), 1.2 * _zoom(), MUZZLE_DOT)
 
+## `at` (his frame's pixels) as a point of piece `l`'s own painting on this frame, undoing where
+## it sits, its turn, its size and its flip.
+func _on_piece(l: HeroBody.Layer, at: Vector2) -> Vector2:
+	var p := l.pin(_f())
+	var v := (at - Vector2(p.x, p.y)).rotated(-deg_to_rad(p.z)) / l.size(_f())
+	if l.flipped(_f()):
+		v.x = -v.x
+	return v + l.anchor(_f())
+
 ## The topmost piece with paint under `at` (screen position), or null.
 func _piece_at(at: Vector2) -> HeroBody.Layer:
 	var stack := _stack()
 	stack.reverse()
 	for l in stack:
-		var p := l.pin(_f())
 		var tex := l.texture(_f())
-		var px := ((at - _origin()) / _zoom() - Vector2(p.x, p.y)).rotated(-deg_to_rad(p.z)) / l.size(_f()) + l.anchor(_f())
+		var px := _on_piece(l, (at - _origin()) / _zoom())
 		if not _images.has(tex):
 			_images[tex] = tex.get_image()
 		var img: Image = _images[tex]
@@ -375,6 +386,7 @@ func _unhandled_key_input(ev: InputEvent) -> void:
 		KEY_DELETE, KEY_BACKSPACE: _delete_here()
 		KEY_C: _copy_prev()
 		KEY_R: _reset()
+		KEY_F: _flip()
 		KEY_Q: _turn(-0.5 if ev.shift_pressed else -2.0)
 		KEY_E: _turn(0.5 if ev.shift_pressed else 2.0)
 		KEY_BRACKETLEFT: _resize(-(SIZE_FINE if ev.shift_pressed else SIZE_STEP))
@@ -408,8 +420,7 @@ func _set_muzzle(at: Vector2) -> void:
 	var px := (at - _origin()) / _zoom()
 	var muzzles: MuzzleSetDef = HeroBody.MUZZLES
 	if l.held():
-		var p := l.pin(_f())
-		var on := (px - Vector2(p.x, p.y)).rotated(-deg_to_rad(p.z)) / l.size(_f()) + l.anchor(_f())
+		var on := _on_piece(l, px)
 		muzzles.points[(l.owner as EquipDef).id] = Vector2(snappedf(on.x, 0.5), snappedf(on.y, 0.5))
 	elif l.part == &"hands":
 		muzzles.hands[_f()] = Vector2(snappedf(px.x, 0.5), snappedf(px.y, 0.5))
@@ -446,6 +457,15 @@ func _resize(d: float) -> void:
 	_changed(l.held() if l.held() else l.owner)
 	if k > 1.0:
 		_status.text = "Changed (not saved yet). Bigger than painted, so it will look a little softer"
+
+## Mirrors the picked piece on this frame around the point it turns around, keeping where it
+## sits and how it is turned; again puts it back as painted.
+func _flip() -> void:
+	var l := _sel()
+	if l == null or not l.shows(_f()):
+		return
+	l.set_flipped(_f(), not l.flipped(_f()))
+	_changed(l.held() if l.held() else l.owner)
 
 ## Moves the picked piece `d` places up (or down) the stack on this frame: a held piece to the
 ## next of its layers, anything else past the piece above (or below) it.
@@ -485,11 +505,13 @@ func _delete_here() -> void:
 	if h:
 		h.pins.erase(_f())
 		h.sizes.erase(_f())
+		h.flips.erase(_f())
 		_changed(h)
 	else:
 		l.set_frame_art(_f(), &"")
 		l.set_nudge(_f(), Vector4.ZERO)
 		l.set_size(_f(), 1.0)
+		l.set_flipped(_f(), false)
 		_changed(l.owner)
 
 ## Puts the picked piece on this frame with its own painting for this frame (each piece has one
@@ -547,17 +569,23 @@ func _reset_pose() -> void:
 func _reset_piece(l: HeroBody.Layer) -> void:
 	var h := l.held()
 	if h:
-		var saved: Array = _saved_pins.get_or_add(h, [h.pins.duplicate(), h.sizes.duplicate()])
+		var saved: Array = _saved_pins.get_or_add(h, _held_places(h))
 		if saved[0].has(_f()):
 			h.pins[_f()] = saved[0][_f()]
 		else:
 			h.pins.erase(_f())
 		l.set_size(_f(), saved[1].get(_f(), 1.0))
+		l.set_flipped(_f(), saved[2].get(_f(), false))
 		_changed(h)
-	elif l.nudges().has(_f()) or l.sizes().has(_f()):
+	elif l.nudges().has(_f()) or l.sizes().has(_f()) or l.flipped(_f()):
 		l.set_nudge(_f(), Vector4.ZERO)
 		l.set_size(_f(), 1.0)
+		l.set_flipped(_f(), false)
 		_changed(l.owner)
+
+## A held piece's pins, sizes and flips, copied.
+func _held_places(h: HeldDef) -> Array:
+	return [h.pins.duplicate(), h.sizes.duplicate(), h.flips.duplicate()]
 
 ## The place of the nearest earlier frame that has one, copied onto this frame.
 func _copy_prev() -> void:
@@ -574,10 +602,12 @@ func _copy_prev() -> void:
 			if h:
 				h.pins[_f()] = h.pins[f]
 				l.set_size(_f(), l.size(f))
+				l.set_flipped(_f(), l.flipped(f))
 				_changed(h)
 			elif l.shows(_f()):
 				l.set_nudge(_f(), places[f])
 				l.set_size(_f(), l.size(f))
+				l.set_flipped(_f(), l.flipped(f))
 				_changed(l.owner)
 			return
 
@@ -599,7 +629,7 @@ func _save() -> void:
 	for res: Resource in _dirty:
 		var err := ResourceSaver.save(res, res.resource_path)
 		if res is HeldDef and err == OK:
-			_saved_pins[res] = [(res as HeldDef).pins.duplicate(), (res as HeldDef).sizes.duplicate()]
+			_saved_pins[res] = _held_places(res as HeldDef)
 		saved.append("%s %s" % [res.resource_path.get_file(), "saved" if err == OK else "FAILED (%s)" % error_string(err)])
 	_dirty.clear()
 	_status.text = ", ".join(saved) if saved else "Nothing changed"

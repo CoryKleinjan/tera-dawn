@@ -23,12 +23,14 @@ then character select shows the list (name, level and job) with the new characte
   `data/hero/held/`): ONE painting pinned per frame (anchor point, spot, turn and layer), the
   MapleStory way. Pose him by hand in `scenes/dev/hero_pose_editor.tscn` (play it in Godot:
   pick the job ("No job" for the plain hero), face, hair, pose and what he wears from the dropdowns, click
-  any piece and drag it, wheel or Q/E to turn, Shift+wheel or [ ] to resize, PgUp/PgDn to move
-  it up or down the stack, Save writes the files). Held pieces save to their pins; worn layers
+  any piece and drag it, wheel or Q/E to turn, Shift+wheel or [ ] to resize, F or Flip to mirror
+  it on that pose, PgUp/PgDn to move it up or down the stack, Save writes the files). Held pieces save to their pins; worn layers
   to `EquipDef.nudges`, a face or hairstyle to its `HeroStyleDef.nudges` and his body and fists
   to `HeroLookDef.nudges` (frame ->
-  Vector4: shift, turn, places up the stack), and sizes to each one's `sizes` (frame -> share
-  of its painted size), applied whole by `HeroBody.Layer`. The Shown here checkboxes put a piece
+  Vector4: shift, turn, places up the stack), sizes to each one's `sizes` (frame -> share
+  of its painted size) and flips to each one's `flips` (frame -> true: mirrored around the
+  point it turns around, then turned; a held piece's muzzle mirrors with it), applied whole by
+  `HeroBody.Layer`. The Shown here checkboxes put a piece
   on a frame or take it off; a worn piece with no painting of its own for that pose can't be
   ticked (held pieces fit any pose). Held pieces gain or lose that frame's pin; worn
   layers and his parts record it in `frame_art` (frame -> the frame whose painting shows there,

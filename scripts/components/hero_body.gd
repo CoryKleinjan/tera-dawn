@@ -103,8 +103,11 @@ static func muzzle_of(worn: Dictionary, anim: StringName, face: int) -> Variant:
 		if e and e.held and e.held.shows(frame) and MUZZLES.points.has(e.id):
 			var pin: Vector4 = e.held.pins[frame]
 			var k := float(e.held.sizes.get(frame, 1.0))
-			# turned and sized the way the piece is drawn (_place), in his frame's pixels
-			at = Vector2(pin.x, pin.y) + ((MUZZLES.points[e.id] as Vector2) - e.held.anchor).rotated(deg_to_rad(pin.z)) * k
+			var off := (MUZZLES.points[e.id] as Vector2) - e.held.anchor
+			if e.held.flipped(frame):
+				off.x = -off.x
+			# flipped, turned and sized the way the piece is drawn (_place), in his frame's pixels
+			at = Vector2(pin.x, pin.y) + off.rotated(deg_to_rad(pin.z)) * k
 			break
 	if at == null:
 		return null
@@ -112,8 +115,8 @@ static func muzzle_of(worn: Dictionary, anim: StringName, face: int) -> Variant:
 	var texel := TDStage.TEXEL / TDStage.frames_density(LOOK.body)
 	return Vector2(((at as Vector2).x - size.x / 2.0) * face, (at as Vector2).y - size.y) * texel
 
-## Sets every layer up for `frame` facing `face` in `worn`: which picture it shows, turned,
-## sized and mirrored, and where it sits from his feet (_offsets).
+## Sets every layer up for `frame` facing `face` in `worn`: which picture it shows, flipped,
+## turned, sized and mirrored, and where it sits from his feet (_offsets).
 func _set_up(worn: Dictionary, frame: StringName, face: int) -> void:
 	var stack := layers(worn, frame, face_style, hair_style)
 	while _layers.size() < stack.size():
@@ -129,18 +132,19 @@ func _set_up(worn: Dictionary, frame: StringName, face: int) -> void:
 		var tex := layer.texture(frame) if layer else null
 		if tex and size != Vector2.ZERO:
 			var pin := layer.pin(frame)
-			_offsets[i] = _place(s, tex, layer.anchor(frame), Vector2(pin.x, pin.y), pin.z, layer.size(frame), size, face)
+			_offsets[i] = _place(s, tex, layer.anchor(frame), Vector2(pin.x, pin.y), pin.z, layer.size(frame), layer.flipped(frame), size, face)
 		s.visible = visible and s.texture != null
 
 ## Puts `s` showing `tex` with its point `anchor` (its own pixels) on `pin` (the pixels of his
-## frames, `size`, whose bottom middle is at his feet), turned `deg` clockwise and drawn `k`
-## times as big around it, mirrored when he faces left. Returns where it sits from his feet,
-## in game pixels.
-func _place(s: Sprite3D, tex: Texture2D, anchor: Vector2, pin: Vector2, deg: float, k: float, size: Vector2, face: int) -> Vector2:
+## frames, `size`, whose bottom middle is at his feet), mirrored around `anchor` when `flip`,
+## turned `deg` clockwise and drawn `k` times as big around it, and all of that mirrored when
+## he faces left. Returns where it sits from his feet, in game pixels.
+func _place(s: Sprite3D, tex: Texture2D, anchor: Vector2, pin: Vector2, deg: float, k: float, flip: bool, size: Vector2, face: int) -> Vector2:
 	var texel := TDStage.TEXEL / TDStage.frames_density(LOOK.body)
+	var facing := -face if flip else face  # which way its painting faces on screen
 	s.texture = tex
-	s.flip_h = face < 0
-	s.offset = Vector2((tex.get_width() / 2.0 - anchor.x) * face, anchor.y - tex.get_height() / 2.0)
+	s.flip_h = facing < 0
+	s.offset = Vector2((tex.get_width() / 2.0 - anchor.x) * facing, anchor.y - tex.get_height() / 2.0)
 	s.rotation.z = -deg_to_rad(deg) * face
 	s.scale = Vector3(k, k, 1.0)
 	return Vector2((pin.x - size.x / 2.0) * face, pin.y - size.y) * texel
@@ -283,6 +287,32 @@ class Layer:
 			all.erase(frame)
 		else:
 			all[frame] = k
+
+	## Frame -> true where it is drawn mirrored around the point it turns around, before it is
+	## turned (the pose editor's Flip).
+	func flips() -> Dictionary:
+		if held():
+			return held().flips
+		if _own():
+			return _own().get("flips")
+		return (owner as HeroLookDef).flips.get(part, {})
+
+	func flipped(frame: StringName) -> bool:
+		return bool(flips().get(frame, false))
+
+	## Draws it mirrored on `frame` (see flips), or as painted.
+	func set_flipped(frame: StringName, on: bool) -> void:
+		var all: Dictionary
+		if held():
+			all = held().flips
+		elif _own():
+			all = _own().get("flips")
+		else:
+			all = (owner as HeroLookDef).flips.get_or_add(part, {})
+		if on:
+			all[frame] = true
+		else:
+			all.erase(frame)
 
 	## Frame -> the frame whose painting shows there, or &"" for none, set by the pose editor's
 	## Add/Delete (EquipDef.frame_art); frames not listed show their own painting.
