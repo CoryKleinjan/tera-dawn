@@ -22478,7 +22478,7 @@
  {
   "id": "mshero_mag_slippers_b8",
   "prompts": null,
-  "batch": null,
+  "batch": "maple hero layers (edit)",
   "with": null,
   "refs": [],
   "save": "mshero_mag_slippers_b8.png",
@@ -22491,7 +22491,7 @@
   ],
   "anchor": null,
   "size": "2K",
-  "note": "2026-10-16 thread 'Hero pose review' feet check (Cory 19:16Z 'as long as the foot matches which way it points for every pose and equip, thats fine'): the magician's back slipper on cast1 and skyward2 curled backwards while his foot and every other job's boot point forward; fresh paint with every toe forward.",
+  "note": "2026-10-16 thread 'Hero pose review' feet check (Cory 19:16Z 'as long as the foot matches which way it points for every pose and equip, thats fine'): the magician's back slipper on cast1 and skyward2 curled backwards while his foot and every other job's boot point forward; fresh paint with every toe forward. Released by Cory 20:21Z (\"yes, do the reprints\") to the priced line 20:17Z (3 sheets: Magician slippers b8, Pirate trousers b9, Thief jerkin b9, about $0.20).",
   "edit": {
    "base": "/mnt/project-files/art-sheets/maple-hero/bases/b8_mag_slippers_sil.png",
    "refs": [
@@ -22505,7 +22505,7 @@
  {
   "id": "mshero_pirate_trousers_b9",
   "prompts": null,
-  "batch": null,
+  "batch": "maple hero layers (edit)",
   "with": null,
   "refs": [],
   "save": "mshero_pirate_trousers_b9.png",
@@ -22518,7 +22518,7 @@
   ],
   "anchor": null,
   "size": "2K",
-  "note": "2026-10-16 thread 'Hero pose review' (Cory 19:55Z 'which sheets missed'): the Pirate trousers on crouch, backstep and sit: painted on the place the Thief trousers fill, from one pair of Pirate trousers (no sheet of boys attached)",
+  "note": "2026-10-16 thread 'Hero pose review' (Cory 19:55Z 'which sheets missed'): the Pirate trousers on crouch, backstep and sit: painted on the place the Thief trousers fill, from one pair of Pirate trousers (no sheet of boys attached). Released by Cory 20:21Z (\"yes, do the reprints\") to the priced line 20:17Z (3 sheets: Magician slippers b8, Pirate trousers b9, Thief jerkin b9, about $0.20).",
   "edit": {
    "base": "/mnt/project-files/art-sheets/maple-hero/bases/b9_pirate_trousers_base.png",
    "refs": [
@@ -22530,7 +22530,7 @@
  {
   "id": "mshero_thief_jerkin_b9",
   "prompts": null,
-  "batch": null,
+  "batch": "maple hero layers (edit)",
   "with": null,
   "refs": [],
   "save": "mshero_thief_jerkin_b9.png",
@@ -22543,7 +22543,7 @@
   ],
   "anchor": null,
   "size": "2K",
-  "note": "2026-10-16 thread 'Hero pose review' (Cory 19:55Z 'which sheets missed'): the Thief jerkin on ladder1: its own painting with both sleeves carried down over the white shirt still showing at the elbows",
+  "note": "2026-10-16 thread 'Hero pose review' (Cory 19:55Z 'which sheets missed'): the Thief jerkin on ladder1: its own painting with both sleeves carried down over the white shirt still showing at the elbows. Released by Cory 20:21Z (\"yes, do the reprints\") to the priced line 20:17Z (3 sheets: Magician slippers b8, Pirate trousers b9, Thief jerkin b9, about $0.20).",
   "edit": {
    "base": "/mnt/project-files/art-sheets/maple-hero/bases/b9_thief_jerkin_base.png",
    "refs": [],
