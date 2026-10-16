@@ -1,0 +1,83 @@
+{
+  "source": "art/source/monanim_marsh_horror.png",
+  "save": false,
+  "out_dir": "art/build/monanim_marsh_horror",
+  "cells": [
+    [
+      ""
+    ],
+    [
+      "jump1",
+      "",
+      "jump2",
+      "",
+      "knock_up",
+      "",
+      "knock_down"
+    ],
+    [
+      ""
+    ],
+    [
+      "pounce_windup",
+      "",
+      "pounce",
+      "",
+      "slam_windup",
+      "",
+      "slam"
+    ],
+    [
+      ""
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "scale": 0.2087,
+  "detail": 2.56,
+  "grid": {
+    "rows": [
+      0,
+      5,
+      547,
+      553,
+      1096,
+      1100
+    ],
+    "cols": [
+      [
+        0,
+        1600
+      ],
+      [
+        0,
+        408,
+        413,
+        822,
+        828,
+        1237,
+        1242,
+        1600
+      ],
+      [
+        0,
+        1600
+      ],
+      [
+        0,
+        408,
+        413,
+        822,
+        828,
+        1237,
+        1242,
+        1600
+      ],
+      [
+        0,
+        1600
+      ]
+    ]
+  }
+}

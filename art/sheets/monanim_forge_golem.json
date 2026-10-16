@@ -1,0 +1,67 @@
+{
+  "source": "art/source/monanim_forge_golem.png",
+  "save": false,
+  "out_dir": "art/build/monanim_forge_golem",
+  "cells": [
+    [
+      "jump1",
+      "",
+      "jump2",
+      "",
+      "knock_up",
+      "",
+      "knock_down"
+    ],
+    [
+      ""
+    ],
+    [
+      "lunge_windup",
+      "",
+      "lunge",
+      "",
+      "slam_windup",
+      "",
+      "slam"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "scale": 0.2772,
+  "detail": 2.56,
+  "grid": {
+    "rows": [
+      0,
+      547,
+      553,
+      1100
+    ],
+    "cols": [
+      [
+        0,
+        405,
+        411,
+        823,
+        829,
+        1241,
+        1247,
+        1600
+      ],
+      [
+        0,
+        1600
+      ],
+      [
+        0,
+        405,
+        411,
+        823,
+        829,
+        1241,
+        1247,
+        1600
+      ]
+    ]
+  }
+}

@@ -8,7 +8,7 @@
 script = ExtResource("1_item_def")
 id = &"green_leaf"
 display_name = "Green Leaf"
-description = "Dropped by the Leafwing."
+description = "Dropped by the Seedwing."
 icon = ExtResource("2_green_leaf")
 sprite_scale = 0.36
 glow_color = Color(0.627451, 0.878431, 0.501961, 1.0)

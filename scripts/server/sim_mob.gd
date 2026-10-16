@@ -41,6 +41,8 @@ const HOP_CHANCE := 1.0 / 80.0
 const WAKE_HOP := 5.0
 ## Ticks a flier pulled down by a slam (SkillDef.slam) stays on the ground.
 const DOWNED_TICKS := 120
+## Ticks a thrown or slammed monster lies knocked down after it hits the ground.
+const FLOORED_TICKS := 40
 ## How far around a player's hurtbox a landing shot still hits.
 const SHOT_GROW := 14
 ## Bosses: how fast the damage they remember fades (per tick), how far ahead they cut a
@@ -70,6 +72,7 @@ var stun_t := 0     # ticks left stunned: it can't move or attack
 var hang_t := 0     # ticks left held at its height in the air (a stun or a pin)
 var tossed := false # thrown into the air by a skill: it can't move or attack until it lands
 var downed_t := 0   # ticks left a flier is pulled down to the ground (SkillDef.slam)
+var floored_t := 0  # ticks left lying knocked down after a throw or a slam
 var hex_t := 0      # ticks left hexed: it takes `hex_amount` more damage from everyone
 var hex_amount := 0.0
 var burn_t := 0     # ticks left burning, `burn_damage` every BURN_EVERY ticks
@@ -141,6 +144,7 @@ func _reset() -> void:
 	hang_t = 0
 	tossed = false
 	downed_t = 0
+	floored_t = 0
 	hex_t = 0
 	hex_amount = 0.0
 	burn_t = 0
@@ -263,6 +267,8 @@ func step() -> void:
 		hang_t -= 1
 	if downed_t > 0:
 		downed_t -= 1
+	if floored_t > 0:
+		floored_t -= 1
 	if hex_t > 0:
 		hex_t -= 1
 	if burn_t > 0:
@@ -287,6 +293,8 @@ func step() -> void:
 		if hop <= 0.0:
 			hop = 0.0
 			hop_v = 0.0
+			if tossed:
+				floored_t = FLOORED_TICKS
 			tossed = false
 	var half := def.size.x / 2.0
 	if position.x < area.x + half:
@@ -383,9 +391,10 @@ func root(ticks: int) -> void:
 func controllable() -> bool:
 	return not def.boss
 
-## Whether it is held out of action: stunned, or thrown up and not yet landed.
+## Whether it is held out of action: stunned, thrown up and not yet landed, or lying
+## knocked down after.
 func held() -> bool:
-	return stun_t > 0 or tossed
+	return stun_t > 0 or tossed or floored_t > 0
 
 ## Stops what it's doing without dropping it out of the air (a move ends on the ground).
 func _interrupt() -> void:
@@ -418,8 +427,8 @@ func hold_up(ticks: int) -> void:
 		hang_t = maxi(hang_t, ticks)
 		hop_v = 0.0
 
-## Yanks it down to the ground (SkillDef.slam): a flier stays down for DOWNED_TICKS.
-## Bosses stay up.
+## Yanks it down to the ground (SkillDef.slam): a flier stays down for DOWNED_TICKS, and
+## one slammed out of a jump lies knocked down for a moment. Bosses stay up.
 func slam_down() -> void:
 	if not controllable():
 		return
@@ -429,6 +438,7 @@ func slam_down() -> void:
 		hop_v = 0.0
 		tossed = false
 		hang_t = 0
+		floored_t = FLOORED_TICKS
 	if def.flying:
 		downed_t = DOWNED_TICKS
 
@@ -570,7 +580,8 @@ func _step_shots() -> void:
 		if p and p.hurtbox.rect_at(p.position).grow(SHOT_GROW).has_point(s[2]):
 			map.hurt_player(p, def, position.x, s[3])
 
-## What clients need to draw it: [x, y, dir, hp fraction (0..1000), flags].
+## What clients need to draw it: [x, y, dir, hp fraction (0..1000), flags, move (1 + its
+## index in def.moves while it uses one, else 0)].
 func snapshot() -> Array:
 	var flags := 0
 	if dead:
@@ -597,6 +608,13 @@ func snapshot() -> Array:
 		flags |= SnapshotFlags.MOB_STUNNED
 	if downed_t > 0:
 		flags |= SnapshotFlags.MOB_DOWNED
+	if floored_t > 0:
+		flags |= SnapshotFlags.MOB_FLOORED
+	if tossed:
+		flags |= SnapshotFlags.MOB_TOSSED
+	elif hop > 0.0 and not def.flying:
+		flags |= SnapshotFlags.MOB_AIRBORNE
 	if burn_t > 0:
 		flags |= SnapshotFlags.MOB_BURNING
-	return [position.x, position.y - hop, dir, roundi(health.fraction() * 1000.0), flags]
+	var move := moves.index + 1 if moves.busy() else 0
+	return [position.x, position.y - hop, dir, roundi(health.fraction() * 1000.0), flags, move]

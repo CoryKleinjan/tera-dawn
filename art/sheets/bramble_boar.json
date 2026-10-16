@@ -37,7 +37,17 @@
         "walk3": "bramble_boar:walk3",
         "attack": "bramble_boar:attack",
         "hurt": "bramble_boar:hurt",
-        "defeated": "bramble_boar:defeated"
+        "defeated": "bramble_boar:defeated",
+        "jump1": "monanim_bramble_boar:jump1",
+        "jump2": "monanim_bramble_boar:jump2",
+        "knock_up": "monanim_bramble_boar:knock_up",
+        "knock_down": "monanim_bramble_boar:knock_down",
+        "charge_windup": "monanim_bramble_boar:charge_windup",
+        "charge": "monanim_bramble_boar:charge",
+        "slam_windup": "monanim_bramble_boar:slam_windup",
+        "slam": "monanim_bramble_boar:slam",
+        "pounce_windup": "monanim_bramble_boar:pounce_windup",
+        "pounce": "monanim_bramble_boar:pounce"
       },
       "anchor": "mass",
       "baseline": "bottom",
@@ -79,6 +89,62 @@
           ],
           "fps": 1,
           "loop": false
+        },
+        "jump": {
+          "frames": [
+            "jump1",
+            "jump2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "knock_up": {
+          "frames": [
+            "knock_up"
+          ],
+          "fps": 1
+        },
+        "knock_down": {
+          "frames": [
+            "knock_down"
+          ],
+          "fps": 1
+        },
+        "charge_windup": {
+          "frames": [
+            "charge_windup"
+          ],
+          "fps": 1
+        },
+        "charge": {
+          "frames": [
+            "charge"
+          ],
+          "fps": 1
+        },
+        "slam_windup": {
+          "frames": [
+            "slam_windup"
+          ],
+          "fps": 1
+        },
+        "slam": {
+          "frames": [
+            "slam"
+          ],
+          "fps": 1
+        },
+        "pounce_windup": {
+          "frames": [
+            "pounce_windup"
+          ],
+          "fps": 1
+        },
+        "pounce": {
+          "frames": [
+            "pounce"
+          ],
+          "fps": 1
         }
       }
     }

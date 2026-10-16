@@ -36,7 +36,11 @@
         "shoot1": "acorn_sentry:shoot1",
         "shoot2": "acorn_sentry:shoot2",
         "hurt": "acorn_sentry:hurt",
-        "defeated": "acorn_sentry:defeated"
+        "defeated": "acorn_sentry:defeated",
+        "knock_up": "monanim_acorn_sentry:knock_up",
+        "knock_down": "monanim_acorn_sentry:knock_down",
+        "shot_windup": "monanim_acorn_sentry:shot_windup",
+        "shot": "monanim_acorn_sentry:shot"
       },
       "anchor": "mass",
       "baseline": "bottom",
@@ -77,6 +81,30 @@
           ],
           "fps": 1,
           "loop": false
+        },
+        "knock_up": {
+          "frames": [
+            "knock_up"
+          ],
+          "fps": 1
+        },
+        "knock_down": {
+          "frames": [
+            "knock_down"
+          ],
+          "fps": 1
+        },
+        "shot_windup": {
+          "frames": [
+            "shot_windup"
+          ],
+          "fps": 1
+        },
+        "shot": {
+          "frames": [
+            "shot"
+          ],
+          "fps": 1
         }
       }
     }

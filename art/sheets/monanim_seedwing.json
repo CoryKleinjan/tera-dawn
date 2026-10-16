@@ -1,0 +1,35 @@
+{
+  "source": "art/source/monanim_seedwing.png",
+  "save": false,
+  "out_dir": "art/build/monanim_seedwing",
+  "cells": [
+    [
+      "swoop_windup",
+      "",
+      "swoop",
+      "",
+      "knock_down"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "scale": 0.0927,
+  "detail": 2.56,
+  "grid": {
+    "rows": [
+      0,
+      550
+    ],
+    "cols": [
+      [
+        0,
+        399,
+        402,
+        799,
+        802,
+        1200
+      ]
+    ]
+  }
+}

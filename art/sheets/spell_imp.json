@@ -36,7 +36,15 @@
         "walk3": "spell_imp:walk3",
         "attack": "spell_imp:attack",
         "hurt": "spell_imp:hurt",
-        "defeated": "spell_imp:defeated"
+        "defeated": "spell_imp:defeated",
+        "jump1": "monanim_spell_imp:jump1",
+        "jump2": "monanim_spell_imp:jump2",
+        "knock_up": "monanim_spell_imp:knock_up",
+        "knock_down": "monanim_spell_imp:knock_down",
+        "lunge_windup": "monanim_spell_imp:lunge_windup",
+        "lunge": "monanim_spell_imp:lunge",
+        "shot_windup": "monanim_spell_imp:shot_windup",
+        "shot": "monanim_spell_imp:shot"
       },
       "anchor": "mass",
       "baseline": "bottom",
@@ -78,6 +86,50 @@
           ],
           "fps": 1,
           "loop": false
+        },
+        "jump": {
+          "frames": [
+            "jump1",
+            "jump2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "knock_up": {
+          "frames": [
+            "knock_up"
+          ],
+          "fps": 1
+        },
+        "knock_down": {
+          "frames": [
+            "knock_down"
+          ],
+          "fps": 1
+        },
+        "lunge_windup": {
+          "frames": [
+            "lunge_windup"
+          ],
+          "fps": 1
+        },
+        "lunge": {
+          "frames": [
+            "lunge"
+          ],
+          "fps": 1
+        },
+        "shot_windup": {
+          "frames": [
+            "shot_windup"
+          ],
+          "fps": 1
+        },
+        "shot": {
+          "frames": [
+            "shot"
+          ],
+          "fps": 1
         }
       }
     }

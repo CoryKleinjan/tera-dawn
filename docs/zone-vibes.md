@@ -128,9 +128,9 @@ thatch and antler trim.
 
 | Sub-zone | Role | Lv | What changes | Monsters |
 | --- | --- | --- | --- | --- |
-| Bough Trail | Border to Dawnharbor | 9-10 | Forest edge, warm golden daylight | Thornling, Leafwing |
-| Whispering Grove | Border to Lumewood | 9-10 | Cool mint-teal mist, rising motes; quiet, a little magical, hinting at Lumewood | Thornling, Leafwing |
-| Mossy Glade | Training | 10-14 | Brightest Greenbough map, sunlit glade, strong light shafts | Leafwing, Bramble Boar |
+| Bough Trail | Border to Dawnharbor | 9-10 | Forest edge, warm golden daylight | Thornling, Seedwing |
+| Whispering Grove | Border to Lumewood | 9-10 | Cool mint-teal mist, rising motes; quiet, a little magical, hinting at Lumewood | Thornling, Seedwing |
+| Mossy Glade | Training | 10-14 | Brightest Greenbough map, sunlit glade, strong light shafts | Seedwing, Bramble Boar |
 | Thornwood | Training | 14-16 | Dim and tangled: olive fog, muted colour, darker shadows, thorns | Bramble Boar, Acorn Sentry |
 | Deep Canopy | Training | 16-18 | Dark green under a closed canopy, warm shafts piercing through | Acorn Sentry, Barkcap |
 | Old Oak Heights | Training | 18-23 | High in the old oaks: warm afternoon light through the leaves, golden shafts, soft green haze | Barkcap, Grove Wisp |

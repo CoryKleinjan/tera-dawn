@@ -1,0 +1,99 @@
+{
+  "source": "art/source/monanim_gloomcap.png",
+  "save": false,
+  "out_dir": "art/build/monanim_gloomcap",
+  "cells": [
+    [
+      "jump1",
+      "",
+      "jump2",
+      "",
+      "knock_up",
+      "",
+      "knock_down"
+    ],
+    [
+      ""
+    ],
+    [
+      ""
+    ],
+    [
+      ""
+    ],
+    [
+      "pounce_windup",
+      "",
+      "pounce",
+      "",
+      "slam_windup",
+      "",
+      "slam"
+    ],
+    [
+      ""
+    ],
+    [
+      ""
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "scale": 0.1733,
+  "detail": 2.56,
+  "grid": {
+    "rows": [
+      0,
+      483,
+      490,
+      547,
+      554,
+      1033,
+      1040,
+      1100
+    ],
+    "cols": [
+      [
+        0,
+        405,
+        413,
+        822,
+        829,
+        1239,
+        1246,
+        1600
+      ],
+      [
+        0,
+        1600
+      ],
+      [
+        0,
+        1600
+      ],
+      [
+        0,
+        1600
+      ],
+      [
+        0,
+        405,
+        413,
+        822,
+        829,
+        1239,
+        1246,
+        1600
+      ],
+      [
+        0,
+        1600
+      ],
+      [
+        0,
+        1600
+      ]
+    ]
+  }
+}

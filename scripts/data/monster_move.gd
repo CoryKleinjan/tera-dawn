@@ -46,3 +46,9 @@ enum Kind {
 @export var recover := 24
 ## Shot: what it fires.
 @export var projectile: ProjectileDef
+
+## The monster's animation for this move (its kind: "lunge", "charge", ...). Its wind-up
+## plays "<name>_windup". Either falls back to the attack pose and a lean when the monster
+## has no such frames.
+func animation_name() -> StringName:
+	return StringName((Kind.keys()[kind] as String).to_lower())

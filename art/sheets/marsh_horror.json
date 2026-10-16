@@ -37,7 +37,15 @@
         "hop3": "marsh_horror:hop3",
         "attack": "marsh_horror:attack",
         "hurt": "marsh_horror:hurt",
-        "defeated": "marsh_horror:defeated"
+        "defeated": "marsh_horror:defeated",
+        "jump1": "monanim_marsh_horror:jump1",
+        "jump2": "monanim_marsh_horror:jump2",
+        "knock_up": "monanim_marsh_horror:knock_up",
+        "knock_down": "monanim_marsh_horror:knock_down",
+        "pounce_windup": "monanim_marsh_horror:pounce_windup",
+        "pounce": "monanim_marsh_horror:pounce",
+        "slam_windup": "monanim_marsh_horror:slam_windup",
+        "slam": "monanim_marsh_horror:slam"
       },
       "anchor": "mass",
       "baseline": "cell",
@@ -78,6 +86,50 @@
           ],
           "fps": 1,
           "loop": false
+        },
+        "jump": {
+          "frames": [
+            "jump1",
+            "jump2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "knock_up": {
+          "frames": [
+            "knock_up"
+          ],
+          "fps": 1
+        },
+        "knock_down": {
+          "frames": [
+            "knock_down"
+          ],
+          "fps": 1
+        },
+        "pounce_windup": {
+          "frames": [
+            "pounce_windup"
+          ],
+          "fps": 1
+        },
+        "pounce": {
+          "frames": [
+            "pounce"
+          ],
+          "fps": 1
+        },
+        "slam_windup": {
+          "frames": [
+            "slam_windup"
+          ],
+          "fps": 1
+        },
+        "slam": {
+          "frames": [
+            "slam"
+          ],
+          "fps": 1
         }
       }
     }

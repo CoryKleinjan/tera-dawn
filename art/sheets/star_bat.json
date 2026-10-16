@@ -37,7 +37,12 @@
         "fly3": "star_bat:fly3",
         "attack": "star_bat:attack",
         "hurt": "star_bat:hurt",
-        "defeated": "star_bat:defeated"
+        "defeated": "star_bat:defeated",
+        "knock_down": "monanim_star_bat:knock_down",
+        "swoop_windup": "monanim_star_bat:swoop_windup",
+        "swoop": "monanim_star_bat:swoop",
+        "shot_windup": "monanim_star_bat:shot_windup",
+        "shot": "monanim_star_bat:shot"
       },
       "anchor": "mass",
       "baseline": "cell",
@@ -79,6 +84,36 @@
           ],
           "fps": 1,
           "loop": false
+        },
+        "knock_down": {
+          "frames": [
+            "knock_down"
+          ],
+          "fps": 1
+        },
+        "swoop_windup": {
+          "frames": [
+            "swoop_windup"
+          ],
+          "fps": 1
+        },
+        "swoop": {
+          "frames": [
+            "swoop"
+          ],
+          "fps": 1
+        },
+        "shot_windup": {
+          "frames": [
+            "shot_windup"
+          ],
+          "fps": 1
+        },
+        "shot": {
+          "frames": [
+            "shot"
+          ],
+          "fps": 1
         }
       }
     }

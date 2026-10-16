@@ -1,0 +1,44 @@
+{
+  "source": "art/source/monanim_lantern_wraith.png",
+  "save": false,
+  "out_dir": "art/build/monanim_lantern_wraith",
+  "cells": [
+    [
+      "swoop_windup",
+      "",
+      "swoop",
+      "",
+      "shot_windup",
+      "",
+      "shot"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "scale": 0.3189,
+  "detail": 2.72,
+  "grid": {
+    "rows": [
+      0,
+      550
+    ],
+    "cols": [
+      [
+        0,
+        399,
+        401,
+        800,
+        801,
+        1200,
+        1202,
+        1600
+      ]
+    ]
+  },
+  "overrides": {
+    "swoop_windup": {
+      "drop_edge": true
+    }
+  }
+}

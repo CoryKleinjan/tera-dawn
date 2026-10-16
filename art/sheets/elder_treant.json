@@ -52,7 +52,15 @@
         "hurt": "elder_treant:hurt",
         "enraged": "elder_treant:enraged",
         "defeated1": "elder_treant:defeated1",
-        "defeated2": "elder_treant:defeated2"
+        "defeated2": "elder_treant:defeated2",
+        "jump1": "monanim_elder_treant:jump1",
+        "jump2": "monanim_elder_treant:jump2",
+        "lunge_windup": "monanim_elder_treant:lunge_windup",
+        "lunge": "monanim_elder_treant:lunge",
+        "slam_windup": "monanim_elder_treant:slam_windup",
+        "slam": "monanim_elder_treant:slam",
+        "shot_windup": "monanim_elder_treant:shot_windup",
+        "shot": "monanim_elder_treant:shot"
       },
       "anchor": "mass",
       "baseline": "bottom",
@@ -97,6 +105,50 @@
           ],
           "fps": 2,
           "loop": false
+        },
+        "jump": {
+          "frames": [
+            "jump1",
+            "jump2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "lunge_windup": {
+          "frames": [
+            "lunge_windup"
+          ],
+          "fps": 1
+        },
+        "lunge": {
+          "frames": [
+            "lunge"
+          ],
+          "fps": 1
+        },
+        "slam_windup": {
+          "frames": [
+            "slam_windup"
+          ],
+          "fps": 1
+        },
+        "slam": {
+          "frames": [
+            "slam"
+          ],
+          "fps": 1
+        },
+        "shot_windup": {
+          "frames": [
+            "shot_windup"
+          ],
+          "fps": 1
+        },
+        "shot": {
+          "frames": [
+            "shot"
+          ],
+          "fps": 1
         }
       }
     }

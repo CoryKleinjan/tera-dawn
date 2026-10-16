@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MonsterDef" load_steps=20 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
-[ext_resource type="SpriteFrames" path="res://assets/animations/leafwing.tres" id="2_leafwing"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/seedwing.tres" id="2_seedwing"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/green_leaf.tres" id="5_green_leaf"]
@@ -64,8 +64,8 @@ max_amount = 23
 
 [resource]
 script = ExtResource("1_monster_def")
-id = &"leafwing"
-display_name = "Leafwing"
+id = &"seedwing"
+display_name = "Seedwing"
 level = 10
 max_hp = 270
 attack = 29
@@ -76,6 +76,6 @@ boss = false
 flying = true
 hover_height = 56.0
 moves = Array[ExtResource("mv_script")]([ExtResource("mv_swoop")])
-sprite_frames = ExtResource("2_leafwing")
+sprite_frames = ExtResource("2_seedwing")
 sprite_scale = 1.0
 drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7")])

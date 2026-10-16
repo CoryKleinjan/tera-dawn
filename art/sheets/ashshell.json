@@ -49,7 +49,13 @@
         "walk3": "ashshell:walk3",
         "attack": "ashshell:attack",
         "hurt": "ashshell:hurt",
-        "defeated": "ashshell:defeated"
+        "defeated": "ashshell:defeated",
+        "jump1": "monanim_ashshell:jump1",
+        "jump2": "monanim_ashshell:jump2",
+        "knock_up": "monanim_ashshell:knock_up",
+        "knock_down": "monanim_ashshell:knock_down",
+        "lunge_windup": "monanim_ashshell:lunge_windup",
+        "lunge": "monanim_ashshell:lunge"
       },
       "anchor": "mass",
       "baseline": "bottom",
@@ -91,6 +97,38 @@
           ],
           "fps": 1,
           "loop": false
+        },
+        "jump": {
+          "frames": [
+            "jump1",
+            "jump2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "knock_up": {
+          "frames": [
+            "knock_up"
+          ],
+          "fps": 1
+        },
+        "knock_down": {
+          "frames": [
+            "knock_down"
+          ],
+          "fps": 1
+        },
+        "lunge_windup": {
+          "frames": [
+            "lunge_windup"
+          ],
+          "fps": 1
+        },
+        "lunge": {
+          "frames": [
+            "lunge"
+          ],
+          "fps": 1
         }
       }
     }

@@ -1,0 +1,99 @@
+{
+  "source": "art/source/monanim_barkcap.png",
+  "save": false,
+  "out_dir": "art/build/monanim_barkcap",
+  "cells": [
+    [
+      "jump1",
+      "",
+      "jump2",
+      "",
+      "knock_up",
+      "",
+      "knock_down"
+    ],
+    [
+      ""
+    ],
+    [
+      ""
+    ],
+    [
+      ""
+    ],
+    [
+      "pounce_windup",
+      "",
+      "pounce",
+      "",
+      "slam_windup",
+      "",
+      "slam"
+    ],
+    [
+      ""
+    ],
+    [
+      ""
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "scale": 0.1445,
+  "detail": 2.56,
+  "grid": {
+    "rows": [
+      0,
+      501,
+      505,
+      549,
+      552,
+      1048,
+      1052,
+      1100
+    ],
+    "cols": [
+      [
+        0,
+        396,
+        400,
+        823,
+        827,
+        1237,
+        1240,
+        1600
+      ],
+      [
+        0,
+        1600
+      ],
+      [
+        0,
+        1600
+      ],
+      [
+        0,
+        1600
+      ],
+      [
+        0,
+        396,
+        400,
+        823,
+        827,
+        1237,
+        1240,
+        1600
+      ],
+      [
+        0,
+        1600
+      ],
+      [
+        0,
+        1600
+      ]
+    ]
+  }
+}

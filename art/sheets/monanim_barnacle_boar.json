@@ -1,0 +1,52 @@
+{
+  "source": "art/source/monanim_barnacle_boar.png",
+  "save": false,
+  "out_dir": "art/build/monanim_barnacle_boar",
+  "cells": [
+    [
+      "jump1",
+      "jump2",
+      "knock_up",
+      "knock_down"
+    ],
+    [
+      "lunge_windup",
+      "lunge",
+      "charge_windup",
+      "charge"
+    ],
+    [
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "pounce_windup",
+      "pounce",
+      "slam_windup",
+      "slam"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "scale": 0.1774,
+  "detail": 4.5,
+  "grid": {
+    "rows": [
+      0,
+      412,
+      824,
+      1103,
+      1650
+    ],
+    "cols": [
+      0,
+      412,
+      824,
+      1236,
+      1600
+    ]
+  }
+}
