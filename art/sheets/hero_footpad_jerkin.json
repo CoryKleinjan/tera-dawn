@@ -45,7 +45,7 @@
     [
       "",
       "skyward2",
-      "gravity1",
+      "",
       "gravity2",
       "ambush1",
       "ambush2",
@@ -91,6 +91,7 @@
   "dark_key": false,
   "defringe": false,
   "scale": 0.111,
+  "fix": "guide_green",
   "save": false,
   "sets": {
     "hero_footpad_jerkin": {
@@ -116,7 +117,6 @@
         "throw2": "hero_footpad_jerkin:throw2",
         "pistol1": "hero_footpad_jerkin:pistol1",
         "pistol2": "hero_footpad_jerkin:pistol2",
-        "gravity1": "hero_footpad_jerkin:gravity1",
         "gravity2": "hero_footpad_jerkin:gravity2",
         "ambush1": "hero_footpad_jerkin:ambush1",
         "anchor1": "hero_footpad_jerkin:anchor1",
@@ -263,12 +263,6 @@
         "pistol2": {
           "frames": [
             "pistol2"
-          ],
-          "fps": 1
-        },
-        "gravity1": {
-          "frames": [
-            "gravity1"
           ],
           "fps": 1
         },

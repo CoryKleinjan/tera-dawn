@@ -22,6 +22,7 @@
   "dark_key": false,
   "defringe": true,
   "scale": 0.111,
+  "keep": "largest",
   "save": false,
   "sets": {
     "hero_hair_under_hunters_hood": {

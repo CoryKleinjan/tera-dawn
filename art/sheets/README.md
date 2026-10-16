@@ -78,6 +78,9 @@ screen. `detail` and `alpha` default to this for every asset;
 - `round_top`: rebuilds a round button's rim that ran under the label box.
 - `medal_symbol`: keeps only the symbol on a cream medal, outlined (the quest markers).
 - `painted_sky`, `sky_body` (the sun or moon).
+- `guide_green`, `guide_blue`: hero layers painted over a guide shape; the green silhouette
+  rim (or a blue hat guide) Gemini left at the edge goes. Only for pieces with no green (or
+  blue) of their own.
 
 `recolor` names one of `RECOLORS`: `dark_parchment` turns the leather UI sheets' pale parchment
 into dark leather (the game writes light text on its panels), `leather` recolours older purple
