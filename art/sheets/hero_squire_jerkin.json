@@ -119,10 +119,6 @@
         "throw2": "hero_squire_jerkin:throw2",
         "pistol1": "hero_squire_jerkin:pistol1",
         "pistol2": "hero_squire_jerkin:pistol2",
-        "cast1": "hero_squire_jerkin:cast1",
-        "cast2": "hero_squire_jerkin:cast2",
-        "skyward1": "hero_squire_jerkin:skyward1",
-        "skyward2": "hero_squire_jerkin:skyward2",
         "gravity1": "hero_squire_jerkin:gravity1",
         "gravity2": "hero_squire_jerkin:gravity2",
         "ambush1": "hero_squire_jerkin:ambush1",
@@ -282,30 +278,6 @@
         "pistol2": {
           "frames": [
             "pistol2"
-          ],
-          "fps": 1
-        },
-        "cast1": {
-          "frames": [
-            "cast1"
-          ],
-          "fps": 1
-        },
-        "cast2": {
-          "frames": [
-            "cast2"
-          ],
-          "fps": 1
-        },
-        "skyward1": {
-          "frames": [
-            "skyward1"
-          ],
-          "fps": 1
-        },
-        "skyward2": {
-          "frames": [
-            "skyward2"
           ],
           "fps": 1
         },

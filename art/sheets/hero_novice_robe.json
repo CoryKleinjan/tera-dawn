@@ -119,10 +119,6 @@
         "throw2": "hero_novice_robe:throw2",
         "pistol1": "hero_novice_robe:pistol1",
         "pistol2": "hero_novice_robe:pistol2",
-        "cast1": "hero_novice_robe:cast1",
-        "cast2": "hero_novice_robe:cast2",
-        "skyward1": "hero_novice_robe:skyward1",
-        "skyward2": "hero_novice_robe:skyward2",
         "gravity1": "hero_novice_robe:gravity1",
         "gravity2": "hero_novice_robe:gravity2",
         "ambush1": "hero_novice_robe:ambush1",
@@ -282,30 +278,6 @@
         "pistol2": {
           "frames": [
             "pistol2"
-          ],
-          "fps": 1
-        },
-        "cast1": {
-          "frames": [
-            "cast1"
-          ],
-          "fps": 1
-        },
-        "cast2": {
-          "frames": [
-            "cast2"
-          ],
-          "fps": 1
-        },
-        "skyward1": {
-          "frames": [
-            "skyward1"
-          ],
-          "fps": 1
-        },
-        "skyward2": {
-          "frames": [
-            "skyward2"
           ],
           "fps": 1
         },

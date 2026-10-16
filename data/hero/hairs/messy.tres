@@ -22,8 +22,8 @@ nudges = {
 &"anchor1": Vector4(-2.6, 3.9, 3, 0),
 &"anchor2": Vector4(-26.6, 8.7, -12, 0),
 &"backstep": Vector4(-11.6, -12.2, 3, 0),
-&"cast1": Vector4(0.5, 3.2, -14, 0),
-&"cast2": Vector4(-3.6, 0.4, -0, 0),
+&"cast1": Vector4(0.2, 2.8, -14, 0),
+&"cast2": Vector4(0.1, -2.3, -0, 0),
 &"gravity1": Vector4(21.6, 11.7, 0, 0),
 &"gravity2": Vector4(8.1, 28, 3, 0),
 &"hurt": Vector4(-24.5, 11.1, -24, 0),
@@ -33,8 +33,8 @@ nudges = {
 &"roll1": Vector4(12.4, 17.8, 45, 0),
 &"roll2": Vector4(-12.4, 62.2, -135, 0),
 &"sit": Vector4(-3.6, 23.7, 0, 0),
-&"skyward1": Vector4(18.9, 18.5, 20, 0),
-&"skyward2": Vector4(-7.3, -3.1, 0, 0),
+&"skyward1": Vector4(3.6, 17.2, 20, 0),
+&"skyward2": Vector4(3.3, 5.2, 0, 0),
 &"swing2": Vector4(8.6, 7.1, 15, 0),
 &"swing3": Vector4(18.9, 14.6, 18, 0)
 }

@@ -101,10 +101,6 @@
         "throw2": "hero_hands:throw2",
         "pistol1": "hero_hands:pistol1",
         "pistol2": "hero_hands:pistol2",
-        "cast1": "hero_hands:cast1",
-        "cast2": "hero_hands:cast2",
-        "skyward1": "hero_hands:skyward1",
-        "skyward2": "hero_hands:skyward2",
         "gravity1": "hero_hands:gravity1",
         "gravity2": "hero_hands:gravity2",
         "ambush1": "hero_hands:ambush1",
@@ -220,30 +216,6 @@
         "pistol2": {
           "frames": [
             "pistol2"
-          ],
-          "fps": 1
-        },
-        "cast1": {
-          "frames": [
-            "cast1"
-          ],
-          "fps": 1
-        },
-        "cast2": {
-          "frames": [
-            "cast2"
-          ],
-          "fps": 1
-        },
-        "skyward1": {
-          "frames": [
-            "skyward1"
-          ],
-          "fps": 1
-        },
-        "skyward2": {
-          "frames": [
-            "skyward2"
           ],
           "fps": 1
         },
