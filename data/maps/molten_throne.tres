@@ -235,4 +235,3 @@ props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_24"), Sub
 region = &"emberreach"
 world_pos = Vector2(800.0, 335.0)
 return_map = &"emberforge"
-level_text = "Lv. 23-31"

@@ -24,7 +24,6 @@ script = ExtResource("1_quest_def")
 id = &"q21_lumewood_boss"
 title = "The Arcane Sentinel"
 giver = &"lumewood_instructor"
-min_level = 22
 requires = Array[StringName]([&"q20_lumewood_supplies"])
 offer_text = "At the end of our hunting grounds lives the Arcane Sentinel. Only the strongest of us have faced it. Bring me the Arcane Core and I'll know you're ready."
 progress_text = "Defeat the Arcane Sentinel at the far end of the hunting grounds and bring back the Arcane Core."

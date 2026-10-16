@@ -24,7 +24,6 @@ script = ExtResource("1_quest_def")
 id = &"q19_lumewood_patrol"
 title = "Lumewood Patrol"
 giver = &"lumewood_store"
-min_level = 10
 requires = Array[StringName]([])
 offer_text = "The Glowcaps in Glowcap Hollow are getting bold. Would you thin them out? 15 ought to do it. The portal by Brin leads out there."
 progress_text = "15 Glowcaps in Glowcap Hollow. The portal by the storage keeper leads there."

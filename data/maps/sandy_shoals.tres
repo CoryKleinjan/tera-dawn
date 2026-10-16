@@ -350,4 +350,3 @@ props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_41"), Sub
 region = &"driftcove"
 world_pos = Vector2(395.0, 430.0)
 return_map = &"driftcove"
-level_text = "Lv. 9-10"

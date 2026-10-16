@@ -270,7 +270,6 @@ lantern_spacing = 0.0
 region = &"dawnrise_isle"
 world_pos = Vector2(150.0, 270.0)
 town = true
-level_text = "Town"
 platforms = Array[ExtResource("3_platform_def")]([SubResource("Plat_rise")])
 climbables = Array[ExtResource("climbable_def")]([SubResource("Ladder_rise")])
 portals = Array[ExtResource("4_portal_def")]([SubResource("Portal_west"), SubResource("Portal_east"), SubResource("Door_elder"), SubResource("Door_store")])

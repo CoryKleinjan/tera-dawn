@@ -24,7 +24,6 @@ script = ExtResource("1_quest_def")
 id = &"q27_lanternfall_boss"
 title = "The Lantern Wraith"
 giver = &"lanternfall_instructor"
-min_level = 22
 requires = Array[StringName]([&"q26_lanternfall_supplies"])
 offer_text = "At the end of our hunting grounds lives the Lantern Wraith. Only the strongest of us have faced it. Bring me the Wraith Lantern and I'll know you're ready."
 progress_text = "Defeat the Lantern Wraith at the far end of the hunting grounds and bring back the Wraith Lantern."

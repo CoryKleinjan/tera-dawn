@@ -77,5 +77,4 @@ spawns = Array[ExtResource("5_spawn_def")]([SubResource("Boss")])
 region = &"lanternfall"
 world_pos = Vector2(790.0, 530.0)
 return_map = &"lanternfall"
-level_text = "Lv. 28-30"
 music = &"boss_lanternfall"

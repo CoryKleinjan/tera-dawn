@@ -24,7 +24,6 @@ script = ExtResource("1_quest_def")
 id = &"q32_dawnharbor_patrol"
 title = "Dawnharbor Patrol"
 giver = &"harbor_store"
-min_level = 10
 requires = Array[StringName]([])
 offer_text = "Tide Slimes keep oozing up out of the ditches on Windmill Downs and spoiling my deliveries. Would you thin them out? 15 ought to do it. The road east of town leads there."
 progress_text = "15 Tide Slimes on Windmill Downs, past Harbor Road east of town."

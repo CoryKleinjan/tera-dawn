@@ -398,7 +398,6 @@ region = &"dawnharbor"
 world_pos = Vector2(530, 395)
 town = false
 return_map = &"dawnharbor"
-level_text = "Lv. 20-22"
 interior = false
 platforms = Array[ExtResource("7_5a77d")]([SubResource("Resource_uit6t"), SubResource("Resource_87m7u"), SubResource("Resource_sm1p6"), SubResource("Resource_qupgw"), SubResource("Resource_1xdqn"), SubResource("Resource_gd0cp"), SubResource("Resource_8jkyd"), SubResource("Resource_xj5fg"), SubResource("Resource_nv6yq"), SubResource("Resource_e35bm"), SubResource("Resource_8mtvj"), SubResource("Resource_r4dkn")])
 climbables = Array[ExtResource("3_h2qlq")]([SubResource("Resource_jr4j6"), SubResource("Resource_5appu"), SubResource("Resource_afxr1"), SubResource("Resource_0jqkm"), SubResource("Resource_6adkm"), SubResource("Resource_ttioq"), SubResource("Resource_6sgq8"), SubResource("Resource_p8cqh"), SubResource("Resource_uidym"), SubResource("Resource_qrvo4"), SubResource("Resource_1l7ox"), SubResource("Resource_vtos5")])

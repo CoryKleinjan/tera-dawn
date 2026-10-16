@@ -82,5 +82,4 @@ spawns = Array[ExtResource("5_spawn_def")]([SubResource("Boss")])
 region = &"dawnrise_isle"
 world_pos = Vector2(250.0, 375.0)
 return_map = &"dawnrise_village"
-level_text = "Lv. 10-12"
 music = &"boss_dawnharbor"

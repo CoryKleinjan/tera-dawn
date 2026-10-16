@@ -59,7 +59,8 @@ const OFFHAND_NAMES := {&"shield": "a shield", &"star": "throwing stars", &"book
 @export_group("Requirements")
 ## Job lines that can wear it (JobDef.family); empty for anyone.
 @export var jobs: Array[StringName] = []
-## Not checked any more (levels are gone); the field goes with its data in a later change.
+## The tuning tier it's made for, like MonsterDef.level: never checked or shown (there are no
+## levels in the game). Balance and the test characters pick gear by it.
 @export var required_level := 0
 @export var required_strength := 0
 @export var required_dexterity := 0

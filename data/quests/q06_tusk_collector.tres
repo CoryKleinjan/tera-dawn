@@ -17,7 +17,6 @@ script = ExtResource("1_quest_def")
 id = &"q06_tusk_collector"
 title = "Tusk Collector"
 giver = &"harbor_store"
-min_level = 8
 requires = Array[StringName]([])
 repeatable = true
 offer_text = "Boar Tusks make the finest potion stirrers. I'll always pay for ten more, any time you bring them."

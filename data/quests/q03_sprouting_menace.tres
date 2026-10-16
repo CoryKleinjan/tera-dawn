@@ -24,7 +24,6 @@ script = ExtResource("1_quest_def")
 id = &"q03_sprouting_menace"
 title = "Sprouting Menace"
 giver = &"village_elder"
-min_level = 4
 requires = Array[StringName]([&"q01_dewling_trouble"])
 repeatable = false
 offer_text = "Sproutcaps have taken the upper meadow. They spread their spores if left alone. Clear six of them, and bring back three of their caps so I know it's done."

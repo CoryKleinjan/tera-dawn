@@ -25,7 +25,6 @@ script = ExtResource("1_quest_def")
 id = &"q02_moss_for_the_stall"
 title = "Moss for the Stall"
 giver = &"shopkeeper"
-min_level = 2
 requires = Array[StringName]([])
 repeatable = false
 offer_text = "My potion shelf needs fresh moss to keep the bottles cool. Mosslings carry the softest tufts. Bring me ten?"

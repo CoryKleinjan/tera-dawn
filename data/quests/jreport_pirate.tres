@@ -16,7 +16,6 @@ id = &"jreport_pirate"
 title = "Report to Celest"
 giver = &"driftcove_instructor"
 turn_in = &"lumewood_instructor"
-min_level = 10
 requires = Array[StringName]([&"jtest_pirate"])
 offer_text = "Archmage Celest is in Lumewood."
 progress_text = "Archmage Celest is in Lumewood."

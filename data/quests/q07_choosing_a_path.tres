@@ -24,7 +24,6 @@ id = &"q07_choosing_a_path"
 title = "Choosing a Path"
 giver = &"guide_sorrel"
 turn_in = &"harbormaster"
-min_level = 7
 requires = Array[StringName]([])
 jobs = Array[StringName]([])
 offer_text = "You're nearly ready to choose a job. The job instructors live on the mainland. Take Captain Marlo's ship to Dawnharbor and find Harbormaster Ines at the docks. She'll show you the way to the job towns."

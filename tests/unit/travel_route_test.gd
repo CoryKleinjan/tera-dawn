@@ -13,11 +13,9 @@ func before_each() -> void:
 	dest.display_name = "Greenbough"
 
 func test_label_names_the_trip_and_the_fare_but_no_level() -> void:
-	dest.level_text = "Lv. 7-12"
 	check_eq(TDDialogueWindow.travel_label(route, dest), "Coach to Greenbough (400 Dawnshards)", "no level range shown")
 
 func test_label_leaves_out_a_town_and_says_free() -> void:
-	dest.level_text = "Town"
 	dest.town = true
 	check_eq(TDDialogueWindow.travel_label(route, dest), "Coach to Greenbough (400 Dawnshards)", "a town")
 	route.price = 0

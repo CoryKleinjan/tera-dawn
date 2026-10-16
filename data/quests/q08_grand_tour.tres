@@ -47,7 +47,6 @@ script = ExtResource("1_quest_def")
 id = &"q08_grand_tour"
 title = "The Grand Tour"
 giver = &"harbormaster"
-min_level = 8
 requires = Array[StringName]([&"q07_choosing_a_path"])
 jobs = Array[StringName]([])
 offer_text = "New to the mainland? Then see it properly. Visit all five job towns: Greenbough, Lumewood, Emberforge, Lanternfall and Driftcove. Rook's coach will take you."

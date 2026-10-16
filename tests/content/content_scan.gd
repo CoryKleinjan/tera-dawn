@@ -94,14 +94,6 @@ static func tables() -> Dictionary:
 		out[kind] = Content.get(kind)
 	return out
 
-## "Lv. 10-14" -> Vector2i(10, 14); anything else (Town, "") -> Vector2i(-1, -1).
-static func level_range(text: String) -> Vector2i:
-	var re := RegEx.create_from_string("^Lv\\. (\\d+)-(\\d+)$")
-	var m := re.search(text)
-	if m == null:
-		return Vector2i(-1, -1)
-	return Vector2i(int(m.get_string(1)), int(m.get_string(2)))
-
 ## Monsters that live somewhere: every map's roster (spawns and what they split into).
 static func spawned_monsters() -> Dictionary:
 	var out := {}

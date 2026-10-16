@@ -24,7 +24,6 @@ script = ExtResource("1_quest_def")
 id = &"q25_lanternfall_patrol"
 title = "Lanternfall Patrol"
 giver = &"lanternfall_store"
-min_level = 10
 requires = Array[StringName]([])
 offer_text = "The Shade Imps in Lantern Alley are getting bold. Would you thin them out? 15 ought to do it. The portal by Brin leads out there."
 progress_text = "15 Shade Imps in Lantern Alley. The portal by the storage keeper leads there."

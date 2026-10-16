@@ -24,7 +24,6 @@ script = ExtResource("1_quest_def")
 id = &"q24_emberforge_boss"
 title = "The Molten King"
 giver = &"emberforge_instructor"
-min_level = 22
 requires = Array[StringName]([&"q23_emberforge_supplies"])
 offer_text = "At the end of our hunting grounds lives the Molten King. Only the strongest of us have faced it. Bring me the Molten Crown Shard and I'll know you're ready."
 progress_text = "Defeat the Molten King at the far end of the hunting grounds and bring back the Molten Crown Shard."

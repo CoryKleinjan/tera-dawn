@@ -16,7 +16,6 @@ script = ExtResource("1_quest_def")
 id = &"q13_proof_pirate"
 title = "Proof of the Sea"
 giver = &"driftcove_instructor"
-min_level = 10
 requires = Array[StringName]([])
 jobs = Array[StringName]([&"pirate"])
 offer_text = "You've joined us, but words are cheap. Bring me 20 Sand Claws from the Sand Crabs in the Tidepools, just outside town, and prove you can hunt."

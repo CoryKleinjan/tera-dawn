@@ -27,7 +27,6 @@ script = ExtResource("1_quest_def")
 id = &"q04_sweet_nectar"
 title = "Sweet Nectar"
 giver = &"shopkeeper"
-min_level = 3
 requires = Array[StringName]([&"q02_moss_for_the_stall"])
 repeatable = false
 offer_text = "I'm baking honey cakes for the village, but I'm out of nectar. Petal Bats keep it in their wings. Could you collect five Petal Nectar?"
