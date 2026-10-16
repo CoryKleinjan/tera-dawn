@@ -37,7 +37,10 @@
         "fly3": "seedwing:fly3",
         "attack": "seedwing:attack",
         "hurt": "seedwing:hurt",
-        "defeated": "seedwing:defeated"
+        "defeated": "seedwing:defeated",
+        "swoop_windup": "monanim_seedwing:swoop_windup",
+        "swoop": "monanim_seedwing:swoop",
+        "knock_down": "monanim_seedwing:knock_down"
       },
       "anchor": "mass",
       "baseline": "cell",
@@ -79,6 +82,24 @@
           ],
           "fps": 1,
           "loop": false
+        },
+        "swoop_windup": {
+          "frames": [
+            "swoop_windup"
+          ],
+          "fps": 1
+        },
+        "swoop": {
+          "frames": [
+            "swoop"
+          ],
+          "fps": 1
+        },
+        "knock_down": {
+          "frames": [
+            "knock_down"
+          ],
+          "fps": 1
         }
       }
     }
