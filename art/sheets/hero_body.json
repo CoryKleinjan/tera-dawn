@@ -43,7 +43,7 @@
       ""
     ],
     [
-      "skyward1",
+      "",
       "skyward2",
       "gravity1",
       "gravity2",
@@ -121,7 +121,6 @@
         "swing3": "hero_body:swing3",
         "cast1": "hero_body:cast1",
         "cast2": "hero_body:cast2",
-        "skyward1": "hero_body:skyward1",
         "skyward2": "hero_body:skyward2",
         "gravity1": "hero_body:gravity1",
         "gravity2": "hero_body:gravity2",
@@ -294,12 +293,6 @@
         "cast2": {
           "frames": [
             "cast2"
-          ],
-          "fps": 1
-        },
-        "skyward1": {
-          "frames": [
-            "skyward1"
           ],
           "fps": 1
         },

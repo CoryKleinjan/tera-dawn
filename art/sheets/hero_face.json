@@ -82,7 +82,6 @@
         "swing3": "hero_face:idle1",
         "cast1": "hero_face:idle1",
         "cast2": "hero_face:idle1",
-        "skyward1": "hero_face:idle1",
         "skyward2": "hero_face:idle1",
         "gravity1": "hero_face:idle1",
         "gravity2": "hero_face:idle1",
@@ -218,12 +217,6 @@
         "cast2": {
           "frames": [
             "cast2"
-          ],
-          "fps": 1
-        },
-        "skyward1": {
-          "frames": [
-            "skyward1"
           ],
           "fps": 1
         },

@@ -43,7 +43,7 @@
       "pistol2"
     ],
     [
-      "skyward1",
+      "",
       "skyward2",
       "gravity1",
       "gravity2",
@@ -133,7 +133,6 @@
         "ambush2": "hero_footpad_jerkin:ambush2",
         "cast1": "hero_footpad_jerkin:cast1",
         "cast2": "hero_footpad_jerkin:cast2",
-        "skyward1": "hero_footpad_jerkin:skyward1",
         "skyward2": "hero_footpad_jerkin:skyward2"
       },
       "anchor": "cell",
@@ -366,12 +365,6 @@
         "cast2": {
           "frames": [
             "cast2"
-          ],
-          "fps": 1
-        },
-        "skyward1": {
-          "frames": [
-            "skyward1"
           ],
           "fps": 1
         },
