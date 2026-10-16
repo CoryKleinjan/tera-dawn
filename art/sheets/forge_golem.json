@@ -37,7 +37,15 @@
         "walk3": "forge_golem:walk3",
         "attack": "forge_golem:attack",
         "hurt": "forge_golem:hurt",
-        "defeated": "forge_golem:defeated"
+        "defeated": "forge_golem:defeated",
+        "jump1": "monanim_forge_golem:jump1",
+        "jump2": "monanim_forge_golem:jump2",
+        "knock_up": "monanim_forge_golem:knock_up",
+        "knock_down": "monanim_forge_golem:knock_down",
+        "lunge_windup": "monanim_forge_golem:lunge_windup",
+        "lunge": "monanim_forge_golem:lunge",
+        "slam_windup": "monanim_forge_golem:slam_windup",
+        "slam": "monanim_forge_golem:slam"
       },
       "anchor": "mass",
       "baseline": "bottom",
@@ -79,6 +87,50 @@
           ],
           "fps": 1,
           "loop": false
+        },
+        "jump": {
+          "frames": [
+            "jump1",
+            "jump2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "knock_up": {
+          "frames": [
+            "knock_up"
+          ],
+          "fps": 1
+        },
+        "knock_down": {
+          "frames": [
+            "knock_down"
+          ],
+          "fps": 1
+        },
+        "lunge_windup": {
+          "frames": [
+            "lunge_windup"
+          ],
+          "fps": 1
+        },
+        "lunge": {
+          "frames": [
+            "lunge"
+          ],
+          "fps": 1
+        },
+        "slam_windup": {
+          "frames": [
+            "slam_windup"
+          ],
+          "fps": 1
+        },
+        "slam": {
+          "frames": [
+            "slam"
+          ],
+          "fps": 1
         }
       }
     }

@@ -38,7 +38,13 @@
         "walk3": "prism_slime:walk3",
         "attack": "prism_slime:attack",
         "hurt": "prism_slime:hurt",
-        "defeated": "prism_slime:defeated"
+        "defeated": "prism_slime:defeated",
+        "jump1": "monanim_prism_slime:jump1",
+        "jump2": "monanim_prism_slime:jump2",
+        "knock_up": "monanim_prism_slime:knock_up",
+        "knock_down": "monanim_prism_slime:knock_down",
+        "pounce_windup": "monanim_prism_slime:pounce_windup",
+        "pounce": "monanim_prism_slime:pounce"
       },
       "anchor": "mass",
       "baseline": "bottom",
@@ -80,6 +86,38 @@
           ],
           "fps": 1,
           "loop": false
+        },
+        "jump": {
+          "frames": [
+            "jump1",
+            "jump2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "knock_up": {
+          "frames": [
+            "knock_up"
+          ],
+          "fps": 1
+        },
+        "knock_down": {
+          "frames": [
+            "knock_down"
+          ],
+          "fps": 1
+        },
+        "pounce_windup": {
+          "frames": [
+            "pounce_windup"
+          ],
+          "fps": 1
+        },
+        "pounce": {
+          "frames": [
+            "pounce"
+          ],
+          "fps": 1
         }
       }
     }

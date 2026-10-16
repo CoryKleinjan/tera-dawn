@@ -1,0 +1,43 @@
+{
+  "source": "art/source/monanim_lantern_wisp.png",
+  "save": false,
+  "out_dir": "art/build/monanim_lantern_wisp",
+  "cells": [
+    [
+      "knock_down",
+      "",
+      "swoop_windup",
+      "",
+      "swoop",
+      "",
+      "shot_windup",
+      "",
+      "shot"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "scale": 0.0808,
+  "detail": 2.56,
+  "grid": {
+    "rows": [
+      0,
+      550
+    ],
+    "cols": [
+      [
+        0,
+        399,
+        402,
+        799,
+        802,
+        1199,
+        1202,
+        1599,
+        1602,
+        2000
+      ]
+    ]
+  }
+}

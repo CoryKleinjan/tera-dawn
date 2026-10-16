@@ -1,0 +1,67 @@
+{
+  "source": "art/source/monanim_fire_imp_archer.png",
+  "save": false,
+  "out_dir": "art/build/monanim_fire_imp_archer",
+  "cells": [
+    [
+      "jump1",
+      "",
+      "jump2",
+      "",
+      "knock_up",
+      "",
+      "knock_down"
+    ],
+    [
+      ""
+    ],
+    [
+      "lunge_windup",
+      "",
+      "lunge",
+      "",
+      "shot_windup",
+      "",
+      "shot"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "scale": 0.1755,
+  "detail": 2.56,
+  "grid": {
+    "rows": [
+      0,
+      545,
+      555,
+      1100
+    ],
+    "cols": [
+      [
+        0,
+        403,
+        414,
+        820,
+        831,
+        1237,
+        1248,
+        1600
+      ],
+      [
+        0,
+        1600
+      ],
+      [
+        0,
+        403,
+        414,
+        820,
+        831,
+        1237,
+        1248,
+        1600
+      ]
+    ]
+  }
+}

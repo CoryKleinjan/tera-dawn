@@ -1,46 +1,86 @@
-[gd_resource type="SpriteFrames" load_steps=10 format=3]
+[gd_resource type="SpriteFrames" load_steps=18 format=3]
 
 [ext_resource type="Texture2D" path="res://assets/sprites/monsters/dusk_stalker.png" id="1_strip"]
 
 [sub_resource type="AtlasTexture" id="f0"]
 atlas = ExtResource("1_strip")
-region = Rect2(0, 0, 258, 149)
+region = Rect2(0, 0, 274, 184)
 metadata/art_density = 2.56
 
 [sub_resource type="AtlasTexture" id="f1"]
 atlas = ExtResource("1_strip")
-region = Rect2(258, 0, 258, 149)
+region = Rect2(274, 0, 274, 184)
 metadata/art_density = 2.56
 
 [sub_resource type="AtlasTexture" id="f2"]
 atlas = ExtResource("1_strip")
-region = Rect2(516, 0, 258, 149)
+region = Rect2(548, 0, 274, 184)
 metadata/art_density = 2.56
 
 [sub_resource type="AtlasTexture" id="f3"]
 atlas = ExtResource("1_strip")
-region = Rect2(774, 0, 258, 149)
+region = Rect2(822, 0, 274, 184)
 metadata/art_density = 2.56
 
 [sub_resource type="AtlasTexture" id="f4"]
 atlas = ExtResource("1_strip")
-region = Rect2(1032, 0, 258, 149)
+region = Rect2(1096, 0, 274, 184)
 metadata/art_density = 2.56
 
 [sub_resource type="AtlasTexture" id="f5"]
 atlas = ExtResource("1_strip")
-region = Rect2(1290, 0, 258, 149)
+region = Rect2(1370, 0, 274, 184)
 metadata/art_density = 2.56
 
 [sub_resource type="AtlasTexture" id="f6"]
 atlas = ExtResource("1_strip")
-region = Rect2(1548, 0, 258, 149)
+region = Rect2(1644, 0, 274, 184)
 metadata/art_density = 2.56
 
 [sub_resource type="AtlasTexture" id="f7"]
 atlas = ExtResource("1_strip")
-region = Rect2(1806, 0, 258, 149)
+region = Rect2(1918, 0, 274, 184)
+metadata/art_density = 2.56
+
+[sub_resource type="AtlasTexture" id="f8"]
+atlas = ExtResource("1_strip")
+region = Rect2(2192, 0, 274, 184)
+metadata/art_density = 2.56
+
+[sub_resource type="AtlasTexture" id="f9"]
+atlas = ExtResource("1_strip")
+region = Rect2(2466, 0, 274, 184)
+metadata/art_density = 2.56
+
+[sub_resource type="AtlasTexture" id="f10"]
+atlas = ExtResource("1_strip")
+region = Rect2(2740, 0, 274, 184)
+metadata/art_density = 2.56
+
+[sub_resource type="AtlasTexture" id="f11"]
+atlas = ExtResource("1_strip")
+region = Rect2(3014, 0, 274, 184)
+metadata/art_density = 2.56
+
+[sub_resource type="AtlasTexture" id="f12"]
+atlas = ExtResource("1_strip")
+region = Rect2(3288, 0, 274, 184)
+metadata/art_density = 2.56
+
+[sub_resource type="AtlasTexture" id="f13"]
+atlas = ExtResource("1_strip")
+region = Rect2(3562, 0, 274, 184)
+metadata/art_density = 2.56
+
+[sub_resource type="AtlasTexture" id="f14"]
+atlas = ExtResource("1_strip")
+region = Rect2(3836, 0, 274, 184)
+metadata/art_density = 2.56
+
+[sub_resource type="AtlasTexture" id="f15"]
+atlas = ExtResource("1_strip")
+region = Rect2(4110, 0, 274, 184)
 metadata/art_density = 2.56
 
 [resource]
-animations = [{"frames": [{"duration": 1.0, "texture": SubResource("f0")}, {"duration": 1.0, "texture": SubResource("f1")}], "loop": true, "name": &"idle", "speed": 3.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f2")}, {"duration": 1.0, "texture": SubResource("f3")}, {"duration": 1.0, "texture": SubResource("f4")}, {"duration": 1.0, "texture": SubResource("f3")}], "loop": true, "name": &"move", "speed": 7.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f5")}], "loop": true, "name": &"attack", "speed": 4.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f6")}], "loop": true, "name": &"hurt", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f7")}], "loop": false, "name": &"die", "speed": 1.0}]
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("f0")}, {"duration": 1.0, "texture": SubResource("f1")}], "loop": true, "name": &"idle", "speed": 3.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f2")}, {"duration": 1.0, "texture": SubResource("f3")}, {"duration": 1.0, "texture": SubResource("f4")}, {"duration": 1.0, "texture": SubResource("f3")}], "loop": true, "name": &"move", "speed": 7.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f5")}], "loop": true, "name": &"attack", "speed": 4.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f6")}], "loop": true, "name": &"hurt", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f7")}], "loop": false, "name": &"die", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f8")}, {"duration": 1.0, "texture": SubResource("f9")}], "loop": false, "name": &"jump", "speed": 8.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f10")}], "loop": true, "name": &"knock_up", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f11")}], "loop": true, "name": &"knock_down", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f12")}], "loop": true, "name": &"lunge_windup", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f13")}], "loop": true, "name": &"lunge", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f14")}], "loop": true, "name": &"charge_windup", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f15")}], "loop": true, "name": &"charge", "speed": 1.0}]

@@ -9,14 +9,14 @@ extends RefCounted
 ##
 ## Layout (little-endian):
 ##   u32 tick, u16 monster count, then per monster: u16 index, s16 x, s16 y, s8 dir,
-##   u16 hp (0..1000), u16 flags;
+##   u16 hp (0..1000), u16 flags, u8 move (1 + its index in MonsterDef.moves, 0 for none);
 ##   u8 player count, then per player: u32 peer, s16 x, s16 y, s8 face, u8 flags,
 ##   u8 animation name length, the name's UTF-8 bytes.
 
 ## Bytes one monster takes.
-const MOB_BYTES := 11
+const MOB_BYTES := 12
 
-## One monster's record, from SimMob.snapshot() ([x, y, dir, hp, flags]).
+## One monster's record, from SimMob.snapshot() ([x, y, dir, hp, flags, move]).
 static func mob_record(index: int, state: Array) -> PackedByteArray:
 	var b := StreamPeerBuffer.new()
 	b.put_u16(index)
@@ -25,6 +25,7 @@ static func mob_record(index: int, state: Array) -> PackedByteArray:
 	b.put_8(int(state[2]))
 	b.put_u16(clampi(int(state[3]), 0, 1000))
 	b.put_u16(int(state[4]))
+	b.put_u8(int(state[5]) if state.size() > 5 else 0)
 	return b.data_array
 
 ## The whole update: `mob_records` joined from mob_record(), and players as
@@ -47,7 +48,7 @@ static func encode(tick: int, mob_records: Array[PackedByteArray], players: Arra
 		b.put_data(anim)
 	return b.data_array
 
-## The update as {"tick", "mobs": [[index, [x, y, dir, hp, flags]], ...],
+## The update as {"tick", "mobs": [[index, [x, y, dir, hp, flags, move]], ...],
 ## "players": [[peer, x, y, face, animation, flags], ...]}.
 static func decode(data: PackedByteArray) -> Dictionary:
 	var b := StreamPeerBuffer.new()
@@ -55,7 +56,7 @@ static func decode(data: PackedByteArray) -> Dictionary:
 	var out := {"tick": b.get_u32(), "mobs": [], "players": []}
 	for i in b.get_u16():
 		var index := b.get_u16()
-		out["mobs"].append([index, [float(b.get_16()), float(b.get_16()), b.get_8(), b.get_u16(), b.get_u16()]])
+		out["mobs"].append([index, [float(b.get_16()), float(b.get_16()), b.get_8(), b.get_u16(), b.get_u16(), b.get_u8()]])
 	for i in b.get_u8():
 		var peer := b.get_u32()
 		var x := float(b.get_16())

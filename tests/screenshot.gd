@@ -558,5 +558,84 @@ func _run() -> void:
 		hollow.kill_mob(hollow.mobs[0], _me())
 		await _physics(25)
 		await _shot("hollow")
+	if only == "monster_anims":
+		# A Bramble Boar walking, hopping, using each move and thrown up and knocked down:
+		# frames every few ticks for an animated preview (not in the default run).
+		await _monster_anims(world, args[2] if args.size() > 2 else "bramble_boar")
 	Net.stop()
 	get_tree().quit()
+
+## Frames of one monster kind going through every animation it has (see "monster_anims"),
+## saved as monster_<id>_<nnn>.png. It borrows the moves of every preset family it has
+## frames for, so one monster shows them all.
+func _monster_anims(world: TDWorld, id: String) -> void:
+	var def := Content.monster(StringName(id))
+	for map_id in Content.maps:
+		if (Content.maps[map_id] as MapDef).spawns.any(func(s: SpawnDef) -> bool: return s.monster == def):
+			if _me().map.def.id != map_id:
+				Net.server.enter_map(_me(), map_id, 300.0)
+			break
+	await _physics(60)
+	# no intro scene holding the camera
+	Net.server.scenes.stop(_me())
+	world.scenes.stop()
+	var field: MapInstance = _me().map
+	var mob: SimMob = null
+	for m in field.mobs:
+		if m.def == def and (mob == null or m.plat.w > mob.plat.w):
+			mob = m
+	var others := field.mobs.filter(func(m: SimMob) -> bool: return m != mob)
+	for m in others:
+		m.die()
+		m.respawn = 1000000
+	var rig: SpriteRig = world.mobs()[mob.index].rig
+	var moves: Array[MonsterMove] = []
+	for kind in MonsterMove.Kind.values():
+		var mv: MonsterMove = null
+		for d: MonsterDef in Content.monsters.values():
+			for m: MonsterMove in d.moves:
+				if m.kind == kind and not d.boss:
+					mv = m
+		if mv and rig.has(mv.animation_name()):
+			moves.append(mv)
+	def.moves = moves
+	mob.moves = MobMoves.new(mob)
+	mob.health.reset(1000000)
+	_me().inv = 1000000
+	var x := mob.plat.x + mob.plat.w * 0.5
+	var shots := [0]
+	var film := func(ticks: int) -> void:
+		for i in ticks / 4:
+			await _physics(4)
+			# a slow renderer runs all four ticks in one frame: let the views catch up
+			await _frames(2)
+			await _shot("monster_%s_%03d" % [id, shots[0]])
+			shots[0] += 1
+	# the player stands off to the left, out of its sight while it walks
+	var home := x + 110.0
+	_teleport(world, Vector2(home - 200.0, mob.plat.y))
+	world.snap_camera()
+	var reset := func() -> void:
+		_place_mob(mob, home)
+		mob.dir = -1
+		mob.hurt_t = 0
+	reset.call()
+	var sight := def.sight
+	def.sight = 0.0
+	await film.call(60)
+	def.sight = sight
+	# a hop
+	reset.call()
+	def.jumps = true
+	mob.hop_v = def.jump_power
+	await film.call(48)
+	def.jumps = false
+	# each move on the player
+	for i in moves.size():
+		reset.call()
+		mob.moves.start(i, _me())
+		await film.call(moves[i].windup + 90)
+	# thrown up, then lying knocked down
+	reset.call()
+	mob.launch(9.0)
+	await film.call(100)

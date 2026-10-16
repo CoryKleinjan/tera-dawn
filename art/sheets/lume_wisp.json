@@ -37,7 +37,10 @@
         "fly3": "lume_wisp:fly3",
         "attack": "lume_wisp:attack",
         "hurt": "lume_wisp:hurt",
-        "defeated": "lume_wisp:defeated"
+        "defeated": "lume_wisp:defeated",
+        "knock_down": "monanim_lume_wisp:knock_down",
+        "swoop_windup": "monanim_lume_wisp:swoop_windup",
+        "swoop": "monanim_lume_wisp:swoop"
       },
       "anchor": "mass",
       "baseline": "cell",
@@ -79,6 +82,24 @@
           ],
           "fps": 1,
           "loop": false
+        },
+        "knock_down": {
+          "frames": [
+            "knock_down"
+          ],
+          "fps": 1
+        },
+        "swoop_windup": {
+          "frames": [
+            "swoop_windup"
+          ],
+          "fps": 1
+        },
+        "swoop": {
+          "frames": [
+            "swoop"
+          ],
+          "fps": 1
         }
       }
     }

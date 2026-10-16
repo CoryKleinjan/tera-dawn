@@ -53,7 +53,15 @@
         "hurt": "old_clawbeard:hurt",
         "enraged": "old_clawbeard:enraged",
         "defeated1": "old_clawbeard:defeated1",
-        "defeated2": "old_clawbeard:defeated2"
+        "defeated2": "old_clawbeard:defeated2",
+        "jump1": "monanim_old_clawbeard:jump1",
+        "jump2": "monanim_old_clawbeard:jump2",
+        "lunge_windup": "monanim_old_clawbeard:lunge_windup",
+        "lunge": "monanim_old_clawbeard:lunge",
+        "charge_windup": "monanim_old_clawbeard:charge_windup",
+        "charge": "monanim_old_clawbeard:charge",
+        "shot_windup": "monanim_old_clawbeard:shot_windup",
+        "shot": "monanim_old_clawbeard:shot"
       },
       "anchor": "mass",
       "baseline": "bottom",
@@ -98,6 +106,50 @@
           ],
           "fps": 2,
           "loop": false
+        },
+        "jump": {
+          "frames": [
+            "jump1",
+            "jump2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "lunge_windup": {
+          "frames": [
+            "lunge_windup"
+          ],
+          "fps": 1
+        },
+        "lunge": {
+          "frames": [
+            "lunge"
+          ],
+          "fps": 1
+        },
+        "charge_windup": {
+          "frames": [
+            "charge_windup"
+          ],
+          "fps": 1
+        },
+        "charge": {
+          "frames": [
+            "charge"
+          ],
+          "fps": 1
+        },
+        "shot_windup": {
+          "frames": [
+            "shot_windup"
+          ],
+          "fps": 1
+        },
+        "shot": {
+          "frames": [
+            "shot"
+          ],
+          "fps": 1
         }
       }
     }

@@ -37,7 +37,12 @@
         "fly3": "lantern_wisp:fly3",
         "attack": "lantern_wisp:attack",
         "hurt": "lantern_wisp:hurt",
-        "defeated": "lantern_wisp:defeated"
+        "defeated": "lantern_wisp:defeated",
+        "knock_down": "monanim_lantern_wisp:knock_down",
+        "swoop_windup": "monanim_lantern_wisp:swoop_windup",
+        "swoop": "monanim_lantern_wisp:swoop",
+        "shot_windup": "monanim_lantern_wisp:shot_windup",
+        "shot": "monanim_lantern_wisp:shot"
       },
       "anchor": "mass",
       "baseline": "cell",
@@ -79,6 +84,36 @@
           ],
           "fps": 1,
           "loop": false
+        },
+        "knock_down": {
+          "frames": [
+            "knock_down"
+          ],
+          "fps": 1
+        },
+        "swoop_windup": {
+          "frames": [
+            "swoop_windup"
+          ],
+          "fps": 1
+        },
+        "swoop": {
+          "frames": [
+            "swoop"
+          ],
+          "fps": 1
+        },
+        "shot_windup": {
+          "frames": [
+            "shot_windup"
+          ],
+          "fps": 1
+        },
+        "shot": {
+          "frames": [
+            "shot"
+          ],
+          "fps": 1
         }
       }
     }

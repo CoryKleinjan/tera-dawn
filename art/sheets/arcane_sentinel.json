@@ -53,7 +53,15 @@
         "hurt": "arcane_sentinel:hurt",
         "enraged": "arcane_sentinel:enraged",
         "defeated1": "arcane_sentinel:defeated1",
-        "defeated2": "arcane_sentinel:defeated2"
+        "defeated2": "arcane_sentinel:defeated2",
+        "jump1": "monanim_arcane_sentinel:jump1",
+        "jump2": "monanim_arcane_sentinel:jump2",
+        "charge_windup": "monanim_arcane_sentinel:charge_windup",
+        "charge": "monanim_arcane_sentinel:charge",
+        "slam_windup": "monanim_arcane_sentinel:slam_windup",
+        "slam": "monanim_arcane_sentinel:slam",
+        "shot_windup": "monanim_arcane_sentinel:shot_windup",
+        "shot": "monanim_arcane_sentinel:shot"
       },
       "anchor": "mass",
       "baseline": "bottom",
@@ -98,6 +106,50 @@
           ],
           "fps": 2,
           "loop": false
+        },
+        "jump": {
+          "frames": [
+            "jump1",
+            "jump2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "charge_windup": {
+          "frames": [
+            "charge_windup"
+          ],
+          "fps": 1
+        },
+        "charge": {
+          "frames": [
+            "charge"
+          ],
+          "fps": 1
+        },
+        "slam_windup": {
+          "frames": [
+            "slam_windup"
+          ],
+          "fps": 1
+        },
+        "slam": {
+          "frames": [
+            "slam"
+          ],
+          "fps": 1
+        },
+        "shot_windup": {
+          "frames": [
+            "shot_windup"
+          ],
+          "fps": 1
+        },
+        "shot": {
+          "frames": [
+            "shot"
+          ],
+          "fps": 1
         }
       }
     }

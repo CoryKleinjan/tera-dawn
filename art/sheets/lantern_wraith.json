@@ -53,7 +53,11 @@
         "hurt": "lantern_wraith:hurt",
         "enraged": "lantern_wraith:enraged",
         "defeated1": "lantern_wraith:defeated1",
-        "defeated2": "lantern_wraith:defeated2"
+        "defeated2": "lantern_wraith:defeated2",
+        "swoop_windup": "monanim_lantern_wraith:swoop_windup",
+        "swoop": "monanim_lantern_wraith:swoop",
+        "shot_windup": "monanim_lantern_wraith:shot_windup",
+        "shot": "monanim_lantern_wraith:shot"
       },
       "anchor": "mass",
       "baseline": "bottom",
@@ -98,6 +102,30 @@
           ],
           "fps": 2,
           "loop": false
+        },
+        "swoop_windup": {
+          "frames": [
+            "swoop_windup"
+          ],
+          "fps": 1
+        },
+        "swoop": {
+          "frames": [
+            "swoop"
+          ],
+          "fps": 1
+        },
+        "shot_windup": {
+          "frames": [
+            "shot_windup"
+          ],
+          "fps": 1
+        },
+        "shot": {
+          "frames": [
+            "shot"
+          ],
+          "fps": 1
         }
       }
     }

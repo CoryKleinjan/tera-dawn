@@ -1,0 +1,31 @@
+{
+  "source": "art/source/monanim_mossling.png",
+  "save": false,
+  "out_dir": "art/build/monanim_mossling_b",
+  "region": [
+    0,
+    802,
+    400,
+    1100
+  ],
+  "cells": [
+    [
+      "pounce_windup"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "scale": 0.1457,
+  "detail": 2.56,
+  "grid": {
+    "rows": [
+      0,
+      298
+    ],
+    "cols": [
+      0,
+      400
+    ]
+  }
+}

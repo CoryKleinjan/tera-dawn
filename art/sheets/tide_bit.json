@@ -37,7 +37,13 @@
         "hop3": "tide_bit:hop3",
         "attack": "tide_bit:attack",
         "hurt": "tide_bit:hurt",
-        "defeated": "tide_bit:defeated"
+        "defeated": "tide_bit:defeated",
+        "jump1": "monanim_tide_bit:jump1",
+        "jump2": "monanim_tide_bit:jump2",
+        "knock_up": "monanim_tide_bit:knock_up",
+        "knock_down": "monanim_tide_bit:knock_down",
+        "pounce_windup": "monanim_tide_bit:pounce_windup",
+        "pounce": "monanim_tide_bit:pounce"
       },
       "anchor": "mass",
       "baseline": "cell",
@@ -78,6 +84,38 @@
           ],
           "fps": 1,
           "loop": false
+        },
+        "jump": {
+          "frames": [
+            "jump1",
+            "jump2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "knock_up": {
+          "frames": [
+            "knock_up"
+          ],
+          "fps": 1
+        },
+        "knock_down": {
+          "frames": [
+            "knock_down"
+          ],
+          "fps": 1
+        },
+        "pounce_windup": {
+          "frames": [
+            "pounce_windup"
+          ],
+          "fps": 1
+        },
+        "pounce": {
+          "frames": [
+            "pounce"
+          ],
+          "fps": 1
         }
       }
     }

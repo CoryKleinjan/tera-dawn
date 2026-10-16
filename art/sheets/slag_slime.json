@@ -43,7 +43,13 @@
         "walk3": "slag_slime:walk3",
         "attack": "slag_slime:attack",
         "hurt": "slag_slime:hurt",
-        "defeated": "slag_slime:defeated"
+        "defeated": "slag_slime:defeated",
+        "jump1": "monanim_slag_slime:jump1",
+        "jump2": "monanim_slag_slime:jump2",
+        "knock_up": "monanim_slag_slime:knock_up",
+        "knock_down": "monanim_slag_slime:knock_down",
+        "pounce_windup": "monanim_slag_slime:pounce_windup",
+        "pounce": "monanim_slag_slime:pounce"
       },
       "anchor": "mass",
       "baseline": "bottom",
@@ -85,6 +91,38 @@
           ],
           "fps": 1,
           "loop": false
+        },
+        "jump": {
+          "frames": [
+            "jump1",
+            "jump2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "knock_up": {
+          "frames": [
+            "knock_up"
+          ],
+          "fps": 1
+        },
+        "knock_down": {
+          "frames": [
+            "knock_down"
+          ],
+          "fps": 1
+        },
+        "pounce_windup": {
+          "frames": [
+            "pounce_windup"
+          ],
+          "fps": 1
+        },
+        "pounce": {
+          "frames": [
+            "pounce"
+          ],
+          "fps": 1
         }
       }
     }

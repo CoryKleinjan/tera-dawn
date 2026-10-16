@@ -32,6 +32,8 @@ var target := Vector2.ZERO
 var dir := 1
 var hp := 1.0
 var flags := 0
+## The move it is using: 1 + its index in def.moves, 0 for none.
+var move := 0
 ## False until the server has said where it is.
 var known := false
 var death_t := 0
@@ -71,6 +73,7 @@ func apply(state: Array) -> void:
 	dir = state[2]
 	hp = state[3] / 1000.0
 	flags = state[4]
+	move = state[5] if state.size() > 5 else 0
 	if not known or (was_dead and not dead) or (was_hidden and flags & SnapshotFlags.MOB_HIDDEN == 0):
 		position = target # first sight, back from the dead or from a blink: no gliding in
 		death_t = 0
@@ -161,20 +164,34 @@ func _process(_delta: float) -> void:
 	var moving := absf(position.x - _last_x) > 0.01
 	_last_x = position.x
 	var lean := Vector2.ZERO
+	var mv := current_move()
+	var windup := StringName(String(mv.animation_name()) + "_windup") if mv else &""
 	if fallen:
 		rig.play(&"die")
+	elif flags & SnapshotFlags.MOB_TOSSED != 0:
+		rig.play(&"knock_up")
+	elif flags & (SnapshotFlags.MOB_FLOORED | SnapshotFlags.MOB_DOWNED) != 0:
+		rig.play(&"knock_down")
 	elif flags & SnapshotFlags.MOB_CASTING != 0:
-		rig.play(&"attack")
+		rig.play(mv.animation_name() if mv and rig.has(mv.animation_name()) else &"attack")
 	elif hurt or stunned:
 		rig.play(&"hurt")
+	elif winding and rig.has(windup):
+		rig.play(windup)
 	elif winding:
 		rig.play(&"idle")
 		lean = Vector2(-facing * LEAN, 0)
+	elif flags & SnapshotFlags.MOB_AIRBORNE != 0 and rig.has(&"jump"):
+		rig.play(&"jump")
 	elif moving:
 		rig.play(&"move")
 	else:
 		rig.play(&"idle")
 	rig.place(drawn_body_position() + lean, z)
+
+## The move it is using right now, or null.
+func current_move() -> MonsterMove:
+	return def.moves[move - 1] if move > 0 and move <= def.moves.size() else null
 
 ## Its own tint, warmed when enraged and coloured by a hex, root or burn on it.
 func _tint() -> Color:

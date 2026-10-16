@@ -1,0 +1,67 @@
+{
+  "source": "art/source/monanim_elder_treant.png",
+  "save": false,
+  "out_dir": "art/build/monanim_elder_treant",
+  "cells": [
+    [
+      "jump1",
+      "",
+      "jump2",
+      "",
+      "lunge_windup",
+      "",
+      "lunge"
+    ],
+    [
+      ""
+    ],
+    [
+      "slam_windup",
+      "",
+      "slam",
+      "",
+      "shot_windup",
+      "",
+      "shot"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0.2,
+  "strip_labels": true,
+  "scale": 0.2367,
+  "detail": 3.29,
+  "grid": {
+    "rows": [
+      0,
+      549,
+      552,
+      1100
+    ],
+    "cols": [
+      [
+        0,
+        396,
+        400,
+        799,
+        802,
+        1201,
+        1205,
+        1600
+      ],
+      [
+        0,
+        1600
+      ],
+      [
+        0,
+        396,
+        400,
+        799,
+        802,
+        1201,
+        1205,
+        1600
+      ]
+    ]
+  }
+}

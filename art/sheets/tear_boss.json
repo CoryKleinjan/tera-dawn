@@ -44,7 +44,15 @@
         "hurt": "tear_boss:hurt",
         "enraged": "tear_boss:enraged",
         "defeated1": "tear_boss:defeated1",
-        "defeated2": "tear_boss:defeated2"
+        "defeated2": "tear_boss:defeated2",
+        "jump1": "monanim_tear_boss:jump1",
+        "jump2": "monanim_tear_boss:jump2",
+        "pounce_windup": "monanim_tear_boss:pounce_windup",
+        "pounce": "monanim_tear_boss:pounce",
+        "slam_windup": "monanim_tear_boss:slam_windup",
+        "slam": "monanim_tear_boss:slam",
+        "shot_windup": "monanim_tear_boss:shot_windup",
+        "shot": "monanim_tear_boss:shot"
       },
       "anchor": "mass",
       "baseline": "bottom",
@@ -89,6 +97,50 @@
           ],
           "fps": 2,
           "loop": false
+        },
+        "jump": {
+          "frames": [
+            "jump1",
+            "jump2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "pounce_windup": {
+          "frames": [
+            "pounce_windup"
+          ],
+          "fps": 1
+        },
+        "pounce": {
+          "frames": [
+            "pounce"
+          ],
+          "fps": 1
+        },
+        "slam_windup": {
+          "frames": [
+            "slam_windup"
+          ],
+          "fps": 1
+        },
+        "slam": {
+          "frames": [
+            "slam"
+          ],
+          "fps": 1
+        },
+        "shot_windup": {
+          "frames": [
+            "shot_windup"
+          ],
+          "fps": 1
+        },
+        "shot": {
+          "frames": [
+            "shot"
+          ],
+          "fps": 1
         }
       }
     }

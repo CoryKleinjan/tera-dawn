@@ -37,7 +37,11 @@
         "shoot1": "coral_turret:shoot1",
         "shoot2": "coral_turret:shoot2",
         "hurt": "coral_turret:hurt",
-        "defeated": "coral_turret:defeated"
+        "defeated": "coral_turret:defeated",
+        "knock_up": "monanim_coral_turret:knock_up",
+        "knock_down": "monanim_coral_turret:knock_down",
+        "shot_windup": "monanim_coral_turret:shot_windup",
+        "shot": "monanim_coral_turret:shot"
       },
       "anchor": "mass",
       "baseline": "bottom",
@@ -78,6 +82,30 @@
           ],
           "fps": 1,
           "loop": false
+        },
+        "knock_up": {
+          "frames": [
+            "knock_up"
+          ],
+          "fps": 1
+        },
+        "knock_down": {
+          "frames": [
+            "knock_down"
+          ],
+          "fps": 1
+        },
+        "shot_windup": {
+          "frames": [
+            "shot_windup"
+          ],
+          "fps": 1
+        },
+        "shot": {
+          "frames": [
+            "shot"
+          ],
+          "fps": 1
         }
       }
     }

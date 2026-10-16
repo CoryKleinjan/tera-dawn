@@ -49,7 +49,13 @@
         "walk3": "boulderkin:walk3",
         "attack": "boulderkin:attack",
         "hurt": "boulderkin:hurt",
-        "defeated": "boulderkin:defeated"
+        "defeated": "boulderkin:defeated",
+        "jump1": "monanim_boulderkin:jump1",
+        "jump2": "monanim_boulderkin:jump2",
+        "knock_up": "monanim_boulderkin:knock_up",
+        "knock_down": "monanim_boulderkin:knock_down",
+        "slam_windup": "monanim_boulderkin:slam_windup",
+        "slam": "monanim_boulderkin:slam"
       },
       "anchor": "mass",
       "baseline": "bottom",
@@ -91,6 +97,38 @@
           ],
           "fps": 1,
           "loop": false
+        },
+        "jump": {
+          "frames": [
+            "jump1",
+            "jump2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "knock_up": {
+          "frames": [
+            "knock_up"
+          ],
+          "fps": 1
+        },
+        "knock_down": {
+          "frames": [
+            "knock_down"
+          ],
+          "fps": 1
+        },
+        "slam_windup": {
+          "frames": [
+            "slam_windup"
+          ],
+          "fps": 1
+        },
+        "slam": {
+          "frames": [
+            "slam"
+          ],
+          "fps": 1
         }
       }
     }

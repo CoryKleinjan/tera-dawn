@@ -61,6 +61,22 @@ func test_skyward_cleave_throws_monsters_up() -> void:
 	h.step(120)
 	check(not map.mobs[0].tossed and map.mobs[0].hop == 0.0, "and it lands again")
 
+func test_a_thrown_monster_lies_knocked_down_after_landing() -> void:
+	_setup([360.0])
+	var m := map.mobs[0]
+	m.launch(9.0)
+	h.step(2)
+	check(int(m.snapshot()[4]) & SnapshotFlags.MOB_TOSSED != 0, "clients see it knocked up")
+	while m.tossed:
+		h.step(1)
+	check(m.held(), "it lies knocked down when it lands")
+	check(int(m.snapshot()[4]) & SnapshotFlags.MOB_FLOORED != 0, "and clients see that")
+	var x := m.position.x
+	h.step(SimMob.FLOORED_TICKS - 2)
+	check_eq(m.position.x, x, "it doesn't walk while down")
+	h.step(3)
+	check(not m.held(), "then gets up")
+
 func test_a_thrown_monster_cant_hurt_by_touch() -> void:
 	_setup([310.0])
 	map.mobs[0].launch(9.0)
@@ -87,6 +103,7 @@ func test_gravity_well_pulls_monsters_down_and_hits_the_ground() -> void:
 	_use(&"gravity_well")
 	check_eq(map.mobs[0].hop, 0.0, "it's pulled down")
 	check(not map.mobs[0].tossed, "and no longer thrown")
+	check(map.mobs[0].floored_t > 0, "but knocked down")
 	var lines := _lines()
 	check(lines.has(0), "then the shockwave hits it")
 	check(lines.has(1), "and the one behind")

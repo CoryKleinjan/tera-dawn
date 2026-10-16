@@ -35,7 +35,13 @@
         "hop3": "dewling:hop3",
         "attack": "dewling:attack",
         "hurt": "dewling:hurt",
-        "defeated": "dewling:defeated"
+        "defeated": "dewling:defeated",
+        "jump1": "monanim_dewling:jump1",
+        "jump2": "monanim_dewling:jump2",
+        "knock_up": "monanim_dewling:knock_up",
+        "knock_down": "monanim_dewling:knock_down",
+        "pounce_windup": "monanim_dewling:pounce_windup",
+        "pounce": "monanim_dewling:pounce"
       },
       "anchor": "mass",
       "baseline": "cell",
@@ -75,6 +81,38 @@
           ],
           "fps": 1,
           "loop": false
+        },
+        "jump": {
+          "frames": [
+            "jump1",
+            "jump2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "knock_up": {
+          "frames": [
+            "knock_up"
+          ],
+          "fps": 1
+        },
+        "knock_down": {
+          "frames": [
+            "knock_down"
+          ],
+          "fps": 1
+        },
+        "pounce_windup": {
+          "frames": [
+            "pounce_windup"
+          ],
+          "fps": 1
+        },
+        "pounce": {
+          "frames": [
+            "pounce"
+          ],
+          "fps": 1
         }
       }
     }

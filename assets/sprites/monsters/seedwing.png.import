@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccxpc8ti0t2vc"
-path="res://.godot/imported/leafwing.png-f3c2db79452ed401fb6ee49999e198be.ctex"
+uid="uid://bdi0jt88op508"
+path="res://.godot/imported/seedwing.png-3731e8e6b259d6b63ec314708d353125.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/monsters/leafwing.png"
-dest_files=["res://.godot/imported/leafwing.png-f3c2db79452ed401fb6ee49999e198be.ctex"]
+source_file="res://assets/sprites/monsters/seedwing.png"
+dest_files=["res://.godot/imported/seedwing.png-3731e8e6b259d6b63ec314708d353125.ctex"]
 
 [params]
 
