@@ -36,6 +36,8 @@ update this page when one changes. Each zone's own look and music are in
   turns). The weapon is one painting held in his near fist; the shield or tome is in his far
   hand and only shows while the weapon does. Where each sits, its turn and its layer on every
   frame are set by hand in the pose editor.
+- Head gear (helmet, hat, hood, bandana) covers only his head: nothing attached to it reaches his
+  shoulders, so no cape, collar or shoulder flap.
 - Draw order, back to front: off-hand (shield), cape, body, trousers, shoes, tome, top, gloves,
   face, hair (hidden under helmets), hat, weapon, then his fists over its grip. In the pose editor
   any piece (his body, face, hair, fists, each piece of gear) can be moved, turned, resized and
@@ -241,8 +243,8 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
   the "Lv. a-b" level_text) only so content tests keep the zones in order.
 - Monster strength: each kind's own HP, attack and Dawn Essence are what it is on the map nearest
   a town that it lives on; on each map farther from the nearest town than that it is 15% stronger
-  (HP, attack and essence). Shortcuts don't count toward that distance. Bosses keep their own
-  numbers.
+  (HP, attack and essence). Shortcuts and one-way ways home (a boss arena's) don't count
+  toward that distance. Bosses keep their own numbers.
 - The paths players walk between towns stay gentle (tuning tier 10 or below) the whole way, so new
   players can reach every job town. Dead-end training branches climb in smooth steps to a boss
   past the top map.

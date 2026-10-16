@@ -105,16 +105,19 @@ static func _walkable(a: StringName, b: StringName, by_pair: Dictionary) -> bool
 	return reached.has(b)
 
 ## How many maps each map is from the nearest town, as map id -> steps: towns are 0, the
-## fields next to them 1, and so on, walking through any portal in either direction (rooms
-## and arenas count as a map too) except shortcuts, which are secrets that lead back from
-## deeper in and don't bring a map nearer. Maps no town reaches are left out.
+## fields next to them 1, and so on, walking through portals (rooms and arenas count as a
+## map too). A portal counts in either direction, except a one-way one (a boss arena's way
+## home), which only counts the way it goes, and shortcuts, which are secrets that lead back
+## from deeper in and don't count at all: neither brings a map nearer. Maps no town reaches
+## are left out.
 static func steps_from_town() -> Dictionary:
 	var next := {}
 	for m: MapDef in Content.maps.values():
 		for p in m.portals:
 			if p.target_map == m.id or not Content.maps.has(p.target_map) or p.is_shortcut():
 				continue
-			for pair in [[m.id, p.target_map], [p.target_map, m.id]]:
+			var pairs := [[m.id, p.target_map]] if p.one_way or p.after_boss else [[m.id, p.target_map], [p.target_map, m.id]]
+			for pair in pairs:
 				if not next.has(pair[0]):
 					next[pair[0]] = []
 				if not pair[1] in next[pair[0]]:

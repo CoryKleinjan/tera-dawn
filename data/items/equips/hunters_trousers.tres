@@ -16,7 +16,7 @@ frame_art = {
 &"roll2": &"roll1"
 }
 nudges = {
-&"roll2": Vector4(-22, -69, -180, 0)
+&"roll2": Vector4(6, -53, -180, 0)
 }
 id = &"hunters_trousers"
 display_name = "Hunter's Trousers"
