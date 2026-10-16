@@ -196,7 +196,7 @@ func go_to_meadow() -> void:
 	await _ticks(TDPlayer.PORTAL_FADE_TICKS + 4)
 	_check(world.map.id == &"meadow" and not world.map.town and not world.mobs().is_empty(), "the village's east exit leads to the meadow, where the monsters are")
 
-## Killing a Dewling, its EXP and Dawnshards.
+## Killing a Dewling, its Dawn Essence and Dawnshards.
 func first_kill() -> void:
 	# Put a Dewling right in front of the player and hit it until it dies.
 	var meadow: MapInstance = Net.server.maps[&"meadow"]
@@ -208,7 +208,7 @@ func first_kill() -> void:
 	var others := _hold_mobs(meadow, [mob])
 	_teleport(Vector2(mob.position.x - 40, 620))
 	p.face = 1
-	var xp_before: int = Game.me.xp + Game.me.level * 1000
+	var essence_before: int = Game.me.essence
 	var shards: int = Game.me.shards
 	for i in 12:
 		mob.position.x = p.position.x + 40
@@ -220,7 +220,7 @@ func first_kill() -> void:
 	_release_mobs(others)
 	await _ticks(4)
 	_check(world.mobs()[mob.index].dead, "the game shows the Dewling defeated")
-	_check(Game.me.xp + Game.me.level * 1000 > xp_before, "killing a monster gives EXP")
+	_check(Game.me.essence > essence_before, "killing a monster gives Dawn Essence")
 	# Drops land next to the player, so some may already be picked up by now.
 	_check(not meadow.drops.is_empty() or Game.me.shards > shards, "the monster drops Dawnshards")
 	_check(world.drops.size() == meadow.drops.size(), "the game shows the same drops as the server")
@@ -319,13 +319,12 @@ func dawn_slash() -> void:
 
 	# Dawn Slash costs MP and hits several monsters.
 	var mp_before := Game.me.mp
-	var level := Game.me.level
 	p.cooldown = 0
 	_me().cooldown = 0
 	await _tap("quick_2")
 	_check(p.action_anim == Content.skill(&"dawn_slash").animation, "Dawn Slash makes its motion")
-	# MP regen may tick once during the key press, and a kill that levels up refills MP.
-	_check(Game.me.level > level or mp_before - Game.me.mp >= Content.skill(&"dawn_slash").mp_at(1) - 1, "Dawn Slash spends MP")
+	# MP regen may tick once during the key press.
+	_check(mp_before - Game.me.mp >= Content.skill(&"dawn_slash").mp_at(1) - 1, "Dawn Slash spends MP")
 
 ## Climbing a rope, and a portal to Fern Hollow.
 func rope_and_portal() -> void:

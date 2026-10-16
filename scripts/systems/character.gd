@@ -1,15 +1,15 @@
 class_name Character
 extends RefCounted
-## One character: name, level, EXP, job, stats, quickslots, inventory, storage, quests,
+## One character: name, Dawn Essence, job, stats, quickslots, inventory, storage, quests,
 ## Dawnshards, HP, MP, the map they're on and what they've done. Formulas live in
 ## CharacterStats; this only holds and changes state. Three parts keep their own state and
-## rules: `skills` (SkillBook: skills, Skill Points, buffs), `ap` (AbilityPoints) and `gear`
-## (Gear: wearing gear and scrolls; what's worn is `equipment`).
+## rules: `skills` (SkillBook: skills bought and buffs), `ap` (AbilityPoints: stats bought)
+## and `gear` (Gear: wearing gear and scrolls; what's worn is `equipment`).
 ##
 ## The server owns the real Character of every player. Each client keeps a copy of its own
 ## (Game.me) that the server refreshes, so the UI can read it but never changes it directly.
 
-## Base stats, gear or Ability Points changed: anything showing stats should refresh.
+## Base stats or gear changed: anything showing stats should refresh.
 signal stats_changed
 
 ## The first town: where the way out of the tutorial leads, and where you wake after fainting
@@ -22,14 +22,12 @@ const START_JOB := &"beginner"
 const QUICKSLOTS := 8
 ## The innate attack bound to the attack key.
 const BASIC_ATTACK := &"basic_attack"
-## The level cap: EXP stops here, as there are no fields for higher levels yet.
-const MAX_LEVEL := 100
 ## What a storage keeper charges to store one stack.
 const STORE_FEE := 10
 
 var name := ""
-var level := 1
-var xp := 0
+## Unspent Dawn Essence: monsters and quests give it, stats and skills cost it.
+var essence := 0
 var shards := 0
 var mp := 0
 var map_id: StringName = START_MAP
@@ -38,9 +36,12 @@ var job: JobDef
 ## The job this character advanced into `job` from (for a blend, which of its two parents),
 ## or empty for a job reached the usual way.
 var came_from: StringName = &""
-## Stats from the job and Ability Points, before gear.
+## Ids of every job this character has passed (its Job Test taken and its gifts handed over),
+## so switching back to one is free.
+var jobs_passed: Array[String] = []
+## Stats from the job and the points bought, before gear.
 var base := StatBlock.new()
-## Unspent Ability Points and the free reset.
+## Buying stats.
 var ap := AbilityPoints.new(self)
 var inventory := Inventory.new()
 ## Kept by storage keepers in town.
@@ -50,7 +51,7 @@ var equipment := Equipment.new()
 ## Putting gear on and off and upgrade scrolls.
 var gear := Gear.new(self)
 var quests := QuestLog.new()
-## Skills learned, Skill Points and buffs running.
+## Skills learned and buffs running.
 var skills := SkillBook.new(self)
 ## One per quickslot: [] (empty), ["skill", id] or ["item", id].
 var quickslots: Array = []
@@ -84,7 +85,7 @@ func _init() -> void:
 	quickslots.resize(QUICKSLOTS)
 	quickslots.fill([])
 
-## A fresh level 1 character of `job_id` with the job's starting stats, gear and items, and
+## A fresh character of `job_id` with the job's starting stats, gear and items, and
 ## the outfit picked in the character creator (`made`, null for the defaults).
 static func create(char_name: String, job_id := START_JOB, made: NewCharacter = null) -> Character:
 	var c := Character.new()
@@ -122,10 +123,10 @@ func refill() -> void:
 	mp = max_mp()
 
 func max_hp() -> int:
-	return CharacterStats.max_hp(job, level, stats)
+	return CharacterStats.max_hp(job, ap.spent(), stats)
 
 func max_mp() -> int:
-	return CharacterStats.max_mp(job, level, stats)
+	return CharacterStats.max_mp(job, ap.spent(), stats)
 
 func damage_range() -> Vector2i:
 	return CharacterStats.damage_range(job, stats)
@@ -133,48 +134,13 @@ func damage_range() -> Vector2i:
 func magic_range() -> Vector2i:
 	return CharacterStats.magic_range(job, stats)
 
-func xp_need(lvl := -1) -> int:
-	if lvl < 0:
-		lvl = level
-	# Up to JOB_LEVEL a level takes SCALE * lvl^GROWTH EXP; after it, the Lv 10 amount times
-	# (lvl / JOB_LEVEL)^JOB_GROWTH, so each level takes longer than the one before.
-	# Tuned with the pace bot (playtest/pace-run-3.md in the project files) at SCALE 55: about
-	# 1.5-2 hours to Lv 10 and 31-49 hours to the Lv 35 cap. SCALE was then halved to 27.5 so
-	# every level needs half the EXP (twice as fast). The island quests pay about 85,000 EXP
-	# before Lv 10, more than the 55,000 now needed, so the early levels speed up the most.
-	# Quest EXP rewards are left as they were, so quests stay worth doing; change them together.
-	const SCALE := 27.5
-	const GROWTH := 3.0
-	const JOB_LEVEL := 10
-	const JOB_GROWTH := 1.8
-	if lvl <= JOB_LEVEL:
-		return int(floor(SCALE * pow(lvl, GROWTH)))
-	return int(floor(SCALE * pow(JOB_LEVEL, GROWTH) * pow(float(lvl) / JOB_LEVEL, JOB_GROWTH)))
+## How far the character has grown (see CharacterStats.growth): what HP and MP regen go by.
+func growth() -> float:
+	return CharacterStats.growth(ap.spent())
 
-## Whether the character is at MAX_LEVEL, where EXP stops.
-func at_max_level() -> bool:
-	return level >= MAX_LEVEL
-
-## Adds EXP and returns how many levels were gained. At MAX_LEVEL EXP stops (kept at 0).
-func gain_xp(n: int) -> int:
-	if at_max_level():
-		xp = 0
-		return 0
-	xp += n
-	var gained := 0
-	while not at_max_level() and xp >= xp_need():
-		xp -= xp_need()
-		level += 1
-		gained += 1
-	if at_max_level():
-		xp = 0
-	if gained > 0:
-		ap.points += gained * job.ap_per_level
-		skills.points += gained * job.sp_per_level
-		skills.keep_in_room()
-		recalc()
-		refill()
-	return gained
+## Adds Dawn Essence (from a monster or a quest).
+func gain_essence(n: int) -> void:
+	essence += maxi(0, n)
 
 func spend_mp(n: int) -> bool:
 	if mp < n:
@@ -271,17 +237,6 @@ func retrieve(tab: int, i: int) -> String:
 
 # ---------- jobs ----------
 
-## The base stats still short of what advancing to `next` asks for, as {stat: amount needed}
-## (empty when the stats are there; the level isn't counted).
-func stats_short_of(next: JobDef) -> Dictionary:
-	var out := {}
-	if next.advance_requirements:
-		for stat in StatBlock.BASE:
-			var need := next.advance_requirements.value(stat)
-			if base.value(stat) < need:
-				out[stat] = need
-	return out
-
 ## The jobs this character has been, newest first: their job, the one they advanced from
 ## (`came_from` for a blend), and so on back to the Beginner.
 func job_path() -> Array[StringName]:
@@ -306,16 +261,31 @@ func job_line() -> Array[StringName]:
 				out.append(parent)
 	return out
 
-## Why the character can't advance to `next`, or "" if they can.
+## Whether this character has passed `j` before (see jobs_passed).
+func has_passed(j: JobDef) -> bool:
+	return jobs_passed.has(String(j.id))
+
+## Whether a tutor teaching `next` would offer it: a first job to anyone past the Beginner
+## (switching from another first job or a blend), a blend to one of its parents, and any job
+## passed before.
+func can_become(next: JobDef) -> bool:
+	if next == job or next.is_starting_job():
+		return false
+	return next.tier() == 1 or next.opens_from(job.id) or has_passed(next)
+
+## The skills this character would lose by becoming `next` (those outside its JobDef.line).
+func skills_lost_by(next: JobDef) -> Array[SkillDef]:
+	return skills.outside(next.line())
+
+## Why the character can't become `next`, or "" if they can.
 func advance_problem(next: JobDef) -> String:
-	if not next.opens_from(job.id):
+	if next == job:
+		var article := "an" if next.display_name.substr(0, 1).to_lower() in ["a", "e", "i", "o", "u"] else "a"
+		return "You're already %s %s." % [article, next.display_name]
+	if not can_become(next):
 		return "A %s can't become a %s." % [job.display_name, next.display_name]
-	if level < next.advance_level:
-		return "You need to be level %d to become a %s." % [next.advance_level, next.display_name]
-	if next.advance_requirements:
-		for stat in StatBlock.BASE:
-			if base.value(stat) < next.advance_requirements.value(stat):
-				return "You need %d %s to become a %s." % [next.advance_requirements.value(stat), StatBlock.LABELS[stat], next.display_name]
+	if has_passed(next):
+		return ""
 	if next.advance_quest and not quests.done.has(next.advance_quest.id):
 		return "Pass the %s first." % next.advance_quest.title
 	var full := inventory.tab_without_room(next.advance_gifts.map(func(g: DropEntry) -> Array: return [g.item, 1 if g.item is EquipDef else g.min_amount]))
@@ -323,22 +293,24 @@ func advance_problem(next: JobDef) -> String:
 		return "Make room in your %s inventory first." % ItemDef.TAB_NAMES[full]
 	return ""
 
-## Becomes `next` (see advance_problem) and receives its gifts and SP (as many as taking it at
-## its advance level would have given). Returns why not, or "".
+## Becomes `next` (see advance_problem). The skills of the old job that `next` can't use go,
+## and the Dawn Essence paid for them comes back; stats stay. The first time, it receives the
+## job's gifts. Returns why not, or "".
 func advance(next: JobDef) -> String:
 	var problem := advance_problem(next)
 	if problem != "":
 		return problem
-	came_from = job.id if next.partner != &"" else &""
+	var first_time := not has_passed(next)
+	came_from = job.id if next.partner != &"" and next.opens_from(job.id) else &""
 	job = next
-	# a job taken late still pays its Skill Points for every level since it opened
-	skills.points += next.advance_sp + (level - next.advance_level) * next.sp_per_level
-	skills.keep_in_room()
-	for g in next.advance_gifts:
-		if g.item is EquipDef:
-			inventory.add_stack(ItemStack.unrolled(g.item, 1))
-		elif g.item:
-			inventory.add(g.item, g.min_amount)
+	skills.forget_outside(next.line())
+	if first_time:
+		jobs_passed.append(String(next.id))
+		for g in next.advance_gifts:
+			if g.item is EquipDef:
+				inventory.add_stack(ItemStack.unrolled(g.item, 1))
+			elif g.item:
+				inventory.add(g.item, g.min_amount)
 	recalc()
 	_wear_advance_weapon(next)
 	refill()

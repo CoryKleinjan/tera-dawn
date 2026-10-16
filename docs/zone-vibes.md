@@ -13,8 +13,12 @@ a map look (`MapDef.variant`) for it, and update the entry when the zone changes
   light, fog, colour grade, setting). It keeps the zone's palette family, brushwork and materials.
 - **Music**: each zone has one town track and one field track in the town's tone; the field
   track plays in every field of the zone, dark caves and woods included. Each zone's boss map
-  has its own `boss_<zone>` track: the town's tone, but more upbeat and dangerous. Bosses that
+  has its own `boss_<zone>` track: the town's tone, but cinematic and dangerous. Bosses that
   live in a training map (Dawnrise) play the field track.
+- **Music feel** (Cory, 2026-10-16): grown-up, never childish, in the spirit of Hollow Knight.
+  Towns and fields are ambient: slow, spacious and wistful, cello and felt piano under the zone's
+  own instruments, no music box. Bosses are cinematic: full orchestral weight, low strings, choir
+  swells, heavy timpani over the zone's instruments. Each zone keeps its own tone.
 - **Cities**: Dawnharbor is the gold standard. Every other city matches its attention to detail
   and polish in its own zone's tone, never copying Dawnharbor's look. Change Dawnharbor only with
   great care.
@@ -60,8 +64,9 @@ where every adventurer wakes; the softest, most innocent zone.
 `#ffe2b0`, rose-pink haze `#e8a49a`; golden motes, light shafts. Rolling grass, wildflowers,
 ropes, small rocks and trees. Round, soft, friendly shapes; small cute monsters.
 
-**Keep (music):** innocent and carefree. Town: music box, ocarina, acoustic guitar, soft strings,
-gentle bouncy tempo. Field: strings, flute, light percussion, bright skipping melody.
+**Keep (music):** gentle and hopeful. Town: ocarina, felt piano, acoustic guitar, soft strings,
+cello, slow and tender. Field: ocarina, flute, guitar, strings, light percussion, a gentle
+wandering melody.
 
 **Town: Dawnrise Village.** Small and cosy, humbler than Dawnharbor: a village green with a low
 grassy rise (ladder up) where the windmill stands. Round honey-stone and timber cottages under fat
@@ -90,7 +95,7 @@ wood, rope, sails, stone harbour walls.
 
 **Keep (music):** breezy, travelling, sea wind. Field: acoustic guitar, strings, flute, light
 snare, steady travelling tempo. Town: the same instruments plus accordion touches, busier and
-warmer, a cheerful harbour-market tune.
+warmer, a calm, reflective harbour-market tune.
 
 **Town: Dawnharbor (the gold standard for every city's detail and polish).** Three levels: a long quay lined with barrels, crates,
 nets and carts, a stone-walled terrace above with lamp posts, ivy and flower boxes, and a cliff top
@@ -119,7 +124,7 @@ Giant oak trunks, broad leaf canopies, planks, rope bridges and ladders, moss an
 are plant and woodland creatures.
 
 **Keep (music):** adventurous and verdant. Town: wooden flutes, harp, plucked strings,
-birdsong-like woodwinds, light skipping rhythm. Field: wooden flutes, strings, hand drums,
+birdsong-like woodwinds, airy and calm. Field: wooden flutes, strings, hand drums, a quiet
 swinging hunting rhythm.
 
 **Town: Greenbough Village.** Treehouses built into giant oaks, reached by ladders and linked by
@@ -175,8 +180,8 @@ light `#ffd0a0`, orange-red haze `#bf592f`; rising embers. Grey stone, terracott
 chimneys, iron straps and rivets, forge-lit windows, cinder slopes, slag and lava. Monsters are
 fire, stone and metal creatures.
 
-**Keep (music):** proud and driving. Town: warm brass, low strings, anvil-like metal percussion,
-taiko, a strong friendly march. Field: low brass, string ostinato, war drums, energetic but not
+**Keep (music):** proud and driving. Town: a slow, stately military march: parade snare
+cadence, bass drum, low brass fanfare, low strings, anvil-like chimes. Field: low brass, string ostinato, war drums, energetic but not
 dark.
 
 **Town: Emberforge.** Stone forge halls with terracotta roofs and tall chimneys, glowing windows
@@ -202,7 +207,7 @@ light `#c7bfff` against warm lantern glow, deep blue fog `#3a3a6f`; golden motes
 Tall, narrow half-timbered houses, cream plaster, dark beams, wall lanterns, narrow alleys,
 cobbles. Monsters are shades, wisps, moths and crypt creatures.
 
-**Keep (music):** a den of thieves: sly, roguish heist-caper mischief, cozy and charming, never
+**Keep (music):** a den of thieves: sly, roguish heist-caper mischief with a smoky noir edge, charming, never
 dark. Walking upright bass, muted clarinet (and muted trumpet), pizzicato strings, brushed snare and
 finger snaps, accordion and celesta touches. Town: relaxed swagger. Field: sneaky tiptoe caper.
 Boss: a fast heist-gone-wrong chase.
@@ -233,7 +238,7 @@ cream light `#fff0c7`, turquoise haze `#8ed0d8`; cool sparkle. Sand, rock pools,
 wreck timber, portholes, masts and rigging, sea caves. Monsters are crabs, gulls, slimes, kelp
 and reef creatures.
 
-**Keep (music):** jolly and buoyant. Town: fiddle, accordion, concertina, stomping hand drums,
+**Keep (music):** buoyant and mellow. Town: fiddle, accordion, concertina, stomping hand drums,
 rollicking shanty feel without singing. Field: marimba, steel-string guitar, flowing strings,
 light island percussion.
 

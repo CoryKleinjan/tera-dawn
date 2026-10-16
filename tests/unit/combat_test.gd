@@ -1,6 +1,6 @@
 extends TestCase
-## Combat: player hits (misses against higher monsters, crits, damage range and skill
-## multiplier, level penalty and magic), monster touches (dodge, defense, floor of 1)
+## Combat: player hits (never miss, crits, damage range and skill multiplier, magic, no
+## penalty against stronger monsters), monster touches (dodge from avoid, defense, floor of 1)
 ## and the faint penalty. Randomness is pinned with seed() or stats that force the outcome.
 
 var fx: UnitHelpers
@@ -11,13 +11,12 @@ func before_each() -> void:
 func after_each() -> void:
 	fx.cleanup()
 
-## A level-10 character whose physical range is exactly 9..18 and who never crits.
+## A character whose physical range is exactly 9..18 and who never crits.
 func _fighter(extra := {}) -> Character:
 	var values := {"strength": 25, "dexterity": 10, "attack": 10, "crit": -12}
 	values.merge(extra, true)
 	var c := fx.character(null, {})
 	c.base = UnitHelpers.stats(values)
-	c.level = 10
 	c.recalc()
 	return c
 
@@ -27,13 +26,13 @@ func _attack(multiplier := 1.0) -> SkillDef:
 	s.innate = true
 	return s
 
-func test_same_level_never_misses_and_stays_in_range() -> void:
+func test_never_misses_and_stays_in_range() -> void:
 	var c := _fighter()
 	var m := fx.monster(&"t_mob", 10)
 	var s := _attack()
 	for i in 300:
 		var r := Combat.player_hit(s, m, c)
-		check(not r["miss"], "no misses at equal level")
+		check(not r["miss"], "no misses")
 		check(not r["crit"], "no crits at 0% crit rate")
 		check_between(r["damage"], 9, 18, "within damage range")
 
@@ -64,43 +63,16 @@ func test_certain_crit_multiplies_damage() -> void:
 		check(r["crit"], "always crits")
 		check_between(r["damage"], roundi(9 * 1.6), roundi(18 * 1.6), "crit range")
 
-func test_higher_level_monster_takes_less_and_can_dodge() -> void:
+func test_stronger_monster_neither_dodges_nor_shrugs_off_damage() -> void:
 	var c := _fighter()
 	c.base.dexterity = 0
 	c.recalc()
-	var m := fx.monster(&"t_mob", 20)  # 10 levels above: 60% miss before accuracy, capped at 60%
+	var m := fx.monster(&"t_mob", 60)
 	var s := _attack()
-	var misses := 0
-	for i in 1000:
+	for i in 300:
 		var r := Combat.player_hit(s, m, c)
-		if r["miss"]:
-			misses += 1
-			check_eq(r["damage"], 0, "miss does no damage")
-		else:
-			# raw 8..18 (STR 20 only: 80 × 10 / 100 × 2 = 16)... minus 20, floored at 1
-			check_eq(r["damage"], 1, "level gap eats the damage down to 1")
-	check_between(misses, 500, 700, "about 60% misses")
-
-func test_accuracy_wins_back_misses() -> void:
-	var c := _fighter({"accuracy": 1000})
-	var m := fx.monster(&"t_mob", 30)
-	var s := _attack()
-	for i in 200:
-		check(not Combat.player_hit(s, m, c)["miss"], "enough accuracy never misses")
-
-func test_level_gap_reduction_is_two_per_level() -> void:
-	var c := _fighter({"strength": 1000, "attack": 100})
-	c.base.dexterity = 0
-	c.job.mastery = 0.95
-	c.recalc()
-	var r := c.damage_range()
-	var m := fx.monster(&"t_mob", 11)
-	var s := _attack()
-	s.damage_multiplier = 1.0
-	c.base.accuracy = 1000
-	c.recalc()
-	for i in 100:
-		check_between(Combat.player_hit(s, m, c)["damage"], r.x - 2, r.y - 2, "one level above: -2")
+		check(not r["miss"], "no misses without accuracy")
+		check_between(r["damage"], 9, 18, "the full damage range")
 
 func test_magic_skill_uses_magic_range() -> void:
 	var c := _fighter()
@@ -129,13 +101,12 @@ func test_player_hit_is_repeatable_with_same_seed() -> void:
 func test_monster_hit_range_without_dodge() -> void:
 	var c := _fighter()
 	c.base = UnitHelpers.stats({"defense": 10})
-	c.level = 10
 	c.recalc()
 	var m := fx.monster(&"t_mob", 10)
 	m.attack = 100
-	# 100 × 0.85..1.15 - 6 - 3 = 76..106
+	# 100 × 0.85..1.15 - 10 × 0.3 = 82..112
 	for i in 300:
-		check_between(Combat.monster_hit(m, c), 76, 106, "touch damage")
+		check_between(Combat.monster_hit(m, c), 82, 112, "touch damage")
 
 func test_monster_hit_never_below_one() -> void:
 	var c := _fighter()
@@ -155,11 +126,14 @@ func test_monster_hit_dodge_capped_at_thirty_percent() -> void:
 			dodged += 1
 	check_between(dodged, 500, 700, "about 30% dodged")
 
-func test_high_level_monster_cannot_be_dodged() -> void:
-	var c := _fighter({"avoid": 50})
+func test_dodge_comes_from_avoid_alone() -> void:
+	var c := _fighter({"avoid": 50})  # 50 × 0.004 = 20%
 	var m := fx.monster(&"t_mob", 60)
-	for i in 300:
-		check(Combat.monster_hit(m, c) > 0, "no dodge 50 levels up")
+	var dodged := 0
+	for i in 2000:
+		if Combat.monster_hit(m, c) == 0:
+			dodged += 1
+	check_between(dodged, 300, 500, "about 20% dodged, however strong the monster")
 
 func test_faint_penalty_is_ten_percent_rounded_down() -> void:
 	check_eq(Combat.faint_penalty(0), 0, "zero")

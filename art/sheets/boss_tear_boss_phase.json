@@ -1,0 +1,60 @@
+{
+  "source": "art/source/boss_tear_boss_phase.png",
+  "save": false,
+  "out_dir": "art/build/boss_tear_boss_phase",
+  "cells": [
+    [
+      "phase1",
+      "",
+      "phase2",
+      "",
+      "phase3"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.1895,
+  "detail": 3.66,
+  "grid": {
+    "rows": [
+      3,
+      540
+    ],
+    "cols": [
+      [
+        0,
+        362,
+        369,
+        837,
+        843,
+        1260
+      ]
+    ]
+  },
+  "overrides": {
+    "phase1": {
+      "crop": [
+        0,
+        0,
+        10000,
+        530
+      ]
+    },
+    "phase2": {
+      "crop": [
+        0,
+        0,
+        10000,
+        530
+      ]
+    },
+    "phase3": {
+      "crop": [
+        0,
+        0,
+        10000,
+        530
+      ]
+    }
+  }
+}

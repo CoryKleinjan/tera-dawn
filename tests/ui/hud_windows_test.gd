@@ -215,91 +215,110 @@ func _plus_rects(win: TDWindow) -> Array[Rect2]:
 
 # ---------- character stats ----------
 
-func test_stats_plus_buttons_spend_ability_points() -> void:
-	await ui.edit(func(c: Character) -> void: c.ap.points = 3)
+func test_stats_plus_buttons_buy_with_dawn_essence() -> void:
+	# a fresh character: every stat's first point costs the same, and this pays for one
+	await ui.edit(func(c: Character) -> void: c.essence = CharacterStats.stat_price(0))
 	var stats: TDStatsWindow = _open("stats")
-	await _redrawn(stats, "stats with AP to spend")
+	await _redrawn(stats, "stats with essence to spend")
 	var plus := _plus_rects(stats) # drawn in StatBlock.BASE order
 	check_eq(plus.size(), StatBlock.BASE.size(), "a + for every base stat")
 	for i in plus.size():
 		check(Rect2(Vector2.ZERO, stats.size).encloses(plus[i]), "the %s + lies inside the window" % StatBlock.BASE[i])
 	var str_before := Game.me.base.strength
+	var price := Game.me.ap.price(&"strength")
+	check_eq(price, CharacterStats.stat_price(0), "the first STR point costs the base price")
 	await ui.click(stats, plus[StatBlock.BASE.find(&"strength")].get_center())
 	await ui.ticks(3)
 	check_eq(Game.me.base.strength, str_before + 1, "STR after clicking its +")
-	check_eq(Game.me.ap.points, 2, "AP left")
+	check_eq(Game.me.essence, 0, "the point's price was paid")
+	check_eq(Game.me.ap.price(&"strength"), CharacterStats.stat_price(1), "the next STR point costs more")
+	await _redrawn(stats, "stats with no essence left")
+	check(_plus_rects(stats).is_empty(), "no + buttons once the essence is spent")
 
 func test_stats_window_leaves_the_status_bar_visible() -> void:
 	var stats: TDStatsWindow = _open("stats")
 	check(stats.position.y + stats.size.y < TDWorld.VIEW.y - TDStatusBar.HEIGHT, "ends above the HP bar")
 
-func test_stats_hide_plus_buttons_without_points() -> void:
+func test_stats_hide_plus_buttons_without_essence() -> void:
+	await ui.edit(func(c: Character) -> void: c.essence = 0)
 	var stats: TDStatsWindow = _open("stats")
 	await _redrawn(stats, "stats")
-	check(_plus_rects(stats).is_empty(), "no + buttons with 0 AP")
+	check(_plus_rects(stats).is_empty(), "no + buttons with no Dawn Essence")
+	check(not TDStatsWindow.can_buy_any(Game.me), "nothing to buy")
 
-func test_stats_window_shows_a_beginner_the_job_paths() -> void:
+func test_stats_show_plus_only_where_the_essence_pays() -> void:
+	# five STR points bought make the next one dearer than a first point anywhere else
+	await ui.edit(func(c: Character) -> void:
+		c.essence = 1000000
+		c.ap.buy(&"strength", 5)
+		c.essence = CharacterStats.stat_price(0))
+	check(Game.me.ap.price(&"strength") > Game.me.essence, "STR costs more than the essence in hand")
+	var stats: TDStatsWindow = _open("stats")
+	await _redrawn(stats, "stats with essence for some stats")
+	check_eq(_plus_rects(stats).size(), StatBlock.BASE.size() - 1, "a + for every stat but STR")
+	check(TDStatsWindow.can_buy_any(Game.me), "something to buy")
+
+func test_stats_window_for_a_beginner() -> void:
 	await ui.edit(func(c: Character) -> void:
 		c.job = Content.job(Character.START_JOB)
-		c.level = 9
-		c.ap.points = 5
-		c.base.strength = 35
-		c.base.dexterity = 4
-		c.base.intelligence = 4
-		c.base.luck = 4
-		c.base.charisma = 4)
+		c.essence = 1000000)
 	var stats: TDStatsWindow = _open("stats")
 	await _redrawn(stats, "stats for a Beginner")
-	var paths := JobDef.paths_from(Character.START_JOB)
-	check(paths.size() >= 5, "a Beginner has every first job ahead")
-	check_eq(stats.size.y, stats.wanted_height(), "the window grows to fit the paths")
-	check(stats.position.y + stats.size.y < TDWorld.VIEW.y - TDStatusBar.HEIGHT, "still ends above the HP bar (%s)" % (stats.position.y + stats.size.y))
-	check(stats.content_end <= stats.size.y - 16, "the last path line (%s) lies inside the window (%s)" % [stats.content_end, stats.size.y])
-	check_eq(TDStatsWindow.path_text(Game.me, Content.job(&"warrior")), "Warrior: 35 STR", "a path whose stats are there")
-	check_eq(TDStatsWindow.path_text(Game.me, Content.job(&"thief")), "Thief: 25 LUK (you have 4)", "what's missing")
-	check_eq(TDStatsWindow.path_text(Game.me, Content.job(&"pirate")), "Pirate: 25 CHA (you have 4)", "only what's missing")
-	for j in paths:
-		var w := DrawUtil.text_width(Game.ui_font, TDStatsWindow.path_text(Game.me, j), 11)
-		check(w < stats.size.x - TDWindow.PAD * 2, "%s's line fits across the window (%d px)" % [j.id, w])
+	check_eq(stats.size.y, TDStatsWindow.BASE_H, "no job paths, no extra room")
+	check(stats.position.y + stats.size.y < TDWorld.VIEW.y - TDStatusBar.HEIGHT, "ends above the HP bar (%s)" % (stats.position.y + stats.size.y))
+	check(stats.content_end <= stats.size.y - 16, "the rows fit")
 	check_eq(stats.auto_rect, Rect2(), "no Auto button for a Beginner")
-	check_eq(_plus_rects(stats).size(), StatBlock.BASE.size(), "the + buttons are still there")
+	check_eq(_plus_rects(stats).size(), StatBlock.BASE.size(), "a + for every stat")
 
-func test_stats_window_hides_the_paths_once_you_have_a_job() -> void:
+func test_stats_window_for_a_warrior() -> void:
 	await ui.edit(func(c: Character) -> void:
-		c.job = Content.job(&"warrior")
-		c.level = 12)
+		c.job = Content.job(&"warrior"))
 	var stats: TDStatsWindow = _open("stats")
 	await _redrawn(stats, "stats for a Warrior")
-	check_eq(stats.size.y, TDStatsWindow.BASE_H, "no paths, no extra room")
+	check_eq(stats.size.y, TDStatsWindow.BASE_H, "the same height as a Beginner's")
 	check(stats.content_end <= stats.size.y - 16, "the rows fit")
 
-func test_stats_auto_spends_every_point_through_the_server() -> void:
+func test_stats_auto_buys_damage_stats_through_the_server() -> void:
 	await ui.edit(func(c: Character) -> void:
 		c.job = Content.job(&"thief")
-		c.level = 12
-		c.ap.points = 10)
+		c.essence = 600)
 	var stats: TDStatsWindow = _open("stats")
 	await _redrawn(stats, "stats with an Auto button")
 	check(stats.auto_rect.size.x > 0 and Rect2(Vector2.ZERO, stats.size).encloses(stats.auto_rect), "Auto lies inside the window")
-	var plan := Game.me.ap.auto_plan()
+	# what AbilityPoints.auto should buy: the cheaper damage stat each time, while the essence lasts
+	var main := Game.me.job.damage_stats()
+	var bought := {}
+	for stat in main:
+		bought[stat] = Game.me.ap.bought(stat)
+	var left := Game.me.essence
+	var want := {}
+	while true:
+		var next: StringName = main[0]
+		for stat in main:
+			if CharacterStats.stat_price(bought[stat]) < CharacterStats.stat_price(bought[next]):
+				next = stat
+		var price := CharacterStats.stat_price(bought[next])
+		if left < price:
+			break
+		left -= price
+		bought[next] += 1
+		want[next] = int(want.get(next, 0)) + 1
 	var before := Game.me.base.copy()
 	await ui.click(stats, stats.auto_rect.get_center())
 	await ui.ticks(3)
-	check_eq(Game.me.ap.points, 0, "every point spent")
-	check_eq(Game.me.base.luck - before.luck, plan.get(&"luck", 0), "LUK as planned")
-	check_eq(Game.me.base.dexterity - before.dexterity, plan.get(&"dexterity", 0), "DEX as planned")
-	check(plan.get(&"luck", 0) > 0, "most points go in the thief's LUK")
+	check_eq(Game.me.essence, left, "Dawn Essence left once the next point costs too much")
+	for stat in StatBlock.BASE:
+		check_eq(Game.me.base.value(stat) - before.value(stat), int(want.get(stat, 0)), "%s as Auto buys it" % stat)
+	check(int(want.get(&"luck", 0)) > 0, "the thief's LUK gets points")
 
-func test_status_bar_glows_while_points_wait() -> void:
+func test_status_bar_glows_while_essence_waits() -> void:
 	await ui.edit(func(c: Character) -> void:
-		c.ap.points = 0
-		c.skills.points = 0)
+		c.job = Content.job(&"warrior")
+		c.essence = 0)
 	check(not TDStatusBar.has_points_waiting("stats") and not TDStatusBar.has_points_waiting("skills"), "nothing to spend, no glow")
-	await ui.edit(func(c: Character) -> void:
-		c.ap.points = 5
-		c.skills.points = 2)
-	check(TDStatusBar.has_points_waiting("stats"), "the Character button glows with AP")
-	check(TDStatusBar.has_points_waiting("skills"), "the Skills button glows with SP")
+	await ui.edit(func(c: Character) -> void: c.essence = 100000)
+	check(TDStatusBar.has_points_waiting("stats"), "the Character button glows when the essence buys a stat")
+	check(TDStatusBar.has_points_waiting("skills"), "the Skills button glows when it buys a skill level")
 	check(not TDStatusBar.has_points_waiting("inventory"), "other buttons don't")
 	check(await ui.redraw(ui.hud.status), "the status bar draws the glow")
 
@@ -312,8 +331,7 @@ func test_skill_window_lists_every_skill_of_every_job() -> void:
 			continue
 		await ui.edit(func(c: Character) -> void:
 			c.job = j
-			c.level = 30
-			c.skills.points = 5)
+			c.essence = 100000)
 		var book: TDSkillWindow = _open("skills")
 		var line := book.jobs()
 		if j.partner == &"":
@@ -338,13 +356,12 @@ func test_skill_window_lists_every_skill_of_every_job() -> void:
 func test_skill_plus_learns_through_the_server() -> void:
 	await ui.edit(func(c: Character) -> void:
 		c.job = Content.job(&"warrior")
-		c.level = 30
-		c.skills.points = 3)
+		c.essence = c.skills.price())
 	var book: TDSkillWindow = _open("skills")
 	book.tab = 1
 	await _redrawn(book, "warrior skills")
 	var plus := _plus_rects(book)
-	check(not plus.is_empty(), "skills with points to spend show a +")
+	check(not plus.is_empty(), "skills the essence pays for show a +")
 	var row := -1
 	for i in TDSkillWindow.ROWS:
 		if book.row_rect(i).encloses(plus[0]):
@@ -354,15 +371,17 @@ func test_skill_plus_learns_through_the_server() -> void:
 	await ui.click(book, plus[0].get_center())
 	await ui.ticks(3)
 	check_eq(Game.me.skills.level(Content.skill(id)), 1, "%s after clicking its +" % id)
-	check_eq(Game.me.skills.points, 2, "SP left")
+	check_eq(Game.me.essence, 0, "the level's price was paid")
+	check_eq(Game.me.skills.price(), CharacterStats.skill_price(1), "the next skill level costs more")
 
 # ---------- quests ----------
 
 ## A character with quests in progress, ready to hand in and done.
 func _quest_log(c: Character) -> void:
-	c.level = 12
-	# past the Job Tests (five of them, one per tutor, are open to a Lv 10 Beginner)
+	# past the Job Tests (five of them, one per tutor; a Warrior may still take the other four)
 	c.job = Content.job(&"warrior")
+	for job in JobDef.paths_from(Character.START_JOB):
+		c.quests.done[job.advance_quest.id] = 1
 	var avail := Content.quests.values().filter(func(q: QuestDef) -> bool: return c.quests.status(q, c) == QuestLog.Status.AVAILABLE)
 	avail.sort_custom(func(a: QuestDef, b: QuestDef) -> bool: return String(a.id) < String(b.id))
 	c.quests.done[avail[0].id] = 1
@@ -395,7 +414,8 @@ func test_quest_pages_list_what_the_log_holds() -> void:
 					check_eq(s, QuestLog.Status.AVAILABLE, "%s available" % q.id)
 				TDQuestWindow.Page.DONE:
 					check(me.quests.done.has(q.id), "%s done" % q.id)
-		for i in listed.size():
+		# rows past the first screenful scroll into view (test_quest_done_page_lists_every_finished_quest)
+		for i in mini(listed.size(), TDQuestWindow.ROWS):
 			var row := log.row_rect(i)
 			if row.end.y > log.size.y:
 				fail("%s: row %d (%s) runs off the bottom of the window" % [TDQuestWindow.PAGE_NAMES[page], i, listed[i].id])
@@ -407,7 +427,6 @@ func test_quest_pages_list_what_the_log_holds() -> void:
 func test_every_quest_draws_in_the_log() -> void:
 	# every quest's details, as each page shows them, drawn inside the window's own draw
 	await ui.edit(func(c: Character) -> void:
-		c.level = 60
 		for q: QuestDef in Content.quests.values():
 			c.quests.accept(q))
 	var log: TDQuestWindow = _open("quests")
@@ -549,7 +568,7 @@ func _social() -> Dictionary:
 	return {
 		"buddies": [["Mossy", true, "Dawnrise Meadow"], ["Kestrel", false, ""]],
 		"fame": 3,
-		"party": {"leader": me, "members": [[me, 1, Game.me.level, "beginner", 1.0, "meadow"], ["Mossy", 7, 22, "warrior", 0.4, "hollow"]]},
+		"party": {"leader": me, "members": [[me, 1, "beginner", 1.0, "meadow"], ["Mossy", 7, "warrior", 0.4, "hollow"]]},
 		"guild": {"name": "Dawnbreakers", "master": me, "members": [[me, true], ["Mossy", true], ["Kestrel", false]]},
 	}
 
@@ -637,7 +656,6 @@ func _safe_page_option(label: String) -> bool:
 func test_every_npc_dialogue_and_its_pages() -> void:
 	await ui.edit(func(c: Character) -> void:
 		_quest_log(c)
-		c.level = 30
 		c.base.strength = 60
 		c.base.dexterity = 60
 		c.base.intelligence = 60
@@ -681,8 +699,7 @@ func test_every_npc_dialogue_and_its_pages() -> void:
 				_win(key).visible = false
 		npc.free()
 
-func test_choosing_a_path_lists_every_job_and_what_it_takes() -> void:
-	await ui.edit(func(c: Character) -> void: c.level = 7)
+func test_choosing_a_path_lists_every_job() -> void:
 	var q: QuestDef = Content.quests[&"q07_choosing_a_path"]
 	check(q.lists_job_paths, "the quest lists the job paths")
 	var npc := ui.npc_beside(Content.npcs[q.giver])
@@ -693,11 +710,57 @@ func test_choosing_a_path_lists_every_job_and_what_it_takes() -> void:
 	if not check(at >= 0, "Sorrel offers %s: %s" % [q.title, labels]):
 		return
 	talk.choose(at)
+	check(talk.text.contains("The paths ahead:"), "the offer lists the paths")
 	for j in JobDef.paths_from(Character.START_JOB):
-		check(talk.text.contains(j.path_line()), "the offer names %s" % j.path_line())
-	check(talk.text.contains("Warrior: Level 10, 35 STR"), "in the JobDef's own words")
+		check(talk.text.contains("\n" + j.display_name), "the offer names %s" % j.display_name)
+	check(not talk.text.contains("STR"), "and asks for no stats")
 	await _redrawn(talk, "the Choosing a Path offer")
 	check(talk.position.y + talk.size.y < TDWorld.VIEW.y - TDStatusBar.HEIGHT, "the window ends above the status bar")
+
+## Opens `tutor`'s page for the job named `job_name` (through "Choose a job").
+func _job_page(tutor: StringName, job_name: String) -> TDNpc:
+	var npc := ui.npc_beside(Content.npcs[tutor])
+	ui.hud.open_dialogue(npc)
+	var talk: TDDialogueWindow = _win("dialogue")
+	var labels: Array = talk.options.map(func(o: Array) -> String: return o[0])
+	check(labels.has("Choose a job"), "%s offers a job" % tutor)
+	talk.choose(labels.find("Choose a job"))
+	labels = talk.options.map(func(o: Array) -> String: return o[0])
+	check(labels.has(job_name), "%s is offered: %s" % [job_name, labels])
+	talk.choose(labels.find(job_name))
+	return npc
+
+func test_a_job_page_shows_what_switching_costs() -> void:
+	await ui.edit(func(c: Character) -> void:
+		c.job = Content.job(&"warrior")
+		c.jobs_passed.assign(["warrior"])
+		c.quests.done.erase(&"jtest_mage")
+		c.skills.learned[&"power_strike"] = 2
+		c.skills.paid[&"power_strike"] = 48)
+	var npc := _job_page(&"lumewood_instructor", "Magician")
+	var talk: TDDialogueWindow = _win("dialogue")
+	check(talk.text.contains("You would forget Power Strike, and get back 48 Dawn Essence."), "what would go and what comes back: %s" % talk.text)
+	check(talk.text.contains("Pass the Job Test first."), "the Job Test first")
+	check(not talk.text.contains("You passed this path before"), "not passed yet")
+	var labels: Array = talk.options.map(func(o: Array) -> String: return o[0])
+	check_eq(labels, ["Back"], "no Become button yet")
+	await _redrawn(talk, "a Warrior's Magician page")
+	talk.visible = false
+	npc.free()
+
+func test_a_job_page_for_a_job_passed_before() -> void:
+	await ui.edit(func(c: Character) -> void:
+		c.job = Content.job(&"warrior")
+		c.jobs_passed.assign(["warrior", "mage"])
+		c.quests.done.erase(&"jtest_mage"))
+	var npc := _job_page(&"lumewood_instructor", "Magician")
+	var talk: TDDialogueWindow = _win("dialogue")
+	check(talk.text.contains("You passed this path before, so it's yours again for the asking."), "passed before")
+	check(not talk.text.contains("You would forget"), "no skills to lose")
+	check(not talk.text.contains("Pass the Job Test"), "no Job Test again")
+	check_eq(talk.options[0][0], "Become a Magician", "free to switch back")
+	talk.visible = false
+	npc.free()
 
 func test_dialogue_number_keys_pick_options() -> void:
 	var elder: NpcDef = Content.npcs[&"village_elder"]
@@ -828,7 +891,6 @@ func test_trade_window_shows_both_offers() -> void:
 func test_player_menu_lists_what_you_can_do() -> void:
 	var a := TDAvatar.create(ui.world, 4242)
 	a.char_name = "Mossy"
-	a.level = 22
 	a.job = &"warrior"
 	var menu: TDPlayerMenuWindow = _win("player")
 	Game.social = {}

@@ -11,7 +11,6 @@ var ui: UiHelpers
 func before_each() -> void:
 	ui = UiHelpers.new(self)
 	await ui.start("Trialist")
-	await ui.edit(func(c: Character) -> void: c.level = 10)
 
 func after_each() -> void:
 	ui.stop()

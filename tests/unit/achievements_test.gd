@@ -31,7 +31,9 @@ func _raise(c: Character, kind: String, n: int) -> void:
 					c.book.add_card(m)
 				left -= mini(left, CardDef.SET)
 				k += 1
-		"level": c.level = n
+		"stats":
+			c.base.strength = n
+			c.recalc()
 		"job": c.job.advances_from = &"beginner" if n > 0 else &""
 		"quests":
 			c.quests.done.clear()
@@ -70,17 +72,18 @@ func test_every_achievement_reached_exactly_at_goal() -> void:
 
 func test_check_awards_only_once() -> void:
 	var c := fx.character()
-	c.level = 10
+	c.base.strength = Achievements.find("level_10").goal
+	c.recalc()
 	var first := _ids(Achievements.check(c))
-	check_has(first, "level_5", "level 5")
-	check_has(first, "level_10", "level 10")
-	check(not first.has("level_30"), "not 30")
+	check_has(first, "level_5", "the first stat goal")
+	check_has(first, "level_10", "the second")
+	check(not first.has("level_30"), "not the third")
 	check_eq(Achievements.check(c).size(), 0, "nothing new the second time")
 	check_eq(c.achievements.count("level_5"), 1, "listed once")
 
 func test_fresh_character_reaches_nothing() -> void:
 	var c := fx.character()
-	check_eq(Achievements.check(c).size(), 0, "nothing at level 1")
+	check_eq(Achievements.check(c).size(), 0, "nothing with no stats bought")
 	check_eq(c.achievements.size(), 0, "list empty")
 
 func test_measure_reads_counters_and_unknown_kinds() -> void:

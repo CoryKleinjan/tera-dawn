@@ -44,8 +44,8 @@ update this page when one changes. Each zone's own look and music are in
   moved up or down the stack on any frame; nothing is repainted or cut for it. Prefer shrinking
   to growing: a piece drawn bigger than painted looks softer.
 - Every piece of gear has frames for every pose in the game, whatever its job: every job's
-  attack (swing, bow, pistol, throw, cast) and every skill pose added later, since the Harbinger
-  wears all gear and uses all skills. A new body pose means new frames for all gear.
+  attack (swing, bow, pistol, throw, cast) and every skill pose added later. A new body pose
+  means new frames for all gear.
 - His arms, fists and held weapons never cover his face, in any pose; both fists show. Blink
   has no pose of its own: he just vanishes and reappears.
 - Animations are shared across similar actions (one swing for all melee, one cast for all
@@ -82,43 +82,51 @@ update this page when one changes. Each zone's own look and music are in
 
 ## Jobs, stats and skills
 
+- There are no levels anywhere. Monsters drop Dawn Essence when they die and it flies to the hero
+  (quests pay it too). It is spent anywhere, in the stats window on stat points and in the skill
+  window on skill levels; each point in a stat costs more than the last one in that stat, and
+  each skill level more than the last skill level bought. Every stat point bought also adds a
+  little Max HP and MP. Fainting loses 10% of the unspent essence, with no way to win it back.
+  The HUD and menus call it "Dawn Essence".
 - Each first job has one stat that drives its damage, and no other stat adds to it: Warrior STR,
   Magician INT, Thief LUK, Archer DEX, Pirate CHA (Charisma). Gear asks only for the job's own
-  stat; Auto puts every Ability Point there.
+  stat; Auto spends essence on that stat.
 - What each stat also gives as it grows: STR Max HP, INT Max MP, DEX Accuracy, LUK Avoidability,
   CHA slightly lower shop prices (capped) and more Dawnshards found.
 - A first job has seven skills: a movement skill, a quick single-target attack, a crowd attack, a
   self buff, a party buff (reaches party members nearby), a passive and a monster-control skill.
-  The SP earned from Lv 10 to 30 maxes all but the control skill (max 10), so players choose
-  what to leave unmaxed; no bonus SP makes up for it. No finishers in the first job; later
-  tiers get them.
+  Skill levels get dear quickly, so players choose what to leave unmaxed.
 - Monster control, one per job, made to combo: Warrior Skyward Cleave throws monsters in front
   into the air; Magician Gravity Well pulls airborne monsters down, then hits every grounded one
   around; Thief Shadow Ambush blinks into the biggest group ahead (ground or air) and stuns it;
   Archer Pinning Shot pins one monster in place, even in mid-air; Pirate Anchor Haul drags
   monsters in a line back to the hero. Thrown or stunned monsters can't move, attack or hurt by
   touch. Every one deals damage. Bosses take the damage but are never thrown, dragged or stunned.
-- Second tier (Lv 30): every first job picks one of two blends of itself and another first job:
+- First-job tutors open when the hero reaches their town, with no stat requirement and no stat
+  reset; each job is taken by passing its Job Test once, and switching back to a job already
+  passed is free (its gifts come only the first time). Switching jobs at any tutor
+  that offers one drops the old job's skills and refunds the essence spent on them; stats stay.
+- Second tier: every first job picks one of two blends of itself and another first job:
   Spellblade (Warrior + Magician), Hexcaster (Magician + Thief), Swashbuckler (Thief + Pirate),
   Sharpshooter (Pirate + Archer), Wildhunter (Archer + Warrior). A blend is the same job from
-  either side. It keeps its own first-job skills, opens all of the other job's first-job skills,
-  and adds its own finisher and signature skill (max 10 each); 4 Skill Points a level, so
-  nearly everything is maxed by the third tier at Lv 50 (the control skills leave some choice). Both stats add together for damage (no
-  averaging); Auto splits points evenly. It wields every weapon and off-hand of both jobs.
-  No Ability Point reset on advancing. A later tutor offers the blends; the first-job tutors
-  never do.
+  either side. It keeps its own first-job skills and opens all of the other job's first-job
+  skills; it has no skills of its own (its draw is combining the two jobs). Both stats add
+  together for damage (no averaging); Auto buys both, the cheaper first. It wields every weapon and off-hand of both jobs.
+  Second- and third-tier jobs open when the hero beats a set boss, found through the tears,
+  while one of the parent jobs. Which tutor teaches them and which boss opens each wait on
+  the story.
 - Every job is built to attack and be fun solo: no tank or healer jobs.
 - No job is shown or named to the player until they can choose it: no menu, list, tooltip,
-  quest or NPC line hints at a later job before then. The one exception: Beginners see the
-  five first jobs and what each needs, so they can plan their stats.
-- Third tier (Lv 50, planned): five jobs, each joining two blends that share no first job, so
-  all four of their stats add together for damage. It uses every weapon of its four first
-  jobs plus its own two-handed weapon, opens every skill of those four jobs and both blends,
-  and adds one ultimate skill that hits a very large area and a huge number of monsters.
-- Fourth tier (planned): one job, Harbinger. It has every skill and weapon in the game, and
-  all five stats add together for its damage. It unlocks only after the story reveals the hero
-  is the harbinger; until then nothing in the game names it.
-- Max level is 100.
+  quest or NPC line hints at a later job before then. The one exception: Beginners hear the
+  five first jobs named.
+- Third tier (planned): each blend splits into two jobs, each leaning into one of its
+  two parents: Spellblade into Bladecaller (Warrior) or Runeblade (Magician), Hexcaster into
+  Warlock (Magician) or Nightweaver (Thief), Swashbuckler into Cutthroat (Thief) or Dread
+  Pirate (Pirate), Sharpshooter into Gunslinger (Pirate) or Hawkeye (Archer), Wildhunter into
+  Stalker (Archer) or Berserker (Warrior). It joins no new job: it keeps both parents' skills
+  and weapons (no two-handed weapons), both stats still add evenly, and it adds four skills of
+  its own that differ by lean: three skills and one ultimate that hits a very large area.
+- There is no Harbinger job: the harbinger is only a story reveal.
 - Off-hand slot (once the Shield slot): Warriors and Beginners wear a shield, a Thief throwing
   stars (with a dagger in hand), a Magician a book, an Archer a quiver worn on the back, a Pirate a pistol (with a scimitar). Stars
   and pistols never run out. A Thief's dagger hits one monster and the stars hit a crowd; a
@@ -265,8 +273,10 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
 ## Audio and travel
 
 - Every town, field and boss map plays its zone's music: one town track, one field track and one
-  more upbeat, dangerous boss track per zone. Lanternfall sounds like a thieves' den.
-- Kenney CC0 sound effects; the title theme and jingles stay.
+  cinematic, dangerous boss track per zone. Lanternfall sounds like a thieves' den.
+- Music feels grown-up, never childish (Hollow Knight's spirit): towns, fields and the title are
+  ambient; bosses are cinematic. Each zone keeps its own tone (`docs/zone-vibes.md`).
+- Kenney CC0 sound effects; the jingles stay.
 - Captain Marlo's ship carries players from the start island to Dawnharbor; coachman Rook takes them
   to the job towns (400-500 Dawnshards, the same for everyone), but coaches only go to towns the
   player has already been to; the towns are also joined by a ring

@@ -1,0 +1,35 @@
+{
+  "source": "art/source/boss_old_clawbeard_shot.png",
+  "save": false,
+  "out_dir": "art/build/boss_old_clawbeard_shot",
+  "cells": [
+    [
+      "shot_windup2",
+      "",
+      "shot2",
+      "",
+      "shot_recover"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.2458,
+  "detail": 3.27,
+  "grid": {
+    "rows": [
+      0,
+      540
+    ],
+    "cols": [
+      [
+        0,
+        413,
+        423,
+        837,
+        847,
+        1260
+      ]
+    ]
+  },
+  "overrides": {}
+}

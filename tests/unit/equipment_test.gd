@@ -1,5 +1,5 @@
 extends TestCase
-## Equipment and wearing gear: places on the body, rings, job, level and stat restrictions,
+## Equipment and wearing gear: places on the body, rings, job and stat restrictions (no level),
 ## stat bonuses reaching the character, swapping with the bag, taking off, and saves.
 
 var fx: UnitHelpers
@@ -132,14 +132,11 @@ func test_equip_allowed_for_listed_family() -> void:
 	check_eq(c.gear.equip_problem(e), "", "archer family listed")
 	check(c.gear.can_use([]), "empty list is anyone")
 
-func test_equip_level_requirement_boundary() -> void:
+func test_equip_ignores_the_gear_tier() -> void:
 	var c := fx.character()
 	var e := fx.equip()
-	e.required_level = 5
-	c.level = 4
-	check_ne(c.gear.equip_problem(e), "", "level 4 too low")
-	c.level = 5
-	check_eq(c.gear.equip_problem(e), "", "level 5 enough")
+	e.required_level = 50
+	check_eq(c.gear.equip_problem(e), "", "no level to fall short of")
 
 func test_equip_stat_requirement_uses_total_stats() -> void:
 	var c := fx.character(null, {"dexterity": 20})
@@ -154,7 +151,7 @@ func test_requirements_lists_only_nonzero() -> void:
 	check_eq(e.requirements(), {}, "none")
 	e.required_level = 10
 	e.required_luck = 30
-	check_eq(e.requirements(), {&"level": 10, &"luck": 30}, "level and luck")
+	check_eq(e.requirements(), {&"luck": 30}, "luck, and no level")
 
 func test_equip_to_named_place_and_invalid_place_falls_back() -> void:
 	var c := fx.character()

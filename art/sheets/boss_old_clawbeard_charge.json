@@ -1,0 +1,92 @@
+{
+  "source": "art/source/boss_old_clawbeard_charge.png",
+  "save": false,
+  "out_dir": "art/build/boss_old_clawbeard_charge",
+  "cells": [
+    [
+      "charge_windup2",
+      "",
+      "charge2",
+      "",
+      "charge_recover"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.3445,
+  "detail": 3.27,
+  "grid": {
+    "rows": [
+      0,
+      540
+    ],
+    "cols": [
+      [
+        0,
+        413,
+        419,
+        841,
+        848,
+        1260
+      ]
+    ]
+  },
+  "overrides": {
+    "charge_windup2": {
+      "blank": [
+        [
+          0,
+          490,
+          67,
+          498
+        ],
+        [
+          79,
+          490,
+          86,
+          498
+        ],
+        [
+          100,
+          490,
+          117,
+          498
+        ],
+        [
+          133,
+          490,
+          201,
+          498
+        ],
+        [
+          208,
+          490,
+          209,
+          498
+        ],
+        [
+          319,
+          490,
+          405,
+          498
+        ]
+      ]
+    },
+    "charge2": {
+      "crop": [
+        0,
+        0,
+        10000,
+        490
+      ]
+    },
+    "charge_recover": {
+      "crop": [
+        0,
+        0,
+        10000,
+        490
+      ]
+    }
+  }
+}

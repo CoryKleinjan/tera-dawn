@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=17 format=3]
+[gd_resource type="SpriteFrames" load_steps=30 format=3]
 
 [ext_resource type="Texture2D" path="res://assets/sprites/monsters/lantern_wraith.png" id="1_strip"]
 
@@ -77,5 +77,70 @@ atlas = ExtResource("1_strip")
 region = Rect2(5460, 0, 364, 389)
 metadata/art_density = 2.72
 
+[sub_resource type="AtlasTexture" id="f16"]
+atlas = ExtResource("1_strip")
+region = Rect2(5824, 0, 364, 389)
+metadata/art_density = 2.72
+
+[sub_resource type="AtlasTexture" id="f17"]
+atlas = ExtResource("1_strip")
+region = Rect2(6188, 0, 364, 389)
+metadata/art_density = 2.72
+
+[sub_resource type="AtlasTexture" id="f18"]
+atlas = ExtResource("1_strip")
+region = Rect2(6552, 0, 364, 389)
+metadata/art_density = 2.72
+
+[sub_resource type="AtlasTexture" id="f19"]
+atlas = ExtResource("1_strip")
+region = Rect2(6916, 0, 364, 389)
+metadata/art_density = 2.72
+
+[sub_resource type="AtlasTexture" id="f20"]
+atlas = ExtResource("1_strip")
+region = Rect2(7280, 0, 364, 389)
+metadata/art_density = 2.72
+
+[sub_resource type="AtlasTexture" id="f21"]
+atlas = ExtResource("1_strip")
+region = Rect2(7644, 0, 364, 389)
+metadata/art_density = 2.72
+
+[sub_resource type="AtlasTexture" id="f22"]
+atlas = ExtResource("1_strip")
+region = Rect2(8008, 0, 364, 389)
+metadata/art_density = 2.72
+
+[sub_resource type="AtlasTexture" id="f23"]
+atlas = ExtResource("1_strip")
+region = Rect2(8372, 0, 364, 389)
+metadata/art_density = 2.72
+
+[sub_resource type="AtlasTexture" id="f24"]
+atlas = ExtResource("1_strip")
+region = Rect2(8736, 0, 364, 389)
+metadata/art_density = 2.72
+
+[sub_resource type="AtlasTexture" id="f25"]
+atlas = ExtResource("1_strip")
+region = Rect2(9100, 0, 364, 389)
+metadata/art_density = 2.72
+
+[sub_resource type="AtlasTexture" id="f26"]
+atlas = ExtResource("1_strip")
+region = Rect2(9464, 0, 364, 389)
+metadata/art_density = 2.72
+
+[sub_resource type="AtlasTexture" id="f27"]
+atlas = ExtResource("1_strip")
+region = Rect2(9828, 0, 364, 389)
+metadata/art_density = 2.72
+
+[sub_resource type="AtlasTexture" id="f28"]
+atlas = ExtResource("1_strip")
+region = Rect2(10192, 0, 364, 389)
+metadata/art_density = 2.72
+
 [resource]
-animations = [{"frames": [{"duration": 1.0, "texture": SubResource("f0")}, {"duration": 1.0, "texture": SubResource("f1")}], "loop": true, "name": &"idle", "speed": 3.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f2")}, {"duration": 1.0, "texture": SubResource("f3")}, {"duration": 1.0, "texture": SubResource("f4")}, {"duration": 1.0, "texture": SubResource("f3")}], "loop": true, "name": &"move", "speed": 6.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f5")}, {"duration": 1.0, "texture": SubResource("f6")}, {"duration": 1.0, "texture": SubResource("f7")}], "loop": false, "name": &"attack", "speed": 3.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f8")}], "loop": true, "name": &"hurt", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f10")}, {"duration": 1.0, "texture": SubResource("f11")}], "loop": false, "name": &"die", "speed": 2.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f12")}], "loop": true, "name": &"swoop_windup", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f13")}], "loop": true, "name": &"swoop", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f14")}], "loop": true, "name": &"shot_windup", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f15")}], "loop": true, "name": &"shot", "speed": 1.0}]
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("f0")}, {"duration": 1.0, "texture": SubResource("f1")}], "loop": true, "name": &"idle", "speed": 3.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f2")}, {"duration": 1.0, "texture": SubResource("f3")}, {"duration": 1.0, "texture": SubResource("f4")}, {"duration": 1.0, "texture": SubResource("f3")}], "loop": true, "name": &"move", "speed": 6.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f5")}, {"duration": 1.0, "texture": SubResource("f6")}, {"duration": 1.0, "texture": SubResource("f7")}], "loop": false, "name": &"attack", "speed": 3.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f8")}], "loop": true, "name": &"hurt", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f14")}, {"duration": 1.0, "texture": SubResource("f15")}, {"duration": 3.0, "texture": SubResource("f16")}], "loop": false, "name": &"die", "speed": 4.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f10")}, {"duration": 1.0, "texture": SubResource("f26")}], "loop": false, "name": &"swoop_windup", "speed": 3.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f11")}, {"duration": 1.0, "texture": SubResource("f27")}], "loop": false, "name": &"swoop", "speed": 8.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f12")}, {"duration": 1.0, "texture": SubResource("f23")}], "loop": false, "name": &"shot_windup", "speed": 3.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f13")}, {"duration": 1.0, "texture": SubResource("f24")}], "loop": false, "name": &"shot", "speed": 8.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f25")}], "loop": true, "name": &"shot_recover", "speed": 1.0}, {"frames": [{"duration": 1.0, "texture": SubResource("f28")}], "loop": true, "name": &"swoop_recover", "speed": 1.0}, {"frames": [{"duration": 2.0, "texture": SubResource("f17")}, {"duration": 4.0, "texture": SubResource("f18")}, {"duration": 2.0, "texture": SubResource("f19")}], "loop": false, "name": &"intro", "speed": 5.0}, {"frames": [{"duration": 2.0, "texture": SubResource("f20")}, {"duration": 4.0, "texture": SubResource("f21")}, {"duration": 2.0, "texture": SubResource("f22")}], "loop": false, "name": &"phase", "speed": 5.0}]

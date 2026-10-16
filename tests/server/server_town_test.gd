@@ -1,7 +1,7 @@
 extends TestCase
 ## Town services through the server: NPC shops (buying, selling, not enough Dawnshards),
-## storage and its fee, portals, paid travel (wagons and ships) and a job instructor's
-## free Ability Point reset.
+## storage and its fee, portals, paid travel (wagons and ships) and switching jobs at a job
+## instructor.
 
 const ServerHarness := preload("res://tests/framework/server_helpers.gd")
 
@@ -233,40 +233,31 @@ func test_a_coach_only_goes_where_you_have_been() -> void:
 
 # ---------- job instructors ----------
 
-## A Beginner who put 20 points into STR instead of the INT a Magician needs.
-func _misbuilt() -> int:
+## A Warrior (passed) who bought 20 points of STR, spending all their Dawn Essence, and has
+## passed the Magician's Job Test. Returns the STR they started with.
+func _warrior_ready_to_switch() -> int:
 	var start := c.job.starting_stats.strength
-	c.base.strength = start + 20
-	c.ap.points = 0
-	c.recalc()
+	c.job = Content.job(&"warrior")
+	c.jobs_passed.assign(["warrior"])
+	c.quests.done[Content.job(&"mage").advance_quest.id] = true
+	c.essence = 0
+	TestCharacters.grant_stat(c, &"strength", 20)
 	return start
 
-func test_an_instructor_resets_a_misbuilt_beginners_ap_once() -> void:
-	var start := _misbuilt()
+func test_an_instructor_switches_a_warrior_and_the_stats_stay() -> void:
+	var start := _warrior_ready_to_switch()
+	check_eq(c.base.strength, start + 20, "20 points bought")
+	check_eq(c.essence, 0, "all spent")
 	h.place(p, INSTRUCTOR_X)
-	h.ask(2, &"req_reset_ap", [&"test_instructor", &"mage"])
-	check_eq(c.base.strength, start, "STR back where it started")
-	check_eq(c.ap.points, 20, "every point back")
-	check(c.ap.reset_used, "used up")
-	check(h.told(2, "Your Ability Points are back: 20 to spend."), "told")
-	c.ap.spend(&"strength", 20)
-	h.ask(2, &"req_reset_ap", [&"test_instructor", &"mage"])
-	check_eq(c.ap.points, 0, "no second reset")
-	check(h.told(2, "You've already had your free reset."), "told why")
+	h.ask(2, &"req_advance", [&"test_instructor", &"mage"])
+	check_eq(c.job.id, &"mage", "a Magician now")
+	check_eq(c.base.strength, start + 20, "the STR bought stays")
+	check_eq(c.essence, 0, "and no essence comes back for it")
 
-func test_no_ap_reset_once_the_stats_are_there() -> void:
-	_misbuilt()
-	c.base.intelligence = 20
+func test_switching_needs_you_by_an_instructor_of_that_job() -> void:
+	_warrior_ready_to_switch()
+	h.ask(2, &"req_advance", [&"test_instructor", &"mage"])
+	check_eq(c.job.id, &"warrior", "too far away")
 	h.place(p, INSTRUCTOR_X)
-	h.ask(2, &"req_reset_ap", [&"test_instructor", &"mage"])
-	check_eq(c.ap.points, 0, "nothing back")
-	check(not c.ap.reset_used, "still unused")
-
-func test_ap_reset_needs_you_by_an_instructor_of_that_job() -> void:
-	_misbuilt()
-	h.ask(2, &"req_reset_ap", [&"test_instructor", &"mage"])
-	check_eq(c.ap.points, 0, "too far away")
-	h.place(p, INSTRUCTOR_X)
-	h.ask(2, &"req_reset_ap", [&"test_instructor", &"warrior"])
-	check_eq(c.ap.points, 0, "they don't teach Warriors")
-	check(not c.ap.reset_used, "still unused")
+	h.ask(2, &"req_advance", [&"test_instructor", &"thief"])
+	check_eq(c.job.id, &"warrior", "they don't teach Thieves")

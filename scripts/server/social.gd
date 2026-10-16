@@ -15,13 +15,11 @@ const PARTY_MAX := 6
 const BUDDY_MAX := 20
 const GUILD_MAX := 30
 const GUILD_COST := 15000
-const GUILD_LEVEL := 10
-## Fame can be given from this level, once a day, and to the same player once a month.
-const FAME_LEVEL := 15
+## Fame can be given once a day, and to the same player once a month.
 const FAME_REPEAT_DAYS := 30
 const TRADE_SLOTS := 9
 const CHAT_MAX := 120
-## Share of a kill's EXP every other party member on the map gets.
+## Share of a kill's Dawn Essence every other party member on the map gets.
 const PARTY_SHARE := 0.4
 ## Ticks an invitation waits for an answer.
 const INVITE_TICKS := 3600
@@ -152,7 +150,7 @@ func summary(p: SimPlayer) -> Dictionary:
 		for m in pt.members:
 			var o := player_named(m)
 			if o:
-				members.append([m, o.peer, o.character.level, String(o.character.job.id), o.character.health.fraction(), String(o.map.def.id) if o.map else ""])
+				members.append([m, o.peer, String(o.character.job.id), o.character.health.fraction(), String(o.map.def.id) if o.map else ""])
 		out["party"] = {"leader": pt.leader, "members": members}
 	var g := guild_of(c.name)
 	if not g.is_empty():
@@ -179,8 +177,8 @@ func invite(p: SimPlayer, kind: String, to: String) -> void:
 func on_answer(peer: int, id: int, accept: bool) -> void:
 	party.on_answer(peer, id, accept)
 
-func party_shares(killer: SimPlayer, xp: int) -> Array:
-	return party.shares(killer, xp)
+func party_shares(killer: SimPlayer, amount: int) -> Array:
+	return party.shares(killer, amount)
 
 ## Party members on the same map within `reach` of `p` (for party buffs).
 func party_near(p: SimPlayer, reach: float) -> Array[SimPlayer]:

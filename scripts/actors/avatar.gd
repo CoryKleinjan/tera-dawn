@@ -9,7 +9,6 @@ const FOLLOW := 0.3
 var world: TDWorld
 var peer := 0
 var char_name := ""
-var level := 1
 var target := Vector2.ZERO
 var face := 1
 var animation := &"idle"
@@ -46,14 +45,13 @@ func apply(state: Array) -> void:
 		position = target # first sight or a portal hop: no gliding across the map
 	known = true
 
-## Takes their [name, level, job, guild, pet, worn gear], sent when it changes.
+## Takes their [name, job, guild, pet, worn gear], sent when it changes.
 func apply_info(info: Array) -> void:
 	char_name = info[0]
-	level = info[1]
-	job = StringName(str(info[2]))
-	guild = str(info[3])
-	pet = StringName(str(info[4]))
-	worn = Equipment.defs_from_ids(info[5]) if info.size() > 5 and info[5] is Dictionary else {}
+	job = StringName(str(info[1]))
+	guild = str(info[2])
+	pet = StringName(str(info[3]))
+	worn = Equipment.defs_from_ids(info[4]) if info.size() > 4 and info[4] is Dictionary else {}
 
 ## They used a skill: they make its motion (a buff or spell makes none).
 func play_skill(skill: SkillDef) -> void:

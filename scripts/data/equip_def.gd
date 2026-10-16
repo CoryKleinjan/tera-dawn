@@ -59,6 +59,7 @@ const OFFHAND_NAMES := {&"shield": "a shield", &"star": "throwing stars", &"book
 @export_group("Requirements")
 ## Job lines that can wear it (JobDef.family); empty for anyone.
 @export var jobs: Array[StringName] = []
+## Not checked any more (levels are gone); the field goes with its data in a later change.
 @export var required_level := 0
 @export var required_strength := 0
 @export var required_dexterity := 0
@@ -115,11 +116,9 @@ static func families_text(families: Array[StringName]) -> String:
 func slot_name() -> String:
 	return SLOT_NAMES[slot]
 
-## What it takes to wear this, as {stat: amount}, with "level" for the level.
+## What it takes to wear this, as {stat: amount}.
 func requirements() -> Dictionary:
 	var out := {}
-	if required_level > 0:
-		out[&"level"] = required_level
 	for pair in [[&"strength", required_strength], [&"dexterity", required_dexterity],
 			[&"intelligence", required_intelligence], [&"luck", required_luck], [&"charisma", required_charisma]]:
 		if pair[1] > 0:

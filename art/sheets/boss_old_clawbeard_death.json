@@ -1,0 +1,35 @@
+{
+  "source": "art/source/boss_old_clawbeard_death.png",
+  "save": false,
+  "out_dir": "art/build/boss_old_clawbeard_death",
+  "cells": [
+    [
+      "death1",
+      "",
+      "death2",
+      "",
+      "death3"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.2739,
+  "detail": 3.27,
+  "grid": {
+    "rows": [
+      0,
+      540
+    ],
+    "cols": [
+      [
+        0,
+        417,
+        424,
+        837,
+        844,
+        1260
+      ]
+    ]
+  },
+  "overrides": {}
+}

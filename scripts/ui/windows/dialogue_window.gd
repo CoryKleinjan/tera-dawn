@@ -144,7 +144,7 @@ func _guild_page() -> void:
 	if Game.me.guild != "":
 		_page("You're already in %s. Leave it first if you want to found your own." % Game.me.guild, [["Back", func() -> void: _main_page(greeting)]])
 		return
-	_page("A guild of your own costs %d Dawnshards, and you must be level %d. Its name shows under every member's name, and members can talk with /g." % [TDSocial.GUILD_COST, TDSocial.GUILD_LEVEL], [
+	_page("A guild of your own costs %d Dawnshards. Its name shows under every member's name, and members can talk with /g." % TDSocial.GUILD_COST, [
 		["Name the guild", func() -> void:
 			visible = false
 			hud.prompt.ask("Name your guild", "", func(n: String) -> void: Net.ask(&"req_guild_create", [who, n]))],
@@ -176,12 +176,12 @@ static func travel_label(r: TravelRoute, dest: MapDef) -> String:
 	bits.append("free" if fare == 0 else "%d Dawnshards" % fare)
 	return "%s to %s (%s)" % [r.by, dest.display_name, ", ".join(bits)]
 
-## The jobs this instructor teaches that the player could advance into from their job.
+## The jobs this instructor teaches that the player could become (Character.can_become).
 func _jobs_offered() -> Array[JobDef]:
 	var out: Array[JobDef] = []
 	for id in npc.def.instructs:
 		var j: JobDef = Content.jobs.get(id)
-		if j and j.opens_from(Game.me.job.id):
+		if j and Game.me.can_become(j):
 			out.append(j)
 	return out
 
@@ -193,39 +193,40 @@ func _job_list() -> void:
 	opts.append(["Back", func() -> void: _main_page(greeting)])
 	_page("Which path calls to you?", opts)
 
-## One job: what it is, what it takes (in red what you don't have yet), and the choice.
-## A Beginner without the stats it asks for may also take the one free AP reset.
+## One job: what it is, what switching to it costs (the skills that go and the essence that
+## comes back), why not yet, and the choice.
 func _job_page(j: JobDef) -> void:
 	var problem := Game.me.advance_problem(j)
-	var say := "%s\n\nRequires: %s" % [j.description, ", ".join(j.requirement_lines())]
+	var parts := PackedStringArray()
+	if j.description != "":
+		parts.append(j.description)
+	if Game.me.has_passed(j):
+		parts.append("You passed this path before, so it's yours again for the asking.")
+	var lost := Game.me.skills_lost_by(j)
+	if not lost.is_empty():
+		var back := 0
+		for s in lost:
+			back += int(Game.me.skills.paid.get(s.id, 0))
+		parts.append("You would forget %s, and get back %d Dawn Essence." % [ServerJobs.skill_names(lost), back])
 	if problem != "":
-		say += "\n\n" + problem
+		parts.append(problem)
+	var say := "\n\n".join(parts)
 	var opts := []
 	if problem == "":
-		opts.append(["Become a %s" % j.display_name, func() -> void:
+		opts.append(["Become " + ServerJobs.with_article(j.display_name), func() -> void:
 			Net.ask(&"req_advance", [npc.def.id, j.id])
 			visible = false])
-	if Game.me.ap.reset_problem(j) == "":
-		opts.append(["Reset my Ability Points", _reset_ap_page.bind(j)])
 	opts.append(["Back", _job_list])
 	_page(say, opts)
 
-## The free AP reset: what it does, once, and the choice.
-func _reset_ap_page(j: JobDef) -> void:
-	_page("Built the wrong way? Once, and only once, I can give back all %d Ability Points you've spent. Your stats go back to where you started, so you can put them where a %s needs them." % [Game.me.ap.spent(), j.display_name], [
-		["Reset them", func() -> void:
-			Net.ask(&"req_reset_ap", [npc.def.id, j.id])
-			visible = false],
-		["Back", _job_page.bind(j)]])
-
 ## For a quest that lists the job paths: a paragraph naming each job a Beginner can
-## advance into and what it takes ("Warrior: Level 10, 35 STR"). "" for other quests.
+## advance into. "" for other quests.
 static func _job_paths(q: QuestDef) -> String:
 	if not q.lists_job_paths:
 		return ""
 	var lines := ["", "", "The paths ahead:"]
 	for j in JobDef.paths_from(Character.START_JOB):
-		lines.append(j.path_line())
+		lines.append(j.display_name)
 	return "\n".join(lines)
 
 ## "Defeat 8 Dewlings (3/8)", one per line.

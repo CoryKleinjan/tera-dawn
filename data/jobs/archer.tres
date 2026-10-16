@@ -1,7 +1,6 @@
 [gd_resource type="Resource" script_class="JobDef" format=3]
 
 [ext_resource type="Script" path="res://scripts/data/job_def.gd" id="1_job_def"]
-[ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="2_stat_block"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/use/red_potion.tres" id="5_red_potion"]
 [ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="q_blue_potion"]
@@ -15,10 +14,6 @@ chance = 1.0
 min_amount = 20
 max_amount = 20
 
-[sub_resource type="Resource" id="Resource_1"]
-script = ExtResource("2_stat_block")
-dexterity = 25
-
 [resource]
 script = ExtResource("1_job_def")
 id = &"archer"
@@ -29,14 +24,10 @@ primary_stat = "dexterity"
 mastery = 0.6
 description = "Sharp-eyed hunters who strike from afar with bows. Dexterity drives their damage and their aim."
 base_hp = 50
-hp_per_level = 12
+hp_growth = 12
 base_mp = 20
-mp_per_level = 6
-ap_per_level = 5
+mp_growth = 6
 advances_from = &"beginner"
-advance_level = 10
-advance_requirements = SubResource("Resource_1")
 advance_gifts = Array[ExtResource("3_drop_entry")]([SubResource("Resource_3")])
-advance_sp = 1
 starting_quickslots = Array[ExtResource("q_item_def")]([ExtResource("5_red_potion"), ExtResource("q_blue_potion")])
 advance_quest = ExtResource("20_test")

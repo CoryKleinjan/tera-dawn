@@ -28,11 +28,11 @@ instead of racing it. Tests drive `Sound.advance` by hand (`tests/unit/sound_mus
   `TDWorld.TITLE_MUSIC`.
   Every track follows `docs/zone-vibes.md`.
 - **Effects**: `EffectDef.sound` plays wherever the effect appears (hits, crits, heals, buffs,
-  pickups, portals, a monster's death, the level-up sparkle).
+  pickups, portals, a monster's death).
 - **Skills**: `SkillDef.cast_sound()`: the skill's own `sound`, else its projectile's
   (`ProjectileDef.sound`: bow, throw, gun, cast; monsters' shots `mob_shot`), else a swing for
   an attack or a cast for magic. Buffs sound through their effect.
-- **Jingles**: level up (`TDWorldFx.LEVEL_UP_JINGLE`), fainting (`TDPlayer.FAINT_JINGLE`), and
+- **Jingles**: fainting (`TDPlayer.FAINT_JINGLE`), and
   the server's `ev_jingle` for a quest done or a job advance (`ServerQuests.QUEST_JINGLE`,
   `ServerJobs.ADVANCE_JINGLE`).
 - **Your hero**: getting hurt, entering a portal (`TDPlayer.*_SOUND`).

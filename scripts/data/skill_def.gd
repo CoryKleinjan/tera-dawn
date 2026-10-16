@@ -17,12 +17,6 @@ const KIND_NAMES := ["Attack", "Buff", "Passive", "Movement"]
 const DEFAULT_FLASH := Color(1.0, 0.9, 0.65)
 ## How far a party buff reaches from the caster, in game pixels (about a screen).
 const PARTY_REACH := 640.0
-## How close counts as up close for a mark's extra damage (about two body lengths).
-const MARK_CLOSE := 90.0
-## Seconds a burn lasts, its damage spread across them.
-const BURN_SECONDS := 3
-## The most attacks in a row a streak counts.
-const STREAK_MAX := 10
 ## An ambush (`ambush`) looks for monsters this far up or down from the player, and this far
 ## behind them; monsters this close to one another count as one group.
 const AMBUSH_HEIGHT := 180.0
@@ -92,22 +86,6 @@ const AMBUSH_GROUP := 110.0
 ## Seconds each monster it hits is rooted: it can't move, but can still attack (SimMob.root).
 @export var root := 0.0
 @export var root_per_level := 0.0
-## Each monster it hits takes this much more damage from everyone (0.2 = 20%) for `hex_time`
-## seconds (SimMob.hex).
-@export var hex := 0.0
-@export var hex_per_level := 0.0
-@export var hex_time := 0.0
-@export var hex_time_per_level := 0.0
-## Extra damage lines on a monster that's hexed.
-@export var hexed_extra_hits := 0
-## Marks the first monster it hits for `mark_time` seconds: the caster hits it `mark_bonus`
-## harder, and `mark_close_bonus` harder again within MARK_CLOSE. When the marked monster
-## falls the mark jumps to the nearest one (MapInstance.MARK_JUMP).
-@export var mark_bonus := 0.0
-@export var mark_bonus_per_level := 0.0
-@export var mark_close_bonus := 0.0
-@export var mark_close_per_level := 0.0
-@export var mark_time := 0.0
 
 @export_group("Moving monsters")
 ## Monster control: each first job has one skill that throws, drags or holds monsters, made
@@ -149,23 +127,6 @@ const AMBUSH_GROUP := 110.0
 @export var steady := false
 ## While the buff lasts, monsters can't see or hit the player; attacking ends it.
 @export var hide := false
-## Casting it again while it runs picks the next element (SkillBook.ELEMENTS: fire, ice,
-## lightning). While it lasts every attack burns (`burn`), chills (`slow`) or sparks (`spark`).
-@export var elements := false
-## Fire: each monster hit burns for this share of the hit, spread over BURN_SECONDS.
-@export var burn := 0.0
-@export var burn_per_level := 0.0
-## Lightning: one more monster near the first one hit takes this share of a hit.
-@export var spark := 0.0
-@export var spark_per_level := 0.0
-## A passive: Critical Rate (in %) for each attack in a row that lands, up to STREAK_MAX.
-## Getting hit starts the streak over.
-@export var streak_crit := 0.0
-@export var streak_crit_per_level := 0.0
-## A passive: every shot (an attack with a projectile) bounces on to one more monster nearby,
-## hitting it for this share.
-@export var bounce := 0.0
-@export var bounce_per_level := 0.0
 ## What it adds to the character's stats while a buff lasts, or always for a passive.
 @export var stats: StatBlock
 @export var stats_per_level: StatBlock
@@ -183,10 +144,6 @@ const AMBUSH_GROUP := 110.0
 ## name ("throw"), passed on to everyone watching. "cast" (SPELL: buffs and spells) makes no
 ## motion at all, so the player carries on with what they were doing.
 @export var animation := &"attack"
-## "1.5" or "2" from a number.
-static func _number(n: float) -> String:
-	return str(roundi(n)) if is_equal_approx(n, roundf(n)) else "%.1f" % n
-
 ## The colour the player flashes when a buff or spell goes off, each skill its own (kept for
 ## the hero's new look: nothing draws him while it is made). Transparent: DEFAULT_FLASH (see
 ## flash_color).
@@ -252,34 +209,6 @@ func ambush_spot(from: Vector2, face: int, bodies: Array[Vector2]) -> Vector2:
 func stun_ticks(level: int) -> int:
 	return roundi(grown(stun, stun_per_level, level) * 60.0)
 
-func hex_at(level: int) -> float:
-	return grown(hex, hex_per_level, level)
-
-func hex_ticks(level: int) -> int:
-	return roundi(grown(hex_time, hex_time_per_level, level) * 60.0)
-
-func mark_bonus_at(level: int) -> float:
-	return grown(mark_bonus, mark_bonus_per_level, level)
-
-func mark_close_at(level: int) -> float:
-	return grown(mark_close_bonus, mark_close_per_level, level)
-
-func burn_at(level: int) -> float:
-	return grown(burn, burn_per_level, level)
-
-func spark_at(level: int) -> float:
-	return grown(spark, spark_per_level, level)
-
-func streak_crit_at(level: int) -> float:
-	return grown(streak_crit, streak_crit_per_level, level)
-
-func bounce_at(level: int) -> float:
-	return grown(bounce, bounce_per_level, level)
-
-## Marks what it hits (Hunter's Mark).
-func marks() -> bool:
-	return mark_bonus > 0.0
-
 func damage_at(level: int) -> float:
 	return damage_multiplier + damage_per_level * maxi(0, level - 1)
 
@@ -338,12 +267,6 @@ func describe_level(level: int) -> PackedStringArray:
 			out.append("Slows them for %s seconds" % _seconds(slow_ticks(level)))
 		if root_ticks(level) > 0:
 			out.append("Roots them for %s seconds" % _seconds(root_ticks(level)))
-		if hex_at(level) > 0.0:
-			out.append("Hexed: they take %d%% more damage for %s seconds" % [roundi(hex_at(level) * 100), _seconds(hex_ticks(level))])
-		if hexed_extra_hits > 0:
-			out.append("%d more hit%s on a hexed monster" % [hexed_extra_hits, "s" if hexed_extra_hits > 1 else ""])
-		if marks():
-			out.append("Marked: %d%% more damage from you, %d%% more up close, for %s seconds" % [roundi(mark_bonus_at(level) * 100), roundi(mark_close_at(level) * 100), _seconds(roundi(mark_time * 60.0))])
 	if heal_at(level) > 0.0:
 		out.append("Heals %d%% of Max HP" % roundi(heal_at(level) * 100))
 	if kind == Kind.MOVE and move:
@@ -357,15 +280,6 @@ func describe_level(level: int) -> PackedStringArray:
 		out.append("MP recovery +%d" % regen_mp_at(level))
 	if mp_guard_at(level) > 0.0:
 		out.append("%d%% of damage taken comes out of MP" % roundi(mp_guard_at(level) * 100))
-	if elements:
-		out.append("Cast again to switch: fire, ice, lightning")
-		out.append("Fire: burns for %d%% of the hit over %d seconds" % [roundi(burn_at(level) * 100), BURN_SECONDS])
-		out.append("Ice: slows for %s seconds" % _seconds(slow_ticks(level)))
-		out.append("Lightning: sparks to one more monster for %d%%" % roundi(spark_at(level) * 100))
-	if streak_crit_at(level) > 0.0:
-		out.append("Critical Rate +%s%% for each attack in a row, up to %d" % [_number(streak_crit_at(level)), STREAK_MAX])
-	if bounce_at(level) > 0.0:
-		out.append("Shots bounce to one more monster for %d%%" % roundi(bounce_at(level) * 100))
 	if steady:
 		out.append("No knockback")
 	if hide:

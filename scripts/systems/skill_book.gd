@@ -1,20 +1,14 @@
 class_name SkillBook
 extends CharacterPart
-## A character's skills: the levels learned, unspent Skill Points, the buffs running, and
-## the rules for learning and using skills (Character.skills).
+## A character's skills: the levels learned (each bought with Dawn Essence), the buffs
+## running, and the rules for learning and using skills (Character.skills).
 
 ## Skill id -> level learned.
 var learned := {}
-## Unspent Skill Points.
-var points := 0
+## Skill id -> the Dawn Essence paid for its levels, handed back if the skill is ever dropped.
+var paid := {}
 ## Buffs running: skill id -> [level, ticks left].
 var buffs := {}
-## The element an element buff (SkillDef.elements, Elemental Edge) is set to: an index into
-## ELEMENTS.
-var element := 0
-
-const ELEMENTS := ["Fire", "Ice", "Lightning"]
-enum Element { FIRE, ICE, LIGHTNING }
 
 ## The level the character has in a skill (innate skills are always at least 1).
 func level(skill: SkillDef) -> int:
@@ -36,22 +30,24 @@ func learn_problem(skill: SkillDef) -> String:
 		return "You can't learn %s." % skill.display_name
 	if level(skill) >= skill.max_level:
 		return "%s is already at its highest level." % skill.display_name
-	if points <= 0:
-		return "You have no Skill Points left."
 	if skill.requires != &"":
 		var need: SkillDef = Content.skills.get(skill.requires)
 		if need and level(need) < skill.requires_level:
 			return "Learn %s to level %d first." % [need.display_name, skill.requires_level]
+	if character.essence < price():
+		return "You need %d Dawn Essence for that." % price()
 	return ""
 
-## Spends a Skill Point on `skill`. A newly learned skill goes on the first free quickslot.
-## Returns why not, or "".
+## Buys one more level of `skill` with Dawn Essence. A newly learned skill goes on the first
+## free quickslot. Returns why not, or "".
 func learn(skill: SkillDef) -> String:
 	var problem := learn_problem(skill)
 	if problem != "":
 		return problem
 	var c := character
-	points -= 1
+	var cost := price()
+	c.essence -= cost
+	paid[skill.id] = int(paid.get(skill.id, 0)) + cost
 	learned[skill.id] = level(skill) + 1
 	if learned[skill.id] == 1 and skill.is_active() and c.quickslot_of(&"skill", skill.id) < 0:
 		var free := c.quickslots.find([])
@@ -60,21 +56,42 @@ func learn(skill: SkillDef) -> String:
 	c.recalc()
 	return ""
 
-## How many more levels the character could still learn: one for every level left on each
-## skill of their job line. Unspent Skill Points never go above this (see keep_in_room).
-func room() -> int:
-	var line := character.job_line()
-	var out := 0
-	for s: SkillDef in Content.skills.values():
-		if not s.innate and s.job in line:
-			out += maxi(0, s.max_level - level(s))
+## Whether the essence pays for one more level of any skill the character may learn.
+func can_learn_any() -> bool:
+	if character.essence < price():
+		return false
+	return Content.skills.values().any(func(skill: SkillDef) -> bool: return learn_problem(skill) == "")
+
+## The skills learned that a job of `line` (JobDef.line) can't use.
+func outside(line: Array[StringName]) -> Array[SkillDef]:
+	var out: Array[SkillDef] = []
+	for id in learned:
+		var s: SkillDef = Content.skills.get(id)
+		if s and not s.innate and not s.job in line and learned[id] > 0:
+			out.append(s)
 	return out
 
-## Drops unspent Skill Points that no skill could ever take.
-func keep_in_room() -> void:
-	points = mini(points, room())
+## Forgets every skill a job of `line` can't use (see outside): the Dawn Essence paid for each
+## comes back and its quickslot empties. Returns the essence handed back.
+func forget_outside(line: Array[StringName]) -> int:
+	var back := 0
+	for s in outside(line):
+		back += int(paid.get(s.id, 0))
+		learned.erase(s.id)
+		paid.erase(s.id)
+		buffs.erase(s.id)
+		var slot := character.quickslot_of(&"skill", s.id)
+		if slot >= 0:
+			character.set_quickslot(slot, &"", &"")
+	character.essence += back
+	return back
 
-## Skill Points spent on learned levels.
+## Dawn Essence for the next skill level: each level bought (of any skill) makes the next
+## one cost more (CharacterStats.skill_price).
+func price() -> int:
+	return CharacterStats.skill_price(spent())
+
+## Skill levels bought.
 func spent() -> int:
 	var out := 0
 	for id in learned:
@@ -82,27 +99,6 @@ func spent() -> int:
 		if s and not s.innate:
 			out += learned[id]
 	return out
-
-## Every Skill Point the character's level and job path have earned, as if each job was taken
-## the moment it opened (a job taken later loses nothing).
-func earned() -> int:
-	var c := character
-	var out := 0
-	var until := c.level
-	for id in c.job_path():
-		var j: JobDef = Content.job(id)
-		var from := j.advance_level if j.advances_from != &"" else 1
-		out += maxi(0, until - from) * j.sp_per_level
-		if j.advances_from != &"":
-			out += j.advance_sp
-		until = mini(until, from)
-	return out
-
-## Hands back any Skill Points a character is owed (earned minus spent), then keeps them in
-## room. Run when a character loads, so a job taken late before this rule existed catches up.
-func settle() -> void:
-	points = maxi(points, earned() - spent())
-	keep_in_room()
 
 ## Why `skill` can't be used right now, or "".
 func use_problem(skill: SkillDef) -> String:
@@ -129,35 +125,8 @@ func add_buff(skill: SkillDef, lvl := -1) -> void:
 		lvl = level(skill)
 	if skill.duration_ticks(lvl) <= 0:
 		return
-	if skill.elements:
-		# the first cast is fire; each cast while it runs picks the next element
-		element = (element + 1) % ELEMENTS.size() if buffs.has(skill.id) else Element.FIRE
 	buffs[skill.id] = [lvl, skill.duration_ticks(lvl)]
 	character.recalc()
-
-## The running element buff (Elemental Edge) and its level, or [] when none is on.
-func element_buff() -> Array:
-	for id in buffs:
-		var s: SkillDef = Content.skills.get(id)
-		if s and s.elements:
-			return [s, buffs[id][0]]
-	return []
-
-## Critical Rate (in %) each attack in a row adds, from passives (Lucky Streak).
-func streak_crit() -> float:
-	return _passive_sum(func(s: SkillDef, lvl: int) -> float: return s.streak_crit_at(lvl))
-
-## The share of a shot that bounces on to one more monster, from passives (Ricochet).
-func bounce() -> float:
-	return _passive_sum(func(s: SkillDef, lvl: int) -> float: return s.bounce_at(lvl))
-
-func _passive_sum(value: Callable) -> float:
-	var out := 0.0
-	for id in learned:
-		var s: SkillDef = Content.skills.get(id)
-		if s and s.kind == SkillDef.Kind.PASSIVE:
-			out += value.call(s, learned[id])
-	return out
 
 ## Running buffs that keep monster hits from knocking the player back.
 func steady() -> bool:

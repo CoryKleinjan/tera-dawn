@@ -67,8 +67,6 @@ const HURT_FLASH := 0.35
 const HURT_FLASH_COLOR := Color(1.0, 0.85, 0.8)
 ## Ticks of the hurt pose at the start of the invincibility after a hit.
 const HURT_POSE_TICKS := 20
-## Ticks of the level-up pose.
-const CHEER_TICKS := 50
 ## Ticks between asking the server for the next item while the loot key is held.
 const LOOT_EVERY := 4
 ## Ticks an attack or skill press made too early (still swinging, or on cooldown) is kept
@@ -118,7 +116,6 @@ var recharge := {}
 var inv := 0          # invincibility (blinking) ticks after being hit
 var down := false     # fainted, until the server sends you back to town
 var land_t := 0       # ticks of the landing pose
-var cheer_t := 0      # ticks of the level-up pose
 var ready_t := 0      # ticks of the combat-ready stance left after an attack
 var turn_t := 0       # ticks of the turn pose
 var run_t := 0        # ticks spent at top speed (faster after RUN_AFTER, see _top_speed)
@@ -231,9 +228,6 @@ func correct(at: Vector2) -> void:
 	position = at
 	vel = Vector2.ZERO
 
-func level_up() -> void:
-	cheer_t = CHEER_TICKS
-
 # ---------- per tick ----------
 
 func step() -> void:
@@ -278,8 +272,6 @@ func step() -> void:
 		drop_t -= 1
 	if land_t > 0:
 		land_t -= 1
-	if cheer_t > 0:
-		cheer_t -= 1
 	if loot_cd > 0:
 		loot_cd -= 1
 	if not Game.me.skills.buffs.is_empty():
@@ -419,7 +411,6 @@ func _use(skill: SkillDef) -> void:
 		action_t = CharacterStats.attack_ticks(skill.action_ticks, Game.me.stats)
 		action_anim = skill.animation
 		ready_t = READY_TICKS
-		cheer_t = 0
 		_aim = aim
 	if aim == Hitbox.Aim.DOWN and not skill.is_ranged() and _meets_monster(skill, aim):
 		vel.y = POGO_SPEED
@@ -698,8 +689,6 @@ func _animation() -> StringName:
 		return &"jump" if vel.y < 0 else &"fall"
 	if land_t > 0:
 		return &"land"
-	if cheer_t > 0:
-		return &"level_up"
 	if turn_t > 0:
 		return &"turn"
 	if absf(vel.x) > 0.3:

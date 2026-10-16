@@ -199,7 +199,7 @@ func snapshot(peer: int) -> Dictionary:
 	var ev := last(peer, &"ev_snapshot")
 	return SnapshotCodec.decode(ev[0]) if not ev.is_empty() else {}
 
-## The latest info `peer` was sent about player `of` ([name, level, job, guild, pet, worn gear]),
+## The latest info `peer` was sent about player `of` ([name, job, guild, pet, worn gear]),
 ## or [].
 func player_info(peer: int, of: int) -> Array:
 	for i in range(events(peer, &"ev_player_info").size() - 1, -1, -1):
@@ -280,15 +280,15 @@ static func platform(x: float, y: float, width: float) -> PlatformDef:
 	d.width = width
 	return d
 
-## A monster that never walks or misses its touch: level 1, 1 HP, `exp` EXP, no drops.
-static func monster(id := &"test_mob", hp := 1, exp := 10) -> MonsterDef:
+## A monster that never walks or misses its touch: level 1, 1 HP, `essence` Dawn Essence, no drops.
+static func monster(id := &"test_mob", hp := 1, essence := 10) -> MonsterDef:
 	var d := MonsterDef.new()
 	d.id = id
 	d.display_name = String(id).capitalize()
 	d.level = 1
 	d.max_hp = hp
 	d.attack = 1
-	d.exp_reward = exp
+	d.essence = essence
 	d.speed = 0.0
 	d.size = Vector2(36, 30)
 	d.respawn_ticks = Vector2i(100, 100)

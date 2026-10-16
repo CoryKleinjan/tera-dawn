@@ -30,6 +30,6 @@ offer_text = "Smugglers' Grotto, past Gull Bluffs, has a new master: a great tus
 progress_text = "Defeat the Grotto Tusker in its den at the back of Smugglers' Grotto, past Gull Bluffs."
 complete_text = "The boats are already heading out. The whole harbour will hear of this. Take these, and my thanks."
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1")])
-reward_xp = 188400
+reward_essence = 188400
 reward_shards = 6000
 reward_items = Array[ExtResource("4_drop_entry")]([SubResource("Resource_3")])

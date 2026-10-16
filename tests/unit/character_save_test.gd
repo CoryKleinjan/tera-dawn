@@ -1,6 +1,6 @@
 extends TestCase
 ## Character.to_dict / load_dict: a full round trip (gear rolled stats and scroll upgrades,
-## skills, buffs, quickslots, buddies, fame, guild, Monster Book, pet, visited maps,
+## Dawn Essence, jobs passed, skills and what was paid for them, buffs, quickslots, buddies, fame, guild, Monster Book, pet, visited maps,
 ## achievements, tallies), bad values, and the older save formats load_dict still accepts.
 
 var fx: UnitHelpers
@@ -15,12 +15,9 @@ func after_each() -> void:
 func _rich() -> Character:
 	var c := fx.character(null, {"strength": 30, "dexterity": 12, "luck": 4})
 	c.name = "Saver"
-	c.level = 12
-	c.xp = 345
+	c.essence = 345
 	c.shards = 9876
-	c.ap.points = 4
-	c.ap.reset_used = true
-	c.skills.points = 2
+	c.jobs_passed.assign(["t_next", "t_other"])
 	c.map_id = Content.maps.keys()[0]
 	var sword := fx.equip(&"t_sword", EquipDef.Slot.WEAPON, {"attack": 20}, 3)
 	var worn := ItemStack.exact(sword)
@@ -40,6 +37,8 @@ func _rich() -> Character:
 	buff.duration = 30.0
 	c.skills.learned[passive.id] = 3
 	c.skills.learned[buff.id] = 2
+	c.skills.paid[passive.id] = 17 + 31 + 50
+	c.skills.paid[buff.id] = 73 + 101
 	c.skills.buffs[buff.id] = [2, 500]
 	c.set_quickslot(0, &"skill", buff.id)
 	c.set_quickslot(Character.QUICKSLOTS - 2, &"item", &"red_potion")
@@ -77,12 +76,9 @@ func test_round_trip_basics() -> void:
 	var c := _rich()
 	var b := _round_trip(c)
 	check_eq(b.name, "Saver", "name")
-	check_eq(b.level, 12, "level")
-	check_eq(b.xp, 345, "xp")
+	check_eq(b.essence, 345, "essence")
 	check_eq(b.shards, 9876, "shards")
-	check_eq(b.ap.points, 4, "AP")
-	check(b.ap.reset_used, "free AP reset used")
-	check_eq(b.skills.points, 2, "SP")
+	check_eq(Array(b.jobs_passed), ["t_next", "t_other"], "jobs passed")
 	check_eq(b.map_id, c.map_id, "map")
 	check(b.job == c.job, "job")
 	check_eq(b.base.to_dict(), c.base.to_dict(), "base stats")
@@ -107,6 +103,7 @@ func test_round_trip_items_and_storage() -> void:
 func test_round_trip_skills_buffs_and_quickslots() -> void:
 	var b := _round_trip(_rich())
 	check_eq(b.skills.learned, {&"t_passive": 3, &"t_buff": 2}, "skills")
+	check_eq(b.skills.paid, {&"t_passive": 98, &"t_buff": 174}, "essence paid for them")
 	check_eq(b.skills.buffs, {&"t_buff": [2, 500]}, "buffs")
 	check_eq(b.quickslots[0], [&"skill", &"t_buff"], "skill quickslot")
 	check_eq(b.quickslots[Character.QUICKSLOTS - 2], [&"item", &"red_potion"], "potion quickslot")
@@ -135,6 +132,13 @@ func test_round_trip_survives_json() -> void:
 	back.load_dict(JSON.parse_string(JSON.stringify(c.to_dict())))
 	check_eq(back.to_dict(), c.to_dict(), "same after JSON")
 
+func test_save_has_essence_and_no_levels_or_points() -> void:
+	var d := _rich().to_dict()
+	check_eq(d["essence"], 345, "essence saved")
+	check(d.has("skills_paid"), "what skills cost saved")
+	for gone in ["level", "xp", "ap", "sp", "ap_reset_used"]:
+		check(not d.has(gone), "no %s" % gone)
+
 func test_save_is_stable() -> void:
 	var c := _rich()
 	var once := c.to_dict()
@@ -151,71 +155,129 @@ func test_to_dict_does_not_share_lists() -> void:
 func test_bad_values_are_clamped_or_ignored() -> void:
 	var c := fx.character()
 	c.load_dict({
-		"job": "t_job", "level": -4, "xp": -10, "shards": -1, "map_id": "t_nowhere",
-		"base": {}, "ap": -3, "sp": -2,
-		"skills": {"t_gone": 3},
+		"job": "t_job", "essence": -10, "shards": -1, "map_id": "t_nowhere",
+		"base": {},
+		"skills": {"t_gone": 3}, "skills_paid": {"t_gone": 17},
 		"buffs": {"t_gone": [1, 50], "t_job": "bad"},
 		"pet": "t_etc", "pet_full": 500, "hp": 0, "mp": 99999,
 	})
-	check_eq(c.level, 1, "level floor")
-	check_eq(c.xp, 0, "xp floor")
+	check_eq(c.essence, 0, "essence floor")
 	check_eq(c.shards, 0, "shards floor")
 	check_eq(c.map_id, Character.START_MAP, "unknown map: start map")
-	check_eq(c.ap.points, 0, "AP floor")
-	check_eq(c.skills.points, 0, "SP floor")
 	check(c.skills.learned.is_empty(), "unknown skill dropped")
+	check(c.skills.paid.is_empty(), "and what was paid for it")
 	check(c.skills.buffs.is_empty(), "bad buffs dropped")
 	check_eq(c.pet, &"", "not a pet")
 	check_eq(c.pet_full, 100, "fullness capped")
 	check_eq(c.health.hp, 1, "loads with at least 1 HP")
 	check_eq(c.mp, c.max_mp(), "MP capped")
 
+func test_bad_paid_values_are_floored() -> void:
+	fx.skill()
+	var c := fx.character()
+	c.load_dict({"job": "t_job", "essence": 0, "skills": {"t_skill": 1}, "skills_paid": {"t_skill": -5}})
+	check_eq(c.skills.paid, {&"t_skill": 0}, "never negative")
+
 func test_skill_levels_clamped_to_max() -> void:
 	var s := fx.skill()
 	s.max_level = 5
 	var c := fx.character()
-	c.load_dict({"job": "t_job", "skills": {"t_skill": 99}, "sp": 0})
+	c.load_dict({"job": "t_job", "skills": {"t_skill": 99}, "essence": 0})
 	check_eq(c.skills.learned[&"t_skill"], 5, "capped")
 
 func test_unknown_job_keeps_current_job() -> void:
 	var c := fx.character()
-	c.load_dict({"job": "t_no_such_job", "sp": 0, "base": {}})
+	c.load_dict({"job": "t_no_such_job", "essence": 0, "base": {}})
 	check_eq(c.job.id, &"t_job", "kept")
 
 func test_missing_hp_and_mp_load_full() -> void:
 	var c := fx.character()
-	c.load_dict({"job": "t_job", "level": 3, "base": {}, "sp": 0})
+	c.load_dict({"job": "t_job", "essence": 0, "base": {"dexterity": 5}, "stat_rules": CharacterCodec.STAT_RULES})
 	check_eq(c.health.hp, c.max_hp(), "full HP")
 	check_eq(c.mp, c.max_mp(), "full MP")
-	check_eq(c.max_hp(), 80, "level 3 max HP")
+	check_eq(c.max_hp(), 70, "5 points bought: 50 + 2 × 10")
 
 func test_save_with_an_old_appearance_loads_without_it() -> void:
 	var c := fx.character()
-	c.load_dict({"name": "Old", "job": "t_job", "level": 3, "base": {}, "sp": 0,
+	c.load_dict({"name": "Old", "job": "t_job", "essence": 3, "base": {},
 		"appearance": {"skin": "", "face": "", "eyes": "", "hair": "hair_ponytail", "hair_color": ""}})
-	check_eq([c.name, c.level], ["Old", 3], "the rest loads")
+	check_eq([c.name, c.essence], ["Old", 3], "the rest loads")
 	check(not c.to_dict().has("appearance"), "and the look is not saved again")
 
-func test_save_from_before_stats_hands_out_ap() -> void:
+func test_save_from_before_essence_turns_exp_and_points_into_essence() -> void:
 	var c := fx.character()
-	c.load_dict({"name": "Old", "job": "t_job", "level": 7, "sp": 0})
-	check_eq(c.ap.points, 30, "6 levels × 5 AP")
+	c.load_dict({"name": "Old", "job": "t_job", "level": 7, "xp": 100, "ap": 3, "sp": 2})
+	# 100 EXP, 3 STR points at 17 + 25 + 34, 2 skill levels at 17 + 31
+	check_eq(c.essence, 100 + 76 + 48, "everything unspent becomes essence")
+	check_eq(c.ap.spent(), 0, "no stats bought for it")
+	check(c.skills.learned.is_empty(), "no skills learned for it")
+	var d := c.to_dict()
+	check(not d.has("level") and not d.has("xp"), "saved again without a level or EXP")
+	check_eq(d["essence"], 224, "but with the essence")
+
+func test_save_from_before_essence_prices_points_from_what_was_bought() -> void:
+	fx.skill()
+	var c := fx.character()
+	c.load_dict({"name": "Old", "job": "t_job", "level": 9, "xp": 0, "stat_rules": CharacterCodec.STAT_RULES,
+		"base": {"strength": 3}, "ap": 2, "skills": {"t_skill": 2}, "sp": 1})
+	# STR points 4 and 5 at 46 + 58, skill level 3 at 50
+	check_eq(c.essence, 104 + 50, "each point worth the next price")
+	check_eq(c.base.strength, 3, "stats kept")
+	check_eq(c.skills.learned[&"t_skill"], 2, "skills kept")
+	check_eq(c.skills.paid, {&"t_skill": 17 + 31}, "and priced as bought, so a job switch can hand it back")
+
+func test_save_from_before_essence_prices_each_skill_in_turn() -> void:
+	fx.skill(&"t_a")
+	fx.skill(&"t_b")
+	var c := fx.character()
+	c.load_dict({"name": "Old", "job": "t_job", "level": 9, "stat_rules": CharacterCodec.STAT_RULES,
+		"base": {}, "skills": {"t_a": 1, "t_b": 2}})
+	var paid := int(c.skills.paid[&"t_a"]) + int(c.skills.paid[&"t_b"])
+	check_eq(paid, 17 + 31 + 50, "three levels at the first three prices")
+	check_eq(c.skills.paid.size(), 2, "both priced")
+
+func test_jobs_passed_survives_json() -> void:
+	var c := fx.character()
+	c.jobs_passed.assign(["t_next"])
+	var back := Character.new()
+	back.load_dict(JSON.parse_string(JSON.stringify(c.to_dict())))
+	check_eq(Array(back.jobs_passed), ["t_next"], "kept")
+	check(back.has_passed(fx.job(&"t_next", &"t_warrior", &"t_job")), "and counts as passed")
+
+func test_save_from_before_switching_counts_its_path_as_passed() -> void:
+	var first := fx.job(&"t_job")
+	fx.job(&"t_next", &"t_warrior", &"t_job")
+	fx.job(&"t_other", &"t_mage", &"t_job")
+	var blend := fx.job(&"t_blend", &"t_blends", &"t_next")
+	blend.partner = &"t_other"
+	var c := fx.character(first)
+	c.load_dict({"name": "Old", "job": "t_next", "essence": 0, "base": {}})
+	check_eq(Array(c.jobs_passed), ["t_next"], "its first job, not the Beginner")
+	var b := fx.character(first)
+	b.load_dict({"name": "Old", "job": "t_blend", "came_from": "t_other", "essence": 0, "base": {}})
+	check_eq(Array(b.jobs_passed), ["t_blend", "t_other"], "a blend and the parent it came from")
+	var fresh := fx.character(first)
+	fresh.load_dict({"name": "Old", "job": "t_job", "essence": 0, "base": {}})
+	check(fresh.jobs_passed.is_empty(), "a Beginner has passed nothing")
+	var newer := fx.character(first)
+	newer.load_dict({"name": "New", "job": "t_next", "essence": 0, "base": {}, "jobs_passed": []})
+	check(newer.jobs_passed.is_empty(), "a newer save keeps its own list")
 
 func test_save_from_before_one_stat_per_job_gets_its_points_back_once() -> void:
 	var c := fx.character()
 	c.load_dict({"name": "Old", "job": "t_job", "level": 7, "base": {"strength": 12, "dexterity": 8}, "ap": 2, "sp": 0})
-	check_eq(c.ap.points, 22, "every spent point back")
-	check_eq(c.base.strength, 0, "STR back to the start")
-	c.ap.spend(&"strength", 5)
+	# 2 unspent AP at STR points 13 and 14 (222 + 250), then 12 STR (1,090) and 8 DEX (449) back
+	check_eq(c.essence, 472 + 1090 + 449, "every spent point's essence back")
+	check_eq([c.base.strength, c.base.dexterity], [0, 0], "back to the start")
+	check_eq(c.ap.buy(&"strength", 5), 5, "bought again")
 	var again := fx.character()
 	again.load_dict(c.to_dict())
-	check_eq([again.base.strength, again.ap.points], [5, 17], "a newer save keeps its stats")
+	check_eq([again.base.strength, again.essence], [5, 2011 - 180], "a newer save keeps its stats")
 
-func test_save_from_before_skills_hands_out_sp_and_potion_keys() -> void:
+func test_save_from_before_skills_gets_potion_keys() -> void:
 	var c := fx.character()
 	c.job.starting_quickslots = [fx.use(&"t_red"), fx.use(&"t_blue")]
 	c.load_dict({"name": "Old", "job": "t_job", "level": 4, "base": {"strength": 10}, "ap": 0})
-	check_eq(c.skills.points, 9, "3 levels × 3 SP")
 	check_eq(c.quickslots[Character.QUICKSLOTS - 2], [&"item", &"t_red"], "first potion key")
 	check_eq(c.quickslots[Character.QUICKSLOTS - 1], [&"item", &"t_blue"], "second potion key")
 
@@ -223,15 +285,14 @@ func test_oldest_save_with_only_name_and_level() -> void:
 	var c := Character.new()
 	c.load_dict({"name": "Ancient", "level": 3, "xp": 5})
 	check_eq(c.job.id, Character.START_JOB, "beginner")
-	check_eq(c.ap.points, 2 * c.job.ap_per_level, "AP for the levels")
-	check_eq(c.skills.points, 2 * c.job.sp_per_level, "SP for the levels")
+	check_eq(c.essence, 5, "the EXP as essence")
 	check_eq(c.map_id, Character.START_MAP, "start map")
 	check_eq(c.health.hp, c.max_hp(), "full HP")
 	check_eq(c.quickslots.size(), Character.QUICKSLOTS, "quickslots")
 
 func test_short_or_bad_quickslots_are_padded() -> void:
 	var c := fx.character()
-	c.load_dict({"job": "t_job", "sp": 0, "base": {}, "quickslots": [["skill", "t_a"], "junk", ["item"]]})
+	c.load_dict({"job": "t_job", "essence": 0, "base": {}, "quickslots": [["skill", "t_a"], "junk", ["item"]]})
 	check_eq(c.quickslots.size(), Character.QUICKSLOTS, "eight")
 	check_eq(c.quickslots[0], [&"skill", &"t_a"], "kept")
 	check_eq(c.quickslots[1], [], "junk cleared")
@@ -240,7 +301,7 @@ func test_short_or_bad_quickslots_are_padded() -> void:
 
 func test_hp_over_max_is_clamped() -> void:
 	var c := fx.character()
-	c.load_dict({"job": "t_job", "sp": 0, "base": {}, "hp": 100000})
+	c.load_dict({"job": "t_job", "essence": 0, "base": {}, "hp": 100000})
 	check_eq(c.health.hp, c.max_hp(), "clamped")
 
 func test_real_new_character_round_trip() -> void:
@@ -249,19 +310,16 @@ func test_real_new_character_round_trip() -> void:
 	back.load_dict(c.to_dict())
 	check_eq(back.to_dict(), c.to_dict(), "identical")
 
-func test_server_load_hands_back_sp_a_late_job_lost() -> void:
-	fx.job().sp_per_level = 1
-	var next := fx.job(&"t_next", &"t_family", &"t_job")
-	next.advance_sp = 1
-	fx.skill(&"t_cut", SkillDef.Kind.ATTACK, &"t_next").max_level = 40
-	# advanced at Lv 12 under the old rule: 11 levels at 1, the advance's 1, 2 levels at 3
-	var path := "user://t_late_sp.json"
+func test_server_load_turns_an_old_save_into_essence() -> void:
+	fx.job()
+	var path := "user://t_old_save.json"
 	var f := FileAccess.open(path, FileAccess.WRITE)
-	f.store_string(JSON.stringify({"name": "Late", "job": "t_next", "level": 14, "sp": 11 + 1 + 6}))
+	f.store_string(JSON.stringify({"name": "Late", "job": "t_job", "level": 14, "xp": 50, "sp": 3}))
 	f.close()
 	var c := CharacterStore.load_file(path, "Late")
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
-	check_eq(c.skills.points, 9 + 1 + 4 * 3, "topped up to what advancing at Lv 10 would have given")
-	var plain := Character.new()
-	plain.load_dict({"name": "Late", "job": "t_next", "level": 14, "sp": 3})
-	check_eq(plain.skills.points, 3, "a plain load (the client's copy) keeps what the server sent")
+	if not check(c != null, "loads"):
+		return
+	check_eq(c.job.id, &"t_job", "job")
+	# 50 EXP and 3 skill levels at 17 + 31 + 50
+	check_eq(c.essence, 50 + 98, "EXP and SP as essence")

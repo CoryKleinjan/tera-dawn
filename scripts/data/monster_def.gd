@@ -10,7 +10,8 @@ extends Resource
 @export var max_hp := 10
 ## Damage dealt to the player on contact, before the player's defence.
 @export var attack := 5
-@export var exp_reward := 1
+## Dawn Essence it gives the player who beats it (and a share to their party there).
+@export var essence := 1
 @export var speed := 1.0
 ## The hurtbox: width and height in game pixels, standing on the feet.
 @export var size := Vector2(36, 30)

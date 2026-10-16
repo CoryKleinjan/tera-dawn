@@ -26,19 +26,16 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
 2. Effects are **EffectDef**s in `data/effects/`: a flipbook of frames from
    `assets/sprites/effects/`, its speed and size, an optional light and particle burst.
    Effects the game fires on its own rather than through a skill or item (celebrate, monster
-   poof, level up, critical) are named as constants on `EffectDef`; code uses those, never
+   poof, critical) are named as constants on `EffectDef`; code uses those, never
    the id as a string.
 3. Give it an icon: a painted badge on a skill icon sheet (a Gemini edit in `tools/art/gemini_pass.json`,
    matching `skill_icons_test`), cut by an `art/sheets/skill_icons_<sheet>.json` manifest into
    `assets/sprites/skills/<skill id>.png`.
 
-It then appears in its job's tab of the skill window (K). Players spend Skill Points on it
-(`SkillBook.learn`, checked by `ServerJobs.on_learn_skill`), and a newly learned attack or
-buff goes on the first free quickslot. A job taken late still pays the Skill Points of every
-level since it opened (`Character.advance`), and unspent points never go above the levels
-left on the job line's skills (`SkillBook.room`), so a new skill raises that limit by itself.
-Saves settle up when the server loads them (`SkillBook.settle`, from
-`CharacterStore.load_file`). Quickslots (`Character.quickslots`, eight keys in
+It then appears in its job's tab of the skill window (K). Players buy its levels with Dawn
+Essence (`SkillBook.learn`, checked by `ServerJobs.on_learn_skill`; `SkillBook.paid` keeps
+what each skill cost), and a newly learned attack or buff goes on the first free quickslot.
+Quickslots (`Character.quickslots`, eight keys in
 `Game.QUICKSLOT_ACTIONS`) hold skills or items and are saved with the character. The
 server checks the skill is known and pays its MP (`TDServer.on_skill`), then works out what
 it hits (`MapInstance.use_skill`) or starts the buff (`SkillBook.add_buff`, counted down
@@ -75,17 +72,10 @@ Aiming and melee weight:
   monster on your screen bounces you at once (`TDPlayer.POGO_SPEED`); the server still decides
   the damage.
 
-Second-tier skill rules (all in `MapInstance.use_skill`):
+Area and hold rules (all in `MapInstance.use_skill`):
 - `around` hits both sides of the player (a spin, a wall along the platform).
-- `root` stops a monster moving, `hex` makes it take more damage from everyone (with
-  `hexed_extra_hits` for skills that punish hexed monsters), all on `SimMob` and shown to
-  clients as a tint (`SnapshotFlags.MOB_HEXED`, `MOB_ROOTED`, `MOB_BURNING`).
-- `mark_bonus` marks the first monster hit (`SimPlayer.mark`); the mark jumps on when it falls.
-- An `elements` buff (Elemental Edge) cycles fire, ice and lightning on each cast
-  (`SkillBook.element`, saved): fire burns (`SimMob.set_burning`, `MapInstance.burn`), ice
-  slows, lightning sparks to one more monster.
-- Passives: `streak_crit` (Critical Rate per attack in a row, `SimPlayer.streak`, reset when
-  hit) and `bounce` (shots bounce on to one more monster).
+- `root` stops a monster moving (`SimMob.root`), shown to clients as a tint
+  (`SnapshotFlags.MOB_ROOTED`).
 
 Monster-control skills (one per first job, all in `MapInstance.use_skill` and `SimMob`):
 - `launch` throws what it hits up (`SimMob.launch`, `tossed`); `slam` first yanks airborne

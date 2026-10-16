@@ -1,0 +1,80 @@
+{
+  "source": "art/source/boss_elder_treant_death.png",
+  "save": false,
+  "out_dir": "art/build/boss_elder_treant_death",
+  "cells": [
+    [
+      "death1",
+      "",
+      "death2",
+      "",
+      "death3"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.2472,
+  "detail": 3.29,
+  "grid": {
+    "rows": [
+      0,
+      540
+    ],
+    "cols": [
+      [
+        0,
+        417,
+        424,
+        837,
+        844,
+        1260
+      ]
+    ]
+  },
+  "overrides": {
+    "death1": {
+      "crop": [
+        0,
+        0,
+        10000,
+        487
+      ]
+    },
+    "death2": {
+      "crop": [
+        0,
+        0,
+        10000,
+        487
+      ]
+    },
+    "death3": {
+      "blank": [
+        [
+          0,
+          487,
+          11,
+          494
+        ],
+        [
+          17,
+          487,
+          49,
+          494
+        ],
+        [
+          247,
+          487,
+          285,
+          494
+        ],
+        [
+          378,
+          487,
+          408,
+          494
+        ]
+      ]
+    }
+  }
+}

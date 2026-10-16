@@ -48,7 +48,7 @@ var save_dir := "user://characters"
 ## The characters character select is showing (this computer's own, or the test characters
 ## with the Developer setting on); see `open_saves`.
 var saves: CharacterStore
-## The characters as character select shows them: {name, level, job}.
+## The characters as character select shows them: {name, job}.
 var characters: Array = []
 ## The character this player is playing ("" at character select).
 var playing := ""
@@ -390,7 +390,7 @@ func req_scene_done(scene_id: StringName) -> void:
 	if server:
 		server.scenes.on_scene_done(_sender(), scene_id)
 
-# --- jobs, Ability and Skill Points (ServerJobs) ---
+# --- jobs, stats and skills (ServerJobs) ---
 
 @rpc("any_peer", "call_local", "reliable")
 func req_advance(npc_id: StringName, job_id: StringName) -> void:
@@ -398,20 +398,16 @@ func req_advance(npc_id: StringName, job_id: StringName) -> void:
 		server.jobs.on_advance(_sender(), npc_id, job_id)
 
 @rpc("any_peer", "call_local", "reliable")
-func req_reset_ap(npc_id: StringName, job_id: StringName) -> void:
+func req_buy_stat(stat: StringName) -> void:
 	if server:
-		server.jobs.on_reset_ap(_sender(), npc_id, job_id)
+		server.jobs.on_buy_stat(_sender(), stat)
 
+## Spends Dawn Essence on the job's damage stats until the next point costs too much (the
+## Character window's Auto button).
 @rpc("any_peer", "call_local", "reliable")
-func req_add_ap(stat: StringName) -> void:
+func req_auto_stats() -> void:
 	if server:
-		server.jobs.on_add_ap(_sender(), stat)
-
-## Spends several Ability Points on one stat at once (the Character window's Auto button).
-@rpc("any_peer", "call_local", "reliable")
-func req_add_ap_many(stat: StringName, amount: int) -> void:
-	if server:
-		server.jobs.on_add_ap(_sender(), stat, amount)
+		server.jobs.on_auto_stats(_sender())
 
 @rpc("any_peer", "call_local", "reliable")
 func req_learn_skill(skill_id: StringName) -> void:
@@ -509,8 +505,8 @@ func ev_character(character: Dictionary) -> void:
 	Game.apply_character(character)
 
 @rpc("authority", "call_local", "reliable")
-func ev_vitals(hp: int, mp: int, xp: int, level: int, shards: int) -> void:
-	Game.apply_vitals(hp, mp, xp, level, shards)
+func ev_vitals(hp: int, mp: int, essence: int, shards: int) -> void:
+	Game.apply_vitals(hp, mp, essence, shards)
 
 @rpc("authority", "call_local", "reliable")
 func ev_enter_map(map_id: StringName, x: float, state: Dictionary) -> void:
@@ -522,7 +518,7 @@ func ev_snapshot(data: PackedByteArray) -> void:
 	if world:
 		world.apply_snapshot(SnapshotCodec.decode(data))
 
-## Another player's name, level, job and the like, when it changes (see MapInstance.send_player_info).
+## Another player's name, job and the like, when it changes (see MapInstance.send_player_info).
 @rpc("authority", "call_local", "reliable")
 func ev_player_info(peer: int, info: Array) -> void:
 	if world:
@@ -605,12 +601,13 @@ func ev_scene(scene_id: StringName) -> void:
 	if world:
 		world.play_scene(scene_id)
 
+## Dawn Essence from a monster that fell at (x, y), flying to you.
 @rpc("authority", "call_local", "reliable")
-func ev_level_up(peer: int, level: int) -> void:
+func ev_essence(x: float, y: float, amount: int) -> void:
 	if world:
-		world.show_level_up(peer, level)
+		world.fly_essence(Vector2(x, y), amount)
 
-## EXP or Dawnshards you just gained, shown rising over you.
+## Dawn Essence or Dawnshards you just gained, shown rising over you.
 @rpc("authority", "call_local", "reliable")
 func ev_gain(kind: StringName, amount: int) -> void:
 	if world:
