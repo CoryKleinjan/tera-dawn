@@ -1,6 +1,6 @@
 # Sound effect credits
 
-Made with `tools/audio/make_sfx.py` (trimmed, mono, levelled) from:
+Made with `tools/audio/make_sfx.py` (trimmed, mono, levelled; kept as WAV) from:
 
 - **Kenney** (kenney.nl), CC0 1.0 (public domain, no attribution required):
   Interface Sounds (click, open, close, bow), Impact Sounds (hit, crit, hurt, gun,

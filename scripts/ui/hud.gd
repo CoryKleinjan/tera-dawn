@@ -33,6 +33,8 @@ const SEE_THROUGH_RANGE := 400.0
 var keys_help: Label
 ## A quest's key hint sits this far above the status bar.
 const QUEST_HINT_GAP := 14.0
+## Frames between working out the quest hint again.
+const QUEST_HINT_EVERY := 10
 var ui_theme: Theme
 ## Holds the windows so raising one never lifts it above the tooltip or the title menu.
 var window_layer: Control
@@ -140,6 +142,11 @@ func _build_menu_button() -> void:
 	move_child(cog, window_layer.get_index())
 	menu_cog = cog
 
+## The quest hint, worked out every QUEST_HINT_EVERY frames (see _show_quest_hint).
+var _hint := ""
+var _hint_wait := 0
+static var _key_pattern: RegEx
+
 func _process(delta: float) -> void:
 	menu_cog.visible = world != null and world.started
 	# the minimap (drawn by the overlay) only shows once there's a character
@@ -149,9 +156,16 @@ func _process(delta: float) -> void:
 ## The key hint of the quest step you're on, at the bottom of the screen. Hidden behind any
 ## window, so it never covers a dialogue.
 func _show_quest_hint() -> void:
-	var quest := quest_hint() if world != null and world.started else ""
+	# a few times a second is plenty: it walks every quest
+	_hint_wait -= 1
+	if _hint_wait <= 0:
+		_hint_wait = QUEST_HINT_EVERY
+		_hint = quest_hint() if world != null and world.started else ""
+	var quest := _hint if world != null and world.started else ""
 	keys_help.visible = quest != "" and not title.visible and not any_window_open()
 	if not keys_help.visible:
+		return
+	if keys_help.text == quest:
 		return
 	keys_help.text = quest
 	keys_help.reset_size()
@@ -178,8 +192,9 @@ func quest_hint() -> String:
 
 ## `text` with each {action} swapped for the key it's bound to: "{jump} to jump" -> "Space to jump".
 static func keys_in(text: String) -> String:
-	var re := RegEx.create_from_string("\\{(\\w+)\\}")
-	for m in re.search_all(text):
+	if _key_pattern == null:
+		_key_pattern = RegEx.create_from_string("\\{(\\w+)\\}")
+	for m in _key_pattern.search_all(text):
 		text = text.replace(m.get_string(), TDStatusBar._key_name(m.get_string(1)))
 	return text
 

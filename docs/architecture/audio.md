@@ -11,7 +11,7 @@ it exists; `tests/content/content_audio_test.gd` fails until every id has its fi
 |---|---|---|
 | Track (loops) | `assets/audio/music/<id>.ogg` | `Sound.music(id)`: crossfades from the last track; the same id again keeps playing |
 | Jingle (once) | `assets/audio/music/<id>.ogg` | `Sound.jingle(id)`: over the music, which dips while it plays |
-| Sound effect | `assets/audio/sfx/<id>.ogg`, or `<id>_1.ogg`, `<id>_2.ogg` ... for variants | `Sound.play(id)`, or `TDWorld.sound_at(id, pos)` for a sound in the world (quieter with distance) |
+| Sound effect | `assets/audio/sfx/<id>.wav`, or `<id>_1.wav`, `<id>_2.wav` ... for variants (WAV, so hits never wait on decoding) | `Sound.play(id)`, or `TDWorld.sound_at(id, pos)` for a sound in the world (quieter with distance) |
 
 Music plays on the **Music** bus and effects on the **Effects** bus, so the settings sliders
 (AudioSettings) reach them. Effects play a little higher or lower each time.
@@ -53,7 +53,7 @@ instead of racing it. Tests drive `Sound.advance` by hand (`tests/unit/sound_mus
 ## How to add a sound effect
 
 1. `python3 tools/audio/make_sfx.py <id> SOURCE [SOURCE ...]` writes
-   `assets/audio/sfx/<id>.ogg` (or variants), trimmed, mono and at one loudness
+   `assets/audio/sfx/<id>.wav` (or variants), trimmed, mono and at one loudness
    (`--gain` to nudge it).
 2. Name it from data (`EffectDef.sound`, `SkillDef.sound`, `ProjectileDef.sound`) or, for
    something only code knows about, a constant next to the code that plays it, added to

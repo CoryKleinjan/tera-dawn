@@ -38,10 +38,14 @@ var mute_box: CheckBox
 var mode_pick: OptionButton
 var size_pick: OptionButton
 var fps_pick: OptionButton
+var scale_pick: OptionButton
+var aa_pick: OptionButton
 var vsync_box: CheckBox
 var bloom_box: CheckBox
 var ao_box: CheckBox
 var fog_box: CheckBox
+var dof_box: CheckBox
+var shadow_box: CheckBox
 var shake_box: CheckBox
 var _sizes: Array[Vector2i] = []
 
@@ -144,10 +148,14 @@ func refresh() -> void:
 	size_pick.select(maxi(0, _sizes.find(v.window_size)))
 	size_pick.disabled = v.window_mode != VideoSettings.WindowMode.WINDOWED
 	fps_pick.select(maxi(0, VideoSettings.FPS_CAPS.find(v.max_fps)))
+	scale_pick.select(maxi(0, VideoSettings.RENDER_SCALES.find(v.render_scale)))
+	aa_pick.select(maxi(0, VideoSettings.AA_LEVELS.find(v.anti_aliasing)))
 	vsync_box.set_pressed_no_signal(v.vsync)
 	bloom_box.set_pressed_no_signal(v.bloom)
 	ao_box.set_pressed_no_signal(v.ambient_occlusion)
 	fog_box.set_pressed_no_signal(v.fog)
+	dof_box.set_pressed_no_signal(v.depth_of_field)
+	shadow_box.set_pressed_no_signal(v.shadows)
 	shake_box.set_pressed_no_signal(v.screen_shake)
 	if test_box:
 		test_box.set_pressed_no_signal(Settings.dev.test_characters)
@@ -308,10 +316,28 @@ func _build_video() -> Control:
 		Settings.apply(v))
 	_grid_row(grid, "Frame rate limit", fps_pick)
 
+	var scale_names: Array[String] = []
+	for f in VideoSettings.RENDER_SCALES:
+		scale_names.append("%d%%" % roundi(f * 100.0))
+	scale_pick = _option_button(scale_names, func(i: int) -> void:
+		v.render_scale = VideoSettings.RENDER_SCALES[i]
+		Settings.apply(v))
+	_grid_row(grid, "Render scale", scale_pick)
+
+	var aa_names: Array[String] = []
+	for n in VideoSettings.AA_LEVELS:
+		aa_names.append("Off" if n == 0 else "%dx" % n)
+	aa_pick = _option_button(aa_names, func(i: int) -> void:
+		v.anti_aliasing = VideoSettings.AA_LEVELS[i]
+		Settings.apply(v))
+	_grid_row(grid, "Anti-aliasing", aa_pick)
+
 	vsync_box = _video_toggle("VSync", "vsync")
 	bloom_box = _video_toggle("Bloom (glowing lights and sun)", "bloom")
 	ao_box = _video_toggle("Ambient occlusion (soft contact shadows)", "ambient_occlusion")
 	fog_box = _video_toggle("Depth fog", "fog")
+	dof_box = _video_toggle("Depth of field (soft far scenery)", "depth_of_field")
+	shadow_box = _video_toggle("Shadows", "shadows")
 	shake_box = _video_toggle("Screen shake", "screen_shake")
 	# the switches in two columns (short names left, the long effect names right), so the
 	# page is no taller than the others
@@ -319,10 +345,17 @@ func _build_video() -> Control:
 	switches.columns = 2
 	switches.add_theme_constant_override("h_separation", 18)
 	page.add_child(switches)
-	for box in [vsync_box, bloom_box, fog_box, ao_box, shake_box]:
+	for box in [vsync_box, bloom_box, fog_box, ao_box, shadow_box, dof_box, shake_box]:
 		switches.add_child(box)
-	var hint := UiBuild.label("Turning off bloom, ambient occlusion or fog helps slower computers.", 12, Palette.MUTED)
+	var hint := UiBuild.label("A lower render scale, or turning off ambient occlusion, depth of field or shadows, helps slower computers.", 12, Palette.MUTED)
 	page.add_child(hint)
+	# a computer without Vulkan runs the simpler renderer, which has no ambient occlusion or
+	# depth of field
+	if RenderingServer.get_current_rendering_method() == "gl_compatibility":
+		var simple := UiBuild.label("This computer is using the simpler renderer: ambient occlusion and depth of field are off. Updating the graphics driver (for Vulkan) brings them back.", 12, Palette.MUTED)
+		simple.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		simple.custom_minimum_size.x = 560
+		page.add_child(simple)
 	return page
 
 func _video_toggle(text: String, property: String) -> CheckBox:

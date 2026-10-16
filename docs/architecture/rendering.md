@@ -60,6 +60,15 @@ hero and monsters stand out, and a gloomier sub-zone dims a borrowed backdrop wi
 `fog_color`, never a tint. Ambient occlusion keeps a small radius, so it shades creases in the
 land and never draws a halo round a character standing in front of it.
 
+The costly effects are video settings (`VideoSettings`, applied by `TDStage.apply_video` and
+`VideoSettings.apply`): bloom, ambient occlusion, fog, depth of field, sun shadows, a render
+scale (the 3D scene drawn at 85% or 70% and sharpened back up with FSR; the HUD stays sharp)
+and MSAA. MSAA stays at 4x by default because it gives the land's edges their soft line
+(alpha to coverage in `TerrainBuilder._strip`). A Steam Deck starts at 85% scale, 2x MSAA, no
+ambient occlusion or depth of field. The game is made for Vulkan (Forward+); a computer
+without it falls back to the compatibility renderer, which has no ambient occlusion or depth
+of field, and the video page says so. Store pages should list Vulkan as recommended.
+
 Text that belongs to a spot in the world (name tags, hints, damage numbers)
 is never put in the 3D stage: `TDOverlay` projects the spot to the screen and draws it there,
 so depth of field never blurs it and nothing in the world covers it.

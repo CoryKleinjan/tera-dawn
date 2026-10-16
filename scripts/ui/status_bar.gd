@@ -41,6 +41,14 @@ var world: TDWorld
 var _trails := {"hp": [0.0, 0.0], "mp": [0.0, 0.0]}
 var _xp_seen := -1
 var _flash := 0.0
+## What was last drawn (_drawn_state), and a count bumped when the keys are rebound.
+var _drawn := []
+var _keys_shown := 0
+
+func _ready() -> void:
+	Settings.changed.connect(func(section: SettingsSection) -> void:
+		if section is Keybinds:
+			_keys_shown += 1)
 
 func _process(delta: float) -> void:
 	# the title screen shows no bar until there's a character to show
@@ -53,7 +61,24 @@ func _process(delta: float) -> void:
 			_flash = EXP_FLASH
 		_xp_seen = xp
 		_flash = maxf(0.0, _flash - delta)
-	queue_redraw()
+	# drawn again only when something it shows changed
+	var state := _drawn_state()
+	if state != _drawn:
+		_drawn = state
+		queue_redraw()
+
+## Everything _draw shows, to tell when it needs drawing again.
+func _drawn_state() -> Array:
+	if not visible:
+		return []
+	var me := Game.me
+	var open := []
+	for action in TDHud.WINDOW_ACTIONS:
+		open.append(world.hud.windows[action].visible)
+		if has_points_waiting(action):  # the button's glow pulses
+			open.append(Time.get_ticks_msec())
+	return [size, me.level, me.health.hp, me.health.max_hp, me.mp, me.max_mp(), me.xp, me.shards,
+		_trails["hp"][0], _trails["mp"][0], _flash, open, _keys_shown]
 
 ## Moves a bar's pale chunk: up at once when the bar fills, down slowly after a pause when
 ## it empties.

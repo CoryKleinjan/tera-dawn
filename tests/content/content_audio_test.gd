@@ -43,7 +43,7 @@ func test_every_jingle_has_a_file() -> void:
 func test_every_sound_has_a_file() -> void:
 	var ids := _sound_ids()
 	for id in ids:
-		check(Sound.has_sound(id), "%s (%s): assets/audio/sfx/%s.ogg is missing" % [id, ids[id], id])
+		check(Sound.has_sound(id), "%s (%s): assets/audio/sfx/%s.wav is missing" % [id, ids[id], id])
 
 func test_music_loops_and_jingles_do_not() -> void:
 	for id in _music_ids():
@@ -56,12 +56,14 @@ func test_music_loops_and_jingles_do_not() -> void:
 			check(not (s as AudioStreamOggVorbis).loop, "%s plays once" % id)
 			check(s.get_length() < 15.0, "jingle %s is short (%.1f s)" % [id, s.get_length()])
 
-func test_sound_files_are_ogg() -> void:
-	for dir in [Sound.MUSIC_DIR, Sound.SFX_DIR]:
+func test_music_is_ogg_and_effects_are_wav() -> void:
+	var kinds := {Sound.MUSIC_DIR: "ogg", Sound.SFX_DIR: "wav"}
+	for dir: String in kinds:
+		var ext: String = kinds[dir]
 		for file in DirAccess.get_files_at(dir):
 			if file.get_extension() in ["import", "md"]:
 				continue
-			check(file.get_extension() == "ogg", "%s/%s: sounds are .ogg files" % [dir, file])
+			check(file.get_extension() == ext, "%s/%s: these sounds are .%s files" % [dir, file, ext])
 
 func test_variants_belong_to_one_sound() -> void:
 	check_eq(Sound.sfx_id("hit"), "hit", "a plain name is its own sound")

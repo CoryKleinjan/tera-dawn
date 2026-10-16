@@ -28,6 +28,10 @@ screen. `detail` and `alpha` default to this for every asset;
 2. Write `art/sheets/<name>.json` with at least `source`, `out_dir` and `cells`.
 3. Run `--grid` first to check the slicer sees the same rows and columns as `cells`.
 4. Cut it, look at the output with `contact_sheet.py`, and tune `scale` and overrides.
+5. New pictures: run `godot --headless --import --path .`, then `tools/art/import_settings.py`
+   and import again. It stores world art (backdrops, rooms, buildings, monsters, tiles)
+   GPU-compressed with mipmaps and keeps UI, icons and the hero lossless; the art tool tests
+   fail on a world picture it hasn't set.
 
 ## Keys
 

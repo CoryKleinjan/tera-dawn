@@ -80,7 +80,7 @@ func _icon_from_look() -> void:
 	var tex: Texture2D = held.texture() if held else (worn.get_frame_texture(&"idle1", 0) if worn and worn.has_animation(&"idle1") else null)
 	if tex == null:
 		return
-	var used := tex.get_image().get_used_rect()
+	var used := TextureBounds.used_rect(tex)
 	if used.size == Vector2i.ZERO:
 		return
 	var a := AtlasTexture.new()
