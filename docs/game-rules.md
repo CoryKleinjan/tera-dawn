@@ -263,8 +263,10 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
 ## Audio and travel
 
 - Every town, field and boss map plays its zone's music: one town track, one field track and one
-  more upbeat, dangerous boss track per zone. Lanternfall sounds like a thieves' den.
-- Kenney CC0 sound effects; the title theme and jingles stay.
+  cinematic, dangerous boss track per zone. Lanternfall sounds like a thieves' den.
+- Music feels grown-up, never childish (Hollow Knight's spirit): towns, fields and the title are
+  ambient; bosses are cinematic. Each zone keeps its own tone (`docs/zone-vibes.md`).
+- Kenney CC0 sound effects; the jingles stay.
 - Captain Marlo's ship carries players from the start island to Dawnharbor; coachman Rook takes them
   to the job towns (400-500 Dawnshards, the same for everyone), but coaches only go to towns the
   player has already been to; the towns are also joined by a ring
