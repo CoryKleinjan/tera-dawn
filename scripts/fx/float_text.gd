@@ -1,19 +1,19 @@
 class_name TDFloatText
 extends Node2D
 ## A floating number, drawn by the overlay at its projected screen position: damage (hit,
-## crit, taken or miss), or something you gained (exp, shards) as a smaller "+9 EXP".
+## crit, taken or miss), or something you gained (essence, shards) as a smaller "+9 Dawn Essence".
 
 ## Gains younger than this stack above each other (see TDWorldFx.show_gain).
 const GAIN_STACK_TICKS := 30
 ## What each kind of gain says after its amount, and its colour.
 const GAINS := {
-	"exp": ["EXP", Color("ffe39a")],
+	"essence": ["Dawn Essence", Color("ffe39a")],
 	"shards": ["Dawnshards", Color("ffd36b")],
 }
 
 var world: TDWorld
 var value := 0
-var kind := "hit" # hit, crit, taken, miss, or a gain (exp, shards)
+var kind := "hit" # hit, crit, taken, miss, or a gain (essence, shards)
 var t := 0
 
 func is_gain() -> bool:

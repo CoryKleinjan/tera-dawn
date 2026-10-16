@@ -8,7 +8,6 @@ const TOP := 64.0
 
 var peer := 0
 var who_name := ""
-var level := 1
 var job := &""
 var guild := ""
 
@@ -19,7 +18,6 @@ func _init() -> void:
 func open(a: TDAvatar) -> void:
 	peer = a.peer
 	who_name = a.char_name
-	level = a.level
 	job = a.job
 	guild = a.guild
 	title = who_name
@@ -48,7 +46,7 @@ func row_rect(i: int) -> Rect2:
 
 func _draw_body() -> void:
 	var j: JobDef = Content.jobs.get(job)
-	draw_label(Vector2(PAD, 46), "Lv. %d %s%s" % [level, j.display_name if j else "", "  ·  " + guild if guild != "" else ""], Palette.MUTED)
+	draw_label(Vector2(PAD, 46), "%s%s" % [j.display_name if j else "", "  ·  " + guild if guild != "" else ""], Palette.MUTED)
 	var list := actions()
 	for i in list.size():
 		var r := row_rect(i)

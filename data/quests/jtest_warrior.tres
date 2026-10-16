@@ -21,6 +21,6 @@ offer_text = "Ten levels. Not bad. Now earn the name. My trial ground, end to en
 progress_text = "The trial ground is through the light by the wall."
 complete_text = "Ha! You put that thing down! You're a Warrior, no question. But I didn't like that light. Not one bit. Go to Lumewood. Archmage Celest knows more about strange lights than any of us."
 hint = "Step into the light by the wall and press {move_up}"
-reward_xp = 1000
+reward_essence = 1000
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Boss")])
 reward_items = Array[ExtResource("4_drop_entry")]([])

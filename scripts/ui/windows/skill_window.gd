@@ -1,8 +1,8 @@
 class_name TDSkillWindow
 extends TDWindow
 ## The skill book (K): a tab for each job the character has been (Beginner, then their
-## job), listing that job's skills with their levels. Unspent Skill Points show at the top;
-## "+" spends one (the server checks it). Click a skill to read what it does now and at its
+## job), listing that job's skills with their levels. Unspent Dawn Essence and the price of
+## the next skill level show at the top; "+" buys one (the server checks it). Click a skill to read what it does now and at its
 ## next level; drag a learned skill's icon onto a quickslot to use it with that key.
 
 const LIST_Y := 74.0
@@ -53,8 +53,8 @@ func _draw_body() -> void:
 	draw_tabs(line.map(func(id: StringName) -> String:
 		var j: JobDef = Content.jobs.get(id)
 		return j.display_name if j else String(id)), tab)
-	DrawUtil.text(self, Game.ui_font, Vector2(_close_rect().position.x - 8, 20), "Skill Points: %d" % Game.me.skills.points, 13,
-		Palette.SUN if Game.me.skills.points > 0 else Palette.MIST, -1, 3, Palette.NIGHT)
+	DrawUtil.text(self, Game.ui_font, Vector2(_close_rect().position.x - 8, 20), "Dawn Essence: %d  ·  Next: %d" % [Game.me.essence, Game.me.skills.price()], 13,
+		Palette.SUN if Game.me.essence >= Game.me.skills.price() else Palette.MIST, -1, 3, Palette.NIGHT)
 	var skills := listed()
 	if selected == &"" or not skills.any(func(s: SkillDef) -> bool: return s.id == selected):
 		selected = skills[0].id if not skills.is_empty() else &""
@@ -97,7 +97,7 @@ func _draw_details(s: SkillDef, at: Vector2) -> void:
 			DrawUtil.text(self, Game.ui_font, Vector2(at.x + 8, y), l, 11, Palette.GOOD, 1, 3, Palette.NIGHT)
 			y += 15
 	var problem := Game.me.skills.learn_problem(s)
-	if problem != "" and lvl < s.max_level and Game.me.skills.points > 0:
+	if problem != "" and lvl < s.max_level:
 		DrawUtil.text(self, Game.ui_font, Vector2(at.x + 8, y), problem, 11, Palette.WARN, 1, 3, Palette.NIGHT)
 
 func _click(at: Vector2, button: int, _double: bool) -> void:
@@ -111,7 +111,7 @@ func _click(at: Vector2, button: int, _double: bool) -> void:
 func _tab_clicked(i: int) -> void:
 	tab = i
 
-## Spends a Skill Point on `skill`.
+## Buys the next level of `skill` with Dawn Essence.
 func learn(skill: SkillDef) -> void:
 	selected = skill.id
 	Net.ask(&"req_learn_skill", [skill.id])

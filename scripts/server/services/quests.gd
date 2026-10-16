@@ -80,8 +80,7 @@ func on_quest_complete(peer: int, npc_id: StringName, quest_id: StringName) -> v
 		return
 	tell(p, "Quest complete: %s" % q.title, Palette.SUN)
 	Net.send(p.peer, &"ev_jingle", [QUEST_JINGLE])
-	if q.reward_xp > 0:
-		server.give_xp(p, q.reward_xp)
+	server.give_essence(p, q.reward_essence)
 	server.scenes.play(p, q.finish_scene)
 	var c := p.character
 	# a job test: passing it makes you that job

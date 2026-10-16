@@ -1,6 +1,6 @@
 extends Node
-## Prints how many hits each job's main attack takes against monsters of its level, and how
-## many kills a level takes. Run: godot --headless --path . res://tests/balance_report.tscn
+## Prints how many hits each job's main attack takes against monsters of its tier (see
+## Balance), and how many kills pay for a tier. Run: godot --headless --path . res://tests/balance_report.tscn
 
 func _ready() -> void:
 	var by_level := {}
@@ -9,14 +9,14 @@ func _ready() -> void:
 			by_level[m.level] = by_level.get(m.level, []) + [m]
 	var levels := by_level.keys()
 	levels.sort()
-	print("lvl  monster              hp    exp  kills/lvl  " + "  ".join(Balance.lines().map(func(j: StringName) -> String: return String(j).substr(0, 7).rpad(7))))
+	print("tier monster              hp   ess  kills/tier " + "  ".join(Balance.lines().map(func(j: StringName) -> String: return String(j).substr(0, 7).rpad(7))))
 	for lvl: int in levels:
 		for m: MonsterDef in by_level[lvl]:
-			var row := "%3d  %-18s %6d %5d %8.1f   " % [lvl, m.id, m.max_hp, m.exp_reward, Balance.kills_per_level(lvl, m)]
+			var row := "%3d  %-18s %6d %5d %8.1f   " % [lvl, m.id, m.max_hp, m.essence, Balance.kills_per_tier(lvl, m)]
 			for j in Balance.lines():
 				row += "%7.1f  " % Balance.hits_to_kill(Balance.typical(j, maxi(1, lvl)), m)
 			print(row)
-	# damage a level-L character's main attack does per cast, averaged over the jobs
+	# damage a tier-T character's main attack does per cast, averaged over the jobs
 	var dmg := []
 	for lvl in range(1, 41):
 		var total := 0.0

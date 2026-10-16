@@ -29,8 +29,6 @@ func equip_problem(e: EquipDef) -> String:
 	var c := character
 	if not can_use(e.jobs):
 		return "Only %s can use the %s." % [EquipDef.families_text(e.jobs), e.display_name]
-	if c.level < e.required_level:
-		return "You need to be level %d to wear the %s." % [e.required_level, e.display_name]
 	var reqs := e.requirements()
 	for stat in StatBlock.BASE:
 		if reqs.has(stat) and c.stats.value(stat) < reqs[stat]:

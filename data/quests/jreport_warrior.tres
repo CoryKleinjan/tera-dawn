@@ -23,5 +23,5 @@ progress_text = "Archmage Celest is in Lumewood."
 complete_text = "A tear in the air, and something stepping out of it? My scholars have noted strange lights near the strongest beasts, but never this. Thank you. Keep your eyes open out there, and come to me if you see another."
 auto_start = true
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Visit")])
-reward_xp = 2000
+reward_essence = 2000
 reward_items = Array[ExtResource("4_drop_entry")]([])

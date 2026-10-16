@@ -1,7 +1,7 @@
 class_name TDCommunityWindow
 extends TDWindow
 ## Buddies, party and guild (O), from the server's summary in Game.social. Buddies shows
-## who's online and where; Party shows each member's level, job and HP; Guild lists its
+## who's online and where; Party shows each member's job and HP; Guild lists its
 ## members. Invite people from here by name, or click them on the map.
 
 const TABS := ["Buddies", "Party", "Guild"]
@@ -70,14 +70,14 @@ func _draw_party() -> void:
 		var m: Array = members[i]
 		var r := row_rect(i)
 		draw_row(r)
-		var j: JobDef = Content.jobs.get(StringName(m[3]))
+		var j: JobDef = Content.jobs.get(StringName(m[2]))
 		var x := 6.0
 		if m[0] == party["leader"]:
 			UiSkin.draw_icon(self, "social/leader_star", Rect2(r.position + Vector2(4, 1), Vector2(14, 14)))
 			x = 20.0
 		draw_label(r.position + Vector2(x, 12), m[0], Palette.SUN, 12)
-		draw_label(r.position + Vector2(6, 24), "Lv. %d %s  ·  %s" % [m[2], j.display_name if j else "", Content.map(StringName(m[5])).display_name if Content.maps.has(StringName(m[5])) else ""], Palette.MUTED, 10)
-		WorldSkin.draw_party_hp(self, party_hp_rect(r).position, PARTY_HP_W, float(m[4]))
+		draw_label(r.position + Vector2(6, 24), "%s  ·  %s" % [j.display_name if j else "", Content.map(StringName(m[4])).display_name if Content.maps.has(StringName(m[4])) else ""], Palette.MUTED, 10)
+		WorldSkin.draw_party_hp(self, party_hp_rect(r).position, PARTY_HP_W, float(m[3]))
 		var who: String = m[0]
 		if lead and who != Game.me.name:
 			add_button(kick_rect(r), "Kick", func() -> void: Net.ask(&"req_social", [&"kick", who]), true, true)
@@ -100,7 +100,7 @@ func _draw_guild() -> void:
 	var g: Dictionary = Game.social.get("guild", {})
 	if g.is_empty():
 		for k in 3:
-			draw_hint(Vector2(PAD, LIST_Y + 18 + k * 18), ["You're not in a guild.", "Found one with the Guild Clerk in Dawnharbor", "(%d Dawnshards, level %d), or get invited." % [TDSocial.GUILD_COST, TDSocial.GUILD_LEVEL]][k])
+			draw_hint(Vector2(PAD, LIST_Y + 18 + k * 18), ["You're not in a guild.", "Found one with the Guild Clerk in Dawnharbor", "(%d Dawnshards), or get invited." % TDSocial.GUILD_COST][k])
 		return
 	UiSkin.draw_icon(self, "social/guild_emblem", Rect2(PAD, LIST_Y - 12, 20, 20))
 	WorldSkin.draw_guild_tag(self, Vector2(PAD + 26 + (DrawUtil.text_width(Game.ui_font, g["name"], 11) + 34) / 2.0, LIST_Y - 10), g["name"])

@@ -23,6 +23,6 @@ offer_text = "You've joined us, but words are cheap. Bring me 20 Sand Claws from
 progress_text = "20 Sand Claws. The Sand Crabs in the Tidepools carry them."
 complete_text = "Good. You have the makings of one of us. Wear this with pride."
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1")])
-reward_xp = 28300
+reward_essence = 28300
 reward_shards = 500
 reward_items = Array[ExtResource("4_drop_entry")]([])

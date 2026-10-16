@@ -129,7 +129,7 @@ func snapshot(full := false) -> PackedByteArray:
 			_sent_mobs[i] = r
 	return SnapshotCodec.encode(tick, records, players.values().map(func(p: SimPlayer) -> Array: return p.motion()))
 
-## Sends this map's players the info (name, level, job, guild, pet, worn gear) of
+## Sends this map's players the info (name, job, guild, pet, worn gear) of
 ## every player whose info changed since it was last sent. Reliable, unlike snapshots.
 func send_player_info() -> void:
 	for p: SimPlayer in players.values():
@@ -147,7 +147,7 @@ func broadcast(event: StringName, args: Array, skip := 0) -> void:
 func tell(p: SimPlayer, text: String, col: Color) -> void:
 	Net.send(p.peer, &"ev_log", [text, col.to_html()])
 
-## Shows the player what they just gained (&"exp" or &"shards") as a small number rising
+## Shows the player what they just gained (&"essence" or &"shards") as a small number rising
 ## over them, rather than a line in the message log.
 func show_gain(p: SimPlayer, kind: StringName, amount: int) -> void:
 	Net.send(p.peer, &"ev_gain", [kind, amount])
@@ -294,11 +294,12 @@ func kill_mob(m: SimMob, killer: SimPlayer) -> void:
 	broadcast(&"ev_mob_died", [m.index])
 	for i in m.children.size():
 		m.children[i].wake(m.position.x + (i - (m.children.size() - 1) / 2.0) * 30.0, killer.peer)
-	server.give_xp(killer, m.def.exp_reward)
-	# the killer's party on this map shares the EXP, and the kill counts for their quests too
+	var from := m.body_position()
+	server.give_essence(killer, m.def.essence, from)
+	# the killer's party on this map shares the essence, and the kill counts for their quests too
 	var credited: Array[SimPlayer] = [killer]
-	for share in server.social.party_shares(killer, m.def.exp_reward):
-		server.give_xp(share[0], share[1])
+	for share in server.social.party_shares(killer, m.def.essence):
+		server.give_essence(share[0], share[1], from)
 		credited.append(share[0])
 	for p in credited:
 		server.quests.record_kill(p, m.def)
@@ -354,10 +355,10 @@ func hurt_player(p: SimPlayer, def: MonsterDef, from_x: float, power := 1.0) -> 
 	if p.character.health.is_dead():
 		p.faint_t = SimPlayer.FAINT_TICKS
 		p.climbing = false
-		var lost := Combat.faint_penalty(p.character.xp)
-		p.character.xp -= lost
+		var lost := Combat.faint_penalty(p.character.essence)
+		p.character.essence -= lost
 		Net.send(p.peer, &"ev_fainted", [])
-		tell(p, "You fainted and lost %d EXP." % lost, BAD)
+		tell(p, "You fainted and lost %d Dawn Essence." % lost, BAD)
 
 # ---------- items ----------
 

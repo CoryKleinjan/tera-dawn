@@ -1,11 +1,11 @@
 class_name TDStatusBar
 extends Control
-## The bar along the bottom of the screen: level badge, HP, MP and EXP, buttons for the
+## The bar along the bottom of the screen: HP, MP and Dawn Essence, buttons for the
 ## game windows and the Dawnshard purse. The quickslots sit just above it (TDQuickslots). Drawn from
 ## the UI sheet's art.
 
 const HEIGHT := 50.0
-## Every piece on the bar (level badge, HP, MP and EXP bars, window buttons, Dawnshards) is
+## Every piece on the bar (HP, MP and essence bars, window buttons, Dawnshards) is
 ## ITEM_H tall and centred on the band between the art's two gold trim lines.
 const ITEM_H := 26.0
 ## The band between the gold trim lines, in art pixels of the bar art (top and bottom row).
@@ -16,11 +16,11 @@ const WINDOW_BUTTON_GAP := 2.0
 ## art pixels. The art is drawn at one scale to fit HEIGHT, and the dawn-lit band between the caps
 ## repeats along the bar instead of stretching, so its gold trim stays sharp at any width.
 const BAR_CAP := 38.0
-## The level badge's left edge, just inside the brass end cap.
-const BADGE_X := 40.0
+## Where the HP bar starts, just inside the brass end cap.
+const BARS_X := 40.0
 ## How much wider than their art the HP and MP bars are drawn, in pixels.
 const HP_MP_EXTRA := 24.0
-## The space between the badge and the bars, and between bars.
+## The space between bars.
 const BAR_GAP := 6.0
 ## UI sheet art for each window's button. A window without art yet gets a round button
 ## with the first letter of its action.
@@ -29,17 +29,16 @@ const WINDOW_ICONS := {"inventory": "bag_button", "equipment": "gear_button", "s
 	"community": "hud/community_button", "collection": "hud/collection_button"}
 
 ## Lost HP/MP stays on the bar as a pale chunk for TRAIL_HOLD seconds, then drains away at
-## TRAIL_DRAIN of the bar a second. EXP gained lights the EXP bar for EXP_FLASH seconds.
+## TRAIL_DRAIN of the bar a second. Essence gained lights the essence bar for ESSENCE_FLASH
+## seconds.
 const TRAIL_HOLD := 0.35
 const TRAIL_DRAIN := 0.9
-const EXP_FLASH := 0.5
-## Shown on the EXP bar (and the stats window) at Character.MAX_LEVEL.
-const MAX_LEVEL_TEXT := "Max level"
+const ESSENCE_FLASH := 0.5
 
 var world: TDWorld
 ## The pale chunk's end for HP and MP: [fraction, seconds until it drains].
 var _trails := {"hp": [0.0, 0.0], "mp": [0.0, 0.0]}
-var _xp_seen := -1
+var _essence_seen := -1
 var _flash := 0.0
 ## What was last drawn (_drawn_state), and a count bumped when the keys are rebound.
 var _drawn := []
@@ -56,10 +55,9 @@ func _process(delta: float) -> void:
 	if visible:
 		_follow("hp", Game.me.health.fraction(), delta)
 		_follow("mp", float(Game.me.mp) / Game.me.max_mp(), delta)
-		var xp := Game.me.xp + Game.me.level * 1000000  # a level-up counts as a gain too
-		if _xp_seen >= 0 and xp > _xp_seen:
-			_flash = EXP_FLASH
-		_xp_seen = xp
+		if _essence_seen >= 0 and Game.me.essence > _essence_seen:
+			_flash = ESSENCE_FLASH
+		_essence_seen = Game.me.essence
 		_flash = maxf(0.0, _flash - delta)
 	# drawn again only when something it shows changed
 	var state := _drawn_state()
@@ -77,7 +75,7 @@ func _drawn_state() -> Array:
 		open.append(world.hud.windows[action].visible)
 		if has_points_waiting(action):  # the button's glow pulses
 			open.append(Time.get_ticks_msec())
-	return [size, me.level, me.health.hp, me.health.max_hp, me.mp, me.max_mp(), me.xp, me.shards,
+	return [size, me.health.hp, me.health.max_hp, me.mp, me.max_mp(), me.essence, me.shards,
 		_trails["hp"][0], _trails["mp"][0], _flash, open, _keys_shown]
 
 ## Moves a bar's pale chunk: up at once when the bar fills, down slowly after a pause when
@@ -99,18 +97,11 @@ func trail(bar: String) -> float:
 func _draw() -> void:
 	var w := size.x
 	UiSkin.draw_box(self, _bar_box(), Rect2(0, 0, w, HEIGHT), HEIGHT / UiSkin.size_of("hud_bar").y)
-	# level badge
-	var badge := badge_rect()
-	draw_texture_rect(UiSkin.tex("level_badge"), badge, false)
-	var c := badge.get_center()
-	DrawUtil.text(self, Game.ui_font, c + Vector2(0, -3), "Lv", 7, Palette.MIST)
-	DrawUtil.text(self, Game.num_font, c + Vector2(0, 9), str(Game.me.level), 11, Palette.SUN, 0, 3, Palette.NIGHT)
-	# HP, MP, EXP
+	# HP, MP, Dawn Essence
 	var hp := Game.me.health
 	WorldSkin.draw_bar(self, "hp_frame", "fill_red", bar_rect("hp_frame").position, hp.fraction(), fit("hp_frame"), "%d / %d" % [hp.hp, hp.max_hp], trail("hp"), 0.0, HP_MP_EXTRA)
 	WorldSkin.draw_bar(self, "mp_frame", "fill_blue", bar_rect("mp_frame").position, float(Game.me.mp) / Game.me.max_mp(), fit("mp_frame"), "%d / %d" % [Game.me.mp, Game.me.max_mp()], trail("mp"), 0.0, HP_MP_EXTRA)
-	var exp_fill := 1.0 if Game.me.at_max_level() else float(Game.me.xp) / Game.me.xp_need()
-	WorldSkin.draw_bar(self, "exp_frame", "fill_gold", exp_bar_rect().position, exp_fill, fit("exp_frame"), exp_text(), 0.0, _flash / EXP_FLASH)
+	WorldSkin.draw_bar(self, "exp_frame", "fill_gold", essence_bar_rect().position, essence_fill(Game.me), fit("exp_frame"), essence_text(), 0.0, _flash / ESSENCE_FLASH)
 	# window buttons
 	for i in TDHud.WINDOW_ACTIONS.size():
 		_window_button(TDHud.WINDOW_ACTIONS[i], _window_button_rect(i))
@@ -119,11 +110,17 @@ func _draw() -> void:
 	UiSkin.draw_icon(self, "icon_dawnshard", icon)
 	DrawUtil.text(self, Game.num_font, Vector2(icon.end.x + 4, band_center() + 5), str(Game.me.shards), 14, Palette.SUN, 1, 3, Palette.NIGHT)
 
-## What the EXP bar says: "42.5%" of the way to the next level, or "Max level" at the cap.
-func exp_text() -> String:
-	if Game.me.at_max_level():
-		return MAX_LEVEL_TEXT
-	return "%.1f%%" % (100.0 * Game.me.xp / Game.me.xp_need())
+## What the essence bar says: "Dawn Essence 120".
+func essence_text() -> String:
+	return "Dawn Essence %d" % Game.me.essence
+
+## How full the essence bar is: how near `c`'s essence is to paying for the cheapest stat
+## point or skill level (full once it does).
+static func essence_fill(c: Character) -> float:
+	var cheapest := c.skills.price()
+	for stat in StatBlock.BASE:
+		cheapest = mini(cheapest, c.ap.price(stat))
+	return clampf(float(c.essence) / maxi(1, cheapest), 0.0, 1.0)
 
 ## The middle of the band between the bar art's gold trim lines, in pixels from the top.
 static func band_center() -> float:
@@ -137,13 +134,10 @@ static func item_top() -> float:
 static func fit(art: String) -> float:
 	return ITEM_H / UiSkin.size_of(art).y
 
-func badge_rect() -> Rect2:
-	return Rect2(Vector2(BADGE_X, item_top()), UiSkin.size_of("level_badge") * fit("level_badge"))
-
-## Where a bar frame is drawn: HP after the badge, then MP, then EXP, BAR_GAP apart. HP and
+## Where a bar frame is drawn: HP from BARS_X, then MP, then essence, BAR_GAP apart. HP and
 ## MP are HP_MP_EXTRA wider than their art.
 func bar_rect(frame: String) -> Rect2:
-	var x := badge_rect().end.x + BAR_GAP
+	var x := BARS_X
 	for f in ["hp_frame", "mp_frame", "exp_frame"]:
 		var s := UiSkin.size_of(f) * fit(f)
 		if f != "exp_frame":
@@ -153,8 +147,8 @@ func bar_rect(frame: String) -> Rect2:
 		x += s.x + BAR_GAP
 	return Rect2()
 
-## Where the EXP bar's frame is drawn.
-func exp_bar_rect() -> Rect2:
+## Where the essence bar's frame is drawn.
+func essence_bar_rect() -> Rect2:
 	return bar_rect("exp_frame")
 
 func _window_button_rect(i: int) -> Rect2:
@@ -186,14 +180,14 @@ func _gui_input(event: InputEvent) -> void:
 			world.hud.toggle_window(TDHud.WINDOW_ACTIONS[i])
 			accept_event()
 
-## Whether a window's button should glow because there are points to spend in it: the
-## Character window while you have Ability Points, Skills while you have Skill Points.
+## Whether a window's button should glow because there's essence to spend in it: the
+## Character window while it pays for a stat point, Skills while it pays for a skill level.
 static func has_points_waiting(action: String) -> bool:
 	match action:
 		"stats":
-			return Game.me.ap.points > 0
+			return TDStatsWindow.can_buy_any(Game.me)
 		"skills":
-			return Game.me.skills.points > 0
+			return Game.me.skills.can_learn_any()
 	return false
 
 static func _key_name(action: String) -> String:

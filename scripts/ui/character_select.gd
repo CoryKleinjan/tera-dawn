@@ -1,7 +1,7 @@
 class_name TDCharacterSelect
 extends CenterContainer
 ## Character select, shown once a game is started or joined: a slot for each character
-## saved on this computer (their name, level and job) and empty slots up to the
+## saved on this computer (their name and job) and empty slots up to the
 ## limit, with Play, Create, Delete and Back. TDTitleScreen decides what the buttons do;
 ## the list is Net.characters.
 
@@ -27,7 +27,7 @@ var create_button: Button
 var delete_button: Button
 var leave_button: Button
 var message: Label
-## The characters shown: {name, level, job} like Net.characters.
+## The characters shown: {name, job} like Net.characters.
 var characters: Array = []
 ## The picked character's name ("" for none).
 var selected := ""
@@ -156,7 +156,7 @@ func _fill_slot(b: Button, c: Dictionary) -> void:
 		b.tooltip_text = "Make a new character here"
 		return
 	title.text = c["name"]
-	line.text = "Lv %d %s" % [int(c["level"]), c["job"]]
+	line.text = str(c["job"])
 	b.tooltip_text = ""
 
 ## One of the buttons along the bottom.

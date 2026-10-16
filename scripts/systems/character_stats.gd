@@ -20,6 +20,19 @@ const DISCOUNT_PER_CHA := 0.001
 const MAX_DISCOUNT := 0.15
 const SHARDS_PER_CHA := 0.002
 
+## Dawn Essence prices. Each point in a stat costs more than the last point bought in that
+## stat: STAT_PRICE × (1 + bought / STAT_STEP) ^ PRICE_GROWTH. Skill levels work the same way,
+## counted across every skill level bought (SKILL_STEP). Set so the first hours take about as
+## long as the old EXP curve did; the pace bot should retune them.
+const STAT_PRICE := 17.0
+const STAT_STEP := 5.0
+const SKILL_PRICE := 17.0
+const SKILL_STEP := 3.0
+const PRICE_GROWTH := 2.1
+## Max HP and MP grow by the job's hp_growth / mp_growth for every this many stat points
+## bought (and once more from the start).
+const GROWTH_POINTS := 5
+
 ## Lowest and highest hit before skills, crits and monster level: the stats window's
 ## "Damage" line. max = main stat × MAIN_STAT_WEIGHT × weapon attack / 100, with the stat
 ## (or a blend's two stats added together) `JobDef.damage_stat_value` gives.
@@ -77,8 +90,20 @@ static func speed_multiplier(total: StatBlock) -> float:
 static func jump_multiplier(total: StatBlock) -> float:
 	return clampf(1.0 + total.jump / 100.0, 0.5, 1.23)
 
-static func max_hp(job: JobDef, level: int, total: StatBlock) -> int:
-	return job.base_hp + level * job.hp_per_level + total.max_hp + roundi(total.strength * HP_PER_STR)
+## How far a character has grown: 1, plus one for every GROWTH_POINTS stat points bought.
+static func growth(bought: int) -> float:
+	return 1.0 + float(maxi(0, bought)) / GROWTH_POINTS
 
-static func max_mp(job: JobDef, level: int, total: StatBlock) -> int:
-	return job.base_mp + level * job.mp_per_level + total.max_mp + roundi(total.intelligence * MP_PER_INT)
+static func max_hp(job: JobDef, bought: int, total: StatBlock) -> int:
+	return job.base_hp + roundi(growth(bought) * job.hp_growth) + total.max_hp + roundi(total.strength * HP_PER_STR)
+
+static func max_mp(job: JobDef, bought: int, total: StatBlock) -> int:
+	return job.base_mp + roundi(growth(bought) * job.mp_growth) + total.max_mp + roundi(total.intelligence * MP_PER_INT)
+
+## Dawn Essence for the next point of a stat that has had `bought` points bought already.
+static func stat_price(bought: int) -> int:
+	return roundi(STAT_PRICE * pow(1.0 + maxi(0, bought) / STAT_STEP, PRICE_GROWTH))
+
+## Dawn Essence for the next skill level, with `bought` skill levels bought already.
+static func skill_price(bought: int) -> int:
+	return roundi(SKILL_PRICE * pow(1.0 + maxi(0, bought) / SKILL_STEP, PRICE_GROWTH))

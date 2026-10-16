@@ -28,8 +28,6 @@ func on_create(peer: int, npc_id: StringName, guild_name: String) -> void:
 	var problem := ""
 	if not social.guild_of(c.name).is_empty():
 		problem = "You're already in a guild."
-	elif c.level < TDSocial.GUILD_LEVEL:
-		problem = "You need to be level %d to found a guild." % TDSocial.GUILD_LEVEL
 	elif c.shards < TDSocial.GUILD_COST:
 		problem = "Founding a guild costs %d Dawnshards." % TDSocial.GUILD_COST
 	elif n.length() < 3:
@@ -91,8 +89,6 @@ func fame_problem(p: SimPlayer, o: SimPlayer) -> String:
 	if o.map != p.map:
 		return "%s needs to be on this map." % o.character.name
 	var c := p.character
-	if c.level < TDSocial.FAME_LEVEL:
-		return "You can give fame from level %d." % TDSocial.FAME_LEVEL
 	var day := today()
 	if c.fame_day == day:
 		return "You've already given fame today."

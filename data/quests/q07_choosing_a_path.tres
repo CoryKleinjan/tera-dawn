@@ -32,6 +32,6 @@ progress_text = "Captain Marlo's ship to Dawnharbor leaves from the meadow. Harb
 complete_text = "Sorrel sent you? Welcome to the mainland! Rook's coach by the docks goes to every job town, for a few hundred Dawnshards a ride. Here, for the road: Return Scrolls bring you back to town in a pinch."
 lists_job_paths = true
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1")])
-reward_xp = 9900
+reward_essence = 9900
 reward_shards = 300
 reward_items = Array[ExtResource("3_drop_entry")]([SubResource("Resource_2")])
