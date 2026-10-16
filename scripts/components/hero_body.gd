@@ -10,6 +10,8 @@ extends RefCounted
 ##                                                      # again only when the frame, facing, gear or looks change)
 
 const LOOK: HeroLookDef = preload("res://data/hero/look.tres")
+## Where each held piece's shots start (MuzzleSetDef).
+const MUZZLES: MuzzleSetDef = preload("res://data/hero/muzzles.tres")
 ## How far in front of the one below it each layer sits (3D units), so the layers stack in
 ## order without fighting over depth.
 const LAYER_STEP := 0.002
@@ -44,6 +46,8 @@ var _offsets: Array[Vector2] = []
 ## game time (a slow frame doesn't skip or hold a step).
 var _anim := &""
 var _since := 0
+## What he wore when last drawn (place -> EquipDef), for muzzle().
+var _worn: Dictionary = {}
 
 ## Holds the animation where it is for `ticks` physics ticks (hit-stop, TDPlayer.hit_stop):
 ## the frame clock starts that much later.
@@ -68,6 +72,7 @@ func draw(face: int, pet: StringName, anim: StringName, worn: Dictionary) -> voi
 	if anim != _anim:
 		_anim = anim
 		_since = Engine.get_physics_frames()
+	_worn = worn
 	var weapon: EquipDef = worn.get(&"weapon")
 	var frame := LOOK.frame_at(anim, weapon.weapon_kind if weapon else &"", float(Engine.get_physics_frames() - _since) / Engine.physics_ticks_per_second)
 	var shown := [frame, face, face_style, hair_style, worn.values()]
@@ -78,6 +83,34 @@ func draw(face: int, pet: StringName, anim: StringName, worn: Dictionary) -> voi
 		var s := _layers[i]
 		if s.texture:
 			s.position = TDStage.to3d(at + _offsets[i], _z + i * LAYER_STEP)
+
+## Where a shot of `anim` (SkillDef.animation) leaves from, from his feet in game pixels
+## facing `face`: the muzzle (MUZZLES) of the held piece showing on the frame the shot leaves
+## on (MuzzleSetDef.frames, else the move's first), the off-hand first (a pistol or star
+## beside a sword), else his shooting fist there (MuzzleSetDef.hands), or null for neither.
+func muzzle(anim: StringName, face: int) -> Variant:
+	return muzzle_of(_worn, anim, face)
+
+## muzzle() for a hero wearing `worn` (place -> EquipDef).
+static func muzzle_of(worn: Dictionary, anim: StringName, face: int) -> Variant:
+	var weapon: EquipDef = worn.get(&"weapon")
+	var move := LOOK.resolve(anim, weapon.weapon_kind if weapon else &"")
+	var frame: StringName = MUZZLES.frames.get(move, LOOK.frame_at(move, &"", 0.0))
+	if not LOOK.body.has_animation(frame):
+		return null
+	var at: Variant = MUZZLES.hands.get(frame)
+	for e: EquipDef in [worn.get(&"shield"), weapon]:
+		if e and e.held and e.held.shows(frame) and MUZZLES.points.has(e.id):
+			var pin: Vector4 = e.held.pins[frame]
+			var k := float(e.held.sizes.get(frame, 1.0))
+			# turned and sized the way the piece is drawn (_place), in his frame's pixels
+			at = Vector2(pin.x, pin.y) + ((MUZZLES.points[e.id] as Vector2) - e.held.anchor).rotated(deg_to_rad(pin.z)) * k
+			break
+	if at == null:
+		return null
+	var size := LOOK.body.get_frame_texture(frame, 0).get_size()
+	var texel := TDStage.TEXEL / TDStage.frames_density(LOOK.body)
+	return Vector2(((at as Vector2).x - size.x / 2.0) * face, (at as Vector2).y - size.y) * texel
 
 ## Sets every layer up for `frame` facing `face` in `worn`: which picture it shows, turned,
 ## sized and mirrored, and where it sits from his feet (_offsets).

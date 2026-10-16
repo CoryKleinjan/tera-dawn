@@ -1,0 +1,33 @@
+{
+  "source": "art/source/boss_molten_king_fix_recover.png",
+  "save": false,
+  "out_dir": "art/build/boss_molten_king_fix_recover",
+  "cells": [
+    [
+      "charge_recover",
+      "",
+      "slam_recover",
+      "",
+      ""
+    ]
+  ],
+  "inset": 4,
+  "scale": 0.23,
+  "detail": 3.47,
+  "grid": {
+    "rows": [
+      0,
+      550
+    ],
+    "cols": [
+      [
+        0,
+        426,
+        432,
+        820,
+        826,
+        1200
+      ]
+    ]
+  }
+}

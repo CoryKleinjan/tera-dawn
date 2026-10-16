@@ -33,7 +33,11 @@ then character select shows the list (name, level and job) with the new characte
   ticked (held pieces fit any pose). Held pieces gain or lose that frame's pin; worn
   layers and his parts record it in `frame_art` (frame -> the frame whose painting shows there,
   or "" when deleted), and an added piece shows even where the stack
-  would leave it off (hair under a hat, fists with no weapon out). A character has no picked appearance
+  would leave it off (hair under a hat, fists with no weapon out). Shots (arrows, bullets,
+  stars, spells) leave from `HeroBody.muzzle`: the muzzle of the held piece showing on the
+  frame the shot leaves on (`data/hero/muzzles.tres`, `MuzzleSetDef`: a point per piece in its
+  painting, the shot frame per move, and a shooting fist per frame for when the weapon isn't
+  placed there). M in the editor sets them; the held files stay as placed. A character has no picked appearance
   yet; older saves that carry one still load.
 - **One body for every hero**: your hero (`TDPlayer`) and other players' (`TDAvatar`) each
   work out what they are doing (from your keys, or from the snapshot: an animation name such

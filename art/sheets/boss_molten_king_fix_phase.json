@@ -1,0 +1,33 @@
+{
+  "source": "art/source/boss_molten_king_fix_phase.png",
+  "save": false,
+  "out_dir": "art/build/boss_molten_king_fix_phase",
+  "cells": [
+    [
+      "phase1",
+      "",
+      "phase2",
+      "",
+      ""
+    ]
+  ],
+  "inset": 4,
+  "scale": 0.2375,
+  "detail": 3.47,
+  "grid": {
+    "rows": [
+      0,
+      550
+    ],
+    "cols": [
+      [
+        0,
+        423,
+        429,
+        853,
+        859,
+        1200
+      ]
+    ]
+  }
+}

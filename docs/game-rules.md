@@ -232,6 +232,10 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
   that fits the distance, in a set order players can learn, aim where the player is heading,
   leap to the player's platform, chain a charge or pounce into a slam, and get a second wind at
   half HP (faster, each move followed straight away by the next). In co-op they go for whoever has hurt them most lately.
+- Bosses look and move a step above normal monsters: each move has a two-frame wind-up, a
+  two-frame strike and a recovery pose; they roar an intro when they first see a player and
+  roar again at their second wind; their defeat is a painted fall (hit pause, collapse, embers
+  fading) rather than a quick poof. Molten King has this first; the others follow as painted.
 - Max level is 100; monsters and maps reach about Lv 30 so far. Monster HP is 40% lower than first
   tuned and EXP needed per level is halved (monster and quest EXP unchanged), so early levels go
   fast; about 40 hours to Lv 35 was only a starting reference.

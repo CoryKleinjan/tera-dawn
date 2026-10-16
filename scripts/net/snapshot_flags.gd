@@ -31,6 +31,8 @@ const MOB_AIRBORNE := 8192
 const MOB_TOSSED := 16384
 ## Lying knocked down after a throw or a slam: clients show it knocked down.
 const MOB_FLOORED := 32768
+## A boss roaring on the spot (its intro, or its second wind): clients play the roar.
+const MOB_ROARING := 65536
 
 # ---------- players (SimPlayer.snapshot, read by TDAvatar) ----------
 const PLAYER_FAINTED := 1

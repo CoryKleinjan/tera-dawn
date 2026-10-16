@@ -287,6 +287,51 @@ func _run() -> void:
 		Input.action_release("quick_1")
 		await _physics(5)
 		await _shot("ranged")
+	if only == "muzzles":
+		# Each ranged job's shot held still where it leaves, on the frame it leaves on (not in
+		# the full run): `_old` from the chest as it used to, `_new` from the bow, the pistol's
+		# barrel, the star in his hand or the wand's tip (HeroBody.muzzle).
+		await _go(&"greenbough", 900)  # a town: nothing to hit
+		for job: Array in [[&"archer", &"hunters_bow", &"", &"bow_shot"], [&"pirate", &"deckhand_scimitar", &"deckhand_pistol", &"broadside"],
+				[&"thief", &"footpad_dagger", &"footpad_star", &"star_scatter"], [&"mage", &"novice_wand", &"novice_tome", &"fire_burst"]]:
+			for c: Character in [ch, Game.me]:
+				c.job = Content.job(job[0])
+				c.equipment.take(&"weapon")
+				c.equipment.take(&"shield")
+				c.equipment.put(&"weapon", ItemStack.exact(Content.item(job[1])))
+				if job[2] != &"":
+					c.equipment.put(&"shield", ItemStack.exact(Content.item(job[2])))
+			_me().dirty_character = true
+			await _physics(150)  # the job's ribbon and light fade
+			var skill: SkillDef = Content.skill(job[3])
+			var weapon: EquipDef = Game.me.equipment.defs().get(&"weapon")
+			var move := HeroBody.LOOK.resolve(skill.animation, weapon.weapon_kind)
+			var frame: StringName = HeroBody.MUZZLES.frames.get(move, HeroBody.LOOK.frame_at(move, &"", 0.0))
+			var spec: Dictionary = HeroBody.LOOK.animations[move]
+			var ticks := int(((spec["frames"] as Array).find(frame) + 0.4) / float(spec["fps"]) * 60.0)
+			for way in ["old", "new"]:
+				p = world.player
+				_teleport(world, Vector2(900, world.map.ground_y))
+				p.face = 1
+				p.scene_pose = skill.animation
+				await _frames(2)
+				p.body._since = Engine.get_physics_frames() - ticks  # straight to the shot's frame
+				await _frames(1)
+				var feet := p.position
+				var from := feet + Vector2(0, -TDPlayer.CHEST) + Vector2(20, -2)
+				if way == "new":
+					from = feet + (p.body.muzzle(skill.animation, 1) as Vector2)
+				var shot := TDProjectile.create(world, skill.projectile, from, from + Vector2(400, 0), 100000, null, Callable())
+				world.fx_layer.add_child(shot)
+				shot._sync()
+				var at := world.stage.screen(feet, TDStage.Z_PLAYER)
+				await _shot("muzzle_%s_%s" % [job[0], way])
+				shot.queue_free()
+				p.scene_pose = &""
+				await _physics(5)  # so the next pose starts from its first frame
+				var img := Image.load_from_file("%s/muzzle_%s_%s.png" % [out, job[0], way])
+				var k := img.get_width() / TDWorld.VIEW.x
+				img.get_region(Rect2i(Vector2i((at + Vector2(-90, -150)) * k), Vector2i(Vector2(220, 170) * k))).save_png("%s/muzzle_%s_%s.png" % [out, job[0], way])
 	if only == "" or only == "control":
 		# Each job's monster-control skill in action, on a few monsters of a field's widest
 		# platform with monsters on it.
@@ -577,8 +622,67 @@ func _run() -> void:
 		# A Bramble Boar walking, hopping, using each move and thrown up and knocked down:
 		# frames every few ticks for an animated preview (not in the default run).
 		await _monster_anims(world, args[2] if args.size() > 2 else "bramble_boar")
+	if only == "boss_anims":
+		# A boss's intro roar, each of its moves, its second wind and its fall: frames
+		# every two ticks for an in-game preview video (not in the default run).
+		await _boss_anims(world, args[2] if args.size() > 2 else "molten_king")
 	Net.stop()
 	get_tree().quit()
+
+## Frames of a boss fighting the player on its own map (see "boss_anims"): its intro roar,
+## each of its moves in order, its second wind and its fall, saved as boss_<id>_<nnnn>.png
+## every four ticks (15 a second, real time).
+func _boss_anims(world: TDWorld, id: String) -> void:
+	# one physics tick per drawn frame, so a slow renderer doesn't skip ticks between shots
+	Engine.max_physics_steps_per_frame = 1
+	var def := Content.monster(StringName(id))
+	var sight := def.sight
+	def.sight = 0.0
+	for map_id in Content.maps:
+		if (Content.maps[map_id] as MapDef).spawns.any(func(s: SpawnDef) -> bool: return s.monster == def):
+			Net.server.enter_map(_me(), map_id, 300.0)
+			break
+	await _physics(60)
+	Net.server.scenes.stop(_me())
+	world.scenes.stop()
+	var field: MapInstance = _me().map
+	var mob: SimMob = field.mobs.filter(func(m: SimMob) -> bool: return m.def == def)[0]
+	_me().inv = 1000000
+	var shots := [0]
+	var film := func(ticks: int) -> void:
+		var until: int = Net.server.tick + ticks
+		while Net.server.tick < until:
+			var next: int = Net.server.tick + 4
+			while Net.server.tick < next:
+				await _physics(1)
+			await _shot("boss_%s_%04d" % [id, shots[0]])
+			shots[0] += 1
+	var stand_off := func() -> void:
+		_teleport(world, Vector2(mob.position.x - 230.0, mob.plat.y))
+	# it hasn't seen the player yet, then does and roars
+	_place_mob(mob, mob.plat.x + mob.plat.w * 0.6)
+	stand_off.call()
+	world.snap_camera()
+	await film.call(30)
+	def.sight = sight
+	await film.call(def.intro_ticks + 30)
+	# each move in its order, the player standing off to its left
+	for i in def.moves.size():
+		while mob.moves.busy() or mob.roar_t > 0:
+			await film.call(2)
+		stand_off.call()
+		mob.moves.start(i, _me())
+		await film.call(def.moves[i].windup + def.moves[i].recover + 50)
+	# its second wind at half HP, then its fall
+	while mob.moves.busy():
+		await film.call(2)
+	stand_off.call()
+	mob.health.set_hp(def.max_hp / 2 - 1)
+	await film.call(def.rage_ticks + 40)
+	while mob.moves.busy():
+		await film.call(2)
+	field.kill_mob(mob, _me())
+	await film.call(TDMob.BOSS_DEATH_TICKS + 30)
 
 ## Frames of one monster kind going through every animation it has (see "monster_anims"),
 ## saved as monster_<id>_<nnn>.png. It borrows the moves of every preset family it has

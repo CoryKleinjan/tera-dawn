@@ -1,0 +1,33 @@
+{
+  "source": "art/source/boss_molten_king_death.png",
+  "save": false,
+  "out_dir": "art/build/boss_molten_king_death",
+  "cells": [
+    [
+      "death1",
+      "",
+      "death2",
+      "",
+      ""
+    ]
+  ],
+  "inset": 4,
+  "scale": 0.2175,
+  "detail": 3.47,
+  "grid": {
+    "rows": [
+      0,
+      485
+    ],
+    "cols": [
+      [
+        0,
+        397,
+        403,
+        837,
+        843,
+        1200
+      ]
+    ]
+  }
+}
