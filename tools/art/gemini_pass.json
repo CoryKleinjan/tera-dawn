@@ -19577,6 +19577,32 @@
    ],
    "text": "The base picture is an EMPTY sheet of 8 cells (2 rows of 4, numbered left to right, then top to bottom) on a flat magenta background. Paint ONE new game monster once in every cell, in the pose given for that cell. The monster is a small flying \"Seedwing\", a woodland plant creature from the forest of Greenbough: a round, plump maple-seed pod body about the size of a fist, warm honey-amber and chestnut brown with fine wood-grain texture and a pale cream belly, a cute face on the front of the pod (big glossy dark eyes with bright white eye shines, pink cheek blush, small mouth), a tiny curled green stem and one small fresh green leaf on top of its head, and TWO long thin papery maple-key wings growing from its back in a V (like the twin wings of a real maple seed), translucent leaf-green fading to warm amber at the tips with fine visible veins. No legs, no arms, no feathers, no acorn cap. Painted in the same style as the attached picture: rich warm colours, strong light from the upper left with bright highlights and soft shadow, visible soft painted brush texture at a fairly chunky brush scale, a thin dark plum-brown outline, smooth anti-aliased edges. Never pixel art, never a flat cartoon, never a vector look. Copy ONLY the painting style from the attached picture, never its people, objects, text or background. It is exactly the same creature in every cell (same body, colours, face, leaf and both wings), and the same size in every cell, filling about half of its cell's height. It always faces RIGHT, seen from the side. It flies: every pose floats in the air. Cell 1, HOVER 1: floating in place, both wings raised in a V, happy face. Cell 2, HOVER 2: floating in place a little lower, both wings lowered and spread out sideways, happy face. Cell 3, FLY 1: gliding forward, tilted slightly forward, wings raised. Cell 4, FLY 2: gliding forward, tilted slightly forward, wings level and spread. Cell 5, FLY 3: gliding forward, tilted slightly forward, wings swept down. Cell 6, ATTACK: lunging forward through the air with fierce narrowed eyes and an open mouth, wings flared back. Cell 7, HURT: jolted backward, eyes squeezed shut, wings crumpled forward. Cell 8, DEFEATED: fainted and drooping, tipped over sideways, eyes closed, wings limp and hanging down. Exactly one monster per cell. Do NOT draw dust, speed lines, motion flicks, shadows, ground, grass, sparkles, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching or cut off by the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell. The background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Never a second copy, a ghost, an after-image or a different creature."
   }
+ },
+ {
+  "id": "monanim_seedwing",
+  "prompts": null,
+  "batch": "monster animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "monanim_seedwing.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Monster animations' (Cory 01:17Z 'Yes' to keeping the Seedwing look and painting its swoop and knocked-down sheet, ~$0.07): the Seedwing's animation sheet; reference is cell 1 of mon_seedwing. cells swoop_windup, swoop, knock_down.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x3.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/seedwing_idle.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game\\'s monster \"Seedwing\" once, floating in its idle pose on magenta. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, markings, face, every glowing part, light-mote, gem, flame or other detail it has in its idle pose, the same size as in the first attached picture, the same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different from the others. Every glowing part and detail it has in the first attached picture is there in every cell. It always faces RIGHT, seen from the side, its face turned to the right. Both of its long maple-key wings and its leaf and sprout are there in every cell. It flies: every pose is in the air above the ground line except the knocked-down pose, which lies on it. Where a pose names body parts it does not have (legs, wings, mouth), show the same idea with the body it has. Cell 1, SWOOP WIND-UP: pulled up and back in the air, wings or body drawn back and raised high, ready to dive. Cell 2, SWOOP: diving steeply down and forward through the air, wings or body swept back, head first. Cell 3, KNOCKED DOWN: fallen out of the air and lying flat on its side on the ground line, wings or body limp and spread on the ground, dazed with dizzy swirl eyes and tongue out, still clearly alive (not defeated). Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
  }
 ]
 }
