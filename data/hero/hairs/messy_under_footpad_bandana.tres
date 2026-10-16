@@ -32,7 +32,7 @@ nudges = {
 &"roll2": Vector4(-16.7, 71.2, -135, 0),
 &"sit": Vector4(-3.6, 23.7, -0, 0),
 &"skyward1": Vector4(3.9, 13.9, 20, 0),
-&"skyward2": Vector4(-12, -2.4, -25, 0),
+&"skyward2": Vector4(-13, -2.4, -38, 0),
 &"swing2": Vector4(8.7, 4.6, 15, 0),
 &"swing3": Vector4(19.2, 11.6, 18, 0),
 &"throw1": Vector4(-4.9, 0.7, -3, 0),
