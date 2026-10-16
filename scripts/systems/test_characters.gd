@@ -1,6 +1,6 @@
 class_name TestCharacters
 extends RefCounted
-## Developer-only test characters: one per job with STAT_POINTS stat points bought, wearing the
+## Developer-only test characters: one per job with every stat bought up to STAT, wearing the
 ## best gear that job can wear up to GEAR_TIER, with every skill learned to its highest level
 ## and plenty of Dawnshards and Dawn Essence.
 ## Everything is read from the data, so a new job, skill or piece of gear shows up here with
@@ -27,8 +27,10 @@ const ESSENCE := 5000
 ## The gear tier test characters wear up to (EquipDef.required_level, until gear tiers come
 ## from the maps): the top of the game's content so far.
 const GEAR_TIER := 35
-## Stat points test characters have bought, all told: what a player that far along would.
+## Stat points a player as far along as the content so far would have bought, all told.
 const STAT_POINTS := (GEAR_TIER - 1) * CharacterStats.GROWTH_POINTS
+## Every stat of a test character is bought up to this (or what its gear asks, if more).
+const STAT := 100
 
 ## Whether this build may make and use test characters: never in a release export.
 static func allowed() -> bool:
@@ -55,7 +57,8 @@ static func path_to(job: JobDef) -> Array[JobDef]:
 	return out
 
 ## Makes sure `store` has one test character of every job, making the ones missing, or
-## every one again when `rebuild`. Each one kept is put back in its job's town.
+## every one again when `rebuild`. Each one kept is put back in its job's town, with its stats
+## topped up to STAT.
 static func prepare(store: CharacterStore, rebuild: bool) -> void:
 	var have := {}
 	for n in store.names():
@@ -66,6 +69,9 @@ static func prepare(store: CharacterStore, rebuild: bool) -> void:
 		var kept: Character = have.get(job)
 		if kept and not rebuild:
 			kept.map_id = home_town(job)
+			_buy_stats(kept)
+			kept.recalc()
+			kept.refill()
 			store.save(kept)
 		else:
 			store.save(build(kept.name if kept else _free_name(store, job), job))
@@ -235,20 +241,18 @@ static func _wear_best_gear(c: Character) -> void:
 
 # ---------- stats and skills ----------
 
-## Buys stats up to STAT_POINTS: first whatever the worn gear still asks for, then the rest
-## the Auto button's way (the job's damage stats, the cheaper first).
+## Buys every stat up to STAT, or up to what the worn gear asks for when that's more. Stats
+## already that high stay as they are.
 static func _buy_stats(c: Character) -> void:
+	var want := {}
+	for stat in StatBlock.BASE:
+		want[stat] = STAT
 	for s: ItemStack in c.equipment.worn.values():
 		var reqs := s.equip_def().requirements()
-		for stat in StatBlock.BASE:
-			grant_stat(c, stat, int(reqs.get(stat, 0)) - c.stats.value(stat))
-	var stats := c.job.damage_stats()
-	while c.ap.spent() < STAT_POINTS:
-		var next: StringName = stats[0]
-		for stat in stats:
-			if c.ap.price(stat) < c.ap.price(next):
-				next = stat
-		grant_stat(c, next, 1)
+		for stat in reqs:
+			want[stat] = maxi(want[stat], reqs[stat])
+	for stat: StringName in want:
+		grant_stat(c, stat, want[stat] - c.base.value(stat))
 
 ## Every skill of the job line at its highest level, learned in an order its requirements
 ## allow, so new skills go on the quickslots as they would for a player.
