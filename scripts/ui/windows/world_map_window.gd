@@ -91,7 +91,7 @@ static func capital_pos(r: RegionDef) -> Vector2:
 func open_zone(region: StringName) -> void:
 	zone = region
 	var r: RegionDef = Content.regions.get(region)
-	title = "World Map" if r == null else "World Map  ·  %s%s" % [r.display_name, "  (%s)" % r.level_text if r.level_text != "" else ""]
+	title = "World Map" if r == null else "World Map  ·  %s" % r.display_name
 	hovered = &""
 	hovered_region = &""
 	queue_redraw()
@@ -134,8 +134,6 @@ func _draw_world() -> void:
 			var at := to_screen(r.label_pos)
 			var col := Palette.SUN if r.id == hovered_region else r.color.lightened(0.45)
 			DrawUtil.text(self, Game.num_font, at, r.display_name, 15, col, 0, 5, Palette.NIGHT)
-			if r.level_text != "":
-				DrawUtil.text(self, Game.ui_font, at + Vector2(0, 14), r.level_text, 11, Palette.MIST, 0, 4, Palette.NIGHT)
 	_draw_region_info(Content.regions.get(hovered_region))
 
 ## A route between regions or a path between a zone's maps, kept light so it doesn't cover
@@ -186,8 +184,6 @@ func _draw_region_info(r: RegionDef) -> void:
 	var name := r.display_name + ("  ·  " + city.display_name if city else "")
 	DrawUtil.text(self, Game.num_font, Vector2(INFO_X, y), name, 16, Palette.SUN, 1, 4, Palette.NIGHT)
 	var bits := []
-	if r.level_text != "":
-		bits.append(r.level_text)
 	var ways := []
 	for route in WorldRoutes.routes_of(r.id):
 		var other: RegionDef = Content.regions.get(WorldRoutes.other_end(route, r.id))
@@ -312,8 +308,6 @@ func _draw_info(m: MapDef) -> void:
 	var bits := []
 	if r:
 		bits.append(r.display_name)
-	if m.level_text != "" and not m.town:
-		bits.append(m.level_text)
 	if m.id == _here():
 		bits.append("You are here")
 	var ways := []
@@ -325,11 +319,11 @@ func _draw_info(m: MapDef) -> void:
 		bits.append("Leads to " + ", ".join(ways))
 	DrawUtil.text(self, Game.ui_font, Vector2(INFO_X, y + 18), "  ·  ".join(bits), 12, Palette.MIST, 1, 3, Palette.NIGHT)
 
-## The screen area a region's name (and level range) covers, for keeping dots off it.
+## The screen area a region's name covers, for keeping dots off it.
 func label_rect(r: RegionDef) -> Rect2:
 	var at := to_screen(r.label_pos)
-	var w := maxf(DrawUtil.text_width(Game.num_font, r.display_name, 15), DrawUtil.text_width(Game.ui_font, r.level_text, 11))
-	return Rect2(at.x - w / 2.0, at.y - 12, w, 16 if r.level_text == "" else 30)
+	var w := DrawUtil.text_width(Game.num_font, r.display_name, 15)
+	return Rect2(at.x - w / 2.0, at.y - 12, w, 16)
 
 func _click(at: Vector2, button: int, _double: bool) -> void:
 	if button == MOUSE_BUTTON_RIGHT and zone != &"":

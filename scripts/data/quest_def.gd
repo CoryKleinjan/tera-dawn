@@ -10,8 +10,10 @@ extends Resource
 @export var turn_in: StringName
 
 @export_group("Who can take it")
+## The tuning tier it's made for; not checked and never shown (there are no levels in the
+## game). Content tests use it to keep quests near their monsters.
 @export var min_level := 1
-## 0 for no limit.
+## Not checked any more; 0 for no limit.
 @export var max_level := 0
 ## Job ids that may take it; empty for anyone.
 @export var jobs: Array[StringName] = []

@@ -62,7 +62,7 @@ func check() -> void:
 	await _tap("loot")
 	await _ticks(3)
 	_check(ch.book.cards(dew) == CardDef.SET and Game.me.book.complete(dew), "picking up a card fills in the book")
-	_check(ch.book.level() == 2 and ch.stats.strength == strength + 1, "completed pages raise the book's level and your stats")
+	_check(ch.book.rank() == 2 and ch.stats.strength == strength + 1, "completed pages raise the book's rank and your stats")
 	_check(ch.achievements.has("first_hunt") and ch.achievements.has("first_page") and Game.me.achievements.has("first_page"), "kills and pages earn achievements")
 	await _press("collection")
 	var book: TDCollectionWindow = world.hud.windows["collection"]

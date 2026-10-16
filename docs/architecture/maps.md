@@ -24,7 +24,7 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
    of the screen (`display_name`); nothing labels a map out in the world.
 5. Place it in the world: its `region` (a **RegionDef** in `data/regions/`), `world_pos` on
    the world map (pixels of the painting, `TDWorldMapWindow.WORLD`, inside its region's
-   `zone_rect`), `level_text`, and either `town = true` or the
+   `zone_rect`), `level_text` (a hidden tuning tier, never shown), and either `town = true` or the
    `return_map` where fainting and Return Scrolls send you.
 6. Optionally give it an `intro_scene`, a cutscene played the first time a character arrives
    (see [cutscenes](cutscenes.md)).
@@ -72,9 +72,8 @@ The same NpcDef can stand in several maps (Brin is in every town).
 
 Travel NPCs (ships, wagons) list **TravelRoute**s in `NpcDef.travel` (destination, arrival x,
 fare, "Ship"/"Wagon"); their dialogue offers "Travel" and `ServerTravel.on_travel` moves the
-player, charging `TravelRoute.price` (everyone pays the same fare). Each trip's label also shows the
-destination's `MapDef.level_text` unless it's a town ("Wagon to Fern Hollow (Lv. 6-12,
-150 Dawnshards)", `TDDialogueWindow.travel_label`). A **UseDef** with `teleport` set to a map id, or to `town`, is a return scroll.
+player, charging `TravelRoute.price` (everyone pays the same fare). Each trip's label shows the
+destination and fare ("Wagon to Fern Hollow (150 Dawnshards)", `TDDialogueWindow.travel_label`). A **UseDef** with `teleport` set to a map id, or to `town`, is a return scroll.
 
 The content tests (`tests/content/`) check that every portal points at a real map and every
 spawn at a real platform, so a typo fails a test instead of the game.
