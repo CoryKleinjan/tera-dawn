@@ -106,12 +106,15 @@ spawn at a real platform, so a typo fails a test instead of the game.
 A **BiomeDef** is the look shared by many maps: sky and light colours, ground and platform
 textures, parallax backdrop layers (`BackdropLayerDef`: a tiled strip, scattered pieces, or one
 painted `PICTURE` stretched just wide enough to cover the view from either end of the map and
-left out of the fog, all at a depth nearer than `TDStage.FAR`), random decoration (`DecorDef`), lantern and portal art. A new region of the
+left out of the fog, all at a depth nearer than `TDStage.FAR`), random decoration (`DecorDef`), lantern and portal art, and
+optional leaves hanging into the screen's top corners (`frame_left` / `frame_right`, drawn as tall as the screen by
+`CornerFrame`, over the world and under the HUD, like Hollow Knight's foreground plants). A new region of the
 world is usually a new biome plus a few maps that use it.
 
 Each region has **one** biome (its style); its fields differ within it. A field keeps its region's `biome` and sets a **BiomeVariantDef** as `MapDef.variant`: only
 what this sub zone changes (sky, light, fog colour and haze, colour grade, hidden backdrop
-layers, extra backdrop layers, hidden or extra ground scenery). `MapDef.look()` is the biome with the variant applied; the
+layers, extra backdrop layers, hidden or extra ground scenery, no edge tufts or platform plants for land painted with its
+own grass, its own land pieces and corner leaves). `MapDef.look()` is the biome with the variant applied; the
 world builders read `look()`, never `biome`. Towns usually use the plain biome; Dawnharbor's
 variant swaps the harbour strips for one painted picture (the clouds stay). `tests/screenshot.gd`
 with `subzones` renders every field for a side-by-side look.
