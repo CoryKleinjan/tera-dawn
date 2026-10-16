@@ -347,15 +347,12 @@ func _build_video() -> Control:
 	page.add_child(switches)
 	for box in [vsync_box, bloom_box, fog_box, ao_box, shadow_box, dof_box, shake_box]:
 		switches.add_child(box)
-	var hint := UiBuild.label("A lower render scale, or turning off ambient occlusion, depth of field or shadows, helps slower computers.", 12, Palette.MUTED)
-	page.add_child(hint)
+	var tip := "A lower render scale, or turning off ambient occlusion, depth of field or shadows, helps slower computers."
 	# a computer without Vulkan runs the simpler renderer, which has no ambient occlusion or
-	# depth of field
+	# depth of field: say so rather than show switches that do nothing
 	if RenderingServer.get_current_rendering_method() == "gl_compatibility":
-		var simple := UiBuild.label("This computer is using the simpler renderer: ambient occlusion and depth of field are off. Updating the graphics driver (for Vulkan) brings them back.", 12, Palette.MUTED)
-		simple.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		simple.custom_minimum_size.x = 560
-		page.add_child(simple)
+		tip = "This computer is using the simpler renderer (no Vulkan), so ambient occlusion and depth of field are off."
+	page.add_child(UiBuild.label(tip, 12, Palette.MUTED))
 	return page
 
 func _video_toggle(text: String, property: String) -> CheckBox:

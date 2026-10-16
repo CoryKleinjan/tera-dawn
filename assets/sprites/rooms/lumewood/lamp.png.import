@@ -3,27 +3,28 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://keu1iypiwho6"
-path="res://.godot/imported/lamp.png-96a1f50f6b56e6e28754356b9f032777.ctex"
+path.bptc="res://.godot/imported/lamp.png-96a1f50f6b56e6e28754356b9f032777.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/sprites/rooms/lumewood/lamp.png"
-dest_files=["res://.godot/imported/lamp.png-96a1f50f6b56e6e28754356b9f032777.ctex"]
+dest_files=["res://.godot/imported/lamp.png-96a1f50f6b56e6e28754356b9f032777.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
