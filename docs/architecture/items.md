@@ -14,8 +14,8 @@ From the level, job and stats, `CharacterStats` works out:
   min = max × the job's mastery. Spells use Magic Attack plus power (`magic_attack`).
 - Avoidability (dodging monster touches): gear's, `BASE_AVOID`, and the job's `avoid_growth` a
   level. Weapon and Magic Defense give a chance to block a hit (`Combat.block_chance`); a hit costs
-  1 heart, 2 at `Combat.TWO_HEART_HIT` (`Combat.monster_hit`). Speed and Jump scale movement.
-- Hearts (`CharacterStats.max_hearts`): `START_HEARTS` plus one every `HEART_LEVELS` levels, the
+  1 health segment, 2 at `Combat.TWO_HEART_HIT` (`Combat.monster_hit`). Speed and Jump scale movement.
+- Health segments (`CharacterStats.max_hearts`; "hearts" in code): `START_HEARTS` plus one every `HEART_LEVELS` levels, the
   job's `bonus_hearts`, and one per `HEART_PIECES` heart pieces from gear and runes. Max MP: the
   job's base plus its `mp_growth` times the level, plus gear.
 - Attack Speed (%) shortens cooldowns and swings (`attack_ticks`); Melee and Ranged Damage (%)

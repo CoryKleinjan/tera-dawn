@@ -9,7 +9,7 @@
 script = ExtResource("script")
 id = &"elixir"
 display_name = "Elixir"
-description = "A golden draught of morning light. Heals half your hearts and MP."
+description = "A golden draught of morning light. Heals half your health and MP."
 icon = ExtResource("icon")
 sprite_scale = 0.36
 glow_color = Color(1.0, 0.85, 0.4, 1.0)
