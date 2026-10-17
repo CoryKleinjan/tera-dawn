@@ -70,6 +70,10 @@ const DOOR_GAP := 7.0
 const DOOR_STUB := 6.0
 const DOOR_CORNER := 40.0
 const EXIT_REACH := 22.0
+## An exit's label drawn to shape: how far it lifts above its arrow when the map's edge leaves
+## no room past the tip, and the dark plate it sits on over the rooms.
+const EXIT_LABEL_LIFT := 14.0
+const EXIT_PLATE := Color(0.1, 0.07, 0.04, 0.85)
 ## The you-are-here ring in a room: smaller than on the painting.
 const HERE_IN_ROOM := 7.0
 
@@ -338,8 +342,10 @@ func zone_exits() -> Array:
 			var w := DrawUtil.text_width(Game.ui_font, label, 11)
 			var at := to - dir * 14.0 + Vector2(0, 4)
 			if shaped():
-				# past the arrow's tip, clear of the rooms
+				# past the arrow's tip, or above the arrow when the map's edge leaves no room there
 				at = to + Vector2(dir.x * (w / 2.0 + 4.0), dir.y * 12.0 + 4.0)
+				if absf(clampf(at.x, a.position.x + w / 2.0 + 4, a.end.x - w / 2.0 - 4) - at.x) > 1.0:
+					at.y -= EXIT_LABEL_LIFT
 			at.x = clampf(at.x, a.position.x + w / 2.0 + 4, a.end.x - w / 2.0 - 4)
 			at.y = clampf(at.y, a.position.y + 14, a.end.y - 6)
 			out.append({"map": inside.id, "region": other.id, "by": route.by, "from": from, "to": to, "label": label, "label_at": at})
@@ -557,6 +563,8 @@ func _draw_shaped_zone() -> void:
 	for m: MapDef in rooms:
 		_draw_room_name(m)
 	for exit in zone_exits():
+		var w := DrawUtil.text_width(Game.ui_font, exit.label, 11)
+		draw_rect(Rect2(exit.label_at - Vector2(w / 2.0 + 4.0, 13), Vector2(w + 8.0, 18)), EXIT_PLATE)
 		DrawUtil.text(self, Game.ui_font, exit.label_at, exit.label, 11, TRIP, 0, 4, Palette.NIGHT)
 	var here: MapDef = Content.maps.get(_here())
 	if here and here.region == zone:

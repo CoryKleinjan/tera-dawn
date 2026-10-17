@@ -158,8 +158,8 @@ update this page when one changes. Each zone's own look and music are in
   loop through, each with 2 to 4 exits, and more rooms hide behind secrets: fake walls you walk
   through, breakable walls and shortcuts. Shortcuts open one way until you find them, then work
   both ways.
-- Every field has two secret ledges only a job's movement skill reaches (a small room, up to 2400
-  px wide, one): a high one (Flash Jump, Blink) or a far one across a gap (every movement skill).
+- Every field has two secret ledges only a job's movement skill reaches (a small room has one):
+  a high one (Flash Jump, Blink) and a far one across a gap (every movement skill).
   Each holds a chest a character opens once (shards, potions, a 60% scroll, a local Monster Book
   card). Secret ledges and shortcuts stay off the minimap; the zone map shows them once found.
 - Characters, NPCs, ropes and ladders draw in front of land; characters cast no shadows. Portals draw in front of land and
