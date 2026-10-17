@@ -9,7 +9,7 @@
 script = ExtResource("1_use_def")
 id = &"honey_bun"
 display_name = "Honey Bun"
-description = "A sticky Greenbough bun. Heals 3 hearts."
+description = "A sticky Greenbough bun. Heals 3 health."
 icon = ExtResource("2_honey_bun")
 sprite_scale = 0.36
 glow_color = Color(0.878431, 0.627451, 0.313725, 1.0)

@@ -87,15 +87,15 @@ func test_jump_multiplier_and_caps() -> void:
 
 func test_hearts_and_mp_grow_with_level_and_gear() -> void:
 	var j := fx.job()  # MP 20 + 5 a level
-	check_eq(CharacterStats.max_hearts(j, 1, StatBlock.new()), 3, "three hearts at level 1")
-	check_eq(CharacterStats.max_hearts(j, 0, StatBlock.new()), 3, "never below level 1")
-	check_eq(CharacterStats.max_hearts(j, 19, StatBlock.new()), 3, "still three at level 19")
-	check_eq(CharacterStats.max_hearts(j, 20, StatBlock.new()), 4, "one more every 20 levels")
-	check_eq(CharacterStats.max_hearts(j, 100, StatBlock.new()), 8, "eight at level 100")
-	check_eq(CharacterStats.max_hearts(j, 1, UnitHelpers.stats({"heart_pieces": 3})), 3, "three pieces aren't a heart")
-	check_eq(CharacterStats.max_hearts(j, 1, UnitHelpers.stats({"heart_pieces": 4})), 4, "four pieces make a heart")
+	check_eq(CharacterStats.max_hearts(j, 1, StatBlock.new()), 5, "five segments at level 1")
+	check_eq(CharacterStats.max_hearts(j, 0, StatBlock.new()), 5, "never below level 1")
+	check_eq(CharacterStats.max_hearts(j, 19, StatBlock.new()), 5, "still five at level 19")
+	check_eq(CharacterStats.max_hearts(j, 20, StatBlock.new()), 6, "one more every 20 levels")
+	check_eq(CharacterStats.max_hearts(j, 100, StatBlock.new()), 10, "ten at level 100")
+	check_eq(CharacterStats.max_hearts(j, 1, UnitHelpers.stats({"heart_pieces": 3})), 5, "three pieces aren't a segment")
+	check_eq(CharacterStats.max_hearts(j, 1, UnitHelpers.stats({"heart_pieces": 4})), 6, "four pieces make a segment")
 	j.bonus_hearts = 1
-	check_eq(CharacterStats.max_hearts(j, 1, StatBlock.new()), 4, "the job's bonus heart")
+	check_eq(CharacterStats.max_hearts(j, 1, StatBlock.new()), 6, "the job's bonus segment")
 	check_eq(CharacterStats.max_mp(j, 1, StatBlock.new()), 25, "MP at level 1")
 	check_eq(CharacterStats.max_mp(j, 30, UnitHelpers.stats({"max_mp": 5})), 175, "MP at level 30, with gear")
 

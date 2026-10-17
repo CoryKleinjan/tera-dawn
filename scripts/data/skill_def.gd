@@ -176,7 +176,7 @@ func mp_guard_at(level: int) -> float:
 
 ## "1 heart", "2 hearts".
 static func hearts_text(n: int) -> String:
-	return "%d heart%s" % [n, "" if n == 1 else "s"]
+	return "%d health" % n
 
 ## `base` grown by `per` for every level above 1 (0 when the skill isn't learned).
 static func grown(base: float, per: float, level: int) -> float:
@@ -279,11 +279,11 @@ func describe_level(level: int) -> PackedStringArray:
 	for f in s.nonzero():
 		out.append("%s %s" % [StatBlock.LABELS[f], StatBlock.format(f, s.value(f))])
 	if regen_hp_at(level) > 0:
-		out.append("Heart recovery +%d" % regen_hp_at(level))
+		out.append("Health recovery +%d" % regen_hp_at(level))
 	if regen_mp_at(level) > 0:
 		out.append("MP recovery +%d" % regen_mp_at(level))
 	if mp_guard_at(level) > 0.0:
-		out.append("%d%% chance a hit costs MP instead of a heart" % roundi(mp_guard_at(level) * 100))
+		out.append("%d%% chance a hit costs MP instead of health" % roundi(mp_guard_at(level) * 100))
 	if steady:
 		out.append("No knockback")
 	if hide:
