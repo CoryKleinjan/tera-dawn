@@ -44,7 +44,7 @@ func test_typical_buys_its_tiers_points() -> void:
 			spent += c.base.value(s) - start.value(s)
 		check_eq(spent, 19 * CharacterStats.GROWTH_POINTS, "%s buys a tier's points for every tier past 1" % j)
 		check_eq(c.ap.spent(), spent, "%s: the points count as bought" % j)
-		check_eq(Balance.tier(c), 20, "%s is back at tier 20" % j)
+		check_eq([c.level, Balance.tier(c)], [20, 20], "%s is level 20, tier 20" % j)
 		var main := StringName(c.job.primary_stat)
 		check(c.base.value(main) - start.value(main) >= spent / 2, "%s puts most into the main stat" % j)
 
@@ -72,10 +72,8 @@ func test_main_attack_is_known_to_the_job() -> void:
 		check_between(attack[1], 1, s.max_level, "%s skill level" % j)
 
 func test_kills_per_tier() -> void:
-	# tier 1's points are the first GROWTH_POINTS points of one stat
-	var cost := 0
-	for n in CharacterStats.GROWTH_POINTS:
-		cost += CharacterStats.stat_price(n)
+	# a tier is a level's EXP, and a monster gives as much EXP as essence
+	var cost := CharacterStats.xp_need(1)
 	var m := MonsterDef.new()
 	m.essence = cost
 	check_near(Balance.kills_per_tier(1, m), 1.0, "one kill pays for tier 1")

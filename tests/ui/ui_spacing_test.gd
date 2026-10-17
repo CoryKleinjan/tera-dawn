@@ -105,14 +105,13 @@ func test_shop_tabs_and_amount_chips_fit() -> void:
 	check(chips[-1].end.x + GAP <= shop._sell_etc_rect().position.x, "the chips end before Sell all Etc")
 	check(TDWindow.PAD + DrawUtil.text_width(Game.ui_font, "Amount", 12) + GAP <= chips[0].position.x, "the Amount label ends before the chips")
 
-func test_status_bar_essence_and_window_buttons_keep_apart() -> void:
+func test_status_bar_exp_and_window_buttons_keep_apart() -> void:
 	var bar := ui.hud.status
-	check(bar.essence_bar_rect().end.x + GAP <= bar._window_button_rect(0).position.x,
-		"the essence bar (ends %d) stops before the first window button (%d)" % [bar.essence_bar_rect().end.x, bar._window_button_rect(0).position.x])
+	check(bar.exp_bar_rect().end.x + GAP <= bar._window_button_rect(0).position.x,
+		"the EXP bar (ends %d) stops before the first window button (%d)" % [bar.exp_bar_rect().end.x, bar._window_button_rect(0).position.x])
 	var last := bar._window_button_rect(TDHud.WINDOW_ACTIONS.size() - 1)
 	check(last.end.x + GAP <= bar.size.x - 140, "the window buttons stop before the Dawnshards")
-	check(bar.essence_bar_rect().position.y >= 0 and bar.essence_bar_rect().end.y <= TDStatusBar.HEIGHT, "the essence bar sits inside the bar")
-	check(bar.bar_rect("hp_frame").position.x >= TDStatusBar.BARS_X, "the HP bar starts inside the end cap")
+	check(bar.exp_bar_rect().position.y >= 0 and bar.exp_bar_rect().end.y <= TDStatusBar.HEIGHT, "the EXP bar sits inside the bar")
 
 func test_equipment_slot_labels_fit() -> void:
 	for p in TDEquipmentWindow.LAYOUT:

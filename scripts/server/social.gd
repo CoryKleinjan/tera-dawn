@@ -19,7 +19,7 @@ const GUILD_COST := 15000
 const FAME_REPEAT_DAYS := 30
 const TRADE_SLOTS := 9
 const CHAT_MAX := 120
-## Share of a kill's Dawn Essence every other party member on the map gets.
+## Share of a kill's Dawn Essence and EXP every other party member on the map gets.
 const PARTY_SHARE := 0.4
 ## Ticks an invitation waits for an answer.
 const INVITE_TICKS := 3600

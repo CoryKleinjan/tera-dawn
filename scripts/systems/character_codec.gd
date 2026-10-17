@@ -10,7 +10,7 @@ const STAT_RULES := 1
 
 static func to_dict(c: Character) -> Dictionary:
 	return {
-		"name": c.name, "essence": c.essence, "shards": c.shards, "map_id": c.map_id,
+		"name": c.name, "level": c.level, "xp": c.xp, "essence": c.essence, "shards": c.shards, "map_id": c.map_id,
 		"job": c.job.id, "came_from": String(c.came_from), "base": c.base.to_dict(), "jobs_passed": c.jobs_passed.duplicate(),
 		"stat_rules": STAT_RULES,
 		"hp": c.health.hp, "mp": c.mp,
@@ -35,6 +35,8 @@ static func _string_keys(d: Dictionary) -> Dictionary:
 ## out).
 static func load_dict(c: Character, data: Dictionary) -> void:
 	c.name = str(data.get("name", c.name))
+	c.level = clampi(int(data.get("level", c.level)), 1, Character.MAX_LEVEL)
+	c.xp = maxi(0, int(data.get("xp", c.xp)))
 	c.essence = maxi(0, int(data.get("essence", c.essence)))
 	c.shards = maxi(0, int(data.get("shards", c.shards)))
 	var m := StringName(str(data.get("map_id", c.map_id)))
@@ -108,7 +110,12 @@ static func load_dict(c: Character, data: Dictionary) -> void:
 		for k in data["counters"]:
 			c.counters[str(k)] = int(data["counters"][k])
 	if not data.has("essence"):
-		_essence_from_levels(c, data)
+		_essence_from_points(c, data)
+	elif not data.has("level"):
+		# a save from the days without levels: a level for every GROWTH_POINTS stat points it
+		# bought, counted before any refund below
+		c.level = mini(Character.MAX_LEVEL, 1 + c.ap.spent() / CharacterStats.GROWTH_POINTS)
+		c.xp = 0
 	if not data.has("jobs_passed"):
 		# a save from before job switching: the jobs it advanced through count as passed
 		for id in c.job_path():
@@ -118,15 +125,17 @@ static func load_dict(c: Character, data: Dictionary) -> void:
 	if refund:
 		# the stat rules changed since this was saved: the essence of every stat point back
 		c.ap.refund_all()
+	if c.at_max_level():
+		c.xp = 0
 	c.recalc()
 	c.health.set_hp(maxi(1, int(data.get("hp", c.max_hp()))))
 	c.mp = clampi(int(data.get("mp", c.max_mp())), 0, c.max_mp())
 
-## A save from before Dawn Essence (it had a level, EXP and points to spend): the stats and
-## skills it bought stay, and its EXP and unspent points become essence, each point worth
-## what the next one would cost now.
-static func _essence_from_levels(c: Character, data: Dictionary) -> void:
-	c.essence = maxi(0, int(data.get("xp", 0)))
+## A save from before Dawn Essence (it had a level, EXP and points to spend): its level, EXP
+## and the stats and skills it bought stay, and its unspent points become essence, each point
+## worth what the next one would cost now.
+static func _essence_from_points(c: Character, data: Dictionary) -> void:
+	c.essence = 0
 	var main := StringName(c.job.primary_stat)
 	var stat_bought := c.ap.bought(main)
 	for n in maxi(0, int(data.get("ap", 0))):

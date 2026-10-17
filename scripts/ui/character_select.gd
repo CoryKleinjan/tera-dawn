@@ -156,7 +156,7 @@ func _fill_slot(b: Button, c: Dictionary) -> void:
 		b.tooltip_text = "Make a new character here"
 		return
 	title.text = c["name"]
-	line.text = str(c["job"])
+	line.text = "Lv %d %s" % [int(c.get("level", 1)), c["job"]]
 	b.tooltip_text = ""
 
 ## One of the buttons along the bottom.

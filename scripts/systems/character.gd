@@ -1,6 +1,6 @@
 class_name Character
 extends RefCounted
-## One character: name, Dawn Essence, job, stats, quickslots, inventory, storage, quests,
+## One character: name, level, EXP, Dawn Essence, job, stats, quickslots, inventory, storage, quests,
 ## Dawnshards, HP, MP, the map they're on and what they've done. Formulas live in
 ## CharacterStats; this only holds and changes state. Three parts keep their own state and
 ## rules: `skills` (SkillBook: skills bought and buffs), `ap` (AbilityPoints: stats bought)
@@ -24,8 +24,14 @@ const QUICKSLOTS := 8
 const BASIC_ATTACK := &"basic_attack"
 ## What a storage keeper charges to store one stack.
 const STORE_FEE := 10
+## The level cap: EXP stops here.
+const MAX_LEVEL := 100
 
 var name := ""
+## Levels come from EXP (monsters and quests give it); each one raises Max HP and MP by the
+## job's growth (CharacterStats.max_hp).
+var level := 1
+var xp := 0
 ## Unspent Dawn Essence: monsters and quests give it, stats and skills cost it.
 var essence := 0
 var shards := 0
@@ -125,10 +131,10 @@ func refill() -> void:
 	mp = max_mp()
 
 func max_hp() -> int:
-	return CharacterStats.max_hp(job, ap.spent(), stats)
+	return CharacterStats.max_hp(job, level, stats)
 
 func max_mp() -> int:
-	return CharacterStats.max_mp(job, ap.spent(), stats)
+	return CharacterStats.max_mp(job, level, stats)
 
 func damage_range() -> Vector2i:
 	return CharacterStats.damage_range(job, stats)
@@ -136,9 +142,32 @@ func damage_range() -> Vector2i:
 func magic_range() -> Vector2i:
 	return CharacterStats.magic_range(job, stats)
 
-## How far the character has grown (see CharacterStats.growth): what HP and MP regen go by.
-func growth() -> float:
-	return CharacterStats.growth(ap.spent())
+## EXP needed to go from level `lvl` (this character's own by default) to the next.
+func xp_need(lvl := -1) -> int:
+	return CharacterStats.xp_need(level if lvl < 0 else lvl)
+
+## Whether the character is at MAX_LEVEL, where EXP stops.
+func at_max_level() -> bool:
+	return level >= MAX_LEVEL
+
+## Adds EXP and returns how many levels were gained; each level up refills HP and MP. At
+## MAX_LEVEL EXP stops (kept at 0).
+func gain_xp(n: int) -> int:
+	if at_max_level():
+		xp = 0
+		return 0
+	xp += maxi(0, n)
+	var gained := 0
+	while not at_max_level() and xp >= xp_need():
+		xp -= xp_need()
+		level += 1
+		gained += 1
+	if at_max_level():
+		xp = 0
+	if gained > 0:
+		recalc()
+		refill()
+	return gained
 
 ## Adds Dawn Essence (from a monster or a quest).
 func gain_essence(n: int) -> void:

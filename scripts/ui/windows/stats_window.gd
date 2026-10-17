@@ -1,6 +1,6 @@
 class_name TDStatsWindow
 extends TDWindow
-## Character info (S): job, HP/MP, unspent Dawn Essence, the four base stats with what gear
+## Character info (S): job, level, EXP, HP/MP, unspent Dawn Essence, the four base stats with what gear
 ## adds and what the next point of each costs, a "+" per stat the essence pays for (and Auto,
 ## once you have a job), and everything the stats work out to in combat.
 
@@ -18,7 +18,7 @@ const COL_RIGHT_VALUE := 98.0
 ## The room kept between a left-hand value and the right-hand column's label.
 const COL_GAP := 8.0
 ## The window's height.
-const BASE_H := 357.0
+const BASE_H := 374.0
 const AUTO_SIZE := Vector2(46, 20)
 
 ## Where the last row ended when the window was last drawn (for checking it fits).
@@ -32,10 +32,11 @@ func _init() -> void:
 func _draw_body() -> void:
 	var s := Game.me.stats
 	var y := 52.0
-	y = _pair(y, ["Job", Game.me.job.display_name],
+	y = _pair(y, ["Job", Game.me.job.display_name], ["Level", str(Game.me.level)])
+	y = _pair(y, ["Guild", Game.me.guild if Game.me.guild != "" else "-"],
 		["Fame", str(Game.me.fame), Palette.GOOD if Game.me.fame > 0 else (Palette.WARN if Game.me.fame < 0 else Palette.MIST)])
 	# the long numbers get a row each, so they line up with the values above
-	y = _row(y, "Guild", Game.me.guild if Game.me.guild != "" else "-")
+	y = _row(y, "EXP", TDStatusBar.MAX_LEVEL_TEXT if Game.me.at_max_level() else "%d / %d" % [Game.me.xp, Game.me.xp_need()])
 	y = _row(y, "HP", "%d / %d" % [Game.me.health.hp, Game.me.max_hp()])
 	y = _row(y, "MP", "%d / %d" % [Game.me.mp, Game.me.max_mp()])
 	y = _divider(y)

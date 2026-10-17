@@ -1,10 +1,9 @@
 class_name Balance
 extends RefCounted
-## Numbers for tuning: a typical character of a job at a tier of progress (stats bought in
-## the job's main stat, the best gear made for that tier from the game's items), and how many
-## hits of their main attack a monster takes. A tier is how far along a player is, measured
-## like the old levels: each one is GROWTH_POINTS stat points bought, and a monster's tier is
-## its MonsterDef.level. tests/balance_report.tscn prints the whole table; the smoke test keeps
+## Numbers for tuning: a typical character of a job at a tier of progress (their level, stats
+## bought in the job's main stat, the best gear made for that tier from the game's items), and
+## how many hits of their main attack a monster takes. A player's tier is their level, and a
+## monster's tier is its MonsterDef.level. tests/balance_report.tscn prints the whole table; the smoke test keeps
 ## every job inside BAND against monsters of its tier.
 
 ## Hits a tier-matched monster should take with the main attack, low to high.
@@ -25,6 +24,7 @@ static func typical(job_id: StringName, tier: int) -> Character:
 	if tier >= 10:
 		c.job = Content.job(job_id)
 	var j := c.job
+	c.level = clampi(tier, 1, Character.MAX_LEVEL)
 	var points := (tier - 1) * CharacterStats.GROWTH_POINTS
 	c.base.set(StringName(j.primary_stat), c.base.value(StringName(j.primary_stat)) + points)
 	c.recalc()
@@ -50,9 +50,9 @@ static func _score(c: Character, e: EquipDef) -> int:
 	return (s.magic_attack + s.intelligence if c.job.primary_stat == "intelligence" else s.attack * 3) \
 		+ s.value(StringName(c.job.primary_stat)) + s.defense / 4
 
-## How far along `c` is (see the top): one tier per GROWTH_POINTS stat points bought.
+## How far along `c` is (see the top): their level.
 static func tier(c: Character) -> int:
-	return 1 + c.ap.spent() / CharacterStats.GROWTH_POINTS
+	return c.level
 
 ## The attack this character would mostly use: the attack skill they could have (at the
 ## skill level their tier pays for) with the most damage per second, or the basic attack.
@@ -90,10 +90,7 @@ static func hits_to_kill(c: Character, m: MonsterDef) -> float:
 	var per_hit := maxf(1.0, _average(c, attack[0], attack[1]))
 	return m.max_hp / per_hit / float(attack[0].hits)
 
-## Kills of a tier-matched monster that pay for one tier (its GROWTH_POINTS stat points, all
-## in one stat, as typical() buys them).
+## Kills of a tier-matched monster it takes to level up once from `tier` (a monster gives as
+## much EXP as Dawn Essence).
 static func kills_per_tier(tier: int, m: MonsterDef) -> float:
-	var cost := 0
-	for n in range((tier - 1) * CharacterStats.GROWTH_POINTS, tier * CharacterStats.GROWTH_POINTS):
-		cost += CharacterStats.stat_price(n)
-	return cost / float(maxi(1, m.essence))
+	return CharacterStats.xp_need(tier) / float(maxi(1, m.essence))
