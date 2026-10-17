@@ -10,11 +10,11 @@ const BAR_TEXT_MIN := 9
 ## How many art pixels of plain groove draw_bar_frame stretches when a bar is drawn wider.
 const BAR_STRETCH := 8.0
 ## Where each bar frame's empty groove is, in art pixels: Rect2(x, y, w, h).
+## The space between two hearts in a row (draw_hearts), as a share of a heart's height.
+const HEART_GAP := 0.08
 const GROOVES := {
-	"hp_frame": Rect2(40, 10, 92, 21),
 	"mp_frame": Rect2(42, 12, 92, 21),
 	"exp_frame": Rect2(28, 9, 124, 12),
-	"social/party_hp_frame": Rect2(10, 8, 164, 11),
 }
 ## The monster HP bar's frame without the emblem painted at its left end, in art pixels of
 ## monster_hp_1: its right end cap and a plain strip of its middle. The left end is the right
@@ -79,12 +79,23 @@ static func bar_groove(frame: String, pos: Vector2, scale: float, extra := 0.0) 
 	var g: Rect2 = GROOVES[frame]
 	return Rect2(pos + g.position * scale, g.size * scale + Vector2(extra, 0))
 
-## Splits a health bar's `groove` into `hearts` equal cells with thin dark marks, so it reads
-## as hearts until the painted heart icons replace it.
-static func draw_heart_marks(ci: CanvasItem, groove: Rect2, hearts: int) -> void:
-	for i in range(1, hearts):
-		var x := roundf(groove.position.x + groove.size.x * i / hearts)
-		ci.draw_line(Vector2(x, groove.position.y), Vector2(x, groove.end.y), Palette.NIGHT, 2.0)
+## A row of `hearts` painted hearts, the first `full` of them full and the rest empty, from the
+## left of `r`: as tall as `r`, or smaller if that many don't fit its width (HEART_GAP apart).
+static func draw_hearts(ci: CanvasItem, r: Rect2, full: int, hearts: int) -> void:
+	if hearts <= 0:
+		return
+	var art := UiSkin.size_of("heart_full")
+	var h := minf(r.size.y, r.size.x / hearts / (art.x / art.y + HEART_GAP))
+	var size := Vector2(art.x / art.y * h, h)
+	var y := r.position.y + (r.size.y - h) / 2.0
+	for i in hearts:
+		var x := r.position.x + i * (size.x + HEART_GAP * h)
+		ci.draw_texture_rect(UiSkin.tex("heart_full" if i < full else "heart_empty"), Rect2(Vector2(x, y), size), false)
+
+## How wide draw_hearts draws `hearts` hearts `h` tall.
+static func hearts_width(hearts: int, h: float) -> float:
+	var art := UiSkin.size_of("heart_full")
+	return hearts * art.x / art.y * h + maxi(0, hearts - 1) * HEART_GAP * h
 
 ## A bar frame drawn `extra` pixels wider than its art: a plain strip from the middle of its
 ## groove stretches, so the painted end caps keep their shape.
@@ -158,17 +169,9 @@ static func draw_quest_marker(ci: CanvasItem, bottom_center: Vector2, kind: Stri
 	var center := bottom_center - Vector2(0, height / 2.0)
 	ci.draw_texture_rect(t, Rect2(center - s / 2.0, s), false)
 
-## A party member's slim health bar (marked into `hearts`), `width` pixels wide with its top left at `pos`. The art has
-## a fill painted in, so the groove is emptied before the real fill goes on.
-static func draw_party_hp(ci: CanvasItem, pos: Vector2, width: float, fraction: float, hearts := 0) -> void:
-	var frame := "social/party_hp_frame"
-	var scale := width / UiSkin.size_of(frame).x
-	var g: Rect2 = GROOVES[frame]
-	ci.draw_texture_rect(UiSkin.tex(frame), Rect2(pos, UiSkin.size_of(frame) * scale), false)
-	var groove := Rect2(pos + g.position * scale, g.size * scale)
-	DrawUtil.round_rect(ci, groove.grow(0.5), groove.size.y / 2.0, Palette.NIGHT)
-	draw_bar_fill(ci, "fill_red", groove, fraction)
-	draw_heart_marks(ci, groove, hearts)
+## A party member's hearts in `r`: `fraction` of their `hearts` full.
+static func draw_party_hearts(ci: CanvasItem, r: Rect2, fraction: float, hearts: int) -> void:
+	draw_hearts(ci, r, roundi(fraction * hearts), hearts)
 
 ## A monster HP bar `width` pixels wide centred above it.
 static func draw_monster_hp(ci: CanvasItem, bottom_center: Vector2, width: float, fraction: float) -> void:

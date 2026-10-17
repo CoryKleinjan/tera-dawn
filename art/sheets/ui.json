@@ -9,12 +9,12 @@
   "cells": [
     [
       "",
-      "hp_frame",
+      "",
       "mp_frame",
       "exp_frame"
     ],
     [
-      "fill_red",
+      "",
       "fill_blue",
       "fill_gold",
       "level_badge"
@@ -52,17 +52,6 @@
       "scale": 0.8504,
       "split_by": "y"
     },
-    "hp_frame": {
-      "blank": [
-        [
-          0,
-          0,
-          212,
-          29
-        ]
-      ],
-      "scale": 0.78
-    },
     "mp_frame": {
       "blank": [
         [
@@ -84,17 +73,6 @@
         ]
       ],
       "scale": 0.909
-    },
-    "fill_red": {
-      "blank": [
-        [
-          0,
-          0,
-          197,
-          28
-        ]
-      ],
-      "scale": 0.7346
     },
     "fill_blue": {
       "blank": [

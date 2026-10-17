@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bb81fpvkomogp"
-path="res://.godot/imported/party_hp_frame.png-52d9756219a9666bbac97f7b715511d7.ctex"
+uid="uid://ba05fwgct6j78"
+path="res://.godot/imported/heart_empty.png-29aa708a9a4ec35596add8cea4ead63c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/ui/social/party_hp_frame.png"
-dest_files=["res://.godot/imported/party_hp_frame.png-52d9756219a9666bbac97f7b715511d7.ctex"]
+source_file="res://assets/sprites/ui/heart_empty.png"
+dest_files=["res://.godot/imported/heart_empty.png-29aa708a9a4ec35596add8cea4ead63c.ctex"]
 
 [params]
 

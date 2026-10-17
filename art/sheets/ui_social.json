@@ -16,7 +16,7 @@
       "online_dot",
       "offline_dot",
       "leader_star",
-      "party_hp_frame"
+      ""
     ],
     [
       "guild_tag",
@@ -120,17 +120,6 @@
           0,
           0,
           191,
-          27
-        ]
-      ]
-    },
-    "party_hp_frame": {
-      "scale": 1.0986,
-      "blank": [
-        [
-          0,
-          0,
-          299,
           27
         ]
       ]

@@ -8,8 +8,10 @@ const TABS := ["Buddies", "Party", "Guild"]
 const LIST_Y := 72.0
 const ROW_H := 30.0
 const ROWS := 8
-## A party row: the member's HP bar, the Kick button, and the space between them.
+## A party row: the member's hearts (at most PARTY_HEART_H tall), the Kick button, and the
+## space between them.
 const PARTY_HP_W := 80.0
+const PARTY_HEART_H := 14.0
 const KICK_W := 38.0
 const BUTTON_GAP := 8.0
 ## Pixels per art pixel of the friend row art, and the middle of its round niche in art pixels.
@@ -77,7 +79,7 @@ func _draw_party() -> void:
 			x = 20.0
 		draw_label(r.position + Vector2(x, 12), m[0], Palette.SUN, 12)
 		draw_label(r.position + Vector2(6, 24), "%s  ·  %s" % [j.display_name if j else "", Content.map(StringName(m[4])).display_name if Content.maps.has(StringName(m[4])) else ""], Palette.MUTED, 10)
-		WorldSkin.draw_party_hp(self, party_hp_rect(r).position, PARTY_HP_W, float(m[3]), int(m[5]) if m.size() > 5 else 0)
+		WorldSkin.draw_party_hearts(self, party_hp_rect(r), float(m[3]), int(m[5]) if m.size() > 5 else 0)
 		var who: String = m[0]
 		if lead and who != Game.me.name:
 			add_button(kick_rect(r), "Kick", func() -> void: Net.ask(&"req_social", [&"kick", who]), true, true)
@@ -91,10 +93,9 @@ func _draw_party() -> void:
 func kick_rect(row: Rect2) -> Rect2:
 	return Rect2(row.end.x - KICK_W - 2, row.position.y + 3, KICK_W, 20)
 
-## Where a party row's HP bar goes: a gap short of the Kick button, whether or not it's there.
+## Where a party row's hearts go: a gap short of the Kick button, whether or not it's there.
 func party_hp_rect(row: Rect2) -> Rect2:
-	var art := UiSkin.tex("social/party_hp_frame")
-	return Rect2(kick_rect(row).position.x - BUTTON_GAP - PARTY_HP_W, row.position.y + 4, PARTY_HP_W, art.get_height() * PARTY_HP_W / art.get_width())
+	return Rect2(kick_rect(row).position.x - BUTTON_GAP - PARTY_HP_W, row.position.y + 4, PARTY_HP_W, PARTY_HEART_H)
 
 func _draw_guild() -> void:
 	var g: Dictionary = Game.social.get("guild", {})

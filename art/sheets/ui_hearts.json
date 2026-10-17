@@ -1,0 +1,11 @@
+{
+ "source": "art/source/ui_hearts.png",
+ "region": [0, 0, 1600, 950],
+ "detail": 1,
+ "scale": 0.09,
+ "alpha": "smooth",
+ "out_dir": "assets/sprites/ui",
+ "cells": [
+  ["heart_full", "heart_empty"]
+ ]
+}
