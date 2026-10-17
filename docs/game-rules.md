@@ -60,12 +60,15 @@ update this page when one changes. Each zone's own look and music are in
   air, hops short when jump is let go early and falls faster than he rises. A full jump keeps its
   height, so every map stays reachable.
 - He walks, never runs, and walks 15% faster after about 0.4 s of moving. No jump sound.
-- No dash for the hero: each job has its own movement skill instead. Warrior Charge (a lunge
-  that only shoves monsters aside, no damage; once per jump in the air too), Thief Flash Jump (a
-  second jump in mid-air), Magician Blink (a teleport the held way, up and down too), Archer
-  Backstep Leap (springs back still facing ahead), Pirate Rolling Dash (a low roll on the ground
-  nothing can hit). Beginners have none. Their effects are code-drawn stand-ins until painted
-  ones are made with Gemini in the same look as every other skill effect.
+- Jobs have no movement skills (Cory Oct 17): bosses unlock moves instead, Hollow Knight
+  style. Each zone boss drops a relic the first time a character beats it, for everyone at the
+  fight, and only they can take theirs. The move is theirs for good on every job, with no
+  level, essence or MP: Grotto Tusker Dash (a flat burst ahead, once per jump in the air; the
+  roll pose), Arcane Sentinel Double Jump (the leap pose), Molten King Slam (Down + Jump in the
+  air drops straight down and breaks cracked floors), Reef Titan Surge (hold Down + Dash on the
+  ground, let go to fly straight ahead; the lunge pose). Elder Treant Wall Jump and Lantern
+  Wraith Glide wait for their poses. The main way never needs a move; secret rooms can. Their
+  effects and the relic icons are stand-ins until painted.
 - Attacks and most attack skills aim: up hits overhead, down (in the air only) hits below. Buffs
   don't aim. A downward melee blow that meets a monster bounces him off it (pogo).
 - He can move while swinging and keeps facing the swing until it ends. Buffs and spells make no
@@ -95,8 +98,8 @@ update this page when one changes. Each zone's own look and music are in
 - Monsters also drop Dawn Essence when they die and it flies to the hero (quests pay it too). It
   buys skill levels only, anywhere, in the skill window; each skill level costs more than the
   last one bought. Menus call it "Dawn Essence".
-- A first job has seven skills: a movement skill, a quick single-target attack, a crowd attack, a
-  self buff, a party buff (reaches party members nearby), a passive and a monster-control skill.
+- A first job has six skills: a quick single-target attack, a crowd attack, a self buff, a party
+  buff (reaches party members nearby), a passive and a monster-control skill.
   Skill levels get dear quickly, so players choose what to leave unmaxed.
 - Monster control, one per job, made to combo: Warrior Skyward Cleave throws monsters in front
   into the air; Magician Gravity Well pulls airborne monsters down, then hits every grounded one
@@ -143,8 +146,8 @@ update this page when one changes. Each zone's own look and music are in
   (Lanternfall), Archer Hunter's set (Greenbough), Pirate Deckhand set (Driftcove). Tests still
   bring their own plain gear (`tests/fixtures/gear`) for what the game doesn't have yet.
 - No upgrade scrolls (Cory Oct 17): gear gets better through enchantments, which are planned
-  (three per piece; boss ones drop only). Specialised boss drops unlock movement skills, the
-  way Hollow Knight unlocks its moves.
+  (three per piece; boss ones drop only). Boss relics unlock moves (see "Movement and combat
+  feel").
 
 ## Weapons
 
@@ -159,7 +162,7 @@ update this page when one changes. Each zone's own look and music are in
   deck, a lookout, a crow's nest, a railed wing) can be stood on too; a ladder painted into one
   is scenery, with invisible steps on its rungs to hop up.
 - No ropes, ladders, vines or climbing anywhere: every place is reached by platforming (jumps,
-  and a job's movement skill for secrets). A climb that used to be there is a run of plain
+  and a boss relic's move for secrets). A climb that used to be there is a run of plain
   platforms, each at most a comfortable jump above the last (Cory, Oct 17). No two exits of a map lead to the same map. Maps can be wide and multi-level.
 - A zone's maps fit together like Hollow Knight's rooms on one zone map (Greenbough first): each
   room its own size, canopy above and roots below, neighbours touching where their doors join
@@ -172,8 +175,8 @@ update this page when one changes. Each zone's own look and music are in
   style), or a key from a chest elsewhere in the zone unlocks it and is used up. Keys can't be
   sold or dropped. Each character opens their own. Gates guard side rooms and shortcuts, never
   the main way.
-- Every field has two secret ledges only a job's movement skill reaches (a small room has one):
-  a high one (Flash Jump, Blink) and a far one across a gap (every movement skill).
+- Every field has two secret ledges only a boss relic's move reaches (a small room has one):
+  a high one (Double Jump) and a far one across a gap (Dash or Surge).
   Each holds a chest a character opens once (shards, potions, a local Monster Book card). Secret ledges and shortcuts stay off the minimap; the zone map shows them once found.
 - Greenbough's fields have no raised land: every ledge is a plain platform with nothing under it
   (no terrace walls).
@@ -302,8 +305,7 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
   4-8 (Y, RB, LB, RT, B), Back opens a window menu, and with a window open a pad cursor stands
   in for the mouse (A click and drag, X right-click, Y double-click, B closes). Key hints name
   the pad's buttons while it's in use.
-- Skill icons are painted NPC-style badges: one bold subject (no people for Shoulder Bash or
-  Rolling Dash) in a thick rounded frame of the job's colour: Beginner warm brown, Warrior
+- Skill icons are painted NPC-style badges: one bold subject (no people for Shoulder Bash) in a thick rounded frame of the job's colour: Beginner warm brown, Warrior
   crimson, Magician blue, Thief charcoal black with silver trim, Archer green, Pirate gold.
 
 ## Audio and travel

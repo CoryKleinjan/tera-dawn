@@ -161,7 +161,7 @@ func test_bad_values_are_clamped_or_ignored() -> void:
 		"buffs": {"t_gone": [1, 50], "t_job": "bad"},
 		"pet": "t_etc", "pet_full": 500, "hp": 0, "mp": 99999,
 	})
-	check_eq(c.essence, 0, "essence floor")
+	check_eq(c.essence, 17, "essence floor, plus what the unknown skill cost")
 	check_eq([c.level, c.xp], [1, 0], "no level from the days without levels")
 	check_eq(c.shards, 0, "shards floor")
 	check_eq(c.map_id, Character.START_MAP, "unknown map: start map")
@@ -178,6 +178,17 @@ func test_bad_paid_values_are_floored() -> void:
 	var c := fx.character()
 	c.load_dict({"job": "t_job", "essence": 0, "skills": {"t_skill": 1}, "skills_paid": {"t_skill": -5}})
 	check_eq(c.skills.paid, {&"t_skill": 0}, "never negative")
+
+func test_a_skill_gone_from_the_game_pays_back_its_essence() -> void:
+	fx.skill()
+	var c := fx.character()
+	c.load_dict({"job": "t_job", "essence": 10, "skills": {"t_skill": 1, "t_gone": 2},
+		"skills_paid": {"t_skill": 7, "t_gone": 50},
+		"quickslots": [["skill", "t_gone"], ["skill", "t_skill"]]})
+	check(not c.skills.learned.has(&"t_gone"), "dropped")
+	check_eq(c.essence, 60, "its essence back")
+	check_eq(c.quickslots[0], [], "its quickslot emptied")
+	check_eq(c.quickslots[1], [&"skill", &"t_skill"], "others kept")
 
 func test_skill_levels_clamped_to_max() -> void:
 	var s := fx.skill()

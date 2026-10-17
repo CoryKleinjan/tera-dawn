@@ -48,13 +48,13 @@ drawn in code (`TDStage._build_tears`); nothing in the game mentions them.
 
 ### Secrets and shortcuts
 
-A **secret ledge** (`PlatformDef.secret`) is reached only with a job's movement skill at level
-1 (Flash Jump, Blink, Charge, Rolling Dash, Backstep Leap), never a plain jump or a fall,
-and the minimap leaves it out. Nothing a player needs stands on one (a chest may);
-`content_reach_test` checks both ways with `map_reach.gd`'s skill moves. A field has two: a
-high one about 130 px over the ledge you jump from, with nothing over it (Flash Jump, Blink),
-and a far one about 220 px out from a ledge's end and 50 px lower, at least 100 px over anything
-below and too far out to drift onto in a fall from anything above (every movement skill).
+A **secret ledge** (`PlatformDef.secret`) is reached only with a move from a boss relic
+(Dash, Double Jump, Surge; see `RelicDef`), never a plain jump or a fall, and the minimap
+leaves it out. Nothing a player needs stands on one (a chest may); `content_reach_test` checks
+both ways with `map_reach.gd`'s relic moves. A field has two: a high one about 130 px over the
+ledge you jump from, with nothing over it (Double Jump), and a far one about 220 px out from a
+ledge's end and 50 px lower, at least 100 px over anything below and too far out to drift onto
+in a fall from anything above (Dash or Surge).
 
 A **shortcut** is a pair of portals: its far end (`PortalDef.shortcut`, an id) is hidden and shut
 until the character has found it; its near end (`opens_shortcut`, the same id) is always open
@@ -69,7 +69,9 @@ so breaking it opens the way on both maps. With no `broken` picture it is gone o
 A **fake wall** (`walk_through`) takes no blows: it fades the first time a player steps into it
 (`MapInstance.check_secrets` after each move report) and opens the `shortcut` portal behind it
 the same way, so put it where the main way never crosses, at the end of a side ledge or a nook,
-looking like the room's wall. Standing on a secret ledge finds it too (`MapDef.ledge_secret`),
+looking like the room's wall. A **cracked floor** (`slam_only`) is a wall lying on a platform:
+blows only shake it, and a Slam landing on it (`MapInstance.slam`) breaks it and opens its
+`shortcut` portal, a way down. Standing on a secret ledge finds it too (`MapDef.ledge_secret`),
 so the zone map can show it.
 
 A **gated door** (`PortalDef.gate`, an id) shows from the start behind its shut gate

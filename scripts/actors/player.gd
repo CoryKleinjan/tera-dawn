@@ -44,9 +44,21 @@ const POGO_SPEED := -8.5
 ## many ticks (without steering).
 const RECOIL := 2.5
 const RECOIL_TICKS := 4
-## Upward speed of a Flash Jump and lift of a Backstep Leap (movement skills, see MoveDef).
-const AIR_JUMP_SPEED := -7.5
-const BACKSTEP_LIFT := -4.5
+## Moves from boss relics (RelicDef.Move). A Dash's speed (game pixels a tick), how many
+## ticks it lasts, and the wait before the next one on the ground (in the air it works once
+## per jump).
+const DASH_SPEED := 12.0
+const DASH_TICKS := 9
+const DASH_COOLDOWN := 24
+## A double jump's upward speed, as a share of a plain jump's.
+const DOUBLE_JUMP_SHARE := 1.0
+## How fast a Slam drops (game pixels a tick), and how hard the screen jolts when it lands.
+const SLAM_SPEED := 14.0
+const SLAM_SHAKE := 0.4
+## Ticks of holding a Surge's charge before it can fly, its speed and its longest flight.
+const SURGE_CHARGE := 36
+const SURGE_SPEED := 12.0
+const SURGE_TICKS := 50
 ## Ticks spent falling through a platform after down + jump.
 const DROP_TICKS := 16
 ## Ticks of the landing pose after a fall.
@@ -76,7 +88,7 @@ const ATTACK_BUFFER_TICKS := 8
 const PORTAL_FADE_TICKS := 12
 ## Ticks of the combat-ready stance after an attack, before he relaxes into idle.
 const READY_TICKS := 120
-## Fewest ticks a movement skill's pose shows (a Blink itself is over at once).
+## Ticks a double jump's pose shows.
 const MOVE_POSE_TICKS := 10
 ## Ticks of the turn pose when he turns round while moving fast on the ground.
 const TURN_TICKS := 5
@@ -136,12 +148,16 @@ var _queued_t := 0
 var _lock_t := 0      # ticks the knockback carries you without steering
 var _jumping := false # rising from your own jump (letting go cuts it short)
 var _aim := Hitbox.Aim.AHEAD  # which way the current attack aims
-## A movement skill carrying you (Charge, Rolling Dash): its MoveDef, ticks left and speed.
-var _move_def: MoveDef
-var _move_t := 0
-var _move_speed := 0.0
-## Movement skills already used in this jump (ids): each works once per jump in the air.
-var _air_moves := {}
+## Relic moves (RelicDef.Move): ticks left in a Dash and before the next one on the
+## ground, whether this jump has used its Dash and its double jump, a Slam dropping, ticks
+## of a Surge's charge held (-1 when not charging) and ticks left of its flight.
+var _dash_t := 0
+var _dash_cd := 0
+var _air_dashed := false
+var _air_jumped := false
+var _slamming := false
+var _charge_t := -1
+var _surge_t := 0
 ## Sitting on the ground (the server said so). Moving or getting hit gets you up.
 var sitting := false
 
@@ -162,6 +178,7 @@ func place(x: float, y: float) -> void:
 	sitting = false
 	platform = world.platforms[0]
 	jump_grace.cancel()
+	_end_relic_moves()
 	_stop_t = 0
 	_portal_t = 0
 	_queued = null
@@ -199,7 +216,7 @@ func knock_back(from_x: float) -> void:
 		_jumping = false
 		_freeze_t = HURT_FREEZE
 		_lock_t = HURT_LOCK
-		_move_t = 0
+		_end_relic_moves()
 		jump_grace.cancel()
 
 ## Your melee blow landed: he holds mid-swing for `ticks` (the monster freezes too, see
@@ -295,7 +312,7 @@ func step() -> void:
 
 ## Standing still on the ground with nothing else going on (the server checks too).
 func _can_sit() -> bool:
-	return on_ground and not fainted() and action_t == 0 and _move_t == 0 \
+	return on_ground and not fainted() and action_t == 0 and not _relic_moving() \
 		and scene_pose == &"" and absf(vel.x) < 0.01
 
 ## Whether an input is held, unless typing or minding a shop.
@@ -380,8 +397,6 @@ func _use(skill: SkillDef) -> void:
 	if problem != "":
 		world.add_log(problem, Palette.INFO)
 		return
-	if skill.kind == SkillDef.Kind.MOVE and not _can_move(skill):
-		return
 	var ambush_to := _ambush_spot(skill)
 	if skill.ambush > 0.0 and ambush_to == Vector2.INF:
 		world.add_log("There are no monsters ahead to ambush.", Palette.INFO)
@@ -391,9 +406,6 @@ func _use(skill: SkillDef) -> void:
 	if skill.recharge_ticks(lvl) > 0:
 		recharge[skill.id] = skill.recharge_ticks(lvl)
 	var aim := skill.aim_for(_held_aim())
-	if skill.kind == SkillDef.Kind.MOVE:
-		_start_move(skill, aim)
-		return
 	# buffs and spells make no motion: he carries on with what he was doing
 	if not skill.is_spell():
 		action_t = CharacterStats.attack_ticks(skill.action_ticks, Game.me.stats)
@@ -429,45 +441,6 @@ func _ambush_spot(skill: SkillDef) -> Vector2:
 	if to == Vector2.INF:
 		return to
 	return Vector2(clampf(to.x, EDGE, float(world.map.width) - EDGE), clampf(to.y, 0.0, float(world.map.ground_y)))
-
-## Whether movement skill `skill` can go off here: on the ground, or once per jump in the air.
-func _can_move(skill: SkillDef) -> bool:
-	var m := skill.move
-	return m.on_ground if on_ground else m.in_air and not _air_moves.has(skill.id)
-
-## Starts movement skill `skill` aimed `aim` (a Blink goes that way). Tells the server from
-## where it started.
-func _start_move(skill: SkillDef, aim: Hitbox.Aim) -> void:
-	var m := skill.move
-	if not on_ground:
-		_air_moves[skill.id] = true
-	var from := position
-	var speed := m.distance_at(Game.me.skills.level(skill)) / maxf(1.0, m.ticks)
-	match m.style:
-		MoveDef.Style.CHARGE, MoveDef.Style.ROLL:
-			_move_def = m
-			_move_t = m.ticks
-			_move_speed = face * speed
-		MoveDef.Style.AIR_JUMP:
-			vel = Vector2(face * speed, AIR_JUMP_SPEED)
-			_lock_t = m.ticks
-		MoveDef.Style.BACKSTEP:
-			vel = Vector2(-face * speed, BACKSTEP_LIFT)
-			_lock_t = m.ticks
-			on_ground = false
-		MoveDef.Style.BLINK:
-			position = m.blink_to(from, face, aim, Game.me.skills.level(skill), float(world.map.width), float(world.map.ground_y))
-			vel = Vector2.ZERO
-			on_ground = false
-	_jumping = false
-	jump_grace.cancel()
-	# every move has its own pose
-	if not skill.is_spell():
-		action_t = maxi(m.ticks, MOVE_POSE_TICKS)
-		action_anim = skill.animation
-	Net.ask(&"req_skill", [skill.id, from, face, aim])
-	TDMoveFx.play(world, m, from, position, self)
-	Sound.play(skill.cast_sound())
 
 ## Whether `skill` aimed `aim` from here meets a living monster, as this screen shows them
 ## (the server decides the damage; this only lets the bounce happen at once).
@@ -517,9 +490,10 @@ func _top_speed(base: float) -> float:
 func _move() -> void:
 	var left := _held("move_left") or auto_walk < 0
 	var right := _held("move_right") or auto_walk > 0
-	# knocked back (or recoiling from your own blow, or springing away with a movement
-	# skill): carried along without steering
-	var rooted := _lock_t > 0 or _move_t > 0
+	_relic_moves()
+	# knocked back (or recoiling from your own blow, or carried by a relic's move): along
+	# without steering
+	var rooted := _lock_t > 0 or _relic_moving()
 	if _lock_t > 0:
 		_lock_t -= 1
 	var acc := ACCEL_GROUND if on_ground else ACCEL_AIR
@@ -553,7 +527,9 @@ func _move() -> void:
 	# landing goes off on landing (see JumpGrace); dropping through needs footing
 	if _tapped("jump"):
 		jump_grace.press()
-	if jump_grace.can_jump(on_ground):
+	if _relic_moving():
+		pass # a jump pressed meanwhile is kept for a few ticks (JumpGrace)
+	elif jump_grace.can_jump(on_ground):
 		jump_grace.cancel()
 		if on_ground and _held("move_down") and platform != null and not platform.solid:
 			drop_from = platform
@@ -563,23 +539,35 @@ func _move() -> void:
 			vel.y = JUMP_SPEED * CharacterStats.jump_multiplier(Game.me.stats)
 			_jumping = true
 		on_ground = false
+	elif _tapped("jump") and not on_ground:
+		_air_jump()
 	# letting go of jump on the way up turns it into a short hop
 	if _jumping and not _held("jump") and vel.y < JUMP_CUT:
 		vel.y = JUMP_CUT
 	if vel.y >= 0.0:
 		_jumping = false
 
-	# a Charge or roll: straight ahead at its own speed, a Charge flat even in the air
-	var flat := _move_t > 0 and _move_def.style == MoveDef.Style.CHARGE
-	if _move_t > 0:
-		_move_t -= 1
-		vel.x = _move_speed
-	vel.y = 0.0 if flat else minf(vel.y + gravity(vel.y), MAX_FALL)
+	# a Dash or Surge flies flat ahead at its own speed, even in the air, and a Slam drops
+	# straight down
+	var flat := _dash_t > 0 or _surge_t > 0
+	if _dash_t > 0:
+		_dash_t -= 1
+		vel.x = face * DASH_SPEED
+	elif _surge_t > 0:
+		_surge_t -= 1
+		vel.x = face * SURGE_SPEED
+	if _slamming:
+		vel = Vector2(0.0, SLAM_SPEED)
+	else:
+		vel.y = 0.0 if flat else minf(vel.y + gravity(vel.y), MAX_FALL)
 	var prev_y := position.y
 	var hard_landing := vel.y > -JUMP_SPEED * CharacterStats.jump_multiplier(Game.me.stats) + HARD_LANDING
 	var was_falling := vel.y > 4.0
 	position.x = clampf(position.x + vel.x, EDGE, float(world.map.width) - EDGE)
 	position.y += vel.y
+	# a Surge stops at the map's edge
+	if _surge_t > 0 and (position.x <= EDGE or position.x >= float(world.map.width) - EDGE):
+		_surge_t = 0
 	on_ground = false
 	if vel.y >= 0:
 		for pl in world.platforms:
@@ -602,7 +590,88 @@ func _move() -> void:
 		vel.y = 0
 	jump_grace.step(on_ground)
 	if on_ground:
-		_air_moves.clear()
+		_air_dashed = false
+		_air_jumped = false
+		if _slamming:
+			_slam_landed()
+
+# ---------- moves from boss relics (RelicDef.Move) ----------
+
+## Whether a relic's move carries him this tick (a Dash, a Surge or its charge, a Slam).
+func _relic_moving() -> bool:
+	return _dash_t > 0 or _surge_t > 0 or _charge_t >= 0 or _slamming
+
+func _end_relic_moves() -> void:
+	_dash_t = 0
+	_surge_t = 0
+	_charge_t = -1
+	_slamming = false
+
+## The Dash key: a Dash, or with Down held on the ground a Surge's charge, which flies once
+## it is ready and the key is let go (let go sooner, it fizzles). Jump or Dash ends a Surge.
+func _relic_moves() -> void:
+	if _dash_cd > 0:
+		_dash_cd -= 1
+	if _charge_t >= 0:
+		vel.x = 0.0
+		if _held("dash"):
+			_charge_t += 1
+			return
+		if _charge_t >= SURGE_CHARGE:
+			_surge_t = SURGE_TICKS
+			_trail(RelicDef.Move.SURGE, SURGE_TICKS)
+		_charge_t = -1
+		return
+	if _surge_t > 0:
+		if _tapped("jump") or _tapped("dash"):
+			_surge_t = 0
+		return
+	if not _tapped("dash") or _dash_t > 0 or _slamming:
+		return
+	if on_ground and _held("move_down") and Game.me.has_move(RelicDef.Move.SURGE):
+		_charge_t = 0
+		vel.x = 0.0
+		return
+	if not Game.me.has_move(RelicDef.Move.DASH) or (_dash_cd > 0 if on_ground else _air_dashed):
+		return
+	_dash_t = DASH_TICKS
+	_dash_cd = DASH_COOLDOWN
+	if not on_ground:
+		_air_dashed = true
+	_jumping = false
+	_trail(RelicDef.Move.DASH, DASH_TICKS)
+
+## Jump pressed in mid-air past the ledge grace: with Down held a Slam, else a double jump
+## (each from its relic).
+func _air_jump() -> void:
+	if _held("move_down") and Game.me.has_move(RelicDef.Move.SLAM):
+		jump_grace.cancel()
+		_slamming = true
+		_jumping = false
+		return
+	if _air_jumped or not Game.me.has_move(RelicDef.Move.DOUBLE_JUMP):
+		return
+	jump_grace.cancel()
+	_air_jumped = true
+	vel.y = JUMP_SPEED * DOUBLE_JUMP_SHARE * CharacterStats.jump_multiplier(Game.me.stats)
+	_jumping = true
+	action_t = MOVE_POSE_TICKS
+	action_anim = &"leap"
+	world.fx.dust(position, 0, 4)
+
+## A Slam hit the ground: the screen jolts and the server breaks what it landed on.
+func _slam_landed() -> void:
+	_slamming = false
+	land_t = LAND_TICKS
+	world.shake(SLAM_SHAKE)
+	world.fx.dust(position, 0, 10)
+	Net.ask(&"req_slam", [position])
+
+## The code-drawn trail of relic move `m` for `ticks`, until painted effects replace it.
+func _trail(m: RelicDef.Move, ticks: int) -> void:
+	var relic := Game.me.relic_for(m)
+	if relic:
+		TDMoveFx.play(world, relic.trail_move(ticks), position, position, self)
 
 # ---------- Visuals ----------
 
@@ -619,6 +688,14 @@ func _animation() -> StringName:
 		return &"faint"
 	if sitting:
 		return &"sit"
+	if _slamming:
+		return &"fall"
+	if _charge_t >= 0:
+		return &"crouch"
+	if _dash_t > 0:
+		return &"roll"
+	if _surge_t > 0:
+		return &"lunge"
 	if action_t > 0:
 		return action_anim
 	if inv > SimPlayer.HURT_INV - HURT_POSE_TICKS and inv <= SimPlayer.HURT_INV: # just got hit (see knock_back)

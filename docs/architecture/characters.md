@@ -66,6 +66,12 @@ then character select shows the list (name and job) with the new character picke
   `Content` makes a `CardDef` for every monster at startup (`card_<id>`, no files); monsters
   drop it at `CardDef.CHANCE` until your page is full, and picking it up files it in the book
   instead of the bag. The book's rank adds to power (`Character.power`).
+- **Relic moves** (`RelicDef.Move`: Dash, Double Jump, Slam, Surge) come from boss relics.
+  Picking one up (`MapInstance._learn_relic`) adds its id to `Character.relics` for good,
+  never to the bag; `Character.has_move` says what's unlocked. `TDPlayer` does the moves on
+  your own machine like any other step (`_relic_moves`, `_air_jump`, the "dash" key); the
+  server only breaks what a Slam lands on (`req_slam`). A relic drop is its owner's alone and
+  never expires (`SimDrop`).
 - **Achievements** are **AchievementDef**s in `data/achievements/`, loaded by `Content`; each
   measures something about the Character (its `kind`, see `Achievements.measure`) against a
   `goal`. `Achievements.all()` lists them in `order` for the collection window and the server.
