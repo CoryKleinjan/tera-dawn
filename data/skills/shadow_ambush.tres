@@ -8,7 +8,7 @@
 
 [sub_resource type="Resource" id="Resource_look"]
 script = ExtResource("2_move_def")
-style = 2
+style = 1
 color = Color(1.1, 0.7, 1.6, 1)
 
 [resource]

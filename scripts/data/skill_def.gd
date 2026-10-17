@@ -10,8 +10,8 @@ extends Resource
 ## Add a skill by saving a SkillDef in data/skills/: it shows up in its job's tab of the
 ## skill window, and players put it on a quickslot to use it.
 
-enum Kind { ATTACK, BUFF, PASSIVE, MOVE }
-const KIND_NAMES := ["Attack", "Buff", "Passive", "Movement"]
+enum Kind { ATTACK, BUFF, PASSIVE }
+const KIND_NAMES := ["Attack", "Buff", "Passive"]
 ## The flash of a skill that goes off as a spell without a colour of its own (an attack with
 ## a wand's or staff's spell motion, like Dawn Slash in a Magician's hands): soft dawn gold.
 const DEFAULT_FLASH := Color(1.0, 0.9, 0.65)
@@ -110,8 +110,7 @@ const AMBUSH_GROUP := 110.0
 ## around where they land.
 @export var ambush := 0.0
 
-@export_group("Movement")
-## How a movement skill (Kind.MOVE) carries the hero.
+## How an ambush's leap looks (its code-drawn bolt, TDMoveFx).
 @export var move: MoveDef
 
 @export_group("Buffs and passives")
@@ -243,7 +242,7 @@ func is_spell() -> bool:
 
 ## The aim it actually takes when used aimed `aim`: only aiming attacks turn.
 func aim_for(aim: Hitbox.Aim) -> Hitbox.Aim:
-	return aim if kind in [Kind.ATTACK, Kind.MOVE] and aims and not around else Hitbox.Aim.AHEAD
+	return aim if kind == Kind.ATTACK and aims and not around else Hitbox.Aim.AHEAD
 
 ## A player can press it (attacks and buffs; passives are always on).
 func is_active() -> bool:
@@ -269,8 +268,6 @@ func describe_level(level: int) -> PackedStringArray:
 			out.append("Roots them for %s seconds" % _seconds(root_ticks(level)))
 	if heal_at(level) > 0.0:
 		out.append("Heals %d%% of Max HP" % roundi(heal_at(level) * 100))
-	if kind == Kind.MOVE and move:
-		out.append("Distance: %d" % roundi(move.distance_at(level)))
 	var s := stats_at(level)
 	for f in s.nonzero():
 		out.append("%s %s" % [StatBlock.LABELS[f], StatBlock.format(f, s.value(f))])

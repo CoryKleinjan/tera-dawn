@@ -50,16 +50,11 @@ Ranged and magic skills:
   and an optional `basic_attack` skill that replaces the plain swing (a bow's Shoot). Ranged
   weapons need no ammo.
 - `weapons` limits a skill to weapon kinds and `offhand` to what's worn in the off-hand slot
-  (a Thief's stars, a Pirate's pistol); `magic` uses Magic Attack (INT included) through
+  (a Thief's stars, a Pirate's pistol); `magic` uses Magic Attack (Power included) through
   `CharacterStats.magic_range` instead of the weapon.
 
-Movement skills (`kind` Movement) carry a **MoveDef** (`move`): its style (Charge, air jump,
-Blink, backstep, roll), distance, ticks, whether it works on the ground and once per jump in
-the air, whether nothing can hit you meanwhile, how many monsters it shoves aside and its trail
-colour. The hero moves on his own machine (`TDPlayer._start_move`); the server pays the MP,
-puts a Blink where it lands (`MoveDef.blink_to`, the same sum on both sides), shoves monsters
-and keeps a roller from being hit (`ServerMoves`, `SimPlayer.dodge_t`). Everyone sees the
-code-drawn trail or Blink bolt (`TDMoveFx`) until painted effects replace it.
+Jobs have no movement skills: the hero's moves come from boss relics (`RelicDef`, see
+`characters.md`).
 
 Aiming and melee weight:
 - Attacks with `aims` on (the default) turn with the held direction: Up aims up, Down in the

@@ -43,6 +43,7 @@ There are four inventory tabs, and the class of the item decides which one it go
 | **ItemDef** | Etc | Monster parts and anything else; stacks up to `max_stack` |
 | **PetDef** | Setup | Pets: `loot_reach`, `loot_every`, `hunger_ticks` and their `chatter` |
 | **CardDef** | (book) | Monster Book cards, made by `Content` for every monster |
+| **RelicDef** | (moves) | A boss's relic: picking it up unlocks its `move` for good (`Character.relics`) |
 
 Equipment slots: Weapon, Hat, Top, Bottom, Shoes, Gloves, Cape, Earrings, Pendant, two Rings
 and Shield (`EquipDef.Slot` and `Equipment.PLACES_FOR`). Adding a slot means adding it to both.
