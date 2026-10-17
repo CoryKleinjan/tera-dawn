@@ -24,7 +24,6 @@ script = ExtResource("1_quest_def")
 id = &"q34_dawnharbor_boss"
 title = "The Grotto Tusker"
 giver = &"harbormaster"
-min_level = 22
 requires = Array[StringName]([&"q33_dawnharbor_supplies"])
 offer_text = "Smugglers' Grotto, past Gull Bluffs, has a new master: a great tusked boar the smugglers call the Grotto Tusker. No boat will put in there while it lives. Deal with it and the harbour owes you."
 progress_text = "Defeat the Grotto Tusker in its den at the back of Smugglers' Grotto, past Gull Bluffs."

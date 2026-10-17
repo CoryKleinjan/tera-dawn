@@ -34,13 +34,6 @@ func _visit_quest(id := &"t_visit", map := &"t_far") -> QuestDef:
 	o.map = map
 	return fx.quest(id, [o])
 
-func test_can_take_ignores_the_old_level_window() -> void:
-	var q := _kill_quest()
-	q.min_level = 5
-	q.max_level = 8
-	check(c.quests.can_take(q, c), "no level to be too low or too high for")
-	check_eq(c.quests.status(q, c), QuestLog.Status.AVAILABLE, "available")
-
 func test_can_take_job_list() -> void:
 	var q := _kill_quest()
 	q.jobs = [&"t_other_job"]

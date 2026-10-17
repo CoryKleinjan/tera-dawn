@@ -24,7 +24,6 @@ script = ExtResource("1_quest_def")
 id = &"q28_driftcove_patrol"
 title = "Driftcove Patrol"
 giver = &"driftcove_store"
-min_level = 10
 requires = Array[StringName]([])
 offer_text = "The Sand Crabs in the Tidepools are getting bold. Would you thin them out? 15 ought to do it. The portal by Brin leads out there."
 progress_text = "15 Sand Crabs in the Tidepools. The portal by the storage keeper leads there."

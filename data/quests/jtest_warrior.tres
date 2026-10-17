@@ -15,7 +15,6 @@ script = ExtResource("1_quest_def")
 id = &"jtest_warrior"
 title = "Job Test"
 giver = &"emberforge_instructor"
-min_level = 10
 offer_text = "You've held your own out there. Not bad. Now earn the name. My trial ground, end to end, no stopping."
 progress_text = "The trial ground is through the light by the wall."
 complete_text = "Ha! You put that thing down! You're a Warrior, no question. But I didn't like that light. Not one bit. Go to Lumewood. Archmage Celest knows more about strange lights than any of us."

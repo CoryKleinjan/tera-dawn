@@ -45,7 +45,6 @@ script = ExtResource("1_quest_def")
 id = &"q31_ring_road"
 title = "The Ring Road"
 giver = &"harbormaster"
-min_level = 20
 requires = Array[StringName]([&"q08_grand_tour"])
 offer_text = "Every town is joined by road, and the roads are dangerous. Walk the whole ring once, from Dawnharbor round to Dawnharbor, and you'll know the mainland like I do. Start with the Harbor Road."
 progress_text = "Visit Harbor Road, Glimmer Path, Cinder Pass, Dusk Bridge, Saltwind Cliffs and Harbor Beach."

@@ -24,7 +24,6 @@ script = ExtResource("1_quest_def")
 id = &"q29_driftcove_supplies"
 title = "Driftcove Supplies"
 giver = &"driftcove_shop"
-min_level = 13
 requires = Array[StringName]([&"q28_driftcove_patrol"])
 offer_text = "I need 20 Sea Jellys for my work. You'll find them in the Coral Reef, past the Tidepools."
 progress_text = "20 Sea Jellys from the Coral Reef."

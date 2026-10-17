@@ -242,8 +242,8 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
 - Defeated monsters (bosses too) stay down until the map loads fresh: leaving and coming back,
   or fainting and returning. In co-op a map resets once every player has left it.
 - No levels are shown anywhere: no "Lv." on monsters, bosses, maps, regions, the Monster Book,
-  quests, gear or trips. Monsters, maps and quests keep a hidden tuning tier (MonsterDef.level,
-  the "Lv. a-b" level_text) only so content tests keep the zones in order.
+  quests, gear or trips. Monsters and gear keep a hidden tuning tier (MonsterDef.level,
+  EquipDef.required_level) only so the balance and content checks can measure them.
 - Monster strength: each kind's own HP, attack and Dawn Essence are what it is on the map nearest
   a town that it lives on; on each map farther from the nearest town than that it is 15% stronger
   (HP, attack and essence). Shortcuts and one-way ways home (a boss arena's) don't count

@@ -78,5 +78,4 @@ spawns = Array[ExtResource("5_spawn_def")]([SubResource("Boss")])
 region = &"driftcove"
 world_pos = Vector2(285.0, 420.0)
 return_map = &"driftcove"
-level_text = "Lv. 28-30"
 music = &"boss_driftcove"

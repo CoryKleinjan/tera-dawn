@@ -24,7 +24,6 @@ script = ExtResource("1_quest_def")
 id = &"q26_lanternfall_supplies"
 title = "Lanternfall Supplies"
 giver = &"lanternfall_shop"
-min_level = 13
 requires = Array[StringName]([&"q25_lanternfall_patrol"])
 offer_text = "I need 20 Moth Dusts for my work. You'll find them in the Gloom Woods, past Lantern Alley."
 progress_text = "20 Moth Dusts from the Gloom Woods."

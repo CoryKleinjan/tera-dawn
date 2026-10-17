@@ -30,8 +30,8 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
    of the screen (`display_name`); nothing labels a map out in the world.
 5. Place it in the world: its `region` (a **RegionDef** in `data/regions/`), `world_pos` on
    the world map (pixels of the painting, `TDWorldMapWindow.WORLD`, inside its region's
-   `zone_rect`), `level_text` (a hidden tuning tier, never shown), and either `town = true` or the
-   `return_map` where fainting and Return Scrolls send you.
+   `zone_rect`), and either `town = true` or the `return_map` where fainting and Return Scrolls
+   send you.
 6. Optionally give it an `intro_scene`, a cutscene played the first time a character arrives
    (see [cutscenes](cutscenes.md)).
 
@@ -137,7 +137,7 @@ door you walk through by pressing Up, into a small room that is its own map.
    lanterns and the people) and is sized to keep its `height` there.
 3. **Making it enterable**: create the room, a **MapDef** in `data/maps/rooms/<id>.tres` with
    `interior = true`, `return_map` set to the town (so return scrolls and the world map treat
-   it as the town), its town's `region`, no `world_pos` or `level_text`, a biome from
+   it as the town), its town's `region`, no `world_pos`, a biome from
    `data/biomes/rooms/`, NPCs and furniture `props`, and one **PortalDef** with `door = true`
    leading back out beside the building. Then add a door portal (`door = true`) to the town
    at the building's `x` and platform, leading into the room.

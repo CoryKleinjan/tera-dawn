@@ -313,4 +313,3 @@ props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_32"), Sub
 region = &"dawnharbor"
 world_pos = Vector2(505.0, 232.0)
 return_map = &"dawnharbor"
-level_text = "Lv. 6-9"

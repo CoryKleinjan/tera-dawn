@@ -509,5 +509,4 @@ buildings = Array[ExtResource("7_building_placement")]([SubResource("Building_0"
 region = &"dawnharbor"
 world_pos = Vector2(420.0, 300.0)
 town = true
-level_text = "Town"
 portals = Array[ExtResource("5_portal_def")]([SubResource("Portal_west"), SubResource("Door_store"), SubResource("Door_hall"), SubResource("Door_tavern"), SubResource("Portal_east")])

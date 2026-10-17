@@ -76,5 +76,4 @@ spawns = Array[ExtResource("5_spawn_def")]([SubResource("Boss")])
 region = &"emberreach"
 world_pos = Vector2(765.0, 345.0)
 return_map = &"emberforge"
-level_text = "Lv. 28-30"
 music = &"boss_emberreach"

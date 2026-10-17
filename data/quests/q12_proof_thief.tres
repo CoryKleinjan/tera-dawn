@@ -16,7 +16,6 @@ script = ExtResource("1_quest_def")
 id = &"q12_proof_thief"
 title = "Proof of the Shadow"
 giver = &"lanternfall_instructor"
-min_level = 10
 requires = Array[StringName]([])
 jobs = Array[StringName]([&"thief"])
 offer_text = "You've joined us, but words are cheap. Bring me 20 Shade Horns from the Shade Imps in Lantern Alley, just outside town, and prove you can hunt."

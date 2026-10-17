@@ -24,7 +24,6 @@ script = ExtResource("1_quest_def")
 id = &"q33_dawnharbor_supplies"
 title = "Dawnharbor Supplies"
 giver = &"harbor_store"
-min_level = 13
 requires = Array[StringName]([&"q32_dawnharbor_patrol"])
 offer_text = "Sailmaker Odile pays well for good feathers, and I'm clean out. Bring me 20 Reef Feathers. The Reef Gulls on Windmill Downs and Gull Bluffs carry them."
 progress_text = "20 Reef Feathers from the Reef Gulls on Windmill Downs or Gull Bluffs."

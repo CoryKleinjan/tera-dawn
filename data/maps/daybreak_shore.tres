@@ -108,7 +108,6 @@ variant = SubResource("Resource_afyww")
 width = 2000
 region = &"dawnrise_isle"
 return_map = &"daybreak_shore"
-level_text = "Lv. 1-2"
 intro_scene = ExtResource("5_1whi3")
 platforms = Array[ExtResource("12_1lham")]([SubResource("Resource_63r5f"), SubResource("Resource_7regm"), SubResource("Resource_ual6t")])
 climbables = Array[ExtResource("3_fg3cc")]([SubResource("Resource_yh0k4")])

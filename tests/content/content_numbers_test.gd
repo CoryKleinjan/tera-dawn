@@ -1,7 +1,7 @@
 extends TestCase
 ## Numbers in content make sense: chances are 0 to 1, amount ranges run low to high,
-## HP, Dawn Essence and prices are positive, shops never pay more than they charge, levels sit
-## inside their map's and region's ranges, and skills, jobs and items have usable values.
+## HP, Dawn Essence and prices are positive, shops never pay more than they charge, and
+## skills, jobs and items have usable values.
 
 const Scan := preload("res://tests/content/content_scan.gd")
 ## The tier a Beginner takes a first job at (see Balance.typical): one tier for every
@@ -155,11 +155,9 @@ func test_travel_fares_are_affordable() -> void:
 		for i in n.travel.size():
 			check_between(n.travel[i].price, 0, 100000, "%s: travel[%d].price" % [Scan.where(n), i])
 
-func test_quests_have_sane_levels_counts_and_rewards() -> void:
+func test_quests_have_sane_counts_and_rewards() -> void:
 	for q: QuestDef in Content.quests.values():
 		var w := Scan.where(q)
-		check(q.min_level >= 1, "%s: min_level is %d" % [w, q.min_level])
-		check(q.max_level == 0 or q.max_level >= q.min_level, "%s: max_level %d is below min_level %d" % [w, q.max_level, q.min_level])
 		check(q.reward_essence >= 0 and q.reward_shards >= 0, "%s: reward_essence %d / reward_shards %d is negative" % [w, q.reward_essence, q.reward_shards])
 		check(q.reward_essence > 0 or q.reward_shards > 0 or not q.reward_items.is_empty(), "%s: rewards nothing" % w)
 		check(q.offer_text != "" and q.progress_text != "" and q.complete_text != "", "%s: offer_text, progress_text or complete_text is empty" % w)
@@ -174,14 +172,6 @@ func test_quests_have_sane_levels_counts_and_rewards() -> void:
 					check(o.count <= o.item.stack_size() * Inventory.SLOTS, "%s: objectives[%d] wants %d %s, more than a bag holds" % [w, i, o.count, o.item.id])
 			if o.kind == QuestObjective.Kind.VISIT or o.kind == QuestObjective.Kind.REACH:
 				check_eq(o.count, 1, "%s: objectives[%d].count of a VISIT or REACH" % [w, i])
-
-func test_quests_ask_for_monsters_near_their_level() -> void:
-	for q: QuestDef in Content.quests.values():
-		for i in q.objectives.size():
-			var o := q.objectives[i]
-			var m: MonsterDef = o.monster if o and o.kind == QuestObjective.Kind.KILL else null
-			if m:
-				check(m.level <= q.min_level + 15, "%s: objectives[%d] wants level %d %s from level %d players" % [Scan.where(q), i, m.level, m.id, q.min_level])
 
 func test_skills_have_usable_numbers() -> void:
 	for s: SkillDef in Content.skills.values():
@@ -263,46 +253,6 @@ func test_use_items_have_sane_numbers() -> void:
 		var s := i as ScrollDef
 		if s:
 			check(s.chance > 0.0 and s.chance <= 1.0, "%s: chance is %s" % [Scan.where(s), s.chance])
-
-func test_level_texts_are_readable() -> void:
-	for m: MapDef in Content.maps.values():
-		if m.interior:
-			check(m.level_text == "", "%s: a room inside a building isn't on the world map, so has no level_text" % Scan.where(m))
-			continue
-		if m.level_text == "Town":
-			check(m.town, "%s: level_text says Town but town is false" % Scan.where(m))
-			continue
-		var r := Scan.level_range(m.level_text)
-		check(r.x >= 1 and r.x <= r.y, "%s: level_text %s isn't \"Lv. low-high\" or Town" % [Scan.where(m), m.level_text])
-	for g: RegionDef in Content.regions.values():
-		var r := Scan.level_range(g.level_text)
-		check(r.x >= 1 and r.x <= r.y, "%s: level_text %s isn't \"Lv. low-high\"" % [Scan.where(g), g.level_text])
-
-func test_map_levels_sit_inside_their_region() -> void:
-	for m: MapDef in Content.maps.values():
-		var mine := Scan.level_range(m.level_text)
-		var g: RegionDef = Content.regions.get(m.region)
-		if mine.x < 0 or g == null:
-			continue
-		var range := Scan.level_range(g.level_text)
-		check(mine.x >= range.x and mine.y <= range.y, "%s: level_text %s is outside region %s (%s)" % [Scan.where(m), m.level_text, g.id, g.level_text])
-
-func test_map_monsters_match_its_levels() -> void:
-	# maps mix in weaker monsters, but some monster must suit the map's levels and none
-	# (bosses aside) may be far above them
-	for m: MapDef in Content.maps.values():
-		var r := Scan.level_range(m.level_text)
-		if r.x < 0:
-			continue
-		var suits := false
-		for i in m.spawns.size():
-			var mon := m.spawns[i].monster if m.spawns[i] else null
-			if mon == null:
-				continue
-			suits = suits or (mon.level >= r.x - 2 and mon.level <= r.y + 2)
-			if not mon.boss:
-				check(mon.level <= r.y + 3, "%s: spawns[%d] %s is level %d, well above %s" % [Scan.where(m), i, mon.id, mon.level, m.level_text])
-		check(suits or m.spawns.is_empty(), "%s: no monster is near %s" % [Scan.where(m), m.level_text])
 
 func test_towns_are_safe() -> void:
 	# towns are where you wake up: nothing hostile spawns there (the starting meadow excepted)
