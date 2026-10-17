@@ -93,6 +93,14 @@ hidden until a player first stands on that platform (`MapInstance.check_tear`, `
 it shows, closer and bigger, `tear_scene` plays, and the spawns marked `from_tear` (asleep until
 then) step out of the first tear when the scene ends (`wake_tear`) and stay down once beaten.
 
+`scene_spots` (SceneSpot) are spots that do something for the player standing on them
+(`MapInstance.check_spots`): play a cutscene once, then optionally send them to `then_map`
+with a `then_scene` there (a spot that sends you on keeps doing so after its scene is seen).
+`while_on` opens a spot only during those quests (`until_ready`: until they're ready to hand
+in), and `glow` draws a tear there for whoever it's open to (`TDStage.show_spot_glows`). The
+home-world tear uses them: the light over Starfall Ridge pulls the hero into the `silent`,
+solo `home_world` during "A Closer Look", thoughts play along it, and its far end leads back.
+
 The job tests use both: each job town's hall has a trial gate (`while_on` its Job Test) to its
 `trial_<town>` Trial Ground, a short course with the tutor at the start and an arena at the far
 end where the tear boss steps out.

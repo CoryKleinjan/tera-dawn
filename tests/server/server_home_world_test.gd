@@ -12,6 +12,7 @@ const CLOSER := &"story_a_closer_look"
 const RIDGE := &"starfall_ridge"
 const HOME := &"home_world"
 const TOWN := &"lumewood"
+const HALL := &"lumewood_hall"
 const ALDOUS := &"lumewood_stargazer"
 const CELEST := &"lumewood_instructor"
 
@@ -32,12 +33,16 @@ func _ready_for_it() -> void:
 	c.quests.done[&"jreport_warrior"] = 1
 	c.book.record_kill(Content.monster(&"grotto_tusker"))
 
-## Stands by `npc` on the town map.
+## Stands by `npc` where they stand in Lumewood (the town, or a hall in it).
 func _by(npc: StringName) -> void:
-	if p.map.def.id != TOWN:
-		h.move_to(p, TOWN)
-	var at: NpcPlacement = Content.map(TOWN).npcs.filter(func(n: NpcPlacement) -> bool: return n.npc.id == npc)[0]
-	h.place(p, at.x, p.map.def.surface_y(at.platform))
+	for map in [TOWN, HALL]:
+		var at: Array = Content.map(map).npcs.filter(func(n: NpcPlacement) -> bool: return n.npc.id == npc)
+		if not at.is_empty():
+			if p.map.def.id != map:
+				h.move_to(p, map)
+			h.place(p, at[0].x, p.map.def.surface_y(at[0].platform))
+			return
+	fail("%s isn't in Lumewood" % npc)
 
 ## Stands on scene spot `s` of the map they're on, as walking there would.
 func _stand_on(s: SceneSpot) -> void:

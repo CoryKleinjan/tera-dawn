@@ -136,7 +136,7 @@ func check_spots(p: SimPlayer) -> void:
 	if p.in_scene():
 		return
 	for s in def.scene_spots:
-		if s.platform < layout.platforms.size() and s.open_to(p.character) \
+		if (s.scene or s.then_map != &"") and s.platform < layout.platforms.size() and s.open_to(p.character) \
 				and p.stands_on(layout.platforms[s.platform]) and s.covers(p.position.x):
 			server.scenes.at_spot(p, s)
 			return

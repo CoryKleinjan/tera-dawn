@@ -154,12 +154,15 @@ func music_id() -> StringName:
 		return &""
 	return r.town_music if town or interior else r.field_music
 
-## The maps its portals lead to.
+## The maps its portals and scene spots lead to.
 func neighbours() -> Array[StringName]:
 	var out: Array[StringName] = []
 	for p in portals:
 		if not p.target_map in out:
 			out.append(p.target_map)
+	for s in scene_spots:
+		if s.then_map != &"" and not s.then_map in out:
+			out.append(s.then_map)
 	return out
 
 ## Every monster on the map, in the order the server and every client number them:
