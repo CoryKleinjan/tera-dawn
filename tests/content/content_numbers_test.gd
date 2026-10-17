@@ -50,6 +50,7 @@ func test_monsters_have_positive_stats() -> void:
 		check(m.speed >= 0.0, "%s: speed is %s" % [w, m.speed])
 		check(m.size.x > 0 and m.size.y > 0, "%s: size is %s" % [w, m.size])
 		check(m.sprite_scale > 0, "%s: sprite_scale is %s" % [w, m.sprite_scale])
+		check(m.respawn_ticks.x > 0 and m.respawn_ticks.x <= m.respawn_ticks.y, "%s: respawn_ticks %s must be positive and low to high" % [w, m.respawn_ticks])
 		if m.flying:
 			check(m.hover_height > 0, "%s: flying with hover_height %s" % [w, m.hover_height])
 		check(m.sight > 0, "%s: sight is %s" % [w, m.sight])
