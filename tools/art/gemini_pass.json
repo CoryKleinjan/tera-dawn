@@ -27378,6 +27378,31 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a cute chibi girl with a brown ponytail in 8 frames of a double jump in the air. Repaint the character in EVERY cell as the WOMAN in the attached picture: give her exactly the attached woman's face, shoulder-length auburn hair (loose, no ponytail), brown eyes with dark lashes and her friendly grown-up expression. Keep EVERYTHING else in the base picture exactly as it is: the same pose, size, position and angle in every cell (including the upside-down and tumbling frames), the same body, arms, hands, legs and boots, the same cream linen shirt with rolled sleeves, brown belt, dark brown trousers and brown boots, the same three-quarter facing to the right, the same grid lines and the same flat pure magenta #FF00FF background. Do not make her smaller or bigger than the girl in the base picture. No arm or hand ever covers her face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Paint only the woman: no ground, wall, shadow, glow, speed lines, effects, text, labels or numbers, and no extra figures. The background stays flat pure magenta #FF00FF everywhere in every cell, never green or white."
   }
+ },
+ {
+  "id": "newhero_woman_double_jump_v4",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_woman_double_jump_v4.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': fourth try at the woman's Double Jump. v3 had the right size, but its ref was her whole walk sheet and cells 4-8 copied those walk poses; this ref is one standing frame of her and the prompt names each cell's pose. Released by Cory 22:38Z (\"Yes\") to the priced line 22:35Z (\"Should I try once more that way for $0.07?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/newhero_girl_double_jump.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/bases/woman_idle_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a cute chibi girl with a brown ponytail in 8 frames of a double jump in the air. Repaint the character in EVERY cell as the WOMAN in the attached picture (one standing picture of her, only to show her face and hair): give her exactly the attached woman's face, shoulder-length auburn hair (loose, no ponytail), brown eyes with dark lashes and her friendly grown-up expression. Keep EVERYTHING else in the base picture exactly as it is: the same pose, size, position and angle in every cell (including the upside-down and tumbling frames), the same body, arms, hands, legs and boots, the same cream linen shirt with rolled sleeves, brown belt, dark brown trousers and brown boots, the same three-quarter facing to the right, the same grid lines and the same flat pure magenta #FF00FF background. Every cell keeps the girl's in-air pose from the base picture, never a walking or standing pose: 1 jumping with legs bent and arms out; 2 tucked in a ball hugging her knees; 3 one knee kicked out, both arms up; 4 stretched straight up, both arms high over her head; 5 tumbling on her side; 6 upside down, head at the bottom; 7 falling, leaning back with knees bent; 8 arms spread wide, legs a little bent. Do not make her smaller or bigger than the girl in the base picture. No arm or hand ever covers her face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Paint only the woman: no ground, wall, shadow, glow, speed lines, effects, text, labels or numbers, and no extra figures. The background stays flat pure magenta #FF00FF everywhere in every cell, never green or white."
+  }
  }
 ]
 }
