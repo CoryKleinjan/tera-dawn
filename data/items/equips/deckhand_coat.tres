@@ -24,11 +24,15 @@ nudges = {
 &"crouch": Vector4(-2.800003, 5.0999985, 0, 0),
 &"pistol2": Vector4(-4.199997, -3.199997, 0, 1),
 &"roll2": Vector4(10, -31, -180, 0),
-&"swing3": Vector4(2.800003, 2.300003, 0, 0),
+&"swing3": Vector4(-5.8, 3.2, 0, 0),
 &"throw1": Vector4(0, 0, 0, 1)
 }
+sizes = {
+&"swing3": 0.92
+}
 frame_art = {
-&"roll2": &"roll1"
+&"roll2": &"roll1",
+&"swing3": &"lunge"
 }
 jobs = Array[StringName]([&"pirate"])
 required_level = 10
