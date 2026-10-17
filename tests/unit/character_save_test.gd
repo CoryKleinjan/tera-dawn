@@ -1,7 +1,8 @@
 extends TestCase
-## Character.to_dict / load_dict: a full round trip (gear rolled stats and scroll upgrades,
-## Dawn Essence, jobs passed, skills and what was paid for them, buffs, quickslots, buddies, fame, guild, Monster Book, pet, visited maps,
-## achievements, tallies), bad values, and the older save formats load_dict still accepts.
+## Character.to_dict / load_dict: a full round trip (gear rolled stats,
+## level, EXP, Dawn Essence, jobs passed, skills and what was paid for them, buffs, quickslots, buddies, fame, guild, Monster Book, pet, visited maps,
+## achievements, tallies), bad values, and the older save formats load_dict still accepts
+## (base stats handed back as essence).
 
 var fx: UnitHelpers
 
@@ -13,8 +14,10 @@ func after_each() -> void:
 
 ## Everything filled in with values that differ from a fresh character.
 func _rich() -> Character:
-	var c := fx.character(null, {"strength": 30, "dexterity": 12, "luck": 4})
+	var c := fx.character()
 	c.name = "Saver"
+	c.level = 12
+	c.xp = 40
 	c.essence = 345
 	c.shards = 9876
 	c.jobs_passed.assign(["t_next", "t_other"])
@@ -22,11 +25,9 @@ func _rich() -> Character:
 	var sword := fx.equip(&"t_sword", EquipDef.Slot.WEAPON, {"attack": 20}, 3)
 	var worn := ItemStack.exact(sword)
 	worn.stats.attack = 23
-	worn.slots_used = 3
-	worn.upgrades = 2
 	c.equipment.put(&"weapon", worn)
-	var bagged := ItemStack.exact(fx.equip(&"t_ring", EquipDef.Slot.RING, {"luck": 3}))
-	bagged.stats.luck = 4
+	var bagged := ItemStack.exact(fx.equip(&"t_ring", EquipDef.Slot.RING, {"avoid": 3}))
+	bagged.stats.avoid = 4
 	c.inventory.put(ItemDef.Tab.EQUIP, 6, bagged)
 	c.inventory.add(fx.use(), 42)
 	c.storage.add(fx.etc(), 9)
@@ -81,18 +82,16 @@ func test_round_trip_basics() -> void:
 	check_eq(Array(b.jobs_passed), ["t_next", "t_other"], "jobs passed")
 	check_eq(b.map_id, c.map_id, "map")
 	check(b.job == c.job, "job")
-	check_eq(b.base.to_dict(), c.base.to_dict(), "base stats")
+	check_eq([b.level, b.xp], [12, 40], "level and EXP")
+	check_eq(b.power(), c.power(), "power")
 	check_eq(b.health.hp, 50, "HP")
 	check_eq(b.mp, 17, "MP")
 
-func test_round_trip_gear_keeps_rolled_stats_and_upgrades() -> void:
+func test_round_trip_gear_keeps_rolled_stats() -> void:
 	var b := _round_trip(_rich())
 	var w := b.equipment.at(&"weapon")
 	check_eq(w.stats.attack, 23, "rolled attack")
-	check_eq(w.slots_used, 3, "slots used")
-	check_eq(w.upgrades, 2, "upgrades")
-	check_eq(w.slots_left(), 4, "slots left")
-	check_eq(b.inventory.at(ItemDef.Tab.EQUIP, 6).stats.luck, 4, "bag gear rolled stats and slot")
+	check_eq(b.inventory.at(ItemDef.Tab.EQUIP, 6).stats.avoid, 4, "bag gear rolled stats and slot")
 	check_eq(b.stats.attack, 23 + 4, "worn gear and buff count in totals")
 
 func test_round_trip_items_and_storage() -> void:
@@ -132,11 +131,12 @@ func test_round_trip_survives_json() -> void:
 	back.load_dict(JSON.parse_string(JSON.stringify(c.to_dict())))
 	check_eq(back.to_dict(), c.to_dict(), "same after JSON")
 
-func test_save_has_essence_and_no_levels_or_points() -> void:
+func test_save_has_level_exp_and_essence_and_no_points() -> void:
 	var d := _rich().to_dict()
+	check_eq([d["level"], d["xp"]], [12, 40], "level and EXP saved")
 	check_eq(d["essence"], 345, "essence saved")
 	check(d.has("skills_paid"), "what skills cost saved")
-	for gone in ["level", "xp", "ap", "sp", "ap_reset_used"]:
+	for gone in ["ap", "sp", "ap_reset_used", "base", "stat_rules"]:
 		check(not d.has(gone), "no %s" % gone)
 
 func test_save_is_stable() -> void:
@@ -162,6 +162,7 @@ func test_bad_values_are_clamped_or_ignored() -> void:
 		"pet": "t_etc", "pet_full": 500, "hp": 0, "mp": 99999,
 	})
 	check_eq(c.essence, 0, "essence floor")
+	check_eq([c.level, c.xp], [1, 0], "no level from the days without levels")
 	check_eq(c.shards, 0, "shards floor")
 	check_eq(c.map_id, Character.START_MAP, "unknown map: start map")
 	check(c.skills.learned.is_empty(), "unknown skill dropped")
@@ -192,10 +193,10 @@ func test_unknown_job_keeps_current_job() -> void:
 
 func test_missing_hp_and_mp_load_full() -> void:
 	var c := fx.character()
-	c.load_dict({"job": "t_job", "essence": 0, "base": {"dexterity": 5}, "stat_rules": CharacterCodec.STAT_RULES})
+	c.load_dict({"job": "t_job", "essence": 0, "level": 2})
 	check_eq(c.health.hp, c.max_hp(), "full HP")
 	check_eq(c.mp, c.max_mp(), "full MP")
-	check_eq(c.max_hp(), 70, "5 points bought: 50 + 2 × 10")
+	check_eq(c.max_hp(), 70, "level 2: 50 + 2 × 10")
 
 func test_save_with_an_old_appearance_loads_without_it() -> void:
 	var c := fx.character()
@@ -204,25 +205,58 @@ func test_save_with_an_old_appearance_loads_without_it() -> void:
 	check_eq([c.name, c.essence], ["Old", 3], "the rest loads")
 	check(not c.to_dict().has("appearance"), "and the look is not saved again")
 
-func test_save_from_before_essence_turns_exp_and_points_into_essence() -> void:
+func test_save_from_before_essence_keeps_its_level_and_turns_points_into_essence() -> void:
 	var c := fx.character()
 	c.load_dict({"name": "Old", "job": "t_job", "level": 7, "xp": 100, "ap": 3, "sp": 2})
-	# 100 EXP, 3 STR points at 17 + 25 + 34, 2 skill levels at 17 + 31
-	check_eq(c.essence, 100 + 76 + 48, "everything unspent becomes essence")
-	check_eq(c.ap.spent(), 0, "no stats bought for it")
+	check_eq([c.level, c.xp], [7, 100], "level and EXP kept")
+	# 3 AP at 17 + 25 + 34, 2 skill levels at 17 + 31
+	check_eq(c.essence, 76 + 48, "unspent points become essence")
 	check(c.skills.learned.is_empty(), "no skills learned for it")
 	var d := c.to_dict()
-	check(not d.has("level") and not d.has("xp"), "saved again without a level or EXP")
-	check_eq(d["essence"], 224, "but with the essence")
+	check_eq([d["level"], d["xp"], d["essence"]], [7, 100, 124], "saved again with all three")
 
-func test_save_from_before_essence_prices_points_from_what_was_bought() -> void:
+func test_old_stat_prices_climb_with_each_point_in_a_stat() -> void:
+	# 17 × (1 + n / 5) ^ 2.1, rounded
+	var want := {0: 17, 1: 25, 2: 34, 3: 46, 4: 58, 5: 73, 10: 171, 19: 458}
+	for n in want:
+		check_eq(CharacterCodec.old_stat_price(n), want[n], "point %d" % (n + 1))
+	for n in range(0, 200):
+		check(CharacterCodec.old_stat_price(n + 1) > CharacterCodec.old_stat_price(n), "point %d costs more than %d" % [n + 2, n + 1])
+	check_eq(CharacterCodec.old_stat_price(-3), 17, "never below the first")
+
+func test_save_with_base_stats_gets_the_essence_of_every_point_bought() -> void:
+	var c := fx.character()
+	c.load_dict({"name": "Old", "job": "t_job", "level": 5, "essence": 10,
+		"base": {"strength": 14, "dexterity": 6, "intelligence": 5, "luck": 4, "charisma": 3}})
+	# 2 STR at 17 + 25, 1 DEX at 17, 1 INT at 17: each stat priced from its own first
+	check_eq(c.essence, 10 + 42 + 17 + 17, "essence back")
+	check_eq(c.level, 5, "level kept")
+	var start := fx.character()
+	start.load_dict({"name": "New", "job": "t_job", "level": 3, "essence": 4, "base": CharacterCodec.OLD_START})
+	check_eq(start.essence, 4, "nothing bought above the start, nothing back")
+
+func test_save_from_without_levels_gets_a_level_per_five_stat_points() -> void:
+	var c := fx.character()
+	c.load_dict({"name": "Mid", "job": "t_job", "essence": 9, "base": {"strength": 20, "dexterity": 11}})
+	check_eq([c.level, c.xp], [1 + 14 / CharacterCodec.OLD_POINTS_PER_LEVEL, 0], "a level for every 5 points bought")
+	# 8 STR points (449) and 6 DEX points (253)
+	check_eq(c.essence, 9 + 449 + 253, "essence kept, and the points' essence back")
+	var big := fx.character()
+	big.load_dict({"name": "Big", "job": "t_job", "essence": 0, "base": {"strength": 900}})
+	check_eq(big.level, Character.MAX_LEVEL, "never past the cap")
+	var again := fx.character()
+	again.load_dict(c.to_dict())
+	check_eq(again.level, c.level, "a newer save keeps its own level")
+	check_eq(again.essence, c.essence, "and gets nothing back twice")
+
+func test_save_from_before_essence_refunds_its_stats_and_prices_its_points() -> void:
 	fx.skill()
 	var c := fx.character()
-	c.load_dict({"name": "Old", "job": "t_job", "level": 9, "xp": 0, "stat_rules": CharacterCodec.STAT_RULES,
-		"base": {"strength": 3}, "ap": 2, "skills": {"t_skill": 2}, "sp": 1})
-	# STR points 4 and 5 at 46 + 58, skill level 3 at 50
-	check_eq(c.essence, 104 + 50, "each point worth the next price")
-	check_eq(c.base.strength, 3, "stats kept")
+	c.load_dict({"name": "Old", "job": "t_job", "level": 9, "xp": 0,
+		"base": {"strength": 15}, "ap": 2, "skills": {"t_skill": 2}, "sp": 1})
+	# 3 STR points back (17 + 25 + 34), 2 AP at 17 + 25, skill level 3 at 50
+	check_eq(c.essence, 76 + 42 + 50, "every point as essence")
+	check_eq(c.level, 9, "level kept")
 	check_eq(c.skills.learned[&"t_skill"], 2, "skills kept")
 	check_eq(c.skills.paid, {&"t_skill": 17 + 31}, "and priced as bought, so a job switch can hand it back")
 
@@ -230,8 +264,7 @@ func test_save_from_before_essence_prices_each_skill_in_turn() -> void:
 	fx.skill(&"t_a")
 	fx.skill(&"t_b")
 	var c := fx.character()
-	c.load_dict({"name": "Old", "job": "t_job", "level": 9, "stat_rules": CharacterCodec.STAT_RULES,
-		"base": {}, "skills": {"t_a": 1, "t_b": 2}})
+	c.load_dict({"name": "Old", "job": "t_job", "level": 9, "skills": {"t_a": 1, "t_b": 2}})
 	var paid := int(c.skills.paid[&"t_a"]) + int(c.skills.paid[&"t_b"])
 	check_eq(paid, 17 + 31 + 50, "three levels at the first three prices")
 	check_eq(c.skills.paid.size(), 2, "both priced")
@@ -263,16 +296,15 @@ func test_save_from_before_switching_counts_its_path_as_passed() -> void:
 	newer.load_dict({"name": "New", "job": "t_next", "essence": 0, "base": {}, "jobs_passed": []})
 	check(newer.jobs_passed.is_empty(), "a newer save keeps its own list")
 
-func test_save_from_before_one_stat_per_job_gets_its_points_back_once() -> void:
+func test_save_with_base_stats_gets_its_points_back_once() -> void:
 	var c := fx.character()
 	c.load_dict({"name": "Old", "job": "t_job", "level": 7, "base": {"strength": 12, "dexterity": 8}, "ap": 2, "sp": 0})
-	# 2 unspent AP at STR points 13 and 14 (222 + 250), then 12 STR (1,090) and 8 DEX (449) back
-	check_eq(c.essence, 472 + 1090 + 449, "every spent point's essence back")
-	check_eq([c.base.strength, c.base.dexterity], [0, 0], "back to the start")
-	check_eq(c.ap.buy(&"strength", 5), 5, "bought again")
+	# 2 unspent AP (17 + 25), then 3 DEX points above the start back (17 + 25 + 34)
+	check_eq(c.essence, 42 + 76, "every point's essence back")
+	check(not c.to_dict().has("base"), "no base stats saved again")
 	var again := fx.character()
 	again.load_dict(c.to_dict())
-	check_eq([again.base.strength, again.essence], [5, 2011 - 180], "a newer save keeps its stats")
+	check_eq(again.essence, c.essence, "a newer save gets nothing back twice")
 
 func test_save_from_before_skills_gets_potion_keys() -> void:
 	var c := fx.character()
@@ -285,7 +317,7 @@ func test_oldest_save_with_only_name_and_level() -> void:
 	var c := Character.new()
 	c.load_dict({"name": "Ancient", "level": 3, "xp": 5})
 	check_eq(c.job.id, Character.START_JOB, "beginner")
-	check_eq(c.essence, 5, "the EXP as essence")
+	check_eq([c.level, c.xp, c.essence], [3, 5, 0], "level and EXP kept")
 	check_eq(c.map_id, Character.START_MAP, "start map")
 	check_eq(c.health.hp, c.max_hp(), "full HP")
 	check_eq(c.quickslots.size(), Character.QUICKSLOTS, "quickslots")
@@ -310,7 +342,7 @@ func test_real_new_character_round_trip() -> void:
 	back.load_dict(c.to_dict())
 	check_eq(back.to_dict(), c.to_dict(), "identical")
 
-func test_server_load_turns_an_old_save_into_essence() -> void:
+func test_server_load_keeps_an_old_saves_level() -> void:
 	fx.job()
 	var path := "user://t_old_save.json"
 	var f := FileAccess.open(path, FileAccess.WRITE)
@@ -321,5 +353,6 @@ func test_server_load_turns_an_old_save_into_essence() -> void:
 	if not check(c != null, "loads"):
 		return
 	check_eq(c.job.id, &"t_job", "job")
-	# 50 EXP and 3 skill levels at 17 + 31 + 50
-	check_eq(c.essence, 50 + 98, "EXP and SP as essence")
+	check_eq([c.level, c.xp], [14, 50], "level and EXP")
+	# 3 skill levels at 17 + 31 + 50
+	check_eq(c.essence, 98, "SP as essence")

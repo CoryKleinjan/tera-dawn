@@ -1,18 +1,9 @@
-[gd_resource type="Resource" script_class="QuestDef" load_steps=8 format=3]
+[gd_resource type="Resource" script_class="QuestDef" load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="1_quest_def"]
 [ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="2_quest_objective"]
 [ext_resource type="Resource" path="res://data/monsters/tide_slime.tres" id="3_tide_slime"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
-[ext_resource type="Resource" path="res://data/items/scrolls/scroll_armor_def_60.tres" id="5_reward_scroll"]
-
-[sub_resource type="Resource" id="Resource_2"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("5_reward_scroll")
-chance = 1.0
-min_amount = 1
-max_amount = 1
-
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("2_quest_objective")
 kind = 0
@@ -31,4 +22,4 @@ complete_text = "Ha! My carts can roll again. Thank you, truly."
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1")])
 reward_essence = 12900
 reward_shards = 800
-reward_items = Array[ExtResource("4_drop_entry")]([SubResource("Resource_2")])
+reward_items = Array[ExtResource("4_drop_entry")]([])

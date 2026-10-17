@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="EffectDef" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/effect_def.gd" id="1_effect_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/effects/level_up_1.png" id="2_level_up_1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/effects/level_up_2.png" id="3_level_up_2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/effects/level_up_3.png" id="4_level_up_3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ui/dialogue/level_up_banner.png" id="5_level_up_banner"]
+
+[resource]
+script = ExtResource("1_effect_def")
+id = &"level_up"
+frames = Array[Texture2D]([ExtResource("2_level_up_1"), ExtResource("3_level_up_2"), ExtResource("4_level_up_3")])
+fps = 9.0
+lifetime = 120
+texel = 1.3
+offset = Vector2(0.0, -58.0)
+energy = 1.8
+follow_player = true
+light_color = Color(1.0, 0.8196078431372549, 0.4, 1.0)
+light_energy = 4.0
+light_range = 8.0
+caption = "LEVEL UP!"
+caption_art = ExtResource("5_level_up_banner")
+burst_color = Color(2.6, 2.0, 0.9, 1.0)
+burst_amount = 30
+sound = &"sparkle"

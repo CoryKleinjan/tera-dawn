@@ -112,8 +112,7 @@ func test_magic_guard_takes_part_of_a_hit_out_of_mp() -> void:
 	var c := ann.character
 	var guard := c.skills.mp_guard()
 	check_near(guard, Content.skill(&"magic_guard").mp_guard_at(1), "guarding")
-	c.base.avoid = -999
-	c.recalc()
+	ServerHarness.no_dodge(c)
 	c.mp = c.max_mp()
 	var mp := c.mp
 	var hp := c.health.hp
@@ -129,8 +128,7 @@ func test_magic_guard_lets_hp_take_the_rest_once_mp_runs_out() -> void:
 	var c := ann.character
 	c.mp = 0
 	var hp := c.health.hp
-	c.base.avoid = -999
-	c.recalc()
+	ServerHarness.no_dodge(c)
 	map.hurt_player(ann, mob_def, 400.0)
 	check(c.health.hp < hp, "no MP, so HP takes it all")
 

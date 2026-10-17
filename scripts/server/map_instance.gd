@@ -315,11 +315,14 @@ func kill_mob(m: SimMob, killer: SimPlayer) -> void:
 	for i in m.children.size():
 		m.children[i].wake(m.position.x + (i - (m.children.size() - 1) / 2.0) * 30.0, killer.peer)
 	var from := m.body_position()
+	# a kill pays as much EXP as Dawn Essence
 	server.give_essence(killer, m.essence(), from)
-	# the killer's party on this map shares the essence, and the kill counts for their quests too
+	server.give_xp(killer, m.essence())
+	# the killer's party on this map shares both, and the kill counts for their quests too
 	var credited: Array[SimPlayer] = [killer]
 	for share in server.social.party_shares(killer, m.essence()):
 		server.give_essence(share[0], share[1], from)
+		server.give_xp(share[0], share[1])
 		credited.append(share[0])
 	for p in credited:
 		server.quests.record_kill(p, m.def)
@@ -424,10 +427,10 @@ func hurt_player(p: SimPlayer, def: MonsterDef, from_x: float, power := 1.0) -> 
 	Net.send(p.peer, &"ev_hurt", [from_x])
 	if p.character.health.is_dead():
 		p.faint_t = SimPlayer.FAINT_TICKS
-		var lost := Combat.faint_penalty(p.character.essence)
-		p.character.essence -= lost
+		var lost := Combat.faint_penalty(p.character.xp)
+		p.character.xp -= lost
 		Net.send(p.peer, &"ev_fainted", [])
-		tell(p, "You fainted and lost %d Dawn Essence." % lost, BAD)
+		tell(p, "You fainted and lost %d EXP." % lost, BAD)
 
 # ---------- items ----------
 
@@ -460,8 +463,6 @@ func pick_up(p: SimPlayer, d: SimDrop) -> bool:
 		return true
 	var found := d.amount
 	if d.item.is_currency:
-		# Charisma finds a few more
-		found = roundi(d.amount * CharacterStats.shard_bonus(ch.stats))
 		ch.shards += found
 		p.dirty_vitals = true
 	elif d.stack:

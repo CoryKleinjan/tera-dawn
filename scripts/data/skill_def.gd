@@ -60,7 +60,7 @@ const AMBUSH_GROUP := 110.0
 @export var hits := 1
 @export var damage_multiplier := 1.0
 @export var damage_per_level := 0.0
-## Uses Magic Attack and INT instead of the weapon (spells).
+## Uses Magic Attack and power instead of the weapon (spells).
 @export var magic := false
 ## Shown flying to each target. Null for melee.
 @export var projectile: ProjectileDef

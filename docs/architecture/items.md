@@ -4,42 +4,42 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
 
 ## Items, equipment and stats
 
-Stats work like MapleStory. A character has base **STR / DEX / INT / LUK / CHA** (their job's
-starting stats plus the points they buy with Dawn Essence), and everything they wear adds
-a **StatBlock** on top. `Character.stats` is the total. From it, `CharacterStats` works out:
+There are no base stats: a character's level and job set what gear doesn't. Everything they
+wear (and their passive and buff skills) adds a **StatBlock**; `Character.stats` is the total.
+From the level, job and stats, `CharacterStats` works out:
 
-- **Damage range**: max = main stat × `MAIN_STAT_WEIGHT` × Weapon Attack / 100 × `DAMAGE_SCALE`,
-  min = max × the job's mastery. The job's `primary_stat` is its one main stat (STR for
-  warriors, CHA for pirates); no other stat adds to damage. A job with `uses_best_stat` (the
-  Beginner) hits with whichever base stat is highest (`JobDef.damage_stat`).
-- What each stat also gives: STR Max HP, INT Max MP (and Magic Attack), DEX Accuracy, LUK Avoidability (dodging their touches), CHA a shop discount
-  (`shop_discount`, capped at `MAX_DISCOUNT`, used by `ShopEntry.cost_for`) and more
-  Dawnshards picked up (`shard_bonus`). Weapon Defense lowers the damage, Speed and Jump scale
-  movement.
-- Max HP and MP: the job's base plus its `hp_growth`/`mp_growth` times `CharacterStats.growth`
-  (one step per `GROWTH_POINTS` stat points bought) plus gear, plus STR and INT.
+- **Power** (`power`): the job's `base_power` plus `POWER_PER_LEVEL` every level past the first;
+  `Character.power` adds the Monster Book's rank (`MonsterBook.power_bonus`).
+- **Damage range**: max = power × `MAIN_STAT_WEIGHT` × Weapon Attack / 100 × `DAMAGE_SCALE`,
+  min = max × the job's mastery. Spells use Magic Attack plus power (`magic_attack`).
+- Avoidability (dodging monster touches): gear's, `BASE_AVOID`, and the job's `avoid_growth` a
+  level. Weapon Defense lowers the damage, Speed and Jump scale movement.
+- Max HP and MP: the job's base plus its `hp_growth`/`mp_growth` times the level, plus gear.
 - Attack Speed (%) shortens cooldowns and swings (`attack_ticks`); Melee and Ranged Damage (%)
   raise hits with and without a projectile (`damage_bonus`).
-- When these rules change, `CharacterCodec.STAT_RULES` goes up and older saves get every
-  stat point back as essence once (`AbilityPoints.refund_all`).
 
 `Combat` uses those numbers, so all balance lives in `character_stats.gd` and `combat.gd`.
 
-Dawn Essence (`Character.essence`) replaces levels and EXP: monsters (`MonsterDef.essence`,
-flown to the killer by `TDWorldFx.fly_essence`) and quests (`QuestDef.reward_essence`) give
-it, and it buys stat points (`AbilityPoints.buy`, `CharacterStats.stat_price`: each point in a
-stat costs more than the last) and skill levels (`SkillBook.learn`,
-`CharacterStats.skill_price`: each skill level bought makes the next dearer). Fainting loses
-10% of what's unspent (`Combat.faint_penalty`). Saves from before essence turn their EXP and
-unspent points into essence (`CharacterCodec._essence_from_levels`).
+Levels (`Character.level`, `xp`, up to `MAX_LEVEL`) come from EXP: `TDServer.give_xp` adds a
+kill's essence (`SimMob.essence`) or a quest's `reward_essence` as EXP, `Character.gain_xp`
+levels up on `CharacterStats.xp_need` and refills HP and MP, and `ev_level_up` plays the
+`level_up` effect and jingle (`TDWorldFx.show_level_up`). Fainting loses 10% of the EXP toward
+the next level (`Combat.faint_penalty`).
+
+Dawn Essence (`Character.essence`): monsters (`MonsterDef.essence`, flown to the killer by
+`TDWorldFx.fly_essence`) and quests (`QuestDef.reward_essence`) give it, and it buys skill
+levels (`SkillBook.learn`, `CharacterStats.skill_price`: each skill level bought makes the
+next dearer). Saves that still carry base stats get the essence of every stat point bought
+back (`CharacterCodec.old_points_bought`); saves from before essence keep their level and EXP
+and turn unspent points into essence (`CharacterCodec._essence_from_points`); saves from the
+days without levels get a level per `CharacterCodec.OLD_POINTS_PER_LEVEL` stat points.
 
 There are four inventory tabs, and the class of the item decides which one it goes in:
 
 | Class | Tab | What |
 | --- | --- | --- |
-| **EquipDef** | Equip | Gear: slot, required level and stats, a `StatBlock` of bonuses, and `variance` (each dropped copy rolls every stat up or down by up to this much) |
+| **EquipDef** | Equip | Gear: slot, the job lines that wear it, a hidden tuning tier (`required_level`), a `StatBlock` of bonuses, and `variance` (each dropped copy rolls every stat up or down by up to this much) |
 | **UseDef** | Use | Potions: HP / MP restored (flat and percent), effect, cooldown |
-| **ScrollDef** | Use | Upgrade scrolls: the gear `slots` they work on, a success `chance` and the `stats` they add. Each use spends one of the gear's `upgrade_slots` (`ItemStack.slots_used`; `upgrades` counts the ones that worked) |
 | **ItemDef** | Etc | Monster parts and anything else; stacks up to `max_stack` |
 | **PetDef** | Setup | Pets: `loot_reach`, `loot_every`, `hunger_ticks` and their `chatter` |
 | **CardDef** | (book) | Monster Book cards, made by `Content` for every monster |
@@ -56,9 +56,9 @@ The Shield slot is called Off-hand in the game (its place key stays `shield`): i
    edit in `tools/art/gemini_pass.json`, cut by its `art/sheets/items_*.json` manifest). Gear
    has no icon yet; an item slot shows the item's name instead, and a drop shows only its glow.
    Gear the hero wears also sets `worn` (its layer, see [characters](characters.md)).
-2. Create the `.tres` in `data/items/equips/`, `use/`, `etc/`, `scrolls/` or `setup/` as an
+2. Create the `.tres` in `data/items/equips/`, `use/`, `etc/` or `setup/` as an
    **EquipDef**, **UseDef** or **ItemDef**. Fill in `id`, name, description, icon and
-   `sell_price`; for gear, the slot, requirements and a **StatBlock** in `stats`.
+   `sell_price`; for gear, the slot, its job lines and a **StatBlock** in `stats`.
 3. Make something drop it: a **DropEntry** on a monster's `drops` (item, chance from 0 to 1,
    amount range). Rare gear is usually 1 to 4%.
 

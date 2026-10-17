@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=174 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=170 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
@@ -11,9 +11,7 @@
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="13_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="14_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="15_white_potion"]
-[ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_int_60.tres" id="16_scroll_top_int_60"]
 [ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="17_blue_potion"]
-[ext_resource type="Resource" path="res://data/items/scrolls/scroll_armor_def_60.tres" id="18_scroll_armor_def_60"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="19_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/rock_large.png" id="20_rock_large"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/bush_large.png" id="21_bush_large"]
@@ -890,12 +888,6 @@ item = ExtResource("15_white_potion")
 min_amount = 3
 max_amount = 3
 
-[sub_resource type="Resource" id="Loot_1_2"]
-script = ExtResource("13_drop_entry")
-item = ExtResource("16_scroll_top_int_60")
-min_amount = 1
-max_amount = 1
-
 [sub_resource type="Resource" id="Breakable_1"]
 script = ExtResource("11_breakable_def")
 id = &"mossy_glade_crown_chest"
@@ -905,7 +897,7 @@ hits = 1
 whole = ExtResource("34_chest")
 broken = ExtResource("35_chest_open")
 height = 48.0
-loot = Array[ExtResource("13_drop_entry")]([SubResource("Loot_1_0"), SubResource("Loot_1_1"), SubResource("Loot_1_2")])
+loot = Array[ExtResource("13_drop_entry")]([SubResource("Loot_1_0"), SubResource("Loot_1_1")])
 card = ExtResource("10_seedwing")
 
 [sub_resource type="Resource" id="Loot_2_0"]
@@ -920,12 +912,6 @@ item = ExtResource("17_blue_potion")
 min_amount = 3
 max_amount = 3
 
-[sub_resource type="Resource" id="Loot_2_2"]
-script = ExtResource("13_drop_entry")
-item = ExtResource("18_scroll_armor_def_60")
-min_amount = 1
-max_amount = 1
-
 [sub_resource type="Resource" id="Breakable_2"]
 script = ExtResource("11_breakable_def")
 id = &"mossy_glade_far_chest"
@@ -935,7 +921,7 @@ hits = 1
 whole = ExtResource("34_chest")
 broken = ExtResource("35_chest_open")
 height = 48.0
-loot = Array[ExtResource("13_drop_entry")]([SubResource("Loot_2_0"), SubResource("Loot_2_1"), SubResource("Loot_2_2")])
+loot = Array[ExtResource("13_drop_entry")]([SubResource("Loot_2_0"), SubResource("Loot_2_1")])
 card = ExtResource("9_bramble_boar")
 
 [resource]

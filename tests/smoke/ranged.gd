@@ -45,7 +45,6 @@ func check() -> void:
 	ch.job = Content.job(&"mage")
 	ch.equipment.take(&"weapon")
 	ch.equipment.put(&"weapon", ItemStack.exact(Content.item(&"apprentice_wand")))
-	ch.base.intelligence = 60
 	ch.skills.learned[&"ice_spike"] = 1
 	ch.recalc()
 	var bolt: SkillDef = Content.skill(&"ice_spike")

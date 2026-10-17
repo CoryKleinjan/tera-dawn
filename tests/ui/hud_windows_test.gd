@@ -40,7 +40,6 @@ func _fill_bag(c: Character) -> void:
 	for k: Callable in [
 			func(i: ItemDef) -> bool: return i is EquipDef,
 			func(i: ItemDef) -> bool: return i is UseDef,
-			func(i: ItemDef) -> bool: return i is ScrollDef,
 			func(i: ItemDef) -> bool: return i.tab() == ItemDef.Tab.ETC and not i is CardDef,
 			func(i: ItemDef) -> bool: return i is PetDef]:
 		var list := _items(k)
@@ -128,21 +127,6 @@ func test_inventory_hover_shows_the_item_under_the_mouse() -> void:
 	await ui.hover(inv, inv.slot_rect(Inventory.SLOTS - 1).get_center())
 	check(ui.hud.tooltip.stack == null, "hovering an empty slot shows nothing, got %s in tab %d at %s" % [ui.hud.tooltip.stack.item.id if ui.hud.tooltip.stack else "", inv.tab, ui.hud.tooltip.at])
 
-func test_inventory_scroll_waits_for_gear_and_right_click_cancels() -> void:
-	var scroll: ScrollDef = _items(func(i: ItemDef) -> bool: return i is ScrollDef)[0]
-	await ui.edit(func(c: Character) -> void:
-		c.inventory.add(scroll, 2)
-		c.inventory.add(Content.item(&"leaf_cap")))
-	var inv: TDInventoryWindow = _open("inventory")
-	inv.tab = ItemDef.Tab.USE
-	var at := Game.me.inventory.find(scroll)
-	inv.use_slot(at)
-	check_eq(inv.scrolling, at, "double-clicking a scroll picks it up")
-	check_eq(inv.tab, ItemDef.Tab.EQUIP, "and turns to the Equip tab")
-	await _redrawn(inv, "inventory with a scroll picked up")
-	await ui.click(inv, inv.slot_rect(20).get_center(), MOUSE_BUTTON_RIGHT)
-	check_eq(inv.scrolling, -1, "right-click puts the scroll back")
-
 func test_inventory_double_click_equips_through_the_server() -> void:
 	await ui.edit(func(c: Character) -> void:
 		c.inventory.clear()
@@ -215,48 +199,17 @@ func _plus_rects(win: TDWindow) -> Array[Rect2]:
 
 # ---------- character stats ----------
 
-func test_stats_plus_buttons_buy_with_dawn_essence() -> void:
-	# a fresh character: every stat's first point costs the same, and this pays for one
-	await ui.edit(func(c: Character) -> void: c.essence = CharacterStats.stat_price(0))
+func test_stats_window_has_nothing_to_buy() -> void:
+	# Dawn Essence buys skill levels only: the Character window just shows it
+	await ui.edit(func(c: Character) -> void: c.essence = 100000)
 	var stats: TDStatsWindow = _open("stats")
-	await _redrawn(stats, "stats with essence to spend")
-	var plus := _plus_rects(stats) # drawn in StatBlock.BASE order
-	check_eq(plus.size(), StatBlock.BASE.size(), "a + for every base stat")
-	for i in plus.size():
-		check(Rect2(Vector2.ZERO, stats.size).encloses(plus[i]), "the %s + lies inside the window" % StatBlock.BASE[i])
-	var str_before := Game.me.base.strength
-	var price := Game.me.ap.price(&"strength")
-	check_eq(price, CharacterStats.stat_price(0), "the first STR point costs the base price")
-	await ui.click(stats, plus[StatBlock.BASE.find(&"strength")].get_center())
-	await ui.ticks(3)
-	check_eq(Game.me.base.strength, str_before + 1, "STR after clicking its +")
-	check_eq(Game.me.essence, 0, "the point's price was paid")
-	check_eq(Game.me.ap.price(&"strength"), CharacterStats.stat_price(1), "the next STR point costs more")
-	await _redrawn(stats, "stats with no essence left")
-	check(_plus_rects(stats).is_empty(), "no + buttons once the essence is spent")
+	await _redrawn(stats, "stats with essence in hand")
+	check(_plus_rects(stats).is_empty(), "no + buttons")
+	check(stats.content_end <= stats.size.y - 16, "the rows fit")
 
 func test_stats_window_leaves_the_status_bar_visible() -> void:
 	var stats: TDStatsWindow = _open("stats")
 	check(stats.position.y + stats.size.y < TDWorld.VIEW.y - TDStatusBar.HEIGHT, "ends above the HP bar")
-
-func test_stats_hide_plus_buttons_without_essence() -> void:
-	await ui.edit(func(c: Character) -> void: c.essence = 0)
-	var stats: TDStatsWindow = _open("stats")
-	await _redrawn(stats, "stats")
-	check(_plus_rects(stats).is_empty(), "no + buttons with no Dawn Essence")
-	check(not TDStatsWindow.can_buy_any(Game.me), "nothing to buy")
-
-func test_stats_show_plus_only_where_the_essence_pays() -> void:
-	# five STR points bought make the next one dearer than a first point anywhere else
-	await ui.edit(func(c: Character) -> void:
-		c.essence = 1000000
-		c.ap.buy(&"strength", 5)
-		c.essence = CharacterStats.stat_price(0))
-	check(Game.me.ap.price(&"strength") > Game.me.essence, "STR costs more than the essence in hand")
-	var stats: TDStatsWindow = _open("stats")
-	await _redrawn(stats, "stats with essence for some stats")
-	check_eq(_plus_rects(stats).size(), StatBlock.BASE.size() - 1, "a + for every stat but STR")
-	check(TDStatsWindow.can_buy_any(Game.me), "something to buy")
 
 func test_stats_window_for_a_beginner() -> void:
 	await ui.edit(func(c: Character) -> void:
@@ -267,8 +220,7 @@ func test_stats_window_for_a_beginner() -> void:
 	check_eq(stats.size.y, TDStatsWindow.BASE_H, "no job paths, no extra room")
 	check(stats.position.y + stats.size.y < TDWorld.VIEW.y - TDStatusBar.HEIGHT, "ends above the HP bar (%s)" % (stats.position.y + stats.size.y))
 	check(stats.content_end <= stats.size.y - 16, "the rows fit")
-	check_eq(stats.auto_rect, Rect2(), "no Auto button for a Beginner")
-	check_eq(_plus_rects(stats).size(), StatBlock.BASE.size(), "a + for every stat")
+	check(_plus_rects(stats).is_empty(), "no + buttons")
 
 func test_stats_window_for_a_warrior() -> void:
 	await ui.edit(func(c: Character) -> void:
@@ -278,46 +230,13 @@ func test_stats_window_for_a_warrior() -> void:
 	check_eq(stats.size.y, TDStatsWindow.BASE_H, "the same height as a Beginner's")
 	check(stats.content_end <= stats.size.y - 16, "the rows fit")
 
-func test_stats_auto_buys_damage_stats_through_the_server() -> void:
-	await ui.edit(func(c: Character) -> void:
-		c.job = Content.job(&"thief")
-		c.essence = 600)
-	var stats: TDStatsWindow = _open("stats")
-	await _redrawn(stats, "stats with an Auto button")
-	check(stats.auto_rect.size.x > 0 and Rect2(Vector2.ZERO, stats.size).encloses(stats.auto_rect), "Auto lies inside the window")
-	# what AbilityPoints.auto should buy: the cheaper damage stat each time, while the essence lasts
-	var main := Game.me.job.damage_stats()
-	var bought := {}
-	for stat in main:
-		bought[stat] = Game.me.ap.bought(stat)
-	var left := Game.me.essence
-	var want := {}
-	while true:
-		var next: StringName = main[0]
-		for stat in main:
-			if CharacterStats.stat_price(bought[stat]) < CharacterStats.stat_price(bought[next]):
-				next = stat
-		var price := CharacterStats.stat_price(bought[next])
-		if left < price:
-			break
-		left -= price
-		bought[next] += 1
-		want[next] = int(want.get(next, 0)) + 1
-	var before := Game.me.base.copy()
-	await ui.click(stats, stats.auto_rect.get_center())
-	await ui.ticks(3)
-	check_eq(Game.me.essence, left, "Dawn Essence left once the next point costs too much")
-	for stat in StatBlock.BASE:
-		check_eq(Game.me.base.value(stat) - before.value(stat), int(want.get(stat, 0)), "%s as Auto buys it" % stat)
-	check(int(want.get(&"luck", 0)) > 0, "the thief's LUK gets points")
-
 func test_status_bar_glows_while_essence_waits() -> void:
 	await ui.edit(func(c: Character) -> void:
 		c.job = Content.job(&"warrior")
 		c.essence = 0)
 	check(not TDStatusBar.has_points_waiting("stats") and not TDStatusBar.has_points_waiting("skills"), "nothing to spend, no glow")
 	await ui.edit(func(c: Character) -> void: c.essence = 100000)
-	check(TDStatusBar.has_points_waiting("stats"), "the Character button glows when the essence buys a stat")
+	check(not TDStatusBar.has_points_waiting("stats"), "the Character button never glows: it has nothing to buy")
 	check(TDStatusBar.has_points_waiting("skills"), "the Skills button glows when it buys a skill level")
 	check(not TDStatusBar.has_points_waiting("inventory"), "other buttons don't")
 	check(await ui.redraw(ui.hud.status), "the status bar draws the glow")
@@ -494,6 +413,18 @@ func test_world_map_shows_the_major_routes_between_cities() -> void:
 		await _redrawn(wm, "world map hovering %s" % r.id)
 	wm._hovered(Vector2(-50, -50))
 	check_eq(wm.hovered_region, &"", "hovering outside the map finds nothing")
+
+func test_world_map_opens_on_the_zone_you_are_in() -> void:
+	var wm: TDWorldMapWindow = _open("worldmap")
+	var here: MapDef = Content.maps[wm._here()]
+	check(Content.regions.has(here.region), "the start map %s is in a zone" % here.id)
+	check_eq(wm.zone, here.region, "the map opens on %s, where you are" % here.region)
+	await _redrawn(wm, "zone %s" % here.region)
+	await ui.click(wm, wm.back_rect().get_center())
+	check_eq(wm.zone, &"", "the back arrow still leads to the world view")
+	wm.toggle()
+	wm.toggle()
+	check_eq(wm.zone, here.region, "opening it again goes back to %s" % here.region)
 
 func test_world_map_click_opens_a_zone_and_the_arrow_goes_back() -> void:
 	var wm: TDWorldMapWindow = _open("worldmap")
@@ -686,11 +617,7 @@ func _safe_page_option(label: String) -> bool:
 
 func test_every_npc_dialogue_and_its_pages() -> void:
 	await ui.edit(func(c: Character) -> void:
-		_quest_log(c)
-		c.base.strength = 60
-		c.base.dexterity = 60
-		c.base.intelligence = 60
-		c.base.luck = 60)
+		_quest_log(c))
 	var talk: TDDialogueWindow = _win("dialogue")
 	var ids := Content.npcs.keys()
 	ids.sort()

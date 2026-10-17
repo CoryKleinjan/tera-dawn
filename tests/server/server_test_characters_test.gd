@@ -1,9 +1,9 @@
 extends TestCase
-## Developer test characters (TestCharacters): one per job with its stat points bought, in the
+## Developer test characters (TestCharacters): one per job at the top level, in the
 ## best gear the job can wear up to the gear tier and able to wear all of it, with every skill,
 ## the Dawnshards and Dawn Essence to spare; they're
 ## kept in their own folder apart from the player's own characters, only the missing ones
-## are made unless asked to rebuild, and each is put back in its job's town with its stats topped up.
+## are made unless asked to rebuild, and each is put back in its job's town at the top level.
 
 const ServerHarness := preload("res://tests/framework/server_helpers.gd")
 
@@ -23,9 +23,8 @@ func test_every_job_gets_a_grown_character_in_gear_it_can_wear() -> void:
 	for job in TestCharacters.jobs():
 		var c := TestCharacters.build(TestCharacters.name_for(job), job)
 		check_eq(c.job, job, "%s: the job" % job.id)
-		check(c.ap.spent() >= TestCharacters.STAT_POINTS, "%s: its stat points bought (%d)" % [job.id, c.ap.spent()])
-		for stat in StatBlock.BASE:
-			check(c.base.value(stat) >= TestCharacters.STAT, "%s: %s bought up to %d (%d)" % [job.id, stat, TestCharacters.STAT, c.base.value(stat)])
+		check_eq([c.level, c.xp], [Character.MAX_LEVEL, 0], "%s: the top level" % job.id)
+		check_eq(c.power(), CharacterStats.power(job, Character.MAX_LEVEL), "%s: the top level's power" % job.id)
 		check_eq(c.shards, TestCharacters.SHARDS, "%s: Dawnshards" % job.id)
 		check_eq(c.essence, TestCharacters.ESSENCE, "%s: Dawn Essence to try buying with" % job.id)
 		check(c.gear.weapon() != null, "%s: holds a weapon" % job.id)
@@ -110,13 +109,13 @@ func test_they_are_kept_until_rebuilt() -> void:
 	for n in store.names():
 		var kept := store.load_character(n)
 		kept.map_id = &"nowhere"
-		kept.base.luck = 10
+		kept.level = 5
 		store.save(kept)
 	TestCharacters.prepare(store, false)
 	for n in store.names():
 		var kept := store.load_character(n)
 		check_eq(kept.map_id, TestCharacters.home_town(kept.job), "%s back in its town" % n)
-		check(kept.base.luck >= TestCharacters.STAT, "%s: stats topped up to %d" % [n, TestCharacters.STAT])
+		check_eq(kept.level, Character.MAX_LEVEL, "%s back at the top level" % n)
 	TestCharacters.prepare(store, true)
 	check_eq(store.load_character(first).shards, TestCharacters.SHARDS, "made fresh")
 	check_eq(store.names().size(), Content.jobs.size(), "still one per job")

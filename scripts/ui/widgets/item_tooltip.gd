@@ -1,7 +1,7 @@
 class_name TDItemTooltip
 extends Control
-## The card that follows the mouse over an item slot: name, kind, requirements (red when
-## not met), stats, how gear compares with what's worn in its slot, what a potion restores,
+## The card that follows the mouse over an item slot: name, kind, which jobs can use it (red
+## when yours can't), stats, how gear compares with what's worn in its slot, what a potion restores,
 ## the description and what double-clicking does. Drawn above every window.
 
 const W := 220.0
@@ -49,10 +49,6 @@ func _lines() -> Array:
 		out.append(["Equip · %s%s" % [e.slot_name(), kind], Palette.MUTED, 11])
 		if not e.jobs.is_empty():
 			out.append(["%s only" % EquipDef.families_text(e.jobs), Palette.MIST if Game.me.gear.can_use(e.jobs) else Palette.BAD, 12])
-		var reqs := e.requirements()
-		for key in reqs:
-			var have := Game.me.stats.value(key)
-			out.append(["Requires %s %d" % [StatBlock.LABELS[key], reqs[key]], Palette.MIST if have >= reqs[key] else Palette.BAD, 12])
 		var base := e.stats if e.stats else StatBlock.new()
 		for f in stack.stats.nonzero():
 			var v := stack.stats.value(f)
@@ -62,7 +58,6 @@ func _lines() -> Array:
 			elif v < base.value(f):
 				col = Palette.WARN
 			out.append(["%s: %s" % [StatBlock.LABELS[f], StatBlock.format(f, v)], col, 12])
-		out.append(["Upgrades available: %d" % stack.slots_left(), Palette.MUTED, 11])
 		if compare:
 			out.append_array(_comparison(e))
 	elif item is UseDef:
@@ -85,13 +80,6 @@ func _lines() -> Array:
 	elif item is CardDef:
 		var card := item as CardDef
 		out.append(["Monster Book card · %d/%d found" % [Game.me.book.cards(card.monster), CardDef.SET], Palette.CARD, 11])
-	elif item is ScrollDef:
-		var sc := item as ScrollDef
-		out.append(["Upgrade scroll · %s" % sc.slot_text(), Palette.MUTED, 11])
-		out.append(["Success rate: %d%%" % roundi(sc.chance * 100.0), Palette.SUN, 12])
-		if sc.stats:
-			for f in sc.stats.nonzero():
-				out.append(["%s +%s" % [StatBlock.LABELS[f], StatBlock.format(f, sc.stats.value(f))], Palette.MIST, 12])
 	else:
 		out.append(["Etc", Palette.MUTED, 11])
 	if item.description != "":

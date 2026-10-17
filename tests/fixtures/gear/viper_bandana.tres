@@ -25,5 +25,3 @@ jobs = Array[StringName]([&"thief"])
 required_level = 25
 stats = SubResource("Resource_1")
 variance = 2
-upgrade_slots = 7
-required_luck = 50

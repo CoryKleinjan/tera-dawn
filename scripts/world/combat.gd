@@ -19,11 +19,11 @@ static func player_hit(skill: SkillDef, _target: MonsterDef, ch: Character) -> D
 ## Damage a character takes from a monster's touch (or a move `power` times as strong),
 ## or 0 if they dodge it.
 static func monster_hit(monster: MonsterDef, ch: Character, power := 1.0) -> int:
-	var dodge := clampf(CharacterStats.avoid(ch.stats) * 0.004, 0.0, 0.3)
+	var dodge := clampf(ch.avoid() * 0.004, 0.0, 0.3)
 	if randf() < dodge:
 		return 0
 	return maxi(1, roundi(monster.attack * power * randf_range(0.85, 1.15) - ch.stats.defense * 0.3))
 
-## Dawn Essence (of what's unspent) lost when the player faints.
-static func faint_penalty(essence: int) -> int:
-	return int(essence * 0.1)
+## EXP (of what's toward the next level) lost when the player faints.
+static func faint_penalty(xp: int) -> int:
+	return int(xp * 0.1)

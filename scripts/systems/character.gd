@@ -1,15 +1,15 @@
 class_name Character
 extends RefCounted
-## One character: name, Dawn Essence, job, stats, quickslots, inventory, storage, quests,
+## One character: name, level, EXP, Dawn Essence, job, stats, quickslots, inventory, storage, quests,
 ## Dawnshards, HP, MP, the map they're on and what they've done. Formulas live in
-## CharacterStats; this only holds and changes state. Three parts keep their own state and
-## rules: `skills` (SkillBook: skills bought and buffs), `ap` (AbilityPoints: stats bought)
-## and `gear` (Gear: wearing gear and scrolls; what's worn is `equipment`).
+## CharacterStats; this only holds and changes state. Two parts keep their own state and
+## rules: `skills` (SkillBook: skills bought and buffs) and `gear` (Gear: wearing gear; what's
+## worn is `equipment`).
 ##
 ## The server owns the real Character of every player. Each client keeps a copy of its own
 ## (Game.me) that the server refreshes, so the UI can read it but never changes it directly.
 
-## Base stats or gear changed: anything showing stats should refresh.
+## Level, gear or skills changed: anything showing stats should refresh.
 signal stats_changed
 
 ## The first town: where the way out of the tutorial leads, and where you wake after fainting
@@ -24,9 +24,15 @@ const QUICKSLOTS := 8
 const BASIC_ATTACK := &"basic_attack"
 ## What a storage keeper charges to store one stack.
 const STORE_FEE := 10
+## The level cap: EXP stops here.
+const MAX_LEVEL := 100
 
 var name := ""
-## Unspent Dawn Essence: monsters and quests give it, stats and skills cost it.
+## Levels come from EXP (monsters and quests give it); each one raises power, Max HP and MP by
+## the job's growth (CharacterStats).
+var level := 1
+var xp := 0
+## Unspent Dawn Essence: monsters and quests give it, skill levels cost it.
 var essence := 0
 var shards := 0
 var mp := 0
@@ -39,23 +45,19 @@ var came_from: StringName = &""
 ## Ids of every job this character has passed (its Job Test taken and its gifts handed over),
 ## so switching back to one is free.
 var jobs_passed: Array[String] = []
-## Stats from the job and the points bought, before gear.
-var base := StatBlock.new()
-## Buying stats.
-var ap := AbilityPoints.new(self)
 var inventory := Inventory.new()
 ## Kept by storage keepers in town.
 var storage := Inventory.new()
 ## What's worn.
 var equipment := Equipment.new()
-## Putting gear on and off and upgrade scrolls.
+## Putting gear on and off.
 var gear := Gear.new(self)
 var quests := QuestLog.new()
 ## Skills learned and buffs running.
 var skills := SkillBook.new(self)
 ## One per quickslot: [] (empty), ["skill", id] or ["item", id].
 var quickslots: Array = []
-## Base stats plus everything worn. Kept up to date by recalc().
+## Everything worn plus skill bonuses. Kept up to date by recalc().
 var stats := StatBlock.new()
 ## Names of this character's buddies (the server keeps them both ways).
 var buddies: Array[String] = []
@@ -87,13 +89,12 @@ func _init() -> void:
 	quickslots.resize(QUICKSLOTS)
 	quickslots.fill([])
 
-## A fresh character of `job_id` with the job's starting stats, gear and items, and
+## A fresh character of `job_id` with the job's starting gear and items, and
 ## the outfit picked in the character creator (`made`, null for the defaults).
 static func create(char_name: String, job_id := START_JOB, made: NewCharacter = null) -> Character:
 	var c := Character.new()
 	c.name = char_name
 	c.job = Content.job(job_id)
-	c.base = c.job.starting_stats.copy() if c.job.starting_stats else StatBlock.new()
 	if made == null:
 		made = NewCharacter.new(job_id)
 	for e in made.starting_gear(c.job):
@@ -108,13 +109,12 @@ static func create(char_name: String, job_id := START_JOB, made: NewCharacter = 
 	c.map_id = NEW_MAP if Content.maps.has(NEW_MAP) else START_MAP
 	return c
 
-## Works out the total stats again after base stats or gear change.
+## Works out the total stats again after the level, gear or skills change.
 func recalc() -> void:
 	if job == null:
 		return
-	stats = base.plus(equipment.bonus())
+	stats = equipment.bonus()
 	stats.add(skills.bonus())
-	stats.add(book.bonus())
 	health.set_max(max_hp())
 	mp = mini(mp, max_mp())
 	stats_changed.emit()
@@ -125,20 +125,53 @@ func refill() -> void:
 	mp = max_mp()
 
 func max_hp() -> int:
-	return CharacterStats.max_hp(job, ap.spent(), stats)
+	return CharacterStats.max_hp(job, level, stats)
 
 func max_mp() -> int:
-	return CharacterStats.max_mp(job, ap.spent(), stats)
+	return CharacterStats.max_mp(job, level, stats)
+
+## What damage grows from: the job's power at this level plus the Monster Book's rank.
+func power() -> int:
+	return CharacterStats.power(job, level) + book.power_bonus()
 
 func damage_range() -> Vector2i:
-	return CharacterStats.damage_range(job, stats)
+	return CharacterStats.damage_range(job, power(), stats)
 
 func magic_range() -> Vector2i:
-	return CharacterStats.magic_range(job, stats)
+	return CharacterStats.magic_range(job, power(), stats)
 
-## How far the character has grown (see CharacterStats.growth): what HP and MP regen go by.
-func growth() -> float:
-	return CharacterStats.growth(ap.spent())
+func magic_attack() -> int:
+	return CharacterStats.magic_attack(stats, power())
+
+func avoid() -> int:
+	return CharacterStats.avoid(job, level, stats)
+
+## EXP needed to go from level `lvl` (this character's own by default) to the next.
+func xp_need(lvl := -1) -> int:
+	return CharacterStats.xp_need(level if lvl < 0 else lvl)
+
+## Whether the character is at MAX_LEVEL, where EXP stops.
+func at_max_level() -> bool:
+	return level >= MAX_LEVEL
+
+## Adds EXP and returns how many levels were gained; each level up refills HP and MP. At
+## MAX_LEVEL EXP stops (kept at 0).
+func gain_xp(n: int) -> int:
+	if at_max_level():
+		xp = 0
+		return 0
+	xp += maxi(0, n)
+	var gained := 0
+	while not at_max_level() and xp >= xp_need():
+		xp -= xp_need()
+		level += 1
+		gained += 1
+	if at_max_level():
+		xp = 0
+	if gained > 0:
+		recalc()
+		refill()
+	return gained
 
 ## Adds Dawn Essence (from a monster or a quest).
 func gain_essence(n: int) -> void:

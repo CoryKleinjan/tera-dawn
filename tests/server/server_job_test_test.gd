@@ -143,10 +143,9 @@ func test_leaving_starts_it_fresh_and_fainting_sends_you_to_town() -> void:
 	check(not _boss(p.map).dead, "so it steps out at once")
 
 func test_a_fresh_beginner_can_beat_it() -> void:
-	# a Beginner ready for their job (Balance tier 10)'s basic attack, every stat point
-	# bought in STR as the Auto button would
+	# a Beginner ready for their job (level 10, Balance tier 10)'s basic attack
 	var hero := Character.create("Tester", Character.START_JOB)
-	hero.base.strength += 9 * CharacterStats.GROWTH_POINTS
+	hero.level = 10
 	hero.recalc()
 	var boss: MonsterDef = Content.monster(&"tear_boss")
 	var skill: SkillDef = Content.skills[Character.BASIC_ATTACK]

@@ -22,10 +22,11 @@ func check() -> void:
 			slow += " %s %.0f" % [m.id, kills]
 	_check(worst == "", "every job beats monsters of its tier in a few hits%s" % worst)
 	_check(slow == "", "no monster takes too many kills a tier%s" % slow)
-	# the stat point a tier-20 or tier-30 character buys next (all in one stat, as Balance.typical)
-	var at_20 := CharacterStats.stat_price(19 * CharacterStats.GROWTH_POINTS)
-	var at_30 := CharacterStats.stat_price(29 * CharacterStats.GROWTH_POINTS)
-	_check(CharacterStats.stat_price(0) < 100 and CharacterStats.skill_price(0) < 100 and at_30 > at_20 * 2, "the first stat points are cheap and later ones cost more")
+	# power grows every level; skill levels start cheap and get dear
+	var at_20 := Balance.typical(&"warrior", 20)
+	var at_30 := Balance.typical(&"warrior", 30)
+	_check(at_30.power() == at_20.power() + 10 * CharacterStats.POWER_PER_LEVEL, "power grows with every level")
+	_check(CharacterStats.skill_price(0) < 100 and CharacterStats.skill_price(30) > CharacterStats.skill_price(0) * 2, "the first skill levels are cheap and later ones cost more")
 	var steam_ids := {}
 	var achievements := Achievements.all()
 	for a in achievements:

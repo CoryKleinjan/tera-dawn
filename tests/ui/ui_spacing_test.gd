@@ -39,7 +39,7 @@ func _check_layout(w: TDWindow, what: String) -> void:
 		var width := DrawUtil.text_width(Game.ui_font, label, TDWindow.tab_font_size(r, label))
 		check(width <= TDWindow.tab_text_width(r), "%s: the %s tab's label (%d px) fits its tab (%d px)" % [what, label, width, TDWindow.tab_text_width(r)])
 
-## Makes the player a `job` with Dawn Essence for every stat's next point and skill levels.
+## Makes the player a `job` with Dawn Essence for skill levels.
 func _spender(job: StringName) -> void:
 	await ui.edit(func(c: Character) -> void:
 		c.job = Content.job(job)
@@ -47,14 +47,13 @@ func _spender(job: StringName) -> void:
 		c.guild = "Dawnbreakers"
 		c.fame = 12)
 
-func test_stat_plus_buttons_and_auto_keep_apart() -> void:
+func test_character_window_fits_with_no_stat_buttons() -> void:
 	for job: StringName in [&"warrior", &"beginner"]:
 		await _spender(job)
 		var stats: TDStatsWindow = await _open("stats")
 		_check_layout(stats, "Character window, %s" % job)
 		var plus := stats._buttons.filter(func(b: Array) -> bool: return (b[0] as Rect2).size.x == (b[0] as Rect2).size.y)
-		check_eq(plus.size(), StatBlock.BASE.size(), "%s: a + for every stat" % job)
-		check_eq(stats.auto_rect.size.x > 0, job != &"beginner", "%s: Auto once you have a job" % job)
+		check(plus.is_empty(), "%s: no + buttons" % job)
 		check(stats.position.y + stats.size.y < TDWorld.VIEW.y - TDStatusBar.HEIGHT, "%s: the window ends above the status bar" % job)
 		check(stats.content_end <= stats.size.y - 16, "%s: the rows fit" % job)
 
@@ -105,14 +104,13 @@ func test_shop_tabs_and_amount_chips_fit() -> void:
 	check(chips[-1].end.x + GAP <= shop._sell_etc_rect().position.x, "the chips end before Sell all Etc")
 	check(TDWindow.PAD + DrawUtil.text_width(Game.ui_font, "Amount", 12) + GAP <= chips[0].position.x, "the Amount label ends before the chips")
 
-func test_status_bar_essence_and_window_buttons_keep_apart() -> void:
+func test_status_bar_exp_and_window_buttons_keep_apart() -> void:
 	var bar := ui.hud.status
-	check(bar.essence_bar_rect().end.x + GAP <= bar._window_button_rect(0).position.x,
-		"the essence bar (ends %d) stops before the first window button (%d)" % [bar.essence_bar_rect().end.x, bar._window_button_rect(0).position.x])
+	check(bar.exp_bar_rect().end.x + GAP <= bar._window_button_rect(0).position.x,
+		"the EXP bar (ends %d) stops before the first window button (%d)" % [bar.exp_bar_rect().end.x, bar._window_button_rect(0).position.x])
 	var last := bar._window_button_rect(TDHud.WINDOW_ACTIONS.size() - 1)
 	check(last.end.x + GAP <= bar.size.x - 140, "the window buttons stop before the Dawnshards")
-	check(bar.essence_bar_rect().position.y >= 0 and bar.essence_bar_rect().end.y <= TDStatusBar.HEIGHT, "the essence bar sits inside the bar")
-	check(bar.bar_rect("hp_frame").position.x >= TDStatusBar.BARS_X, "the HP bar starts inside the end cap")
+	check(bar.exp_bar_rect().position.y >= 0 and bar.exp_bar_rect().end.y <= TDStatusBar.HEIGHT, "the EXP bar sits inside the bar")
 
 func test_equipment_slot_labels_fit() -> void:
 	for p in TDEquipmentWindow.LAYOUT:
