@@ -8,7 +8,6 @@
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("4_stat_block")
 defense = 14
-dexterity = 1
 
 [resource]
 script = ExtResource("1_equip_def")
@@ -25,4 +24,3 @@ jobs = Array[StringName]([&"archer"])
 required_level = 15
 stats = SubResource("Resource_1")
 variance = 2
-required_dexterity = 40

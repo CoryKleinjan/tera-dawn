@@ -65,7 +65,7 @@ then character select shows the list (name and job) with the new character picke
 - **The Monster Book** (`MonsterBook`, on the Character) counts kills and cards per monster.
   `Content` makes a `CardDef` for every monster at startup (`card_<id>`, no files); monsters
   drop it at `CardDef.CHANCE` until your page is full, and picking it up files it in the book
-  instead of the bag. The book's level adds to every main stat in `Character.recalc`.
+  instead of the bag. The book's rank adds to power (`Character.power`).
 - **Achievements** are **AchievementDef**s in `data/achievements/`, loaded by `Content`; each
   measures something about the Character (its `kind`, see `Achievements.measure`) against a
   `goal`. `Achievements.all()` lists them in `order` for the collection window and the server.
@@ -78,8 +78,8 @@ then character select shows the list (name and job) with the new character picke
 
 ### Balance
 
-`Balance` builds a typical character for any job and tier of progress (stat points bought in
-the main stat, the best gear made for that tier) and works out how many hits of their main
+`Balance` builds a typical character for any job and tier of progress (that level, the best
+gear made for that tier) and works out how many hits of their main
 attack a monster takes and how many kills pay for a tier. The smoke test keeps every job inside
 `Balance.BAND` against every monster of its tier; `tests/balance_report.tscn` prints the full table when tuning.
 

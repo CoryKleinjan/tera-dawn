@@ -60,21 +60,14 @@ const OFFHAND_NAMES := {&"shield": "a shield", &"star": "throwing stars", &"book
 @export_group("Requirements")
 ## Job lines that can wear it (JobDef.family); empty for anyone.
 @export var jobs: Array[StringName] = []
-## The tuning tier it's made for, like MonsterDef.level: never checked or shown (there are no
-## levels in the game). Balance and the test characters pick gear by it.
+## The tuning tier it's made for, like MonsterDef.level: never checked or shown (nothing
+## needs a level). Balance and the test characters pick gear by it.
 @export var required_level := 0
-@export var required_strength := 0
-@export var required_dexterity := 0
-@export var required_intelligence := 0
-@export var required_luck := 0
-@export var required_charisma := 0
 
 @export_group("Stats")
 @export var stats: StatBlock
 ## Each nonzero stat on a dropped copy moves up or down by up to this much.
 @export var variance := 1
-## Upgrade slots for scrolls (not used yet).
-@export var upgrade_slots := 7
 
 func tab() -> Tab:
 	return Tab.EQUIP
@@ -117,12 +110,3 @@ static func families_text(families: Array[StringName]) -> String:
 
 func slot_name() -> String:
 	return SLOT_NAMES[slot]
-
-## What it takes to wear this, as {stat: amount}.
-func requirements() -> Dictionary:
-	var out := {}
-	for pair in [[&"strength", required_strength], [&"dexterity", required_dexterity],
-			[&"intelligence", required_intelligence], [&"luck", required_luck], [&"charisma", required_charisma]]:
-		if pair[1] > 0:
-			out[pair[0]] = pair[1]
-	return out

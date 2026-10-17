@@ -18,7 +18,7 @@ func on_buy(peer: int, npc_id: StringName, index: int, count: int) -> void:
 	var entry := npc.shop.items[index]
 	count = clampi(count, 1, entry.item.stack_size())
 	var c := p.character
-	var total := entry.cost_for(c) * count
+	var total := entry.cost() * count
 	if c.shards < total:
 		tell(p, NOT_ENOUGH_SHARDS)
 	elif not c.inventory.has_room(entry.item, count):

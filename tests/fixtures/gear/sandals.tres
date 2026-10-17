@@ -24,4 +24,3 @@ slot = 4
 required_level = 10
 stats = SubResource("Resource_1")
 variance = 2
-upgrade_slots = 5

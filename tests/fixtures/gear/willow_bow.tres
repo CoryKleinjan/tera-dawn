@@ -25,6 +25,5 @@ jobs = Array[StringName]([&"archer"])
 required_level = 10
 stats = SubResource("Resource_1")
 variance = 1
-required_dexterity = 25
 weapon_kind = &"bow"
 basic_attack = ExtResource("bow_shot")

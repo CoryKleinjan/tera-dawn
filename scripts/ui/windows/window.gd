@@ -273,7 +273,7 @@ func icon_button(r: Rect2, art: String, action: Callable) -> void:
 	UiSkin.draw_icon(self, art, r, UiSkin.LIT if r.has_point(_hover) else Color.WHITE)
 	_buttons.append([r, action])
 
-## The "+" that spends a point (Ability Points, Skill Points), `side` pixels square with its
+## The "+" that buys a skill level, `side` pixels square with its
 ## top left at `at`.
 func plus_button(at: Vector2, action: Callable, side := PLUS_SIZE) -> void:
 	var r := Rect2(at, Vector2(side, side))

@@ -1,6 +1,6 @@
 extends TestCase
 ## Achievements (data/achievements/, through Content): every file loads as a complete
-## AchievementDef, ids and Steam ids are unique, they're the 24 the game shipped with (saves
+## AchievementDef, ids and Steam ids are unique, they're the 23 the game shipped with and kept (saves
 ## and Steamworks know them by id and Steam name), every kind is something
 ## Achievements.measure or a Counters tally actually tracks, goals are reachable numbers, and
 ## find() returns each one.
@@ -10,7 +10,8 @@ const Scan := preload("res://tests/content/content_scan.gd")
 ## The achievements as they were when they lived in code, in order. Saved characters keep
 ## these ids and Steamworks these Steam names, so none may change. Three were made solo goals
 ## when the game became single player first (Cory, 2026-10-16): level_50 (now every boss),
-## well_liked (a boss untouched) and dealmaker (every map of a zone).
+## well_liked (a boss untouched) and dealmaker (every map of a zone). lucky_scroll went with
+## the upgrade scrolls (Cory, 2026-10-17).
 const SHIPPED := [
 	{"id": "first_hunt", "steam": "ACH_FIRST_HUNT", "title": "First Hunt", "text": "Defeat a monster.", "kind": "kills", "goal": 1},
 	{"id": "hunter", "steam": "ACH_HUNTER", "title": "Hunter", "text": "Defeat 500 monsters.", "kind": "kills", "goal": 500},
@@ -29,7 +30,6 @@ const SHIPPED := [
 	{"id": "collector", "steam": "ACH_COLLECTOR", "title": "Collector", "text": "Find 10 Monster Book cards.", "kind": "cards", "goal": 10},
 	{"id": "first_page", "steam": "ACH_FIRST_PAGE", "title": "First Page", "text": "Complete a Monster Book page.", "kind": "pages", "goal": 1},
 	{"id": "scholar", "steam": "ACH_SCHOLAR", "title": "Monster Scholar", "text": "Complete 15 Monster Book pages.", "kind": "pages", "goal": 15},
-	{"id": "lucky_scroll", "steam": "ACH_LUCKY_SCROLL", "title": "Lucky Scroll", "text": "Have an upgrade scroll work.", "kind": "scrolls", "goal": 1},
 	{"id": "nest_egg", "steam": "ACH_NEST_EGG", "title": "Nest Egg", "text": "Hold 100,000 Dawnshards.", "kind": "shards", "goal": 100000},
 	{"id": "take_a_seat", "steam": "ACH_TAKE_A_SEAT", "title": "Take a Seat", "text": "Sit down for a rest.", "kind": "sat", "goal": 1},
 	{"id": "best_friend", "steam": "ACH_BEST_FRIEND", "title": "Best Friend", "text": "Bring out a pet.", "kind": "pets", "goal": 1},

@@ -6,8 +6,6 @@ extends RefCounted
 
 ## Bosses defeated.
 const BOSSES := "bosses"
-## Upgrade scrolls that worked.
-const SCROLLS := "scrolls"
 ## Times sat down.
 const SAT := "sat"
 ## Times a pet was brought out.
@@ -17,4 +15,4 @@ const DEALS := "deals"
 ## Bosses defeated without taking a hit since arriving on their map.
 const CLEAN_BOSSES := "clean_bosses"
 ## Every tally above.
-const ALL: Array[String] = [BOSSES, SCROLLS, SAT, PETS, DEALS, CLEAN_BOSSES]
+const ALL: Array[String] = [BOSSES, SAT, PETS, DEALS, CLEAN_BOSSES]

@@ -1,6 +1,6 @@
 extends TestCase
 ## Using and wearing items through requests: potions and their cooldown, return scrolls,
-## equipping and taking off gear, upgrade scrolls, moving items and Ability Points.
+## equipping and taking off gear, and moving items (no stats to buy, no upgrade scrolls).
 
 const ServerHarness := preload("res://tests/framework/server_helpers.gd")
 
@@ -126,26 +126,6 @@ func test_taking_gear_off_into_a_full_bag_is_refused() -> void:
 	check(c.equipment.at(&"top") != null, "still worn")
 	check(h.told(2, "Your Equip inventory is full."), "told why")
 
-func test_a_sure_scroll_upgrades_gear() -> void:
-	var scroll := ScrollDef.new()
-	scroll.id = &"test_scroll"
-	scroll.display_name = "Test Scroll"
-	scroll.chance = 1.0
-	scroll.stats = StatBlock.new()
-	scroll.stats.attack = 2
-	var sword := ItemStack.exact(Content.item(&"training_sword"))
-	scroll.slots = [sword.equip_def().slot]
-	c.inventory.put(ItemDef.Tab.USE, 5, ItemStack.create(scroll, 1))
-	c.inventory.put(ItemDef.Tab.EQUIP, 0, sword)
-	var attack := sword.stats.attack
-	h.ask(2, &"req_scroll", [5, 0])
-	check_eq(sword.stats.attack, attack + 2, "attack added")
-	check_eq(sword.upgrades, 1, "one upgrade")
-	check_eq(sword.slots_used, 1, "one slot used")
-	check(c.inventory.at(ItemDef.Tab.USE, 5) == null, "scroll used up")
-	check(h.told(2, "The scroll worked!"), "told")
-	check_eq(int(c.counters.get(Counters.SCROLLS, 0)), 1, "counted for achievements")
-
 func test_moving_items_in_the_bag() -> void:
 	var slot := _red_slot()
 	h.ask(2, &"req_move_item", [ItemDef.Tab.USE, slot, 10])
@@ -157,36 +137,6 @@ func test_moving_items_to_a_bad_slot_is_ignored() -> void:
 	h.ask(2, &"req_move_item", [ItemDef.Tab.USE, slot, Inventory.SLOTS])
 	check(c.inventory.at(ItemDef.Tab.USE, slot) != null, "stayed")
 
-func test_buying_a_stat_spends_its_price_in_essence() -> void:
-	var first := c.ap.price(&"strength")
-	var second := CharacterStats.stat_price(c.ap.bought(&"strength") + 1)
-	c.essence = first + second - 1
-	var strength := c.base.strength
-	h.ask(2, &"req_buy_stat", [&"strength"])
-	check_eq(c.base.strength, strength + 1, "STR raised")
-	check_eq(c.essence, second - 1, "its price spent")
-	check_eq(c.ap.price(&"strength"), second, "the next point costs more")
-	h.ask(2, &"req_buy_stat", [&"strength"])
-	check_eq(c.base.strength, strength + 1, "not enough for the next point")
-	check_eq(c.essence, second - 1, "nothing spent")
-	check(h.told(2, "You need %d Dawn Essence for that." % second), "told why")
-	h.ask(2, &"req_buy_stat", [&"attack"])
-	check_eq(c.essence, second - 1, "only base stats can be bought")
-
-func test_auto_buys_the_damage_stat_while_the_essence_lasts() -> void:
-	c.essence = 100
-	var strength := c.base.strength
-	var luck := c.base.luck
-	var bought := c.ap.bought(&"strength")
-	var cost := 0
-	var n := 0
-	while cost + CharacterStats.stat_price(bought + n) <= 100:
-		cost += CharacterStats.stat_price(bought + n)
-		n += 1
-	check(n > 0, "100 buys at least one point")
-	h.ask(2, &"req_auto_stats")
-	check_eq(c.base.strength, strength + n, "a Beginner's damage stat is STR")
-	check_eq(c.base.luck, luck, "nothing else")
-	check_eq(c.essence, 100 - cost, "stops when the next point costs more than is left")
-	h.ask(2, &"req_auto_stats")
-	check_eq(c.base.strength, strength + n, "nothing more to buy")
+func test_there_is_nothing_to_buy_stats_or_use_upgrade_scrolls_with() -> void:
+	for gone in [&"req_buy_stat", &"req_auto_stats", &"req_scroll"]:
+		check(not Net.has_method(gone), "no %s" % gone)

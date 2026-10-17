@@ -312,11 +312,6 @@ func req_setup(slot: int) -> void:
 		server.items.on_setup(_sender(), slot)
 
 @rpc("any_peer", "call_local", "reliable")
-func req_scroll(use_slot: int, equip_slot: int) -> void:
-	if server:
-		server.items.on_scroll(_sender(), use_slot, equip_slot)
-
-@rpc("any_peer", "call_local", "reliable")
 func req_equip(slot: int, place: StringName) -> void:
 	if server:
 		server.items.on_equip(_sender(), slot, place)
@@ -396,18 +391,6 @@ func req_scene_done(scene_id: StringName) -> void:
 func req_advance(npc_id: StringName, job_id: StringName) -> void:
 	if server:
 		server.jobs.on_advance(_sender(), npc_id, job_id)
-
-@rpc("any_peer", "call_local", "reliable")
-func req_buy_stat(stat: StringName) -> void:
-	if server:
-		server.jobs.on_buy_stat(_sender(), stat)
-
-## Spends Dawn Essence on the job's damage stats until the next point costs too much (the
-## Character window's Auto button).
-@rpc("any_peer", "call_local", "reliable")
-func req_auto_stats() -> void:
-	if server:
-		server.jobs.on_auto_stats(_sender())
 
 @rpc("any_peer", "call_local", "reliable")
 func req_learn_skill(skill_id: StringName) -> void:

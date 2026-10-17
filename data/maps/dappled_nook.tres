@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=82 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=80 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="11_breakable_def"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="13_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="14_dawnshard"]
-[ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_int_60.tres" id="16_scroll_top_int_60"]
 [ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="17_blue_potion"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="19_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/rock_large.png" id="20_rock_large"]
@@ -368,12 +367,6 @@ item = ExtResource("17_blue_potion")
 min_amount = 3
 max_amount = 3
 
-[sub_resource type="Resource" id="Loot_0_2"]
-script = ExtResource("13_drop_entry")
-item = ExtResource("16_scroll_top_int_60")
-min_amount = 1
-max_amount = 1
-
 [sub_resource type="Resource" id="Breakable_0"]
 script = ExtResource("11_breakable_def")
 id = &"dappled_nook_sun_chest"
@@ -383,7 +376,7 @@ hits = 1
 whole = ExtResource("34_chest")
 broken = ExtResource("35_chest_open")
 height = 48.0
-loot = Array[ExtResource("13_drop_entry")]([SubResource("Loot_0_0"), SubResource("Loot_0_1"), SubResource("Loot_0_2")])
+loot = Array[ExtResource("13_drop_entry")]([SubResource("Loot_0_0"), SubResource("Loot_0_1")])
 card = ExtResource("10_seedwing")
 
 [resource]

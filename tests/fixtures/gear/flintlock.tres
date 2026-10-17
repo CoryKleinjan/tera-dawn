@@ -25,4 +25,3 @@ required_level = 15
 stats = SubResource("Resource_1")
 variance = 2
 offhand_kind = &"pistol"
-required_charisma = 40

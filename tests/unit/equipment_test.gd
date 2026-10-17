@@ -1,5 +1,5 @@
 extends TestCase
-## Equipment and wearing gear: places on the body, rings, job and stat restrictions (no level),
+## Equipment and wearing gear: places on the body, rings, job restrictions (no level or stats),
 ## stat bonuses reaching the character, swapping with the bag, taking off, and saves.
 
 var fx: UnitHelpers
@@ -44,12 +44,12 @@ func test_put_returns_previous_and_take_removes() -> void:
 
 func test_bonus_sums_every_worn_piece() -> void:
 	var eq := Equipment.new()
-	eq.put(&"weapon", ItemStack.exact(fx.equip(&"t_a", EquipDef.Slot.WEAPON, {"attack": 10, "strength": 2})))
-	eq.put(&"hat", ItemStack.exact(fx.equip(&"t_b", EquipDef.Slot.HAT, {"defense": 5, "strength": 3})))
+	eq.put(&"weapon", ItemStack.exact(fx.equip(&"t_a", EquipDef.Slot.WEAPON, {"attack": 10, "accuracy": 2})))
+	eq.put(&"hat", ItemStack.exact(fx.equip(&"t_b", EquipDef.Slot.HAT, {"defense": 5, "accuracy": 3})))
 	var b := eq.bonus()
 	check_eq(b.attack, 10, "attack")
 	check_eq(b.defense, 5, "defense")
-	check_eq(b.strength, 5, "strength adds up")
+	check_eq(b.accuracy, 5, "accuracy adds up")
 	check_eq(Equipment.new().bonus().nonzero().size(), 0, "nothing worn, nothing added")
 
 func test_changed_emitted_on_put_and_take() -> void:
@@ -89,15 +89,14 @@ func test_load_drops_bad_places_and_misfits() -> void:
 # ---------- wearing through the character ----------
 
 func test_equip_moves_gear_from_bag_and_adds_stats() -> void:
-	var c := fx.character(null, {"strength": 10})
-	c.inventory.add_stack(ItemStack.exact(fx.equip(&"t_a", EquipDef.Slot.WEAPON, {"attack": 15, "strength": 4, "max_hp": 30})))
+	var c := fx.character()
+	c.inventory.add_stack(ItemStack.exact(fx.equip(&"t_a", EquipDef.Slot.WEAPON, {"attack": 15, "accuracy": 4, "max_hp": 30})))
 	var hp_before := c.max_hp()
 	check_eq(c.gear.equip(0), "", "equipped")
 	check(c.inventory.at(ItemDef.Tab.EQUIP, 0) == null, "left the bag")
 	check_eq(c.stats.attack, 15, "attack")
-	check_eq(c.stats.strength, 14, "strength")
-	check_eq(c.base.strength, 10, "base unchanged")
-	check_eq(c.max_hp(), hp_before + 30 + 4, "max HP, plus the 4 STR")
+	check_eq(c.stats.accuracy, 4, "accuracy")
+	check_eq(c.max_hp(), hp_before + 30, "max HP")
 
 func test_equip_swaps_old_gear_into_same_bag_slot() -> void:
 	var c := fx.character()
@@ -138,20 +137,13 @@ func test_equip_ignores_the_gear_tier() -> void:
 	e.required_level = 50
 	check_eq(c.gear.equip_problem(e), "", "no level to fall short of")
 
-func test_equip_stat_requirement_uses_total_stats() -> void:
-	var c := fx.character(null, {"dexterity": 20})
-	var e := fx.equip(&"t_bow")
-	e.required_dexterity = 25
-	check_ne(c.gear.equip_problem(e), "", "20 DEX too low")
-	c.equipment.put(&"hat", ItemStack.exact(fx.equip(&"t_hat", EquipDef.Slot.HAT, {"dexterity": 5})))
-	check_eq(c.gear.equip_problem(e), "", "gear DEX counts")
-
-func test_requirements_lists_only_nonzero() -> void:
-	var e := fx.equip()
-	check_eq(e.requirements(), {}, "none")
-	e.required_level = 10
-	e.required_luck = 30
-	check_eq(e.requirements(), {&"luck": 30}, "luck, and no level")
+func test_equip_only_asks_for_the_job_line() -> void:
+	var c := fx.character()
+	var e := fx.equip(&"t_bow", EquipDef.Slot.WEAPON, {"attack": 90})
+	e.required_level = 90
+	check_eq(c.gear.equip_problem(e), "", "strong gear, no stats asked")
+	e.jobs = [&"archer"]
+	check_eq(c.gear.equip_problem(e), "Only Archers can use the T Bow.", "only the job line")
 
 func test_equip_to_named_place_and_invalid_place_falls_back() -> void:
 	var c := fx.character()

@@ -25,4 +25,3 @@ jobs = Array[StringName]([&"pirate"])
 required_level = 15
 stats = SubResource("Resource_1")
 variance = 2
-required_charisma = 35
