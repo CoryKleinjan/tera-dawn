@@ -1,6 +1,25 @@
-[gd_resource type="Resource" script_class="RegionDef" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="RegionDef" load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/region_def.gd" id="1_region_def"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="2_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/runes/thorn_rune.tres" id="rune_thorn_rune"]
+[ext_resource type="Resource" path="res://data/items/runes/leaf_rune.tres" id="rune_leaf_rune"]
+[ext_resource type="Resource" path="res://data/items/runes/moss_rune.tres" id="rune_moss_rune"]
+
+[sub_resource type="Resource" id="Drop_thorn_rune"]
+script = ExtResource("2_drop_entry")
+item = ExtResource("rune_thorn_rune")
+chance = 0.01
+
+[sub_resource type="Resource" id="Drop_leaf_rune"]
+script = ExtResource("2_drop_entry")
+item = ExtResource("rune_leaf_rune")
+chance = 0.01
+
+[sub_resource type="Resource" id="Drop_moss_rune"]
+script = ExtResource("2_drop_entry")
+item = ExtResource("rune_moss_rune")
+chance = 0.01
 
 [resource]
 script = ExtResource("1_region_def")
@@ -14,3 +33,4 @@ zone_rect = Rect2(250.0, 15.0, 330.0, 217.0)
 shaped_zone = true
 town_music = &"town_greenbough"
 field_music = &"field_greenbough"
+drops = Array[ExtResource("2_drop_entry")]([SubResource("Drop_thorn_rune"), SubResource("Drop_leaf_rune"), SubResource("Drop_moss_rune")])

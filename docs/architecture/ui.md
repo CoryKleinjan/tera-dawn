@@ -19,7 +19,7 @@ give it a line in `Keybinds.ACTIONS`.
 Shared pieces for what's inside a window (`scripts/ui/windows/`):
 
 - **`SlotGrid`**: a grid of item slots (origin, columns, count, slot size, gap): `rect(i)`,
-  `cell_rect(cell)`, `at(pos)`, `bounds()`. The bag, shop, storage, trade, equipment and
+  `cell_rect(cell)`, `at(pos)`, `bounds()`. The bag, shop, storage, enchanter, trade, equipment and
   quickslots all use one.
 - **`ScrollList`**: a list showing `rows` rows at a time that the mouse wheel scrolls:
   `row_rect(i)` (by index in the whole list), `shown(count)`, `row_at`, `wheel(button, count)`

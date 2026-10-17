@@ -366,6 +366,15 @@ func req_retrieve(npc_id: StringName, tab: int, slot: int) -> void:
 	if server:
 		server.storage.on_retrieve(_sender(), npc_id, tab, slot)
 
+# --- enchanting (ServerEnchanting) ---
+
+## Sets the rune in Etc slot `rune_slot` in rune slot `socket` of the gear in Equip slot
+## `gear_slot`, at the enchanter `npc_id`.
+@rpc("any_peer", "call_local", "reliable")
+func req_enchant(npc_id: StringName, gear_slot: int, rune_slot: int, socket: int) -> void:
+	if server:
+		server.enchanting.on_enchant(_sender(), npc_id, gear_slot, rune_slot, socket)
+
 # --- quests (ServerQuests) ---
 
 @rpc("any_peer", "call_local", "reliable")

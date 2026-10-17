@@ -347,7 +347,12 @@ func kill_mob(m: SimMob, killer: SimPlayer) -> void:
 			if not p.character.has_relic(m.def.relic):
 				spawn_drop(m.def.relic, 1, null, DropFlight.create(m.position + Vector2(0, -20), m.plat.y, m.position.x), p.peer)
 	var loot := []
-	for entry in m.def.drops:
+	# its own loot, and its zone's runes
+	var table: Array[DropEntry] = m.def.drops.duplicate()
+	var region: RegionDef = Content.regions.get(def.region)
+	if region:
+		table.append_array(region.drops)
+	for entry in table:
 		var amount := entry.roll()
 		if amount > 0:
 			loot.append([entry.item, amount])

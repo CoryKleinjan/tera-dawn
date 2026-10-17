@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=20 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=22 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/lantern_wraith.tres" id="3_lantern_wraith"]
@@ -13,6 +13,12 @@
 [ext_resource type="Resource" path="res://data/monster_moves/boss_swoop.tres" id="mv_boss_swoop"]
 [ext_resource type="Resource" path="res://data/monster_moves/blink.tres" id="mv_blink"]
 [ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="mv_script"]
+[ext_resource type="Resource" path="res://data/items/runes/wraith_rune.tres" id="rune_wraith_rune"]
+
+[sub_resource type="Resource" id="Drop_wraith_rune"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("rune_wraith_rune")
+chance = 0.3
 
 [sub_resource type="Resource" id="Resource_18"]
 script = ExtResource("4_drop_entry")
@@ -77,5 +83,5 @@ rage_ticks = 100
 sprite_frames = ExtResource("3_lantern_wraith")
 sprite_scale = 1.1
 light_color = Color(0.501961, 0.376471, 1.0, 1.0)
-drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_18")])
+drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_18"), SubResource("Drop_wraith_rune")])
 respawn_ticks = Vector2i(1800, 2400)

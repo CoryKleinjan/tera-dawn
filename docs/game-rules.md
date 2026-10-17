@@ -144,9 +144,20 @@ update this page when one changes. Each zone's own look and music are in
   town's shop: Warrior Squire set (Emberforge), Magician Novice set (Lumewood), Thief Footpad set
   (Lanternfall), Archer Hunter's set (Greenbough), Pirate Deckhand set (Driftcove). Tests still
   bring their own plain gear (`tests/fixtures/gear`) for what the game doesn't have yet.
-- No upgrade scrolls (Cory Oct 17): gear gets better through enchantments, which are planned
-  (three per piece; boss ones drop only). Boss relics unlock moves (see "Movement and combat
-  feel").
+- No upgrade scrolls (Cory Oct 17): gear gets better through enchantments. Every piece has 3
+  rune slots. An enchanter sets a rune from the bag in a slot of a piece in the bag for the
+  rune's Dawnshard fee; it always works, and a rune set over another loses the old one. A worn
+  piece adds its runes' bonuses (the gear bonuses that already exist). The tooltip lists each
+  slot, filled or empty.
+- Runes: every monster in a zone's fields can drop that zone's runes (2-3 kinds, about 1% each),
+  each zone with its own flavour: Dawnharbor Coast Max HP and Weapon Defense, Greenbough
+  Accuracy, Speed and Jump, Lumewood Magic Attack, Max MP and Magic Defense, Emberreach Weapon
+  Attack and Melee Damage, Lanternfall Critical Rate and Ranged Damage, Driftcove Avoidability
+  and Attack Speed. Each zone boss also drops a stronger rune of its own (two bonuses, 30% a
+  kill) that no shop sells. Dawnrise Isle has none, so the starter island stays simple.
+- Enchanters: Juno in Dawnharbor, and in the other main towns the equipment seller. Runes and
+  boss runes have no icons yet (a slot shows the name); their art is priced before any run.
+- Boss relics unlock moves (see "Movement and combat feel").
 
 ## Weapons
 

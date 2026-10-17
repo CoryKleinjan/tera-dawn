@@ -267,6 +267,7 @@ func _build_windows() -> void:
 	var dialogue := TDDialogueWindow.new()
 	var shop := TDShopWindow.new()
 	var storage := TDStorageWindow.new()
+	var enchant := TDEnchantWindow.new()
 	var community := TDCommunityWindow.new()
 	community.position = Vector2(300, 80)
 	var collection := TDCollectionWindow.new()
@@ -275,7 +276,7 @@ func _build_windows() -> void:
 	var player := TDPlayerMenuWindow.new()
 	var trade := TDTradeWindow.new()
 	for pair in [["inventory", inventory], ["equipment", equipment], ["stats", stats], ["quests", quests], ["skills", skills], ["worldmap", worldmap],
-			["community", community], ["collection", collection], ["dialogue", dialogue], ["shop", shop], ["storage", storage], ["player", player], ["trade", trade]]:
+			["community", community], ["collection", collection], ["dialogue", dialogue], ["shop", shop], ["storage", storage], ["enchant", enchant], ["player", player], ["trade", trade]]:
 		var w: TDWindow = pair[1]
 		w.hud = self
 		windows[pair[0]] = w
