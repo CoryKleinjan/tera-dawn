@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=115 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=118 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
@@ -24,6 +24,9 @@
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_armor_def_60.tres" id="25_scroll_armor_def_60"]
 [ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="26_white_potion"]
 [ext_resource type="Resource" path="res://data/items/scrolls/scroll_weapon_att_60.tres" id="27_scroll_weapon_att_60"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/gate.png" id="28_gate"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/lever.png" id="29_lever"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/lever_pulled.png" id="30_lever_pulled"]
 
 [sub_resource type="Resource" id="Resource_41"]
 script = ExtResource("12_prop_placement")
@@ -346,6 +349,7 @@ target_x = 1210.0
 target_platform = 1
 shortcut = &"whispering_grove_fake_wall"
 gate = &"whisper_pool_gate"
+gate_picture = ExtResource("28_gate")
 
 [sub_resource type="Resource" id="Spawn_0"]
 script = ExtResource("8_spawn_def")
@@ -619,6 +623,8 @@ id = &"whisper_pool_gate"
 x = 2220.0
 platform = 42
 hits = 1
+whole = ExtResource("29_lever")
+broken = ExtResource("30_lever_pulled")
 height = 80.0
 
 [resource]

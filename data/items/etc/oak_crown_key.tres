@@ -1,16 +1,18 @@
-[gd_resource type="Resource" script_class="ItemDef" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="ItemDef" load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/item_def.gd" id="1_item_def"]
-[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="2_shard_pickup"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/oak_crown_key.png" id="2_oak_crown_key"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="3_shard_pickup"]
 
 [resource]
 script = ExtResource("1_item_def")
 id = &"oak_crown_key"
 display_name = "Oak Crown Key"
 description = "An old bronze key with a leaf for a bow. It opens the locked gate at the top of Old Oak Heights."
+icon = ExtResource("2_oak_crown_key")
 sprite_scale = 0.36
 glow_color = Color(0.86, 0.62, 0.32, 1.0)
-pickup_effect = ExtResource("2_shard_pickup")
+pickup_effect = ExtResource("3_shard_pickup")
 max_stack = 1
 sell_price = 0
 quest_item = true

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=173 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=176 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
@@ -30,6 +30,9 @@
 [ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="33_backdrop_layer_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/greenbough_fields/deep_canopy.png" id="34_deep_canopy"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/root_wall.png" id="35_root_wall"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/gate.png" id="36_gate"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/lever.png" id="37_lever"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/lever_pulled.png" id="38_lever_pulled"]
 
 [sub_resource type="Resource" id="Prop_0"]
 script = ExtResource("20_prop_placement")
@@ -621,6 +624,7 @@ target_map = &"mossy_glade"
 target_x = 240.0
 target_platform = 3
 gate = &"greenbough_trunk"
+gate_picture = ExtResource("36_gate")
 
 [sub_resource type="Resource" id="Portal_3"]
 script = ExtResource("8_portal_def")
@@ -949,6 +953,8 @@ id = &"greenbough_trunk"
 x = 2700.0
 platform = 0
 hits = 1
+whole = ExtResource("37_lever")
+broken = ExtResource("38_lever_pulled")
 height = 80.0
 
 [resource]
