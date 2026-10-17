@@ -25233,6 +25233,81 @@
    ],
    "text": "The base picture is an empty sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines. Paint the SAME boy as in the attached picture in every cell, exactly the same face, hair, clothes, colours, proportions and size: a cute chibi boy of about ten with a very big round head, deep-blue eyes, short messy brown hair, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round, like in the attached picture. Only his pose changes. He is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way he stands in the attached picture, drawn at the same size as there (his standing height about 85% of a cell). Every figure stays fully inside its own cell with a clear margin all round and never crosses a grid line. The 8 cells are numbered in reading order (top row left to right, then the bottom row). Cells 1 and 2 are sliding down a wall: an invisible wall is just behind his back at the LEFT edge of the cell; he has his back to it, one boot and his near hand pressed flat against it, knees bent, sliding down: 1 and 2 are two frames of that slide, slightly different. Cells 3 to 6 are a wall jump away from that wall to the right: 3 pushing off hard with both feet from the wall on the left, body leaving it; 4 flying up and to the right, body stretched; 5 rising, knees tucking up; 6 at the top, legs a little bent, arms out for balance. Cells 7 and 8 are a glide, floating slowly down through the air (no ground): his arms spread wide out to the sides, body tipped a little forward, legs trailing together behind; 7 and 8 are two gentle frames of that, his arms a little higher in 8. No arm or hand ever covers his face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the boy: no ground, wall, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures."
   }
+ },
+ {
+  "id": "newhero_boy_slam_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_boy_slam_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': repaint of newhero_boy_slam, his 8-frame Slam, a drop straight down, painted on stick-figure pose guides because the first paint turned the in-air frames into standing poses. Released by Cory 20:23Z (\"Yeah. Repaint\") to the priced line 20:19Z (\"Should I repaint Slam, Double Jump and the wall/glide sheet for $0.21?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/boy_slam_guide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_boy_walk_idle.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4, numbered in reading order) on a flat magenta background with thin grid lines. Each cell holds a flat green stick-figure POSE GUIDE: a big green circle for the head, a block for the body, dark green bars for his NEAR arm and leg (the ones toward the viewer) and pale green bars for his FAR arm and leg. Paint the SAME boy as in the attached picture over each guide, in EXACTLY the guide's pose: his head where the circle is, his body along the block, each arm and leg along its bar and bent at the same joints, his hands and boots at the bar ends, at the same place, angle and height in the cell as the guide (when a guide is high in its cell, he is up in the air there; when it is tipped or upside down, so is he). The guides are only a pose map: cover them completely, and no green from them is left anywhere. Never paint him standing upright where the guide is not. Copy the boy exactly: the same face, hair, clothes, colours, proportions and size as in the attached picture, a cute chibi boy of about ten with a very big round head, deep-blue eyes, short messy brown hair, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round. He is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way he stands in the attached picture. His face is calm and determined. Every figure stays fully inside its own cell and never crosses a grid line. The 8 cells are one Slam, a drop straight down from high in the air: 1 high up, knees pulled up, both arms raised; 2 hanging at the top, tucked in a ball; 3 dropping, legs straight down together and both arms stretched straight up above his head; 4 and 5 plunging straight down feet first, lower each time, body straight, arms straight up; 6 the impact: landed in a deep squat, both fists punched down onto the ground in front of his boots; 7 still squatting, hands on his knees, looking ahead; 8 standing again. No arm or hand ever covers his face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the boy: no ground, wall, streak, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures."
+  }
+ },
+ {
+  "id": "newhero_boy_double_jump_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_boy_double_jump_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': repaint of newhero_boy_double_jump, his 8-frame Double Jump, a leap in the air, painted on stick-figure pose guides because the first paint turned the in-air frames into standing poses. Released by Cory 20:23Z (\"Yeah. Repaint\") to the priced line 20:19Z (\"Should I repaint Slam, Double Jump and the wall/glide sheet for $0.21?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/boy_double_jump_guide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_boy_walk_idle.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4, numbered in reading order) on a flat magenta background with thin grid lines. Each cell holds a flat green stick-figure POSE GUIDE: a big green circle for the head, a block for the body, dark green bars for his NEAR arm and leg (the ones toward the viewer) and pale green bars for his FAR arm and leg. Paint the SAME boy as in the attached picture over each guide, in EXACTLY the guide's pose: his head where the circle is, his body along the block, each arm and leg along its bar and bent at the same joints, his hands and boots at the bar ends, at the same place, angle and height in the cell as the guide (when a guide is high in its cell, he is up in the air there; when it is tipped or upside down, so is he). The guides are only a pose map: cover them completely, and no green from them is left anywhere. Never paint him standing upright where the guide is not. Copy the boy exactly: the same face, hair, clothes, colours, proportions and size as in the attached picture, a cute chibi boy of about ten with a very big round head, deep-blue eyes, short messy brown hair, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round. He is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way he stands in the attached picture. His face is calm and determined. Every figure stays fully inside its own cell and never crosses a grid line. The 8 cells are one Double Jump, a second leap in the air with no ground under him: 1 falling a little, knees bent, arms out; 2 tucked in a tight ball; 3 kicking down hard with his near leg, both arms flung straight up; 4 shooting upward, body stretched straight, both arms straight up; 5 tipped forward on his side in a tucked forward somersault; 6 upside down in the tucked somersault, head at the bottom; 7 coming out of the somersault, leaning back, knees bent; 8 at the top, legs a little bent, arms spread wide. No arm or hand ever covers his face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the boy: no ground, wall, streak, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures."
+  }
+ },
+ {
+  "id": "newhero_boy_wall_glide_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_boy_wall_glide_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': repaint of newhero_boy_wall_glide, his wall slide, wall jump and glide, painted on stick-figure pose guides because the first paint turned the in-air frames into standing poses. Released by Cory 20:23Z (\"Yeah. Repaint\") to the priced line 20:19Z (\"Should I repaint Slam, Double Jump and the wall/glide sheet for $0.21?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/boy_wall_glide_guide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_boy_walk_idle.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4, numbered in reading order) on a flat magenta background with thin grid lines. Each cell holds a flat green stick-figure POSE GUIDE: a big green circle for the head, a block for the body, dark green bars for his NEAR arm and leg (the ones toward the viewer) and pale green bars for his FAR arm and leg. Paint the SAME boy as in the attached picture over each guide, in EXACTLY the guide's pose: his head where the circle is, his body along the block, each arm and leg along its bar and bent at the same joints, his hands and boots at the bar ends, at the same place, angle and height in the cell as the guide (when a guide is high in its cell, he is up in the air there; when it is tipped or upside down, so is he). The guides are only a pose map: cover them completely, and no green from them is left anywhere. Never paint him standing upright where the guide is not. Copy the boy exactly: the same face, hair, clothes, colours, proportions and size as in the attached picture, a cute chibi boy of about ten with a very big round head, deep-blue eyes, short messy brown hair, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round. He is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way he stands in the attached picture. His face is calm and determined. Every figure stays fully inside its own cell and never crosses a grid line. Cells 1 and 2 are a wall slide: his back and near hand pressed flat against an invisible wall at the LEFT edge of the cell, his far boot flat against it, knees bent, sliding down (do not paint the wall). Cells 3 to 6 are a wall jump away from it: 3 kicking off to the right with both legs stretched back to the left, arms reaching up and right; 4 flying up and to the right, body stretched out on a diagonal; 5 rising, knees tucking up, arms out; 6 at the top, legs a little bent, arms spread wide. Cells 7 and 8 are a glide: his body tipped far forward, nearly flat, head in front, legs straight and trailing behind together, arms spread wide like wings, gliding slowly down; 8 is the same with his arms a little higher. No arm or hand ever covers his face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the boy: no ground, wall, streak, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures."
+  }
  }
 ]
 }
