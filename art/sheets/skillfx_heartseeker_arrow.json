@@ -1,0 +1,45 @@
+{
+  "source": "art/source/skillfx_heartseeker_arrow.png",
+  "out_dir": "assets/sprites/effects/skills",
+  "grid": {
+    "rows": [0, 674, 675, 1349],
+    "cols": [0, 598, 600, 1198, 1200, 1798, 1800, 2398]
+  },
+  "cells": [
+    ["heartseeker_arrow_1", "", "heartseeker_arrow_2", "", "heartseeker_arrow_3", "", "heartseeker_arrow_4"],
+    ["", "", "", "", "", "", ""],
+    ["heartseeker_arrow_5", "", "heartseeker_arrow_6", "", "heartseeker_arrow_7", "", "heartseeker_arrow_8"]
+  ],
+  "glow": true,
+  "alpha": "soft",
+  "trim": false,
+  "label_band": 0,
+  "inset": 10,
+  "scale": 0.0973,
+  "overrides": {
+    "heartseeker_arrow_1": {
+      "crop": [0, 54, 578, 600]
+    },
+    "heartseeker_arrow_2": {
+      "crop": [0, 54, 578, 600]
+    },
+    "heartseeker_arrow_3": {
+      "crop": [0, 54, 578, 600]
+    },
+    "heartseeker_arrow_4": {
+      "crop": [0, 54, 578, 600]
+    },
+    "heartseeker_arrow_5": {
+      "crop": [0, 54, 578, 600]
+    },
+    "heartseeker_arrow_6": {
+      "crop": [0, 54, 578, 600]
+    },
+    "heartseeker_arrow_7": {
+      "crop": [0, 54, 578, 600]
+    },
+    "heartseeker_arrow_8": {
+      "crop": [0, 54, 578, 600]
+    }
+  }
+}

@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="EffectDef" load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/effect_def.gd" id="1_effect_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/effects/skills/dark_sight_burst_1.png" id="f1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/effects/skills/dark_sight_burst_2.png" id="f2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/effects/skills/dark_sight_burst_3.png" id="f3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/effects/skills/dark_sight_burst_4.png" id="f4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/effects/skills/dark_sight_burst_5.png" id="f5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/effects/skills/dark_sight_burst_6.png" id="f6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/effects/skills/dark_sight_burst_7.png" id="f7"]
+[ext_resource type="Texture2D" path="res://assets/sprites/effects/skills/dark_sight_burst_8.png" id="f8"]
+
+[resource]
+script = ExtResource("1_effect_def")
+id = &"dark_sight_burst"
+frames = Array[Texture2D]([ExtResource("f1"), ExtResource("f2"), ExtResource("f3"), ExtResource("f4"), ExtResource("f5"), ExtResource("f6"), ExtResource("f7"), ExtResource("f8")])
+fps = 14.0
+texel = 1.6
+offset = Vector2(0.0, -34.0)
+energy = 1.2
+follow_player = true
+fade_out = false
+sound = &"buff"

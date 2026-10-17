@@ -57,6 +57,8 @@ const KEEP_COLOR := Color(0, 0, 0, 0)
 ## Leaves in the screen's top corners (BiomeDef.frame_left / frame_right), when set.
 @export var frame_left: Texture2D
 @export var frame_right: Texture2D
+## BiomeDef.frame_scale, when 0 or more.
+@export var frame_scale := -1.0
 
 @export_group("Land")
 ## The sub zone's own land pieces (BiomeDef's platform, terrace and ground pictures), e.g. a
@@ -74,7 +76,7 @@ const KEEP_COLOR := Color(0, 0, 0, 0)
 const COLORS := ["sky_top", "sky_mid", "sky_low", "sky_horizon", "sun_color", "light_color", "ambient_color",
 	"fog_color", "mote_color", "grade_tint", "grade_lift", "light_shaft_color"]
 const NUMBERS := ["light_energy", "ambient_energy", "fog_begin", "fog_end", "fog_density", "grade_lift_amount",
-	"grade_saturation"]
+	"grade_saturation", "frame_scale"]
 const TOGGLES := ["motes_rise", "light_shafts"]
 const LAND := ["platform_left", "platform_middle", "platform_middle_alt", "platform_right", "terrace_left",
 	"terrace_right", "terrace_corner_left", "terrace_corner_right", "ground_side"]

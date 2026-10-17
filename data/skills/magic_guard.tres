@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="SkillDef" load_steps=4 format=3]
+[gd_resource type="Resource" script_class="SkillDef" load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
-[ext_resource type="Resource" path="res://data/effects/magic_armor_aura.tres" id="e_magic_armor_aura"]
 [ext_resource type="Texture2D" path="res://assets/sprites/skills/magic_guard.png" id="i_magic_armor"]
+[ext_resource type="Resource" path="res://data/effects/magic_guard_burst.tres" id="fx_effect"]
+[ext_resource type="Resource" path="res://data/effects/magic_guard_aura.tres" id="fx_aura"]
 
 [resource]
 script = ExtResource("1_skill_def")
@@ -22,5 +23,6 @@ animation = &"cast"
 mp_guard = 0.25
 mp_guard_per_level = 0.05
 flash = Color(0.78, 0.55, 1.0, 1)
-effect = ExtResource("e_magic_armor_aura")
+effect = ExtResource("fx_effect")
+aura = ExtResource("fx_aura")
 icon = ExtResource("i_magic_armor")

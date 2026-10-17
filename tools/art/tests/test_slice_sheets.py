@@ -145,6 +145,52 @@ class Keying(unittest.TestCase):
         self.assertEqual(alpha[0, 12], 0.0)
 
 
+class Glow(unittest.TestCase):
+    """key_glow: painted light (and smoke) on a flat background."""
+
+    def _glow(self, core, edge_share=0.4):
+        """A magenta cell with an opaque core of `core` and a ring of it blended into the magenta."""
+        cell = np.zeros((40, 40, 3), float)
+        cell[:] = helpers.MAGENTA
+        cell[10:30, 10:30] = edge_share * np.array(core, float) + (1 - edge_share) * np.array(helpers.MAGENTA)
+        cell[15:25, 15:25] = core
+        return cell
+
+    def test_a_gold_halo_stays_gold(self):
+        gold = (255, 200, 80)
+        rgb, alpha = ss.key_glow(self._glow(gold), np.array(helpers.MAGENTA))
+        self.assertEqual(alpha[0, 0], 0.0)
+        self.assertEqual(alpha[20, 20], 1.0)
+        self.assertAlmostEqual(alpha[12, 12], 0.4, delta=0.08, msg="the halo keeps its share as alpha")
+        self.assertTrue(np.allclose(rgb[12, 12], np.array(gold) / 255.0, atol=0.03), msg="no pink fringe")
+
+    def test_dark_smoke_stays_grey(self):
+        smoke = (50, 50, 55)
+        rgb, alpha = ss.key_glow(self._glow(smoke, 0.5), np.array(helpers.MAGENTA))
+        self.assertEqual(alpha[20, 20], 1.0)
+        self.assertAlmostEqual(alpha[12, 12], 0.5, delta=0.1)
+        r, g, b = rgb[12, 12]
+        self.assertLess(abs(g - r) + abs(g - b), 0.08, msg="the smoke's edge is grey, not green or pink")
+
+    def test_any_flat_background(self):
+        mauve = (184, 78, 146)
+        cell = np.zeros((20, 20, 3), float)
+        cell[:] = mauve
+        cell[5:15, 5:15] = (60, 200, 190)
+        _, alpha = ss.key_glow(cell, np.array(mauve))
+        self.assertEqual(alpha[0, 0], 0.0)
+        self.assertEqual(alpha[10, 10], 1.0)
+
+    def test_a_faint_frame_reads_as_the_sheets_light(self):
+        gold = np.array((255, 200, 80), float)
+        cell = np.zeros((40, 40, 3), float)
+        cell[:] = helpers.MAGENTA
+        cell[19:21, 19:21] = 0.2 * gold + 0.8 * np.array(helpers.MAGENTA)  # the last of a fade, no core
+        rgb, alpha = ss.key_glow(cell, np.array(helpers.MAGENTA), ref=gold.tolist())
+        self.assertAlmostEqual(alpha[20, 20], 0.2, delta=0.06)
+        self.assertTrue(np.allclose(rgb[20, 20], gold / 255.0, atol=0.02))
+
+
 class Colour(unittest.TestCase):
     def test_hsv_round_trip(self):
         rng = np.random.default_rng(1)

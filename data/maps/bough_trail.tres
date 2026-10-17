@@ -291,7 +291,7 @@ width = 150.0
 script = ExtResource("7_portal_def")
 x = 60.0
 target_map = &"harbor_road"
-target_x = 2760.0
+target_x = 4140.0
 
 [sub_resource type="Resource" id="Portal_1"]
 script = ExtResource("7_portal_def")

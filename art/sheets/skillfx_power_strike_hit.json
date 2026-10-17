@@ -1,0 +1,45 @@
+{
+  "source": "art/source/skillfx_power_strike_hit.png",
+  "out_dir": "assets/sprites/effects/skills",
+  "grid": {
+    "rows": [0, 674, 675, 1349],
+    "cols": [0, 598, 600, 1198, 1200, 1798, 1800, 2398]
+  },
+  "cells": [
+    ["power_strike_hit_1", "", "power_strike_hit_2", "", "power_strike_hit_3", "", "power_strike_hit_4"],
+    ["", "", "", "", "", "", ""],
+    ["power_strike_hit_5", "", "power_strike_hit_6", "", "power_strike_hit_7", "", "power_strike_hit_8"]
+  ],
+  "glow": true,
+  "alpha": "soft",
+  "trim": false,
+  "label_band": 0,
+  "inset": 10,
+  "scale": 0.1298,
+  "overrides": {
+    "power_strike_hit_1": {
+      "crop": [0, 0, 578, 654]
+    },
+    "power_strike_hit_2": {
+      "crop": [0, 0, 578, 654]
+    },
+    "power_strike_hit_3": {
+      "crop": [0, 0, 578, 654]
+    },
+    "power_strike_hit_4": {
+      "crop": [0, 0, 578, 654]
+    },
+    "power_strike_hit_5": {
+      "crop": [0, 0, 578, 654]
+    },
+    "power_strike_hit_6": {
+      "crop": [0, 0, 578, 654]
+    },
+    "power_strike_hit_7": {
+      "crop": [0, 0, 578, 654]
+    },
+    "power_strike_hit_8": {
+      "crop": [0, 0, 578, 654]
+    }
+  }
+}

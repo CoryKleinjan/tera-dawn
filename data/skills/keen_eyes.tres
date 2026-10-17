@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="SkillDef" load_steps=7 format=3]
+[gd_resource type="Resource" script_class="SkillDef" load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="2_stat_block"]
-[ext_resource type="Resource" path="res://data/effects/buff_rise.tres" id="e_buff_rise"]
 [ext_resource type="Texture2D" path="res://assets/sprites/skills/keen_eyes.png" id="i_focus"]
+[ext_resource type="Resource" path="res://data/effects/keen_eyes_burst.tres" id="fx_effect"]
+[ext_resource type="Resource" path="res://data/effects/keen_eyes_aura.tres" id="fx_aura"]
 
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("2_stat_block")
@@ -30,7 +31,8 @@ duration_per_level = 12.85714
 animation = &"cast"
 party = true
 flash = Color(0.9, 1.0, 0.55, 1)
-effect = ExtResource("e_buff_rise")
+effect = ExtResource("fx_effect")
+aura = ExtResource("fx_aura")
 icon = ExtResource("i_focus")
 stats = SubResource("Resource_1")
 stats_per_level = SubResource("Resource_2")

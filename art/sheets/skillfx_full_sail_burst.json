@@ -1,0 +1,45 @@
+{
+  "source": "art/source/skillfx_full_sail_burst.png",
+  "out_dir": "assets/sprites/effects/skills",
+  "grid": {
+    "rows": [0, 674, 675, 1349],
+    "cols": [0, 598, 600, 1198, 1200, 1798, 1800, 2398]
+  },
+  "cells": [
+    ["full_sail_burst_1", "", "full_sail_burst_2", "", "full_sail_burst_3", "", "full_sail_burst_4"],
+    ["", "", "", "", "", "", ""],
+    ["full_sail_burst_5", "", "full_sail_burst_6", "", "full_sail_burst_7", "", "full_sail_burst_8"]
+  ],
+  "glow": true,
+  "alpha": "soft",
+  "trim": false,
+  "label_band": 0,
+  "inset": 10,
+  "scale": 0.1622,
+  "overrides": {
+    "full_sail_burst_1": {
+      "crop": [0, 0, 578, 654]
+    },
+    "full_sail_burst_2": {
+      "crop": [0, 0, 578, 654]
+    },
+    "full_sail_burst_3": {
+      "crop": [0, 0, 578, 654]
+    },
+    "full_sail_burst_4": {
+      "crop": [0, 0, 578, 654]
+    },
+    "full_sail_burst_5": {
+      "crop": [0, 0, 578, 654]
+    },
+    "full_sail_burst_6": {
+      "crop": [0, 0, 578, 654]
+    },
+    "full_sail_burst_7": {
+      "crop": [0, 0, 578, 654]
+    },
+    "full_sail_burst_8": {
+      "crop": [0, 0, 578, 654]
+    }
+  }
+}
