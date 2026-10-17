@@ -249,6 +249,12 @@ func _sources() -> Dictionary:
 			out[card.id] = "card of %s" % m.id
 		if m.relic:
 			out[m.relic.id] = "relic of %s" % m.id
+	for m: MapDef in Content.maps.values():
+		var region: RegionDef = Content.regions.get(m.region)
+		if region and m.spawns.any(func(s: SpawnDef) -> bool: return s and s.monster and spawned.has(s.monster.id)):
+			for d in region.drops:
+				if d and d.item:
+					out[d.item.id] = "dropped in %s" % region.id
 	for n: NpcDef in Content.npcs.values():
 		if n.shop and placed.has(n.id):
 			for e in n.shop.items:

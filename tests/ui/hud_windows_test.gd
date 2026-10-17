@@ -6,7 +6,7 @@ extends TestCase
 ## the server's kind of state. (tests/run_all.sh fails on any script error they print.)
 
 const KNOWN := ["inventory", "equipment", "stats", "quests", "skills", "worldmap", "community", "collection",
-	"dialogue", "shop", "storage", "player", "trade"]
+	"dialogue", "shop", "storage", "enchant", "player", "trade"]
 
 var ui: UiHelpers
 
@@ -632,6 +632,7 @@ func test_every_npc_dialogue_and_its_pages() -> void:
 			continue
 		check_eq(labels.has("Open shop"), def.shop != null, "%s: offers its shop" % id)
 		check_eq(labels.has("Open storage"), def.storage, "%s: offers storage" % id)
+		check_eq(labels.has("Enchant gear"), def.enchants, "%s: offers enchanting" % id)
 		check_eq(labels.has("Travel"), not def.travel.is_empty(), "%s: offers travel" % id)
 		await _redrawn(talk, "%s dialogue" % id)
 		for i in talk.options.size():
@@ -641,7 +642,7 @@ func test_every_npc_dialogue_and_its_pages() -> void:
 			ui.hud.open_dialogue(npc)
 			talk.choose(i)
 			await ui.frames(1)
-			for key in ["dialogue", "shop", "storage", "inventory"]:
+			for key in ["dialogue", "shop", "storage", "enchant", "inventory"]:
 				if _win(key).visible:
 					await _redrawn(_win(key), "%s: after %s, the %s window" % [id, labels[i], key])
 			if talk.visible and not talk._on_main_page:
@@ -653,7 +654,7 @@ func test_every_npc_dialogue_and_its_pages() -> void:
 						if talk.visible:
 							await _redrawn(talk, "%s: %s > %s" % [id, labels[i], sub[k]])
 						break
-			for key in ["dialogue", "shop", "storage", "inventory"]:
+			for key in ["dialogue", "shop", "storage", "enchant", "inventory"]:
 				_win(key).visible = false
 		npc.free()
 
@@ -819,6 +820,55 @@ func test_storage_draws_every_tab() -> void:
 		await ui.hover(vault, vault.slot_rect(0, false).get_center())
 		check(ui.hud.tooltip.stack == Game.me.storage.at(t, 0), "hovering stored slot 0 shows it")
 	check_eq(vault._slot_at(Vector2(1, 1)), [-1, false], "hit test outside the slots")
+
+func test_enchanting_at_juno_sets_a_rune_through_the_server() -> void:
+	var juno: NpcDef = Content.npcs[&"harbor_outfitter"]
+	var cap := Content.item(&"leaf_cap")
+	var tide := Content.item(&"tide_rune") as RuneDef
+	await ui.edit(func(c: Character) -> void:
+		c.inventory.clear()
+		c.inventory.add(cap)
+		c.inventory.add(Content.item(&"green_leaf"), 3)
+		c.inventory.add(tide, 2)
+		c.shards = 1000)
+	Net.server.enter_map(ui.player(), &"dawnharbor", 300)
+	await ui.ticks(3)
+	var npc: TDNpc = ui.world.npcs().filter(func(n: TDNpc) -> bool: return n.def == juno)[0]
+	ui.teleport(npc.position + Vector2(-20, 0))
+	await ui.ticks(2)
+	ui.hud.open_dialogue(npc)
+	var talk: TDDialogueWindow = _win("dialogue")
+	talk.choose(talk.options.map(func(o: Array) -> String: return o[0]).find("Enchant gear"))
+	var w: TDEnchantWindow = _win("enchant")
+	check(w.visible and not talk.visible, "Enchant gear opens the enchanter")
+	await _redrawn(w, "the enchanter, nothing picked")
+	check_eq(w.hint(), "Pick a piece of gear", "asks for gear first")
+	await ui.click(w, w.runes.rect(0).get_center())
+	check_eq(w.rune_slot, -1, "a green leaf isn't a rune")
+	await ui.click(w, w.gear.rect(0).get_center())
+	await ui.click(w, w.runes.rect(1).get_center())
+	check(w.picked_gear() != null and w.picked_rune() == tide, "the cap and the rune picked")
+	await _redrawn(w, "the enchanter, both picked")
+	await ui.hover(w, w.runes.rect(1).get_center())
+	check(ui.hud.tooltip.stack != null and ui.hud.tooltip.stack.item == tide, "hovering the rune shows it")
+	await _redrawn(ui.hud.tooltip, "a rune's tooltip")
+	await ui.click(w, w.socket_rect(1).get_center())
+	check(ui.hud.confirm.visible and ui.hud.confirm.question.text.contains("%d Dawnshards" % tide.fee), "it asks first, with the fee")
+	ui.hud.confirm.ok_button.pressed.emit()
+	await ui.ticks(3)
+	var gear := Game.me.inventory.at(ItemDef.Tab.EQUIP, 0)
+	check(gear.runes[1] == tide, "set in the second slot")
+	check_eq(Game.me.shards, 1000 - tide.fee, "fee paid")
+	check_eq(Game.me.inventory.count_of(tide), 1, "one rune used")
+	await ui.click(w, w.gear.rect(0).get_center())
+	await ui.hover(w, w.socket_rect(1).get_center())
+	check(ui.hud.tooltip.stack != null and ui.hud.tooltip.stack.item == tide, "hovering a filled slot shows its rune")
+	await ui.hover(w, w.gear.rect(0).get_center())
+	await _redrawn(ui.hud.tooltip, "an enchanted cap's tooltip")
+	var lines: Array = ui.hud.tooltip._lines().map(func(l: Array) -> String: return l[0])
+	check(lines.has("%s %s: %s" % [TDItemTooltip.RUNE_MARK, tide.display_name, tide.bonus_text()]), "the cap's tooltip lists the rune: %s" % [lines])
+	check_eq(lines.count("%s Empty rune slot" % TDItemTooltip.RUNE_MARK), 2, "and its two empty slots")
+	w.visible = false
 
 # ---------- trade, the player menu ----------
 
