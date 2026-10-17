@@ -241,6 +241,7 @@ func on_move(peer: int, at: Vector2, face: int, anim: StringName) -> void:
 	elif p:
 		quests.reached(p)
 		p.map.check_tear(p)
+		p.map.check_spots(p)
 		p.map.check_secrets(p)
 
 ## The player's Slam landed at `at`: what it lands on breaks (MapInstance.slam), if they

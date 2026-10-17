@@ -24703,6 +24703,26 @@
    ],
    "text": "The base picture is a sheet of 3 cells (1 row of 3) showing the boar boss \"Grotto Tusker\" in 3 poses on a flat magenta background. The attached picture shows Grotto Tusker in his idle pose: his look is exactly that (wet dark slate-blue hide with pale barnacles and water drips, dripping strands of dark green kelp for a mane, a short dark kelp beard, a cluster of pale barnacles and small shells on his shoulder, long yellowed tusks, small pale eyes, an old iron lantern glowing warm yellow on a short rope tied around his near tusk). Keep EVERYTHING in the base picture exactly as it is: the same pose, size, position, body shape, leg positions, head angle, mouth and facing in every cell, the same cute chunky cartoon style, smooth soft painted shading and thin dark plum-brown outline, the same grid lines and the same pure flat magenta #FF00FF background. Never take a pose from the attached picture. Change ONLY these things: In cell 1 the lantern hangs below his feet: shorten its rope so the lantern hangs close under his tusk, its bottom higher than his lowest hoof and above the ground line. In cell 2 the lantern is missing: add the old iron lantern glowing warm yellow on a short rope tied around his near tusk, hanging close under the tusk, its bottom higher than his lowest hoof. Keep cell 3 exactly as it is. Write NO text, labels or names anywhere. Draw NO shadow, puddle, ground, glow halo or effect around it: only the boar on flat magenta. Every boar stays fully inside its own cell, never touching the cell borders. Exactly one boar per cell."
   }
+ },
+ {
+  "id": "home_world_pieces",
+  "prompts": null,
+  "batch": "Home world test: ruined cottage, broken lookout, empty doorway, upturned boat (edit)",
+  "with": null,
+  "refs": [],
+  "save": "home_world_pieces.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": true,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Main story' (home-world tear, plans/home-world-tear.md): Cory picked the ashen seaside town look (18:11Z 'Your recommendation'). Small test before the kit (land + backdrop). Base 2400x1600, exactly 3:2. Set pieces follow greenbough_fields_pieces (no NPC style ref).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/home-world/bases/pieces_base.png",
+   "refs": [],
+   "text": "The first image is a guide on a flat magenta #FF00FF background showing four objects for my 2D side-scrolling game as flat colour shapes. Paint each one over its shape as a finished object for a small, ordinary seaside town that was abandoned and fell to ruin long ago, keeping each shape's position, size and outline EXACTLY. The whole place is drained of colour: ash greys, pale blue-greys and faded driftwood browns under a flat, sunless, overcast light; quiet and sad, never scary, no blood, no bones, no fire, no plants growing, nobody there. 1) LEFT, a ruined cottage front: a plain whitewashed stone cottage wall, its roof gone, the top of the wall broken into jagged crumbling stone, the plaster cracked and flaking to show grey stones beneath; the two dark squares are empty window holes with a broken shutter hanging from one; the dark doorway is an empty opening with no door. 2) MIDDLE, a broken wooden lookout: an old weathered wooden watchtower of two tall posts with a cross brace and a plank deck on top; the top rail has snapped and hangs at an angle, one rail post is broken short; the wood is grey, split and salt-worn, with rusty iron bolts. 3) RIGHT TOP, a lone standing wall: all that is left of a house, a section of grey stone wall with a crumbling top and an empty door frame, its doorway open onto nothing. 4) RIGHT BOTTOM, an upturned old rowboat lying on the sand, its grey planks cracked, with a broken hole in its side (the dark shape). Style: clean, simple and strongly readable shapes with little clutter, like the hand-made world of Hollow Knight, but in my game's own painted style: soft cel-painted shading with clear light and shadow shapes, soft pale highlights on the lit edges from the upper left, a bold dark outline, and hand-painted texture at a fairly chunky brush scale (stone, cracked plaster, wood grain, worn and chipped spots). Painted, never pixel art. Every object is a flat front view at eye level: no top surface shows, nothing recedes into depth, and each stands on ONE flat level bottom edge. Everything that is not part of an object stays flat pure magenta #FF00FF: no ground, no sky, no shadows on the magenta, no labels, no border."
+  }
  }
 ]
 }

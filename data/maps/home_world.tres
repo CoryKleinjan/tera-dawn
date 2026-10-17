@@ -1,0 +1,89 @@
+[gd_resource type="Resource" script_class="MapDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
+[ext_resource type="Resource" path="res://data/biomes/coast.tres" id="2_biome"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="3_platform"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="4_variant"]
+[ext_resource type="Script" path="res://scripts/data/scene_spot.gd" id="spot_def"]
+[ext_resource type="Resource" path="res://data/cutscenes/home_beach.tres" id="home_beach"]
+[ext_resource type="Resource" path="res://data/cutscenes/home_lookout.tres" id="home_lookout"]
+[ext_resource type="Resource" path="res://data/cutscenes/home_doorway.tres" id="home_doorway"]
+[ext_resource type="Resource" path="res://data/cutscenes/home_way_back.tres" id="home_way_back"]
+[ext_resource type="Resource" path="res://data/cutscenes/home_back.tres" id="home_back"]
+
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("4_variant")
+sky_top = Color(0.52, 0.55, 0.6, 1)
+sky_mid = Color(0.64, 0.67, 0.71, 1)
+sky_low = Color(0.74, 0.76, 0.78, 1)
+sky_horizon = Color(0.8, 0.81, 0.82, 1)
+sun_color = Color(0.78, 0.8, 0.84, 1)
+light_color = Color(0.78, 0.8, 0.86, 1)
+light_energy = 0.7
+ambient_color = Color(0.6, 0.63, 0.68, 1)
+fog_color = Color(0.66, 0.68, 0.72, 1)
+fog_begin = 6.0
+fog_end = 90.0
+fog_density = 0.85
+mote_color = Color(0.8, 0.82, 0.86, 1)
+motes_rise = 2
+light_shafts = 2
+
+[sub_resource type="Resource" id="P1"]
+script = ExtResource("3_platform")
+x = 820.0
+y = 555.0
+width = 140.0
+
+[sub_resource type="Resource" id="P2"]
+script = ExtResource("3_platform")
+x = 990.0
+y = 490.0
+width = 170.0
+
+[sub_resource type="Resource" id="Beach"]
+script = ExtResource("spot_def")
+platform = 0
+from_x = 380.0
+to_x = 620.0
+scene = ExtResource("home_beach")
+
+[sub_resource type="Resource" id="Lookout"]
+script = ExtResource("spot_def")
+platform = 2
+scene = ExtResource("home_lookout")
+
+[sub_resource type="Resource" id="Doorway"]
+script = ExtResource("spot_def")
+platform = 0
+from_x = 1500.0
+to_x = 1680.0
+scene = ExtResource("home_doorway")
+
+[sub_resource type="Resource" id="WayBack"]
+script = ExtResource("spot_def")
+platform = 0
+from_x = 2150.0
+to_x = 2340.0
+scene = ExtResource("home_way_back")
+then_map = &"starfall_ridge"
+then_x = 1980.0
+then_scene = ExtResource("home_back")
+glow = Vector2(2240.0, 170.0)
+
+[resource]
+script = ExtResource("1_map_def")
+id = &"home_world"
+display_name = "???"
+biome = ExtResource("2_biome")
+variant = SubResource("Variant")
+width = 2400
+start_x = 200.0
+lantern_spacing = 0.0
+decor_density = 0.4
+silent = true
+solo = true
+region = &"lumewood"
+return_map = &"lumewood"
+platforms = Array[ExtResource("3_platform")]([SubResource("P1"), SubResource("P2")])
+scene_spots = Array[ExtResource("spot_def")]([SubResource("Beach"), SubResource("Lookout"), SubResource("Doorway"), SubResource("WayBack")])

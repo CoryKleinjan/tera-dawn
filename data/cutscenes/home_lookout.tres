@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="CutsceneDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/cutscene_def.gd" id="1_def"]
+[ext_resource type="Script" path="res://scripts/data/cutscene_step.gd" id="2_step"]
+
+[sub_resource type="Resource" id="S1"]
+script = ExtResource("2_step")
+kind = 2
+ticks = 30
+wait = false
+
+[sub_resource type="Resource" id="S2"]
+script = ExtResource("2_step")
+kind = 6
+speaker = &"hero"
+text = "Someone used to climb up here every morning. I don't know how I know that."
+
+[sub_resource type="Resource" id="S3"]
+script = ExtResource("2_step")
+kind = 2
+ticks = 30
+amount = 0.0
+
+[resource]
+script = ExtResource("1_def")
+id = &"home_lookout"
+steps = Array[ExtResource("2_step")]([SubResource("S1"), SubResource("S2"), SubResource("S3")])

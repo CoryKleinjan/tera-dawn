@@ -24,6 +24,11 @@ func can_take(q: QuestDef, c: Character) -> bool:
 	for r in q.requires:
 		if not done.has(r):
 			return false
+	if not q.requires_any.is_empty() and not q.requires_any.any(func(r: StringName) -> bool: return done.has(r)):
+		return false
+	for m in q.requires_beaten:
+		if m and c.book.kills(m) <= 0:
+			return false
 	return true
 
 ## How far along objective `i` is.
