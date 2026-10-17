@@ -14,11 +14,12 @@ func check() -> void:
 	await _ticks(3)
 	_check(me.sitting and world.player.sitting and world.player._animation() == &"sit", "the sit key sits you down")
 	_check(ch.achievements.has("take_a_seat") and world.hud.banners.toasts.any(func(t: AchievementDef) -> bool: return t.title == "Take a Seat"), "sitting down earns an achievement")
-	ch.health.set_hp(10)
+	ch.health.set_hp(1)
 	var hp := ch.health.hp
-	map.tick = (map.tick / 120 + 1) * 120 - 1
+	var every := SimPlayer.HEART_REGEN_EVERY / 2
+	map.tick = (map.tick / every + 1) * every - 1
 	await _ticks(1)
-	_check(ch.health.hp - hp == (SimPlayer.REGEN_BASE + ch.level / SimPlayer.REGEN_HP_LEVELS) * 2 + ch.skills.regen_bonus().x, "sitting doubles HP recovery")
+	_check(ch.health.hp - hp == 1 + ch.skills.regen_bonus().x, "sitting brings a heart back twice as often")
 	await _hold("move_right", 6)
 	await _ticks(4)
 	_check(not me.sitting and not world.player.sitting, "moving gets you up")

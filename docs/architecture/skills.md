@@ -11,9 +11,9 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
    - Attacks: cooldown, how long the player is busy (`action_ticks`), the hit area (`reach`,
      `height`), `max_targets`, `hits` and the damage multiplier.
    - Buffs: `stats` added while it lasts, and `duration` in seconds. Also: `party` (it reaches
-     party members within `SkillDef.PARTY_REACH`, at the caster's level), `heal` (a share of
-     Max HP; a heal with no duration adds no buff), `mp_guard` (a share of damage taken comes
-     out of MP), `steady` (no knockback), `hide` (monsters can't see or touch you; attacking
+     party members within `SkillDef.PARTY_REACH`, at the caster's level), `heal` (hearts,
+     rounded down; a heal with no duration adds no buff), `mp_guard` (the chance a hit costs MP
+     instead of a heart), `steady` (no knockback), `hide` (monsters can't see or touch you; attacking
      ends it), and HP/MP recovery.
    - Passives: `stats` always added, and/or extra HP/MP recovery. Attack Speed, Melee Damage
      and Ranged Damage are stats too.

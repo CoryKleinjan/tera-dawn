@@ -90,13 +90,13 @@ func test_load_drops_bad_places_and_misfits() -> void:
 
 func test_equip_moves_gear_from_bag_and_adds_stats() -> void:
 	var c := fx.character()
-	c.inventory.add_stack(ItemStack.exact(fx.equip(&"t_a", EquipDef.Slot.WEAPON, {"attack": 15, "accuracy": 4, "max_hp": 30})))
-	var hp_before := c.max_hp()
+	c.inventory.add_stack(ItemStack.exact(fx.equip(&"t_a", EquipDef.Slot.WEAPON, {"attack": 15, "accuracy": 4, "heart_pieces": 4})))
+	var hp_before := c.max_hearts()
 	check_eq(c.gear.equip(0), "", "equipped")
 	check(c.inventory.at(ItemDef.Tab.EQUIP, 0) == null, "left the bag")
 	check_eq(c.stats.attack, 15, "attack")
 	check_eq(c.stats.accuracy, 4, "accuracy")
-	check_eq(c.max_hp(), hp_before + 30, "max HP")
+	check_eq(c.max_hearts(), hp_before + 1, "four heart pieces make a heart")
 
 func test_equip_swaps_old_gear_into_same_bag_slot() -> void:
 	var c := fx.character()

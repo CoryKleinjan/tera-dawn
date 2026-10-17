@@ -16,12 +16,14 @@ const HURT_INV := 90
 const HURTBOX_SIZE := Vector2(19, 40)
 ## Their chest above their feet: where monsters aim their shots (and TDPlayer.CHEST).
 const CHEST := 34.0
-## Ticks between HP / MP regeneration, and what's regained each time: a base plus
+## Ticks between MP regeneration, and what's regained each time: a base plus
 ## level / divisor, plus the character's regen bonus. Sitting regains the base part twice.
 const REGEN_EVERY := 120
 const REGEN_BASE := 2
-const REGEN_HP_LEVELS := 3
 const REGEN_MP_LEVELS := 4
+## Ticks between getting a heart back on its own (plus the regen bonus's hearts); sitting
+## halves it.
+const HEART_REGEN_EVERY := 900
 
 var peer := 0
 var character: Character
@@ -93,7 +95,7 @@ func report_move(at: Vector2, facing: int, anim: StringName) -> bool:
 	animation = anim
 	return true
 
-## Runs the player's timers and HP / MP regeneration. True when they've lain fainted long
+## Runs the player's timers and heart / MP regeneration. True when they've lain fainted long
 ## enough to be sent back to town.
 func step() -> bool:
 	since_move += 1
@@ -113,10 +115,11 @@ func step() -> bool:
 			map.tell(self, "%s wore off." % s.display_name, Palette.MIST)
 			dirty_character = true
 	if map.tick % REGEN_EVERY == 0:
-		var bonus := character.skills.regen_bonus()
 		var times := 2 if sitting else 1
-		character.health.heal((REGEN_BASE + character.level / REGEN_HP_LEVELS) * times + bonus.x)
-		character.restore_mp((REGEN_BASE + character.level / REGEN_MP_LEVELS) * times + bonus.y)
+		character.restore_mp((REGEN_BASE + character.level / REGEN_MP_LEVELS) * times + character.skills.regen_bonus().y)
+		dirty_vitals = true
+	if map.tick % (HEART_REGEN_EVERY / (2 if sitting else 1)) == 0 and character.health.hp < character.health.max_hp:
+		character.health.heal(1 + character.skills.regen_bonus().x)
 		dirty_vitals = true
 	return false
 

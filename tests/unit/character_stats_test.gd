@@ -85,11 +85,17 @@ func test_jump_multiplier_and_caps() -> void:
 	check_near(CharacterStats.jump_multiplier(UnitHelpers.stats({"jump": 100})), 1.23, "capped at 123%")
 	check_near(CharacterStats.jump_multiplier(UnitHelpers.stats({"jump": -100})), 0.5, "floored at 50%")
 
-func test_max_hp_and_mp_grow_with_level_and_gear() -> void:
-	var j := fx.job()  # HP 50 + 10 and MP 20 + 5 a level
-	check_eq(CharacterStats.max_hp(j, 1, StatBlock.new()), 60, "HP at level 1")
-	check_eq(CharacterStats.max_hp(j, 0, StatBlock.new()), 60, "never below level 1")
-	check_eq(CharacterStats.max_hp(j, 10, UnitHelpers.stats({"max_hp": 25})), 175, "HP at level 10, with gear")
+func test_hearts_and_mp_grow_with_level_and_gear() -> void:
+	var j := fx.job()  # MP 20 + 5 a level
+	check_eq(CharacterStats.max_hearts(j, 1, StatBlock.new()), 3, "three hearts at level 1")
+	check_eq(CharacterStats.max_hearts(j, 0, StatBlock.new()), 3, "never below level 1")
+	check_eq(CharacterStats.max_hearts(j, 19, StatBlock.new()), 3, "still three at level 19")
+	check_eq(CharacterStats.max_hearts(j, 20, StatBlock.new()), 4, "one more every 20 levels")
+	check_eq(CharacterStats.max_hearts(j, 100, StatBlock.new()), 8, "eight at level 100")
+	check_eq(CharacterStats.max_hearts(j, 1, UnitHelpers.stats({"heart_pieces": 3})), 3, "three pieces aren't a heart")
+	check_eq(CharacterStats.max_hearts(j, 1, UnitHelpers.stats({"heart_pieces": 4})), 4, "four pieces make a heart")
+	j.bonus_hearts = 1
+	check_eq(CharacterStats.max_hearts(j, 1, StatBlock.new()), 4, "the job's bonus heart")
 	check_eq(CharacterStats.max_mp(j, 1, StatBlock.new()), 25, "MP at level 1")
 	check_eq(CharacterStats.max_mp(j, 30, UnitHelpers.stats({"max_mp": 5})), 175, "MP at level 30, with gear")
 

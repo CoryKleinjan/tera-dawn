@@ -67,12 +67,13 @@ func _lines() -> Array:
 	elif item is UseDef:
 		var u := item as UseDef
 		out.append(["Use", Palette.MUTED, 11])
-		var hp := u.hp_for(Game.me.max_hp())
+		var hearts := u.hearts_for(Game.me.max_hearts())
 		var mp := u.mp_for(Game.me.max_mp())
-		if hp > 0:
-			out.append(["Restores %d HP" % hp, Palette.HP, 12])
+		if hearts > 0:
+			out.append(["Heals %s" % SkillDef.hearts_text(hearts), Palette.HP, 12])
 		if mp > 0:
-			out.append(["Restores %d MP" % mp, Palette.MP, 12])
+			# MP is a number only behind the scenes: players see how much of their bar it fills
+			out.append(["Restores %d%% of your MP" % mini(100, roundi(100.0 * mp / Game.me.max_mp())), Palette.MP, 12])
 		if u.pet_food > 0:
 			out.append(["Pet food: +%d fullness" % u.pet_food, Palette.PET, 12])
 	elif item is PetDef:

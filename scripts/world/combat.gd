@@ -16,13 +16,35 @@ static func player_hit(skill: SkillDef, _target: MonsterDef, ch: Character) -> D
 		* (CRIT_MULTIPLIER if crit else 1.0)))
 	return {"damage": dmg, "crit": crit, "miss": false}
 
-## Damage a character takes from a monster's touch (or a move `power` times as strong),
-## or 0 if they dodge it.
+## A hit as strong as this (a monster's attack times its move's power and its strength on
+## the map) costs two hearts instead of one: the hardest hitters and the bosses' big moves.
+const TWO_HEART_HIT := 100.0
+## Chance to block a hit for each point of Weapon and Magic Defense, and the most it reaches.
+const BLOCK_PER_DEFENSE := 0.02
+const MAX_BLOCK := 0.3
+
+## Hearts a character loses to a monster's touch (or a hit `power` times as strong: its move's
+## power times its strength on the map), or 0 if they dodge or block it.
 static func monster_hit(monster: MonsterDef, ch: Character, power := 1.0) -> int:
 	var dodge := clampf(ch.avoid() * 0.004, 0.0, 0.3)
-	if randf() < dodge:
+	if randf() < dodge or randf() < block_chance(ch.stats):
 		return 0
-	return maxi(1, roundi(monster.attack * power * randf_range(0.85, 1.15) - ch.stats.defense * 0.3))
+	return hearts_for(monster.attack * power)
+
+## Hearts a hit of `strength` (attack x power) costs.
+static func hearts_for(strength: float) -> int:
+	return 2 if strength >= TWO_HEART_HIT else 1
+
+## The chance that Weapon and Magic Defense block a hit entirely.
+static func block_chance(total: StatBlock) -> float:
+	return minf(MAX_BLOCK, (total.defense + total.magic_defense) * BLOCK_PER_DEFENSE)
+
+## Share of max MP a guard (Magic Guard) spends to soak one heart of a hit.
+const GUARD_MP_SHARE := 0.1
+
+## MP a guard spends to soak a heart for `ch`.
+static func guard_mp(ch: Character) -> int:
+	return maxi(1, roundi(ch.max_mp() * GUARD_MP_SHARE))
 
 ## EXP (of what's toward the next level) lost when the player faints.
 static func faint_penalty(xp: int) -> int:

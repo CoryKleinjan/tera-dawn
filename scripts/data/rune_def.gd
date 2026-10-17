@@ -13,7 +13,7 @@ extends ItemDef
 ## A boss's own rune: drop-only and stronger. The tooltip says so.
 @export var boss := false
 
-## Its bonuses as players read them: "Weapon Attack +1, MaxHP +15".
+## Its bonuses as players read them: "Weapon Attack +1, Heart Pieces +1".
 func bonus_text() -> String:
 	var parts := PackedStringArray()
 	if stats:
