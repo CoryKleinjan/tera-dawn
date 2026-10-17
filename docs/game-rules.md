@@ -300,6 +300,10 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
   roar again at their second wind; their defeat is a painted fall (hit pause, collapse, embers
   fading) rather than a quick poof. Molten King has this first; the others follow as painted.
 - Monster HP is 40% lower than first tuned, so fights stay quick.
+- Monsters move with their painted frames, never repainted or recoloured in code: steps keep
+  pace with their speed (no sliding feet), they stretch taking off and squash landing, lurch
+  into each strike, breathe at idle, flinch back when hit, topple over when defeated (bosses
+  play their painted fall) and pop up when they respawn.
 
 ## UI
 
