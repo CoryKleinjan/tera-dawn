@@ -25133,6 +25133,31 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cell 4 holds a painted bald chibi boy standing at rest, turned toward the right, in a cream undershirt with rolled sleeves and brown shorts, barefoot. Leave cell 4 exactly as it is. Cells 1 and 2 each hold a rough flat colour GUIDE of the same boy in a new pose: the GREEN shapes are his head, body, legs and his far arm; the BLUE shape is his NEAR arm, the arm closest to the viewer, ending in his near fist. Paint the SAME boy as cell 4 over each guide in that pose, covering the guide completely so no flat green or blue is left: same size as cell 4, the same proportions as cell 4 (big round head, short body), seen from the side and turned toward the right, turned the same way as the boy in cell 4 with his shirt front and collar showing, never showing his back. The blue arm is always the near arm, the arm on the viewer's side of his body, painted ON TOP of his body and reaching straight down and forward along the blue shape, well clear of his body, as if he had just slashed a blade down in front of him (do not paint any blade). The far arm is mostly behind his body with only its fist showing at his hip. Cell 1: crouched low with his legs apart, his near arm reaching down and forward, the near fist low and well ahead of his belly; the far fist pulled back at his hip. Cell 2: a deeper lunge, his back leg stretched far behind him and his front knee bent, his near arm reaching down and forward, the near fist low and far ahead of him past his front knee; the far fist pulled back behind his hip. He is bald, with no face and no hair: keep his head bare exactly like the boy in cell 4. No arm, hand or fist ever crosses or touches his head or face, and both fists are visible. His fists are his own bare skin, the same skin colour as his head, exactly like the fists of the boy in cell 4: small round closed hands with no fingers showing. No gloves of any kind. He has exactly two arms and two legs. Do not add any weapon, object, ground, dust, motion lines, text or extra figure. Leave cells 3 and 5 to 8 empty. Keep the background flat pure magenta #FF00FF and keep the grid lines. Style: exactly like the boy in cell 4 (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the attached picture. No text, no labels."
   }
+ },
+ {
+  "id": "newhero_boy_test_walk_idle",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_boy_test_walk_idle.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review' (Cory 18:53-18:58Z: start the hero over as preset boy and girl looks, each armor set and weapon painted onto the whole character, full animations): first test, one boy in plain clothes, a 6-frame walk and a 2-frame idle on a blank sheet, no old hero art used. Released by Cory 18:58Z (\"Paint the test\") to the priced line 18:57Z (\"Then I'll price a 1-sheet test: one boy's walk and idle, 8 frames, about $0.07.\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/blank_2x4_169.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is an empty sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines. Paint ONE character, exactly the same in every cell: a cute chibi boy adventurer of about ten, with a very big round head about half his height on a small body, big glossy eyes with a dark top lash, deep-blue irises and white highlights, a small friendly smile and short messy brown hair. He wears plain everyday clothes: a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and simple brown leather shoes. No armour, cape, hat, bag or weapon, and nothing in his hands; his hands are small and round. He is seen from the side, facing right, like a character in a side-scrolling game, the same size in every cell, with his feet on the same invisible ground line near the bottom of each cell. He fills about 80% of the cell height and stays fully inside his cell with a clear margin all round. The 8 cells are animation frames in reading order (top row left to right, then the bottom row). Cells 1 to 6 are one smooth 6-frame walk cycle that loops, each frame a different step: 1 his near foot forward touching the ground, 2 his body lowest as his weight lands, 3 his far leg passing under him, 4 his far foot forward touching the ground, 5 his body lowest again, 6 his near leg passing under him. His arms swing opposite to his legs. Cells 7 and 8 are an idle breathing loop, standing relaxed: 7 breathing in, his chest and head a little higher, 8 breathing out. Keep his face, hair, clothes, colours, proportions and size exactly the same in every cell. No arm or hand ever covers his face. Style: like the painted villagers in the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture (cloth folds, worn leather), a thin dark plum-brown outline; never pixel art. The attached picture only shows the painting style: do not copy any person, object or background from it. Keep the background flat pure magenta #FF00FF and keep the grid lines. No ground, shadow, dust, motion lines, text, labels or numbers."
+  }
  }
 ]
 }
