@@ -10,10 +10,15 @@ extends Resource
 ## The faces and hairstyles he can have (HeroStyleDef), the first of each his default.
 @export var faces: Array[Resource] = []
 @export var hairs: Array[Resource] = []
-## His fists painted on their own, drawn over the weapon he holds so his hand wraps its grip.
+## What a frame's name ends with in `hands` for his fists painted for long sleeves
+## (EquipDef.long_sleeves): only what shows past the cuffs ("pinning_sleeved").
+const SLEEVED := "_sleeved"
+
+## His fists painted on their own, drawn over the weapon he holds so his hand wraps its grip;
+## under long sleeves a frame's fists painted for them (SLEEVED) show instead, where it has some.
 @export var hands: SpriteFrames
 ## Frames whose fists were painted with bare forearms, left off under long sleeves
-## (EquipDef.long_sleeves).
+## (EquipDef.long_sleeves) unless the frame has fists painted for them.
 @export var bare_arm_frames: Array[StringName] = []
 ## Frames whose fists are drawn over his clothes with or without a weapon out (lying down, a
 ## hand resting on his belly).

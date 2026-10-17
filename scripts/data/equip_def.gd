@@ -52,7 +52,8 @@ const OFFHAND_NAMES := {&"shield": "a shield", &"star": "throwing stars", &"book
 	set(v):
 		held = v
 		_icon_from_look()
-## A top whose long sleeves reach his wrists (a robe), so the fists painted with bare forearms
+## A top whose long sleeves reach his wrists (a robe): his fists show the paintings made for long
+## sleeves where a frame has them (HeroLookDef.SLEEVED), and the ones painted with bare forearms
 ## (HeroLookDef.bare_arm_frames) aren't drawn over them.
 @export var long_sleeves := false
 

@@ -35,7 +35,10 @@ then character select shows the list (name and job) with the new character picke
   ticked (held pieces fit any pose). Held pieces gain or lose that frame's pin; worn
   layers and his parts record it in `frame_art` (frame -> the frame whose painting shows there,
   or "" when deleted), and an added piece shows even where the stack
-  would leave it off (hair under a hat, fists with no weapon out). Shots (arrows, bullets,
+  would leave it off (hair under a hat, fists with no weapon out). Under a top with `long_sleeves`
+  (the robe) his fists (`HeroBody.fists`) show a frame's painting for long sleeves where the fists
+  sheet has one (`<frame>_sleeved`: only what shows past the cuffs), and fists painted with bare
+  forearms (`bare_arm_frames`) are left off there otherwise. Shots (arrows, bullets,
   stars, spells) leave from `HeroBody.muzzle`: the muzzle of the held piece showing on the
   frame the shot leaves on (`data/hero/muzzles.tres`, `MuzzleSetDef`: a point per piece in its
   painting, the shot frame per move, and a shooting fist per frame for when the weapon isn't
