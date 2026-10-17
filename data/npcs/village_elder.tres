@@ -11,4 +11,4 @@ title = "Village Elder"
 texture = ExtResource("2_village_elder")
 sprite_scale = 1.0
 greeting = "Ah, a new Dawnling. The sun rises on you today. What can an old man do for you?"
-lines = PackedStringArray("Welcome to Dawnrise Meadow, young Dawnling.", "The Dewlings are harmless. Practice your sword on them first.", "Hold Up on a rope or ladder to climb to the upper meadow.", "Beyond the eastern portal lies Fern Hollow. Train well before you go.")
+lines = PackedStringArray("Welcome to Dawnrise Meadow, young Dawnling.", "The Dewlings are harmless. Practice your sword on them first.", "Hop from ledge to ledge to reach the upper meadow.", "Beyond the eastern portal lies Fern Hollow. Train well before you go.")

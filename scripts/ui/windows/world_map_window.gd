@@ -9,7 +9,7 @@ extends TDWindow
 ##   - dots: a zoomed-in part of the same painting (RegionDef.zone_rect) with every map in it
 ##     as a dot and the paths between them;
 ##   - to shape, the Hollow Knight way (RegionDef.shaped_zone): every map a room of its real
-##     size where it sits in the zone (MapDef.zone_pos), with its ledges, ropes and doors, inked
+##     size where it sits in the zone (MapDef.zone_pos), with its ledges and doors, inked
 ##     on dark paper. Rooms show once you've been there; secret ledges, and doors behind a
 ##     shortcut or a fake or breakable wall, once you've found them. You're marked where you
 ##     stand.
@@ -51,13 +51,12 @@ var hovered_region: StringName = &""
 
 ## A zone drawn to shape: dark paper; each room filled with its region's colour darkened by
 ## ROOM_SHADE (ROOM_SHADE_LIT hovered), edged lightened by ROOM_EDGE_TINT, its land lightened
-## by ROOM_LAND_TINT; ropes and ladders in ROOM_ROPE.
+## by ROOM_LAND_TINT.
 const PAPER := Color("1a120b")
 const ROOM_SHADE := 0.72
 const ROOM_SHADE_LIT := 0.56
 const ROOM_EDGE_TINT := 0.45
 const ROOM_LAND_TINT := 0.15
-const ROOM_ROPE := Color(0.85, 0.7, 0.45, 0.85)
 ## How far in from the map area the rooms keep (room for the exit labels at the sides).
 const SHAPE_MARGIN := Vector2(70, 34)
 ## Room names: their size, and the smallest they shrink to before they're left to the strip.
@@ -572,14 +571,12 @@ func _draw_shaped_zone() -> void:
 	_draw_zone_frame(r, here)
 
 ## A room's land: its floor, its ledges (raised land filled down to what it stands on; secret
-## ones once found) and its ropes and ladders.
+## ones once found).
 func _draw_room_land(m: MapDef, land: Color) -> void:
 	var k := _shape_fit().get_scale()
 	var floor_at := _in_room(m, Vector2(0, m.ground_y))
 	draw_rect(Rect2(floor_at, Vector2(m.width, m.height - m.ground_y) * k), Color(land, 0.45))
 	draw_line(floor_at, floor_at + Vector2(m.width * k.x, 0), land, 1.5)
-	for c in m.climbables:
-		draw_line(_in_room(m, Vector2(c.x, c.top)), _in_room(m, Vector2(c.x, c.bottom)), ROOM_ROPE, 1.0)
 	for i in range(1, m.platforms.size() + 1):
 		if not ledge_shown(m, i):
 			continue

@@ -69,7 +69,7 @@ cello, slow and tender. Field: ocarina, flute, guitar, strings, light percussion
 wandering melody.
 
 **Town: Dawnrise Village.** Small and cosy, humbler than Dawnharbor: a village green with a low
-grassy rise (ladder up) where the windmill stands. Round honey-stone and timber cottages under fat
+grassy rise (steps up) where the windmill stands. Round honey-stone and timber cottages under fat
 golden thatch, rose and peach heart shutters, flower boxes, climbing roses; no blue tiles or cream
 plaster. Buildings: Elder Rowan's house, Mira's shop (striped awning), a family cottage, the
 windmill. Rose-wound lamp posts. One 4K sunrise meadow panorama (hills, village, windmill, sea).

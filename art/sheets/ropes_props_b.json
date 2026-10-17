@@ -6,17 +6,17 @@
   "cells": [
     [
       "",
-      "rope_middle",
-      "rope_bottom",
-      "vine_middle",
-      "vine_bottom"
+      "",
+      "",
+      "",
+      ""
     ],
     [
-      "ladder_top",
-      "ladder_middle",
-      "ladder_bottom",
-      "rope_ladder_middle",
-      "rope_ladder_bottom"
+      "",
+      "",
+      "",
+      "",
+      ""
     ],
     [
       "",
@@ -94,87 +94,6 @@
       ],
       "fix": "glow_backdrop",
       "scale": 0.0957
-    },
-    "ladder_top": {
-      "crop": [
-        0,
-        55,
-        620,
-        515
-      ],
-      "scale": 0.144
-    },
-    "ladder_middle": {
-      "crop": [
-        0,
-        125,
-        638,
-        472
-      ],
-      "scale": 0.144
-    },
-    "ladder_bottom": {
-      "crop": [
-        0,
-        55,
-        638,
-        515
-      ],
-      "scale": 0.144
-    },
-    "rope_ladder_middle": {
-      "crop": [
-        0,
-        112,
-        640,
-        492
-      ],
-      "scale": 0.144
-    },
-    "rope_ladder_bottom": {
-      "crop": [
-        0,
-        55,
-        620,
-        515
-      ],
-      "scale": 0.144
-    },
-    "rope_middle": {
-      "crop": [
-        0,
-        80,
-        638,
-        420
-      ],
-      "scale": 0.0755
-    },
-    "rope_bottom": {
-      "crop": [
-        0,
-        60,
-        638,
-        520
-      ],
-      "scale": 0.0755
-    },
-    "vine_middle": {
-      "crop": [
-        0,
-        60,
-        640,
-        518
-      ],
-      "scale": 0.0621
-    },
-    "vine_bottom": {
-      "crop": [
-        0,
-        60,
-        620,
-        520
-      ],
-      "scale": 0.0621
     }
   },
   "grid": {
@@ -194,27 +113,5 @@
       3505
     ]
   },
-  "inset": 35,
-  "climb": {
-    "ladder": {
-      "top": "ladder_top",
-      "middle": "ladder_middle",
-      "bottom": "ladder_bottom"
-    },
-    "rope": {
-      "top": "rope_top",
-      "middle": "rope_middle",
-      "bottom": "rope_bottom"
-    },
-    "rope_ladder": {
-      "top": "rope_ladder_top",
-      "middle": "rope_ladder_middle",
-      "bottom": "rope_ladder_bottom"
-    },
-    "vine": {
-      "top": "vine_top",
-      "middle": "vine_middle",
-      "bottom": "vine_bottom"
-    }
-  }
+  "inset": 35
 }

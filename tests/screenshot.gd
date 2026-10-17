@@ -587,20 +587,6 @@ func _run() -> void:
 			Net.server.maps[&"meadow"].spawn_drop(Content.item(loot[i]), 3, null, DropFlight.create(Vector2(1100, 600), 620, x), 0)
 		await _physics(45)
 		await _shot("drops")
-	if only == "" or only == "rope":
-		# On the meadow's rope at x 700 (it hangs from 420 to the ground at 620; see
-		# data/maps/meadow.tres), put straight on it so nothing earlier (an NPC close by, a
-		# grab cooldown) can stop the grab, then climbing up the middle of it.
-		var rope := world.layout.climbable_near(Vector2(700, 600))
-		_teleport(world, Vector2(rope.x, rope.bottom - 70))
-		p.climb = rope
-		p.on_ground = false
-		Input.action_press("move_up")
-		await _physics(20)
-		Input.action_release("move_up")
-		if not p.is_climbing():
-			print("rope: the hero isn't on the rope at ", p.position)
-		await _shot("rope")
 	if only == "" or only == "hollow":
 		await _go(&"hollow", 760)
 		_me().inv = 100000

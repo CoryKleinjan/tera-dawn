@@ -23,12 +23,12 @@
       "faint"
     ],
     [
-      "rope1",
-      "rope2",
-      "rope_hold",
-      "ladder1",
       "",
-      "ladder_hold",
+      "",
+      "",
+      "",
+      "",
+      "",
       "back",
       ""
     ]
@@ -73,11 +73,6 @@
         "crouch": "hero_squire_helm:crouch",
         "sit": "hero_squire_helm:idle1",
         "faint": "hero_squire_helm:faint",
-        "rope1": "hero_squire_helm:rope1",
-        "rope2": "hero_squire_helm:rope2",
-        "rope_hold": "hero_squire_helm:rope_hold",
-        "ladder1": "hero_squire_helm:ladder1",
-        "ladder_hold": "hero_squire_helm:ladder_hold",
         "back": "hero_squire_helm:back",
         "swing2": "hero_squire_helm:idle1",
         "swing3": "hero_squire_helm:idle1",
@@ -163,36 +158,6 @@
         "faint": {
           "frames": [
             "faint"
-          ],
-          "fps": 1
-        },
-        "rope1": {
-          "frames": [
-            "rope1"
-          ],
-          "fps": 1
-        },
-        "rope2": {
-          "frames": [
-            "rope2"
-          ],
-          "fps": 1
-        },
-        "rope_hold": {
-          "frames": [
-            "rope_hold"
-          ],
-          "fps": 1
-        },
-        "ladder1": {
-          "frames": [
-            "ladder1"
-          ],
-          "fps": 1
-        },
-        "ladder_hold": {
-          "frames": [
-            "ladder_hold"
           ],
           "fps": 1
         },

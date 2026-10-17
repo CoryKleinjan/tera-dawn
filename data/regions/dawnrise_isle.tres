@@ -6,7 +6,7 @@
 script = ExtResource("1_region_def")
 id = &"dawnrise_isle"
 display_name = "Dawnrise Isle"
-description = "A sunny island where every Dawnling wakes. Meadows, ropes and gentle monsters."
+description = "A sunny island where every Dawnling wakes. Meadows, ledges and gentle monsters."
 color = Color(1.0, 0.819608, 0.4, 1.0)
 capital = &"dawnrise_village"
 label_pos = Vector2(140.0, 420.0)

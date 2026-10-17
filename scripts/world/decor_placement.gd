@@ -8,8 +8,8 @@ extends RefCounted
 ## Every piece:
 ## - sits wholly on the land it stands on: inside the map's floor, or inside its platform's
 ##   ends;
-## - keeps clear of what stands on that land (buildings, portals, NPCs, ropes and ladders,
-##   props, lanterns), so it never shows in front of or behind them. In a field, pieces far
+## - keeps clear of what stands on that land (buildings, portals, NPCs, props,
+##   lanterns), so it never shows in front of or behind them. In a field, pieces far
 ##   back (the tree line, distant houses) only keep clear of buildings and lanterns; in a town
 ##   they keep clear of everything, so no exit or prop stands in front of a tree or a house;
 ## - never overlaps another piece from the same rule, and in a town no other piece at all;
@@ -118,8 +118,8 @@ static func scatter(rule: DecorDef, land: Vector2, y: float, rng: RandomNumberGe
 	return out
 
 ## The stretches (left and right edges as x and y) taken by what stands on platform
-## `platform` (0 is the floor): buildings, portals, NPCs, ropes and ladders that reach it
-## from above or below, props, and raised land whose wall stands on it.
+## `platform` (0 is the floor): buildings, portals, NPCs, props, and raised land whose wall
+## stands on it.
 static func standing_on(map: MapDef, platform: int) -> Array[Vector2]:
 	var out := building_spans(map, platform)
 	out.append_array(map.solid_spans_on(platform))
@@ -131,9 +131,6 @@ static func standing_on(map: MapDef, platform: int) -> Array[Vector2]:
 		if n.platform == platform:
 			var r := LanternPlacement.npc_rect(n)
 			out.append(Vector2(n.x + r.position.x, n.x + r.end.x))
-	for c in map.climbables:
-		if c.top < y + 4.0 and c.bottom > y - 4.0 and _on(map, platform, c.x):
-			out.append(Vector2(c.x - LanternPlacement.CLIMB_HALF, c.x + LanternPlacement.CLIMB_HALF))
 	for p in map.props:
 		if p.texture == null:
 			continue

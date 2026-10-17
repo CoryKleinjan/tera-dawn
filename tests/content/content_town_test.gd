@@ -83,7 +83,6 @@ func test_streets_have_no_long_empty_stretches() -> void:
 				levels.append(i + 1)
 		for plat: int in levels:
 			var land := Vector2(0, m.width) if plat == 0 else Vector2(m.platforms[plat - 1].x, m.platforms[plat - 1].x + m.platforms[plat - 1].width)
-			var y := m.surface_y(plat)
 			var spans: Array[Vector2] = [Vector2(land.x, land.x), Vector2(land.y, land.y)]
 			spans.append_array(m.solid_spans_on(plat))
 			if plat == 0:
@@ -99,9 +98,6 @@ func test_streets_have_no_long_empty_stretches() -> void:
 			for n in m.npcs:
 				if n.platform == plat:
 					spans.append(Vector2(n.x - 30.0, n.x + 30.0))
-			for c in m.climbables:
-				if c.top < y + 4.0 and c.bottom > y - 4.0 and c.x >= land.x and c.x <= land.y:
-					spans.append(Vector2(c.x - 16.0, c.x + 16.0))
 			spans.sort_custom(func(a: Vector2, b: Vector2) -> bool: return a.x < b.x)
 			var reach := land.x
 			for s in spans:

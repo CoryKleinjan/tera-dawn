@@ -27,7 +27,7 @@ update this page when one changes. Each zone's own look and music are in
   over a flat green silhouette of it so they land in place on every frame.
 - Gear is painted whole on every frame: no holes, gaps, notches or bites where an arm, hand or
   leg crosses it, nothing cut off flat, and both shoes or boots on every pose (sitting and lying
-  down too). On climbing and back frames he faces away, so gear shows its BACK: no buttons,
+  down too). On back frames he faces away, so gear shows its BACK: no buttons,
   buckles, clasps, collar stars, flies, knee patches or toe caps. Every gear prompt says both
   rules in plain words, names the cells seen from behind, and every result is checked frame by
   frame on a flat colour before it goes in; a hole is fixed by repainting that piece alone on
@@ -150,8 +150,12 @@ update this page when one changes. Each zone's own look and music are in
 
 - Map names show only at the top of the screen; nothing labels a map in the world.
 - Every piece of land is walkable: no arches or floating rock islands, nothing that looks like
-  ground but isn't. A deck, ledge or ladder painted into a building or a terrace (a treehouse
-  deck, a lookout, a crow's nest, a railed wing) can be stood on or climbed too. No two exits of a map lead to the same map. Maps can be wide and multi-level.
+  ground but isn't. A deck or ledge painted into a building or a terrace (a treehouse
+  deck, a lookout, a crow's nest, a railed wing) can be stood on too; a ladder painted into one
+  is scenery, with invisible steps on its rungs to hop up.
+- No ropes, ladders, vines or climbing anywhere: every place is reached by platforming (jumps,
+  and a job's movement skill for secrets). A climb that used to be there is a run of plain
+  platforms, each at most a comfortable jump above the last (Cory, Oct 17). No two exits of a map lead to the same map. Maps can be wide and multi-level.
 - A zone's maps fit together like Hollow Knight's rooms on one zone map (Greenbough first): each
   room its own size, canopy above and roots below, neighbours touching where their doors join
   them, with MapleStory portals at the room edges they lead through. Fields are a web you can
@@ -164,14 +168,12 @@ update this page when one changes. Each zone's own look and music are in
   card). Secret ledges and shortcuts stay off the minimap; the zone map shows them once found.
 - Greenbough's fields have no raised land: every ledge is a plain platform with nothing under it
   (no terrace walls).
-- Characters, NPCs, ropes and ladders draw in front of land; characters cast no shadows. Portals draw in front of land and
-  scenery, behind ropes, NPCs, monsters and players; no NPC stands on a portal.
+- Characters and NPCs draw in front of land; characters cast no shadows. Portals draw in front of land and
+  scenery, behind NPCs, monsters and players; no NPC stands on a portal.
 - Portals are a blue-white light pillar on the ground, at exits and doorways, 70% opaque.
 - Platforms and land cast no shadows. Platform end caps line up with the platform. Terrace walls stop
   straight down from the bottom of the path's end stone, with the path's thin outline, standing
   straight up and down. Wall ivy hangs flush with the platform's bottom edge.
-- Ladders, ropes and vines stand straight and line up at every joint. Ladders sit on flat wall
-  faces and never stick out past a corner.
 - Buildings, props and decorations are flat 2D front views with a flat bottom, never a perspective
   picture cut flat. They sit flush on the ground with no gap under them (the stage sinks every base
   a few pixels; fix a leftover gap in the map's data). Every building is unique and at proper
@@ -197,7 +199,7 @@ update this page when one changes. Each zone's own look and music are in
 
 - Towns have no monsters and no grass tufts.
 - NPCs stand still at idle; town villagers use the second idle frame. An NPC stands in the middle
-  of a plank, jetty or platform, never at its edge, on a rope or on a portal.
+  of a plank, jetty or platform, never at its edge or on a portal.
 - No duplicate NPCs anywhere in the game, names included: every town has its own shopkeepers,
   storage keeper and townsfolk. A character who travels (the ship's captain at both ends of the
   voyage, a job tutor in their hall and at their Trial Ground, the coachmen) is one person, not a
@@ -238,8 +240,7 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
   foreground). Results go in exactly as painted; one that fails goes to Cory as keep, repaint or
   leave out. Cleaning up a cut (background, ground line, stray bits) is fine; nothing is retouched.
 - **In game**: the content tests check the town has its buildings, shop and storage keeper, its
-  building pictures are its own, its NPCs have their own names and stand mid-platform, and its
-  ladders stay clear of platform ends.
+  building pictures are its own, and its NPCs have their own names and stand mid-platform.
 
 ## Monsters
 
@@ -282,7 +283,7 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
   what the gear adds beside them.
 - No clouds on the title screen.
 - The world map shows towns always and a field only once visited (as "???" before). A zone drawn
-  to shape (Greenbough) shows a room only once visited, like Hollow Knight: its ledges, ropes and
+  to shape (Greenbough) shows a room only once visited, like Hollow Knight: its ledges and
   doors, secret ledges and ways once found, and where you stand.
 - Playing solo, the chat box shows only the last few lines, briefly; achievements are solo goals.
 - No controls box on screen, in towns or fields: the tutorial teaches the keys (its step hints

@@ -1,6 +1,6 @@
 extends TestCase
 ## The tutorial on the server, start to finish with the real content: a new character wakes on
-## Daybreak Shore (its intro plays), races the girl to the big rock, climbs to her lookout, is
+## Daybreak Shore (its intro plays), races the girl to the big rock, jumps up to her lookout, is
 ## given a shell, clears her tide pool and brings her Dewling jelly. Each step after the race
 ## starts by itself as the last is handed in. The way to the village stays shut until the end.
 
@@ -84,7 +84,7 @@ func test_the_whole_tutorial() -> void:
 	_stand(780.0, 1)
 	check_eq(_status(&"tut1_race"), QuestLog.Status.READY, "reaching the big rock wins it")
 	_talk(&"tut1_race", true)
-	check_eq(_status(&"tut2_lookout"), QuestLog.Status.ACTIVE, "the climb starts by itself")
+	check_eq(_status(&"tut2_lookout"), QuestLog.Status.ACTIVE, "the lookout starts by itself")
 	_stand(1150.0, 2)
 	check_eq(_status(&"tut2_lookout"), QuestLog.Status.READY, "up on her lookout")
 	_talk(&"tut2_lookout", true)

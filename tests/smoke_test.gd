@@ -164,7 +164,7 @@ func _run() -> void:
 	await keepsakes.check()
 
 	await play.dawn_slash()
-	await play.rope_and_portal()
+	await play.portal()
 	await play.faint()
 	await play.leave()
 

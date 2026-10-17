@@ -4,7 +4,7 @@ extends Resource
 ## (his body and fists here, each face and hairstyle's HeroStyleDef.frames and each piece of
 ## gear's `EquipDef.worn`) is a SpriteFrames cut from the same cells (art/sheets/hero_*.json),
 ## so the layers line up frame by frame; each frame is a one-frame animation named after its
-## cell ("idle1", "walk2", "rope_hold"). HeroBody stacks them in a fixed order.
+## cell ("idle1", "walk2", "crouch"). HeroBody stacks them in a fixed order.
 
 @export var body: SpriteFrames
 ## The faces and hairstyles he can have (HeroStyleDef), the first of each his default.

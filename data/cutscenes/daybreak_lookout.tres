@@ -30,7 +30,7 @@ at = Vector2(1180, 380)
 script = ExtResource("2_feluu")
 kind = 6
 speaker = &"girl_on_beach"
-text = "Up here! This is my lookout. Climb the rope."
+text = "Up here! This is my lookout. Jump up the ledges."
 
 [sub_resource type="Resource" id="Resource_ejk6a"]
 script = ExtResource("2_feluu")

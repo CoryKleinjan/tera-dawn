@@ -3,14 +3,12 @@
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="map_def"]
 [ext_resource type="Resource" path="res://data/biomes/forge.tres" id="forge"]
 [ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="platform_def"]
-[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="climbable_def"]
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="portal_def"]
 [ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="npc_placement"]
 [ext_resource type="Script" path="res://scripts/data/building_placement.gd" id="building_placement"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="prop_placement"]
 [ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 [ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="backdrop_layer_def"]
-[ext_resource type="Resource" path="res://data/climb_styles/ladder.tres" id="ladder"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/emberforge/panorama.png" id="panorama"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberforge/terrace.png" id="t_terrace"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberforge/brazier.png" id="t_brazier"]
@@ -82,34 +80,6 @@ x = 4930.3
 y = 799.22
 width = 169.7
 in_scenery = true
-
-[sub_resource type="Resource" id="Ladder_mid_west"]
-script = ExtResource("climbable_def")
-x = 1686.9
-top = 781.0
-bottom = 1020.0
-style = ExtResource("ladder")
-
-[sub_resource type="Resource" id="Ladder_mid_east"]
-script = ExtResource("climbable_def")
-x = 2113.1
-top = 781.0
-bottom = 1020.0
-style = ExtResource("ladder")
-
-[sub_resource type="Resource" id="Ladder_up_west"]
-script = ExtResource("climbable_def")
-x = 4274.7
-top = 696.0
-bottom = 1020.0
-style = ExtResource("ladder")
-
-[sub_resource type="Resource" id="Ladder_up_east"]
-script = ExtResource("climbable_def")
-x = 4885.3
-top = 696.0
-bottom = 1020.0
-style = ExtResource("ladder")
 
 [sub_resource type="Resource" id="Portal_west"]
 script = ExtResource("portal_def")
@@ -342,6 +312,48 @@ hide_ground_decor = PackedInt32Array(0)
 hide_town_decor = true
 more_backdrop = Array[ExtResource("backdrop_layer_def")]([SubResource("Backdrop_picture")])
 
+[sub_resource type="Resource" id="Step_1"]
+script = ExtResource("platform_def")
+x = 1659.9
+y = 960.2
+width = 110.0
+
+[sub_resource type="Resource" id="Step_2"]
+script = ExtResource("platform_def")
+x = 1603.9
+y = 900.5
+width = 110.0
+
+[sub_resource type="Resource" id="Step_3"]
+script = ExtResource("platform_def")
+x = 1659.9
+y = 840.8
+width = 110.0
+
+[sub_resource type="Resource" id="Step_4"]
+script = ExtResource("platform_def")
+x = 4247.7
+y = 955.2
+width = 110.0
+
+[sub_resource type="Resource" id="Step_5"]
+script = ExtResource("platform_def")
+x = 4191.7
+y = 890.4
+width = 110.0
+
+[sub_resource type="Resource" id="Step_6"]
+script = ExtResource("platform_def")
+x = 4247.7
+y = 825.6
+width = 110.0
+
+[sub_resource type="Resource" id="Step_7"]
+script = ExtResource("platform_def")
+x = 4191.7
+y = 760.8
+width = 110.0
+
 [resource]
 script = ExtResource("map_def")
 id = &"emberforge"
@@ -353,8 +365,7 @@ height = 1100
 ground_y = 1020
 lantern_spacing = 0.0
 start_x = 300.0
-platforms = Array[ExtResource("platform_def")]([SubResource("Terrace_mid"), SubResource("Terrace_up"), SubResource("Terrace_mid_west_wing"), SubResource("Terrace_mid_east_wing"), SubResource("Terrace_up_west_wing"), SubResource("Terrace_up_east_wing")])
-climbables = Array[ExtResource("climbable_def")]([SubResource("Ladder_mid_west"), SubResource("Ladder_mid_east"), SubResource("Ladder_up_west"), SubResource("Ladder_up_east")])
+platforms = Array[ExtResource("platform_def")]([SubResource("Terrace_mid"), SubResource("Terrace_up"), SubResource("Terrace_mid_west_wing"), SubResource("Terrace_mid_east_wing"), SubResource("Terrace_up_west_wing"), SubResource("Terrace_up_east_wing"), SubResource("Step_1"), SubResource("Step_2"), SubResource("Step_3"), SubResource("Step_4"), SubResource("Step_5"), SubResource("Step_6"), SubResource("Step_7")])
 npcs = Array[ExtResource("npc_placement")]([SubResource("Npc_taxi"), SubResource("Npc_shop"), SubResource("Npc_apprentice"), SubResource("Npc_keeper"), SubResource("Npc_kid"), SubResource("Npc_veteran")])
 props = Array[ExtResource("prop_placement")]([SubResource("Prop_brazier_west"), SubResource("Prop_bench"), SubResource("Prop_crate"), SubResource("Prop_ingots"), SubResource("Prop_brazier_terrace"), SubResource("Prop_brazier_forge"), SubResource("Prop_anvil"), SubResource("Prop_quench_barrel"), SubResource("Prop_grindstone"), SubResource("Prop_weapon_rack"), SubResource("Prop_shield_rack"), SubResource("Prop_logs"), SubResource("Prop_ore_cart"), SubResource("Prop_coal_bin"), SubResource("Prop_brazier_east"), SubResource("Prop_brazier_hall"), SubResource("Prop_dummy")])
 buildings = Array[ExtResource("building_placement")]([SubResource("Building_store"), SubResource("Building_armoury"), SubResource("Building_bunkhouse"), SubResource("Building_forge"), SubResource("Building_cottage"), SubResource("Building_hall")])

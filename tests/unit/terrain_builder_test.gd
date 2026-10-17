@@ -147,5 +147,5 @@ func test_flat_bases_sink_below_the_land_edge() -> void:
 
 func test_portals_stand_in_front_of_the_land_behind_everyone() -> void:
 	check(TDStage.Z_PORTAL > TDStage.LAND_FRONT, "portals stand in front of the land and scenery")
-	for z in [TDStage.Z_CLIMBABLE, TDStage.Z_NPC, TDStage.Z_MONSTER, TDStage.Z_DROP, TDStage.Z_OTHER_PLAYER, TDStage.Z_PLAYER]:
+	for z in [TDStage.Z_NPC, TDStage.Z_MONSTER, TDStage.Z_DROP, TDStage.Z_OTHER_PLAYER, TDStage.Z_PLAYER]:
 		check(TDStage.Z_PORTAL < z, "portals stand behind what you can touch (%.2f)" % z)

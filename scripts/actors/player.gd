@@ -1,8 +1,8 @@
 class_name TDPlayer
 extends Node2D
 ## Your own character. position is the point between the feet, in game pixels.
-## Movement and climbing are hand-tuned platformer physics that run right here, so they
-## feel instant. They are snappy, Hollow Knight style: he starts and stops at once, steers
+## Movement is hand-tuned platformer physics that runs right here, so it
+## feels instant. It is snappy, Hollow Knight style: he starts and stops at once, steers
 ## freely in the air, hops short when jump is let go early and falls faster than he rises.
 ## Where you are goes to the server a few times a second. Attacks, portals, looting and
 ## potions are requests the server answers (see Net). The attack key uses the basic attack;
@@ -102,10 +102,8 @@ var vel := Vector2.ZERO
 var face := 1
 var on_ground := false
 var platform: Platform = null
-var climb: ClimbableDef = null
 var hurtbox := Hitbox.new(SimPlayer.HURTBOX_SIZE)
 
-var grab_cd := 0      # ticks before a rope can be grabbed again
 var drop_from: Platform = null
 var drop_t := 0       # ticks to fall through drop_from
 var action_t := 0     # ticks left in the current attack pose
@@ -159,7 +157,6 @@ func _ready() -> void:
 func place(x: float, y: float) -> void:
 	position = Vector2(x, y)
 	vel = Vector2.ZERO
-	climb = null
 	on_ground = true
 	down = false
 	sitting = false
@@ -171,16 +168,12 @@ func place(x: float, y: float) -> void:
 	_queued_t = 0
 	_report()
 
-func is_climbing() -> bool:
-	return climb != null
-
 func fainted() -> bool:
 	return down
 
 ## The server says you fainted. You lie there until it sends you back to town.
 func faint() -> void:
 	down = true
-	climb = null
 	sitting = false
 	Sound.jingle(FAINT_JINGLE)
 
@@ -199,7 +192,7 @@ func knock_back(from_x: float) -> void:
 	sitting = false # the server gets you up too
 	world.stage.flash_screen(HURT_FLASH_COLOR, HURT_FLASH)
 	# a steadying buff (Iron Body) keeps you on your feet
-	if not is_climbing() and not Game.me.skills.steady():
+	if not Game.me.skills.steady():
 		vel = Vector2(-KNOCKBACK.x if position.x < from_x else KNOCKBACK.x, KNOCKBACK.y)
 		on_ground = false
 		run_t = 0
@@ -212,14 +205,14 @@ func knock_back(from_x: float) -> void:
 ## Your melee blow landed: he holds mid-swing for `ticks` (the monster freezes too, see
 ## TDMob.hit_react), so the blow feels heavy. Presses meanwhile are kept, not lost.
 func hit_stop(ticks: int) -> void:
-	if ticks > _stop_t and not is_climbing():
+	if ticks > _stop_t:
 		_stop_t = ticks
 		body.hold(ticks)
 
 ## Your melee blow ahead landed: a little push back. (A downward blow already bounced you,
 ## see _use.)
 func recoil() -> void:
-	if _aim == Hitbox.Aim.AHEAD and not is_climbing():
+	if _aim == Hitbox.Aim.AHEAD:
 		vel.x = -face * RECOIL
 		_lock_t = maxi(_lock_t, RECOIL_TICKS)
 
@@ -266,8 +259,6 @@ func step() -> void:
 		cooldown -= 1
 	if not recharge.is_empty():
 		SimPlayer.tick_recharge(recharge)
-	if grab_cd > 0:
-		grab_cd -= 1
 	if drop_t > 0:
 		drop_t -= 1
 	if land_t > 0:
@@ -293,21 +284,18 @@ func step() -> void:
 		Net.ask(&"req_sit", [true])
 	_attacks()
 	# hold the loot key to pick up everything in reach, one item after another
-	if _held("loot") and loot_cd == 0 and not is_climbing():
+	if _held("loot") and loot_cd == 0:
 		_report()
 		Net.ask(&"req_loot")
 		loot_cd = LOOT_EVERY
 	if not _interact():
-		if is_climbing():
-			_climb()
-		elif not _grab_climbable():
-			_move()
+		_move()
 	if world.tick % REPORT_EVERY == 0 or _animation() != _reported:
 		_report()
 
 ## Standing still on the ground with nothing else going on (the server checks too).
 func _can_sit() -> bool:
-	return on_ground and not is_climbing() and not fainted() and action_t == 0 and _move_t == 0 \
+	return on_ground and not fainted() and action_t == 0 and _move_t == 0 \
 		and scene_pose == &"" and absf(vel.x) < 0.01
 
 ## Whether an input is held, unless typing or minding a shop.
@@ -320,10 +308,10 @@ func _tapped(action: StringName) -> bool:
 ## Tells the server where you are and what you're doing.
 func _report() -> void:
 	_reported = _animation()
-	Net.ask(&"req_move", [position, face, _reported, is_climbing()])
+	Net.ask(&"req_move", [position, face, _reported])
 
 func _attacks() -> void:
-	# items on quickslots work even mid-swing or on a rope
+	# items on quickslots work even mid-swing
 	for i in Game.QUICKSLOT_ACTIONS.size():
 		if _tapped(Game.QUICKSLOT_ACTIONS[i]):
 			use_quickslot(i)
@@ -356,10 +344,10 @@ func _press(skill: SkillDef) -> void:
 		_queued = skill
 		_queued_t = ATTACK_BUFFER_TICKS
 
-## Whether `skill` could go off this tick as far as timing goes (not climbing, no cooldown,
+## Whether `skill` could go off this tick as far as timing goes (no cooldown,
 ## no recharge, not held by hit-stop).
 func _ready_for(skill: SkillDef) -> bool:
-	return skill != null and not is_climbing() and cooldown == 0 and _stop_t == 0 and not recharge.has(skill.id)
+	return skill != null and cooldown == 0 and _stop_t == 0 and not recharge.has(skill.id)
 
 ## Does what's on quickslot `i`: a skill, or the first stack of an item.
 func use_quickslot(i: int) -> void:
@@ -386,7 +374,7 @@ func _held_aim() -> Hitbox.Aim:
 ## Swings right away and asks the server to work out what it hits (or casts a buff).
 ## A downward melee blow that meets a monster bounces you straight off it.
 func _use(skill: SkillDef) -> void:
-	if skill == null or is_climbing() or cooldown > 0 or recharge.has(skill.id):
+	if skill == null or cooldown > 0 or recharge.has(skill.id):
 		return
 	var problem := Game.me.skills.use_problem(skill)
 	if problem != "":
@@ -510,56 +498,6 @@ func _interact() -> bool:
 		return true
 	return false
 
-func _climb() -> void:
-	vel = Vector2.ZERO
-	if _held("move_up"):
-		position.y -= 2.6
-	if _held("move_down"):
-		position.y += 2.6
-	var left := _held("move_left")
-	var right := _held("move_right")
-	if _tapped("jump") and (left or right):
-		var dir := -1 if left else 1
-		climb = null
-		grab_cd = 20
-		vel = Vector2(3.0 * dir, -5.5)
-		face = dir
-	elif position.y <= climb.top:
-		position.y = climb.top
-		_leave_climb()
-	elif position.y >= climb.bottom:
-		position.y = climb.bottom
-		_leave_climb()
-
-func _leave_climb() -> void:
-	climb = null
-	on_ground = true
-	grab_cd = 10
-	for pl in world.platforms:
-		if pl.contains_x(position.x) and absf(pl.y - position.y) < 1.0:
-			platform = pl
-
-func _grab_climbable() -> bool:
-	if grab_cd > 0 or _move_t > 0:
-		return false
-	var c := world.layout.climbable_near(position)
-	if c == null:
-		return false
-	if _held("move_up") and on_ground and world.npc_near(position):
-		return false # Up next to someone talks to them (see _interact)
-	if _held("move_up") and position.y > c.top + 1:
-		climb = c
-	elif _held("move_down") and on_ground and absf(position.y - c.top) < 3:
-		climb = c
-		position.y = c.top + 8
-	else:
-		return false
-	position.x = c.x
-	vel = Vector2.ZERO
-	on_ground = false
-	jump_grace.cancel()
-	return true
-
 ## The pull of gravity on someone moving up or down at `vy`: stronger once falling, so a
 ## jump drops back faster than it rose (MapReach runs the same rule).
 static func gravity(vy: float) -> float:
@@ -676,9 +614,6 @@ func _animation() -> StringName:
 		return &"faint"
 	if sitting:
 		return &"sit"
-	if is_climbing():
-		var moving := _held("move_up") or _held("move_down")
-		return climb.style.climb_animation if moving and climb.style else &"climb_idle"
 	if action_t > 0:
 		return action_anim
 	if inv > SimPlayer.HURT_INV - HURT_POSE_TICKS and inv <= SimPlayer.HURT_INV: # just got hit (see knock_back)

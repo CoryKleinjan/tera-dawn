@@ -1,5 +1,5 @@
 extends RefCounted
-## Works out which platforms and ropes of a map the player can get to, by running
+## Works out which platforms of a map the player can get to, by running
 ## TDPlayer's movement rules (its constants, no speed or jump bonus, no coyote time) from
 ## every place a player arrives: the map's start, and where each portal, ship or wagon
 ## leading here lands. `skills_reaching` tries the jobs' movement skills too, for secret
@@ -10,7 +10,7 @@ extends RefCounted
 
 var map: MapDef
 var plats: Array[Platform]
-## "p<i>" for platform i, "c<i>" for climbable i -> true.
+## "p<i>" for platform i -> true.
 var seen := {}
 
 ## `arrivals` are where players arrive (feet positions, see arrivals_of).
@@ -48,60 +48,33 @@ static func arrivals_of(m: MapDef) -> Array:
 func platform_reached(i: int) -> bool:
 	return seen.has("p%d" % i)
 
-func climbable_reached(i: int) -> bool:
-	return seen.has("c%d" % i)
-
 ## Nodes reachable in one move from node n.
 func _edges(n: String) -> Array:
 	var out := []
 	var i := int(n.substr(1))
-	if n[0] == "p":
-		var pl := plats[i]
-		var xs := []
-		var x := pl.x + 2.0
-		while x <= pl.x + pl.w - 2.0:
-			xs.append(x)
-			x += 10.0
-		xs.append(pl.x + pl.w - 1.0)
-		for sx in xs:
-			sx = clampf(sx, TDPlayer.EDGE, map.width - TDPlayer.EDGE)
-			for dir in [-1, 0, 1]:
-				# a jump standing still, or running and holding a direction
-				out.append_array(_sim(Vector2(sx, pl.y), Vector2(dir * TDPlayer.RUN_SPEED, TDPlayer.JUMP_SPEED), dir, -1))
-			if not pl.solid:
-				out.append_array(_sim(Vector2(sx, pl.y), Vector2(0, 1), 0, i)) # down + jump
-		# walk off each end
-		for e in [[pl.x - 1.0, -1], [pl.x + pl.w + 1.0, 1]]:
-			if e[0] > TDPlayer.EDGE and e[0] < map.width - TDPlayer.EDGE:
-				out.append_array(_sim(Vector2(e[0], pl.y), Vector2(e[1] * TDPlayer.RUN_SPEED, 0), e[1], -1))
-		# up or down onto a rope or ladder from here
-		for ci in map.climbables.size():
-			var c: ClimbableDef = map.climbables[ci]
-			if absf(c.x - clampf(c.x, pl.x, pl.x + pl.w)) < 16 and pl.y > c.top - 2 and pl.y <= c.bottom + 2:
-				out.append("c%d" % ci)
-	else:
-		var c: ClimbableDef = map.climbables[i]
-		# off the top and the bottom
-		for y in [c.top, c.bottom]:
-			var stood := false
-			for pi in plats.size():
-				if plats[pi].contains_x(c.x) and absf(plats[pi].y - y) < 1.0:
-					out.append("p%d" % pi)
-					stood = true
-			if not stood:
-				out.append_array(_sim(Vector2(c.x, y), Vector2.ZERO, 0, -1))
-		# jump off sideways at any height
-		var y := c.top + 4.0
-		while y < c.bottom:
-			for dir in [-1, 1]:
-				out.append_array(_sim(Vector2(c.x, y), Vector2(3.0 * dir, -5.5), dir, -1))
-			y += 10.0
+	var pl := plats[i]
+	var xs := []
+	var x := pl.x + 2.0
+	while x <= pl.x + pl.w - 2.0:
+		xs.append(x)
+		x += 10.0
+	xs.append(pl.x + pl.w - 1.0)
+	for sx in xs:
+		sx = clampf(sx, TDPlayer.EDGE, map.width - TDPlayer.EDGE)
+		for dir in [-1, 0, 1]:
+			# a jump standing still, or running and holding a direction
+			out.append_array(_sim(Vector2(sx, pl.y), Vector2(dir * TDPlayer.RUN_SPEED, TDPlayer.JUMP_SPEED), dir, -1))
+		if not pl.solid:
+			out.append_array(_sim(Vector2(sx, pl.y), Vector2(0, 1), 0, i)) # down + jump
+	# walk off each end
+	for e in [[pl.x - 1.0, -1], [pl.x + pl.w + 1.0, 1]]:
+		if e[0] > TDPlayer.EDGE and e[0] < map.width - TDPlayer.EDGE:
+			out.append_array(_sim(Vector2(e[0], pl.y), Vector2(e[1] * TDPlayer.RUN_SPEED, 0), e[1], -1))
 	return out
 
-## Runs TDPlayer's air physics until landing. Returns the platform landed on, plus every
-## rope or ladder passed close enough to grab with Up held. For a movement skill, the first
-## `lock` ticks carry the player along at the speed they start with (no steering), and the
-## first `flat` of those stay level and can't land (a Charge).
+## Runs TDPlayer's air physics until landing. Returns the platform landed on. For a movement
+## skill, the first `lock` ticks carry the player along at the speed they start with (no
+## steering), and the first `flat` of those stay level and can't land (a Charge).
 func _sim(pos: Vector2, vel: Vector2, dir: int, drop_from: int, lock := 0, flat := 0) -> Array:
 	var out := []
 	var drop_t := TDPlayer.DROP_TICKS if drop_from >= 0 else 0
@@ -118,11 +91,6 @@ func _sim(pos: Vector2, vel: Vector2, dir: int, drop_from: int, lock := 0, flat 
 		pos.y += vel.y
 		if drop_t > 0:
 			drop_t -= 1
-		if t > 1:
-			for ci in map.climbables.size():
-				var c: ClimbableDef = map.climbables[ci]
-				if absf(pos.x - c.x) < 16 and pos.y > c.top + 1 and pos.y <= c.bottom + 2:
-					out.append("c%d" % ci)
 		if vel.y >= 0 and t >= flat:
 			for pi in plats.size():
 				if pi == drop_from and drop_t > 0:

@@ -39,8 +39,6 @@ nudges = {
 &"pistol2": Vector4(-4.1, 0.7, -3, 0),
 &"roll1": Vector4(14.7, 10.8, 45, 0),
 &"roll2": Vector4(4.3, 68.2, -135, 0),
-&"rope2": Vector4(1.800003, 0, -10, 0),
-&"rope_hold": Vector4(0, 2.800003, 0, 0),
 &"sit": Vector4(-3.6, 23.7, 0, 0),
 &"skyward2": Vector4(-5.2, -5.9, 0, 0),
 &"swing2": Vector4(8.7, 4.6, 15, 0),

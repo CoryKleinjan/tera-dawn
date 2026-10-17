@@ -51,7 +51,7 @@ func walk_and_jump() -> void:
 	await _ticks(4)
 	_check(absf(_me().position.x - p.position.x) < 6.0, "the server hears where the player walked")
 	var before := _me().position
-	Net.server.on_move(1, before + Vector2(900, 0), 1, &"walk", false)
+	Net.server.on_move(1, before + Vector2(900, 0), 1, &"walk")
 	_check(_me().position == before and absf(p.position.x - before.x) < 1.0, "the server refuses an impossible move and puts the player back")
 
 	await _tap("jump")
@@ -315,7 +315,7 @@ func windows() -> void:
 
 ## Dawn Slash.
 func dawn_slash() -> void:
-	_me().inv = 100000 # a monster's touch would knock the player off the rope or the portal
+	_me().inv = 100000 # a monster's touch would knock the player off the portal
 
 	# Dawn Slash costs MP and hits several monsters.
 	var mp_before := Game.me.mp
@@ -326,15 +326,9 @@ func dawn_slash() -> void:
 	# MP regen may tick once during the key press.
 	_check(mp_before - Game.me.mp >= Content.skill(&"dawn_slash").mp_at(1) - 1, "Dawn Slash spends MP")
 
-## Climbing a rope, and a portal to Fern Hollow.
-func rope_and_portal() -> void:
-	# Climb the rope at x=700 up to the platform at y=420.
+## A portal to Fern Hollow.
+func portal() -> void:
 	await _ticks(40)
-	_teleport(Vector2(700, 620))
-	await _ticks(2)
-	await _hold("move_up", 100)
-	_check(is_equal_approx(p.position.y, 420.0) and not p.is_climbing(), "climbing a rope reaches the platform above")
-
 	# Walk through the portal to Fern Hollow.
 	_teleport(Vector2(2530, 620))
 	await _ticks(3)

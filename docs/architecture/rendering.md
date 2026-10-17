@@ -12,7 +12,6 @@ camera). The layers are constants at the top of `scripts/world/stage.gd`, back t
 | Backdrop | far behind | Sky, mountains, distant trees (`BackdropLayerDef.depth`) |
 | Land | `-SCENERY_LAYER` to `LAND_FRONT` | The floor and platforms (flat painted front skins), and just behind them buildings, decoration, props, lanterns, signs |
 | `Z_PORTAL` | 0.17 | Portals, in front of all the land and scenery (NPCs are never placed over one) |
-| `Z_CLIMBABLE` | 0.2 | Ropes, vines and ladders |
 | `Z_NPC` | 0.3 | NPCs |
 | `Z_MONSTER` | 0.38 to 0.52 | Monsters, each at a slightly different depth so overlapping ones don't flicker |
 | `Z_DROP` | 0.56 | Dawnshards and other drops |
@@ -27,7 +26,7 @@ Use `effect_sprite` for anything that plays on the characters' plane, and keep `
 for glows that belong to the scenery (lanterns, drops).
 
 Everything you can touch stands in front of all the land, so a platform, bush or prop never
-hides a character, NPC, rope or ladder. Decoration and prop depths in data (0 down to
+hides a character or NPC. Decoration and prop depths in data (0 down to
 `-SCENERY_DEEP`) go through `TDStage.land_depth()`, which squeezes them into the thin
 `SCENERY_LAYER` behind the land's front in the same order, so a `DecorDef` or `PropPlacement`
 can't be set in front of the actors by mistake. Something new that the player interacts with should use one of the `Z_`
@@ -42,7 +41,7 @@ and sunk (`land_sink`) so their base tucks behind the grass edge at any camera h
 (`PlatformSkin`): the biome's left cap, middles and right cap, overlapped and joined where they
 match best, so a long platform never reads as small ones pasted together.
 
-All art in the world (land, buildings, ropes and ladders, lanterns, portals, backdrop layers,
+All art in the world (land, buildings, lanterns, portals, backdrop layers,
 room interiors, NPCs, monsters, pets, drops, effects and projectiles)
 is cut at two texels per art pixel with its smooth painted edge and drawn at `TDStage.TEXEL` game
 pixels per art pixel (`TDStage.art_density`, `art_size`; `TDStage.ART_DENSITY` lists the

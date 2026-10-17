@@ -1,6 +1,6 @@
 extends TestCase
 ## Every texture and SpriteFrames content points at is there: monster, NPC, item, skill,
-## effect, projectile, biome, climb style and prop art, and the frames animated actors play.
+## effect, projectile, biome and prop art, and the frames animated actors play.
 
 const Scan := preload("res://tests/content/content_scan.gd")
 
@@ -68,13 +68,6 @@ func test_projectiles_have_textures() -> void:
 		if p:
 			_texture(p.texture, path + ": texture")
 			check(p.speed > 0 and p.max_range > 0, "%s: speed %s / max_range %s must be positive" % [path, p.speed, p.max_range])
-
-func test_climb_styles_have_textures() -> void:
-	for path in Scan.files(Scan.DATA.path_join("climb_styles")):
-		var c := load(path) as ClimbStyleDef
-		if c:
-			_texture(c.middle, path + ": middle")
-			check(c.climb_animation in [&"rope", &"ladder"], "%s: climb_animation %s is not rope or ladder" % [path, c.climb_animation])
 
 func test_biomes_have_their_art() -> void:
 	for path in Scan.files(Scan.DATA.path_join("biomes")):

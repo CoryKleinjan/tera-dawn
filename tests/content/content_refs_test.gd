@@ -186,13 +186,6 @@ func test_every_region_has_maps() -> void:
 	for id in Content.regions:
 		check(used.has(id), "%s: no map is in this region" % Scan.where(Content.regions[id]))
 
-func test_climbables_have_a_style() -> void:
-	for m: MapDef in Content.maps.values():
-		for i in m.climbables.size():
-			var c := m.climbables[i]
-			if check(c != null, "%s: climbables[%d] is empty" % [Scan.where(m), i]):
-				check(c.style != null and c.style.middle != null, "%s: climbables[%d].style is missing or has no middle texture" % [Scan.where(m), i])
-
 func test_jobs_link_up() -> void:
 	for j: JobDef in Content.jobs.values():
 		if j.advances_from != &"":

@@ -68,7 +68,7 @@ func aim() -> void:
 	if absf(player.vel.x) > 0.3:
 		look = move_toward(look, player.face * LOOK_AHEAD, 1.6)
 	var y := player.position.y
-	if player.on_ground or player.is_climbing() or absf(y - floor_y) > DEAD_ZONE:
+	if player.on_ground or absf(y - floor_y) > DEAD_ZONE:
 		floor_y += (y - floor_y) * (1.0 if absf(y - floor_y) > 400.0 else 0.25)
 
 ## Shakes the screen (a crit, a boss slam, getting hit): 0.3 is a nudge, 1 is a big hit.

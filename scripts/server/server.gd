@@ -217,9 +217,9 @@ func check_achievements(p: SimPlayer) -> void:
 func player_of(peer: int) -> SimPlayer:
 	return sessions.get(peer)
 
-func on_move(peer: int, at: Vector2, face: int, anim: StringName, climbing: bool) -> void:
+func on_move(peer: int, at: Vector2, face: int, anim: StringName) -> void:
 	var p := player_of(peer)
-	if p and not p.report_move(at, face, anim, climbing) and not p.fainted():
+	if p and not p.report_move(at, face, anim) and not p.fainted():
 		Net.send(peer, &"ev_place", [p.position.x, p.position.y])
 	elif p:
 		quests.reached(p)
@@ -232,7 +232,7 @@ func on_sit(peer: int, down: bool) -> void:
 	var p := player_of(peer)
 	if p == null or p.sitting == down:
 		return
-	if down and (p.fainted() or p.climbing or p.in_scene() or p.map.layout.platform_under(p.position) == null):
+	if down and (p.fainted() or p.in_scene() or p.map.layout.platform_under(p.position) == null):
 		p.map.tell(p, "You can't sit here.", MapInstance.BAD)
 		Net.send(peer, &"ev_sit", [false])
 		return
@@ -259,7 +259,7 @@ func on_skill(peer: int, skill_id: StringName, at: Vector2, face: int, aim := 0)
 		return
 	var lvl := c.skills.level(skill)
 	c.spend_mp(skill.mp_at(lvl))
-	p.report_move(at, face, skill.animation, false)
+	p.report_move(at, face, skill.animation)
 	p.cooldown = CharacterStats.attack_ticks(skill.cooldown, c.stats)
 	if skill.recharge_ticks(lvl) > 0:
 		p.recharge[skill.id] = skill.recharge_ticks(lvl)
@@ -303,5 +303,5 @@ func on_set_quickslot(peer: int, i: int, kind: StringName, id: StringName) -> vo
 
 func on_loot(peer: int) -> void:
 	var p := player_of(peer)
-	if p and not p.climbing:
+	if p:
 		p.map.loot_near(p)
