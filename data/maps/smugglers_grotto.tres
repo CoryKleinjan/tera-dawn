@@ -1,269 +1,35 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=67 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=92 format=3]
 
-[ext_resource type="Resource" path="res://data/biomes/harbor.tres" id="1_njh0v"]
-[ext_resource type="Script" path="res://scripts/data/building_placement.gd" id="2_x273b"]
-[ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="6_l2s11"]
-[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="7_5a77d"]
-[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="8_v0hwf"]
-[ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="9_4fhit"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_small.png" id="10_iiwv3"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/stump.png" id="11_owqkk"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/rock_large.png" id="12_ok0yy"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tall_grass.png" id="13_j2f0n"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_large.png" id="14_fu2pp"]
-[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="15_q6phd"]
-[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="16_vhlnm"]
-[ext_resource type="Resource" path="res://data/monsters/kelp_lurker.tres" id="17_71gso"]
-[ext_resource type="Resource" path="res://data/monsters/barnacle_boar.tres" id="18_v8ctv"]
-[ext_resource type="Script" path="res://scripts/data/decor_def.gd" id="20_2qgkd"]
-[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="21_muwax"]
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
+[ext_resource type="Resource" path="res://data/biomes/harbor.tres" id="2_harbor"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="3_biome_variant_def"]
+[ext_resource type="Script" path="res://scripts/data/decor_def.gd" id="4_decor_def"]
+[ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="5_prop_placement"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_small.png" id="6_tree_small"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/stump.png" id="7_stump"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/rock_large.png" id="8_rock_large"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tall_grass.png" id="9_tall_grass"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_large.png" id="10_tree_large"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="11_platform_def"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="12_portal_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/gate_locked.png" id="13_gate_locked"]
+[ext_resource type="Resource" path="res://data/items/etc/smugglers_key.tres" id="14_smugglers_key"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/gate.png" id="15_gate"]
+[ext_resource type="Resource" path="res://data/monsters/kelp_lurker.tres" id="16_kelp_lurker"]
+[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="17_spawn_def"]
+[ext_resource type="Resource" path="res://data/monsters/barnacle_boar.tres" id="18_barnacle_boar"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/lever.png" id="19_lever"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/lever_pulled.png" id="20_lever_pulled"]
+[ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="21_breakable_def"]
+[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="22_dawnshard"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="23_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/use/orange_potion.tres" id="24_orange_potion"]
+[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="25_blue_potion"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/chest.png" id="26_chest"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/chest_open.png" id="27_chest_open"]
 
-[sub_resource type="Resource" id="Resource_uit6t"]
-script = ExtResource("7_5a77d")
-x = 2500.0
-y = 500.0
-width = 400.0
-
-[sub_resource type="Resource" id="Resource_87m7u"]
-script = ExtResource("7_5a77d")
-x = 2340.0
-y = 390.0
-width = 300.0
-
-[sub_resource type="Resource" id="Resource_sm1p6"]
-script = ExtResource("7_5a77d")
-x = 2300.0
-y = 270.0
-width = 260.0
-
-[sub_resource type="Resource" id="Resource_qupgw"]
-script = ExtResource("7_5a77d")
-x = 1920.0
-y = 490.0
-width = 340.0
-
-[sub_resource type="Resource" id="Resource_1xdqn"]
-script = ExtResource("7_5a77d")
-x = 1800.0
-y = 370.0
-width = 320.0
-
-[sub_resource type="Resource" id="Resource_gd0cp"]
-script = ExtResource("7_5a77d")
-x = 1460.0
-y = 500.0
-width = 300.0
-
-[sub_resource type="Resource" id="Resource_8jkyd"]
-script = ExtResource("7_5a77d")
-x = 940.0
-y = 500.0
-width = 340.0
-
-[sub_resource type="Resource" id="Resource_xj5fg"]
-script = ExtResource("7_5a77d")
-x = 860.0
-y = 370.0
-width = 300.0
-
-[sub_resource type="Resource" id="Resource_nv6yq"]
-script = ExtResource("7_5a77d")
-x = 880.0
-y = 260.0
-width = 220.0
-
-[sub_resource type="Resource" id="Resource_e35bm"]
-script = ExtResource("7_5a77d")
-x = 380.0
-y = 480.0
-width = 300.0
-
-[sub_resource type="Resource" id="Resource_8mtvj"]
-script = ExtResource("7_5a77d")
-x = 260.0
-y = 350.0
-width = 260.0
-
-[sub_resource type="Resource" id="Resource_r4dkn"]
-script = ExtResource("7_5a77d")
-x = 1770.0
-y = 170.0
-width = 140.0
-
-[sub_resource type="Resource" id="Resource_6c3ii"]
-script = ExtResource("8_v0hwf")
-x = 60.0
-platform = 0
-target_map = &"gull_bluffs"
-target_x = 2880.0
-door = false
-
-[sub_resource type="Resource" id="Resource_6f5w5"]
-script = ExtResource("9_4fhit")
-texture = ExtResource("10_iiwv3")
-x = 718.0
-y = -1.0
-depth = -6.7
-scale = 0.92
-flip = true
-light_color = Color(0, 0, 0, 0)
-light_energy = 1.5
-light_height = 30.0
-
-[sub_resource type="Resource" id="Resource_4nmy4"]
-script = ExtResource("9_4fhit")
-texture = ExtResource("11_owqkk")
-x = 825.0
-y = -1.0
-depth = -2.4
-scale = 1.3
-flip = false
-light_color = Color(0, 0, 0, 0)
-light_energy = 1.5
-light_height = 30.0
-
-[sub_resource type="Resource" id="Resource_g7nll"]
-script = ExtResource("9_4fhit")
-texture = ExtResource("12_ok0yy")
-x = 437.0
-y = -1.0
-depth = -2.7
-scale = 1.03
-flip = false
-light_color = Color(0, 0, 0, 0)
-light_energy = 1.5
-light_height = 30.0
-
-[sub_resource type="Resource" id="Resource_g7rl4"]
-script = ExtResource("9_4fhit")
-texture = ExtResource("13_j2f0n")
-x = 1735.0
-y = -1.0
-depth = -7.7
-scale = 1.13
-flip = false
-light_color = Color(0, 0, 0, 0)
-light_energy = 1.5
-light_height = 30.0
-
-[sub_resource type="Resource" id="Resource_ow4ht"]
-script = ExtResource("9_4fhit")
-texture = ExtResource("14_fu2pp")
-x = 789.0
-y = -1.0
-depth = -7.2
-scale = 1.3
-flip = false
-light_color = Color(0, 0, 0, 0)
-light_energy = 1.5
-light_height = 30.0
-
-[sub_resource type="Resource" id="Resource_loyx4"]
-script = ExtResource("16_vhlnm")
-monster = ExtResource("17_71gso")
-platform = 0
-count = 3
-patrol_from = -1.0
-patrol_to = -1.0
-
-[sub_resource type="Resource" id="Resource_uqekj"]
-script = ExtResource("16_vhlnm")
-monster = ExtResource("18_v8ctv")
-platform = 0
-count = 3
-patrol_from = -1.0
-patrol_to = -1.0
-
-[sub_resource type="Resource" id="Resource_g4coa"]
-script = ExtResource("16_vhlnm")
-monster = ExtResource("17_71gso")
-platform = 1
-count = 3
-patrol_from = -1.0
-patrol_to = -1.0
-
-[sub_resource type="Resource" id="Resource_o0myh"]
-script = ExtResource("16_vhlnm")
-monster = ExtResource("17_71gso")
-platform = 2
-count = 2
-patrol_from = -1.0
-patrol_to = -1.0
-
-[sub_resource type="Resource" id="Resource_j5jm3"]
-script = ExtResource("16_vhlnm")
-monster = ExtResource("18_v8ctv")
-platform = 3
-count = 2
-patrol_from = -1.0
-patrol_to = -1.0
-
-[sub_resource type="Resource" id="Resource_yh6yx"]
-script = ExtResource("16_vhlnm")
-monster = ExtResource("17_71gso")
-platform = 4
-count = 3
-patrol_from = -1.0
-patrol_to = -1.0
-
-[sub_resource type="Resource" id="Resource_lxbmf"]
-script = ExtResource("16_vhlnm")
-monster = ExtResource("17_71gso")
-platform = 5
-count = 2
-patrol_from = -1.0
-patrol_to = -1.0
-
-[sub_resource type="Resource" id="Resource_66eil"]
-script = ExtResource("16_vhlnm")
-monster = ExtResource("18_v8ctv")
-platform = 6
-count = 2
-patrol_from = -1.0
-patrol_to = -1.0
-
-[sub_resource type="Resource" id="Resource_gadrn"]
-script = ExtResource("16_vhlnm")
-monster = ExtResource("17_71gso")
-platform = 7
-count = 3
-patrol_from = -1.0
-patrol_to = -1.0
-
-[sub_resource type="Resource" id="Resource_b78er"]
-script = ExtResource("16_vhlnm")
-monster = ExtResource("17_71gso")
-platform = 8
-count = 2
-patrol_from = -1.0
-patrol_to = -1.0
-
-[sub_resource type="Resource" id="Resource_wuuv8"]
-script = ExtResource("16_vhlnm")
-monster = ExtResource("18_v8ctv")
-platform = 9
-count = 2
-patrol_from = -1.0
-patrol_to = -1.0
-
-[sub_resource type="Resource" id="Resource_pobws"]
-script = ExtResource("16_vhlnm")
-monster = ExtResource("17_71gso")
-platform = 10
-count = 2
-patrol_from = -1.0
-patrol_to = -1.0
-
-[sub_resource type="Resource" id="Resource_ixevy"]
-script = ExtResource("16_vhlnm")
-monster = ExtResource("17_71gso")
-platform = 11
-count = 2
-patrol_from = -1.0
-patrol_to = -1.0
-
-[sub_resource type="Resource" id="Resource_ljweq"]
-script = ExtResource("21_muwax")
+[sub_resource type="Resource" id="Copied_Resource_ljweq"]
+script = ExtResource("3_biome_variant_def")
 sky_top = Color(0.0627451, 0.0941176, 0.156863, 1)
 sky_mid = Color(0.164706, 0.227451, 0.345098, 1)
 sky_low = Color(0, 0, 0, 0)
@@ -286,113 +52,461 @@ fog_begin = 0.0
 fog_end = 130.0
 fog_density = 0.95
 hide_layers = PackedInt32Array(3)
-more_ground_decor = Array[ExtResource("20_2qgkd")]([])
+more_ground_decor = Array[ExtResource("4_decor_def")]([])
 
-[sub_resource type="Resource" id="Portal_arena"]
-script = ExtResource("8_v0hwf")
-x = 3140.0
-platform = 0
+[sub_resource type="Resource" id="Copied_Resource_6f5w5"]
+script = ExtResource("5_prop_placement")
+texture = ExtResource("6_tree_small")
+x = 718.0
+y = -1.0
+depth = -6.7
+scale = 0.92
+flip = true
+light_color = Color(0, 0, 0, 0)
+light_energy = 1.5
+light_height = 30.0
+
+[sub_resource type="Resource" id="Copied_Resource_4nmy4"]
+script = ExtResource("5_prop_placement")
+texture = ExtResource("7_stump")
+x = 825.0
+y = -1.0
+depth = -2.4
+scale = 1.3
+flip = false
+light_color = Color(0, 0, 0, 0)
+light_energy = 1.5
+light_height = 30.0
+
+[sub_resource type="Resource" id="Copied_Resource_g7nll"]
+script = ExtResource("5_prop_placement")
+texture = ExtResource("8_rock_large")
+x = 437.0
+y = -1.0
+depth = -2.7
+scale = 1.03
+flip = false
+light_color = Color(0, 0, 0, 0)
+light_energy = 1.5
+light_height = 30.0
+
+[sub_resource type="Resource" id="Copied_Resource_g7rl4"]
+script = ExtResource("5_prop_placement")
+texture = ExtResource("9_tall_grass")
+x = 1735.0
+y = -1.0
+depth = -7.7
+scale = 1.13
+flip = false
+light_color = Color(0, 0, 0, 0)
+light_energy = 1.5
+light_height = 30.0
+
+[sub_resource type="Resource" id="Copied_Resource_ow4ht"]
+script = ExtResource("5_prop_placement")
+texture = ExtResource("10_tree_large")
+x = 789.0
+y = -1.0
+depth = -7.2
+scale = 1.3
+flip = false
+light_color = Color(0, 0, 0, 0)
+light_energy = 1.5
+light_height = 30.0
+
+[sub_resource type="Resource" id="Platform_1"]
+script = ExtResource("11_platform_def")
+x = 1900.0
+y = 400.0
+width = 480.0
+
+[sub_resource type="Resource" id="Platform_2"]
+script = ExtResource("11_platform_def")
+x = 1700.0
+y = 520.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_3"]
+script = ExtResource("11_platform_def")
+x = 100.0
+y = 670.0
+width = 1550.0
+
+[sub_resource type="Resource" id="Platform_4"]
+script = ExtResource("11_platform_def")
+x = 1100.0
+y = 820.0
+width = 1200.0
+
+[sub_resource type="Resource" id="Platform_5"]
+script = ExtResource("11_platform_def")
+x = 100.0
+y = 970.0
+width = 1200.0
+
+[sub_resource type="Resource" id="Platform_6"]
+script = ExtResource("11_platform_def")
+x = 1100.0
+y = 1120.0
+width = 1200.0
+
+[sub_resource type="Resource" id="Platform_7"]
+script = ExtResource("11_platform_def")
+x = 100.0
+y = 1270.0
+width = 1200.0
+
+[sub_resource type="Resource" id="Platform_8"]
+script = ExtResource("11_platform_def")
+x = 1100.0
+y = 1420.0
+width = 1200.0
+
+[sub_resource type="Resource" id="Platform_9"]
+script = ExtResource("11_platform_def")
+x = 100.0
+y = 1570.0
+width = 1200.0
+
+[sub_resource type="Resource" id="Platform_10"]
+script = ExtResource("11_platform_def")
+x = 1100.0
+y = 1720.0
+width = 1200.0
+
+[sub_resource type="Resource" id="Platform_11"]
+script = ExtResource("11_platform_def")
+x = 100.0
+y = 1870.0
+width = 1200.0
+
+[sub_resource type="Resource" id="Platform_12"]
+script = ExtResource("11_platform_def")
+x = 1100.0
+y = 2020.0
+width = 1200.0
+
+[sub_resource type="Resource" id="Platform_13"]
+script = ExtResource("11_platform_def")
+x = 100.0
+y = 2170.0
+width = 1200.0
+
+[sub_resource type="Resource" id="Platform_14"]
+script = ExtResource("11_platform_def")
+x = 1100.0
+y = 2320.0
+width = 1200.0
+
+[sub_resource type="Resource" id="Platform_15"]
+script = ExtResource("11_platform_def")
+x = 20.0
+y = 2470.0
+width = 1280.0
+
+[sub_resource type="Resource" id="Platform_16"]
+script = ExtResource("11_platform_def")
+x = 1100.0
+y = 2620.0
+width = 1200.0
+
+[sub_resource type="Resource" id="Platform_17"]
+script = ExtResource("11_platform_def")
+x = 100.0
+y = 2770.0
+width = 1200.0
+
+[sub_resource type="Resource" id="Platform_18"]
+script = ExtResource("11_platform_def")
+x = 1100.0
+y = 2920.0
+width = 1200.0
+
+[sub_resource type="Resource" id="Platform_19"]
+script = ExtResource("11_platform_def")
+x = 100.0
+y = 3070.0
+width = 1200.0
+
+[sub_resource type="Resource" id="Platform_20"]
+script = ExtResource("11_platform_def")
+x = 1100.0
+y = 3220.0
+width = 1200.0
+
+[sub_resource type="Resource" id="Platform_21"]
+script = ExtResource("11_platform_def")
+x = 100.0
+y = 3370.0
+width = 1200.0
+
+[sub_resource type="Resource" id="Platform_22"]
+script = ExtResource("11_platform_def")
+x = 1100.0
+y = 3520.0
+width = 1200.0
+
+[sub_resource type="Resource" id="Platform_23"]
+script = ExtResource("11_platform_def")
+x = 100.0
+y = 3670.0
+width = 1200.0
+
+[sub_resource type="Resource" id="Platform_24"]
+script = ExtResource("11_platform_def")
+x = 1100.0
+y = 3820.0
+width = 1290.0
+
+[sub_resource type="Resource" id="Platform_25"]
+script = ExtResource("11_platform_def")
+x = 100.0
+y = 3970.0
+width = 1200.0
+
+[sub_resource type="Resource" id="Platform_26"]
+script = ExtResource("11_platform_def")
+x = 2000.0
+y = 4120.0
+width = 300.0
+
+[sub_resource type="Resource" id="Platform_27"]
+script = ExtResource("11_platform_def")
+x = 100.0
+y = 4270.0
+width = 1200.0
+
+[sub_resource type="Resource" id="Platform_28"]
+script = ExtResource("11_platform_def")
+x = 1950.0
+y = 4420.0
+width = 350.0
+
+[sub_resource type="Resource" id="Platform_29"]
+script = ExtResource("11_platform_def")
+x = 100.0
+y = 4570.0
+width = 1200.0
+
+[sub_resource type="Resource" id="Platform_30"]
+script = ExtResource("11_platform_def")
+x = 100.0
+y = 540.0
+width = 150.0
+secret = true
+
+[sub_resource type="Resource" id="Platform_31"]
+script = ExtResource("11_platform_def")
+x = 1400.0
+y = 450.0
+width = 150.0
+secret = true
+
+[sub_resource type="Resource" id="Portal_0"]
+script = ExtResource("12_portal_def")
+x = 2320.0
+platform = 1
+target_map = &"gull_bluffs"
+target_x = 150.0
+target_platform = 30
+
+[sub_resource type="Resource" id="Portal_1"]
+script = ExtResource("12_portal_def")
+x = 80.0
+platform = 15
+target_map = &"smugglers_stash"
+target_x = 2140.0
+gate = &"smugglers_stash_gate"
+gate_picture = ExtResource("13_gate_locked")
+key = ExtResource("14_smugglers_key")
+
+[sub_resource type="Resource" id="Portal_2"]
+script = ExtResource("12_portal_def")
+x = 2320.0
+platform = 24
+target_map = &"tide_tunnel"
+target_x = 200.0
+gate = &"tide_tunnel_gate"
+gate_picture = ExtResource("15_gate")
+
+[sub_resource type="Resource" id="Portal_3"]
+script = ExtResource("12_portal_def")
+x = 2320.0
 target_map = &"tuskers_den"
 target_x = 140.0
 
-[sub_resource type="Resource" id="Step_1"]
-script = ExtResource("7_5a77d")
-x = 2813.0
-y = 560.0
-width = 110.0
+[sub_resource type="Resource" id="Spawn_0"]
+script = ExtResource("17_spawn_def")
+monster = ExtResource("16_kelp_lurker")
+platform = 2
+count = 2
 
-[sub_resource type="Resource" id="Step_2"]
-script = ExtResource("7_5a77d")
-x = 2203.0
-y = 555.0
-width = 110.0
+[sub_resource type="Resource" id="Spawn_1"]
+script = ExtResource("17_spawn_def")
+monster = ExtResource("18_barnacle_boar")
+platform = 4
+count = 2
 
-[sub_resource type="Resource" id="Step_3"]
-script = ExtResource("7_5a77d")
-x = 1703.0
-y = 560.0
-width = 110.0
+[sub_resource type="Resource" id="Spawn_2"]
+script = ExtResource("17_spawn_def")
+monster = ExtResource("16_kelp_lurker")
+platform = 6
+count = 2
 
-[sub_resource type="Resource" id="Step_4"]
-script = ExtResource("7_5a77d")
-x = 1223.0
-y = 560.0
-width = 110.0
+[sub_resource type="Resource" id="Spawn_3"]
+script = ExtResource("17_spawn_def")
+monster = ExtResource("18_barnacle_boar")
+platform = 8
+count = 2
 
-[sub_resource type="Resource" id="Step_5"]
-script = ExtResource("7_5a77d")
-x = 613.0
-y = 550.0
-width = 110.0
+[sub_resource type="Resource" id="Spawn_4"]
+script = ExtResource("17_spawn_def")
+monster = ExtResource("16_kelp_lurker")
+platform = 10
+count = 2
 
-[sub_resource type="Resource" id="Step_6"]
-script = ExtResource("7_5a77d")
-x = 2573.0
-y = 445.0
-width = 110.0
+[sub_resource type="Resource" id="Spawn_5"]
+script = ExtResource("17_spawn_def")
+monster = ExtResource("18_barnacle_boar")
+platform = 12
+count = 2
 
-[sub_resource type="Resource" id="Step_7"]
-script = ExtResource("7_5a77d")
-x = 1093.0
-y = 435.0
-width = 110.0
+[sub_resource type="Resource" id="Spawn_6"]
+script = ExtResource("17_spawn_def")
+monster = ExtResource("16_kelp_lurker")
+platform = 14
+count = 2
 
-[sub_resource type="Resource" id="Step_8"]
-script = ExtResource("7_5a77d")
-x = 2053.0
-y = 430.0
-width = 110.0
+[sub_resource type="Resource" id="Spawn_7"]
+script = ExtResource("17_spawn_def")
+monster = ExtResource("18_barnacle_boar")
+platform = 16
+count = 2
 
-[sub_resource type="Resource" id="Step_9"]
-script = ExtResource("7_5a77d")
-x = 453.0
-y = 415.0
-width = 110.0
+[sub_resource type="Resource" id="Spawn_8"]
+script = ExtResource("17_spawn_def")
+monster = ExtResource("16_kelp_lurker")
+platform = 18
+count = 2
 
-[sub_resource type="Resource" id="Step_10"]
-script = ExtResource("7_5a77d")
-x = 2493.0
-y = 330.0
-width = 110.0
+[sub_resource type="Resource" id="Spawn_9"]
+script = ExtResource("17_spawn_def")
+monster = ExtResource("18_barnacle_boar")
+platform = 20
+count = 2
 
-[sub_resource type="Resource" id="Step_11"]
-script = ExtResource("7_5a77d")
-x = 1033.0
-y = 315.0
-width = 110.0
+[sub_resource type="Resource" id="Spawn_10"]
+script = ExtResource("17_spawn_def")
+monster = ExtResource("16_kelp_lurker")
+platform = 22
+count = 2
 
-[sub_resource type="Resource" id="Step_12"]
-script = ExtResource("7_5a77d")
-x = 1813.0
-y = 303.3
-width = 110.0
+[sub_resource type="Resource" id="Spawn_11"]
+script = ExtResource("17_spawn_def")
+monster = ExtResource("16_kelp_lurker")
+platform = 26
+count = 2
 
-[sub_resource type="Resource" id="Step_13"]
-script = ExtResource("7_5a77d")
-x = 1757.0
-y = 236.7
-width = 110.0
+[sub_resource type="Resource" id="Spawn_12"]
+script = ExtResource("17_spawn_def")
+monster = ExtResource("18_barnacle_boar")
+platform = 28
+count = 2
+
+[sub_resource type="Resource" id="Spawn_13"]
+script = ExtResource("17_spawn_def")
+monster = ExtResource("18_barnacle_boar")
+platform = 0
+count = 3
+patrol_from = 300.0
+patrol_to = 2000.0
+
+[sub_resource type="Resource" id="Breakable_0"]
+script = ExtResource("21_breakable_def")
+id = &"tide_tunnel_gate"
+x = 1900.0
+platform = 24
+hits = 1
+whole = ExtResource("19_lever")
+broken = ExtResource("20_lever_pulled")
+height = 80.0
+
+[sub_resource type="Resource" id="Loot_1_0"]
+script = ExtResource("23_drop_entry")
+item = ExtResource("22_dawnshard")
+min_amount = 100
+max_amount = 160
+
+[sub_resource type="Resource" id="Loot_1_1"]
+script = ExtResource("23_drop_entry")
+item = ExtResource("24_orange_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Loot_1_2"]
+script = ExtResource("23_drop_entry")
+item = ExtResource("25_blue_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Breakable_1"]
+script = ExtResource("21_breakable_def")
+id = &"smugglers_grotto_high_chest"
+x = 175.0
+platform = 30
+hits = 1
+whole = ExtResource("26_chest")
+broken = ExtResource("27_chest_open")
+height = 48.0
+loot = Array[ExtResource("23_drop_entry")]([SubResource("Loot_1_0"), SubResource("Loot_1_1"), SubResource("Loot_1_2")])
+card = ExtResource("16_kelp_lurker")
+
+[sub_resource type="Resource" id="Loot_2_0"]
+script = ExtResource("23_drop_entry")
+item = ExtResource("22_dawnshard")
+min_amount = 100
+max_amount = 160
+
+[sub_resource type="Resource" id="Loot_2_1"]
+script = ExtResource("23_drop_entry")
+item = ExtResource("24_orange_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Loot_2_2"]
+script = ExtResource("23_drop_entry")
+item = ExtResource("25_blue_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Breakable_2"]
+script = ExtResource("21_breakable_def")
+id = &"smugglers_grotto_far_chest"
+x = 1475.0
+platform = 31
+hits = 1
+whole = ExtResource("26_chest")
+broken = ExtResource("27_chest_open")
+height = 48.0
+loot = Array[ExtResource("23_drop_entry")]([SubResource("Loot_2_0"), SubResource("Loot_2_1"), SubResource("Loot_2_2")])
+card = ExtResource("18_barnacle_boar")
 
 [resource]
-script = ExtResource("15_q6phd")
+script = ExtResource("1_map_def")
 id = &"smugglers_grotto"
 display_name = "Smugglers' Grotto"
-biome = ExtResource("1_njh0v")
-variant = SubResource("Resource_ljweq")
-width = 3200
-height = 700
-ground_y = 620
-start_x = 120.0
-lantern_spacing = -1.0
-decor_density = -1.0
+biome = ExtResource("2_harbor")
+variant = SubResource("Copied_Resource_ljweq")
+width = 2400
+height = 5000
+ground_y = 4920
+start_x = 2100.0
+platforms = Array[ExtResource("11_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7"), SubResource("Platform_8"), SubResource("Platform_9"), SubResource("Platform_10"), SubResource("Platform_11"), SubResource("Platform_12"), SubResource("Platform_13"), SubResource("Platform_14"), SubResource("Platform_15"), SubResource("Platform_16"), SubResource("Platform_17"), SubResource("Platform_18"), SubResource("Platform_19"), SubResource("Platform_20"), SubResource("Platform_21"), SubResource("Platform_22"), SubResource("Platform_23"), SubResource("Platform_24"), SubResource("Platform_25"), SubResource("Platform_26"), SubResource("Platform_27"), SubResource("Platform_28"), SubResource("Platform_29"), SubResource("Platform_30"), SubResource("Platform_31")])
+portals = Array[ExtResource("12_portal_def")]([SubResource("Portal_0"), SubResource("Portal_1"), SubResource("Portal_2"), SubResource("Portal_3")])
+breakables = Array[ExtResource("21_breakable_def")]([SubResource("Breakable_0"), SubResource("Breakable_1"), SubResource("Breakable_2")])
+spawns = Array[ExtResource("17_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3"), SubResource("Spawn_4"), SubResource("Spawn_5"), SubResource("Spawn_6"), SubResource("Spawn_7"), SubResource("Spawn_8"), SubResource("Spawn_9"), SubResource("Spawn_10"), SubResource("Spawn_11"), SubResource("Spawn_12"), SubResource("Spawn_13")])
+props = Array[ExtResource("5_prop_placement")]([SubResource("Copied_Resource_6f5w5"), SubResource("Copied_Resource_4nmy4"), SubResource("Copied_Resource_g7nll"), SubResource("Copied_Resource_g7rl4"), SubResource("Copied_Resource_ow4ht")])
 region = &"dawnharbor"
-world_pos = Vector2(530, 395)
-town = false
+world_pos = Vector2(530.0, 395.0)
+zone_pos = Vector2(-6800.0, -2300.0)
 return_map = &"dawnharbor"
-interior = false
-platforms = Array[ExtResource("7_5a77d")]([SubResource("Resource_uit6t"), SubResource("Resource_87m7u"), SubResource("Resource_sm1p6"), SubResource("Resource_qupgw"), SubResource("Resource_1xdqn"), SubResource("Resource_gd0cp"), SubResource("Resource_8jkyd"), SubResource("Resource_xj5fg"), SubResource("Resource_nv6yq"), SubResource("Resource_e35bm"), SubResource("Resource_8mtvj"), SubResource("Resource_r4dkn"), SubResource("Step_1"), SubResource("Step_2"), SubResource("Step_3"), SubResource("Step_4"), SubResource("Step_5"), SubResource("Step_6"), SubResource("Step_7"), SubResource("Step_8"), SubResource("Step_9"), SubResource("Step_10"), SubResource("Step_11"), SubResource("Step_12"), SubResource("Step_13")])
-portals = Array[ExtResource("8_v0hwf")]([SubResource("Resource_6c3ii"), SubResource("Portal_arena")])
-spawns = Array[ExtResource("16_vhlnm")]([SubResource("Resource_loyx4"), SubResource("Resource_uqekj"), SubResource("Resource_g4coa"), SubResource("Resource_o0myh"), SubResource("Resource_j5jm3"), SubResource("Resource_yh6yx"), SubResource("Resource_lxbmf"), SubResource("Resource_66eil"), SubResource("Resource_gadrn"), SubResource("Resource_b78er"), SubResource("Resource_wuuv8"), SubResource("Resource_pobws"), SubResource("Resource_ixevy")])
-npcs = Array[ExtResource("6_l2s11")]([])
-props = Array[ExtResource("9_4fhit")]([SubResource("Resource_6f5w5"), SubResource("Resource_4nmy4"), SubResource("Resource_g7nll"), SubResource("Resource_g7rl4"), SubResource("Resource_ow4ht")])
-buildings = Array[ExtResource("2_x273b")]([])
