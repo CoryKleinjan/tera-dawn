@@ -10,7 +10,15 @@ var face := 1
 var follow: Node2D
 ## Which way it points (Hitbox.Aim): aimed swings turn it up or down.
 var aim := Hitbox.Aim.AHEAD
+## A buff's aura: how many ticks it lasts (0: the def's own length) and, round you, the buff
+## it ends with (it fades out early when that runs out or is taken off).
+var lasts := 0
+var buff: StringName
+var _had_buff := false
 var t := 0
+## Ticks a buff's aura takes to fade in and out.
+const AURA_FADE_IN := 8
+const AURA_FADE_OUT := 24
 var sprite: Sprite3D
 var flash: OmniLight3D
 
@@ -65,21 +73,37 @@ func step() -> void:
 	t += 1
 	if is_instance_valid(follow):
 		position = follow.position
-	if t > def.duration():
+	if buff != &"" and Game.me:
+		# your copy of the buff can land a moment after its aura does
+		var has := Game.me.skills.buffs.has(buff)
+		if _had_buff and not has:
+			t = maxi(t, lasts - AURA_FADE_OUT)
+		_had_buff = _had_buff or has
+	if t > length():
 		queue_free()
 		return
 	_sync()
 
+## Its length in ticks.
+func length() -> int:
+	return lasts if lasts > 0 else def.duration()
+
+## Ends a buff's aura now with a short fade (the buff was cast again).
+func fade() -> void:
+	lasts = mini(lasts, t + AURA_FADE_OUT)
+
 func _sync() -> void:
-	var k := float(t) / def.duration()
+	var k := float(t) / length()
 	var at := position + Vector2(def.offset.x * face, def.offset.y).rotated(_turn())
 	if sprite:
 		var i := mini(int(t / 60.0 * def.fps), def.frames.size() - 1)
-		if def.lifetime > 0:
+		if def.lifetime > 0 or lasts > 0:
 			i = int(t / 60.0 * def.fps) % def.frames.size()  # long effects loop their frames
 		sprite.texture = def.frames[i]
 		sprite.position = TDStage.to3d(at, TDStage.Z_EFFECT)
-		if def.fade_out:
+		if lasts > 0:
+			sprite.transparency = 1.0 - clampf(minf(float(t) / AURA_FADE_IN, float(lasts - t) / AURA_FADE_OUT), 0.0, 1.0)
+		elif def.fade_out:
 			sprite.transparency = clampf((k - 0.6) / 0.4, 0.0, 1.0)
 	if flash:
 		flash.position = TDStage.to3d(at, TDStage.Z_EFFECT + 0.6)

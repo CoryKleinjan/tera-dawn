@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="SkillDef" load_steps=7 format=3]
+[gd_resource type="Resource" script_class="SkillDef" load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="2_stat_block"]
-[ext_resource type="Resource" path="res://data/effects/quick_step_aura.tres" id="3_heal"]
 [ext_resource type="Texture2D" path="res://assets/sprites/skills/quick_step.png" id="4_quick_step"]
+[ext_resource type="Resource" path="res://data/effects/quick_step_burst.tres" id="fx_effect"]
+[ext_resource type="Resource" path="res://data/effects/quick_step_aura.tres" id="fx_aura"]
 
 [sub_resource type="Resource" id="Resource_2"]
 script = ExtResource("2_stat_block")
@@ -31,6 +32,7 @@ stats_per_level = SubResource("Resource_2")
 duration = 30.0
 duration_per_level = 30.0
 animation = &"cast"
-effect = ExtResource("3_heal")
+effect = ExtResource("fx_effect")
+aura = ExtResource("fx_aura")
 icon = ExtResource("4_quick_step")
 flash = Color(0.55, 1.0, 0.8, 1)

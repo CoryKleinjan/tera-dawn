@@ -151,6 +151,8 @@ const AMBUSH_GROUP := 110.0
 @export var effect: EffectDef
 ## Played on each monster hit.
 @export var hit_effect: EffectDef
+## Buffs: the glow round each player it lands on, looping for as long as the buff lasts.
+@export var aura: EffectDef
 ## Played as it goes off (Sound.play id). Empty: its projectile's sound, or a swing for an
 ## attack and a cast for a spell (see cast_sound).
 @export var sound: StringName

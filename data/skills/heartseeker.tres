@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="SkillDef" load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
-[ext_resource type="Resource" path="res://data/projectiles/arrow.tres" id="p_arrow"]
-[ext_resource type="Resource" path="res://data/effects/arrow_hit.tres" id="h_arrow_hit"]
 [ext_resource type="Texture2D" path="res://assets/sprites/skills/heartseeker.png" id="i_arrow_blow"]
+[ext_resource type="Resource" path="res://data/effects/heartseeker_hit.tres" id="fx_hit_effect"]
+[ext_resource type="Resource" path="res://data/projectiles/heartseeker_arrow.tres" id="fx_projectile"]
 
 [resource]
 script = ExtResource("1_skill_def")
@@ -26,6 +26,6 @@ action_ticks = 22
 reach = 400.0
 height = 90.0
 animation = &"attack"
-projectile = ExtResource("p_arrow")
-hit_effect = ExtResource("h_arrow_hit")
+projectile = ExtResource("fx_projectile")
+hit_effect = ExtResource("fx_hit_effect")
 icon = ExtResource("i_arrow_blow")

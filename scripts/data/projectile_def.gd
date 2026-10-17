@@ -6,6 +6,9 @@ extends Resource
 
 @export var id: StringName
 @export var texture: Texture2D
+## A painted flipbook it loops in flight, pointing where it goes (empty: just `texture`).
+@export var frames: Array[Texture2D] = []
+@export var fps := 14.0
 ## Size of one texel in game pixels.
 @export var texel := 1.0
 ## Game pixels per tick.

@@ -633,6 +633,12 @@ func ev_effect(effect_id: StringName, x: float, y: float, face: int, follow_peer
 	if world:
 		world.add_effect(Content.effects.get(effect_id), Vector2(x, y), face, world.actor(follow_peer))
 
+## A buff landed on `peer`: its aura shows round them for `ticks` (SkillDef.aura).
+@rpc("authority", "call_local", "reliable")
+func ev_aura(peer: int, skill_id: StringName, ticks: int) -> void:
+	if world and Content.skills.has(skill_id):
+		world.add_aura(world.actor(peer), Content.skills[skill_id], ticks)
+
 @rpc("authority", "call_local", "reliable")
 func ev_drop(snap: Array) -> void:
 	if world:

@@ -13,6 +13,7 @@ var on_land: Callable
 var sprite: Sprite3D
 var glow: OmniLight3D
 var _angle := 0.0
+var _t := 0
 
 static func create(w: TDWorld, d: ProjectileDef, from: Vector2, dest: Vector2, wait: int, mob: TDMob, landed: Callable) -> TDProjectile:
 	var p := TDProjectile.new()
@@ -53,6 +54,9 @@ func step() -> void:
 		queue_free()
 		return
 	position += d.normalized() * def.speed
+	_t += 1
+	if not def.frames.is_empty():
+		sprite.texture = def.frames[int(_t / 60.0 * def.fps) % def.frames.size()]
 	_angle = _angle + def.spin * TAU if def.spin != 0.0 else atan2(-d.y, d.x)
 	_sync()
 

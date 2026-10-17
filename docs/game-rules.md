@@ -81,7 +81,11 @@ update this page when one changes. Each zone's own look and music are in
 - No chairs: the Sit key sits him on the ground, where he regains HP and MP twice as fast (the
   base part). Moving, the Sit key again or any monster hit gets him up.
 - An aimed attack turns its swing effect up or down.
-- Job skills will be flashy and grand, like MapleStory.
+- Job skills will be flashy and grand, like MapleStory. Their effects are painted (Gemini),
+  8 frames at 14 fps: soft glow with no outline, MapleStory-big, in the job's colours. Attacks
+  show a swing and a hit on each monster struck, shots fly as painted frames, buffs burst as
+  cast and keep an aura round the player while they last; passives get none. Art only: no
+  added screen shake, flash or slow-down.
 
 ## Jobs, levels and skills
 
