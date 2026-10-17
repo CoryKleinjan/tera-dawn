@@ -45,6 +45,12 @@ one is ready to hand in. `QuestLog` (in `Character`) holds progress and the rule
 server's `on_quest_accept` / `on_quest_complete` apply them. A quest can play a cutscene when
 it's taken (`start_scene`) and handed in (`finish_scene`); see [cutscenes](cutscenes.md).
 
+## Enchanters
+
+Set `enchants` on an NpcDef and they offer "Enchant gear", which opens `TDEnchantWindow`
+(see [items](items.md#runes-and-enchanting)). Juno in Dawnharbor and each main town's equipment
+seller do it.
+
 ## How to add a shop
 
 Create `data/shops/<id>.tres` as a **ShopDef**: a name and a list of **ShopEntry**s (an item

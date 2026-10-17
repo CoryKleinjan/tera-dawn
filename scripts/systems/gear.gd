@@ -1,7 +1,8 @@
 class_name Gear
 extends CharacterPart
 ## The rules for a character's gear (Character.gear): who can wear what, putting gear on
-## and taking it off between the bag's Equip tab and what's worn (Character.equipment).
+## and taking it off between the bag's Equip tab and what's worn (Character.equipment), and
+## setting runes in gear at an enchanter.
 
 ## The weapon worn, or null.
 func weapon() -> EquipDef:
@@ -63,3 +64,30 @@ func unequip(place: StringName, i := -1) -> String:
 	c.inventory.put(ItemDef.Tab.EQUIP, i, stack)
 	return ""
 
+
+# ---------- runes ----------
+
+## Why the rune in Etc slot `rune_slot` can't go in rune slot `socket` of the gear in Equip
+## slot `gear_slot`, or "".
+func enchant_problem(gear_slot: int, rune_slot: int, socket: int) -> String:
+	var bag := character.inventory
+	var gear := bag.at(ItemDef.Tab.EQUIP, gear_slot) if Inventory.valid_slot(ItemDef.Tab.EQUIP, gear_slot) else null
+	var held := bag.at(ItemDef.Tab.ETC, rune_slot) if Inventory.valid_slot(ItemDef.Tab.ETC, rune_slot) else null
+	if gear == null or held == null or not held.item is RuneDef or socket < 0 or socket >= ItemStack.RUNE_SLOTS:
+		return "Pick a piece of gear in your bag, a rune and a rune slot."
+	if character.shards < (held.item as RuneDef).fee:
+		return "You don't have enough Dawnshards."
+	return ""
+
+## Sets the rune in Etc slot `rune_slot` in rune slot `socket` of the gear in Equip slot
+## `gear_slot`, for its fee. It always works; a rune already there is lost. Returns why it
+## couldn't, or "".
+func enchant(gear_slot: int, rune_slot: int, socket: int) -> String:
+	var problem := enchant_problem(gear_slot, rune_slot, socket)
+	if problem != "":
+		return problem
+	var bag := character.inventory
+	var rune := bag.take(ItemDef.Tab.ETC, rune_slot, 1).item as RuneDef
+	character.shards -= rune.fee
+	bag.at(ItemDef.Tab.EQUIP, gear_slot).runes[socket] = rune
+	return ""

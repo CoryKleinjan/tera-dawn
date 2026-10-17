@@ -14,3 +14,4 @@ greeting = "Gear for the Magician path. Take a look."
 lines = PackedStringArray("Everything here's made in town.", "Check the stat each piece asks for.")
 shop = ExtResource("3_arcanum")
 storage = false
+enchants = true

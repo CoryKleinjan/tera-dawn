@@ -8,7 +8,7 @@ data/                 Content, one .tres per thing
   monster_moves/      Monster attacks, shared by monster families (MonsterMove)
   achievements/       Milestones, unlocked on Steam too (AchievementDef)
   quests/ shops/ regions/ cutscenes/ projectiles/    Also looked up by id
-  items/use/ items/etc/ items/setup/ items/equips/  Subfolders are scanned too
+  items/use/ items/etc/ items/setup/ items/equips/ items/runes/  Subfolders are scanned too
   hero/               HeroLookDef (look.tres: his layers and animations); held/ has each held
                       weapon or off-hand's pins per frame (HeldDef), set in the pose editor
   maps/ biomes/ buildings/    Maps and how they look (maps/rooms/ and
@@ -22,7 +22,7 @@ scripts/
   server/             TDServer, TDLobby, MapInstance, SimPlayer, SimMob (+ MobMoves), SimDrop,
                       TDSocial
   server/social/      TDSocial's parts: chat, parties, trade, guilds
-  server/services/    TDServer's parts (ServerPart): items, NPC shops, storage, travel, quests, jobs,
+  server/services/    TDServer's parts (ServerPart): items, NPC shops, storage, enchanting, travel, quests, jobs,
                       cutscenes
   net/                SnapshotFlags (the bits both sides read in snapshots), SnapshotCodec (packs them)
   data/               Resource classes for everything in data/

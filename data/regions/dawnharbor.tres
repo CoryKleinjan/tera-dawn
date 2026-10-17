@@ -1,6 +1,19 @@
-[gd_resource type="Resource" script_class="RegionDef" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="RegionDef" load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/region_def.gd" id="1_region_def"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="2_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/runes/tide_rune.tres" id="rune_tide_rune"]
+[ext_resource type="Resource" path="res://data/items/runes/shell_rune.tres" id="rune_shell_rune"]
+
+[sub_resource type="Resource" id="Drop_tide_rune"]
+script = ExtResource("2_drop_entry")
+item = ExtResource("rune_tide_rune")
+chance = 0.01
+
+[sub_resource type="Resource" id="Drop_shell_rune"]
+script = ExtResource("2_drop_entry")
+item = ExtResource("rune_shell_rune")
+chance = 0.01
 
 [resource]
 script = ExtResource("1_region_def")
@@ -14,3 +27,4 @@ zone_rect = Rect2(300.0, 200.0, 330.0, 217.0)
 shaped_zone = true
 town_music = &"town_dawnharbor"
 field_music = &"field_dawnharbor"
+drops = Array[ExtResource("2_drop_entry")]([SubResource("Drop_tide_rune"), SubResource("Drop_shell_rune")])
