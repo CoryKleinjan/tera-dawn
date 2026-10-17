@@ -6,8 +6,8 @@
 
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("3_travel_route")
-target_map = &"dawnharbor"
-target_x = 300.0
+target_map = &"dawnharbor_docks"
+target_x = 760.0
 price = 300
 by = "Ship"
 

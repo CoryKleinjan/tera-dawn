@@ -325,7 +325,9 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
 - Music feels grown-up, never childish (Hollow Knight's spirit): towns, fields and the title are
   ambient; bosses are cinematic. Each zone keeps its own tone (`docs/zone-vibes.md`).
 - Kenney CC0 sound effects; the jingles stay.
-- Captain Marlo's ship carries players from the start island to Dawnharbor; coachman Rook takes them
+- Captain Marlo's ship carries players from the start island to Dawnharbor. He waits with his ship on
+  a small dock map beside each end (Dawnrise Dock, Dawnharbor Docks), reached by a portal from the
+  town; a dock map belongs to its town (`return_map`). Coachman Rook takes them
   to the job towns (400-500 Dawnshards, the same for everyone), but coaches only go to towns the
   player has already been to; the towns are also joined by a ring
   of portals. Developer test characters start in their job's town.

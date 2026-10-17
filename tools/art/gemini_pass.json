@@ -24703,6 +24703,32 @@
    ],
    "text": "The base picture is a sheet of 3 cells (1 row of 3) showing the boar boss \"Grotto Tusker\" in 3 poses on a flat magenta background. The attached picture shows Grotto Tusker in his idle pose: his look is exactly that (wet dark slate-blue hide with pale barnacles and water drips, dripping strands of dark green kelp for a mane, a short dark kelp beard, a cluster of pale barnacles and small shells on his shoulder, long yellowed tusks, small pale eyes, an old iron lantern glowing warm yellow on a short rope tied around his near tusk). Keep EVERYTHING in the base picture exactly as it is: the same pose, size, position, body shape, leg positions, head angle, mouth and facing in every cell, the same cute chunky cartoon style, smooth soft painted shading and thin dark plum-brown outline, the same grid lines and the same pure flat magenta #FF00FF background. Never take a pose from the attached picture. Change ONLY these things: In cell 1 the lantern hangs below his feet: shorten its rope so the lantern hangs close under his tusk, its bottom higher than his lowest hoof and above the ground line. In cell 2 the lantern is missing: add the old iron lantern glowing warm yellow on a short rope tied around his near tusk, hanging close under the tusk, its bottom higher than his lowest hoof. Keep cell 3 exactly as it is. Write NO text, labels or names anywhere. Draw NO shadow, puddle, ground, glow halo or effect around it: only the boar on flat magenta. Every boar stays fully inside its own cell, never touching the cell borders. Exactly one boar per cell."
   }
+ },
+ {
+  "id": "dawnbreaker_ship",
+  "prompts": null,
+  "batch": "Dock maps: the Dawnbreaker ship (test)",
+  "with": null,
+  "refs": [],
+  "save": "dawnbreaker_ship.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": true,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Harbormaster dock maps' (Cory OK'd the plan 19:22Z): one painting of Captain Marlo's ship, used in both dock maps (Dawnrise Dock and Dawnharbor Docks), moored with its waterline behind the dock edge. Base 2400x1600, exactly 3:2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/dawnharbor-city/ship_dawnbreaker_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+    "art/source/building_dawnharbor_shipwright.png"
+   ],
+   "text": "The first image is an empty magenta canvas. On it, paint ONE sailing ship, the Dawnbreaker, for my 2D side-scrolling game: the friendly ship that carries new adventurers from a sunny starting island to Dawnharbor, a bright, breezy, prosperous port town of white and cream plaster, blue roof tiles, weathered wood, rope and sails under warm early-morning light. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, rope fibres, cloth folds, worn and chipped spots, slight colour variation between planks) at a fairly chunky brush scale. The third image is the shipwright's workshop from Dawnharbor: match its style, palette, outline thickness and level of detail exactly, so the ship clearly belongs to the same town. The ship: a small, sturdy two-masted sailing ship seen exactly from the side, bow pointing RIGHT, about four times as long as it is tall at the hull. A warm honey-brown wooden hull with clearly painted planks, a deep blue painted stripe along the top of the hull with a thin cream line under it, a row of three small round brass-rimmed portholes, a raised deck at the stern with a carved wooden rail, and a short bowsprit at the front. Two straight wooden masts, each with two square cream canvas sails, gently filled with wind and with soft patched cloth folds, held by a few taut ropes that all run from the masts down to the hull rails (every rope is attached at both ends). A small blue pennant at the top of the taller mast. Strict rules: 1) Pure side view at eye level, perfectly level: no deck top, no three-quarter angle, no perspective. 2) The bottom of the hull is cut off by ONE perfectly flat, straight horizontal edge at the waterline, running the whole length of the ship; no keel, water, waves, reflection, shadow or ground under it. 3) The whole ship fills most of the canvas width with a clear band of magenta on every side; nothing touches the edges. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, words, figurehead faces or people on deck. Nothing ends loose in mid-air. Flat pure magenta #FF00FF background everywhere outside the ship, including between the masts, sails and ropes. Do not draw any characters, and do not copy anything else from the reference images."
+  }
  }
 ]
 }

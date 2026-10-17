@@ -1,0 +1,74 @@
+[gd_resource type="Resource" script_class="MapDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
+[ext_resource type="Resource" path="res://data/biomes/meadow.tres" id="2_meadow"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="3_portal_def"]
+[ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="4_npc_placement"]
+[ext_resource type="Resource" path="res://data/npcs/captain_marlo.tres" id="5_captain_marlo"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
+[ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="backdrop_layer_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/dawnrise/panorama.png" id="panorama"]
+[ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="prop_placement"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnrise/lamp_post.png" id="t_lamp"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnrise/prop_bench.png" id="t_bench"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnrise/prop_signpost.png" id="t_signpost"]
+
+[sub_resource type="Resource" id="Portal_village"]
+script = ExtResource("3_portal_def")
+x = 80.0
+target_map = &"dawnrise_village"
+target_x = 760.0
+
+[sub_resource type="Resource" id="Npc_marlo"]
+script = ExtResource("4_npc_placement")
+npc = ExtResource("5_captain_marlo")
+x = 860.0
+face = 1
+
+[sub_resource type="Resource" id="Prop_signpost"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_signpost")
+x = 260.0
+depth = -1.5
+
+[sub_resource type="Resource" id="Lamp"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_lamp")
+x = 470.0
+depth = -1.5
+
+[sub_resource type="Resource" id="Prop_bench"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_bench")
+x = 640.0
+depth = -1.5
+
+[sub_resource type="Resource" id="Backdrop_picture"]
+script = ExtResource("backdrop_layer_def")
+textures = Array[Texture2D]([ExtResource("panorama")])
+mode = 2
+depth = 300.0
+screen_top = Vector2(-0.2, -0.2)
+
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("variant_def")
+hide_layers = PackedInt32Array(0, 1, 2, 3, 4, 5)
+hide_ground_decor = PackedInt32Array(0)
+more_backdrop = Array[ExtResource("backdrop_layer_def")]([SubResource("Backdrop_picture")])
+
+[resource]
+script = ExtResource("1_map_def")
+id = &"dawnrise_dock"
+display_name = "Dawnrise Dock"
+biome = ExtResource("2_meadow")
+variant = SubResource("Variant")
+width = 1400
+start_x = 200.0
+lantern_spacing = 0.0
+region = &"dawnrise_isle"
+world_pos = Vector2(150.0, 222.0)
+town = true
+return_map = &"dawnrise_village"
+portals = Array[ExtResource("3_portal_def")]([SubResource("Portal_village")])
+npcs = Array[ExtResource("4_npc_placement")]([SubResource("Npc_marlo")])
+props = Array[ExtResource("prop_placement")]([SubResource("Prop_signpost"), SubResource("Lamp"), SubResource("Prop_bench")])

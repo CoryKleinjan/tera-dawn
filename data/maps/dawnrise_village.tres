@@ -29,7 +29,6 @@
 [ext_resource type="Resource" path="res://data/npcs/village_elder.tres" id="16_village_elder"]
 [ext_resource type="Resource" path="res://data/npcs/guide_sorrel.tres" id="40_guide_sorrel"]
 [ext_resource type="Resource" path="res://data/npcs/wagon_driver.tres" id="41_wagon_driver"]
-[ext_resource type="Resource" path="res://data/npcs/captain_marlo.tres" id="42_captain_marlo"]
 [ext_resource type="Resource" path="res://data/npcs/rowans_granddaughter.tres" id="43_granddaughter"]
 [ext_resource type="Resource" path="res://data/quests/tut5_dewling_jelly.tres" id="44_tut5"]
 [ext_resource type="Resource" path="res://data/npcs/dawnrise_farmer.tres" id="n_farmer"]
@@ -175,12 +174,12 @@ x = 220.0
 platform = 0
 face = 1
 
-[sub_resource type="Resource" id="Npc_marlo"]
-script = ExtResource("5_npc_placement")
-npc = ExtResource("42_captain_marlo")
-x = 680.0
+[sub_resource type="Resource" id="Portal_dock"]
+script = ExtResource("4_portal_def")
+x = 652.0
 platform = 0
-face = -1
+target_map = &"dawnrise_dock"
+target_x = 200.0
 
 [sub_resource type="Resource" id="Npc_elder"]
 script = ExtResource("5_npc_placement")
@@ -263,7 +262,7 @@ region = &"dawnrise_isle"
 world_pos = Vector2(150.0, 270.0)
 town = true
 platforms = Array[ExtResource("3_platform_def")]([SubResource("Plat_rise")])
-portals = Array[ExtResource("4_portal_def")]([SubResource("Portal_west"), SubResource("Portal_east"), SubResource("Door_elder"), SubResource("Door_store")])
-npcs = Array[ExtResource("5_npc_placement")]([SubResource("Npc_elder"), SubResource("Npc_sorrel"), SubResource("Npc_hobb"), SubResource("Npc_marlo"), SubResource("Npc_granddaughter"), SubResource("Npc_baker"), SubResource("Npc_farmer")])
+portals = Array[ExtResource("4_portal_def")]([SubResource("Portal_west"), SubResource("Portal_east"), SubResource("Door_elder"), SubResource("Door_store"), SubResource("Portal_dock")])
+npcs = Array[ExtResource("5_npc_placement")]([SubResource("Npc_elder"), SubResource("Npc_sorrel"), SubResource("Npc_hobb"), SubResource("Npc_granddaughter"), SubResource("Npc_baker"), SubResource("Npc_farmer")])
 props = Array[ExtResource("prop_placement")]([SubResource("Lamp_west"), SubResource("Lamp_east"), SubResource("Prop_signpost"), SubResource("Prop_fence"), SubResource("Prop_veg_bed"), SubResource("Prop_flower_bed"), SubResource("Prop_bench"), SubResource("Prop_well"), SubResource("Prop_bread_basket"), SubResource("Prop_hay"), SubResource("Prop_scarecrow"), SubResource("Prop_beehives"), SubResource("Prop_wheelbarrow")])
 buildings = Array[ExtResource("bp_script")]([SubResource("House_cottage"), SubResource("House_elder"), SubResource("House_shop"), SubResource("House_windmill")])
