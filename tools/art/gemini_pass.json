@@ -26280,6 +26280,31 @@
    "base": "/mnt/project-files/art-sheets/gemini-pass-1/skillfx_quick_step_aura.png",
    "text": "This is an edit of the attached sheet of 8 animation frames (2 rows of 4 cells, numbered left to right, then top to bottom) of a painted glowing skill effect on a flat magenta background. Cells 1 to 7 have a flat magenta rectangle in the middle, like a hole cut out of the effect. Remove it: paint the swirling rings of light straight through where it was, continuing them around it, so no rectangle, box or straight hard edge is left anywhere. Cell 8 is empty: paint a frame there that sits between cell 7 and cell 1, so the 8 cells loop smoothly. Keep everything else exactly as it is: the same painted look, brush strokes, colours, brightness, shapes and positions, in the same 8 cells. The background stays the bright pure flat magenta #FF00FF (RGB 255, 0, 255) in every cell, never a darker plum, mauve, grey or white, with no haze spreading into it beyond the effect's own soft edge. Keep the thin dark grid lines exactly where they are; never add grid lines, boxes, rectangles, panels or cut-out shapes. Add nothing new: no characters, hands, weapons, objects, ground, text, letters or numbers. The effect has no outline, and it uses no pink, magenta, purple or violet."
   }
+ },
+ {
+  "id": "ui_hearts",
+  "prompts": null,
+  "batch": "heart icons (edit)",
+  "with": null,
+  "refs": [],
+  "save": "ui_hearts.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   2
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hearts for health': the HUD's hearts (health counts hearts, PR #307). Cory 21:17Z: classic red hearts. Small test: one full heart and its empty socket.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/hearts/bases/blank_1x2_43.png",
+   "refs": [
+    "art/source/ui.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 2 cells side by side on a flat magenta background, split by one thin dark line. Paint one game UI icon in each cell, centred, filling about two thirds of the cell, for the health hearts of a hand-painted 2D fantasy side-scroller. Paint them in exactly the style of the second attached image (my game's painted HUD): soft hand-painted shading, visible fairly chunky brush texture, warm light from the upper left with a bright highlight, and the same thin dark plum-brown outline. Cell 1 (left): a FULL HEART, a classic plump symmetrical heart shape, rich glossy ruby red with deeper crimson in the lower right, a bright soft white-pink highlight on the upper left lobe, set in a thin polished gold rim that follows the heart's edge. Cell 2 (right): the EMPTY HEART, the exact same heart shape, size, position and gold rim, but the inside is a dark hollow plum-brown socket with a faint inner shadow and no red at all. Both hearts are the same size, straight-on, upright and not tilted. Never pixel art, never a photo, never a 3D render, never flat vector shapes. The background stays the bright pure flat magenta #FF00FF (RGB 255, 0, 255) in both cells, with no haze, glow or shadow on it. Keep the thin dark dividing line exactly where it is; add no other lines, boxes or frames. Add nothing else: no text, letters, numbers, labels, sparkles or extra hearts."
+  }
  }
 ]
 }
