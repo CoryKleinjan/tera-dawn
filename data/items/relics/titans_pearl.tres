@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="RelicDef" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="RelicDef" load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/relic_def.gd" id="1_relic_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/items/clawbeard_pearl.png" id="2_icon"]
+[ext_resource type="Resource" path="res://data/effects/charge_trail.tres" id="3_effect"]
 
 [resource]
 script = ExtResource("1_relic_def")
 move = 3
+effect = ExtResource("3_effect")
 move_name = "Surge"
 trail = Color(0.8, 1.5, 1.7, 1)
 id = &"titans_pearl"

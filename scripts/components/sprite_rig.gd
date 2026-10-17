@@ -39,6 +39,12 @@ var _pulse_color := Color.WHITE
 var _pulse := 0.0
 ## Stands perfectly still (see hold_still): no animation or procedural breathing.
 var _still := false
+## How fast the animation plays (see set_speed), 1 for its own speed.
+var _speed := 1.0
+## A stretch and tilt the actor's own code puts on the whole picture (see set_pose),
+## on top of the hit squash. It pivots on the feet.
+var _pose_scale := Vector2.ONE
+var _pose_tilt := 0.0
 
 ## Builds the sprite. Pass `frames` for an animated actor or `texture` for a single image.
 ## `texel` is the size of one art pixel in game pixels (TDStage.art_density texels each).
@@ -132,9 +138,26 @@ func set_flash(on: bool) -> void:
 		_flash = on
 		_apply_modulate()
 
-## Squashes the body for a moment (taking a hit); it springs back by itself.
+## Squashes the body for a moment (taking a hit, landing); it springs back by itself.
 func squash(amount := 1.0) -> void:
 	_squash = maxf(_squash, amount)
+
+## Stretches the body tall and thin for a moment (taking off); it springs back by itself.
+func stretch(amount := 1.0) -> void:
+	_squash = minf(_squash, -amount)
+
+## Plays the animation `mult` times its own speed (a walk keeping pace with the feet).
+func set_speed(mult: float) -> void:
+	if not is_equal_approx(mult, _speed):
+		_speed = mult
+		_apply_speed()
+
+## Stretches (`scale`, 1 for none) and tilts (`tilt` radians, + leans toward +x) the whole
+## picture about its feet: breathing, flinching, toppling. Only moves the painting, never
+## repaints it.
+func set_pose(scale: Vector2, tilt := 0.0) -> void:
+	_pose_scale = scale
+	_pose_tilt = tilt
 
 ## Freezes the animation for a few frames (hit-stop) or lets it run again.
 func freeze(on: bool) -> void:
@@ -143,7 +166,7 @@ func freeze(on: bool) -> void:
 
 func _apply_speed() -> void:
 	if body is AnimatedSprite3D:
-		(body as AnimatedSprite3D).speed_scale = 0.0 if _frozen else 1.0
+		(body as AnimatedSprite3D).speed_scale = 0.0 if _frozen else _speed
 
 ## A warm pulsing glow (0 off .. 1 full), e.g. a monster about to strike.
 func set_glow(amount: float) -> void:
@@ -203,7 +226,8 @@ func _process(delta: float) -> void:
 		_apply_modulate()
 	var squash_xy := Vector2(1.0 + 0.18 * _squash, 1.0 - 0.15 * _squash)
 	if _frames or _still:
-		body.scale = Vector3(squash_xy.x, squash_xy.y, 1.0)
+		body.scale = Vector3(squash_xy.x * _pose_scale.x, squash_xy.y * _pose_scale.y, 1.0)
+		body.rotation.z = -_pose_tilt
 		return
 	# single-image actors: move the sprite procedurally
 	_t += delta
